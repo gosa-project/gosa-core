@@ -50,9 +50,6 @@ class worktabs extends tabs
     if(($this->by_object['printgeneric']->is_account==false)&&($this->by_object['printgeneric']->initially_was_account==true)){
       $this->by_object['printgeneric']->remove_from_parent();
     }
-    if($this->by_object['printgeneric']->is_account){
-      $this->by_object['printgeneric']->handle_object_tagging();
-    }
 
     /* Fix tagging if needed */
     $baseobject->handle_object_tagging();
