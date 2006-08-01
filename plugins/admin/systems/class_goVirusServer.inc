@@ -4,7 +4,7 @@ class govirusserver extends plugin{
 	
   /* This plugin only writes its objectClass */
   var $objectclasses    = array("goVirusServer");
-  var $attributes       = array("avMaxThreads","avMaxDirectoryRecursions",/*"avUser",*/"avFlags","avArchiveMaxFileSize","avArchiveMaxRecursion",
+  var $attributes       = array("avMaxThreads","avMaxDirectoryRecursions","avUser","avFlags","avArchiveMaxFileSize","avArchiveMaxRecursion",
                                 "avArchiveMaxCompressionRatio","avDatabaseMirror","avChecksPerDay","avHttpProxyURL");
   var $StatusFlag       = "avStatus";
  
@@ -22,11 +22,11 @@ class govirusserver extends plugin{
 
   var $Flags            = array("D","S","A","E");
   
-  var $avFlags          = "DSAE";
+  var $avFlags          = "DS";
   var $avFlagsD         = TRUE;
   var $avFlagsS         = TRUE;
-  var $avFlagsA         = TRUE;
-  var $avFlagsE         = TRUE;
+  var $avFlagsA         = FALSE;
+  var $avFlagsE         = FALSE;
 
   var $avMaxThreads                 = 5;
   var $avMaxDirectoryRecursions     = 4;    
@@ -35,7 +35,7 @@ class govirusserver extends plugin{
   var $avArchiveMaxCompressionRatio = 95;
   var $avChecksPerDay               = 12;
 
-//  var $avUser                       = "";
+  var $avUser                       = "";
   var $avHttpProxyURL               = "";
   var $avDatabaseMirror             = "";
 
@@ -115,6 +115,12 @@ class govirusserver extends plugin{
     }
     $smarty->assign("ThreadValues",$tmp);
 
+    if($this->avFlagsA){
+      $smarty->assign("avFlagsAState" , "" );
+    }else{
+      $smarty->assign("avFlagsAState" , " disabled " );
+    }
+
     return($display.$smarty->fetch(get_template_path("goVirusServer.tpl",TRUE,dirname(__FILE__))));
   }
 
@@ -162,6 +168,14 @@ class govirusserver extends plugin{
     }
 
     plugin::save();
+
+    if(!$this->avFlagsA){
+      $arr = array("avArchiveMaxFileSize","avArchiveMaxRecursion","avArchiveMaxCompressionRatio");
+      foreach($arr as $attr){
+        $this->attrs[$attr] =  array();
+      }
+      $this->attrs['avFlags'] = preg_replace("/E/","",$this->attrs['avFlags']);
+    }
 
     /* Check if this is a new entry ... add/modify */
     $ldap = $this->config->get_ldap_link();

@@ -10,12 +10,10 @@
 	<table>
 	 <tr>
 	  <td>
-	 	{t}Maximum threads{/t}
+	 	{t}Database user{/t}
 	  </td>
 	  <td>
-		<select name="avMaxThreads" title='{t}Select number of maximal threads{/t}'>
-		 {html_options options=$ThreadValues selected=$avMaxThreads}
-	 	</select>
+	  	<input type='text' name='avUser' value='{$avUser}' {$avUserACL} style='width:220px;'>
 	  </td>
 	 </tr>
 	 <tr>
@@ -34,6 +32,12 @@
 	  	<input type='text' name='avHttpProxyURL' value='{$avHttpProxyURL}' {$avHttpProxyURLACL} style='width:220px;'>
 	  </td>
 	 </tr>
+	</table>
+ 
+  </td>
+  <td style='border-left:1px solid #A0A0A0;vertical-align:top;'>
+  
+	<table>
 	 <tr>
 	  <td>
 	 	{t}Checks per day{/t}
@@ -42,12 +46,16 @@
 	  	<input type='text' name='avChecksPerDay' value='{$avChecksPerDay}' {$avChecksPerDayACL}>
 	  </td>
 	 </tr>
-	</table>
- 
-  </td>
-  <td style='border-left:1px solid #A0A0A0;vertical-align:top;'>
-  
-	<table>
+	 <tr>
+	  <td>
+	 	{t}Maximum threads{/t}
+	  </td>
+	  <td>
+		<select name="avMaxThreads" title='{t}Select number of maximal threads{/t}'>
+		 {html_options options=$ThreadValues selected=$avMaxThreads}
+	 	</select>
+	  </td>
+	 </tr>
 	 <tr>
 	  <td>
 	  	<input type='checkbox' name='avFlagsD' {$avFlagsDACL} {$avFlagsDCHK} value='1'>
@@ -70,44 +78,49 @@
   </td>
  </tr>
  <tr>
-  <td  style="vertical-align:top;width:50%;">
+  <td style='vertical-align:top;'>
+	<table>
+	 <tr>
+	  <td>
+	  	<input type='checkbox' name='avFlagsA' {$avFlagsAACL} {$avFlagsACHK} value='1'
+			onClick=" changeState('avFlagsE') ; 
+				  changeState('avArchiveMaxFileSize') ; 
+				  changeState('avArchiveMaxRecursion') ; 
+				  changeState('avArchiveMaxCompressionRatio') ; "
+		>
+		{t}Enable scanning of archives{/t}
+	  </td>
+	 </tr>
+	 <tr>
+	  <td>
+	  	<input type='checkbox' name='avFlagsE' {$avFlagsEACL} {$avFlagsECHK} {$avFlagsAState} value='1' id='avFlagsE'>
+		{t}Block encrypted archives{/t}
+	  </td>
+	 </tr>
+	</table>
+  
+  </td>
+  <td  style="vertical-align:top;width:50%;border-left:1px solid #A0A0A0;">
 	<table>
 	 <tr>
 	  <td>{t}Maximum file size{/t}
 	  </td>
 	  <td>
-	   <input name='avArchiveMaxFileSize' value='{$avArchiveMaxFileSize}' {$avArchiveMaxFileSizeACL} >
+	   <input name='avArchiveMaxFileSize' id='avArchiveMaxFileSize' value='{$avArchiveMaxFileSize}'  {$avFlagsAState} {$avArchiveMaxFileSizeACL} >
 	  </td>
 	 </tr>
 	 <tr>
 	  <td>{t}Maximum recursion{/t}
 	  </td>
 	  <td>
-	   <input name='avArchiveMaxRecursion' value='{$avArchiveMaxRecursion}' {$avArchiveMaxRecursionACL} >
+	   <input name='avArchiveMaxRecursion' id='avArchiveMaxRecursion' value='{$avArchiveMaxRecursion}'  {$avFlagsAState} {$avArchiveMaxRecursionACL} >
 	  </td>
 	 </tr>
 	 <tr>
 	  <td>{t}Maximum compression ratio{/t}
 	  </td>
 	  <td>
-	   <input name='avArchiveMaxCompressionRatio' value='{$avArchiveMaxCompressionRatio}' {$avArchiveMaxCompressionRatioACL} >
-	  </td>
-	 </tr>
-	</table>
-  
-  </td>
-  <td style='border-left:1px solid #A0A0A0;vertical-align:top;'>
-	<table>
-	 <tr>
-	  <td>
-	  	<input type='checkbox' name='avFlagsA' {$avFlagsAACL} {$avFlagsACHK} value='1'>
-		{t}Enable scanning of archives{/t}
-	  </td>
-	 </tr>
-	 <tr>
-	  <td>
-	  	<input type='checkbox' name='avFlagsE' {$avFlagsEACL} {$avFlagsECHK} value='1'>
-		{t}Block encrypted archives{/t}
+	   <input name='avArchiveMaxCompressionRatio' id='avArchiveMaxCompressionRatio' value='{$avArchiveMaxCompressionRatio}' {$avFlagsAState}  {$avArchiveMaxCompressionRatioACL} >
 	  </td>
 	 </tr>
 	</table>
