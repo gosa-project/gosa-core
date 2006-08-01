@@ -123,7 +123,14 @@ class govirusserver extends plugin{
   function remove_from_parent()
   {
     if(!$this->is_account && $this->initially_was_account){
+
       plugin::remove_from_parent();
+
+      /* Remove status flag, it is not a memeber of
+         this->attributes, so ensure that it is deleted too */
+      if(!empty($this->StatusFlag)){
+        $this->attrs[$this->StatusFlag] = array();
+      }
 
       /* Check if this is a new entry ... add/modify */
       $ldap = $this->config->get_ldap_link();
