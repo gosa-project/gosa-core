@@ -1,6 +1,6 @@
 <?php
 
-class goVirusServer extends plugin{
+class govirusserver extends plugin{
 	
   /* This plugin only writes its objectClass */
   var $objectclasses    = array("goVirusServer");
@@ -39,7 +39,7 @@ class goVirusServer extends plugin{
   var $avHttpProxyURL               = "";
   var $avDatabaseMirror             = "";
 
-  function goVirusServer($config,$dn)
+  function gvirusserver($config,$dn)
   {
     /* Init class */
     plugin::plugin($config,$dn);

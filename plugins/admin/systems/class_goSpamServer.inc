@@ -1,7 +1,12 @@
 <?php
 
-class goSpamServer extends plugin{
-	
+class gospamserver extends plugin{
+
+  /* CLI vars */
+  var $cli_summary= "Manage server base objects";
+  var $cli_description= "Some longer text\nfor help";
+  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
+
   /* This plugin only writes its objectClass */
   var $objectclasses    = array("goSpamServer");
   var $attributes       = array("saRewriteHeader","saTrustedNetworks","saRequiredScore","saFlags","saRule");
@@ -35,7 +40,7 @@ class goSpamServer extends plugin{
   var $ui               = NULL;
   var $acl              = NULL;
 
-  function goSpamServer($config,$dn)
+  function gospamserver($config,$dn)
   {
     /* Init class */
     plugin::plugin($config,$dn);
@@ -293,6 +298,12 @@ class goSpamServer extends plugin{
   function check()
   { 
     $message = plugin::check();
+
+    /* Check if required score is numeric */
+    if(!is_numeric($this->saRequiredScore)){
+      $message[] = _("Required score must be a numeric value.");
+    }
+
     return($message);
   }
   
@@ -300,7 +311,10 @@ class goSpamServer extends plugin{
   function save_object()
   {
     if(isset($_POST['goSpamServer'])){
+
       plugin::save_object();
+
+      /* Check flags */
       foreach($this->Flags as $flag){
         $var = "saFlags".$flag;
         if(isset($_POST[$var])){
