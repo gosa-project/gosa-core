@@ -201,6 +201,7 @@ class govirusserver extends plugin{
     $message = plugin::check();
 
     $mustBeNumeric = array(
+          "avMaxDirectoryRecursions"     =>_("Maximum directory recursions"),
           "avMaxThreads"                 =>_("Maximum threads"),
           "avArchiveMaxFileSize"         =>_("Maximum file size"),
           "avArchiveMaxRecursion"        =>_("Maximum recursions"),
@@ -350,8 +351,8 @@ class govirusserver extends plugin{
           "avFlagsE"         =>_("Block encrypted archives"),
 
           "avMaxThreads"                 =>_("Maximum threads"),
-//          "avMaxDirectoryRecursions"     =>_(""),
-//          "avUser"                       =>_(""),
+          "avMaxDirectoryRecursions"     =>_("Maximum directory recursions"),
+          "avUser"                       =>_("Anti virus user"),
           "avArchiveMaxFileSize"         =>_("Maximum file size"),
           "avArchiveMaxRecursion"        =>_("Maximum recursions"),
           "avArchiveMaxCompressionRatio" =>_("Maximum compression ratio"),

@@ -32,20 +32,6 @@
 	  	<input type='text' name='avHttpProxyURL' value='{$avHttpProxyURL}' {$avHttpProxyURLACL} style='width:220px;'>
 	  </td>
 	 </tr>
-	</table>
- 
-  </td>
-  <td style='border-left:1px solid #A0A0A0;vertical-align:top;'>
-  
-	<table>
-	 <tr>
-	  <td>
-	 	{t}Checks per day{/t}
-	  </td>
-	  <td>
-	  	<input type='text' name='avChecksPerDay' value='{$avChecksPerDay}' {$avChecksPerDayACL}>
-	  </td>
-	 </tr>
 	 <tr>
 	  <td>
 	 	{t}Maximum threads{/t}
@@ -56,14 +42,36 @@
 	 	</select>
 	  </td>
 	 </tr>
+	</table>
+ 
+  </td>
+  <td style='border-left:1px solid #A0A0A0;vertical-align:top;'>
+  
+	<table>
 	 <tr>
 	  <td>
+	 	{t}Max directory recursions{/t}
+	  </td>
+	  <td>
+	  	<input type='text' name='avMaxDirectoryRecursions' value='{$avMaxDirectoryRecursions}' {$avMaxDirectoryRecursionsACL}>
+	  </td>
+	 </tr>
+	 <tr>
+	  <td>
+	 	{t}Checks per day{/t}
+	  </td>
+	  <td>
+	  	<input type='text' name='avChecksPerDay' value='{$avChecksPerDay}' {$avChecksPerDayACL}>
+	  </td>
+	 </tr>
+	 <tr>
+	  <td colspan=2>
 	  	<input type='checkbox' name='avFlagsD' {$avFlagsDACL} {$avFlagsDCHK} value='1'>
 		{t}Enable debugging{/t}
 	  </td>
 	 </tr>
 	 <tr>
-	  <td>
+	  <td colspan=2>
 	  	<input type='checkbox' name='avFlagsS' {$avFlagsSACL} {$avFlagsSCHK} value='1'>
 		{t}Enable mail scanning{/t}
 	  </td>
