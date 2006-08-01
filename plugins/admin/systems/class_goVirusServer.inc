@@ -22,21 +22,22 @@ class goVirusServer extends plugin{
 
   var $Flags            = array("D","S","A","E");
   
-  var $avFlags          = "";
-  var $avFlagsD         = FALSE;
-  var $avFlagsS         = FALSE;
-  var $avFlagsA         = FALSE;
-  var $avFlagsE         = FALSE;
+  var $avFlags          = "DSAE";
+  var $avFlagsD         = TRUE;
+  var $avFlagsS         = TRUE;
+  var $avFlagsA         = TRUE;
+  var $avFlagsE         = TRUE;
 
   var $avMaxThreads                 = 5;
   var $avMaxDirectoryRecursions     = 4;    
-//  var $avUser                       = "";
   var $avArchiveMaxFileSize         = 4000;
   var $avArchiveMaxRecursion        = 5;
   var $avArchiveMaxCompressionRatio = 95;
-  var $avDatabaseMirror             = "";
   var $avChecksPerDay               = 12;
+
+//  var $avUser                       = "";
   var $avHttpProxyURL               = "";
+  var $avDatabaseMirror             = "";
 
   function goVirusServer($config,$dn)
   {
@@ -98,27 +99,14 @@ class goVirusServer extends plugin{
       }
     }
 
+    /* Assign value for max thread select box */
+    $tmp = array();
+    for($i = 1 ; $i <= 20 ; $i ++){
+      $tmp[$i] = $i;
+    }
+    $smarty->assign("ThreadValues",$tmp);
+
     return($display.$smarty->fetch(get_template_path("goVirusServer.tpl",TRUE,dirname(__FILE__))));
-  }
-
-
-  /* Add $post to list of configured trusted */
-  function AddTrust($post)
-  {
-    if(!empty($post)){
-      $this->TrustedNetworks[$post] = $post;
-    }
-  }
-
-
-  /* Delete trusted network */
-  function DelTrust($posts)
-  {
-    foreach($posts as $post){
-      if(isset($this->TrustedNetworks[$post])){
-        unset($this->TrustedNetworks[$post]);     
-      }
-    }
   }
 
 
@@ -159,8 +147,6 @@ class goVirusServer extends plugin{
 
     plugin::save();
 
-    print_a($this->attrs);
-
     /* Check if this is a new entry ... add/modify */
     $ldap = $this->config->get_ldap_link();
     $ldap->cat($this->dn,array("objectClass"));
@@ -183,6 +169,26 @@ class goVirusServer extends plugin{
   function check()
   { 
     $message = plugin::check();
+
+    $mustBeNumeric = array(
+          "avMaxThreads"                 =>_("Maximum threads"),
+          "avArchiveMaxFileSize"         =>_("Maximum file size"),
+          "avArchiveMaxRecursion"        =>_("Maximum recursions"),
+          "avArchiveMaxCompressionRatio" =>_("Maximum compression ratio"),
+          "avChecksPerDay"               =>_("Checks per day"));
+
+    foreach($mustBeNumeric as $key => $trans){
+      if(!is_numeric($this->$key)){
+        $message[] = sprintf(_("The specified value for '%s' must be a numeric value."),$trans);
+      }
+    }
+
+
+
+
+
+
+
     return($message);
   }
   
