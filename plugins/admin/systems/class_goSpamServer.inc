@@ -45,7 +45,8 @@ class goSpamServer extends plugin{
     $this->ui = get_userinfo();
 
     /* Set up the users ACL's for this 'dn' */
-    $this->acl= get_permissions ($this->dn, $this->ui->subtreeACL);
+    $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "goSpamServer", $this->ui->dn);
 
     /* Get Flags */
     foreach($this->Flags as $flag){
@@ -181,7 +182,7 @@ class goSpamServer extends plugin{
 
     /* Create divlist */
     $DivRules = new divSelectBox("SpamRules");
-    $DivRules->SetHeight(150);
+    $DivRules->SetHeight(130);
 
     if(preg_match("/disabled/",chkacl($this->acl,"saTrustedNetworks"))){
       $actions = "";
