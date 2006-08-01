@@ -14,7 +14,7 @@ class govirusserver extends plugin{
   var $DisplayName      = "";
   var $dn               = NULL;
   var $cn               = "";
-  var $saStatus         = "";
+  var $avStatus         = "";
 
   var $dialog           = NULL;
   var $ui               = NULL;
@@ -39,7 +39,7 @@ class govirusserver extends plugin{
   var $avHttpProxyURL               = "";
   var $avDatabaseMirror             = "";
 
-  function gvirusserver($config,$dn)
+  function govirusserver($config,$dn)
   {
     /* Init class */
     plugin::plugin($config,$dn);
@@ -64,25 +64,34 @@ class govirusserver extends plugin{
 
   function execute()
   {
-    /* Do we need to flip is_account state? */
-    if (isset($_POST['modify_state'])) {
-      $this->is_account = !$this->is_account;
-    }
- 
-    /* Show tab dialog headers */
-    if ($this->is_account) {
-      /* call Add Acoount to add account */
-      $display = $this->show_header(_("Remove anti virus extension"), 
-        _("This server has anti virus features enabled. You can disable them by clicking below."));
-    } else {
-      /* call remove Account */
-      $display = $this->show_header(_("Add anti virus service"), 
-        _("This server has anti virus features disabled. You can enable them by clicking below."));
-      return ($display);
+    $smarty = get_smarty(); 
+    if(get_class($this->parent) == "servtabs"){
+
+      $smarty->assign("servtabs",TRUE);
+
+      /* Do we need to flip is_account state? */
+      if (isset($_POST['modify_state'])) {
+        $this->is_account = !$this->is_account;
+      }
+
+      /* Show tab dialog headers */
+      if ($this->is_account) {
+        /* call Add Acoount to add account */
+        $display = $this->show_header(_("Remove anti virus extension"), 
+            _("This server has anti virus features enabled. You can disable them by clicking below."));
+      } else {
+        /* call remove Account */
+        $display = $this->show_header(_("Add anti virus service"), 
+            _("This server has anti virus features disabled. You can enable them by clicking below."));
+        return ($display);
+      }
+    }else{
+      $display = "";
+      $smarty->assign("servtabs",FALSE);
+      $this->is_account = true;
     }
 
     /* Assign smarty vars */
-    $smarty = get_smarty(); 
     foreach($this->attributes as $attr){
       $smarty->assign($attr,$this->$attr);
       $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
@@ -183,12 +192,6 @@ class govirusserver extends plugin{
       }
     }
 
-
-
-
-
-
-
     return($message);
   }
   
@@ -209,6 +212,103 @@ class govirusserver extends plugin{
   }  
 
   
+
+  /* For newer service management dialogs */
+  function getListEntry()
+  {
+    $this->updateStatusState();
+    $flag                   = $this->StatusFlag;
+    $fields['Status']       = $this->$flag;
+    $fields['Message']      = _("Anti virus");
+    $fields['AllowStart']   = true;
+    $fields['AllowStop']    = true;
+    $fields['AllowRestart'] = true;
+    $fields['AllowRemove']  = true;
+    $fields['AllowEdit']    = true;
+    return($fields);
+  }
+
+  function updateStatusState()
+  {
+    if(empty($this->StatusFlag)) return;
+
+    $attrs = array();
+    $flag = $this->StatusFlag;
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->cn);
+    $ldap->cat($this->dn,array($flag));
+    if($ldap->count()){
+      $attrs = $ldap->fetch();
+    }
+    if(isset($attrs[$flag][0])){
+      $this->$flag = $attrs[$flag][0];
+    }
+  }
+
+  function action_hook($add_attrs= array())
+  {
+    /* Find postcreate entries for this class */
+    $command= search_config($this->config->data['MENU'], get_class($this), "ACTION_HOOK");
+    if ($command == "" && isset($this->config->data['TABS'])){
+      $command= search_config($this->config->data['TABS'], get_class($this), "ACTION_HOOK");
+    }
+    if ($command != ""){
+      /* Walk through attribute list */
+      foreach ($this->attributes as $attr){
+        if (!is_array($this->$attr)){
+          $command= preg_replace("/%$attr/", $this->$attr, $command);
+        }
+      }
+      $command= preg_replace("/%dn/", $this->dn, $command);
+      /* Additional attributes */
+      foreach ($add_attrs as $name => $value){
+        $command= preg_replace("/%$name/", $value, $command);
+      }
+
+      /* If there are still some %.. in our command, try to fill these with some other class vars */
+      if(preg_match("/%/",$command)){
+        $attrs = get_object_vars($this);
+        foreach($attrs as $name => $value){
+          if(!is_string($value)) continue;
+          $command= preg_replace("/%$name/", $value, $command);
+        }
+      }
+
+      if (check_command($command)){
+        @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
+            $command, "Execute");
+
+        exec($command);
+      } else {
+        $message= sprintf(_("Command '%s', specified as ACTION_HOOK for plugin '%s' doesn't seem to exist."), $command, get_class($this));
+        print_red ($message);
+      }
+    }
+  }
+
+  /* Directly save new status flag */
+  function setStatus($value)
+  {
+    if($value == "none") return;
+    if(!$this->initially_was_account) return;
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->dn);
+    $ldap->cat($this->dn,array("objectClass"));
+    if($ldap->count()){
+
+      $tmp = $ldap->fetch();
+      for($i = 0; $i < $tmp['objectClass']['count']; $i ++){
+        $attrs['objectClass'][] = $tmp['objectClass'][$i];
+      }
+      $flag = $this->StatusFlag;
+      $attrs[$flag] = $value;
+      $this->$flag = $value;
+      $ldap->modify($attrs);
+      show_ldap_error($ldap->get_error(), sprintf(_("Set status flag for server services/anti virus with dn '%s' failed."),$this->dn));
+      $this->action_hook();
+    }
+  }
+
   /* Return plugin informations for acl handling 
   function plInfo()
   {
@@ -240,105 +340,6 @@ class govirusserver extends plugin{
           ));
   }
   */
-
-  /* For newer service management dialogs */
-  /*function getListEntry()
-  {
-    $this->updateStatusState();
-    $flag                   = $this->StatusFlag;
-    $fields['Status']       = $this->$flag;
-    $fields['Message']      = _("Anti virus");
-    $fields['AllowStart']   = true;
-    $fields['AllowStop']    = true;
-    $fields['AllowRestart'] = true;
-    $fields['AllowRemove']  = true;
-    $fields['AllowEdit']    = true;
-    return($fields);
-  }
-
-  function updateStatusState()
-  {
-    if(empty($this->StatusFlag)) return;
-
-    $attrs = array();
-    $flag = $this->StatusFlag;
-    $ldap = $this->config->get_ldap_link();
-    $ldap->cd($this->cn);
-    $ldap->cat($this->dn,array($flag));
-    if($ldap->count()){
-      $attrs = $ldap->fetch();
-    }
-    if(isset($attrs[$flag][0])){
-      $this->$flag = $attrs[$flag][0];
-    }
-  }
-  function action_hook($add_attrs= array())
-  {
-    /* Find postcreate entries for this class * /
-    $command= search_config($this->config->data['MENU'], get_class($this), "ACTION_HOOK");
-    if ($command == "" && isset($this->config->data['TABS'])){
-      $command= search_config($this->config->data['TABS'], get_class($this), "ACTION_HOOK");
-    }
-    if ($command != ""){
-      /* Walk through attribute list * /
-      foreach ($this->attributes as $attr){
-        if (!is_array($this->$attr)){
-          $command= preg_replace("/%$attr/", $this->$attr, $command);
-        }
-      }
-      $command= preg_replace("/%dn/", $this->dn, $command);
-      /* Additional attributes * /
-      foreach ($add_attrs as $name => $value){
-        $command= preg_replace("/%$name/", $value, $command);
-      }
-
-      /* If there are still some %.. in our command, try to fill these with some other class vars * /
-      if(preg_match("/%/",$command)){
-        $attrs = get_object_vars($this);
-        foreach($attrs as $name => $value){
-          if(!is_string($value)) continue;
-          $command= preg_replace("/%$name/", $value, $command);
-        }
-      }
-
-      if (check_command($command)){
-        @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
-            $command, "Execute");
-
-        exec($command);
-      } else {
-        $message= sprintf(_("Command '%s', specified as ACTION_HOOK for plugin '%s' doesn't seem to exist."), $command, get_class($this));
-        print_red ($message);
-      }
-    }
-  }
-
-  /* Directly save new status flag * /
-  function setStatus($value)
-  {
-    if($value == "none") return;
-    if(!$this->initially_was_account) return;
-    $ldap = $this->config->get_ldap_link();
-    $ldap->cd($this->dn);
-    $ldap->cat($this->dn,array("objectClass"));
-    if($ldap->count()){
-
-      $tmp = $ldap->fetch();
-      for($i = 0; $i < $tmp['objectClass']['count']; $i ++){
-        $attrs['objectClass'][] = $tmp['objectClass'][$i];
-      }
-      $flag = $this->StatusFlag;
-      $attrs[$flag] = $value;
-      $this->$flag = $value;
-      $ldap->modify($attrs);
-      show_ldap_error($ldap->get_error(), sprintf(_("Set status flag for server services/anti virus with dn '%s' failed."),$this->dn));
-      $this->action_hook();
-    }
-  }
-
-
-  */
-
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

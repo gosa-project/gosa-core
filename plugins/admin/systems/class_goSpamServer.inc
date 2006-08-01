@@ -87,23 +87,32 @@ class gospamserver extends plugin{
 
   function execute()
   {
-    /* Do we need to flip is_account state? */
-    if (isset($_POST['modify_state'])) {
-      $this->is_account = !$this->is_account;
-    }
- 
-    /* Show tab dialog headers */
-    if ($this->is_account) {
-      /* call Add Acoount to add account */
-      $display = $this->show_header(_("Remove spamassassin extension"), 
-        _("This server has spamassassin features enabled. You can disable them by clicking below."));
-    } else {
-      /* call remove Account */
-      $display = $this->show_header(_("Add spamassassin service"), 
-        _("This server has spamassassin features disabled. You can enable them by clicking below."));
-      return ($display);
-    }
+    $smarty = get_smarty(); 
+    if(get_class($this->parent) == "servtabs"){
 
+      $smarty->assign("servtabs",true);
+      /* Do we need to flip is_account state? */
+      if (isset($_POST['modify_state'])) {
+        $this->is_account = !$this->is_account;
+      }
+
+      /* Show tab dialog headers */
+      if ($this->is_account) {
+        /* call Add Acoount to add account */
+        $display = $this->show_header(_("Remove spamassassin extension"), 
+            _("This server has spamassassin features enabled. You can disable them by clicking below."));
+      } else {
+        /* call remove Account */
+        $display = $this->show_header(_("Add spamassassin service"), 
+            _("This server has spamassassin features disabled. You can enable them by clicking below."));
+        return ($display);
+      }
+    }else{
+      $this->is_account =true;
+      $display ="";
+      $smarty->assign("servtabs",false);
+    }
+  
     /* Add new trusted network */
     if(isset($_POST['AddNewTrust'])){
       $this->AddTrust($_POST['NewTrustName']);
@@ -168,7 +177,6 @@ class gospamserver extends plugin{
     }
 
     /* Assign smarty vars */
-    $smarty = get_smarty(); 
     foreach($this->attributes as $attr){
       $smarty->assign($attr,$this->$attr);
       $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
@@ -203,6 +211,13 @@ class gospamserver extends plugin{
     }
     $smarty->assign("divRules",$DivRules->DrawList()); 
     $smarty->assign("TrustedNetworks",$this->TrustedNetworks); 
+
+    /* Create Spam score select box entries */
+    $tmp = array();
+    for($i = 0 ; $i <= 20 ; $i ++ ){
+      $tmp[$i] = $i;
+    }
+    $smarty->assign("SpamScore",$tmp);
 
     return($display.$smarty->fetch(get_template_path("goSpamServer.tpl",TRUE,dirname(__FILE__))));
   }
@@ -356,12 +371,12 @@ class gospamserver extends plugin{
   */
 
   /* For newer service management dialogs */
-  /*function getListEntry()
+  function getListEntry()
   {
     $this->updateStatusState();
     $flag                   = $this->StatusFlag;
     $fields['Status']       = $this->$flag;
-    $fields['Message']      = _("spamassassin");
+    $fields['Message']      = _("Spamassassin");
     $fields['AllowStart']   = true;
     $fields['AllowStop']    = true;
     $fields['AllowRestart'] = true;
@@ -388,25 +403,25 @@ class gospamserver extends plugin{
   }
   function action_hook($add_attrs= array())
   {
-    /* Find postcreate entries for this class * /
+    /* Find postcreate entries for this class */
     $command= search_config($this->config->data['MENU'], get_class($this), "ACTION_HOOK");
     if ($command == "" && isset($this->config->data['TABS'])){
       $command= search_config($this->config->data['TABS'], get_class($this), "ACTION_HOOK");
     }
     if ($command != ""){
-      /* Walk through attribute list * /
+      /* Walk through attribute list */
       foreach ($this->attributes as $attr){
         if (!is_array($this->$attr)){
           $command= preg_replace("/%$attr/", $this->$attr, $command);
         }
       }
       $command= preg_replace("/%dn/", $this->dn, $command);
-      /* Additional attributes * /
+      /* Additional attributes */
       foreach ($add_attrs as $name => $value){
         $command= preg_replace("/%$name/", $value, $command);
       }
 
-      /* If there are still some %.. in our command, try to fill these with some other class vars * /
+      /* If there are still some %.. in our command, try to fill these with some other class vars */
       if(preg_match("/%/",$command)){
         $attrs = get_object_vars($this);
         foreach($attrs as $name => $value){
@@ -427,7 +442,7 @@ class gospamserver extends plugin{
     }
   }
 
-  /* Directly save new status flag * /
+  /* Directly save new status flag */
   function setStatus($value)
   {
     if($value == "none") return;
@@ -450,8 +465,6 @@ class gospamserver extends plugin{
     }
   }
 
-
-  */
 
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

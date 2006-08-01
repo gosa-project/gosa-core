@@ -16,7 +16,9 @@
       {t}Required score{/t}      
      </td>
      <td>
-      <input type='text' name='saRequiredScore' value='{$saRequiredScore}' {$saRequiredScoreACL}>
+      <select name='saRequiredScore' title='{t}Select required score to tag mail as spam{/t}'>
+       {html_options options=$SpamScore selected=$saRequiredScore}
+      </select>
      </td>
     </tr>
    </table>
@@ -91,3 +93,15 @@
   </td>
 </table>
 <input type='hidden' value='1' name='goSpamServer'>
+
+{if !$servtabs}
+<p class='seperator'>&nbsp;</p>
+<p>
+<div style="width:100%; text-align:right;">
+    <input type='submit' name='SaveService' value='{t}Save{/t}'>
+    &nbsp;
+    <input type='submit' name='CancelService' value='{t}Cancel{/t}'>
+</div>
+</p>
+{/if}
+
