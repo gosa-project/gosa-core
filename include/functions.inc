@@ -1029,7 +1029,7 @@ function is_ip_with_subnetmask($ip)
 /* Simple is domain check, it checks if the given string looks like "string(...).string" */
 function is_domain($str)
 {
-  return(preg_match("/^([a-z0-9i\-]*)\.[a-z0-9]$/i",$str));
+  return(preg_match("/^([a-z0-9i\-]*)\.[a-z0-9]*$/i",$str));
 }
 
 
