@@ -986,6 +986,52 @@ function is_ip($ip)
   return preg_match("/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/", $ip);
 }
 
+/* Checks if the given ip address doesn't match
+    "is_ip" because there is also a sub net mask given */
+function is_ip_with_subnetmask($ip)
+{
+        /* Generate list of valid submasks */
+        $res = array();
+        for($e = 0 ; $e <= 32; $e++){
+                $res[$e] = $e;
+        }
+        $i[0] =255;
+        $i[1] =255;
+        $i[2] =255;
+        $i[3] =255;
+        for($a= 3 ; $a >= 0 ; $a --){
+                $c = 1;
+                while($i[$a] > 0 ){
+                        $str  = $i[0].".".$i[1].".".$i[2].".".$i[3];
+                        $res[$str] = $str;
+                        $i[$a] -=$c;
+                        $c = 2*$c;
+                }
+        }
+        $res["0.0.0.0"] = "0.0.0.0";
+        if(preg_match("/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.".
+                        "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.".
+                        "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.".
+                        "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/", $ip)){
+                $mask = preg_replace("/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.".
+                        "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.".
+                        "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.".
+                        "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/","",$ip);
+
+                $mask = preg_replace("/^\//","",$mask);
+                if((in_array("$mask",$res)) && preg_match("/^[0-9\.]/",$mask)){
+                        return(TRUE);
+                }
+        }
+        return(FALSE);
+}
+
+/* Simple is domain check, it checks if the given string looks like "string(...).string" */
+function is_domain($str)
+{
+  return(preg_match("/^([a-z0-9i\-]*)\.[a-z0-9]$/i",$str));
+}
+
 
 function is_id($id)
 {
