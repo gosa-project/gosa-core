@@ -2,6 +2,7 @@ GOsa2 changelog
 ===============
 
 * gosa 2.5.3
+  - Fixed problem in reloading departments when we've PHP4
   - Fixed gotoPrinter membership problem.
   - Fixed environment shares, only available shares will be displayed (gosaUnitTag was ignored)
   - Fixed saving of inherited workstation settings
@@ -18,6 +19,7 @@ GOsa2 changelog
   - Fixed ACL handling to *not* show the admin user dialog
     when configured for self modify only
   - Fixed problem when changing passwords via "My account"
+  - Added more information to hotplug devices.
 
 * gosa 2.5.2
   - Fixed current main base not beeing set when editing non tabbed
