@@ -24,12 +24,8 @@ class apptabs extends tabs
     /* Check for new 'dn', in order to propagate the
        'dn' to all plugins */
     $tmp = search_config($this->config->data,"faiManagement","CLASS");
-    if((!empty($tmp)) && (isset($_SESSION['appfilter']['release']))){
-      if(!$baseobject->isReleaseApplikation){
-        $new_dn= "cn=".$baseobject->cn.",ou=apps,".$baseobject->base;
-      }else{
-        $new_dn ="cn=".$baseobject->cn.",".$_SESSION['appfilter']['release'];
-      }
+    if((!empty($tmp)) && (isset($_SESSION['appfilter']['release'])) && ($baseobject->isReleaseApplikation) && $_SESSION['appfilter']['release'] != "main"){
+      $new_dn ="cn=".$baseobject->cn.",".$_SESSION['appfilter']['release'];
     }else{
       $new_dn= "cn=".$baseobject->cn.",ou=apps,".$baseobject->base;
     }
