@@ -284,7 +284,7 @@
   <td style="vertical-align:top;">
    <table summary="" style="width:100%"> 
     <tr>
-     <td><label for="l">{t}Location{/t}</l></td>
+     <td><label for="l">{t}Location{/t}</label></td>
      <td><input id="l" name="l" size=22 maxlength=60 {$lACL} value="{$l}"></td>
     </tr>
     <tr>
