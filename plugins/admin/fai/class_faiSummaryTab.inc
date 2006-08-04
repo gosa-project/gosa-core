@@ -67,6 +67,7 @@ class faiSummaryTab extends plugin{
       /* Get Classes and release */
       $this->Classes = $this->parent->by_object['faiProfile']->FAIclasses;
       $str = preg_replace("/^.*ou=profiles,/","",$this->dn);
+
       if(isset($tmp[$str])){
         $this->Release = $tmp[$str];
       }
@@ -142,18 +143,17 @@ class faiSummaryTab extends plugin{
   }
 
 
-  /* returns an array with all possibly release types */
-  function getBranches($base = false,$prefix = "")
+  function getBranches()
   {
-    $ret = array("main"=>"/");
+    $dn   = $this->config->current['BASE'];
     $ldap = $this->config->get_ldap_link();
-    $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(objectClass=FAIbranch)",array("dn","cn","ou"));
+    $ldap->cd($dn);
+    $ldap->search("(&(objectClass=organizationalUnit)(objectClass=FAIbranch))",array("ou","cn","dn"));
+    $ret = array("main"=>"/");
     while($attrs = $ldap->fetch()){
-      if((isset($attrs['ou']))&&($attrs['dn']!=$base)){
+      if(preg_match("/ou=fai,/",$attrs['dn'])){
         $name = convert_department_dn(preg_replace("/,ou=fai,.*$/","",$attrs['dn']));
         $ret[$attrs['dn']] = $name;
-        $ret = array_merge($ret,$this->getBranches($attrs['dn'],$prefix.$attrs['ou'][0]."/"));
       }
     }
     return($ret);
