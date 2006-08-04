@@ -553,11 +553,20 @@ class LDAP{
             }else{
               print_red(_("Unknown FAIstate %s"),$type);
             }
+          }elseif(in_array("gosaApplication",$attr['objectClass'])){
+            $attr['objectClass'][] = "FAIobject";
+            $attr['FAIstate'] = $type;
           }
 
           /* Replace FAIdebianRelease with new release name */
           if(in_array("FAIpackageList" , $attr['objectClass'])){
-            $attr['FAIdebianRelease'] = $destinationName; 
+            if($type=="branch"){
+              $attr['FAIstate'] ="branch";
+            }elseif($type=="freeze"){
+              $attr['FAIstate'] ="freeze";
+            }else{
+              print_red(_("Unknown FAIstate %s"),$type);
+            }
           }
 
           /* Add entry */
