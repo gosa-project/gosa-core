@@ -238,6 +238,13 @@ class applicationManagement extends plugin
       /* Get 'dn' from posted 'applist', must be unique */
       $this->dn= $this->applications[$s_entry]['dn'];
 
+      /* Get faistate to check if this applications is frezzed. 
+         Freezed applications can't be modified anyway */
+      $state = "";
+      if(isset($this->applications[$s_entry]['FAIstate'])){
+        $state = $this->applications[$s_entry]['FAIstate'][0];
+      }
+
       /* Check locking, save current plugin in 'back_plugin', so
          the dialog knows where to return. */
       if (($user= get_lock($this->dn)) != ""){
@@ -252,9 +259,14 @@ class applicationManagement extends plugin
       $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
 
       /* Register apptabs to trigger edit dialog */
-      $this->apptabs= new apptabs($this->config,
-          $this->config->data['TABS']['APPSTABS'], $this->dn);
-      $this->apptabs->set_acl($acl);
+      $this->apptabs= new apptabs($this->config,$this->config->data['TABS']['APPSTABS'], $this->dn);
+
+      /* If this is a freeze assign acl none  */
+      if(preg_match("/freeze/",$state)){
+        $this->apptabs->set_acl(array());
+      }else{
+        $this->apptabs->set_acl($acl);
+      }
       $_SESSION['objectinfo']= $this->dn;
     }
 

@@ -58,9 +58,9 @@
     </td>
     <td style="vertical-align:top">
     &nbsp;<br>
-    <input type="hidden" name="MAX_FILE_SIZE" value="100000">
-    <input name="picture_file" type="file" size="20" maxlength="255" accept="image/*.png" id="picture_file">
-    <input type="submit" name="update" value="{t}Update{/t}" title="{t}Reload picture from LDAP{/t}">
+    <input type="hidden" name="MAX_FILE_SIZE" value="100000" {$gosaApplicationIconACL}>
+    <input name="picture_file" type="file" size="20" maxlength="255" accept="image/*.png" id="picture_file" {$gosaApplicationIconACL}>
+    <input type="submit" name="update" value="{t}Update{/t}" title="{t}Reload picture from LDAP{/t}" {$gosaApplicationIconACL}>
     </td>
     </tr>
    </table>
@@ -97,9 +97,9 @@
 	<tr>
 		<td>
 			<h2><img src="images/fai_script.png" alt="{t}Script{/t}" align="middle">&nbsp;{t}Script{/t}</h2>
-			<textarea name="gotoLogonScript" style='width:99%;height:220px;'>{$gotoLogonScript}</textarea>
-			<input type="file" name="ScriptFile" value="{t}Import{/t}">
-			<input type="submit" name="upLoad" value="{t}Upload{/t}">
+			<textarea name="gotoLogonScript" style='width:99%;height:220px;' {$gotoLogonScriptACL}>{$gotoLogonScript}</textarea>
+			<input type="file" name="ScriptFile" value="{t}Import{/t}" {$gotoLogonScriptACL}>
+			<input type="submit" name="upLoad" value="{t}Upload{/t}" {$gotoLogonScriptACL}>
 		</td>
 	</tr>
 </table>
