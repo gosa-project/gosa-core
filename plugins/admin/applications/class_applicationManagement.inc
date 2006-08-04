@@ -388,7 +388,7 @@ class applicationManagement extends plugin
       if(isset($Releases[$release])){
         $use_base  = $release;
       }else{
-        $use_base  = $base;
+        $use_base  = "ou=apps,".$base;
       }
     }
 
