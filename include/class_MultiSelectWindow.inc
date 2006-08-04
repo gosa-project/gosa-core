@@ -274,7 +274,7 @@ class MultiSelectWindow{
 			if($box['default'] == true){
 				$boxes .="<input type='checkbox' name='".$box['name']."' value='1' title='".$box['value']."' checked ".$boxClick.">&nbsp;".$box['string']."<br>";
 			}else{
-				$boxes .="<input type='checkbox' name='".$box['name']."' value='1' title='".$box['value']."'".$boxClick.";>&nbsp;".$box['string']."<br>";
+				$boxes .="<input type='checkbox' name='".$box['name']."' value='1' title='".$box['value']."'".$boxClick.">&nbsp;".$box['string']."<br>";
 			}
 		}
 		$smarty->assign("CheckBoxes", $boxes);
