@@ -16,12 +16,12 @@
 	  <table>
 	   <tr>
 		<td width="147" height="200" bgcolor="gray">
-		 <img align="center" valign="center" border="0" width="100%" src="getbin.php?rand={$rand}" alt="{t}Personal picture{/t}">
+		 <img align="middle" border="0" width="100%" src="getbin.php?rand={$rand}" alt="{t}Personal picture{/t}">
 		</td>
 	   </tr>
 	   <tr>
 		<td>
-		 <input valign="top" type="submit" name="edit_picture" {$jpegPhotoACL} value="{t}Change picture{/t}...">
+		 <input type="submit" name="edit_picture" {$jpegPhotoACL} value="{t}Change picture{/t}...">
 		</td>
 	   </tr>
 	  </table>
