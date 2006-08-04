@@ -131,25 +131,40 @@ class divListApplication extends MultiSelectWindow
     $empty    = "<img class='center' src='images/empty.png' style='width:16px;height:16px;' alt=''>";
 
 
-    /* Create action icons */
-    $actions = "";
-    if($this->parent->CopyPasteHandler){
-      $actions.= "<input class='center' type='image'
-        src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
-      $actions.= "<input class='center' type='image'
-        src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
-    }
-    $actions.= "<input class='center' type='image'
-      src='images/edit.png' alt='"._("edit")."' name='appl_edit_%KEY%' title='"._("Edit this entry")."'>";
-    $actions.= "<input class='center' type='image'
-      src='images/edittrash.png' alt='"._("delete")."' name='appl_del_%KEY%' title='"._("Delete this entry")."'>";
-
-
     /********************
       Attach objects
      ********************/
 
     foreach($list as $key => $val){
+
+      /* Get state */
+      $state = "";
+      if(isset($val['FAIstate'])){
+        $state = $val['FAIstate'][0];
+      }
+
+      /* If this application is a freezed one, we must hide some action buttons */
+      $is_freezed = preg_match("/freeze/i",$state);
+
+      /* Create action icons */
+      $actions = "";
+      if(($this->parent->CopyPasteHandler) && (!$is_freezed)){
+        $actions.= "<input class='center' type='image'
+          src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+        $actions.= "<input class='center' type='image'
+          src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
+      }
+    
+      $actions.= "<input class='center' type='image'
+        src='images/edit.png' alt='"._("edit")."' name='appl_edit_%KEY%' title='"._("Edit this entry")."'>";
+      if($is_freezed){
+        $actions.= "<img src='empty' width='32' alt='&nbsp;' >";
+      }else{
+        $actions.= "<input class='center' type='image'
+          src='images/edittrash.png' alt='"._("delete")."' name='appl_del_%KEY%' title='"._("Delete this entry")."'>";
+      }
+
+
       $title = "title='".preg_replace('/ /', '&nbsp;', @LDAP::fix($val['dn']))."'";
 
       if(!isset($val['description'][0])){

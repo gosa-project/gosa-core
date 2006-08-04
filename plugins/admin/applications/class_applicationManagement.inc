@@ -72,7 +72,7 @@ class applicationManagement extends plugin
     $ldap                   = $this->config->get_ldap_link();
     $dn                     = "ou=apps,".$base;
     $ret                    = array();
-    $ret [$base] = "/";
+    $ret [$dn] = "/";
 
     $ldap->cd($dn);
     $ldap->search("objectClass=organizationalUnit",array("ou"));
@@ -396,7 +396,7 @@ class applicationManagement extends plugin
       $Flags    |= GL_SUBSEARCH;  
     }
    
-    $res= get_list($Filter, $this->ui->subtreeACL,$use_base, array("cn","description","dn","objectClass"), $Flags);
+    $res= get_list($Filter, $this->ui->subtreeACL,$use_base, array("cn","description","dn","objectClass","FAIstate"), $Flags);
     foreach ($res as $val){
       $tmp[strtolower($val['cn'][0]).$val['cn'][0]]=$val;
     }
