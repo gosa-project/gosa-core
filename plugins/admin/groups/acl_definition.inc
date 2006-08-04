@@ -7,6 +7,8 @@ $ACLD['application']=array("cn" => "LDAP name",
 			"description" => "Description",
 			"gosaApplicationExecute" => "Execute",
 			"gosaApplicationFlags" => "Modify flags",
+			"gotoLogonScript" => "Script",
+			"gosaApplicationIcon" => "Icon",
 			"gosaApplicationName" => "Visible name");
 $ACLD['mimetype']=array("cn" 				=> "LDAP name",
 			"create" 						=> "Create",
