@@ -99,7 +99,8 @@
 			<h2><img src="images/fai_script.png" alt="{t}Script{/t}" align="middle">&nbsp;{t}Script{/t}</h2>
 			<textarea name="gotoLogonScript" style='width:99%;height:220px;' {$gotoLogonScriptACL}>{$gotoLogonScript}</textarea>
 			<input type="file" name="ScriptFile" value="{t}Import{/t}" {$gotoLogonScriptACL}>
-			<input type="submit" name="upLoad" value="{t}Upload{/t}" {$gotoLogonScriptACL}>
+		 	<input type="submit" name="upLoad" value="{t}Upload{/t}" {$gotoLogonScriptACL}>
+			<input type='submit' name='download' value='{t}Download{/t}'>
 		</td>
 	</tr>
 </table>
