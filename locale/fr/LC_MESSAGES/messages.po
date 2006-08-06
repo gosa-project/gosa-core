@@ -3,7 +3,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
-"PO-Revision-Date: 2006-07-11 11:23+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-08-05 12:58+0200\n"
+"PO-Revision-Date: 2006-08-06 20:51+0200\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team: Français <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -115,7 +117,7 @@ msgstr "Fax"
 #: plugins/admin/groups/class_divListGroup.inc:134
 #: plugins/admin/users/class_divListUsers.inc:168
 #: plugins/admin/departments/generic.tpl:63
-#: plugins/admin/systems/class_systemManagement.inc:742
+#: plugins/admin/systems/class_systemManagement.inc:753
 #: plugins/admin/systems/chooser.tpl:12
 #: plugins/admin/ogroups/class_ogroupManagement.inc:368
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:6
@@ -168,7 +170,7 @@ msgstr "Périphériques"
 
 #: contrib/gosa.conf:119 contrib/gosa.conf:144
 #: plugins/personal/environment/environment.tpl:171
-#: plugins/admin/systems/class_systemManagement.inc:751
+#: plugins/admin/systems/class_systemManagement.inc:762
 #: plugins/admin/ogroups/class_ogroupManagement.inc:371
 #: plugins/generic/references/class_reference.inc:52
 msgid "Printer"
@@ -278,39 +280,39 @@ msgstr "Sommaire"
 msgid "Packages"
 msgstr "Paquets"
 
-#: contrib/gosa.conf:255
+#: contrib/gosa.conf:254
 msgid "{LOCATIONNAME}"
 msgstr ""
 
-#: contrib/gosa.conf:273 plugins/admin/ogroups/class_phonequeue.inc:164
+#: contrib/gosa.conf:272 plugins/admin/ogroups/class_phonequeue.inc:164
 msgid "German"
 msgstr "Allemand"
 
-#: contrib/gosa.conf:274
+#: contrib/gosa.conf:273
 msgid "Russian"
 msgstr "Russe"
 
-#: contrib/gosa.conf:275
+#: contrib/gosa.conf:274
 msgid "Spanish"
 msgstr "Espagnol"
 
-#: contrib/gosa.conf:276
+#: contrib/gosa.conf:275
 msgid "French"
 msgstr "Français"
 
-#: contrib/gosa.conf:277
+#: contrib/gosa.conf:276
 msgid "Dutch"
 msgstr "Hollandais"
 
-#: contrib/gosa.conf:278
+#: contrib/gosa.conf:277
 msgid "English"
 msgstr "Anglais"
 
-#: contrib/gosa.conf:279
+#: contrib/gosa.conf:278
 msgid "Italian"
 msgstr "Italien"
 
-#: contrib/gosa.conf:280
+#: contrib/gosa.conf:279
 msgid "Polish"
 msgstr "Polonais"
 
@@ -492,6 +494,7 @@ msgstr "Nom à afficher"
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:7
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:7
 #: plugins/admin/systems/class_glpiAttachmentPool.inc:201
+#: plugins/admin/systems/goSpamServerRule.tpl:6
 #: plugins/gofon/macro/parameter.tpl:5
 msgid "Name"
 msgstr "Nom"
@@ -1018,7 +1021,7 @@ msgstr ""
 #: ihtml/themes/default/setup_finish.tpl:30
 #: ihtml/themes/default/setup_step2.tpl:12
 #: ihtml/themes/default/setup_step3.tpl:17
-#: ihtml/themes/default/setup_step4.tpl:114 include/functions.inc:1470
+#: ihtml/themes/default/setup_step4.tpl:114 include/functions.inc:1516
 #: plugins/personal/password/changed.tpl:12
 #: plugins/personal/generic/main.inc:169
 #: plugins/gofax/faxreports/detail.tpl:67
@@ -1114,6 +1117,7 @@ msgstr ""
 #: plugins/admin/systems/glpiManufacturer.tpl:8
 #: plugins/admin/systems/printer.tpl:53
 #: plugins/admin/systems/class_servDNSeditZoneEntries.inc:390
+#: plugins/admin/systems/goSpamServer.tpl:37
 msgid "Remove"
 msgstr "Supprimer"
 
@@ -1130,7 +1134,7 @@ msgstr "Supprimer"
 #: plugins/personal/environment/hotplugDialog.tpl:64
 #: plugins/personal/environment/selectPrinterDialog.tpl:61
 #: plugins/personal/environment/logonManagement.tpl:76
-#: plugins/personal/environment/hotplugDialogNew.tpl:39
+#: plugins/personal/environment/hotplugDialogNew.tpl:54
 #: plugins/personal/generic/password.tpl:19
 #: plugins/personal/generic/generic_picture.tpl:35
 #: plugins/personal/generic/generic_certs.tpl:78
@@ -1166,9 +1170,9 @@ msgstr "Supprimer"
 #: plugins/admin/users/template.tpl:50
 #: plugins/admin/users/class_userManagement.inc:625
 #: plugins/admin/users/remove.tpl:16 plugins/admin/applications/remove.tpl:15
-#: plugins/admin/applications/class_applicationManagement.inc:350
+#: plugins/admin/applications/class_applicationManagement.inc:362
 #: plugins/admin/departments/remove.tpl:16
-#: plugins/admin/departments/class_departmentManagement.inc:300
+#: plugins/admin/departments/class_departmentManagement.inc:305
 #: plugins/admin/systems/glpi_edit_type.tpl:29
 #: plugins/admin/systems/glpi_edit_printer_type.tpl:30
 #: plugins/admin/systems/glpiDeviceManagement.tpl:52
@@ -1184,13 +1188,16 @@ msgstr "Supprimer"
 #: plugins/admin/systems/printerPPDDialog.tpl:23
 #: plugins/admin/systems/remove_glpi.tpl:16
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:75
-#: plugins/admin/systems/class_systemManagement.inc:478
+#: plugins/admin/systems/class_systemManagement.inc:489
 #: plugins/admin/systems/servDNSeditZoneEntries.tpl:21
 #: plugins/admin/systems/class_baseSelectDialog.inc:41
 #: plugins/admin/systems/remove.tpl:16
 #: plugins/admin/systems/glpiAttachmentPool.tpl:52
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:61
 #: plugins/admin/systems/password.tpl:30 plugins/admin/systems/chooser.tpl:18
+#: plugins/admin/systems/goSpamServer.tpl:103
+#: plugins/admin/systems/goSpamServerRule.tpl:24
+#: plugins/admin/systems/goVirusServer.tpl:146
 #: plugins/admin/ogroups/ogroup_objects.tpl:52
 #: plugins/admin/ogroups/class_ogroupManagement.inc:333
 #: plugins/admin/ogroups/remove.tpl:16
@@ -1479,7 +1486,7 @@ msgstr ""
 #: plugins/personal/mail/main.inc:104 plugins/personal/posix/main.inc:110
 #: plugins/personal/samba/main.inc:104
 #: plugins/personal/environment/main.inc:104
-#: plugins/personal/environment/hotplugDialogNew.tpl:38
+#: plugins/personal/environment/hotplugDialogNew.tpl:53
 #: plugins/personal/generic/generic_picture.tpl:33
 #: plugins/personal/generic/generic_certs.tpl:76
 #: plugins/personal/generic/main.inc:158
@@ -1491,16 +1498,19 @@ msgstr ""
 #: plugins/admin/fai/faiPartitionTableEntry.tpl:29
 #: plugins/admin/groups/class_groupManagement.inc:326
 #: plugins/admin/users/class_userManagement.inc:623
-#: plugins/admin/applications/class_applicationManagement.inc:348
-#: plugins/admin/departments/class_departmentManagement.inc:298
+#: plugins/admin/applications/class_applicationManagement.inc:360
+#: plugins/admin/departments/class_departmentManagement.inc:303
 #: plugins/admin/systems/servnfs.tpl:120
 #: plugins/admin/systems/glpiAttachmentEdit.tpl:69
 #: plugins/admin/systems/servdnseditzone.tpl:119
 #: plugins/admin/systems/glpi_devices.tpl:760
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:74
-#: plugins/admin/systems/class_systemManagement.inc:476
+#: plugins/admin/systems/class_systemManagement.inc:487
 #: plugins/admin/systems/servDNSeditZoneEntries.tpl:20
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:80
+#: plugins/admin/systems/goSpamServer.tpl:101
+#: plugins/admin/systems/goSpamServerRule.tpl:22
+#: plugins/admin/systems/goVirusServer.tpl:144
 #: plugins/admin/ogroups/class_ogroupManagement.inc:331
 #: plugins/gofon/phoneaccount/main.inc:105
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:239
@@ -1852,7 +1862,7 @@ msgstr ""
 msgid "Support for Kolab enabled"
 msgstr "Le support de Kolab est activé"
 
-#: include/functions_setup.inc:254 include/functions.inc:1084
+#: include/functions_setup.inc:254 include/functions.inc:1130
 msgid "OK"
 msgstr "OK"
 
@@ -2528,11 +2538,11 @@ msgstr "Configurer"
 msgid "incomplete"
 msgstr "incomplet"
 
-#: include/functions.inc:1062 include/functions.inc:1251
+#: include/functions.inc:1108 include/functions.inc:1297
 msgid "LDAP error:"
 msgstr "Erreur LDAP :"
 
-#: include/functions.inc:1063
+#: include/functions.inc:1109
 msgid ""
 "Problems with the LDAP server mean that you probably lost the last changes. "
 "Please check your LDAP setup for possible errors and try again."
@@ -2540,7 +2550,7 @@ msgstr ""
 "Des problèmes avec le serveur LDAP on probablement provoqué la perte des "
 "changements. Veuillez vérifier votre serveur LDAP et ressayer"
 
-#: include/functions.inc:1071
+#: include/functions.inc:1117
 msgid ""
 "Please check your input and fix the error. Press 'OK' to close this message "
 "box."
@@ -2548,19 +2558,19 @@ msgstr ""
 "Veuillez vérifier vos données et corriger l'erreur. Cliquez sur 'OK' pour "
 "fermer cette fenètre."
 
-#: include/functions.inc:1080
+#: include/functions.inc:1126
 msgid "An error occured while processing your request"
 msgstr "Une erreur s'est produite lors de l'execution de votre demande"
 
-#: include/functions.inc:1145
+#: include/functions.inc:1191
 msgid "Continue anyway"
 msgstr "Continuer malgré tout"
 
-#: include/functions.inc:1147
+#: include/functions.inc:1193
 msgid "Edit anyway"
 msgstr "Éditer malgré tout"
 
-#: include/functions.inc:1149
+#: include/functions.inc:1195
 #, php-format
 msgid ""
 "You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
@@ -2570,19 +2580,19 @@ msgstr ""
 "d'utilisation par '%s'. Veuillez contacter cette personne afin de clarifier "
 "la situation."
 
-#: include/functions.inc:1433
+#: include/functions.inc:1479
 msgid "Entries per page"
 msgstr "Entrées par page"
 
-#: include/functions.inc:1461
+#: include/functions.inc:1507
 msgid "Apply filter"
 msgstr "Appliquer le filtre"
 
-#: include/functions.inc:1735
+#: include/functions.inc:1781
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-#: include/functions.inc:1778
+#: include/functions.inc:1824
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "Version de développement de GOsa (Rev %s)"
@@ -2692,12 +2702,12 @@ msgstr "Objet"
 msgid "Error while fetching source dn - aborted!"
 msgstr "Une erreur s'est produite lors de la récupération du dn - Arrêt!"
 
-#: include/class_ldap.inc:554
+#: include/class_ldap.inc:554 include/class_ldap.inc:568
 #, php-format
 msgid "Unknown FAIstate %s"
 msgstr "Statut FAI inconnu %s"
 
-#: include/class_ldap.inc:702
+#: include/class_ldap.inc:711
 #, php-format
 msgid ""
 "Autocreation of type '%s' is currently not supported. Please report to the "
@@ -2706,17 +2716,17 @@ msgstr ""
 "La création automatique du type '%s' n'est pas supportée. Veuillez faire un "
 "rapport à l'équipe de GOsa."
 
-#: include/class_ldap.inc:771
+#: include/class_ldap.inc:780
 #, php-format
 msgid "while operating on '%s' using LDAP server '%s'"
 msgstr "lors de l'opération sur '%s' en utilisant le serveur LDAP '%s'"
 
-#: include/class_ldap.inc:773
+#: include/class_ldap.inc:782
 #, php-format
 msgid "while operating on LDAP server %s"
 msgstr "lors de l'opération sur le serveur LDAP '%s'"
 
-#: include/class_ldap.inc:969
+#: include/class_ldap.inc:978
 #, php-format
 msgid ""
 "This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
@@ -2725,12 +2735,12 @@ msgstr ""
 "Ceci n'est pas un DN valide: '%s'. Le fichier d'importation doit commencer "
 "avec 'dn: ...' à la ligne %s"
 
-#: include/class_ldap.inc:982
+#: include/class_ldap.inc:991
 #, php-format
 msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
 msgstr "Le dn : '%s' (de la ligne %s) existe déjà dans l'arbre LDAP."
 
-#: include/class_ldap.inc:998
+#: include/class_ldap.inc:1007
 #, php-format
 msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
 msgstr ""
@@ -3129,8 +3139,8 @@ msgstr "Adresses alternatives"
 #: plugins/gofax/faxaccount/lists.tpl:13 plugins/admin/fai/faiVariable.tpl:44
 #: plugins/admin/fai/faiPartitionTable.tpl:43
 #: plugins/admin/fai/faiPackage.tpl:71 plugins/admin/fai/faiProfile.tpl:38
-#: plugins/admin/fai/faiScript.tpl:41 plugins/admin/fai/faiTemplate.tpl:35
-#: plugins/admin/fai/faiHook.tpl:41 plugins/admin/groups/mail.tpl:51
+#: plugins/admin/fai/faiScript.tpl:43 plugins/admin/fai/faiTemplate.tpl:35
+#: plugins/admin/fai/faiHook.tpl:43 plugins/admin/groups/mail.tpl:51
 #: plugins/admin/groups/mail.tpl:95 plugins/admin/groups/generic.tpl:108
 #: plugins/admin/groups/class_groupMail.inc:540
 #: plugins/admin/groups/group_objects.tpl:55
@@ -3163,6 +3173,8 @@ msgstr "Adresses alternatives"
 #: plugins/admin/systems/phonesettings.tpl:176
 #: plugins/admin/systems/phonesettings.tpl:191
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:60
+#: plugins/admin/systems/goSpamServer.tpl:36
+#: plugins/admin/systems/goSpamServer.tpl:88
 #: plugins/admin/ogroups/ogroup_objects.tpl:50
 #: plugins/admin/ogroups/termgroup.tpl:23 plugins/admin/ogroups/generic.tpl:43
 #: plugins/admin/ogroups/phonequeue.tpl:24
@@ -3185,7 +3197,7 @@ msgstr "Ajouter en local"
 #: plugins/personal/posix/generic.tpl:74
 #: plugins/personal/posix/generic.tpl:104
 #: plugins/personal/samba/samba3.tpl:332
-#: plugins/personal/environment/class_environment.inc:614
+#: plugins/personal/environment/class_environment.inc:624
 #: plugins/personal/environment/environment.tpl:137
 #: plugins/personal/environment/environment.tpl:165
 #: plugins/personal/environment/environment.tpl:181
@@ -3241,7 +3253,7 @@ msgstr "Liste des adresses de messagerie alternatives"
 
 #: plugins/personal/mail/generic.tpl:11
 #: plugins/addons/mailqueue/contents.tpl:53 plugins/admin/groups/mail.tpl:14
-#: plugins/admin/systems/class_systemManagement.inc:743
+#: plugins/admin/systems/class_systemManagement.inc:754
 #: plugins/admin/systems/class_SelectDeviceType.inc:34
 #: plugins/admin/ogroups/class_ogroupManagement.inc:367
 #: plugins/generic/references/class_reference.inc:44
@@ -3258,7 +3270,7 @@ msgstr "Utilisation des Quota"
 
 #: plugins/personal/mail/generic.tpl:30 plugins/admin/groups/mail.tpl:32
 #: plugins/admin/systems/class_terminalInfo.inc:169
-#: plugins/admin/systems/class_printGeneric.inc:483
+#: plugins/admin/systems/class_printGeneric.inc:486
 msgid "not defined"
 msgstr "non défini"
 
@@ -3614,7 +3626,7 @@ msgstr "non configuré"
 
 #: plugins/personal/posix/class_posixAccount.inc:203
 #: plugins/admin/systems/class_workstationService.inc:182
-#: plugins/admin/systems/class_workstationStartup.inc:782
+#: plugins/admin/systems/class_workstationStartup.inc:766
 #: plugins/admin/systems/class_terminalService.inc:194
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:212
 msgid "automatic"
@@ -4257,27 +4269,29 @@ msgstr "La sauvegarde du compte Samba à échoué"
 msgid "User environment settings"
 msgstr "Utiliser les préférences d'environnement"
 
-#: plugins/personal/environment/class_hotplugDialog.inc:113
+#: plugins/personal/environment/class_hotplugDialog.inc:115
 msgid "Please specify a valid name. Only 0-9 a-Z is allowed."
 msgstr ""
 "Veuillez indiquer un nom valide. Seul les chiffres de 0 à 9 et les lettres "
 "de a à Z sont permises."
 
-#: plugins/personal/environment/class_hotplugDialog.inc:116
+#: plugins/personal/environment/class_hotplugDialog.inc:118
 msgid "Invalid character in description. Please specify a valid description."
 msgstr ""
 "Caractères invalides dans la description. Veuillez indiquer une description "
 "valide."
 
-#: plugins/personal/environment/class_hotplugDialog.inc:119
+#: plugins/personal/environment/class_hotplugDialog.inc:121
+#: plugins/personal/environment/class_hotplugDialog.inc:124
+#: plugins/personal/environment/class_hotplugDialog.inc:127
 msgid "Please specify a valid id."
 msgstr "Veuillez indiquer un id valide."
 
-#: plugins/personal/environment/class_hotplugDialog.inc:125
+#: plugins/personal/environment/class_hotplugDialog.inc:133
 msgid "An Entry with this name already exists."
 msgstr "Une entrée avec ce nom existe déjà."
 
-#: plugins/personal/environment/class_hotplugDialog.inc:130
+#: plugins/personal/environment/class_hotplugDialog.inc:138
 msgid "Please select an entry or press cancel."
 msgstr "Veuillez sélectionner une entrée ou cliquez sur annuler."
 
@@ -4316,11 +4330,11 @@ msgstr "Expression régulière concordant avec les noms des périphériques hotp
 msgid "Please select a printer or press cancel."
 msgstr "Veuillez sélectionner une imprimante ou cliquez sur annuler."
 
-#: plugins/personal/environment/class_environment.inc:185
+#: plugins/personal/environment/class_environment.inc:192
 msgid "auto"
 msgstr "automatique"
 
-#: plugins/personal/environment/class_environment.inc:207
+#: plugins/personal/environment/class_environment.inc:214
 #: plugins/admin/systems/class_workstationService.inc:88
 #: plugins/admin/systems/class_terminalService.inc:95
 #, php-format
@@ -4331,34 +4345,34 @@ msgstr ""
 "Vous avez spécifié un hook externe qui ne peut pas être lu, veuillez "
 "vérifier les permissions du fichier '%s'."
 
-#: plugins/personal/environment/class_environment.inc:284
-#: plugins/personal/environment/class_environment.inc:321
+#: plugins/personal/environment/class_environment.inc:291
+#: plugins/personal/environment/class_environment.inc:328
 msgid "Remove environment extension"
 msgstr "Enlever l'extension d'environnement"
 
-#: plugins/personal/environment/class_environment.inc:285
-#: plugins/personal/environment/class_environment.inc:322
+#: plugins/personal/environment/class_environment.inc:292
+#: plugins/personal/environment/class_environment.inc:329
 msgid "Environment extension enabled. You can disable it by clicking below."
 msgstr ""
 "Extension d'environnement activée. Vous pouvez la désactiver en cliquant sur "
 "le bouton ci-dessous."
 
-#: plugins/personal/environment/class_environment.inc:294
-#: plugins/personal/environment/class_environment.inc:299
-#: plugins/personal/environment/class_environment.inc:327
-#: plugins/personal/environment/class_environment.inc:332
+#: plugins/personal/environment/class_environment.inc:301
+#: plugins/personal/environment/class_environment.inc:306
+#: plugins/personal/environment/class_environment.inc:334
+#: plugins/personal/environment/class_environment.inc:339
 msgid "Add environment extension"
 msgstr "Ajouter une extension d'environnement"
 
-#: plugins/personal/environment/class_environment.inc:295
-#: plugins/personal/environment/class_environment.inc:328
+#: plugins/personal/environment/class_environment.inc:302
+#: plugins/personal/environment/class_environment.inc:335
 msgid "Environment extension disabled. You can enable it by clicking below."
 msgstr ""
 "Extension d'environnement désactivé. Vous pouvez l'activer en cliquant sur "
 "le bouton ci-dessous."
 
-#: plugins/personal/environment/class_environment.inc:300
-#: plugins/personal/environment/class_environment.inc:333
+#: plugins/personal/environment/class_environment.inc:307
+#: plugins/personal/environment/class_environment.inc:340
 msgid ""
 "Environment extension disabled. You have to setup a posix account before you "
 "can enable this feature."
@@ -4366,31 +4380,31 @@ msgstr ""
 "Extension d'environnement désactivée. Vous devez d'abord créer un compte "
 "posix avant de pouvoir activer cette extension."
 
-#: plugins/personal/environment/class_environment.inc:448
-#: plugins/personal/environment/class_environment.inc:761
+#: plugins/personal/environment/class_environment.inc:455
+#: plugins/personal/environment/class_environment.inc:771
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:406
 msgid "None"
 msgstr "Aucun"
 
-#: plugins/personal/environment/class_environment.inc:531
-#: plugins/personal/environment/class_environment.inc:542
-#: plugins/admin/systems/class_workstationStartup.inc:606
+#: plugins/personal/environment/class_environment.inc:538
+#: plugins/personal/environment/class_environment.inc:549
+#: plugins/admin/systems/class_workstationStartup.inc:590
 #: plugins/admin/systems/class_terminalStartup.inc:187
 msgid "You must specify a valid mount point."
 msgstr "Veuillez indiquer un point de montage valide."
 
-#: plugins/personal/environment/class_environment.inc:601
-#: plugins/personal/environment/class_environment.inc:602
-#: plugins/personal/environment/class_environment.inc:610
 #: plugins/personal/environment/class_environment.inc:611
+#: plugins/personal/environment/class_environment.inc:612
+#: plugins/personal/environment/class_environment.inc:620
+#: plugins/personal/environment/class_environment.inc:621
 msgid "Reset password hash"
 msgstr "Réinitialiser le mot de passe"
 
-#: plugins/personal/environment/class_environment.inc:615
+#: plugins/personal/environment/class_environment.inc:625
 msgid "Delete share entry"
 msgstr "Supprimer ce partage"
 
-#: plugins/personal/environment/class_environment.inc:764
+#: plugins/personal/environment/class_environment.inc:774
 #, php-format
 msgid ""
 "The selected kiosk profile '%s' is no longer available, setting current "
@@ -4399,15 +4413,15 @@ msgstr ""
 "Le profil kiosk sélectionné '%s' n'est plus disponible, le profil actuel est "
 "changé en 'aucun'."
 
-#: plugins/personal/environment/class_environment.inc:815
+#: plugins/personal/environment/class_environment.inc:825
 msgid "Removing environment information failed"
 msgstr "La suppression de l'extension d'environnement à échoué"
 
-#: plugins/personal/environment/class_environment.inc:868
+#: plugins/personal/environment/class_environment.inc:878
 msgid "Please set a valid profile quota size."
 msgstr "Veuillez indiquer un quota valide pour le profil."
 
-#: plugins/personal/environment/class_environment.inc:875
+#: plugins/personal/environment/class_environment.inc:885
 msgid ""
 "You need to setup a valid posix extension in order to enable evironment "
 "features."
@@ -4415,35 +4429,25 @@ msgstr ""
 "Vous devez configurer correctement l'extension posix pour activer "
 "l'extension d'environnement."
 
-#: plugins/personal/environment/class_environment.inc:913
+#: plugins/personal/environment/class_environment.inc:923
 msgid "Can't save new kiosk profiles, possibly permission denied for folder"
 msgstr ""
 "Impossible de sauver de nouveaux profiles kiosk, je n'ai pas les droits sur "
 "le répertoire"
 
-#: plugins/personal/environment/class_environment.inc:1027
-msgid "Error while writing printer"
-msgstr "Une erreur s'est produite lors de la sauvegarde de l'imprimante"
-
-#: plugins/personal/environment/class_environment.inc:1097
-msgid "Error while writing printer settings"
-msgstr ""
-"Une erreur s'est produite lors de la sauvegarde des paramètres de "
-"l'imprimante"
-
-#: plugins/personal/environment/class_environment.inc:1166
+#: plugins/personal/environment/class_environment.inc:1067
 msgid "Adding environment information failed"
 msgstr "L'ajout de l'extension d'environnement à échoué"
 
-#: plugins/personal/environment/class_environment.inc:1179
+#: plugins/personal/environment/class_environment.inc:1080
 msgid "group share"
 msgstr "partage de groupe"
 
-#: plugins/personal/environment/class_environment.inc:1211
+#: plugins/personal/environment/class_environment.inc:1112
 msgid "Administrator"
 msgstr "Administrateur"
 
-#: plugins/personal/environment/class_environment.inc:1216
+#: plugins/personal/environment/class_environment.inc:1117
 msgid "Default printer"
 msgstr "Imprimante par défaut"
 
@@ -4653,8 +4657,16 @@ msgid "Device name"
 msgstr "Nom du périphérique"
 
 #: plugins/personal/environment/hotplugDialogNew.tpl:28
+msgid "Vendor ID"
+msgstr "ID du vendeur"
+
+#: plugins/personal/environment/hotplugDialogNew.tpl:35
 msgid "Device ID"
 msgstr "Identification du périphérique"
+
+#: plugins/personal/environment/hotplugDialogNew.tpl:43
+msgid "Product ID"
+msgstr "ID du produit"
 
 #: plugins/personal/environment/class_kioskManagementDialog.inc:67
 #: plugins/personal/environment/class_kioskManagementDialog.inc:85
@@ -5682,28 +5694,28 @@ msgstr "recevoir"
 msgid "Removing blocklist object failed"
 msgstr "La suppression de l'objet blocklist à échoué"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:432
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:436
 msgid "You have no permissions to create a blocklist on this 'Base'."
 msgstr "Vous n'avez pas l'autorisation de créer une liste rouge sur cette 'Base'."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:438
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:442
 #: plugins/admin/departments/class_departmentGeneric.inc:233
 msgid "Required field 'Name' is not set."
 msgstr "Le champ obligatoire 'Nom' n'est pas rempli."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:441
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:445
 msgid "Required field 'Name' contains invalid characters"
 msgstr "Le champ obligatoire 'Nom' contient des caractères invalides"
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:448
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:452
 msgid "Specified name is already used."
 msgstr "Le nom spécifié est déjà utilisé."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:455
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:459
 msgid "No permission to create a blocklist on this base."
 msgstr "Vous n'avez pas l'autorisation de créer des listes rouge sur cette base."
 
-#: plugins/gofax/blocklists/class_blocklistManagement.inc:503
+#: plugins/gofax/blocklists/class_blocklistManagement.inc:507
 msgid "Saving blocklist object failed"
 msgstr "La sauvegarde de l'objet blocklist à échoué"
 
@@ -5943,7 +5955,7 @@ msgstr "Soumettre le département"
 #: plugins/admin/fai/class_divListFai.inc:214
 #: plugins/admin/groups/class_divListGroup.inc:150
 #: plugins/admin/users/class_divListUsers.inc:143
-#: plugins/admin/applications/class_divListApplication.inc:143
+#: plugins/admin/applications/class_divListApplication.inc:159
 #: plugins/admin/departments/class_divListDepartment.inc:92
 #: plugins/admin/systems/glpi.tpl:15 plugins/admin/systems/glpi.tpl:25
 #: plugins/admin/systems/glpi.tpl:35 plugins/admin/systems/glpiPrinter.tpl:15
@@ -5970,7 +5982,7 @@ msgstr "Editer un utilisateur"
 #: plugins/admin/fai/class_divListFai.inc:216
 #: plugins/admin/groups/class_divListGroup.inc:152
 #: plugins/admin/users/class_divListUsers.inc:147
-#: plugins/admin/applications/class_divListApplication.inc:145
+#: plugins/admin/applications/class_divListApplication.inc:164
 #: plugins/admin/departments/class_divListDepartment.inc:94
 #: plugins/admin/systems/class_divListSystem.inc:136
 #: plugins/admin/ogroups/class_divListOGroup.inc:140
@@ -6199,7 +6211,7 @@ msgstr "FAX ID"
 #: plugins/gofax/faxreports/detail.tpl:21
 #: plugins/gofax/faxreports/contents.tpl:30
 #: plugins/admin/fai/faiTemplateEntry.tpl:94
-#: plugins/admin/systems/class_printGeneric.inc:760
+#: plugins/admin/systems/class_printGeneric.inc:781
 #: plugins/admin/ogroups/class_ogroupManagement.inc:363
 msgid "User"
 msgstr "Utilisateur"
@@ -7139,6 +7151,7 @@ msgstr "Affichage des logs système"
 #: plugins/admin/fai/class_faiScriptEntry.inc:89
 #: plugins/admin/fai/class_faiHook.inc:265
 #: plugins/admin/fai/class_faiHookEntry.inc:84
+#: plugins/admin/applications/generic.tpl:103
 msgid "Download"
 msgstr "Téléchargement"
 
@@ -7160,9 +7173,9 @@ msgstr "La sauvegarde du script FAI à échoué"
 
 #: plugins/admin/fai/faiVariable.tpl:32
 #: plugins/admin/fai/faiPartitionTable.tpl:32
-#: plugins/admin/fai/faiScript.tpl:32 plugins/admin/fai/faiTemplate.tpl:29
+#: plugins/admin/fai/faiScript.tpl:34 plugins/admin/fai/faiTemplate.tpl:29
 #: plugins/admin/fai/class_faiProfileEntry.inc:155
-#: plugins/admin/fai/faiHook.tpl:32
+#: plugins/admin/fai/faiHook.tpl:34
 msgid "Objects"
 msgstr "Objets"
 
@@ -7680,7 +7693,7 @@ msgstr ""
 "Vous avez plus de 3 partitions primaires dans votre configuration, veuillez "
 "vérifier votre configuration."
 
-#: plugins/admin/fai/faiScript.tpl:34
+#: plugins/admin/fai/faiScript.tpl:36
 msgid "List of scripts"
 msgstr "Liste des scripts"
 
@@ -7819,8 +7832,8 @@ msgid "List of FAI classes"
 msgstr "Liste des classes FAI"
 
 #: plugins/admin/fai/class_divListFai.inc:44
-msgid "This table displays all systems, in the selected tree."
-msgstr "Ce tableau montre toutes les systèmes, dans l'arbre sélectionné."
+msgid "This table displays all FAL classes, in the selected tree."
+msgstr "Ce tableau montre toutes les classes FAI, dans l'arbre sélectionné."
 
 #: plugins/admin/fai/class_divListFai.inc:48
 msgid "This menu allows you to create, delete and edit FAI classes."
@@ -8210,8 +8223,8 @@ msgstr "Propriétaire"
 
 #: plugins/admin/fai/faiTemplateEntry.tpl:71
 #: plugins/admin/fai/faiTemplateEntry.tpl:103
-#: plugins/admin/systems/class_printGeneric.inc:755
-#: plugins/admin/systems/class_printGeneric.inc:757
+#: plugins/admin/systems/class_printGeneric.inc:776
+#: plugins/admin/systems/class_printGeneric.inc:778
 #: plugins/admin/ogroups/class_ogroupManagement.inc:364
 #: plugins/generic/references/class_reference.inc:36
 msgid "Group"
@@ -8262,7 +8275,7 @@ msgstr "Autres"
 msgid "sticky"
 msgstr "permanent"
 
-#: plugins/admin/fai/faiHook.tpl:34
+#: plugins/admin/fai/faiHook.tpl:36
 msgid "List of hook scripts"
 msgstr "Liste des scripts de connexions"
 
@@ -8520,34 +8533,34 @@ msgstr "Applications"
 
 #: plugins/admin/groups/class_divListGroup.inc:145
 #: plugins/admin/users/class_divListUsers.inc:139
-#: plugins/admin/applications/class_divListApplication.inc:138
+#: plugins/admin/applications/class_divListApplication.inc:153
 #: plugins/admin/ogroups/class_divListOGroup.inc:133
 msgid "cut"
 msgstr "couper"
 
 #: plugins/admin/groups/class_divListGroup.inc:145
 #: plugins/admin/users/class_divListUsers.inc:139
-#: plugins/admin/applications/class_divListApplication.inc:138
+#: plugins/admin/applications/class_divListApplication.inc:153
 #: plugins/admin/ogroups/class_divListOGroup.inc:133
 msgid "Cut this entry"
 msgstr "Couper cette entrée"
 
 #: plugins/admin/groups/class_divListGroup.inc:147
 #: plugins/admin/users/class_divListUsers.inc:141
-#: plugins/admin/applications/class_divListApplication.inc:140
+#: plugins/admin/applications/class_divListApplication.inc:155
 #: plugins/admin/ogroups/class_divListOGroup.inc:135
 msgid "copy"
 msgstr "copier"
 
 #: plugins/admin/groups/class_divListGroup.inc:147
 #: plugins/admin/users/class_divListUsers.inc:141
-#: plugins/admin/applications/class_divListApplication.inc:140
+#: plugins/admin/applications/class_divListApplication.inc:155
 #: plugins/admin/ogroups/class_divListOGroup.inc:135
 msgid "Copy this entry"
 msgstr "Copier cette entrée"
 
 #: plugins/admin/groups/class_divListGroup.inc:150
-#: plugins/admin/applications/class_divListApplication.inc:143
+#: plugins/admin/applications/class_divListApplication.inc:159
 #: plugins/admin/departments/class_divListDepartment.inc:92
 #: plugins/admin/ogroups/class_divListOGroup.inc:138
 #: plugins/gofon/conference/class_divListConferences.inc:103
@@ -8555,7 +8568,7 @@ msgid "Edit this entry"
 msgstr "Modifier cette entrée"
 
 #: plugins/admin/groups/class_divListGroup.inc:152
-#: plugins/admin/applications/class_divListApplication.inc:145
+#: plugins/admin/applications/class_divListApplication.inc:164
 #: plugins/admin/departments/class_divListDepartment.inc:94
 #: plugins/admin/ogroups/class_divListOGroup.inc:140
 #: plugins/gofon/conference/class_divListConferences.inc:105
@@ -8852,7 +8865,7 @@ msgstr ""
 "Sélectionnez 'aucun' afin de ne pas utiliser les modèles."
 
 #: plugins/admin/users/template.tpl:15
-#: plugins/admin/systems/class_systemManagement.inc:736
+#: plugins/admin/systems/class_systemManagement.inc:747
 msgid "Template"
 msgstr "Modèle"
 
@@ -9096,7 +9109,7 @@ msgstr ""
 #: plugins/admin/applications/class_divListApplication.inc:44
 #: plugins/admin/applications/generic.tpl:7
 #: plugins/admin/applications/generic.tpl:8
-#: plugins/admin/applications/class_applicationGeneric.inc:446
+#: plugins/admin/applications/class_applicationGeneric.inc:458
 msgid "Application name"
 msgstr "Nom de l'application"
 
@@ -9110,7 +9123,7 @@ msgid "Create new application"
 msgstr "Créer une nouvelle application"
 
 #: plugins/admin/applications/generic.tpl:13
-#: plugins/admin/applications/class_applicationGeneric.inc:451
+#: plugins/admin/applications/class_applicationGeneric.inc:463
 msgid "Application name to be displayed (i.e. below icons)"
 msgstr "Le nom de l'application à afficher (ex: en dessous des icônes)"
 
@@ -9170,13 +9183,13 @@ msgstr ""
 msgid "Application management"
 msgstr "Gestion des applications"
 
-#: plugins/admin/applications/class_applicationManagement.inc:287
+#: plugins/admin/applications/class_applicationManagement.inc:299
 #, php-format
 msgid "You're about to delete the application '%s'."
 msgstr "Vous êtes sur le point de supprimer l'application '%s'."
 
-#: plugins/admin/applications/class_applicationManagement.inc:293
-#: plugins/admin/applications/class_applicationManagement.inc:322
+#: plugins/admin/applications/class_applicationManagement.inc:305
+#: plugins/admin/applications/class_applicationManagement.inc:334
 msgid "You are not allowed to delete this application!"
 msgstr "Vous n'êtes pas autorisé à supprimer cette application!"
 
@@ -9184,62 +9197,62 @@ msgstr "Vous n'êtes pas autorisé à supprimer cette application!"
 msgid "no example"
 msgstr "pas d'exemple"
 
-#: plugins/admin/applications/class_applicationGeneric.inc:116
+#: plugins/admin/applications/class_applicationGeneric.inc:128
 msgid "This 'dn' is no application."
 msgstr "Ce 'dn' n'est pas une application."
 
-#: plugins/admin/applications/class_applicationGeneric.inc:199
+#: plugins/admin/applications/class_applicationGeneric.inc:211
 msgid "Removing application failed"
 msgstr "La suppression de l'application à échoué"
 
-#: plugins/admin/applications/class_applicationGeneric.inc:211
+#: plugins/admin/applications/class_applicationGeneric.inc:223
 #, php-format
 msgid "Removing application from objectgroup '%s' failed"
 msgstr "La suppression de l'application du groupe d'objet '%s' à échoue"
 
-#: plugins/admin/applications/class_applicationGeneric.inc:218
+#: plugins/admin/applications/class_applicationGeneric.inc:230
 #, php-format
 msgid "Removing application from group '%s' failed"
 msgstr "La suppression de l'application du groupe '%s' à échoué"
 
-#: plugins/admin/applications/class_applicationGeneric.inc:260
+#: plugins/admin/applications/class_applicationGeneric.inc:272
 msgid "The specified picture has not been uploaded correctly."
 msgstr "L'image spécifiée n'as pas été télé-chargée correctement."
 
-#: plugins/admin/applications/class_applicationGeneric.inc:336
+#: plugins/admin/applications/class_applicationGeneric.inc:348
 msgid "Specified execute path must start with '/'."
 msgstr "Le répertoire d'éxecutiondoit commencer par '/'."
 
-#: plugins/admin/applications/class_applicationGeneric.inc:350
+#: plugins/admin/applications/class_applicationGeneric.inc:362
 msgid "You have no permissions to create a application on this 'Base'."
 msgstr ""
 "Vous n'avez pas les droits suffisants pour créer une application dans cette "
 "'Base'."
 
-#: plugins/admin/applications/class_applicationGeneric.inc:355
+#: plugins/admin/applications/class_applicationGeneric.inc:367
 msgid "Required field 'Name' is not filled."
 msgstr "Le champ obligatoire 'Nom' n'est pas rempli."
 
-#: plugins/admin/applications/class_applicationGeneric.inc:359
+#: plugins/admin/applications/class_applicationGeneric.inc:371
 msgid "Invalid character in application name. Only a-z 0-9 are allowed."
 msgstr ""
 "Caractère non valide dans le nom de l'application. Seul les caractères de a-"
 "z et 0-9 sont permis."
 
-#: plugins/admin/applications/class_applicationGeneric.inc:363
+#: plugins/admin/applications/class_applicationGeneric.inc:375
 msgid "Required field 'Execute' is not filled."
 msgstr "Le champ obligatoire 'Exécuter' n'est pas rempli."
 
-#: plugins/admin/applications/class_applicationGeneric.inc:378
-#: plugins/admin/applications/class_applicationGeneric.inc:386
+#: plugins/admin/applications/class_applicationGeneric.inc:390
+#: plugins/admin/applications/class_applicationGeneric.inc:398
 msgid "There's already an application with this 'Name'."
 msgstr "Une application ayant le même 'Nom' existe déjà."
 
-#: plugins/admin/applications/class_applicationGeneric.inc:417
+#: plugins/admin/applications/class_applicationGeneric.inc:429
 msgid "Saving application failed"
 msgstr "La sauvegarde de l'application à échouée"
 
-#: plugins/admin/applications/class_applicationGeneric.inc:442
+#: plugins/admin/applications/class_applicationGeneric.inc:454
 msgid "Application settings"
 msgstr "Préférences de l'application"
 
@@ -9366,7 +9379,7 @@ msgstr ""
 msgid "You have no permission to remove this department."
 msgstr "Vous n'avez pas les droits nécessaires pour supprimer ce département."
 
-#: plugins/admin/departments/class_departmentManagement.inc:334
+#: plugins/admin/departments/class_departmentManagement.inc:339
 msgid ".."
 msgstr ".."
 
@@ -9423,8 +9436,8 @@ msgid "present"
 msgstr "présent"
 
 #: plugins/admin/systems/class_terminalInfo.inc:67
-#: plugins/admin/systems/class_workstationService.inc:241
-#: plugins/admin/systems/class_workstationStartup.inc:481
+#: plugins/admin/systems/class_workstationService.inc:252
+#: plugins/admin/systems/class_workstationStartup.inc:465
 #: plugins/admin/systems/class_terminalService.inc:252
 #: plugins/admin/systems/class_terminalStartup.inc:151
 #: plugins/admin/systems/class_terminalGeneric.inc:230
@@ -9916,10 +9929,17 @@ msgstr "Client ICA"
 #: plugins/admin/systems/class_workstationService.inc:213
 #: plugins/admin/systems/class_workstationService.inc:216
 #: plugins/admin/systems/class_workstationService.inc:219
-#: plugins/admin/systems/class_workstationStartup.inc:266
-#: plugins/admin/systems/class_workstationStartup.inc:284
-#: plugins/admin/systems/class_workstationStartup.inc:288
-#: plugins/admin/systems/class_workstationStartup.inc:781
+#: plugins/admin/systems/class_workstationService.inc:229
+#: plugins/admin/systems/class_workstationService.inc:230
+#: plugins/admin/systems/class_workstationService.inc:231
+#: plugins/admin/systems/class_workstationService.inc:232
+#: plugins/admin/systems/class_workstationService.inc:233
+#: plugins/admin/systems/class_workstationService.inc:234
+#: plugins/admin/systems/class_workstationService.inc:235
+#: plugins/admin/systems/class_workstationStartup.inc:272
+#: plugins/admin/systems/class_workstationStartup.inc:290
+#: plugins/admin/systems/class_workstationStartup.inc:294
+#: plugins/admin/systems/class_workstationStartup.inc:765
 #: plugins/admin/systems/class_workstationGeneric.inc:118
 #: plugins/admin/systems/class_terminalService.inc:72
 #: plugins/admin/systems/class_terminalService.inc:100
@@ -9948,13 +9968,13 @@ msgstr "hérité"
 msgid "Bit"
 msgstr "Bit"
 
-#: plugins/admin/systems/class_workstationService.inc:291
+#: plugins/admin/systems/class_workstationService.inc:302
 #: plugins/admin/systems/class_terminalService.inc:303
 msgid "Choose the phone located at the current terminal"
 msgstr "Choisissez le téléphone situé à coté du terminal"
 
-#: plugins/admin/systems/class_workstationService.inc:359
-#: plugins/admin/systems/class_workstationService.inc:364
+#: plugins/admin/systems/class_workstationService.inc:370
+#: plugins/admin/systems/class_workstationService.inc:375
 #: plugins/admin/systems/class_terminalService.inc:365
 #: plugins/admin/systems/class_terminalService.inc:370
 msgid "Please specify a valid VSync range."
@@ -9962,8 +9982,8 @@ msgstr ""
 "Veuillez spécifier une plage valide pour la fréquence de synchronisation "
 "verticale."
 
-#: plugins/admin/systems/class_workstationService.inc:374
-#: plugins/admin/systems/class_workstationService.inc:379
+#: plugins/admin/systems/class_workstationService.inc:385
+#: plugins/admin/systems/class_workstationService.inc:390
 #: plugins/admin/systems/class_terminalService.inc:380
 #: plugins/admin/systems/class_terminalService.inc:385
 msgid "Please specify a valid HSync range."
@@ -9971,11 +9991,11 @@ msgstr ""
 "Veuillez spécifier une plage valide pour la fréquence de synchronisation "
 "Horizontale."
 
-#: plugins/admin/systems/class_workstationService.inc:422
+#: plugins/admin/systems/class_workstationService.inc:433
 msgid "Saving workstation services failed"
 msgstr "La sauvegarde des services de la station de travail à échoué"
 
-#: plugins/admin/systems/class_workstationStartup.inc:309
+#: plugins/admin/systems/class_workstationStartup.inc:315
 #: plugins/admin/systems/class_terminalStartup.inc:93
 #, fuzzy, php-format
 msgid ""
@@ -9985,7 +10005,7 @@ msgstr ""
 "La commande '%s', spécifié comme KERNELS hook de l'extension '%s' n'existe "
 "pas."
 
-#: plugins/admin/systems/class_workstationStartup.inc:416
+#: plugins/admin/systems/class_workstationStartup.inc:400
 msgid ""
 "There are packages in your configuration, which can't be resolved with "
 "current server/release settings."
@@ -9993,11 +10013,11 @@ msgstr ""
 "Il y à des paquets dans votre configuration, qui ne peuvent pas être trouvés "
 "avec les paramètres de serveur/version actuels."
 
-#: plugins/admin/systems/class_workstationStartup.inc:461
+#: plugins/admin/systems/class_workstationStartup.inc:445
 msgid "Please select a 'FAI server' or remove the 'FAI classes'."
 msgstr "Veuillez sélectionner un 'serveur FAI' ou effacer les 'Classes FAI'."
 
-#: plugins/admin/systems/class_workstationStartup.inc:519
+#: plugins/admin/systems/class_workstationStartup.inc:503
 msgid ""
 "There is already a profile in your selection that contain partition table "
 "configurations."
@@ -10005,7 +10025,7 @@ msgstr ""
 "Il y a déjà un profil dans votre sélection qui contient des configurations "
 "de table de partitions."
 
-#: plugins/admin/systems/class_workstationStartup.inc:852
+#: plugins/admin/systems/class_workstationStartup.inc:836
 #, php-format
 msgid ""
 "Can't resolve one or more of the given FAIclass(es) [%s] in FAI server '%s'. "
@@ -10014,7 +10034,7 @@ msgstr ""
 "Impossible de trouver une ou plusieurs des classes FAI [%s] dans le serveur "
 "FAI '%s'. le serveur à été remis en 'auto'."
 
-#: plugins/admin/systems/class_workstationStartup.inc:863
+#: plugins/admin/systems/class_workstationStartup.inc:847
 #, php-format
 msgid ""
 "Can't resolve the given FAIclass(es) [%s] anyway, please check your FAI "
@@ -10027,16 +10047,16 @@ msgstr ""
 "Toutes les classes on été enlevées de ce compte, cliquez sur annuler si vous "
 "ne voulez pas sauver ceci."
 
-#: plugins/admin/systems/class_workstationStartup.inc:1030
+#: plugins/admin/systems/class_workstationStartup.inc:1014
 msgid "Saving workstation startup settings failed"
 msgstr "La sauvegarde des paramètres de démarrage pour la station de travail à échoué"
 
-#: plugins/admin/systems/class_workstationStartup.inc:1080
+#: plugins/admin/systems/class_workstationStartup.inc:1064
 #, php-format
 msgid "Can't execute specified REPOSITORY_HOOK '%s' please check your gosa.conf."
 msgstr "Impossible d'exécuter REPOSITORY_HOOK '%s' veuillez vérifier votre gosa.conf."
 
-#: plugins/admin/systems/class_workstationStartup.inc:1082
+#: plugins/admin/systems/class_workstationStartup.inc:1066
 #: plugins/admin/systems/class_servRepositorySetup.inc:172
 #, php-format
 msgid ""
@@ -10548,7 +10568,7 @@ msgstr "Le champ obligatoire 'Nom de la station de travail' n'est pas renseigné
 #: plugins/admin/systems/class_winGeneric.inc:174
 #: plugins/admin/systems/class_terminalGeneric.inc:386
 #: plugins/admin/systems/class_servGeneric.inc:242
-#: plugins/admin/systems/class_printGeneric.inc:616
+#: plugins/admin/systems/class_printGeneric.inc:625
 #: plugins/admin/systems/class_phoneGeneric.inc:312
 #, php-format
 msgid "There is already an entry '%s' in the base choosen by you"
@@ -10652,7 +10672,7 @@ msgid "New Terminal template"
 msgstr "Nouveau modèle de terminal"
 
 #: plugins/admin/systems/class_divListSystem.inc:96
-#: plugins/admin/systems/class_systemManagement.inc:749
+#: plugins/admin/systems/class_systemManagement.inc:760
 msgid "New Terminal"
 msgstr "Nouveau terminal"
 
@@ -10661,7 +10681,7 @@ msgid "New Workstation template"
 msgstr "Nouveau modèle de station de travail"
 
 #: plugins/admin/systems/class_divListSystem.inc:98
-#: plugins/admin/systems/class_systemManagement.inc:750
+#: plugins/admin/systems/class_systemManagement.inc:761
 msgid "New Workstation"
 msgstr "Nouvelle station de travail"
 
@@ -10759,31 +10779,31 @@ msgstr ""
 msgid "Can't read '/etc/gosa/encodings', please check permissions."
 msgstr "Impossible de lire '/etc/gosa/encodings', veuillez vérifier les permissions."
 
-#: plugins/admin/systems/class_servNfs.inc:179
+#: plugins/admin/systems/class_servNfs.inc:180
 msgid "Please specify a valid path for your setup."
 msgstr "Veuillez entrer un chemin valide pour votre configuration."
 
-#: plugins/admin/systems/class_servNfs.inc:185
+#: plugins/admin/systems/class_servNfs.inc:186
 msgid "Please specify a valid name for your share."
 msgstr "Veuillez spécifier un nom valide pour votre partage."
 
-#: plugins/admin/systems/class_servNfs.inc:188
+#: plugins/admin/systems/class_servNfs.inc:189
 msgid "Please specify a name for your share."
 msgstr "Veuillez spécifier un nom pour votre partage."
 
-#: plugins/admin/systems/class_servNfs.inc:193
+#: plugins/admin/systems/class_servNfs.inc:194
 msgid "Description contains invalid characters."
 msgstr "La description contient des caractères invalides."
 
-#: plugins/admin/systems/class_servNfs.inc:197
+#: plugins/admin/systems/class_servNfs.inc:198
 msgid "Volume contains invalid characters."
 msgstr "Le nom du Volume contient des caractères invalides."
 
-#: plugins/admin/systems/class_servNfs.inc:201
+#: plugins/admin/systems/class_servNfs.inc:202
 msgid "Path contains invalid characters."
 msgstr "Le chemin contient des caractères invalides."
 
-#: plugins/admin/systems/class_servNfs.inc:205
+#: plugins/admin/systems/class_servNfs.inc:206
 msgid "Option contains invalid characters."
 msgstr "L'option contient des caractères invalides."
 
@@ -12005,72 +12025,72 @@ msgstr ""
 "Vous êtes sur le point de supprimer toute les informations relatives aux "
 "composant '%s'."
 
-#: plugins/admin/systems/class_systemManagement.inc:616
+#: plugins/admin/systems/class_systemManagement.inc:627
 msgid "New terminal"
 msgstr "Nouveau terminal"
 
-#: plugins/admin/systems/class_systemManagement.inc:618
+#: plugins/admin/systems/class_systemManagement.inc:629
 msgid "New workstation"
 msgstr "Nouvelle station de travail"
 
-#: plugins/admin/systems/class_systemManagement.inc:620
+#: plugins/admin/systems/class_systemManagement.inc:631
 msgid "New Device"
 msgstr "Nouveau périphérique"
 
-#: plugins/admin/systems/class_systemManagement.inc:635
+#: plugins/admin/systems/class_systemManagement.inc:646
 msgid "Terminal template for"
 msgstr "Modèle de terminal pour "
 
-#: plugins/admin/systems/class_systemManagement.inc:647
+#: plugins/admin/systems/class_systemManagement.inc:658
 msgid "Workstation template for"
 msgstr "Modèle de station de travail pour"
 
-#: plugins/admin/systems/class_systemManagement.inc:735
+#: plugins/admin/systems/class_systemManagement.inc:746
 msgid "New System from incoming"
 msgstr "Nouveau système depuis l'arrivée"
 
-#: plugins/admin/systems/class_systemManagement.inc:737
+#: plugins/admin/systems/class_systemManagement.inc:748
 #: plugins/admin/systems/class_SelectDeviceType.inc:34
 #: plugins/admin/ogroups/class_ogroupManagement.inc:370
 msgid "Terminal"
 msgstr "Terminal"
 
-#: plugins/admin/systems/class_systemManagement.inc:738
+#: plugins/admin/systems/class_systemManagement.inc:749
 #: plugins/admin/systems/class_SelectDeviceType.inc:34
 #: plugins/admin/ogroups/class_ogroupManagement.inc:369
 #: plugins/generic/references/class_reference.inc:48
 msgid "Workstation"
 msgstr "Stations de travail"
 
-#: plugins/admin/systems/class_systemManagement.inc:739
+#: plugins/admin/systems/class_systemManagement.inc:750
 msgid "Workstation is installing"
 msgstr "La station de travail s'installe"
 
-#: plugins/admin/systems/class_systemManagement.inc:740
+#: plugins/admin/systems/class_systemManagement.inc:751
 msgid "Workstation is waiting for action"
 msgstr "La station de travail attend une action"
 
-#: plugins/admin/systems/class_systemManagement.inc:741
+#: plugins/admin/systems/class_systemManagement.inc:752
 msgid "Workstation installation failed"
 msgstr "L'installation de la station de travail à échoué"
 
-#: plugins/admin/systems/class_systemManagement.inc:744
+#: plugins/admin/systems/class_systemManagement.inc:755
 msgid "Server is installing"
 msgstr "Le serveur s'installe"
 
-#: plugins/admin/systems/class_systemManagement.inc:745
+#: plugins/admin/systems/class_systemManagement.inc:756
 msgid "Server is waiting for action"
 msgstr "Le serveur attend une action"
 
-#: plugins/admin/systems/class_systemManagement.inc:746
+#: plugins/admin/systems/class_systemManagement.inc:757
 msgid "Server installation failed"
 msgstr "L'installation du serveur à échoué"
 
-#: plugins/admin/systems/class_systemManagement.inc:747
+#: plugins/admin/systems/class_systemManagement.inc:758
 msgid "Winstation"
 msgstr "Stations Windows"
 
-#: plugins/admin/systems/class_systemManagement.inc:748
+#: plugins/admin/systems/class_systemManagement.inc:759
 msgid "Network Device"
 msgstr "Périphérique réseau"
 
@@ -12308,23 +12328,23 @@ msgstr "Veuillez spécifier un nombre pour la durée d'expiration."
 msgid "Please specify a numeric value for retry."
 msgstr "Veuillez spécifier un nombre pour la durée entre chaque essai."
 
-#: plugins/admin/systems/class_printGeneric.inc:103
+#: plugins/admin/systems/class_printGeneric.inc:108
 #, php-format
 msgid "Can't extract a valid base out of object dn, setting base to '%s'."
 msgstr ""
 "Impossible d'obtenir un base valide depuis le dn de l'objet, je met la base "
 "à '%s'. "
 
-#: plugins/admin/systems/class_printGeneric.inc:232
-#: plugins/admin/systems/class_printGeneric.inc:240
-#: plugins/admin/systems/class_printGeneric.inc:245
-#: plugins/admin/systems/class_printGeneric.inc:284
-#: plugins/admin/systems/class_printGeneric.inc:300
-#: plugins/admin/systems/class_printGeneric.inc:303
+#: plugins/admin/systems/class_printGeneric.inc:243
+#: plugins/admin/systems/class_printGeneric.inc:251
+#: plugins/admin/systems/class_printGeneric.inc:256
+#: plugins/admin/systems/class_printGeneric.inc:295
+#: plugins/admin/systems/class_printGeneric.inc:311
+#: plugins/admin/systems/class_printGeneric.inc:314
 msgid "Add printer extension"
 msgstr "Ajouter une extension d'imprimante"
 
-#: plugins/admin/systems/class_printGeneric.inc:233
+#: plugins/admin/systems/class_printGeneric.inc:244
 msgid ""
 "Could not intialize printer tab, parameter parent was missing while "
 "construction."
@@ -12332,19 +12352,19 @@ msgstr ""
 "Impossible d'initialiser l'onglet imprimante, le paramètre parent était "
 "manquant pendant la construction."
 
-#: plugins/admin/systems/class_printGeneric.inc:241
+#: plugins/admin/systems/class_printGeneric.inc:252
 msgid "This is a workstation template, printer tab is disabled."
 msgstr "Ceci est un modèle de station de travail, l'onglet imprimante est désactivé."
 
-#: plugins/admin/systems/class_printGeneric.inc:246
+#: plugins/admin/systems/class_printGeneric.inc:257
 msgid "This is a terminal template, printer tab is disabled."
 msgstr "Ceci est un modèle de terminal, l'onglet imprimante est désactivé."
 
-#: plugins/admin/systems/class_printGeneric.inc:277
+#: plugins/admin/systems/class_printGeneric.inc:288
 msgid "This 'dn' has no printer features."
 msgstr "Ce 'dn' n'a pas d'extensions d'impression."
 
-#: plugins/admin/systems/class_printGeneric.inc:285
+#: plugins/admin/systems/class_printGeneric.inc:296
 msgid ""
 "This object has printer extension disabled. You can't enable it while 'cn' "
 "is not present in entry. Possibly you are currently creating a new terminal "
@@ -12354,12 +12374,12 @@ msgstr ""
 "tant qu'un 'cn' n'est pas présent dans l'entrée. Vous êtes probablement "
 "occupé à créer un nouveau modèle de terminal"
 
-#: plugins/admin/systems/class_printGeneric.inc:292
-#: plugins/admin/systems/class_printGeneric.inc:295
+#: plugins/admin/systems/class_printGeneric.inc:303
+#: plugins/admin/systems/class_printGeneric.inc:306
 msgid "Remove printer extension"
 msgstr "Enlever l'extension d'impression"
 
-#: plugins/admin/systems/class_printGeneric.inc:293
+#: plugins/admin/systems/class_printGeneric.inc:304
 msgid ""
 "This workstation has printer extension enabled.You can disable it by "
 "clicking below."
@@ -12367,7 +12387,7 @@ msgstr ""
 "Ce stations de travail à l'extension d'imprimante activée. Vous pouvez la "
 "désactiver en cliquant sur le bouton ci-dessous."
 
-#: plugins/admin/systems/class_printGeneric.inc:296
+#: plugins/admin/systems/class_printGeneric.inc:307
 msgid ""
 "This terminal has printer extension enabled. You can disable it by clicking "
 "below."
@@ -12375,7 +12395,7 @@ msgstr ""
 "Ce serveur à l'extension d'imprimante activée. Vous pouvez la désactiver en "
 "cliquant sur le bouton ci-dessous."
 
-#: plugins/admin/systems/class_printGeneric.inc:301
+#: plugins/admin/systems/class_printGeneric.inc:312
 msgid ""
 "This workstation has printer extension disabled. You can enable it by "
 "clicking below."
@@ -12383,7 +12403,7 @@ msgstr ""
 "Ce serveur à l'extension d'imprimante désactivé. Vous pouvez l'activer en "
 "cliquant sur le bouton ci-dessous."
 
-#: plugins/admin/systems/class_printGeneric.inc:304
+#: plugins/admin/systems/class_printGeneric.inc:315
 msgid ""
 "This terminal has printer extension disabled. You can enable it by clicking "
 "below."
@@ -12391,36 +12411,51 @@ msgstr ""
 "Ce serveur à l'extension d'imprimante désactivé. Vous pouvez l'activer en "
 "cliquant sur le bouton ci-dessous."
 
-#: plugins/admin/systems/class_printGeneric.inc:478
+#: plugins/admin/systems/class_printGeneric.inc:481
 #, php-format
 msgid "Your currently selected PPD file '%s' doesn't exist."
 msgstr "Le fichier PPD sélectionné '%s' n'existe pas."
 
-#: plugins/admin/systems/class_printGeneric.inc:486
+#: plugins/admin/systems/class_printGeneric.inc:489
 msgid "can't get ppd informations."
 msgstr "Impossible d'obtenir les informations sur le fichier ppd."
 
-#: plugins/admin/systems/class_printGeneric.inc:499
+#: plugins/admin/systems/class_printGeneric.inc:502
 #, php-format
 msgid "This printer belongs to terminal %s. You can't rename this printer."
 msgstr ""
 "Cette imprimante appartient au terminal %s. Vous ne pouvez pas changer son "
 "nom."
 
-#: plugins/admin/systems/class_printGeneric.inc:501
+#: plugins/admin/systems/class_printGeneric.inc:504
 #, php-format
 msgid "This printer belongs to workstation %s. You can't rename this printer."
 msgstr ""
 "Cette imprimante appartient à la station de travail %s. Vous ne pouvez pas "
 "changer son nom."
 
-#: plugins/admin/systems/class_printGeneric.inc:552
+#: plugins/admin/systems/class_printGeneric.inc:559
 msgid "Removing printer failed"
 msgstr "La suppression de l'imprimante à échoué"
 
-#: plugins/admin/systems/class_printGeneric.inc:738
+#: plugins/admin/systems/class_printGeneric.inc:756
 msgid "Saving printer failed"
 msgstr "La sauvegarde de l'imprimante à échoué"
+
+#: plugins/admin/systems/class_printGeneric.inc:801
+#, php-format
+msgid "Illegal printer type while adding '%s' to the list of '%s' printers,"
+msgstr "Type d'imprimante illégale lors de l'ajout de '%s' à la liste des imprimantes '%s',"
+
+#: plugins/admin/systems/class_printGeneric.inc:823
+#, php-format
+msgid "Can't add '%s' to the list of members, it is already used."
+msgstr "Impossible d'ajouter '%s' à la liste des membres, il est déjà utilisé."
+
+#: plugins/admin/systems/class_printGeneric.inc:831
+#, php-format
+msgid "Can't add '%s' to list of members, it is not reachable."
+msgstr "Impossible d'ajouter '%s' à la liste des membres, il n'est pas accessible."
 
 #: plugins/admin/systems/class_baseSelectDialog.inc:23
 msgid "Choose a base"
@@ -12786,6 +12821,225 @@ msgstr "Le vendeur sélectionné '%s' n'existe pas dans notre liste de ppds."
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:80
 msgid "Printer ppd selection."
 msgstr "Sélection du ppd de votre imprimante."
+
+#: plugins/admin/systems/goSpamServer.tpl:8
+msgid "Rewrite header"
+msgstr "Récrire l'entête"
+
+#: plugins/admin/systems/goSpamServer.tpl:16
+msgid "Required score"
+msgstr "Score requis"
+
+#: plugins/admin/systems/goSpamServer.tpl:19
+msgid "Select required score to tag mail as spam"
+msgstr "Sélectionner le score requis pour marquer ce message comme étant un spam"
+
+#: plugins/admin/systems/goSpamServer.tpl:56
+msgid "Enable use of bayes filtering"
+msgstr "Activer l'utilisation de la méthode de filtrage bayesienne"
+
+#: plugins/admin/systems/goSpamServer.tpl:57
+msgid "Enable bayes auto learning"
+msgstr "Activer l'apprentissage automatique pour la méthode bayesienne"
+
+#: plugins/admin/systems/goSpamServer.tpl:58
+msgid "Enable RBL checks"
+msgstr "Activer les vérification RBL"
+
+#: plugins/admin/systems/goSpamServer.tpl:67
+msgid "Enable use of Razor"
+msgstr "Activer l'utilisation de Razor"
+
+#: plugins/admin/systems/goSpamServer.tpl:68
+msgid "Enable use of DDC"
+msgstr "Activer l'utilisation de DDC"
+
+#: plugins/admin/systems/goSpamServer.tpl:69
+msgid "Enable use of Pyzer"
+msgstr "Activer l'utilisation de Pyzer"
+
+#: plugins/admin/systems/goSpamServerRule.tpl:14
+msgid "Rule"
+msgstr "Règle"
+
+#: plugins/admin/systems/class_goSpamServer.inc:47
+#: plugins/admin/systems/class_goSpamServer.inc:387
+msgid "Spamassassin"
+msgstr ""
+
+#: plugins/admin/systems/class_goSpamServer.inc:102
+msgid "Remove spamassassin extension"
+msgstr "Enlever l'extension spamassassin"
+
+#: plugins/admin/systems/class_goSpamServer.inc:103
+msgid ""
+"This server has spamassassin features enabled. You can disable them by "
+"clicking below."
+msgstr ""
+"Ce serveur à l'extension spamassassin activée. Vous pouvez la désactiver en "
+"cliquant sur le bouton ci-dessous."
+
+#: plugins/admin/systems/class_goSpamServer.inc:106
+msgid "Add spamassassin service"
+msgstr "Ajouter un service spamassassin"
+
+#: plugins/admin/systems/class_goSpamServer.inc:107
+msgid ""
+"This server has spamassassin features disabled. You can enable them by "
+"clicking below."
+msgstr ""
+"Ce serveur à l'extension spamassassin désactivé. Vous pouvez l'activer en cliquant "
+"sur le bouton ci-dessous."
+
+#: plugins/admin/systems/class_goSpamServer.inc:270
+#, php-format
+msgid "Removing of server services/spamassassin with dn '%s' failed."
+msgstr "La suppression du service spamassasin sur le serveur avec le dn '%s' à échoué."
+
+#: plugins/admin/systems/class_goSpamServer.inc:318
+#, php-format
+msgid "Saving of server services/spamassassin with dn '%s' failed."
+msgstr "La sauvegarde du service spamassassin sur le serveur avec le dn '%s' à échoué."
+
+#: plugins/admin/systems/class_goSpamServer.inc:327
+msgid "Required score must be a numeric value."
+msgstr "Le score requis doit être un nombre positif."
+
+#: plugins/admin/systems/class_goSpamServer.inc:447
+#: plugins/admin/systems/class_goVirusServer.inc:305
+#, php-format
+msgid "Command '%s', specified as ACTION_HOOK for plugin '%s' doesn't seem to exist."
+msgstr "La commande '%s', utilisée dans le ACTION_HOOK de l'extension '%s' n'existe pas."
+
+#: plugins/admin/systems/class_goSpamServer.inc:471
+#, php-format
+msgid "Set status flag for server services/spamassassin with dn '%s' failed."
+msgstr "L'activation du statut pour le service spamassassin avec le dn '%s' à échoué."
+
+#: plugins/admin/systems/class_goVirusServer.inc:46
+#: plugins/admin/systems/class_goVirusServer.inc:244
+msgid "Anti virus"
+msgstr "Antivirus"
+
+#: plugins/admin/systems/class_goVirusServer.inc:80
+msgid "Remove anti virus extension"
+msgstr "Enlever l'extension d'antivirus"
+
+#: plugins/admin/systems/class_goVirusServer.inc:81
+msgid ""
+"This server has anti virus features enabled. You can disable them by "
+"clicking below."
+msgstr ""
+"Ce serveur à l'extension antivirus activée. Vous pouvez la désactiver en "
+"cliquant sur le bouton ci-dessous."
+
+#: plugins/admin/systems/class_goVirusServer.inc:84
+msgid "Add anti virus service"
+msgstr "Ajouter un service antivirus"
+
+#: plugins/admin/systems/class_goVirusServer.inc:85
+msgid ""
+"This server has anti virus features disabled. You can enable them by "
+"clicking below."
+msgstr ""
+"Ce serveur à l'extension d'antivirus désactivé. Vous pouvez l'activer en "
+"cliquant sur le bouton ci-dessous."
+
+#: plugins/admin/systems/class_goVirusServer.inc:151
+#, php-format
+msgid "Removing of server services/anti virus with dn '%s' failed."
+msgstr "La suppression du service antivirus du serveur avec le dn '%s' à échoué."
+
+#: plugins/admin/systems/class_goVirusServer.inc:196
+#, php-format
+msgid "Saving of server services/anti virus with dn '%s' failed."
+msgstr "La sauvegarde du service antivirus du serveur avec le dn '%s' à échoué."
+
+#: plugins/admin/systems/class_goVirusServer.inc:204
+msgid "Maximum directory recursions"
+msgstr "Nombre maximal de récursions"
+
+#: plugins/admin/systems/class_goVirusServer.inc:205
+#: plugins/admin/systems/goVirusServer.tpl:37
+msgid "Maximum threads"
+msgstr "Nombre de processus maximum"
+
+#: plugins/admin/systems/class_goVirusServer.inc:206
+#: plugins/admin/systems/goVirusServer.tpl:114
+msgid "Maximum file size"
+msgstr "Taille maximum des fichiers"
+
+#: plugins/admin/systems/class_goVirusServer.inc:207
+msgid "Maximum recursions"
+msgstr "Nombre maximum de récursions"
+
+#: plugins/admin/systems/class_goVirusServer.inc:208
+#: plugins/admin/systems/goVirusServer.tpl:128
+msgid "Maximum compression ratio"
+msgstr "Ratio maximum de compression"
+
+#: plugins/admin/systems/class_goVirusServer.inc:209
+#: plugins/admin/systems/goVirusServer.tpl:61
+msgid "Checks per day"
+msgstr "Vérifications par jour"
+
+#: plugins/admin/systems/class_goVirusServer.inc:213
+#, php-format
+msgid "The specified value for '%s' must be a numeric value."
+msgstr "Le valeur spécifiée pour '%s' doit être une numérique."
+
+#: plugins/admin/systems/class_goVirusServer.inc:329
+#, php-format
+msgid "Set status flag for server services/anti virus with dn '%s' failed."
+msgstr "L'activation du statut pour le service antivirus avec le dn '%s' à échoué."
+
+#: plugins/admin/systems/goVirusServer.tpl:5
+msgid "Generic virus filtering"
+msgstr "Filtrage antivirus générique"
+
+#: plugins/admin/systems/goVirusServer.tpl:13
+msgid "Database user"
+msgstr "Base de données utilisateur"
+
+#: plugins/admin/systems/goVirusServer.tpl:21
+msgid "Database mirror"
+msgstr "Base de données mirroir"
+
+#: plugins/admin/systems/goVirusServer.tpl:29
+msgid "Http proxy URL"
+msgstr "URL du proxy http"
+
+#: plugins/admin/systems/goVirusServer.tpl:40
+msgid "Select number of maximal threads"
+msgstr "Sélectionnez le nombre maximal de processus"
+
+#: plugins/admin/systems/goVirusServer.tpl:53
+msgid "Max directory recursions"
+msgstr "Nombre maximum de récursions dans les répertoires"
+
+#: plugins/admin/systems/goVirusServer.tpl:70
+msgid "Enable debugging"
+msgstr "Activer le deboguage"
+
+#: plugins/admin/systems/goVirusServer.tpl:76
+msgid "Enable mail scanning"
+msgstr "Activer la vérification de la messagerie"
+
+#: plugins/admin/systems/goVirusServer.tpl:85
+msgid "Archive scanning"
+msgstr "Vérification des archives"
+
+#: plugins/admin/systems/goVirusServer.tpl:99
+msgid "Enable scanning of archives"
+msgstr "Activer la vérification des archives"
+
+#: plugins/admin/systems/goVirusServer.tpl:105
+msgid "Block encrypted archives"
+msgstr "Bloquer les archives encryptées"
+
+#: plugins/admin/systems/goVirusServer.tpl:121
+msgid "Maximum recursion"
+msgstr "Récursions maximum"
 
 #: plugins/admin/ogroups/class_termgroup.inc:111
 msgid "There must be at least one NTP server selected."
