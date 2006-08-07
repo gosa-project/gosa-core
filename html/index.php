@@ -75,7 +75,7 @@ function displayLogin()
       $smarty->assign("php_errors", "");
     }
 
-    $smarty->display (get_template_path('headers.tpl'));
+    $smarty->display(get_template_path('headers.tpl'));
     $smarty->display(get_template_path('login.tpl'));
     exit();
 }
@@ -351,7 +351,6 @@ $smarty->assign ("server_options", $servers);
 $smarty->assign ("server_id", $selected);
 
 /* show login screen */
-$smarty->display (get_template_path('headers.tpl'));
 $smarty->assign ("PHPSESSID", session_id());
 if (isset($_SESSION['errors'])){
   $smarty->assign("errors", $_SESSION['errors']);
