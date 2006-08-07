@@ -46,7 +46,7 @@ function displayLogin()
 
     /* Displasy SSL mode warning? */
     if ($ssl != "" && $config->data['MAIN']['WARNSSL'] == 'true'){
-      $smarty->assign ("ssl", "<b>"._("Warning").":</b> "._("Session will not be encrypted.")." <a style=\"color:red;\" href=\"$ssl\"><b>"._("Enter SSL session")."</b></a>!");
+      $smarty->assign ("ssl", "<b>"._("Warning").":<\/b> "._("Session will not be encrypted.")." <a style=\"color:red;\" href=\"$ssl\"><b>"._("Enter SSL session")."<\/b></a>!");
     } else {
       $smarty->assign ("ssl", "");
     }
@@ -328,13 +328,13 @@ $smarty->assign ("message", $message);
 
 /* Displasy SSL mode warning? */
 if ($ssl != "" && $config->data['MAIN']['WARNSSL'] == 'true'){
-  $smarty->assign ("ssl", "<b>"._("Warning").":</b> "._("Session will not be encrypted.")." <a style=\"color:red;\" href=\"$ssl\"><b>"._("Enter SSL session")."</b></a>!");
+  $smarty->assign ("ssl", "<b>"._("Warning").":<\/b> "._("Session will not be encrypted.")." <a style=\"color:red;\" href=\"$ssl\"><b>"._("Enter SSL session")."<\/b></a>!");
 } else {
   $smarty->assign ("ssl", "");
 }
 
 /* Translation of cookie-warning. Whether to display it, is determined by JavaScript */
-$smarty->assign ("cookies", "<b>"._("Warning").":</b> "._("Your browser has cookies disabled. Please enable cookies and reload this page before logging in!"));
+$smarty->assign ("cookies", "<b>"._("Warning").":<\/b> "._("Your browser has cookies disabled. Please enable cookies and reload this page before logging in!"));
 
 
 /* Generate server list */
