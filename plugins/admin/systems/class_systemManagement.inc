@@ -402,10 +402,10 @@ class systems extends plugin
         $found = false;
   
         /* Set gotoMode to active if we there was an ogroup selected . (save_object_directly) */
-        foreach(array("workgeneric","servgeneric") as $tab){
+        foreach(array("workgeneric"=>"active","servgeneric"=>"active","termgeneric"=>"graphic") as $tab => $value){
           if(isset($this->systab->by_object[$tab]->gotoMode)) {
             $found = true;
-            $this->systab->by_object[$tab]->gotoMode = "active";
+            $this->systab->by_object[$tab]->gotoMode = $value;
           }
         }   
         if(!$found){
