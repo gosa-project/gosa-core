@@ -408,7 +408,7 @@ class termgeneric extends plugin
     /* Strip out 'default' values */
     foreach (array("gotoTerminalPath", "gotoSwapServer", "gotoSyslogServer") as $val){
 
-      if ($this->attrs[$val] == "default"){
+      if (!isset($this->attrs[$val]) || $this->attrs[$val] == "default"){
         $this->attrs[$val]= array();
       }
     }

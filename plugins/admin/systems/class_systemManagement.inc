@@ -125,6 +125,12 @@ class systems extends plugin
     /* Create new default terminal 
      * Or create specified object of selected system type, from given incoming object  
      */
+
+    $save_object_directly = false;
+    if(($s_action == "SelectedSystemType") && (isset($_POST['ObjectGroup']) && ($_POST['ObjectGroup'] != "none"))){
+      $save_object_directly = true;
+    }
+    
     if (isset($_POST['create_system'])||$s_action=="newsystem"||$s_action == "SelectedSystemType") {
 
       /* If the current entry is an incoming object 
@@ -386,11 +392,27 @@ class systems extends plugin
     /* Finish user edit is triggered by the tabulator dialog, so
        the user wants to save edited data. Check and save at this
        point. */
-    if ((isset($_POST['edit_finish'])) && (isset($this->systab->config))){
+    if ((isset($_POST['edit_finish'])) && (isset($this->systab->config)) || $save_object_directly){
 
       /* Check tabs, will feed message array */
-      $message= $this->systab->check();
+      $message = array();
+      if(!$save_object_directly){
+        $message = $this->systab->check();
+      }else{
+        $found = false;
+  
+        /* Set gotoMode to active if we there was an ogroup selected . (save_object_directly) */
+        foreach(array("workgeneric","servgeneric") as $tab){
+          if(isset($this->systab->by_object[$tab]->gotoMode)) {
+            $found = true;
+            $this->systab->by_object[$tab]->gotoMode = "active";
+          }
+        }   
+        if(!$found){
+          print_red(sprintf(_("Can't set gotoMode to status 'avtice', the current object couldn't be identified.")));
+        }
 
+      }
       /* Save, or display error message? */
       if (count($message) == 0){
 
