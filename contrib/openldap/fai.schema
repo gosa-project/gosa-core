@@ -301,6 +301,8 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.5.27 NAME 'FAIrepository'
 # Description: Used to store repository state (branched/freezed)
 attributetype ( 1.3.6.1.4.1.10098.1.1.5.28 NAME 'FAIstate'
 		DESC 'TODO'
+                EQUALITY caseIgnoreIA5Match
+                SUBSTR caseIgnoreIA5SubstringsMatch
 		SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
 
 # Name       : FAIrelease
