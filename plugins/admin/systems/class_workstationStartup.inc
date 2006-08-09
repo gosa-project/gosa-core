@@ -9,9 +9,9 @@ class workstartup extends plugin
   /* Generic terminal attributes */
   var $bootmode             = "G";
   var $goLdapServerList     = array();
-  var $gotoBootKernel       = "default";
+  var $gotoBootKernel       = "default-inherited";
   var $gotoKernelParameters = "";
-  var $gotoLdapServer       = "default";
+  var $gotoLdapServer       = "default-inherited";
   var $gotoModules          = array();
   var $gotoAutoFs           = array();
   var $gotoFilesystem       = array();
@@ -269,7 +269,7 @@ class workstartup extends plugin
     $this->orig_dn= $this->dn;
 
     /* Handle inheritance value "default" */
-    $this->gotoBootKernels= array("%default%" => '['._("inherited").']');
+    $this->gotoBootKernels= array("default-inherited" => '['._("inherited").']');
 
 
     /* Load hardware list */
@@ -287,11 +287,11 @@ class workstartup extends plugin
 
         switch ($name){
           case 'gotoLdapServer':
-            $this->goLdapServerList= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']' ), $this->goLdapServerList);
+            $this->goLdapServerList= array_merge(array('default-inherited' => _("inherited").' ['.$attrs[$name][0].']' ), $this->goLdapServerList);
             break;
 
           case 'gotoBootKernel':
-            $this->gotoBootKernels['%default%']=  _("inherited").' ['.$attrs[$name][0].']' ;
+            $this->gotoBootKernels['default-inherited']=  _("inherited").' ['.$attrs[$name][0].']' ;
             break;
 
           case 'FAIclass':
@@ -319,8 +319,16 @@ class workstartup extends plugin
         $fh= popen($command, "r");
         while (!feof($fh)) {
           $buffer= trim(fgets($fh, 256));
+
+          $name= $value = $buffer;
+
+          if(preg_match("/:/",$buffer)){
+            $name  = preg_replace("/:.*$/","",$buffer);
+            $value = preg_replace("/^.*:/","",$buffer);
+          }
+
           if ($buffer != ""){
-            $this->gotoBootKernels[preg_replace('/:.*$/', '', $buffer)]= $buffer;
+            $this->gotoBootKernels[$name]= $value;
           }
         }
         pclose($fh);
@@ -967,11 +975,11 @@ class workstartup extends plugin
     }
 
     /* Strip out 'default' values */
-    if ($this->attrs['gotoLdapServer'] == "default"){
+    if ($this->attrs['gotoLdapServer'] == "default-inherited"){
       $this->attrs['gotoLdapServer']= array();
     }
 
-    if (($this->attrs['gotoBootKernel'] == "default") || ($this->attrs['gotoBootKernel'] == "%default%")){
+    if (($this->attrs['gotoBootKernel'] == "default-inherited") || ($this->attrs['gotoBootKernel'] == "%default%")){
       $this->attrs['gotoBootKernel']= array();
     }
 
