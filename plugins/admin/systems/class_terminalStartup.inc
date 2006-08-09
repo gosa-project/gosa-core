@@ -9,7 +9,7 @@ class termstartup extends plugin
   /* Generic terminal attributes */
   var $bootmode= "G";
   var $goLdapServerList= array();
-  var $gotoBootKernel= "";
+  var $gotoBootKernel= "default-inherit";
   var $gotoKernelParameters= "";
   var $gotoLdapServer= "";
   var $gotoModules= array();
