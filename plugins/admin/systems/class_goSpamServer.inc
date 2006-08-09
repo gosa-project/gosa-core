@@ -227,7 +227,11 @@ class gospamserver extends plugin{
   function AddTrust($post)
   {
     if(!empty($post)){
-      $this->TrustedNetworks[$post] = $post;
+      if(is_ip($post) || is_domain($post) || (is_ip_with_subnetmask($post))){
+        $this->TrustedNetworks[$post] = $post;
+      }else{
+        print_red(_("Specified value is not a valid 'trusted network' value."));
+      }
     }
   }
 
@@ -279,7 +283,7 @@ class gospamserver extends plugin{
     plugin::save();
 
     /* Create Flags */     
-    $this->attrs['saFlags'] = "";
+    $this->attrs['saFlags'] = array();
     foreach($this->Flags as $flag){
       $var = "saFlags".$flag;
       if($this->$var){
