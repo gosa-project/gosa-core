@@ -7,7 +7,7 @@
     <tr>
      <td style="width:30%"><LABEL for="gotoBootKernel">{t}Boot kernel{/t}</LABEL></td>
      <td>
-	<select id="gotoBootKernel" name="gotoBootKernel" {$gotoBootKernelACL} onchange='document.mainform.submit()'>
+	<select id="gotoBootKernel" name="gotoBootKernel" {$gotoBootKernelACL}>
 	{html_options options=$gotoBootKernels  selected=$gotoBootKernel}
 	<option disabled>&nbsp;</option>
 	</select>

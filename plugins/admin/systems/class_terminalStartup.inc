@@ -36,7 +36,7 @@ class termstartup extends plugin
   {
     plugin::plugin ($config, $dn);
 
-    $this->gotoBootKernels = array("default"=>"["._("inherited")."]");
+    $this->gotoBootKernels = array("default-inherit"=>"["._("inherited")."]");
 
     /* Get arrays */
     foreach (array("gotoModules") as $val){
@@ -95,9 +95,17 @@ class termstartup extends plugin
       } else {
         $fh= popen($command, "r");
         while (!feof($fh)) {
-          $buffer= fgets($fh, 256);
+          $buffer= trim(fgets($fh, 256));
+
+          $name=$value = $buffer;
+    
+          if(preg_match("/:/",$buffer)){
+            $name = preg_replace("/:.*$/","",$buffer);
+            $value= preg_replace("/^.*:/","",$buffer);
+          }
+
           if(!empty($buffer)){
-            $this->gotoBootKernels[]= $buffer;
+            $this->gotoBootKernels[$name]= $value;
           }
         }
         pclose($fh);
@@ -107,7 +115,7 @@ class termstartup extends plugin
     $tmp = $this->config->data['SERVERS']['LDAP'];  
     foreach($tmp as $server){
       $visible = $server;
-      if($server == "default"){
+      if($server == "default-inherit"){
         $visible = "["._("inherited")."]";
       }
       $this->goLdapServerList[$server] = $visible;
@@ -128,7 +136,7 @@ class termstartup extends plugin
 
         switch ($name){
           case 'gotoLdapServer':
-            $this->goLdapServerList= array_merge(array('default' => _("inherited").' ['.$attrs[$name][0].']' ), $this->goLdapServerList);
+            $this->goLdapServerList= array_merge(array('default-inherit' => _("inherited").' ['.$attrs[$name][0].']' ), $this->goLdapServerList);
             break;
         }
       }
@@ -304,7 +312,7 @@ class termstartup extends plugin
     /* Find proper terminal path for tftp configuration
        FIXME: This is suboptimal when the default has changed to
        another location! */
-    if ($this->gotoTerminalPath == "default"){
+    if ($this->gotoTerminalPath == "default-inherit"){
       $ldap= $this->config->get_ldap_link();
 
       /* Strip relevant part from dn, keep trailing ',' */
@@ -363,7 +371,7 @@ class termstartup extends plugin
 
     /* Strip out 'default' values */
     foreach(array("gotoBootKernel","gotoLdapServer") as $value){
-      if (!isset($this->attrs[$value]) || $this->attrs[$value] == "default"){
+      if (!isset($this->attrs[$value]) || $this->attrs[$value] == "default-inherit"){
         $this->attrs[$value] = array();
       } 
     }
