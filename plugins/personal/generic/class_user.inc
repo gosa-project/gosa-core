@@ -86,7 +86,7 @@ class user extends plugin
   /* attribute list for save action */
   var $attributes= array("sn", "givenName", "uid", "personalTitle", "academicTitle",
       "homePostalAddress", "homePhone", "labeledURI", "o", "ou", "dateOfBirth", "gender","preferredLanguage",
-      "departmentNumber", "employeeNumber", "employeeType", "l", "st",
+      "departmentNumber", "employeeNumber", "employeeType", "l", "st","jpegPhoto",
       "roomNumber", "telephoneNumber", "mobile", "pager", "cn", "userPKCS12",
       "postalAddress", "facsimileTelephoneNumber", "userSMIMECertificate");
 
@@ -310,8 +310,8 @@ class user extends plugin
 
     /* Remove picture? */
     if (isset($_POST['picture_remove'])){
+      $this->set_picture ();
       $this->jpegPhoto= "*removed*";
-      $this->set_picture ("./images/default.jpg");
       $this->is_modified= TRUE;
 
       return($smarty->fetch (get_template_path('generic_picture.tpl', TRUE, dirname(__FILE__))));
@@ -1118,9 +1118,9 @@ class user extends plugin
 
 
   /* Load picture from file to object */
-  function set_picture($filename)
+  function set_picture($filename ="")
   {
-    if (!is_file($filename)){
+    if (!is_file($filename) || $filename == ""){
       $filename= "./images/default.jpg";
       $this->jpegPhoto= "*removed*";
     }
