@@ -63,7 +63,7 @@ class environment extends plugin
 
   var $CopyPasteVars      = array("gotoHotplugDevices","newKioskProfiles","gotoAvailableShares","gotoShareSelections","gotoPrinterSel","gotoProfileFlag_L","gotoXResolutions","gotoProfileFlag_C","gotoProfileServers","useProfile","is_group","in_dialog","OrigCn");
 
-  var $attributes         = array("uid","gotoProfileServer","gotoProfileFlags",
+  var $attributes         = array("uid","gotoProfileServer","gotoProfileFlags","gotoHotplugDevice",
                                     "gotoXResolution","gotoProfileQuota",
                                     "gotoLogonScripts","gotoLogonScript",
                                     "gotoPrinter", "gosaDefaultPrinter",
@@ -820,7 +820,7 @@ class environment extends plugin
 
     $ldap->cd($this->dn);
     $this->cleanup();
-    $ldap->modify ($this->attrs); 
+    $ldap->modify ($this->attrs);
 
     show_ldap_error($ldap->get_error(), _("Removing environment information failed"));
 
