@@ -97,15 +97,17 @@ class termstartup extends plugin
         while (!feof($fh)) {
           $buffer= trim(fgets($fh, 256));
 
-          $name=$value = $buffer;
-    
-          if(preg_match("/:/",$buffer)){
-            $name = preg_replace("/:.*$/","",$buffer);
-            $value= preg_replace("/^.*:/","",$buffer);
-          }
-
           if(!empty($buffer)){
-            $this->gotoBootKernels[$name]= $value;
+
+            $name=$value = $buffer;
+
+            if(preg_match("/:/",$buffer)){
+              $name = preg_replace("/:.*$/","",$buffer);
+              $value= preg_replace("/^.*:/","",$buffer);
+              $this->gotoBootKernels[$name]= $name.":".$value;
+            }else{
+              $this->gotoBootKernels[$name]= $value;
+            }
           }
         }
         pclose($fh);
