@@ -257,14 +257,18 @@ class mailAccount extends plugin
     /* Show tab dialog headers */
     if ($this->parent != NULL){
       if ($this->is_account){
-        $display= $this->show_header(_("Remove mail account"),
-            _("This account has mail features enabled. You can disable them by clicking below."));
+        if($this->accountDelegationsConfigured()){
+          $display= $this->show_header(_("Remove mail account"),
+              _("This account can't be removed while there are delegations configured. Remove those delegations first."),TRUE,TRUE);
+        }else{
+          $display= $this->show_header(_("Remove mail account"),
+              _("This account has mail features enabled. You can disable them by clicking below."));
+        }
       } else {
         $display= $this->show_header(_("Create mail account"), _("This account has mail features disabled. You can enable them by clicking below."));
         return ($display);
       }
     }
-
 
     /* Forwarder  subdialog */
 
@@ -593,6 +597,22 @@ class mailAccount extends plugin
 
     $display.= $smarty->fetch (get_template_path('generic.tpl', TRUE, dirname(__FILE__)));
     return ($display);
+  }
+
+  /* check if we have some delegations configured, those delegations must be removed first */
+  function accountDelegationsConfigured()
+  { 
+    /* We are in administrational edit mode.
+        Check tab configurations directly */
+    if(isset($this->attrs)){
+      $checkArray  = array("kolabInvitationPolicy","unrestrictedMailSize", "calFBURL","kolabDelegate","kolabFreeBusyFuture");
+      foreach($checkArray as $index){
+        if(isset($this->attrs[$index])){
+           return(true);
+        }
+      }
+    }
+    return(false); 
   }
 
 

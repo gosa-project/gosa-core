@@ -18,7 +18,7 @@ class kolabAccount extends plugin
   var $kolabDelegate          = array();
 
   /* attribute list for save action */
-  var $attributes     = array("kolabFreeBusyFuture", "unrestrictedMailSize", "calFBURL","kolabDelegate");
+  var $attributes     = array("kolabFreeBusyFuture", "unrestrictedMailSize", "calFBURL","kolabDelegate","kolabInvitationPolicy");
   var $objectclasses  = array("kolabInetOrgPerson");
 
   /* Helper */
@@ -166,9 +166,10 @@ class kolabAccount extends plugin
     /* Transfer account states for this union */
     if (isset($this->parent) && $this->parent->by_object['mailAccount']->is_account){
       $smarty->assign('mail_account', 'true');
-    } elseif($this-> initially_was_account && (isset($this->attrs['objectClass']) && (in_array("kolabInetOrgPerson",$this->attrs['objectClass'])))){
+    }elseif( isset($this->attrs) && isset($this->attrs['kolabHomeServer'])){
       $smarty->assign('mail_account', 'true');
     }else{
+      $this->is_account= false;
       $smarty->assign('mail_account', '');
     }
 
@@ -249,6 +250,10 @@ class kolabAccount extends plugin
     /* Optionally execute a command after we're done */
     plugin::remove_from_parent();
     
+    /* This plugin and the mailAccount plugin are using the same objectClass 
+        check here if the mail account still activated. 
+        If mailAccount is activated we must re-add the the objectClass.
+    */
     if(!in_array("kolabInetOrgPerson",$this->attrs['objectClass'])){
       $this->attrs['objectClass'][] = "kolabInetOrgPerson";
     }
