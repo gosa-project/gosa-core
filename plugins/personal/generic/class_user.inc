@@ -785,7 +785,7 @@ class user extends plugin
         $this->attrs["jpegPhoto"] = $output;
       }
 
-    } elseif(!$this->new) {
+    } else{
       $this->attrs["jpegPhoto"] = array();
     }
 
