@@ -14,7 +14,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td><LABEL for="HOT_description">{t}Description{/t}</LABEL>{$must}
+			<td><LABEL for="HOT_description">{t}Description{/t}</LABEL>
 			</td>
 			<td>
 				<input type="text" size=40 value="{$HOT_description}" name="HOT_description" id="HOT_description">
@@ -24,28 +24,28 @@
    </td>
    <td style="vertical-align:top">
 	<table summary="">
-		<tr>
-			<td><LABEL for="HOT_vendor">{t}Vendor ID{/t}</LABEL>{$must}
-			</td>
-			<td>
-				<input type="text" value="{$HOT_vendor}" name="HOT_vendor" id="HOT_vendor">
-			</td>
-		</tr>
-		<tr>
-			<td><LABEL for="HOT_id">{t}Device ID{/t}</LABEL>{$must}
-			</td>
-			<td>
-				<input type="text" value="{$HOT_id}" name="HOT_id" id="HOT_id">
-			</td>
-			<td cols="2">&nbsp;</td>
-		</tr>
-		<tr>
-			<td><LABEL for="HOT_produkt">{t}Product ID{/t}</LABEL>{$must}
-			</td>
-			<td>
-				<input type="text" value="{$HOT_produkt}" name="HOT_produkt" id="HOT_produkt">
-			</td>
-		</tr>
+                <tr>
+                        <td><LABEL for="HOT_id">{t}Serial number{/t}&nbsp;{t}(iSerial){/t}</LABEL>
+                        </td>
+                        <td>
+                                <input type="text" value="{$HOT_id}" name="HOT_id" id="HOT_id">
+                        </td>
+                        <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                        <td><LABEL for="HOT_vendor">{t}Vendor-ID{/t}&nbsp;{t}(idVendor){/t}</LABEL>
+                        </td>
+                        <td>
+                                <input type="text" value="{$HOT_vendor}" name="HOT_vendor" id="HOT_vendor">
+                        </td>
+                </tr>
+                <tr>
+                        <td><LABEL for="HOT_produkt">{t}Product-ID{/t}&nbsp;{t}(idProduct){/t}</LABEL>
+                        </td>
+                        <td>
+                                <input type="text" value="{$HOT_produkt}" name="HOT_produkt" id="HOT_produkt">
+                        </td>
+                </tr>
 	</table>
 </table>
 	<p class="seperator">&nbsp;</p>
