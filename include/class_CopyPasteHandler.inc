@@ -215,7 +215,7 @@ class CopyPasteHandler {
       $Copy_Paste.= "<input type='image' name='editPaste' class='center'
         src='".$img."' alt='"._("Paste")."' title='".$this->GetCurrentDn()."'>&nbsp;";
     }else{
-      $Copy_Paste.= "<img class='center' src='images/cant_editpaste.png' alt='"._("Can't paste")."'>&nbsp;";
+      $Copy_Paste.= "<img class='center' src='images/cant_editpaste.png' alt=\""._("Can't paste")."\" >&nbsp;";
     }
 
     return ($Copy_Paste);

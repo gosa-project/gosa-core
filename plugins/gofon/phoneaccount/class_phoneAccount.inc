@@ -8,7 +8,7 @@ class phoneAccount extends plugin
   var $has_mailAccount= FALSE;
 
   /* Attributes */
-  var $telephoneNumber        = "";
+  var $telephoneNumber        = array();
   var $goFonHardware          = "";
   var $goFonFormat            = "";
   var $goFonPIN               = "";
@@ -794,7 +794,7 @@ class phoneAccount extends plugin
     /* Fill arrays */
     $smarty->assign ("goFonHardware", $this->goFonHardware);
     if (!count($this->phoneNumbers)){
-      $smarty->assign ("phoneNumbers", array(""));
+      $smarty->assign ("phoneNumbers", array());
     } else {
       $smarty->assign ("phoneNumbers", $this->phoneNumbers);
     }

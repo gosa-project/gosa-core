@@ -194,7 +194,7 @@ class kolabAccount extends plugin
                          changeState('add".$nr."'); \n changeState('remove".$nr."'); \n";
 
       $invitation.= "<tr><td>";
-      if($this->is_account){
+      if(($this->is_account) && !preg_match("/disabled/",$acl)){
         $dis = " ";
       }else{
         $dis = " disabled ";
@@ -209,12 +209,12 @@ class kolabAccount extends plugin
       } else {
         $name= preg_replace('/:.*$/', '', $entry);
         $mode= preg_replace('/^[^:]*: */', '', $entry);
-        $invitation.= "<input name=\"address$nr\" size=16 maxlength=60 $acl value=\"$name\" id='address".$nr."' ".$dis.">";
+        $invitation.= "<input name=\"address$nr\" size=16 maxlength=60 value=\"$name\" id='address".$nr."' ".$dis.">";
       }
       $invitation.= "</td>";
 
       /* Add mode switch */
-      $invitation.= "<td><select size=\"1\" name=\"policy$nr\" $acl  id='policy".$nr."' ".$dis.">";
+      $invitation.= "<td><select size=\"1\" name=\"policy$nr\" id='policy".$nr."' ".$dis.">";
       foreach($policies as $key => $value){
         if ($key == $mode){
           $invitation.= "<option value=\"$key\" selected>$value</option>";

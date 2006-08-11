@@ -14,12 +14,12 @@
    <td>
     <table summary="" border=0 width="100%" cellpadding=0>
     <tr><td colspan=2>
-    <input type="checkbox" name="filterF" id="filterF" value="F" {$filterF} {$gosaProxyAcctFlagsACL} {$pstate}>
+    <input type="checkbox" name="filterF" id="filterF" value="F" {$filterF} {if $gosaProxyAcctFlagsACL!="" || $pstate!=""} disabled {/if}>
     {t}Filter unwanted content (i.e. pornographic or violence related){/t}
     </td></tr>
      <tr>
       <td width="50%">
-    <input type="checkbox" name="filterT" id="filterT" value="T" {$filterT} {$Working_allowedACL} {$pstate}
+    <input type="checkbox" name="filterT" id="filterT" value="T" {$filterT} {if $gosaProxyAcctFlagsACL!="" || $pstate!=""} disabled {/if}
     	onClick="{$ProxyWorkingStateChange}">
     <LABEL for="startHour">{t}Limit proxy access to working time{/t}</LABEL>
     <br>

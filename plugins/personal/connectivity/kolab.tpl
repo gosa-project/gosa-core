@@ -28,16 +28,15 @@
 	<option disabled>&nbsp;</option>
    </select>
    <br>
-   <input name="delegate_address" size=30 align=middle maxlength=60 {if !$kolabState} disabled {/if}
-        {$kolabDelegateACL} value="" id="delegate_address">
-   <input type=submit value="{t}Add{/t}" name="add_delegation" {if !$kolabState} disabled {/if}
-        {$kolabDelegateACL} id="add_delegation">&nbsp;
-   <input type=submit value="{t}Delete{/t}" name="delete_delegation" {if !$kolabState} disabled {/if}
-        {$kolabDelegateACL} id="delete_delegation">
+   <input name="delegate_address" size=30 align=middle maxlength=60 {if !$kolabState || $kolabDelegateACL !=""} disabled {/if}
+        value="" id="delegate_address">
+   <input type=submit value="{t}Add{/t}" name="add_delegation" {if !$kolabState || $kolabDelegateACL !=""} disabled {/if}
+        id="add_delegation">&nbsp;
+   <input type=submit value="{t}Delete{/t}" name="delete_delegation" {if !$kolabState || $kolabDelegateACL !=""} disabled {/if}
+        id="delete_delegation">
    <p>
     <b>{t}Mail size{/t}</b><br>
-     &nbsp;<input type="checkbox" id='unrestrictedMailSize' name="unrestrictedMailSize" value="1" {if !$kolabState} disabled {/if}
-	{$unrestrictedMailSizeACL} {$unrestrictedMailSizeState}> {t}No mail size restriction for this account{/t}
+     &nbsp;<input type="checkbox" id='unrestrictedMailSize' name="unrestrictedMailSize" value="1" {if !$kolabState || $unrestrictedMailSizeACL !=""} disabled {/if} {$unrestrictedMailSizeState}> {t}No mail size restriction for this account{/t}
     </p>
   </td>
   <td rowspan=2 style="border-left:1px solid #A0A0A0">
@@ -49,11 +48,11 @@
  <table summary="">
   <tr>
    <td><LABEL for="calFBURL">{t}URL{/t}</LABEL></td>
-   <td><input id="calFBURL" name="calFBURL" size=30 maxlength=60 {$calFBURLACL} value="{$calFBURL}" {if !$kolabState} disabled {/if}></td>
+   <td><input id="calFBURL" name="calFBURL" size=30 maxlength=60 value="{$calFBURL}" {if !$kolabState || $calFBURLACL !=""} disabled {/if}></td>
   </tr>
   <tr>
   <td><LABEL for="kolabFreeBusyFuture">{t}Future{/t}</LABEL></td>
-   <td><input id="kolabFreeBusyFuture" name="kolabFreeBusyFuture" size=5 maxlength=6 i {if !$kolabState} disabled {/if}{$kolabFreeBusyFutureACL} value="{$kolabFreeBusyFuture}"> {t}days{/t}</td>
+   <td><input id="kolabFreeBusyFuture" name="kolabFreeBusyFuture" size=5 maxlength=6 {if !$kolabState || $kolabFreeBusyFutureACL != ""} disabled {/if} value="{$kolabFreeBusyFuture}"> {t}days{/t}</td>
   </tr>
  </table>
 
