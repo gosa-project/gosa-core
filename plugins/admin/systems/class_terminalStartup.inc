@@ -9,7 +9,7 @@ class termstartup extends plugin
   /* Generic terminal attributes */
   var $bootmode= "G";
   var $goLdapServerList= array();
-  var $gotoBootKernel= "default-inherit";
+  var $gotoBootKernel= "";
   var $gotoKernelParameters= "";
   var $gotoLdapServer= "";
   var $gotoModules= array();
@@ -35,8 +35,6 @@ class termstartup extends plugin
   function termstartup ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
-
-    $this->gotoBootKernels = array("default-inherit"=>"["._("inherited")."]");
 
     /* Get arrays */
     foreach (array("gotoModules") as $val){
@@ -108,6 +106,9 @@ class termstartup extends plugin
             }else{
               $this->gotoBootKernels[$name]= $value;
             }
+            if(empty($this->gotoBootKernel)){
+              $this->gotoBootKernel = $name; 
+            }
           }
         }
         pclose($fh);
@@ -128,7 +129,7 @@ class termstartup extends plugin
     $ldap->cd($this->config->current['BASE']);
     $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".$this->dn."))");
     if ($ldap->count() == 1){
-      $map= array("gotoLdapServer");
+      $map= array("gotoLdapServer","gotoBootKernel");
       $attrs= $ldap->fetch();
 
       foreach ($map as $name){
@@ -139,6 +140,9 @@ class termstartup extends plugin
         switch ($name){
           case 'gotoLdapServer':
             $this->goLdapServerList= array_merge(array('default-inherit' => _("inherited").' ['.$attrs[$name][0].']' ), $this->goLdapServerList);
+            break;
+          case 'gotoBootKernel':
+            $this->gotoBootKernels= array_merge(array('default-inherit' => _("inherited").' ['.$attrs[$name][0].']' ), $this->goLdapServerList);
             break;
         }
       }

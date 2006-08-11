@@ -9,7 +9,7 @@ class workstartup extends plugin
   /* Generic terminal attributes */
   var $bootmode             = "G";
   var $goLdapServerList     = array();
-  var $gotoBootKernel       = "default-inherited";
+  var $gotoBootKernel       = "";
   var $gotoKernelParameters = "";
   var $gotoLdapServer       = "default-inherited";
   var $gotoModules          = array();
@@ -269,7 +269,7 @@ class workstartup extends plugin
     $this->orig_dn= $this->dn;
 
     /* Handle inheritance value "default" */
-    $this->gotoBootKernels= array("default-inherited" => '['._("inherited").']');
+    $this->gotoBootKernels= array();
 
 
     /* Load hardware list */
@@ -316,6 +316,7 @@ class workstartup extends plugin
             get_class($this));
       } else {
         
+        $first = false; 
         $fh= popen($command, "r");
         while (!feof($fh)) {
           $buffer= trim(fgets($fh, 256));
@@ -323,7 +324,6 @@ class workstartup extends plugin
           if(!empty($buffer)){
 
             $name=$value = $buffer;
-
             if(preg_match("/:/",$buffer)){
               $name = preg_replace("/:.*$/","",$buffer);
               $value= preg_replace("/^.*:/","",$buffer);
@@ -331,6 +331,10 @@ class workstartup extends plugin
             }else{
               $this->gotoBootKernels[$name]= $value;
             }
+            if($this->gotoBootKernel =="" ){
+              $this->gotoBootKernel = $name;
+            }
+
           }
         }
         pclose($fh);
