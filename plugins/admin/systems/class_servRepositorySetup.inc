@@ -61,7 +61,24 @@ class servRepositorySetup  extends plugin
     $smarty= get_smarty();
 
     if((isset($_POST['AddSection']))&&(isset($_POST['SectionName']))&&(!empty($_POST['SectionName']))){
-      $this->Sections[$_POST['SectionName']]=$_POST['SectionName'];
+     
+      /* Replace multiple spaces with a single, and cut of white spaces (trim)*/ 
+      $val = preg_replace("/\ \ * /" , " ", trim($_POST['SectionName']));
+    
+      /* check if there are more than one entry given ( "section1 section2 )*/
+      if(preg_match("/ /",$val)){
+
+        /* Generate list of new section names */
+        $vals = split(" ",$val);
+ 
+        /* Add new entries */ 
+        foreach($vals as $entry){
+          $entry = trim($entry);
+          $this->Sections[$entry]=$entry;
+        }
+      }else{
+        $this->Sections[$val]=$val;
+      }
     }
     
     foreach($_POST as $name => $value){

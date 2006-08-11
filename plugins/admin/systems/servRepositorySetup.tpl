@@ -32,7 +32,7 @@
 		<td>
 			{t}Sections{/t}<br>
 			{$Sections}
-			<input type="text" 		name="SectionName" value="">
+			<input type="text" 	name="SectionName" value="" style='width:100%;'>
 			<input type="submit" 	name="AddSection"  value="{t}Add{/t}">
 		</td>
 	</tr>
