@@ -820,7 +820,7 @@ class workstartup extends plugin
     }
 
     $errorClasses = "";  
-    if(is_array($this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'])) {
+    if(isset($this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'])) {
       foreach($this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'] as $release => $sections){
         $use = true;
 
