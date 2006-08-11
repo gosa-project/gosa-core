@@ -264,7 +264,7 @@ class plugin
     foreach ($this->attributes as $val){
       if (chkacl ($this->acl, "$val") == "" && isset ($_POST["$val"])){
         /* Check for modifications */
-        if (get_magic_quotes_gpc()) {
+        if ((get_magic_quotes_gpc()) && !is_array($_POST["$val"])) {
           $data= stripcslashes($_POST["$val"]);
         } else {
           $data= $this->$val = $_POST["$val"];
