@@ -142,7 +142,7 @@ class termstartup extends plugin
             $this->goLdapServerList= array_merge(array('default-inherit' => _("inherited").' ['.$attrs[$name][0].']' ), $this->goLdapServerList);
             break;
           case 'gotoBootKernel':
-            $this->gotoBootKernels= array_merge(array('default-inherit' => _("inherited").' ['.$attrs[$name][0].']' ), $this->goLdapServerList);
+            $this->gotoBootKernels= array_merge(array('default-inherit' => _("inherited").' ['.$attrs[$name][0].']' ), $this->gotoBootKernels);
             break;
         }
       }

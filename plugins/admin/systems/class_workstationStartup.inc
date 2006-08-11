@@ -277,7 +277,7 @@ class workstartup extends plugin
     $ldap->cd($this->config->current['BASE']);
     $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".$this->dn."))");
     if ($ldap->count() == 1){
-      $map= array("gotoLdapServer","FAIclass","FAIdebianMirror");
+      $map= array("gotoLdapServer","FAIclass","FAIdebianMirror","gotoBootKernel");
       $attrs= $ldap->fetch();
 
       foreach ($map as $name){
@@ -820,24 +820,25 @@ class workstartup extends plugin
     }
 
     $errorClasses = "";  
-  
-    foreach($this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'] as $release => $sections){
-      $use = true;
-      
-      if(!count($this->FAIclass) == 0){
-        foreach($this->FAIclass as $class){
-          if(!in_array($class, $sections['PACKAGES'])){
-            $use = false;
-            $errorClasses[$class] = $class;
-          }else{
-            if(isset($errorClasses[$class])){
-              unset($errorClasses[$class]); 
+    if(is_array($this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'])) {
+      foreach($this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'] as $release => $sections){
+        $use = true;
+
+        if(!count($this->FAIclass) == 0){
+          foreach($this->FAIclass as $class){
+            if(!in_array($class, $sections['PACKAGES'])){
+              $use = false;
+              $errorClasses[$class] = $class;
+            }else{
+              if(isset($errorClasses[$class])){
+                unset($errorClasses[$class]); 
+              }
             }
           }
         }
-      }
-      if($use){
-        $ret[$release]=$release;
+        if($use){
+          $ret[$release]=$release;
+        }
       }
     } 
     if((count($ret) == 0 ) && ($this->FAIdebianMirror != "auto")){
