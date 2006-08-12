@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-05 12:58+0200\n"
+"POT-Creation-Date: 2006-08-11 18:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -119,7 +119,7 @@ msgstr ""
 #: plugins/admin/groups/class_divListGroup.inc:134
 #: plugins/admin/users/class_divListUsers.inc:168
 #: plugins/admin/departments/generic.tpl:63
-#: plugins/admin/systems/class_systemManagement.inc:753
+#: plugins/admin/systems/class_systemManagement.inc:775
 #: plugins/admin/systems/chooser.tpl:12
 #: plugins/admin/ogroups/class_ogroupManagement.inc:368
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:6
@@ -172,7 +172,7 @@ msgstr ""
 
 #: contrib/gosa.conf:119 contrib/gosa.conf:144
 #: plugins/personal/environment/environment.tpl:171
-#: plugins/admin/systems/class_systemManagement.inc:762
+#: plugins/admin/systems/class_systemManagement.inc:784
 #: plugins/admin/ogroups/class_ogroupManagement.inc:371
 #: plugins/generic/references/class_reference.inc:52
 msgid "Printer"
@@ -1044,7 +1044,7 @@ msgstr ""
 #: plugins/personal/generic/generic_certs.tpl:17
 #: plugins/personal/generic/generic_certs.tpl:37
 #: plugins/personal/generic/generic_certs.tpl:57
-#: plugins/personal/connectivity/class_kolabAccount.inc:231
+#: plugins/personal/connectivity/class_kolabAccount.inc:232
 #: plugins/admin/fai/faiPackage.tpl:72
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:266
 #: plugins/admin/groups/class_groupMail.inc:544
@@ -1127,7 +1127,7 @@ msgstr ""
 #: plugins/admin/systems/printerPPDDialog.tpl:23
 #: plugins/admin/systems/remove_glpi.tpl:16
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:75
-#: plugins/admin/systems/class_systemManagement.inc:489
+#: plugins/admin/systems/class_systemManagement.inc:511
 #: plugins/admin/systems/servDNSeditZoneEntries.tpl:21
 #: plugins/admin/systems/class_baseSelectDialog.inc:41
 #: plugins/admin/systems/remove.tpl:16
@@ -1401,7 +1401,7 @@ msgstr ""
 #: plugins/admin/systems/servdnseditzone.tpl:119
 #: plugins/admin/systems/glpi_devices.tpl:760
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:74
-#: plugins/admin/systems/class_systemManagement.inc:487
+#: plugins/admin/systems/class_systemManagement.inc:509
 #: plugins/admin/systems/servDNSeditZoneEntries.tpl:20
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:80
 #: plugins/admin/systems/goSpamServer.tpl:101
@@ -2691,110 +2691,117 @@ msgstr ""
 msgid "This account has no mail extensions."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:260
+#: plugins/personal/mail/class_mailAccount.inc:261
+#: plugins/personal/mail/class_mailAccount.inc:264
 #: plugins/admin/groups/class_groupMail.inc:320
 #: plugins/admin/ogroups/class_mailogroup.inc:40
 msgid "Remove mail account"
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:261
+#: plugins/personal/mail/class_mailAccount.inc:262
+msgid ""
+"This account can't be removed while there are delegations configured. Remove "
+"those delegations first."
+msgstr ""
+
+#: plugins/personal/mail/class_mailAccount.inc:265
 #: plugins/admin/groups/class_groupMail.inc:321
 msgid ""
 "This account has mail features enabled. You can disable them by clicking "
 "below."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:263
+#: plugins/personal/mail/class_mailAccount.inc:268
 #: plugins/admin/groups/class_groupMail.inc:323
 #: plugins/admin/ogroups/class_mailogroup.inc:43
 msgid "Create mail account"
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:263
+#: plugins/personal/mail/class_mailAccount.inc:268
 #: plugins/admin/groups/class_groupMail.inc:324
 msgid ""
 "This account has mail features disabled. You can enable them by clicking "
 "below."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:314
+#: plugins/personal/mail/class_mailAccount.inc:318
 msgid ""
 "You're trying to add an invalid email address to the list of forwarders."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:320
+#: plugins/personal/mail/class_mailAccount.inc:324
 #: plugins/admin/groups/class_groupMail.inc:383
 msgid "Adding your one of your own addresses to the forwarders makes no sense."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:358
-#: plugins/personal/mail/class_mailAccount.inc:363
+#: plugins/personal/mail/class_mailAccount.inc:362
+#: plugins/personal/mail/class_mailAccount.inc:367
 #: plugins/admin/groups/class_groupMail.inc:411
 msgid ""
 "You're trying to add an invalid email address to the list of alternate "
 "addresses."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:373
+#: plugins/personal/mail/class_mailAccount.inc:377
 #: plugins/admin/groups/class_groupMail.inc:416
 msgid "The address you're trying to add is already used by user"
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:626
+#: plugins/personal/mail/class_mailAccount.inc:646
 msgid "Removing mail account failed"
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:730
+#: plugins/personal/mail/class_mailAccount.inc:750
 msgid "Saving mail account failed"
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:778
+#: plugins/personal/mail/class_mailAccount.inc:798
 msgid ""
 "There is no valid mailserver specified, please add one in the system setup."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:783
+#: plugins/personal/mail/class_mailAccount.inc:803
 #: plugins/admin/groups/class_groupMail.inc:803
 msgid "The required field 'Primary address' is not set."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:787
-#: plugins/personal/mail/class_mailAccount.inc:791
+#: plugins/personal/mail/class_mailAccount.inc:807
+#: plugins/personal/mail/class_mailAccount.inc:811
 #: plugins/addons/addressbook/class_addressbook.inc:589
 #: plugins/admin/ogroups/class_mailogroup.inc:71
 msgid "Please enter a valid email address in 'Primary address' field."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:797
+#: plugins/personal/mail/class_mailAccount.inc:817
 #: plugins/admin/groups/class_groupMail.inc:812
 #: plugins/admin/ogroups/class_mailogroup.inc:78
 msgid "The primary address you've entered is already in use."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:803
+#: plugins/personal/mail/class_mailAccount.inc:823
 #: plugins/admin/groups/class_groupMail.inc:818
 msgid "Value in 'Quota size' is not valid."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:812
+#: plugins/personal/mail/class_mailAccount.inc:832
 #: plugins/admin/groups/class_groupMail.inc:827
 msgid "Please specify a vaild mail size for mails to be rejected."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:822
+#: plugins/personal/mail/class_mailAccount.inc:842
 #: plugins/admin/groups/class_groupMail.inc:835
 msgid "You need to set the maximum mail size in order to reject anything."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:826
+#: plugins/personal/mail/class_mailAccount.inc:846
 msgid "You specified Spam settings, but there is no Folder specified."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:971
+#: plugins/personal/mail/class_mailAccount.inc:991
 msgid "Waiting for kolab to remove mail properties."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:973
+#: plugins/personal/mail/class_mailAccount.inc:993
 msgid ""
 "Please remove the mail account first, to allow kolab to call its remove "
 "methods."
@@ -2838,7 +2845,7 @@ msgstr ""
 #: plugins/personal/environment/environment.tpl:180
 #: plugins/personal/environment/kioskManagement.tpl:14
 #: plugins/personal/connectivity/kolab.tpl:33
-#: plugins/personal/connectivity/class_kolabAccount.inc:228
+#: plugins/personal/connectivity/class_kolabAccount.inc:229
 #: plugins/gofax/blocklists/generic.tpl:68
 #: plugins/gofax/faxaccount/generic.tpl:76
 #: plugins/gofax/faxaccount/locals.tpl:60
@@ -2959,7 +2966,7 @@ msgstr ""
 
 #: plugins/personal/mail/generic.tpl:11
 #: plugins/addons/mailqueue/contents.tpl:53 plugins/admin/groups/mail.tpl:14
-#: plugins/admin/systems/class_systemManagement.inc:754
+#: plugins/admin/systems/class_systemManagement.inc:776
 #: plugins/admin/systems/class_SelectDeviceType.inc:34
 #: plugins/admin/ogroups/class_ogroupManagement.inc:367
 #: plugins/generic/references/class_reference.inc:44
@@ -3312,7 +3319,7 @@ msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:203
 #: plugins/admin/systems/class_workstationService.inc:182
-#: plugins/admin/systems/class_workstationStartup.inc:766
+#: plugins/admin/systems/class_workstationStartup.inc:780
 #: plugins/admin/systems/class_terminalService.inc:194
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:212
 msgid "automatic"
@@ -3905,25 +3912,31 @@ msgstr ""
 msgid "User environment settings"
 msgstr ""
 
-#: plugins/personal/environment/class_hotplugDialog.inc:115
+#: plugins/personal/environment/class_hotplugDialog.inc:127
 msgid "Please specify a valid name. Only 0-9 a-Z is allowed."
 msgstr ""
 
-#: plugins/personal/environment/class_hotplugDialog.inc:118
+#: plugins/personal/environment/class_hotplugDialog.inc:130
 msgid "Invalid character in description. Please specify a valid description."
 msgstr ""
 
-#: plugins/personal/environment/class_hotplugDialog.inc:121
-#: plugins/personal/environment/class_hotplugDialog.inc:124
-#: plugins/personal/environment/class_hotplugDialog.inc:127
+#: plugins/personal/environment/class_hotplugDialog.inc:134
 msgid "Please specify a valid id."
 msgstr ""
 
-#: plugins/personal/environment/class_hotplugDialog.inc:133
+#: plugins/personal/environment/class_hotplugDialog.inc:137
+msgid "Please specify a valid vendor id. (2 byte hex like '0xFFFF')"
+msgstr ""
+
+#: plugins/personal/environment/class_hotplugDialog.inc:140
+msgid "Please specify a valid product id. (2 byte hex like '0xFFFF')"
+msgstr ""
+
+#: plugins/personal/environment/class_hotplugDialog.inc:145
 msgid "An Entry with this name already exists."
 msgstr ""
 
-#: plugins/personal/environment/class_hotplugDialog.inc:138
+#: plugins/personal/environment/class_hotplugDialog.inc:150
 msgid "Please select an entry or press cancel."
 msgstr ""
 
@@ -4012,8 +4025,8 @@ msgstr ""
 
 #: plugins/personal/environment/class_environment.inc:538
 #: plugins/personal/environment/class_environment.inc:549
-#: plugins/admin/systems/class_workstationStartup.inc:590
-#: plugins/admin/systems/class_terminalStartup.inc:187
+#: plugins/admin/systems/class_workstationStartup.inc:604
+#: plugins/admin/systems/class_terminalStartup.inc:201
 msgid "You must specify a valid mount point."
 msgstr ""
 
@@ -4250,7 +4263,7 @@ msgid "Apply"
 msgstr ""
 
 #: plugins/personal/environment/class_logonManagementDialog.inc:97
-msgid "Specified name is invalid."
+msgid "Specified name should only consist of uper-/lowercase characters."
 msgstr ""
 
 #: plugins/personal/environment/class_logonManagementDialog.inc:101
@@ -4275,15 +4288,28 @@ msgid "Device name"
 msgstr ""
 
 #: plugins/personal/environment/hotplugDialogNew.tpl:28
-msgid "Vendor ID"
+#: plugins/admin/systems/glpi_devices.tpl:76
+msgid "Serial number"
 msgstr ""
 
-#: plugins/personal/environment/hotplugDialogNew.tpl:35
-msgid "Device ID"
+#: plugins/personal/environment/hotplugDialogNew.tpl:28
+msgid "(iSerial)"
+msgstr ""
+
+#: plugins/personal/environment/hotplugDialogNew.tpl:36
+msgid "Vendor-ID"
+msgstr ""
+
+#: plugins/personal/environment/hotplugDialogNew.tpl:36
+msgid "(idVendor)"
 msgstr ""
 
 #: plugins/personal/environment/hotplugDialogNew.tpl:43
-msgid "Product ID"
+msgid "Product-ID"
+msgstr ""
+
+#: plugins/personal/environment/hotplugDialogNew.tpl:43
+msgid "(idProduct)"
 msgstr ""
 
 #: plugins/personal/environment/class_kioskManagementDialog.inc:67
@@ -4809,30 +4835,30 @@ msgstr ""
 msgid "Mail size"
 msgstr ""
 
-#: plugins/personal/connectivity/kolab.tpl:40
+#: plugins/personal/connectivity/kolab.tpl:39
 msgid "No mail size restriction for this account"
 msgstr ""
 
-#: plugins/personal/connectivity/kolab.tpl:48
+#: plugins/personal/connectivity/kolab.tpl:47
 msgid "Free Busy information"
 msgstr ""
 
-#: plugins/personal/connectivity/kolab.tpl:51
+#: plugins/personal/connectivity/kolab.tpl:50
 #: plugins/admin/systems/servRepositorySetup.tpl:24
 msgid "URL"
 msgstr ""
 
-#: plugins/personal/connectivity/kolab.tpl:55
+#: plugins/personal/connectivity/kolab.tpl:54
 msgid "Future"
 msgstr ""
 
-#: plugins/personal/connectivity/kolab.tpl:56
+#: plugins/personal/connectivity/kolab.tpl:55
 #: plugins/personal/connectivity/oxchange.tpl:26
 #: plugins/personal/connectivity/oxchange.tpl:30
 msgid "days"
 msgstr ""
 
-#: plugins/personal/connectivity/kolab.tpl:61
+#: plugins/personal/connectivity/kolab.tpl:60
 msgid "Invitation policy"
 msgstr ""
 
@@ -5101,34 +5127,34 @@ msgstr ""
 msgid "Manual"
 msgstr ""
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:205
+#: plugins/personal/connectivity/class_kolabAccount.inc:206
 msgid "Anonymous"
 msgstr ""
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:262
+#: plugins/personal/connectivity/class_kolabAccount.inc:267
 #, php-format
 msgid "Removing of user/kolab account with dn '%s' failed."
 msgstr ""
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:273
+#: plugins/personal/connectivity/class_kolabAccount.inc:278
 msgid "The value specified as Free Busy future needs to be an integer."
 msgstr ""
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:278
+#: plugins/personal/connectivity/class_kolabAccount.inc:283
 msgid "The value specified as Free Busy Information URL is invalid."
 msgstr ""
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:292
+#: plugins/personal/connectivity/class_kolabAccount.inc:297
 #, php-format
 msgid "The invitation policy entry for address '%s' is not valid."
 msgstr ""
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:300
+#: plugins/personal/connectivity/class_kolabAccount.inc:305
 #, php-format
 msgid "There's no mail user with address '%s' for your invitation policy!"
 msgstr ""
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:379
+#: plugins/personal/connectivity/class_kolabAccount.inc:384
 #, php-format
 msgid "Saving of user/kolab account with dn '%s' failed."
 msgstr ""
@@ -6757,8 +6783,8 @@ msgstr ""
 
 #: plugins/admin/fai/class_faiManagement.inc:159
 #: plugins/admin/fai/class_faiManagement.inc:202
-#: plugins/admin/systems/class_systemManagement.inc:313
-#: plugins/admin/systems/class_systemManagement.inc:373
+#: plugins/admin/systems/class_systemManagement.inc:319
+#: plugins/admin/systems/class_systemManagement.inc:379
 msgid "You are not allowed to delete this component!"
 msgstr ""
 
@@ -8292,7 +8318,7 @@ msgid ""
 msgstr ""
 
 #: plugins/admin/users/template.tpl:15
-#: plugins/admin/systems/class_systemManagement.inc:747
+#: plugins/admin/systems/class_systemManagement.inc:769
 msgid "Template"
 msgstr ""
 
@@ -8828,9 +8854,9 @@ msgstr ""
 
 #: plugins/admin/systems/class_terminalInfo.inc:67
 #: plugins/admin/systems/class_workstationService.inc:252
-#: plugins/admin/systems/class_workstationStartup.inc:465
+#: plugins/admin/systems/class_workstationStartup.inc:479
 #: plugins/admin/systems/class_terminalService.inc:252
-#: plugins/admin/systems/class_terminalStartup.inc:151
+#: plugins/admin/systems/class_terminalStartup.inc:165
 #: plugins/admin/systems/class_terminalGeneric.inc:230
 msgid "This 'dn' has no terminal features."
 msgstr ""
@@ -9325,10 +9351,9 @@ msgstr ""
 #: plugins/admin/systems/class_workstationService.inc:233
 #: plugins/admin/systems/class_workstationService.inc:234
 #: plugins/admin/systems/class_workstationService.inc:235
-#: plugins/admin/systems/class_workstationStartup.inc:272
 #: plugins/admin/systems/class_workstationStartup.inc:290
 #: plugins/admin/systems/class_workstationStartup.inc:294
-#: plugins/admin/systems/class_workstationStartup.inc:765
+#: plugins/admin/systems/class_workstationStartup.inc:779
 #: plugins/admin/systems/class_workstationGeneric.inc:118
 #: plugins/admin/systems/class_terminalService.inc:72
 #: plugins/admin/systems/class_terminalService.inc:100
@@ -9344,9 +9369,9 @@ msgstr ""
 #: plugins/admin/systems/class_terminalService.inc:226
 #: plugins/admin/systems/class_terminalService.inc:229
 #: plugins/admin/systems/class_terminalService.inc:232
-#: plugins/admin/systems/class_terminalStartup.inc:39
-#: plugins/admin/systems/class_terminalStartup.inc:111
-#: plugins/admin/systems/class_terminalStartup.inc:131
+#: plugins/admin/systems/class_terminalStartup.inc:122
+#: plugins/admin/systems/class_terminalStartup.inc:142
+#: plugins/admin/systems/class_terminalStartup.inc:145
 #: plugins/admin/systems/class_terminalGeneric.inc:114
 #: plugins/admin/systems/class_terminalGeneric.inc:280
 msgid "inherited"
@@ -9381,37 +9406,37 @@ msgid "Saving workstation services failed"
 msgstr ""
 
 #: plugins/admin/systems/class_workstationStartup.inc:315
-#: plugins/admin/systems/class_terminalStartup.inc:93
+#: plugins/admin/systems/class_terminalStartup.inc:91
 #, php-format
 msgid ""
 "Command '%s', specified as KERNELS hook for plugin '%s' doesn't seem to "
 "exist."
 msgstr ""
 
-#: plugins/admin/systems/class_workstationStartup.inc:400
+#: plugins/admin/systems/class_workstationStartup.inc:414
 msgid ""
 "There are packages in your configuration, which can't be resolved with "
 "current server/release settings."
 msgstr ""
 
-#: plugins/admin/systems/class_workstationStartup.inc:445
+#: plugins/admin/systems/class_workstationStartup.inc:459
 msgid "Please select a 'FAI server' or remove the 'FAI classes'."
 msgstr ""
 
-#: plugins/admin/systems/class_workstationStartup.inc:503
+#: plugins/admin/systems/class_workstationStartup.inc:517
 msgid ""
 "There is already a profile in your selection that contain partition table "
 "configurations."
 msgstr ""
 
-#: plugins/admin/systems/class_workstationStartup.inc:836
+#: plugins/admin/systems/class_workstationStartup.inc:851
 #, php-format
 msgid ""
 "Can't resolve one or more of the given FAIclass(es) [%s] in FAI server '%s'. "
 "Server was reset to 'auto'."
 msgstr ""
 
-#: plugins/admin/systems/class_workstationStartup.inc:847
+#: plugins/admin/systems/class_workstationStartup.inc:862
 #, php-format
 msgid ""
 "Can't resolve the given FAIclass(es) [%s] anyway, please check your FAI "
@@ -9420,18 +9445,18 @@ msgid ""
 "be saved."
 msgstr ""
 
-#: plugins/admin/systems/class_workstationStartup.inc:1014
+#: plugins/admin/systems/class_workstationStartup.inc:1029
 msgid "Saving workstation startup settings failed"
 msgstr ""
 
-#: plugins/admin/systems/class_workstationStartup.inc:1064
+#: plugins/admin/systems/class_workstationStartup.inc:1079
 #, php-format
 msgid ""
 "Can't execute specified REPOSITORY_HOOK '%s' please check your gosa.conf."
 msgstr ""
 
-#: plugins/admin/systems/class_workstationStartup.inc:1066
-#: plugins/admin/systems/class_servRepositorySetup.inc:172
+#: plugins/admin/systems/class_workstationStartup.inc:1081
+#: plugins/admin/systems/class_servRepositorySetup.inc:189
 #, php-format
 msgid ""
 "The specified REPOSITORY_HOOK '%s', specified in your gosa.conf, returns an "
@@ -9929,8 +9954,8 @@ msgid ""
 "activated."
 msgstr ""
 
-#: plugins/admin/systems/class_workstationGeneric.inc:424
-#: plugins/admin/systems/class_workstationGeneric.inc:442
+#: plugins/admin/systems/class_workstationGeneric.inc:423
+#: plugins/admin/systems/class_workstationGeneric.inc:441
 #: plugins/admin/ogroups/class_termgroup.inc:290
 msgid "Saving workstation failed"
 msgstr ""
@@ -10015,7 +10040,7 @@ msgid "New Terminal template"
 msgstr ""
 
 #: plugins/admin/systems/class_divListSystem.inc:96
-#: plugins/admin/systems/class_systemManagement.inc:760
+#: plugins/admin/systems/class_systemManagement.inc:782
 msgid "New Terminal"
 msgstr ""
 
@@ -10024,7 +10049,7 @@ msgid "New Workstation template"
 msgstr ""
 
 #: plugins/admin/systems/class_divListSystem.inc:98
-#: plugins/admin/systems/class_systemManagement.inc:761
+#: plugins/admin/systems/class_systemManagement.inc:783
 msgid "New Workstation"
 msgstr ""
 
@@ -10669,10 +10694,6 @@ msgstr ""
 msgid "BNC"
 msgstr ""
 
-#: plugins/admin/systems/glpi_devices.tpl:76
-msgid "Serial number"
-msgstr ""
-
 #: plugins/admin/systems/glpi_devices.tpl:83
 msgid "Additional serial number"
 msgstr ""
@@ -10909,7 +10930,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: plugins/admin/systems/class_terminalStartup.inc:386
+#: plugins/admin/systems/class_terminalStartup.inc:400
 msgid "Saving terminal startup settings failed"
 msgstr ""
 
@@ -11281,89 +11302,96 @@ msgstr ""
 msgid "Systems"
 msgstr ""
 
-#: plugins/admin/systems/class_systemManagement.inc:211
+#: plugins/admin/systems/class_systemManagement.inc:217
 msgid "You can't edit this object type yet!"
 msgstr ""
 
-#: plugins/admin/systems/class_systemManagement.inc:236
+#: plugins/admin/systems/class_systemManagement.inc:242
 msgid "Passwords entered as new and repeated do not match!"
 msgstr ""
 
-#: plugins/admin/systems/class_systemManagement.inc:253
+#: plugins/admin/systems/class_systemManagement.inc:259
 msgid "You are not allowed to set this systems password!"
 msgstr ""
 
-#: plugins/admin/systems/class_systemManagement.inc:307
+#: plugins/admin/systems/class_systemManagement.inc:313
 #, php-format
 msgid "You're about to delete all information about the component at '%s'."
 msgstr ""
 
-#: plugins/admin/systems/class_systemManagement.inc:627
+#: plugins/admin/systems/class_systemManagement.inc:412
+#, php-format
+msgid ""
+"Can't set gotoMode to status 'avtice', the current object couldn't be "
+"identified."
+msgstr ""
+
+#: plugins/admin/systems/class_systemManagement.inc:649
 msgid "New terminal"
 msgstr ""
 
-#: plugins/admin/systems/class_systemManagement.inc:629
+#: plugins/admin/systems/class_systemManagement.inc:651
 msgid "New workstation"
 msgstr ""
 
-#: plugins/admin/systems/class_systemManagement.inc:631
+#: plugins/admin/systems/class_systemManagement.inc:653
 msgid "New Device"
 msgstr ""
 
-#: plugins/admin/systems/class_systemManagement.inc:646
+#: plugins/admin/systems/class_systemManagement.inc:668
 msgid "Terminal template for"
 msgstr ""
 
-#: plugins/admin/systems/class_systemManagement.inc:658
+#: plugins/admin/systems/class_systemManagement.inc:680
 msgid "Workstation template for"
 msgstr ""
 
-#: plugins/admin/systems/class_systemManagement.inc:746
+#: plugins/admin/systems/class_systemManagement.inc:768
 msgid "New System from incoming"
 msgstr ""
 
-#: plugins/admin/systems/class_systemManagement.inc:748
+#: plugins/admin/systems/class_systemManagement.inc:770
 #: plugins/admin/systems/class_SelectDeviceType.inc:34
 #: plugins/admin/ogroups/class_ogroupManagement.inc:370
 msgid "Terminal"
 msgstr ""
 
-#: plugins/admin/systems/class_systemManagement.inc:749
+#: plugins/admin/systems/class_systemManagement.inc:771
 #: plugins/admin/systems/class_SelectDeviceType.inc:34
 #: plugins/admin/ogroups/class_ogroupManagement.inc:369
 #: plugins/generic/references/class_reference.inc:48
 msgid "Workstation"
 msgstr ""
 
-#: plugins/admin/systems/class_systemManagement.inc:750
+#: plugins/admin/systems/class_systemManagement.inc:772
 msgid "Workstation is installing"
 msgstr ""
 
-#: plugins/admin/systems/class_systemManagement.inc:751
+#: plugins/admin/systems/class_systemManagement.inc:773
 msgid "Workstation is waiting for action"
 msgstr ""
 
-#: plugins/admin/systems/class_systemManagement.inc:752
+#: plugins/admin/systems/class_systemManagement.inc:774
 msgid "Workstation installation failed"
 msgstr ""
 
-#: plugins/admin/systems/class_systemManagement.inc:755
+#: plugins/admin/systems/class_systemManagement.inc:777
 msgid "Server is installing"
 msgstr ""
 
-#: plugins/admin/systems/class_systemManagement.inc:756
+#: plugins/admin/systems/class_systemManagement.inc:778
 msgid "Server is waiting for action"
 msgstr ""
 
-#: plugins/admin/systems/class_systemManagement.inc:757
+#: plugins/admin/systems/class_systemManagement.inc:779
 msgid "Server installation failed"
 msgstr ""
 
-#: plugins/admin/systems/class_systemManagement.inc:758
+#: plugins/admin/systems/class_systemManagement.inc:780
 msgid "Winstation"
 msgstr ""
 
-#: plugins/admin/systems/class_systemManagement.inc:759
+#: plugins/admin/systems/class_systemManagement.inc:781
 msgid "Network Device"
 msgstr ""
 
@@ -11514,15 +11542,15 @@ msgstr ""
 msgid "Saving DNS entries failed"
 msgstr ""
 
-#: plugins/admin/systems/class_servRepositorySetup.inc:119
+#: plugins/admin/systems/class_servRepositorySetup.inc:136
 msgid "Please enter a value for 'release'."
 msgstr ""
 
-#: plugins/admin/systems/class_servRepositorySetup.inc:123
+#: plugins/admin/systems/class_servRepositorySetup.inc:140
 msgid "Please specify a valid value for 'url'."
 msgstr ""
 
-#: plugins/admin/systems/class_servRepositorySetup.inc:170
+#: plugins/admin/systems/class_servRepositorySetup.inc:187
 #, php-format
 msgid ""
 "Can't execute specified REPOSITORY_HOOK '%s'. Please check your gosa.conf."
@@ -12076,7 +12104,7 @@ msgid "Rule"
 msgstr ""
 
 #: plugins/admin/systems/class_goSpamServer.inc:47
-#: plugins/admin/systems/class_goSpamServer.inc:387
+#: plugins/admin/systems/class_goSpamServer.inc:391
 msgid "Spamassassin"
 msgstr ""
 
@@ -12100,28 +12128,32 @@ msgid ""
 "clicking below."
 msgstr ""
 
-#: plugins/admin/systems/class_goSpamServer.inc:270
+#: plugins/admin/systems/class_goSpamServer.inc:233
+msgid "Specified value is not a valid 'trusted network' value."
+msgstr ""
+
+#: plugins/admin/systems/class_goSpamServer.inc:274
 #, php-format
 msgid "Removing of server services/spamassassin with dn '%s' failed."
 msgstr ""
 
-#: plugins/admin/systems/class_goSpamServer.inc:318
+#: plugins/admin/systems/class_goSpamServer.inc:322
 #, php-format
 msgid "Saving of server services/spamassassin with dn '%s' failed."
 msgstr ""
 
-#: plugins/admin/systems/class_goSpamServer.inc:327
+#: plugins/admin/systems/class_goSpamServer.inc:331
 msgid "Required score must be a numeric value."
 msgstr ""
 
-#: plugins/admin/systems/class_goSpamServer.inc:447
+#: plugins/admin/systems/class_goSpamServer.inc:451
 #: plugins/admin/systems/class_goVirusServer.inc:305
 #, php-format
 msgid ""
 "Command '%s', specified as ACTION_HOOK for plugin '%s' doesn't seem to exist."
 msgstr ""
 
-#: plugins/admin/systems/class_goSpamServer.inc:471
+#: plugins/admin/systems/class_goSpamServer.inc:475
 #, php-format
 msgid "Set status flag for server services/spamassassin with dn '%s' failed."
 msgstr ""
