@@ -286,7 +286,6 @@ class faiPackage extends plugin
           $this->usedPackages[$pkg]= $pkg;
         }
       }
-      print_a($this->usedPackages);
     }
 
     /* Save Configuration */

@@ -41,7 +41,7 @@ class divListFai extends MultiSelectWindow
 
     /* Set list strings */
     $this->SetTitle(_("List of FAI classes"));
-    $this->SetSummary(_("This table displays all FAL classes, in the selected tree."));
+    $this->SetSummary(_("This table displays all FAI classes in the selected tree."));
 
     /* Result page will look like a headpage */
     $this->SetHeadpageMode();
