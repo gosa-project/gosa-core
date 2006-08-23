@@ -1003,13 +1003,6 @@ class workstartup extends plugin
 
     /* Remove FAI objects if no FAI class is selected */ 
     if((count($this->FAIclass)==0) && (!isset($checkFAIstate['FAIstate']))){
-      $tmp = array();
-      foreach($this->attrs['objectClass'] as $class){
-        if($class != "FAIobject"){
-          $tmp[] = $class;
-        }
-      }
-      $this->attrs['objectClass']     = $tmp;
       $this->attrs['FAIclass']        = array();
       $this->attrs['FAIdebianMirror'] = array();
     }
