@@ -50,7 +50,7 @@ class workgeneric extends plugin
       "ghGfxAdapter", "ghSoundAdapter", "gotoLastUser", "l","FAIscript");
   var $objectclasses= array("top", "gotoWorkstation", "GOhard","FAIobject");
 
-  var $mapActions   = array("reboot"          => "",
+  var $mapActions   = array("reboot"          => "localboot",
                             "instant_update"  => "softupdate",
                             "update"          => "sceduledupdate",
                             "reinstall"       => "install",
