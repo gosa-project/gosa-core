@@ -27,10 +27,10 @@
   							<tr>
    								<td>
 									<LABEL for="sn">
-										{t}First name{/t}{$must}
+										{t}Last name{/t}{$must}
 									</LABEL>, 
 									<LABEL for="givenName">
-										{t}Last name{/t}{$must}
+										{t}First name{/t}{$must}
 									</LABEL>
 								</td>
    								<td>	
