@@ -197,9 +197,17 @@ class posixAccount extends plugin
       asort($this->printerList);
     }
 
+    /* Set tag attribute if we've tagging activated */
+    $filter= "(objectClass=posixGroup)";
+    $ui= get_userinfo();
+    if ($ui->gosaUnitTag != "" && isset($config->current['STRICT_UNITS']) &&
+        preg_match('/TRUE/i', $config->current['STRICT_UNITS'])){
+      $filter= "(&(objectClass=posixGroup)(gosaUnitTag=".$ui->gosaUnitTag."))";
+    }
+
     /* Generate group list */
     $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(objectClass=posixGroup)", array("cn", "gidNumber"));
+    $ldap->search("$filter", array("cn", "gidNumber"));
     $this->secondaryGroups[]= "- "._("automatic")." -";
     while ($attrs= $ldap->fetch()){
       $this->secondaryGroups[$attrs['gidNumber'][0]]= $attrs['cn'][0];

@@ -85,7 +85,16 @@ class selectPrinterDialog extends plugin
     $a_return=array();
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->depselect);
-    $ldap->search("(&(objectClass=gotoPrinter)(cn=".$this->regex."))",array("*"));
+
+    /* Set tag attribute if we've tagging activated */
+    $tag= "";
+    $ui= get_userinfo();
+    if ($ui->gosaUnitTag != "" && isset($this->config->current['STRICT_UNITS']) &&
+        preg_match('/TRUE/i', $this->config->current['STRICT_UNITS'])){
+      $tag= "(gosaUnitTag=".$ui->gosaUnitTag.")";
+    }
+
+    $ldap->search("(&(objectClass=gotoPrinter)$tag(cn=".$this->regex."))",array("*"));
     while($printer = $ldap->fetch()){
 
       if(isset($this->AlreadyAssigned[$printer['cn'][0]])) continue;

@@ -633,7 +633,16 @@ class config  {
   function getShareList($listboxEntry = false)
   {
     $ldap= $this->get_ldap_link();
-    $a_res = $ldap->search("(objectClass=goShareServer)",array("goExportEntry","cn"));
+
+    /* Set tag attribute if we've tagging activated */
+    $tag= "";
+    $ui= get_userinfo();
+    if ($ui->gosaUnitTag != "" && isset($this->current['STRICT_UNITS']) &&
+        preg_match('/TRUE/i', $this->current['STRICT_UNITS'])){
+      $tag= "(gosaUnitTag=".$ui->gosaUnitTag.")";
+    }
+
+    $a_res = $ldap->search("(&(objectClass=goShareServer)$tag(objectClass=goServer))",array("goExportEntry","cn"));
     $return= array();
     while($entry = $ldap->fetch($a_res)){
       if(isset($entry['goExportEntry']['count'])){

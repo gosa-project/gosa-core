@@ -73,6 +73,7 @@ class printgeneric extends plugin
     }
 
     $this->orig_dn = $this->dn;
+    $ui= get_userinfo();
 
     /* Get printer settings, possibly dn has changed */
     plugin::plugin ($config, $this->dn);
@@ -92,7 +93,6 @@ class printgeneric extends plugin
 
     /* Set base */
     if ($this->dn == "new"){
-      $ui= get_userinfo();
       $this->base= dn2base($ui->dn);
       $this->cn= "";
     } else {
@@ -128,10 +128,17 @@ class printgeneric extends plugin
         unset($this->attrs[$attr]['count']);
       }
 
+      /* Set tag attribute if we've tagging activated */
+      $tag= "";
+      if ($ui->gosaUnitTag != "" && isset($config->current['STRICT_UNITS']) &&
+          preg_match('/TRUE/i', $config->current['STRICT_UNITS'])){
+        $tag= "(gosaUnitTag=".$ui->gosaUnitTag.")";
+      }
+
       if(isset($this->attrs[$attr])){
         foreach($this->attrs[$attr] as $mem){
           if(preg_match("/Group/",$type)){
-            $ldap->search("(&(objectClass=posixGroup)(cn=".$mem."))",array("cn","description"));
+            $ldap->search("(&(objectClass=posixGroup)$tag(cn=".$mem."))",array("cn","description"));
             if($ldap->count()){
               $entry = $ldap->fetch();
               if(isset($entry['cn'])){
@@ -139,7 +146,7 @@ class printgeneric extends plugin
               }
             }
           }else{
-            $ldap->search("(&(objectClass=person)(objectClass=inetOrgPerson)(uid=".$mem."))",array("cn","uid"));
+            $ldap->search("(&(objectClass=person)$tag(objectClass=inetOrgPerson)(uid=".$mem."))",array("cn","uid"));
             if($ldap->count()){
               $entry = $ldap->fetch();
               if(isset($entry['uid'])){

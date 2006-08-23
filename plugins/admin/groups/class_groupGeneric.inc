@@ -439,7 +439,16 @@ class group extends plugin
     /* Create display list of users matching regex & filter 
      */
     $this->displayUsers = array();
-    $filter = "(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(!(uid=*$))(|(uid=".$regex.")(sn=".$regex.")(givenName=".$regex.")))";
+
+    /* Set tag attribute if we've tagging activated */
+    $tag= "";
+    $ui= get_userinfo();
+    if ($ui->gosaUnitTag != "" && isset($this->config->current['STRICT_UNITS']) &&
+        preg_match('/TRUE/i', $this->config->current['STRICT_UNITS'])){
+      $tag= "(gosaUnitTag=".$ui->gosaUnitTag.")";
+    }
+
+    $filter = "(&(objectClass=gosaAccount)$tag(!(objectClass=gosaUserTemplate))(!(uid=*$))(|(uid=".$regex.")(sn=".$regex.")(givenName=".$regex.")))";
 
     /* Search in current tree or within subtrees depending on the checkbox from filter section */
     if($gufilter['SubSearchGroup']){
