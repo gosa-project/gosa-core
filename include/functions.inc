@@ -973,7 +973,7 @@ function is_uid($uid)
 
   /* STRICT adds spaces and case insenstivity to the uid check.
      This is dangerous and should not be used. */
-  if (isset($config->current['STRICT']) && preg_match('/^no$/i', $config->current['STRICT'])){
+  if (isset($config->current['STRICT']) && preg_match('/^(no|false)$/i', $config->current['STRICT'])){
     return preg_match ("/^[a-z0-9 _.-]+$/i", $uid);
   } else {
     return preg_match ("/^[a-z0-9_-]+$/", $uid);
