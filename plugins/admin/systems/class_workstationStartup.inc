@@ -9,7 +9,7 @@ class workstartup extends plugin
   /* Generic terminal attributes */
   var $bootmode             = "G";
   var $goLdapServerList     = array();
-  var $gotoBootKernel       = "";
+  var $gotoBootKernel       = "default-inherited";
   var $gotoKernelParameters = "";
   var $gotoLdapServer       = "default-inherited";
   var $gotoModules          = array();
