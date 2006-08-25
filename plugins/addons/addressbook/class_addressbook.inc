@@ -47,10 +47,17 @@ class addressbook extends plugin
 			"facsimileTelephoneNumber", "pager");
 	var $objectclasses= array("top", "person", "organizationalPerson", "inetOrgPerson");
 
+	var $abobjectclass= "dc=addressbook";
+
 	function addressbook ($config, $dn= NULL)
 	{
 		/* Include config object */
 		$this->config= $config;
+
+		$aoc = search_config($this->config->data['MENU'], "addressbook", "LDAP_OBJECT_CLASS");
+		if ($aoc != ""){
+			$this->abobjectclass  = $aoc;
+		}
 
 		/* Get global filter config */
 		if (!is_global("phonefilter")){
@@ -307,7 +314,7 @@ class addressbook extends plugin
 		$bases= array();
 		$filter= "";
 		if ($phonefilter['global'] == "checked"){
-			$bases[]= preg_replace("/".$this->config->current['BASE']."/", "dc=addressbook,".$this->config->current['BASE'], $this->search_base);
+			$bases[]= preg_replace("/".$this->config->current['BASE']."/", $this->abobjectclass.",".$this->config->current['BASE'], $this->search_base);
 		} else {
 			$filter= '(objectClass=gosaAccount)';
 		}
@@ -461,7 +468,7 @@ class addressbook extends plugin
 					$smarty->assign("info_$name", "-");
 				}
 			}
-			if (preg_match("/,dc=addressbook,/", $_SESSION['show_info'])){
+			if (preg_match("/,".$this->abobjectclass.",/", $_SESSION['show_info'])){
 				$storage= _("global addressbook");
 				$smarty->assign("internal", 0);
 			} else {
@@ -592,7 +599,7 @@ class addressbook extends plugin
 	/* Assemble cn/dn */
 	$this->cn= $this->givenName." ".$this->sn;
 	if ($this->orig_cn != $this->cn || $this->storage_base != $this->orig_storage_base){
-		$this->new_dn= $this->create_unique_dn("cn", preg_replace("/,*".$this->config->current['BASE']."$/", "", $this->storage_base).",dc=addressbook,".$this->config->current['BASE']);
+		$this->new_dn= $this->create_unique_dn("cn", preg_replace("/,*".$this->config->current['BASE']."$/", "", $this->storage_base).",".$this->abobjectclass.",".$this->config->current['BASE']);
 		if ($this->new_dn == "none"){
 			$message[]= _("Cannot create a unique DN for your entry. Please fill more formular fields.");
 			return ($message);
@@ -613,7 +620,7 @@ class addressbook extends plugin
 	{
 		/* Load base attributes */
 		plugin::plugin ($this->config, $this->dn);
-		$this->storage_base= preg_replace('/^[^,]+,/', '', preg_replace('/dc=addressbook,/', '', $this->dn));
+		$this->storage_base= preg_replace('/^[^,]+,/', '', preg_replace('/'.$this->abobjectclass.',/', '', $this->dn));
 	}
 
 
