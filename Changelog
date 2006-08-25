@@ -1,6 +1,9 @@
 GOsa2 changelog
 ===============
 
+* gosa 2.5.4
+  - Included patch to choose the addressbook base
+
 * gosa 2.5.3
   - Fixed problem in reloading departments when we've PHP4
   - Fixed gotoPrinter membership problem.
