@@ -210,7 +210,6 @@ class termgroup extends plugin
 
     $smarty->assign("inheritTimeServer",$this->inheritTimeServer);
     $smarty->assign("modes", $this->modes);
-    $smarty->assign("actions", array("wake" => _("Wake up"), "halt" => _("Switch off"), "reboot" => _("Reboot")));
     $smarty->assign("actionACL", chkacl($this->acl, 'action'));
     $smarty->assign("gotoNtpServers",$this->gotoNtpServers); 
     $smarty->assign("syslogservers", $this->config->data['SERVERS']['SYSLOG']); 
