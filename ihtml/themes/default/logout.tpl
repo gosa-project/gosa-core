@@ -10,5 +10,12 @@
  <center><input type="submit" name="dummy" value="{t}Sign in again{/t}"></center>
 </div>
 </form>
-
 </body>
+<!-- Place cursor -->
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+  document.mainform.dummy.focus();
+  -->
+</script>
+
+
