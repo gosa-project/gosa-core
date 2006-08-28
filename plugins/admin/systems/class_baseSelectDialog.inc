@@ -60,22 +60,24 @@ class baseSelectDialog extends MultiSelectWindow
   function setEntries()
   {
     $this->ClearElementsList();
-    $ldap = $this->config->get_ldap_link();
-    $ldap->cd($this->selectedBase);
-    $ldap->ls("(&(objectClass=gosaDepartment)
-                 (|(ou=".$this->base_selection_regex.")
-                   (cn=".$this->base_selection_regex.")
-                   (description=".$this->base_selection_regex.")))",
-              $this->selectedBase,array("ou","description","cn"));
 
     $link = "<a href='?plug=".$_GET['plug']."&open_dep=%s'>%s</a>";
 
     $base_back          = preg_replace("/^[^,]+,/","",$this->selectedBase);
     $base_back          = convert_department_dn($base_back);
   
+
+    $filter = "(&(objectClass=gosaDepartment)".
+                "(|(ou=".$this->base_selection_regex.")".
+                  "(cn=".$this->base_selection_regex.")".
+                  "(description=".$this->base_selection_regex.")))";
+
+    $ui = get_userinfo();
+    $res = get_list($filter,$ui->subtreeACL,$this->selectedBase,array("ou","description","cn"),GL_SIZELIMIT);
+
     /* Add departments, to be able to switch into them
      */
-    while($attrs = $ldap->fetch()){
+    foreach($res as $attrs){
  
       $key = $attrs['dn']  ;
       $val = $attrs['ou'][0];
