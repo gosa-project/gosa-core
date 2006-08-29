@@ -1015,7 +1015,7 @@ class environment extends plugin
     $this->attrs['gotoShare']=array();
     foreach($this->gotoShares as $name => $share){
       $mntp= $share['mountPoint'];
-      if (!preg_match('=^[a-z0-9+_/%-]+$=i', $mntp)){
+      if (!preg_match('=^[a-z0-9+\._/%-]+$=i', $mntp)){
         $mntp= base64_encode($mntp);
       }
       $this->attrs['gotoShare'][] =$share['server']."|".$share['name']."|".$mntp."|".$share['PwdHash']."|".$share['Username'];
