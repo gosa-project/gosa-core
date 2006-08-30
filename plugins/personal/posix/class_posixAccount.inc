@@ -790,7 +790,7 @@ class posixAccount extends plugin
     /* Fill gecos */
     if (isset($this->parent) && $this->parent != NULL){
       $this->gecos= rewrite($this->parent->by_object['user']->cn);
-      if (!preg_match('/[a-z0-9 -]/i', $this->gecos)){
+      if (!preg_match('/^[a-z0-9 -]+$/i', $this->gecos)){
         $this->gecos= "";
       }
     }
