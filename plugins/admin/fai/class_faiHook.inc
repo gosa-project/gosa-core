@@ -171,8 +171,6 @@ class faiHook extends plugin
     }
     ///// Ende new list handling
 
-    print_a($this->SubObjects);
-
     /* Add new sub object */
     if(isset($_POST['AddSubObject'])){
       $this->dialog= new $this->subClassName($this->config,"new");
