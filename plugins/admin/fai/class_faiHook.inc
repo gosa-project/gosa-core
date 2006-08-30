@@ -24,8 +24,10 @@ class faiHook extends plugin
   var $subClassName     = "faiHookEntry";      
 
   /* Attributes to initialise for each subObject */
-  var $subAttributes    = array("cn","description","FAItask","FAIscript"); 
+  var $subAttributes    = array("cn","description","FAItask"); 
+  var $sub_Load_Later   = array("FAIscript"); 
   var $sub64coded       = array();
+  var $subBinary        = array("FAIscript");
 
   /* Specific attributes */
   var $cn               = "";       // The class name for this object
@@ -66,33 +68,51 @@ class faiHook extends plugin
        */
       $ldap     = $this->config->get_ldap_link();
       $ldap->cd ($this->dn);
-      $ldap->search("(&(objectClass=FAIclass)(objectClass=".$this->subClass."))",$this->subAttributes);
+      $ldap->search("(&(objectClass=FAIclass)(objectClass=".$this->subClass."))",array("dn"));
 
       while($object = $ldap->fetch()){
+
         /* Set status for save management */
-
-        foreach($this->subAttributes as $attrs){
-          if(!isset($object[$attrs][0])){
-            $this->SubObjects[$object['cn'][0]][$attrs]="";
-          }else{
-            $this->SubObjects[$object['cn'][0]][$attrs]=$object[$attrs][0];
-          }
-        }
-
-        $this->SubObjects[$object['cn'][0]]['status']      = "edited";
-        $this->SubObjects[$object['cn'][0]]['dn']          = $object['dn'];
-
-        foreach($this->sub64coded as $codeIt){
-          $this->SubObjects[$object['cn'][0]][$codeIt]=base64_decode($this->SubObjects[$object['cn'][0]][$codeIt]);
-        }
-
-        foreach($this->subAttributes as $attrs){
-          $this->SubObjects[$object['cn'][0]][$attrs]=addslashes($this->SubObjects[$object['cn'][0]][$attrs]);
-        }
-        $this->SubObjects[$object['cn'][0]]['FAIscript']   = addslashes( $ldap->get_attribute($object['dn'], "FAIscript",$r_array=0));
+        $objects = array();
+        $objects['status']      = "FreshLoaded";
+        $objects['dn']          = $object['dn'];
+        $objects                = $this->get_object_attributes($objects,$this->subAttributes);
+        $this->SubObjects[$objects['cn']] = $objects;
       }
     }
   }
+
+
+  /* Reload some attributes */
+  function get_object_attributes($object,$attributes)
+  {
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->cat($object['dn'],$attributes);
+    $tmp  = $ldap->fetch();
+  
+    foreach($attributes as $attrs){
+      if(isset($tmp[$attrs][0])){
+        $var = $tmp[$attrs][0];
+
+        /* Check if we must decode some attributes */
+        if(in_array_ics($attrs,$this->sub64coded)){
+          $var = base64_decode($var);
+        }
+
+        /*  check if this is a binary entry */
+        if(in_array_ics($attrs,$this->subBinary)){
+          $var = addslashes( $ldap->get_attribute($object['dn'], $attrs,$r_array=0));
+        }
+
+        /* Fix slashes */
+        $var = addslashes($var);
+        $object[$attrs] = $var;
+      }
+    }
+    return($object);
+  }
+
 
   function getUsedFAItask($cn)
   {
@@ -107,6 +127,7 @@ class faiHook extends plugin
     }
     return($ret);
   }
+
 
   function execute()
   {
@@ -125,9 +146,15 @@ class faiHook extends plugin
         $once = false;
         $entry = preg_replace("/^editscript_/","",$name);
         $entry = base64_decode(preg_replace("/_.*/","",$entry));
-        $this->dialog= new $this->subClassName($this->config,$this->dn,$this->SubObjects[$entry]);
+
+        $obj  = $this->SubObjects[$entry];
+        if($obj['status'] == "FreshLoaded"){
+          $obj  = $this->get_object_attributes($obj,$this->sub_Load_Later);
+        }
+
+        $this->dialog= new $this->subClassName($this->config,$this->dn,$obj);
         $this->dialog->acl = $this->acl;
-        $_SESSION['objectinfo'] = $this->SubObjects[$entry]['dn'];
+        $_SESSION['objectinfo'] = $obj['dn'];
         $this->dialog->parent = &$this;
         $this->is_dialog=true;
       }
@@ -144,6 +171,8 @@ class faiHook extends plugin
     }
     ///// Ende new list handling
 
+    print_a($this->SubObjects);
+
     /* Add new sub object */
     if(isset($_POST['AddSubObject'])){
       $this->dialog= new $this->subClassName($this->config,"new");
@@ -154,27 +183,6 @@ class faiHook extends plugin
 
     if($this->dn != "new"){
       $_SESSION['objectinfo']= $this->dn;
-    }
-    /* Edit selected Sub Object */
-    if((isset($_POST['EditSubObject']))&&(isset($_POST['SubObject']))){
-      $hook = $_POST['SubObject'][0];
-
-      $this->dialog= new $this->subClassName($this->config,$this->dn,$this->SubObjects[$hook]);
-      $this->dialog->acl = $this->acl;
-      $this->dialog->parent = &$this;
-      $_SESSION['objectinfo'] = $this->SubObjects[$hook]['dn'];
-      $this->is_dialog=true;
-    }
-
-    /* Remove Sub object */
-    if((isset($_POST['DelSubObject']))&&(isset($_POST['SubObject']))){
-      foreach($_POST['SubObject'] as $hook){
-        if($this->SubObjects[$hook]['status'] == "edited"){
-          $this->SubObjects[$hook]['status']= "delete";
-        }else{
-          unset($this->SubObjects[$hook]);
-        }
-      }
     }
 
     /* Save Dialog */
@@ -196,9 +204,10 @@ class faiHook extends plugin
         /* Get return object */
         $obj = $this->dialog->save();
         if(isset($obj['remove'])){
+          $old_stat = $this->SubObjects[$obj['remove']['from']]['status'];
 
           /* Depending on status, set new status */
-          if($this->SubObjects[$obj['remove']['from']]['status']=="edited"){
+          if($old_stat == "edited" || $old_stat == "FreshLoaded"){
             $this->SubObjects[$obj['remove']['from']]['status'] = "delete";
           }elseif($this->SubObjects[$obj['remove']['from']]['status']=="new"){
             unset($this->SubObjects[$obj['remove']['from']]);
@@ -207,8 +216,12 @@ class faiHook extends plugin
           $this->SubObjects[$obj['remove']['to']] = $obj;
           unset($this->SubObjects[$obj['remove']['to']]['remove']);
         }else{
+          if($obj['status'] == "FreshLoaded"){
+            $obj['status'] = "edited";
+          }
           $this->SubObjects[$obj['cn']]=$obj;
         }
+    
         $this->is_dialog=false;
         unset($this->dialog);
         $this->dialog=NULL;
@@ -393,25 +406,42 @@ class faiHook extends plugin
      * After deletion, we perform add and modify 
      */
     $Objects = array();
+
+
+    /* We do not need to save untouched objects */
+    foreach($this->SubObjects as $name => $obj){
+      if($obj['status'] == "FreshLoaded"){
+        unset($this->SubObjects[$name]);
+      } 
+    }
+
+    /* Add objects that must be removed first.*/
     foreach($this->SubObjects as $name => $obj){
       if($obj['status'] == "delete"){
         $Objects[$name] = $obj; 
       }
     }
+
+    /* Add objects to add/modify */
     foreach($this->SubObjects as $name => $obj){
       if($obj['status'] != "delete"){
         $Objects[$name] = $obj; 
       }
     }
 
+    /* Walk through list of objects */
     foreach($Objects as $name => $obj){
 
+      /* Encode attribtues if required */
       foreach($this->sub64coded as $codeIt){
         $obj[$codeIt]=base64_encode(stripslashes($obj[$codeIt]));
       }
 
+      /* Create ldap entry */
       $tmp = array();
-      foreach($this->subAttributes as $attrs){
+      $attributes = array_merge($this->sub_Load_Later,$this->subAttributes);
+      foreach($attributes as $attrs){
+  
         if(empty($obj[$attrs])){
           $obj[$attrs] = array();
         }
