@@ -103,7 +103,7 @@ class faiTemplate extends plugin
 
         /*  check if this is a binary entry */
         if(in_array_ics($attrs,$this->subBinary)){
-          $var = addslashes( $ldap->get_attribute($object['dn'], $attrs,$r_array=0));
+          $var = $ldap->get_attribute($object['dn'], $attrs,$r_array=0);
         }
 
         /* Fix slashes */
