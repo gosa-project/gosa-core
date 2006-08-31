@@ -1,4 +1,5 @@
 <?php
+
 class workstartup extends plugin
 {
   /* CLI vars */
@@ -339,6 +340,11 @@ class workstartup extends plugin
         }
         pclose($fh);
       }
+    }
+
+    /* Turn to default, if we've nothing to inherit */
+    if (!isset($this->gotoBootKernels['default-inherited']) && $this->gotoBootKernel == "default-inherited"){
+      $this->gotoBootKernel= "default";
     }
 
     if(count($this->FAIclass)==0 && $this->FAIrelease == ""){
