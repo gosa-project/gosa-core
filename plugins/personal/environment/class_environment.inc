@@ -183,11 +183,6 @@ class environment extends plugin
       $this->useProfile = false;
     }
 
-    /* Set to group environment if we editing a group */
-    if(!isset($this->parent)){
-      $this->is_group = true;
-    }
-
     /* Set resolutions */
     $this->gotoXResolutions = array("auto"=>_("auto"),
                                     "640x480"   =>  "640x480",
@@ -221,6 +216,20 @@ class environment extends plugin
     $this->gotoAvailableShares= $config->getShareList(false);  
 
   }
+
+
+  /* Detect type of edited object (user|group)*/
+  function detect_grouptype()
+  {
+    if((!isset($this->parent))&&(!$this->is_account)){
+      $this->is_group     = false;
+    }elseif((isset($this->parent))&&(!isset($this->parent->by_object['posixAccount']))){
+      $this->is_group     = true;
+    }else{
+      $this->is_group     = false;
+    }
+  }
+
 
   function execute()
   {
@@ -256,6 +265,8 @@ class environment extends plugin
      All these tab management is done here
    */
 
+  $this->detect_grouptype();
+
   /* Working from Usermenu an the Account is currently disbled
      * this->parent :  is only set if we are working in a list of tabs
      * is_account   :  is only true if the needed objectClass is given
@@ -277,7 +288,6 @@ class environment extends plugin
      */
     }elseif((isset($this->parent))&&(!isset($this->parent->by_object['posixAccount']))){
       $smarty->assign("is_account","true");
-      $this->is_group     = true;
       $this->uid          = $this->cn;
       $this->attrs['uid'] = $this->cn;
 
@@ -314,7 +324,6 @@ class environment extends plugin
        */
       $smarty->assign("is_account","true");
 
-      $this->is_group = false;
 
       /* Do we need to flip is_account state? */
       if (isset($_POST['modify_state'])){
@@ -872,6 +881,7 @@ class environment extends plugin
   function check()
   {
     /* Call common method to give check the hook */
+    $this->detect_grouptype();
     $message= plugin::check();
   
     if(preg_match("/[^0-9]/",$this->gotoProfileQuota)) {
@@ -953,6 +963,9 @@ class environment extends plugin
                     "gotoGroupPrinter"      => "AddGroup",
                     "gotoUserAdminPrinter"  => "AddAdminUser",
                     "gotoGroupAdminPrinter" => "AddAdminGroup");
+
+    /* Detect type of edited object, sometimes this wasn't set correctly ... */
+    $this->detect_grouptype();
 
     if($this->is_group){
       $s_suffix = "Group";
