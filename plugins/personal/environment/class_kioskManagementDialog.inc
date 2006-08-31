@@ -58,16 +58,23 @@ class kioskManagementDialog extends plugin
         $only_once = false;
         $id  = preg_replace("/^delkiosk_/","",$name);
         $id = preg_replace("/_.*$/","",$id);
+    
+        $name = preg_replace("/^.*\//i","",base64_decode($id));
+        
+        $filename = $this->baseDir."/".$name;
 
-        $filename = $this->baseDir."/".preg_replace("/^.*\//i","",base64_decode($id));
+        if(isset($this->filesToAttach[$name])){
+          unset($this->filesToAttach[$name]);
+        }else{
 
-        $res = unlink($filename);
-        if(!$res){
-          if(!is_writeable($filename)){
-            print_red(sprintf(_("Can't delete '%s'. Error was: permission denied."), $filename));
-          }
-          if(!file_exists($filename)){
-            print_red(sprintf(_("Can't delete '%s'. Errow was: file doesn't exist."), $filename));
+          $res = @unlink($filename);
+          if(!$res){
+            if(!is_writeable($filename)){
+              print_red(sprintf(_("Can't delete '%s'. Error was: permission denied."), $filename));
+            }
+            if(!file_exists($filename)){
+              print_red(sprintf(_("Can't delete '%s'. Errow was: file doesn't exist."), $filename));
+            }
           }
         }
       }
