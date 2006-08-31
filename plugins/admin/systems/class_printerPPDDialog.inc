@@ -478,7 +478,14 @@ class printerPPDDialog extends plugin
     return($str);
   }
   
-  function check(){  return(plugin::check()); }
+  function check()
+  {  
+    $message = plugin::check();
+    if(empty($this->selectedPPD['link'])){
+      $message[] = _("Please select a valid ppd file or use 'Cancel' to go back to printer configuration.");
+    }
+    return($message); 
+  }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
