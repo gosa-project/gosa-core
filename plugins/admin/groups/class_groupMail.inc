@@ -170,7 +170,7 @@ class mailgroup extends plugin
           }else{
             $this->quotaUsage     = "";
             $this->gosaMailQuota  = "";
-            print_red(sprintf(_("Can't get quota information for '%s'."),$this->uid));
+//            print_red(sprintf(_("Can't get quota information for '%s'."),$this->uid));
           }
           $method->disconnect();
         }   // ENDE $method->connect($this->attrs["gosaMailServer"][0])){
