@@ -315,14 +315,14 @@ class faiHook extends plugin
       if($obj['status'] != "delete"){
         if($use_dns){
           if((isset($obj['description']))&&(!empty($obj['description']))){
-            $a_return[$obj['cn']]['name']= $obj['cn']." [".$obj['description']."]";
+            $a_return[$obj['cn']]['name']= $obj['cn']." [".stripslashes($obj['description'])."]";
           }else{
             $a_return[$obj['cn']]['name']= $obj['cn'];
           }
           $a_return[$obj['cn']]['dn']= $obj['dn'];
         }else{
           if((isset($obj['description']))&&(!empty($obj['description']))){
-            $a_return[$obj['cn']]= $obj['cn']." [".$obj['description']."]";
+            $a_return[$obj['cn']]= $obj['cn']." [".stripslashes($obj['description'])."]";
           }else{
             $a_return[$obj['cn']]= $obj['cn'];
           }
