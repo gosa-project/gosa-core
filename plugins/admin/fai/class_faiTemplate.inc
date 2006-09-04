@@ -108,6 +108,7 @@ class faiTemplate extends plugin
 
         /* Fix slashes */
         $var = addslashes($var);
+
         $object[$attrs] = $var;
       }
     }
@@ -294,7 +295,7 @@ class faiTemplate extends plugin
           if(strlen($obj['description']) > 40){
             $obj['description'] = substr($obj['description'],0,40)."...";
           }
-          $a_return[$obj['cn']]= $obj['cn']." [".$obj['description']."]";
+          $a_return[$obj['cn']]= $obj['cn']." [".stripslashes( $obj['description'] )."]";
         }else{
           $a_return[$obj['cn']]= $obj['cn'];
         }
@@ -402,7 +403,7 @@ class faiTemplate extends plugin
         if(empty($obj[$attrs])){
           $obj[$attrs] = array();
         }
-        $tmp[$attrs] = $obj[$attrs];
+        $tmp[$attrs] = stripslashes ($obj[$attrs]);
       }    
         
       $tmp['objectClass'] = $this->subClasses;
