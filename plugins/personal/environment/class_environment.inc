@@ -545,6 +545,8 @@ class environment extends plugin
       /* We assign a share to this user, if we don't know where to mount the share */
       if((!isset($_POST['gotoShareMountPoint']))||(empty($_POST['gotoShareMountPoint']))||(preg_match("/[\|]/i",$_POST['gotoShareMountPoint']))){
         print_red(_("You must specify a valid mount point."));
+      }elseif(preg_match('/ /', $_POST['gotoShareMountPoint'])){
+        print_red(_("Spaces are not allowed in the mount path!"));
       }elseif(!(
         preg_match("/^\//",$_POST['gotoShareMountPoint'])  ||
         preg_match("/^~/",$_POST['gotoShareMountPoint']) ||
