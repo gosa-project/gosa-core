@@ -234,7 +234,11 @@ class mailMethodKolab extends mailMethodCyrus
     foreach($this->attribute_map as $kolabAttr){
       $mailObject->attrs[$kolabAttr] = array();
     }  
-    $mailObject->attrs['kolabDeleteFlag']= preg_replace('%imap://%', '', $mailObject->gosaMailServer);
+
+    /* Only add kolab delete Flag in case of an user.mailAccount */
+    if(!in_array("posixGroup", $mailObject->attrs['objectClass'])){
+      $mailObject->attrs['kolabDeleteFlag']= preg_replace('%imap://%', '', $mailObject->gosaMailServer);
+    }
   }
 
 }
