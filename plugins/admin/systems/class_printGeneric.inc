@@ -615,6 +615,16 @@ class printgeneric extends plugin
     if(($this->BelongsTo == "Printer") && (empty($this->cn))){
       $message[]= "The required field 'Printer name' is not set.";
     }
+
+    if($this->BelongsTo == "Printer"){
+      $ui= get_userinfo();
+      $acl= get_permissions ($dn, $ui->subtreeACL);
+      $acl= get_module_permission($acl, "printer", $this->dn);
+      if (chkacl($acl, "create") != ""){
+        $message[]= _("You have no permissions to create a printer on this 'Base'.");
+      }
+    }
+
     
     /* must: labeledURI */
     if(empty($this->labeledURI)){
