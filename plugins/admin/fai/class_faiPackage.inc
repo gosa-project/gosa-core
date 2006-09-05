@@ -274,19 +274,21 @@ class faiPackage extends plugin
     }
 
     /* Configuration dialog open*/
-    if((isset($_POST['Markpkg']))&&(isset($_POST['usedPackages']))&&(!empty($_POST['usedPackages']))){
-      foreach($_POST['usedPackages'] as $pkg){
-        if (isset($this->usedPackages[$pkg])){
-          unset($this->usedPackages[$pkg]);
-          if (preg_match('/^-/', $pkg)){
-            $pkg= preg_replace('/^-/', '', $pkg);
-          } else {
-            $pkg= preg_replace('/^/', '-', $pkg);
+    if($this->FAIstate != "freeze"){
+      if((isset($_POST['Markpkg']))&&(isset($_POST['usedPackages']))&&(!empty($_POST['usedPackages']))){
+        foreach($_POST['usedPackages'] as $pkg){
+          if (isset($this->usedPackages[$pkg])){
+            unset($this->usedPackages[$pkg]);
+            if (preg_match('/^-/', $pkg)){
+              $pkg= preg_replace('/^-/', '', $pkg);
+            } else {
+              $pkg= preg_replace('/^/', '-', $pkg);
+            }
+            $this->usedPackages[$pkg]= $pkg;
           }
-          $this->usedPackages[$pkg]= $pkg;
         }
       }
-    }
+    }    
 
     /* Save Configuration */
     if(isset($_POST['SaveObjectConfig'])){

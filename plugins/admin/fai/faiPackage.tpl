@@ -71,7 +71,7 @@
 			<input type="submit" name="Addpkg" value="{t}Add{/t}" {$OptionsACL} {$cnACL}>
 			<input type="submit" name="Delpkg" value="{t}Remove{/t}"  {$OptionsACL} {$cnACL}>
 			<input type="submit" name="Conpkg" value="{t}Configure{/t}"  {$OptionsACL} >
-			<input type="submit" name="Markpkg" value="{t}Toggle remove flag{/t}"  {$OptionsACL} >
+			<input type="submit" name="Markpkg" value="{t}Toggle remove flag{/t}"  {$OptionsACL} {$cnACL}>
 		</td>
 	</tr>
 </table>
