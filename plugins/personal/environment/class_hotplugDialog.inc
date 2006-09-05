@@ -130,7 +130,7 @@ class hotplugDialog extends plugin
         $message[]=_("Invalid character in description. Please specify a valid description.");
       }
 
-      if(preg_match("/[\|]/i",$this->HOT_id)){
+      if(preg_match("/[\|\*]/i",$this->HOT_id)){
         $message[]=_("Please specify a valid id.");
       }
       if(!$this->is_2byteHex($this->HOT_vendor)){
