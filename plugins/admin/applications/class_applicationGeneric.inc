@@ -406,6 +406,9 @@ class application extends plugin
   /* Save to LDAP */
   function save()
   {
+    /* Get application script without header part, to check if we must save the script itself */
+    $script = preg_replace('/.*### END HEADER ###/s', '', $this->gotoLogonScript);
+
     plugin::save();
     $this->attrs["gosaApplicationIcon"]= $this->gosaApplicationIcon;
 
@@ -415,11 +418,23 @@ class application extends plugin
 
     $a= $ldap->fetch();
     if (count($a)){
+      
+      /* Remove gotoLogonScript if it is empty */
+      if(empty($script))    {
+        $this->attrs['gotoLogonScript'] = array();
+      }
+
       $ldap->cd($this->dn);
       $this->cleanup();
       $ldap->modify ($this->attrs); 
       $this->handle_post_events("modify");
     } else {
+
+      /* Remove gotoLogonScript if it is empty */
+      if(empty($script))    {
+        unset($this->attrs['gotoLogonScript']);
+      }
+
       $ldap->cd($this->config->current['BASE']);
       $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
       $ldap->cd($this->dn);
