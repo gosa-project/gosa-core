@@ -52,7 +52,7 @@ class faiTemplateEntry extends plugin
     $this->user = explode( '.', $this->FAIowner );
     $this->group = $this->user[1];
     $this->user = $this->user[0];
-    $_SESSION['binary'] = $this->FAItemplateFile;
+    $_SESSION['binary'] = stripslashes($this->FAItemplateFile);
     $_SESSION['binarytype'] = 'octet-stream';
     $_SESSION['binaryfile'] = basename( $this->FAItemplatePath );
     
@@ -72,14 +72,14 @@ class faiTemplateEntry extends plugin
 
     if(isset($_POST['TmpFileUpload'])){
       if($str=file_get_contents($_FILES['FAItemplateFile']['tmp_name'])){
-        $this->FAItemplateFile = $str;
+        $this->FAItemplateFile = addslashes($str);
 
         /* If we don't have a filename set it from upload filename. */
         if( 0 == strlen( $this->FAItemplatePath )){
           $this->FAItemplatePath = $_FILES['FAItemplateFile']['name'];
         }
 
-        $_SESSION['binary']     = $this->FAItemplateFile;
+        $_SESSION['binary']     = stripslashes($this->FAItemplateFile);
         $_SESSION['binarytype'] = 'octet-stream';
         $_SESSION['binaryfile'] = basename( $this->FAItemplatePath );
       }
