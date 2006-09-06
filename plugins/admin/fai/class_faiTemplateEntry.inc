@@ -90,7 +90,7 @@ class faiTemplateEntry extends plugin
     $bStatus = false; // Hide download icon on default 
     
     if(strlen($this->FAItemplateFile)){
-      $status= sprintf(_("exists in database (size: %s bytes)"),strlen($this->FAItemplateFile));
+      $status= sprintf(_("exists in database (size: %s bytes)"),strlen( stripslashes( $this->FAItemplateFile)));
       $bStatus = true;  // Display download icon 
     }
     $smarty->assign("status",$status);
