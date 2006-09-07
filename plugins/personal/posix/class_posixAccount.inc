@@ -1041,7 +1041,8 @@ class posixAccount extends plugin
     }
 
 	$ldap->cd($this->config->current['BASE']);
-    $ldap->search("(&(objectClass=gosaUserTemplate)(uid=".$template."))", array("cn","accessTo"));
+  $ldap->search("(&(objectClass=gosaUserTemplate)(uid=".$template.")(accessTo=*))", array("cn","accessTo"));
+
 	while($attr = $ldap->fetch()){
 		$tmp = $attr['accessTo'];
 		unset ($tmp['count']);
