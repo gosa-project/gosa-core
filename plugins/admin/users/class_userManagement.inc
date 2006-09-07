@@ -79,6 +79,7 @@ class userManagement extends plugin
       foreach(array("del"       => "user_del",    "edit"      => "user_edit",
                     "new"       => "user_new",
                     "new_tpl"   => "user_tplnew",
+                    "create_user_from_tpl"          => "userfrom_tpl",
                     "change_pw" => "user_chgpw", 
                     "editPaste" => "editPaste",   "copy"      => "copy",
                     "cut"       => "cut") as $act => $name){
@@ -507,7 +508,7 @@ class userManagement extends plugin
      ********************/
 
     /* Continue template editing */
-    if ((isset($_POST['template_continue']) && $_POST['template'] != 'none' && !isset($_POST['uid']))){
+    if ((isset($_POST['template_continue'])) && ($_POST['template'] != 'none') && (!isset($_POST['uid']))){
       $this->sn             = $_POST['sn'];
       $this->givenName      = $_POST['givenName'];
 
