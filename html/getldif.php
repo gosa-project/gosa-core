@@ -66,7 +66,7 @@ session_start ();
 /* Logged in? Simple security check */
 if (!isset($_SESSION['ui'])){
   gosa_log ("Error: getldif.php called without session");
-  header ("Location: ../index.php");
+  header ("Location: index.php");
   exit;
 }
 $ui= $_SESSION["ui"];
@@ -84,7 +84,7 @@ header("Content-type: text/plain");
 $acl= get_permissions ($config->current['BASE'], $ui->subtreeACL);
 $acl= get_module_permission($acl, "all", $config->current['BASE']);
 if (chkacl($acl, "all") != ""){
-  header ("Location: ../index.php");
+  header ("Location: index.php");
   exit;
 }
 

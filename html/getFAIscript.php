@@ -68,7 +68,7 @@ session_start ();
 /* Logged in? Simple security check */
 if (!isset($_SESSION['ui'])){
   gosa_log ("Error: getFAIScript.php called without session");
-  header ("Location: ../index.php");
+  header ("Location: index.php");
   exit;
 }
 $ui= $_SESSION["ui"];
@@ -78,7 +78,7 @@ $config= $_SESSION['config'];
 $acl= get_permissions ($config->current['BASE'], $ui->subtreeACL);
 $acl= get_module_permission($acl, "all", $config->current['BASE']);
 if (chkacl($acl, "all") != ""){
-  header ("Location: ../index.php");
+  header ("Location: index.php");
   exit;
 }
 $dir = search_config($config->data,"environment", "KIOSKPATH");

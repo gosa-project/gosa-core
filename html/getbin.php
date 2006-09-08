@@ -27,7 +27,7 @@ session_start ();
 /* Logged in? Simple security check */
 if (!isset($_SESSION['ui'])){
   gosa_log ("Error: getbin.php called without session");
-  header ("Location: ../index.php");
+  header ("Location: index.php");
   exit;
 }
 

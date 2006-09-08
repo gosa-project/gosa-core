@@ -27,7 +27,7 @@ session_start ();
 /* Logged in? Simple security check */
 if (!isset($_SESSION['ui'])){
   gosa_log ("Error: getfax.php called without session");
-  header ("Location: ../index.php");
+  header ("Location: index.php");
   exit;
 }
 $ui= $_SESSION["ui"];
@@ -35,7 +35,7 @@ $ui= $_SESSION["ui"];
 /* User object present? */
 if (!isset($_SESSION['fuserfilter'])){
   gosa_log ("Error: getfax.php called without propper session data");
-  header ("Location: ../index.php");
+  header ("Location: index.php");
   exit;
 }
 
