@@ -389,7 +389,11 @@ class faiProfile extends plugin
 
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($_SESSION['CurrentMainBase']);
-    $ldap->search("(&(objectClass=FAIprofile)(cn=".$this->cn.")(!cn=".$this->old_cn."))",array("*"));
+    if ($this->old_cn == ""){
+      $ldap->search("(&(objectClass=FAIprofile)(cn=".$this->cn."))",array("*"));
+    } else {
+      $ldap->search("(&(objectClass=FAIprofile)(cn=".$this->cn.")(!cn=".$this->old_cn."))",array("*"));
+    }
 
     if($ldap->count()){
       $message[]=_("There is already a profile with this class name defined.");
