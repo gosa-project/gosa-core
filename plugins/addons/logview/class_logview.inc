@@ -16,6 +16,7 @@ class logview extends plugin
   var $loglevellist= array();
   var $tilist= array();
   var $fields= array("log_level", "host", "time_stamp", "message");
+  var $last= array("log_level", "host", "time", "regex");
   var $range = 25;
 
   function logview ($config, $dn= NULL)
@@ -26,7 +27,7 @@ class logview extends plugin
         /* Get global filter config */
         if (!is_global("logfilter")){
                 $logfilter= array("time" => "1",
-                                "log_level" => "!ALL",
+                                "log_level" => "!All",
                                 "host" => "!All",
                                 "regex" => "*");
                 register_global("logfilter", $logfilter);
@@ -53,6 +54,10 @@ class logview extends plugin
 	$smarty->assign("hostlist", $this->hostlist);
 	$smarty->assign("loglevellist", $this->loglevellist);
 	$smarty->assign("tilist", $this->tilist);
+	$smarty->assign("mode0", "");
+	$smarty->assign("mode1", "");
+	$smarty->assign("mode2", "");
+	$smarty->assign("mode3", "");
 
 	$logfilter['regex']= preg_replace('/\%/', '*', $logfilter['regex']);
 	foreach( array("host", "log_level", "time", "regex") as $type){
@@ -93,6 +98,7 @@ class logview extends plugin
 			}
 			$this->hostlist['!All']= _("All");
 			ksort($this->hostlist);
+			$smarty->assign("hostlist", $this->hostlist);
 		}
 
 		/* Log level list */
@@ -104,12 +110,13 @@ class logview extends plugin
 			return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
 		}
 		
-		if(count($this->loglevellist)){
+		if(count($this->loglevellist) == 0){
 			while ($line = mysql_fetch_array($result, MYSQL_ASSOC)){
 				$this->loglevellist[$line['log_level']]= $line['log_level'];
 			}
 			$this->loglevellist['!All']= _("All");
 			ksort($this->loglevellist);
+			$smarty->assign("loglevellist", $this->loglevellist);
 		}
 	}
 
@@ -119,6 +126,7 @@ class logview extends plugin
 				"2" => _("12 hours"), "3" => _("24 hours"),
 				"4" => _("2 days"), "5" => _("one week"),
 				"6" => _("2 weeks"), "7" => _("one month"));
+		$smarty->assign("tilist", $this->tilist);
 	}
 	
 	if(isset($_POST['EntriesPerPage'])){
@@ -127,11 +135,17 @@ class logview extends plugin
 
 	/* Save data */
 	$logfilter= get_global("logfilter");
+	$logfilter_changed = 0;
 	foreach( array("host", "time", "log_level", "regex") as $type){
+		$last[$type] = $logfilter[$type];
 		if (isset($_POST[$type])){
 			$logfilter[$type]= $_POST[$type];
 		}
+		if ($last[$type] != $logfilter[$type]){
+			$logfilter_changed = 1;
+		}
 	}
+	$smarty->assign("regex", $logfilter['regex']);
 	if ($logfilter['regex'] == ""){
 		$logfilter['regex']= '%';
 	} else {
@@ -141,6 +155,9 @@ class logview extends plugin
 
 	if (isset($_GET['start'])){
 		$this->start= (int)$_GET['start'];
+	}
+	if ($logfilter_changed > 0){
+		$this->start= 0;
 	}
 
 	/* Adapt sorting */
@@ -170,15 +187,6 @@ class logview extends plugin
 		if (! @mysql_select_db("gomon")){
 			print_red(_("Can't select log database for log generation!"));
 		} else {
-
-			/* Get number of entries */
-			$query= "SELECT COUNT(*) FROM golog;";
-			$result = @mysql_query($query);
-			$line= mysql_fetch_array($result, MYSQL_ASSOC);
-			$count= $line['COUNT(*)'];
-			if ($count > 25){
-				$smarty->assign("range_selector", range_selector($count, $this->start, $this->range,"EntriesPerPage"));
-			}
 
 			/* Assemble time query */
 			switch ($logfilter['time']){
@@ -222,21 +230,40 @@ class logview extends plugin
 			} else {
 				$ll= "AND log_level='".$logfilter['log_level']."'";
 			}
+			$smarty->assign("log_level", $logfilter['log_level']);
 			if ($logfilter['host'] == '!All'){
 				$hf= "";
 			} else {
 				$hf= "AND host='".$logfilter['host']."'";
 			}
+			$smarty->assign("host", $logfilter['host']);
 
 			/* Order setting */
 			if ($this->sort_direction == "down"){
 				$desc= "DESC";
+				$sort_sign = "\\/";
 			} else {
 				$desc= "";
+				$sort_sign="/\\";
 			}
+			$smarty->assign("mode".$this->sort, $sort_sign);
 
 			$end= date ("YmdHis");
-			$query= "SELECT * FROM golog WHERE message like '".$logfilter['regex']."' $ll $hf AND time_stamp <= $end AND time_stamp >= $start ORDER BY ".$this->fields[$this->sort]." $desc LIMIT ".$this->start.",25;";
+			$query_base= " FROM golog WHERE message like '".$logfilter['regex']."' $ll $hf AND time_stamp <= $end AND time_stamp >= $start";
+
+			/* Get number of entries */
+			$query= "SELECT COUNT(*)".$query_base.";";
+			$result = @mysql_query($query);
+			$line= mysql_fetch_array($result, MYSQL_ASSOC);
+			$count= $line['COUNT(*)'];
+			if ($count > 25){
+				$smarty->assign("range_selector", range_selector($count, $this->start, $this->range,"EntriesPerPage"));
+			} else {
+				$smarty->assign("range_selector", "");
+			}
+
+			/* Query results */
+			$query= "SELECT *".$query_base." ORDER BY ".$this->fields[$this->sort]." $desc LIMIT ".$this->start.",".$this->range.";";
 			@DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__, $query, "Database query");
 			$result = @mysql_query($query);
 
@@ -251,11 +278,12 @@ class logview extends plugin
 
 				$res.="<tr style=\"$col\">\n";
 				$res.="<td style=\"text-align:center\">
-					<img alt=\"\" src=\"".get_template_path('images/log_'.strtolower($line['log_level'])).".png\" title=\"Log level is '".$line['log_level']."'\"></td><td>".$line['host']."</td>";
+					<img alt=\"".$line['log_level']."\" src=\"".get_template_path('images/log_'.strtolower($line['log_level'])).".png\" title=\"Log level is '".$line['log_level']."'\"></td><td>".$line['host']."</td>";
 				$res.="<td>".$line['time_stamp']."</td><td width=\"100%\">".$line['message']."</td>";
 				$res.="</tr>\n";
 			}
 			mysql_close($link);
+			$smarty->assign("search_result", $res);
 		}
 	}
 
