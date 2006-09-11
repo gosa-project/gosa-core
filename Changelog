@@ -3,6 +3,9 @@ GOsa2 changelog
 
 * gosa 2.5.4
   - Included patch to choose the addressbook base
+  - Applied fixes for logviewer done by Mario Minati
+  - Updated locales, fixed a set of missing strings
+  - Fixed problems in FAI list handling
 
 * gosa 2.5.3
   - Fixed problem in reloading departments when we've PHP4
