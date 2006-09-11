@@ -25,7 +25,7 @@
    <td style="vertical-align:top">
 	<table summary="">
                 <tr>
-                        <td><LABEL for="HOT_id">{t}Serial number{/t}&nbsp;{t}(iSerial){/t}</LABEL>
+                        <td><LABEL for="HOT_id">{t}Serial number{/t}&nbsp;{t}(iSerial){/t}</LABEL>{$must}
                         </td>
                         <td>
                                 <input type="text" value="{$HOT_id}" name="HOT_id" id="HOT_id">
@@ -33,14 +33,14 @@
                         <td colspan="2">&nbsp;</td>
                 </tr>
                 <tr>
-                        <td><LABEL for="HOT_vendor">{t}Vendor-ID{/t}&nbsp;{t}(idVendor){/t}</LABEL>
+                        <td><LABEL for="HOT_vendor">{t}Vendor-ID{/t}&nbsp;{t}(idVendor){/t}</LABEL>{$must}
                         </td>
                         <td>
                                 <input type="text" value="{$HOT_vendor}" name="HOT_vendor" id="HOT_vendor">
                         </td>
                 </tr>
                 <tr>
-                        <td><LABEL for="HOT_produkt">{t}Product-ID{/t}&nbsp;{t}(idProduct){/t}</LABEL>
+                        <td><LABEL for="HOT_produkt">{t}Product-ID{/t}&nbsp;{t}(idProduct){/t}</LABEL>{$must}
                         </td>
                         <td>
                                 <input type="text" value="{$HOT_produkt}" name="HOT_produkt" id="HOT_produkt">

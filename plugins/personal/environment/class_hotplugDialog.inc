@@ -130,13 +130,13 @@ class hotplugDialog extends plugin
         $message[]=_("Invalid character in description. Please specify a valid description.");
       }
 
-      if(preg_match("/[\|\*]/i",$this->HOT_id)){
+      if(empty($this->HOT_id) || preg_match("/[\|\*]/i",$this->HOT_id)){
         $message[]=_("Please specify a valid id.");
       }
-      if(!$this->is_2byteHex($this->HOT_vendor)){
+      if(empty($this->HOT_vendor) || !$this->is_2byteHex($this->HOT_vendor)){
         $message[]=_("Please specify a valid vendor id. (2 byte hex like '0xFFFF')");
       }
-      if(!$this->is_2byteHex($this->HOT_produkt)){
+      if(empty($this->HOT_produkt) || !$this->is_2byteHex($this->HOT_produkt)){
         $message[]=_("Please specify a valid product id. (2 byte hex like '0xFFFF')");
       }
       $ldap = $this->config->get_ldap_link();
