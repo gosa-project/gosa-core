@@ -141,22 +141,21 @@ class termgroup extends plugin
   function update_term_member_FAIstate($act)
   {
     /* Get required informations */
-    $og     = $this->parent->by_object['ogroup'];
-    $allobs = $og->allobjects;
-    $mem    = $og->member;
+    $og    = $this->parent->by_object['ogroup'];
+    $allobs= $og->allobjects;
 
     /* Get correct value for FAIstate */
-    $action = $this->mapActions[$act];
+    $action= $this->mapActions[$act];
 
     /* Get ldap connection */
-    $ldap = $this->config->get_ldap_link();
+    $ldap= $this->config->get_ldap_link();
     $ldap->cd ($this->config->current['BASE']);
 
     /* Foreach member of mthis ogroup  ... */
-    foreach($mem  as $key ){
+    foreach($og->member as $key ){
   
       /* check objectClasses and create attributes array */
-      $attrs = array("FAIstate"=>$action);  
+      $attrs = array("FAIstate" => $action);  
       for($i = 0; $i < $allobs[$key]['objectClass']['count'] ; $i ++){
         $attrs['objectClass'][] = $allobs[$key]['objectClass'][$i];
       }
