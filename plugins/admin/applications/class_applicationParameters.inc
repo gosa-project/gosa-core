@@ -90,18 +90,27 @@ class applicationParameters extends plugin
 		$this->option_name[]= "";
 		$this->option_value[]= "";
 	}
+
+	$mode= "";
+	if (chkacl($this->acl, "create") != ""){
+		$mode= "disabled";
+	}
+
 	$table= "<table summary=\"\"><tr><td>"._("Variable")."</td><td>"._("Default value")."</td><td></td></tr>";
 	if (count ($this->option_name)){
 		for ($i= 0; $i < count($this->option_name); $i++){
 			$table.="<tr><td><input name=\"option$i\" size=25 maxlength=50 ".
-				"value=\"".$this->option_name[$i]."\"></td><td><input name=\"value$i\" ".
-				"size=60 maxlength=250 value=\"".$this->option_value[$i]."\"><br></td><td>".
+				"value=\"".$this->option_name[$i]."\" $mode></td><td><input name=\"value$i\" ".
+				"size=60 maxlength=250 value=\"".$this->option_value[$i]."\" $mode><br></td><td>".
 				"<input type=\"submit\" name=\"remove$i\" value=\"".
-				_("Remove")."\"></td></tr>";
+				_("Remove")."\" $mode></td></tr>";
 		}
 	}
 	$table.= "</table>";
-	$table.="<input type=\"submit\" name=\"add_option\" value=\""._("Add option")."\">";
+
+	if ($mode == ""){
+		$table.="<input type=\"submit\" name=\"add_option\" value=\""._("Add option")."\">";
+	}
 
 	/* Show main page */
 	$smarty= get_smarty();
