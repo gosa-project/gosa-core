@@ -952,63 +952,65 @@ class environment extends plugin
 
 
     /* Save usersettings to Printer */
+    $skip_printer_changes = false;
     if(chkacl($this->acl,"gotoPrinter")!=""){
-      $this->gotoPrinter = array();
+      $this->gotoPrinter    = array();
+      $skip_printer_changes = true;
     }  
     
-    /* 1. Search all printers that have our uid/cn as member
-     * 2. Delete this uid/cn from every single entry and save it again.
-     * 2.1 There are different types of members: Users / Groups, this will be defined in $suffix
-     * 2.2 And each type has two modes, Admin (e.g. 'gotoUserAdminPrinter') and Normal
-     */
-    $types = array( "gotoUserPrinter"       => "AddUser",
-                    "gotoGroupPrinter"      => "AddGroup",
-                    "gotoUserAdminPrinter"  => "AddAdminUser",
-                    "gotoGroupAdminPrinter" => "AddAdminGroup");
+    if(!$skip_printer_changes){
+      /* 1. Search all printers that have our uid/cn as member
+       * 2. Delete this uid/cn from every single entry and save it again.
+       * 2.1 There are different types of members: Users / Groups, this will be defined in $suffix
+       * 2.2 And each type has two modes, Admin (e.g. 'gotoUserAdminPrinter') and Normal
+       */
+      $types = array( "gotoUserPrinter"       => "AddUser",
+          "gotoGroupPrinter"      => "AddGroup",
+          "gotoUserAdminPrinter"  => "AddAdminUser",
+          "gotoGroupAdminPrinter" => "AddAdminGroup");
 
-    /* Detect type of edited object, sometimes this wasn't set correctly ... */
-    $this->detect_grouptype();
+      /* Detect type of edited object, sometimes this wasn't set correctly ... */
+      $this->detect_grouptype();
 
-    if($this->is_group){
-      $s_suffix = "Group";
-      $useVar   = "cn";
-    }else{
-      $useVar   = "uid";
-      $s_suffix = "User";
-    }
-
-    /* Remove old entries */
-    $ldap->search("(&(objectClass=gotoPrinter)(goto".$s_suffix."Printer=".$this->uid."))",array("*"));
-    while($attr = $ldap->fetch()){
-      $printerObj = NULL;
-      $printerObj = new printtabs($this->config,$this->config->data['TABS']['PRINTTABS'],$attr['dn']);
-      $printerObj->by_object['printgeneric']->DelMember($types["goto".$s_suffix."Printer"],$this->uid);
-      $printerObj->by_object['printgeneric']->save();
-    }
-
-    $ldap->search("(&(objectClass=gotoPrinter)(goto".$s_suffix."AdminPrinter=".$this->uid."))",array("*"));
-    while($attr = $ldap->fetch()){
-      $printerObj = NULL;
-      $printerObj = new printtabs($this->config,$this->config->data['TABS']['PRINTTABS'],$attr['dn']);
-      $printerObj->by_object['printgeneric']->DelMember($types["goto".$s_suffix."AdminPrinter"],$this->uid);
-      $printerObj->by_object['printgeneric']->save();
-    }
-
-    foreach($this->gotoPrinter as $printer){
-      $printerObj = NULL;
-      $printerObj = new printtabs($this->config,$this->config->data['TABS']['PRINTTABS'],$printer['dn']);
-
-      if($printer['mode'] == "admin") {
-        $attribute = "goto".$s_suffix."AdminPrinter";
+      if($this->is_group){
+        $s_suffix = "Group";
+        $useVar   = "cn";
       }else{
-        $attribute = "goto".$s_suffix."Printer";
+        $useVar   = "uid";
+        $s_suffix = "User";
       }
 
-      $printerObj->by_object['printgeneric']->AddMember($types[$attribute],$this->dn);
-      $printerObj->by_object['printgeneric']->save();
+      /* Remove old entries */
+      $ldap->search("(&(objectClass=gotoPrinter)(goto".$s_suffix."Printer=".$this->uid."))",array("*"));
+      while($attr = $ldap->fetch()){
+        $printerObj = NULL;
+        $printerObj = new printtabs($this->config,$this->config->data['TABS']['PRINTTABS'],$attr['dn']);
+        $printerObj->by_object['printgeneric']->DelMember($types["goto".$s_suffix."Printer"],$this->uid);
+        $printerObj->by_object['printgeneric']->save();
+      }
+
+      $ldap->search("(&(objectClass=gotoPrinter)(goto".$s_suffix."AdminPrinter=".$this->uid."))",array("*"));
+      while($attr = $ldap->fetch()){
+        $printerObj = NULL;
+        $printerObj = new printtabs($this->config,$this->config->data['TABS']['PRINTTABS'],$attr['dn']);
+        $printerObj->by_object['printgeneric']->DelMember($types["goto".$s_suffix."AdminPrinter"],$this->uid);
+        $printerObj->by_object['printgeneric']->save();
+      }
+
+      foreach($this->gotoPrinter as $printer){
+        $printerObj = NULL;
+        $printerObj = new printtabs($this->config,$this->config->data['TABS']['PRINTTABS'],$printer['dn']);
+
+        if($printer['mode'] == "admin") {
+          $attribute = "goto".$s_suffix."AdminPrinter";
+        }else{
+          $attribute = "goto".$s_suffix."Printer";
+        }
+
+        $printerObj->by_object['printgeneric']->AddMember($types[$attribute],$this->dn);
+        $printerObj->by_object['printgeneric']->save();
+      }
     }
-
-
 
     /* Prepare HotPlug devices */
     $this->attrs['gotoHotplugDevice'] = array();
