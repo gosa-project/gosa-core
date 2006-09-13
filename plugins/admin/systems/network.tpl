@@ -9,12 +9,12 @@
 					<td><LABEL	for="ipHostNumber">{t}IP-address{/t}{if $IPisMust}{$staticAddress}{/if}</LABEL></td>
 					<td><input	id="ipHostNumber"	name="ipHostNumber"	size=25	maxlength=80	value="{$ipHostNumber}"></td>
 				</tr>
-				<tr
+				<tr>
 					<td><LABEL	for="macAddress">{t}MAC-address{/t}</LABEL>{$staticAddress}</td>
 					<td><input	name="macAddress"	id="macAddress"	size=25	maxlength=80	value="{$macAddress}"></td>
 				</tr>
         {if $autonet==true}
-				<tr
+				<tr>
 					<td>&nbsp;</td>
 					<td><input type="submit" name="autonet" value="{t}Autodetect{/t}"></td>
 				</tr>
