@@ -25,7 +25,7 @@ class ogroup extends plugin
   var $gosaGroupObjects= "";
   var $department= "";
   var $objects= array();
-  var $allobjects= array();
+  var $objcache= array();
   var $memberList= array();
   var $member= array();
   var $orig_dn= "";
@@ -98,7 +98,7 @@ class ogroup extends plugin
   function AddDelMembership($NewMember = false){
 
     if($NewMember){
-      $this->memberList[$NewMember]= $this->allobjects[$NewMember];
+      $this->memberList[$NewMember]= $this->objcache[$NewMember];
       $this->member[$NewMember]= $NewMember;
       unset ($this->objects[$NewMember]);
       uasort ($this->memberList, 'sort_list');
@@ -431,46 +431,6 @@ class ogroup extends plugin
     uasort ($this->objects, 'sort_list');
     reset ($this->objects);
 
-    /*###########
-      Get a list with all possible objects, to detect objects which doesn't exists anymore ... 
-      ###########*/
-
-    /* Only do this, if this wasn't already done */
-    if(count($this->allobjects) == 0){
-      $ldap->cd ($this->config->current['BASE']);
-      $filter="(objectClass=gosaAccount)".        
-              "(objectClass=posixGroup)".
-              "(objectClass=gosaApplication)".
-              "(objectClass=gosaDepartment)".
-              "(objectClass=goServer)".
-              "(objectClass=gotoWorkstation)".
-              "(objectClass=gotoTerminal)".
-              "(objectClass=gotoPrinter)".
-              "(objectClass=goFonHardware)";
-      $regex= "*";
-
-      $ldap->search ("(&(|$filter)(|(uid=$regex)(cn=$regex)(ou=$regex)))", array("dn", "cn", "ou", "description", "objectClass", "sn", "givenName", "uid"));
-      while ($attrs= $ldap->fetch()){
-
-        $type= $this->getObjectType($attrs);
-        $name= $this->getObjectName($attrs);
-
-        if (isset($attrs["description"][0])){
-          $this->allobjects[$attrs["dn"]]= array("text" => "$name [".$attrs["description"][0]."]", "type" => "$type");
-        } elseif (isset($attrs["uid"][0])) {
-          $this->allobjects[$attrs["dn"]]= array("text" => "$name [".$attrs["uid"][0]."]", "type" => "$type");
-        } else {
-          $this->allobjects[$attrs["dn"]]= array("text" => "$name", "type" => "$type");
-        }
-        $this->allobjects[$attrs["dn"]]['objectClass']  = $attrs['objectClass'];
-        if(isset($attrs['uid'])){
-          $this->allobjects[$attrs["dn"]]['uid']          = $attrs['uid'];
-        }
-      }
-      uasort ($this->allobjects, 'sort_list');
-      reset ($this->allobjects);
-    }      
-
     
     /*###########
       Build member list and try to detect obsolete entries 
@@ -481,61 +441,46 @@ class ogroup extends plugin
     /* Walk through all single member entry */
     foreach($this->member as $dn){
 
-      /* Object in object list? */
-      if (isset($this->allobjects[$dn])){
-        
-        /* Add this entry to member list, its dn is in allobjects
-            this means it still exists 
-         */
-        $this->memberList[$dn]= $this->allobjects[$dn];
+      /* The dn for the current member can't be resolved 
+         it seams that this entry was removed 
+       */ 
+      /* Try to resolv the entry again, if it still fails, display error msg */
+      $ldap->cat($dn, array("cn", "sn", "givenName", "ou", "description", "objectClass"));
 
-        /* Remove this from selectable entries */
-        if (isset ($this->objects[$dn])){
-          unset ($this->objects[$dn]);
-        }
+      /* It has failed, add entry with type flag I (Invalid)*/
+      if ($ldap->error != "Success"){
+        $this->memberList[$dn]= array('text' => _("Non existing dn:")." ".@LDAP::fix($dn),"type" => "I");
 
-      
       } else {
 
-        /* The dn for the current member can't be resolved 
-            it seams that this entry was removed 
-         */ 
-        /* Try to resolv the entry again, if it still fails, display error msg */
-        $ldap->cat($dn, array("cn", "sn", "givenName", "ou", "description", "objectClass"));
+        /* Append this entry to our all object list */
 
-        /* It has failed, add entry with type flag I (Invalid)*/
-        if ($ldap->error != "success"){
-          $this->memberList[$dn]= array('text' => _("Non existing dn:")." ".@LDAP::fix($dn),"type" => "I");
+        /* Fetch object */
+        $attrs= $ldap->fetch();
 
+        $type= $this->getObjectType($attrs);
+        $name= $this->getObjectName($attrs);
+
+        if (isset($attrs["description"][0])){
+          $this->objcache[$attrs["dn"]]= array("text" => "$name [".$attrs["description"][0]."]", "type" => "$type");
+        } elseif (isset($attrs["uid"][0])) {
+          $this->objcache[$attrs["dn"]]= array("text" => "$name [".$attrs["uid"][0]."]", "type" => "$type");
         } else {
-          
-          /* Append this entry to our all object list */
-    
-          /* Fetch object */
-          $attrs= $ldap->fetch();
-
-          $type= $this->getObjectType($attrs);
-          $name= $this->getObjectName($attrs);
-
-          if (isset($attrs["description"][0])){
-            $this->allobjects[$attrs["dn"]]= array("text" => "$name [".$attrs["description"][0]."]", "type" => "$type");
-          } elseif (isset($attrs["uid"][0])) {
-            $this->allobjects[$attrs["dn"]]= array("text" => "$name [".$attrs["uid"][0]."]", "type" => "$type");
-          } else {
-            $this->allobjects[$attrs["dn"]]= array("text" => "$name", "type" => "$type");
-          }
-          $this->allobjects[$attrs["dn"]]['objectClass']  = $attrs['objectClass'];
-          if(isset($attrs['uid'])){
-            $this->allobjects[$attrs["dn"]]['uid']          = $attrs['uid'];
-          }
-
-          /* Fill array */
-          if (isset($attrs["description"][0])){
-            $this->objects[$attrs["dn"]]= array("text" => "$name [".$attrs["description"][0]."]", "type" => "$type");
-          } else {
-            $this->objects[$attrs["dn"]]= array("text" => "$name", "type" => "$type");
-          }
+          $this->objcache[$attrs["dn"]]= array("text" => "$name", "type" => "$type");
         }
+        $this->objcache[$attrs["dn"]]['objectClass']  = $attrs['objectClass'];
+        if(isset($attrs['uid'])){
+          $this->objcache[$attrs["dn"]]['uid']          = $attrs['uid'];
+        }
+
+        /* Fill array */
+        if (isset($attrs["description"][0])){
+          $this->objects[$attrs["dn"]]= array("text" => "$name [".$attrs["description"][0]."]", "type" => "$type");
+        } else {
+          $this->objects[$attrs["dn"]]= array("text" => "$name", "type" => "$type");
+        }
+
+        $this->memberList[$dn]= $this->objects[$attrs["dn"]];
       }
     }
     uasort ($this->memberList, 'sort_list');
