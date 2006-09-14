@@ -661,6 +661,8 @@ class printgeneric extends plugin
 
     if($this->BelongsTo == "Workstation"){
       $this->dn= preg_replace("/ou=workstations,/","ou=printers,",$this->dn);
+      $mac = $this->parent->by_object['workgeneric']->netConfigDNS->macAddress;
+      $this->netConfigDNS->macAddress = $mac;
     }
     
     if(!$this->is_account) return;
@@ -771,6 +773,7 @@ class printgeneric extends plugin
       $this->handle_post_events("modify");
     }
     show_ldap_error($ldap->get_error(), _("Saving printer failed"));
+
 
     $this->netConfigDNS->cn = $this->cn;
     $this->netConfigDNS->dn = $this->dn;
