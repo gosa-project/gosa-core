@@ -80,11 +80,15 @@ function displayLogin()
     exit();
 }
 
+session_start();
 
+/* Destroy old session if exists.
+    Else you will get your old session back, if you not logged out correctly. */
+if(is_array($_SESSION) && count($_SESSION)){
+  session_destroy();
+  session_start();
+}
 
-/* Set error handler to own one, initialize time calculation
-   and start session. */
-session_start ();
 $username= "";
 
 /* Reset errors */
