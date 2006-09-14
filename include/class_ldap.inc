@@ -197,6 +197,8 @@ class LDAP{
         }
       }
 
+      $this->log("LDAP operation: time=".get_MicroTimeDiff($start,microtime())." operation=search('".$this->fix($this->basedn)."', '$filter')");
+
       return($this->sr);
     }else{
       $this->error = "Could not connect to LDAP server";
@@ -229,6 +231,8 @@ class LDAP{
         }
       }
 
+      $this->log("LDAP operation: time=".get_MicroTimeDiff($start,microtime())." operation=ls('".$this->fix($basedn)."', '$filter')");
+
       return($this->sr);
     }else{
       $this->error = "Could not connect to LDAP server";
@@ -240,12 +244,14 @@ class LDAP{
   {
     if($this->hascon){
       if ($this->reconnect) $this->connect();
+      $start = microtime();
       $this->clearResult();
       $filter = "(objectclass=*)";
       $this->sr = @ldap_read($this->cid, $this->fix($dn), $filter,$attrs);
       $this->error = @ldap_error($this->cid);
       $this->resetResult();
       $this->hasres=true;
+      $this->log("LDAP operation: time=".get_MicroTimeDiff($start,microtime())." operation=cat('".$this->fix($dn)."')");
       return($this->sr);
     }else{
       $this->error = "Could not connect to LDAP server";
@@ -390,8 +396,10 @@ class LDAP{
   {
     if($this->hascon){
       if ($this->reconnect) $this->connect();
+      $start= microtime();
       $r = @ldap_delete($this->cid, $this->fix($deletedn));
       $this->error = @ldap_error($this->cid);
+      $this->log("LDAP operation: time=".get_MicroTimeDiff($start,microtime())." operation=delete('".$this->fix($delettedn)."')");
       return($r ? $r : 0);
     }else{
       $this->error = "Could not connect to LDAP server";
@@ -621,8 +629,10 @@ class LDAP{
     }
     if($this->hascon){
       if ($this->reconnect) $this->connect();
+      $start= microtime();
       $r = @ldap_modify($this->cid, $this->fix($this->basedn), $attrs);
       $this->error = @ldap_error($this->cid);
+      $this->log("LDAP operation: time=".get_MicroTimeDiff($start,microtime())." operation=modify('$this->basedn')");
       return($r ? $r : 0);
     }else{
       $this->error = "Could not connect to LDAP server";
@@ -634,8 +644,10 @@ class LDAP{
   {
     if($this->hascon){
       if ($this->reconnect) $this->connect();
+      $start= microtime();
       $r = @ldap_add($this->cid, $this->fix($this->basedn), $attrs);
       $this->error = @ldap_error($this->cid);
+      $this->log("LDAP operation: time=".get_MicroTimeDiff($start,microtime())." operation=add('$this->basedn')");
       return($r ? $r : 0);
     }else{
       $this->error = "Could not connect to LDAP server";
@@ -1138,6 +1150,16 @@ function gen_xls ($dn, $filter= "(objectClass=*)", $attributes= array('*'), $rec
 	  
 	  return $objectclasses;
   }
+
+
+  function log($string)
+  {
+    $cfg= $_SESSION['config'];
+    if (isset($cfg->current['LDAPSTATS']) && preg_match('/true/i', $cfg->current['LDAPSTATS'])){
+        syslog (LOG_INFO, $string);
+    }
+  }
+
 
 }
 

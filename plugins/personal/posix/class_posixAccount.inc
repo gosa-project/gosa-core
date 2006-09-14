@@ -864,7 +864,7 @@ class posixAccount extends plugin
     /* Take care about groupMembership values: add to groups */
     foreach ($this->groupMembership as $key => $value){
       if (!isset($this->savedGroupMembership[$key])){
-        $g= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $key);
+        $g= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $key, false);
         $g->by_object['group']->addUser($this->uid);
         $g->save();
       }
