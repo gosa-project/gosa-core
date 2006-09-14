@@ -787,11 +787,8 @@ class appgroup extends plugin
   function getReleases()
   {
     $dn   = $this->config->current['BASE'];
+    $ui   = get_userinfo();
     $ldap = $this->config->get_ldap_link();
-    $ldap->cd($dn);
-    $ldap->search("(&(objectClass=organizationalUnit)(objectClass=FAIbranch))",array("ou"));
-  
-    $ui = get_userinfo();
     $returned = get_list("(&(objectClass=organizationalUnit)(objectClass=FAIbranch))",$ui->subtreeACL,$dn,array("ou"));
     $ret =array();
     
