@@ -309,7 +309,7 @@ class ogroupManagement extends plugin
      ****************/
 
     /* Cancel dialogs */
-    if (isset($_POST['edit_cancel'])){
+    if ((isset($_POST['edit_cancel'])) && (isset($this->ogroup->dn))){
       del_lock ($this->ogroup->dn);
       unset ($this->ogroup);
       $this->ogroup= NULL;
