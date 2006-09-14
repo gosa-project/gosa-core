@@ -1250,9 +1250,11 @@ function get_printer_list($cups_server)
   /* Merge in printers from LDAP */
   $ldap= $config->get_ldap_link();
   $ldap->cd ($config->current['BASE']);
-  $ldap->search('(objectClass=gotoPrinter)', array('cn'));
-  while ($attrs= $ldap->fetch()){
-    $res[$attrs["cn"][0]]= $attrs["cn"][0];
+  $ui= get_userinfo();
+  if (preg_match('/TRUE/i', $config->current['STRICT_UNITS']) && $ui->gosaUnitTag != ""){   
+    $ldap->search('((objectClass=gotoPrinter)(gosaUnitTag='.$ui->gosaUnitTag.'))', array('cn'));
+  } else {
+    $ldap->search('(objectClass=gotoPrinter)', array('cn'));
   }
 
   return $res;

@@ -18,7 +18,9 @@ class kioskManagementDialog extends plugin
 
   function kioskManagementDialog ($config, $dn= NULL,$attach=false )
   {
-    plugin::plugin ($config, $dn);
+    $this->config= $config;
+    $this->dn= $dn;
+
     if($attach){
       $this->filesToAttach = $attach;
     }
