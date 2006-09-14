@@ -678,7 +678,7 @@ class ogroup extends plugin
     /* Move members to target array */
     $this->attrs['member'] =array();
     foreach ($this->member as $key => $desc){
-      $this->attrs['member'][]= $key;
+      $this->attrs['member'][]= @LDAP::fix($key);
     }
 
     $ldap= $this->config->get_ldap_link();
