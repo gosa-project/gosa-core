@@ -399,7 +399,7 @@ class LDAP{
       $start= microtime();
       $r = @ldap_delete($this->cid, $this->fix($deletedn));
       $this->error = @ldap_error($this->cid);
-      $this->log("LDAP operation: time=".get_MicroTimeDiff($start,microtime())." operation=delete('".$this->fix($delettedn)."')");
+      $this->log("LDAP operation: time=".get_MicroTimeDiff($start,microtime())." operation=delete('".$this->fix($deletedn)."')");
       return($r ? $r : 0);
     }else{
       $this->error = "Could not connect to LDAP server";
