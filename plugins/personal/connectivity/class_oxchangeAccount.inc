@@ -39,6 +39,8 @@ class oxchangeAccount extends plugin
   var $attributes= array("OXAppointmentDays", "OXTaskDays", "OXTimeZone","mailEnabled");
   var $objectclasses= array("OXUserObject");
 
+  var $uid = "";
+
   var $oxconf = array();
   var $timezones=array(
       "Africa/Abidjan",
@@ -590,6 +592,11 @@ class oxchangeAccount extends plugin
         $this->oxconf=$this->config->data['TABS']['CONNECTIVITY'][$i];
         break;
       }
+    }
+
+    /* Setting uid to default */
+    if(isset($this->attrs['uid'][0])){
+      $this->uid = $this->attrs['uid'][0];
     }
 
     $this->dnmode= $this->config->current['DNMODE'];

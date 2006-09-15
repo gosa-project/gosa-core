@@ -36,10 +36,16 @@ class opengwAccount extends plugin
 	var $is_account           = false;
 	var $initialy_was_account = false;
   var $OGWPassword          = "";
+  var $uid ="";
 
 	function opengwAccount ($config, $dn= NULL)
 	{
 		plugin::plugin ($config, $dn);
+
+    /* Setting uid to default */
+    if(isset($this->attrs['uid'][0])){
+      $this->uid = $this->attrs['uid'][0];
+    }
 
 		$this->info=array();
 

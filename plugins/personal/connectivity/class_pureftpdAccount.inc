@@ -22,6 +22,8 @@ class pureftpdAccount extends plugin
   var $FTPuid = "";
   var $FTPgid = "";
 
+  var $uid = "";
+
   /* attribute list for save action */
   var $attributes= array("FTPQuotaFiles","FTPQuotaMBytes","FTPUploadRatio","FTPDownloadRatio",
       "FTPUploadBandwidth","FTPDownloadBandwidth","FTPStatus","FTPuid","FTPgid");
@@ -30,6 +32,12 @@ class pureftpdAccount extends plugin
   function pureftpdAccount ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
+    
+    /* Setting uid to default */
+    if(isset($this->attrs['uid'][0])){
+      $this->uid = $this->attrs['uid'][0];
+    }
+
   }
 
   function execute()
@@ -96,7 +104,7 @@ class pureftpdAccount extends plugin
     show_ldap_error($ldap->get_error(), _("Removing pureftpd account failed"));
 
     /* Optionally execute a command after we're done */
-    $this->handle_post_events('remove');
+    $this->handle_post_events('remove',array("uid" => $this->uid));
   }
 
 
@@ -177,10 +185,10 @@ class pureftpdAccount extends plugin
     /* Optionally execute a command after we're done */
     if ($this->initially_was_account == $this->is_account){
       if ($this->is_modified){
-        $this->handle_post_events("modify");
+        $this->handle_post_events("modify",array("uid" => $this->uid));
       }
     } else {
-      $this->handle_post_events("add");
+      $this->handle_post_events("add",array("uid" => $this->uid));
     }
 
   }
