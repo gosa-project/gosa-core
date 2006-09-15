@@ -787,12 +787,11 @@ class appgroup extends plugin
   function getReleases()
   {
     $dn   = $this->config->current['BASE'];
-    $ui   = get_userinfo();
     $ldap = $this->config->get_ldap_link();
-    $returned = get_list("(&(objectClass=organizationalUnit)(objectClass=FAIbranch))",$ui->subtreeACL,$dn,array("ou"));
+    $ldap->cd($dn);
+    $ldap->search("(&(objectClass=organizationalUnit)(objectClass=FAIbranch))",array("ou"));
     $ret =array();
-    
-    foreach($returned as $attrs){
+    while($attrs = $ldap->fetch()){
       if(preg_match("/ou=apps,/",$attrs['dn'])){
         $bb = preg_replace("/ou=apps,.*/","",$attrs['dn']);
         $parts = array_reverse(split("ou=",$bb));
@@ -880,7 +879,7 @@ class appgroup extends plugin
     /* Optionally execute a command after we're done */
     if ($this->initially_was_account == $this->is_account){
       if ($this->is_modified){
-        $this->handle_post_events("modify");
+        $this->handle_post_events("mofify");
       }
     } else {
       $this->handle_post_events("add");
