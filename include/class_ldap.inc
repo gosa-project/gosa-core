@@ -1154,9 +1154,11 @@ function gen_xls ($dn, $filter= "(objectClass=*)", $attributes= array('*'), $rec
 
   function log($string)
   {
-    $cfg= $_SESSION['config'];
-    if (isset($cfg->current['LDAPSTATS']) && preg_match('/true/i', $cfg->current['LDAPSTATS'])){
+    if (isset($_SESSION['config'])){
+      $cfg= $_SESSION['config'];
+      if (isset($cfg->current['LDAPSTATS']) && preg_match('/true/i', $cfg->current['LDAPSTATS'])){
         syslog (LOG_INFO, $string);
+      }
     }
   }
 

@@ -95,9 +95,10 @@ class ogroup extends plugin
     $this->reload();
   }
 
-  function AddDelMembership($NewMember = false){
-
+  function AddDelMembership($NewMember = false)
+  {
     if($NewMember){
+      $this->importMember($NewMember);
       $this->memberList[$NewMember]= $this->objcache[$NewMember];
       $this->member[$NewMember]= $NewMember;
       unset ($this->objects[$NewMember]);
@@ -440,48 +441,7 @@ class ogroup extends plugin
   
     /* Walk through all single member entry */
     foreach($this->member as $dn){
-
-      /* The dn for the current member can't be resolved 
-         it seams that this entry was removed 
-       */ 
-      /* Try to resolv the entry again, if it still fails, display error msg */
-      $ldap->cat($dn, array("cn", "sn", "givenName", "ou", "description", "objectClass"));
-
-      /* It has failed, add entry with type flag I (Invalid)*/
-      if ($ldap->error != "Success"){
-        $this->memberList[$dn]= array('text' => _("Non existing dn:")." ".@LDAP::fix($dn),"type" => "I");
-
-      } else {
-
-        /* Append this entry to our all object list */
-
-        /* Fetch object */
-        $attrs= $ldap->fetch();
-
-        $type= $this->getObjectType($attrs);
-        $name= $this->getObjectName($attrs);
-
-        if (isset($attrs["description"][0])){
-          $this->objcache[$attrs["dn"]]= array("text" => "$name [".$attrs["description"][0]."]", "type" => "$type");
-        } elseif (isset($attrs["uid"][0])) {
-          $this->objcache[$attrs["dn"]]= array("text" => "$name [".$attrs["uid"][0]."]", "type" => "$type");
-        } else {
-          $this->objcache[$attrs["dn"]]= array("text" => "$name", "type" => "$type");
-        }
-        $this->objcache[$attrs["dn"]]['objectClass']  = $attrs['objectClass'];
-        if(isset($attrs['uid'])){
-          $this->objcache[$attrs["dn"]]['uid']          = $attrs['uid'];
-        }
-
-        /* Fill array */
-        if (isset($attrs["description"][0])){
-          $this->objects[$attrs["dn"]]= array("text" => "$name [".$attrs["description"][0]."]", "type" => "$type");
-        } else {
-          $this->objects[$attrs["dn"]]= array("text" => "$name", "type" => "$type");
-        }
-
-        $this->memberList[$dn]= $this->objects[$attrs["dn"]];
-      }
+      $this->importMember($dn);
     }
     uasort ($this->memberList, 'sort_list');
     reset ($this->memberList);
@@ -503,6 +463,48 @@ class ogroup extends plugin
     $this->gosaGroupObjects= "[$objectTypes]";
   }
 
+
+  function importMember($dn)
+  {
+    $ldap= $this->config->get_ldap_link();
+
+    /* Try to resolv the entry again, if it still fails, display error msg */
+    $ldap->cat($dn, array("cn", "sn", "givenName", "ou", "description", "objectClass"));
+
+    /* It has failed, add entry with type flag I (Invalid)*/
+    if ($ldap->error != "Success"){
+      $this->memberList[$dn]= array('text' => _("Non existing dn:")." ".@LDAP::fix($dn),"type" => "I");
+    } else {
+      /* Append this entry to our all object list */
+
+      /* Fetch object */
+      $attrs= $ldap->fetch();
+
+      $type= $this->getObjectType($attrs);
+      $name= $this->getObjectName($attrs);
+
+      if (isset($attrs["description"][0])){
+        $this->objcache[$attrs["dn"]]= array("text" => "$name [".$attrs["description"][0]."]", "type" => "$type");
+      } elseif (isset($attrs["uid"][0])) {
+        $this->objcache[$attrs["dn"]]= array("text" => "$name [".$attrs["uid"][0]."]", "type" => "$type");
+      } else {
+        $this->objcache[$attrs["dn"]]= array("text" => "$name", "type" => "$type");
+      }
+      $this->objcache[$attrs["dn"]]['objectClass']  = $attrs['objectClass'];
+      if(isset($attrs['uid'])){
+        $this->objcache[$attrs["dn"]]['uid']          = $attrs['uid'];
+      }
+
+      /* Fill array */
+      if (isset($attrs["description"][0])){
+        $this->objects[$attrs["dn"]]= array("text" => "$name [".$attrs["description"][0]."]", "type" => "$type");
+      } else {
+        $this->objects[$attrs["dn"]]= array("text" => "$name", "type" => "$type");
+      }
+
+      $this->memberList[$dn]= $this->objects[$attrs["dn"]];
+    }
+  }
 
   function convert_list($input)
   {
