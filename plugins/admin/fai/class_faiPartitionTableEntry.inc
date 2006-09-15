@@ -182,7 +182,7 @@ class faiPartitionTableEntry extends plugin
   function generateParts()
   {
     /* Define Arrays with allowed syntax */
-    $PartitionTypes   = array("primary","logical");
+    $PartitionTypes   = array("primary"=>_("primary"),"logical"=>_("logical"));
     $FAIfsTypes       = array("ext2","ext3","xfs","swap","reiserfs","dosfat16","winfat32");
 
     /* Display Header */
@@ -221,11 +221,11 @@ class faiPartitionTableEntry extends plugin
         /* Generate Partition select box  
          */
         $PartitionType = "<select name='FAIpartitionType_".$key."' id='FAIpartitionType_".$key."' ".$disableALL.">";
-        foreach($PartitionTypes as $type){
+        foreach($PartitionTypes as $type => $PTname){
           if($part['FAIpartitionType'] == $type){
-            $PartitionType .="<option value='".$type."' selected >".$type."</option>";
+            $PartitionType .="<option value='".$type."' selected >".$PTname."</option>";
           }else{
-            $PartitionType .="<option value='".$type."'>".$type."</option>";
+            $PartitionType .="<option value='".$type."'>".$PTname."</option>";
           }
         }        
         $PartitionType.="</select>";   
