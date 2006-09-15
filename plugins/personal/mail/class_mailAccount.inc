@@ -658,7 +658,7 @@ class mailAccount extends plugin
     }
 
     /* Optionally execute a command after we're done */
-    $this->handle_post_events("remove", array('uid'));
+    $this->handle_post_events("remove", array('uid'=> $this->uid));
   }
 
 
@@ -779,10 +779,10 @@ class mailAccount extends plugin
     /* Optionally execute a command after we're done */
     if ($this->initially_was_account == $this->is_account){
       if ($this->is_modified){
-        $this->handle_post_events("modify", array('uid'));
+        $this->handle_post_events("modify", array('uid'=> $this->uid));
       }
     } else {
-      $this->handle_post_events("add", array('uid'));
+      $this->handle_post_events("add", array('uid'=>$this->uid));
     }
 
   }

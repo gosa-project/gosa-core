@@ -779,7 +779,7 @@ I: Only insider delivery */
     /* Optionally execute a command after we're done */
     if ($this->initially_was_account == $this->is_account){
       if ($this->is_modified){
-        $this->handle_post_events("mofify");
+        $this->handle_post_events("modify");
       }
     } else {
       $this->handle_post_events("add");
