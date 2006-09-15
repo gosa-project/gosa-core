@@ -79,6 +79,9 @@ class logonManagementDialog extends plugin
   {
     if(isset($_POST['dialogissubmitted'])){
       foreach($this->attributes as $attr){
+        if(!$this->nameIsEditable && $attr == "LogonName"){
+          continue;
+        }
         if(isset($_POST[$attr])){
           $this->$attr = stripslashes($_POST[$attr]); 
         }else{
