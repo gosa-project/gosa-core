@@ -593,7 +593,7 @@ class systems extends plugin
 
     /* This array represents the combination between checkboxes and search filters */
     $objs = array( "ShowServers"        => array("CLASS" => "goServer"        ,"TREE" => "ou=servers,ou=systems," ),
-        "ShowTerminals"      => array("CLASS" => "goHard"          ,"TREE" => "ou=terminals,ou=systems,"), 
+        "ShowTerminals"      => array("CLASS" => "gotoTerminal"    ,"TREE" => "ou=terminals,ou=systems,"), 
         "ShowPrinters"       => array("CLASS" => "gotoPrinter"     ,"TREE" => "ou=printers,ou=systems," ),
         "ShowDevices"        => array("CLASS" => "ieee802Device"   ,"TREE" => "ou=netdevices,ou=systems," ),
         "ShowPhones"         => array("CLASS" => "goFonHardware"   ,"TREE" => "ou=phones,ou=systems," ),
