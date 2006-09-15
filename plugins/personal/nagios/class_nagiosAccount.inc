@@ -59,6 +59,8 @@ class nagiosAccount extends plugin
 
   var $objectclasses= array("nagiosContact","nagiosAuth");
 
+  var $uid = "";
+
   /* constructor, if 'dn' is set, the node loads the given
      'dn' from LDAP */
   function nagiosAccount ($config, $dn= NULL)
@@ -67,6 +69,11 @@ class nagiosAccount extends plugin
     $this->config= $config;
 
     plugin::plugin ($config, $dn);
+
+    /* Set uid */    
+    if(isset($this->attrs['uid'])){
+      $this->uid = $this->attrs['uid'][0];
+    }
 
     /* Save initial account state */  
     $this->initially_was_account= $this->is_account;
@@ -149,10 +156,10 @@ class nagiosAccount extends plugin
     /* Optionally execute a command after we're done */
     if ($this->initially_was_account == $this->is_account){
       if ($this->is_modified){
-        $this->handle_post_events("modify");
+        $this->handle_post_events("modify",array("uid" => $this->uid));
       }
     } else {
-      $this->handle_post_events("add");
+      $this->handle_post_events("add", array("uid" => $this->uid));
     }
   }
 
@@ -229,7 +236,7 @@ class nagiosAccount extends plugin
     unset ($this->attrs['uid']);
 
     /* Optionally execute a command after we're done */
-    $this->handle_post_events('remove');
+    $this->handle_post_events('remove',array("uid"=>$this->uid));
   }
 
 }

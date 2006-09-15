@@ -87,6 +87,8 @@ class sambaAccount extends plugin
   var $attributes= array();
   var $objectclasses= array();
 
+  var $uid = "";
+
   var $CopyPasteVars = array("kickoff_time_set","logoff_time_set","logon_time_set","mungedObject","orig_sambaDomainName");
 
   function sambaAccount ($config, $dn= NULL)
@@ -114,6 +116,11 @@ class sambaAccount extends plugin
     }
 
     plugin::plugin ($config, $dn);
+
+    /* set user id */    
+    if(isset($this->attrs['uid'])){
+      $this->uid = $this->attrs['uid'][0];
+    }
 
     /* Get samba Domain in case of samba 3 */
     if ($this->samba3 && $this->sambaSID != ""){
@@ -627,7 +634,7 @@ class sambaAccount extends plugin
     show_ldap_error($ldap->get_error(), _("Removing Samba account failed"));
 
     /* Optionally execute a command after we're done */
-    $this->handle_post_events("remove");
+    $this->handle_post_events("remove",array("uid"=>$this->uid));
   }
 
 
@@ -976,10 +983,10 @@ class sambaAccount extends plugin
     /* Optionally execute a command after we're done */
     if ($this->initially_was_account == $this->is_account){
       if ($this->is_modified){
-        $this->handle_post_events("modify");
+        $this->handle_post_events("modify",array("uid" => $this->uid));
       }
     } else {
-      $this->handle_post_events("add");
+      $this->handle_post_events("add",array("uid" => $this>uid));
     }
 
   }

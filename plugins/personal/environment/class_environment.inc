@@ -836,7 +836,7 @@ class environment extends plugin
     show_ldap_error($ldap->get_error(), _("Removing environment information failed"));
 
     /* Optionally execute a command after we're done */
-    $this->handle_post_events("remove");
+    $this->handle_post_events("remove",array("uid" => $this->uid));
   }
 
 
@@ -1082,7 +1082,7 @@ class environment extends plugin
     $this->cleanup();
     $ldap->$mode($this->attrs);
     show_ldap_error($ldap->get_error(), _("Adding environment information failed"));
-    $this->handle_post_events($mode);
+    $this->handle_post_events($mode,array("uid"=>$this->uid));
   }
 
 /* Generate ListBox frindly output for the defined shares 
