@@ -43,11 +43,17 @@ class gofaxAccount extends plugin
       "goFaxPrinter", "goFaxDivertNumber", "goFaxLanguage", "goFaxFormat", "mail");
   var $objectclasses= array("goFaxAccount");
 
+  var $uid= "";
+
   function gofaxAccount ($config, $dn= NULL)
   {
     /* General initialization */
     plugin::plugin ($config, $dn);
 
+    /* Get user id */
+    if(isset($this->attrs['uid'])){
+      $this->uid = $this->attrs['uid'][0];
+    }
 
     /* Hickert : 11.11.05
      * Added to be able to handle department selection in divSelelect
@@ -624,7 +630,7 @@ class gofaxAccount extends plugin
     show_ldap_error($ldap->get_error(), _("Removing FAX account failed"));
 
     /* Optionally execute a command after we're done */
-    $this->handle_post_events('remove');
+    $this->handle_post_events('remove',array("uid"=> $this->uid));
   }
 
 
@@ -745,10 +751,10 @@ class gofaxAccount extends plugin
     /* Optionally execute a command after we're done */
     if ($this->initially_was_account == $this->is_account){
       if ($this->is_modified){
-        $this->handle_post_events("modify");
+        $this->handle_post_events("modify",array("uid" => $this->uid));
       }
     } else {
-      $this->handle_post_events("add");
+      $this->handle_post_events("add",array("uid" => $this->uid));
     }
 
   }
