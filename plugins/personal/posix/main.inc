@@ -101,7 +101,7 @@ if (!$remove_lock){
   }
 
   /* Show page footer depending on the mode */
-  if (!$posixAccount->group_dialog && $posixAccount->is_account){
+  if (!$posixAccount->group_dialog && !$posixAccount->show_ws_dialog && $posixAccount->is_account){
 
     $display.= "<p class=\"plugbottom\">";
 
