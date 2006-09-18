@@ -28,13 +28,13 @@ class termgroup extends plugin
                             "sysinfo"         => "sysinfo");
 
 
-  function termgroup ($config, $dn= NULL)
+  function termgroup ($config, $dn= NULL, $parent= NULL)
   {
     /***************
       Some  initialisations
      ***************/
 
-    plugin::plugin($config, $dn);
+    plugin::plugin($config, $dn, $parent);
 
     $ldap= $config->get_ldap_link();
 

@@ -40,10 +40,10 @@ class gospamserver extends plugin{
   var $ui               = NULL;
   var $acl              = NULL;
 
-  function gospamserver($config,$dn)
+  function gospamserver($config,$dn, $parent= NULL)
   {
     /* Init class */
-    plugin::plugin($config,$dn);
+    plugin::plugin($config,$dn, $parent);
     $this->DisplayName = _("Spamassassin");
 
     /* Get userinfo & acls */

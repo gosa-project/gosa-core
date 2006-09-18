@@ -45,9 +45,9 @@ class group extends plugin
   var $attributes= array("cn", "description", "gidNumber","memberUid","sambaGroupType","sambaSID");
   var $objectclasses= array("top", "posixGroup");
 
-  function group ($config, $dn= NULL)
+  function group ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
 
     /* Load attributes depending on the samba version */
     $this->samba3= ($config->current['SAMBAVERSION'] == 3);

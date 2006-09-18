@@ -29,9 +29,9 @@ class pureftpdAccount extends plugin
       "FTPUploadBandwidth","FTPDownloadBandwidth","FTPStatus","FTPuid","FTPgid");
   var $objectclasses= array("PureFTPdUser");
 
-  function pureftpdAccount ($config, $dn= NULL)
+  function pureftpdAccount ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
     
     /* Setting uid to default */
     if(isset($this->attrs['uid'][0])){

@@ -74,9 +74,9 @@ class environment extends plugin
   var $cn;
   var $OrigCn;
 
-  function environment ($config, $dn= NULL)
+  function environment ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
 
     /* Check : Are we currently editing a group or user dialog */
     if((isset($this->attrs['cn'][0]))&&(!isset($this->attrs['uid'][0]))){

@@ -77,13 +77,13 @@ class posixAccount extends plugin
 
   /* constructor, if 'dn' is set, the node loads the given
      'dn' from LDAP */
-  function posixAccount ($config, $dn= NULL)
+  function posixAccount ($config, $dn= NULL, $parent= NULL)
   {
     /* Configuration is fine, allways */
     $this->config= $config;
 
     /* Load bases attributes */
-    plugin::plugin($config, $dn);
+    plugin::plugin($config, $dn, $parent);
 
     /* set user id */    
     if(isset($this->attrs['uid'])){

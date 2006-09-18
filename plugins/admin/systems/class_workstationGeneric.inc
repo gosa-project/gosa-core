@@ -60,9 +60,9 @@ class workgeneric extends plugin
 
 
 
-  function workgeneric ($config, $dn= NULL)
+  function workgeneric ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
     $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses);
 
     /* Read arrays */

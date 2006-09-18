@@ -17,9 +17,9 @@ class webdavAccount extends plugin
 
   var $uid ="";
 
-  function webdavAccount ($config, $dn= NULL)
+  function webdavAccount ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
     
     /* Setting uid to default */
     if(isset($this->attrs['uid'][0])){

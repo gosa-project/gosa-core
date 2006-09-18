@@ -37,9 +37,9 @@ class intranetAccount extends plugin
       \version 1.00
       \date    1.07.2005
   */
-  function intranetAccount ($config, $dn= NULL)
+  function intranetAccount ($config, $dn= NULL, $parent= NULL)
   {
-	plugin::plugin ($config, $dn);
+	plugin::plugin ($config, $dn, $parent);
 	
     /* Setting uid to default */
     if(isset($this->attrs['uid'][0])){

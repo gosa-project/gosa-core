@@ -51,9 +51,9 @@ class workstartup extends plugin
   /* Contains all possible server/release/class settings */
   var $FAIServRepConfig   = array();
 
-  function workstartup ($config, $dn= NULL)
+  function workstartup ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
 
     /* Creating a list of valid Mirrors 
      * none will not be saved to ldap.

@@ -22,9 +22,9 @@ class componentGeneric extends plugin
   var $objectclasses= array("top", "device", "ipHost", "ieee802Device");
   var $netConfigDNS;
 
-  function componentgeneric ($config, $dn= NULL)
+  function componentgeneric ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
 
     /* Set base */
     if ($this->dn == "new"){

@@ -39,7 +39,7 @@ class appgroup extends plugin
   var $gosaApplicationParameter ;
 
 
-  function appgroup ($config, $dn= NULL)
+  function appgroup ($config, $dn= NULL, $parent= NULL)
   {
    
     /* prepare group app for release management */ 
@@ -50,7 +50,7 @@ class appgroup extends plugin
       $this->attributes[] =  "FAIrelease";
     }
 
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
 
     /* In some case of old applikations with old release tag saving, we 
         must reassign is_account state.

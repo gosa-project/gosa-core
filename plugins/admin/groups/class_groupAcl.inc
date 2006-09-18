@@ -26,9 +26,9 @@ class acl extends plugin
   var $attributes= array("gosaSubtreeACL");
   var $objectclasses= array("gosaObject");
 
-  function acl ($config, $dn= NULL)
+  function acl ($config, $dn= NULL, $parent= NULL)
   {
-	plugin::plugin($config, $dn);
+	plugin::plugin($config, $dn, $parent);
 
 	/* WorkAround */
 	include "acl_definition.inc";

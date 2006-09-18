@@ -39,10 +39,10 @@ class govirusserver extends plugin{
   var $avHttpProxyURL               = "";
   var $avDatabaseMirror             = "";
 
-  function govirusserver($config,$dn)
+  function govirusserver($config,$dn, $parent= NULL)
   {
     /* Init class */
-    plugin::plugin($config,$dn);
+    plugin::plugin($config,$dn, $parent);
     $this->DisplayName = _("Anti virus");
 
     /* Get userinfo & acls */

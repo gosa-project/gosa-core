@@ -36,9 +36,9 @@ class servgeneric extends plugin
                             "memcheck"        => "memcheck",
                             "sysinfo"         => "sysinfo");
 
-  function servgeneric ($config, $dn= NULL)
+  function servgeneric ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
 
     $this->modes["active"]= _("Activated");
     $this->modes["locked"]= _("Locked");

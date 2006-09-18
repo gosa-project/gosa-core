@@ -51,9 +51,9 @@ class servdb extends plugin
                           "goFonServer" => array("goFonAdmin", "goFonPassword",
                                                 "goFonAreaCode", "goFonCountryCode"));
 
-  function servdb ($config, $dn= NULL)
+  function servdb ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
 
     /* Make dynamic list of objectClasses */
     foreach ($this->additionaloc as $oc => $dummy){

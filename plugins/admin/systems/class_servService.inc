@@ -41,10 +41,10 @@ class servservice extends plugin
   var $mounts_to_remove = array();
   var $oldone = NULL; //temp dave for old mount entry
 
-  function servservice ($config, $dn= NULL)
+  function servservice ($config, $dn= NULL, $parent= NULL)
   {
     
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
     
     $ldap = $this->config->get_ldap_link();
     $avl_objectclasses = $ldap->get_objectclasses();

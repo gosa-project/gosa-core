@@ -91,7 +91,7 @@ class sambaAccount extends plugin
 
   var $CopyPasteVars = array("kickoff_time_set","logoff_time_set","logon_time_set","mungedObject","orig_sambaDomainName");
 
-  function sambaAccount ($config, $dn= NULL)
+  function sambaAccount ($config, $dn= NULL, $parent= NULL)
   {
     /* Load attributes depending on the samba version */
     $this->samba3= ($config->current['SAMBAVERSION'] == 3);
@@ -115,7 +115,7 @@ class sambaAccount extends plugin
       $this->objectclasses= array ("sambaAccount");
     }
 
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
 
     /* set user id */    
     if(isset($this->attrs['uid'])){

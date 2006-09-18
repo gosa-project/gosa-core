@@ -56,9 +56,9 @@ class termgeneric extends plugin
                             "sysinfo"         => "sysinfo");
 
 
-  function termgeneric ($config, $dn= NULL)
+  function termgeneric ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
     $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses);
     /* Read arrays */
     foreach (array("ghNetNic", "ghIdeDev", "ghScsiDev") as $val){

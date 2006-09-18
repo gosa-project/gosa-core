@@ -36,9 +36,9 @@ class phpscheduleitAccount extends plugin
   var $attributes= array();
   var $objectclasses= array("phpscheduleitAccount");
 
-  function phpscheduleitAccount ($config, $dn= NULL)
+  function phpscheduleitAccount ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
   }
 
   function execute()

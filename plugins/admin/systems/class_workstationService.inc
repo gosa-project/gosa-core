@@ -58,9 +58,9 @@ class workservice extends plugin
   var $XKbLayouts       =array();
   var $XKbVariants      =array();
 
-  function workservice ($config, $dn= NULL)
+  function workservice ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
 
     $this->XResolutions= array( 
         "640x480"   =>  "640x480",

@@ -21,9 +21,9 @@ class servdns extends plugin
   var $DNSinitially_was_account;
 
 
-  function servdns ($config, $dn= NULL)
+  function servdns ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
 
     $this->orig_dn = $dn;
 

@@ -55,11 +55,11 @@ class mailgroup extends plugin
   var $objectclasses= array("gosaMailAccount");
 
 
-  function mailgroup ($config, $dn= NULL, $ui= NULL)
+  function mailgroup ($config, $dn= NULL, $parent= NULL)
   {
     /* Initialise all available attributes ... if possible
      */
-    plugin::plugin($config, $dn);
+    plugin::plugin($config, $dn, $parent);
 
     /* Set mailMethod to the one defined in gosa.conf 
      */

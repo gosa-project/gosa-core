@@ -63,9 +63,9 @@ class conference extends plugin
 
   var $objectclasses= array("top", "goFonConference");
 
-  function conference ($config, $dn)
+  function conference ($config, $dn, $plugin= NULL)
   {
-    plugin::plugin($config, $dn);
+    plugin::plugin($config, $dn, $plugin);
     $this->is_account	= TRUE;
     $this->ui			= get_userinfo();
     $this->dn			= $dn;

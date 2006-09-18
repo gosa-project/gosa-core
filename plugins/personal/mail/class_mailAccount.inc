@@ -65,10 +65,10 @@ class mailAccount extends plugin
 
   /* constructor, if 'dn' is set, the node loads the given
      'dn' from LDAP */
-  function mailAccount ($config, $dn= NULL)
+  function mailAccount ($config, $dn= NULL, $parent= NULL)
   {
     /* Load bases attributes */
-    plugin::plugin($config, $dn);
+    plugin::plugin($config, $dn, $parent);
 
     if(isset($this->attrs['uid'])){
       $this->uid = $this->attrs['uid'][0];

@@ -41,9 +41,9 @@ class phoneAccount extends plugin
 
   var $uid;
 
-  function phoneAccount ($config, $dn= NULL)
+  function phoneAccount ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
 
     /* Set phone hardware */
     if (!isset($this->attrs['goFonHardware'])){

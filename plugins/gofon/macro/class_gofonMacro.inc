@@ -50,9 +50,9 @@ class macro extends plugin
 
   //! The Konstructor   
   /*!  Konstructor, load class with  attributes of the given dn*/
-  function macro ($config, $dn= NULL)
+  function macro ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
 
     $ldap= $config->get_ldap_link();
 

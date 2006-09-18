@@ -14,9 +14,9 @@ class applicationParameters extends plugin
   var $attributes= array("gosaApplicationParameter");
   var $objectclasses= array();
 
-  function applicationParameters ($config, $dn= NULL)
+  function applicationParameters ($config, $dn= NULL, $parent= NULL)
   {
-	plugin::plugin ($config, $dn);
+	plugin::plugin ($config, $dn, $parent);
 
 	$this->gosaApplicationParameter = array();
 

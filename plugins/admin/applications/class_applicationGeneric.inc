@@ -28,9 +28,9 @@ class application extends plugin
 
   var $isReleaseApplikation = false;
 
-  function application ($config, $dn= NULL)
+  function application ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
 
     $tmp = search_config($this->config->data,"faiManagement","CLASS");
     if(!empty($tmp)) {

@@ -62,9 +62,9 @@ class termservice extends plugin
   var $objectclasses= array("GOhard");
 
 
-  function termservice ($config, $dn= NULL)
+  function termservice ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
     
     array_unshift($this->XDrivers, "["._("unknown")."]");
     

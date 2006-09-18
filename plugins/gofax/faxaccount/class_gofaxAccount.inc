@@ -45,10 +45,10 @@ class gofaxAccount extends plugin
 
   var $uid= "";
 
-  function gofaxAccount ($config, $dn= NULL)
+  function gofaxAccount ($config, $dn= NULL, $parent)
   {
     /* General initialization */
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
 
     /* Get user id */
     if(isset($this->attrs['uid'])){

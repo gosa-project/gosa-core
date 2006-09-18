@@ -114,7 +114,7 @@ class plugin
     \param dn Distinguished name to initialize plugin from
     \sa plugin()
    */
-  function plugin ($config, $dn= NULL)
+  function plugin ($config, $dn= NULL, $parent= NULL)
   {
     /* Configuration is fine, allways */
     $this->config= $config;	
@@ -130,8 +130,12 @@ class plugin
     if ($dn != NULL){
 
       /* Load data to 'attrs' and save 'dn' */
-      $ldap->cat ($dn);
-      $this->attrs= $ldap->fetch();
+      if ($parent != NULL){
+        $this->attrs= $parent->attrs;
+      } else {
+        $ldap->cat ($dn);
+        $this->attrs= $ldap->fetch();
+      }
 
       /* Copy needed attributes */
       foreach ($this->attributes as $val){

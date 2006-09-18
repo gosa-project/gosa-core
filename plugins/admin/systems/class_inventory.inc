@@ -12,9 +12,9 @@ class inventory extends plugin
   var $attributes= array();
   var $objectclasses= array("whatever");
 
-  function inventory ($config, $dn= NULL)
+  function inventory ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
   }
 
   function execute()

@@ -22,9 +22,9 @@ class servrepository extends plugin
   var $repositories           = array();
   var $FAIrepository           = array();
 
-  function servrepository ($config, $dn= NULL)
+  function servrepository ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
 
     $this->repositories = array();
     if(isset($this->attrs['FAIrepository'])){

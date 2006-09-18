@@ -32,18 +32,20 @@ class tabs
   var $by_object= array();
   var $SubDialog = false;
 
-  function tabs($config, $data, $dn, $gui= true)
+  function tabs($config, $data, $dn)
   {
 	/* Save dn */
 	$this->dn= $dn;
 	$this->config= $config;
+	$baseobject= NULL;
 
 	foreach ($data as $tab){
 		$this->by_name[$tab['CLASS']]= $tab['NAME'];
-		if ($gui){
-			$this->by_object[$tab['CLASS']]= new $tab['CLASS']($this->config, $this->dn);
+		if ($baseobject == NULL){
+			$baseobject= new $tab['CLASS']($this->config, $this->dn);
+			$this->by_object[$tab['CLASS']]= $baseobject;
 		} else {
-			$this->by_object[$tab['CLASS']]= new $tab['CLASS']($this->config, $this->dn, false);
+			$this->by_object[$tab['CLASS']]= new $tab['CLASS']($this->config, $this->dn, $baseobject);
 		}
 		$this->by_object[$tab['CLASS']]->parent= &$this;
 

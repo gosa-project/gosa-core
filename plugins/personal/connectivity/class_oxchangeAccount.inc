@@ -584,9 +584,9 @@ class oxchangeAccount extends plugin
 
   var $dnmode= "";
 
-  function oxchangeAccount ($config, $dn= NULL)
+  function oxchangeAccount ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
     for ($i=0;$i<count($this->config->data['TABS']['CONNECTIVITY']);$i++){
       if($this->config->data['TABS']['CONNECTIVITY'][$i]['CLASS']=='oxchangeAccount') {
         $this->oxconf=$this->config->data['TABS']['CONNECTIVITY'][$i];

@@ -45,9 +45,9 @@ class wingeneric extends plugin
   var $objectclasses= array("posixAccount","person","organizationalPerson","inetOrgPerson","gosaAccount","shadowAccount","sambaSamAccount","top");
 
 
-  function wingeneric ($config, $dn= NULL)
+  function wingeneric ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
     $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses);
     /* Set base */
     if ($this->dn == "new"){

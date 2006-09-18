@@ -12,9 +12,9 @@ class mailogroup extends plugin
   var $members= array();
 
 
-  function mailogroup ($config, $dn= NULL)
+  function mailogroup ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin($config, $dn);
+    plugin::plugin($config, $dn, $parent);
 
     /* Include config object */
     $this->config= $config;

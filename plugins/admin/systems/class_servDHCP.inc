@@ -12,9 +12,9 @@ class servdhcp extends plugin
   var $attributes= array();
   var $objectclasses= array("whatever");
 
-  function servdhcp ($config, $dn= NULL)
+  function servdhcp ($config, $dn= NULL, $parent= NULL)
   {
-    plugin::plugin ($config, $dn);
+    plugin::plugin ($config, $dn, $parent);
   }
 
   function execute()
