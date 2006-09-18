@@ -159,7 +159,6 @@ _("Submit")."'>&nbsp;".
   {
     $this->ClearElementsList();
     $this->GenHeader();
-    $this->AvailableBranches = $this->parent->getBranches();
   }
 
   function setEntries($list)

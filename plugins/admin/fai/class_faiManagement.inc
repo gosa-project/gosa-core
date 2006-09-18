@@ -67,6 +67,7 @@ class faiManagement extends plugin
     
     /* Creat dialog object */
     $this->DivListFai = new divListFai($this->config,$this);
+    $this->DivListFai->AvailableBranches = $this->getBranches();
 	}
 
 	function execute()
@@ -195,6 +196,7 @@ class faiManagement extends plugin
 				unset ($this->dialog);
 				gosa_log ("FAI class '".$this->dn."' has been removed");
 				$this->dialog= NULL;
+        $this->DivListFai->AvailableBranches = $this->getBranches();
 			} else {
 
 				/* Normally this shouldn't be reached, send some extra
@@ -270,7 +272,7 @@ class faiManagement extends plugin
         $ldap = $this->config->get_ldap_link();
       }
 
-      $br = $this->getBranches();
+      $br = $this->DivListFai->AvailableBranches;
 
       if(isset($br[$bb])){
         $name = $br[$bb];
@@ -279,6 +281,7 @@ class faiManagement extends plugin
         $ldap->cd(preg_replace('/,ou=fai,ou=configs,ou=systems,/', ',ou=apps,', $bb));
         $ldap->recursive_remove();
         $this->DivListFai->selectedBranch = "main";
+        $this->DivListFai->AvailableBranches = $this->getBranches();
 
         /* Post remove */
         $this->lock_name   = $name;
@@ -356,7 +359,7 @@ class faiManagement extends plugin
   
       /* Create new Release name to be able to set faidebianRelease for FAIpackageList */
       
-      $CurrentReleases  = $this->getBranches();
+      $CurrentReleases  = $this->DivListFai->AvailableBranches;
       $NewReleaseName   = $name;
       if(isset($CurrentReleases[$this->DivListFai->selectedBranch])) {
         if($this->DivListFai->selectedBranch != "main"){
@@ -404,6 +407,7 @@ class faiManagement extends plugin
       $this->lock_name  = $name; 
       $this->lock_dn    = $baseToUse;
       $this->postcreate();
+      $this->DivListFai->AvailableBranches = $this->getBranches();
       exit();
     }
 
@@ -602,7 +606,7 @@ class faiManagement extends plugin
     /* Set base for all searches */
     $base           = "ou=fai,ou=configs,ou=systems,".$this->DivListFai->selectedBase;
     if($this->DivListFai->selectedBranch != "main"){
-      $br = $this->getBranches();
+      $br = $this->DivListFai->AvailableBranches;
       if(isset($br[$this->DivListFai->selectedBranch])){
         $base = $this->DivListFai->selectedBranch;
       }else{
