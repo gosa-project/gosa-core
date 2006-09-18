@@ -712,11 +712,12 @@ class printgeneric extends plugin
     }
 
     /* Only save ppd path, if the path is not empty (no ppd selected )*/ 
-    if(count($this->gotoPrinterPPD)) {
+    if(!empty($this->gotoPrinterPPD)) {
       $this->attrs['gotoPrinterPPD'] = $method.str_replace("//","/",$_SERVER['SERVER_NAME']."/ppd/".$this->gotoPrinterPPD);
     }else{
       $this->attrs['gotoPrinterPPD'] = array();
     }
+
 
     /* Append printer user 
      */
