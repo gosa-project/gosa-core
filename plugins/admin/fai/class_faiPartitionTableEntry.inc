@@ -122,7 +122,8 @@ class faiPartitionTableEntry extends plugin
      */
     if($s_action == "remove"){
       if($this->partitions[$s_entry]['status'] == "edited"){
-        $this->deletePartitions[]= $this->partitions[$s_entry];
+        $this->deletePartitions[$s_entry]= $this->partitions[$s_entry];
+        $this->deletePartitions[$s_entry]['FAIpartitionNr']=$s_entry;
         unset($this->partitions[$s_entry]);
       }else{
         unset($this->partitions[$s_entry]);
@@ -170,8 +171,6 @@ class faiPartitionTableEntry extends plugin
 //    }else{
       $smarty->assign("DISK_cnACL","");
 //    }
-
-  
 
     /* Fetch template and show the result
      */
