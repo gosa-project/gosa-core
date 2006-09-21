@@ -31,8 +31,10 @@ class termtabs extends tabs
     tabs::save_object($save_current);
 
     /* Update reference, transfer variables */
-    $this->by_object['termstartup']->gotoTerminalPath=
-      $this->by_object['termgeneric']->gotoTerminalPath;
+    if(isset($this->by_object['termstartup'])){
+      $this->by_object['termstartup']->gotoTerminalPath=
+        $this->by_object['termgeneric']->gotoTerminalPath;
+    }
   }
 
 
