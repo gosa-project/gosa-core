@@ -149,7 +149,9 @@ class faiTemplate extends plugin
         $once = false;
         $entry = preg_replace("/^deletescript_/","",$name);
         $entry = base64_decode(preg_replace("/_.*/","",$entry));
-        if($this->SubObjects[$entry]['status'] == "edited"){
+
+        $status = $this->SubObjects[$entry]['status'];
+        if($status == "edited" || $status == "FreshLoaded"){
           $this->SubObjects[$entry]['status']= "delete";
         }else{
           unset($this->SubObjects[$entry]);
