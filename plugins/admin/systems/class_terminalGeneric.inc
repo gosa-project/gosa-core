@@ -339,8 +339,10 @@ class termgeneric extends plugin
     }
 
     /* Save terminal path to parent since it is used by termstartup, too */
+    if(isset($this->parent->by_object['termstartup'])){
     $this->parent->by_object['termstartup']->gotoTerminalPath=
       $this->gotoTerminalPath;
+    }
   
     if(isset($_POST['termgeneric_posted'])){
       if(isset($_POST["inheritTimeServer"])){
