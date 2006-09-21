@@ -4,6 +4,8 @@
 <p class="seperator">
 {t}You are now going to create a branch or locked branch. This action clones the existing release to another release name. Branches can be modified as usual. FAI classes of locked branches cannot be modified, just additional classes are possible. Branch names should be alphanumeric, excluding the reserved names 'scripts', 'hooks', 'partitions', 'variables', 'templates' and 'fai'.{/t}
 <br>
+{t}Branches are created as subreleases of the currently selected branch. Creating a new branch named 1.0.2 in SARGE for example, will result in a new release called SARGE/1.0.2.{/t}
+<br>
 <br>
 </p>
 <p class="seperator">
