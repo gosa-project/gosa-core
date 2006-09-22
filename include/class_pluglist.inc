@@ -121,7 +121,7 @@ class pluglist {
 					$plDescription= $vars['plDescription'];
 
 
-					$index= $this->get_index($info['PATH']);
+					$index= $this->get_index($info['PATH'],$info['CLASS']);
 					$image= get_template_path('images/'.$info['ICON']);
 					$href= "main.php?plug=$index&amp;reset=1";
 
@@ -219,7 +219,7 @@ class pluglist {
 					$plHeadline= $vars['plHeadline'];
 					$plDescription= $vars['plDescription'];
 
-					$index= $this->get_index($info['PATH']);
+					$index= $this->get_index($info['PATH'],$info['CLASS']);
 
 					$href = "main.php?plug=".$index."&amp;reset=1";
 
@@ -283,9 +283,21 @@ class pluglist {
 		return ("../".$this->dirlist[$index]);
 	}
 
-	function get_index($path)
+	function get_index($path,$class)
 	{
-		return (array_search($path, $this->dirlist));
+		/* Search for plugin index (id), identify entry by path && class */
+                $data = $this->config->data['MENU'];
+                foreach($data as $section => $plugins){
+                        foreach($plugins as $key => $plugin)    {
+                                if($plugin['CLASS'] == $class && $plugin['PATH'] == $path){
+                                        return($key);
+                                }
+                        }
+                }
+
+		/* Indentify by path*/
+                return (array_search($path, $this->dirlist));
+
 	}
 }
 ?>
