@@ -122,8 +122,7 @@ class faiPartitionTableEntry extends plugin
      */
     if($s_action == "remove"){
       if($this->partitions[$s_entry]['status'] == "edited"){
-        $this->deletePartitions[$s_entry]= $this->partitions[$s_entry];
-        $this->deletePartitions[$s_entry]['FAIpartitionNr']=$s_entry;
+        $this->deletePartitions[] = $this->partitions[$s_entry];
         unset($this->partitions[$s_entry]);
       }else{
         unset($this->partitions[$s_entry]);
@@ -139,12 +138,27 @@ class faiPartitionTableEntry extends plugin
      *  array to the already defined partitions.
      */
     if(isset($_POST['AddPartition'])){
+  
+      /* FAIpartitionNr is used to indentify an entry.
+           (The index of an entry may vary)
+         Walk through the given entries and check for a free FAIpartitionNr. */
+      $ids = array();
+      foreach($this->partitions as $part){
+        $ids[$part['FAIpartitionNr']] = $part['FAIpartitionNr'];
+      }
+      $new_nr = 1 ; 
+      while(isset($ids[$new_nr]) && $new_nr < 100){
+        $new_nr ++ ;
+      }      
+
+      /* Add empty attributes */
       foreach($this->UsedAttrs as $attr){
         $tmp[$attr]                = "";     
       }
       $tmp["old_cn"]               = "";     
-      $tmp['status']="new";
-      $this->partitions[count($this->partitions)+1]=$tmp;
+      $tmp['status']               ="new";
+      $tmp['FAIpartitionNr']       = $new_nr;
+      $this->partitions[]=$tmp;
     }
 
     /* $setup contains a table with the partitions. 
@@ -276,15 +290,10 @@ class faiPartitionTableEntry extends plugin
     $tmp = array();
     $tmp['cn']          = $this->DISK_cn;
 
-    /* Attach partitions */
-    foreach($this->partitions as $key=>$val) {
-      $this->partitions[$key]['FAIpartitionNr']=$key;
-    }
-
     /* Attach deleted */
     foreach($this->deletePartitions as $key=>$val) {
-      $this->partitions[$key."-delete"]=$val;
-      $this->partitions[$key."-delete"]['status']="delete";
+      $this->partitions[$val['FAIpartitionNr']."-delete"]=$val;
+      $this->partitions[$val['FAIpartitionNr']."-delete"]['status']="delete";
     }
 
     $tmp['description'] = $this->DISK_description;
@@ -315,10 +324,13 @@ class faiPartitionTableEntry extends plugin
      
       foreach($this->partitions as $key => $part){
         foreach($this->UsedAttrs as $attrs){
-          if(isset($_POST[$attrs."_".$key])){
-            $this->partitions[$key][$attrs] = $_POST[$attrs."_".$key];
-          }else{
-            $this->partitions[$key][$attrs] = false;
+
+          if(!in_array_ics($attrs,array("FAIpartitionNr"))){
+            if(isset($_POST[$attrs."_".$key])){ 
+              $this->partitions[$key][$attrs] = $_POST[$attrs."_".$key];
+            }else{
+              $this->partitions[$key][$attrs] = false;
+            }
           }
         }
       }
