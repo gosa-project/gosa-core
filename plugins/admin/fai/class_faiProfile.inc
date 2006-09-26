@@ -69,36 +69,37 @@ class faiProfile extends plugin
       }
     }
 
-    $categories = array("FAIscript","FAItemplate","FAIhook","FAIvariable","FAIpartitionTable","FAIpackageList");
+    /* Search only in fai tree */
+    $ObjectTypes = array(
+        "FAIpartitionTable"  => array("OU"=>"ou=disk,"       , "CHKBOX"=>"ShowPartitions"),
+        "FAIpackageList"     => array("OU"=>"ou=packages,"    , "CHKBOX"=>"ShowPackages"),
+        "FAIscript"          => array("OU"=>"ou=scripts,"     , "CHKBOX"=>"ShowScripts"),
+        "FAIvariable"        => array("OU"=>"ou=variables,"   , "CHKBOX"=>"ShowVariables"),
+        "FAIhook"            => array("OU"=>"ou=hooks,"       , "CHKBOX"=>"ShowHooks"),
+#        "FAIprofile"         => array("OU"=>"ou=profiles,"    , "CHKBOX"=>"ShowProfiles"),
+        "FAItemplate"        => array("OU"=>"ou=templates,"   , "CHKBOX"=>"ShowTemplates"));
 
-    /* Build filter */
-    $filter= "";
-    foreach ($categories as $cat){
-      $filter.= "(objectClass=$cat)";
+    $base= "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
+    if($_SESSION['faifilter']['branch']!="main"){
+      $base = $_SESSION['faifilter']['branch'];
     }
-    
-    /* Get ldap connection */ 
-    $base = $_SESSION['CurrentMainBase'];
+
+    /* Get ldap connection */
+    $ldap= $this->config->get_ldap_link();
     $ldap->cd($base);
-    $sort = array();
 
-    /* search all FAI classes */
-    $ldap->search("(|$filter)",array("*"));
-    while($attrs = $ldap->fetch()){
+    /* Capture objects from given base */
+    $result = array();
+    foreach($ObjectTypes as $oc => $data){
+      $ou = $data['OU'].$base;
 
-      /* Sort by categorie */
-      foreach($categories as $cat){
-        if(in_array($cat,$attrs['objectClass'])){
-
-          /* Append entry */
-          $this->FAIAllclasses[$attrs['cn'][0]][$cat]=$attrs;
-  
-          /* Create sort array, because the array above is a multidimensional array, and can't be sorted by php sorting functions*/
-          $sort[strtolower($attrs['cn'][0])] = $attrs['cn'][0];
-        }
+      $ldap->ls("(objectClass=".$oc.")",$ou,array("cn","objectClass","dn"));
+      while($attrs = $ldap->fetch()){
+        $this->FAIAllclasses[$attrs['cn'][0]][$oc]=$attrs;
+        $sort[strtolower($attrs['cn'][0])] = $attrs['cn'][0];
       }
-    } 
-
+    }
+  
     /* Sort the sort array */
     //ksort($sort);
 

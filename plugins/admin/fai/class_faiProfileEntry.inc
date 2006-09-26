@@ -43,7 +43,7 @@ class faiProfileEntry extends plugin
     foreach($ObjectTypes as $oc => $data){
       $ou = $data['OU'].$base;
 
-      $ldap->ls("(objectClass=".$oc.")",$ou,array("*"));
+      $ldap->ls("(objectClass=".$oc.")",$ou,array("cn","objectClass","dn"));
       while($res = $ldap->fetch()){
         $result[] = $res;
       } 
