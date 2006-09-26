@@ -106,6 +106,9 @@ class reference extends plugin
 			}
 			foreach ($attrs[$memberattr] as $uid){
 				$content= $this->getCacheObject($uid);
+				if ($content == NULL){
+					continue;
+				}
 				$addon.= '<tr style="background-color:'.$cycle[$id&1].';"><td title="'.$attrs['cn'][0].'">&nbsp;&nbsp;&nbsp;'.$content['name'].'</td><td>'.$content['description'].'</td><td>'.$content['type'].'</td> </tr>';
 			}
 		}
@@ -138,15 +141,19 @@ class reference extends plugin
 		} else {
 			$ldap->search("(uid=$dn)", array("cn", "objectClass", "description"));
 		}
-		$attrs= $ldap->fetch();
-		if (isset($attrs['description'])){
-			$description= $attrs['description'][0];
+		if ($ldap->count()){
+			$attrs= $ldap->fetch();
+			if (isset($attrs['description'])){
+				$description= $attrs['description'][0];
+			} else {
+				$description= "-";
+			}
+			$this->objectCache[$dn]= array(	'name' => $attrs['cn'][0],
+					'description' => "$description",
+					'type' => $this->createContentString($attrs['objectClass']));
 		} else {
-			$description= "-";
+			return NULL;
 		}
-		$this->objectCache[$dn]= array(	'name' => $attrs['cn'][0],
-						'description' => "$description",
-						'type' => $this->createContentString($attrs['objectClass']));
 	}
 	return ($this->objectCache[$dn]);
   }

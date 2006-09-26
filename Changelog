@@ -8,6 +8,7 @@ GOsa2 changelog
   - Fixed problems in FAI list handling
   - Added "uid" to personal plugins for replacement in post events
   - Fixed saving of user logon scripts
+  - Fixed non-FAI application mode
 
 * gosa 2.5.3
   - Fixed problem in reloading departments when we've PHP4

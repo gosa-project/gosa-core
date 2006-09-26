@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polski\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-11 15:51+0200\n"
+"POT-Creation-Date: 2006-09-21 15:00+0200\n"
 "PO-Revision-Date: 2006-06-08 02:33+0100\n"
 "Last-Translator: Piotr Rybicki <meritus@innervision.pl>\n"
 "Language-Team: Piotr Rybicki <meritus@innervision.pl>\n"
@@ -156,7 +156,7 @@ msgstr "ACL"
 msgid "Options"
 msgstr "Opcje"
 
-#: contrib/gosa.conf:111 plugins/gofon/phoneaccount/class_phoneAccount.inc:654
+#: contrib/gosa.conf:111 plugins/gofon/phoneaccount/class_phoneAccount.inc:656
 msgid "Parameter"
 msgstr "Parametr"
 
@@ -347,8 +347,8 @@ msgstr ""
 #: ihtml/themes/default/setup_useradmin.tpl:41
 #: ihtml/themes/default/setup_step3.tpl:18
 #: plugins/admin/systems/SelectDeviceType.tpl:44
-#: plugins/admin/fai/class_faiManagement.inc:392
-#: plugins/admin/fai/class_faiManagement.inc:545
+#: plugins/admin/fai/class_faiManagement.inc:395
+#: plugins/admin/fai/class_faiManagement.inc:549
 #: plugins/admin/fai/faiPackageNew.tpl:50
 #: plugins/admin/departments/class_departmentGeneric.inc:421
 #: plugins/admin/departments/class_departmentGeneric.inc:506
@@ -425,8 +425,8 @@ msgstr ""
 #: plugins/addons/ldapmanager/contentexport.tpl:66
 #: plugins/addons/ldapmanager/contentexportxls.tpl:69
 #: plugins/addons/ldapmanager/contentcsv.tpl:114
-#: plugins/admin/fai/faiNewBranch.tpl:50
-#: plugins/admin/departments/dep_iframe.tpl:19 include/functions.inc:1516
+#: plugins/admin/fai/faiNewBranch.tpl:52
+#: plugins/admin/departments/dep_iframe.tpl:19 include/functions.inc:1518
 msgid "Back"
 msgstr "Wróć"
 
@@ -525,7 +525,7 @@ msgstr "Wykryto konflikt blokady"
 
 #: ihtml/themes/altlinux/islocked.tpl:6 ihtml/themes/altlinux/conflict.tpl:6
 #: ihtml/themes/default/islocked.tpl:6 ihtml/themes/default/conflict.tpl:6
-#: html/index.php:49 html/index.php:331 html/index.php:337
+#: html/index.php:49 html/index.php:335 html/index.php:341
 #: plugins/gofax/blocklists/remove.tpl:2 plugins/gofon/macro/remove.tpl:2
 #: plugins/gofon/conference/remove.tpl:2
 #: plugins/addons/addressbook/remove.tpl:2
@@ -551,7 +551,7 @@ msgstr ""
 #: ihtml/themes/altlinux/islocked.tpl:13
 #: plugins/personal/environment/kioskManagement.tpl:15
 #: plugins/personal/environment/environment.tpl:120
-#: plugins/personal/connectivity/class_kolabAccount.inc:232
+#: plugins/personal/connectivity/class_kolabAccount.inc:238
 #: plugins/personal/generic/generic_certs.tpl:17
 #: plugins/personal/generic/generic_certs.tpl:37
 #: plugins/personal/generic/generic_certs.tpl:57
@@ -630,11 +630,11 @@ msgstr "Usuń"
 #: plugins/admin/applications/class_applicationManagement.inc:362
 #: plugins/admin/fai/faiHookEntry.tpl:71
 #: plugins/admin/fai/faiPackageEntry.tpl:57
-#: plugins/admin/fai/faiNewBranch.tpl:20
+#: plugins/admin/fai/faiNewBranch.tpl:22
 #: plugins/admin/fai/faiTemplateEntry.tpl:131
 #: plugins/admin/fai/faiScriptEntry.tpl:69
-#: plugins/admin/fai/class_faiManagement.inc:541
-#: plugins/admin/fai/class_faiManagement.inc:546
+#: plugins/admin/fai/class_faiManagement.inc:545
+#: plugins/admin/fai/class_faiManagement.inc:550
 #: plugins/admin/fai/faiPackageConfiguration.tpl:7
 #: plugins/admin/fai/remove.tpl:17 plugins/admin/fai/faiProfileEntry.tpl:71
 #: plugins/admin/fai/faiPartitionTableEntry.tpl:30
@@ -689,7 +689,7 @@ msgid "You already have an Administrative Account and a Group."
 msgstr "Konto administracyjne oraz grupa już istnieją"
 
 #: ihtml/themes/altlinux/setup_useradmin.tpl:6
-#: ihtml/themes/default/setup_useradmin.tpl:6 html/index.php:244
+#: ihtml/themes/default/setup_useradmin.tpl:6 html/index.php:248
 #: include/functions_setup.inc:1029 include/functions_setup.inc:1052
 #: include/functions_setup.inc:1061
 msgid ""
@@ -840,8 +840,8 @@ msgstr "Typ pocztowy"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:91
 #: ihtml/themes/default/setup_step4.tpl:91
-#: plugins/personal/posix/class_posixAccount.inc:555
-#: plugins/personal/samba/class_sambaAccount.inc:455
+#: plugins/personal/posix/class_posixAccount.inc:561
+#: plugins/personal/samba/class_sambaAccount.inc:462
 #: plugins/admin/systems/class_terminalGeneric.inc:97
 msgid "disabled"
 msgstr "wyłączone"
@@ -1068,7 +1068,7 @@ msgstr ""
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:74
 #: plugins/admin/systems/goVirusServer.tpl:144
 #: plugins/admin/applications/class_applicationManagement.inc:360
-#: plugins/admin/fai/class_faiManagement.inc:539
+#: plugins/admin/fai/class_faiManagement.inc:543
 #: plugins/admin/fai/faiPartitionTableEntry.tpl:29
 #: plugins/admin/groups/class_groupManagement.inc:326
 #: plugins/admin/ogroups/class_ogroupManagement.inc:331
@@ -1519,30 +1519,30 @@ msgstr "Nie można wybrać bazy danych!"
 msgid "Database query failed!"
 msgstr "Zapytanie do bazy danych nieudane"
 
-#: html/index.php:49 html/index.php:331
+#: html/index.php:49 html/index.php:335
 msgid "Session will not be encrypted."
 msgstr "Sesja nie będzie szyfrowana."
 
-#: html/index.php:49 html/index.php:331
+#: html/index.php:49 html/index.php:335
 msgid "Enter SSL session"
 msgstr "Sprowadź sesję SSL"
 
-#: html/index.php:113
+#: html/index.php:117
 #, php-format
 msgid "GOsa configuration %s/gosa.conf is not readable. Aborted."
 msgstr "Nie można czytać pliku konfiguracji %s/gosa.conf. Kończę."
 
-#: html/index.php:134
+#: html/index.php:138
 #, php-format
 msgid "Directory '%s' specified as compile directory is not accessible!"
 msgstr "Katalog '%s' podany jako katalog kompilacji jest niedostępny!"
 
-#: html/index.php:203 include/class_config.inc:207
+#: html/index.php:207 include/class_config.inc:207
 msgid "Can't bind to LDAP. Please contact the system administrator."
 msgstr ""
 "Nie można połączyć się z LDAP. Proszę skontaktować się z administratorem."
 
-#: html/index.php:215
+#: html/index.php:219
 msgid ""
 "GOsa cannot retrieve information about the installed schema files. Please "
 "make sure, that this is possible."
@@ -1550,30 +1550,30 @@ msgstr ""
 "GOsa nie może uzyskać informacji o zainstalowanych plikach schema. Proszę "
 "skorygować."
 
-#: html/index.php:224
+#: html/index.php:228
 msgid ""
 "Your ldap setup contains old schema definitions. Please re-run the setup."
 msgstr ""
 "Ustawienia serwera LDAP zawierają stare definicje schema. Proszę uruchomić "
 "setup."
 
-#: html/index.php:252
+#: html/index.php:256
 msgid "Please specify a valid username!"
 msgstr "Proszę podać prawidłową nazwę użytkownika!"
 
-#: html/index.php:254
+#: html/index.php:258
 msgid "Please specify your password!"
 msgstr "Proszę podać prawidłowe hasło!"
 
-#: html/index.php:261
+#: html/index.php:265
 msgid "Please check the username/password combination."
 msgstr "Proszę sprawdzić kombinację login/hasło."
 
-#: html/index.php:285
+#: html/index.php:289
 msgid "Account locked. Please contact your system administrator."
 msgstr "Konto zablokowane. Proszę skontaktować się z administratorem systemu."
 
-#: html/index.php:337
+#: html/index.php:341
 msgid ""
 "Your browser has cookies disabled. Please enable cookies and reload this "
 "page before logging in!"
@@ -1651,15 +1651,15 @@ msgstr "Nie można otworzyć pliku '%s'."
 msgid "This does something"
 msgstr "To robi coś"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:92
+#: plugins/personal/nagios/class_nagiosAccount.inc:99
 msgid "This account has no nagios extensions."
 msgstr "To konto nie posiada rozszerzenia nagios"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:101
+#: plugins/personal/nagios/class_nagiosAccount.inc:108
 msgid "Remove nagios account"
 msgstr "Usuń konto nagios"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:102
+#: plugins/personal/nagios/class_nagiosAccount.inc:109
 msgid ""
 "This account has nagios features enabled. You can disable them by clicking "
 "below."
@@ -1667,35 +1667,35 @@ msgstr ""
 "To konto posiada rozszerzenia rozszerzenia nagios. Można je wyłączyć "
 "klikając poniżej."
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:104
+#: plugins/personal/nagios/class_nagiosAccount.inc:111
 msgid "Create nagios account"
 msgstr "Utwórz konto nagios"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:104
+#: plugins/personal/nagios/class_nagiosAccount.inc:111
 msgid ""
 "This account has nagios features disabled. You can enable them by clicking "
 "below."
 msgstr ""
 "To konto nie posiada rozszerzenia nagios. Można je włączyć klikając poniżej"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:147
+#: plugins/personal/nagios/class_nagiosAccount.inc:154
 msgid "Saving nagios account failed"
 msgstr "Zapisywanie konta Nagios nieudane"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:167
+#: plugins/personal/nagios/class_nagiosAccount.inc:174
 msgid "The required field 'NagiosAlias' is not set."
 msgstr "Wymagane pole 'NagiosAlias' nie jest wypełnione"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:170
+#: plugins/personal/nagios/class_nagiosAccount.inc:177
 msgid "The required field 'NagiosMail' is not set."
 msgstr "Wymagane pole 'NagiosMail' nie jest wypełnione"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:174
-#: plugins/personal/nagios/class_nagiosAccount.inc:178
+#: plugins/personal/nagios/class_nagiosAccount.inc:181
+#: plugins/personal/nagios/class_nagiosAccount.inc:185
 msgid "Please enter a valid email address in 'NagiosMail' field."
 msgstr "Proszę podać poprawny adres email w polu 'NagiosMail'"
 
-#: plugins/personal/nagios/class_nagiosAccount.inc:226
+#: plugins/personal/nagios/class_nagiosAccount.inc:233
 msgid "Removing nagios account failed"
 msgstr "Usuwanie konta Nagios nieudane"
 
@@ -1815,7 +1815,7 @@ msgstr "Hasło wygasa"
 
 #: plugins/personal/posix/generic.tpl:7
 #: plugins/personal/posix/paste_generic.tpl:8
-#: plugins/personal/samba/class_sambaAccount.inc:643
+#: plugins/personal/samba/class_sambaAccount.inc:650
 #: plugins/personal/samba/samba3.tpl:13 plugins/personal/samba/samba3.tpl:94
 msgid "Home directory"
 msgstr "Katalog domowy"
@@ -1871,7 +1871,7 @@ msgstr "(Uwaga: NFS nie wspiera więcej niż 16 grup!)"
 #: plugins/personal/mail/copypaste.tpl:43
 #: plugins/personal/mail/copypaste.tpl:61
 #: plugins/personal/mail/mail_locals.tpl:41
-#: plugins/personal/connectivity/class_kolabAccount.inc:229
+#: plugins/personal/connectivity/class_kolabAccount.inc:235
 #: plugins/personal/connectivity/kolab.tpl:33
 #: plugins/personal/samba/samba3.tpl:330
 #: plugins/personal/samba/samba3_workstations.tpl:39
@@ -2031,53 +2031,53 @@ msgstr "Wyrażenie regularne dla dopasowania adresów"
 msgid "UNIX"
 msgstr "UNIX"
 
-#: plugins/personal/posix/class_posixAccount.inc:125
+#: plugins/personal/posix/class_posixAccount.inc:131
 msgid "expired"
 msgstr "wygasło"
 
-#: plugins/personal/posix/class_posixAccount.inc:127
+#: plugins/personal/posix/class_posixAccount.inc:133
 msgid "grace time active"
 msgstr "Czas prolongaty aktywny"
 
-#: plugins/personal/posix/class_posixAccount.inc:130
+#: plugins/personal/posix/class_posixAccount.inc:136
 msgid "active, password not changable"
 msgstr "aktywne, hasło niezmienialne"
 
-#: plugins/personal/posix/class_posixAccount.inc:132
+#: plugins/personal/posix/class_posixAccount.inc:138
 msgid "active, password expired"
 msgstr "aktywne, hasło wygasło"
 
-#: plugins/personal/posix/class_posixAccount.inc:134
+#: plugins/personal/posix/class_posixAccount.inc:140
 msgid "active"
 msgstr "Aktywne"
 
-#: plugins/personal/posix/class_posixAccount.inc:145
-#: plugins/personal/posix/class_posixAccount.inc:987
+#: plugins/personal/posix/class_posixAccount.inc:151
+#: plugins/personal/posix/class_posixAccount.inc:995
 msgid "Group of user"
 msgstr "Grupa użytkownika"
 
-#: plugins/personal/posix/class_posixAccount.inc:185
+#: plugins/personal/posix/class_posixAccount.inc:191
 msgid "unconfigured"
 msgstr "nieskonfigurowane"
 
-#: plugins/personal/posix/class_posixAccount.inc:211
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:212
+#: plugins/personal/posix/class_posixAccount.inc:217
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:214
 #: plugins/admin/systems/class_workstationService.inc:182
 #: plugins/admin/systems/class_terminalService.inc:194
 #: plugins/admin/systems/class_workstationStartup.inc:786
 msgid "automatic"
 msgstr "automatyczne"
 
-#: plugins/personal/posix/class_posixAccount.inc:250
+#: plugins/personal/posix/class_posixAccount.inc:256
 msgid "This account has no unix extensions."
 msgstr "To konto nie posiada rozszerzeń unix"
 
-#: plugins/personal/posix/class_posixAccount.inc:270
-#: plugins/personal/posix/class_posixAccount.inc:273
+#: plugins/personal/posix/class_posixAccount.inc:276
+#: plugins/personal/posix/class_posixAccount.inc:279
 msgid "Remove posix account"
 msgstr "Usuń konto posixowe"
 
-#: plugins/personal/posix/class_posixAccount.inc:271
+#: plugins/personal/posix/class_posixAccount.inc:277
 msgid ""
 "This account has unix features enabled. To disable them, you'll need to "
 "remove the samba / environment account first."
@@ -2085,237 +2085,237 @@ msgstr ""
 "To konto posiada rozszerzenia unix, Aby je wyłączyć należy najpierw usunąć "
 "konto Samba/Środowisko."
 
-#: plugins/personal/posix/class_posixAccount.inc:274
+#: plugins/personal/posix/class_posixAccount.inc:280
 msgid ""
 "This account has posix features enabled. You can disable them by clicking "
 "below."
 msgstr ""
 "To konto posiada rozszerzenia posix. Można je wyłączyć klikająć poniżej."
 
-#: plugins/personal/posix/class_posixAccount.inc:277
+#: plugins/personal/posix/class_posixAccount.inc:283
 msgid "Create posix account"
 msgstr "Utwórz konto posixowe"
 
-#: plugins/personal/posix/class_posixAccount.inc:278
+#: plugins/personal/posix/class_posixAccount.inc:284
 msgid ""
 "This account has posix features disabled. You can enable them by clicking "
 "below."
 msgstr ""
 "To konto nie posiada rozszerzenia posix. Można je włączyć klikająć poniżej."
 
-#: plugins/personal/posix/class_posixAccount.inc:441
+#: plugins/personal/posix/class_posixAccount.inc:447
 #, php-format
 msgid "Password can't be changed up to %s days after last change"
 msgstr "Hasło nie może być zmienione do %s dni po ostatniej zmianie"
 
-#: plugins/personal/posix/class_posixAccount.inc:443
+#: plugins/personal/posix/class_posixAccount.inc:449
 #, php-format
 msgid "Password must be changed after %s days"
 msgstr "Hasło musi zostać zmienione po %s dniach"
 
-#: plugins/personal/posix/class_posixAccount.inc:445
+#: plugins/personal/posix/class_posixAccount.inc:451
 #, php-format
 msgid "Disable account after %s days of inactivity after password expiery"
 msgstr "Wyłącz konto po %s dniach nieaktywności po wygaśnięciu hasła"
 
-#: plugins/personal/posix/class_posixAccount.inc:447
+#: plugins/personal/posix/class_posixAccount.inc:453
 #, php-format
 msgid "Warn user %s days before password expiery"
 msgstr "Ostrzeż użytkownika na %s dni przed wygaśnięciem hasła"
 
-#: plugins/personal/posix/class_posixAccount.inc:471
-#: plugins/personal/samba/class_sambaAccount.inc:357
-#: plugins/personal/samba/class_sambaAccount.inc:375
-#: plugins/personal/samba/class_sambaAccount.inc:393
-#: plugins/personal/samba/class_sambaAccount.inc:411
+#: plugins/personal/posix/class_posixAccount.inc:477
+#: plugins/personal/samba/class_sambaAccount.inc:364
+#: plugins/personal/samba/class_sambaAccount.inc:382
+#: plugins/personal/samba/class_sambaAccount.inc:400
+#: plugins/personal/samba/class_sambaAccount.inc:418
 #: plugins/personal/generic/class_user.inc:245
 msgid "January"
 msgstr "Styczeń"
 
-#: plugins/personal/posix/class_posixAccount.inc:471
-#: plugins/personal/samba/class_sambaAccount.inc:357
-#: plugins/personal/samba/class_sambaAccount.inc:375
-#: plugins/personal/samba/class_sambaAccount.inc:393
-#: plugins/personal/samba/class_sambaAccount.inc:411
+#: plugins/personal/posix/class_posixAccount.inc:477
+#: plugins/personal/samba/class_sambaAccount.inc:364
+#: plugins/personal/samba/class_sambaAccount.inc:382
+#: plugins/personal/samba/class_sambaAccount.inc:400
+#: plugins/personal/samba/class_sambaAccount.inc:418
 #: plugins/personal/generic/class_user.inc:245
 msgid "February"
 msgstr "Luty"
 
-#: plugins/personal/posix/class_posixAccount.inc:471
-#: plugins/personal/samba/class_sambaAccount.inc:357
-#: plugins/personal/samba/class_sambaAccount.inc:375
-#: plugins/personal/samba/class_sambaAccount.inc:393
-#: plugins/personal/samba/class_sambaAccount.inc:411
+#: plugins/personal/posix/class_posixAccount.inc:477
+#: plugins/personal/samba/class_sambaAccount.inc:364
+#: plugins/personal/samba/class_sambaAccount.inc:382
+#: plugins/personal/samba/class_sambaAccount.inc:400
+#: plugins/personal/samba/class_sambaAccount.inc:418
 #: plugins/personal/generic/class_user.inc:245
 msgid "March"
 msgstr "Marzec"
 
-#: plugins/personal/posix/class_posixAccount.inc:471
-#: plugins/personal/samba/class_sambaAccount.inc:357
-#: plugins/personal/samba/class_sambaAccount.inc:375
-#: plugins/personal/samba/class_sambaAccount.inc:393
-#: plugins/personal/samba/class_sambaAccount.inc:411
+#: plugins/personal/posix/class_posixAccount.inc:477
+#: plugins/personal/samba/class_sambaAccount.inc:364
+#: plugins/personal/samba/class_sambaAccount.inc:382
+#: plugins/personal/samba/class_sambaAccount.inc:400
+#: plugins/personal/samba/class_sambaAccount.inc:418
 #: plugins/personal/generic/class_user.inc:245
 msgid "April"
 msgstr "Kwiecień"
 
-#: plugins/personal/posix/class_posixAccount.inc:472
-#: plugins/personal/samba/class_sambaAccount.inc:358
-#: plugins/personal/samba/class_sambaAccount.inc:376
-#: plugins/personal/samba/class_sambaAccount.inc:394
-#: plugins/personal/samba/class_sambaAccount.inc:412
+#: plugins/personal/posix/class_posixAccount.inc:478
+#: plugins/personal/samba/class_sambaAccount.inc:365
+#: plugins/personal/samba/class_sambaAccount.inc:383
+#: plugins/personal/samba/class_sambaAccount.inc:401
+#: plugins/personal/samba/class_sambaAccount.inc:419
 #: plugins/personal/generic/class_user.inc:246
 msgid "May"
 msgstr "Maj"
 
-#: plugins/personal/posix/class_posixAccount.inc:472
-#: plugins/personal/samba/class_sambaAccount.inc:358
-#: plugins/personal/samba/class_sambaAccount.inc:376
-#: plugins/personal/samba/class_sambaAccount.inc:394
-#: plugins/personal/samba/class_sambaAccount.inc:412
+#: plugins/personal/posix/class_posixAccount.inc:478
+#: plugins/personal/samba/class_sambaAccount.inc:365
+#: plugins/personal/samba/class_sambaAccount.inc:383
+#: plugins/personal/samba/class_sambaAccount.inc:401
+#: plugins/personal/samba/class_sambaAccount.inc:419
 #: plugins/personal/generic/class_user.inc:246
 msgid "June"
 msgstr "Czerwiec"
 
-#: plugins/personal/posix/class_posixAccount.inc:472
-#: plugins/personal/samba/class_sambaAccount.inc:358
-#: plugins/personal/samba/class_sambaAccount.inc:376
-#: plugins/personal/samba/class_sambaAccount.inc:394
-#: plugins/personal/samba/class_sambaAccount.inc:412
+#: plugins/personal/posix/class_posixAccount.inc:478
+#: plugins/personal/samba/class_sambaAccount.inc:365
+#: plugins/personal/samba/class_sambaAccount.inc:383
+#: plugins/personal/samba/class_sambaAccount.inc:401
+#: plugins/personal/samba/class_sambaAccount.inc:419
 #: plugins/personal/generic/class_user.inc:246
 msgid "July"
 msgstr "Lipiec"
 
-#: plugins/personal/posix/class_posixAccount.inc:472
-#: plugins/personal/samba/class_sambaAccount.inc:358
-#: plugins/personal/samba/class_sambaAccount.inc:376
-#: plugins/personal/samba/class_sambaAccount.inc:394
-#: plugins/personal/samba/class_sambaAccount.inc:412
+#: plugins/personal/posix/class_posixAccount.inc:478
+#: plugins/personal/samba/class_sambaAccount.inc:365
+#: plugins/personal/samba/class_sambaAccount.inc:383
+#: plugins/personal/samba/class_sambaAccount.inc:401
+#: plugins/personal/samba/class_sambaAccount.inc:419
 #: plugins/personal/generic/class_user.inc:246
 msgid "August"
 msgstr "Sierpień"
 
-#: plugins/personal/posix/class_posixAccount.inc:472
-#: plugins/personal/samba/class_sambaAccount.inc:358
-#: plugins/personal/samba/class_sambaAccount.inc:376
-#: plugins/personal/samba/class_sambaAccount.inc:394
-#: plugins/personal/samba/class_sambaAccount.inc:412
+#: plugins/personal/posix/class_posixAccount.inc:478
+#: plugins/personal/samba/class_sambaAccount.inc:365
+#: plugins/personal/samba/class_sambaAccount.inc:383
+#: plugins/personal/samba/class_sambaAccount.inc:401
+#: plugins/personal/samba/class_sambaAccount.inc:419
 #: plugins/personal/generic/class_user.inc:246
 msgid "September"
 msgstr "Wrzesień"
 
-#: plugins/personal/posix/class_posixAccount.inc:473
-#: plugins/personal/samba/class_sambaAccount.inc:359
-#: plugins/personal/samba/class_sambaAccount.inc:377
-#: plugins/personal/samba/class_sambaAccount.inc:395
-#: plugins/personal/samba/class_sambaAccount.inc:413
+#: plugins/personal/posix/class_posixAccount.inc:479
+#: plugins/personal/samba/class_sambaAccount.inc:366
+#: plugins/personal/samba/class_sambaAccount.inc:384
+#: plugins/personal/samba/class_sambaAccount.inc:402
+#: plugins/personal/samba/class_sambaAccount.inc:420
 #: plugins/personal/generic/class_user.inc:247
 msgid "October"
 msgstr "Październik"
 
-#: plugins/personal/posix/class_posixAccount.inc:473
-#: plugins/personal/samba/class_sambaAccount.inc:359
-#: plugins/personal/samba/class_sambaAccount.inc:377
-#: plugins/personal/samba/class_sambaAccount.inc:395
-#: plugins/personal/samba/class_sambaAccount.inc:413
+#: plugins/personal/posix/class_posixAccount.inc:479
+#: plugins/personal/samba/class_sambaAccount.inc:366
+#: plugins/personal/samba/class_sambaAccount.inc:384
+#: plugins/personal/samba/class_sambaAccount.inc:402
+#: plugins/personal/samba/class_sambaAccount.inc:420
 #: plugins/personal/generic/class_user.inc:247
 msgid "November"
 msgstr "Listopad"
 
-#: plugins/personal/posix/class_posixAccount.inc:473
-#: plugins/personal/samba/class_sambaAccount.inc:359
-#: plugins/personal/samba/class_sambaAccount.inc:377
-#: plugins/personal/samba/class_sambaAccount.inc:395
-#: plugins/personal/samba/class_sambaAccount.inc:413
+#: plugins/personal/posix/class_posixAccount.inc:479
+#: plugins/personal/samba/class_sambaAccount.inc:366
+#: plugins/personal/samba/class_sambaAccount.inc:384
+#: plugins/personal/samba/class_sambaAccount.inc:402
+#: plugins/personal/samba/class_sambaAccount.inc:420
 #: plugins/personal/generic/class_user.inc:247
 msgid "December"
 msgstr "Grudzień"
 
-#: plugins/personal/posix/class_posixAccount.inc:555
+#: plugins/personal/posix/class_posixAccount.inc:561
 msgid "full access"
 msgstr "pełen dostęp"
 
-#: plugins/personal/posix/class_posixAccount.inc:556
+#: plugins/personal/posix/class_posixAccount.inc:562
 msgid "allow access to these hosts"
 msgstr "zezwól na dostęp do tych hostów"
 
-#: plugins/personal/posix/class_posixAccount.inc:602
+#: plugins/personal/posix/class_posixAccount.inc:608
 msgid "Removing UNIX account failed"
 msgstr "Usuwanie konta UNIX nieudane"
 
-#: plugins/personal/posix/class_posixAccount.inc:751
+#: plugins/personal/posix/class_posixAccount.inc:757
 msgid "Failed: overriding lock"
 msgstr "Niepowodzenie: nadpisuję blokadę"
 
-#: plugins/personal/posix/class_posixAccount.inc:840
+#: plugins/personal/posix/class_posixAccount.inc:846
 msgid "Saving UNIX account failed"
 msgstr "Zapisywanie konta UNIX nieudane"
 
-#: plugins/personal/posix/class_posixAccount.inc:901
+#: plugins/personal/posix/class_posixAccount.inc:909
 msgid "The required field 'Home directory' is not set."
 msgstr "Wymagane pole 'Katalog domowy' nie jest ustawione."
 
-#: plugins/personal/posix/class_posixAccount.inc:904
+#: plugins/personal/posix/class_posixAccount.inc:912
 msgid "Please enter a valid path in 'Home directory' field."
 msgstr "Proszę podać prawidłową ścieżkę w polu 'Katalog domowy'."
 
-#: plugins/personal/posix/class_posixAccount.inc:912
+#: plugins/personal/posix/class_posixAccount.inc:920
 msgid "Value specified as 'UID' is not valid."
 msgstr "Wartość podana jako 'UID' jest nieprawidłowa."
 
-#: plugins/personal/posix/class_posixAccount.inc:915
+#: plugins/personal/posix/class_posixAccount.inc:923
 msgid "Value specified as 'UID' is too small."
 msgstr "Wartość podana jako 'UID' jest za mała."
 
-#: plugins/personal/posix/class_posixAccount.inc:919
+#: plugins/personal/posix/class_posixAccount.inc:927
 #: plugins/admin/groups/class_groupGeneric.inc:783
 msgid "Value specified as 'GID' is not valid."
 msgstr "Wartość podana jako 'GID' jest nieprawidłowa."
 
-#: plugins/personal/posix/class_posixAccount.inc:922
+#: plugins/personal/posix/class_posixAccount.inc:930
 #: plugins/admin/groups/class_groupGeneric.inc:786
 msgid "Value specified as 'GID' is too small."
 msgstr "Wartość podana jako 'GID' jest za mała."
 
-#: plugins/personal/posix/class_posixAccount.inc:930
+#: plugins/personal/posix/class_posixAccount.inc:938
 msgid "Value specified as 'shadowMin' is not valid."
 msgstr "Wartość podana jako 'shadowMin' jest nieprawidłowa."
 
-#: plugins/personal/posix/class_posixAccount.inc:935
+#: plugins/personal/posix/class_posixAccount.inc:943
 msgid "Value specified as 'shadowMax' is not valid."
 msgstr "Wartość podana jako 'shadowMax' jest nieprawidłowa."
 
-#: plugins/personal/posix/class_posixAccount.inc:940
+#: plugins/personal/posix/class_posixAccount.inc:948
 msgid "Value specified as 'shadowWarning' is not valid."
 msgstr "Wartość podana jako 'shadowWarning' jest nieprawidłowa."
 
-#: plugins/personal/posix/class_posixAccount.inc:943
+#: plugins/personal/posix/class_posixAccount.inc:951
 msgid "'shadowWarning' without 'shadowMax' makes no sense."
 msgstr "'shadowWarning' bez 'shadowMax' nie ma sensu."
 
-#: plugins/personal/posix/class_posixAccount.inc:946
+#: plugins/personal/posix/class_posixAccount.inc:954
 msgid "Value specified as 'shadowWarning' should be smaller than 'shadowMax'."
 msgstr ""
 "Wartość podana jako 'shadowWarning' powinna być mniejsza niż 'shadowMax'."
 
-#: plugins/personal/posix/class_posixAccount.inc:949
+#: plugins/personal/posix/class_posixAccount.inc:957
 msgid "Value specified as 'shadowWarning' should be greater than 'shadowMin'."
 msgstr ""
 "Wartość podana jako 'shadowWarning' powinna być większa niż 'shadowMin'."
 
-#: plugins/personal/posix/class_posixAccount.inc:954
+#: plugins/personal/posix/class_posixAccount.inc:962
 msgid "Value specified as 'shadowInactive' is not valid."
 msgstr "Wartość podana jako ;shadowInactive' jest nieprawidłowa."
 
-#: plugins/personal/posix/class_posixAccount.inc:957
+#: plugins/personal/posix/class_posixAccount.inc:965
 msgid "'shadowInactive' without 'shadowMax' makes no sense."
 msgstr "'shadowInactive' bez 'shadowMax' nie ma sensu."
 
-#: plugins/personal/posix/class_posixAccount.inc:962
+#: plugins/personal/posix/class_posixAccount.inc:970
 msgid "Value specified as 'shadowMin' should be smaller than 'shadowMax'."
 msgstr "Wartość podana jako 'shadowMin' powinna być mniejsza niż 'shadowMax'."
 
-#: plugins/personal/posix/class_posixAccount.inc:1090
+#: plugins/personal/posix/class_posixAccount.inc:1098
 #: plugins/admin/groups/class_groupGeneric.inc:822
 msgid "Too many users, can't allocate a free ID!"
 msgstr "Zbyt wielu użytkowników, nie można nadać wolnego ID"
@@ -2441,7 +2441,7 @@ msgstr "Skrypt logowania"
 #: plugins/admin/systems/printerPPDDialog.tpl:22
 #: plugins/admin/fai/faiHookEntry.tpl:70
 #: plugins/admin/fai/faiPackageEntry.tpl:56
-#: plugins/admin/fai/faiNewBranch.tpl:19
+#: plugins/admin/fai/faiNewBranch.tpl:21
 #: plugins/admin/fai/faiTemplateEntry.tpl:130
 #: plugins/admin/fai/faiScriptEntry.tpl:68
 #: plugins/admin/fai/faiPackageConfiguration.tpl:6
@@ -2475,26 +2475,26 @@ msgstr "Wyrażenie regularne do dopasowania nazw drukarek"
 msgid "Please select a printer or press cancel."
 msgstr "Proszę wybrać drukarkę lub nacisnąć Anuluj."
 
-#: plugins/personal/environment/class_kioskManagementDialog.inc:73
-#: plugins/personal/environment/class_kioskManagementDialog.inc:92
+#: plugins/personal/environment/class_kioskManagementDialog.inc:75
+#: plugins/personal/environment/class_kioskManagementDialog.inc:94
 #, php-format
 msgid "Can't delete '%s'. Error was: permission denied."
 msgstr "Nie można usunąć '%s'. Błąd: brak dostępu."
 
-#: plugins/personal/environment/class_kioskManagementDialog.inc:76
-#: plugins/personal/environment/class_kioskManagementDialog.inc:95
+#: plugins/personal/environment/class_kioskManagementDialog.inc:78
+#: plugins/personal/environment/class_kioskManagementDialog.inc:97
 #, php-format
 msgid "Can't delete '%s'. Errow was: file doesn't exist."
 msgstr "Nie można usunąć '%s'. Błąd: plik nie istnieje."
 
-#: plugins/personal/environment/class_kioskManagementDialog.inc:137
+#: plugins/personal/environment/class_kioskManagementDialog.inc:139
 msgid ""
 "There is no KIOSKPATH defined in your gosa.conf. Can't manage kiosk profiles!"
 msgstr ""
 "Nie istnieje parametr KIOSKPATH w gosa.conf. Nie można zarządzać profilami "
 "kiosk!"
 
-#: plugins/personal/environment/class_kioskManagementDialog.inc:143
+#: plugins/personal/environment/class_kioskManagementDialog.inc:145
 #, php-format
 msgid "Kiosk path '%s' is not accessible. Please check the permissions."
 msgstr "Ścieżka kiosk '%s' nie jest dostępna. Proszę sprawdzić uprawnienia."
@@ -2523,15 +2523,15 @@ msgstr "Przeglądaj"
 msgid "Close"
 msgstr "Zamknij"
 
-#: plugins/personal/environment/class_logonManagementDialog.inc:97
+#: plugins/personal/environment/class_logonManagementDialog.inc:100
 msgid "Specified name should only consist of uper-/lowercase characters."
 msgstr ""
 
-#: plugins/personal/environment/class_logonManagementDialog.inc:101
+#: plugins/personal/environment/class_logonManagementDialog.inc:104
 msgid "Please specify a valid script name."
 msgstr "Proszę podać prawidłową nazwę skryptu."
 
-#: plugins/personal/environment/class_logonManagementDialog.inc:105
+#: plugins/personal/environment/class_logonManagementDialog.inc:108
 msgid "Specified description contains invalid characters."
 msgstr "Podany opis zawiera nieprawidłowe znaki."
 
@@ -2681,19 +2681,19 @@ msgstr ""
 "Nie można zapisać nowych profili kiosk, prawdopodobnie brak uprawnień dla "
 "katalogu"
 
-#: plugins/personal/environment/class_environment.inc:1082
+#: plugins/personal/environment/class_environment.inc:1084
 msgid "Adding environment information failed"
 msgstr "Dodawanie informacji środowiska nieudane"
 
-#: plugins/personal/environment/class_environment.inc:1095
+#: plugins/personal/environment/class_environment.inc:1097
 msgid "group share"
 msgstr "grupuj udział"
 
-#: plugins/personal/environment/class_environment.inc:1127
+#: plugins/personal/environment/class_environment.inc:1129
 msgid "Administrator"
 msgstr "Administrator"
 
-#: plugins/personal/environment/class_environment.inc:1132
+#: plugins/personal/environment/class_environment.inc:1134
 msgid "Default printer"
 msgstr "Domyślna drukarka"
 
@@ -2733,7 +2733,7 @@ msgstr "Quota profili"
 
 #: plugins/personal/environment/environment.tpl:45
 #: plugins/personal/mail/generic.tpl:96
-#: plugins/personal/connectivity/class_proxyAccount.inc:79
+#: plugins/personal/connectivity/class_proxyAccount.inc:87
 #: plugins/personal/connectivity/pureftpd.tpl:44
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:227
 msgid "MB"
@@ -3241,11 +3241,11 @@ msgstr ""
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: plugins/personal/connectivity/class_webdavAccount.inc:68
+#: plugins/personal/connectivity/class_webdavAccount.inc:76
 msgid "Removing webDAV account failed"
 msgstr "Usuwanie konta webDAV nieudane"
 
-#: plugins/personal/connectivity/class_webdavAccount.inc:111
+#: plugins/personal/connectivity/class_webdavAccount.inc:119
 msgid "Saving webDAV account failed"
 msgstr "Zapisywanie konta webDAV nieudane"
 
@@ -3299,11 +3299,11 @@ msgstr "Konto WebDAV"
 msgid "PHPGroupware"
 msgstr "PHPGroupware"
 
-#: plugins/personal/connectivity/class_phpgwAccount.inc:72
+#: plugins/personal/connectivity/class_phpgwAccount.inc:80
 msgid "Removing PHPgw account failed"
 msgstr "Usuwanie konta PHPgw nieudane"
 
-#: plugins/personal/connectivity/class_phpgwAccount.inc:115
+#: plugins/personal/connectivity/class_phpgwAccount.inc:123
 msgid "Saving PHPgw account failed"
 msgstr "Zapisywanie konta PHPgw nieudane"
 
@@ -3339,11 +3339,11 @@ msgstr "Konto Intranet"
 msgid "Intranet"
 msgstr "Inranet"
 
-#: plugins/personal/connectivity/class_intranetAccount.inc:102
+#: plugins/personal/connectivity/class_intranetAccount.inc:109
 msgid "Removing intranet account failed"
 msgstr "Usuwanie konta intranet nieudane"
 
-#: plugins/personal/connectivity/class_intranetAccount.inc:157
+#: plugins/personal/connectivity/class_intranetAccount.inc:164
 msgid "Saving intranet account failed"
 msgstr "Zapisywanie konta intranet nieudane"
 
@@ -3355,11 +3355,11 @@ msgstr "To konto nie posiada rozszerzeń do Połączeń"
 msgid "PPTP"
 msgstr "PPTP"
 
-#: plugins/personal/connectivity/class_pptpAccount.inc:84
+#: plugins/personal/connectivity/class_pptpAccount.inc:92
 msgid "Removing PPTP account failed"
 msgstr "Usuwanie konta PPTP nieudane"
 
-#: plugins/personal/connectivity/class_pptpAccount.inc:127
+#: plugins/personal/connectivity/class_pptpAccount.inc:135
 msgid "Saving PPTP account failed"
 msgstr "Zapisywanie konta PPTP nieudane"
 
@@ -3372,31 +3372,31 @@ msgstr "konto PHPscheduleit"
 msgid "FTP"
 msgstr "FTP"
 
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:96
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:104
 msgid "Removing pureftpd account failed"
 msgstr "Usuwanie konta pureftpd nieudane"
 
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:138
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:146
 msgid "Value specified as 'Upload bandwidth' is not valid."
 msgstr "Wartość podana jako 'Przepustowość wysyłania' jest nieprawidłowa"
 
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:141
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:149
 msgid "Value specified as 'Download bandwidth' is not valid."
 msgstr "Wartość podana jako 'Przepustowość ściągania' jest nieprawidłowa."
 
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:144
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:152
 msgid "Value specified as 'Files' is not valid."
 msgstr "Wartość podana jako 'Pliki' jest nieprawidłowa"
 
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:147
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:155
 msgid "Value specified as 'Size' is not valid."
 msgstr "Wartość podana jako 'Rozmiar' jest nieprawidłowa."
 
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:150
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:158
 msgid "Value specified as 'Ratio' is not valid."
 msgstr "Wartość podana jako 'Proporcja' jest nieprawidłowa."
 
-#: plugins/personal/connectivity/class_pureftpdAccount.inc:175
+#: plugins/personal/connectivity/class_pureftpdAccount.inc:183
 msgid "Saving pureftpd account failed"
 msgstr "Zapisywanie konta pureftpd nieudane"
 
@@ -3404,7 +3404,7 @@ msgstr "Zapisywanie konta pureftpd nieudane"
 msgid "Opengroupware account"
 msgstr "Konto Opengroupware"
 
-#: plugins/personal/connectivity/class_opengwAccount.inc:139
+#: plugins/personal/connectivity/class_opengwAccount.inc:145
 msgid ""
 "OpenGroupware: Your configuration is missing a postgresql extension. Can't "
 "perform any database queries."
@@ -3412,7 +3412,7 @@ msgstr ""
 "OpenGroupware: Brak rozszerzenia postgresql. Nie można wykonywać zadnych "
 "zapytań do bazy danych."
 
-#: plugins/personal/connectivity/class_opengwAccount.inc:144
+#: plugins/personal/connectivity/class_opengwAccount.inc:150
 msgid ""
 "OpenGroupware: Missing database configuration for opengroupware. Can't get "
 "or set any informations."
@@ -3420,7 +3420,7 @@ msgstr ""
 "OpenGroupware: Brak konfiguracji bazy dla OpenGroupware. Nie można pobierać "
 "ani wysyłać żadnych informacji."
 
-#: plugins/personal/connectivity/class_opengwAccount.inc:152
+#: plugins/personal/connectivity/class_opengwAccount.inc:158
 msgid ""
 "OpenGroupware: Can't connect to specified database. Please check given "
 "configuration twice."
@@ -3456,44 +3456,44 @@ msgstr "Zespoły"
 msgid "Proxy"
 msgstr "Proxy"
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:79
+#: plugins/personal/connectivity/class_proxyAccount.inc:87
 msgid "KB"
 msgstr "KB"
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:79
+#: plugins/personal/connectivity/class_proxyAccount.inc:87
 msgid "GB"
 msgstr "GB"
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:80
+#: plugins/personal/connectivity/class_proxyAccount.inc:88
 #: plugins/addons/mailqueue/class_mailqueue.inc:323
 msgid "hour"
 msgstr "godzina"
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:80
+#: plugins/personal/connectivity/class_proxyAccount.inc:88
 msgid "day"
 msgstr "dzień"
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:80
+#: plugins/personal/connectivity/class_proxyAccount.inc:88
 msgid "week"
 msgstr "tydzień"
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:80
+#: plugins/personal/connectivity/class_proxyAccount.inc:88
 msgid "month"
 msgstr "miesiąc"
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:156
+#: plugins/personal/connectivity/class_proxyAccount.inc:164
 msgid "Removing proxy account failed"
 msgstr "Usuwanie konta proxy nieudane"
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:172
+#: plugins/personal/connectivity/class_proxyAccount.inc:180
 msgid "Numerical value for Quota Setting is empty."
 msgstr "Wartość numeryczna dla ustawień Quoty jest pusta."
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:175
+#: plugins/personal/connectivity/class_proxyAccount.inc:183
 msgid "Numerical value for Quota Setting is not valid."
 msgstr "Wartość numeryczna dla ustawień Quoty jest nieprawidłowa."
 
-#: plugins/personal/connectivity/class_proxyAccount.inc:262
+#: plugins/personal/connectivity/class_proxyAccount.inc:270
 msgid "Saving proxy account failed"
 msgstr "Zapisywanie konta proxy nieudane"
 
@@ -3505,41 +3505,41 @@ msgstr "Konto PHPGroupware"
 msgid "Open-Xchange"
 msgstr "Open-Xchange"
 
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:719
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:816
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:726
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:823
 msgid "Couldn't connect to postgresql database!"
 msgstr "Nie można połączyć się z bazą PostgreSQL!"
 
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:723
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:820
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:730
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:827
 msgid "Needed parameters for openexchange connectivity plugin are missing!"
 msgstr "Brak wymaganych parametrów dla plugina połączeń openXchange!"
 
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:727
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:824
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:734
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:831
 msgid "PHP4 module for postgresql database is missing!"
 msgstr "Brak modułu PHP do bazy PostgreSQL!"
 
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:736
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:743
 msgid "Removing of oxchange addressbook failed"
 msgstr "Usuwanie książki adresowej oxchange nieudane"
 
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:744
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:751
 msgid "Removing oxchange account failed"
 msgstr "Usuwanie konta oxchange nieudane"
 
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:803
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:810
 msgid ""
 "The Open-Xchange accountname is empty and thus invalid! Check to make sure "
 "that "
 msgstr ""
 "Nazwa konta Open-Xchange jest pusta więc nieprawidłowa!. Proszę sprawdzić czy"
 
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:837
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:844
 msgid "Saving of oxchange account failed"
 msgstr "Zapisywanie konta oxchange nieudane"
 
-#: plugins/personal/connectivity/class_oxchangeAccount.inc:844
+#: plugins/personal/connectivity/class_oxchangeAccount.inc:851
 msgid "Creating oxchange addressbook tree failed"
 msgstr "Tworzenie drzewa książki adresowej oxchange nieudane"
 
@@ -3547,12 +3547,12 @@ msgstr "Tworzenie drzewa książki adresowej oxchange nieudane"
 msgid "Kolab"
 msgstr "Kolab"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:117
+#: plugins/personal/connectivity/class_kolabAccount.inc:123
 msgid ""
 "You're trying to add an invalid email address to the list of delegations."
 msgstr "Próbujesz dodać nieprawidłowy adres email do listy delegacji."
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:125
+#: plugins/personal/connectivity/class_kolabAccount.inc:131
 msgid ""
 "The mail address you're trying to add is no primary mail address of an "
 "existing user."
@@ -3560,54 +3560,54 @@ msgstr ""
 "Adres email, który próbujesz dodać nie jest podstawowym adresem istniejącego "
 "użytkownika."
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:152
+#: plugins/personal/connectivity/class_kolabAccount.inc:158
 msgid "Always accept"
 msgstr "Zawsze akceptuj"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:153
+#: plugins/personal/connectivity/class_kolabAccount.inc:159
 msgid "Always reject"
 msgstr "Zawsze odrzuć"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:154
+#: plugins/personal/connectivity/class_kolabAccount.inc:160
 msgid "Reject if conflicts"
 msgstr "Odmów jeśli koliduje"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:155
+#: plugins/personal/connectivity/class_kolabAccount.inc:161
 msgid "Manual if conflicts"
 msgstr "Ustaw ręcznie jeśli koliduje"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:156
+#: plugins/personal/connectivity/class_kolabAccount.inc:162
 msgid "Manual"
 msgstr "Ręczne"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:206
+#: plugins/personal/connectivity/class_kolabAccount.inc:212
 msgid "Anonymous"
 msgstr "Anonimowy"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:267
+#: plugins/personal/connectivity/class_kolabAccount.inc:273
 #, fuzzy, php-format
 msgid "Removing of user/kolab account with dn '%s' failed."
 msgstr "Usuwanie konta ogólnego użytkownika nieudane"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:278
+#: plugins/personal/connectivity/class_kolabAccount.inc:284
 msgid "The value specified as Free Busy future needs to be an integer."
 msgstr "Wartość podana jako przyszłość FreeBusy musi być liczbą."
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:283
+#: plugins/personal/connectivity/class_kolabAccount.inc:289
 msgid "The value specified as Free Busy Information URL is invalid."
 msgstr "Wartość podana jako informacyjny URL FreeBusy jest nieprawidłowa."
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:297
+#: plugins/personal/connectivity/class_kolabAccount.inc:303
 #, php-format
 msgid "The invitation policy entry for address '%s' is not valid."
 msgstr "Polityka zapraszania dla adresu '%s' jest nieprawidłowa."
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:305
+#: plugins/personal/connectivity/class_kolabAccount.inc:311
 #, php-format
 msgid "There's no mail user with address '%s' for your invitation policy!"
 msgstr "Brak użytkownika pocztowego o adresie '%s' dla polityki zapraszania!"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:384
+#: plugins/personal/connectivity/class_kolabAccount.inc:390
 #, fuzzy, php-format
 msgid "Saving of user/kolab account with dn '%s' failed."
 msgstr "Zapisywanie konta Kolab nieudane"
@@ -3729,34 +3729,34 @@ msgstr "Przyszłość"
 msgid "Invitation policy"
 msgstr "Polityka zapraszania"
 
-#: plugins/personal/samba/class_sambaAccount.inc:198
+#: plugins/personal/samba/class_sambaAccount.inc:205
 msgid "This account has no samba extensions."
 msgstr "To konto nie posiada rozszerzeń samba"
 
-#: plugins/personal/samba/class_sambaAccount.inc:207
+#: plugins/personal/samba/class_sambaAccount.inc:214
 msgid "Remove samba account"
 msgstr "Usuń konto samba"
 
-#: plugins/personal/samba/class_sambaAccount.inc:208
+#: plugins/personal/samba/class_sambaAccount.inc:215
 msgid ""
 "This account has samba features enabled. You can disable them by clicking "
 "below."
 msgstr ""
 "To konto posiada rozszerzenia samba. Można je wyłączyć klikając poniżej."
 
-#: plugins/personal/samba/class_sambaAccount.inc:218
-#: plugins/personal/samba/class_sambaAccount.inc:221
+#: plugins/personal/samba/class_sambaAccount.inc:225
+#: plugins/personal/samba/class_sambaAccount.inc:228
 msgid "Create samba account"
 msgstr "Stwórz konto samba"
 
-#: plugins/personal/samba/class_sambaAccount.inc:219
+#: plugins/personal/samba/class_sambaAccount.inc:226
 msgid ""
 "This account has samba features disabled. You can enable them by clicking "
 "below."
 msgstr ""
 "To konto nie posiada rozszerzenia samba. Można he włączyć klikając poniżej."
 
-#: plugins/personal/samba/class_sambaAccount.inc:222
+#: plugins/personal/samba/class_sambaAccount.inc:229
 msgid ""
 "This account has samba features disabled. Posix features are needed for "
 "samba accounts, enable them first."
@@ -3764,69 +3764,69 @@ msgstr ""
 "To konto nie posiada rozszerzenia samba. Wymagane są rozszerzenia posix, "
 "które należy włączyć wcześniej."
 
-#: plugins/personal/samba/class_sambaAccount.inc:456
+#: plugins/personal/samba/class_sambaAccount.inc:463
 msgid "input on, notify on"
 msgstr "input tak, notify tak"
 
-#: plugins/personal/samba/class_sambaAccount.inc:457
+#: plugins/personal/samba/class_sambaAccount.inc:464
 msgid "input on, notify off"
 msgstr "input tak, notify nie"
 
-#: plugins/personal/samba/class_sambaAccount.inc:458
+#: plugins/personal/samba/class_sambaAccount.inc:465
 msgid "input off, notify on"
 msgstr "input nie, notify tak"
 
-#: plugins/personal/samba/class_sambaAccount.inc:459
+#: plugins/personal/samba/class_sambaAccount.inc:466
 msgid "input off, nofify off"
 msgstr "input nie, notify nie"
 
-#: plugins/personal/samba/class_sambaAccount.inc:461
+#: plugins/personal/samba/class_sambaAccount.inc:468
 msgid "disconnect"
 msgstr "rozłącz"
 
-#: plugins/personal/samba/class_sambaAccount.inc:462
+#: plugins/personal/samba/class_sambaAccount.inc:469
 msgid "reset"
 msgstr "resetuj"
 
-#: plugins/personal/samba/class_sambaAccount.inc:464
+#: plugins/personal/samba/class_sambaAccount.inc:471
 msgid "from any client"
 msgstr "z każdego klienta"
 
-#: plugins/personal/samba/class_sambaAccount.inc:465
+#: plugins/personal/samba/class_sambaAccount.inc:472
 msgid "from previous client only"
 msgstr "tylko z poprzedniego klienta"
 
-#: plugins/personal/samba/class_sambaAccount.inc:627
+#: plugins/personal/samba/class_sambaAccount.inc:634
 msgid "Removing Samba account failed"
 msgstr "Usuwanie konta Samba nieudane"
 
-#: plugins/personal/samba/class_sambaAccount.inc:644
+#: plugins/personal/samba/class_sambaAccount.inc:651
 #: plugins/personal/samba/samba3.tpl:44 plugins/personal/samba/samba3.tpl:104
 #: plugins/personal/samba/samba2.tpl:36
 msgid "Profile path"
 msgstr "Ścieżka do profilu"
 
-#: plugins/personal/samba/class_sambaAccount.inc:646
+#: plugins/personal/samba/class_sambaAccount.inc:653
 #, php-format
 msgid "The value specified as '%s' contains invalid characters!"
 msgstr "Wartość podana jako '%s' zawiera niedozwolone znaki!"
 
-#: plugins/personal/samba/class_sambaAccount.inc:651
+#: plugins/personal/samba/class_sambaAccount.inc:658
 #: plugins/personal/samba/samba3.tpl:158
 msgid "Connection"
 msgstr "Połączenie"
 
-#: plugins/personal/samba/class_sambaAccount.inc:652
+#: plugins/personal/samba/class_sambaAccount.inc:659
 #: plugins/personal/samba/samba3.tpl:167
 msgid "Disconnection"
 msgstr "Rozłączenie"
 
-#: plugins/personal/samba/class_sambaAccount.inc:653
+#: plugins/personal/samba/class_sambaAccount.inc:660
 #: plugins/personal/samba/samba3.tpl:176
 msgid "IDLE"
 msgstr "BEZCZYNNY"
 
-#: plugins/personal/samba/class_sambaAccount.inc:656
+#: plugins/personal/samba/class_sambaAccount.inc:663
 #, php-format
 msgid ""
 "The timeout property '%s' is checked and contains invalid or no characters!"
@@ -3834,14 +3834,14 @@ msgstr ""
 "Właściwości timeoutu '%s' są włączone i zawierają nieprawidłowe znaki, lub "
 "są puste!"
 
-#: plugins/personal/samba/class_sambaAccount.inc:662
+#: plugins/personal/samba/class_sambaAccount.inc:669
 msgid ""
 "The windows user manager only allows eight clients. You've specified more "
 "than eight."
 msgstr ""
 "User manager w windows zezwala tylko na 8 klientów. Podano więcej niż 8."
 
-#: plugins/personal/samba/class_sambaAccount.inc:846
+#: plugins/personal/samba/class_sambaAccount.inc:853
 msgid ""
 "Warning: This account has an undefined samba SID assigned. The problem can "
 "not be fixed by GOsa!"
@@ -3849,7 +3849,7 @@ msgstr ""
 "Ostrzeżenie: To konto ma przypisany niezdefiniowany samba SID. Ten problem "
 "nie może być naprawiony przez GOsa!"
 
-#: plugins/personal/samba/class_sambaAccount.inc:870
+#: plugins/personal/samba/class_sambaAccount.inc:877
 msgid ""
 "Warning: Can't identify users primary group - no conversion to a samba group "
 "possible!"
@@ -3857,7 +3857,7 @@ msgstr ""
 "Ostrzeżenie: Nie można określić podstawowej grupy użytkowników - nie jest "
 "możliwa konwersja do grupy samba!"
 
-#: plugins/personal/samba/class_sambaAccount.inc:974
+#: plugins/personal/samba/class_sambaAccount.inc:981
 msgid "Saving Samba account failed"
 msgstr "Zapisywanie konta Samba nieudane"
 
@@ -3977,42 +3977,42 @@ msgstr "Wyświetl stacje robocze departamentu"
 msgid "Manage netatalk account"
 msgstr "Zarządzaj kontem Netatalk"
 
-#: plugins/personal/netatalk/class_netatalk.inc:110
+#: plugins/personal/netatalk/class_netatalk.inc:116
 msgid "This account has no netatalk extensions."
 msgstr "To konto nie posiada rozszerzeń Netatalk"
 
-#: plugins/personal/netatalk/class_netatalk.inc:133
+#: plugins/personal/netatalk/class_netatalk.inc:139
 msgid "Remove netatalk account"
 msgstr "Usuń konto Netatalk"
 
-#: plugins/personal/netatalk/class_netatalk.inc:133
+#: plugins/personal/netatalk/class_netatalk.inc:139
 msgid ""
 "This account has netatalk features enabled. You can disable them by clicking "
 "below."
 msgstr ""
 "To konto ma włączone cechu Netatalk. Można je wyłączyć klikając poniżej."
 
-#: plugins/personal/netatalk/class_netatalk.inc:144
-#: plugins/personal/netatalk/class_netatalk.inc:146
+#: plugins/personal/netatalk/class_netatalk.inc:150
+#: plugins/personal/netatalk/class_netatalk.inc:152
 msgid "Create netatalk account"
 msgstr "Utwórz konto Netatalk"
 
-#: plugins/personal/netatalk/class_netatalk.inc:144
+#: plugins/personal/netatalk/class_netatalk.inc:150
 msgid ""
 "This account has netatalk features disabled. You can enable them by clicking "
 "below."
 msgstr ""
 "To konto ma wyłączone cechy Netatalk. Można je włączyć klikając poniżej."
 
-#: plugins/personal/netatalk/class_netatalk.inc:202
+#: plugins/personal/netatalk/class_netatalk.inc:208
 msgid "You must select a share to use."
 msgstr "Trzeba wybrać udział do użycia."
 
-#: plugins/personal/netatalk/class_netatalk.inc:256
+#: plugins/personal/netatalk/class_netatalk.inc:262
 msgid "Saving Netatalk account failed"
 msgstr "Zapisywanie konta Netatalk nieudane"
 
-#: plugins/personal/netatalk/class_netatalk.inc:316
+#: plugins/personal/netatalk/class_netatalk.inc:322
 msgid "Removing Netatalk account failed"
 msgstr "Usuwanie konta Netatalk nieudane"
 
@@ -4491,7 +4491,7 @@ msgstr "podczas"
 
 #: plugins/gofax/faxreports/contents.tpl:30
 #: plugins/gofax/faxreports/detail.tpl:21
-#: plugins/admin/systems/class_printGeneric.inc:798
+#: plugins/admin/systems/class_printGeneric.inc:807
 #: plugins/admin/fai/faiTemplateEntry.tpl:94
 #: plugins/admin/ogroups/class_ogroupManagement.inc:363
 msgid "User"
@@ -4955,14 +4955,14 @@ msgstr "Zatwierdź departament"
 #: plugins/admin/systems/glpi.tpl:15 plugins/admin/systems/glpi.tpl:25
 #: plugins/admin/systems/glpi.tpl:35
 #: plugins/admin/applications/class_divListApplication.inc:159
-#: plugins/admin/fai/class_faiScript.inc:240
-#: plugins/admin/fai/class_faiScript.inc:243
-#: plugins/admin/fai/class_faiHook.inc:263
-#: plugins/admin/fai/class_faiHook.inc:266
-#: plugins/admin/fai/class_faiTemplate.inc:237
-#: plugins/admin/fai/class_faiTemplate.inc:240
-#: plugins/admin/fai/class_divListFai.inc:209
-#: plugins/admin/fai/class_divListFai.inc:214
+#: plugins/admin/fai/class_faiScript.inc:242
+#: plugins/admin/fai/class_faiScript.inc:245
+#: plugins/admin/fai/class_faiHook.inc:265
+#: plugins/admin/fai/class_faiHook.inc:268
+#: plugins/admin/fai/class_faiTemplate.inc:239
+#: plugins/admin/fai/class_faiTemplate.inc:242
+#: plugins/admin/fai/class_divListFai.inc:208
+#: plugins/admin/fai/class_divListFai.inc:213
 #: plugins/admin/groups/class_divListGroup.inc:150
 #: plugins/admin/ogroups/class_divListOGroup.inc:138
 #: plugins/admin/departments/class_divListDepartment.inc:92
@@ -4982,10 +4982,10 @@ msgstr "Edytuj użytkownika"
 #: plugins/addons/mailqueue/contents.tpl:93
 #: plugins/admin/systems/class_divListSystem.inc:136
 #: plugins/admin/applications/class_divListApplication.inc:164
-#: plugins/admin/fai/class_faiScript.inc:244
-#: plugins/admin/fai/class_faiHook.inc:267
-#: plugins/admin/fai/class_faiTemplate.inc:241
-#: plugins/admin/fai/class_divListFai.inc:216
+#: plugins/admin/fai/class_faiScript.inc:246
+#: plugins/admin/fai/class_faiHook.inc:269
+#: plugins/admin/fai/class_faiTemplate.inc:243
+#: plugins/admin/fai/class_divListFai.inc:215
 #: plugins/admin/groups/class_divListGroup.inc:152
 #: plugins/admin/ogroups/class_divListOGroup.inc:140
 #: plugins/admin/departments/class_divListDepartment.inc:94
@@ -5102,62 +5102,62 @@ msgstr "Ustawienia FAX"
 msgid "FAX"
 msgstr "FAX"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:137
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:143
 msgid "This account has no fax extensions."
 msgstr "To konto nie posiada rozszerzenia fax"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:146
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:152
 msgid "Remove fax account"
 msgstr "Usuń konto fax"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:147
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:153
 msgid ""
 "This account has fax features enabled. You can disable them by clicking "
 "below."
 msgstr "To konto ma włączone cechu fax. Można je wyłączyć klikając poniżej."
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:149
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:155
 msgid "Create fax account"
 msgstr "Utwórz konto fax"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:150
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:156
 msgid ""
 "This account has fax features disabled. You can enable them by clicking "
 "below."
 msgstr "To konto ma wyłączone cechy faxu. Można je włączyć klikając poniżej."
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:218
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:224
 msgid "You're trying to add an invalid phone number."
 msgstr "Nieprawidłowy numer telefonu."
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:431
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:513
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:437
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:519
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:94
 #: plugins/admin/groups/class_groupApplication.inc:632
 msgid "back"
 msgstr "wróć"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:624
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:630
 msgid "Removing FAX account failed"
 msgstr "Usuwanie konta FAX nieudane"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:639
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:645
 msgid "The required field 'Fax' is not set."
 msgstr "Wymagane pole 'fax' jest puste."
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:643
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:649
 msgid "Please enter a valid telephone number in the 'Fax' field."
 msgstr "Proszę podać prawidłowy numer telefonu w polu 'Fax'."
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:651
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:657
 msgid "Mail delivery is checked, but no address has been specified."
 msgstr "Dostarczanie poczty jest włączone, ale nie podano adresu."
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:653
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:659
 msgid "The mail address you've entered is invalid."
 msgstr "Adres email który podano jest nieprawidłowy."
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:659
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:665
 msgid ""
 "Deliver fax to printer, is only possible if valid printer is given. Please "
 "correct your choice."
@@ -5165,7 +5165,7 @@ msgstr ""
 "Dostarczanie faxu do drukarki jest możliwe jedynie gdy istnieje prawidłowa "
 "drukarka. Proszę poprawić."
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:743
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:749
 msgid "Saving FAX account failed"
 msgstr "Zapytanie konta FAX nieudane!"
 
@@ -5355,7 +5355,7 @@ msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro."
 msgstr "Brak uprawnień do zmian atrybutu '%s' w goFonMacro."
 
 #: plugins/gofon/macro/class_gofonMacroParameters.inc:336
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:916
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:918
 #, php-format
 msgid "The parameter %s contains invalid char. '!,#' is used as delimiter"
 msgstr ""
@@ -5401,8 +5401,8 @@ msgstr ""
 "gdyż nie ma operacji powrotu."
 
 #: plugins/gofon/macro/class_gofonMacro.inc:97
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:251
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:646
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:253
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:648
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:249
 msgid ""
 "There is currently no asterisk server defined. Possibly you are missing a "
@@ -5438,9 +5438,9 @@ msgstr ""
 "w bazie asterisk."
 
 #: plugins/gofon/macro/class_gofonMacro.inc:235
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:80
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:296
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1038
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:82
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:298
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1040
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:386
 #: plugins/admin/ogroups/class_phonequeue.inc:615
 #, php-format
@@ -5452,9 +5452,9 @@ msgstr ""
 "dla błedu mysql."
 
 #: plugins/gofon/macro/class_gofonMacro.inc:246
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:87
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:307
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1049
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:89
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:309
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1051
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:281
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:397
 #: plugins/admin/ogroups/class_phonequeue.inc:250
@@ -5569,15 +5569,15 @@ msgstr "Odśwież"
 msgid "Phone settings"
 msgstr "Ustawienia telefonu"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:119
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:121
 msgid "no macro"
 msgstr "brak makra"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:136
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:138
 msgid "undefined"
 msgstr "niezdefiniowany"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:257
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:259
 msgid ""
 "Can't save any changes to asterisk database, there is no mysql extension "
 "available."
@@ -5585,38 +5585,38 @@ msgstr ""
 "Nie można zapisać zmian w bazie asterisk. Brak wsparcia dla mysql w "
 "ustawieniach php."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:561
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:563
 msgid "Error while performing query:"
 msgstr "Błąd podczas wykonywania zapytania:"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:617
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:741
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:619
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:743
 msgid "This account has no phone extensions."
 msgstr "To konto nie posiada rozszerzeń telefonu."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:637
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:639
 msgid ""
 "The macro you selected, is no longer available for you, please choose "
 "another one."
 msgstr "Makro które wybrano nie jest już dostępne, proszę wybrać inne."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:751
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:753
 msgid "Remove phone account"
 msgstr "Usuń konto telefoniczne"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:752
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:754
 msgid ""
 "This account has phone features enabled. You can disable them by clicking "
 "below."
 msgstr ""
 "To konto ma włączone cechy telefonu. Można je wyłączyć klikając poniżej."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:755
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:758
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:757
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:760
 msgid "Create phone account"
 msgstr "Utwórz konto telefoniczne"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:756
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:758
 msgid ""
 "This account has phone features disabled. You can't enable them while no uid "
 "is set."
@@ -5624,37 +5624,37 @@ msgstr ""
 "To konto posiada wyłączone rozszerzenia telefonu. Nie można włączyć tego "
 "rozszerzenia dopóki nie jest ustawiony uid."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:759
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:761
 msgid ""
 "This account has phone features disabled. You can enable them by clicking "
 "below."
 msgstr ""
 "To konto ma wyłączone cechy telefonu. Można je włączyć klikając poniżej."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:772
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:774
 msgid "Please enter a valid phone number!"
 msgstr "Proszę podać prawidłowy numer telefonu."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:802
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:804
 msgid "Choose your private phone"
 msgstr "Wybierz swój telefon prywatny"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:888
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:890
 msgid "Voicemail PIN must be between 1-4 characters."
 msgstr "PIN Voicemail musi zawierać od 1 do 4 znaków."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:891
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:893
 msgid ""
 "The specified Voicemail PIN contains invalid characters, only numeric values "
 "are allowed here."
 msgstr ""
 "Podany PIN Voicemail zawiera niedozwolone znaki, tylko cyfry są dozwolone."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:896
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:898
 msgid "Phone PIN must be at least one character long."
 msgstr "PIN telefonu musi zawierać co najmniej 1 znak."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:899
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:901
 msgid ""
 "The specified phone PIN contains invalid characters, only aphanumeric values "
 "are allowed here."
@@ -5662,20 +5662,20 @@ msgstr ""
 "Podany PIN telefonu zawiera niedozwolone znaki, tylko znaki alfanumeryczne "
 "są dozwolone."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:909
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:911
 #, php-format
 msgid "You need to specify at least one phone number!"
 msgstr "Musisz podac co najmniej jeden numer telefonu!"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:964
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:966
 msgid "Saving phone account failed"
 msgstr "Zapisywanie konta telefonicznego nieudane"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1080
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1082
 msgid "Stop"
 msgstr "Zatrzymaj"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1085
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1087
 msgid ""
 "Can't remove phone account, the mysql extension is not present in php "
 "configuration."
@@ -5683,17 +5683,17 @@ msgstr ""
 "Nie można usunąć konta telefonicznego. Brak wsparcia dla mysql w "
 "ustawieniach php."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1118
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1120
 #, php-format
 msgid "Removed user '%s' from phone queue '%s'."
 msgstr "Usunięto użytkownika '%s' z kolejki telefonicznej '%s'."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1125
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1127
 msgid "Removing phone account failed"
 msgstr "Usuwanie konta telefonicznego nieudane"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1154
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1156
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1158
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:437
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:439
 #: plugins/admin/ogroups/class_phonequeue.inc:525
@@ -6720,8 +6720,8 @@ msgid "This object has no relationship to other objects."
 msgstr "Ten obiekt nie posiada powiązań z innymi obiektami."
 
 #: plugins/generic/references/class_reference.inc:36
-#: plugins/admin/systems/class_printGeneric.inc:793
-#: plugins/admin/systems/class_printGeneric.inc:795
+#: plugins/admin/systems/class_printGeneric.inc:802
+#: plugins/admin/systems/class_printGeneric.inc:804
 #: plugins/admin/fai/faiTemplateEntry.tpl:71
 #: plugins/admin/fai/faiTemplateEntry.tpl:103
 #: plugins/admin/ogroups/class_ogroupManagement.inc:364
@@ -7148,21 +7148,21 @@ msgstr "Usuwanie drukarki nieudane"
 msgid "You have no permissions to create a printer on this 'Base'."
 msgstr "Brak uprawnień do tworzenia telefonu w tym elemencie."
 
-#: plugins/admin/systems/class_printGeneric.inc:773
+#: plugins/admin/systems/class_printGeneric.inc:781
 msgid "Saving printer failed"
 msgstr "Zapisywanie drukarki nieudane"
 
-#: plugins/admin/systems/class_printGeneric.inc:818
+#: plugins/admin/systems/class_printGeneric.inc:827
 #, php-format
 msgid "Illegal printer type while adding '%s' to the list of '%s' printers,"
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:840
+#: plugins/admin/systems/class_printGeneric.inc:849
 #, php-format
 msgid "Can't add '%s' to the list of members, it is already used."
 msgstr ""
 
-#: plugins/admin/systems/class_printGeneric.inc:848
+#: plugins/admin/systems/class_printGeneric.inc:857
 #, php-format
 msgid "Can't add '%s' to list of members, it is not reachable."
 msgstr ""
@@ -8145,7 +8145,7 @@ msgstr "Nowy załącznik"
 
 #: plugins/admin/systems/class_glpiAttachmentPool.inc:351
 #: plugins/admin/systems/class_servRepository.inc:212
-#: plugins/admin/fai/class_faiManagement.inc:322
+#: plugins/admin/fai/class_faiManagement.inc:325
 msgid "This name is already in use."
 msgstr "Ta nazwa jest już w użyciu."
 
@@ -8665,7 +8665,7 @@ msgstr "Zapisywanie ustawień serwera baz danych nieudane"
 
 #: plugins/admin/systems/class_SelectDeviceType.inc:29
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:393
-#: plugins/admin/ogroups/class_ogroup.inc:277
+#: plugins/admin/ogroups/class_ogroup.inc:278
 #: plugins/admin/users/class_userManagement.inc:452
 msgid "none"
 msgstr "żaden"
@@ -9553,8 +9553,8 @@ msgstr "Zamierzasz usunąć wszystkie informacje o komponencie w '%s'."
 
 #: plugins/admin/systems/class_systemManagement.inc:319
 #: plugins/admin/systems/class_systemManagement.inc:379
-#: plugins/admin/fai/class_faiManagement.inc:159
-#: plugins/admin/fai/class_faiManagement.inc:202
+#: plugins/admin/fai/class_faiManagement.inc:160
+#: plugins/admin/fai/class_faiManagement.inc:204
 msgid "You are not allowed to delete this component!"
 msgstr "Brak uprawnień do usunięcia tego elementu!"
 
@@ -10520,9 +10520,9 @@ msgstr "Utwórz wpis w pasku uruchamiania członka"
 
 #: plugins/admin/applications/generic.tpl:103
 #: plugins/admin/fai/class_faiHookEntry.inc:84
-#: plugins/admin/fai/class_faiScript.inc:253
-#: plugins/admin/fai/class_faiHook.inc:276
-#: plugins/admin/fai/class_faiTemplate.inc:253
+#: plugins/admin/fai/class_faiScript.inc:255
+#: plugins/admin/fai/class_faiHook.inc:278
+#: plugins/admin/fai/class_faiTemplate.inc:255
 #: plugins/admin/fai/class_faiScriptEntry.inc:89
 msgid "Download"
 msgstr "Ściągnij"
@@ -10856,16 +10856,23 @@ msgstr ""
 "nie zawierać zarezerwowanych nazw 'scripts', 'hooks', 'partitions', "
 "'variables', 'templates', oraz 'fai'."
 
-#: plugins/admin/fai/faiNewBranch.tpl:11
+#: plugins/admin/fai/faiNewBranch.tpl:7
+msgid ""
+"Branches are created as subreleases of the currently selected branch. "
+"Creating a new branch named 1.0.2 in SARGE for example, will result in a new "
+"release called SARGE/1.0.2."
+msgstr ""
+
+#: plugins/admin/fai/faiNewBranch.tpl:13
 msgid "Please enter a name for the branch"
 msgstr "Proszę podać nazwę gałęzi"
 
-#: plugins/admin/fai/faiNewBranch.tpl:33
+#: plugins/admin/fai/faiNewBranch.tpl:35
 #: plugins/admin/departments/dep_iframe.tpl:1
 msgid "Processing the requested operation"
 msgstr "Przetwarzam zadaną operację"
 
-#: plugins/admin/fai/faiNewBranch.tpl:34
+#: plugins/admin/fai/faiNewBranch.tpl:36
 msgid ""
 "As soon as the copy operation has finished, you can scroll down to end of "
 "the page and press the 'Continue' button to continue with the fai management "
@@ -10874,7 +10881,7 @@ msgstr ""
 "Jak tylko operacja kopiowania zakończy się, można przewinąć stronę na dół i "
 "nacisnąć przycisk 'Kontynuuj' aby przejść do dialogu zarządzania FAI."
 
-#: plugins/admin/fai/faiNewBranch.tpl:40
+#: plugins/admin/fai/faiNewBranch.tpl:42
 #: plugins/admin/departments/dep_iframe.tpl:8
 msgid ""
 "Your browser doesn't support iframes, please use this link to perform the "
@@ -10883,27 +10890,27 @@ msgstr ""
 "Twoja przeglądarka nie obsługuje iframes, proszę użyć tego linku aby wykonać "
 "żądaną operację."
 
-#: plugins/admin/fai/faiNewBranch.tpl:42
+#: plugins/admin/fai/faiNewBranch.tpl:44
 msgid "Perform requested operation."
 msgstr "Wykonaj żądaną operację."
 
-#: plugins/admin/fai/faiNewBranch.tpl:42
+#: plugins/admin/fai/faiNewBranch.tpl:44
 msgid "Initiate operation"
 msgstr "Zainicjiuj operację"
 
-#: plugins/admin/fai/class_faiScript.inc:315
+#: plugins/admin/fai/class_faiScript.inc:317
 msgid "Removing FAI script base failed"
 msgstr "Usuwanie bazy skryptów FAI nieudane"
 
-#: plugins/admin/fai/class_faiScript.inc:366
+#: plugins/admin/fai/class_faiScript.inc:368
 msgid "Creating FAI script base failed"
 msgstr "Tworzenie bazy skryptów FAI nieudane"
 
-#: plugins/admin/fai/class_faiScript.inc:445
+#: plugins/admin/fai/class_faiScript.inc:447
 msgid "Removing FAI script failed"
 msgstr "Usuwanie skryptu FAI nieudane"
 
-#: plugins/admin/fai/class_faiScript.inc:464
+#: plugins/admin/fai/class_faiScript.inc:466
 msgid "Saving FAI script failed"
 msgstr "Zapisywanie skryptu FAI nieudane"
 
@@ -11036,20 +11043,20 @@ msgstr "Proszę podać prawidłową grupę. Tylko a-z/0-9 są dozwolone."
 msgid "List of template files"
 msgstr "Lista plików szablonów"
 
-#: plugins/admin/fai/class_faiHook.inc:343
+#: plugins/admin/fai/class_faiHook.inc:345
 msgid "Removing FAI hook base failed"
 msgstr "Usuwanie bazy zaczepu FAI nieudane"
 
-#: plugins/admin/fai/class_faiHook.inc:394
+#: plugins/admin/fai/class_faiHook.inc:396
 msgid "Saving FAI hook base failed"
 msgstr "Zapisywanie bazy zaczepu FAI nieudane"
 
-#: plugins/admin/fai/class_faiHook.inc:479
+#: plugins/admin/fai/class_faiHook.inc:481
 msgid "Removing FAI hook failed"
 msgstr "Usuwanie zaczepu FAI nieudane"
 
-#: plugins/admin/fai/class_faiHook.inc:485
-#: plugins/admin/fai/class_faiHook.inc:495
+#: plugins/admin/fai/class_faiHook.inc:487
+#: plugins/admin/fai/class_faiHook.inc:497
 msgid "Saving FAI hook failed"
 msgstr "Zapisywanie zaczepu FAI nieudane"
 
@@ -11079,44 +11086,54 @@ msgstr "FAI"
 msgid "Fully Automatic Installation - management"
 msgstr "Fully Automatic Installation - zarządzanie"
 
-#: plugins/admin/fai/class_faiManagement.inc:153
+#: plugins/admin/fai/class_faiManagement.inc:154
 #, php-format
 msgid "You're about to delete all information about the FAI class at '%s'."
 msgstr "Zamierzasz usunąć wszyskie informacje o klasie FAI w '%s'."
 
-#: plugins/admin/fai/class_faiManagement.inc:255
+#: plugins/admin/fai/class_faiManagement.inc:257
 #, php-format
 msgid "You're about to delete a fai branch / freeze  '%s'."
 msgstr "Zamierzasz usunąć gałąź / zamrożenie FAI '%s'."
 
-#: plugins/admin/fai/class_faiManagement.inc:258
+#: plugins/admin/fai/class_faiManagement.inc:260
 msgid "You are not allowed to delete this release!"
 msgstr "Brak uprawnień do usunięcia tego wydania!"
 
-#: plugins/admin/fai/class_faiManagement.inc:313
+#: plugins/admin/fai/class_faiManagement.inc:316
 msgid "Specified branch name is invalid."
 msgstr "Podana nazwa gałęzi jest niepoprawna."
 
-#: plugins/admin/fai/class_faiManagement.inc:315
+#: plugins/admin/fai/class_faiManagement.inc:318
 msgid "Specified freeze name is invalid."
 msgstr "Podana nazwa zamrożenia jest niepoprawna."
 
-#: plugins/admin/fai/class_faiTemplate.inc:364
+#: plugins/admin/fai/class_faiTemplate.inc:366
 msgid "Saving FAI template base failed"
 msgstr "Zapisywanie bazy szablonów FAI nieudane"
 
-#: plugins/admin/fai/class_faiTemplate.inc:435
+#: plugins/admin/fai/class_faiTemplate.inc:437
 msgid "Removing FAI template base failed"
 msgstr "Usuwanie bazy szablonów FAI nieudane"
 
-#: plugins/admin/fai/class_faiTemplate.inc:440
-#: plugins/admin/fai/class_faiTemplate.inc:453
+#: plugins/admin/fai/class_faiTemplate.inc:442
+#: plugins/admin/fai/class_faiTemplate.inc:455
 msgid "Saving FAI template failed"
 msgstr "Zapisywanie szablonu FAI nieudane"
 
 #: plugins/admin/fai/faiPackageConfiguration.tpl:1
 msgid "Package"
 msgstr "Pakiet"
+
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:185
+#, fuzzy
+msgid "primary"
+msgstr "Grupa podstawowa"
+
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:185
+#, fuzzy
+msgid "logical"
+msgstr "Dodaj lokalne"
 
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:193
 msgid "FS type"
@@ -11207,36 +11224,36 @@ msgstr ""
 "Operacja odnosi się do 'wszystkich' informacji obiektowych. Proszę upewnić "
 "się, czy na pewno wykonać tą operację, gdyż nie ma możliwości powrotu."
 
-#: plugins/admin/fai/class_faiPackage.inc:341
+#: plugins/admin/fai/class_faiPackage.inc:345
 msgid "Removing FAI package base failed"
 msgstr "Usuwanie bazy pakietów FAI nieudane"
 
-#: plugins/admin/fai/class_faiPackage.inc:370
+#: plugins/admin/fai/class_faiPackage.inc:374
 msgid "Please select a least one Package."
 msgstr "Prosze wybrać przynajmniej jeden pakiet."
 
-#: plugins/admin/fai/class_faiPackage.inc:374
+#: plugins/admin/fai/class_faiPackage.inc:378
 msgid "Please choose a valid combination for your repository setup."
 msgstr "Proszę wybrać poprawną kombinację dla ustawień repozytorium."
 
-#: plugins/admin/fai/class_faiPackage.inc:395
+#: plugins/admin/fai/class_faiPackage.inc:399
 msgid "package is configured"
 msgstr "pakiet jest skonfigurowany"
 
-#: plugins/admin/fai/class_faiPackage.inc:401
+#: plugins/admin/fai/class_faiPackage.inc:405
 msgid "Package marked for removal"
 msgstr "Pakiet zaznaczony do usunięcia"
 
-#: plugins/admin/fai/class_faiPackage.inc:426
+#: plugins/admin/fai/class_faiPackage.inc:430
 #, php-format
 msgid "Package file '%s' does not exist."
 msgstr "Plik pakietu '%s' nie istnieje."
 
-#: plugins/admin/fai/class_faiPackage.inc:485
+#: plugins/admin/fai/class_faiPackage.inc:489
 msgid "Saving FAI package base failed"
 msgstr "Zapisywanie bazy pakietów nieudane"
 
-#: plugins/admin/fai/class_faiPackage.inc:530
+#: plugins/admin/fai/class_faiPackage.inc:534
 msgid "Saving FAI package entry failed"
 msgstr "Zapisywanie elementu pakietu FAI nieudane"
 
@@ -11519,12 +11536,12 @@ msgstr "Nowa lista pakietów"
 msgid "PK"
 msgstr "PK"
 
-#: plugins/admin/fai/class_divListFai.inc:210
-#: plugins/admin/fai/class_divListFai.inc:215
+#: plugins/admin/fai/class_divListFai.inc:209
+#: plugins/admin/fai/class_divListFai.inc:214
 msgid "Edit class"
 msgstr "Edytuj klasę"
 
-#: plugins/admin/fai/class_divListFai.inc:217
+#: plugins/admin/fai/class_divListFai.inc:216
 msgid "Delete class"
 msgstr "Usuń klasę"
 
@@ -11687,7 +11704,7 @@ msgstr ""
 
 #: plugins/admin/groups/acl.tpl:4
 #: plugins/admin/departments/class_departmentGeneric.inc:487
-#: include/class_ldap.inc:455
+#: include/class_ldap.inc:463
 msgid "Object"
 msgstr "Obiekt"
 
@@ -11697,7 +11714,7 @@ msgstr "Zastosuj ten ACL tylko dla własnych parametrów użytkownika."
 
 #: plugins/admin/groups/generic.tpl:7 plugins/admin/groups/paste_generic.tpl:5
 #: plugins/admin/ogroups/generic.tpl:7
-#: plugins/admin/ogroups/class_ogroup.inc:737
+#: plugins/admin/ogroups/class_ogroup.inc:684
 msgid "Group name"
 msgstr "Nazwa grupy"
 
@@ -11909,7 +11926,7 @@ msgid "Saving group failed"
 msgstr "Zapisywanie grupy nieudane"
 
 #: plugins/admin/groups/class_groupGeneric.inc:731
-#: plugins/admin/ogroups/class_ogroup.inc:656
+#: plugins/admin/ogroups/class_ogroup.inc:603
 msgid "You have no permissions to create a group on this 'Base'."
 msgstr "Brak uprawnień do tworzenia grupy w tej 'bazie'."
 
@@ -12335,71 +12352,71 @@ msgstr "System"
 msgid "Terminals"
 msgstr "Terminale"
 
-#: plugins/admin/ogroups/class_ogroup.inc:144
+#: plugins/admin/ogroups/class_ogroup.inc:145
 msgid "This 'dn' is no object group."
 msgstr "Ten 'dn' nie jest grupą obiektową."
 
-#: plugins/admin/ogroups/class_ogroup.inc:279
+#: plugins/admin/ogroups/class_ogroup.inc:280
 msgid "too many different objects!"
 msgstr "za dużo różnych obiektów!"
 
-#: plugins/admin/ogroups/class_ogroup.inc:281
+#: plugins/admin/ogroups/class_ogroup.inc:282
 msgid "users"
 msgstr "użytkownicy"
 
-#: plugins/admin/ogroups/class_ogroup.inc:282
+#: plugins/admin/ogroups/class_ogroup.inc:283
 msgid "groups"
 msgstr "grupy"
 
-#: plugins/admin/ogroups/class_ogroup.inc:283
+#: plugins/admin/ogroups/class_ogroup.inc:284
 msgid "applications"
 msgstr "aplikacje"
 
-#: plugins/admin/ogroups/class_ogroup.inc:284
+#: plugins/admin/ogroups/class_ogroup.inc:285
 msgid "departments"
 msgstr "departamenty"
 
-#: plugins/admin/ogroups/class_ogroup.inc:285
+#: plugins/admin/ogroups/class_ogroup.inc:286
 msgid "servers"
 msgstr "serwery"
 
-#: plugins/admin/ogroups/class_ogroup.inc:286
+#: plugins/admin/ogroups/class_ogroup.inc:287
 msgid "workstations"
 msgstr "stacje robocze"
 
-#: plugins/admin/ogroups/class_ogroup.inc:287
+#: plugins/admin/ogroups/class_ogroup.inc:288
 msgid "terminals"
 msgstr "terminale"
 
-#: plugins/admin/ogroups/class_ogroup.inc:288
+#: plugins/admin/ogroups/class_ogroup.inc:289
 msgid "phones"
 msgstr "telefony"
 
-#: plugins/admin/ogroups/class_ogroup.inc:289
+#: plugins/admin/ogroups/class_ogroup.inc:290
 msgid "printers"
 msgstr "drukarki"
 
-#: plugins/admin/ogroups/class_ogroup.inc:296
+#: plugins/admin/ogroups/class_ogroup.inc:297
 msgid "and"
 msgstr "i"
 
-#: plugins/admin/ogroups/class_ogroup.inc:508
+#: plugins/admin/ogroups/class_ogroup.inc:476
 msgid "Non existing dn:"
 msgstr "Nieistniejące dn:"
 
-#: plugins/admin/ogroups/class_ogroup.inc:649
+#: plugins/admin/ogroups/class_ogroup.inc:596
 msgid "There is already an object with this cn."
 msgstr "Już istnieje obiekt z tym cn."
 
-#: plugins/admin/ogroups/class_ogroup.inc:666
+#: plugins/admin/ogroups/class_ogroup.inc:613
 msgid "You can combine two different object types at maximum only!"
 msgstr "Można połączyć maksymalnie tylko 2 różne typy obiektów!"
 
-#: plugins/admin/ogroups/class_ogroup.inc:715
+#: plugins/admin/ogroups/class_ogroup.inc:662
 msgid "Saving object group failed"
 msgstr "Zapisywanie grupy obiektów nieudane"
 
-#: plugins/admin/ogroups/class_ogroup.inc:728
+#: plugins/admin/ogroups/class_ogroup.inc:675
 msgid "Removing object group failed"
 msgstr "Usuwanie grupy obiektów nieudane"
 
@@ -13097,7 +13114,7 @@ msgstr ""
 msgid "incomplete"
 msgstr "niepełne"
 
-#: include/functions.inc:1108 include/functions.inc:1297
+#: include/functions.inc:1108 include/functions.inc:1299
 msgid "LDAP error:"
 msgstr "błąd LDAP:"
 
@@ -13143,19 +13160,19 @@ msgstr ""
 "Zamierzasz edytować wpis LDAP '%s' który wydaje się być używany przez '%s'. "
 "Proszę skontaktować się z osobą aby wyjaśnić postępowanie."
 
-#: include/functions.inc:1479
+#: include/functions.inc:1481
 msgid "Entries per page"
 msgstr "Wpisów na stronie"
 
-#: include/functions.inc:1507
+#: include/functions.inc:1509
 msgid "Apply filter"
 msgstr "Zastosuj filtr"
 
-#: include/functions.inc:1781
+#: include/functions.inc:1783
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-#: include/functions.inc:1824
+#: include/functions.inc:1826
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "Wersja deweloperska GOsa (Rev %s)"
@@ -13225,7 +13242,7 @@ msgstr ""
 "Serwer LDAP odpowiada bardzo wolno (%.2f dla ostatniego zapytania). To może "
 "być przyczyną słabej wydajności."
 
-#: include/class_ldap.inc:228
+#: include/class_ldap.inc:230
 #, php-format
 msgid ""
 "The ldapserver is answering very slow (%.2f), this may be responsible for "
@@ -13234,25 +13251,25 @@ msgstr ""
 "Serwer LDAP odpowiada bardzo wolno (%.2f), to może być przyczyną słabej "
 "wydajności."
 
-#: include/class_ldap.inc:448
+#: include/class_ldap.inc:456
 #, php-format
 msgid "Creating copy of %s"
 msgstr "Tworzenie kopii %s"
 
-#: include/class_ldap.inc:451
+#: include/class_ldap.inc:459
 msgid "Processing"
 msgstr "Przetwarzanie"
 
-#: include/class_ldap.inc:491
+#: include/class_ldap.inc:499
 msgid "Error while fetching source dn - aborted!"
 msgstr "Błąd podczas pobierania źródłowego dn - anulowano!"
 
-#: include/class_ldap.inc:554 include/class_ldap.inc:568
+#: include/class_ldap.inc:562 include/class_ldap.inc:576
 #, php-format
 msgid "Unknown FAIstate %s"
 msgstr "Nieznany FAIstate %s"
 
-#: include/class_ldap.inc:711
+#: include/class_ldap.inc:723
 #, php-format
 msgid ""
 "Autocreation of type '%s' is currently not supported. Please report to the "
@@ -13261,17 +13278,17 @@ msgstr ""
 "Automatyczne tworzenie typu '%s' nie jest obecnie wspierane. Proszę "
 "skontaktować się z zespołem GOsa."
 
-#: include/class_ldap.inc:780
+#: include/class_ldap.inc:792
 #, php-format
 msgid "while operating on '%s' using LDAP server '%s'"
 msgstr "podczas działania na '%s' używając serwera LDAP '%s'"
 
-#: include/class_ldap.inc:782
+#: include/class_ldap.inc:794
 #, php-format
 msgid "while operating on LDAP server %s"
 msgstr "podczas połączenia z serwerem LDAP '%s'"
 
-#: include/class_ldap.inc:978
+#: include/class_ldap.inc:990
 #, php-format
 msgid ""
 "This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
@@ -13280,12 +13297,12 @@ msgstr ""
 "To nie jest poprawne DN: '%s'. Blok dla importu powinien zaczynać się "
 "'dn: ...' w linii %s"
 
-#: include/class_ldap.inc:991
+#: include/class_ldap.inc:1003
 #, php-format
 msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
 msgstr "dn: '%s' (od linii %s) już istnieje w bazie LDAP"
 
-#: include/class_ldap.inc:1007
+#: include/class_ldap.inc:1019
 #, php-format
 msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
 msgstr "Błąd podczas importu dn: '%s', proszę sprawdzić LDIF od linii %s !"
@@ -13328,7 +13345,7 @@ msgstr "Nie można użyć sha do szyfrowania, brak funkcji sha1 / mhash / crypt"
 msgid "Setting the password failed. LDAP server says '%s'."
 msgstr "Ustawianie hasła nieudane, Odpowiedź serwera LDAP '%s'."
 
-#: include/class_password-methods.inc:181 include/class_plugin.inc:580
+#: include/class_password-methods.inc:181 include/class_plugin.inc:584
 #, php-format
 msgid ""
 "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
@@ -13433,7 +13450,7 @@ msgstr "Parsowanie pliku PPD %s nieudane - nie znaleziono informacji."
 msgid "This package has no debconf options."
 msgstr "Ten pakiet nie ma opcji debconf."
 
-#: include/class_tabs.inc:182
+#: include/class_tabs.inc:188
 #, php-format
 msgid "Delete process has been canceled by plugin '%s': %s"
 msgstr "Proces usuwania został anulowany przez dodatek '%s': %s"
@@ -13996,39 +14013,39 @@ msgstr "Komunikacja z bazą Kerberos nieudana"
 msgid "Changing password in kerberos database failed!"
 msgstr "Zmiana hasła w bazie kerberos nieudana!"
 
-#: include/class_plugin.inc:400
+#: include/class_plugin.inc:404
 #, php-format
 msgid ""
 "Command '%s', specified as CHECK hook for plugin '%s' doesn't seem to exist."
 msgstr "Polecenie '%s' podane jako CHECK dla dodatku '%s' nie istnieje."
 
-#: include/class_plugin.inc:546
+#: include/class_plugin.inc:550
 #, php-format
 msgid ""
 "Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
 msgstr "Polecenie '%s' podane jako POSTCREATE dla dodatku '%s' nie istnieje."
 
-#: include/class_plugin.inc:614
+#: include/class_plugin.inc:618
 #, php-format
 msgid ""
 "Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
 msgstr "Polecenie '%s' podane jako POSTREMOVE dla dodatku '%s' nie istnieje."
 
-#: include/class_plugin.inc:920
+#: include/class_plugin.inc:924
 #, php-format
 msgid "Object '%s' is already tagged"
 msgstr "Obiekt '%s' jest już zaznaczony"
 
-#: include/class_plugin.inc:927
+#: include/class_plugin.inc:931
 #, php-format
 msgid "Adding tag (%s) to object '%s'"
 msgstr "Dodawanie znacznika (%s) do obiektu '%s'"
 
-#: include/class_plugin.inc:941 include/class_plugin.inc:970
+#: include/class_plugin.inc:945 include/class_plugin.inc:974
 msgid "Handle object tagging failed"
 msgstr "Znakowanie obiektu nieudane"
 
-#: include/class_plugin.inc:957
+#: include/class_plugin.inc:961
 #, php-format
 msgid "Removing tag from object '%s'"
 msgstr "Usuwanie znacznika z obiektu '%s'"
