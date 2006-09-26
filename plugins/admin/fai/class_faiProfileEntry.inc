@@ -20,20 +20,40 @@ class faiProfileEntry extends plugin
     plugin::plugin ($config, $dn);
 
     /* Search only in fai tree */
-    $base = "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
+    $ObjectTypes = array(
+        "FAIpartitionTable"  => array("OU"=>"ou=disk,"       , "CHKBOX"=>"ShowPartitions"),
+        "FAIpackageList"     => array("OU"=>"ou=packages,"    , "CHKBOX"=>"ShowPackages"),
+        "FAIscript"          => array("OU"=>"ou=scripts,"     , "CHKBOX"=>"ShowScripts"),
+        "FAIvariable"        => array("OU"=>"ou=variables,"   , "CHKBOX"=>"ShowVariables"),
+        "FAIhook"            => array("OU"=>"ou=hooks,"       , "CHKBOX"=>"ShowHooks"),
+        "FAIprofile"         => array("OU"=>"ou=profiles,"    , "CHKBOX"=>"ShowProfiles"),
+        "FAItemplate"        => array("OU"=>"ou=templates,"   , "CHKBOX"=>"ShowTemplates"));
+
+    $base= "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
+    if($_SESSION['faifilter']['branch']!="main"){
+      $base = $_SESSION['faifilter']['branch'];
+    }
+
+    /* Get ldap connection */
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd($base);
+
+    /* Capture objects from given base */
+    $result = array();
+    foreach($ObjectTypes as $oc => $data){
+      $ou = $data['OU'].$base;
+
+      $ldap->ls("(objectClass=".$oc.")",$ou,array("*"));
+      while($res = $ldap->fetch()){
+        $result[] = $res;
+      } 
+    }
 
     /* Create array with categories to be able to sort different types of objects */
     $categories = array("FAIscript","FAItemplate","FAIhook","FAIvariable","FAIpartitionTable","FAIpackageList");
-
-    /* Read out all objects from fai tree */
-    $ldap= $this->config->get_ldap_link();
-    $ldap->cd($base);
-    $ldap->search("(| (objectClass=FAIscript)(objectClass=FAItemplate)(objectClass=FAIhook)(objectClass=FAIvariable)
-                      (objectClass=FAIpartitionTable)(objectClass=FAIpackageList))",array("*"));
-    
-    $sort=array();
-    while($attrs = $ldap->fetch()){
-      
+    $sort = array();
+    foreach($result as $attrs){   
+   
       /* Only use objects which have cn set */
       if((isset($attrs['cn'][0]))&&(!in_array($attrs['cn'][0],$used))){
         foreach($categories as $cat){
