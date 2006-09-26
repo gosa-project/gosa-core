@@ -21,13 +21,13 @@ class faiProfileEntry extends plugin
 
     /* Search only in fai tree */
     $ObjectTypes = array(
-        "FAIpartitionTable"  => array("OU"=>"ou=disk,"       , "CHKBOX"=>"ShowPartitions"),
-        "FAIpackageList"     => array("OU"=>"ou=packages,"    , "CHKBOX"=>"ShowPackages"),
-        "FAIscript"          => array("OU"=>"ou=scripts,"     , "CHKBOX"=>"ShowScripts"),
-        "FAIvariable"        => array("OU"=>"ou=variables,"   , "CHKBOX"=>"ShowVariables"),
-        "FAIhook"            => array("OU"=>"ou=hooks,"       , "CHKBOX"=>"ShowHooks"),
-        "FAIprofile"         => array("OU"=>"ou=profiles,"    , "CHKBOX"=>"ShowProfiles"),
-        "FAItemplate"        => array("OU"=>"ou=templates,"   , "CHKBOX"=>"ShowTemplates"));
+        "FAIpartitionTable"  => array("OU"=>"ou=disk,"       ),
+        "FAIpackageList"     => array("OU"=>"ou=packages,"   ),
+        "FAIscript"          => array("OU"=>"ou=scripts,"    ),
+        "FAIvariable"        => array("OU"=>"ou=variables,"  ),
+        "FAIhook"            => array("OU"=>"ou=hooks,"      ),
+        "FAIprofile"         => array("OU"=>"ou=profiles,"   ),
+        "FAItemplate"        => array("OU"=>"ou=templates,"  ));
 
     $base= "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
     if($_SESSION['faifilter']['branch']!="main"){
