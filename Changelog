@@ -11,6 +11,9 @@ GOsa2 changelog
   - Fixed non-FAI application mode
   - More speed fixes applied, especially for users, objectgroups and
     generic plugin loading
+  - Bug while saving FAI partitions fixed
+  - Don't save PPD if none is not selected bug fixed
+  - Saving of non revisioned applications fixed
 
 * gosa 2.5.3
   - Fixed problem in reloading departments when we've PHP4
