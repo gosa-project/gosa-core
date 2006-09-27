@@ -1,6 +1,6 @@
 gosa (2.5.4-1) unstable; urgency=low
 
-  * New stable upstream release
+  * New stable upstream release (Closes: #284718)
 
  -- Cajus Pollmeier <cajus@debian.org>  Mon, 11 Sep 2006 10:06:47 +0200
 
