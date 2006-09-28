@@ -3,7 +3,15 @@ GOsa2 changelog
 * branches/openca { by Guido Serra <zeph@purotesto.it> }
   - branched from branches/2.5 - Revision: 4946
   - added spkac to gosa schemas
-  - merging with local modified files...
+  - CNAME moved away from DNS reverse zone
+  - function dump_obj() ... usefull to debug and study data structures
+  - user/generic interface to self create an spkac
+  - CNAME can be more than one
+  - Samba creates workstations using CN ...
+  - template of the admin interface to sign/revoke certificates
+  - apache-ssl config file
+  - gosa.conf ... better have uids over 10000 to do not conflic with system
+  - slapd.conf from debian merged
 
 * gosa 2.5.4
   - Included patch to choose the addressbook base
