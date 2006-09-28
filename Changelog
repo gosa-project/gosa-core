@@ -1,5 +1,9 @@
 GOsa2 changelog
 ===============
+* branches/openca { by Guido Serra <zeph@purotesto.it> }
+  - branched from branches/2.5 - Revision: 4946
+  - added spkac to gosa schemas
+  - merging with local modified files...
 
 * gosa 2.5.4
   - Included patch to choose the addressbook base
