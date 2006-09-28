@@ -1,5 +1,7 @@
 GOsa2 changelog
 ===============
+* gosa 2.5.5
+  - Fixed missing ppd configuration error, for newly created printer.
 
 * gosa 2.5.4
   - Included patch to choose the addressbook base
