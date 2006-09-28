@@ -149,24 +149,24 @@
    <table summary="" style="width:100%"> 
     <tr>
      <td style="vertical-align:top;"><label for="homePostalAddress">{t}Address{/t}</label></td>
-     <td><textarea id="homePostalAddress" name="homePostalAddress" rows="3" style="width:100%" {$homePostalAddressACL}>{$homePostalAddress}</textarea></td>
+     <td colspan="2"><textarea id="homePostalAddress" name="homePostalAddress" rows="3" style="width:100%" {$homePostalAddressACL}>{$homePostalAddress}</textarea></td>
     </tr>
     <tr>
      <td><label for="homePhone">{t}Private phone{/t}</label></td>
-     <td><input id="homePhone" name="homePhone" size=25 maxlength=60 {$homePhoneACL} value="{$homePhone}"></td>
+     <td colspan="2"><input id="homePhone" name="homePhone" size=25 maxlength=60 {$homePhoneACL} value="{$homePhone}"></td>
     </tr>
     <tr>
      <td><label for="labeledURI">{t}Homepage{/t}</label></td>
-     <td><input id="labeledURI" name="labeledURI" size=25 maxlength=60 {$labeledURIACL} value="{$labeledURI}"></td>
+     <td colspan="2"><input id="labeledURI" name="labeledURI" size=25 maxlength=60 {$labeledURIACL} value="{$labeledURI}"></td>
     </tr>
     <tr>
-     <td colspan=2>
+     <td colspan=3>
       <div style="height:20px;"></div>
      </td>
     </tr>
     <tr>
      <td><label for="pw_storage">{t}Password storage{/t}</label></td>
-     <td>
+     <td colspan="2">
       <select size="1" id="pw_storage" name="pw_storage" {$passwordStorageACL}>
        {html_options values=$pwmode output=$pwmode selected=$pwmode_select}
       </select>
@@ -178,11 +178,13 @@
      <td><label for="edit_cert">{t}Certificates{/t}</label></td>
      <td>
       <input id="edit_cert" type="submit" name="edit_cert" {$certificatesACL} value="{t}Edit certificates{/t}...">
+ 	</td><td>
+      <input id="gen_cert" type="submit" name="gen_cert" {$certificatesACL} value="{t}request{/t}">
      </td>
     </tr>
     <tr>
      <td><label for="edit_krb">{t}Kerberos{/t}</label></td>
-     <td><input id="edit_krb" type="submit" name="edit_krb" disabled value="{t}Edit properties{/t}..."></td>
+     <td colspan="2"><input id="edit_krb" type="submit" name="edit_krb" disabled value="{t}Edit properties{/t}..."></td>
     </tr>
     {/if}
 

@@ -52,8 +52,12 @@ class user extends plugin
   var $old_jpegPhoto= "";
   var $old_photoData= "";
   var $cert_dialog= FALSE;
+  var $gen_dialog= FALSE;
+  var $gen2_dialog= FALSE;
   var $picture_dialog= FALSE;
 
+	var $challengePassword = "";
+	var $SPKAC = "";
   var $userPKCS12= "";
   var $userSMIMECertificate= "";
   var $userCertificate= "";
@@ -87,11 +91,11 @@ class user extends plugin
   var $attributes= array("sn", "givenName", "uid", "personalTitle", "academicTitle",
       "homePostalAddress", "homePhone", "labeledURI", "o", "ou", "dateOfBirth", "gender","preferredLanguage",
       "departmentNumber", "employeeNumber", "employeeType", "l", "st","jpegPhoto",
-      "roomNumber", "telephoneNumber", "mobile", "pager", "cn", "userPKCS12",
+      "roomNumber", "telephoneNumber", "mobile", "pager", "cn", "userPKCS12", "SPKAC",
       "postalAddress", "facsimileTelephoneNumber", "userSMIMECertificate");
 
   var $objectclasses= array("top", "person", "organizationalPerson", "inetOrgPerson",
-      "gosaAccount");
+      "gosaAccount", "gosaCA");
 
   /* attributes that are part of the government mode */
   var $govattrs= array("gouvernmentOrganizationalUnit", "houseIdentifier", "vocation",
@@ -99,6 +103,17 @@ class user extends plugin
       "gouvernmentOrganizationalUnitDescription","gouvernmentOrganizationalUnitSubjectArea",
       "functionalTitle", "certificateSerialNumber", "publicVisible", "street", "role",
       "postalCode");
+      
+  /* certificate spkac array */
+  var $spkac_args= array(
+		"commonName" => "",
+		"emailAddress" => "",
+		"organizationName" => "",
+		"organizationalUnitName" => "",
+		"localityName" => "",
+		"stateOrProvinceName" => "",
+		"countryName" => "",
+		"SPKAC" => "");
 
 
   /* constructor, if 'dn' is set, the node loads the given
@@ -385,7 +400,54 @@ class user extends plugin
       $this->cert_dialog= FALSE;
       $this->dialog= FALSE;
     }
+  
+    /* CERTIFICATE_gen start */
+    if (isset($_POST['gen_cert'])){
+      $this->gen_dialog= TRUE;
+      $this->dialog= TRUE;
+    }
 
+    /* CERTIFICATE_gen abort */	
+    if (isset($_POST['cert_gen_cancel'])){
+      $this->gen_dialog= FALSE;
+      $this->dialog= FALSE;
+    }
+    
+    /* CERTIFICATE_gen continue */	
+    if (isset($_POST['cert_gen_continue'])){
+    	// TODO --- gran cacata
+    	foreach ($this->spkac_args as $elemento_id => $elemento)
+    		$this->spkac_args[$elemento_id] = $_POST[$elemento_id];
+    	//otherwise it will not write anything
+    	$this->is_modified= TRUE;
+    	$this->gen_dialog= FALSE;
+      $this->gen2_dialog= TRUE;
+      $this->dialog= TRUE;
+    }
+    
+    /* CERTIFICATE_gen save */	
+    if (isset($_POST['cert_generate'])){    	
+      $row = "";
+      $this->SPKAC = "";
+      //TODO --- remove...
+      //$handle = fopen("/tmp/".$this->spkac_args["commonName"].".spkac", "w");
+      foreach ($this->spkac_args as $elemento_id => $elemento)
+      	if($elemento_id == "SPKAC"){
+      		$dust = array("\n","\r","\c");
+      		$clean = str_replace($dust,"",$_POST["SPKAC"]);
+      		$this->SPKAC .=  $elemento_id." = ".$clean; 
+      		//fwrite($handle,$elemento_id." = ".$clean."\n");
+      	}	
+      	else {
+      		$row = 	$elemento_id." = ".$elemento."\n";
+      		$this->SPKAC .= $row; 
+      		//fwrite($handle,$row);
+      	}
+      //fclose($handle);
+      $this->is_modified= TRUE;
+      $this->gen2_dialog= FALSE;
+      $this->dialog= FALSE;
+    }
 
     /* Remove certificate? */
     foreach (array ("userCertificate", "userSMIMECertificate", "userPKCS12") as $val){
@@ -466,6 +528,42 @@ class user extends plugin
       }
       $smarty->assign("governmentmode", "false");
       return($smarty->fetch (get_template_path('generic_certs.tpl', TRUE, dirname(__FILE__))));
+    }
+    
+    /* Display form dialog */
+    if ($this->gen_dialog){
+			
+			$this->spkac_args["commonName"] = $this->cn;
+			//$this->spkac_args["emailAddress"] = $this->email;
+			$this->spkac_args["organizationName"] = $this->o;
+			$this->spkac_args["organizationalUnitName"] = $this->ou;
+			$this->spkac_args["localityName"] = $this->l;
+			$this->spkac_args["stateOrProvinceName"] = $this->st;
+			//$this->spkac_args["countryName"] = $this->c;
+		
+    	foreach($this->spkac_args as $val_id => $val){
+      	$smarty->assign($val_id, $val);
+    	}
+      return($smarty->fetch (get_template_path('generic_certs-form.tpl', TRUE, dirname(__FILE__))));
+    }
+    
+    /* Display generation dialog */
+    if ($this->gen2_dialog){
+    // TODO 	
+    
+    	foreach($this->spkac_args as $val_id => $val){
+      	$smarty->assign($val_id, $val);
+    	}
+    	
+    	//token length...
+    	$length = 20;
+    	$pattern = "1234567890abcdefghijklmnopqrstuvwxyz";
+   		for($i=0;$i<$length;$i++){
+     		$this->challengePassword .= $pattern{rand(0,35)};
+   		} 		
+    	$smarty->assign("challengePassword", $this->challengePassword);
+
+      return($smarty->fetch (get_template_path('generic_certs-spkac.tpl', TRUE, dirname(__FILE__))));
     }
 
     /* Show us the edit screen */
