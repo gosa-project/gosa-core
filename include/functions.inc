@@ -2138,6 +2138,14 @@ function is_department_name_reserved($name,$base)
   return(false);
 }
 
+/* dump data structures
+ * ... by zeph@purotesto.it
+ */
+function dump_obj($obj){
+	//echo nl2br( eregi_replace( " ", " ", print_r( $obj, TRUE ) ) );
+	echo '<pre>'.str_replace(array("\n" , " "), 
+		array('<br>', '&nbsp;'), print_r($obj, true)).'</pre>';
+}
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
