@@ -1251,7 +1251,7 @@ function get_printer_list($cups_server)
   $ldap= $config->get_ldap_link();
   $ldap->cd ($config->current['BASE']);
   $ui= get_userinfo();
-  if (preg_match('/TRUE/i', $config->current['STRICT_UNITS']) && $ui->gosaUnitTag != ""){   
+  if (isset($config->current['STRICT_UNITS']) && preg_match('/TRUE/i', $config->current['STRICT_UNITS']) && $ui->gosaUnitTag != ""){   
     $ldap->search('((objectClass=gotoPrinter)(gosaUnitTag='.$ui->gosaUnitTag.'))', array('cn'));
   } else {
     $ldap->search('(objectClass=gotoPrinter)', array('cn'));
