@@ -686,6 +686,19 @@ class printgeneric extends plugin
       $this->PPDdialogToSave->save_ppd();
     }
 
+    if(preg_match("/https/i",$_SERVER['HTTP_REFERER'])){
+      $method="https://";
+    }else{
+      $method="http://";
+    }
+
+    /* If no ppd is selected, remove this attribute */
+    if(!empty($this->gotoPrinterPPD)) {
+      $this->gotoPrinterPPD = $method.str_replace("//","/",$_SERVER['SERVER_NAME']."/ppd/".$this->gotoPrinterPPD);
+    }else{
+      $this->gotoPrinterPPD = array();
+    }
+
     $dn= $this->dn;
     plugin::save();
     $ldap= $this->config->get_ldap_link();
@@ -704,20 +717,6 @@ class printgeneric extends plugin
       }
       $this->attrs= $attrs;
     }
-
-    if(preg_match("/https/i",$_SERVER['HTTP_REFERER'])){
-      $method="https://";
-    }else{
-      $method="http://";
-    }
-
-    /* Only save ppd path, if the path is not empty (no ppd selected )*/ 
-    if(!empty($this->gotoPrinterPPD)) {
-      $this->attrs['gotoPrinterPPD'] = $method.str_replace("//","/",$_SERVER['SERVER_NAME']."/ppd/".$this->gotoPrinterPPD);
-    }else{
-      $this->attrs['gotoPrinterPPD'] = array();
-    }
-
 
     /* Append printer user 
      */
