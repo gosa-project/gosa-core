@@ -19,6 +19,13 @@
 			<input type="text" name="postfix_mydestination" value="{$postfix_mydestination}" {$postfix_mydestinationACL}>
 		</td>
 	</tr>
+	<tr>
+		<td>{t}Cyrus admins{/t}
+		</td>
+		<td>
+			<input type="text" name="cyrus_admins" value="{$cyrus_admins}" {$cyrus_adminsACL}>
+		</td>
+	</tr>
    </table>	
    <p class="seperator" >&nbsp;</p>
    <table summary="">
