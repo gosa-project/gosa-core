@@ -347,12 +347,12 @@ class servdnseditZone extends plugin
     /* Check if zoneName is already in use */
     $usedZones = $this->getUsedZoneNames();
     if(($this->isNew == true)||($this->zoneName  != $this->InitialzoneName)||($this->ReverseZone != $this->InitialReverseZone)){
-      if((isset($usedZones[$this->zoneName]))&&($this->zoneName  != $this->InitialzoneName)){
+/*      if((isset($usedZones[$this->zoneName]))&&($this->zoneName  != $this->InitialzoneName)){
         $message[] =_("This zoneName is already in use");
       }
       if((in_array($this->ReverseZone,$usedZones))&&($this->ReverseZone != $this->InitialReverseZone)){
         $message[] =_("This reverse zone is already in use");
-      }
+      }*/
     }
 
     if(empty($this->zoneName)){
