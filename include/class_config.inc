@@ -241,7 +241,7 @@ class config  {
       $this->current['GROUPS']= "ou=groups";
     }
     if (!isset($this->current['WINSTATIONS'])){
-      $this->current['WINSTATIONS']= "ou=winstations,ou=systems";
+      $this->current['WINSTATIONS']= "ou=computers";
     }
     if (!isset($this->current['HASH'])){
       $this->current['HASH']= "crypt";
