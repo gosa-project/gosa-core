@@ -143,7 +143,7 @@ class tabs
 		}
 
 		/* Paint tab */
-		$display.= "<td style=\"vertical-align:bottom; width:100px;\">";
+		$display.= "<td style=\"vertical-align:bottom;width:1px;\">";
 
 		/* Shorten string if its too long for the tab headers*/
 		$title= _($name);
