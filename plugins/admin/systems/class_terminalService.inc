@@ -194,6 +194,8 @@ class termservice extends plugin
     $this->hardware_list["automatic"]= _("automatic");
     ksort($this->hardware_list);
 
+    /* Convert gotoLpdEnable */
+    $this->gotoLpdEnable= ($this->gotoLpdEnable == "yes");
 
       /* Load hardware list */
     $ldap= $this->config->get_ldap_link();
@@ -406,6 +408,9 @@ class termservice extends plugin
         $this->attrs[$val]= array();
       }
     }
+
+    /* Convert to string */
+    $this->gotoLpdEnable= $this->gotoLpdEnable?"yes":"no";
 
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();
