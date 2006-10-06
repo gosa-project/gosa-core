@@ -80,16 +80,18 @@ class ogroup extends plugin
       }
     }
     register_global("ogfilter", $ogfilter);
-  
-    if(isset($_SESSION['CurrentMainBase'])){
-     $this->base = $_SESSION['CurrentMainBase'];
+ 
+    /* Set base */
+    if ($this->dn == "new"){
+      $this->base= $_SESSION['CurrentMainBase'];
+    } else {
+      $this->base= preg_replace ("/^[^,]+,[^,]+,/", "", $this->dn);
     }
 
-     /* set permissions */
+    /* set permissions */
     $ui= get_userinfo();
     $acl= get_permissions ($ui->dn, $ui->subtreeACL);
     $this->acl= get_module_permission($acl, "ogroup", $ui->dn);
-
 
     /* Load member data */
     $this->reload();
