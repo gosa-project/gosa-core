@@ -3,6 +3,9 @@ GOsa2 changelog
 * gosa 2.5.5
   - Fixed missing ppd configuration error, for newly created printer.
   - Fixed object group saving, the base was sometimes broken.
+  - Fixed saving of terminal attribute gotoLpdEnable
+  - Avoid reset of several attributes from workstations when not
+    inherited from object groups.
 
 * gosa 2.5.4
   - Included patch to choose the addressbook base

@@ -417,7 +417,7 @@ class systems extends plugin
       if (count($message) == 0){
 
         /* Save terminal data to ldap */
-        if(isset($_SESSION['SelectedSystemType']['ogroup'])){
+        if(isset($_SESSION['SelectedSystemType']['ogroup']) && $_SESSION['SelectedSystemType']['ogroup'] != 'none'){
           foreach (array("workservice", "termservice") as $cls){
             if (isset($this->systab->by_object[$cls])){
               $this->systab->by_object[$cls]->gotoXMouseport= "";
