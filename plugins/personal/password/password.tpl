@@ -1,7 +1,3 @@
-<div class="plugtop">
-  <img alt="" src="{$headimage}" align=middle>{t}Change password{/t}
-</div>
-
 <p>
   {t}To change your personal password use the fields below. The changes take effect immediately. Please memorize the new password, because you wouldn't be able to login without it.{/t}
 </p>

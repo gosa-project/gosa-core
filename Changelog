@@ -6,6 +6,7 @@ GOsa2 changelog
   - Fixed saving of terminal attribute gotoLpdEnable
   - Avoid reset of several attributes from workstations when not
     inherited from object groups.
+  - Show error messages from password dialog
 
 * gosa 2.5.4
   - Included patch to choose the addressbook base

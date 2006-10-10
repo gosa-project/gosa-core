@@ -18,11 +18,9 @@
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-if (!$remove_lock){
+$display= "";
 
-  /* Assign headline image */
-  $smarty->assign ('headimage', get_template_path('images/password.png'));
-  $display= "";
+if (!$remove_lock){
 
   /* Check for interaction */
   if ($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -114,6 +112,10 @@ if (!$remove_lock){
     }
   }
 }
+
+/* Assign headline image */
+$display= print_header(get_template_path('images/password.png'),
+                             _("Change password"), "").$display;
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
