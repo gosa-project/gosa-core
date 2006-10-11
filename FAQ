@@ -337,3 +337,6 @@ Q: Sieve is not working from GOsa
 A: verify that the paramater sasl_auto_transition: no is not
    present in your imap.conf
 
+A: For Kolab to work correctly you have to include the rfc2739.schema
+   in your slapd.conf before the kolab2.schema
+
