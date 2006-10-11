@@ -312,3 +312,28 @@ Q: How can i active the account expiration code for the gosa interface?
 
 A: Yes. Just set "account_expiration" to "true" in your gosa.conf's main section.
 
+Q: How can i activate the object snapshot functionality?
+
+A: Add these lines in the main section of your gosa.conf
+   enable_snapshot     ="true"
+   snapshot_base       ="ou=snapshots,dc=server,dc=de"
+
+
+Q: How can i store object snapshots on another server?
+
+A: Just add these lines in the main section of your gosa conf
+
+   snapshot_ldap_base  ="dc=server,dc=de"
+   snapshot_user       ="cn=ldapadmin,dc=server,dc=de"
+   snapshot_password   ="password"
+   snapshot_server     ="ldap://server:389"
+
+Q: What is the correct connection string for a Kolab Server in Gosa
+
+A: {localhost:143/novalidate-cert}
+
+Q: Sieve is not working from GOsa
+
+A: verify that the paramater sasl_auto_transition: no is not
+   present in your imap.conf
+
