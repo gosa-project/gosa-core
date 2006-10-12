@@ -328,15 +328,22 @@ A: Just add these lines in the main section of your gosa conf
    snapshot_password   ="password"
    snapshot_server     ="ldap://server:389"
 
-Q: What is the correct connection string for a Kolab Server in Gosa
 
-A: {localhost:143/novalidate-cert}
+Q: What is the correct connection string for a Kolab server in GOsa?
 
-Q: Sieve is not working from GOsa
+A: Try {localhost:143/novalidate-cert}.
 
-A: verify that the paramater sasl_auto_transition: no is not
+
+Q: Sieve is not working from GOsa - there are authentication problems
+   with this service, IMAP/POP is working. What's wrong?
+
+A: Verify that the paramater sasl_auto_transition: no is not
    present in your imap.conf
 
+
+Q: Slapd does not start with kolab2.schema included. It claims that the
+   definition of calFBURL is missing. What can I do?
+
 A: For Kolab to work correctly you have to include the rfc2739.schema
-   in your slapd.conf before the kolab2.schema
+   in your slapd.conf. Insert it before the kolab2.schema
 

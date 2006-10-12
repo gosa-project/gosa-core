@@ -7,6 +7,7 @@ GOsa2 changelog
   - Avoid reset of several attributes from workstations when not
     inherited from object groups.
   - Show error messages from password dialog
+  - Fixed a set of W3C problems
 
 * gosa 2.5.4
   - Included patch to choose the addressbook base
