@@ -405,6 +405,12 @@ class termgeneric extends plugin
   /* Save to LDAP */
   function save()
   {
+
+    /* Move object if requested */
+    if( $this->orig_dn != 'new' && $this->dn != $this->orig_dn){
+      $this->move($this->orig_dn, $this->dn);
+    }
+  
     plugin::save();
 
     /* Strip out 'default' values */
@@ -459,13 +465,9 @@ class termgeneric extends plugin
       $ldap->add($this->attrs);
       $this->handle_post_events("add");
     } else {
-      if ($this->orig_dn != $this->dn){
-        $this->move($this->orig_dn, $this->dn);
-      }
       $ldap->cd($this->dn);
       $this->cleanup();
       $ldap->modify ($this->attrs); 
-
       $this->handle_post_events("modify");
     }
     $this->netConfigDNS->cn = $this->cn;
