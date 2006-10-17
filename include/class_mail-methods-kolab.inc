@@ -49,6 +49,7 @@ class mailMethodKolab extends mailMethodCyrus
     return (TRUE);
   }
 
+  /* return all folders of the users mailbox*/
   function getMailboxList($folder, $uid= "")
   {
     global $config;
