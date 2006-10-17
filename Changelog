@@ -1,6 +1,7 @@
 GOsa2 changelog
 ===============
 * gosa 2.5.5
+  - Added subsearch checkbox to ogroup->add filter
   - Fixed missing ppd configuration error, for newly created printer.
   - Fixed object group saving, the base was sometimes broken.
   - Fixed saving of terminal attribute gotoLpdEnable

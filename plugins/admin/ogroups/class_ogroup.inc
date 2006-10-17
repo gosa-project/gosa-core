@@ -71,6 +71,7 @@ class ogroup extends plugin
           "W" => "workstations",
           "T" => "terminals",
           "F" => "phones",
+          "_" => "subtrees",
           "P" => "printers") as $key => $val){
 
       if (preg_match("/$key/", $this->gosaGroupObjects)){
@@ -228,7 +229,7 @@ class ogroup extends plugin
       }
       if (isset($_POST['dselect'])){
         foreach( array("accounts", "groups", "applications", "departments",
-              "servers", "workstations", "terminals", "printers",
+              "servers", "workstations", "terminals", "printers","subtrees",
               "phones") as $type){
 
           if (isset($_POST[$type])) {
@@ -258,7 +259,7 @@ class ogroup extends plugin
       $smarty->assign("deplist", $this->config->idepartments);
       $smarty->assign("alphabet", generate_alphabet());
       foreach( array("dselect", "regex", "accounts", "groups", "applications",
-            "departments", "servers", "workstations", "terminals",
+            "departments", "servers", "workstations", "terminals","subtrees",
             "printers", "phones") as $type){
         $smarty->assign("$type", $ogfilter[$type]);
       }
@@ -412,8 +413,15 @@ class ogroup extends plugin
 
     /* Perform search for selected objectClasses */
     foreach($objectClasses as $class=> $basedn){
-      $ldap->ls("(&(objectClass=".$class.")(|(uid=$regex)(cn=$regex)(ou=$regex)))",$basedn.$ogfilter['dselect'] ,
-          array("dn", "cn", "description", "objectClass", "sn", "givenName", "uid","ou"));
+
+      if($ogfilter['subtrees'] == "checked"){
+        $ldap->cd($ogfilter['dselect']);
+        $ldap->search("(&(objectClass=".$class.")(|(uid=$regex)(cn=$regex)(ou=$regex)))",
+            array("dn", "cn", "description", "objectClass", "sn", "givenName", "uid","ou"));
+      }else{
+        $ldap->ls("(&(objectClass=".$class.")(|(uid=$regex)(cn=$regex)(ou=$regex)))",$basedn.$ogfilter['dselect'] ,
+            array("dn", "cn", "description", "objectClass", "sn", "givenName", "uid","ou"));
+      }
       
       /* fetch results and append them to the list */
       while($attrs = $ldap->fetch()){
