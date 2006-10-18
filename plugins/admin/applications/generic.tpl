@@ -16,7 +16,7 @@
     <tr>
      <td><LABEL for="gosaApplicationExecute">{t}Execute{/t}{$must}</LABEL></td>
      <td>
-        <input id="gosaApplicationExecute" name="gosaApplicationExecute" size=35 maxlength=60 {$gosaApplicationExecuteACL} value="{$gosaApplicationExecute}" title="{t}Path and/or binary name of application{/t}">
+        <input id="gosaApplicationExecute" name="gosaApplicationExecute" size=35 maxlength=120 {$gosaApplicationExecuteACL} value="{$gosaApplicationExecute}" title="{t}Path and/or binary name of application{/t}">
      </td>
     </tr>
     <tr>
