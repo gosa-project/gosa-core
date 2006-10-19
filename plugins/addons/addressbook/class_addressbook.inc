@@ -253,14 +253,16 @@ class addressbook extends plugin
 			switch ($_GET['global']){
 				case "add":
 					$this->dn= "new";
-				$this->orig_cn= "";
+          $this->orig_cn= "";
 
 				/* Clean values */
 				foreach ($this->attributes as $name){
 					$this->$name= "";
 				}
+        $this->saved_attributes= array();
 				$this->storage_base= $this->config->current["BASE"];
 				break;
+
 				case "edit":
 					/* Clean values */
 					foreach ($this->attributes as $name){
