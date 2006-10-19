@@ -9,6 +9,8 @@ GOsa2 changelog
     inherited from object groups.
   - Show error messages from password dialog
   - Fixed a set of W3C problems
+  - Fixed multiple savings in addressbook (Closes: #23)
+  - Fixed shadow expire when using templates (Closes: #20)
 
 * gosa 2.5.4
   - Included patch to choose the addressbook base

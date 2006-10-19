@@ -171,12 +171,7 @@ class posixAccount extends plugin
     }
 
     /* Convert to seconds */
-    if ($this->shadowExpire != 0){
-      $this->shadowExpire*= 60 * 60 * 24;
-    } else {
-      $date= getdate();
-      $this->shadowExpire= floor($date[0] / (60*60*24)) * 60 * 60 * 24;
-    }
+    $this->shadowExpire= $this->convertToSeconds($this->shadowExpire);
 
     /* Generate shell list from /etc/gosa/shells */
     if (file_exists('/etc/gosa/shells')){
@@ -1048,15 +1043,15 @@ class posixAccount extends plugin
       $this->primaryGroup= $this->gidNumber;
     }
 
-	$ldap->cd($this->config->current['BASE']);
-  $ldap->search("(&(objectClass=gosaUserTemplate)(uid=".$template.")(accessTo=*))", array("cn","accessTo"));
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(&(objectClass=gosaUserTemplate)(uid=".$template.")(accessTo=*))", array("cn","accessTo"));
 
-	while($attr = $ldap->fetch()){
-		$tmp = $attr['accessTo'];
-		unset ($tmp['count']);
-		$this->accessTo = $tmp;	
-	}
-	
+    while($attr = $ldap->fetch()){
+      $tmp = $attr['accessTo'];
+      unset ($tmp['count']);
+      $this->accessTo = $tmp;	
+    }
+
     /* Adjust shadow checkboxes */
     foreach (array("shadowMin", "shadowMax", "shadowWarning", "shadowInactive",
           "shadowExpire") as $val){
@@ -1066,6 +1061,8 @@ class posixAccount extends plugin
         $this->$oval= "1";
       }
     }
+
+    $this->shadowExpire= $this->convertToSeconds($this->shadowExpire);
   }
 
   function get_next_id($attrib)
@@ -1229,6 +1226,17 @@ class posixAccount extends plugin
     $ret['string'] = $str;
     $ret['status'] = $sta;
     return($ret);
+  }
+
+
+  function convertToSeconds($val)
+  {
+    if ($val != 0){
+      $val*= 60 * 60 * 24;
+    } else {
+      $date= getdate();
+      $val= floor($date[0] / (60*60*24)) * 60 * 60 * 24;
+    }
   }
 
 }
