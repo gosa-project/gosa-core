@@ -99,6 +99,11 @@ class mailMethodKolab extends mailMethodCyrus
   {
     $result= array('quotaUsage' => '', 'gosaMailQuota' => '');
 
+    /* Only use lower case folder names, if folder name is like "@domain.com" */
+    if(preg_match("/@/",$folder)){
+      $folder = strtolower($folder);
+    }
+
     error_reporting(0);  
   
     /* Load quota settings */
