@@ -141,28 +141,6 @@ var $uattrib= "uid";
   }
 
 
-  function getMailboxList2($folder, $uid= "")
-  {
-    /* Initialize depending on group or user mode */
-    if ($uid != ""){
-      $result= array("INBOX");
-    } else {
-      $result= array();
-    }
-
-    /* Get list of mailboxes for combo box */
-    $cfg= $this->config[$this->gosaMailServer];
-    $list = imap_listmailbox($this->mbox, $cfg["connect"], $folder.".*");
-    if (is_array($list)){
-      foreach ($list as $val){
-        $result[]=preg_replace ("/.*user\.".$uid."\./",
-            "INBOX.", imap_utf7_decode ($val));
-      }
-    }
-
-    return ($result);
-  }
-
   function updateMailbox($folder)
   {
     /* Check if mailbox exists */
