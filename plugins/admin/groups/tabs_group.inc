@@ -30,6 +30,16 @@ class grouptabs extends tabs
 		}
 	}
 
+	function delete()
+	{
+		/* Put baseobjects 'cn' to mailobjects 'uid' */
+		$baseobject= $this->by_object['group'];
+		if (isset($this->by_object['mailgroup'])){
+			$this->by_object['mailgroup']->uid= $baseobject->cn;
+		}
+		tabs::delete();
+	}
+
 	function save()
 	{
 		$baseobject= $this->by_object['group'];
