@@ -40,7 +40,8 @@ class mailgroup extends plugin
   var $perms                      = array();
   var $gosaMailDeliveryMode       = "[L        ]";   // 
   var $gosaMailMaxSize            = "";       // 
-
+  
+  var $remove_folder_from_imap    = true;
 
   /* Helper */
   var $indexed_acl= array();
@@ -295,6 +296,7 @@ class mailgroup extends plugin
 
     /* Load templating engine */
     $smarty= get_smarty();
+    $display = "";
     if ($_SESSION['js']==FALSE){
       $smarty->assign("javascript", "false");
     } else {
@@ -308,7 +310,8 @@ class mailgroup extends plugin
 
     /* Do we represent a valid account? */
     if (!$this->is_account && $this->parent == NULL){
-      $display= "<img alt=\"\" src=\"images/stop.png\" align=middle>&nbsp;<b>".
+
+      $display.= "<img alt=\"\" src=\"images/stop.png\" align=middle>&nbsp;<b>".
         _("This 'dn' has no valid mail extensions.")."</b>";
       return ($display);
     }
@@ -320,8 +323,23 @@ class mailgroup extends plugin
         $display= $this->show_header(_("Remove mail account"),
             _("This account has mail features enabled. You can disable them by clicking below."));
       } else {
-        $display= $this->show_header(_("Create mail account"),
+        $display.= $this->show_header(_("Create mail account"),
             _("This account has mail features disabled. You can enable them by clicking below."));
+
+        /* Show checkbox that allows us to remove imap entry too*/
+        if($this->initially_was_account){
+        
+          $c = "";
+          if($this->remove_folder_from_imap){
+            $c= " checked ";
+          }
+  
+          $display .= "<h2>Shared folder delete options</h2>
+                       <input class='center' type='checkbox' name='remove_folder_from_imap' value='1' ".$c."  
+                          title='"._("Remove shared folder from mail server database")."'>";
+          $display .= _("Remove the shared folder and all its contents from mail server."); 
+        }
+
         return ($display);
       }
     }
@@ -596,8 +614,10 @@ class mailgroup extends plugin
 
     /* Connect to IMAP server for account deletion */
     if ($this->initially_was_account){
+ 
       $method= new $this->method($this->config);
-      if ($method->connect($this->gosaMailServer)){
+      if ($method->connect($this->gosaMailServer) && $this->remove_folder_from_imap){
+
         /* Remove account from IMAP server */
         $method->deleteMailbox($this->uid);
         $method->disconnect();
@@ -606,7 +626,6 @@ class mailgroup extends plugin
     }
     /* Keep uid */
     unset ($this->attrs['uid']);
-
 
     $ldap->cd($this->dn);
     $ldap->modify ($this->attrs); 
@@ -620,6 +639,16 @@ class mailgroup extends plugin
   /* Save data to object */
   function save_object()
   {
+
+    /* Check if user wants to remove the shared folder from imap too */
+    if($this->initially_was_account && !$this->is_account){
+      if(isset($_POST['remove_folder_from_imap'])){
+        $this->remove_folder_from_imap = true;
+      }else{
+        $this->remove_folder_from_imap = false;
+      }
+    }
+
     /* Assemble mail delivery mode
        The mode field in ldap consists of values between braces, this must
        be called when 'mail' is set, because checkboxes may not be set when
