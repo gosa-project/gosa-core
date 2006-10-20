@@ -44,7 +44,7 @@ class mailAccount extends plugin
   var $quotaUsage                         = 0;
   var $forward_dialog                     = FALSE;
   var $folder_prefix                      = "";
-  var $mailboxList                        = array();
+  var $mailboxList                        = array("INBOX");
   var $default_permissions                = "none";
   var $member_permissions                 = "post";
   var $members                            = array();
