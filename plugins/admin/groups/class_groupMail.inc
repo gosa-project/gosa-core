@@ -616,13 +616,13 @@ class mailgroup extends plugin
     if ($this->initially_was_account){
  
       $method= new $this->method($this->config);
+      $method->fixAttributesOnRemove($this);
       if ($method->connect($this->gosaMailServer) && $this->remove_folder_from_imap){
 
         /* Remove account from IMAP server */
         $method->deleteMailbox($this->uid);
         $method->disconnect();
       }
-      $method->fixAttributesOnRemove($this);
     }
     /* Keep uid */
     unset ($this->attrs['uid']);
