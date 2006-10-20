@@ -23,6 +23,7 @@ class mailMethodCyrus extends mailMethod
   var $mbox= "-";
   var $config;
   var $gosaMailServer= "";
+var $uattrib= "uid";
 
   function mailMethodCyrus($config)
   {
@@ -96,7 +97,51 @@ class mailMethodCyrus extends mailMethod
     return ($result);
   }
 
+
+  /* return all folders of the users mailbox*/
   function getMailboxList($folder, $uid= "")
+  {
+    global $config;
+    $result = array();
+
+    /* Get domain an mail address if uid is an mail address */
+    $domain = "";
+    if(preg_match("/@/",$folder)){
+      $domain = "@".preg_replace("/^.*@/","",$folder);
+      $folder = preg_replace("/@.*$/","",$folder);
+    }
+
+    /* Get list of mailboxes for combo box */
+    $cfg= $this->config[$this->gosaMailServer];
+
+    /* Create search pattern
+         (user/kekse*@domain.de
+          user.kekse*@domain.de
+          user.kekse*  )
+       depending on given folder name) */
+    $q = $folder."*".$domain;
+    $list = imap_listmailbox($this->mbox, $cfg["connect"], $q);
+
+    /* Create list of returned folder names */
+    if (is_array($list)){
+      foreach ($list as $val){
+
+        /* Cut domain name */
+        $val = preg_replace("/@.*$/","",$val);
+        $result[]=preg_replace ("/^.*".normalizePreg($folder)."/","INBOX", imap_utf7_decode ($val));
+      }
+    }
+
+    /* Append "INBOX" to the folder array if result is empty and request comes from user dialog */
+    if(empty($result) && !empty($uid)){
+      $result[] = "INBOX";
+    }
+
+    return ($result);
+  }
+
+
+  function getMailboxList2($folder, $uid= "")
   {
     /* Initialize depending on group or user mode */
     if ($uid != ""){
