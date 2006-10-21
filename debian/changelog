@@ -1,3 +1,9 @@
+gosa (2.5.4-2) unstable; urgency=low
+
+  * New DNS multiple nameservers support
+
+ -- Guido Serra <zeph@purotesto.it>  Sat, 21 Oct 2006 12:10:10 +0200
+
 gosa (2.5.4-1) unstable; urgency=low
 
   * New stable upstream release (Closes: #284718)

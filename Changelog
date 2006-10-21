@@ -1,5 +1,8 @@
 GOsa2 changelog
 ===============
+* DNS support
+  - change DNS functions to support multiple nameservers
+
 * branches/openca { by Guido Serra <zeph@purotesto.it> }
   - branched from branches/2.5 - Revision: 4946
   - added spkac to gosa schemas
