@@ -246,6 +246,16 @@ class mailMethodKolab extends mailMethodCyrus
     }
   }
 
+
+  function deleteMailbox($folder)
+  {
+    /* Remove shared folders and skip removing users. 
+       KolabD is not able to remove shared folders yet, so we do it instead */
+    if(preg_match("/^shared/",$folder)){
+      return mailMethodCyrus::deleteMailbox($folder);
+    }
+    return (TRUE);
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
