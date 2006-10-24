@@ -116,17 +116,25 @@ class divListOpenCA extends MultiSelectWindow {
     "</div>";
     $this->SetListHeader($listhead);
 	}
+	
 	function execute(){    
 		$this->ClearElementsList();
     $this->GenHeader();
 	}
-	function setEntries(){
-		// TODO
-		return;
+	
+	function setEntries($sslObjects){
+		foreach($sslObjects as $display){
+			$elem1 = array("string" => "");
+			$elem2 = array("string" => $display);
+			$elem3 = array("string" => "");		
+			$this->AddElement( array($elem1,$elem2,$elem3));
+		}
 	}
+	
 	function Save(){
     MultiSelectWindow :: Save();  
 	}
+	
 	function save_object(){
     /* Save automatic created POSTs like regex, checkboxes */
     MultiSelectWindow :: save_object();   

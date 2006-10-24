@@ -60,9 +60,77 @@ class openca extends plugin
     if(!$this->DivListOpenCA->SubSearch){
       $this->DivListOpenCA->AddDepartments($this->DivListOpenCA->selectedBase);
     }
-    //$this->reload();
-    //$this->DivListOpenCA->setEntries($this->terminals);
+    $this->reload();
+    $this->DivListOpenCA->setEntries($this->sslObjects);
     return($this->DivListOpenCA->Draw());
+  }
+  
+  function remove_lock(){
+    if (isset($this->ssltab->dn)){
+      del_lock ($this->ssltab->dn);
+    }
+  }
+  
+  function reload(){
+    /* Load terminal shortcuts */
+    $responsible= array();
+    foreach ($this->config->departments as $key => $value){
+      if (get_module_permission(get_permissions ($value, $this->ui->subtreeACL),
+            "openca", $value) == "#all#"){
+        $responsible[$key]= $value;
+      }
+    }
+
+    /* some var init */
+    $res               = array();
+    $this->sslObjects  = array();
+    $userregex         = "";
+
+    /* Set base for all searches */
+    $base=  $this->DivListOpenCA->selectedBase;
+    
+    /* This array represents the combination between checkboxes and search filters */
+    $objs = array( 
+			"ShowSPKACs",
+      "ShowPKCS10s", 
+      "ShowCertificates",
+      "ShowExpired",
+      "ShowRevoked");
+    
+    
+    /* Include the 'Display Systems of user' attribute */ 
+    if ((!empty($this->DivListOpenCA->UserRegex)) && ($this->DivListOpenCA->UserRegex!= "*")){
+      $userregex = "(gotoLastUser=".$this->DivListOpenCA->UserRegex.")";
+    }
+    
+
+    if(!$this->DivListOpenCA->SubSearch){
+    	$filter = "(|(&".$userregex."(objectClass=gosaCA)(cn=".$this->DivListOpenCA->Regex.")))";
+      $res = array_merge($res,get_list($filter,$this->ui->subtreeACL, get_people_ou().$base,
+      	array("cn", "uid", "SPKAC"), GL_NONE | GL_SIZELIMIT));
+    }else{
+    	/* User filter? */
+      $filter = "(|(&".$userregex."(objectClass=gosaCA)(cn=".$this->DivListOpenCA->Regex.")))";
+      $res = array_merge($res,get_list($filter,$this->ui->subtreeACL, get_people_ou().$base,
+      	array("cn", "uid", "SPKAC"), GL_NONE | GL_SUBSEARCH | GL_SIZELIMIT));
+    }
+
+    /* Search for incoming objects */ 
+    $filter = "(|(&".$userregex."(objectClass=gosaCA)(cn=".$this->DivListOpenCA->Regex.")))";
+    $res = array_merge($res,get_list($filter,$this->ui->subtreeACL, "ou=incoming,".$base,
+          array("cn", "uid", "SPKAC"), GL_NONE | GL_SIZELIMIT));    
+    
+		foreach($res as $sslObj){
+			$this->sslObjects[] = $sslObj["dn"];
+		}
+
+    reset ($this->sslObjects);    
+  }
+  
+   /* Save data to object */
+  function save_object()
+  {
+    $this->DivListOpenCA->save_object();
   }
 
 }
