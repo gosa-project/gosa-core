@@ -27,23 +27,42 @@ class openca extends plugin
 {
   /* Definitions */
   var $plHeadline= "Certificates";
-  var $plDescription= "This does something";
+  var $plDescription= "Certification Authority control panel";
+  var $departments=array();
+ 
+  /* Dialog attributes */
+  var $ssltab= NULL;
+  var $sslObjects= array();
+  var $ui= NULL;
+  var $acl= "";
+	var $DivListOpenCA;
+	
+  function openca ($config, $ui){
+    /* Save configuration for internal use */
+    $this->config= $config;
+    $this->ui= $ui;
 
-  function openca ($config, $dn= NULL)
-  {
-	/* Include config object */
-	$this->config= $config;
+    /* Creat dialog object */
+    $this->DivListOpenCA = new divListOpenCA($this->config,$this);
   }
 
-  function execute()
-  {
-	/* Call parent execute */
-	plugin::execute();
+  function execute(){
+		/* Call parent execute */
+		plugin::execute();
 
-	$smarty= get_smarty();
+		$smarty= get_smarty();
 
-	/* Show main page */
-	return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
+    /* Display dialog with system list */
+    $this->DivListOpenCA->parent = $this;
+    $this->DivListOpenCA->execute();
+
+    /* Add departments if subsearch is disabled */
+    if(!$this->DivListOpenCA->SubSearch){
+      $this->DivListOpenCA->AddDepartments($this->DivListOpenCA->selectedBase);
+    }
+    //$this->reload();
+    //$this->DivListOpenCA->setEntries($this->terminals);
+    return($this->DivListOpenCA->Draw());
   }
 
 }

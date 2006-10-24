@@ -33,7 +33,7 @@ if ($remove_lock){
 } else {
 	/* Create logview object on demand */
 	if (!isset($_SESSION['openca']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-		$_SESSION['openca']= new openca ($config);
+		$_SESSION['openca']= new openca ($config, $ui);
 	}
 	$openca= $_SESSION['openca'];
 	$openca->save_object();
