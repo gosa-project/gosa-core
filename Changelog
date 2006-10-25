@@ -1,6 +1,11 @@
 GOsa2 changelog
 ===============
 * gosa 2.5.5
+  - Added remove method for shared folder in kolab mode.
+  - Added checkbox to decide if the shared folder should be deleted from imap too, 
+    if the mail extension is removed from group mail account.
+  - Updated request method for mail folders.
+  - Fixed hang up while writing sieve filter.
   - Added subsearch checkbox to ogroup->add filter
   - Fixed missing ppd configuration error, for newly created printer.
   - Fixed object group saving, the base was sometimes broken.

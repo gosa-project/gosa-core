@@ -23,7 +23,7 @@ class divlist {
 
 		$this->i_currentPage    = 0;
 		$this->i_entriesPerPage = 10;
-    $this->s_height         = "450";
+    $this->s_height         = "650";
     $this->s_width          = "600";
 		$this->s_summary        = "";
 		$this->a_entries        = array();
