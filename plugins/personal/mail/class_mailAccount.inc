@@ -373,7 +373,7 @@ class mailAccount extends plugin
 
         if ($valid && ($user= $this->addAlternate ($_POST['alternate_address'])) != ""){
           $ui= get_userinfo();
-          if ($user != $ui->username){
+          if ($user != $ui->username && !$this->is_template){
             print_red (_("The address you're trying to add is already used by user")." '$user'.");
           }
         }
@@ -905,7 +905,7 @@ class mailAccount extends plugin
       
     /* Is this address already assigned in LDAP? */
     $ldap->cd ($this->config->current['BASE']);
-    $ldap->search ("(&(objectClass=gosaMailAccount)(|(mail=$address)"."(gosaMailAlternateAddress=$address)))", array("uid"));
+    $ldap->search ("(&(!(objectClass=gosaUserTemplate))(objectClass=gosaMailAccount)(|(mail=$address)"."(gosaMailAlternateAddress=$address)))", array("uid"));
 
     if ($ldap->count() > 0){
       $attrs= $ldap->fetch ();

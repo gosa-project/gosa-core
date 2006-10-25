@@ -19,6 +19,7 @@ GOsa2 changelog
   - Fixed a set of W3C problems
   - Fixed multiple savings in addressbook (Closes: #23)
   - Fixed shadow expire when using templates (Closes: #20)
+  - Made %uid, %sn, etc. available in templates using gosaMailAlternateAddress
 
 * gosa 2.5.4
   - Included patch to choose the addressbook base
