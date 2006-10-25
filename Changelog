@@ -1,17 +1,20 @@
 GOsa2 changelog
 ===============
+
 * gosa 2.5.5
-  - Added remove method for shared folder in kolab mode.
-  - Added checkbox to decide if the shared folder should be deleted from imap too, 
-    if the mail extension is removed from group mail account.
-  - Updated request method for mail folders.
-  - Fixed hang up while writing sieve filter.
-  - Added subsearch checkbox to ogroup->add filter
-  - Fixed missing ppd configuration error, for newly created printer.
-  - Fixed object group saving, the base was sometimes broken.
-  - Fixed saving of terminal attribute gotoLpdEnable
+  - Added remove method for shared folder in kolab mode
+  - Added checkbox to decide if the shared folder should be deleted from IMAP
+    if the mail extension is removed from group mail account
+  - Updated request method for mail folders
+  - Resolved problem with infinite loop while storing sieve scripts
+  - Added subsearch checkbox to object group "add items" filter
+  - Fixed "missing PPD" configuration error, for newly created printer
+  - Corrected problem where the object base was sometimes broken when
+    saving object groups
+  - Fixed saving of terminal attribute gotoLpdEnable to contain "yes"
+    instead of "1"
   - Avoid reset of several attributes from workstations when not
-    inherited from object groups.
+    inherited from object groups
   - Show error messages from password dialog
   - Fixed a set of W3C problems
   - Fixed multiple savings in addressbook (Closes: #23)
