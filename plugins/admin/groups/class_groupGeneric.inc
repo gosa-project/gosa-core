@@ -155,7 +155,9 @@ class group extends plugin
         $this->base= dn2base($ui->dn);
       }
     } else {
-      $this->base= preg_replace ("/^[^,]+,[^,]+,/", "", $this->dn);
+
+      /* Get object base */
+      $this->base =preg_replace ("/^[^,]+,".normalizePreg(get_groups_ou())."/","",$this->dn);
     }
 
     /* This is always an account */
