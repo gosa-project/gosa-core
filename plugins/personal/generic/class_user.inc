@@ -1204,7 +1204,7 @@ class user extends plugin
         
           foreach($attrs['gosaSubtreeACL'] as $attr){
             if((preg_match("/:user#/",$attr))||(preg_match("/:all/",$attr))){
-              $s =  preg_replace("/^.*ou=groups,/","",$attrs['dn']);
+              $s =  preg_replace("/^.*".get_groups_ou().",/","",$attrs['dn']);
 
               foreach($this->config->idepartments as $key => $dep) {
                 if(preg_match("/".$s."/i",$key)){
