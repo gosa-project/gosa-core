@@ -116,3 +116,6 @@ source diff:
 
 binary: binary-indep 
 .PHONY: build install clean binary-indep binary
+
+binary-arch:
+
