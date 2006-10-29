@@ -1,3 +1,10 @@
+gosa (2.5.5-1) unstable; urgency=low
+
+  * New upstrame release
+  * Added binary-arch to debian/rules (Closes: #395605)
+
+ -- Cajus Pollmeier <cajus@debian.org>  Sun, 29 Oct 2006 08:02:11 +0100
+
 gosa (2.5.4-1) unstable; urgency=low
 
   * New stable upstream release (Closes: #284718)
