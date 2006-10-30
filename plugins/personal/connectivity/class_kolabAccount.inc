@@ -284,10 +284,10 @@ class kolabAccount extends plugin
       $message[]= _("The value specified as Free Busy future needs to be an integer.");
     }
 
-#    /* Check for URL scheme... */
-#    if ($this->calFBURL != "" && !@preg_match('/^[^:/]+://[a-z0-9_/.+~-]+$/i', $this->calFBURL)){
-#      $message[]= _("The value specified as Free Busy Information URL is invalid.");
-#    }
+    /* Check for URL scheme... */
+    if(!empty($this->calFBURL) && !preg_match("/(https|https):\/\//",$this->calFBURL)){
+      $message[]= _("The value specified as Free Busy Information URL is invalid.");
+    }
 
     /* Check invitation policy for existing mail addresses */
     foreach($this->kolabInvitationPolicy as $policy){
