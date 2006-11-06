@@ -25,7 +25,7 @@ $_SESSION['DEBUGLEVEL']= 1;
 
 if (!isset($_GET['js']) && !isset($_SESSION['js'])){
   echo '<script language="JavaScript" type="text/javascript">';
-  echo '  location = "index.php?js=true";';
+  echo '  location = "setup.php?js=true";';
   echo '</script>';
 
   $_SESSION['js']= FALSE;
