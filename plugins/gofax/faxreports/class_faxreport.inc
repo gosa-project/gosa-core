@@ -103,7 +103,7 @@ class faxreport extends plugin
 
     /* Some checks */
     if(!isset($this->config->data['SERVERS']['FAX'])){
-      print_red(_("Can't connect to fax database, no reports can be shown!"));
+      print_red(_("No fax extension defined in your sever configuration, no reports can be shown!"));
       return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
     }elseif(!is_callable("mysql_connect")){
       print_red(_("There is no mysql extension available, please check your php setup."));
@@ -122,7 +122,7 @@ class faxreport extends plugin
       }
 
       if (! mysql_query("SELECT * FROM faxlog;")){
-        print_red(_("Can't select fax database for report generation!"));
+        print_red(_("Can't query fax table 'faxlog' for report generation!"));
         return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
       }
     }		
