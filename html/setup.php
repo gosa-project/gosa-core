@@ -22,14 +22,13 @@
 session_start();
 $_SESSION['DEBUGLEVEL']= 1;
 
-
 if (!isset($_GET['js']) && !isset($_SESSION['js'])){
   echo '<script language="JavaScript" type="text/javascript">';
   echo '  location = "setup.php?js=true";';
   echo '</script>';
 
   $_SESSION['js']= FALSE;
-} else {
+} elseif(isset($_GET['js'])) {
   $_SESSION['js']= TRUE;
 }
 
@@ -56,6 +55,10 @@ if (!file_exists(CONFIG_TEMPLATE_DIR."/gosa.conf")){
 
 // No Errors occured yet
 $_SESSION['errors']= "";
+$_SESSION['errors']             = "";
+$_SESSION['errorsAlreadyPosted']= array();
+$_SESSION['LastError']          = "";
+
 
 // Print out gosa.conf 
 //if(isset($_SESSION['classes'])) print "\$_SESSION['classes']=ok";
@@ -133,13 +136,13 @@ if($next < 1){
 //  and we call this func again, to output the error
 
 // I hope this will work fine ^^
-if((!show_setup_page1(false))||($next == 1)) {
+if((show_setup_page1(false))||($next == 1)) {
   show_setup_page1();  
-} elseif((!show_setup_page2(false))||($next==2)) {
+} elseif((show_setup_page2(false))||($next==2)) {
   show_setup_page2();
-} elseif((!show_setup_page3(false))||($next==3)) {
+} elseif((show_setup_page3(false))||($next==3)) {
   show_setup_page3();
-} elseif((!show_setup_page4(false))||($next==4)) {
+} elseif((show_setup_page4(false))||($next==4)) {
   show_setup_page4();
 }
 // This is called to test if we have an administrative Group with a User in it
