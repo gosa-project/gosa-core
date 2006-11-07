@@ -3,7 +3,7 @@ GOsa2 changelog
 
 * gosa 2.5.6
   - Fixed setup.php to have no loops in certain cases
-  - Aoid tab lables to have line feeds
+  - Avoid tab lables to have line feeds
 
 * gosa 2.5.5
   - Added remove method for shared folder in kolab mode
