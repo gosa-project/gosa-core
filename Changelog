@@ -6,6 +6,7 @@ GOsa2 changelog
   - Avoid tab lables to have line feeds
 
 * gosa 2.5.5
+  - Fixed endless javascript loop in setup.php
   - Added remove method for shared folder in kolab mode
   - Added checkbox to decide if the shared folder should be deleted from IMAP
     if the mail extension is removed from group mail account
