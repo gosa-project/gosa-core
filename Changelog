@@ -3,8 +3,8 @@ GOsa2 changelog
 
 * gosa 2.5.6
   - Fixed endless javascript loop in setup.php
-  - Fixed setup.php to have no loops in certain cases
   - Avoid tab lables to have line feeds
+  - Activated missing checks for IP and MAC
 
 * gosa 2.5.5
   - Added remove method for shared folder in kolab mode

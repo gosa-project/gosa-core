@@ -50,7 +50,7 @@ class divListSystem extends MultiSelectWindow
     /* set Page header */
     $this->AddHeader(array("string"=>"&nbsp;","attach"=>"style='width:20px;'"));
     $this->AddHeader(array("string"=>_("System / Department")));
-    $this->AddHeader(array("string"=>_("Actions"),"attach"=>"style='width:60px;border-right:0px;'"));
+    $this->AddHeader(array("string"=>_("Actions"),"attach"=>"style='width:70px;border-right:0px;'"));
 
     /*                  Text        ,Value    ,Name         ,Is selected */
     $this->AddCheckBox("ShowServers",         _("Select to see servers"),            _("Show servers"),          true);
@@ -175,6 +175,10 @@ class divListSystem extends MultiSelectWindow
         $action2 = "";
       }
 
+      if(in_array("gotoWorkstation",$val['objectClass'])){
+        $action2= "<input class='center' type='image' src='images/cdrom.png' alt='"._("Create CD")."'   name='gen_cd_%KEY%' title='"._("Create FAI CD")."'>".$action2;
+      }
+
       if(isset($val['message'])){
         $display.= "  (".$val['message']." '".$this->config->idepartments[$_SESSION['CurrentMainBase']]."'  )";
       }
@@ -182,7 +186,7 @@ class divListSystem extends MultiSelectWindow
       $img    = $this->parent->convert_list($val);
       $field1 = array("string" => sprintf($img['img'],$val['dn']), "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' title='".preg_replace('/ /', '&nbsp;', @LDAP::fix($val['dn']))."'");
-      $field3 = array("string" => preg_replace("/%KEY%/", "$key", $action2.$action), "attach" => "style='width:60px;border-right:0px;text-align:right;'");
+      $field3 = array("string" => preg_replace("/%KEY%/", "$key", $action2.$action), "attach" => "style='width:70px;border-right:0px;text-align:right;'");
       $this->AddElement( array($field1,$field2,$field3));
     }
 

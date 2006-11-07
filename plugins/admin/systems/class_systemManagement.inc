@@ -83,6 +83,9 @@ class systems extends plugin
       }elseif(preg_match("/user_setpwd_.*/i",$key)){
         $s_action="change_pw";
         $s_entry  = preg_replace("/user_setpwd_/i","",$key);
+      }elseif(preg_match("/gen_cd_.*/i",$key)){
+        $s_action="gen_cd";
+        $s_entry  = preg_replace("/gen_cd_/i","",$key);
       }elseif(preg_match("/newsystem_.*/i",$key)){
         $s_action="newsystem";
         $s_entry  = preg_replace("/newsystem_/i","",$key);
@@ -218,6 +221,16 @@ class systems extends plugin
         del_lock($this->dn);
       }
     }
+
+    /********************
+      Create FAI CD ...   
+     ********************/
+    if ($s_action=="gen_cd"){
+      $this->dn= $this->terminals[$s_entry]['dn'];
+      $_SESSION['objectinfo']= $this->dn;
+      return ($smarty->fetch(get_template_path('gencd.tpl', TRUE)));
+    }
+
 
 
     /********************
