@@ -150,6 +150,8 @@ class tabs
 		if (mb_strlen($title, 'UTF-8') > 14){
 			$title= mb_substr($title,0, 12, 'UTF-8')."...";
 		}
+
+		$title= preg_replace("/ /", "&nbsp;", $title);
 		
 		if ($_SESSION['js']==FALSE){	
 			$display.= "<div class=\"$style[$index]\"><input type=\"submit\" name=\"$class\"".
