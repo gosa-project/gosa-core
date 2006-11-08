@@ -10,5 +10,5 @@
 <p class="plugbottom">
  <input type="hidden" name="next" value="3">
  <input type='submit' name='back' value='{t}Back{/t}'>
- <input type='submit' name='continue2' value='{t}Continue{/t}'>
+ <input type='submit' name='continue2' value='{t}Continue{/t}' {$mode}>
 </p>

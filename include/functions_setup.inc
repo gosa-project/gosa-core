@@ -622,11 +622,14 @@ function parse_contrib_conf()
 /* Show setup_page 1 */
 function show_setup_page1($withoutput = true)
 {
-  $faults = false;
+  $faults   = false;
+  $faults2  = false;
   $smarty = get_smarty();  
   $smarty->assign ("content", get_template_path('setup_introduction.tpl'));
   $smarty->assign ("tests", perform_php_checks($faults));
-  $smarty->assign ("detailed_tests", perform_additional_function_checks($faults));
+  $smarty->assign ("detailed_tests", perform_additional_function_checks($faults2));
+
+  $faults = $faults || $faults2;
 
   /* This var is true if anything went wrong */
   if ($faults){
@@ -653,7 +656,7 @@ function show_setup_page1($withoutput = true)
 /* Show setup_page 2 */
 function show_setup_page2($withoutput = true)
 {
-  $faults = array();
+  $faults = false;
   $smarty = get_smarty();
   $smarty->assign ("content", get_template_path('setup_step2.tpl'));
   $smarty->assign ("tests", perform_additional_checks($faults));
