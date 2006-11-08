@@ -21,15 +21,17 @@
   </tr>
   <tr style='height:100%;'>
     <td style="background-color: white;vertical-align:top;" colspan=2>
+
     {include file="$content"}
+
     </td>
   </tr>
-<table summary="">
+</table>
 
 <script language="JavaScript" type="text/javascript">
   <!--
     h=parseInt(window.innerHeight)-20;
-    document.write('</div>');
+    document.write('<\/div>');
   //-->
 </script>
 
