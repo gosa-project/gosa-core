@@ -2,7 +2,7 @@ GOsa2 changelog
 ===============
 
 * gosa 2.5.6
-  - Fixed endless javascript loop in setup.php
+  - Fixes various issues with setup.php
   - Avoid tab lables to have line feeds
   - Activated missing checks for IP and MAC
 
