@@ -5,6 +5,7 @@ GOsa2 changelog
   - Fixes various issues with setup.php
   - Avoid tab lables to have line feeds
   - Activated missing checks for IP and MAC
+  - Fixed copy'n paste errors for netatalk
 
 * gosa 2.5.5
   - Added remove method for shared folder in kolab mode

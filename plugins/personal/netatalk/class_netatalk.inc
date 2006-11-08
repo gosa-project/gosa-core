@@ -55,6 +55,7 @@ class netatalk extends plugin {
   
   /* Attributes to save to LDAP */
   var $attributes = array ("apple-user-homeurl", "apple-user-homeDirectory");
+  var $CopyPasteVars= array("apple_user_homeurl", "apple_user_homeDirectory");
 
   /* Attributes to use in smarty template */
   var $smarty_attributes = array ("apple_user_homepath_raw", "shares", "selectedshare");
