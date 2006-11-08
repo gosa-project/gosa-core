@@ -1,7 +1,7 @@
+<h2>{t}Posix settings{/t}</h2>
 <table width='100%'>
 	<tr>
-		<td style='vertical-align:top;'>
-			<h2>{t}Posix settings{/t}</h2>
+		<td style='vertical-align:top; border-right:1px solid #AAA'>
 			<table>
 	  			<tr>
 					<td>
@@ -41,6 +41,8 @@
 					</td>
 				</tr>
 			</table>
+		</td>
+		<td>
 			<table width="50%">
 				<tr>
 					<td style="vertical-align:top;" colspan="4">
