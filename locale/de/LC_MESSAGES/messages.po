@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-10-25 10:50+0200\n"
-"PO-Revision-Date: 2006-10-25 10:55+0200\n"
+"PO-Revision-Date: 2006-11-08 17:38+0100\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: Deutsch <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -10142,7 +10142,7 @@ msgstr "Zeige Windows basierte Arbeitsstationen"
 
 #: plugins/admin/systems/class_divListSystem.inc:60
 msgid "Select to see network printers"
-msgstr "Wählen, um die 'Netzwerk-Drucker' zu sehen"
+msgstr "Wählen, um die Netzwerk-Drucker zu sehen"
 
 #: plugins/admin/systems/class_divListSystem.inc:60
 msgid "Show network printers"
@@ -10150,7 +10150,7 @@ msgstr "Zeige Netzwerk-Drucker"
 
 #: plugins/admin/systems/class_divListSystem.inc:61
 msgid "Select to see VOIP phones"
-msgstr "Wählen, um 'VoIP-Telefone' zu sehen"
+msgstr "Wählen, um VoIP-Telefone zu sehen"
 
 #: plugins/admin/systems/class_divListSystem.inc:61
 #: plugins/admin/ogroups/ogroup_objects.tpl:35
@@ -12660,15 +12660,15 @@ msgstr "Zeige Anwendungen"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:32
 msgid "Select to see workstations"
-msgstr "Wählen, um die 'Arbeitsstationen' zu sehen"
+msgstr "Wählen, um die Arbeitsstationen zu sehen"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:33
 msgid "Select to see terminals"
-msgstr "Wählen, um die 'Terminals' zu sehen"
+msgstr "Wählen, um die Terminals zu sehen"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:34
 msgid "Select to see printers"
-msgstr "Wählen, um die 'Netzwerkdrucker' zu sehen"
+msgstr "Wählen, um die Netzwerkdrucker zu sehen"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:34
 msgid "Show printers"
@@ -12676,7 +12676,7 @@ msgstr "Zeige Netzwerk-Drucker"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:35
 msgid "Select to see phones"
-msgstr "Wählen, um die 'VOIP Telefone' zu sehen"
+msgstr "Wählen, um die VOIP Telefone zu sehen"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:41
 msgid "Display objects of department"
