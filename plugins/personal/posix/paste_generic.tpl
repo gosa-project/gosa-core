@@ -15,7 +15,7 @@
 			<table>
 	  			<tr>
 					<td>
-					  	<input id="force_ids" type=checkbox name="force_ids" value="1" ".$force_ids."}
+					  	<input id="force_ids" type=checkbox name="force_ids" value="1" {$force_ids}
 								 onclick="changeState('uidNumber');changeState('gidNumber');">
 					</td>
 					<td>
