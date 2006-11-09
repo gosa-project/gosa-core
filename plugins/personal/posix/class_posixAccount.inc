@@ -1256,6 +1256,14 @@ class posixAccount extends plugin
     return($ret);
   }
 
+  function PrepareForCopyPaste($source)
+  {
+    plugin::PrepareForCopyPaste($source);
+    
+    /* Avoid using the same gid/uid number as source user */
+    $this->savedUidNumber = $this->get_next_id("gidNumber");
+    $this->savedGidNumber = $this->get_next_id("uidNumber");
+  }
 
   function convertToSeconds($val)
   {
