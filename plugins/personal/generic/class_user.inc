@@ -1301,6 +1301,23 @@ class user extends plugin
       }
     } 
   }
+
+
+  function PrepareForCopyPaste($source)
+  {
+    plugin::PrepareForCopyPaste($source);
+
+    /* Reset certificate information addepted from source user
+        to avoid setting the same user certificate for the destination user. */
+    $this->userPKCS12= "";
+    $this->userSMIMECertificate= "";
+    $this->userCertificate= "";
+    $this->certificateSerialNumber= "";
+    $this->old_certificateSerialNumber= "";
+    $this->old_userPKCS12= "";
+    $this->old_userSMIMECertificate= "";
+    $this->old_userCertificate= "";
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
