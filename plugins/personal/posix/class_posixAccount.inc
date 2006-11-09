@@ -459,7 +459,15 @@ class posixAccount extends plugin
     }
 
     /* Fill calendar */
-    $date= getdate($this->shadowExpire);
+   
+    /* If this $this->shadowExpire is empty 
+        use current date as base for calculating selectbox values.
+       (This attribute is empty if this is a new user )*/ 
+    if(empty($this->shadowExpire)){
+      $date= getdate(time());
+    }else{
+      $date= getdate($this->shadowExpire);
+    }
 
     $days= array();
     for($d= 1; $d<32; $d++){

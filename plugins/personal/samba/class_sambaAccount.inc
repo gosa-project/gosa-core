@@ -986,7 +986,7 @@ class sambaAccount extends plugin
         $this->handle_post_events("modify",array("uid" => $this->uid));
       }
     } else {
-      $this->handle_post_events("add",array("uid" => $this>uid));
+      $this->handle_post_events("add",array("uid" => $this->uid));
     }
 
   }
