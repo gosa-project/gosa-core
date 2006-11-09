@@ -978,8 +978,17 @@ class mailAccount extends plugin
     if(isset($_POST['mail'])){
       $this->mail = $_POST['mail'];
     }
-
   }
+
+   
+  function PrepareForCopyPaste($source)
+  {
+    plugin::PrepareForCopyPaste($source);
+
+    /* Reset alternate mail addresses */
+    $this->gosaMailAlternateAddress = array();    
+  }
+
 
   function allow_remove()
   {
