@@ -852,15 +852,15 @@ class posixAccount extends plugin
     del_lock ("uidnumber");
 
 
-    /* Posix accounts have group interrelationship, take care about these here. */
-    if ($this->force_ids == 0 && $this->primaryGroup == 0){
+    /* Posix accounts have group interrelationship, 
+        take care about these here if this is a new user without forced gidNumber. */
+    if ($this->force_ids == 0 && $this->primaryGroup == 0 && !$this->initially_was_account){
       $ldap->cd($this->config->current['BASE']);
       $ldap->search("(&(objectClass=posixGroup)(gidNumber=".$this->gidNumber."))", array("cn"));
 
       /* Create group if it doesn't exist */
       if ($ldap->count() == 0){
         $groupdn= preg_replace ('/^'.$this->config->current['DNMODE'].'=[^,]+,'.get_people_ou().'/i', 'cn='.$this->uid.','.get_groups_ou(), $this->dn);
-
         $g= new group($this->config, $groupdn);
         $g->cn= $this->uid;
         $g->force_gid= 1;
