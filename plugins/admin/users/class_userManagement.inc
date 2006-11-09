@@ -52,8 +52,6 @@ class userManagement extends plugin
     /* Creat dialog object */
     $this->DivListUsers = new divListUsers($this->config,$this);
 
-    /* LOCK MESSAGE Vars */
-    $_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^user_edit_/","/^user_del_/");
   }
 
 
@@ -61,6 +59,9 @@ class userManagement extends plugin
   {
     /* Call parent execute */
     plugin::execute();
+
+    /* LOCK MESSAGE Vars */
+    $_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^user_edit_/","/^user_del_/");
 
     $smarty       = get_smarty();                 // Smarty instance
     $s_action     = "";                           // Contains the action to be taken
