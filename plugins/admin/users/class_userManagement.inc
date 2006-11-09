@@ -757,6 +757,9 @@ class userManagement extends plugin
 
         /* Use the last dn to search for it's ID in the newly generated list. */
         $dn= $this->CopyPasteHandler->lastdn;
+
+        /* Get new user list */
+        $this->reload();
         foreach($this->list as $id => $entry){
           if($entry['dn'] == $dn){
             $s_entry= $id;

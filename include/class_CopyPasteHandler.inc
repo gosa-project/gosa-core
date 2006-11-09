@@ -139,6 +139,7 @@ class CopyPasteHandler {
           }
         }else{
           $this->current->save();
+          $this->lastdn = $this->current->dn;
           $this->dialogOpen =false;
           $this->Clear();
         }
