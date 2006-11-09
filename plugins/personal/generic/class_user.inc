@@ -459,7 +459,7 @@ class user extends plugin
           /* Additional info if start end time is '0' */
           $add_str_info = "";
           if($timeto == 0 && $timefrom == 0){
-            $add_str_info = "<br><i>"._("(Some types of certificates are currently not supported and may be displayed as 'invalid'.")."</i>";
+            $add_str_info = "<br><i>"._("(Some types of certificates are currently not supported and may be displayed as 'invalid'.)")."</i>";
           }
 
           $str = "<table summary=\"\" border=0>

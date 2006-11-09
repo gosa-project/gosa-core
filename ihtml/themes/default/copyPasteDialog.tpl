@@ -6,7 +6,6 @@
 	<p class='seperator'>&nbsp;</p>
 	<br>
 	{$AttributesToFix}
-	<p class='seperator'>&nbsp;</p>
 	{if $SubDialog == false}
 	<br>
 

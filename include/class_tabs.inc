@@ -280,22 +280,25 @@ class tabs
    */
   function getCopyDialog()
   {
-	  $ret = "";
-	  $this->SubDialog = false;
-	  foreach ($this->by_object as $key => $obj){
-		  if($obj->is_account){
-			  $tmp = $this->by_object[$key]->getCopyDialog();
-			  if($tmp['status'] == "SubDialog"){
-				  $this->SubDialog = true;
-	              return($tmp['string']);
-	     	  }else{
-                 $ret .= $tmp['string'];
-			  }
-		  }
-	  }
-	  return($ret);
+    $ret = "";
+    $this->SubDialog = false;
+    foreach ($this->by_object as $key => $obj){
+      if($obj->is_account){
+        $tmp = $this->by_object[$key]->getCopyDialog();
+        if($tmp['status'] == "SubDialog"){
+          $this->SubDialog = true;
+          return($tmp['string']);
+        }else{
+          if(!empty($tmp['string'])){
+            $ret .= $tmp['string'];
+            $ret .= "<p class='seperator'>&nbsp;</p>";
+          }
+        }
+      }
+    }
+    return($ret);
   }
-
 }
 
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

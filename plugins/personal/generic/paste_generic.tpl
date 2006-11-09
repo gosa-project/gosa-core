@@ -57,5 +57,3 @@
   </tr>
 </table>
 <br>
-<br>
-<p class="seperator"></p>
