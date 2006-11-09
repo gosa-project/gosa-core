@@ -553,10 +553,18 @@ class sambaAccount extends plugin
     }
 
     /* 'normal' Checkboxes */
-    if ($this->pwdCanChange=="1"){
-      $smarty->assign("flagsP", "checked");
-    } else {
-      $smarty->assign("flagsP", "");
+    if($this->samba3){
+      if ($this->sambaPwdCanChange=="1"){
+        $smarty->assign("flagsP", "checked");
+      } else {
+        $smarty->assign("flagsP", "");
+      }
+    }else{
+      if ($this->pwdCanChange=="1"){
+        $smarty->assign("flagsP", "checked");
+      } else {
+        $smarty->assign("flagsP", "");
+      }
     }
     if ($this->password_expires=="1"){
       $smarty->assign("flagsC", "checked");
