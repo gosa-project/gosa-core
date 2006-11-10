@@ -114,36 +114,13 @@ class netatalk extends plugin {
     $ldap = $this->config->get_ldap_link();
 
     if($this->dn === "new" || $this->dn == NULL) {
-      $ldap->cd($this->parent->by_object['user']->base);
+      $base = $_SESSION['CurrentMainBase'];
     } else {
-      $ldap->cd ($this->dn);
-      $ldap->cd ('..'); $ldap->cd ('..');
+      $base = preg_replace("/^[^,]+,".normalizePreg(get_people_ou())."/","",$this->dn);
     }
+  
+    $ldap->cd($base);
     $ldap->search ("(&(objectClass=mount)(|(mountType=url)(mountType=nfs))(cn=*))");
-
-    /* Show tab dialog headers */
-    if ($this->parent != NULL) {
-      if ($this->is_account) {
-        $display = $this->show_header(_("Remove netatalk account"), 
-          _("This account has netatalk features enabled. You can disable them by clicking below."));
-      } else {
-        $errmsg="";
-        $obj = $this->parent->by_object['posixAccount'];
-        if  (!($obj->is_account) ) {
-          $errmsg.="Posix features are needed for netatalk accounts, enable them first. ";
-        }
-        if ($ldap->count() == 0) {
-          $errmsg.="At least one share with netatalk or NFS mount entry needed.";
-        }
-        if($errmsg==""){
-          $display = $this->show_header(_("Create netatalk account"), 
-            _("This account has netatalk features disabled. You can enable them by clicking below."));
-        } else {
-          $display = $this->show_header(_("Create netatalk account"), _($errmsg), TRUE);  
-        }
-        return ($display);
-      }
-    }
 
     while ($attrs = $ldap->fetch()){
       $tmp  = split(":", $attrs["cn"][0]);
@@ -193,6 +170,29 @@ class netatalk extends plugin {
       return ($display);
     }
     
+    /* Show tab dialog headers */
+    if ($this->parent != NULL) {
+      if ($this->is_account) {
+        $display = $this->show_header(_("Remove netatalk account"), 
+          _("This account has netatalk features enabled. You can disable them by clicking below."));
+      } else {
+        $errmsg="";
+        $obj = $this->parent->by_object['posixAccount'];
+        if  (!($obj->is_account) ) {
+          $errmsg.="Posix features are needed for netatalk accounts, enable them first. ";
+        }
+        if ($ldap->count() == 0) {
+          $errmsg.="At least one share with netatalk or NFS mount entry needed.";
+        }
+        if($errmsg==""){
+          $display = $this->show_header(_("Create netatalk account"), 
+            _("This account has netatalk features disabled. You can enable them by clicking below."));
+        } else {
+          $display = $this->show_header(_("Create netatalk account"), _($errmsg), TRUE);  
+        }
+        return ($display);
+      }
+    }
     
     $smarty->assign("netatalkShareACL", chkacl($this->acl, "netatalkShare"));
     $smarty->assign("netatalkUserHomepathACL", chkacl($this->acl, "netatalkUserHomepath"));
