@@ -217,8 +217,6 @@ class netatalk extends plugin {
   function check() {
     $message = array ();
   
-    echo $this->apple_user_share;
-
     if (strlen($this->apple_user_share) == 0) {
       $message[] = _("You must select a share to use.");
     }
