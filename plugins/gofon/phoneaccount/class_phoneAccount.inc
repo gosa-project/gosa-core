@@ -34,7 +34,9 @@ class phoneAccount extends plugin
   var $cli_parameters         = array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
 
   /* attribute list for save action */
-  var $CopyPasteVars          = array("phoneNumbers");
+  var $CopyPasteVars          = array("phoneNumbers","macroarray","macrostillavailable"/*"phoneNumbers" -Reset- */,
+                                      "hardware_list","used_hardware");
+
   var $attributes             = array("goFonDeliveryMode", "goFonFormat","uid","cn",
       "goFonHardware","goFonPIN","goFonVoicemailPIN","telephoneNumber", "goFonMacro","macro");
   var $objectclasses= array("goFonAccount");
