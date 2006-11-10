@@ -38,9 +38,12 @@ class gofaxAccount extends plugin
   var $out_blocklist_dialog= FALSE;
   var $current_blocklist= array();
 
+  /* Copy & paste variables */
+  var $CopyPasteVars=array("facsimileTelephoneNumber");
+
   /* attribute list for save action */
   var $attributes= array("goFaxDeliveryMode", "goFaxIsEnabled","goFaxRBlockgroups","facsimileAlternateTelephoneNumber",
-      "goFaxPrinter", "goFaxDivertNumber", "goFaxLanguage", "goFaxFormat", "mail");
+      "goFaxPrinter", "goFaxDivertNumber", "goFaxLanguage", "goFaxFormat", "mail","facsimileTelephoneNumber");
   var $objectclasses= array("goFaxAccount");
 
   var $uid= "";
@@ -734,11 +737,8 @@ class gofaxAccount extends plugin
       $this->attrs[$val]= $this->$val;
     }
 
-    /* Adapt mail settings if needed */
+    /* Do not save mail address ... it was possibly changed by mail plugin*/
     unset($this->attrs['mail']);
-    if (!$this->has_mailAccount && $this->goFaxDeliveryMode && 32){
-      $this->attrs['mail']= $this->mail;
-    }
 
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();
