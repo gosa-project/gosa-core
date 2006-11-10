@@ -39,10 +39,10 @@ class gofaxAccount extends plugin
   var $current_blocklist= array();
 
   /* Copy & paste variables */
-  var $CopyPasteVars=array("facsimileTelephoneNumber");
+  var $CopyPasteVars=array("facsimileTelephoneNumber","goFaxRBlocklist","goFaxRBlockgroups","goFaxSBlocklist","goFaxSBlockgroups");
 
   /* attribute list for save action */
-  var $attributes= array("goFaxDeliveryMode", "goFaxIsEnabled","goFaxRBlockgroups","facsimileAlternateTelephoneNumber",
+  var $attributes= array("goFaxDeliveryMode", "goFaxIsEnabled","facsimileAlternateTelephoneNumber",
       "goFaxPrinter", "goFaxDivertNumber", "goFaxLanguage", "goFaxFormat", "mail","facsimileTelephoneNumber");
   var $objectclasses= array("goFaxAccount");
 
