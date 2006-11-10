@@ -807,8 +807,7 @@ class oxchangeAccount extends plugin
     preg_match("/^(\w+(?=\=))=((\w|\s|\.)+(?=\,)),.*/",$this->dn,$uidarray);
     $uid=$uidarray[2];
     if (trim($uid) == "") {
-      print_red(_("The Open-Xchange accountname is empty and thus invalid! Check to make sure that ".
-                  "you are not using any strange characters in the loginname."));
+      print_red(_("The Open-Xchange accountname is empty and thus invalid! Check to make sure that you are not using any strange characters in the loginname."));
       return;
     }
 	
