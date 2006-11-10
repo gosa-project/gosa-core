@@ -6,6 +6,7 @@ class divListSystem extends MultiSelectWindow
   /* Current base */
   var $selectedBase       = "";
   var $departments        = array();
+  var $do_iso             = FALSE;
 
   /* Regex */
   var $Regex              = "*";
@@ -32,6 +33,10 @@ class divListSystem extends MultiSelectWindow
     
     $this->parent       = $parent;
     $this->ui           = get_userinfo();
+
+    if (search_config($config->data['TABS'], "workgeneric", "ISOCMD")){
+      $this->do_iso= TRUE;
+    }
 
     /* Set list strings */
     $this->SetTitle(_("List of systems"));
@@ -175,7 +180,7 @@ class divListSystem extends MultiSelectWindow
         $action2 = "";
       }
 
-      if(in_array("gotoWorkstation",$val['objectClass'])){
+      if($this->do_iso && in_array("gotoWorkstation",$val['objectClass'])){
         $action2= "<input class='center' type='image' src='images/cdrom.png' alt='"._("Create CD")."'   name='gen_cd_%KEY%' title='"._("Create FAI CD")."'>".$action2;
       }
 
