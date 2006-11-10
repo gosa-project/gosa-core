@@ -181,7 +181,7 @@ class netatalk extends plugin {
         if  (!($obj->is_account) ) {
           $errmsg.="Posix features are needed for netatalk accounts, enable them first. ";
         }
-        if ($ldap->count() == 0) {
+        if (count($this->shares)== 0) {
           $errmsg.="At least one share with netatalk or NFS mount entry needed.";
         }
         if($errmsg==""){
@@ -253,8 +253,13 @@ class netatalk extends plugin {
 
     $ldap = $this->config->get_ldap_link();
 
-    /* Call parents save to prepare $this->attrs */
+    /* Reset array of used attributes, because plugin::save() 
+        will not work with '-' in attributes names 
+        after calling save restore attributes array */
+    $attributes = $this->attributes;
+    $this->attributes = array();
     plugin :: save();
+    $this->attributes = $attributes;
 
     /* Do attribute conversion */
     foreach ($this->attributes as $val) {
