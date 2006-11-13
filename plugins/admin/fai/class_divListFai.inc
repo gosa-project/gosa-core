@@ -219,8 +219,10 @@ _("Submit")."'>&nbsp;".
        /* Create action icons */
        $action ="";
        if($this->parent->CopyPasteHandler){
-         $action .= "<input class='center' type='image'
-           src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+         if($value['FAIstate'] != "freeze"){
+           $action .= "<input class='center' type='image'
+             src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+         }
          $action.= "<input class='center' type='image'
            src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
        }

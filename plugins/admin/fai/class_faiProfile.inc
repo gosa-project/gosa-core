@@ -442,6 +442,11 @@ class faiProfile extends plugin
 
     $this->attrs['FAIclass']=trim($this->FAIclass);
 
+    /* Copy & Paste : Ensure that FAIstate is copied too */
+    if($this->copy_paste_mode && preg_match("/freeze/",$this->FAIstate)){
+      $this->attrs['FAIstate'] = $this->FAIstate;
+    }
+
     $ldap->cat($this->dn,array("objectClass"));
     if($ldap->count()!=0){
       /* Write FAIscript to ldap*/

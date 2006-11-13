@@ -39,6 +39,8 @@ class faiVariable extends plugin
   var $release          = "";
   var $copy_paste_mode  = false;
 
+  var $CopyPasteVars  = array("SubObjects","FAIstate");
+
   function faiVariable ($config, $dn= NULL)
   {
     /* Load Attributes */
@@ -292,7 +294,12 @@ class faiVariable extends plugin
     plugin::save();
  
     $ldap = $this->config->get_ldap_link();
-  
+ 
+    /* Copy & Paste : Ensure that FAIstate is copied too */
+    if($this->copy_paste_mode && preg_match("/freeze/",$this->FAIstate)){
+      $this->attrs['FAIstate'] = $this->FAIstate;
+    }
+ 
     $ldap->cat($this->dn,array("objectClass"));
     if($ldap->count()!=0){
       /* Write FAIscript to ldap*/
@@ -346,6 +353,10 @@ class faiVariable extends plugin
       $tmp['objectClass'] = $this->subClasses;
 
       $sub_dn = "cn=".$obj['cn'].",".$this->dn;
+
+      if($this->copy_paste_mode){
+        $obj['status'] = "new";
+      }
 
       if($obj['status']=="new"){
         $ldap->cat($sub_dn,array("objectClass"));

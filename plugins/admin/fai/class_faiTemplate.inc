@@ -41,6 +41,8 @@ class faiTemplate extends plugin
   var $release          = "";
   var $copy_paste_mode  = false;
 
+  var $CopyPasteVars  = array("SubObjects","FAIstate");
+
   function faiTemplate ($config, $dn= NULL)
   {
     /* Load Attributes */
@@ -365,6 +367,11 @@ class faiTemplate extends plugin
 
     $ldap = $this->config->get_ldap_link();
 
+    /* Copy & Paste : Ensure that FAIstate is copied too */
+    if($this->copy_paste_mode && preg_match("/freeze/",$this->FAIstate)){
+      $this->attrs['FAIstate'] = $this->FAIstate;
+    }
+
     $ldap->cat($this->dn,array("objectClass"));
     if($ldap->count()!=0){
       /* Write FAIscript to ldap*/
@@ -396,6 +403,7 @@ class faiTemplate extends plugin
       if($obj['status'] == "FreshLoaded"){
         if($this->copy_paste_mode){
           $this->SubObjects[$name] = $this->get_object_attributes($obj,$this->sub_Load_Later);
+          $this->SubObjects[$name]['status'] = "new";
         }else{
           unset($this->SubObjects[$name]);
         }

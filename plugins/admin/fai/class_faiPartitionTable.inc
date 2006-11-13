@@ -24,6 +24,8 @@ class faiPartitionTable extends plugin
   var $release          = "";
   var $copy_paste_mode  = false;
 
+  var $CopyPasteVars  = array("disks","FAIstate");
+
   function faiPartitionTable ($config, $dn= NULL)
   {
     /* Load Attributes */
@@ -347,6 +349,11 @@ class faiPartitionTable extends plugin
      * 3 : Save partitions for each disk
      */  
 
+    /* Copy & Paste : Ensure that FAIstate is copied too */
+    if($this->copy_paste_mode && preg_match("/freeze/",$this->FAIstate)){
+      $this->attrs['FAIstate'] = $this->FAIstate;
+    }
+
     $ldap = $this->config->get_ldap_link();
 
     if($this->new){
@@ -386,6 +393,11 @@ class faiPartitionTable extends plugin
       $disk_attrs['description']  =  $disk['description']; 
       $disk_attrs['objectClass']  =  array("top","FAIclass","FAIpartitionDisk");
 
+      /* We currently use the copy & paste method */
+      if($this->copy_paste_mode){
+        $disk['status'] = "new";
+      }
+
       if($disk['status']=="new"){
         $ldap->cat($disk_dn,array("objectClass"));
         if($ldap->count()){
@@ -399,7 +411,7 @@ class faiPartitionTable extends plugin
       if(isset($attrs['objectClass']) && in_array_ics("gosaAdministrativeUnitTag",$attrs['objectClass'])){
         $disk_attrs['objectClass'][] = "gosaAdministrativeUnitTag";
       }
- 
+
       if($disk['status'] == "delete"){
         $ldap->cd($disk_dn);
         $ldap->rmdir_recursive($disk_dn);
@@ -455,6 +467,11 @@ class faiPartitionTable extends plugin
           /* Unset status attributes */
           unset($partition_attrs['status']);
           unset($partition_attrs['old_cn']);
+
+          /* We currently use the copy & paste method */
+          if($this->copy_paste_mode){
+            $partition['status']="new";
+          }
 
           /* Check if this partition is realy new .. */
           if($partition['status']=="new"){

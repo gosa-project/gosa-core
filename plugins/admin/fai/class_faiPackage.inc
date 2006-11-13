@@ -64,7 +64,7 @@ class faiPackage extends plugin
   var $base             = "";
   var $release          = "";
   var $copy_paste_mode  = false;
-  var $CopyPasteVars  = array("FAIdebianRelease","FAIdebianSection","FAIinstallMethod","mirror","servers","releases","sections","list","mirrors","usedPackages");
+  var $CopyPasteVars  = array("FAIstate","ConfiguredPackages","FAIdebianRelease","FAIdebianSection","FAIinstallMethod","mirror","servers","releases","sections","list","mirrors","usedPackages");
 
 
   function faiPackage ($config, $dn= NULL)
@@ -478,6 +478,11 @@ class faiPackage extends plugin
     plugin::save();
 
     $ldap = $this->config->get_ldap_link();
+
+    /* Copy & Paste : Ensure that FAIstate is copied too */
+    if($this->copy_paste_mode && preg_match("/freeze/",$this->FAIstate)){
+      $this->attrs['FAIstate'] = $this->FAIstate;
+    }
 
     $this->attrs['FAIpackage'] = array();
     foreach($this->usedPackages as $pkg => $obj){
