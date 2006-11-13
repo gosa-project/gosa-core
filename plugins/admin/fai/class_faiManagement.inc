@@ -79,6 +79,9 @@ class faiManagement extends plugin
 	{
     /* Call parent execute */
     plugin::execute();
+  
+    /* Get new list of available branches */
+    $this->DivListFai->AvailableBranches = $this->getBranches();
 
     /* Initialise vars and smarty */
 		$smarty 	= get_smarty();
