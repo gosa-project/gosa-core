@@ -349,18 +349,25 @@ function getDNSHostEntries($config,$name,$silent = false)
    */
   $foundIn = array();
   $zones = getAvailableZones($config);
-  foreach($zones as $zone){
-    $zoneDn = getDNSZoneDN($config,$zone);
-    $ldap->ls("(&(objectClass=dNSZone)(zoneName=*)(relativeDomainName=".$name.")(!(relativeDomainName=@)))", $zoneDn,$attrs = array("*"));
-    while($attrs = $ldap->fetch()){
-      $foundIn [] = $attrs['dn'];
-    }
+  
+  $zonesArr = array();
+  foreach($zones as $zoneMix){
+  	$zoneIndex = split("/",$zoneMix);
+  	if(!array_key_exists($zoneIndex[0],$zonesArr)) $zonesArr[$zoneIndex[0]] = array();
+		array_push($zonesArr[$zoneIndex[0]],$zoneIndex[1]);
   }
-
-  /* Alert if there is more than one zone with an entry named like $name
-   */ 
-  if((count($foundIn) > 1) && (!$silent)) {
-    print_red(sprintf(_("Found more than one dns zone which contains an entry named '%s'. Aborting getting dns informations for this device."),$name));
+  
+  foreach($zonesArr as $nameServer => $nameServerArr){
+  	$foundInTmp = array();
+  	foreach($nameServerArr as $zoneArr => $zone){
+  		$zoneMix = $nameServer."/".$zone;
+    	$zoneDn = getDNSZoneDN($config,$zoneMix);
+    	$ldap->ls("(&(objectClass=dNSZone)(zoneName=*)(relativeDomainName=".$name.")(!(relativeDomainName=@)))", $zoneDn,$attrs = array("*"));
+    	while($attrs = $ldap->fetch()){
+    	  $foundInTmp [] = $attrs['dn'];
+    	  $foundIn [] = $attrs['dn'];
+    	}
+  	}
   }
 
   /* No zone found which contains an entry for us
@@ -426,16 +433,17 @@ function getDNSHostEntriesDiff($config,$oldName,$newEntry,$newName)
   $zones              = getAvailableZones($config);
   $specialAttributes  = array("cNAMERecord","pTRRecord");
   $newRecords         = array();  // Used to remember which records are removed 
-  $zoneName           = $newEntry['zoneName'];
-  $zoneDn             = getDNSZoneDN($config,$zoneName);
+  $zoneNameMix           = $newEntry['zoneName'];
+  $zoneDn             = getDNSZoneDN($config,$zoneNameMix);
   $tmp                = array_flip($zones);
+  $zoneName 					= getNameFromMix($zoneNameMix);
  
   /* If reverseZone can't be resolved ... this 
    *  can't be a valid entry, so remove this account
    */ 
-  if(isset($tmp[$zoneName])){
-    $reverseName  = $tmp[$zoneName];
-    $reverseDn    = getDNSZoneDN($config,$reverseName);
+  if(isset($tmp[$zoneNameMix])){
+    $reverseNameMix  = $tmp[$zoneNameMix];
+    $reverseDn    = getDNSZoneDN($config,$reverseNameMix);
     if(empty($reverseDn)){
       $newEntry['exists'] = false;
     }
@@ -467,7 +475,7 @@ function getDNSHostEntriesDiff($config,$oldName,$newEntry,$newName)
     /* Check if zoneName has changed 
      */   
     if(count($newEntry['RECORDS'])){
-      if($oldEntry['zoneName'] != $newEntry['zoneName']){
+      if($oldEntry['zoneName'] != $zoneName){
         $oldzoneDn = getDNSZoneDN($config,$oldEntry['zoneName']);
         $dn = "relativeDomainName=".$oldName.",".$oldzoneDn;
         $dn2= "relativeDomainName=".$oldName.",".$zoneDn;
@@ -553,17 +561,18 @@ function getDNSHostEntriesDiff($config,$oldName,$newEntry,$newName)
     if($rec['type']  == "pTRRecord"){
       $PTRdn= "relativeDomainName=".$rec['value'].",".$baseDn;
       $ptrObj = $baseObj;
+      $reverseName = getNameFromMix($reverseNameMix);
       $ptrObj['zoneName']           = $reverseName;
-      $ptrObj['pTRRecord']          = $newName.".".$zoneName;
+      $ptrObj['pTRRecord']          = $newName.".".$zoneName.".";
       $ptrObj['relativeDomainName'] = $rec['value'];
-      
+    
       $add[$PTRdn] = $ptrObj;
     }else  
     if($rec['type']  == "cNAMERecord"){
       $PTRdn= "relativeDomainName=".$rec['value'].",".$baseDn;
       $ptrObj = $baseObj;
-      $ptrObj['zoneName']           = $reverseName;
-      $ptrObj['cNAMERecord']        = $newName.".".$zoneName;
+      $ptrObj['zoneName']           = $zoneName;
+      $ptrObj['cNAMERecord']        = $newName;
       $ptrObj['relativeDomainName'] = $rec['value'];
       
       $add[$PTRdn] = $ptrObj;
@@ -578,18 +587,37 @@ function getDNSHostEntriesDiff($config,$oldName,$newEntry,$newName)
   return($ret);
 } 
 
+function getNameFromMix($zoneMix){
+	$ret = "";
+  if(!strstr($zoneMix, '/')) return($ret);	
+  $zoneIndex 	  	= split("/",$zoneMix);
+  return($zoneIndex[1]);
+}
 
 /* returns the dn for a specified zone
  */
-function getDNSZoneDN($config,$zoneName){
+function getDNSZoneDN($config,$zoneNameMix){
   $ret = "";
+  if(!strstr($zoneNameMix, '/')) return($ret);
+  $zoneNameIndex 	  	= split("/",$zoneNameMix); 
+  $zoneName           = $zoneNameIndex[1];
+  $nameServer		  		= strtolower($zoneNameIndex[0]);
   $ldap = $config->get_ldap_link();
+
+  /* search for the nameserver */
   $ldap-> cd($config->current['BASE']);
+  $ldap->search("(&(objectClass=goServer)(cn=".$nameServer."))",array("cn"));
+  if($ldap->count()){
+    $attr = $ldap->fetch();
+  } else  return($ret);
+  
+  $ldap-> cd($attr['dn']);
   $ldap->search("(&(objectClass=dNSZone)(sOARecord=*)(zoneName=".$zoneName."))",array("zoneName"));
   if($ldap->count()){
     $attr = $ldap->fetch();
     return($attr['dn']);
   }
+  
   return($ret);
 }
 
@@ -625,9 +653,10 @@ function getAvailableZones($config)
      */  
     foreach($ReverseZones as $Rdn => $Robj ){
       if(preg_match("/".$dn."/",$Rdn)){
-        $zones[$Robj['zoneName'][0]] =  $obj['zoneName'][0];
+        $zones[strtoupper($ldap->getCn($dn))."/".$Robj['zoneName'][0]] =  
+        		strtoupper($ldap->getCn($dn))."/".$obj['zoneName'][0];
       }
-    }
+    }   
   }
   return($zones);
 }
