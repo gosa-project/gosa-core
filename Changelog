@@ -2,6 +2,7 @@ GOsa2 changelog
 ===============
 
 * gosa 2.5.6
+  - Copy & paste implemented into FAI
   - Added setup fix to support GraphicsMagick
   - Added several fixes for all user plugins to support Copy & Paste.
   - Fixed malformed usage of $this>var in samba class. 
