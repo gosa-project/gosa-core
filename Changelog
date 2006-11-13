@@ -2,6 +2,11 @@ GOsa2 changelog
 ===============
 
 * gosa 2.5.6
+  - Added setup fix to support GraphicsMagick
+  - Added several fixes for all user plugins to support Copy & Paste.
+  - Fixed malformed usage of $this>var in samba class. 
+  - Fixed checkbox selection in samba class.
+  - Connectivity netatalk: Moved plugin intialization from execute() to contructor().
   - Fixes various issues with setup.php
   - Avoid tab lables to have line feeds
   - Activated missing checks for IP and MAC
