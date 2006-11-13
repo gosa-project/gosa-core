@@ -810,6 +810,12 @@ class appgroup extends plugin
         $ret[$attrs['dn']] = $name;
       }
     }
+
+    /* Set releases to / id nor presenet */
+    if (!count($ret)){
+      $ret['/']= '/';
+    }
+
     return($ret);
   }
 

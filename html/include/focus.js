@@ -1,4 +1,5 @@
 var browserType;
+var timeout;
 
 if (document.layers) {browserType = "nn4"}
 if (document.all) {browserType = "ie"}
@@ -14,6 +15,11 @@ for (iln = 0; iln < len; iln++){
 }
 netscape= (ver.charAt(iln+1).toUpperCase() != "C");
 
+
+function scrollDown() {
+	document.body.scrollTop = document.body.scrollHeight - document.body.clientHeight;
+	timeout= setTimeout("scrollDown()", 500);
+}
 
 function keyPress(DnEvents) {
   // determines whether Netscape or Internet Explorer
