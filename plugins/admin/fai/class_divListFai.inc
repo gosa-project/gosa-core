@@ -57,7 +57,7 @@ class divListFai extends MultiSelectWindow
     $this->AddHeader(array("string" => "&nbsp;",                "attach" => "style='text-align:center;width:20px;'"));
     $this->AddHeader(array("string" => _("Name of FAI class"),  "attach" => "style=''"));
     $this->AddHeader(array("string" => _("Class type"),         "attach" => "style='width:200px;'"));
-    $this->AddHeader(array("string" => _("Actions"),            "attach" => "style='width:60px;border-right:0px;text-align:right;'"));
+    $this->AddHeader(array("string" => _("Actions"),            "attach" => "style='width:80px;border-right:0px;text-align:right;'"));
 
     $this->AddCheckBox("ShowProfiles"   , _("Display FAI profile objects")    ,_("Show profiles")     ,true);
     $this->AddCheckBox("ShowTemplates"  , _("Display FAI template objects")   ,_("Show templates")    ,true);
@@ -101,7 +101,17 @@ class divListFai extends MultiSelectWindow
       }
     }
 
-        /* Create listhead, it will be shown on top of the divlist.
+
+
+
+    /* Get copy & paste icon */
+    if($this->parent->CopyPasteHandler){
+      $Copy_Paste = $this->parent->CopyPasteHandler->generatePasteIcon();
+    }else{
+      $Copy_Paste ="";
+    }
+
+    /* Create listhead, it will be shown on top of the divlist.
      * It provides general navigation and object creation
      */
     $listhead =
@@ -143,6 +153,8 @@ _("Submit")."'>&nbsp;".
 
       " <input class='center' type='image' src='images/fai_new_packages.png' align='middle'
       title='"._("New package list")."' name='Create_package' alt='"._("PK")."'>&nbsp;".
+
+      $Copy_Paste.
 
       " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
 
@@ -204,13 +216,22 @@ _("Submit")."'>&nbsp;".
          $desc= "";
        }
 
+       /* Create action icons */
+       $action ="";
+       if($this->parent->CopyPasteHandler){
+         $action .= "<input class='center' type='image'
+           src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+         $action.= "<input class='center' type='image'
+           src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
+       }
+
        if($value['FAIstate'] == "freeze"){
-         $action  = "<input class='center' type='image' src='images/edit.png'  alt='"._("edit")."'
+         $action .= "<input class='center' type='image' src='images/edit.png'  alt='"._("edit")."'
            name='entry_edit_%KEY%' title='"._("Edit class")."'>";
          $edi = $editlink;
          $acti = $action;
        }else{
-         $action  = "<input class='center' type='image' src='images/edit.png'  alt='"._("edit")."'
+         $action .= "<input class='center' type='image' src='images/edit.png'  alt='"._("edit")."'
            name='entry_edit_%KEY%' title='"._("Edit class")."'>";
          $action .= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'
            name='entry_delete_%KEY%' title='"._("Delete class")."'>";
@@ -218,10 +239,12 @@ _("Submit")."'>&nbsp;".
          $edi = $editlink;
        }
 
+
+
        $field1 = array("string" => $img , "attach" => "style='text-align:center;width:20px;'");
        $field2 = array("string" => preg_replace(array("/%KEY%/","/%NAME%/","/%TITLE%/"),array($key,$value['cn'].$desc,preg_replace('/ /', '&nbsp;', @LDAP::fix($value['dn']))),$edi) , "attach" => "style=''");
        $field3 = array("string" => $info, "attach" => "style='width:200px;'");
-       $field4 = array("string" => preg_replace("/%KEY%/",$key,$acti) , "attach" => "style='width:60px;border-right:0px;text-align:right;'");
+       $field4 = array("string" => preg_replace("/%KEY%/",$key,$acti) , "attach" => "style='width:80px;border-right:0px;text-align:right;'");
        $this->AddElement(array($field1,$field2,$field3,$field4));
     }
   }

@@ -61,6 +61,9 @@ class faiPackage extends plugin
       "hold", "clean", "aptitude", "aptitude-r",
       "pending", "dpkgc" );
 
+  var $base             = "";
+  var $release          = "";
+  var $copy_paste_mode  = false;
 
   function faiPackage ($config, $dn= NULL)
   {
@@ -378,8 +381,22 @@ class faiPackage extends plugin
       $message[]=_("Please choose a valid combination for your repository setup.");
     }
 
+    /* If this is a new script, check if a script with this name already exists */
+    if(!empty($this->release) && $this->copy_paste_mode){
+
+      /* Check if current name is already used for fai scripts in selected release */
+      $dn = 'cn='.$this->cn.",ou=packages,".$this->release;
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cat($dn);
+      if($ldap->count()){
+
+        $r =convert_department_dn($this->release);;
+        $message[] = sprintf(_("Can't insert a fai package list named '%s' in '%s' there is already a package list with the given name."),$this->cn,$r);
+      }
+    }
     return ($message);
   }
+
 
   function printUsedPackages(){
     $a_ret=array(); 

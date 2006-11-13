@@ -53,8 +53,8 @@ class faiManagement extends plugin
 
   var $dispNewBranch= false;
   var $dispNewFreeze= false;
-
   var $DivListFai;
+  var $CopyPasteHandler     = NULL;
 
 	/* construction/reconstruction 
 	 */
@@ -68,6 +68,11 @@ class faiManagement extends plugin
     /* Creat dialog object */
     $this->DivListFai = new divListFai($this->config,$this);
     $this->DivListFai->AvailableBranches = $this->getBranches();
+
+    /* Copy & Paste handler */
+    if ($this->config->boolValueIsTrue("main", "enableCopyPaste")){
+      $this->CopyPasteHandler= new CopyPasteHandler($this->config);
+    }
 	}
 
 	function execute()
@@ -116,6 +121,18 @@ class faiManagement extends plugin
 				$s_entry = preg_replace("/_.*$/","",$s_entry);
         $s_action = "delete";
       }
+
+      /* Check for Copy & Paste actions */
+      foreach(array(  "editPaste" => "editPaste",   
+            "copy"      => "copy",
+            "cut"       => "cut") as $act => $action){
+        if (preg_match("/".$act.".*/", $name)){
+          $s_action= $action;
+          $s_entry= preg_replace("/".$act."_/i", "", $name);
+				  $s_entry = preg_replace("/_.*$/","",$s_entry);
+          break;
+        }
+      }
     }
 
 		if(isset($_GET['edit_entry'])){
@@ -128,6 +145,11 @@ class faiManagement extends plugin
       $this->dispNewFreeze = false;
     }
 
+    /* Display the copy & paste dialog, if it is currently open */
+    $ret = $this->copyPasteHandling($s_action,$s_entry);
+    if($ret){
+      return($ret);
+    }
 
     /****************
       Delete confirme dialog 
@@ -587,7 +609,102 @@ class faiManagement extends plugin
     return ($ret);
   }
 
+ 
+   /* Perform copy & paste requests
+      If copy&paste is in progress this returns a dialog to fix required attributes
+   */
+  function copyPasteHandling($s_action,$s_entry)
+  {
   
+    /* Only perform copy/paste if it is enabled */
+    if($this->CopyPasteHandler){
+
+      /* Prepare current object to be pasted */
+      if( $s_action == "editPaste" || $this->CopyPasteHandler->stillOpen()){
+
+        $this->CopyPasteHandler->save_object();
+        $this->CopyPasteHandler->SetVar("base",             $this->DivListFai->selectedBase);
+        $this->CopyPasteHandler->SetVar("copy_paste_mode",  TRUE);
+    
+        $release = $_SESSION['CurrentMainBase'];
+        if($_SESSION['faifilter']['branch']!="main"){
+                $release = $_SESSION['faifilter']['branch'];
+        }
+        $this->CopyPasteHandler->SetVar("release",  $release);
+
+        /* Execute copy & paste dialog and display returned data, normaly a dialog which allows
+           us to solve all attribute mismatches for this object.
+            If nothing is returned, copy & paste was succesfully or aborted */
+        if(($ret= $this->CopyPasteHandler->execute())){
+          return ($ret);
+        }
+
+        /* Use the last dn to search for it's ID in the newly generated list. */
+        $dn= $this->CopyPasteHandler->lastdn;
+
+        /* Get new list */
+        $this->reload();
+        foreach($this->objects as $id => $entry){
+          if($entry['dn'] == $dn){
+            $s_entry= $id;
+            break;
+          }
+        }
+      }
+
+      /* Copy selected object
+          Create a new empty object and the current selected object.
+          Send both to copy&paste class*/
+      if($s_action == "copy"){
+        $this->CopyPasteHandler->Clear();
+
+			  $dn= $this->objects[$s_entry]['dn'];
+        $acl= get_permissions ($dn, $this->ui->subtreeACL);
+
+        $ldap       = $this->config->get_ldap_link();
+        $ldap->cat($dn);
+        $attr       = $ldap->fetch();
+        $tmp        = $this->get_type($attr);
+
+        if(!count($tmp) == 3 ) return;
+
+        $tabs  = $tmp[0];
+        $class = $tmp[1];
+        $data  = $tmp[2];
+
+        $obj    = new $tabs($this->config, $this->config->data['TABS'][$data], $dn);
+        $objNew = new $tabs($this->config, $this->config->data['TABS'][$data], "new");
+        $obj->    set_acl($acl);
+        $objNew-> set_acl($acl);
+        $this->CopyPasteHandler->Copy($obj,$objNew);
+      }
+
+      /* Cut selected object.
+          Open user object and send it to the copy & paste handler */
+      if($s_action == "cut"){
+        $this->CopyPasteHandler->Clear();
+			  $dn= $this->objects[$s_entry]['dn'];
+        $acl= get_permissions ($dn, $this->ui->subtreeACL);
+
+        $ldap       = $this->config->get_ldap_link();
+        $ldap->cat($dn);
+        $attr       = $ldap->fetch();
+        $tmp        = $this->get_type($attr);
+
+        if(!count($tmp) == 3 ) return;
+
+        $tabs  = $tmp[0];
+        $class = $tmp[1];
+        $data  = $tmp[2];
+        $obj= new $tabs($this->config, $this->config->data['TABS'][$data], $dn);
+        $obj->set_acl($acl);
+        $this->CopyPasteHandler->Cut($obj);
+      }
+    }
+  }
+
+    
+ 
   /* reload list of objects */
 	function reload()
 	{

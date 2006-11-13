@@ -30,7 +30,12 @@ class faiProfile extends plugin
   var $FAIclasses       = array();  // Contains classname seperated in an array
   var $FAIAllclasses    = array();  // Contains all possible Classnames
 
-  var $FAIstate      = "";
+  var $FAIstate       = "";
+  var $base           = "";
+  var $release        = "";
+  var $copy_paste_mode= false;
+
+  var $CopyPasteVars  = array("FAIclass","FAIclasses","FAIAllclasses","FAIstate");
 
   function faiProfile($config, $dn= NULL)
   {
@@ -87,7 +92,7 @@ class faiProfile extends plugin
     /* Get ldap connection */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($base);
-
+    $sort = array();
     /* Capture objects from given base */
     $result = array();
     foreach($ObjectTypes as $oc => $data){
@@ -389,17 +394,20 @@ class faiProfile extends plugin
     }
 
     $ldap = $this->config->get_ldap_link();
-    $ldap->cd($_SESSION['CurrentMainBase']);
+    $release = "ou=profiles,ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
+    if($_SESSION['faifilter']['branch']!="main"){
+      $release = "ou=profiles,".$_SESSION['faifilter']['branch'];
+    }
+    $ldap->cd($release);
     if ($this->old_cn == ""){
       $ldap->search("(&(objectClass=FAIprofile)(cn=".$this->cn."))",array("*"));
     } else {
       $ldap->search("(&(objectClass=FAIprofile)(cn=".$this->cn.")(!cn=".$this->old_cn."))",array("*"));
     }
-
     if($ldap->count()){
       $message[]=_("There is already a profile with this class name defined.");
     }
-
+    
     return ($message);
   }
 

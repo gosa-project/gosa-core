@@ -37,6 +37,9 @@ class faiTemplate extends plugin
   var $SubObjects       = array();  // All leafobjects of this object
 
   var $FAIstate         = "";
+  var $base             = "";
+  var $release          = "";
+  var $copy_paste_mode  = false;
 
   function faiTemplate ($config, $dn= NULL)
   {
@@ -338,6 +341,19 @@ class faiTemplate extends plugin
     /* Call common method to give check the hook */
     $message= plugin::check();
 
+    /* If this is a new script, check if a script with this name already exists */
+    if(!empty($this->release) && $this->copy_paste_mode){
+
+      /* Check if current name is already used for fai scripts in selected release */
+      $dn = 'cn='.$this->cn.",ou=templates,".$this->release;
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cat($dn);
+      if($ldap->count()){
+
+        $r =convert_department_dn($this->release);;
+        $message[] = sprintf(_("Can't insert a fai template named '%s' in '%s' there is already a template with the given name."),$this->cn,$r);
+      }
+    }
     return ($message);
   }
 
