@@ -338,6 +338,7 @@ function get_link($function_name) {
   $result= "<a href='http://de.php.net/manual/en/function.";
 
   /* Replace all underscores with hyphens (phpdoc convention) */
+  /* hjb: added alternative check for GraphicsMagick >= 1.1.2 */
   $function_name= str_replace("_", "-", $function_name);
 
   /* Append to base URL */
@@ -387,11 +388,18 @@ function perform_additional_checks(&$faults)
   $output= shell_exec ($query);
   if ($output != ""){
     $lines= split ("\n", $output);
-    $version= preg_replace ("/^Version:.+Magick ([^\s]+).*/", "\\1", $lines[0]);
-    list($major, $minor)= split("\.", $version);
-    $msg.= check (	$faults, _("Checking for ImageMagick (>=5.4.0)"),
-        _("ImageMagick is used to convert user supplied images to fit the suggested size and the unified JPEG format."),
-        ($major > 5 || ($major == 5 && $minor >= 4)));
+    $version= preg_replace ("/^Version: (.+Magick) ([^\s]+).*/", "\\1 \\2", $lines[0]);
+    list($prog, $version) = split(" ", $version);
+    list($major, $minor,$minor2)= split("\.", $version);
+    if (preg_match('/GraphicsMagick/', $prog)) {
+      $msg.= check (	$faults, _("Checking for GraphicsMagick (>=1.1.2)"),
+          _("GraphicsMagick is used to convert user supplied images to fit the suggested size and the unified JPEG format."),
+          ($major > 1 || ($major == 1 && $minor >= 1) || ($major == 1 && $minor == 1 && $minor2 >= 2) ) );
+    } else {
+      $msg.= check (	$faults, _("Checking for ImageMagick (>=5.4.0)"),
+          _("ImageMagick is used to convert user supplied images to fit the suggested size and the unified JPEG format."),
+          ($major > 5 || ($major == 5 && $minor >= 4)));
+        }
   } else {
     $msg.= check (	$faults, _("Checking imagick module for PHP"),
         _("Imagick is used to convert user supplied images to fit the suggested size and the unified JPEG format from PHP script."), function_exists('imagick_blob2image'), TRUE);
@@ -1198,5 +1206,4 @@ function get_available_mail_classes()
   return($methods);
 }
 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
-?>
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:ae>
