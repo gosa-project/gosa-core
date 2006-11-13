@@ -394,7 +394,11 @@ class faiTemplate extends plugin
     /* We do not need to save untouched objects */
     foreach($this->SubObjects as $name => $obj){
       if($obj['status'] == "FreshLoaded"){
-        unset($this->SubObjects[$name]);
+        if($this->copy_paste_mode){
+          $this->SubObjects[$name] = $this->get_object_attributes($obj,$this->sub_Load_Later);
+        }else{
+          unset($this->SubObjects[$name]);
+        }
       }
     }
 
@@ -420,8 +424,10 @@ class faiTemplate extends plugin
       foreach($attributes as $attrs){
         if(empty($obj[$attrs])){
           $obj[$attrs] = array();
+          $tmp[$attrs] = $obj[$attrs];
+        }else{
+          $tmp[$attrs] = stripslashes ($obj[$attrs]);
         }
-        $tmp[$attrs] = stripslashes ($obj[$attrs]);
       }    
         
       $tmp['objectClass'] = $this->subClasses;

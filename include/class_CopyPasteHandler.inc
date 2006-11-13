@@ -124,10 +124,18 @@ class CopyPasteHandler {
     /* Cut & paste
      */
     if($this->cutCurrent){
-      $this->current->save();
-      $this->dialogOpen =false;
-      $this->Clear();
 
+      $msgs = $this->check();	
+      if(count ($msgs) ){
+        foreach( $msgs as $msg){
+          print_red($msg);
+        }
+        $this->dialogOpen =false;
+      }else{
+        $this->current->save();
+        $this->dialogOpen =false;
+        $this->Clear();
+      }
       /* Copy & paste
        */
     }else{

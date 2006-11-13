@@ -41,6 +41,8 @@ class faiScript extends plugin
   var $base             ="";
   var $release          ="";
   var $copy_paste_mode  = false;
+  var $CopyPasteVars    = array("SubObjects","FAIstate");
+
 
   function faiScript ($config, $dn= NULL)
   {
@@ -397,7 +399,11 @@ class faiScript extends plugin
     /* We do not need to save untouched objects */
     foreach($this->SubObjects as $name => $obj){
       if($obj['status'] == "FreshLoaded"){
-        unset($this->SubObjects[$name]);
+        if($this->copy_paste_mode){
+          $this->SubObjects[$name] = $this->get_object_attributes($obj,$this->sub_Load_Later);
+        }else{
+          unset($this->SubObjects[$name]);
+        }
       }
     }
 

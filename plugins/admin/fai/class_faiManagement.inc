@@ -629,7 +629,7 @@ class faiManagement extends plugin
         $this->CopyPasteHandler->SetVar("base",             $this->DivListFai->selectedBase);
         $this->CopyPasteHandler->SetVar("copy_paste_mode",  TRUE);
     
-        $release = $_SESSION['CurrentMainBase'];
+        $release = "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
         if($_SESSION['faifilter']['branch']!="main"){
                 $release = $_SESSION['faifilter']['branch'];
         }

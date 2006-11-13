@@ -64,6 +64,8 @@ class faiPackage extends plugin
   var $base             = "";
   var $release          = "";
   var $copy_paste_mode  = false;
+  var $CopyPasteVars  = array("FAIdebianRelease","FAIdebianSection","FAIinstallMethod","mirror","servers","releases","sections","list","mirrors","usedPackages");
+
 
   function faiPackage ($config, $dn= NULL)
   {

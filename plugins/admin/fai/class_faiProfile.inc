@@ -385,29 +385,45 @@ class faiProfile extends plugin
     /* Call common method to give check the hook */
     $message= plugin::check();
 
-    if(count($this->FAIclasses) == 0){
-      $message[]=_("Please assign at least one class to this  profile.");
-    }
+    if($this->copy_paste_mode){
 
-    if(empty($this->cn)){
-      $message[]=_("Please enter a valid name.");
-    }
+      /* If this is a new script, check if a script with this name already exists */
+      if(!empty($this->release) && $this->copy_paste_mode){
 
-    $ldap = $this->config->get_ldap_link();
-    $release = "ou=profiles,ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
-    if($_SESSION['faifilter']['branch']!="main"){
-      $release = "ou=profiles,".$_SESSION['faifilter']['branch'];
+        /* Check if current name is already used for fai scripts in selected release */
+        $dn = 'cn='.$this->cn.",ou=profiles,".$this->release;
+        $ldap = $this->config->get_ldap_link();
+        $ldap->cat($dn);
+        if($ldap->count()){
+
+          $r =convert_department_dn($this->release);;
+          $message[] = sprintf(_("Can't insert a script named '%s' in '%s' there is already a script with the given name."),$this->cn,$r);
+        }
+      }
+    }else{
+      if(count($this->FAIclasses) == 0){
+        $message[]=_("Please assign at least one class to this  profile.");
+      }
+
+      if(empty($this->cn)){
+        $message[]=_("Please enter a valid name.");
+      }
+
+      $ldap = $this->config->get_ldap_link();
+      $release = "ou=profiles,ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
+      if($_SESSION['faifilter']['branch']!="main"){
+        $release = "ou=profiles,".$_SESSION['faifilter']['branch'];
+      }
+      $ldap->cd($release);
+      if ($this->old_cn == ""){
+        $ldap->search("(&(objectClass=FAIprofile)(cn=".$this->cn."))",array("*"));
+      } else {
+        $ldap->search("(&(objectClass=FAIprofile)(cn=".$this->cn.")(!cn=".$this->old_cn."))",array("*"));
+      }
+      if($ldap->count()){
+        $message[]=_("There is already a profile with this class name defined.");
+      }
     }
-    $ldap->cd($release);
-    if ($this->old_cn == ""){
-      $ldap->search("(&(objectClass=FAIprofile)(cn=".$this->cn."))",array("*"));
-    } else {
-      $ldap->search("(&(objectClass=FAIprofile)(cn=".$this->cn.")(!cn=".$this->old_cn."))",array("*"));
-    }
-    if($ldap->count()){
-      $message[]=_("There is already a profile with this class name defined.");
-    }
-    
     return ($message);
   }
 
