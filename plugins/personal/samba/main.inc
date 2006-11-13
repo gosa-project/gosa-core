@@ -76,6 +76,7 @@ if (!$remove_lock){
       $sambaAccount->save ();
       gosa_log ("User/samba object'".$ui->dn."' has been saved");
       $sambaAccount->acl= "#none#";
+      $editacl= get_module_permission($acl, "samba", $ui->dn);
       del_lock ($ui->dn);
       sess_del ('edit');
 

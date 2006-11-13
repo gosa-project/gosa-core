@@ -122,6 +122,7 @@ if (!$remove_lock){
       $user->save ();
       gosa_log ("User/generic object'".$ui->dn."' has been saved");
       $user->acl= "#none#";
+      $editacl= get_module_permission($acl, "user", $ui->dn);
       del_lock ($ui->dn);
       sess_del ('edit');
 
@@ -174,6 +175,7 @@ if (!$remove_lock){
         $info= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/openlock.png').
                "\"> ".$ui->dn."&nbsp;";
       }
+
       if ($fn == "edit" && isset($editacl) && $editacl != "#none#"){
         $info.= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/lamp.png')."\"> ".
                 _("Click the 'Edit' button below to change informations in this dialog");

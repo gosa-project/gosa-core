@@ -75,6 +75,7 @@ if (!$remove_lock){
       $nagiosAccount->save ();
       gosa_log ("User/nagios object'".$ui->dn."' has been saved");
       $nagiosAccount->acl= "#none#";
+      $editacl= get_module_permission($acl, "nagiosAccount", $ui->dn);
       del_lock ($ui->dn);
       sess_del ('edit');
 

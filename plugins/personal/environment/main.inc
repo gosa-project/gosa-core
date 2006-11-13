@@ -75,6 +75,7 @@ if (!$remove_lock){
       $environment->save ();
       gosa_log ("User/environment object'".$ui->dn."' has been saved");
       $environment->acl= "#none#";
+      $editacl= get_module_permission($acl, "gotoEnvironment",$ui->dn);
       del_lock ($ui->dn);
       sess_del ('edit');
 
