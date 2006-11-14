@@ -14,6 +14,7 @@ GOsa2 changelog
   - Fixed copy'n paste errors for netatalk
   - Various W3C fixes
   - Fixed "My Account" mode, where buttons disappear after saving
+  - Avoid removal of shares while they are used by users
 
 * gosa 2.5.5
   - Added remove method for shared folder in kolab mode
