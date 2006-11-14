@@ -1206,4 +1206,5 @@ function get_available_mail_classes()
   return($methods);
 }
 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:ae>
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+?>
