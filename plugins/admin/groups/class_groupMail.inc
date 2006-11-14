@@ -1001,8 +1001,13 @@ I: Only insider delivery */
     }
   }
 
+  function PrepareForCopyPaste($source)
+  {
+    plugin::PrepareForCopyPaste($source);
 
+    /* Reset alternate mail addresses */
+    $this->gosaMailAlternateAddress = array();
+  }
 }
-
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
