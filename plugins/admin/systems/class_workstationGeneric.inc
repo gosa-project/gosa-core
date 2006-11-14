@@ -142,7 +142,7 @@ class workgeneric extends plugin
         exec ($cmd." ".$this->netConfigDNS->macAddress." ".escapeshellarg($_POST['saction']), $dummy, $retval);
         if ($retval != 0){
           print_red(sprintf(_("Execution of '%s' failed!"), $cmd));
-        } else {
+        } elseif ($_POST['saction'] != "wake") {
 
           /* Set FAIstate */
           $ldap = $this->config->get_ldap_link();
