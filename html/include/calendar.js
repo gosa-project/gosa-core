@@ -4,15 +4,17 @@
 		
 			monthIx=objForm.month.selectedIndex;
 			nextMonthIx=0;
-			if(monthIx!=11)
+			if(monthIx!=11) {
 				nextMonthIx=monthIx+1;
+			}
 
 			nextMonthSel=objForm.month.options[nextMonthIx].value;
 			monthSel=objForm.month.options[monthIx].value;
 
 			daySel=1;
-			if(objForm.day.selectedIndex!=-1)
-				daySel=objForm.day.options[objForm.day.selectedIndex].value;
+			if(objForm.day.selectedIndex!=-1) {
+				daySel=objForm.day.options[objForm.day.selectedIndex].text;
+			}
 
 			timeOfDayOne = new Date(yearSel, nextMonthSel, 1);
 			timeDifference = timeOfDayOne - 86400000;
