@@ -647,9 +647,6 @@ class user extends plugin
     /* Only force save of changes .... 
        If this attributes aren't changed, avoid saving.
      */
-    if ($this->use_dob == "1"){
-      $this->dateOfBirth= date("Y-m-d", $this->dateOfBirth);
-    }
     if($this->gender=="0") $this->gender ="";
     if($this->preferredLanguage=="0") $this->preferredLanguage ="";
     
@@ -657,6 +654,9 @@ class user extends plugin
     /* First use parents methods to do some basic fillup in $this->attrs */
     plugin::save ();
 
+    if ($this->use_dob == "1"){
+      $this->attrs['dateOfBirth']= date("Y-m-d", $this->attrs['dateOfBirth']);
+    }
     /* Remove additional objectClasses */
     $tmp= array();
     foreach ($this->attrs['objectClass'] as $key => $set){
