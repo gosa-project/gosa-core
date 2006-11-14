@@ -180,7 +180,11 @@
 		<input type="submit" {$gotoPrinterACL} name="gotoPrinterAdd"     value="{t}Add{/t}">
 		<input type="submit" {$gotoPrinterACL} name="gotoPrinterDel"     value="{t}Delete{/t}">
 		<input type="submit" {$gotoPrinterACL} name="gotoPrinterEdit"    value="{t}Toggle admin{/t}">
+{if $is_group }
+		<input type="submit" {$gotoPrinterACL} name="gotoPrinterDefault"    value="{t}Toggle default{/t}" disabled>
+{else}
 		<input type="submit" {$gotoPrinterACL} name="gotoPrinterDefault"    value="{t}Toggle default{/t}">
+{/if}
 	    </td>
 	</tr>
     </table>
