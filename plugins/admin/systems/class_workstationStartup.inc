@@ -24,6 +24,9 @@ class workstartup extends plugin
   var $attributes     = array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters", "FAIclass", "FAIstatus", "gotoShare","FAIdebianMirror", "FAIrelease");
   var $objectclasses  = array("GOhard", "FAIobject");
 
+  /* These vars are required to copy object groups !. */
+  var $CopyPasteVars  = array("gotoModules","gotoShares","customParameters","FAIclass","FAIrelease","FAIdebianMirror"); 
+
   /* Share */
   var $gotoShares         = array();// Currently Share Option
   var $gotoShare          = "";     // currently selected Share Option

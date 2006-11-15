@@ -181,6 +181,7 @@ class ogrouptabs extends tabs
           break;
       }
     }
+    $this->reload($this->by_object['ogroup']->gosaGroupObjects);
   }
 
 
@@ -244,6 +245,16 @@ class ogrouptabs extends tabs
     /* Fix tagging if needed */
 		$baseobject->dn= $new_dn;
     $baseobject->handle_object_tagging();
+  }
+
+  function saveCopyDialog()
+  {
+    tabs::saveCopyDialog();
+    $baseobject= $this->by_object['ogroup'];
+    $cn = $baseobject->cn;
+    foreach($this->by_object as  $name => $obj){
+      $this->by_object[$name]->cn = $cn;
+    }
   }
 
 }
