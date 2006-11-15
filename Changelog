@@ -15,6 +15,7 @@ GOsa2 changelog
   - Various W3C fixes
   - Fixed "My Account" mode, where buttons disappear after saving
   - Avoid removal of shares while they are used by users
+  - Added finer grained ACL settings for mail accounts
 
 * gosa 2.5.5
   - Added remove method for shared folder in kolab mode
