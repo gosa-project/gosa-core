@@ -453,6 +453,11 @@ class ogroupManagement extends plugin
         $dn       =   $this->ogrouplist[$s_entry]['dn'];
         $obj      =   new ogrouptabs($this->config, $this->config->data['TABS']['OGROUPTABS'], $dn);
         $objNew   =   new ogrouptabs($this->config, $this->config->data['TABS']['OGROUPTABS'], "new");
+
+        $types_of_tabs = $obj->by_object['ogroup']->gosaGroupObjects;
+        $objNew->by_object['ogroup']->gosaGroupObjects = $types_of_tabs;    
+        $objNew->reload($types_of_tabs);
+
         $this->CopyPasteHandler->Copy($obj,$objNew);
       }
 
