@@ -16,6 +16,7 @@ GOsa2 changelog
   - Fixed "My Account" mode, where buttons disappear after saving
   - Avoid removal of shares while they are used by users
   - Added finer grained ACL settings for mail accounts
+  - Fixed day of birth problem in M$ IE
 
 * gosa 2.5.5
   - Added remove method for shared folder in kolab mode
