@@ -17,6 +17,7 @@ GOsa2 changelog
   - Avoid removal of shares while they are used by users
   - Added finer grained ACL settings for mail accounts
   - Fixed day of birth problem in M$ IE
+  - Fixed setting of Kerberos passwords
 
 * gosa 2.5.5
   - Added remove method for shared folder in kolab mode

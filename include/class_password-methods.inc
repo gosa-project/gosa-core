@@ -22,6 +22,7 @@
 class passwordMethod
 {
   var $config = false;
+  var $attrs= array();
 
   // Konstructor
   function passwordMethod($config)
@@ -102,7 +103,7 @@ function change_password ($dn, $password, $mode=0, $hash= "")
 
   // read current password entry for $dn, to detect the encryption Method
   $ldap       = $config->get_ldap_link();
-  $ldap->cat ($dn, array("shadowLastChange", "userPassword"));
+  $ldap->cat ($dn, array("shadowLastChange", "userPassword", "uid"));
   $attrs      = $ldap->fetch ();
 
   // Set encryption type to clear if required 
@@ -124,6 +125,7 @@ function change_password ($dn, $password, $mode=0, $hash= "")
 
     // Crypt with the detected Method
     $test = new  $available[$hash]($config);
+    $test->attrs= $attrs;
     $newpass =  $test->generate_hash($password);
 
   } else {

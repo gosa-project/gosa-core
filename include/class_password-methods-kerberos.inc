@@ -52,7 +52,7 @@ class passwordMethodkerberos extends passwordMethod
 				print_red (_("Kerberos database communication failed!"));
 			}
 
-			$ret= kadm5_chpass_principal($handle, $attrs['uid'][0]."@".$cfg['REALM'],$password);
+			$ret= kadm5_chpass_principal($handle, $this->attrs['uid'][0]."@".$cfg['REALM'],$password);
 
 			if ($ret === FALSE)
 			{
@@ -61,7 +61,7 @@ class passwordMethodkerberos extends passwordMethod
 
 			kadm5_destroy($handle);
 
-			$newpass= "{kerberos}".$attrs['uid'][0]."@".$cfg['REALM'];
+			$newpass= "{kerberos}".$this->attrs['uid'][0]."@".$cfg['REALM'];
 
 			return $newpass;       
 		}
