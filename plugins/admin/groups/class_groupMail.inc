@@ -49,7 +49,7 @@ class mailgroup extends plugin
   var $indexed_user= array();
 
   /* Copy & paste */
-  var $CopyPasteVars          = array("quotaUsage");
+  var $CopyPasteVars          = array("quotaUsage","imapacl");
 
   /* attribute list for save action */
   var $attributes= array( "mail",   "gosaMailServer", "gosaMailQuota", "gosaMailMaxSize",
