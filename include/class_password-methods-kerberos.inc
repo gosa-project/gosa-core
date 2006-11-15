@@ -23,6 +23,7 @@ class passwordMethodkerberos extends passwordMethod
 
 	function passwordMethodkerberos($config)  
 	{
+    $this->config=$config;
 	}
 
   function is_available()
