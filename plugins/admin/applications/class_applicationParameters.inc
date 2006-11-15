@@ -11,6 +11,8 @@ class applicationParameters extends plugin
   var $option_value= array();
 
   /* attribute list for save action */
+
+  var $CopyPasteVars = array("option_name","option_value");
   var $attributes= array("gosaApplicationParameter");
   var $objectclasses= array();
 
