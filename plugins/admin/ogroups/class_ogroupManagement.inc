@@ -113,36 +113,12 @@ class ogroupManagement extends plugin
 
     /* Only perform copy / paste if it is enabled
      */
-    if($this->CopyPasteHandler){
 
-      /* Paste copied/cutted object in here
-       */
-      if(($s_action == "editPaste") || ($this->CopyPasteHandler->stillOpen())){
-        $this->CopyPasteHandler->save_object();
-        $this->CopyPasteHandler->SetVar("base", $this->DivListOGroup->selectedBase);
-        return($this->CopyPasteHandler->execute());
-      }
-
-      /* Copy current object to CopyHandler
-       */
-      if($s_action == "copy"){
-        $this->CopyPasteHandler->Clear();
-        $dn       =   $this->ogrouplist[$s_entry]['dn'];
-        $obj      =   new ogrouptabs($this->config, $this->config->data['TABS']['OGROUPTABS'], $dn);
-        $objNew   =   new ogrouptabs($this->config, $this->config->data['TABS']['OGROUPTABS'], "new");
-        $this->CopyPasteHandler->Copy($obj,$objNew);
-      }
-
-      /* Copy current object to CopyHandler
-       */
-      if($s_action == "cut"){
-        $this->CopyPasteHandler->Clear();
-        $dn       =   $this->ogrouplist[$s_entry]['dn'];
-        $obj      =   new ogrouptabs($this->config, $this->config->data['TABS']['OGROUPTABS'], $dn);
-        $this->CopyPasteHandler->Cut($obj);
-      }
+    /* Display the copy & paste dialog, if it is currently open */
+    $ret = $this->copyPasteHandling($s_action,$s_entry);
+    if($ret){
+      return($ret);
     }
-
 
     /****************
       Create a new object group 
@@ -456,6 +432,40 @@ class ogroupManagement extends plugin
     $this->DivListOGroup->save_object();
   }
 
+  
+  function copyPasteHandling($s_action,$s_entry)
+  {
+
+    if($this->CopyPasteHandler){
+
+      /* Paste copied/cutted object in here
+       */
+      if(($s_action == "editPaste") || ($this->CopyPasteHandler->stillOpen())){
+        $this->CopyPasteHandler->save_object();
+        $this->CopyPasteHandler->SetVar("base", $this->DivListOGroup->selectedBase);
+        return($this->CopyPasteHandler->execute());
+      }
+
+      /* Copy current object to CopyHandler
+       */
+      if($s_action == "copy"){
+        $this->CopyPasteHandler->Clear();
+        $dn       =   $this->ogrouplist[$s_entry]['dn'];
+        $obj      =   new ogrouptabs($this->config, $this->config->data['TABS']['OGROUPTABS'], $dn);
+        $objNew   =   new ogrouptabs($this->config, $this->config->data['TABS']['OGROUPTABS'], "new");
+        $this->CopyPasteHandler->Copy($obj,$objNew);
+      }
+
+      /* Copy current object to CopyHandler
+       */
+      if($s_action == "cut"){
+        $this->CopyPasteHandler->Clear();
+        $dn       =   $this->ogrouplist[$s_entry]['dn'];
+        $obj      =   new ogrouptabs($this->config, $this->config->data['TABS']['OGROUPTABS'], $dn);
+        $this->CopyPasteHandler->Cut($obj);
+      }
+    }
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

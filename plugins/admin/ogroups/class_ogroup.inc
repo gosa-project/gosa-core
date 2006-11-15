@@ -690,10 +690,15 @@ class ogroup extends plugin
 
   function getCopyDialog()
   {
-    $str  = "";
-    $str .= _("Group name");
-    $str .= "&nbsp;<input type='text' name='cn' value='".$this->cn."'>";
-    return($str);
+    $str = "";
+
+    $smarty = get_smarty();
+    $smarty->assign("cn",     $this->cn);
+    $str = $smarty->fetch(get_template_path("paste_generic.tpl",TRUE,dirname(__FILE__)));
+    $ret = array();
+    $ret['string'] = $str;
+    $ret['status'] = "";
+    return($ret);
   }
 
   function saveCopyDialog()
