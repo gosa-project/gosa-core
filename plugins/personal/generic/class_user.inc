@@ -580,6 +580,41 @@ class user extends plugin
       $og->save ();
     }
 
+    /* Kerberos server defined? */
+    if (isset($this->config->data['SERVERS']['KERBEROS'])){
+      $cfg= $this->config->data['SERVERS']['KERBEROS'];
+    }
+    if (isset($cfg['SERVER']) && function_exists('kadm5_init_with_password')){
+
+      /* Connect to the admin interface */
+      $handle = kadm5_init_with_password($cfg['SERVER'], $cfg['REALM'],
+          $cfg['ADMIN'], $cfg['PASSWORD']);
+
+      /* Errors? */		
+      if ($handle === FALSE){
+        print_red (_("Kerberos database communication failed"));
+        return (2);
+      }
+
+      /* Build user principal, get list of existsing principals */
+      $principal= $this->uid."@".$cfg['REALM'];
+      $principals = kadm5_get_principals($handle);
+
+      /* User exists in database? */
+      if (in_array($principal, $principals)){
+
+        /* Ok. User exists. Remove him/her */
+          $ret= kadm5_delete_principal ( $handle, $principal);
+          if ($ret === FALSE){
+            print_red (_("Can't remove user from kerberos database."));
+          }
+      }
+
+      /* Free kerberos admin handle */
+      kadm5_destroy($handle);
+    }
+
+
     /* Optionally execute a command after we're done */
     $this->handle_post_events("remove",array("uid" => $this->uid));
   }
