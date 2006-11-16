@@ -1,3 +1,6 @@
+	<!-- Avoid posting the first action specified on this page when pressing 'enter' while editing an input field. 
+		Mostly "dep_root" was posted the base selector was resetted. -->
+	<input type='image' src='images/empty.png' name='no_action_posted' value='do_nothing' alt='' width='2' height='2'>
 	<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
 	<tr>
 	 		<td style="vertical-align:top; width:50%;">
