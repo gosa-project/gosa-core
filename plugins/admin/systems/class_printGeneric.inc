@@ -758,12 +758,25 @@ class printgeneric extends plugin
       }
     }
 
+    /* Ensure to create a new object */
+    if(preg_match("/ou=incoming,/",$this->orig_dn)){
+      $this->orig_dn = "new";
+    }
+
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();
     if ($this->orig_dn == 'new'){
       $ldap->cd($this->config->current['BASE']);
       $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
       $ldap->cd($this->dn);
+     
+      /* Remove empty values */ 
+      foreach($this->attrs as $name => $value){
+        if(empty($value)){
+          unset($this->attrs[$name]);
+        }
+      }
+      
       $ldap->add($this->attrs);
       $this->handle_post_events("add");
     } else {
