@@ -1273,6 +1273,7 @@ class posixAccount extends plugin
       $date= getdate();
       $val= floor($date[0] / (60*60*24)) * 60 * 60 * 24;
     }
+    return($val);
   }
 
 }
