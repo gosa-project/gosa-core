@@ -173,6 +173,14 @@ rm -rf %{buildroot}
 # Add shells file to /etc/gosa 
 /bin/cp /etc/shells /etc/gosa
 
+%pre
+# Cleanup compile dir on updates
+[ -d /var/spool/gosa ] && rm -rf /var/spool/gosa/*
+
+%postun
+# Remove temporary files, just to be sure
+rm -rf /var/spool/gosa/
+
 %files
 %defattr(-,%{apacheuser},%{apachegroup})
 %doc %attr(-,root,root) AUTHORS TODO README README.safemode Changelog COPYING INSTALL FAQ
@@ -212,7 +220,9 @@ rm -rf %{buildroot}
 
 %changelog
 * Fri Nov 17 2006 Lars Scheiter <lars.scheiter@GONICUS.de> 2.5.6
-- New Upstream
+- New upstream
+- Cleanup temporary dir after package removal
+- Cleanup temporary dir before update
 
 * Thu Sep 28 2006 Lars Scheiter <lars.scheiter@GONICUS.de> 2.5.4
 - New upstream version
