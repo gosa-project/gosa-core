@@ -690,7 +690,10 @@ class user extends plugin
     plugin::save ();
 
     if ($this->use_dob == "1"){
-      $this->attrs['dateOfBirth']= date("Y-m-d", $this->attrs['dateOfBirth']);
+      /* If it is an array, the generic page has never been loaded - so there's no difference. Using an array would cause an error btw. */
+      if(!is_array($this->attrs['dateOfBirth'])) {
+        $this->attrs['dateOfBirth']= date("Y-m-d", $this->attrs['dateOfBirth']);
+      }
     }
     /* Remove additional objectClasses */
     $tmp= array();
