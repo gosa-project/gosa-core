@@ -11,7 +11,7 @@
 #
 Summary: 		Web Based LDAP Administration Program 
 Name:			gosa
-Version: 		2.5
+Version: 		2.5.6
 Release:		1
 License: 		GPL
 Source: 		ftp://oss.GONICUS.de/pub/gosa/%{sourcename}.tar.bz2
@@ -21,7 +21,7 @@ Vendor:			GONICUS GmbH
 Packager:		Lars Scheiter <lars.scheiter@GONICUS.de>
 Buildarch: 		noarch
 %if %{suse}
-Requires:		apache2,apache2-mod_php5,php5,php5-gd,php5-ldap,php5-mcrypt,php5-mysql,php5-imap,php5-iconv,php5-mbstring,php5-gettext,php5-posix,ImageMagick,perl-Crypt-SmbHash
+Requires:		apache2,apache2-mod_php4,php4,php4-gd,php4-ldap,php4-mcrypt,php4-mysql,php4-imap,php4-iconv,php4-mbstring,php4-gettext,php4-session,ImageMagick,perl-Crypt-SmbHash
 %else
 Requires: 		httpd,php,php-ldap,php-imap,php-snmp,php-mysql,php-mbstring,perl-Crypt-SmbHash >= 0.02,ImageMagick
 %endif
@@ -64,6 +64,37 @@ Obsoletes:		gosa-ldap
 %description schema
 Contains the Schema definition files for the GOSA admin package.
 
+%package help-en
+Group: 			System/Administration
+Summary: 		English online manual for GOSA package
+Requires:		gosa >= %{version}
+
+%description help-en
+English online manual page for GOSA package
+
+%package help-de
+Group: 			System/Administration
+Summary: 		German localized online manual for GOSA package
+Requires:		gosa >= %{version}
+
+%description help-de
+German localized online manual page for GOSA package
+
+%package help-fr
+Group: 			System/Administration
+Summary: 		French localized online manual for GOSA package
+Requires:		gosa >= %{version}
+
+%description help-fr
+French localized online manual page for GOSA package
+
+%package help-nl
+Group: 			System/Administration
+Summary: 		Dutch localized online manual for GOSA package
+Requires:		gosa >= %{version}
+
+%description help-nl
+Dutch localized online manual page for GOSA package
 
 %prep
 %setup -q -n %{sourcename}
@@ -76,13 +107,35 @@ find . -depth -name CVS -type d | xargs rm -rf
 # Create buildroot
 mkdir -p %{buildroot}/usr/share/gosa
 
+# Copy
 DIRS="doc ihtml plugins html include locale"
-
 for i in $DIRS; do \
   cp -ua $i %{buildroot}/usr/share/gosa/$i ; \
 done
 
-mkdir -p %{buildroot}/var/spool/gosa
+# Create files for temporary stuff
+for i in compile config cache; do \
+  mkdir -p %{buildroot}/var/spool/gosa/$i ; \
+done
+
+# Cleanup manual dirs
+for i in admin devel; do \
+  rm -rf %{buildroot}/usr/share/gosa/doc/guide/$i ; \
+done
+
+# Remove (some) unneeded files
+for i in gen_locale.sh gen_online_help.sh gen_function_list.php update.sh; do \
+ rm -rf %{buildroot}/usr/share/gosa/$i ; \
+done
+
+# Cleanup lyx warnings
+find %{buildroot}/usr/share/gosa -name WARNINGS |xargs rm
+
+
+# Cleanup guide
+rm -rf %{buildroot}/usr/share/gosa/doc/guide/user/*/lyx-source
+
+
 # Copy default config
 mkdir -p %{buildroot}%{confdir}
 mkdir -p %{buildroot}%{webconf}
@@ -103,12 +156,13 @@ mkdir -p %{buildroot}/etc/openldap/schema/gosa
 mv contrib/openldap/*.schema %{buildroot}/etc/openldap/schema/gosa
 sed 's§"CONFIG_TEMPLATE_DIR", "../contrib/"§"CONFIG_TEMPLATE_DIR", "%{docdir}/"§g' %{buildroot}/usr/share/gosa/include/functions.inc > %{buildroot}/usr/share/gosa/include/functions.inc.new
 mv -f %{buildroot}/usr/share/gosa/include/functions.inc.new %{buildroot}/usr/share/gosa/include/functions.inc
+
 mv -f doc manual
 mkdir -p %{buildroot}/etc/gosa/vacation
-mv plugins/personal/mail/sieve-*.txt %{buildroot}/etc/gosa
+mv -f %{buildroot}/usr/share/gosa/plugins/personal/mail/sieve-*.txt %{buildroot}/etc/gosa
 mkdir -p %{buildroot}/usr/share/doc/gosa-%{version}
 rm -rf %{buildroot}/usr/share/gosa/contrib
-rm -rf %{buildroot}/usr/share/gosa/doc
+#rm -rf %{buildroot}/usr/share/gosa/doc
 #rmdir contrib/openldap
 bzip2 -9 contrib/opensides/goSamba.pl
 
@@ -121,26 +175,57 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,%{apacheuser},%{apachegroup})
-%doc %attr(-,root,root) AUTHORS TODO README manual/* README.safemode Changelog COPYING INSTALL FAQ
-%doc %attr(-,root,root) manual 
+%doc %attr(-,root,root) AUTHORS TODO README README.safemode Changelog COPYING INSTALL FAQ
 %doc %attr(-,root,root) contrib/altlinux contrib/fix_config.sh contrib/gosa.conf contrib/mysql contrib/opensides
-%doc %attr(-,root,root) contrib/patches contrib/scripts contrib/vacation_example.txt
+%doc %attr(-,root,root) contrib/patches contrib/scripts contrib/vacation_example.txt contrib/demo.ldif contrib/openldap
 
 %config(noreplace) %attr(0600,%{apacheuser},%{apachegroup}) %{webconf}/gosa_include.conf
 %config(noreplace) %attr(0700,%{apacheuser},%{apachegroup}) /etc/gosa
-%dir %attr(0700, %{apacheuser}, %{apachegroup}) /var/spool/gosa
-%attr(0744, %{apacheuser}, %{apachegroup}) /usr/share/gosa
+%attr(0700, %{apacheuser}, %{apachegroup}) /var/spool/gosa
+%attr(0744, %{apacheuser}, %{apachegroup}) /usr/share/gosa/html
+%attr(0744, %{apacheuser}, %{apachegroup}) /usr/share/gosa/ihtml
+%attr(0744, %{apacheuser}, %{apachegroup}) /usr/share/gosa/include
+%attr(0744, %{apacheuser}, %{apachegroup}) /usr/share/gosa/locale
+%attr(0744, %{apacheuser}, %{apachegroup}) /usr/share/gosa/plugins
+%attr(0744, %{apacheuser}, %{apachegroup}) /usr/share/gosa/doc/guide.xml
 
 %files schema
 %defattr(-,root,root)
 %doc COPYING AUTHORS README contrib/demo.ldif contrib/openldap
 /etc/openldap/schema/gosa
 
+%files help-en
+%defattr(-,root,root)
+/usr/share/gosa/doc/guide/user/en
+
+%files help-de
+%defattr(-,root,root)
+/usr/share/gosa/doc/guide/user/de
+
+%files help-fr
+%defattr(-,root,root)
+/usr/share/gosa/doc/guide/user/fr
+
+%files help-nl
+%defattr(-,root,root)
+/usr/share/gosa/doc/guide/user/nl
+
 %changelog
+* Fri Nov 17 2006 Lars Scheiter <lars.scheiter@GONICUS.de> 2.5.6
+- New Upstream
+
+* Thu Sep 28 2006 Lars Scheiter <lars.scheiter@GONICUS.de> 2.5.4
+- New upstream version
+- Downgraded SuSE dependencies to php4
+
+* Wed Jun 21 2006 Lars Scheiter <lars.scheiter@GONICUS.de> 2.5.1
+- New upstream version
+
 * Tue May 30 2006 Lars Scheiter <lars.scheiter@GONICUS.de> 2.5
 - Updated RedHat dependencies
 - New upstream version
 - Spelling errors fixed ;)
+- Seperation of online manual
 
 * Mon Dec 19 2005 Lars Scheiter <lars.scheiter@GONICUS.de> 2.4-2
 - Updated SuSE dependencies to php5
