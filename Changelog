@@ -1,6 +1,9 @@
 GOsa2 changelog
 ===============
 
+* gosa 2.5.7
+  -
+
 * gosa 2.5.6
   - Copy & paste implemented into FAI
   - Added setup fix to support GraphicsMagick
