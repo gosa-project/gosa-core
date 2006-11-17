@@ -62,7 +62,7 @@ class passwordMethodkerberos extends passwordMethod
 
 			kadm5_destroy($handle);
 
-			$newpass= "{kerberos}".$this->attrs['uid'][0]."@".$cfg['REALM'];
+			$newpass= "{".$this->config->current['KRBSASL']."}".$this->attrs['uid'][0]."@".$cfg['REALM'];
 
 			return $newpass;       
 		}

@@ -338,3 +338,10 @@ Q: Is there a way to let GOsa automatically fill missing fields in the network
 A: Sure. You can specify the "autoconf" option and provide the contributed
    script "net-resolver.sh" in your gosa.conf. If this is configured, you're
    getting an additional button in each network dialog.
+
+
+Q: New implementations of OpenLDAP seem to require {sasl} instead of {kerberos}
+   in password hashes. GOsa writes the wrong string. What can I do?
+
+A: You can set "krbsasl" to "true" in your gosa.conf's main section.
+
