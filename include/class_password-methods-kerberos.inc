@@ -53,7 +53,7 @@ class passwordMethodkerberos extends passwordMethod
 				print_red (_("Kerberos database communication failed!"));
 			}
 
-			$ret= kadm5_chpass_principal($handle, $this->attrs['uid'][0]."@".$cfg['REALM'],$password);
+			$ret= kadm5_chpass_principal($handle, $this->attrs['uid'][0]."@".$cfg['REALM'],$wd);
 
 			if ($ret === FALSE)
 			{
@@ -67,6 +67,11 @@ class passwordMethodkerberos extends passwordMethod
 			return $newpass;       
 		}
 	}
+}
+
+/* Dummy class for OpenLDAP Kerberos/SASL change  */
+class passwordMethodsasl extends passwordMethodkerberos
+{
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

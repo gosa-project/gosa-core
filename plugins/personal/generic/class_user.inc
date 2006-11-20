@@ -947,7 +947,7 @@ class user extends plugin
 
         /* Ok. User exists. Remove him/her when pw_storage has
            changed to be NOT kerberos. */
-        if ($this->pw_storage != "kerberos"){
+        if ($this->pw_storage != $this->config->current['KRBSASL']){
           $ret= kadm5_delete_principal ( $handle, $principal);
 
           if ($ret === FALSE){
