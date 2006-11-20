@@ -957,8 +957,8 @@ class user extends plugin
 
       } else {
 
-        /* User doesn't exists, create it when pw_storage is kerberos. */
-        if ($this->pw_storage == "kerberos"){
+        /* User doesn't exists, create it when pw_storage is kerberos or SASL. */
+        if ($this->pw_storage == "kerberos" || $this->pw_storage == "sasl" ){
           $ret= kadm5_create_principal ( $handle, $principal);
 
           if ($ret === FALSE){
