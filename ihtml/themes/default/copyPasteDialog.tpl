@@ -1,5 +1,5 @@
 <h2>{t}Copy &amp; paste wizard{/t}</h2>
-<b>{t}Copied object{/t} : {$objectDN}</b>
+<b>{t}Object to be pasted{/t}</b>: {$objectDN}
 <br>
 <br>
 {if $Complete == false}
