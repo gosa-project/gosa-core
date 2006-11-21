@@ -64,7 +64,7 @@ class printgeneric extends plugin
     }
 
     /* Update dn, to ensure storing as printer instead of WS / terminal */
-    if($this->BelongsTo == "Terminal"){
+    if($this->BelongsTo == "Terminal" || $this->BelongsTo == "TerminalTemplate"){
       $this->dn= preg_replace("/ou=terminals,/","ou=printers,",$this->dn);
     }
 
