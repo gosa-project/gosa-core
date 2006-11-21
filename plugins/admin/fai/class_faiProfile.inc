@@ -466,6 +466,29 @@ class faiProfile extends plugin
     $this->handle_object_tagging();
     show_ldap_error($ldap->get_error());
   }
+
+  
+  /* return copy & paste dialog
+   */
+  function getCopyDialog()
+  {
+    /* Ask for cn */
+    $smarty = get_smarty();
+    $smarty->assign("cn" ,$this->cn);
+    $str = $smarty->fetch(get_template_path("paste_fai_object.tpl",TRUE));
+    $ret = array();
+    $ret['string'] = $str;
+    $ret['status'] = "";
+    return($ret);
+  }
+
+  /* Get posted cn */
+  function saveCopyDialog()
+  {
+    if(isset($_POST['cn'])){
+      $this->cn = $_POST['cn'];
+    }
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
