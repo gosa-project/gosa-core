@@ -627,7 +627,10 @@ class faiManagement extends plugin
 
         $this->CopyPasteHandler->save_object();
         $this->CopyPasteHandler->SetVar("base",             $this->DivListFai->selectedBase);
-        $this->CopyPasteHandler->SetVar("copy_paste_mode",  TRUE);
+
+        if($this->CopyPasteHandler->copyCurrent){
+          $this->CopyPasteHandler->SetVar("copy_paste_mode",  TRUE);
+        }
     
         $release = "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
         if($_SESSION['faifilter']['branch']!="main"){
@@ -687,7 +690,6 @@ class faiManagement extends plugin
       if($s_action == "cut"){
         $this->CopyPasteHandler->Clear();
 			  $dn= $this->objects[$s_entry]['dn'];
-        $acl= get_permissions ($dn, $this->ui->subtreeACL);
 
         $ldap       = $this->config->get_ldap_link();
         $ldap->cat($dn);
@@ -700,7 +702,6 @@ class faiManagement extends plugin
         $class = $tmp[1];
         $data  = $tmp[2];
         $obj= new $tabs($this->config, $this->config->data['TABS'][$data], $dn);
-        $obj->set_acl($acl);
         $this->CopyPasteHandler->Cut($obj);
       }
     }
