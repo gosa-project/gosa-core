@@ -64,6 +64,8 @@ class faiPackage extends plugin
   var $base             = "";
   var $release          = "";
   var $copy_paste_mode  = false;
+  var $cut_paste_mode   = false;
+
   var $CopyPasteVars  = array("FAIstate","ConfiguredPackages","FAIdebianRelease","FAIdebianSection","FAIinstallMethod","mirror","servers","releases","sections","list","mirrors","usedPackages");
 
 
@@ -384,7 +386,7 @@ class faiPackage extends plugin
     }
 
     /* If this is a new script, check if a script with this name already exists */
-    if(!empty($this->release) && $this->copy_paste_mode){
+    if(!empty($this->release) && ($this->copy_paste_mode || $this->cut_paste_mode) ){
 
       /* Check if current name is already used for fai scripts in selected release */
       $dn = 'cn='.$this->cn.",ou=packages,".$this->release;

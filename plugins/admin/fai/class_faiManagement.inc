@@ -631,6 +631,9 @@ class faiManagement extends plugin
         if($this->CopyPasteHandler->copyCurrent){
           $this->CopyPasteHandler->SetVar("copy_paste_mode",  TRUE);
         }
+        if($this->CopyPasteHandler->cutCurrent){
+          $this->CopyPasteHandler->SetVar("cut_paste_mode",  TRUE);
+        }
     
         $release = "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
         if($_SESSION['faifilter']['branch']!="main"){
