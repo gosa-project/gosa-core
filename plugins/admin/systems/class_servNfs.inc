@@ -202,7 +202,7 @@ class servnfs extends plugin
       $message[]=_("Path contains invalid characters.");
     }
 
-    if(preg_match("/[^a-z0-9._+ \|-]/i",$this->option)){
+    if(preg_match("/[^a-z0-9._,=+ \|-]/i",$this->option)){
       $message[]=_("Option contains invalid characters.");
     }
 
