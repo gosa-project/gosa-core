@@ -36,7 +36,7 @@ class faiProfile extends plugin
   var $copy_paste_mode= false;
   var $cut_paste_mode = false;
 
-  var $CopyPasteVars  = array("FAIclass","FAIclasses","FAIAllclasses","FAIstate");
+  var $CopyPasteVars  = array("FAIclass","FAIclasses","FAIAllclasses");
 
   function faiProfile($config, $dn= NULL)
   {

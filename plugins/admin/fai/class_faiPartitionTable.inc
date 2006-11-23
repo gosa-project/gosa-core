@@ -25,7 +25,7 @@ class faiPartitionTable extends plugin
   var $copy_paste_mode  = false;
   var $cut_paste_mode  = false;
 
-  var $CopyPasteVars  = array("disks","FAIstate");
+  var $CopyPasteVars  = array("disks");
 
   function faiPartitionTable ($config, $dn= NULL)
   {

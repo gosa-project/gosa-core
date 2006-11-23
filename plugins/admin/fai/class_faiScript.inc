@@ -42,7 +42,7 @@ class faiScript extends plugin
   var $release          ="";
   var $copy_paste_mode  = false;
   var $cut_paste_mode   = false;
-  var $CopyPasteVars    = array("SubObjects","FAIstate");
+  var $CopyPasteVars    = array("SubObjects");
 
 
   function faiScript ($config, $dn= NULL)
