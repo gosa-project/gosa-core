@@ -68,7 +68,7 @@ class printgeneric extends plugin
       $this->dn= preg_replace("/ou=terminals,/","ou=printers,",$this->dn);
     }
 
-    if($this->BelongsTo == "Workstation"){
+    if($this->BelongsTo == "Workstation" || $this->BelongsTo == "WorkstationTemplate"){
       $this->dn= preg_replace("/ou=workstations,/","ou=printers,",$this->dn);
     }
 

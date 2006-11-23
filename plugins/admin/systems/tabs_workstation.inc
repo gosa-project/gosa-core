@@ -31,7 +31,7 @@ class worktabs extends tabs
     tabs::save_object($save_current);
 
     /* Assign current cn to all other plugins */
-    $baseobject= $this->by_object['termgeneric'];
+    $baseobject= $this->by_object['workgeneric'];
     foreach ($this->by_object as $key => $obj){
       $this->by_object[$key]->dn= $this->dn;
       $this->by_object[$key]->cn= $baseobject->cn;
