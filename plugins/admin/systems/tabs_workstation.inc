@@ -29,6 +29,13 @@ class worktabs extends tabs
   function save_object($save_current= FALSE)
   {
     tabs::save_object($save_current);
+
+    /* Assign current cn to all other plugins */
+    $baseobject= $this->by_object['termgeneric'];
+    foreach ($this->by_object as $key => $obj){
+      $this->by_object[$key]->dn= $this->dn;
+      $this->by_object[$key]->cn= $baseobject->cn;
+    }
   }
 
 
@@ -47,8 +54,10 @@ class worktabs extends tabs
 
     tabs::save(TRUE);
 
-    if(($this->by_object['printgeneric']->is_account==false)&&($this->by_object['printgeneric']->initially_was_account==true)){
-      $this->by_object['printgeneric']->remove_from_parent();
+    if(isset($this->by_object['printgeneric'])){
+      if(($this->by_object['printgeneric']->is_account==false)&&($this->by_object['printgeneric']->initially_was_account==true)){
+        $this->by_object['printgeneric']->remove_from_parent();
+      }
     }
 
     /* Fix tagging if needed */
