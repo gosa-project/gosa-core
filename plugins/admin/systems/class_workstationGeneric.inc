@@ -345,20 +345,21 @@ class workgeneric extends plugin
         $ldap->cat($this->dn);
       }else{
         $ldap->search ("(&(cn=".$this->cn.")(objectClass=gotoWorkstation))", array("cn"));
-        if ($ldap->count() != 0){
-          while ($attrs= $ldap->fetch()){
-            if (preg_match ("/,ou=incoming,/", $ldap->getDN())){
-              continue;
-            } else {
-              if ($attrs['dn'] != $this->orig_dn){
-                $message[]= sprintf (_("There is already an entry '%s' in the base choosen by you"), $this->cn);
-                break;
-              }
+      }
+      if ($ldap->count() != 0){
+        while ($attrs= $ldap->fetch()){
+          if (preg_match ("/,ou=incoming,/", $ldap->getDN())){
+            continue;
+          } else {
+            if ($attrs['dn'] != $this->orig_dn){
+              $message[]= sprintf (_("There is already an entry '%s' in the base choosen by you"), $this->cn);
+              break;
             }
           }
         }
       }
     }
+
 
     /* Check for valid ntpServer selection */
     if((!$this->inheritTimeServer) && (!count($this->gotoNtpServer))){
