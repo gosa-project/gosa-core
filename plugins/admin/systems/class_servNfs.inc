@@ -190,11 +190,11 @@ class servnfs extends plugin
       }
     }
 
-    if(preg_match("/[^a-z0-9._+ -]+/i",$this->description)){
+    if(preg_match("/[^a-z0-9\._+ -]+/i",$this->description)){
       $message[]=_("Description contains invalid characters.");
     }
 
-    if(preg_match("/[^a-z0-9._+ -]/i",$this->volume)){
+    if(preg_match("/[^a-z0-9\._+ -]/i",$this->volume)){
       $message[]=_("Volume contains invalid characters.");
     }
   
