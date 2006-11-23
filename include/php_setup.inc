@@ -108,6 +108,12 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
       $args= "";
       if (isset($ct['args'])){
         foreach ($ct['args'] as $arg){
+
+          /* Avoid convertig object to string errors */ 
+          if(is_object($arg)){
+            $arg = "CLASS:&nbsp;".get_class($arg);
+          }
+
           $args.= htmlentities("\"$arg\", ");
         }
       }
