@@ -55,6 +55,8 @@ class netatalk extends plugin {
   
   /* Attributes to save to LDAP */
   var $attributes = array ("apple-user-homeurl", "apple-user-homeDirectory");
+  var $CopyPasteVars= array("apple_user_homeurl", "apple_user_homeDirectory","apple_user_share","shares_settings","apple_user_homepath_raw",
+                            "apple_user_homeurl_raw","apple_user_homeurl_xml","apple_user_homeurl","selectedshare","mountDirectory");
 
   /* Attributes to use in smarty template */
   var $smarty_attributes = array ("apple_user_homepath_raw", "shares", "selectedshare");
@@ -93,13 +95,62 @@ class netatalk extends plugin {
     if (strlen($this->apple_user_homeDirectory) >0) {
       $this->apple_user_homepath_raw = substr($this->apple_user_homeDirectory, strrpos($this->apple_user_homeDirectory, '/') + 1 );
     }
-    
+ 
+    /* get share list an set default values */
+    $this->get_netatalk_shares(); 
+    $this->apple_user_share = $this->selectedshare;
+
     /* Save initial account state */
     $this->initially_was_account = $this->is_account;
   }
 
+
+    
+  /* Get netatalk shares */
+  function get_netatalk_shares()
+  {
+    /* Get netatalk shares */
+    $this->shares = array();
+    $ldap = $this->config->get_ldap_link();
+
+    if($this->dn === "new" || $this->dn == NULL) {
+      $base = $_SESSION['CurrentMainBase'];
+    } else {
+      $base = preg_replace("/^[^,]+,".normalizePreg(get_people_ou())."/","",$this->dn);
+    }
+  
+    $ldap->cd($base);
+    $ldap->search ("(&(objectClass=mount)(|(mountType=url)(mountType=nfs))(cn=*))");
+
+    while ($attrs = $ldap->fetch()){
+      $tmp  = split(":", $attrs["cn"][0]);
+      $host = trim($tmp[0]);
+      $dir  = trim($tmp[1]);
+      $mountType = trim($attrs["mountType"][0]);
+      if ($mountType == "url") {
+        $mountTypeReal = "netatalk";
+      } else {
+        $mountTypeReal = $mountType;
+      } 
+      $share = $attrs["cn"][0]. " (" . $mountTypeReal . ")";
+      $this->shares[$share] = $share;
+      $this->shares_settings[$share]["mountType"]=$mountType;
+      $this->shares_settings[$share]["dir"]=$dir;
+      $this->shares_settings[$share]["host"]=$host;
+
+      $oldShare=substr($this->apple_user_homeDirectory, 0, strrpos($this->apple_user_homeDirectory, '/'));
+      $newShare=($this->mountDirectory . "/". $host . $dir );
+      if (strcmp($oldShare, $newShare)==0) {
+        $this->selectedshare = $share;
+      }
+    }
+    asort($this->shares);
+  }
+
+
   /* Execute the plugin, produce the output. */
-  function execute() {
+  function execute() 
+  {
     plugin :: execute();
 
     /* Use the smarty templating engine here... */
@@ -119,67 +170,29 @@ class netatalk extends plugin {
       return ($display);
     }
     
-    
-    /* Get netatalk shares */
-    $this->shares = array();
-    $ldap = $this->config->get_ldap_link();
-
-    if($this->dn === "new" || $this->dn == NULL) {
-      $ldap->cd($this->parent->by_object['user']->base);
-    } else {
-      $ldap->cd ($this->dn);
-      $ldap->cd ('..'); $ldap->cd ('..');
-    }
-    $ldap->search ("(&(objectClass=mount)(|(mountType=url)(mountType=nfs))(cn=*))");
-
-
     /* Show tab dialog headers */
     if ($this->parent != NULL) {
       if ($this->is_account) {
-        $display = $this->show_header(_("Remove netatalk account"), _("This account has netatalk features enabled. You can disable them by clicking below."));
+        $display = $this->show_header(_("Remove netatalk account"), 
+          _("This account has netatalk features enabled. You can disable them by clicking below."));
       } else {
         $errmsg="";
         $obj = $this->parent->by_object['posixAccount'];
         if  (!($obj->is_account) ) {
           $errmsg.="Posix features are needed for netatalk accounts, enable them first. ";
         }
-        if ($ldap->count() == 0) {
+        if (count($this->shares)== 0) {
           $errmsg.="At least one share with netatalk or NFS mount entry needed.";
         }
         if($errmsg==""){
-          $display = $this->show_header(_("Create netatalk account"), _("This account has netatalk features disabled. You can enable them by clicking below."));
+          $display = $this->show_header(_("Create netatalk account"), 
+            _("This account has netatalk features disabled. You can enable them by clicking below."));
         } else {
           $display = $this->show_header(_("Create netatalk account"), _($errmsg), TRUE);  
         }
         return ($display);
       }
     }
-    
-    
-    while ($attrs = $ldap->fetch()){
-      $tmp = split(":", $attrs["cn"][0]);
-      $host = trim($tmp[0]);
-      $dir = trim($tmp[1]);
-      $mountType = trim($attrs["mountType"][0]);
-      if ($mountType == "url") {
-        $mountTypeReal = "netatalk";
-      } else {
-        $mountTypeReal = $mountType;
-      } 
-      $share = $attrs["cn"][0]. " (" . $mountTypeReal . ")";
-      $this->shares[$share] = $share;
-      $this->shares_settings[$share]["mountType"]=$mountType;
-      $this->shares_settings[$share]["dir"]=$dir;
-      $this->shares_settings[$share]["host"]=$host;
-
-      $oldShare=substr($this->apple_user_homeDirectory, 0, strrpos($this->apple_user_homeDirectory, '/'));
-      $newShare=($this->mountDirectory . "/". $host . $dir );
-      if (strcmp($oldShare, $newShare)==0) {
-            $this->selectedshare = $share;
-      }
-    }
-    asort($this->shares);
-    /* Assign attributes and ACL to smarty */
     
     $smarty->assign("netatalkShareACL", chkacl($this->acl, "netatalkShare"));
     $smarty->assign("netatalkUserHomepathACL", chkacl($this->acl, "netatalkUserHomepath"));
@@ -203,7 +216,7 @@ class netatalk extends plugin {
   /* Check if we have correct data */
   function check() {
     $message = array ();
-
+  
     if (strlen($this->apple_user_share) == 0) {
       $message[] = _("You must select a share to use.");
     }
@@ -240,8 +253,13 @@ class netatalk extends plugin {
 
     $ldap = $this->config->get_ldap_link();
 
-    /* Call parents save to prepare $this->attrs */
+    /* Reset array of used attributes, because plugin::save() 
+        will not work with '-' in attributes names 
+        after calling save restore attributes array */
+    $attributes = $this->attributes;
+    $this->attributes = array();
     plugin :: save();
+    $this->attributes = $attributes;
 
     /* Do attribute conversion */
     foreach ($this->attributes as $val) {

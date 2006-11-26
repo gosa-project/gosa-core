@@ -35,6 +35,12 @@ class faiVariable extends plugin
   var $SubObjects       = array();  // All leafobjects of this object
 
   var $FAIstate         = "";
+  var $base             = "";
+  var $release          = "";
+  var $copy_paste_mode  = false;
+  var $cut_paste_mode   = false;
+
+  var $CopyPasteVars  = array("SubObjects");
 
   function faiVariable ($config, $dn= NULL)
   {
@@ -266,6 +272,19 @@ class faiVariable extends plugin
     /* Call common method to give check the hook */
     $message= plugin::check();
 
+    /* If this is a new script, check if a script with this name already exists */
+    if(!empty($this->release) && ($this->copy_paste_mode || $this->cut_paste_mode) ){
+
+      /* Check if current name is already used for fai scripts in selected release */
+      $dn = 'cn='.$this->cn.",ou=variables,".$this->release;
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cat($dn);
+      if($ldap->count()){
+
+        $r =convert_department_dn($this->release);;
+        $message[] = sprintf(_("Can't insert a fai variable named '%s' in '%s' there is already a variable with the given name."),$this->cn,$r);
+      }
+    }
     return ($message);
   }
 
@@ -276,7 +295,12 @@ class faiVariable extends plugin
     plugin::save();
  
     $ldap = $this->config->get_ldap_link();
-  
+ 
+    /* Copy & Paste : Ensure that FAIstate is copied too */
+    if($this->copy_paste_mode && preg_match("/freeze/",$this->FAIstate)){
+      $this->attrs['FAIstate'] = $this->FAIstate;
+    }
+ 
     $ldap->cat($this->dn,array("objectClass"));
     if($ldap->count()!=0){
       /* Write FAIscript to ldap*/
@@ -331,6 +355,10 @@ class faiVariable extends plugin
 
       $sub_dn = "cn=".$obj['cn'].",".$this->dn;
 
+      if($this->copy_paste_mode){
+        $obj['status'] = "new";
+      }
+
       if($obj['status']=="new"){
         $ldap->cat($sub_dn,array("objectClass"));
         if($ldap->count()){
@@ -376,6 +404,28 @@ class faiVariable extends plugin
       }
 
       $this->handle_object_tagging($sub_dn, $this->gosaUnitTag);
+    }
+  }
+  
+  /* return copy & paste dialog
+   */
+  function getCopyDialog()
+  {
+    /* Ask for cn */
+    $smarty = get_smarty();
+    $smarty->assign("cn" ,$this->cn);
+    $str = $smarty->fetch(get_template_path("paste_fai_object.tpl",TRUE));
+    $ret = array();
+    $ret['string'] = $str;
+    $ret['status'] = "";
+    return($ret);
+  }
+
+  /* Get posted cn */
+  function saveCopyDialog()
+  {
+    if(isset($_POST['cn'])){
+      $this->cn = $_POST['cn'];
     }
   }
 }

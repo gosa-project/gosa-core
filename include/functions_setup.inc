@@ -338,6 +338,7 @@ function get_link($function_name) {
   $result= "<a href='http://de.php.net/manual/en/function.";
 
   /* Replace all underscores with hyphens (phpdoc convention) */
+  /* hjb: added alternative check for GraphicsMagick >= 1.1.2 */
   $function_name= str_replace("_", "-", $function_name);
 
   /* Append to base URL */
@@ -387,11 +388,18 @@ function perform_additional_checks(&$faults)
   $output= shell_exec ($query);
   if ($output != ""){
     $lines= split ("\n", $output);
-    $version= preg_replace ("/^Version:.+Magick ([^\s]+).*/", "\\1", $lines[0]);
-    list($major, $minor)= split("\.", $version);
-    $msg.= check (	$faults, _("Checking for ImageMagick (>=5.4.0)"),
-        _("ImageMagick is used to convert user supplied images to fit the suggested size and the unified JPEG format."),
-        ($major > 5 || ($major == 5 && $minor >= 4)));
+    $version= preg_replace ("/^Version: (.+Magick) ([^\s]+).*/", "\\1 \\2", $lines[0]);
+    list($prog, $version) = split(" ", $version);
+    list($major, $minor,$minor2)= split("\.", $version);
+    if (preg_match('/GraphicsMagick/', $prog)) {
+      $msg.= check (	$faults, _("Checking for GraphicsMagick (>=1.1.2)"),
+          _("GraphicsMagick is used to convert user supplied images to fit the suggested size and the unified JPEG format."),
+          ($major > 1 || ($major == 1 && $minor >= 1) || ($major == 1 && $minor == 1 && $minor2 >= 2) ) );
+    } else {
+      $msg.= check (	$faults, _("Checking for ImageMagick (>=5.4.0)"),
+          _("ImageMagick is used to convert user supplied images to fit the suggested size and the unified JPEG format."),
+          ($major > 5 || ($major == 5 && $minor >= 4)));
+        }
   } else {
     $msg.= check (	$faults, _("Checking imagick module for PHP"),
         _("Imagick is used to convert user supplied images to fit the suggested size and the unified JPEG format from PHP script."), function_exists('imagick_blob2image'), TRUE);
@@ -622,11 +630,14 @@ function parse_contrib_conf()
 /* Show setup_page 1 */
 function show_setup_page1($withoutput = true)
 {
-  $faults = array();
+  $faults   = false;
+  $faults2  = false;
   $smarty = get_smarty();  
   $smarty->assign ("content", get_template_path('setup_introduction.tpl'));
   $smarty->assign ("tests", perform_php_checks($faults));
-  $smarty->assign ("detailed_tests", perform_additional_function_checks($faults));
+  $smarty->assign ("detailed_tests", perform_additional_function_checks($faults2));
+
+  $faults = $faults || $faults2;
 
   /* This var is true if anything went wrong */
   if ($faults){
@@ -646,14 +657,14 @@ function show_setup_page1($withoutput = true)
     $smarty->display (get_template_path('setup.tpl'));
   }
 
-  return (!$faults);
+  return ($faults);
 }
 
 
 /* Show setup_page 2 */
 function show_setup_page2($withoutput = true)
 {
-  $faults = array();
+  $faults = false;
   $smarty = get_smarty();
   $smarty->assign ("content", get_template_path('setup_step2.tpl'));
   $smarty->assign ("tests", perform_additional_checks($faults));
@@ -671,7 +682,7 @@ function show_setup_page2($withoutput = true)
     $smarty->display (get_template_path('setup.tpl'));
   }
 
-  return (!$faults);                               
+  return ($faults);                               
 }
 
 
@@ -701,18 +712,7 @@ function show_setup_page3($withoutput = true)
   /* No error till now */
   $fault = false;
 
-  /* If we pushed the Button continue */
-  if(isset($_POST['continue3'])){
-    if(!isset($uri)) {
-      $fault = true;
-
-      /* Output the Error */
-      if($withoutput) {
-        print_red (_("You've to specify an ldap server before continuing!"));
-        $smarty->assign ("content", get_template_path('setup_step3.tpl'));
-      }
-    }
-  } elseif (!$ds = @ldap_connect (validate($uri))) {
+  if (!$ds = @ldap_connect (validate($uri))) {
     $fault =true;
 
     /* Output the Error */
@@ -757,13 +757,41 @@ function show_setup_page3($withoutput = true)
     $smarty->display (get_template_path('setup.tpl'));
   }
 
-  return (!$fault);                             
+  return ($fault);                             
 }
 
 
 function show_setup_page4($withoutput = true)
 {
   $smarty= get_smarty();      
+
+  /* check POST data */
+  if(isset($_POST['check'])) {
+
+    /* Check if all needed vars are submitted */
+    foreach($checkvars as $key) {
+      if($key == "peopleou"){
+        continue;
+      }
+      if($key == "groupou"){
+        continue;
+      }
+
+      if((isset($_POST[$key]))&&($_POST[$key]!="")) {
+        $_SESSION['ldapconf'][$key] = $_POST[$key];
+      } else {
+        if($withoutput) {
+          print_red(sprintf(_("You're missing the required attribute '%s' from this formular. Please complete!"), $key));
+        }
+        $fault = true;
+      }
+    }
+  }
+
+  /* Transfer base */
+  if(isset($_POST['base'])){
+    $_SESSION['ldapconf']['base']= $_POST['base'];
+  }
 
 	// ?
   if(!isset($_SESSION['ldapconf']['base'])){
@@ -797,7 +825,7 @@ function show_setup_page4($withoutput = true)
 
   /* If there are some empty vars in ldapconnect -
      these values also represent out default values */
-  if(!$ds = @ldap_connect (validate($uri))){
+  if(!$ds =  @ldap_connect (validate($uri))){
     $fault = true;
     if($withoutput){
       print_red (_("Can't connect to the specified LDAP server! Please make sure that is reachable for GOsa."));
@@ -805,22 +833,21 @@ function show_setup_page4($withoutput = true)
   } elseif(!@ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3)){
     $fault = true;
     if($withoutput){
-      print_red (_("Can't bind to the specified LDAP server! Please make sure that it is reachable for GOsa."));
+      print_red (_("Can't set ldap protocol version 3."));
     }
   } elseif(!$r= @ldap_bind ($ds)){
     $fault = true;
     if($withoutput){
-      print_red (_("Can't bind to the specified LDAP server! Please make sure that it is reachable for GOsa."));
+      print_red (_("Could not bind to the specified LDAP server! Please make sure that it is reachable for GOsa."));
     }
   } else {
-    $sr=   @ldap_search ($ds, NULL, "objectClass=*", array("namingContexts"));
+    $sr=   @ldap_search ($r, NULL, "objectClass=*", array("namingContexts"));
     $attr= @ldap_get_entries($ds,$sr);
 
     if((empty($attr))) {
-      $base= "dc=example,dc=net";
 
       if($withoutput){
-        print_red(_("Bind to server successful, but the server seems to be completly empty, please check all information twice"));
+#        print_red(_("Bind to server successful, but the server seems to be completly empty, please check all information twice"));
       }
 
     } else {
@@ -860,34 +887,6 @@ function show_setup_page4($withoutput = true)
     $_SESSION['ldapconf']['arr_crypts']   = $tmp['md5'];
   }
 
-  /* check POST data */
-  if(isset($_POST['check'])) {
-
-    /* Check if all needed vars are submitted */
-    foreach($checkvars as $key) {
-      if($key == "peopleou"){
-        continue;
-      }
-      if($key == "groupou"){
-        continue;
-      }
-
-      if((isset($_POST[$key]))&&($_POST[$key]!="")) {
-        $_SESSION['ldapconf'][$key] = $_POST[$key];
-      } else {
-        if($withoutput) {
-          print_red(sprintf(_("You're missing the required attribute '%s' from this formular. Please complete!"), $key));
-        }
-        $fault = true;
-      }
-    }
-  }
-
-  /* Transfer base */
-  if(isset($_POST['base'])){
-    $_SESSION['ldapconf']['base']= $_POST['base'];
-  }
-
   $smarty->assign("arr_cryptkeys",$_SESSION['ldapconf']['arr_cryptkeys']);
   $smarty->assign("mail_methods", $_SESSION['ldapconf']['mail_methods']);
 
@@ -895,7 +894,7 @@ function show_setup_page4($withoutput = true)
     $smarty->assign($key,$val);
   }
 
-  if(isset($_POST['check'])) {
+  if(isset($_POST['check']) || (isset($_POST['admin'])) && isset($_POST['password'])) {
     $ldap= new LDAP($_SESSION['ldapconf']['admin'],
         $_SESSION['ldapconf']['password'],
         $_SESSION['ldapconf']['uri']);
@@ -934,7 +933,8 @@ function show_setup_page4($withoutput = true)
   if($withoutput){
     $smarty->display (get_template_path('setup.tpl'));
   }
-  return (!$fault);
+
+  return ($fault);
 }
 
 

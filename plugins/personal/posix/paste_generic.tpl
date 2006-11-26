@@ -1,7 +1,7 @@
+<h2>{t}Posix settings{/t}</h2>
 <table width='100%'>
 	<tr>
-		<td style='vertical-align:top;'>
-			<h2>{t}Posix settings{/t}</h2>
+		<td style='width:50%;vertical-align:top; border-right:1px solid #AAA'>
 			<table>
 	  			<tr>
 					<td>
@@ -12,10 +12,10 @@
 					</td>
 	  			</tr>
 			</table>
-			<table>
+			<table style='width:100%;'>
 	  			<tr>
 					<td>
-					  	<input id="force_ids" type=checkbox name="force_ids" value="1" ".$force_ids."}
+					  	<input id="force_ids" type=checkbox name="force_ids" value="1" {$force_ids}
 								 onclick="changeState('uidNumber');changeState('gidNumber');">
 					</td>
 					<td>
@@ -41,6 +41,8 @@
 					</td>
 				</tr>
 			</table>
+		</td>
+		<td>
 			<table width="50%">
 				<tr>
 					<td style="vertical-align:top;" colspan="4">

@@ -19,7 +19,6 @@ class wintabs extends tabs
     /* Check for new 'dn', in order to propagate the
        'dn' to all plugins */
     $baseobject= $this->by_object['wingeneric'];
-	// it is also case sensitive !!!
     $this->dn= "uid=$baseobject->cn,ou=winstations,ou=systems,".$baseobject->base;
     $baseobject->dn= $this->dn;
 

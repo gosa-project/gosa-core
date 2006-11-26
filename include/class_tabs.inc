@@ -143,13 +143,15 @@ class tabs
 		}
 
 		/* Paint tab */
-		$display.= "<td style=\"vertical-align:bottom; width:100px;\">";
+		$display.= "<td style=\"vertical-align:bottom;width:1px;\">";
 
 		/* Shorten string if its too long for the tab headers*/
 		$title= _($name);
 		if (mb_strlen($title, 'UTF-8') > 14){
 			$title= mb_substr($title,0, 12, 'UTF-8')."...";
 		}
+
+		$title= preg_replace("/ /", "&nbsp;", $title);
 		
 		if ($_SESSION['js']==FALSE){	
 			$display.= "<div class=\"$style[$index]\"><input type=\"submit\" name=\"$class\"".
@@ -278,22 +280,25 @@ class tabs
    */
   function getCopyDialog()
   {
-	  $ret = "";
-	  $this->SubDialog = false;
-	  foreach ($this->by_object as $key => $obj){
-		  if($obj->is_account){
-			  $tmp = $this->by_object[$key]->getCopyDialog();
-			  if($tmp['status'] == "SubDialog"){
-				  $this->SubDialog = true;
-	              return($tmp['string']);
-	     	  }else{
-                 $ret .= $tmp['string'];
-			  }
-		  }
-	  }
-	  return($ret);
+    $ret = "";
+    $this->SubDialog = false;
+    foreach ($this->by_object as $key => $obj){
+      if($obj->is_account){
+        $tmp = $this->by_object[$key]->getCopyDialog();
+        if($tmp['status'] == "SubDialog"){
+          $this->SubDialog = true;
+          return($tmp['string']);
+        }else{
+          if(!empty($tmp['string'])){
+            $ret .= $tmp['string'];
+            $ret .= "<p class='seperator'>&nbsp;</p>";
+          }
+        }
+      }
+    }
+    return($ret);
   }
-
 }
 
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

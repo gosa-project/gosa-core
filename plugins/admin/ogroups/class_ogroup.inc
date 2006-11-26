@@ -71,6 +71,7 @@ class ogroup extends plugin
           "W" => "workstations",
           "T" => "terminals",
           "F" => "phones",
+          "_" => "subtrees",
           "P" => "printers") as $key => $val){
 
       if (preg_match("/$key/", $this->gosaGroupObjects)){
@@ -80,16 +81,18 @@ class ogroup extends plugin
       }
     }
     register_global("ogfilter", $ogfilter);
-  
-    if(isset($_SESSION['CurrentMainBase'])){
-     $this->base = $_SESSION['CurrentMainBase'];
+ 
+    /* Set base */
+    if ($this->dn == "new"){
+      $this->base= $_SESSION['CurrentMainBase'];
+    } else {
+      $this->base= preg_replace("/^[^,]+,".get_groups_ou()."/","",$this->dn);
     }
 
-     /* set permissions */
+    /* set permissions */
     $ui= get_userinfo();
     $acl= get_permissions ($ui->dn, $ui->subtreeACL);
     $this->acl= get_module_permission($acl, "ogroup", $ui->dn);
-
 
     /* Load member data */
     $this->reload();
@@ -226,7 +229,7 @@ class ogroup extends plugin
       }
       if (isset($_POST['dselect'])){
         foreach( array("accounts", "groups", "applications", "departments",
-              "servers", "workstations", "terminals", "printers",
+              "servers", "workstations", "terminals", "printers","subtrees",
               "phones") as $type){
 
           if (isset($_POST[$type])) {
@@ -256,7 +259,7 @@ class ogroup extends plugin
       $smarty->assign("deplist", $this->config->idepartments);
       $smarty->assign("alphabet", generate_alphabet());
       foreach( array("dselect", "regex", "accounts", "groups", "applications",
-            "departments", "servers", "workstations", "terminals",
+            "departments", "servers", "workstations", "terminals","subtrees",
             "printers", "phones") as $type){
         $smarty->assign("$type", $ogfilter[$type]);
       }
@@ -410,8 +413,15 @@ class ogroup extends plugin
 
     /* Perform search for selected objectClasses */
     foreach($objectClasses as $class=> $basedn){
-      $ldap->ls("(&(objectClass=".$class.")(|(uid=$regex)(cn=$regex)(ou=$regex)))",$basedn.$ogfilter['dselect'] ,
-          array("dn", "cn", "description", "objectClass", "sn", "givenName", "uid","ou"));
+
+      if($ogfilter['subtrees'] == "checked"){
+        $ldap->cd($ogfilter['dselect']);
+        $ldap->search("(&(objectClass=".$class.")(|(uid=$regex)(cn=$regex)(ou=$regex)))",
+            array("dn", "cn", "description", "objectClass", "sn", "givenName", "uid","ou"));
+      }else{
+        $ldap->ls("(&(objectClass=".$class.")(|(uid=$regex)(cn=$regex)(ou=$regex)))",$basedn.$ogfilter['dselect'] ,
+            array("dn", "cn", "description", "objectClass", "sn", "givenName", "uid","ou"));
+      }
       
       /* fetch results and append them to the list */
       while($attrs = $ldap->fetch()){
@@ -680,10 +690,15 @@ class ogroup extends plugin
 
   function getCopyDialog()
   {
-    $str  = "";
-    $str .= _("Group name");
-    $str .= "&nbsp;<input type='text' name='cn' value='".$this->cn."'>";
-    return($str);
+    $str = "";
+
+    $smarty = get_smarty();
+    $smarty->assign("cn",     $this->cn);
+    $str = $smarty->fetch(get_template_path("paste_generic.tpl",TRUE,dirname(__FILE__)));
+    $ret = array();
+    $ret['string'] = $str;
+    $ret['status'] = "";
+    return($ret);
   }
 
   function saveCopyDialog()

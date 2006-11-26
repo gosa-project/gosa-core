@@ -99,7 +99,24 @@ class servservice extends plugin
   }
 
   function deleteFromList($id){
-    unset($this->goExportEntryList[$id]);
+    /* Check if the share is used by someone */
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(|(gotoProfileServer=*|$id)(gotoShare=*|$id|*))", array("cn"));
+    $cnt= $ldap->count();
+    if ($cnt){
+      $msg= sprintf(_("The share can't be removed since it is still used by %d users:"), $cnt);
+      $msg.= "<br><br><ul>";
+      while ($attrs= $ldap->fetch()){
+        $msg.= "<li>".$attrs["cn"][0]."</li>";
+      }
+      $msg.= "</ul>"._("Please correct the share-/profile settings of these users");
+      print_red($msg);
+      
+    } else {
+      /* Finally remove it */
+      unset($this->goExportEntryList[$id]);
+    }
   }
   
   function addToMountList($entry) {

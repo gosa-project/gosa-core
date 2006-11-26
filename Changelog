@@ -1,9 +1,27 @@
 GOsa2 changelog
 ===============
-* DNS support
-  - change DNS functions to support multiple nameservers
+* gosa 2.5.7
+  -
 
-* branches/openca { by Guido Serra <zeph@purotesto.it> }
+* gosa 2.5.6
+  - Copy & paste implemented into FAI
+  - Added setup fix to support GraphicsMagick
+  - Added several fixes for all user plugins to support Copy & Paste.
+  - Fixed malformed usage of $this>var in samba class. 
+  - Fixed checkbox selection in samba class.
+  - Connectivity netatalk: Moved plugin intialization from execute() to contructor().
+  - Fixes various issues with setup.php
+  - Avoid tab lables to have line feeds
+  - Activated missing checks for IP and MAC
+  - Fixed copy'n paste errors for netatalk
+  - Various W3C fixes
+  - Fixed "My Account" mode, where buttons disappear after saving
+  - Avoid removal of shares while they are used by users
+  - Added finer grained ACL settings for mail accounts
+  - Fixed day of birth problem in M$ IE
+  - Fixed setting of Kerberos passwords
+  - branches/openca { by Guido Serra <zeph@purotesto.it> }
+  - change DNS functions to support multiple nameservers
   - branched from branches/2.5 - Revision: 4946
   - added spkac to gosa schemas
   - CNAME moved away from DNS reverse zone
@@ -16,6 +34,27 @@ GOsa2 changelog
   - gosa.conf ... better have uids over 10000 to do not conflic with system
   - slapd.conf from debian merged
 
+* gosa 2.5.5
+  - Added remove method for shared folder in kolab mode
+  - Added checkbox to decide if the shared folder should be deleted from IMAP
+    if the mail extension is removed from group mail account
+  - Updated request method for mail folders
+  - Resolved problem with infinite loop while storing sieve scripts
+  - Added subsearch checkbox to object group "add items" filter
+  - Fixed "missing PPD" configuration error, for newly created printer
+  - Corrected problem where the object base was sometimes broken when
+    saving object groups
+  - Fixed saving of terminal attribute gotoLpdEnable to contain "yes"
+    instead of "1"
+  - Avoid reset of several attributes from workstations when not
+    inherited from object groups
+  - Show error messages from password dialog
+  - Fixed a set of W3C problems
+  - Fixed multiple savings in addressbook (Closes: #23)
+  - Fixed shadow expire when using templates (Closes: #20)
+  - Made %uid, %sn, etc. available in templates using gosaMailAlternateAddress
+
+>>>>>>> .merge-right.r5419
 * gosa 2.5.4
   - Included patch to choose the addressbook base
   - Applied fixes for logviewer done by Mario Minati

@@ -864,7 +864,9 @@ class plugin
     }
     $todo[] = "is_account";
     foreach($todo as $var){
-      $this->$var = $source->$var;
+      if (isset($source->$var)){
+        $this->$var= $source->$var;
+      }
     }
   }
 

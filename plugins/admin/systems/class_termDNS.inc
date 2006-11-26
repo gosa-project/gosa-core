@@ -302,12 +302,11 @@ class termDNS extends plugin
         $message[]= _("The required field 'IP-address' is not set.");
       }
 
-      /* check if given ip is valid ipi
-       */
-      $num="(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])";
-      if (!preg_match("/^$num\\.$num\\.$num\\.$num$/", $this->ipHostNumber)){
-        $message[]= _("Wrong IP format in field IP-address.");
-      }
+    }
+
+    /* check if given ip is valid ip */
+    if ($this->ipHostNumber != "" && !is_ip($this->ipHostNumber)){
+      $message[]= _("Wrong IP format in field IP-address.");
     }
 
     /* Check if mac is empty 
@@ -318,8 +317,7 @@ class termDNS extends plugin
 
     /* Check if given mac is valid mac 
      */
-    $tr = count(split(":",$this->macAddress));
-    if($tr!=6){
+    if(!is_mac($this->macAddress)){
       $message[]=(_("The given macaddress is invalid. There must be 6 2byte segments seperated by ':'."));
     }
 

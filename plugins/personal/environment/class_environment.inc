@@ -761,13 +761,15 @@ class environment extends plugin
       }
     }
 
-    if((isset($_POST['gotoPrinterDefault']))&&(isset($_POST['gotoPrinterSel']))&&(!empty($_POST['gotoPrinterSel']))){
-      if ($this->gosaDefaultPrinter == $_POST['gotoPrinterSel'][0]){
-        $this->gosaDefaultPrinter= "";
-      } else {
-        $this->gosaDefaultPrinter= $_POST['gotoPrinterSel'][0];
+    if(!$this->is_group){
+      if((isset($_POST['gotoPrinterDefault']))&&(isset($_POST['gotoPrinterSel']))&&(!empty($_POST['gotoPrinterSel']))){
+        if ($this->gosaDefaultPrinter == $_POST['gotoPrinterSel'][0]){
+          $this->gosaDefaultPrinter= "";
+        } else {
+          $this->gosaDefaultPrinter= $_POST['gotoPrinterSel'][0];
+        }
       }
-    }
+    }  
 
     $smarty->assign("gotoPrinter",$this->printOutPrinterDevices());
     $smarty->assign("gotoPrinterKeys",array_flip($this->printOutPrinterDevices()));
@@ -800,6 +802,8 @@ class environment extends plugin
       $smarty->assign("gotoProfileServerACL"," disabled ");
       $smarty->assign("gotoProfileQuotaACL"," disabled ");
     }
+
+    $smarty->assign("is_group",$this->is_group);
 
     /* Als smarty vars are set. Get smarty template and generate output */
     $display.= $smarty->fetch(get_template_path('environment.tpl', TRUE,dirname(__FILE__)));

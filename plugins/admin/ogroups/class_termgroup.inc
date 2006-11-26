@@ -27,6 +27,7 @@ class termgroup extends plugin
                             "memcheck"        => "memcheck",
                             "sysinfo"         => "sysinfo");
 
+  var $CopyPasteVars = array("gotoNtpServers","modes","inheritTimeServer");
 
   function termgroup ($config, $dn= NULL, $parent= NULL)
   {
@@ -141,8 +142,8 @@ class termgroup extends plugin
   function update_term_member_FAIstate($act)
   {
     /* Get required informations */
-    $og    = $this->parent->by_object['ogroup'];
-    $allobs= $og->allobjects;
+    $og    = $this->parent->by_object['ogroup'];  
+    $allobs= $og->objcache;
 
     /* Get correct value for FAIstate */
     $action= $this->mapActions[$act];

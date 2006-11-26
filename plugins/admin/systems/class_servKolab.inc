@@ -8,6 +8,7 @@ class servkolab extends plugin {
 
   var $postfix_mydomain                 = "";
   var $postfix_mydestination            = "";
+  var $cyrus_admins                     = "";
   var $postfix_mynetworks               = "127.0.0.1/8";
   var $postfix_enable_virus_scan        = "TRUE";
   var $postfix_relayhost                = "";
@@ -16,7 +17,6 @@ class servkolab extends plugin {
   var $cyrus_quotawarn                  = "80";
   var $kolabFreeBusyFuture              = "1";
   var $k                                = "kolab";
-  var $cyrus_admins                     = "TRUE";
   var $cyrus_imap                       = "TRUE";
   var $cyrus_pop3                       = "TRUE";
   var $cyrus_imaps                      = "TRUE";
@@ -42,7 +42,7 @@ class servkolab extends plugin {
     $this->dn       = "k=kolab,".$config->current['BASE'];
 
     /* Load variables, if given*/
-    plugin::plugin($config, $this->dn, $parent);
+    plugin::plugin($config, $this->dn);
 
     /* Copy needed attributes */
     foreach($this->attributes as $val) {
@@ -228,7 +228,7 @@ class servkolab extends plugin {
 
       /* Save checkboxes */
       foreach (array( "postfix_enable_virus_scan", "postfix_allow_unauthenticated",
-            "cyrus_admins", "cyrus_imap", "cyrus_pop3", "cyrus_imaps",
+             "cyrus_imap", "cyrus_pop3", "cyrus_imaps",
             "cyrus_pop3s", "cyrus_sieve", "apache_allow_unauthenticated_fb",
             "proftpd_ftp", "apache_http") as $cb){
         if (isset($_POST[$cb])){

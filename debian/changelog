@@ -1,8 +1,20 @@
-gosa (2.5.4-2) unstable; urgency=low
+gosa (2.5.6-1) unstable; urgency=low
 
   * New DNS multiple nameservers support
+  * Merge from r4941 branches/2.5
 
- -- Guido Serra <zeph@purotesto.it>  Sat, 21 Oct 2006 12:10:10 +0200
+ -- Guido Serra <zeph@purotesto.it>  Sat, 26 Nov 2006 16:30:10 +0100
+
+  * New upstream release
+
+ -- Cajus Pollmeier <cajus@debian.org>  Wed, 15 Nov 2006 09:43:09 +0100
+
+gosa (2.5.5-1) unstable; urgency=low
+
+  * New upstrame release
+  * Added binary-arch to debian/rules (Closes: #395605)
+
+ -- Cajus Pollmeier <cajus@debian.org>  Sun, 29 Oct 2006 08:02:11 +0100
 
 gosa (2.5.4-1) unstable; urgency=low
 

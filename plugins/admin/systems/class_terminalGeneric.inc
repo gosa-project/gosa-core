@@ -359,10 +359,13 @@ class termgeneric extends plugin
   {
     /* Call common method to give check the hook */
     $message= plugin::check();
-    $message= array_merge($message, $this->netConfigDNS->check());
+
+    if($this->cn != "default"){
+      $message= array_merge($message, $this->netConfigDNS->check());
+    }
 
     /* Permissions for that base? */
-    $this->dn= "cn=".$this->cn."ou=terminals,ou=systems,".$this->base;
+    $this->dn= "cn=".$this->cn.",ou=terminals,ou=systems,".$this->base;
 
     $ui= get_userinfo();
     $acl= get_permissions ($this->dn, $ui->subtreeACL);
@@ -377,8 +380,16 @@ class termgeneric extends plugin
 
     if ($this->orig_dn == 'new'){
       $ldap= $this->config->get_ldap_link();
-      $ldap->cd ($this->base);
-      $ldap->search ("(&(objectClass=gotoTerminal)(cn=".$this->cn."))", array("cn"));
+      $ldap->cd ($this->config->current['BASE']);
+ 
+      /* It is possible to have a 'default' terminal on every base */
+      if($this->cn == "default"){
+        $ldap->cat($this->dn);
+      }else{
+        $ldap->search ("(&(objectClass=gotoTerminal)(cn=".$this->cn."))", array("cn"));
+      }
+  
+      /* Check if there are some other terminals found */
       if ($ldap->count() != 0){
         while ($attrs= $ldap->fetch()){
           if (preg_match ("/,ou=incoming,/", $ldap->getDN())){
@@ -405,6 +416,12 @@ class termgeneric extends plugin
   /* Save to LDAP */
   function save()
   {
+
+    /* Move object if requested */
+    if( $this->orig_dn != 'new' && $this->dn != $this->orig_dn){
+      $this->move($this->orig_dn, $this->dn);
+    }
+ 
     plugin::save();
 
     /* Strip out 'default' values */
@@ -459,15 +476,17 @@ class termgeneric extends plugin
       $ldap->add($this->attrs);
       $this->handle_post_events("add");
     } else {
-      if ($this->orig_dn != $this->dn){
-        $this->move($this->orig_dn, $this->dn);
-      }
       $ldap->cd($this->dn);
       $this->cleanup();
       $ldap->modify ($this->attrs); 
-
       $this->handle_post_events("modify");
     }
+    
+    /* cn=default and macAddress=- indicates that this is a template */ 
+    if($this->cn == "default"){
+      $this->netConfigDNS->macAddress = "-";
+    }
+  
     $this->netConfigDNS->cn = $this->cn;
     $this->netConfigDNS->save($this->dn);
     show_ldap_error($ldap->get_error(), _("Saving terminal failed"));

@@ -139,10 +139,10 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.13.22 NAME 'goFonMacroParameter'
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
 
 attributetype ( 1.3.6.1.4.1.10098.1.1.13.23 NAME 'goFonMacro'
-	DESC 'Holds the macro parameter definitions'
-	EQUALITY caseExactIA5Match
-	SUBSTR caseExactIA5SubstringsMatch
-	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE)
+    DESC 'Holds the macro parameter definitions'
+    EQUALITY caseExactMatch
+    SUBSTR caseExactSubstringsMatch
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE)
 
 attributetype ( 1.3.6.1.4.1.10098.1.1.13.24 NAME 'goFonTimeOut'
     DESC 'Holds the queue goFonTimeOut definitions'

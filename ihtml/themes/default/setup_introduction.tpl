@@ -9,7 +9,7 @@
 </div>
 <p class="plugbottom">
  <input type="hidden" name="next" value="2">
- <input type='submit' name='continue' value='{t}Continue{/t}'>
+ <input type='submit' name='continue' value='{t}Continue{/t}' {$mode}>
 </p>
 
 <p class="seperator">&nbsp;</p>

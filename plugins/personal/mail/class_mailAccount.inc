@@ -44,7 +44,7 @@ class mailAccount extends plugin
   var $quotaUsage                         = 0;
   var $forward_dialog                     = FALSE;
   var $folder_prefix                      = "";
-  var $mailboxList                        = array();
+  var $mailboxList                        = array("INBOX");
   var $default_permissions                = "none";
   var $member_permissions                 = "post";
   var $members                            = array();
@@ -373,7 +373,7 @@ class mailAccount extends plugin
 
         if ($valid && ($user= $this->addAlternate ($_POST['alternate_address'])) != ""){
           $ui= get_userinfo();
-          if ($user != $ui->username){
+          if ($user != $ui->username && !$this->is_template){
             print_red (_("The address you're trying to add is already used by user")." '$user'.");
           }
         }
@@ -502,12 +502,25 @@ class mailAccount extends plugin
     /* Display mail account tab */
 
     $smarty->assign("mailServers", $mailserver);
-    foreach(array("gosaMailServer", "gosaMailQuota", "perms", "mail",
-          "gosaMailAlternateAddress", "gosaMailForwardingAddress",
-          "gosaVacationMessage", "gosaMailDeliveryMode",
-          "gosaMailMaxSize", "gosaSpamSortLevel", "gosaSpamMailbox") as $val){
+    foreach(array(
+          "gosaMailServer", 
+          "gosaMailQuota", 
+          "perms", 
+          "mail",
+          "gosaMailAlternateAddress", 
+          "gosaMailForwardingAddress",
 
-      $smarty->assign("$val", $this->$val);
+          // gosaMailDeliveryMode Flags 
+          "drop_own_mails",                       // No local delivery 
+          "gosaMailMaxSize",                      // Enable - Drop mails > max size
+          "gosaSpamSortLevel", "gosaSpamMailbox", // Enable - Spam sort options
+          "gosaVacationMessage",                  // Enable - Vacation message      
+          "custom_sieve",                         // Use custom sieve script
+          "only_local"                            // Send/receive local mails 
+                                        ) as $val){
+      if(isset($this->$val)){
+        $smarty->assign("$val", $this->$val);
+      }
       $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
     }
 
@@ -683,32 +696,57 @@ class mailAccount extends plugin
          I: Only insider delivery */
 
       $tmp= "";
-      if (!isset($_POST["drop_own_mails"])){
-        $tmp.= "L";
-      }
-      if (isset($_POST["use_mailsize_limit"])){
-        $tmp.= "R";
-      }
-      if (isset($_POST["use_spam_filter"])){
-        $tmp.= "S";
-      }
-      if (isset($_POST["use_vacation"])){
-        $tmp.= "V";
-      }
-      if (isset($_POST["own_script"])){
-        $tmp.= "C";
-      }
-      if (isset($_POST["only_local"])){
-        $tmp.= "I";
-      }
-      $tmp= "[$tmp]";
+      $Flags = array(
+                     "R"  => array("ACL" => "gosaMailMaxSize",    "POST" => "use_mailsize_limit"),
+                     "V"  => array("ACL" => "gosaVacationMessage","POST" => "use_vacation"),
+                     "C"  => array("ACL" => "custom_sieve",       "POST" => "own_script"),
+                     "I"  => array("ACL" => "only_local",         "POST" => "only_local"));
 
-      if (chkacl ($this->acl, "gosaMailDeliveryMode") == ""){
-        if ($this->gosaMailDeliveryMode != $tmp){
-          $this->is_modified= TRUE;
+      /* Check acls and set new value if allowed. 
+         If we do not have permission to change the value 
+          check for the old value and use this */
+      foreach($Flags as $flag => $val){
+        $acl  = $val['ACL'];
+        $post = $val['POST'];
+        if(chkacl($this->acl,$acl) ==""){
+          if (isset($_POST[$post])){
+            $tmp.= $flag;
+          }
+        }else{
+          if(preg_match("/".$flag."/",$this->gosaMailDeliveryMode)){
+            $tmp.= $flag ;
+          }
         }
-        $this->gosaMailDeliveryMode= $tmp;
       }
+
+      /* ! Inverse flag handling for drop_own_mails */
+      if(chkacl($this->acl,"drop_own_mails") == ""){
+        if (!isset($_POST['drop_own_mails'])){
+          $tmp.= "L";
+        }
+      }else{
+        if(preg_match("/L/",$this->gosaMailDeliveryMode)){
+          $tmp.= "L" ;
+        }
+      }
+
+      /* If one of these acls are given, we are allowed to enable disable the the spam settings */
+      if(chkacl($this->acl,"gosaSpamMailbox") == "" || chkacl($this->acl,"gosaSpamSortLevel") ==""){
+        if (isset($_POST["use_spam_filter"])){
+          $tmp.= "S";
+        }
+      }else{
+        if(preg_match("/S/",$this->gosaMailDeliveryMode)){
+          $tmp.= "S" ;
+        }
+      }
+      
+      /* Check if something has changed an assign new gosaMailDeliveryMode */
+      $tmp= "[$tmp]";
+      if ($this->gosaMailDeliveryMode != $tmp){
+        $this->is_modified= TRUE;
+      }
+      $this->gosaMailDeliveryMode= $tmp;
     }
   }
 
@@ -905,7 +943,7 @@ class mailAccount extends plugin
       
     /* Is this address already assigned in LDAP? */
     $ldap->cd ($this->config->current['BASE']);
-    $ldap->search ("(&(objectClass=gosaMailAccount)(|(mail=$address)"."(gosaMailAlternateAddress=$address)))", array("uid"));
+    $ldap->search ("(&(!(objectClass=gosaUserTemplate))(objectClass=gosaMailAccount)(|(mail=$address)"."(gosaMailAlternateAddress=$address)))", array("uid"));
 
     if ($ldap->count() > 0){
       $attrs= $ldap->fetch ();
@@ -978,8 +1016,17 @@ class mailAccount extends plugin
     if(isset($_POST['mail'])){
       $this->mail = $_POST['mail'];
     }
-
   }
+
+   
+  function PrepareForCopyPaste($source)
+  {
+    plugin::PrepareForCopyPaste($source);
+
+    /* Reset alternate mail addresses */
+    $this->gosaMailAlternateAddress = array();    
+  }
+
 
   function allow_remove()
   {

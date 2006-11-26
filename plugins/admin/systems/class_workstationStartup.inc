@@ -24,6 +24,9 @@ class workstartup extends plugin
   var $attributes     = array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters", "FAIclass", "FAIstatus", "gotoShare","FAIdebianMirror", "FAIrelease");
   var $objectclasses  = array("GOhard", "FAIobject");
 
+  /* These vars are required to copy object groups !. */
+  var $CopyPasteVars  = array("gotoModules","gotoShares","customParameters","FAIclass","FAIrelease","FAIdebianMirror"); 
+
   /* Share */
   var $gotoShares         = array();// Currently Share Option
   var $gotoShare          = "";     // currently selected Share Option
@@ -42,6 +45,7 @@ class workstartup extends plugin
   var $FAIrelease         = "";
   var $FAIdebianMirror    = "auto";
 
+  var $unresolved_classes = array();
   
   /* FAI class selection */
   var $InheritedFAIclass           = array();
@@ -682,6 +686,7 @@ class workstartup extends plugin
     }
 
     $smarty->assign("FAIdebianMirrors",$this->getFAIdebianMirrors());
+    $smarty->assign("FAIdebianMirror",$this->FAIdebianMirror);
     $smarty->assign("FAIreleases",$this->getFAIreleases());
     $smarty->assign("FAIrelease",$this->FAIrelease);
     $smarty->assign("FAIclasses",$this->selectFriendlyClasses());
@@ -706,6 +711,11 @@ class workstartup extends plugin
 
     foreach($tmp as $class){
 
+      $marker = "";
+      if(in_array_ics($class,$this->unresolved_classes)){
+        $marker = "&nbsp;<font color='red'>("._("Not available in current setup").")</font>";
+      }
+
       if($this->FAIdebianMirror == "inherited"){
         $str = "";
       }else{
@@ -720,7 +730,7 @@ class workstartup extends plugin
       $i ++ ; 
 
       $div->AddEntry(array(
-            array("string"=>$class),
+            array("string"=>$class.$marker),
             array("string"=>preg_replace("/\%s/",base64_encode($class),$str),"attach"=>"style='width:50px;border-right:none;'")
             ));
     }  
@@ -864,8 +874,10 @@ class workstartup extends plugin
         $eClasses .= $class." ";
       }
       
-      $this->FAIclass= array();
-      print_red(sprintf(_("Can't resolve the given FAIclass(es) [%s] anyway, please check your FAI configurations, possibly some classes where deleted or renamed. !All classes have been removed from this account, press cancel if you don't want this to be saved."),$eClasses));
+      $this->unresolved_classes = $errorClasses;
+      $this->FAIdebianMirror = "auto";
+      //$this->FAIclass= array();
+      print_red(sprintf(_("Can't resolve the given FAIclass(es) [%s] anyway, please check your FAI configurations, possibly some classes where deleted or renamed. Server was reset to 'auto'."),$eClasses));
     }
     return($ret);
   }

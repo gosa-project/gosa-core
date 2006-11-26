@@ -61,6 +61,13 @@ class faiPackage extends plugin
       "hold", "clean", "aptitude", "aptitude-r",
       "pending", "dpkgc" );
 
+  var $base             = "";
+  var $release          = "";
+  var $copy_paste_mode  = false;
+  var $cut_paste_mode   = false;
+
+  var $CopyPasteVars  = array("ConfiguredPackages","FAIdebianRelease","FAIdebianSection","FAIinstallMethod","mirror","servers","releases","sections","list","mirrors","usedPackages");
+
 
   function faiPackage ($config, $dn= NULL)
   {
@@ -378,8 +385,22 @@ class faiPackage extends plugin
       $message[]=_("Please choose a valid combination for your repository setup.");
     }
 
+    /* If this is a new script, check if a script with this name already exists */
+    if(!empty($this->release) && ($this->copy_paste_mode || $this->cut_paste_mode) ){
+
+      /* Check if current name is already used for fai scripts in selected release */
+      $dn = 'cn='.$this->cn.",ou=packages,".$this->release;
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cat($dn);
+      if($ldap->count()){
+
+        $r =convert_department_dn($this->release);;
+        $message[] = sprintf(_("Can't insert a fai package list named '%s' in '%s' there is already a package list with the given name."),$this->cn,$r);
+      }
+    }
     return ($message);
   }
+
 
   function printUsedPackages(){
     $a_ret=array(); 
@@ -460,6 +481,11 @@ class faiPackage extends plugin
 
     $ldap = $this->config->get_ldap_link();
 
+    /* Copy & Paste : Ensure that FAIstate is copied too */
+    if($this->copy_paste_mode && preg_match("/freeze/",$this->FAIstate)){
+      $this->attrs['FAIstate'] = $this->FAIstate;
+    }
+
     $this->attrs['FAIpackage'] = array();
     foreach($this->usedPackages as $pkg => $obj){
       $this->attrs['FAIpackage'][] = $pkg;
@@ -537,10 +563,28 @@ class faiPackage extends plugin
         $this->handle_object_tagging($pkgdn, $this->gosaUnitTag);
       }
     }
+  }
+  
+  /* return copy & paste dialog
+   */
+  function getCopyDialog()
+  {
+    /* Ask for cn */
+    $smarty = get_smarty();
+    $smarty->assign("cn" ,$this->cn);
+    $str = $smarty->fetch(get_template_path("paste_fai_object.tpl",TRUE));
+    $ret = array();
+    $ret['string'] = $str;
+    $ret['status'] = "";
+    return($ret);
+  }
 
-
-
-
+  /* Get posted cn */
+  function saveCopyDialog()
+  {
+    if(isset($_POST['cn'])){
+      $this->cn = $_POST['cn'];
+    }
   }
 }
 

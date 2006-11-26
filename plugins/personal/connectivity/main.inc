@@ -67,6 +67,7 @@ if (!$remove_lock){
       $connectivity->save ();
       gosa_log ("User/connectivity object'".$ui->dn."' has been saved");
       $connectivity->acl= "#none#";
+      $editacl= get_module_permission($acl, "connectivity", $ui->dn);
       del_lock ($ui->dn);
       sess_del ('edit');
 

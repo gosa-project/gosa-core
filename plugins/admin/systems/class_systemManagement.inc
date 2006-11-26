@@ -83,6 +83,9 @@ class systems extends plugin
       }elseif(preg_match("/user_setpwd_.*/i",$key)){
         $s_action="change_pw";
         $s_entry  = preg_replace("/user_setpwd_/i","",$key);
+      }elseif(preg_match("/gen_cd_.*/i",$key)){
+        $s_action="gen_cd";
+        $s_entry  = preg_replace("/gen_cd_/i","",$key);
       }elseif(preg_match("/newsystem_.*/i",$key)){
         $s_action="newsystem";
         $s_entry  = preg_replace("/newsystem_/i","",$key);
@@ -218,6 +221,69 @@ class systems extends plugin
         del_lock($this->dn);
       }
     }
+
+    /********************
+      Create FAI CD ...   
+     ********************/
+    if ($s_action=="gen_cd"){
+echo "ACL CHECK!";
+      $this->dn= $this->terminals[$s_entry]['dn'];
+      $_SESSION['objectinfo']= $this->dn;
+      return ($smarty->fetch(get_template_path('gencd.tpl', TRUE)));
+    }
+
+
+    /* Start CD-Creation */
+    if (isset($_POST["cd_create"])){
+echo "ACL CHECK!";
+      $smarty->assign("src", "?plug=".$_GET['plug']."&PerformIsoCreation");
+      return ($smarty->fetch(get_template_path('gencd_frame.tpl', TRUE)));
+    }
+
+    if ($this->dn != "" && isset($_GET['PerformIsoCreation'])){
+echo "ACL CHECK!";
+
+      $command= search_config($this->config->data['TABS'], "workgeneric", "ISOCMD");
+      if (check_command($command)){
+        @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
+
+        $dsc= array(0 => array("pipe", "r"), 1 => array("pipe", "w"), 2 => array("pipe", "w"));
+        echo "<html><head>";
+        echo "<script language=\"javascript\" src=\"include/focus.js\" type=\"text/javascript\"></script>";
+        echo "</head>";
+        echo "<body onLoad='scrollDown()'><pre>";
+        $process= proc_open($command, $dsc, $pipes, '/tmp');
+        if (is_resource($process)) {
+          fclose($pipes[0]);
+          while (!feof($pipes[1])){
+            echo fgets($pipes[1], 1024);
+            flush();
+          }
+        }
+        $buffer= stream_get_contents($pipes[2]);
+        fclose($pipes[1]);
+        fclose($pipes[2]);
+        $ret= proc_close($process);
+        echo "</pre>";
+        
+        if ($ret == 0){
+          echo "hier der runterladen button";
+        } else {
+          echo "<h1 style='color:red'>"._("Creating the image failed. Please see the report below.")."</h1>";
+          echo "<pre style='color:red'>$buffer</pre>";
+        }
+
+      } else {
+        $tmp= "<h1 style='color:red'>".sprintf(_("Command '%s', specified for ISO creation doesn't seem to exist."), $command)."</h1>";
+        echo $tmp;
+      }
+
+      echo "<button onClick='clearTimeout(timeout)'>"._("Disable auto scroll")."</button>";
+      echo "</body></html>";
+
+      exit;
+    }
+
 
 
     /********************
@@ -417,7 +483,7 @@ class systems extends plugin
       if (count($message) == 0){
 
         /* Save terminal data to ldap */
-        if(isset($_SESSION['SelectedSystemType']['ogroup'])){
+        if(isset($_SESSION['SelectedSystemType']['ogroup']) && $_SESSION['SelectedSystemType']['ogroup'] != 'none'){
           foreach (array("workservice", "termservice") as $cls){
             if (isset($this->systab->by_object[$cls])){
               $this->systab->by_object[$cls]->gotoXMouseport= "";
@@ -654,6 +720,12 @@ class systems extends plugin
         }
       } 
 
+      /* Create a string containing the last part of the department. */
+      $dn_name = preg_replace("#^([^/]+/)*#","",convert_department_dn(@LDAP::fix($tmp)));
+      if(empty($dn_name)){
+        $dn_name = "/";
+      }
+      
       /* Detect type of object and create an entry for $this->terminals */
       $terminal = array();
       if ((in_array ($tmp, $responsible)) || ($add != "")){
@@ -665,7 +737,7 @@ class systems extends plugin
           } else {
             $terminal             = $value;
             $terminal['type']     = "D";
-            $terminal['message']  = _("Terminal template for");
+            $terminal['message']  = _("Terminal template for")."&nbsp;'".$dn_name."'&nbsp;";
             $terminal['location'] = array_search($tmp, $this->config->departments); 
           }
         } elseif (in_array_ics('gotoWorkstation', $value["objectClass"])){
@@ -677,7 +749,7 @@ class systems extends plugin
             $terminal             = $value;
             $terminal['type']     = "D";
             $terminal['location'] = array_search($tmp, $this->config->departments);
-            $terminal['message']  = _("Workstation template for");
+            $terminal['message']  = _("Workstation template for")."&nbsp;'".$dn_name."'&nbsp;";
           }
           if (isset($value["FAIstate"][0])){
             $terminal['type']= $this->getState($terminal['type'], $value["FAIstate"][0]);

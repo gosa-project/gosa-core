@@ -4,7 +4,10 @@
 		<label for="apple_user_share">{t}Share{/t}</label>
 	</td>
 	<td>
-		<select name="apple_user_share" id="apple_user_share" {$netatalkShareACL} >{html_options options=$shares selected=$selectedshare}</select>
+		<select name="apple_user_share" id="apple_user_share" {$netatalkShareACL} >
+			{html_options options=$shares selected=$selectedshare}
+	
+			</select>
 	</td>
 <tr>
 	<td>

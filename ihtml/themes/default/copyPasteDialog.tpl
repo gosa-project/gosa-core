@@ -1,12 +1,13 @@
 <h2>{t}Copy &amp; paste wizard{/t}</h2>
-
+<b>{t}Object to be pasted{/t}</b>: {$objectDN}
+<br>
+<br>
 {if $Complete == false}
 	{t}Some values need to be unique in the complete directory while some combinations make no sense. GOsa shows the relevant attributes. Please maintain the values below to fullfill the policies.{/t}
 	<br>
 	<p class='seperator'>&nbsp;</p>
 	<br>
 	{$AttributesToFix}
-	<p class='seperator'>&nbsp;</p>
 	{if $SubDialog == false}
 	<br>
 

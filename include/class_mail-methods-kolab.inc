@@ -44,17 +44,16 @@ class mailMethodKolab extends mailMethodCyrus
     return (TRUE);
   }
 
-  function deleteMailbox($folder)
-  {
-    return (TRUE);
-  }
-
-
   /* Get quota and divide it by 1024, because in gosa we display in MB
       but we get Kb */
   function getQuota($folder)
   {
     $result= array('quotaUsage' => '', 'gosaMailQuota' => '');
+
+    /* Only use lower case folder names, if folder name is like "@domain.com" */
+    if(preg_match("/@/",$folder)){
+      $folder = strtolower($folder);
+    }
 
     error_reporting(0);  
   
@@ -238,9 +237,25 @@ class mailMethodKolab extends mailMethodCyrus
     /* Only add kolab delete Flag in case of an user.mailAccount */
     if(!in_array("posixGroup", $mailObject->attrs['objectClass'])){
       $mailObject->attrs['kolabDeleteFlag']= preg_replace('%imap://%', '', $mailObject->gosaMailServer);
+    }else{
+      /* Kolab shared folder names are like ' shared.uid@server.de ' 
+        So overwrite uid to match these folder names. Else we can't read quota settings etc. 
+        #FIXME is there a better way to detect if it is 'shared.' or 'shared+' or 'kolab+shared.' or what ever ?*/
+      $mailObject->uid = "shared.".$mailObject->uid."@".preg_replace("/^.*@/","",$mailObject->mail);
+      
     }
   }
 
+
+  function deleteMailbox($folder)
+  {
+    /* Remove shared folders and skip removing users. 
+       KolabD is not able to remove shared folders yet, so we do it instead */
+    if(preg_match("/^shared/",$folder)){
+      return mailMethodCyrus::deleteMailbox($folder);
+    }
+    return (TRUE);
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

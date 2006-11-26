@@ -280,12 +280,12 @@ class kolabAccount extends plugin
     $message= plugin::check();
 
     /* FBFuture is in days... */
-    if ($this->kolabFreeBusyFuture != "" && !preg_match('/^[0-9]+$/', $this->kolabFreeBusyFuture)){
+    if (!empty($this->kolabFreeBusyFuture) && !preg_match('/^[0-9]+$/', $this->kolabFreeBusyFuture)){
       $message[]= _("The value specified as Free Busy future needs to be an integer.");
     }
 
     /* Check for URL scheme... */
-    if ($this->calFBURL != "" && !@preg_match('/^[^:/]+://[a-z0-9_/.+~-]+$/i', $this->calFBURL)){
+    if(!empty($this->calFBURL) && !preg_match("/http+(s)*:\/\//",$this->calFBURL)){
       $message[]= _("The value specified as Free Busy Information URL is invalid.");
     }
 

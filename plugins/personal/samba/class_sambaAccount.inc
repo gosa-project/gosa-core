@@ -553,10 +553,18 @@ class sambaAccount extends plugin
     }
 
     /* 'normal' Checkboxes */
-    if ($this->pwdCanChange=="1"){
-      $smarty->assign("flagsP", "checked");
-    } else {
-      $smarty->assign("flagsP", "");
+    if($this->samba3){
+      if ($this->sambaPwdCanChange=="1"){
+        $smarty->assign("flagsP", "checked");
+      } else {
+        $smarty->assign("flagsP", "");
+      }
+    }else{
+      if ($this->pwdCanChange=="1"){
+        $smarty->assign("flagsP", "checked");
+      } else {
+        $smarty->assign("flagsP", "");
+      }
     }
     if ($this->password_expires=="1"){
       $smarty->assign("flagsC", "checked");
@@ -986,7 +994,7 @@ class sambaAccount extends plugin
         $this->handle_post_events("modify",array("uid" => $this->uid));
       }
     } else {
-      $this->handle_post_events("add",array("uid" => $this>uid));
+      $this->handle_post_events("add",array("uid" => $this->uid));
     }
 
   }

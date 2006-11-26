@@ -67,7 +67,7 @@ class posixAccount extends plugin
   var $SubSearch        = false;
 
   /* attribute list for save action */
-  var $CopyPasteVars  = array("grouplist","groupMembership","use_shadowMin","use_shadowMax","use_shadowWarning","use_shadowInactive","use_shadowExpire","must_change_password","force_ids","printerList","grouplist","savedGidNumber","savedUidNumber","savedGroupMembership");
+  var $CopyPasteVars  = array("grouplist","groupMembership","use_shadowMin","use_shadowMax","use_shadowWarning","use_shadowInactive","use_shadowExpire","must_change_password","printerList","grouplist","savedGidNumber","savedUidNumber");
   var $attributes     = array("homeDirectory", "loginShell", "uidNumber", "gidNumber", "gecos",
       "shadowMin", "shadowMax", "shadowWarning", "shadowInactive", "shadowLastChange",
       "shadowExpire", "gosaDefaultPrinter", "gosaDefaultLanguage", "uid","accessTo","trustModel");
@@ -171,12 +171,7 @@ class posixAccount extends plugin
     }
 
     /* Convert to seconds */
-    if ($this->shadowExpire != 0){
-      $this->shadowExpire*= 60 * 60 * 24;
-    } else {
-      $date= getdate();
-      $this->shadowExpire= floor($date[0] / (60*60*24)) * 60 * 60 * 24;
-    }
+    $this->shadowExpire= $this->convertToSeconds($this->shadowExpire);
 
     /* Generate shell list from /etc/gosa/shells */
     if (file_exists('/etc/gosa/shells')){
@@ -464,7 +459,15 @@ class posixAccount extends plugin
     }
 
     /* Fill calendar */
-    $date= getdate($this->shadowExpire);
+   
+    /* If this $this->shadowExpire is empty 
+        use current date as base for calculating selectbox values.
+       (This attribute is empty if this is a new user )*/ 
+    if(empty($this->shadowExpire)){
+      $date= getdate(time());
+    }else{
+      $date= getdate($this->shadowExpire);
+    }
 
     $days= array();
     for($d= 1; $d<32; $d++){
@@ -849,15 +852,15 @@ class posixAccount extends plugin
     del_lock ("uidnumber");
 
 
-    /* Posix accounts have group interrelationship, take care about these here. */
-    if ($this->force_ids == 0 && $this->primaryGroup == 0){
+    /* Posix accounts have group interrelationship, 
+        take care about these here if this is a new user without forced gidNumber. */
+    if ($this->force_ids == 0 && $this->primaryGroup == 0 && !$this->initially_was_account){
       $ldap->cd($this->config->current['BASE']);
       $ldap->search("(&(objectClass=posixGroup)(gidNumber=".$this->gidNumber."))", array("cn"));
 
       /* Create group if it doesn't exist */
       if ($ldap->count() == 0){
         $groupdn= preg_replace ('/^'.$this->config->current['DNMODE'].'=[^,]+,'.get_people_ou().'/i', 'cn='.$this->uid.','.get_groups_ou(), $this->dn);
-
         $g= new group($this->config, $groupdn);
         $g->cn= $this->uid;
         $g->force_gid= 1;
@@ -1048,15 +1051,15 @@ class posixAccount extends plugin
       $this->primaryGroup= $this->gidNumber;
     }
 
-	$ldap->cd($this->config->current['BASE']);
-  $ldap->search("(&(objectClass=gosaUserTemplate)(uid=".$template.")(accessTo=*))", array("cn","accessTo"));
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(&(objectClass=gosaUserTemplate)(uid=".$template.")(accessTo=*))", array("cn","accessTo"));
 
-	while($attr = $ldap->fetch()){
-		$tmp = $attr['accessTo'];
-		unset ($tmp['count']);
-		$this->accessTo = $tmp;	
-	}
-	
+    while($attr = $ldap->fetch()){
+      $tmp = $attr['accessTo'];
+      unset ($tmp['count']);
+      $this->accessTo = $tmp;	
+    }
+
     /* Adjust shadow checkboxes */
     foreach (array("shadowMin", "shadowMax", "shadowWarning", "shadowInactive",
           "shadowExpire") as $val){
@@ -1066,6 +1069,8 @@ class posixAccount extends plugin
         $this->$oval= "1";
       }
     }
+
+    $this->shadowExpire= $this->convertToSeconds($this->shadowExpire);
   }
 
   function get_next_id($attrib)
@@ -1157,11 +1162,31 @@ class posixAccount extends plugin
     reset ($this->grouplist);
   }
 
+ 
+  /* Get posts from copy & paste dialog */ 
+  function saveCopyDialog()
+  {
+    if(isset($_POST['homeDirectory'])){
+      $this->homeDirectory = $_POST['homeDirectory'];
+      if (isset ($_POST['force_ids'])){
+        $data= 1;
+        $this->gidNumber = $_POST['gidNumber'];
+        $this->uidNumber = $_POST['uidNumber'];
+      } else {
+        $data= 0;
+      }
+      if ($this->force_ids != $data){
+        $this->is_modified= TRUE;
+      }
+      $this->force_ids= $data;
+    }
+  }
+
 
   /* Create the posix dialog part for copy & paste */
   function getCopyDialog()
   {
-    /* Skip dialog creation if this is not a valid account*/
+    /* Skip dialog creation if this is not a valid account */
     if(!$this->is_account) return("");
     if ($this->force_ids == 1){
       $force_ids = "checked";
@@ -1229,6 +1254,26 @@ class posixAccount extends plugin
     $ret['string'] = $str;
     $ret['status'] = $sta;
     return($ret);
+  }
+
+  function PrepareForCopyPaste($source)
+  {
+    plugin::PrepareForCopyPaste($source);
+    
+    /* Avoid using the same gid/uid number as source user */
+    $this->savedUidNumber = $this->get_next_id("gidNumber");
+    $this->savedGidNumber = $this->get_next_id("uidNumber");
+  }
+
+  function convertToSeconds($val)
+  {
+    if ($val != 0){
+      $val*= 60 * 60 * 24;
+    } else {
+      $date= getdate();
+      $val= floor($date[0] / (60*60*24)) * 60 * 60 * 24;
+    }
+    return($val);
   }
 
 }

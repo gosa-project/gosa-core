@@ -38,9 +38,11 @@ class gofaxAccount extends plugin
   var $out_blocklist_dialog= FALSE;
   var $current_blocklist= array();
 
+  /* Copy & paste variables */
+  var $CopyPasteVars=array("facsimileTelephoneNumber");//,"goFaxRBlocklist","goFaxRBlockgroups","goFaxSBlocklist","goFaxSBlockgroups");
+
   /* attribute list for save action */
-  var $attributes= array("goFaxDeliveryMode", "goFaxIsEnabled","goFaxRBlockgroups","facsimileAlternateTelephoneNumber",
-      "goFaxPrinter", "goFaxDivertNumber", "goFaxLanguage", "goFaxFormat", "mail");
+  var $attributes= array("goFaxDeliveryMode", "goFaxIsEnabled","facsimileAlternateTelephoneNumber","goFaxRBlocklist","goFaxRBlockgroups","goFaxSBlocklist","goFaxSBlockgroups","goFaxPrinter", "goFaxDivertNumber", "goFaxLanguage", "goFaxFormat", "mail","facsimileTelephoneNumber");
   var $objectclasses= array("goFaxAccount");
 
   var $uid= "";
@@ -610,13 +612,6 @@ class gofaxAccount extends plugin
 
     plugin::remove_from_parent();
 
-    /* Zero out arrays */
-    foreach (array("goFaxRBlocklist", "goFaxRBlockgroups", "goFaxSBlocklist",
-          "goFaxSBlockgroups", "facsimileAlternateTelephoneNumber") as $val){
-
-      $this->attrs[$val]= array();
-    }
-
     /* Adapt mail settings if needed */
     if ((isset($this->parent->by_object['mailAccount']->is_account)) && ($this->parent->by_object['mailAccount']->is_account)){
       unset($this->attrs['mail']);
@@ -734,10 +729,9 @@ class gofaxAccount extends plugin
       $this->attrs[$val]= $this->$val;
     }
 
-    /* Adapt mail settings if needed */
-    unset($this->attrs['mail']);
-    if (!$this->has_mailAccount && $this->goFaxDeliveryMode && 32){
-      $this->attrs['mail']= $this->mail;
+    /* Do not save mail address ... it was possibly changed by mail plugin*/
+    if ((isset($this->parent->by_object['mailAccount']->is_account)) && ($this->parent->by_object['mailAccount']->is_account)){
+      unset($this->attrs['mail']);
     }
 
     /* Write back to ldap */

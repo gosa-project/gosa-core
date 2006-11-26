@@ -75,6 +75,7 @@ if (!$remove_lock){
       $mailAccount->save ();
       gosa_log ("User/mail object'".$ui->dn."' has been saved");
       $mailAccount->acl= "#none#";
+      $editacl= get_module_permission($acl, "mail", $ui->dn);
       del_lock ($ui->dn);
       sess_del ('edit');
 

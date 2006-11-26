@@ -517,8 +517,25 @@ class user extends plugin
           /* Read out data*/
           $timeto   = $certificate->getvalidto_date();
           $timefrom = $certificate->getvalidfrom_date();
-          $str = "<table summary=\"\" border=0><tr><td style='vertical-align:top'>CN</td><td>".preg_replace("/ /", "&nbsp;", $certificate->getname())."</td></tr></table><br>".
-                  sprintf(_("Certificate is valid from %s to %s and is currently %s."), "<b>".date('d M Y',$timefrom)."</b>","<b>".date('d M Y',$timeto)."</b>", $certificate->isvalid()?"<b><font style='color:green'>"._("valid")."</font></b>":"<b><font style='color:red'>"._("invalid")."</font></b>");
+
+          /* Additional info if start end time is '0' */
+          $add_str_info = "";
+          if($timeto == 0 && $timefrom == 0){
+            $add_str_info = "<br><i>"._("(Some types of certificates are currently not supported and may be displayed as 'invalid'.)")."</i>";
+          }
+
+          $str = "<table summary=\"\" border=0>
+                    <tr>
+                      <td style='vertical-align:top'>CN</td>
+                      <td>".preg_replace("/ /", "&nbsp;", $certificate->getname())."</td>
+                    </tr>
+                  </table><br>".
+                  
+                  sprintf(_("Certificate is valid from %s to %s and is currently %s."), 
+                        "<b>".date('d M Y',$timefrom)."</b>",
+                        "<b>".date('d M Y',$timeto)."</b>", 
+                        $certificate->isvalid()?"<b><font style='color:green'>"._("valid")."</font></b>": 
+                                                "<b><font style='color:red'>"._("invalid")."</font></b>").$add_str_info;
           $smarty->assign($cert."info",$str);
           $smarty->assign($cert."_state","true");
         } else {
@@ -661,6 +678,41 @@ class user extends plugin
       $og->save ();
     }
 
+    /* Kerberos server defined? */
+    if (isset($this->config->data['SERVERS']['KERBEROS'])){
+      $cfg= $this->config->data['SERVERS']['KERBEROS'];
+    }
+    if (isset($cfg['SERVER']) && function_exists('kadm5_init_with_password')){
+
+      /* Connect to the admin interface */
+      $handle = kadm5_init_with_password($cfg['SERVER'], $cfg['REALM'],
+          $cfg['ADMIN'], $cfg['PASSWORD']);
+
+      /* Errors? */		
+      if ($handle === FALSE){
+        print_red (_("Kerberos database communication failed"));
+        return (2);
+      }
+
+      /* Build user principal, get list of existsing principals */
+      $principal= $this->uid."@".$cfg['REALM'];
+      $principals = kadm5_get_principals($handle);
+
+      /* User exists in database? */
+      if (in_array($principal, $principals)){
+
+        /* Ok. User exists. Remove him/her */
+          $ret= kadm5_delete_principal ( $handle, $principal);
+          if ($ret === FALSE){
+            print_red (_("Can't remove user from kerberos database."));
+          }
+      }
+
+      /* Free kerberos admin handle */
+      kadm5_destroy($handle);
+    }
+
+
     /* Optionally execute a command after we're done */
     $this->handle_post_events("remove",array("uid" => $this->uid));
   }
@@ -728,9 +780,6 @@ class user extends plugin
     /* Only force save of changes .... 
        If this attributes aren't changed, avoid saving.
      */
-    if ($this->use_dob == "1"){
-      $this->dateOfBirth= date("Y-m-d", $this->dateOfBirth);
-    }
     if($this->gender=="0") $this->gender ="";
     if($this->preferredLanguage=="0") $this->preferredLanguage ="";
     
@@ -738,6 +787,12 @@ class user extends plugin
     /* First use parents methods to do some basic fillup in $this->attrs */
     plugin::save ();
 
+    if ($this->use_dob == "1"){
+      /* If it is an array, the generic page has never been loaded - so there's no difference. Using an array would cause an error btw. */
+      if(!is_array($this->attrs['dateOfBirth'])) {
+        $this->attrs['dateOfBirth']= date("Y-m-d", $this->attrs['dateOfBirth']);
+      }
+    }
     /* Remove additional objectClasses */
     $tmp= array();
     foreach ($this->attrs['objectClass'] as $key => $set){
@@ -990,7 +1045,7 @@ class user extends plugin
 
         /* Ok. User exists. Remove him/her when pw_storage has
            changed to be NOT kerberos. */
-        if ($this->pw_storage != "kerberos"){
+        if ($this->pw_storage != $this->config->current['KRBSASL']){
           $ret= kadm5_delete_principal ( $handle, $principal);
 
           if ($ret === FALSE){
@@ -1000,8 +1055,8 @@ class user extends plugin
 
       } else {
 
-        /* User doesn't exists, create it when pw_storage is kerberos. */
-        if ($this->pw_storage == "kerberos"){
+        /* User doesn't exists, create it when pw_storage is kerberos or SASL. */
+        if ($this->pw_storage == "kerberos" || $this->pw_storage == "sasl" ){
           $ret= kadm5_create_principal ( $handle, $principal);
 
           if ($ret === FALSE){
@@ -1302,7 +1357,7 @@ class user extends plugin
         
           foreach($attrs['gosaSubtreeACL'] as $attr){
             if((preg_match("/:user#/",$attr))||(preg_match("/:all/",$attr))){
-              $s =  preg_replace("/^.*ou=groups,/","",$attrs['dn']);
+              $s =  preg_replace("/^.*".get_groups_ou().",/","",$attrs['dn']);
 
               foreach($this->config->idepartments as $key => $dep) {
                 if(preg_match("/".$s."/i",$key)){
@@ -1381,6 +1436,23 @@ class user extends plugin
         $this->$attr = $_POST[$attr];
       }
     } 
+  }
+
+
+  function PrepareForCopyPaste($source)
+  {
+    plugin::PrepareForCopyPaste($source);
+
+    /* Reset certificate information addepted from source user
+        to avoid setting the same user certificate for the destination user. */
+    $this->userPKCS12= "";
+    $this->userSMIMECertificate= "";
+    $this->userCertificate= "";
+    $this->certificateSerialNumber= "";
+    $this->old_certificateSerialNumber= "";
+    $this->old_userPKCS12= "";
+    $this->old_userSMIMECertificate= "";
+    $this->old_userCertificate= "";
   }
 }
 

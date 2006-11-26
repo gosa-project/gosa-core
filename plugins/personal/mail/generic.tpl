@@ -69,7 +69,7 @@
  <tr style="padding-bottom:0px;">
   <td style="width:50%">
    <input type=checkbox name="drop_own_mails" value="1" {$drop_own_mails}
-	{$gosaMailDeliveryModeACL} title="{t}Select if you want to forward mails without getting own copies of them{/t}"> {t}No delivery to own mailbox{/t}
+	{$drop_own_mailsACL} title="{t}Select if you want to forward mails without getting own copies of them{/t}"> {t}No delivery to own mailbox{/t}
    <br>
    <input type=checkbox name="use_vacation" value="1" {$use_vacation}
 	{$gosaVacationMessageACL} title="{t}Select to automatically response with the vacation message defined below{/t}"> {t}Activate vacation message{/t}

@@ -30,7 +30,13 @@ class faiProfile extends plugin
   var $FAIclasses       = array();  // Contains classname seperated in an array
   var $FAIAllclasses    = array();  // Contains all possible Classnames
 
-  var $FAIstate      = "";
+  var $FAIstate       = "";
+  var $base           = "";
+  var $release        = "";
+  var $copy_paste_mode= false;
+  var $cut_paste_mode = false;
+
+  var $CopyPasteVars  = array("FAIclass","FAIclasses","FAIAllclasses");
 
   function faiProfile($config, $dn= NULL)
   {
@@ -87,7 +93,7 @@ class faiProfile extends plugin
     /* Get ldap connection */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($base);
-
+    $sort = array();
     /* Capture objects from given base */
     $result = array();
     foreach($ObjectTypes as $oc => $data){
@@ -380,26 +386,45 @@ class faiProfile extends plugin
     /* Call common method to give check the hook */
     $message= plugin::check();
 
-    if(count($this->FAIclasses) == 0){
-      $message[]=_("Please assign at least one class to this  profile.");
-    }
+    if($this->copy_paste_mode){
 
-    if(empty($this->cn)){
-      $message[]=_("Please enter a valid name.");
-    }
+      /* If this is a new script, check if a script with this name already exists */
+      if(!empty($this->release) && ($this->copy_paste_mode || $this->cut_paste_mode) ){
 
-    $ldap = $this->config->get_ldap_link();
-    $ldap->cd($_SESSION['CurrentMainBase']);
-    if ($this->old_cn == ""){
-      $ldap->search("(&(objectClass=FAIprofile)(cn=".$this->cn."))",array("*"));
-    } else {
-      $ldap->search("(&(objectClass=FAIprofile)(cn=".$this->cn.")(!cn=".$this->old_cn."))",array("*"));
-    }
+        /* Check if current name is already used for fai scripts in selected release */
+        $dn = 'cn='.$this->cn.",ou=profiles,".$this->release;
+        $ldap = $this->config->get_ldap_link();
+        $ldap->cat($dn);
+        if($ldap->count()){
 
-    if($ldap->count()){
-      $message[]=_("There is already a profile with this class name defined.");
-    }
+          $r =convert_department_dn($this->release);;
+          $message[] = sprintf(_("Can't insert a script named '%s' in '%s' there is already a script with the given name."),$this->cn,$r);
+        }
+      }
+    }else{
+      if(count($this->FAIclasses) == 0){
+        $message[]=_("Please assign at least one class to this  profile.");
+      }
 
+      if(empty($this->cn)){
+        $message[]=_("Please enter a valid name.");
+      }
+
+      $ldap = $this->config->get_ldap_link();
+      $release = "ou=profiles,ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
+      if($_SESSION['faifilter']['branch']!="main"){
+        $release = "ou=profiles,".$_SESSION['faifilter']['branch'];
+      }
+      $ldap->cd($release);
+      if ($this->old_cn == ""){
+        $ldap->search("(&(objectClass=FAIprofile)(cn=".$this->cn."))",array("*"));
+      } else {
+        $ldap->search("(&(objectClass=FAIprofile)(cn=".$this->cn.")(!cn=".$this->old_cn."))",array("*"));
+      }
+      if($ldap->count()){
+        $message[]=_("There is already a profile with this class name defined.");
+      }
+    }
     return ($message);
   }
 
@@ -417,6 +442,11 @@ class faiProfile extends plugin
     }
 
     $this->attrs['FAIclass']=trim($this->FAIclass);
+
+    /* Copy & Paste : Ensure that FAIstate is copied too */
+    if($this->copy_paste_mode && preg_match("/freeze/",$this->FAIstate)){
+      $this->attrs['FAIstate'] = $this->FAIstate;
+    }
 
     $ldap->cat($this->dn,array("objectClass"));
     if($ldap->count()!=0){
@@ -436,6 +466,29 @@ class faiProfile extends plugin
     /* Do object tagging */
     $this->handle_object_tagging();
     show_ldap_error($ldap->get_error());
+  }
+
+  
+  /* return copy & paste dialog
+   */
+  function getCopyDialog()
+  {
+    /* Ask for cn */
+    $smarty = get_smarty();
+    $smarty->assign("cn" ,$this->cn);
+    $str = $smarty->fetch(get_template_path("paste_fai_object.tpl",TRUE));
+    $ret = array();
+    $ret['string'] = $str;
+    $ret['status'] = "";
+    return($ret);
+  }
+
+  /* Get posted cn */
+  function saveCopyDialog()
+  {
+    if(isset($_POST['cn'])){
+      $this->cn = $_POST['cn'];
+    }
   }
 }
 

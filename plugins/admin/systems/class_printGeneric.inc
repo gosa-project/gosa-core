@@ -64,11 +64,11 @@ class printgeneric extends plugin
     }
 
     /* Update dn, to ensure storing as printer instead of WS / terminal */
-    if($this->BelongsTo == "Terminal"){
+    if($this->BelongsTo == "Terminal" || $this->BelongsTo == "TerminalTemplate"){
       $this->dn= preg_replace("/ou=terminals,/","ou=printers,",$this->dn);
     }
 
-    if($this->BelongsTo == "Workstation"){
+    if($this->BelongsTo == "Workstation" || $this->BelongsTo == "WorkstationTemplate"){
       $this->dn= preg_replace("/ou=workstations,/","ou=printers,",$this->dn);
     }
 
@@ -686,6 +686,19 @@ class printgeneric extends plugin
       $this->PPDdialogToSave->save_ppd();
     }
 
+    if(preg_match("/https/i",$_SERVER['HTTP_REFERER'])){
+      $method="https://";
+    }else{
+      $method="http://";
+    }
+
+    /* If no ppd is selected, remove this attribute */
+    if(!empty($this->gotoPrinterPPD)) {
+      $this->gotoPrinterPPD = $method.str_replace("//","/",$_SERVER['SERVER_NAME']."/ppd/".$this->gotoPrinterPPD);
+    }else{
+      $this->gotoPrinterPPD = array();
+    }
+
     $dn= $this->dn;
     plugin::save();
     $ldap= $this->config->get_ldap_link();
@@ -704,20 +717,6 @@ class printgeneric extends plugin
       }
       $this->attrs= $attrs;
     }
-
-    if(preg_match("/https/i",$_SERVER['HTTP_REFERER'])){
-      $method="https://";
-    }else{
-      $method="http://";
-    }
-
-    /* Only save ppd path, if the path is not empty (no ppd selected )*/ 
-    if(!empty($this->gotoPrinterPPD)) {
-      $this->attrs['gotoPrinterPPD'] = $method.str_replace("//","/",$_SERVER['SERVER_NAME']."/ppd/".$this->gotoPrinterPPD);
-    }else{
-      $this->attrs['gotoPrinterPPD'] = array();
-    }
-
 
     /* Append printer user 
      */
@@ -759,12 +758,25 @@ class printgeneric extends plugin
       }
     }
 
+    /* Ensure to create a new object */
+    if(preg_match("/ou=incoming,/",$this->orig_dn)){
+      $this->orig_dn = "new";
+    }
+
     /* Write back to ldap */
     $ldap= $this->config->get_ldap_link();
     if ($this->orig_dn == 'new'){
       $ldap->cd($this->config->current['BASE']);
       $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
       $ldap->cd($this->dn);
+     
+      /* Remove empty values */ 
+      foreach($this->attrs as $name => $value){
+        if(empty($value)){
+          unset($this->attrs[$name]);
+        }
+      }
+      
       $ldap->add($this->attrs);
       $this->handle_post_events("add");
     } else {

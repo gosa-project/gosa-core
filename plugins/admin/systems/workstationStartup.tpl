@@ -154,3 +154,4 @@
   <!-- // First input field on page
   document.mainform.gotoLdapServer.focus();
   -->
+</script>

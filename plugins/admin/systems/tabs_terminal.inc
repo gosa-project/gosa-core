@@ -35,6 +35,12 @@ class termtabs extends tabs
       $this->by_object['termstartup']->gotoTerminalPath=
         $this->by_object['termgeneric']->gotoTerminalPath;
     }
+   
+    /* Assign current cn to all other plugins */ 
+    $baseobject= $this->by_object['termgeneric'];
+    foreach ($this->by_object as $key => $obj){
+      $this->by_object[$key]->cn= $baseobject->cn;
+    }
   }
 
 

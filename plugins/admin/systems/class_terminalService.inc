@@ -29,6 +29,7 @@ class termservice extends plugin
   var $gotoScannerClients= "";
   var $gotoScannerBackend= "";
   var $goFonHardware= "automatic";
+  var $AutoSync = false;
 
   /* Needed values and lists */
   var $ignore_account= TRUE;
@@ -194,6 +195,8 @@ class termservice extends plugin
     $this->hardware_list["automatic"]= _("automatic");
     ksort($this->hardware_list);
 
+    /* Convert gotoLpdEnable */
+    $this->gotoLpdEnable= preg_match("/yes/",$this->gotoLpdEnable);
 
       /* Load hardware list */
     $ldap= $this->config->get_ldap_link();
@@ -233,6 +236,11 @@ class termservice extends plugin
             break;
         }
       }
+    }
+    if(preg_match("/\+/",$this->gotoXHsync)){
+      $this->AutoSync = true;
+      $this->gotoXHsync = preg_replace("/\+/","-",$this->gotoXHsync);
+      $this->gotoXVsync = preg_replace("/\+/","-",$this->gotoXVsync);
     }
   }
 
@@ -319,6 +327,17 @@ class termservice extends plugin
     $smarty->assign ("hardware_list", $hl);
     $smarty->assign ("gotoXMonitor", $this->gotoXMonitor);
 
+    $smarty->assign("AutoSyncACL",chkacl($this->acl,"AutoSync"));
+  
+    if($this->AutoSync){
+      $smarty->assign("AutoSyncCHK"," checked ");
+      $smarty->assign("hiddenState"," disabled ");
+    }else{
+      $smarty->assign("AutoSyncCHK"," ");
+      $smarty->assign("hiddenState","");
+    }
+
+  
     /* Show main page */
     return($smarty->fetch (get_template_path('terminalService.tpl', TRUE)));
   }
@@ -344,7 +363,15 @@ class termservice extends plugin
           $this->$val= TRUE;
         }
       }
+    } 
+    if(isset($_POST['gotoXDriver'])){
+      if(isset($_POST['AutoSync'])){
+        $this->AutoSync = true;
+      }else{
+        $this->AutoSync = false;
+      }
     }
+
   }
 
 
@@ -355,38 +382,43 @@ class termservice extends plugin
     $message= plugin::check();
 
     /* Default entries can use blank hsync/vsync entries */
-    if ($this->dn != "" && $this->cn != "default" && $this->cn != "wdefault"){
+    if ($this->dn != "" && $this->cn != "default" && $this->cn != "default"){
 
-      /* Check vsync for correct usage */
-      $val= preg_replace ("/\s/", "", $this->gotoXVsync);
-      if (!preg_match ("/^\d+(\.\d+)?(\-\d+(\.\d+)?)?$/", $val)
-          && chkacl ($this->acl, "gotoXVsync") == ""){
+      /* But only if no auto sync is enabled... */
+      if (!$this->AutoSync){
 
-        $message[]= _("Please specify a valid VSync range.");
-      } elseif (chkacl ($this->acl, "gotoXVsync") == ""){
-        list($v1,$v2)= split ("-", $val);
-        if ($v2 != ""){
-          if ($v1 > $v2){
-            $message[]= _("Please specify a valid VSync range.");
+        /* Check vsync for correct usage */
+        $val= preg_replace ("/\s/", "", $this->gotoXVsync);
+        if (!preg_match ("/^\d+(\.\d+)?([-]\d+(\.\d+)?)?$/", $val)
+            && chkacl ($this->acl, "gotoXVsync") == ""){
+
+          $message[]= _("Please specify a valid VSync range.");
+        } elseif (chkacl ($this->acl, "gotoXVsync") == ""){
+          list($v1,$v2)= preg_split ("/[-+]/", $val);
+          if ($v2 != ""){
+            if ($v1 > $v2){
+              $message[]= _("Please specify a valid VSync range.");
+            }
           }
         }
-      }
 
-      /* Check hsync for correct usage */
-      $val= preg_replace ("/\s/", "", $this->gotoXHsync);
-      if (!preg_match ("/^\d+(\.\d+)?(\-\d+(\.\d+)?)?$/", $val)
-          && chkacl ($this->acl, "gotoXHsync") == ""){
+        /* Check hsync for correct usage */
+        $val= preg_replace ("/\s/", "", $this->gotoXHsync);
+        if (!preg_match ("/^\d+(\.\d+)?([-]\d+(\.\d+)?)?$/", $val)
+            && chkacl ($this->acl, "gotoXHsync") == ""){
 
-        $message[]= _("Please specify a valid HSync range.");
-      } elseif (chkacl ($this->acl, "gotoXHsync") == ""){
-        list($v1,$v2)= split ("-", $val);
-        if ($v2 != ""){
-          if ($v1 > $v2){
-            $message[]= _("Please specify a valid HSync range.");
+          $message[]= _("Please specify a valid HSync range.");
+        } elseif (chkacl ($this->acl, "gotoXHsync") == ""){
+          list($v1,$v2)= preg_split ("/[-+]/", $val);
+          if ($v2 != ""){
+            if ($v1 > $v2){
+              $message[]= _("Please specify a valid HSync range.");
+            }
           }
         }
       }
     }
+
     return ($message);
   }
 
@@ -394,6 +426,9 @@ class termservice extends plugin
   /* Save to LDAP */
   function save()
   {
+    /* Convert to string */
+    $this->gotoLpdEnable= $this->gotoLpdEnable?"Yes":"No";
+
     plugin::save();
 
     /* Strip out 'default' values */
@@ -405,6 +440,11 @@ class termservice extends plugin
       if ($this->attrs[$val] == "default"){
         $this->attrs[$val]= array();
       }
+    }
+
+    if($this->AutoSync){
+      $this->attrs['gotoXHsync'] = "30+55";
+      $this->attrs['gotoXVsync'] = "50+70";
     }
 
     /* Write back to ldap */

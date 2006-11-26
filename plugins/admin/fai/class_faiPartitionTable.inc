@@ -20,6 +20,12 @@ class faiPartitionTable extends plugin
   var $dialog           = NULL;     // a dialog, e.g. new disk dialog
 
   var $FAIstate         = "";
+  var $base             = "";
+  var $release          = "";
+  var $copy_paste_mode  = false;
+  var $cut_paste_mode  = false;
+
+  var $CopyPasteVars  = array("disks");
 
   function faiPartitionTable ($config, $dn= NULL)
   {
@@ -316,6 +322,19 @@ class faiPartitionTable extends plugin
     /* Call common method to give check the hook */
     $message= plugin::check();
 
+    /* If this is a new script, check if a script with this name already exists */
+    if(!empty($this->release) && ($this->copy_paste_mode || $this->cut_paste_mode) ){
+
+      /* Check if current name is already used for fai scripts in selected release */
+      $dn = 'cn='.$this->cn.",ou=disk,".$this->release;
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cat($dn);
+      if($ldap->count()){
+
+        $r =convert_department_dn($this->release);;
+        $message[] = sprintf(_("Can't insert a new fai partition table named '%s' in '%s' there is already one defined with the given name."),$this->cn,$r);
+      }
+    }
     return ($message);
   }
 
@@ -330,6 +349,11 @@ class faiPartitionTable extends plugin
      * 2 : Append Disk with cn and  description.
      * 3 : Save partitions for each disk
      */  
+
+    /* Copy & Paste : Ensure that FAIstate is copied too */
+    if($this->copy_paste_mode && preg_match("/freeze/",$this->FAIstate)){
+      $this->attrs['FAIstate'] = $this->FAIstate;
+    }
 
     $ldap = $this->config->get_ldap_link();
 
@@ -370,6 +394,11 @@ class faiPartitionTable extends plugin
       $disk_attrs['description']  =  $disk['description']; 
       $disk_attrs['objectClass']  =  array("top","FAIclass","FAIpartitionDisk");
 
+      /* We currently use the copy & paste method */
+      if($this->copy_paste_mode){
+        $disk['status'] = "new";
+      }
+
       if($disk['status']=="new"){
         $ldap->cat($disk_dn,array("objectClass"));
         if($ldap->count()){
@@ -383,7 +412,7 @@ class faiPartitionTable extends plugin
       if(isset($attrs['objectClass']) && in_array_ics("gosaAdministrativeUnitTag",$attrs['objectClass'])){
         $disk_attrs['objectClass'][] = "gosaAdministrativeUnitTag";
       }
- 
+
       if($disk['status'] == "delete"){
         $ldap->cd($disk_dn);
         $ldap->rmdir_recursive($disk_dn);
@@ -439,6 +468,11 @@ class faiPartitionTable extends plugin
           /* Unset status attributes */
           unset($partition_attrs['status']);
           unset($partition_attrs['old_cn']);
+
+          /* We currently use the copy & paste method */
+          if($this->copy_paste_mode){
+            $partition['status']="new";
+          }
 
           /* Check if this partition is realy new .. */
           if($partition['status']=="new"){
@@ -506,6 +540,29 @@ class faiPartitionTable extends plugin
       $this->handle_object_tagging($partition_dn, $this->gosaUnitTag);
     }
     $this->handle_post_events("add");
+  }
+
+  
+  /* return copy & paste dialog
+   */
+  function getCopyDialog()
+  {
+    /* Ask for cn */
+    $smarty = get_smarty();
+    $smarty->assign("cn" ,$this->cn);
+    $str = $smarty->fetch(get_template_path("paste_fai_object.tpl",TRUE));
+    $ret = array();
+    $ret['string'] = $str;
+    $ret['status'] = "";
+    return($ret);
+  }
+
+  /* Get posted cn */
+  function saveCopyDialog()
+  {
+    if(isset($_POST['cn'])){
+      $this->cn = $_POST['cn'];
+    }
   }
 }
 

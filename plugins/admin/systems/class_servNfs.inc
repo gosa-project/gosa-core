@@ -180,7 +180,7 @@ class servnfs extends plugin
       $message[]=_("Please specify a valid path for your setup.");
     }
 
-    // only 0-9a-z
+    // Skip if there are diallowed characters 
     if(!$this->is_edit){
       if(!preg_match("/^[a-z0-9\.\-_]+$/i",$this->name)){
         $message[]=_("Please specify a valid name for your share.");
@@ -190,11 +190,11 @@ class servnfs extends plugin
       }
     }
 
-    if(preg_match("/[^a-z0-9._+ \|-]+/i",$this->description)){
+    if(preg_match("/[^a-z0-9\._+ -]+/i",$this->description)){
       $message[]=_("Description contains invalid characters.");
     }
 
-    if(preg_match("/[^a-z0-9._+ |-]/i",$this->volume)){
+    if(preg_match("/[^a-z0-9\._+ -]/i",$this->volume)){
       $message[]=_("Volume contains invalid characters.");
     }
   
@@ -202,7 +202,7 @@ class servnfs extends plugin
       $message[]=_("Path contains invalid characters.");
     }
 
-    if(preg_match("/[^a-z0-9._+ \|-]/i",$this->option)){
+    if(preg_match("/[^a-z0-9\._,=+ -]/i",$this->option)){
       $message[]=_("Option contains invalid characters.");
     }
 

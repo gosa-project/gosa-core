@@ -81,6 +81,7 @@ if (!$remove_lock){
       $posixAccount->save ();
       gosa_log ("User/posix object'".$ui->dn."' has been saved");
       $posixAccount->acl= "#none#";
+      $editacl= get_module_permission($acl, "posix", $ui->dn);
       del_lock ($ui->dn);
       sess_del ('edit');
 

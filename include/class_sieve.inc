@@ -119,8 +119,13 @@ class sieve
             $this->error_raw[]=substr($this->line, 0, strlen($this->line) -2);    //we want to be nice and strip crlf's
             $this->err_recv = strlen($this->line);
 
-            while($this->err_recv < $this->err_len){
+	    /* Avoid loop till memory is full 
+               This can happen if sieve script is modified via external scripts and not by gosa .. */
+	    $max = 10000;
+            $cur = 0 ; 
+            while($this->err_recv < $this->err_len && ($cur < $max)){
                 //print "<br>Trying to receive ".($this->err_len-$this->err_recv)." bytes for result<br>";
+                $cur ++ ; 
                 $this->line = fgets($this->fp, ($this->err_len-$this->err_recv));
                 $this->error_raw[]=substr($this->line, 0, strlen($this->line) -2);    //we want to be nice and strip crlf's
                 $this->err_recv += strlen($this->line);

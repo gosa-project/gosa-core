@@ -300,6 +300,17 @@ class config  {
       $this->current['PASSWORD']= $referral['PASSWORD'];
     }
 
+    /* Possibly load kerberos style */
+    if (isset($this->current['KRBSASL'])){
+      if (preg_match('/^(yes|true)$/i', $this->current['KRBSASL'])){
+        $this->current['KRBSASL']= "sasl";
+      } else {
+        $this->current['KRBSASL']= "kerberos";
+      }
+    } else {
+      $this->current['KRBSASL']= "kerberos";
+    }
+
     /* Load server informations */
     $this->load_servers();
   }

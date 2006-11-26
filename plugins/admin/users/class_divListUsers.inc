@@ -231,7 +231,7 @@ class divListUsers extends MultiSelectWindow
               $fonac = preg_replace("/%image%/", "select_phone_connected.png", $fonimg);
               $fonac = preg_replace("/%KEY%/", "$key", $fonac);
               $fonac = preg_replace("/%title%/", $connected, $fonac);
-              $ip_port= " - ".$mysql_entry[3].":".$mysql_entry[2];
+              #$ip_port= " - ".$mysql_entry[3].":".$mysql_entry[2];
             }
             if((isset($mysql_entry[0]))&&($mysql_entry[0]==0)){
               $connected = " | "._("Offline");

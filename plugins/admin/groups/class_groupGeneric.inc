@@ -41,6 +41,8 @@ class group extends plugin
 
   var $allowGroupsWithSameNameInOtherSubtrees = true;
 
+  var $CopyPasteVars          = array("force_gid","fon_group","smbgroup","groupType","sambaSID","sambaDomainName","SID","nagios_group","sambaGroupType");
+
   /* attribute list for save action */
   var $attributes= array("cn", "description", "gidNumber","memberUid","sambaGroupType","sambaSID");
   var $objectclasses= array("top", "posixGroup");
@@ -155,7 +157,9 @@ class group extends plugin
         $this->base= dn2base($ui->dn);
       }
     } else {
-      $this->base= preg_replace ("/^[^,]+,[^,]+,/", "", $this->dn);
+
+      /* Get object base */
+      $this->base =preg_replace ("/^[^,]+,".normalizePreg(get_groups_ou())."/","",$this->dn);
     }
 
     /* This is always an account */

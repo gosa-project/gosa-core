@@ -37,6 +37,12 @@ class faiTemplate extends plugin
   var $SubObjects       = array();  // All leafobjects of this object
 
   var $FAIstate         = "";
+  var $base             = "";
+  var $release          = "";
+  var $copy_paste_mode  = false;
+  var $cut_paste_mode   = false;
+
+  var $CopyPasteVars  = array("SubObjects");
 
   function faiTemplate ($config, $dn= NULL)
   {
@@ -338,6 +344,19 @@ class faiTemplate extends plugin
     /* Call common method to give check the hook */
     $message= plugin::check();
 
+    /* If this is a new script, check if a script with this name already exists */
+    if(!empty($this->release) && ($this->copy_paste_mode || $this->cut_paste_mode) ){
+
+      /* Check if current name is already used for fai scripts in selected release */
+      $dn = 'cn='.$this->cn.",ou=templates,".$this->release;
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cat($dn);
+      if($ldap->count()){
+
+        $r =convert_department_dn($this->release);;
+        $message[] = sprintf(_("Can't insert a fai template named '%s' in '%s' there is already a template with the given name."),$this->cn,$r);
+      }
+    }
     return ($message);
   }
 
@@ -348,6 +367,11 @@ class faiTemplate extends plugin
     plugin::save();
 
     $ldap = $this->config->get_ldap_link();
+
+    /* Copy & Paste : Ensure that FAIstate is copied too */
+    if($this->copy_paste_mode && preg_match("/freeze/",$this->FAIstate)){
+      $this->attrs['FAIstate'] = $this->FAIstate;
+    }
 
     $ldap->cat($this->dn,array("objectClass"));
     if($ldap->count()!=0){
@@ -378,7 +402,12 @@ class faiTemplate extends plugin
     /* We do not need to save untouched objects */
     foreach($this->SubObjects as $name => $obj){
       if($obj['status'] == "FreshLoaded"){
-        unset($this->SubObjects[$name]);
+        if($this->copy_paste_mode){
+          $this->SubObjects[$name] = $this->get_object_attributes($obj,$this->sub_Load_Later);
+          $this->SubObjects[$name]['status'] = "new";
+        }else{
+          unset($this->SubObjects[$name]);
+        }
       }
     }
 
@@ -404,8 +433,10 @@ class faiTemplate extends plugin
       foreach($attributes as $attrs){
         if(empty($obj[$attrs])){
           $obj[$attrs] = array();
+          $tmp[$attrs] = $obj[$attrs];
+        }else{
+          $tmp[$attrs] = stripslashes ($obj[$attrs]);
         }
-        $tmp[$attrs] = stripslashes ($obj[$attrs]);
       }    
         
       $tmp['objectClass'] = $this->subClasses;
@@ -434,12 +465,12 @@ class faiTemplate extends plugin
         $ldap->cd($sub_dn);
         $ldap->rmdir_recursive($sub_dn);
         $this->handle_post_events("remove");
-        show_ldap_error($ldap->get_error(), _("Removing FAI template base failed")); 
+        show_ldap_error($ldap->get_error(), _("Removing FAI template entry failed")); 
       }elseif($obj['status'] == "edited"){
         $ldap->cd($sub_dn);
         $this->cleanup();
         $ldap->modify ($tmp); 
-        show_ldap_error($ldap->get_error(), _("Saving FAI template failed")); 
+        show_ldap_error($ldap->get_error(), _("Modifying FAI template entry failed")); 
 
         $this->handle_post_events("modify");
       }elseif($obj['status']=="new"){
@@ -452,10 +483,32 @@ class faiTemplate extends plugin
         $ldap->cd($sub_dn);
         $ldap->add($tmp); 
         $this->handle_post_events("add");
-        show_ldap_error($ldap->get_error(), _("Saving FAI template failed")); 
+        show_ldap_error($ldap->get_error(), _("Creating FAI template entry failed")); 
       }
 
       $this->handle_object_tagging($sub_dn, $this->gosaUnitTag);
+    }
+  }
+  
+  /* return copy & paste dialog
+   */
+  function getCopyDialog()
+  {
+    /* Ask for cn */
+    $smarty = get_smarty();
+    $smarty->assign("cn" ,$this->cn);
+    $str = $smarty->fetch(get_template_path("paste_fai_object.tpl",TRUE));
+    $ret = array();
+    $ret['string'] = $str;
+    $ret['status'] = "";
+    return($ret);
+  }
+
+  /* Get posted cn */
+  function saveCopyDialog()
+  {
+    if(isset($_POST['cn'])){
+      $this->cn = $_POST['cn'];
     }
   }
 }
