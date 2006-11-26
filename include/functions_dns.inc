@@ -356,7 +356,6 @@ function getDNSHostEntries($config,$name,$silent = false)
   	if(!array_key_exists($zoneIndex[0],$zonesArr)) $zonesArr[$zoneIndex[0]] = array();
 		array_push($zonesArr[$zoneIndex[0]],$zoneIndex[1]);
   }
-<<<<<<< .working
   
   foreach($zonesArr as $nameServer => $nameServerArr){
   	foreach($nameServerArr as $zoneArr => $zone){
@@ -367,20 +366,6 @@ function getDNSHostEntries($config,$name,$silent = false)
     	  $foundIn [] = $attrs['dn'];
     	}
   	}
-=======
-  
-  foreach($zonesArr as $nameServer => $nameServerArr){
-  	$foundInTmp = array();
-  	foreach($nameServerArr as $zoneArr => $zone){
-  		$zoneMix = $nameServer."/".$zone;
-    	$zoneDn = getDNSZoneDN($config,$zoneMix);
-    	$ldap->ls("(&(objectClass=dNSZone)(zoneName=*)(relativeDomainName=".$name.")(!(relativeDomainName=@)))", $zoneDn,$attrs = array("*"));
-    	while($attrs = $ldap->fetch()){
-    	  $foundInTmp [] = $attrs['dn'];
-    	  $foundIn [] = $attrs['dn'];
-    	}
-  	}
->>>>>>> .merge-right.r5419
   }
 
   /* No zone found which contains an entry for us
