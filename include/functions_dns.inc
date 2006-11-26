@@ -358,13 +358,11 @@ function getDNSHostEntries($config,$name,$silent = false)
   }
   
   foreach($zonesArr as $nameServer => $nameServerArr){
-  	$foundInTmp = array();
   	foreach($nameServerArr as $zoneArr => $zone){
   		$zoneMix = $nameServer."/".$zone;
     	$zoneDn = getDNSZoneDN($config,$zoneMix);
     	$ldap->ls("(&(objectClass=dNSZone)(zoneName=*)(relativeDomainName=".$name.")(!(relativeDomainName=@)))", $zoneDn,$attrs = array("*"));
     	while($attrs = $ldap->fetch()){
-    	  $foundInTmp [] = $attrs['dn'];
     	  $foundIn [] = $attrs['dn'];
     	}
   	}
@@ -377,11 +375,12 @@ function getDNSHostEntries($config,$name,$silent = false)
   }
 
   /* Get host informations from zone
+   * TODO : !!!! $foundIn[0] ???? change!!!
+   * 
    */ 
   $ldap->cd($foundIn[0]);
   $ldap->search("(&(objectClass=dNSZone)(zoneName=*)(!(relativeDomainName=@)))",array("*"));
   while($attrs = $ldap->fetch()){
-
     /* If relative domainname == cn
      * Try to read dnsclass / TTl / zone
      */

@@ -120,8 +120,9 @@ class openca extends plugin
     $res = array_merge($res,get_list($filter,$this->ui->subtreeACL, "ou=incoming,".$base,
           array("cn", "uid", "SPKAC"), GL_NONE | GL_SIZELIMIT));    
     
+    //TODO - This for could be removed ($this->sslObjects[] = $res)
 		foreach($res as $sslObj){
-			$this->sslObjects[] = $sslObj["dn"];
+			$this->sslObjects[] = $sslObj;
 		}
 
     reset ($this->sslObjects);    

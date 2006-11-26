@@ -122,10 +122,13 @@ class divListOpenCA extends MultiSelectWindow {
     $this->GenHeader();
 	}
 	
-	function setEntries($sslObjects){
-		foreach($sslObjects as $display){
+	function setEntries($sslObjects){		
+		foreach($sslObjects as $sslObject){
+
+			$str = $sslObject["cn"][0];
+		
 			$elem1 = array("string" => "");
-			$elem2 = array("string" => $display);
+			$elem2 = array("string" => $str);
 			$elem3 = array("string" => "");		
 			$this->AddElement( array($elem1,$elem2,$elem3));
 		}

@@ -72,7 +72,8 @@ class termDNS extends plugin
        */
       $this->Zones        = getAvailableZones($config);
 
-      /* Get Entry 
+      /* Get Entry
+       * TODO : must change upon zoneName changed... 
        */
       $this->dnsEntry     = getDNSHostEntries($config,$this->OrigCn);
 
@@ -208,6 +209,9 @@ class termDNS extends plugin
     $smarty->assign("Zones",$this->Zones);
     $smarty->assign("ZoneKeys",($this->Zones));
     $smarty->assign("IPisMust",(($this->IPisMust)||($this->DNS_is_account)));
+    
+    if(isset($_POST["zoneName"]))
+    	$smarty->assign("zoneName",$_POST["zoneName"]);
   
     $tmp = $this->generateRecordsList();
     
@@ -325,8 +329,6 @@ class termDNS extends plugin
       $checkArray = array();
       $onlyOnce   = array();
 
-			// There can be many CNAME records
-      //$onlyOnce['cNAMERecord'] = 0;
 
       /* Walk through all entries and detect duplicates or mismatches
        */  
