@@ -568,6 +568,7 @@ class LDAP{
 
           /* Replace FAIdebianRelease with new release name */
           if(in_array("FAIpackageList" , $attr['objectClass'])){
+            $attr['FAIdebianRelease'] = $destinationName;
             if($type=="branch"){
               $attr['FAIstate'] ="branch";
             }elseif($type=="freeze"){
