@@ -2,7 +2,7 @@ GOsa2 changelog
 ===============
 
 * gosa 2.5.7
-  -
+  - Include personal title in DN
 
 * gosa 2.5.6
   - Copy & paste implemented into FAI

@@ -84,8 +84,14 @@ class usertabs extends tabs
     /* Check for new 'dn', in order to propagate the
        'dn' to all plugins */
     $baseobject= $this->by_object['user'];
+    if ($baseobject->personalTitle == ""){
+      $pt= "";
+    } else {
+      $pt= $baseobject->personalTitle." ";
+    }
+
     if ($this->dn == 'new'){
-      $baseobject->cn= $baseobject->givenName." ".$baseobject->sn;
+      $baseobject->cn= $tp.$baseobject->givenName." ".$baseobject->sn;
       $this->by_object['user']= $baseobject;
       if (isset($this->config->current['DNMODE']) && $this->config->current['DNMODE'] == "uid"){
         $this->dn= 'uid='.$baseobject->uid.','.get_people_ou().$baseobject->base;
@@ -99,7 +105,7 @@ class usertabs extends tabs
       if (isset($this->config->current['DNMODE']) && $this->config->current['DNMODE'] == "uid"){
         $new_dn= 'uid='.$baseobject->uid.','.get_people_ou().$baseobject->base;
       } else {
-        $new_dn= "cn=".$baseobject->givenName." ".$baseobject->sn.','.
+        $new_dn= "cn=".$pt.$baseobject->givenName." ".$baseobject->sn.','.
           get_people_ou().$baseobject->base;
       }
       
@@ -119,7 +125,7 @@ class usertabs extends tabs
       if ($this->dn != $new_dn){
 
         /* Write entry on new 'dn' */
-        $baseobject->cn= $baseobject->givenName." ".$baseobject->sn;
+        $baseobject->cn= $pt.$baseobject->givenName." ".$baseobject->sn;
         $baseobject->move($this->dn, $new_dn);
         $this->by_object['user']= $baseobject;
 
