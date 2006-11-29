@@ -37,11 +37,13 @@ class appgroup extends plugin
 
   var $CopyPasteVars            = array("Categories");
   var $gosaApplicationParameter ;
+  var $ui                       ;
 
 
   function appgroup ($config, $dn= NULL, $parent= NULL)
   {
-   
+    $this->ui = get_userinfo();  
+ 
     /* prepare group app for release management */ 
     $tmp = search_config($config->data,"faiManagement","CLASS");
     if(!empty($tmp)){
@@ -930,17 +932,12 @@ class appgroup extends plugin
       }
 
       $base = preg_replace("/ou=apps,.*$/","ou=apps,".$this->curbase,$base);
-    
-      $ldap   = $this->config->get_ldap_link();
-      $ldap->cd ($base);
-      $ldap->ls ("(objectClass=gosaApplication)",$base);
+      $app_res = get_list("(objectClass=gosaApplication)", $this->ui->subtreeACL, $base,array("cn","description"));
     }else{
-      $ldap   = $this->config->get_ldap_link();
-      $ldap->cd ("ou=apps,".$this->curbase);
-      $ldap->ls ("(objectClass=gosaApplication)","ou=apps,".$this->curbase);
+      $app_res = get_list("(objectClass=gosaApplication)", $this->ui->subtreeACL, "ou=apps,".$this->curbase,array("cn","description"));
     }
     
-    while ($attrs= $ldap->fetch()){
+    foreach($app_res as $attrs){
       if (isset($attrs["description"][0])){    
         $this->apps[$attrs["cn"][0]]=
           $attrs["cn"][0]." (".
@@ -951,6 +948,7 @@ class appgroup extends plugin
       }
     }
 
+    $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
     $ldap->search("objectClass=gosaApplication",array("gosaApplicationParameter","cn"));
     $tmp = search_config($this->config->data,"faiManagement","CLASS");
