@@ -196,7 +196,7 @@ class termservice extends plugin
     ksort($this->hardware_list);
 
     /* Convert gotoLpdEnable */
-    $this->gotoLpdEnable= preg_match("/yes/",$this->gotoLpdEnable);
+    $this->gotoLpdEnable= preg_match("/yes/i",$this->gotoLpdEnable);
 
       /* Load hardware list */
     $ldap= $this->config->get_ldap_link();
