@@ -143,7 +143,7 @@ $ACLD['user']=       array("academicTitle",
 			"telephoneNumber",
 			"uid",
 			"vocation");
-$ACLD['mail']=       array(
+$ACLD['mailAccount']=       array(
 			"custom_sieve",
 			"gosaMailAlternateAddress",
 #			"gosaMailDeliveryMode",
@@ -157,7 +157,7 @@ $ACLD['mail']=       array(
                         "drop_own_mails",
 			"mail",
 			"only_local");
-$ACLD['posix']=      array("allowedHosts",
+$ACLD['posixAccount']=      array("allowedHosts",
 			"force_ids",
 			"gidNumber",
 			"gosaDefaultLanguage",
@@ -176,7 +176,7 @@ $ACLD['posix']=      array("allowedHosts",
 			"shadowMin",
 			"shadowWarning",
 			"uidNumber");
-$ACLD['samba']=      
+$ACLD['sambaAccount']=      
 			array("acctFlags" => "samba2:acctFlags", 
 			"allow_pwchange" => "samba2:allow_pwchange",
 			"homeDrive" 	=> "samba2:homeDrive",

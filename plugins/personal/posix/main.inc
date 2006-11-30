@@ -62,10 +62,10 @@ if (!$remove_lock){
   /* Adjust acl's to mode */
   if (isset($_SESSION['edit'])){
     $acl= get_permissions ($ui->dn, $ui->subtreeACL);
-    $posixAccount->acl= get_module_permission($acl, "posix", $ui->dn);
+    $posixAccount->acl= get_module_permission($acl, "posixAccount", $ui->dn);
   } else {
     $acl= get_permissions ($ui->dn, $ui->subtreeACL);
-    $editacl= get_module_permission($acl, "posix", $ui->dn);
+    $editacl= get_module_permission($acl, "posixAccount", $ui->dn);
     $posixAccount->acl= "#none#";
   }
 
@@ -81,7 +81,7 @@ if (!$remove_lock){
       $posixAccount->save ();
       gosa_log ("User/posix object'".$ui->dn."' has been saved");
       $posixAccount->acl= "#none#";
-      $editacl= get_module_permission($acl, "posix", $ui->dn);
+      $editacl= get_module_permission($acl, "posixAccount", $ui->dn);
       del_lock ($ui->dn);
       sess_del ('edit');
 
