@@ -16,6 +16,7 @@ class printerPPDSelectionDialog extends plugin
   var $header               =array();
 
   var $Vendor               = "";
+  var $current_del_id       = "";
 
   function printerPPDSelectionDialog ($config, $dn= NULL,$list=false,$headers=false,$ppd=false)
   {
@@ -55,18 +56,70 @@ class printerPPDSelectionDialog extends plugin
     $regex = str_replace("**","*",$regex);
     $_SESSION['printerPPDSelectionDialog']['regex'] = $regex;
   
+    /* Delete requested, check if everything is ok and display confirmation dialog */
+    if(isset($_GET['act']) && $_GET['act'] == "del"){
+        
+      /* Get id and check if id is valid */
+      $id_to_del = base64_decode($_GET['id']);
+      $found = "";
+      foreach($this->list[$this->Vendor] as $key => $data){
+        if($data['link'] == $id_to_del){
+          $found = $key;
+          break;
+        }
+      }
+      if(!empty($found)){
+        $this->current_del_id = $id_to_del;
+    
+        $smarty->assign("warning", sprintf(_("You're about to delete the ppd file '%s' at '%s'."), $found,$id_to_del));
+        return($smarty->fetch(get_template_path('remove_ppd.tpl', TRUE)));
+  
+      }else{
+        print_red(sprintf(_("Could not found specified ppd file '%s'."),$id_to_del));
+      }
+    }
+
+    /* Deletion confirmed */
+    if(isset($_POST['delete_ppd_confirm']) && !empty($this->current_del_id)){
+
+      /* check if file is removeable */
+      if(is_writeable($this->current_del_id)){
+        $is_ok = @unlink($this->current_del_id);
+   
+        /* Update ppd list */ 
+        if($is_ok){
+          foreach($this->list as $vendor => $ppds){
+            foreach($ppds as $ppd => $data){
+              if($data['link'] == $this->current_del_id){
+                unset($this->list[$vendor][$ppd]);
+              }
+            }
+          }
+        }
+      }else{
+        $is_ok = false;
+      }
+  
+      if(!$is_ok){
+        print_red(_("Something went wrong while trying to remove the ppd file from server, possibly we have no write access."));
+      }
+    }
+
     /** Added **/
     $list = array();
     foreach($this->list as $cat => $ppds){
       foreach($ppds as $ppd){
         if(preg_match("/^".str_replace("*",".*",$regex)."/i",$ppd['ppd'])){
-          $list[$ppd['link']] = $ppd;
+          if(is_readable($ppd['link'])){
+            $list[$ppd['link']] = $ppd;
+          }
         }
       }
     }
- 
+
+
+    /* Open vendor folder */ 
     if((isset($_GET['act']))&&($_GET['act']=="open"))  {
-      
       if((!empty($_GET['id'])) && (!isset( $this->header[base64_decode($_GET['id'])]))){
         print_red(sprintf(_("Selected vendor '%s' does not exists in our list of ppds."),base64_decode($_GET['id'])));      
         $this->Vendor = ""; 
@@ -81,7 +134,7 @@ class printerPPDSelectionDialog extends plugin
     
     $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=open&amp;id=%s'>%s</a>";
     $uselink  = "<a href='?plug=".$_GET['plug']."&amp;act=use&amp;id=%s'>%s</a>";
-    
+    $dellink  = "<a href='?plug=".$_GET['plug']."&amp;act=del&amp;id=%s'><img src='images/edittrash.png' alt='"._("delete")."' border=0></a>";
 
     if(empty($this->Vendor)){
       foreach($this-> header as $key => $entry){
@@ -95,8 +148,16 @@ class printerPPDSelectionDialog extends plugin
             ));
       foreach($list as $key => $ppd){
         if(preg_match("/^".$this->Vendor."/",$ppd['ppd'])){
+
+          if(is_writeable($ppd['link'])){
+            $del_str = sprintf($dellink,base64_encode($key));
+          }else{
+            $del_str = "";
+          }
+    
           $div ->AddEntry (array(
-                array("string"=>sprintf($uselink,base64_encode($key),$ppd['ppd']),"attach"=>"style='border-right:0px;'")
+                                  array("string"=>sprintf($uselink,base64_encode($key),$ppd['ppd'])),
+                                  array("string"=>$del_str,"attach"=>"style='border-right:0px;'")
                 ));
         }
       }
