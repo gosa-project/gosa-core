@@ -1263,6 +1263,9 @@ function get_printer_list($cups_server)
   } else {
     $ldap->search('(objectClass=gotoPrinter)', array('cn'));
   }
+  while($attrs = $ldap->fetch()){
+    $res[$attrs['cn'][0]] = $attrs['cn'][0];
+  }
 
   return $res;
 }
