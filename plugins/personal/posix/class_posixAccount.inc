@@ -52,7 +52,6 @@ class posixAccount extends plugin
   var $use_shadowExpire= "0";
   var $must_change_password= "0";
   var $force_ids= 0;
-  var $printerList= array();
   var $group_dialog= FALSE;
   var $show_ws_dialog= FALSE;
   var $secondaryGroups= array();
@@ -67,7 +66,7 @@ class posixAccount extends plugin
   var $SubSearch        = false;
 
   /* attribute list for save action */
-  var $CopyPasteVars  = array("grouplist","groupMembership","use_shadowMin","use_shadowMax","use_shadowWarning","use_shadowInactive","use_shadowExpire","must_change_password","printerList","grouplist","savedGidNumber","savedUidNumber");
+  var $CopyPasteVars  = array("grouplist","groupMembership","use_shadowMin","use_shadowMax","use_shadowWarning","use_shadowInactive","use_shadowExpire","must_change_password","grouplist","savedGidNumber","savedUidNumber");
   var $attributes     = array("homeDirectory", "loginShell", "uidNumber", "gidNumber", "gecos",
       "shadowMin", "shadowMax", "shadowWarning", "shadowInactive", "shadowLastChange",
       "shadowExpire", "gosaDefaultPrinter", "gosaDefaultLanguage", "uid","accessTo","trustModel");
@@ -190,12 +189,6 @@ class posixAccount extends plugin
     /* Insert possibly missing loginShell */
     if ($this->loginShell != "" && !in_array($this->loginShell, $this->loginShellList)){
       $this->loginShellList[]= $this->loginShell;
-    }
-
-    /* Generate printer list */
-    if (isset($this->config->data['SERVERS']['CUPS'])){
-      $this->printerList= get_printer_list ($this->config->data['SERVERS']['CUPS']);
-      asort($this->printerList);
     }
 
     /* Set tag attribute if we've tagging activated */
@@ -501,7 +494,6 @@ class posixAccount extends plugin
     } else {
       $smarty->assign("groups", "");
     }
-    $smarty->assign("printerList", $this->printerList);
     $smarty->assign("languages", $this->config->data['MAIN']['LANGUAGES']);
 
 	/* Avoid "Undefined index: forceMode" */
