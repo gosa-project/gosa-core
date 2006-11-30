@@ -647,7 +647,7 @@ class gofaxAccount extends plugin
     /* IF mail is specified (which is only the case if there's no mail account
        present), check if it's valid..  */
     if (@isset($this->parent->by_object['mailAccount']) &&
-        $this->goFaxDeliveryMode && 32){
+        $this->goFaxDeliveryMode & 32){
       if ($this->mail == ""){
         $message[]= _("Mail delivery is checked, but no address has been specified.");
       } elseif (!is_email($this->mail)){
