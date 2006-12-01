@@ -167,6 +167,35 @@ $ACLD['servdb']=   array("goKrbServer",
 			"goGlpiPassword",
 			"goGlpiDatabase",
 			"goKrbPassword");
+$ACLD['servkolab']=   array("postfix_mydomain",
+			"postfix_mydestination",
+			"cyrus_admins",
+			"cyrus_pop3s",
+			"cyrus_imap",
+			"cyrus_imaps",
+			"cyrus_sieve",
+			"proftpd_ftp",
+			"apache_http",
+			"postfix_enable_virus_scan",
+			"apache_allow_unauthenticated_fb",
+			"postfix_mynetworks",
+			"postfix_relayhost",
+			"postfix_allow_unauthenticated",
+			"cyrus_pop3");
+$ACLD['servservice']=   array("goExportEntry",
+			"goExportEntry",
+			"goNtpServer",
+			"goLdapBase",
+			"goTerminalServer",
+			"goXdmcpIsEnabled",
+			"goSyslogServer",
+			"goCupsServer",
+			"goMailServer",
+			"goLdapServer");
+$ACLD['servrepository']=   array("",
+			"base",
+			"gotoMode",
+			"description");
 $ACLD['user']=       array("academicTitle",
 			"create",
 			"delete",
@@ -350,6 +379,7 @@ $ACLD['phpgwAccount']			=array("phpgwAccount" 			);
 $ACLD['webdavAccount']			=array("webdavAccount" 			);
 $ACLD['intranetAccount']		=array("intranetAccount" 		);
 $ACLD['systems']			=array("systems" 		);
+$ACLD['FAIclass']			=array("FAIclass" 		);
 $ACLD['pptpAccount']			=array("gosapptp" 	  			);
 $ACLD['phpscheduleitAccount']	=array("gosaphpscheduleit" 	  	);
 $ACLD['opengwAccount']			=array(	"opengwAccount"	=>"Enable/disable account",	
