@@ -110,8 +110,12 @@ class servrepository extends plugin
        ADD / EDIT Repository
        Dialog Handling
      */
-      
-    $allow_edit = chkacl($this->acl,"FAIclass") == "";
+     
+    $ui = get_userinfo();
+    $tmp= get_permissions ($this->dn, $ui->subtreeACL);
+    $this->acl= get_module_permission($tmp, "FAIclass", $this->dn);
+    $allow_edit = !preg_match("/disabled/i",chkacl($this->acl,"FAIclass"));
+    
 
     $once = false;
     if(isset($_POST['servRepository'])){
@@ -300,6 +304,13 @@ class servrepository extends plugin
 
   function remove_from_parent()
   {
+    /* Skip if not allowed */ 
+    $ui = get_userinfo();
+    $tmp= get_permissions ($this->dn, $ui->subtreeACL);
+    $this->acl= get_module_permission($tmp, "FAIclass", $this->dn);
+
+    if(preg_match("/disabled/",chkacl($this->acl,"FAIclass"))) return;
+
     plugin::remove_from_parent();    
     $ldap= $this->config->get_ldap_link();
     $ldap->cd ($this->config->current['BASE']);
@@ -341,6 +352,10 @@ class servrepository extends plugin
   {
    
     /* Skip if not allowed */ 
+    $ui = get_userinfo();
+    $tmp= get_permissions ($this->dn, $ui->subtreeACL);
+    $this->acl= get_module_permission($tmp, "FAIclass", $this->dn);
+
     if(preg_match("/disabled/",chkacl($this->acl,"FAIclass"))) return;
     plugin::save();
 
