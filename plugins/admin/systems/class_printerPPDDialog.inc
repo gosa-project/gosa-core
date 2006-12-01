@@ -477,6 +477,23 @@ class printerPPDDialog extends plugin
     }
     return($str);
   }
+
+  function removeModifiedPPD()
+  {
+    $path = $this->pathToPPD.$this->pathToModified.$this->selectedPPD['link'];
+
+    if(file_exists($path)){
+      if(is_writeable($path)){
+        if(!@unlink($path)){
+          print_red(sprintf(_("Removing old ppd file '%s' failed."),$path));
+        }
+      }else{
+        print_red(sprintf(_("Removing old ppd file '%s' failed. File is not accessible."),$path));
+      }
+    }else{
+      print_red(sprintf(_("Removing old ppd file '%s' failed. File does not exists or is not accessible."),$path));
+    }
+  }
   
   function check()
   {  

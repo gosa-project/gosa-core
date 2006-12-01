@@ -18,6 +18,7 @@ class printgeneric extends plugin
   var $description      = "";
   var $labeledURI       = "";
   var $gotoPrinterPPD   = "";
+  var $initial_PPD      = "";
   var $orig_dn          = "";
 
   var $UserMember       ="";
@@ -114,6 +115,8 @@ class printgeneric extends plugin
     if(isset($this->gotoPrinterPPD)){
       $this->gotoPrinterPPD = preg_replace("/^http.*ppd\//i","",$this->gotoPrinterPPD);
     }
+
+    $this->initial_PPD = $this->gotoPrinterPPD;
 
     /* Prepare different member types */ 
     foreach(array("AddUser"       =>"gotoUserPrinter",
@@ -574,6 +577,12 @@ class printgeneric extends plugin
         unset($og->member[$this->dn]);
         $og->save ();
       }
+
+      /* Remove previously selected ppd file.*/
+      if(!empty($this->initial_PPD)){
+        $tmp = new printerPPDDialog($this->config, $this->dn,$this->initial_PPD);
+        $tmp->removeModifiedPPD();
+      }
     }
   }
 
@@ -684,6 +693,14 @@ class printgeneric extends plugin
     /* save ppd configuration */
     if($this->PPDdialogToSave){
       $this->PPDdialogToSave->save_ppd();
+    }
+
+    /* Remove previously selected ppd file.*/
+    if($this->initial_PPD != $this->gotoPrinterPPD){
+      if(!empty($this->initial_PPD)){
+        $tmp = new printerPPDDialog($this->config, $this->dn,$this->initial_PPD);
+        $tmp->removeModifiedPPD();
+      }
     }
 
     if(preg_match("/https/i",$_SERVER['HTTP_REFERER'])){
