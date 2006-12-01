@@ -226,7 +226,7 @@ class servgeneric extends plugin
 
     $ui= get_userinfo();
     $acl= get_permissions ($this->dn, $ui->subtreeACL);
-    $acl= get_module_permission($acl, "server", $this->dn);
+    $acl= get_module_permission($acl, "servgeneric", $this->dn);
     if (chkacl($acl, "create") != ""){
       $message[]= _("You have no permissions to create a server on this 'Base'.");
     }

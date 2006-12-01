@@ -139,6 +139,7 @@ $ACLD['printgeneric']=   array("cn",
 			"description");
 $ACLD['servgeneric']=   array("cn",
 			"base",
+			"create",
 			"gotoMode",
 			"description");
 $ACLD['servdb']=   array("goKrbServer",

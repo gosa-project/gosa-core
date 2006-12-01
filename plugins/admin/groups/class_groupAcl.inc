@@ -162,7 +162,8 @@ class acl extends plugin
 		$this->selfflag= FALSE;
 	}
 
-	/* Strip trailing colon... */
+	/* Remove double colons, strip trailing colon... */
+	$this->current_acl= preg_replace("/,,/", ",", $this->current_acl);
 	$this->current_acl= preg_replace("/,$/", "", $this->current_acl);
   }
 
