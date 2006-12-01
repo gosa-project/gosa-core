@@ -26,6 +26,10 @@ class servrepository extends plugin
   {
     plugin::plugin ($config, $dn, $parent);
 
+    $ui = get_userinfo();
+    $tmp= get_permissions ($this->dn, $ui->subtreeACL);
+    $this->acl= get_module_permission($tmp, "FAIclass", $this->dn);
+    
     $this->repositories = array();
     if(isset($this->attrs['FAIrepository'])){
       for($i = 0; $i < $this->attrs['FAIrepository']['count']; $i++){
@@ -106,18 +110,20 @@ class servrepository extends plugin
        ADD / EDIT Repository
        Dialog Handling
      */
+      
+    $allow_edit = chkacl($this->acl,"FAIclass") == "";
 
     $once = false;
     if(isset($_POST['servRepository'])){
       foreach($_POST as $name => $value){
 
-        if(preg_match("/AddRepository/",$name)){
+        if(preg_match("/AddRepository/",$name) && !$once && $allow_edit){
           $once = true;
           $this->dialog = new servRepositorySetup($this->config,$this->dn);
           $this->dialog->acl = $this->acl;
         }
 
-        if((preg_match("/^delete_/",$name))&&(!$once)){
+        if((preg_match("/^delete_/",$name))&&(!$once) && $allow_edit){
           $once = true;
           $value = preg_replace("/delete_/","",$name);
           $value = base64_decode(preg_replace("/_.*$/","",$value));
@@ -150,7 +156,7 @@ class servrepository extends plugin
           }
         }
 
-        if((preg_match("/^edit_/",$name))&&(!$once)){
+        if((preg_match("/^edit_/",$name))&&(!$once) && $allow_edit){
           $value = preg_replace("/edit_/","",$name);
           $value = base64_decode(preg_replace("/_.$/","",$value));
 
@@ -192,7 +198,7 @@ class servrepository extends plugin
         }
       }
     }
-    if((isset($_GET['act']))&&($_GET['act']=="open")&&(isset($_GET['id']))){
+    if((isset($_GET['act']))&&($_GET['act']=="open")&&(isset($_GET['id'])) && $allow_edit){
       $obj = $this->repositories[base64_decode($_GET['id'])];
       $obj['initialy_was'] = $obj['Release'];
       $this->dialog = new servRepositorySetup($this->config,$this->dn,$obj);
@@ -261,23 +267,32 @@ class servrepository extends plugin
     foreach($this->repositories as $name => $reps){
 
       $str = " ";
-
       if(preg_match("/".str_replace("*",".*",$this->regex)."/",$reps['Release'])){
-    
 
       foreach($reps['Sections'] as $sec){
         $str.=$sec." ";  
       }    
-  
+
+      if($allow_edit){
+        $link_str = sprintf($link,base64_encode($name),$name);
+        $sections = sprintf($link,base64_encode($name),_("Sections")." :".$str);
+        $options  = preg_replace("/%s/",base64_encode($name),$edit.$delete);
+      }else{
+        $link_str = $name;
+        $sections = _("Sections")." :".$str;
+        $options  = "";
+      }
+    
+ 
       $divlist->AddEntry(array(
-                              array("string"=>sprintf($link,base64_encode($name),$name),"attach"=>"style='width:80px;'"),
-                              array("string"=>sprintf($link,base64_encode($name),_("Sections")." :".$str)),
-                              array("string"=>preg_replace("/%s/",base64_encode($name),$edit.$delete),"attach"=>"style='border-right:0px;width:55px;text-align:right;'")
-                              ));
+                              array("string"=>$link_str,"attach"=>"style='width:80px;'"),
+                              array("string"=>$sections),
+                              array("string"=>$options,"attach"=>"style='border-right:0px;width:55px;text-align:right;'")));
       }
     }
  
     $smarty -> assign("Repositories",$divlist->DrawList());
+    $smarty -> assign("FAIclassACL",chkacl($this->acl,"FAIclass"));
 
     $display.= $smarty->fetch(get_template_path('servRepository.tpl', TRUE));
     return($display);
@@ -324,6 +339,9 @@ class servrepository extends plugin
   /* Save to LDAP */
   function save()
   {
+   
+    /* Skip if not allowed */ 
+    if(preg_match("/disabled/",chkacl($this->acl,"FAIclass"))) return;
     plugin::save();
 
     $arr = array();
