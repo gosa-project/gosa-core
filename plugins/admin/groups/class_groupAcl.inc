@@ -52,7 +52,6 @@ class acl extends plugin
 
   function execute()
   {
-echo "Pre: $this->current_acl<br>";
 	/* Call parent execute */
 	plugin::execute();
 
