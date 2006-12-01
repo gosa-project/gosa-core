@@ -786,7 +786,6 @@ function show_setup_page4($withoutput = true)
       }
 
       if((isset($_POST[$key]))&&(!empty($_POST[$key]))) {
-        echo $key." -> ".$_POST[$key]."<br>";
         $_SESSION['ldapconf'][$key] = $_POST[$key];
       } else {
         if($withoutput) {
