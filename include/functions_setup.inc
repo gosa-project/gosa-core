@@ -764,6 +764,14 @@ function show_setup_page3($withoutput = true)
 function show_setup_page4($withoutput = true)
 {
   $smarty= get_smarty();      
+  $checkvars = array("location", "admin", "password", "peopleou", "base",
+      "peopledn", "arr_crypts", "uidbase","errorlvl");
+
+  $fault     = false;              
+  $uri       = $_SESSION['ldapconf']['uri'];
+  $ldapconf  = $_SESSION['ldapconf'];
+  $arr_crypts= array();
+  $temp      = "";
 
   /* check POST data */
   if(isset($_POST['check'])) {
@@ -777,7 +785,8 @@ function show_setup_page4($withoutput = true)
         continue;
       }
 
-      if((isset($_POST[$key]))&&($_POST[$key]!="")) {
+      if((isset($_POST[$key]))&&(!empty($_POST[$key]))) {
+        echo $key." -> ".$_POST[$key]."<br>";
         $_SESSION['ldapconf'][$key] = $_POST[$key];
       } else {
         if($withoutput) {
@@ -802,14 +811,6 @@ function show_setup_page4($withoutput = true)
     $_SESSION['ldapconf']['base']= $base;
   }
   require_once("class_password-methods.inc");
-
-  $fault     = false;              
-  $uri       = $_SESSION['ldapconf']['uri'];
-  $ldapconf  = $_SESSION['ldapconf'];
-  $arr_crypts= array();
-  $temp      = "";
-  $checkvars = array("location", "admin", "password", "peopleou", "base",
-      "peopledn", "arr_crypts", "mail", "uidbase","errorlvl");
 
   if(!isset($_SESSION['ldapconf']['arr_cryptkeys'])) {
     require_once("class_password-methods.inc");

@@ -664,7 +664,13 @@ class LDAP{
     }
 
     $real_path= substr($target, 0, strlen($target) - strlen($this->basedn) -1 );
-    $l= array_reverse(ldap_explode_dn($real_path,0));
+    $tmp = ldap_explode_dn($real_path,0);
+    if(!$tmp){
+      print_red(sprintf(_("The referral url '%s' is missing the ldap base. It should look like this 'ldap://server:port/base'."),$this->fix($this->basedn)));
+      return;
+    }
+
+    $l= array_reverse($tmp);
     unset($l['count']);
     $cdn= $this->basedn;
     $tag= "";
