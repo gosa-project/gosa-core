@@ -81,6 +81,12 @@ class servrepository extends plugin
     $smarty= get_smarty();
     $display= "";
 
+    $ui = get_userinfo();
+    $tmp= get_permissions ($this->dn, $ui->subtreeACL);
+    $this->acl= get_module_permission($tmp, "FAIclass", $this->dn);
+    $allow_edit = !preg_match("/disabled/i",chkacl($this->acl,"FAIclass"));
+    
+
     /* Smarty vars*/
     $smarty->assign("infoimage",    get_template_path('images/info.png'));
     $smarty->assign("search_image", get_template_path('images/search.png'));
@@ -110,12 +116,6 @@ class servrepository extends plugin
        ADD / EDIT Repository
        Dialog Handling
      */
-     
-    $ui = get_userinfo();
-    $tmp= get_permissions ($this->dn, $ui->subtreeACL);
-    $this->acl= get_module_permission($tmp, "FAIclass", $this->dn);
-    $allow_edit = !preg_match("/disabled/i",chkacl($this->acl,"FAIclass"));
-    
 
     $once = false;
     if(isset($_POST['servRepository'])){
