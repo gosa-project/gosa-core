@@ -52,6 +52,7 @@ class acl extends plugin
 
   function execute()
   {
+echo "Pre: $this->current_acl<br>";
 	/* Call parent execute */
 	plugin::execute();
 
@@ -116,7 +117,7 @@ class acl extends plugin
 	if ($this->object == "all"){
 		$this->current_acl= preg_replace ( "/[,]?all[,]?/", "", $this->current_acl);
 	}
-	$this->current_acl= preg_replace ( "/(^|[^a-z0-9A-Z])$this->object#[^,]*[,]?/", "", $this->current_acl);
+	$this->current_acl= preg_replace ( "/(^|[^a-z0-9A-Z])$this->object#[^,]*[,]?/", ",", $this->current_acl);
 
 	/* assemble new attributes */
 	$attrs= "";
@@ -161,6 +162,9 @@ class acl extends plugin
 	} else {
 		$this->selfflag= FALSE;
 	}
+
+	/* Strip trailing colon... */
+	$this->current_acl= preg_replace("/,$/", "", $this->current_acl);
   }
 
 

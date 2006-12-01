@@ -102,6 +102,30 @@ $ACLD['terminal']=   array("gotoAdaptPath",
 			"gotoXdmcpServer",
 			"login",
 			"password");
+$ACLD['workgeneric']=   array("base",
+			"gotoMode",
+			"gotoSyslogServer",
+			"gotoNtpServer",
+			"action",
+			"password");
+$ACLD['workstartup']=   array("gotoBootKernel",
+			"gotoKernelParameters",
+			"FAIdebianMirror",
+			"FAIclass",
+			"gotoModules",
+			"gotoShare");
+$ACLD['workservice']=   array("gotoXKbModel",
+			"gotoXKbLayout",
+			"gotoXKbVariant",
+			"gotoXMouseType",
+			"gotoXMouseport",
+			"gotoXResolution",
+			"gotoXColordepth",
+			"AutoSync",
+			"gotoXHsync",
+			"gotoVHsync",
+			"gotoScannerEnable",
+			"gotoXDriver");
 $ACLD['user']=       array("academicTitle",
 			"create",
 			"delete",
@@ -267,7 +291,7 @@ $ACLD['conference']= array(
 			"goFonConferenceOption_c",
 			"goFonConferenceOwner");
 
-$ACLD['gotoEnvironment']=array(
+$ACLD['environment']=array(
 					"gotoPrinter",
 					"gotoEnvironment",
 					"gotoShare",
@@ -284,6 +308,7 @@ $ACLD['gotoEnvironment']=array(
 $ACLD['phpgwAccount']			=array("phpgwAccount" 			);
 $ACLD['webdavAccount']			=array("webdavAccount" 			);
 $ACLD['intranetAccount']		=array("intranetAccount" 		);
+$ACLD['systems']			=array("systems" 		);
 $ACLD['pptpAccount']			=array("gosapptp" 	  			);
 $ACLD['phpscheduleitAccount']	=array("gosaphpscheduleit" 	  	);
 $ACLD['opengwAccount']			=array(	"opengwAccount"	=>"Enable/disable account",	
