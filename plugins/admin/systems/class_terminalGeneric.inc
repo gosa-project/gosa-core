@@ -297,6 +297,7 @@ class termgeneric extends plugin
     }
 
     /* Show main page */
+    $this->netConfigDNS->cn= $this->cn;
     $smarty->assign("netconfig", $this->netConfigDNS->execute());
     $smarty->assign("actionACL", chkacl($this->acl, 'action'));
     return($smarty->fetch (get_template_path('terminal.tpl', TRUE)));

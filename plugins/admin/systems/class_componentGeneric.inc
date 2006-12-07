@@ -89,6 +89,7 @@ class componentGeneric extends plugin
     $smarty->assign("baseACL", chkacl($this->acl,"base"));
 
     /* Show main page */
+    $this->netConfigDNS->cn= $this->cn;
     $smarty->assign("netconfig", $this->netConfigDNS->execute());
     return($smarty->fetch (get_template_path('component.tpl', TRUE)));
   }

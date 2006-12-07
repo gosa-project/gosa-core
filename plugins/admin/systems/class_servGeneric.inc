@@ -174,6 +174,7 @@ class servgeneric extends plugin
     }
 
     /* Show main page */
+    $this->netConfigDNS->cn= $this->cn;
     $smarty->assign("netconfig", $this->netConfigDNS->execute());
     $smarty->assign("modes", $this->modes);
 

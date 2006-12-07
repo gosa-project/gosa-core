@@ -525,6 +525,7 @@ class printgeneric extends plugin
     $smarty->assign("AdminMembers"   ,$adminlist);
     $smarty->assign("AdminMemberKeys",array_flip($adminlist));
     if($this->BelongsTo == "Printer"){
+      $this->netConfigDNS->cn= $this->cn;
       $smarty->assign("netconfig", $this->netConfigDNS->execute());
     } else {
       $smarty->assign("netconfig", "");
