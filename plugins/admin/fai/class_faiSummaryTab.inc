@@ -163,6 +163,14 @@ class faiSummaryTab extends plugin{
   /* This function calls all nescessary functions to generate the fai class summary tree */
   function execute() 
   {
+
+    /* Skip this if fai is deactivated */
+    $tmp = search_config($this->config->data,"faiManagement","CLASS");
+    if(empty($tmp)){
+      $str = "<h2>"._("You can't use this plugin until FAI is activated.")."</h2>";
+      return $str;
+    }
+
     /* Check if we must (re)init the this tab */
     if(!$this->InitCalled){
       $this->init();
