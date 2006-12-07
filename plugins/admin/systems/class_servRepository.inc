@@ -20,11 +20,21 @@ class servrepository extends plugin
 
   /* Repositories */
   var $repositories           = array();
-  var $FAIrepository           = array();
+  var $FAIrepository          = array();
+
+  var $fai_activated          = FALSE;
 
   function servrepository ($config, $dn= NULL, $parent= NULL)
   {
     plugin::plugin ($config, $dn, $parent);
+
+    /* Skip this if fai is deactivated */
+    $tmp = search_config($this->config->data,"faiManagement","CLASS");
+    if(!empty($tmp)){
+      $this->fai_activated = TRUE;    
+    }else{
+      return;
+    }
 
     $ui = get_userinfo();
     $tmp= get_permissions ($this->dn, $ui->subtreeACL);
@@ -76,6 +86,11 @@ class servrepository extends plugin
   {
     /* Call parent execute */
     plugin::execute();
+
+    if(!$this->fai_activated){
+      $str = "<h2>"._("You can't use this plugin until FAI is activated.")."</h2>";
+      return $str;
+    }
 
     /* Fill templating stuff */
     $smarty= get_smarty();
@@ -304,6 +319,9 @@ class servrepository extends plugin
 
   function remove_from_parent()
   {
+
+    if(!$this->fai_activated) return;
+    
     /* Skip if not allowed */ 
     $ui = get_userinfo();
     $tmp= get_permissions ($this->dn, $ui->subtreeACL);
@@ -350,7 +368,8 @@ class servrepository extends plugin
   /* Save to LDAP */
   function save()
   {
-   
+    if(!$this->fai_activated) return;
+
     /* Skip if not allowed */ 
     $ui = get_userinfo();
     $tmp= get_permissions ($this->dn, $ui->subtreeACL);
