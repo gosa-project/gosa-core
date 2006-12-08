@@ -170,44 +170,44 @@ class tabs
 
   function set_acl($acl)
   {
-	/* Set local acl */
-	$this->acl= $acl;
+    /* Set local acl */
+    $this->acl= $acl;
 
-	/* Setup for all plugins */
-	foreach ($this->by_object as $key => $obj){
-		$sacl= get_module_permission($acl, "$key", $this->dn);
-		$obj->acl= $sacl;
-		$this->by_object[$key]= $obj;
-	}
+    /* Setup for all plugins */
+    foreach ($this->by_object as $key => $obj){
+      $sacl= get_module_permission($acl, "$key", $this->dn);
+      $obj->acl= $sacl;
+      $this->by_object[$key]= $obj;
+    }
   }
 
   function delete()
   {
-	/* Check if all plugins will ACK for deletion */
-	foreach (array_reverse($this->by_object) as $key => $obj){
-		$reason= $obj->allow_remove();
-		if ($reason != ""){
-			print_red(sprintf(_("Delete process has been canceled by plugin '%s': %s"), $key, $reason));
-			return;
-		}
-	}
+    /* Check if all plugins will ACK for deletion */
+    foreach (array_reverse($this->by_object) as $key => $obj){
+      $reason= $obj->allow_remove();
+      if ($reason != ""){
+        print_red(sprintf(_("Delete process has been canceled by plugin '%s': %s"), $key, $reason));
+        return;
+      }
+    }
 
-	/* Delete for all plugins */
-	foreach (array_reverse($this->by_object) as $key => $obj){
-		$obj->remove_from_parent();
-	}
+    /* Delete for all plugins */
+    foreach (array_reverse($this->by_object) as $key => $obj){
+      $obj->remove_from_parent();
+    }
   }
 
   function password_change_needed()
   {
-	/* Ask all plugins for needed password changes */
-	foreach ($this->by_object as $key => $obj){
-		if ($obj->password_change_needed()){
-			return TRUE;
-		}
-	}
+    /* Ask all plugins for needed password changes */
+    foreach ($this->by_object as $key => $obj){
+      if ($obj->password_change_needed()){
+        return TRUE;
+      }
+    }
 
-	return FALSE;
+    return FALSE;
   }
 
   function check($ignore_account= FALSE)

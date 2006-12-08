@@ -62,6 +62,7 @@ $ACLD['group']=      array("cn",
 			"gidNumber");
 $ACLD['appgroup']=   array();
 $ACLD['all']=        array();
+$ACLD['acl']=   array('acl');
 $ACLD['mailgroup']=  array("default_permission",
 			"imap_perms",
 			"member_permissions",
