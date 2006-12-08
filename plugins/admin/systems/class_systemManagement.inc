@@ -39,6 +39,7 @@ class systems extends plugin
   var $ui= NULL;
   var $acl= "";
   var $DivListSystem;
+  var $image_creation_log ="";
 
   function systems ($config, $ui)
   {
@@ -226,64 +227,118 @@ class systems extends plugin
       Create FAI CD ...   
      ********************/
     if ($s_action=="gen_cd"){
-echo "ACL CHECK!";
       $this->dn= $this->terminals[$s_entry]['dn'];
       $_SESSION['objectinfo']= $this->dn;
       return ($smarty->fetch(get_template_path('gencd.tpl', TRUE)));
     }
 
-
     /* Start CD-Creation */
     if (isset($_POST["cd_create"])){
-echo "ACL CHECK!";
       $smarty->assign("src", "?plug=".$_GET['plug']."&PerformIsoCreation");
       return ($smarty->fetch(get_template_path('gencd_frame.tpl', TRUE)));
     }
-
+  
     if ($this->dn != "" && isset($_GET['PerformIsoCreation'])){
-echo "ACL CHECK!";
 
+      /* Initialize some attributes  */
+      $this->image_creation_log = "";
+      $download_button = "<a href='?plug=".$_GET['plug']."&download_image_log'><image='images/zip.png'>"._("Download")."</a>";
+      $return_button   = "<a href='?plug=".$_GET['plug']."' target='parent'><image='images/list_reload.png'>"._("Back to work")."</a>";
+      $dsc             = array(0 => array("pipe", "r"), 1 => array("pipe", "w"), 2 => array("pipe", "w"));
+
+      /* Get and check command */
       $command= search_config($this->config->data['TABS'], "workgeneric", "ISOCMD");
+      $command = "/bin/sh /home/hickert/gen_stuff.sh";
       if (check_command($command)){
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
 
-        $dsc= array(0 => array("pipe", "r"), 1 => array("pipe", "w"), 2 => array("pipe", "w"));
+        /* Print out html introduction */
         echo "<html><head>";
         echo "<script language=\"javascript\" src=\"include/focus.js\" type=\"text/javascript\"></script>";
         echo "</head>";
-        echo "<body onLoad='scrollDown()'><pre>";
+        echo "<body>
+                <script language=\"javascript\" type=\"text/javascript\">
+                  document.body.scrollTop = document.body.scrollHeight - document.body.clientHeight;
+                </script>
+              <pre>";
+
+        /* Open process handle and check if it is a valid process */
         $process= proc_open($command, $dsc, $pipes, '/tmp');
         if (is_resource($process)) {
           fclose($pipes[0]);
+
+          /* Print out returned lines && write JS to scroll down each line */
           while (!feof($pipes[1])){
-            echo fgets($pipes[1], 1024);
+            $cur_dat = fgets($pipes[1], 1024);
+            $this->image_creation_log .= $cur_dat;
+            echo $cur_dat;
+            echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
             flush();
           }
         }
+    
+        /* Get error string && close streams */
         $buffer= stream_get_contents($pipes[2]);
         fclose($pipes[1]);
         fclose($pipes[2]);
-        $ret= proc_close($process);
         echo "</pre>";
-        
+      
+        /* Check return code */ 
+        $ret= proc_close($process);
         if ($ret == 0){
-          echo "hier der runterladen button";
+  
+          /* No error */
+          $this->image_creation_log.="\n\nSuccessfull finished image creation.\n\n";
         } else {
+  
+          /* Error */
           echo "<h1 style='color:red'>"._("Creating the image failed. Please see the report below.")."</h1>";
           echo "<pre style='color:red'>$buffer</pre>";
+
+          $this->image_creation_log.="\n\nImage creation failed. Please see report below : \n\n";
+          $this->image_creation_log.=$buffer."\n\n";
         }
+
+        echo $return_button.$download_button;
 
       } else {
         $tmp= "<h1 style='color:red'>".sprintf(_("Command '%s', specified for ISO creation doesn't seem to exist."), $command)."</h1>";
         echo $tmp;
       }
 
-      echo "<button onClick='clearTimeout(timeout)'>"._("Disable auto scroll")."</button>";
+      /* Scroll down completly */
+      echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
       echo "</body></html>";
-
+      flush();
       exit;
     }
 
+
+    /******************
+      FAI Image creation logfile requested 
+     ******************/
+    if(isset($_GET['download_image_log'])){
+
+      /* force download dialog */
+      header("Content-type: application/tiff\n");
+      if (preg_match('/MSIE 5.5/', $HTTP_USER_AGENT) ||
+          preg_match('/MSIE 6.0/', $HTTP_USER_AGENT)) {
+        header('Content-Disposition: filename="image.log"');
+      } else {
+        header('Content-Disposition: attachment; filename="image.log"');
+      }
+      header("Content-transfer-encoding: binary\n");
+      header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+      header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
+      header("Cache-Control: no-cache");
+      header("Pragma: no-cache");
+      header("Cache-Control: post-check=0, pre-check=0");
+
+      echo $this->image_creation_log;
+ 
+      exit();
+    }
+    
 
 
     /********************
