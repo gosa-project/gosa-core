@@ -21,6 +21,12 @@ function scrollDown() {
 	timeout= setTimeout("scrollDown()", 500);
 }
 
+
+function scrollDown2() {
+	document.body.scrollTop = document.body.scrollHeight - document.body.clientHeight;
+}
+
+
 function keyPress(DnEvents) {
   // determines whether Netscape or Internet Explorer
   k = (netscape) ? DnEvents.keyCode : window.event.keyCode;
