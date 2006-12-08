@@ -45,6 +45,7 @@
 
 {$netconfig}
 
+{if $fai_activated}
 <p class="plugbottom" style="margin-bottom:0px; padding:0px;">&nbsp;</p>
 
 <h2><img class="center" alt="" align="middle" src="images/rocket.png"> {t}Action{/t}</h2>
@@ -61,7 +62,7 @@
   </td>
  </tr>
 </table>
-
+{/if}
 
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
