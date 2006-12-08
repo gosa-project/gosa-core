@@ -248,7 +248,7 @@ class systems extends plugin
 
       /* Get and check command */
       $command= search_config($this->config->data['TABS'], "workgeneric", "ISOCMD");
-      $command = "/bin/sh /home/hickert/gen_stuff.sh";
+//      $command = "/bin/sh /home/hickert/gen_stuff.sh";
       if (check_command($command)){
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
 
