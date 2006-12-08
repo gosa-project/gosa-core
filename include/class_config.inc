@@ -240,6 +240,11 @@ class config  {
     if (!isset($this->current['GROUPS'])){
       $this->current['GROUPS']= "ou=groups";
     }
+
+    /* Remove possibly added ',' from end of group and people ou */
+    $this->current['GROUPS'] = preg_replace("/,*$/","",$this->current['GROUPS']);
+    $this->current['PEOPLE'] = preg_replace("/,*$/","",$this->current['PEOPLE']);
+
     if (!isset($this->current['WINSTATIONS'])){
       $this->current['WINSTATIONS']= "ou=winstations,ou=systems";
     }
