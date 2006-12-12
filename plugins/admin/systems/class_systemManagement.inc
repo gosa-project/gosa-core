@@ -239,9 +239,10 @@ class systems extends plugin
   
     if ($this->dn != "" && isset($_GET['PerformIsoCreation'])){
 
-      $return_button   = "<a href='?plug=".$_GET['plug']."' target='_parent' class='center'> ".
-                         "  <img src='images/list_reload.png' border=0 class='center'>".
-                         _("Back to work")."</a>";
+      $return_button   = "<form type='get' action='main.php' target='_parent'>
+                            <input type='submit' value='"._("Back")."'>
+                            <input type='hidden' name='plug' value='".$_GET['plug']."'/>
+                          </form>";
 
       $dsc             = array(0 => array("pipe", "r"), 1 => array("pipe", "w"), 2 => array("pipe", "w"));
 
@@ -290,7 +291,6 @@ class systems extends plugin
           echo "<pre style='color:red'>$buffer</pre>";
         }
 
-        echo $download_button."<br><br>";
         echo $return_button."<br>";
 
       } else {
