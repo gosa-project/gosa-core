@@ -233,6 +233,7 @@ class workstartup extends plugin
       }
       sort ($this->$val);
       $this->$val= array_unique($this->$val);
+      $this->saved_attributes[$val]= $this->$val;
     }
 
     /* Parse Kernel Parameters to decide what boot mode is enabled */
