@@ -1084,18 +1084,17 @@ class posixAccount extends plugin
     }
 
     /* Find out next free id near to UID_BASE */
-    for ($id= $this->config->current['UIDBASE']; $id++; $id<65000){
+    for ($id= $this->config->current['UIDBASE']; $id++; $id < pow(2,32)){
       if (!in_array($id, $ids)){
         return ($id);
       }
     }
 
-    /* Should not happen */
-    if ($id == 65000){
-      print_red(_("Too many users, can't allocate a free ID!"));
+    /* Check if current id reaches the maximum of 32 bit */
+    if ($id >= pow(2,32)){
+      echo _("Too many users, can't allocate a free ID!");
       exit;
     }
-
   }
 
  function reload()
