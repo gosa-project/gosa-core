@@ -65,10 +65,10 @@ if(count($att)== 0){
   return;
 }
 
-if(!is_readable("/etc/gosa/glpi/".$att['filename'])){
-  print sprintf(_("Can't open file '%s'."),"/etc/gosa/glpi/".$att['filename']);
+if(!is_readable(CONFIG_DIR."/glpi/".$att['filename'])){
+  print sprintf(_("Can't open file '%s'."),CONFIG_DIR."/glpi/".$att['filename']);
 }
-$data = file_get_contents("/etc/gosa/glpi/".$att['filename']);
+$data = file_get_contents(CONFIG_DIR."/glpi/".$att['filename']);
 
 /* force download dialog */
 header("Content-type: ".$att['mime']."\n");
