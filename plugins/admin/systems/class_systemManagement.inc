@@ -39,7 +39,6 @@ class systems extends plugin
   var $ui= NULL;
   var $acl= "";
   var $DivListSystem;
-  var $image_creation_log ="";
 
   function systems ($config, $ui)
   {
@@ -240,24 +239,7 @@ class systems extends plugin
   
     if ($this->dn != "" && isset($_GET['PerformIsoCreation'])){
 
-      /* Initialize some attributes  */
-      $this->image_creation_log = 
-"
-GOsa - FAI image 
-Date        : ".date("d.m.Y - H:i:s")."
-User-cn     : ".$this->ui->cn."
-User-dn     : ".$this->ui->dn."
-
-Object-dn   : ".$this->dn."
-
-/* Script returned : */
-";
-
-      $download_button = "<a href='?plug=".$_GET['plug']."&amp;download_image_log' class='center' >".
-                           "<img src='images/save.png' border=0 class='center'>".
-                        _("Use this link to download the logfile")."</a>";
-
-      $return_button   = "<a href='?plug=".$_GET['plug']."' target='parent' class='center'> ".
+      $return_button   = "<a href='?plug=".$_GET['plug']."' target='_parent' class='center'> ".
                          "  <img src='images/list_reload.png' border=0 class='center'>".
                          _("Back to work")."</a>";
 
@@ -289,7 +271,6 @@ Object-dn   : ".$this->dn."
           /* Print out returned lines && write JS to scroll down each line */
           while (!feof($pipes[1])){
             $cur_dat = fgets($pipes[1], 1024);
-            $this->image_creation_log .= $cur_dat;
             echo $cur_dat;
             echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
             flush();
@@ -304,18 +285,9 @@ Object-dn   : ".$this->dn."
       
         /* Check return code */ 
         $ret= proc_close($process);
-        if ($ret == 0){
-  
-          /* No error */
-          $this->image_creation_log.="\n\nSuccessfull finished image creation.\n\n";
-        } else {
-  
-          /* Error */
+        if ($ret != 0){
           echo "<h1 style='color:red'>"._("Creating the image failed. Please see the report below.")."</h1>";
           echo "<pre style='color:red'>$buffer</pre>";
-
-          $this->image_creation_log.="\n\nImage creation failed. Please see report below : \n\n";
-          $this->image_creation_log.=$buffer."\n\n";
         }
 
         echo $download_button."<br><br>";
@@ -332,33 +304,6 @@ Object-dn   : ".$this->dn."
       flush();
       exit;
     }
-
-
-    /******************
-      FAI Image creation logfile requested 
-     ******************/
-    if(isset($_GET['download_image_log'])){
-
-      /* force download dialog */
-      header("Content-type: application/tiff\n");
-      if (preg_match('/MSIE 5.5/', $HTTP_USER_AGENT) ||
-          preg_match('/MSIE 6.0/', $HTTP_USER_AGENT)) {
-        header('Content-Disposition: filename="image.log"');
-      } else {
-        header('Content-Disposition: attachment; filename="image.log"');
-      }
-      header("Content-transfer-encoding: binary\n");
-      header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-      header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
-      header("Cache-Control: no-cache");
-      header("Pragma: no-cache");
-      header("Cache-Control: post-check=0, pre-check=0");
-
-      echo $this->image_creation_log;
- 
-      exit();
-    }
-    
 
 
     /********************
