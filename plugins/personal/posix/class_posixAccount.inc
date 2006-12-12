@@ -1083,6 +1083,9 @@ class posixAccount extends plugin
       $ids[]= (int)$attrs["$attrib"][0];
     }
 
+    /* Add the nobody id */
+    $ids[]=  65534;
+
     /* Find out next free id near to UID_BASE */
     for ($id= $this->config->current['UIDBASE']; $id++; $id < pow(2,32)){
       if (!in_array($id, $ids)){
