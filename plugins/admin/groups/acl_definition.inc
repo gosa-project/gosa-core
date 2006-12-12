@@ -194,8 +194,7 @@ $ACLD['servservice']=   array("goExportEntry",
 			"goCupsServer",
 			"goMailServer",
 			"goLdapServer");
-$ACLD['servrepository']=   array("",
-			"base",
+$ACLD['servrepository']=   array("base",
 			"gotoMode",
 			"description");
 $ACLD['user']=       array("academicTitle",
