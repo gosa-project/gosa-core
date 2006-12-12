@@ -234,16 +234,33 @@ class systems extends plugin
 
     /* Start CD-Creation */
     if (isset($_POST["cd_create"])){
-      $smarty->assign("src", "?plug=".$_GET['plug']."&PerformIsoCreation");
+      $smarty->assign("src", "?plug=".$_GET['plug']."&amp;PerformIsoCreation");
       return ($smarty->fetch(get_template_path('gencd_frame.tpl', TRUE)));
     }
   
     if ($this->dn != "" && isset($_GET['PerformIsoCreation'])){
 
       /* Initialize some attributes  */
-      $this->image_creation_log = "";
-      $download_button = "<a href='?plug=".$_GET['plug']."&download_image_log'><image='images/zip.png'>"._("Download")."</a>";
-      $return_button   = "<a href='?plug=".$_GET['plug']."' target='parent'><image='images/list_reload.png'>"._("Back to work")."</a>";
+      $this->image_creation_log = 
+"
+GOsa - FAI image 
+Date        : ".date("d.m.Y - H:i:s")."
+User-cn     : ".$this->ui->cn."
+User-dn     : ".$this->ui->dn."
+
+Object-dn   : ".$this->dn."
+
+/* Script returned : */
+";
+
+      $download_button = "<a href='?plug=".$_GET['plug']."&amp;download_image_log' class='center' >".
+                           "<img src='images/save.png' border=0 class='center'>".
+                        _("Use this link to download the logfile")."</a>";
+
+      $return_button   = "<a href='?plug=".$_GET['plug']."' target='parent' class='center'> ".
+                         "  <img src='images/list_reload.png' border=0 class='center'>".
+                         _("Back to work")."</a>";
+
       $dsc             = array(0 => array("pipe", "r"), 1 => array("pipe", "w"), 2 => array("pipe", "w"));
 
       /* Get and check command */
@@ -253,7 +270,9 @@ class systems extends plugin
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
 
         /* Print out html introduction */
-        echo "<html><head>";
+        echo '<!-- headers.tpl--><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                "http://www.w3.org/TR/html4/transitional.dtd">
+                <html><head><title></title><style type="text/css">@import url("themes/default/style.css");</style>';
         echo "<script language=\"javascript\" src=\"include/focus.js\" type=\"text/javascript\"></script>";
         echo "</head>";
         echo "<body>
@@ -299,7 +318,8 @@ class systems extends plugin
           $this->image_creation_log.=$buffer."\n\n";
         }
 
-        echo $return_button.$download_button;
+        echo $download_button."<br><br>";
+        echo $return_button."<br>";
 
       } else {
         $tmp= "<h1 style='color:red'>".sprintf(_("Command '%s', specified for ISO creation doesn't seem to exist."), $command)."</h1>";
