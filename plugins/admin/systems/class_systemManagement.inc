@@ -275,7 +275,7 @@ Object-dn   : ".$this->dn."
                 <html><head><title></title><style type="text/css">@import url("themes/default/style.css");</style>';
         echo "<script language=\"javascript\" src=\"include/focus.js\" type=\"text/javascript\"></script>";
         echo "</head>";
-        echo "<body>
+        echo "<body style='background: none;'>
                 <script language=\"javascript\" type=\"text/javascript\">
                   document.body.scrollTop = document.body.scrollHeight - document.body.clientHeight;
                 </script>
