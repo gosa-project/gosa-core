@@ -1136,12 +1136,11 @@ function gen_xls ($dn, $filter= "(objectClass=*)", $attributes= array('*'), $rec
 	  # Get base to look for schema 
 	  $sr           = @ldap_read ($this->cid, NULL, "objectClass=*", array("subschemaSubentry"));
 	  $attr         = @ldap_get_entries($this->cid,$sr);
-    $this->error  = @ldap_error($this->cid);
-
-    gosa_log($this->get_error());
 
 	  if (!isset($attr[0]['subschemasubentry'][0])){
-	    return array();
+      $this->error  = @ldap_error($this->cid);
+      gosa_log($this->get_error());
+      return array();
 	  }
 	
 	  # Get list of objectclasses
