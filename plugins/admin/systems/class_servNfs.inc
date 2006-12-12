@@ -42,13 +42,13 @@ class servnfs extends plugin
 	
     $this->charsets = array();
 
-    if(!file_exists("/etc/gosa/encodings")){
-      print_red(_("The file '/etc/gosa/encodings' does not exist, can't get supported charsets."));
+    if(!file_exists(CONFIG_DIR."/encodings")){
+      print_red(sprintf(_("The file '%s/encodings' does not exist, can't get supported charsets."),CONFIG_DIR));
     }else{
-      if(!is_readable("/etc/gosa/encodings")){
-        print_red(_("Can't read '/etc/gosa/encodings', please check permissions."));
+      if(!is_readable(CONFIG_DIR."/encodings")){
+        print_red(sprintf(_("Can't read '%s/encodings', please check permissions."),CONFIG_DIR));
       }else{
-        $fp = fopen("/etc/gosa/encodings","r");
+        $fp = fopen(CONFIG_DIR."/encodings","r");
         $i = 100;
         while(!feof($fp)&&$i){
           $i -- ;

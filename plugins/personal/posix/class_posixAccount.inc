@@ -172,9 +172,9 @@ class posixAccount extends plugin
     /* Convert to seconds */
     $this->shadowExpire= $this->convertToSeconds($this->shadowExpire);
 
-    /* Generate shell list from /etc/gosa/shells */
-    if (file_exists('/etc/gosa/shells')){
-      $shells = file ('/etc/gosa/shells');
+    /* Generate shell list from CONFIG_DIR./shells */
+    if (file_exists(CONFIG_DIR.'/shells')){
+      $shells = file (CONFIG_DIR.'/shells');
       foreach ($shells as $line){
         if (!preg_match ("/^#/", $line)){
           $this->loginShellList[]= trim($line);
