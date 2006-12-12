@@ -248,7 +248,6 @@ class systems extends plugin
 
       /* Get and check command */
       $command= search_config($this->config->data['TABS'], "workgeneric", "ISOCMD");
-//      $command = "/bin/sh /home/hickert/gen_stuff.sh";
       if (check_command($command)){
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
 
@@ -265,7 +264,7 @@ class systems extends plugin
               <pre>";
 
         /* Open process handle and check if it is a valid process */
-        $process= proc_open($command, $dsc, $pipes, '/tmp');
+        $process= proc_open($command, $dsc, $pipes);
         if (is_resource($process)) {
           fclose($pipes[0]);
 
@@ -279,7 +278,11 @@ class systems extends plugin
         }
     
         /* Get error string && close streams */
-        $buffer= stream_get_contents($pipes[2]);
+        $buffer = "";
+        while (!feof($pipes[2])){
+          $buffer .= fgets($pipes[2],256);
+        }
+      
         fclose($pipes[1]);
         fclose($pipes[2]);
         echo "</pre>";
