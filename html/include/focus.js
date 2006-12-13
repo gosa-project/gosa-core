@@ -21,9 +21,10 @@ function scrollDown() {
 	timeout= setTimeout("scrollDown()", 500);
 }
 
-
-function scrollDown2() {
-	document.body.scrollTop = document.body.scrollHeight - document.body.clientHeight;
+/* Scroll down the body frame */
+function scrollDown2() 
+{
+		document.body.scrollTop = document.body.scrollHeight - document.body.clientHeight;
 }
 
 
