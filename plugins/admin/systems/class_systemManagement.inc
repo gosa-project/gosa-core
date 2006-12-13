@@ -656,7 +656,7 @@ class systems extends plugin
     $responsible= array();
     foreach ($this->config->departments as $key => $value){
       if (get_module_permission(get_permissions ($value, $this->ui->subtreeACL),
-            "terminal", $value) == "#all#"){
+            "systems", $value) != ""){
         $responsible[$key]= $value;
       }
     }
