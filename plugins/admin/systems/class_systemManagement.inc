@@ -263,7 +263,7 @@ class systems extends plugin
                   <pre>';
 
         /* Open process handle and check if it is a valid process */
-        $process= proc_open($command, $dsc, $pipes);
+        $process= proc_open($command." '".$this->dn."'", $dsc, $pipes);
         if (is_resource($process)) {
           fclose($pipes[0]);
 
