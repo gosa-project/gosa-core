@@ -598,6 +598,8 @@ class LDAP{
         }
       }
 
+      echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
+
       $this->ls ("(objectClass=*)",$sourcedn);
       while ($this->fetch()){
         $deldn= $this->getDN();

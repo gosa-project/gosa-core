@@ -37,11 +37,11 @@
 <br>
 <br>
 <div style="margin:3px;background-color:white; border:1px solid #A0A0A0">
-<iframe src="?plug={$plugID}&PerformBranch=1" width="100%" name="status" style="height:450px;background-color:#FFFFFF;">
+<iframe src="?plug={$plugID}&amp;PerformBranch=1" width="100%" name="status" style="height:450px;background-color:#FFFFFF;">
 
 	<p>{t}Your browser doesn't support iframes, please use this link to perform the requested operation.{/t}
 		<br>
-		<a href='?plug={$plugID}&PerformBranch=1' target="_blank" title="{t}Perform requested operation.{/t}"><b>{t}Initiate operation{/t}</b></a>
+		<a href='?plug={$plugID}&amp;PerformBranch=1' target="_blank" title="{t}Perform requested operation.{/t}"><b>{t}Initiate operation{/t}</b></a>
 	</p>	
 </iframe>
 </div>
