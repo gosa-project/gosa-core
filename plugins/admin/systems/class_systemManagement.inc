@@ -239,7 +239,7 @@ class systems extends plugin
   
     if ($this->dn != "" && isset($_GET['PerformIsoCreation'])){
 
-      $return_button   = "<form type='get' action='main.php' target='_parent'>
+      $return_button   = "<form method='get' action='main.php' target='_parent'>
                             <input type='submit' value='"._("Back")."'>
                             <input type='hidden' name='plug' value='".$_GET['plug']."'/>
                           </form>";
@@ -252,16 +252,15 @@ class systems extends plugin
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
 
         /* Print out html introduction */
-        echo '<!-- headers.tpl--><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-                "http://www.w3.org/TR/html4/transitional.dtd">
-                <html><head><title></title><style type="text/css">@import url("themes/default/style.css");</style>';
-        echo "<script language=\"javascript\" src=\"include/focus.js\" type=\"text/javascript\"></script>";
-        echo "</head>";
-        echo "<body style='background: none;'>
-                <script language=\"javascript\" type=\"text/javascript\">
-                  document.body.scrollTop = document.body.scrollHeight - document.body.clientHeight;
-                </script>
-              <pre>";
+        echo '  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+                <html>
+                  <head>
+                    <title></title>
+                    <style type="text/css">@import url("themes/default/style.css");</style>
+                    <script language="javascript" src="include/focus.js" type="text/javascript"></script>
+                  </head>
+                  <body style="background: none; margin:4px;" id="body" >
+                  <pre>';
 
         /* Open process handle and check if it is a valid process */
         $process= proc_open($command, $dsc, $pipes);
@@ -272,7 +271,7 @@ class systems extends plugin
           while (!feof($pipes[1])){
             $cur_dat = fgets($pipes[1], 1024);
             echo $cur_dat;
-            echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
+            echo '<script language="javascript" type="text/javascript">scrollDown2();</script>' ;
             flush();
           }
         }
@@ -302,8 +301,8 @@ class systems extends plugin
       }
 
       /* Scroll down completly */
-      echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
-      echo "</body></html>";
+      echo '<script language="javascript" type="text/javascript">scrollDown2();</script>' ;
+      echo '</body></html>';
       flush();
       exit;
     }
