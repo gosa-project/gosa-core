@@ -357,7 +357,7 @@ class department extends plugin
   function ShowTagFrame()
   {
     $smarty = get_smarty();
-    $smarty->assign("src","?plug=".$_GET['plug']."&TagDepartment");
+    $smarty->assign("src","?plug=".$_GET['plug']."&amp;TagDepartment");
     $smarty->assign("message","As soon as the tag operation has finished, you can scroll down to end of the page and press the 'Continue' button to continue with the department management dialog.");
     $display=  $smarty->fetch(get_template_path("dep_iframe.tpl",TRUE));
     return($display);
@@ -368,8 +368,18 @@ class department extends plugin
 	{
     if(!$OnlySetTagFlag){
       $smarty= get_smarty();
-      echo "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
-      echo "<body style='background-image:none;margin:3px;color:black'>";
+
+      /* Print out html introduction */
+      echo '  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+        <html>
+        <head>
+        <title></title>
+        <style type="text/css">@import url("themes/default/style.css");</style>
+        <script language="javascript" src="include/focus.js" type="text/javascript"></script>
+        </head>
+        <body style="background-image:none;margin:3px;color:black" id="body" >
+        ';
+
       echo "<h3>".sprintf(_("Tagging '%s'."),"<i>".@LDAP::fix($this->dn)."</i>")."</h3>";
     }
 
@@ -413,6 +423,7 @@ class department extends plugin
           return;
         }
 				$this->handle_object_tagging($attrs['dn'], $this->gosaUnitTag, TRUE );
+        echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
 			}
 		}
     if(!$OnlySetTagFlag){
@@ -421,6 +432,7 @@ class department extends plugin
         <br><input type='submit' name='back' value='"._("Continue")."'>
         </form></div>";
     }
+    echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
 	}
 
 
