@@ -1,7 +1,6 @@
 Target for 2.6:
 ===============
 
-
 * Can't use a dn longer than 100 characters as Glpi contact/technical responsible person.
 
 * Add new smarty gettext plugin -> requires fixing of <b> and <i> tags in

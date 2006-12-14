@@ -2,14 +2,13 @@ GOsa2 changelog
 ===============
 
 * gosa 2.5.7
-  - Fixed login.tpl to display error msgs in the middle of the screen.
-  - Fixed some error outputs in login.php, the screen was broken.
-  - Added auto scroll function to FAI-Create-Branch and Department tagging. (JavaScript)
-  - Fixed problems with missing fai.schema 
-  - Made gid / uid numbers compatible for 32 Bit.
-  - Replaced hard-coded config path /etc/gosa with CONFIG_DIR constant.
-    Some groups were not displayed, server/workstation could not be saved.
-  - Include personal title in DN
+  - Fixed login.tpl to display error msgs in the middle of the screen
+  - Fixed some error outputs in login.php to not break the screen
+  - Added auto scroll function to FAI-Create-Branch and Department tagging
+  - Fixed problems with workstations when fai.schema was not included
+  - Made gid-/uidNumbers 32 bit aware
+  - Replaced hardcoded config path /etc/gosa with CONFIG_DIR constant
+  - Included personal title in DN
   - Added function to remove PPD's from disc
   - Removed old cups dependencies
   - Fixed saving of terminals printer service attribute
