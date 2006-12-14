@@ -608,9 +608,17 @@ class environment extends plugin
     $divlistShares->SetHeight(100);
     $tmp = $this->printOutAssignedShares();
     
+    
     foreach($tmp as $key => $value){
       $img = "";
    
+      $hide       = false;    
+      $background = "";
+      if(chkacl($this->acl,"gotoShare") != ""){
+        $background = "background: #D0D0D0; ";
+        $hide = true;    
+      }
+
       /* Check if entry starts with an ! */
       if(preg_match("/^!/",$this->gotoShares[$key]['server'])){
 
@@ -618,12 +626,12 @@ class environment extends plugin
         if($this->is_group) continue;
     
         /* Create pwd reset images */
-        if($this->gotoShares[$key]['PwdHash'] != ""){
+        if($this->gotoShares[$key]['PwdHash'] != "" && !$hide){
           $img.= "<input type='image' name='gotoShareResetPwd_".base64_encode($key)." 'src='images/list_reset_password.png' alt='"._("Reset password hash")."' 
             title='"._("Reset password hash")."'>";
         }
-        $field1 = array("string" => "<font style=\"color:#C0C0C0\">".$value."</font>" );
-        $field2 = array("string" => $img   , "attach" => "style='border-right:0px;'");
+        $field1 = array("string" => "<font style=\"color:#C0C0C0\">".$value."</font>" , "attach" => "style='".$background."'");
+        $field2 = array("string" => $img   , "attach" => "style='".$background."border-right:0px;'");
       }else{
 
         /* Create pwd reset img && delete image */
@@ -632,10 +640,12 @@ class environment extends plugin
             title='"._("Reset password hash")."'>";
           $img.= "&nbsp;";
         }
+        if(!$hide){
         $img.= "<input type='image' name='gotoShareDel_".base64_encode($key)." 'src='images/edittrash.png' alt='"._("Delete")."' 
           title='"._("Delete share entry")."'>";
-        $field1 = array("string" => $value);
-        $field2 = array("string" => $img   , "attach" => "style='border-right:0px;'");
+        }
+        $field1 = array("string" => $value , "attach" => "style='".$background."'");
+        $field2 = array("string" => $img   , "attach" => "style='".$background."border-right:0px;'");
       }
       $divlistShares->AddEntry(array($field1,$field2));
     }
