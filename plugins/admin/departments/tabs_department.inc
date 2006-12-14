@@ -37,9 +37,11 @@ class deptabs extends tabs
         }
       }
     }
+
     $this->dn= $new_dn;
     $baseobject->dn= $this->dn;
     $this->by_object['department']= $baseobject;
+
     return(tabs::save(TRUE));
   }
 

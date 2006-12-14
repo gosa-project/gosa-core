@@ -214,7 +214,6 @@ class department extends plugin
 		$message= plugin::check();
 
 		/* Permissions for that base? */
-		//	$this->dn= "ou=$this->ou,".$this->base;
 		if (chkacl($this->acl, "create") != ""){
 			$message[]= _("You have no permissions to create a department on this 'Base'.");
 		}
@@ -497,8 +496,6 @@ class department extends plugin
 
 			/* Copy objects from small to big indent levels by replacing src_dn by dst_dn */
 			foreach ($objects as $object => $len){
-
-
 				$src= str_replace("\\","\\\\",$object);
 				$dst= preg_replace("/".str_replace("\\","\\\\",$src_dn)."$/", "$dst_dn", $object);
 				$dst= str_replace($src_dn,$dst_dn,$object);

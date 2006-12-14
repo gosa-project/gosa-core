@@ -194,7 +194,6 @@ class departmentManagement extends plugin
       if (count($message) == 0){
 
         $this->deptabs->save(true);
-        $this->deptabs->by_object['department']->save();     
 
         /* This object must be tagged, so set ObjectTaggingRequested to true */
         if($this->deptabs->by_object['department']->must_be_tagged()){
