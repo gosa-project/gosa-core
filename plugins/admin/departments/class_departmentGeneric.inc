@@ -348,7 +348,7 @@ class department extends plugin
   function ShowMoveFrame()
   {
     $smarty = get_smarty();
-    $smarty->assign("src","?plug=".$_GET['plug']."&PerformRecMove");
+    $smarty->assign("src","?plug=".$_GET['plug']."&amp;PerformRecMove");
     $smarty->assign("message","As soon as the move operation has finished, you can scroll down to end of the page and press the 'Continue' button to continue with the department management dialog.");
     $display=  $smarty->fetch(get_template_path("dep_iframe.tpl",TRUE));
     return($display);
@@ -432,7 +432,6 @@ class department extends plugin
         <br><input type='submit' name='back' value='"._("Continue")."'>
         </form></div>";
     }
-    echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
 	}
 
 
@@ -457,11 +456,19 @@ class department extends plugin
 
 			/* Print header to have styles included */
 			$smarty= get_smarty();
-			echo "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
-			echo "<body style='background-image:none;margin:3px;color:black'>";
+
+      /* Print out html introduction */
+      echo '  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+        <html>
+        <head>
+        <title></title>
+        <style type="text/css">@import url("themes/default/style.css");</style>
+        <script language="javascript" src="include/focus.js" type="text/javascript"></script>
+        </head>
+        <body style="background: none; margin:4px;" id="body" >
+        ';
 
 			echo "<h3>".sprintf(_("Moving '%s' to '%s'"),"<i>".@LDAP::fix($src_dn)."</i>","<i>".@LDAP::fix($dst_dn)."</i>")."</h3>";
-
 
 			/* Check if the destination entry exists */
 			$ldap= $this->config->get_ldap_link();
@@ -498,11 +505,12 @@ class department extends plugin
 
 				echo "<b>"._("Object").":</b> ".@LDAP::fix($src)."<br>";
 
-				if (!$this->copy($src, $dst)){
+        if (!$this->copy($src, $dst)){
 					echo "<font color='#FF0000'><br>".sprintf(_("FAILED to copy %s, aborting operation"),@LDAP::fix($src))."</font>";
 					return (FALSE);
 				}
 
+        echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
 				flush();
 			}
 
@@ -518,6 +526,7 @@ class department extends plugin
 				<br><input type='submit' name='back' value='"._("Continue")."'>
 				</form></div>";
 
+      echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
 			echo "</body></html>";
 
 			return (TRUE);
