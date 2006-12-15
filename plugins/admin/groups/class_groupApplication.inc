@@ -738,11 +738,11 @@ class appgroup extends plugin
             /*  release managent is active
              */
             if(!$this->enableReleaseManagement){
-              $image = "<img class='center' src='images/select_invalid_application.png' 
+              $image = "<img class='center' alt='R' src='images/select_invalid_application.png' 
                           title='"._("This application is no longer available.")."'>&nbsp;";
             }else{
-              $image = "<img class='center' src='images/select_invalid_application.png' 
-                          title='".sprintf(_("This application is not available in any release named %s."),$this->FAIrelease)."'>&nbsp;";
+              $image = "<img class='center' alt='F' src='images/select_invalid_application.png' 
+                          title=\"".sprintf(_("This application is not available in any release named %s."),$this->FAIrelease)."\">&nbsp;";
             }
       
           }elseif(isset($Differences[$entry['App']]) && ($Differences[$entry['App']] == true)) {
