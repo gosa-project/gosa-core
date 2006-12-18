@@ -1,6 +1,7 @@
 <body style="background-color: #8B858B;background-image:none;">
 {* GOsa login - smarty template *}
 {$php_errors}
+{$errors}
 
 <!-- Spacer for some browsers -->
 <div class='gosaLoginSpacer'></div>
@@ -21,7 +22,6 @@
  
     <!-- Formular data, containing a table to center fields -->
     <form action='index.php' method='post' name='mainform' onSubmit='js_check(this);return true;'>
-     {$errors}
      <table summary="" style='vertical-align:middle; text-align:left;' cellspacing='7' align='center'>
       <tr>
         <td>

@@ -55,9 +55,16 @@ class termgeneric extends plugin
                             "memcheck"        => "memcheck",
                             "sysinfo"         => "sysinfo");
 
+  var $fai_activated = FALSE;
 
   function termgeneric ($config, $dn= NULL, $parent= NULL)
   {
+    /* Check if FAI is activated */
+    $tmp = search_config($config->data,"faiManagement","CLASS");
+    if(!empty($tmp)){
+      $this->fai_activated = TRUE;
+    }
+
     plugin::plugin ($config, $dn, $parent);
     $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses);
     /* Read arrays */
@@ -131,34 +138,37 @@ class termgeneric extends plugin
 
     if (isset($_POST['action'])){
 
-      /* Set FAIstate */
-      $ldap = $this->config->get_ldap_link();
-      $ldap->cd($this->config->current['BASE']);
-      $ldap->cat($this->dn,array("objectClass"));
-      $res = $ldap->fetch();
 
-      $attrs = array();
-      $attrs['FAIstate'] = "";
-      if(isset($this->mapActions[$_POST['saction']])){
-        $attrs['FAIstate'] = $this->mapActions[$_POST ['saction']];
+      if($this->fai_activated && $this->dn != "new"){
+        /* Set FAIstate */
+        $ldap = $this->config->get_ldap_link();
+        $ldap->cd($this->config->current['BASE']);
+        $ldap->cat($this->dn,array("objectClass"));
+        $res = $ldap->fetch();
+
+        $attrs = array();
+        $attrs['FAIstate'] = "";
+        if(isset($this->mapActions[$_POST['saction']])){
+          $attrs['FAIstate'] = $this->mapActions[$_POST ['saction']];
+        }
+
+        for($i = 0; $i < $res['objectClass']['count'] ; $i ++){
+          $attrs['objectClass'][] = $res['objectClass'][$i];
+        }
+
+        if(($attrs['FAIstate'] != "") && (!in_array("FAIobject",$attrs['objectClass']))){
+          $attrs['objectClass'][] = "FAIobject";
+        }
+
+        if($attrs['FAIstate'] == ""){
+#FIXME we should check if FAIobject is used anymore
+          $attrs['FAIstate'] = array();
+        }
+
+        $ldap->cd($this->dn);
+        $ldap->modify($attrs);
+        show_ldap_error($ldap->get_error());
       }
-
-      for($i = 0; $i < $res['objectClass']['count'] ; $i ++){
-        $attrs['objectClass'][] = $res['objectClass'][$i];
-      }
-
-      if(($attrs['FAIstate'] != "") && (!in_array("FAIobject",$attrs['objectClass']))){
-        $attrs['objectClass'][] = "FAIobject";
-      }
-
-      if($attrs['FAIstate'] == ""){
-      #FIXME we should check if FAIobject is used anymore
-        $attrs['FAIstate'] = array();
-      }
-
-      $ldap->cd($this->dn);
-      $ldap->modify($attrs);
-      show_ldap_error($ldap->get_error());
 
       switch($_POST['saction']){
         case 'wake':
@@ -297,7 +307,9 @@ class termgeneric extends plugin
     }
 
     /* Show main page */
+    $this->netConfigDNS->cn= $this->cn;
     $smarty->assign("netconfig", $this->netConfigDNS->execute());
+    $smarty->assign("fai_activated",$this->fai_activated);
     $smarty->assign("actionACL", chkacl($this->acl, 'action'));
     return($smarty->fetch (get_template_path('terminal.tpl', TRUE)));
   }

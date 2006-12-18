@@ -111,27 +111,9 @@ class divListFai extends MultiSelectWindow
       $Copy_Paste ="";
     }
 
-    /* Create listhead, it will be shown on top of the divlist.
-     * It provides general navigation and object creation
-     */
-    $listhead =
-      "<div style='background:#F0F0F9;padding:5px;'>&nbsp;".
-
-      "<input class='center' type='image' src='images/list_root.png' align='middle'
-      title='"._("Go to root department")."' name='dep_root' alt='".      _("Root")."'>&nbsp;".
-
-      "<input class='center' type='image' src='images/list_up.png' align='middle'
-      title='"._("Go up one department")."' name='dep_back' alt='"._("Up"). "'>&nbsp;".
-
-      "<input class='center' type='image' src='images/list_home.png' align='middle'
-      title='"._("Go to users home department")."' name='dep_home' alt='"._("Home")."'>&nbsp;".
-
-      " <input class='center' type='image' src='images/list_reload.png' align='middle' title='"._("Reload list")."' name='submit_department' alt='".
-_("Submit")."'>&nbsp;".
-
-      "<img class='center' src=\"images/list_seperator.png\" alt=\"\" align=\"middle\" height=\"16\" width=\"1\">&nbsp;".
-
-      " <input class='center' type='image' src='images/fai_new_profile.png' align='middle'
+    /* Add default header */
+    $listhead = MultiSelectWindow::get_default_header();
+    $listhead.=      " <input class='center' type='image' src='images/fai_new_profile.png' align='middle'
       title='"._("New profile")."' name='Create_profile' alt='"._("P")."'>&nbsp;".
 
       "<img class='center' src=\"images/list_seperator.png\" alt=\"\" align=\"middle\" height=\"16\" width=\"1\">&nbsp;".

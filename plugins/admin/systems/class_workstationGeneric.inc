@@ -59,9 +59,16 @@ class workgeneric extends plugin
                             "sysinfo"         => "sysinfo");
 
 
+  var $fai_activated = FALSE;
 
   function workgeneric ($config, $dn= NULL, $parent= NULL)
   {
+    /* Check if FAI is activated */
+    $tmp = search_config($config->data,"faiManagement","CLASS");
+    if(!empty($tmp)){
+      $this->fai_activated = TRUE;
+    }
+
     plugin::plugin ($config, $dn, $parent);
     $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses);
 
@@ -144,36 +151,38 @@ class workgeneric extends plugin
           print_red(sprintf(_("Execution of '%s' failed!"), $cmd));
         } elseif ($_POST['saction'] != "wake") {
 
-          /* Set FAIstate */
-          $ldap = $this->config->get_ldap_link();
-          $ldap->cd($this->config->current['BASE']);
-          $ldap->cat($this->dn,array("objectClass"));
-          $res = $ldap->fetch();
+          if($this->fai_activated && $this->dn != "new"){
+            /* Set FAIstate */
+            $ldap = $this->config->get_ldap_link();
+            $ldap->cd($this->config->current['BASE']);
+            $ldap->cat($this->dn,array("objectClass"));
+            $res = $ldap->fetch();
 
-          $attrs = array();
-          $attrs['FAIstate'] = "";
-          if(isset($this->mapActions[$_POST['saction']])){
-            $attrs['FAIstate'] = $this->mapActions[$_POST ['saction']];
+            $attrs = array();
+            $attrs['FAIstate'] = "";
+            if(isset($this->mapActions[$_POST['saction']])){
+              $attrs['FAIstate'] = $this->mapActions[$_POST ['saction']];
+            }
+
+            for($i = 0; $i < $res['objectClass']['count'] ; $i ++){
+              $attrs['objectClass'][] = $res['objectClass'][$i];
+            }
+
+            if(($attrs['FAIstate'] != "") && (!in_array("FAIobject",$attrs['objectClass']))){
+              $attrs['objectClass'][] = "FAIobject";
+            }
+
+            if($attrs['FAIstate'] == ""){
+#FIXME we should check if FAIobject is used anymore
+              $attrs['FAIstate'] = array();
+            }
+
+            $ldap->cd($this->dn);
+            $ldap->modify($attrs);
+            show_ldap_error($ldap->get_error());
+
+            $this->didAction= TRUE; 
           }
-
-          for($i = 0; $i < $res['objectClass']['count'] ; $i ++){
-            $attrs['objectClass'][] = $res['objectClass'][$i];
-          }
-
-          if(($attrs['FAIstate'] != "") && (!in_array("FAIobject",$attrs['objectClass']))){
-            $attrs['objectClass'][] = "FAIobject";
-          }
-
-          if($attrs['FAIstate'] == ""){
-            #FIXME we should check if FAIobject is used anymore
-            $attrs['FAIstate'] = array();
-          }
-
-          $ldap->cd($this->dn);
-          $ldap->modify($attrs);
-          show_ldap_error($ldap->get_error());
-  
-          $this->didAction= TRUE;
         }
       }
     }
@@ -267,7 +276,9 @@ class workgeneric extends plugin
     $smarty->assign("inheritTimeServer",$this->inheritTimeServer);
 
     /* Show main page */
+    $this->netConfigDNS->cn= $this->cn;
     $smarty->assign("netconfig", $this->netConfigDNS->execute());
+    $smarty->assign("fai_activated",$this->fai_activated);
     return($smarty->fetch (get_template_path('workstation.tpl', TRUE)));
   }
 

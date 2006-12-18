@@ -1,6 +1,6 @@
 <h2>{t}Processing the requested operation{/t}</h2>
 {$message}
-{t}As soon as the move operation has finished, you can scroll down to end of the page and press the 'Continue' button to continue with the department management dialog.{/t}
+<!--{t}As soon as the move operation has finished, you can scroll down to end of the page and press the 'Continue' button to continue with the department management dialog.{/t}-->
 <br>
 <br>
 <div style="margin:3px;background-color:white; border:1px solid #A0A0A0">

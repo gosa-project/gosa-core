@@ -122,7 +122,7 @@ class termDNS extends plugin
     $display= "";
 
     $smarty->assign("staticAddress", ""); 
-    $smarty->assign("autonet", "");
+    $smarty->assign("autonet", $this->autonet);
  
     /* Check for autonet button */
     if ($this->autonet && isset($_POST['autonet'])){
@@ -157,11 +157,6 @@ class termDNS extends plugin
       }
       $smarty->assign("staticAddress","<font class=\"must\">*</font>");
 
-      if ($this->autonet){
-        $smarty->assign("autonet", "true");
-      } else {
-        $smarty->assign("autonet", "");
-      }
       $display.= $smarty->fetch(get_template_path('network.tpl', TRUE));
       return($display);
     }else{

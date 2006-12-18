@@ -226,64 +226,86 @@ class systems extends plugin
       Create FAI CD ...   
      ********************/
     if ($s_action=="gen_cd"){
-echo "ACL CHECK!";
       $this->dn= $this->terminals[$s_entry]['dn'];
       $_SESSION['objectinfo']= $this->dn;
       return ($smarty->fetch(get_template_path('gencd.tpl', TRUE)));
     }
 
-
     /* Start CD-Creation */
     if (isset($_POST["cd_create"])){
-echo "ACL CHECK!";
-      $smarty->assign("src", "?plug=".$_GET['plug']."&PerformIsoCreation");
+      $smarty->assign("src", "?plug=".$_GET['plug']."&amp;PerformIsoCreation");
       return ($smarty->fetch(get_template_path('gencd_frame.tpl', TRUE)));
     }
-
+  
     if ($this->dn != "" && isset($_GET['PerformIsoCreation'])){
-echo "ACL CHECK!";
 
+      $return_button   = "<form method='get' action='main.php' target='_parent'>
+                            <input type='submit' value='"._("Back")."'>
+                            <input type='hidden' name='plug' value='".$_GET['plug']."'/>
+                          </form>";
+
+      $dsc             = array(0 => array("pipe", "r"), 1 => array("pipe", "w"), 2 => array("pipe", "w"));
+
+      /* Get and check command */
       $command= search_config($this->config->data['TABS'], "workgeneric", "ISOCMD");
       if (check_command($command)){
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
 
-        $dsc= array(0 => array("pipe", "r"), 1 => array("pipe", "w"), 2 => array("pipe", "w"));
-        echo "<html><head>";
-        echo "<script language=\"javascript\" src=\"include/focus.js\" type=\"text/javascript\"></script>";
-        echo "</head>";
-        echo "<body onLoad='scrollDown()'><pre>";
-        $process= proc_open($command, $dsc, $pipes, '/tmp');
+        /* Print out html introduction */
+        echo '  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+                <html>
+                  <head>
+                    <title></title>
+                    <style type="text/css">@import url("themes/default/style.css");</style>
+                    <script language="javascript" src="include/focus.js" type="text/javascript"></script>
+                  </head>
+                  <body style="background: none; margin:4px;" id="body" >
+                  <pre>';
+
+        /* Open process handle and check if it is a valid process */
+        $process= proc_open($command." '".$this->dn."'", $dsc, $pipes);
         if (is_resource($process)) {
           fclose($pipes[0]);
+
+          /* Print out returned lines && write JS to scroll down each line */
           while (!feof($pipes[1])){
-            echo fgets($pipes[1], 1024);
+            $cur_dat = fgets($pipes[1], 1024);
+            echo $cur_dat;
+            echo '<script language="javascript" type="text/javascript">scrollDown2();</script>' ;
             flush();
           }
         }
-        $buffer= stream_get_contents($pipes[2]);
+    
+        /* Get error string && close streams */
+        $buffer = "";
+        while (!feof($pipes[2])){
+          $buffer .= fgets($pipes[2],256);
+        }
+      
         fclose($pipes[1]);
         fclose($pipes[2]);
-        $ret= proc_close($process);
         echo "</pre>";
-        
-        if ($ret == 0){
-          echo "hier der runterladen button";
-        } else {
+      
+        /* Check return code */ 
+        $ret= proc_close($process);
+        if ($ret != 0){
           echo "<h1 style='color:red'>"._("Creating the image failed. Please see the report below.")."</h1>";
           echo "<pre style='color:red'>$buffer</pre>";
         }
+
+        echo $return_button."<br>";
 
       } else {
         $tmp= "<h1 style='color:red'>".sprintf(_("Command '%s', specified for ISO creation doesn't seem to exist."), $command)."</h1>";
         echo $tmp;
       }
 
-      echo "<button onClick='clearTimeout(timeout)'>"._("Disable auto scroll")."</button>";
-      echo "</body></html>";
-
+      /* Scroll down completly */
+      echo '<script language="javascript" type="text/javascript">scrollDown2();</script>' ;
+      echo '</body></html>';
+      flush();
       exit;
     }
-
 
 
     /********************
@@ -634,7 +656,7 @@ echo "ACL CHECK!";
     $responsible= array();
     foreach ($this->config->departments as $key => $value){
       if (get_module_permission(get_permissions ($value, $this->ui->subtreeACL),
-            "terminal", $value) == "#all#"){
+            "systems", $value) != ""){
         $responsible[$key]= $value;
       }
     }

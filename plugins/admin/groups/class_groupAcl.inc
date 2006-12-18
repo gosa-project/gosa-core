@@ -19,6 +19,7 @@ class acl extends plugin
   var $object= "";
   var $current_acl= "";
   var $selfflag= FALSE;
+  var $tacl= "";
 
   var $gosaSubtreeACL;
 
@@ -52,6 +53,12 @@ class acl extends plugin
 
   function execute()
   {
+	if (chkacl($this->acl, 'acl') != ""){
+		$display= "<b>"._("You have no permissions to view and edit ACLs.")."</b>";
+			
+		return ($display);
+	}
+
 	/* Call parent execute */
 	plugin::execute();
 
@@ -83,7 +90,7 @@ class acl extends plugin
 	$display= $smarty->fetch (get_template_path('acl.tpl', TRUE));
 
 	/* Show acl stuff */
-	$this->acl= get_module_permission (array($this->current_acl), $this->object, "");
+	$this->tacl= get_module_permission (array($this->current_acl), $this->object, "");
 	$display.= $this->print_attributes ($this->objects[$this->object]);
 	return ($display);
   }
@@ -106,60 +113,67 @@ class acl extends plugin
   /* Save data to object */
   function save_object()
   {
-	plugin::save_object();
+	if (chkacl($this->acl, 'acl') == ""){
+		plugin::save_object();
 
-	if (!isset($_POST['object'])){
-		return;
-	}
+		if (!isset($_POST['object'])){
+			return;
+		}
 
-	/* Strip of old information */
-	if ($this->object == "all"){
-		$this->current_acl= preg_replace ( "/[,]?all[,]?/", "", $this->current_acl);
-	}
-	$this->current_acl= preg_replace ( "/(^|[^a-z0-9A-Z])$this->object#[^,]*[,]?/", "", $this->current_acl);
+		/* Strip of old information */
+		if ($this->object == "all"){
+			$this->current_acl= preg_replace ( "/[,]?all[,]?/", "", $this->current_acl);
+		}
+		$this->current_acl= preg_replace ( "/(^|[^a-z0-9A-Z])$this->object#[^,]*[,]?/", ",", $this->current_acl);
 
-	/* assemble new attributes */
-	$attrs= "";
-	if (isset($_POST['all'])){
-		$attrs.= "#all";
-	}
-	if ($this->object != "all" && !isset($_POST['all']) && $this->object != ""){
-		foreach ($this->objects[$this->object] as $key => $val){
-			if (is_integer($key)){
-				$aname= $val;
-			} else {
-				$aname= $key;
-			}
-			if (isset($_POST[$aname])){
-				$attrs.= "#$aname";
+		/* assemble new attributes */
+		$attrs= "";
+		if (isset($_POST['all'])){
+			$attrs.= "#all";
+		}
+		if ($this->object != "all" && !isset($_POST['all']) && $this->object != ""){
+			foreach ($this->objects[$this->object] as $key => $val){
+				if (is_integer($key)){
+					$aname= $val;
+				} else {
+					$aname= $key;
+				}
+				if (isset($_POST[$aname])){
+					$attrs.= "#$aname";
+				}
 			}
 		}
-	}
 
-	/* append information */
-	if ($attrs != ""){
-		$tmp= $this->object;
-		$attrs= $tmp.$attrs;
-	}
-	if ($this->current_acl != "" && $attrs != ""){
-		$this->current_acl.= ",";
-	}
-	$this->current_acl.= $attrs;
-	if (preg_match("/all#all/", $this->current_acl)){
-		$this->current_acl= "all";
-	}
-	if (preg_match("/^all,/", $this->current_acl)){
-		$this->current_acl= "all";
-	}
+		/* append information */
+		if ($attrs != ""){
+			$tmp= $this->object;
+			$attrs= $tmp.$attrs;
+		}
+		if ($this->current_acl != "" && $attrs != ""){
+			$this->current_acl.= ",";
+		}
+		$this->current_acl.= $attrs;
+		if (preg_match("/all#all/", $this->current_acl)){
+			$this->current_acl= "all";
+		}
+		if (preg_match("/^all,/", $this->current_acl)){
+			$this->current_acl= "all";
+		}
 
-	/* Save current object selection */
-	if (isset($_POST['object'])){
-		$this->object= $_POST['object'];
-	}
-	if (isset($_POST['selfflag'])){
-		$this->selfflag= TRUE;
-	} else {
-		$this->selfflag= FALSE;
+		/* Save current object selection */
+		if (isset($_POST['object'])){
+			$this->object= $_POST['object'];
+		}
+		if (isset($_POST['selfflag'])){
+			$this->selfflag= TRUE;
+		} else {
+			$this->selfflag= FALSE;
+		}
+
+		/* Remove double colons, strip trailing colon... */
+		$this->current_acl= preg_replace("/,,/", ",", $this->current_acl);
+		$this->current_acl= preg_replace("/,$/", "", $this->current_acl);
+		$this->current_acl= preg_replace("/^,/", "", $this->current_acl);
 	}
   }
 
@@ -202,7 +216,7 @@ class acl extends plugin
   function print_attributes ($name)
   {
   	$display= "<input type=checkbox name=\"all\" value=\"1\"";
-	if (chkacl ($this->acl, "all") == ""){
+	if (chkacl ($this->tacl, "all") == ""){
 		$display.= " checked";
 	}
 	$display.= "><b>"._("All fields are writeable")."</b><br>";
@@ -220,13 +234,13 @@ class acl extends plugin
 
 		if (is_integer($key)){
 			$display.= "<td><input type=checkbox name=\"$val\" value=\"1\" ";
-			if (chkacl ($this->acl, "$val") == ""){
+			if (chkacl ($this->tacl, "$val") == ""){
 				$display.= "checked";
 			}
 			$display.= ">$val</td>";
 		} else {
 			$display.= "<td><input type=checkbox name=\"$key\" value=\"1\"";
-			if (chkacl ($this->acl, "$key") == ""){
+			if (chkacl ($this->tacl, "$key") == ""){
 				$display.= "checked";
 			}
 			$display.= ">"._($val)."</td>";

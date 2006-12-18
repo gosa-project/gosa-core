@@ -764,6 +764,14 @@ function show_setup_page3($withoutput = true)
 function show_setup_page4($withoutput = true)
 {
   $smarty= get_smarty();      
+  $checkvars = array("location", "admin", "password", "peopleou", "base",
+      "peopledn", "arr_crypts", "uidbase","errorlvl");
+
+  $fault     = false;              
+  $uri       = $_SESSION['ldapconf']['uri'];
+  $ldapconf  = $_SESSION['ldapconf'];
+  $arr_crypts= array();
+  $temp      = "";
 
   /* check POST data */
   if(isset($_POST['check'])) {
@@ -777,7 +785,7 @@ function show_setup_page4($withoutput = true)
         continue;
       }
 
-      if((isset($_POST[$key]))&&($_POST[$key]!="")) {
+      if((isset($_POST[$key]))&&(!empty($_POST[$key]))) {
         $_SESSION['ldapconf'][$key] = $_POST[$key];
       } else {
         if($withoutput) {
@@ -802,14 +810,6 @@ function show_setup_page4($withoutput = true)
     $_SESSION['ldapconf']['base']= $base;
   }
   require_once("class_password-methods.inc");
-
-  $fault     = false;              
-  $uri       = $_SESSION['ldapconf']['uri'];
-  $ldapconf  = $_SESSION['ldapconf'];
-  $arr_crypts= array();
-  $temp      = "";
-  $checkvars = array("location", "admin", "password", "peopleou", "base",
-      "peopledn", "arr_crypts", "mail", "uidbase","errorlvl");
 
   if(!isset($_SESSION['ldapconf']['arr_cryptkeys'])) {
     require_once("class_password-methods.inc");
@@ -998,69 +998,48 @@ function create_user_for_setup($withoutput=true)
      We check that, if this user or group is missing we ask for creating them */
   $ldap= new LDAP($_SESSION['ldapconf']['admin'],    $_SESSION['ldapconf']['password'],   $_SESSION['ldapconf']['uri']);
 
-  /* 
-  Now we are testing for a group, with the rights :all 
-  */
-  
+  /* Now we are testing for a group, with the rights :all  */
   $ldap->cd($ldapconf['base']);
   $ldap->search("(&(objectClass=gosaObject)(gosaSubtreeACL=:all))");
 
   $group_cnt  = $ldap->count();
   $data       = $ldap->fetch();
 
-//  $str_there  = "Searching for Aminitrative users <br><br>";
-
-  /* 
-  We need to create administrative user and group  because theres no group found 
-  */
+  /* We need to create administrative user and group  because there was no group found */
   if($group_cnt < 1) {
     
-    /* 
-    Set var to create user 
-    */
-//    $str_there  =   "no group found<br>";
-
     $need_to_create_group = true;
     $need_to_create_user  = true;
 
-
     /* Output error */
-    if(($withoutput)&&(!isset($_POST['new_admin']))){
-      print_red(_("You're missing an administrative account for GOsa, you'll not be able to administrate anything!"));
-    }
+#    if(($withoutput)&&(!isset($_POST['new_admin']))){
+#      print_red(_("You're missing an administrative account for GOsa, you'll not be able to administrate anything!"));
+#    }
   } else {
     
-//    $str_there = "Group found <br>".$data['dn'];    
-
     $need_to_create_group = false;
- 
     $ldap->clearResult();
    
-    /* We found an Administrative Group, is there a user, too */
+    /* We found an Administrative Group, is there a user too ? */
     if(isset($data['memberUid'][0])) {
-      $str = "uid=".$data['memberUid']['0'];
+      $str      = "uid=".$data['memberUid']['0'];
       $ldap->search("(&(objectClass=gosaAccount)(objectClass=person)(".$str."))");
-      $data2   = $ldap->fetch();
+      $data2    = $ldap->fetch();
   
       /* We must create a user */
       if (($ldap->count() < 1)||(!isset($data2))) {
-//        $str_there.="Missing user";
-        
         $need_to_create_user = true;
-      
-        if(($withoutput)&&(!isset($_POST['new_admin']))){
-          print_red(_("You're missing an administrative account for GOsa, you'll not be able to administrate anything!"));
-        }
+#        if(($withoutput)&&(!isset($_POST['new_admin']))){
+#          print_red(_("You're missing an administrative account for GOsa, you'll not be able to administrate anything!"));
+#        }
       }else {
-//        $str_there.="<br>User found <br>".$data2['dn'];
         $need_to_create_user = false;
       }
     } else {
       $need_to_create_user=true;
-      if(($withoutput)&&(!isset($_POST['new_admin']))){
-          print_red(_("You're missing an administrative account for GOsa, you'll not be able to administrate anything!"));
-        }   
-//      $str_there.="<br>No User found <br>";
+#      if(($withoutput)&&(!isset($_POST['new_admin']))){
+#          print_red(_("You're missing an administrative account for GOsa, you'll not be able to administrate anything!"));
+#        }   
     }
   }
 
@@ -1110,8 +1089,7 @@ function create_user_for_setup($withoutput=true)
         $ldap->cd($dn);
         $ldap->add($arr);
         if($ldap->error!="Success"){
-          print_red($ldap->error);
-          print_red("Can't create user, and / or Group, possibly this problem  depends on an empty LDAP server. Check your configuration and try again!");
+          show_ldap_error($ldap->get_error(),_("User and/or group could not be created, please check your configuration twice !"));
         }
       }    
     }
@@ -1154,7 +1132,7 @@ function create_user_for_setup($withoutput=true)
     return(true);
   } else {
 
-    if((!isset($create_user))||(!($create_user))) {
+    if((!isset($need_to_create_user))||(!($need_to_create_user))) {
       $smarty->assign ("content", get_template_path('setup_useradmin.tpl'));
       $smarty->assign("exists",true);
     } else {

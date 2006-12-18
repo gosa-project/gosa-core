@@ -62,6 +62,7 @@ $ACLD['group']=      array("cn",
 			"gidNumber");
 $ACLD['appgroup']=   array();
 $ACLD['all']=        array();
+$ACLD['acl']=   array('acl');
 $ACLD['mailgroup']=  array("default_permission",
 			"imap_perms",
 			"member_permissions",
@@ -102,6 +103,100 @@ $ACLD['terminal']=   array("gotoAdaptPath",
 			"gotoXdmcpServer",
 			"login",
 			"password");
+$ACLD['workgeneric']=   array("base",
+			"gotoMode",
+			"gotoSyslogServer",
+			"gotoNtpServer",
+			"action",
+			"password");
+$ACLD['workstartup']=   array("gotoBootKernel",
+			"gotoKernelParameters",
+			"FAIdebianMirror",
+			"FAIclass",
+			"gotoModules",
+			"gotoShare");
+$ACLD['workservice']=   array("gotoXKbModel",
+			"gotoXKbLayout",
+			"gotoXKbVariant",
+			"gotoXMouseType",
+			"gotoXMouseport",
+			"gotoXResolution",
+			"gotoXColordepth",
+			"AutoSync",
+			"gotoXHsync",
+			"gotoVHsync",
+			"gotoScannerEnable",
+			"gotoXDriver");
+$ACLD['printgeneric']=   array("cn",
+			"base",
+			"labeledURI",
+			"gotoPrinterPPD",
+			"gotoUserPrinter",
+			"macAddress",
+			"gotoUserAdminPrinter",
+			"gotoGroupAdminPrinter",
+			"gotoUserPrinter",
+			"gotoAdminPrinter",
+			"description");
+$ACLD['servgeneric']=   array("cn",
+			"base",
+			"create",
+			"gotoMode",
+			"description");
+$ACLD['servdb']=   array("goKrbServer",
+			"goKrbRealm",
+			"goKrbAdmin",
+			"goFaxServer",
+			"goFaxAdmin",
+			"goFaxPassword",
+			"goFonServer",
+			"goFonAdmin",
+			"goFonPassword",
+			"goFonCountryCode",
+			"goFonAreaCode",
+			"goImapServer",
+			"goImapPassword",
+			"goImapName",
+			"goImapConnect",
+			"goImapAdmin",
+			"goImapPassword",
+			"goImapSievePort",
+			"goLogDBServer",
+			"goLogAdmin",
+			"goLogPassword",
+			"goGlpiServer",
+			"goGlpiAdmin",
+			"goGlpiPassword",
+			"goGlpiDatabase",
+			"goKrbPassword");
+$ACLD['servkolab']=   array("postfix_mydomain",
+			"postfix_mydestination",
+			"cyrus_admins",
+			"cyrus_pop3s",
+			"cyrus_imap",
+			"cyrus_imaps",
+			"cyrus_sieve",
+			"proftpd_ftp",
+			"apache_http",
+			"postfix_enable_virus_scan",
+			"apache_allow_unauthenticated_fb",
+			"postfix_mynetworks",
+			"postfix_relayhost",
+			"postfix_allow_unauthenticated",
+			"cyrus_pop3");
+$ACLD['servservice']=   array("goExportEntry",
+			"goExportEntry",
+			"goNtpServer",
+			"goLdapBase",
+			"goTerminalServer",
+			"goXdmcpIsEnabled",
+			"goSyslogServer",
+			"goCupsServer",
+			"goMailServer",
+			"goLdapServer");
+$ACLD['servrepository']=   array("base",
+			"gotoMode",
+			"description");
 $ACLD['user']=       array("academicTitle",
 			"create",
 			"delete",
@@ -143,7 +238,7 @@ $ACLD['user']=       array("academicTitle",
 			"telephoneNumber",
 			"uid",
 			"vocation");
-$ACLD['mail']=       array(
+$ACLD['mailAccount']=       array(
 			"custom_sieve",
 			"gosaMailAlternateAddress",
 #			"gosaMailDeliveryMode",
@@ -157,7 +252,7 @@ $ACLD['mail']=       array(
                         "drop_own_mails",
 			"mail",
 			"only_local");
-$ACLD['posix']=      array("allowedHosts",
+$ACLD['posixAccount']=      array("allowedHosts",
 			"force_ids",
 			"gidNumber",
 			"gosaDefaultLanguage",
@@ -176,7 +271,7 @@ $ACLD['posix']=      array("allowedHosts",
 			"shadowMin",
 			"shadowWarning",
 			"uidNumber");
-$ACLD['samba']=      
+$ACLD['sambaAccount']=      
 			array("acctFlags" => "samba2:acctFlags", 
 			"allow_pwchange" => "samba2:allow_pwchange",
 			"homeDrive" 	=> "samba2:homeDrive",
@@ -267,7 +362,7 @@ $ACLD['conference']= array(
 			"goFonConferenceOption_c",
 			"goFonConferenceOwner");
 
-$ACLD['gotoEnvironment']=array(
+$ACLD['environment']=array(
 					"gotoPrinter",
 					"gotoEnvironment",
 					"gotoShare",
@@ -284,6 +379,8 @@ $ACLD['gotoEnvironment']=array(
 $ACLD['phpgwAccount']			=array("phpgwAccount" 			);
 $ACLD['webdavAccount']			=array("webdavAccount" 			);
 $ACLD['intranetAccount']		=array("intranetAccount" 		);
+$ACLD['systems']			=array("systems" 		);
+$ACLD['FAIclass']			=array("FAIclass" 		);
 $ACLD['pptpAccount']			=array("gosapptp" 	  			);
 $ACLD['phpscheduleitAccount']	=array("gosaphpscheduleit" 	  	);
 $ACLD['opengwAccount']			=array(	"opengwAccount"	=>"Enable/disable account",	

@@ -1091,7 +1091,12 @@ class user extends plugin
     $message= plugin::check();
 
     /* Assemble cn */
-    $this->cn= $this->givenName." ".$this->sn;
+    if ($this->personalTitle == ""){
+      $pt= "";
+    } else {
+      $pt= $this->personalTitle." ";
+    }
+    $this->cn= $pt.$this->givenName." ".$this->sn;
 
     /* Permissions for that base? */
     if (isset($this->config->current['DNMODE']) && $this->config->current['DNMODE'] == "uid"){

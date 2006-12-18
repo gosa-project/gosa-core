@@ -113,7 +113,7 @@ class termservice extends plugin
       $this->XKbModels[$type] = $type;
     }
 
-    /* Additional values will be extracted from /etc/gosa/keyboardLayouts */
+    /* Additional values will be extracted from CONFIG_DIR./keyboardLayouts */
     $this->XKbLayouts= array ("default"=>"["._("inherited")."]","de"=> "de","intl" =>"intl","us" =>"us");
     $this->XKbVariants= array ("default"=>"["._("inherited")."]", "nodeadkeys"=>"nodeadkeys", "basic"=>"basic");
 
@@ -196,7 +196,7 @@ class termservice extends plugin
     ksort($this->hardware_list);
 
     /* Convert gotoLpdEnable */
-    $this->gotoLpdEnable= preg_match("/yes/",$this->gotoLpdEnable);
+    $this->gotoLpdEnable= preg_match("/yes/i",$this->gotoLpdEnable);
 
       /* Load hardware list */
     $ldap= $this->config->get_ldap_link();

@@ -1,7 +1,20 @@
 GOsa2 changelog
 ===============
 * gosa 2.5.7
-  -
+  - Fixed login.tpl to display error msgs in the middle of the screen
+  - Fixed some error outputs in login.php to not break the screen
+  - Added auto scroll function to FAI-Create-Branch and Department tagging
+  - Fixed problems with workstations when fai.schema was not included
+  - Made gid-/uidNumbers 32 bit aware
+  - Replaced hardcoded config path /etc/gosa with CONFIG_DIR constant
+  - Included personal title in DN
+  - Added function to remove PPD's from disc
+  - Removed old cups dependencies
+  - Fixed saving of terminals printer service attribute
+  - Fixed a ACL naming bug, that avoids that an admin with non "all" ACLs
+    can edit specified objects.
+  - Fixed simultaneous move + rename for deparments
+  - Internally updated to smarty 2.6.16
 
 * gosa 2.5.6
   - Copy & paste implemented into FAI

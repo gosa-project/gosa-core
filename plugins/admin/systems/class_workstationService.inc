@@ -112,7 +112,7 @@ class workservice extends plugin
                              "/dev/ttyS1"       => "/dev/ttyS1",          "/dev/psaux"  =>"/dev/psaux", 
                              "/dev/input/mice"  => "/dev/input/mice");
 
-    /* Additional values will be extracted from /etc/gosa/keyboardLayouts */
+    /* Additional values will be extracted from CONFIG_DIR/gosa/keyboardLayouts */
     $this->XKbLayouts= array ("de"=> "de","intl" =>"intl","us" =>"us");
     $this->XKbVariants= array ("nodeadkeys"=>"nodeadkeys", "basic"=>"basic");
 

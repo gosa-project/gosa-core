@@ -58,10 +58,10 @@ if (!$remove_lock){
   /* Adjust acl's to mode */
   if (isset($_SESSION['edit'])){
     $acl= get_permissions ($ui->dn, $ui->subtreeACL);
-    $sambaAccount->acl= get_module_permission($acl, "samba", $ui->dn);
+    $sambaAccount->acl= get_module_permission($acl, "sambaAccount", $ui->dn);
   } else {
     $acl= get_permissions ($ui->dn, $ui->subtreeACL);
-    $editacl= get_module_permission($acl, "samba", $ui->dn);
+    $editacl= get_module_permission($acl, "sambaAccount", $ui->dn);
     $sambaAccount->acl= "#none#";
   }
 
@@ -76,7 +76,7 @@ if (!$remove_lock){
       $sambaAccount->save ();
       gosa_log ("User/samba object'".$ui->dn."' has been saved");
       $sambaAccount->acl= "#none#";
-      $editacl= get_module_permission($acl, "samba", $ui->dn);
+      $editacl= get_module_permission($acl, "sambaAccount", $ui->dn);
       del_lock ($ui->dn);
       sess_del ('edit');
 

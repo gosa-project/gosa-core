@@ -55,8 +55,19 @@ class workstartup extends plugin
   /* Contains all possible server/release/class settings */
   var $FAIServRepConfig   = array();
 
+  var $fai_activated      = FALSE;
+
   function workstartup ($config, $dn= NULL, $parent= NULL)
   {
+    /* Cehck if FAI is activated, else do not save any FAI attributes */
+    $tmp = search_config($config->data,"faiManagement","CLASS");
+    if(!empty($tmp)){
+      $this->fai_activated = TRUE;
+    }else{
+      $this->attributes = array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters", "gotoShare");
+      $this->objectclasses  = array("GOhard");
+    }
+
     plugin::plugin ($config, $dn, $parent);
 
     /* Creating a list of valid Mirrors 
@@ -68,143 +79,148 @@ class workstartup extends plugin
     foreach($this->config->data['SERVERS']['LDAP'] as $server) {
       $this->goLdapServerList[$server]= $server; // $this->config->data['SERVERS']['LDAP'];
     }
-   
-    $_SESSION['getAvailableClassesForThisRelease_CACHE'] = array();
-    $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'] = array();
 
-    $ui = get_userinfo();
-    $res = get_list(          "(|(objectClass=FAIpackageList)".
-        "(objectClass=FAItemplate)".
-        "(objectClass=FAIvariable)".
-        "(objectClass=FAIscript)".
-        "(objectClass=FAIhook)".
-        "(objectClass=FAIprofile)".
-        "(objectClass=FAIpartitionTable))",
-        $ui->subtreeACL,$this->config->current['BASE'],
-        array("cn","objectClass","FAIdebianSection"));
-    
-    foreach($res as $attr){
-      $cn = $attr['cn'][0];
-    
-      $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'][] = $attr;
- 
-      if(in_array('FAIpackageList',$attr['objectClass'])){
-        $tmp2[$cn]['FAIpackageList']['obj']   = 'FAIpackageList'; 
-        $tmp2[$cn]['FAIpackageList']['kzl']   = 'Pl';
-        $tmp2[$cn]['FAIpackageList']['sec']   = $attr['FAIdebianSection'];
-        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+  
+    /* Perform some special FAI stuff, only if it is activated */
+    if($this->fai_activated){
+
+      $_SESSION['getAvailableClassesForThisRelease_CACHE'] = array();
+      $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'] = array();
+
+      $ui = get_userinfo();
+      $res = get_list(          "(|(objectClass=FAIpackageList)".
+          "(objectClass=FAItemplate)".
+          "(objectClass=FAIvariable)".
+          "(objectClass=FAIscript)".
+          "(objectClass=FAIhook)".
+          "(objectClass=FAIprofile)".
+          "(objectClass=FAIpartitionTable))",
+          $ui->subtreeACL,$this->config->current['BASE'],
+          array("cn","objectClass","FAIdebianSection"));
+
+      foreach($res as $attr){
+        $cn = $attr['cn'][0];
+
+        $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'][] = $attr;
+
+        if(in_array('FAIpackageList',$attr['objectClass'])){
+          $tmp2[$cn]['FAIpackageList']['obj']   = 'FAIpackageList'; 
+          $tmp2[$cn]['FAIpackageList']['kzl']   = 'Pl';
+          $tmp2[$cn]['FAIpackageList']['sec']   = $attr['FAIdebianSection'];
+          $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+        }
+        if(in_array('FAItemplate',$attr['objectClass'])){
+          $tmp2[$cn]['FAItemplate']['obj']      = 'FAItemplate'; 
+          $tmp2[$cn]['FAItemplate']['kzl']      = 'T'; 
+          $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+        }
+        if(in_array('FAIvariable',$attr['objectClass'])){
+          $tmp2[$cn]['FAIvariable']['obj']      = 'FAIvariable'; 
+          $tmp2[$cn]['FAIvariable']['kzl']      = 'V'; 
+          $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+        }
+        if(in_array('FAIscript',$attr['objectClass'])){
+          $tmp2[$cn]['FAIscript']['obj']        = 'FAIscript'; 
+          $tmp2[$cn]['FAIscript']['kzl']        = 'S'; 
+          $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+        }
+        if(in_array('FAIhook',$attr['objectClass'])){
+          $tmp2[$cn]['FAIhook']['obj']          = 'FAIhook'; 
+          $tmp2[$cn]['FAIhook']['kzl']          = 'H'; 
+          $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+        }
+        if(in_array('FAIpartitionTable',$attr['objectClass'])){
+          $tmp2[$cn]['FAIpartitionTable']['obj']= 'FAIpartitionTable'; 
+          $tmp2[$cn]['FAIpartitionTable']['kzl']= 'Pt'; 
+          $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+        }
+        if(in_array('FAIprofile',$attr['objectClass'])){
+          $tmp2[$cn]['FAIprofile']['obj']= 'FAIprofile'; 
+          $tmp2[$cn]['FAIprofile']['kzl']= 'P'; 
+          $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+        }
       }
-      if(in_array('FAItemplate',$attr['objectClass'])){
-        $tmp2[$cn]['FAItemplate']['obj']      = 'FAItemplate'; 
-        $tmp2[$cn]['FAItemplate']['kzl']      = 'T'; 
-        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+      if(is_array($this->FAIclasses)){
+        natcasesort($this->FAIclasses);
       }
-      if(in_array('FAIvariable',$attr['objectClass'])){
-        $tmp2[$cn]['FAIvariable']['obj']      = 'FAIvariable'; 
-        $tmp2[$cn]['FAIvariable']['kzl']      = 'V'; 
-        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+
+      if(isset($tmp2)){
+        $this->FAIclassInfo = $tmp2;
+      } else {
+        $this->FAIclassInfo = array();
       }
-      if(in_array('FAIscript',$attr['objectClass'])){
-        $tmp2[$cn]['FAIscript']['obj']        = 'FAIscript'; 
-        $tmp2[$cn]['FAIscript']['kzl']        = 'S'; 
-        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
-      }
-      if(in_array('FAIhook',$attr['objectClass'])){
-        $tmp2[$cn]['FAIhook']['obj']          = 'FAIhook'; 
-        $tmp2[$cn]['FAIhook']['kzl']          = 'H'; 
-        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
-      }
-      if(in_array('FAIpartitionTable',$attr['objectClass'])){
-        $tmp2[$cn]['FAIpartitionTable']['obj']= 'FAIpartitionTable'; 
-        $tmp2[$cn]['FAIpartitionTable']['kzl']= 'Pt'; 
-        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
-      }
-      if(in_array('FAIprofile',$attr['objectClass'])){
-        $tmp2[$cn]['FAIprofile']['obj']= 'FAIprofile'; 
-        $tmp2[$cn]['FAIprofile']['kzl']= 'P'; 
-        $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
-      }
-    }
-    if(is_array($this->FAIclasses)){
-      natcasesort($this->FAIclasses);
-    }
 
-    if(isset($tmp2)){
-      $this->FAIclassInfo = $tmp2;
-    } else {
-      $this->FAIclassInfo = array();
-    }
+      /* Build up an array like this one :
+         [$url]['SERVER'] = 'srv1-002';
+         [$url]['RELEASE']['siga/rc9.0.2']
+         ['SECTIONS'][0] "main";
+         ['SECTIONS'][1] "non-free";
+         [$url]['RELEASE']['siga/rc9.0.2']
+         ['PACKAGES'][0] "pkg1";
+         ['PACKAGES'][1] "postfix";
+       */
 
-    /* Build up an array like this one :
-        [$url]['SERVER'] = 'srv1-002';
-        [$url]['RELEASE']['siga/rc9.0.2']
-                                           ['SECTIONS'][0] "main";
-                                           ['SECTIONS'][1] "non-free";
-        [$url]['RELEASE']['siga/rc9.0.2']
-                                           ['PACKAGES'][0] "pkg1";
-                                           ['PACKAGES'][1] "postfix";
-     */
+      $ldap->search("(&(FAIrepository=*)(objectClass=FAIrepositoryServer))",array("FAIrepository"));
+      $test = array();
+      while($attr = $ldap->fetch()){
+        if(isset($attr['FAIrepository'])){
 
-    $ldap->search("(&(FAIrepository=*)(objectClass=FAIrepositoryServer))",array("FAIrepository"));
-    $test = array();
-    while($attr = $ldap->fetch()){
-      if(isset($attr['FAIrepository'])){
+          unset($attr['FAIrepository']['count']);
 
-        unset($attr['FAIrepository']['count']);
+          foreach($attr['FAIrepository'] as $rep){
+            $tmp = split("\|",$rep);
 
-        foreach($attr['FAIrepository'] as $rep){
-          $tmp = split("\|",$rep);
+            if(count($tmp)==4){
+              $sections = split(",",$tmp[3]);
+              $release  = $tmp[2];
+              $server   = $tmp[1];
+              $url      = $tmp[0];
 
-          if(count($tmp)==4){
-            $sections = split(",",$tmp[3]);
-            $release  = $tmp[2];
-            $server   = $tmp[1];
-            $url      = $tmp[0];
-           
-            $test[$url]['RELEASE'][$release]['SECTIONS'] = $sections;
-    
-            /* Result will be cached
-             */
-            $test[$url]['RELEASE'][$release]['PACKAGES'] = $this->getAvailableClassesForThisRelease($release);
-            $test[$url]['SERVER'] = $server;
+              $test[$url]['RELEASE'][$release]['SECTIONS'] = $sections;
 
-            /* auto gets all releases/classes 
-             */
-            $test['auto']['RELEASE'][$release]['SECTION'] = $sections;
-            $test['auto']['RELEASE'][$release]['PACKAGES'] = $this->getAvailableClassesForThisRelease($release);
+              /* Result will be cached
+               */
+              $test[$url]['RELEASE'][$release]['PACKAGES'] = $this->getAvailableClassesForThisRelease($release);
+              $test[$url]['SERVER'] = $server;
+
+              /* auto gets all releases/classes 
+               */
+              $test['auto']['RELEASE'][$release]['SECTION'] = $sections;
+              $test['auto']['RELEASE'][$release]['PACKAGES'] = $this->getAvailableClassesForThisRelease($release);
+            }
           }
         }
       }
-    }
-    
-    /* Add possible elements from hook */
-    $lines= $this->GetHookElements();
-    foreach ($lines as $hline){
-      $entries= split(";", $hline);
-      if (isset($entries[1]) && !isset($test[$entries[1]])){
-        $test[$entries[1]]['RELEASE']= array();
 
-        /* Split releases */
-        if (isset($entries[2])){
-          $releases= split(",", $entries[2]);
+      /* Add possible elements from hook */
+      $lines= $this->GetHookElements();
+      foreach ($lines as $hline){
+        $entries= split(";", $hline);
+        if (isset($entries[1]) && !isset($test[$entries[1]])){
+          $test[$entries[1]]['RELEASE']= array();
 
-          foreach ($releases as $release){
-            $rname= preg_replace('/:.*$/', '', $release);
-            $sections= split(':', preg_replace('/^[^:]+:([^|]+)|.*$/', '\1', $release));
-            $classes= split('\|', preg_replace('/^[^|]+\|(.*)$/', '\1', $release));
-            $test[$entries[1]]['RELEASE'][$rname]= array();
-            $test[$entries[1]]['RELEASE'][$rname]['SECTION']= $sections;
-            foreach ($classes as $class){
-              if ($class != ""){
-                $test[$entries[1]]['RELEASE'][$rname]['PACKAGES'][$class]= $class;
+          /* Split releases */
+          if (isset($entries[2])){
+            $releases= split(",", $entries[2]);
+
+            foreach ($releases as $release){
+              $rname= preg_replace('/:.*$/', '', $release);
+              $sections= split(':', preg_replace('/^[^:]+:([^|]+)|.*$/', '\1', $release));
+              $classes= split('\|', preg_replace('/^[^|]+\|(.*)$/', '\1', $release));
+              $test[$entries[1]]['RELEASE'][$rname]= array();
+              $test[$entries[1]]['RELEASE'][$rname]['SECTION']= $sections;
+              foreach ($classes as $class){
+                if ($class != ""){
+                  $test[$entries[1]]['RELEASE'][$rname]['PACKAGES'][$class]= $class;
+                }
               }
             }
           }
         }
       }
-    }
-    
-    $this->FAIServRepConfig= $test;
+
+      $this->FAIServRepConfig= $test;
+    } // Do FAI stuff end   
 
     /* Get arrays */
     foreach (array("gotoModules", "gotoAutoFs", "gotoFilesystem") as $val){
@@ -217,6 +233,7 @@ class workstartup extends plugin
       }
       sort ($this->$val);
       $this->$val= array_unique($this->$val);
+      $this->saved_attributes[$val]= $this->$val;
     }
 
     /* Parse Kernel Parameters to decide what boot mode is enabled */
@@ -251,24 +268,28 @@ class workstartup extends plugin
     $this->gotoShareSelections= $config->getShareList(true);
     $this->gotoAvailableShares= $config->getShareList(false);
     $tmp2 = array();
-  
-    if((isset($this->FAIclass))&&(!is_array($this->FAIclass))){
-      $tmp = array();
-      $tmp = split(" ",$this->FAIclass);
-      $tmp2 =array();  
-    
-      foreach($tmp as $class){
-        if( ":" == $class[0] ) {
-          $this->FAIrelease = substr( $class, 1 );
-        }
-        else
-          $tmp2[$class] = $class;
-      }
-      $this->FAIclass = $tmp2;
-    }
 
-    if(!is_array($this->FAIclass)){
-      $this->FAIclass =array();
+
+    /* Again some special FAI stuff */
+    if($this->fai_activated){ 
+      if((isset($this->FAIclass))&&(!is_array($this->FAIclass))){
+        $tmp = array();
+        $tmp = split(" ",$this->FAIclass);
+        $tmp2 =array();  
+
+        foreach($tmp as $class){
+          if( ":" == $class[0] ) {
+            $this->FAIrelease = substr( $class, 1 );
+          }
+          else
+            $tmp2[$class] = $class;
+        }
+        $this->FAIclass = $tmp2;
+      }
+
+      if(!is_array($this->FAIclass)){
+        $this->FAIclass =array();
+      }
     }
 
     $this->orig_dn= $this->dn;
@@ -282,7 +303,14 @@ class workstartup extends plugin
     $ldap->cd($this->config->current['BASE']);
     $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".$this->dn."))");
     if ($ldap->count() == 1){
-      $map= array("gotoLdapServer","FAIclass","FAIdebianMirror","gotoBootKernel");
+
+
+      if($this->fai_activated){
+        $map= array("gotoLdapServer","FAIclass","FAIdebianMirror","gotoBootKernel");
+      }else{
+        $map= array("gotoLdapServer","gotoBootKernel");
+      }
+
       $attrs= $ldap->fetch();
 
       foreach ($map as $name){
@@ -503,94 +531,97 @@ class workstartup extends plugin
         $this->del_list ($this->gotoModules, $_POST['modules_list']);
       }
     }
-
-    /* FAI class management */
-    if((isset($_POST['AddClass']))&&(isset($_POST['FAIclassesSel']))){
-      $found = 0 ; 
-
-      /* If this new class/profile will attach a second partition table
-       * to our list of classes, abort and show a message.
-       */
-      foreach($this->FAIclass as $name){
-        if(isset($this->FAIclassInfo[$name])){
-          foreach($this->FAIclassInfo[$name] as $atr){
-            if(isset($atr['obj'])){
-              if($atr['obj'] == "FAIpartitionTable"){
-                $found ++ ; 
-              }
-            }
-          }
-        }
-      }
-
-      if((isset($this->FAIclassInfo[$_POST['FAIclassesSel']]['FAIpartitionTable']))&&($found>0)){
-        print_red(_("There is already a profile in your selection that contain partition table configurations."));
-      }else{
-        $this->FAIclass[$_POST['FAIclassesSel']]=$_POST['FAIclassesSel'];
-      }
-    }
-
-    $sort = false;
-    foreach($_POST as $name => $val){
-      
-      $sort_type = false;
-      if((preg_match("/sort_up/",$name))&&(!$sort)){
-        $sort_type = "sort_up_";
-      }
-      if((preg_match("/sort_down/",$name))&&(!$sort)){
-        $sort_type = "sort_down_";
-      }
     
-      if(($sort_type)&&(!$sort)){
-        $value = base64_decode(preg_replace("/_.*$/i","",preg_replace("/".$sort_type."/i","",$name)));
-        $sort = true;
-        
-        $last = -1;
-        $change_down  = -1;
- 
-        /* Create array with numeric index */ 
-        $tmp = array();
-        foreach($this->FAIclass as $class){
-          $tmp [] = $class;
-        }
+    /* FAI class management */
+    if($this->fai_activated){
 
-        /* Walk trough array */
-        foreach($tmp as $key => $faiName){
-          if($faiName == $value){
-            if($sort_type == "sort_up_"){
-              if($last != -1){
-                 $change_down= $last;
-              }
-            }else{
-              if(isset($tmp[$key+1])){
-                $change_down = $key;
+      if((isset($_POST['AddClass']))&&(isset($_POST['FAIclassesSel']))){
+        $found = 0 ; 
+
+        /* If this new class/profile will attach a second partition table
+         * to our list of classes, abort and show a message.
+         */
+        foreach($this->FAIclass as $name){
+          if(isset($this->FAIclassInfo[$name])){
+            foreach($this->FAIclassInfo[$name] as $atr){
+              if(isset($atr['obj'])){
+                if($atr['obj'] == "FAIpartitionTable"){
+                  $found ++ ; 
+                }
               }
             }
           }
-          $last = $key;
         }
- 
-        $tmp2 = array();
-        $skip = false;    
-  
-        foreach($tmp as $ky => $vl){
 
-          if($ky == $change_down){
-            $skip = $vl;
-          }else{
-            $tmp2[$vl] = $vl;
-          }
-          if(($skip != false)&&($ky != $change_down)){
-            $tmp2[$skip]  = $skip;
-            $skip =false;
-          }
-        }   
-        $this->FAIclass = $tmp2; 
+        if((isset($this->FAIclassInfo[$_POST['FAIclassesSel']]['FAIpartitionTable']))&&($found>0)){
+          print_red(_("There is already a profile in your selection that contain partition table configurations."));
+        }else{
+          $this->FAIclass[$_POST['FAIclassesSel']]=$_POST['FAIclassesSel'];
+        }
       }
-  
-      if(preg_match("/fai_remove/i",$name)){
-        $value = base64_decode(preg_replace("/_.*$/i","",preg_replace("/fai_remove_/i","",$name)));
-        unset($this->FAIclass[$value]);
+
+      $sort = false;
+      foreach($_POST as $name => $val){
+        
+        $sort_type = false;
+        if((preg_match("/sort_up/",$name))&&(!$sort)){
+          $sort_type = "sort_up_";
+        }
+        if((preg_match("/sort_down/",$name))&&(!$sort)){
+          $sort_type = "sort_down_";
+        }
+      
+        if(($sort_type)&&(!$sort)){
+          $value = base64_decode(preg_replace("/_.*$/i","",preg_replace("/".$sort_type."/i","",$name)));
+          $sort = true;
+          
+          $last = -1;
+          $change_down  = -1;
+   
+          /* Create array with numeric index */ 
+          $tmp = array();
+          foreach($this->FAIclass as $class){
+            $tmp [] = $class;
+          }
+
+          /* Walk trough array */
+          foreach($tmp as $key => $faiName){
+            if($faiName == $value){
+              if($sort_type == "sort_up_"){
+                if($last != -1){
+                   $change_down= $last;
+                }
+              }else{
+                if(isset($tmp[$key+1])){
+                  $change_down = $key;
+                }
+              }
+            }
+            $last = $key;
+          }
+   
+          $tmp2 = array();
+          $skip = false;    
+    
+          foreach($tmp as $ky => $vl){
+
+            if($ky == $change_down){
+              $skip = $vl;
+            }else{
+              $tmp2[$vl] = $vl;
+            }
+            if(($skip != false)&&($ky != $change_down)){
+              $tmp2[$skip]  = $skip;
+              $skip =false;
+            }
+          }   
+          $this->FAIclass = $tmp2; 
+        }
+    
+        if(preg_match("/fai_remove/i",$name)){
+          $value = base64_decode(preg_replace("/_.*$/i","",preg_replace("/fai_remove_/i","",$name)));
+          unset($this->FAIclass[$value]);
+        }
       }
     }
 
@@ -685,57 +716,60 @@ class workstartup extends plugin
       $smarty->assign($val."ACL", chkacl($this->acl, $val));
     }
 
-    $smarty->assign("FAIdebianMirrors",$this->getFAIdebianMirrors());
-    $smarty->assign("FAIdebianMirror",$this->FAIdebianMirror);
-    $smarty->assign("FAIreleases",$this->getFAIreleases());
-    $smarty->assign("FAIrelease",$this->FAIrelease);
-    $smarty->assign("FAIclasses",$this->selectFriendlyClasses());
-    $smarty->assign("FAIclassesKeys",array_flip($this->selectFriendlyClasses()));
-    $smarty->assign("FAIclassKeys",$this->FAIclass);
-    $smarty->assign("InheritedFAIrelease",$this->InheritedFAIrelease);
+    $smarty->assign("fai_activated",$this->fai_activated);
+    if($this->fai_activated){
+      $smarty->assign("FAIdebianMirrors",$this->getFAIdebianMirrors());
+      $smarty->assign("FAIdebianMirror",$this->FAIdebianMirror);
+      $smarty->assign("FAIreleases",$this->getFAIreleases());
+      $smarty->assign("FAIrelease",$this->FAIrelease);
+      $smarty->assign("FAIclasses",$this->selectFriendlyClasses());
+      $smarty->assign("FAIclassesKeys",array_flip($this->selectFriendlyClasses()));
+      $smarty->assign("FAIclassKeys",$this->FAIclass);
+      $smarty->assign("InheritedFAIrelease",$this->InheritedFAIrelease);
     
-    $div = new divSelectBox("WSFAIscriptClasses");
-    $div -> SetHeight("110");
-    $str_up     = " &nbsp;<input type='image' src='images/sort_up.png'    name='sort_up_%s'    value='%s'>";
-    $str_down   = " &nbsp;<input type='image' src='images/sort_down.png'  name='sort_down_%s'  value='%s'>";
-    $str_remove = " &nbsp;<input type='image' src='images/edittrash.png'  name='fai_remove_%s' value='%s'>";
-    $str_empty  = " &nbsp;<img src='images/empty.png' alt=\"\" width='7'>"; 
+      $div = new divSelectBox("WSFAIscriptClasses");
+      $div -> SetHeight("110");
+      $str_up     = " &nbsp;<input type='image' src='images/sort_up.png'    name='sort_up_%s'    value='%s'>";
+      $str_down   = " &nbsp;<input type='image' src='images/sort_down.png'  name='sort_down_%s'  value='%s'>";
+      $str_remove = " &nbsp;<input type='image' src='images/edittrash.png'  name='fai_remove_%s' value='%s'>";
+      $str_empty  = " &nbsp;<img src='images/empty.png' alt=\"\" width='7'>"; 
 
-    $i = 1;
-
-    if($this->FAIdebianMirror == "inherited"){
-      $tmp = $this->InheritedFAIclass;
-    }else{
-      $tmp = $this->FAIclass;
-    }
-
-    foreach($tmp as $class){
-
-      $marker = "";
-      if(in_array_ics($class,$this->unresolved_classes)){
-        $marker = "&nbsp;<font color='red'>("._("Not available in current setup").")</font>";
-      }
+      $i = 1;
 
       if($this->FAIdebianMirror == "inherited"){
-        $str = "";
+        $tmp = $this->InheritedFAIclass;
       }else{
-        if($i==1){
-          $str = $str_empty.$str_down.$str_remove;
-        }elseif($i == count($this->FAIclass)){
-          $str = $str_up.$str_empty.$str_remove;
-        }else{
-          $str = $str_up.$str_down.$str_remove;
-        }
+        $tmp = $this->FAIclass;
       }
-      $i ++ ; 
 
-      $div->AddEntry(array(
-            array("string"=>$class.$marker),
-            array("string"=>preg_replace("/\%s/",base64_encode($class),$str),"attach"=>"style='width:50px;border-right:none;'")
-            ));
-    }  
+      foreach($tmp as $class){
 
-    $smarty->assign("FAIScriptlist",$div->DrawList()); 
+        $marker = "";
+        if(in_array_ics($class,$this->unresolved_classes)){
+          $marker = "&nbsp;<font color='red'>("._("Not available in current setup").")</font>";
+        }
+
+        if($this->FAIdebianMirror == "inherited"){
+          $str = "";
+        }else{
+          if($i==1){
+            $str = $str_empty.$str_down.$str_remove;
+          }elseif($i == count($this->FAIclass)){
+            $str = $str_up.$str_empty.$str_remove;
+          }else{
+            $str = $str_up.$str_down.$str_remove;
+          }
+        }
+        $i ++ ; 
+
+        $div->AddEntry(array(
+              array("string"=>$class.$marker),
+              array("string"=>preg_replace("/\%s/",base64_encode($class),$str),"attach"=>"style='width:50px;border-right:none;'")
+              ));
+      }  
+
+      $smarty->assign("FAIScriptlist",$div->DrawList()); 
+    }
 
     /* Radio button group */
     if (preg_match("/G/", $this->bootmode)) {
@@ -910,14 +944,18 @@ class workstartup extends plugin
      * if we are currently editing from ogroup menu we use (array("gotWorkstationTemplate","GOhard", "FAIobject"))
      */
     if(isset($this->parent->by_object['ogroup'])){
-      $this->objectclasses = array("gotoWorkstationTemplate", "FAIobject");
+      $this->objectclasses = array("gotoWorkstationTemplate");
     }elseif(isset($this->parent->by_object['workgeneric'])){
-      $this->objectclasses = array("GOhard", "FAIobject");
+      $this->objectclasses = array("GOhard");
     }elseif(isset($this->parent->by_object['servgeneric'])){
-      $this->objectclasses = array("GOhard", "FAIobject");
+      $this->objectclasses = array("GOhard");
     }else{
       print "Object Type Configuration : unknown";
       exit();
+    }
+
+    if($this->fai_activated){
+      $this->objectclasses [] = "FAIobject";
     }
 
     /* Find proper terminal path for tftp configuration
@@ -968,25 +1006,34 @@ class workstartup extends plugin
 
     plugin::save();
 
-    unset( $this->attrs['FAIrelease'] );
+
+    if($this->fai_activated){
+
+      unset( $this->attrs['FAIrelease'] );
+      
+      $str = "";
+
+      if($this->FAIdebianMirror == "inherited"){
     
-    $str = "";
+        $this->attrs['FAIclass'] = $this->attrs['FAIrelease'] =  $this->attrs['FAIdebianMirror'] = array(); 
 
-    if($this->FAIdebianMirror == "inherited"){
-  
-      $this->attrs['FAIclass'] = $this->attrs['FAIrelease'] =  $this->attrs['FAIdebianMirror'] = array(); 
+      }else{
 
-    }else{
+        foreach($this->FAIclass as $class){
+          $str .= $class." ";
+        }
+        $str .= ":" . $this->FAIrelease;
+        $this->attrs['FAIclass']= "";
+        $this->attrs['FAIclass']= trim($str);
 
-      foreach($this->FAIclass as $class){
-        $str .= $class." ";
+        if(empty($this->attrs['FAIclass'])){
+          $this->attrs['FAIclass'] = array();
+        }
       }
-      $str .= ":" . $this->FAIrelease;
-      $this->attrs['FAIclass']= "";
-      $this->attrs['FAIclass']= trim($str);
 
-      if(empty($this->attrs['FAIclass'])){
-        $this->attrs['FAIclass'] = array();
+      /* if mirror == none stop saving this attribute */
+      if($this->FAIdebianMirror == "none"){
+        $this->FAIdebianMirror = "";
       }
     }
 
@@ -1008,21 +1055,19 @@ class workstartup extends plugin
       $this->attrs['gotoBootKernel']= array();
     }
 
-    /* if mirror == none stop saving this attribute */
-    if($this->FAIdebianMirror == "none"){
-      $this->FAIdebianMirror = "";
-    }
-   
-    /* Get FAIstate from object, the generic tab could have changed it during execute */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
-    $ldap->cat($this->dn,array("FAIstate"));
-    $checkFAIstate = $ldap->fetch();
 
-    /* Remove FAI objects if no FAI class is selected */ 
-    if((count($this->FAIclass)==0) && (!isset($checkFAIstate['FAIstate']))){
-      $this->attrs['FAIclass']        = array();
-      $this->attrs['FAIdebianMirror'] = array();
+    /* Get FAIstate from object, the generic tab could have changed it during execute */
+    if($this->fai_activated){
+      $ldap->cat($this->dn,array("FAIstate"));
+      $checkFAIstate = $ldap->fetch();
+
+      /* Remove FAI objects if no FAI class is selected */ 
+      if((count($this->FAIclass)==0) && (!isset($checkFAIstate['FAIstate']))){
+        $this->attrs['FAIclass']        = array();
+        $this->attrs['FAIdebianMirror'] = array();
+      }
     }
 
     /* prepare share settings */

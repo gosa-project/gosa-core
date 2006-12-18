@@ -52,7 +52,6 @@ class posixAccount extends plugin
   var $use_shadowExpire= "0";
   var $must_change_password= "0";
   var $force_ids= 0;
-  var $printerList= array();
   var $group_dialog= FALSE;
   var $show_ws_dialog= FALSE;
   var $secondaryGroups= array();
@@ -67,7 +66,7 @@ class posixAccount extends plugin
   var $SubSearch        = false;
 
   /* attribute list for save action */
-  var $CopyPasteVars  = array("grouplist","groupMembership","use_shadowMin","use_shadowMax","use_shadowWarning","use_shadowInactive","use_shadowExpire","must_change_password","printerList","grouplist","savedGidNumber","savedUidNumber");
+  var $CopyPasteVars  = array("grouplist","groupMembership","use_shadowMin","use_shadowMax","use_shadowWarning","use_shadowInactive","use_shadowExpire","must_change_password","grouplist","savedGidNumber","savedUidNumber");
   var $attributes     = array("homeDirectory", "loginShell", "uidNumber", "gidNumber", "gecos",
       "shadowMin", "shadowMax", "shadowWarning", "shadowInactive", "shadowLastChange",
       "shadowExpire", "gosaDefaultPrinter", "gosaDefaultLanguage", "uid","accessTo","trustModel");
@@ -173,9 +172,9 @@ class posixAccount extends plugin
     /* Convert to seconds */
     $this->shadowExpire= $this->convertToSeconds($this->shadowExpire);
 
-    /* Generate shell list from /etc/gosa/shells */
-    if (file_exists('/etc/gosa/shells')){
-      $shells = file ('/etc/gosa/shells');
+    /* Generate shell list from CONFIG_DIR./shells */
+    if (file_exists(CONFIG_DIR.'/shells')){
+      $shells = file (CONFIG_DIR.'/shells');
       foreach ($shells as $line){
         if (!preg_match ("/^#/", $line)){
           $this->loginShellList[]= trim($line);
@@ -190,12 +189,6 @@ class posixAccount extends plugin
     /* Insert possibly missing loginShell */
     if ($this->loginShell != "" && !in_array($this->loginShell, $this->loginShellList)){
       $this->loginShellList[]= $this->loginShell;
-    }
-
-    /* Generate printer list */
-    if (isset($this->config->data['SERVERS']['CUPS'])){
-      $this->printerList= get_printer_list ($this->config->data['SERVERS']['CUPS']);
-      asort($this->printerList);
     }
 
     /* Set tag attribute if we've tagging activated */
@@ -501,7 +494,6 @@ class posixAccount extends plugin
     } else {
       $smarty->assign("groups", "");
     }
-    $smarty->assign("printerList", $this->printerList);
     $smarty->assign("languages", $this->config->data['MAIN']['LANGUAGES']);
 
 	/* Avoid "Undefined index: forceMode" */
@@ -1091,19 +1083,21 @@ class posixAccount extends plugin
       $ids[]= (int)$attrs["$attrib"][0];
     }
 
+    /* Add the nobody id */
+    $ids[]=  65534;
+
     /* Find out next free id near to UID_BASE */
-    for ($id= $this->config->current['UIDBASE']; $id++; $id<65000){
+    for ($id= $this->config->current['UIDBASE']; $id++; $id < pow(2,32)){
       if (!in_array($id, $ids)){
         return ($id);
       }
     }
 
-    /* Should not happen */
-    if ($id == 65000){
-      print_red(_("Too many users, can't allocate a free ID!"));
+    /* Check if current id reaches the maximum of 32 bit */
+    if ($id >= pow(2,32)){
+      echo _("Too many users, can't allocate a free ID!");
       exit;
     }
-
   }
 
  function reload()

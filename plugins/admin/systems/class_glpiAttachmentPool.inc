@@ -113,7 +113,7 @@ class glpiAttachmentPool extends plugin
 
       }else{
         $this->parent->handle->deleteAttachment($this->delAttach);
-        @unlink("/etc/gosa/glpi/".$this->filename);
+        @unlink(CONFIG_DIR."/glpi/".$this->filename);
         $attach     = $this->parent->handle->getAttachments();
       }
     }
@@ -130,10 +130,10 @@ class glpiAttachmentPool extends plugin
           if($FILE['error']!=0) {
             print_red(_("Upload wasn't successfull."));
           }else{
-            if(!is_dir("/etc/gosa/glpi/")){
-              print_red(_("Missing directory '/etc/gosa/glpi/' to store glpi uploads."));
+            if(!is_dir(CONFIG_DIR."/glpi/")){
+              print_red(sprintf(_("Missing directory '%s/glpi/' to store glpi uploads."),CONFIG_DIR));
             }else{
-              $filen = "/etc/gosa/glpi/".$FILE['name'];
+              $filen = CONFIG_DIR."/glpi/".$FILE['name'];
               if(file_exists($filen)){
                 print_red(_("There is already a file with the same name uploaded."));
               }else{
@@ -182,7 +182,7 @@ class glpiAttachmentPool extends plugin
         $smarty->assign($attr,htmlentities(utf8_decode($this->$attr)));
       }
       if(!empty($this->filename)){
-        if(is_readable("/etc/gosa/glpi/".$this->filename)){
+        if(is_readable(CONFIG_DIR."/glpi/".$this->filename)){
           $status =_("File is available.");
         }else{
           $status =_("File is not readable, possibly the file is missing.");

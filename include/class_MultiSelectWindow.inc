@@ -153,6 +153,68 @@ class MultiSelectWindow{
 		$this->array_Elements[] = $arr;
 	}
 
+
+  function get_default_header($navigation= TRUE)
+  {
+    $enable_back = $navigation;
+    $enable_root = $navigation;
+    $enable_home = $navigation;
+
+    $ui = get_userinfo();
+
+    /* Check if selectedBase = first available base */
+    $deps = array();
+    foreach($this->config->departments as $dep){
+      $deps[] = $dep;
+    }
+
+
+    if(!count($deps) || $deps[0] == $this->selectedBase){
+      $enable_back = FALSE;
+      $enable_root = FALSE;
+    }
+
+    /* Check if we are in users home  department */
+    if(!count($deps) ||$this->selectedBase == get_base_from_people($ui->dn)){
+      $enable_home = FALSE;
+    }
+
+    /* Create header with selected base */
+    $listhead = "<div style='background:#F0F0F9;padding:5px;'>";
+
+    /* Draw root button */
+    if($enable_root){
+      $listhead .= " <input class='center' type='image' src='images/list_root.png' align='middle'
+        title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;";
+    }else{
+      $listhead .= " <img src='images/list_root_gray.png' class='center' alt='"._("Root")."'>&nbsp;";
+    }
+
+    /* Draw back button */
+    if($enable_back){
+      $listhead .= " <input class='center' type='image' align='middle' src='images/list_back.png'
+        title='"._("Go up one department")."' alt='"._("Up")."'                name='dep_back'>&nbsp;";
+    }else{
+      $listhead .= " <img src='images/list_back_gray.png' class='center' alt='"._("Up")."'>&nbsp;";
+    }
+
+    /* Draw home button */
+    if($enable_home){
+      $listhead .= " <input class='center' type='image' align='middle' src='images/list_home.png'
+        title='"._("Go to users department")."' alt='"._("Home")."'            name='dep_home'>&nbsp;";
+    }else{
+      $listhead .= " <img src='images/list_home_gray.png' class='center' alt='"._("Home")."'>&nbsp;";
+    }
+
+    /* And at least draw reload button, this button is enabled everytime */
+    $listhead .=  " <input class='center' type='image' src='images/list_reload.png' align='middle'
+      title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
+      " <img   class='center' src='images/list_seperator.png' align='middle' alt='-' height='16' width='1'>&nbsp;";
+
+    return ($listhead);
+  }
+
+
 	/* Add a checkbox to the filter element,
 	   the name specifies an existing class var to store the 'selection' */
 	function AddCheckBox($name,$value="Unset",$string="Unset",$default=false)

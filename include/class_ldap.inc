@@ -568,6 +568,7 @@ class LDAP{
 
           /* Replace FAIdebianRelease with new release name */
           if(in_array("FAIpackageList" , $attr['objectClass'])){
+            $attr['FAIdebianRelease'] = $destinationName;
             if($type=="branch"){
               $attr['FAIstate'] ="branch";
             }elseif($type=="freeze"){
@@ -596,6 +597,8 @@ class LDAP{
           }          
         }
       }
+
+      echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
 
       $this->ls ("(objectClass=*)",$sourcedn);
       while ($this->fetch()){
@@ -663,7 +666,13 @@ class LDAP{
     }
 
     $real_path= substr($target, 0, strlen($target) - strlen($this->basedn) -1 );
-    $l= array_reverse(ldap_explode_dn($real_path,0));
+    $tmp = ldap_explode_dn($real_path,0);
+    if(!$tmp){
+      print_red(sprintf(_("The referral url '%s' is missing the ldap base. It should look like this 'ldap://server:port/base'."),$this->fix($this->basedn)));
+      return;
+    }
+
+    $l= array_reverse($tmp);
     unset($l['count']);
     $cdn= $this->basedn;
     $tag= "";
@@ -1127,10 +1136,13 @@ function gen_xls ($dn, $filter= "(objectClass=*)", $attributes= array('*'), $rec
   	  $objectclasses = array();
   	
 	  # Get base to look for schema 
-	  $sr = @ldap_read ($this->cid, NULL, "objectClass=*", array("subschemaSubentry"));
-	  $attr = @ldap_get_entries($this->cid,$sr);
+	  $sr           = @ldap_read ($this->cid, NULL, "objectClass=*", array("subschemaSubentry"));
+	  $attr         = @ldap_get_entries($this->cid,$sr);
+
 	  if (!isset($attr[0]['subschemasubentry'][0])){
-	    return array();
+      $this->error  = @ldap_error($this->cid);
+      gosa_log($this->get_error());
+      return array();
 	  }
 	
 	  # Get list of objectclasses

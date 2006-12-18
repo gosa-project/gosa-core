@@ -36,9 +36,17 @@ class servgeneric extends plugin
                             "memcheck"        => "memcheck",
                             "sysinfo"         => "sysinfo");
 
+  var $fai_activated = FALSE;
+
   function servgeneric ($config, $dn= NULL, $parent= NULL)
   {
     plugin::plugin ($config, $dn, $parent);
+
+    /* Check if FAI is activated */
+    $tmp = search_config($config->data,"faiManagement","CLASS");
+    if(!empty($tmp)){
+      $this->fai_activated = TRUE;
+    }
 
     $this->modes["active"]= _("Activated");
     $this->modes["locked"]= _("Locked");
@@ -82,33 +90,36 @@ class servgeneric extends plugin
           $this->didAction= TRUE;
 
           /* Set FAIstate */
-          $ldap = $this->config->get_ldap_link();
-          $ldap->cd($this->config->current['BASE']);
-          $ldap->cat($this->dn,array("objectClass"));
-          $res = $ldap->fetch();
-          
-          $attrs = array();
-          $attrs['FAIstate'] = "";
-          if(isset($this->mapActions[$_POST['saction']])){
-            $attrs['FAIstate'] = $this->mapActions[$_POST ['saction']];
-          }
 
-          for($i = 0; $i < $res['objectClass']['count'] ; $i ++){
-            $attrs['objectClass'][] = $res['objectClass'][$i];
-          }
+          if($this->fai_activated && $this->dn != "new"){
+            $ldap = $this->config->get_ldap_link();
+            $ldap->cd($this->config->current['BASE']);
+            $ldap->cat($this->dn,array("objectClass"));
+            $res = $ldap->fetch();
 
-          if(($attrs['FAIstate'] != "") && (!in_array("FAIobject",$attrs['objectClass']))){
-            $attrs['objectClass'][] = "FAIobject";
-          }
+            $attrs = array();
+            $attrs['FAIstate'] = "";
+            if(isset($this->mapActions[$_POST['saction']])){
+              $attrs['FAIstate'] = $this->mapActions[$_POST ['saction']];
+            }
 
-          if($attrs['FAIstate'] == ""){
-            #FIXME we should check if FAIobject is used anymore
-            $attrs['FAIstate'] = array();
+            for($i = 0; $i < $res['objectClass']['count'] ; $i ++){
+              $attrs['objectClass'][] = $res['objectClass'][$i];
+            }
+
+            if(($attrs['FAIstate'] != "") && (!in_array("FAIobject",$attrs['objectClass']))){
+              $attrs['objectClass'][] = "FAIobject";
+            }
+
+            if($attrs['FAIstate'] == ""){
+#FIXME we should check if FAIobject is used anymore
+              $attrs['FAIstate'] = array();
+            }
+
+            $ldap->cd($this->dn);
+            $ldap->modify($attrs);
+            show_ldap_error($ldap->get_error());
           }
- 
-          $ldap->cd($this->dn);
-          $ldap->modify($attrs);
-          show_ldap_error($ldap->get_error());
         }
       }
     }
@@ -174,7 +185,9 @@ class servgeneric extends plugin
     }
 
     /* Show main page */
+    $this->netConfigDNS->cn= $this->cn;
     $smarty->assign("netconfig", $this->netConfigDNS->execute());
+    $smarty->assign("fai_activated",$this->fai_activated);
     $smarty->assign("modes", $this->modes);
 
     return($smarty->fetch (get_template_path('server.tpl', TRUE)));
@@ -226,7 +239,7 @@ class servgeneric extends plugin
 
     $ui= get_userinfo();
     $acl= get_permissions ($this->dn, $ui->subtreeACL);
-    $acl= get_module_permission($acl, "server", $this->dn);
+    $acl= get_module_permission($acl, "servgeneric", $this->dn);
     if (chkacl($acl, "create") != ""){
       $message[]= _("You have no permissions to create a server on this 'Base'.");
     }

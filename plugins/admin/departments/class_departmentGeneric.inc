@@ -214,7 +214,6 @@ class department extends plugin
 		$message= plugin::check();
 
 		/* Permissions for that base? */
-		//	$this->dn= "ou=$this->ou,".$this->base;
 		if (chkacl($this->acl, "create") != ""){
 			$message[]= _("You have no permissions to create a department on this 'Base'.");
 		}
@@ -348,7 +347,7 @@ class department extends plugin
   function ShowMoveFrame()
   {
     $smarty = get_smarty();
-    $smarty->assign("src","?plug=".$_GET['plug']."&PerformRecMove");
+    $smarty->assign("src","?plug=".$_GET['plug']."&amp;PerformRecMove");
     $smarty->assign("message","As soon as the move operation has finished, you can scroll down to end of the page and press the 'Continue' button to continue with the department management dialog.");
     $display=  $smarty->fetch(get_template_path("dep_iframe.tpl",TRUE));
     return($display);
@@ -357,7 +356,7 @@ class department extends plugin
   function ShowTagFrame()
   {
     $smarty = get_smarty();
-    $smarty->assign("src","?plug=".$_GET['plug']."&TagDepartment");
+    $smarty->assign("src","?plug=".$_GET['plug']."&amp;TagDepartment");
     $smarty->assign("message","As soon as the tag operation has finished, you can scroll down to end of the page and press the 'Continue' button to continue with the department management dialog.");
     $display=  $smarty->fetch(get_template_path("dep_iframe.tpl",TRUE));
     return($display);
@@ -368,8 +367,18 @@ class department extends plugin
 	{
     if(!$OnlySetTagFlag){
       $smarty= get_smarty();
-      echo "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
-      echo "<body style='background-image:none;margin:3px;color:black'>";
+
+      /* Print out html introduction */
+      echo '  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+        <html>
+        <head>
+        <title></title>
+        <style type="text/css">@import url("themes/default/style.css");</style>
+        <script language="javascript" src="include/focus.js" type="text/javascript"></script>
+        </head>
+        <body style="background-image:none;margin:3px;color:black" id="body" >
+        ';
+
       echo "<h3>".sprintf(_("Tagging '%s'."),"<i>".@LDAP::fix($this->dn)."</i>")."</h3>";
     }
 
@@ -413,6 +422,7 @@ class department extends plugin
           return;
         }
 				$this->handle_object_tagging($attrs['dn'], $this->gosaUnitTag, TRUE );
+        echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
 			}
 		}
     if(!$OnlySetTagFlag){
@@ -445,11 +455,19 @@ class department extends plugin
 
 			/* Print header to have styles included */
 			$smarty= get_smarty();
-			echo "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
-			echo "<body style='background-image:none;margin:3px;color:black'>";
+
+      /* Print out html introduction */
+      echo '  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+        <html>
+        <head>
+        <title></title>
+        <style type="text/css">@import url("themes/default/style.css");</style>
+        <script language="javascript" src="include/focus.js" type="text/javascript"></script>
+        </head>
+        <body style="background: none; margin:4px;" id="body" >
+        ';
 
 			echo "<h3>".sprintf(_("Moving '%s' to '%s'"),"<i>".@LDAP::fix($src_dn)."</i>","<i>".@LDAP::fix($dst_dn)."</i>")."</h3>";
-
 
 			/* Check if the destination entry exists */
 			$ldap= $this->config->get_ldap_link();
@@ -478,19 +496,18 @@ class department extends plugin
 
 			/* Copy objects from small to big indent levels by replacing src_dn by dst_dn */
 			foreach ($objects as $object => $len){
-
-
 				$src= str_replace("\\","\\\\",$object);
 				$dst= preg_replace("/".str_replace("\\","\\\\",$src_dn)."$/", "$dst_dn", $object);
 				$dst= str_replace($src_dn,$dst_dn,$object);
 
 				echo "<b>"._("Object").":</b> ".@LDAP::fix($src)."<br>";
 
-				if (!$this->copy($src, $dst)){
+        if (!$this->copy($src, $dst)){
 					echo "<font color='#FF0000'><br>".sprintf(_("FAILED to copy %s, aborting operation"),@LDAP::fix($src))."</font>";
 					return (FALSE);
 				}
 
+        echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
 				flush();
 			}
 
@@ -506,6 +523,7 @@ class department extends plugin
 				<br><input type='submit' name='back' value='"._("Continue")."'>
 				</form></div>";
 
+      echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
 			echo "</body></html>";
 
 			return (TRUE);
