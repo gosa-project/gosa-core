@@ -154,11 +154,11 @@ class MultiSelectWindow{
 	}
 
 
-  function get_default_header()
+  function get_default_header($navigation= TRUE)
   {
-    $enable_back = TRUE;
-    $enable_root = TRUE;
-    $enable_home = TRUE;
+    $enable_back = $navigation;
+    $enable_root = $navigation;
+    $enable_home = $navigation;
 
     $ui = get_userinfo();
 
