@@ -15,6 +15,7 @@ GOsa2 changelog
   - Fixed a ACL naming bug, that avoids that an admin with non "all" ACLs
     can edit specified objects.
   - Fixed simultaneous move + rename for deparments
+  - Internally updated to smarty 2.6.16
 
 * gosa 2.5.6
   - Copy & paste implemented into FAI

@@ -3,10 +3,7 @@ Target for 2.6:
 
 * Can't use a dn longer than 100 characters as Glpi contact/technical responsible person.
 
-* Add new smarty gettext plugin -> requires fixing of <b> and <i> tags in
-  translations
-
-* Fix DNS plugin
+* Verify DNS plugin
   * Zones are not creatable, currently
   * Error messages are partly wrong
 
@@ -14,9 +11,9 @@ Target for 2.6:
 
 * Enhance the export xls to export the whole three with a maximum of attributes in each sheet ( OpenSides )
 
-* Enhance the pptp plugin (OpenSides )
+* Enhance the pptp plugin (OpenSides)
 
-* Add support for nagios in the system part ( OpenSides )
+* Add support for nagios in the system part (OpenSides)
 
 * Asterisk : Create entry like this #309,1,PickupChan(SIP/rainer), 
 			 to allow others to pickup the phone by pressing # and number of the phone.
@@ -29,8 +26,6 @@ Target for 2.6:
 
 * Simplify plugins by providing a schema parser
 
-* Remove smarty from SVN. It has an own repository.
-
 * Replace PHP IMAP module by self made module
 
 * Add possibility to add referrals in department dialog
@@ -41,11 +36,6 @@ Target for 2.6:
   Special kerberos attributes like ticket expiery and policies can't
   be handeled with GOsa right now this has to be added in later releases.
   
-* Server-/Workstation management
-  This has been removed because of inconsistencies. Will be back soon:
-  - support for dhcp
-  - attributes for ldap-, ntp-, nfs-, imap- and print-servers
-
 * SSL
   User certificates are only shown as "absent" or "present", because the
   SSL PHP module isn't buildable in the moment. I'll check this later on.
@@ -55,11 +45,6 @@ Target for 2.6:
      print_r(openssl_x509_parse ($this->userCertificate));
     )
     
-* Rework ACL stuff, use experimental (native) LDAP ACLs / get ACLs from classes
-  The complete ACL dialog stinks. If every dialog is done by smarty, we could
-  use a shrinked version of each dialog with checkboxes, to let the admin decide
-  what fields could be edited.
-
 * Documentation
   - End user documentation: online help
   - Administrators documentation: how to install / contributed scripts, etc.
