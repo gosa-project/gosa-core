@@ -28,6 +28,15 @@ define ("FILEHEADER",
         "20002000200020002000200020002000".
         "20002000200020002000200020002000".
       	"5000");
+/* This is the old header, it is needed to automatically convert old mungedDials to new ones */
+define ("FILEHEADER_OLD",   
+        "6d000800200020002000200020002000".
+        "20002000200020002000200020002000".
+        "20002000200020002000200064000100".
+        "20002000200020002000200020002000".
+        "20002000200020002000200020002000".
+        "20002000200020002000200020002000".
+        "50001000");
 
 class sambaMungedDial
 {
@@ -66,6 +75,7 @@ class sambaMungedDial
   /* These parameters are treated as time values and get converted */
   var $timeParams= array("CtxMaxConnectionTime", "CtxMaxDisconnectionTime", "CtxMaxIdleTime");
 
+  var $old_behavior= false;
 
   function strhex($string)
   {
@@ -221,9 +231,18 @@ class sambaMungedDial
   	/* 
   	 * Remove base64 encoding and skip FILEHEADER.
   	 * The '4' is added, because the FILEHEADER has been stripped by 4 chars.
-  	 * These is the number of attributes follow - we don't need this now - only when writing.
+  	 * This is the number of attributes following - we don't need this at read time, only when writing.
   	 */
-  	$ctxField= substr(base64_decode($munge), (strlen(FILEHEADER)+4) / 2);
+    if(substr(base64_decode($munge),0,2)=="6d") {
+      $this->old_behavior=true;
+    }
+
+    $ctxField="";
+    if($this->old_behavior==true) {
+  	  $ctxField= substr(base64_decode($munge), (strlen(FILEHEADER_OLD)) / 2);
+    } else {
+  	  $ctxField= substr(base64_decode($munge), (strlen(FILEHEADER)+4) / 2);
+    }
   
   	/* Decode parameters */
   	while ($ctxField!=""){
@@ -422,7 +441,11 @@ class sambaMungedDial
   */
   function getShadow ()
   {
-  	$result= substr($this->ctx['CtxShadow'], 1, 1);
+    if($this->old_behavior==true) {
+      $result= substr($this->ctx['CtxCfgFlags1'], 1, 1);
+    } else {
+    	$result= substr($this->ctx['CtxShadow'], 1, 1);
+    }
   	return $result;
   }
 
@@ -430,6 +453,10 @@ class sambaMungedDial
   function setShadow ($checked, $value)
   {
   	if ($checked) {
+      if($this->old_behavior==true) {
+        // We need to reset the old setting
+       	$this->ctx['CtxCfgFlags1'][1]= sprintf('%1X', $value);
+      }
   		$this->ctx['CtxShadow'][1]= sprintf('%1x', $value);
   	}
   }
