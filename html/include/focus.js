@@ -16,6 +16,18 @@ for (iln = 0; iln < len; iln++){
 netscape= (ver.charAt(iln+1).toUpperCase() != "C");
 
 
+/* Toggle checkbox that matches regex */
+function chk_set_all(regex,value)
+{
+				for (var i = 0; i < document.mainform.elements.length; i++) {
+								var _id=document.mainform.elements[i].id;
+								if(_id.match(regex)) {
+												document.getElementById(_id).checked= value;
+								}
+				}
+}
+
+
 function scrollDown() {
 	document.body.scrollTop = document.body.scrollHeight - document.body.clientHeight;
 	timeout= setTimeout("scrollDown()", 500);
