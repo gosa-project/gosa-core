@@ -562,7 +562,9 @@ class LDAP{
               print_red(_("Unknown FAIstate %s"),$type);
             }
           }elseif(in_array("gosaApplication",$attr['objectClass'])){
-            $attr['objectClass'][] = "FAIobject";
+            if(!in_array("FAIobject",$attr['objectClass'])){
+              $attr['objectClass'][] = "FAIobject";
+            }
             $attr['FAIstate'] = $type;
           }
 
