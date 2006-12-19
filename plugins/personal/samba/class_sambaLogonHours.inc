@@ -88,6 +88,12 @@ class sambaLogonHours extends plugin
         }
       }
     }
+    
+    /* All hours and days selected */
+    if(substr_count($ret,'f') == 42){
+      $ret ="";
+    }
+  
     return($ret);
   }
 }
