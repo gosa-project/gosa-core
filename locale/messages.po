@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-18 08:32+0100\n"
+"POT-Creation-Date: 2006-12-19 14:08+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgstr ""
 #: contrib/gosa.conf:156 contrib/gosa.conf:161 contrib/gosa.conf:166
 #: contrib/gosa.conf:171 contrib/gosa.conf:176
 #: plugins/personal/mail/generic.tpl:4 plugins/personal/posix/generic.tpl:4
-#: plugins/personal/samba/samba2.tpl:6 plugins/personal/samba/samba3.tpl:6
+#: plugins/personal/samba/samba3.tpl:6 plugins/personal/samba/samba2.tpl:6
 #: plugins/personal/generic/class_user.inc:16
 #: plugins/gofax/blocklists/generic.tpl:1
 #: plugins/gofax/faxaccount/generic.tpl:6
@@ -363,6 +363,7 @@ msgstr ""
 #: plugins/personal/posix/main.inc:113 plugins/personal/netatalk/main.inc:106
 #: plugins/personal/samba/main.inc:107
 #: plugins/personal/samba/samba3_workstations.tpl:41
+#: plugins/personal/samba/sambaLogonHours.tpl:89
 #: plugins/personal/environment/main.inc:107
 #: plugins/personal/environment/hotplugDialog.tpl:64
 #: plugins/personal/environment/selectPrinterDialog.tpl:61
@@ -728,7 +729,7 @@ msgstr ""
 #: plugins/personal/posix/posix_groups.tpl:79
 #: plugins/personal/posix/paste_generic.tpl:63
 #: plugins/personal/posix/trust_machines.tpl:39
-#: plugins/personal/samba/samba3.tpl:330
+#: plugins/personal/samba/samba3.tpl:332
 #: plugins/personal/samba/samba3_workstations.tpl:39
 #: plugins/personal/environment/environment.tpl:119
 #: plugins/personal/environment/environment.tpl:136
@@ -840,7 +841,7 @@ msgstr ""
 #: plugins/personal/posix/generic.tpl:74
 #: plugins/personal/posix/generic.tpl:104
 #: plugins/personal/posix/paste_generic.tpl:64
-#: plugins/personal/samba/samba3.tpl:332
+#: plugins/personal/samba/samba3.tpl:334
 #: plugins/personal/environment/environment.tpl:137
 #: plugins/personal/environment/environment.tpl:165
 #: plugins/personal/environment/environment.tpl:181
@@ -1249,7 +1250,7 @@ msgstr ""
 #: plugins/personal/posix/generic.tpl:7
 #: plugins/personal/posix/paste_generic.tpl:8
 #: plugins/personal/samba/samba3.tpl:13 plugins/personal/samba/samba3.tpl:94
-#: plugins/personal/samba/class_sambaAccount.inc:658
+#: plugins/personal/samba/class_sambaAccount.inc:684
 msgid "Home directory"
 msgstr ""
 
@@ -1353,7 +1354,7 @@ msgid "User must change password on first login"
 msgstr ""
 
 #: plugins/personal/posix/posix_shadow.tpl:14
-#: plugins/personal/samba/samba2.tpl:68 plugins/personal/samba/samba3.tpl:267
+#: plugins/personal/samba/samba3.tpl:267 plugins/personal/samba/samba2.tpl:68
 msgid "Password expires on"
 msgstr ""
 
@@ -1472,115 +1473,115 @@ msgid "Warn user %s days before password expiery"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:473
-#: plugins/personal/samba/class_sambaAccount.inc:364
-#: plugins/personal/samba/class_sambaAccount.inc:382
-#: plugins/personal/samba/class_sambaAccount.inc:400
-#: plugins/personal/samba/class_sambaAccount.inc:418
+#: plugins/personal/samba/class_sambaAccount.inc:390
+#: plugins/personal/samba/class_sambaAccount.inc:408
+#: plugins/personal/samba/class_sambaAccount.inc:426
+#: plugins/personal/samba/class_sambaAccount.inc:444
 #: plugins/personal/generic/class_user.inc:245
 msgid "January"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:473
-#: plugins/personal/samba/class_sambaAccount.inc:364
-#: plugins/personal/samba/class_sambaAccount.inc:382
-#: plugins/personal/samba/class_sambaAccount.inc:400
-#: plugins/personal/samba/class_sambaAccount.inc:418
+#: plugins/personal/samba/class_sambaAccount.inc:390
+#: plugins/personal/samba/class_sambaAccount.inc:408
+#: plugins/personal/samba/class_sambaAccount.inc:426
+#: plugins/personal/samba/class_sambaAccount.inc:444
 #: plugins/personal/generic/class_user.inc:245
 msgid "February"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:473
-#: plugins/personal/samba/class_sambaAccount.inc:364
-#: plugins/personal/samba/class_sambaAccount.inc:382
-#: plugins/personal/samba/class_sambaAccount.inc:400
-#: plugins/personal/samba/class_sambaAccount.inc:418
+#: plugins/personal/samba/class_sambaAccount.inc:390
+#: plugins/personal/samba/class_sambaAccount.inc:408
+#: plugins/personal/samba/class_sambaAccount.inc:426
+#: plugins/personal/samba/class_sambaAccount.inc:444
 #: plugins/personal/generic/class_user.inc:245
 msgid "March"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:473
-#: plugins/personal/samba/class_sambaAccount.inc:364
-#: plugins/personal/samba/class_sambaAccount.inc:382
-#: plugins/personal/samba/class_sambaAccount.inc:400
-#: plugins/personal/samba/class_sambaAccount.inc:418
+#: plugins/personal/samba/class_sambaAccount.inc:390
+#: plugins/personal/samba/class_sambaAccount.inc:408
+#: plugins/personal/samba/class_sambaAccount.inc:426
+#: plugins/personal/samba/class_sambaAccount.inc:444
 #: plugins/personal/generic/class_user.inc:245
 msgid "April"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:474
-#: plugins/personal/samba/class_sambaAccount.inc:365
-#: plugins/personal/samba/class_sambaAccount.inc:383
-#: plugins/personal/samba/class_sambaAccount.inc:401
-#: plugins/personal/samba/class_sambaAccount.inc:419
+#: plugins/personal/samba/class_sambaAccount.inc:391
+#: plugins/personal/samba/class_sambaAccount.inc:409
+#: plugins/personal/samba/class_sambaAccount.inc:427
+#: plugins/personal/samba/class_sambaAccount.inc:445
 #: plugins/personal/generic/class_user.inc:246
 msgid "May"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:474
-#: plugins/personal/samba/class_sambaAccount.inc:365
-#: plugins/personal/samba/class_sambaAccount.inc:383
-#: plugins/personal/samba/class_sambaAccount.inc:401
-#: plugins/personal/samba/class_sambaAccount.inc:419
+#: plugins/personal/samba/class_sambaAccount.inc:391
+#: plugins/personal/samba/class_sambaAccount.inc:409
+#: plugins/personal/samba/class_sambaAccount.inc:427
+#: plugins/personal/samba/class_sambaAccount.inc:445
 #: plugins/personal/generic/class_user.inc:246
 msgid "June"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:474
-#: plugins/personal/samba/class_sambaAccount.inc:365
-#: plugins/personal/samba/class_sambaAccount.inc:383
-#: plugins/personal/samba/class_sambaAccount.inc:401
-#: plugins/personal/samba/class_sambaAccount.inc:419
+#: plugins/personal/samba/class_sambaAccount.inc:391
+#: plugins/personal/samba/class_sambaAccount.inc:409
+#: plugins/personal/samba/class_sambaAccount.inc:427
+#: plugins/personal/samba/class_sambaAccount.inc:445
 #: plugins/personal/generic/class_user.inc:246
 msgid "July"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:474
-#: plugins/personal/samba/class_sambaAccount.inc:365
-#: plugins/personal/samba/class_sambaAccount.inc:383
-#: plugins/personal/samba/class_sambaAccount.inc:401
-#: plugins/personal/samba/class_sambaAccount.inc:419
+#: plugins/personal/samba/class_sambaAccount.inc:391
+#: plugins/personal/samba/class_sambaAccount.inc:409
+#: plugins/personal/samba/class_sambaAccount.inc:427
+#: plugins/personal/samba/class_sambaAccount.inc:445
 #: plugins/personal/generic/class_user.inc:246
 msgid "August"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:474
-#: plugins/personal/samba/class_sambaAccount.inc:365
-#: plugins/personal/samba/class_sambaAccount.inc:383
-#: plugins/personal/samba/class_sambaAccount.inc:401
-#: plugins/personal/samba/class_sambaAccount.inc:419
+#: plugins/personal/samba/class_sambaAccount.inc:391
+#: plugins/personal/samba/class_sambaAccount.inc:409
+#: plugins/personal/samba/class_sambaAccount.inc:427
+#: plugins/personal/samba/class_sambaAccount.inc:445
 #: plugins/personal/generic/class_user.inc:246
 msgid "September"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:475
-#: plugins/personal/samba/class_sambaAccount.inc:366
-#: plugins/personal/samba/class_sambaAccount.inc:384
-#: plugins/personal/samba/class_sambaAccount.inc:402
-#: plugins/personal/samba/class_sambaAccount.inc:420
+#: plugins/personal/samba/class_sambaAccount.inc:392
+#: plugins/personal/samba/class_sambaAccount.inc:410
+#: plugins/personal/samba/class_sambaAccount.inc:428
+#: plugins/personal/samba/class_sambaAccount.inc:446
 #: plugins/personal/generic/class_user.inc:247
 msgid "October"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:475
-#: plugins/personal/samba/class_sambaAccount.inc:366
-#: plugins/personal/samba/class_sambaAccount.inc:384
-#: plugins/personal/samba/class_sambaAccount.inc:402
-#: plugins/personal/samba/class_sambaAccount.inc:420
+#: plugins/personal/samba/class_sambaAccount.inc:392
+#: plugins/personal/samba/class_sambaAccount.inc:410
+#: plugins/personal/samba/class_sambaAccount.inc:428
+#: plugins/personal/samba/class_sambaAccount.inc:446
 #: plugins/personal/generic/class_user.inc:247
 msgid "November"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:475
-#: plugins/personal/samba/class_sambaAccount.inc:366
-#: plugins/personal/samba/class_sambaAccount.inc:384
-#: plugins/personal/samba/class_sambaAccount.inc:402
-#: plugins/personal/samba/class_sambaAccount.inc:420
+#: plugins/personal/samba/class_sambaAccount.inc:392
+#: plugins/personal/samba/class_sambaAccount.inc:410
+#: plugins/personal/samba/class_sambaAccount.inc:428
+#: plugins/personal/samba/class_sambaAccount.inc:446
 #: plugins/personal/generic/class_user.inc:247
 msgid "December"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:556
-#: plugins/personal/samba/class_sambaAccount.inc:462
+#: plugins/personal/samba/class_sambaAccount.inc:488
 #: plugins/admin/systems/class_terminalGeneric.inc:104
 #: ihtml/themes/altlinux/setup_step4.tpl:91
 #: ihtml/themes/default/setup_step4.tpl:91
@@ -1734,38 +1735,18 @@ msgstr ""
 msgid "Removing Netatalk account failed"
 msgstr ""
 
-#: plugins/personal/samba/samba2.tpl:13
-msgid "Samba home"
+#: plugins/personal/samba/samba3.tpl:23
+msgid "Domain"
 msgstr ""
 
-#: plugins/personal/samba/samba2.tpl:30 plugins/personal/samba/samba3.tpl:38
+#: plugins/personal/samba/samba3.tpl:38 plugins/personal/samba/samba2.tpl:30
 msgid "Script path"
 msgstr ""
 
-#: plugins/personal/samba/samba2.tpl:36 plugins/personal/samba/samba3.tpl:44
-#: plugins/personal/samba/samba3.tpl:104
-#: plugins/personal/samba/class_sambaAccount.inc:659
+#: plugins/personal/samba/samba3.tpl:44 plugins/personal/samba/samba3.tpl:104
+#: plugins/personal/samba/samba2.tpl:36
+#: plugins/personal/samba/class_sambaAccount.inc:685
 msgid "Profile path"
-msgstr ""
-
-#: plugins/personal/samba/samba2.tpl:48 plugins/personal/samba/samba3.tpl:252
-msgid "Access options"
-msgstr ""
-
-#: plugins/personal/samba/samba2.tpl:54 plugins/personal/samba/samba3.tpl:258
-msgid "Allow user to change password from client"
-msgstr ""
-
-#: plugins/personal/samba/samba2.tpl:57 plugins/personal/samba/samba3.tpl:261
-msgid "Login from windows client requires no password"
-msgstr ""
-
-#: plugins/personal/samba/samba2.tpl:60
-msgid "Temporary disable samba account"
-msgstr ""
-
-#: plugins/personal/samba/samba3.tpl:23
-msgid "Domain"
 msgstr ""
 
 #: plugins/personal/samba/samba3.tpl:56
@@ -1793,17 +1774,17 @@ msgid "Timeout settings (in minutes)"
 msgstr ""
 
 #: plugins/personal/samba/samba3.tpl:158
-#: plugins/personal/samba/class_sambaAccount.inc:666
+#: plugins/personal/samba/class_sambaAccount.inc:692
 msgid "Connection"
 msgstr ""
 
 #: plugins/personal/samba/samba3.tpl:167
-#: plugins/personal/samba/class_sambaAccount.inc:667
+#: plugins/personal/samba/class_sambaAccount.inc:693
 msgid "Disconnection"
 msgstr ""
 
 #: plugins/personal/samba/samba3.tpl:176
-#: plugins/personal/samba/class_sambaAccount.inc:668
+#: plugins/personal/samba/class_sambaAccount.inc:694
 msgid "IDLE"
 msgstr ""
 
@@ -1840,6 +1821,18 @@ msgstr ""
 msgid "Reconnect if disconnected"
 msgstr ""
 
+#: plugins/personal/samba/samba3.tpl:252 plugins/personal/samba/samba2.tpl:48
+msgid "Access options"
+msgstr ""
+
+#: plugins/personal/samba/samba3.tpl:258 plugins/personal/samba/samba2.tpl:54
+msgid "Allow user to change password from client"
+msgstr ""
+
+#: plugins/personal/samba/samba3.tpl:261 plugins/personal/samba/samba2.tpl:57
+msgid "Login from windows client requires no password"
+msgstr ""
+
 #: plugins/personal/samba/samba3.tpl:264
 msgid "Lock samba account"
 msgstr ""
@@ -1856,8 +1849,24 @@ msgstr ""
 msgid "Account expires after"
 msgstr ""
 
-#: plugins/personal/samba/samba3.tpl:324
+#: plugins/personal/samba/samba3.tpl:320
+msgid "Samba logon times"
+msgstr ""
+
+#: plugins/personal/samba/samba3.tpl:320
+msgid "Edit settings..."
+msgstr ""
+
+#: plugins/personal/samba/samba3.tpl:326
 msgid "Allow connection from these workstations only"
+msgstr ""
+
+#: plugins/personal/samba/samba2.tpl:13
+msgid "Samba home"
+msgstr ""
+
+#: plugins/personal/samba/samba2.tpl:60
+msgid "Temporary disable samba account"
 msgstr ""
 
 #: plugins/personal/samba/main.inc:124
@@ -1872,104 +1881,159 @@ msgstr ""
 msgid "Display workstations of department"
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:205
+#: plugins/personal/samba/class_sambaLogonHours.inc:41
+msgid "Sunday"
+msgstr ""
+
+#: plugins/personal/samba/class_sambaLogonHours.inc:42
+msgid "Monday"
+msgstr ""
+
+#: plugins/personal/samba/class_sambaLogonHours.inc:43
+msgid "Tuesday"
+msgstr ""
+
+#: plugins/personal/samba/class_sambaLogonHours.inc:44
+msgid "Wednesday"
+msgstr ""
+
+#: plugins/personal/samba/class_sambaLogonHours.inc:45
+msgid "Thursday"
+msgstr ""
+
+#: plugins/personal/samba/class_sambaLogonHours.inc:46
+msgid "Friday"
+msgstr ""
+
+#: plugins/personal/samba/class_sambaLogonHours.inc:47
+msgid "Saturday"
+msgstr ""
+
+#: plugins/personal/samba/class_sambaAccount.inc:206
 msgid "This account has no samba extensions."
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:214
+#: plugins/personal/samba/class_sambaAccount.inc:215
 msgid "Remove samba account"
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:215
+#: plugins/personal/samba/class_sambaAccount.inc:216
 msgid ""
 "This account has samba features enabled. You can disable them by clicking "
 "below."
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:225
-#: plugins/personal/samba/class_sambaAccount.inc:228
+#: plugins/personal/samba/class_sambaAccount.inc:226
+#: plugins/personal/samba/class_sambaAccount.inc:229
 msgid "Create samba account"
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:226
+#: plugins/personal/samba/class_sambaAccount.inc:227
 msgid ""
 "This account has samba features disabled. You can enable them by clicking "
 "below."
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:229
+#: plugins/personal/samba/class_sambaAccount.inc:230
 msgid ""
 "This account has samba features disabled. Posix features are needed for "
 "samba accounts, enable them first."
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:463
+#: plugins/personal/samba/class_sambaAccount.inc:489
 msgid "input on, notify on"
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:464
+#: plugins/personal/samba/class_sambaAccount.inc:490
 msgid "input on, notify off"
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:465
+#: plugins/personal/samba/class_sambaAccount.inc:491
 msgid "input off, notify on"
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:466
+#: plugins/personal/samba/class_sambaAccount.inc:492
 msgid "input off, nofify off"
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:468
+#: plugins/personal/samba/class_sambaAccount.inc:494
 msgid "disconnect"
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:469
+#: plugins/personal/samba/class_sambaAccount.inc:495
 msgid "reset"
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:471
+#: plugins/personal/samba/class_sambaAccount.inc:497
 msgid "from any client"
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:472
+#: plugins/personal/samba/class_sambaAccount.inc:498
 msgid "from previous client only"
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:642
+#: plugins/personal/samba/class_sambaAccount.inc:668
 msgid "Removing Samba account failed"
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:661
+#: plugins/personal/samba/class_sambaAccount.inc:687
 #, php-format
 msgid "The value specified as '%s' contains invalid characters!"
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:671
+#: plugins/personal/samba/class_sambaAccount.inc:697
 #, php-format
 msgid ""
 "The timeout property '%s' is checked and contains invalid or no characters!"
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:677
+#: plugins/personal/samba/class_sambaAccount.inc:703
 msgid ""
 "The windows user manager only allows eight clients. You've specified more "
 "than eight."
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:861
+#: plugins/personal/samba/class_sambaAccount.inc:887
 msgid ""
 "Warning: This account has an undefined samba SID assigned. The problem can "
 "not be fixed by GOsa!"
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:885
+#: plugins/personal/samba/class_sambaAccount.inc:911
 msgid ""
 "Warning: Can't identify users primary group - no conversion to a samba group "
 "possible!"
 msgstr ""
 
-#: plugins/personal/samba/class_sambaAccount.inc:989
+#: plugins/personal/samba/class_sambaAccount.inc:1015
 msgid "Saving Samba account failed"
+msgstr ""
+
+#: plugins/personal/samba/sambaLogonHours.tpl:21
+msgid "Specify the hours this user is allowed to log in"
+msgstr ""
+
+#: plugins/personal/samba/sambaLogonHours.tpl:27
+msgid "Hour"
+msgstr ""
+
+#: plugins/personal/samba/sambaLogonHours.tpl:87
+#: plugins/personal/environment/logonManagement.tpl:75
+#: plugins/gofax/faxaccount/lists.tpl:31
+#: plugins/admin/fai/faiProfileEntry.tpl:70
+#: plugins/admin/fai/faiPackageConfiguration.tpl:6
+#: plugins/admin/fai/faiScriptEntry.tpl:68
+#: plugins/admin/fai/faiNewBranch.tpl:21
+#: plugins/admin/fai/faiVariableEntry.tpl:48
+#: plugins/admin/fai/faiPackageEntry.tpl:56
+#: plugins/admin/fai/faiHookEntry.tpl:70
+#: plugins/admin/fai/faiTemplateEntry.tpl:130
+#: plugins/admin/groups/mail_admins.tpl:37
+#: plugins/admin/groups/application_options.tpl:11
+#: plugins/admin/systems/servRepositorySetup.tpl:41
+#: plugins/admin/systems/printerPPDDialog.tpl:22
+#: plugins/gofon/macro/class_gofonMacroManagement.inc:266
+msgid "Apply"
 msgstr ""
 
 #: plugins/personal/environment/environment.tpl:3
@@ -2372,24 +2436,6 @@ msgstr ""
 
 #: plugins/personal/environment/logonManagement.tpl:56
 msgid "Logon script"
-msgstr ""
-
-#: plugins/personal/environment/logonManagement.tpl:75
-#: plugins/gofax/faxaccount/lists.tpl:31
-#: plugins/admin/fai/faiProfileEntry.tpl:70
-#: plugins/admin/fai/faiPackageConfiguration.tpl:6
-#: plugins/admin/fai/faiScriptEntry.tpl:68
-#: plugins/admin/fai/faiNewBranch.tpl:21
-#: plugins/admin/fai/faiVariableEntry.tpl:48
-#: plugins/admin/fai/faiPackageEntry.tpl:56
-#: plugins/admin/fai/faiHookEntry.tpl:70
-#: plugins/admin/fai/faiTemplateEntry.tpl:130
-#: plugins/admin/groups/mail_admins.tpl:37
-#: plugins/admin/groups/application_options.tpl:11
-#: plugins/admin/systems/servRepositorySetup.tpl:41
-#: plugins/admin/systems/printerPPDDialog.tpl:22
-#: plugins/gofon/macro/class_gofonMacroManagement.inc:266
-msgid "Apply"
 msgstr ""
 
 #: plugins/personal/environment/class_kioskManagementDialog.inc:75
@@ -6520,6 +6566,18 @@ msgstr ""
 msgid "All fields are writeable"
 msgstr ""
 
+#: plugins/admin/groups/application_options.tpl:2
+msgid "Application options"
+msgstr ""
+
+#: plugins/admin/groups/mail_locals.tpl:32
+msgid "Display addresses of department"
+msgstr ""
+
+#: plugins/admin/groups/mail_locals.tpl:42
+msgid "Display addresses matching"
+msgstr ""
+
 #: plugins/admin/groups/class_groupApplication.inc:395
 msgid "This 'dn' is no appgroup."
 msgstr ""
@@ -6618,18 +6676,6 @@ msgstr ""
 msgid ""
 "Can't resolve the release name '%s', setting release name to '%s'. Possibly "
 "the objects base has changed."
-msgstr ""
-
-#: plugins/admin/groups/application_options.tpl:2
-msgid "Application options"
-msgstr ""
-
-#: plugins/admin/groups/mail_locals.tpl:32
-msgid "Display addresses of department"
-msgstr ""
-
-#: plugins/admin/groups/mail_locals.tpl:42
-msgid "Display addresses matching"
 msgstr ""
 
 #: plugins/admin/users/remove.tpl:6
@@ -12455,12 +12501,6 @@ msgid ""
 "twice !"
 msgstr ""
 
-#: include/class_MultiSelectWindow.inc:456
-msgid ""
-"Error: The requested subtree has an inconsistent DN encoding, check your "
-"LDAP!"
-msgstr ""
-
 #: include/class_password-methods-sha.inc:50
 msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
 msgstr ""
@@ -12553,77 +12593,10 @@ msgstr ""
 msgid "Parsing PPD file %s failed - no information found."
 msgstr ""
 
-#: include/class_ldap.inc:196
-#, php-format
+#: include/class_MultiSelectWindow.inc:456
 msgid ""
-"The LDAP server is slow (%.2fs for the last query). This may be responsible "
-"for performance breakdowns."
-msgstr ""
-
-#: include/class_ldap.inc:230
-#, php-format
-msgid ""
-"The ldapserver is answering very slow (%.2f), this may be responsible for "
-"performance breakdowns."
-msgstr ""
-
-#: include/class_ldap.inc:456
-#, php-format
-msgid "Creating copy of %s"
-msgstr ""
-
-#: include/class_ldap.inc:459
-msgid "Processing"
-msgstr ""
-
-#: include/class_ldap.inc:499
-msgid "Error while fetching source dn - aborted!"
-msgstr ""
-
-#: include/class_ldap.inc:562 include/class_ldap.inc:577
-#, php-format
-msgid "Unknown FAIstate %s"
-msgstr ""
-
-#: include/class_ldap.inc:671
-#, php-format
-msgid ""
-"The referral url '%s' is missing the ldap base. It should look like this "
-"'ldap://server:port/base'."
-msgstr ""
-
-#: include/class_ldap.inc:732
-#, php-format
-msgid ""
-"Autocreation of type '%s' is currently not supported. Please report to the "
-"GOsa team."
-msgstr ""
-
-#: include/class_ldap.inc:801
-#, php-format
-msgid "while operating on '%s' using LDAP server '%s'"
-msgstr ""
-
-#: include/class_ldap.inc:803
-#, php-format
-msgid "while operating on LDAP server %s"
-msgstr ""
-
-#: include/class_ldap.inc:999
-#, php-format
-msgid ""
-"This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
-"in line %s"
-msgstr ""
-
-#: include/class_ldap.inc:1012
-#, php-format
-msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
-msgstr ""
-
-#: include/class_ldap.inc:1028
-#, php-format
-msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
+"Error: The requested subtree has an inconsistent DN encoding, check your "
+"LDAP!"
 msgstr ""
 
 #: include/class_certificate.inc:35
@@ -12877,6 +12850,79 @@ msgstr ""
 
 #: include/class_config.inc:485
 msgid "SID and/or RIDBASE missing in your configuration!"
+msgstr ""
+
+#: include/class_ldap.inc:196
+#, php-format
+msgid ""
+"The LDAP server is slow (%.2fs for the last query). This may be responsible "
+"for performance breakdowns."
+msgstr ""
+
+#: include/class_ldap.inc:230
+#, php-format
+msgid ""
+"The ldapserver is answering very slow (%.2f), this may be responsible for "
+"performance breakdowns."
+msgstr ""
+
+#: include/class_ldap.inc:456
+#, php-format
+msgid "Creating copy of %s"
+msgstr ""
+
+#: include/class_ldap.inc:459
+msgid "Processing"
+msgstr ""
+
+#: include/class_ldap.inc:499
+msgid "Error while fetching source dn - aborted!"
+msgstr ""
+
+#: include/class_ldap.inc:562 include/class_ldap.inc:577
+#, php-format
+msgid "Unknown FAIstate %s"
+msgstr ""
+
+#: include/class_ldap.inc:671
+#, php-format
+msgid ""
+"The referral url '%s' is missing the ldap base. It should look like this "
+"'ldap://server:port/base'."
+msgstr ""
+
+#: include/class_ldap.inc:732
+#, php-format
+msgid ""
+"Autocreation of type '%s' is currently not supported. Please report to the "
+"GOsa team."
+msgstr ""
+
+#: include/class_ldap.inc:801
+#, php-format
+msgid "while operating on '%s' using LDAP server '%s'"
+msgstr ""
+
+#: include/class_ldap.inc:803
+#, php-format
+msgid "while operating on LDAP server %s"
+msgstr ""
+
+#: include/class_ldap.inc:999
+#, php-format
+msgid ""
+"This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
+"in line %s"
+msgstr ""
+
+#: include/class_ldap.inc:1012
+#, php-format
+msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
+msgstr ""
+
+#: include/class_ldap.inc:1028
+#, php-format
+msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
 msgstr ""
 
 #: html/setup.php:89
