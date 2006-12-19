@@ -77,6 +77,7 @@ class sambaAccount extends plugin
   var $mungedObject;
 
   /* Helper */
+  var $dialog;
   var $show_ws_dialog= FALSE;
   var $logon_time_set= 0;
   var $logoff_time_set= 0;
@@ -231,6 +232,31 @@ class sambaAccount extends plugin
         return ($display);
       }
     }
+
+
+    /* Open Samaba Logong hours dialog */
+    if(isset($_POST['SetSambaLogonHours']) && $this->samba3){
+      $this->dialog = new sambaLogonHours($this->config,$this->dn,$this->sambaLogonHours);
+    }
+
+    /* Cancel dialog */
+    if(isset($_POST['cancel_logonHours'])){
+      $this->dialog = NULL; 
+    }
+
+    /* Save selected logon hours */
+    if(isset($_POST['save_logonHours'])){
+      $this->dialog->save_object();  
+      $this->sambaLogonHours = $this->dialog->save();
+      $this->dialog = NULL; 
+    }
+
+    /* Display dialog */
+    if(isset($this->dialog)){
+      $this->dialog->save_object();
+      return($this->dialog->execute());
+    }
+
 
     /* Prepare templating */
     $smarty= get_smarty();
