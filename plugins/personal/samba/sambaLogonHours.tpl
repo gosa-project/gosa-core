@@ -53,6 +53,7 @@
       <input type='button' onClick="toggle_chk('_{$hours}$');" value='+/-' style='width:100%;'>
     </td>
     {/foreach}
+    <td><input type='button' onClick="toggle_chk('day_*_*');" value='+/-' style='width:100%;'></td>
   </tr>
 
   <!-- Add Entries -->
