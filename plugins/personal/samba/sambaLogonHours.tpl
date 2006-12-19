@@ -21,7 +21,7 @@
 <h1>{t}Specify the hours this user is allowed to log in{/t}</h1>
 <br>
 
-<table cellspacing=0 cellpadding=0 style='border: solid 1px #B0B0B0; background-color: #EEEEEE;'>
+<table cellspacing=0 cellpadding=0 style='border: solid 1px #B0B0B0; background-color: #EEEEEE; width :100%;' >
   <tr>
     <td>&nbsp;</td>
     <td colspan=24 style='text-align:center;height:24px;border-bottom: solid 1px #B0B0B0;'><b>{t}Hour{/t}</b></td>
@@ -30,9 +30,9 @@
     <td style='text-align: left;' class='list0'>&nbsp;</td>
     {foreach from=$Hours item=hours key=key_hours}
       {if (($hours)%2) == 0 }
-        <td style="height: 22px; background-color: rgb(226, 226, 226); ">
+        <td style="text-align:center;height: 22px; background-color: rgb(226, 226, 226); ">
       {else}
-        <td style="height: 22px; background-color: rgb(245, 245, 245); border-right: solid 1px #B0B0B0;">
+        <td style="text-align:center;height: 22px; background-color: rgb(245, 245, 245); border-right: solid 1px #B0B0B0;">
       {/if}
       {$hours}
     </td>
@@ -46,11 +46,11 @@
     </td>
     {foreach from=$Hours item=hours key=key_hours}
       {if (($hours)%2) == 0 }
-        <td style="height: 22px; background-color: rgb(226, 226, 226); text-align: right;">
+        <td style="text-align:center; height: 22px; background-color: rgb(226, 226, 226); text-align: right;">
       {else}
-        <td style="height: 22px; background-color: rgb(245, 245, 245); border-right: solid 1px #B0B0B0; text-align: right;">
+        <td style="text-align:center; height: 22px; background-color: rgb(245, 245, 245); border-right: solid 1px #B0B0B0; text-align: right;">
       {/if}
-      <input type='button' onClick="toggle_chk('_{$hours}$');" value='+/-' style='padding:0px;margin:0px;;'>
+      <input type='button' onClick="toggle_chk('_{$hours}$');" value='+/-' style='width:100%;'>
     </td>
     {/foreach}
   </tr>
@@ -63,9 +63,9 @@
     </td>
     {foreach from=$days item=hours key=key_hour}
       {if (($key_hour)%2) == 0 }
-        <td style="height: 22px; background-color: rgb(226, 226, 226); ">
+        <td style="text-align:center;height: 22px; background-color: rgb(226, 226, 226); ">
       {else}
-        <td style="height: 22px; background-color: rgb(245, 245, 245); border-right: solid 1px;">
+        <td style="text-align:center;height: 22px; background-color: rgb(245, 245, 245); border-right: solid 1px;">
       {/if}
         {if $Matrix[$key_day].$key_hour}
           <input id='day_{$key_day}_{$key_hour}' type='checkbox' name='day_{$key_day}_{$key_hour}' checked >
