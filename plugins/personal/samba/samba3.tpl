@@ -317,7 +317,7 @@
    <input type="hidden" name="sambaLogoffTime" value="{$sambaLogoffTime}">
    <input type="hidden" name="sambaKickoffTime" value="{$sambaKickoffTime}">
 
-   <input type='submit' name='SetSambaLogonHours' value='{t}Setup{/t}'>&nbsp;{t}Samba logon restrictions{/t}
+   {t}Samba logon times{/t}&nbsp;<input type='submit' name='SetSambaLogonHours' value='{t}Edit settings...{/t}'>
   </td>	
   <td style="border-left:1px solid #A0A0A0">
    &nbsp;

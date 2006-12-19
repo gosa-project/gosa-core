@@ -18,10 +18,13 @@
   {/literal}
 </script>
 
+<h1>{t}Specify the hours this user is allowed to log in{/t}</h1>
+<br>
+
 <table cellspacing=0 cellpadding=0>
   <tr>
-    <td style='text-align: right;' class='list0'>
-      {t}Hours{/t}&nbsp;
+    <td style='text-align: left;' class='list0'>
+      <b>{t}Hour{/t}</b>
     </td>
     {foreach from=$Hours item=hours key=key_hours}
       {if (($hours)%2) == 0 }
@@ -37,7 +40,7 @@
   <!-- Add toggle buttons for hours -->
   <tr>
     <td style='text-align: left;' class='list0'>
-      &nbsp;{t}Days{/t}
+      &nbsp;
     </td>
     {foreach from=$Hours item=hours key=key_hours}
       {if (($hours)%2) == 0 }
