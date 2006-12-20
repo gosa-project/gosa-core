@@ -16,6 +16,8 @@ GOsa2 changelog
     can edit specified objects.
   - Fixed simultaneous move + rename for deparments
   - Internally updated to smarty 2.6.16
+  - Removed asterisk status view in user display. This was too slow in
+    bigger installations.
 
 * gosa 2.5.6
   - Copy & paste implemented into FAI
