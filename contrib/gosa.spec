@@ -11,7 +11,7 @@
 #
 Summary: 		Web Based LDAP Administration Program 
 Name:			gosa
-Version: 		2.5.6
+Version: 		2.5.7
 Release:		1
 License: 		GPL
 Source: 		ftp://oss.GONICUS.de/pub/gosa/%{sourcename}.tar.bz2
@@ -219,6 +219,9 @@ rm -rf /var/spool/gosa/
 /usr/share/gosa/doc/guide/user/nl
 
 %changelog
+* Wed Dec 20 2006 Lars Scheiter <lars.scheiter@GONICUS.de> 2.5.7
+- New upstream
+
 * Fri Nov 17 2006 Lars Scheiter <lars.scheiter@GONICUS.de> 2.5.6
 - New upstream
 - Cleanup temporary dir after package removal
