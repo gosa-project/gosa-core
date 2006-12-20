@@ -78,7 +78,7 @@ class phoneAccount extends plugin
        array_key_exists('FON',$_SESSION['config']->data['SERVERS']) &&
        is_callable("mysql_connect")
        ) {
-      $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
+      $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'][0];
       $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
       if(!$r_con){
         $this->generate_error = sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
@@ -250,7 +250,7 @@ class phoneAccount extends plugin
   // Generate MySQL Syntax
   function generate_mysql_entension_entries($save = false){
 
-    if(!isset($_SESSION['config']->data['SERVERS']['FON'])){
+    if(!isset($_SESSION['config']->data['SERVERS']['FON'][0])){
       if($save)
       print_red(_("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). Your settings can't be saved to asterisk database."));
       return(true);
@@ -263,7 +263,7 @@ class phoneAccount extends plugin
     }
   
     // Get Configuration for Mysql database Server
-    $a_SETUP        = $_SESSION['config']->data['SERVERS']['FON'];  // DB Configuration
+    $a_SETUP        = $_SESSION['config']->data['SERVERS']['FON'][0];  // DB Configuration
     $s_parameter    = "";                                           // Contains paramter for selected Macro 
     $r_con          = false;                                        // DB connection
     $r_db           = false;                                        // Selected DB
@@ -646,7 +646,7 @@ class phoneAccount extends plugin
     $smarty->assign("macro", $this->macro);   
 
     /* check if there is a FON server created */
-    if(!isset($_SESSION['config']->data['SERVERS']['FON'])){
+    if(!isset($_SESSION['config']->data['SERVERS']['FON'][0])){
       print_red(_("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). Your settings can't be saved to asterisk database."));
     }
 
@@ -1031,7 +1031,7 @@ class phoneAccount extends plugin
        array_key_exists('FON', $_SESSION['config']->data['SERVERS']) &&
         is_callable("mysql_pconnect")) {
       // Get Configuration for Mysql database Server
-      $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
+      $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'][0];
       $s_parameter  ="";
 
       // Connect to DB server

@@ -245,13 +245,13 @@ class conference extends plugin
 
   function SQL_add_me($save){
 
-    if(!isset($_SESSION['config']->data['SERVERS']['FON'])){
+    if(!isset($_SESSION['config']->data['SERVERS']['FON'][0])){
       $this->generate_error = _("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). Your settings can't be saved to asterisk database.");
       return(false);
     }
   
     // Get Configuration for Mysql database Server
-    $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
+    $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'][0];
 
     // Connect to DB server
     $r_con = false;    
@@ -376,7 +376,7 @@ class conference extends plugin
 
     if($this->old_tele_number){
       // Get Configuration for Mysql database Server
-      $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
+      $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'][0];
 
       // Connect to DB server
       $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);

@@ -223,12 +223,12 @@ class phonequeue extends plugin
 
     $SQL = array();
 
-    if(!isset($_SESSION['config']->data['SERVERS']['FON'])){
+    if(!isset($_SESSION['config']->data['SERVERS']['FON'][0])){
       return(_("There is currently no asterisk server defined. Your settings can't be saved."));
     }
 
     // Get Configuration for Mysql database Server
-    $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
+    $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'][0];
     $s_parameter  ="";
 
     // Connect to DB server
@@ -603,7 +603,7 @@ class phonequeue extends plugin
     $SQL = array();
 
     // Get Configuration for Mysql database Server
-    $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
+    $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'][0];
     $s_parameter  ="";
 
     // Connect to DB server

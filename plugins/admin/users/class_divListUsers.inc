@@ -182,8 +182,8 @@ class divListUsers extends MultiSelectWindow
      */
     $r_db   =false;
     $r_con  =false;
-    if (isset($_SESSION['config']->data['SERVERS']['FON'])){
-      $a_SETUP= $_SESSION['config']->data['SERVERS']['FON'];
+    if (isset($_SESSION['config']->data['SERVERS']['FON'][0])){
+      $a_SETUP= $_SESSION['config']->data['SERVERS']['FON'][0];
       $r_con = false;
       $r_db  = false;
       if(is_callable("mysql_pconnect")){

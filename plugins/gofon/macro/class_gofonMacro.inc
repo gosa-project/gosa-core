@@ -93,7 +93,7 @@ class macro extends plugin
     $tmp  	= array();
     $number = 0; 
 
-    if(!isset($_SESSION['config']->data['SERVERS']['FON'])){
+    if(!isset($_SESSION['config']->data['SERVERS']['FON'][0])){
       print_red(_("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). Your settings can't be saved to asterisk database."));
     }
 
@@ -212,7 +212,7 @@ class macro extends plugin
   // Generate MySQL Syntax 
   function generate_mysql_entension_entries($save = false,$delete_only=false,$remove_old_macroname=false){
 
-    if(!isset($_SESSION['config']->data['SERVERS']['FON'])){
+    if(!isset($_SESSION['config']->data['SERVERS']['FON'][0])){
       return(true);
     }
 
@@ -225,7 +225,7 @@ class macro extends plugin
     }
 
     // Get Configuration for Mysql database Server  
-    $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'];
+    $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'][0];
 
     // Connect to DB server
     $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']); 
