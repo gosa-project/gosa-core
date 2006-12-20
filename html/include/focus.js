@@ -248,12 +248,22 @@ function adjust_height(e) {
 				suggested= inner_height-230;
 			}
 	
-		} else if(px_height >= 450) {
-				suggested= px_height-230;
+		// IE uses other height specifications
+		} else if (browserType == "ie") {
+			suggested= document.all.menucell.offsetHeight;
+			offset= absTop(d_scrollbody);
+			suggested-= offset;
+			if((inner_height-230)-suggested>0) {
+				suggested= inner_height-230;
+			}
 		}
 		document.getElementById("d_scrollbody").style.height=suggested+"px";
 	}
 	return true;
+}
+
+function absTop(e) {
+	return (e.offsetParent)?e.offsetTop+absTop(e.offsetParent) : e.offsetTop;
 }
 
 // Automatic resize (width) of divlists
