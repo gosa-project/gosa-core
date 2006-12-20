@@ -5,12 +5,18 @@ class sambaLogonHours extends plugin
 
   var $sambaLogonHours = "";
   var $Matrix          = array();
-  
+  var $timezone        = 0; 
   var $config;
 
   function sambaLogonHours ($config, $dn, $slh)
   {
     plugin::plugin($config,$dn);
+    $this->sambaLogonHours = $slh;
+
+    /* Get Timezone to be able to shift to the correct beginning */
+    if(isset($this->config->current['TIMEZONE'])){
+      $this->timezone = $this->config->current['TIMEZONE'];
+    }
 
     /* Convert to bin */
     $tmp = '';
@@ -18,11 +24,26 @@ class sambaLogonHours extends plugin
       $tmp .= str_pad(base_convert($slh[$i],16,2),4,'0',STR_PAD_LEFT);
     }
     $slh = $tmp;
-    $this->sambaLogonHours = $slh;
 
     /* Set to default if value is empty or seams to be broken */
     if(strlen($slh) != 168){
       $slh = str_pad('',168 , "1");
+    }
+
+    /* Rework string, because it was stored in little endian */
+    $new = '';
+    for($i = 0 ; $i < 21 ; $i ++ ){
+      $part         = strrev(substr($slh, $i * 8, 8));
+      $byte['hi']   = substr($part,0,4);
+      $byte['low']  = substr($part,4,4);
+      $new .= $byte['hi'].$byte['low'];
+    }
+
+    /* Shift string to match given timezone settings */
+    $shift_by = (168 + $this->timezone) % 168;
+    for($i = 0 ; $i < $shift_by; $i ++){
+      $new = $new[167].$new;
+      $new = substr($new,0,168);
     }
 
     /* Create matrix */ 
@@ -30,7 +51,7 @@ class sambaLogonHours extends plugin
     for($day = 0 ; $day < 7 ; $day ++ ){
       for($hour  = 0 ; $hour < 24 ; $hour ++){
         $bitpos  = ($day * 24 + $hour) % 168;
-        $this->Matrix[$day][$hour] = $slh[$bitpos]; 
+        $this->Matrix[$day][$hour] = $new[$bitpos]; 
       }
     }
   }
@@ -76,24 +97,45 @@ class sambaLogonHours extends plugin
   
   function save()
   {
+
     /* Convert Matrix to Hex */
-    $ret = "";
+    $slh = "";
     foreach($this->Matrix as $day_key => $days){
-      $four_bit = '';
       foreach($days as $hour_key => $hour){
-        $four_bit .= $hour;
-        if(strlen($four_bit) == 4){
-          $ret .= base_convert($four_bit,2,16);
-          $four_bit ='';
-        }
+        $slh .= $hour;
       }
     }
+
+    /* Shift string to match given timezone settings */
+    $shift_by = (168 + ($this->timezone*(-1))) % 168;
+    for($i = 0 ; $i < $shift_by; $i ++){
+      $slh = $slh[167].$slh;
+      $slh = substr($slh,0,168);
+    }
+ 
+    /* Rework string, because it was stored in little endian */
+    $new = '';
+    for($i = 0 ; $i < 21 ; $i ++ ){
+      $part         = strrev(substr($slh, $i * 8, 8));
+      $byte['hi']   = substr($part,0,4);
+      $byte['low']  = substr($part,4,4);
+      $new .= $byte['hi'].$byte['low'];
+    }
+
+    /* Convert to bin */
+    $tmp = '';
+    for($i = 0 ; $i < 21 ; $i ++){
+      $tmp .= str_pad(base_convert(substr($new,$i*8,8),2,16),2,'0',STR_PAD_LEFT);
+    }
+
+    /* Create uppercase HEX chars */
+    $ret = strtoupper( $tmp);
     
     /* All hours and days selected */
-    if(substr_count($ret,'f') == 42){
-      $ret ="";
+    if(substr_count($ret,'F') == 42){
+      $ret = "";
     }
-  
+
     return($ret);
   }
 }
