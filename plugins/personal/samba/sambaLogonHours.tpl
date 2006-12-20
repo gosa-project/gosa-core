@@ -50,10 +50,10 @@
       {else}
         <td style="text-align:center; height: 22px; background-color: rgb(245, 245, 245); border-right: solid 1px #B0B0B0; text-align: right;">
       {/if}
-      <input type='button' onClick="toggle_chk('_{$hours}$');" value='+/-' style='width:100%;'>
+      <input type='button' onClick="toggle_chk('^day_[0-9]*_{$hours}$');" value='+/-' style='width:100%;'>
     </td>
     {/foreach}
-    <td><input type='button' onClick="toggle_chk('day_*_*');" value='+/-' style='width:100%;'></td>
+    <td><input type='button' onClick="toggle_chk('^day_[0-9]*_[0-9]*$');" value='+/-' style='width:100%;'></td>
   </tr>
 
   <!-- Add Entries -->
@@ -78,7 +78,7 @@
 
     <!-- Add toggle button for days -->
     <td>  
-      <input type='button' onClick="toggle_chk('^day_{$key_day}')" value='+/-'  style='padding:0px;margin:0px;'>
+      <input type='button' onClick="toggle_chk('^day_{$key_day}_[0-9]*$')" value='+/-'  style='padding:0px;margin:0px;'>
     </td>
   </tr>
 {/foreach}
