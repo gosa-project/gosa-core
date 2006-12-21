@@ -9,8 +9,8 @@ class phoneAccount extends plugin
 
   /* Attributes */
   var $telephoneNumber        = array();
-  var $goFonHardware          = "";
-  var $goFonFormat            = "";
+  var $goFonHardware          = "automatic";
+  var $goFonFormat            = "wav";
   var $goFonPIN               = "";
   var $goFonVoicemailPIN      = "";
   var $goFonDeliveryMode      = "";
@@ -50,16 +50,6 @@ class phoneAccount extends plugin
   {
     plugin::plugin ($config, $dn, $parent);
 
-    /* Set phone hardware */
-    if (!isset($this->attrs['goFonHardware'])){
-      $this->goFonHardware= "automatic";
-    }
-
-    /* Preset voice format */
-    if (!isset($this->attrs['goFonFormat'])){
-      $this->goFonFormat= "wav";
-    }
-
     /* Assemble phone numbers */
     if (isset($this->attrs['telephoneNumber'])){
       for ($i= 0; $i<$this->attrs['telephoneNumber']['count']; $i++){
@@ -75,6 +65,12 @@ class phoneAccount extends plugin
       }
     }
 
+
+    /* Check server configurations 
+     * Load all server configuration in $this->goFonHomeServers if available
+     *  and first server as default if necessary.
+     * Check if connection is successfull for the selected server $this->goFonHomeServer
+     */
     $a_SETUP= array();
     if(array_key_exists('config',$_SESSION) &&
        array_key_exists('SERVERS',$_SESSION['config']->data) &&
@@ -92,7 +88,6 @@ class phoneAccount extends plugin
 
       /* get config */
       $cur_cfg = $this->goFonHomeServers[$this->goFonHomeServer];
-     
 
       $r_con =  @mysql_pconnect($cur_cfg['SERVER'],$cur_cfg['LOGIN'],$cur_cfg['PASSWORD']);
       if(!$r_con){
@@ -116,7 +111,10 @@ class phoneAccount extends plugin
       }
     }
 
-    /* Load hardware list */
+
+    /* Get available phone hardware  
+     * Search for all available phone hardware  
+     */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
     $ldap->search("(objectClass=goFonHardware)", array('cn', 'description'));
@@ -128,65 +126,65 @@ class phoneAccount extends plugin
         $description= "";
       }
       $this->hardware_list[$cn]= "$cn$description";
-
     }
 
-    /* Perform search, to get Macro Parameters,Name,Dn,Displayname etc*/
-    $ldap->search("(objectClass=goFonMacro)", array("*"));
+
+    /* Get available Macros  
+     * Search for all Marcos that are visible and create 
+     *  an array with name and parameters 
+     */
+    $ldap->search("((objectClass=goFonMacro)(goFonMacroVisible=1))", array("*"));
 
     /* Add none for no macro*/
     $this->macros['none']=_("no macro");    
     $this->macro ="none";
 
-
     /* Fetch all Macros*/
     while ($attrs= $ldap->fetch()){
 
-      /* Only visisble */
-      if((isset($attrs['goFonMacroVisible'][0]))&&($attrs['goFonMacroVisible'][0] ==1)){
+      /* unset Count, we don't need that here */
+      unset($attrs['displayName']['count']);
 
-        /* unset Count, we don't need that here */
-        unset($attrs['displayName']['count']);
+      /* Parse macro data, unset count for parameterarrays  */
+      if (isset($attrs['goFonMacroParameter']['count'])){
+        unset($attrs['goFonMacroParameter']['count']);
+      }
 
-        /* fill Selectfield variable with Macros */
-        if(isset($attrs['displayName'][0])){
-          $this->macros[$attrs['dn']] = $attrs['displayName'][0]." (".$attrs['cn'][0].")";
-        }else{
-          $this->macros[$attrs['dn']] = _("undefined");
-        }
+      /* fill Selectfield variable with Macros */
+      if(isset($attrs['displayName'][0])){
+        $this->macros[$attrs['dn']] = $attrs['displayName'][0]." (".$attrs['cn'][0].")";
+      }else{
+        $this->macros[$attrs['dn']] = _("undefined");
+      }
 
-        /* Parse macro data, unset count for parameterarrays  */
-        if (isset($attrs['goFonMacroParameter']['count'])){
-          unset($attrs['goFonMacroParameter']['count']);
-        }
+      /* Go through available parameters and parse all attributes, like parametername, type, default ...*/
+      if((isset($attrs['goFonMacroParameter']))&&(is_array($attrs['goFonMacroParameter']))){
 
-        /* Go through available parameters and parse all attributes, like parametername, type, default ...*/
-        if((isset($attrs['goFonMacroParameter']))&&(is_array($attrs['goFonMacroParameter']))){
+        foreach($attrs['goFonMacroParameter'] as $pkey=>$pval){
+          /* Split Data in readable values, by delimiter !  */
+          $data = split("!",$attrs['goFonMacroParameter'][$pkey]);
 
-          foreach($attrs['goFonMacroParameter'] as $pkey=>$pval){
-            /* Split Data in readable values, by delimiter !  */
-            $data = split("!",$attrs['goFonMacroParameter'][$pkey]);
-
-            /* Set all attrs */
-            $id = $data[0];
-            $this->macroarray[$attrs['dn']][$id]['var']    ="var".$id;
-            $this->macroarray[$attrs['dn']][$id]['choosen']=$data[3]; 
-            $this->macroarray[$attrs['dn']][$id]['id']     =$id;
-            $this->macroarray[$attrs['dn']][$id]['name']   =$data[1];
-            $this->macroarray[$attrs['dn']][$id]['type']   =$data[2];
-            $this->macroarray[$attrs['dn']][$id]['default']=$data[3];
-            if($data[2] == "bool"){
-              $this->macroarray[$attrs['dn']][$id]['choosen']=$data[3];
-            }
-          }//foreach
-        }//is_array
-      }//visible = 1
+          /* Set all attrs */
+          $id = $data[0];
+          $this->macroarray[$attrs['dn']][$id]['var']    ="var".$id;
+          $this->macroarray[$attrs['dn']][$id]['choosen']=$data[3]; 
+          $this->macroarray[$attrs['dn']][$id]['id']     =$id;
+          $this->macroarray[$attrs['dn']][$id]['name']   =$data[1];
+          $this->macroarray[$attrs['dn']][$id]['type']   =$data[2];
+          $this->macroarray[$attrs['dn']][$id]['default']=$data[3];
+          if($data[2] == "bool"){
+            $this->macroarray[$attrs['dn']][$id]['choosen']=$data[3];
+          }
+        }//foreach
+      }//is_array
     }//while
 
-    /* Go through already saved values, for a parameter */
-    $tmp = split("!",$this->goFonMacro);
 
-    /* it is possible that nothing has been saved yet */
+    /* Parse used Macro  
+     * If we have a macro selected, parse it and set values 
+     *  in $this->macroarray[$this->macro]. 
+     */
+    $tmp = split("!",$this->goFonMacro);
     if(is_array($tmp)){
 
       /* First value is the macroname */
@@ -217,7 +215,10 @@ class phoneAccount extends plugin
     }
 
 
-    /* Eventually colorize phones */
+    /* Colorize phones 
+     * Used phones will be colored in grey, 
+     *  so we must detect which phones are currently in use.
+     */
     $ldap->cd($this->config->current['BASE']);
     foreach ($this->hardware_list as $cn => $desc){
       $ldap->search("(goFonHardware=$cn)", array('cn'));
@@ -262,11 +263,20 @@ class phoneAccount extends plugin
   }
 
 
-  // Generate MySQL Syntax
+  /* This function generates the Database entries. 
+   * The Parameter 'save' could be true or false.
+   *  false - means only testing no database transactions.
+   *  true  - write database entries.
+   *
+   * 'sip_users','voice_mail' and 'extensions' table entries will be created.
+   * 
+   * If the phone hardware is 'automatic' the table entries will only be removed
+   *  and not added. 
+   */
   function generate_mysql_entension_entries($save = false)
   {
     /* Check if there is at least one server available 
-       If not, return and tell the user that saving failed 
+     * If not, return and tell the user that saving failed 
      */
     if(!count($this->goFonHomeServers)){
       if($save){
@@ -312,32 +322,28 @@ class phoneAccount extends plugin
     $i_is_accounted = false;  // Ensure that extension entry, for name to number is only once in table
 
 
-    // Connect to DB server
+    /* Test given server config.
+     */
     $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
-
-    // Check if we are  connected correctly
     if(!$r_con){
       $this->generate_error = sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
           $a_SETUP['SERVER'],$a_SETUP['LOGIN']);
       gosa_log(mysql_error());
       return false;
     }
-
-    // Select database for Extensions
     $r_db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
-
-    // Test if we have the database selected correctly
     if(!$r_db){
       $this->generate_error = sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']);
       gosa_log(mysql_error());
       return false;
     }
 
-    // Get phonehardware to setup sip entry
+    /* Get phonehardware to setup sip entry  */
     $ldap         = $this->config->get_ldap_link();
     $r_res        = $ldap->search("(&(objectClass=goFonHardware)(cn=".$this->goFonHardware."))", array('*'));
     $a_ldap_attrs = $ldap->fetch();
 
+    /* Check if phone number is used */
     if($this->is_number_used()){
       $this->generate_error = $this->is_number_used(); 
       return false;
@@ -357,7 +363,7 @@ class phoneAccount extends plugin
         $newnums[]= preg_replace("/[^0-9]/","",$tele);
       }
 
-      // Attribute GoFonDefaultIP set ?
+      /* Check selected phone hardware, is a default IP set? */
       if(((isset($a_ldap_attrs['goFonDefaultIP'][0]))&&($a_ldap_attrs['goFonDefaultIP'][0] != "dynamic"))){
         $s_ip       = $a_ldap_attrs['goFonDefaultIP'][0];
         $s_host     = $s_ip;
@@ -433,11 +439,6 @@ class phoneAccount extends plugin
         $s_parameter = preg_replace("/\|$/","",$s_parameter);
       }
 
-      if($this->is_number_used()){
-        $this->generate_error = $this->is_number_used(); 
-        return false;
-      }
-
       // Create new SIP entry ...
       $sip_entry = $sip_data_array;
       reset($newnums);
@@ -451,11 +452,12 @@ class phoneAccount extends plugin
         $s_mail = "";
       }
 
-      // $SQL contains all queries
+      /* Remove old entries first */
       $SQL   = array();
       $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$this->uid."';\n";
       $SQL[] = "DELETE FROM ".$a_SETUP['SIP_TABLE']." WHERE name='".$this->uid."';\n";
       $SQL[] = "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$newnums[$i_new_key].";"; 
+
       // Delete old entries
       $b_first_deleted  =false;
       if(isset($oldnums) && is_array($oldnums)){
@@ -467,6 +469,8 @@ class phoneAccount extends plugin
           }
         }
       }
+
+      /* If phone hardware is automatic only remove old entries. */
       if($this->goFonHardware=="automatic"){
         foreach($SQL as $query ){
           mysql_query($query) ;
@@ -474,28 +478,28 @@ class phoneAccount extends plugin
         return;
       }
 
-      // Generate Strings with keys and values 
+      /* Generate new database entries */
       foreach($sip_entry as $s_sip_key=>$s_sip_val){
         if($s_sip_val == NULL) continue;
         $s_sip_values.="'".$s_sip_val."',";
         $s_sip_keys  .="`".$s_sip_key."`,";
       }
-      // Remove last ,
       $s_sip_values =  preg_replace("/,$/","",$s_sip_values);
       $s_sip_keys   =  preg_replace("/,$/","",$s_sip_keys);
 
-      // Append SIP Entry 
+      /* Add sip entries to mysql queries */
       $SQL[] ="INSERT INTO ".$a_SETUP['SIP_TABLE']." (".$s_sip_keys.") VALUES (".$s_sip_values.");";
 
       /* If deletion starts from userslist, cn uid are not set */
       if((isset($this->parent->by_object['user']->uid))&&(!empty($this->parent->by_object['user']->uid))){
         $this->uid = $this->parent->by_object['user']->uid;
       }
-
       if((isset($this->parent->by_object['user']->cn))&&(!empty($this->parent->by_object['user']->cn))){
         $this->cn  = $this->parent->by_object['user']->cn;
       }
 
+      /* Create voicemail entry 
+       */
       if((!isset($this->cn))||(empty($this->cn))){
         $CNname= $this->uid;
       }else{
@@ -510,10 +514,12 @@ class phoneAccount extends plugin
                     '".$CNname."',
                     '".$s_mail."',
                     '');";
+
+      /* Create extension table entries 
+       * For each phone number we several lines in extension table 
+       */
       $i_is_accounted=false;
-    
       $i = 0; 
- 
       $is_inserted_once = false;
  
       // Entension entries  Hint / Dial / Goto
@@ -559,7 +565,6 @@ class phoneAccount extends plugin
         $EXT[$i]['app']     = $s_app;
         $EXT[$i]['appdata'] = $s_par;
         $i ++;
-
       }
 
       // Append all these Entries 
@@ -613,7 +618,7 @@ class phoneAccount extends plugin
         /* Macroname saved, delete that index */
         unset($tmp[0]);
 
-        /* Check if makro has been removed */
+        /* Check if macro has been removed */
         if(!isset($this->macroarray[$this->macro])){
           $this->macrostillavailable = false;
         }else{
@@ -656,7 +661,7 @@ class phoneAccount extends plugin
     /* Prepare templating */
     $smarty= get_smarty();
 
-    /* tell user that the pluging selected is no longer available*/
+    /* tell user that the selected plugin is no longer available */
     if((!$this->macrostillavailable)&&($this->macro!="none")){
       print_red(_("The macro you selected, is no longer available for you, please choose another one."));
     }
@@ -670,7 +675,9 @@ class phoneAccount extends plugin
       print_red(_("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). Your settings can't be saved to asterisk database."));
     }
 
-    /* Create parameter table, skip if no parameters given */
+    /* Create html parameter table for selected macro parameters 
+     *  skip if no parameters given 
+     */
     if(!isset($this->macroarray[$this->macro])){
       $macrotab="";
     }else{
@@ -681,8 +688,6 @@ class phoneAccount extends plugin
       foreach($this->phoneNumbers as $phonenum){
         $tmp[] = $phonenum;
       }
-
-      
     
       if($this->macro != $this->lastmacro){
         /* Go through all params */
@@ -758,6 +763,7 @@ class phoneAccount extends plugin
 
     /* Give smarty the table */
     $smarty->assign("macrotab",$macrotab);
+
 
     /* Do we represent a valid account? */
     if (!$this->is_account && $this->parent == NULL){
@@ -1006,28 +1012,6 @@ class phoneAccount extends plugin
       $this->handle_post_events("add",array("uid" => $this->uid));
     }
 
-  }
-
-
-  function insert_after($entry, $nr, $list)
-  {
-    /* Is the entry free? No? Make it free... */
-    if (isset($list[$nr])) {
-      $dest= array();
-      $newidx= 0;
-
-      foreach ($list as $idx => $contents){
-        $dest[$newidx++]= $contents;
-        if ($idx == $nr){
-          $dest[$newidx++]= $entry;
-        }
-      }
-    } else {
-      $dest= $list;
-      $dest[$nr]= $entry;
-    }
-
-    return ($dest);
   }
 
 
