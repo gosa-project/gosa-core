@@ -555,7 +555,7 @@ class phoneAccount extends plugin
         $sip_data_array['host']         = $s_host;
         $sip_data_array['insecure']     = NULL;
         $sip_data_array['language']     = NULL;
-        $sip_data_array['mailbox']      = "asterisk";
+        $sip_data_array['mailbox']      = $newnums[$i_new_key];
         $sip_data_array['md5secret']    = NULL;
         $sip_data_array['nat']          = "no";
         $sip_data_array['permit']       = NULL;
