@@ -27,6 +27,9 @@ class phoneAccount extends plugin
   var $generate_error         = "";
   var $a_old_telenums         = array();
   var $goFonPINVoice          = "";
+  var $goFonHomeServer        = "0";            // Contains the dn of the server that manage this account 
+  var $goFonHomeServers       = array();        // Contains all available server configurations 
+    
 
   /* CLI vars */
   var $cli_summary            = "Manage users phone account";
@@ -37,7 +40,7 @@ class phoneAccount extends plugin
   var $CopyPasteVars          = array("phoneNumbers","macroarray","macrostillavailable"/*"phoneNumbers" -Reset- */,
                                       "hardware_list","used_hardware");
 
-  var $attributes             = array("goFonDeliveryMode", "goFonFormat","uid","cn",
+  var $attributes             = array("goFonDeliveryMode", "goFonFormat","uid","cn","goFonHomeServer",
       "goFonHardware","goFonPIN","goFonVoicemailPIN","telephoneNumber", "goFonMacro","macro");
   var $objectclasses= array("goFonAccount");
 
@@ -78,17 +81,29 @@ class phoneAccount extends plugin
        array_key_exists('FON',$_SESSION['config']->data['SERVERS']) &&
        is_callable("mysql_connect")
        ) {
-      $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'][0];
-      $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+
+      /* Set available server */
+      $this->goFonHomeServers = $_SESSION['config']->data['SERVERS']['FON'];
+
+      /* Set default server */
+      if($this->dn == "new"){
+        $this->goFonHomeServer = $this->goFonHomeServers[0]['DN'];
+      }
+
+      /* get config */
+      $cur_cfg = $this->goFonHomeServers[$this->goFonHomeServer];
+     
+
+      $r_con =  @mysql_pconnect($cur_cfg['SERVER'],$cur_cfg['LOGIN'],$cur_cfg['PASSWORD']);
       if(!$r_con){
         $this->generate_error = sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
-          $a_SETUP['SERVER'],$a_SETUP['LOGIN']);
+          $cur_cfg['SERVER'],$cur_cfg['LOGIN']);
         gosa_log(mysql_error());
         return false;
       }
-      $db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
+      $db  =  @mysql_select_db($cur_cfg['DB'],$r_con);
       if(!$db){
-        $this->generate_error = sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']);
+        $this->generate_error = sprintf(_("Can't select database %s on %s."),$cur_cfg['DB'],$cur_cfg['SERVER']);
         gosa_log(mysql_error());
         return false;
       }
@@ -228,11 +243,11 @@ class phoneAccount extends plugin
      * This means, the PIN in the DB is up to date
      */
     // Connect to DB server
-    if((is_callable("mysql_pconnect"))&&(isset($a_SETUP))&&(isset($a_SETUP['SERVER']))&&(isset($a_SETUP['LOGIN']))&&(isset($a_SETUP['PASSWORD']))){
-      $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
+    if((is_callable("mysql_pconnect"))&&(isset($cur_cfg))&&(isset($cur_cfg['SERVER']))&&(isset($cur_cfg['LOGIN']))&&(isset($cur_cfg['PASSWORD']))){
+      $r_con =  @mysql_pconnect($cur_cfg['SERVER'],$cur_cfg['LOGIN'],$cur_cfg['PASSWORD']);
       if($r_con){
-        $r_db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
-        $vp = mysql_fetch_row(mysql_query("SELECT ".$a_SETUP['VOICE_TABLE'].".password FROM  ".$a_SETUP['VOICE_TABLE'].", ".$a_SETUP['SIP_TABLE']."  WHERE customer_id = sip_users.mailbox AND name='".$this->uid."'"));
+        $r_db  =  @mysql_select_db($cur_cfg['DB'],$r_con);
+        $vp = mysql_fetch_row(mysql_query("SELECT ".$cur_cfg['VOICE_TABLE'].".password FROM  ".$cur_cfg['VOICE_TABLE'].", ".$cur_cfg['SIP_TABLE']."  WHERE customer_id = sip_users.mailbox AND name='".$this->uid."'"));
 
         if((isset($vp[0]))&&(!empty($vp[0]))){
           $this->goFonPINVoice = $vp[0];
@@ -248,14 +263,19 @@ class phoneAccount extends plugin
 
 
   // Generate MySQL Syntax
-  function generate_mysql_entension_entries($save = false){
-
-    if(!isset($_SESSION['config']->data['SERVERS']['FON'][0])){
-      if($save)
-      print_red(_("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). Your settings can't be saved to asterisk database."));
+  function generate_mysql_entension_entries($save = false)
+  {
+    /* Check if there is at least one server available 
+       If not, return and tell the user that saving failed 
+     */
+    if(!count($this->goFonHomeServers)){
+      if($save){
+        print_red(_("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). Your settings can't be saved to asterisk database."));
+      }
       return(true);
     }
 
+    /* Check if Mysql extension is available */
     if(!is_callable("mysql_pconnect")){
       if($save)
       print_red(_("Can't save any changes to asterisk database, there is no mysql extension available."));
@@ -263,7 +283,7 @@ class phoneAccount extends plugin
     }
   
     // Get Configuration for Mysql database Server
-    $a_SETUP        = $_SESSION['config']->data['SERVERS']['FON'][0];  // DB Configuration
+    $a_SETUP        = $this->goFonHomeServers[$this->goFonHomeServer];  // DB Configuration
     $s_parameter    = "";                                           // Contains paramter for selected Macro 
     $r_con          = false;                                        // DB connection
     $r_db           = false;                                        // Selected DB
@@ -574,8 +594,8 @@ class phoneAccount extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     $display = "";
 
@@ -646,7 +666,7 @@ class phoneAccount extends plugin
     $smarty->assign("macro", $this->macro);   
 
     /* check if there is a FON server created */
-    if(!isset($_SESSION['config']->data['SERVERS']['FON'][0])){
+    if(!count($this->goFonHomeServer)){
       print_red(_("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). Your settings can't be saved to asterisk database."));
     }
 
@@ -794,6 +814,15 @@ class phoneAccount extends plugin
         $smarty->assign($val,"");
       }
     }
+
+    /* Create home server array */
+    $tmp = array();
+    foreach($this->goFonHomeServers as $dn => $attrs){
+      if(!is_numeric($dn)){
+        $tmp[$dn] = $attrs['SERVER'];
+      }
+    }
+    $smarty->assign("goFonHomeServers",$tmp);
 
     /* Fill arrays */
     $smarty->assign ("goFonHardware", $this->goFonHardware);
@@ -1026,12 +1055,10 @@ class phoneAccount extends plugin
         unset($this->$val);
       }
     }
-    if(array_key_exists('config', $_SESSION) &&
-       array_key_exists('SERVERS', $_SESSION['config']->data) &&
-       array_key_exists('FON', $_SESSION['config']->data['SERVERS']) &&
-        is_callable("mysql_pconnect")) {
+    if(count($this->goFonHomeServers) && !empty($this->goFonHomeServer) && is_callable("mysql_pconnect")){
+
       // Get Configuration for Mysql database Server
-      $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'][0];
+      $a_SETUP = $this->goFonHomeServers[$this->goFonHomeServer];
       $s_parameter  ="";
 
       // Connect to DB server
