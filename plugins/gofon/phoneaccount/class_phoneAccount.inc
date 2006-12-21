@@ -104,13 +104,11 @@ class phoneAccount extends plugin
         print_red( sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
             $cur_cfg['SERVER'],$cur_cfg['LOGIN']));
         gosa_log(mysql_error());
-        return false;
       }
       $db  =  @mysql_select_db($cur_cfg['DB'],$r_con);
       if(!$db){
         print_red(sprintf(_("Can't select database %s on %s."),$cur_cfg['DB'],$cur_cfg['SERVER']));
         gosa_log(mysql_error());
-        return false;
       }
 
       $first = false; 
@@ -751,10 +749,12 @@ class phoneAccount extends plugin
       }
 
       // Perform queries ...
-      foreach($SQL_query_array as $query){
-        if(!@mysql_query($query,$new_connection)){
-          print_red(_("Error while performing query:")." ".mysql_error());
-          return false;
+      if($this->goFonHardware != "automatic"){
+        foreach($SQL_query_array as $query){
+          if(!@mysql_query($query,$new_connection)){
+            print_red(_("Error while performing query:")." ".mysql_error());
+            return false;
+          }
         }
       }
     }
