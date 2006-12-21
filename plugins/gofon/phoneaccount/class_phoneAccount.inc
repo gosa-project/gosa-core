@@ -28,6 +28,7 @@ class phoneAccount extends plugin
   var $a_old_telenums         = array();
   var $goFonPINVoice          = "";
   var $goFonHomeServer        = "0";            // Contains the dn of the server that manage this account 
+  var $init_HomeServer        = "0";            // Contains the dn of the server that manage this account 
   var $goFonHomeServers       = array();        // Contains all available server configurations 
     
 
@@ -85,6 +86,9 @@ class phoneAccount extends plugin
       if($this->dn == "new"){
         $this->goFonHomeServer = $this->goFonHomeServers[0]['DN'];
       }
+
+      /* Remember inital home server, to be able to remove old entries */
+      $this->init_HomeServer = $this->goFonHomeServer;
 
       /* get config */
       $cur_cfg = $this->goFonHomeServers[$this->goFonHomeServer];
@@ -291,9 +295,14 @@ class phoneAccount extends plugin
       print_red(_("Can't save any changes to asterisk database, there is no mysql extension available."));
       return(true);
     }
-  
+ 
+    /********************** 
+     * Attribute Initialisation
+     **********************/
+
+    $old_connection = false;
+
     // Get Configuration for Mysql database Server
-    $a_SETUP        = $this->goFonHomeServers[$this->goFonHomeServer];  // DB Configuration
     $s_parameter    = "";                                           // Contains paramter for selected Macro 
     $r_con          = false;                                        // DB connection
     $r_db           = false;                                        // Selected DB
@@ -321,27 +330,70 @@ class phoneAccount extends plugin
 
     $i_is_accounted = false;  // Ensure that extension entry, for name to number is only once in table
 
+    restore_error_handler();
 
-    /* Test given server config.
+    /* Prepare some basic attributes */
+    foreach($this->a_old_telenums as $tele){
+      $oldnums[]= preg_replace("/[^0-9]/","",$tele);
+    }
+    foreach($this->phoneNumbers as $tele){
+      $newnums[]= preg_replace("/[^0-9]/","",$tele);
+    }
+
+    /* If deletion starts from userslist, cn uid are not set */
+    if((isset($this->parent->by_object['user']->uid))&&(!empty($this->parent->by_object['user']->uid))){
+      $this->uid = $this->parent->by_object['user']->uid;
+    }
+    if((isset($this->parent->by_object['user']->cn))&&(!empty($this->parent->by_object['user']->cn))){
+      $this->cn  = $this->parent->by_object['user']->cn;
+    }
+    /* Create voicemail entry 
      */
-    $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
-    if(!$r_con){
-      $this->generate_error = sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
-          $a_SETUP['SERVER'],$a_SETUP['LOGIN']);
-      gosa_log(mysql_error());
-      return false;
-    }
-    $r_db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
-    if(!$r_db){
-      $this->generate_error = sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']);
-      gosa_log(mysql_error());
-      return false;
+    if((!isset($this->cn))||(empty($this->cn))){
+      $CNname= $this->uid;
+    }else{
+      $CNname= $this->cn;
     }
 
+    if((isset($this->parent))&&(isset($this->parent->by_object['mailAccount']))&&($this->parent->by_object['mailAccount']->is_account==true)){
+      $s_mail = $this->parent->by_object['mailAccount']->mail;
+    }else{
+      $s_mail = "";
+    }
     /* Get phonehardware to setup sip entry  */
     $ldap         = $this->config->get_ldap_link();
     $r_res        = $ldap->search("(&(objectClass=goFonHardware)(cn=".$this->goFonHardware."))", array('*'));
     $a_ldap_attrs = $ldap->fetch();
+
+    /* Check selected phone hardware, is a default IP set? */
+    if(((isset($a_ldap_attrs['goFonDefaultIP'][0]))&&($a_ldap_attrs['goFonDefaultIP'][0] != "dynamic"))){
+      $s_ip       = $a_ldap_attrs['goFonDefaultIP'][0];
+      $s_host     = $s_ip;
+    }else{
+      $s_ip       = NULL;
+      $s_host     = "dynamic";
+    }
+
+    // Attribute GoFonQualify set ?
+    if(isset($a_ldap_attrs['goFonQualify'])){
+      $s_qualify = $a_ldap_attrs['goFonQualify'][0];
+    }
+
+    // Attribute GoFonPIN set ?
+    if(isset($this->goFonPIN)){
+      $s_pin      = $this->goFonPIN;
+    }
+
+    // Attribute GoFonType set ?
+    if(isset($a_ldap_attrs['goFonType'])){
+      $s_type = $a_ldap_attrs['goFonType'][0];
+    }
+
+    if(isset($a_ldap_attrs['goFonDmtfMode'][0])){
+      $sip_data_array['dtmfmode']     = $a_ldap_attrs['goFonDmtfMode'][0];
+    }else{
+      $sip_data_array['dtmfmode']     ="rfc2833";
+    }
 
     /* Check if phone number is used */
     if($this->is_number_used()){
@@ -349,88 +401,278 @@ class phoneAccount extends plugin
       return false;
     }
 
-    /* If Save == true, we should save something.
-     * Generate SQL, for drop of old entries
-     * Generate SQL, for insert new entries
+
+
+    /********************** 
+     * Check Server Connection Information
+     **********************/
+ 
+    /* Create Mysql handle for the current goFonHomeServer, if possible  
+     * Get configuration to old asterisk home server 
      */ 
+    $a_New = $this->goFonHomeServers[$this->goFonHomeServer];  // DB Configuration
+    $new_connection =  @mysql_pconnect($a_New['SERVER'],$a_New['LOGIN'],$a_New['PASSWORD']);
+    if(!$new_connection){
+      $this->generate_error = sprintf(
+          _("The MySQL Server '%s' isn't reachable as user '%s'. Abort saving entries to keep the database consistent, check GOsa log for mysql error."),
+          $a_New['SERVER'],$a_New['LOGIN']);
+      gosa_log(mysql_error($new_connection));
+      return false;
+    }
+    $new_database  =  @mysql_select_db($a_New['DB'],$new_connection);
+    if(!$new_database){
+      $this->generate_error = sprintf(
+          _("Can't select database %s on %s. Abort saving entries to keep the database consistent, check GOsa log for mysql error."),
+          $a_New['DB'],$a_New['SERVER']);
+      gosa_log(mysql_error($new_connection));
+      return false;
+    }
+
+    /* If the home server has changed, we must remove entries from old 
+     *  server and add new entries in new server.  
+     */
+    if($this->init_HomeServer != $this->goFonHomeServer){
+    
+      /* Get configuration to old asterisk home server */ 
+      $a_Remove = $this->goFonHomeServers[$this->init_HomeServer];  // DB Configuration
+ 
+      /* Create connection to the database that contains the old entry. 
+       */
+      $old_connection =  @mysql_pconnect($a_Remove['SERVER'],$a_Remove['LOGIN'],$a_Remove['PASSWORD']);
+      if(!$old_connection){
+        $this->generate_error = sprintf(
+            _("The old MySQL home server '%s' isn't reachable as user '%s'. Abort saving entries to keep the database consistent, check GOsa log for mysql error."),
+            $a_Remove['SERVER'],$a_Remove['LOGIN']);
+        gosa_log(mysql_error($old_connection));
+        return false;
+      }
+      $old_database  =  @mysql_select_db($a_Remove['DB'],$old_connection);
+      if(!$old_database){
+        $this->generate_error = sprintf(
+            _("Can't select database %s on %s. Abort saving entries to keep the database consistent, check GOsa log for mysql error."),
+            $a_Remove['DB'],$a_Remove['SERVER']);
+        gosa_log(mysql_error($old_connection));
+        return false;
+      }
+    }
+
+    /* Save means that we must save changes, not only test  */
     if($save == true){
+    
+      /********************** 
+       * Remove entries from old home server 
+       **********************/
+
+      /* Check if there is an old entry 
+       * If there is en old entry, get callerid and remove voicemail and extensions too 
+       */
+      if($old_connection){
+        $query  = "SELECT id,name,callerid FROM ".$a_Remove['SIP_TABLE']." WHERE name='".$this->uid."';";
+        $rid    = mysql_query($query,$old_connection);
+
+        /* Old entry found, remove it */
+        $query_a = array();
+        if(mysql_affected_rows($old_connection)){
+          $result = mysql_fetch_assoc($rid);
+          $query_a[]= "DELETE FROM ".$a_Remove['SIP_TABLE']." WHERE name='".$this->uid."';";
+          $query_a[]= "DELETE FROM ".$a_Remove['VOICE_TABLE']." WHERE customer_id='".$result['callerid']."';";
+          $query_a[]= "DELETE FROM ".$a_Remove['EXT_TABLE']." WHERE exten='".$this->uid."';";
+          foreach($oldnums as $s_telenums) {
+            $query_a[]= "DELETE FROM ".$a_Remove['EXT_TABLE']." WHERE exten='".$s_telenums."';";
+          }
+
+          foreach($query_a as $qry){
+            if(!mysql_query($qry,$old_connection)){
+              echo $qry;
+              echo mysql_error($old_connection);
+            } 
+          }
+        }
+      }
+
+      /********************** 
+       * Update / Insert sip_users entry  
+       **********************/
+
+      /* Set the first given phone number as callerid */
+      reset($newnums);        
+      $i_new_key = key($newnums);
+      $sip_data_array['callerid']  =$newnums[$i_new_key];
+      $sip_data_array['mailbox']   =$newnums[$i_new_key];
+
+      /* Check if there is already an entry in sip_users for this uid */
+      $SQL_query_array = array();
+      $rid = mysql_query("SELECT * FROM ".$a_New['SIP_TABLE']." WHERE name='".$this->uid."';\n",$new_connection);
+      if(mysql_affected_rows($new_connection)){
+
+        /********************** 
+         * Update sip_users entry 
+         **********************/
+        $result                     = mysql_fetch_assoc($rid);
+        $sip_data_array['host']         = $s_host;
+        $sip_data_array['qualify']      = $s_qualify;
+        $sip_data_array['secret']       = $this->goFonPIN;
+        $sip_data_array['type']         = $s_type ;
+        $sip_data_array['username']     = $this->uid;
+        $sip_data_array['ipaddr']       = $s_ip;
+
+        /* Remove not changed attributes, to avoid updating table with same values */
+        foreach($sip_data_array as $name => $value){
+          if($result[$name] == $value){
+            unset($sip_data_array[$name]);
+          }
+        }
+        /* Only update entry if there is something to uopdate */
+        if(count($sip_data_array)){
+          $query = "UPDATE ".$a_New['SIP_TABLE']." SET ";
+          foreach($sip_data_array as $key => $val){
+            $query.= "".$key."='".$val."',"; 
+          } 
+          $query = preg_replace("/,$/","",$query);
+          $query.= " WHERE name='".$this->uid."';";
+          $SQL_query_array[] = $query;
+        }
+      } else {
+ 
+        /********************** 
+         * Insert sip_users entry 
+         **********************/
+        //generate SIP entry
+        $sip_data_array['id']           = "";
+        $sip_data_array['name']         = $this->uid;
+        $sip_data_array['accountcode']  = NULL;          
+        $sip_data_array['amaflags']     = NULL;
+        $sip_data_array['callgroup']    = NULL;
+        $sip_data_array['canreinvite']  = "no";
+        $sip_data_array['context']      = "default";
+        $sip_data_array['defaultip']    = NULL;
+        $sip_data_array['fromuser']     = NULL;
+        $sip_data_array['fromdomain']   = NULL;
+        $sip_data_array['host']         = $s_host;
+        $sip_data_array['insecure']     = NULL;
+        $sip_data_array['language']     = NULL;
+        $sip_data_array['mailbox']      = "asterisk";
+        $sip_data_array['md5secret']    = NULL;
+        $sip_data_array['nat']          = "no";
+        $sip_data_array['permit']       = NULL;
+        $sip_data_array['deny']         = NULL;
+        $sip_data_array['mask']         = NULL;
+        $sip_data_array['pickupgroup']  = NULL;
+        $sip_data_array['port']         = NULL;
+        $sip_data_array['qualify']      = $s_qualify;
+        $sip_data_array['restrictcid']  = "n";
+        $sip_data_array['rtptimeout']   = NULL;
+        $sip_data_array['rtpholdtimeout']=NULL;
+        $sip_data_array['secret']       = $this->goFonPIN;
+        $sip_data_array['type']         = $s_type ;
+        $sip_data_array['username']     = $this->uid;
+        $sip_data_array['disallow']     = NULL;
+        $sip_data_array['allow']        = NULL;
+        $sip_data_array['musiconhold']  = NULL;
+        $sip_data_array['regseconds']   = NULL;
+        $sip_data_array['ipaddr']       = $s_ip;
+        $sip_data_array['regexten']     = NULL;
+        $sip_data_array['cancallforward']=NULL;
+
+        /* There is currently no entry for this user in the sip_users table. 
+         * We should create one i
+         */
+        foreach($sip_data_array as $s_sip_key=>$s_sip_val){
+          if($s_sip_val == NULL) continue;
+          $s_sip_values.="'".$s_sip_val."',";
+          $s_sip_keys  .="`".$s_sip_key."`,";
+        }
+        $s_sip_values =  preg_replace("/,$/","",$s_sip_values);
+        $s_sip_keys   =  preg_replace("/,$/","",$s_sip_keys);
+
+        /* Add sip entries to mysql queries */
+        $SQL_query_array[] ="INSERT INTO ".$a_New['SIP_TABLE']." (".$s_sip_keys.") VALUES (".$s_sip_values.");";
+      }
+
+
+      /********************** 
+       * Update / Insert Voice mail entry  
+       **********************/
+
+      $customer_id = $newnums[$i_new_key];
+
+      $voice_data_array = array(
+          "customer_id" => $customer_id,
+          "mailbox"     => $customer_id,
+          "password"    => $this->goFonVoicemailPIN,
+          "fullname"    => $CNname,
+          "email"       => $s_mail);
+
+      /* Check if there is already an entry in sip_users for this uid */
+      $rid = mysql_query("SELECT * FROM ".$a_New['VOICE_TABLE']." WHERE customer_id='".$customer_id."';\n",$new_connection);
+      if(mysql_affected_rows($new_connection)){
+
+        /********************** 
+         * Update Voice mail entry  
+         **********************/
+        $result = mysql_fetch_assoc($rid)  ;
+
+        foreach($voice_data_array as $name => $value){
+          if($result[$name] == $value){
+            unset($voice_data_array[$name]);
+          }
+        }
+
+        /* Only update entry if there is something to uopdate */
+        if(count($voice_data_array)){
+          $query = "UPDATE ".$a_New['VOICE_TABLE']." SET ";
+          foreach($voice_data_array as $key => $val){
+            $query.= "".$key."='".$val."',"; 
+          } 
+          $query = preg_replace("/,$/","",$query);
+          $query.= " WHERE customer_id='".$customer_id."';";
+          $SQL_query_array[] = $query;
+        }
+      }else{
+
+        /********************** 
+         * Insert Voice mail entry  
+         **********************/
+        $voice_data_array['context'] = "default";
+        $voice_data_array['pager']   = "";
+  
+        /* There is currently no voice mail entry for this user. 
+         * We should create one 
+         */
+        $s_voi_values = $s_voi_keys = "";
+        foreach($voice_data_array as $s_voi_key=>$s_voi_val){
+          if($s_voi_val == NULL) continue;
+          $s_voi_values.="'".$s_voi_val."',";
+          $s_voi_keys  .="`".$s_voi_key."`,";
+        }
+        $s_voi_values =  preg_replace("/,$/","",$s_voi_values);
+        $s_voi_keys   =  preg_replace("/,$/","",$s_voi_keys);
+
+        /* Add sip entries to mysql queries */
+        $SQL_query_array[] ="INSERT INTO ".$a_New['VOICE_TABLE']." (".$s_voi_keys.") VALUES (".$s_voi_values.");";
+      }
+
+     
+      /********************** 
+       * Remove/Insert extension entries
+       **********************/
       
-      foreach($this->a_old_telenums as $tele){
-        $oldnums[]= preg_replace("/[^0-9]/","",$tele);
+      /* Remove old entries */
+      $query = array();
+      $query[]= "DELETE FROM ".$a_New['EXT_TABLE']." WHERE exten=\"".$this->uid."\";";
+      foreach($newnums as $s_telenums){
+        $query[]= "DELETE FROM ".$a_New['EXT_TABLE']." WHERE exten=\"".$s_telenums."\";";
       }
-
-      foreach($this->phoneNumbers as $tele){
-        $newnums[]= preg_replace("/[^0-9]/","",$tele);
+      foreach($query as $qry){
+        if(!mysql_query($qry,$new_connection)){
+          echo mysql_error($new_connection);
+        } 
       }
-
-      /* Check selected phone hardware, is a default IP set? */
-      if(((isset($a_ldap_attrs['goFonDefaultIP'][0]))&&($a_ldap_attrs['goFonDefaultIP'][0] != "dynamic"))){
-        $s_ip       = $a_ldap_attrs['goFonDefaultIP'][0];
-        $s_host     = $s_ip;
-      }else{
-        $s_ip       = NULL;
-        $s_host     = "dynamic";
-      }
-
-      // Attribute GoFonQualify set ?
-      if(isset($a_ldap_attrs['goFonQualify'])){
-        $s_qualify = $a_ldap_attrs['goFonQualify'][0];
-      }
-
-      // Attribute GoFonPIN set ?
-      if(isset($this->goFonPIN)){
-        $s_pin      = $this->goFonPIN;
-      }
-
-      // Attribute GoFonType set ?
-      if(isset($a_ldap_attrs['goFonType'])){
-        $s_type = $a_ldap_attrs['goFonType'][0];
-      }
-
-      if(isset($a_ldap_attrs['goFonDmtfMode'][0])){
-        $sip_data_array['dtmfmode']     = $a_ldap_attrs['goFonDmtfMode'][0];
-      }else{
-        $sip_data_array['dtmfmode']     ="rfc2833";
-      }
-
-      // generate SIP entry
-      $sip_data_array['id']           = "";
-      $sip_data_array['name']         = $this->uid;
-      $sip_data_array['accountcode']  = NULL;          
-      $sip_data_array['amaflags']     = NULL;
-      $sip_data_array['callgroup']    = NULL;
-      $sip_data_array['callerid']     = "";
-      $sip_data_array['canreinvite']  = "no";
-      $sip_data_array['context']      = "default";
-      $sip_data_array['defaultip']    = NULL;
-      $sip_data_array['fromuser']     = NULL;
-      $sip_data_array['fromdomain']   = NULL;
-      $sip_data_array['host']         = $s_host;
-      $sip_data_array['insecure']     = NULL;
-      $sip_data_array['language']     = NULL;
-      $sip_data_array['mailbox']      = "asterisk";
-      $sip_data_array['md5secret']    = NULL;
-      $sip_data_array['nat']          = "no";
-      $sip_data_array['permit']       = NULL;
-      $sip_data_array['deny']         = NULL;
-      $sip_data_array['mask']         = NULL;
-      $sip_data_array['pickupgroup']  = NULL;
-      $sip_data_array['port']         = NULL;
-      $sip_data_array['qualify']      = $s_qualify;
-      $sip_data_array['restrictcid']  = "n";
-      $sip_data_array['rtptimeout']   = NULL;
-      $sip_data_array['rtpholdtimeout']=NULL;
-      $sip_data_array['secret']       = $this->goFonPIN;
-      $sip_data_array['type']         = $s_type ;
-      $sip_data_array['username']     = $this->uid;
-      $sip_data_array['disallow']     = NULL;
-      $sip_data_array['allow']        = NULL;
-      $sip_data_array['musiconhold']  = NULL;
-      $sip_data_array['regseconds']   = NULL;
-      $sip_data_array['ipaddr']       = $s_ip;
-      $sip_data_array['regexten']     = NULL;
-      $sip_data_array['cancallforward']=NULL;
-
+ 
+      /********************** 
+       * Insert extension entries
+       **********************/
+ 
       // Get selected Macro Parameter and create parameter entry 
       if(isset($this->macroarray[$this->macro])){
         foreach($this->macroarray[$this->macro] as $key => $val ){
@@ -438,107 +680,25 @@ class phoneAccount extends plugin
         }
         $s_parameter = preg_replace("/\|$/","",$s_parameter);
       }
-
-      // Create new SIP entry ...
-      $sip_entry = $sip_data_array;
-      reset($newnums);
-      $i_new_key = key($newnums);
-      $sip_entry['callerid']  =$newnums[$i_new_key];
-      $sip_entry['mailbox']   =$newnums[$i_new_key];
-
-      if((isset($this->parent))&&(isset($this->parent->by_object['mailAccount']))&&($this->parent->by_object['mailAccount']->is_account==true)){
-        $s_mail = $this->parent->by_object['mailAccount']->mail;
-      }else{
-        $s_mail = "";
-      }
-
-      /* Remove old entries first */
-      $SQL   = array();
-      $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$this->uid."';\n";
-      $SQL[] = "DELETE FROM ".$a_SETUP['SIP_TABLE']." WHERE name='".$this->uid."';\n";
-      $SQL[] = "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$newnums[$i_new_key].";"; 
-
-      // Delete old entries
-      $b_first_deleted  =false;
-      if(isset($oldnums) && is_array($oldnums)){
-        foreach($oldnums as $s_telenums){
-          $SQL[] = "DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE exten='".$s_telenums."';\n";
-          if(!$b_first_deleted){
-            $b_first_deleted=true;
-            $SQL[] = "DELETE FROM ".$a_SETUP['VOICE_TABLE']." WHERE customer_id=".$s_telenums.";";
-          }
-        }
-      }
-
-      /* If phone hardware is automatic only remove old entries. */
-      if($this->goFonHardware=="automatic"){
-        foreach($SQL as $query ){
-          mysql_query($query) ;
-        }
-        return;
-      }
-
-      /* Generate new database entries */
-      foreach($sip_entry as $s_sip_key=>$s_sip_val){
-        if($s_sip_val == NULL) continue;
-        $s_sip_values.="'".$s_sip_val."',";
-        $s_sip_keys  .="`".$s_sip_key."`,";
-      }
-      $s_sip_values =  preg_replace("/,$/","",$s_sip_values);
-      $s_sip_keys   =  preg_replace("/,$/","",$s_sip_keys);
-
-      /* Add sip entries to mysql queries */
-      $SQL[] ="INSERT INTO ".$a_SETUP['SIP_TABLE']." (".$s_sip_keys.") VALUES (".$s_sip_values.");";
-
-      /* If deletion starts from userslist, cn uid are not set */
-      if((isset($this->parent->by_object['user']->uid))&&(!empty($this->parent->by_object['user']->uid))){
-        $this->uid = $this->parent->by_object['user']->uid;
-      }
-      if((isset($this->parent->by_object['user']->cn))&&(!empty($this->parent->by_object['user']->cn))){
-        $this->cn  = $this->parent->by_object['user']->cn;
-      }
-
-      /* Create voicemail entry 
-       */
-      if((!isset($this->cn))||(empty($this->cn))){
-        $CNname= $this->uid;
-      }else{
-        $CNname= $this->cn;
-      }
-
-      $SQL[]= "INSERT INTO ".$a_SETUP['VOICE_TABLE']." (`customer_id`,`context`,`mailbox`,`password`,`fullname`,`email`,`pager`)
-          VALUES   ('".$newnums[$i_new_key]."',
-                    'default',
-                    '".$newnums[$i_new_key]."',
-                    '".$this->goFonVoicemailPIN."',
-                    '".$CNname."',
-                    '".$s_mail."',
-                    '');";
-
-      /* Create extension table entries 
-       * For each phone number we several lines in extension table 
-       */
-      $i_is_accounted=false;
+     
       $i = 0; 
-      $is_inserted_once = false;
- 
+      $EXT = array();
+      $EXT[$i]['context'] = 'GOsa';
+      $EXT[$i]['exten']   = $this->uid;
+      $EXT[$i]['priority']= 1;
+      $EXT[$i]['app']     = "Goto";
+      $EXT[$i]['appdata'] = $newnums[$i_new_key]."|1";
+      $i ++;
+
       // Entension entries  Hint / Dial / Goto
       foreach($newnums as $s_telenums){
 
-        if(!$is_inserted_once){
-          $is_inserted_once = true;
-          $EXT[$i]['context'] = 'GOsa';
-          $EXT[$i]['exten']   = $this->uid;
-          $EXT[$i]['priority']= 1;
-          $EXT[$i]['app']     = "Goto";
-          $EXT[$i]['appdata'] = $s_telenums."|1";
-          $i ++;
-        }
         /* Hint Entry */
         $EXT[$i]['context'] = 'GOsa';
         $EXT[$i]['exten']   = $s_telenums;
         $EXT[$i]['priority']= "Hint";
         $EXT[$i]['app']     = 'SIP/'.$this->uid;
+        $EXT[$i]['appdata'] = '';
         $i ++;  
         /* SetCID */
         //$EXT[$i]['context'] = 'GOsa';
@@ -569,7 +729,7 @@ class phoneAccount extends plugin
 
       // Append all these Entries 
       foreach($EXT as $entr){
-        $SQL_syn = "INSERT INTO ".$a_SETUP['EXT_TABLE']." (";
+        $SQL_syn = "INSERT INTO ".$a_New['EXT_TABLE']." (";
         foreach($entr as $key2 => $val2){
           $SQL_syn.= "`".$key2."`,";
         }
@@ -580,19 +740,20 @@ class phoneAccount extends plugin
         }
         $SQL_syn = preg_replace("/,$/","",$SQL_syn);
         $SQL_syn .=");\n";
-        $SQL[] =$SQL_syn;
+
+        $SQL_query_array[] =$SQL_syn;
         $SQL_syn ="";
       }
 
       // Perform queries ...
-      foreach($SQL as $query){
-        if(!@mysql_query($query,$r_con)){
+      foreach($SQL_query_array as $query){
+        if(!@mysql_query($query,$new_connection)){
           print_red(_("Error while performing query:")." ".mysql_error());
           return false;
         }
       }
     }
-    @mysql_close($r_con);
+    @mysql_close($new_connection);
     return true;
   }
 
@@ -966,9 +1127,9 @@ class phoneAccount extends plugin
     plugin::save();
 
     /* Save arrays */
-    $this->attrs['telephoneNumber']= array();
+    $tmp_numbers = array();
     foreach ($this->phoneNumbers as $number){
-      $this->attrs['telephoneNumber'][]= $number;
+      $tmp_numbers[] = $number;
     }
 
     /* Save settings, or remove goFonMacro attribute*/
@@ -998,6 +1159,9 @@ class phoneAccount extends plugin
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
     $this->cleanup();
+    
+    /* Force saving numbers, else it will be overwriten by user account. */
+    $this->attrs['telephoneNumber'] =$tmp_numbers;
     $ldap->modify ($this->attrs); 
 
     show_ldap_error($ldap->get_error(), _("Saving phone account failed"));
@@ -1039,10 +1203,10 @@ class phoneAccount extends plugin
         unset($this->$val);
       }
     }
-    if(count($this->goFonHomeServers) && !empty($this->goFonHomeServer) && is_callable("mysql_pconnect")){
+    if(count($this->goFonHomeServers) && !empty($this->init_HomeServer) && is_callable("mysql_pconnect")){
 
-      // Get Configuration for Mysql database Server
-      $a_SETUP = $this->goFonHomeServers[$this->goFonHomeServer];
+      // Get Configuration for initial Mysql database Server
+      $a_SETUP = $this->goFonHomeServers[$this->init_HomeServer];
       $s_parameter  ="";
 
       // Connect to DB server
