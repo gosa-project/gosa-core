@@ -214,7 +214,6 @@ class phoneConferenceManagment extends plugin
           del_lock ($this->dn);
         }
 
-        $this->conftab->save ();
         del_lock ($this->conftab->dn);;
         unset ($this->conftab);
         $this->conftab= NULL;

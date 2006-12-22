@@ -116,7 +116,11 @@ class conference extends plugin
         $this->base= dn2base($ui->dn);
       }
     } else {
-      $this->base= preg_replace ("/^[^,]+,/", "", $this->dn);
+
+      /* The base is something like this 
+          "cn=Confis,ou=conferences,ou=asterisk,ou=configs,ou=systems,"  
+      */
+      $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,[^,]+,[^,]+,/", "", $this->dn);
     }
 
     $ui= get_userinfo();
@@ -217,7 +221,10 @@ class conference extends plugin
 
   function remove_from_parent()
   {
-    $this->SQL_remove_me(true); 
+    $str = $this->SQL_remove_me(true); 
+    if($str){
+      print_red($str);
+    }
 
     $ldap= $this->config->get_ldap_link();
     $ldap->cd ($this->dn);
@@ -244,6 +251,53 @@ class conference extends plugin
     }
   }
 
+
+  function check_database_accessibility()
+  {
+
+    /* Check if mysql extension is available */
+    if(!is_callable("mysql_pconnect")){
+      return(_("Can't save any changes to asterisk database, there is currently no mysql extension available in your php setup."));
+    }
+
+    /********************
+     * Check currently selected home server 
+     ********************/
+
+    $cfg_Current  = $this->goFonHomeServers[$this->goFonHomeServer] ;
+    $r_current    =  @mysql_pconnect($cfg_Current['SERVER'],$cfg_Current['LOGIN'],$cfg_Current['PASSWORD']);
+    if(!$r_current){
+      gosa_log(@mysql_error($r_current));
+      return(sprintf(_("The MySQL home server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
+            $cfg_Current['SERVER'],$cfg_Current['LOGIN']));
+    }
+    $db_current  =  @mysql_select_db($cfg_Current['DB'],$r_current);
+    if(!$db_current){
+      gosa_log(@mysql_error($r_current));
+      mysql_close($r_current);
+      return( sprintf(_("Can't select database '%s' on home server '%s'."),$cfg_Current['DB'],$cfg_Current['SERVER']));
+    }
+
+    /********************
+     * Check init home server 
+     ********************/
+
+    if($this->goFonHomeServers != $this->init_HomeServer){
+      $cfg_Init  = $this->goFonHomeServers[$this->init_HomeServer] ;
+      $r_init    =  @mysql_pconnect($cfg_Init['SERVER'],$cfg_Init['LOGIN'],$cfg_Init['PASSWORD']);
+      if(!$r_init){
+        gosa_log(@mysql_error($r_init));
+        return(sprintf(_("The MySQL initial home server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
+              $cfg_Init['SERVER'],$cfg_Init['LOGIN']));
+      }
+      $db_init  =  @mysql_select_db($cfg_Init['DB'],$r_init);
+      if(!$db_init){
+        gosa_log(@mysql_error($r_init));
+        mysql_close($r_init);
+        return( sprintf(_("Can't select database '%s' on initial home server '%s'."),$cfg_Init['DB'],$cfg_Init['SERVER']));
+      }
+    }
+  }
 
   /* Check values */
   function check()
@@ -275,15 +329,9 @@ class conference extends plugin
       $message[] =_("Only numbers are allowed in Lifetime.");
     }
 
-
     $str = $this->SQL_add_me(false);
     if(!empty($str)){
       $message[] = $str;
-    }
-
-    if(!empty($this->generate_error)){
-      $message[]=$this->generate_error;
-      $this->generate_error="";
     }
 
     return $message;
@@ -300,46 +348,55 @@ class conference extends plugin
     /********************
      * Get configuration and try to connect 
      ********************/
-    $a_New = $this->goFonHomeServers[$this->goFonHomeServer] ;
-    if(!is_callable("mysql_pconnect")){
-      return(_("Can't save any changes to asterisk database, there is currently no mysql extension available in your php setup."));
+
+    /* Check if databases are reachable, returns an error string if anything fails  */
+    $error_str = $this->check_database_accessibility();
+    if($error_str){
+      return($error_str);
     }
-    $r_new =  @mysql_pconnect($a_New['SERVER'],$a_New['LOGIN'],$a_New['PASSWORD']);
-    if(!$r_new){
-      gosa_log(@mysql_error($r_new));
-      return(sprintf(_("The MySQL server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
-          $a_New['SERVER'],$a_New['LOGIN']));
+
+    /* Remove old entries, returns an error string if anything fails  */
+    $error_str = $this->SQL_remove_me($save);
+    if($error_str){
+      return($error_str);
     }
-    $db_new  =  @mysql_select_db($a_New['DB'],$r_new);
-    if(!$db_new){
-      gosa_log(@mysql_error($r_new));
-      return(sprintf(_("Can't select database %s on %s."),$a_New['DB'],$a_New['SERVER']));
-    }
+
+
+    /* Connect to current database to be able to add new entries */
+    $cfg_Current  = $this->goFonHomeServers[$this->goFonHomeServer] ;
+    $res_cur      =  @mysql_pconnect($cfg_Current['SERVER'],$cfg_Current['LOGIN'],$cfg_Current['PASSWORD']);
+    $db_cur       =  @mysql_select_db($cfg_Current['DB'],$res_cur);
 
     /********************
-     * Remove entries from old home server 
+     * Remove entries that could cause trouble  
      ********************/
 
-    $a_Remove   = $this->goFonHomeServers[$this->init_HomeServer] ;
-    if(!is_callable("mysql_pconnect")){
-      return(_("Can't save any changes to asterisk database, there is currently no mysql extension available in your php setup."));
-    }
-    $r_remove =  @mysql_pconnect($a_Remove['SERVER'],$a_Remove['LOGIN'],$a_Remove['PASSWORD']);
-    if(!$r_remove){
-      gosa_log(@mysql_error());
-      return(sprintf(_("The MySQL server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
-            $a_Remove['SERVER'],$a_Remove['LOGIN']));
-    }
-    $db_remove  =  @mysql_select_db($a_Remove['DB'],$r_remove);
-    if(!$db_remove){
-      gosa_log(@mysql_error($r_remove));
-      return( sprintf(_("Can't select database %s on %s."),$a_Remove['DB'],$a_Remove['SERVER']));
-    }
-    $query = "DELETE FROM ".$a_Remove['EXT_TABLE']." WHERE exten='".$this->old_tele_number."' OR exten='".$this->old_cn."';";
-    if(!@mysql_query($query,$r_remove)){
-      return(_("Could not remove old entries"));
-    }
+    /* If the current home server is different to the initial home server,
+     *  there may be already some entries with the given telephoneNumber and/or cn.
+     * We must remove those entries to avoid duplicate use of the same extension name.
+     */
+    if($this->goFonHomeServer != $this->init_HomeServer){
+      $query = "SELECT id FROM ".$cfg_Current['EXT_TABLE']." WHERE exten='".$this->telephoneNumber."' OR '".$this->cn."';";
+      $res = @mysql_query($query,$res_cur);
+      if(!$res){
+        gosa_log(@mysql_error($res_cur));
+        return(_("Can not check if there are already some entries with given telephone number and/or cn in the destination home server.").
+            "&nbsp;"._("Please have a look a the gosa logfiles."));
+      }
+      if($save && mysql_affected_rows($res_cur)) {
+        $SQL = "DELETE FROM ".$cfg_Current['EXT_TABLE']." 
+          WHERE   (exten='".$this->telephoneNumber."') 
+          OR    (exten='".$this->cn."')";
 
+        /* Query and ensure that everything went fine */
+        $res =  @mysql_query($SQL,$res_cur);
+        if(!$res){
+          gosa_log(@mysql_error($res_cur));
+          return(_("Can not remove entries with some telephone number and/or cn from destination home server.").
+              "&nbsp;"._("Please have a look a the gosa logfiles."));
+        }
+      }
+    }
 
     /********************
      * Add new conference entry  
@@ -414,64 +471,64 @@ class conference extends plugin
         }
         $s_keys   =preg_replace("/\,$/","",$s_keys); 
         $s_values =preg_replace("/\,$/","",$s_values); 
-        $SQL[]="INSERT INTO ".$a_New['EXT_TABLE']." (".$s_keys.") VALUES (".$s_values.");"; 
+        $SQL[]="INSERT INTO ".$cfg_Current['EXT_TABLE']." (".$s_keys.") VALUES (".$s_values.");"; 
       }
       foreach($SQL as $sqlsyn){
-        mysql_query($sqlsyn);
+        mysql_query($sqlsyn,$res_cur);
       }
     } 
 
-    @mysql_close($r_con);
+    @mysql_close($res_cur);
   }
 
 
-  function SQL_remove_me($save){
-    if(!is_callable("mysql_pconnect")){
-      if(!$this->error_shown){
-        print_red(_("Can't save any changes to asterisk database, there is currently no mysql extension available in your php setup."));
-        $this->error_shown = true;
-      }
-      return(true);
+  /* Remove initial entry from database 
+   * This function checks if there is an entry in the 
+   *  initial home server that uses this->old_cn or $this->old_tele_number
+   *  and removes this entries. 
+   * This function is called from save and remove_from parent.
+   * 
+   *  The parameter '$save' is false if we just 
+   *   want to check if a remove is possible. 
+   *  And true if we realy want to remove the entries.   
+   */
+  function SQL_remove_me($save)
+  {
+    /* check database access */
+    $str = $this->check_database_accessibility();
+    if($str){
+      return($str);
     }
 
-    if($this->old_tele_number){
-      // Get Configuration for Mysql database Server
-      $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'][0];
-
-      // Connect to DB server
-      $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
-
-      // Check if we are  connected correctly
-      if(!$r_con){
-        $this->generate_error = sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
-            $a_SETUP['SERVER'],$a_SETUP['LOGIN']);
-        gosa_log(mysql_error());
-        return false;
-      }
-
-      // Select database for Extensions
-      $db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
-
-      // Test if we have the database selected correctly
-      if(!$db){
-        $this->generate_error = sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']);
-        gosa_log(mysql_error());
-        return false;
-      }
-
-      $SQL = "DELETE FROM ".$a_SETUP['EXT_TABLE']." 
+    /* Connect to old database */
+    $cfg_Init  = $this->goFonHomeServers[$this->init_HomeServer] ;
+    $r_init    =  @mysql_pconnect($cfg_Init['SERVER'],$cfg_Init['LOGIN'],$cfg_Init['PASSWORD']);
+    $db_init   =  @mysql_select_db($cfg_Init['DB'],$r_init);
+   
+    /* Check if there is an old entry */
+    $query = "SELECT id FROM ".$cfg_Init['EXT_TABLE']." WHERE exten='".$this->old_tele_number."' OR '".$this->old_cn."';";
+    $res = @mysql_query($query,$r_init);
+    if(!$res){
+      gosa_log(@mysql_error($r_init));
+      return(_("Can not check if entry exists in old database. Please have a look a the gosa logfiles."));
+    }
+   
+    /* There are entries using this cn and/or phone number */
+    if($save && mysql_affected_rows($r_init)) {
+      $SQL = "DELETE FROM ".$cfg_Init['EXT_TABLE']." 
       WHERE   (exten='".$this->old_tele_number."') 
-        OR    (exten='".$this->telephoneNumber."') 
-        OR    (exten='".$this->cn."')  
         OR    (exten='".$this->old_cn."')";
-
-      if($save){
-        @mysql_query($SQL);
-      } 
+  
+      /* Query and ensure that everything went fine */
+      $res =  @mysql_query($SQL,$r_init);
+      if(!$res){
+        gosa_log(@mysql_error($r_init));
+        return(_("Can not remove old entries from initial home server. Please have a look a the gosa logfiles."));
+      }
 
     }//ENDE  old num availiable ...
-    @mysql_close($r_con);
-    return(true);
+    @mysql_close($r_init);
+    return(false);
   }
 
 
@@ -502,9 +559,6 @@ class conference extends plugin
   }
 
 
-
-
-
   /* Save to LDAP */
   function save()
   {
@@ -521,7 +575,6 @@ class conference extends plugin
       $this->old_tele_number= $this->telephoneNumber;
     }
 
-    $this->SQL_remove_me(true);
     $this->SQL_add_me(true);
 
     if(empty($this->goFonConferenceOption_P)){
