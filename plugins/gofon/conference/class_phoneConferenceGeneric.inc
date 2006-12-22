@@ -42,15 +42,11 @@ class conference extends plugin
   var $init_HomeServer          = "0";      // Initial home server of the conference
   var $goFonHomeServers         = array();  // All available home servers
 
-  var $error_shown = false;
-
   var $goFonConferenceOptionFormat 		= "";
   var $goFonConferenceOptionLifetime 	= "";
   var $telephoneNumber 		= "";
 
   var $old_tele_number	        = false;
-  var $generate_error           = "";
-
   var $old_dn;
 
   /* Headpage attributes */
@@ -76,8 +72,7 @@ class conference extends plugin
     
     /* Check server configurations
      * Load all server configuration in $this->goFonHomeServers if available
-     *  and first server as default if necessary.
-     * Check if connection is successfull for the selected server $this->goFonHomeServer
+     *  and use first server as default if necessary.
      */
     $a_SETUP= array();
     if(array_key_exists('config',$_SESSION) &&
@@ -99,7 +94,7 @@ class conference extends plugin
 
       /* get config */
       if(!isset($this->goFonHomeServers[$this->goFonHomeServer])){
-        print_red(sprintf(_("The specified goFonHomeServer '%s' is not available in GOsa server configuration. Saving this account will create a new entry on the server '%s'. Use cancel if you do not want to create a new entry and ignoring old accounts."),$this->goFonHomeServer, $this->goFonHomeServers[0]['DN']));
+        print_red(sprintf(_("The specified home server '%s' is not available in GOsa server configuration. Saving this account will create a new entry on the server '%s'. Use cancel if you do not want to create a new entry while ignoring old accounts."),$this->goFonHomeServer, $this->goFonHomeServers[0]['DN']));
 
         $this->goFonHomeServer = $this->goFonHomeServers[0]['DN'];
         $this->init_HomeServer = $this->goFonHomeServers[0]['DN'];
@@ -118,8 +113,7 @@ class conference extends plugin
     } else {
 
       /* The base is something like this 
-          "cn=Confis,ou=conferences,ou=asterisk,ou=configs,ou=systems,"  
-      */
+          "cn=Confis,ou=conferences,ou=asterisk,ou=configs,ou=systems," */
       $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,[^,]+,[^,]+,/", "", $this->dn);
     }
 
@@ -219,6 +213,7 @@ class conference extends plugin
     return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
   }
 
+
   function remove_from_parent()
   {
     $str = $this->SQL_remove_me(true); 
@@ -254,7 +249,6 @@ class conference extends plugin
 
   function check_database_accessibility()
   {
-
     /* Check if mysql extension is available */
     if(!is_callable("mysql_pconnect")){
       return(_("Can't save any changes to asterisk database, there is currently no mysql extension available in your php setup."));
@@ -329,6 +323,7 @@ class conference extends plugin
       $message[] =_("Only numbers are allowed in Lifetime.");
     }
 
+    /* Check if add could be successful */    
     $str = $this->SQL_add_me(false);
     if(!empty($str)){
       $message[] = $str;
@@ -360,7 +355,6 @@ class conference extends plugin
     if($error_str){
       return($error_str);
     }
-
 
     /* Connect to current database to be able to add new entries */
     $cfg_Current  = $this->goFonHomeServers[$this->goFonHomeServer] ;
