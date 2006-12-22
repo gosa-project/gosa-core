@@ -83,7 +83,7 @@ class phoneAccount extends plugin
       $this->goFonHomeServers = $_SESSION['config']->data['SERVERS']['FON'];
 
       /* Set default server */
-      if($this->dn == "new"){
+      if(empty($this->goFonHomeServer) || $this->goFonHomeServer == "0"){
         $this->goFonHomeServer = $this->goFonHomeServers[0]['DN'];
       }
 
@@ -141,7 +141,7 @@ class phoneAccount extends plugin
      * Search for all Marcos that are visible and create 
      *  an array with name and parameters 
      */
-    $ldap->search("((objectClass=goFonMacro)(goFonMacroVisible=1))", array("*"));
+    $ldap->search("(&(objectClass=goFonMacro)(goFonMacroVisible=1))", array("*"));
 
     /* Add none for no macro*/
     $this->macros['none']=_("no macro");    

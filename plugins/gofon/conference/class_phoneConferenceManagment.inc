@@ -273,7 +273,7 @@ class phoneConferenceManagment extends plugin
     $Regex            = $this->DivListConference->Regex;
     $Flags            = GL_SIZELIMIT ; 
     $Filter           = "(&(|(cn=".$Regex.")(description=".$Regex."))(objectClass=goFonConference))";
-    $Attrs            = array("cn","goFonConferenceOwner","goFonPIN","telephoneNumber");
+    $Attrs            = array("cn","goFonConferenceOwner","goFonPIN","telephoneNumber","description");
  
     if($SubSearch){
       $Flags |= GL_SUBSEARCH;
