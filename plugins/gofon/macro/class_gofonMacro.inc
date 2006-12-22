@@ -217,12 +217,12 @@ class macro extends plugin
     }
 
     /* Create query string */
-    $context  = "macro-".$this->cn;
+    $context  = addslashes("macro-".$this->cn);
 
     /* Remove current macro from each server available */ 
     if($save){
       foreach($this->goFonHomeServers as $dn => $Server){
-        $query      = "DELETE FROM ".$Server['EXT_TABLE']." WHERE context= '".$context."';";
+        $query      = "DELETE FROM ".$Server['EXT_TABLE']." WHERE context='".$context."';";
         $r_current  =  @mysql_pconnect($Server['SERVER'],$Server['LOGIN'],$Server['PASSWORD']);
         $db_current =  @mysql_select_db($Server['DB'],$r_current);
         $res = @mysql_query($query,$r_current);
@@ -313,10 +313,10 @@ class macro extends plugin
        *  and add this line to an array that will be inserted 
        *  to each database.
        */
-      $exten  = $tmp[0];
-      $prio   = $tmp[1];
-      $app    = preg_replace("/\(.*\).*$/","",$tmp[2]);
-      $para   = preg_replace("/^.*\(/","",$tmp[2]);
+      $exten  = addslashes($tmp[0]);
+      $prio   = addslashes($tmp[1]);
+      $app    = addslashes(preg_replace("/\(.*\).*$/","",$tmp[2]));
+      $para   = addslashes(preg_replace("/^.*\(/","",$tmp[2]));
       $para   = preg_replace("/\).*$/","",$para);
       $sql.= " ('".$context."','".$exten."','".$prio."','".$app."','".$para."'),";
     }
@@ -454,7 +454,7 @@ class macro extends plugin
     /* Try to add entries to databases */
     $str = $this->add_to_database(true);
     if($str){
-      print_a($str);
+      print_red($str);
     }else{
       /* Write back to ldap */
       $ldap= $this->config->get_ldap_link();
