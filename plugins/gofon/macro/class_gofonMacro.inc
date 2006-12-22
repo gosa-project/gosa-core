@@ -43,10 +43,11 @@ class macro extends plugin
   /*! attribute list for save action */
   var $attributes     = array("cn","base", "description","displayName","goFonMacroContent","goFonMacroVisible");
 
-  var $is_new=false;
   var $orig_cn = ""; 
   /*! Objectclasses that this calls handles */
   var $objectclasses  = array("top", "goFonMacro");
+
+  var $goFonHomeServers = array(); // Contains all available asterisk database server 
 
   //! The Konstructor   
   /*!  Konstructor, load class with  attributes of the given dn*/
@@ -54,56 +55,57 @@ class macro extends plugin
   {
     plugin::plugin ($config, $dn, $parent);
 
-    $ldap= $config->get_ldap_link();
-
-    $this->dn = $dn;
-
     /* This is always an account */
     $this->is_account= TRUE;
-
 
     /* Edit or new one ?*/
     if ($this->dn == "new"){
       if(isset($_SESSION['CurrentMainBase'])){
         $this->base = $_SESSION['CurrentMainBase'];
-        $this->is_new = true;
       }else{
-        $this->is_new = true;
         $ui= get_userinfo();
         $this->base= dn2base($ui->dn);
       }
     } else {
-      $this->is_new = false;
       $this->orig_cn=$this->cn;
-      $this->base= preg_replace("/ou=macros,ou=asterisk,ou=configs,ou=systems,/","",dn2base($this->dn));
+      $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,[^,]+,[^,]+,/", "", $this->dn);
     }
-    $ui= get_userinfo();
-    $acl= get_permissions ($ui->dn, $ui->subtreeACL);
+
+    /* Check server configurations
+     * Load all server configuration in $this->goFonHomeServers if available
+     */
+    $a_SETUP= array();
+    if(array_key_exists('config',$_SESSION) &&
+       array_key_exists('SERVERS',$_SESSION['config']->data) &&
+       array_key_exists('FON',$_SESSION['config']->data['SERVERS'])) {
+
+      /* Set available server */
+      $this->goFonHomeServers = $_SESSION['config']->data['SERVERS']['FON'];
+  
+      /* Remove default entry, not necessary here */
+      if(isset($this->goFonHomeServers[0])){
+        unset($this->goFonHomeServers[0]);  
+      }
+    }
+
+    /* Load acl */
+    $ui       = get_userinfo();
+    $acl      = get_permissions ($ui->dn, $ui->subtreeACL);
     $this->acl= get_module_permission($acl, "goFonMacro", $ui->dn);
   }
+
 
   /*!  Execute this plugin */
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     /* Variables */
     $vars 	= "";
     $tmp  	= array();
     $number = 0; 
 
-    if(!isset($_SESSION['config']->data['SERVERS']['FON'][0])){
-      print_red(_("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). Your settings can't be saved to asterisk database."));
-    }
-
-    /* Do we represent a valid group? */
-    if (!$this->is_account && $this->parent == NULL){
-      $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
-        _("This 'dn' is no phone macro.")."</b>";
-      return ($display);
-    }
-    
     /* Base select dialog */
     $once = true;
     foreach($_POST as $name => $value){
@@ -128,8 +130,6 @@ class macro extends plugin
         return($this->dialog->execute());
       }
     }
-
-
 
     /* Fill templating stuff */
     $smarty= get_smarty();
@@ -160,227 +160,216 @@ class macro extends plugin
       }
     }
     
-    if(!$this->is_new){
+    if($this->dn != "new"){
       $smarty->assign("disable_cn"," disabled ");
-      $smarty->assign("cn",$this->orig_cn);
     }else{
       $smarty->assign("disable_cn","  ");
-      $smarty->assign("cn",$this->cn);
     }
-    $this->generate_mysql_entension_entries();
     /* Show main page */
     return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
   }
 
-  /*!
-  Remove this Object
-  */
-  function remove_from_parent()
+
+  /* This method check if all databases are reachable.  
+   *  Returns with error message or an empty string on success.
+   * 
+   * - Is mysql extension available  
+   * - Is every server reachable 
+   * - Does the database exists/is accessible
+   */
+  function check_database_accessibility()
   {
-    $ldap= $this->config->get_ldap_link();
-    
-    $res = $ldap->search("(&(objectClass=goFonAccount)(objectClass=gosaAccount))", array("goFonMacro"));
+    /* Check if mysql extension is available */
+    if(!is_callable("mysql_pconnect")){
+      return(_("Can't save any changes to asterisk database, there is currently no mysql extension available in your php setup."));
+    }
 
-    while ($val = $ldap->fetch()){ 
-      if(isset($val['goFonMacro'])){
-        if(strstr($val['goFonMacro'][0],$this->dn)){ 
-          print_red(_("This macro ist still in use. To delete this Macro ensure that nobody has selected this Macro."));
-          return false;
-        }
+    /********************
+     * Check all home server
+     ********************/
+    foreach($this->goFonHomeServers as $goFonHomeServer => $cfg_Current){
+      $r_current    =  @mysql_pconnect($cfg_Current['SERVER'],$cfg_Current['LOGIN'],$cfg_Current['PASSWORD']);
+      if(!$r_current){
+        gosa_log(@mysql_error($r_current));
+        return(sprintf(_("The MySQL home server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
+              $cfg_Current['SERVER'],$cfg_Current['LOGIN']));
       }
-    }
-  
-    $ldap->rmDir($this->dn); 
-    show_ldap_error($ldap->get_error(), _("Removing phone macro failed"));
-    if(isset($this->orig_cn)){
-      $this->generate_mysql_entension_entries(false,true,$this->orig_cn);
-    }else{
-      $this->generate_mysql_entension_entries(false,true);
-    }
-
-    /* Delete references to object groups */
-    $ldap->cd ($this->config->current['BASE']);
-    $ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".$this->dn."))", array("cn"));
-    while ($ldap->fetch()){
-        $og= new ogroup($this->config, $ldap->getDN());
-        unset($og->member[$this->dn]);
-        $og->save ();
-        show_ldap_error($ldap->get_error(), _("Removing phone macro reverences failed"));
+      $db_current  =  @mysql_select_db($cfg_Current['DB'],$r_current);
+      if(!$db_current){
+        gosa_log(@mysql_error($r_current));
+        mysql_close($r_current);
+        return( sprintf(_("Can't select database '%s' on home server '%s'."),$cfg_Current['DB'],$cfg_Current['SERVER']));
+      }
     }
   }
 
-  // Generate MySQL Syntax 
-  function generate_mysql_entension_entries($save = false,$delete_only=false,$remove_old_macroname=false){
 
-    if(!isset($_SESSION['config']->data['SERVERS']['FON'][0])){
-      return(true);
+  /* Remove current macro from all asterisk server.
+   * First of all check if we have access to all databases. 
+   * - Remove old entries 
+   */ 
+  function remove_from_database($save)
+  {
+    /* Check if all databases are reachable */
+    $str = $this->check_database_accessibility();
+    if($str){
+      return($str);
     }
 
-    if(!is_callable("mysql_connect")){
-      if((!$this->error_shown)&&($save)){
-        print_red(_("There is no mysql extension available in your php setup, can't save any changes to asterisk db."));
-        $this->error_shown = true;
-      }
-      return(true);
-    }
-
-    // Get Configuration for Mysql database Server  
-    $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'][0];
-
-    // Connect to DB server
-    $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']); 
-  
-    // Check if we are  connected correctly 
-    if(!$r_con){
-      $this->generate_error = sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
-          $a_SETUP['SERVER'],$a_SETUP['LOGIN']);
-      gosa_log(mysql_error());
-      return false;
-    }
-
-    // Select database for Extensions 
-    $db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
-
-    // Test if we have the database selected correctly
-    if(!$db){
-      $this->generate_error = sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']);
-      gosa_log(mysql_error());
-      return false;
-    }
-
-
-    // Context def
+    /* Create query string */
     $context  = "macro-".$this->cn;
 
-    // Parse Content if we connected correctly
-    if($db &&  $r_con ){
-
-      // Split Content into lines 
-      $a_contentLines = split ("\n",$this->goFonMacroContent);
-
-      // Foreach single line ...
-      foreach($a_contentLines as $i_linenum => $s_linestr){
-    
-        // Remove unwanted exten => tag 
-        $s_linestr= preg_replace ("/^.*\> /","",$s_linestr);
-      
-        // Remove  spaces 
-        $s_linestr = trim ( $s_linestr);
-
-        // Skip empty lines
-        if ($s_linestr == ""){
-          continue;
-        }
-
-        // If not empty or linebreak at [0]
-        if((!empty($s_linestr))&&($s_linestr[0]!=";")&&(ord($s_linestr[0]) !=13)){
-  
-          // Set general SQL statement
-          $SQL[$i_linenum] =  
-            "INSERT INTO ".$a_SETUP['EXT_TABLE'].
-            " (context,exten,priority,app,appdata) ".
-            " VALUES ".
-            " (";
-      
-          // Parse linestr to entry data
-          $linecontents = preg_replace("/;.*$/","",$s_linestr) ;
-
-          $tmp  = split(",", preg_replace("/\(.*$/","",$linecontents));
-  
-          if(!isset($tmp[2])){
-            $this->generate_error = sprintf(_("Unable to parse macro contents on line: %s"),$i_linenum);
-            return false;
-          }    
-            $exten = $tmp[0];
-            $prio = $tmp[1];
-            $app  = $tmp[2];
-            $para = $linecontents; 
-            $para = preg_replace("/^.*\(/","",$para);
-            $para = preg_replace("/\)$/","",$para);
-
-            // Append SQL syntax
-            $SQL[$i_linenum].="'".$context."','".$exten."','".$prio."','".$app."','".$para."');";
-        }
-     }
-
-      if(($save)||($delete_only)){
-        $res = mysql_query("SELECT count(*) FROM ".$a_SETUP['EXT_TABLE']." WHERE context= '".$context."'");
+    /* Remove current macro from each server available */ 
+    if($save){
+      foreach($this->goFonHomeServers as $dn => $Server){
+        $query      = "DELETE FROM ".$Server['EXT_TABLE']." WHERE context= '".$context."';";
+        $r_current  =  @mysql_pconnect($Server['SERVER'],$Server['LOGIN'],$Server['PASSWORD']);
+        $db_current =  @mysql_select_db($Server['DB'],$r_current);
+        $res = @mysql_query($query,$r_current);
         if(!$res){
-          $this->generate_error = sprintf(_("Can't perform SELECT query in DB '%s'"),$a_SETUP['DB']);
-          gosa_log(mysql_error());
-          return false;
+          gosa_log(@mysql_error($r_current));
+          return(sprintf(_("Removing marco from '%s' failed. Check GOsa log for mysql error."),$Server['SERVER']));
         }
-        $cnt = mysql_fetch_row($res);
-        $cnt = $cnt[0];
+        @mysql_close($r_current);
+      }
+    }
+  }
 
-        if($cnt != 0) {
-          if(!mysql_query("DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE context= '".$context."'")){
-            $this->generate_error = sprintf(_("Can't perform DELETE query in DB '%s'"),$a_SETUP['DB']);
-            gosa_log(mysql_error());
-            return false;
-          }
-        }
+ 
+  /* Add current macro to all asterisk server.
+   * First of all check if we have access to all databases. 
+   * - Remove old entries 
+   * - Add new entries 
+   */ 
+  function add_to_database($save)
+  {
+    /* Check if all databases are reachable */
+    $str = $this->check_database_accessibility();
+    if($str){
+      return($str);
+    }
 
-        if($remove_old_macroname!="false"){
-          if(!mysql_query("DELETE FROM ".$a_SETUP['EXT_TABLE']." WHERE context= 'Makro-".$remove_old_macroname."'")){
-            $this->generate_error = sprintf(_("Can't perform DELETE query in DB '%s'"),$a_SETUP['DB']);
-            gosa_log(mysql_error());
-            return false;
-          }
-        }
+    /* Remove old entries first. Else we got duplicated entries */
+    $str = $this->remove_from_database($save);
+    if($str){
+      return($str);
+    }
 
+    /* Create query string */
+    $context      = "macro-".$this->cn;
 
+    /************
+     * Parse Macro content
+     ************/
+    $sql = 
+      "INSERT INTO %TABLENAME% ".
+      " (context,exten,priority,app,appdata) ".
+      " VALUES ";
+      
+    $a_contentLines = split("\n",$this->goFonMacroContent);
+    foreach($a_contentLines as $i_linenum => $s_linestr){
 
+      /* Remove the 'exten => ' string in front of the macro content line 
+       *  example line  'exten => s,2,GotoIf(${ARG3}?3:5)'
+       * Remove comments introduced by ;
+       * Skip empty lines 
+       */ 
+      $s_linestr = preg_replace ("/^.*=\> /","",$s_linestr);
+      $s_linestr = preg_replace("/;.*$/","",$s_linestr) ;
+      $s_linestr = trim($s_linestr);
+      if(empty($s_linestr)){
+        continue;
       }
 
-      // We want to save this 
-      if(($save)&&(isset($SQL))){
-        foreach($SQL as $entry){
-          if(!mysql_query($entry)){
-            $this->generate_error = sprintf(_("Can't perform INSERT query in DB '%s'"),$a_SETUP['DB']);
-            gosa_log(mysql_error());
-            return false;
-          }
-        } 
-      }    
+      /* A line that passes the check above should look like this 
+       *  s,1,SetLanguage(de)
+       * 3 parts seperated by , 
+       * If there are more or less parts, abort.
+       * The preg_replace exclude parameters from split .. 
+       */
+      $tmp  = split(",", $s_linestr,3);
+
+      /* Check if there are exactly 2 , */ 
+      if(substr_count($s_linestr,",") !=2){
+        return(sprintf(_("More than two ',' given in line : '%s'. Remember that parameters are seperated by '|'."),$i_linenum));
+      }
+      /* Multiple () are not supproted currently ... */  
+      if(substr_count($s_linestr,"(") >1 ){
+        return(sprintf(_("More than one '(' is currently not supported. Line : '%s'."),$i_linenum));
+      }
+      if(substr_count($s_linestr,")") >1 ){
+        return(sprintf(_("More than one ')' is currently not supported. Line : '%s'."),$i_linenum));
+      }
+      /* Check if there is an application given */
+      if(empty($tmp[1])){
+        return(sprintf(_("There is no application given in line : '%s'."),$i_linenum));
+      } 
+      /* Check if there is an extension given */
+      if(empty($tmp[0])){
+        return(sprintf(_("There is no extension type given in line : '%s'."),$i_linenum));
+      } 
+
+      /* Create extension entry for current line 
+       *  and add this line to an array that will be inserted 
+       *  to each database.
+       */
+      $exten  = $tmp[0];
+      $prio   = $tmp[1];
+      $app    = preg_replace("/\(.*\).*$/","",$tmp[2]);
+      $para   = preg_replace("/^.*\(/","",$tmp[2]);
+      $para   = preg_replace("/\).*$/","",$para);
+      $sql.= " ('".$context."','".$exten."','".$prio."','".$app."','".$para."'),";
     }
-    if((isset($r_con))&&($r_con)){
-      @mysql_close($r_con);
+    
+    /* Remove last , from query string */
+    $sql = preg_replace("/,$/","",$sql);
+
+    /* Save current changes to the database */
+    if($save){
+    
+      /* Macro are spread to each asterisk server */
+      foreach($this->goFonHomeServers as $dn => $cfg){
+        $r_con  = @mysql_pconnect($cfg['SERVER'],$cfg['LOGIN'],$cfg['PASSWORD']); 
+        $db     = @mysql_select_db($cfg['DB'],$r_con);
+        $query  = preg_replace("/%TABLENAME%/",$cfg['EXT_TABLE'],$sql);
+        $res    = @mysql_query($query,$r_con);
+        if(!$res){
+          gosa_log(@mysql_error($r_con));
+          return(sprintf(_("Insert of new macro failed for server '%s'."),$cfg['SERVER']));
+        }
+        @mysql_close($r_con);
+      }
     }
-    return true;
   }
 
 
-
-
-  /*!
-  Save data to object 
-  */
+  /*! Save data to object */
   function save_object()
   {
     if (isset($_POST['displayName'])){
       plugin::save_object();
-    }
-    foreach($this->attributes as $attr){
-      if(isset($_POST[$attr])){
-        $this->$attr= $_POST [$attr];
+
+      /* The cn can't be changed if this entry is not new */
+      if($this->dn!= "new"){
+        $this->cn = $this->orig_cn;
       }
     }
   }
 
 
-  /*! 
-  Check values 
-  */
+  /*! Check values */
   function check()
   {
     /* Call common method to give check the hook */
     $message= plugin::check();
 
-    if(!$this->generate_mysql_entension_entries()){
-      $message[] = $this->generate_error;
+    /* Check if insert/replace is possible and all servers are available */
+    $str = $this->add_to_database(false);
+    if($str){
+      $message[] = $str;
     }
 
+    /* Check if cn is already used  */
     if(($this->dn=="new")||($this->orig_cn!=$this->cn)){
       $ldap = $this->config->get_ldap_link();
       $ldap->search("(&(objectClass=goFonMacro)(cn=".$this->cn."))",array("cn"));
@@ -388,38 +377,72 @@ class macro extends plugin
         $message[]=sprintf(_("The given cn '%s' already exists."),$this->cn);
       }
     }
-
+  
+    /* Check if display name is set */
     if(empty($this->displayName)){
       $message[] = _("You must specify the 'Display Name' in order to save this macro");
     }  
- 
+    /* CN is restricted to 20 chars */
     if(strlen("Makro-".$this->cn)>20 ){
       $message[]=_("The given cn is too long, to create a Makro entry, maximum 20 chars.");
     }
- 
+  
+    /* Check permissions */
     foreach($this->attributes as $attr){
       if(chkacl($this->acl,"edit")){
         $str =  sprintf( _("Insufficient permissions, can't change attribute '%s' in goFonMacro"),$attr) ;
         return(array($str));
-        }
       }
-    
+    }
+
+    /* Macro content must be smaller than 100 lines */
     if(count(split("\n",$this->goFonMacroContent))>100){
       $message[] = _("Makro length must be lower than 100 lines");
     }
-   
-    /*Some stupid IE fixes again*/
-    if(empty ($this->base)) {
-      $message[] = _("Please choose a valid  base.");
-    }
- 
+
     return $message;
   }
 
 
-  /*! 
-  Save to LDAP 
-  */
+  /*! Remove makro from all given databases 
+   *   and ldap too.
+   */
+  function remove_from_parent()
+  {
+    $ldap= $this->config->get_ldap_link();
+
+    /* Skip remove if this macro is still in use */
+    $res = $ldap->search("(&(objectClass=goFonAccount)(objectClass=gosaAccount)(goFonMacro=*))", array("goFonMacro"));
+    while ($val = $ldap->fetch()){ 
+      if(strstr($val['goFonMacro'][0],$this->dn)){ 
+        print_red(_("This macro is still in use. To delete this Macro ensure that nobody has selected it."));
+        return false;
+      }
+    }
+
+    /* Try to remove from database */
+    $str = $this->remove_from_database(true);
+    if($str){ 
+      print_red($str);
+    }
+
+    /* Remove phone macro */ 
+    $ldap->rmDir($this->dn); 
+    show_ldap_error($ldap->get_error(), _("Removing phone macro failed"));
+
+    /* Delete references to object groups */
+    $ldap->cd ($this->config->current['BASE']);
+    $ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".$this->dn."))", array("cn"));
+    while ($ldap->fetch()){
+      $og= new ogroup($this->config, $ldap->getDN());
+      unset($og->member[$this->dn]);
+      $og->save ();
+      show_ldap_error($ldap->get_error(), _("Removing phone macro reverences failed"));
+    }
+  }
+
+
+  /*! Save to LDAP */
   function save()
   {
     /* Post checks */
@@ -428,18 +451,16 @@ class macro extends plugin
     plugin::save();
     unset($this->attrs['base']);
 
-    /* Write back to ldap */
-    $ldap= $this->config->get_ldap_link();
-    $ldap->cat($this->dn, array('dn'));
-    $a= $ldap->fetch();
-    
-    if(isset($this->orig_cn)){
-      $this-> generate_mysql_entension_entries(true,false,$this->orig_cn);
+    /* Try to add entries to databases */
+    $str = $this->add_to_database(true);
+    if($str){
+      print_a($str);
     }else{
-      $this-> generate_mysql_entension_entries(true);
-    }
+      /* Write back to ldap */
+      $ldap= $this->config->get_ldap_link();
+      $ldap->cat($this->dn, array('dn'));
+      $a= $ldap->fetch();
 
-    if($this->generate_mysql_entension_entries()){
       if (count($a)){
         $ldap->cd($this->dn);
         $this->cleanup();
