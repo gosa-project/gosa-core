@@ -37,7 +37,10 @@ class conference extends plugin
   var $goFonConferenceOption_c 	= "";   // Count User
   var $goFonConferenceOption_D 	= "";   // Conference Type, no PIN/PIN
 
-  var $goFonConferenceOwner    = "";
+  var $goFonConferenceOwner     = "";
+  var $goFonHomeServer          = "0";      // Home server of the conference
+  var $init_HomeServer          = "0";      // Initial home server of the conference
+  var $goFonHomeServers         = array();  // All available home servers
 
   var $error_shown = false;
 
@@ -58,7 +61,7 @@ class conference extends plugin
 
   /* attribute list for save action */
   var $attributes= array("cn","base", "description", "goFonPIN","goFonConferenceOption_P","goFonConferenceOption_r",
-      "goFonConferenceOption_M","goFonConferenceOption_s","goFonConferenceOption_i","goFonConferenceOption_c",
+      "goFonConferenceOption_M","goFonConferenceOption_s","goFonConferenceOption_i","goFonConferenceOption_c","goFonHomeServer",
       "goFonConferenceOption_D","goFonConferenceOptionFormat","goFonConferenceOptionLifetime","telephoneNumber","goFonConferenceOwner");
 
   var $objectclasses= array("top", "goFonConference");
@@ -67,10 +70,42 @@ class conference extends plugin
   {
     plugin::plugin($config, $dn, $plugin);
     $this->is_account	= TRUE;
-    $this->ui			= get_userinfo();
-    $this->dn			= $dn;
+    $this->ui			    = get_userinfo();
     $this->orig_dn		= $dn;
-    $this->config		= $config;
+
+    
+    /* Check server configurations
+     * Load all server configuration in $this->goFonHomeServers if available
+     *  and first server as default if necessary.
+     * Check if connection is successfull for the selected server $this->goFonHomeServer
+     */
+    $a_SETUP= array();
+    if(array_key_exists('config',$_SESSION) &&
+       array_key_exists('SERVERS',$_SESSION['config']->data) &&
+       array_key_exists('FON',$_SESSION['config']->data['SERVERS']) &&
+       is_callable("mysql_connect")
+       ) {
+
+      /* Set available server */
+      $this->goFonHomeServers = $_SESSION['config']->data['SERVERS']['FON'];
+
+      /* Set default server */
+      if($this->dn == "new"){
+        $this->goFonHomeServer = $this->goFonHomeServers[0]['DN'];
+      }
+
+      /* Remember inital home server, to be able to remove old entries */
+      $this->init_HomeServer = $this->goFonHomeServer;
+
+      /* get config */
+      if(!isset($this->goFonHomeServers[$this->goFonHomeServer])){
+        print_red(sprintf(_("The specified goFonHomeServer '%s' is not available in GOsa server configuration. Saving this account will create a new entry on the server '%s'. Use cancel if you do not want to create a new entry and ignoring old accounts."),$this->goFonHomeServer, $this->goFonHomeServers[0]['DN']));
+
+        $this->goFonHomeServer = $this->goFonHomeServers[0]['DN'];
+        $this->init_HomeServer = $this->goFonHomeServers[0]['DN'];
+      }
+      $cur_cfg = $this->goFonHomeServers[$this->goFonHomeServer]; 
+    }
 
     /* Set base */
     if ($this->dn == "new"){
@@ -111,6 +146,7 @@ class conference extends plugin
     $this->old_cn = $this->cn;
   }
 
+
   function execute()
   {
     /* Call parent execute */
@@ -145,6 +181,14 @@ class conference extends plugin
       }
     }
 
+    /* Create array with goFonHomeServer */
+    $tmp = array();
+    foreach($this->goFonHomeServers as $dn => $val){
+      if(!is_numeric($dn)){
+        $tmp[$dn]  = $val['SERVER'];
+      }
+    }
+    $smarty->assign("goFonHomeServers",$tmp);
     $smarty->assign("goFonConferenceOptions",		    array("D"=>"Conference ","d"=>"Conference without PIN"));
     $smarty->assign("goFonConferenceOptionFormats",	array("WAV"=>"Wave","GSM"=>"GSM","WAV49"=>"Wave49"));
     $smarty->assign("goFonConferenceOption",        $this->goFonConferenceOption_D);
@@ -231,8 +275,11 @@ class conference extends plugin
       $message[] =_("Only numbers are allowed in Lifetime.");
     }
 
-    $this->SQL_remove_me(false);
-    $this->SQL_add_me(false);
+
+    $str = $this->SQL_add_me(false);
+    if(!empty($str)){
+      $message[] = $str;
+    }
 
     if(!empty($this->generate_error)){
       $message[]=$this->generate_error;
@@ -243,50 +290,63 @@ class conference extends plugin
   }
 
 
-  function SQL_add_me($save){
-
-    if(!isset($_SESSION['config']->data['SERVERS']['FON'][0])){
-      $this->generate_error = _("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). Your settings can't be saved to asterisk database.");
-      return(false);
+  function SQL_add_me($save)
+  {
+    /* Check if there is at least on server configuration */
+    if(!count($this->goFonHomeServers)){
+      return( _("There is currently no asterisk server defined. Possibly you are missing a server that handles the asterisk management (goFonServer). Your settings can't be saved to asterisk database."));
     }
   
-    // Get Configuration for Mysql database Server
-    $a_SETUP = $_SESSION['config']->data['SERVERS']['FON'][0];
-
-    // Connect to DB server
-    $r_con = false;    
-
+    /********************
+     * Get configuration and try to connect 
+     ********************/
+    $a_New = $this->goFonHomeServers[$this->goFonHomeServer] ;
     if(!is_callable("mysql_pconnect")){
-      if(!$this->error_shown){
-        print_red(_("Can't save any changes to asterisk database, there is currently no mysql extension available in your php setup."));
-        $this->error_shown = true;
-      }
-      return(true);
+      return(_("Can't save any changes to asterisk database, there is currently no mysql extension available in your php setup."));
     }
-    $r_con =  @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
-
-    // Check if we are  connected correctly
-    if(!$r_con){
-      $this->generate_error = sprintf(_("The MySQL server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
-          $a_SETUP['SERVER'],$a_SETUP['LOGIN']);
-      gosa_log(mysql_error());
-      return false;
+    $r_new =  @mysql_pconnect($a_New['SERVER'],$a_New['LOGIN'],$a_New['PASSWORD']);
+    if(!$r_new){
+      gosa_log(@mysql_error($r_new));
+      return(sprintf(_("The MySQL server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
+          $a_New['SERVER'],$a_New['LOGIN']));
+    }
+    $db_new  =  @mysql_select_db($a_New['DB'],$r_new);
+    if(!$db_new){
+      gosa_log(@mysql_error($r_new));
+      return(sprintf(_("Can't select database %s on %s."),$a_New['DB'],$a_New['SERVER']));
     }
 
-    // Select database for Extensions
-    $db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
+    /********************
+     * Remove entries from old home server 
+     ********************/
 
-    // Test if we have the database selected correctly
-    if(!$db){
-      $this->generate_error = sprintf(_("Can't select database %s on %s."),$a_SETUP['DB'],$a_SETUP['SERVER']);
-      gosa_log(mysql_error());
-      return false;
+    $a_Remove   = $this->goFonHomeServers[$this->init_HomeServer] ;
+    if(!is_callable("mysql_pconnect")){
+      return(_("Can't save any changes to asterisk database, there is currently no mysql extension available in your php setup."));
+    }
+    $r_remove =  @mysql_pconnect($a_Remove['SERVER'],$a_Remove['LOGIN'],$a_Remove['PASSWORD']);
+    if(!$r_remove){
+      gosa_log(@mysql_error());
+      return(sprintf(_("The MySQL server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
+            $a_Remove['SERVER'],$a_Remove['LOGIN']));
+    }
+    $db_remove  =  @mysql_select_db($a_Remove['DB'],$r_remove);
+    if(!$db_remove){
+      gosa_log(@mysql_error($r_remove));
+      return( sprintf(_("Can't select database %s on %s."),$a_Remove['DB'],$a_Remove['SERVER']));
+    }
+    $query = "DELETE FROM ".$a_Remove['EXT_TABLE']." WHERE exten='".$this->old_tele_number."' OR exten='".$this->old_cn."';";
+    if(!@mysql_query($query,$r_remove)){
+      return(_("Could not remove old entries"));
     }
 
+
+    /********************
+     * Add new conference entry  
+     ********************/
     if((!empty($this->telephoneNumber))&&($save==true)){
 
-      $EXT=array();
-
+      /* Create string out of conference Flags */
       $parameter  ="";
       foreach(array("goFonConferenceOption_P","goFonConferenceOption_r","goFonConferenceOption_M","goFonConferenceOption_s",
             "goFonConferenceOption_i","goFonConferenceOption_c","goFonConferenceOption_D") as $attrs){
@@ -294,6 +354,7 @@ class conference extends plugin
       }
 
       $i=1;
+      $EXT=array();
       $context="GOsa";
       // Set Language to German
       $EXT[$i]['exten']   =$this->telephoneNumber;
@@ -353,17 +414,16 @@ class conference extends plugin
         }
         $s_keys   =preg_replace("/\,$/","",$s_keys); 
         $s_values =preg_replace("/\,$/","",$s_values); 
-        $SQL[]="INSERT INTO ".$a_SETUP['EXT_TABLE']." (".$s_keys.") VALUES (".$s_values.");"; 
+        $SQL[]="INSERT INTO ".$a_New['EXT_TABLE']." (".$s_keys.") VALUES (".$s_values.");"; 
       }
       foreach($SQL as $sqlsyn){
         mysql_query($sqlsyn);
       }
     } 
 
-
     @mysql_close($r_con);
-    return(true);
   }
+
 
   function SQL_remove_me($save){
     if(!is_callable("mysql_pconnect")){

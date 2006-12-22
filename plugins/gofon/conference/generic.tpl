@@ -42,6 +42,14 @@
         {/if}
 	</td>
 	</tr>
+	<tr>
+	<td><LABEL for="goFonHomeServer">{t}Home server{/t}</LABEL></td>
+	<td>
+		<select name='goFonHomeServer'>
+		 {html_options options=$goFonHomeServers selected=$goFonHomeServer}
+                </select>
+	</td>
+	</tr>
 	</table>
 
 </td>
