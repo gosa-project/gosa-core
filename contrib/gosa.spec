@@ -55,7 +55,7 @@ and can write user adapted sieve scripts.
 Group: 			System/Administration
 Summary: 		Schema Definitions for the GOSA package
 %if %{suse}
-Requires:		openldap2 >= 2.2.6
+Requires:		openldap2 >= 2.1.22
 %else
 Requires:		openldap-servers >= 2.2.0
 %endif
