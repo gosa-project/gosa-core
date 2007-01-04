@@ -1053,16 +1053,28 @@ class posixAccount extends plugin
     }
 
     /* Adjust shadow checkboxes */
-    foreach (array("shadowMin", "shadowMax", "shadowWarning", "shadowInactive",
-          "shadowExpire") as $val){
-
+    foreach (array("shadowMin", "shadowMax", "shadowWarning", "shadowInactive") as $val){
       if ($this->$val != 0){
         $oval= "use_".$val;
         $this->$oval= "1";
       }
     }
 
-    $this->shadowExpire= $this->convertToSeconds($this->shadowExpire);
+    /* FIXME: NEED review of this section */
+    /* Need to check shadowExpire separately */
+
+    /* 
+     * If shadowExpire is not enabled in the template, it's a UNIX timestamp - so don't convert it to seconds.
+     * The check is a hack - if difference between timestamp generated above and here is max 1 day.
+     */
+    if(abs($this->shadowExpire - time())>86400) {
+      $this->shadowExpire= $this->convertToSeconds($this->shadowExpire);
+    }
+    
+    /* Only enable checkbox, if shadowExpire is in the future */
+    if($this->shadowExpire > time()) {
+      $this->use_shadowExpire= "1";
+    }
   }
 
   function get_next_id($attrib)

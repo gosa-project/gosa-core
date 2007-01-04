@@ -219,7 +219,12 @@ class user extends plugin
     } else {
       if(is_array($this->dateOfBirth)){
         $date = $this->dateOfBirth;
-      }else{
+  
+        // Trigger on dates like 1985-04-01, getdate only understands timestamps
+      } else if (!is_numeric($this->dateOfBirth)){
+        $date= getdate(strtotime($this->dateOfBirth));
+
+      } else {
         $date = getdate($this->dateOfBirth);
       } 
     }
