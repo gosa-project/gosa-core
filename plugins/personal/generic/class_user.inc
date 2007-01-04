@@ -221,7 +221,7 @@ class user extends plugin
         $date = $this->dateOfBirth;
   
         // Trigger on dates like 1985-04-01, getdate only understands timestamps
-      } else if (!is_numeric($this->dateOfBirth)){
+      } else if (!empty($this->dateOfBirth) && !is_numeric($this->dateOfBirth)){
         $date= getdate(strtotime($this->dateOfBirth));
 
       } else {
