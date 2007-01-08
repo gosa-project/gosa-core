@@ -345,3 +345,11 @@ Q: New implementations of OpenLDAP seem to require {sasl} instead of {kerberos}
 
 A: You can set "krbsasl" to "true" in your gosa.conf's main section.
 
+
+Q: Is there a way to add the personalTitle attribute the the users dn?
+
+A: Just add this line into the location section of your gosa.conf.
+   <location name=...
+	include_personal_title="true"
+   ...>
+

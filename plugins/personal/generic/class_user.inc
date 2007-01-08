@@ -998,11 +998,13 @@ class user extends plugin
     $message= plugin::check();
 
     /* Assemble cn */
-    if ($this->personalTitle == ""){
-      $pt= "";
-    } else {
-      $pt= $this->personalTitle." ";
+    $pt= "";
+    if(isset($this->config->current['INCLUDE_PERSONAL_TITLE']) && preg_match("/true/i",$this->config->current['INCLUDE_PERSONAL_TITLE'])){
+      if(!empty($this->personalTitle)){
+        $pt = $this->personalTitle." ";
+      }
     }
+    
     $this->cn= $pt.$this->givenName." ".$this->sn;
 
     /* Permissions for that base? */
