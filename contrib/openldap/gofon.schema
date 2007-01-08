@@ -279,9 +279,9 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.13.46 NAME 'goFonVoicemailPIN'
 
 attributetype ( 1.3.6.1.4.1.10098.1.1.13.47 NAME 'goFonHomeServer'
 	DESC 'defines voicemail delivery format'
-	EQUALITY caseExactIA5Match
-	SUBSTR caseExactIA5SubstringsMatch
-	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE)
+	EQUALITY caseExactMatch
+	SUBSTR caseExactSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE)
 
 # objectclass 
 objectclass (1.3.6.1.4.1.10098.1.2.3.11 NAME 'goFonAccount' SUP top AUXILIARY
