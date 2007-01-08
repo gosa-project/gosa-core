@@ -5,6 +5,8 @@ GOsa2 changelog
   - Added support for sambaLogonHours 
 
 * gosa 2.5.7
+  - Fixed date of birth and shadow expire in template adaption. 
+  - Updated user mail account to search for CYRUSUNIXSTYLE in location too.
   - Fixed login.tpl to display error msgs in the middle of the screen
   - Fixed some error outputs in login.php to not break the screen
   - Added auto scroll function to FAI-Create-Branch and Department tagging
