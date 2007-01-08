@@ -38,7 +38,8 @@ class servdb extends plugin
                          "goKrbAdmin", "goKrbPassword", "goFaxAdmin", "goFaxPassword",
                          "goLogAdmin", "goLogPassword", "goFonAdmin", "goFonPassword",
                          "goFonAreaCode", "goFonCountryCode","goGlpiAdmin","goGlpiDatabase","goGlpiPassword");
-  var $objectclasses= array("top", "goServer");
+  var $objectclasses  = array("top", "goServer");
+  var $init_objectclasses = array();
   var $additionaloc= array("goImapServer" => array("goImapName", "goImapConnect",
                                                 "goImapAdmin", "goImapPassword",
                                                 "goImapSieveServer", 
@@ -62,6 +63,9 @@ class servdb extends plugin
       }
     }
 
+    /* Remember used databases */
+    $this->init_objectclasses = $this->objectclasses;
+
     /* We need to save the historical state of goImapName for later checking */
     $this->goImapName_old= $this->goImapName;
 
@@ -71,8 +75,8 @@ class servdb extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     /* Fill templating stuff */
     $smarty= get_smarty();
@@ -184,6 +188,33 @@ class servdb extends plugin
         }
       }
     }
+    
+    /* Check if we are able to remove the asterisk database. If the database is still in use skip */
+    if (!in_array("goFonServer", $this->objectclasses) && in_array("goFonServer", $this->init_objectclasses)){
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cd($this->config->current['BASE']);
+      $ldap->search("(&(goFonHomeServer=".$this->dn.")(|(uid=*)(cn=*)))",array("dn","uid","cn","goFonHomeServer"));
+      if($ldap->count()){
+
+        /* Number of entries shown in warning */
+        $i    = 3;
+        $str  = "";   
+        while(($attrs = $ldap->fetch()) && $i >= 0){
+          $i --; 
+          if(isset($attrs['uid'][0])){
+            $str .= $attrs['uid'][0]." ";
+          }else{
+            $str .= $attrs['cn'][0]." ";
+          }
+        }
+
+        /* Some entries found */
+        if($i != 3){
+          $message[] = sprintf(_("You can't remove the asterisk database extension, it is still in use by these objects '%s'."),trim($str));
+        }
+      } 
+    }
+
     if (in_array("goImapServer", $this->objectclasses) && 
         $this->goImapName != $this->goImapName_old) {
       // Attribute has changed
@@ -253,6 +284,36 @@ class servdb extends plugin
       $this->handle_post_events("add");
     }
   }
+
+  function allow_remove()
+  {
+    /* Check if we are able to remove the asterisk database. If the database is still in use skip */
+    if (in_array_ics("goFonServer", $this->init_objectclasses)){
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cd($this->config->current['BASE']);
+      $ldap->search("(&(goFonHomeServer=".$this->dn.")(|(uid=*)(cn=*)))",array("dn","uid","cn","goFonHomeServer"));
+      if($ldap->count()){
+
+        /* Number of entries shown in warning */
+        $i    = 3;
+        $str  = "";
+        while(($attrs = $ldap->fetch()) && $i >= 0){
+          $i --;
+          if(isset($attrs['uid'][0])){
+            $str .= $attrs['uid'][0]." ";
+          }else{
+            $str .= $attrs['cn'][0]." ";
+          }
+        }
+
+        /* Some entries found */
+        if($i != 3){
+          return(sprintf(_("You can't remove the asterisk database extension, it is still in use by these objects '%s'."),trim($str)));
+        }
+      }
+    }
+  }
+
 
 }
 
