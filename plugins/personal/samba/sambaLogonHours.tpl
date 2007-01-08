@@ -85,6 +85,7 @@
 </table>
 <br>
 <input type='hidden' name='sambaLogonHoursPosted' value='1'> 
+<br>
 <p class="plugbottom">
   <input type=submit name="save_logonHours" value="{t}Apply{/t}">
   &nbsp;
