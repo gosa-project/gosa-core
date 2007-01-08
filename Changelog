@@ -2,8 +2,9 @@ GOsa2 changelog
 ===============
 
 * gosa 2.5.8
-  - Fixed date of birth and shadow expire in template adaption. 
-  - Updated user mail account to search for CYRUSUNIXSTYLE in location too.
+  - Fixed date of birth and shadow expire in template adaption
+  - Updated user mail account to search for CYRUSUNIXSTYLE in all
+    relevant sections of the config file
   - Added support for sambaLogonHours 
 
 * gosa 2.5.7
