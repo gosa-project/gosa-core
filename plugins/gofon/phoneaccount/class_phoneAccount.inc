@@ -82,39 +82,43 @@ class phoneAccount extends plugin
       /* Set available server */
       $this->goFonHomeServers = $_SESSION['config']->data['SERVERS']['FON'];
 
-      /* Set default server */
-      if(empty($this->goFonHomeServer) || $this->goFonHomeServer == "0"){
-        $this->goFonHomeServer = $this->goFonHomeServers[0]['DN'];
-      }
+      /* Servers defined? Watch here... */
+      if (count($this->goFonHomeServers)){
 
-      /* Remember inital home server, to be able to remove old entries */
-      $this->init_HomeServer = $this->goFonHomeServer;
+        /* Set default server */
+        if(empty($this->goFonHomeServer) || $this->goFonHomeServer == "0"){
+          $this->goFonHomeServer= $this->goFonHomeServers[0]['DN'];
+        }
 
-      /* get config */
-      if(!isset($this->goFonHomeServers[$this->goFonHomeServer])){
-        print_red(sprintf(_("The specified goFonHomeServer '%s' is not available in GOsa server configuration. Saving this account will create a new entry on the server '%s'. Use cancel if you do not want to create a new entry ignoring old accounts."),$this->goFonHomeServer, $this->goFonHomeServers[0]['DN']));
+        /* Remember inital home server, to be able to remove old entries */
+        $this->init_HomeServer = $this->goFonHomeServer;
 
-        $this->goFonHomeServer = $this->goFonHomeServers[0]['DN'];
-        $this->init_HomeServer = $this->goFonHomeServers[0]['DN'];
-      }    
-      $cur_cfg = $this->goFonHomeServers[$this->goFonHomeServer];
+        /* Get config */
+        if(!isset($this->goFonHomeServers[$this->goFonHomeServer])){
+          print_red(sprintf(_("The specified goFonHomeServer '%s' is not available in GOsa server configuration. Saving this account will create a new entry on the server '%s'. Use cancel if you do not want to create a new entry ignoring old accounts."),$this->goFonHomeServer, $this->goFonHomeServers[0]['DN']));
 
-      $r_con =  @mysql_pconnect($cur_cfg['SERVER'],$cur_cfg['LOGIN'],$cur_cfg['PASSWORD']);
-      if(!$r_con){
-        print_red( sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
-            $cur_cfg['SERVER'],$cur_cfg['LOGIN']));
-        gosa_log(mysql_error());
-      }
-      $db  =  @mysql_select_db($cur_cfg['DB'],$r_con);
-      if(!$db){
-        print_red(sprintf(_("Can't select database %s on %s."),$cur_cfg['DB'],$cur_cfg['SERVER']));
-        gosa_log(mysql_error());
-      }
+          $this->goFonHomeServer = $this->goFonHomeServers[0]['DN'];
+          $this->init_HomeServer = $this->goFonHomeServers[0]['DN'];
+        }    
+        $cur_cfg = $this->goFonHomeServers[$this->goFonHomeServer];
 
-      $first = false; 
-      foreach($this->phoneNumbers as $key => $val){
-        if(!$first){
-          $first = $key;
+        $r_con =  @mysql_pconnect($cur_cfg['SERVER'],$cur_cfg['LOGIN'],$cur_cfg['PASSWORD']);
+        if(!$r_con){
+          print_red( sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
+                $cur_cfg['SERVER'],$cur_cfg['LOGIN']));
+          gosa_log(mysql_error());
+        }
+        $db  =  @mysql_select_db($cur_cfg['DB'],$r_con);
+        if(!$db){
+          print_red(sprintf(_("Can't select database %s on %s."),$cur_cfg['DB'],$cur_cfg['SERVER']));
+          gosa_log(mysql_error());
+        }
+
+        $first = false; 
+        foreach($this->phoneNumbers as $key => $val){
+          if(!$first){
+            $first = $key;
+          }
         }
       }
     }
