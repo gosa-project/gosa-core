@@ -217,11 +217,19 @@ class conference extends plugin
 
   function remove_from_parent()
   {
-    $str = $this->SQL_remove_me(true); 
-    if($str){
-      print_red($str);
+    /* Check if 'old' home server is available in gosa FON server configuration 
+     * Try to remove this entry from database and display errors.  
+     */
+    if(isset($this->goFonHomeServers[$this->goFonHomeServer])){
+      $str = $this->SQL_remove_me(true); 
+      if($str){
+        print_red($str);
+      }
+    }else{
+      print_red(_("Could not remove the conference entry from database on home server (%s). Please check your asterisk database configurations and remove this entry from database manually, if necessary."));
     }
 
+    /* Remove ldap entry */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd ($this->dn);
     $ldap->recursive_remove();
@@ -259,7 +267,7 @@ class conference extends plugin
      * Check currently selected home server 
      ********************/
 
-    $cfg_Current  = $this->goFonHomeServers[$this->goFonHomeServer] ;
+    $cfg_Current  = $this->goFonHomeServers[$this->goFonHomeServer];
     $r_current    =  @mysql_pconnect($cfg_Current['SERVER'],$cfg_Current['LOGIN'],$cfg_Current['PASSWORD']);
     if(!$r_current){
       gosa_log(@mysql_error($r_current));
