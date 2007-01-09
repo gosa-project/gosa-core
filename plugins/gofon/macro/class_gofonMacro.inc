@@ -404,6 +404,18 @@ class macro extends plugin
       }
     }
 
+    /* If this macro is still in use we should not change the visible for user flag to invisible */
+    if(!$this->goFonMacroVisible){
+      $ldap = $this->config->get_ldap_link();
+      $res = $ldap->search("(&(objectClass=goFonAccount)(objectClass=gosaAccount)(goFonMacro=*))", array("goFonMacro"));
+      while ($val = $ldap->fetch()){
+        if(strstr($val['goFonMacro'][0],$this->dn)){
+          $message[] = _("This macro is still in use. It is necessary to mark this macro as visible for users.");
+          return($message);
+        }
+      }
+    }
+
     /* Macro content must be smaller than 100 lines */
     if(count(split("\n",$this->goFonMacroContent))>100){
       $message[] = _("Makro length must be lower than 100 lines");
