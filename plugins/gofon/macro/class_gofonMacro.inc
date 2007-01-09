@@ -77,6 +77,7 @@ class macro extends plugin
     $a_SETUP= array();
     if(array_key_exists('config',$_SESSION) &&
        array_key_exists('SERVERS',$_SESSION['config']->data) &&
+       count($_SESSION['config']->data['SERVERS']['FON']) && 
        array_key_exists('FON',$_SESSION['config']->data['SERVERS'])) {
 
       /* Set available server */
@@ -165,6 +166,10 @@ class macro extends plugin
     }else{
       $smarty->assign("disable_cn","  ");
     }
+
+    /* Ensure that macro content is displayed correctly encoded */
+    $smarty->assign("goFonMacroContent",htmlentities(utf8_decode ($this->goFonMacroContent)));
+
     /* Show main page */
     return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
   }
@@ -363,6 +368,10 @@ class macro extends plugin
     /* Call common method to give check the hook */
     $message= plugin::check();
 
+    if(!count($this->goFonHomeServers)){
+      $message[] = _("There must be at least one server with an asterisk database to save this phone macro.");
+    }
+
     /* Check if insert/replace is possible and all servers are available */
     $str = $this->add_to_database(false);
     if($str){
@@ -421,9 +430,13 @@ class macro extends plugin
     }
 
     /* Try to remove from database */
-    $str = $this->remove_from_database(true);
-    if($str){ 
-      print_red($str);
+    if(count($this->goFonHomeServers)){
+      $str = $this->remove_from_database(true);
+      if($str){ 
+        print_red($str);
+      }
+    }else{
+      print_red(_("Could not remove the macro entry from asterisk databases. Please check your asterisk database configurations and remove this entry from database manually, if necessary."));
     }
 
     /* Remove phone macro */ 
