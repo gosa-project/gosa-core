@@ -30,6 +30,15 @@
 		<tr>
 		  <td colspan=2><h2><img class="center" alt="" src="images/select_ogroup.png" align="middle">&nbsp;{t}Options{/t}</h2></td>
 		</tr>
+			<tr>
+		<td><LABEL for="goFonHomeServer">{t}Home server{/t}</LABEL>{$must}</td>
+		<td>
+			<select name='goFonHomeServer'>
+			 {html_options options=$goFonHomeServers selected=$goFonHomeServer}
+			</select>
+		</td>
+		</tr>
+
 		<tr>
 		<td>
 			{t}Language{/t}	

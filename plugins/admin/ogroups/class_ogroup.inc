@@ -479,7 +479,7 @@ class ogroup extends plugin
     $ldap= $this->config->get_ldap_link();
 
     /* Try to resolv the entry again, if it still fails, display error msg */
-    $ldap->cat($dn, array("cn", "sn", "givenName", "ou", "description", "objectClass"));
+    $ldap->cat($dn, array("cn", "sn", "givenName", "ou", "uid", "description", "objectClass"));
 
     /* It has failed, add entry with type flag I (Invalid)*/
     if ($ldap->error != "Success"){
