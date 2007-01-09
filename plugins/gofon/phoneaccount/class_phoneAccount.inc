@@ -123,6 +123,10 @@ class phoneAccount extends plugin
       }
     }
 
+    /* Check if previously selected server is still available */
+    if($this->is_account && !isset($this->goFonHomeServers[$this->goFonHomeServer])){
+      print_red(sprintf(_("The previously selected asterisk home server (%s) is no longer available."),preg_replace("/,/",", ",$this->goFonHomeServer)));
+    }
 
     /* Get available phone hardware  
      * Search for all available phone hardware  
@@ -1092,6 +1096,14 @@ class phoneAccount extends plugin
   {
     /* Call common method to give check the hook */
     $message= plugin::check();
+
+    if(!count($this->goFonHomeServers)){
+      $message[] = _("There must be at least one server with an asterisk database to create a phone account.");
+    }
+
+    if(empty($this->goFonHomeServer)){
+      $message[] = _("Please select a valid goFonHomeServer.");
+    }
 
     if((strlen($this->goFonVoicemailPIN)==0)||(strlen($this->goFonVoicemailPIN)>4)){
       $message[]=(_("Voicemail PIN must be between 1-4 characters."));
