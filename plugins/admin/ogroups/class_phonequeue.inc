@@ -52,15 +52,17 @@ class phonequeue extends plugin
   /* ObjectClass */
   var $objectclasses= array("goFonQueue");
 
+
+
+  /* Pluigin initialization 
+   * - Check currently selected and available home server.
+   * - Set default home server if necessary
+   * - Parse phone options flags
+   * - Get phone numbers 
+   */
   function phonequeue ($config, $dn= NULL)
   {
     plugin::plugin($config, $dn);
-
-    /* Include config object */
-    $this->config= $config;
-
-    /* Save initial account state */
-    $this->initially_was_account= $this->is_account;
 
     /* Check server configurations
      * Load all server configuration in $this->goFonHomeServers if available
@@ -94,7 +96,9 @@ class phonequeue extends plugin
     }
 
 
-    /* Load telephone numbers */
+    /* Variable init  
+     *  Load phone nubmers and parse dial options 
+     */
     if($this->is_account){
       if(isset($this->attrs['telephoneNumber'])){
         $this->telephoneNumber=$this->attrs['telephoneNumber'];
@@ -106,18 +110,20 @@ class phonequeue extends plugin
       }
     }
 
+    /* Set Queue announce hold time to true/false */
     if(preg_match("/no/i",$this->goFonQueueAnnounceHoldtime)){
       $this->goFonQueueAnnounceHoldtime=false;
+    }else{
+      $this->goFonQueueAnnounceHoldtime=true;
     }
-    $this->old_phone_numbers = $this->telephoneNumber;
 
+    /* Define all available ringdown types */
     $types= array('ringall'    =>_("ring all"),
         'roundrobin' =>_("round robin"),
         'leastrecent'=>_("least recently called"),
         'fewestcalls'=>_("fewest completed calls"),
         'random'     =>_("random"),
         'rrmemory'   =>_("round robin with memory"));
-
     $i = 0;
     foreach($types as $type => $name){
       $i++;
@@ -125,16 +131,15 @@ class phonequeue extends plugin
       $this->goFonQueueStrategyOptionsR[$i]   =$type;
       $tmp[$type] = $i; 
     }
-
-    
-    $this->old_cn = $this->cn;
     $this->goFonQueueStrategy= $tmp[$this->goFonQueueStrategy];
+    $this->old_cn = $this->cn;
+    $this->old_phone_numbers = $this->telephoneNumber;
   }
 
 
-  /* This function ensure that the selected home server 
-   * and the initially selecte home server are reachable and accessible  
-   **/
+  /* This function ensures that the selected home server 
+   * and the initially selected home server are reachable and accessible  
+   */
   function check_database_accessibility()
   {
     /* Check if mysql extension is available */
@@ -181,9 +186,8 @@ class phonequeue extends plugin
     }
   }
 
-
-
-
+  
+  /* Display plugin ui */
   function execute()
   {
     /* Call parent execute */
@@ -317,7 +321,6 @@ class phonequeue extends plugin
   }
 
 
-
   /* This function removes the old database entries. 
    * If this entry should be removed or the home server has changed
    *  this function is called to ensure that all old entries will be deleted.
@@ -408,12 +411,16 @@ class phonequeue extends plugin
     $this->cn = $this->parent->by_object['ogroup']->cn;
 
     if($save){
-   
+  
+      /*****************
+       * Create queue table entry 
+       *****************/
+ 
       /* Check if QUEUE_TABLE entry exists.
        * If this entry is missing - create it 
        *  else update the entry with new values.
        */
-      $query = "SELECT * FROM ".$cfg_Current['QUEUE_TABLE']."  WHERE name='".$this->cn."';";
+      $query = "SELECT * FROM ".$cfg_Current['QUEUE_TABLE']."  WHERE name='".$this->old_cn."';";
       $res   = mysql_query($query,$res_cur);
       if(!$res){
         gosa_log(@mysql_error($res_cur));
@@ -424,7 +431,7 @@ class phonequeue extends plugin
       /* Create queue table entry */
       $queue["announce"]              = "0";
       $queue["monitor_join"]          = "0";
-      $queue["monitor_format"]        = "0";
+      $queue["monitor_format"]        = "";
       $queue["queue_holdtime"]        = $this->goFonQueueAnnounce;
       $queue["queue_lessthan"]        = $this->goFonQueueLessThan;   
       $queue["announce_round_seconds"]= "0";   
@@ -456,6 +463,11 @@ class phonequeue extends plugin
       $queue["announce_holdtime"]     = $this->goFonQueueAnnounceHoldtime;   
       $queue["musiconhold"]           = $this->goFonMusiconHold;
 
+
+      /* Check if we must create a new queue entry 
+       *  or if we can update an existing entry 
+       *  $cnt contains the number of entries matching this cn
+       */
 
       /* Create new queue table entry 
        */
@@ -490,13 +502,17 @@ class phonequeue extends plugin
             $query.= "".$key."='".$val."',";
           }
           $query = preg_replace("/,$/","",$query);
-          $query.= " WHERE name='".$this->cn."';";
+          $query.= " WHERE name='".$this->old_cn."';";
           $SQL[] = $query;
         }
       }else{
         return(sprintf(_("More than one entry in queue table found, that uses the name ('%s'). Please fix this issue manually first."),$this->cn));
       }
 
+
+      /*****************
+       * Create queue member entries
+       *****************/
       
       /* Add the queue member entries 
        * First we must remove all old user entries. 
@@ -537,6 +553,10 @@ class phonequeue extends plugin
         }
       }
       
+
+      /*****************
+       * Create extension entries
+       *****************/
       
       /* Add the extension entries 
        * First we must remove all old entensions. 
@@ -560,7 +580,7 @@ class phonequeue extends plugin
 
       /* Create a extension entry fpr each telephoneNumber */
       $i_insert_only_once = false;
-      $prio = 11;
+      $prio = 11;   // This represents the priority for each telephoneNumber 
       foreach($this->telephoneNumber as $num){
 
         /* The naming refrences */
@@ -574,7 +594,9 @@ class phonequeue extends plugin
           $i ++ ; 
         }
 
-        
+        /* If there is currently no user for this queue 
+         * Play no service sound file and return to default context.  
+         */
         if(count($queueuser)==0){
           $a_ext[$i]['context']  = 'GOsa';
           $a_ext[$i]['exten']    = $num;
@@ -597,25 +619,35 @@ class phonequeue extends plugin
           $a_ext[$i]['appdata']  = "default";
           $i ++ ; 
         }else{
+
+          /* Dcrement priority to avoid using same priority twice */
           $prio --;
+
+          /* Wait for 2 seconds */
           $a_ext[$i]['context']  = 'GOsa';
           $a_ext[$i]['exten']    = $num;
           $a_ext[$i]['priority'] = 1;
           $a_ext[$i]['app']      = "Wait";
           $a_ext[$i]['appdata']  = "2";
           $i ++ ; 
+    
+          /* Set language to queue language */
           $a_ext[$i]['context']  = 'GOsa';
           $a_ext[$i]['exten']    = $num;
           $a_ext[$i]['priority'] = 2;
           $a_ext[$i]['app']      = "SetLanguage";
           $a_ext[$i]['appdata']  = $this->goFonQueueLanguage;
           $i ++ ; 
+  
+          /* Play welcome sound file */
           $a_ext[$i]['context']  = 'GOsa';
           $a_ext[$i]['exten']    = $num;
           $a_ext[$i]['priority'] = 3;
           $a_ext[$i]['app']      = "Playback";
           $a_ext[$i]['appdata']  = $this->goFonWelcomeMusic;
           $i ++ ; 
+
+          /* Set CID name */
           $a_ext[$i]['context']  = 'GOsa';
           $a_ext[$i]['exten']    = $num;
           $a_ext[$i]['priority'] = 4;
@@ -626,12 +658,16 @@ class phonequeue extends plugin
             $a_ext[$i]['appdata']  = $this->cn." - ".$num;
           }
           $i ++ ; 
+
+          /* Set queue priority */
           $a_ext[$i]['context']  = 'GOsa';
           $a_ext[$i]['exten']    = $num;
           $a_ext[$i]['priority'] = 5;
           $a_ext[$i]['app']      = "SetVar";
           $a_ext[$i]['appdata']  = "QUEUE_PRIO=".$prio;
           $i ++ ; 
+
+          /* Open queue */
           $a_ext[$i]['context']  = 'GOsa';
           $a_ext[$i]['exten']    = $num;
           $a_ext[$i]['priority'] = 6;
@@ -661,6 +697,8 @@ class phonequeue extends plugin
         $SQL[]="INSERT INTO ".$cfg_Current['EXT_TABLE']." (".$entries.") VALUES (".$values.")";
       }
 
+      /* Do all collected mysql queries 
+       */
       foreach($SQL as $query)
       $res   = mysql_query($query,$res_cur);
       if(!$res){
@@ -729,28 +767,31 @@ class phonequeue extends plugin
 
   function save()
   {
-  #fixme workaround : Tab is not initialised correct
-	if(!$this->is_account) return;
-
     $ldap= $this->config->get_ldap_link();
 
     plugin::save();
+
+    /* Create dial option attribute */
     $this->attrs['goFonDialOption'] = "";
     foreach(array("goFonDialOption_t","goFonDialOption_T","goFonDialOption_r","goFonDialOption_h","goFonDialOption_H","cn") as $val){
       $this->attrs['goFonDialOption'].=$this->$val; 
       unset($this->attrs[$val]); 
     }
-    if($this->attrs['goFonDialOption']=="") $this->attrs['goFonDialOption']=array();
-  
+    if(empty($this->attrs['goFonDialOption'])) {
+      $this->attrs['goFonDialOption']=array();
+    }
+
+    /* Set announce hold time to yes no .. */
     if($this->goFonQueueAnnounceHoldtime != "no" ){
       $this->attrs['goFonQueueAnnounceHoldtime'] = "yes";
     }else{
       $this->attrs['goFonQueueAnnounceHoldtime'] = "no";
     }
 
+    /* Set strategy */
     $this->attrs['goFonQueueStrategy'] = $this->goFonQueueStrategyOptionsR[$this->goFonQueueStrategy];
 
-  
+    /* Add database entry, display error and abort if this fails */
     $str = $this->add_to_database(true);
     if(!empty($str)){
       print_red($str);
