@@ -41,6 +41,7 @@ class phonequeue extends plugin
 
   var $goFonHomeServer  = "0";
   var $init_HomeServer  = "0";
+  var $goFonHomeServers = array();
 
   /* attribute list for save action */
   var $attributes= array( "goFonTimeOut","goFonMaxLen","goFonAnnounceFrequency","goFonDialOption_t","goFonDialOption_T",
@@ -88,7 +89,7 @@ class phonequeue extends plugin
 
       /* get config */
       if(!isset($this->goFonHomeServers[$this->goFonHomeServer])){
-        print_red(sprintf(_("The specified home server '%s' is not available in GOsa server configuration. Saving this account will create a new entry on the server '%s'. Use cancel if you do not want to create a new entry while ignoring old accounts."),$this->goFonHomeServer, $this->goFonHomeServers[0]['DN']));
+        print_red(sprintf(_("The specified home server '%s' is not available in GOsa server configuration. Saving this account will create a new entry on the server '%s'. Use cancel if you do not want to create a new entry while ignoring old accounts."), preg_replace("/,/",", ",$this->goFonHomeServer), preg_replace("/,/",", ",$this->goFonHomeServers[0]['DN'])));
         $this->goFonHomeServer = $this->goFonHomeServers[0]['DN'];
         $this->init_HomeServer = $this->goFonHomeServers[0]['DN'];
       }
@@ -288,7 +289,7 @@ class phonequeue extends plugin
     /* Call common method to give check the hook */
     $message= plugin::check();
     if(!count($this->goFonHomeServers)){
-      $message[] = _("There must be at least one server with an asterisk database to create a phone account.");
+      $message[] = _("There must be at least one server with an asterisk database to create a phone queue.");
     }
     if(empty($this->goFonHomeServer)){
       $message[] = _("Please select a valid goFonHomeServer.");
@@ -428,24 +429,28 @@ class phonequeue extends plugin
       }
       $cnt = mysql_affected_rows($res_cur);
 
-      /* Create queue table entry */
-      $queue["announce"]              = "0";
-      $queue["monitor_join"]          = "0";
+
+      /* Create queue table entry 
+       * Leave unused options empty. 
+       */
+      $queue["announce"]              = "";
+      $queue["monitor_join"]          = "";
       $queue["monitor_format"]        = "";
+      $queue["announce_round_seconds"]= "";   
+      $queue["wrapuptime"]            = "";
+      $queue["servicelevel"]          = "";
+      $queue["eventmemberstatus"]     = "";
+      $queue["eventwhencalled"]       = "";
+      $queue["memberdelay"]           = "";
+      $queue["weight"]                = "";
+      $queue["timeoutrestart"]        = "";
+
       $queue["queue_holdtime"]        = $this->goFonQueueAnnounce;
       $queue["queue_lessthan"]        = $this->goFonQueueLessThan;   
-      $queue["announce_round_seconds"]= "0";   
       $queue["retry"]                 = $this->goFonQueueRetry;
-      $queue["wrapuptime"]            = "0";
-      $queue["servicelevel"]          = "0";
+      $queue["reportholdtime"]        = "1";
       $queue["joinempty"]             = "no";
       $queue["leavewhenempty"]        = "yes";   
-      $queue["eventmemberstatus"]     = "0";
-      $queue["eventwhencalled"]       = "0";
-      $queue["reportholdtime"]        = "1";
-      $queue["memberdelay"]           = "0";
-      $queue["weight"]                = "0";
-      $queue["timeoutrestart"]        = "0";
 
       $queue["context"]               = "default";
       $queue["name"]                  = $this->cn;  
@@ -490,7 +495,7 @@ class phonequeue extends plugin
          */
         $queue_old = @mysql_fetch_assoc($res);
         foreach($queue_old as $name => $value){
-          if($queue[$name] == $value){
+          if(isset($queue[$name]) && $queue[$name] == $value){
             unset($queue[$name]);
           }
         }
