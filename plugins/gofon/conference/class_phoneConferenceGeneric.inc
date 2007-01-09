@@ -224,9 +224,11 @@ class conference extends plugin
       $str = $this->SQL_remove_me(true); 
       if($str){
         print_red($str);
+        return false;
       }
     }else{
-      print_red(_("Could not remove the conference entry from database on home server (%s). Please check your asterisk database configurations and remove this entry from database manually, if necessary."));
+      print_red(_("Could not remove the conference entry from database on home server (%s). Please check your asterisk database configuration."));
+      return false;
     }
 
     /* Remove ldap entry */

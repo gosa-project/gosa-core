@@ -123,11 +123,6 @@ class phoneAccount extends plugin
       }
     }
 
-    /* Check if previously selected server is still available */
-    if($this->is_account && !isset($this->goFonHomeServers[$this->goFonHomeServer])){
-      print_red(sprintf(_("The previously selected asterisk home server (%s) is no longer available."),preg_replace("/,/",", ",$this->goFonHomeServer)));
-    }
-
     /* Get available phone hardware  
      * Search for all available phone hardware  
      */
@@ -1391,6 +1386,15 @@ class phoneAccount extends plugin
     }
     if(isset($_POST['goFonPIN'])){
       $this->goFonPIN = $_POST['goFonPIN'];
+    }
+  }
+
+
+  function allow_remove()
+  {
+    /* Check if previously selected server is still available */
+    if($this->initially_was_account && !isset($this->goFonHomeServers[$this->goFonHomeServer])){
+      return sprintf(_("The previously selected asterisk home server (%s) is no longer available. Remove aborted."),preg_replace("/,/",", ",$this->goFonHomeServer));
     }
   }
 }

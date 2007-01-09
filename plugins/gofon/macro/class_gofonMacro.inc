@@ -442,9 +442,11 @@ class macro extends plugin
       $str = $this->remove_from_database(true);
       if($str){ 
         print_red($str);
+        return false;
       }
     }else{
-      print_red(_("Could not remove the macro entry from asterisk databases. Please check your asterisk database configurations and remove this entry from database manually, if necessary."));
+      print_red(_("Could not remove the macro entry from asterisk databases. Please check your asterisk database configurations."));
+      return false;
     }
 
     /* Remove phone macro */ 
