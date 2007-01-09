@@ -1173,7 +1173,10 @@ class phoneAccount extends plugin
 
     $this->attrs['goFonForwarding']=array();
 
-    $this->generate_mysql_entension_entries(true);
+    $str = $this->generate_mysql_entension_entries(true);
+    if(empty($str)){
+      print_red($str);
+    }
 
     if($this->attrs['goFonMacro']==""){
       $this->attrs['goFonMacro']=array();

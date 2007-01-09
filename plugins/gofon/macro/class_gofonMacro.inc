@@ -285,9 +285,9 @@ class macro extends plugin
       $tmp  = split(",", $s_linestr,3);
 
       /* Check if there are exactly 2 , */ 
-      if(substr_count($s_linestr,",") !=2){
-        return(sprintf(_("More than two ',' given in line : '%s'. Remember that parameters are seperated by '|'."),$i_linenum));
-      }
+#      if(substr_count($s_linestr,",") !=2){
+#        return(sprintf(_("More than two ',' given in line : '%s'. Remember that parameters are seperated by '|'."),$i_linenum));
+#      }
       /* Multiple () are not supproted currently ... */  
       if(substr_count($s_linestr,"(") >1 ){
         return(sprintf(_("More than one '(' is currently not supported. Line : '%s'."),$i_linenum));
