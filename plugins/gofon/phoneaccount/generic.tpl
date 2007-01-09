@@ -29,7 +29,7 @@
      <td>{$hardware_list}</td>
     </tr>
     <tr>
-     <td>{t}Home server{/t}
+     <td>{t}Home server{/t}{$must}
      </td>
      <td>
       <select name='goFonHomeServer' title='{t}Select the accounts home server{/t}'> 

@@ -43,7 +43,7 @@
 	</td>
 	</tr>
 	<tr>
-	<td><LABEL for="goFonHomeServer">{t}Home server{/t}</LABEL></td>
+	<td><LABEL for="goFonHomeServer">{t}Home server{/t}</LABEL>{$must}</td>
 	<td>
 		<select name='goFonHomeServer'>
 		 {html_options options=$goFonHomeServers selected=$goFonHomeServer}
