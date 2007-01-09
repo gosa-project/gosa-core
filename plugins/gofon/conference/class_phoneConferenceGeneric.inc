@@ -78,6 +78,7 @@ class conference extends plugin
     if(array_key_exists('config',$_SESSION) &&
        array_key_exists('SERVERS',$_SESSION['config']->data) &&
        array_key_exists('FON',$_SESSION['config']->data['SERVERS']) &&
+       count($_SESSION['config']->data['SERVERS']['FON']) &&
        is_callable("mysql_connect")
        ) {
 
@@ -301,6 +302,12 @@ class conference extends plugin
 
     if($this->is_number_used()){
       $message[] =  $this->is_number_used();
+    }
+
+    /* Check if previously selected server is still available */
+    if($this->initially_was_account && !isset($this->goFonHomeServers[$this->goFonHomeServer])){
+      $message[]= sprintf(_("The previously selected asterisk home server (%s) is no longer available."),preg_replace("/,/",", ",$this->goFonHomeServer));
+      return($message);
     }
 
     if((!empty($this->goFonPIN)||($this->goFonConferenceOption_P=="P"))&&($this->goFonConferenceOption_D=="d")){
