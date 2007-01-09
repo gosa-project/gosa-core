@@ -205,7 +205,7 @@ class phoneAccount extends plugin
       unset($tmp[0]);
 
       /* Check if makro has been removed */
-      if(!isset($this->macroarray[$this->macro])){
+      if(!isset($this->macros[$this->macro])){
         $this->macrostillavailable = false;
       }else{
         $this->macrostillavailable = true;
@@ -1141,6 +1141,16 @@ class phoneAccount extends plugin
   function save()
   {
     plugin::save();
+
+    /* Force saving macro again 
+     * This ensures that 
+     *  - the macro is available on the destiantion server.
+     *  - the macro saved is up to date on the destination server.
+     */
+    if(!empty($this->macro) && $this->macro != "none")  {
+      $macro_tab = new macrotabs($this->config,$this->config->data['TABS']['MACROTABS'], $this->macro);
+      $macro_tab -> save();
+    }
 
     /* Save arrays */
     $tmp_numbers = array();
