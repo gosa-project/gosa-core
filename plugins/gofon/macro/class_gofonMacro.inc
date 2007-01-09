@@ -151,16 +151,6 @@ class macro extends plugin
       $smarty->assign("goFonMacroVisibleChecked","");
     }
 
-    if(isset($_POST['goFonMacroVisible'])) {
-      $this->goFonMacroVisible= 1 ;
-      $smarty->assign("goFonMacroVisibleChecked"," checked ");
-    }else  {
-      if(isset($_POST['displayName'])){
-        $this->goFonMacroVisible= 0 ;
-        $smarty->assign("goFonMacroVisibleChecked","");
-      }
-    }
-    
     if($this->dn != "new"){
       $smarty->assign("disable_cn"," disabled ");
     }else{
@@ -357,6 +347,12 @@ class macro extends plugin
       /* The cn can't be changed if this entry is not new */
       if($this->dn!= "new"){
         $this->cn = $this->orig_cn;
+      }
+
+      if(isset($_POST['goFonMacroVisible'])) {
+        $this->goFonMacroVisible= 1 ;
+      }else  {
+        $this->goFonMacroVisible= 0 ;
       }
     }
   }
