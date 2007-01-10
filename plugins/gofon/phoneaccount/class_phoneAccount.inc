@@ -66,6 +66,13 @@ class phoneAccount extends plugin
       }
     }
 
+    /* Set uid */
+    if((isset($this->parent->by_object['user']->uid))&&(!empty($this->parent->by_object['user']->uid))){
+      $this->uid = $this->parent->by_object['user']->uid;
+    }
+    if((isset($this->parent->by_object['user']->cn))&&(!empty($this->parent->by_object['user']->cn))){
+      $this->cn  = $this->parent->by_object['user']->cn;
+    }
 
     /* Check server configurations 
      * Load all server configuration in $this->goFonHomeServers if available
@@ -1320,14 +1327,14 @@ class phoneAccount extends plugin
 
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(objectClass=goFonQueue)", array("member"));
+    $ldap->search("(&(objectClass=goFonQueue)(member=*))", array("member"));
     while($attr = $ldap->fetch()){
       if(in_array($this->dn,$attr['member'])){
         $new =new ogrouptabs($this->config, $this->config->data['TABS']['OGROUPTABS'],$attr['dn']);
         unset($new->by_object['ogroup']->memberList[$this->dn]);
         unset($new->by_object['ogroup']->member[$this->dn]);
         $new->save();
-        print_red(sprintf(_("Removed user '%s' from phone queue '%s'."),$this->uid,$new->by_object['ogroup']->attrs['cn']));
+        print_red(sprintf(_("Removed user '%s' from phone queue '%s'."),$this->uid,$new->by_object['ogroup']->cn));
       }
     }
     $ldap->cd($this->dn);
