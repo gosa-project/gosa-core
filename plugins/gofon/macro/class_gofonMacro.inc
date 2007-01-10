@@ -468,9 +468,6 @@ class macro extends plugin
   /*! Save to LDAP */
   function save()
   {
-    /* Post checks */
-    $this->execute();
-
     plugin::save();
     unset($this->attrs['base']);
 
