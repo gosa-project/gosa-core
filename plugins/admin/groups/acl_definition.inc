@@ -279,46 +279,45 @@ $ACLD['sambaAccount']=
 			"profilePath"		=> "samba2:profilePath",
 			"scriptPath" => "samba2:scriptPath",
 			"smbHome" => "samba2:smbHome",
-			"temporary_disable" => "samba2:temporary_disable",
-			 	        "sambaHomePath"		,//=> _("Home path"), 
-						"sambaHomeDrive"	,//=> _("Home drive"), 
-						"sambaDomainName"	,//=> _("Samba domain name"),
-						"sambaLogonScript"	,//=> _("Logon script"),
-				        "sambaProfilePath"	,//=> _("Profile path"),	 
+			"temporary_disable",
+			"sambaHomePath"		,//=> _("Home path"), 
+			"sambaHomeDrive"	,//=> _("Home drive"), 
+			"sambaDomainName"	,//=> _("Samba domain name"),
+			"sambaLogonScript"	,//=> _("Logon script"),
+			"sambaProfilePath"	,//=> _("Profile path"),	 
 
-						"sambaLogonTime",//	=> _("Limit Logon Time"),
-						"sambaLogoffTime",// 	=> _("Limit Logoff Time"), 
-						"sambaKickoffTime",// 	=> _("Account expiry"), 	
-						"sambaPwdCanChange",//	=> _("Can change password"),
-						"sambaPwdMustChange",//=> _("Password expiry"), 
-						"allow_pwchange"	,//=> _("Allow password change"),
-						"no_password_required",// => _("Login from windows client requires no password"),
-						"temporary_disable",// => _("Lock account"),
-						"sambaUserWorkstation",//=> _("Allow connection from these workstations only"),
+			"sambaLogonTime",//	=> _("Limit Logon Time"),
+			"sambaLogoffTime",// 	=> _("Limit Logoff Time"), 
+			"sambaKickoffTime",// 	=> _("Account expiry"), 	
+			"sambaPwdCanChange",//	=> _("Can change password"),
+			"sambaPwdMustChange",//=> _("Password expiry"), 
+			"allow_pwchange"	,//=> _("Allow password change"),
+			"no_password_required",// => _("Login from windows client requires no password"),
+			"temporary_disable",// => _("Lock account"),
+			"sambaUserWorkstation",//=> _("Allow connection from these workstations only"),
 
-						"connectclientdrives",//	=> _("Connect client drives at logon"),
-						"connectclientprinters",// => _("Connect client printers at logon"),
-						"defaultprinter",//	 	=> _("Default to main client printer"),
+			"connectclientdrives",//	=> _("Connect client drives at logon"),
+			"connectclientprinters",// => _("Connect client printers at logon"),
+			"defaultprinter",//	 	=> _("Default to main client printer"),
 
-						"shadow",//				=> _("Shadowing"),
-						"brokenconn",//			=> _("On broken or timed out"),
-						"reconn",//				=> _("Reconnect if disconnected"),
+			"shadow",//				=> _("Shadowing"),
+			"brokenconn",//			=> _("On broken or timed out"),
+			"reconn",//				=> _("Reconnect if disconnected"),
 
-						"inherit",//				=> _("Inherit client config")
-						"tslogin",//				=> _("Inherit client config")
-		
-						"CtxWFHomeDir",
-						"CtxWFHomeDirDrive",
-						"CtxWFProfilePath",
+			"inherit",//				=> _("Inherit client config")
+			"tslogin",//				=> _("Inherit client config")
 
-						"CtxMaxConnectionTime",
-						"CtxMaxDisconnectionTime",
-						"CtxMaxIdleTime",
+			"CtxWFHomeDir",
+			"CtxWFHomeDirDrive",
+			"CtxWFProfilePath",
 
-						"CtxInitialProgram",
-						"CtxWorkDirectory"
-				
-						) ;
+			"CtxMaxConnectionTime",
+			"CtxMaxDisconnectionTime",
+			"CtxMaxIdleTime",
+
+			"CtxInitialProgram",
+			"CtxWorkDirectory"
+			) ;
 
 $ACLD['netatalk']=	array(
 			"netatalkShare",
