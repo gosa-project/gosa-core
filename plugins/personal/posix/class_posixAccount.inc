@@ -1060,9 +1060,6 @@ class posixAccount extends plugin
       }
     }
 
-    /* FIXME: NEED review of this section */
-    /* Need to check shadowExpire separately */
-
     /* 
      * If shadowExpire is not enabled in the template, it's a UNIX timestamp - so don't convert it to seconds.
      * The check is a hack - if difference between timestamp generated above and here is max 1 day.
