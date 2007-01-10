@@ -610,6 +610,11 @@ class phoneAccount extends plugin
           "fullname"    => $CNname,
           "email"       => $s_mail);
 
+      /* Set pager number if available */
+      if(isset($this->parent->by_object['user']->pager)){
+        $voice_data_array['pager']   = $this->parent->by_object['user']->pager;
+      }
+
       /* Check if there is already an entry in sip_users for this uid */
       $rid = mysql_query("SELECT * FROM ".$a_New['VOICE_TABLE']." WHERE customer_id='".$customer_id."';\n",$new_connection);
       if(mysql_affected_rows($new_connection)){
@@ -641,7 +646,6 @@ class phoneAccount extends plugin
          * Insert Voice mail entry  
          **********************/
         $voice_data_array['context'] = "default";
-        $voice_data_array['pager']   = "";
   
         /* There is currently no voice mail entry for this user. 
          * We should create one 
