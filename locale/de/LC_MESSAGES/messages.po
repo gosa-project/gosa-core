@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-01-10 09:13+0100\n"
-"PO-Revision-Date: 2007-01-10 09:17+0100\n"
+"PO-Revision-Date: 2007-01-10 09:20+0100\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: Deutsch <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2427,13 +2427,13 @@ msgstr "Bitte geben Sie eine gültige Seriennummer ein!"
 #: plugins/personal/environment/class_hotplugDialog.inc:140
 msgid "Please specify a valid vendor ID. (2 byte hex like '0xFFFF')"
 msgstr ""
-"Bitte geben Sie eine gültige Hersteller ID an (2 Byte, hexadezimal, z.B. "
+"Bitte geben Sie eine gültige Hersteller-ID an (2 Byte, hexadezimal, z.B. "
 "0xFFFF)"
 
 #: plugins/personal/environment/class_hotplugDialog.inc:143
 msgid "Please specify a valid product ID. (2 byte hex like '0xFFFF')"
 msgstr ""
-"Bitte geben Sie eine gültige Produkt ID ein (2 Byte, hexadezimal, z.B. "
+"Bitte geben Sie eine gültige Produkt-ID ein (2 Byte, hexadezimal, z.B. "
 "0xFFFF)"
 
 #: plugins/personal/environment/class_hotplugDialog.inc:148
