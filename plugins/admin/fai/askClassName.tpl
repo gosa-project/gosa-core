@@ -29,7 +29,7 @@
    <tr>
      <td>&nbsp;</td>
      <td>
-      {t}Class name{/t}&nbsp;<input type="text"	 name="UseTextInputName" value="" style="width:120px;">
+      {t}Class name{/t}&nbsp;<input type="text"	 name="UseTextInputName" value="{$ClassName}" style="width:120px;" >
      </td>
     </tr>
    </table>
