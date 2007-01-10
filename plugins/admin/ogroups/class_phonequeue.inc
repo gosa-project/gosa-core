@@ -530,10 +530,22 @@ class phonequeue extends plugin
       $queueuser =array();
       $i = 0;
       $parent = $this->parent->by_object['ogroup'];
+
+      
+      $ldap = $this->config->get_ldap_link();
       foreach($parent->memberList as $member => $mem_data){
-        $obj = $parent->objcache[$member];
-        if(isset($obj['objectClass'])){
-          if(in_array("goFonAccount",$obj['objectClass'])){
+        $ldap->cat($member,array("goFonHomeServer","objectClass","dn","uid"));
+        if($ldap->count()){
+
+          $obj = $ldap->fetch();
+
+          /* Calculate server and account dependencies */
+          $is_acc = in_array("goFonAccount",$obj['objectClass']);
+          $is_home= isset($obj['goFonHomeServer'][0]) && $obj['goFonHomeServer'][0] == $this->goFonHomeServer; 
+
+          /* Append user to list of queue member,
+           *  only if user has phoneAccount extension && is on same home server */
+          if($is_acc && $is_home){
             $i ++ ;
             $queueuser[$i]['queue_name']  = $this->cn; 
             $queueuser[$i]['interface']   = "SIP/".$obj['uid'][0]; 

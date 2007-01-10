@@ -1,3 +1,7 @@
+<p style='padding-left:7px;'>
+ <img class='center' src='images/lamp.png' alt='!'>&nbsp;<b>{t}Only users with the same asterisk home server will be included to this queue.{/t}</b>
+</p>
+
 <table summary="{t}Queue Settings{/t}" style="width: 100%; vertical-align: top; text-align: left;" border="0" cellpadding="4">
 <tr>
 <td valign='top'>
