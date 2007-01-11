@@ -196,7 +196,13 @@ class phonequeue extends plugin
 
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
-      $this->is_account= !$this->is_account;
+
+      /* Onyl change account state if allowed */
+      if($this->is_account && $this->acl == "#all#"){
+        $this->is_account= !$this->is_account;
+      }elseif(!$this->is_account && chkacl($this->acl,"create") == ""){
+        $this->is_account= !$this->is_account;
+      }
     }
 
     /* Show tab dialog headers */
@@ -767,10 +773,12 @@ class phonequeue extends plugin
     plugin::save_object();  
     if(isset($_POST['phonenumber'])){
       foreach(array("goFonDialOption_t","goFonDialOption_T","goFonDialOption_h","goFonDialOption_r","goFonDialOption_H","goFonMusiconHold") as $val){
-        if(isset($_POST[$val])){
-          $this->$val = $_POST[$val];
-        }else{
-          $this->$val = false;
+        if(chkacl($this->acl,$val) == "") {
+          if(isset($_POST[$val])){
+            $this->$val = $_POST[$val];
+          }else{
+            $this->$val = false;
+          }
         }
       }
       if(isset($_POST['goFonQueueAnnounceHoldtime'])){

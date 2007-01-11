@@ -114,10 +114,34 @@ class ogroupManagement extends plugin
     /* Only perform copy / paste if it is enabled
      */
 
-    /* Display the copy & paste dialog, if it is currently open */
-    $ret = $this->copyPasteHandling($s_action,$s_entry);
-    if($ret){
-      return($ret);
+
+    /********************
+      Copy & Paste Handling  ...
+     ********************/
+
+    /* Only perform copy&paste requests if it is enabled
+     */
+    /* Get 'dn' from posted 'uid' */
+    if(in_array_ics($s_action,array("editPaste","cut","copy"))){
+
+      if(isset($this->ogrouplist[trim($s_entry)]['dn'])){
+        $dn= $this->ogrouplist[trim($s_entry)]['dn'];
+      }else{
+        $dn = $this->DivListOGroup->selectedBase;
+      }
+
+      $acl= get_permissions ($dn, $this->ui->subtreeACL);
+      $acl= get_module_permission($acl, "ogroup", $dn);
+
+      if($acl != "#all#"){
+        print_red (_("You are not allowed to execute this method!"));
+      }else{
+        /* Display the copy & paste dialog, if it is currently open */
+        $ret = $this->copyPasteHandling($s_action,$s_entry);
+        if($ret){
+          return($ret);
+        }
+      }
     }
 
     /****************

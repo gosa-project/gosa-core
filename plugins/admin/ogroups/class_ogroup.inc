@@ -110,7 +110,7 @@ class ogroup extends plugin
       $this->reload();
     }else{
       /* Delete objects from group */
-      if (isset($_POST['delete_membership']) && isset($_POST['members'])){
+      if (isset($_POST['delete_membership']) && isset($_POST['members'])  && chkacl($this->acl,"gosaGroupObjects") == ""){
         foreach ($_POST['members'] as $value){
           $this->objects["$value"]= $this->memberList[$value];
           unset ($this->memberList["$value"]);
@@ -122,7 +122,7 @@ class ogroup extends plugin
       }
 
       /* Add objects to group */
-      if (isset($_POST['add_object_finish']) && isset($_POST['objects'])){
+      if (isset($_POST['add_object_finish']) && isset($_POST['objects'])  && chkacl($this->acl,"gosaGroupObjects") == ""){
         foreach ($_POST['objects'] as $value){
           $this->memberList["$value"]= $this->objects[$value];
           $this->member["$value"]= $value;
@@ -150,7 +150,7 @@ class ogroup extends plugin
     }
 
     /* Delete objects from group */
-    if (isset($_POST['delete_membership']) && isset($_POST['members'])){
+    if (isset($_POST['delete_membership']) && isset($_POST['members']) && chkacl($this->acl,"gosaGroupObjects") == ""){
       foreach ($_POST['members'] as $value){
         if(isset($this->memberList[$value])){
           $this->objects["$value"]= $this->memberList[$value];
@@ -183,7 +183,7 @@ class ogroup extends plugin
     /* Base select dialog */
     $once = true;
     foreach($_POST as $name => $value){
-      if(preg_match("/^chooseBase/",$name) && $once){
+      if(preg_match("/^chooseBase/",$name) && $once && chkacl($this->acl,"base") == ""){
         $once = false;
         $this->dialog = new baseSelectDialog($this->config);
         $this->dialog->setCurrentBase($this->base);
@@ -206,7 +206,7 @@ class ogroup extends plugin
     }
 
     /* Add objects? */
-    if (isset($_POST["edit_membership"])){
+    if (isset($_POST["edit_membership"])  && chkacl($this->acl,"gosaGroupObjects") == ""){
       $this->group_dialog= TRUE;
       $this->dialog= TRUE;
     }
@@ -271,10 +271,9 @@ class ogroup extends plugin
     }
 
     /* Bases / Departments */
-   
-      if (isset($_POST['base'])){
-        $this->base= $_POST['base'];
-      }
+    if (isset($_POST['base']) && chkacl($this->acl,"base") == ""){
+      $this->base= $_POST['base'];
+    }
 
     /* Assemble combine string */
     if ($this->gosaGroupObjects == "[]"){
@@ -338,7 +337,6 @@ class ogroup extends plugin
       if (chkacl ($this->acl, "base") == "" && isset($_POST["base"])){
         $this->base= $_POST["base"];
       }
-
     }
   }
 
@@ -609,7 +607,7 @@ class ogroup extends plugin
     $ui= get_userinfo();
     $acl= get_permissions ($new_dn, $ui->subtreeACL);
     $acl= get_module_permission($acl, "group", $new_dn);
-    if (chkacl($acl, "create") != ""){
+    if (chkacl($acl, "create") != "" && $this->dn=="new"){
       $message[]= _("You have no permissions to create a group on this 'Base'.");
     }
 
