@@ -287,6 +287,8 @@ $ACLD['sambaAccount']=
 			"sambaLogonScript"	,//=> _("Logon script"),
 			"sambaProfilePath"	,//=> _("Profile path"),	 
 
+			"sambaLogonHours",
+
 			"sambaLogonTime",//	=> _("Limit Logon Time"),
 			"sambaLogoffTime",// 	=> _("Limit Logoff Time"), 
 			"sambaKickoffTime",// 	=> _("Account expiry"), 	
