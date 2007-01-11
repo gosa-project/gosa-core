@@ -655,7 +655,8 @@ class user extends plugin
       /* Save base and pw_storage, since these are no LDAP attributes */
       if (isset($_POST['base'])){
         foreach(array("base", "pw_storage") as $val){
-          if(isset($_POST[$val])){
+
+          if(isset($_POST[$val]) && chkacl ($this->acl, "$val") == ""){
             $data= validate($_POST[$val]);
             if ($data != $this->$val){
               $this->is_modified= TRUE;
