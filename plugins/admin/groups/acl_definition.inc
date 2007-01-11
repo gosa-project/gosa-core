@@ -389,7 +389,7 @@ $ACLD['opengwAccount']			=array("create"	=>"Enable/disable account",
 $ACLD['systems']			=array("systems" 		);
 $ACLD['FAIclass']			=array("FAIclass" 		);
 
-$ACLD['phoneAccount'] = array("create","goFonDeliveryMode",
+$ACLD['phoneAccount'] = array("create","goFonDeliveryMode","goFonHomeServer",
       "goFonHardware","goFonPIN","goFonVoicemailPIN","telephoneNumber", "goFonMacro");
 
 $ACLD['nagiosAccount'] = array("NagiosAlias"

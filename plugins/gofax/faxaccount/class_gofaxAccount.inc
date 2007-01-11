@@ -16,7 +16,7 @@ class gofaxAccount extends plugin
   var $departments;
 
   /* Fax attributes */
-  var $goFaxDeliveryMode= "";
+  var $goFaxDeliveryMode= "0";
   var $facsimileTelephoneNumber= "";
   var $goFaxIsEnabled= 1;
   var $goFaxPrinter= "";
@@ -100,12 +100,19 @@ class gofaxAccount extends plugin
           "regex"           => "");
       register_global("faxfilter", $faxfilter);
     }
+    $this->ui = get_userinfo();
   }
 
   function execute()
   {
     /* Call parent execute */
     plugin::execute();
+
+
+    $acl= get_permissions ($this->ui->dn, $this->ui->subtreeACL);
+    $editacl= get_module_permission($acl, "gofax", $this->dn);
+    $this->acl = $editacl;
+
     /* Hickert : 11.11.05
      * Added to be able to handle department selection in divSelelect
      */
