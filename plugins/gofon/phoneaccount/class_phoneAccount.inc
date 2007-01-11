@@ -13,7 +13,7 @@ class phoneAccount extends plugin
   var $goFonFormat            = "wav";
   var $goFonPIN               = "";
   var $goFonVoicemailPIN      = "";
-  var $goFonDeliveryMode      = "";
+  var $goFonDeliveryMode      = "[]";
   var $phoneNumbers           = array();
   var $mail                   = "";
   var $hardware_list          = array();
