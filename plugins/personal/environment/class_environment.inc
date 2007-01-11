@@ -393,18 +393,14 @@ class environment extends plugin
       $smarty->assign("useProfileCHK"," checked ");
     }
 
- 
-    $smarty->assign("useProfileACL","");
-    if($this->acl != "#none#"){
-      $smarty->assign("useProfileACL","");
-      $smarty->assign("gotoProfileFlag_CACL"," ");
-      $smarty->assign("gotoProfileQuotaACL"," ");
-    }else{
-      $smarty->assign("gotoProfileFlag_CACL"," disabled ");
-      $smarty->assign("useProfileACL","disabled");
-      $smarty->assign("gotoProfileServer"," disabled ");
-      $smarty->assign("gotoProfileQuotaACL"," disabled ");
-    }
+
+    
+    $smarty->assign("useProfileACL", chkacl($this->acl,"gotoProfileServer"));
+
+    $smarty->assign("gotoProfileQuotaACL" , chkacl($this->acl,"gotoProfileQuota"));
+    $smarty->assign("gotoProfileFlag_CACL", chkacl($this->acl,"gotoProfileFlags"))  ;
+    $smarty->assign("gotoProfileServerACL", chkacl($this->acl,"gotoProfileServer"))  ;
+
 
     /* HANDLE Profile Settings here 
      * Assign available Quota and resolution settings
@@ -453,7 +449,7 @@ class environment extends plugin
     $_SESSION['current_class_for_help'] = get_class($this);
  
     /* Open Management Dialog */
-    if(isset($_POST['KioskManagementDialog'])){
+    if(isset($_POST['KioskManagementDialog']) && chkacl($this->acl,"gotoKioskProfile") == ""){
       $this->dialog = new kioskManagementDialog($this->config,$this->dn,$this->newKioskProfiles); 
       $this->dialog->parent= $this;
       $this->dialog->acl = $this->acl;
@@ -494,8 +490,9 @@ class environment extends plugin
       $this->dialog= NULL;
     }
    
-    /* Check Edit Del New Posts for a selected LogonScript */ 
-    if(isset($_POST['gotoLogonScriptNew'])||isset($_POST['gotoLogonScriptEdit'])||isset($_POST['gotoLogonScriptDel'])){
+    /* Check Edit Del New Posts for a selected LogonScript */
+    if((chkacl($this->acl,"gotoLogonScript") == "") && 
+        (isset($_POST['gotoLogonScriptNew'])||isset($_POST['gotoLogonScriptEdit'])||isset($_POST['gotoLogonScriptDel']))){
 
       /* New Logon Script: Open an edit dialog, we don't need a $_POST['gotoLogonScript'] here.
        * In this case we create a new Logon Script.
@@ -541,7 +538,7 @@ class environment extends plugin
     /* if $_POST['gotoShareAdd'] is set, we will try to add a new entry 
      * This entry will be, a combination of mountPoint and sharedefinitions 
      */
-    if(isset($_POST['gotoShareAdd'])){
+    if(isset($_POST['gotoShareAdd']) && chkacl($this->acl,"gotoShare") ==""){
       /* We assign a share to this user, if we don't know where to mount the share */
       if((!isset($_POST['gotoShareMountPoint']))||(empty($_POST['gotoShareMountPoint']))||(preg_match("/[\|]/i",$_POST['gotoShareMountPoint']))){
         print_red(_("You must specify a valid mount point."));
@@ -575,7 +572,7 @@ class environment extends plugin
      */
     $once = true;
     foreach($_POST as $name => $value){
-      if((preg_match("/^gotoShareDel_/",$name)) && ($once)){
+      if((preg_match("/^gotoShareDel_/",$name)) && ($once) && chkacl($this->acl,"gotoShare") == ""){
         $once = false;  
         $key  = preg_replace("/^gotoShareDel_/","",$name);
         $key  = preg_replace("/_+[xy]$/","",$key);
@@ -592,7 +589,7 @@ class environment extends plugin
         }
 
       }
-      if((preg_match("/^gotoShareResetPwd_/",$name)) && ($once)){
+      if((preg_match("/^gotoShareResetPwd_/",$name)) && ($once) && chkacl($this->acl,"gotoShare") == ""){
         $once = false;
         $key  = preg_replace("/^gotoShareResetPwd_/","",$name);
         $key  = preg_replace("/_+[xy]$/","",$key);
@@ -659,7 +656,7 @@ class environment extends plugin
      */
 
     /* If there is a new entry wanted, open a new entry by initilising the dialog */
-    if(isset($_POST['gotoHotplugDeviceNew'])){
+    if(isset($_POST['gotoHotplugDeviceNew']) && chkacl($this->acl,"gotoHotplugDevice") == ""){
       $this->dialog = new hotplugDialog($this->config,$this->dn);
       $this->is_dialog = true;
     }
@@ -672,7 +669,7 @@ class environment extends plugin
     }
 
     /* There are already defined hotplugs from other users we could use */
-    if(isset($_POST['gotoHotplugDeviceUse'])){
+    if(isset($_POST['gotoHotplugDeviceUse']) && chkacl($this->acl,"gotoHotplugDevice") == ""){
       $this->dialog = new hotplugDialog($this->config,$this->dn,true);
       $this->is_dialog = true;
     }
@@ -717,7 +714,7 @@ class environment extends plugin
      */ 
     
     /* First handle Add Post. Open a dialog that allows us to select a printer or two */ 
-    if(isset($_POST['gotoPrinterAdd'])){
+    if(isset($_POST['gotoPrinterAdd'])  && chkacl($this->acl,"gotoPrinter") == ""){
       $this->is_dialog=true;
       $this->dialog = new selectPrinterDialog($this->config,$this->dn,$this->gotoPrinter);
     }
@@ -749,37 +746,39 @@ class environment extends plugin
         $this->dialog   =NULL;
       }
     }
-  
-    if((isset($_POST['gotoPrinterDel']))&&(isset($_POST['gotoPrinterSel']))&&(!empty($_POST['gotoPrinterSel']))){
-      $printer = $_POST['gotoPrinterSel'];
-      foreach($printer as $pname){
-        unset($this->gotoPrinter[$pname]);
-      }
-    }
-
-    if((isset($_POST['gotoPrinterEdit']))&&(isset($_POST['gotoPrinterSel']))&&(!empty($_POST['gotoPrinterSel']))){
-
-
-      $printers = $_POST['gotoPrinterSel'];
-
-      foreach($printers as $printer){
-        if($this->gotoPrinter[$printer]['mode']=="user"){
-          $this->gotoPrinter[$printer]['mode']="admin";
-        }else{
-          $this->gotoPrinter[$printer]['mode']="user";
+ 
+    
+    /* So some printer operations if allowed */
+    if(chkacl($this->acl,"gotoPrinter")==""){ 
+      if((isset($_POST['gotoPrinterDel']))&&(isset($_POST['gotoPrinterSel']))&&(!empty($_POST['gotoPrinterSel']))){
+        $printer = $_POST['gotoPrinterSel'];
+        foreach($printer as $pname){
+          unset($this->gotoPrinter[$pname]);
         }
       }
-    }
 
-    if(!$this->is_group){
-      if((isset($_POST['gotoPrinterDefault']))&&(isset($_POST['gotoPrinterSel']))&&(!empty($_POST['gotoPrinterSel']))){
-        if ($this->gosaDefaultPrinter == $_POST['gotoPrinterSel'][0]){
-          $this->gosaDefaultPrinter= "";
-        } else {
-          $this->gosaDefaultPrinter= $_POST['gotoPrinterSel'][0];
+      if((isset($_POST['gotoPrinterEdit']))&&(isset($_POST['gotoPrinterSel']))&&(!empty($_POST['gotoPrinterSel']))){
+        $printers = $_POST['gotoPrinterSel'];
+
+        foreach($printers as $printer){
+          if($this->gotoPrinter[$printer]['mode']=="user"){
+            $this->gotoPrinter[$printer]['mode']="admin";
+          }else{
+            $this->gotoPrinter[$printer]['mode']="user";
+          }
         }
       }
-    }  
+
+      if(!$this->is_group){
+        if((isset($_POST['gotoPrinterDefault']))&&(isset($_POST['gotoPrinterSel']))&&(!empty($_POST['gotoPrinterSel']))){
+          if ($this->gosaDefaultPrinter == $_POST['gotoPrinterSel'][0]){
+            $this->gosaDefaultPrinter= "";
+          } else {
+            $this->gosaDefaultPrinter= $_POST['gotoPrinterSel'][0];
+          }
+        }
+      }  
+    }
 
     $smarty->assign("gotoPrinter",$this->printOutPrinterDevices());
     $smarty->assign("gotoPrinterKeys",array_flip($this->printOutPrinterDevices()));
@@ -798,13 +797,6 @@ class environment extends plugin
         $this->gotoKioskProfile = 'none';
       }
       return($disp);
-    }
-    if($this->acl != "#none#"){
-      $smarty->assign("useProfileACL","");
-    }else{
-      $smarty->assign("gotoProfileFlag_CACL"," disabled ");
-      $smarty->assign("gotoProfileServerACL"," disabled ");
-      $smarty->assign("gotoProfileQuotaACL"," disabled ");
     }
 
     if(!$this->useProfile){
@@ -862,32 +854,30 @@ class environment extends plugin
      */
  
     if(isset($_POST['iamposted'])){
-      if(isset($_POST['useProfile'])){
-        $this->useProfile = true;
-      }else{
-        $this->useProfile = false;
+
+      if(chkacl($this->acl,"gotoProfileServer") == ""){
+        if(isset($_POST['useProfile'])){
+          $this->useProfile = true;
+        }else{
+          $this->useProfile = false;
+        }
       }
-      if(isset($_POST['gotoProfileFlag_C'])){
-        $this->gotoProfileFlag_C = $_POST['gotoProfileFlag_C'];
-      }else{
-        $this->gotoProfileFlag_C = false;
-      }
-      if(isset($_POST['gotoProfileFlag_L'])){
-        $this->gotoProfileFlag_L = $_POST['gotoProfileFlag_L'];
-      }else{
-        $this->gotoProfileFlag_L = false;
+
+      if(chkacl($this->acl,"gotoProfileFlags") == ""){
+        if(isset($_POST['gotoProfileFlag_C'])){
+          $this->gotoProfileFlag_C = $_POST['gotoProfileFlag_C'];
+        }else{
+          $this->gotoProfileFlag_C = false;
+        }
+        if(isset($_POST['gotoProfileFlag_L'])){
+          $this->gotoProfileFlag_L = $_POST['gotoProfileFlag_L'];
+        }else{
+          $this->gotoProfileFlag_L = false;
+        }
       }
 
       $tmp= $this->gosaDefaultPrinter;
       plugin::save_object();
-      foreach($this->attributes as $s_attr){
-        if(in_array($s_attr,array("gotoShares","gotoHotplugDevices","gotoPrinter","gotoLogonScripts","uid"))) continue;
-        if(isset($_POST[$s_attr])){
-          $this->$s_attr = $_POST[$s_attr];
-        }else{
-          $this->$s_attr = false;
-        }
-      }
       $this->gosaDefaultPrinter= $tmp;
     }
   }
