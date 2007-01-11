@@ -519,7 +519,7 @@ class workstartup extends plugin
     }
 
     /* Add module */
-    if (isset ($_POST['add_module'])){
+    if (isset ($_POST['add_module']) ){
       if ($_POST['module'] != "" && chkacl ($this->acl, "gotoModule") == ""){
         $this->add_list ($this->gotoModules, $_POST['module']);
       }
@@ -533,7 +533,7 @@ class workstartup extends plugin
     }
     
     /* FAI class management */
-    if($this->fai_activated){
+    if($this->fai_activated && chkacl($this->acl,"FAIclass") == ""){
 
       if((isset($_POST['AddClass']))&&(isset($_POST['FAIclassesSel']))){
         $found = 0 ; 
@@ -639,7 +639,7 @@ class workstartup extends plugin
     /* if $_POST['gotoShareAdd'] is set, we will try to add a new entry
      * This entry will be, a combination of mountPoint and sharedefinitions
      */
-    if(isset($_POST['gotoShareAdd'])){
+    if(isset($_POST['gotoShareAdd']) && chkacl($this->acl,"gotoShare") ==""){
       /* We assign a share to this user, if we don't know where to mount the share */
       if((!isset($_POST['gotoShareMountPoint']))||(empty($_POST['gotoShareMountPoint']))||(preg_match("/[\|]/i",$_POST['gotoShareMountPoint']))){
         print_red(_("You must specify a valid mount point."));
@@ -657,7 +657,7 @@ class workstartup extends plugin
     /* if the Post  gotoShareDel is set, someone asked GOsa to delete the selected entry (if there is one selected)
      * If there is no defined share selected, we will abort the deletion without any message
      */
-    if((isset($_POST['gotoShareDel']))&&(isset($_POST['gotoShare']))){
+    if((isset($_POST['gotoShareDel']))&&(isset($_POST['gotoShare'])) && chkacl($this->acl,"gotoShare") ==""){
       unset($this->gotoShares[$_POST['gotoShare']]);
     }
 
