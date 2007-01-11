@@ -126,9 +126,26 @@ class groupManagement extends plugin
 
     /* Only perform copy&paste requests if it is enabled
      */
-    if($this->CopyPasteHandler){
-      if($str = $this->copyPasteHandling($s_action,$s_entry)){
-        return $str;
+    /* Get 'dn' from posted 'uid' */
+    if(in_array_ics($s_action,array("editPaste","cut","copy"))){
+
+      if(isset($this->grouplist[trim($s_entry)]['dn'])){
+        $dn= $this->grouplist[trim($s_entry)]['dn'];
+      }else{
+        $dn = $this->DivListGroup->selectedBase;
+      }
+
+      $acl= get_permissions ($dn, $this->ui->subtreeACL);
+      $acl= get_module_permission($acl, "group", $dn);
+
+      if($acl != "#all#"){
+        print_red (_("You are not allowed to execute this method!"));
+      }else{
+        /* Display the copy & paste dialog, if it is currently open */
+        $ret = $this->copyPasteHandling($s_action,$s_entry);
+        if($ret){
+          return($ret);
+        }
       }
     }
 

@@ -112,7 +112,13 @@ class userManagement extends plugin
 
     /* Get 'dn' from posted 'uid' */
     if(in_array_ics($s_action,array("editPaste","cut","copy"))){
-      $dn= $this->list[trim($s_entry)]['dn'];
+
+      if(isset($this->list[trim($s_entry)]['dn'])){
+        $dn= $this->list[trim($s_entry)]['dn'];
+      }else{
+        $dn = $this->DivListUsers->selectedBase;
+      }
+
       $acl= get_permissions ($dn, $this->ui->subtreeACL);
       $acl= get_module_permission($acl, "user", $dn);
 
