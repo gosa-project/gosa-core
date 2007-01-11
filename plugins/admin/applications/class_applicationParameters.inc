@@ -15,6 +15,7 @@ class applicationParameters extends plugin
   var $CopyPasteVars = array("option_name","option_value");
   var $attributes= array("gosaApplicationParameter");
   var $objectclasses= array();
+var $ui;
 
   function applicationParameters ($config, $dn= NULL, $parent= NULL)
   {
@@ -35,6 +36,7 @@ class applicationParameters extends plugin
 	} else {
 		$this->is_account= FALSE;
 	}
+	$this->ui = get_userinfo();
   }
 
   function execute()
@@ -42,8 +44,11 @@ class applicationParameters extends plugin
 	/* Call parent execute */
 	plugin::execute();
 
+      	$acl= get_permissions ($this->dn, $this->ui->subtreeACL);
+      	$this->acl= get_module_permission($acl, "application", $this->dn);
+
 	/* Do we need to flip is_account state? */
-	if (isset($_POST['modify_state'])){
+	if (isset($_POST['modify_state']) && chkacl($this->acl,"gotoLogonScript")==""){
 		$this->is_account= !$this->is_account;
 	}
 
@@ -68,22 +73,25 @@ class applicationParameters extends plugin
 		$this->option_value[$i]= "";
 	}
 
-	/* Remove value from list */
-	for ($i= 0; $i<count($this->option_name); $i++){
-		if (isset($_POST["remove$i"])){
-			$k= 0;
-			$on= array();
-			$ov= array();
-			for ($j= 0; $j<count($this->option_name); $j++){
-				if ($j != $i){
-					$on[$k]= $this->option_name[$j];
-					$ov[$k]= $this->option_value[$j];
-					$k++;
+	if(chkacl($this->acl,"gotoLogonScript") == ""){
+
+		/* Remove value from list */
+		for ($i= 0; $i<count($this->option_name); $i++){
+			if (isset($_POST["remove$i"])){
+				$k= 0;
+				$on= array();
+				$ov= array();
+				for ($j= 0; $j<count($this->option_name); $j++){
+					if ($j != $i){
+						$on[$k]= $this->option_name[$j];
+						$ov[$k]= $this->option_value[$j];
+						$k++;
+					}
 				}
+				$this->option_name= $on;
+				$this->option_value= $ov;
+				break;
 			}
-			$this->option_name= $on;
-			$this->option_value= $ov;
-			break;
 		}
 	}
 
@@ -146,15 +154,17 @@ class applicationParameters extends plugin
   /* Save data to object */
   function save_object()
   {
-	if (isset($_POST['option0'])){
-		for ($i= 0; $i<count($this->option_name); $i++){
-			$this->option_name[$i]= $_POST["option$i"];
-			$this->option_value[$i]= "";
-			if ($_POST["value$i"] != ""){
-				$this->option_value[$i]= $_POST["value$i"];
-			}
-		}
-	}
+	  if(chkacl($this->acl,"gotoLogonScript") == ""){
+		  if (isset($_POST['option0'])){
+			  for ($i= 0; $i<count($this->option_name); $i++){
+				  $this->option_name[$i]= $_POST["option$i"];
+				  $this->option_value[$i]= "";
+				  if ($_POST["value$i"] != ""){
+					  $this->option_value[$i]= $_POST["value$i"];
+				  }
+			  }
+		  }
+	  }
   }
 
 

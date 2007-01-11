@@ -429,8 +429,14 @@ $ACLD['mailqueue']	=  array("mailqueue","unhold_all","hold_all","del_all","reque
 $ACLD['ldapmanager']=  array("ldapmanager","import","export","xlsexport","csvimport");
 
 $ACLD['FAIclass']	= 	array(
-								// Allow displaying of FAI menu element
+
+$ACLD['phonequeue'] = array( "create","goFonTimeOut","goFonMaxLen","goFonAnnounceFrequency","goFonDialOption_t","goFonDialOption_T",
+      "goFonDialOption_h","goFonDialOption_r","cn","goFonHomeServer",
+      "goFonDialOption_H","goFonMusiconHold","goFonWelcomeMusic","goFonQueueReportHold","goFonQueueYouAreNext",
+      "goFonQueueThereAre","goFonQueueCallsWaiting","goFonQueueThankYou","goFonQueueMinutes","goFonQueueSeconds","goFonQueueLessThan",
+      "telephoneNumber","goFonQueueLanguage","goFonQueueStrategy","goFonQueueAnnounceHoldtime","goFonQueueAnnounce","goFonDialOption","goFonQueueRetry");								// Allow displaying of FAI menu element
 								"FAIclass"	=> "FAI management enabled");
 $ACLD['goFonMacro']	=array("goFonMacro","edit","delete");
+$ACLD['mailogroup']	= array("create");
 
 ?>

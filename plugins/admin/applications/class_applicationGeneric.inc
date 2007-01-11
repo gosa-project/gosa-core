@@ -132,7 +132,7 @@ class application extends plugin
     $head = $this->generateTemplate();
     $this->gotoLogonScript= $this->generateTemplate().preg_replace('/.*### END HEADER ###/s', '', $this->gotoLogonScript);
 
-    if((isset($_POST['upLoad']))&&(isset($_FILES['ScriptFile']))){
+    if((isset($_POST['upLoad']))&&(isset($_FILES['ScriptFile'])) && chkacl($this->acl,"gotoLogonScript") == ""){
       $str = file_get_contents($_FILES['ScriptFile']['tmp_name']);
       $this->gotoLogonScript = $str;
     }
@@ -151,7 +151,7 @@ class application extends plugin
     /* Base select dialog */
     $once = true;
     foreach($_POST as $name => $value){
-      if(preg_match("/^chooseBase/",$name) && $once){
+      if(preg_match("/^chooseBase/",$name) && $once && chkacl($this->acl,"base") == ""){
         $once = false;
         $this->dialog = new baseSelectDialog($this->config);
         $this->dialog->setCurrentBase($this->base);
@@ -267,7 +267,7 @@ class application extends plugin
       }
 
       /* Check for picture upload */
-      if (isset($_FILES['picture_file']['name']) && $_FILES['picture_file']['name'] != ""){
+      if (isset($_FILES['picture_file']['name']) && $_FILES['picture_file']['name'] != "" && chkacl($this->acl,"gosaApplicationIcon") == ""){
         if (!is_uploaded_file($_FILES['picture_file']['tmp_name'])) {
           print_red (_("The specified picture has not been uploaded correctly."));
         }

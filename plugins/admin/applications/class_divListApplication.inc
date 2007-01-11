@@ -126,6 +126,9 @@ class divListApplication extends MultiSelectWindow
 
     foreach($list as $key => $val){
 
+      $acl= get_permissions ($val['dn'], $this->ui->subtreeACL);
+      $acl= get_module_permission($acl, "application", $val['dn']);
+
       /* Get state */
       $state = "";
       if(isset($val['FAIstate'])){
@@ -137,20 +140,28 @@ class divListApplication extends MultiSelectWindow
 
       /* Create action icons */
       $actions = "";
-      if(($this->parent->CopyPasteHandler) && (!$is_freezed)){
-        $actions.= "<input class='center' type='image'
-          src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+
+      if($acl == "#all#"){
+        if(($this->parent->CopyPasteHandler) && (!$is_freezed)){
+          $actions.= "<input class='center' type='image'
+            src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+        }
+        if($this->parent->CopyPasteHandler){
+          $actions.= "<input class='center' type='image'
+            src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
+        }
       }
-      $actions.= "<input class='center' type='image'
-        src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
     
       $actions.= "<input class='center' type='image'
         src='images/edit.png' alt='"._("edit")."' name='appl_edit_%KEY%' title='"._("Edit this entry")."'>";
       if($is_freezed){
         $actions.= "<img src='images/empty.png' width='16' alt='&nbsp;' class='center'>";
       }else{
-        $actions.= "<input class='center' type='image'
-          src='images/edittrash.png' alt='"._("delete")."' name='appl_del_%KEY%' title='"._("Delete this entry")."'>";
+
+        if(chkacl($acl,"delete") == ""){
+          $actions.= "<input class='center' type='image'
+            src='images/edittrash.png' alt='"._("delete")."' name='appl_del_%KEY%' title='"._("Delete this entry")."'>";
+        }
       }
 
 
