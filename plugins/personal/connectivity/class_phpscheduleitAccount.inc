@@ -59,7 +59,13 @@ class phpscheduleitAccount extends plugin
       $smarty->assign("wstate", "disabled");
     }
 
-    $smarty->assign('gosaphpscheduleitACL', chkacl($this->acl, 'gosaphpscheduleit'));
+    /* Allow account status toogle?  */
+    $smarty->assign("gosaphpscheduleitACL", "disabled");
+    if(!$this->is_account && chkacl($this->acl,"create") == ""){
+      $smarty->assign("gosaphpscheduleitACL", "");
+    }elseif($this->is_account && $this->acl == "#all#" ){
+      $smarty->assign("gosaphpscheduleitACL", "");
+    }
 
     $display.= $smarty->fetch (get_template_path('phpscheduleit.tpl', TRUE, dirname(__FILE__)));
     return ($display);
@@ -92,16 +98,18 @@ class phpscheduleitAccount extends plugin
   {
     /* Do we need to flip is_account state? */
     if (isset($_POST['connectivityTab'])){
-      if (isset($_POST['phpscheduleit'])){
-        if (!$this->is_account && $_POST['phpscheduleit'] == "B"){
-          $this->is_account= TRUE;
-        }
-      } else {
-        $this->is_account= FALSE;
+
+      /* Change state if needed */
+      if(!$this->is_account && isset($_POST["phpscheduleit"]) && $_POST['phpscheduleit'] == "B" && chkacl($this->acl,"create") == ""){
+        $this->is_account = true;
+      }elseif($this->is_account && !isset($_POST["phpscheduleit"]) && $this->acl == "#all#"){
+        $this->is_account = false;
       }
     }
 
     plugin::save_object();
+    
+    #FIXME seams to be unused code !
     if (isset($_POST["phpscheduleitStatus"])){
       $this->pptpStatus = "disabled";
     } else {

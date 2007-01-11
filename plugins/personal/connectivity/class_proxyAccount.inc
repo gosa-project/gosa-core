@@ -45,7 +45,15 @@ class proxyAccount extends plugin
 
     /* Prepare templating */
     $smarty= get_smarty();
-    $smarty->assign("proxyAccountACL",          chkacl($this->acl, "proxyAccount"));
+
+    /* Allow account status toogle?  */
+    $smarty->assign("proxyAccountACL", "disabled");
+    if(!$this->is_account && chkacl($this->acl,"create") == ""){
+      $smarty->assign("proxyAccountACL", "");
+    }elseif($this->is_account && $this->acl == "#all#" ){
+      $smarty->assign("proxyAccountACL", "");
+    }
+
     $smarty->assign("gosaProxyAcctFlagsACL",    chkacl($this->acl, "gosaProxyAcctFlags"));
     $smarty->assign("gosaProxyWorkingStartACL", chkacl($this->acl, "gosaProxyWorkingStart"));
     $smarty->assign("gosaProxyWorkingStopACL",  chkacl($this->acl, "gosaProxyWorkingStop"));
@@ -194,20 +202,14 @@ class proxyAccount extends plugin
     /* Do we need to flip is_account state? */
     if ($this->parent != NULL){
       if (isset($_POST['connectivityTab'])){
-        if (isset($_POST['proxy'])){
-          if (!$this->is_account && $_POST['proxy'] == "B"){
-            $this->is_account= TRUE;
-          }
-        } else {
-          $this->is_account= FALSE;
+
+        /* Change state if needed */
+        if(!$this->is_account && isset($_POST["proxy"]) && chkacl($this->acl,"create") == ""){
+          $this->is_account = true;
+        }elseif($this->is_account && !isset($_POST["proxy"]) && $this->acl == "#all#"){
+          $this->is_account = false;
         }
       }
-    }
-
-    if(isset($_POST['proxy'])){
-      $this->is_account = TRUE; 
-    }else{
-      $this->is_account = FALSE;
     }
 
     /* Save flag value */

@@ -240,6 +240,7 @@ $ACLD['user']=       array("academicTitle",
 			"uid",
 			"vocation");
 $ACLD['mailAccount']=       array(
+			"create",
 			"custom_sieve",
 			"gosaMailAlternateAddress",
 #			"gosaMailDeliveryMode",
@@ -253,7 +254,9 @@ $ACLD['mailAccount']=       array(
                         "drop_own_mails",
 			"mail",
 			"only_local");
-$ACLD['posixAccount']=      array("allowedHosts",
+$ACLD['posixAccount']=      
+		array(  "create",	
+			"allowedHosts",
 			"force_ids",
 			"gidNumber",
 			"gosaDefaultLanguage",
@@ -273,7 +276,9 @@ $ACLD['posixAccount']=      array("allowedHosts",
 			"shadowWarning",
 			"uidNumber");
 $ACLD['sambaAccount']=      
-			array("acctFlags" => "samba2:acctFlags", 
+		array(
+			"create",
+			"acctFlags" => "samba2:acctFlags", 
 			"allow_pwchange" => "samba2:allow_pwchange",
 			"homeDrive" 	=> "samba2:homeDrive",
 			"no_password_required" => "samba2:no_password_required",
@@ -327,22 +332,6 @@ $ACLD['netatalk']=	array(
 			"netatalkUserHomepath");
 
 
-$ACLD['proxyAccount']=      array(
-			"proxyAccount",
-			"gosaProxyAcctFlags",
-			"gosaProxyQuota",
-			"gosaProxyWorkingStart",
-			"gosaProxyWorkingStop");
-
-$ACLD['pureftpdAccount']=   array(
-			"pureftpd",	
-			"FTPUploadBandwidth",
-			"FTPStatus",
-			"FTPDownloadBandwidth",
-			"FTPQuotaFiles",
-			"FTPQuotaMBytes",
-			"FTPUploadRatio",
-			"FTPDownloadRatio");
 $ACLD['conference']= array(
 			"goFonConference",
 			"goFonPIN",
@@ -365,6 +354,7 @@ $ACLD['conference']= array(
 			"goFonConferenceOwner");
 
 $ACLD['environment']=array(
+					"create",
 					"gotoPrinter",
 					"gotoEnvironment",
 					"gotoShare",
@@ -377,21 +367,29 @@ $ACLD['environment']=array(
 					"gotoHotplugDevice",
 					"gotoShareAppleMounts"
 					);
+/* Connectivity accounts */
+$ACLD['phpgwAccount']			=array("create");
+$ACLD['webdavAccount']			=array("create");
+$ACLD['intranetAccount']		=array("create");
+$ACLD['phpscheduleitAccount']		=array("create");
+$ACLD['pptpAccount']			=array("create");
+$ACLD['proxyAccount']			=array("create","proxyAccount","gosaProxyAcctFlags","gosaProxyQuota",
+						"gosaProxyWorkingStart","gosaProxyWorkingStop");
+$ACLD['pureftpdAccount']		=array("create","FTPUploadBandwidth","FTPStatus",
+						"FTPDownloadBandwidth","FTPQuotaFiles","FTPQuotaMBytes",
+						"FTPUploadRatio","FTPDownloadRatio");
+$ACLD['kolabAccount']			=array("create","kolabFreeBusyFuture", "unrestrictedMailSize", "calFBURL","kolabDelegate");
+$ACLD['opengwAccount']			=array("create"	=>"Enable/disable account",	
+		"LocationTeam"	=>"Location team",
+		"TemplateUser"	=>"Template user",
+		"is_locked"		=>"Lock status",
+		"TeamIDs"		=>"Teams");
 
-$ACLD['phpgwAccount']			=array("phpgwAccount" 			);
-$ACLD['webdavAccount']			=array("webdavAccount" 			);
-$ACLD['intranetAccount']		=array("intranetAccount" 		);
+
 $ACLD['systems']			=array("systems" 		);
 $ACLD['FAIclass']			=array("FAIclass" 		);
-$ACLD['pptpAccount']			=array("gosapptp" 	  			);
-$ACLD['phpscheduleitAccount']	=array("gosaphpscheduleit" 	  	);
-$ACLD['opengwAccount']			=array(	"opengwAccount"	=>"Enable/disable account",	
-										"LocationTeam"	=>"Location team",
-										"TemplateUser"	=>"Template user",
-										"is_locked"		=>"Lock status",
-										"TeamIDs"		=>"Teams");
 
-$ACLD['phoneAccount'] = array("goFonDeliveryMode",
+$ACLD['phoneAccount'] = array("create","goFonDeliveryMode",
       "goFonHardware","goFonPIN","goFonVoicemailPIN","telephoneNumber", "goFonMacro");
 
 $ACLD['nagiosAccount'] = array("NagiosAlias"
@@ -428,6 +426,5 @@ $ACLD['FAIclass']	= 	array(
 								// Allow displaying of FAI menu element
 								"FAIclass"	=> "FAI management enabled");
 $ACLD['goFonMacro']	=array("goFonMacro","edit","delete");
-$ACLD['kolabAccount']	=array("kolabAccount","kolabFreeBusyFuture", "unrestrictedMailSize", "calFBURL","kolabDelegate");
 
 ?>

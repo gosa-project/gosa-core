@@ -54,7 +54,13 @@ class phpgwAccount extends plugin
       $smarty->assign("phpgwState", "");
     }
 
-    $smarty->assign('phpgwAccountACL', chkacl($this->acl, 'phpgwAccount'));
+    /* Allow account status toogle?  */
+    $smarty->assign("phpgwAccountACL", "disabled");
+    if(!$this->is_account && chkacl($this->acl,"create") == ""){
+      $smarty->assign("phpgwAccountACL", "");
+    }elseif($this->is_account && $this->acl == "#all#" ){
+      $smarty->assign("phpgwAccountACL", "");
+    }
 
     $display.= $smarty->fetch (get_template_path('phpgw.tpl', TRUE, dirname(__FILE__)));
     return ($display);
@@ -90,16 +96,18 @@ class phpgwAccount extends plugin
   {
     /* Do we need to flip is_account state? */
     if (isset($_POST['connectivityTab'])){
-      if (isset($_POST['phpgw'])){
-        if (!$this->is_account && $_POST['phpgw'] == "B"){
-          $this->is_account= TRUE;
-        }
-      } else {
-        $this->is_account= FALSE;
+
+      /* Change state if needed */
+      if(!$this->is_account && isset($_POST["phpgw"]) && chkacl($this->acl,"create") == ""){
+        $this->is_account = true;
+      }elseif($this->is_account && !isset($_POST["phpgw"]) && $this->acl == "#all#"){
+        $this->is_account = false;
       }
     }
 
     plugin::save_object();
+
+    #FIXME seams to be unused code !
     if (isset($_POST["phpgwStatus"])){
       $this->phpgwStatus = "disabled";
     } else {
