@@ -233,9 +233,13 @@ class posixAccount extends plugin
   }
 
   if(!$isCopyPaste){
+
+    $required = (isset($this->parent->by_object['sambaAccount']) && $this->parent->by_object['sambaAccount']->is_account) || 
+                (isset($this->parent->by_object['environment'] ) && $this->parent->by_object['environment'] ->is_account);
+
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
-      if($this->is_account && $this->acl == "#all#"){
+      if($this->is_account && $this->acl == "#all#" && !$required ){
         $this->is_account= !$this->is_account;
       }elseif(!$this->is_account && chkacl($this->acl,"create") == ""){
         $this->is_account= !$this->is_account;
