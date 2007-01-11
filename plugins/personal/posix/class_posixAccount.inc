@@ -308,7 +308,7 @@ class posixAccount extends plugin
     }
 
     /* Add user workstation? */
-    if (isset($_POST["add_ws"])){
+    if (isset($_POST["add_ws"]) && chkacl($this->acl,"allowedHosts") == ""){
       $this->show_ws_dialog= TRUE;
       $this->dialog= TRUE;
     }
@@ -323,7 +323,7 @@ class posixAccount extends plugin
     }
 
     /* Remove user workstations? */
-    if (isset($_POST["delete_ws"]) && isset($_POST['workstation_list'])){
+    if (isset($_POST["delete_ws"]) && isset($_POST['workstation_list']) && chkacl($this->acl,"allowedHosts") == ""){
       foreach($_POST['workstation_list'] as $name){
         unset ($this->accessTo[$name]);
       }
@@ -666,7 +666,7 @@ class posixAccount extends plugin
       }
 
       /* Trust mode - special handling */
-      if (isset($_POST['trustmode'])){
+      if (isset($_POST['trustmode']) && chkacl($this->acl,"allowedHosts") == ""){
         $saved= $this->trustModel;
         if ($_POST['trustmode'] == "1"){
           $this->trustModel= "fullaccess";
