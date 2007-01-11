@@ -124,21 +124,6 @@ class divListUsers extends MultiSelectWindow
     $tplimg     = "<img class='center' src='images/select_template.png' alt='Template' title='%s'>";
     $editlink   = "<a href='?plug=".validate($_GET['plug'])."&amp;id=%s&amp;act=edit_entry'>%s</a>";
 
-    /* Create action icons */
-    $action = "";
-    if($this->parent->CopyPasteHandler){
-      $action .= "<input class='center' type='image'
-        src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
-      $action.= "<input class='center' type='image'
-        src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
-    }
-    $action.= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'
-      name='user_edit_%KEY%' title='"._("Edit user")."'>";
-    $action.= "<input class='center' type='image' src='images/list_password.png' alt='"._("password")."'
-      name='user_chgpw_%KEY%' title='"._("Change password")."'>";
-    $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'
-      name='user_del_%KEY%' title='"._("Delete user")."'>";
-    
     /* Possilbe objectClass image combinations */  
     $possibleAccounts = array(
             "posixAccount"    => array("VAR"=>"posix"     ,"IMG"=>"posiximg"),
@@ -179,6 +164,37 @@ class divListUsers extends MultiSelectWindow
  
     // Test Every Entry and generate divlist Array
     foreach($list as $key => $val){
+
+      /* Create action icons */
+      $action = "";
+
+      $dn= $val['dn'];
+      $acl= get_permissions ($dn, $this->ui->subtreeACL);
+      $acl= get_module_permission($acl, "user", $dn);
+
+      /* Append copy&paste icons if allowed */
+      if($acl == "#all#" && $this->parent->CopyPasteHandler){
+        $action .= "<input class='center' type='image'
+          src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+        $action.= "<input class='center' type='image'
+          src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
+      }
+
+      /* Add edit icon */
+      $action.= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'
+        name='user_edit_%KEY%' title='"._("Edit user")."'>";
+
+      /* Add passowrd change icon if allowed */
+      if (chkacl($acl, "password") == ""){
+        $action.= "<input class='center' type='image' src='images/list_password.png' alt='"._("password")."'
+          name='user_chgpw_%KEY%' title='"._("Change password")."'>";
+      }
+
+      /* Add delete icon if delete user is allowed */
+      if (chkacl($acl, "delete") == ""){
+        $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'
+          name='user_del_%KEY%' title='"._("Delete user")."'>";
+      }
 
       /* Create phonaccopunt informationm, if conencted && is phoneAccount */ 
       if((in_array("goFonAccount"    ,$val['objectClass']))){
