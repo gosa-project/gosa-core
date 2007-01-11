@@ -328,6 +328,7 @@ $ACLD['sambaAccount']=
 			) ;
 
 $ACLD['netatalk']=	array(
+			"create",
 			"netatalkShare",
 			"netatalkUserHomepath");
 
@@ -392,22 +393,24 @@ $ACLD['FAIclass']			=array("FAIclass" 		);
 $ACLD['phoneAccount'] = array("create","goFonDeliveryMode","goFonHomeServer",
       "goFonHardware","goFonPIN","goFonVoicemailPIN","telephoneNumber", "goFonMacro");
 
-$ACLD['nagiosAccount'] = array("NagiosAlias"
-, "NagiosPager"
-, "NagiosMail"
-, "HostNotificationPeriod"
-, "ServiceNotificationPeriod"
-, "HostNotificationCommands"
-, "ServiceNotificationCommands"
-, "HostNotificationOptions"
-, "ServiceNotificationOptions"
-, "AuthorizedAllHosts"
-, "AuthorizedAllServices"
-, "AuthorizedSystemCommands"
-, "AuthorizedAllHostCommands"
-, "AuthorizedAllServiceCommands"
-, "AuthorizedConfigurationInformation"
-, "AuthorizedSystemInformation");
+$ACLD['nagiosAccount'] = array(
+		"create",
+		"NagiosAlias",
+		 "NagiosPager",
+		 "NagiosMail",
+		 "HostNotificationPeriod",
+		 "ServiceNotificationPeriod",
+		 "HostNotificationCommands",
+		 "ServiceNotificationCommands",
+		 "HostNotificationOptions",
+		 "ServiceNotificationOptions",
+		 "AuthorizedAllHosts",
+		 "AuthorizedAllServices",
+		 "AuthorizedSystemCommands",
+		 "AuthorizedAllHostCommands",
+		 "AuthorizedAllServiceCommands",
+		 "AuthorizedConfigurationInformation",
+		 "AuthorizedSystemInformation");
 
 $ACLD['addressbook']=  array("addressbook","add", "delete",
 	  "sn", "givenName", "mail", "title",
