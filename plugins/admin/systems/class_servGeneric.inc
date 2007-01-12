@@ -60,6 +60,7 @@ class servgeneric extends plugin
       $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,/", "", $this->dn);
     }
     $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses);
+    $this->netConfigDNS->acl = $this->acl;
     /* Save dn for later references */
     $this->orig_dn= $this->dn;
   }
@@ -67,6 +68,7 @@ class servgeneric extends plugin
   function execute()
   {
     /* Call parent execute */
+    $this->netConfigDNS->acl = $this->acl;
     plugin::execute();
 
     /* Do we represent a valid server? */
@@ -195,6 +197,7 @@ class servgeneric extends plugin
 
   function remove_from_parent()
   {
+    $this->netConfigDNS->acl = $this->acl;
     $this->netConfigDNS->remove_from_parent();
     $ldap= $this->config->get_ldap_link();
     $ldap->rmdir($this->dn);
@@ -267,6 +270,7 @@ class servgeneric extends plugin
   /* Save to LDAP */
   function save()
   {
+    $this->netConfigDNS->acl = $this->acl;
     plugin::save();
 
     /* Remove all empty values */

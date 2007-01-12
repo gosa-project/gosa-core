@@ -35,14 +35,18 @@ class componentGeneric extends plugin
       $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,/", "", $this->dn);
     }
     $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses, true);
+    $this->netConfigDNS->acl = $this->acl;
+
     /* Save dn for later references */
     $this->orig_dn= $this->dn;
   }
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    $this->netConfigDNS->acl = $this->acl;
+
+    /* Call parent execute */
+    plugin::execute();
 
     /* Do we represent a valid phone? */
     if (!$this->is_account && $this->parent == NULL){
@@ -96,6 +100,7 @@ class componentGeneric extends plugin
 
   function remove_from_parent()
   {
+    $this->netConfigDNS->acl = $this->acl;
     $ldap= $this->config->get_ldap_link();
     $this->netConfigDNS->remove_from_parent();
     $ldap->rmdir($this->dn);
@@ -177,6 +182,7 @@ class componentGeneric extends plugin
   /* Save to LDAP */
   function save()
   {
+    $this->netConfigDNS->acl = $this->acl;
     plugin::save();
 
     /* Remove all empty values */

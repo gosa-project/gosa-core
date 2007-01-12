@@ -49,6 +49,8 @@ class wingeneric extends plugin
   {
     plugin::plugin ($config, $dn, $parent);
     $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses);
+    $this->netConfigDNS->acl = $this->acl;
+
     /* Set base */
     if ($this->dn == "new"){
       $ui= get_userinfo();
@@ -64,8 +66,10 @@ class wingeneric extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    $this->netConfigDNS->acl = $this->acl;
+
+    /* Call parent execute */
+    plugin::execute();
 
     /* Do we represent a valid phone? */
     if (!$this->is_account && $this->parent == NULL){
@@ -121,6 +125,7 @@ class wingeneric extends plugin
 
   function remove_from_parent()
   {
+    $this->netConfigDNS->acl = $this->acl;
     $this->netConfigDNS->remove_from_parent();
     $ldap= $this->config->get_ldap_link();
     $ldap->rmdir($this->dn);
@@ -186,6 +191,7 @@ class wingeneric extends plugin
   /* Save to LDAP */
   function save()
   {
+    $this->netConfigDNS->acl = $this->acl;
     plugin::save();
 
     /* Remove all empty values */

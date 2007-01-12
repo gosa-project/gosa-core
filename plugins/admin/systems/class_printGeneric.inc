@@ -91,6 +91,7 @@ class printgeneric extends plugin
     
     /* create dns object */
     $this->netConfigDNS = new termDNS($this->config, $this->dn,$this->objectclasses);
+    $this->netConfigDNS->acl = $this->acl;
 
     /* Set base */
     if ($this->dn == "new"){
@@ -243,6 +244,8 @@ class printgeneric extends plugin
 
   function execute()
   {
+    $this->netConfigDNS->acl = $this->acl;
+
     /* Call parent execute */
     plugin::execute();
 
@@ -543,6 +546,8 @@ class printgeneric extends plugin
 
   function remove_from_parent()
   {
+    $this->netConfigDNS->acl = $this->acl;
+
     /* Only remove if there was initially an account */
     if($this->initially_was_account){
 
@@ -670,6 +675,8 @@ class printgeneric extends plugin
   /* Save to LDAP */
   function save()
   {
+    $this->netConfigDNS->acl = $this->acl;
+
     /* Update dn, to ensure storing as printer instead of WS / terminal
      */
     if($this->BelongsTo == "Terminal"){
