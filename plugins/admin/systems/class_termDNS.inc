@@ -462,14 +462,14 @@ class termDNS extends plugin
 
         $str.=" <tr>".
           "   <td>".$this->generateRecordListBox($entry['type'],"RecordTypeSelectedFor_".$key)."</td>".
-          "   <td><input type='text' value='".$entry['value']."' name='RecordValue_".$key."' id='RecordValue_".$key."'></td>".
-          "   <td><input type='submit' name='RemoveRecord_".$key."' value='"._("Delete")."' id='RemoveRecord_".$key."'></td>".
+          "   <td><input ".chkacl($this->acl,"termDNS")." type='text' value='".$entry['value']."' name='RecordValue_".$key."' id='RecordValue_".$key."'></td>".
+          "   <td><input ".chkacl($this->acl,"termDNS")." type='submit' name='RemoveRecord_".$key."' value='"._("Delete")."' id='RemoveRecord_".$key."'></td>".
           "</tr>";
     }
 
     $str.= "  <tr>".
            "    <td colspan=2 width='50%'></td><td>".
-           "      <input type='submit' value='"._("Add")."' name='AddNewRecord'>".
+           "      <input type='submit' value='"._("Add")."' name='AddNewRecord' ".chkacl($this->acl,"termDNS")." >".
            "    </td>".
            "  </tr>".
            "</table>";
@@ -482,7 +482,7 @@ class termDNS extends plugin
    */
   function generateRecordListBox($selected,$name)
   {
-    $str = "<select name='".$name."' id='".$name."'>";
+    $str = "<select ".chkacl($this->acl,"termDNS")."  name='".$name."' id='".$name."'>";
     foreach($this->RecordTypes as $type => $value){
       $use = "";
       if($type == $selected){

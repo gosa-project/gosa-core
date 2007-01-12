@@ -338,7 +338,7 @@ class printgeneric extends plugin
     /* Base select dialog */
     $once = true;
     foreach($_POST as $name => $value){
-      if(preg_match("/^chooseBase/",$name) && $once){
+      if(preg_match("/^chooseBase/",$name) && $once && chkacl($this->acl,"base")){
         $once = false;
         $this->dialog = new baseSelectDialog($this->config);
         $this->dialog->setCurrentBase($this->base);
@@ -377,21 +377,21 @@ class printgeneric extends plugin
 
     $smarty->assign("baseACL", chkacl($this->acl,"base"));
 
-    if(isset($_POST['AddUser'])){
+    if(isset($_POST['AddUser']) && chkacl($this->acl,"gotoUserPrinter") == ""){
       $this->dialog = new selectUserToPrinterDialog($this->config, NULL,"AddUser");
     }
-    if(isset($_POST['AddGroup'])){
+    if(isset($_POST['AddGroup']) && chkacl($this->acl,"gotoGroupPrinter") == ""){
       $this->dialog = new selectUserToPrinterDialog($this->config, NULL,"AddGroup");
     }
-    if(isset($_POST['AddAdminUser'])){
+    if(isset($_POST['AddAdminUser']) && chkacl($this->acl,"gotoUserAdminPrinter") == ""){
       $this->dialog = new selectUserToPrinterDialog($this->config, NULL,"AddAdminUser");
     }
-    if(isset($_POST['AddAdminGroup'])){
+    if(isset($_POST['AddAdminGroup']) && chkacl($this->acl,"gotoGroupAdminPrinter") == ""){
       $this->dialog = new selectUserToPrinterDialog($this->config, NULL,"AddAdminGroup");
     }
 
     /* Display ppd configure/select dialog      */
-    if(isset($_POST['EditDriver'])){
+    if(isset($_POST['EditDriver']) && chkacl($this->acl,"gotoPrinterPPD")==""){
       if($this->PPDdialogToSave){
         $this->dialog = $this->PPDdialogToSave;
       }else{
@@ -400,7 +400,7 @@ class printgeneric extends plugin
     }
 
     /* remove ppd */
-    if(isset($_POST['RemoveDriver'])){
+    if(isset($_POST['RemoveDriver']) && chkacl($this->acl,"gotoPrinterPPD")==""){
       $this->gotoPrinterPPD = array();
       $this->PPDdialogToSave = NULL;
     }
@@ -428,25 +428,25 @@ class printgeneric extends plugin
     }
 
     /* Member management, delete user / group / admin ..*/
-    if((isset($_POST['DelUser']))&&(isset($_POST['UserMember']))){
+    if((isset($_POST['DelUser']))&&(isset($_POST['UserMember'])) && chkacl($this->acl,"gotoUserPrinter")==""){
       foreach($_POST['UserMember'] as $mem){
         $this->DelMember('AddUser',$mem);
       }
     }
 
-    if((isset($_POST['DelUser']))&&(isset($_POST['UserMember']))){
+    if((isset($_POST['DelUser']))&&(isset($_POST['UserMember'])) && chkacl($this->acl,"gotoGroupPrinter")==""){
       foreach($_POST['UserMember'] as $mem){
         $this->DelMember('AddGroup',$mem);
       }
     }
 
-    if((isset($_POST['DelAdmin']))&&(isset($_POST['AdminMember']))){
+    if((isset($_POST['DelAdmin']))&&(isset($_POST['AdminMember'])) && chkacl($this->acl,"gotoUserAdminPrinter")==""){
       foreach($_POST['AdminMember'] as $mem){
         $this->DelMember('AddAdminUser',$mem);
       }
     }
 
-    if((isset($_POST['DelAdmin']))&&(isset($_POST['AdminMember']))){
+    if((isset($_POST['DelAdmin']))&&(isset($_POST['AdminMember'])) && chkacl($this->acl,"gotoGroupAdminPrinter")==""){
       foreach($_POST['AdminMember'] as $mem){
         $this->DelMember('AddAdminGroup',$mem);
       }
