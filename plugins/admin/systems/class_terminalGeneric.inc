@@ -131,13 +131,14 @@ class termgeneric extends plugin
     /* Call parent execute */
     plugin::execute();
 
+    $this->netConfigDNS->acl = $this->acl;
+
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
       $this->is_account= !$this->is_account;
     }
 
-    if (isset($_POST['action'])){
-
+    if (isset($_POST['action']) && chkacl($this->acl,"FAIstate") ==""){
 
       if($this->fai_activated && $this->dn != "new"){
         /* Set FAIstate */
@@ -212,7 +213,7 @@ class termgeneric extends plugin
     /* Base select dialog */
     $once = true;
     foreach($_POST as $name => $value){
-      if(preg_match("/^chooseBase/",$name) && $once){
+      if(preg_match("/^chooseBase/",$name) && $once && chkacl($this->acl,"base") == ""){
         $once = false;
         $this->dialog = new baseSelectDialog($this->config);
         $this->dialog->setCurrentBase($this->base);
@@ -242,12 +243,12 @@ class termgeneric extends plugin
     }
 
     /* Add new ntp Server to our list */
-    if((isset($_POST['addNtpServer'])) && (isset($_POST['gotoNtpServers']))){
+    if((isset($_POST['addNtpServer'])) && (isset($_POST['gotoNtpServers'])) && chkacl($this->acl,"gotoNtpServer")== ""){
       $this->gotoNtpServer[$_POST['gotoNtpServers']] = $_POST['gotoNtpServers'];
     }
 
     /* Delete selected NtpServer for list of used servers  */
-    if((isset($_POST['delNtpServer'])) && (isset($_POST['gotoNtpServerSelected']))){
+    if((isset($_POST['delNtpServer'])) && (isset($_POST['gotoNtpServerSelected'])) && chkacl($this->acl,"gotoNtpServer")== ""){
       foreach($_POST['gotoNtpServerSelected'] as $name){
         unset($this->gotoNtpServer[$name]);
       } 
@@ -317,6 +318,7 @@ class termgeneric extends plugin
   function remove_from_parent()
   {
     
+    $this->netConfigDNS->acl = $this->acl;
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
     $ldap->cat($this->dn, array('dn'));
@@ -428,6 +430,7 @@ class termgeneric extends plugin
   /* Save to LDAP */
   function save()
   {
+    $this->netConfigDNS->acl = $this->acl;
 
     /* Move object if requested */
     if( $this->orig_dn != 'new' && $this->dn != $this->orig_dn){

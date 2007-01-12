@@ -153,6 +153,7 @@ class termDNS extends plugin
       /* Assign smarty all non DNs attributes */
       foreach($this->attributes as $attr){
         $smarty->assign($attr,$this->$attr);
+        $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
       }
       $smarty->assign("staticAddress","<font class=\"must\">*</font>");
 
@@ -191,14 +192,18 @@ class termDNS extends plugin
     /* Assign smarty all non DNs attributes */
     foreach($this->attributes as $attr){
       $smarty->assign($attr,$this->$attr);
+      $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
     }
 
     /* Assign smarty all DNS attributes */
     foreach($this->DNSattributes as $attr){
       $smarty->assign($attr,$this->dnsEntry[$attr]);
+      $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
     }
     
     /* Assign all needed vars */
+    $smarty->assign("DNSaccountACL",chkacl($this->acl,"termDNS"));
+
     $smarty->assign("DNSAccount",$this->DNS_is_account);
     $smarty->assign("Zones",$this->Zones);
     $smarty->assign("ZoneKeys",($this->Zones));
@@ -236,15 +241,8 @@ class termDNS extends plugin
     /* Save all posted vars */
     plugin::save_object();
     
-    /* Ge all non dns attributes (IP/MAC)*/
-    foreach($this->attributes as $attr){
-      if(isset($_POST[$attr])){
-        $this->$attr = $_POST[$attr];
-      }
-    }
-
     /* Get dns attributes */
-    if(($this->DNSenabled) && (isset($_POST['network_tpl_posted']))){
+    if(($this->DNSenabled) && (isset($_POST['network_tpl_posted'])) && chkacl($this->acl,"termDNS") == ""){
 
       /* Check for posted record changes */
       if(is_array($this->dnsEntry['RECORDS'])){
@@ -424,6 +422,7 @@ class termDNS extends plugin
 
       /* Add || Update new DNS entries 
        */
+      print_a($tmp);
       foreach($tmp['add'] as $dn => $attrs){
         $ldap->cd($dn);
         $ldap->cat($dn, array('dn'));
