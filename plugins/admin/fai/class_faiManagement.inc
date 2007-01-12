@@ -255,7 +255,7 @@ class faiManagement extends plugin
 			$this->is_dialog  = true;
 
       if($entry['FAIstate'] == "freeze"){
-        $this->dialog->set_acl(array("*none*"))  ;
+        $this->dialog->set_acl(array("#none#"))  ;
       }
 			$_SESSION['objectinfo'] = $this->dn;
 		}

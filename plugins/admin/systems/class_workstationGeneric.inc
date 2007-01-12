@@ -71,6 +71,7 @@ class workgeneric extends plugin
 
     plugin::plugin ($config, $dn, $parent);
     $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses);
+    $this->netConfigDNS->acl = $this->acl;
 
     /* Read arrays */
     foreach (array("ghNetNic", "ghIdeDev", "ghScsiDev") as $val){
@@ -135,13 +136,14 @@ class workgeneric extends plugin
   {
     /* Call parent execute */
     plugin::execute();
+    $this->netConfigDNS->acl = $this->acl;
 
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
       $this->is_account= !$this->is_account;
     }
 
-    if (isset($_POST['action'])){
+    if (isset($_POST['action']) && chkacl($this->acl,"FAIstate") == ""){
       $cmd= search_config($this->config->data['TABS'], "workgeneric", "ACTIONCMD");
       if ($cmd == ""){
         print_red(_("No ACTIONCMD definition found in your gosa.conf"));
@@ -220,12 +222,12 @@ class workgeneric extends plugin
     }
 
     /* Add new ntp Server to our list */ 
-    if((isset($_POST['addNtpServer'])) && (isset($_POST['gotoNtpServers']))){
+    if((isset($_POST['addNtpServer'])) && (isset($_POST['gotoNtpServers'])) && chkacl($this->acl,"gotoNtpServer") == ""){
       $this->gotoNtpServer[$_POST['gotoNtpServers']] = $_POST['gotoNtpServers'];
     }
 
     /* Delete selected NtpServer for list of used servers  */
-    if((isset($_POST['delNtpServer'])) && (isset($_POST['gotoNtpServerSelected']))){
+    if((isset($_POST['delNtpServer'])) && (isset($_POST['gotoNtpServerSelected'])) && chkacl($this->acl,"gotoNtpServer") == ""){
       foreach($_POST['gotoNtpServerSelected'] as $name){
         unset($this->gotoNtpServer[$name]);
       }
@@ -284,6 +286,7 @@ class workgeneric extends plugin
 
   function remove_from_parent()
   {
+    $this->netConfigDNS->acl = $this->acl;
     $this->netConfigDNS->remove_from_parent();
     $ldap= $this->config->get_ldap_link();
     $ldap->rmdir($this->dn);
@@ -384,6 +387,7 @@ class workgeneric extends plugin
   /* Save to LDAP */
   function save()
   {
+    $this->netConfigDNS->acl = $this->acl;
     plugin::save();
 
     /* Strip out 'default' values */

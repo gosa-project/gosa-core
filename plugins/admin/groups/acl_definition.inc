@@ -110,6 +110,7 @@ $ACLD['workgeneric']=   array("base",
 			"gotoMode",
 			"gotoSyslogServer",
 			"gotoNtpServer",
+			"FAIstate",
 			"action",
 			"password");
 $ACLD['workstartup']=   array("gotoBootKernel",
