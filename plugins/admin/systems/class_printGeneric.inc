@@ -286,10 +286,17 @@ class printgeneric extends plugin
       $smarty->assign("StandAlone",false);
     }
 
-    /* Do we need to flip is_account state? */
+
     if (isset($_POST['modify_state'])){
-      $this->is_modified = true;
-      $this->is_account= !$this->is_account;
+
+      /* Only change account state if allowed */
+      if($this->is_account && $this->acl == "#all#"){
+        $this->is_account= !$this->is_account;
+        $this->is_modified = true;
+      }elseif(!$this->is_account && chkacl($this->acl,"create") == ""  && !((empty($this->cn)) && ($this->dn != "new"))){
+        $this->is_account= !$this->is_account;
+        $this->is_modified = true;
+      }
     }
 
     /* Do we represent a valid printer? */

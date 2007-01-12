@@ -422,7 +422,6 @@ class termDNS extends plugin
 
       /* Add || Update new DNS entries 
        */
-      print_a($tmp);
       foreach($tmp['add'] as $dn => $attrs){
         $ldap->cd($dn);
         $ldap->cat($dn, array('dn'));

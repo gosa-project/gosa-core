@@ -114,7 +114,7 @@ class glpiDeviceManagement extends plugin
       }elseif(isset($tmp['designation'])){
         $smarty->assign("warning", sprintf(_("You're about to delete the glpi device '%s'."), $tmp['designation']));
       }else{
-        print_a(_("Can't detect object name."));
+        print_red(_("Can't detect object name."));
       }
       
       return($smarty->fetch(get_template_path('remove_glpi.tpl', TRUE)));
