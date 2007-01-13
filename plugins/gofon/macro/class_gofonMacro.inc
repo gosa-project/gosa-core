@@ -223,7 +223,7 @@ class macro extends plugin
         $res = @mysql_query($query,$r_current);
         if(!$res){
           gosa_log(@mysql_error($r_current));
-          return(sprintf(_("Removing marco from '%s' failed. Check GOsa log for mysql error."),$Server['SERVER']));
+          return(sprintf(_("Removing macro from '%s' failed. Check GOsa log for mysql error."),$Server['SERVER']));
         }
         @mysql_close($r_current);
       }
