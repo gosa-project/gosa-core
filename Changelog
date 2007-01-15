@@ -7,7 +7,7 @@ GOsa2 changelog
     relevant sections of the config file
   - Added support for sambaLogonHours 
   - Security fix, that allows non priviledged users to change
-    admin passwords
+    several settings - including admin passwords
 
 * gosa 2.5.7
   - Fixed login.tpl to display error msgs in the middle of the screen

@@ -1,3 +1,9 @@
+gosa (2.5.8-1) unstable; urgency=high
+
+  * New upstream release fixes security problem
+
+ -- Cajus Pollmeier <cajus@debian.org>  Mon, 15 Jan 2007 11:49:16 +0100
+
 gosa (2.5.7-1) unstable; urgency=low
 
   * New upstream release
