@@ -60,7 +60,15 @@ class servdns extends plugin
     /* Do we need to flip is_account state? 
      */
     if (isset($_POST['modify_state'])){
-      $this->is_account= !$this->is_account;
+
+      /* Only change account state if allowed */
+      if($this->is_account && $this->acl == "#all#"){
+        $this->is_account= !$this->is_account;
+        $this->is_modified = true;
+      }elseif(!$this->is_account && chkacl($this->acl,"create") == ""){
+        $this->is_account= !$this->is_account;
+        $this->is_modified = true;
+      }
     }
 
     if ($this->is_account){
@@ -104,7 +112,7 @@ class servdns extends plugin
 
     /* Add empty new zone 
      */
-    if(isset($_POST['AddZone'])){
+    if(isset($_POST['AddZone']) && chkacl($this->acl,"servdns") == ""){
       $this->dialog = new servdnseditZone($this->config,$this->dn);
     }
 
@@ -115,7 +123,7 @@ class servdns extends plugin
   
       /* check all post for edit request 
        */
-      if(preg_match("/^editZone_/",$name)&&!$once){
+      if(preg_match("/^editZone_/",$name)&&!$once && chkacl($this->acl,"servdns") == ""){
         $once =true;
         $tmp = preg_replace("/^editZone_/","",$name);
         $tmp = base64_decode(preg_replace("/_.*$/","",$tmp));
@@ -124,7 +132,7 @@ class servdns extends plugin
 
       /* check posts for delete zone 
        */
-      if(preg_match("/^delZone_/",$name)&&!$once){
+      if(preg_match("/^delZone_/",$name)&&!$once && chkacl($this->acl,"servdns") == ""){
 
         $once =true;
         $tmp = preg_replace("/^delZone_/","",$name);
@@ -162,7 +170,9 @@ class servdns extends plugin
             array("string" =>str_replace("%s",base64_encode($zone),$editImg))
             ));
     }    
-
+  
+    $smarty->assign("servdnsACL",chkacl($this->acl,"servdns"));
+  
     /* Display tempalte 
      */
     $smarty->assign("ZoneList",$ZoneList->DrawList());

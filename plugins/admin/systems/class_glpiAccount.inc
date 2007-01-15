@@ -192,14 +192,14 @@ class glpiAccount extends plugin
  
     /* Add Device was requested, open new dialog
      */
-    if(isset($_POST['AddDevice'])){
+    if(isset($_POST['AddDevice']) && chkacl($this->acl,"usedDevices") == ""){
       $this->dialog =true;
       $this->cur_dialog = new glpiDeviceManagement($this->config,$this->dn,$this->usedDevices);
     }
 
     /* Attachment pool was closed with use
      */
-    if(isset($_POST['UseAttachment'])){
+    if(isset($_POST['UseAttachment']) && chkacl($this->acl,"usedAttachments") == ""){
       if(count($this->cur_dialog->check())){
         foreach($this->cur_dialog->check() as $msg){
           print_red($msg);
@@ -230,7 +230,7 @@ class glpiAccount extends plugin
      */
     $once = true;
     foreach($_POST as $name => $value){
-      if((preg_match("/^delAttachment_/",$name))&&($once)){
+      if((preg_match("/^delAttachment_/",$name))&&($once) && chkacl($this->acl,"usedAttachments") == ""){
         $once= false;
         $name = preg_replace("/^delAttachment_/","",$name);
         $entry = preg_replace("/_.*$/","",$name);
@@ -239,7 +239,7 @@ class glpiAccount extends plugin
         }
       }
     }
-    if((isset($_POST['RemoveAttachment']))&&(isset($_POST['Attachments']))){
+    if((isset($_POST['RemoveAttachment']))&&(isset($_POST['Attachments'])) && chkacl($this->acl,"usedAttachments") == ""){
       foreach($_POST['Attachments'] as $entry){
         if(isset($this->usedAttachments[$entry])){
           unset($this->usedAttachments[$entry]);
@@ -267,7 +267,7 @@ class glpiAccount extends plugin
 
     /* System type management
      */
-    if(isset($_POST['edit_type'])){
+    if(isset($_POST['edit_type']) && chkacl($this->acl,"type") == ""){
       $this->dialog = true;
       $this->edit_type=true;
     }
@@ -286,7 +286,7 @@ class glpiAccount extends plugin
 
     /* This appends a new system to our sytem types
      */
-    if((isset($_POST['add_type']))&&(!empty($_POST['type_string']))){
+    if((isset($_POST['add_type']))&&(!empty($_POST['type_string'])) && chkacl($this->acl,"type") == ""){
       $attr = $this->handle->getSystemTypes();
       if(in_array(trim($_POST['type_string']),$attr)){
         print_red(_("Adding new sytem type failed, this system type name is already used.")) ;
@@ -297,7 +297,7 @@ class glpiAccount extends plugin
 
     /* Remove selected type from our system types list
      */
-    if((isset($_POST['del_type']))&&(!empty($_POST['select_type']))){
+    if((isset($_POST['del_type']))&&(!empty($_POST['select_type'])) && chkacl($this->acl,"type") == ""){
       $tmp = $this->handle->is_systemTypeUsed($_POST['select_type']);
       if(count($tmp)){
         $names = "";
@@ -328,7 +328,7 @@ class glpiAccount extends plugin
     }
     
   
-    if((isset($_POST['rename_type'])&&(!empty($_POST['select_type'])))||($this->renameTypeDialog)){
+    if((isset($_POST['rename_type'])&&(!empty($_POST['select_type'])))||($this->renameTypeDialog) && chkacl($this->acl,"type") == ""){
       if(isset($_POST['select_type'])){
         $this->select_type = $_POST['select_type'];
       }
@@ -359,7 +359,7 @@ class glpiAccount extends plugin
 
     /* System os management
      */
-    if(isset($_POST['edit_os'])){
+    if(isset($_POST['edit_os']) && chkacl($this->acl,"os") == ""){
       $this->dialog = true;
       $this->edit_os=true;
     }
@@ -373,7 +373,7 @@ class glpiAccount extends plugin
 
     /* Add new os to the db
      */
-    if((isset($_POST['add_os']))&&(!empty($_POST['is_string']))){
+    if((isset($_POST['add_os']))&&(!empty($_POST['is_string'])) && chkacl($this->acl,"os") == ""){
       $attr = $this->handle->getOSTypes();
       if(in_array(trim($_POST['is_string']),$attr)){
         print_red(_("Adding new operating system failed, specifed name is already used.")) ;
@@ -384,7 +384,7 @@ class glpiAccount extends plugin
 
     /* Delete selected os from list and db
      */
-    if((isset($_POST['del_os']))&&(!empty($_POST['select_os']))){
+    if((isset($_POST['del_os']))&&(!empty($_POST['select_os'])) && chkacl($this->acl,"os") == ""){
       $tmp = $this->handle->is_osUsed($_POST['select_os']);
   
       if(count($tmp)){
@@ -416,7 +416,7 @@ class glpiAccount extends plugin
         $this->renameOSDialog = false;
       }
     }
-    if((isset($_POST['rename_os'])&&(!empty($_POST['select_os'])))||($this->renameOSDialog)){
+    if((isset($_POST['rename_os'])&&(!empty($_POST['select_os'])))||($this->renameOSDialog) && chkacl($this->acl,"os") == ""){
       if(isset($_POST['select_os'])){
         $this->select_type = $_POST['select_os'];
       }
@@ -434,7 +434,7 @@ class glpiAccount extends plugin
 
     /* Open dialog to edit os types 
      */
-    if($this->edit_os){
+    if($this->edit_os && chkacl($this->acl,"os") == ""){
       $smarty->assign("Method","edit");
       $smarty->assign("OSs",            $this->handle->getOSTypes());
       $smarty->assign("OSKeys",         array_flip($this->handle->getOSTypes()));
@@ -447,14 +447,14 @@ class glpiAccount extends plugin
     /* Show dialog to select a new contact person
      * Select a contact person
      */
-    if(isset($_POST['SelectContactPerson'])){
+    if(isset($_POST['SelectContactPerson']) && chkacl($this->acl,"user_tech_num") == ""){
       $this->addUser = "contact";
       $this->cur_dialog= new glpiSelectUser($this->config,$this->dn,"user_tech_num");
     }
 
     /* Open dialog which allows to edit the manufacturers
      */
-    if(isset($_POST['edit_manufacturer'])){
+    if(isset($_POST['edit_manufacturer']) && chkacl($this->acl,"user_tech_num") == ""){
       $this->cur_dialog = new glpiManufacturer($this->config,$this->dn);
       $this->dialog = true;
     }
@@ -477,13 +477,13 @@ class glpiAccount extends plugin
 
     /* Selecte technical responsible person
      */
-    if(isset($_POST['SelectTechPerson'])){
+    if(isset($_POST['SelectTechPerson']) && chkacl($this->acl,"user_tech_num") == ""){
       $this->addUser ="tech";
       $this->cur_dialog= new glpiSelectUser($this->config,$this->dn,"user_tech_num");
     }
 
     /* Technical responsible person selected*/
-    if(isset($_GET['act'])&&($_GET['act']=="user_tech_num")){
+    if(isset($_GET['act'])&&($_GET['act']=="user_tech_num") && chkacl($this->acl,"user_tech_num") == ""){
 
       /* Get posted id */
       $id = base64_decode($_GET['id']);
@@ -556,8 +556,17 @@ class glpiAccount extends plugin
     }
 
     /* Do we need to flip is_account state? */
+    
     if (isset($_POST['modify_state'])){
-      $this->is_account= !$this->is_account;
+
+      /* Only change account state if allowed */
+      if($this->is_account && $this->acl == "#all#"){
+        $this->is_account= !$this->is_account;
+        $this->is_modified = true;
+      }elseif(!$this->is_account && chkacl($this->acl,"create") == "" ){
+        $this->is_account= !$this->is_account;
+        $this->is_modified = true;
+      }
     }
 
     /* Show tab dialog headers */
@@ -691,11 +700,6 @@ class glpiAccount extends plugin
       return ;
     }
     plugin::save_object();
-    foreach($this->attributes as $attrs){
-      if(isset($_POST[$attrs])){
-        $this->$attrs = stripslashes ($_POST[$attrs]);
-      }
-    }
   }
 
 
