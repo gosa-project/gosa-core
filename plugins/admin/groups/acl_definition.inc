@@ -146,6 +146,7 @@ $ACLD['servgeneric']=   array("cn",
 			"base",
 			"create",
 			"gotoMode",
+			"FAIstate",
 			"description");
 $ACLD['servdb']=   array("goKrbServer",
 			"goKrbRealm",
