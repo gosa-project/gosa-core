@@ -32,7 +32,7 @@
      <td>{t}Home server{/t}{$must}
      </td>
      <td>
-      <select name='goFonHomeServer' title='{t}Select the accounts home server{/t}'> 
+      <select name='goFonHomeServer' title='{t}Select the accounts home server{/t}' {$goFonHomeServerACL}>  
 	{html_options options=$goFonHomeServers selected=$goFonHomeServer}
       </select>	
      </td>
