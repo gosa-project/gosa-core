@@ -118,10 +118,13 @@ class servdb extends plugin
       
       /* Save checkbox state */
       foreach ($this->additionaloc as $oc => $dummy){
-        if (isset($_POST[$oc]) && $_POST[$oc] == '1'){
-          $this->objectclasses[$oc]= $oc;
-        } else {
-          unset($this->objectclasses[$oc]);
+
+        if(chkacl($this->acl,$oc) == ""){
+          if (isset($_POST[$oc]) && $_POST[$oc] == '1'){
+            $this->objectclasses[$oc]= $oc;
+          } else {
+            unset($this->objectclasses[$oc]);
+          }
         }
       }
     }

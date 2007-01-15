@@ -2,7 +2,7 @@
  <tr>
   <td style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;" width="50%">
 
-   <input type=checkbox name="goShareServer" value="1" {$goShareServer} 
+   <input type=checkbox name="goShareServer" value="1" {$goShareServer} {$goExportEntryACL} 
    	onchange="changeState('goExportEntry');
 			changeState('NewNfsEditId');
 			changeState('DelNfsEntId');

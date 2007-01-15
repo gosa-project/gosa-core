@@ -79,7 +79,7 @@ class servgeneric extends plugin
     }
 
     /* Check for action */
-    if (isset($_POST['action'])){
+    if (isset($_POST['action']) && chkacl($this->acl,"FAIstate") == ""){
       $cmd= search_config($this->config->data['TABS'], "workgeneric", "ACTIONCMD");
       if ($cmd == ""){
         print_red(_("No ACTIONCMD definition found in your gosa.conf"));

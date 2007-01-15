@@ -145,7 +145,7 @@ class servservice extends plugin
     $smarty= get_smarty();
     $smarty->assign("staticAddress", "");
 
-    if((isset($_POST['DelNfsEnt']))&&(isset($_POST['goExportEntryList']))){
+    if((isset($_POST['DelNfsEnt'])) && (isset($_POST['goExportEntryList'])) && chkacl($this->acl,"goExportEntry") == ""){
       if($this->allow_mounts){
         foreach($_POST['goExportEntryList'] as $entry){
           $this->deleteFromMountList($this->goExportEntryList[$entry]);
@@ -156,13 +156,13 @@ class servservice extends plugin
       }
     }
 
-    if(isset($_POST['NewNfsAdd'])){
+    if(isset($_POST['NewNfsAdd']) && chkacl($this->acl,"goExportEntry") == ""){
       $this->oldone = NULL;
       $this->o_subWindow = new servnfs($this->config,$this->acl, $this->allow_mounts, $this->dn);
       $this->dialog = true;
     }
 
-    if((isset($_POST['NewNfsEdit']))&&(isset($_POST['goExportEntryList']))){
+    if((isset($_POST['NewNfsEdit']))&&(isset($_POST['goExportEntryList'])) && chkacl($this->acl,"goExportEntry") == ""){
       $entry = $this->goExportEntryList[$_POST['goExportEntryList'][0]];
       $add_mount=isset($this->mounts_to_add[$entry]);
       $this->oldone=$entry;
@@ -210,13 +210,13 @@ class servservice extends plugin
     }
 
     /* Here we add a new entry  */
-    if(isset($_POST['NewNTPAdd']) && $_POST['NewNTPExport'] != "") {
+    if(isset($_POST['NewNTPAdd']) && $_POST['NewNTPExport'] != "" && chkacl($this->acl,"goNtpServer") == "") {
       $this->goTimeSource[$_POST['NewNTPExport']]= $_POST['NewNTPExport'];
       asort($this->goTimeSource);
     }
 
     /* Deleting an Entry, is a bit more complicated than adding one*/
-    if(isset($_POST['DelNTPEnt'])) {
+    if(isset($_POST['DelNTPEnt']) && chkacl($this->acl,"goNtpServer") == "") {
       foreach ($_POST['goTimeSource'] as $entry){
         if (isset($this->goTimeSource[$entry])){
           unset($this->goTimeSource[$entry]);
@@ -265,7 +265,7 @@ class servservice extends plugin
       $smarty->assign("goExportEntryACL", " disabled ");
     }else{
       $smarty->assign("goShareServerState", "  ");
-      $smarty->assign("goExportEntryACL", "  ");
+      $smarty->assign("goExportEntryACL", chkacl($this->acl, "goExportEntry"));
     }
 
     /* Different handling for checkbox */
@@ -292,9 +292,9 @@ class servservice extends plugin
     if (isset($_POST['servicetab'])){
       $tmp = $this->goTimeSource;
   
-      if(isset($_POST['goLdapBase'])){
+      if(isset($_POST['goLdapBase']) && chkacl($this->acl,"goLdapBase") == ""){
         $this->goLdapBase = $_POST['goLdapBase'];
-       }
+      }
   
       /* Save checkbox state */
       foreach ($this->additionaloc as $oc => $dummy){
@@ -309,17 +309,21 @@ class servservice extends plugin
       }
 
       /* Save xdmcp is enabled flag */
-      if (isset($_POST['goXdmcpIsEnabled'])){
-        $this->goXdmcpIsEnabled= "true";
-      } else {
-        $this->goXdmcpIsEnabled= "false";
+      if(chkacl($this->acl,"goXdmcpIsEnabled") == ""){
+        if (isset($_POST['goXdmcpIsEnabled'])){
+          $this->goXdmcpIsEnabled= "true";
+        } else {
+          $this->goXdmcpIsEnabled= "false";
+        }
       }
         
       /* Save xdmcp is enabled flag */
-      if (isset($_POST['goShareServer'])){
-        $this->goShareServer = true;
-      } else {
-        $this->goShareServer = false;
+      if(chkacl($this->acl,"goExportEntry") == ""){
+        if (isset($_POST['goShareServer'])){
+          $this->goShareServer = true;
+        } else {
+          $this->goShareServer = false;
+        }
       }
       $this->goTimeSource = array();
       $this->goTimeSource = $tmp;
