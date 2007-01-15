@@ -173,8 +173,22 @@ if (isset($_SESSION['plugin_dir'])){
 } else {
   $old_plugin_dir= "";
 }
+
+/* reload navigation if language changed*/  
+if($reload_navigation){
+  $plist->menu="";;
+}
+$plist->gen_headlines();
+$plist->gen_menu();
+
+
 if (isset($_GET['plug'])){
   $plug= validate($_GET['plug']);
+
+  if(!in_array_ics($plug,$plist->allowed_plug_ids)){
+    $plug = key($plist->allowed_plug_ids);
+  }
+
   $plugin_dir= $plist->get_path($plug);
   $_SESSION['plugin_dir']= $plugin_dir;
   if ($plugin_dir == ""){
@@ -286,12 +300,6 @@ $smarty->assign ("go_corner", get_template_path('images/go_corner.png'));
 $smarty->assign ("go_left", get_template_path('images/go_left.png'));
 $smarty->assign ("go_help", get_template_path('images/help.png'));
 
-/* reload navigation if language changed*/  
-if($reload_navigation){
-  $plist->menu="";;
-}
-$plist->gen_headlines();
-$plist->gen_menu();
 $smarty->assign ("menu", $plist->menu);
 $smarty->assign ("plug", "$plug");
 
