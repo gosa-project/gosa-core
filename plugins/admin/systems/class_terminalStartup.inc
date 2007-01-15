@@ -24,7 +24,7 @@ class termstartup extends plugin
 
 
   /* attribute list for save action */
-  var $attributes= array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters");
+  var $attributes= array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters","gotoModules");
   var $objectclasses= array("GOhard");
 
   /* Helper */
@@ -38,13 +38,15 @@ class termstartup extends plugin
 
     /* Get arrays */
     foreach (array("gotoModules") as $val){
-      if (isset($this->attrs["$val"]["count"])){
-        for ($i= 0; $i<$this->attrs["count"]; $i++){
-          if (isset($this->attrs["$val"][$i])){
-            array_push($this->$val, $this->attrs["$val"][$i]);
+      $tmp =array();
+      if (isset($this->attrs[$val]["count"])){
+        for ($i= 0; $i<$this->attrs[$val]["count"]; $i++){
+          if (isset($this->attrs[$val][$i])){
+            $tmp[] = $this->attrs["$val"][$i];
           }
         }
       }
+      $this->$val = $tmp;
       sort ($this->$val);
       $this->$val= array_unique($this->$val);
     }
@@ -182,7 +184,7 @@ class termstartup extends plugin
     /* Delete module */
     if (isset ($_POST['delete_module'])){
       if (count($_POST['modules_list']) && chkacl ($this->acl, "gotoModule") == ""){
-        $this->del_list ($this->gotoModules, $_POST['modules_list']);
+        $this->gotoModules = $this->del_list($this->gotoModules, $_POST['modules_list']);
       }
     }
 
@@ -379,8 +381,9 @@ class termstartup extends plugin
       if (isset ($this->$val) && count ($this->$val) != 0){
     
         $this->attrs["$val"]= array_unique($this->$val);
+      }else{
+        $this->attrs["$val"]=array();
       }
-      if(!isset($this->attrs["$val"])) $this->attrs["$val"]=array();
     }
 
     /* Strip out 'default' values */
@@ -421,7 +424,7 @@ class termstartup extends plugin
 
 
   /* Delete value to array, check if unique */
-  function del_list (&$array, $list)
+  function del_list ($array, $list)
   {
     $tmp= array();
     foreach ($array as $mod){
@@ -429,7 +432,7 @@ class termstartup extends plugin
         $tmp[]= $mod;
       }
     }
-    $array= $tmp;
+    return($tmp);
   }
 
    /* Generate ListBox frindly output for the defined shares
