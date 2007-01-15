@@ -207,6 +207,8 @@ class faiManagement extends plugin
 
 			/* Some nice guy may send this as POST, so we've to check
 			   for the permissions again. */
+			$acl= get_permissions ($this->dn, $this->ui->subtreeACL);
+			$this->acl= get_module_permission($acl, "FAIclass", $this->dn);
 			if (chkacl($this->acl, "delete") == ""){
 
 				/* Find out more about the object type */
@@ -320,7 +322,9 @@ class faiManagement extends plugin
       Create a new branch "insert Name"
      ****************/
 
-    if((isset($_POST['UseBranchName']))&&(($this->dispNewBranch)||($this->dispNewFreeze))){
+    $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "FAIclass", $this->DivListFai->selectedBase);
+    if((isset($_POST['UseBranchName']))&&(($this->dispNewBranch)||($this->dispNewFreeze)) && chkacl($this->acl,"FAIclass") == ""){
       $_SESSION['LASTPOST'] = $_POST;
 
       if($this->dispNewBranch){
@@ -366,7 +370,9 @@ class faiManagement extends plugin
       Create a new branch 
      ****************/
 
-    if(isset($_GET['PerformBranch'])){
+    $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "FAIclass", $this->DivListFai->selectedBase);
+    if(isset($_GET['PerformBranch']) && chkacl($this->acl,"FAIclass") == ""){
       /* Create it know */
       $this->dispNewBranch = false;
       $this->dispNewFreeze = false;
@@ -450,7 +456,9 @@ class faiManagement extends plugin
       Display dialog to enter new Branch name
      ****************/
 
-    if(($s_action == "branch_branch")||($this->dispNewBranch)){
+    $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "FAIclass", $this->DivListFai->selectedBase);
+    if((($s_action == "branch_branch")||($this->dispNewBranch)) && chkacl($this->acl,"FAIclass") == ""){
       $this->dispNewBranch=true;
       $smarty->assign("iframe",false);
 		  $display 	.= $smarty->fetch(get_template_path('faiNewBranch.tpl', TRUE, dirname(__FILE__)));
@@ -462,7 +470,9 @@ class faiManagement extends plugin
       Display dialog to enter new Freeze name
      ****************/
 
-    if(($s_action == "freeze_branch")||($this->dispNewFreeze)){
+    $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "FAIclass", $this->DivListFai->selectedBase);
+    if((($s_action == "freeze_branch")||($this->dispNewFreeze)) && chkacl($this->acl,"FAIclass") == ""){
       $this->dispNewFreeze = true;
       $smarty->assign("iframe",false);
 		  $display 	.= $smarty->fetch(get_template_path('faiNewBranch.tpl', TRUE, dirname(__FILE__)));
@@ -481,12 +491,16 @@ class faiManagement extends plugin
                     "new_template"      =>  "FAItemplate",
                     "new_package"       =>  "FAIpackageList");
 
-    if(isset($types[$s_action])){
+    $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "FAIclass", $this->DivListFai->selectedBase);
+    if(isset($types[$s_action]) && chkacl($this->acl,"FAIclass") == ""){
       $this->dialog = new askClassName($this->config,$this->dn,$this->ui,$types[$s_action]);
     }
 
     /* New Profile */
-    if($s_action == "new_profile"){
+    $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "FAIclass", $this->DivListFai->selectedBase);
+    if($s_action == "new_profile" && chkacl($this->acl,"FAIclass") == ""){
       $this->dn = "new" ;
       $a_setup= $this->get_type(array("objectClass"=>array("FAIprofile")));
 
@@ -606,6 +620,12 @@ class faiManagement extends plugin
   function getBranches($base = false,$prefix = "")
   {
     $ret = array("main"=>"/");
+    $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "FAIclass", $this->DivListFai->selectedBase);
+    if(chkacl($this->acl,"FAIclass") != ""){
+      return($ret);
+    }
+    
     $ldap = $this->config->get_ldap_link();
     if(!$base){
       $base= "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
@@ -751,6 +771,12 @@ class faiManagement extends plugin
     $str            = "";
     $objects        = array();
     $this->objects  = array();
+
+    $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "FAIclass", $base);
+    if(chkacl($this->acl,"FAIclass") != ""){
+      return;
+    }
 
     /* Walk through possible sub departments and fetch all FAI objects */
 		foreach($ObjectTypes as $type => $obj){
