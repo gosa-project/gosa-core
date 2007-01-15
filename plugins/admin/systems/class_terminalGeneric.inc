@@ -257,6 +257,7 @@ class termgeneric extends plugin
     /* Fill templating stuff */
     $smarty= get_smarty();
     $smarty->assign("cn", $this->cn);
+    $smarty->assign("cnACL", chkacl($this->acl,"cn"));
     $smarty->assign("staticAddress", "");
 
     $smarty->assign("bases", $this->config->idepartments);
@@ -358,7 +359,7 @@ class termgeneric extends plugin
       $this->gotoTerminalPath;
     }
   
-    if(isset($_POST['termgeneric_posted'])){
+    if(isset($_POST['termgeneric_posted']) && chkacl($this->acl,"gotoNtpServer") == ""){
       if(isset($_POST["inheritTimeServer"])){
         $this->inheritTimeServer = true;
       }else{

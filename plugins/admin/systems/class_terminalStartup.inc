@@ -248,9 +248,7 @@ class termstartup extends plugin
         $use = " checked ";
       };
 
-      if(chkacl($this->acl,"gotoLdapServer") == ""){
-        $use.= " disabled ";
-      }
+      $use .= chkacl($this->acl,"gotoLdapServer");
 
       $SelectBoxLdapServer->AddEntry(
           array(
