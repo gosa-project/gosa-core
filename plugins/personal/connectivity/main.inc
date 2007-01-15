@@ -67,7 +67,7 @@ if (!$remove_lock){
       $connectivity->save ();
       gosa_log ("User/connectivity object'".$ui->dn."' has been saved");
       $connectivity->acl= "#none#";
-      $editacl= get_module_permission($acl, "connectivity", $ui->dn);
+    #  $editacl= get_module_permission($acl, "connectivity", $ui->dn);
       del_lock ($ui->dn);
       sess_del ('edit');
 
@@ -124,15 +124,18 @@ if (!$remove_lock){
     } else {
       $info= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/openlock.png').
              "\"> ".$ui->dn."&nbsp;";
-      if ($editacl != "#none#"){
+     # if ($editacl != "#none#"){
         $info.= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/lamp.png').
                 "\">"._("Click the 'Edit' button below to change informations in this dialog");
         $display.= "<input type=submit name=\"edit\" value=\""._("Edit")."\">\n";
-      }
+      #}
       $display.= "<input type=\"hidden\" name=\"ignore\">\n";
     }
     $display.="</div>";
+  }else{
+    $display.= "<input type=\"hidden\" name=\"ignore\">\n";
   }
+
 //  $display.= "</p>\n";
 
   /* Page header*/
