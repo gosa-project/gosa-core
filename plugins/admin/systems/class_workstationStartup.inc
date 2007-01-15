@@ -693,6 +693,8 @@ class workstartup extends plugin
         $use = " checked ";
       };
 
+      $use .= chkacl($this->acl,"gotoLdapServer");
+
       $display = $server;
 
       $SelectBoxLdapServer->AddEntry(

@@ -50,7 +50,7 @@
 			</tr>
 			<tr>
 				<td>
-					<select name="FAIdebianMirror"   onchange='document.mainform.submit()'>
+					<select name="FAIdebianMirror"   onchange='document.mainform.submit()' {$FAIdebianMirrorACL}>
 						{html_options options=$FAIdebianMirrors output=$FAIdebianMirrors selected=$FAIdebianMirror}
 					</select>
 				</td>
@@ -87,7 +87,7 @@
 				<!--<input type="submit" value="{t}set{/t}" name="refresh">-->
 				</td>
 				<td>
-					<select name="FAIrelease"  onchange='document.mainform.submit()'>
+					<select name="FAIrelease"  onchange='document.mainform.submit()' {$FAIclassACL}>
 					{html_options options=$FAIreleases output=$FAIreleases selected=$FAIrelease}
 					</select>
 				</td>
@@ -118,7 +118,8 @@
    <h2>
     <img class="center" alt="" align="middle" src="images/hardware.png"> {t}Kernel modules (format: name parameters){/t}
    </h2>
-    <select style="width:100%; height:150px;" name="modules_list[]" size=15 multiple title="{t}Add additional modules to load on startup{/t}">
+    <select style="width:100%; height:150px;" name="modules_list[]" size=15 multiple title="{t}Add additional modules to load on startup{/t}" 
+	{$gotoModulesACL}>
      {html_options values=$gotoModules output=$gotoModules}
 	 <option disabled>&nbsp;</option>
     </select>

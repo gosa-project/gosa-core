@@ -245,6 +245,10 @@ class workgeneric extends plugin
     $query= "fping -q -r 1 -t 500 ".$this->cn;
     exec ($query, $dummy, $retval);
 
+    foreach($this->attributes as $attrs ){
+      $smarty->assign($attrs."ACL",chkacl($this->acl,$attrs));
+    }
+
     /* Offline */
     if ($retval == 0){
       $smarty->assign("actions", array("halt" => _("Switch off"), "reboot" => _("Reboot"),
@@ -318,14 +322,13 @@ class workgeneric extends plugin
     $this->netConfigDNS->save_object();
 
     /* Set inherit mode */
-    if(isset($_POST['workgeneric_posted'])){
+    if(isset($_POST['workgeneric_posted']) && chkacl($this->acl,"gotoNtpServer") == ""){
       if(isset($_POST["inheritTimeServer"])){
         $this->inheritTimeServer = true;
       }else{
         $this->inheritTimeServer = false;
       }
     }
-
   }
 
 
