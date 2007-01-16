@@ -824,10 +824,12 @@ class printgeneric extends plugin
     }
     show_ldap_error($ldap->get_error(), _("Saving printer failed"));
 
-
-    $this->netConfigDNS->cn = $this->cn;
-    $this->netConfigDNS->dn = $this->dn;
-    $this->netConfigDNS->save($this->dn);
+    /* Only save dns stuff if we are a standalone printer */
+    if($this->BelongsTo == "Printer"){
+      $this->netConfigDNS->cn = $this->cn;
+      $this->netConfigDNS->dn = $this->dn;
+      $this->netConfigDNS->save($this->dn);
+    }
 
     /* Optionally execute a command after we're done */
     $this->postcreate();

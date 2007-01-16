@@ -353,7 +353,9 @@ function getDNSHostEntries($config,$name,$silent = false)
   $zonesArr = array();
   foreach($zones as $zoneMix){
   	$zoneIndex = split("/",$zoneMix);
-  	if(!array_key_exists($zoneIndex[0],$zonesArr)) $zonesArr[$zoneIndex[0]] = array();
+  	if(!array_key_exists($zoneIndex[0],$zonesArr)) {
+      $zonesArr[$zoneIndex[0]] = array();
+    }
 		array_push($zonesArr[$zoneIndex[0]],$zoneIndex[1]);
   }
   
@@ -364,8 +366,8 @@ function getDNSHostEntries($config,$name,$silent = false)
     	$zoneDn = getDNSZoneDN($config,$zoneMix);
     	$ldap->ls("(&(objectClass=dNSZone)(zoneName=*)(relativeDomainName=".$name.")(!(relativeDomainName=@)))", $zoneDn,$attrs = array("*"));
     	while($attrs = $ldap->fetch()){
-    	  $foundInTmp [] = $attrs['dn'];
-    	  $foundIn [] = $attrs['dn'];
+    	  $foundInTmp [$zoneMix] = $attrs['dn'];
+    	  $foundIn [$zoneMix] = $attrs['dn'];
     	}
   	}
   }
@@ -378,7 +380,8 @@ function getDNSHostEntries($config,$name,$silent = false)
 
   /* Get host informations from zone
    */ 
-  $ldap->cd($foundIn[0]);
+  $id_tmp = key($foundIn);
+  $ldap->cd($foundIn[$id_tmp]);
   $ldap->search("(&(objectClass=dNSZone)(zoneName=*)(!(relativeDomainName=@)))",array("*"));
   while($attrs = $ldap->fetch()){
 
@@ -387,7 +390,8 @@ function getDNSHostEntries($config,$name,$silent = false)
      */
     if($attrs['relativeDomainName'][0] == $name){
       $ret['exists'] = true;
-      foreach(array("dNSClass","zoneName","dNSTTL") as $atr){
+      $ret['zoneName'] = $id_tmp;
+      foreach(array("dNSClass","dNSTTL") as $atr){
         if(isset($attrs[$atr][0])){
           $ret[$atr] = $attrs[$atr][0];
         }
@@ -475,7 +479,7 @@ function getDNSHostEntriesDiff($config,$oldName,$newEntry,$newName)
     /* Check if zoneName has changed 
      */   
     if(count($newEntry['RECORDS'])){
-      if($oldEntry['zoneName'] != $zoneName){
+      if($oldEntry['zoneName'] != $newEntry['zoneName']){
         $oldzoneDn = getDNSZoneDN($config,$oldEntry['zoneName']);
         $dn = "relativeDomainName=".$oldName.",".$oldzoneDn;
         $dn2= "relativeDomainName=".$oldName.",".$zoneDn;
@@ -596,20 +600,27 @@ function getNameFromMix($zoneMix){
 
 /* returns the dn for a specified zone
  */
-function getDNSZoneDN($config,$zoneNameMix){
+function getDNSZoneDN($config,$zoneNameMix)
+{
   $ret = "";
-  if(!strstr($zoneNameMix, '/')) return($ret);
+  if(!strstr($zoneNameMix, '/')) {
+    print_red(sprintf(_("Undefined zone name '%s'. Zone name must look like this 'server/zone.com'."),$zoneNameMix));
+    return($ret);
+  }
+
   $zoneNameIndex 	  	= split("/",$zoneNameMix); 
   $zoneName           = $zoneNameIndex[1];
   $nameServer		  		= strtolower($zoneNameIndex[0]);
-  $ldap = $config->get_ldap_link();
+  $ldap               = $config->get_ldap_link();
 
   /* search for the nameserver */
   $ldap-> cd($config->current['BASE']);
   $ldap->search("(&(objectClass=goServer)(cn=".$nameServer."))",array("cn"));
   if($ldap->count()){
     $attr = $ldap->fetch();
-  } else  return($ret);
+  } else {
+    return($ret);
+  }
   
   $ldap-> cd($attr['dn']);
   $ldap->search("(&(objectClass=dNSZone)(sOARecord=*)(zoneName=".$zoneName."))",array("zoneName"));

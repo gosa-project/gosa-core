@@ -395,7 +395,9 @@ class termDNS extends plugin
 
       /* Add ipHostNumber to aRecords
        */
-      $this->dnsEntry['RECORDS'][] = array("type"=>"aRecord","value"=>$this->ipHostNumber);
+      if(!empty($this->ipHostNumber)){
+        $this->dnsEntry['RECORDS'][] = array("type"=>"aRecord","value"=>$this->ipHostNumber);
+      }
 
       /* Create diff and follow instructions 
        * If Account was disabled, remove account by setting exists to false
