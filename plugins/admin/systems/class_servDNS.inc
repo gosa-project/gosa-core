@@ -253,23 +253,24 @@ class servdns extends plugin
   }
 
 
-  /* Remove dns service 
+
+    /* Remove dns service
    */
   function remove_from_parent()
   {
-    if(!$this->DNSinitially_was_account){
-      return;
+    if($this->initially_was_account){
+      $bool = true;
+      foreach($this->Zones as $key => $zone){
+        $bool= $bool & $this->RemoveZone($key);
+      }
+
+      if($bool){
+        $this->save();
+      }
+      return($bool);
     }
-    print_red("Can't remove dns yet. returning without remove.");
-    return;
-    $ldap = $this->config->get_ldap_link();
-    $ldap->ls("(&(objectClass=dNSZone)(zoneName=*)(relativeDomainName=@))",$this->orig_dn,array("relativeDomainName","zoneName"));
-    while($attr = $ldap->fetch()){
-      $ldap->cd($attr['dn']);
-      $ldap->rmDir($attr['dn']);
-    }
-    show_ldap_error($ldap->get_error(), _("Removing DNS service failed"));
   }
+
 
 
   /* Save to LDAP */

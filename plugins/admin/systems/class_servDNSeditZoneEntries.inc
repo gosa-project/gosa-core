@@ -284,7 +284,6 @@ class servDNSeditZoneEntries extends plugin
 
     $todo = array(); 
 
-    print_a($this->Devices);
 
     /* Create todolist
      */
