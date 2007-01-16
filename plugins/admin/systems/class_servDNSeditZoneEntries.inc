@@ -9,7 +9,7 @@ class servDNSeditZoneEntries extends plugin
 
   /* attribute list for save action */
   var $ignore_account     = TRUE;
-  var $attributes         = array();
+  var $attributes         = array("cn");
   var $objectclasses      = array("whatever");
 
   var $Devices            = array();
@@ -20,6 +20,7 @@ class servDNSeditZoneEntries extends plugin
   var $RecordTypes        = array();  // Possible record type.
 
   var $disableDialog      = false; // Dialog will be disabled, if this zone is new 
+  var $cn;
 
   function servDNSeditZoneEntries ($config,$dn, $zoneObject)
   {
@@ -29,8 +30,8 @@ class servDNSeditZoneEntries extends plugin
      */
     $this->RecordTypes  = getDnsRecordTypes();
     $this->dn           = "zoneName=".$zoneObject['InitialzoneName'].",".$dn; 
-    $this->zoneName     = $zoneObject['InitialzoneName'];
-    $this->reverseName  = $zoneObject['InitialReverseZone'];
+    $this->zoneName     = strtoupper($this->cn)."/".$zoneObject['InitialzoneName'];
+    $this->reverseName  = strtoupper($this->cn)."/".$zoneObject['InitialReverseZone'];
 
     /* Get ldap connection 
      */
@@ -195,7 +196,13 @@ class servDNSeditZoneEntries extends plugin
     $ldap->cd($this->config->current['BASE']);
 
     $names = array();
+
     foreach($this->Devices as $DevName => $device){
+
+      /* skip checking empty attributes */
+      if(count($this->Devices[$DevName]['RECORDS']) == 0){
+        return;
+      }
 
       /* Checking entry name
        */
@@ -229,6 +236,8 @@ class servDNSeditZoneEntries extends plugin
 
       /* Names should be written in lowercase
        */
+
+
       if(strtolower($DevName) != $DevName){
         $message[] = sprintf(_("The host name '%s' should be written in lowercase."), $DevName);
       }
@@ -274,6 +283,8 @@ class servDNSeditZoneEntries extends plugin
     if($this->disableDialog) return;
 
     $todo = array(); 
+
+    print_a($this->Devices);
 
     /* Create todolist
      */
