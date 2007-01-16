@@ -234,7 +234,9 @@ class servdns extends plugin
 
     }else{
       unset($this->Zones[$id]);
+      return(true);
     }
+    return(false);
   } 
 
 
@@ -258,7 +260,7 @@ class servdns extends plugin
    */
   function remove_from_parent()
   {
-    if($this->initially_was_account){
+    if($this->DNSinitially_was_account){
       $bool = true;
       foreach($this->Zones as $key => $zone){
         $bool= $bool & $this->RemoveZone($key);
