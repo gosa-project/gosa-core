@@ -699,12 +699,15 @@ class phoneAccount extends plugin
      
       $i = 0; 
       $EXT = array();
-      $EXT[$i]['context'] = 'GOsa';
-      $EXT[$i]['exten']   = $this->uid;
-      $EXT[$i]['priority']= 1;
-      $EXT[$i]['app']     = "Goto";
-      $EXT[$i]['appdata'] = $newnums[$i_new_key]."|1";
-      $i ++;
+    
+      if(!is_numeric($this->uid)){
+        $EXT[$i]['context'] = 'GOsa';
+        $EXT[$i]['exten']   = $this->uid;
+        $EXT[$i]['priority']= 1;
+        $EXT[$i]['app']     = "Goto";
+        $EXT[$i]['appdata'] = $newnums[$i_new_key]."|1";
+        $i ++;
+      }
 
       // Entension entries  Hint / Dial / Goto
       foreach($newnums as $s_telenums){
