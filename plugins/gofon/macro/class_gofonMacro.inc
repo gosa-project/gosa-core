@@ -269,9 +269,10 @@ class macro extends plugin
        * Remove comments introduced by ;
        * Skip empty lines 
        */ 
-      $s_linestr = preg_replace ("/^.*=\> /","",$s_linestr);
-      $s_linestr = preg_replace("/;.*$/","",$s_linestr) ;
       $s_linestr = trim($s_linestr);
+      $s_linestr = preg_replace("/;.*$/","",$s_linestr) ;
+      $s_linestr = preg_replace ("/^.*=\> /","",$s_linestr);
+
       if(empty($s_linestr)){
         continue;
       }
