@@ -34,7 +34,7 @@ class servdns extends plugin
     /* Get all zone Informations
      */
     $this->Zones = getDNSZoneEntries($config,$dn);
-    
+  
     /* If there is at least one entry in this -> types, we have DNS enabled 
      */
     if(count($this->Zones) == 0){
@@ -83,7 +83,7 @@ class servdns extends plugin
 
     /* Edited or Added zone 
      */
-    if(isset($_POST['SaveZoneChanges'])){
+    if((isset($_POST['SaveZoneChanges'])) && is_object($this->dialog)){
       $this->dialog->save_object();
 
       /* Check for errors  
@@ -163,11 +163,11 @@ class servdns extends plugin
       <input type='image' src='images/edittrash.png' name='delZone_%s'>";
     foreach($this->Zones as $zone => $values ){
       $ZoneList->AddEntry(array(
-            array("string" => $zone),
-            array("string" => _("Reverse zone")." : ".$values['ReverseZone']),
+            array("string" => getNameFromMix($zone)),
+            array("string" => _("Reverse zone")." : ".getNameFromMix($values['ReverseZone'])),
             array("string" => _("TTL")." : ".$values['sOAttl']),
             array("string" => _("Class")." : ".$values['dNSClass']),
-            array("string" =>str_replace("%s",base64_encode($zone),$editImg))
+            array("string" => str_replace("%s",base64_encode($zone),$editImg))
             ));
     }    
   
@@ -186,16 +186,17 @@ class servdns extends plugin
   function RemoveZone($id)
   {
     $zones =  $this->getUsedZoneNames();
-
+    $rev  ="";
+  
     if(isset($this->Zones[$id]['InitialReverseZone'])){
-      $rev = FlipIp($this->Zones[$id]['InitialReverseZone']);
-    }else{
-      $rev = FlipIp($this->Zones[$id]['ReverseZone']);
+      $rev = FlipIp(getNameFromMix($this->Zones[$id]['InitialReverseZone']));
+    }elseif(isset($this->Zones[$id]['ReverseZone'])){
+      $rev = FlipIp(getNameFromMix($this->Zones[$id]['ReverseZone']));
     }
 
     $zonename = "";
     if(isset($this->Zones[$id]['InitialzoneName'])){
-      $zonename= $this->Zones[$id]['InitialzoneName'];
+      $zonename= getNameFromMix($this->Zones[$id]['InitialzoneName']);
     }
 
     $used = array();
@@ -283,7 +284,13 @@ class servdns extends plugin
   
     /* Get differences 
      */
-    $tmp = getDNSZoneEntriesDiff($this->config,$this->Zones,$this->orig_dn);
+
+    $old_dn =  $this->orig_dn;
+    if($old_dn == "new"){
+      $old_dn = $this->dn;
+    }
+  
+    $tmp = getDNSZoneEntriesDiff($this->config,$this->Zones,$old_dn);
 
     /* Updated zone entries if reverser or forward name has changed  
      * Must be done before moving entries, else the given dn is invalid

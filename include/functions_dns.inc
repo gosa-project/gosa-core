@@ -67,7 +67,7 @@ function FlipIp($ip)
 function getDNSZoneEntries($config,$HostDn,$silent = false)
 {
   global $RecordTypes;
- 
+
   $ldap = $config->get_ldap_link();
   $ldap->cd($config->current['BASE']); 
 
@@ -78,6 +78,10 @@ function getDNSZoneEntries($config,$HostDn,$silent = false)
   /* Special sOArecords 
    */
   $sOAREcords  = array("0"=>"sOAprimary","1"=>"sOAmail","2"=>"sOAserial","3"=>"sOArefresh","4"=>"sOAretry","5"=>"sOAexpire","6"=>"sOAttl");
+
+  /* Get host entry */
+  $ldap->cat($HostDn);
+  $host_attr = $ldap->fetch();
 
   /* Create tempalte for all fetched zone Data 
    */
@@ -105,21 +109,20 @@ function getDNSZoneEntries($config,$HostDn,$silent = false)
    */
   foreach($tmp_res as $attrs){
 
-    $zoneName                   = $attrs['zoneName'][0];
+    $zoneName                   = strtoupper($host_attr['cn'][0])."/".$attrs['zoneName'][0];
     $Zones[$zoneName]           = $ZoneBase;
     $Zones[$zoneName]['exists'] = true;
 
     /* Set basic attributes 
      */
-    foreach(array("zoneName","dNSClass") as $attr){
-      if(isset($attrs[$attr][0])){
-        $Zones[$zoneName][$attr] = $attrs[$attr][0];
-      }
+    if(isset($attrs["dNSClass"][0])){
+      $Zones[$zoneName]["dNSClass"] = $attrs["dNSClass"][0];
     }
 
     /* Set initial zone name, to be able to detect if this entry was renamed 
      */
     $Zones[$zoneName]['InitialzoneName'] = $zoneName;
+    $Zones[$zoneName]['zoneName'] = $zoneName;
 
     /* Generate SOA entry
      */
@@ -173,8 +176,8 @@ function getDNSZoneEntries($config,$HostDn,$silent = false)
       unset($Zones[$zoneName]);
     }else{
       $tmp = $ldap->fetch();
-      $Zones[$zoneName]['ReverseZone']        = FlipIp(str_replace(".in-addr.arpa","",$tmp['zoneName'][0]));
-      $Zones[$zoneName]['InitialReverseZone'] = FlipIp(str_replace(".in-addr.arpa","",$tmp['zoneName'][0]));
+      $Zones[$zoneName]['ReverseZone']        = strtoupper($host_attr['cn'][0])."/".FlipIp(str_replace(".in-addr.arpa","",$tmp['zoneName'][0]));
+      $Zones[$zoneName]['InitialReverseZone'] = strtoupper($host_attr['cn'][0])."/".FlipIp(str_replace(".in-addr.arpa","",$tmp['zoneName'][0]));
     }
   }
   return($Zones);
@@ -221,9 +224,9 @@ function getDNSZoneEntriesDiff($config,$newZones,$HostDn)
       
       /* Move old zone to new position 
        */ 
-      $oldDn = "zoneName=".$zone['InitialzoneName'].",".$HostDn;
-      $newDn = "zoneName=".$zone['zoneName'].",".$HostDn;
-      $PrePareZoneEntries[$zone['InitialzoneName']] = $zone['zoneName'];
+      $oldDn = "zoneName=".getNameFromMix($zone['InitialzoneName']).",".$HostDn;
+      $newDn = "zoneName=".getNameFromMix($zone['zoneName']).",".$HostDn;
+      $PrePareZoneEntries[$zone['InitialzoneName']] = getNameFromMix($zone['zoneName']);
       $move [$oldDn] = $newDn;      
     }
 
@@ -236,9 +239,9 @@ function getDNSZoneEntriesDiff($config,$newZones,$HostDn)
 
     /* Create forward zone entry and put it in our add queue
      */
-    $newDn  = "zoneName=".$zone['zoneName'].",".$HostDn;
+    $newDn  = "zoneName=".getNameFromMix($zone['zoneName']).",".$HostDn;
     $obj    =  $zoneBase;
-    $obj['zoneName'] = $zone['zoneName'];
+    $obj['zoneName'] = getNameFromMix($zone['zoneName']);
  
     /* Create sOARecord & add it to the obj
      */ 
@@ -252,9 +255,9 @@ function getDNSZoneEntriesDiff($config,$newZones,$HostDn)
      */
     if(!empty($zone['InitialReverseZone'])){
       if($zone['InitialReverseZone'] != $zone['ReverseZone']){
-        $base = "zoneName=".$zone['zoneName'].",".$HostDn;
-        $oldRDn = "zoneName=". FlipIp($zone['InitialReverseZone']).".in-addr.arpa,".$base; 
-        $newRDn = "zoneName=". FlipIp($zone['ReverseZone']).".in-addr.arpa,".$base;
+        $base = "zoneName=".getNameFromMix($zone['zoneName']).",".$HostDn;
+        $oldRDn = "zoneName=". FlipIp(getNameFromMix($zone['InitialReverseZone'])).".in-addr.arpa,".$base; 
+        $newRDn = "zoneName=". FlipIp(getNameFromMix($zone['ReverseZone'])).".in-addr.arpa,".$base;
         $PrePareZoneEntries[FlipIp($zone['InitialReverseZone']).".in-addr.arpa"] = FlipIp($zone['ReverseZone']).".in-addr.arpa";
         $move [$oldRDn] = $newRDn;
       }
@@ -283,8 +286,8 @@ function getDNSZoneEntriesDiff($config,$newZones,$HostDn)
     /* Create Reverse Entry 
      * And append it to our add queue
      */
-    $zone['ReverseZone'] = FlipIp($zone['ReverseZone']).".in-addr.arpa";
-    $base = "zoneName=".$zone['zoneName'].",".$HostDn;
+    $zone['ReverseZone'] = FlipIp(getNameFromMix($zone['ReverseZone'])).".in-addr.arpa";
+    $base = "zoneName=".getNameFromMix($zone['zoneName']).",".$HostDn;
     $newRDn = "zoneName=".$zone['ReverseZone'].",".$base;
     $rObj = $obj;
     $rObj['zoneName']= $zone['ReverseZone'];
@@ -302,7 +305,7 @@ function getDNSZoneEntriesDiff($config,$newZones,$HostDn)
    *  because they are no longer available in newZones anymore.
    */
   foreach($oldZones as $zone)  {
-    $oldDn = "zoneName=".$zone['InitialzoneName'].",".$HostDn;
+    $oldDn = "zoneName=".getNameFromMix($zone['InitialzoneName']).",".$HostDn;
     $del[$oldDn] = "";
   }
 
@@ -314,7 +317,7 @@ function getDNSZoneEntriesDiff($config,$newZones,$HostDn)
     $ldap = $config->get_ldap_link();
     foreach($PrePareZoneEntries as $FromZoneName => $ToZoneName){
       $ldap->cd($HostDn);
-      $ldap->search("(&(objectClass=dNSZone)(zoneName=".$FromZoneName.")(!(relativeDomainName=@)))",array("zoneName"));
+      $ldap->search("(&(objectClass=dNSZone)(zoneName=".getNameFromMix($FromZoneName).")(!(relativeDomainName=@)))",array("zoneName"));
       while($attrs = $ldap->fetch()){
         $zoneUpdates[$attrs['dn']] = array("zoneName"=>$ToZoneName);
       }

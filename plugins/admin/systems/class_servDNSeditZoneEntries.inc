@@ -29,9 +29,9 @@ class servDNSeditZoneEntries extends plugin
     /* Initialise class
      */
     $this->RecordTypes  = getDnsRecordTypes();
-    $this->dn           = "zoneName=".$zoneObject['InitialzoneName'].",".$dn; 
-    $this->zoneName     = strtoupper($this->cn)."/".$zoneObject['InitialzoneName'];
-    $this->reverseName  = strtoupper($this->cn)."/".$zoneObject['InitialReverseZone'];
+    $this->dn           = "zoneName=".getNameFromMix($zoneObject['InitialzoneName']).",".$dn; 
+    $this->zoneName     = $zoneObject['InitialzoneName'];
+    $this->reverseName  = $zoneObject['InitialReverseZone'];
 
     /* Get ldap connection 
      */
