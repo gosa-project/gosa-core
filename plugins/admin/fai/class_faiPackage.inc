@@ -536,19 +536,21 @@ class faiPackage extends plugin
         if((isset($attrs['objectClass'])) && (in_array_ics("gosaAdministrativeUnitTag",$attrs['objectClass']))){
           $pkgattrs['objectClass'][] = "gosaAdministrativeUnitTag";
         }
-    
-        if($ldap->count()!=0){
-          $ldap->cd($pkgdn);
-          $this->cleanup();
-          $ldap->modify ($pkgattrs); 
+  
+        if(in_array($pkgattrs['FAIvariableType'],array("boolean","multiselect","password","select","string","text"))){
+          if($ldap->count()!=0){
+            $ldap->cd($pkgdn);
+            $this->cleanup();
+            $ldap->modify ($pkgattrs); 
 
-        }else{
-          $ldap->cd($this->config->current['BASE']);
-          $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $pkgdn));
-          $ldap->cd($pkgdn);
-          $ldap->add($pkgattrs);
+          }else{
+            $ldap->cd($this->config->current['BASE']);
+            $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $pkgdn));
+            $ldap->cd($pkgdn);
+            $ldap->add($pkgattrs);
+          }
+          show_ldap_error($ldap->get_error(), _("Saving FAI package entry failed"));
         }
-        show_ldap_error($ldap->get_error(), _("Saving FAI package entry failed"));
 
         /* Handle tagging */
         $this->handle_object_tagging($pkgdn, $this->gosaUnitTag);
