@@ -49,7 +49,7 @@ class termgeneric extends plugin
 
   var $mapActions   = array("reboot"          => "",
                             "instant_update"  => "softupdate",
-                            "update"          => "sceduledupdate",
+                            "update"          => "scheduledupdate",
                             "reinstall"       => "install",
                             "rescan"          => "",
                             "memcheck"        => "memcheck",

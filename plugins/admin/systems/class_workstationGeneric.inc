@@ -52,7 +52,7 @@ class workgeneric extends plugin
 
   var $mapActions   = array("reboot"          => "localboot",
                             "instant_update"  => "softupdate",
-                            "update"          => "sceduledupdate",
+                            "update"          => "scheduledupdate",
                             "reinstall"       => "install",
                             "rescan"          => "",
                             "memcheck"        => "memcheck",
