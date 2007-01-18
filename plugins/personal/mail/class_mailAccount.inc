@@ -792,6 +792,7 @@ class mailAccount extends plugin
 
       if ($method->connect($this->gosaMailServer)){
         $method->updateMailbox($this->folder_prefix.$this->$id);
+        $method->updateDefaultMailboxes($this->folder_prefix.$this->$id, $this->config->current['IMAPDEFAULTFOLDERS']);
         
         $method->setQuota($this->folder_prefix.$this->$id, $this->gosaMailQuota);
         $method->disconnect();

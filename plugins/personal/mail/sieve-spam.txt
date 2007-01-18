@@ -2,4 +2,3 @@
 if header :contains "X-Spam-Level" "$spamlevel" {
   fileinto "$spambox";
 }
-

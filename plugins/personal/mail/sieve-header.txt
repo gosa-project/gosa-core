@@ -1,3 +1,2 @@
 ###GOSA
 require ["fileinto", "reject", "vacation"];
-
