@@ -125,15 +125,22 @@ class divListConference extends MultiSelectWindow
         $cn ="";
       }
 
+      /* Create the display name */
+      $d_name = $conference['cn'][0];
+      if(isset($conference['description'][0])){
+        $d_name.="&nbsp;[".$conference['description'][0]."] &nbsp;";
+      }
+      $d_name .=$number;
+
 
       $title = " title='".preg_replace("/ /","&nbsp;",@LDAP::fix($data['dn']))."' ";
 
       $a_field1 = array("string"=>sprintf($userimg,_("Conference")), "attach" => $title." style='text-align:center;width:20px;'");
 
       if(($this->parent->acl=="#all#")||(($this->parent->ui->dn==$conference['goFonConferenceOwner'][0])&&(chkacl($this->parent->acl,"goFonConferenceOwner")==""))){
-        $a_field2 = array("string"=>sprintf($editlink,$conferencekey,$conference['cn'][0].$number), "attach" => $title." style=''");
+        $a_field2 = array("string"=>sprintf($editlink,$conferencekey,$d_name ), "attach" => $title." style=''");
       }else{
-        $a_field2 = array("string"=>$conference['cn'][0].$number, "attach" => $title." style=''");
+        $a_field2 = array("string"=>$d_name , "attach" => $title." style=''");
       }
       $a_field3 = array("string"=> $cn, "attach" =>  $title." style='width:200px;'");
       $a_field4 = array("string"=> $pin, "attach" =>  $title." style='width:50px;'");

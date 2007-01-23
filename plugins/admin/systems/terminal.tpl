@@ -9,7 +9,7 @@
      {else}
      <td><LABEL for="cn">{t}Terminal name{/t}</LABEL>{$must}</td>
      <td>
-      <input name="cn" id="cn" size=18 maxlength=60 value="{$cn}">
+      <input name="cn" id="cn" size=18 maxlength=60 value="{$cn}" {$cnACL}>
      </td>
      {/if}
     </tr>
@@ -77,7 +77,7 @@
 	<table width="100%">
     <tr>
 	 <td colspan="2">
-		<input type="checkbox" value="1" name="inheritTimeServer"
+		<input type="checkbox" value="1" name="inheritTimeServer" {$gotoNtpServerACL}
 			{if $inheritTimeServer } checked {/if} 
 			onClick="javascript:
 					changeState('gotoNtpServerSelected');

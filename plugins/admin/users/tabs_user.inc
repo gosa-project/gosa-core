@@ -84,10 +84,13 @@ class usertabs extends tabs
     /* Check for new 'dn', in order to propagate the
        'dn' to all plugins */
     $baseobject= $this->by_object['user'];
-    if ($baseobject->personalTitle == ""){
-      $pt= "";
-    } else {
-      $pt= $baseobject->personalTitle." ";
+
+    /* Assemble cn */
+    $pt= "";
+    if(isset($this->config->current['INCLUDE_PERSONAL_TITLE']) && preg_match("/true/i",$this->config->current['INCLUDE_PERSONAL_TITLE'])){
+      if(!empty($baseobject->personalTitle)){
+        $pt = $baseobject->personalTitle." ";
+      }
     }
 
     if ($this->dn == 'new'){

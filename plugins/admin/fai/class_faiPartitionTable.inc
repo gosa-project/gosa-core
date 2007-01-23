@@ -536,8 +536,8 @@ class faiPartitionTable extends plugin
           $ldap->add($partition_attrs);
           show_ldap_error($ldap->get_error(), _("Saving FAI partition table entry failed"));
         }
+        $this->handle_object_tagging($partition_dn, $this->gosaUnitTag);
       }
-      $this->handle_object_tagging($partition_dn, $this->gosaUnitTag);
     }
     $this->handle_post_events("add");
   }

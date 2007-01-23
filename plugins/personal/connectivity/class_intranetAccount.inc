@@ -81,7 +81,13 @@ class intranetAccount extends plugin
 		$smarty->assign("tabbed", 0);	
 	}
 
-   $smarty->assign('gosaIntranetACL', chkacl($this->acl, 'intranetAccount'));
+	/* Allow account status toogle?  */
+	$smarty->assign("gosaIntranetACL", "disabled");
+	if(!$this->is_account && chkacl($this->acl,"create") == ""){
+		$smarty->assign("gosaIntranetACL", "");
+	}elseif($this->is_account && $this->acl == "#all#" ){
+		$smarty->assign("gosaIntranetACL", "");
+	}
 
 	$display.= $smarty->fetch (get_template_path('intranet.tpl', TRUE, dirname(__FILE__)));
 	return ($display);
@@ -124,15 +130,15 @@ class intranetAccount extends plugin
   function save_object()
   {
         /* Do we need to flip is_account state? */
-        if (isset($_POST['connectivityTab'])){
-                if (isset($_POST['intranet'])){
-                        if (!$this->is_account && $_POST['intranet'] == "B"){
-                                $this->is_account= TRUE;
-                        }
-                } else {
-                        $this->is_account= FALSE;
-                }
-        }
+	  if (isset($_POST['connectivityTab'])){
+
+		  /* Change state if needed */
+		  if(!$this->is_account && isset($_POST["intranet"]) && chkacl($this->acl,"create") == ""){
+			  $this->is_account = true;
+		  }elseif($this->is_account && !isset($_POST["intranet"]) && $this->acl == "#all#"){
+			  $this->is_account = false;
+		  }
+	  }
 
 	plugin::save_object();
 	if (isset($_POST["INTRANETStatus"])){

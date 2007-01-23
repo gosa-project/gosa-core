@@ -7,23 +7,24 @@
 			<table	summary="">
 				<tr>
 					<td><LABEL	for="ipHostNumber">{t}IP-address{/t}{if $IPisMust}{$staticAddress}{/if}</LABEL></td>
-					<td><input	id="ipHostNumber"	name="ipHostNumber"	size=25	maxlength=80	value="{$ipHostNumber}"></td>
+					<td><input	id="ipHostNumber"	name="ipHostNumber"	size=25	maxlength=80	value="{$ipHostNumber}" {$ipHostNumberACL}></td>
 				</tr>
 				<tr>
 					<td><LABEL	for="macAddress">{t}MAC-address{/t}</LABEL>{$staticAddress}</td>
-					<td><input	name="macAddress"	id="macAddress"	size=25	maxlength=80	value="{$macAddress}"></td>
+					<td><input	name="macAddress"	id="macAddress"	size=25	maxlength=80	value="{$macAddress}" {$macAddressACL}></td>
 				</tr>
         {if $autonet==true}
 				<tr>
 					<td>&nbsp;</td>
-					<td><input type="submit" name="autonet" value="{t}Autodetect{/t}"></td>
+					<td><input type="submit" name="autonet" value="{t}Autodetect{/t}" 
+            {if ($ipHostNumberACL !="" || $macAddressACL!= "")} disabled {/if}></td>
 				</tr>
         {/if}
       </table> 
     </td>
     {if $DNS_is_account==true}
 		<td	style="width:50%;vertical-align:top;border-left:1px solid #b0b0b0;" valign="top">
-      <input type="checkbox" name="enableDNS" value="1" 
+      <input type="checkbox" name="enableDNS" value="1" {$DNSaccountACL} 
         {if $DNSAccount == true}checked="checked"
         onclick="toggle('test2');
           changeState('zoneName');
@@ -39,7 +40,7 @@
       "/>
         {/if}
       {t}Enable DNS for this device{/t}
-      <input type="submit" name="reloadThisDNSStuff" value="{t}Refresh{/t}"/>
+      <input type="submit" name="reloadThisDNSStuff" value="{t}Refresh{/t}" {$DNSaccountACL}/>
       {if $DNSAccount == true}
       <div style="padding-left:20px;visibility:visible;" id="test2">
       {else}
@@ -49,14 +50,14 @@
 				<tr>
 					<td><LABEL	for="zoneName">{t}Zone{/t}</LABEL></td>
 					<td>
-              <select name="zoneName" id="zoneName" {if $DNSAccount == false} disabled='disabled' {/if}>
+              <select name="zoneName" id="zoneName" {if $DNSAccount == false} disabled='disabled' {/if}  {$zoneNameACL}>
                 {html_options values=$ZoneKeys output=$Zones selected=$zoneName}
               </select>
           </td>
 				</tr>
 				<tr>
           <td>{t}TTL{/t}</td>
-          <td><input type="text" name="dNSTTL" value="{$dNSTTL}" id="dNSTTL" {if $DNSAccount == false} disabled='disabled' {/if}>
+          <td><input type="text" name="dNSTTL" value="{$dNSTTL}" id="dNSTTL" {if $DNSAccount == false} disabled='disabled' {/if} {$dNSTTLACL}>
           </td> 
 				</tr>
 				<tr>

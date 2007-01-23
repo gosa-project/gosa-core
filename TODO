@@ -5,7 +5,6 @@ Target for 2.6:
 
 * Verify DNS plugin
   * Zones are not creatable, currently
-  <zeph@purotesto.it> i'm working on it, contact me
   * Error messages are partly wrong
 
 * Auto-Resize for subdialogs
@@ -20,12 +19,10 @@ Target for 2.6:
 			 to allow others to pickup the phone by pressing # and number of the phone.
 
 * Evaluate patches for certificate generation
-  <zeph@purotesto.it> working on them ... 
 
 * Bug submitter
 
 * Complete PHP5 compliance and optimization
-  <zeph@purotesto.it> is it a good idea? Debian Stable does not have PHP5
 
 * Simplify plugins by providing a schema parser
 
@@ -47,7 +44,6 @@ Target for 2.6:
      ldif -b "usercertificate;binary" < outcert.der   > cert.ldif
      print_r(openssl_x509_parse ($this->userCertificate));
     )
-  <zeph@purotesto.it> i'm fixing it... i need user to download certificates 
     
 * Documentation
   - End user documentation: online help

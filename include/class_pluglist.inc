@@ -29,6 +29,7 @@ class pluglist {
 	var $ui= NULL;
 	var $current= "";
 	var $headlines = array();
+	var $allowed_plug_ids =array();
 
 	function pluglist($config, $ui)
 	{
@@ -132,7 +133,7 @@ class pluglist {
 					}
 
 					if ($this->check_access($info['ACL'])){
-
+						$this->allowed_plug_ids[$index]=$index;
 						$entries= $entries."<p class=\"menuitem\" ".
 							"onClick='return question(\""._("You are currently editing a database entry. Do you want to dismiss the changes?")."\", \"$href\");'>".
 							"<a class=\"menuitem\" ".

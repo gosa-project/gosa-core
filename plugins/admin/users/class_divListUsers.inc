@@ -124,21 +124,6 @@ class divListUsers extends MultiSelectWindow
     $tplimg     = "<img class='center' src='images/select_template.png' alt='Template' title='%s'>";
     $editlink   = "<a href='?plug=".validate($_GET['plug'])."&amp;id=%s&amp;act=edit_entry'>%s</a>";
 
-    /* Create action icons */
-    $action = "";
-    if($this->parent->CopyPasteHandler){
-      $action .= "<input class='center' type='image'
-        src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
-      $action.= "<input class='center' type='image'
-        src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
-    }
-    $action.= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'
-      name='user_edit_%KEY%' title='"._("Edit user")."'>";
-    $action.= "<input class='center' type='image' src='images/list_password.png' alt='"._("password")."'
-      name='user_chgpw_%KEY%' title='"._("Change password")."'>";
-    $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'
-      name='user_del_%KEY%' title='"._("Delete user")."'>";
-    
     /* Possilbe objectClass image combinations */  
     $possibleAccounts = array(
             "posixAccount"    => array("VAR"=>"posix"     ,"IMG"=>"posiximg"),
@@ -172,29 +157,6 @@ class divListUsers extends MultiSelectWindow
       END :: Variable init
      ********************/
 
-    /* Get Configuration for goFon DB (if it is set), to connect to the asterisk tables.
-     * Read Sip Table for specified account (for each user with phoneAccount).
-     * Check the attributes ip port and regseconds.
-     * If regseconds is set and >0 , the phone is logged in.
-     * Else the phone is currently not logged.
-     * If we can't read any Data from the DB or there is no goFon DB specified
-     * show old style without status icons.
-     */
-    $r_db   =false;
-    $r_con  =false;
-    if (isset($_SESSION['config']->data['SERVERS']['FON'])){
-      $a_SETUP= $_SESSION['config']->data['SERVERS']['FON'];
-      $r_con = false;
-      $r_db  = false;
-      if(is_callable("mysql_pconnect")){
-        $r_con= @mysql_pconnect($a_SETUP['SERVER'],$a_SETUP['LOGIN'],$a_SETUP['PASSWORD']);
-        // Check if we are  connected correctly
-        if($r_con){
-          $r_db  =  @mysql_select_db($a_SETUP['DB'],$r_con);
-        }
-      }
-    }
-   
  
     /********************
       Append entries to divlist 
@@ -203,9 +165,38 @@ class divListUsers extends MultiSelectWindow
     // Test Every Entry and generate divlist Array
     foreach($list as $key => $val){
 
+      /* Create action icons */
+      $action = "";
+
+      $dn= $val['dn'];
+      $acl= get_permissions ($dn, $this->ui->subtreeACL);
+      $acl= get_module_permission($acl, "user", $dn);
+
+      /* Append copy&paste icons if allowed */
+      if($acl == "#all#" && $this->parent->CopyPasteHandler){
+        $action .= "<input class='center' type='image'
+          src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+        $action.= "<input class='center' type='image'
+          src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
+      }
+
+      /* Add edit icon */
+      $action.= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'
+        name='user_edit_%KEY%' title='"._("Edit user")."'>";
+
+      /* Add passowrd change icon if allowed */
+      if (chkacl($acl, "password") == ""){
+        $action.= "<input class='center' type='image' src='images/list_password.png' alt='"._("password")."'
+          name='user_chgpw_%KEY%' title='"._("Change password")."'>";
+      }
+
+      /* Add delete icon if delete user is allowed */
+      if (chkacl($acl, "delete") == ""){
+        $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'
+          name='user_del_%KEY%' title='"._("Delete user")."'>";
+      }
+
       /* Create phonaccopunt informationm, if conencted && is phoneAccount */ 
-      $connected  = ""; // This string represents timestamp or offline status
-      $ip_port    = ""; // String that will represent ip : port of the connected phone
       if((in_array("goFonAccount"    ,$val['objectClass']))){
 
         /* Set defaults */
@@ -213,26 +204,6 @@ class divListUsers extends MultiSelectWindow
         $fonac = preg_replace("/%KEY%/", "$key", $fonac);
         $fonac = preg_replace("/%title%/", "", $fonac);
 
-        /* Database connection is ok ?*/
-        if(($r_db)&&(is_callable("mysql_query"))){
-          $res= @mysql_query("SELECT regseconds,name,port,ipaddr FROM ".$a_SETUP['SIP_TABLE']." WHERE (name='".$val['uid'][0]."')");
-          $mysql_entry = @mysql_fetch_row($res);
-          if(is_array($mysql_entry)){
-            if((isset($mysql_entry[0]))&&($mysql_entry[0]>1)){
-              $connected = " | "._("Online")." : ".gmdate("d.m.Y H:i:s",($mysql_entry[0]+(60*60)));
-              $fonac = preg_replace("/%image%/", "select_phone_connected.png", $fonimg);
-              $fonac = preg_replace("/%KEY%/", "$key", $fonac);
-              $fonac = preg_replace("/%title%/", $connected, $fonac);
-              #$ip_port= " - ".$mysql_entry[3].":".$mysql_entry[2];
-            }
-            if((isset($mysql_entry[0]))&&($mysql_entry[0]==0)){
-              $connected = " | "._("Offline");
-              $fonac = preg_replace("/%image%/", "select_phone.png", $fonimg);
-              $fonac = preg_replace("/%KEY%/", "$key", $fonac);
-              $fonac = preg_replace("/%title%/", $connected, $fonac);
-            }
-          }
-        }
       }else{
         $fonac=$empty;
       }
@@ -270,7 +241,7 @@ class divListUsers extends MultiSelectWindow
 
       /* Create each field */
       $field1 = array("string" => sprintf($tpl,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($editlink,$key,$display).$ip_port, "attach" => "style='' title='".preg_replace('/ /', '&nbsp;', @LDAP::fix($val['dn']))."'");
+      $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' title='".preg_replace('/ /', '&nbsp;', @LDAP::fix($val['dn']))."'");
       $field3 = array("string" => $UseImg, "attach" => "style='width:152px;'");
       $field4 = array("string" => $s_img_create_from_template.preg_replace("/%KEY%/", "$key", $action),
                       "attach" => "style='width:102px;border-right:0px;    text-align:right;'");
@@ -286,13 +257,6 @@ class divListUsers extends MultiSelectWindow
       }
     }
     
-    /* close database connection, if it was opened */
-    if(isset($r_con)){
-      if((is_callable("mysql_close"))&&($r_con)){
-        @mysql_close($r_con);
-      }
-    }
-
   }
 
   function Save()

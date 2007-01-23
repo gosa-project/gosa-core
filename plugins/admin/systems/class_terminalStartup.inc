@@ -24,7 +24,7 @@ class termstartup extends plugin
 
 
   /* attribute list for save action */
-  var $attributes= array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters");
+  var $attributes= array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters","gotoModules");
   var $objectclasses= array("GOhard");
 
   /* Helper */
@@ -38,13 +38,15 @@ class termstartup extends plugin
 
     /* Get arrays */
     foreach (array("gotoModules") as $val){
-      if (isset($this->attrs["$val"]["count"])){
-        for ($i= 0; $i<$this->attrs["count"]; $i++){
-          if (isset($this->attrs["$val"][$i])){
-            array_push($this->$val, $this->attrs["$val"][$i]);
+      $tmp =array();
+      if (isset($this->attrs[$val]["count"])){
+        for ($i= 0; $i<$this->attrs[$val]["count"]; $i++){
+          if (isset($this->attrs[$val][$i])){
+            $tmp[] = $this->attrs["$val"][$i];
           }
         }
       }
+      $this->$val = $tmp;
       sort ($this->$val);
       $this->$val= array_unique($this->$val);
     }
@@ -151,12 +153,18 @@ class termstartup extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
-      $this->is_account= !$this->is_account;
+
+      /* Only change account state if allowed */
+      if($this->is_account && $this->acl == "#all#"){
+        $this->is_account= !$this->is_account;
+      }elseif(!$this->is_account && chkacl($this->acl,"create") == ""){
+        $this->is_account= !$this->is_account;
+      }
     }
 
     /* Do we represent a valid terminal? */
@@ -176,7 +184,7 @@ class termstartup extends plugin
     /* Delete module */
     if (isset ($_POST['delete_module'])){
       if (count($_POST['modules_list']) && chkacl ($this->acl, "gotoModule") == ""){
-        $this->del_list ($this->gotoModules, $_POST['modules_list']);
+        $this->gotoModules = $this->del_list($this->gotoModules, $_POST['modules_list']);
       }
     }
 
@@ -195,7 +203,7 @@ class termstartup extends plugin
     /* if $_POST['gotoShareAdd'] is set, we will try to add a new entry
      * This entry will be, a combination of mountPoint and sharedefinitions
      */
-    if(isset($_POST['gotoShareAdd'])){
+    if(isset($_POST['gotoShareAdd']) && chkacl($this->acl,"gotoShare") == ""){
       /* We assign a share to this user, if we don't know where to mount the share */
       if((!isset($_POST['gotoShareMountPoint']))||(empty($_POST['gotoShareMountPoint']))||(preg_match("/[\|]/i",$_POST['gotoShareMountPoint']))){
         print_red(_("You must specify a valid mount point."));
@@ -211,7 +219,7 @@ class termstartup extends plugin
     /* if the Post  gotoShareDel is set, someone asked GOsa to delete the selected entry (if there is one selected)
      * If there is no defined share selected, we will abort the deletion without any message
      */
-    if((isset($_POST['gotoShareDel']))&&(isset($_POST['gotoShare']))){
+    if((isset($_POST['gotoShareDel']))&&(isset($_POST['gotoShare'])) && chkacl($this->acl,"gotoShare") == ""){
       unset($this->gotoShares[$_POST['gotoShare']]);
     }
 
@@ -241,6 +249,8 @@ class termstartup extends plugin
         $found = true;
         $use = " checked ";
       };
+
+      $use .= chkacl($this->acl,"gotoLdapServer");
 
       $SelectBoxLdapServer->AddEntry(
           array(
@@ -371,8 +381,9 @@ class termstartup extends plugin
       if (isset ($this->$val) && count ($this->$val) != 0){
     
         $this->attrs["$val"]= array_unique($this->$val);
+      }else{
+        $this->attrs["$val"]=array();
       }
-      if(!isset($this->attrs["$val"])) $this->attrs["$val"]=array();
     }
 
     /* Strip out 'default' values */
@@ -413,7 +424,7 @@ class termstartup extends plugin
 
 
   /* Delete value to array, check if unique */
-  function del_list (&$array, $list)
+  function del_list ($array, $list)
   {
     $tmp= array();
     foreach ($array as $mod){
@@ -421,7 +432,7 @@ class termstartup extends plugin
         $tmp[]= $mod;
       }
     }
-    $array= $tmp;
+    return($tmp);
   }
 
    /* Generate ListBox frindly output for the defined shares

@@ -562,7 +562,9 @@ class LDAP{
               print_red(_("Unknown FAIstate %s"),$type);
             }
           }elseif(in_array("gosaApplication",$attr['objectClass'])){
-            $attr['objectClass'][] = "FAIobject";
+            if(!in_array("FAIobject",$attr['objectClass'])){
+              $attr['objectClass'][] = "FAIobject";
+            }
             $attr['FAIstate'] = $type;
           }
 
@@ -1176,12 +1178,16 @@ function gen_xls ($dn, $filter= "(objectClass=*)", $attributes= array('*'), $rec
   
   /* added by Guido Serra aka Zeph <zeph@purotesto.it> */
   function getCn($dn){
-  	$simple = split(",",$dn);
-  	foreach($simple as $piece)
-  	{
-  		$partial = split("=",$piece);
-  		if($partial[0]=="cn") return $partial[1];
-  	}
+    $simple= split(",", $dn);
+
+    foreach($simple as $piece) {
+      $partial= split("=", $piece);
+
+      if($partial[0] == "cn"){
+        return $partial[1];
+      }
+    }
+
   }
 
 

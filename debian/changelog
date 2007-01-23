@@ -1,9 +1,16 @@
+gosa (2.5.8-1) unstable; urgency=high
+
+  * New upstream release fixes security problem
+
+ -- Cajus Pollmeier <cajus@debian.org>  Mon, 15 Jan 2007 11:49:16 +0100
+
+gosa (2.5.7-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cajus Pollmeier <cajus@debian.org>  Wed, 20 Dec 2006 09:10:16 +0100
+
 gosa (2.5.6-1) unstable; urgency=low
-
-  * New DNS multiple nameservers support
-  * Merge from r4941 branches/2.5
-
- -- Guido Serra <zeph@purotesto.it>  Sat, 26 Nov 2006 16:30:10 +0100
 
   * New upstream release
 

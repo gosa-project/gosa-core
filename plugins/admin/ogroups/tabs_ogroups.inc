@@ -11,9 +11,10 @@ class ogrouptabs extends tabs
      * but there is no user left with goPhoneAccount ... remove it.
      */
     $usePhoneTab = false;
+    $o_cache = $this->by_object['ogroup']->objcache;
     foreach($this->by_object['ogroup']->memberList as $dn => $val){
-      if(isset($val['objectClass'])){
-        if(in_array("goFonAccount",$val['objectClass'])){
+      if(isset($o_cache[$dn]['objectClass'])){
+        if(in_array("goFonAccount",$o_cache[$dn]['objectClass'])){
           $usePhoneTab = true;
         }
       }
@@ -53,10 +54,11 @@ class ogrouptabs extends tabs
     /* Create goPhoneAccount if theres an user with goPhoneAccount
      * but only if there is currently no queue enabled.
      */
+    $o_cache = $this->by_object['ogroup']->objcache;
     if(!isset($this->by_object['phonequeue'])){
       foreach($this->by_object['ogroup']->memberList as $dn => $val){
-        if(isset($val['objectClass'])){
-          if(in_array("goFonAccount",$val['objectClass'])){
+        if(isset($o_cache[$dn]['objectClass'])){
+          if(in_array("goFonAccount",$o_cache[$dn]['objectClass'])){
             require_once("class_phonequeue.inc");
             $this->by_name['phonequeue']= _("Phone queue");
             $this->by_object['phonequeue']= new phonequeue($this->config, $this->dn);
@@ -151,9 +153,10 @@ class ogrouptabs extends tabs
           case "U":
             /* Append a PhoneQueue, if objectClass = goFonAccount */
             $use = false;
+          $o_cache = $this->by_object['ogroup']->objcache;
           foreach($this->by_object['ogroup']->memberList as $dn => $val){
-            if(isset($val['objectClass'])){
-              if(in_array("goFonAccount",$val['objectClass'])){
+            if(isset($o_cache[$dn]['objectClass'])){
+              if(in_array("goFonAccount",$o_cache[$dn]['objectClass'])){
                 $use = true; 
               }
             }

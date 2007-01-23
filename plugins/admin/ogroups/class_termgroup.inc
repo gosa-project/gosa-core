@@ -21,7 +21,7 @@ class termgroup extends plugin
 
   var $mapActions   = array("reboot"          => "localboot",
                             "instant_update"  => "softupdate",
-                            "update"          => "sceduledupdate",
+                            "update"          => "scheduledupdate",
                             "reinstall"       => "install",
                             "rescan"          => "",
                             "memcheck"        => "memcheck",
@@ -202,7 +202,7 @@ class termgroup extends plugin
         $names.= "$cn ";
       }
 
-      if (isset($_POST['action'])){
+      if (isset($_POST['action']) && $this->acl == "#all#"){
 
         /* Update members fai state */
         $this->update_term_member_FAIstate(trim($_POST['saction']));
@@ -227,12 +227,12 @@ class termgroup extends plugin
      ***************/
 
     /* Add new ntp Server to our list */
-    if((isset($_POST['addNtpServer'])) && (isset($_POST['gotoNtpServers']))){
+    if((isset($_POST['addNtpServer'])) && (isset($_POST['gotoNtpServers'])) && $this->acl == "#all#"){
       $this->gotoNtpServer[$_POST['gotoNtpServers']] = $_POST['gotoNtpServers'];
     }
 
     /* Delete selected NtpServer for list of used servers  */
-    if((isset($_POST['delNtpServer'])) && (isset($_POST['gotoNtpServerSelected']))){
+    if((isset($_POST['delNtpServer'])) && (isset($_POST['gotoNtpServerSelected'])) && $this->acl == "#all#"){
       foreach($_POST['gotoNtpServerSelected'] as $name){
         unset($this->gotoNtpServer[$name]);
       }

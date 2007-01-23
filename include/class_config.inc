@@ -246,7 +246,7 @@ class config  {
     $this->current['PEOPLE'] = preg_replace("/,*$/","",$this->current['PEOPLE']);
 
     if (!isset($this->current['WINSTATIONS'])){
-      $this->current['WINSTATIONS']= "ou=computers";
+      $this->current['WINSTATIONS']= "ou=winstations,ou=systems";
     }
     if (!isset($this->current['HASH'])){
       $this->current['HASH']= "crypt";
@@ -376,18 +376,38 @@ class config  {
     /* Get asterisk servers */
     $ldap->cd ($this->current['BASE']);
     $ldap->search ("(objectClass=goFonServer)");
+    $this->data['SERVERS']['FON']= array(); 
     if ($ldap->count()){
-      $attrs= $ldap->fetch();
-      $this->data['SERVERS']['FON']= array( 
-          'SERVER' 	=> $attrs['cn'][0],
-          'LOGIN' 	=> $attrs['goFonAdmin'][0],
-          'PASSWORD' 	=> $attrs['goFonPassword'][0],
-          'DB'		=> "gophone",
-          'SIP_TABLE'		=> "sip_users",
-          'EXT_TABLE' 	=> "extensions",
-          'VOICE_TABLE'	=> "voicemail_users",
-          'QUEUE_TABLE'	=> "queues",
-          'QUEUE_MEMBER_TABLE'	=> "queue_members");
+      while ($attrs= $ldap->fetch()){
+
+        /* Add 0 entry for development */
+        if(count($this->data['SERVERS']['FON']) == 0){
+          $this->data['SERVERS']['FON'][0]= array(
+              'DN'      => $attrs['dn'],
+              'SERVER' 	=> $attrs['cn'][0],
+              'LOGIN' 	=> $attrs['goFonAdmin'][0],
+              'PASSWORD' 	=> $attrs['goFonPassword'][0],
+              'DB'		=> "gophone",
+              'SIP_TABLE'		=> "sip_users",
+              'EXT_TABLE' 	=> "extensions",
+              'VOICE_TABLE'	=> "voicemail_users",
+              'QUEUE_TABLE'	=> "queues",
+              'QUEUE_MEMBER_TABLE'	=> "queue_members");
+        }
+
+        /* Add entry with 'dn' as index */
+        $this->data['SERVERS']['FON'][$attrs['dn']]= array(
+            'DN'      => $attrs['dn'],
+            'SERVER'  => $attrs['cn'][0],
+            'LOGIN'   => $attrs['goFonAdmin'][0],
+            'PASSWORD'  => $attrs['goFonPassword'][0],
+            'DB'    => "gophone",
+            'SIP_TABLE'   => "sip_users",
+            'EXT_TABLE'   => "extensions",
+            'VOICE_TABLE' => "voicemail_users",
+            'QUEUE_TABLE' => "queues",
+            'QUEUE_MEMBER_TABLE'  => "queue_members");
+      }
     }
 
     /* Get glpi servers */

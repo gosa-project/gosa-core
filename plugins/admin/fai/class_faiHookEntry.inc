@@ -101,9 +101,9 @@ class faiHookEntry extends plugin
      */
     foreach($this->attributes as $attrs){
       if(get_magic_quotes_gpc()){
-        $smarty->assign($attrs,htmlentities(stripslashes($this->$attrs)));
+        $smarty->assign($attrs,stripslashes($this->$attrs));
       }else{
-        $smarty->assign($attrs,htmlentities($this->$attrs));
+        $smarty->assign($attrs,$this->$attrs);
       }
     }
 

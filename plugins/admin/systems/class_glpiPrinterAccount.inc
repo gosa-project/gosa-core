@@ -191,8 +191,17 @@ class glpiPrinterAccount extends plugin
 
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
-      $this->is_account= !$this->is_account;
+
+      /* Only change account state if allowed */
+      if($this->is_account && $this->acl == "#all#"){
+        $this->is_account= !$this->is_account;
+        $this->is_modified = true;
+      }elseif(!$this->is_account && chkacl($this->acl,"create") == ""){
+        $this->is_account= !$this->is_account;
+        $this->is_modified = true;
+      }
     }
+
 
     /* Show tab dialog headers */
     if ($this->is_account){
@@ -211,7 +220,7 @@ class glpiPrinterAccount extends plugin
      */
 
     /* Rename was requested */
-    if(isset($_POST['Rename_PType_OK'])){
+    if(isset($_POST['Rename_PType_OK']) && chkacl($this->acl,"type") == ""){
       $tmp = $this->handle->getPrinterTypes();
       $allok = true;
       foreach($tmp as $id => $name){
@@ -235,7 +244,7 @@ class glpiPrinterAccount extends plugin
 
     /* Printer type management
      */
-    if(isset($_POST['edit_type'])){
+    if(isset($_POST['edit_type']) && chkacl($this->acl,"type") == ""){
       $this->dialog = true;
       $this->edit_type=true;
     }
@@ -249,7 +258,7 @@ class glpiPrinterAccount extends plugin
 
     /* This appends a new printer to our sytem types
      */
-    if((isset($_POST['add_type']))&&(!empty($_POST['type_string']))){
+    if((isset($_POST['add_type']))&&(!empty($_POST['type_string'])) && chkacl($this->acl,"type") == ""){
     
       $tmp = $this->handle->getPrinterTypes();
       $allok = true;
@@ -267,7 +276,7 @@ class glpiPrinterAccount extends plugin
 
     /* Remove selected type from our printer types list
      */
-    if((isset($_POST['del_type']))&&(!empty($_POST['select_type']))){
+    if((isset($_POST['del_type']))&&(!empty($_POST['select_type'])) && chkacl($this->acl,"type") == ""){
       $tmp = $this->handle->is_printerTypeUsed($_POST['select_type']);
       if(count($tmp)){
         $str = "";
@@ -283,7 +292,7 @@ class glpiPrinterAccount extends plugin
 
     /* Rename selected printer type to given string
      */
-    if((isset($_POST['rename_type']))&&(!empty($_POST['select_type']))||($this->rename)){
+    if((isset($_POST['rename_type']))&&(!empty($_POST['select_type']))||($this->rename) && chkacl($this->acl,"type") == ""){
       $this->rename = true;
 
       $smarty->assign("Method","rename");
@@ -321,7 +330,7 @@ class glpiPrinterAccount extends plugin
 
     /* Open dialog which allows to edit the manufacturers
      */
-    if(isset($_POST['edit_manufacturer'])){
+    if(isset($_POST['edit_manufacturer']) && chkacl($this->acl,"manufacturer") == ""){
       $this->cur_dialog = new glpiManufacturer($this->config,$this->dn);
       $this->dialog = true;
       $this->editManufacturer =true;
@@ -329,7 +338,7 @@ class glpiPrinterAccount extends plugin
 
     /* Close manufacturer editing dialog
      */
-    if((isset($_POST['close_edit_manufacturer']))&&($this->editManufacturer)){
+    if((isset($_POST['close_edit_manufacturer']))&&($this->editManufacturer) && chkacl($this->acl,"manufacturer") == ""){
       $this->dialog = false;
       $this->cur_dialog = false;
       $this->editManufacturer=false;
@@ -345,14 +354,14 @@ class glpiPrinterAccount extends plugin
     /* Show dialog to select a new contact person
      * Select a contact person
      */
-    if(isset($_POST['SelectContactPerson'])){
+    if(isset($_POST['SelectContactPerson']) && chkacl($this->acl,"user_tech_num") == ""){
       $this->addUser = "contact";
       $this->cur_dialog= new glpiSelectUser($this->config,$this->dn,"user_tech_num");
     }
 
     /* Selecte technical responsible person
      */
-    if(isset($_POST['SelectTechPerson'])){
+    if(isset($_POST['SelectTechPerson']) && chkacl($this->acl,"user_tech_num") == ""){
       $this->addUser ="tech";
       $this->cur_dialog= new glpiSelectUser($this->config,$this->dn,"user_tech_num");
     }
@@ -367,7 +376,7 @@ class glpiPrinterAccount extends plugin
     }
 
     /* Technical responsible/contact person selected */
-    if(isset($_GET['act'])&&($_GET['act']=="user_tech_num")){
+    if(isset($_GET['act'])&&($_GET['act']=="user_tech_num") && chkacl($this->acl,"user_tech_num") == ""){
 
       /* Get posted id */
       $id = base64_decode($_GET['id']);
@@ -418,7 +427,7 @@ class glpiPrinterAccount extends plugin
     
     /* Attachment pool was closed with use
      */
-    if(isset($_POST['UseAttachment'])){
+    if(isset($_POST['UseAttachment']) && chkacl($this->acl,"useAttachments") == ""){
       if(count($this->cur_dialog->check())){
         foreach($this->cur_dialog->check() as $msg){
           print_red($msg);
@@ -440,7 +449,7 @@ class glpiPrinterAccount extends plugin
 
     /* Open Attachment pool to add/edit Attachments
      */
-    if(isset($_POST['AddAttachment'])){
+    if(isset($_POST['AddAttachment']) && chkacl($this->acl,"useAttachments") == ""){
       $this->cur_dialog = new glpiAttachmentPool($this->config,$this->dn,$this->usedAttachments);
       $this->dialog = true;
     }
@@ -449,7 +458,7 @@ class glpiPrinterAccount extends plugin
      */
     $once = true;
     foreach($_POST as $name => $value){
-      if((preg_match("/^delAttachment_/",$name))&&($once)){
+      if((preg_match("/^delAttachment_/",$name))&&($once) && chkacl($this->acl,"useAttachments") == ""){
         $once= false;
         $name = preg_replace("/^delAttachment_/","",$name);
         $entry = preg_replace("/_.*$/","",$name);
@@ -458,7 +467,7 @@ class glpiPrinterAccount extends plugin
         }
       }
     }
-    if((isset($_POST['RemoveAttachment']))&&(isset($_POST['Attachments']))){
+    if((isset($_POST['RemoveAttachment']))&&(isset($_POST['Attachments'])) && chkacl($this->acl,"useAttachments") == ""){
       if(isset($this->usedAttachments[$_POST['Attachments']])){
         unset($this->usedAttachments[$_POST['Attachments']]);
       }
@@ -490,7 +499,7 @@ class glpiPrinterAccount extends plugin
 
     /* Remove cartridge  
      */
-    if((isset($_POST['RemoveCartridge']))&&(isset($_POST['Cartridges']))){
+    if((isset($_POST['RemoveCartridge']))&&(isset($_POST['Cartridges'])) && chkacl($this->acl,"cartridges") == ""){
 
       foreach($_POST['Cartridges'] as $cartID){
 
@@ -506,7 +515,7 @@ class glpiPrinterAccount extends plugin
 
     /* Open Attachment pool to add/edit Attachments
      */
-    if(isset($_POST['AddCartridge'])){
+    if(isset($_POST['AddCartridge']) && chkacl($this->acl,"cartridges") == ""){
       $this->cur_dialog = new glpiPrinterCartridges($this->config,$this->dn,$this->type);
       $this->dialog = true;
     }
@@ -657,17 +666,14 @@ class glpiPrinterAccount extends plugin
   {
     if(isset($_POST['glpiPrinterFlagsPosted'])){
       plugin::save_object();
-      foreach($this->attributes as $attrs){
-        if(isset($_POST[$attrs])){
-          $this->$attrs = $_POST[$attrs];
-        }
-      }
 
       foreach(array("flags_serial","flags_par","flags_usb") as $checkboxes){
-        if(isset($_POST[$checkboxes])){
-          $this->$checkboxes = 1;
-        }else{
-          $this->$checkboxes = 0;
+        if(chkacl($this->acl,$checkboxes) == ""){
+          if(isset($_POST[$checkboxes])){
+            $this->$checkboxes = 1;
+          }else{
+            $this->$checkboxes = 0;
+          }
         }
       }
     }

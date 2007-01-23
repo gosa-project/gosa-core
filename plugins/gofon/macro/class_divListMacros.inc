@@ -104,6 +104,16 @@ class divListMacro extends MultiSelectWindow
     foreach($list as $key => $val){
       $display= $val["displayName"][0];
 
+      if(isset($val['description'][0])){
+
+        $desc = $val['description'][0];
+        if(strlen($desc) > 55){
+          $desc = substr($desc,0,52)."...";
+        }
+
+        $display .= "&nbsp;[".$desc."]";
+      }
+
       if(isset($val['goFonMacroVisible']['0'])&&($val['goFonMacroVisible']['0'] == "1")){
         $pic1 = $visible;
       }else{

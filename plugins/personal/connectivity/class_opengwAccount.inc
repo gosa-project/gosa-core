@@ -134,11 +134,19 @@ class opengwAccount extends plugin
 			$smarty->assign($ar,array());
 		}
 		$smarty->assign("OGWstate"," disabled ");
-		foreach(array("LocationTeam","TemplateUser","is_locked","validTeams","opengwAccount","is_account"/*,"OGWPassword"*/) as $ar){
+		foreach(array("LocationTeam","TemplateUser","is_locked","validTeams","is_account"/*,"OGWPassword"*/) as $ar){
 			$smarty->assign($ar,"");
 			$smarty->assign($ar."CHK","");
 			$smarty->assign($ar."ACL"," disabled ");
 		}
+
+    /* Allow account status toogle?  */
+    $smarty->assign("opengwAccountACL", "disabled");
+    if(!$this->is_account && chkacl($this->acl,"create") == ""){
+      $smarty->assign("opengwAccountACL", "");
+    }elseif($this->is_account && $this->acl == "#all#" ){
+      $smarty->assign("opengwAccountACL", "");
+    }
 
 		/* Check database extension */    
 		if(!is_callable("pg_connect")){
@@ -308,13 +316,12 @@ class opengwAccount extends plugin
 			}
 		}
 
-		/* change account status */
-		if(isset($_POST['is_account'])){
-			$this->is_account = $_POST['is_account'];
-		}else{
-			$this->is_account = false;//$_POST['is_account'];
-		}
-
+    /* Change state if needed */
+    if(!$this->is_account && isset($_POST["is_account"]) && chkacl($this->acl,"create") == ""){
+      $this->is_account = true;
+    }elseif($this->is_account && !isset($_POST["is_account"]) && $this->acl == "#all#"){
+      $this->is_account = false;
+    }
 	}
 
 

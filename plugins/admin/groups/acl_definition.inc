@@ -54,16 +54,19 @@ $ACLD['blocklists']= array("cn",
 			"goFaxBlocklist");
 $ACLD['ogroup']=   array("ogroup","create","delete","cn", "description", "gosaGroupObjects","base");
 $ACLD['group']=      array("cn",
+			"memberUid",
 			"create",
 			"delete",
 			"description",
 			"force_gid",
 			"password",
 			"gidNumber");
-$ACLD['appgroup']=   array();
+$ACLD['appgroup']=   array("create");
 $ACLD['all']=        array();
 $ACLD['acl']=   array('acl');
-$ACLD['mailgroup']=  array("default_permission",
+$ACLD['mailgroup']=  array(
+			"create",
+			"default_permission",
 			"imap_perms",
 			"member_permissions",
 			"mail",
@@ -107,6 +110,7 @@ $ACLD['workgeneric']=   array("base",
 			"gotoMode",
 			"gotoSyslogServer",
 			"gotoNtpServer",
+			"FAIstate",
 			"action",
 			"password");
 $ACLD['workstartup']=   array("gotoBootKernel",
@@ -142,6 +146,7 @@ $ACLD['servgeneric']=   array("cn",
 			"base",
 			"create",
 			"gotoMode",
+			"FAIstate",
 			"description");
 $ACLD['servdb']=   array("goKrbServer",
 			"goKrbRealm",
@@ -229,6 +234,7 @@ $ACLD['user']=       array("academicTitle",
 			"personalTitle",
 			"postalAddress",
 			"postalCode",
+			"passwordStorage",
 			"publicVisible",
 			"role",
 			"roomNumber",
@@ -239,6 +245,7 @@ $ACLD['user']=       array("academicTitle",
 			"uid",
 			"vocation");
 $ACLD['mailAccount']=       array(
+			"create",
 			"custom_sieve",
 			"gosaMailAlternateAddress",
 #			"gosaMailDeliveryMode",
@@ -252,7 +259,9 @@ $ACLD['mailAccount']=       array(
                         "drop_own_mails",
 			"mail",
 			"only_local");
-$ACLD['posixAccount']=      array("allowedHosts",
+$ACLD['posixAccount']=      
+		array(  "create",	
+			"allowedHosts",
 			"force_ids",
 			"gidNumber",
 			"gosaDefaultLanguage",
@@ -272,75 +281,63 @@ $ACLD['posixAccount']=      array("allowedHosts",
 			"shadowWarning",
 			"uidNumber");
 $ACLD['sambaAccount']=      
-			array("acctFlags" => "samba2:acctFlags", 
+		array(
+			"create",
+			"acctFlags" => "samba2:acctFlags", 
 			"allow_pwchange" => "samba2:allow_pwchange",
 			"homeDrive" 	=> "samba2:homeDrive",
 			"no_password_required" => "samba2:no_password_required",
 			"profilePath"		=> "samba2:profilePath",
 			"scriptPath" => "samba2:scriptPath",
 			"smbHome" => "samba2:smbHome",
-			"temporary_disable" => "samba2:temporary_disable",
-			 	        "sambaHomePath"		,//=> _("Home path"), 
-						"sambaHomeDrive"	,//=> _("Home drive"), 
-						"sambaDomainName"	,//=> _("Samba domain name"),
-						"sambaLogonScript"	,//=> _("Logon script"),
-				        "sambaProfilePath"	,//=> _("Profile path"),	 
+			"temporary_disable",
+			"sambaHomePath"		,//=> _("Home path"), 
+			"sambaHomeDrive"	,//=> _("Home drive"), 
+			"sambaDomainName"	,//=> _("Samba domain name"),
+			"sambaLogonScript"	,//=> _("Logon script"),
+			"sambaProfilePath"	,//=> _("Profile path"),	 
 
-						"sambaLogonTime",//	=> _("Limit Logon Time"),
-						"sambaLogoffTime",// 	=> _("Limit Logoff Time"), 
-						"sambaKickoffTime",// 	=> _("Account expiry"), 	
-						"sambaPwdCanChange",//	=> _("Can change password"),
-						"sambaPwdMustChange",//=> _("Password expiry"), 
-						"allow_pwchange"	,//=> _("Allow password change"),
-						"no_password_required",// => _("Login from windows client requires no password"),
-						"temporary_disable",// => _("Lock account"),
-						"sambaUserWorkstation",//=> _("Allow connection from these workstations only"),
+			"sambaLogonHours",
 
-						"connectclientdrives",//	=> _("Connect client drives at logon"),
-						"connectclientprinters",// => _("Connect client printers at logon"),
-						"defaultprinter",//	 	=> _("Default to main client printer"),
+			"sambaLogonTime",//	=> _("Limit Logon Time"),
+			"sambaLogoffTime",// 	=> _("Limit Logoff Time"), 
+			"sambaKickoffTime",// 	=> _("Account expiry"), 	
+			"sambaPwdCanChange",//	=> _("Can change password"),
+			"sambaPwdMustChange",//=> _("Password expiry"), 
+			"allow_pwchange"	,//=> _("Allow password change"),
+			"no_password_required",// => _("Login from windows client requires no password"),
+			"temporary_disable",// => _("Lock account"),
+			"sambaUserWorkstation",//=> _("Allow connection from these workstations only"),
 
-						"shadow",//				=> _("Shadowing"),
-						"brokenconn",//			=> _("On broken or timed out"),
-						"reconn",//				=> _("Reconnect if disconnected"),
+			"connectclientdrives",//	=> _("Connect client drives at logon"),
+			"connectclientprinters",// => _("Connect client printers at logon"),
+			"defaultprinter",//	 	=> _("Default to main client printer"),
 
-						"inherit",//				=> _("Inherit client config")
-						"tslogin",//				=> _("Inherit client config")
-		
-						"CtxWFHomeDir",
-						"CtxWFHomeDirDrive",
-						"CtxWFProfilePath",
+			"shadow",//				=> _("Shadowing"),
+			"brokenconn",//			=> _("On broken or timed out"),
+			"reconn",//				=> _("Reconnect if disconnected"),
 
-						"CtxMaxConnectionTime",
-						"CtxMaxDisconnectionTime",
-						"CtxMaxIdleTime",
+			"inherit",//				=> _("Inherit client config")
+			"tslogin",//				=> _("Inherit client config")
 
-						"CtxInitialProgram",
-						"CtxWorkDirectory"
-				
-						) ;
+			"CtxWFHomeDir",
+			"CtxWFHomeDirDrive",
+			"CtxWFProfilePath",
+
+			"CtxMaxConnectionTime",
+			"CtxMaxDisconnectionTime",
+			"CtxMaxIdleTime",
+
+			"CtxInitialProgram",
+			"CtxWorkDirectory"
+			) ;
 
 $ACLD['netatalk']=	array(
+			"create",
 			"netatalkShare",
 			"netatalkUserHomepath");
 
 
-$ACLD['proxyAccount']=      array(
-			"proxyAccount",
-			"gosaProxyAcctFlags",
-			"gosaProxyQuota",
-			"gosaProxyWorkingStart",
-			"gosaProxyWorkingStop");
-
-$ACLD['pureftpdAccount']=   array(
-			"pureftpd",	
-			"FTPUploadBandwidth",
-			"FTPStatus",
-			"FTPDownloadBandwidth",
-			"FTPQuotaFiles",
-			"FTPQuotaMBytes",
-			"FTPUploadRatio",
-			"FTPDownloadRatio");
 $ACLD['conference']= array(
 			"goFonConference",
 			"goFonPIN",
@@ -363,6 +360,7 @@ $ACLD['conference']= array(
 			"goFonConferenceOwner");
 
 $ACLD['environment']=array(
+					"create",
 					"gotoPrinter",
 					"gotoEnvironment",
 					"gotoShare",
@@ -375,39 +373,49 @@ $ACLD['environment']=array(
 					"gotoHotplugDevice",
 					"gotoShareAppleMounts"
 					);
+/* Connectivity accounts */
+$ACLD['phpgwAccount']			=array("create");
+$ACLD['webdavAccount']			=array("create");
+$ACLD['intranetAccount']		=array("create");
+$ACLD['phpscheduleitAccount']		=array("create");
+$ACLD['pptpAccount']			=array("create");
+$ACLD['proxyAccount']			=array("create","proxyAccount","gosaProxyAcctFlags","gosaProxyQuota",
+						"gosaProxyWorkingStart","gosaProxyWorkingStop");
+$ACLD['pureftpdAccount']		=array("create","FTPUploadBandwidth","FTPStatus",
+						"FTPDownloadBandwidth","FTPQuotaFiles","FTPQuotaMBytes",
+						"FTPUploadRatio","FTPDownloadRatio");
+$ACLD['kolabAccount']			=array("create","kolabFreeBusyFuture", "unrestrictedMailSize", "calFBURL","kolabDelegate");
+$ACLD['opengwAccount']			=array("create"	=>"Enable/disable account",	
+		"LocationTeam"	=>"Location team",
+		"TemplateUser"	=>"Template user",
+		"is_locked"		=>"Lock status",
+		"TeamIDs"		=>"Teams");
 
-$ACLD['phpgwAccount']			=array("phpgwAccount" 			);
-$ACLD['webdavAccount']			=array("webdavAccount" 			);
-$ACLD['intranetAccount']		=array("intranetAccount" 		);
+
 $ACLD['systems']			=array("systems" 		);
 $ACLD['FAIclass']			=array("FAIclass" 		);
-$ACLD['pptpAccount']			=array("gosapptp" 	  			);
-$ACLD['phpscheduleitAccount']	=array("gosaphpscheduleit" 	  	);
-$ACLD['opengwAccount']			=array(	"opengwAccount"	=>"Enable/disable account",	
-										"LocationTeam"	=>"Location team",
-										"TemplateUser"	=>"Template user",
-										"is_locked"		=>"Lock status",
-										"TeamIDs"		=>"Teams");
 
-$ACLD['phoneAccount'] = array("goFonDeliveryMode",
+$ACLD['phoneAccount'] = array("create","goFonDeliveryMode","goFonHomeServer",
       "goFonHardware","goFonPIN","goFonVoicemailPIN","telephoneNumber", "goFonMacro");
 
-$ACLD['nagiosAccount'] = array("NagiosAlias"
-, "NagiosPager"
-, "NagiosMail"
-, "HostNotificationPeriod"
-, "ServiceNotificationPeriod"
-, "HostNotificationCommands"
-, "ServiceNotificationCommands"
-, "HostNotificationOptions"
-, "ServiceNotificationOptions"
-, "AuthorizedAllHosts"
-, "AuthorizedAllServices"
-, "AuthorizedSystemCommands"
-, "AuthorizedAllHostCommands"
-, "AuthorizedAllServiceCommands"
-, "AuthorizedConfigurationInformation"
-, "AuthorizedSystemInformation");
+$ACLD['nagiosAccount'] = array(
+		"create",
+		"NagiosAlias",
+		 "NagiosPager",
+		 "NagiosMail",
+		 "HostNotificationPeriod",
+		 "ServiceNotificationPeriod",
+		 "HostNotificationCommands",
+		 "ServiceNotificationCommands",
+		 "HostNotificationOptions",
+		 "ServiceNotificationOptions",
+		 "AuthorizedAllHosts",
+		 "AuthorizedAllServices",
+		 "AuthorizedSystemCommands",
+		 "AuthorizedAllHostCommands",
+		 "AuthorizedAllServiceCommands",
+		 "AuthorizedConfigurationInformation",
+		 "AuthorizedSystemInformation");
 
 $ACLD['addressbook']=  array("addressbook","add", "delete",
 	  "sn", "givenName", "mail", "title",
@@ -423,9 +431,15 @@ $ACLD['mailqueue']	=  array("mailqueue","unhold_all","hold_all","del_all","reque
 $ACLD['ldapmanager']=  array("ldapmanager","import","export","xlsexport","csvimport");
 
 $ACLD['FAIclass']	= 	array(
-								// Allow displaying of FAI menu element
-								"FAIclass"	=> "FAI management enabled");
+		// Allow displaying of FAI menu element
+		"FAIclass"	=> "FAI management enabled");
+
+$ACLD['phonequeue'] = array( "create","goFonTimeOut","goFonMaxLen","goFonAnnounceFrequency","goFonDialOption_t","goFonDialOption_T",
+      "goFonDialOption_h","goFonDialOption_r","cn","goFonHomeServer",
+      "goFonDialOption_H","goFonMusiconHold","goFonWelcomeMusic","goFonQueueReportHold","goFonQueueYouAreNext",
+      "goFonQueueThereAre","goFonQueueCallsWaiting","goFonQueueThankYou","goFonQueueMinutes","goFonQueueSeconds","goFonQueueLessThan",
+      "telephoneNumber","goFonQueueLanguage","goFonQueueStrategy","goFonQueueAnnounceHoldtime","goFonQueueAnnounce","goFonDialOption","goFonQueueRetry");					
 $ACLD['goFonMacro']	=array("goFonMacro","edit","delete");
-$ACLD['kolabAccount']	=array("kolabAccount","kolabFreeBusyFuture", "unrestrictedMailSize", "calFBURL","kolabDelegate");
+$ACLD['mailogroup']	= array("create");
 
 ?>

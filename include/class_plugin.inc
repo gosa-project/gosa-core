@@ -506,15 +506,20 @@ class plugin
   /* Show header message for tab dialogs */
   function show_header($button_text, $text, $disabled= FALSE)
   {
-    if ($disabled == TRUE){
-      $state= "disabled";
-    } else {
+    $state = "disabled";
+    if($this->is_account && $this->acl == "#all#"){
+      $state= "";
+    }elseif(!$this->is_account && chkacl($this->acl,"create") == ""){
       $state= "";
     }
+
+    if ($disabled == TRUE){
+      $state= "disabled";
+    }
+
     $display= "<table summary=\"\" width=\"100%\"><tr>\n<td colspan=2><p><b>$text</b></p>\n";
-    $display.= "<input type=submit value=\"$button_text\" name=\"modify_state\" ".
-      chkacl($this->acl, "all")." ".$state.
-      "><p class=\"seperator\">&nbsp;</p></td></tr></table>";
+    $display.= "<input type=submit value=\"$button_text\" name=\"modify_state\" ".$state.">".
+                "<p class=\"seperator\">&nbsp;</p></td></tr></table>";
 
     return($display);
   }

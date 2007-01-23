@@ -57,6 +57,7 @@ class phoneGeneric extends plugin
   {
     plugin::plugin ($config, $dn, $parent);
     $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses, true);
+    $this->netConfigDNS->acl = $this->acl;
 
     /* Set base */
     if ($this->dn == "new"){
@@ -96,8 +97,10 @@ class phoneGeneric extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    $this->netConfigDNS->acl = $this->acl;
+
+    /* Call parent execute */
+    plugin::execute();
 
     /* Do we represent a valid phone? */
     if (!$this->is_account && $this->parent == NULL){
@@ -233,6 +236,7 @@ class phoneGeneric extends plugin
 
   function remove_from_parent()
   {
+    $this->netConfigDNS->acl = $this->acl;
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
 
@@ -324,6 +328,7 @@ class phoneGeneric extends plugin
   /* Save to LDAP */
   function save()
   {
+    $this->netConfigDNS->acl = $this->acl;
     plugin::save();
    
    

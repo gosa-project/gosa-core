@@ -9,7 +9,7 @@ class servdnseditZone extends plugin
 
   /* attribute list for save action */
   var $ignore_account= TRUE;
-  var $attributes     = array("zoneName","ReverseZone","dNSClass",
+  var $attributes     = array("zoneName","ReverseZone","dNSClass","cn",
       "sOAprimary","sOAmail","sOAserial","sOArefresh","sOAretry","sOAexpire","sOAttl"); 
   var $objectclasses  = array("whatever");
 
@@ -39,7 +39,7 @@ class servdnseditZone extends plugin
   var $dialog                   = false;
 
   var $isNew                    = true;
-
+  var $cn;
   var $ZoneObject               = array();
 
   function servdnseditZone ($config, $dn= NULL,$attrs = array())
@@ -69,7 +69,9 @@ class servdnseditZone extends plugin
       $this->isNew                  = false;
 
       foreach($this->attributes as $value){
-        $this->$value = $attrs[$value];
+        if(isset($attrs[$value])){
+          $this->$value = $attrs[$value];
+        }
       }
       if(isset($attrs['RECORDS'])){
         $this->Records = $attrs['RECORDS']; 
@@ -281,6 +283,10 @@ class servdnseditZone extends plugin
       $smarty->assign($name,$this->$name);
     }
 
+    /* Set zoneNames without server suffix */
+    foreach(array("zoneName","ReverseZone") as $attr){
+      $smarty->assign($attr,getNameFromMix($this->$attr));
+    }
 
     $div = new DivSelectBox("MxRecords");
     $div->setHeight(120);
@@ -324,6 +330,12 @@ class servdnseditZone extends plugin
     foreach($this->attributes as $attr){
       if(isset($_POST[$attr])){
         $this->$attr = $_POST[$attr];
+      }
+    }
+
+    foreach(array("zoneName","ReverseZone") as $attr){
+      if(isset($_POST[$attr])){
+        $this->$attr = strtoupper($this->cn)."/".$_POST[$attr];
       }
     }
 
@@ -379,7 +391,7 @@ class servdnseditZone extends plugin
       $message[] = _("Your mail address contains '@' replace this with '.' to enable GOsa to create a valid SOA record.");
     }
 
-    if($this->zoneName != strtolower($this->zoneName)){
+    if(getNameFromMix($this->zoneName) != strtolower(getNameFromMix($this->zoneName))){
       $message[] = _("Only lowercase strings are allowed as zone name.");
     }
 

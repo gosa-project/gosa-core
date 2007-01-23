@@ -38,7 +38,7 @@ class servrepository extends plugin
 
     $ui = get_userinfo();
     $tmp= get_permissions ($this->dn, $ui->subtreeACL);
-    $this->acl= get_module_permission($tmp, "FAIclass", $this->dn);
+    $this->acl= get_module_permission($tmp, "servrepository", $this->dn);
     
     $this->repositories = array();
     if(isset($this->attrs['FAIrepository'])){
@@ -98,7 +98,7 @@ class servrepository extends plugin
 
     $ui = get_userinfo();
     $tmp= get_permissions ($this->dn, $ui->subtreeACL);
-    $this->acl= get_module_permission($tmp, "FAIclass", $this->dn);
+    $this->acl= get_module_permission($tmp, "servrepository", $this->dn);
     $allow_edit = !preg_match("/disabled/i",chkacl($this->acl,"FAIclass"));
     
 
@@ -114,7 +114,15 @@ class servrepository extends plugin
 
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
-      $this->is_account= !$this->is_account;
+
+      /* Only change account state if allowed */
+      if($this->is_account && $this->acl == "#all#"){
+        $this->is_account= !$this->is_account;
+        $this->is_modified = true;
+      }elseif(!$this->is_account && chkacl($this->acl,"create") == ""){
+        $this->is_account= !$this->is_account;
+        $this->is_modified = true;
+      }
     }
 
     /* Show tab dialog headers */
@@ -325,7 +333,7 @@ class servrepository extends plugin
     /* Skip if not allowed */ 
     $ui = get_userinfo();
     $tmp= get_permissions ($this->dn, $ui->subtreeACL);
-    $this->acl= get_module_permission($tmp, "FAIclass", $this->dn);
+    $this->acl= get_module_permission($tmp, "servrepository", $this->dn);
 
     if(preg_match("/disabled/",chkacl($this->acl,"FAIclass"))) return;
 
@@ -373,7 +381,7 @@ class servrepository extends plugin
     /* Skip if not allowed */ 
     $ui = get_userinfo();
     $tmp= get_permissions ($this->dn, $ui->subtreeACL);
-    $this->acl= get_module_permission($tmp, "FAIclass", $this->dn);
+    $this->acl= get_module_permission($tmp, "servrepository", $this->dn);
 
     if(preg_match("/disabled/",chkacl($this->acl,"FAIclass"))) return;
     plugin::save();

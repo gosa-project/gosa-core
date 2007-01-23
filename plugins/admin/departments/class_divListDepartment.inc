@@ -85,14 +85,23 @@ class divListDepartment extends MultiSelectWindow
 
   function setEntries($list)
   {
-    $actions= "<input class='center' type='image' src='images/edit.png'
-      alt='"._("edit")."'   name='dep_edit_%KEY%' title='"._("Edit this entry")."'>";
-    $actions.= "<input class='center' type='image' src='images/edittrash.png'
-      alt='"._("delete")."'   name='dep_del_%KEY%' title='"._("Delete this entry")."'>";
 
     $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
 
+    $ui = get_userinfo();
     foreach($list as $key => $val) {
+
+      $acl= get_permissions ($this->config->departments[$key], $ui->subtreeACL);
+      $acl= get_module_permission($acl, "department", $this->config->departments[$key]);
+
+      $actions= "<input class='center' type='image' src='images/edit.png'
+        alt='"._("edit")."'   name='dep_edit_%KEY%' title='"._("Edit this entry")."'>";
+
+      if(chkacl($acl,"delete") == ""){
+        $actions.= "<input class='center' type='image' src='images/edittrash.png'
+          alt='"._("delete")."'   name='dep_del_%KEY%' title='"._("Delete this entry")."'>";
+      }
+
       if(!isset($this->config->departments[trim($key)])){
         $this->config->departments[trim($key)]="";
       }

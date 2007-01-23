@@ -1,3 +1,7 @@
+<p style='padding-left:7px;'>
+ <img class='center' src='images/lamp.png' alt='!'>&nbsp;<b>{t}Only users with the same asterisk home server will be included to this queue.{/t}</b>
+</p>
+
 <table summary="{t}Queue Settings{/t}" style="width: 100%; vertical-align: top; text-align: left;" border="0" cellpadding="4">
 <tr>
 <td valign='top'>
@@ -30,6 +34,15 @@
 		<tr>
 		  <td colspan=2><h2><img class="center" alt="" src="images/select_ogroup.png" align="middle">&nbsp;{t}Options{/t}</h2></td>
 		</tr>
+			<tr>
+		<td><LABEL for="goFonHomeServer">{t}Home server{/t}</LABEL>{$must}</td>
+		<td>
+			<select name='goFonHomeServer' {$goFonHomeServerACL}>
+			 {html_options options=$goFonHomeServers selected=$goFonHomeServer}
+			</select>
+		</td>
+		</tr>
+
 		<tr>
 		<td>
 			{t}Language{/t}	

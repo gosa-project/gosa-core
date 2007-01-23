@@ -9,14 +9,14 @@
      {else}
      <td><LABEL for="cn">{t}Workstation name{/t}</LABEL>{$must}</td>
      <td>
-      <input name="cn" id="cn" size=18 maxlength=60 value="{$cn}">
+      <input name="cn" id="cn" size=18 maxlength=60 value="{$cn}" {$cnACL}>
      </td>
      {/if}
     </tr>
     <tr>
      <td><LABEL for="cn">{t}Location{/t}</LABEL></td>
      <td>
-      <input name="l" id="l" size=18 maxlength=60 value="{$l}">
+      <input name="l" id="l" size=18 maxlength=60 value="{$l}" {$lACL}>
      </td>
     </tr>
     <tr>
@@ -56,7 +56,7 @@
    <table width="100%">
     <tr>
      <td colspan="2">
-        <input type="checkbox" value="1" name="inheritTimeServer"
+        <input type="checkbox" value="1" name="inheritTimeServer"  {$gotoNtpServerACL}
             {if $inheritTimeServer } checked {/if}
             onClick="javascript:
                     changeState('gotoNtpServerSelected');

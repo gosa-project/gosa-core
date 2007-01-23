@@ -66,7 +66,13 @@ class pptpAccount extends plugin
       $smarty->assign("wstate", "disabled");
     }
 
-    $smarty->assign('gosapptpACL', chkacl($this->acl, 'gosapptp'));
+    /* Allow account status toogle?  */
+    $smarty->assign("gosapptpACL", "disabled");
+    if(!$this->is_account && chkacl($this->acl,"create") == ""){
+      $smarty->assign("gosapptpACL", "");
+    }elseif($this->is_account && $this->acl == "#all#" ){
+      $smarty->assign("gosapptpACL", "");
+    }
 
     $display.= $smarty->fetch (get_template_path('pptp.tpl', TRUE, dirname(__FILE__)));
     return ($display);
@@ -102,16 +108,18 @@ class pptpAccount extends plugin
   {
     /* Do we need to flip is_account state? */
     if (isset($_POST['connectivityTab'])){
-      if (isset($_POST['pptp'])){
-        if (!$this->is_account && $_POST['pptp'] == "B"){
-          $this->is_account= TRUE;
-        }
-      } else {
-        $this->is_account= FALSE;
+
+      /* Change state if needed */
+      if(!$this->is_account && isset($_POST["pptp"]) && chkacl($this->acl,"create") == ""){
+        $this->is_account = true;
+      }elseif($this->is_account && !isset($_POST["pptp"]) && $this->acl == "#all#"){
+        $this->is_account = false;
       }
     }
 
     plugin::save_object();
+    
+    #FIXME seams to be unused code !
     if (isset($_POST["pptpStatus"])){
       $this->pptpStatus = "disabled";
     } else {

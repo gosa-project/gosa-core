@@ -91,6 +91,7 @@ class printgeneric extends plugin
     
     /* create dns object */
     $this->netConfigDNS = new termDNS($this->config, $this->dn,$this->objectclasses);
+    $this->netConfigDNS->acl = $this->acl;
 
     /* Set base */
     if ($this->dn == "new"){
@@ -243,6 +244,8 @@ class printgeneric extends plugin
 
   function execute()
   {
+    $this->netConfigDNS->acl = $this->acl;
+
     /* Call parent execute */
     plugin::execute();
 
@@ -286,10 +289,17 @@ class printgeneric extends plugin
       $smarty->assign("StandAlone",false);
     }
 
-    /* Do we need to flip is_account state? */
+
     if (isset($_POST['modify_state'])){
-      $this->is_modified = true;
-      $this->is_account= !$this->is_account;
+
+      /* Only change account state if allowed */
+      if($this->is_account && $this->acl == "#all#"){
+        $this->is_account= !$this->is_account;
+        $this->is_modified = true;
+      }elseif(!$this->is_account && chkacl($this->acl,"create") == ""  && !((empty($this->cn)) && ($this->dn != "new"))){
+        $this->is_account= !$this->is_account;
+        $this->is_modified = true;
+      }
     }
 
     /* Do we represent a valid printer? */
@@ -331,7 +341,7 @@ class printgeneric extends plugin
     /* Base select dialog */
     $once = true;
     foreach($_POST as $name => $value){
-      if(preg_match("/^chooseBase/",$name) && $once){
+      if(preg_match("/^chooseBase/",$name) && $once && chkacl($this->acl,"base")){
         $once = false;
         $this->dialog = new baseSelectDialog($this->config);
         $this->dialog->setCurrentBase($this->base);
@@ -370,21 +380,21 @@ class printgeneric extends plugin
 
     $smarty->assign("baseACL", chkacl($this->acl,"base"));
 
-    if(isset($_POST['AddUser'])){
+    if(isset($_POST['AddUser']) && chkacl($this->acl,"gotoUserPrinter") == ""){
       $this->dialog = new selectUserToPrinterDialog($this->config, NULL,"AddUser");
     }
-    if(isset($_POST['AddGroup'])){
+    if(isset($_POST['AddGroup']) && chkacl($this->acl,"gotoGroupPrinter") == ""){
       $this->dialog = new selectUserToPrinterDialog($this->config, NULL,"AddGroup");
     }
-    if(isset($_POST['AddAdminUser'])){
+    if(isset($_POST['AddAdminUser']) && chkacl($this->acl,"gotoUserAdminPrinter") == ""){
       $this->dialog = new selectUserToPrinterDialog($this->config, NULL,"AddAdminUser");
     }
-    if(isset($_POST['AddAdminGroup'])){
+    if(isset($_POST['AddAdminGroup']) && chkacl($this->acl,"gotoGroupAdminPrinter") == ""){
       $this->dialog = new selectUserToPrinterDialog($this->config, NULL,"AddAdminGroup");
     }
 
     /* Display ppd configure/select dialog      */
-    if(isset($_POST['EditDriver'])){
+    if(isset($_POST['EditDriver']) && chkacl($this->acl,"gotoPrinterPPD")==""){
       if($this->PPDdialogToSave){
         $this->dialog = $this->PPDdialogToSave;
       }else{
@@ -393,7 +403,7 @@ class printgeneric extends plugin
     }
 
     /* remove ppd */
-    if(isset($_POST['RemoveDriver'])){
+    if(isset($_POST['RemoveDriver']) && chkacl($this->acl,"gotoPrinterPPD")==""){
       $this->gotoPrinterPPD = array();
       $this->PPDdialogToSave = NULL;
     }
@@ -421,25 +431,25 @@ class printgeneric extends plugin
     }
 
     /* Member management, delete user / group / admin ..*/
-    if((isset($_POST['DelUser']))&&(isset($_POST['UserMember']))){
+    if((isset($_POST['DelUser']))&&(isset($_POST['UserMember'])) && chkacl($this->acl,"gotoUserPrinter")==""){
       foreach($_POST['UserMember'] as $mem){
         $this->DelMember('AddUser',$mem);
       }
     }
 
-    if((isset($_POST['DelUser']))&&(isset($_POST['UserMember']))){
+    if((isset($_POST['DelUser']))&&(isset($_POST['UserMember'])) && chkacl($this->acl,"gotoGroupPrinter")==""){
       foreach($_POST['UserMember'] as $mem){
         $this->DelMember('AddGroup',$mem);
       }
     }
 
-    if((isset($_POST['DelAdmin']))&&(isset($_POST['AdminMember']))){
+    if((isset($_POST['DelAdmin']))&&(isset($_POST['AdminMember'])) && chkacl($this->acl,"gotoUserAdminPrinter")==""){
       foreach($_POST['AdminMember'] as $mem){
         $this->DelMember('AddAdminUser',$mem);
       }
     }
 
-    if((isset($_POST['DelAdmin']))&&(isset($_POST['AdminMember']))){
+    if((isset($_POST['DelAdmin']))&&(isset($_POST['AdminMember'])) && chkacl($this->acl,"gotoGroupAdminPrinter")==""){
       foreach($_POST['AdminMember'] as $mem){
         $this->DelMember('AddAdminGroup',$mem);
       }
@@ -536,6 +546,8 @@ class printgeneric extends plugin
 
   function remove_from_parent()
   {
+    $this->netConfigDNS->acl = $this->acl;
+
     /* Only remove if there was initially an account */
     if($this->initially_was_account){
 
@@ -663,6 +675,8 @@ class printgeneric extends plugin
   /* Save to LDAP */
   function save()
   {
+    $this->netConfigDNS->acl = $this->acl;
+
     /* Update dn, to ensure storing as printer instead of WS / terminal
      */
     if($this->BelongsTo == "Terminal"){
@@ -810,10 +824,12 @@ class printgeneric extends plugin
     }
     show_ldap_error($ldap->get_error(), _("Saving printer failed"));
 
-
-    $this->netConfigDNS->cn = $this->cn;
-    $this->netConfigDNS->dn = $this->dn;
-    $this->netConfigDNS->save($this->dn);
+    /* Only save dns stuff if we are a standalone printer */
+    if($this->BelongsTo == "Printer"){
+      $this->netConfigDNS->cn = $this->cn;
+      $this->netConfigDNS->dn = $this->dn;
+      $this->netConfigDNS->save($this->dn);
+    }
 
     /* Optionally execute a command after we're done */
     $this->postcreate();

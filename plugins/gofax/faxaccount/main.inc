@@ -12,7 +12,7 @@ if (!$remove_lock){
 
 	/* Create gofaxAccount object on demand */
 	if (!isset($_SESSION['gofaxAccount']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-		$_SESSION['gofaxAccount']= new gofaxAccount ($config, $ui->dn);
+		$_SESSION['gofaxAccount']= new gofaxAccount ($config, $ui->dn,NULL);
 	}
 	$gofaxAccount= $_SESSION['gofaxAccount'];
 

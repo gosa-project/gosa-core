@@ -23,7 +23,7 @@ class mailMethodCyrus extends mailMethod
   var $mbox= "-";
   var $config;
   var $gosaMailServer= "";
-	var $uattrib= "uid";
+var $uattrib= "uid";
 
   function mailMethodCyrus($config)
   {
@@ -128,12 +128,7 @@ class mailMethodCyrus extends mailMethod
 
         /* Cut domain name */
         $val = preg_replace("/@.*$/","",$val);
-        
-        if (isset($this->config->current['CYRUSUNIXSTYLE']) && $this->config->current['CYRUSUNIXSTYLE'] == "true"){
-      		$val = preg_replace("/INBOX/","",$val);
-    		}
-    		
-    		$result[]=preg_replace ("/^.*".normalizePreg($folder)."/","INBOX", imap_utf7_decode ($val));
+        $result[]=preg_replace ("/^.*".normalizePreg($folder)."/","INBOX", imap_utf7_decode ($val));
       }
     }
 
@@ -157,15 +152,6 @@ class mailMethodCyrus extends mailMethod
         return;
       }
     }
-  }
-  
-  function updateDefaultMailboxes($baseFolder, $config)
-  {
-		$structure = array();
-		$structure = split(';',$config);
-		foreach($structure as $folder){
-			$this->updateMailbox($baseFolder."/".$folder);
-		}
   }
 
 

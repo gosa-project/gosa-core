@@ -72,8 +72,7 @@ class termDNS extends plugin
        */
       $this->Zones        = getAvailableZones($config);
 
-      /* Get Entry
-       * TODO : must change upon zoneName changed... 
+      /* Get Entry 
        */
       $this->dnsEntry     = getDNSHostEntries($config,$this->OrigCn);
 
@@ -154,6 +153,7 @@ class termDNS extends plugin
       /* Assign smarty all non DNs attributes */
       foreach($this->attributes as $attr){
         $smarty->assign($attr,$this->$attr);
+        $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
       }
       $smarty->assign("staticAddress","<font class=\"must\">*</font>");
 
@@ -192,21 +192,22 @@ class termDNS extends plugin
     /* Assign smarty all non DNs attributes */
     foreach($this->attributes as $attr){
       $smarty->assign($attr,$this->$attr);
+      $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
     }
 
     /* Assign smarty all DNS attributes */
     foreach($this->DNSattributes as $attr){
       $smarty->assign($attr,$this->dnsEntry[$attr]);
+      $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
     }
     
     /* Assign all needed vars */
+    $smarty->assign("DNSaccountACL",chkacl($this->acl,"termDNS"));
+
     $smarty->assign("DNSAccount",$this->DNS_is_account);
     $smarty->assign("Zones",$this->Zones);
     $smarty->assign("ZoneKeys",($this->Zones));
     $smarty->assign("IPisMust",(($this->IPisMust)||($this->DNS_is_account)));
-    
-    if(isset($_POST["zoneName"]))
-    	$smarty->assign("zoneName",$_POST["zoneName"]);
   
     $tmp = $this->generateRecordsList();
     
@@ -240,15 +241,8 @@ class termDNS extends plugin
     /* Save all posted vars */
     plugin::save_object();
     
-    /* Ge all non dns attributes (IP/MAC)*/
-    foreach($this->attributes as $attr){
-      if(isset($_POST[$attr])){
-        $this->$attr = $_POST[$attr];
-      }
-    }
-
     /* Get dns attributes */
-    if(($this->DNSenabled) && (isset($_POST['network_tpl_posted']))){
+    if(($this->DNSenabled) && (isset($_POST['network_tpl_posted'])) && chkacl($this->acl,"termDNS") == ""){
 
       /* Check for posted record changes */
       if(is_array($this->dnsEntry['RECORDS'])){
@@ -322,6 +316,8 @@ class termDNS extends plugin
       $checkArray = array();
       $onlyOnce   = array();
 
+			// There can be many CNAME records
+      //$onlyOnce['cNAMERecord'] = 0;
 
       /* Walk through all entries and detect duplicates or mismatches
        */  
@@ -393,13 +389,15 @@ class termDNS extends plugin
     /* If isn't DNS account but initially was DNS account 
        remove all DNS entries 
      */ 
-    if(!$this->DNSenabled){
+    if((!$this->DNSenabled) || (!$this->DNS_is_account && !$this->DNSinitially_was_account)){
       return;
     }else{
 
       /* Add ipHostNumber to aRecords
        */
-      $this->dnsEntry['RECORDS'][] = array("type"=>"aRecord","value"=>$this->ipHostNumber);
+      if(!empty($this->ipHostNumber)){
+        $this->dnsEntry['RECORDS'][] = array("type"=>"aRecord","value"=>$this->ipHostNumber);
+      }
 
       /* Create diff and follow instructions 
        * If Account was disabled, remove account by setting exists to false
@@ -466,14 +464,14 @@ class termDNS extends plugin
 
         $str.=" <tr>".
           "   <td>".$this->generateRecordListBox($entry['type'],"RecordTypeSelectedFor_".$key)."</td>".
-          "   <td><input type='text' value='".$entry['value']."' name='RecordValue_".$key."' id='RecordValue_".$key."'></td>".
-          "   <td><input type='submit' name='RemoveRecord_".$key."' value='"._("Delete")."' id='RemoveRecord_".$key."'></td>".
+          "   <td><input ".chkacl($this->acl,"termDNS")." type='text' value='".$entry['value']."' name='RecordValue_".$key."' id='RecordValue_".$key."'></td>".
+          "   <td><input ".chkacl($this->acl,"termDNS")." type='submit' name='RemoveRecord_".$key."' value='"._("Delete")."' id='RemoveRecord_".$key."'></td>".
           "</tr>";
     }
 
     $str.= "  <tr>".
            "    <td colspan=2 width='50%'></td><td>".
-           "      <input type='submit' value='"._("Add")."' name='AddNewRecord'>".
+           "      <input type='submit' value='"._("Add")."' name='AddNewRecord' ".chkacl($this->acl,"termDNS")." >".
            "    </td>".
            "  </tr>".
            "</table>";
@@ -486,7 +484,7 @@ class termDNS extends plugin
    */
   function generateRecordListBox($selected,$name)
   {
-    $str = "<select name='".$name."' id='".$name."'>";
+    $str = "<select ".chkacl($this->acl,"termDNS")."  name='".$name."' id='".$name."'>";
     foreach($this->RecordTypes as $type => $value){
       $use = "";
       if($type == $selected){

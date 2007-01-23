@@ -16,6 +16,18 @@ for (iln = 0; iln < len; iln++){
 netscape= (ver.charAt(iln+1).toUpperCase() != "C");
 
 
+/* Toggle checkbox that matches regex */
+function chk_set_all(regex,value)
+{
+				for (var i = 0; i < document.mainform.elements.length; i++) {
+								var _id=document.mainform.elements[i].id;
+								if(_id.match(regex)) {
+												document.getElementById(_id).checked= value;
+								}
+				}
+}
+
+
 function scrollDown() {
 	document.body.scrollTop = document.body.scrollHeight - document.body.clientHeight;
 	timeout= setTimeout("scrollDown()", 500);
@@ -236,12 +248,22 @@ function adjust_height(e) {
 				suggested= inner_height-230;
 			}
 	
-		} else if(px_height >= 450) {
-				suggested= px_height-230;
+		// IE uses other height specifications
+		} else if (browserType == "ie") {
+			suggested= document.all.menucell.offsetHeight;
+			offset= absTop(d_scrollbody);
+			suggested-= offset;
+			if((inner_height-230)-suggested>0) {
+				suggested= inner_height-230;
+			}
 		}
 		document.getElementById("d_scrollbody").style.height=suggested+"px";
 	}
 	return true;
+}
+
+function absTop(e) {
+	return (e.offsetParent)?e.offsetTop+absTop(e.offsetParent) : e.offsetTop;
 }
 
 // Automatic resize (width) of divlists

@@ -11,7 +11,7 @@
 			 </tr>
 			 <tr>
 			  <td><LABEL for="description">{t}Description{/t}</LABEL></td>
-			  <td><input id="description" name="description" size=25 maxlength=80 value="{$description}"></td>
+			  <td><input id="description" name="description" size=25 maxlength=80 value="{$description}" {$descriptionACL}></td>
 			 </tr>
 			 <tr>
 				  <td colspan=2>&nbsp;</td>
@@ -37,11 +37,11 @@
 			<table summary="">
 			 	<tr>
 			  		<td><LABEL for="l">{t}Printer location{/t}</LABEL></td>
-			  		<td><input id="l" name="l" size=25 maxlength=80 value="{$l}"></td>
+			  		<td><input id="l" name="l" size=25 maxlength=80 value="{$l}" {$lACL}></td>
 			 	</tr>
 			 	<tr>
 			  		<td><LABEL for="labeledURI">{t}Printer URL{/t}</LABEL>{$must}</td>
-			  		<td><input id="labeledURI" name="labeledURI" size=25 maxlength=80 value="{$labeledURI}"></td>
+			  		<td><input id="labeledURI" name="labeledURI" size=25 maxlength=80 value="{$labeledURI}" {$labeledURIACL}></td>
 			 	</tr>
 			</table>
 			<table summary="">
@@ -49,8 +49,8 @@
 					<td>
 						<br>
 						{t}Driver{/t}: <i>{$driverInfo}</i>&nbsp;
-							<input type="submit" name="EditDriver" value="{t}Edit{/t}">
-							<input type="submit" name="RemoveDriver" value="{t}Remove{/t}">
+							<input type="submit" name="EditDriver" value="{t}Edit{/t}" {$gotoPrinterPPDACL}>
+							<input type="submit" name="RemoveDriver" value="{t}Remove{/t}" {$gotoPrinterPPDACL}>
 					</td>
 				</tr>
 			</table>
@@ -68,12 +68,14 @@
 				<tr>
 					<td>
 						{t}Users which are allowed to use this printer{/t}<br>
-		     				<select size="1" name="UserMember[]" title="{t}Users{/t}" style="width:100%;height:120px;"  multiple>
+		     				<select  {if $gotoUserPrinterACL!="" || $gotoGroupPrinterACL!=""} disabled {/if}
+                                                         size="1" name="UserMember[]" title="{t}Users{/t}" style="width:100%;height:120px;"  multiple>
                 				{html_options options=$UserMembers values=$UserMemberKeys}
                				</select><br>
-							<input type="submit" value="{t}Add user{/t}"  name="AddUser">
-							<input type="submit" value="{t}Add group{/t}" name="AddGroup">
-							<input type="submit" value="{t}Delete{/t}" name="DelUser">
+							<input {$gotoUserPrinterACL} type="submit" value="{t}Add user{/t}"  name="AddUser">
+							<input {$gotoGroupPrinterACL} type="submit" value="{t}Add group{/t}" name="AddGroup">
+							<input {if $gotoUserPrinterACL!="" || $gotoGroupPrinterACL!=""} disabled {/if} 
+								type="submit" value="{t}Delete{/t}" name="DelUser">
 					</td>
 				</tr>
 			</table>	
@@ -84,12 +86,14 @@
 				<tr>
 					<td>
 						{t}Users which are allowed to administrate this printer{/t}<br>
-		     				<select size="1" name="AdminMember[]" title="{t}Admins{/t}" style="width:100%;height:120px;"  multiple>
+		     				<select {if $gotoUserAdminPrinterACL!="" || $gotoGroupAdminPrinterACL!=""} disabled {/if}
+                                                        size="1" name="AdminMember[]" title="{t}Admins{/t}" style="width:100%;height:120px;"  multiple>
                 				{html_options options=$AdminMembers values=$AdminMemberKeys}
                				</select><br>
-							<input type="submit" value="{t}Add user{/t}"  name="AddAdminUser">
-							<input type="submit" value="{t}Add group{/t}" name="AddAdminGroup">
-							<input type="submit" value="{t}Delete{/t}" name="DelAdmin">
+							<input {$gotoUserAdminPrinterACL} type="submit" value="{t}Add user{/t}"  name="AddAdminUser">
+							<input {$gotoGroupAdminPrinterACL} type="submit" value="{t}Add group{/t}" name="AddAdminGroup">
+							<input {if $gotoUserAdminPrinterACL!="" || $gotoGroupAdminPrinterACL!=""} disabled {/if}
+								type="submit" value="{t}Delete{/t}" name="DelAdmin">
 		
 					</td>
 				</tr>

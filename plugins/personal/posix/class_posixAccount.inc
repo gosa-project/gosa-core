@@ -233,9 +233,17 @@ class posixAccount extends plugin
   }
 
   if(!$isCopyPaste){
+
+    $required = (isset($this->parent->by_object['sambaAccount']) && $this->parent->by_object['sambaAccount']->is_account) || 
+                (isset($this->parent->by_object['environment'] ) && $this->parent->by_object['environment'] ->is_account);
+
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
-      $this->is_account= !$this->is_account;
+      if($this->is_account && $this->acl == "#all#" && !$required ){
+        $this->is_account= !$this->is_account;
+      }elseif(!$this->is_account && chkacl($this->acl,"create") == ""){
+        $this->is_account= !$this->is_account;
+      }
     }
 
     /* Do we represent a valid posixAccount? */
@@ -308,7 +316,7 @@ class posixAccount extends plugin
     }
 
     /* Add user workstation? */
-    if (isset($_POST["add_ws"])){
+    if (isset($_POST["add_ws"]) && chkacl($this->acl,"allowedHosts") == ""){
       $this->show_ws_dialog= TRUE;
       $this->dialog= TRUE;
     }
@@ -323,7 +331,7 @@ class posixAccount extends plugin
     }
 
     /* Remove user workstations? */
-    if (isset($_POST["delete_ws"]) && isset($_POST['workstation_list'])){
+    if (isset($_POST["delete_ws"]) && isset($_POST['workstation_list']) && chkacl($this->acl,"allowedHosts") == ""){
       foreach($_POST['workstation_list'] as $name){
         unset ($this->accessTo[$name]);
       }
@@ -666,7 +674,7 @@ class posixAccount extends plugin
       }
 
       /* Trust mode - special handling */
-      if (isset($_POST['trustmode'])){
+      if (isset($_POST['trustmode']) && chkacl($this->acl,"allowedHosts") == ""){
         $saved= $this->trustModel;
         if ($_POST['trustmode'] == "1"){
           $this->trustModel= "fullaccess";
@@ -1053,16 +1061,25 @@ class posixAccount extends plugin
     }
 
     /* Adjust shadow checkboxes */
-    foreach (array("shadowMin", "shadowMax", "shadowWarning", "shadowInactive",
-          "shadowExpire") as $val){
-
+    foreach (array("shadowMin", "shadowMax", "shadowWarning", "shadowInactive") as $val){
       if ($this->$val != 0){
         $oval= "use_".$val;
         $this->$oval= "1";
       }
     }
 
-    $this->shadowExpire= $this->convertToSeconds($this->shadowExpire);
+    /* 
+     * If shadowExpire is not enabled in the template, it's a UNIX timestamp - so don't convert it to seconds.
+     * The check is a hack - if difference between timestamp generated above and here is max 1 day.
+     */
+    if(abs($this->shadowExpire - time())>86400) {
+      $this->shadowExpire= $this->convertToSeconds($this->shadowExpire);
+    }
+    
+    /* Only enable checkbox, if shadowExpire is in the future */
+    if($this->shadowExpire > time()) {
+      $this->use_shadowExpire= "1";
+    }
   }
 
   function get_next_id($attrib)

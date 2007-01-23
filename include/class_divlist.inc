@@ -196,7 +196,7 @@ class divlist {
     							
     				$s_value = $this->a_entries[$i];
     				
-    				
+    		    // Alternation of background color		
     				if($i_alternate) $i_alternate=0; else $i_alternate=1;
     				
     				$s_return .= "\n<tr>";

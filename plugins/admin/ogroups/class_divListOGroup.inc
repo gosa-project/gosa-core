@@ -117,19 +117,6 @@ class divListOGroup extends MultiSelectWindow
   {
     /* Add Copy & Paste buttons if copy&paste is enabled
      */
-    /* Create action icons */
-    $actions = "";
-    if($this->parent->CopyPasteHandler){
-      $actions.= "<input class='center' type='image'
-        src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
-      $actions.= "<input class='center' type='image'
-        src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
-    }
-    $actions.= "<input class='center' type='image'
-      src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
-    $actions.= "<input class='center' type='image'
-      src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
-
     // Defining Links
     $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
     $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
@@ -139,6 +126,25 @@ class divListOGroup extends MultiSelectWindow
 
     // Assigning ogroups
     foreach($list as $key => $val){
+
+      $acl= get_permissions ($val['dn'], $this->ui->subtreeACL);
+      $acl= get_module_permission($acl, "ogroup", $val['dn']);
+  
+      /* Create action icons */
+      $actions = "";
+      if($this->parent->CopyPasteHandler && $acl == "#all#"){
+        $actions.= "<input class='center' type='image'
+          src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+        $actions.= "<input class='center' type='image'
+          src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
+      }
+      $actions.= "<input class='center' type='image'
+        src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
+
+      if(chkacl($acl,"delete") == ""){
+        $actions.= "<input class='center' type='image'
+          src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
+      }
 
       if(isset($val['mail'])){
         $mail = $mailimg;

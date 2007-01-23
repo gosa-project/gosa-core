@@ -110,12 +110,29 @@ class userManagement extends plugin
       $s_tab = "user";
     }
 
-    /* Display the copy & paste dialog, if it is currently open */
-    $ret = $this->copyPasteHandling($s_action,$s_entry);
-    if($ret){
-      return($ret);
-    }
+    /* Get 'dn' from posted 'uid' */
+    if(in_array_ics($s_action,array("editPaste","cut","copy"))){
 
+      if(isset($this->list[trim($s_entry)]['dn'])){
+        $dn= $this->list[trim($s_entry)]['dn'];
+      }else{
+        $dn = $this->DivListUsers->selectedBase;
+      }
+
+      $acl= get_permissions ($dn, $this->ui->subtreeACL);
+      $acl= get_module_permission($acl, "user", $dn);
+
+      if($acl != "#all#"){
+        print_red (_("You are not allowed to execute this method!")); 
+      }else{
+        /* Display the copy & paste dialog, if it is currently open */
+        $ret = $this->copyPasteHandling($s_action,$s_entry);
+        if($ret){
+          return($ret);
+        }
+      }
+    }
+  
 
     /********************
       Edit existing entry 

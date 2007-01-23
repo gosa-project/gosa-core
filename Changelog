@@ -1,5 +1,14 @@
 GOsa2 changelog
 ===============
+
+* gosa 2.5.8
+  - Fixed date of birth and shadow expire in template adaption
+  - Updated user mail account to search for CYRUSUNIXSTYLE in all
+    relevant sections of the config file
+  - Added support for sambaLogonHours 
+  - Security fix, that allows non priviledged users to change
+    several settings - including admin passwords
+
 * gosa 2.5.7
   - Fixed login.tpl to display error msgs in the middle of the screen
   - Fixed some error outputs in login.php to not break the screen
@@ -15,6 +24,9 @@ GOsa2 changelog
     can edit specified objects.
   - Fixed simultaneous move + rename for deparments
   - Internally updated to smarty 2.6.16
+  - Removed asterisk status view in user display. This was too slow in
+    bigger installations.
+  - Re-enabled phone queues. They got optimized for invisibility.
 
 * gosa 2.5.6
   - Copy & paste implemented into FAI
@@ -33,19 +45,6 @@ GOsa2 changelog
   - Added finer grained ACL settings for mail accounts
   - Fixed day of birth problem in M$ IE
   - Fixed setting of Kerberos passwords
-  - branches/openca { by Guido Serra <zeph@purotesto.it> }
-  - change DNS functions to support multiple nameservers
-  - branched from branches/2.5 - Revision: 4946
-  - added spkac to gosa schemas
-  - CNAME moved away from DNS reverse zone
-  - function dump_obj() ... usefull to debug and study data structures
-  - user/generic interface to self create an spkac
-  - CNAME can be more than one
-  - Samba creates workstations using CN ...
-  - template of the admin interface to sign/revoke certificates
-  - apache-ssl config file
-  - gosa.conf ... better have uids over 10000 to do not conflic with system
-  - slapd.conf from debian merged
 
 * gosa 2.5.5
   - Added remove method for shared folder in kolab mode
@@ -67,7 +66,6 @@ GOsa2 changelog
   - Fixed shadow expire when using templates (Closes: #20)
   - Made %uid, %sn, etc. available in templates using gosaMailAlternateAddress
 
->>>>>>> .merge-right.r5419
 * gosa 2.5.4
   - Included patch to choose the addressbook base
   - Applied fixes for logviewer done by Mario Minati

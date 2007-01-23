@@ -16,7 +16,7 @@ class gofaxAccount extends plugin
   var $departments;
 
   /* Fax attributes */
-  var $goFaxDeliveryMode= "";
+  var $goFaxDeliveryMode= "0";
   var $facsimileTelephoneNumber= "";
   var $goFaxIsEnabled= 1;
   var $goFaxPrinter= "";
@@ -100,12 +100,19 @@ class gofaxAccount extends plugin
           "regex"           => "");
       register_global("faxfilter", $faxfilter);
     }
+    $this->ui = get_userinfo();
   }
 
   function execute()
   {
     /* Call parent execute */
     plugin::execute();
+
+
+    $acl= get_permissions ($this->ui->dn, $this->ui->subtreeACL);
+    $editacl= get_module_permission($acl, "gofax", $this->dn);
+    $this->acl = $editacl;
+
     /* Hickert : 11.11.05
      * Added to be able to handle department selection in divSelelect
      */
@@ -136,7 +143,13 @@ class gofaxAccount extends plugin
 
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
-      $this->is_account= !$this->is_account;
+
+      /* Onyl change account state if allowed */
+      if($this->is_account && $this->acl == "#all#"){
+        $this->is_account= !$this->is_account;
+      }elseif(!$this->is_account && chkacl($this->acl,"create") == ""){
+        $this->is_account= !$this->is_account;
+      }
     }
 
     /* Do we represent a valid account? */

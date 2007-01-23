@@ -4,11 +4,11 @@
 	<table summary="">
 	 <tr>
 	  <td><LABEL for="cn">{t}Server name{/t}</LABEL>{$must}</td>
-	  <td><input name="cn" id="cn" size=20 maxlength=60 value="{$cn}"></td>
+	  <td><input name="cn" id="cn" size=20 maxlength=60 value="{$cn}" {$cnACL}></td>
 	 </tr>
 	 <tr>
 	  <td><LABEL for="description">{t}Description{/t}</LABEL></td>
-	  <td><input name="description" id="description" size=25 maxlength=80 value="{$description}"></td>
+	  <td><input name="description" id="description" size=25 maxlength=80 value="{$description}" {$descriptionACL}></td>
 	 </tr>
  	 <tr>
 	  <td><br><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>

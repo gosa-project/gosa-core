@@ -77,6 +77,7 @@ class sambaAccount extends plugin
   var $mungedObject;
 
   /* Helper */
+  var $dialog;
   var $show_ws_dialog= FALSE;
   var $logon_time_set= 0;
   var $logoff_time_set= 0;
@@ -192,13 +193,21 @@ class sambaAccount extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
+
 
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
-      $this->is_account= !$this->is_account;
+
+      /* Only change account state if allowed */
+      if($this->is_account && $this->acl == "#all#"){
+        $this->is_account= !$this->is_account;
+      }elseif(!$this->is_account && chkacl($this->acl,"create") == ""){
+        $this->is_account= !$this->is_account;
+      }
     }
+
     /* Do we represent a valid account? */
     if (!$this->is_account && $this->parent == NULL){
       $display= "<img alt=\"\"src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
@@ -231,6 +240,31 @@ class sambaAccount extends plugin
         return ($display);
       }
     }
+
+
+    /* Open Samaba Logong hours dialog */
+    if(isset($_POST['SetSambaLogonHours']) && $this->samba3 && chkacl($this->acl,"sambaLogonHours") == ""){
+      $this->dialog = new sambaLogonHours($this->config,$this->dn,$this->sambaLogonHours);
+    }
+
+    /* Cancel dialog */
+    if(isset($_POST['cancel_logonHours'])){
+      $this->dialog = NULL; 
+    }
+
+    /* Save selected logon hours */
+    if(isset($_POST['save_logonHours'])){
+      $this->dialog->save_object();  
+      $this->sambaLogonHours = $this->dialog->save();
+      $this->dialog = NULL; 
+    }
+
+    /* Display dialog */
+    if((isset($this->dialog)) && (is_object($this->dialog))){
+      $this->dialog->save_object();
+      return($this->dialog->execute());
+    }
+
 
     /* Prepare templating */
     $smarty= get_smarty();
@@ -599,6 +633,7 @@ class sambaAccount extends plugin
     $smarty->assign("sambaLogoffTimeACL",       chkacl($this->acl, "sambaLogoffTime"));
     $smarty->assign("sambaKickoffTimeACL",      chkacl($this->acl, "sambaKickoffTime"));
 
+    $smarty->assign("sambaLogonHoursACL",       chkacl($this->acl, "sambaLogonHours"));
 
     /* In case of javascript, disable some fields on demand */
     if ($this->samba3){
@@ -713,13 +748,17 @@ class sambaAccount extends plugin
           $tmp.= "N";
         }
       }
-      if (isset($_POST["password_expires"])){
-        if ($_POST["password_expires"] == 1){
-          $this->password_expires= 1;
+
+      if(chkacl($this->acl,"sambaPwdMustChange") == ""){
+        if (isset($_POST["password_expires"])){
+          if ($_POST["password_expires"] == 1){
+            $this->password_expires= 1;
+          }
+        } else {
+          $this->password_expires= 0;
         }
-      } else {
-        $this->password_expires= 0;
       }
+
       if (isset($_POST["temporary_disable"])){
         if ($_POST["temporary_disable"] == 1){
           if (is_integer(strpos($this->sambaAcctFlags, "L"))) {
@@ -729,26 +768,35 @@ class sambaAccount extends plugin
           }
         }
       }
-      if (isset($_POST["logon_time_set"])){
-        if ($_POST["logon_time_set"] == 1){
-          $this->logon_time_set= 1;
+
+      if(chkacl($this->acl,"sambaLogonTime") ==""){
+        if (isset($_POST["logon_time_set"])){
+          if ($_POST["logon_time_set"] == 1){
+            $this->logon_time_set= 1;
+          }
+        } else {
+          $this->logon_time_set= 0;
         }
-      } else {
-        $this->logon_time_set= 0;
       }
-      if (isset($_POST["logoff_time_set"])){
-        if ($_POST["logoff_time_set"] == 1){
-          $this->logoff_time_set= 1;
+
+      if(chkacl($this->acl,"sambaLogoffTime") == ""){
+        if (isset($_POST["logoff_time_set"])){
+          if ($_POST["logoff_time_set"] == 1){
+            $this->logoff_time_set= 1;
+          }
+        } else {
+          $this->logoff_time_set= 0;
         }
-      } else {
-        $this->logoff_time_set= 0;
       }
-      if (isset($_POST["kickoff_time_set"])){
-        if ($_POST["kickoff_time_set"] == 1){
-          $this->kickoff_time_set= 1;
+
+      if(chkacl($this->acl,"sambaKickoffTime") == ""){
+        if (isset($_POST["kickoff_time_set"])){
+          if ($_POST["kickoff_time_set"] == 1){
+            $this->kickoff_time_set= 1;
+          }
+        } else {
+          $this->kickoff_time_set= 0;
         }
-      } else {
-        $this->kickoff_time_set= 0;
       }
       
       $fill= "";

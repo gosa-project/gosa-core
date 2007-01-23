@@ -183,7 +183,7 @@ class group extends plugin
     }
 
     /* Delete user from group */
-    if (isset($_POST['del_users']) && isset($_POST['members'])){
+    if (isset($_POST['del_users']) && isset($_POST['members']) && chkacl($this->acl,"memberUid") ==""){
       foreach ($_POST['members'] as $value){
         unset ($this->members["$value"]);
         $this->removeUser($value);
@@ -192,7 +192,7 @@ class group extends plugin
     }
 
     /* Add objects? */
-    if (isset($_POST["edit_membership"])){
+    if (isset($_POST["edit_membership"]) && chkacl($this->acl,"memberUid") ==""){
       $this->group_dialog= TRUE;
       $this->dialog= TRUE;
     }
@@ -731,7 +731,7 @@ class group extends plugin
     $ui= get_userinfo();
     $acl= get_permissions ($ui->dn, $ui->subtreeACL);
     $acl= get_module_permission($acl, "group", $ui->dn);
-    if (chkacl($this->acl, "create") != ""){
+    if ($this-> dn == "new" && chkacl($this->acl, "create") != ""){
       $message[]= _("You have no permissions to create a group on this 'Base'.");
     }
 

@@ -153,7 +153,7 @@ class fonreport extends plugin
      *****************/
 
     /* Connecting, selecting database */
-    if (!isset($this->config->data['SERVERS']['FON'])){
+    if (!isset($this->config->data['SERVERS']['FON'][0])){
       print_red(_("Can't connect to phone database, no reports can be shown!"));
       return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
     }elseif(!is_callable("mysql_connect")){
@@ -161,7 +161,7 @@ class fonreport extends plugin
       return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
     }else{
 
-      $cfg= $this->config->data['SERVERS']['FON'];
+      $cfg= $this->config->data['SERVERS']['FON'][0];
       $link = @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
       if ($link === FALSE){
         print_red(_("Can't connect to phone database, no reports can be shown!"));
@@ -179,7 +179,7 @@ class fonreport extends plugin
      *****************/
 
     $query  = $this->CreateQuerySyntax();
-    $cfg    = $this->config->data['SERVERS']['FON'];
+    $cfg    = $this->config->data['SERVERS']['FON'][0];
     $link   = @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
 
     @DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__,$query, "Database query");

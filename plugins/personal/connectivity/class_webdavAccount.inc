@@ -50,7 +50,14 @@ class webdavAccount extends plugin
       $smarty->assign("tabbed", 1);
     }
 
-    $smarty->assign('webdavAccountACL', chkacl($this->acl, 'webdavAccount'));
+    /* Allow account status toogle?  */
+    $smarty->assign("webdavAccountACL", "disabled");
+    if(!$this->is_account && chkacl($this->acl,"create") == ""){
+      $smarty->assign("webdavAccountACL", "");
+    }elseif($this->is_account && $this->acl == "#all#" ){
+      $smarty->assign("webdavAccountACL", "");
+    }
+
 
     $display.= $smarty->fetch (get_template_path('webdav.tpl', TRUE, dirname(__FILE__)));
     return ($display);
@@ -86,16 +93,18 @@ class webdavAccount extends plugin
   {
     /* Do we need to flip is_account state? */
     if (isset($_POST['connectivityTab'])){
-      if (isset($_POST['webdav'])){
-        if (!$this->is_account && $_POST['webdav'] == "B"){
-          $this->is_account= TRUE;
-        }
-      } else {
-        $this->is_account= FALSE;
+
+      /* Change state if needed */
+      if(!$this->is_account && isset($_POST["webdav"]) && chkacl($this->acl,"create") == ""){
+        $this->is_account = true;
+      }elseif($this->is_account && !isset($_POST["webdav"]) && $this->acl == "#all#"){
+        $this->is_account = false;
       }
     }
 
     plugin::save_object();
+
+    #FIXME seams to be unused code !
     if (isset($_POST["WEBDAVStatus"])){
       $this->WEBDAVStatus = "disabled";
     } else {

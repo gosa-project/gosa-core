@@ -2,7 +2,7 @@
  <tr>
   <td style="vertical-align:top; border-right:1px solid #A0A0A0; padding-right:5px;" width="50%">
 
-   <input type=checkbox name="goShareServer" value="1" {$goShareServer} 
+   <input type=checkbox name="goShareServer" value="1" {$goShareServer}  
    	onchange="changeState('goExportEntry');
 			changeState('NewNfsEditId');
 			changeState('DelNfsEntId');
@@ -12,7 +12,7 @@
    <table summary="" style="width:100%">
     <tr>
      <td>
-		<select style="width:100%" id="goExportEntry" name="goExportEntryList[]" {$goExportEntryACL} {$goShareServerState} size=12 multiple >
+		<select style="width:100%" id="goExportEntry" name="goExportEntryList[]" {$goShareServerState} size=12 multiple >
     		{html_options values=$goExportEntry output=$goExportEntryKeys}
 			<option disabled>&nbsp;</option>
 	    </select>

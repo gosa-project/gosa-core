@@ -131,14 +131,20 @@ class divListSystem extends MultiSelectWindow
     $img10 = "<img class='center' src='images/save.png'               alt='L' title='"._("Ldap Server") ."'>";
 
     $empty    ="&nbsp;";
-    $action= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit system")."'>";
-    $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete system")."'>";
-
     // User and Template  Images
     $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
 
     // Test Every Entry and generate divlist Array
     foreach($terminals as $key => $val){
+
+      $acl= get_permissions ($val['dn'], $this->ui->subtreeACL);
+      $acl= get_module_permission($acl, "terminal", $val['dn']);
+
+      $action= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'     name='user_edit_%KEY%' title='"._("Edit system")."'>";
+      if(chkacl($acl,"delete") ==""){
+        $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete system")."'>";
+      }
+
  
       /* Generate picture list, which is currently disabled */
       if(in_array("goCupsServer"    ,$val['objectClass'])) $cups    = $img1;   else $cups  =$empty;
@@ -168,7 +174,7 @@ class divListSystem extends MultiSelectWindow
         $display= $val["cn"][0].$dsc;
       }
 
-      if((in_array("gotoTerminal",$val['objectClass']))||(in_array("gotoWorkstation",$val['objectClass']))){
+      if(((in_array("gotoTerminal",$val['objectClass']))||(in_array("gotoWorkstation",$val['objectClass']))) && chkacl($acl,"password") == ""){
         $action2 = "<input class='center' type='image' src='images/certs.png' alt='"._("Password")."'   name='user_setpwd_%KEY%' title='"._("Set root       password")."'>";
       }else{
         $action2 = "";

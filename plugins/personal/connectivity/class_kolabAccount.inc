@@ -80,7 +80,14 @@ class kolabAccount extends plugin
       $smarty->assign("$val", $this->$val);
       $smarty->assign($val."ACL", chkacl($this->acl, "$val"));
     }
-    $smarty->assign("kolabAccountACL", chkacl($this->acl, "kolabAccountACL"));
+  
+    /* Allow account status toogle?  */
+    $smarty->assign("kolabAccountACL", "disabled");
+    if(!$this->is_account && chkacl($this->acl,"create") == ""){
+      $smarty->assign("kolabAccountACL", "");
+    }elseif($this->is_account && $this->acl == "#all#" ){
+      $smarty->assign("kolabAccountACL", "");
+    }
 
     /* Check for invitation action */
     $nr= 0;
@@ -324,9 +331,10 @@ class kolabAccount extends plugin
     /* Do we need to flip is_account state? */
     if (isset($_POST['connectivityTab'])){
 
-      if(isset($_POST["kolabState"])){
+      /* Change state if needed */
+      if(!$this->is_account && isset($_POST["kolabState"]) && chkacl($this->acl,"create") == ""){
         $this->is_account = true;
-      }else{
+      }elseif($this->is_account && !isset($_POST["kolabState"]) && $this->acl == "#all#"){
         $this->is_account = false;
       }
 

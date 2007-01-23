@@ -11,7 +11,7 @@
 #
 Summary: 		Web Based LDAP Administration Program 
 Name:			gosa
-Version: 		2.5.6
+Version: 		2.5.7
 Release:		1
 License: 		GPL
 Source: 		ftp://oss.GONICUS.de/pub/gosa/%{sourcename}.tar.bz2
@@ -55,7 +55,7 @@ and can write user adapted sieve scripts.
 Group: 			System/Administration
 Summary: 		Schema Definitions for the GOSA package
 %if %{suse}
-Requires:		openldap2 >= 2.2.6
+Requires:		openldap2 >= 2.1.22
 %else
 Requires:		openldap-servers >= 2.2.0
 %endif
@@ -174,12 +174,12 @@ rm -rf %{buildroot}
 /bin/cp /etc/shells /etc/gosa
 
 %pre
-# Cleanup compile dir on updates
-[ -d /var/spool/gosa ] && rm -rf /var/spool/gosa/*
+# Cleanup compile dir on updates, always exit cleanly even on errors
+[ -d /var/spool/gosa ] && rm -rf /var/spool/gosa/* ; exit 0
 
 %postun
 # Remove temporary files, just to be sure
-rm -rf /var/spool/gosa/
+[ -d /var/spool/gosa ] && rm -rf /var/spool/gosa/ ; exit 0
 
 %files
 %defattr(-,%{apacheuser},%{apachegroup})
@@ -219,6 +219,10 @@ rm -rf /var/spool/gosa/
 /usr/share/gosa/doc/guide/user/nl
 
 %changelog
+* Wed Dec 20 2006 Lars Scheiter <lars.scheiter@GONICUS.de> 2.5.7
+- New upstream
+- %pre and %postun always end successfully now, even on errors
+
 * Fri Nov 17 2006 Lars Scheiter <lars.scheiter@GONICUS.de> 2.5.6
 - New upstream
 - Cleanup temporary dir after package removal

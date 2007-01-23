@@ -91,16 +91,16 @@ class mailAccount extends plugin
       }
     }
 
-    
     /* Create the account prefix  user. user/ 
        Preset folder prefix. Will change it later to respect
        altnamespace. */
     if (isset($this->config->current['CYRUSUNIXSTYLE']) && $this->config->current['CYRUSUNIXSTYLE'] == "true"){
       $this->folder_prefix= "user/";
+    }elseif (isset($this->config->data['MAIN']['CYRUSUNIXSTYLE']) && $this->config->data['MAIN']['CYRUSUNIXSTYLE'] == "true"){
+      $this->folder_prefix= "user/";
     } else {
       $this->folder_prefix= "user.";
     }
-
     
     /* This is not a new account, parse additional attributes */
     if (($dn != NULL) && ($dn != "new") && $this->is_account){
@@ -242,7 +242,13 @@ class mailAccount extends plugin
 
     /* Do we need to flip is_account state? */
     if (isset($_POST['modify_state'])){
-      $this->is_account= !$this->is_account;
+
+      /* Onyl change account state if allowed */
+      if($this->is_account && $this->acl == "#all#" && !$this->accountDelegationsConfigured()){
+        $this->is_account= !$this->is_account;
+      }elseif(!$this->is_account && chkacl($this->acl,"create") == ""){
+        $this->is_account= !$this->is_account;
+      }
     }
 
     /* Do we represent a valid account? */
@@ -625,6 +631,11 @@ class mailAccount extends plugin
         }
       }
     }
+    if(isset($this->parent->by_object['connectivity']->plugin['kolabAccount'])){
+      if($this->parent->by_object['connectivity']->plugin['kolabAccount']->is_account){
+        return(true);
+      }
+    }
     return(false); 
   }
 
@@ -792,7 +803,6 @@ class mailAccount extends plugin
 
       if ($method->connect($this->gosaMailServer)){
         $method->updateMailbox($this->folder_prefix.$this->$id);
-        $method->updateDefaultMailboxes($this->folder_prefix.$this->$id, $this->config->current['IMAPDEFAULTFOLDERS']);
         
         $method->setQuota($this->folder_prefix.$this->$id, $this->gosaMailQuota);
         $method->disconnect();
