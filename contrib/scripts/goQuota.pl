@@ -39,7 +39,8 @@ sub anonBind
 	my $ldap = Net::LDAP->new( $LDAP_HOST, port => $LDAP_PORT );
 	if($ldap)
 	{
-		my $mesg = $ldap->bind();
+		my $mesg = $ldap->bind('cn=squid,ou=Apps,dc=example,dc=com',
+		                      password => 'XXXXXXXXXX');
 		$mesg->code && warn timestamp, "Can't bind to ldap://$LDAP_HOST:$LDAP_PORT:", $mesg->error, "\n";
 		return $ldap;
 	}
