@@ -32,8 +32,7 @@ if (!$remove_lock){
         $tldap = new LDAP($ui->dn, $_POST['current_password'],
             $config->current['SERVER'],
             isset($config->current['RECURSIVE']) && $config->current['RECURSIVE'] == "true",
-            isset($config->current['TLS'])
-            && $config->current['TLS'] == "true");
+            isset($config->current['TLS']) && $config->current['TLS'] == "true");
         if ($tldap->error != "Success"){
           $message[]= _("The password you've entered as your current password doesn't match the real one.");
         }

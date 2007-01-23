@@ -215,12 +215,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
   }
   if(isset($config->data['MAIN']['SCHEMA_CHECK'])&&preg_match("/true/i",$config->data['MAIN']['SCHEMA_CHECK'])){
     require_once("functions_setup.inc");
-    if(!is_schema_readable($config->current['SERVER'],$config->current['ADMIN'],$config->current['PASSWORD'])){
+    $recursive = (isset($config->current['RECURSIVE']) && $config->current['RECURSIVE'] == "true");
+    $tls =       (isset($config->current['TLS'])       && $config->current['TLS'] == "true");
+
+    if(!is_schema_readable($config->current['SERVER'], $config->current['ADMIN'], $config->current['PASSWORD'], $recursive, $tls)){
+
       print_red(_("GOsa cannot retrieve information about the installed schema files. Please make sure, that this is possible."));
       displayLogin();
       exit();
     }else{
-      $str = (schema_check($config->current['SERVER'],$config->current['ADMIN'],$config->current['PASSWORD'],0,TRUE));
+      $str = (schema_check($config->current['SERVER'],$config->current['ADMIN'],$config->current['PASSWORD'], $recursive, $tls, 0, TRUE));
       $checkarr = array();
       foreach($str as $tr){
         if(isset($tr['needonstartup'])){

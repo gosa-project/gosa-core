@@ -1,5 +1,7 @@
 GOsa2 changelog
 ===============
+* gosa 2.5.9
+  - Fixed ldap tls connections when schema check was being used
 
 * gosa 2.5.8
   - Fixed date of birth and shadow expire in template adaption
