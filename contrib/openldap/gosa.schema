@@ -239,6 +239,20 @@ attributetype ( 1.3.6.1.4.1.19414.2.1.651
     EQUALITY caseIgnoreIA5Match
 	SUBSTR caseIgnoreIA5SubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{256} )
+	
+# SPKAC http://www.openssl.org/docs/apps/spkac.html
+# added by Guido Serra <zeph@purotesto.it> to support
+# CA Management functionality http://dev.purotesto.it/support/gosa/
+## OpenLDAP note: ";binary" transfer should NOT be used as syntax is binary
+attributetype ( 1.3.6.1.4.1.10098.1.1.15.2
+	NAME 'SPKAC'
+	DESC 'Signed Public Key And Challenge'
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.5 )
+
+objectClass  ( 1.3.6.1.4.1.10098.1.1.15.1 NAME 'gosaCA' SUP top AUXILIARY
+    DESC 'CaPerson'
+    MUST ( cn )
+    MAY ( SPKAC ))
 
 # Objectclasses
 objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.1 NAME 'gosaObject' SUP top AUXILIARY
