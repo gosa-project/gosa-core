@@ -243,7 +243,7 @@
 		iconsize="48x48"
 		pwminlen="6"
 		forceglobals="false"
-		smbhash='perl -MCrypt::SmbHash -e "ntlmgen \"$ARGV[0]\", $lm, $nt; print \"${lm}:${nt}\n\";" '
+		smbhash='perl -MCrypt::SmbHash -e "ntlmgen \"\$ARGV[0]\", \$lm, \$nt; print \"\${lm}:\${nt}\n\";" '
 		session_lifetime="7200"
 		schema_check="true"
 		max_ldap_query_time="5.0"
