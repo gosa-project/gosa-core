@@ -80,6 +80,18 @@ td.phonelist:hover {
   background-color: #D2D2D2;
 }
 
+td.scrollbody {
+       vertical-align:top;
+       padding:0px;
+}
+
+div.scrollbody {
+       background-color:#ffffff;
+       overflow:auto;
+       text-align:left;
+}
+
+
 h1.menuheader{
   border-style:solid;
   border-color:#707070;
