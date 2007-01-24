@@ -1,13 +1,9 @@
-<!--
-     Defining the doctype doesn't allow screens with 100% height. If you've
-     fixes for this, please tell me!!!
-     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 	"http://www.w3.org/TR/html4/transitional.dtd">
--->
 <html>
 
 <head>
-  <title>PuroTesto</title>
+  <title>{if isset($title)}{$title}{else}PuroTesto{/if}</title>
 
   <meta name="generator" content="my hands">
   <meta name="description" content="GOsa - Login">
@@ -18,9 +14,9 @@
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="post-check=0, pre-check=0">
-  <meta http-equiv="Content-Type" content="text/html">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-  <link rel="stylesheet" type="text/css" href="themes/purotesto/style.css">
+  <style type="text/css">@import url('themes/purotesto/style.css');</style>
   <link rel="shortcut icon" href="favicon.ico">
 
   <script language="javascript"src="include/png.js" type="text/javascript"></script>
