@@ -198,7 +198,7 @@ class blocklist extends plugin
 
     /* Handle interactions: add */
     if (isset($_POST['add_number']) && $_POST['number'] != ""){
-      if (is_phone_nr($_POST['number'])){
+      if (is_phone_nr($_POST['number']) || preg_match ("/^[\/0-9 ()\^\.\$+*-]+$/",$_POST['number'])){
         $this->addNumber ($_POST['number']);
       } else {
         print_red (_("Please specify a valid phone number."));

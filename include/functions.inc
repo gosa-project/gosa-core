@@ -290,7 +290,8 @@ function ldap_init ($server, $base, $binddn='', $pass='')
 {
   global $config;
 
-  $ldap = new LDAP ($binddn, $pass, $server, isset($config->current['RECURSIVE'])                                                && $config->current['RECURSIVE'] == "true",
+  $ldap = new LDAP ($binddn, $pass, $server,
+      isset($config->current['RECURSIVE']) && $config->current['RECURSIVE'] == "true",
       isset($config->current['TLS']) && $config->current['TLS'] == "true");
 
   /* Sadly we've no proper return values here. Use the error message instead. */

@@ -30,9 +30,9 @@ function view_schema_check($table)
 }
 
 
-function is_schema_readable($server, $admin, $password)
+function is_schema_readable($server, $admin, $password, $follow_referrals=FALSE, $tls=FALSE)
 {
-  $ldap = new LDAP($admin,$password,$server);
+  $ldap = new LDAP($admin, $password, $server, $follow_referrals, $tls);
   $tmp = $ldap->get_objectclasses();
 
   if(count($tmp)){
@@ -41,7 +41,7 @@ function is_schema_readable($server, $admin, $password)
   return(false);
 } 
 
-function schema_check($server, $admin, $password, $aff=0,$CalledByIndexPhP=false)
+function schema_check($server, $admin, $password, $follow_referrals=FALSE, $tls=FALSE, $aff=0, $CalledByIndexPhP=false)
 {
   global $config;
 
@@ -78,7 +78,7 @@ function schema_check($server, $admin, $password, $aff=0,$CalledByIndexPhP=false
       );
 
   /* Get objectclasses */
-  $ldap = new LDAP($admin,$password, $server);
+  $ldap = new LDAP($admin,$password, $server, $follow_referrals, $tls);
   $objectclasses = $ldap->get_objectclasses(); 
   if(count($objectclasses) == 0){
     return (array(array("msg" => _("Can't get schema information from server. No schema check possible!"), "status" => FALSE)));
@@ -882,6 +882,13 @@ function show_setup_page4($withoutput = true)
   if(!isset($_SESSION['ldapconf']['mail'])){
     $_SESSION['ldapconf']['mail']= 0;
   }
+  if(!isset($_SESSION['ldapconf']['follow_referrals'])){
+    $_SESSION['ldapconf']['follow_referrals']= FALSE;
+  }
+  if(!isset($_SESSION['ldapconf']['tls'])){
+    $_SESSION['ldapconf']['tls']= FALSE;
+  }
+
   $tmp= array_flip($_SESSION['ldapconf']['arr_cryptkeys']);
   if(!isset($_SESSION['ldapconf']['arr_crypts'])){
     $_SESSION['ldapconf']['arr_crypts']   = $tmp['md5'];
@@ -897,14 +904,22 @@ function show_setup_page4($withoutput = true)
   if(isset($_POST['check']) || (isset($_POST['admin'])) && isset($_POST['password'])) {
     $ldap= new LDAP($_SESSION['ldapconf']['admin'],
         $_SESSION['ldapconf']['password'],
-        $_SESSION['ldapconf']['uri']);
+        $_SESSION['ldapconf']['uri'],
+        $_SESSION['ldapconf']['follow_referrals'],
+        $_SESSION['ldapconf']['tls']);
 
     $m= schema_check($_SESSION['ldapconf']['uri'],
         $_SESSION['ldapconf']['admin'],
-        $_SESSION['ldapconf']['password']);
+        $_SESSION['ldapconf']['password'],
+        $_SESSION['ldapconf']['follow_referrals'],
+        $_SESSION['ldapconf']['tls']);
+
     $_SESSION['classes']= $m;
 
-    if(!is_schema_readable($ldapconf['uri'],$ldapconf['admin'],$ldapconf['password'])){
+    //TODO: Ask user for referrals and TLS config options during setup. They are initialized to false at the moment:
+    $ldapconf['follow_referrals'] = false;
+    $ldapconf['tls'] = false;
+    if(!is_schema_readable($ldapconf['uri'], $ldapconf['admin'], $ldapconf['password'], $ldapconf['follow_referrals'], $ldapconf['tls'])){
       if($withoutput){
         print_red(_("Can't read schema informations, GOsa needs to know your schema setup. Please verify that it is readable for GOsa"));
       }
@@ -954,7 +969,12 @@ function show_setup_page5($withoutput=true)
   $smarty->assign("webgroup", $info['name']);
   $smarty->assign("path", CONFIG_DIR);
   $message= "<table summary=\"\" class=\"check\">";
-  $m= schema_check($ldapconf['uri'], $ldapconf['admin'], $ldapconf['password'],1);
+
+  //TODO:Ask user for referral and TLS config options during setup. They are initialized to false at the moment:
+  $ldapconf['follow_referrals'] = false;
+  $ldapconf['tls'] = false;
+
+  $m= schema_check($ldapconf['uri'], $ldapconf['admin'], $ldapconf['password'], $ldapconf['follow_referrals'], $ldapconf['tls'], 1);
 
   if($withoutput) {
     $smarty->assign ("schemas", view_schema_check($m));

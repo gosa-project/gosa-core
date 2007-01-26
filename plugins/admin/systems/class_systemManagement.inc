@@ -698,14 +698,14 @@ class systems extends plugin
       if($this->DivListSystem->$checkBox){
         if($this->DivListSystem->SubSearch){
           if($oc['CLASS'] != ""){
-            $filter = "(|(&".$userregex."(objectClass=".$oc['CLASS'].")(cn=".$this->DivListSystem->Regex.")))";
+            $filter = "(&".$userregex."(objectClass=".$oc['CLASS'].")(cn=".$this->DivListSystem->Regex."))";
             $res = array_merge($res,get_list($filter,$this->ui->subtreeACL, $base,
                   array("cn", "description", "macAddress", "objectClass", "sambaDomainName", "FAIstate"), GL_NONE | GL_SUBSEARCH | GL_SIZELIMIT));
           }
         }else{
           /* User filter? */
           if($oc['CLASS'] != ""){
-            $filter = "(|(&".$userregex."(objectClass=".$oc['CLASS'].")(cn=".$this->DivListSystem->Regex.")))";
+            $filter = "(&".$userregex."(objectClass=".$oc['CLASS'].")(cn=".$this->DivListSystem->Regex."))";
             $res = array_merge($res,get_list($filter,$this->ui->subtreeACL, $oc['TREE'].$base,
                   array("cn", "description", "macAddress", "objectClass", "sambaDomainName", "FAIstate"), GL_NONE | GL_SIZELIMIT));
           }

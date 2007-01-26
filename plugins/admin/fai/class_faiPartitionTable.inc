@@ -533,6 +533,9 @@ class faiPartitionTable extends plugin
           $ldap->cd($this->config->current['BASE']);
           $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $partition_dn));
           $ldap->cd($partition_dn);
+          if (isset($partition_attrs['gosaUnitTag']) && !in_array_ics("gosaAdministrativeUnitTag",$partition_attrs['objectClass'])){
+            $partition_attrs['objectClass'][]= "gosaAdministrativeUnitTag";
+          }
           $ldap->add($partition_attrs);
           show_ldap_error($ldap->get_error(), _("Saving FAI partition table entry failed"));
         }
