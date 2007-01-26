@@ -83,12 +83,20 @@ $REWRITE= array( "ä" => "ae",
 function get_dir_list($folder= ".")
 {
   $currdir=getcwd();
+  //echo "DIR: ".$currdir."<br>\n";
   if ($folder){
+    //echo "Chdir: ".$folder."<br>\n";
     chdir("$folder");
   }
 
-  $dh = opendir(".");
-  while(false !== ($file = readdir($dh))){
+  $cmd = "ls -1 ".$folder;
+  
+  $files = preg_split('/\n/',shell_exec($cmd));
+
+  foreach ($files as $file) 
+    if($file != '') {
+  
+    $fullpath = $folder."/".$file;
 
     // Smarty is included by  include/php_setup.inc     require("smarty/Smarty.class.php");
     // Skip all files and dirs in  "./.svn/" we don't need any information from them
@@ -102,18 +110,19 @@ function get_dir_list($folder= ".")
 
     /* Recurse through all "common" directories */
     if(is_dir($file) &&$file!="CVS"){
-      get_dir_list($file);
+      get_dir_list($fullpath);
       continue;
     }
 
+    //echo "FILE?: ".$file."<br>\n";
+
     /* Include existing class_ files */
-    if (!is_dir($file) && preg_match("/^class_.*\.inc$/", $file)) {
+    if (!is_dir($file) && preg_match("/class_.*\.inc$/", $file)) {
+      //echo "Read: ".getcwd()."/".$file."<br>\n"; 
       require_once($file);
     }
   }
-
-  closedir($dh);
-  chdir($currdir);
+  chdir("$currdir");
 }
 
 
