@@ -728,16 +728,25 @@ class userManagement extends plugin
     $SortTemp = array();
     $List = array();
     foreach($ListTemp as $Key => $Entry){
-       // Generate caption for rows
-      if (isset($Entry["sn"]) && isset($Entry["givenName"])){
-        $display= $Entry["sn"][0].", ".$Entry["givenName"][0]." [".$Entry["uid"][0]."]";
-      } else {
-        $display= "[".$Entry["uid"][0]."]";
-      }
 
-      $display = strtolower($display);
-      $List[$display] = $Entry;
-      $SortTemp[$display] = $display;
+      /* Skip entries that are not located under the people ou (normaly 'ou=people,')
+       * Else winstations will be listed too, if you use the subtree flag. 
+       */
+      if(!preg_match("/".normalizePreg(get_people_ou())."/i",$Entry['dn'])){
+        continue;
+      }else{
+
+        // Generate caption for rows
+        if (isset($Entry["sn"]) && isset($Entry["givenName"])){
+          $display= $Entry["sn"][0].", ".$Entry["givenName"][0]." [".$Entry["uid"][0]."]";
+        } else {
+          $display= "[".$Entry["uid"][0]."]";
+        }
+
+        $display = strtolower($display);
+        $List[$display] = $Entry;
+        $SortTemp[$display] = $display;
+      }
     }
     sort($SortTemp);
     reset($SortTemp);
