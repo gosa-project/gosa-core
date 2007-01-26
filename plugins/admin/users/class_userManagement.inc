@@ -732,7 +732,7 @@ class userManagement extends plugin
       /* Skip entries that are not located under the people ou (normaly 'ou=people,')
        * Else winstations will be listed too, if you use the subtree flag. 
        */
-      if(!preg_match("/".normalizePreg(get_people_ou())."/",$Entry['dn'])){
+      if(!preg_match("/".normalizePreg(get_people_ou())."/i",$Entry['dn'])){
         continue;
       }else{
 
