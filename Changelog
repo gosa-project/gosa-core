@@ -4,6 +4,8 @@ GOsa2 changelog
   - Fixed ldap tls connections when schema check was being used
 
 * gosa 2.5.8
+  - Fixed problem with winstations shown in user list. 
+  - Allow basic regex ().*^$ in fax blocklist numbers.
   - Fixed date of birth and shadow expire in template adaption
   - Updated user mail account to search for CYRUSUNIXSTYLE in all
     relevant sections of the config file
