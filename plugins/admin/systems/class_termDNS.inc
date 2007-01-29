@@ -71,6 +71,16 @@ class termDNS extends plugin
       /* Get Zones  
        */
       $this->Zones        = getAvailableZones($config);
+      //echo '<pre>DEBUG: '.print_r($this->Zones, true).'</pre>';
+
+      $idZones = array_flip($this->Zones);
+
+      $idZones = array_filter($idZones,array($this,"netmaskIsCoherent"));
+      $this->Zones = array_flip($idZones);
+
+      if(count($this->Zones) < 1) $this->Zones = array("" => "- no reverse zone matching you ip -");
+
+      //echo '<pre>DEBUG: '.print_r($this->Zones, true).'</pre>';
 
       /* Get Entry 
        */
@@ -101,6 +111,14 @@ class termDNS extends plugin
     /* Store initally account settings 
      */
     $this->DNSinitially_was_account = $this->DNS_is_account;
+  }
+
+  function netmaskIsCoherent($idZone) {
+    $netmask = FlipIp(str_replace(".in-addr.arpa","",getNameFromMix($idZone)));
+    if(!strstr($this->ipHostNumber, $netmask))
+      return false;
+    else 
+      return true;
   }
 
 
