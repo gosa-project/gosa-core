@@ -44,10 +44,10 @@ class termDNS extends plugin
     plugin::plugin ($config, $dn);
 
     if(isset($this->attrs['cn'][0])){
-      $this->OrigCn = $this->attrs['cn'][0];
-      $this->cn = $this->attrs['cn'][0];
+      $this->OrigCn = preg_replace("/\\\$\$/","",$this->attrs['cn'][0]);
+      $this->cn = preg_replace("/\\\$\$/","",$this->attrs['cn'][0]);
     }
-
+  
     /* Do we have autonet support? */
     if (isset($this->config->data['MAIN']['AUTO_NETWORK_HOOK'])){
       $this->autonet= true;
