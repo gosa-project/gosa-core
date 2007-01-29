@@ -62,6 +62,8 @@ class wingeneric extends plugin
 
     /* Save dn for later references */
     $this->orig_dn= $this->dn;
+
+    $this->cn= preg_replace("/\\\$\$/","",$this->cn);
   }
 
   function execute()
@@ -226,7 +228,7 @@ class wingeneric extends plugin
       $this->handle_post_events("modify");
     }
 
-    $this->netConfigDNS->cn = $this->cn;
+    $this->netConfigDNS->cn = preg_replace("/\\\$\$/","",$this->cn);
     $this->netConfigDNS->save($this->dn);
     show_ldap_error($ldap->get_error(), _("Saving Samba workstation failed"));
 

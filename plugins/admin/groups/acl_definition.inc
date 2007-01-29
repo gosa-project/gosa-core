@@ -190,7 +190,6 @@ $ACLD['servkolab']=   array("postfix_mydomain",
 			"postfix_allow_unauthenticated",
 			"cyrus_pop3");
 $ACLD['servservice']=   array("goExportEntry",
-			"goExportEntry",
 			"goNtpServer",
 			"goLdapBase",
 			"goTerminalServer",

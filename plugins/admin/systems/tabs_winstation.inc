@@ -18,7 +18,13 @@ class wintabs extends tabs
   {
     /* Check for new 'dn', in order to propagate the
        'dn' to all plugins */
+
+    /* add $ to end of name if mising */
     $baseobject= $this->by_object['wingeneric'];
+    if(!preg_match("/\\\$\$/",$baseobject->cn)){
+      $baseobject->cn .= "$";
+    }
+
     $this->dn= "uid=$baseobject->cn,".get_winstations_ou().$baseobject->base;
     $baseobject->dn= $this->dn;
 
