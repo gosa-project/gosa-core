@@ -18,11 +18,6 @@ class nagiosAccount extends plugin
   var $plHeadline= "Nagios";
   var $plDescription= "This does something";
 
-  /* CLI vars */
-  var $cli_summary= "Manage users nagios account";
-  var $cli_description= "Manage Account and autorization\nfor Nagios";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* plugin specific values */
   var $NagiosAlias  = "";
   var $NagiosPager  = "";

@@ -1,11 +1,6 @@
 <?php
 class appgroup extends plugin
 {
-  /* CLI vars */
-  var $cli_summary= "Manage application groups";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* Appgroup attributes */
   var $gosaMemberApplication= array();
 

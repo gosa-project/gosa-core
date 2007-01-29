@@ -2,11 +2,6 @@
 
 class workgeneric extends plugin
 {
-  /* CLI vars */
-  var $cli_summary= "Manage workstation base objects";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* Generic terminal attributes */
   var $gotoMode= "locked";
   var $gotoSyslogServer= "";

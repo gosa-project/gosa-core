@@ -24,11 +24,6 @@ class oxchangeAccount extends plugin
   var $plHeadline= "Open-Xchange";
   var $plDescription= "This does something";
 
-  /* CLI vars */
-  var $cli_summary= "Management of Open-Xchange accounts";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* GW attributes */
   var $OXAppointmentDays="500";
   var $OXTaskDays="5";

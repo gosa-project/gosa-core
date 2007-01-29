@@ -5,11 +5,6 @@ class kolabAccount extends plugin
   var $plHeadline       = "Kolab";
   var $plDescription    = "This does something";
 
-  /* CLI vars */
-  var $cli_summary      = "Manage users Kolab account";
-  var $cli_description  = "Some longer text\nfor help";
-  var $cli_parameters   = array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* Kolab attributes */
   var $kolabInvitationPolicy  = array();
   var $kolabFreeBusyFuture    = 60;

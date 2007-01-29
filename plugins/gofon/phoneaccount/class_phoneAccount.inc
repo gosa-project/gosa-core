@@ -31,12 +31,6 @@ class phoneAccount extends plugin
   var $init_HomeServer        = "0";            // Contains the dn of the server that manage this account 
   var $goFonHomeServers       = array();        // Contains all available server configurations 
     
-
-  /* CLI vars */
-  var $cli_summary            = "Manage users phone account";
-  var $cli_description        = "Some longer text\nfor help";
-  var $cli_parameters         = array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* attribute list for save action */
   var $CopyPasteVars          = array("phoneNumbers","macroarray","macrostillavailable"/*"phoneNumbers" -Reset- */,
                                       "hardware_list","used_hardware");

@@ -23,11 +23,6 @@ class mailAccount extends plugin
   var $plDescription      = "This does something";
   var $method             = "mailMethod";
 
-  /* CLI vars */
-  var $cli_summary        = "Manage users mail account";
-  var $cli_description    = "Some longer text\nfor help";
-  var $cli_parameters     = array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* plugin specific values */
   var $mail                               = "";
   var $uid                                = "";

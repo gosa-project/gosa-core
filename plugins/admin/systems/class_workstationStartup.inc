@@ -2,11 +2,6 @@
 
 class workstartup extends plugin
 {
-  /* CLI vars */
-  var $cli_summary= "Manage terminal startup options";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* Generic terminal attributes */
   var $bootmode             = "G";
   var $goLdapServerList     = array();

@@ -2,11 +2,6 @@
 
 class mailgroup extends plugin
 {
-  /* CLI vars */
-  var $cli_summary        = "Manage mail groups/shared folders";
-  var $cli_description    = "Some longer text\nfor help";
-  var $cli_parameters     = array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   var $uid                        = "";       // User id 
   var $cn                         = "";       // cn
   var $orig_cn                    = "";       // cn

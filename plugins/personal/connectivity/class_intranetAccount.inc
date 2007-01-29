@@ -15,13 +15,6 @@ class intranetAccount extends plugin
   /*! Definitions */
   var $plDescription= "This does something";
 
-  /*! CLI vars */
-  var $cli_summary= "Manage users Intranet account";
-  /*! CLI vars */
-  var $cli_description= "Some longer text\nfor help";
-  /*! CLI vars */
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* attribute list for save action */
   var $attributes= array();
   /* ObjectClasses list for save action */

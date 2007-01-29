@@ -1,11 +1,6 @@
 <?php
 class application extends plugin
 {
-  /* CLI vars */
-  var $cli_summary= "Handling of GOsa's application object";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* application attributes */
   var $cn= "";
   var $description= "";

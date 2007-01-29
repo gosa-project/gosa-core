@@ -1,11 +1,6 @@
 <?php
 
   class dfsgeneric extends plugin {
-    /* CLI vars */
-    var $cli_summary      = "Manage terminal base objects";
-    var $cli_description  = "Some longer text\nfor help";
-    var $cli_parameters   = array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
     /* Needed values and lists */
     var $base             = "";
     var $cn               = "";

@@ -10,13 +10,6 @@
 */
 class macroParameter extends plugin
 {
-  /*! CLI vars */
-  var $cli_summary= "Handling of GOsa's application object";
-  /*! CLI vars */
-  var $cli_description= "Some longer text\nfor help";
-  /*! CLI vars */
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* Parameter Count*/
   var $para_count = 0 ; 
   /*! macro base  */

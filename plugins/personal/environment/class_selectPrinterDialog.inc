@@ -2,11 +2,6 @@
 
 class selectPrinterDialog extends plugin
 {
-  /* CLI vars */
-  var $cli_summary          = "Manage server basic objects";
-  var $cli_description      = "Some longer text\nfor help";
-  var $cli_parameters       = array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* attribute list for save action */
   var $ignore_account       = TRUE;
   var $attributes           = array();

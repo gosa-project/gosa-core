@@ -24,11 +24,6 @@ class sambaAccount extends plugin
   var $plHeadline= "Samba";
   var $plDescription= "This does something";
 
-  /* CLI vars */
-  var $cli_summary= "Manage users samba account";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* Switch for Samba version */
   var $samba3= FALSE;
   var $uidNumber= 65535;

@@ -32,12 +32,6 @@ class faiManagement extends plugin
 	var $plHeadline			= "FAI";
 	var $plDescription		= "Fully Automatic Installation - management";
 
-	/* CLI vars */
-	var $cli_summary		  = "Handling of FAI entries";
-	var $cli_description	= "This plugin represents a management tool\n
-		which allows us to manage all needed attributes for fully automatic installations (FAI)";
-	var $cli_parameters		= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
 	/* Headpage attributes */
   var $lock_type    = "";    // should be branch/freeze
   var $lock_name    = "";

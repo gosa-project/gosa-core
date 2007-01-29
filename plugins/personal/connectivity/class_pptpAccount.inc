@@ -26,11 +26,6 @@ class pptpAccount extends plugin
   var $plHeadline= "PPTP";
   var $plDescription= "This does something";
 
-  /* CLI vars */
-  var $cli_summary= "Manage users pptp account";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* attribute list for save action */
   var $attributes= array();
   var $objectclasses= array("pptpServerAccount");

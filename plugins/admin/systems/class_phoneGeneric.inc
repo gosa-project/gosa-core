@@ -2,11 +2,6 @@
 
 class phoneGeneric extends plugin
 {
-  /* CLI vars */
-  var $cli_summary= "Manage phone base objects";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* Generic terminal attributes */
   var $interfaces= array();
   var $ignore_account= TRUE;

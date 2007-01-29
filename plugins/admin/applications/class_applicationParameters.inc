@@ -1,11 +1,6 @@
 <?php
 class applicationParameters extends plugin
 {
-  /* CLI vars */
-  var $cli_summary= "Manage application class parameters";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* Parameters  */
   var $option_name= array();
   var $option_value= array();

@@ -6,12 +6,6 @@ class gofaxAccount extends plugin
   var $plHeadline= "FAX";
   var $plDescription= "This does something";
 
-  /* CLI vars */
-  var $cli_summary= "Manage users fax account";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
-
   /* Department list shown in the divSelectList*/
   var $departments;
 

@@ -5,11 +5,6 @@ class blocklist extends plugin
   var $plHeadline= "FAX Blocklists";
   var $plDescription= "This does something";
 
-  /* CLI vars */
-  var $cli_summary= "Handling of GOfax block lists";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* blocklist attributes */
   var $cn               = "";
   var $description      = "";

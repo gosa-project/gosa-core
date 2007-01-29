@@ -9,13 +9,6 @@
 */
 class macro extends plugin
 {
-  /*! CLI vars */
-  var $cli_summary= "Handling of GOsa's macro object";
-  /*! CLI vars */
-  var $cli_description= "Some longer text\nfor help";
-  /*! CLI vars */
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /*! Macro attributes,  */
   var $generate_error= "";
   

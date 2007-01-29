@@ -2,11 +2,6 @@
 
 class gospamserver extends plugin{
 
-  /* CLI vars */
-  var $cli_summary= "Manage server base objects";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* This plugin only writes its objectClass */
   var $objectclasses    = array("goSpamServer");
   var $attributes       = array("saRewriteHeader","saTrustedNetworks","saRequiredScore","saFlags","saRule");

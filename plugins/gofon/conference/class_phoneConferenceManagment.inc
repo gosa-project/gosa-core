@@ -25,11 +25,6 @@ class phoneConferenceManagment extends plugin
   var $plHeadline				  = "Phone conferences";
   var $plDescription			= "Management";
 
-  /* CLI vars */
-  var $cli_summary			  = "Handling of LDAP subtrees";
-  var $cli_description		= "Some longer text\nfor help";
-  var $cli_parameters			= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* attribute list for save action */
   var $attributes				  = array();
   var $objectclasses			= array();
