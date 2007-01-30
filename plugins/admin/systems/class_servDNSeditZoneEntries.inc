@@ -208,13 +208,13 @@ class servDNSeditZoneEntries extends plugin
       /* Renaming check for existing devices 
        */
       if(isset($device['OrigCn'])  && ($DevName != $device['OrigCn'] )){
-        $ldap->cd($this->config->current['BASE']);
+        $ldap->cd($this->dn);
         $ldap->search("(relativeDomainName=".$DevName.")",array("relativeDomainName"));
         if($ldap->count()){
           $message[] = sprintf(_("Can not rename '%s' to '%s',the destination name already exists."),$device['OrigCn'],$DevName);
         }
       }elseif(!isset($device['OrigCn'])){
-        $ldap->cd($this->config->current['BASE']);
+        $ldap->cd($this->dn);
         $ldap->search("(relativeDomainName=".$DevName.")",array("relativeDomainName"));
         if($ldap->count()){
           $message[] = sprintf(_("Can not create '%s',the destination name already exists."),$DevName);
