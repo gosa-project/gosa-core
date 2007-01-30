@@ -66,16 +66,6 @@ class termDNS extends plugin
       /* Get Zones  
        */
       $this->Zones        = getAvailableZones($config);
-      //echo '<pre>DEBUG: '.print_r($this->Zones, true).'</pre>';
-
-      $idZones = array_flip($this->Zones);
-
-      $idZones = array_filter($idZones,array($this,"netmaskIsCoherent"));
-      $this->Zones = array_flip($idZones);
-
-      if(count($this->Zones) < 1) $this->Zones = array("" => "- no reverse zone matching you ip -");
-
-      //echo '<pre>DEBUG: '.print_r($this->Zones, true).'</pre>';
 
       /* Get Entry 
        */
@@ -108,12 +98,15 @@ class termDNS extends plugin
     $this->DNSinitially_was_account = $this->DNS_is_account;
   }
 
-  function netmaskIsCoherent($idZone) {
+
+  function netmaskIsCoherent($idZone) 
+  {
     $netmask = FlipIp(str_replace(".in-addr.arpa","",getNameFromMix($idZone)));
-    if(!strstr($this->ipHostNumber, $netmask))
+    if(!strstr($this->ipHostNumber, $netmask)){
       return false;
-    else 
+    }else{
       return true;
+    }
   }
 
 
@@ -221,7 +214,19 @@ class termDNS extends plugin
     $smarty->assign("Zones",$this->Zones);
     $smarty->assign("ZoneKeys",($this->Zones));
     $smarty->assign("IPisMust",(($this->IPisMust)||($this->DNS_is_account)));
-  
+ 
+    /* Create zone array */
+    $idZones = array();
+    foreach($this->Zones as $id => $zone){
+      if($this->netmaskIsCoherent($id)) {
+        $idZones[$id] = $zone;
+      }else{
+        $idZones[$id] = $zone."&nbsp;("._("Not matching").")";
+      }
+    }    
+    $smarty->assign("Zones",$idZones);
+    $smarty->assign("ZoneKeys", $idZones);
+
     $tmp = $this->generateRecordsList();
     
     $changeStateForRecords = $tmp['changeStateForRecords'];
@@ -328,6 +333,13 @@ class termDNS extends plugin
 
       $checkArray = array();
       $onlyOnce   = array();
+
+      $tmp = array_flip($this->Zones);
+      $tmp2 = $tmp[$this->dnsEntry['zoneName']];
+      if(!$this->netmaskIsCoherent($tmp2)){ //this->dnsEntry['zoneName'])){
+        $tmp2 = preg_replace("/^.*\//","",$tmp2);
+        $message[] =sprintf(_("The specified IP address '%s' is not matching the selected reverse zone entry '%s'."),$this->ipHostNumber,$tmp2);
+      }
 
 			// There can be many CNAME records
       //$onlyOnce['cNAMERecord'] = 0;
