@@ -225,7 +225,7 @@ class termDNS extends plugin
       }
     }    
     $smarty->assign("Zones",$idZones);
-    $smarty->assign("ZoneKeys", $idZones);
+    $smarty->assign("ZoneKeys", $this->Zones);
 
     $tmp = $this->generateRecordsList();
     
