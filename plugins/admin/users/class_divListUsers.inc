@@ -48,7 +48,7 @@ class divListUsers extends MultiSelectWindow
     /* set Page header */
     $this->AddHeader(array("string"=>"&nbsp;",          "attach"=>"style='width:20px;'"));
     $this->AddHeader(array("string"=>_("Username")." / "._("Department")));
-    $this->AddHeader(array("string"=>_("Properties"),   "attach" => "style='width:152px;'"));
+    $this->AddHeader(array("string"=>_("Properties"),   "attach" => "style='width:166px;'"));
     $this->AddHeader(array("string"=>_("Actions"),      "attach" => "style='width:102px;border-right:0px;text-align:right;'"));
     
     $this->AddCheckBox("ShowTemplates"      ,_("Select to see template pseudo users")               ,_("Show templates")        , false);
@@ -242,7 +242,7 @@ class divListUsers extends MultiSelectWindow
       /* Create each field */
       $field1 = array("string" => sprintf($tpl,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' title='".preg_replace('/ /', '&nbsp;', @LDAP::fix($val['dn']))."'");
-      $field3 = array("string" => $UseImg, "attach" => "style='width:152px;'");
+      $field3 = array("string" => $UseImg, "attach" => "style='width:166px;'");
       $field4 = array("string" => $s_img_create_from_template.preg_replace("/%KEY%/", "$key", $action),
                       "attach" => "style='width:102px;border-right:0px;    text-align:right;'");
       /* Add to list */
