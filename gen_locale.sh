@@ -1,7 +1,9 @@
 #!/bin/sh
 
+set -x 
 ORIG=`pwd`
 TEMPDIR="/tmp/gosa-locale"
+TRUE=`which true`
 
 echo
 echo "Creating temporary directory..."
@@ -15,13 +17,13 @@ echo -n "Converting .tpl files: "
 pushd . &> /dev/null
 cd $TEMPDIR
 
-for template in $(find -name '*.tpl'); do
+for template in $(find . -name '*.tpl'); do
   echo -en "\rConverting .tpl files: $(basename $template)                 \r"
   sed -e 's/{t}/<?php $t= _("/g;s!{/t}!");?>!g' $template > $template.new
   mv $template.new $template
 done
 
-for class in $(find -name 'class_*.inc'); do
+for class in $(find . -name 'class_*.inc'); do
   echo -en "\rConverting class_*.inc files: $(basename $template)                 \r"
   sed -e 's/\($pl[DH][^=]*\)= *"\([^"]*\)";$/\1= _("\2");/g' $class > $class.new
   mv $class.new $class
@@ -44,7 +46,7 @@ for f in locale/??/LC_MESSAGES; do
 
   # Do an extra check for dummy dir 'locale/en/LC_MESSAGES'
   if [ $? -ne 0 ]; then
-    [ "$f" == "locale/en/LC_MESSAGES" ] && /bin/true
+    [ "$f" == "locale/en/LC_MESSAGES" ] && $TRUE
   fi
 
   if [ $? -eq 0 ]; then
