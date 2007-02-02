@@ -70,9 +70,9 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.12.10 NAME 'gosaSpamMailbox'
 
 attributetype ( 1.3.6.1.4.1.10098.1.1.12.11 NAME 'gosaVacationMessage'
         DESC 'Text to display in case of vacation'
-        EQUALITY caseIgnoreIA5Match
-	SUBSTR caseIgnoreIA5SubstringsMatch
-        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+        EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15)
 
 attributetype ( 1.3.6.1.4.1.10098.1.1.12.12 NAME 'gosaMailDeliveryMode'
         DESC 'What to do with mails'
