@@ -1,6 +1,5 @@
 #!/bin/sh
 
-set -x 
 ORIG=`pwd`
 TEMPDIR="/tmp/gosa-locale"
 TRUE=`which true`

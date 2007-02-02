@@ -10,13 +10,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-02-02 08:24+0100\n"
+"POT-Creation-Date: 2007-02-02 08:49+0100\n"
 "PO-Revision-Date: 2007-02-02 08:41+0100\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: contrib/gosa.conf:4
 msgid "My account"
@@ -9290,7 +9290,9 @@ msgstr ""
 msgid ""
 "The specified IP address '%s' is not matching the selected reverse zone "
 "entry '%s'."
-msgstr "Die angegebene IP-Adresse '%s' passt nicht zum gewählten Reverse Zonen-Eintrag '%s'."
+msgstr ""
+"Die angegebene IP-Adresse '%s' passt nicht zum gewählten Reverse Zonen-"
+"Eintrag '%s'."
 
 #: plugins/admin/systems/class_termDNS.inc:356
 #, php-format
