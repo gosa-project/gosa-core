@@ -80,7 +80,7 @@ class user extends plugin
 
   /* attribute list for save action */
   var $attributes= array("sn", "givenName", "uid", "personalTitle", "academicTitle",
-      "homePostalAddress", "homePhone", "labeledURI", "o", "ou", "dateOfBirth", "gender","preferredLanguage",
+      "homePostalAddress", "homePhone", "labeledURI", "ou", "o", "dateOfBirth", "gender","preferredLanguage",
       "departmentNumber", "employeeNumber", "employeeType", "l", "st","jpegPhoto",
       "roomNumber", "telephoneNumber", "mobile", "pager", "cn", "userPKCS12",
       "postalAddress", "facsimileTelephoneNumber", "userSMIMECertificate");
