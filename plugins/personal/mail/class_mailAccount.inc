@@ -406,8 +406,15 @@ class mailAccount extends plugin
       /* Replace attributes */
       $attrs= $this->parent->by_object['user']->attributes;
       foreach ($attrs as $val){
-        $contents= preg_replace("/%$val/",
-            $this->parent->by_object['user']->$val, $contents);
+        
+        if(preg_match("/dateOfBirth/",$val)){
+          if($this->parent->by_object['user']->use_dob){
+            $contents= preg_replace("/%$val/",date("Y-d-m",$this->parent->by_object['user']->dateOfBirth),$contents);
+          }
+        }else {
+          $contents= preg_replace("/%$val/",
+              $this->parent->by_object['user']->$val, $contents);
+        }
       }
 
       /* Save message */
