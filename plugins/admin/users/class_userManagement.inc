@@ -111,7 +111,7 @@ class userManagement extends plugin
     }
 
     /* Get 'dn' from posted 'uid' */
-    if(in_array_ics($s_action,array("editPaste","cut","copy"))){
+    if(in_array_ics($s_action,array("editPaste","cut","copy")) || $this->CopyPasteHandler->stillOpen()){
 
       if(isset($this->list[trim($s_entry)]['dn'])){
         $dn= $this->list[trim($s_entry)]['dn'];

@@ -122,7 +122,7 @@ class ogroupManagement extends plugin
     /* Only perform copy&paste requests if it is enabled
      */
     /* Get 'dn' from posted 'uid' */
-    if(in_array_ics($s_action,array("editPaste","cut","copy"))){
+    if(in_array_ics($s_action,array("editPaste","cut","copy")) || $this->CopyPasteHandler->stillOpen()){
 
       if(isset($this->ogrouplist[trim($s_entry)]['dn'])){
         $dn= $this->ogrouplist[trim($s_entry)]['dn'];

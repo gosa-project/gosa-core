@@ -127,7 +127,7 @@ class groupManagement extends plugin
     /* Only perform copy&paste requests if it is enabled
      */
     /* Get 'dn' from posted 'uid' */
-    if(in_array_ics($s_action,array("editPaste","cut","copy"))){
+    if(in_array_ics($s_action,array("editPaste","cut","copy")) || $this->CopyPasteHandler->stillOpen()){
 
       if(isset($this->grouplist[trim($s_entry)]['dn'])){
         $dn= $this->grouplist[trim($s_entry)]['dn'];
