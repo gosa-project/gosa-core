@@ -3,6 +3,9 @@ GOsa2 changelog
 * gosa 2.5.9
   - Fixed ldap tls connections when schema check was being used
   - Updated italian translation
+  - Added the possiblility to choose a RDN style for DN's when
+    a CN is already in use
+  - Fixed a problem with cut'n paste for groups and ogroups
 
 * gosa 2.5.8
   - Fixed problem with winstations shown in user list. 

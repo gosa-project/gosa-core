@@ -57,5 +57,3 @@ Target for 2.6:
 
 * Make IMAP namespace configurable
 
-* Try RDN style for unique names
-

@@ -19,6 +19,7 @@ class user extends plugin
   /* Plugin specific values */
   var $base= "";
   var $cn= "";
+  var $new_dn= "";
   var $personalTitle= "";
   var $academicTitle= "";
   var $homePostalAddress= "";
@@ -845,23 +846,16 @@ class user extends plugin
       $this->attrs["jpegPhoto"] = array();
     }
 
-    /* Build new dn */
-    if (isset($this->config->current['DNMODE']) && $this->config->current['DNMODE'] == "uid"){
-      $new_dn= 'uid='.$this->uid.','.get_people_ou().$this->base;
-    } else {
-      $new_dn= 'cn='.$this->cn.','.get_people_ou().$this->base;
-    }
-
     /* This only gets called when user is renaming himself */
     $ldap= $this->config->get_ldap_link();
-    if ($this->dn != $new_dn){
+    if ($this->dn != $this->new_dn){
 
       /* Write entry on new 'dn' */
-      $this->move($this->dn, $new_dn);
+      $this->move($this->dn, $this->new_dn);
 
       /* Happen to use the new one */
-      change_ui_dn($this->dn, $new_dn);
-      $this->dn= $new_dn;
+      change_ui_dn($this->dn, $this->new_dn);
+      $this->dn= $this->new_dn;
     }
 
 
@@ -1005,17 +999,22 @@ class user extends plugin
 
     /* Permissions for that base? */
     if (isset($this->config->current['DNMODE']) && $this->config->current['DNMODE'] == "uid"){
-      $new_dn= 'uid='.$this->uid.','.get_people_ou().$this->base;
+      $this->new_dn= 'uid='.$this->uid.','.get_people_ou().$this->base;
     } else {
-      $new_dn= 'cn='.$this->cn.','.get_people_ou().$this->base;
+      /* Don't touch dn, if cn hasn't changed */
+      if (isset($this->saved_attributes['cn']) && $this->saved_attributes['cn'] == $this->cn){
+        $this->new_dn= $this->dn;
+      } else {
+        $this->new_dn= $this->create_unique_dn('cn', get_people_ou().$this->base);
+      }
     }
 
     $ui= get_userinfo();
-    $acl= get_permissions ($new_dn, $ui->subtreeACL);
-    $acl= get_module_permission($acl, "user", $new_dn);
+    $acl= get_permissions ($this->new_dn, $ui->subtreeACL);
+    $acl= get_module_permission($acl, "user", $this->new_dn);
     if ($this->dn == "new" && chkacl($acl, "create") != ""){
       $message[]= _("You have no permissions to create a user on this 'Base'.");
-    } elseif ($this->dn != $new_dn && $this->dn != "new"){
+    } elseif ($this->dn != $this->new_dn && $this->dn != "new"){
       $acl= get_permissions ($this->dn, $ui->subtreeACL);
       $acl= get_module_permission($acl, "user", $this->dn);
       if (chkacl($acl, "create") != ""){
@@ -1046,10 +1045,8 @@ class user extends plugin
         $message[]= _("The required field 'Login' is not set.");
       }
       if (!(isset($this->config->current['DNMODE']) && $this->config->current['DNMODE'] == "uid")){
-        $ldap->cd($this->config->current['BASE']);
-        $ldap->search("(cn=".$this->cn.")", array("uid"));
-        $ldap->fetch();
-        if ($ldap->count() != 0 && $this->dn != $new_dn && $this->dn == 'new'){
+        $ldap->cat($this->new_dn);
+        if ($ldap->count() != 0 && $this->dn != $this->new_dn && $this->dn == 'new'){
           $message[]= _("There's already a person with this 'Name'/'Given name' combination in the database.");
         }
       }

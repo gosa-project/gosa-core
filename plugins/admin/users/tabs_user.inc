@@ -85,60 +85,20 @@ class usertabs extends tabs
        'dn' to all plugins */
     $baseobject= $this->by_object['user'];
 
-    /* Assemble cn */
-    $pt= "";
-    if(isset($this->config->current['INCLUDE_PERSONAL_TITLE']) && preg_match("/true/i",$this->config->current['INCLUDE_PERSONAL_TITLE'])){
-      if(!empty($baseobject->personalTitle)){
-        $pt = $baseobject->personalTitle." ";
-      }
-    }
+    if ($this->dn != 'new'){
+      $new_dn= $baseobject->new_dn;
+      if (strtolower($this->dn) != strtolower($new_dn)){
 
-    if ($this->dn == 'new'){
-      $baseobject->cn= $pt.$baseobject->givenName." ".$baseobject->sn;
-      $this->by_object['user']= $baseobject;
-      if (isset($this->config->current['DNMODE']) && $this->config->current['DNMODE'] == "uid"){
-        $this->dn= 'uid='.$baseobject->uid.','.get_people_ou().$baseobject->base;
-      } else {
-        $this->dn= 'cn='.$baseobject->cn.','.get_people_ou().$baseobject->base;
-      }
-    } // != 'new' 
-    else 
-    {
-      /* Extract cn and compare with actual cn present in 'dn' */
-      if (isset($this->config->current['DNMODE']) && $this->config->current['DNMODE'] == "uid"){
-        $new_dn= 'uid='.$baseobject->uid.','.get_people_ou().$baseobject->base;
-      } else {
-        $new_dn= "cn=".$pt.$baseobject->givenName." ".$baseobject->sn.','.
-          get_people_ou().$baseobject->base;
-      }
-      
-      /* Hickert: 31.08.2005 
-       * fixed error = Trying to overwrite cn=***  which already exists.
-       * If you changed one of the "Name" / "Givenname" attributes to lower or upper case, like "test" to "Test", (in DNMODE=cn)
-       *  the old_dn and new dn were different. cn=test ... cn=Test ...
-       * The following code decided to move the entry from old_dn to new_dn. (Because they differ)
-       * But the ldap attribute cn is not case sensitive and the function plugin::move() quits with 
-       *  an error, because source and destination dn are both the same (for ldap, but not for php).
-       * This fix allow you to change the givenname or name attributes.
-       */
-      if(strtolower($this->dn)==strtolower($new_dn)){
-        $this->dn=$new_dn;
-      }
-  
-      if ($this->dn != $new_dn){
-
-        /* Write entry on new 'dn' */
-        $baseobject->cn= $pt.$baseobject->givenName." ".$baseobject->sn;
         $baseobject->move($this->dn, $new_dn);
         $this->by_object['user']= $baseobject;
 
         /* Did we change ourselves? Update ui object. */
         change_ui_dn($this->dn, $new_dn);
-
-        /* Happen to use the new one */
-        $this->dn= $new_dn;
       }
     }
+
+    $this->dn= $baseobject->new_dn;
+
     return tabs::save();
   }
 
