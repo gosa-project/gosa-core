@@ -530,7 +530,7 @@ class ogroup extends plugin
 
     foreach ($input as $key => $value){
       /* Generate output */
-      $temp.= "<option value=\"$key\" class=\"select\" style=\"background-image:url('".get_template_path("images/".$conv[$value['type']])."');\">".$value['text']."</option>\n";
+      $temp.= "<option title='".addslashes($key)."' value=\"$key\" class=\"select\" style=\"background-image:url('".get_template_path("images/".$conv[$value['type']])."');\">".$value['text']."</option>\n";
     }
 
     return ($temp);
