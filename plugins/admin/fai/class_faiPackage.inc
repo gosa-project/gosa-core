@@ -195,8 +195,14 @@ class faiPackage extends plugin
 
       /* Assemble sections */
       $repos= $this->getServerInfos();
-      $this->FAIdebianSection= $repos[$this->FAIdebianRelease];
-      $this->FAIdebianSection= array_unique($this->FAIdebianSection);
+
+      if(isset($repos[$this->FAIdebianRelease])){
+        $this->FAIdebianSection= $repos[$this->FAIdebianRelease];
+        $this->FAIdebianSection= array_unique($this->FAIdebianSection);
+      }else{
+        $this->FAIdebianSection = array();
+        print_red(sprintf(_("No repository server found that provide this release '%s'."), $this->FAIdebianRelease));
+      }
 
       /* Assign Repository settings*/ 
       $this->is_account     = true;
