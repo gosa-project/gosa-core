@@ -774,6 +774,7 @@ class printgeneric extends plugin
 
     if(($this->gosaUnitTag) && (!in_array_ics("gosaAdministrativeUnitTag",$this->attrs['objectClass']))){
       $this->attrs['objectClass'][] = "gosaAdministrativeUnitTag";
+      $this->attrs['gosaUnitTag'] = $this->gosaUnitTag;
     }
 
     if($this->orig_dn == 'new'){
