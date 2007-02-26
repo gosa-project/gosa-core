@@ -681,6 +681,7 @@ class printgeneric extends plugin
 
     if($this->BelongsTo == "Workstation"){
       $this->dn= preg_replace("/ou=workstations,/","ou=printers,",$this->dn);
+      $this->macAddress = $this->parent->by_object['workgeneric']->netConfigDNS->macAddress;
     }
     
     if(!$this->is_account) return;

@@ -195,7 +195,7 @@ class mailgroup extends plugin
 
     /* Load permissions */
     $tmp = array();
-    if(preg_match("/kolab/i",$this->mmethod)){
+    if(preg_match("/olab/i",$this->mmethod)){
       $ldap = $this->config->get_ldap_link();
 
       if (isset($this->attrs['acl'])){
@@ -606,7 +606,7 @@ class mailgroup extends plugin
     /* Added these ObjectClass and Attributes, because they were not 
        removed correctly, only in case of kolab ... 
      */
-    if(isset($this->config->current['MAILMETHOD'])&&preg_match("/kolab/i",$this->config->current['MAILMETHOD'])){
+    if(isset($this->config->current['MAILMETHOD'])&&preg_match("/olab/i",$this->config->current['MAILMETHOD'])){
       $this->attributes[]="acl";
       $this->objectclasses[] = "kolabSharedFolder";
     }
@@ -736,7 +736,7 @@ I: Only insider delivery */
     $this->attrs['gosaMailForwardingAddress'] = $this->gosaMailForwardingAddress;
     $this->attrs['gosaSharedFolderTarget']    = "share+".$this->uid;
 
-    if(preg_match("/kolab/i",$this->mmethod)){
+    if(preg_match("/olab/i",$this->mmethod)){
       /* Save acl's */
       $this->attrs['acl']= array();
       foreach ($this->imapacl as $user => $acl){
@@ -765,7 +765,7 @@ I: Only insider delivery */
     }
 
     /* Only do IMAP actions if we are not a template */
-    if(preg_match("/kolab/i",$this->mmethod)){
+    if(preg_match("/olab/i",$this->mmethod)){
       if (empty($this->gosaMailServer)||is_array($this->gosaMailServer)){
         if(isset($this->attrs['gosaMailServer'][0])){
           $this->gosaMailServer = $this->attrs['gosaMailServer'][0];
@@ -778,7 +778,7 @@ I: Only insider delivery */
     $memberacl= $this->imapacl['%members%'];
 
     foreach ($this->members as $user){
-      if(preg_match("/kolab/i",$this->mmethod)){
+      if(preg_match("/olab/i",$this->mmethod)){
         $ldap->cd($this->config->current['BASE']);
         $ldap->search("(&(objectClass=person)(|(mail=".$user.")(uid=".$user.")))",array("mail"));
         $at = $ldap->fetch();

@@ -1045,7 +1045,7 @@ class mailAccount extends plugin
   {
     if (isset($this->config->current['MAILMETHOD'])){
       $method= $this->config->current['MAILMETHOD'];
-      if(preg_match("/kolab/i",$method)){
+      if(preg_match("/olab/i",$method)){
         $ldap = $this->config->get_ldap_link();
         $ldap->cd($this->config->current['BASE']);
         $ldap->cat($this->dn);
