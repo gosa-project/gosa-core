@@ -12,6 +12,7 @@ GOsa2 changelog
   - Fixed undefined index in FAI package lists
   - Fixed copy'n paste for groups and object groups
   - Enabled non ASCII characters in vacation messages
+  - Fixed "none" permissions in IMAP shared folders to be assignable
 
 * gosa 2.5.8
   - Fixed problem with winstations shown in user list. 

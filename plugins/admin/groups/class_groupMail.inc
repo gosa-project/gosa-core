@@ -557,9 +557,9 @@ class mailgroup extends plugin
           "value=\"$user\" $perm></td><td><select size=\"1\" name=\"perm_$nr\" $perm>";
         foreach ($this->perms as $key => $value){
           if ($acl == $key){
-            $tmp.= "<option value=$key selected>$value</option>";
+            $tmp.= "<option value=\"$key\" selected>$value</option>";
           } else {
-            $tmp.= "<option value=$key>$value</option>";
+            $tmp.= "<option value=\"$key\">$value</option>";
           }
         }
         $tmp.= "</select>&nbsp;";
