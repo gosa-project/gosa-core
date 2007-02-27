@@ -2150,5 +2150,11 @@ function is_department_name_reserved($name,$base)
 }
 
 
+function is_php4()
+{
+  return (strpos(phpversion(), 4) === 0);
+}
+
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

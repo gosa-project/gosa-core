@@ -86,7 +86,9 @@ class tabs
 
 	$obj= $this->by_object[$this->current];
 	$display.= $obj->execute();
-	$this->by_object[$this->current]= $obj;
+  if (is_php4()){
+    $this->by_object[$this->current]= $obj;
+  }
 
 	/* Footer for tabbed dialog */
 	$display.= "</td></tr></table>";
@@ -102,7 +104,9 @@ class tabs
 
 		$obj= $this->by_object[$this->last];
 		$obj->save_object ();
-		$this->by_object[$this->last]= $obj;
+    if (is_php4()){
+      $this->by_object[$this->last]= $obj;
+    }
 	}
 
 	/* Skip if curent and last are the same object */
@@ -118,7 +122,9 @@ class tabs
         	        $this->current, "Saving (current)");
 
 		$obj->save_object ();
-		$this->by_object[$this->current]= $obj;
+    if (is_php4()){
+      $this->by_object[$this->current]= $obj;
+    }
 	}
 
   }
@@ -177,7 +183,9 @@ class tabs
     foreach ($this->by_object as $key => $obj){
       $sacl= get_module_permission($acl, "$key", $this->dn);
       $obj->acl= $sacl;
-      $this->by_object[$key]= $obj;
+      if (is_php4()){
+        $this->by_object[$key]= $obj;
+      }
     }
   }
 
@@ -222,6 +230,9 @@ class tabs
 	        	        $key, "Checking");
 
 			$messages= $obj->check();
+      if (is_php4()){
+        $this->by_object[$key]= $obj;
+      }
 			if (count($messages)){
 				$this->current= $key;
 				break;
@@ -259,7 +270,9 @@ class tabs
 				  $key, "Adapting");
 		  $obj->parent= &$this;
 		  $obj->adapt_from_template($dn);
-		  $this->by_object[$key]= $obj;
+      if (is_php4()){
+        $this->by_object[$key]= $obj;
+      }
 	  }
   }
 
