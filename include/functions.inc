@@ -2152,7 +2152,7 @@ function is_department_name_reserved($name,$base)
 
 function is_php4()
 {
-  return (strpos(phpversion(), 4) === 0);
+  return (preg_match('/^4/', phpversion()));
 }
 
 
