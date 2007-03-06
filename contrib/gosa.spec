@@ -11,7 +11,7 @@
 #
 Summary: 		Web Based LDAP Administration Program 
 Name:			gosa
-Version: 		2.5.7
+Version: 		2.5.9.99
 Release:		1
 License: 		GPL
 Source: 		ftp://oss.GONICUS.de/pub/gosa/%{sourcename}.tar.bz2
@@ -179,7 +179,7 @@ rm -rf %{buildroot}
 
 %postun
 # Remove temporary files, just to be sure
-[ -d /var/spool/gosa ] && rm -rf /var/spool/gosa/ ; exit 0
+[ -d /var/spool/gosa ] && rm -rf /var/spool/gosa/* ; exit 0
 
 %files
 %defattr(-,%{apacheuser},%{apachegroup})
@@ -219,6 +219,13 @@ rm -rf %{buildroot}
 /usr/share/gosa/doc/guide/user/nl
 
 %changelog
+* Tue Mar 6 2007 Lars Scheiter <lars.scheiter@GONICUS.de> 2.5.9
+- New upstream
+- fixed typo in updateprocess
+
+* Mon Jan 15 2007 Lars Scheiter <lars.scheiter@GONICUS.de> 2.5.8
+- New upstream release with security fixes
+
 * Wed Dec 20 2006 Lars Scheiter <lars.scheiter@GONICUS.de> 2.5.7
 - New upstream
 - %pre and %postun always end successfully now, even on errors
