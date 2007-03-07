@@ -1,7 +1,7 @@
 In order to run GOsa in PHP's safe mode, these changes in your php.ini
 have been tested:
 
-magic_quotes_gpc = On
+magic_quotes_qpc = On
 allow_url_fopen = No
 register_globals = Off
 safe_mode = On
