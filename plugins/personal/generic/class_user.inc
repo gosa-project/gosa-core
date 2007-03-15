@@ -1002,7 +1002,9 @@ class user extends plugin
       $this->new_dn= 'uid='.$this->uid.','.get_people_ou().$this->base;
     } else {
       /* Don't touch dn, if cn hasn't changed */
-      if (isset($this->saved_attributes['cn']) && $this->saved_attributes['cn'] == $this->cn){
+      if (isset($this->saved_attributes['cn']) && $this->saved_attributes['cn'] == $this->cn
+          && (isset($this->saved_attributes['base']) && $this->saved_attributes['base'] == $this->base )
+         ){
         $this->new_dn= $this->dn;
       } else {
         $this->new_dn= $this->create_unique_dn('cn', get_people_ou().$this->base);
