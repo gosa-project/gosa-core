@@ -758,11 +758,11 @@ class posixAccount extends plugin
         }
 
         add_lock ("uidnumber", "gosa");
-        $this->uidNumber= $this->get_next_id("uidNumber");
+        $this->uidNumber= $this->get_next_id("uidNumber", $this->dn);
         if ($this->savedGidNumber != ""){
           $this->gidNumber= $this->savedGidNumber;
         } else {
-          $this->gidNumber= $this->get_next_id("gidNumber");
+          $this->gidNumber= $this->get_next_id("gidNumber", $this->dn);
         }
       }
 
@@ -1077,7 +1077,7 @@ class posixAccount extends plugin
     }
   }
 
-  function get_next_id($attrib)
+  function get_next_id($attrib, $dn)
   {
     $ids= array();
     $ldap= $this->config->get_ldap_link();
@@ -1096,10 +1096,16 @@ class posixAccount extends plugin
     }
 
     /* Add the nobody id */
-    $ids[]=  65534;
+    $ids[]= 65534;
 
     /* Find out next free id near to UID_BASE */
-    for ($id= $this->config->current['UIDBASE']; $id++; $id < pow(2,32)){
+    if (!isset($this->config->current['BASE_HOOK'])){
+      $base= $this->config->current['UIDBASE'];
+    } else {
+      /* Call base hook */
+      $base= get_base_from_hook($dn, $attrib);
+    }
+    for ($id= $base; $id++; $id < pow(2,32)){
       if (!in_array($id, $ids)){
         return ($id);
       }
@@ -1267,8 +1273,8 @@ class posixAccount extends plugin
     plugin::PrepareForCopyPaste($source);
     
     /* Avoid using the same gid/uid number as source user */
-    $this->savedUidNumber = $this->get_next_id("gidNumber");
-    $this->savedGidNumber = $this->get_next_id("uidNumber");
+    $this->savedUidNumber = $this->get_next_id("gidNumber", $this->dn);
+    $this->savedGidNumber = $this->get_next_id("uidNumber", $this->dn);
   }
 
   function convertToSeconds($val)

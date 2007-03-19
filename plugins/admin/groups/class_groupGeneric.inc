@@ -580,7 +580,7 @@ class group extends plugin
           }
         }
         add_lock ("uidnumber", "gosa");
-        $this->gidNumber= $this->get_next_id("gidNumber");
+        $this->gidNumber= $this->get_next_id("gidNumber", $this->dn);
       }
     }
   
@@ -791,7 +791,7 @@ class group extends plugin
     return ($message);
   }
 
-  function get_next_id($attrib)
+  function get_next_id($attrib, $dn)
   {
     $ids= array();
     $ldap= $this->config->get_ldap_link();
@@ -810,7 +810,13 @@ class group extends plugin
     }
 
     /* Find out next free id near to UID_BASE */
-    for ($id= $this->config->current['UIDBASE']; $id++; $id < pow(2,32)){
+    if (!isset($this->config->current['BASE_HOOK'])){
+      $base= $this->config->current['UIDBASE'];
+    } else {
+      /* Call base hook */
+      $base= get_base_from_hook($dn, $attrib);
+    }
+    for ($id= $base; $id++; $id < pow(2,32)){
       if (!in_array($id, $ids)){
         return ($id);
       }
@@ -818,7 +824,7 @@ class group extends plugin
 
     /* check if id reached maximum of 32 bit*/
     if ($id >= pow(2,32)){
-      echo _("Too many users, can't allocate a free ID!");
+      echo _("Too many groups, can't allocate a free ID!");
       exit;
     }
   }

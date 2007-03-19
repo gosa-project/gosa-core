@@ -2156,5 +2156,39 @@ function is_php4()
 }
 
 
+function get_base_from_hook($dn, $attrib)
+{
+  global $config;
+
+  if (isset($config->current['BASE_HOOK'])){
+    
+    /* Call hook script - if present */
+    $command= $config->current['BASE_HOOK'];
+
+    if ($command != ""){
+      $command.= " '$dn' $attrib";
+      if (check_command($command)){
+        @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
+        exec($command, $output);
+        if (preg_match("/^[0-9]+$/", $output)){
+          return ($output[0]);
+        } else {
+          print_red(_("Warning - base_hook is not avialable. Using default base."));
+          return ($config->current['UIDBASE']);
+        }
+      } else {
+        print_red(_("Warning - base_hook is not avialable. Using default base."));
+        return ($config->current['UIDBASE']);
+      }
+
+    } else {
+
+      print_red(_("Warning - no base_hook defined. Using default base."));
+      return ($config->current['UIDBASE']);
+
+    }
+  }
+}
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
