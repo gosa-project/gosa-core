@@ -73,6 +73,49 @@
    <br>
    <input type=checkbox name="use_vacation" value="1" {$use_vacation}
 	{$gosaVacationMessageACL} title="{t}Select to automatically response with the vacation message defined below{/t}"> {t}Activate vacation message{/t}
+   <br>
+   <div style="padding-left:22px;">
+     <input type=checkbox name="use_vacation_interval" value="1" {$use_vacation_interval}
+	{$gosaVacationMessageACL} title="{t}Only respond within the selected interval{/t}"> {t}Use vacation interval{/t}<br>
+
+	<table>
+         <tr>
+          <td>
+	{t}From{/t}
+          </td>
+          <td>
+	<select name=day onChange="createResult(this.form,this.form.gosaVacationStart);" {$gosaVacationMessageACL}>
+		{html_options values=$days output=$days selected=$start_day}
+	</select>
+	<select name=month onChange="populate(this.form,this.form.gosaVacationStart);" {$gosaVacationMessageACL}>
+		{html_options options=$months selected=$start_month}
+	</select>
+	<select name=year onChange="populate(this.form,this.form.gosaVacationStart);" {$gosaVacationMessageACL}>
+		{html_options values=$years output=$years selected=$start_year}
+	</select>
+	<input type="hidden" name="gosaVacationStart" value="{$gosaVacationStart}">
+          </td>
+         </tr>
+         <tr>
+          <td>
+	{t}till{/t}
+          </td>
+          <td>
+	<select name=day onChange="createResult(this.form,this.form.gosaVacationStop);" {$gosaVacationMessageACL}>
+		{html_options values=$days output=$days selected=$end_day}
+	</select>
+	<select name=month onChange="populate(this.form,this.form.gosaVacationStop);" {$gosaVacationMessageACL}>
+		{html_options options=$months selected=$end_month}
+	</select>
+	<select name=year onChange="populate(this.form,this.form.gosaVacationStop);" {$gosaVacationMessageACL}>
+		{html_options values=$years output=$years selected=$end_year}
+	</select>
+	<input type="hidden" name="gosaVacationStop" value="{$gosaVacationStop}">
+          </td>
+         </tr>
+        </table>
+
+   </div>
   </td>
    <td rowspan=2 style="border-left:1px solid #A0A0A0">
    &nbsp;
@@ -112,6 +155,7 @@
    <input type="submit" value="{t}Import{/t}" name="import_vacation"
 	{$gosaVacationMessageACL}>
    {/if}
+   <br>
   </td>
   <td>
    <p style="margin-bottom:0px;">

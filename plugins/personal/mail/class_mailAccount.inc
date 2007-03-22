@@ -33,6 +33,8 @@ class mailAccount extends plugin
   var $gosaMailQuota                      = "";
   var $gosaMailMaxSize                    = "";
   var $gosaVacationMessage                = "";
+  var $gosaVacationStart                  = NULL;
+  var $gosaVacationStop                   = NULL;
   var $gosaSpamSortLevel                  = "";
   var $gosaSpamMailbox                    = "";
 
@@ -54,7 +56,7 @@ class mailAccount extends plugin
   /* attribute list for save action */
   var $attributes= array("mail", "gosaMailServer", "gosaMailQuota", "gosaMailMaxSize","gosaMailForwardingAddress",
       "gosaMailDeliveryMode", "gosaSpamSortLevel", "gosaSpamMailbox","gosaMailAlternateAddress",
-      "gosaVacationMessage", "gosaMailAlternateAddress", "gosaMailForwardingAddress");
+      "gosaVacationMessage", "gosaMailAlternateAddress", "gosaMailForwardingAddress", "gosaVacationStart", "gosaVacationStop");
   var $objectclasses= array("gosaMailAccount");
 
 
@@ -508,6 +510,39 @@ class mailAccount extends plugin
     }
 
     /* Display mail account tab */
+    if(empty($this->gosaVacationStart)){
+      $date= getdate(time());
+    }else{
+      $date= getdate($this->gosaVacationStart);
+    }
+    $days= array();
+    for($d= 1; $d<32; $d++){
+      $days[$d]= $d;
+    }
+    $years= array();
+    for($y= $date['year']-10; $y<$date['year']+10; $y++){
+      $years[]= $y;
+    }
+    $months= array(_("January"), _("February"), _("March"), _("April"),
+        _("May"), _("June"), _("July"), _("August"), _("September"),
+        _("October"), _("November"), _("December"));
+    $smarty->assign("start_day", $date["mday"]);
+    $smarty->assign("days", $days);
+    $smarty->assign("months", $months);
+    $smarty->assign("start_month", $date["mon"]-1);
+    $smarty->assign("years", $years);
+    $smarty->assign("start_year", $date["year"]);
+
+    if(empty($this->gosaVacationStop)){
+      $date= getdate(time());
+      $date["mday"]++;
+    }else{
+      $date= getdate($this->gosaVacationStop);
+    }
+    $smarty->assign("end_day", $date["mday"]);
+    $smarty->assign("end_month", $date["mon"]-1);
+    $smarty->assign("end_year", $date["year"]);
+
 
     $smarty->assign("mailServers", $mailserver);
     foreach(array(
@@ -523,6 +558,8 @@ class mailAccount extends plugin
           "gosaMailMaxSize",                      // Enable - Drop mails > max size
           "gosaSpamSortLevel", "gosaSpamMailbox", // Enable - Spam sort options
           "gosaVacationMessage",                  // Enable - Vacation message      
+          "gosaVacationStart",
+          "gosaVacationStop",
           "custom_sieve",                         // Use custom sieve script
           "only_local"                            // Send/receive local mails 
                                         ) as $val){
@@ -530,6 +567,12 @@ class mailAccount extends plugin
         $smarty->assign("$val", $this->$val);
       }
       $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
+    }
+
+    if (isset($this->gosaVacationStart)){
+      $smarty->assign("use_vacation_interval", 1);
+    } else {
+      $smarty->assign("use_vacation_interval", 0);
     }
 
     if (is_numeric($this->gosaMailQuota) && $this->gosaMailQuota != 0){
