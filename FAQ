@@ -359,4 +359,4 @@ Q: I'd like to assign different uid bases for certain user/group objects.
 
 A: Use the base_hook in your gosa.conf's location section to specify a script
    which handles the ID generation externaly. It get's called with the "dn"
-   and the attribute to be id'd. It should return an integer value.
+   and the attribute to be ID'd. It should return an integer value.
