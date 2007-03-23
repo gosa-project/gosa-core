@@ -33,8 +33,8 @@ class mailAccount extends plugin
   var $gosaMailQuota                      = "";
   var $gosaMailMaxSize                    = "";
   var $gosaVacationMessage                = "";
-  var $gosaVacationStart                  = NULL;
-  var $gosaVacationStop                   = NULL;
+  var $gosaVacationStart                  = 0;
+  var $gosaVacationStop                   = 0;
   var $gosaSpamSortLevel                  = "";
   var $gosaSpamMailbox                    = "";
 
@@ -510,7 +510,7 @@ class mailAccount extends plugin
     }
 
     /* Display mail account tab */
-    if(empty($this->gosaVacationStart)){
+    if($this->gosaVacationStart ==0){
       $date= getdate(time());
     }else{
       $date= getdate($this->gosaVacationStart);
@@ -533,7 +533,7 @@ class mailAccount extends plugin
     $smarty->assign("years", $years);
     $smarty->assign("start_year", $date["year"]);
 
-    if(empty($this->gosaVacationStop)){
+    if($this->gosaVacationStop ==0){
       $date= getdate(time());
       $date["mday"]++;
     }else{
