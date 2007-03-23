@@ -543,7 +543,6 @@ class mailAccount extends plugin
     $smarty->assign("end_month", $date["mon"]-1);
     $smarty->assign("end_year", $date["year"]);
 
-
     $smarty->assign("mailServers", $mailserver);
     foreach(array(
           "gosaMailServer", 
@@ -569,10 +568,10 @@ class mailAccount extends plugin
       $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
     }
 
-    if (isset($this->gosaVacationStart)){
-      $smarty->assign("use_vacation_interval", 1);
+    if (preg_match('/V/', $this->gosaMailDeliveryMode)){
+      $smarty->assign('rangeEnabled', "");
     } else {
-      $smarty->assign("use_vacation_interval", 0);
+      $smarty->assign('rangeEnabled', "disabled");
     }
 
     if (is_numeric($this->gosaMailQuota) && $this->gosaMailQuota != 0){
@@ -804,6 +803,7 @@ class mailAccount extends plugin
       }
       $this->gosaMailDeliveryMode= $tmp;
     }
+
   }
 
 
@@ -835,6 +835,12 @@ class mailAccount extends plugin
     }
 
     $this->attrs['mail'] = strtolower($this->attrs['mail']); 
+
+    /* Remove attributes - if not needed */
+    if (!preg_match('/V/', $this->gosaMailDeliveryMode)){
+      unset($this->attrs['gosaVacationStart']);
+      unset($this->attrs['gosaVacationStop']);
+    }
 
     /* Save data to LDAP */
     $ldap->cd($this->dn);
@@ -942,6 +948,10 @@ class mailAccount extends plugin
 
     if((preg_match("/S/", $this->gosaMailDeliveryMode))&&(empty($this->gosaSpamMailbox))) {
       $message[]= _("You specified Spam settings, but there is no Folder specified.");
+    }
+
+    if (preg_match('/V/', $this->gosaMailDeliveryMode) && $this->gosaVacationStart >= $this->gosaVacationStop){
+      $message[]= _("Time interval to show vacation message is not valid.");
     }
 
     return ($message);

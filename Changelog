@@ -3,6 +3,7 @@ GOsa2 changelog
 
 * gosa 2.5.10
   - Included hook to make use of dynamic uid-bases
+  - Included vacation date range specification
 
 * gosa 2.5.9
   - Fixed ldap tls connections when schema check was being used

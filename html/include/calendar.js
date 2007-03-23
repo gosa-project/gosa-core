@@ -171,3 +171,52 @@
 		selectedDate= new Date(yearSel,monthSel,daySel);
 		saveResult(selectedDate,resultForm);
 	}
+
+
+	function populate2(objForm,resultForm) {
+		if(objForm.syear) {
+			yearSel=objForm.syear.options[objForm.syear.selectedIndex].text;
+		
+			monthIx=objForm.smonth.selectedIndex;
+			nextMonthIx=0;
+			if(monthIx!=11) {
+				nextMonthIx=monthIx+1;
+			}
+
+			nextMonthSel=objForm.smonth.options[nextMonthIx].value;
+			monthSel=objForm.smonth.options[monthIx].value;
+
+			daySel=1;
+			if(objForm.sday.selectedIndex!=-1) {
+				daySel=objForm.sday.options[objForm.sday.selectedIndex].text;
+			}
+
+			timeOfDayOne = new Date(yearSel, nextMonthSel, 1);
+			timeDifference = timeOfDayOne - 86400000;
+			timeOfLastDay = new Date(timeDifference);
+
+			var daysInMonth = timeOfLastDay.getDate();
+
+			if(daySel>daysInMonth) daySel=daysInMonth;
+
+			selectedDate= new Date(yearSel,monthSel,daySel);
+			for (var i = 0; i < objForm.sday.length; i++) {
+				objForm.sday.options[0] = null;
+			}
+			for (var i = 0; i < daysInMonth; i++) {
+				objForm.sday.options[i] = new Option(i+1);
+			}
+			objForm.sday.selectedIndex=daySel-1;
+			saveResult(selectedDate,resultForm);
+		}
+	}
+
+	function createResult2(objForm,resultForm){
+		yearSel=objForm.syear.options[objForm.syear.selectedIndex].text;
+		monthIx=objForm.smonth.selectedIndex;
+		monthSel=objForm.smonth.options[monthIx].value;
+		daySel=objForm.sday.options[objForm.sday.selectedIndex].value;
+		selectedDate= new Date(yearSel,monthSel,daySel);
+		saveResult(selectedDate,resultForm);
+	}
+

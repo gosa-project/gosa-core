@@ -72,25 +72,22 @@
 	{$drop_own_mailsACL} title="{t}Select if you want to forward mails without getting own copies of them{/t}"> {t}No delivery to own mailbox{/t}
    <br>
    <input type=checkbox name="use_vacation" value="1" {$use_vacation}
-	{$gosaVacationMessageACL} title="{t}Select to automatically response with the vacation message defined below{/t}"> {t}Activate vacation message{/t}
+	{$gosaVacationMessageACL} title="{t}Select to automatically response with the vacation message defined below{/t}"  onclick="changeState('day'); changeState('month'); changeState('year'); changeState('sday'); changeState('smonth'); changeState('syear');"> {t}Activate vacation message{/t}
    <br>
    <div style="padding-left:22px;">
-     <input type=checkbox name="use_vacation_interval" value="1" {$use_vacation_interval}
-	{$gosaVacationMessageACL} title="{t}Only respond within the selected interval{/t}"> {t}Use vacation interval{/t}<br>
-
 	<table>
          <tr>
           <td>
-	{t}From{/t}
+	{t}from{/t}
           </td>
           <td>
-	<select name=day onChange="createResult(this.form,this.form.gosaVacationStart);" {$gosaVacationMessageACL}>
+	<select name=day id="day" onChange="createResult(this.form,this.form.gosaVacationStart);" {$gosaVacationMessageACL} {$rangeEnabled}>
 		{html_options values=$days output=$days selected=$start_day}
 	</select>
-	<select name=month onChange="populate(this.form,this.form.gosaVacationStart);" {$gosaVacationMessageACL}>
+	<select name=month id="month" onChange="populate(this.form,this.form.gosaVacationStart);" {$gosaVacationMessageACL} {$rangeEnabled}>
 		{html_options options=$months selected=$start_month}
 	</select>
-	<select name=year onChange="populate(this.form,this.form.gosaVacationStart);" {$gosaVacationMessageACL}>
+	<select name=year id="year" onChange="populate(this.form,this.form.gosaVacationStart);" {$gosaVacationMessageACL} {$rangeEnabled}>
 		{html_options values=$years output=$years selected=$start_year}
 	</select>
 	<input type="hidden" name="gosaVacationStart" value="{$gosaVacationStart}">
@@ -101,13 +98,13 @@
 	{t}till{/t}
           </td>
           <td>
-	<select name=day onChange="createResult(this.form,this.form.gosaVacationStop);" {$gosaVacationMessageACL}>
+	<select name=sday id="sday" onChange="createResult2(this.form,this.form.gosaVacationStop);" {$gosaVacationMessageACL} {$rangeEnabled}>
 		{html_options values=$days output=$days selected=$end_day}
 	</select>
-	<select name=month onChange="populate(this.form,this.form.gosaVacationStop);" {$gosaVacationMessageACL}>
+	<select name=smonth id="smonth" onChange="populate2(this.form,this.form.gosaVacationStop);" {$gosaVacationMessageACL} {$rangeEnabled}>
 		{html_options options=$months selected=$end_month}
 	</select>
-	<select name=year onChange="populate(this.form,this.form.gosaVacationStop);" {$gosaVacationMessageACL}>
+	<select name=syear id="syear" onChange="populate2(this.form,this.form.gosaVacationStop);" {$gosaVacationMessageACL} {$rangeEnabled}>
 		{html_options values=$years output=$years selected=$end_year}
 	</select>
 	<input type="hidden" name="gosaVacationStop" value="{$gosaVacationStop}">
