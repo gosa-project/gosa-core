@@ -1,2 +1,4 @@
-# Vacation is disabled, take a look at the contributed cron-job
+# Vacation message
+vacation :addresses [$addrlist]
+"$vacmsg" ;
 
