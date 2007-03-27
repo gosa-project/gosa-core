@@ -24,6 +24,7 @@ class group extends plugin
   var $allusers= array();
   var $department= "";
   var $saved_gidNumber= "";
+  var $savedSID= "";
   var $oldgroupType= "";
   var $orig_dn= "";
   var $orig_cn= "";
@@ -96,6 +97,7 @@ class group extends plugin
     /* Get samba Domain in case of samba 3 */
     if ($this->samba3 && $this->sambaSID != ""){
       $this->SID= preg_replace ("/-[^-]+$/", "", $this->sambaSID);
+      $this->savedSID= $this->SID;
       $ldap= $this->config->get_ldap_link();
       $ldap->cd($this->config->current['BASE']);
       $ldap->search ("(&(objectClass=sambaDomain)(sambaSID=$this->SID))",array("sambaAlgorithmicRidBase"));
@@ -622,7 +624,7 @@ class group extends plugin
       /* Check if we need to create a special entry */
       if ($this->groupType == 0){
 
-        if ($this->sambaSID == "" || $this->oldgroupType != $this->groupType){
+        if ($this->sambaSID == "" || $this->SID != $this->savedSID || $this->oldgroupType != $this->groupType ){
           $gidNumber= $this->gidNumber;
           while(TRUE){
             $sid= $this->SID."-".($gidNumber*2 + $this->ridBase+1);
