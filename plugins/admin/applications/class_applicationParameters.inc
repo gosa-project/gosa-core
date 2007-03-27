@@ -39,9 +39,6 @@ var $ui;
 	/* Call parent execute */
 	plugin::execute();
 
-      	$acl= get_permissions ($this->dn, $this->ui->subtreeACL);
-      	$this->acl= get_module_permission($acl, "application", $this->dn);
-
 	/* Do we need to flip is_account state? */
 	if (isset($_POST['modify_state']) && chkacl($this->acl,"gotoLogonScript")==""){
 		$this->is_account= !$this->is_account;
