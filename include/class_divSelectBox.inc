@@ -100,7 +100,7 @@ class divSelectBox {
           $style = " ".$s_value2['attach']." "	;
         }
 
-        $s_return .= "\n<td ".$style." class='".$class."' onmouseover='highlight(this);' onmouseout='unhighlight(this,\"list".$i_alternate."\");'>";
+        $s_return .= "\n<td ".$style." class='".$class."' >";
         $s_return .= $s_value2['string'];
         $s_return .= "</td>";
       }
