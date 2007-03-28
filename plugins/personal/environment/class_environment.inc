@@ -1161,6 +1161,14 @@ function printOutHotPlugDevices()
     }
     return($a_return);
   }
+  
+  function saveCopyDialog()
+  {
+    if(isset($_POST['cn'])){
+      $this->cn = $_POST['cn'];
+      $this->uid = $_POST['cn'];
+    }
+  }
 }
 
 
