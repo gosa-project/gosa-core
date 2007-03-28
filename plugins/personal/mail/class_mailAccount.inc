@@ -512,6 +512,7 @@ class mailAccount extends plugin
     /* Display mail account tab */
     if($this->gosaVacationStart ==0){
       $date= getdate(time());
+      $this->gosaVacationStart = time();
     }else{
       $date= getdate($this->gosaVacationStart);
     }
@@ -536,6 +537,7 @@ class mailAccount extends plugin
     if($this->gosaVacationStop ==0){
       $date= getdate(time());
       $date["mday"]++;
+      $this->gosaVacationStop = time() + (60*60*24);
     }else{
       $date= getdate($this->gosaVacationStop);
     }
