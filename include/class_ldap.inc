@@ -991,7 +991,7 @@ function gen_xls ($dn, $filter= "(objectClass=*)", $attributes= array('*'), $rec
       $ndn = split("#", $lineone[0]);
       $line = $ndn[1];
 
-      $dnn = split (":",$line);
+      $dnn = split (":",$line,2);
       $current_line = $ndn[0];
       $dn    = $dnn[0];
       $value = $dnn[1];
@@ -1060,7 +1060,7 @@ function gen_xls ($dn, $filter= "(objectClass=*)", $attributes= array('*'), $rec
         }
 
         /* Split the line into  attribute  and value */
-        $attr   = split(":", $row);
+        $attr   = split(":", $row,2);
         $attr[0]= trim($attr[0]);  /* attribute */
         $attr[1]= trim($attr[1]);  /* value */
 
