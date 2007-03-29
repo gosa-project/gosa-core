@@ -46,6 +46,7 @@ class ogroup extends plugin
     if (isset($this->attrs['member'])){
       foreach ($this->attrs['member'] as $key => $value){
         if ("$key" != "count"){
+          $value= @LDAP::convert($value);
           $this->member["$value"]= "$value";
         }
       }
