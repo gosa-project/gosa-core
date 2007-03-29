@@ -23,7 +23,8 @@ class servgeneric extends plugin
   var $netConfigDNS;
   var $modes = array();
 
-  var $mapActions   = array("reboot"          => "",
+  var $mapActions   = array("reboot"          => "localboot",
+                            "localboot"       => "localboot",
                             "instant_update"  => "softupdate",
                             "update"          => "scheduledupdate",
                             "reinstall"       => "install",
@@ -172,12 +173,14 @@ class servgeneric extends plugin
                                        "reinstall" => _("Reinstall"),
                                        "rescan" => _("Rescan hardware"),
                                        "memcheck" => _("Memory test"),
+                                       "localboot" => _("Force localboot"),
                                        "sysinfo"  => _("System analysis")));
     } else {
       $smarty->assign("actions", array("wake" => _("Wake up"),
                                        "reinstall" => _("Reinstall"),
                                        "update" => _("Scheduled update"),
                                        "memcheck" => _("Memory test"),
+                                       "localboot" => _("Force localboot"),
                                        "sysinfo"  => _("System analysis")));
     }
 

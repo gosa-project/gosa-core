@@ -46,6 +46,7 @@ class workgeneric extends plugin
   var $objectclasses= array("top", "gotoWorkstation", "GOhard","FAIobject");
 
   var $mapActions   = array("reboot"          => "localboot",
+                            "localboot"       => "localboot",
                             "instant_update"  => "softupdate",
                             "update"          => "scheduledupdate",
                             "reinstall"       => "install",
@@ -252,12 +253,14 @@ class workgeneric extends plugin
                                        "reinstall" => _("Reinstall"),
                                        "rescan" => _("Rescan hardware"),
                                        "memcheck" => _("Memory test"),
+                                       "localboot" => _("Force localboot"),
                                        "sysinfo"  => _("System analysis")));
     } else {
       $smarty->assign("actions", array("wake" => _("Wake up"),
                                        "reinstall" => _("Reinstall"),
                                        "update" => _("Scheduled update"),
                                        "memcheck" => _("Memory test"),
+                                       "localboot" => _("Force localboot"),
                                        "sysinfo"  => _("System analysis")));
     }
     /* Arrays */
