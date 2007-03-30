@@ -6,6 +6,8 @@ GOsa2 changelog
   - Included vacation date range specification
   - Fixed non-saved Samba-Domain changes in groups
   - Freezed application parameters are not editable anymore
+  - Fixed problem with removing commata based DN's
+  - Corrected setup generated perl mkntpasswd string
 
 * gosa 2.5.9
   - Fixed ldap tls connections when schema check was being used
