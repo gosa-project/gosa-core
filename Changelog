@@ -8,6 +8,7 @@ GOsa2 changelog
   - Freezed application parameters are not editable anymore
   - Fixed problem with removing commata based DN's
   - Corrected setup generated perl mkntpasswd string
+  - Fixed month listing in fax reports - february was march
 
 * gosa 2.5.9
   - Fixed ldap tls connections when schema check was being used

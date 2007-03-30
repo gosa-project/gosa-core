@@ -69,7 +69,7 @@ class faxreport extends plugin
     /* Create months */ 
     $months= array();
     for($i = 1 ; $i <= 12 ; $i ++ ){
-      $months[$i] = _(date("F",gmmktime(0,0,0,$i)));
+      $months[$i] = _(date("F",gmmktime(0,0,0,$i,1)));
     }
 
     /* Create years */
