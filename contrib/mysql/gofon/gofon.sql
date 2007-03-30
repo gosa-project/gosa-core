@@ -1,5 +1,5 @@
-create database asteriskcdrdb;
-use asteriskcdrdb;
+create database gophone;
+use gophone;
 
 create table cdr (
   calldate datetime NOT NULL default '0000-00-00 00:00:00',
@@ -20,5 +20,5 @@ create table cdr (
   userfield varchar(255) NOT NULL default ''
 );
 
-GRANT INSERT,SELECT ON asteriskcdrdb.cdr TO asterisk@localhost IDENTIFIED BY 'somemysqlpass';
+GRANT INSERT,SELECT ON gophone.cdr TO asterisk@localhost IDENTIFIED BY 'somemysqlpass';
 
