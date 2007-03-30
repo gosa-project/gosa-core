@@ -424,13 +424,8 @@ class groupManagement extends plugin
     /* Collect primary groupIDs to show primary groups 
        if this option is enabled in gosa conf && the checkbox is checked */  
     if ($this->ShowPrimaryCheckBox){
-      if ($SubSearch){
-        $res = get_list("(&(uid=$Regex)(!(uid=*$))(objectClass=posixAccount)(gidNumber=*))", $this->ui->subtreeACL,
-            $base,array("gidNumber", "cn"),  GL_SUBSEARCH);
-      } else {
-        $res = get_list("(&(uid=$Regex)(!(uid=*$))(objectClass=posixAccount)(gidNumber=*))", $this->ui->subtreeACL,
-            $base,array("gidNumber", "cn"));
-      }
+      $res = get_list("(&(uid=$Regex)(!(uid=*$))(objectClass=posixAccount)(gidNumber=*))", $this->ui->subtreeACL,
+          $base,array("gidNumber", "cn"),  GL_SUBSEARCH);
       foreach ($res as $attrs){
         $primaries[$attrs['gidNumber'][0]]= $attrs['cn'][0];
       }
