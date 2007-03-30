@@ -424,8 +424,13 @@ class groupManagement extends plugin
     /* Collect primary groupIDs to show primary groups 
        if this option is enabled in gosa conf && the checkbox is checked */  
     if ($this->ShowPrimaryCheckBox){
-      $res = get_list("(&(uid=$Regex)(!(uid=*$))(objectClass=posixAccount)(gidNumber=*))", $this->ui->subtreeACL,
-          $base,array("gidNumber", "cn"),  GL_SUBSEARCH);
+      if ($SubSearch){
+        $res = get_list("(&(uid=$Regex)(!(uid=*$))(objectClass=posixAccount)(gidNumber=*))", $this->ui->subtreeACL,
+            $base,array("gidNumber", "cn"),  GL_SUBSEARCH);
+      } else {
+        $res = get_list("(&(uid=$Regex)(!(uid=*$))(objectClass=posixAccount)(gidNumber=*))", $this->ui->subtreeACL,
+            $base,array("gidNumber", "cn"));
+      }
       foreach ($res as $attrs){
         $primaries[$attrs['gidNumber'][0]]= $attrs['cn'][0];
       }
@@ -434,7 +439,11 @@ class groupManagement extends plugin
     /* Collect all GroupIDs from those groups which are functional.
        Only perfrom this search if  ShowFunctionalGroups  is unchecked, else leave arre empty  */ 
     $ff = "(&(cn=$Regex)(objectClass=posixGroup)(!(|(objectClass=gosaMailAccount)(objectClass=gosaApplicationGroup)$sfilter)))";
-    $res = get_list($ff,$this->ui->subtreeACL,$base,array("gidNumber", "cn", "description"), GL_SUBSEARCH);
+    if ($SubSearch){
+      $res = get_list($ff,$this->ui->subtreeACL,$base,array("gidNumber", "cn", "description"), GL_SUBSEARCH);
+    } else {
+      $res = get_list($ff,$this->ui->subtreeACL,$base,array("gidNumber", "cn", "description"));
+    }
     foreach($res as $attrs){
       if (!isset($primaries[$attrs['gidNumber'][0]])){
         $functional[$attrs['gidNumber'][0]]= $attrs['gidNumber'][0];
