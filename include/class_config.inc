@@ -241,6 +241,10 @@ class config  {
       $this->current['GROUPS']= "ou=groups";
     }
 
+    if (isset($this->current['INITIAL_BASE'])){
+      $_SESSION['CurrentMainBase']= $this->current['INITIAL_BASE'];
+    }
+
     /* Remove possibly added ',' from end of group and people ou */
     $this->current['GROUPS'] = preg_replace("/,*$/","",$this->current['GROUPS']);
     $this->current['PEOPLE'] = preg_replace("/,*$/","",$this->current['PEOPLE']);
