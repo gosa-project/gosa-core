@@ -15,7 +15,7 @@
 			<LABEL for='gidNumber'>{t}Force GID{/t}</LABEL>
 		</td>
 		<td>
-			<input name='gidNumber' size=5 maxlength=5 id='gidNumber' {$dis} value='{$gidNumber}' title='{t}Forced ID number{/t}'>
+			<input name='gidNumber' size=9 maxlength=9 id='gidNumber' {$dis} value='{$gidNumber}' title='{t}Forced ID number{/t}'>
 		</td>
 	</tr>
 </table>

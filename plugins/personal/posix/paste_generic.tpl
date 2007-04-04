@@ -28,7 +28,7 @@
 						<label for="uidNumber">{t}UID{/t}</label>
 					</td>
 					<td>
-						<input id="uidNumber" name="uidNumber" size=5 maxlength=5 {$forceMode} value="{$uidNumber}">
+						<input id="uidNumber" name="uidNumber" size=9 maxlength=9 {$forceMode} value="{$uidNumber}">
 					</td>
 				</tr>
 				<tr>
@@ -37,7 +37,7 @@
 						<label for="gidNumber">{t}GID{/t}</label>
 					</td>
 					<td>
-						<input id="gidNumber" name="gidNumber" size=5 maxlength=5 {$forceMode} value="{$gidNumber}">
+						<input id="gidNumber" name="gidNumber" size=9 maxlength=9 {$forceMode} value="{$gidNumber}">
 					</td>
 				</tr>
 			</table>
