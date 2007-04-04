@@ -7,15 +7,20 @@ export DH_COMPAT=4
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-build: 
+build: patch 
 	#**** Off we go... ****
 
-clean:
+clean: clean-patched unpatch
+clean-patched: clean-patched
 	dh_testdir
 	rm -f install-stamp 
 	-rm -f debian/files
 	-rm -f debian/substvars
 	dh_clean
+
+unpatch:
+	dpatch deapply-all
+	rm -rf patch-stamp debian/patched
 
 install: install-stamp
 install-stamp: 
@@ -86,6 +91,11 @@ install-stamp:
 	-sed 's%require("smarty/Smarty.class.php");%require("/usr/share/php/smarty/libs/Smarty.class.php");%g' debian/gosa/usr/share/gosa/include/php_setup.inc > debian/gosa/usr/share/gosa/include/php_setup.inc.new
 	-mv debian/gosa/usr/share/gosa/include/php_setup.inc.new debian/gosa/usr/share/gosa/include/php_setup.inc
 	touch install-stamp
+
+patch: patch-stamp
+patch-stamp:
+	dpatch apply-all
+	dpatch cat-all >patch-stamp
 
 binary-indep: install
 	dh_testdir
