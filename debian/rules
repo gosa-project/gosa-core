@@ -4,6 +4,7 @@
 # Some lines taken from debmake, by Cristoph Lameter.
 
 export DH_COMPAT=4
+SARGE_PACKAGE=`cat debian/changelog  | head -n1 | grep sarge`
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
@@ -85,11 +86,13 @@ install-stamp:
 	-rm -rf debian/gosa/usr/share/gosa/gen_function_list.php
 	-rm -rf debian/gosa/usr/share/gosa/update.sh
 	-rm -rf debian/gosa/usr/share/doc/gosa/guide*
-	-rm -rf debian/gosa/usr/share/gosa/include/smarty
-	-sed 's%"CONFIG_TEMPLATE_DIR", "../contrib/"%"CONFIG_TEMPLATE_DIR", "/usr/share/doc/gosa/contrib/"%g' debian/gosa/usr/share/gosa/include/functions.inc > debian/gosa/usr/share/gosa/include/functions.inc.new
-	-mv debian/gosa/usr/share/gosa/include/functions.inc.new debian/gosa/usr/share/gosa/include/functions.inc
-	-sed 's%require("smarty/Smarty.class.php");%require("/usr/share/php/smarty/libs/Smarty.class.php");%g' debian/gosa/usr/share/gosa/include/php_setup.inc > debian/gosa/usr/share/gosa/include/php_setup.inc.new
-	-mv debian/gosa/usr/share/gosa/include/php_setup.inc.new debian/gosa/usr/share/gosa/include/php_setup.inc
+	-if [ -z "${SARGE_PACKAGE}" ]; then \
+		rm -rf debian/gosa/usr/share/gosa/include/smarty; \
+		sed 's%"CONFIG_TEMPLATE_DIR", "../contrib/"%"CONFIG_TEMPLATE_DIR", "/usr/share/doc/gosa/contrib/"%g' debian/gosa/usr/share/gosa/include/functions.inc > debian/gosa/usr/share/gosa/include/functions.inc.new; \
+		mv debian/gosa/usr/share/gosa/include/functions.inc.new debian/gosa/usr/share/gosa/include/functions.inc; \
+		sed 's%require("smarty/Smarty.class.php");%require("/usr/share/php/smarty/libs/Smarty.class.php");%g' debian/gosa/usr/share/gosa/include/php_setup.inc > debian/gosa/usr/share/gosa/include/php_setup.inc.new; \
+		mv debian/gosa/usr/share/gosa/include/php_setup.inc.new debian/gosa/usr/share/gosa/include/php_setup.inc; \
+	fi
 	touch install-stamp
 
 patch: patch-stamp
@@ -115,7 +118,11 @@ binary-indep: install
 	cd debian/gosa && find ./etc -type f -print | sed -e 's#^./#/#' > DEBIAN/conffiles
 	chmod 644 debian/gosa/DEBIAN/conffiles
 
-	dh_gencontrol
+	-if [ -z "${SARGE_PACKAGE}" ]; then \
+		dh_gencontrol; \
+	else \
+		dh_gencontrol -- -cdebian/control.sarge; \
+	fi
 	dh_md5sums
 	dh_builddeb
 
