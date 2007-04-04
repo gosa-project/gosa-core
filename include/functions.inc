@@ -2170,7 +2170,7 @@ function get_base_from_hook($dn, $attrib)
       if (check_command($command)){
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
         exec($command, $output);
-        if (preg_match("/^[0-9]+$/", $output)){
+        if (preg_match("/^[0-9]+$/", $output[0])){
           return ($output[0]);
         } else {
           print_red(_("Warning - base_hook is not avialable. Using default base."));
