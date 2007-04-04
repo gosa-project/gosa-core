@@ -663,6 +663,16 @@ class sambaAccount extends plugin
     unset($this->attrs['uid']);
     unset($this->attrs['uidNumber']);
     unset($this->attrs['gidNumber']);
+
+    /* Remove objectClass for sambaIdmapEntry */
+    $tmp= array();
+    for ($i= 0; $i<count($this->attrs["objectClass"]); $i++){
+      if ($this->attrs['objectClass'][$i] != 'sambaIdmapEntry'){
+        $tmp[]= $this->attrs['objectClass'][$i];
+      }
+    }
+    $this->attrs['objectClass']= $tmp;
+
     @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
         $this->attributes, "Save");
     $ldap->cd($this->dn);
