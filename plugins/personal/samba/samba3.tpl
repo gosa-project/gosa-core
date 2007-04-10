@@ -121,9 +121,10 @@
      <td><label for="CtxInitialProgram">{t}Initial program{/t}</label></td>
      <td>
       <input id="CtxInitialProgram" name="CtxInitialProgram" size=35 maxlength=60 {if $CtxInitialProgramACL==""}{$CtxInitialProgramMode}{/if} value="{$CtxInitialProgram}" 
-		{if ($CtxInitialProgramACL!="" || $tsloginstate!="" || $inheritstate!="") && $CtxInitialProgramACL!=""}
+		{if $CtxInitialProgramACL!="" || $tsloginstate!="" || $inheritstate!=""}
 			disabled 
 		{/if}
+		{$tsloginstate}
 		>
      </td>
     </tr>
@@ -133,12 +134,11 @@
       <input id="CtxWorkDirectory" name="CtxWorkDirectory" size=35 maxlength=60 
 		{if $CtxWorkDirectoryACL==""}
 			{$CtxInitialProgramMode}
-		{else}
-			disabled
 		{/if} value="{$CtxWorkDirectory}" 
-		{if ($CtxInitialProgramACL=="disabled" || $tsloginstate=="disabled" || $inheritstate=="disabled") && $CtxWorkDirectoryACL!=""}
+		{if $CtxInitialProgramACL=="disabled" || $tsloginstate=="disabled" || $inheritstate=="disabled"}
 			disabled 
 		{/if}
+		{$CtxWorkDirectoryACL}
 		>
      </td>
     </tr>
