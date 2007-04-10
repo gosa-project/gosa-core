@@ -384,7 +384,7 @@ class environment extends plugin
  
     }
 
-    foreach(array("gotoHotplugDevice","gotoPrinterSel") as $s_attr){
+    foreach(array("gotoHotplugDevice","gotoPrinterSel", "gotoPrinterToggle") as $s_attr){
       if(chkacl($this->acl,$s_attr)=="") {
         $smarty->assign($s_attr."ACL","");
       }else{

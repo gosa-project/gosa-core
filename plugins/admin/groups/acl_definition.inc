@@ -359,19 +359,20 @@ $ACLD['conference']= array(
 			"goFonConferenceOwner");
 
 $ACLD['environment']=array(
-					"create",
-					"gotoPrinter",
-					"gotoEnvironment",
-					"gotoShare",
-					"gotoProfileServer",
-					"gotoProfileFlags",
-					"gotoXResolution",
-					"gotoLogonScript",
-					"gotoKioskProfile",
-					"gotoProfileQuota",
-					"gotoHotplugDevice",
-					"gotoShareAppleMounts"
-					);
+			"create",
+			"gotoPrinter",
+			"gotoPrinterToggle",
+			"gotoEnvironment",
+			"gotoShare",
+			"gotoProfileServer",
+			"gotoProfileFlags",
+			"gotoXResolution",
+			"gotoLogonScript",
+			"gotoKioskProfile",
+			"gotoProfileQuota",
+			"gotoHotplugDevice",
+			"gotoShareAppleMounts"
+			);
 /* Connectivity accounts */
 $ACLD['phpgwAccount']			=array("create");
 $ACLD['webdavAccount']			=array("create");
