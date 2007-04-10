@@ -10,6 +10,7 @@ GOsa2 changelog
   - Corrected setup generated perl mkntpasswd string
   - Fixed month listing in fax reports - february was march
   - Enabled 9 digits for gid-/uidNumbers
+  - Fixed acl's for saving printers
 
 * gosa 2.5.9
   - Fixed ldap tls connections when schema check was being used
