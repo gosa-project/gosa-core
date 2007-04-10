@@ -11,6 +11,7 @@ GOsa2 changelog
   - Fixed month listing in fax reports - february was march
   - Enabled 9 digits for gid-/uidNumbers
   - Fixed acl's for saving printers
+  - Fixed saving of disabled samba acl's
 
 * gosa 2.5.9
   - Fixed ldap tls connections when schema check was being used

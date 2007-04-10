@@ -133,6 +133,8 @@
       <input id="CtxWorkDirectory" name="CtxWorkDirectory" size=35 maxlength=60 
 		{if $CtxWorkDirectoryACL==""}
 			{$CtxInitialProgramMode}
+		{else}
+			disabled
 		{/if} value="{$CtxWorkDirectory}" 
 		{if ($CtxInitialProgramACL=="disabled" || $tsloginstate=="disabled" || $inheritstate=="disabled") && $CtxWorkDirectoryACL!=""}
 			disabled 

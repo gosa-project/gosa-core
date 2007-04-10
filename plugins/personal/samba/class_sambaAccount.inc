@@ -845,32 +845,42 @@ class sambaAccount extends plugin
         }
 
         /* Save checkbox states. */
-        $this->mungedObject->setTsLogin(!isset($_POST['tslogin'])
-                        && chkacl($this->acl, "tslogin") == "");
+        if (chkacl($this->acl, "tslogin") == ""){
+          $this->mungedObject->setTsLogin(!isset($_POST['tslogin']));
+        }
         // Need to do some index checking to avoid messages like "index ... not found"
         if(isset($_POST['brokenconn'])) {
-          $this->mungedObject->setBrokenConn($_POST['brokenconn'] == '1'
-                          && chkacl($this->acl, "brokenconn") == "");
+          if (chkacl($this->acl, "brokenconn") == ""){
+            $this->mungedObject->setBrokenConn($_POST['brokenconn'] == '1');
+          }
         }
         if(isset($_POST['reconn'])) {
-          $this->mungedObject->setReConn($_POST['reconn'] == '1'
-                          && chkacl($this->acl, "reconn") == "");
+          if (chkacl($this->acl, "reconn") == ""){
+            $this->mungedObject->setReConn($_POST['reconn'] == '1');
+          }
         }
-        $this->mungedObject->setInheritMode(isset($_POST['inherit'])
-                        && chkacl($this->acl, "inherit") == "");
-        $this->mungedObject->setCtxMaxConnectionTimeF(!isset($_POST['CtxMaxConnectionTimeF'])
-                        && chkacl($this->acl, "CtxMaxConnectionTime") == "");
-        $this->mungedObject->setCtxMaxDisconnectionTimeF(
-                        !isset($_POST['CtxMaxDisconnectionTimeF']) 
-                        && chkacl($this->acl, "CtxMaxDisconnectionTime") == "");
-        $this->mungedObject->setCtxMaxIdleTimeF(!isset($_POST['CtxMaxIdleTimeF'])
-                        && chkacl($this->acl, "CtxMaxIdleTime") == "");
-        $this->mungedObject->setConnectClientDrives(isset($_POST['connectclientdrives'])
-                        && chkacl($this->acl, "connectclientdrives") == "");
-        $this->mungedObject->setConnectClientPrinters(isset($_POST['connectclientprinters'])  
-                        && chkacl($this->acl, "connectclientprinters") == "");
-        $this->mungedObject->setDefaultPrinter(isset($_POST['defaultprinter'])
-                        && chkacl($this->acl, "defaultprinter") == "");
+        if (chkacl($this->acl, "inherit") == "") {
+          $this->mungedObject->setInheritMode(isset($_POST['inherit']));
+        }
+        if (chkacl($this->acl, "CtxMaxConnectionTime") == "") {
+          $this->mungedObject->setCtxMaxConnectionTimeF(!isset($_POST['CtxMaxConnectionTimeF']));
+        }
+        if (chkacl($this->acl, "CtxMaxDisconnectionTime") == ""){
+          $this->mungedObject->setCtxMaxDisconnectionTimeF(
+                        !isset($_POST['CtxMaxDisconnectionTimeF']));
+        }
+        if (chkacl($this->acl, "CtxMaxIdleTime") == ""){
+          $this->mungedObject->setCtxMaxIdleTimeF(!isset($_POST['CtxMaxIdleTimeF']));
+        }
+        if (chkacl($this->acl, "connectclientdrives") == ""){
+          $this->mungedObject->setConnectClientDrives(isset($_POST['connectclientdrives']));
+        }
+        if (chkacl($this->acl, "connectclientprinters") == ""){
+          $this->mungedObject->setConnectClientPrinters(isset($_POST['connectclientprinters']));
+        }
+        if (chkacl($this->acl, "defaultprinter") == ""){
+          $this->mungedObject->setDefaultPrinter(isset($_POST['defaultprinter']));
+        }
 
         /* Save combo boxes. Takes two values */
         if(isset($_POST['reconn'])) {
