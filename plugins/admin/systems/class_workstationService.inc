@@ -109,7 +109,7 @@ class workservice extends plugin
 
     /* Additional values will be extracted from CONFIG_DIR/gosa/keyboardLayouts */
     $this->XKbLayouts= array ("de"=> "de","intl" =>"intl","us" =>"us");
-    $this->XKbVariants= array ("nodeadkeys"=>"nodeadkeys", "basic"=>"basic");
+    $this->XKbVariants= array ("basic"=>"basic", "nodeadkeys"=>"nodeadkeys");
 
     /* try to read additional keyboard layouts 
      */
