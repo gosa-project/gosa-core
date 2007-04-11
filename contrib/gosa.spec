@@ -11,7 +11,7 @@
 #
 Summary: 		Web Based LDAP Administration Program 
 Name:			gosa
-Version: 		2.5.9.99
+Version: 		2.5.10
 Release:		1
 License: 		GPL
 Source: 		ftp://oss.GONICUS.de/pub/gosa/%{sourcename}.tar.bz2
@@ -21,9 +21,9 @@ Vendor:			GONICUS GmbH
 Packager:		Lars Scheiter <lars.scheiter@GONICUS.de>
 Buildarch: 		noarch
 %if %{suse}
-Requires:		apache2,apache2-mod_php4,php4,php4-gd,php4-ldap,php4-mcrypt,php4-mysql,php4-imap,php4-iconv,php4-mbstring,php4-gettext,php4-session,ImageMagick,perl-Crypt-SmbHash
+Requires:		apache2,apache2-mod_php4,php4,php4-gd,php4-ldap,php4-mcrypt,php4-mysql,php4-imap,php4-iconv,php4-mbstring,php4-gettext,php4-session,ImageMagick
 %else
-Requires: 		httpd,php,php-ldap,php-imap,php-snmp,php-mysql,php-mbstring,perl-Crypt-SmbHash >= 0.02,ImageMagick
+Requires: 		httpd,php,php-ldap,php-imap,php-snmp,php-mysql,php-mbstring,ImageMagick
 %endif
 BuildRoot: 		%{_tmppath}/%{name}-%{version}-root
 BuildArch:		noarch
@@ -63,6 +63,19 @@ Obsoletes:		gosa-ldap
 
 %description schema
 Contains the Schema definition files for the GOSA admin package.
+
+%package mkntpasswd
+Group: 			System/Administration
+Summary: 		Schema Definitions for the GOSA package
+%if %{suse}
+Requires:		perl-Crypt-SmbHash
+%else
+Requires:		perl-Crypt-SmbHash >= 0.02
+%endif
+
+%description mkntpasswd
+Wrapper Script around perl to create Samba Hashes on the fly, added for completeness only.
+If in doubt use sambas "native" mkntpwd tool to generate hashes for GOsa.
 
 %package help-en
 Group: 			System/Administration
@@ -112,6 +125,8 @@ DIRS="doc ihtml plugins html include locale"
 for i in $DIRS; do \
   cp -ua $i %{buildroot}/usr/share/gosa/$i ; \
 done
+mkdir %{buildroot}/usr/bin
+cp bin/mkntpasswd %{buildroot}/usr/bin/
 
 # Create files for temporary stuff
 for i in compile config cache; do \
@@ -202,6 +217,10 @@ rm -rf %{buildroot}
 %doc COPYING AUTHORS README contrib/demo.ldif contrib/openldap
 /etc/openldap/schema/gosa
 
+%files mkntpasswd
+%defattr(-,root,root)
+/usr/bin/mkntpasswd
+
 %files help-en
 %defattr(-,root,root)
 /usr/share/gosa/doc/guide/user/en
@@ -219,6 +238,11 @@ rm -rf %{buildroot}
 /usr/share/gosa/doc/guide/user/nl
 
 %changelog
+* Wed Apr 11 2007 Lars Scheiter <lars.scheiter@GONICUS.de> 2.5.10
+- New upstream
+- Added new subpackage mkntpasswd
+- Remove perl dependencies off of GOsa main package
+
 * Tue Mar 6 2007 Lars Scheiter <lars.scheiter@GONICUS.de> 2.5.9
 - New upstream
 - fixed typo in updateprocess
