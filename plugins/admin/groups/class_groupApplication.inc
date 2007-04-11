@@ -1060,6 +1060,13 @@ class appgroup extends plugin
     }
   return($ret);
   }
+
+  function PrepareForCopyPaste($source)
+  {
+    $this->FAIrelease = $this->InitialFAIrelease = $source->FAIrelease;
+    $this->gosaMemberApplication = $source->gosaMemberApplication;
+    $this->appoption = $source->appoption; 
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
