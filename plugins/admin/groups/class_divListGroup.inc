@@ -141,7 +141,7 @@ class divListGroup extends MultiSelectWindow
     foreach($groups as $key => $val){
 
       $acl= get_permissions ($val['dn'], $this->ui->subtreeACL);
-      $acl= get_module_permission($acl, "user", $val['dn']);
+      $acl= get_module_permission($acl, "group", $val['dn']);
       
 
 
