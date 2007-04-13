@@ -17,8 +17,6 @@
   
     <!-- Display SSL warning message on demand -->
     <p class='gosaLoginWarning'> {$ssl} </p>
-	     <!-- Display SSL warning message on demand -->
-    <p class='gosaLoginWarning'> {$ssl} </p>
  
     <!-- Formular data, containing a table to center fields -->
     <form action='index.php' method='post' name='mainform' onSubmit='js_check(this);return true;'>
