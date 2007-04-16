@@ -21,6 +21,7 @@ class group extends plugin
   var $ridBase= 0;
   var $members= array();
   var $users= array();
+  var $member= array();
   var $allusers= array();
   var $department= "";
   var $saved_gidNumber= "";
@@ -33,7 +34,9 @@ class group extends plugin
   var $nagios_group =FALSE;
   var $sambaGroupType;
   var $dialog;
+  var $rfc2307bis= FALSE;
   var $OnlyShowFirstEntries =200;
+  var $dnMapping= array();
 
   var $allowGroupsWithSameNameInOtherSubtrees = true;
 
@@ -45,6 +48,13 @@ class group extends plugin
 
   function group ($config, $dn= NULL, $parent= NULL)
   {
+    /* Set rfc2307bis flag */
+    if (isset($config->current['RFC2307BIS']) && ($config->current['RFC2307BIS']== "true")){
+      $this->rfc2307bis= TRUE;
+      $this->attributes[]= "member";
+      $this->objectclasses[]= "groupOfNames";
+    }
+
     plugin::plugin ($config, $dn, $parent);
 
     /* Load attributes depending on the samba version */
@@ -423,8 +433,9 @@ class group extends plugin
     }
     if(!empty($filter)){    
       $ldap->cd($this->config->current['BASE']);
-      $ldap->search("(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(|".$filter."))",array("uid","sn","givenName"));
+      $ldap->search("(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(|".$filter."))",array("dn", "uid","sn","givenName"));
       while($attrs = $ldap->fetch()){
+        $this->dnMapping[$attrs['uid'][0]] = $attrs['dn'];
         $this->members[$attrs['uid'][0]] = $this->createResultName($attrs);
         $this->allusers[$attrs['uid'][0]]= $this->createResultName($attrs);
       } 
@@ -453,9 +464,9 @@ class group extends plugin
 
     /* Search in current tree or within subtrees depending on the checkbox from filter section */
     if($gufilter['SubSearchGroup']){
-      $ldap->search($filter, array("uid", "sn","givenName"));
+      $ldap->search($filter, array("dn", "uid", "sn","givenName"));
     }else{
-      $ldap->ls ($filter, get_people_ou().$gufilter['dselect'],array("uid", "sn", "givenName"));
+      $ldap->ls ($filter, get_people_ou().$gufilter['dselect'],array("dn", "uid", "sn", "givenName"));
     }
     $i = 0;
     
@@ -468,6 +479,7 @@ class group extends plugin
       if($i > $MaxUser) {
         break;
       }
+      $this->dnMapping[$attrs['uid'][0]]= $attrs["dn"];
       $this->allusers[$attrs['uid'][0]]     = $this->createResultName($attrs);
       $this->displayUsers[$attrs['uid'][0]] = $this->createResultName($attrs);
     }
@@ -660,7 +672,7 @@ class group extends plugin
 
     /* Add nagios functionality */
     if ($this->nagios_group){
-	$this->attrs['objectClass'][]= "nagiosContactGroup";
+      $this->attrs['objectClass'][]= "nagiosContactGroup";
     }
 
     /* Take members array */
@@ -671,6 +683,18 @@ class group extends plugin
     /* New accounts need proper 'dn', propagate it to remaining objects */
     if ($this->dn == 'new'){
       $this->dn= 'cn='.$this->cn.','.get_groups_ou().$this->base;
+    }
+
+    /* Add member dn's for RFC2307bis Support */
+    if ($this->rfc2307bis){
+      if (count($this->memberUid)){
+        $this->attrs['member'] = array();
+        foreach($this->attrs['memberUid'] as $uid) {
+          $this->attrs['member'][]= $this->dnMapping[$uid];
+        }
+      } else {
+        $this->attrs['member'][]= $this->dn;
+      }
     }
 
     /* Save data. Using 'modify' implies that the entry is already present, use 'add' for
@@ -741,7 +765,6 @@ class group extends plugin
     if (!is_uid($this->cn)){
       $message[]= _("The field 'Name' contains invalid characters. Lowercase, numbers and dashes are allowed.");
     }
-
 
     if($this->allowGroupsWithSameNameInOtherSubtrees == true){
 

@@ -360,3 +360,10 @@ Q: I'd like to assign different uid bases for certain user/group objects.
 A: Use the base_hook in your gosa.conf's location section to specify a script
    which handles the ID generation externaly. It get's called with the "dn"
    and the attribute to be ID'd. It should return an integer value.
+
+
+Q: I'd like to use rfc2307bis compliant groups. Is this possible?
+
+A: Yes - place the rfc2307bis="true" inside of the location section of
+   your gosa.conf. Remember, that you can't create empty groups in this mode.
+
