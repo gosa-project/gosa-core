@@ -141,7 +141,7 @@ class divListApplication extends MultiSelectWindow
       /* Create action icons */
       $actions = "";
 
-      if($acl == "#all#"){
+      if($acl == "#all#" || preg_match('/#create#/', $acl)){
         if(($this->parent->CopyPasteHandler) && (!$is_freezed)){
           $actions.= "<input class='center' type='image'
             src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
