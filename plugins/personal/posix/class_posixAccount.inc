@@ -870,6 +870,7 @@ class posixAccount extends plugin
       if (!isset($this->savedGroupMembership[$key])){
         $g= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $key, false);
         $g->by_object['group']->addUser($this->uid);
+        $g->dnMapping[$this->uid]= $this->dn;
         $g->save();
       }
     }
