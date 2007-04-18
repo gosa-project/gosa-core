@@ -73,15 +73,19 @@ class phoneAccount extends plugin
      *  and first server as default if necessary.
      * Check if connection is successfull for the selected server $this->goFonHomeServer
      */
+
+    /* Set available server */
+    if(isset($_SESSION['config']->data['SERVERS']['FON'])){
+      $this->goFonHomeServers = $_SESSION['config']->data['SERVERS']['FON'];
+    }
+
     $a_SETUP= array();
-    if(array_key_exists('config',$_SESSION) &&
+    if($this->is_account &&
+       array_key_exists('config',$_SESSION) &&
        array_key_exists('SERVERS',$_SESSION['config']->data) &&
        array_key_exists('FON',$_SESSION['config']->data['SERVERS']) &&
        is_callable("mysql_connect")
        ) {
-
-      /* Set available server */
-      $this->goFonHomeServers = $_SESSION['config']->data['SERVERS']['FON'];
 
       /* Servers defined? Watch here... */
       if (count($this->goFonHomeServers)){

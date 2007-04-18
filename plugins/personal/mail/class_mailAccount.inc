@@ -98,7 +98,7 @@ class mailAccount extends plugin
     } else {
       $this->folder_prefix= "user.";
     }
-    
+   
     /* This is not a new account, parse additional attributes */
     if (($dn != NULL) && ($dn != "new") && $this->is_account){
 
