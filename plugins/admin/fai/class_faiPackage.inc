@@ -565,6 +565,17 @@ class faiPackage extends plugin
   {
     /* Ask for cn */
     $smarty = get_smarty();
+
+    /* Assemble release name */
+    $tmp= preg_replace('/,ou=fai,ou=configs,ou=systems,.*$/', '', $_SESSION['faifilter']['branch']);
+    $tmp= preg_replace('/ou=/', '', $tmp);
+    $rev= array_reverse(split(',', $tmp));
+    $this->FAIdebianRelease= "";
+    foreach ($rev as $part){
+      $this->FAIdebianRelease.= "/$part";
+    }
+    $this->FAIdebianRelease= preg_replace('#^/#', '', $this->FAIdebianRelease);
+
     $smarty->assign("cn" ,$this->cn);
     $str = $smarty->fetch(get_template_path("paste_fai_object.tpl",TRUE));
     $ret = array();
