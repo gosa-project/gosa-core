@@ -2152,6 +2152,9 @@ function is_department_name_reserved($name,$base)
 
 function is_php4()
 {
+  if (isset($_SESSION['PHP4COMPATIBLE'])){
+    return true;
+  }
   return (preg_match('/^4/', phpversion()));
 }
 

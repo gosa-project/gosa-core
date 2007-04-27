@@ -84,7 +84,6 @@ class userinfo
         $this->subtreeACL[$base][]= $attrs["gosaSubtreeACL"][$i];
       }
     }
-
   }
 
 }

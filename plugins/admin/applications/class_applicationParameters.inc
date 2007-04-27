@@ -10,7 +10,7 @@ class applicationParameters extends plugin
   var $CopyPasteVars = array("option_name","option_value");
   var $attributes= array("gosaApplicationParameter");
   var $objectclasses= array();
-var $ui;
+  var $ui;
 
   function applicationParameters ($config, $dn= NULL, $parent= NULL)
   {

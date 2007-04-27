@@ -281,6 +281,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
       $config->make_idepartments();
       $_SESSION['config']= $config;
 
+      /* Take care about zend.ze1_compatiblity_mode */
+      if (ini_get("zend.ze1_compatibility_mode") != 0){
+        $_SESSION['PHP4COMPATIBLE']= TRUE;
+      }
+
       /* are we using accountexpiration */
       if((isset($config->data['MAIN']['ACCOUNT_EXPIRATION'])) && 
           preg_match('/true/i', $config->data['MAIN']['ACCOUNT_EXPIRATION'])){
