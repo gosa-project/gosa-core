@@ -104,39 +104,36 @@ class sieve
     $this->line=fgets($this->fp,1024);
     $this->token = split(" ", $this->line, 2);
 
-    if($this->token[0] == "NO"){
-        /* we need to try and extract the error code from here.  There are two possibilites: one, that it will take the form of:
-           NO ("yyyyy") "zzzzzzz" or, two, NO {yyyyy} "zzzzzzzzzzz" */
-        $this->x = 0;
-        list($this->ltoken, $this->mtoken, $this->rtoken) = split(" ", $this->line." ", 3);
-        if($this->mtoken[0] == "{"){
-            while($this->mtoken[$this->x] != "}" or $this->err_len < 1){
-                $this->err_len = substr($this->mtoken, 1, $this->x);
-                $this->x++;    
-            }
-            //print "<br>Trying to receive $this->err_len bytes for result<br>";
-            $this->line = fgets($this->fp,$this->err_len);
-            $this->error_raw[]=substr($this->line, 0, strlen($this->line) -2);    //we want to be nice and strip crlf's
-            $this->err_recv = strlen($this->line);
+	if($this->token[0] == "NO"){
+		/* we need to try and extract the error code from here.  There are two possibilites: one, that it will take the form of:
+		   NO ("yyyyy") "zzzzzzz" or, two, NO {yyyyy} "zzzzzzzzzzz" */
+		$this->x = 0;
+		list($this->ltoken, $this->mtoken, $this->rtoken) = split(" ", $this->line." ", 3);
+		if($this->mtoken[0] == "{"){
+			while($this->mtoken[$this->x] != "}" or $this->err_len < 1){
+				$this->err_len = substr($this->mtoken, 1, $this->x);
+				$this->x++;    
+			}
+			#print "<br>Trying to receive $this->err_len bytes for result<br>";
+			$this->line = fgets($this->fp,$this->err_len);
+			$this->error_raw[]=substr($this->line, 0, strlen($this->line) -2);    //we want to be nice and strip crlf's
+			$this->err_recv = strlen($this->line);
 
-	    /* Avoid loop till memory is full 
-               This can happen if sieve script is modified via external scripts and not by gosa .. */
-	    $max = 10000;
-            $cur = 0 ; 
-            while($this->err_recv < $this->err_len && ($cur < $max)){
-                //print "<br>Trying to receive ".($this->err_len-$this->err_recv)." bytes for result<br>";
-                $cur ++ ; 
-                $this->line = fgets($this->fp, ($this->err_len-$this->err_recv));
-                $this->error_raw[]=substr($this->line, 0, strlen($this->line) -2);    //we want to be nice and strip crlf's
-                $this->err_recv += strlen($this->line);
-            } /* end while */
-            $this->line = fgets($this->fp, 1024);	//we need to grab the last crlf, i think.  this may be a bug...
-            $this->error=EC_UNKNOWN;
-      
-        } /* end if */
-        elseif($this->mtoken[0] == "("){
-            switch($this->mtoken){
-                case "(\"QUOTA\")":
+			/* Ensure max loop of 1000, to keep the ui from freezing */
+			$max = 1000;
+			$cur = 0;
+
+			while($this->err_recv < ($this->err_len) && ($cur < $max)){
+
+				$cur ++;
+				$this->line 	 = fgets($this->fp,4096);
+				$this->err_recv += strlen($this->line);
+				$this->error_raw[]=preg_replace("/\r\n/","",$this->line);    //we want to be nice and strip crlf'
+			} 
+		} /* end if */
+		elseif($this->mtoken[0] == "("){
+			switch($this->mtoken){
+				case "(\"QUOTA\")":
                     $this->error = EC_QUOTA;
                     $this->error_raw=$this->rtoken;
                     break;
@@ -283,7 +280,7 @@ class sieve
   function sieve_login()
   {
 
-    $this->fp=fsockopen($this->host,$this->port);
+    $this->fp=@fsockopen($this->host,$this->port);
     if($this->fp == false)
         return false;
  

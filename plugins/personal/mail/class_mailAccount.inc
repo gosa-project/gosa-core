@@ -10,7 +10,7 @@
  */
 
 /* Load sieve support */
-require_once ("class_sieve.inc");
+require_once ("sieve/class_sieve.inc");
 
 /* Load mail methods */
 global $BASE_DIR;
@@ -59,6 +59,7 @@ class mailAccount extends plugin
       "gosaVacationMessage", "gosaMailAlternateAddress", "gosaMailForwardingAddress", "gosaVacationStart", "gosaVacationStop");
   var $objectclasses= array("gosaMailAccount");
 
+  var $sieve_management = NULL;
 
   /* constructor, if 'dn' is set, the node loads the given
      'dn' from LDAP */
@@ -182,6 +183,10 @@ class mailAccount extends plugin
       }
     }
 
+    /* Create sieve management class */
+    $method = new $this->method($this->config);
+    $id     = $method->uattrib;
+    $this->sieve_management = new sieveManagement($this->config,$this->dn,$this,$id);
 
   /* Create filter */
 
@@ -234,6 +239,33 @@ class mailAccount extends plugin
     foreach ($this->config->data['SERVERS']['IMAP'] as $key => $val){
       $mailserver[]= $key;
     }
+
+
+    /*
+     * Sieve Management
+     */
+    if(isset($_POST['sieveManagement'])
+        && preg_match("/C/",$this->gosaMailDeliveryMode)
+        && chkacl($this->acl,"sieveManagement") == "") {
+      $this->dialog = $this->sieve_management;
+    }
+
+    /* Cancel sieve edit */
+    if(isset($_POST['sieve_cancel'])){
+      $this->dialog = NULL;
+    }
+
+    /* Save sieve changes */
+    if(isset($_POST['sieve_finish'])){
+      $this->sieve_management = $this->dialog;
+      $this->dialog = NULL;
+    }
+
+    if(is_object($this->dialog)){
+      $this->dialog->save_object();
+      return($this->dialog->execute());
+    }
+
 
     /* Handle account state */
 
@@ -570,6 +602,8 @@ class mailAccount extends plugin
       $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
     }
 
+    $smarty->assign("sieveManagementACL", chkacl($this->acl,"sieveManagement"));
+
     if (preg_match('/V/', $this->gosaMailDeliveryMode)){
       $smarty->assign('rangeEnabled', "");
     } else {
@@ -862,7 +896,7 @@ class mailAccount extends plugin
 
         /* Only talk with sieve if the mail account already exists */
         if($this->initially_was_account){
-          
+         
           /* Write sieve information only if not in C mode */
           if (!is_integer(strpos($this->gosaMailDeliveryMode, "C"))){
             $method->configureFilter($this->$id,
@@ -873,6 +907,8 @@ class mailAccount extends plugin
                 $this->gosaSpamMailbox,
                 $this->gosaSpamSortLevel,
                 $this->gosaVacationMessage);
+          }else{
+            $this->sieve_management->save();
           }
         }
       }

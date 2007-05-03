@@ -62,16 +62,56 @@
  </tr>
 </table>
 
+<!-- SIEVE -->
+<p class="seperator">&nbsp;</p>
+<h2><img class="center" alt="" align="middle" src="images/envelope.png" />&nbsp;{t}Mail options{/t}</h2>
+<table summary="" style="vertical-align:top; text-align:left;" cellpadding=4 border=0>
+ <tr>
+  <td>
+   <input type=checkbox name="own_script" value="1" {$own_script}
+		{$custom_sieveACL}
+        onClick="
+            changeState('sieveManagement');
+            changeState('drop_own_mails');
+            changeState('use_vacation');
+            changeState('use_spam_filter');
+            changeState('use_mailsize_limit');
+            changeState('import_vacation');
+            changeState('vacation_template');
+//          changeState('forward_address');
+//          changeState('add_forwarder');
+//          changeState('add_local_forwarder');
+//          changeState('delete_forwarder');
+            changeState('only_local');
+            changeState('gosaVacationMessage');
+            changeState('gosaSpamSortLevel');
+            changeState('gosaSpamMailbox');
+            changeState('gosaMailMaxSize');
+            changeStates();
+
+        "
+
+> {t}Use custom sieve script{/t} <b>({t}disables all Mail options!{/t})</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <input {$sieveManagementACL} {if $own_script == ""} disabled {/if} id='sieveManagement' type='submit' name='sieveManagement' value='{t}Sieve Management{/t}'>
+  </td>
+ </tr>
+</table>
+
+
 <p class="seperator">&nbsp;</p>
 
 <h2><img class="center" alt="" align="middle" src="images/envelope.png" />&nbsp;{t}Mail options{/t}</h2>
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
  <tr style="padding-bottom:0px;">
   <td style="width:50%">
-   <input type=checkbox name="drop_own_mails" value="1" {$drop_own_mails}
+   <input type=checkbox name="drop_own_mails" value="1" {$drop_own_mails} id="drop_own_mails"
 	{$drop_own_mailsACL} title="{t}Select if you want to forward mails without getting own copies of them{/t}"> {t}No delivery to own mailbox{/t}
    <br>
-   <input type=checkbox name="use_vacation" value="1" {$use_vacation}
+   <input type=checkbox name="use_vacation" value="1" {$use_vacation} id="use_vacation"
 	{$gosaVacationMessageACL} title="{t}Select to automatically response with the vacation message defined below{/t}"  onclick="changeState('day'); changeState('month'); changeState('year'); changeState('sday'); changeState('smonth'); changeState('syear');"> {t}Activate vacation message{/t}
    <br>
    <div style="padding-left:22px;">
@@ -118,19 +158,19 @@
    &nbsp;
   </td>
   <td style="vertical-align:top;">
-   <input type=checkbox name="use_spam_filter" value="1" {$use_spam_filter}
+   <input type=checkbox name="use_spam_filter" value="1" {$use_spam_filter} id="use_spam_filter"
 	{$gosaSpamSortLevelACL} title="{t}Select if you want to filter this mails through spamassassin{/t}"> <label for="gosaSpamSortLevel">{t}Move mails tagged with spam level greater than{/t}</label>
 	
    <select id="gosaSpamSortLevel" size="1" name="gosaSpamSortLevel" {$gosaSpamSortLevelACL} title="{t}Choose spam level - smaller values are more sensitive{/t}">
         {html_options values=$spamlevel output=$spamlevel selected=$gosaSpamSortLevel}
    </select>
    <label for="gosaSpamMailbox">{t}to folder{/t}</label>
-   <select size="1" id="gosaSpamMailbox" name="gosaSpamMailbox" {$gosaSpamMailboxACL}>
+   <select size="1" id="gosaSpamMailbox" name="gosaSpamMailbox" {$gosaSpamMailboxACL} id="gosaSpamMailbox">
         	{html_options values=$spambox output=$spambox selected=$gosaSpamMailbox}
 			<option disabled>&nbsp;</option>
    </select>
    <br>
-   <input type=checkbox name="use_mailsize_limit" value="1" {$use_mailsize_limit}
+   <input type=checkbox name="use_mailsize_limit" value="1" {$use_mailsize_limit} id="use_mailsize_limit"
 	{$gosaMailMaxSizeACL}> <label for="gosaMailMaxSize">{t}Reject mails bigger than{/t}</label> 
    <input id="gosaMailMaxSize" name="gosaMailMaxSize" size="6" align="middle" maxlength="30" {$gosaMailMaxSizeACL}
 	value="{$gosaMailMaxSize}"> {t}MB{/t}
@@ -145,11 +185,11 @@
 	{$gosaVacationMessageACL}>{$gosaVacationMessage}</textarea>
    <br>
    {if $show_templates eq "true"}
-   <select name="vacation_template">
+   <select name="vacation_template" id="vacation_template">
         	{html_options options=$vacationtemplates selected=$template}
 		<option disabled>&nbsp;</option>
    </select>
-   <input type="submit" value="{t}Import{/t}" name="import_vacation"
+   <input type="submit" value="{t}Import{/t}" name="import_vacation" id="import_vacation"
 	{$gosaVacationMessageACL}>
    {/if}
    <br>
@@ -163,13 +203,13 @@
 			<option disabled>&nbsp;</option>
    </select>
    <br>
-   <input name="forward_address" size=20 align="middle" maxlength=65
+   <input name="forward_address" size=20 align="middle" maxlength=65 id="forward_address"
 	{$gosaMailForwardingAddressACL} value="">
-   <input type="submit" value="{t}Add{/t}" name="add_forwarder"
+   <input type="submit" value="{t}Add{/t}" name="add_forwarder" id="add_forwarder"
 	{$gosaMailForwardingAddressACL}>&nbsp;
-   <input type="submit" value="{t}Add local{/t}" name="add_local_forwarder"
+   <input type="submit" value="{t}Add local{/t}" name="add_local_forwarder" id="add_local_forwarder"
 	{$gosaMailForwardingAddressACL}>&nbsp;
-   <input type="submit" value="{t}Delete{/t}" name="delete_forwarder"
+   <input type="submit" value="{t}Delete{/t}" name="delete_forwarder" id="delete_forwarder"
 	{$gosaMailForwardingAddressACL}>
   </td>
  </tr>
@@ -182,15 +222,8 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding="4" border="0">
  <tr>
   <td>
-   <input type=checkbox name="only_local" value="1" {$only_local} {$only_localACL} title="{t}Select if user can only send and receive inside his own domain{/t}">
+   <input id="only_local" type=checkbox name="only_local" value="1" {$only_local} {$only_localACL} title="{t}Select if user can only send and receive inside his own domain{/t}">
    {t}User is only allowed to send and receive local mails{/t}
-  </td>
-  <td style="border-left:1px solid #A0A0A0">
-   &nbsp;
-  </td>
-  <td>
-   <input type=checkbox name="own_script" value="1" {$own_script} {$custom_sieveACL}>
-   {t}Use custom sieve script{/t} <b>({t}disables all Mail options!{/t})</b>
   </td>
  </tr>
 </table>
@@ -199,6 +232,32 @@
 
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
+
+ {literal}
+    function changeStates()
+    {
+
+        if(document.getElementById('use_vacation').checked){
+            changeState('day');
+            changeState('month');
+            changeState('year');
+            changeState('sday');
+            changeState('smonth');
+            changeState('syear');
+        }else{
+            changeSubselectState('use_vacation','day');
+            changeSubselectState('use_vacation','month');
+            changeSubselectState('use_vacation','year');
+            changeSubselectState('use_vacation','sday');
+            changeSubselectState('use_vacation','smonth');
+            changeSubselectState('use_vacation','syear');
+        }
+    }
+
+    {/literal}
+
+
+
   <!-- // First input field on page
   document.mainform.mail.focus();
   -->
