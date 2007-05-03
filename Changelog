@@ -4,6 +4,7 @@ GOsa2 changelog
 * gosa 2.5.11
   - Add workaround for failing is_php4() when using PHP5
     with "zend.ze1_compatibility_mode" set to "On"
+  - Backported new sieve filter editor from trunk
 
 * gosa 2.5.10
   - Included hook to make use of dynamic uid-bases
