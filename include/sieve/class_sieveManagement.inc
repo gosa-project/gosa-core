@@ -54,12 +54,18 @@ class sieveManagement extends plugin
    *  import dialog opened. 
    */
   var $Import_Script = FALSE;
+  var $acl = "";
 
   /* Initialize the class and load all sieve scripts 
    *  try to parse them and display errors 
    */ 
   function sieveManagement($config,$dn,$parent,$uattrib)
   {
+    /* Use mail Acls here */    
+    $ui = get_userinfo();
+    $acl= get_permissions ($ui->dn, $ui->subtreeACL);
+    $this->acl= get_module_permission($acl, "mailAccount", $ui->dn);
+
     /* Check given parameter */
     if(!isset($parent->$uattrib)){
       trigger_error("Sieve Management implementation error. Parameter 4 must be part of the given parent element.");
@@ -280,7 +286,7 @@ class sieveManagement extends plugin
       }
 
       /* remove script requested */
-      if(chkacl($this->parent->acl,"sieveManagement") == "" && preg_match("/^delscript_/",$name) && $once && !$this->current_handler){
+      if(chkacl($this->acl,"sieveManagement") == "" && preg_match("/^delscript_/",$name) && $once && !$this->current_handler){
         $script = preg_replace("/^delscript_/","",$name);
         $script = preg_replace("/_(x|y)/","",$script);
         $once = FALSE;
@@ -288,7 +294,7 @@ class sieveManagement extends plugin
       }
 
       /* Activate script */
-      if(chkacl($this->parent->acl,"sieveManagement") == "" && preg_match("/^active_script_/",$name) && $once && !$this->current_handler){
+      if(chkacl($this->acl,"sieveManagement") == "" && preg_match("/^active_script_/",$name) && $once && !$this->current_handler){
         $script = preg_replace("/^active_script_/","",$name);
         $script = preg_replace("/_(x|y)/","",$script);
         $once = FALSE;
@@ -333,7 +339,7 @@ class sieveManagement extends plugin
     }
 
     /* Remove confirmed */
-    if(chkacl($this->parent->acl,"sieveManagement") == "" && isset($_POST['delete_script_confirm'])){
+    if(chkacl($this->acl,"sieveManagement") == "" && isset($_POST['delete_script_confirm'])){
 
       $script = $this->scripts[$this->script_to_delete];
 
@@ -382,7 +388,7 @@ class sieveManagement extends plugin
     }
 
     /* Save currently edited sieve script. */
-    if(chkacl($this->parent->acl,"sieveManagement") == "" && 
+    if(chkacl($this->acl,"sieveManagement") == "" && 
        isset($_POST['save_sieve_changes']) && 
        is_object($this->current_handler)){
       $chk = $this->current_handler->check();
@@ -646,14 +652,14 @@ class sieveManagement extends plugin
       $field3 = array("string" => $script['MSG']);
       $field4 = array("string" => _("Script length").":&nbsp;".strlen($script['SCRIPT']));
 
-      if(chkacl($this->parent->acl,"sieveManagement") == ""){
+      if(chkacl($this->acl,"sieveManagement") == ""){
         $del = "<input type='image' name='delscript_".$key."' src='images/edittrash.png'
                   title='"._("Remove script")."'>";
       }else{
         $del = "<img src='images/empty' alt=' '>";
       }
 
-      if($active || $script['IS_NEW'] || chkacl($this->parent->acl,"sieveManagement") != ""){
+      if($active || $script['IS_NEW'] || chkacl($this->acl,"sieveManagement") != ""){
         $activate = "<img src='images/empty' alt=' '>";
       }else{
         $activate = "<input type='image' name='active_script_".$key."' src='images/true.png'
