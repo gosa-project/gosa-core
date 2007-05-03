@@ -715,7 +715,8 @@ class sieveManagement extends plugin
       }
       return(FALSE);
     }
-    if(!is_object($this->current_handler) || get_class($this->current_handler) != "My_Parser"){
+  
+    if(!is_object($this->current_handler) || !preg_match("/My_Parser/i",get_class($this->current_handler))){
       trigger_error("Can't add new element, there is no valid script editor opened.");
       return(FALSE);
     }
