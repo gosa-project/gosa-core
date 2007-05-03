@@ -255,6 +255,7 @@ $ACLD['mailAccount']=       array(
 			"gosaSpamMailbox",
 			"gosaSpamSortLevel",
 			"gosaVacationMessage",
+			"sieveManagement",
                         "drop_own_mails",
 			"mail",
 			"only_local");
