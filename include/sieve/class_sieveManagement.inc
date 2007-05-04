@@ -807,6 +807,13 @@ class sieveManagement extends plugin
       $ele[] = new $this->add_element_type(NULL, preg_replace("/[^0-9]/","",microtime()),$parent);
     }
 
+    /* PHP 4 automatic requirement add */
+    if(isset($_SESSION['add_require']) && count($_SESSION['add_require'])){
+      foreach($_SESSION['add_require'] as $reg){
+        $this->current_handler->tree_->add_require($reg,true);
+      }
+    }
+
     /* Get index of the element identified by object_id == $id; 
      */
     $index = -1;
