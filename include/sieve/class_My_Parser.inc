@@ -1,7 +1,5 @@
 <?php
 
-require_once('libsieve.inc');
-
 /* String used to indent the different code blocks */
 define("SIEVE_INDENT_TAB","  ");
 
