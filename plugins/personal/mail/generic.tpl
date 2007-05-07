@@ -108,10 +108,10 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4 border=0>
  <tr style="padding-bottom:0px;">
   <td style="width:50%">
-   <input type=checkbox name="drop_own_mails" value="1" {$drop_own_mails} id="drop_own_mails"
+   <input {if $own_script != ""} disabled {/if} type=checkbox name="drop_own_mails" value="1" {$drop_own_mails} id="drop_own_mails"
 	{$drop_own_mailsACL} title="{t}Select if you want to forward mails without getting own copies of them{/t}"> {t}No delivery to own mailbox{/t}
    <br>
-   <input type=checkbox name="use_vacation" value="1" {$use_vacation} id="use_vacation"
+   <input type=checkbox {if $own_script != ""} disabled {/if} name="use_vacation" value="1" {$use_vacation} id="use_vacation"
 	{$gosaVacationMessageACL} title="{t}Select to automatically response with the vacation message defined below{/t}"  onclick="changeState('day'); changeState('month'); changeState('year'); changeState('sday'); changeState('smonth'); changeState('syear');"> {t}Activate vacation message{/t}
    <br>
    <div style="padding-left:22px;">
@@ -121,13 +121,13 @@
 	{t}from{/t}
           </td>
           <td>
-	<select name=day id="day" onChange="createResult(this.form,this.form.gosaVacationStart);" {$gosaVacationMessageACL} {$rangeEnabled}>
+	<select {if $own_script != ""} disabled {/if} name=day id="day" onChange="createResult(this.form,this.form.gosaVacationStart);" {$gosaVacationMessageACL} {$rangeEnabled}>
 		{html_options values=$days output=$days selected=$start_day}
 	</select>
-	<select name=month id="month" onChange="populate(this.form,this.form.gosaVacationStart);" {$gosaVacationMessageACL} {$rangeEnabled}>
+	<select {if $own_script != ""} disabled {/if} name=month id="month" onChange="populate(this.form,this.form.gosaVacationStart);" {$gosaVacationMessageACL} {$rangeEnabled}>
 		{html_options options=$months selected=$start_month}
 	</select>
-	<select name=year id="year" onChange="populate(this.form,this.form.gosaVacationStart);" {$gosaVacationMessageACL} {$rangeEnabled}>
+	<select {if $own_script != ""} disabled {/if} name=year id="year" onChange="populate(this.form,this.form.gosaVacationStart);" {$gosaVacationMessageACL} {$rangeEnabled}>
 		{html_options values=$years output=$years selected=$start_year}
 	</select>
 	<input type="hidden" name="gosaVacationStart" value="{$gosaVacationStart}">
@@ -138,13 +138,13 @@
 	{t}till{/t}
           </td>
           <td>
-	<select name=sday id="sday" onChange="createResult2(this.form,this.form.gosaVacationStop);" {$gosaVacationMessageACL} {$rangeEnabled}>
+	<select {if $own_script != ""} disabled {/if} name=sday id="sday" onChange="createResult2(this.form,this.form.gosaVacationStop);" {$gosaVacationMessageACL} {$rangeEnabled}>
 		{html_options values=$days output=$days selected=$end_day}
 	</select>
-	<select name=smonth id="smonth" onChange="populate2(this.form,this.form.gosaVacationStop);" {$gosaVacationMessageACL} {$rangeEnabled}>
+	<select {if $own_script != ""} disabled {/if} name=smonth id="smonth" onChange="populate2(this.form,this.form.gosaVacationStop);" {$gosaVacationMessageACL} {$rangeEnabled}>
 		{html_options options=$months selected=$end_month}
 	</select>
-	<select name=syear id="syear" onChange="populate2(this.form,this.form.gosaVacationStop);" {$gosaVacationMessageACL} {$rangeEnabled}>
+	<select {if $own_script != ""} disabled {/if} name=syear id="syear" onChange="populate2(this.form,this.form.gosaVacationStop);" {$gosaVacationMessageACL} {$rangeEnabled}>
 		{html_options values=$years output=$years selected=$end_year}
 	</select>
 	<input type="hidden" name="gosaVacationStop" value="{$gosaVacationStop}">
@@ -158,21 +158,21 @@
    &nbsp;
   </td>
   <td style="vertical-align:top;">
-   <input type=checkbox name="use_spam_filter" value="1" {$use_spam_filter} id="use_spam_filter"
+   <input type=checkbox {if $own_script != ""} disabled {/if} name="use_spam_filter" value="1" {$use_spam_filter} id="use_spam_filter"
 	{$gosaSpamSortLevelACL} title="{t}Select if you want to filter this mails through spamassassin{/t}"> <label for="gosaSpamSortLevel">{t}Move mails tagged with spam level greater than{/t}</label>
 	
-   <select id="gosaSpamSortLevel" size="1" name="gosaSpamSortLevel" {$gosaSpamSortLevelACL} title="{t}Choose spam level - smaller values are more sensitive{/t}">
+   <select id="gosaSpamSortLevel" size="1" {if $own_script != ""} disabled {/if} name="gosaSpamSortLevel" {$gosaSpamSortLevelACL} title="{t}Choose spam level - smaller values are more sensitive{/t}">
         {html_options values=$spamlevel output=$spamlevel selected=$gosaSpamSortLevel}
    </select>
    <label for="gosaSpamMailbox">{t}to folder{/t}</label>
-   <select size="1" id="gosaSpamMailbox" name="gosaSpamMailbox" {$gosaSpamMailboxACL} id="gosaSpamMailbox">
+   <select size="1" id="gosaSpamMailbox" {if $own_script != ""} disabled {/if} name="gosaSpamMailbox" {$gosaSpamMailboxACL} id="gosaSpamMailbox">
         	{html_options values=$spambox output=$spambox selected=$gosaSpamMailbox}
 			<option disabled>&nbsp;</option>
    </select>
    <br>
-   <input type=checkbox name="use_mailsize_limit" value="1" {$use_mailsize_limit} id="use_mailsize_limit"
+   <input type=checkbox {if $own_script != ""} disabled {/if} name="use_mailsize_limit" value="1" {$use_mailsize_limit} id="use_mailsize_limit"
 	{$gosaMailMaxSizeACL}> <label for="gosaMailMaxSize">{t}Reject mails bigger than{/t}</label> 
-   <input id="gosaMailMaxSize" name="gosaMailMaxSize" size="6" align="middle" maxlength="30" {$gosaMailMaxSizeACL}
+   <input id="gosaMailMaxSize" {if $own_script != ""} disabled {/if} name="gosaMailMaxSize" size="6" align="middle" maxlength="30" {$gosaMailMaxSizeACL}
 	value="{$gosaMailMaxSize}"> {t}MB{/t}
   </td>
  </tr>
@@ -181,16 +181,16 @@
    <p style="margin-bottom:0px;">
     <b><label for="gosaVacationMessage">{t}Vacation message{/t}</label></b>
    </p>
-   <textarea id="gosaVacationMessage" style="width:99%; height:100px;" name="gosaVacationMessage" rows="4" cols="512"
+   <textarea id="gosaVacationMessage" style="width:99%; height:100px;" {if $own_script != ""} disabled {/if} name="gosaVacationMessage" rows="4" cols="512"
 	{$gosaVacationMessageACL}>{$gosaVacationMessage}</textarea>
    <br>
    {if $show_templates eq "true"}
-   <select name="vacation_template" id="vacation_template">
+   <select name="vacation_template" id="vacation_template" {if $own_script != ""} disabled {/if} >
         	{html_options options=$vacationtemplates selected=$template}
 		<option disabled>&nbsp;</option>
    </select>
    <input type="submit" value="{t}Import{/t}" name="import_vacation" id="import_vacation"
-	{$gosaVacationMessageACL}>
+	{$gosaVacationMessageACL} {if $own_script != ""} disabled {/if} >
    {/if}
    <br>
   </td>
@@ -222,7 +222,7 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding="4" border="0">
  <tr>
   <td>
-   <input id="only_local" type=checkbox name="only_local" value="1" {$only_local} {$only_localACL} title="{t}Select if user can only send and receive inside his own domain{/t}">
+   <input id="only_local" type=checkbox {if $own_script != ""} disabled {/if} name="only_local" value="1" {$only_local} {$only_localACL} title="{t}Select if user can only send and receive inside his own domain{/t}">
    {t}User is only allowed to send and receive local mails{/t}
   </td>
  </tr>
