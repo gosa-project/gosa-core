@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-11 10:04+0200\n"
+"POT-Creation-Date: 2007-05-08 09:22+0200\n"
 "PO-Revision-Date: 2006-12-14 00:25+0100\n"
 "Last-Translator: Roberto Franchi <roberto.franchi@training-team.it>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,6 +54,7 @@ msgstr "Moduli aggiuntivi"
 #: plugins/admin/fai/faiPartitionTableEntry.tpl:2
 #: plugins/admin/fai/faiPackage.tpl:4 plugins/admin/fai/faiVariableEntry.tpl:5
 #: plugins/admin/groups/mail.tpl:7 plugins/admin/ogroups/termgroup.tpl:6
+#: setup/setup_feedback.tpl:44
 msgid "Generic"
 msgstr "Generico"
 
@@ -158,7 +159,7 @@ msgstr "Liste controllo accessi (ACL)"
 msgid "Options"
 msgstr "Opzioni"
 
-#: contrib/gosa.conf:111 plugins/gofon/phoneaccount/class_phoneAccount.inc:866
+#: contrib/gosa.conf:111 plugins/gofon/phoneaccount/class_phoneAccount.inc:870
 msgid "Parameter"
 msgstr "Parametri"
 
@@ -195,7 +196,7 @@ msgstr "Stampanti"
 #: plugins/admin/systems/glpiAttachmentPool.tpl:20
 #: plugins/admin/systems/glpiPrinterCartridges.tpl:20
 #: plugins/admin/fai/faiPackageEntry.tpl:22
-#: plugins/admin/fai/faiProfileEntry.tpl:21
+#: plugins/admin/fai/faiProfileEntry.tpl:21 setup/setup_ldap.tpl:120
 msgid "Information"
 msgstr "Informazione"
 
@@ -227,6 +228,7 @@ msgstr "OpenGroupware (OGo)"
 #: plugins/addons/ldapmanager/contentexportxls.tpl:19
 #: plugins/addons/ldapmanager/contentexportxls.tpl:32
 #: plugins/addons/ldapmanager/contentexportxls.tpl:47
+#: include/sieve/templates/edit_frame_base.tpl:6
 msgid "Export"
 msgstr "Esporta"
 
@@ -235,11 +237,13 @@ msgid "Excel Export"
 msgstr "Esporta formato Excel"
 
 #: contrib/gosa.conf:201 plugins/personal/environment/logonManagement.tpl:65
-#: plugins/personal/mail/generic.tpl:152
+#: plugins/personal/mail/generic.tpl:192
 #: plugins/addons/ldapmanager/contentimport.tpl:49
 #: plugins/addons/ldapmanager/contentcsv.tpl:109
 #: plugins/addons/ldapmanager/contentcsv.tpl:112
 #: plugins/admin/applications/generic.tpl:101
+#: include/sieve/templates/edit_frame_base.tpl:7
+#: include/sieve/templates/import_script.tpl:12
 msgid "Import"
 msgstr "Importa"
 
@@ -288,10 +292,11 @@ msgid "{LOCATIONNAME}"
 msgstr "{LOCATIONNAME}"
 
 #: contrib/gosa.conf:272 plugins/admin/ogroups/class_phonequeue.inc:262
+#: setup/class_setupStep_Language.inc:48
 msgid "German"
 msgstr "Tedesco"
 
-#: contrib/gosa.conf:273
+#: contrib/gosa.conf:273 setup/class_setupStep_Language.inc:51
 msgid "Russian"
 msgstr "Russo"
 
@@ -299,7 +304,7 @@ msgstr "Russo"
 msgid "Spanish"
 msgstr "Spagnolo"
 
-#: contrib/gosa.conf:275
+#: contrib/gosa.conf:275 setup/class_setupStep_Language.inc:49
 msgid "French"
 msgstr "Francese"
 
@@ -307,7 +312,7 @@ msgstr "Francese"
 msgid "Dutch"
 msgstr "Olandese"
 
-#: contrib/gosa.conf:277
+#: contrib/gosa.conf:277 setup/class_setupStep_Language.inc:50
 msgid "English"
 msgstr "Inglese"
 
@@ -355,6 +360,8 @@ msgstr ""
 #: plugins/admin/departments/class_departmentGeneric.inc:431
 #: plugins/admin/departments/class_departmentGeneric.inc:523
 #: plugins/admin/users/template.tpl:48
+#: include/sieve/templates/add_element.tpl:11
+#: include/sieve/templates/select_test_type.tpl:11 setup/class_setup.inc:280
 msgid "Continue"
 msgstr "Continua"
 
@@ -394,7 +401,7 @@ msgstr ""
 "gosa.conf e mettetelo in /etc/gosa. Cambiatelo in seguito se necessario."
 
 #: ihtml/themes/altlinux/setup_finish.tpl:17
-#: ihtml/themes/default/setup_finish.tpl:17
+#: ihtml/themes/default/setup_finish.tpl:17 setup/setup_finish.tpl:13
 msgid "Download configuration"
 msgstr "Download della configurazione"
 
@@ -431,6 +438,7 @@ msgstr ""
 #: plugins/admin/systems/class_systemManagement.inc:243
 #: plugins/admin/fai/faiNewBranch.tpl:52
 #: plugins/admin/departments/dep_iframe.tpl:19 include/functions.inc:1529
+#: setup/class_setup.inc:275 setup/class_setup.inc:277
 msgid "Back"
 msgstr "Indietro"
 
@@ -532,7 +540,7 @@ msgstr "Conflitto di LOCK individuato"
 
 #: ihtml/themes/altlinux/islocked.tpl:6 ihtml/themes/altlinux/conflict.tpl:6
 #: ihtml/themes/default/islocked.tpl:6 ihtml/themes/default/conflict.tpl:6
-#: html/index.php:49 html/index.php:337 html/index.php:343
+#: html/index.php:49 html/index.php:342 html/index.php:348
 #: plugins/gofax/blocklists/remove.tpl:2 plugins/gofon/macro/remove.tpl:2
 #: plugins/gofon/conference/remove.tpl:2
 #: plugins/addons/addressbook/remove.tpl:2
@@ -542,6 +550,11 @@ msgstr "Conflitto di LOCK individuato"
 #: plugins/admin/fai/remove_branch.tpl:2 plugins/admin/groups/remove.tpl:2
 #: plugins/admin/ogroups/termgroup.tpl:2 plugins/admin/ogroups/remove.tpl:2
 #: plugins/admin/departments/remove.tpl:2 plugins/admin/users/remove.tpl:2
+#: include/sieve/templates/remove_script.tpl:2 setup/setup_checks.tpl:32
+#: setup/setup_checks.tpl:93 setup/class_setupStep_Migrate.inc:212
+#: setup/class_setupStep_Migrate.inc:261 setup/class_setupStep_Migrate.inc:365
+#: setup/class_setupStep_Migrate.inc:411 setup/class_setupStep_Migrate.inc:546
+#: setup/class_setupStep_Migrate.inc:676
 msgid "Warning"
 msgstr "Attenzione"
 
@@ -573,7 +586,7 @@ msgstr ""
 #: plugins/admin/applications/class_applicationParameters.inc:108
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:274
 #: plugins/admin/fai/faiPackage.tpl:72
-#: plugins/admin/groups/class_groupMail.inc:571
+#: plugins/admin/groups/class_groupMail.inc:572
 msgid "Remove"
 msgstr "Rimuovi"
 
@@ -662,6 +675,16 @@ msgstr "Rimuovi"
 #: plugins/admin/departments/remove.tpl:16 plugins/admin/users/password.tpl:23
 #: plugins/admin/users/class_userManagement.inc:649
 #: plugins/admin/users/remove.tpl:16 plugins/admin/users/template.tpl:50
+#: include/sieve/templates/edit_frame_base.tpl:41
+#: include/sieve/templates/import_script.tpl:14
+#: include/sieve/templates/management.tpl:26
+#: include/sieve/templates/select_test_type.tpl:13
+#: include/sieve/templates/create_script.tpl:15
+#: include/sieve/templates/remove_script.tpl:16
+#: include/sieve/templates/element_comment.tpl:10 setup/setup_migrate.tpl:131
+#: setup/setup_migrate.tpl:179 setup/setup_migrate.tpl:267
+#: setup/setup_migrate.tpl:322 setup/setup_migrate.tpl:376
+#: setup/setup_ldap.tpl:17
 msgid "Cancel"
 msgstr "Cancella"
 
@@ -722,7 +745,7 @@ msgstr ""
 #: ihtml/themes/altlinux/setup_useradmin.tpl:22
 #: ihtml/themes/altlinux/login.tpl:26 ihtml/themes/altlinux/login.tpl:30
 #: ihtml/themes/default/setup_useradmin.tpl:22
-#: ihtml/themes/default/login.tpl:28 ihtml/themes/default/login.tpl:32
+#: ihtml/themes/default/login.tpl:26 ihtml/themes/default/login.tpl:30
 #: plugins/admin/users/class_divListUsers.inc:50
 msgid "Username"
 msgstr "Username"
@@ -730,13 +753,15 @@ msgstr "Username"
 #: ihtml/themes/altlinux/setup_useradmin.tpl:30
 #: ihtml/themes/altlinux/login.tpl:35 ihtml/themes/altlinux/login.tpl:39
 #: ihtml/themes/default/setup_useradmin.tpl:30
-#: ihtml/themes/default/login.tpl:37 ihtml/themes/default/login.tpl:41
+#: ihtml/themes/default/login.tpl:35 ihtml/themes/default/login.tpl:39
 #: plugins/personal/password/class_password.inc:5
 #: plugins/personal/generic/paste_generic.tpl:20
 #: plugins/admin/systems/servdb.tpl:18 plugins/admin/systems/servdb.tpl:34
 #: plugins/admin/systems/servdb.tpl:50 plugins/admin/systems/servdb.tpl:86
 #: plugins/admin/systems/servdb.tpl:109 plugins/admin/systems/servdb.tpl:128
 #: plugins/admin/systems/class_divListSystem.inc:178
+#: setup/setup_migrate.tpl:218 setup/setup_config2.tpl:181
+#: setup/setup_config2.tpl:226
 msgid "Password"
 msgstr "Password"
 
@@ -756,7 +781,7 @@ msgid "Enter a description for the location you're configuring here"
 msgstr "Inserite una descrizione per la Lacalità che state qui congifurando"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:11
-#: ihtml/themes/default/setup_step4.tpl:11
+#: ihtml/themes/default/setup_step4.tpl:11 setup/setup_ldap.tpl:29
 msgid "Location name"
 msgstr "Nome della Località (location)"
 
@@ -773,17 +798,17 @@ msgstr ""
 "necessario l'amministratore DN e la corrispondente password."
 
 #: ihtml/themes/altlinux/setup_step4.tpl:23
-#: ihtml/themes/default/setup_step4.tpl:23
+#: ihtml/themes/default/setup_step4.tpl:23 setup/setup_ldap.tpl:73
 msgid "Admin DN"
 msgstr "Amministratore DN"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:27
-#: ihtml/themes/default/setup_step4.tpl:27
+#: ihtml/themes/default/setup_step4.tpl:27 setup/setup_ldap.tpl:92
 msgid "Admin password"
 msgstr "Password dell'amministratore"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:34
-#: ihtml/themes/default/setup_step4.tpl:34
+#: ihtml/themes/default/setup_step4.tpl:34 setup/setup_config1.tpl:211
 msgid ""
 "Some basic LDAP parameters are tunable and affect the locations where GOsa "
 "saves people and groups, including the way accounts get created. Check the "
@@ -801,6 +826,7 @@ msgstr "Base"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:43
 #: ihtml/themes/default/setup_step4.tpl:43
+#: setup/class_setupStep_Config1.inc:121
 msgid "People storage ou"
 msgstr "Persone - archivio unità organizzativa (OU)"
 
@@ -811,6 +837,7 @@ msgstr "Persone - attributo dn (dn)"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:55
 #: ihtml/themes/default/setup_step4.tpl:55
+#: setup/class_setupStep_Config1.inc:125
 msgid "Group storage ou"
 msgstr "Gruppi - archivio unità organizzativa (OU)"
 
@@ -820,7 +847,7 @@ msgid "ID base for users/groups"
 msgstr "ID base per utenti e gruppi"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:67
-#: ihtml/themes/default/setup_step4.tpl:67
+#: ihtml/themes/default/setup_step4.tpl:67 setup/setup_config1.tpl:209
 msgid ""
 "GOsa supports several encryption types for your passwords. Normally this is "
 "adjustable via user templates, but you can specify a default method to be "
@@ -848,7 +875,7 @@ msgstr ""
 "plugin adatto per lasciare invariati i settaggi effettuati. ?????"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:88
-#: ihtml/themes/default/setup_step4.tpl:88
+#: ihtml/themes/default/setup_step4.tpl:88 setup/setup_config2.tpl:99
 msgid "Mail method"
 msgstr "Metodo di posta"
 
@@ -857,6 +884,7 @@ msgstr "Metodo di posta"
 #: plugins/personal/posix/class_posixAccount.inc:559
 #: plugins/personal/samba/class_sambaAccount.inc:491
 #: plugins/admin/systems/class_terminalGeneric.inc:99
+#: setup/setup_config2.tpl:103
 msgid "disabled"
 msgstr "Disabilitato"
 
@@ -925,15 +953,15 @@ msgstr ""
 "accedere"
 
 #: ihtml/themes/altlinux/login.tpl:44 ihtml/themes/altlinux/login.tpl:47
-#: ihtml/themes/default/login.tpl:46 ihtml/themes/default/login.tpl:49
+#: ihtml/themes/default/login.tpl:44 ihtml/themes/default/login.tpl:47
 msgid "Directory"
 msgstr "Directory"
 
-#: ihtml/themes/altlinux/login.tpl:55 ihtml/themes/default/login.tpl:57
+#: ihtml/themes/altlinux/login.tpl:55 ihtml/themes/default/login.tpl:55
 msgid "Sign in"
 msgstr "Autenticazione"
 
-#: ihtml/themes/altlinux/login.tpl:56 ihtml/themes/default/login.tpl:58
+#: ihtml/themes/altlinux/login.tpl:56 ihtml/themes/default/login.tpl:56
 msgid "Click here to log in"
 msgstr "Cliccare quì per autenticarsi"
 
@@ -1007,7 +1035,7 @@ msgstr "Indice"
 #: plugins/gofon/fonreports/contents.tpl:21
 #: plugins/addons/mailqueue/contents.tpl:10
 #: plugins/addons/mailqueue/contents.tpl:26
-#: plugins/addons/logview/contents.tpl:67
+#: plugins/addons/logview/contents.tpl:67 setup/setup_ldap.tpl:13
 msgid "Search"
 msgstr "Cerca"
 
@@ -1093,6 +1121,8 @@ msgstr ""
 #: plugins/admin/departments/class_departmentManagement.inc:297
 #: plugins/admin/users/class_userManagement.inc:647
 #: include/class_MultiSelectWindow.inc:78
+#: include/sieve/templates/edit_frame_base.tpl:39
+#: include/sieve/templates/management.tpl:24
 msgid "Save"
 msgstr "Salva"
 
@@ -1103,6 +1133,7 @@ msgstr "Operazione completata"
 #: ihtml/themes/default/copyPasteDialog.tpl:24
 #: plugins/personal/netatalk/main.inc:104
 #: plugins/addons/godfs/class_dfsManagment.inc:247
+#: setup/class_setupStep_Finish.inc:37
 msgid "Finish"
 msgstr "Completa"
 
@@ -1245,6 +1276,7 @@ msgstr "Lista degli utenti di %s su %s"
 #: html/getxls.php:80 html/getxls.php:108 html/getxls.php:123
 #: html/getxls.php:282 html/getxls.php:299
 #: plugins/addons/addressbook/class_addressbook.inc:524
+#: setup/setup_migrate.tpl:210
 msgid "User ID"
 msgstr "Utente ID"
 
@@ -1348,7 +1380,8 @@ msgstr "Nome mostrato (display name)"
 #: plugins/admin/fai/faiPackage.tpl:9
 #: plugins/admin/fai/class_faiSummaryTab.inc:329
 #: plugins/admin/fai/paste_fai_object.tpl:1
-#: plugins/admin/fai/faiVariableEntry.tpl:9
+#: plugins/admin/fai/faiVariableEntry.tpl:9 setup/setup_migrate.tpl:202
+#: setup/setup_feedback.tpl:20
 msgid "Name"
 msgstr "Nome"
 
@@ -1375,7 +1408,7 @@ msgid "Location"
 msgstr "Lacalizzazione"
 
 #: html/getxls.php:174 plugins/personal/nagios/nagios.tpl:12
-#: plugins/admin/systems/servdnseditzone.tpl:51
+#: plugins/admin/systems/servdnseditzone.tpl:51 setup/setup_feedback.tpl:28
 msgid "Mail address"
 msgstr "Indirizzo e-mail"
 
@@ -1416,6 +1449,9 @@ msgstr "Numero di telefono"
 #: plugins/addons/addressbook/address_info.tpl:82
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:21
 #: plugins/admin/departments/generic.tpl:59
+#: include/sieve/class_sieveManagement.inc:602
+#: include/sieve/templates/element_address.tpl:15
+#: include/sieve/templates/element_address.tpl:113
 msgid "Address"
 msgstr "Indirizzo"
 
@@ -1469,6 +1505,7 @@ msgid "Mobile"
 msgstr "Telefono cellulare"
 
 #: html/getxls.php:236 plugins/personal/generic/generic.tpl:213
+#: setup/setup_feedback.tpl:12
 msgid "Organization"
 msgstr "Organizzazione"
 
@@ -1537,11 +1574,11 @@ msgstr "Non posso selezionare il database!"
 msgid "Database query failed!"
 msgstr "La query di interrogazione del database è fallita!"
 
-#: html/index.php:49 html/index.php:337
+#: html/index.php:49 html/index.php:342
 msgid "Session will not be encrypted."
 msgstr "La sessione non è criptata."
 
-#: html/index.php:49 html/index.php:337
+#: html/index.php:49 html/index.php:342
 msgid "Enter SSL session"
 msgstr "Entra in una sessione SSL"
 
@@ -1589,11 +1626,11 @@ msgstr "Per favore specificate la vostra password!"
 msgid "Please check the username/password combination."
 msgstr "Per favore controllate la combinazione utente/password."
 
-#: html/index.php:291
+#: html/index.php:296
 msgid "Account locked. Please contact your system administrator."
 msgstr "Utente bloccato. Per favore contattate l'amministratore del sistema."
 
-#: html/index.php:343
+#: html/index.php:348
 msgid ""
 "Your browser has cookies disabled. Please enable cookies and reload this "
 "page before logging in!"
@@ -1625,7 +1662,7 @@ msgid "Can't get specified attachment file, there is no entry with this id."
 msgstr ""
 "Non posso caricare il file allegato, non c'è nessun 'entry' con questo 'id'."
 
-#: html/get_attachment.php:69
+#: html/get_attachment.php:69 include/sieve/class_sieveManagement.inc:446
 #, php-format
 msgid "Can't open file '%s'."
 msgstr "Non posso aprire il file '%s'."
@@ -1821,6 +1858,7 @@ msgstr ""
 #: plugins/admin/systems/glpi.tpl:56 plugins/admin/systems/glpi.tpl:85
 #: plugins/admin/fai/faiVariable.tpl:45
 #: plugins/admin/fai/faiPartitionTable.tpl:44
+#: include/sieve/templates/element_comment.tpl:8
 msgid "Edit"
 msgstr "Modifica"
 
@@ -1891,7 +1929,7 @@ msgstr "(Attenzione: NFS non supporta più di 16 gruppi!)"
 #: plugins/personal/environment/environment.tpl:136
 #: plugins/personal/environment/environment.tpl:180
 #: plugins/personal/environment/hotplugDialog.tpl:63
-#: plugins/personal/mail/generic.tpl:57 plugins/personal/mail/generic.tpl:168
+#: plugins/personal/mail/generic.tpl:57 plugins/personal/mail/generic.tpl:208
 #: plugins/personal/mail/copypaste.tpl:43
 #: plugins/personal/mail/copypaste.tpl:61
 #: plugins/personal/mail/mail_locals.tpl:75
@@ -1943,7 +1981,7 @@ msgstr "(Attenzione: NFS non supporta più di 16 gruppi!)"
 #: plugins/admin/groups/application.tpl:27
 #: plugins/admin/groups/paste_mail.tpl:30
 #: plugins/admin/groups/paste_mail.tpl:41
-#: plugins/admin/groups/class_groupMail.inc:567
+#: plugins/admin/groups/class_groupMail.inc:568
 #: plugins/admin/ogroups/termgroup.tpl:23 plugins/admin/ogroups/generic.tpl:43
 #: plugins/admin/ogroups/phonequeue.tpl:28
 #: plugins/admin/ogroups/ogroup_objects.tpl:54
@@ -1957,7 +1995,7 @@ msgstr "Aggiungi"
 #: plugins/personal/environment/environment.tpl:137
 #: plugins/personal/environment/environment.tpl:165
 #: plugins/personal/environment/environment.tpl:181
-#: plugins/personal/mail/generic.tpl:59 plugins/personal/mail/generic.tpl:172
+#: plugins/personal/mail/generic.tpl:59 plugins/personal/mail/generic.tpl:212
 #: plugins/personal/mail/copypaste.tpl:45
 #: plugins/personal/mail/copypaste.tpl:62
 #: plugins/personal/connectivity/kolab.tpl:35
@@ -2001,6 +2039,7 @@ msgstr "Aggiungi"
 #: plugins/admin/ogroups/termgroup.tpl:25 plugins/admin/ogroups/generic.tpl:44
 #: plugins/admin/ogroups/phonequeue.tpl:29 plugins/admin/ogroups/remove.tpl:14
 #: plugins/admin/departments/remove.tpl:14 plugins/admin/users/remove.tpl:14
+#: include/sieve/templates/remove_script.tpl:14
 msgid "Delete"
 msgstr "cancella"
 
@@ -2085,7 +2124,7 @@ msgid "unconfigured"
 msgstr "Non configurato"
 
 #: plugins/personal/posix/class_posixAccount.inc:200
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:244
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:248
 #: plugins/admin/systems/class_workstationService.inc:177
 #: plugins/admin/systems/class_terminalService.inc:190
 #: plugins/admin/systems/class_workstationStartup.inc:827
@@ -2154,7 +2193,7 @@ msgstr ""
 "Informazione per l'utente %s giorni prima della scadenza della password"
 
 #: plugins/personal/posix/class_posixAccount.inc:476
-#: plugins/personal/mail/class_mailAccount.inc:527
+#: plugins/personal/mail/class_mailAccount.inc:559
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/samba/class_sambaAccount.inc:429
@@ -2164,7 +2203,7 @@ msgid "January"
 msgstr "gennaio"
 
 #: plugins/personal/posix/class_posixAccount.inc:476
-#: plugins/personal/mail/class_mailAccount.inc:527
+#: plugins/personal/mail/class_mailAccount.inc:559
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/samba/class_sambaAccount.inc:429
@@ -2174,7 +2213,7 @@ msgid "February"
 msgstr "febbraio"
 
 #: plugins/personal/posix/class_posixAccount.inc:476
-#: plugins/personal/mail/class_mailAccount.inc:527
+#: plugins/personal/mail/class_mailAccount.inc:559
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/samba/class_sambaAccount.inc:429
@@ -2184,7 +2223,7 @@ msgid "March"
 msgstr "marzo"
 
 #: plugins/personal/posix/class_posixAccount.inc:476
-#: plugins/personal/mail/class_mailAccount.inc:527
+#: plugins/personal/mail/class_mailAccount.inc:559
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/samba/class_sambaAccount.inc:429
@@ -2194,7 +2233,7 @@ msgid "April"
 msgstr "aprile"
 
 #: plugins/personal/posix/class_posixAccount.inc:477
-#: plugins/personal/mail/class_mailAccount.inc:528
+#: plugins/personal/mail/class_mailAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
 #: plugins/personal/samba/class_sambaAccount.inc:430
@@ -2204,7 +2243,7 @@ msgid "May"
 msgstr "maggio"
 
 #: plugins/personal/posix/class_posixAccount.inc:477
-#: plugins/personal/mail/class_mailAccount.inc:528
+#: plugins/personal/mail/class_mailAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
 #: plugins/personal/samba/class_sambaAccount.inc:430
@@ -2214,7 +2253,7 @@ msgid "June"
 msgstr "giugno"
 
 #: plugins/personal/posix/class_posixAccount.inc:477
-#: plugins/personal/mail/class_mailAccount.inc:528
+#: plugins/personal/mail/class_mailAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
 #: plugins/personal/samba/class_sambaAccount.inc:430
@@ -2224,7 +2263,7 @@ msgid "July"
 msgstr "luglio"
 
 #: plugins/personal/posix/class_posixAccount.inc:477
-#: plugins/personal/mail/class_mailAccount.inc:528
+#: plugins/personal/mail/class_mailAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
 #: plugins/personal/samba/class_sambaAccount.inc:430
@@ -2234,7 +2273,7 @@ msgid "August"
 msgstr "agosto"
 
 #: plugins/personal/posix/class_posixAccount.inc:477
-#: plugins/personal/mail/class_mailAccount.inc:528
+#: plugins/personal/mail/class_mailAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
 #: plugins/personal/samba/class_sambaAccount.inc:430
@@ -2244,7 +2283,7 @@ msgid "September"
 msgstr "settembre"
 
 #: plugins/personal/posix/class_posixAccount.inc:478
-#: plugins/personal/mail/class_mailAccount.inc:529
+#: plugins/personal/mail/class_mailAccount.inc:561
 #: plugins/personal/samba/class_sambaAccount.inc:395
 #: plugins/personal/samba/class_sambaAccount.inc:413
 #: plugins/personal/samba/class_sambaAccount.inc:431
@@ -2254,7 +2293,7 @@ msgid "October"
 msgstr "ottobre"
 
 #: plugins/personal/posix/class_posixAccount.inc:478
-#: plugins/personal/mail/class_mailAccount.inc:529
+#: plugins/personal/mail/class_mailAccount.inc:561
 #: plugins/personal/samba/class_sambaAccount.inc:395
 #: plugins/personal/samba/class_sambaAccount.inc:413
 #: plugins/personal/samba/class_sambaAccount.inc:431
@@ -2264,7 +2303,7 @@ msgid "November"
 msgstr "novembre"
 
 #: plugins/personal/posix/class_posixAccount.inc:478
-#: plugins/personal/mail/class_mailAccount.inc:529
+#: plugins/personal/mail/class_mailAccount.inc:561
 #: plugins/personal/samba/class_sambaAccount.inc:395
 #: plugins/personal/samba/class_sambaAccount.inc:413
 #: plugins/personal/samba/class_sambaAccount.inc:431
@@ -2310,12 +2349,12 @@ msgid "Value specified as 'UID' is too small."
 msgstr "Il valore specificato come 'UID' è troppo piccolo."
 
 #: plugins/personal/posix/class_posixAccount.inc:925
-#: plugins/admin/groups/class_groupGeneric.inc:784
+#: plugins/admin/groups/class_groupGeneric.inc:807
 msgid "Value specified as 'GID' is not valid."
 msgstr "Il valore specificato come 'GID' non è valido."
 
 #: plugins/personal/posix/class_posixAccount.inc:928
-#: plugins/admin/groups/class_groupGeneric.inc:787
+#: plugins/admin/groups/class_groupGeneric.inc:810
 msgid "Value specified as 'GID' is too small."
 msgstr "Il valore specificato come 'GID' è troppo piccolo."
 
@@ -2501,6 +2540,10 @@ msgstr "Script di accesso"
 #: plugins/admin/fai/faiVariableEntry.tpl:48
 #: plugins/admin/groups/mail_admins.tpl:37
 #: plugins/admin/groups/application_options.tpl:11
+#: include/sieve/templates/create_script.tpl:13 setup/setup_migrate.tpl:129
+#: setup/setup_migrate.tpl:177 setup/setup_migrate.tpl:262
+#: setup/setup_migrate.tpl:264 setup/setup_migrate.tpl:320
+#: setup/setup_migrate.tpl:374 setup/setup_ldap.tpl:16
 msgid "Apply"
 msgstr "Applica"
 
@@ -2571,7 +2614,7 @@ msgstr "Sfoglia"
 #: plugins/admin/systems/glpi_edit_cartridge_type.tpl:13
 #: plugins/admin/systems/glpi_edit_os.tpl:15
 #: plugins/admin/fai/class_faiSummaryTab.inc:227
-#: include/class_MultiSelectWindow.inc:79
+#: include/class_MultiSelectWindow.inc:79 setup/setup_migrate.tpl:78
 msgid "Close"
 msgstr "Chiudi"
 
@@ -2785,7 +2828,7 @@ msgid "Profil quota"
 msgstr "Profilo quota"
 
 #: plugins/personal/environment/environment.tpl:45
-#: plugins/personal/mail/generic.tpl:136
+#: plugins/personal/mail/generic.tpl:176
 #: plugins/personal/connectivity/class_proxyAccount.inc:90
 #: plugins/personal/connectivity/pureftpd.tpl:44
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:222
@@ -3023,6 +3066,7 @@ msgstr "Indirizzo principale"
 #: plugins/admin/systems/class_systemManagement.inc:870
 #: plugins/admin/groups/mail.tpl:14
 #: plugins/admin/ogroups/class_ogroupManagement.inc:367
+#: setup/setup_config2.tpl:163 setup/setup_config2.tpl:208
 msgid "Server"
 msgstr "Server"
 
@@ -3057,98 +3101,108 @@ msgstr "Indirizzo alternativi"
 msgid "List of alternative mail addresses"
 msgstr "Lista degli indirizzi e-mail alternativi"
 
-#: plugins/personal/mail/generic.tpl:67
+#: plugins/personal/mail/generic.tpl:67 plugins/personal/mail/generic.tpl:107
 msgid "Mail options"
 msgstr "Opzioni Mail"
 
-#: plugins/personal/mail/generic.tpl:72
+#: plugins/personal/mail/generic.tpl:94
+msgid "Use custom sieve script"
+msgstr "Utilizza uno script personalizzato Sieve"
+
+#: plugins/personal/mail/generic.tpl:94
+msgid "disables all Mail options!"
+msgstr "disabilita tutte le opzioni di posta elettronica!"
+
+#: plugins/personal/mail/generic.tpl:99
+#, fuzzy
+msgid "Sieve Management"
+msgstr "Gestione"
+
+#: plugins/personal/mail/generic.tpl:112
 msgid "Select if you want to forward mails without getting own copies of them"
 msgstr ""
 "Selezionate se volete inoltrare le mail senza trattenere copia delle stesse"
 
-#: plugins/personal/mail/generic.tpl:72
+#: plugins/personal/mail/generic.tpl:112
 msgid "No delivery to own mailbox"
 msgstr "Nessuna consegna alla propria casella di posta"
 
-#: plugins/personal/mail/generic.tpl:75
+#: plugins/personal/mail/generic.tpl:115
 msgid ""
 "Select to automatically response with the vacation message defined below"
 msgstr ""
 "Selezionate per avere una risposta automatica in caso di assenza, con il "
 "messaggio specificato sotto"
 
-#: plugins/personal/mail/generic.tpl:75
+#: plugins/personal/mail/generic.tpl:115
 msgid "Activate vacation message"
 msgstr "Attivate la funzione di messaggio automatico per assenza"
 
-#: plugins/personal/mail/generic.tpl:81
+#: plugins/personal/mail/generic.tpl:121
 #, fuzzy
 msgid "from"
 msgstr "formato"
 
-#: plugins/personal/mail/generic.tpl:98
+#: plugins/personal/mail/generic.tpl:138
 msgid "till"
 msgstr ""
 
-#: plugins/personal/mail/generic.tpl:122
+#: plugins/personal/mail/generic.tpl:162
 msgid "Select if you want to filter this mails through spamassassin"
 msgstr "Selezionate se volete filtrare la posta con 'spamassassin'"
 
-#: plugins/personal/mail/generic.tpl:122
+#: plugins/personal/mail/generic.tpl:162
 msgid "Move mails tagged with spam level greater than"
 msgstr "Spostate le e-mail con un livello di 'spam' superiore a"
 
-#: plugins/personal/mail/generic.tpl:124
+#: plugins/personal/mail/generic.tpl:164
 msgid "Choose spam level - smaller values are more sensitive"
 msgstr "Scegliete un livello di spam. I valori più piccoli sono più sensibili"
 
-#: plugins/personal/mail/generic.tpl:127
+#: plugins/personal/mail/generic.tpl:167
 msgid "to folder"
 msgstr "alla cartella"
 
-#: plugins/personal/mail/generic.tpl:134
+#: plugins/personal/mail/generic.tpl:174
 msgid "Reject mails bigger than"
 msgstr "Rifiutate mail di dimensione maggiore a"
 
-#: plugins/personal/mail/generic.tpl:142
+#: plugins/personal/mail/generic.tpl:182
+#: include/sieve/class_sieveManagement.inc:515
+#: include/sieve/class_sieveManagement.inc:735
+#: include/sieve/templates/object_container.tpl:31
+#: include/sieve/templates/element_vacation.tpl:44
 msgid "Vacation message"
 msgstr "Messaggio per assenze"
 
-#: plugins/personal/mail/generic.tpl:159
+#: plugins/personal/mail/generic.tpl:199
 #: plugins/personal/mail/copypaste.tpl:13
 msgid "Forward messages to"
 msgstr "Inoltra messaggi a "
 
-#: plugins/personal/mail/generic.tpl:170
+#: plugins/personal/mail/generic.tpl:210
 #: plugins/personal/mail/copypaste.tpl:44
 #: plugins/gofax/faxaccount/generic.tpl:77 plugins/admin/groups/mail.tpl:96
 #: plugins/admin/groups/paste_mail.tpl:42
 msgid "Add local"
 msgstr "Aggiungi locali"
 
-#: plugins/personal/mail/generic.tpl:180
+#: plugins/personal/mail/generic.tpl:220
 msgid "Advanced mail options"
 msgstr "Opzioni avanzate di posta"
 
-#: plugins/personal/mail/generic.tpl:185
+#: plugins/personal/mail/generic.tpl:225
 msgid "Select if user can only send and receive inside his own domain"
 msgstr ""
 "Selezionate se l'utente può solo spedire o ricevere posta all'interno del "
 "dominio"
 
-#: plugins/personal/mail/generic.tpl:186
+#: plugins/personal/mail/generic.tpl:226
 msgid "User is only allowed to send and receive local mails"
 msgstr "L'utente può solo spedire e ricevere mail in locale"
 
-#: plugins/personal/mail/generic.tpl:193
-msgid "Use custom sieve script"
-msgstr "Utilizza uno script personalizzato Sieve"
-
-#: plugins/personal/mail/generic.tpl:193
-msgid "disables all Mail options!"
-msgstr "disabilita tutte le opzioni di posta elettronica!"
-
 #: plugins/personal/mail/copypaste.tpl:1 plugins/admin/groups/paste_mail.tpl:1
+#: setup/setup_config2.tpl:95
 msgid "Mail settings"
 msgstr "Settaggi di posta"
 
@@ -3175,7 +3229,7 @@ msgstr "Nome dell'utente i cui indirizzi sono mostrati"
 msgid "User mail settings"
 msgstr "Definizione mail utenti"
 
-#: plugins/personal/mail/class_mailAccount.inc:87
+#: plugins/personal/mail/class_mailAccount.inc:88
 #: plugins/admin/groups/class_groupMail.inc:78
 #, php-format
 msgid "There is no mail method '%s' specified in your gosa.conf available."
@@ -3183,22 +3237,22 @@ msgstr ""
 "Non è specificato un metodo di inoltro posta '%s' nel file gosa.conf "
 "disponibile."
 
-#: plugins/personal/mail/class_mailAccount.inc:209
+#: plugins/personal/mail/class_mailAccount.inc:214
 msgid "No DESC tag in vacation file:"
 msgstr "NOn c'è un 'DESC tag' nel file per le assenze:"
 
-#: plugins/personal/mail/class_mailAccount.inc:254
+#: plugins/personal/mail/class_mailAccount.inc:286
 msgid "This account has no mail extensions."
 msgstr "Questo utente non ha estensioni di posta elettronica."
 
-#: plugins/personal/mail/class_mailAccount.inc:264
-#: plugins/personal/mail/class_mailAccount.inc:267
-#: plugins/admin/groups/class_groupMail.inc:332
+#: plugins/personal/mail/class_mailAccount.inc:296
+#: plugins/personal/mail/class_mailAccount.inc:299
+#: plugins/admin/groups/class_groupMail.inc:333
 #: plugins/admin/ogroups/class_mailogroup.inc:47
 msgid "Remove mail account"
 msgstr "Rimuovi utente di posta"
 
-#: plugins/personal/mail/class_mailAccount.inc:265
+#: plugins/personal/mail/class_mailAccount.inc:297
 msgid ""
 "This account can't be removed while there are delegations configured. Remove "
 "those delegations first."
@@ -3206,8 +3260,8 @@ msgstr ""
 "Questo utente non può essere rimosso finché ci sono delegazioni configurate. "
 "Rimuovere prima le delegazioni."
 
-#: plugins/personal/mail/class_mailAccount.inc:268
-#: plugins/admin/groups/class_groupMail.inc:333
+#: plugins/personal/mail/class_mailAccount.inc:300
+#: plugins/admin/groups/class_groupMail.inc:334
 msgid ""
 "This account has mail features enabled. You can disable them by clicking "
 "below."
@@ -3215,14 +3269,14 @@ msgstr ""
 "Questo utente ha le caratteristiche di posta abilitate. Potete disabilitarle "
 "cliccando sotto."
 
-#: plugins/personal/mail/class_mailAccount.inc:271
-#: plugins/admin/groups/class_groupMail.inc:335
+#: plugins/personal/mail/class_mailAccount.inc:303
+#: plugins/admin/groups/class_groupMail.inc:336
 #: plugins/admin/ogroups/class_mailogroup.inc:50
 msgid "Create mail account"
 msgstr "Crea un utente di posta"
 
-#: plugins/personal/mail/class_mailAccount.inc:271
-#: plugins/admin/groups/class_groupMail.inc:336
+#: plugins/personal/mail/class_mailAccount.inc:303
+#: plugins/admin/groups/class_groupMail.inc:337
 msgid ""
 "This account has mail features disabled. You can enable them by clicking "
 "below."
@@ -3230,23 +3284,23 @@ msgstr ""
 "Questo utente ha le caratteristiche di posta disabilitate. Potete abilitarle "
 "cliccando sotto."
 
-#: plugins/personal/mail/class_mailAccount.inc:321
+#: plugins/personal/mail/class_mailAccount.inc:353
 msgid ""
 "You're trying to add an invalid email address to the list of forwarders."
 msgstr ""
 "State provando ad aggiungere un indirizzo di posta elettronica errato alla "
 "lista degli inoltri."
 
-#: plugins/personal/mail/class_mailAccount.inc:327
-#: plugins/admin/groups/class_groupMail.inc:410
+#: plugins/personal/mail/class_mailAccount.inc:359
+#: plugins/admin/groups/class_groupMail.inc:411
 msgid "Adding your one of your own addresses to the forwarders makes no sense."
 msgstr ""
 "Aggiungere uno dei vostri indirizzi di posta agli indirizzi di inoltro non è "
 "corretto."
 
-#: plugins/personal/mail/class_mailAccount.inc:365
-#: plugins/personal/mail/class_mailAccount.inc:370
-#: plugins/admin/groups/class_groupMail.inc:438
+#: plugins/personal/mail/class_mailAccount.inc:397
+#: plugins/personal/mail/class_mailAccount.inc:402
+#: plugins/admin/groups/class_groupMail.inc:439
 msgid ""
 "You're trying to add an invalid email address to the list of alternate "
 "addresses."
@@ -3254,33 +3308,33 @@ msgstr ""
 "State provando ad aggiungere un indirizzo di posta elettronica non valido "
 "alla lista degli indirizzi alternativi."
 
-#: plugins/personal/mail/class_mailAccount.inc:380
-#: plugins/admin/groups/class_groupMail.inc:443
+#: plugins/personal/mail/class_mailAccount.inc:412
+#: plugins/admin/groups/class_groupMail.inc:444
 msgid "The address you're trying to add is already used by user"
 msgstr "L'indirizzo che state provando ad aggiungere è già utilizzato"
 
-#: plugins/personal/mail/class_mailAccount.inc:716
+#: plugins/personal/mail/class_mailAccount.inc:750
 msgid "Removing mail account failed"
 msgstr "Rimozione utente di posta fallito"
 
-#: plugins/personal/mail/class_mailAccount.inc:852
+#: plugins/personal/mail/class_mailAccount.inc:886
 msgid "Saving mail account failed"
 msgstr "Salvataggio della mail utente fallita"
 
-#: plugins/personal/mail/class_mailAccount.inc:904
+#: plugins/personal/mail/class_mailAccount.inc:940
 msgid ""
 "There is no valid mailserver specified, please add one in the system setup."
 msgstr ""
 "Non è stato specificato un valido server di posta; per favore aggiungerne "
 "uno al setup."
 
-#: plugins/personal/mail/class_mailAccount.inc:909
-#: plugins/admin/groups/class_groupMail.inc:855
+#: plugins/personal/mail/class_mailAccount.inc:945
+#: plugins/admin/groups/class_groupMail.inc:856
 msgid "The required field 'Primary address' is not set."
 msgstr "Il campo obbligatorio 'Indirizzo principale' non è configurato."
 
-#: plugins/personal/mail/class_mailAccount.inc:913
-#: plugins/personal/mail/class_mailAccount.inc:917
+#: plugins/personal/mail/class_mailAccount.inc:949
+#: plugins/personal/mail/class_mailAccount.inc:953
 #: plugins/addons/addressbook/class_addressbook.inc:598
 #: plugins/admin/ogroups/class_mailogroup.inc:78
 msgid "Please enter a valid email address in 'Primary address' field."
@@ -3288,46 +3342,46 @@ msgstr ""
 "Per favore inserire un valido indirizzo di posta nel campo 'Indirizzo "
 "primario'."
 
-#: plugins/personal/mail/class_mailAccount.inc:923
-#: plugins/admin/groups/class_groupMail.inc:864
+#: plugins/personal/mail/class_mailAccount.inc:959
+#: plugins/admin/groups/class_groupMail.inc:865
 #: plugins/admin/ogroups/class_mailogroup.inc:85
 msgid "The primary address you've entered is already in use."
 msgstr "L'indirizzo primario inserito è già in uso."
 
-#: plugins/personal/mail/class_mailAccount.inc:929
-#: plugins/admin/groups/class_groupMail.inc:870
+#: plugins/personal/mail/class_mailAccount.inc:965
+#: plugins/admin/groups/class_groupMail.inc:871
 msgid "Value in 'Quota size' is not valid."
 msgstr "Valore di 'Quota' non valido."
 
-#: plugins/personal/mail/class_mailAccount.inc:938
-#: plugins/admin/groups/class_groupMail.inc:879
+#: plugins/personal/mail/class_mailAccount.inc:974
+#: plugins/admin/groups/class_groupMail.inc:880
 msgid "Please specify a vaild mail size for mails to be rejected."
 msgstr ""
 "Per favore specificate una corretta dimensione della posta che deve essere "
 "rifiutata."
 
-#: plugins/personal/mail/class_mailAccount.inc:948
-#: plugins/admin/groups/class_groupMail.inc:887
+#: plugins/personal/mail/class_mailAccount.inc:984
+#: plugins/admin/groups/class_groupMail.inc:888
 msgid "You need to set the maximum mail size in order to reject anything."
 msgstr ""
 "Non avete definito la dimensione massima della posta che deve essere "
 "rifiutata."
 
-#: plugins/personal/mail/class_mailAccount.inc:952
+#: plugins/personal/mail/class_mailAccount.inc:988
 msgid "You specified Spam settings, but there is no Folder specified."
 msgstr ""
 "Avete definito delle regole per lo spam ma non è stata indicata una cartella "
 "'ad hoc'."
 
-#: plugins/personal/mail/class_mailAccount.inc:956
+#: plugins/personal/mail/class_mailAccount.inc:992
 msgid "Time interval to show vacation message is not valid."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:1110
+#: plugins/personal/mail/class_mailAccount.inc:1146
 msgid "Waiting for kolab to remove mail properties."
 msgstr "Attendere perchè Kolab sta rimuovendo le proprietà della posta."
 
-#: plugins/personal/mail/class_mailAccount.inc:1112
+#: plugins/personal/mail/class_mailAccount.inc:1148
 msgid ""
 "Please remove the mail account first, to allow kolab to call its remove "
 "methods."
@@ -3374,6 +3428,7 @@ msgstr "Giorni di appuntamento"
 #: plugins/personal/connectivity/oxchange.tpl:26
 #: plugins/personal/connectivity/oxchange.tpl:30
 #: plugins/personal/connectivity/kolab.tpl:55
+#: include/sieve/templates/element_vacation.tpl:25
 msgid "days"
 msgstr "giorni"
 
@@ -3753,6 +3808,8 @@ msgstr "Files"
 #: plugins/admin/systems/glpi_devices.tpl:293
 #: plugins/admin/systems/glpi_devices.tpl:420
 #: plugins/admin/systems/glpi_devices.tpl:485
+#: include/sieve/class_sieveManagement.inc:605
+#: include/sieve/templates/element_size.tpl:4
 msgid "Size"
 msgstr "Dimensione (size)"
 
@@ -4113,7 +4170,7 @@ msgstr "Samba home"
 msgid "Temporary disable samba account"
 msgstr "Disabilita temporaneamente l'account samba"
 
-#: plugins/personal/samba/main.inc:124
+#: plugins/personal/samba/main.inc:124 setup/setup_config2.tpl:2
 msgid "Samba settings"
 msgstr "Parametri samba"
 
@@ -4282,7 +4339,7 @@ msgstr "Linguaggio preferito"
 #: plugins/admin/ogroups/class_divListOGroup.inc:102
 #: plugins/admin/departments/generic.tpl:27
 #: plugins/admin/departments/class_divListDepartment.inc:72
-#: plugins/admin/users/class_divListUsers.inc:99
+#: plugins/admin/users/class_divListUsers.inc:99 setup/setup_ldap.tpl:55
 msgid "Base"
 msgstr "Base"
 
@@ -4673,6 +4730,8 @@ msgstr "durante"
 #: plugins/admin/systems/class_printGeneric.inc:849
 #: plugins/admin/fai/faiTemplateEntry.tpl:94
 #: plugins/admin/ogroups/class_ogroupManagement.inc:363
+#: setup/setup_migrate.tpl:241 setup/setup_migrate.tpl:244
+#: setup/setup_config2.tpl:172 setup/setup_config2.tpl:217
 msgid "User"
 msgstr "utentge"
 
@@ -4842,6 +4901,7 @@ msgstr "I numeri possono anche contenere delle wild cards."
 
 #: plugins/gofax/blocklists/remove.tpl:6
 #: plugins/admin/systems/remove_glpi.tpl:6
+#: include/sieve/templates/remove_script.tpl:6
 msgid ""
 "Please double check if your really want to do this since there is no way for "
 "GOsa to get your data back."
@@ -5394,6 +5454,13 @@ msgid "You are not allowed to delete this macro!"
 msgstr "Non ti è permesso cancellare questa macro!"
 
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:263
+#: setup/setup_checks.tpl:27 setup/setup_checks.tpl:87
+#: setup/class_setupStep_Migrate.inc:218 setup/class_setupStep_Migrate.inc:267
+#: setup/class_setupStep_Migrate.inc:325 setup/class_setupStep_Migrate.inc:372
+#: setup/class_setupStep_Migrate.inc:418 setup/class_setupStep_Migrate.inc:489
+#: setup/class_setupStep_Migrate.inc:542 setup/class_setupStep_Migrate.inc:672
+#: setup/class_setupStep_Migrate.inc:761
+#: setup/class_setupStep_Migrate.inc:1440
 msgid "Ok"
 msgstr "OK"
 
@@ -5430,6 +5497,7 @@ msgid "Combobox"
 msgstr "Combobox"
 
 #: plugins/gofon/macro/class_gofonMacroParameters.inc:240
+#: include/sieve/templates/element_boolean.tpl:4
 msgid "Bool"
 msgstr "Booleano"
 
@@ -5444,7 +5512,7 @@ msgstr ""
 "Permessi insufficienti, non puoi cambiare gli attributi '%s' in goFonMacro."
 
 #: plugins/gofon/macro/class_gofonMacroParameters.inc:329
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1144
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1148
 #, php-format
 msgid "The parameter %s contains invalid char. '!,#' is used as delimiter"
 msgstr ""
@@ -5691,7 +5759,7 @@ msgstr "Aggiorna"
 msgid "Phone settings"
 msgstr "Impostazioni telefono"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:99
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:103
 #, php-format
 msgid ""
 "The specified goFonHomeServer '%s' is not available in GOsa server "
@@ -5700,8 +5768,8 @@ msgid ""
 "accounts."
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:108
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1258
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:112
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1262
 #, php-format
 msgid ""
 "The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql "
@@ -5710,22 +5778,22 @@ msgstr ""
 "Il server MySQL '%s' non è raggiungibile per l'utente '%s'; controlla il "
 "file di log di GOsa per identificare gli errori mysql."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:114
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1269
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:118
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1273
 #, php-format
 msgid "Can't select database %s on %s."
 msgstr "Non posso selezionare il database %s in %s."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:151
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:155
 msgid "no macro"
 msgstr "Nessuna macro"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:169
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:173
 msgid "undefined"
 msgstr "Non definito"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:295
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:856
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:299
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:860
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:357
 #: plugins/admin/ogroups/class_phonequeue.inc:342
 #: plugins/admin/ogroups/class_phonequeue.inc:391
@@ -5738,7 +5806,7 @@ msgstr ""
 "indicare l'handle di gestione di Asterisk (goFonServer). Queste impostazioni "
 "non possono essere salvate nel database Asterisk."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:303
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:307
 msgid ""
 "Can't save any changes to asterisk database, there is no mysql extension "
 "available."
@@ -5746,7 +5814,7 @@ msgstr ""
 "Non posso salvare le modifiche nel database Asterisk; non è disponibile "
 "alcuna estensione mysql."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:423
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:427
 #, fuzzy, php-format
 msgid ""
 "The MySQL Server '%s' isn't reachable as user '%s'. Abort saving entries to "
@@ -5755,15 +5823,15 @@ msgstr ""
 "Il server MySQL '%s' non è raggiungibile per l'utente '%s'; controlla il "
 "file di log di GOsa per identificare gli errori mysql."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:431
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:458
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:435
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:462
 #, php-format
 msgid ""
 "Can't select database %s on %s. Abort saving entries to keep the database "
 "consistent, check GOsa log for mysql error."
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:450
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:454
 #, fuzzy, php-format
 msgid ""
 "The old MySQL home server '%s' isn't reachable as user '%s'. Abort saving "
@@ -5772,27 +5840,27 @@ msgstr ""
 "Il server MySQL '%s' non è raggiungibile per l'utente '%s'; verifica il file "
 "di log di GOsa per gli errori MySql."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:764
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:768
 msgid "Error while performing query:"
 msgstr "Errore nell'esecuzione dell'interrogazione:"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:821
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:952
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:825
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:956
 msgid "This account has no phone extensions."
 msgstr "L'utente non ha estensioni telefoniche."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:847
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:851
 msgid ""
 "The macro you selected, is no longer available for you, please choose "
 "another one."
 msgstr ""
 "la macro selezionata non è più dispobilie, per favore sceglierne un'altra."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:962
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:966
 msgid "Remove phone account"
 msgstr "Rimuovi utente telefonico"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:963
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:967
 msgid ""
 "This account has phone features enabled. You can disable them by clicking "
 "below."
@@ -5800,12 +5868,12 @@ msgstr ""
 "L'utente ha le impostazioni telefoniche abilitate. Potete disabilitarle "
 "cliccando sotto."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:966
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:969
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:970
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:973
 msgid "Create phone account"
 msgstr "Crea un utente telefonico"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:967
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:971
 msgid ""
 "This account has phone features disabled. You can't enable them while no uid "
 "is set."
@@ -5813,7 +5881,7 @@ msgstr ""
 "L'utente ha le impostazioni telefoniche disabilitate. Non potete abilitarle "
 "se non è definito un UID."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:970
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:974
 msgid ""
 "This account has phone features disabled. You can enable them by clicking "
 "below."
@@ -5821,15 +5889,15 @@ msgstr ""
 "L'utente ha le impostazioni telefoniche disabilitate. Potete abilitarle "
 "cliccando sotto."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:983
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:987
 msgid "Please enter a valid phone number!"
 msgstr "Per favore inserite un numero telefonico valido!"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1022
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1026
 msgid "Choose your private phone"
 msgstr "Scegli il tuo numero personale di telefono"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1108
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1112
 #, fuzzy
 msgid ""
 "There must be at least one server with an asterisk database to create a "
@@ -5838,17 +5906,17 @@ msgstr ""
 "Ci deve essere almeno un server NTP selezionato o la modalità di "
 "ereditarietà non sarà attivata."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1112
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1116
 #: plugins/admin/ogroups/class_phonequeue.inc:301
 #, fuzzy
 msgid "Please select a valid goFonHomeServer."
 msgstr "Per favore selezionate un valido server di posta."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1116
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1120
 msgid "Voicemail PIN must be between 1-4 characters."
 msgstr "Il PIN della Segreteria telefonica deve contenere da 1 a 4 caratteri."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1119
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1123
 msgid ""
 "The specified Voicemail PIN contains invalid characters, only numeric values "
 "are allowed here."
@@ -5856,11 +5924,11 @@ msgstr ""
 "Il PIN della segreteria telefonica indicato contiene caratteri non ammessi; "
 "sono consentiti solo valori numerici."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1124
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1128
 msgid "Phone PIN must be at least one character long."
 msgstr "Il PIN telefonico deve essere di almeno 1 carattere."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1127
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1131
 msgid ""
 "The specified phone PIN contains invalid characters, only aphanumeric values "
 "are allowed here."
@@ -5868,20 +5936,24 @@ msgstr ""
 "Il PIN della telefono indicato contiene caratteri non ammessi; sono "
 "consentiti solo valori alfanumerici."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1137
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1141
 #, php-format
 msgid "You need to specify at least one phone number!"
 msgstr "devi specificare almeno un numero telefonico!"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1208
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1212
 msgid "Saving phone account failed"
 msgstr "Salvataggio dell'utente telefonico fallito"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1300
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1304
+#: include/sieve/class_sieveManagement.inc:514
+#: include/sieve/class_sieveManagement.inc:734
+#: include/sieve/templates/object_container.tpl:30
+#: include/sieve/templates/element_stop.tpl:4
 msgid "Stop"
 msgstr "Ferma"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1305
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1309
 msgid ""
 "Can't remove phone account, the mysql extension is not present in php "
 "configuration."
@@ -5889,17 +5961,17 @@ msgstr ""
 "Non posso cancellare l'utente telefonico; l'estensione mysql non è presente "
 "nella configurazione php."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1338
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1342
 #, php-format
 msgid "Removed user '%s' from phone queue '%s'."
 msgstr "Rimozione dell'utente '%s' dalla coda telefonica '%s'."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1345
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1349
 msgid "Removing phone account failed"
 msgstr "Rimozione dell'utente telefonico fallita"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1374
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1376
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1378
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1380
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:565
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:567
 #: plugins/admin/ogroups/class_phonequeue.inc:761
@@ -5908,7 +5980,7 @@ msgstr "Rimozione dell'utente telefonico fallita"
 msgid "The specified telephonenumber '%s' is already assigned to '%s'."
 msgstr "Il numero di telefono prescelto '%s' è già assegnato a '%s'."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1422
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1426
 #, php-format
 msgid ""
 "The previously selected asterisk home server (%s) is no longer available. "
@@ -6301,6 +6373,7 @@ msgstr ""
 "effettuata."
 
 #: plugins/addons/addressbook/class_addressbook.inc:6
+#: setup/class_setupStep_Feedback.inc:106
 msgid "Addressbook"
 msgstr "Rubrica"
 
@@ -6505,6 +6578,8 @@ msgstr "Risali di una share DFS"
 #: plugins/admin/ogroups/phonequeue.tpl:21
 #: include/class_MultiSelectWindow.inc:196
 #: include/class_MultiSelectWindow.inc:198
+#: include/sieve/templates/object_container.tpl:8
+#: include/sieve/templates/object_container_clear.tpl:8
 msgid "Up"
 msgstr "Su"
 
@@ -6588,12 +6663,14 @@ msgstr "Arrivo"
 msgid "Recipient"
 msgstr "Destinatario"
 
-#: plugins/addons/mailqueue/contents.tpl:58
+#: plugins/addons/mailqueue/contents.tpl:58 setup/setup_checks.tpl:30
+#: setup/setup_checks.tpl:91
 msgid "Error"
 msgstr "Errore"
 
 #: plugins/addons/mailqueue/contents.tpl:76
 #: plugins/addons/mailqueue/class_mailqueue.inc:373
+#: include/sieve/class_sieveManagement.inc:647
 msgid "Active"
 msgstr "Attivo"
 
@@ -7027,6 +7104,7 @@ msgstr "L'oggetto non ha relazioni con altri oggetti."
 #: plugins/admin/fai/faiTemplateEntry.tpl:71
 #: plugins/admin/fai/faiTemplateEntry.tpl:103
 #: plugins/admin/ogroups/class_ogroupManagement.inc:364
+#: setup/setup_migrate.tpl:240 setup/setup_migrate.tpl:243
 msgid "Group"
 msgstr "Gruppo"
 
@@ -8472,6 +8550,7 @@ msgid "This table displays all available attachments."
 msgstr "Questa tabella mostra tutti gli allegati disponibili."
 
 #: plugins/admin/systems/class_glpiAttachmentPool.inc:217
+#: include/sieve/class_sieveElement_If.inc:447
 msgid "empty"
 msgstr "vuoto"
 
@@ -8754,11 +8833,15 @@ msgstr "Sezione"
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:457
 #: plugins/admin/systems/class_printerPPDDialog.inc:460
+#: include/sieve/class_sieveManagement.inc:609
+#: include/sieve/class_sieveElement_If.inc:915
 msgid "True"
 msgstr "Vero"
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:458
 #: plugins/admin/systems/class_printerPPDDialog.inc:461
+#: include/sieve/class_sieveManagement.inc:610
+#: include/sieve/class_sieveElement_If.inc:915
 msgid "False"
 msgstr "Falso"
 
@@ -9083,7 +9166,7 @@ msgstr "Salvataggio delle impostazioni database del server fallito"
 
 #: plugins/admin/systems/class_SelectDeviceType.inc:24
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:388
-#: plugins/admin/groups/class_groupMail.inc:292
+#: plugins/admin/groups/class_groupMail.inc:293
 #: plugins/admin/ogroups/class_ogroup.inc:281
 #: plugins/admin/users/class_userManagement.inc:475
 msgid "none"
@@ -9849,7 +9932,7 @@ msgstr "Stampanti di rete"
 msgid "Other network component"
 msgstr "Altri componenti di rete"
 
-#: plugins/admin/systems/chooser.tpl:16
+#: plugins/admin/systems/chooser.tpl:16 setup/class_setupStep_Migrate.inc:767
 msgid "Create"
 msgstr "Crea"
 
@@ -9926,6 +10009,10 @@ msgstr "Allegati"
 #: plugins/admin/systems/glpi_devices.tpl:722
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:25
 #: plugins/admin/systems/glpi.tpl:63
+#: include/sieve/class_sieveManagement.inc:507
+#: include/sieve/class_sieveManagement.inc:727
+#: include/sieve/templates/object_container.tpl:23
+#: include/sieve/templates/element_comment.tpl:4
 msgid "Comment"
 msgstr "Commento"
 
@@ -10337,6 +10424,8 @@ msgstr "Espressioni regolari per confrontare i tipi di cartucce"
 #: plugins/admin/systems/class_servDNSeditZone.inc:291
 #: plugins/admin/fai/class_faiProfile.inc:306
 #: plugins/admin/ogroups/phonequeue.tpl:22
+#: include/sieve/templates/object_container.tpl:12
+#: include/sieve/templates/object_container_clear.tpl:12
 msgid "Down"
 msgstr "Giù"
 
@@ -10615,6 +10704,13 @@ msgstr "Microfono integrato"
 #: plugins/admin/systems/glpi_devices.tpl:176
 #: plugins/admin/systems/glpi_devices.tpl:296
 #: plugins/admin/systems/glpi_devices.tpl:361
+#: include/sieve/templates/element_address.tpl:40
+#: include/sieve/templates/element_header.tpl:41
+#: include/sieve/templates/element_envelope.tpl:41
+#: setup/class_setupStep_Config2.inc:129 setup/class_setupStep_Config1.inc:87
+#: setup/class_setupStep_Ldap.inc:74 setup/setup_feedback.tpl:51
+#: setup/setup_feedback.tpl:69 setup/class_setupStep_Schema.inc:63
+#: setup/class_setupStep_Config3.inc:76
 msgid "Yes"
 msgstr "Sì"
 
@@ -10625,6 +10721,13 @@ msgstr "Sì"
 #: plugins/admin/systems/glpi_devices.tpl:177
 #: plugins/admin/systems/glpi_devices.tpl:297
 #: plugins/admin/systems/glpi_devices.tpl:362
+#: include/sieve/templates/element_address.tpl:42
+#: include/sieve/templates/element_header.tpl:43
+#: include/sieve/templates/element_envelope.tpl:43
+#: setup/class_setupStep_Config2.inc:129 setup/class_setupStep_Config1.inc:87
+#: setup/class_setupStep_Ldap.inc:74 setup/setup_feedback.tpl:53
+#: setup/setup_feedback.tpl:71 setup/class_setupStep_Schema.inc:63
+#: setup/class_setupStep_Config3.inc:76
 msgid "No"
 msgstr "Nessuno"
 
@@ -12405,41 +12508,41 @@ msgstr "Crea un nuovo gruppo"
 msgid "Posix"
 msgstr "Posix"
 
-#: plugins/admin/groups/class_groupGeneric.inc:122
+#: plugins/admin/groups/class_groupGeneric.inc:132
 msgid "Can't find this groups SID in LDAP or in your configuration file!"
 msgstr ""
 "Non posso trovare il SID del gruppo in LDAP o nel file di configurazione!"
 
-#: plugins/admin/groups/class_groupGeneric.inc:178
+#: plugins/admin/groups/class_groupGeneric.inc:188
 msgid "This 'dn' is no group."
 msgstr "Questo 'dn' non è un gruppo."
 
-#: plugins/admin/groups/class_groupGeneric.inc:318
+#: plugins/admin/groups/class_groupGeneric.inc:328
 msgid "Samba group"
 msgstr "Gruppo samba"
 
-#: plugins/admin/groups/class_groupGeneric.inc:318
+#: plugins/admin/groups/class_groupGeneric.inc:328
 msgid "Domain admins"
 msgstr "Amministratori del dominio"
 
-#: plugins/admin/groups/class_groupGeneric.inc:318
+#: plugins/admin/groups/class_groupGeneric.inc:328
 msgid "Domain users"
 msgstr "Utenti del dominio"
 
-#: plugins/admin/groups/class_groupGeneric.inc:319
+#: plugins/admin/groups/class_groupGeneric.inc:329
 msgid "Domain guests"
 msgstr "Ospiti del dominio"
 
-#: plugins/admin/groups/class_groupGeneric.inc:324
+#: plugins/admin/groups/class_groupGeneric.inc:334
 #, php-format
 msgid "Special group (%d)"
 msgstr "Gruppi speciali (%d)"
 
-#: plugins/admin/groups/class_groupGeneric.inc:436
+#: plugins/admin/groups/class_groupGeneric.inc:447
 msgid "! unknown id"
 msgstr "! id sconosciuto"
 
-#: plugins/admin/groups/class_groupGeneric.inc:477
+#: plugins/admin/groups/class_groupGeneric.inc:489
 #, php-format
 msgid ""
 "Your search method returned more than '%s' users, only '%s' users are shown."
@@ -12447,30 +12550,30 @@ msgstr ""
 "Il metodo di ricerca ha restituito più di '%s' utenti, soli '%s' utenti sono "
 "mostrati."
 
-#: plugins/admin/groups/class_groupGeneric.inc:506
+#: plugins/admin/groups/class_groupGeneric.inc:518
 msgid "Removing group failed"
 msgstr "Rimozione del gruppo fallito"
 
-#: plugins/admin/groups/class_groupGeneric.inc:613
+#: plugins/admin/groups/class_groupGeneric.inc:625
 #, php-format
 msgid "No configured SID found for '%s'."
 msgstr "Non è stato trovato un SID configurato per '%s'."
 
-#: plugins/admin/groups/class_groupGeneric.inc:618
+#: plugins/admin/groups/class_groupGeneric.inc:630
 #, php-format
 msgid "No configured RIDBASE found for '%s'."
 msgstr "Non è stato trovato un RIDBASE per '%s'."
 
-#: plugins/admin/groups/class_groupGeneric.inc:703
+#: plugins/admin/groups/class_groupGeneric.inc:727
 msgid "Saving group failed"
 msgstr "Salvataggio del gruppo fallito"
 
-#: plugins/admin/groups/class_groupGeneric.inc:732
+#: plugins/admin/groups/class_groupGeneric.inc:756
 #: plugins/admin/ogroups/class_ogroup.inc:612
 msgid "You have no permissions to create a group on this 'Base'."
 msgstr "Non hai il permesso per preare un gruppo a questo livello."
 
-#: plugins/admin/groups/class_groupGeneric.inc:742
+#: plugins/admin/groups/class_groupGeneric.inc:766
 msgid ""
 "The field 'Name' contains invalid characters. Lowercase, numbers and dashes "
 "are allowed."
@@ -12478,13 +12581,13 @@ msgstr ""
 "Il campo 'Nome' contiene caratteri non validi. Caratteri minuscoli, numeri e "
 "trattini sono consentiti."
 
-#: plugins/admin/groups/class_groupGeneric.inc:754
-#: plugins/admin/groups/class_groupGeneric.inc:768
-#: plugins/admin/groups/class_groupGeneric.inc:775
+#: plugins/admin/groups/class_groupGeneric.inc:777
+#: plugins/admin/groups/class_groupGeneric.inc:791
+#: plugins/admin/groups/class_groupGeneric.inc:798
 msgid "Value specified as 'Name' is already used."
 msgstr "Il valore specifciato come 'Nome' è già in uso."
 
-#: plugins/admin/groups/class_groupGeneric.inc:829
+#: plugins/admin/groups/class_groupGeneric.inc:852
 #, fuzzy
 msgid "Too many groups, can't allocate a free ID!"
 msgstr "Troppi utenti, non ho un ID da allocare!"
@@ -12610,11 +12713,15 @@ msgstr "Cancella il valore"
 
 #: plugins/admin/groups/class_groupApplication.inc:687
 #: plugins/admin/groups/class_groupApplication.inc:717
+#: include/sieve/templates/object_container.tpl:9
+#: include/sieve/templates/object_container_clear.tpl:9
 msgid "Move up"
 msgstr "Muoviti su"
 
 #: plugins/admin/groups/class_groupApplication.inc:688
 #: plugins/admin/groups/class_groupApplication.inc:718
+#: include/sieve/templates/object_container.tpl:13
+#: include/sieve/templates/object_container_clear.tpl:13
 msgid "Move down"
 msgstr "Muoviti giù"
 
@@ -12713,11 +12820,16 @@ msgstr "append"
 msgid "write"
 msgstr "scrivi"
 
-#: plugins/admin/groups/class_groupMail.inc:324
+#: plugins/admin/groups/class_groupMail.inc:292
+#, fuzzy
+msgid "admin"
+msgstr "Amministratori"
+
+#: plugins/admin/groups/class_groupMail.inc:325
 msgid "This 'dn' has no valid mail extensions."
 msgstr "Questo 'dn' non ha una valida estensione mail"
 
-#: plugins/admin/groups/class_groupMail.inc:348
+#: plugins/admin/groups/class_groupMail.inc:349
 msgid ""
 "Remove shared folder from mail server database when entry gets removed in "
 "LDAP"
@@ -12725,38 +12837,38 @@ msgstr ""
 "Rimuovi le cartelle condivise dal server di posta quando questi valori sono "
 "rimossi da LDAP"
 
-#: plugins/admin/groups/class_groupMail.inc:349
+#: plugins/admin/groups/class_groupMail.inc:350
 msgid "Remove the shared folder and all its contents after saving this account"
 msgstr ""
 "Rimuovi le cartelle condivise e tutto il loro contenuto dopo aver salvato "
 "questo utente"
 
-#: plugins/admin/groups/class_groupMail.inc:404
+#: plugins/admin/groups/class_groupMail.inc:405
 msgid "You're trying to add an invalid email address "
 msgstr "Stai provando ad aggiungere un indirizzo mail non valido"
 
-#: plugins/admin/groups/class_groupMail.inc:641
+#: plugins/admin/groups/class_groupMail.inc:642
 msgid "Removing group mail settings failed"
 msgstr "Rimozione delle specifiche dei gruppi di posta fallita"
 
-#: plugins/admin/groups/class_groupMail.inc:829
+#: plugins/admin/groups/class_groupMail.inc:830
 msgid "Saving group mail settings failed"
 msgstr "Salvataggio delle specifiche dei gruppi di posta fallita"
 
-#: plugins/admin/groups/class_groupMail.inc:858
+#: plugins/admin/groups/class_groupMail.inc:859
 msgid "Please enter a valid email addres in 'Primary address' field."
 msgstr ""
 "Per favore inserite un validoi indirizzo e-mail nel campo 'Indirizzo "
 "principale'."
 
-#: plugins/admin/groups/class_groupMail.inc:891
+#: plugins/admin/groups/class_groupMail.inc:892
 msgid ""
 "Please choose valid permission settings. Default permission can't be emtpy."
 msgstr ""
 "Per favore scegli delle valide impostazioni di permesso. Le impostazioni di "
 "permesso non possono essere vuote."
 
-#: plugins/admin/groups/class_groupMail.inc:895
+#: plugins/admin/groups/class_groupMail.inc:896
 msgid "Please select a valid mail server."
 msgstr "Per favore selezionate un valido server di posta."
 
@@ -13778,11 +13890,11 @@ msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "Snapshot di sviluppo di GOsa (Rev %s)"
 
-#: include/functions.inc:2176 include/functions.inc:2180
+#: include/functions.inc:2179 include/functions.inc:2183
 msgid "Warning - base_hook is not avialable. Using default base."
 msgstr ""
 
-#: include/functions.inc:2186
+#: include/functions.inc:2189
 msgid "Warning - no base_hook defined. Using default base."
 msgstr ""
 
@@ -13827,6 +13939,10 @@ msgstr ""
 "Non posso rimuovere le caselle postali IMAP. Il server ha risposto '%s'."
 
 #: include/class_mail-methods-cyrus.inc:264
+#: include/sieve/class_sieveManagement.inc:309
+#: include/sieve/class_sieveManagement.inc:355
+#: include/sieve/class_sieveManagement.inc:685
+#: include/sieve/class_sieveManagement.inc:1045
 #, php-format
 msgid "Can't log into SIEVE server. Server says '%s'."
 msgstr "Non posso collegarmi al server SIEVE. Il server ha risposto '%s'."
@@ -14110,7 +14226,7 @@ msgstr "%s di risultati per la ricerca con la chiave %s"
 msgid "%s%% hit rate in file %s"
 msgstr "%s%% alta corrispondenza nel file %s  ??????"
 
-#: include/functions_setup.inc:84
+#: include/functions_setup.inc:84 setup/class_setupStep_Schema.inc:101
 msgid "Can't get schema information from server. No schema check possible!"
 msgstr ""
 "Non posso ottenere le informazioni schema dal server. Non posso controllare "
@@ -14246,7 +14362,11 @@ msgstr "Supporto per Kolab attivato"
 msgid "Ignored"
 msgstr "Ignorato"
 
-#: include/functions_setup.inc:259
+#: include/functions_setup.inc:259 setup/class_setupStep_Migrate.inc:318
+#: setup/class_setupStep_Migrate.inc:468 setup/class_setupStep_Migrate.inc:481
+#: setup/class_setupStep_Migrate.inc:765
+#: setup/class_setupStep_Migrate.inc:1417
+#: setup/class_setupStep_Migrate.inc:1430
 msgid "Failed"
 msgstr "Fallito"
 
@@ -14311,7 +14431,7 @@ msgstr "Controllo per funzioni XML"
 msgid "XML functions are required to parse the configuration file."
 msgstr "Le funzioni XML sono richieste per esaminare i file di configurazione."
 
-#: include/functions_setup.inc:298
+#: include/functions_setup.inc:298 setup/class_setupStep_Checks.inc:80
 msgid "Checking for gettext support"
 msgstr "Controllo per supporto gettext"
 
@@ -14319,7 +14439,7 @@ msgstr "Controllo per supporto gettext"
 msgid "Gettext support is required for internationalized GOsa."
 msgstr "Il supporto Gettext è richiesto per le versioni localizzate di GOsa."
 
-#: include/functions_setup.inc:302
+#: include/functions_setup.inc:302 setup/class_setupStep_Checks.inc:88
 msgid "Checking for iconv support"
 msgstr "Controllo per supporto iconv "
 
@@ -14395,7 +14515,7 @@ msgstr ""
 msgid "Checking for kadm5 module"
 msgstr "Controllo modulo kadm5"
 
-#: include/functions_setup.inc:327
+#: include/functions_setup.inc:327 setup/class_setupStep_Checks.inc:129
 msgid ""
 "Managing users in kerberos requires the kadm5 module which is downloadable "
 "via PEAR network."
@@ -14472,7 +14592,7 @@ msgstr ""
 "ImaMagick è utilizzato per convertire immagine fornite dagli nutenti alla "
 "corretta dimensione e nel formato previsto dagli scrip PHP."
 
-#: include/functions_setup.inc:412
+#: include/functions_setup.inc:412 setup/class_setupStep_Checks.inc:154
 msgid "Checking for fping utility"
 msgstr "Controllo per utilità fping"
 
@@ -14560,7 +14680,7 @@ msgstr ""
 msgid "php.ini check -> magic_quotes_gpc"
 msgstr "verificate il file php.ini -> magic_quotes_gpc"
 
-#: include/functions_setup.inc:473
+#: include/functions_setup.inc:473 setup/class_setupStep_Checks.inc:243
 msgid ""
 "Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
 "escape all quotes in strings in this case."
@@ -14724,6 +14844,2411 @@ msgstr "Operazione fallita nell'etichettare l'Handle dell'oggetto"
 msgid "Removing tag from object '%s'"
 msgstr "Etichetta rimossa dall'oggetto '%s'"
 
+#: include/sieve/class_sieveElement_Redirect.inc:24
+#, fuzzy
+msgid "Please specify a valid email address."
+msgstr "Per favore specificare un valido id."
+
+#: include/sieve/class_sieveElement_Redirect.inc:35
+#, fuzzy
+msgid "Place a mail address here"
+msgstr "Per favore inserite un indirizzo di posta"
+
+#: include/sieve/class_sieveElement_Vacation.inc:148
+#, fuzzy
+msgid "Alternative sender address must be a valid email addresses."
+msgstr "Per favore specificare un valido id."
+
+#: include/sieve/class_sieveManagement.inc:120
+#: include/sieve/class_sieveManagement.inc:247
+#, fuzzy
+msgid "Parse failed"
+msgstr "fallito"
+
+#: include/sieve/class_sieveManagement.inc:124
+#: include/sieve/class_sieveManagement.inc:251
+#, fuzzy
+msgid "Parse successful"
+msgstr "Importazione completata con successo"
+
+#: include/sieve/class_sieveManagement.inc:161
+#, php-format
+msgid ""
+"The specified mail server '%s' does not exist within the GOsa configuration."
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:206
+#, fuzzy
+msgid "You should specify a name for your new script."
+msgstr "Per favore inserite un nome per la vostra condivisione."
+
+#: include/sieve/class_sieveManagement.inc:211
+#, fuzzy
+msgid "Only lower case names are allowed."
+msgstr "Solo stringe in caratteri minuscoli sono ammesse nel nome della zona."
+
+#: include/sieve/class_sieveManagement.inc:217
+#, fuzzy
+msgid "Only alphabetical characters are allowed in script names."
+msgstr "Sono ammessi solo caratteri numerici nel campo 'Numero'"
+
+#: include/sieve/class_sieveManagement.inc:223
+#, fuzzy
+msgid "The specified name is already in use."
+msgstr "Il nome selezionato è già in uso."
+
+#: include/sieve/class_sieveManagement.inc:317
+#, fuzzy, php-format
+msgid "Can't activate sieve script on server. Server says '%s'."
+msgstr ""
+"Non posso attivare gli script sieve di GOsa. Il server ha risposto '%s'."
+
+#: include/sieve/class_sieveManagement.inc:360
+#, fuzzy, php-format
+msgid "Can't remove sieve script from server. Server says '%s'."
+msgstr "Non posso ottenere gli script sieve. Il server ha risposto '%s'."
+
+#: include/sieve/class_sieveManagement.inc:372
+#, php-format
+msgid "You are going to remove the sieve script '%s' from your mail server."
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:408
+#, fuzzy
+msgid "Edited"
+msgstr "Modifica"
+
+#: include/sieve/class_sieveManagement.inc:415
+#, php-format
+msgid "Please fix all errors before saving. Last error was: %s"
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:442
+#, fuzzy
+msgid "Specified file seems to be empty."
+msgstr "Il file specificato è vuoto."
+
+#: include/sieve/class_sieveManagement.inc:444
+msgid "Upload failed. The temporary file can't be accessed."
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:506
+#: include/sieve/class_sieveManagement.inc:509
+#: include/sieve/class_sieveManagement.inc:726
+#: include/sieve/class_sieveManagement.inc:729
+#: include/sieve/templates/object_container.tpl:22
+#: include/sieve/templates/object_container.tpl:25
+#: include/sieve/templates/element_keep.tpl:4
+msgid "Keep"
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:508
+#: include/sieve/class_sieveManagement.inc:728
+#, fuzzy
+msgid "File into"
+msgstr "File"
+
+#: include/sieve/class_sieveManagement.inc:510
+#: include/sieve/class_sieveManagement.inc:730
+#: include/sieve/templates/object_container.tpl:26
+#: include/sieve/templates/element_discard.tpl:4
+#, fuzzy
+msgid "Discard"
+msgstr "Dischi"
+
+#: include/sieve/class_sieveManagement.inc:511
+#: include/sieve/class_sieveManagement.inc:731
+#: include/sieve/templates/object_container.tpl:27
+#: include/sieve/templates/element_redirect.tpl:13
+#, fuzzy
+msgid "Redirect"
+msgstr "Diretto"
+
+#: include/sieve/class_sieveManagement.inc:512
+#: include/sieve/class_sieveManagement.inc:732
+#: include/sieve/templates/object_container.tpl:28
+#, fuzzy
+msgid "Reject"
+msgstr "Seleziona"
+
+#: include/sieve/class_sieveManagement.inc:513
+#: include/sieve/class_sieveManagement.inc:733
+#: include/sieve/templates/object_container.tpl:29
+#: include/sieve/templates/element_require.tpl:12
+#, fuzzy
+msgid "Require"
+msgstr "Punteggio (score) richiesto"
+
+#: include/sieve/class_sieveManagement.inc:516
+#: include/sieve/class_sieveManagement.inc:736
+#: include/sieve/templates/object_container.tpl:32
+#: include/sieve/class_sieveElement_If.inc:836
+msgid "If"
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:532
+msgid "Failed to add new element."
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:575
+#: include/sieve/class_sieveManagement.inc:771
+#: include/sieve/templates/object_container.tpl:33
+#: include/sieve/templates/element_else.tpl:4
+#: include/sieve/class_sieveElement_If.inc:840
+#, fuzzy
+msgid "Else"
+msgstr "falso"
+
+#: include/sieve/class_sieveManagement.inc:577
+#: include/sieve/class_sieveManagement.inc:773
+#: include/sieve/class_sieveManagement.inc:778
+#: include/sieve/templates/element_elsif.tpl:4
+#: include/sieve/templates/object_container.tpl:34
+#: include/sieve/class_sieveElement_If.inc:838
+msgid "Else If"
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:603
+#: include/sieve/templates/element_header.tpl:16
+#: include/sieve/templates/element_header.tpl:106
+#, fuzzy
+msgid "Header"
+msgstr "header"
+
+#: include/sieve/class_sieveManagement.inc:604
+#: include/sieve/templates/element_envelope.tpl:16
+#: include/sieve/templates/element_envelope.tpl:105
+msgid "Envelope"
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:606
+#: include/sieve/templates/element_exists.tpl:8
+#, fuzzy
+msgid "Exists"
+msgstr "Esistente"
+
+#: include/sieve/class_sieveManagement.inc:607
+#: include/sieve/templates/element_allof.tpl:10
+#, fuzzy
+msgid "All of"
+msgstr "Tutti"
+
+#: include/sieve/class_sieveManagement.inc:608
+#: include/sieve/templates/element_anyof.tpl:10
+msgid "Any of"
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:648
+msgid "This script is marked as active"
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:653
+#, fuzzy
+msgid "Script length"
+msgstr "Path degli script"
+
+#: include/sieve/class_sieveManagement.inc:657
+#, fuzzy
+msgid "Remove script"
+msgstr "Script di importazione"
+
+#: include/sieve/class_sieveManagement.inc:666
+#, fuzzy
+msgid "Activate script"
+msgstr "Ultimo script"
+
+#: include/sieve/class_sieveManagement.inc:670
+#, fuzzy
+msgid "Edit script"
+msgstr "Ultimo script"
+
+#: include/sieve/class_sieveManagement.inc:785
+#, php-format
+msgid "Can't add the specified element at the given position."
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:1060
+#, fuzzy
+msgid "Failed to save sieve script"
+msgstr "Utilizza uno script personalizzato Sieve"
+
+#: include/sieve/class_sieveElement_Require.inc:73
+#, fuzzy
+msgid "Please specify at least one valid requirement."
+msgstr "Per favore indicate un utente valido!"
+
+#: include/sieve/templates/edit_frame_base.tpl:12
+msgid "View structured"
+msgstr ""
+
+#: include/sieve/templates/edit_frame_base.tpl:14
+msgid "View source"
+msgstr ""
+
+#: include/sieve/templates/element_address.tpl:18
+#: include/sieve/templates/element_header.tpl:19
+#: include/sieve/templates/element_envelope.tpl:19
+#: include/sieve/templates/element_vacation.tpl:16
+msgid "Normal view"
+msgstr ""
+
+#: include/sieve/templates/element_address.tpl:25
+#: include/sieve/templates/element_header.tpl:26
+#: include/sieve/templates/element_envelope.tpl:26
+#, fuzzy
+msgid "Match type"
+msgstr "Tipo autorizzazione"
+
+#: include/sieve/templates/element_address.tpl:28
+#: include/sieve/templates/element_address.tpl:51
+#: include/sieve/templates/element_address.tpl:61
+#: include/sieve/templates/element_address.tpl:72
+#: include/sieve/templates/element_address.tpl:121
+#: include/sieve/templates/element_address.tpl:126
+#: include/sieve/templates/element_boolean.tpl:5
+#: include/sieve/templates/element_header.tpl:29
+#: include/sieve/templates/element_header.tpl:52
+#: include/sieve/templates/element_header.tpl:63
+#: include/sieve/templates/element_header.tpl:114
+#: include/sieve/templates/element_header.tpl:119
+#: include/sieve/templates/element_envelope.tpl:29
+#: include/sieve/templates/element_envelope.tpl:52
+#: include/sieve/templates/element_envelope.tpl:63
+#: include/sieve/templates/element_envelope.tpl:113
+#: include/sieve/templates/element_envelope.tpl:118
+#, fuzzy
+msgid "Boolean value"
+msgstr "Valore di default"
+
+#: include/sieve/templates/element_address.tpl:36
+#: include/sieve/templates/element_header.tpl:37
+#: include/sieve/templates/element_envelope.tpl:37
+#, fuzzy
+msgid "Invert test"
+msgstr "Test della memoria"
+
+#: include/sieve/templates/element_address.tpl:48
+msgid "Part of address that should be used"
+msgstr ""
+
+#: include/sieve/templates/element_address.tpl:58
+#: include/sieve/templates/element_header.tpl:49
+#: include/sieve/templates/element_envelope.tpl:49
+#, fuzzy
+msgid "Comparator"
+msgstr "Computers"
+
+#: include/sieve/templates/element_address.tpl:69
+#: include/sieve/templates/element_envelope.tpl:60
+msgid "Operator"
+msgstr ""
+
+#: include/sieve/templates/element_address.tpl:85
+#: include/sieve/templates/element_header.tpl:77
+#: include/sieve/templates/element_envelope.tpl:76
+msgid "Address fields to include"
+msgstr ""
+
+#: include/sieve/templates/element_address.tpl:89
+#: include/sieve/templates/element_header.tpl:81
+#: include/sieve/templates/element_envelope.tpl:80
+msgid "Values to match for"
+msgstr ""
+
+#: include/sieve/templates/element_address.tpl:116
+#: include/sieve/templates/element_exists.tpl:10
+#: include/sieve/templates/element_size.tpl:11
+#: include/sieve/templates/element_anyof.tpl:5
+#: include/sieve/templates/element_header.tpl:109
+#: include/sieve/templates/element_envelope.tpl:108
+#: include/sieve/templates/element_allof.tpl:5
+#, fuzzy
+msgid "Not"
+msgstr "Nessuno"
+
+#: include/sieve/templates/element_address.tpl:118
+#: include/sieve/templates/element_exists.tpl:12
+#: include/sieve/templates/element_size.tpl:13
+#: include/sieve/templates/element_anyof.tpl:7
+#: include/sieve/templates/element_header.tpl:111
+#: include/sieve/templates/element_envelope.tpl:110
+#: include/sieve/templates/element_allof.tpl:7
+msgid "-"
+msgstr ""
+
+#: include/sieve/templates/element_address.tpl:138
+#: include/sieve/templates/element_header.tpl:131
+#: include/sieve/templates/element_envelope.tpl:130
+#: include/sieve/templates/element_vacation.tpl:47
+msgid "Expert view"
+msgstr ""
+
+#: include/sieve/templates/element_if.tpl:4
+#: include/sieve/class_sieveElement_If.inc:834
+#, fuzzy
+msgid "Condition"
+msgstr "Connessione"
+
+#: include/sieve/templates/element_exists.tpl:10
+#: include/sieve/templates/element_exists.tpl:12
+#: include/sieve/templates/element_size.tpl:11
+#: include/sieve/templates/element_size.tpl:13
+#: include/sieve/templates/element_anyof.tpl:5
+#: include/sieve/templates/element_anyof.tpl:7
+#: include/sieve/templates/element_envelope.tpl:41
+#: include/sieve/templates/element_envelope.tpl:43
+#: include/sieve/templates/element_allof.tpl:5
+#: include/sieve/templates/element_allof.tpl:7
+msgid "Inverse match"
+msgstr ""
+
+#: include/sieve/templates/import_script.tpl:1
+#, fuzzy
+msgid "Import sieve script"
+msgstr "Script di importazione"
+
+#: include/sieve/templates/import_script.tpl:2
+msgid ""
+"Please select the sieve script you want to import. Use the import button to "
+"import the script or the cancel button to abort."
+msgstr ""
+
+#: include/sieve/templates/import_script.tpl:5
+#, fuzzy
+msgid "Script to import"
+msgstr "Path degli script"
+
+#: include/sieve/templates/object_container.tpl:8
+msgid "Move object up one position"
+msgstr ""
+
+#: include/sieve/templates/object_container.tpl:12
+msgid "Move object down one position"
+msgstr ""
+
+#: include/sieve/templates/object_container.tpl:16
+#: include/sieve/templates/object_test_container.tpl:10
+#, fuzzy
+msgid "Remove object"
+msgstr "Componente dell'oggetto??????"
+
+#: include/sieve/templates/object_container.tpl:17
+#: include/sieve/templates/object_container_clear.tpl:17
+#, fuzzy
+msgid "Remove element"
+msgstr "Cancella valore"
+
+#: include/sieve/templates/object_container.tpl:21
+msgid "choose element"
+msgstr ""
+
+#: include/sieve/templates/object_container.tpl:24
+#, fuzzy
+msgid "Fileinto"
+msgstr "File"
+
+#: include/sieve/templates/object_container.tpl:38
+#: include/sieve/templates/object_container.tpl:42
+#, fuzzy
+msgid "Add new"
+msgstr "Aggiungi utente"
+
+#: include/sieve/templates/object_container.tpl:38
+#: include/sieve/templates/object_container.tpl:40
+msgid "Add a new object above this one."
+msgstr ""
+
+#: include/sieve/templates/object_container.tpl:40
+msgid "Add element above"
+msgstr ""
+
+#: include/sieve/templates/object_container.tpl:42
+#: include/sieve/templates/object_container.tpl:44
+msgid "Add a new object below this one."
+msgstr ""
+
+#: include/sieve/templates/object_container.tpl:44
+msgid "Add element below"
+msgstr ""
+
+#: include/sieve/templates/element_boolean.tpl:8
+#, fuzzy
+msgid "update"
+msgstr "Aggiorna"
+
+#: include/sieve/templates/element_reject.tpl:14
+#, fuzzy
+msgid "Reject mail"
+msgstr "Rifiutate mail di dimensione maggiore a"
+
+#: include/sieve/templates/element_reject.tpl:17
+msgid "This is a multiline text element"
+msgstr ""
+
+#: include/sieve/templates/element_reject.tpl:19
+#, fuzzy
+msgid "This is stored as single string"
+msgstr "Questo fa qualcosa"
+
+#: include/sieve/templates/element_redirect.tpl:18
+msgid "Redirect mail to following recipients"
+msgstr ""
+
+#: include/sieve/templates/object_container_clear.tpl:8
+msgid "Move this object up one position"
+msgstr ""
+
+#: include/sieve/templates/object_container_clear.tpl:12
+msgid "Move this object down one position"
+msgstr ""
+
+#: include/sieve/templates/object_container_clear.tpl:16
+#, fuzzy
+msgid "Remove this object"
+msgstr "Rimuovi utente telefonico"
+
+#: include/sieve/templates/element_size.tpl:16
+#, fuzzy
+msgid "Select match type"
+msgstr "Seleziona il modello"
+
+#: include/sieve/templates/element_size.tpl:20
+#, fuzzy
+msgid "Select value unit"
+msgstr "Dipartimento selezionate"
+
+#: include/sieve/templates/element_discard.tpl:9
+#, fuzzy
+msgid "Discard message"
+msgstr "Tieni il messaggio"
+
+#: include/sieve/templates/management.tpl:1
+#, fuzzy
+msgid "List of sieve scripts"
+msgstr "Elenco degli script"
+
+#: include/sieve/templates/management.tpl:5
+msgid ""
+"Connection to the sieve server could not be established, the "
+"authentification attribute is empty."
+msgstr ""
+
+#: include/sieve/templates/management.tpl:6
+msgid ""
+"Please verfiy that the attributes uid and mail are not empty and try again."
+msgstr ""
+
+#: include/sieve/templates/management.tpl:12
+msgid "Connection to the sieve server could not be established."
+msgstr ""
+
+#: include/sieve/templates/management.tpl:15
+msgid "Possibly the sieve account has not been created yet."
+msgstr ""
+
+#: include/sieve/templates/management.tpl:19
+#, fuzzy
+msgid ""
+"Be careful. All your changes will be saved directly to sieve, if you use the "
+"save button below."
+msgstr ""
+"Fate attenzione a modificare i record in questa finestra. I cambiamenti "
+"saranno salvati immediatamente una volta premuto il bottone 'Salva'."
+
+#: include/sieve/templates/management.tpl:22
+#, fuzzy
+msgid "Create new script"
+msgstr "Crea un nuovo utilizzatore"
+
+#: include/sieve/templates/add_element.tpl:1
+msgid "Add a new element"
+msgstr ""
+
+#: include/sieve/templates/add_element.tpl:2
+msgid "Please select the type of element you want to add"
+msgstr ""
+
+#: include/sieve/templates/add_element.tpl:13 setup/setup_migrate.tpl:192
+#, fuzzy
+msgid "Abort"
+msgstr "Porta"
+
+#: include/sieve/templates/object_test_container.tpl:6
+#, fuzzy
+msgid "Add object"
+msgstr "Albero degli oggetti FAI"
+
+#: include/sieve/templates/select_test_type.tpl:1
+#, fuzzy
+msgid "Select the type of test you want to add"
+msgstr "Selezionate i sistemi da aggiungere"
+
+#: include/sieve/templates/select_test_type.tpl:3
+#, fuzzy
+msgid "Available test types"
+msgstr "Attributi delle variabili"
+
+#: include/sieve/templates/element_header.tpl:60
+msgid "operator"
+msgstr ""
+
+#: include/sieve/templates/create_script.tpl:2
+msgid ""
+"Please enter the name for the new script below. Script names must consist of "
+"lower case characters only."
+msgstr ""
+
+#: include/sieve/templates/create_script.tpl:8
+#, fuzzy
+msgid "Script name"
+msgstr "Nome script"
+
+#: include/sieve/templates/element_keep.tpl:9
+#, fuzzy
+msgid "Keep message"
+msgstr "Rilascia il messaggio"
+
+#: include/sieve/templates/remove_script.tpl:10
+#, fuzzy
+msgid ""
+"Best thing to do before performing this action would be to save the current "
+"script in a file. So - if you've done so - press 'Delete' to continue or "
+"'Cancel' to abort."
+msgstr ""
+"E' meglio salvare il contenuto dell'albero LDAP i un file prima di eseguire "
+"questa azione. Una volta fatto questo puoi premere 'Cancella' per proseguire "
+"o 'Annulla' per interompere l'azione."
+
+#: include/sieve/templates/element_fileinto.tpl:4
+#, fuzzy
+msgid "Move mail into folder"
+msgstr "alla cartella"
+
+#: include/sieve/templates/element_fileinto.tpl:8
+#, fuzzy
+msgid "Select from list"
+msgstr "Seleziona il modello"
+
+#: include/sieve/templates/element_fileinto.tpl:10
+#, fuzzy
+msgid "Manual selection"
+msgstr "Settaggi di posta"
+
+#: include/sieve/templates/element_fileinto.tpl:18
+#, fuzzy
+msgid "Folder"
+msgstr "alla cartella"
+
+#: include/sieve/templates/element_stop.tpl:9
+msgid "Stop execution here"
+msgstr ""
+
+#: include/sieve/templates/element_vacation.tpl:13
+#, fuzzy
+msgid "Vacation Message"
+msgstr "Messaggio per assenze"
+
+#: include/sieve/templates/element_vacation.tpl:21
+#, fuzzy
+msgid "Release interval"
+msgstr "Intervallo di tempo"
+
+#: include/sieve/templates/element_vacation.tpl:30
+#, fuzzy
+msgid "Alternative sender addresses"
+msgstr "Indirizzo alternativi"
+
+#: include/sieve/class_sieveElement_Comment.inc:21
+msgid "Your comment here"
+msgstr ""
+
+#: include/sieve/class_sieveElement_Reject.inc:21
+msgid "Invalid character found, quotes are not allowed in a reject message."
+msgstr ""
+
+#: include/sieve/class_sieveElement_Reject.inc:37
+msgid "Your reject text here"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:27
+#, fuzzy
+msgid "Complete address"
+msgstr "Indirizzo e-mail"
+
+#: include/sieve/class_sieveElement_If.inc:27
+#: include/sieve/class_sieveElement_If.inc:33
+#, fuzzy
+msgid "Default"
+msgstr "default"
+
+#: include/sieve/class_sieveElement_If.inc:28
+#, fuzzy
+msgid "Domain part"
+msgstr "Dominio"
+
+#: include/sieve/class_sieveElement_If.inc:29
+msgid "Local part"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:33
+msgid "Case insensitive"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:34
+msgid "Case sensitive"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:35
+msgid "Numeric"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:39
+msgid "is"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:40
+#, fuzzy
+msgid "regex"
+msgstr "reset"
+
+#: include/sieve/class_sieveElement_If.inc:41
+#, fuzzy
+msgid "contains"
+msgstr "Azioni"
+
+#: include/sieve/class_sieveElement_If.inc:42
+#, fuzzy
+msgid "matches"
+msgstr "Cache"
+
+#: include/sieve/class_sieveElement_If.inc:43
+#, fuzzy
+msgid "count"
+msgstr "Utente"
+
+#: include/sieve/class_sieveElement_If.inc:44
+#, fuzzy
+msgid "value is"
+msgstr "valido"
+
+#: include/sieve/class_sieveElement_If.inc:48
+msgid "less than"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:49
+msgid "less or equal"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:50
+#, fuzzy
+msgid "equals"
+msgstr "Dettagli"
+
+#: include/sieve/class_sieveElement_If.inc:51
+msgid "greater or equal"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:52
+#: include/sieve/class_sieveElement_If.inc:726
+#: include/sieve/class_sieveElement_If.inc:1059
+#, fuzzy
+msgid "greater than"
+msgstr "Crea opzioni"
+
+#: include/sieve/class_sieveElement_If.inc:53
+#, fuzzy
+msgid "not equal"
+msgstr "nessun esempio"
+
+#: include/sieve/class_sieveElement_If.inc:102
+#, fuzzy
+msgid "Can't save empty tests."
+msgstr "Non posso salvare i file '%s'."
+
+#: include/sieve/class_sieveElement_If.inc:446
+#, fuzzy
+msgid "emtpy"
+msgstr "vuoto"
+
+#: include/sieve/class_sieveElement_If.inc:493
+msgid "Nothing specified right now"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:595
+msgid "Invalid type of address part."
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:605
+msgid "Invalid match type given."
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:621
+msgid "Invalid operator given."
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:638
+#, fuzzy
+msgid "Please specify a valid operator."
+msgstr "Per favore specificare un valido id."
+
+#: include/sieve/class_sieveElement_If.inc:654
+msgid ""
+"Invalid character found in address attribute. Quotes are not allowed here."
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:669
+#, fuzzy
+msgid ""
+"Invalid character found in value attribute. Quotes are not allowed here."
+msgstr ""
+"Carattere non valido nel nome dell'applicazione: solo i caratteri a-z e 0-9 "
+"sono consentiti."
+
+#: include/sieve/class_sieveElement_If.inc:727
+#: include/sieve/class_sieveElement_If.inc:1060
+msgid "lower than"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:729
+#: include/sieve/class_sieveElement_If.inc:1062
+msgid "Megabyte"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:730
+#: include/sieve/class_sieveElement_If.inc:1063
+msgid "Kilobyte"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:731
+#: include/sieve/class_sieveElement_If.inc:1064
+#, fuzzy
+msgid "Bytes"
+msgstr "Sì"
+
+#: include/sieve/class_sieveElement_If.inc:745
+#, fuzzy
+msgid "Please select a valid match type in the list box below."
+msgstr "Per favore selezionate un valido server di posta."
+
+#: include/sieve/class_sieveElement_If.inc:759
+#, fuzzy
+msgid "Only numeric values are allowed here."
+msgstr "Sono ammessi solo caratteri numerici nel campo 'Numero'"
+
+#: include/sieve/class_sieveElement_If.inc:769
+#, fuzzy
+msgid "No valid unit selected"
+msgstr "Nessun valido certificato caricato"
+
+#: include/sieve/class_sieveElement_If.inc:876
+#, fuzzy
+msgid "Empty"
+msgstr "vuoto"
+
+#: include/sieve/class_sieveElement_If.inc:1134
+#: include/sieve/class_sieveElement_If.inc:1164
+#, fuzzy
+msgid "Click here to add a new test"
+msgstr "Cliccare quì per autenticarsi"
+
+#: include/sieve/class_sieveElement_If.inc:1176
+msgid "Unhandled switch type"
+msgstr ""
+
+#: include/sieve/class_My_Tree.inc:245
+msgid "Can't remove last element."
+msgstr ""
+
+#: include/sieve/class_My_Tree.inc:250
+msgid "Can't remove element with object_id="
+msgstr ""
+
+#: include/sieve/class_My_Tree.inc:658
+msgid "Require must be the first command in the script."
+msgstr ""
+
+#: setup/class_setupStep_Config2.inc:79 setup/class_setupStep_Config2.inc:80
+#, fuzzy
+msgid "GOsa settings 2/3"
+msgstr "Settaggi di posta"
+
+#: setup/class_setupStep_Config2.inc:81
+#, fuzzy
+msgid "Customize special parameters"
+msgstr "Verifica i parametri"
+
+#: setup/setup_finish.tpl:3
+#, fuzzy
+msgid "Create your configuration file"
+msgstr "Configurazione dei file"
+
+#: setup/setup_finish.tpl:18
+#, fuzzy
+msgid "Status: "
+msgstr "Stato"
+
+#: setup/setup_checks.tpl:9
+msgid "PHP module and extension checks"
+msgstr ""
+
+#: setup/setup_checks.tpl:41 setup/setup_checks.tpl:103
+msgid "GOsa will NOT run without fixing this."
+msgstr ""
+
+#: setup/setup_checks.tpl:45 setup/setup_checks.tpl:107
+msgid "GOsa will run without fixing this."
+msgstr ""
+
+#: setup/setup_checks.tpl:67
+#, fuzzy
+msgid "PHP setup configuration"
+msgstr "Ispezione setup PHP"
+
+#: setup/setup_checks.tpl:67
+#, fuzzy
+msgid "show information"
+msgstr "Informazioni personali"
+
+#: setup/class_setupStep_Language.inc:40 setup/class_setupStep_Language.inc:41
+#, fuzzy
+msgid "Language setup"
+msgstr "Lingua"
+
+#: setup/class_setupStep_Language.inc:42
+msgid "This step is allows you to select your prefered language."
+msgstr ""
+
+#: setup/class_setupStep_Language.inc:47
+#, fuzzy
+msgid "Automatic"
+msgstr "automatico"
+
+#: setup/setup_config1.tpl:2
+msgid "Look and feel"
+msgstr ""
+
+#: setup/setup_config1.tpl:6
+#, fuzzy
+msgid "Theme"
+msgstr "Modello"
+
+#: setup/setup_config1.tpl:15
+#, fuzzy
+msgid "People and group storage"
+msgstr "Persone - archivio unità organizzativa (OU)"
+
+#: setup/setup_config1.tpl:18
+#, fuzzy
+msgid "People DN attribute"
+msgstr "Persone - attributo dn (dn)"
+
+#: setup/setup_config1.tpl:29
+#, fuzzy
+msgid "People storage subtree"
+msgstr "Persone - archivio unità organizzativa (OU)"
+
+#: setup/setup_config1.tpl:38
+#, fuzzy
+msgid "Group storage subtree"
+msgstr "Gruppi - archivio unità organizzativa (OU)"
+
+#: setup/setup_config1.tpl:47
+msgid "Include personal title in user DN"
+msgstr ""
+
+#: setup/setup_config1.tpl:58
+msgid "Relaxed naming policies"
+msgstr ""
+
+#: setup/setup_config1.tpl:69
+#, fuzzy
+msgid "Automatic uids"
+msgstr "automatico"
+
+#: setup/setup_config1.tpl:85 setup/class_setupStep_Config1.inc:117
+msgid "GID / UID min id"
+msgstr ""
+
+#: setup/setup_config1.tpl:101
+#, fuzzy
+msgid "Number base for people/groups"
+msgstr "ID base per utenti e gruppi"
+
+#: setup/setup_config1.tpl:109
+msgid "Hook for number base"
+msgstr ""
+
+#: setup/setup_config1.tpl:124
+#, fuzzy
+msgid "Password settings"
+msgstr "Impostazioni utente"
+
+#: setup/setup_config1.tpl:128
+#, fuzzy
+msgid "Password encryption algorithm"
+msgstr "Algoritmo di encriptazione"
+
+#: setup/setup_config1.tpl:139
+#, fuzzy
+msgid "Password restrictions"
+msgstr "La password scade il "
+
+#: setup/setup_config1.tpl:146 setup/setup_config1.tpl:150
+msgid "Password minimum length"
+msgstr ""
+
+#: setup/setup_config1.tpl:157 setup/setup_config1.tpl:161
+msgid "Different characters from old password"
+msgstr ""
+
+#: setup/setup_config1.tpl:170
+#, fuzzy
+msgid "Password change hook"
+msgstr "Il cambio della password non è permesso"
+
+#: setup/setup_config1.tpl:186
+msgid "Use SASL for kerberos"
+msgstr ""
+
+#: setup/setup_config1.tpl:197
+#, fuzzy
+msgid "Use account expiration"
+msgstr "Scadenza utenti dopo"
+
+#: setup/setup_config1.tpl:210
+#, fuzzy
+msgid ""
+"GOsa always acts as admin and manages access rights internally. This is a "
+"workaround till OpenLDAP's in directory ACI's are    fully implemented. For "
+"this to work, we need the admin DN and the corresponding password."
+msgstr ""
+"GOsa opera sempre come 'Amministratore' e gestisce i diritti di accesso "
+"internamente. Questa è una soluzione provvisoria fintanto che OpenLDAP nella "
+"directory ACI non sarà completamente implementato. Per questa ragione è "
+"necessario l'amministratore DN e la corrispondente password."
+
+#: setup/setup_config1.tpl:212
+#, fuzzy
+msgid ""
+"GOsa has modular support for several mail methods. These methods provide "
+"interfaces to users mailboxes and general handling    for quotas. You can "
+"choose the dummy plugin to leave all your mail settings untouched."
+msgstr ""
+"GOsa ha un supporto modulare per diversi sistemi di posta elettroncia "
+"(mail). Questo metodo permetee di utilzzare interfacce per gestire le "
+"mailbox e determiante i limiti delle stesse (quota). Potete scegliere il "
+"plugin adatto per lasciare invariati i settaggi effettuati. ?????"
+
+#: setup/class_setupStep_Config1.inc:73 setup/class_setupStep_Config1.inc:74
+#, fuzzy
+msgid "GOsa settings 1/3"
+msgstr "Settaggi di posta"
+
+#: setup/class_setupStep_Config1.inc:75
+#, fuzzy
+msgid "GOsa generic settings"
+msgstr "Impostazioni utente"
+
+#: setup/class_setupStep_Config1.inc:117
+#, fuzzy, php-format
+msgid "The specified value for '%s' must be a numeric value"
+msgstr "Il valore indicato per '%s' deve essere numerico."
+
+#: setup/class_setupStep_Config1.inc:121 setup/class_setupStep_Config1.inc:125
+#, php-format
+msgid "Don't add a trailing comma to '%s'."
+msgstr ""
+
+#: setup/class_setupStep_Config1.inc:129
+#, fuzzy
+msgid "Uid base must be numeric"
+msgstr "Il timeout deve essere un valore numerico"
+
+#: setup/class_setupStep_Config1.inc:133
+#, fuzzy
+msgid "The given password minimum length is not numeric."
+msgstr "La porta Sieve deve essere indicata con un numero."
+
+#: setup/class_setupStep_Config1.inc:136
+#, fuzzy
+msgid "The given password differ value is not numeric."
+msgstr "La porta Sieve deve essere indicata con un numero."
+
+#: setup/class_setupStep_License.inc:53 setup/class_setupStep_License.inc:54
+#, fuzzy
+msgid "License"
+msgstr "Linea"
+
+#: setup/class_setupStep_License.inc:55
+msgid "Terms and conditions for usage"
+msgstr ""
+
+#: setup/setup_schema.tpl:3
+#, fuzzy
+msgid "Schema specific settings"
+msgstr "Parametri samba"
+
+#: setup/setup_schema.tpl:7
+msgid "Enable schema validation when logging in"
+msgstr ""
+
+#: setup/setup_schema.tpl:16
+#, fuzzy
+msgid "Check status"
+msgstr "con stato"
+
+#: setup/setup_schema.tpl:20
+msgid "Schema check succeeded"
+msgstr ""
+
+#: setup/setup_schema.tpl:23
+#, fuzzy
+msgid "Schema check failed"
+msgstr "Salvataggio del telefono fallito"
+
+#: setup/class_setupStep_Feedback.inc:92
+msgid "UNIX accounts/groups"
+msgstr ""
+
+#: setup/class_setupStep_Feedback.inc:94
+#, fuzzy
+msgid "Samba management"
+msgstr "Gestione del sistema"
+
+#: setup/class_setupStep_Feedback.inc:96
+#, fuzzy
+msgid "Mailsystem management"
+msgstr "Gestione del sistema"
+
+#: setup/class_setupStep_Feedback.inc:98
+#, fuzzy
+msgid "FAX system administration"
+msgstr "Utente amministativo"
+
+#: setup/class_setupStep_Feedback.inc:100
+#, fuzzy
+msgid "Asterisk administration"
+msgstr "Utente amministativo"
+
+#: setup/class_setupStep_Feedback.inc:102
+#, fuzzy
+msgid "System invetory"
+msgstr "Rimuovi l'elenco/l'inventario (inventory)"
+
+#: setup/class_setupStep_Feedback.inc:104
+#, fuzzy
+msgid "System-/Configmanagement"
+msgstr "Gestione del sistema"
+
+#: setup/class_setupStep_Feedback.inc:111
+#: setup/class_setupStep_Feedback.inc:113
+msgid "Notification and feedback"
+msgstr ""
+
+#: setup/class_setupStep_Feedback.inc:112
+#, fuzzy
+msgid "Get notifications or send feedback"
+msgstr "Comandi di notifica dell'Host"
+
+#: setup/class_setupStep_Feedback.inc:177
+#, fuzzy
+msgid "Could not send feedback."
+msgstr "Non posso selezionare il database!"
+
+#: setup/setup_migrate.tpl:5
+msgid ""
+"During the LDAP inspection, we're going to check for several common pitfalls "
+"that may occur when migration to GOsa base LDAP administration. You may want "
+"to fix the problems below, in order to provide smooth services."
+msgstr ""
+
+#: setup/setup_migrate.tpl:33
+#, fuzzy
+msgid "Check again"
+msgstr "Controlla"
+
+#: setup/setup_migrate.tpl:37
+msgid "Move windows workstations into a valid windows workstation department"
+msgstr ""
+
+#: setup/setup_migrate.tpl:39
+msgid ""
+"This dialog allows you to move the displayed windows workstations into a "
+"valid department"
+msgstr ""
+
+#: setup/setup_migrate.tpl:41
+msgid ""
+"Be careful with this tool, there may be references pointing to this "
+"workstations that can't be migrated."
+msgstr ""
+
+#: setup/setup_migrate.tpl:66
+msgid "Move selected windows workstations into the following GOsa department"
+msgstr ""
+
+#: setup/setup_migrate.tpl:71
+#, fuzzy
+msgid "Move selected workstations"
+msgstr "Seleziona per vedere le workstation"
+
+#: setup/setup_migrate.tpl:72
+msgid "What will be done here"
+msgstr ""
+
+#: setup/setup_migrate.tpl:84
+msgid "Move groups into configured group tree"
+msgstr ""
+
+#: setup/setup_migrate.tpl:87
+msgid ""
+"This dialog allows moving a couple of groups to the configured group tree. "
+"Doing this may straighten your LDAP service."
+msgstr ""
+
+#: setup/setup_migrate.tpl:90
+msgid ""
+"Be careful with this option! There may be references pointing to these "
+"groups. The GOsa setup can't migrate references, so you may want to cancel "
+"the migration in this case in this case."
+msgstr ""
+
+#: setup/setup_migrate.tpl:93
+msgid "Move selected groups into this group tree"
+msgstr ""
+
+#: setup/setup_migrate.tpl:121 setup/setup_migrate.tpl:170
+#: setup/setup_migrate.tpl:312 setup/setup_migrate.tpl:366
+msgid "Hide changes"
+msgstr ""
+
+#: setup/setup_migrate.tpl:123 setup/setup_migrate.tpl:172
+#: setup/setup_migrate.tpl:314 setup/setup_migrate.tpl:368
+#, fuzzy
+msgid "Show changes"
+msgstr "Mostra pacchetti"
+
+#: setup/setup_migrate.tpl:136
+msgid "Move users into configured user tree"
+msgstr ""
+
+#: setup/setup_migrate.tpl:138
+msgid ""
+"This dialog allows moving a couple of users to the configured user tree. "
+"Doing this may straighten your LDAP service."
+msgstr ""
+
+#: setup/setup_migrate.tpl:141
+msgid ""
+"Be careful with this option! There may be references pointing to these "
+"users. The GOsa setup can't migrate references, so you may want to cancel "
+"the migration in this case in this case."
+msgstr ""
+
+#: setup/setup_migrate.tpl:144
+#, fuzzy
+msgid "Move selected users into this people tree"
+msgstr "Crea utente con questo modello"
+
+#: setup/setup_migrate.tpl:191
+#, fuzzy
+msgid "Next"
+msgstr "prossimo"
+
+#: setup/setup_migrate.tpl:194
+#, fuzzy
+msgid "Create a new GOsa administrator account"
+msgstr "Crea un utente Netatalk"
+
+#: setup/setup_migrate.tpl:197
+msgid ""
+"This dialog will automatically add a new super administrator to your LDAP "
+"tree."
+msgstr ""
+
+#: setup/setup_migrate.tpl:226
+#, fuzzy
+msgid "Password (again)"
+msgstr "Archiviazione password"
+
+#: setup/setup_migrate.tpl:236
+msgid "Assign super administrator permissions to an existing user or group"
+msgstr ""
+
+#: setup/setup_migrate.tpl:237
+msgid ""
+"To grant administrative permissions to a user or a group, select an object "
+"and choose 'Assign'."
+msgstr ""
+
+#: setup/setup_migrate.tpl:275
+msgid ""
+"The listed deparmtents are currenlty invisble in the GOsa user interface. If "
+"you want to change this for a couple of entries, select them and use the "
+"migrate button below."
+msgstr ""
+
+#: setup/setup_migrate.tpl:276 setup/setup_migrate.tpl:329
+msgid ""
+"If you want to know what will be done when migrating the selected entries, "
+"use the 'Show changes' button to see the LDIF."
+msgstr ""
+
+#: setup/setup_migrate.tpl:286 setup/setup_migrate.tpl:338
+#, fuzzy
+msgid "Current"
+msgstr "release corrente"
+
+#: setup/setup_migrate.tpl:293 setup/setup_migrate.tpl:345
+#, fuzzy
+msgid "After migration"
+msgstr "Utente amministativo"
+
+#: setup/setup_migrate.tpl:328
+msgid ""
+"The listed users are currenlty invisble in the GOsa user interface. If you "
+"want to change this for a couple of users, just select them and use the "
+"'Migrate' button below."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:38 setup/class_setupStep_Checks.inc:39
+msgid "Installation check"
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:40
+msgid "Basic checks for PHP version and required extensions."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:64
+#, fuzzy
+msgid "Checking PHP version"
+msgstr "Controllo versione PHP  (>=4.1.0)"
+
+#: setup/class_setupStep_Checks.inc:65
+#, php-format
+msgid "PHP must be of version %s / %s or above."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:66
+msgid ""
+"GOsa requires functionality that is not available (or buggy) in older PHP "
+"versions. Please update to a supported version."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:72
+#, fuzzy
+msgid "Checking for LDAP support"
+msgstr "Controllo per supporto iconv "
+
+#: setup/class_setupStep_Checks.inc:73
+#, fuzzy
+msgid "This is the main extension used by GOsa and therefore really required."
+msgstr "Questo è il principale modulo usato da GOsa e non può mancare."
+
+#: setup/class_setupStep_Checks.inc:74
+msgid ""
+"The ldap extension (php4-ldap/php5-ldap) is required to communicate with "
+"your LDAP server."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:81
+#, fuzzy
+msgid "Gettext support is required for internationalization."
+msgstr "Il supporto Gettext è richiesto per le versioni localizzate di GOsa."
+
+#: setup/class_setupStep_Checks.inc:82 setup/class_setupStep_Checks.inc:90
+msgid "Please make sure that the extension is activated."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:89
+#, fuzzy
+msgid ""
+"This module is used by GOsa to convert samba munged dial informations and is "
+"therefore required. "
+msgstr ""
+"Questo modulo è usato da GOsa pr convertire munged ??? informazioni di "
+"composizione delefonica di samba ed è necessario."
+
+#: setup/class_setupStep_Checks.inc:96
+#, fuzzy
+msgid "Checking for mhash support"
+msgstr "Controllo per supporto iconv "
+
+#: setup/class_setupStep_Checks.inc:97
+msgid "You'll need this module to make use of SSHA encryption"
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:98
+msgid ""
+"The mhash module for PHP 4/5 is not available.Pplease install php4-mhash/"
+"php5-mhash."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:104
+#, fuzzy
+msgid "Checking for IMAP support"
+msgstr "Controllo per supporto iconv "
+
+#: setup/class_setupStep_Checks.inc:105
+#, fuzzy
+msgid ""
+"The IMAP module is needed to communicate with the IMAP server. GOsa "
+"retrieves status information, creates and deletes mail users, etc."
+msgstr ""
+"Il modulo IMAP è necessario per comunicare con il server IMAP. Esso "
+"acquisisce lo nstato delle informazioni, crea e cancella gloi utenti di "
+"posta."
+
+#: setup/class_setupStep_Checks.inc:106
+msgid ""
+"This module is used to communicate with your mail server. Please install "
+"php4-imap/php5-imap."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:112
+#, fuzzy
+msgid "Checking for getacl in IMAP implementation"
+msgstr "Controllo per getacl in imap"
+
+#: setup/class_setupStep_Checks.inc:113
+#, fuzzy
+msgid ""
+"The getacl support is needed to handle shared folder permissions. Old IMAP "
+"extensions are not capable of reading acl's. You need a recent PHP version "
+"to use this feature."
+msgstr ""
+"Il supporto getacl è necessario per i permessi sulle cartelle condivise. Il "
+"modulo standard IMAP non è in grado di leggere le acls's. Hai bisogno di una "
+"versione recente di PHP con questa caratteristica."
+
+#: setup/class_setupStep_Checks.inc:120
+#, fuzzy
+msgid "Checking for MySQL support"
+msgstr "Controllo per supporto iconv "
+
+#: setup/class_setupStep_Checks.inc:121
+#, fuzzy
+msgid ""
+"MySQL support is needed to communicate with several supported databases."
+msgstr ""
+"Il supporto MySQL è necessario per leggere i report di GOFax dal database. "
+
+#: setup/class_setupStep_Checks.inc:122
+msgid ""
+"This module is required to communicate with database servers (GOfax, "
+"asterisk, GLPI, etc.). Please install php4-mysql/php5-mysql"
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:128
+#, fuzzy
+msgid "Checking for kadm5 support"
+msgstr "Controllo per supporto iconv "
+
+#: setup/class_setupStep_Checks.inc:130
+#, fuzzy
+msgid ""
+"This module is required to manage user in kerberos, it is downloadable via "
+"PEAR network"
+msgstr ""
+"La gestione degli utenti in kerberos richiede il modulo kadm5 che è "
+"scaricabile attraverso il netowork PEAR."
+
+#: setup/class_setupStep_Checks.inc:136
+#, fuzzy
+msgid "Checking for SNMP support"
+msgstr "Controllo per supporto iconv "
+
+#: setup/class_setupStep_Checks.inc:137
+#, fuzzy
+msgid ""
+"The simple network management protocol is needed to get status information "
+"from clients."
+msgstr ""
+"Simple Network Management Protocol (SNMP) è richiesto per il controllo dei "
+"client."
+
+#: setup/class_setupStep_Checks.inc:138
+msgid ""
+"This module is required for client monitoring. Please install php4-snmp/php5-"
+"snmp."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:144
+#, fuzzy
+msgid "Checking for CUPS support"
+msgstr "Controllo per supporto iconv "
+
+#: setup/class_setupStep_Checks.inc:145
+#, fuzzy
+msgid ""
+"In order to read available printers via the IPP protocol instead of printcap "
+"files, you've to install the CUPS module."
+msgstr ""
+"Per leggere le stampanti disponibili dal protocollo IPP anziché dal file di "
+"printcap devi aver installato il modulo CUPS."
+
+#: setup/class_setupStep_Checks.inc:155
+#, fuzzy
+msgid ""
+"The fping utility is used if you've got a thin client based terminal "
+"environment."
+msgstr ""
+"L'utilità fping è usata solo se hai un thin????? client basato su una "
+"ambiente terminale in uso."
+
+#: setup/class_setupStep_Checks.inc:156
+#, fuzzy
+msgid ""
+"The fping utility is only used in thin client based terminal environment."
+msgstr ""
+"L'utilità fping è usata solo se hai un thin????? client basato su una "
+"ambiente terminale in uso."
+
+#: setup/class_setupStep_Checks.inc:171
+msgid "SAMBA password hash generation"
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:172
+#, fuzzy
+msgid ""
+"In order to use SAMBA 2/3 passwords, you've to install additional packages "
+"to generate password hashes."
+msgstr ""
+"Per usare samba 2/3 devi installare anche i pacchetti addizionali per "
+"geenrare gli hashes delle password."
+
+#: setup/class_setupStep_Checks.inc:173
+#, fuzzy
+msgid ""
+"In order to use SAMBA 2/3 you've to install additional perl libraries. Take "
+"a look at mkntpasswd."
+msgstr ""
+"Per usare samba 2/3 devi installare anche i pacchetti addizionali per "
+"geenrare gli hashes delle password."
+
+#: setup/class_setupStep_Checks.inc:183 setup/class_setupStep_Checks.inc:202
+#: setup/class_setupStep_Checks.inc:218 setup/class_setupStep_Checks.inc:234
+#: setup/class_setupStep_Checks.inc:251
+#, fuzzy
+msgid "Off"
+msgstr "Sconnesso"
+
+#: setup/class_setupStep_Checks.inc:184
+#, fuzzy
+msgid ""
+"register_globals is a PHP mechanism to register all global varibales to be "
+"accessible from scripts without changing the scope. This may be a security "
+"risk."
+msgstr ""
+"register_globals è un meccanismo PHP per registrare tutte le variabili "
+"globali che debbono essere accessibili da uno script senza modificare lo "
+"scopo.  Questo può comportare problemi di sicurezza. GOsa può operare in "
+"entrambi i modi."
+
+#: setup/class_setupStep_Checks.inc:185
+#, fuzzy
+msgid "Search for 'register_globals' in your php.ini and switch it to 'Off'."
+msgstr "Controllate se register_globals è impostata a 'off'"
+
+#: setup/class_setupStep_Checks.inc:193
+msgid "PHP uses this value for the garbage collector to delete old sessions."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:194
+#, fuzzy
+msgid ""
+"Setting this value to one day will prevent loosing session and cookies "
+"before they really timeout."
+msgstr ""
+"PHP usa questo valore per collezionare scarti derivanti dall'eliminiazione "
+"di vecchie sessioni;  impostare questo valore a un giorno previene dal "
+"rischio di perdere sessioni e cookie prima dell'effettiva scadenza."
+
+#: setup/class_setupStep_Checks.inc:195
+msgid ""
+"Search for 'session.gc_maxlifetime' in your php.ini and set it to 86400 or "
+"higher."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:203
+#, fuzzy
+msgid ""
+"In Order to use GOsa without any trouble, the session.auto_register option "
+"in your php.ini should be set to 'Off'."
+msgstr ""
+"Per usare GOsa senza problemi l'opzione session.auto_register nel file php."
+"ini deve essere impostata a 'Off'."
+
+#: setup/class_setupStep_Checks.inc:204
+#, fuzzy
+msgid "Search for 'session.auto_start' in your php.ini and set it to 'Off'."
+msgstr ""
+"Per usare GOsa senza problemi l'opzione session.auto_register nel file php."
+"ini deve essere impostata a 'Off'."
+
+#: setup/class_setupStep_Checks.inc:211
+#, fuzzy
+msgid ""
+"GOsa needs at least 32MB of memory. Setting it below this limit may cause "
+"errors that are not reproducable! Increase it for larger setups."
+msgstr ""
+"GOsa richiede almeno 16 MB di memoria, utilizzarne meno può generare "
+"imprevisti errori! Aumentatela per setup più complessi."
+
+#: setup/class_setupStep_Checks.inc:212
+msgid ""
+"Search for 'memory_limit' in your php.ini and set it to '32M' or higher."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:219
+#, fuzzy
+msgid ""
+"This option influences the PHP output handling. Turn this Option off, to "
+"increase performance."
+msgstr ""
+"Questa opzione influenza la gestione degli output. Disattivate l'opzione per "
+"migliorare le performance."
+
+#: setup/class_setupStep_Checks.inc:220
+msgid "Search for 'implicit_flush' in your php.ini and set it to 'Off'."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:227
+#, fuzzy
+msgid "The Execution time should be at least 30 seconds."
+msgstr ""
+"Il tempo di esecuzione dovrebbe essere di almeno 30 secondi perchè alcune "
+"azioni potranno richiedere diveso tempo."
+
+#: setup/class_setupStep_Checks.inc:228
+msgid ""
+"Search for 'max_execution_time' in your php.ini and set it to '30' or higher."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:235
+#, fuzzy
+msgid ""
+"Increase the server security by setting expose_php to 'off'. PHP won't send "
+"any information about the server you are running in this case."
+msgstr ""
+"Aumentate la sicurezza del server settando 'expose_php' a 'off''. PHP in "
+"questo modo non invierà informazioni sul server in uso."
+
+#: setup/class_setupStep_Checks.inc:236
+msgid "Search for 'expose_php' in your php.ini and set if to 'Off'."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:242
+#, fuzzy
+msgid "On"
+msgstr "Apri"
+
+#: setup/class_setupStep_Checks.inc:244
+msgid "Search for 'magic_quotes_gpc' in your php.ini and set it to 'On'."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:252
+#, fuzzy
+msgid "Increase your server performance by setting magic_quotes_gpc to 'off'."
+msgstr ""
+"Aumentate la sicurezza del server settando 'magic_quotes_gpc' a 'on'. In "
+"questo caso PHP non eseguirà le stringhe tra virgolette."
+
+#: setup/class_setupStep_Checks.inc:253
+msgid ""
+"Search for 'zend.ze1_compatibility_mode' in your php.ini and set it to 'Off'."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:264
+#, fuzzy
+msgid "Configuration writeable"
+msgstr "Configurazione dei file"
+
+#: setup/class_setupStep_Checks.inc:265
+#, fuzzy
+msgid "The configuration file can't be written"
+msgstr "visualizza le informazioni di configurazione"
+
+#: setup/class_setupStep_Checks.inc:266
+#, php-format
+msgid ""
+"GOsa reads its configuration from a file located in (%s/%s). The setup can "
+"write the configuration directly if it is writeable."
+msgstr ""
+
+#: setup/class_setupStep_Finish.inc:38
+#, fuzzy
+msgid "Write configuration file"
+msgstr "Configurazione dei file"
+
+#: setup/class_setupStep_Finish.inc:39
+#, fuzzy
+msgid "Finish - write the configuration file"
+msgstr "Le funzioni XML sono richieste per esaminare i file di configurazione."
+
+#: setup/class_setupStep_Finish.inc:100
+msgid ""
+"Your configuration file is currently world readable. Please updated the file "
+"permissions!"
+msgstr ""
+
+#: setup/class_setupStep_Finish.inc:102
+#, fuzzy
+msgid "The configuration is currently not readable or it does not exists."
+msgstr ""
+"La configurazione di GOsa  %s/gosa.conf non è leggibile. Operazione "
+"interrotta."
+
+#: setup/class_setupStep_Finish.inc:111
+#, fuzzy, php-format
+msgid ""
+"After downloading and placing the file under %s, please make sure that the "
+"user the webserver is running with is able to read %s, while other users "
+"shouldn't. You may want to execute these commands to achieve this "
+"requirement:"
+msgstr ""
+"Dopo aver posto il file in /etc/gosa, verificate che l'utente di default del "
+"webserver sia in grado di leggere il file gosa.conf , altrimenti i reali "
+"utenti non potranno operare. Potrebbe essere necessario eseguire le seguenti "
+"istruzioni per far leggere questo file:"
+
+#: setup/setup_welcome.tpl:4
+msgid ""
+"This seems to be the first time you start GOsa - we didn't find any "
+"configuration right now. This simple wizard intends to help you while "
+"setting it up."
+msgstr ""
+
+#: setup/setup_welcome.tpl:8
+msgid "What will the wizard do for you?"
+msgstr ""
+
+#: setup/setup_welcome.tpl:11
+msgid "Create a basic, single site configuration"
+msgstr ""
+
+#: setup/setup_welcome.tpl:12
+msgid "Tries to find problems within your PHP and LDAP setup"
+msgstr ""
+
+#: setup/setup_welcome.tpl:13
+msgid "Let you choose from a set of basic and advanced configuration switches"
+msgstr ""
+
+#: setup/setup_welcome.tpl:14
+msgid "Guided migration of existing LDAP trees"
+msgstr ""
+
+#: setup/setup_welcome.tpl:17
+msgid "What will the wizard NOT do for you?"
+msgstr ""
+
+#: setup/setup_welcome.tpl:20
+msgid "Find every possible configuration error"
+msgstr ""
+
+#: setup/setup_welcome.tpl:21
+msgid "Migrate every possible LDAP setup - create backup dumps!"
+msgstr ""
+
+#: setup/setup_welcome.tpl:25
+#, fuzzy
+msgid "To continue..."
+msgstr "Setup in progresso....."
+
+#: setup/setup_welcome.tpl:28
+msgid ""
+"For security reasons you need to authenticate for the installation by "
+"creating the file '/tmp/gosa.auth', containing the current session ID on the "
+"servers local filesystem. This can be done by executing the following "
+"command:"
+msgstr ""
+
+#: setup/setup_welcome.tpl:34
+msgid "Click the 'Continue' button when you've finished."
+msgstr ""
+
+#: setup/class_setupStep_Ldap.inc:53
+#, fuzzy
+msgid "LDAP setup"
+msgstr "Server LDAP"
+
+#: setup/class_setupStep_Ldap.inc:54
+#, fuzzy
+msgid "LDAP connection setup"
+msgstr "Disconnessione"
+
+#: setup/class_setupStep_Ldap.inc:55
+msgid ""
+"This dialog performs the basic configuration of the LDAP connectivity for "
+"GOsa."
+msgstr ""
+
+#: setup/class_setupStep_Ldap.inc:99
+#, fuzzy, php-format
+msgid "Anonymous bind failed on server '%s'."
+msgstr "Login dell'utente fallito. Il server LDAP risponde '%s'."
+
+#: setup/class_setupStep_Ldap.inc:101
+#, fuzzy, php-format
+msgid "Bind as user '%s' failed on server '%s'."
+msgstr "Login dell'utente fallito. Il server LDAP risponde '%s'."
+
+#: setup/class_setupStep_Ldap.inc:106
+#, php-format
+msgid "Anonymous bind on server '%s' succeeded."
+msgstr ""
+
+#: setup/class_setupStep_Ldap.inc:107
+#, fuzzy
+msgid "Please specify user and password."
+msgstr "Per favore specificate la vostra password!"
+
+#: setup/class_setupStep_Ldap.inc:109
+#, fuzzy, php-format
+msgid "Bind as user '%s' on server '%s' succeeded."
+msgstr "Non posso selezionare il database %s in %s."
+
+#: setup/setup_feedback.tpl:4
+msgid "Subscribe to the gosa-announce mailinglist"
+msgstr ""
+
+#: setup/setup_feedback.tpl:7
+msgid ""
+"When checking this option, GOsa will try to connect http://oss.gonicus.de in "
+"order to subscribe you to the gosa-announce mailing list. You've to confirm "
+"this by mail."
+msgstr ""
+
+#: setup/setup_feedback.tpl:39
+msgid "Send feedback to the GOsa project team"
+msgstr ""
+
+#: setup/setup_feedback.tpl:42
+msgid ""
+"When checking this option, GOsa will try to connect http://oss.gonicus.de in "
+"order to submit your form anonymously."
+msgstr ""
+
+#: setup/setup_feedback.tpl:48
+msgid "Did the setup procedure help you to get started?"
+msgstr ""
+
+#: setup/setup_feedback.tpl:58
+msgid "If not, what problems did you encounter"
+msgstr ""
+
+#: setup/setup_feedback.tpl:66
+msgid "Is this the first time you use GOsa?"
+msgstr ""
+
+#: setup/setup_feedback.tpl:72
+msgid "I use it since"
+msgstr ""
+
+#: setup/setup_feedback.tpl:73
+msgid "Select the year since when you are using GOsa"
+msgstr ""
+
+#: setup/setup_feedback.tpl:80
+msgid "What operating system / distribution do you use?"
+msgstr ""
+
+#: setup/setup_feedback.tpl:88
+msgid "What web server do you use?"
+msgstr ""
+
+#: setup/setup_feedback.tpl:96
+msgid "What PHP version do you use?"
+msgstr ""
+
+#: setup/setup_feedback.tpl:104
+msgid "LDAP"
+msgstr ""
+
+#: setup/setup_feedback.tpl:108
+msgid "What kind of LDAP server(s) do you use?"
+msgstr ""
+
+#: setup/setup_feedback.tpl:114
+msgid "How many objects are in your LDAP?"
+msgstr ""
+
+#: setup/setup_feedback.tpl:121
+#, fuzzy
+msgid "Features"
+msgstr "Future"
+
+#: setup/setup_feedback.tpl:124
+msgid "What features of GOsa do you use?"
+msgstr ""
+
+#: setup/setup_feedback.tpl:134
+msgid "What features do you want to see in future versions of GOsa?"
+msgstr ""
+
+#: setup/setup_feedback.tpl:141
+msgid "Send feedback"
+msgstr ""
+
+#: setup/setup_config3.tpl:2
+#, fuzzy
+msgid "GOsa core settings"
+msgstr "Impostazioni utente"
+
+#: setup/setup_config3.tpl:6
+#, fuzzy
+msgid "Disable primary group filter"
+msgstr "Mostra gruppi di utenti"
+
+#: setup/setup_config3.tpl:18
+#, fuzzy
+msgid "Honour administrative units"
+msgstr "Gruppo Amministrativo"
+
+#: setup/setup_config3.tpl:30
+#, fuzzy
+msgid "Smarty compile directory"
+msgstr "Home directory"
+
+#: setup/setup_config3.tpl:39
+#, fuzzy
+msgid "Path for PPD storage"
+msgstr "Archiviazione password"
+
+#: setup/setup_config3.tpl:55
+#, fuzzy
+msgid "Path for kiosk profile storage"
+msgstr "Definizione profilo Kiosk"
+
+#: setup/setup_config3.tpl:74
+#, fuzzy
+msgid "Network resolv hook"
+msgstr "Indirizzo della rete"
+
+#: setup/setup_config3.tpl:92
+#, fuzzy
+msgid "Mail queue script"
+msgstr "Coda delle mail"
+
+#: setup/setup_config3.tpl:110
+#, fuzzy
+msgid "Notification script"
+msgstr "Periodo di notifica dell'Host"
+
+#: setup/setup_config3.tpl:126
+msgid "Login and session"
+msgstr ""
+
+#: setup/setup_config3.tpl:129
+msgid "Enforce register_globals to be activated"
+msgstr ""
+
+#: setup/setup_config3.tpl:141
+#, fuzzy
+msgid "Enforce encrypted connections"
+msgstr "Blocca archivi criptati"
+
+#: setup/setup_config3.tpl:153
+#, fuzzy
+msgid "Warn if session is not encrypted"
+msgstr "La sessione non è criptata."
+
+#: setup/setup_config3.tpl:165
+#, fuzzy
+msgid "Session lifetime"
+msgstr "Conflitto di sessione individuato"
+
+#: setup/setup_config3.tpl:173
+#, fuzzy
+msgid "Debugging"
+msgstr "Attiva il debug"
+
+#: setup/setup_config3.tpl:177
+#, fuzzy
+msgid "Show PHP errors"
+msgstr "Errore PHP"
+
+#: setup/setup_config3.tpl:189
+#, fuzzy
+msgid "Maximum LDAP query time"
+msgstr "massiam dimensione file"
+
+#: setup/setup_config3.tpl:207
+msgid "Log LDAP statistics"
+msgstr ""
+
+#: setup/setup_config3.tpl:219
+#, fuzzy
+msgid "Debug level"
+msgstr "Livello dei log"
+
+#: setup/setup_config3.tpl:224 setup/setup_config3.tpl:227
+#, fuzzy
+msgid "Disabled"
+msgstr "Disabilitato"
+
+#: setup/setup_config3.tpl:225 setup/setup_config3.tpl:228
+#, fuzzy
+msgid "Enabled"
+msgstr "Disabilitato"
+
+#: setup/class_setupStep_Welcome.inc:38
+#, fuzzy
+msgid "Welcome"
+msgstr "Benvenuti %s!"
+
+#: setup/class_setupStep_Welcome.inc:39
+#, fuzzy
+msgid "The welcome message"
+msgstr "Rilascia il messaggio"
+
+#: setup/class_setupStep_Welcome.inc:40
+#, fuzzy
+msgid "Welcome to GOsa setup wizard"
+msgstr "Benvenuti nel setup di GOsa!"
+
+#: setup/setup_frame.tpl:11
+#, fuzzy
+msgid "GOsa setup wizard"
+msgstr "GOsa visualizzatore aiuti"
+
+#: setup/setup_frame.tpl:18
+#, fuzzy
+msgid "Installation"
+msgstr "Winstation"
+
+#: setup/setup_frame.tpl:18
+#, fuzzy
+msgid "Steps"
+msgstr "Ferma"
+
+#: setup/class_setup.inc:210
+#, fuzzy
+msgid "Completed"
+msgstr "incompleto"
+
+#: setup/class_setupStep_Schema.inc:40 setup/class_setupStep_Schema.inc:41
+msgid "LDAP schema check"
+msgstr ""
+
+#: setup/class_setupStep_Schema.inc:42
+msgid "Perform test on your curren LDAP schema"
+msgstr ""
+
+#: setup/class_setupStep_Schema.inc:138
+msgid "Used to store account specific informations."
+msgstr ""
+
+#: setup/class_setupStep_Schema.inc:145
+msgid ""
+"Used to lock currently edited entries to avoid multiple changes at the same "
+"time."
+msgstr ""
+
+#: setup/class_setupStep_Schema.inc:189
+#, fuzzy, php-format
+msgid "The required objectClass '%s' is not present in your schema setup"
+msgstr "Objectclass '%s' richiesta non presente nel setup LDAP"
+
+#: setup/class_setupStep_Schema.inc:191
+#, fuzzy, php-format
+msgid "The optional objectClass '%s' is not present in your schema setup"
+msgstr "Objectclass '%s' richiesta non presente nel setup LDAP"
+
+#: setup/class_setupStep_Schema.inc:197
+#, fuzzy, php-format
+msgid "The required objectclass '%s' does not have version %s"
+msgstr "L'objectclass '%s' richiesta non ha la versione %s"
+
+#: setup/class_setupStep_Schema.inc:199
+#, fuzzy, php-format
+msgid "The optional objectclass '%s' does not have version %s"
+msgstr "L'objectclass '%s' richiesta non ha la versione %s"
+
+#: setup/class_setupStep_Schema.inc:203
+#, fuzzy, php-format
+msgid "Class(es) available"
+msgstr "Il file è disponibilie."
+
+#: setup/class_setupStep_Schema.inc:228
+msgid ""
+"You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
+"schema configuration do not support this option."
+msgstr ""
+
+#: setup/class_setupStep_Schema.inc:229
+msgid ""
+"In order to use rfc2307bis corform groups the objectClass 'posixGroup' must "
+"be AUXILIARY"
+msgstr ""
+
+#: setup/class_setupStep_Schema.inc:233
+msgid ""
+"You have disabled the rfc2307bis option on the 'ldap setup' step, but your "
+"schema configuration do not support this option."
+msgstr ""
+
+#: setup/class_setupStep_Schema.inc:234
+msgid "The objectClass 'posixGroup' must be STRUCTURAL"
+msgstr ""
+
+#: setup/class_setupStep_Config3.inc:67 setup/class_setupStep_Config3.inc:68
+#, fuzzy
+msgid "GOsa settings 3/3"
+msgstr "Settaggi di posta"
+
+#: setup/class_setupStep_Config3.inc:69
+msgid "Tweak some GOsa core behaviour"
+msgstr ""
+
+#: setup/class_setupStep_Config3.inc:171
+#, fuzzy
+msgid "Session lifetime must be a numeric value."
+msgstr "Il punteggio richiesto deve essere numerico."
+
+#: setup/class_setupStep_Config3.inc:175
+#, fuzzy
+msgid "Maximal ldap query time must be a numeric value. "
+msgstr "Il punteggio richiesto deve essere numerico."
+
+#: setup/setup_language.tpl:3
+#, fuzzy
+msgid "Please select the prefered language"
+msgstr "Per favore seleziona una stampante o premi annulla."
+
+#: setup/setup_language.tpl:5
+msgid ""
+"At this point, you can select the site wide default langauge. Choosing "
+"'automatic' will use the language requested by the browser. This setting can "
+"be overriden per user."
+msgstr ""
+
+#: setup/setup_language.tpl:9
+#, fuzzy
+msgid "Please your prefered language here"
+msgstr "Per favore inserite la stringa di ricerca quì"
+
+#: setup/setup_ldap.tpl:7
+msgid "Please choose the LDAP user to be used by GOsa"
+msgstr ""
+
+#: setup/setup_ldap.tpl:25
+#, fuzzy
+msgid "LDAP connection"
+msgstr "Disconnessione"
+
+#: setup/setup_ldap.tpl:37
+#, fuzzy
+msgid "Connection URL"
+msgstr "URL di connessione"
+
+#: setup/setup_ldap.tpl:45
+#, fuzzy
+msgid "TLS connection"
+msgstr "Connessione"
+
+#: setup/setup_ldap.tpl:65
+#, fuzzy
+msgid "Reload"
+msgstr "Lettura"
+
+#: setup/setup_ldap.tpl:69
+#, fuzzy
+msgid "Authentication"
+msgstr "Autenticazione Nagios"
+
+#: setup/setup_ldap.tpl:77
+#, fuzzy
+msgid "Select user"
+msgstr "Cancella utente"
+
+#: setup/setup_ldap.tpl:85
+msgid "Automatically append LDAP base to admin DN"
+msgstr ""
+
+#: setup/setup_ldap.tpl:100
+#, fuzzy
+msgid "Schema based settings"
+msgstr "Parametri samba"
+
+#: setup/setup_ldap.tpl:104
+msgid "Use rfc2307bis compliant groups"
+msgstr ""
+
+#: setup/setup_ldap.tpl:116
+#, fuzzy
+msgid "Current status"
+msgstr "release corrente"
+
+#: setup/setup_config2.tpl:6
+msgid "Samba hash generator"
+msgstr ""
+
+#: setup/setup_config2.tpl:15
+#, fuzzy
+msgid "Samba SID"
+msgstr "Samba"
+
+#: setup/setup_config2.tpl:31
+#, fuzzy
+msgid "RID base"
+msgstr "Database"
+
+#: setup/setup_config2.tpl:46
+#, fuzzy
+msgid "Workstation container"
+msgstr "Nome delle workstation"
+
+#: setup/setup_config2.tpl:61
+msgid "Samba SID mapping"
+msgstr ""
+
+#: setup/setup_config2.tpl:70
+#, fuzzy
+msgid "Additional GOsa settings"
+msgstr "Impostazioni applicazioni"
+
+#: setup/setup_config2.tpl:74
+msgid "Enable Copy & Paste"
+msgstr ""
+
+#: setup/setup_config2.tpl:86
+#, fuzzy
+msgid "Government mode"
+msgstr "Nome del dipartimento"
+
+#: setup/setup_config2.tpl:113
+#, fuzzy
+msgid "Vacation templates"
+msgstr "Modello delle workstation"
+
+#: setup/setup_config2.tpl:129
+msgid "Use Cyrus UNIX style"
+msgstr ""
+
+#: setup/setup_config2.tpl:139
+msgid "Snapshots / Undo"
+msgstr ""
+
+#: setup/setup_config2.tpl:148 setup/setup_config2.tpl:193
+msgid "Enable snapshots"
+msgstr ""
+
+#: setup/setup_config2.tpl:154 setup/setup_config2.tpl:199
+msgid "Snapshot base"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:106 setup/class_setupStep_Migrate.inc:107
+#, fuzzy
+msgid "LDAP inspection"
+msgstr "Ispezione setup PHP"
+
+#: setup/class_setupStep_Migrate.inc:108
+msgid "Analyze your current LDAP for GOsa compatibility"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:114
+#, fuzzy
+msgid "Checking for root object"
+msgstr "Controllo per supporto iconv "
+
+#: setup/class_setupStep_Migrate.inc:120
+msgid "Checking permissions on LDAP database"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:126
+#, fuzzy
+msgid "Checking for invisible deparmtments"
+msgstr "Controllo per supporto iconv "
+
+#: setup/class_setupStep_Migrate.inc:132
+#, fuzzy
+msgid "Checking for invisible users"
+msgstr "Controllo per supporto iconv "
+
+#: setup/class_setupStep_Migrate.inc:138
+#, fuzzy
+msgid "Checking for super administrator"
+msgstr "Verifica di alcuni programmi addizionali"
+
+#: setup/class_setupStep_Migrate.inc:144
+#, fuzzy
+msgid "Checking for users outside the people tree"
+msgstr "Controllo modulo cups"
+
+#: setup/class_setupStep_Migrate.inc:150
+#, fuzzy
+msgid "Checking for groups outside the groups tree"
+msgstr "Controllo modulo cups"
+
+#: setup/class_setupStep_Migrate.inc:156
+msgid "Checking for windows workstations outside the winstation tree"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:162
+#, fuzzy
+msgid "Checking for duplicate uid numbers"
+msgstr "Controllo per modulo ldap"
+
+#: setup/class_setupStep_Migrate.inc:168
+#, fuzzy
+msgid "Checking for duplicate gid numbers"
+msgstr "Controllo per modulo ldap"
+
+#: setup/class_setupStep_Migrate.inc:191 setup/class_setupStep_Migrate.inc:240
+#: setup/class_setupStep_Migrate.inc:302 setup/class_setupStep_Migrate.inc:348
+#: setup/class_setupStep_Migrate.inc:394 setup/class_setupStep_Migrate.inc:454
+#: setup/class_setupStep_Migrate.inc:538 setup/class_setupStep_Migrate.inc:668
+#: setup/class_setupStep_Migrate.inc:757
+#, fuzzy
+msgid "LDAP query failed"
+msgstr "La query di interrogazione del database è fallita!"
+
+#: setup/class_setupStep_Migrate.inc:192 setup/class_setupStep_Migrate.inc:241
+#: setup/class_setupStep_Migrate.inc:303 setup/class_setupStep_Migrate.inc:349
+#: setup/class_setupStep_Migrate.inc:395 setup/class_setupStep_Migrate.inc:455
+#: setup/class_setupStep_Migrate.inc:539 setup/class_setupStep_Migrate.inc:669
+#: setup/class_setupStep_Migrate.inc:758
+msgid "Possibly the 'root object' is missing."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:214
+#, fuzzy, php-format
+msgid "Found %s duplicate values for attribute 'uidNumber'."
+msgstr "Valore duplicato per il tipo record '%s'."
+
+#: setup/class_setupStep_Migrate.inc:263
+#, fuzzy, php-format
+msgid "Found %s duplicate values for attribute 'gidNumber'."
+msgstr "Valore duplicato per il tipo record '%s'."
+
+#: setup/class_setupStep_Migrate.inc:320
+#, php-format
+msgid ""
+"Found %s winstations outside the predefined winstation department ou '%s'."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:321 setup/class_setupStep_Migrate.inc:549
+#: setup/class_setupStep_Migrate.inc:678
+#, fuzzy
+msgid "Migrate"
+msgstr "Crea"
+
+#: setup/class_setupStep_Migrate.inc:367
+#, php-format
+msgid "Found %s groups outside the configured tree '%s'."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:368 setup/class_setupStep_Migrate.inc:414
+#, fuzzy
+msgid "Move"
+msgstr "Modalità"
+
+#: setup/class_setupStep_Migrate.inc:413
+#, php-format
+msgid "Found %s user(s) outside the configured tree '%s'."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:470 setup/class_setupStep_Migrate.inc:483
+#, php-format
+msgid ""
+"The specified user '%s' does not have full access to your ldap database."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:547
+#, php-format
+msgid "Found %s user(s) that will not be visible in GOsa."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:597 setup/class_setupStep_Migrate.inc:729
+#, php-format
+msgid ""
+"Failed to migrate the department '%s' into GOsa, error message is as follows "
+"'%s'."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:677
+#, php-format
+msgid "Found %s department(s) that will not be visible in GOsa."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:766
+msgid "There is no GOsa administrator account inside your LDAP."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:828
+#, fuzzy, php-format
+msgid "Adding acls for user '%s' failed, ldap says '%s'."
+msgstr "Aggiunta del blocco fallito. Il server LDAP ha risposto '%s'."
+
+#: setup/class_setupStep_Migrate.inc:846
+msgid "Specified passwords are empty or not equal."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:914 setup/class_setupStep_Migrate.inc:962
+#: setup/class_setupStep_Migrate.inc:1010
+#, fuzzy
+msgid "Couldn't move users to specified department."
+msgstr "Vai al diparimento di base degli utenti"
+
+#: setup/class_setupStep_Migrate.inc:924
+msgid "Winstation will be moved from"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:924 setup/class_setupStep_Migrate.inc:972
+#: setup/class_setupStep_Migrate.inc:1020
+#, fuzzy
+msgid "to"
+msgstr "auto"
+
+#: setup/class_setupStep_Migrate.inc:935 setup/class_setupStep_Migrate.inc:983
+msgid "Updating following references too"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:972
+msgid "Group will be moved from"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:1020
+msgid "User will be moved from"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:1030
+msgid "The following references will be updated"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:1418
+msgid ""
+"The LDAP root object is missing. It is required to use your LDAP service."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:1419
+#: setup/class_setupStep_Migrate.inc:1432
+msgid "Try to create root object"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:1431
+msgid "Root object couldn't be created, you should try it on your own."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:1678
+#, php-format
+msgid "Failed to copy '%s' to '%s'. LDAP says '%s'."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:1681
+msgid "Something went wrong while copying dns."
+msgstr ""
+
+#, fuzzy
+#~ msgid "Can't open file '%s' to read uploaded file contents."
+#~ msgstr "Non posso creare la cartella '%s' per il file ppd caricato."
+
+#, fuzzy
+#~ msgid "Vacationmessage"
+#~ msgstr "Messaggio per assenze"
+
 #~ msgid ""
 #~ "There is no mysql extension available in your php setup, can't save any "
 #~ "changes to asterisk db."
@@ -14751,9 +17276,6 @@ msgstr "Etichetta rimossa dall'oggetto '%s'"
 
 #~ msgid "Disable auto scroll"
 #~ msgstr "Disabilita l'auto scroll"
-
-#~ msgid "Go to users home department"
-#~ msgstr "Vai al diparimento di base degli utenti"
 
 #~ msgid "cn"
 #~ msgstr "cn"
@@ -14809,6 +17331,3 @@ msgstr "Etichetta rimossa dall'oggetto '%s'"
 
 #~ msgid "Online"
 #~ msgstr "Connesso"
-
-#~ msgid "Offline"
-#~ msgstr "Sconnesso"

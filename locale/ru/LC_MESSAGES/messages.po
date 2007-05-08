@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-11 10:04+0200\n"
+"POT-Creation-Date: 2007-05-08 09:22+0200\n"
 "PO-Revision-Date: 2005-04-18 14:35+0300\n"
 "Last-Translator: Igor Muratov <migor@altlinux.org>\n"
 "Language-Team: ALT Linux Team\n"
@@ -53,6 +53,7 @@ msgstr "Дополнительно"
 #: plugins/admin/fai/faiPartitionTableEntry.tpl:2
 #: plugins/admin/fai/faiPackage.tpl:4 plugins/admin/fai/faiVariableEntry.tpl:5
 #: plugins/admin/groups/mail.tpl:7 plugins/admin/ogroups/termgroup.tpl:6
+#: setup/setup_feedback.tpl:44
 msgid "Generic"
 msgstr "Общее"
 
@@ -157,7 +158,7 @@ msgstr "Доступ"
 msgid "Options"
 msgstr "Параметры"
 
-#: contrib/gosa.conf:111 plugins/gofon/phoneaccount/class_phoneAccount.inc:866
+#: contrib/gosa.conf:111 plugins/gofon/phoneaccount/class_phoneAccount.inc:870
 #, fuzzy
 msgid "Parameter"
 msgstr "Параметры загрузки"
@@ -195,7 +196,7 @@ msgstr "Принтер"
 #: plugins/admin/systems/glpiAttachmentPool.tpl:20
 #: plugins/admin/systems/glpiPrinterCartridges.tpl:20
 #: plugins/admin/fai/faiPackageEntry.tpl:22
-#: plugins/admin/fai/faiProfileEntry.tpl:21
+#: plugins/admin/fai/faiProfileEntry.tpl:21 setup/setup_ldap.tpl:120
 msgid "Information"
 msgstr "Информация"
 
@@ -228,6 +229,7 @@ msgstr ""
 #: plugins/addons/ldapmanager/contentexportxls.tpl:19
 #: plugins/addons/ldapmanager/contentexportxls.tpl:32
 #: plugins/addons/ldapmanager/contentexportxls.tpl:47
+#: include/sieve/templates/edit_frame_base.tpl:6
 msgid "Export"
 msgstr "Экспорт"
 
@@ -237,11 +239,13 @@ msgid "Excel Export"
 msgstr "Экспорт"
 
 #: contrib/gosa.conf:201 plugins/personal/environment/logonManagement.tpl:65
-#: plugins/personal/mail/generic.tpl:152
+#: plugins/personal/mail/generic.tpl:192
 #: plugins/addons/ldapmanager/contentimport.tpl:49
 #: plugins/addons/ldapmanager/contentcsv.tpl:109
 #: plugins/addons/ldapmanager/contentcsv.tpl:112
 #: plugins/admin/applications/generic.tpl:101
+#: include/sieve/templates/edit_frame_base.tpl:7
+#: include/sieve/templates/import_script.tpl:12
 msgid "Import"
 msgstr "Импортировать"
 
@@ -297,10 +301,11 @@ msgid "{LOCATIONNAME}"
 msgstr ""
 
 #: contrib/gosa.conf:272 plugins/admin/ogroups/class_phonequeue.inc:262
+#: setup/class_setupStep_Language.inc:48
 msgid "German"
 msgstr "Немецкий"
 
-#: contrib/gosa.conf:273
+#: contrib/gosa.conf:273 setup/class_setupStep_Language.inc:51
 msgid "Russian"
 msgstr "Русский"
 
@@ -308,7 +313,7 @@ msgstr "Русский"
 msgid "Spanish"
 msgstr "Испанский"
 
-#: contrib/gosa.conf:275
+#: contrib/gosa.conf:275 setup/class_setupStep_Language.inc:49
 msgid "French"
 msgstr "Французский"
 
@@ -316,7 +321,7 @@ msgstr "Французский"
 msgid "Dutch"
 msgstr "Датский"
 
-#: contrib/gosa.conf:277
+#: contrib/gosa.conf:277 setup/class_setupStep_Language.inc:50
 msgid "English"
 msgstr "Английский"
 
@@ -363,6 +368,8 @@ msgstr ""
 #: plugins/admin/departments/class_departmentGeneric.inc:431
 #: plugins/admin/departments/class_departmentGeneric.inc:523
 #: plugins/admin/users/template.tpl:48
+#: include/sieve/templates/add_element.tpl:11
+#: include/sieve/templates/select_test_type.tpl:11 setup/class_setup.inc:280
 msgid "Continue"
 msgstr "Продолжить"
 
@@ -402,7 +409,7 @@ msgstr ""
 "gosa/gosa/conf При необходимости, внесите свои изменения."
 
 #: ihtml/themes/altlinux/setup_finish.tpl:17
-#: ihtml/themes/default/setup_finish.tpl:17
+#: ihtml/themes/default/setup_finish.tpl:17 setup/setup_finish.tpl:13
 #, fuzzy
 msgid "Download configuration"
 msgstr "Системная информация"
@@ -439,6 +446,7 @@ msgstr ""
 #: plugins/admin/systems/class_systemManagement.inc:243
 #: plugins/admin/fai/faiNewBranch.tpl:52
 #: plugins/admin/departments/dep_iframe.tpl:19 include/functions.inc:1529
+#: setup/class_setup.inc:275 setup/class_setup.inc:277
 msgid "Back"
 msgstr "Назад"
 
@@ -540,7 +548,7 @@ msgstr "Конфликт блокировок"
 
 #: ihtml/themes/altlinux/islocked.tpl:6 ihtml/themes/altlinux/conflict.tpl:6
 #: ihtml/themes/default/islocked.tpl:6 ihtml/themes/default/conflict.tpl:6
-#: html/index.php:49 html/index.php:337 html/index.php:343
+#: html/index.php:49 html/index.php:342 html/index.php:348
 #: plugins/gofax/blocklists/remove.tpl:2 plugins/gofon/macro/remove.tpl:2
 #: plugins/gofon/conference/remove.tpl:2
 #: plugins/addons/addressbook/remove.tpl:2
@@ -550,6 +558,11 @@ msgstr "Конфликт блокировок"
 #: plugins/admin/fai/remove_branch.tpl:2 plugins/admin/groups/remove.tpl:2
 #: plugins/admin/ogroups/termgroup.tpl:2 plugins/admin/ogroups/remove.tpl:2
 #: plugins/admin/departments/remove.tpl:2 plugins/admin/users/remove.tpl:2
+#: include/sieve/templates/remove_script.tpl:2 setup/setup_checks.tpl:32
+#: setup/setup_checks.tpl:93 setup/class_setupStep_Migrate.inc:212
+#: setup/class_setupStep_Migrate.inc:261 setup/class_setupStep_Migrate.inc:365
+#: setup/class_setupStep_Migrate.inc:411 setup/class_setupStep_Migrate.inc:546
+#: setup/class_setupStep_Migrate.inc:676
 msgid "Warning"
 msgstr "Предупреждение"
 
@@ -582,7 +595,7 @@ msgstr ""
 #: plugins/admin/applications/class_applicationParameters.inc:108
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:274
 #: plugins/admin/fai/faiPackage.tpl:72
-#: plugins/admin/groups/class_groupMail.inc:571
+#: plugins/admin/groups/class_groupMail.inc:572
 msgid "Remove"
 msgstr "Удалить"
 
@@ -671,6 +684,16 @@ msgstr "Удалить"
 #: plugins/admin/departments/remove.tpl:16 plugins/admin/users/password.tpl:23
 #: plugins/admin/users/class_userManagement.inc:649
 #: plugins/admin/users/remove.tpl:16 plugins/admin/users/template.tpl:50
+#: include/sieve/templates/edit_frame_base.tpl:41
+#: include/sieve/templates/import_script.tpl:14
+#: include/sieve/templates/management.tpl:26
+#: include/sieve/templates/select_test_type.tpl:13
+#: include/sieve/templates/create_script.tpl:15
+#: include/sieve/templates/remove_script.tpl:16
+#: include/sieve/templates/element_comment.tpl:10 setup/setup_migrate.tpl:131
+#: setup/setup_migrate.tpl:179 setup/setup_migrate.tpl:267
+#: setup/setup_migrate.tpl:322 setup/setup_migrate.tpl:376
+#: setup/setup_ldap.tpl:17
 msgid "Cancel"
 msgstr "Отмена"
 
@@ -727,7 +750,7 @@ msgstr ""
 #: ihtml/themes/altlinux/setup_useradmin.tpl:22
 #: ihtml/themes/altlinux/login.tpl:26 ihtml/themes/altlinux/login.tpl:30
 #: ihtml/themes/default/setup_useradmin.tpl:22
-#: ihtml/themes/default/login.tpl:28 ihtml/themes/default/login.tpl:32
+#: ihtml/themes/default/login.tpl:26 ihtml/themes/default/login.tpl:30
 #: plugins/admin/users/class_divListUsers.inc:50
 msgid "Username"
 msgstr "Имя пользователя"
@@ -735,13 +758,15 @@ msgstr "Имя пользователя"
 #: ihtml/themes/altlinux/setup_useradmin.tpl:30
 #: ihtml/themes/altlinux/login.tpl:35 ihtml/themes/altlinux/login.tpl:39
 #: ihtml/themes/default/setup_useradmin.tpl:30
-#: ihtml/themes/default/login.tpl:37 ihtml/themes/default/login.tpl:41
+#: ihtml/themes/default/login.tpl:35 ihtml/themes/default/login.tpl:39
 #: plugins/personal/password/class_password.inc:5
 #: plugins/personal/generic/paste_generic.tpl:20
 #: plugins/admin/systems/servdb.tpl:18 plugins/admin/systems/servdb.tpl:34
 #: plugins/admin/systems/servdb.tpl:50 plugins/admin/systems/servdb.tpl:86
 #: plugins/admin/systems/servdb.tpl:109 plugins/admin/systems/servdb.tpl:128
 #: plugins/admin/systems/class_divListSystem.inc:178
+#: setup/setup_migrate.tpl:218 setup/setup_config2.tpl:181
+#: setup/setup_config2.tpl:226
 msgid "Password"
 msgstr "Пароль"
 
@@ -758,7 +783,7 @@ msgid "Enter a description for the location you're configuring here"
 msgstr "Введите описание владельца каталога"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:11
-#: ihtml/themes/default/setup_step4.tpl:11
+#: ihtml/themes/default/setup_step4.tpl:11 setup/setup_ldap.tpl:29
 msgid "Location name"
 msgstr "Местоположение"
 
@@ -778,17 +803,17 @@ msgstr ""
 "пароль."
 
 #: ihtml/themes/altlinux/setup_step4.tpl:23
-#: ihtml/themes/default/setup_step4.tpl:23
+#: ihtml/themes/default/setup_step4.tpl:23 setup/setup_ldap.tpl:73
 msgid "Admin DN"
 msgstr "DN администратора"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:27
-#: ihtml/themes/default/setup_step4.tpl:27
+#: ihtml/themes/default/setup_step4.tpl:27 setup/setup_ldap.tpl:92
 msgid "Admin password"
 msgstr "Пароль администратора"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:34
-#: ihtml/themes/default/setup_step4.tpl:34
+#: ihtml/themes/default/setup_step4.tpl:34 setup/setup_config1.tpl:211
 msgid ""
 "Some basic LDAP parameters are tunable and affect the locations where GOsa "
 "saves people and groups, including the way accounts get created. Check the "
@@ -806,6 +831,7 @@ msgstr "Ветка"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:43
 #: ihtml/themes/default/setup_step4.tpl:43
+#: setup/class_setupStep_Config1.inc:121
 msgid "People storage ou"
 msgstr "Структурная единица (OU) пользователей"
 
@@ -816,6 +842,7 @@ msgstr "Атрибут DN пользователей"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:55
 #: ihtml/themes/default/setup_step4.tpl:55
+#: setup/class_setupStep_Config1.inc:125
 msgid "Group storage ou"
 msgstr "OU групп"
 
@@ -825,7 +852,7 @@ msgid "ID base for users/groups"
 msgstr "База идентификаторов для пользователей/групп"
 
 #: ihtml/themes/altlinux/setup_step4.tpl:67
-#: ihtml/themes/default/setup_step4.tpl:67
+#: ihtml/themes/default/setup_step4.tpl:67 setup/setup_config1.tpl:209
 msgid ""
 "GOsa supports several encryption types for your passwords. Normally this is "
 "adjustable via user templates, but you can specify a default method to be "
@@ -846,7 +873,7 @@ msgid ""
 msgstr ""
 
 #: ihtml/themes/altlinux/setup_step4.tpl:88
-#: ihtml/themes/default/setup_step4.tpl:88
+#: ihtml/themes/default/setup_step4.tpl:88 setup/setup_config2.tpl:99
 #, fuzzy
 msgid "Mail method"
 msgstr "Почтовые настройки"
@@ -856,6 +883,7 @@ msgstr "Почтовые настройки"
 #: plugins/personal/posix/class_posixAccount.inc:559
 #: plugins/personal/samba/class_sambaAccount.inc:491
 #: plugins/admin/systems/class_terminalGeneric.inc:99
+#: setup/setup_config2.tpl:103
 msgid "disabled"
 msgstr "отключен"
 
@@ -927,15 +955,15 @@ msgstr ""
 "i>."
 
 #: ihtml/themes/altlinux/login.tpl:44 ihtml/themes/altlinux/login.tpl:47
-#: ihtml/themes/default/login.tpl:46 ihtml/themes/default/login.tpl:49
+#: ihtml/themes/default/login.tpl:44 ihtml/themes/default/login.tpl:47
 msgid "Directory"
 msgstr "Каталог"
 
-#: ihtml/themes/altlinux/login.tpl:55 ihtml/themes/default/login.tpl:57
+#: ihtml/themes/altlinux/login.tpl:55 ihtml/themes/default/login.tpl:55
 msgid "Sign in"
 msgstr "Войти"
 
-#: ihtml/themes/altlinux/login.tpl:56 ihtml/themes/default/login.tpl:58
+#: ihtml/themes/altlinux/login.tpl:56 ihtml/themes/default/login.tpl:56
 msgid "Click here to log in"
 msgstr "Нажмите на эту кнопку, чтобы войти в систему"
 
@@ -1000,7 +1028,7 @@ msgstr ""
 #: plugins/gofon/fonreports/contents.tpl:21
 #: plugins/addons/mailqueue/contents.tpl:10
 #: plugins/addons/mailqueue/contents.tpl:26
-#: plugins/addons/logview/contents.tpl:67
+#: plugins/addons/logview/contents.tpl:67 setup/setup_ldap.tpl:13
 msgid "Search"
 msgstr "Поиск"
 
@@ -1085,6 +1113,8 @@ msgstr ""
 #: plugins/admin/departments/class_departmentManagement.inc:297
 #: plugins/admin/users/class_userManagement.inc:647
 #: include/class_MultiSelectWindow.inc:78
+#: include/sieve/templates/edit_frame_base.tpl:39
+#: include/sieve/templates/management.tpl:24
 msgid "Save"
 msgstr "Сохранить"
 
@@ -1096,6 +1126,7 @@ msgstr "не полный"
 #: ihtml/themes/default/copyPasteDialog.tpl:24
 #: plugins/personal/netatalk/main.inc:104
 #: plugins/addons/godfs/class_dfsManagment.inc:247
+#: setup/class_setupStep_Finish.inc:37
 msgid "Finish"
 msgstr "Готово"
 
@@ -1239,6 +1270,7 @@ msgstr "Список пользователей"
 #: html/getxls.php:80 html/getxls.php:108 html/getxls.php:123
 #: html/getxls.php:282 html/getxls.php:299
 #: plugins/addons/addressbook/class_addressbook.inc:524
+#: setup/setup_migrate.tpl:210
 msgid "User ID"
 msgstr "Идентификатор пользователя"
 
@@ -1345,7 +1377,8 @@ msgstr "Отображаемое имя"
 #: plugins/admin/fai/faiPackage.tpl:9
 #: plugins/admin/fai/class_faiSummaryTab.inc:329
 #: plugins/admin/fai/paste_fai_object.tpl:1
-#: plugins/admin/fai/faiVariableEntry.tpl:9
+#: plugins/admin/fai/faiVariableEntry.tpl:9 setup/setup_migrate.tpl:202
+#: setup/setup_feedback.tpl:20
 msgid "Name"
 msgstr "Фамилия"
 
@@ -1372,7 +1405,7 @@ msgid "Location"
 msgstr "Местоположение"
 
 #: html/getxls.php:174 plugins/personal/nagios/nagios.tpl:12
-#: plugins/admin/systems/servdnseditzone.tpl:51
+#: plugins/admin/systems/servdnseditzone.tpl:51 setup/setup_feedback.tpl:28
 #, fuzzy
 msgid "Mail address"
 msgstr "MAC-адрес"
@@ -1417,6 +1450,9 @@ msgstr "Телефонные номера"
 #: plugins/addons/addressbook/address_info.tpl:82
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:21
 #: plugins/admin/departments/generic.tpl:59
+#: include/sieve/class_sieveManagement.inc:602
+#: include/sieve/templates/element_address.tpl:15
+#: include/sieve/templates/element_address.tpl:113
 msgid "Address"
 msgstr "Адрес"
 
@@ -1475,6 +1511,7 @@ msgid "Mobile"
 msgstr "Мобильный"
 
 #: html/getxls.php:236 plugins/personal/generic/generic.tpl:213
+#: setup/setup_feedback.tpl:12
 msgid "Organization"
 msgstr "Организация"
 
@@ -1547,11 +1584,11 @@ msgstr "Невозможно выбрать базу данных!"
 msgid "Database query failed!"
 msgstr "Невозможно выполнить запрос к базе данных!"
 
-#: html/index.php:49 html/index.php:337
+#: html/index.php:49 html/index.php:342
 msgid "Session will not be encrypted."
 msgstr "Данные, передаваемые в течение этого сеанса, не будут зашифрованы."
 
-#: html/index.php:49 html/index.php:337
+#: html/index.php:49 html/index.php:342
 msgid "Enter SSL session"
 msgstr "Использовать шифрование SSL"
 
@@ -1595,14 +1632,14 @@ msgstr "Введите свой пароль!"
 msgid "Please check the username/password combination."
 msgstr "Проверьте, правильно ли вы ввели имя пользователя и пароль."
 
-#: html/index.php:291
+#: html/index.php:296
 #, fuzzy
 msgid "Account locked. Please contact your system administrator."
 msgstr ""
 "Не удается начать сеанс на LDAP-сервере. Обратитесь к системному "
 "администратору."
 
-#: html/index.php:343
+#: html/index.php:348
 msgid ""
 "Your browser has cookies disabled. Please enable cookies and reload this "
 "page before logging in!"
@@ -1631,7 +1668,7 @@ msgstr "Не удается подключиться к базе журнало�
 msgid "Can't get specified attachment file, there is no entry with this id."
 msgstr ""
 
-#: html/get_attachment.php:69
+#: html/get_attachment.php:69 include/sieve/class_sieveManagement.inc:446
 #, fuzzy, php-format
 msgid "Can't open file '%s'."
 msgstr "Удалить"
@@ -1847,6 +1884,7 @@ msgstr "Нажмите 'Изменить' чтобы отредактирова�
 #: plugins/admin/systems/glpi.tpl:56 plugins/admin/systems/glpi.tpl:85
 #: plugins/admin/fai/faiVariable.tpl:45
 #: plugins/admin/fai/faiPartitionTable.tpl:44
+#: include/sieve/templates/element_comment.tpl:8
 msgid "Edit"
 msgstr "Изменить"
 
@@ -1919,7 +1957,7 @@ msgstr ""
 #: plugins/personal/environment/environment.tpl:136
 #: plugins/personal/environment/environment.tpl:180
 #: plugins/personal/environment/hotplugDialog.tpl:63
-#: plugins/personal/mail/generic.tpl:57 plugins/personal/mail/generic.tpl:168
+#: plugins/personal/mail/generic.tpl:57 plugins/personal/mail/generic.tpl:208
 #: plugins/personal/mail/copypaste.tpl:43
 #: plugins/personal/mail/copypaste.tpl:61
 #: plugins/personal/mail/mail_locals.tpl:75
@@ -1971,7 +2009,7 @@ msgstr ""
 #: plugins/admin/groups/application.tpl:27
 #: plugins/admin/groups/paste_mail.tpl:30
 #: plugins/admin/groups/paste_mail.tpl:41
-#: plugins/admin/groups/class_groupMail.inc:567
+#: plugins/admin/groups/class_groupMail.inc:568
 #: plugins/admin/ogroups/termgroup.tpl:23 plugins/admin/ogroups/generic.tpl:43
 #: plugins/admin/ogroups/phonequeue.tpl:28
 #: plugins/admin/ogroups/ogroup_objects.tpl:54
@@ -1985,7 +2023,7 @@ msgstr "Добавить"
 #: plugins/personal/environment/environment.tpl:137
 #: plugins/personal/environment/environment.tpl:165
 #: plugins/personal/environment/environment.tpl:181
-#: plugins/personal/mail/generic.tpl:59 plugins/personal/mail/generic.tpl:172
+#: plugins/personal/mail/generic.tpl:59 plugins/personal/mail/generic.tpl:212
 #: plugins/personal/mail/copypaste.tpl:45
 #: plugins/personal/mail/copypaste.tpl:62
 #: plugins/personal/connectivity/kolab.tpl:35
@@ -2029,6 +2067,7 @@ msgstr "Добавить"
 #: plugins/admin/ogroups/termgroup.tpl:25 plugins/admin/ogroups/generic.tpl:44
 #: plugins/admin/ogroups/phonequeue.tpl:29 plugins/admin/ogroups/remove.tpl:14
 #: plugins/admin/departments/remove.tpl:14 plugins/admin/users/remove.tpl:14
+#: include/sieve/templates/remove_script.tpl:14
 msgid "Delete"
 msgstr "Удалить"
 
@@ -2118,7 +2157,7 @@ msgid "unconfigured"
 msgstr "Не настроено"
 
 #: plugins/personal/posix/class_posixAccount.inc:200
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:244
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:248
 #: plugins/admin/systems/class_workstationService.inc:177
 #: plugins/admin/systems/class_terminalService.inc:190
 #: plugins/admin/systems/class_workstationStartup.inc:827
@@ -2188,7 +2227,7 @@ msgstr ""
 "(shadowWarning)"
 
 #: plugins/personal/posix/class_posixAccount.inc:476
-#: plugins/personal/mail/class_mailAccount.inc:527
+#: plugins/personal/mail/class_mailAccount.inc:559
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/samba/class_sambaAccount.inc:429
@@ -2198,7 +2237,7 @@ msgid "January"
 msgstr "Январь"
 
 #: plugins/personal/posix/class_posixAccount.inc:476
-#: plugins/personal/mail/class_mailAccount.inc:527
+#: plugins/personal/mail/class_mailAccount.inc:559
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/samba/class_sambaAccount.inc:429
@@ -2208,7 +2247,7 @@ msgid "February"
 msgstr "Февраль"
 
 #: plugins/personal/posix/class_posixAccount.inc:476
-#: plugins/personal/mail/class_mailAccount.inc:527
+#: plugins/personal/mail/class_mailAccount.inc:559
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/samba/class_sambaAccount.inc:429
@@ -2218,7 +2257,7 @@ msgid "March"
 msgstr "Март"
 
 #: plugins/personal/posix/class_posixAccount.inc:476
-#: plugins/personal/mail/class_mailAccount.inc:527
+#: plugins/personal/mail/class_mailAccount.inc:559
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/samba/class_sambaAccount.inc:429
@@ -2228,7 +2267,7 @@ msgid "April"
 msgstr "Апрель"
 
 #: plugins/personal/posix/class_posixAccount.inc:477
-#: plugins/personal/mail/class_mailAccount.inc:528
+#: plugins/personal/mail/class_mailAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
 #: plugins/personal/samba/class_sambaAccount.inc:430
@@ -2238,7 +2277,7 @@ msgid "May"
 msgstr "Май"
 
 #: plugins/personal/posix/class_posixAccount.inc:477
-#: plugins/personal/mail/class_mailAccount.inc:528
+#: plugins/personal/mail/class_mailAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
 #: plugins/personal/samba/class_sambaAccount.inc:430
@@ -2248,7 +2287,7 @@ msgid "June"
 msgstr "Июнь"
 
 #: plugins/personal/posix/class_posixAccount.inc:477
-#: plugins/personal/mail/class_mailAccount.inc:528
+#: plugins/personal/mail/class_mailAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
 #: plugins/personal/samba/class_sambaAccount.inc:430
@@ -2258,7 +2297,7 @@ msgid "July"
 msgstr "Июль"
 
 #: plugins/personal/posix/class_posixAccount.inc:477
-#: plugins/personal/mail/class_mailAccount.inc:528
+#: plugins/personal/mail/class_mailAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
 #: plugins/personal/samba/class_sambaAccount.inc:430
@@ -2268,7 +2307,7 @@ msgid "August"
 msgstr "Август"
 
 #: plugins/personal/posix/class_posixAccount.inc:477
-#: plugins/personal/mail/class_mailAccount.inc:528
+#: plugins/personal/mail/class_mailAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
 #: plugins/personal/samba/class_sambaAccount.inc:430
@@ -2278,7 +2317,7 @@ msgid "September"
 msgstr "Сентябрь"
 
 #: plugins/personal/posix/class_posixAccount.inc:478
-#: plugins/personal/mail/class_mailAccount.inc:529
+#: plugins/personal/mail/class_mailAccount.inc:561
 #: plugins/personal/samba/class_sambaAccount.inc:395
 #: plugins/personal/samba/class_sambaAccount.inc:413
 #: plugins/personal/samba/class_sambaAccount.inc:431
@@ -2288,7 +2327,7 @@ msgid "October"
 msgstr "Октябрь"
 
 #: plugins/personal/posix/class_posixAccount.inc:478
-#: plugins/personal/mail/class_mailAccount.inc:529
+#: plugins/personal/mail/class_mailAccount.inc:561
 #: plugins/personal/samba/class_sambaAccount.inc:395
 #: plugins/personal/samba/class_sambaAccount.inc:413
 #: plugins/personal/samba/class_sambaAccount.inc:431
@@ -2298,7 +2337,7 @@ msgid "November"
 msgstr "Ноябрь"
 
 #: plugins/personal/posix/class_posixAccount.inc:478
-#: plugins/personal/mail/class_mailAccount.inc:529
+#: plugins/personal/mail/class_mailAccount.inc:561
 #: plugins/personal/samba/class_sambaAccount.inc:395
 #: plugins/personal/samba/class_sambaAccount.inc:413
 #: plugins/personal/samba/class_sambaAccount.inc:431
@@ -2346,12 +2385,12 @@ msgid "Value specified as 'UID' is too small."
 msgstr "Значение 'UID' слишком маленькое."
 
 #: plugins/personal/posix/class_posixAccount.inc:925
-#: plugins/admin/groups/class_groupGeneric.inc:784
+#: plugins/admin/groups/class_groupGeneric.inc:807
 msgid "Value specified as 'GID' is not valid."
 msgstr "Значение поля 'GID' некорректно."
 
 #: plugins/personal/posix/class_posixAccount.inc:928
-#: plugins/admin/groups/class_groupGeneric.inc:787
+#: plugins/admin/groups/class_groupGeneric.inc:810
 msgid "Value specified as 'GID' is too small."
 msgstr "Значение 'GID' слишком маленькое."
 
@@ -2541,6 +2580,10 @@ msgstr ""
 #: plugins/admin/fai/faiVariableEntry.tpl:48
 #: plugins/admin/groups/mail_admins.tpl:37
 #: plugins/admin/groups/application_options.tpl:11
+#: include/sieve/templates/create_script.tpl:13 setup/setup_migrate.tpl:129
+#: setup/setup_migrate.tpl:177 setup/setup_migrate.tpl:262
+#: setup/setup_migrate.tpl:264 setup/setup_migrate.tpl:320
+#: setup/setup_migrate.tpl:374 setup/setup_ldap.tpl:16
 msgid "Apply"
 msgstr "Применить"
 
@@ -2615,7 +2658,7 @@ msgstr "Просмотр"
 #: plugins/admin/systems/glpi_edit_cartridge_type.tpl:13
 #: plugins/admin/systems/glpi_edit_os.tpl:15
 #: plugins/admin/fai/class_faiSummaryTab.inc:227
-#: include/class_MultiSelectWindow.inc:79
+#: include/class_MultiSelectWindow.inc:79 setup/setup_migrate.tpl:78
 #, fuzzy
 msgid "Close"
 msgstr "Выбрать"
@@ -2853,7 +2896,7 @@ msgid "Profil quota"
 msgstr "Путь к профилю"
 
 #: plugins/personal/environment/environment.tpl:45
-#: plugins/personal/mail/generic.tpl:136
+#: plugins/personal/mail/generic.tpl:176
 #: plugins/personal/connectivity/class_proxyAccount.inc:90
 #: plugins/personal/connectivity/pureftpd.tpl:44
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:222
@@ -3106,6 +3149,7 @@ msgstr "Основной адрес"
 #: plugins/admin/systems/class_systemManagement.inc:870
 #: plugins/admin/groups/mail.tpl:14
 #: plugins/admin/ogroups/class_ogroupManagement.inc:367
+#: setup/setup_config2.tpl:163 setup/setup_config2.tpl:208
 msgid "Server"
 msgstr "Сервер"
 
@@ -3141,97 +3185,107 @@ msgstr "Альтернативные адреса"
 msgid "List of alternative mail addresses"
 msgstr "Список альтернативных адресов эл. почты"
 
-#: plugins/personal/mail/generic.tpl:67
+#: plugins/personal/mail/generic.tpl:67 plugins/personal/mail/generic.tpl:107
 msgid "Mail options"
 msgstr "Почтовые настройки"
 
-#: plugins/personal/mail/generic.tpl:72
+#: plugins/personal/mail/generic.tpl:94
+msgid "Use custom sieve script"
+msgstr "Использовать другой сценарий SIEVE"
+
+#: plugins/personal/mail/generic.tpl:94
+msgid "disables all Mail options!"
+msgstr "отключает все почтовые настройки!"
+
+#: plugins/personal/mail/generic.tpl:99
+#, fuzzy
+msgid "Sieve Management"
+msgstr "Название"
+
+#: plugins/personal/mail/generic.tpl:112
 msgid "Select if you want to forward mails without getting own copies of them"
 msgstr "Выберите, нужно ли оставлять копии перенаправляемых сообщений"
 
-#: plugins/personal/mail/generic.tpl:72
+#: plugins/personal/mail/generic.tpl:112
 msgid "No delivery to own mailbox"
 msgstr "Не оставлять копии в своем почтовом ящике"
 
-#: plugins/personal/mail/generic.tpl:75
+#: plugins/personal/mail/generic.tpl:115
 msgid ""
 "Select to automatically response with the vacation message defined below"
 msgstr "Выберите, чтобы включить автоответчик с сообщением, указанным ниже"
 
-#: plugins/personal/mail/generic.tpl:75
+#: plugins/personal/mail/generic.tpl:115
 msgid "Activate vacation message"
 msgstr "Включить автоответчик"
 
-#: plugins/personal/mail/generic.tpl:81
+#: plugins/personal/mail/generic.tpl:121
 #, fuzzy
 msgid "from"
 msgstr "Порт"
 
-#: plugins/personal/mail/generic.tpl:98
+#: plugins/personal/mail/generic.tpl:138
 msgid "till"
 msgstr ""
 
-#: plugins/personal/mail/generic.tpl:122
+#: plugins/personal/mail/generic.tpl:162
 #, fuzzy
 msgid "Select if you want to filter this mails through spamassassin"
 msgstr "Выберите, нужно ли фильтровать сообщения с помощью SpamAssassin"
 
-#: plugins/personal/mail/generic.tpl:122
+#: plugins/personal/mail/generic.tpl:162
 msgid "Move mails tagged with spam level greater than"
 msgstr "Перемещать сообщения с меткой рекламы больше"
 
-#: plugins/personal/mail/generic.tpl:124
+#: plugins/personal/mail/generic.tpl:164
 msgid "Choose spam level - smaller values are more sensitive"
 msgstr ""
 "Выберите метку рекламы - чем меньше значение, тем чувствительнее фильтр"
 
-#: plugins/personal/mail/generic.tpl:127
+#: plugins/personal/mail/generic.tpl:167
 msgid "to folder"
 msgstr "в папку"
 
-#: plugins/personal/mail/generic.tpl:134
+#: plugins/personal/mail/generic.tpl:174
 msgid "Reject mails bigger than"
 msgstr "Отклонять сообщения размером больше"
 
-#: plugins/personal/mail/generic.tpl:142
+#: plugins/personal/mail/generic.tpl:182
+#: include/sieve/class_sieveManagement.inc:515
+#: include/sieve/class_sieveManagement.inc:735
+#: include/sieve/templates/object_container.tpl:31
+#: include/sieve/templates/element_vacation.tpl:44
 msgid "Vacation message"
 msgstr "Сообщение автоответчика"
 
-#: plugins/personal/mail/generic.tpl:159
+#: plugins/personal/mail/generic.tpl:199
 #: plugins/personal/mail/copypaste.tpl:13
 msgid "Forward messages to"
 msgstr "Перенаправлять сообщения"
 
-#: plugins/personal/mail/generic.tpl:170
+#: plugins/personal/mail/generic.tpl:210
 #: plugins/personal/mail/copypaste.tpl:44
 #: plugins/gofax/faxaccount/generic.tpl:77 plugins/admin/groups/mail.tpl:96
 #: plugins/admin/groups/paste_mail.tpl:42
 msgid "Add local"
 msgstr "Добавить локально"
 
-#: plugins/personal/mail/generic.tpl:180
+#: plugins/personal/mail/generic.tpl:220
 msgid "Advanced mail options"
 msgstr "Дополнительные почтовые настройки"
 
-#: plugins/personal/mail/generic.tpl:185
+#: plugins/personal/mail/generic.tpl:225
 msgid "Select if user can only send and receive inside his own domain"
 msgstr ""
 "Выберите, может ли пользователь отправлять и получать сообщения только "
 "внутри своего домена"
 
-#: plugins/personal/mail/generic.tpl:186
+#: plugins/personal/mail/generic.tpl:226
 msgid "User is only allowed to send and receive local mails"
 msgstr "Пользователь может отправлять и получать почту только локально"
 
-#: plugins/personal/mail/generic.tpl:193
-msgid "Use custom sieve script"
-msgstr "Использовать другой сценарий SIEVE"
-
-#: plugins/personal/mail/generic.tpl:193
-msgid "disables all Mail options!"
-msgstr "отключает все почтовые настройки!"
-
 #: plugins/personal/mail/copypaste.tpl:1 plugins/admin/groups/paste_mail.tpl:1
+#: setup/setup_config2.tpl:95
 #, fuzzy
 msgid "Mail settings"
 msgstr "Почтовые настройки пользователя"
@@ -3260,35 +3314,35 @@ msgstr "Имя пользователя, адрес которого показ�
 msgid "User mail settings"
 msgstr "Почтовые настройки пользователя"
 
-#: plugins/personal/mail/class_mailAccount.inc:87
+#: plugins/personal/mail/class_mailAccount.inc:88
 #: plugins/admin/groups/class_groupMail.inc:78
 #, php-format
 msgid "There is no mail method '%s' specified in your gosa.conf available."
 msgstr "Метод '%s' не описан в вашем файле конфигурации."
 
-#: plugins/personal/mail/class_mailAccount.inc:209
+#: plugins/personal/mail/class_mailAccount.inc:214
 msgid "No DESC tag in vacation file:"
 msgstr "В файле сообщения автоответчика отсутствует тег DESC:"
 
-#: plugins/personal/mail/class_mailAccount.inc:254
+#: plugins/personal/mail/class_mailAccount.inc:286
 msgid "This account has no mail extensions."
 msgstr "В этой учетной записи нет почтовых расширений."
 
-#: plugins/personal/mail/class_mailAccount.inc:264
-#: plugins/personal/mail/class_mailAccount.inc:267
-#: plugins/admin/groups/class_groupMail.inc:332
+#: plugins/personal/mail/class_mailAccount.inc:296
+#: plugins/personal/mail/class_mailAccount.inc:299
+#: plugins/admin/groups/class_groupMail.inc:333
 #: plugins/admin/ogroups/class_mailogroup.inc:47
 msgid "Remove mail account"
 msgstr "Удалить настройки эл. почты"
 
-#: plugins/personal/mail/class_mailAccount.inc:265
+#: plugins/personal/mail/class_mailAccount.inc:297
 msgid ""
 "This account can't be removed while there are delegations configured. Remove "
 "those delegations first."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:268
-#: plugins/admin/groups/class_groupMail.inc:333
+#: plugins/personal/mail/class_mailAccount.inc:300
+#: plugins/admin/groups/class_groupMail.inc:334
 msgid ""
 "This account has mail features enabled. You can disable them by clicking "
 "below."
@@ -3296,14 +3350,14 @@ msgstr ""
 "В этой учетной записи есть настройки электронной почты. Вы можете удалить "
 "их, щелкнув ниже."
 
-#: plugins/personal/mail/class_mailAccount.inc:271
-#: plugins/admin/groups/class_groupMail.inc:335
+#: plugins/personal/mail/class_mailAccount.inc:303
+#: plugins/admin/groups/class_groupMail.inc:336
 #: plugins/admin/ogroups/class_mailogroup.inc:50
 msgid "Create mail account"
 msgstr "Создать настройки запись эл. почты"
 
-#: plugins/personal/mail/class_mailAccount.inc:271
-#: plugins/admin/groups/class_groupMail.inc:336
+#: plugins/personal/mail/class_mailAccount.inc:303
+#: plugins/admin/groups/class_groupMail.inc:337
 msgid ""
 "This account has mail features disabled. You can enable them by clicking "
 "below."
@@ -3311,22 +3365,22 @@ msgstr ""
 "В этой учетной записи нет настроек электронной почты. Вы можете добавить их, "
 "щелкнув ниже."
 
-#: plugins/personal/mail/class_mailAccount.inc:321
+#: plugins/personal/mail/class_mailAccount.inc:353
 msgid ""
 "You're trying to add an invalid email address to the list of forwarders."
 msgstr ""
 "Вы пытаетесь добавить некорректный адрес электронной почты к списку тех, "
 "кому должны пересылаться сообщения."
 
-#: plugins/personal/mail/class_mailAccount.inc:327
-#: plugins/admin/groups/class_groupMail.inc:410
+#: plugins/personal/mail/class_mailAccount.inc:359
+#: plugins/admin/groups/class_groupMail.inc:411
 msgid "Adding your one of your own addresses to the forwarders makes no sense."
 msgstr ""
 "Добавление своего единственного адреса к списку пересылки не имеет смысла."
 
-#: plugins/personal/mail/class_mailAccount.inc:365
-#: plugins/personal/mail/class_mailAccount.inc:370
-#: plugins/admin/groups/class_groupMail.inc:438
+#: plugins/personal/mail/class_mailAccount.inc:397
+#: plugins/personal/mail/class_mailAccount.inc:402
+#: plugins/admin/groups/class_groupMail.inc:439
 msgid ""
 "You're trying to add an invalid email address to the list of alternate "
 "addresses."
@@ -3334,72 +3388,72 @@ msgstr ""
 "Вы пытаетесь добавить некорректный адрес электронной почты к списку "
 "альтернативных адресов."
 
-#: plugins/personal/mail/class_mailAccount.inc:380
-#: plugins/admin/groups/class_groupMail.inc:443
+#: plugins/personal/mail/class_mailAccount.inc:412
+#: plugins/admin/groups/class_groupMail.inc:444
 msgid "The address you're trying to add is already used by user"
 msgstr "Добавляемый вами адрес уже используется пользователем"
 
-#: plugins/personal/mail/class_mailAccount.inc:716
+#: plugins/personal/mail/class_mailAccount.inc:750
 #, fuzzy
 msgid "Removing mail account failed"
 msgstr "Удалить настройки эл. почты"
 
-#: plugins/personal/mail/class_mailAccount.inc:852
+#: plugins/personal/mail/class_mailAccount.inc:886
 #, fuzzy
 msgid "Saving mail account failed"
 msgstr "Удалить настройки эл. почты"
 
-#: plugins/personal/mail/class_mailAccount.inc:904
+#: plugins/personal/mail/class_mailAccount.inc:940
 msgid ""
 "There is no valid mailserver specified, please add one in the system setup."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:909
-#: plugins/admin/groups/class_groupMail.inc:855
+#: plugins/personal/mail/class_mailAccount.inc:945
+#: plugins/admin/groups/class_groupMail.inc:856
 msgid "The required field 'Primary address' is not set."
 msgstr "Обязательное поле \"Основной адрес\" не заполнено."
 
-#: plugins/personal/mail/class_mailAccount.inc:913
-#: plugins/personal/mail/class_mailAccount.inc:917
+#: plugins/personal/mail/class_mailAccount.inc:949
+#: plugins/personal/mail/class_mailAccount.inc:953
 #: plugins/addons/addressbook/class_addressbook.inc:598
 #: plugins/admin/ogroups/class_mailogroup.inc:78
 msgid "Please enter a valid email address in 'Primary address' field."
 msgstr "Введите корректное значение в поле \"Основной адрес\"."
 
-#: plugins/personal/mail/class_mailAccount.inc:923
-#: plugins/admin/groups/class_groupMail.inc:864
+#: plugins/personal/mail/class_mailAccount.inc:959
+#: plugins/admin/groups/class_groupMail.inc:865
 #: plugins/admin/ogroups/class_mailogroup.inc:85
 msgid "The primary address you've entered is already in use."
 msgstr "Введенный вами адрес уже используется."
 
-#: plugins/personal/mail/class_mailAccount.inc:929
-#: plugins/admin/groups/class_groupMail.inc:870
+#: plugins/personal/mail/class_mailAccount.inc:965
+#: plugins/admin/groups/class_groupMail.inc:871
 msgid "Value in 'Quota size' is not valid."
 msgstr "Значение поля \"Квота\" некорректно."
 
-#: plugins/personal/mail/class_mailAccount.inc:938
-#: plugins/admin/groups/class_groupMail.inc:879
+#: plugins/personal/mail/class_mailAccount.inc:974
+#: plugins/admin/groups/class_groupMail.inc:880
 msgid "Please specify a vaild mail size for mails to be rejected."
 msgstr "Укажите корректный размер сообщений, которые будут отклоняться."
 
-#: plugins/personal/mail/class_mailAccount.inc:948
-#: plugins/admin/groups/class_groupMail.inc:887
+#: plugins/personal/mail/class_mailAccount.inc:984
+#: plugins/admin/groups/class_groupMail.inc:888
 msgid "You need to set the maximum mail size in order to reject anything."
 msgstr "Помните, что указывать нужно максимальный допустимый размер сообщений."
 
-#: plugins/personal/mail/class_mailAccount.inc:952
+#: plugins/personal/mail/class_mailAccount.inc:988
 msgid "You specified Spam settings, but there is no Folder specified."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:956
+#: plugins/personal/mail/class_mailAccount.inc:992
 msgid "Time interval to show vacation message is not valid."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:1110
+#: plugins/personal/mail/class_mailAccount.inc:1146
 msgid "Waiting for kolab to remove mail properties."
 msgstr ""
 
-#: plugins/personal/mail/class_mailAccount.inc:1112
+#: plugins/personal/mail/class_mailAccount.inc:1148
 msgid ""
 "Please remove the mail account first, to allow kolab to call its remove "
 "methods."
@@ -3446,6 +3500,7 @@ msgstr ""
 #: plugins/personal/connectivity/oxchange.tpl:26
 #: plugins/personal/connectivity/oxchange.tpl:30
 #: plugins/personal/connectivity/kolab.tpl:55
+#: include/sieve/templates/element_vacation.tpl:25
 #, fuzzy
 msgid "days"
 msgstr "день"
@@ -3838,6 +3893,8 @@ msgstr "Файлы"
 #: plugins/admin/systems/glpi_devices.tpl:293
 #: plugins/admin/systems/glpi_devices.tpl:420
 #: plugins/admin/systems/glpi_devices.tpl:485
+#: include/sieve/class_sieveManagement.inc:605
+#: include/sieve/templates/element_size.tpl:4
 msgid "Size"
 msgstr "Размер"
 
@@ -4205,7 +4262,7 @@ msgstr "Домашний каталог Samba"
 msgid "Temporary disable samba account"
 msgstr "Временно отключить учетную запись Samba"
 
-#: plugins/personal/samba/main.inc:124
+#: plugins/personal/samba/main.inc:124 setup/setup_config2.tpl:2
 msgid "Samba settings"
 msgstr "Настройки Samba"
 
@@ -4388,7 +4445,7 @@ msgstr "Язык по умолчанию"
 #: plugins/admin/ogroups/class_divListOGroup.inc:102
 #: plugins/admin/departments/generic.tpl:27
 #: plugins/admin/departments/class_divListDepartment.inc:72
-#: plugins/admin/users/class_divListUsers.inc:99
+#: plugins/admin/users/class_divListUsers.inc:99 setup/setup_ldap.tpl:55
 msgid "Base"
 msgstr "Ветка"
 
@@ -4786,6 +4843,8 @@ msgstr "в течение"
 #: plugins/admin/systems/class_printGeneric.inc:849
 #: plugins/admin/fai/faiTemplateEntry.tpl:94
 #: plugins/admin/ogroups/class_ogroupManagement.inc:363
+#: setup/setup_migrate.tpl:241 setup/setup_migrate.tpl:244
+#: setup/setup_config2.tpl:172 setup/setup_config2.tpl:217
 msgid "User"
 msgstr "Пользователь"
 
@@ -4950,6 +5009,7 @@ msgstr "Вместо точных номеров можно использова
 
 #: plugins/gofax/blocklists/remove.tpl:6
 #: plugins/admin/systems/remove_glpi.tpl:6
+#: include/sieve/templates/remove_script.tpl:6
 msgid ""
 "Please double check if your really want to do this since there is no way for "
 "GOsa to get your data back."
@@ -5532,6 +5592,13 @@ msgid "You are not allowed to delete this macro!"
 msgstr "У вас недостаточно прав для удаления этой группы!"
 
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:263
+#: setup/setup_checks.tpl:27 setup/setup_checks.tpl:87
+#: setup/class_setupStep_Migrate.inc:218 setup/class_setupStep_Migrate.inc:267
+#: setup/class_setupStep_Migrate.inc:325 setup/class_setupStep_Migrate.inc:372
+#: setup/class_setupStep_Migrate.inc:418 setup/class_setupStep_Migrate.inc:489
+#: setup/class_setupStep_Migrate.inc:542 setup/class_setupStep_Migrate.inc:672
+#: setup/class_setupStep_Migrate.inc:761
+#: setup/class_setupStep_Migrate.inc:1440
 msgid "Ok"
 msgstr ""
 
@@ -5574,6 +5641,7 @@ msgid "Combobox"
 msgstr ""
 
 #: plugins/gofon/macro/class_gofonMacroParameters.inc:240
+#: include/sieve/templates/element_boolean.tpl:4
 msgid "Bool"
 msgstr ""
 
@@ -5588,7 +5656,7 @@ msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro."
 msgstr ""
 
 #: plugins/gofon/macro/class_gofonMacroParameters.inc:329
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1144
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1148
 #, fuzzy, php-format
 msgid "The parameter %s contains invalid char. '!,#' is used as delimiter"
 msgstr "Неправильное указание таймаута '%s'"
@@ -5823,7 +5891,7 @@ msgstr "Ссылки"
 msgid "Phone settings"
 msgstr "Настройки телефона"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:99
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:103
 #, php-format
 msgid ""
 "The specified goFonHomeServer '%s' is not available in GOsa server "
@@ -5832,32 +5900,32 @@ msgid ""
 "accounts."
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:108
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1258
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:112
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1262
 #, php-format
 msgid ""
 "The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql "
 "error."
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:114
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1269
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:118
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1273
 #, fuzzy, php-format
 msgid "Can't select database %s on %s."
 msgstr "Невозможно выбрать базу данных!"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:151
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:155
 #, fuzzy
 msgid "no macro"
 msgstr "Телефонные отчеты"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:169
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:173
 #, fuzzy
 msgid "undefined"
 msgstr "не определена"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:295
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:856
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:299
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:860
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:357
 #: plugins/admin/ogroups/class_phonequeue.inc:342
 #: plugins/admin/ogroups/class_phonequeue.inc:391
@@ -5867,54 +5935,54 @@ msgid ""
 "can't be saved to asterisk database."
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:303
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:307
 msgid ""
 "Can't save any changes to asterisk database, there is no mysql extension "
 "available."
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:423
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:427
 #, php-format
 msgid ""
 "The MySQL Server '%s' isn't reachable as user '%s'. Abort saving entries to "
 "keep the database consistent, check GOsa log for mysql error."
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:431
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:458
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:435
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:462
 #, php-format
 msgid ""
 "Can't select database %s on %s. Abort saving entries to keep the database "
 "consistent, check GOsa log for mysql error."
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:450
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:454
 #, php-format
 msgid ""
 "The old MySQL home server '%s' isn't reachable as user '%s'. Abort saving "
 "entries to keep the database consistent, check GOsa log for mysql error."
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:764
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:768
 msgid "Error while performing query:"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:821
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:952
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:825
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:956
 msgid "This account has no phone extensions."
 msgstr "В этой учетной записи нет атрибутов для телефона."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:847
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:851
 msgid ""
 "The macro you selected, is no longer available for you, please choose "
 "another one."
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:962
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:966
 msgid "Remove phone account"
 msgstr "Удалить телефонный аккаунт"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:963
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:967
 msgid ""
 "This account has phone features enabled. You can disable them by clicking "
 "below."
@@ -5922,12 +5990,12 @@ msgstr ""
 "В этой учетной записи включены телефонные атрибуты. Вы можете отключить их, "
 "щелкнув ниже."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:966
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:969
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:970
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:973
 msgid "Create phone account"
 msgstr "Создать телефонный аккаунт"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:967
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:971
 #, fuzzy
 msgid ""
 "This account has phone features disabled. You can't enable them while no uid "
@@ -5936,7 +6004,7 @@ msgstr ""
 "В этой учетной записи отключены телефонные атрибуты. Вы можете включить их, "
 "щелкнув ниже."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:970
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:974
 msgid ""
 "This account has phone features disabled. You can enable them by clicking "
 "below."
@@ -5944,31 +6012,31 @@ msgstr ""
 "В этой учетной записи отключены телефонные атрибуты. Вы можете включить их, "
 "щелкнув ниже."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:983
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:987
 msgid "Please enter a valid phone number!"
 msgstr "Введите корректный номер телефона!"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1022
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1026
 msgid "Choose your private phone"
 msgstr "Укажите личный телефон"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1108
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1112
 msgid ""
 "There must be at least one server with an asterisk database to create a "
 "phone account."
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1112
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1116
 #: plugins/admin/ogroups/class_phonequeue.inc:301
 #, fuzzy
 msgid "Please select a valid goFonHomeServer."
 msgstr "Введите корректный серийный номер"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1116
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1120
 msgid "Voicemail PIN must be between 1-4 characters."
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1119
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1123
 #, fuzzy
 msgid ""
 "The specified Voicemail PIN contains invalid characters, only numeric values "
@@ -5977,11 +6045,11 @@ msgstr ""
 "Значение поля \"Регистрационное имя\" содержит недопустимые символы. "
 "Допустимыми являются буквы в нижнем регистре, цифры и дефисы."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1124
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1128
 msgid "Phone PIN must be at least one character long."
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1127
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1131
 #, fuzzy
 msgid ""
 "The specified phone PIN contains invalid characters, only aphanumeric values "
@@ -5990,38 +6058,42 @@ msgstr ""
 "Значение поля \"Регистрационное имя\" содержит недопустимые символы. "
 "Допустимыми являются буквы в нижнем регистре, цифры и дефисы."
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1137
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1141
 #, php-format
 msgid "You need to specify at least one phone number!"
 msgstr "Необходимо указать не менее одного телефонного номера!"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1208
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1212
 #, fuzzy
 msgid "Saving phone account failed"
 msgstr "Аккаунт Proxy"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1300
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1304
+#: include/sieve/class_sieveManagement.inc:514
+#: include/sieve/class_sieveManagement.inc:734
+#: include/sieve/templates/object_container.tpl:30
+#: include/sieve/templates/element_stop.tpl:4
 msgid "Stop"
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1305
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1309
 msgid ""
 "Can't remove phone account, the mysql extension is not present in php "
 "configuration."
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1338
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1342
 #, php-format
 msgid "Removed user '%s' from phone queue '%s'."
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1345
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1349
 #, fuzzy
 msgid "Removing phone account failed"
 msgstr "Удалить учетную запись POSIX"
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1374
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1376
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1378
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1380
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:565
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:567
 #: plugins/admin/ogroups/class_phonequeue.inc:761
@@ -6030,7 +6102,7 @@ msgstr "Удалить учетную запись POSIX"
 msgid "The specified telephonenumber '%s' is already assigned to '%s'."
 msgstr ""
 
-#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1422
+#: plugins/gofon/phoneaccount/class_phoneAccount.inc:1426
 #, php-format
 msgid ""
 "The previously selected asterisk home server (%s) is no longer available. "
@@ -6441,6 +6513,7 @@ msgstr ""
 "поскольку GOsa не сможет отменить результаты этой операции."
 
 #: plugins/addons/addressbook/class_addressbook.inc:6
+#: setup/class_setupStep_Feedback.inc:106
 msgid "Addressbook"
 msgstr "Адресная книга"
 
@@ -6662,6 +6735,8 @@ msgstr "Подразделение"
 #: plugins/admin/ogroups/phonequeue.tpl:21
 #: include/class_MultiSelectWindow.inc:196
 #: include/class_MultiSelectWindow.inc:198
+#: include/sieve/templates/object_container.tpl:8
+#: include/sieve/templates/object_container_clear.tpl:8
 msgid "Up"
 msgstr ""
 
@@ -6755,12 +6830,14 @@ msgstr "Апрель"
 msgid "Recipient"
 msgstr "Описание"
 
-#: plugins/addons/mailqueue/contents.tpl:58
+#: plugins/addons/mailqueue/contents.tpl:58 setup/setup_checks.tpl:30
+#: setup/setup_checks.tpl:91
 msgid "Error"
 msgstr ""
 
 #: plugins/addons/mailqueue/contents.tpl:76
 #: plugins/addons/mailqueue/class_mailqueue.inc:373
+#: include/sieve/class_sieveManagement.inc:647
 #, fuzzy
 msgid "Active"
 msgstr "Личный"
@@ -7212,6 +7289,7 @@ msgstr "Данный объект не имеет ссылок на другие
 #: plugins/admin/fai/faiTemplateEntry.tpl:71
 #: plugins/admin/fai/faiTemplateEntry.tpl:103
 #: plugins/admin/ogroups/class_ogroupManagement.inc:364
+#: setup/setup_migrate.tpl:240 setup/setup_migrate.tpl:243
 msgid "Group"
 msgstr "Группа"
 
@@ -8717,6 +8795,7 @@ msgid "This table displays all available attachments."
 msgstr ""
 
 #: plugins/admin/systems/class_glpiAttachmentPool.inc:217
+#: include/sieve/class_sieveElement_If.inc:447
 #, fuzzy
 msgid "empty"
 msgstr "Шаблон"
@@ -9003,12 +9082,16 @@ msgstr "Действие"
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:457
 #: plugins/admin/systems/class_printerPPDDialog.inc:460
+#: include/sieve/class_sieveManagement.inc:609
+#: include/sieve/class_sieveElement_If.inc:915
 #, fuzzy
 msgid "True"
 msgstr "Улица"
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:458
 #: plugins/admin/systems/class_printerPPDDialog.inc:461
+#: include/sieve/class_sieveManagement.inc:610
+#: include/sieve/class_sieveElement_If.inc:915
 #, fuzzy
 msgid "False"
 msgstr "женский"
@@ -9323,7 +9406,7 @@ msgstr "Почтовые настройки пользователя"
 
 #: plugins/admin/systems/class_SelectDeviceType.inc:24
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:388
-#: plugins/admin/groups/class_groupMail.inc:292
+#: plugins/admin/groups/class_groupMail.inc:293
 #: plugins/admin/ogroups/class_ogroup.inc:281
 #: plugins/admin/users/class_userManagement.inc:475
 msgid "none"
@@ -10141,7 +10224,7 @@ msgstr "Сетевой принтер"
 msgid "Other network component"
 msgstr "Прочие сетевые компоненты"
 
-#: plugins/admin/systems/chooser.tpl:16
+#: plugins/admin/systems/chooser.tpl:16 setup/class_setupStep_Migrate.inc:767
 msgid "Create"
 msgstr "Создать"
 
@@ -10228,6 +10311,10 @@ msgstr "подразделения"
 #: plugins/admin/systems/glpi_devices.tpl:722
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:25
 #: plugins/admin/systems/glpi.tpl:63
+#: include/sieve/class_sieveManagement.inc:507
+#: include/sieve/class_sieveManagement.inc:727
+#: include/sieve/templates/object_container.tpl:23
+#: include/sieve/templates/element_comment.tpl:4
 #, fuzzy
 msgid "Comment"
 msgstr "Контакт"
@@ -10677,6 +10764,8 @@ msgstr "Регулярное выражение для поиска адреса
 #: plugins/admin/systems/class_servDNSeditZone.inc:291
 #: plugins/admin/fai/class_faiProfile.inc:306
 #: plugins/admin/ogroups/phonequeue.tpl:22
+#: include/sieve/templates/object_container.tpl:12
+#: include/sieve/templates/object_container_clear.tpl:12
 #, fuzzy
 msgid "Down"
 msgstr "Домен"
@@ -10985,6 +11074,13 @@ msgstr ""
 #: plugins/admin/systems/glpi_devices.tpl:176
 #: plugins/admin/systems/glpi_devices.tpl:296
 #: plugins/admin/systems/glpi_devices.tpl:361
+#: include/sieve/templates/element_address.tpl:40
+#: include/sieve/templates/element_header.tpl:41
+#: include/sieve/templates/element_envelope.tpl:41
+#: setup/class_setupStep_Config2.inc:129 setup/class_setupStep_Config1.inc:87
+#: setup/class_setupStep_Ldap.inc:74 setup/setup_feedback.tpl:51
+#: setup/setup_feedback.tpl:69 setup/class_setupStep_Schema.inc:63
+#: setup/class_setupStep_Config3.inc:76
 #, fuzzy
 msgid "Yes"
 msgstr "Системы"
@@ -10996,6 +11092,13 @@ msgstr "Системы"
 #: plugins/admin/systems/glpi_devices.tpl:177
 #: plugins/admin/systems/glpi_devices.tpl:297
 #: plugins/admin/systems/glpi_devices.tpl:362
+#: include/sieve/templates/element_address.tpl:42
+#: include/sieve/templates/element_header.tpl:43
+#: include/sieve/templates/element_envelope.tpl:43
+#: setup/class_setupStep_Config2.inc:129 setup/class_setupStep_Config1.inc:87
+#: setup/class_setupStep_Ldap.inc:74 setup/setup_feedback.tpl:53
+#: setup/setup_feedback.tpl:71 setup/class_setupStep_Schema.inc:63
+#: setup/class_setupStep_Config3.inc:76
 #, fuzzy
 msgid "No"
 msgstr "нет"
@@ -12924,70 +13027,70 @@ msgstr "Создать телефонный аккаунт"
 msgid "Posix"
 msgstr "Прокси-сервер"
 
-#: plugins/admin/groups/class_groupGeneric.inc:122
+#: plugins/admin/groups/class_groupGeneric.inc:132
 msgid "Can't find this groups SID in LDAP or in your configuration file!"
 msgstr "Не могу найти SID в базе LDAP или в сонфигурационном файле!"
 
-#: plugins/admin/groups/class_groupGeneric.inc:178
+#: plugins/admin/groups/class_groupGeneric.inc:188
 msgid "This 'dn' is no group."
 msgstr "Это DN соответствует не группе."
 
-#: plugins/admin/groups/class_groupGeneric.inc:318
+#: plugins/admin/groups/class_groupGeneric.inc:328
 msgid "Samba group"
 msgstr "Группа Samba"
 
-#: plugins/admin/groups/class_groupGeneric.inc:318
+#: plugins/admin/groups/class_groupGeneric.inc:328
 msgid "Domain admins"
 msgstr "Администраторы домена"
 
-#: plugins/admin/groups/class_groupGeneric.inc:318
+#: plugins/admin/groups/class_groupGeneric.inc:328
 msgid "Domain users"
 msgstr "Пользователи домена"
 
-#: plugins/admin/groups/class_groupGeneric.inc:319
+#: plugins/admin/groups/class_groupGeneric.inc:329
 msgid "Domain guests"
 msgstr "Непривилегированные пользователи домена"
 
-#: plugins/admin/groups/class_groupGeneric.inc:324
+#: plugins/admin/groups/class_groupGeneric.inc:334
 #, php-format
 msgid "Special group (%d)"
 msgstr "Специальная группа (%d)"
 
-#: plugins/admin/groups/class_groupGeneric.inc:436
+#: plugins/admin/groups/class_groupGeneric.inc:447
 #, fuzzy
 msgid "! unknown id"
 msgstr "состояние неизвестно"
 
-#: plugins/admin/groups/class_groupGeneric.inc:477
+#: plugins/admin/groups/class_groupGeneric.inc:489
 #, php-format
 msgid ""
 "Your search method returned more than '%s' users, only '%s' users are shown."
 msgstr ""
 
-#: plugins/admin/groups/class_groupGeneric.inc:506
+#: plugins/admin/groups/class_groupGeneric.inc:518
 msgid "Removing group failed"
 msgstr ""
 
-#: plugins/admin/groups/class_groupGeneric.inc:613
+#: plugins/admin/groups/class_groupGeneric.inc:625
 #, php-format
 msgid "No configured SID found for '%s'."
 msgstr ""
 
-#: plugins/admin/groups/class_groupGeneric.inc:618
+#: plugins/admin/groups/class_groupGeneric.inc:630
 #, php-format
 msgid "No configured RIDBASE found for '%s'."
 msgstr ""
 
-#: plugins/admin/groups/class_groupGeneric.inc:703
+#: plugins/admin/groups/class_groupGeneric.inc:727
 msgid "Saving group failed"
 msgstr ""
 
-#: plugins/admin/groups/class_groupGeneric.inc:732
+#: plugins/admin/groups/class_groupGeneric.inc:756
 #: plugins/admin/ogroups/class_ogroup.inc:612
 msgid "You have no permissions to create a group on this 'Base'."
 msgstr "У вас недостаточно прав для создания группы в этой ветке."
 
-#: plugins/admin/groups/class_groupGeneric.inc:742
+#: plugins/admin/groups/class_groupGeneric.inc:766
 msgid ""
 "The field 'Name' contains invalid characters. Lowercase, numbers and dashes "
 "are allowed."
@@ -12995,13 +13098,13 @@ msgstr ""
 "Значение поля \"Имя\" содержит недопустимые символы. Допустимыми являются "
 "буквы в нижнем регистре, цифры и дефисы."
 
-#: plugins/admin/groups/class_groupGeneric.inc:754
-#: plugins/admin/groups/class_groupGeneric.inc:768
-#: plugins/admin/groups/class_groupGeneric.inc:775
+#: plugins/admin/groups/class_groupGeneric.inc:777
+#: plugins/admin/groups/class_groupGeneric.inc:791
+#: plugins/admin/groups/class_groupGeneric.inc:798
 msgid "Value specified as 'Name' is already used."
 msgstr "Группа с таким именем уже существует."
 
-#: plugins/admin/groups/class_groupGeneric.inc:829
+#: plugins/admin/groups/class_groupGeneric.inc:852
 #, fuzzy
 msgid "Too many groups, can't allocate a free ID!"
 msgstr "Слишком много пользователей, невозможно создать идентификатор!"
@@ -13139,11 +13242,15 @@ msgstr "Удалить"
 
 #: plugins/admin/groups/class_groupApplication.inc:687
 #: plugins/admin/groups/class_groupApplication.inc:717
+#: include/sieve/templates/object_container.tpl:9
+#: include/sieve/templates/object_container_clear.tpl:9
 msgid "Move up"
 msgstr ""
 
 #: plugins/admin/groups/class_groupApplication.inc:688
 #: plugins/admin/groups/class_groupApplication.inc:718
+#: include/sieve/templates/object_container.tpl:13
+#: include/sieve/templates/object_container_clear.tpl:13
 #, fuzzy
 msgid "Move down"
 msgstr "Домен"
@@ -13246,43 +13353,48 @@ msgstr "добавление"
 msgid "write"
 msgstr "запись"
 
-#: plugins/admin/groups/class_groupMail.inc:324
+#: plugins/admin/groups/class_groupMail.inc:292
+#, fuzzy
+msgid "admin"
+msgstr "DN администратора"
+
+#: plugins/admin/groups/class_groupMail.inc:325
 msgid "This 'dn' has no valid mail extensions."
 msgstr "Для этого DN нет корректных почтовых расширений."
 
-#: plugins/admin/groups/class_groupMail.inc:348
+#: plugins/admin/groups/class_groupMail.inc:349
 msgid ""
 "Remove shared folder from mail server database when entry gets removed in "
 "LDAP"
 msgstr ""
 
-#: plugins/admin/groups/class_groupMail.inc:349
+#: plugins/admin/groups/class_groupMail.inc:350
 msgid "Remove the shared folder and all its contents after saving this account"
 msgstr ""
 
-#: plugins/admin/groups/class_groupMail.inc:404
+#: plugins/admin/groups/class_groupMail.inc:405
 msgid "You're trying to add an invalid email address "
 msgstr "Вы пытаетесь добавить некорректный адрес электронной почты "
 
-#: plugins/admin/groups/class_groupMail.inc:641
+#: plugins/admin/groups/class_groupMail.inc:642
 #, fuzzy
 msgid "Removing group mail settings failed"
 msgstr "Почтовые настройки пользователя"
 
-#: plugins/admin/groups/class_groupMail.inc:829
+#: plugins/admin/groups/class_groupMail.inc:830
 msgid "Saving group mail settings failed"
 msgstr ""
 
-#: plugins/admin/groups/class_groupMail.inc:858
+#: plugins/admin/groups/class_groupMail.inc:859
 msgid "Please enter a valid email addres in 'Primary address' field."
 msgstr "Введите корректное значение в поле \"Основной адрес\"."
 
-#: plugins/admin/groups/class_groupMail.inc:891
+#: plugins/admin/groups/class_groupMail.inc:892
 msgid ""
 "Please choose valid permission settings. Default permission can't be emtpy."
 msgstr ""
 
-#: plugins/admin/groups/class_groupMail.inc:895
+#: plugins/admin/groups/class_groupMail.inc:896
 #, fuzzy
 msgid "Please select a valid mail server."
 msgstr "Введите корректный серийный номер"
@@ -14355,11 +14467,11 @@ msgstr "*АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ012345678
 msgid "GOsa development snapshot (Rev %s)"
 msgstr ""
 
-#: include/functions.inc:2176 include/functions.inc:2180
+#: include/functions.inc:2179 include/functions.inc:2183
 msgid "Warning - base_hook is not avialable. Using default base."
 msgstr ""
 
-#: include/functions.inc:2186
+#: include/functions.inc:2189
 msgid "Warning - no base_hook defined. Using default base."
 msgstr ""
 
@@ -14404,6 +14516,10 @@ msgid "Can't remove IMAP mailbox. Server says '%s'."
 msgstr "Не удается удалить почтовый ящик IMAP. Ответ сервера: '%s'."
 
 #: include/class_mail-methods-cyrus.inc:264
+#: include/sieve/class_sieveManagement.inc:309
+#: include/sieve/class_sieveManagement.inc:355
+#: include/sieve/class_sieveManagement.inc:685
+#: include/sieve/class_sieveManagement.inc:1045
 #, php-format
 msgid "Can't log into SIEVE server. Server says '%s'."
 msgstr "Невозможно зарегистрироваться на сервере SIEVE. Ответ сервера: \"%s\"."
@@ -14672,7 +14788,7 @@ msgstr ""
 msgid "%s%% hit rate in file %s"
 msgstr ""
 
-#: include/functions_setup.inc:84
+#: include/functions_setup.inc:84 setup/class_setupStep_Schema.inc:101
 msgid "Can't get schema information from server. No schema check possible!"
 msgstr "Не удается получить информацию о схемах. Проверка схем невозможна!"
 
@@ -14808,7 +14924,11 @@ msgstr ""
 msgid "Ignored"
 msgstr "Пропуск"
 
-#: include/functions_setup.inc:259
+#: include/functions_setup.inc:259 setup/class_setupStep_Migrate.inc:318
+#: setup/class_setupStep_Migrate.inc:468 setup/class_setupStep_Migrate.inc:481
+#: setup/class_setupStep_Migrate.inc:765
+#: setup/class_setupStep_Migrate.inc:1417
+#: setup/class_setupStep_Migrate.inc:1430
 msgid "Failed"
 msgstr "Ошибка"
 
@@ -14870,7 +14990,7 @@ msgstr "Проверка поддержки gettext"
 msgid "XML functions are required to parse the configuration file."
 msgstr ""
 
-#: include/functions_setup.inc:298
+#: include/functions_setup.inc:298 setup/class_setupStep_Checks.inc:80
 msgid "Checking for gettext support"
 msgstr "Проверка поддержки gettext"
 
@@ -14878,7 +14998,7 @@ msgstr "Проверка поддержки gettext"
 msgid "Gettext support is required for internationalized GOsa."
 msgstr "Необходима для локализованных версий GOsa."
 
-#: include/functions_setup.inc:302
+#: include/functions_setup.inc:302 setup/class_setupStep_Checks.inc:88
 #, fuzzy
 msgid "Checking for iconv support"
 msgstr "Проверка поддержки gettext"
@@ -14954,7 +15074,7 @@ msgstr ""
 msgid "Checking for kadm5 module"
 msgstr "Проверка модуля kadm5"
 
-#: include/functions_setup.inc:327
+#: include/functions_setup.inc:327 setup/class_setupStep_Checks.inc:129
 msgid ""
 "Managing users in kerberos requires the kadm5 module which is downloadable "
 "via PEAR network."
@@ -15033,7 +15153,7 @@ msgstr ""
 "ImageMagick используется для приведения изображений, полученных от "
 "пользователей, к заданным размерам и формату JPEG."
 
-#: include/functions_setup.inc:412
+#: include/functions_setup.inc:412 setup/class_setupStep_Checks.inc:154
 msgid "Checking for fping utility"
 msgstr "Проверка утилиты fping"
 
@@ -15111,7 +15231,7 @@ msgstr ""
 msgid "php.ini check -> magic_quotes_gpc"
 msgstr ""
 
-#: include/functions_setup.inc:473
+#: include/functions_setup.inc:473 setup/class_setupStep_Checks.inc:243
 msgid ""
 "Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
 "escape all quotes in strings in this case."
@@ -15272,6 +15392,2357 @@ msgstr ""
 msgid "Removing tag from object '%s'"
 msgstr ""
 
+#: include/sieve/class_sieveElement_Redirect.inc:24
+#, fuzzy
+msgid "Please specify a valid email address."
+msgstr "Введите корректное имя пользователя!"
+
+#: include/sieve/class_sieveElement_Redirect.inc:35
+#, fuzzy
+msgid "Place a mail address here"
+msgstr "Введите корректный серийный номер"
+
+#: include/sieve/class_sieveElement_Vacation.inc:148
+#, fuzzy
+msgid "Alternative sender address must be a valid email addresses."
+msgstr "Введите корректное имя пользователя!"
+
+#: include/sieve/class_sieveManagement.inc:120
+#: include/sieve/class_sieveManagement.inc:247
+#, fuzzy
+msgid "Parse failed"
+msgstr "Ошибка"
+
+#: include/sieve/class_sieveManagement.inc:124
+#: include/sieve/class_sieveManagement.inc:251
+#, fuzzy
+msgid "Parse successful"
+msgstr "Импорт успешен."
+
+#: include/sieve/class_sieveManagement.inc:161
+#, php-format
+msgid ""
+"The specified mail server '%s' does not exist within the GOsa configuration."
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:206
+#, fuzzy
+msgid "You should specify a name for your new script."
+msgstr "Укажите корректный номер телефона."
+
+#: include/sieve/class_sieveManagement.inc:211
+msgid "Only lower case names are allowed."
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:217
+msgid "Only alphabetical characters are allowed in script names."
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:223
+#, fuzzy
+msgid "The specified name is already in use."
+msgstr "Указанное имя уже используется."
+
+#: include/sieve/class_sieveManagement.inc:317
+#, fuzzy, php-format
+msgid "Can't activate sieve script on server. Server says '%s'."
+msgstr "Невозможно активировать сценарий  GOsa SIEVE. Ответ сервера: \"%s\"."
+
+#: include/sieve/class_sieveManagement.inc:360
+#, fuzzy, php-format
+msgid "Can't remove sieve script from server. Server says '%s'."
+msgstr "Невозможно получить сценарий SIEVE. Ответ сервера: \"%s\"."
+
+#: include/sieve/class_sieveManagement.inc:372
+#, php-format
+msgid "You are going to remove the sieve script '%s' from your mail server."
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:408
+#, fuzzy
+msgid "Edited"
+msgstr "Изменить"
+
+#: include/sieve/class_sieveManagement.inc:415
+#, php-format
+msgid "Please fix all errors before saving. Last error was: %s"
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:442
+#, fuzzy
+msgid "Specified file seems to be empty."
+msgstr "Значение поля \"Файлы\" некорректно."
+
+#: include/sieve/class_sieveManagement.inc:444
+msgid "Upload failed. The temporary file can't be accessed."
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:506
+#: include/sieve/class_sieveManagement.inc:509
+#: include/sieve/class_sieveManagement.inc:726
+#: include/sieve/class_sieveManagement.inc:729
+#: include/sieve/templates/object_container.tpl:22
+#: include/sieve/templates/object_container.tpl:25
+#: include/sieve/templates/element_keep.tpl:4
+msgid "Keep"
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:508
+#: include/sieve/class_sieveManagement.inc:728
+#, fuzzy
+msgid "File into"
+msgstr "Файлы"
+
+#: include/sieve/class_sieveManagement.inc:510
+#: include/sieve/class_sieveManagement.inc:730
+#: include/sieve/templates/object_container.tpl:26
+#: include/sieve/templates/element_discard.tpl:4
+#, fuzzy
+msgid "Discard"
+msgstr "Устройства"
+
+#: include/sieve/class_sieveManagement.inc:511
+#: include/sieve/class_sieveManagement.inc:731
+#: include/sieve/templates/object_container.tpl:27
+#: include/sieve/templates/element_redirect.tpl:13
+#, fuzzy
+msgid "Redirect"
+msgstr "напрямую"
+
+#: include/sieve/class_sieveManagement.inc:512
+#: include/sieve/class_sieveManagement.inc:732
+#: include/sieve/templates/object_container.tpl:28
+#, fuzzy
+msgid "Reject"
+msgstr "Удалить"
+
+#: include/sieve/class_sieveManagement.inc:513
+#: include/sieve/class_sieveManagement.inc:733
+#: include/sieve/templates/object_container.tpl:29
+#: include/sieve/templates/element_require.tpl:12
+msgid "Require"
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:516
+#: include/sieve/class_sieveManagement.inc:736
+#: include/sieve/templates/object_container.tpl:32
+#: include/sieve/class_sieveElement_If.inc:836
+msgid "If"
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:532
+msgid "Failed to add new element."
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:575
+#: include/sieve/class_sieveManagement.inc:771
+#: include/sieve/templates/object_container.tpl:33
+#: include/sieve/templates/element_else.tpl:4
+#: include/sieve/class_sieveElement_If.inc:840
+#, fuzzy
+msgid "Else"
+msgstr "женский"
+
+#: include/sieve/class_sieveManagement.inc:577
+#: include/sieve/class_sieveManagement.inc:773
+#: include/sieve/class_sieveManagement.inc:778
+#: include/sieve/templates/element_elsif.tpl:4
+#: include/sieve/templates/object_container.tpl:34
+#: include/sieve/class_sieveElement_If.inc:838
+msgid "Else If"
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:603
+#: include/sieve/templates/element_header.tpl:16
+#: include/sieve/templates/element_header.tpl:106
+#, fuzzy
+msgid "Header"
+msgstr "Отправитель"
+
+#: include/sieve/class_sieveManagement.inc:604
+#: include/sieve/templates/element_envelope.tpl:16
+#: include/sieve/templates/element_envelope.tpl:105
+msgid "Envelope"
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:606
+#: include/sieve/templates/element_exists.tpl:8
+#, fuzzy
+msgid "Exists"
+msgstr "Изменить"
+
+#: include/sieve/class_sieveManagement.inc:607
+#: include/sieve/templates/element_allof.tpl:10
+#, fuzzy
+msgid "All of"
+msgstr "Все"
+
+#: include/sieve/class_sieveManagement.inc:608
+#: include/sieve/templates/element_anyof.tpl:10
+msgid "Any of"
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:648
+msgid "This script is marked as active"
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:653
+#, fuzzy
+msgid "Script length"
+msgstr "Путь к сценариям"
+
+#: include/sieve/class_sieveManagement.inc:657
+#, fuzzy
+msgid "Remove script"
+msgstr "Показать хосты"
+
+#: include/sieve/class_sieveManagement.inc:666
+#, fuzzy
+msgid "Activate script"
+msgstr "Личный"
+
+#: include/sieve/class_sieveManagement.inc:670
+#, fuzzy
+msgid "Edit script"
+msgstr "Пользователи домена"
+
+#: include/sieve/class_sieveManagement.inc:785
+#, php-format
+msgid "Can't add the specified element at the given position."
+msgstr ""
+
+#: include/sieve/class_sieveManagement.inc:1060
+#, fuzzy
+msgid "Failed to save sieve script"
+msgstr "Использовать другой сценарий SIEVE"
+
+#: include/sieve/class_sieveElement_Require.inc:73
+#, fuzzy
+msgid "Please specify at least one valid requirement."
+msgstr "Введите корректное имя пользователя!"
+
+#: include/sieve/templates/edit_frame_base.tpl:12
+msgid "View structured"
+msgstr ""
+
+#: include/sieve/templates/edit_frame_base.tpl:14
+msgid "View source"
+msgstr ""
+
+#: include/sieve/templates/element_address.tpl:18
+#: include/sieve/templates/element_header.tpl:19
+#: include/sieve/templates/element_envelope.tpl:19
+#: include/sieve/templates/element_vacation.tpl:16
+msgid "Normal view"
+msgstr ""
+
+#: include/sieve/templates/element_address.tpl:25
+#: include/sieve/templates/element_header.tpl:26
+#: include/sieve/templates/element_envelope.tpl:26
+#, fuzzy
+msgid "Match type"
+msgstr "Соответствующий объект"
+
+#: include/sieve/templates/element_address.tpl:28
+#: include/sieve/templates/element_address.tpl:51
+#: include/sieve/templates/element_address.tpl:61
+#: include/sieve/templates/element_address.tpl:72
+#: include/sieve/templates/element_address.tpl:121
+#: include/sieve/templates/element_address.tpl:126
+#: include/sieve/templates/element_boolean.tpl:5
+#: include/sieve/templates/element_header.tpl:29
+#: include/sieve/templates/element_header.tpl:52
+#: include/sieve/templates/element_header.tpl:63
+#: include/sieve/templates/element_header.tpl:114
+#: include/sieve/templates/element_header.tpl:119
+#: include/sieve/templates/element_envelope.tpl:29
+#: include/sieve/templates/element_envelope.tpl:52
+#: include/sieve/templates/element_envelope.tpl:63
+#: include/sieve/templates/element_envelope.tpl:113
+#: include/sieve/templates/element_envelope.tpl:118
+#, fuzzy
+msgid "Boolean value"
+msgstr "По умолчанию"
+
+#: include/sieve/templates/element_address.tpl:36
+#: include/sieve/templates/element_header.tpl:37
+#: include/sieve/templates/element_envelope.tpl:37
+#, fuzzy
+msgid "Invert test"
+msgstr "Память"
+
+#: include/sieve/templates/element_address.tpl:48
+msgid "Part of address that should be used"
+msgstr ""
+
+#: include/sieve/templates/element_address.tpl:58
+#: include/sieve/templates/element_header.tpl:49
+#: include/sieve/templates/element_envelope.tpl:49
+#, fuzzy
+msgid "Comparator"
+msgstr "не полный"
+
+#: include/sieve/templates/element_address.tpl:69
+#: include/sieve/templates/element_envelope.tpl:60
+msgid "Operator"
+msgstr ""
+
+#: include/sieve/templates/element_address.tpl:85
+#: include/sieve/templates/element_header.tpl:77
+#: include/sieve/templates/element_envelope.tpl:76
+msgid "Address fields to include"
+msgstr ""
+
+#: include/sieve/templates/element_address.tpl:89
+#: include/sieve/templates/element_header.tpl:81
+#: include/sieve/templates/element_envelope.tpl:80
+msgid "Values to match for"
+msgstr ""
+
+#: include/sieve/templates/element_address.tpl:116
+#: include/sieve/templates/element_exists.tpl:10
+#: include/sieve/templates/element_size.tpl:11
+#: include/sieve/templates/element_anyof.tpl:5
+#: include/sieve/templates/element_header.tpl:109
+#: include/sieve/templates/element_envelope.tpl:108
+#: include/sieve/templates/element_allof.tpl:5
+#, fuzzy
+msgid "Not"
+msgstr "нет"
+
+#: include/sieve/templates/element_address.tpl:118
+#: include/sieve/templates/element_exists.tpl:12
+#: include/sieve/templates/element_size.tpl:13
+#: include/sieve/templates/element_anyof.tpl:7
+#: include/sieve/templates/element_header.tpl:111
+#: include/sieve/templates/element_envelope.tpl:110
+#: include/sieve/templates/element_allof.tpl:7
+msgid "-"
+msgstr ""
+
+#: include/sieve/templates/element_address.tpl:138
+#: include/sieve/templates/element_header.tpl:131
+#: include/sieve/templates/element_envelope.tpl:130
+#: include/sieve/templates/element_vacation.tpl:47
+msgid "Expert view"
+msgstr ""
+
+#: include/sieve/templates/element_if.tpl:4
+#: include/sieve/class_sieveElement_If.inc:834
+#, fuzzy
+msgid "Condition"
+msgstr "Подключение"
+
+#: include/sieve/templates/element_exists.tpl:10
+#: include/sieve/templates/element_exists.tpl:12
+#: include/sieve/templates/element_size.tpl:11
+#: include/sieve/templates/element_size.tpl:13
+#: include/sieve/templates/element_anyof.tpl:5
+#: include/sieve/templates/element_anyof.tpl:7
+#: include/sieve/templates/element_envelope.tpl:41
+#: include/sieve/templates/element_envelope.tpl:43
+#: include/sieve/templates/element_allof.tpl:5
+#: include/sieve/templates/element_allof.tpl:7
+msgid "Inverse match"
+msgstr ""
+
+#: include/sieve/templates/import_script.tpl:1
+#, fuzzy
+msgid "Import sieve script"
+msgstr "Показать хосты"
+
+#: include/sieve/templates/import_script.tpl:2
+msgid ""
+"Please select the sieve script you want to import. Use the import button to "
+"import the script or the cancel button to abort."
+msgstr ""
+
+#: include/sieve/templates/import_script.tpl:5
+#, fuzzy
+msgid "Script to import"
+msgstr "Путь к сценариям"
+
+#: include/sieve/templates/object_container.tpl:8
+msgid "Move object up one position"
+msgstr ""
+
+#: include/sieve/templates/object_container.tpl:12
+msgid "Move object down one position"
+msgstr ""
+
+#: include/sieve/templates/object_container.tpl:16
+#: include/sieve/templates/object_test_container.tpl:10
+#, fuzzy
+msgid "Remove object"
+msgstr "Включаемые объекты"
+
+#: include/sieve/templates/object_container.tpl:17
+#: include/sieve/templates/object_container_clear.tpl:17
+#, fuzzy
+msgid "Remove element"
+msgstr "Удалить объект"
+
+#: include/sieve/templates/object_container.tpl:21
+msgid "choose element"
+msgstr ""
+
+#: include/sieve/templates/object_container.tpl:24
+#, fuzzy
+msgid "Fileinto"
+msgstr "Файлы"
+
+#: include/sieve/templates/object_container.tpl:38
+#: include/sieve/templates/object_container.tpl:42
+#, fuzzy
+msgid "Add new"
+msgstr "Пользователи домена"
+
+#: include/sieve/templates/object_container.tpl:38
+#: include/sieve/templates/object_container.tpl:40
+msgid "Add a new object above this one."
+msgstr ""
+
+#: include/sieve/templates/object_container.tpl:40
+msgid "Add element above"
+msgstr ""
+
+#: include/sieve/templates/object_container.tpl:42
+#: include/sieve/templates/object_container.tpl:44
+msgid "Add a new object below this one."
+msgstr ""
+
+#: include/sieve/templates/object_container.tpl:44
+msgid "Add element below"
+msgstr ""
+
+#: include/sieve/templates/element_boolean.tpl:8
+#, fuzzy
+msgid "update"
+msgstr "Обновить"
+
+#: include/sieve/templates/element_reject.tpl:14
+#, fuzzy
+msgid "Reject mail"
+msgstr "Отклонять сообщения размером больше"
+
+#: include/sieve/templates/element_reject.tpl:17
+msgid "This is a multiline text element"
+msgstr ""
+
+#: include/sieve/templates/element_reject.tpl:19
+#, fuzzy
+msgid "This is stored as single string"
+msgstr "Что-то будет"
+
+#: include/sieve/templates/element_redirect.tpl:18
+msgid "Redirect mail to following recipients"
+msgstr ""
+
+#: include/sieve/templates/object_container_clear.tpl:8
+msgid "Move this object up one position"
+msgstr ""
+
+#: include/sieve/templates/object_container_clear.tpl:12
+msgid "Move this object down one position"
+msgstr ""
+
+#: include/sieve/templates/object_container_clear.tpl:16
+#, fuzzy
+msgid "Remove this object"
+msgstr "Включаемые объекты"
+
+#: include/sieve/templates/element_size.tpl:16
+#, fuzzy
+msgid "Select match type"
+msgstr "Создать шаблон"
+
+#: include/sieve/templates/element_size.tpl:20
+#, fuzzy
+msgid "Select value unit"
+msgstr "Выберите подразделение"
+
+#: include/sieve/templates/element_discard.tpl:9
+#, fuzzy
+msgid "Discard message"
+msgstr "Домашняя страница"
+
+#: include/sieve/templates/management.tpl:1
+#, fuzzy
+msgid "List of sieve scripts"
+msgstr "Список пользователей"
+
+#: include/sieve/templates/management.tpl:5
+msgid ""
+"Connection to the sieve server could not be established, the "
+"authentification attribute is empty."
+msgstr ""
+
+#: include/sieve/templates/management.tpl:6
+msgid ""
+"Please verfiy that the attributes uid and mail are not empty and try again."
+msgstr ""
+
+#: include/sieve/templates/management.tpl:12
+msgid "Connection to the sieve server could not be established."
+msgstr ""
+
+#: include/sieve/templates/management.tpl:15
+msgid "Possibly the sieve account has not been created yet."
+msgstr ""
+
+#: include/sieve/templates/management.tpl:19
+msgid ""
+"Be careful. All your changes will be saved directly to sieve, if you use the "
+"save button below."
+msgstr ""
+
+#: include/sieve/templates/management.tpl:22
+#, fuzzy
+msgid "Create new script"
+msgstr "Создание нового объекта в"
+
+#: include/sieve/templates/add_element.tpl:1
+msgid "Add a new element"
+msgstr ""
+
+#: include/sieve/templates/add_element.tpl:2
+msgid "Please select the type of element you want to add"
+msgstr ""
+
+#: include/sieve/templates/add_element.tpl:13 setup/setup_migrate.tpl:192
+#, fuzzy
+msgid "Abort"
+msgstr "Порт"
+
+#: include/sieve/templates/object_test_container.tpl:6
+#, fuzzy
+msgid "Add object"
+msgstr "Соответствующий объект"
+
+#: include/sieve/templates/select_test_type.tpl:1
+#, fuzzy
+msgid "Select the type of test you want to add"
+msgstr "Выберите системы для добавления"
+
+#: include/sieve/templates/select_test_type.tpl:3
+#, fuzzy
+msgid "Available test types"
+msgstr "Доступные приложения"
+
+#: include/sieve/templates/element_header.tpl:60
+msgid "operator"
+msgstr ""
+
+#: include/sieve/templates/create_script.tpl:2
+msgid ""
+"Please enter the name for the new script below. Script names must consist of "
+"lower case characters only."
+msgstr ""
+
+#: include/sieve/templates/create_script.tpl:8
+#, fuzzy
+msgid "Script name"
+msgstr "Список"
+
+#: include/sieve/templates/element_keep.tpl:9
+#, fuzzy
+msgid "Keep message"
+msgstr "Сообщение о состоянии"
+
+#: include/sieve/templates/remove_script.tpl:10
+#, fuzzy
+msgid ""
+"Best thing to do before performing this action would be to save the current "
+"script in a file. So - if you've done so - press 'Delete' to continue or "
+"'Cancel' to abort."
+msgstr ""
+"Лучше всего перед удалением сохранить резервную копию текущего дерева LDAP в "
+"файл. Если вы сделали это и действительно хотите выполнить удаление, нажмите "
+"<i>Удалить</i>, иначе нажмите <i>Отмена</i>."
+
+#: include/sieve/templates/element_fileinto.tpl:4
+#, fuzzy
+msgid "Move mail into folder"
+msgstr "в папку"
+
+#: include/sieve/templates/element_fileinto.tpl:8
+#, fuzzy
+msgid "Select from list"
+msgstr "Создать шаблон"
+
+#: include/sieve/templates/element_fileinto.tpl:10
+#, fuzzy
+msgid "Manual selection"
+msgstr "Почтовые настройки пользователя"
+
+#: include/sieve/templates/element_fileinto.tpl:18
+#, fuzzy
+msgid "Folder"
+msgstr "в папку"
+
+#: include/sieve/templates/element_stop.tpl:9
+msgid "Stop execution here"
+msgstr ""
+
+#: include/sieve/templates/element_vacation.tpl:13
+#, fuzzy
+msgid "Vacation Message"
+msgstr "Сообщение автоответчика"
+
+#: include/sieve/templates/element_vacation.tpl:21
+#, fuzzy
+msgid "Release interval"
+msgstr "Интервал времени"
+
+#: include/sieve/templates/element_vacation.tpl:30
+#, fuzzy
+msgid "Alternative sender addresses"
+msgstr "Альтернативные адреса"
+
+#: include/sieve/class_sieveElement_Comment.inc:21
+msgid "Your comment here"
+msgstr ""
+
+#: include/sieve/class_sieveElement_Reject.inc:21
+msgid "Invalid character found, quotes are not allowed in a reject message."
+msgstr ""
+
+#: include/sieve/class_sieveElement_Reject.inc:37
+msgid "Your reject text here"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:27
+#, fuzzy
+msgid "Complete address"
+msgstr "Основной адрес"
+
+#: include/sieve/class_sieveElement_If.inc:27
+#: include/sieve/class_sieveElement_If.inc:33
+#, fuzzy
+msgid "Default"
+msgstr "по умолчанию"
+
+#: include/sieve/class_sieveElement_If.inc:28
+#, fuzzy
+msgid "Domain part"
+msgstr "Домен"
+
+#: include/sieve/class_sieveElement_If.inc:29
+msgid "Local part"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:33
+msgid "Case insensitive"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:34
+msgid "Case sensitive"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:35
+#, fuzzy
+msgid "Numeric"
+msgstr "Ноябрь"
+
+#: include/sieve/class_sieveElement_If.inc:39
+msgid "is"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:40
+#, fuzzy
+msgid "regex"
+msgstr "сброс"
+
+#: include/sieve/class_sieveElement_If.inc:41
+#, fuzzy
+msgid "contains"
+msgstr "Действия"
+
+#: include/sieve/class_sieveElement_If.inc:42
+#, fuzzy
+msgid "matches"
+msgstr "Отмена"
+
+#: include/sieve/class_sieveElement_If.inc:43
+#, fuzzy
+msgid "count"
+msgstr "Учетная запись"
+
+#: include/sieve/class_sieveElement_If.inc:44
+#, fuzzy
+msgid "value is"
+msgstr "По умолчанию"
+
+#: include/sieve/class_sieveElement_If.inc:48
+msgid "less than"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:49
+msgid "less or equal"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:50
+msgid "equals"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:51
+msgid "greater or equal"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:52
+#: include/sieve/class_sieveElement_If.inc:726
+#: include/sieve/class_sieveElement_If.inc:1059
+#, fuzzy
+msgid "greater than"
+msgstr "Создать параметры"
+
+#: include/sieve/class_sieveElement_If.inc:53
+#, fuzzy
+msgid "not equal"
+msgstr "не полный"
+
+#: include/sieve/class_sieveElement_If.inc:102
+#, fuzzy
+msgid "Can't save empty tests."
+msgstr "Удалить"
+
+#: include/sieve/class_sieveElement_If.inc:446
+#, fuzzy
+msgid "emtpy"
+msgstr "Шаблон"
+
+#: include/sieve/class_sieveElement_If.inc:493
+msgid "Nothing specified right now"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:595
+msgid "Invalid type of address part."
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:605
+#, fuzzy
+msgid "Invalid match type given."
+msgstr "Значение поля \"Имя\" содержит недопустимые символы."
+
+#: include/sieve/class_sieveElement_If.inc:621
+#, fuzzy
+msgid "Invalid operator given."
+msgstr "Значение поля \"Имя\" содержит недопустимые символы."
+
+#: include/sieve/class_sieveElement_If.inc:638
+#, fuzzy
+msgid "Please specify a valid operator."
+msgstr "Введите корректное имя пользователя!"
+
+#: include/sieve/class_sieveElement_If.inc:654
+#, fuzzy
+msgid ""
+"Invalid character found in address attribute. Quotes are not allowed here."
+msgstr "Введите корректное имя пользователя!"
+
+#: include/sieve/class_sieveElement_If.inc:669
+msgid ""
+"Invalid character found in value attribute. Quotes are not allowed here."
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:727
+#: include/sieve/class_sieveElement_If.inc:1060
+msgid "lower than"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:729
+#: include/sieve/class_sieveElement_If.inc:1062
+msgid "Megabyte"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:730
+#: include/sieve/class_sieveElement_If.inc:1063
+msgid "Kilobyte"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:731
+#: include/sieve/class_sieveElement_If.inc:1064
+#, fuzzy
+msgid "Bytes"
+msgstr "Системы"
+
+#: include/sieve/class_sieveElement_If.inc:745
+#, fuzzy
+msgid "Please select a valid match type in the list box below."
+msgstr "Введите корректный серийный номер"
+
+#: include/sieve/class_sieveElement_If.inc:759
+msgid "Only numeric values are allowed here."
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:769
+msgid "No valid unit selected"
+msgstr ""
+
+#: include/sieve/class_sieveElement_If.inc:876
+#, fuzzy
+msgid "Empty"
+msgstr "Шаблон"
+
+#: include/sieve/class_sieveElement_If.inc:1134
+#: include/sieve/class_sieveElement_If.inc:1164
+#, fuzzy
+msgid "Click here to add a new test"
+msgstr "Нажмите на эту кнопку, чтобы войти в систему"
+
+#: include/sieve/class_sieveElement_If.inc:1176
+msgid "Unhandled switch type"
+msgstr ""
+
+#: include/sieve/class_My_Tree.inc:245
+msgid "Can't remove last element."
+msgstr ""
+
+#: include/sieve/class_My_Tree.inc:250
+msgid "Can't remove element with object_id="
+msgstr ""
+
+#: include/sieve/class_My_Tree.inc:658
+msgid "Require must be the first command in the script."
+msgstr ""
+
+#: setup/class_setupStep_Config2.inc:79 setup/class_setupStep_Config2.inc:80
+#, fuzzy
+msgid "GOsa settings 2/3"
+msgstr "Почтовые настройки пользователя"
+
+#: setup/class_setupStep_Config2.inc:81
+#, fuzzy
+msgid "Customize special parameters"
+msgstr "Изменить параметры"
+
+#: setup/setup_finish.tpl:3
+#, fuzzy
+msgid "Create your configuration file"
+msgstr "Настроить"
+
+#: setup/setup_finish.tpl:18
+#, fuzzy
+msgid "Status: "
+msgstr "Состояние"
+
+#: setup/setup_checks.tpl:9
+msgid "PHP module and extension checks"
+msgstr ""
+
+#: setup/setup_checks.tpl:41 setup/setup_checks.tpl:103
+msgid "GOsa will NOT run without fixing this."
+msgstr ""
+
+#: setup/setup_checks.tpl:45 setup/setup_checks.tpl:107
+msgid "GOsa will run without fixing this."
+msgstr ""
+
+#: setup/setup_checks.tpl:67
+#, fuzzy
+msgid "PHP setup configuration"
+msgstr "Проверка конфигурации PHP"
+
+#: setup/setup_checks.tpl:67
+#, fuzzy
+msgid "show information"
+msgstr "Личная информация"
+
+#: setup/class_setupStep_Language.inc:40 setup/class_setupStep_Language.inc:41
+#, fuzzy
+msgid "Language setup"
+msgstr "Язык"
+
+#: setup/class_setupStep_Language.inc:42
+msgid "This step is allows you to select your prefered language."
+msgstr ""
+
+#: setup/class_setupStep_Language.inc:47
+#, fuzzy
+msgid "Automatic"
+msgstr "автоматически"
+
+#: setup/setup_config1.tpl:2
+msgid "Look and feel"
+msgstr ""
+
+#: setup/setup_config1.tpl:6
+#, fuzzy
+msgid "Theme"
+msgstr "Шаблон"
+
+#: setup/setup_config1.tpl:15
+#, fuzzy
+msgid "People and group storage"
+msgstr "Структурная единица (OU) пользователей"
+
+#: setup/setup_config1.tpl:18
+#, fuzzy
+msgid "People DN attribute"
+msgstr "Атрибут DN пользователей"
+
+#: setup/setup_config1.tpl:29
+#, fuzzy
+msgid "People storage subtree"
+msgstr "Структурная единица (OU) пользователей"
+
+#: setup/setup_config1.tpl:38
+#, fuzzy
+msgid "Group storage subtree"
+msgstr "OU групп"
+
+#: setup/setup_config1.tpl:47
+msgid "Include personal title in user DN"
+msgstr ""
+
+#: setup/setup_config1.tpl:58
+msgid "Relaxed naming policies"
+msgstr ""
+
+#: setup/setup_config1.tpl:69
+#, fuzzy
+msgid "Automatic uids"
+msgstr "автоматически"
+
+#: setup/setup_config1.tpl:85 setup/class_setupStep_Config1.inc:117
+msgid "GID / UID min id"
+msgstr ""
+
+#: setup/setup_config1.tpl:101
+#, fuzzy
+msgid "Number base for people/groups"
+msgstr "База идентификаторов для пользователей/групп"
+
+#: setup/setup_config1.tpl:109
+msgid "Hook for number base"
+msgstr ""
+
+#: setup/setup_config1.tpl:124
+#, fuzzy
+msgid "Password settings"
+msgstr "Почтовые настройки пользователя"
+
+#: setup/setup_config1.tpl:128
+msgid "Password encryption algorithm"
+msgstr ""
+
+#: setup/setup_config1.tpl:139
+#, fuzzy
+msgid "Password restrictions"
+msgstr "Срок действия пароля истекает"
+
+#: setup/setup_config1.tpl:146 setup/setup_config1.tpl:150
+msgid "Password minimum length"
+msgstr ""
+
+#: setup/setup_config1.tpl:157 setup/setup_config1.tpl:161
+msgid "Different characters from old password"
+msgstr ""
+
+#: setup/setup_config1.tpl:170
+#, fuzzy
+msgid "Password change hook"
+msgstr "Сменить пароль"
+
+#: setup/setup_config1.tpl:186
+msgid "Use SASL for kerberos"
+msgstr ""
+
+#: setup/setup_config1.tpl:197
+#, fuzzy
+msgid "Use account expiration"
+msgstr "Учетная запись"
+
+#: setup/setup_config1.tpl:210
+#, fuzzy
+msgid ""
+"GOsa always acts as admin and manages access rights internally. This is a "
+"workaround till OpenLDAP's in directory ACI's are    fully implemented. For "
+"this to work, we need the admin DN and the corresponding password."
+msgstr ""
+"Сейчас вам нужно указать параметры доступа к LDAP-серверу. GOsa всегда "
+"выступает в роли администратора и управляет правами доступа самостоятельно. "
+"Это временное решение, пока в OpenLDAP не будут реализованы полностью "
+"средства контроля доступа (ACI) внутри каталогов. Чтобы это решение "
+"работало, укажите DN (уникальное имя) администратора и соответствующий "
+"пароль."
+
+#: setup/setup_config1.tpl:212
+msgid ""
+"GOsa has modular support for several mail methods. These methods provide "
+"interfaces to users mailboxes and general handling    for quotas. You can "
+"choose the dummy plugin to leave all your mail settings untouched."
+msgstr ""
+
+#: setup/class_setupStep_Config1.inc:73 setup/class_setupStep_Config1.inc:74
+#, fuzzy
+msgid "GOsa settings 1/3"
+msgstr "Почтовые настройки пользователя"
+
+#: setup/class_setupStep_Config1.inc:75
+#, fuzzy
+msgid "GOsa generic settings"
+msgstr "Почтовые настройки пользователя"
+
+#: setup/class_setupStep_Config1.inc:117
+#, php-format
+msgid "The specified value for '%s' must be a numeric value"
+msgstr ""
+
+#: setup/class_setupStep_Config1.inc:121 setup/class_setupStep_Config1.inc:125
+#, php-format
+msgid "Don't add a trailing comma to '%s'."
+msgstr ""
+
+#: setup/class_setupStep_Config1.inc:129
+msgid "Uid base must be numeric"
+msgstr ""
+
+#: setup/class_setupStep_Config1.inc:133
+msgid "The given password minimum length is not numeric."
+msgstr ""
+
+#: setup/class_setupStep_Config1.inc:136
+#, fuzzy
+msgid "The given password differ value is not numeric."
+msgstr "Значение поля \"Квота\" некорректно."
+
+#: setup/class_setupStep_License.inc:53 setup/class_setupStep_License.inc:54
+#, fuzzy
+msgid "License"
+msgstr "в"
+
+#: setup/class_setupStep_License.inc:55
+msgid "Terms and conditions for usage"
+msgstr ""
+
+#: setup/setup_schema.tpl:3
+#, fuzzy
+msgid "Schema specific settings"
+msgstr "Настройки телефона"
+
+#: setup/setup_schema.tpl:7
+msgid "Enable schema validation when logging in"
+msgstr ""
+
+#: setup/setup_schema.tpl:16
+#, fuzzy
+msgid "Check status"
+msgstr "Состояние"
+
+#: setup/setup_schema.tpl:20
+msgid "Schema check succeeded"
+msgstr ""
+
+#: setup/setup_schema.tpl:23
+#, fuzzy
+msgid "Schema check failed"
+msgstr "Приложение"
+
+#: setup/class_setupStep_Feedback.inc:92
+#, fuzzy
+msgid "UNIX accounts/groups"
+msgstr "UNIX аккаунт"
+
+#: setup/class_setupStep_Feedback.inc:94
+#, fuzzy
+msgid "Samba management"
+msgstr "Управление системами"
+
+#: setup/class_setupStep_Feedback.inc:96
+#, fuzzy
+msgid "Mailsystem management"
+msgstr "Управление системами"
+
+#: setup/class_setupStep_Feedback.inc:98
+#, fuzzy
+msgid "FAX system administration"
+msgstr "Управление пользователями"
+
+#: setup/class_setupStep_Feedback.inc:100
+#, fuzzy
+msgid "Asterisk administration"
+msgstr "Управление пользователями"
+
+#: setup/class_setupStep_Feedback.inc:102
+#, fuzzy
+msgid "System invetory"
+msgstr "Удалить объект"
+
+#: setup/class_setupStep_Feedback.inc:104
+#, fuzzy
+msgid "System-/Configmanagement"
+msgstr "Управление системами"
+
+#: setup/class_setupStep_Feedback.inc:111
+#: setup/class_setupStep_Feedback.inc:113
+msgid "Notification and feedback"
+msgstr ""
+
+#: setup/class_setupStep_Feedback.inc:112
+#, fuzzy
+msgid "Get notifications or send feedback"
+msgstr "Параметры приложения"
+
+#: setup/class_setupStep_Feedback.inc:177
+#, fuzzy
+msgid "Could not send feedback."
+msgstr "Невозможно выбрать базу данных!"
+
+#: setup/setup_migrate.tpl:5
+msgid ""
+"During the LDAP inspection, we're going to check for several common pitfalls "
+"that may occur when migration to GOsa base LDAP administration. You may want "
+"to fix the problems below, in order to provide smooth services."
+msgstr ""
+
+#: setup/setup_migrate.tpl:33
+#, fuzzy
+msgid "Check again"
+msgstr "Проверить"
+
+#: setup/setup_migrate.tpl:37
+msgid "Move windows workstations into a valid windows workstation department"
+msgstr ""
+
+#: setup/setup_migrate.tpl:39
+msgid ""
+"This dialog allows you to move the displayed windows workstations into a "
+"valid department"
+msgstr ""
+
+#: setup/setup_migrate.tpl:41
+msgid ""
+"Be careful with this tool, there may be references pointing to this "
+"workstations that can't be migrated."
+msgstr ""
+
+#: setup/setup_migrate.tpl:66
+msgid "Move selected windows workstations into the following GOsa department"
+msgstr ""
+
+#: setup/setup_migrate.tpl:71
+#, fuzzy
+msgid "Move selected workstations"
+msgstr "Выберите чтобы посмотреть рабочие станции"
+
+#: setup/setup_migrate.tpl:72
+msgid "What will be done here"
+msgstr ""
+
+#: setup/setup_migrate.tpl:84
+msgid "Move groups into configured group tree"
+msgstr ""
+
+#: setup/setup_migrate.tpl:87
+msgid ""
+"This dialog allows moving a couple of groups to the configured group tree. "
+"Doing this may straighten your LDAP service."
+msgstr ""
+
+#: setup/setup_migrate.tpl:90
+msgid ""
+"Be careful with this option! There may be references pointing to these "
+"groups. The GOsa setup can't migrate references, so you may want to cancel "
+"the migration in this case in this case."
+msgstr ""
+
+#: setup/setup_migrate.tpl:93
+msgid "Move selected groups into this group tree"
+msgstr ""
+
+#: setup/setup_migrate.tpl:121 setup/setup_migrate.tpl:170
+#: setup/setup_migrate.tpl:312 setup/setup_migrate.tpl:366
+#, fuzzy
+msgid "Hide changes"
+msgstr "Удалить телефонный аккаунт"
+
+#: setup/setup_migrate.tpl:123 setup/setup_migrate.tpl:172
+#: setup/setup_migrate.tpl:314 setup/setup_migrate.tpl:368
+#, fuzzy
+msgid "Show changes"
+msgstr "Показать телефоны"
+
+#: setup/setup_migrate.tpl:136
+msgid "Move users into configured user tree"
+msgstr ""
+
+#: setup/setup_migrate.tpl:138
+msgid ""
+"This dialog allows moving a couple of users to the configured user tree. "
+"Doing this may straighten your LDAP service."
+msgstr ""
+
+#: setup/setup_migrate.tpl:141
+msgid ""
+"Be careful with this option! There may be references pointing to these "
+"users. The GOsa setup can't migrate references, so you may want to cancel "
+"the migration in this case in this case."
+msgstr ""
+
+#: setup/setup_migrate.tpl:144
+#, fuzzy
+msgid "Move selected users into this people tree"
+msgstr "Создать шаблон"
+
+#: setup/setup_migrate.tpl:191
+#, fuzzy
+msgid "Next"
+msgstr "текст"
+
+#: setup/setup_migrate.tpl:194
+#, fuzzy
+msgid "Create a new GOsa administrator account"
+msgstr "Создать настройки запись эл. почты"
+
+#: setup/setup_migrate.tpl:197
+msgid ""
+"This dialog will automatically add a new super administrator to your LDAP "
+"tree."
+msgstr ""
+
+#: setup/setup_migrate.tpl:226
+#, fuzzy
+msgid "Password (again)"
+msgstr "Хэширование паролей"
+
+#: setup/setup_migrate.tpl:236
+msgid "Assign super administrator permissions to an existing user or group"
+msgstr ""
+
+#: setup/setup_migrate.tpl:237
+msgid ""
+"To grant administrative permissions to a user or a group, select an object "
+"and choose 'Assign'."
+msgstr ""
+
+#: setup/setup_migrate.tpl:275
+msgid ""
+"The listed deparmtents are currenlty invisble in the GOsa user interface. If "
+"you want to change this for a couple of entries, select them and use the "
+"migrate button below."
+msgstr ""
+
+#: setup/setup_migrate.tpl:276 setup/setup_migrate.tpl:329
+msgid ""
+"If you want to know what will be done when migrating the selected entries, "
+"use the 'Show changes' button to see the LDIF."
+msgstr ""
+
+#: setup/setup_migrate.tpl:286 setup/setup_migrate.tpl:338
+#, fuzzy
+msgid "Current"
+msgstr "Текущий пароль"
+
+#: setup/setup_migrate.tpl:293 setup/setup_migrate.tpl:345
+#, fuzzy
+msgid "After migration"
+msgstr "Управление пользователями"
+
+#: setup/setup_migrate.tpl:328
+msgid ""
+"The listed users are currenlty invisble in the GOsa user interface. If you "
+"want to change this for a couple of users, just select them and use the "
+"'Migrate' button below."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:38 setup/class_setupStep_Checks.inc:39
+msgid "Installation check"
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:40
+msgid "Basic checks for PHP version and required extensions."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:64
+#, fuzzy
+msgid "Checking PHP version"
+msgstr "Проверка версии PHP (>=4.1.0)"
+
+#: setup/class_setupStep_Checks.inc:65
+#, php-format
+msgid "PHP must be of version %s / %s or above."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:66
+msgid ""
+"GOsa requires functionality that is not available (or buggy) in older PHP "
+"versions. Please update to a supported version."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:72
+#, fuzzy
+msgid "Checking for LDAP support"
+msgstr "Проверка поддержки gettext"
+
+#: setup/class_setupStep_Checks.inc:73
+#, fuzzy
+msgid "This is the main extension used by GOsa and therefore really required."
+msgstr "Основной модуль, используемый GOsa, и поэтому обязательный."
+
+#: setup/class_setupStep_Checks.inc:74
+msgid ""
+"The ldap extension (php4-ldap/php5-ldap) is required to communicate with "
+"your LDAP server."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:81
+#, fuzzy
+msgid "Gettext support is required for internationalization."
+msgstr "Необходима для локализованных версий GOsa."
+
+#: setup/class_setupStep_Checks.inc:82 setup/class_setupStep_Checks.inc:90
+msgid "Please make sure that the extension is activated."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:89
+msgid ""
+"This module is used by GOsa to convert samba munged dial informations and is "
+"therefore required. "
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:96
+#, fuzzy
+msgid "Checking for mhash support"
+msgstr "Проверка поддержки gettext"
+
+#: setup/class_setupStep_Checks.inc:97
+msgid "You'll need this module to make use of SSHA encryption"
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:98
+msgid ""
+"The mhash module for PHP 4/5 is not available.Pplease install php4-mhash/"
+"php5-mhash."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:104
+#, fuzzy
+msgid "Checking for IMAP support"
+msgstr "Проверка поддержки gettext"
+
+#: setup/class_setupStep_Checks.inc:105
+#, fuzzy
+msgid ""
+"The IMAP module is needed to communicate with the IMAP server. GOsa "
+"retrieves status information, creates and deletes mail users, etc."
+msgstr ""
+"Этот модуль нужен для работы с сервером IMAP. С его помощью можно получать "
+"информацию о состоянии учетной записи, создавать и удалять пользователей."
+
+#: setup/class_setupStep_Checks.inc:106
+msgid ""
+"This module is used to communicate with your mail server. Please install "
+"php4-imap/php5-imap."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:112
+#, fuzzy
+msgid "Checking for getacl in IMAP implementation"
+msgstr "Проверка использования getacl в IMAP"
+
+#: setup/class_setupStep_Checks.inc:113
+#, fuzzy
+msgid ""
+"The getacl support is needed to handle shared folder permissions. Old IMAP "
+"extensions are not capable of reading acl's. You need a recent PHP version "
+"to use this feature."
+msgstr ""
+"Поддержка getacl в IMAP нужна для выставления прав на общие папки. "
+"Стандартный модуль IMAP не может обрабатывать acl. Для использования этой "
+"функции вам нужна последняя версия PHP."
+
+#: setup/class_setupStep_Checks.inc:120
+#, fuzzy
+msgid "Checking for MySQL support"
+msgstr "Проверка поддержки gettext"
+
+#: setup/class_setupStep_Checks.inc:121
+#, fuzzy
+msgid ""
+"MySQL support is needed to communicate with several supported databases."
+msgstr ""
+"Необходим для чтения отчетов о полученных факсимильных сообщениях из базы "
+"данных."
+
+#: setup/class_setupStep_Checks.inc:122
+msgid ""
+"This module is required to communicate with database servers (GOfax, "
+"asterisk, GLPI, etc.). Please install php4-mysql/php5-mysql"
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:128
+#, fuzzy
+msgid "Checking for kadm5 support"
+msgstr "Проверка поддержки gettext"
+
+#: setup/class_setupStep_Checks.inc:130
+#, fuzzy
+msgid ""
+"This module is required to manage user in kerberos, it is downloadable via "
+"PEAR network"
+msgstr ""
+"Чтобы управлять пользователями с помощью Kerberos, необходим модуль kadm5, "
+"который можно загрузить из сети PEAR."
+
+#: setup/class_setupStep_Checks.inc:136
+#, fuzzy
+msgid "Checking for SNMP support"
+msgstr "Проверка поддержки gettext"
+
+#: setup/class_setupStep_Checks.inc:137
+msgid ""
+"The simple network management protocol is needed to get status information "
+"from clients."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:138
+msgid ""
+"This module is required for client monitoring. Please install php4-snmp/php5-"
+"snmp."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:144
+#, fuzzy
+msgid "Checking for CUPS support"
+msgstr "Проверка поддержки gettext"
+
+#: setup/class_setupStep_Checks.inc:145
+#, fuzzy
+msgid ""
+"In order to read available printers via the IPP protocol instead of printcap "
+"files, you've to install the CUPS module."
+msgstr ""
+"Чтобы получать информацию о доступных принтерах по протоколу IPP вместо "
+"чтения файлов printcap, вам нужно установить модуль CUPS."
+
+#: setup/class_setupStep_Checks.inc:155
+#, fuzzy
+msgid ""
+"The fping utility is used if you've got a thin client based terminal "
+"environment."
+msgstr ""
+"Эта программа используется, только если вы работате с бездисковыми "
+"терминалами."
+
+#: setup/class_setupStep_Checks.inc:156
+#, fuzzy
+msgid ""
+"The fping utility is only used in thin client based terminal environment."
+msgstr ""
+"Эта программа используется, только если вы работате с бездисковыми "
+"терминалами."
+
+#: setup/class_setupStep_Checks.inc:171
+msgid "SAMBA password hash generation"
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:172
+#, fuzzy
+msgid ""
+"In order to use SAMBA 2/3 passwords, you've to install additional packages "
+"to generate password hashes."
+msgstr ""
+"Чтобы пользоваться Samba 2/3, вам нужно установить некоторые дополнительные "
+"программы для создания хэшей паролей."
+
+#: setup/class_setupStep_Checks.inc:173
+#, fuzzy
+msgid ""
+"In order to use SAMBA 2/3 you've to install additional perl libraries. Take "
+"a look at mkntpasswd."
+msgstr ""
+"Чтобы пользоваться Samba 2/3, вам нужно установить некоторые дополнительные "
+"программы для создания хэшей паролей."
+
+#: setup/class_setupStep_Checks.inc:183 setup/class_setupStep_Checks.inc:202
+#: setup/class_setupStep_Checks.inc:218 setup/class_setupStep_Checks.inc:234
+#: setup/class_setupStep_Checks.inc:251
+#, fuzzy
+msgid "Off"
+msgstr "не в сети"
+
+#: setup/class_setupStep_Checks.inc:184
+#, fuzzy
+msgid ""
+"register_globals is a PHP mechanism to register all global varibales to be "
+"accessible from scripts without changing the scope. This may be a security "
+"risk."
+msgstr ""
+"register_globals - механизм PHP, позволяющий делать все глобальные "
+"переменные доступными из сценария без смены области действия. Это может быть "
+"нарушением безопасности. Тем не менее, GOsa будет работать в любом случае."
+
+#: setup/class_setupStep_Checks.inc:185
+#, fuzzy
+msgid "Search for 'register_globals' in your php.ini and switch it to 'Off'."
+msgstr "Проверка значения параметра register_globals (должно быть: off)"
+
+#: setup/class_setupStep_Checks.inc:193
+msgid "PHP uses this value for the garbage collector to delete old sessions."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:194
+msgid ""
+"Setting this value to one day will prevent loosing session and cookies "
+"before they really timeout."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:195
+msgid ""
+"Search for 'session.gc_maxlifetime' in your php.ini and set it to 86400 or "
+"higher."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:203
+msgid ""
+"In Order to use GOsa without any trouble, the session.auto_register option "
+"in your php.ini should be set to 'Off'."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:204
+msgid "Search for 'session.auto_start' in your php.ini and set it to 'Off'."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:211
+msgid ""
+"GOsa needs at least 32MB of memory. Setting it below this limit may cause "
+"errors that are not reproducable! Increase it for larger setups."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:212
+msgid ""
+"Search for 'memory_limit' in your php.ini and set it to '32M' or higher."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:219
+msgid ""
+"This option influences the PHP output handling. Turn this Option off, to "
+"increase performance."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:220
+msgid "Search for 'implicit_flush' in your php.ini and set it to 'Off'."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:227
+msgid "The Execution time should be at least 30 seconds."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:228
+msgid ""
+"Search for 'max_execution_time' in your php.ini and set it to '30' or higher."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:235
+msgid ""
+"Increase the server security by setting expose_php to 'off'. PHP won't send "
+"any information about the server you are running in this case."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:236
+msgid "Search for 'expose_php' in your php.ini and set if to 'Off'."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:242
+#, fuzzy
+msgid "On"
+msgstr "Параметры"
+
+#: setup/class_setupStep_Checks.inc:244
+msgid "Search for 'magic_quotes_gpc' in your php.ini and set it to 'On'."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:252
+msgid "Increase your server performance by setting magic_quotes_gpc to 'off'."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:253
+msgid ""
+"Search for 'zend.ze1_compatibility_mode' in your php.ini and set it to 'Off'."
+msgstr ""
+
+#: setup/class_setupStep_Checks.inc:264
+#, fuzzy
+msgid "Configuration writeable"
+msgstr "Настроить"
+
+#: setup/class_setupStep_Checks.inc:265
+#, fuzzy
+msgid "The configuration file can't be written"
+msgstr "Информация об организации"
+
+#: setup/class_setupStep_Checks.inc:266
+#, php-format
+msgid ""
+"GOsa reads its configuration from a file located in (%s/%s). The setup can "
+"write the configuration directly if it is writeable."
+msgstr ""
+
+#: setup/class_setupStep_Finish.inc:38
+#, fuzzy
+msgid "Write configuration file"
+msgstr "Настроить"
+
+#: setup/class_setupStep_Finish.inc:39
+msgid "Finish - write the configuration file"
+msgstr ""
+
+#: setup/class_setupStep_Finish.inc:100
+msgid ""
+"Your configuration file is currently world readable. Please updated the file "
+"permissions!"
+msgstr ""
+
+#: setup/class_setupStep_Finish.inc:102
+#, fuzzy
+msgid "The configuration is currently not readable or it does not exists."
+msgstr ""
+"Не удается прочитать файл настройки GOsa %s/gosa.conf. Операция прервана."
+
+#: setup/class_setupStep_Finish.inc:111
+#, fuzzy, php-format
+msgid ""
+"After downloading and placing the file under %s, please make sure that the "
+"user the webserver is running with is able to read %s, while other users "
+"shouldn't. You may want to execute these commands to achieve this "
+"requirement:"
+msgstr ""
+"Поместив файл gosa.conf в каталог /etc/gosa, убедитесь, что только "
+"пользователь веб-сервера может его читать. Для этого вам, возможно, "
+"понадобится выполнить следующие команды:"
+
+#: setup/setup_welcome.tpl:4
+msgid ""
+"This seems to be the first time you start GOsa - we didn't find any "
+"configuration right now. This simple wizard intends to help you while "
+"setting it up."
+msgstr ""
+
+#: setup/setup_welcome.tpl:8
+msgid "What will the wizard do for you?"
+msgstr ""
+
+#: setup/setup_welcome.tpl:11
+msgid "Create a basic, single site configuration"
+msgstr ""
+
+#: setup/setup_welcome.tpl:12
+msgid "Tries to find problems within your PHP and LDAP setup"
+msgstr ""
+
+#: setup/setup_welcome.tpl:13
+msgid "Let you choose from a set of basic and advanced configuration switches"
+msgstr ""
+
+#: setup/setup_welcome.tpl:14
+msgid "Guided migration of existing LDAP trees"
+msgstr ""
+
+#: setup/setup_welcome.tpl:17
+msgid "What will the wizard NOT do for you?"
+msgstr ""
+
+#: setup/setup_welcome.tpl:20
+msgid "Find every possible configuration error"
+msgstr ""
+
+#: setup/setup_welcome.tpl:21
+msgid "Migrate every possible LDAP setup - create backup dumps!"
+msgstr ""
+
+#: setup/setup_welcome.tpl:25
+#, fuzzy
+msgid "To continue..."
+msgstr "Продолжение настройки..."
+
+#: setup/setup_welcome.tpl:28
+msgid ""
+"For security reasons you need to authenticate for the installation by "
+"creating the file '/tmp/gosa.auth', containing the current session ID on the "
+"servers local filesystem. This can be done by executing the following "
+"command:"
+msgstr ""
+
+#: setup/setup_welcome.tpl:34
+msgid "Click the 'Continue' button when you've finished."
+msgstr ""
+
+#: setup/class_setupStep_Ldap.inc:53
+#, fuzzy
+msgid "LDAP setup"
+msgstr "LDAP-сервер"
+
+#: setup/class_setupStep_Ldap.inc:54
+#, fuzzy
+msgid "LDAP connection setup"
+msgstr "Отключение"
+
+#: setup/class_setupStep_Ldap.inc:55
+msgid ""
+"This dialog performs the basic configuration of the LDAP connectivity for "
+"GOsa."
+msgstr ""
+
+#: setup/class_setupStep_Ldap.inc:99
+#, fuzzy, php-format
+msgid "Anonymous bind failed on server '%s'."
+msgstr "Ошибка при регистрации. Ответ сервера: \"%s\"."
+
+#: setup/class_setupStep_Ldap.inc:101
+#, fuzzy, php-format
+msgid "Bind as user '%s' failed on server '%s'."
+msgstr "Ошибка при регистрации. Ответ сервера: \"%s\"."
+
+#: setup/class_setupStep_Ldap.inc:106
+#, php-format
+msgid "Anonymous bind on server '%s' succeeded."
+msgstr ""
+
+#: setup/class_setupStep_Ldap.inc:107
+#, fuzzy
+msgid "Please specify user and password."
+msgstr "Введите свой пароль!"
+
+#: setup/class_setupStep_Ldap.inc:109
+#, fuzzy, php-format
+msgid "Bind as user '%s' on server '%s' succeeded."
+msgstr "Невозможно выбрать базу данных!"
+
+#: setup/setup_feedback.tpl:4
+msgid "Subscribe to the gosa-announce mailinglist"
+msgstr ""
+
+#: setup/setup_feedback.tpl:7
+msgid ""
+"When checking this option, GOsa will try to connect http://oss.gonicus.de in "
+"order to subscribe you to the gosa-announce mailing list. You've to confirm "
+"this by mail."
+msgstr ""
+
+#: setup/setup_feedback.tpl:39
+msgid "Send feedback to the GOsa project team"
+msgstr ""
+
+#: setup/setup_feedback.tpl:42
+msgid ""
+"When checking this option, GOsa will try to connect http://oss.gonicus.de in "
+"order to submit your form anonymously."
+msgstr ""
+
+#: setup/setup_feedback.tpl:48
+msgid "Did the setup procedure help you to get started?"
+msgstr ""
+
+#: setup/setup_feedback.tpl:58
+msgid "If not, what problems did you encounter"
+msgstr ""
+
+#: setup/setup_feedback.tpl:66
+msgid "Is this the first time you use GOsa?"
+msgstr ""
+
+#: setup/setup_feedback.tpl:72
+msgid "I use it since"
+msgstr ""
+
+#: setup/setup_feedback.tpl:73
+msgid "Select the year since when you are using GOsa"
+msgstr ""
+
+#: setup/setup_feedback.tpl:80
+msgid "What operating system / distribution do you use?"
+msgstr ""
+
+#: setup/setup_feedback.tpl:88
+msgid "What web server do you use?"
+msgstr ""
+
+#: setup/setup_feedback.tpl:96
+msgid "What PHP version do you use?"
+msgstr ""
+
+#: setup/setup_feedback.tpl:104
+msgid "LDAP"
+msgstr ""
+
+#: setup/setup_feedback.tpl:108
+msgid "What kind of LDAP server(s) do you use?"
+msgstr ""
+
+#: setup/setup_feedback.tpl:114
+msgid "How many objects are in your LDAP?"
+msgstr ""
+
+#: setup/setup_feedback.tpl:121
+msgid "Features"
+msgstr ""
+
+#: setup/setup_feedback.tpl:124
+msgid "What features of GOsa do you use?"
+msgstr ""
+
+#: setup/setup_feedback.tpl:134
+msgid "What features do you want to see in future versions of GOsa?"
+msgstr ""
+
+#: setup/setup_feedback.tpl:141
+msgid "Send feedback"
+msgstr ""
+
+#: setup/setup_config3.tpl:2
+#, fuzzy
+msgid "GOsa core settings"
+msgstr "Почтовые настройки пользователя"
+
+#: setup/setup_config3.tpl:6
+#, fuzzy
+msgid "Disable primary group filter"
+msgstr "Показать группы пользователей"
+
+#: setup/setup_config3.tpl:18
+#, fuzzy
+msgid "Honour administrative units"
+msgstr "Управление группами"
+
+#: setup/setup_config3.tpl:30
+#, fuzzy
+msgid "Smarty compile directory"
+msgstr "Домашний каталог"
+
+#: setup/setup_config3.tpl:39
+#, fuzzy
+msgid "Path for PPD storage"
+msgstr "Хэширование паролей"
+
+#: setup/setup_config3.tpl:55
+#, fuzzy
+msgid "Path for kiosk profile storage"
+msgstr "Почтовые настройки пользователя"
+
+#: setup/setup_config3.tpl:74
+#, fuzzy
+msgid "Network resolv hook"
+msgstr "Сетевые устройства"
+
+#: setup/setup_config3.tpl:92
+#, fuzzy
+msgid "Mail queue script"
+msgstr "Сервер"
+
+#: setup/setup_config3.tpl:110
+#, fuzzy
+msgid "Notification script"
+msgstr "Параметры приложения"
+
+#: setup/setup_config3.tpl:126
+msgid "Login and session"
+msgstr ""
+
+#: setup/setup_config3.tpl:129
+msgid "Enforce register_globals to be activated"
+msgstr ""
+
+#: setup/setup_config3.tpl:141
+msgid "Enforce encrypted connections"
+msgstr ""
+
+#: setup/setup_config3.tpl:153
+#, fuzzy
+msgid "Warn if session is not encrypted"
+msgstr "Данные, передаваемые в течение этого сеанса, не будут зашифрованы."
+
+#: setup/setup_config3.tpl:165
+#, fuzzy
+msgid "Session lifetime"
+msgstr "Конфликт сеансов"
+
+#: setup/setup_config3.tpl:173
+msgid "Debugging"
+msgstr ""
+
+#: setup/setup_config3.tpl:177
+#, fuzzy
+msgid "Show PHP errors"
+msgstr "Ошибка LDAP:"
+
+#: setup/setup_config3.tpl:189
+#, fuzzy
+msgid "Maximum LDAP query time"
+msgstr "Размер квоты"
+
+#: setup/setup_config3.tpl:207
+msgid "Log LDAP statistics"
+msgstr ""
+
+#: setup/setup_config3.tpl:219
+#, fuzzy
+msgid "Debug level"
+msgstr "Уровень информативности"
+
+#: setup/setup_config3.tpl:224 setup/setup_config3.tpl:227
+#, fuzzy
+msgid "Disabled"
+msgstr "отключен"
+
+#: setup/setup_config3.tpl:225 setup/setup_config3.tpl:228
+#, fuzzy
+msgid "Enabled"
+msgstr "отключен"
+
+#: setup/class_setupStep_Welcome.inc:38
+#, fuzzy
+msgid "Welcome"
+msgstr "Добро пожаловать %s!"
+
+#: setup/class_setupStep_Welcome.inc:39
+#, fuzzy
+msgid "The welcome message"
+msgstr "Сообщение о состоянии"
+
+#: setup/class_setupStep_Welcome.inc:40
+#, fuzzy
+msgid "Welcome to GOsa setup wizard"
+msgstr "Добро пожаловать в раздел настройки GOsa!"
+
+#: setup/setup_frame.tpl:11
+msgid "GOsa setup wizard"
+msgstr ""
+
+#: setup/setup_frame.tpl:18
+#, fuzzy
+msgid "Installation"
+msgstr "Рабочая станция"
+
+#: setup/setup_frame.tpl:18
+#, fuzzy
+msgid "Steps"
+msgstr "Системы"
+
+#: setup/class_setup.inc:210
+#, fuzzy
+msgid "Completed"
+msgstr "не полный"
+
+#: setup/class_setupStep_Schema.inc:40 setup/class_setupStep_Schema.inc:41
+msgid "LDAP schema check"
+msgstr ""
+
+#: setup/class_setupStep_Schema.inc:42
+msgid "Perform test on your curren LDAP schema"
+msgstr ""
+
+#: setup/class_setupStep_Schema.inc:138
+msgid "Used to store account specific informations."
+msgstr ""
+
+#: setup/class_setupStep_Schema.inc:145
+msgid ""
+"Used to lock currently edited entries to avoid multiple changes at the same "
+"time."
+msgstr ""
+
+#: setup/class_setupStep_Schema.inc:189
+#, fuzzy, php-format
+msgid "The required objectClass '%s' is not present in your schema setup"
+msgstr "Обязательный класс объектов \"%s\" отсутствует в установке LDAP."
+
+#: setup/class_setupStep_Schema.inc:191
+#, fuzzy, php-format
+msgid "The optional objectClass '%s' is not present in your schema setup"
+msgstr "Обязательный класс объектов \"%s\" отсутствует в установке LDAP."
+
+#: setup/class_setupStep_Schema.inc:197
+#, fuzzy, php-format
+msgid "The required objectclass '%s' does not have version %s"
+msgstr "У обязательного класса объектов \"%s\" версия не %s"
+
+#: setup/class_setupStep_Schema.inc:199
+#, fuzzy, php-format
+msgid "The optional objectclass '%s' does not have version %s"
+msgstr "У обязательного класса объектов \"%s\" версия не %s"
+
+#: setup/class_setupStep_Schema.inc:203
+#, php-format
+msgid "Class(es) available"
+msgstr ""
+
+#: setup/class_setupStep_Schema.inc:228
+msgid ""
+"You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
+"schema configuration do not support this option."
+msgstr ""
+
+#: setup/class_setupStep_Schema.inc:229
+msgid ""
+"In order to use rfc2307bis corform groups the objectClass 'posixGroup' must "
+"be AUXILIARY"
+msgstr ""
+
+#: setup/class_setupStep_Schema.inc:233
+msgid ""
+"You have disabled the rfc2307bis option on the 'ldap setup' step, but your "
+"schema configuration do not support this option."
+msgstr ""
+
+#: setup/class_setupStep_Schema.inc:234
+msgid "The objectClass 'posixGroup' must be STRUCTURAL"
+msgstr ""
+
+#: setup/class_setupStep_Config3.inc:67 setup/class_setupStep_Config3.inc:68
+#, fuzzy
+msgid "GOsa settings 3/3"
+msgstr "Почтовые настройки пользователя"
+
+#: setup/class_setupStep_Config3.inc:69
+msgid "Tweak some GOsa core behaviour"
+msgstr ""
+
+#: setup/class_setupStep_Config3.inc:171
+msgid "Session lifetime must be a numeric value."
+msgstr ""
+
+#: setup/class_setupStep_Config3.inc:175
+msgid "Maximal ldap query time must be a numeric value. "
+msgstr ""
+
+#: setup/setup_language.tpl:3
+#, fuzzy
+msgid "Please select the prefered language"
+msgstr "Введите корректный номер телефона!"
+
+#: setup/setup_language.tpl:5
+msgid ""
+"At this point, you can select the site wide default langauge. Choosing "
+"'automatic' will use the language requested by the browser. This setting can "
+"be overriden per user."
+msgstr ""
+
+#: setup/setup_language.tpl:9
+#, fuzzy
+msgid "Please your prefered language here"
+msgstr "Введите корректный серийный номер"
+
+#: setup/setup_ldap.tpl:7
+msgid "Please choose the LDAP user to be used by GOsa"
+msgstr ""
+
+#: setup/setup_ldap.tpl:25
+#, fuzzy
+msgid "LDAP connection"
+msgstr "Отключение"
+
+#: setup/setup_ldap.tpl:37
+#, fuzzy
+msgid "Connection URL"
+msgstr "Подключение"
+
+#: setup/setup_ldap.tpl:45
+#, fuzzy
+msgid "TLS connection"
+msgstr "Подключение"
+
+#: setup/setup_ldap.tpl:65
+#, fuzzy
+msgid "Reload"
+msgstr "чтение"
+
+#: setup/setup_ldap.tpl:69
+#, fuzzy
+msgid "Authentication"
+msgstr "Рабочая станция Windows"
+
+#: setup/setup_ldap.tpl:77
+#, fuzzy
+msgid "Select user"
+msgstr "Удалить"
+
+#: setup/setup_ldap.tpl:85
+msgid "Automatically append LDAP base to admin DN"
+msgstr ""
+
+#: setup/setup_ldap.tpl:100
+#, fuzzy
+msgid "Schema based settings"
+msgstr "Настройки Samba"
+
+#: setup/setup_ldap.tpl:104
+msgid "Use rfc2307bis compliant groups"
+msgstr ""
+
+#: setup/setup_ldap.tpl:116
+#, fuzzy
+msgid "Current status"
+msgstr "Текущий пароль"
+
+#: setup/setup_config2.tpl:6
+msgid "Samba hash generator"
+msgstr ""
+
+#: setup/setup_config2.tpl:15
+#, fuzzy
+msgid "Samba SID"
+msgstr "Samba"
+
+#: setup/setup_config2.tpl:31
+#, fuzzy
+msgid "RID base"
+msgstr "Базы данных"
+
+#: setup/setup_config2.tpl:46
+#, fuzzy
+msgid "Workstation container"
+msgstr "Имя рабочий станции"
+
+#: setup/setup_config2.tpl:61
+msgid "Samba SID mapping"
+msgstr ""
+
+#: setup/setup_config2.tpl:70
+#, fuzzy
+msgid "Additional GOsa settings"
+msgstr "Дополнительные записи в fstab"
+
+#: setup/setup_config2.tpl:74
+msgid "Enable Copy & Paste"
+msgstr ""
+
+#: setup/setup_config2.tpl:86
+#, fuzzy
+msgid "Government mode"
+msgstr "Управление подразделениями"
+
+#: setup/setup_config2.tpl:113
+#, fuzzy
+msgid "Vacation templates"
+msgstr "Шаблон рабочей станции"
+
+#: setup/setup_config2.tpl:129
+msgid "Use Cyrus UNIX style"
+msgstr ""
+
+#: setup/setup_config2.tpl:139
+msgid "Snapshots / Undo"
+msgstr ""
+
+#: setup/setup_config2.tpl:148 setup/setup_config2.tpl:193
+msgid "Enable snapshots"
+msgstr ""
+
+#: setup/setup_config2.tpl:154 setup/setup_config2.tpl:199
+msgid "Snapshot base"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:106 setup/class_setupStep_Migrate.inc:107
+#, fuzzy
+msgid "LDAP inspection"
+msgstr "Проверка конфигурации PHP"
+
+#: setup/class_setupStep_Migrate.inc:108
+msgid "Analyze your current LDAP for GOsa compatibility"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:114
+#, fuzzy
+msgid "Checking for root object"
+msgstr "Проверка модуля gd"
+
+#: setup/class_setupStep_Migrate.inc:120
+msgid "Checking permissions on LDAP database"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:126
+#, fuzzy
+msgid "Checking for invisible deparmtments"
+msgstr "Проверка поддержки gettext"
+
+#: setup/class_setupStep_Migrate.inc:132
+#, fuzzy
+msgid "Checking for invisible users"
+msgstr "Проверка поддержки gettext"
+
+#: setup/class_setupStep_Migrate.inc:138
+#, fuzzy
+msgid "Checking for super administrator"
+msgstr "Проверка дополнительных программ"
+
+#: setup/class_setupStep_Migrate.inc:144
+#, fuzzy
+msgid "Checking for users outside the people tree"
+msgstr "Проверка модуля cups"
+
+#: setup/class_setupStep_Migrate.inc:150
+#, fuzzy
+msgid "Checking for groups outside the groups tree"
+msgstr "Проверка модуля cups"
+
+#: setup/class_setupStep_Migrate.inc:156
+msgid "Checking for windows workstations outside the winstation tree"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:162
+#, fuzzy
+msgid "Checking for duplicate uid numbers"
+msgstr "Проверка модуля ldap"
+
+#: setup/class_setupStep_Migrate.inc:168
+#, fuzzy
+msgid "Checking for duplicate gid numbers"
+msgstr "Проверка модуля ldap"
+
+#: setup/class_setupStep_Migrate.inc:191 setup/class_setupStep_Migrate.inc:240
+#: setup/class_setupStep_Migrate.inc:302 setup/class_setupStep_Migrate.inc:348
+#: setup/class_setupStep_Migrate.inc:394 setup/class_setupStep_Migrate.inc:454
+#: setup/class_setupStep_Migrate.inc:538 setup/class_setupStep_Migrate.inc:668
+#: setup/class_setupStep_Migrate.inc:757
+#, fuzzy
+msgid "LDAP query failed"
+msgstr "Невозможно выполнить запрос к базе данных!"
+
+#: setup/class_setupStep_Migrate.inc:192 setup/class_setupStep_Migrate.inc:241
+#: setup/class_setupStep_Migrate.inc:303 setup/class_setupStep_Migrate.inc:349
+#: setup/class_setupStep_Migrate.inc:395 setup/class_setupStep_Migrate.inc:455
+#: setup/class_setupStep_Migrate.inc:539 setup/class_setupStep_Migrate.inc:669
+#: setup/class_setupStep_Migrate.inc:758
+msgid "Possibly the 'root object' is missing."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:214
+#, fuzzy, php-format
+msgid "Found %s duplicate values for attribute 'uidNumber'."
+msgstr "Укажите корректный номер телефона."
+
+#: setup/class_setupStep_Migrate.inc:263
+#, fuzzy, php-format
+msgid "Found %s duplicate values for attribute 'gidNumber'."
+msgstr "Укажите корректный номер телефона."
+
+#: setup/class_setupStep_Migrate.inc:320
+#, php-format
+msgid ""
+"Found %s winstations outside the predefined winstation department ou '%s'."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:321 setup/class_setupStep_Migrate.inc:549
+#: setup/class_setupStep_Migrate.inc:678
+#, fuzzy
+msgid "Migrate"
+msgstr "Дата"
+
+#: setup/class_setupStep_Migrate.inc:367
+#, php-format
+msgid "Found %s groups outside the configured tree '%s'."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:368 setup/class_setupStep_Migrate.inc:414
+#, fuzzy
+msgid "Move"
+msgstr "Режим"
+
+#: setup/class_setupStep_Migrate.inc:413
+#, php-format
+msgid "Found %s user(s) outside the configured tree '%s'."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:470 setup/class_setupStep_Migrate.inc:483
+#, php-format
+msgid ""
+"The specified user '%s' does not have full access to your ldap database."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:547
+#, php-format
+msgid "Found %s user(s) that will not be visible in GOsa."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:597 setup/class_setupStep_Migrate.inc:729
+#, php-format
+msgid ""
+"Failed to migrate the department '%s' into GOsa, error message is as follows "
+"'%s'."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:677
+#, php-format
+msgid "Found %s department(s) that will not be visible in GOsa."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:766
+msgid "There is no GOsa administrator account inside your LDAP."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:828
+#, fuzzy, php-format
+msgid "Adding acls for user '%s' failed, ldap says '%s'."
+msgstr "Ошибка при создании блокировки. Ответ сервера: \"%s\"."
+
+#: setup/class_setupStep_Migrate.inc:846
+msgid "Specified passwords are empty or not equal."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:914 setup/class_setupStep_Migrate.inc:962
+#: setup/class_setupStep_Migrate.inc:1010
+#, fuzzy
+msgid "Couldn't move users to specified department."
+msgstr "Невозможно подключиться к серверу базы данных!"
+
+#: setup/class_setupStep_Migrate.inc:924
+msgid "Winstation will be moved from"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:924 setup/class_setupStep_Migrate.inc:972
+#: setup/class_setupStep_Migrate.inc:1020
+#, fuzzy
+msgid "to"
+msgstr "Отношение"
+
+#: setup/class_setupStep_Migrate.inc:935 setup/class_setupStep_Migrate.inc:983
+msgid "Updating following references too"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:972
+msgid "Group will be moved from"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:1020
+msgid "User will be moved from"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:1030
+msgid "The following references will be updated"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:1418
+msgid ""
+"The LDAP root object is missing. It is required to use your LDAP service."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:1419
+#: setup/class_setupStep_Migrate.inc:1432
+msgid "Try to create root object"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:1431
+msgid "Root object couldn't be created, you should try it on your own."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:1678
+#, php-format
+msgid "Failed to copy '%s' to '%s'. LDAP says '%s'."
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:1681
+msgid "Something went wrong while copying dns."
+msgstr ""
+
+#, fuzzy
+#~ msgid "Can't open file '%s' to read uploaded file contents."
+#~ msgstr "Общая информация о пользователе"
+
+#, fuzzy
+#~ msgid "Vacationmessage"
+#~ msgstr "Сообщение автоответчика"
+
 #~ msgid "to the list of forwarders."
 #~ msgstr "к списку тех, кому должны пересылаться сообщения."
 
@@ -15298,10 +17769,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Online"
 #~ msgstr "в сети"
-
-#, fuzzy
-#~ msgid "Offline"
-#~ msgstr "не в сети"
 
 #, fuzzy
 #~ msgid "Please choose a valid  base."
@@ -15373,10 +17840,6 @@ msgstr ""
 #~ msgstr "Принтер"
 
 #, fuzzy
-#~ msgid "Admin"
-#~ msgstr "DN администратора"
-
-#, fuzzy
 #~ msgid "Admin Toggle"
 #~ msgstr "Пользователи домена"
 
@@ -15387,10 +17850,6 @@ msgstr ""
 #~ msgstr ""
 #~ "В этой учетной записи нет настроек Samba. Для учетных записей Samba нужны "
 #~ "атрибуты POSIX, включите сначала их использование."
-
-#, fuzzy
-#~ msgid "OpenXchange"
-#~ msgstr "Удалить телефонный аккаунт"
 
 #, fuzzy
 #~ msgid ""
@@ -15508,9 +17967,6 @@ msgstr ""
 #~ msgid "Display object groups matching"
 #~ msgstr "Показать совпадения объектов"
 
-#~ msgid "UNIX accounts"
-#~ msgstr "UNIX аккаунт"
-
 #~ msgid "Thin Clients"
 #~ msgstr "Тонкие клиенты"
 
@@ -15584,10 +18040,6 @@ msgstr ""
 #~ msgstr "сброс"
 
 #, fuzzy
-#~ msgid "Complete"
-#~ msgstr "не полный"
-
-#, fuzzy
 #~ msgid "Successfully finished"
 #~ msgstr "Настройка завершена"
 
@@ -15656,10 +18108,6 @@ msgstr ""
 #~ msgstr "Выбрать"
 
 #, fuzzy
-#~ msgid "Current base"
-#~ msgstr "Текущий пароль"
-
-#, fuzzy
 #~ msgid "mailto"
 #~ msgstr "Email"
 
@@ -15668,16 +18116,8 @@ msgstr ""
 #~ msgstr "Сетевой принтер"
 
 #, fuzzy
-#~ msgid "Can't connect to specified database."
-#~ msgstr "Невозможно подключиться к серверу базы данных!"
-
-#, fuzzy
 #~ msgid "Coments"
 #~ msgstr "Контакт"
-
-#, fuzzy
-#~ msgid "Invalid characters in uid."
-#~ msgstr "Значение поля \"Имя\" содержит недопустимые символы."
 
 #, fuzzy
 #~ msgid "Append new class names"
@@ -15714,10 +18154,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "No mysql extension loaded, can't connect to mysql server."
 #~ msgstr "Выберите способ подключения к серверу терминалов"
-
-#, fuzzy
-#~ msgid "Account expiry"
-#~ msgstr "Учетная запись"
 
 #, fuzzy
 #~ msgid "Can change password"
@@ -15767,10 +18203,6 @@ msgstr ""
 #~ msgstr "Отображаемое имя"
 
 #, fuzzy
-#~ msgid "BirthDate"
-#~ msgstr "Дата"
-
-#, fuzzy
 #~ msgid "DisplayName"
 #~ msgstr "Отображаемое имя"
 
@@ -15810,10 +18242,6 @@ msgstr ""
 #~ "С помощью этого меню вы можете добавлять, изменять и удалять выбранных "
 #~ "пользователей. Если у вас достаточно большое количество пользователей, вы "
 #~ "можете использовать групповое выделение."
-
-#, fuzzy
-#~ msgid "Specific Phone settings"
-#~ msgstr "Настройки телефона"
 
 #, fuzzy
 #~ msgid ""
@@ -15951,9 +18379,6 @@ msgstr ""
 #~ msgid "Add additional automount entries"
 #~ msgstr "Укажите дополнительные устройства для автоматического монтирования"
 
-#~ msgid "Additional fstab entries"
-#~ msgstr "Дополнительные записи в fstab"
-
 #~ msgid "Add additional filesystems to be mounted during startup"
 #~ msgstr ""
 #~ "Укажите дополнительные файловые системы для монтирования во время загрузки"
@@ -16015,10 +18440,6 @@ msgstr ""
 #~ msgstr "Введите корректное имя пользователя!"
 
 #, fuzzy
-#~ msgid "Invalid character in description. Please enter a valid description."
-#~ msgstr "Введите корректное имя пользователя!"
-
-#, fuzzy
 #~ msgid "Please specify a description for this profile."
 #~ msgstr "Укажите корректный номер телефона."
 
@@ -16029,10 +18450,6 @@ msgstr ""
 #, fuzzy
 #~ msgid " name="
 #~ msgstr "Список"
-
-#, fuzzy
-#~ msgid " value="
-#~ msgstr "По умолчанию"
 
 #, fuzzy
 #~ msgid " type="
@@ -16059,24 +18476,8 @@ msgstr ""
 #~ msgstr "Создать шаблон"
 
 #, fuzzy
-#~ msgid "Edit object"
-#~ msgstr "Соответствующий объект"
-
-#, fuzzy
-#~ msgid "Delete object"
-#~ msgstr "Включаемые объекты"
-
-#, fuzzy
-#~ msgid "Script set"
-#~ msgstr "Путь к сценариям"
-
-#, fuzzy
 #~ msgid "Variable set"
 #~ msgstr "Переменная"
-
-#, fuzzy
-#~ msgid "Abort"
-#~ msgstr "Порт"
 
 #, fuzzy
 #~ msgid "Please enter a valid name for partition %s."
@@ -16093,10 +18494,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "cancel"
 #~ msgstr "Отмена"
-
-#, fuzzy
-#~ msgid "Available class names."
-#~ msgstr "Доступные приложения"
 
 #, fuzzy
 #~ msgid "Create new FAI object - set of scripts."
@@ -16129,10 +18526,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Name of Conference"
 #~ msgstr "Подразделение"
-
-#, fuzzy
-#~ msgid "Number"
-#~ msgstr "Ноябрь"
 
 #, fuzzy
 #~ msgid "Additional phone attributes "
@@ -16260,10 +18653,6 @@ msgstr ""
 #~ msgid "Show empty groups"
 #~ msgstr "Показать пустые группы"
 
-#, fuzzy
-#~ msgid "The given value for goFonQualify is not a valid number."
-#~ msgstr "Значение поля \"Квота\" некорректно."
-
 #~ msgid "Answering machine"
 #~ msgstr "Автоответчик"
 
@@ -16335,10 +18724,6 @@ msgstr ""
 #~ "доступен GOsa."
 
 #, fuzzy
-#~ msgid "Checking for PHP version (<=5)"
-#~ msgstr "Проверка версии PHP (>=4.1.0)"
-
-#, fuzzy
 #~ msgid "Send report"
 #~ msgstr "Отправитель"
 
@@ -16361,9 +18746,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Обнаружен не поддерживаемый метод хэширования паролей. Не удается создать "
 #~ "подходящий пароль."
-
-#~ msgid "Checking for gd module"
-#~ msgstr "Проверка модуля gd"
 
 #~ msgid ""
 #~ "GOsa needs this module for recalculating image sizes provided for users "
