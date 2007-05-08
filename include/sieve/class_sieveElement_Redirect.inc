@@ -32,7 +32,7 @@ class sieve_redirect
     $this->object_id = $object_id;
 
     if($data == NULL){
-      $data = array('ELEMENTS' => array(array('class' => "quoted-string" ,"text" => _("Put a mail address here"))));
+      $data = array('ELEMENTS' => array(array('class' => "quoted-string" ,"text" => _("Place a mail address here"))));
     }
 
     for($i = 0 ; $i < count($data['ELEMENTS']) ; $i++){

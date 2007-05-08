@@ -1,7 +1,7 @@
 <table class='sieve_default_table'>
 	<tr>
 		<td>
-			<b>{t}Else if{/t}</b>
+			<b>{t}Else If{/t}</b>
 			{$Contents}
     	</td>
 	</tr>

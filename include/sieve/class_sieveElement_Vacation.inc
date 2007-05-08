@@ -145,7 +145,7 @@ class sieve_vacation
       }
     }
     if($err){
-      $msgs[] = _("Alternative sender addresse must be valid email addresses.");
+      $msgs[] = _("Alternative sender address must be a valid email addresses.");
     }
     return($msgs);
   }

@@ -412,7 +412,7 @@ class sieveManagement extends plugin
         }
       }else{
         foreach($chk as $msgs){
-          print_red(sprintf(_("Please fix all errors before saving. Last error was : %s"),$msgs));
+          print_red(sprintf(_("Please fix all errors before saving. Last error was: %s"),$msgs));
         }
       }
     }
@@ -441,9 +441,9 @@ class sieveManagement extends plugin
           if($file['size'] == 0){
             print_red(_("Specified file seems to be empty."));
           }elseif(!file_exists($file['tmp_name'])){
-            print_red(_("Upload failed, somehow nothing was uploaded or the temporary file can't be accessed."));
+            print_red(_("Upload failed. The temporary file can't be accessed."));
           }elseif(!is_readable ($file['tmp_name'])){
-            print_red(sprintf(_("Can't open file '%s' to read uploaded file contents."),$file['tmp_name']));
+            print_red(sprintf(_("Can't open file '%s'."),$file['tmp_name']));
           }else{
             
             
