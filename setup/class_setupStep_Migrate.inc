@@ -748,79 +748,56 @@ class Step_Migrate extends setup_step
         FALSE,
         $cv['tls']);
 
-    /* Search for gosaAcls */ 
+    /* Search for groups that have complete permissions */ 
     $ldap->cd($cv['base']);
-    $res = $ldap->cat($cv['base']);
-    
+    $res = $ldap->search("(&(objectClass=posixGroup)(gosaSubtreeACL=:all)(memberUid=*))",array("memberUid","cn"));
+   
+    /* If ldap search failed, set error message */ 
     if(!$res){
       $this->checks['acls']['STATUS']    = FALSE;
       $this->checks['acls']['STATUS_MSG']= _("LDAP query failed");
       $this->checks['acls']['ERROR_MSG'] = _("Possibly the 'root object' is missing.");
     }else{
-      $found = false;
-      $username = "";
-      $attrs = $ldap->fetch();
-      if(isset($attrs['gosaAclEntry'])){
-        $acls = $attrs['gosaAclEntry'];
-        for($i = 0 ; $i < $acls['count'] ; $i++){
-          $acl = $acls[$i];
-          $tmp = split(":",$acl);
-          if($tmp[1] == "psub"){
-            $members = split(",",$tmp[2]);
-            foreach($members as $member){
-              $member = base64_decode($member);
 
-              /* Check if acl owner is a valid GOsa user account */
-              $ldap->cat($member,array("objectClass","uid","cn"));
-              $ret = $ldap->fetch();
+      /* */
+      $found = FALSE;
+      $debug = "";
+      $admin_groups = array();
 
-              if(isset($ret['objectClass']) && in_array("posixGroup",$ret['objectClass'])){
-                $found = TRUE;
-                $username .= "ACL-Group:&nbsp;".$ret['cn'][0]."<br>";
-              }elseif(isset($ret['objectClass']) && in_array("gosaAccount",$ret['objectClass']) &&
-                  in_array("organizationalPerson",$ret['objectClass']) &&
-                  in_array("inetOrgPerson",$ret['objectClass'])){
-                $found = TRUE;
-                $username .= "ACL:&nbsp;".$ret['uid'][0]."<br>";
-              }
-            }
-          }elseif($tmp[1] == "role"){
-
-            /* Check if acl owner is a valid GOsa user account */
-            $ldap->cat(base64_decode($tmp[2]),array("gosaAclTemplate"));
-            $ret = $ldap->fetch();
-
-            if(isset($ret['gosaAclTemplate'])){
-              $cnt = $ret['gosaAclTemplate']['count'];
-              for($e = 0 ; $e < $cnt ; $e++){
-
-                $a_str = $ret['gosaAclTemplate'][$e];
-                if(preg_match("/^[0-9]*:psub:/",$a_str) && preg_match("/:all;cmdrw$/",$a_str)){
-
-                  $members = split(",",$tmp[3]);
-                  foreach($members as $member){
-                    $member = base64_decode($member);
-
-                    /* Check if acl owner is a valid GOsa user account */
-                    $ldap->cat($member,array("objectClass","uid"));
-                    $ret = $ldap->fetch();
-  
-                    if(isset($ret['objectClass']) && in_array("gosaAccount",$ret['objectClass']) &&
-                        in_array("organizationalPerson",$ret['objectClass']) &&
-                        in_array("inetOrgPerson",$ret['objectClass'])){
-                      $found = TRUE;
-                      $username .= "ACL Role:&nbsp;".$ret['uid'][0]."<br>";
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+      /* Get all returned groups */
+      while($attrs  = $ldap->fetch()){
+        $admin_groups[]= $attrs;
       }
 
+      /* Walk through groups and check if memberUid exists in ldap database */
+      foreach($admin_groups as $group){
+
+        $debug .= "<b>".$group['cn'][0].":</b><br>";
+
+        $count_member = $group['memberUid']['count'];
+
+        /* Check every single group member */
+        for($i = 0 ; $i < $count_member ; $i++){
+          $debug .= $group['memberUid'][$i];
+
+          /* Check if user exists */
+          $ldap->search("(&(objectClass=gosaAccount)(uid=".$group['memberUid'][$i]."))",array("dn"));
+          $cnt= $ldap->count(); 
+           
+          /* Update found-status if there is a member available */ 
+          if($cnt == 1){
+            $debug .= " <i>->Found</i><br>";
+            $found = TRUE;
+          }elseif($cnt == 0 ){
+            $debug .= " <font color='red'>-> NOT Found</font><br>";
+          }else{
+            $debug .= " <font color='red'>-> Found more than once -.- </font><br>";
+          }
+        } 
+      
+      }
       # For debugging
-      #echo $username;
+      # echo $debug."<br>----------------<br>"; 
 
       if($found){
         $this->checks['acls']['STATUS']    = TRUE;
