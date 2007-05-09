@@ -801,7 +801,7 @@ class Step_Migrate extends setup_step
 
       if($found){
         $this->checks['acls']['STATUS']    = TRUE;
-        $this->checks['acls']['STATUS_MSG']= _("Ok")."&nbsp;";
+        $this->checks['acls']['STATUS_MSG']= _("Ok");
         $this->checks['acls']['ERROR_MSG'] = "";
       }else{
         $this->checks['acls']['STATUS']    = FALSE;
