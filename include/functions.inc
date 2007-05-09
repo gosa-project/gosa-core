@@ -2160,6 +2160,66 @@ function is_php4()
 }
 
 
+function gosa_ldap_explode_dn($dn,$config = NULL,$verify_in_ldap=false)
+{
+  /* Initialize variables */
+  $ret  = array("count" => 0);  // Set count to 0
+  $next = true;                 // if false, then skip next loops and return
+  $cnt  = 0;                    // Current number of loops
+  $max  = 100;                  // Just for security, prevent looops
+  $ldap = NULL;                 // To check if created result a valid
+  $keep = "";                   // save last failed parse string
+
+  /* Check each parsed dn in ldap ? */
+  if($config!=NULL && $verify_in_ldap){
+    $ldap = $config->get_ldap_link();
+  }
+
+  /* Lets start */
+  $called = false;
+  while(preg_match("/,/",$dn) && $next &&  $cnt < $max){
+
+    $cnt ++;
+    if(!preg_match("/,/",$dn)){
+      $next = false;
+    }
+    $object = preg_replace("/[,].*$/","",$dn);
+    $dn     = preg_replace("/^[^,]+,/","",$dn);
+
+    $called = true;
+
+    /* Check if current dn is valid */
+    if($ldap!=NULL){
+      $ldap->cd($dn);
+      $ldap->cat($dn,array("dn"));
+      if($ldap->count()){
+        $ret[]  = $keep.$object;
+        $keep   = "";
+      }else{
+        $keep  .= $object.",";
+      }
+    }else{
+      $ret[]  = $keep.$object;
+      $keep   = "";
+    }
+  }
+
+  /* No dn was posted */
+  if($cnt == 0 && !empty($dn)){
+    $ret[] = $dn;
+  }
+
+  /* Append the rest */
+  $test = $keep.$dn;
+  if($called && !empty($test)){
+    $ret[] = $keep.$dn;
+  }
+  $ret['count'] = count($ret) - 1;
+
+  return($ret);
+}
+
+
 function get_base_from_hook($dn, $attrib)
 {
   global $config;
