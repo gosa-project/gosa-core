@@ -832,49 +832,81 @@ class Step_Migrate extends setup_step
         $cv['connection'],
         FALSE,
         $cv['tls']);
-
-    /* Get current base attributes */
+    
     $ldap->cd($cv['base']);
-    $ldap->cat($cv['base'],array("dn","objectClass","gosaAclEntry"));
-    $attrs = $ldap->fetch();
+    $ldap->cat($dn,array("objectClass","cn","uid"));
+    $object_attrs = $ldap->fetch();
+    $type = "none";
+  
+    /* Check object that should receive admin acls */
+    if(in_array("gosaAccount",$object_attrs['objectClass'])){
+      $type = "user";
+    }elseif(in_array("posixGroup",$object_attrs['objectClass'])){
+      $type = "group";
+    } 
 
-    /* Add acls for the selcted user to the base */
-    $attrs_new['objectClass'] = array("gosaACL");
+    /* If a user should get administrative acls, we  
+     *  should check if there is an administrational group 
+     *  and just assign the user to it.
+     * If there is no such group, we must create one.
+     */
+    if($type == "user"){
 
-    for($i = 0; $i < $attrs['objectClass']['count']; $i ++){
-      if(!in_array_ics($attrs['objectClass'][$i],$attrs_new['objectClass'])){
-        $attrs_new['objectClass'][] = $attrs['objectClass'][$i];
-      }
-    }
+      $ldap->search("(&(objectClass=posixGroup)(gosaSubtreeACL=:all)(memberUid=*))",array("memberUid"));
+      if($ldap->count()){
+        $fetched_attrs          = $ldap->fetch();
+        $attrs_admin_group      = $this->cleanup_array($fetched_attrs);
+        $attrs_admin_group_new  = $attrs_admin_group;
 
-    $acl = "0:psub:".base64_encode($dn).":all;cmdrw";    
-    $attrs_new['gosaAclEntry'][] = $acl;
-    if(isset($attrs['gosaAclEntry'])){
-      for($i = 0 ; $i < $attrs['gosaAclEntry']['count']; $i ++){
-          
-        $prio = preg_replace("/[:].*$/","",$attrs['gosaAclEntry'][$i]);
-        $rest = preg_replace("/^[^:]/","",$attrs['gosaAclEntry'][$i]);
- 
-        $data = ($prio+1).$rest;
-        $attrs_new['gosaAclEntry'][] = $data;
-      }
-    }
+        if(!isset($attrs_admin_group_new['memberUid'])){
+          $attrs_admin_group_new['memberUid'] = array();
+        }
+        if(!in_array($object_attrs['uid'][0],$attrs_admin_group_new['memberUid'])){
+          $attrs_admin_group_new['memberUid'][] = $object_attrs['uid'][0];
+        }
 
-    if($only_ldif){
-      $this->acl_create_changes ="\n".$cv['base']."\n";
-      $this->acl_create_changes.=$this->array_to_ldif($attrs)."\n";
-      $this->acl_create_changes.="\n".$cv['base']."\n";
-      $this->acl_create_changes.=$this->array_to_ldif($attrs_new);
-    }else{
-   
-      $ldap->cd($cv['base']);
-      if(!$ldap->modify($attrs_new)){
-        print_red(sprintf(_("Adding acls for user '%s' failed, ldap says '%s'."),$dn,$ldap->get_error()));
-        return(FALSE);
+        if($only_ldif){
+          $this->acl_create_changes = _("Appending user to to group administrational group: \n");
+          $this->acl_create_changes.= "\n"._("Before").":\n";
+          $this->acl_create_changes.= $fetched_attrs['dn']."\n";
+          $this->acl_create_changes.= $this->array_to_ldif($attrs_admin_group)."\n";
+          $this->acl_create_changes.= "\n"._("After").":\n";
+          $this->acl_create_changes.= $fetched_attrs['dn']."\n";
+          $this->acl_create_changes.= $this->array_to_ldif($attrs_admin_group_new)."\n";
+        }else{ 
+          $ldap->cd($fetched_attrs['dn']);
+          $ldap->modify($attrs_admin_group_new);
+          if(!preg_match("/success/i",$ldap->get_error())){
+            print_red(sprintf(_("Adding acls for user '%s' failed, ldap says '%s'."),$dn,$ldap->get_error()));
+            return(FALSE);
+          }
+        }
+        
       }else{
-        return(TRUE);
+        $new_group_dn = "cn=GOsa Administrators,".$cv['groupou'].",".$cv['base'];
+        $new_group_attrs['objectClass'] = array("gosaObject","posixGroup");
+        $new_group_attrs['cn'] = "GOsa Administrators";
+        $new_group_attrs['gosaSubtreeACL'] = ":all";
+        $new_group_attrs['gidNumber'] = "999";
+        $new_group_attrs['memberUid'] = array($object_attrs['uid'][0]);
+
+        if($only_ldif){
+          $this->acl_create_changes = _("Creating new administrational group: \n\n");
+          $this->acl_create_changes.= $new_group_dn."\n";
+          $this->acl_create_changes.= $this->array_to_ldif($new_group_attrs);
+        }else{ 
+          $ldap->cd($cv['base']);
+          $ldap->create_missing_trees($cv['groupou'].",".$cv['base']);
+          $ldap->cd($new_group_dn);
+          $res = $ldap->add($new_group_attrs);
+          if(!$res){
+            print_red(sprintf(_("Adding acls for user '%s' failed, ldap says '%s'."),$dn,$ldap->get_error()));
+            return(FALSE);
+          }
+        }
       }
     }
+    return(TRUE);
   }
  
   
@@ -1267,8 +1299,8 @@ class Step_Migrate extends setup_step
       $smarty->assign("new_user_password2",@$_POST['new_user_password2']);
       $smarty->assign("users" ,$this->get_user_list());
       $smarty->assign("users_cnt" ,count($this->get_user_list()));
-      $smarty->assign("groups",$this->get_group_list());
-      $smarty->assign("groups_cnt",count($this->get_group_list()));
+//      $smarty->assign("groups",$this->get_group_list());
+//      $smarty->assign("groups_cnt",count($this->get_group_list()));
       $smarty->assign("type"  ,$this->acl_create_type);
       $smarty->assign("method","create_acls");
       $smarty->assign("acl_create_selected",$this->acl_create_selected);

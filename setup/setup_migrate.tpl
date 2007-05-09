@@ -245,25 +245,12 @@
 </script>
 				<input type='submit' name='create_admin_user' value='{t}Apply{/t}'>	
 			
-			{if $users_cnt != 0 || $groups_cnt != 0}
+			{if $users_cnt != 0 }
 			
-			<h2>{t}Assign super administrator permissions to an existing user or group{/t}</h2>
-			<p>{t}To grant administrative permissions to a user or a group, select an object and choose 'Assign'.{/t}</p>
-			<select name='acl_create_type' onChange='document.mainform.submit();' >
-				{if $type == "user"}
-				<option value='group'>{t}Group{/t}</option>
-				<option selected value='user'>{t}User{/t}</option>
-				{else}
-				<option selected value='group'>{t}Group{/t}</option>
-				<option value='user'>{t}User{/t}</option>
-				{/if}
-			</select>
+			<h2>{t}Assign super administrator permissions to an existing user{/t}</h2>
+			<p>{t}To grant administrative permissions to a user, select one and choose 'Assign'.{/t}</p>
 			<select name='create_acls_selected' size="12" style='width:100%;'>
-				{if $type == "user"}
-					{html_options options=$users selected=$acl_create_selected}
-				{else}
-					{html_options options=$groups selected=$acl_create_selected}
-				{/if}
+				{html_options options=$users selected=$acl_create_selected}
 			</select>
 			<input type='submit' name='create_acls_create' value='{t}Apply{/t}'>
 			{/if}
