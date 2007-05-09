@@ -113,7 +113,7 @@ class pluglist {
 
 					/* Read information from class variable */
 					if (!isset($info['CLASS'])){
-						print_red(_("Your gosa.conf information has changed partly. Please convert it using the contributed script fix_config.sh!"));
+						print_red(sprintf(_("Your %s information has changed partly. Please convert it using the contributed script fix_config.sh!"),CONFIG_FILE));
 						echo $_SESSION['errors'];
 						exit;
 					}

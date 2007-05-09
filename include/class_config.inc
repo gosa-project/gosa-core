@@ -68,7 +68,8 @@ class config  {
     $xmldata= fread($fh, 100000);
     fclose($fh); 
     if(!xml_parse($this->parser, chop($xmldata))){
-      print_red(sprintf(_("XML error in gosa.conf: %s at line %d"),
+      print_red(sprintf(_("XML error in %s: %s at line %d"),
+            CONFIG_FILE,
             xml_error_string(xml_get_error_code($this->parser)),
             xml_get_current_line_number($this->parser)));
       echo $_SESSION['errors'];

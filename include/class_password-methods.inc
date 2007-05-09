@@ -201,7 +201,7 @@ function generate_smb_nt_hash($password)
   $hash= current($ar);
   if ($hash == "")
   {
-    print_red (_("Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."));
+    print_red (sprintf(_("Setting for SMBHASH in %s is incorrect! Can't change Samba password."),CONFIG_FILE));
   }
   else 
   {

@@ -97,7 +97,7 @@ $_SESSION['errorsAlreadyPosted']= array();
 $_SESSION['LastError']          = "";
 
 /* Check if we need to run setup */
-if (!file_exists(CONFIG_DIR."/gosa.conf")){
+if (!file_exists(CONFIG_DIR."/".CONFIG_FILE)){
   header("location:setup.php");
   exit();
 }
@@ -112,14 +112,14 @@ if(isset($_POST['javascript']) && $_POST['javascript'] == "true") {
   $_SESSION['js']= FALSE;
 }
 
-/* Check if gosa.conf is accessible */
-if (!is_readable(CONFIG_DIR."/gosa.conf")){
-  echo sprintf(_("GOsa configuration %s/gosa.conf is not readable. Aborted."), CONFIG_DIR);
+/* Check if CONFIG_FILE is accessible */
+if (!is_readable(CONFIG_DIR."/".CONFIG_FILE)){
+  echo sprintf(_("GOsa configuration %s/%s is not readable. Aborted."), CONFIG_DIR,CONFIG_FILE);
   exit();
 }
 
 /* Parse configuration file */
-$config= new config(CONFIG_DIR."/gosa.conf", $BASE_DIR);
+$config= new config(CONFIG_DIR."/".CONFIG_FILE, $BASE_DIR);
 $_SESSION['DEBUGLEVEL']= $config->data['MAIN']['DEBUGLEVEL'];
 if ($_SERVER["REQUEST_METHOD"] != "POST"){
   @DEBUG (DEBUG_CONFIG, __LINE__, __FUNCTION__, __FILE__, $config->data, "config");
@@ -214,7 +214,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
     $config->data['MAIN']['SCHEMA_CHECK'] = "true";
   }
   if(isset($config->data['MAIN']['SCHEMA_CHECK'])&&preg_match("/true/i",$config->data['MAIN']['SCHEMA_CHECK'])){
-    require_once("functions_setup.inc");
     $recursive = (isset($config->current['RECURSIVE']) && $config->current['RECURSIVE'] == "true");
     $tls =       (isset($config->current['TLS'])       && $config->current['TLS'] == "true");
 
