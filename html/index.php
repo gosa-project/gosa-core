@@ -230,7 +230,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
       $cfg['connection']= $config->current['SERVER'];
       $cfg['tls']       = $tls;
   
-      $str = check_schema($cfg,preg_match("/(true|yes|on|1)/i",$config->current['RFC2307BIS']));
+      $str = check_schema($cfg,isset($config->current['RFC2307BIS']) && preg_match("/(true|yes|on|1)/i",$config->current['RFC2307BIS']));
 
       $checkarr = array();
       foreach($str as $tr){
