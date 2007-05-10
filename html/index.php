@@ -223,15 +223,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
       displayLogin();
       exit();
     }else{
-#      $str = (schema_check($config->current['SERVER'],$config->current['ADMIN'],$config->current['PASSWORD'], $recursive, $tls, 0, TRUE));
-#      $checkarr = array();
-#      foreach($str as $tr){
-#        if(isset($tr['needonstartup'])){
-#          print_red($tr['msg']."<br>"._("Your ldap setup contains old schema definitions. Please re-run the setup."));
-#          displayLogin();
-#          exit();
-#        }
-#      }
+ 
+      $cfg = array(); 
+      $cfg['admin']     = $config->current['ADMIN'];
+      $cfg['password']  = $config->current['PASSWORD'];
+      $cfg['connection']= $config->current['SERVER'];
+      $cfg['tls']       = $tls;
+  
+      $str = check_schema($cfg,preg_match("/(true|yes|on|1)/i",$config->current['RFC2307BIS']));
+
+      $checkarr = array();
+      foreach($str as $tr){
+        if(isset($tr['IS_MUST_HAVE']) && !$tr['STATUS']){
+          print_red($tr['MSG']."<br>"._("Your ldap setup contains old schema definitions. Please re-run the setup."));
+          displayLogin();
+          exit();
+        }
+      }
     }
   }
   /* Check for locking area */
