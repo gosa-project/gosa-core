@@ -130,15 +130,26 @@ class Step_Ldap extends setup_step
 
   function save_object()
   {
+    $reset = FALSE;
     foreach($this->attributes as $attr){
       if(isset($_POST[$attr])){
-
         if(in_array($attr,array("base","connection")) && $this->$attr != get_post($attr)){
-          $this->parent->disable_steps_from($this->parent->step_name_to_id(get_class($this)) + 1);
+          $reset = TRUE;
         }
         $this->$attr = get_post($attr);
       }
     }
+
+    if($reset){
+      $this->parent->disable_steps_from(($this->parent->step_name_to_id(get_class($this))) +1);
+      $attr = @LDAP::get_naming_contexts($this->connection);
+      if(!in_array(get_post("base"),$attr)){
+        if(isset($attr[0])){
+          $this->base = $attr[0];
+        }
+      }
+    }
+
 
     if(isset($_POST['resolve_user_x'])){
       $this->resolve_user = !$this->resolve_user;
