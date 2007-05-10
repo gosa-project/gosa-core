@@ -47,6 +47,7 @@ class workgeneric extends plugin
 
   var $mapActions   = array("reboot"          => "localboot",
                             "localboot"       => "localboot",
+                            "halt"            => "localboot",
                             "instant_update"  => "softupdate",
                             "update"          => "scheduledupdate",
                             "reinstall"       => "install",
@@ -256,7 +257,7 @@ class workgeneric extends plugin
                                        "localboot" => _("Force localboot"),
                                        "sysinfo"  => _("System analysis")));
     } else {
-      $smarty->assign("actions", array("wake" => _("Wake up"),
+      $smarty->assign("actions", array("halt" => _("Switch off"), "reboot" => _("Reboot"),
                                        "reinstall" => _("Reinstall"),
                                        "update" => _("Scheduled update"),
                                        "memcheck" => _("Memory test"),
