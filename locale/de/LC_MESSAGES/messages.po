@@ -16427,7 +16427,7 @@ msgstr "Zusätzliche GOsa-Einstellungen"
 
 #: setup/setup_config2.tpl:74
 msgid "Enable Copy & Paste"
-msgstr "Ermögliche Kopieren & Einfügen"
+msgstr "Ermögliche Kopieren &amp; Einfügen"
 
 #: setup/setup_config2.tpl:86
 msgid "Government mode"
