@@ -134,7 +134,7 @@ class Step_Ldap extends setup_step
       if(isset($_POST[$attr])){
 
         if(in_array($attr,array("base","connection")) && $this->$attr != get_post($attr)){
-          $this->parent->disable_steps_from($this->parent->step_name_to_id(get_class($this)));
+          $this->parent->disable_steps_from($this->parent->step_name_to_id(get_class($this)) + 1);
         }
         $this->$attr = get_post($attr);
       }
