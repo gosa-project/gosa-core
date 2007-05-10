@@ -15,6 +15,12 @@ for (iln = 0; iln < len; iln++){
 }
 netscape= (ver.charAt(iln+1).toUpperCase() != "C");
 
+function toggle_all_(regex,state_object)
+{
+    state = document.getElementById(state_object).checked;
+    chk_set_all(regex, state);
+}
+
 
 /* Toggle checkbox that matches regex */
 function chk_set_all(regex,value)

@@ -61,8 +61,8 @@
 				{/if}
 				<br>
 			{/foreach}
-			<input type='button' value='{t}Select all{/t}' onClick="acl_set_all('^select_winstation_',true)">
-			<input type='button' value='{t}Select none{/t}' onClick="acl_set_all('^select_winstation_',false)">
+			<input type='checkbox' id='toggle_calue' onClick="toggle_all_('^select_winstation_','toggle_calue')">
+			{t}Select all{/t}
 			<p>
 			<b>{t}Move selected windows workstations into the following GOsa department{/t} : </b>
 			<select name='move_winstation_to'>
@@ -116,10 +116,9 @@
 				{/if}
 				<br>
 			{/foreach}
-
+			<input type='checkbox' id='toggle_calue' onClick="toggle_all_('^select_group_','toggle_calue')">
+			&nbsp;{t}Select all{/t}
 			<p>
-				<input type='button' value='{t}Select all{/t}' onClick="acl_set_all('^select_group_',true)">
-				<input type='button' value='{t}Select none{/t}' onClick="acl_set_all('^select_group_',false)">
                         {if $group_details}
                         <input type='submit' name='outside_groups_dialog_refresh' value='{t}Hide changes{/t}'>
                         {else}
@@ -168,9 +167,9 @@
 				{/if}
 				<br>
 			{/foreach}
+			<input type='checkbox' id='toggle_calue' onClick="toggle_all_('^select_user_','toggle_calue')">
+			&nbsp;{t}Select all{/t}
 			<br>
-			<input type='button' value='{t}Select all{/t}' onClick="acl_set_all('^select_user_',true)">
-			<input type='button' value='{t}Select none{/t}' onClick="acl_set_all('^select_user_',false)">
 
 			{if $user_details}
 			<input type='submit' name='outside_users_dialog_refresh' value='{t}Hide changes{/t}'>
@@ -289,12 +288,11 @@ dn: {$deps_to_migrate.$key.dn}
 					{$deps_to_migrate.$key.dn}
 				{/if}
 				
-
-			{/foreach}
-
 			<br>
-			<input type='button' value='{t}Select all{/t}' onClick="acl_set_all('^migrate_',true)">
-			<input type='button' value='{t}Select none{/t}' onClick="acl_set_all('^migrate_',false)">
+			{/foreach}
+			<input type='checkbox' id='toggle_calue' onClick="toggle_all_('^migrate_','toggle_calue')">
+			{t}Select all{/t}
+			<br>
 
 			{if $deps_details}
 			<input type='submit' name='deps_visible_migrate_refresh' value='{t}Hide changes{/t}'>
@@ -343,14 +341,11 @@ dn: {$users_to_migrate.$key.dn}
 					<input type='checkbox' name='migrate_{$key}' id='migrate_{$key}'>
 					{$users_to_migrate.$key.dn}
 				{/if}
-
 				<br>
-				
-
 			{/foreach}
+			<input type='checkbox' id='toggle_calue' onClick="toggle_all_('^migrate_','toggle_calue')">
+			{t}Select all{/t}
 			<br>
-            <input type='button' value='{t}Select all{/t}' onClick="acl_set_all('^migrate_',true)">
-            <input type='button' value='{t}Select none{/t}' onClick="acl_set_all('^migrate_',false)">
 
 			{if $user_details}
 			<input type='submit' name='users_visible_migrate_refresh' value='{t}Hide changes{/t}'>
