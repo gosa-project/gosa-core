@@ -10,31 +10,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-08 09:22+0200\n"
-"PO-Revision-Date: 2007-05-08 15:24+0200\n"
+"POT-Creation-Date: 2007-05-10 13:38+0200\n"
+"PO-Revision-Date: 2007-05-10 14:52+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: Deutsch <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: contrib/gosa.conf:4
 msgid "My account"
 msgstr "Mein Konto"
 
-#: contrib/gosa.conf:30
+#: contrib/gosa.conf:34
 msgid "Administration"
 msgstr "Administration"
 
-#: contrib/gosa.conf:59
+#: contrib/gosa.conf:62
 msgid "Addons"
 msgstr "Zusätzliches"
 
-#: contrib/gosa.conf:76 contrib/gosa.conf:90 contrib/gosa.conf:99
-#: contrib/gosa.conf:105 contrib/gosa.conf:110 contrib/gosa.conf:116
-#: contrib/gosa.conf:125 contrib/gosa.conf:141 contrib/gosa.conf:151
-#: contrib/gosa.conf:156 contrib/gosa.conf:161 contrib/gosa.conf:166
-#: contrib/gosa.conf:171 contrib/gosa.conf:176
+#: contrib/gosa.conf:85 contrib/gosa.conf:100 contrib/gosa.conf:104
+#: contrib/gosa.conf:113 contrib/gosa.conf:119 contrib/gosa.conf:124
+#: contrib/gosa.conf:130 contrib/gosa.conf:139 contrib/gosa.conf:153
+#: contrib/gosa.conf:163 contrib/gosa.conf:168 contrib/gosa.conf:190
+#: contrib/gosa.conf:195 contrib/gosa.conf:200 contrib/gosa.conf:204
 #: plugins/personal/posix/generic.tpl:4 plugins/personal/mail/generic.tpl:4
 #: plugins/personal/samba/samba3.tpl:6 plugins/personal/samba/samba2.tpl:6
 #: plugins/personal/generic/class_user.inc:16
@@ -57,22 +58,22 @@ msgstr "Zusätzliches"
 #: plugins/admin/fai/faiPartitionTableEntry.tpl:2
 #: plugins/admin/fai/faiPackage.tpl:4 plugins/admin/fai/faiVariableEntry.tpl:5
 #: plugins/admin/groups/mail.tpl:7 plugins/admin/ogroups/termgroup.tpl:6
-#: setup/setup_feedback.tpl:44
+#: setup/setup_feedback.tpl:46
 msgid "Generic"
 msgstr "Allgemein"
 
-#: contrib/gosa.conf:77
+#: contrib/gosa.conf:86
 msgid "Unix"
 msgstr "Unix"
 
-#: contrib/gosa.conf:78 contrib/gosa.conf:91
+#: contrib/gosa.conf:87 contrib/gosa.conf:105
 #: plugins/personal/environment/class_environment.inc:7
 #: plugins/admin/groups/class_divListGroup.inc:131
 #: plugins/admin/users/class_divListUsers.inc:141
 msgid "Environment"
 msgstr "Umgebung"
 
-#: contrib/gosa.conf:79 contrib/gosa.conf:93
+#: contrib/gosa.conf:88 contrib/gosa.conf:107
 #: plugins/personal/mail/class_mailAccount.inc:22
 #: plugins/generic/references/class_reference.inc:24
 #: plugins/admin/groups/class_divListGroup.inc:123
@@ -84,7 +85,7 @@ msgstr "Umgebung"
 msgid "Mail"
 msgstr "Mail"
 
-#: contrib/gosa.conf:80 plugins/personal/samba/class_sambaAccount.inc:24
+#: contrib/gosa.conf:89 plugins/personal/samba/class_sambaAccount.inc:24
 #: plugins/generic/references/class_reference.inc:26
 #: plugins/generic/references/class_reference.inc:28
 #: plugins/admin/groups/class_divListGroup.inc:125
@@ -92,18 +93,18 @@ msgstr "Mail"
 msgid "Samba"
 msgstr "Samba"
 
-#: contrib/gosa.conf:81 plugins/personal/netatalk/class_netatalk.inc:36
+#: contrib/gosa.conf:90 plugins/personal/netatalk/class_netatalk.inc:36
 #: plugins/admin/users/class_divListUsers.inc:151
 msgid "Netatalk"
 msgstr "Netatalk"
 
-#: contrib/gosa.conf:82
+#: contrib/gosa.conf:91
 #: plugins/personal/connectivity/class_connectivity.inc:15
 #: plugins/personal/connectivity/main.inc:143
 msgid "Connectivity"
 msgstr "Konnektivität"
 
-#: contrib/gosa.conf:83 html/getxls.php:174 html/getxls.php:236
+#: contrib/gosa.conf:92 html/getxls.php:174 html/getxls.php:236
 #: plugins/personal/generic/generic.tpl:271
 #: plugins/personal/generic/generic.tpl:402
 #: plugins/gofax/faxaccount/generic.tpl:10
@@ -115,7 +116,7 @@ msgstr "Konnektivität"
 msgid "Fax"
 msgstr "Fax"
 
-#: contrib/gosa.conf:84 plugins/personal/generic/generic.tpl:254
+#: contrib/gosa.conf:93 plugins/personal/generic/generic.tpl:254
 #: plugins/personal/generic/generic.tpl:392
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:6
 #: plugins/addons/addressbook/contents.tpl:14
@@ -133,28 +134,27 @@ msgstr "Fax"
 msgid "Phone"
 msgstr "Telefon"
 
-#: contrib/gosa.conf:85 plugins/personal/nagios/class_nagiosAccount.inc:18
+#: contrib/gosa.conf:95 plugins/personal/nagios/class_nagiosAccount.inc:18
 msgid "Nagios"
 msgstr "Nagios"
 
-#: contrib/gosa.conf:86 contrib/gosa.conf:95 contrib/gosa.conf:101
-#: contrib/gosa.conf:106 contrib/gosa.conf:112 contrib/gosa.conf:121
-#: contrib/gosa.conf:137 contrib/gosa.conf:147 contrib/gosa.conf:152
-#: contrib/gosa.conf:157 contrib/gosa.conf:162 contrib/gosa.conf:167
-#: contrib/gosa.conf:172 contrib/gosa.conf:177
-msgid "References"
-msgstr "Referenzen"
-
-#: contrib/gosa.conf:92
+#: contrib/gosa.conf:106
 #: plugins/admin/applications/class_applicationManagement.inc:25
 msgid "Applications"
 msgstr "Anwendungen"
 
-#: contrib/gosa.conf:94
+#: contrib/gosa.conf:108
 msgid "ACL"
 msgstr "Zugriffsregeln"
 
-#: contrib/gosa.conf:100 plugins/gofon/conference/generic.tpl:100
+#: contrib/gosa.conf:109 contrib/gosa.conf:115 contrib/gosa.conf:120
+#: contrib/gosa.conf:126 contrib/gosa.conf:135 contrib/gosa.conf:149
+#: contrib/gosa.conf:159 contrib/gosa.conf:164 contrib/gosa.conf:169
+#: contrib/gosa.conf:191 contrib/gosa.conf:196
+msgid "References"
+msgstr "Referenzen"
+
+#: contrib/gosa.conf:114 plugins/gofon/conference/generic.tpl:100
 #: plugins/admin/systems/class_servRepository.inc:282
 #: plugins/admin/systems/printerPPDDialog.tpl:17
 #: plugins/admin/applications/generic.tpl:73
@@ -162,21 +162,21 @@ msgstr "Zugriffsregeln"
 msgid "Options"
 msgstr "Optionen"
 
-#: contrib/gosa.conf:111 plugins/gofon/phoneaccount/class_phoneAccount.inc:870
+#: contrib/gosa.conf:125 plugins/gofon/phoneaccount/class_phoneAccount.inc:870
 msgid "Parameter"
 msgstr "Parameter"
 
-#: contrib/gosa.conf:117 contrib/gosa.conf:126 contrib/gosa.conf:142
+#: contrib/gosa.conf:131 contrib/gosa.conf:140 contrib/gosa.conf:154
 #: plugins/admin/ogroups/tabs_ogroups.inc:100
 msgid "Startup"
 msgstr "Start"
 
-#: contrib/gosa.conf:118 contrib/gosa.conf:143
+#: contrib/gosa.conf:132 contrib/gosa.conf:155
 #: plugins/admin/ogroups/tabs_ogroups.inc:104
 msgid "Devices"
 msgstr "Geräte"
 
-#: contrib/gosa.conf:119 contrib/gosa.conf:144
+#: contrib/gosa.conf:133 contrib/gosa.conf:156
 #: plugins/personal/environment/environment.tpl:171
 #: plugins/generic/references/class_reference.inc:52
 #: plugins/admin/systems/class_systemManagement.inc:878
@@ -184,7 +184,7 @@ msgstr "Geräte"
 msgid "Printer"
 msgstr "Drucker"
 
-#: contrib/gosa.conf:120 contrib/gosa.conf:136 contrib/gosa.conf:145
+#: contrib/gosa.conf:134 contrib/gosa.conf:148 contrib/gosa.conf:157
 #: ihtml/themes/altlinux/MultiSelectWindow.tpl:22
 #: ihtml/themes/default/MultiSelectWindow.tpl:27
 #: ihtml/themes/default/MultiSelectWindow.tpl:66
@@ -203,29 +203,33 @@ msgstr "Drucker"
 msgid "Information"
 msgstr "Information"
 
-#: contrib/gosa.conf:127
+#: contrib/gosa.conf:141
 msgid "Databases"
 msgstr "Datenbanken"
 
-#: contrib/gosa.conf:128 plugins/admin/systems/servkolab.tpl:33
+#: contrib/gosa.conf:142 plugins/admin/systems/servkolab.tpl:33
 msgid "Services"
 msgstr "Dienste"
 
-#: contrib/gosa.conf:132 contrib/gosa.conf:134
-#: plugins/admin/systems/servRepositorySetup.tpl:1
+#: contrib/gosa.conf:144
+#: plugins/personal/connectivity/class_kolabAccount.inc:5
+msgid "Kolab"
+msgstr "Kolab"
+
+#: contrib/gosa.conf:146 plugins/admin/systems/servRepositorySetup.tpl:1
 #: plugins/admin/fai/faiPackage.tpl:29
 msgid "Repository"
 msgstr "Repository"
 
-#: contrib/gosa.conf:135 contrib/gosa.conf:146
+#: contrib/gosa.conf:147 contrib/gosa.conf:158
 msgid "FAI summary"
 msgstr "FAI Übersicht"
 
-#: contrib/gosa.conf:187
+#: contrib/gosa.conf:217
 msgid "OGo"
 msgstr "OGo"
 
-#: contrib/gosa.conf:199 plugins/addons/ldapmanager/contentexport.tpl:16
+#: contrib/gosa.conf:229 plugins/addons/ldapmanager/contentexport.tpl:16
 #: plugins/addons/ldapmanager/contentexport.tpl:29
 #: plugins/addons/ldapmanager/contentexport.tpl:44
 #: plugins/addons/ldapmanager/contentexportxls.tpl:19
@@ -235,11 +239,11 @@ msgstr "OGo"
 msgid "Export"
 msgstr "Export"
 
-#: contrib/gosa.conf:200
+#: contrib/gosa.conf:230
 msgid "Excel Export"
 msgstr "Excel-Export"
 
-#: contrib/gosa.conf:201 plugins/personal/environment/logonManagement.tpl:65
+#: contrib/gosa.conf:231 plugins/personal/environment/logonManagement.tpl:65
 #: plugins/personal/mail/generic.tpl:192
 #: plugins/addons/ldapmanager/contentimport.tpl:49
 #: plugins/addons/ldapmanager/contentcsv.tpl:109
@@ -250,80 +254,76 @@ msgstr "Excel-Export"
 msgid "Import"
 msgstr "Importieren"
 
-#: contrib/gosa.conf:202
+#: contrib/gosa.conf:232
 msgid "CSV Import"
 msgstr "CSV Import"
 
-#: contrib/gosa.conf:206
+#: contrib/gosa.conf:236
 msgid "Partitions"
 msgstr "Partitionen"
 
-#: contrib/gosa.conf:210 plugins/personal/environment/logonManagement.tpl:55
+#: contrib/gosa.conf:240 plugins/personal/environment/logonManagement.tpl:55
 #: plugins/admin/applications/generic.tpl:99
 #: plugins/admin/fai/faiHookEntry.tpl:50
 #: plugins/admin/fai/faiScriptEntry.tpl:50
 msgid "Script"
 msgstr "Skript"
 
-#: contrib/gosa.conf:214 plugins/admin/fai/class_faiSummaryTab.inc:40
+#: contrib/gosa.conf:244 plugins/admin/fai/class_faiSummaryTab.inc:40
 msgid "Hooks"
 msgstr "Hooks"
 
-#: contrib/gosa.conf:218 plugins/admin/fai/class_faiSummaryTab.inc:41
+#: contrib/gosa.conf:248 plugins/admin/fai/class_faiSummaryTab.inc:41
 msgid "Variables"
 msgstr "Variablen"
 
-#: contrib/gosa.conf:222 plugins/admin/fai/class_faiSummaryTab.inc:42
+#: contrib/gosa.conf:252 plugins/admin/fai/class_faiSummaryTab.inc:42
 msgid "Templates"
 msgstr "Vorlagen"
 
-#: contrib/gosa.conf:226 plugins/personal/environment/environment.tpl:7
+#: contrib/gosa.conf:256 plugins/personal/environment/environment.tpl:7
 #: plugins/admin/fai/class_faiSummaryTab.inc:45
 msgid "Profiles"
 msgstr "Profile"
 
-#: contrib/gosa.conf:227 plugins/admin/ogroups/tabs_ogroups.inc:109
+#: contrib/gosa.conf:257 plugins/admin/ogroups/tabs_ogroups.inc:109
 msgid "Summary"
 msgstr "Übersicht"
 
-#: contrib/gosa.conf:231
+#: contrib/gosa.conf:261
 msgid "Packages"
 msgstr "Pakete"
 
-#: contrib/gosa.conf:253
-msgid "{LOCATIONNAME}"
-msgstr "{LOCATIONNAME}"
-
-#: contrib/gosa.conf:272 plugins/admin/ogroups/class_phonequeue.inc:262
+#: contrib/gosa.conf:437 plugins/admin/ogroups/class_phonequeue.inc:262
 #: setup/class_setupStep_Language.inc:48
 msgid "German"
 msgstr "Deutsch"
 
-#: contrib/gosa.conf:273 setup/class_setupStep_Language.inc:51
+#: contrib/gosa.conf:438 setup/class_setupStep_Language.inc:51
 msgid "Russian"
 msgstr "Russisch"
 
-#: contrib/gosa.conf:274
+#: contrib/gosa.conf:439
 msgid "Spanish"
 msgstr "Spanisch"
 
-#: contrib/gosa.conf:275 setup/class_setupStep_Language.inc:49
+#: contrib/gosa.conf:440 setup/class_setupStep_Language.inc:49
 msgid "French"
 msgstr "Französisch"
 
-#: contrib/gosa.conf:276
+#: contrib/gosa.conf:441
 msgid "Dutch"
 msgstr "Niederländisch"
 
-#: contrib/gosa.conf:277 setup/class_setupStep_Language.inc:50
+#: contrib/gosa.conf:442 setup/class_setupStep_Language.inc:50
 msgid "English"
 msgstr "Englisch"
 
-#: contrib/gosa.conf:278
+#: contrib/gosa.conf:443
 msgid "Italian"
 msgstr "Italienisch"
 
-#: contrib/gosa.conf:279
+#: contrib/gosa.conf:444
 msgid "Polish"
 msgstr "Polnisch"
 
@@ -442,7 +442,7 @@ msgstr ""
 #: plugins/addons/ldapmanager/contentcsv.tpl:114
 #: plugins/admin/systems/class_systemManagement.inc:243
 #: plugins/admin/fai/faiNewBranch.tpl:52
-#: plugins/admin/departments/dep_iframe.tpl:19 include/functions.inc:1529
+#: plugins/admin/departments/dep_iframe.tpl:19 include/functions.inc:1530
 #: setup/class_setup.inc:275 setup/class_setup.inc:277
 msgid "Back"
 msgstr "Zurück"
@@ -522,8 +522,7 @@ msgstr "Bitte entscheiden Sie, wie für diese Sitzung verfahren werden soll"
 
 #: ihtml/themes/altlinux/sizelimit.tpl:9 ihtml/themes/default/sizelimit.tpl:9
 msgid "ignore this error and show all entries the LDAP server returns"
-msgstr ""
-"Ignoriere diesen Fehler und zeige alle vom LDAP-Server gelieferten Einträge"
+msgstr "Ignoriere diesen Fehler und zeige alle vom LDAP-Server gelieferten Einträge"
 
 #: ihtml/themes/altlinux/sizelimit.tpl:10
 #: ihtml/themes/default/sizelimit.tpl:10
@@ -546,7 +545,7 @@ msgstr "Ein Zugriffskonflikt wurde festgestellt"
 
 #: ihtml/themes/altlinux/islocked.tpl:6 ihtml/themes/altlinux/conflict.tpl:6
 #: ihtml/themes/default/islocked.tpl:6 ihtml/themes/default/conflict.tpl:6
-#: html/index.php:49 html/index.php:342 html/index.php:348
+#: html/index.php:49 html/index.php:349 html/index.php:355
 #: plugins/gofax/blocklists/remove.tpl:2 plugins/gofon/macro/remove.tpl:2
 #: plugins/gofon/conference/remove.tpl:2
 #: plugins/addons/addressbook/remove.tpl:2
@@ -557,10 +556,10 @@ msgstr "Ein Zugriffskonflikt wurde festgestellt"
 #: plugins/admin/ogroups/termgroup.tpl:2 plugins/admin/ogroups/remove.tpl:2
 #: plugins/admin/departments/remove.tpl:2 plugins/admin/users/remove.tpl:2
 #: include/sieve/templates/remove_script.tpl:2 setup/setup_checks.tpl:32
-#: setup/setup_checks.tpl:93 setup/class_setupStep_Migrate.inc:212
-#: setup/class_setupStep_Migrate.inc:261 setup/class_setupStep_Migrate.inc:365
-#: setup/class_setupStep_Migrate.inc:411 setup/class_setupStep_Migrate.inc:546
-#: setup/class_setupStep_Migrate.inc:676
+#: setup/setup_checks.tpl:93 setup/class_setupStep_Migrate.inc:211
+#: setup/class_setupStep_Migrate.inc:260 setup/class_setupStep_Migrate.inc:364
+#: setup/class_setupStep_Migrate.inc:410 setup/class_setupStep_Migrate.inc:545
+#: setup/class_setupStep_Migrate.inc:675
 msgid "Warning"
 msgstr "Warnung"
 
@@ -688,9 +687,9 @@ msgstr "Entfernen"
 #: include/sieve/templates/select_test_type.tpl:13
 #: include/sieve/templates/create_script.tpl:15
 #: include/sieve/templates/remove_script.tpl:16
-#: include/sieve/templates/element_comment.tpl:10 setup/setup_migrate.tpl:131
-#: setup/setup_migrate.tpl:179 setup/setup_migrate.tpl:267
-#: setup/setup_migrate.tpl:322 setup/setup_migrate.tpl:376
+#: include/sieve/templates/element_comment.tpl:10 setup/setup_migrate.tpl:134
+#: setup/setup_migrate.tpl:185 setup/setup_migrate.tpl:249
+#: setup/setup_migrate.tpl:310 setup/setup_migrate.tpl:366
 #: setup/setup_ldap.tpl:17
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -728,7 +727,7 @@ msgid "You already have an Administrative Account and a Group."
 msgstr "Sie haben bereits ein administratives Konto und eine passende Gruppe."
 
 #: ihtml/themes/altlinux/setup_useradmin.tpl:6
-#: ihtml/themes/default/setup_useradmin.tpl:6 html/index.php:250
+#: ihtml/themes/default/setup_useradmin.tpl:6 html/index.php:257
 msgid ""
 "You're missing an administrative account for GOsa, you'll not be able to "
 "administrate anything!"
@@ -768,7 +767,7 @@ msgstr "Benutzername"
 #: plugins/admin/systems/servdb.tpl:50 plugins/admin/systems/servdb.tpl:86
 #: plugins/admin/systems/servdb.tpl:109 plugins/admin/systems/servdb.tpl:128
 #: plugins/admin/systems/class_divListSystem.inc:178
-#: setup/setup_migrate.tpl:218 setup/setup_config2.tpl:181
+#: setup/setup_migrate.tpl:224 setup/setup_config2.tpl:181
 #: setup/setup_config2.tpl:226
 msgid "Password"
 msgstr "Passwort"
@@ -1194,15 +1193,6 @@ msgstr "Passwort ändern"
 msgid "Click here to Change your password"
 msgstr "Hier klicken, um Ihr Passwort zu ändern"
 
-#: html/setup.php:89
-#, php-format
-msgid ""
-"Directory '%s' specified as smarty compile directory is not accessible, "
-"please check existence and rights of this directory!"
-msgstr ""
-"Auf das als Compile-Verzeichnis angegegebene Verzeichnis '%s' kann nicht "
-"zugegriffen werden, überprüfen Sie die Existenz und die Rechte!"
-
 #: html/main.php:164
 msgid ""
 "FATAL: Register globals is on. GOsa will refuse to login unless this is "
@@ -1288,7 +1278,7 @@ msgstr "Benutzerliste von %s am %s"
 #: html/getxls.php:80 html/getxls.php:108 html/getxls.php:123
 #: html/getxls.php:282 html/getxls.php:299
 #: plugins/addons/addressbook/class_addressbook.inc:524
-#: setup/setup_migrate.tpl:210
+#: setup/setup_migrate.tpl:216
 msgid "User ID"
 msgstr "Benutzer-ID"
 
@@ -1392,8 +1382,8 @@ msgstr "Angezeigter Name"
 #: plugins/admin/fai/faiPackage.tpl:9
 #: plugins/admin/fai/class_faiSummaryTab.inc:329
 #: plugins/admin/fai/paste_fai_object.tpl:1
-#: plugins/admin/fai/faiVariableEntry.tpl:9 setup/setup_migrate.tpl:202
-#: setup/setup_feedback.tpl:20
+#: plugins/admin/fai/faiVariableEntry.tpl:9 setup/setup_migrate.tpl:208
+#: setup/setup_feedback.tpl:22
 msgid "Name"
 msgstr "Name"
 
@@ -1420,7 +1410,7 @@ msgid "Location"
 msgstr "Ort"
 
 #: html/getxls.php:174 plugins/personal/nagios/nagios.tpl:12
-#: plugins/admin/systems/servdnseditzone.tpl:51 setup/setup_feedback.tpl:28
+#: plugins/admin/systems/servdnseditzone.tpl:51 setup/setup_feedback.tpl:30
 msgid "Mail address"
 msgstr "Mail-Adresse"
 
@@ -1517,7 +1507,7 @@ msgid "Mobile"
 msgstr "Mobiltelefon"
 
 #: html/getxls.php:236 plugins/personal/generic/generic.tpl:213
-#: setup/setup_feedback.tpl:12
+#: setup/setup_feedback.tpl:14
 msgid "Organization"
 msgstr "Organisation"
 
@@ -1586,18 +1576,18 @@ msgstr "Die angegebene Datenbank kann nicht ausgewählt werden."
 msgid "Database query failed!"
 msgstr "Die Datenbankabfrage ist fehlgeschlagen!"
 
-#: html/index.php:49 html/index.php:342
+#: html/index.php:49 html/index.php:349
 msgid "Session will not be encrypted."
 msgstr "Die Sitzung ist nicht verschlüsselt."
 
-#: html/index.php:49 html/index.php:342
+#: html/index.php:49 html/index.php:349
 msgid "Enter SSL session"
 msgstr "SSL Sitzung"
 
 #: html/index.php:117
 #, php-format
-msgid "GOsa configuration %s/gosa.conf is not readable. Aborted."
-msgstr "Die Konfigurationsdatei %s/gosa.conf ist nicht lesbar. Abgebrochen."
+msgid "GOsa configuration %s/%s is not readable. Aborted."
+msgstr "Die Konfigurationsdatei %s/%s ist nicht lesbar. Abgebrochen."
 
 #: html/index.php:138
 #, php-format
@@ -1606,13 +1596,13 @@ msgstr ""
 "Auf das als Compile-Verzeichnis angegegebene Verzeichnis '%s' kann nicht "
 "zugegriffen werden!"
 
-#: html/index.php:207 include/class_config.inc:207
+#: html/index.php:207 include/class_config.inc:208
 msgid "Can't bind to LDAP. Please contact the system administrator."
 msgstr ""
 "Kann den LDAP-Server nicht erreichen. Bitte benachrichtigen Sie den "
 "Administrator."
 
-#: html/index.php:223
+#: html/index.php:222
 msgid ""
 "GOsa cannot retrieve information about the installed schema files. Please "
 "make sure, that this is possible."
@@ -1620,30 +1610,29 @@ msgstr ""
 "GOsa kann keine Informationen über die verfügbaren Schema-Definitionen "
 "anfordern. Bitte stellen Sie sicher, dass dies möglich ist."
 
-#: html/index.php:231
-msgid ""
-"Your ldap setup contains old schema definitions. Please re-run the setup."
+#: html/index.php:238
+msgid "Your ldap setup contains old schema definitions. Please re-run the setup."
 msgstr ""
 "Ihr LDAP-Server enthält veraltete Schema-Definitionen. Bitte führen Sie "
 "erneut die Einrichtung durch."
 
-#: html/index.php:258
+#: html/index.php:265
 msgid "Please specify a valid username!"
 msgstr "Bitte geben Sie einen gültigen Benutzernamen ein!"
 
-#: html/index.php:260
+#: html/index.php:267
 msgid "Please specify your password!"
 msgstr "Bitte geben Sie Ihr Passwort ein!"
 
-#: html/index.php:267
+#: html/index.php:274
 msgid "Please check the username/password combination."
 msgstr "Bitte überprüfen Sie die Kombination von Benutzernamen und Passwort."
 
-#: html/index.php:296
+#: html/index.php:303
 msgid "Account locked. Please contact your system administrator."
 msgstr "Das Konto ist gesperrt. Bitte benachrichtigen Sie den Administrator."
 
-#: html/index.php:348
+#: html/index.php:355
 msgid ""
 "Your browser has cookies disabled. Please enable cookies and reload this "
 "page before logging in!"
@@ -1653,8 +1642,7 @@ msgstr ""
 
 #: html/getvcard.php:36
 msgid "Error: getcvard.php needs a parameter to export a vcard!"
-msgstr ""
-"Fehler: getvcard.php benötigt einen Parameter um eine vcard zu exportieren!"
+msgstr "Fehler: getvcard.php benötigt einen Parameter um eine vcard zu exportieren!"
 
 #: html/get_attachment.php:47
 msgid ""
@@ -1665,8 +1653,7 @@ msgstr ""
 "PHP-Umgebung nicht verfügbar ist."
 
 #: html/get_attachment.php:55
-msgid ""
-"Can't connect to specified database, please check your glpi configuration."
+msgid "Can't connect to specified database, please check your glpi configuration."
 msgstr ""
 "Kann die angegebene Datenbank nicht erreiche, bitte überprüfen Sie Ihre glpi-"
 "Konfiguration."
@@ -1767,8 +1754,7 @@ msgstr "Das benötigte Feld 'NagiosMail' ist nicht gesetzt."
 #: plugins/personal/nagios/class_nagiosAccount.inc:182
 #: plugins/personal/nagios/class_nagiosAccount.inc:186
 msgid "Please enter a valid email address in 'NagiosMail' field."
-msgstr ""
-"Bitte geben Sie eine gültige E-Mail-Adresse in das Feld 'NagiosMail' ein."
+msgstr "Bitte geben Sie eine gültige E-Mail-Adresse in das Feld 'NagiosMail' ein."
 
 #: plugins/personal/nagios/class_nagiosAccount.inc:234
 msgid "Removing nagios account failed"
@@ -2187,8 +2173,7 @@ msgstr ""
 #: plugins/personal/posix/class_posixAccount.inc:438
 #, php-format
 msgid "Password can't be changed up to %s days after last change"
-msgstr ""
-"Passwort kann bis zu %s Tage nach der letzten Änderung nicht geändert werden"
+msgstr "Passwort kann bis zu %s Tage nach der letzten Änderung nicht geändert werden"
 
 #: plugins/personal/posix/class_posixAccount.inc:440
 #, php-format
@@ -2351,8 +2336,7 @@ msgstr "Das benötigte Feld 'Basisverzeichnis' ist nicht gesetzt."
 
 #: plugins/personal/posix/class_posixAccount.inc:910
 msgid "Please enter a valid path in 'Home directory' field."
-msgstr ""
-"Bitte geben Sie einen gültigen Pfad in das Feld 'Basisverzeichnis' ein."
+msgstr "Bitte geben Sie einen gültigen Pfad in das Feld 'Basisverzeichnis' ein."
 
 #: plugins/personal/posix/class_posixAccount.inc:918
 msgid "Value specified as 'UID' is not valid."
@@ -2390,13 +2374,11 @@ msgstr "'shadowWarning' in ohne die Angabe von 'shadowMax' ergibt keinen Sinn."
 
 #: plugins/personal/posix/class_posixAccount.inc:952
 msgid "Value specified as 'shadowWarning' should be smaller than 'shadowMax'."
-msgstr ""
-"Der angegebene Wert 'shadowWarning' sollte kleiner als 'shadowMax' sein."
+msgstr "Der angegebene Wert 'shadowWarning' sollte kleiner als 'shadowMax' sein."
 
 #: plugins/personal/posix/class_posixAccount.inc:955
 msgid "Value specified as 'shadowWarning' should be greater than 'shadowMin'."
-msgstr ""
-"Der angegebene Wert 'shadowWarning' sollte größer als 'shadowMin' sein."
+msgstr "Der angegebene Wert 'shadowWarning' sollte größer als 'shadowMin' sein."
 
 #: plugins/personal/posix/class_posixAccount.inc:960
 msgid "Value specified as 'shadowInactive' is not valid."
@@ -2404,8 +2386,7 @@ msgstr "Der von ihnen angegebene Wert 'shadowInactive' ist nicht gültig."
 
 #: plugins/personal/posix/class_posixAccount.inc:963
 msgid "'shadowInactive' without 'shadowMax' makes no sense."
-msgstr ""
-"'shadowInactive' in ohne die Angabe von 'shadowMax' ergibt keinen Sinn."
+msgstr "'shadowInactive' in ohne die Angabe von 'shadowMax' ergibt keinen Sinn."
 
 #: plugins/personal/posix/class_posixAccount.inc:968
 msgid "Value specified as 'shadowMin' should be smaller than 'shadowMax'."
@@ -2552,10 +2533,10 @@ msgstr "Anmelde-Skript"
 #: plugins/admin/fai/faiVariableEntry.tpl:48
 #: plugins/admin/groups/mail_admins.tpl:37
 #: plugins/admin/groups/application_options.tpl:11
-#: include/sieve/templates/create_script.tpl:13 setup/setup_migrate.tpl:129
-#: setup/setup_migrate.tpl:177 setup/setup_migrate.tpl:262
-#: setup/setup_migrate.tpl:264 setup/setup_migrate.tpl:320
-#: setup/setup_migrate.tpl:374 setup/setup_ldap.tpl:16
+#: include/sieve/templates/create_script.tpl:13 setup/setup_migrate.tpl:132
+#: setup/setup_migrate.tpl:183 setup/setup_migrate.tpl:248
+#: setup/setup_migrate.tpl:308 setup/setup_migrate.tpl:364
+#: setup/setup_ldap.tpl:16
 msgid "Apply"
 msgstr "Anwenden"
 
@@ -2586,8 +2567,7 @@ msgstr "Bitte wählen Sie einen Drucker oder 'Abbrechen'."
 #: plugins/personal/environment/class_kioskManagementDialog.inc:89
 #, php-format
 msgid "Can't delete '%s'. Error was: permission denied."
-msgstr ""
-"Kann Datei '%s' nicht entfernen. Die Fehlermeldung war: Zugriff verweigert."
+msgstr "Kann Datei '%s' nicht entfernen. Die Fehlermeldung war: Zugriff verweigert."
 
 #: plugins/personal/environment/class_kioskManagementDialog.inc:73
 #: plugins/personal/environment/class_kioskManagementDialog.inc:92
@@ -2598,8 +2578,7 @@ msgstr ""
 "nicht."
 
 #: plugins/personal/environment/class_kioskManagementDialog.inc:134
-msgid ""
-"There is no KIOSKPATH defined in your gosa.conf. Can't manage kiosk profiles!"
+msgid "There is no KIOSKPATH defined in your gosa.conf. Can't manage kiosk profiles!"
 msgstr ""
 "In Ihrer gosa.conf wurde kein 'KIOSKPATH' definiert. Die Verwaltung von "
 "KIOSK-Profilen ist nicht möglich."
@@ -2631,7 +2610,7 @@ msgstr "Durchsuchen"
 #: plugins/admin/systems/glpi_edit_cartridge_type.tpl:13
 #: plugins/admin/systems/glpi_edit_os.tpl:15
 #: plugins/admin/fai/class_faiSummaryTab.inc:227
-#: include/class_MultiSelectWindow.inc:79 setup/setup_migrate.tpl:78
+#: include/class_MultiSelectWindow.inc:79 setup/setup_migrate.tpl:79
 msgid "Close"
 msgstr "Schliessen"
 
@@ -3047,8 +3026,7 @@ msgstr ""
 #: plugins/personal/password/main.inc:48 plugins/personal/generic/main.inc:89
 #: plugins/admin/users/class_userManagement.inc:248
 msgid "The password you've entered as 'New password' is empty."
-msgstr ""
-"Das Passwort, welches Sie als 'Neues Passwort' eingegeben haben ist leer."
+msgstr "Das Passwort, welches Sie als 'Neues Passwort' eingegeben haben ist leer."
 
 #: plugins/personal/password/main.inc:56
 msgid "The password used as new and current are too similar."
@@ -3056,8 +3034,7 @@ msgstr "Das alte und neue Passwort sind sich zu ähnlich."
 
 #: plugins/personal/password/main.inc:61
 msgid "The password used as new is to short."
-msgstr ""
-"Das Passwort, welches Sie als 'Neues Passwort' eingegeben haben, ist zu kurz."
+msgstr "Das Passwort, welches Sie als 'Neues Passwort' eingegeben haben, ist zu kurz."
 
 #: plugins/personal/password/main.inc:68
 msgid "You have no permissions to change your password."
@@ -3147,8 +3124,7 @@ msgid "No delivery to own mailbox"
 msgstr "Keine Zustellung in eigenes Postfach"
 
 #: plugins/personal/mail/generic.tpl:115
-msgid ""
-"Select to automatically response with the vacation message defined below"
+msgid "Select to automatically response with the vacation message defined below"
 msgstr ""
 "Wählen Sie dies, um automatisch eine Urlaubsmeldung mit dem unten angebenen "
 "Text zu versenden."
@@ -3175,8 +3151,7 @@ msgstr "Verschiebe Mails mit einem SPAM-Level größer als"
 
 #: plugins/personal/mail/generic.tpl:164
 msgid "Choose spam level - smaller values are more sensitive"
-msgstr ""
-"Wählen sie den 'SPAM'-Level - kleinere Werte reagieren empfindlicher auf SPAM"
+msgstr "Wählen sie den 'SPAM'-Level - kleinere Werte reagieren empfindlicher auf SPAM"
 
 #: plugins/personal/mail/generic.tpl:167
 msgid "to folder"
@@ -3304,8 +3279,7 @@ msgstr ""
 "Sie auf die untere Schaltfläche klicken."
 
 #: plugins/personal/mail/class_mailAccount.inc:353
-msgid ""
-"You're trying to add an invalid email address to the list of forwarders."
+msgid "You're trying to add an invalid email address to the list of forwarders."
 msgstr ""
 "Sie versuchen, eine ungültige Mail-Adresse in die Liste der Weiterleitungen "
 "aufzunehmen."
@@ -3341,8 +3315,7 @@ msgid "Saving mail account failed"
 msgstr "Speichern des Mail-Kontos fehlgeschlagen"
 
 #: plugins/personal/mail/class_mailAccount.inc:940
-msgid ""
-"There is no valid mailserver specified, please add one in the system setup."
+msgid "There is no valid mailserver specified, please add one in the system setup."
 msgstr ""
 "Es wurde kein gültiger Mail-Server angegeben, bitte fügen Sie ein passendes "
 "System hinzu."
@@ -3365,8 +3338,7 @@ msgstr ""
 #: plugins/admin/groups/class_groupMail.inc:865
 #: plugins/admin/ogroups/class_mailogroup.inc:85
 msgid "The primary address you've entered is already in use."
-msgstr ""
-"Die primäre Adresse, welche Sie eingegeben haben, wird bereits benutzt."
+msgstr "Die primäre Adresse, welche Sie eingegeben haben, wird bereits benutzt."
 
 #: plugins/personal/mail/class_mailAccount.inc:965
 #: plugins/admin/groups/class_groupMail.inc:871
@@ -3658,8 +3630,7 @@ msgstr "Das numerische Feld der Kontingent-Einstellung ist leer."
 
 #: plugins/personal/connectivity/class_proxyAccount.inc:186
 msgid "Numerical value for Quota Setting is not valid."
-msgstr ""
-"Das numerische Feld der Kontingent-Einstellung enthält einen ungültigen Wert."
+msgstr "Das numerische Feld der Kontingent-Einstellung enthält einen ungültigen Wert."
 
 #: plugins/personal/connectivity/class_proxyAccount.inc:267
 msgid "Saving proxy account failed"
@@ -3714,13 +3685,8 @@ msgstr "Speichern des oxchange-Adressbuchs fehlgeschlagen"
 msgid "Creating oxchange addressbook tree failed"
 msgstr "Anlegen des oxchange-Adressbuch-Baums fehlgeschlagen"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:5
-msgid "Kolab"
-msgstr "Kolab"
-
 #: plugins/personal/connectivity/class_kolabAccount.inc:125
-msgid ""
-"You're trying to add an invalid email address to the list of delegations."
+msgid "You're trying to add an invalid email address to the list of delegations."
 msgstr ""
 "Sie versuchen, eine ungültige Mail-Adresse in die Liste der Stellvertreter "
 "aufzunehmen."
@@ -4008,8 +3974,7 @@ msgstr "Leerlauf"
 
 #: plugins/personal/samba/class_sambaAccount.inc:711
 #, php-format
-msgid ""
-"The timeout property '%s' is checked and contains invalid or no characters!"
+msgid "The timeout property '%s' is checked and contains invalid or no characters!"
 msgstr ""
 "Die Zeitlimitoption '%s' ist ausgewählt, das entsprechende Feld enthält "
 "ungültige oder keine Zeichen!"
@@ -4741,7 +4706,6 @@ msgstr "während"
 #: plugins/admin/systems/class_printGeneric.inc:849
 #: plugins/admin/fai/faiTemplateEntry.tpl:94
 #: plugins/admin/ogroups/class_ogroupManagement.inc:363
-#: setup/setup_migrate.tpl:241 setup/setup_migrate.tpl:244
 #: setup/setup_config2.tpl:172 setup/setup_config2.tpl:217
 msgid "User"
 msgstr "Benutzer"
@@ -4804,8 +4768,7 @@ msgstr "Kann die Fax-Datenbank zur Berichterstellung nicht öffnen!"
 
 #: plugins/gofax/faxreports/class_faxreport.inc:125
 msgid "Can't query fax table 'faxlog' for report generation!"
-msgstr ""
-"Kann die Fax-Tabelle 'faxlog' nicht für die Berichterstellung abfragen!"
+msgstr "Kann die Fax-Tabelle 'faxlog' nicht für die Berichterstellung abfragen!"
 
 #: plugins/gofax/faxreports/class_faxreport.inc:148
 #: plugins/gofax/faxreports/class_faxreport.inc:266
@@ -4961,8 +4924,7 @@ msgstr "Entfernen des Blocklisten-Objekts fehlgeschlagen"
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:431
 msgid "You have no permissions to create a blocklist on this 'Base'."
-msgstr ""
-"Sie haben keine Berechtigung, eine Sperrliste unter dieser 'Basis' anzulegen."
+msgstr "Sie haben keine Berechtigung, eine Sperrliste unter dieser 'Basis' anzulegen."
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:437
 #: plugins/admin/departments/class_departmentGeneric.inc:232
@@ -5312,8 +5274,7 @@ msgstr "Bitte geben Sie eine gültige Telefonnummer im Feld 'Fax' an."
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:659
 msgid "Mail delivery is checked, but no address has been specified."
-msgstr ""
-"Die Zustellung von Mail ist aktiviert, aber es wurde keine Adresse angegeben."
+msgstr "Die Zustellung von Mail ist aktiviert, aber es wurde keine Adresse angegeben."
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:661
 msgid "The mail address you've entered is invalid."
@@ -5468,12 +5429,12 @@ msgstr "Sie sind nicht berechtigt, dieses Makro zu löschen!"
 
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:263
 #: setup/setup_checks.tpl:27 setup/setup_checks.tpl:87
-#: setup/class_setupStep_Migrate.inc:218 setup/class_setupStep_Migrate.inc:267
-#: setup/class_setupStep_Migrate.inc:325 setup/class_setupStep_Migrate.inc:372
-#: setup/class_setupStep_Migrate.inc:418 setup/class_setupStep_Migrate.inc:489
-#: setup/class_setupStep_Migrate.inc:542 setup/class_setupStep_Migrate.inc:672
-#: setup/class_setupStep_Migrate.inc:761
-#: setup/class_setupStep_Migrate.inc:1440
+#: setup/class_setupStep_Migrate.inc:217 setup/class_setupStep_Migrate.inc:266
+#: setup/class_setupStep_Migrate.inc:324 setup/class_setupStep_Migrate.inc:371
+#: setup/class_setupStep_Migrate.inc:417 setup/class_setupStep_Migrate.inc:488
+#: setup/class_setupStep_Migrate.inc:541 setup/class_setupStep_Migrate.inc:671
+#: setup/class_setupStep_Migrate.inc:803
+#: setup/class_setupStep_Migrate.inc:1554
 msgid "Ok"
 msgstr "Ok"
 
@@ -5599,8 +5560,7 @@ msgstr ""
 #: plugins/admin/ogroups/class_phonequeue.inc:166
 #, php-format
 msgid "Can't select database '%s' on home server '%s'."
-msgstr ""
-"Die Datenbank '%s' auf dem Home-Server '%s' kann nicht ausgewählt werden."
+msgstr "Die Datenbank '%s' auf dem Home-Server '%s' kann nicht ausgewählt werden."
 
 #: plugins/gofon/macro/class_gofonMacro.inc:219
 #, php-format
@@ -5649,8 +5609,7 @@ msgstr "Die Kennung '%s' exisitiert bereits."
 
 #: plugins/gofon/macro/class_gofonMacro.inc:382
 msgid "You must specify the 'Display Name' in order to save this macro"
-msgstr ""
-"Um das Makro zu speichern, darf das Feld 'Angezeigter Name'f nicht leer sein"
+msgstr "Um das Makro zu speichern, darf das Feld 'Angezeigter Name'f nicht leer sein"
 
 #: plugins/gofon/macro/class_gofonMacro.inc:386
 msgid "The given cn is too long, to create a Makro entry, maximum 20 chars."
@@ -5872,8 +5831,7 @@ msgstr "Dieses Konto besitzt keine Telefon-Erweiterungen."
 msgid ""
 "The macro you selected, is no longer available for you, please choose "
 "another one."
-msgstr ""
-"Das gewählte Makro ist nicht mehr verfügbar, bitte wählen Sie ein anderes."
+msgstr "Das gewählte Makro ist nicht mehr verfügbar, bitte wählen Sie ein anderes."
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:966
 msgid "Remove phone account"
@@ -6109,8 +6067,7 @@ msgstr "Verwaltung"
 #: plugins/admin/departments/class_departmentManagement.inc:153
 #, php-format
 msgid "You're about to delete the whole LDAP subtree placed under '%s'."
-msgstr ""
-"Sie sind dabei, einen gesamten LDAP-Baum unterhalb von '%s' zu löschen."
+msgstr "Sie sind dabei, einen gesamten LDAP-Baum unterhalb von '%s' zu löschen."
 
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:147
 #: plugins/admin/departments/class_departmentManagement.inc:174
@@ -6160,10 +6117,8 @@ msgstr ""
 
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:319
 #, php-format
-msgid ""
-"The previously selected asterisk home server (%s) is no longer available."
-msgstr ""
-"Der zuvor ausgewählte Asterisk Home-Server (%s) ist nicht mehr verfügbar."
+msgid "The previously selected asterisk home server (%s) is no longer available."
+msgstr "Der zuvor ausgewählte Asterisk Home-Server (%s) ist nicht mehr verfügbar."
 
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:324
 msgid ""
@@ -6407,7 +6362,7 @@ msgstr ""
 "wiederherzustellen."
 
 #: plugins/addons/addressbook/class_addressbook.inc:6
-#: setup/class_setupStep_Feedback.inc:106
+#: setup/class_setupStep_Feedback.inc:105
 msgid "Addressbook"
 msgstr "Adressbuch"
 
@@ -6490,15 +6445,13 @@ msgid "Cell phone"
 msgstr "Mobiltelefon"
 
 #: plugins/addons/addressbook/class_addressbook.inc:606
-msgid ""
-"Cannot create a unique DN for your entry. Please fill more formular fields."
+msgid "Cannot create a unique DN for your entry. Please fill more formular fields."
 msgstr ""
 "Es kann kein eindeutiger DN für diesen Eintrag erzeugt werden. Füllen Sie "
 "bitte weitere Felder aus."
 
 #: plugins/addons/addressbook/class_addressbook.inc:614
-msgid ""
-"You have no permissions to create or modify a global address book entry."
+msgid "You have no permissions to create or modify a global address book entry."
 msgstr ""
 "Sie haben keine Berechtigung, einen Eintrag unterhalb dieser 'Basis' "
 "anzulegen."
@@ -6677,8 +6630,7 @@ msgstr "Alle Nachrichten wieder einreihen"
 
 #: plugins/addons/mailqueue/contents.tpl:36
 msgid "Requeue all messages in selected servers queue"
-msgstr ""
-"Alle Nachrichten in der Warteschlange des gewählten Servers wieder einreihen"
+msgstr "Alle Nachrichten in der Warteschlange des gewählten Servers wieder einreihen"
 
 #: plugins/addons/mailqueue/contents.tpl:46
 msgid "Search returned no results"
@@ -6749,8 +6701,7 @@ msgid "Mail queue"
 msgstr "Mail-Warteschlange"
 
 #: plugins/addons/mailqueue/class_mailqueue.inc:58
-msgid ""
-"Please check your 'gosa.conf', there is no 'MAILQUEUESCRIPTPATH' specified."
+msgid "Please check your 'gosa.conf', there is no 'MAILQUEUESCRIPTPATH' specified."
 msgstr ""
 "Bitte überprüfen Sie Ihre 'gosa.conf' - der Eintrag 'MAILQUEUESCRIPTPATH' "
 "wurde nicht gefunden."
@@ -6760,8 +6711,7 @@ msgstr ""
 #: plugins/addons/mailqueue/class_mailqueue.inc:171
 #: plugins/addons/mailqueue/class_mailqueue.inc:198
 #, php-format
-msgid ""
-"You do not have permission to execute the command '%s' on the mailqueue."
+msgid "You do not have permission to execute the command '%s' on the mailqueue."
 msgstr ""
 "Sie haben keine Berechtigung, um das Kommando '%s' auf der Mail-"
 "Warteschlange auszuführen."
@@ -6772,8 +6722,7 @@ msgstr ""
 #: plugins/addons/mailqueue/class_mailqueue.inc:213
 #, php-format
 msgid "Please check your 'gosa.conf' the given '%s' can't be executed."
-msgstr ""
-"Bitte überprüfen Sie Ihre 'gosa.conf' - '%s' kann nicht ausgeführt werden."
+msgstr "Bitte überprüfen Sie Ihre 'gosa.conf' - '%s' kann nicht ausgeführt werden."
 
 #: plugins/addons/mailqueue/class_mailqueue.inc:225
 msgid "There are no mail server specified."
@@ -6814,8 +6763,7 @@ msgstr "XLS-Import"
 #: plugins/addons/ldapmanager/class_exportxls.inc:39
 #: plugins/addons/ldapmanager/class_export.inc:38
 msgid "You've no permission to do LDAP exports."
-msgstr ""
-"Sie haben keine Berechtigung, um Daten aus der LDAP-Datenbank zu exportieren."
+msgstr "Sie haben keine Berechtigung, um Daten aus der LDAP-Datenbank zu exportieren."
 
 #: plugins/addons/ldapmanager/class_exportxls.inc:89
 #: plugins/addons/ldapmanager/class_export.inc:83
@@ -6862,8 +6810,7 @@ msgstr "LDIF exportieren"
 
 #: plugins/addons/ldapmanager/class_import.inc:41
 msgid "You've no permission to do LDAP imports."
-msgstr ""
-"Sie haben keine Berechtigung, um Daten in die LDAP-Datenbank zu importieren."
+msgstr "Sie haben keine Berechtigung, um Daten in die LDAP-Datenbank zu importieren."
 
 #: plugins/addons/ldapmanager/class_import.inc:55
 #: plugins/addons/ldapmanager/class_csvimport.inc:336
@@ -6925,8 +6872,7 @@ msgstr "Export erfolgreich"
 
 #: plugins/addons/ldapmanager/contentexport.tpl:59
 msgid "Click here to save the complete LDAP database to a file"
-msgstr ""
-"Hier klicken, um die gesamte LDAP-Datenbank in eine Datei zu exportieren."
+msgstr "Hier klicken, um die gesamte LDAP-Datenbank in eine Datei zu exportieren."
 
 #: plugins/addons/ldapmanager/contentexport.tpl:59
 msgid "Click here to save the LDAP Export "
@@ -6952,8 +6898,7 @@ msgstr "Exportiere vollständige XLS-Datei für"
 
 #: plugins/addons/ldapmanager/contentexportxls.tpl:62
 msgid "Click here to save the complete LDAP database to a xls file"
-msgstr ""
-"Hier klicken, um die gesamte LDAP-Datenbank in eine xls-Datei zu exportieren."
+msgstr "Hier klicken, um die gesamte LDAP-Datenbank in eine xls-Datei zu exportieren."
 
 #: plugins/addons/ldapmanager/contentexportxls.tpl:62
 msgid "Click here to save the LDAP Export to a xls file"
@@ -7143,7 +7088,6 @@ msgstr "Dieses Objekt hat keine Referenzen zu anderen Objekten."
 #: plugins/admin/fai/faiTemplateEntry.tpl:71
 #: plugins/admin/fai/faiTemplateEntry.tpl:103
 #: plugins/admin/ogroups/class_ogroupManagement.inc:364
-#: setup/setup_migrate.tpl:240 setup/setup_migrate.tpl:243
 msgid "Group"
 msgstr "Gruppe"
 
@@ -7215,8 +7159,7 @@ msgstr ""
 #: plugins/admin/systems/class_componentGeneric.inc:166
 #, php-format
 msgid "There is already an entry '%s' in the base choosen by you"
-msgstr ""
-"Der Eintrag '%s' ist in der von Ihnen ausgewählten Basis bereits vorhanden"
+msgstr "Der Eintrag '%s' ist in der von Ihnen ausgewählten Basis bereits vorhanden"
 
 #: plugins/admin/systems/class_winGeneric.inc:228
 msgid "Saving Samba workstation failed"
@@ -7395,8 +7338,7 @@ msgstr "Kernel-Module (Format: Name Parameter)"
 #: plugins/admin/systems/terminalStartup.tpl:55
 #: plugins/admin/systems/workstationStartup.tpl:121
 msgid "Add additional modules to load on startup"
-msgstr ""
-"Zusätzliche Module hinzufügen, die während des Starts geladen werden sollen"
+msgstr "Zusätzliche Module hinzufügen, die während des Starts geladen werden sollen"
 
 #: plugins/admin/systems/terminalStartup.tpl:79
 #: plugins/admin/systems/workstationStartup.tpl:146
@@ -7474,8 +7416,7 @@ msgstr "Speichern des Mount-Containers ist fehlgeschlagen"
 #: plugins/admin/systems/class_printGeneric.inc:105
 #, php-format
 msgid "Can't extract a valid base out of object dn, setting base to '%s'."
-msgstr ""
-"Kann keine gültige Basis aus der Objekt-DN auslesen, setze Basis auf '%s'."
+msgstr "Kann keine gültige Basis aus der Objekt-DN auslesen, setze Basis auf '%s'."
 
 #: plugins/admin/systems/class_printGeneric.inc:251
 #: plugins/admin/systems/class_printGeneric.inc:259
@@ -7490,13 +7431,11 @@ msgstr "Drucker-Erweiterung hinzufügen"
 msgid ""
 "Could not intialize printer tab, parameter parent was missing while "
 "construction."
-msgstr ""
-"Konnte den 'Druck'-Reiter nicht erstellen, der Parameter 'parent' fehlt"
+msgstr "Konnte den 'Druck'-Reiter nicht erstellen, der Parameter 'parent' fehlt"
 
 #: plugins/admin/systems/class_printGeneric.inc:260
 msgid "This is a workstation template, printer tab is disabled."
-msgstr ""
-"Dies ist eine Arbeitsstations-Vorlage, der Drucker-Tab ist deaktiviert."
+msgstr "Dies ist eine Arbeitsstations-Vorlage, der Drucker-Tab ist deaktiviert."
 
 #: plugins/admin/systems/class_printGeneric.inc:265
 msgid "This is a terminal template, printer tab is disabled."
@@ -7606,8 +7545,7 @@ msgstr ""
 #: plugins/admin/systems/class_printGeneric.inc:899
 #, php-format
 msgid "Can't add '%s' to list of members, it is not reachable."
-msgstr ""
-"Kann '%s' nicht zu den Mitgliedern hinzufügen - es ist nicht erreichbar."
+msgstr "Kann '%s' nicht zu den Mitgliedern hinzufügen - es ist nicht erreichbar."
 
 #: plugins/admin/systems/phonesettings.tpl:1
 msgid "Advanced phone settings"
@@ -7923,8 +7861,7 @@ msgstr ""
 #: plugins/admin/systems/class_goVirusServer.inc:151
 #, php-format
 msgid "Removing of server services/anti virus with dn '%s' failed."
-msgstr ""
-"Entfernen des Server-Dienstes AntiVirus mit der DN '%s' ist fehlgeschlagen."
+msgstr "Entfernen des Server-Dienstes AntiVirus mit der DN '%s' ist fehlgeschlagen."
 
 #: plugins/admin/systems/class_goVirusServer.inc:196
 #, php-format
@@ -7967,8 +7904,7 @@ msgstr "Der angegebene Wert für '%s' ist nicht numerisch."
 #: plugins/admin/systems/class_goVirusServer.inc:305
 #: plugins/admin/systems/class_goSpamServer.inc:446
 #, php-format
-msgid ""
-"Command '%s', specified as ACTION_HOOK for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as ACTION_HOOK for plugin '%s' doesn't seem to exist."
 msgstr ""
 "Das in ACTION_HOOK angegebene Kommando '%s' (Modul '%s') scheint nicht zu "
 "existieren."
@@ -7985,8 +7921,7 @@ msgid "List of devices"
 msgstr "Liste der Geräte"
 
 #: plugins/admin/systems/glpiDeviceManagement.tpl:23
-msgid ""
-"This dialog allows you to attach a device to your currently edited computer."
+msgid "This dialog allows you to attach a device to your currently edited computer."
 msgstr ""
 "Dieser Dialog erlaubt es Ihnen, ein Gerät zum momentan ausgewählten Computer "
 "hinzuzufügen."
@@ -8025,8 +7960,7 @@ msgstr "Bitte geben Sie einen Namen ein!"
 #: plugins/admin/systems/class_glpiManufacturer.inc:108
 #: plugins/admin/systems/class_glpiManufacturer.inc:114
 msgid "Specified name is already in use, please choose another one."
-msgstr ""
-"Der angegebene Name wird bereits verwendet. Bitte wählen Sie einen anderen."
+msgstr "Der angegebene Name wird bereits verwendet. Bitte wählen Sie einen anderen."
 
 #: plugins/admin/systems/workstationStartup.tpl:43
 #: plugins/admin/systems/workstationStartup.tpl:73
@@ -8407,8 +8341,7 @@ msgstr "Treiber"
 #: plugins/admin/systems/terminalService.tpl:88
 #: plugins/admin/systems/workstationService.tpl:88
 msgid "Choose graphic driver that is needed by the installed graphic board"
-msgstr ""
-"Wählen Sie den Treiber, der von der installierten Grafikkarte benötigt wird."
+msgstr "Wählen Sie den Treiber, der von der installierten Grafikkarte benötigt wird."
 
 #: plugins/admin/systems/terminalService.tpl:96
 #: plugins/admin/systems/workstationService.tpl:96
@@ -8501,8 +8434,7 @@ msgstr "Spool-Server"
 
 #: plugins/admin/systems/terminalService.tpl:196
 msgid "Select NFS filesystem to place spool files on"
-msgstr ""
-"Wählen Sie das NFS-Dateisystem, in dem die Spool-Dateien abgelegt werden"
+msgstr "Wählen Sie das NFS-Dateisystem, in dem die Spool-Dateien abgelegt werden"
 
 #: plugins/admin/systems/terminalService.tpl:208
 #: plugins/admin/systems/workstationService.tpl:147
@@ -8545,8 +8477,7 @@ msgstr ""
 
 #: plugins/admin/systems/password.tpl:9
 msgid "Changing the password impinges on authentification only."
-msgstr ""
-"Das Ändern des Passwortes wirkt sich nur auf die Authentifizierung aus."
+msgstr "Das Ändern des Passwortes wirkt sich nur auf die Authentifizierung aus."
 
 #: plugins/admin/systems/class_glpiAttachmentPool.inc:68
 #, php-format
@@ -8555,8 +8486,7 @@ msgstr "Sind sind dabei, den GLPI Anhang '%s' zu löschen."
 
 #: plugins/admin/systems/class_glpiAttachmentPool.inc:107
 #, php-format
-msgid ""
-"You can't delete this attachment, it is still in use by these system(s) '%s'"
+msgid "You can't delete this attachment, it is still in use by these system(s) '%s'"
 msgstr ""
 "Sie können diesen Anhang nicht entfernen, er wird noch von folgendem(n) "
 "System(en) verwendet: '%s'"
@@ -8656,8 +8586,7 @@ msgstr "DNS-Dienst entfernen"
 
 #: plugins/admin/systems/class_servDNS.inc:71
 #: plugins/admin/systems/class_inventory.inc:33
-msgid ""
-"This server has DNS features enabled. You can disable them by clicking below."
+msgid "This server has DNS features enabled. You can disable them by clicking below."
 msgstr ""
 "Dieser Server besitzt aktivierte DNS-Funktionen. Sie können diese durch "
 "einen Klick auf die untere Schaltfläche deaktivieren."
@@ -8669,8 +8598,7 @@ msgstr "DNS-Dienst hinzufügen"
 
 #: plugins/admin/systems/class_servDNS.inc:74
 #: plugins/admin/systems/class_inventory.inc:36
-msgid ""
-"This server has DNS features disabled. You can enable them by clicking below."
+msgid "This server has DNS features disabled. You can enable them by clicking below."
 msgstr ""
 "Aktuell besitzt dieser Server keine aktivierten DNS-Funktionen. Sie können "
 "diese durch einen Klick auf die Schaltfläche unten aktivieren."
@@ -8732,8 +8660,7 @@ msgstr ""
 
 #: plugins/admin/systems/class_workstationStartup.inc:492
 msgid "Please select a 'FAI server' or remove the 'FAI classes'."
-msgstr ""
-"Bitte wählen Sie einen 'FAI-Server' oder entfernen Sie die FAI-Klassen."
+msgstr "Bitte wählen Sie einen 'FAI-Server' oder entfernen Sie die FAI-Klassen."
 
 #: plugins/admin/systems/class_workstationStartup.inc:552
 msgid ""
@@ -8774,8 +8701,7 @@ msgstr "Speichern der Arbeitsstations-Einstellungen ist fehlgeschlagen"
 
 #: plugins/admin/systems/class_workstationStartup.inc:1132
 #, php-format
-msgid ""
-"Can't execute specified REPOSITORY_HOOK '%s' please check your gosa.conf."
+msgid "Can't execute specified REPOSITORY_HOOK '%s' please check your gosa.conf."
 msgstr "Kann das als REPOSITORY_HOOK angegebene Kommando '%s' nicht ausführen."
 
 #: plugins/admin/systems/class_workstationStartup.inc:1134
@@ -8809,8 +8735,7 @@ msgstr "Bitte geben Sie im Feld 'url' einen gültigen Wert ein."
 
 #: plugins/admin/systems/class_servRepositorySetup.inc:182
 #, php-format
-msgid ""
-"Can't execute specified REPOSITORY_HOOK '%s'. Please check your gosa.conf."
+msgid "Can't execute specified REPOSITORY_HOOK '%s'. Please check your gosa.conf."
 msgstr "Kann das als REPOSITORY_HOOK angegebene Kommando '%s' nicht ausführen."
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:57
@@ -8870,8 +8795,7 @@ msgstr ""
 #: plugins/admin/systems/class_printerPPDDialog.inc:262
 #, php-format
 msgid "There is already a ppd file for this kind of printer."
-msgstr ""
-"Der von Ihnen gewählte Drucker-Typ verfügt bereits über eine PPD-Datei."
+msgstr "Der von Ihnen gewählte Drucker-Typ verfügt bereits über eine PPD-Datei."
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:283
 #, php-format
@@ -8880,8 +8804,7 @@ msgstr "Kann Datei '%s' nicht speichern."
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:287
 msgid "Uploaded ppd file is empty, can't create new ppd file."
-msgstr ""
-"Die hochgeladene PPD-Datei ist leer, kann daher keine neue PPD-Datei anlegen."
+msgstr "Die hochgeladene PPD-Datei ist leer, kann daher keine neue PPD-Datei anlegen."
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:408
 #: plugins/admin/fai/faiPackage.tpl:41
@@ -8921,8 +8844,7 @@ msgstr ""
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:489
 #, php-format
-msgid ""
-"Removing old ppd file '%s' failed. File does not exists or is not accessible."
+msgid "Removing old ppd file '%s' failed. File does not exists or is not accessible."
 msgstr ""
 "Entfernen der alten PPD-Datei '%s' schlug fehl. Die Datei existiert nicht "
 "oder darf nicht entfernt werden."
@@ -8952,10 +8874,8 @@ msgstr "Wählen Sie die Abteilung, in die das Terminal eingepflegt werden soll"
 
 #: plugins/admin/systems/class_termDNS.inc:138
 #, php-format
-msgid ""
-"Can't execute specified AUTO_NETWORK_HOOK '%s'. Please check your gosa.conf."
-msgstr ""
-"Kann das als AUTO_NETWORK_HOOK angegebene Kommando '%s' nicht ausführen."
+msgid "Can't execute specified AUTO_NETWORK_HOOK '%s'. Please check your gosa.conf."
+msgstr "Kann das als AUTO_NETWORK_HOOK angegebene Kommando '%s' nicht ausführen."
 
 #: plugins/admin/systems/class_termDNS.inc:224
 msgid "Not matching"
@@ -8998,8 +8918,7 @@ msgstr "Es wurde ein doppelter Wert für Eintrag-Typ '%s' gefunden."
 #: plugins/admin/systems/class_termDNS.inc:364
 #, php-format
 msgid "Found more than one entry for the uniqe record type '%s'."
-msgstr ""
-"Es wurde mehr als ein Eintrag für den eindeutigen Eintrags-Typ '%s' gefunden."
+msgstr "Es wurde mehr als ein Eintrag für den eindeutigen Eintrags-Typ '%s' gefunden."
 
 #: plugins/admin/systems/class_termDNS.inc:375
 #, php-format
@@ -9041,8 +8960,7 @@ msgstr ""
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:119
 #, php-format
 msgid "Selected vendor '%s' does not exists in our list of ppds."
-msgstr ""
-"Der ausgewählte Hersteller '%s' existiert nicht in der Liste der PPD's."
+msgstr "Der ausgewählte Hersteller '%s' existiert nicht in der Liste der PPD's."
 
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:128
 msgid "Printer ppd selection."
@@ -9111,8 +9029,7 @@ msgstr "Zeit-Server"
 #: plugins/admin/systems/workstation.tpl:71
 #: plugins/admin/ogroups/termgroup.tpl:16
 msgid "Choose server to use for synchronizing time"
-msgstr ""
-"Wählen Sie den Server, der zur Zeit-Synchronisation genutzt werden soll"
+msgstr "Wählen Sie den Server, der zur Zeit-Synchronisation genutzt werden soll"
 
 #: plugins/admin/systems/terminal.tpl:118
 #: plugins/admin/systems/class_baseSelectDialog.inc:45
@@ -9179,8 +9096,7 @@ msgstr ""
 
 #: plugins/admin/systems/class_servRepository.inc:207
 #, php-format
-msgid ""
-"Be careful editing this release, it is still used by these workstations [%s]."
+msgid "Be careful editing this release, it is still used by these workstations [%s]."
 msgstr ""
 "Seien Sie vorsichtig, wenn Sie dieses Release editieren - es wird momentan "
 "noch von folgenden Arbeitsstationen verwendet [%s]."
@@ -9442,8 +9358,7 @@ msgstr "Frei/Belegt-Einstellungen"
 
 #: plugins/admin/systems/servkolab.tpl:128
 msgid "Allow unauthenticated downloading of Free/Busy information"
-msgstr ""
-"Erlaube nicht-authentifiziertes Herunterladen von Frei/Belegt-Informationen"
+msgstr "Erlaube nicht-authentifiziertes Herunterladen von Frei/Belegt-Informationen"
 
 #: plugins/admin/systems/servkolab.tpl:143
 msgid "SMTP privileged networks"
@@ -9595,8 +9510,7 @@ msgstr "Entfernen des Server-Dienstes Spamassassin ist fehlgeschlagen"
 #: plugins/admin/systems/class_goSpamServer.inc:317
 #, php-format
 msgid "Saving of server services/spamassassin with dn '%s' failed."
-msgstr ""
-"Speichern des Spamassassin Dienstes mit der DN '%s' ist fehlgeschlagen."
+msgstr "Speichern des Spamassassin Dienstes mit der DN '%s' ist fehlgeschlagen."
 
 #: plugins/admin/systems/class_goSpamServer.inc:326
 msgid "Required score must be a numeric value."
@@ -9660,8 +9574,7 @@ msgid "List of users"
 msgstr "Liste der Benutzer"
 
 #: plugins/admin/systems/glpiSelectUser.tpl:23
-msgid ""
-"This dialog allows you to select a user as technical responsible person."
+msgid "This dialog allows you to select a user as technical responsible person."
 msgstr ""
 "Dieser Dialog erlaubt es Ihnen, einen Benutzer als technische Kontaktperson "
 "zu wählen."
@@ -9792,8 +9705,7 @@ msgstr "Der Telefon-Name '0' ist reserviert und kann nicht verwendet werden."
 
 #: plugins/admin/systems/class_phoneGeneric.inc:302
 msgid "You have no permissions to create a phone on this 'Base'."
-msgstr ""
-"Sie haben keine Berechtigung, ein Telefon unterhalb dieser 'Basis' anzulegen."
+msgstr "Sie haben keine Berechtigung, ein Telefon unterhalb dieser 'Basis' anzulegen."
 
 #: plugins/admin/systems/class_phoneGeneric.inc:398
 msgid "Saving phone failed"
@@ -9845,16 +9757,14 @@ msgstr ""
 
 #: plugins/admin/systems/class_glpiAccount.inc:307
 #, php-format
-msgid ""
-"You can't delete this system type, it is still in use by these system(s) '%s'"
+msgid "You can't delete this system type, it is still in use by these system(s) '%s'"
 msgstr ""
 "Sie können diesen Systemtyp nicht entfernen, er wird noch von folgendem(n) "
 "System(en) verwendet: '%s'"
 
 #: plugins/admin/systems/class_glpiAccount.inc:318
 msgid "Rename failed, this system type name is already used."
-msgstr ""
-"Das Umbenennen schlug fehl: Der angegebene Name wird bereits verwendet."
+msgstr "Das Umbenennen schlug fehl: Der angegebene Name wird bereits verwendet."
 
 #: plugins/admin/systems/class_glpiAccount.inc:374
 msgid "Adding new operating system failed, specifed name is already used."
@@ -10015,7 +9925,7 @@ msgstr "Netzwerk-Drucker"
 msgid "Other network component"
 msgstr "Andere Netzwerk-Komponente"
 
-#: plugins/admin/systems/chooser.tpl:16 setup/class_setupStep_Migrate.inc:767
+#: plugins/admin/systems/chooser.tpl:16 setup/class_setupStep_Migrate.inc:809
 msgid "Create"
 msgstr "Anlegen"
 
@@ -10193,14 +10103,12 @@ msgstr ""
 
 #: plugins/admin/systems/class_systemManagement.inc:347
 msgid "You are not allowed to set this systems password!"
-msgstr ""
-"Sie haben keine Berechtigung, das Passwort für dieses Systems zu setzen!"
+msgstr "Sie haben keine Berechtigung, das Passwort für dieses Systems zu setzen!"
 
 #: plugins/admin/systems/class_systemManagement.inc:401
 #, php-format
 msgid "You're about to delete all information about the component at '%s'."
-msgstr ""
-"Sie sind dabei, alle Informationen über die Komponente auf '%s' zu löschen."
+msgstr "Sie sind dabei, alle Informationen über die Komponente auf '%s' zu löschen."
 
 #: plugins/admin/systems/class_systemManagement.inc:407
 #: plugins/admin/systems/class_systemManagement.inc:467
@@ -10303,8 +10211,7 @@ msgstr "Zonen-Einträge"
 
 #: plugins/admin/systems/servdnseditzone.tpl:27
 msgid "Can't be edited because the zone wasn't saved right now."
-msgstr ""
-"Kann nicht bearbeitet werden, da die Zone bis jetzt nicht gespeichert wurde."
+msgstr "Kann nicht bearbeitet werden, da die Zone bis jetzt nicht gespeichert wurde."
 
 #: plugins/admin/systems/servdnseditzone.tpl:39
 msgid "SOA record"
@@ -10347,8 +10254,7 @@ msgstr "Kann Objektnamen nicht erkennen."
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:133
 #, php-format
-msgid ""
-"You can't delete this device, it is still in use by these system(s) '%s'"
+msgid "You can't delete this device, it is still in use by these system(s) '%s'"
 msgstr ""
 "Sie können dieses Gerät nicht entfernen, es wird noch von folgendem(n) System"
 "(en) verwendet: '%s'"
@@ -10533,8 +10439,7 @@ msgstr "Bitte wählen Sie einen gültigen Namen für die Reverse-Zone"
 
 #: plugins/admin/systems/class_servDNSeditZone.inc:374
 msgid "Primary dns server must end with '.' to be a valid entry."
-msgstr ""
-"Der Primäre DNS-Server muss mit '.' enden, um ein gültiger Eintrag zu sein."
+msgstr "Der Primäre DNS-Server muss mit '.' enden, um ein gültiger Eintrag zu sein."
 
 #: plugins/admin/systems/class_servDNSeditZone.inc:378
 msgid "Your specified mail address must end with '.' to be a valid record."
@@ -10801,8 +10706,8 @@ msgstr "Integriertes Mikrofon"
 #: include/sieve/templates/element_header.tpl:41
 #: include/sieve/templates/element_envelope.tpl:41
 #: setup/class_setupStep_Config2.inc:129 setup/class_setupStep_Config1.inc:87
-#: setup/class_setupStep_Ldap.inc:74 setup/setup_feedback.tpl:51
-#: setup/setup_feedback.tpl:69 setup/class_setupStep_Schema.inc:63
+#: setup/class_setupStep_Ldap.inc:74 setup/setup_feedback.tpl:53
+#: setup/setup_feedback.tpl:71 setup/class_setupStep_Schema.inc:63
 #: setup/class_setupStep_Config3.inc:76
 msgid "Yes"
 msgstr "ja"
@@ -10818,8 +10723,8 @@ msgstr "ja"
 #: include/sieve/templates/element_header.tpl:43
 #: include/sieve/templates/element_envelope.tpl:43
 #: setup/class_setupStep_Config2.inc:129 setup/class_setupStep_Config1.inc:87
-#: setup/class_setupStep_Ldap.inc:74 setup/setup_feedback.tpl:53
-#: setup/setup_feedback.tpl:71 setup/class_setupStep_Schema.inc:63
+#: setup/class_setupStep_Ldap.inc:74 setup/setup_feedback.tpl:55
+#: setup/setup_feedback.tpl:73 setup/class_setupStep_Schema.inc:63
 #: setup/class_setupStep_Config3.inc:76
 msgid "No"
 msgstr "nein"
@@ -11321,8 +11226,7 @@ msgstr "Das benötigte Feld 'Name' ist nicht ausgefüllt."
 
 #: plugins/admin/applications/class_applicationGeneric.inc:366
 msgid "Invalid character in application name. Only a-z 0-9 are allowed."
-msgstr ""
-"Ungültiges Zeichen in Anwendungs-Name. Nur a-z und 0-9 sind erlaubte Zeichen."
+msgstr "Ungültiges Zeichen in Anwendungs-Name. Nur a-z und 0-9 sind erlaubte Zeichen."
 
 #: plugins/admin/applications/class_applicationGeneric.inc:370
 msgid "Required field 'Execute' is not filled."
@@ -11381,8 +11285,7 @@ msgid "Create options"
 msgstr "Optionen aktivieren"
 
 #: plugins/admin/applications/class_applicationParameters.inc:55
-msgid ""
-"This application has options disabled. You can enable them by clicking below."
+msgid "This application has options disabled. You can enable them by clicking below."
 msgstr ""
 "Diese Anwendung besitzt keine Optionen. Sie können diese durch Betätigen der "
 "Schaltfläche unten hinzufügen."
@@ -11482,8 +11385,7 @@ msgstr "FAI-Objekthierarchie"
 
 #: plugins/admin/fai/faiSummary.tpl:9
 msgid "Reload class and release configuration from parent object."
-msgstr ""
-"Klasse aktualisieren und Konfiguration vom übergeordneten Objekt freigeben."
+msgstr "Klasse aktualisieren und Konfiguration vom übergeordneten Objekt freigeben."
 
 #: plugins/admin/fai/faiScript.tpl:34 plugins/admin/fai/faiVariable.tpl:32
 #: plugins/admin/fai/class_faiProfileEntry.inc:170
@@ -11765,8 +11667,7 @@ msgstr "Bitte geben Sie einen Benutzer ein."
 
 #: plugins/admin/fai/class_faiTemplateEntry.inc:194
 msgid "Please enter a valid user. Only a-z/0-9 are allowed."
-msgstr ""
-"Bitte geben Sie einen gültigen Benutzer ein (0-9 und a-Z sind erlaubt)."
+msgstr "Bitte geben Sie einen gültigen Benutzer ein (0-9 und a-Z sind erlaubt)."
 
 #: plugins/admin/fai/class_faiTemplateEntry.inc:198
 msgid "Please enter a group."
@@ -11835,8 +11736,7 @@ msgstr "Verwaltung von FAI"
 #: plugins/admin/fai/class_faiManagement.inc:173
 #, php-format
 msgid "You're about to delete all information about the FAI class at '%s'."
-msgstr ""
-"Sie sind dabei, alle Informationen über die FAI-Klasse auf '%s' zu löschen."
+msgstr "Sie sind dabei, alle Informationen über die FAI-Klasse auf '%s' zu löschen."
 
 #: plugins/admin/fai/class_faiManagement.inc:278
 #, php-format
@@ -11986,8 +11886,7 @@ msgstr ""
 #: plugins/admin/fai/class_faiPackage.inc:204
 #, php-format
 msgid "No repository server found that provide this release '%s'."
-msgstr ""
-"Es wurde kein Repository-Server gefunden, der das Release '%s' bereitstellt."
+msgstr "Es wurde kein Repository-Server gefunden, der das Release '%s' bereitstellt."
 
 #: plugins/admin/fai/class_faiPackage.inc:343
 msgid "Removing FAI package base failed"
@@ -11999,8 +11898,7 @@ msgstr "Bitte wählen Sie mindestens ein Paket."
 
 #: plugins/admin/fai/class_faiPackage.inc:376
 msgid "Please choose a valid combination for your repository setup."
-msgstr ""
-"Bitte wählen Sie eine gültige Kombination für Ihr gewünschtes Repository"
+msgstr "Bitte wählen Sie eine gültige Kombination für Ihr gewünschtes Repository"
 
 #: plugins/admin/fai/class_faiPackage.inc:389
 #, php-format
@@ -12054,8 +11952,7 @@ msgstr "Bitte geben Sie einen gültigen Namen ein."
 
 #: plugins/admin/fai/class_faiProfile.inc:420
 msgid "There is already a profile with this class name defined."
-msgstr ""
-"Der von Ihnen angegebene Klassen-Name ist bereits für ein Profil vergeben."
+msgstr "Der von Ihnen angegebene Klassen-Name ist bereits für ein Profil vergeben."
 
 #: plugins/admin/fai/class_faiProfile.inc:459
 msgid "Saving FAI profile failed"
@@ -12125,7 +12022,7 @@ msgstr "Verwendete Pakete"
 msgid "Choosen packages"
 msgstr "Gewählte Pakete"
 
-#: plugins/admin/fai/faiPackage.tpl:73 include/functions.inc:668
+#: plugins/admin/fai/faiPackage.tpl:73 include/functions.inc:669
 msgid "Configure"
 msgstr "Konfigurieren"
 
@@ -12420,16 +12317,14 @@ msgstr "Der angebene Klassen-Name ist leer."
 
 #: plugins/admin/fai/class_askClassName.inc:146
 msgid "The specified class name is already in use for this object type."
-msgstr ""
-"Der angegebene Klassen-Name ist für diesen Objekt-Typ bereits in Gebrauch."
+msgstr "Der angegebene Klassen-Name ist für diesen Objekt-Typ bereits in Gebrauch."
 
 #: plugins/admin/fai/class_faiPackageEntry.inc:30
 msgid "Please enter your search string here"
 msgstr "Bitte geben Sie hier einen Such-Text ein."
 
 #: plugins/admin/fai/class_faiPackageEntry.inc:43
-msgid ""
-"This list displays all assigned package names for this repository settings."
+msgid "This list displays all assigned package names for this repository settings."
 msgstr "Diese Liste zeigt alle diesem Repository zugeordneten Paket-Namen."
 
 #: plugins/admin/fai/class_faiPackageEntry.inc:119
@@ -12472,8 +12367,7 @@ msgstr "Wählen Sie den Unterbaum, in den die Gruppe eingepflegt werden soll"
 #: plugins/admin/groups/generic.tpl:41
 #: plugins/admin/groups/paste_generic.tpl:13
 msgid "Normally IDs are autogenerated, select to specify manually"
-msgstr ""
-"Normalerweise werden IDs automatisch generiert. Auswählen um dies zu umgehen"
+msgstr "Normalerweise werden IDs automatisch generiert. Auswählen um dies zu umgehen"
 
 #: plugins/admin/groups/generic.tpl:41
 #: plugins/admin/groups/paste_generic.tpl:15
@@ -12558,8 +12452,7 @@ msgstr "Gruppenname / Abteilung"
 
 #: plugins/admin/groups/class_divListGroup.inc:54
 msgid "Select to see groups that are primary groups of users"
-msgstr ""
-"Auswählen, um die Gruppen zu sehen, die primären Gruppen der Benutzer sind"
+msgstr "Auswählen, um die Gruppen zu sehen, die primären Gruppen der Benutzer sind"
 
 #: plugins/admin/groups/class_divListGroup.inc:54
 msgid "Show primary groups"
@@ -12567,8 +12460,7 @@ msgstr "Zeige primäre Gruppen"
 
 #: plugins/admin/groups/class_divListGroup.inc:55
 msgid "Select to see groups that have samba groups mappings"
-msgstr ""
-"Auswählen, um die Gruppen zu sehen, denen Samba-Eigenschaften zugeordnet sind"
+msgstr "Auswählen, um die Gruppen zu sehen, denen Samba-Eigenschaften zugeordnet sind"
 
 #: plugins/admin/groups/class_divListGroup.inc:55
 msgid "Show samba groups"
@@ -12646,8 +12538,7 @@ msgstr "! unbekannte id"
 
 #: plugins/admin/groups/class_groupGeneric.inc:489
 #, php-format
-msgid ""
-"Your search method returned more than '%s' users, only '%s' users are shown."
+msgid "Your search method returned more than '%s' users, only '%s' users are shown."
 msgstr ""
 "Ihre Such-Methode ergab mehr als '%s' Benutzer, es werden davon '%s' "
 "Benutzer angezeigt."
@@ -12673,8 +12564,7 @@ msgstr "Speichern der Gruppe fehlgeschlagen"
 #: plugins/admin/groups/class_groupGeneric.inc:756
 #: plugins/admin/ogroups/class_ogroup.inc:612
 msgid "You have no permissions to create a group on this 'Base'."
-msgstr ""
-"Sie haben keine Berechtigung, eine Gruppe unterhalb dieser 'Basis' anzulegen."
+msgstr "Sie haben keine Berechtigung, eine Gruppe unterhalb dieser 'Basis' anzulegen."
 
 #: plugins/admin/groups/class_groupGeneric.inc:766
 msgid ""
@@ -12942,8 +12832,7 @@ msgstr ""
 
 #: plugins/admin/groups/class_groupMail.inc:350
 msgid "Remove the shared folder and all its contents after saving this account"
-msgstr ""
-"Diesen Ordnern samt Inhalt entfernen nachdem dieses Konto gespeichert wurde"
+msgstr "Diesen Ordnern samt Inhalt entfernen nachdem dieses Konto gespeichert wurde"
 
 #: plugins/admin/groups/class_groupMail.inc:405
 msgid "You're trying to add an invalid email address "
@@ -12964,8 +12853,7 @@ msgstr ""
 "ein."
 
 #: plugins/admin/groups/class_groupMail.inc:892
-msgid ""
-"Please choose valid permission settings. Default permission can't be emtpy."
+msgid "Please choose valid permission settings. Default permission can't be emtpy."
 msgstr ""
 "Bitte wählen sie gültige Zugriffsrechte. Standard-Zugriffsrechte dürfen "
 "nicht leer sein."
@@ -12985,15 +12873,13 @@ msgstr ""
 "Systemen ererbt werden."
 
 #: plugins/admin/ogroups/class_mailogroup.inc:48
-msgid ""
-"This group has mail features enabled. You can disable them by clicking below."
+msgid "This group has mail features enabled. You can disable them by clicking below."
 msgstr ""
 "Diese Gruppe besitzt aktivierte Mail-Erweiterungen. Sie können diese "
 "deaktivieren, indem Sie auf die Schaltfläche unten klicken."
 
 #: plugins/admin/ogroups/class_mailogroup.inc:50
-msgid ""
-"This group has mail features disabled. You can enable them by clicking below."
+msgid "This group has mail features disabled. You can enable them by clicking below."
 msgstr ""
 "Diese Gruppe besitz keine Mail-Erweiterungen. Sie können diese aktivieren, "
 "wenn Sie auf die untere Schaltfläche klicken."
@@ -13015,8 +12901,7 @@ msgid "Member objects"
 msgstr "Zusammengefasste Objekte"
 
 #: plugins/admin/ogroups/phonequeue.tpl:2
-msgid ""
-"Only users with the same asterisk home server will be included to this queue."
+msgid "Only users with the same asterisk home server will be included to this queue."
 msgstr ""
 "In diese Warteschlange werden nur Benutzer mit dem selben Asterisk Home-"
 "Server aufgenommen."
@@ -13209,8 +13094,7 @@ msgstr "Diese cn ist bereits vergeben."
 
 #: plugins/admin/ogroups/class_ogroup.inc:622
 msgid "You can combine two different object types at maximum only!"
-msgstr ""
-"Sie können maximal zwei verschiedene Objekttypen miteinander kombinieren!"
+msgstr "Sie können maximal zwei verschiedene Objekttypen miteinander kombinieren!"
 
 #: plugins/admin/ogroups/class_ogroup.inc:671
 msgid "Saving object group failed"
@@ -13438,8 +13322,7 @@ msgid "Remove the phone queue from this Account"
 msgstr "Warteschlange von diesem Konto entfernen"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:212
-msgid ""
-"Phone queue is enabled for this group. You can disable it by clicking below."
+msgid "Phone queue is enabled for this group. You can disable it by clicking below."
 msgstr ""
 "Diese Gruppe besitzt aktivierte die Warteschlangen-Erweiterung. Sie können "
 "diese durch einen Klick auf die untere Schaltfläche deaktivieren."
@@ -13486,13 +13369,11 @@ msgstr "Es ist mindestens eine Telefonnummer erforderlich."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:374
 msgid "Error while removing old queue entries from database."
-msgstr ""
-"Fehler beim Entfernen der alten Warteschlangen-Einträge aus der Datenbank."
+msgstr "Fehler beim Entfernen der alten Warteschlangen-Einträge aus der Datenbank."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:434
 msgid "Could not detect old queue entry, query failed."
-msgstr ""
-"Konnte alten Warteschlangen-Eintrag nicht erkennen, die Abfrage schlug fehl."
+msgstr "Konnte alten Warteschlangen-Eintrag nicht erkennen, die Abfrage schlug fehl."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:520
 #, php-format
@@ -13621,8 +13502,7 @@ msgstr "Das benötigte Feld 'Beschreibung' ist nicht gesetzt."
 
 #: plugins/admin/departments/class_departmentGeneric.inc:239
 #, php-format
-msgid ""
-"The field 'Name' contains the reserved word '%s'. Please choose another name."
+msgid "The field 'Name' contains the reserved word '%s'. Please choose another name."
 msgstr ""
 "Das Feld 'Name' enthält das reservierte Wort '%s'. Bitte wählen Sie einen "
 "anderen Namen."
@@ -13688,8 +13568,7 @@ msgstr "Zeige UNIX-Benutzer"
 
 #: plugins/admin/users/class_divListUsers.inc:57
 msgid "Select to see users that have mail settings"
-msgstr ""
-"Auswählen, um die Benutzer zu sehen, die eine Mail-Erweiterung besitzen"
+msgstr "Auswählen, um die Benutzer zu sehen, die eine Mail-Erweiterung besitzen"
 
 #: plugins/admin/users/class_divListUsers.inc:57
 msgid "Show mail users"
@@ -13802,8 +13681,7 @@ msgstr "Sie haben keine Berechtigung, diesen Benutzer zu löschen!"
 
 #: plugins/admin/users/class_userManagement.inc:553
 msgid "A person with the choosen name is already used in this tree."
-msgstr ""
-"Ein Person mit dem ausgewählten Namen ist in diesem Baum bereits angelegt."
+msgstr "Ein Person mit dem ausgewählten Namen ist in diesem Baum bereits angelegt."
 
 #: plugins/admin/users/remove.tpl:6
 msgid ""
@@ -13851,58 +13729,54 @@ msgstr ""
 
 #: include/functions_dns.inc:610
 #, php-format
-msgid ""
-"Undefined zone name '%s'. Zone name must look like this 'server/zone.com'."
+msgid "Undefined zone name '%s'. Zone name must look like this 'server/zone.com'."
 msgstr ""
 "Ungültiger Zonenname '%s'. Zonennamen müssen folgendem Format entsprechen: "
 "'server/zone.com'."
 
-#: include/functions.inc:299
+#: include/functions.inc:300
 #, php-format
 msgid "FATAL: Error when connecting the LDAP. Server said '%s'."
-msgstr ""
-"FATAL: Fehler beim Verbinden mit dem LDAP-Server. Die Meldung lautet '%s'."
+msgstr "FATAL: Fehler beim Verbinden mit dem LDAP-Server. Die Meldung lautet '%s'."
 
-#: include/functions.inc:316
+#: include/functions.inc:317
 #, php-format
 msgid "User login failed. LDAP server said '%s'."
 msgstr "Anmeldung des Nutzers ist fehlgeschlagen. Die Meldung lautet '%s'."
 
-#: include/functions.inc:337
+#: include/functions.inc:338
 msgid "Username / UID is not unique. Please check your LDAP database."
 msgstr "Die Kennung ist nicht eindeutig. Bitte prüfen Sie die LDAP-Datenbank."
 
-#: include/functions.inc:469
+#: include/functions.inc:470
 msgid ""
 "Error while adding a lock. Parameters are not set correctly, please check "
 "the source!"
-msgstr ""
-"Fehler beim Anlegen eines Locks. Die Parameter sind nicht korrekt gesetzt!"
+msgstr "Fehler beim Anlegen eines Locks. Die Parameter sind nicht korrekt gesetzt!"
 
-#: include/functions.inc:479
+#: include/functions.inc:480
 #, php-format
 msgid ""
 "Can't set locking information in LDAP database. Please check the 'config' "
-"entry in gosa.conf! LDAP server says '%s'."
+"entry in %s! LDAP server says '%s'."
 msgstr ""
 "Der Zugriffsschutz für die LDAP-Datenbank kann nicht gesetzt werden. Bitte "
-"überprüfen Sie den \"Config\" Eintrag in der Datei gosa.conf! Der LDAP-"
+"überprüfen Sie den \"%s\" Eintrag in der Datei gosa.conf! Der LDAP-"
 "Server meldete '%s'."
 
-#: include/functions.inc:494
+#: include/functions.inc:495
 #, php-format
 msgid "Adding a lock failed. LDAP server says '%s'."
-msgstr ""
-"Kann keinen Zugriffsschutz anlegen. Die Meldung des LDAP-Servers lautet '%s'."
+msgstr "Kann keinen Zugriffsschutz anlegen. Die Meldung des LDAP-Servers lautet '%s'."
 
-#: include/functions.inc:520
+#: include/functions.inc:521
 #, php-format
 msgid "Removing a lock failed. LDAP server says '%s'."
 msgstr ""
 "Kann den Zugriffsschutz nicht entfernen. Die Meldung des LDAP-Servers lautet "
 "'%s'."
 
-#: include/functions.inc:550
+#: include/functions.inc:551
 msgid ""
 "Getting the lock from LDAP failed. Parameters are not set correctly, please "
 "check the source!"
@@ -13910,15 +13784,16 @@ msgstr ""
 "Es kann nicht geprüft werden, ob das Objekt gesperrt ist. Die Parameter sind "
 "nicht korrekt!"
 
-#: include/functions.inc:560
+#: include/functions.inc:561
+#, php-format
 msgid ""
 "Can't get locking information in LDAP database. Please check the 'config' "
-"entry in gosa.conf!"
+"entry in %s!"
 msgstr ""
 "Die Information über den Zugriffsschutz kann nicht aus der LDAP-Datenbank "
-"gelesen werden. Bitte prüfen Sie den \"Config\"-Eintrag in der gosa.conf!"
+"gelesen werden. Bitte prüfen Sie den \"%s\"-Eintrag in der gosa.conf!"
 
-#: include/functions.inc:568
+#: include/functions.inc:569
 msgid ""
 "Found multiple locks for object to be locked. This should not be possible - "
 "cleaning up multiple references."
@@ -13926,12 +13801,12 @@ msgstr ""
 "Mehrere Sperrungen für ein Objekt gefunden. Dies sollte nicht möglich sein, "
 "bitte entfernen Sie mehrfache Referenzen."
 
-#: include/functions.inc:654
+#: include/functions.inc:655
 #, php-format
 msgid "The size limit of %d entries is exceed!"
 msgstr "Die Größenbeschränkung von %d Einträgen ist überschritten!"
 
-#: include/functions.inc:656
+#: include/functions.inc:657
 #, php-format
 msgid ""
 "Set the new size limit to %s and show me this message if the limit still "
@@ -13940,15 +13815,15 @@ msgstr ""
 "Verwende eine neue Größenbeschränkung von %s Einträgen und zeige diese "
 "Meldung bei Überschreitung wieder an"
 
-#: include/functions.inc:673
+#: include/functions.inc:674
 msgid "incomplete"
 msgstr "unvollständig"
 
-#: include/functions.inc:1116 include/functions.inc:1310
+#: include/functions.inc:1117 include/functions.inc:1311
 msgid "LDAP error:"
 msgstr "LDAP-Fehler:"
 
-#: include/functions.inc:1117
+#: include/functions.inc:1118
 msgid ""
 "Problems with the LDAP server mean that you probably lost the last changes. "
 "Please check your LDAP setup for possible errors and try again."
@@ -13957,7 +13832,7 @@ msgstr ""
 "verloren gegangen sind. Bitte prüfen Sie die LDAP-Konfiguration um "
 "eventuelle Fehler aufzudecken und wiederholen Sie die Aktion."
 
-#: include/functions.inc:1125
+#: include/functions.inc:1126
 msgid ""
 "Please check your input and fix the error. Press 'OK' to close this message "
 "box."
@@ -13965,23 +13840,23 @@ msgstr ""
 "Bitte prüfen Sie ihre Eingaben und beheben Sie den Fehler. Drücken Sie den "
 "'OK'-Knopf um dieses Meldungsfenster zu schließen."
 
-#: include/functions.inc:1134
+#: include/functions.inc:1135
 msgid "An error occured while processing your request"
 msgstr "Es ist ein Fehler bei der Bearbeitung ihrer Anfrage aufgetreten"
 
-#: include/functions.inc:1138 include/functions_setup.inc:254
+#: include/functions.inc:1139
 msgid "OK"
 msgstr "OK"
 
-#: include/functions.inc:1199
+#: include/functions.inc:1200
 msgid "Continue anyway"
 msgstr "Trotzdem Fortsetzen"
 
-#: include/functions.inc:1201
+#: include/functions.inc:1202
 msgid "Edit anyway"
 msgstr "Trotzdem bearbeiten"
 
-#: include/functions.inc:1203
+#: include/functions.inc:1204
 #, php-format
 msgid ""
 "You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
@@ -13991,32 +13866,99 @@ msgstr ""
 "gerade von '%s' benutzt. Bitte kontaktieren Sie diese Person, um das weitere "
 "Vorgehen abzuklären."
 
-#: include/functions.inc:1492
+#: include/functions.inc:1493
 msgid "Entries per page"
 msgstr "Einträge pro Seite"
 
-#: include/functions.inc:1520
+#: include/functions.inc:1521
 msgid "Apply filter"
 msgstr "Filter anwenden"
 
-#: include/functions.inc:1794
+#: include/functions.inc:1795
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-#: include/functions.inc:1837
+#: include/functions.inc:1838
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "GOsa Entwicklerversion (Rev %s)"
 
-#: include/functions.inc:2179 include/functions.inc:2183
+#: include/functions.inc:2240 include/functions.inc:2244
 msgid "Warning - base_hook is not avialable. Using default base."
 msgstr ""
 "Warnung - base_hook ist nicht deklariert. Es wird die Standardbasis "
 "verwendet."
 
-#: include/functions.inc:2189
+#: include/functions.inc:2250
 msgid "Warning - no base_hook defined. Using default base."
 msgstr "Warnung - base_hook ist nicht deklariert. Benutze Standardbasis."
+
+#: include/functions.inc:2275 setup/class_setupStep_Schema.inc:95
+msgid "Can't get schema information from server. No schema check possible!"
+msgstr ""
+"Kann die Schema-Informationen nicht vom Server beziehen: Keine Überprüfung "
+"möglich!"
+
+#: include/functions.inc:2301
+msgid "Used to store account specific informations."
+msgstr "Wird verwendet, um kontenspezifische Informationen zu speichern."
+
+#: include/functions.inc:2308
+msgid ""
+"Used to lock currently edited entries to avoid multiple changes at the same "
+"time."
+msgstr ""
+"Wird verwendet, um die Einträge, die momentan in Bearbeitung sind, zu "
+"sperren und somit mehrere gleichzeitige Änderungen zu verhindern."
+
+#: include/functions.inc:2351
+#, php-format
+msgid "The required objectClass '%s' is not present in your schema setup"
+msgstr "Die benötigte ObjektKlasse '%s' ist nicht in der Schema-Einrichtung vorhanden"
+
+#: include/functions.inc:2353
+#, php-format
+msgid "The optional objectClass '%s' is not present in your schema setup"
+msgstr "Die optionale ObjektKlasse '%s' ist nicht in der Schema-Einrichtung vorhanden"
+
+#: include/functions.inc:2359
+#, php-format
+msgid "The required objectclass '%s' does not have version %s"
+msgstr "Die benötigte ObjektKlasse '%s' hat nicht die Version %s"
+
+#: include/functions.inc:2361
+#, php-format
+msgid "The optional objectclass '%s' does not have version %s"
+msgstr "Die optionale ObjektKlasse '%s' hat nicht die Version %s"
+
+#: include/functions.inc:2365
+#, php-format
+msgid "Class(es) available"
+msgstr "Verfügbare Klasse(n)"
+
+#: include/functions.inc:2388
+msgid ""
+"You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
+"schema    configuration do not support this option."
+msgstr "Sie haben die rcf2307bis-Optionen in der 'LDAP Einrichtung' aktiviert, aber Ihre Schema-Konfiguration unterstützt diese Option nicht."
+
+#: include/functions.inc:2389
+msgid ""
+"In order to use rfc2307bis conform groups the objectClass 'posixGroup' must "
+"be      AUXILIARY"
+msgstr ""
+"Um zu RFC2307bis konforme Gruppen verwenden zu können, muss die ObjektKlasse "
+"'posixGroup' AUXILIARY sein"
+
+#: include/functions.inc:2393
+msgid ""
+"You have disabled the rfc2307bis option on the 'ldap setup' step, but your "
+"schema   configuration do not support this option."
+msgstr "Ihr LDAP-Schema unterstüzt rfc2307bis, allerdings haben Sie diese Option im Setup nicht aktiviert."
+
+#: include/functions.inc:2394
+msgid "The objectClass 'posixGroup' must be STRUCTURAL"
+msgstr "Die ObjektKlasse 'posixGroup' muss STRUCTURAL sein"
 
 #: include/class_mail-methods-cyrus.inc:40
 msgid "Warning: Account has an invalid mailserver string!"
@@ -14038,8 +13980,7 @@ msgstr "Kann das IMAP-Postfach nicht anlegen. Der Server meldet '%s'."
 #: include/class_mail-methods-cyrus.inc:170
 #, php-format
 msgid "Can't write IMAP quota. Server says '%s'."
-msgstr ""
-"Kann die Kontingent-Einstellungen nicht sichern. Der Server meldete '%s'."
+msgstr "Kann die Kontingent-Einstellungen nicht sichern. Der Server meldete '%s'."
 
 #: include/class_mail-methods-cyrus.inc:196
 msgid "Warning: imap_getacl is not implemented, can't remove acl informations."
@@ -14065,14 +14006,12 @@ msgstr "Kann das IMAP-Postfach nicht entfernen. Der Server meldete '%s'."
 #: include/sieve/class_sieveManagement.inc:1045
 #, php-format
 msgid "Can't log into SIEVE server. Server says '%s'."
-msgstr ""
-"Die Anmeldung am SIEVE-Server ist fehlgeschlagen. Die Meldung war '%s'."
+msgstr "Die Anmeldung am SIEVE-Server ist fehlgeschlagen. Die Meldung war '%s'."
 
 #: include/class_mail-methods-cyrus.inc:277
 #, php-format
 msgid "Can't get sieve script. Server says '%s'."
-msgstr ""
-"Kann das aktive SIEVE-Skript nicht herunterladen. Die Meldung lautet '%s'."
+msgstr "Kann das aktive SIEVE-Skript nicht herunterladen. Die Meldung lautet '%s'."
 
 #: include/class_mail-methods-cyrus.inc:348
 #, php-format
@@ -14120,16 +14059,12 @@ msgstr "Fehler beim Abrufen des Quell-DN, der Vorgang wurde abgebrochen!"
 msgid "Unknown FAIstate %s"
 msgstr "unbekannter FAI-Status %s"
 
-#: include/class_ldap.inc:673
+#: include/class_ldap.inc:739
 #, php-format
-msgid ""
-"The referral url '%s' is missing the ldap base. It should look like this "
-"'ldap://server:port/base'."
-msgstr ""
-"Die Referral-URL '%s' fehlt in der LDAP-Basis. Sie sollte ungefähr so "
-"aussehen 'ldap://server:port/basis'."
+msgid "Autocreation of subtree failed. No objectClass found for attribute '%s'."
+msgstr "Das automatische Anlegen des Unterbaums wird nicht unterstützt. Es wurde keine objectClass für das Attribut '%s' gefunden."
 
-#: include/class_ldap.inc:734
+#: include/class_ldap.inc:787 include/class_ldap.inc:877
 #, php-format
 msgid ""
 "Autocreation of type '%s' is currently not supported. Please report to the "
@@ -14138,17 +14073,31 @@ msgstr ""
 "Das automatische Erzeugen des Objekt-Typs '%s' wird momentan nicht "
 "unterstützt. Bitte melden Sie dies an das Entwicklerteam."
 
-#: include/class_ldap.inc:803
+#: include/class_ldap.inc:795
+#, php-format
+msgid "Creating subtree '%s' failed."
+msgstr "Erzeugen des Unterbaums '%s' ist fehlgeschlagen."
+
+#: include/class_ldap.inc:816
+#, php-format
+msgid ""
+"The referral url '%s' is missing the ldap base. It should look like this "
+"'ldap://server:port/base'."
+msgstr ""
+"Die Referral-URL '%s' fehlt in der LDAP-Basis. Sie sollte ungefähr so "
+"aussehen 'ldap://server:port/basis'."
+
+#: include/class_ldap.inc:946
 #, php-format
 msgid "while operating on '%s' using LDAP server '%s'"
 msgstr "während der Arbeit mit '%s' auf dem LDAP-Server '%s'"
 
-#: include/class_ldap.inc:805
+#: include/class_ldap.inc:948
 #, php-format
 msgid "while operating on LDAP server %s"
 msgstr "während der Arbeit auf LDAP-Server '%s'"
 
-#: include/class_ldap.inc:1001
+#: include/class_ldap.inc:1144
 #, php-format
 msgid ""
 "This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
@@ -14157,12 +14106,12 @@ msgstr ""
 "Dies ist keine valide DN: '%s'.  Ein Block für den Import sollte mit "
 "'dn:...' beginnen in Zeile %s"
 
-#: include/class_ldap.inc:1014
+#: include/class_ldap.inc:1157
 #, php-format
 msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
 msgstr "Der DN: '%s' (aus Zeile %s) existiert bereits in der LDAP-Datenbank."
 
-#: include/class_ldap.inc:1030
+#: include/class_ldap.inc:1173
 #, php-format
 msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
 msgstr ""
@@ -14171,10 +14120,10 @@ msgstr ""
 
 #: include/class_config.inc:71
 #, php-format
-msgid "XML error in gosa.conf: %s at line %d"
-msgstr "XML-Fehler in der Datei gosa.conf: %s in Zeile %d"
+msgid "XML error in %s: %s at line %d"
+msgstr "XML-Fehler in der Datei %2: %s in Zeile %d"
 
-#: include/class_config.inc:509
+#: include/class_config.inc:510
 msgid "SID and/or RIDBASE missing in your configuration!"
 msgstr "SID und/oder RIDBASE fehlen in der Konfiguration!"
 
@@ -14212,25 +14161,25 @@ msgstr ""
 
 #: include/class_password-methods.inc:183 include/class_plugin.inc:589
 #, php-format
-msgid ""
-"Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
 msgstr ""
 "Das in POSTMODIFY angegebene Kommando '%s' (Modul '%s') scheint nicht zu "
 "existieren."
 
 #: include/class_password-methods.inc:204
-msgid ""
-"Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
+#, php-format
+msgid "Setting for SMBHASH in %s is incorrect! Can't change Samba password."
 msgstr ""
-"Die Einstellung 'SMBHASH' in /etc/gosa/gosa.conf ist nicht korrekt! Das "
+"Die Einstellung 'SMBHASH' in %s ist nicht korrekt! Das "
 "Samba-Passwort kann nicht geändert werden."
 
 #: include/class_pluglist.inc:116
+#, php-format
 msgid ""
-"Your gosa.conf information has changed partly. Please convert it using the "
+"Your %s information has changed partly. Please convert it using the "
 "contributed script fix_config.sh!"
 msgstr ""
-"Die Konfigurationsdatei gosa.conf hat sich teilweise geändert. Bitte "
+"Die Information %s hat sich teilweise geändert. Bitte "
 "konvertieren Sie diese mit dem beigefügten Skript fix_config.sh!"
 
 #: include/class_pluglist.inc:130 include/class_pluglist.inc:131
@@ -14281,8 +14230,7 @@ msgstr "Die PPD-Datei '%s' konnte nicht zum Lesen geöffnet werden."
 #: include/class_ppdManager.inc:146
 #, php-format
 msgid "The required tmp file file '%s' can't be opened for writing."
-msgstr ""
-"Die benötigte temporäre Datei '%s' kann nicht zum Schreiben geöffnet werden."
+msgstr "Die benötigte temporäre Datei '%s' kann nicht zum Schreiben geöffnet werden."
 
 #: include/class_ppdManager.inc:170 include/class_ppdManager.inc:297
 #, php-format
@@ -14352,540 +14300,6 @@ msgstr "%s Ergebnisse für Ihre Suche nach %s"
 msgid "%s%% hit rate in file %s"
 msgstr "%s%% Trefferquote in Datei %s"
 
-#: include/functions_setup.inc:84 setup/class_setupStep_Schema.inc:101
-msgid "Can't get schema information from server. No schema check possible!"
-msgstr ""
-"Kann die Schema-Informationen nicht vom Server beziehen: Keine Überprüfung "
-"möglich!"
-
-#: include/functions_setup.inc:99
-#, php-format
-msgid ""
-"Optional objectclass '%s' required by plugin '%s' is not present in LDAP "
-"setup"
-msgstr ""
-"Die optionale Objektklasse '%s' (benötigt vom Modul '%s') ist nicht in den "
-"LDAP eingebunden"
-
-#: include/functions_setup.inc:103
-#, php-format
-msgid ""
-"Optional objectclass '%s' required by plugin '%s' does not have version %s"
-msgstr ""
-"Die optionale Objektklasse '%s' (benötigt vom Modul '%s') hat nicht die "
-"Versionsnummer %s"
-
-#: include/functions_setup.inc:108
-#, php-format
-msgid "Support for '%s' enabled"
-msgstr "Unterstützung für '%s' aktiviert"
-
-#: include/functions_setup.inc:118
-#, php-format
-msgid "Required objectclass '%s' is not present in LDAP setup"
-msgstr "Die benötigte Objektklasse '%s' ist nicht im LDAP vorhanden"
-
-#: include/functions_setup.inc:122
-#, php-format
-msgid "Required objectclass '%s' does not have version %s"
-msgstr "Die benötigte Objektklasse '%s' hat nicht die Version %s"
-
-#: include/functions_setup.inc:133
-msgid "SAMBA 3 support disabled, no schema seems to be installed"
-msgstr ""
-"SAMBA 3.x Unterstützung wurde deaktiviert, kein passendes Schema installiert"
-
-#: include/functions_setup.inc:138
-msgid "SAMBA 3 support enabled"
-msgstr "SAMBA 3 Unterstützung aktiviert"
-
-#: include/functions_setup.inc:143
-msgid "SAMBA 2 support disabled, no schema seems to be installed"
-msgstr ""
-"SAMBA 2.x Unterstützung wurde deaktiviert, kein passendes Schema installiert"
-
-#: include/functions_setup.inc:148
-msgid "SAMBA 2 support enabled"
-msgstr "SAMBA 2 Unterstützung aktiviert"
-
-#: include/functions_setup.inc:154
-msgid "Support for pureftp disabled, no schema seems to be installed"
-msgstr ""
-"Die Unterstützung für PureFTPd wurde deaktiviert, das passende Schema ist "
-"nicht installiert"
-
-#: include/functions_setup.inc:159
-msgid "Support for pureftp enabled"
-msgstr "Unterstützung für PureFTPd aktiviert"
-
-#: include/functions_setup.inc:164
-msgid "Support for WebDAV disabled, no schema seems to be installed"
-msgstr ""
-"Die Unterstützung für WebDAV wurde deaktiviert, das passende Schema ist "
-"nicht installiert."
-
-#: include/functions_setup.inc:169
-msgid "Support for WebDAV enabled"
-msgstr "Unterstützung für WebDAV aktiviert"
-
-#: include/functions_setup.inc:174
-msgid "Support for phpgroupware disabled, no schema seems to be installed"
-msgstr ""
-"Die Unterstützung für PHPGroupware wurde deaktiviert, das passende Schema "
-"ist nicht installiert."
-
-#: include/functions_setup.inc:179
-msgid "Support for phpgroupware enabled"
-msgstr "Unterstützung für PHPGroupware aktiviert"
-
-#: include/functions_setup.inc:184
-msgid "Support for trustAccount disabled, no schema seems to be installed"
-msgstr ""
-"Die Unterstützung für Vertrauensstellungen ist deaktiviert, es wurde kein "
-"passendes Schema gefunden"
-
-#: include/functions_setup.inc:189
-msgid "Support for trustAccount enabled"
-msgstr "Unterstützung für Vertrauensstellungen aktiviert"
-
-#: include/functions_setup.inc:194
-msgid "Support for gofon disabled, no schema seems to be installed"
-msgstr ""
-"Die Unterstützung für goFon wurde deaktiviert, das passende Schema ist nicht "
-"installiert."
-
-#: include/functions_setup.inc:199
-msgid "Support for gofon enabled"
-msgstr "Unterstützung für GOfon aktiviert"
-
-#: include/functions_setup.inc:204
-msgid "Support for nagios disabled, no schema seems to be installed"
-msgstr ""
-"Die Unterstützung für Nagios wurde deaktiviert, das passende Schema ist "
-"nicht installiert."
-
-#: include/functions_setup.inc:209
-msgid "Support for nagios enabled"
-msgstr "Unterstützung für Nagios aktiviert"
-
-#: include/functions_setup.inc:214
-msgid "Support for netatalk disabled, no schema seems to be installed"
-msgstr ""
-"Die Unterstützung für Netatalk wurde deaktiviert, das passende Schema ist "
-"nicht installiert."
-
-#: include/functions_setup.inc:219
-msgid "Support for netatalk enabled"
-msgstr "Unterstützung für Netatalk aktiviert"
-
-#: include/functions_setup.inc:229
-msgid ""
-"Support for Kolab disabled, no schema seems to be installed, setting mail-"
-"method to cyrus"
-msgstr ""
-"Die Unterstützung für Kolab wurde deaktiviert, das passende Schema ist nicht "
-"installiert. Setze Mail Methode auf cyrus."
-
-#: include/functions_setup.inc:236
-msgid "Support for Kolab enabled"
-msgstr "Unterstützung für Kolab aktiviert"
-
-#: include/functions_setup.inc:257
-msgid "Ignored"
-msgstr "Ignoriert"
-
-#: include/functions_setup.inc:259 setup/class_setupStep_Migrate.inc:318
-#: setup/class_setupStep_Migrate.inc:468 setup/class_setupStep_Migrate.inc:481
-#: setup/class_setupStep_Migrate.inc:765
-#: setup/class_setupStep_Migrate.inc:1417
-#: setup/class_setupStep_Migrate.inc:1430
-msgid "Failed"
-msgstr "Fehlgeschlagen"
-
-#: include/functions_setup.inc:276
-msgid "PHP setup inspection"
-msgstr "Überprüfung des PHP-Setups"
-
-#: include/functions_setup.inc:278
-msgid "Checking for PHP version (>=4.1.0)"
-msgstr "Prüfe auf eine PHP-Version (>=4.1.0)"
-
-#: include/functions_setup.inc:279
-msgid ""
-"PHP must be of version 4.1.0 or above for some functions and known bugs in "
-"PHP language."
-msgstr ""
-"PHP muß mindestens in der Version 4.1.0 vorliegen. GOsa verwendet einige "
-"Funktionen, die in früheren Versionen fehlerhaft oder gar nicht "
-"implementiert waren."
-
-#: include/functions_setup.inc:282
-msgid "Checking if register_globals is set to 'off'"
-msgstr "Prüfe ob register_globals ausgeschaltet ist"
-
-#: include/functions_setup.inc:283
-msgid ""
-"register_globals is a PHP mechanism to register all global varibales to be "
-"accessible from scripts without changing the scope. This may be a security "
-"risk. GOsa will run in both modes."
-msgstr ""
-"register_globals ist ein PHP-Mechanismus, welcher alle globalen Variablen "
-"für Skripte direkt zugänglich macht. Dies kann ein Sicherheitsrisiko sein. "
-"GOsa funktioniert mit beiden möglichen Einstellungen."
-
-#: include/functions_setup.inc:286
-msgid "PHP session.gc_maxlifetime (>= 86400 seconds)."
-msgstr "PHP session.gc_maxlifetime (>= 86400 Sekunden)."
-
-#: include/functions_setup.inc:287
-msgid ""
-"PHP uses this value for the garbage collector to delete old sessions, "
-"setting this value to one day will prevent loosing session and cookie  "
-"before they really timeout."
-msgstr ""
-"PHP verwendet diesen Wert für den Garbage Collector um alte Sitzungen zu "
-"entfernen. Wenn Sie diesen Wert auf einen Tag setzen, wird dies vermeiden, "
-"dass Sie die Sitzung und den zugehörigen Cookie verlieren, bevor diese "
-"tatsächlich ihre Gültigkeit verlieren."
-
-#: include/functions_setup.inc:290
-msgid "Checking for ldap module"
-msgstr "Suche LDAP-Modul"
-
-#: include/functions_setup.inc:291
-msgid "This is the main module used by GOsa and therefore really required."
-msgstr ""
-"GOsa benötigt dieses Modul für LDAP-Zugriffe, daher ist es unabkömmlich."
-
-#: include/functions_setup.inc:294
-msgid "Checking for XML functions"
-msgstr "Prüfe auf XML-Funktionen"
-
-#: include/functions_setup.inc:295
-msgid "XML functions are required to parse the configuration file."
-msgstr ""
-"Die XML-Funktionen werden benötigt, um die Konfigurationsdatei zu lesen."
-
-#: include/functions_setup.inc:298 setup/class_setupStep_Checks.inc:80
-msgid "Checking for gettext support"
-msgstr "Prüfe auf gettext-Erweiterung"
-
-#: include/functions_setup.inc:299
-msgid "Gettext support is required for internationalized GOsa."
-msgstr ""
-"Gettext-Unterstützung wird für Übersetzungen benötigt (Anmerkung des "
-"Übersetzers: Da Sie diese Meldung in deutsch lesen können, ist davon "
-"auszugehen, daß ihr PHP gettext-fähig ist)."
-
-#: include/functions_setup.inc:302 setup/class_setupStep_Checks.inc:88
-msgid "Checking for iconv support"
-msgstr "Prüfe auf iconv-Erweiterung"
-
-#: include/functions_setup.inc:303
-msgid ""
-"This module is used by GOsa to convert samba munged dial informations and is "
-"therefore required."
-msgstr ""
-"Dieses Modul wird von GOsa benutzt, um Informationen der samba-Erweiterung "
-"zu verarbeiten und wird daher benötigt."
-
-#: include/functions_setup.inc:306
-msgid "Checking for mhash module"
-msgstr "Suche mhash-Modul"
-
-#: include/functions_setup.inc:307
-msgid ""
-"To use SSHA encryption, you'll need this module. If you are just using crypt "
-"or md5 encryption, ignore this message. GOsa will run without it."
-msgstr ""
-"Bei der Verwendung von speziellen Passwort-Verschlüsselungen (wie z.B. SSHA) "
-"wird dieses Modul benötigt. GOsa funktioniert auch ohne dieses Modul."
-
-#: include/functions_setup.inc:310
-msgid "Checking for imap module"
-msgstr "Suche IMAP-Modul"
-
-#: include/functions_setup.inc:311
-msgid ""
-"The IMAP module is needed to communicate with the IMAP server. It gets "
-"status informations, creates and deletes mail users."
-msgstr ""
-"Das IMAP-Modul wird für die Kommunikation mit ihrem IMAP-Server benötigt. "
-"Dort können Benutzer verwaltet und Statusinformationen bezogen werden."
-
-#: include/functions_setup.inc:314
-msgid "Checking for getacl in imap"
-msgstr "Prüfe auf getacl im IMAP-Modul"
-
-#: include/functions_setup.inc:315
-msgid ""
-"The getacl support is needed for shared folder permissions. The standard "
-"IMAP module is not capable of reading acl's. You need a recend PHP version "
-"for this feature."
-msgstr ""
-"Diese Funktion wird benötigt um Zugriffsrechte von Geteilten Ordnern zu "
-"verwalten. Das normale IMAP-Modul unterstützt das Auslesen dieser "
-"Zugriffsregeln nicht. Sie benötigen entweder ein angepasstes oder ein recht "
-"aktuelles PHP um diese Funktion nutzen zu können."
-
-#: include/functions_setup.inc:318
-msgid "Checking for mysql module"
-msgstr "Suche MySQL-Modul"
-
-#: include/functions_setup.inc:319
-msgid "MySQL support is needed for reading GOfax reports from databases."
-msgstr ""
-"Das MySQL-Modul wird benötigt, um Fax-Berichte anzuzeigen und auszuwerten."
-
-#: include/functions_setup.inc:322
-msgid "Checking for cups module"
-msgstr "Suche CUPS-Modul"
-
-#: include/functions_setup.inc:323
-msgid ""
-"In order to read available printers from IPP protocol instead of printcap "
-"files, you've to install the CUPS module."
-msgstr ""
-"Falls Sie eine Liste der verfügbaren Drucker über IPP auslesen möchten, "
-"benötigen Sie dieses Modul. Anderenfalls wird die printcap-Datei ausgewertet."
-
-#: include/functions_setup.inc:326
-msgid "Checking for kadm5 module"
-msgstr "Suche kadm5-Modul"
-
-#: include/functions_setup.inc:327 setup/class_setupStep_Checks.inc:129
-msgid ""
-"Managing users in kerberos requires the kadm5 module which is downloadable "
-"via PEAR network."
-msgstr ""
-"Um Benutzer auch im Kerberos verwalten zu können, muß das kadm5-Modul "
-"installiert sein. Sie können es über das PEAR-Netzwerk beziehen."
-
-#: include/functions_setup.inc:330
-msgid "Checking for snmp Module"
-msgstr "Suche SNMP-Modul"
-
-#: include/functions_setup.inc:331
-msgid ""
-"Simple Network Management Protocol (SNMP) is required for client monitoring."
-msgstr ""
-"Simple Network Management Protocol (SNMP) wird zur Client-Überwachung "
-"benötigt."
-
-#: include/functions_setup.inc:368
-msgid "PHP detailed function inspection"
-msgstr "Detaillierte Überprüfung der verwendeten PHP-Funktionen"
-
-#: include/functions_setup.inc:372
-#, php-format
-msgid "Checking for function %s"
-msgstr "Prüfe Funktion %s"
-
-#: include/functions_setup.inc:373
-#, php-format
-msgid ""
-"The function %s is used by GOsa. There is no information if it's optional or "
-"required yet."
-msgstr ""
-"Die Funktion '%s' wird von GOsa verwendet. Es gibt derzeit noch keine "
-"Information, ob die Funktion optional ist oder zwingend benötigt wird."
-
-#: include/functions_setup.inc:384
-msgid "Checking for some additional programms"
-msgstr "Suche einige zusätzliche Programme"
-
-#: include/functions_setup.inc:395
-msgid "Checking for GraphicsMagick (>=1.1.2)"
-msgstr "Suche nach GraphicsMagick (>=1.1.2)"
-
-#: include/functions_setup.inc:396
-msgid ""
-"GraphicsMagick is used to convert user supplied images to fit the suggested "
-"size and the unified JPEG format."
-msgstr ""
-"GraphicsMagick wird verwendet, um vom Benutzer hochgeladene Bilder auf die "
-"passende Größe zu skalieren und in das einheitliche JPEG-Format zu "
-"konvertieren."
-
-#: include/functions_setup.inc:399
-msgid "Checking for ImageMagick (>=5.4.0)"
-msgstr "Suche nach ImageMagick (>=5.4.0)"
-
-#: include/functions_setup.inc:400
-msgid ""
-"ImageMagick is used to convert user supplied images to fit the suggested "
-"size and the unified JPEG format."
-msgstr ""
-"ImageMagick wird für die Konvertierung von hochgeladenen Bildern verwendet."
-
-#: include/functions_setup.inc:404
-msgid "Checking imagick module for PHP"
-msgstr "Prüfe auf imagick Erweiterung"
-
-#: include/functions_setup.inc:405
-msgid ""
-"Imagick is used to convert user supplied images to fit the suggested size "
-"and the unified JPEG format from PHP script."
-msgstr ""
-"ImageMagick wird für die Konvertierung von hochgeladenen Bildern verwendet."
-
-#: include/functions_setup.inc:412 setup/class_setupStep_Checks.inc:154
-msgid "Checking for fping utility"
-msgstr "Suche fping-Programm"
-
-#: include/functions_setup.inc:413
-msgid ""
-"The fping utility is only used if you've got a thin client based terminal "
-"environment running."
-msgstr ""
-"Fping wird benötigt, um den Status von Thin-Client basierenden Terminal zu "
-"überwachen."
-
-#: include/functions_setup.inc:428
-msgid "Checking for a way to generate LM/NT password hashes"
-msgstr "Suche einen Weg, um LM/NT Passwort-Hashes zu generieren"
-
-#: include/functions_setup.inc:429
-msgid ""
-"In order to use SAMBA 2/3, you've to install some additional packages to "
-"generate password hashes."
-msgstr ""
-"Um Samba 2.x/3.x in Verbindung mit LDAP nutzen zu können, wird ein externes "
-"Programm benötigt, welches die Passwort-Hashes generieren kann."
-
-#: include/functions_setup.inc:442
-msgid "php.ini check -> session.auto_register"
-msgstr "php.ini Überprüfung -> session.auto_register"
-
-#: include/functions_setup.inc:443
-msgid ""
-"In Order to use GOsa without any trouble, the session.auto_register option "
-"in your php.ini must be set to 'Off'."
-msgstr ""
-"Um GOsa fehlerfrei benutzen zu können, muß die Option session.auto_register "
-"in Ihrer php.ini auf 'off' stehen."
-
-#: include/functions_setup.inc:446
-msgid "php.ini check -> implicit_flush"
-msgstr "php.ini Überprüfung -> implicit_flush"
-
-#: include/functions_setup.inc:447
-msgid ""
-"This option influences the Output handling. Turn this Option off, to "
-"increase performance."
-msgstr ""
-"Diese Einstellung beeinflusst die Verarbeitung der Ausgabe. Stellen Sie "
-"diese auf 'off', um die Leistung zu erhöhen."
-
-#: include/functions_setup.inc:454
-msgid "php.ini check -> max_execution_time"
-msgstr "php.ini Überprüfung -> max_execution_time"
-
-#: include/functions_setup.inc:455
-msgid ""
-"The Execution time should be at least 30 seconds, because some actions may "
-"consume more time."
-msgstr ""
-"Die Ausführungszeit sollte mindestens 30 Sekunden betragen, da einige "
-"Aktionen viel Zeit in Anspruch nehmen."
-
-#: include/functions_setup.inc:462
-msgid "php.ini check -> memory_limit"
-msgstr "php.ini Überprüfung -> memory_limit"
-
-#: include/functions_setup.inc:463
-msgid ""
-"GOsa needs at least 16MB of memory, less will cause unpredictable errors! "
-"Increase it for larger setups."
-msgstr ""
-"GOsa benötigt mindestens 16MB Speicher, weniger Speicher würde "
-"unvorhersehbare Probleme verursachen! Bei größeren Installationen sollte "
-"dieser Wert noch erweitert werden."
-
-#: include/functions_setup.inc:467
-msgid "php.ini check -> expose_php"
-msgstr "php.ini Überprüfung -> expose_php"
-
-#: include/functions_setup.inc:468
-msgid ""
-"Increase the server security by setting expose_php to 'off'. PHP won't send "
-"any Information about the server you are running in this case."
-msgstr ""
-"Erhöhen Sie die Sicherheit Ihres Servers, indem Sie expose_php auf 'off' "
-"setzen. PHP wird in dieser Einstellung keine Informationen über Ihren "
-"laufenden Server senden."
-
-#: include/functions_setup.inc:472
-msgid "php.ini check -> magic_quotes_gpc"
-msgstr "php.ini Überprüfung -> magic_quotes_gpc"
-
-#: include/functions_setup.inc:473 setup/class_setupStep_Checks.inc:243
-msgid ""
-"Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
-"escape all quotes in strings in this case."
-msgstr ""
-"Erhöhen Sie die Sicherheit des Server, indem sie magic_quotes_gpc auf 'on' "
-"stellen. PHP wird in dieser Einstellung alle 'quotes' in 'strings' umwandeln."
-
-#: include/functions_setup.inc:720 include/functions_setup.inc:831
-msgid ""
-"Can't connect to the specified LDAP server! Please make sure that is "
-"reachable for GOsa."
-msgstr ""
-"Kann den angegebenen LDAP-Server nicht erreichen! Bitte stellen Sie sicher, "
-"dass er für GOsa erreichbar ist."
-
-#: include/functions_setup.inc:734
-msgid ""
-"Can't bind to the specified LDAP server! Please make sure that it is "
-"reachable for GOsa."
-msgstr ""
-"Die Anmeldung am LDAP-Server ist fehlgeschlagen. Bitte stellen Sie sicher, "
-"dass der Server für GOsa erreichbar ist."
-
-#: include/functions_setup.inc:792
-#, php-format
-msgid ""
-"You're missing the required attribute '%s' from this formular. Please "
-"complete!"
-msgstr ""
-"Das Attribut '%s' ist in diesem Formular nicht angegeben. Bitte "
-"vervollständigen Sie Ihre Eingaben!"
-
-#: include/functions_setup.inc:836
-msgid "Can't set ldap protocol version 3."
-msgstr "Kann LDAP Protokoll Version 3 nicht setzen."
-
-#: include/functions_setup.inc:841
-msgid ""
-"Could not bind to the specified LDAP server! Please make sure that it is "
-"reachable for GOsa."
-msgstr ""
-"Die Anmeldung am LDAP-Server ist fehlgeschlagen! Bitte stellen Sie sicher, "
-"dass der Server für GOsa erreichbar ist."
-
-#: include/functions_setup.inc:924
-msgid ""
-"Can't read schema informations, GOsa needs to know your schema setup. Please "
-"verify that it is readable for GOsa"
-msgstr ""
-"Kann von GOsa benötigte Schema-Informationen nicht lesen. Bitte stellen Sie "
-"sicher, dass diese lesbar sind."
-
-#: include/functions_setup.inc:933
-#, php-format
-msgid "Can't log into LDAP server. Reason was: %s."
-msgstr ""
-"Die Anmeldung am LDAP-Server ist fehlgeschlagen. Die Meldung lautet '%s'."
-
-#: include/functions_setup.inc:1112
-msgid ""
-"User and/or group could not be created, please check your configuration "
-"twice !"
-msgstr ""
-"Benutzer und/oder Gruppe konnte nicht erstellt werden, bitte überprüfen Sie "
-"Ihre Konfiguration!"
-
 #: include/php_setup.inc:71
 msgid "Generating this page caused the PHP interpreter to raise some errors!"
 msgstr ""
@@ -14938,29 +14352,25 @@ msgstr "Die Kommunikation mit der Kerberos-Datenbank ist fehlgeschlagen!"
 
 #: include/class_password-methods-kerberos.inc:60
 msgid "Changing password in kerberos database failed!"
-msgstr ""
-"Die Änderung des Passworts in der Kerberos-Datenbank ist fehlgeschlagen!"
+msgstr "Die Änderung des Passworts in der Kerberos-Datenbank ist fehlgeschlagen!"
 
 #: include/class_plugin.inc:404
 #, php-format
-msgid ""
-"Command '%s', specified as CHECK hook for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as CHECK hook for plugin '%s' doesn't seem to exist."
 msgstr ""
 "Das in CHECK angegebene Kommando '%s' (Modul '%s') scheint nicht zu "
 "existieren."
 
 #: include/class_plugin.inc:555
 #, php-format
-msgid ""
-"Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
 msgstr ""
 "Das in POSTCREATE angegebene Kommando '%s' (Modul '%s') scheint nicht zu "
 "existieren."
 
 #: include/class_plugin.inc:623
 #, php-format
-msgid ""
-"Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
 msgstr ""
 "Das in POSTREMOVE angegebene Kommando '%s' (Modul '%s') scheint nicht zu "
 "existieren."
@@ -14985,6 +14395,7 @@ msgid "Removing tag from object '%s'"
 msgstr "Entferne Markierung von Objekt '%s'"
 
 #: include/sieve/class_sieveElement_Redirect.inc:24
+#: setup/class_setupStep_Feedback.inc:179
 msgid "Please specify a valid email address."
 msgstr "Bitte geben Sie eine gültige E-Mail-Adresse ein!"
 
@@ -15008,8 +14419,7 @@ msgstr "Syntaxprüfung erfolgreich"
 
 #: include/sieve/class_sieveManagement.inc:161
 #, php-format
-msgid ""
-"The specified mail server '%s' does not exist within the GOsa configuration."
+msgid "The specified mail server '%s' does not exist within the GOsa configuration."
 msgstr "Der angegebene Mail-Server '%s' existiert nicht in der GOsa-Konfiguration."
 
 #: include/sieve/class_sieveManagement.inc:206
@@ -15031,13 +14441,14 @@ msgstr "Der angegebene Name wird bereits verwendet."
 #: include/sieve/class_sieveManagement.inc:317
 #, php-format
 msgid "Can't activate sieve script on server. Server says '%s'."
-msgstr "Kann das SIEVE-Skript auf dem Server nicht aktivieren. Die Meldung lautet '%s'."
+msgstr ""
+"Kann das SIEVE-Skript auf dem Server nicht aktivieren. Die Meldung lautet '%"
+"s'."
 
 #: include/sieve/class_sieveManagement.inc:360
 #, php-format
 msgid "Can't remove sieve script from server. Server says '%s'."
-msgstr ""
-"Kann das Sieve-Skript nicht entfernen. Die Meldung lautet '%s'."
+msgstr "Kann das Sieve-Skript nicht entfernen. Die Meldung lautet '%s'."
 
 #: include/sieve/class_sieveManagement.inc:372
 #, php-format
@@ -15059,7 +14470,9 @@ msgstr "Die angebene Datei scheint leer zu sein."
 
 #: include/sieve/class_sieveManagement.inc:444
 msgid "Upload failed. The temporary file can't be accessed."
-msgstr "Das Hochladen schlug fehl. Auf die temporäre Datei konnte nicht zugegriffen werden."
+msgstr ""
+"Das Hochladen schlug fehl. Auf die temporäre Datei konnte nicht zugegriffen "
+"werden."
 
 #: include/sieve/class_sieveManagement.inc:506
 #: include/sieve/class_sieveManagement.inc:509
@@ -15318,8 +14731,9 @@ msgstr "Sieve-Skript importieren"
 msgid ""
 "Please select the sieve script you want to import. Use the import button to "
 "import the script or the cancel button to abort."
-msgstr "Bitte wählen Sie das zu importierende Sieve-Skript. Verwenden Sie den Import-Knopf,"
-" um das Skript zu importieren oder den Abbrechen-Knopf zum Abbrechen."
+msgstr ""
+"Bitte wählen Sie das zu importierende Sieve-Skript. Verwenden Sie den Import-"
+"Knopf, um das Skript zu importieren oder den Abbrechen-Knopf zum Abbrechen."
 
 #: include/sieve/templates/import_script.tpl:5
 msgid "Script to import"
@@ -15426,13 +14840,15 @@ msgstr "Liste der Sieve-Skripte"
 msgid ""
 "Connection to the sieve server could not be established, the "
 "authentification attribute is empty."
-msgstr "Die Verbindung zum Sieve-Server konnte nicht aufgebaut werden, "
-"das Authentifizierungs-Attribut ist leer."
+msgstr ""
+"Die Verbindung zum Sieve-Server konnte nicht aufgebaut werden, das "
+"Authentifizierungs-Attribut ist leer."
 
 #: include/sieve/templates/management.tpl:6
-msgid ""
-"Please verfiy that the attributes uid and mail are not empty and try again."
-msgstr "Bitte prüfen Sie, dass die Attribute uid und mail nicht leer sind und versuchen Sie es erneut."
+msgid "Please verfiy that the attributes uid and mail are not empty and try again."
+msgstr ""
+"Bitte prüfen Sie, dass die Attribute uid und mail nicht leer sind und "
+"versuchen Sie es erneut."
 
 #: include/sieve/templates/management.tpl:12
 msgid "Connection to the sieve server could not be established."
@@ -15446,8 +14862,9 @@ msgstr "Möglicherweise wurde das Sieve-Konto bisher noch nicht erstellt."
 msgid ""
 "Be careful. All your changes will be saved directly to sieve, if you use the "
 "save button below."
-msgstr "Bitte seien Sie vorsichtig. Alle Änderungen werden unverzüglich nach Sieve übernommen, wenn Sie den "
-"'Speichern'-Knopf drücken."
+msgstr ""
+"Bitte seien Sie vorsichtig. Alle Änderungen werden unverzüglich nach Sieve "
+"übernommen, wenn Sie den 'Speichern'-Knopf drücken."
 
 #: include/sieve/templates/management.tpl:22
 msgid "Create new script"
@@ -15461,7 +14878,7 @@ msgstr "Ein neues Element einfügen"
 msgid "Please select the type of element you want to add"
 msgstr "Bitte wählen Sie den Typ des Elements, das Sie einfügen möchten"
 
-#: include/sieve/templates/add_element.tpl:13 setup/setup_migrate.tpl:192
+#: include/sieve/templates/add_element.tpl:13 setup/setup_migrate.tpl:198
 msgid "Abort"
 msgstr "Abbrechen"
 
@@ -15485,7 +14902,9 @@ msgstr "Operator"
 msgid ""
 "Please enter the name for the new script below. Script names must consist of "
 "lower case characters only."
-msgstr "Bitte geben Sie den Namen für das neue Skript unten ein. Skript-Namen dürfen ausschliesslich aus Kleinbuchstaben bestehen."
+msgstr ""
+"Bitte geben Sie den Namen für das neue Skript unten ein. Skript-Namen dürfen "
+"ausschliesslich aus Kleinbuchstaben bestehen."
 
 #: include/sieve/templates/create_script.tpl:8
 msgid "Script name"
@@ -15500,8 +14919,10 @@ msgid ""
 "Best thing to do before performing this action would be to save the current "
 "script in a file. So - if you've done so - press 'Delete' to continue or "
 "'Cancel' to abort."
-msgstr "Das Beste vor der Ausführung dieser Aktion ist es, das momentane Skript in eine Datei zu speichern. Wenn Sie dies getan haben,"
-" drücken Sie auf 'Entfernen' um fortzufahren oder 'Abbrechen' zum Abbrechen."
+msgstr ""
+"Das Beste vor der Ausführung dieser Aktion ist es, das momentane Skript in "
+"eine Datei zu speichern. Wenn Sie dies getan haben, drücken Sie auf "
+"'Entfernen' um fortzufahren oder 'Abbrechen' zum Abbrechen."
 
 #: include/sieve/templates/element_fileinto.tpl:4
 msgid "Move mail into folder"
@@ -15541,7 +14962,9 @@ msgstr "Hier steht Ihr Kommentar"
 
 #: include/sieve/class_sieveElement_Reject.inc:21
 msgid "Invalid character found, quotes are not allowed in a reject message."
-msgstr "Ungültiges Zeichen entdeckt, Anführungszeichen sind in einer Ablehnungs-Nachricht nicht erlaubt."
+msgstr ""
+"Ungültiges Zeichen entdeckt, Anführungszeichen sind in einer Ablehnungs-"
+"Nachricht nicht erlaubt."
 
 #: include/sieve/class_sieveElement_Reject.inc:37
 msgid "Your reject text here"
@@ -15655,15 +15078,16 @@ msgid "Please specify a valid operator."
 msgstr "Bitte geben Sie einen gültigen Operator an."
 
 #: include/sieve/class_sieveElement_If.inc:654
-msgid ""
-"Invalid character found in address attribute. Quotes are not allowed here."
-msgstr "Ungültiges Zeichen im Adress-Attribut gefunden. Anführungszeichen sind dort nicht erlaubt."
+msgid "Invalid character found in address attribute. Quotes are not allowed here."
+msgstr ""
+"Ungültiges Zeichen im Adress-Attribut gefunden. Anführungszeichen sind dort "
+"nicht erlaubt."
 
 #: include/sieve/class_sieveElement_If.inc:669
-msgid ""
-"Invalid character found in value attribute. Quotes are not allowed here."
+msgid "Invalid character found in value attribute. Quotes are not allowed here."
 msgstr ""
-"Ungültiges Zeichen im Wert-Attribut gefunden. Anführungszeichen sind dort nicht erlaubt."
+"Ungültiges Zeichen im Wert-Attribut gefunden. Anführungszeichen sind dort "
+"nicht erlaubt."
 
 #: include/sieve/class_sieveElement_If.inc:727
 #: include/sieve/class_sieveElement_If.inc:1060
@@ -15763,7 +15187,7 @@ msgid "Language setup"
 msgstr "Sprachen-Einrichtung"
 
 #: setup/class_setupStep_Language.inc:42
-msgid "This step is allows you to select your prefered language."
+msgid "This step allows you to select your preferred language."
 msgstr "Dieser Schritt ermöglicht es Ihnen, Ihre bevorzugte Sprache zu wählen."
 
 #: setup/class_setupStep_Language.inc:47
@@ -15868,10 +15292,10 @@ msgid ""
 "interfaces to users mailboxes and general handling    for quotas. You can "
 "choose the dummy plugin to leave all your mail settings untouched."
 msgstr ""
-"GOsa verfügt über modulare Unterstützung für verschiedene Zustellungs-Methoden. "
-"Diese Methoden stellen Schnittstellen für Benutzer-Postfächer und die allgemeine "
-"Verwaltung von Kontingenten bereit. Wählen sie 'dummy', um all Ihre Mail-Einstellungen unberührt "
-"zu lassen."
+"GOsa verfügt über modulare Unterstützung für verschiedene Zustellungs-"
+"Methoden. Diese Methoden stellen Schnittstellen für Benutzer-Postfächer und "
+"die allgemeine Verwaltung von Kontingenten bereit. Wählen sie 'dummy', um "
+"all Ihre Mail-Einstellungen unberührt zu lassen."
 
 #: setup/class_setupStep_Config1.inc:73 setup/class_setupStep_Config1.inc:74
 msgid "GOsa settings 1/3"
@@ -15931,31 +15355,31 @@ msgstr "Schema-Prüfung war erfolgreich"
 msgid "Schema check failed"
 msgstr "Schemaprüfung fehlgeschlagen"
 
-#: setup/class_setupStep_Feedback.inc:92
+#: setup/class_setupStep_Feedback.inc:91
 msgid "UNIX accounts/groups"
 msgstr "UNIX Konten/Gruppen"
 
-#: setup/class_setupStep_Feedback.inc:94
+#: setup/class_setupStep_Feedback.inc:93
 msgid "Samba management"
 msgstr "Samba Verwaltung"
 
-#: setup/class_setupStep_Feedback.inc:96
+#: setup/class_setupStep_Feedback.inc:95
 msgid "Mailsystem management"
 msgstr "Mailsystem Verwaltung"
 
-#: setup/class_setupStep_Feedback.inc:98
+#: setup/class_setupStep_Feedback.inc:97
 msgid "FAX system administration"
 msgstr "Fax-System Verwaltung"
 
-#: setup/class_setupStep_Feedback.inc:100
+#: setup/class_setupStep_Feedback.inc:99
 msgid "Asterisk administration"
 msgstr "Asterisk Verwaltung"
 
-#: setup/class_setupStep_Feedback.inc:102
-msgid "System invetory"
+#: setup/class_setupStep_Feedback.inc:101
+msgid "System inventory"
 msgstr "System Inventar"
 
-#: setup/class_setupStep_Feedback.inc:104
+#: setup/class_setupStep_Feedback.inc:103
 msgid "System-/Configmanagement"
 msgstr "System-/Konfigurationsverwaltung"
 
@@ -15968,18 +15392,39 @@ msgstr "Benachrichtigung und Rückmeldung"
 msgid "Get notifications or send feedback"
 msgstr "Erhalte Benachrichtigung oder sende Rückmeldung"
 
-#: setup/class_setupStep_Feedback.inc:177
-msgid "Could not send feedback."
-msgstr "Konnte Rückmeldung nicht senden."
+#: setup/class_setupStep_Feedback.inc:140
+#, php-format
+msgid ""
+"Could not connect to feedback server (%s). There is possibly no connection "
+"to the internet."
+msgstr "Kann das Formular nicht an den Server %s verschicken. Prüfen Sie die Internet-Konnektivität."
+
+#: setup/class_setupStep_Feedback.inc:147
+msgid ""
+"Error while sending your feedback. The service is possible temporary "
+"unavailable"
+msgstr "Beim Versenden der Daten ist ein Fehler aufgetreten. Der Dienst ist wahrscheinlich momentan nicht verfügbar."
+
+#: setup/class_setupStep_Feedback.inc:149
+msgid "Feedback sucessfully send"
+msgstr "Daten erfolgreich versendet"
+
+#: setup/class_setupStep_Feedback.inc:183
+msgid ""
+"You should have enabled at least one option, to subscribe or send your "
+"feedback."
+msgstr "Sie solten mindestens eine Option aktiviert haben um Feedback zu senden oder die Mailingliste zu nutzen."
 
 #: setup/setup_migrate.tpl:5
 msgid ""
 "During the LDAP inspection, we're going to check for several common pitfalls "
 "that may occur when migration to GOsa base LDAP administration. You may want "
 "to fix the problems below, in order to provide smooth services."
-msgstr "Während der LDAP-Inspektion, werden wir auf gängige Fallstricke prüfen, die bei der Migration auf"
-" eine GOsa-basierte LDAP-Administration auftreten können. Sie möchten wahrscheinlich die Probleme unten beheben, "
-"um einen reibungslosen Betrieb zu ermöglichen."
+msgstr ""
+"Während der LDAP-Inspektion, werden wir auf gängige Fallstricke prüfen, die "
+"bei der Migration auf eine GOsa-basierte LDAP-Administration auftreten "
+"können. Sie möchten wahrscheinlich die Probleme unten beheben, um einen "
+"reibungslosen Betrieb zu ermöglichen."
 
 #: setup/setup_migrate.tpl:33
 msgid "Check again"
@@ -15987,148 +15432,173 @@ msgstr "Nochmal prüfen"
 
 #: setup/setup_migrate.tpl:37
 msgid "Move windows workstations into a valid windows workstation department"
-msgstr "Verschiebe Windows-Arbeitsstationen in eine gültige Windows-Arbeitsstations-Abteilung"
+msgstr ""
+"Verschiebe Windows-Arbeitsstationen in eine gültige Windows-Arbeitsstations-"
+"Abteilung"
 
 #: setup/setup_migrate.tpl:39
 msgid ""
 "This dialog allows you to move the displayed windows workstations into a "
 "valid department"
-msgstr "Dieser Dialog ermöglicht es Ihnen, die angezeigten Windows Arbeitsstationen in eine gültige Abteilung zu verschieben"
+msgstr ""
+"Dieser Dialog ermöglicht es Ihnen, die angezeigten Windows Arbeitsstationen "
+"in eine gültige Abteilung zu verschieben"
 
 #: setup/setup_migrate.tpl:41
 msgid ""
 "Be careful with this tool, there may be references pointing to this "
 "workstations that can't be migrated."
-msgstr "Seien Sie vorsichtig mit diesem Werkzeug, da es möglich ist, dass es Referenzen auf die Arbeitsstationen gibt, "
-"die nicht migriert werden können."
+msgstr ""
+"Seien Sie vorsichtig mit diesem Werkzeug, da es möglich ist, dass es "
+"Referenzen auf die Arbeitsstationen gibt, die nicht migriert werden können."
 
-#: setup/setup_migrate.tpl:66
+#: setup/setup_migrate.tpl:64 setup/setup_migrate.tpl:121
+#: setup/setup_migrate.tpl:172 setup/setup_migrate.tpl:296
+#: setup/setup_migrate.tpl:352
+msgid "Select all"
+msgstr "Alles auswählen"
+
+#: setup/setup_migrate.tpl:65 setup/setup_migrate.tpl:122
+#: setup/setup_migrate.tpl:173 setup/setup_migrate.tpl:297
+#: setup/setup_migrate.tpl:353
+msgid "Select none"
+msgstr "Nichts auswählen"
+
+#: setup/setup_migrate.tpl:67
 msgid "Move selected windows workstations into the following GOsa department"
-msgstr "Verschiebe ausgewählte Windows-Arbeitsstationen in die folgende GOsa-Abteilung"
+msgstr ""
+"Verschiebe ausgewählte Windows-Arbeitsstationen in die folgende GOsa-"
+"Abteilung"
 
-#: setup/setup_migrate.tpl:71
+#: setup/setup_migrate.tpl:72
 msgid "Move selected workstations"
 msgstr "Verschiebe gewählte Arbeitsstationen"
 
-#: setup/setup_migrate.tpl:72
+#: setup/setup_migrate.tpl:73
 msgid "What will be done here"
 msgstr "Was wird hier gemacht"
 
-#: setup/setup_migrate.tpl:84
+#: setup/setup_migrate.tpl:85
 msgid "Move groups into configured group tree"
 msgstr "Verschiebe Gruppen in den konfigurierten Gruppen-Teilbaum"
 
-#: setup/setup_migrate.tpl:87
+#: setup/setup_migrate.tpl:88
 msgid ""
 "This dialog allows moving a couple of groups to the configured group tree. "
 "Doing this may straighten your LDAP service."
-msgstr "Dieser Dialog ermöglicht Ihnen das Verschieben einer Menge von Gruppen in den konfigurierten Gruppen-Teilbaum. Dieser Schritt wird"
-" Ihren LDAP-Dienst aufräumen."
+msgstr ""
+"Dieser Dialog ermöglicht Ihnen das Verschieben einer Menge von Gruppen in "
+"den konfigurierten Gruppen-Teilbaum. Dieser Schritt wird Ihren LDAP-Dienst "
+"aufräumen."
 
-#: setup/setup_migrate.tpl:90
+#: setup/setup_migrate.tpl:91
 msgid ""
 "Be careful with this option! There may be references pointing to these "
 "groups. The GOsa setup can't migrate references, so you may want to cancel "
 "the migration in this case in this case."
-msgstr "Seien Sie vorsichtig mit dieser Option! Es könnte Referenzen auf diese Gruppen geben. Die GOsa-Einrichtung "
-"kann Referenzen nicht migrieren, also möchten Sie in diesem Fall wahrscheinlich die Migration abbrechen."
+msgstr ""
+"Seien Sie vorsichtig mit dieser Option! Es könnte Referenzen auf diese "
+"Gruppen geben. Die GOsa-Einrichtung kann Referenzen nicht migrieren, also "
+"möchten Sie in diesem Fall wahrscheinlich die Migration abbrechen."
 
-#: setup/setup_migrate.tpl:93
+#: setup/setup_migrate.tpl:94
 msgid "Move selected groups into this group tree"
 msgstr "Verschiebe gewählte Gruppen in den konfigurierten Gruppen-Teilbaum"
 
-#: setup/setup_migrate.tpl:121 setup/setup_migrate.tpl:170
-#: setup/setup_migrate.tpl:312 setup/setup_migrate.tpl:366
+#: setup/setup_migrate.tpl:124 setup/setup_migrate.tpl:176
+#: setup/setup_migrate.tpl:300 setup/setup_migrate.tpl:356
 msgid "Hide changes"
 msgstr "Änderungen verbergen"
 
-#: setup/setup_migrate.tpl:123 setup/setup_migrate.tpl:172
-#: setup/setup_migrate.tpl:314 setup/setup_migrate.tpl:368
+#: setup/setup_migrate.tpl:126 setup/setup_migrate.tpl:178
+#: setup/setup_migrate.tpl:302 setup/setup_migrate.tpl:358
 msgid "Show changes"
 msgstr "Zeige Änderungen"
 
-#: setup/setup_migrate.tpl:136
+#: setup/setup_migrate.tpl:139
 msgid "Move users into configured user tree"
 msgstr "Verschiebe Benutzer in den konfigurieren Benutzer-Teilbaum"
 
-#: setup/setup_migrate.tpl:138
+#: setup/setup_migrate.tpl:141
 msgid ""
 "This dialog allows moving a couple of users to the configured user tree. "
 "Doing this may straighten your LDAP service."
-msgstr "Dieser Dialog ermöglicht Ihnen das Verschieben einer Menge von Benutzern in den konfigurierten Benutzer-Teilbaum. Dieser Schritt wird"
-" Ihren LDAP-Dienst aufräumen."
+msgstr ""
+"Dieser Dialog ermöglicht Ihnen das Verschieben einer Menge von Benutzern in "
+"den konfigurierten Benutzer-Teilbaum. Dieser Schritt wird Ihren LDAP-Dienst "
+"aufräumen."
 
-#: setup/setup_migrate.tpl:141
+#: setup/setup_migrate.tpl:144
 msgid ""
 "Be careful with this option! There may be references pointing to these "
 "users. The GOsa setup can't migrate references, so you may want to cancel "
-"the migration in this case in this case."
-msgstr "Seien Sie vorsichtig mit dieser Option! Es könnte Referenzen auf diese Benutzer geben. Die GOsa-Einrichtung "
-"kann Referenzen nicht migrieren, also möchten Sie in diesem Fall wahrscheinlich die Migration abbrechen."
+"the migration in this case."
+msgstr ""
+"Seien Sie vorsichtig mit dieser Option! Es könnte Referenzen auf diese "
+"Benutzer geben. Die GOsa-Einrichtung kann Referenzen nicht migrieren, also "
+"möchten Sie in diesem Fall wahrscheinlich die Migration abbrechen."
 
-#: setup/setup_migrate.tpl:144
+#: setup/setup_migrate.tpl:147
 msgid "Move selected users into this people tree"
 msgstr "Verschiebe gewählte Benutzer in diesen Benutzer-Teilbaum"
 
-#: setup/setup_migrate.tpl:191
+#: setup/setup_migrate.tpl:197
 msgid "Next"
 msgstr "Weiter"
 
-#: setup/setup_migrate.tpl:194
+#: setup/setup_migrate.tpl:200
 msgid "Create a new GOsa administrator account"
 msgstr "Neues GOsa Administrator-Konto anlegen"
 
-#: setup/setup_migrate.tpl:197
+#: setup/setup_migrate.tpl:203
 msgid ""
 "This dialog will automatically add a new super administrator to your LDAP "
 "tree."
-msgstr "Dieser Dialog wird Ihrem LDAP-Baum automatisch einen neuen Super-Administrator hinzufügen."
+msgstr ""
+"Dieser Dialog wird Ihrem LDAP-Baum automatisch einen neuen Super-"
+"Administrator hinzufügen."
 
-#: setup/setup_migrate.tpl:226
+#: setup/setup_migrate.tpl:232
 msgid "Password (again)"
 msgstr "Kennwort (Wiederholung)"
 
-#: setup/setup_migrate.tpl:236
-msgid "Assign super administrator permissions to an existing user or group"
-msgstr "Zuweisung von Super-Administrator-Rechten zu einem/r bestehenden Benutzer/Gruppe"
-
-#: setup/setup_migrate.tpl:237
+#: setup/setup_migrate.tpl:260
 msgid ""
-"To grant administrative permissions to a user or a group, select an object "
-"and choose 'Assign'."
-msgstr "Um einem Benutzer/ einer Gruppe administrative Tätigkeiten zu erlauben, selektieren Sie ein Objekt und wählen Sie 'Zuweisen'."
-
-#: setup/setup_migrate.tpl:275
-msgid ""
-"The listed deparmtents are currenlty invisble in the GOsa user interface. If "
+"The listed departments are currenlty invisble in the GOsa user interface. If "
 "you want to change this for a couple of entries, select them and use the "
 "migrate button below."
-msgstr "Die aufgelisteten Abteilungen sind momentan in der GOsa Benutzerschnittstelle unsichtbar. Wenn Sie dies "
-"für einige Einträge ändern möchten, wählen Sie diese aus und verwenden Sie den Migrieren-Knopf unterhalb."
+msgstr ""
+"Die aufgelisteten Abteilungen sind momentan in der GOsa "
+"Benutzerschnittstelle unsichtbar. Wenn Sie dies für einige Einträge ändern "
+"möchten, wählen Sie diese aus und verwenden Sie den Migrieren-Knopf "
+"unterhalb."
 
-#: setup/setup_migrate.tpl:276 setup/setup_migrate.tpl:329
+#: setup/setup_migrate.tpl:261 setup/setup_migrate.tpl:317
 msgid ""
 "If you want to know what will be done when migrating the selected entries, "
 "use the 'Show changes' button to see the LDIF."
-msgstr "Wenn Sie wissen möchten, was passieren würde, wenn die gewählten Einträge migriert werden, verwenden Sie den"
-" 'Zeige Änderungen'-Knopf, um den LDIF zu sehen."
+msgstr ""
+"Wenn Sie wissen möchten, was passieren würde, wenn die gewählten Einträge "
+"migriert werden, verwenden Sie den 'Zeige Änderungen'-Knopf, um den LDIF zu "
+"sehen."
 
-#: setup/setup_migrate.tpl:286 setup/setup_migrate.tpl:338
+#: setup/setup_migrate.tpl:271 setup/setup_migrate.tpl:326
 msgid "Current"
 msgstr "Momentan"
 
-#: setup/setup_migrate.tpl:293 setup/setup_migrate.tpl:345
+#: setup/setup_migrate.tpl:278 setup/setup_migrate.tpl:333
 msgid "After migration"
 msgstr "Nach der Migration"
 
-#: setup/setup_migrate.tpl:328
+#: setup/setup_migrate.tpl:316
 msgid ""
 "The listed users are currenlty invisble in the GOsa user interface. If you "
 "want to change this for a couple of users, just select them and use the "
 "'Migrate' button below."
-msgstr "Die angezeigten Benutzer sind momentan in der GOsa Benutzerschnittstelle unsichtbar. "
-"Wenn Sie diese für eine Menge an Benutzern ändern möchten, wählen Sie sie aus und "
-"verwenden Sie den 'Migrieren'-Knopf unterhalb."
+msgstr ""
+"Die angezeigten Benutzer sind momentan in der GOsa Benutzerschnittstelle "
+"unsichtbar. Wenn Sie diese für eine Menge an Benutzern ändern möchten, "
+"wählen Sie sie aus und verwenden Sie den 'Migrieren'-Knopf unterhalb."
 
 #: setup/class_setupStep_Checks.inc:38 setup/class_setupStep_Checks.inc:39
 msgid "Installation check"
@@ -16151,8 +15621,9 @@ msgstr "PHP muss in Version %s / %s oder höher vorliegen."
 msgid ""
 "GOsa requires functionality that is not available (or buggy) in older PHP "
 "versions. Please update to a supported version."
-msgstr "GOsa benötigt Funktionalität, die in alten PHP-Version nicht verfügbar (oder fehlerhaft) ist. Bitte "
-"aktualisieren Sie auf eine unterstützte Version."
+msgstr ""
+"GOsa benötigt Funktionalität, die in alten PHP-Version nicht verfügbar (oder "
+"fehlerhaft) ist. Bitte aktualisieren Sie auf eine unterstützte Version."
 
 #: setup/class_setupStep_Checks.inc:72
 msgid "Checking for LDAP support"
@@ -16166,7 +15637,13 @@ msgstr "Dies ist die grundlegenste GOsa-Erweiterung und daher wirklich erforderl
 msgid ""
 "The ldap extension (php4-ldap/php5-ldap) is required to communicate with "
 "your LDAP server."
-msgstr "Die LDAP-Erweiterung (php4-ldap/php5-ldap) wird für die Kommunikation mit Ihrem LDAP-Server benötigt."
+msgstr ""
+"Die LDAP-Erweiterung (php4-ldap/php5-ldap) wird für die Kommunikation mit "
+"Ihrem LDAP-Server benötigt."
+
+#: setup/class_setupStep_Checks.inc:80
+msgid "Checking for gettext support"
+msgstr "Prüfe auf gettext-Erweiterung"
 
 #: setup/class_setupStep_Checks.inc:81
 msgid "Gettext support is required for internationalization."
@@ -16176,13 +15653,17 @@ msgstr "Gettext-Unterstützung wird für die Sprachanpassung benötigt."
 msgid "Please make sure that the extension is activated."
 msgstr "Bitte stellen Sie sicher, dass die Erweiterung aktiviert ist."
 
+#: setup/class_setupStep_Checks.inc:88
+msgid "Checking for iconv support"
+msgstr "Prüfe auf iconv-Erweiterung"
+
 #: setup/class_setupStep_Checks.inc:89
 msgid ""
 "This module is used by GOsa to convert samba munged dial informations and is "
 "therefore required. "
 msgstr ""
-"Dieses Modul wird von GOsa benutzt, um Samba Munged Dial-Informationen "
-"zu verarbeiten und wird daher benötigt."
+"Dieses Modul wird von GOsa benutzt, um Samba Munged Dial-Informationen zu "
+"verarbeiten und wird daher benötigt."
 
 #: setup/class_setupStep_Checks.inc:96
 msgid "Checking for mhash support"
@@ -16194,9 +15675,11 @@ msgstr "Sie benötigen dieses Modul, um die SSHA-Verschlüssung verwenden zu kö
 
 #: setup/class_setupStep_Checks.inc:98
 msgid ""
-"The mhash module for PHP 4/5 is not available.Pplease install php4-mhash/"
-"php5-mhash."
-msgstr "Das mhash-Modul für PHP 4/5 ist nicht verfügbar. Bitte installieren Sie php4-mhash/php5-mhash."
+"The mhash module for PHP 4/5 is not available.Please install php4-mhash/php5-"
+"mhash."
+msgstr ""
+"Das mhash-Modul für PHP 4/5 ist nicht verfügbar. Bitte installieren Sie php4-"
+"mhash/php5-mhash."
 
 #: setup/class_setupStep_Checks.inc:104
 msgid "Checking for IMAP support"
@@ -16214,7 +15697,9 @@ msgstr ""
 msgid ""
 "This module is used to communicate with your mail server. Please install "
 "php4-imap/php5-imap."
-msgstr "Dieses Modul wird zur Kommunikation mit Ihrem Mail-Server verwendet. Bitte installieren Sie php4-imap/php5-imap."
+msgstr ""
+"Dieses Modul wird zur Kommunikation mit Ihrem Mail-Server verwendet. Bitte "
+"installieren Sie php4-imap/php5-imap."
 
 #: setup/class_setupStep_Checks.inc:112
 msgid "Checking for getacl in IMAP implementation"
@@ -16226,30 +15711,40 @@ msgid ""
 "extensions are not capable of reading acl's. You need a recent PHP version "
 "to use this feature."
 msgstr ""
-"Die getacl-Unterstützung wird benötigt um Zugriffsrechte von Verteilten Ordnern zu "
-"verwalten. Das alte IMAP-Modul unterstützt das Auslesen dieser "
-"Zugriffsregeln nicht. Sie benötigen ein aktuelles PHP um diese Funktion nutzen zu können."
+"Die getacl-Unterstützung wird benötigt um Zugriffsrechte von Verteilten "
+"Ordnern zu verwalten. Das alte IMAP-Modul unterstützt das Auslesen dieser "
+"Zugriffsregeln nicht. Sie benötigen ein aktuelles PHP um diese Funktion "
+"nutzen zu können."
 
 #: setup/class_setupStep_Checks.inc:120
 msgid "Checking for MySQL support"
 msgstr "Prüfe auf MySQL-Unterstützung"
 
 #: setup/class_setupStep_Checks.inc:121
-msgid ""
-"MySQL support is needed to communicate with several supported databases."
+msgid "MySQL support is needed to communicate with several supported databases."
 msgstr ""
-"Die MySQL-Unterstützung wird benötigt, um mit verschiedenen unterstützten Datenbanken zu kommunizieren."
+"Die MySQL-Unterstützung wird benötigt, um mit verschiedenen unterstützten "
+"Datenbanken zu kommunizieren."
 
 #: setup/class_setupStep_Checks.inc:122
 msgid ""
 "This module is required to communicate with database servers (GOfax, "
 "asterisk, GLPI, etc.). Please install php4-mysql/php5-mysql"
-msgstr "Dieses Modul wird benötigt, um mit Datenbank-Servern zu kommunizieren (GOfax, asterisk, GLPI, etc.). Bitte "
-"installieren Sie php4-mysql/php5-mysql"
+msgstr ""
+"Dieses Modul wird benötigt, um mit Datenbank-Servern zu kommunizieren "
+"(GOfax, asterisk, GLPI, etc.). Bitte installieren Sie php4-mysql/php5-mysql"
 
 #: setup/class_setupStep_Checks.inc:128
 msgid "Checking for kadm5 support"
 msgstr "Prüfe auf kadm5-Unterstützung"
+
+#: setup/class_setupStep_Checks.inc:129
+msgid ""
+"Managing users in kerberos requires the kadm5 module which is downloadable "
+"via PEAR network."
+msgstr ""
+"Um Benutzer auch im Kerberos verwalten zu können, muß das kadm5-Modul "
+"installiert sein. Sie können es über das PEAR-Netzwerk beziehen."
 
 #: setup/class_setupStep_Checks.inc:130
 msgid ""
@@ -16275,7 +15770,9 @@ msgstr ""
 msgid ""
 "This module is required for client monitoring. Please install php4-snmp/php5-"
 "snmp."
-msgstr "Dieses Modul wird für die Client-Überwachung benötigt. Bitte installieren Sie php4-snmp/php5-snmp."
+msgstr ""
+"Dieses Modul wird für die Client-Überwachung benötigt. Bitte installieren "
+"Sie php4-snmp/php5-snmp."
 
 #: setup/class_setupStep_Checks.inc:144
 msgid "Checking for CUPS support"
@@ -16286,19 +15783,23 @@ msgid ""
 "In order to read available printers via the IPP protocol instead of printcap "
 "files, you've to install the CUPS module."
 msgstr ""
-"Falls Sie eine Liste der verfügbaren Drucker über IPP auslesen möchten (an Stelle von printcap), "
-"benötigen Sie dieses Modul."
+"Falls Sie eine Liste der verfügbaren Drucker über IPP auslesen möchten (an "
+"Stelle von printcap), benötigen Sie dieses Modul."
+
+#: setup/class_setupStep_Checks.inc:154
+msgid "Checking for fping utility"
+msgstr "Suche fping-Programm"
 
 #: setup/class_setupStep_Checks.inc:155
 msgid ""
 "The fping utility is used if you've got a thin client based terminal "
 "environment."
 msgstr ""
-"Fping wird benötigt, wenn Sie eine Thin-Client basierte Terminal-Umgebung haben."
+"Fping wird benötigt, wenn Sie eine Thin-Client basierte Terminal-Umgebung "
+"haben."
 
 #: setup/class_setupStep_Checks.inc:156
-msgid ""
-"The fping utility is only used in thin client based terminal environment."
+msgid "The fping utility is only used in thin client based terminal environment."
 msgstr ""
 "Fping wird benötigt, um den Status von Thin-Client basierenden Terminal zu "
 "überwachen."
@@ -16311,13 +15812,17 @@ msgstr "SAMBA Kennwort-Hash Erzeugung"
 msgid ""
 "In order to use SAMBA 2/3 passwords, you've to install additional packages "
 "to generate password hashes."
-msgstr "Um SAMBA 2/3 verwenden zu können, müssen Sie weitere Pakete installieren, die Kennwort-Hashes generieren."
+msgstr ""
+"Um SAMBA 2/3 verwenden zu können, müssen Sie weitere Pakete installieren, "
+"die Kennwort-Hashes generieren."
 
 #: setup/class_setupStep_Checks.inc:173
 msgid ""
 "In order to use SAMBA 2/3 you've to install additional perl libraries. Take "
 "a look at mkntpasswd."
-msgstr "Um SAMBA 2/3 verwenden zu können, müssen Sie weitere Perl-Bibliotheken installieren. Werfen Sie einen Blick auf mkntpasswd."
+msgstr ""
+"Um SAMBA 2/3 verwenden zu können, müssen Sie weitere Perl-Bibliotheken "
+"installieren. Werfen Sie einen Blick auf mkntpasswd."
 
 #: setup/class_setupStep_Checks.inc:183 setup/class_setupStep_Checks.inc:202
 #: setup/class_setupStep_Checks.inc:218 setup/class_setupStep_Checks.inc:234
@@ -16327,35 +15832,41 @@ msgstr "Aus"
 
 #: setup/class_setupStep_Checks.inc:184
 msgid ""
-"register_globals is a PHP mechanism to register all global varibales to be "
+"register_globals is a PHP mechanism to register all global variables to be "
 "accessible from scripts without changing the scope. This may be a security "
 "risk."
 msgstr ""
 "register_globals ist ein PHP-Mechanismus, welcher alle globalen Variablen "
-"für Skripte direkt zugänglich macht. Dies kann ein Sicherheitsrisiko sein. "
+"für Skripte direkt zugänglich macht. Dies kann ein Sicherheitsrisiko sein."
 
 #: setup/class_setupStep_Checks.inc:185
 msgid "Search for 'register_globals' in your php.ini and switch it to 'Off'."
-msgstr "Suchen Sie in Ihrer php.ini nach 'register_globals' und setzen sie es auf 'Off'."
+msgstr ""
+"Suchen Sie in Ihrer php.ini nach 'register_globals' und setzen sie es auf "
+"'Off'."
 
 #: setup/class_setupStep_Checks.inc:193
 msgid "PHP uses this value for the garbage collector to delete old sessions."
-msgstr "PHP verwendet diesen Wert für den Garbage Collector, um alte Sitzungen zu entfernen."
+msgstr ""
+"PHP verwendet diesen Wert für den Garbage Collector, um alte Sitzungen zu "
+"entfernen."
 
 #: setup/class_setupStep_Checks.inc:194
 msgid ""
 "Setting this value to one day will prevent loosing session and cookies "
 "before they really timeout."
 msgstr ""
-"Das Setzen dieses Wertes auf einen Tag wird vermeiden, "
-"dass Sie die Sitzung und den zugehörigen Cookie verlieren, bevor diese "
-"tatsächlich ihre Gültigkeit verlieren."
+"Das Setzen dieses Wertes auf einen Tag wird vermeiden, dass Sie die Sitzung "
+"und den zugehörigen Cookie verlieren, bevor diese tatsächlich ihre "
+"Gültigkeit verlieren."
 
 #: setup/class_setupStep_Checks.inc:195
 msgid ""
 "Search for 'session.gc_maxlifetime' in your php.ini and set it to 86400 or "
 "higher."
-msgstr "Suchen Sie in Ihrer php.ini nach 'session.gc_maxlifetime' und setzen sie es auf 86400 oder höher."
+msgstr ""
+"Suchen Sie in Ihrer php.ini nach 'session.gc_maxlifetime' und setzen sie es "
+"auf 86400 oder höher."
 
 #: setup/class_setupStep_Checks.inc:203
 msgid ""
@@ -16367,21 +15878,24 @@ msgstr ""
 
 #: setup/class_setupStep_Checks.inc:204
 msgid "Search for 'session.auto_start' in your php.ini and set it to 'Off'."
-msgstr "Suchen Sie in Ihrer php.ini nach 'session.auto_start' und setzen sie es auf 'Off'."
+msgstr ""
+"Suchen Sie in Ihrer php.ini nach 'session.auto_start' und setzen sie es auf "
+"'Off'."
 
 #: setup/class_setupStep_Checks.inc:211
 msgid ""
 "GOsa needs at least 32MB of memory. Setting it below this limit may cause "
 "errors that are not reproducable! Increase it for larger setups."
 msgstr ""
-"GOsa benötigt mindestens 32MB Speicher, weniger Speicher würde "
-"nicht nachvollziehbare Probleme verursachen! Bei größeren Installationen sollte "
+"GOsa benötigt mindestens 32MB Speicher, weniger Speicher würde nicht "
+"nachvollziehbare Probleme verursachen! Bei größeren Installationen sollte "
 "dieser Wert noch erweitert werden."
 
 #: setup/class_setupStep_Checks.inc:212
-msgid ""
-"Search for 'memory_limit' in your php.ini and set it to '32M' or higher."
-msgstr "Suchen Sie in Ihrer php.ini nach 'memory_limit' und setzen sie es auf '32M' oder höher."
+msgid "Search for 'memory_limit' in your php.ini and set it to '32M' or higher."
+msgstr ""
+"Suchen Sie in Ihrer php.ini nach 'memory_limit' und setzen sie es auf '32M' "
+"oder höher."
 
 #: setup/class_setupStep_Checks.inc:219
 msgid ""
@@ -16393,17 +15907,19 @@ msgstr ""
 
 #: setup/class_setupStep_Checks.inc:220
 msgid "Search for 'implicit_flush' in your php.ini and set it to 'Off'."
-msgstr "Suchen Sie in Ihrer php.ini nach 'implicit_flush' und setzen sie es auf 'Off'."
+msgstr ""
+"Suchen Sie in Ihrer php.ini nach 'implicit_flush' und setzen sie es auf "
+"'Off'."
 
 #: setup/class_setupStep_Checks.inc:227
 msgid "The Execution time should be at least 30 seconds."
-msgstr ""
-"Die Ausführungszeit sollte mindestens 30 Sekunden betragen."
+msgstr "Die Ausführungszeit sollte mindestens 30 Sekunden betragen."
 
 #: setup/class_setupStep_Checks.inc:228
-msgid ""
-"Search for 'max_execution_time' in your php.ini and set it to '30' or higher."
-msgstr "Suchen Sie in Ihrer php.ini nach 'max_execution_time' und setzen sie es auf '30' oder höher."
+msgid "Search for 'max_execution_time' in your php.ini and set it to '30' or higher."
+msgstr ""
+"Suchen Sie in Ihrer php.ini nach 'max_execution_time' und setzen sie es auf "
+"'30' oder höher."
 
 #: setup/class_setupStep_Checks.inc:235
 msgid ""
@@ -16422,9 +15938,19 @@ msgstr "Suchen Sie in Ihrer php.ini nach 'expose_php' und setzen sie es auf 'Off
 msgid "On"
 msgstr "An"
 
+#: setup/class_setupStep_Checks.inc:243
+msgid ""
+"Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
+"escape all quotes in strings in this case."
+msgstr ""
+"Erhöhen Sie die Sicherheit des Server, indem sie magic_quotes_gpc auf 'on' "
+"stellen. PHP wird in dieser Einstellung alle 'quotes' in 'strings' umwandeln."
+
 #: setup/class_setupStep_Checks.inc:244
 msgid "Search for 'magic_quotes_gpc' in your php.ini and set it to 'On'."
-msgstr "Suchen Sie in Ihrer php.ini nach 'magic_quotes_gpc' und setzen sie es auf 'On'."
+msgstr ""
+"Suchen Sie in Ihrer php.ini nach 'magic_quotes_gpc' und setzen sie es auf "
+"'On'."
 
 #: setup/class_setupStep_Checks.inc:252
 msgid "Increase your server performance by setting magic_quotes_gpc to 'off'."
@@ -16433,9 +15959,10 @@ msgstr ""
 "stellen."
 
 #: setup/class_setupStep_Checks.inc:253
-msgid ""
-"Search for 'zend.ze1_compatibility_mode' in your php.ini and set it to 'Off'."
-msgstr "Suchen Sie in Ihrer php.ini nach 'zend.ze1_compatibility_mode' und setzen sie es auf 'Off'."
+msgid "Search for 'zend.ze1_compatibility_mode' in your php.ini and set it to 'Off'."
+msgstr ""
+"Suchen Sie in Ihrer php.ini nach 'zend.ze1_compatibility_mode' und setzen "
+"sie es auf 'Off'."
 
 #: setup/class_setupStep_Checks.inc:264
 msgid "Configuration writeable"
@@ -16450,8 +15977,10 @@ msgstr "Die Konfigurationsdatei kann nicht geschrieben werden"
 msgid ""
 "GOsa reads its configuration from a file located in (%s/%s). The setup can "
 "write the configuration directly if it is writeable."
-msgstr "GOsa liest die Konfiguration aus einer Datei, die sich in (%s/%s) befindet. Die Einrichtung kann die Konfiguration direkt speichern, wenn "
-"die Datei schreibbar ist."
+msgstr ""
+"GOsa liest die Konfiguration aus einer Datei, die sich in (%s/%s) befindet. "
+"Die Einrichtung kann die Konfiguration direkt speichern, wenn die Datei "
+"schreibbar ist."
 
 #: setup/class_setupStep_Finish.inc:38
 msgid "Write configuration file"
@@ -16465,7 +15994,9 @@ msgstr "Fertig - schreibe die Konfigurationsdatei"
 msgid ""
 "Your configuration file is currently world readable. Please updated the file "
 "permissions!"
-msgstr "Ihre Konfigurationsdatei ist momentan von jedem lesbar. Bitte aktualisieren Sie die Zugriffsrechte der Datei."
+msgstr ""
+"Ihre Konfigurationsdatei ist momentan von jedem lesbar. Bitte aktualisieren "
+"Sie die Zugriffsrechte der Datei."
 
 #: setup/class_setupStep_Finish.inc:102
 msgid "The configuration is currently not readable or it does not exists."
@@ -16480,17 +16011,19 @@ msgid ""
 "requirement:"
 msgstr ""
 "Nachdem Sie die Konfigurationsdatei unter %s abgelegt haben, muß "
-"sichergestellt werden, daß der Webserver auf %s zugreifen kann - "
-"während normale Nutzer dies nicht dürfen. Führen Sie diese Kommandos aus, um "
-"die obigen Voraussetzungen zu erfüllen:"
+"sichergestellt werden, daß der Webserver auf %s zugreifen kann - während "
+"normale Nutzer dies nicht dürfen. Führen Sie diese Kommandos aus, um die "
+"obigen Voraussetzungen zu erfüllen:"
 
 #: setup/setup_welcome.tpl:4
 msgid ""
 "This seems to be the first time you start GOsa - we didn't find any "
 "configuration right now. This simple wizard intends to help you while "
 "setting it up."
-msgstr "Dies scheint das erste Mal zu sein, dass Sie GOsa starten - wir haben keine Konfiguration gefunden. Dieser einfache "
-"Assistent wird Ihnen bei der Einrichtung behilflich sein."
+msgstr ""
+"Dies scheint das erste Mal zu sein, dass Sie GOsa starten - wir haben keine "
+"Konfiguration gefunden. Dieser einfache Assistent wird Ihnen bei der "
+"Einrichtung behilflich sein."
 
 #: setup/setup_welcome.tpl:8
 msgid "What will the wizard do for you?"
@@ -16506,7 +16039,9 @@ msgstr "Versucht, Probleme in Ihrer PHP- und LDAP-Einrichtung zu finden"
 
 #: setup/setup_welcome.tpl:13
 msgid "Let you choose from a set of basic and advanced configuration switches"
-msgstr "Lässt Sie aus einem Satz von grundlegenden und erweiterten Konfigurationsschaltern wählen"
+msgstr ""
+"Lässt Sie aus einem Satz von grundlegenden und erweiterten "
+"Konfigurationsschaltern wählen"
 
 #: setup/setup_welcome.tpl:14
 msgid "Guided migration of existing LDAP trees"
@@ -16534,9 +16069,11 @@ msgid ""
 "creating the file '/tmp/gosa.auth', containing the current session ID on the "
 "servers local filesystem. This can be done by executing the following "
 "command:"
-msgstr "Aus Gründen der Sicherheit müssen Sie sich für die Installation authentisieren, indem Sie die Datei "
-"'/tmp/gosa.auth', die Ihre aktuelle Sitzungs-ID enthält, im lokalen Dateisystem des Servers erstellen."
-"Dies kann durch das Ausführen des folgenden Kommandos erreicht werden:"
+msgstr ""
+"Aus Gründen der Sicherheit müssen Sie sich für die Installation "
+"authentisieren, indem Sie die Datei '/tmp/gosa.auth', die Ihre aktuelle "
+"Sitzungs-ID enthält, im lokalen Dateisystem des Servers erstellen.Dies kann "
+"durch das Ausführen des folgenden Kommandos erreicht werden:"
 
 #: setup/setup_welcome.tpl:34
 msgid "Click the 'Continue' button when you've finished."
@@ -16580,87 +16117,89 @@ msgstr "Bitte geben Sie Benutzer und Kennwort ein."
 msgid "Bind as user '%s' on server '%s' succeeded."
 msgstr "Verbindung als Benutzer '%s' zu Server '%s' war erfolgreich."
 
-#: setup/setup_feedback.tpl:4
+#: setup/setup_feedback.tpl:6
 msgid "Subscribe to the gosa-announce mailinglist"
 msgstr "Abonniere die GOsa-Announce Mailingliste"
 
-#: setup/setup_feedback.tpl:7
+#: setup/setup_feedback.tpl:9
 msgid ""
 "When checking this option, GOsa will try to connect http://oss.gonicus.de in "
 "order to subscribe you to the gosa-announce mailing list. You've to confirm "
 "this by mail."
-msgstr "Wenn Sie diese Option auswählen, versucht GOsa eine Verbindung zu http://oss.gonicus.de,"
-" um die GOsa-Announce Mailingliste zu abonnieren. Sie müssen das Abonnement daraufhin per "
-"Mail bestätigen."
+msgstr ""
+"Wenn Sie diese Option auswählen, versucht GOsa eine Verbindung zu http://oss."
+"gonicus.de, um die GOsa-Announce Mailingliste zu abonnieren. Sie müssen das "
+"Abonnement daraufhin per Mail bestätigen."
 
-#: setup/setup_feedback.tpl:39
+#: setup/setup_feedback.tpl:41
 msgid "Send feedback to the GOsa project team"
 msgstr "Rückmeldung an das GOsa-Project-Team senden"
 
-#: setup/setup_feedback.tpl:42
+#: setup/setup_feedback.tpl:44
 msgid ""
 "When checking this option, GOsa will try to connect http://oss.gonicus.de in "
 "order to submit your form anonymously."
-msgstr "Wenn diese Option ausgewählt ist, wird GOsa versuchen, eine Verbindung zu http://oss.gonicus.de aufzubauen, "
-"um Ihr Formular anonym zu übermitteln."
+msgstr ""
+"Wenn diese Option ausgewählt ist, wird GOsa versuchen, eine Verbindung zu "
+"http://oss.gonicus.de aufzubauen, um Ihr Formular anonym zu übermitteln."
 
-#: setup/setup_feedback.tpl:48
+#: setup/setup_feedback.tpl:50
 msgid "Did the setup procedure help you to get started?"
 msgstr "Hat Ihnen die Einrichtungs-Prozedur beim Start geholfen?"
 
-#: setup/setup_feedback.tpl:58
+#: setup/setup_feedback.tpl:60
 msgid "If not, what problems did you encounter"
 msgstr "Wenn nicht, welche Probleme sind Ihnen begegnet"
 
-#: setup/setup_feedback.tpl:66
+#: setup/setup_feedback.tpl:68
 msgid "Is this the first time you use GOsa?"
 msgstr "Ist dies das erste Mal, dass Sie GOsa verwenden?"
 
-#: setup/setup_feedback.tpl:72
+#: setup/setup_feedback.tpl:74
 msgid "I use it since"
 msgstr "Ich verwende es seit"
 
-#: setup/setup_feedback.tpl:73
+#: setup/setup_feedback.tpl:75
 msgid "Select the year since when you are using GOsa"
 msgstr "Wählen Sie das Jahr, seit dem Sie GOsa verwenden"
 
-#: setup/setup_feedback.tpl:80
+#: setup/setup_feedback.tpl:82
 msgid "What operating system / distribution do you use?"
 msgstr "Welches Betriebssystem / welche Distribution verwenden Sie?"
 
-#: setup/setup_feedback.tpl:88
+#: setup/setup_feedback.tpl:90
 msgid "What web server do you use?"
 msgstr "Welchen Web-Server verwenden Sie?"
 
-#: setup/setup_feedback.tpl:96
+#: setup/setup_feedback.tpl:98
 msgid "What PHP version do you use?"
 msgstr "Welche PHP-Version verwenden Sie?"
 
-#: setup/setup_feedback.tpl:104
+#: setup/setup_feedback.tpl:106
 msgid "LDAP"
 msgstr "LDAP"
 
-#: setup/setup_feedback.tpl:108
+#: setup/setup_feedback.tpl:110
 msgid "What kind of LDAP server(s) do you use?"
 msgstr "Welche Arten von LDAP-Servern verwenden Sie?"
 
-#: setup/setup_feedback.tpl:114
+#: setup/setup_feedback.tpl:116
 msgid "How many objects are in your LDAP?"
 msgstr "Wie viele Objekte befinden sich in Ihrem LDAP?"
 
-#: setup/setup_feedback.tpl:121
+#: setup/setup_feedback.tpl:123
 msgid "Features"
 msgstr "Möglichkeiten"
 
-#: setup/setup_feedback.tpl:124
+#: setup/setup_feedback.tpl:126
 msgid "What features of GOsa do you use?"
 msgstr "Welche Funktionen von GOsa verwenden Sie?"
 
-#: setup/setup_feedback.tpl:134
+#: setup/setup_feedback.tpl:136
 msgid "What features do you want to see in future versions of GOsa?"
 msgstr "Welche Funktionen würden Sie gerne in zukünftigen Versionen von GOsa sehen?"
 
-#: setup/setup_feedback.tpl:141
+#: setup/setup_feedback.tpl:143
 msgid "Send feedback"
 msgstr "Sende Rückmeldung"
 
@@ -16781,67 +16320,8 @@ msgid "LDAP schema check"
 msgstr "LDAP Schema-Prüfung"
 
 #: setup/class_setupStep_Schema.inc:42
-msgid "Perform test on your curren LDAP schema"
+msgid "Perform test on your current LDAP schema"
 msgstr "Führe Test auf dem momentanen LDAP-Schema aus"
-
-#: setup/class_setupStep_Schema.inc:138
-msgid "Used to store account specific informations."
-msgstr "Wird verwendet, um kontenspezifische Informationen zu speichern."
-
-#: setup/class_setupStep_Schema.inc:145
-msgid ""
-"Used to lock currently edited entries to avoid multiple changes at the same "
-"time."
-msgstr "Wird verwendet, um die Einträge, die momentan in Bearbeitung sind, zu sperren und "
-"somit mehrere gleichzeitige Änderungen zu verhindern."
-
-#: setup/class_setupStep_Schema.inc:189
-#, php-format
-msgid "The required objectClass '%s' is not present in your schema setup"
-msgstr "Die benötigte ObjektKlasse '%s' ist nicht in der Schema-Einrichtung vorhanden"
-
-#: setup/class_setupStep_Schema.inc:191
-#, php-format
-msgid "The optional objectClass '%s' is not present in your schema setup"
-msgstr "Die optionale ObjektKlasse '%s' ist nicht in der Schema-Einrichtung vorhanden"
-
-#: setup/class_setupStep_Schema.inc:197
-#, php-format
-msgid "The required objectclass '%s' does not have version %s"
-msgstr "Die benötigte ObjektKlasse '%s' hat nicht die Version %s"
-
-#: setup/class_setupStep_Schema.inc:199
-#, php-format
-msgid "The optional objectclass '%s' does not have version %s"
-msgstr "Die optionale ObjektKlasse '%s' hat nicht die Version %s"
-
-#: setup/class_setupStep_Schema.inc:203
-#, php-format
-msgid "Class(es) available"
-msgstr "Verfügbare Klasse(n)"
-
-#: setup/class_setupStep_Schema.inc:228
-msgid ""
-"You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
-"schema configuration do not support this option."
-msgstr "Sie haben die rcf2307bis-Optionen in der 'LDAP Einrichtung' aktiviert, aber Ihre Schema-Konfiguration"
-" unterstützt diese Option nicht."
-
-#: setup/class_setupStep_Schema.inc:229
-msgid ""
-"In order to use rfc2307bis corform groups the objectClass 'posixGroup' must "
-"be AUXILIARY"
-msgstr "Um zu RFC2307bis konforme Gruppen verwenden zu können, muss die ObjektKlasse 'posixGroup' AUXILIARY sein"
-
-#: setup/class_setupStep_Schema.inc:233
-msgid ""
-"You have disabled the rfc2307bis option on the 'ldap setup' step, but your "
-"schema configuration do not support this option."
-msgstr "Ihr LDAP-Schema unterstüzt rfc2307bis, allerdings haben Sie diese Option im Setup nicht aktiviert"
-
-#: setup/class_setupStep_Schema.inc:234
-msgid "The objectClass 'posixGroup' must be STRUCTURAL"
-msgstr "Die ObjektKlasse 'posixGroup' muss STRUCTURAL sein"
 
 #: setup/class_setupStep_Config3.inc:67 setup/class_setupStep_Config3.inc:68
 msgid "GOsa settings 3/3"
@@ -16860,19 +16340,21 @@ msgid "Maximal ldap query time must be a numeric value. "
 msgstr "Der Wert für maximale LDAP-Abfragedauer muß numerisch sein."
 
 #: setup/setup_language.tpl:3
-msgid "Please select the prefered language"
+msgid "Please select the preferred language"
 msgstr "Bitte wählen Sie die bevorzugte Sprache"
 
 #: setup/setup_language.tpl:5
 msgid ""
-"At this point, you can select the site wide default langauge. Choosing "
+"At this point, you can select the site wide default language. Choosing "
 "'automatic' will use the language requested by the browser. This setting can "
 "be overriden per user."
-msgstr "An diesem Punkt können Sie eine Site-weite Standardsprache wählen. Wenn Sie 'automatisch' wählen, wird die"
-" vom Browser angeforderte Sprache verwendet. Diese Einstellung kann vom Benutzer überschrieben werden."
+msgstr ""
+"An diesem Punkt können Sie eine Site-weite Standardsprache wählen. Wenn Sie "
+"'automatisch' wählen, wird die vom Browser angeforderte Sprache verwendet. "
+"Diese Einstellung kann vom Benutzer überschrieben werden."
 
 #: setup/setup_language.tpl:9
-msgid "Please your prefered language here"
+msgid "Please your preferred language here"
 msgstr "Bitte wählen Sie die bevorzugte Sprache"
 
 #: setup/setup_ldap.tpl:7
@@ -16971,198 +16453,246 @@ msgstr "Aktiviere Abzüge"
 msgid "Snapshot base"
 msgstr "Basis für Abzüge"
 
-#: setup/class_setupStep_Migrate.inc:106 setup/class_setupStep_Migrate.inc:107
+#: setup/class_setupStep_Migrate.inc:105 setup/class_setupStep_Migrate.inc:106
 msgid "LDAP inspection"
 msgstr "LDAP-Prüfung"
 
-#: setup/class_setupStep_Migrate.inc:108
+#: setup/class_setupStep_Migrate.inc:107
 msgid "Analyze your current LDAP for GOsa compatibility"
 msgstr "Analysiere die aktuelle LDAP-Umgebung auf GOsa-Kompatibilität"
 
-#: setup/class_setupStep_Migrate.inc:114
+#: setup/class_setupStep_Migrate.inc:113
 msgid "Checking for root object"
 msgstr "Prüfe auf Wurzel Objekt"
 
-#: setup/class_setupStep_Migrate.inc:120
+#: setup/class_setupStep_Migrate.inc:119
 msgid "Checking permissions on LDAP database"
 msgstr "Prüfe Berechtigungen auf die LDAP-Datenbank"
 
-#: setup/class_setupStep_Migrate.inc:126
+#: setup/class_setupStep_Migrate.inc:125
 msgid "Checking for invisible deparmtments"
 msgstr "Prüfe auf nicht sichtbare Abteilungen"
 
-#: setup/class_setupStep_Migrate.inc:132
+#: setup/class_setupStep_Migrate.inc:131
 msgid "Checking for invisible users"
 msgstr "Prüfe auf nicht sichtbare Benutzer"
 
-#: setup/class_setupStep_Migrate.inc:138
+#: setup/class_setupStep_Migrate.inc:137
 msgid "Checking for super administrator"
 msgstr "Prüfe auf Super Administrator"
 
-#: setup/class_setupStep_Migrate.inc:144
+#: setup/class_setupStep_Migrate.inc:143
 msgid "Checking for users outside the people tree"
 msgstr "Prüfe auf Benutzer ausserhalb des Benutzer-Teilbaums"
 
-#: setup/class_setupStep_Migrate.inc:150
+#: setup/class_setupStep_Migrate.inc:149
 msgid "Checking for groups outside the groups tree"
 msgstr "Prüfe auf Gruppen ausserhalb des Gruppen-Teilbaums"
 
-#: setup/class_setupStep_Migrate.inc:156
+#: setup/class_setupStep_Migrate.inc:155
 msgid "Checking for windows workstations outside the winstation tree"
-msgstr "Prüfe auf Windows Arbeitsstationen ausserhalb des Windows Arbeitsstations-Teilbaumes"
+msgstr ""
+"Prüfe auf Windows Arbeitsstationen ausserhalb des Windows Arbeitsstations-"
+"Teilbaumes"
 
-#: setup/class_setupStep_Migrate.inc:162
+#: setup/class_setupStep_Migrate.inc:161
 msgid "Checking for duplicate uid numbers"
 msgstr "Prüfe auf doppelte UID-Nummern"
 
-#: setup/class_setupStep_Migrate.inc:168
+#: setup/class_setupStep_Migrate.inc:167
 msgid "Checking for duplicate gid numbers"
 msgstr "Prüfe auf doppelte GID-Nummern"
+
+#: setup/class_setupStep_Migrate.inc:190 setup/class_setupStep_Migrate.inc:239
+#: setup/class_setupStep_Migrate.inc:301 setup/class_setupStep_Migrate.inc:347
+#: setup/class_setupStep_Migrate.inc:393 setup/class_setupStep_Migrate.inc:453
+#: setup/class_setupStep_Migrate.inc:537 setup/class_setupStep_Migrate.inc:667
+#: setup/class_setupStep_Migrate.inc:757
+msgid "LDAP query failed"
+msgstr "LDAP Abfrage fehlgeschlagen"
 
 #: setup/class_setupStep_Migrate.inc:191 setup/class_setupStep_Migrate.inc:240
 #: setup/class_setupStep_Migrate.inc:302 setup/class_setupStep_Migrate.inc:348
 #: setup/class_setupStep_Migrate.inc:394 setup/class_setupStep_Migrate.inc:454
 #: setup/class_setupStep_Migrate.inc:538 setup/class_setupStep_Migrate.inc:668
-#: setup/class_setupStep_Migrate.inc:757
-msgid "LDAP query failed"
-msgstr "LDAP Abfrage fehlgeschlagen"
-
-#: setup/class_setupStep_Migrate.inc:192 setup/class_setupStep_Migrate.inc:241
-#: setup/class_setupStep_Migrate.inc:303 setup/class_setupStep_Migrate.inc:349
-#: setup/class_setupStep_Migrate.inc:395 setup/class_setupStep_Migrate.inc:455
-#: setup/class_setupStep_Migrate.inc:539 setup/class_setupStep_Migrate.inc:669
 #: setup/class_setupStep_Migrate.inc:758
 msgid "Possibly the 'root object' is missing."
 msgstr "Möglicherweise fehlt das 'Wurzel-Objekt'."
 
-#: setup/class_setupStep_Migrate.inc:214
+#: setup/class_setupStep_Migrate.inc:213
 #, php-format
 msgid "Found %s duplicate values for attribute 'uidNumber'."
 msgstr "Es wurden %s doppelte Werte für Attribut 'uidNumber' gefunden."
 
-#: setup/class_setupStep_Migrate.inc:263
+#: setup/class_setupStep_Migrate.inc:262
 #, php-format
 msgid "Found %s duplicate values for attribute 'gidNumber'."
 msgstr "Es wurden %s doppelte Werte für Attribut 'gidNumber' gefunden."
 
-#: setup/class_setupStep_Migrate.inc:320
-#, php-format
-msgid ""
-"Found %s winstations outside the predefined winstation department ou '%s'."
-msgstr "Es wurde(n) %s Windows-Arbeitsstation(en) ausserhalb der vordefinierten Windows Abteilungs-OU '%s' gefunden."
+#: setup/class_setupStep_Migrate.inc:317 setup/class_setupStep_Migrate.inc:467
+#: setup/class_setupStep_Migrate.inc:480 setup/class_setupStep_Migrate.inc:807
+#: setup/class_setupStep_Migrate.inc:1531
+#: setup/class_setupStep_Migrate.inc:1544
+msgid "Failed"
+msgstr "Fehlgeschlagen"
 
-#: setup/class_setupStep_Migrate.inc:321 setup/class_setupStep_Migrate.inc:549
-#: setup/class_setupStep_Migrate.inc:678
+#: setup/class_setupStep_Migrate.inc:319
+#, php-format
+msgid "Found %s winstations outside the predefined winstation department ou '%s'."
+msgstr ""
+"Es wurde(n) %s Windows-Arbeitsstation(en) ausserhalb der vordefinierten "
+"Windows Abteilungs-OU '%s' gefunden."
+
+#: setup/class_setupStep_Migrate.inc:320 setup/class_setupStep_Migrate.inc:548
+#: setup/class_setupStep_Migrate.inc:677
 msgid "Migrate"
 msgstr "Migrieren"
 
-#: setup/class_setupStep_Migrate.inc:367
+#: setup/class_setupStep_Migrate.inc:366
 #, php-format
 msgid "Found %s groups outside the configured tree '%s'."
-msgstr "Es wurde(n) %s Gruppe(n) ausserhalb des konfigurierten Teilbaums '%s' gefunden."
+msgstr ""
+"Es wurde(n) %s Gruppe(n) ausserhalb des konfigurierten Teilbaums '%s' "
+"gefunden."
 
-#: setup/class_setupStep_Migrate.inc:368 setup/class_setupStep_Migrate.inc:414
+#: setup/class_setupStep_Migrate.inc:367 setup/class_setupStep_Migrate.inc:413
 msgid "Move"
 msgstr "Verschieben"
 
-#: setup/class_setupStep_Migrate.inc:413
+#: setup/class_setupStep_Migrate.inc:412
 #, php-format
 msgid "Found %s user(s) outside the configured tree '%s'."
-msgstr "Es wurde(n) %s Benutzer ausserhalb des konfigurierten Teilbaums '%s' gefunden."
+msgstr ""
+"Es wurde(n) %s Benutzer ausserhalb des konfigurierten Teilbaums '%s' "
+"gefunden."
 
-#: setup/class_setupStep_Migrate.inc:470 setup/class_setupStep_Migrate.inc:483
+#: setup/class_setupStep_Migrate.inc:469 setup/class_setupStep_Migrate.inc:482
 #, php-format
-msgid ""
-"The specified user '%s' does not have full access to your ldap database."
-msgstr "Der angegebene Benutzer '%s' hat nicht die vollen Rechte auf Ihre LDAP-Datenbank."
+msgid "The specified user '%s' does not have full access to your ldap database."
+msgstr ""
+"Der angegebene Benutzer '%s' hat nicht die vollen Rechte auf Ihre LDAP-"
+"Datenbank."
 
-#: setup/class_setupStep_Migrate.inc:547
+#: setup/class_setupStep_Migrate.inc:546
 #, php-format
 msgid "Found %s user(s) that will not be visible in GOsa."
-msgstr "Es wurde(n) %s Benutzer gefunden der/die in GOsa nicht sichtbar sein wird/werden."
+msgstr ""
+"Es wurde(n) %s Benutzer gefunden der/die in GOsa nicht sichtbar sein wird/"
+"werden."
 
-#: setup/class_setupStep_Migrate.inc:597 setup/class_setupStep_Migrate.inc:729
+#: setup/class_setupStep_Migrate.inc:596 setup/class_setupStep_Migrate.inc:728
 #, php-format
 msgid ""
 "Failed to migrate the department '%s' into GOsa, error message is as follows "
 "'%s'."
-msgstr "Migration der Abteilung '%s' nach GOsa ist fehlgeschlagen, die Fehlermeldung lautet wie folgt: '%s'."
+msgstr ""
+"Migration der Abteilung '%s' nach GOsa ist fehlgeschlagen, die Fehlermeldung "
+"lautet wie folgt: '%s'."
 
-#: setup/class_setupStep_Migrate.inc:677
+#: setup/class_setupStep_Migrate.inc:676
 #, php-format
 msgid "Found %s department(s) that will not be visible in GOsa."
 msgstr "Es wurde(n) %s Abteilung(en) gefunden, die in GOsa nicht sichtbar sein wird."
 
-#: setup/class_setupStep_Migrate.inc:766
+#: setup/class_setupStep_Migrate.inc:808
 msgid "There is no GOsa administrator account inside your LDAP."
 msgstr "Es gibt kein GOsa Administratorkonto in Ihrem LDAP."
 
-#: setup/class_setupStep_Migrate.inc:828
+#: setup/class_setupStep_Migrate.inc:868
+msgid "Appending user to to group administrational group: \n"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:869
+msgid "Before"
+msgstr "Vor"
+
+#: setup/class_setupStep_Migrate.inc:872
+msgid "After"
+msgstr "Nach"
+
+#: setup/class_setupStep_Migrate.inc:879 setup/class_setupStep_Migrate.inc:902
 #, php-format
 msgid "Adding acls for user '%s' failed, ldap says '%s'."
-msgstr "Hinzufügen der Zugriffsrechte für Benutzer '%s' fehlgeschlagen, der LDAP-Server meldet '%s'."
+msgstr ""
+"Hinzufügen der Zugriffsrechte für Benutzer '%s' fehlgeschlagen, der LDAP-"
+"Server meldet '%s'."
 
-#: setup/class_setupStep_Migrate.inc:846
+#: setup/class_setupStep_Migrate.inc:893
+#, fuzzy
+msgid ""
+"Creating new administrational group: \n"
+"\n"
+msgstr "Neues GOsa Administrator-Konto anlegen"
+
+#: setup/class_setupStep_Migrate.inc:929
 msgid "Specified passwords are empty or not equal."
 msgstr "Die angegebenen Kennwörter sind leer oder nicht gleich."
 
-#: setup/class_setupStep_Migrate.inc:914 setup/class_setupStep_Migrate.inc:962
+#: setup/class_setupStep_Migrate.inc:934
+msgid "Please specify a valid uid."
+msgstr "Bitte geben Sie eine gültige UID ein!"
+
+#: setup/class_setupStep_Migrate.inc:972
+#, php-format
+msgid ""
+"Could not add administrative user, there is already an object with the same "
+"dn '%s' in your ldap database."
+msgstr "Kann keinen Admiistrator hinzufügen, da bereits ein Objekt mit der selben DN '%s' im LDAP vorhanden ist."
+
 #: setup/class_setupStep_Migrate.inc:1010
+#: setup/class_setupStep_Migrate.inc:1058
+#: setup/class_setupStep_Migrate.inc:1106
 msgid "Couldn't move users to specified department."
 msgstr "Konnte Benutzer nicht in angegebene Abteilung verschieben."
 
-#: setup/class_setupStep_Migrate.inc:924
+#: setup/class_setupStep_Migrate.inc:1020
 msgid "Winstation will be moved from"
 msgstr "Windows Arbeitsstation wird verschoben von"
 
-#: setup/class_setupStep_Migrate.inc:924 setup/class_setupStep_Migrate.inc:972
 #: setup/class_setupStep_Migrate.inc:1020
+#: setup/class_setupStep_Migrate.inc:1068
+#: setup/class_setupStep_Migrate.inc:1116
 msgid "to"
 msgstr "nach"
 
-#: setup/class_setupStep_Migrate.inc:935 setup/class_setupStep_Migrate.inc:983
+#: setup/class_setupStep_Migrate.inc:1031
+#: setup/class_setupStep_Migrate.inc:1079
 msgid "Updating following references too"
 msgstr "Aktualisiere auch die folgenden Referenzen"
 
-#: setup/class_setupStep_Migrate.inc:972
+#: setup/class_setupStep_Migrate.inc:1068
 msgid "Group will be moved from"
 msgstr "Gruppe wird verschoben von"
 
-#: setup/class_setupStep_Migrate.inc:1020
+#: setup/class_setupStep_Migrate.inc:1116
 msgid "User will be moved from"
 msgstr "Benutzer wird verschoben von"
 
-#: setup/class_setupStep_Migrate.inc:1030
+#: setup/class_setupStep_Migrate.inc:1126
 msgid "The following references will be updated"
 msgstr "Die folgenden Referenzen werden aktualisiert"
 
-#: setup/class_setupStep_Migrate.inc:1418
-msgid ""
-"The LDAP root object is missing. It is required to use your LDAP service."
-msgstr "Das LDAP Wurzel-Objekt fehlt. Es wird benötigt, um Ihren LDAP-Dienst zu verwenden."
+#: setup/class_setupStep_Migrate.inc:1532
+msgid "The LDAP root object is missing. It is required to use your LDAP service."
+msgstr ""
+"Das LDAP Wurzel-Objekt fehlt. Es wird benötigt, um Ihren LDAP-Dienst zu "
+"verwenden."
 
-#: setup/class_setupStep_Migrate.inc:1419
-#: setup/class_setupStep_Migrate.inc:1432
+#: setup/class_setupStep_Migrate.inc:1533
+#: setup/class_setupStep_Migrate.inc:1546
 msgid "Try to create root object"
 msgstr "Versuche, das Wurzel-Objekt zu erstellen"
 
-#: setup/class_setupStep_Migrate.inc:1431
+#: setup/class_setupStep_Migrate.inc:1545
 msgid "Root object couldn't be created, you should try it on your own."
 msgstr "Wurzel-Objekt konnte nicht erstellt werden, Sie sollten es selbst versuchen."
 
-#: setup/class_setupStep_Migrate.inc:1678
+#: setup/class_setupStep_Migrate.inc:1792
 #, php-format
 msgid "Failed to copy '%s' to '%s'. LDAP says '%s'."
 msgstr "Fehler beim Kopieren von '%s' nach '%s'. Der LDAP-Dienst meldete '%s'."
 
-#: setup/class_setupStep_Migrate.inc:1681
+#: setup/class_setupStep_Migrate.inc:1795
 msgid "Something went wrong while copying dns."
 msgstr "Etwas ging schief während des Kopierens von DNs."
 
-#, fuzzy
-#~ msgid "Can't open file '%s' to read uploaded file contents."
-#~ msgstr "Kann Verzeichnis '%s' für hochgeladene PPD-Datei nicht anlegen."
-
-#, fuzzy
-#~ msgid "Vacationmessage"
-#~ msgstr "Urlaubsbenachrichtigung"

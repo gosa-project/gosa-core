@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-08 09:22+0200\n"
+"POT-Creation-Date: 2007-05-10 13:38+0200\n"
 "PO-Revision-Date: 2006-06-02 16:58+0100\n"
 "Last-Translator: Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>\n"
 "Language-Team: CareWorks ICT Services <info@careworks.nl>\n"
@@ -23,19 +23,19 @@ msgstr ""
 msgid "My account"
 msgstr "Mijn account"
 
-#: contrib/gosa.conf:30
+#: contrib/gosa.conf:34
 msgid "Administration"
 msgstr "Beheer"
 
-#: contrib/gosa.conf:59
+#: contrib/gosa.conf:62
 msgid "Addons"
 msgstr "Plugins"
 
-#: contrib/gosa.conf:76 contrib/gosa.conf:90 contrib/gosa.conf:99
-#: contrib/gosa.conf:105 contrib/gosa.conf:110 contrib/gosa.conf:116
-#: contrib/gosa.conf:125 contrib/gosa.conf:141 contrib/gosa.conf:151
-#: contrib/gosa.conf:156 contrib/gosa.conf:161 contrib/gosa.conf:166
-#: contrib/gosa.conf:171 contrib/gosa.conf:176
+#: contrib/gosa.conf:85 contrib/gosa.conf:100 contrib/gosa.conf:104
+#: contrib/gosa.conf:113 contrib/gosa.conf:119 contrib/gosa.conf:124
+#: contrib/gosa.conf:130 contrib/gosa.conf:139 contrib/gosa.conf:153
+#: contrib/gosa.conf:163 contrib/gosa.conf:168 contrib/gosa.conf:190
+#: contrib/gosa.conf:195 contrib/gosa.conf:200 contrib/gosa.conf:204
 #: plugins/personal/posix/generic.tpl:4 plugins/personal/mail/generic.tpl:4
 #: plugins/personal/samba/samba3.tpl:6 plugins/personal/samba/samba2.tpl:6
 #: plugins/personal/generic/class_user.inc:16
@@ -58,22 +58,22 @@ msgstr "Plugins"
 #: plugins/admin/fai/faiPartitionTableEntry.tpl:2
 #: plugins/admin/fai/faiPackage.tpl:4 plugins/admin/fai/faiVariableEntry.tpl:5
 #: plugins/admin/groups/mail.tpl:7 plugins/admin/ogroups/termgroup.tpl:6
-#: setup/setup_feedback.tpl:44
+#: setup/setup_feedback.tpl:46
 msgid "Generic"
 msgstr "Algemeen"
 
-#: contrib/gosa.conf:77
+#: contrib/gosa.conf:86
 msgid "Unix"
 msgstr "Unix"
 
-#: contrib/gosa.conf:78 contrib/gosa.conf:91
+#: contrib/gosa.conf:87 contrib/gosa.conf:105
 #: plugins/personal/environment/class_environment.inc:7
 #: plugins/admin/groups/class_divListGroup.inc:131
 #: plugins/admin/users/class_divListUsers.inc:141
 msgid "Environment"
 msgstr "Omgeving"
 
-#: contrib/gosa.conf:79 contrib/gosa.conf:93
+#: contrib/gosa.conf:88 contrib/gosa.conf:107
 #: plugins/personal/mail/class_mailAccount.inc:22
 #: plugins/generic/references/class_reference.inc:24
 #: plugins/admin/groups/class_divListGroup.inc:123
@@ -85,7 +85,7 @@ msgstr "Omgeving"
 msgid "Mail"
 msgstr "E-mail"
 
-#: contrib/gosa.conf:80 plugins/personal/samba/class_sambaAccount.inc:24
+#: contrib/gosa.conf:89 plugins/personal/samba/class_sambaAccount.inc:24
 #: plugins/generic/references/class_reference.inc:26
 #: plugins/generic/references/class_reference.inc:28
 #: plugins/admin/groups/class_divListGroup.inc:125
@@ -93,18 +93,18 @@ msgstr "E-mail"
 msgid "Samba"
 msgstr "Samba"
 
-#: contrib/gosa.conf:81 plugins/personal/netatalk/class_netatalk.inc:36
+#: contrib/gosa.conf:90 plugins/personal/netatalk/class_netatalk.inc:36
 #: plugins/admin/users/class_divListUsers.inc:151
 msgid "Netatalk"
 msgstr "Netatalk"
 
-#: contrib/gosa.conf:82
+#: contrib/gosa.conf:91
 #: plugins/personal/connectivity/class_connectivity.inc:15
 #: plugins/personal/connectivity/main.inc:143
 msgid "Connectivity"
 msgstr "Verbindingen"
 
-#: contrib/gosa.conf:83 html/getxls.php:174 html/getxls.php:236
+#: contrib/gosa.conf:92 html/getxls.php:174 html/getxls.php:236
 #: plugins/personal/generic/generic.tpl:271
 #: plugins/personal/generic/generic.tpl:402
 #: plugins/gofax/faxaccount/generic.tpl:10
@@ -116,7 +116,7 @@ msgstr "Verbindingen"
 msgid "Fax"
 msgstr "Fax"
 
-#: contrib/gosa.conf:84 plugins/personal/generic/generic.tpl:254
+#: contrib/gosa.conf:93 plugins/personal/generic/generic.tpl:254
 #: plugins/personal/generic/generic.tpl:392
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:6
 #: plugins/addons/addressbook/contents.tpl:14
@@ -134,28 +134,27 @@ msgstr "Fax"
 msgid "Phone"
 msgstr "Telefoon"
 
-#: contrib/gosa.conf:85 plugins/personal/nagios/class_nagiosAccount.inc:18
+#: contrib/gosa.conf:95 plugins/personal/nagios/class_nagiosAccount.inc:18
 msgid "Nagios"
 msgstr "Nagios"
 
-#: contrib/gosa.conf:86 contrib/gosa.conf:95 contrib/gosa.conf:101
-#: contrib/gosa.conf:106 contrib/gosa.conf:112 contrib/gosa.conf:121
-#: contrib/gosa.conf:137 contrib/gosa.conf:147 contrib/gosa.conf:152
-#: contrib/gosa.conf:157 contrib/gosa.conf:162 contrib/gosa.conf:167
-#: contrib/gosa.conf:172 contrib/gosa.conf:177
-msgid "References"
-msgstr "Referenties"
-
-#: contrib/gosa.conf:92
+#: contrib/gosa.conf:106
 #: plugins/admin/applications/class_applicationManagement.inc:25
 msgid "Applications"
 msgstr "Programma's"
 
-#: contrib/gosa.conf:94
+#: contrib/gosa.conf:108
 msgid "ACL"
 msgstr "Rechten"
 
-#: contrib/gosa.conf:100 plugins/gofon/conference/generic.tpl:100
+#: contrib/gosa.conf:109 contrib/gosa.conf:115 contrib/gosa.conf:120
+#: contrib/gosa.conf:126 contrib/gosa.conf:135 contrib/gosa.conf:149
+#: contrib/gosa.conf:159 contrib/gosa.conf:164 contrib/gosa.conf:169
+#: contrib/gosa.conf:191 contrib/gosa.conf:196
+msgid "References"
+msgstr "Referenties"
+
+#: contrib/gosa.conf:114 plugins/gofon/conference/generic.tpl:100
 #: plugins/admin/systems/class_servRepository.inc:282
 #: plugins/admin/systems/printerPPDDialog.tpl:17
 #: plugins/admin/applications/generic.tpl:73
@@ -163,21 +162,21 @@ msgstr "Rechten"
 msgid "Options"
 msgstr "Opties"
 
-#: contrib/gosa.conf:111 plugins/gofon/phoneaccount/class_phoneAccount.inc:870
+#: contrib/gosa.conf:125 plugins/gofon/phoneaccount/class_phoneAccount.inc:870
 msgid "Parameter"
 msgstr "Parameters"
 
-#: contrib/gosa.conf:117 contrib/gosa.conf:126 contrib/gosa.conf:142
+#: contrib/gosa.conf:131 contrib/gosa.conf:140 contrib/gosa.conf:154
 #: plugins/admin/ogroups/tabs_ogroups.inc:100
 msgid "Startup"
 msgstr "Opstarten"
 
-#: contrib/gosa.conf:118 contrib/gosa.conf:143
+#: contrib/gosa.conf:132 contrib/gosa.conf:155
 #: plugins/admin/ogroups/tabs_ogroups.inc:104
 msgid "Devices"
 msgstr "Apparaten"
 
-#: contrib/gosa.conf:119 contrib/gosa.conf:144
+#: contrib/gosa.conf:133 contrib/gosa.conf:156
 #: plugins/personal/environment/environment.tpl:171
 #: plugins/generic/references/class_reference.inc:52
 #: plugins/admin/systems/class_systemManagement.inc:878
@@ -185,7 +184,7 @@ msgstr "Apparaten"
 msgid "Printer"
 msgstr "Printer"
 
-#: contrib/gosa.conf:120 contrib/gosa.conf:136 contrib/gosa.conf:145
+#: contrib/gosa.conf:134 contrib/gosa.conf:148 contrib/gosa.conf:157
 #: ihtml/themes/altlinux/MultiSelectWindow.tpl:22
 #: ihtml/themes/default/MultiSelectWindow.tpl:27
 #: ihtml/themes/default/MultiSelectWindow.tpl:66
@@ -204,29 +203,33 @@ msgstr "Printer"
 msgid "Information"
 msgstr "Informatie"
 
-#: contrib/gosa.conf:127
+#: contrib/gosa.conf:141
 msgid "Databases"
 msgstr "Databases"
 
-#: contrib/gosa.conf:128 plugins/admin/systems/servkolab.tpl:33
+#: contrib/gosa.conf:142 plugins/admin/systems/servkolab.tpl:33
 msgid "Services"
 msgstr "Services"
 
-#: contrib/gosa.conf:132 contrib/gosa.conf:134
-#: plugins/admin/systems/servRepositorySetup.tpl:1
+#: contrib/gosa.conf:144
+#: plugins/personal/connectivity/class_kolabAccount.inc:5
+msgid "Kolab"
+msgstr "Kolab"
+
+#: contrib/gosa.conf:146 plugins/admin/systems/servRepositorySetup.tpl:1
 #: plugins/admin/fai/faiPackage.tpl:29
 msgid "Repository"
 msgstr "Verzamelplaats"
 
-#: contrib/gosa.conf:135 contrib/gosa.conf:146
+#: contrib/gosa.conf:147 contrib/gosa.conf:158
 msgid "FAI summary"
 msgstr "FAI samenvatting"
 
-#: contrib/gosa.conf:187
+#: contrib/gosa.conf:217
 msgid "OGo"
 msgstr "OGo"
 
-#: contrib/gosa.conf:199 plugins/addons/ldapmanager/contentexport.tpl:16
+#: contrib/gosa.conf:229 plugins/addons/ldapmanager/contentexport.tpl:16
 #: plugins/addons/ldapmanager/contentexport.tpl:29
 #: plugins/addons/ldapmanager/contentexport.tpl:44
 #: plugins/addons/ldapmanager/contentexportxls.tpl:19
@@ -236,11 +239,11 @@ msgstr "OGo"
 msgid "Export"
 msgstr "Exporteer"
 
-#: contrib/gosa.conf:200
+#: contrib/gosa.conf:230
 msgid "Excel Export"
 msgstr "Excel Export"
 
-#: contrib/gosa.conf:201 plugins/personal/environment/logonManagement.tpl:65
+#: contrib/gosa.conf:231 plugins/personal/environment/logonManagement.tpl:65
 #: plugins/personal/mail/generic.tpl:192
 #: plugins/addons/ldapmanager/contentimport.tpl:49
 #: plugins/addons/ldapmanager/contentcsv.tpl:109
@@ -251,80 +254,76 @@ msgstr "Excel Export"
 msgid "Import"
 msgstr "Importeren"
 
-#: contrib/gosa.conf:202
+#: contrib/gosa.conf:232
 msgid "CSV Import"
 msgstr "CSV Import"
 
-#: contrib/gosa.conf:206
+#: contrib/gosa.conf:236
 msgid "Partitions"
 msgstr "Partities"
 
-#: contrib/gosa.conf:210 plugins/personal/environment/logonManagement.tpl:55
+#: contrib/gosa.conf:240 plugins/personal/environment/logonManagement.tpl:55
 #: plugins/admin/applications/generic.tpl:99
 #: plugins/admin/fai/faiHookEntry.tpl:50
 #: plugins/admin/fai/faiScriptEntry.tpl:50
 msgid "Script"
 msgstr "Script"
 
-#: contrib/gosa.conf:214 plugins/admin/fai/class_faiSummaryTab.inc:40
+#: contrib/gosa.conf:244 plugins/admin/fai/class_faiSummaryTab.inc:40
 msgid "Hooks"
 msgstr "Inhakers"
 
-#: contrib/gosa.conf:218 plugins/admin/fai/class_faiSummaryTab.inc:41
+#: contrib/gosa.conf:248 plugins/admin/fai/class_faiSummaryTab.inc:41
 msgid "Variables"
 msgstr "Variabelen"
 
-#: contrib/gosa.conf:222 plugins/admin/fai/class_faiSummaryTab.inc:42
+#: contrib/gosa.conf:252 plugins/admin/fai/class_faiSummaryTab.inc:42
 msgid "Templates"
 msgstr "Sjablonen"
 
-#: contrib/gosa.conf:226 plugins/personal/environment/environment.tpl:7
+#: contrib/gosa.conf:256 plugins/personal/environment/environment.tpl:7
 #: plugins/admin/fai/class_faiSummaryTab.inc:45
 msgid "Profiles"
 msgstr "Profielen"
 
-#: contrib/gosa.conf:227 plugins/admin/ogroups/tabs_ogroups.inc:109
+#: contrib/gosa.conf:257 plugins/admin/ogroups/tabs_ogroups.inc:109
 msgid "Summary"
 msgstr "Samenvatting"
 
-#: contrib/gosa.conf:231
+#: contrib/gosa.conf:261
 msgid "Packages"
 msgstr "Pakketten"
 
-#: contrib/gosa.conf:253
-msgid "{LOCATIONNAME}"
-msgstr "{LOCATIONNAME}"
-
-#: contrib/gosa.conf:272 plugins/admin/ogroups/class_phonequeue.inc:262
+#: contrib/gosa.conf:437 plugins/admin/ogroups/class_phonequeue.inc:262
 #: setup/class_setupStep_Language.inc:48
 msgid "German"
 msgstr "Duits"
 
-#: contrib/gosa.conf:273 setup/class_setupStep_Language.inc:51
+#: contrib/gosa.conf:438 setup/class_setupStep_Language.inc:51
 msgid "Russian"
 msgstr "Russisch"
 
-#: contrib/gosa.conf:274
+#: contrib/gosa.conf:439
 msgid "Spanish"
 msgstr "Spaans"
 
-#: contrib/gosa.conf:275 setup/class_setupStep_Language.inc:49
+#: contrib/gosa.conf:440 setup/class_setupStep_Language.inc:49
 msgid "French"
 msgstr "Frans"
 
-#: contrib/gosa.conf:276
+#: contrib/gosa.conf:441
 msgid "Dutch"
 msgstr "Nederlands"
 
-#: contrib/gosa.conf:277 setup/class_setupStep_Language.inc:50
+#: contrib/gosa.conf:442 setup/class_setupStep_Language.inc:50
 msgid "English"
 msgstr "Engels"
 
-#: contrib/gosa.conf:278
+#: contrib/gosa.conf:443
 msgid "Italian"
 msgstr "Italiaans"
 
-#: contrib/gosa.conf:279
+#: contrib/gosa.conf:444
 msgid "Polish"
 msgstr "Pools"
 
@@ -442,7 +441,7 @@ msgstr ""
 #: plugins/addons/ldapmanager/contentcsv.tpl:114
 #: plugins/admin/systems/class_systemManagement.inc:243
 #: plugins/admin/fai/faiNewBranch.tpl:52
-#: plugins/admin/departments/dep_iframe.tpl:19 include/functions.inc:1529
+#: plugins/admin/departments/dep_iframe.tpl:19 include/functions.inc:1530
 #: setup/class_setup.inc:275 setup/class_setup.inc:277
 msgid "Back"
 msgstr "Terug"
@@ -544,7 +543,7 @@ msgstr "Er is een blokkade conflict gedetecteerd"
 
 #: ihtml/themes/altlinux/islocked.tpl:6 ihtml/themes/altlinux/conflict.tpl:6
 #: ihtml/themes/default/islocked.tpl:6 ihtml/themes/default/conflict.tpl:6
-#: html/index.php:49 html/index.php:342 html/index.php:348
+#: html/index.php:49 html/index.php:349 html/index.php:355
 #: plugins/gofax/blocklists/remove.tpl:2 plugins/gofon/macro/remove.tpl:2
 #: plugins/gofon/conference/remove.tpl:2
 #: plugins/addons/addressbook/remove.tpl:2
@@ -555,10 +554,10 @@ msgstr "Er is een blokkade conflict gedetecteerd"
 #: plugins/admin/ogroups/termgroup.tpl:2 plugins/admin/ogroups/remove.tpl:2
 #: plugins/admin/departments/remove.tpl:2 plugins/admin/users/remove.tpl:2
 #: include/sieve/templates/remove_script.tpl:2 setup/setup_checks.tpl:32
-#: setup/setup_checks.tpl:93 setup/class_setupStep_Migrate.inc:212
-#: setup/class_setupStep_Migrate.inc:261 setup/class_setupStep_Migrate.inc:365
-#: setup/class_setupStep_Migrate.inc:411 setup/class_setupStep_Migrate.inc:546
-#: setup/class_setupStep_Migrate.inc:676
+#: setup/setup_checks.tpl:93 setup/class_setupStep_Migrate.inc:211
+#: setup/class_setupStep_Migrate.inc:260 setup/class_setupStep_Migrate.inc:364
+#: setup/class_setupStep_Migrate.inc:410 setup/class_setupStep_Migrate.inc:545
+#: setup/class_setupStep_Migrate.inc:675
 msgid "Warning"
 msgstr "Waarschuwing"
 
@@ -686,9 +685,9 @@ msgstr "Verwijderen"
 #: include/sieve/templates/select_test_type.tpl:13
 #: include/sieve/templates/create_script.tpl:15
 #: include/sieve/templates/remove_script.tpl:16
-#: include/sieve/templates/element_comment.tpl:10 setup/setup_migrate.tpl:131
-#: setup/setup_migrate.tpl:179 setup/setup_migrate.tpl:267
-#: setup/setup_migrate.tpl:322 setup/setup_migrate.tpl:376
+#: include/sieve/templates/element_comment.tpl:10 setup/setup_migrate.tpl:134
+#: setup/setup_migrate.tpl:185 setup/setup_migrate.tpl:249
+#: setup/setup_migrate.tpl:310 setup/setup_migrate.tpl:366
 #: setup/setup_ldap.tpl:17
 msgid "Cancel"
 msgstr "Annuleren"
@@ -726,7 +725,7 @@ msgid "You already have an Administrative Account and a Group."
 msgstr "U heeft al een Administratief Account en Groep"
 
 #: ihtml/themes/altlinux/setup_useradmin.tpl:6
-#: ihtml/themes/default/setup_useradmin.tpl:6 html/index.php:250
+#: ihtml/themes/default/setup_useradmin.tpl:6 html/index.php:257
 msgid ""
 "You're missing an administrative account for GOsa, you'll not be able to "
 "administrate anything!"
@@ -765,7 +764,7 @@ msgstr "Gebruikersnaam"
 #: plugins/admin/systems/servdb.tpl:50 plugins/admin/systems/servdb.tpl:86
 #: plugins/admin/systems/servdb.tpl:109 plugins/admin/systems/servdb.tpl:128
 #: plugins/admin/systems/class_divListSystem.inc:178
-#: setup/setup_migrate.tpl:218 setup/setup_config2.tpl:181
+#: setup/setup_migrate.tpl:224 setup/setup_config2.tpl:181
 #: setup/setup_config2.tpl:226
 msgid "Password"
 msgstr "Wachtwoord"
@@ -1195,16 +1194,6 @@ msgstr "Wachtwoord veranderen"
 msgid "Click here to Change your password"
 msgstr "Klik hier om uw wachtwoord te veranderen."
 
-#: html/setup.php:89
-#, php-format
-msgid ""
-"Directory '%s' specified as smarty compile directory is not accessible, "
-"please check existence and rights of this directory!"
-msgstr ""
-"Directory '%s' die opgegeven is als smarty compileer directory is niet "
-"toegankelijk! Controleer of deze directory bestaat en wat de rechten op deze "
-"directory zijn!"
-
 #: html/main.php:164
 msgid ""
 "FATAL: Register globals is on. GOsa will refuse to login unless this is "
@@ -1290,7 +1279,7 @@ msgstr "Gebruikerslijst van %s in %s "
 #: html/getxls.php:80 html/getxls.php:108 html/getxls.php:123
 #: html/getxls.php:282 html/getxls.php:299
 #: plugins/addons/addressbook/class_addressbook.inc:524
-#: setup/setup_migrate.tpl:210
+#: setup/setup_migrate.tpl:216
 msgid "User ID"
 msgstr "Gebruikers ID"
 
@@ -1394,8 +1383,8 @@ msgstr "Getoonde naam"
 #: plugins/admin/fai/faiPackage.tpl:9
 #: plugins/admin/fai/class_faiSummaryTab.inc:329
 #: plugins/admin/fai/paste_fai_object.tpl:1
-#: plugins/admin/fai/faiVariableEntry.tpl:9 setup/setup_migrate.tpl:202
-#: setup/setup_feedback.tpl:20
+#: plugins/admin/fai/faiVariableEntry.tpl:9 setup/setup_migrate.tpl:208
+#: setup/setup_feedback.tpl:22
 msgid "Name"
 msgstr "Naam"
 
@@ -1422,7 +1411,7 @@ msgid "Location"
 msgstr "Plaats"
 
 #: html/getxls.php:174 plugins/personal/nagios/nagios.tpl:12
-#: plugins/admin/systems/servdnseditzone.tpl:51 setup/setup_feedback.tpl:28
+#: plugins/admin/systems/servdnseditzone.tpl:51 setup/setup_feedback.tpl:30
 msgid "Mail address"
 msgstr "E-mail adres"
 
@@ -1519,7 +1508,7 @@ msgid "Mobile"
 msgstr "GSM"
 
 #: html/getxls.php:236 plugins/personal/generic/generic.tpl:213
-#: setup/setup_feedback.tpl:12
+#: setup/setup_feedback.tpl:14
 msgid "Organization"
 msgstr "Organisatie"
 
@@ -1588,17 +1577,17 @@ msgstr "De opgegeven database kon niet geselecteerd worden!"
 msgid "Database query failed!"
 msgstr "De database zoekopdracht is mislukt"
 
-#: html/index.php:49 html/index.php:342
+#: html/index.php:49 html/index.php:349
 msgid "Session will not be encrypted."
 msgstr "De sessie zal niet versleuteld zijn."
 
-#: html/index.php:49 html/index.php:342
+#: html/index.php:49 html/index.php:349
 msgid "Enter SSL session"
 msgstr "Gebruik een SSL sessie"
 
 #: html/index.php:117
-#, php-format
-msgid "GOsa configuration %s/gosa.conf is not readable. Aborted."
+#, fuzzy, php-format
+msgid "GOsa configuration %s/%s is not readable. Aborted."
 msgstr "GOsa configuratie %s/gosa.conf is niet leesbaar. Geannuleerd."
 
 #: html/index.php:138
@@ -1607,13 +1596,13 @@ msgid "Directory '%s' specified as compile directory is not accessible!"
 msgstr ""
 "Directory '%s' die opgegeven is als compileer directory is niet toegankelijk!"
 
-#: html/index.php:207 include/class_config.inc:207
+#: html/index.php:207 include/class_config.inc:208
 msgid "Can't bind to LDAP. Please contact the system administrator."
 msgstr ""
 "Kan niet verbinden met de LDAP server. Neem a.u.b. contact op met de "
 "systeembeheerder."
 
-#: html/index.php:223
+#: html/index.php:222
 msgid ""
 "GOsa cannot retrieve information about the installed schema files. Please "
 "make sure, that this is possible."
@@ -1621,31 +1610,31 @@ msgstr ""
 "GOsa kon geen informatie ophalen over geinstalleerde schema bestanden. Zorg "
 "er a.u.b. voor dat dit mogelijk is."
 
-#: html/index.php:231
+#: html/index.php:238
 msgid ""
 "Your ldap setup contains old schema definitions. Please re-run the setup."
 msgstr ""
 "Uw LDAP installatie bevat oude schema definities. Draai het installatie "
 "programma a.u.b. opnieuw."
 
-#: html/index.php:258
+#: html/index.php:265
 msgid "Please specify a valid username!"
 msgstr "Geef a.u.b. een geldige gebruikersnaam op!"
 
-#: html/index.php:260
+#: html/index.php:267
 msgid "Please specify your password!"
 msgstr "Geef a.u.b. uw wachtwoord op!"
 
-#: html/index.php:267
+#: html/index.php:274
 msgid "Please check the username/password combination."
 msgstr "Controleer a.u.b. de gebruikersnaam/wachtwoord combinatie."
 
-#: html/index.php:296
+#: html/index.php:303
 msgid "Account locked. Please contact your system administrator."
 msgstr ""
 "Account is geblokkeerd. Neem a.u.b. contact op met de systeembeheerder."
 
-#: html/index.php:348
+#: html/index.php:355
 msgid ""
 "Your browser has cookies disabled. Please enable cookies and reload this "
 "page before logging in!"
@@ -2551,10 +2540,10 @@ msgstr "Login script"
 #: plugins/admin/fai/faiVariableEntry.tpl:48
 #: plugins/admin/groups/mail_admins.tpl:37
 #: plugins/admin/groups/application_options.tpl:11
-#: include/sieve/templates/create_script.tpl:13 setup/setup_migrate.tpl:129
-#: setup/setup_migrate.tpl:177 setup/setup_migrate.tpl:262
-#: setup/setup_migrate.tpl:264 setup/setup_migrate.tpl:320
-#: setup/setup_migrate.tpl:374 setup/setup_ldap.tpl:16
+#: include/sieve/templates/create_script.tpl:13 setup/setup_migrate.tpl:132
+#: setup/setup_migrate.tpl:183 setup/setup_migrate.tpl:248
+#: setup/setup_migrate.tpl:308 setup/setup_migrate.tpl:364
+#: setup/setup_ldap.tpl:16
 msgid "Apply"
 msgstr "Toepassen"
 
@@ -2625,7 +2614,7 @@ msgstr "Doorzoek"
 #: plugins/admin/systems/glpi_edit_cartridge_type.tpl:13
 #: plugins/admin/systems/glpi_edit_os.tpl:15
 #: plugins/admin/fai/class_faiSummaryTab.inc:227
-#: include/class_MultiSelectWindow.inc:79 setup/setup_migrate.tpl:78
+#: include/class_MultiSelectWindow.inc:79 setup/setup_migrate.tpl:79
 msgid "Close"
 msgstr "Sluiten"
 
@@ -3705,10 +3694,6 @@ msgstr "Het opslaan van het Open-Xchange account is mislukt"
 msgid "Creating oxchange addressbook tree failed"
 msgstr "Het aanmaken van het Open-Xchange adresboek is mislukt"
 
-#: plugins/personal/connectivity/class_kolabAccount.inc:5
-msgid "Kolab"
-msgstr "Kolab"
-
 #: plugins/personal/connectivity/class_kolabAccount.inc:125
 msgid ""
 "You're trying to add an invalid email address to the list of delegations."
@@ -4732,7 +4717,6 @@ msgstr "gedurende"
 #: plugins/admin/systems/class_printGeneric.inc:849
 #: plugins/admin/fai/faiTemplateEntry.tpl:94
 #: plugins/admin/ogroups/class_ogroupManagement.inc:363
-#: setup/setup_migrate.tpl:241 setup/setup_migrate.tpl:244
 #: setup/setup_config2.tpl:172 setup/setup_config2.tpl:217
 msgid "User"
 msgstr "Gebruiker"
@@ -5454,12 +5438,12 @@ msgstr "U heeft geen toestemming om deze macro te verwijderen!"
 
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:263
 #: setup/setup_checks.tpl:27 setup/setup_checks.tpl:87
-#: setup/class_setupStep_Migrate.inc:218 setup/class_setupStep_Migrate.inc:267
-#: setup/class_setupStep_Migrate.inc:325 setup/class_setupStep_Migrate.inc:372
-#: setup/class_setupStep_Migrate.inc:418 setup/class_setupStep_Migrate.inc:489
-#: setup/class_setupStep_Migrate.inc:542 setup/class_setupStep_Migrate.inc:672
-#: setup/class_setupStep_Migrate.inc:761
-#: setup/class_setupStep_Migrate.inc:1440
+#: setup/class_setupStep_Migrate.inc:217 setup/class_setupStep_Migrate.inc:266
+#: setup/class_setupStep_Migrate.inc:324 setup/class_setupStep_Migrate.inc:371
+#: setup/class_setupStep_Migrate.inc:417 setup/class_setupStep_Migrate.inc:488
+#: setup/class_setupStep_Migrate.inc:541 setup/class_setupStep_Migrate.inc:671
+#: setup/class_setupStep_Migrate.inc:803
+#: setup/class_setupStep_Migrate.inc:1554
 msgid "Ok"
 msgstr ""
 
@@ -6373,7 +6357,7 @@ msgstr ""
 "terug te halen."
 
 #: plugins/addons/addressbook/class_addressbook.inc:6
-#: setup/class_setupStep_Feedback.inc:106
+#: setup/class_setupStep_Feedback.inc:105
 msgid "Addressbook"
 msgstr "Adresboek"
 
@@ -7102,7 +7086,6 @@ msgstr "Dit object heeft geen relatie met andere objecten."
 #: plugins/admin/fai/faiTemplateEntry.tpl:71
 #: plugins/admin/fai/faiTemplateEntry.tpl:103
 #: plugins/admin/ogroups/class_ogroupManagement.inc:364
-#: setup/setup_migrate.tpl:240 setup/setup_migrate.tpl:243
 msgid "Group"
 msgstr "Groep"
 
@@ -9952,7 +9935,7 @@ msgstr "Netwerk printer"
 msgid "Other network component"
 msgstr "Ander netwerk component"
 
-#: plugins/admin/systems/chooser.tpl:16 setup/class_setupStep_Migrate.inc:767
+#: plugins/admin/systems/chooser.tpl:16 setup/class_setupStep_Migrate.inc:809
 msgid "Create"
 msgstr "Aanmaken"
 
@@ -10732,8 +10715,8 @@ msgstr "Geintegreerde microfoon"
 #: include/sieve/templates/element_header.tpl:41
 #: include/sieve/templates/element_envelope.tpl:41
 #: setup/class_setupStep_Config2.inc:129 setup/class_setupStep_Config1.inc:87
-#: setup/class_setupStep_Ldap.inc:74 setup/setup_feedback.tpl:51
-#: setup/setup_feedback.tpl:69 setup/class_setupStep_Schema.inc:63
+#: setup/class_setupStep_Ldap.inc:74 setup/setup_feedback.tpl:53
+#: setup/setup_feedback.tpl:71 setup/class_setupStep_Schema.inc:63
 #: setup/class_setupStep_Config3.inc:76
 msgid "Yes"
 msgstr "Ja"
@@ -10749,8 +10732,8 @@ msgstr "Ja"
 #: include/sieve/templates/element_header.tpl:43
 #: include/sieve/templates/element_envelope.tpl:43
 #: setup/class_setupStep_Config2.inc:129 setup/class_setupStep_Config1.inc:87
-#: setup/class_setupStep_Ldap.inc:74 setup/setup_feedback.tpl:53
-#: setup/setup_feedback.tpl:71 setup/class_setupStep_Schema.inc:63
+#: setup/class_setupStep_Ldap.inc:74 setup/setup_feedback.tpl:55
+#: setup/setup_feedback.tpl:73 setup/class_setupStep_Schema.inc:63
 #: setup/class_setupStep_Config3.inc:76
 msgid "No"
 msgstr "Nee"
@@ -12056,7 +12039,7 @@ msgstr "Gebruikte pakketten"
 msgid "Choosen packages"
 msgstr "Gekozen pakketten"
 
-#: plugins/admin/fai/faiPackage.tpl:73 include/functions.inc:668
+#: plugins/admin/fai/faiPackage.tpl:73 include/functions.inc:669
 msgid "Configure"
 msgstr "Instellen"
 
@@ -13780,22 +13763,22 @@ msgid ""
 "Undefined zone name '%s'. Zone name must look like this 'server/zone.com'."
 msgstr ""
 
-#: include/functions.inc:299
+#: include/functions.inc:300
 #, php-format
 msgid "FATAL: Error when connecting the LDAP. Server said '%s'."
 msgstr ""
 "FATAAL: Fout bij het verbinden met de LDAP server. De server meldt: '%s'."
 
-#: include/functions.inc:316
+#: include/functions.inc:317
 #, php-format
 msgid "User login failed. LDAP server said '%s'."
 msgstr "Gebruikers inlog mislukt. De LDAP server meldt: '%s'."
 
-#: include/functions.inc:337
+#: include/functions.inc:338
 msgid "Username / UID is not unique. Please check your LDAP database."
 msgstr "Gebruikersnaam / UID is niet uniek. Controleer uw LDAP database a.u.b."
 
-#: include/functions.inc:469
+#: include/functions.inc:470
 msgid ""
 "Error while adding a lock. Parameters are not set correctly, please check "
 "the source!"
@@ -13803,26 +13786,26 @@ msgstr ""
 "Fout bij het plaatsen van een blokkade. Parameters zijn niet goed ingesteld. "
 "Controleer de bron!"
 
-#: include/functions.inc:479
-#, php-format
+#: include/functions.inc:480
+#, fuzzy, php-format
 msgid ""
 "Can't set locking information in LDAP database. Please check the 'config' "
-"entry in gosa.conf! LDAP server says '%s'."
+"entry in %s! LDAP server says '%s'."
 msgstr ""
 "Kan de blokkade informatie niet instellen in de LDAP database. Controleer a."
 "u.b. de 'config' regel in gosa.conf! De LDAP server meldt: '%s'."
 
-#: include/functions.inc:494
+#: include/functions.inc:495
 #, php-format
 msgid "Adding a lock failed. LDAP server says '%s'."
 msgstr "Plaatsen van een blokkade mislukt. De LDAP server meldt: '%s'."
 
-#: include/functions.inc:520
+#: include/functions.inc:521
 #, php-format
 msgid "Removing a lock failed. LDAP server says '%s'."
 msgstr "Verwijderen van een blokkade mislukt. De LDAP server meldt: '%s'."
 
-#: include/functions.inc:550
+#: include/functions.inc:551
 msgid ""
 "Getting the lock from LDAP failed. Parameters are not set correctly, please "
 "check the source!"
@@ -13830,15 +13813,16 @@ msgstr ""
 "Ophalen van de blokkade uit de LDAP database is mislukt. Parameters zijn "
 "niet goed ingesteld. Controleer de bron!"
 
-#: include/functions.inc:560
+#: include/functions.inc:561
+#, fuzzy, php-format
 msgid ""
 "Can't get locking information in LDAP database. Please check the 'config' "
-"entry in gosa.conf!"
+"entry in %s!"
 msgstr ""
 "Kan de blokkade informatie niet ophalen uit de LDAP database. Controleer a.u."
 "b. de 'config' regel in gosa.conf!"
 
-#: include/functions.inc:568
+#: include/functions.inc:569
 msgid ""
 "Found multiple locks for object to be locked. This should not be possible - "
 "cleaning up multiple references."
@@ -13846,12 +13830,12 @@ msgstr ""
 "Er zijn meerdere blokkades voor het te blokkeren object gevonden. Dat zou "
 "niet mogelijk moeten zijn. Meervoudige verwijzingen worden opgeschoond."
 
-#: include/functions.inc:654
+#: include/functions.inc:655
 #, php-format
 msgid "The size limit of %d entries is exceed!"
 msgstr "De hoeveelheidslimiet van %d invoeren is overschreden!"
 
-#: include/functions.inc:656
+#: include/functions.inc:657
 #, php-format
 msgid ""
 "Set the new size limit to %s and show me this message if the limit still "
@@ -13860,15 +13844,15 @@ msgstr ""
 "Stel de nieuwe hoeveelheidslimiet in op %s en toon me dit bericht indien de "
 "limiet nog steeds overschreden wordt."
 
-#: include/functions.inc:673
+#: include/functions.inc:674
 msgid "incomplete"
 msgstr "onvolledig"
 
-#: include/functions.inc:1116 include/functions.inc:1310
+#: include/functions.inc:1117 include/functions.inc:1311
 msgid "LDAP error:"
 msgstr "LDAP fout:"
 
-#: include/functions.inc:1117
+#: include/functions.inc:1118
 msgid ""
 "Problems with the LDAP server mean that you probably lost the last changes. "
 "Please check your LDAP setup for possible errors and try again."
@@ -13877,7 +13861,7 @@ msgstr ""
 "verloren gegaan zijn. Controleer uw LDAP instellingen voor mogelijke fouten "
 "en probeer het opnieuw."
 
-#: include/functions.inc:1125
+#: include/functions.inc:1126
 msgid ""
 "Please check your input and fix the error. Press 'OK' to close this message "
 "box."
@@ -13885,23 +13869,23 @@ msgstr ""
 "Controleer uw invoer a.u.b. en verbeter de fout. Druk 'OK' om dit "
 "berichtvenster te sluiten."
 
-#: include/functions.inc:1134
+#: include/functions.inc:1135
 msgid "An error occured while processing your request"
 msgstr "Er is een fout opgetreden bij het verwerken van uw aanvraag"
 
-#: include/functions.inc:1138 include/functions_setup.inc:254
+#: include/functions.inc:1139
 msgid "OK"
 msgstr "OK"
 
-#: include/functions.inc:1199
+#: include/functions.inc:1200
 msgid "Continue anyway"
 msgstr "Toch doorgaan"
 
-#: include/functions.inc:1201
+#: include/functions.inc:1202
 msgid "Edit anyway"
 msgstr "Alsnog bewerken"
 
-#: include/functions.inc:1203
+#: include/functions.inc:1204
 #, php-format
 msgid ""
 "You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
@@ -13911,29 +13895,92 @@ msgstr ""
 "gebruiker '%s'. Neem a.u.b. contact op met deze persoon om eea kort te "
 "sluiten."
 
-#: include/functions.inc:1492
+#: include/functions.inc:1493
 msgid "Entries per page"
 msgstr "Regels per pagina"
 
-#: include/functions.inc:1520
+#: include/functions.inc:1521
 msgid "Apply filter"
 msgstr "Filter toepassen"
 
-#: include/functions.inc:1794
+#: include/functions.inc:1795
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-#: include/functions.inc:1837
+#: include/functions.inc:1838
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "GOsa ontwikkelversie (Revisie %s)"
 
-#: include/functions.inc:2179 include/functions.inc:2183
+#: include/functions.inc:2240 include/functions.inc:2244
 msgid "Warning - base_hook is not avialable. Using default base."
 msgstr ""
 
-#: include/functions.inc:2189
+#: include/functions.inc:2250
 msgid "Warning - no base_hook defined. Using default base."
+msgstr ""
+
+#: include/functions.inc:2275 setup/class_setupStep_Schema.inc:95
+msgid "Can't get schema information from server. No schema check possible!"
+msgstr ""
+"Kan de schema informatie niet ophalen van de server. Schema controle is "
+"onmogelijk!"
+
+#: include/functions.inc:2301
+msgid "Used to store account specific informations."
+msgstr ""
+
+#: include/functions.inc:2308
+msgid ""
+"Used to lock currently edited entries to avoid multiple changes at the same "
+"time."
+msgstr ""
+
+#: include/functions.inc:2351
+#, fuzzy, php-format
+msgid "The required objectClass '%s' is not present in your schema setup"
+msgstr "Vereiste objectklasse '%s' is niet voorhanden in de LDAP configuratie"
+
+#: include/functions.inc:2353
+#, fuzzy, php-format
+msgid "The optional objectClass '%s' is not present in your schema setup"
+msgstr "Vereiste objectklasse '%s' is niet voorhanden in de LDAP configuratie"
+
+#: include/functions.inc:2359
+#, fuzzy, php-format
+msgid "The required objectclass '%s' does not have version %s"
+msgstr "Vereiste objectklasse '%s' heeft niet versienummer %s"
+
+#: include/functions.inc:2361
+#, fuzzy, php-format
+msgid "The optional objectclass '%s' does not have version %s"
+msgstr "Vereiste objectklasse '%s' heeft niet versienummer %s"
+
+#: include/functions.inc:2365
+#, fuzzy, php-format
+msgid "Class(es) available"
+msgstr "Bestand is beschikbaar"
+
+#: include/functions.inc:2388
+msgid ""
+"You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
+"schema    configuration do not support this option."
+msgstr ""
+
+#: include/functions.inc:2389
+msgid ""
+"In order to use rfc2307bis conform groups the objectClass 'posixGroup' must "
+"be      AUXILIARY"
+msgstr ""
+
+#: include/functions.inc:2393
+msgid ""
+"You have disabled the rfc2307bis option on the 'ldap setup' step, but your "
+"schema   configuration do not support this option."
+msgstr ""
+
+#: include/functions.inc:2394
+msgid "The objectClass 'posixGroup' must be STRUCTURAL"
 msgstr ""
 
 #: include/class_mail-methods-cyrus.inc:40
@@ -14037,14 +14084,13 @@ msgstr "Fout bij het ophalen van de bron dn - afgebroken!"
 msgid "Unknown FAIstate %s"
 msgstr "Onbekende FAI status %s"
 
-#: include/class_ldap.inc:673
+#: include/class_ldap.inc:739
 #, php-format
 msgid ""
-"The referral url '%s' is missing the ldap base. It should look like this "
-"'ldap://server:port/base'."
+"Autocreation of subtree failed. No objectClass found for attribute '%s'."
 msgstr ""
 
-#: include/class_ldap.inc:734
+#: include/class_ldap.inc:787 include/class_ldap.inc:877
 #, php-format
 msgid ""
 "Autocreation of type '%s' is currently not supported. Please report to the "
@@ -14053,17 +14099,29 @@ msgstr ""
 "Automatische aanmaak van object type '%s' wordt momenteel niet ondersteund. "
 "Rapporteer dit a.u.b. aan het GOsa team."
 
-#: include/class_ldap.inc:803
+#: include/class_ldap.inc:795
+#, fuzzy, php-format
+msgid "Creating subtree '%s' failed."
+msgstr "Het aanmaken van de FAI script basis is mislukt"
+
+#: include/class_ldap.inc:816
+#, php-format
+msgid ""
+"The referral url '%s' is missing the ldap base. It should look like this "
+"'ldap://server:port/base'."
+msgstr ""
+
+#: include/class_ldap.inc:946
 #, php-format
 msgid "while operating on '%s' using LDAP server '%s'"
 msgstr "bij het bewerken van '%s' op LDAP server '%s'"
 
-#: include/class_ldap.inc:805
+#: include/class_ldap.inc:948
 #, php-format
 msgid "while operating on LDAP server %s"
 msgstr "bij het bewerken van LDAP server %s"
 
-#: include/class_ldap.inc:1001
+#: include/class_ldap.inc:1144
 #, php-format
 msgid ""
 "This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
@@ -14072,12 +14130,12 @@ msgstr ""
 "Dit is geen geldige DN: '%s'. Een blok dat geïmporteerd wordt, dient te "
 "beginnen met 'dn: ...' op regel %s"
 
-#: include/class_ldap.inc:1014
+#: include/class_ldap.inc:1157
 #, php-format
 msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
 msgstr "De dn: '%s' (op regel %s) bestaat al in de LDAP database."
 
-#: include/class_ldap.inc:1030
+#: include/class_ldap.inc:1173
 #, php-format
 msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
 msgstr ""
@@ -14085,11 +14143,11 @@ msgstr ""
 "vanaf regel %s!"
 
 #: include/class_config.inc:71
-#, php-format
-msgid "XML error in gosa.conf: %s at line %d"
+#, fuzzy, php-format
+msgid "XML error in %s: %s at line %d"
 msgstr "XML fout in gosa.conf: %s op regel %d"
 
-#: include/class_config.inc:509
+#: include/class_config.inc:510
 msgid "SID and/or RIDBASE missing in your configuration!"
 msgstr "SID en/of RIDBASE ontbreken in uw configuratie!"
 
@@ -14134,15 +14192,16 @@ msgstr ""
 "bestaat niet."
 
 #: include/class_password-methods.inc:204
-msgid ""
-"Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."
+#, fuzzy, php-format
+msgid "Setting for SMBHASH in %s is incorrect! Can't change Samba password."
 msgstr ""
 "De instelling voor 'SMBHASH' in gosa.conf is niet correct. Kan het samba "
 "wachtwoord niet veranderen."
 
 #: include/class_pluglist.inc:116
+#, fuzzy, php-format
 msgid ""
-"Your gosa.conf information has changed partly. Please convert it using the "
+"Your %s information has changed partly. Please convert it using the "
 "contributed script fix_config.sh!"
 msgstr ""
 "Uw gosa.conf is gedeeltelijk veranderd. Converteer het a.u.b. met het "
@@ -14265,540 +14324,6 @@ msgstr "%s resultaten voor uw zoekopdracht met sleutelwoord %s"
 msgid "%s%% hit rate in file %s"
 msgstr "%s%% resultaat in bestand %s"
 
-#: include/functions_setup.inc:84 setup/class_setupStep_Schema.inc:101
-msgid "Can't get schema information from server. No schema check possible!"
-msgstr ""
-"Kan de schema informatie niet ophalen van de server. Schema controle is "
-"onmogelijk!"
-
-#: include/functions_setup.inc:99
-#, php-format
-msgid ""
-"Optional objectclass '%s' required by plugin '%s' is not present in LDAP "
-"setup"
-msgstr ""
-"De optionele objectklasse '%s' die benodigd is door module '%s' is niet "
-"aanwezig in de LDAP configuratie"
-
-#: include/functions_setup.inc:103
-#, php-format
-msgid ""
-"Optional objectclass '%s' required by plugin '%s' does not have version %s"
-msgstr ""
-"De optionele objectklasse '%s' die benodigd is door module '%s' heeft niet "
-"versienummer %s"
-
-#: include/functions_setup.inc:108
-#, php-format
-msgid "Support for '%s' enabled"
-msgstr "Ondersteuning voor '%s' is ingeschakeld"
-
-#: include/functions_setup.inc:118
-#, php-format
-msgid "Required objectclass '%s' is not present in LDAP setup"
-msgstr "Vereiste objectklasse '%s' is niet voorhanden in de LDAP configuratie"
-
-#: include/functions_setup.inc:122
-#, php-format
-msgid "Required objectclass '%s' does not have version %s"
-msgstr "Vereiste objectklasse '%s' heeft niet versienummer %s"
-
-#: include/functions_setup.inc:133
-msgid "SAMBA 3 support disabled, no schema seems to be installed"
-msgstr ""
-"SAMBA 3 ondersteuning is uitgeschakeld. Het LDAP schema is niet "
-"geïnstalleerd."
-
-#: include/functions_setup.inc:138
-msgid "SAMBA 3 support enabled"
-msgstr "SAMBA 3 ondersteuning is ingeschakeld"
-
-#: include/functions_setup.inc:143
-msgid "SAMBA 2 support disabled, no schema seems to be installed"
-msgstr ""
-"SAMBA 2 ondersteuning is uitgeschakeld. Het LDAP schema is niet "
-"geïnstalleerd."
-
-#: include/functions_setup.inc:148
-msgid "SAMBA 2 support enabled"
-msgstr "SAMBA 2 ondersteuning is ingeschakeld"
-
-#: include/functions_setup.inc:154
-msgid "Support for pureftp disabled, no schema seems to be installed"
-msgstr ""
-"PureFtp ondersteuning is uitgeschakeld. Het LDAP schema is niet geïnstallerd."
-
-#: include/functions_setup.inc:159
-msgid "Support for pureftp enabled"
-msgstr "PureFtp ondersteuning is ingeschakeld"
-
-#: include/functions_setup.inc:164
-msgid "Support for WebDAV disabled, no schema seems to be installed"
-msgstr ""
-"WebDAV ondersteuning is uitgeschakeld. Het LDAP schema is niet geïnstalleer."
-
-#: include/functions_setup.inc:169
-msgid "Support for WebDAV enabled"
-msgstr "WebDAV ondersteuning is ingeschakeld"
-
-#: include/functions_setup.inc:174
-msgid "Support for phpgroupware disabled, no schema seems to be installed"
-msgstr ""
-"Phpgroupware ondersteuning is uitgeschakeld. Het LDAP schema is niet "
-"geïnstalleerd."
-
-#: include/functions_setup.inc:179
-msgid "Support for phpgroupware enabled"
-msgstr "Phpgroupware ondersteuning is ingeschakeld"
-
-#: include/functions_setup.inc:184
-msgid "Support for trustAccount disabled, no schema seems to be installed"
-msgstr ""
-"Vertrouwensaccount ondersteuning is uitgeschakeld. Het LDAP schema is niet "
-"geïnstalleerd."
-
-#: include/functions_setup.inc:189
-msgid "Support for trustAccount enabled"
-msgstr "Vertrouwensaccount ondersteuning is ingeschakeld"
-
-#: include/functions_setup.inc:194
-msgid "Support for gofon disabled, no schema seems to be installed"
-msgstr ""
-"Gofon ondersteuning is uitgeschakeld. Het LDAP schema is niet geïnstalleerd."
-
-#: include/functions_setup.inc:199
-msgid "Support for gofon enabled"
-msgstr "Gofon ondersteuning is ingeschakeld"
-
-#: include/functions_setup.inc:204
-msgid "Support for nagios disabled, no schema seems to be installed"
-msgstr ""
-"Nagios ondersteuning is uitgeschakeld. Het LDAP schema is niet geïnstalleerd."
-
-#: include/functions_setup.inc:209
-msgid "Support for nagios enabled"
-msgstr "Nagios ondersteuning is ingeschakeld"
-
-#: include/functions_setup.inc:214
-msgid "Support for netatalk disabled, no schema seems to be installed"
-msgstr ""
-"Netatalk ondersteuning is uitgeschakeld. Het LDAP schema is niet "
-"geïnstalleerd."
-
-#: include/functions_setup.inc:219
-msgid "Support for netatalk enabled"
-msgstr "Netatalk ondersteuning is ingeschakeld"
-
-#: include/functions_setup.inc:229
-msgid ""
-"Support for Kolab disabled, no schema seems to be installed, setting mail-"
-"method to cyrus"
-msgstr ""
-"Kolab ondersteuning is uitgeschakeld. Aangezien het LDAP schema niet "
-"geïnstalleed is, zal deE-mail methode op Cyrus ingesteld worden."
-
-#: include/functions_setup.inc:236
-msgid "Support for Kolab enabled"
-msgstr "Kolab ondersteuning is ingeschakeld"
-
-#: include/functions_setup.inc:257
-msgid "Ignored"
-msgstr "Genegeerd"
-
-#: include/functions_setup.inc:259 setup/class_setupStep_Migrate.inc:318
-#: setup/class_setupStep_Migrate.inc:468 setup/class_setupStep_Migrate.inc:481
-#: setup/class_setupStep_Migrate.inc:765
-#: setup/class_setupStep_Migrate.inc:1417
-#: setup/class_setupStep_Migrate.inc:1430
-msgid "Failed"
-msgstr "Mislukt"
-
-#: include/functions_setup.inc:276
-msgid "PHP setup inspection"
-msgstr "PHP configuratie inspectie"
-
-#: include/functions_setup.inc:278
-msgid "Checking for PHP version (>=4.1.0)"
-msgstr "Controle op PHP versie (>=4.1.0)"
-
-#: include/functions_setup.inc:279
-msgid ""
-"PHP must be of version 4.1.0 or above for some functions and known bugs in "
-"PHP language."
-msgstr ""
-"PHP moet minimaal versienummer 4.1.0 hebben. GOsa gebruikt bepaalde "
-"functionaliteit die in voorgaande versies niet goed of helemaal niet "
-"voorhanden is."
-
-#: include/functions_setup.inc:282
-msgid "Checking if register_globals is set to 'off'"
-msgstr "Controle of 'register_globals' ingesteld staat op 'off'"
-
-#: include/functions_setup.inc:283
-msgid ""
-"register_globals is a PHP mechanism to register all global varibales to be "
-"accessible from scripts without changing the scope. This may be a security "
-"risk. GOsa will run in both modes."
-msgstr ""
-"'register_globals' is een PHP mechanisme om alle globale variabelen te "
-"registreren zodat deze toegankelijk zijn voor scripts zonder dat de scope "
-"veranderd hoeft te worden. Dit is een veiligheidsrisico. GOsa zal in beide "
-"modi draaien."
-
-#: include/functions_setup.inc:286
-msgid "PHP session.gc_maxlifetime (>= 86400 seconds)."
-msgstr "PHP session.gc_maxlifetime (>= 86400 seconden)."
-
-#: include/functions_setup.inc:287
-msgid ""
-"PHP uses this value for the garbage collector to delete old sessions, "
-"setting this value to one day will prevent loosing session and cookie  "
-"before they really timeout."
-msgstr ""
-"PHP gebruikt deze waarde voor de garbage collector om oude sessies op te "
-"ruimen. Door deze waarde op een dag te zetten, voorkomt u dat sessie en "
-"cookie informatie verloren gaan, voordat deze daadwerkelijk ongeldig zijn."
-
-#: include/functions_setup.inc:290
-msgid "Checking for ldap module"
-msgstr "Zoeken naar de LDAP module"
-
-#: include/functions_setup.inc:291
-msgid "This is the main module used by GOsa and therefore really required."
-msgstr "Dit is hoofd module die GOsa nodig heeft en is daarom noodzakelijk."
-
-#: include/functions_setup.inc:294
-msgid "Checking for XML functions"
-msgstr "Zoeken naar XML functies"
-
-#: include/functions_setup.inc:295
-msgid "XML functions are required to parse the configuration file."
-msgstr ""
-"XML functies zijn vereist om het configuratie bestand in te kunnen lezen."
-
-#: include/functions_setup.inc:298 setup/class_setupStep_Checks.inc:80
-msgid "Checking for gettext support"
-msgstr "Zoeken naar gettext ondersteuning"
-
-#: include/functions_setup.inc:299
-msgid "Gettext support is required for internationalized GOsa."
-msgstr ""
-"Gettext ondersteuning is vereist voor ondersteuning van meerdere talen in "
-"GOsa."
-
-#: include/functions_setup.inc:302 setup/class_setupStep_Checks.inc:88
-msgid "Checking for iconv support"
-msgstr "Zoeken naar iconv ondersteuning"
-
-#: include/functions_setup.inc:303
-msgid ""
-"This module is used by GOsa to convert samba munged dial informations and is "
-"therefore required."
-msgstr ""
-"Deze module wordt gebruikt door GOsa om samba munged dial informatie "
-"(terminal server) te converteren en is daarom vereist."
-
-#: include/functions_setup.inc:306
-msgid "Checking for mhash module"
-msgstr "Zoeken naar de mhash module"
-
-#: include/functions_setup.inc:307
-msgid ""
-"To use SSHA encryption, you'll need this module. If you are just using crypt "
-"or md5 encryption, ignore this message. GOsa will run without it."
-msgstr ""
-"Om SSHA encryptie te gebruiken heeft u deze module nodig. U kunt deze "
-"melding negeren indien u gewoon crypt of md5 encryptie gebruikt."
-
-#: include/functions_setup.inc:310
-msgid "Checking for imap module"
-msgstr "Zoeken naar de IMAP module"
-
-#: include/functions_setup.inc:311
-msgid ""
-"The IMAP module is needed to communicate with the IMAP server. It gets "
-"status informations, creates and deletes mail users."
-msgstr ""
-"De IMAP module is benodigd om met de IMAP server te communiceren. Het "
-"ontvangt status informatie, maakt E-mail gebruikers aan en verwijdert E-mail "
-"gebruikers."
-
-#: include/functions_setup.inc:314
-msgid "Checking for getacl in imap"
-msgstr "Controle op getacl in imap"
-
-#: include/functions_setup.inc:315
-msgid ""
-"The getacl support is needed for shared folder permissions. The standard "
-"IMAP module is not capable of reading acl's. You need a recend PHP version "
-"for this feature."
-msgstr ""
-"De getacl ondersteuning is nodig voor gedeelde map permissies. De standaard "
-"IMAP module is niet in staat om acl's te lezen. U heeft een recente PHP "
-"versie nodig voor deze mogelijkheid."
-
-#: include/functions_setup.inc:318
-msgid "Checking for mysql module"
-msgstr "Zoeken naar MySQL module"
-
-#: include/functions_setup.inc:319
-msgid "MySQL support is needed for reading GOfax reports from databases."
-msgstr ""
-"MySQL ondersteuning is nodig voor het lezen van GOfax rapporten uit "
-"databases."
-
-#: include/functions_setup.inc:322
-msgid "Checking for cups module"
-msgstr "Zoeken naar CUPS module"
-
-#: include/functions_setup.inc:323
-msgid ""
-"In order to read available printers from IPP protocol instead of printcap "
-"files, you've to install the CUPS module."
-msgstr ""
-"U moet de CUPS module installeren om beschikbare printers via het IPP "
-"protocol te kunnen aflezen i.p.v. via printcap bestanden."
-
-#: include/functions_setup.inc:326
-msgid "Checking for kadm5 module"
-msgstr "Zoeken naar kadm5 module"
-
-#: include/functions_setup.inc:327 setup/class_setupStep_Checks.inc:129
-msgid ""
-"Managing users in kerberos requires the kadm5 module which is downloadable "
-"via PEAR network."
-msgstr ""
-"Het beheren van gebruikers in kerberos vereist de kadm5 module welke via het "
-"PEAR netwerk te downloaden is."
-
-#: include/functions_setup.inc:330
-msgid "Checking for snmp Module"
-msgstr "Zoeken naar de SNMP module"
-
-#: include/functions_setup.inc:331
-msgid ""
-"Simple Network Management Protocol (SNMP) is required for client monitoring."
-msgstr ""
-"Het Simple Network Management Protocol (SNMP) is vereist voor werkstation "
-"monitoring."
-
-#: include/functions_setup.inc:368
-msgid "PHP detailed function inspection"
-msgstr "Gedteaileerde PHP functie inspectie"
-
-#: include/functions_setup.inc:372
-#, php-format
-msgid "Checking for function %s"
-msgstr "Zoeken naar functie %s"
-
-#: include/functions_setup.inc:373
-#, php-format
-msgid ""
-"The function %s is used by GOsa. There is no information if it's optional or "
-"required yet."
-msgstr ""
-"De functie '%s' wordt gebruikt door GOsa. Er is nog geen informatie "
-"voorhanden of deze functie optioneel of vereist is."
-
-#: include/functions_setup.inc:384
-msgid "Checking for some additional programms"
-msgstr "Zoeken naar enkele additionele programma's"
-
-#: include/functions_setup.inc:395
-#, fuzzy
-msgid "Checking for GraphicsMagick (>=1.1.2)"
-msgstr "Zoeken naar ImageMagick (>=5.4.0)"
-
-#: include/functions_setup.inc:396
-#, fuzzy
-msgid ""
-"GraphicsMagick is used to convert user supplied images to fit the suggested "
-"size and the unified JPEG format."
-msgstr ""
-"ImageMagick wordt gebruikt om gebruikers aangeleverde plaatjes te laten "
-"passen binnen de voorgestelde grootte en het uniforme JPEG formaat."
-
-#: include/functions_setup.inc:399
-msgid "Checking for ImageMagick (>=5.4.0)"
-msgstr "Zoeken naar ImageMagick (>=5.4.0)"
-
-#: include/functions_setup.inc:400
-msgid ""
-"ImageMagick is used to convert user supplied images to fit the suggested "
-"size and the unified JPEG format."
-msgstr ""
-"ImageMagick wordt gebruikt om gebruikers aangeleverde plaatjes te laten "
-"passen binnen de voorgestelde grootte en het uniforme JPEG formaat."
-
-#: include/functions_setup.inc:404
-msgid "Checking imagick module for PHP"
-msgstr "Zoeken naar de imagick module voor PHP"
-
-#: include/functions_setup.inc:405
-msgid ""
-"Imagick is used to convert user supplied images to fit the suggested size "
-"and the unified JPEG format from PHP script."
-msgstr ""
-"Imagick wordt gebruikt om gebruikers aangeleverde plaatjes te laten passen "
-"binnen de voorgestelde grootte en het uniforme JPEG formaat."
-
-#: include/functions_setup.inc:412 setup/class_setupStep_Checks.inc:154
-msgid "Checking for fping utility"
-msgstr "Zoeken naar het fping programma"
-
-#: include/functions_setup.inc:413
-msgid ""
-"The fping utility is only used if you've got a thin client based terminal "
-"environment running."
-msgstr ""
-"Het fping programma wordt alleen gebruikt indien u een thin client "
-"gebaseerde terminal omgeving heeft draaien."
-
-#: include/functions_setup.inc:428
-msgid "Checking for a way to generate LM/NT password hashes"
-msgstr "Zoeken naar een manier om LM/NT wachtwoord hashes te genereren"
-
-#: include/functions_setup.inc:429
-msgid ""
-"In order to use SAMBA 2/3, you've to install some additional packages to "
-"generate password hashes."
-msgstr ""
-"Om Samba 2.x/3.x te gebruiken moet u enkele additionele pakketten "
-"installeren om wachtwoord hashes te genereren"
-
-#: include/functions_setup.inc:442
-msgid "php.ini check -> session.auto_register"
-msgstr "php.ini controle -> session.auto_register"
-
-#: include/functions_setup.inc:443
-msgid ""
-"In Order to use GOsa without any trouble, the session.auto_register option "
-"in your php.ini must be set to 'Off'."
-msgstr ""
-"Om GOsa zonder problemen te gebruiken, moet de session.auto_register optie "
-"in uw php.ini ingesteld zijn op 'Off'."
-
-#: include/functions_setup.inc:446
-msgid "php.ini check -> implicit_flush"
-msgstr "php.ini controle -> implicit_flush"
-
-#: include/functions_setup.inc:447
-msgid ""
-"This option influences the Output handling. Turn this Option off, to "
-"increase performance."
-msgstr ""
-"Deze Optie definieert Uitvoer afhandeling. Zet deze Optie uit om "
-"snelheiswinst te behalen"
-
-#: include/functions_setup.inc:454
-msgid "php.ini check -> max_execution_time"
-msgstr "php.ini controle -> max_execution_time"
-
-#: include/functions_setup.inc:455
-msgid ""
-"The Execution time should be at least 30 seconds, because some actions may "
-"consume more time."
-msgstr ""
-"De uitvoer tijd moet minimaal 30 seconden zijn, omdat sommige acties lang "
-"kunnen duren."
-
-#: include/functions_setup.inc:462
-msgid "php.ini check -> memory_limit"
-msgstr "php.ini controle -> memory_limit"
-
-#: include/functions_setup.inc:463
-msgid ""
-"GOsa needs at least 16MB of memory, less will cause unpredictable errors! "
-"Increase it for larger setups."
-msgstr ""
-"GOsa heeft tenminste 16MB geheugen nodig. Minder geheugen kan diverse "
-"onvoorspelbare fouten opleveren!.Verhoog deze waarde nog verder voor zeer "
-"grote omgevingen."
-
-#: include/functions_setup.inc:467
-msgid "php.ini check -> expose_php"
-msgstr "php.ini controle -> expose_php"
-
-#: include/functions_setup.inc:468
-msgid ""
-"Increase the server security by setting expose_php to 'off'. PHP won't send "
-"any Information about the server you are running in this case."
-msgstr ""
-"Verhoog de server veiligheid door 'expose_php' op 'Off' in te stellen. PHP "
-"zal dan geen enkele informatie over de Server die u gebruikt weergeven."
-
-#: include/functions_setup.inc:472
-msgid "php.ini check -> magic_quotes_gpc"
-msgstr "php.ini check -> magic_quotes_gpc"
-
-#: include/functions_setup.inc:473 setup/class_setupStep_Checks.inc:243
-msgid ""
-"Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
-"escape all quotes in strings in this case."
-msgstr ""
-"Verhoog de server veiligheid door 'magic_quotes_gpc op 'On' in te stellen."
-"PHP zal dan alle aanhalingstekens in strings omzetten."
-
-#: include/functions_setup.inc:720 include/functions_setup.inc:831
-msgid ""
-"Can't connect to the specified LDAP server! Please make sure that is "
-"reachable for GOsa."
-msgstr ""
-"Kan niet met de opgegeven LDAP server verbinden! Controleer a.u.b. dat deze "
-"bereikbaar is voor GOsa."
-
-#: include/functions_setup.inc:734
-msgid ""
-"Can't bind to the specified LDAP server! Please make sure that it is "
-"reachable for GOsa."
-msgstr ""
-"De aanmelding op de LDAP server is mislukt! Controleer a.u.b. dat deze "
-"bereikbaar is voor GOsa."
-
-#: include/functions_setup.inc:792
-#, php-format
-msgid ""
-"You're missing the required attribute '%s' from this formular. Please "
-"complete!"
-msgstr ""
-"Het vereiste atribuut '%s' uit dit formulier ontbreekt. Maak a.u.b. uw "
-"invoer af!"
-
-#: include/functions_setup.inc:836
-msgid "Can't set ldap protocol version 3."
-msgstr ""
-
-#: include/functions_setup.inc:841
-#, fuzzy
-msgid ""
-"Could not bind to the specified LDAP server! Please make sure that it is "
-"reachable for GOsa."
-msgstr ""
-"De aanmelding op de LDAP server is mislukt! Controleer a.u.b. dat deze "
-"bereikbaar is voor GOsa."
-
-#: include/functions_setup.inc:924
-msgid ""
-"Can't read schema informations, GOsa needs to know your schema setup. Please "
-"verify that it is readable for GOsa"
-msgstr ""
-"Kan schema informatie niet lezen. GOsa moet uw schema installatie kennen. "
-"Controleer a.u.b. dat deze leesbaar is voor GOsa."
-
-#: include/functions_setup.inc:933
-#, php-format
-msgid "Can't log into LDAP server. Reason was: %s."
-msgstr "De aanmelding op de LDAP server is mislukt. De reden was: '%s'."
-
-#: include/functions_setup.inc:1112
-#, fuzzy
-msgid ""
-"User and/or group could not be created, please check your configuration "
-"twice !"
-msgstr ""
-"Kan niet verbinden met de opgegeven database. Controleer uw GLPI "
-"configuratie a.u.b."
-
 #: include/php_setup.inc:71
 msgid "Generating this page caused the PHP interpreter to raise some errors!"
 msgstr ""
@@ -14896,6 +14421,7 @@ msgid "Removing tag from object '%s'"
 msgstr "Verwijderen van markering van object '%s'"
 
 #: include/sieve/class_sieveElement_Redirect.inc:24
+#: setup/class_setupStep_Feedback.inc:179
 #, fuzzy
 msgid "Please specify a valid email address."
 msgstr "Geef a.u.b. een geldige id op."
@@ -15417,7 +14943,7 @@ msgstr ""
 msgid "Please select the type of element you want to add"
 msgstr ""
 
-#: include/sieve/templates/add_element.tpl:13 setup/setup_migrate.tpl:192
+#: include/sieve/templates/add_element.tpl:13 setup/setup_migrate.tpl:198
 #, fuzzy
 msgid "Abort"
 msgstr "Poort"
@@ -15762,8 +15288,9 @@ msgid "Language setup"
 msgstr "Taal"
 
 #: setup/class_setupStep_Language.inc:42
-msgid "This step is allows you to select your prefered language."
-msgstr ""
+#, fuzzy
+msgid "This step allows you to select your preferred language."
+msgstr "Selecteer a.u.b. een printer of druk annuleren in"
 
 #: setup/class_setupStep_Language.inc:47
 #, fuzzy
@@ -15953,36 +15480,36 @@ msgstr ""
 msgid "Schema check failed"
 msgstr "Het opslaan van de telefoon is mislukt"
 
-#: setup/class_setupStep_Feedback.inc:92
+#: setup/class_setupStep_Feedback.inc:91
 msgid "UNIX accounts/groups"
 msgstr ""
 
-#: setup/class_setupStep_Feedback.inc:94
+#: setup/class_setupStep_Feedback.inc:93
 #, fuzzy
 msgid "Samba management"
 msgstr "Systeembeheer"
 
-#: setup/class_setupStep_Feedback.inc:96
+#: setup/class_setupStep_Feedback.inc:95
 #, fuzzy
 msgid "Mailsystem management"
 msgstr "Systeembeheer"
 
-#: setup/class_setupStep_Feedback.inc:98
+#: setup/class_setupStep_Feedback.inc:97
 #, fuzzy
 msgid "FAX system administration"
 msgstr "Gebruikersbeheer"
 
-#: setup/class_setupStep_Feedback.inc:100
+#: setup/class_setupStep_Feedback.inc:99
 #, fuzzy
 msgid "Asterisk administration"
 msgstr "Gebruikersbeheer"
 
-#: setup/class_setupStep_Feedback.inc:102
+#: setup/class_setupStep_Feedback.inc:101
 #, fuzzy
-msgid "System invetory"
+msgid "System inventory"
 msgstr "Inventaris verwijderen"
 
-#: setup/class_setupStep_Feedback.inc:104
+#: setup/class_setupStep_Feedback.inc:103
 #, fuzzy
 msgid "System-/Configmanagement"
 msgstr "Systeembeheer"
@@ -15997,10 +15524,28 @@ msgstr ""
 msgid "Get notifications or send feedback"
 msgstr "Host notificatie commando's"
 
-#: setup/class_setupStep_Feedback.inc:177
-#, fuzzy
-msgid "Could not send feedback."
-msgstr "De opgegeven database kon niet geselecteerd worden!"
+#: setup/class_setupStep_Feedback.inc:140
+#, php-format
+msgid ""
+"Could not connect to feedback server (%s). There is possibly no connection "
+"to the internet."
+msgstr ""
+
+#: setup/class_setupStep_Feedback.inc:147
+msgid ""
+"Error while sending your feedback. The service is possible temporary "
+"unavailable"
+msgstr ""
+
+#: setup/class_setupStep_Feedback.inc:149
+msgid "Feedback sucessfully send"
+msgstr ""
+
+#: setup/class_setupStep_Feedback.inc:183
+msgid ""
+"You should have enabled at least one option, to subscribe or send your "
+"feedback."
+msgstr ""
 
 #: setup/setup_migrate.tpl:5
 msgid ""
@@ -16030,128 +15575,132 @@ msgid ""
 "workstations that can't be migrated."
 msgstr ""
 
-#: setup/setup_migrate.tpl:66
+#: setup/setup_migrate.tpl:64 setup/setup_migrate.tpl:121
+#: setup/setup_migrate.tpl:172 setup/setup_migrate.tpl:296
+#: setup/setup_migrate.tpl:352
+#, fuzzy
+msgid "Select all"
+msgstr "Selecteer"
+
+#: setup/setup_migrate.tpl:65 setup/setup_migrate.tpl:122
+#: setup/setup_migrate.tpl:173 setup/setup_migrate.tpl:297
+#: setup/setup_migrate.tpl:353
+#, fuzzy
+msgid "Select none"
+msgstr "Verwijder gebruiker"
+
+#: setup/setup_migrate.tpl:67
 msgid "Move selected windows workstations into the following GOsa department"
 msgstr ""
 
-#: setup/setup_migrate.tpl:71
+#: setup/setup_migrate.tpl:72
 #, fuzzy
 msgid "Move selected workstations"
 msgstr "Selecteer om werkstations te zien"
 
-#: setup/setup_migrate.tpl:72
+#: setup/setup_migrate.tpl:73
 msgid "What will be done here"
 msgstr ""
 
-#: setup/setup_migrate.tpl:84
+#: setup/setup_migrate.tpl:85
 msgid "Move groups into configured group tree"
 msgstr ""
 
-#: setup/setup_migrate.tpl:87
+#: setup/setup_migrate.tpl:88
 msgid ""
 "This dialog allows moving a couple of groups to the configured group tree. "
 "Doing this may straighten your LDAP service."
 msgstr ""
 
-#: setup/setup_migrate.tpl:90
+#: setup/setup_migrate.tpl:91
 msgid ""
 "Be careful with this option! There may be references pointing to these "
 "groups. The GOsa setup can't migrate references, so you may want to cancel "
 "the migration in this case in this case."
 msgstr ""
 
-#: setup/setup_migrate.tpl:93
+#: setup/setup_migrate.tpl:94
 msgid "Move selected groups into this group tree"
 msgstr ""
 
-#: setup/setup_migrate.tpl:121 setup/setup_migrate.tpl:170
-#: setup/setup_migrate.tpl:312 setup/setup_migrate.tpl:366
+#: setup/setup_migrate.tpl:124 setup/setup_migrate.tpl:176
+#: setup/setup_migrate.tpl:300 setup/setup_migrate.tpl:356
 msgid "Hide changes"
 msgstr ""
 
-#: setup/setup_migrate.tpl:123 setup/setup_migrate.tpl:172
-#: setup/setup_migrate.tpl:314 setup/setup_migrate.tpl:368
+#: setup/setup_migrate.tpl:126 setup/setup_migrate.tpl:178
+#: setup/setup_migrate.tpl:302 setup/setup_migrate.tpl:358
 #, fuzzy
 msgid "Show changes"
 msgstr "Toon pakketten"
 
-#: setup/setup_migrate.tpl:136
+#: setup/setup_migrate.tpl:139
 msgid "Move users into configured user tree"
 msgstr ""
 
-#: setup/setup_migrate.tpl:138
+#: setup/setup_migrate.tpl:141
 msgid ""
 "This dialog allows moving a couple of users to the configured user tree. "
 "Doing this may straighten your LDAP service."
 msgstr ""
 
-#: setup/setup_migrate.tpl:141
+#: setup/setup_migrate.tpl:144
 msgid ""
 "Be careful with this option! There may be references pointing to these "
 "users. The GOsa setup can't migrate references, so you may want to cancel "
-"the migration in this case in this case."
+"the migration in this case."
 msgstr ""
 
-#: setup/setup_migrate.tpl:144
+#: setup/setup_migrate.tpl:147
 #, fuzzy
 msgid "Move selected users into this people tree"
 msgstr "Maak gebruiker aan met dit sjabloon"
 
-#: setup/setup_migrate.tpl:191
+#: setup/setup_migrate.tpl:197
 #, fuzzy
 msgid "Next"
 msgstr "volgende"
 
-#: setup/setup_migrate.tpl:194
+#: setup/setup_migrate.tpl:200
 #, fuzzy
 msgid "Create a new GOsa administrator account"
 msgstr "Netatalk account aanmaken"
 
-#: setup/setup_migrate.tpl:197
+#: setup/setup_migrate.tpl:203
 msgid ""
 "This dialog will automatically add a new super administrator to your LDAP "
 "tree."
 msgstr ""
 
-#: setup/setup_migrate.tpl:226
+#: setup/setup_migrate.tpl:232
 #, fuzzy
 msgid "Password (again)"
 msgstr "Wachtwoord encryptie"
 
-#: setup/setup_migrate.tpl:236
-msgid "Assign super administrator permissions to an existing user or group"
-msgstr ""
-
-#: setup/setup_migrate.tpl:237
+#: setup/setup_migrate.tpl:260
 msgid ""
-"To grant administrative permissions to a user or a group, select an object "
-"and choose 'Assign'."
-msgstr ""
-
-#: setup/setup_migrate.tpl:275
-msgid ""
-"The listed deparmtents are currenlty invisble in the GOsa user interface. If "
+"The listed departments are currenlty invisble in the GOsa user interface. If "
 "you want to change this for a couple of entries, select them and use the "
 "migrate button below."
 msgstr ""
 
-#: setup/setup_migrate.tpl:276 setup/setup_migrate.tpl:329
+#: setup/setup_migrate.tpl:261 setup/setup_migrate.tpl:317
 msgid ""
 "If you want to know what will be done when migrating the selected entries, "
 "use the 'Show changes' button to see the LDIF."
 msgstr ""
 
-#: setup/setup_migrate.tpl:286 setup/setup_migrate.tpl:338
+#: setup/setup_migrate.tpl:271 setup/setup_migrate.tpl:326
 #, fuzzy
 msgid "Current"
 msgstr "Huidige uitgave"
 
-#: setup/setup_migrate.tpl:293 setup/setup_migrate.tpl:345
+#: setup/setup_migrate.tpl:278 setup/setup_migrate.tpl:333
 #, fuzzy
 msgid "After migration"
 msgstr "Gebruikersbeheer"
 
-#: setup/setup_migrate.tpl:328
+#: setup/setup_migrate.tpl:316
 msgid ""
 "The listed users are currenlty invisble in the GOsa user interface. If you "
 "want to change this for a couple of users, just select them and use the "
@@ -16198,6 +15747,10 @@ msgid ""
 "your LDAP server."
 msgstr ""
 
+#: setup/class_setupStep_Checks.inc:80
+msgid "Checking for gettext support"
+msgstr "Zoeken naar gettext ondersteuning"
+
 #: setup/class_setupStep_Checks.inc:81
 #, fuzzy
 msgid "Gettext support is required for internationalization."
@@ -16208,6 +15761,10 @@ msgstr ""
 #: setup/class_setupStep_Checks.inc:82 setup/class_setupStep_Checks.inc:90
 msgid "Please make sure that the extension is activated."
 msgstr ""
+
+#: setup/class_setupStep_Checks.inc:88
+msgid "Checking for iconv support"
+msgstr "Zoeken naar iconv ondersteuning"
 
 #: setup/class_setupStep_Checks.inc:89
 #, fuzzy
@@ -16229,8 +15786,8 @@ msgstr ""
 
 #: setup/class_setupStep_Checks.inc:98
 msgid ""
-"The mhash module for PHP 4/5 is not available.Pplease install php4-mhash/"
-"php5-mhash."
+"The mhash module for PHP 4/5 is not available.Please install php4-mhash/php5-"
+"mhash."
 msgstr ""
 
 #: setup/class_setupStep_Checks.inc:104
@@ -16294,6 +15851,14 @@ msgstr ""
 msgid "Checking for kadm5 support"
 msgstr "Zoeken naar iconv ondersteuning"
 
+#: setup/class_setupStep_Checks.inc:129
+msgid ""
+"Managing users in kerberos requires the kadm5 module which is downloadable "
+"via PEAR network."
+msgstr ""
+"Het beheren van gebruikers in kerberos vereist de kadm5 module welke via het "
+"PEAR netwerk te downloaden is."
+
 #: setup/class_setupStep_Checks.inc:130
 #, fuzzy
 msgid ""
@@ -16336,6 +15901,10 @@ msgid ""
 msgstr ""
 "U moet de CUPS module installeren om beschikbare printers via het IPP "
 "protocol te kunnen aflezen i.p.v. via printcap bestanden."
+
+#: setup/class_setupStep_Checks.inc:154
+msgid "Checking for fping utility"
+msgstr "Zoeken naar het fping programma"
 
 #: setup/class_setupStep_Checks.inc:155
 #, fuzzy
@@ -16386,7 +15955,7 @@ msgstr "Offline"
 #: setup/class_setupStep_Checks.inc:184
 #, fuzzy
 msgid ""
-"register_globals is a PHP mechanism to register all global varibales to be "
+"register_globals is a PHP mechanism to register all global variables to be "
 "accessible from scripts without changing the scope. This may be a security "
 "risk."
 msgstr ""
@@ -16493,6 +16062,14 @@ msgstr ""
 #, fuzzy
 msgid "On"
 msgstr "Open"
+
+#: setup/class_setupStep_Checks.inc:243
+msgid ""
+"Increase your server security by setting magic_quotes_gpc to 'on'. PHP will "
+"escape all quotes in strings in this case."
+msgstr ""
+"Verhoog de server veiligheid door 'magic_quotes_gpc op 'On' in te stellen."
+"PHP zal dan alle aanhalingstekens in strings omzetten."
 
 #: setup/class_setupStep_Checks.inc:244
 msgid "Search for 'magic_quotes_gpc' in your php.ini and set it to 'On'."
@@ -16659,85 +16236,85 @@ msgstr "Geef a.u.b. uw wachtwoord op!"
 msgid "Bind as user '%s' on server '%s' succeeded."
 msgstr "Kan de database %s op %s niet selecteren."
 
-#: setup/setup_feedback.tpl:4
+#: setup/setup_feedback.tpl:6
 msgid "Subscribe to the gosa-announce mailinglist"
 msgstr ""
 
-#: setup/setup_feedback.tpl:7
+#: setup/setup_feedback.tpl:9
 msgid ""
 "When checking this option, GOsa will try to connect http://oss.gonicus.de in "
 "order to subscribe you to the gosa-announce mailing list. You've to confirm "
 "this by mail."
 msgstr ""
 
-#: setup/setup_feedback.tpl:39
+#: setup/setup_feedback.tpl:41
 msgid "Send feedback to the GOsa project team"
 msgstr ""
 
-#: setup/setup_feedback.tpl:42
+#: setup/setup_feedback.tpl:44
 msgid ""
 "When checking this option, GOsa will try to connect http://oss.gonicus.de in "
 "order to submit your form anonymously."
 msgstr ""
 
-#: setup/setup_feedback.tpl:48
+#: setup/setup_feedback.tpl:50
 msgid "Did the setup procedure help you to get started?"
 msgstr ""
 
-#: setup/setup_feedback.tpl:58
+#: setup/setup_feedback.tpl:60
 msgid "If not, what problems did you encounter"
 msgstr ""
 
-#: setup/setup_feedback.tpl:66
+#: setup/setup_feedback.tpl:68
 msgid "Is this the first time you use GOsa?"
 msgstr ""
 
-#: setup/setup_feedback.tpl:72
+#: setup/setup_feedback.tpl:74
 msgid "I use it since"
 msgstr ""
 
-#: setup/setup_feedback.tpl:73
+#: setup/setup_feedback.tpl:75
 msgid "Select the year since when you are using GOsa"
 msgstr ""
 
-#: setup/setup_feedback.tpl:80
+#: setup/setup_feedback.tpl:82
 msgid "What operating system / distribution do you use?"
 msgstr ""
 
-#: setup/setup_feedback.tpl:88
+#: setup/setup_feedback.tpl:90
 msgid "What web server do you use?"
 msgstr ""
 
-#: setup/setup_feedback.tpl:96
+#: setup/setup_feedback.tpl:98
 msgid "What PHP version do you use?"
 msgstr ""
 
-#: setup/setup_feedback.tpl:104
+#: setup/setup_feedback.tpl:106
 msgid "LDAP"
 msgstr ""
 
-#: setup/setup_feedback.tpl:108
+#: setup/setup_feedback.tpl:110
 msgid "What kind of LDAP server(s) do you use?"
 msgstr ""
 
-#: setup/setup_feedback.tpl:114
+#: setup/setup_feedback.tpl:116
 msgid "How many objects are in your LDAP?"
 msgstr ""
 
-#: setup/setup_feedback.tpl:121
+#: setup/setup_feedback.tpl:123
 #, fuzzy
 msgid "Features"
 msgstr "Toekomstig"
 
-#: setup/setup_feedback.tpl:124
+#: setup/setup_feedback.tpl:126
 msgid "What features of GOsa do you use?"
 msgstr ""
 
-#: setup/setup_feedback.tpl:134
+#: setup/setup_feedback.tpl:136
 msgid "What features do you want to see in future versions of GOsa?"
 msgstr ""
 
-#: setup/setup_feedback.tpl:141
+#: setup/setup_feedback.tpl:143
 msgid "Send feedback"
 msgstr ""
 
@@ -16881,64 +16458,7 @@ msgid "LDAP schema check"
 msgstr ""
 
 #: setup/class_setupStep_Schema.inc:42
-msgid "Perform test on your curren LDAP schema"
-msgstr ""
-
-#: setup/class_setupStep_Schema.inc:138
-msgid "Used to store account specific informations."
-msgstr ""
-
-#: setup/class_setupStep_Schema.inc:145
-msgid ""
-"Used to lock currently edited entries to avoid multiple changes at the same "
-"time."
-msgstr ""
-
-#: setup/class_setupStep_Schema.inc:189
-#, fuzzy, php-format
-msgid "The required objectClass '%s' is not present in your schema setup"
-msgstr "Vereiste objectklasse '%s' is niet voorhanden in de LDAP configuratie"
-
-#: setup/class_setupStep_Schema.inc:191
-#, fuzzy, php-format
-msgid "The optional objectClass '%s' is not present in your schema setup"
-msgstr "Vereiste objectklasse '%s' is niet voorhanden in de LDAP configuratie"
-
-#: setup/class_setupStep_Schema.inc:197
-#, fuzzy, php-format
-msgid "The required objectclass '%s' does not have version %s"
-msgstr "Vereiste objectklasse '%s' heeft niet versienummer %s"
-
-#: setup/class_setupStep_Schema.inc:199
-#, fuzzy, php-format
-msgid "The optional objectclass '%s' does not have version %s"
-msgstr "Vereiste objectklasse '%s' heeft niet versienummer %s"
-
-#: setup/class_setupStep_Schema.inc:203
-#, fuzzy, php-format
-msgid "Class(es) available"
-msgstr "Bestand is beschikbaar"
-
-#: setup/class_setupStep_Schema.inc:228
-msgid ""
-"You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
-"schema configuration do not support this option."
-msgstr ""
-
-#: setup/class_setupStep_Schema.inc:229
-msgid ""
-"In order to use rfc2307bis corform groups the objectClass 'posixGroup' must "
-"be AUXILIARY"
-msgstr ""
-
-#: setup/class_setupStep_Schema.inc:233
-msgid ""
-"You have disabled the rfc2307bis option on the 'ldap setup' step, but your "
-"schema configuration do not support this option."
-msgstr ""
-
-#: setup/class_setupStep_Schema.inc:234
-msgid "The objectClass 'posixGroup' must be STRUCTURAL"
+msgid "Perform test on your current LDAP schema"
 msgstr ""
 
 #: setup/class_setupStep_Config3.inc:67 setup/class_setupStep_Config3.inc:68
@@ -16962,19 +16482,19 @@ msgstr "Toekomstige dagen moet een waarde bevatten."
 
 #: setup/setup_language.tpl:3
 #, fuzzy
-msgid "Please select the prefered language"
+msgid "Please select the preferred language"
 msgstr "Selecteer a.u.b. een printer of druk annuleren in"
 
 #: setup/setup_language.tpl:5
 msgid ""
-"At this point, you can select the site wide default langauge. Choosing "
+"At this point, you can select the site wide default language. Choosing "
 "'automatic' will use the language requested by the browser. This setting can "
 "be overriden per user."
 msgstr ""
 
 #: setup/setup_language.tpl:9
 #, fuzzy
-msgid "Please your prefered language here"
+msgid "Please your preferred language here"
 msgstr "Geef hier uw zoekwaarde op"
 
 #: setup/setup_ldap.tpl:7
@@ -17087,207 +16607,670 @@ msgstr ""
 msgid "Snapshot base"
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:106 setup/class_setupStep_Migrate.inc:107
+#: setup/class_setupStep_Migrate.inc:105 setup/class_setupStep_Migrate.inc:106
 #, fuzzy
 msgid "LDAP inspection"
 msgstr "PHP configuratie inspectie"
 
-#: setup/class_setupStep_Migrate.inc:108
+#: setup/class_setupStep_Migrate.inc:107
 msgid "Analyze your current LDAP for GOsa compatibility"
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:114
+#: setup/class_setupStep_Migrate.inc:113
 #, fuzzy
 msgid "Checking for root object"
 msgstr "Zoeken naar iconv ondersteuning"
 
-#: setup/class_setupStep_Migrate.inc:120
+#: setup/class_setupStep_Migrate.inc:119
 msgid "Checking permissions on LDAP database"
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:126
+#: setup/class_setupStep_Migrate.inc:125
 #, fuzzy
 msgid "Checking for invisible deparmtments"
 msgstr "Zoeken naar iconv ondersteuning"
 
-#: setup/class_setupStep_Migrate.inc:132
+#: setup/class_setupStep_Migrate.inc:131
 #, fuzzy
 msgid "Checking for invisible users"
 msgstr "Zoeken naar iconv ondersteuning"
 
-#: setup/class_setupStep_Migrate.inc:138
+#: setup/class_setupStep_Migrate.inc:137
 #, fuzzy
 msgid "Checking for super administrator"
 msgstr "Zoeken naar enkele additionele programma's"
 
-#: setup/class_setupStep_Migrate.inc:144
+#: setup/class_setupStep_Migrate.inc:143
 #, fuzzy
 msgid "Checking for users outside the people tree"
 msgstr "Zoeken naar CUPS module"
 
-#: setup/class_setupStep_Migrate.inc:150
+#: setup/class_setupStep_Migrate.inc:149
 #, fuzzy
 msgid "Checking for groups outside the groups tree"
 msgstr "Zoeken naar CUPS module"
 
-#: setup/class_setupStep_Migrate.inc:156
+#: setup/class_setupStep_Migrate.inc:155
 msgid "Checking for windows workstations outside the winstation tree"
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:162
+#: setup/class_setupStep_Migrate.inc:161
 #, fuzzy
 msgid "Checking for duplicate uid numbers"
 msgstr "Zoeken naar de LDAP module"
 
-#: setup/class_setupStep_Migrate.inc:168
+#: setup/class_setupStep_Migrate.inc:167
 #, fuzzy
 msgid "Checking for duplicate gid numbers"
 msgstr "Zoeken naar de LDAP module"
 
-#: setup/class_setupStep_Migrate.inc:191 setup/class_setupStep_Migrate.inc:240
-#: setup/class_setupStep_Migrate.inc:302 setup/class_setupStep_Migrate.inc:348
-#: setup/class_setupStep_Migrate.inc:394 setup/class_setupStep_Migrate.inc:454
-#: setup/class_setupStep_Migrate.inc:538 setup/class_setupStep_Migrate.inc:668
+#: setup/class_setupStep_Migrate.inc:190 setup/class_setupStep_Migrate.inc:239
+#: setup/class_setupStep_Migrate.inc:301 setup/class_setupStep_Migrate.inc:347
+#: setup/class_setupStep_Migrate.inc:393 setup/class_setupStep_Migrate.inc:453
+#: setup/class_setupStep_Migrate.inc:537 setup/class_setupStep_Migrate.inc:667
 #: setup/class_setupStep_Migrate.inc:757
 #, fuzzy
 msgid "LDAP query failed"
 msgstr "De database zoekopdracht is mislukt"
 
-#: setup/class_setupStep_Migrate.inc:192 setup/class_setupStep_Migrate.inc:241
-#: setup/class_setupStep_Migrate.inc:303 setup/class_setupStep_Migrate.inc:349
-#: setup/class_setupStep_Migrate.inc:395 setup/class_setupStep_Migrate.inc:455
-#: setup/class_setupStep_Migrate.inc:539 setup/class_setupStep_Migrate.inc:669
+#: setup/class_setupStep_Migrate.inc:191 setup/class_setupStep_Migrate.inc:240
+#: setup/class_setupStep_Migrate.inc:302 setup/class_setupStep_Migrate.inc:348
+#: setup/class_setupStep_Migrate.inc:394 setup/class_setupStep_Migrate.inc:454
+#: setup/class_setupStep_Migrate.inc:538 setup/class_setupStep_Migrate.inc:668
 #: setup/class_setupStep_Migrate.inc:758
 msgid "Possibly the 'root object' is missing."
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:214
+#: setup/class_setupStep_Migrate.inc:213
 #, fuzzy, php-format
 msgid "Found %s duplicate values for attribute 'uidNumber'."
 msgstr "Er is een dubbele waarde gevonden voor record type '%s'."
 
-#: setup/class_setupStep_Migrate.inc:263
+#: setup/class_setupStep_Migrate.inc:262
 #, fuzzy, php-format
 msgid "Found %s duplicate values for attribute 'gidNumber'."
 msgstr "Er is een dubbele waarde gevonden voor record type '%s'."
 
-#: setup/class_setupStep_Migrate.inc:320
+#: setup/class_setupStep_Migrate.inc:317 setup/class_setupStep_Migrate.inc:467
+#: setup/class_setupStep_Migrate.inc:480 setup/class_setupStep_Migrate.inc:807
+#: setup/class_setupStep_Migrate.inc:1531
+#: setup/class_setupStep_Migrate.inc:1544
+msgid "Failed"
+msgstr "Mislukt"
+
+#: setup/class_setupStep_Migrate.inc:319
 #, php-format
 msgid ""
 "Found %s winstations outside the predefined winstation department ou '%s'."
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:321 setup/class_setupStep_Migrate.inc:549
-#: setup/class_setupStep_Migrate.inc:678
+#: setup/class_setupStep_Migrate.inc:320 setup/class_setupStep_Migrate.inc:548
+#: setup/class_setupStep_Migrate.inc:677
 #, fuzzy
 msgid "Migrate"
 msgstr "Aanmaken"
 
-#: setup/class_setupStep_Migrate.inc:367
+#: setup/class_setupStep_Migrate.inc:366
 #, php-format
 msgid "Found %s groups outside the configured tree '%s'."
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:368 setup/class_setupStep_Migrate.inc:414
+#: setup/class_setupStep_Migrate.inc:367 setup/class_setupStep_Migrate.inc:413
 #, fuzzy
 msgid "Move"
 msgstr "Modus"
 
-#: setup/class_setupStep_Migrate.inc:413
+#: setup/class_setupStep_Migrate.inc:412
 #, php-format
 msgid "Found %s user(s) outside the configured tree '%s'."
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:470 setup/class_setupStep_Migrate.inc:483
+#: setup/class_setupStep_Migrate.inc:469 setup/class_setupStep_Migrate.inc:482
 #, php-format
 msgid ""
 "The specified user '%s' does not have full access to your ldap database."
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:547
+#: setup/class_setupStep_Migrate.inc:546
 #, php-format
 msgid "Found %s user(s) that will not be visible in GOsa."
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:597 setup/class_setupStep_Migrate.inc:729
+#: setup/class_setupStep_Migrate.inc:596 setup/class_setupStep_Migrate.inc:728
 #, php-format
 msgid ""
 "Failed to migrate the department '%s' into GOsa, error message is as follows "
 "'%s'."
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:677
+#: setup/class_setupStep_Migrate.inc:676
 #, php-format
 msgid "Found %s department(s) that will not be visible in GOsa."
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:766
+#: setup/class_setupStep_Migrate.inc:808
 msgid "There is no GOsa administrator account inside your LDAP."
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:828
+#: setup/class_setupStep_Migrate.inc:868
+msgid "Appending user to to group administrational group: \n"
+msgstr ""
+
+#: setup/class_setupStep_Migrate.inc:869
+#, fuzzy
+msgid "Before"
+msgstr "Ververs"
+
+#: setup/class_setupStep_Migrate.inc:872
+#, fuzzy
+msgid "After"
+msgstr "Overige"
+
+#: setup/class_setupStep_Migrate.inc:879 setup/class_setupStep_Migrate.inc:902
 #, fuzzy, php-format
 msgid "Adding acls for user '%s' failed, ldap says '%s'."
 msgstr "Plaatsen van een blokkade mislukt. De LDAP server meldt: '%s'."
 
-#: setup/class_setupStep_Migrate.inc:846
+#: setup/class_setupStep_Migrate.inc:893
+#, fuzzy
+msgid ""
+"Creating new administrational group: \n"
+"\n"
+msgstr "Netatalk account aanmaken"
+
+#: setup/class_setupStep_Migrate.inc:929
 msgid "Specified passwords are empty or not equal."
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:914 setup/class_setupStep_Migrate.inc:962
+#: setup/class_setupStep_Migrate.inc:934
+#, fuzzy
+msgid "Please specify a valid uid."
+msgstr "Geef a.u.b. een geldige id op."
+
+#: setup/class_setupStep_Migrate.inc:972
+#, fuzzy, php-format
+msgid ""
+"Could not add administrative user, there is already an object with the same "
+"dn '%s' in your ldap database."
+msgstr ""
+"Kon '%s' niet hernoemen naar '%s'. Er is al een invoer met dezelfde naam in "
+"de zone bewerkings dialoog."
+
 #: setup/class_setupStep_Migrate.inc:1010
+#: setup/class_setupStep_Migrate.inc:1058
+#: setup/class_setupStep_Migrate.inc:1106
 #, fuzzy
 msgid "Couldn't move users to specified department."
 msgstr "Ga naar de afdeling van de gebruiker"
 
-#: setup/class_setupStep_Migrate.inc:924
+#: setup/class_setupStep_Migrate.inc:1020
 msgid "Winstation will be moved from"
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:924 setup/class_setupStep_Migrate.inc:972
 #: setup/class_setupStep_Migrate.inc:1020
+#: setup/class_setupStep_Migrate.inc:1068
+#: setup/class_setupStep_Migrate.inc:1116
 #, fuzzy
 msgid "to"
 msgstr "auto"
 
-#: setup/class_setupStep_Migrate.inc:935 setup/class_setupStep_Migrate.inc:983
+#: setup/class_setupStep_Migrate.inc:1031
+#: setup/class_setupStep_Migrate.inc:1079
 msgid "Updating following references too"
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:972
+#: setup/class_setupStep_Migrate.inc:1068
 msgid "Group will be moved from"
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:1020
+#: setup/class_setupStep_Migrate.inc:1116
 msgid "User will be moved from"
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:1030
+#: setup/class_setupStep_Migrate.inc:1126
 msgid "The following references will be updated"
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:1418
+#: setup/class_setupStep_Migrate.inc:1532
 msgid ""
 "The LDAP root object is missing. It is required to use your LDAP service."
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:1419
-#: setup/class_setupStep_Migrate.inc:1432
+#: setup/class_setupStep_Migrate.inc:1533
+#: setup/class_setupStep_Migrate.inc:1546
 msgid "Try to create root object"
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:1431
+#: setup/class_setupStep_Migrate.inc:1545
 msgid "Root object couldn't be created, you should try it on your own."
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:1678
+#: setup/class_setupStep_Migrate.inc:1792
 #, php-format
 msgid "Failed to copy '%s' to '%s'. LDAP says '%s'."
 msgstr ""
 
-#: setup/class_setupStep_Migrate.inc:1681
+#: setup/class_setupStep_Migrate.inc:1795
 msgid "Something went wrong while copying dns."
 msgstr ""
+
+#~ msgid "{LOCATIONNAME}"
+#~ msgstr "{LOCATIONNAME}"
+
+#~ msgid ""
+#~ "Directory '%s' specified as smarty compile directory is not accessible, "
+#~ "please check existence and rights of this directory!"
+#~ msgstr ""
+#~ "Directory '%s' die opgegeven is als smarty compileer directory is niet "
+#~ "toegankelijk! Controleer of deze directory bestaat en wat de rechten op "
+#~ "deze directory zijn!"
+
+#~ msgid ""
+#~ "Optional objectclass '%s' required by plugin '%s' is not present in LDAP "
+#~ "setup"
+#~ msgstr ""
+#~ "De optionele objectklasse '%s' die benodigd is door module '%s' is niet "
+#~ "aanwezig in de LDAP configuratie"
+
+#~ msgid ""
+#~ "Optional objectclass '%s' required by plugin '%s' does not have version %s"
+#~ msgstr ""
+#~ "De optionele objectklasse '%s' die benodigd is door module '%s' heeft "
+#~ "niet versienummer %s"
+
+#~ msgid "Support for '%s' enabled"
+#~ msgstr "Ondersteuning voor '%s' is ingeschakeld"
+
+#~ msgid "Required objectclass '%s' is not present in LDAP setup"
+#~ msgstr ""
+#~ "Vereiste objectklasse '%s' is niet voorhanden in de LDAP configuratie"
+
+#~ msgid "Required objectclass '%s' does not have version %s"
+#~ msgstr "Vereiste objectklasse '%s' heeft niet versienummer %s"
+
+#~ msgid "SAMBA 3 support disabled, no schema seems to be installed"
+#~ msgstr ""
+#~ "SAMBA 3 ondersteuning is uitgeschakeld. Het LDAP schema is niet "
+#~ "geïnstalleerd."
+
+#~ msgid "SAMBA 3 support enabled"
+#~ msgstr "SAMBA 3 ondersteuning is ingeschakeld"
+
+#~ msgid "SAMBA 2 support disabled, no schema seems to be installed"
+#~ msgstr ""
+#~ "SAMBA 2 ondersteuning is uitgeschakeld. Het LDAP schema is niet "
+#~ "geïnstalleerd."
+
+#~ msgid "SAMBA 2 support enabled"
+#~ msgstr "SAMBA 2 ondersteuning is ingeschakeld"
+
+#~ msgid "Support for pureftp disabled, no schema seems to be installed"
+#~ msgstr ""
+#~ "PureFtp ondersteuning is uitgeschakeld. Het LDAP schema is niet "
+#~ "geïnstallerd."
+
+#~ msgid "Support for pureftp enabled"
+#~ msgstr "PureFtp ondersteuning is ingeschakeld"
+
+#~ msgid "Support for WebDAV disabled, no schema seems to be installed"
+#~ msgstr ""
+#~ "WebDAV ondersteuning is uitgeschakeld. Het LDAP schema is niet "
+#~ "geïnstalleer."
+
+#~ msgid "Support for WebDAV enabled"
+#~ msgstr "WebDAV ondersteuning is ingeschakeld"
+
+#~ msgid "Support for phpgroupware disabled, no schema seems to be installed"
+#~ msgstr ""
+#~ "Phpgroupware ondersteuning is uitgeschakeld. Het LDAP schema is niet "
+#~ "geïnstalleerd."
+
+#~ msgid "Support for phpgroupware enabled"
+#~ msgstr "Phpgroupware ondersteuning is ingeschakeld"
+
+#~ msgid "Support for trustAccount disabled, no schema seems to be installed"
+#~ msgstr ""
+#~ "Vertrouwensaccount ondersteuning is uitgeschakeld. Het LDAP schema is "
+#~ "niet geïnstalleerd."
+
+#~ msgid "Support for trustAccount enabled"
+#~ msgstr "Vertrouwensaccount ondersteuning is ingeschakeld"
+
+#~ msgid "Support for gofon disabled, no schema seems to be installed"
+#~ msgstr ""
+#~ "Gofon ondersteuning is uitgeschakeld. Het LDAP schema is niet "
+#~ "geïnstalleerd."
+
+#~ msgid "Support for gofon enabled"
+#~ msgstr "Gofon ondersteuning is ingeschakeld"
+
+#~ msgid "Support for nagios disabled, no schema seems to be installed"
+#~ msgstr ""
+#~ "Nagios ondersteuning is uitgeschakeld. Het LDAP schema is niet "
+#~ "geïnstalleerd."
+
+#~ msgid "Support for nagios enabled"
+#~ msgstr "Nagios ondersteuning is ingeschakeld"
+
+#~ msgid "Support for netatalk disabled, no schema seems to be installed"
+#~ msgstr ""
+#~ "Netatalk ondersteuning is uitgeschakeld. Het LDAP schema is niet "
+#~ "geïnstalleerd."
+
+#~ msgid "Support for netatalk enabled"
+#~ msgstr "Netatalk ondersteuning is ingeschakeld"
+
+#~ msgid ""
+#~ "Support for Kolab disabled, no schema seems to be installed, setting mail-"
+#~ "method to cyrus"
+#~ msgstr ""
+#~ "Kolab ondersteuning is uitgeschakeld. Aangezien het LDAP schema niet "
+#~ "geïnstalleed is, zal deE-mail methode op Cyrus ingesteld worden."
+
+#~ msgid "Support for Kolab enabled"
+#~ msgstr "Kolab ondersteuning is ingeschakeld"
+
+#~ msgid "Ignored"
+#~ msgstr "Genegeerd"
+
+#~ msgid "PHP setup inspection"
+#~ msgstr "PHP configuratie inspectie"
+
+#~ msgid "Checking for PHP version (>=4.1.0)"
+#~ msgstr "Controle op PHP versie (>=4.1.0)"
+
+#~ msgid ""
+#~ "PHP must be of version 4.1.0 or above for some functions and known bugs "
+#~ "in PHP language."
+#~ msgstr ""
+#~ "PHP moet minimaal versienummer 4.1.0 hebben. GOsa gebruikt bepaalde "
+#~ "functionaliteit die in voorgaande versies niet goed of helemaal niet "
+#~ "voorhanden is."
+
+#~ msgid "Checking if register_globals is set to 'off'"
+#~ msgstr "Controle of 'register_globals' ingesteld staat op 'off'"
+
+#~ msgid ""
+#~ "register_globals is a PHP mechanism to register all global varibales to "
+#~ "be accessible from scripts without changing the scope. This may be a "
+#~ "security risk. GOsa will run in both modes."
+#~ msgstr ""
+#~ "'register_globals' is een PHP mechanisme om alle globale variabelen te "
+#~ "registreren zodat deze toegankelijk zijn voor scripts zonder dat de scope "
+#~ "veranderd hoeft te worden. Dit is een veiligheidsrisico. GOsa zal in "
+#~ "beide modi draaien."
+
+#~ msgid "PHP session.gc_maxlifetime (>= 86400 seconds)."
+#~ msgstr "PHP session.gc_maxlifetime (>= 86400 seconden)."
+
+#~ msgid ""
+#~ "PHP uses this value for the garbage collector to delete old sessions, "
+#~ "setting this value to one day will prevent loosing session and cookie  "
+#~ "before they really timeout."
+#~ msgstr ""
+#~ "PHP gebruikt deze waarde voor de garbage collector om oude sessies op te "
+#~ "ruimen. Door deze waarde op een dag te zetten, voorkomt u dat sessie en "
+#~ "cookie informatie verloren gaan, voordat deze daadwerkelijk ongeldig zijn."
+
+#~ msgid "Checking for ldap module"
+#~ msgstr "Zoeken naar de LDAP module"
+
+#~ msgid "This is the main module used by GOsa and therefore really required."
+#~ msgstr "Dit is hoofd module die GOsa nodig heeft en is daarom noodzakelijk."
+
+#~ msgid "Checking for XML functions"
+#~ msgstr "Zoeken naar XML functies"
+
+#~ msgid "XML functions are required to parse the configuration file."
+#~ msgstr ""
+#~ "XML functies zijn vereist om het configuratie bestand in te kunnen lezen."
+
+#~ msgid "Gettext support is required for internationalized GOsa."
+#~ msgstr ""
+#~ "Gettext ondersteuning is vereist voor ondersteuning van meerdere talen in "
+#~ "GOsa."
+
+#~ msgid ""
+#~ "This module is used by GOsa to convert samba munged dial informations and "
+#~ "is therefore required."
+#~ msgstr ""
+#~ "Deze module wordt gebruikt door GOsa om samba munged dial informatie "
+#~ "(terminal server) te converteren en is daarom vereist."
+
+#~ msgid "Checking for mhash module"
+#~ msgstr "Zoeken naar de mhash module"
+
+#~ msgid ""
+#~ "To use SSHA encryption, you'll need this module. If you are just using "
+#~ "crypt or md5 encryption, ignore this message. GOsa will run without it."
+#~ msgstr ""
+#~ "Om SSHA encryptie te gebruiken heeft u deze module nodig. U kunt deze "
+#~ "melding negeren indien u gewoon crypt of md5 encryptie gebruikt."
+
+#~ msgid "Checking for imap module"
+#~ msgstr "Zoeken naar de IMAP module"
+
+#~ msgid ""
+#~ "The IMAP module is needed to communicate with the IMAP server. It gets "
+#~ "status informations, creates and deletes mail users."
+#~ msgstr ""
+#~ "De IMAP module is benodigd om met de IMAP server te communiceren. Het "
+#~ "ontvangt status informatie, maakt E-mail gebruikers aan en verwijdert E-"
+#~ "mail gebruikers."
+
+#~ msgid "Checking for getacl in imap"
+#~ msgstr "Controle op getacl in imap"
+
+#~ msgid ""
+#~ "The getacl support is needed for shared folder permissions. The standard "
+#~ "IMAP module is not capable of reading acl's. You need a recend PHP "
+#~ "version for this feature."
+#~ msgstr ""
+#~ "De getacl ondersteuning is nodig voor gedeelde map permissies. De "
+#~ "standaard IMAP module is niet in staat om acl's te lezen. U heeft een "
+#~ "recente PHP versie nodig voor deze mogelijkheid."
+
+#~ msgid "Checking for mysql module"
+#~ msgstr "Zoeken naar MySQL module"
+
+#~ msgid "MySQL support is needed for reading GOfax reports from databases."
+#~ msgstr ""
+#~ "MySQL ondersteuning is nodig voor het lezen van GOfax rapporten uit "
+#~ "databases."
+
+#~ msgid "Checking for cups module"
+#~ msgstr "Zoeken naar CUPS module"
+
+#~ msgid ""
+#~ "In order to read available printers from IPP protocol instead of printcap "
+#~ "files, you've to install the CUPS module."
+#~ msgstr ""
+#~ "U moet de CUPS module installeren om beschikbare printers via het IPP "
+#~ "protocol te kunnen aflezen i.p.v. via printcap bestanden."
+
+#~ msgid "Checking for kadm5 module"
+#~ msgstr "Zoeken naar kadm5 module"
+
+#~ msgid "Checking for snmp Module"
+#~ msgstr "Zoeken naar de SNMP module"
+
+#~ msgid ""
+#~ "Simple Network Management Protocol (SNMP) is required for client "
+#~ "monitoring."
+#~ msgstr ""
+#~ "Het Simple Network Management Protocol (SNMP) is vereist voor werkstation "
+#~ "monitoring."
+
+#~ msgid "PHP detailed function inspection"
+#~ msgstr "Gedteaileerde PHP functie inspectie"
+
+#~ msgid "Checking for function %s"
+#~ msgstr "Zoeken naar functie %s"
+
+#~ msgid ""
+#~ "The function %s is used by GOsa. There is no information if it's optional "
+#~ "or required yet."
+#~ msgstr ""
+#~ "De functie '%s' wordt gebruikt door GOsa. Er is nog geen informatie "
+#~ "voorhanden of deze functie optioneel of vereist is."
+
+#~ msgid "Checking for some additional programms"
+#~ msgstr "Zoeken naar enkele additionele programma's"
+
+#, fuzzy
+#~ msgid "Checking for GraphicsMagick (>=1.1.2)"
+#~ msgstr "Zoeken naar ImageMagick (>=5.4.0)"
+
+#, fuzzy
+#~ msgid ""
+#~ "GraphicsMagick is used to convert user supplied images to fit the "
+#~ "suggested size and the unified JPEG format."
+#~ msgstr ""
+#~ "ImageMagick wordt gebruikt om gebruikers aangeleverde plaatjes te laten "
+#~ "passen binnen de voorgestelde grootte en het uniforme JPEG formaat."
+
+#~ msgid "Checking for ImageMagick (>=5.4.0)"
+#~ msgstr "Zoeken naar ImageMagick (>=5.4.0)"
+
+#~ msgid ""
+#~ "ImageMagick is used to convert user supplied images to fit the suggested "
+#~ "size and the unified JPEG format."
+#~ msgstr ""
+#~ "ImageMagick wordt gebruikt om gebruikers aangeleverde plaatjes te laten "
+#~ "passen binnen de voorgestelde grootte en het uniforme JPEG formaat."
+
+#~ msgid "Checking imagick module for PHP"
+#~ msgstr "Zoeken naar de imagick module voor PHP"
+
+#~ msgid ""
+#~ "Imagick is used to convert user supplied images to fit the suggested size "
+#~ "and the unified JPEG format from PHP script."
+#~ msgstr ""
+#~ "Imagick wordt gebruikt om gebruikers aangeleverde plaatjes te laten "
+#~ "passen binnen de voorgestelde grootte en het uniforme JPEG formaat."
+
+#~ msgid ""
+#~ "The fping utility is only used if you've got a thin client based terminal "
+#~ "environment running."
+#~ msgstr ""
+#~ "Het fping programma wordt alleen gebruikt indien u een thin client "
+#~ "gebaseerde terminal omgeving heeft draaien."
+
+#~ msgid "Checking for a way to generate LM/NT password hashes"
+#~ msgstr "Zoeken naar een manier om LM/NT wachtwoord hashes te genereren"
+
+#~ msgid ""
+#~ "In order to use SAMBA 2/3, you've to install some additional packages to "
+#~ "generate password hashes."
+#~ msgstr ""
+#~ "Om Samba 2.x/3.x te gebruiken moet u enkele additionele pakketten "
+#~ "installeren om wachtwoord hashes te genereren"
+
+#~ msgid "php.ini check -> session.auto_register"
+#~ msgstr "php.ini controle -> session.auto_register"
+
+#~ msgid ""
+#~ "In Order to use GOsa without any trouble, the session.auto_register "
+#~ "option in your php.ini must be set to 'Off'."
+#~ msgstr ""
+#~ "Om GOsa zonder problemen te gebruiken, moet de session.auto_register "
+#~ "optie in uw php.ini ingesteld zijn op 'Off'."
+
+#~ msgid "php.ini check -> implicit_flush"
+#~ msgstr "php.ini controle -> implicit_flush"
+
+#~ msgid ""
+#~ "This option influences the Output handling. Turn this Option off, to "
+#~ "increase performance."
+#~ msgstr ""
+#~ "Deze Optie definieert Uitvoer afhandeling. Zet deze Optie uit om "
+#~ "snelheiswinst te behalen"
+
+#~ msgid "php.ini check -> max_execution_time"
+#~ msgstr "php.ini controle -> max_execution_time"
+
+#~ msgid ""
+#~ "The Execution time should be at least 30 seconds, because some actions "
+#~ "may consume more time."
+#~ msgstr ""
+#~ "De uitvoer tijd moet minimaal 30 seconden zijn, omdat sommige acties lang "
+#~ "kunnen duren."
+
+#~ msgid "php.ini check -> memory_limit"
+#~ msgstr "php.ini controle -> memory_limit"
+
+#~ msgid ""
+#~ "GOsa needs at least 16MB of memory, less will cause unpredictable errors! "
+#~ "Increase it for larger setups."
+#~ msgstr ""
+#~ "GOsa heeft tenminste 16MB geheugen nodig. Minder geheugen kan diverse "
+#~ "onvoorspelbare fouten opleveren!.Verhoog deze waarde nog verder voor zeer "
+#~ "grote omgevingen."
+
+#~ msgid "php.ini check -> expose_php"
+#~ msgstr "php.ini controle -> expose_php"
+
+#~ msgid ""
+#~ "Increase the server security by setting expose_php to 'off'. PHP won't "
+#~ "send any Information about the server you are running in this case."
+#~ msgstr ""
+#~ "Verhoog de server veiligheid door 'expose_php' op 'Off' in te stellen. "
+#~ "PHP zal dan geen enkele informatie over de Server die u gebruikt "
+#~ "weergeven."
+
+#~ msgid "php.ini check -> magic_quotes_gpc"
+#~ msgstr "php.ini check -> magic_quotes_gpc"
+
+#~ msgid ""
+#~ "Can't connect to the specified LDAP server! Please make sure that is "
+#~ "reachable for GOsa."
+#~ msgstr ""
+#~ "Kan niet met de opgegeven LDAP server verbinden! Controleer a.u.b. dat "
+#~ "deze bereikbaar is voor GOsa."
+
+#~ msgid ""
+#~ "Can't bind to the specified LDAP server! Please make sure that it is "
+#~ "reachable for GOsa."
+#~ msgstr ""
+#~ "De aanmelding op de LDAP server is mislukt! Controleer a.u.b. dat deze "
+#~ "bereikbaar is voor GOsa."
+
+#~ msgid ""
+#~ "You're missing the required attribute '%s' from this formular. Please "
+#~ "complete!"
+#~ msgstr ""
+#~ "Het vereiste atribuut '%s' uit dit formulier ontbreekt. Maak a.u.b. uw "
+#~ "invoer af!"
+
+#, fuzzy
+#~ msgid ""
+#~ "Could not bind to the specified LDAP server! Please make sure that it is "
+#~ "reachable for GOsa."
+#~ msgstr ""
+#~ "De aanmelding op de LDAP server is mislukt! Controleer a.u.b. dat deze "
+#~ "bereikbaar is voor GOsa."
+
+#~ msgid ""
+#~ "Can't read schema informations, GOsa needs to know your schema setup. "
+#~ "Please verify that it is readable for GOsa"
+#~ msgstr ""
+#~ "Kan schema informatie niet lezen. GOsa moet uw schema installatie kennen. "
+#~ "Controleer a.u.b. dat deze leesbaar is voor GOsa."
+
+#~ msgid "Can't log into LDAP server. Reason was: %s."
+#~ msgstr "De aanmelding op de LDAP server is mislukt. De reden was: '%s'."
+
+#, fuzzy
+#~ msgid ""
+#~ "User and/or group could not be created, please check your configuration "
+#~ "twice !"
+#~ msgstr ""
+#~ "Kan niet verbinden met de opgegeven database. Controleer uw GLPI "
+#~ "configuratie a.u.b."
+
+#, fuzzy
+#~ msgid "Could not send feedback."
+#~ msgstr "De opgegeven database kon niet geselecteerd worden!"
 
 #, fuzzy
 #~ msgid "Can't open file '%s' to read uploaded file contents."
