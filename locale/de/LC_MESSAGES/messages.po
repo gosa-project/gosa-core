@@ -15196,7 +15196,7 @@ msgstr "Automatisch"
 
 #: setup/setup_config1.tpl:2
 msgid "Look and feel"
-msgstr "Look & Feel"
+msgstr "Look &amp; Feel"
 
 #: setup/setup_config1.tpl:6
 msgid "Theme"
