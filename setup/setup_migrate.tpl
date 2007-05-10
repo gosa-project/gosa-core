@@ -211,14 +211,14 @@
 						<i>System administrator</i>
 					</td>
 				</tr>
-				<tr>
-					<td>
-						{t}User ID{/t}:&nbsp;
-					</td>
-					<td>
-						<i>admin</i>
-					</td>
-				</tr>
+               	<tr>
+                    <td>
+                        {t}User ID{/t}:&nbsp;
+                    </td>
+                    <td>
+                        <input type='text' value='{$new_user_uid}' name='new_user_uid'><br>
+                    </td>
+                </tr>
 				<tr>
 					<td>
 						{t}Password{/t}:&nbsp;
@@ -243,20 +243,9 @@
   document.mainform.new_user_password.focus();
   -->
 </script>
-				<input type='submit' name='create_admin_user' value='{t}Apply{/t}'>	
-			
-			{if $users_cnt != 0 }
-			
-			<h2>{t}Assign super administrator permissions to an existing user{/t}</h2>
-			<p>{t}To grant administrative permissions to a user, select one and choose 'Assign'.{/t}</p>
-			<select name='create_acls_selected' size="12" style='width:100%;'>
-				{html_options options=$users selected=$acl_create_selected}
-			</select>
-			<input type='submit' name='create_acls_create' value='{t}Apply{/t}'>
-			{/if}
 			<p class='seperator'>&nbsp;</p>	
-
 			<div style='width:99%; text-align:right; padding:5px;'>
+				<input type='submit' name='create_admin_user' value='{t}Apply{/t}'>	
 				<input type='submit' name='create_acls_cancel' value='{t}Cancel{/t}'>
 			</div>
 		

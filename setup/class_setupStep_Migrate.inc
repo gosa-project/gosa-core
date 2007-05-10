@@ -67,7 +67,6 @@ class Step_Migrate extends setup_step
 
   /* Create Acl attributes */
   var $acl_create_dialog  = FALSE;
-  var $acl_create_type    = "group";
   var $acl_create_selected= ""; // Currently selected element, that should receive admin rights 
   var $acl_create_changes = ""; // Contains ldif information about changes 
   var $acl_create_confirmed= FALSE;
@@ -913,7 +912,12 @@ class Step_Migrate extends setup_step
   function create_admin_user()
   {
     $pw1 = $pw2 = "";
+    $uid = "";
 
+    if(isset($_POST['new_user_uid'])){
+      $uid = $_POST['new_user_uid'];
+    }
+  
     if(isset($_POST['new_user_password'])){
       $pw1 = $_POST['new_user_password'];
     }
@@ -925,7 +929,12 @@ class Step_Migrate extends setup_step
       print_red(_("Specified passwords are empty or not equal."));
       return false;
     }
- 
+
+    if(!is_uid($uid) || empty($uid)){
+      print_red(_("Please specify a valid uid."));
+      return false;
+    }
+
     /* Establish ldap connection */
     $cv = $this->parent->captured_values;
     $ldap = new LDAP($cv['admin'],
@@ -940,7 +949,7 @@ class Step_Migrate extends setup_step
     if($cv['peopledn'] == "cn"){
       $dn = "cn=System Administrator,".$cv['peopleou'].",".$cv['base'];
     }else{
-      $dn = "uid=admin,".$cv['peopleou'].",".$cv['base'];
+      $dn = "uid=".$uid.",".$cv['peopleou'].",".$cv['base'];
     }
 
     $methods = @passwordMethod::get_available_methods_if_not_loaded();
@@ -953,10 +962,18 @@ class Step_Migrate extends setup_step
     $new_user['givenName']  = "System";
     $new_user['sn']  = "Administrator";
     $new_user['cn']  = "System Administrator";
-    $new_user['uid'] = "admin";
+    $new_user['uid'] = $uid;
     $new_user['userPassword'] = $hash;
     
     $ldap->cd($cv['base']);
+  
+    $ldap->cat($dn,array("dn"));
+    if($ldap->count()){
+      print_red(sprintf(_("Could not add administrative user, there is already an object with the same dn '%s' in your ldap database."),
+            $dn));
+      return(FALSE);
+    }
+
     $ldap->create_missing_trees(preg_replace("/^[^,]+,/","",$dn));
     $ldap->cd($dn);  
     $res = $ldap->add($new_user);
@@ -1273,14 +1290,14 @@ class Step_Migrate extends setup_step
       $this->show_details = FALSE;
     }
 
-    if(isset($_POST['create_acls_create_confirmed'])){
-      if($this->create_admin()){
-        $this->acl_create_dialog = FALSE;
-        $this->dialog = FALSE;
-      $this->show_details = FALSE;
-        $this->initialize_checks();
-      }
-    }
+#    if(isset($_POST['create_acls_create_confirmed'])){
+#      if($this->create_admin()){
+#        $this->acl_create_dialog = FALSE;
+#        $this->dialog = FALSE;
+#      $this->show_details = FALSE;
+#        $this->initialize_checks();
+#      }
+#    }
 
     if(isset($_POST['create_acls_create'])){
       $this->create_admin(TRUE);
@@ -1295,13 +1312,15 @@ class Step_Migrate extends setup_step
 
     if($this->acl_create_dialog){
       $smarty = get_smarty();
+
+      $uid = "admin";
+      if(isset($_POST['new_user_uid'])){
+        $uid = $_POST['new_user_uid'];
+      }
+
+      $smarty->assign("new_user_uid",$uid);
       $smarty->assign("new_user_password",@$_POST['new_user_password']);
       $smarty->assign("new_user_password2",@$_POST['new_user_password2']);
-      $smarty->assign("users" ,$this->get_user_list());
-      $smarty->assign("users_cnt" ,count($this->get_user_list()));
-//      $smarty->assign("groups",$this->get_group_list());
-//      $smarty->assign("groups_cnt",count($this->get_group_list()));
-      $smarty->assign("type"  ,$this->acl_create_type);
       $smarty->assign("method","create_acls");
       $smarty->assign("acl_create_selected",$this->acl_create_selected);
       $smarty->assign("what_will_be_done_now",$this->acl_create_changes);
@@ -1449,20 +1468,9 @@ class Step_Migrate extends setup_step
 
     /* Get "create acl" dialog posts */
     if($this->acl_create_dialog){
-      if(isset($_POST['create_acls_create'])){
-        if(isset($_POST['create_acls_selected'])){
-          $this->acl_create_selected = base64_decode($_POST['create_acls_selected']);
-        }else{
-          $this->acl_create_selected = ""; 
-        }
-      }
 
       if(isset($_POST['create_acls_create_abort'])){
         $this->acl_create_selected = "";
-      }
-
-      if(isset($_POST['acl_create_type'])){
-        $this->acl_create_type = $_POST['acl_create_type'];
       }
     }
 
