@@ -46,7 +46,7 @@ function displayLogin()
 
     /* Displasy SSL mode warning? */
     if ($ssl != "" && $config->data['MAIN']['WARNSSL'] == 'true'){
-      $smarty->assign ("ssl", "<b>"._("Warning").":<\/b> "._("Session will not be encrypted.")." <a style=\"color:red;\" href=\"$ssl\"><b>"._("Enter SSL session")."<\/b></a>!");
+      $smarty->assign ("ssl", "<b>"._("Warning").":</b> "._("Session will not be encrypted.")." <a style=\"color:red;\" href=\"$ssl\"><b>"._("Enter SSL session")."</b></a>!");
     } else {
       $smarty->assign ("ssl", "");
     }
@@ -217,21 +217,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
     $recursive = (isset($config->current['RECURSIVE']) && $config->current['RECURSIVE'] == "true");
     $tls =       (isset($config->current['TLS'])       && $config->current['TLS'] == "true");
 
-    if(!is_schema_readable($config->current['SERVER'], $config->current['ADMIN'], $config->current['PASSWORD'], $recursive, $tls)){
+    if(!count($ldap->get_objectclasses())){
 
       print_red(_("GOsa cannot retrieve information about the installed schema files. Please make sure, that this is possible."));
       displayLogin();
       exit();
     }else{
-      $str = (schema_check($config->current['SERVER'],$config->current['ADMIN'],$config->current['PASSWORD'], $recursive, $tls, 0, TRUE));
-      $checkarr = array();
-      foreach($str as $tr){
-        if(isset($tr['needonstartup'])){
-          print_red($tr['msg']."<br>"._("Your ldap setup contains old schema definitions. Please re-run the setup."));
-          displayLogin();
-          exit();
-        }
-      }
+#      $str = (schema_check($config->current['SERVER'],$config->current['ADMIN'],$config->current['PASSWORD'], $recursive, $tls, 0, TRUE));
+#      $checkarr = array();
+#      foreach($str as $tr){
+#        if(isset($tr['needonstartup'])){
+#          print_red($tr['msg']."<br>"._("Your ldap setup contains old schema definitions. Please re-run the setup."));
+#          displayLogin();
+#          exit();
+#        }
+#      }
     }
   }
   /* Check for locking area */
