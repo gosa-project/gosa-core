@@ -22,7 +22,7 @@
 
 class Step_Finish extends setup_step
 {
-  var $gosa_conf_contrib   = "/gosa.conf";
+  var $gosa_conf_contrib   = "/gosa.conf.in";
   var $cfg_file_written = FALSE;
   var $header_image= 'images/ldapserver.png';
 
