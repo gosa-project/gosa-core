@@ -257,7 +257,7 @@ class workgeneric extends plugin
                                        "localboot" => _("Force localboot"),
                                        "sysinfo"  => _("System analysis")));
     } else {
-      $smarty->assign("actions", array("halt" => _("Switch off"), "reboot" => _("Reboot"),
+      $smarty->assign("actions", array("wake" => _("Wake up"),
                                        "reinstall" => _("Reinstall"),
                                        "update" => _("Scheduled update"),
                                        "memcheck" => _("Memory test"),
