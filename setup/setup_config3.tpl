@@ -126,7 +126,7 @@
     <p><b>{t}Login and session{/t}</b></p>
     <div class='step4_container'>
         <div class='step4_name'>
-            {t}Enforce register_globals to be activated{/t}
+            {t}Enforce register_globals to be deactivated{/t}
         </div>
         <div class='step4_value'>
 	
