@@ -69,7 +69,7 @@ class setup
     }
     
     foreach($this->o_steps as $key => $step){
-      $this->o_steps[$key]->parent = $this;
+      $this->o_steps[$key]->parent = &$this;
     }
   }
 
