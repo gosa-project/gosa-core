@@ -169,7 +169,7 @@ EOF
 
 mkdir -p %{buildroot}/etc/openldap/schema/gosa
 mv contrib/openldap/*.schema %{buildroot}/etc/openldap/schema/gosa
-sed 's§"CONFIG_TEMPLATE_DIR", "../contrib/"§"CONFIG_TEMPLATE_DIR", "%{docdir}/"§g' %{buildroot}/usr/share/gosa/include/functions.inc > %{buildroot}/usr/share/gosa/include/functions.inc.new
+sed 'sï¿½"CONFIG_TEMPLATE_DIR", "../contrib/"ï¿½"CONFIG_TEMPLATE_DIR", "%{docdir}/"ï¿½g' %{buildroot}/usr/share/gosa/include/functions.inc > %{buildroot}/usr/share/gosa/include/functions.inc.new
 mv -f %{buildroot}/usr/share/gosa/include/functions.inc.new %{buildroot}/usr/share/gosa/include/functions.inc
 
 mv -f doc manual
@@ -205,6 +205,7 @@ rm -rf %{buildroot}
 %config(noreplace) %attr(0600,%{apacheuser},%{apachegroup}) %{webconf}/gosa_include.conf
 %config(noreplace) %attr(0700,%{apacheuser},%{apachegroup}) /etc/gosa
 %attr(0700, %{apacheuser}, %{apachegroup}) /var/spool/gosa
+%attr(0744, %{apacheuser}, %{apachegroup}) /usr/share/gosa/setup
 %attr(0744, %{apacheuser}, %{apachegroup}) /usr/share/gosa/html
 %attr(0744, %{apacheuser}, %{apachegroup}) /usr/share/gosa/ihtml
 %attr(0744, %{apacheuser}, %{apachegroup}) /usr/share/gosa/include
@@ -238,6 +239,10 @@ rm -rf %{buildroot}
 /usr/share/gosa/doc/guide/user/nl
 
 %changelog
+* Wed May 16 2007 Lars Scheiter <lars.scheiter@GONICUS.de> 2.5.11
+- New upstream
+- Added new setup
+
 * Wed Apr 11 2007 Lars Scheiter <lars.scheiter@GONICUS.de> 2.5.10
 - New upstream
 - Added new subpackage mkntpasswd
