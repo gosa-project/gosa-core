@@ -296,7 +296,7 @@ class workgeneric extends plugin
     show_ldap_error($ldap->get_error(), _("Removing workstation failed"));
 
     /* Optionally execute a command after we're done */
-    $this->handle_post_events("remove", array("macAddress" => $this->netConfigDNS->macAddress));
+    $this->handle_post_events("remove", array("macAddress" => $this->netConfigDNS->macAddress,"ipHostNumber" => $this->netConfigDNS->ipHostNumber));
 
     /* Delete references to object groups */
     $ldap->cd ($this->config->current['BASE']);
@@ -448,7 +448,7 @@ class workgeneric extends plugin
       $ldap->add($this->attrs);
       show_ldap_error($ldap->get_error(), _("Saving workstation failed"));
       if(!$this->didAction){
-        $this->handle_post_events("add");
+        $this->handle_post_events("add",array("macAddress" => $this->netConfigDNS->macAddress,"ipHostNumber" => $this->netConfigDNS->ipHostNumber));
       }
     } else {
       if ($this->orig_dn != $this->dn){
@@ -459,7 +459,7 @@ class workgeneric extends plugin
       $ldap->modify ($this->attrs); 
 
       if(!$this->didAction){
-        $this->handle_post_events("modify");
+        $this->handle_post_events("modify",array("macAddress" => $this->netConfigDNS->macAddress,"ipHostNumber" => $this->netConfigDNS->ipHostNumber));
       }
     }
 

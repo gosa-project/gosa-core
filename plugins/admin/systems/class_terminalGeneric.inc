@@ -324,7 +324,7 @@ class termgeneric extends plugin
       show_ldap_error($ldap->get_error(), _("Removing terminal failed"));
 
       /* Optionally execute a command after we're done */
-      $this->handle_post_events("remove", array("macAddress" => $this->netConfigDNS->macAddress));
+      $this->handle_post_events("remove",array("macAddress" => $this->netConfigDNS->macAddress,"ipHostNumber" => $this->netConfigDNS->ipHostNumber));
 
       /* Delete references to object groups */
       $ldap->cd ($this->config->current['BASE']);
@@ -485,12 +485,12 @@ class termgeneric extends plugin
         unset($this->attrs['gotoNtpServer']);
       }
       $ldap->add($this->attrs);
-      $this->handle_post_events("add");
+      $this->handle_post_events("add",array("macAddress" => $this->netConfigDNS->macAddress,"ipHostNumber" => $this->netConfigDNS->ipHostNumber));
     } else {
       $ldap->cd($this->dn);
       $this->cleanup();
       $ldap->modify ($this->attrs); 
-      $this->handle_post_events("modify");
+      $this->handle_post_events("modify",array("macAddress" => $this->netConfigDNS->macAddress,"ipHostNumber" => $this->netConfigDNS->ipHostNumber));
     }
     
     /* cn=default and macAddress=- indicates that this is a template */ 
@@ -501,9 +501,6 @@ class termgeneric extends plugin
     $this->netConfigDNS->cn = $this->cn;
     $this->netConfigDNS->save($this->dn);
     show_ldap_error($ldap->get_error(), _("Saving terminal failed"));
-
-    /* Optionally execute a command after we're done */
-    $this->postcreate();
   }
 
 }

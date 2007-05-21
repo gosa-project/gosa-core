@@ -100,7 +100,7 @@ class componentGeneric extends plugin
     $this->netConfigDNS->remove_from_parent();
     $ldap->rmdir($this->dn);
     show_ldap_error($ldap->get_error(), _("Removing generic component failed"));
-    $this->handle_post_events("remove");
+    $this->handle_post_events("remove",array("macAddress" => $this->netConfigDNS->macAddress,"ipHostNumber" => $this->netConfigDNS->ipHostNumber));
 
     /* Delete references to object groups */
     $ldap->cd ($this->config->current['BASE']);
@@ -206,7 +206,7 @@ class componentGeneric extends plugin
       $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
       $ldap->cd($this->dn);
       $ldap->add($this->attrs);
-      $this->handle_post_events("add");
+      $this->handle_post_events("add",array("macAddress" => $this->netConfigDNS->macAddress,"ipHostNumber" => $this->netConfigDNS->ipHostNumber));
     } else {
       if ($this->orig_dn != $this->dn){
         $this->move($this->orig_dn, $this->dn);
@@ -216,18 +216,14 @@ class componentGeneric extends plugin
       $this->cleanup();
       $ldap->modify ($this->attrs); 
 
-      $this->handle_post_events("modify");
+      $this->handle_post_events("modify",array("macAddress" => $this->netConfigDNS->macAddress,"ipHostNumber" => $this->netConfigDNS->ipHostNumber));
     }
 
     $this->netConfigDNS->cn = $this->cn;
     $this->netConfigDNS->save($this->dn);
 
     show_ldap_error($ldap->get_error(), _("Saving generic component failed"));
-
-    /* Optionally execute a command after we're done */
-    $this->postcreate();
   }
-
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

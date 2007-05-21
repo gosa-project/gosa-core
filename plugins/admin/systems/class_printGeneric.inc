@@ -576,7 +576,7 @@ class printgeneric extends plugin
       $this->netConfigDNS->remove_from_parent();
       $ldap->rmdir($this->dn);
       show_ldap_error($ldap->get_error(), _("Removing printer failed"));
-      $this->handle_post_events("remove");
+      $this->handle_post_events("remove",array("macAddress" => $this->netConfigDNS->macAddress,"ipHostNumber" => $this->netConfigDNS->ipHostNumber));
 
       /* Delete references to object groups */
       $ldap->cd ($this->config->current['BASE']);
@@ -806,7 +806,7 @@ class printgeneric extends plugin
       }
       
       $ldap->add($this->attrs);
-      $this->handle_post_events("add");
+      $this->handle_post_events("add",array("macAddress" => $this->netConfigDNS->macAddress,"ipHostNumber" => $this->netConfigDNS->ipHostNumber));
     } else {
       if ($this->orig_dn != $this->dn){
         $this->move($this->orig_dn, $this->dn);
@@ -816,7 +816,7 @@ class printgeneric extends plugin
       $this->cleanup();
       $ldap->modify ($this->attrs); 
 
-      $this->handle_post_events("modify");
+      $this->handle_post_events("modify",array("macAddress" => $this->netConfigDNS->macAddress,"ipHostNumber" => $this->netConfigDNS->ipHostNumber));
     }
     show_ldap_error($ldap->get_error(), _("Saving printer failed"));
 
@@ -826,9 +826,6 @@ class printgeneric extends plugin
       $this->netConfigDNS->dn = $this->dn;
       $this->netConfigDNS->save($this->dn);
     }
-
-    /* Optionally execute a command after we're done */
-    $this->postcreate();
 
     /* This is a multi object. Handle tagging here... */
     $this->handle_object_tagging();

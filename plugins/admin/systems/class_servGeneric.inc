@@ -209,7 +209,7 @@ class servgeneric extends plugin
       unset($og->member[$this->dn]);
       $og->save ();
     }
-    $this->handle_post_events("remove", array("macAddress" => $this->netConfigDNS->macAddress));
+    $this->handle_post_events("remove", array("macAddress" => $this->netConfigDNS->macAddress,"ipHostNumber" => $this->netConfigDNS->ipHostNumber));
   }
 
 
@@ -318,7 +318,7 @@ class servgeneric extends plugin
 
     /* Optionally execute a command after we're done */
     if(!$this->didAction){
-      $this->handle_post_events($mode);
+      $this->handle_post_events($mode,array("macAddress" => $this->netConfigDNS->macAddress,"ipHostNumber" => $this->netConfigDNS->ipHostNumber));
     }
   }
 
