@@ -16637,7 +16637,7 @@ msgstr "Bitte geben Sie eine gültige UID ein!"
 msgid ""
 "Could not add administrative user, there is already an object with the same "
 "dn '%s' in your ldap database."
-msgstr "Kann keinen Admiistrator hinzufügen, da bereits ein Objekt mit der selben DN '%s' im LDAP vorhanden ist."
+msgstr "Kann keinen Administrator hinzufügen, da bereits ein Objekt mit der selben DN '%s' im LDAP vorhanden ist."
 
 #: setup/class_setupStep_Migrate.inc:1010
 #: setup/class_setupStep_Migrate.inc:1058
