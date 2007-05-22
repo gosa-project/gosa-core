@@ -104,6 +104,7 @@ class askClassName extends plugin
       $smarty->assign("ClassNamesAvailable", "");
       $smarty->assign("grey", "");
     }
+    ksort($used);
     $smarty->assign("ClassNames", $used);
     $smarty->assign("ClassName",  $this->ClassName);
     $display.= $smarty->fetch(get_template_path('askClassName.tpl', TRUE));
