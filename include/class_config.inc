@@ -631,7 +631,8 @@ class config  {
     $ret = array();
     $depth ++;
 
-    /* Walk through array */	
+    /* Walk through array */
+    ksort($arr);
     foreach($arr as $name => $entries){
 
       /* If this department is the last in the current tree position 
@@ -652,7 +653,7 @@ class config  {
       if(isset($entries['ENTRY'])){
         $a = "";
         for($i = 0 ; $i < $depth ; $i ++){
-          $a.="&nbsp;";
+          $a.=".";
         }
         $ret[$entries['ENTRY']]=$a."&nbsp;".$name;
       }	
