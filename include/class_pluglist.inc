@@ -135,10 +135,14 @@ class pluglist {
 					if ($this->check_access($info['ACL'])){
 						$this->allowed_plug_ids[$index]=$index;
 						$entries= $entries."<p class=\"menuitem\" ".
-							"onClick='return question(\""._("You are currently editing a database entry. Do you want to dismiss the changes?")."\", \"$href\");'>".
-							"<a class=\"menuitem\" ".
+							"onClick='return question(\""._("You are currently editing a database entry. Do you want to dismiss the changes?")."\", \"$href\");'>";
+						if($_SESSION['js']){
+							$entries.= _($plHeadline)."</p>\n";
+						} else {
+							$entries.= "<a class=\"menuitem\" ".
 							"href=\"$href\">".
 							_($plHeadline)."</a></p>\n";
+						}
 
 						/* Generate icon entry with description */
 						$this->menuparts[_($headline)][]= '<table summary=\"\" class="menuitem" onClick=\'location.href="'.$href.'"\'><tr><td style="background-color:#F0F0F0;"><a href="'.$href.'"><img alt=\"\" border=0 src="'.$image.'"></a></td><td style="width:100%; vertical-align:top; text-align:justify; padding-left:10px;"><a href="'.$href.'"><b>'._($plHeadline).'</b></a><br><a href="'.$href.'">'._($plDescription).'</a></td></tr></table>';
