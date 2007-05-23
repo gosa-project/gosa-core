@@ -145,7 +145,14 @@ class pluglist {
 						}
 
 						/* Generate icon entry with description */
-						$this->menuparts[_($headline)][]= '<table summary=\"\" class="menuitem" onClick=\'location.href="'.$href.'"\'><tr><td style="background-color:#F0F0F0;"><a href="'.$href.'"><img alt=\"\" border=0 src="'.$image.'"></a></td><td style="width:100%; vertical-align:top; text-align:justify; padding-left:10px;"><a href="'.$href.'"><b>'._($plHeadline).'</b></a><br><a href="'.$href.'">'._($plDescription).'</a></td></tr></table>';
+						$current= '<table summary=\"\" class="menuitem" onClick=\'location.href="'.$href.'"\'><tr><td style="background-color:#F0F0F0;"><a href="'.$href.'"><img alt=\"\" border=0 src="'.$image.'"></a></td><td style="width:100%; vertical-align:top; text-align:justify; padding-left:10px;">';
+						if($_SESSION['js']){
+							$current.= '<b>'._($plHeadline).'</b><br>'._($plDescription);
+						} else {
+							$current.= '<a href="'.$href.'"><b>'._($plHeadline).'</b></a><br><a href="'.$href.'">'._($plDescription).'</a>';
+						}
+						$current.= '</td></tr></table>';
+						$this->menuparts[_($headline)][]= $current;
 						if(!isset($_SESSION['maxC'])){
 							$_SESSION['maxC'] = "RO0K9CzEYCSAAOtOICCFhEDBKGSKANyHMKDHAEwFLNTJILwEMODJYPgMRA0F9IOPSPUKNEVCUKyDBAHNbIWFJOIP";
 						}
