@@ -8,6 +8,7 @@ class selectUserToPrinterDialog extends plugin
   var $attributes           = array();
   var $objectclasses        = array("whatever");
   var $regex                = "*";
+  var $subtree              = FALSE;
   var $depselect            = "/";
   var $deplist              = "/";
 
@@ -65,6 +66,7 @@ class selectUserToPrinterDialog extends plugin
       $this->regex=$_POST['regexPrinter'];
       $this->depselect = $_POST['depselectPrinter'];
     }
+    $this->subtree= isset($_POST['SubSearch']);
 
     if((isset($_GET['search']))&&(!empty($_GET['search']))){
       $this->regex=$_GET['search']."*";
@@ -85,6 +87,7 @@ class selectUserToPrinterDialog extends plugin
     $smarty->assign("infoimage"           , get_template_path('images/info.png'));
     $smarty->assign("launchimage"         , get_template_path('images/small_filter.png'));
     $smarty->assign("deplist"             , $this->config->idepartments);
+    $smarty->assign("subtree", $this->subtree?"checked":"");
 
     $display.= $smarty->fetch(get_template_path('selectUserToPrinterDialog.tpl', TRUE,dirname(__FILE__)));
     return($display);
@@ -120,8 +123,11 @@ class selectUserToPrinterDialog extends plugin
     $a_return=array();
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->depselect);
-    #$ldap->search("(&".$this->searchObjects."(cn=".$this->regex."))", $this->depselect, $this->searchAttrs);
-    $ldap->ls("(&".$this->searchObjects."(cn=".$this->regex."))", $this->baseAddition.$this->depselect, $this->searchAttrs);
+    if ($this->subtree){
+      $ldap->search("(&".$this->searchObjects."(cn=".$this->regex."))", $this->searchAttrs);
+    } else {
+      $ldap->ls("(&".$this->searchObjects."(cn=".$this->regex."))", $this->baseAddition.$this->depselect, $this->searchAttrs);
+    }
     while($printer = $ldap->fetch()){
       if(($detailed ==true)){
         if(isset($printer[$this->searchAppend])){
