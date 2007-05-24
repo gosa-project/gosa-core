@@ -11,7 +11,11 @@
       <table style="margin-left:20px;" border="0" summary="">
        <tr>
         <td style="vertical-align:middle;">
+	{if !$javascript}
 	 <a class="maintitlebar" href='main.php?reset=1' onClick='return question("{t}You are currently editing a database entry. Do you want to dismiss the changes?{/t}", "main.php?reset=1");' >
+	{else}
+	 <a class="maintitlebar" onClick='return question("{t}You are currently editing a database entry. Do you want to dismiss the changes?{/t}", "main.php?reset=1");' >
+	{/if}
 	  <img src='{$go_home}' class='center' border="0" alt="Main">&nbsp;{t}Main{/t}
 	 </a>
 	</td>
@@ -21,9 +25,15 @@
          </a>
 	</td>
 	<td>
+	{if !$javascript}
 	 <a class="maintitlebar" href='logout.php?request' onClick='return question("{t}You are currently editing a database entry. Do you want to dismiss the changes?{/t}", "logout.php?request");' style="margin-left:35px;">
           <img src='{$go_out}' class='center' border="0" alt="Sign out">&nbsp;{t}Sign out{/t}
          </a>
+	{else}
+	 <a class="maintitlebar" onClick='return question("{t}You are currently editing a database entry. Do you want to dismiss the changes?{/t}", "logout.php?request");' style="margin-left:35px;">
+          <img src='{$go_out}' class='center' border="0" alt="Sign out">&nbsp;{t}Sign out{/t}
+         </a>
+	{/if}
 	</td>
        </tr>
       </table>
