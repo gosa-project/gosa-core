@@ -143,7 +143,7 @@ class Step_Ldap extends setup_step
     if($reset){
       $this->parent->disable_steps_from(($this->parent->step_name_to_id(get_class($this))) +1);
       $attr = @LDAP::get_naming_contexts($this->connection);
-      if(!in_array(get_post("base"),$attr)){
+      if(is_array($attr) && !in_array(get_post("base"),$attr)){
         if(isset($attr[0])){
           $this->base = $attr[0];
         }
