@@ -253,10 +253,18 @@ class pluglist {
 							$col = 1;
 						}
 						$entries= $entries."<td class=\"iconmenu\" style=\"width:20%;\" onClick='location.href=\"".$href."\"'".
-							"><a class=\"iconmenu\" href=\"".$href."\">".
-							"<img $isize border=0 align=middle src=\"$image".
-							"\" alt=\"*\">&nbsp;".
-							_($plHeadline)."</a></td>\n";
+							">";
+							if($_SESSION['js']){
+								$entries.= "<img $isize border=0 align=middle src=\"$image".
+									"\" alt=\"*\">&nbsp;".
+									_($plHeadline);
+							} else {
+								$entries.= "<a class=\"iconmenu\" href=\"".$href."\">".
+									"<img $isize border=0 align=middle src=\"$image".
+									"\" alt=\"*\">&nbsp;".
+									_($plHeadline)."</a>";
+							}
+							$entries.= "</td>\n";
 						$col++ ;
 
 					}
