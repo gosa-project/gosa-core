@@ -882,7 +882,13 @@ class Step_Migrate extends setup_step
         }
         
       }else{
-        $new_group_dn = "cn=GOsa Administrators,".$cv['groupou'].",".$cv['base'];
+
+        $group_ou = trim($cv['groupou']);
+        if(!empty($group_ou)){
+          $group_ou = trim($group_ou).",";
+        }
+
+        $new_group_dn = "cn=GOsa Administrators,".$group_ou.$cv['base'];
         $new_group_attrs['objectClass'] = array("gosaObject","posixGroup");
         $new_group_attrs['cn'] = "GOsa Administrators";
         $new_group_attrs['gosaSubtreeACL'] = ":all";
@@ -945,11 +951,16 @@ class Step_Migrate extends setup_step
 
     /* Get current base attributes */
     $ldap->cd($cv['base']);
-  
+
+    $people_ou = trim($cv['peopleou']);
+    if(!empty($people_ou)){
+      $people_ou = trim($people_ou).",";
+    }
+
     if($cv['peopledn'] == "cn"){
-      $dn = "cn=System Administrator,".$cv['peopleou'].",".$cv['base'];
+      $dn = "cn=System Administrator,".$people_ou.$cv['base'];
     }else{
-      $dn = "uid=".$uid.",".$cv['peopleou'].",".$cv['base'];
+      $dn = "uid=".$uid.",".$people_ou.$cv['base'];
     }
 
     $methods = @passwordMethod::get_available_methods_if_not_loaded();
@@ -966,7 +977,6 @@ class Step_Migrate extends setup_step
     $new_user['userPassword'] = $hash;
     
     $ldap->cd($cv['base']);
-  
     $ldap->cat($dn,array("dn"));
     if($ldap->count()){
       print_red(sprintf(_("Could not add administrative user, there is already an object with the same dn '%s' in your ldap database."),
