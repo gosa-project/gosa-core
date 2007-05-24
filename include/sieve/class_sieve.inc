@@ -1,4 +1,4 @@
-<?
+<?php
 
 /*
  * $Id: class_sieve.inc,v 1.1 2005/02/21 09:33:01 cajus Exp $ 
