@@ -385,8 +385,24 @@ class Step_Migrate extends setup_step
         $cv['connection'],
         FALSE,
         $cv['tls']);
-    $people_ou = $cv['peopleou'];
+
     $ldap->cd($cv['base']);
+
+  
+    /***********
+     * Get all gosaDepartments to be able to 
+     *  validate correct ldap tree position of every single user
+     ***********/
+    $valid_deps = array();
+    $valid_deps['/'] = $cv['base'];
+    $ldap->search("(&(objectClass=gosaDepartment)(ou=*))",array("dn","ou"));
+    while($attrs = $ldap->fetch()){
+      $valid_deps[$attrs['ou'][0]] = $attrs['dn'];
+    }
+  
+    /***********
+     * Search for all users 
+     ***********/
     $res = $ldap->search("(&(objectClass=gosaAccount)(!(uid=*$)))",array("dn"));
     if(!$res){
       $this->checks['outside_users']['STATUS']    = FALSE;
@@ -395,10 +411,24 @@ class Step_Migrate extends setup_step
       return(false);
     }
 
-
+    /***********
+     * Check if returned users are within a valid GOsa deparmtment. (peopleou,gosaDepartment,base)
+     ***********/
     $this->outside_users = array();
+    $people_ou = trim($cv['peopleou']);
+    if(!empty($people_ou)){
+      $people_ou = $people_ou.",";
+    } 
+
     while($attrs = $ldap->fetch()){
-      if((!preg_match("/^[^,]+,".normalizePreg($people_ou)."/",$attrs['dn'])  && !preg_match("/,dc=addressbook,/",$attrs['dn']))){
+      $people_db_base = preg_replace("/^[^,]+,".normalizePreg($people_ou)."/","",$attrs['dn']);
+ 
+      /* Check if entry is not an addressbook only user 
+       *  and verify that he is in a valid department
+       */
+      if( !preg_match("/".normalizePreg("dc=addressbook,")."/",$people_db_base) &&
+          !in_array($people_db_base,$valid_deps)
+         ){
         $attrs['selected'] = FALSE;
         $attrs['ldif']     = "";
         $this->outside_users[base64_encode($attrs['dn'])] = $attrs;
