@@ -9,6 +9,8 @@ GOsa2 changelog
   - Backported new sieve filter editor from trunk
   - Fixed double loaded pages in gecko based browsers when js
     is activated
+  - Replaced a set of PHP <? short tag occurences
+  - Updated locales
 
 * gosa 2.5.10
   - Included hook to make use of dynamic uid-bases
