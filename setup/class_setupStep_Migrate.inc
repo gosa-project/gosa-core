@@ -1166,7 +1166,7 @@ class Step_Migrate extends setup_step
       print_red(_("Couldn't move users to specified department."));
       return(false);
     }
- 
+      
     foreach($this->outside_users as $b_dn => $data){
       $this->outside_users[$b_dn]['ldif'] ="";
       if($data['selected']){
@@ -1715,7 +1715,7 @@ class Step_Migrate extends setup_step
       $ldap->cd($cv['base']);
       $tmp = array();
       $ldap->search("(&(objectClass=gosaDepartment)(ou=*))",array("dn"));
-      $tmp['/'] = $cv['base'];
+      $tmp[base64_encode($cv['base'])] = $ldap->fix($cv['base']);
       while($attrs = $ldap->fetch()){
         $tmp[base64_encode($attrs['dn'])] = $ldap->fix($attrs['dn']);;
       }
@@ -1823,7 +1823,7 @@ class Step_Migrate extends setup_step
       $ldap->cd($cv['base']);
       $tmp = array();
       $ldap->search("(&(objectClass=gosaDepartment)(ou=*))",array("dn"));
-      $tmp['/'] = $cv['base'];
+      $tmp[base64_encode($cv['base'])] = $ldap->fix($cv['base']);
       while($attrs = $ldap->fetch()){
         $tmp[base64_encode($attrs['dn'])] = $ldap->fix($attrs['dn']);;
       }
