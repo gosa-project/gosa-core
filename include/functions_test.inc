@@ -1,4 +1,4 @@
-<?
+<?php
 /*
  * This code is part of GOsa (https://gosa.gonicus.de)
  * Copyright (C) 2005 Jan Wenzel
