@@ -4,7 +4,7 @@
             {if $Inverse}
                 <input type='submit' name='toggle_inverse_{$ID}' value='{t}Not{/t}' title='{t}Inverse match{/t}'>
             {else}
-                <input type='submit' name='toggle_inverse_{$ID}' value='{t}-{/t}' title='{t}Inverse match{/t}'>
+                <input type='submit' name='toggle_inverse_{$ID}' value='-' title='{t}Inverse match{/t}'>
             {/if}
 			<br>
 			<b>{t}Any of{/t}</b>

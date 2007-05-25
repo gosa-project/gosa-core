@@ -2237,11 +2237,11 @@ function get_base_from_hook($dn, $attrib)
         if (preg_match("/^[0-9]+$/", $output[0])){
           return ($output[0]);
         } else {
-          print_red(_("Warning - base_hook is not avialable. Using default base."));
+          print_red(_("Warning - base_hook is not available. Using default base."));
           return ($config->current['UIDBASE']);
         }
       } else {
-        print_red(_("Warning - base_hook is not avialable. Using default base."));
+        print_red(_("Warning - base_hook is not available. Using default base."));
         return ($config->current['UIDBASE']);
       }
 
