@@ -270,7 +270,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
 
     /* Login as user, initialize user ACL's */
     $ui= ldap_login_user($username, $_POST["password"]);
-    if ($ui === NULL || $ui == 0){
+    if ($ui === NULL || !$ui ){
       $message= _("Please check the username/password combination.");
       $smarty->assign ('nextfield', 'password');
       gosa_log ("Authentication failed for user \"$username\"");
