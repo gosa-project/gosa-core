@@ -247,7 +247,7 @@ class My_Tree extends Tree
     }
 
     if(!isset($this->pap[$key_id])){
-      trigger_error(_("Can't remove element with object_id=".$key_id.", there is no object with this identifier. Remove aborted."));
+      trigger_error("Can't remove element with object_id=".$key_id.", there is no object with this identifier. Remove aborted.");
       return(false);
     }
 
