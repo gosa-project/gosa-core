@@ -100,7 +100,7 @@ class Step_Feedback  extends setup_step
     $this->features_used['inventory']   = array("USED" => isset($oc['glpiAccount']) , 
                                                 "NAME" => _("System inventory"));
     $this->features_used['system']      = array("USED" => FALSE , 
-                                                "NAME" => _("System-/Configmanagement"));
+                                                "NAME" => _("System / Config management"));
     $this->features_used['addressbook'] = array("USED" => FALSE , 
                                                 "NAME" => _("Addressbook"));
   }
