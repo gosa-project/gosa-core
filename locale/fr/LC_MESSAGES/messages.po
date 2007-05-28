@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-05-25 11:42+0200\n"
-"PO-Revision-Date: 2007-05-28 12:42+0200\n"
+"PO-Revision-Date: 2007-05-28 14:15+0200\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team: Français <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -92,7 +92,7 @@ msgstr "Samba"
 #: contrib/gosa.conf:90 plugins/admin/users/class_divListUsers.inc:151
 #: plugins/personal/netatalk/class_netatalk.inc:36
 msgid "Netatalk"
-msgstr "Netatalk"
+msgstr ""
 
 #: contrib/gosa.conf:91
 #: plugins/personal/connectivity/class_connectivity.inc:15
@@ -132,7 +132,7 @@ msgstr "Téléphone"
 
 #: contrib/gosa.conf:95 plugins/personal/nagios/class_nagiosAccount.inc:18
 msgid "Nagios"
-msgstr "Nagios"
+msgstr ""
 
 #: contrib/gosa.conf:106
 #: plugins/admin/applications/class_applicationManagement.inc:25
@@ -141,7 +141,7 @@ msgstr "Applications"
 
 #: contrib/gosa.conf:108
 msgid "ACL"
-msgstr "ACL"
+msgstr ""
 
 #: contrib/gosa.conf:109 contrib/gosa.conf:115 contrib/gosa.conf:120
 #: contrib/gosa.conf:126 contrib/gosa.conf:135 contrib/gosa.conf:149
@@ -382,7 +382,7 @@ msgstr ""
 #: plugins/addons/logview/class_logview.inc:71
 #: plugins/gofon/fonreports/class_fonreport.inc:160
 msgid "There is no mysql extension available, please check your php setup."
-msgstr "Il n'y a pas d'extension msql disponible, vérifiez votre configuration php."
+msgstr "Il n'y a pas d'extension mysql disponible, vérifiez votre configuration php."
 
 #: plugins/gofax/faxreports/class_faxreport.inc:116
 msgid "Can't connect to fax database, no reports can be shown!"
@@ -1224,7 +1224,7 @@ msgstr "recevoir"
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:390
 msgid "Removing blocklist object failed"
-msgstr "La suppression de l'objet blocklist à échoué"
+msgstr "La suppression de l'objet liste rouge à échoué"
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:431
 msgid "You have no permissions to create a blocklist on this 'Base'."
@@ -1249,7 +1249,7 @@ msgstr "Vous n'avez pas l'autorisation de créer des listes rouge sur cette base
 
 #: plugins/gofax/blocklists/class_blocklistManagement.inc:502
 msgid "Saving blocklist object failed"
-msgstr "La sauvegarde de l'objet blocklist à échoué"
+msgstr "La sauvegarde de l'objet liste rouge à échoué"
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:6
 #: plugins/addons/addressbook/address_edit.tpl:206
@@ -1438,7 +1438,7 @@ msgstr "Appliquer"
 #: plugins/gofon/phoneaccount/main.inc:112
 msgid "Click the 'Edit' button below to change informations in this dialog"
 msgstr ""
-"Cliquez sur le bouton 'Edit' ci-dessous pour changer les informations dans "
+"Cliquez sur le bouton 'Editer' ci-dessous pour changer les informations dans "
 "cette boite de dialogue"
 
 #: plugins/gofax/faxaccount/main.inc:97
@@ -1552,11 +1552,11 @@ msgstr "Queue du serveur de messagerie"
 
 #: plugins/addons/mailqueue/contents.tpl:12
 msgid "Please enter a search string here."
-msgstr "Veuillez indiquer une chaîne de caractères a chercher."
+msgstr "Veuillez indiquer une chaîne de caractères a rechercher."
 
 #: plugins/addons/mailqueue/contents.tpl:14
 msgid "Select a server"
-msgstr "Sélectionnez un serveurs"
+msgstr "Sélectionnez un serveur"
 
 #: plugins/addons/mailqueue/contents.tpl:17
 msgid "with status"
@@ -1708,7 +1708,7 @@ msgstr ""
 
 #: plugins/addons/mailqueue/class_mailqueue.inc:225
 msgid "There are no mail server specified."
-msgstr "Il n'y a pas de serveur de mail spécifiés."
+msgstr "Il n'y a pas de serveur de mail spécifié."
 
 #: plugins/addons/mailqueue/class_mailqueue.inc:275
 msgid "up"
@@ -1716,7 +1716,7 @@ msgstr "au dessus"
 
 #: plugins/addons/mailqueue/class_mailqueue.inc:277
 msgid "down"
-msgstr "En bas"
+msgstr "En dessous"
 
 #: plugins/addons/mailqueue/class_mailqueue.inc:305
 #: plugins/addons/mailqueue/class_mailqueue.inc:370
@@ -1741,11 +1741,11 @@ msgstr "heures"
 
 #: plugins/addons/mailqueue/class_mailqueue.inc:371
 msgid "Hold"
-msgstr "Maintenir"
+msgstr "Mettre en attente"
 
 #: plugins/addons/mailqueue/class_mailqueue.inc:372
 msgid "Un hold"
-msgstr "Mettre en attente"
+msgstr "Enlever de la file d'attente"
 
 #: plugins/addons/mailqueue/class_mailqueue.inc:374
 msgid "Not active"
@@ -1753,30 +1753,30 @@ msgstr "Pas actif"
 
 #: plugins/addons/logview/class_logview.inc:6
 msgid "System logs"
-msgstr "Logs systèmes"
+msgstr "journaux systèmes"
 
 #: plugins/addons/logview/class_logview.inc:68
 msgid "No LOG servers defined!"
-msgstr "Pas de LOG serveurs définis!"
+msgstr "Pas de serveurs de journaux systèmes définis!"
 
 #: plugins/addons/logview/class_logview.inc:78
 #: plugins/addons/logview/class_logview.inc:185
 msgid "Can't connect to log database, no logs can be shown!"
 msgstr ""
-"Impossible de se connecter à la base de données des logs, aucun log ne peut "
+"Impossible de se connecter à la base de données des journaux systèmes, aucun journal ne peut "
 "être affiché!"
 
 #: plugins/addons/logview/class_logview.inc:82
 #: plugins/addons/logview/class_logview.inc:188
 msgid "Can't select log database for log generation!"
 msgstr ""
-"Impossible de sélectionner la base de données des logs afin de générer les "
+"Impossible de sélectionner la base de données des journaux systèmes afin de générer les "
 "logs!"
 
 #: plugins/addons/logview/class_logview.inc:91
 #: plugins/addons/logview/class_logview.inc:109
 msgid "Query for log database failed!"
-msgstr "La requête sur la base de données des logs a échoué!"
+msgstr "La requête sur la base de données des journaux systèmes a échoué!"
 
 #: plugins/addons/logview/class_logview.inc:125
 msgid "one hour"
@@ -1812,7 +1812,7 @@ msgstr "un mois"
 
 #: plugins/addons/logview/main.inc:33
 msgid "System log view"
-msgstr "Affichage des logs système"
+msgstr "Affichage des journaux système"
 
 #: plugins/addons/logview/contents.tpl:11
 msgid "Show hosts"
@@ -1820,7 +1820,7 @@ msgstr "Afficher les machines"
 
 #: plugins/addons/logview/contents.tpl:20
 msgid "Log level"
-msgstr "Log Level"
+msgstr "Niveaux des journaux systèmes"
 
 #: plugins/addons/logview/contents.tpl:38
 msgid "Time interval"
@@ -1828,11 +1828,11 @@ msgstr "Intervalle de temps"
 
 #: plugins/addons/logview/contents.tpl:48
 msgid "Enter string to search for"
-msgstr "Entrée la chaîne de caractères à chercher"
+msgstr "Entrée la chaîne de caractères à rechercher"
 
 #: plugins/addons/logview/contents.tpl:60
 msgid "Ruleset"
-msgstr "Ensemble de Règles"
+msgstr "Ensemble de règles"
 
 #: plugins/addons/logview/contents.tpl:82
 msgid "Level"
@@ -1852,7 +1852,7 @@ msgstr "Gestion DFS"
 
 #: plugins/addons/godfs/class_dfsManagment.inc:151
 msgid "Removing DFS share failed"
-msgstr "La suppression d'une share DFS à échoué"
+msgstr "La suppression d'une partage DFS à échoué"
 
 #: plugins/addons/godfs/class_dfsManagment.inc:170
 msgid "No DFS entries found"
@@ -1889,7 +1889,7 @@ msgstr "Racine"
 
 #: plugins/addons/godfs/class_dfsManagment.inc:215
 msgid "Create new dfsshare"
-msgstr "Création d'un nouveau share dfs"
+msgstr "Création d'un nouveau partage dfs"
 
 #: plugins/addons/godfs/class_dfsManagment.inc:247
 #: plugins/personal/netatalk/main.inc:104 setup/class_setupStep_Finish.inc:37
@@ -1974,7 +1974,7 @@ msgstr "Le champ obligatoire \"Partage sur le serveur\" n'est pas rempli."
 
 #: plugins/addons/godfs/class_dfsgeneric.inc:124
 msgid "Required Field \"Location\" is not set."
-msgstr "Le champ obligatoire \"Description\" n'est pas rempli."
+msgstr "Le champ obligatoire \"Endroit\" n'est pas rempli."
 
 #: plugins/addons/addressbook/remove.tpl:6
 msgid ""
@@ -2401,7 +2401,7 @@ msgstr "Voici le rapport de votre importation:"
 
 #: plugins/addons/ldapmanager/contentcsv.tpl:80
 msgid "Selected Template"
-msgstr "Sélectionnez le modèle"
+msgstr "Modèle sélectionné"
 
 #: plugins/addons/ldapmanager/class_exportxls.inc:7
 msgid "XLS import"
@@ -2498,7 +2498,7 @@ msgstr ""
 "L'extension d'exportation/importation au format LDIF permet exporter/"
 "importer une série d'entrées au format ldif dans l'annuaire. Vous pouvez "
 "utiliser cette fonctionnalité pour ajouter de nouvelles entrées ou modifier "
-"des entrées existantes.Rappelez vous que GOsa ne vérifiera pas vos ldifs par "
+"des entrées existantes. Rappelez vous que GOsa ne vérifiera pas vos ldifs par "
 "rapport au schéma utilisés par GOsa."
 
 #: plugins/addons/ldapmanager/contentimport.tpl:10
@@ -2577,7 +2577,7 @@ msgstr "Le fichier spécifié ne contient pas de données CSV valide..."
 #: plugins/addons/ldapmanager/main.inc:40
 #: plugins/addons/ldapmanager/class_ldif.inc:7
 msgid "LDAP manager"
-msgstr "Gérer LDAP"
+msgstr "Gérer l'annuaire"
 
 #: plugins/addons/ldapmanager/class_import.inc:41
 msgid "You've no permission to do LDAP imports."
@@ -2722,11 +2722,7 @@ msgstr ""
 msgid ""
 "This may be a primary user group. Please double check if you really want to "
 "do this since there is no way for GOsa to get your data back."
-msgstr ""
-"Ce groupe est un groupe principal contenant des utilisateurs. Veuillez vous "
-"assurez que vous voulez bien exécuter cette action. Toutes les données "
-"seront perdues étant donné qu'il est impossible pour GOsa de récupérer vos "
-"données."
+msgstr "Ce groupe est un groupe principal contenant des utilisateurs. Veuillez vous assurez que vous voulez bien exécuter cette action étant donné qu'il est impossible pour GOsa de récupérer vos données."
 
 #: plugins/admin/groups/acl.tpl:4
 #: plugins/admin/departments/class_departmentGeneric.inc:503
@@ -2737,7 +2733,7 @@ msgstr "Objet"
 #: plugins/admin/groups/acl.tpl:12 plugins/admin/groups/mail_admins.tpl:30
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:61
 msgid "Choose"
-msgstr "Choisissez"
+msgstr "Choisir"
 
 #: plugins/admin/groups/acl.tpl:17
 msgid "Apply this acl only for users own entries"
@@ -2845,7 +2841,7 @@ msgstr ""
 
 #: plugins/admin/groups/class_divListGroup.inc:49
 msgid "Groupname / Department"
-msgstr "Nom du groupe / Département"
+msgstr "Nom du Groupe / Département"
 
 #: plugins/admin/groups/class_divListGroup.inc:50
 #: plugins/admin/systems/terminal.tpl:1
@@ -2870,7 +2866,7 @@ msgstr "Afficher les groupes de base"
 
 #: plugins/admin/groups/class_divListGroup.inc:55
 msgid "Select to see groups that have samba groups mappings"
-msgstr "Sélectionnez afin d'afficher les groupes Samba"
+msgstr "Sélectionnez afin d'afficher les groupes qui ont des attributs Samba"
 
 #: plugins/admin/groups/class_divListGroup.inc:55
 msgid "Show samba groups"
@@ -2975,7 +2971,7 @@ msgstr "Copier cette entrée"
 #: plugins/admin/ogroups/class_divListOGroup.inc:142
 #: plugins/gofon/conference/class_divListConferences.inc:94
 msgid "Edit this entry"
-msgstr "Modifier cette entrée"
+msgstr "Editer cette entrée"
 
 #: plugins/admin/groups/class_divListGroup.inc:161
 #: plugins/admin/applications/class_divListApplication.inc:163
@@ -2988,7 +2984,7 @@ msgstr "Supprimer cette entrée"
 
 #: plugins/admin/groups/mail_admins.tpl:4
 msgid "Folder administrators"
-msgstr "Administrateurs du répertoire"
+msgstr "Administrateurs du dossier"
 
 #: plugins/admin/groups/mail_admins.tpl:24
 msgid "Select a specific department"
@@ -3085,7 +3081,7 @@ msgstr ""
 
 #: plugins/admin/groups/class_groupMail.inc:405
 msgid "You're trying to add an invalid email address "
-msgstr "Vous essayez d'ajouter une adresse mail non valide "
+msgstr "Vous essayez d'ajouter une adresse de messagerie non valide "
 
 #: plugins/admin/groups/class_groupMail.inc:411
 #: plugins/personal/mail/class_mailAccount.inc:359
@@ -3226,7 +3222,7 @@ msgstr "Ce 'dn' n'est pas un conteneur pour les acls."
 
 #: plugins/admin/groups/class_groupAcl.inc:104
 msgid "Removing ACL information failed"
-msgstr "LA suppression des informations ACL à échoué"
+msgstr "La suppression des informations ACL à échoué"
 
 #: plugins/admin/groups/class_groupAcl.inc:207
 msgid "Saving ACL information failed"
@@ -3253,11 +3249,11 @@ msgstr "non défini"
 
 #: plugins/admin/groups/mail.tpl:37 plugins/personal/mail/generic.tpl:35
 msgid "Quota size"
-msgstr "Taille des Quota"
+msgstr "Taille du Quota"
 
 #: plugins/admin/groups/mail.tpl:63
 msgid "IMAP shared folders"
-msgstr "Répertoire partagé IMAP"
+msgstr "Dossier partagé IMAP"
 
 #: plugins/admin/groups/mail.tpl:67
 msgid "Default permission"
@@ -3542,11 +3538,11 @@ msgstr "port Sieve"
 
 #: plugins/admin/systems/servdb.tpl:100
 msgid "Logging database"
-msgstr "Base de données des logs"
+msgstr "Base de données des journaux systèmes"
 
 #: plugins/admin/systems/servdb.tpl:104 plugins/admin/systems/servdb.tpl:123
 msgid "Logging DB user"
-msgstr "Utilisateur de la base de données de log"
+msgstr "Utilisateur de la base de données des journaux systèmes"
 
 #: plugins/admin/systems/servdb.tpl:119
 msgid "Glpi database"
@@ -3765,7 +3761,7 @@ msgstr "Ce 'dn' n'a pas d'extension de terminaux."
 
 #: plugins/admin/systems/class_terminalInfo.inc:69
 msgid "There is no php snmp module installed, can't gather any informations."
-msgstr "Le module php snmp n'est pas installé, impossible d'obtenir les informations."
+msgstr "L'extension php-snmp n'est pas installé, impossible d'obtenir les informations."
 
 #: plugins/admin/systems/class_terminalInfo.inc:75
 #: plugins/admin/systems/class_terminalInfo.inc:169
@@ -3836,7 +3832,7 @@ msgstr "Sélectionnez un type de système"
 
 #: plugins/admin/systems/SelectDeviceType.tpl:32
 msgid "Choose an object group as template"
-msgstr "Choisissez un groupe d'objets comme template"
+msgstr "Choisissez un groupe d'objets comme modèles"
 
 #: plugins/admin/systems/SelectDeviceType.tpl:33
 msgid "Choose an object group"
@@ -3978,7 +3974,7 @@ msgstr "Sélectionnez un type de téléphone"
 
 #: plugins/admin/systems/phonesettings.tpl:10
 msgid "refresh"
-msgstr "Rafraichir"
+msgstr "Rafraîchir"
 
 #: plugins/admin/systems/phonesettings.tpl:21
 #: plugins/admin/systems/server.tpl:32 plugins/admin/systems/terminal.tpl:34
@@ -4015,11 +4011,11 @@ msgstr "Secret"
 
 #: plugins/admin/systems/phonesettings.tpl:124
 msgid "GoFonInkeys"
-msgstr "Mot de passe utilisé pour l'authentification rsa"
+msgstr ""
 
 #: plugins/admin/systems/phonesettings.tpl:132
 msgid "GoFonOutKeys"
-msgstr "Mot de passe utilisé pour l'authentification rsa"
+msgstr ""
 
 #: plugins/admin/systems/phonesettings.tpl:145
 msgid "Account code"
@@ -4048,8 +4044,7 @@ msgid ""
 "back."
 msgstr ""
 "Cela inclut tout les systèmes et les informations de configuration. Veuillez "
-"vérifier que vous voulez effectuer cette opération, il est impossible de "
-"revenir en arrière. Toutes les données seront perdues étant donné qu'il est "
+"vérifier que vous voulez effectuer cette opération étant donné qu'il est "
 "impossible pour GOsa de récupérer vos données."
 
 #: plugins/admin/systems/remove.tpl:10 plugins/admin/departments/remove.tpl:10
@@ -4280,7 +4275,7 @@ msgstr "Non"
 
 #: plugins/admin/systems/glpi_devices.tpl:52
 msgid "Integrated speakers"
-msgstr "Haut parleur intègré"
+msgstr "Haut parleur intégré"
 
 #: plugins/admin/systems/glpi_devices.tpl:60
 msgid "Sub-D"
@@ -4353,7 +4348,7 @@ msgstr "Mémoire vive"
 
 #: plugins/admin/systems/glpi_devices.tpl:249
 msgid "Add/Edit controller"
-msgstr "Ajouter/Modifier un controlleur"
+msgstr "Ajouter/Modifier un contrôleur"
 
 #: plugins/admin/systems/glpi_devices.tpl:307
 msgid "Add/Edit drive"
@@ -4426,7 +4421,7 @@ msgstr "Jeu de composants"
 
 #: plugins/admin/systems/glpi_devices.tpl:707
 msgid "Add/Edit computer case"
-msgstr "Ajouter/Modifier un Boitier"
+msgstr "Ajouter/Modifier un Boîtier"
 
 #: plugins/admin/systems/glpi_devices.tpl:742
 msgid "format"
@@ -4456,7 +4451,7 @@ msgstr "Activer le DNS pour ce périphérique"
 #: plugins/admin/systems/servdnseditzone.tpl:67
 #: plugins/gofon/phoneaccount/generic.tpl:76
 msgid "Refresh"
-msgstr "Rafraichir"
+msgstr "Rafraîchir"
 
 #: plugins/admin/systems/network.tpl:51
 msgid "Zone"
@@ -5200,7 +5195,7 @@ msgstr "Monter les partages automatiquement sur les machines Apple."
 
 #: plugins/admin/systems/servnfs.tpl:94
 msgid "Codepage"
-msgstr "Codage caractêres"
+msgstr "Codage des caractères"
 
 #: plugins/admin/systems/servnfs.tpl:104
 msgid "Option"
@@ -5320,7 +5315,7 @@ msgstr "Valeur dupliquée trouvée pour l'enregistrement de type '%s'."
 #: plugins/admin/systems/class_termDNS.inc:364
 #, php-format
 msgid "Found more than one entry for the uniqe record type '%s'."
-msgstr "Plus d'un entrée trouvée pour l'enregistrement unique '%s'."
+msgstr "Plus d'une entrée trouvée pour l'enregistrement unique '%s'."
 
 #: plugins/admin/systems/class_termDNS.inc:375
 #, php-format
@@ -5344,7 +5339,7 @@ msgstr "La sauvegarde du terminal dans l'objet DNS à échoué"
 #: plugins/admin/systems/class_glpiAttachmentPool.inc:68
 #, php-format
 msgid "You're about to delete the glpi attachment component '%s'."
-msgstr "Vous êtes sur le point de supprimer le composant glpi '%s'."
+msgstr "Vous êtes sur le point de supprimer le composant glpi attaché '%s'."
 
 #: plugins/admin/systems/class_glpiAttachmentPool.inc:107
 #, php-format
@@ -5426,7 +5421,7 @@ msgid ""
 "'Delete' to continue or 'Cancel' to abort."
 msgstr ""
 "Il est conseillé de sauvegarder le contenu de votre base de données MySql "
-"dans un fichier avant de réaliser cette action. Appuyez sur 'Supprimer' pour "
+"dans un fichier avant de réaliser cette action. Donc - si vous avez fait cela - appuyez sur 'Supprimer' pour "
 "continuer ou 'Annuler' pour abandonner."
 
 #: plugins/admin/systems/class_servDHCP.inc:31
@@ -5578,7 +5573,7 @@ msgstr "périphériques"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:222
 msgid "New mainbord"
-msgstr "Nouvel carte mère"
+msgstr "Nouvelle carte mère"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:222
 #: plugins/personal/mail/generic.tpl:176
@@ -5607,7 +5602,7 @@ msgstr "C"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:228
 msgid "New network interface"
-msgstr "Nouvel carte réseau"
+msgstr "Nouvelle carte réseau"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:228
 msgid "NI"
@@ -5639,7 +5634,7 @@ msgstr "D"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:236
 msgid "New controller"
-msgstr "Nouveau controlleur"
+msgstr "Nouveau contrôleur"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:236
 msgid "CS"
@@ -6064,11 +6059,11 @@ msgstr "La sauvegarde des paramètres de la base de données à échoué"
 
 #: plugins/admin/systems/servkolab.tpl:9
 msgid "Postfix mydomain"
-msgstr "Postfix mondomaine"
+msgstr ""
 
 #: plugins/admin/systems/servkolab.tpl:16
 msgid "Postfix mydestination"
-msgstr "Postfix madestination"
+msgstr ""
 
 #: plugins/admin/systems/servkolab.tpl:23
 msgid "Cyrus admins"
@@ -6097,7 +6092,7 @@ msgstr "Service sieve"
 #: plugins/admin/systems/servkolab.tpl:80
 msgid "FTP FreeBusy service (legacy, not interoperable with Kolab2 FreeBusy)"
 msgstr ""
-"service des options de disponibilités par FTP (ancien, pas compatible avec "
+"Service des options de disponibilités par FTP (ancien, pas compatible avec "
 "les options de disponibilités de Kolab2)"
 
 #: plugins/admin/systems/servkolab.tpl:88
@@ -6124,11 +6119,11 @@ msgstr ""
 
 #: plugins/admin/systems/servkolab.tpl:143
 msgid "SMTP privileged networks"
-msgstr "Réseaux SMTP privilègiés"
+msgstr "Réseaux SMTP privilégiés"
 
 #: plugins/admin/systems/servkolab.tpl:148
 msgid "Hosts/networks allowed to relay"
-msgstr "Machines/Réseaux qui peuvent relayer du mail"
+msgstr "Machines/Réseaux qui peuvent relayer des messages"
 
 #: plugins/admin/systems/servkolab.tpl:151
 msgid "Enter multiple values, seperated with"
@@ -6280,7 +6275,7 @@ msgstr "Activer l'utilisation de DDC"
 
 #: plugins/admin/systems/goSpamServer.tpl:69
 msgid "Enable use of Pyzer"
-msgstr "Activer l'utilisation de Pyzer"
+msgstr "Activer l'utilisation de Pyzor"
 
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:69
 #, php-format
@@ -6336,7 +6331,7 @@ msgstr "Aller au département des utilisateurs"
 #: include/class_MultiSelectWindow.inc:204
 #: include/class_MultiSelectWindow.inc:206
 msgid "Home"
-msgstr "Acceuil"
+msgstr "Accueil"
 
 #: plugins/admin/systems/class_baseSelectDialog.inc:31
 #: plugins/admin/systems/class_glpiSelectUser.inc:160
@@ -6493,7 +6488,7 @@ msgstr "Nom du fichier"
 
 #: plugins/admin/systems/glpiAttachmentEdit.tpl:54
 msgid "Mime-type"
-msgstr "type mime"
+msgstr "Type mime"
 
 #: plugins/admin/systems/class_servRepository.inc:86
 #: plugins/admin/fai/class_faiSummaryTab.inc:170
@@ -6538,7 +6533,7 @@ msgstr ""
 #, php-format
 msgid "Be careful editing this release, it is still used by these workstations [%s]."
 msgstr ""
-"Soyez prudent en éditant cette version, elle est toujours par ces système(s) "
+"Soyez prudent en éditant cette version, elle est toujours utilisée par ces système(s) "
 "[%s]. "
 
 #: plugins/admin/systems/class_servRepository.inc:280
@@ -6682,13 +6677,13 @@ msgstr "Nom du terminal"
 #: plugins/admin/systems/workstation.tpl:47
 #: plugins/admin/ogroups/termgroup.tpl:47
 msgid "Syslog server"
-msgstr "Serveur de logs systèmes"
+msgstr "Serveur de journaux systèmes"
 
 #: plugins/admin/systems/terminal.tpl:44
 #: plugins/admin/systems/workstation.tpl:49
 #: plugins/admin/ogroups/termgroup.tpl:49
 msgid "Choose server to use for logging"
-msgstr "Sélectionnez le serveur de logs à utiliser"
+msgstr "Sélectionnez le serveur de journaux à utiliser"
 
 #: plugins/admin/systems/terminal.tpl:59
 msgid "Root server"
@@ -6696,7 +6691,7 @@ msgstr "Serveur Primaire"
 
 #: plugins/admin/systems/terminal.tpl:61
 msgid "Select NFS root filesystem to use"
-msgstr "Sélectionnez le système de fichier root NFS à utiliser"
+msgstr "Sélectionnez le système de fichier racine NFS à utiliser"
 
 #: plugins/admin/systems/terminal.tpl:67
 msgid "Swap server"
@@ -6709,7 +6704,7 @@ msgstr "Sélectionnez le système de fichier NFS où sera placé le swap"
 #: plugins/admin/systems/terminal.tpl:86
 #: plugins/admin/systems/workstation.tpl:65
 msgid "Inherit time server attributes"
-msgstr "hérite des paramètres du serveur de temps"
+msgstr "Hérite des paramètres du serveur de temps"
 
 #: plugins/admin/systems/terminal.tpl:90
 #: plugins/admin/systems/workstation.tpl:69
@@ -6738,7 +6733,7 @@ msgstr "Il n'y a pas de serveur qui contient un service glpi valide."
 #: plugins/admin/systems/class_glpiAccount.inc:149
 msgid "Can't connect to glpi database, the php-mysql extension is missing."
 msgstr ""
-"Impossible de se connecter sur la base de données glpi, l'extension mysql "
+"Impossible de se connecter sur la base de données glpi, l'extension php-mysql "
 "n'est pas disponible."
 
 #: plugins/admin/systems/class_glpiPrinterAccount.inc:171
@@ -6797,7 +6792,7 @@ msgstr "Gérer le type de système"
 
 #: plugins/admin/systems/main.inc:45 plugins/admin/systems/main.inc:47
 msgid "System management"
-msgstr "Administration du système"
+msgstr "Administration des système"
 
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:14
 msgid "Reference"
@@ -8414,7 +8409,7 @@ msgstr "Il doit y avoir au moins un serveur NTP sélectionné."
 #: plugins/admin/ogroups/class_termgroup.inc:174
 #, php-format
 msgid "Setting action state (FAIstate) failed for object '%s', value was '%s'."
-msgstr ""
+msgstr "Mettre l'option (FAIstate) pour l'objet '%s' à échoué, la valeur était '%s'."
 
 #: plugins/admin/ogroups/paste_mail.tpl:7
 msgid "Please enter a mail address"
@@ -13047,7 +13042,6 @@ msgid "matches"
 msgstr "correspond"
 
 #: include/sieve/class_sieveElement_If.inc:43
-#, fuzzy
 msgid "count"
 msgstr "nombre"
 
@@ -13095,15 +13089,15 @@ msgstr "Rien de spécifié pour l'instant"
 
 #: include/sieve/class_sieveElement_If.inc:595
 msgid "Invalid type of address part."
-msgstr ""
+msgstr "Type non valide dans la partie adresse."
 
 #: include/sieve/class_sieveElement_If.inc:605
 msgid "Invalid match type given."
-msgstr ""
+msgstr "Type non valide pour la recherche"
 
 #: include/sieve/class_sieveElement_If.inc:621
 msgid "Invalid operator given."
-msgstr ""
+msgstr "Type non valide comme opérateur."
 
 #: include/sieve/class_sieveElement_If.inc:638
 msgid "Please specify a valid operator."
@@ -13115,7 +13109,7 @@ msgstr "Caractère non valide dans l'adresse. Les guillemets sont interdits ici.
 
 #: include/sieve/class_sieveElement_If.inc:669
 msgid "Invalid character found in value attribute. Quotes are not allowed here."
-msgstr ""
+msgstr "Caractère non valide trouvé dans l'attribut. Les guillemets ne sont pas permis ici."
 
 #: include/sieve/class_sieveElement_If.inc:727
 #: include/sieve/class_sieveElement_If.inc:1060
@@ -13139,7 +13133,7 @@ msgstr ""
 
 #: include/sieve/class_sieveElement_If.inc:745
 msgid "Please select a valid match type in the list box below."
-msgstr ""
+msgstr "Veuillez sélectionner un type de correspondance valide dans la liste ci dessous."
 
 #: include/sieve/class_sieveElement_If.inc:759
 msgid "Only numeric values are allowed here."
@@ -13147,7 +13141,7 @@ msgstr "Seul des chiffres sont permis ici."
 
 #: include/sieve/class_sieveElement_If.inc:769
 msgid "No valid unit selected"
-msgstr ""
+msgstr "Pas d'unité valide sélectionnée"
 
 #: include/sieve/class_sieveElement_If.inc:834
 #: include/sieve/templates/element_if.tpl:4
@@ -13188,8 +13182,9 @@ msgid "Click here to add a new test"
 msgstr "Cliquez ici pour vous ajouter un nouveau test"
 
 #: include/sieve/class_sieveElement_If.inc:1176
+#, fuzzy
 msgid "Unhandled switch type"
-msgstr ""
+msgstr "Type de switch non pris en charge"
 
 #: include/sieve/class_My_Tree.inc:245
 msgid "Can't remove last element."
@@ -13205,7 +13200,7 @@ msgstr "Require doit être la première commande de ce script."
 
 #: include/sieve/class_sieveElement_Vacation.inc:148
 msgid "Alternative sender address must be a valid email addresses."
-msgstr ""
+msgstr "L'adresse d'envoi alternative doit être une adresse valide."
 
 #: include/sieve/templates/element_stop.tpl:9
 msgid "Stop execution here"
@@ -13232,14 +13227,12 @@ msgid "Normal view"
 msgstr "Vue normale"
 
 #: include/sieve/templates/element_vacation.tpl:21
-#, fuzzy
 msgid "Release interval"
 msgstr "Intervalle de temps"
 
 #: include/sieve/templates/element_vacation.tpl:30
-#, fuzzy
 msgid "Alternative sender addresses"
-msgstr "Adresses alternatives"
+msgstr "Adresses alternatives pour l'envoi"
 
 #: include/sieve/templates/element_vacation.tpl:47
 #: include/sieve/templates/element_envelope.tpl:130
@@ -13269,7 +13262,7 @@ msgstr "Non"
 #: include/sieve/templates/element_exists.tpl:10
 #: include/sieve/templates/element_exists.tpl:12
 msgid "Inverse match"
-msgstr ""
+msgstr "correspondance inversée"
 
 #: include/sieve/templates/element_anyof.tpl:7
 #: include/sieve/templates/element_envelope.tpl:110
@@ -13296,7 +13289,7 @@ msgstr ""
 #: include/sieve/templates/element_address.tpl:25
 #: include/sieve/templates/element_header.tpl:26
 msgid "Match type"
-msgstr ""
+msgstr "Type de correspondance"
 
 #: include/sieve/templates/element_envelope.tpl:29
 #: include/sieve/templates/element_envelope.tpl:52
@@ -13327,7 +13320,6 @@ msgstr "Test inversé"
 #: include/sieve/templates/element_envelope.tpl:49
 #: include/sieve/templates/element_address.tpl:58
 #: include/sieve/templates/element_header.tpl:49
-#, fuzzy
 msgid "Comparator"
 msgstr "Comparaison"
 
@@ -13346,7 +13338,7 @@ msgstr "Adresses à ajouter "
 #: include/sieve/templates/element_address.tpl:89
 #: include/sieve/templates/element_header.tpl:81
 msgid "Values to match for"
-msgstr ""
+msgstr "Valeur de correspondances"
 
 #: include/sieve/templates/select_test_type.tpl:1
 msgid "Select the type of test you want to add"
@@ -13420,7 +13412,6 @@ msgid "Discard"
 msgstr "Effacer"
 
 #: include/sieve/templates/element_discard.tpl:9
-#, fuzzy
 msgid "Discard message"
 msgstr "Effacer le message"
 
@@ -13484,9 +13475,8 @@ msgid "Select match type"
 msgstr "Sélectionnez le type de correspondance"
 
 #: include/sieve/templates/element_size.tpl:20
-#, fuzzy
 msgid "Select value unit"
-msgstr "Sélectionner"
+msgstr "Choisir l'unité de valeur "
 
 #: include/sieve/templates/element_exists.tpl:8
 #: include/sieve/class_sieveManagement.inc:606
@@ -13499,7 +13489,7 @@ msgstr "Rejeter les messages"
 
 #: include/sieve/templates/element_reject.tpl:17
 msgid "This is a multiline text element"
-msgstr ""
+msgstr "C'est un élément de texte multiligne"
 
 #: include/sieve/templates/element_reject.tpl:19
 msgid "This is stored as single string"
@@ -13555,7 +13545,7 @@ msgstr "Choisir un élément"
 
 #: include/sieve/templates/object_container.tpl:24
 msgid "Fileinto"
-msgstr ""
+msgstr "Classer dans"
 
 #: include/sieve/templates/object_container.tpl:28
 #: include/sieve/class_sieveManagement.inc:512
@@ -13623,12 +13613,12 @@ msgstr "Votre texte de rejet ici"
 #: include/sieve/class_sieveManagement.inc:120
 #: include/sieve/class_sieveManagement.inc:247
 msgid "Parse failed"
-msgstr ""
+msgstr "l'analyse à échouée"
 
 #: include/sieve/class_sieveManagement.inc:124
 #: include/sieve/class_sieveManagement.inc:251
 msgid "Parse successful"
-msgstr ""
+msgstr "L'analyse à réussi"
 
 #: include/sieve/class_sieveManagement.inc:161
 #, php-format
@@ -14152,13 +14142,12 @@ msgid "GOsa development snapshot (Rev %s)"
 msgstr "Version de développement de GOsa (Rev %s)"
 
 #: include/functions.inc:2240 include/functions.inc:2244
-#, fuzzy
 msgid "Warning - base_hook is not available. Using default base."
-msgstr "Attention - "
+msgstr "Attention - base_hook n'est pas disponible. Utilisation de la base par défaut."
 
 #: include/functions.inc:2250
 msgid "Warning - no base_hook defined. Using default base."
-msgstr ""
+msgstr "Attention - pas de base_hook défini. Utilisation de la base par défaut."
 
 #: include/functions.inc:2275 setup/class_setupStep_Schema.inc:95
 msgid "Can't get schema information from server. No schema check possible!"
@@ -14372,7 +14361,7 @@ msgstr "Generateur de hash samba"
 
 #: setup/setup_config2.tpl:15
 msgid "Samba SID"
-msgstr ""
+msgstr "SID Samba"
 
 #: setup/setup_config2.tpl:31
 msgid "RID base"
@@ -14498,7 +14487,7 @@ msgstr "Paramètres de GOsa 3/3"
 
 #: setup/class_setupStep_Config3.inc:69
 msgid "Tweak some GOsa core behaviour"
-msgstr ""
+msgstr "Customise certains paramètres essentiels de GOsa"
 
 #: setup/class_setupStep_Config3.inc:171
 msgid "Session lifetime must be a numeric value."
@@ -14918,7 +14907,7 @@ msgstr "Sélectionner un utilisateur"
 
 #: setup/setup_ldap.tpl:85
 msgid "Automatically append LDAP base to admin DN"
-msgstr ""
+msgstr "Ajouter automatiquement la base de l'annuaire LDAP au DN de l'administrateur"
 
 #: setup/setup_ldap.tpl:92 ihtml/themes/default/setup_step4.tpl:27
 #: ihtml/themes/altlinux/setup_step4.tpl:27
@@ -14926,7 +14915,6 @@ msgid "Admin password"
 msgstr "Mot de passe administrateur"
 
 #: setup/setup_ldap.tpl:100
-#, fuzzy
 msgid "Schema based settings"
 msgstr "Paramètres basé sur les schéma"
 
@@ -14959,17 +14947,15 @@ msgid "show information"
 msgstr "Montrer les informations"
 
 #: setup/setup_welcome.tpl:4
-#, fuzzy
 msgid ""
 "This seems to be the first time you start GOsa - we didn't find any "
 "configuration right now. This simple wizard intends to help you while "
 "setting it up."
-msgstr "Il semble que c'est votre première installation de GOsa - nous n'avons pas trouvé de configuration. Ce "
+msgstr "Il semble que c'est votre première installation de GOsa - nous n'avons pas trouvé de configuration. Ce programme d'aide à l'installation vous aidera à configurer GOsa."
 
 #: setup/setup_welcome.tpl:8
-#, fuzzy
 msgid "What will the wizard do for you?"
-msgstr "Quest ce que le wizard fera pour vous ? "
+msgstr "Qu'est ce que le programme d'aide à l'installation fera pour vous ?"
 
 #: setup/setup_welcome.tpl:11
 msgid "Create a basic, single site configuration"
@@ -15160,9 +15146,8 @@ msgid ""
 msgstr "Soyez prudent avec cette option ! Il peut y avoir des références qui pointent vers ces groupes. L'installation de GOsa ne peut pas migrer ces références, vous préférerez sans doute annuler la migration dans ce cas."
 
 #: setup/setup_migrate.tpl:94
-#, fuzzy
 msgid "Move selected groups into this group tree"
-msgstr "Bouger les groupes sélectionnés dans le groupe "
+msgstr "Bouger les groupes sélectionnés dans le groupe de base cet annuaire"
 
 #: setup/setup_migrate.tpl:123 setup/setup_migrate.tpl:175
 #: setup/setup_migrate.tpl:298 setup/setup_migrate.tpl:351
@@ -15328,7 +15313,7 @@ msgstr "Répertoire pour le stockage des profiles kiosk"
 
 #: setup/setup_config3.tpl:74
 msgid "Network resolv hook"
-msgstr ""
+msgstr "Connexions pour les Résolution réseaux"
 
 #: setup/setup_config3.tpl:92
 msgid "Mail queue script"
@@ -15372,7 +15357,7 @@ msgstr "Durée maximale d'une requête LDAP"
 
 #: setup/setup_config3.tpl:207
 msgid "Log LDAP statistics"
-msgstr ""
+msgstr "Inscrit les statistique de l'annuaire LDAP dans les logs"
 
 #: setup/setup_config3.tpl:219
 msgid "Debug level"
@@ -15717,7 +15702,7 @@ msgstr "Customiser les paramètres spéciaux"
 
 #: setup/setup_config1.tpl:2
 msgid "Look and feel"
-msgstr ""
+msgstr "Thèmes et apparences"
 
 #: setup/setup_config1.tpl:6
 msgid "Theme"
@@ -15757,7 +15742,7 @@ msgstr "Nombre de départ pour les utilisateurs/groupes"
 
 #: setup/setup_config1.tpl:109
 msgid "Hook for number base"
-msgstr ""
+msgstr "Connexions pour le nombre de base"
 
 #: setup/setup_config1.tpl:124
 msgid "Password settings"
@@ -15781,7 +15766,7 @@ msgstr "Nombre de caractères différents de l'ancien mot de passe"
 
 #: setup/setup_config1.tpl:170
 msgid "Password change hook"
-msgstr ""
+msgstr "Connexions pour le changement de mot de passe"
 
 #: setup/setup_config1.tpl:186
 msgid "Use SASL for kerberos"

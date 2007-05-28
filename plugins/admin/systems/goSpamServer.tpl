@@ -66,7 +66,7 @@
      <td>
       <input type='checkbox' {$saFlagsRACL} name='saFlagsR' value='1' {$saFlagsRCHK}> &nbsp;{t}Enable use of Razor{/t}<br>
       <input type='checkbox' {$saFlagsDACL} name='saFlagsD' value='1' {$saFlagsDCHK}> &nbsp;{t}Enable use of DDC{/t}<br>
-      <input type='checkbox' {$saFlagsPACL} name='saFlagsP' value='1' {$saFlagsPCHK}> &nbsp;{t}Enable use of Pyzer{/t}
+      <input type='checkbox' {$saFlagsPACL} name='saFlagsP' value='1' {$saFlagsPCHK}> &nbsp;{t}Enable use of Pyzor{/t}
      </td>
     </tr>
    </table>

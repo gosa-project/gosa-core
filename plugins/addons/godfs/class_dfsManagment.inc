@@ -210,9 +210,9 @@ class dfsManagment extends plugin {
       }
   
       $listhead = "<div style='background:#F0F0F9;padding:5px;'>".
-         " <input type='image' class='center' src='images/list_up.png' align='middle' title='"._("Go up one dfsshare")."' name='dfs_back' alt='"._("Up")."'>&nbsp;".
+         " <input type='image' class='center' src='images/list_up.png' align='middle' title='"._("Go up one dfs share")."' name='dfs_back' alt='"._("Up")."'>&nbsp;".
          " <input type='image' class='center' src='images/list_root.png' align='middle' title='"._("Go to dfs root")."' name='dfs_root' alt='"._("Root")."'>&nbsp;".
-         " <input class='center' type='image' src='images/dtree.png' align='middle' alt='"._("Create new dfsshare")."' name='dfs_new'>&nbsp;".
+         " <input class='center' type='image' src='images/dtree.png' align='middle' alt='"._("Create new dfs share")."' name='dfs_new'>&nbsp;".
          " <img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;".
          _("Base")."&nbsp;<select name='depselect' onChange='mainform.submit()' class='center'>$options</select>".
          " <input class='center' type='image' src='images/list_submit.png' align='middle' title='"._("Submit department")."' name='submit_department' alt='"._("Submit").
