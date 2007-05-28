@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-05-25 11:42+0200\n"
-"PO-Revision-Date: 2007-05-25 13:02+0200\n"
+"PO-Revision-Date: 2007-05-28 12:42+0200\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team: Français <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -14174,54 +14174,54 @@ msgstr "Utilisé pour stocker les informations spécifiques des comptes."
 msgid ""
 "Used to lock currently edited entries to avoid multiple changes at the same "
 "time."
-msgstr ""
+msgstr "Utilisé pour verrouiller les entrées actuellement modifiées afin d'éviter de multiples changements simultanés."
 
 #: include/functions.inc:2351
-#, fuzzy, php-format
+#, php-format
 msgid "The required objectClass '%s' is not present in your schema setup"
-msgstr "l'objectCLass requis '%s' est absent de la configuration de LDAP"
+msgstr "L'objectCLass requis '%s' n'est pas présent dans vos schéma "
 
 #: include/functions.inc:2353
-#, fuzzy, php-format
+#, php-format
 msgid "The optional objectClass '%s' is not present in your schema setup"
-msgstr "l'objectCLass requis '%s' est absent de la configuration de LDAP"
+msgstr "l'objectCLass optionnel '%s' n'est pas présent dans vos schéma"
 
 #: include/functions.inc:2359
-#, fuzzy, php-format
+#, php-format
 msgid "The required objectclass '%s' does not have version %s"
 msgstr "L'objectClass obligatoire '%s' n'est pas à la version %s"
 
 #: include/functions.inc:2361
-#, fuzzy, php-format
+#, php-format
 msgid "The optional objectclass '%s' does not have version %s"
-msgstr "L'objectClass obligatoire '%s' n'est pas à la version %s"
+msgstr "L'objectClass optionnelle '%s' n'est pas à la version %s"
 
 #: include/functions.inc:2365
-#, fuzzy, php-format
+#, php-format
 msgid "Class(es) available"
-msgstr "Le fichier est disponible."
+msgstr "Classe(s) disponible"
 
 #: include/functions.inc:2388
 msgid ""
 "You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema    configuration do not support this option."
-msgstr ""
+msgstr "Vous avez activé l'option rfc2307bis dans votre option 'setup ldap' lors du setup, mais la configuration de vos schéma ne supportent pas cette option."
 
 #: include/functions.inc:2389
 msgid ""
 "In order to use rfc2307bis conform groups the objectClass 'posixGroup' must "
 "be      AUXILIARY"
-msgstr ""
+msgstr "Pour pouvoir utiliser des groupes conformes à la norme rfc2307bis, l'objectClass 'posixGroup' doit être       AUXILIARY"
 
 #: include/functions.inc:2393
 msgid ""
 "You have disabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema   configuration do not support this option."
-msgstr ""
+msgstr "Vous avez désactivé l'option rfc2307bis dans le l'option 'setup ldap' de votre setup, mais la configuration de vos schéma ne supportent pas cette option."
 
 #: include/functions.inc:2394
 msgid "The objectClass 'posixGroup' must be STRUCTURAL"
-msgstr ""
+msgstr "L'objectClass 'posixGroup' doit être STRUCTURAL"
 
 #: include/class_tabs.inc:198
 #, php-format
@@ -14368,40 +14368,35 @@ msgstr "La lecture du fichier PPD %s à échoué - pas de données."
 
 #: setup/setup_config2.tpl:6
 msgid "Samba hash generator"
-msgstr ""
+msgstr "Generateur de hash samba"
 
 #: setup/setup_config2.tpl:15
-#, fuzzy
 msgid "Samba SID"
-msgstr "Samba"
+msgstr ""
 
 #: setup/setup_config2.tpl:31
-#, fuzzy
 msgid "RID base"
-msgstr "Base de données"
+msgstr ""
 
 #: setup/setup_config2.tpl:46
-#, fuzzy
 msgid "Workstation container"
-msgstr "Nom de la station de travail"
+msgstr "Branche contenant les stations de travail"
 
 #: setup/setup_config2.tpl:61
 msgid "Samba SID mapping"
-msgstr ""
+msgstr "Mapping des SID samba"
 
 #: setup/setup_config2.tpl:70
-#, fuzzy
 msgid "Additional GOsa settings"
-msgstr "Préférences de l'application"
+msgstr "Paramètres supplémentaire de GOsa"
 
 #: setup/setup_config2.tpl:74
 msgid "Enable Copy & Paste"
-msgstr ""
+msgstr "Activer le Copier / Coller"
 
 #: setup/setup_config2.tpl:86
-#, fuzzy
 msgid "Government mode"
-msgstr "Nom du département"
+msgstr "Mode Gouvernemental"
 
 #: setup/setup_config2.tpl:99 ihtml/themes/default/setup_step4.tpl:88
 #: ihtml/themes/altlinux/setup_step4.tpl:88
@@ -14409,66 +14404,65 @@ msgid "Mail method"
 msgstr "Méthode de messagerie"
 
 #: setup/setup_config2.tpl:113
-#, fuzzy
 msgid "Vacation templates"
-msgstr "Modèle de station de travail"
+msgstr "Modèles de messages d'absence "
 
 #: setup/setup_config2.tpl:129
 msgid "Use Cyrus UNIX style"
-msgstr ""
+msgstr "Utiliser Cyrus en mode UNIX"
 
 #: setup/setup_feedback.tpl:8
 msgid "Subscribe to the gosa-announce mailinglist"
-msgstr ""
+msgstr "Souscrire à la mailinglist gosa-announce"
 
 #: setup/setup_feedback.tpl:11
 msgid ""
 "When checking this option, GOsa will try to connect http://oss.gonicus.de in "
 "order to subscribe you to the gosa-announce mailing list. You've to confirm "
 "this by mail."
-msgstr ""
+msgstr "Quand vous cochez cette option, GOsa essayera de se connecter a http://oss.gonicus.de afin de vous inscrire à la mailinglist gosa-announce. Vous devrez confirmer cette inscription par email."
 
 #: setup/setup_feedback.tpl:43
 msgid "Send feedback to the GOsa project team"
-msgstr ""
+msgstr "Envoyer vos commentaire au membres du projet Gosa"
 
 #: setup/setup_feedback.tpl:46
 msgid ""
 "When checking this option, GOsa will try to connect http://oss.gonicus.de in "
 "order to submit your form anonymously."
-msgstr ""
+msgstr "Quand vous cocher cette option, GOsa essayera de se connecter à http://oss.gonicus.de pour pouvoir transmettre votre réponse de manière anonyme."
 
 #: setup/setup_feedback.tpl:52
 msgid "Did the setup procedure help you to get started?"
-msgstr ""
+msgstr "Est ce que la procédure de setup vous à aidé ?"
 
 #: setup/setup_feedback.tpl:62
 msgid "If not, what problems did you encounter"
-msgstr ""
+msgstr "Si non, quels sont les problèmes que vous avez rencontrés"
 
 #: setup/setup_feedback.tpl:70
 msgid "Is this the first time you use GOsa?"
-msgstr ""
+msgstr "Est ce la première fois que vous utilisez GOsa ?"
 
 #: setup/setup_feedback.tpl:76
 msgid "I use it since"
-msgstr ""
+msgstr "Je l'utilise depuis "
 
 #: setup/setup_feedback.tpl:77
 msgid "Select the year since when you are using GOsa"
-msgstr ""
+msgstr "Veuillez séléctionner l'année depuis laquelle vous utilisez GOsa"
 
 #: setup/setup_feedback.tpl:84
 msgid "What operating system / distribution do you use?"
-msgstr ""
+msgstr "Quel système d'exploitation / distribution utilisez vous ?"
 
 #: setup/setup_feedback.tpl:92
 msgid "What web server do you use?"
-msgstr ""
+msgstr "Quel serveur web utilisez vous ?"
 
 #: setup/setup_feedback.tpl:100
 msgid "What PHP version do you use?"
-msgstr ""
+msgstr "Quelle version de php utilisez vous ?"
 
 #: setup/setup_feedback.tpl:108
 msgid "LDAP"
@@ -14476,114 +14470,102 @@ msgstr ""
 
 #: setup/setup_feedback.tpl:112
 msgid "What kind of LDAP server(s) do you use?"
-msgstr ""
+msgstr "Quel type de serveur(s) ldap utilisez vous ?"
 
 #: setup/setup_feedback.tpl:118
 msgid "How many objects are in your LDAP?"
-msgstr ""
+msgstr "Combien d'objet sont dans votre annuaire LDAP ?"
 
 #: setup/setup_feedback.tpl:125
-#, fuzzy
 msgid "Features"
-msgstr "Futur"
+msgstr "Fonctionalités"
 
 #: setup/setup_feedback.tpl:128
 msgid "What features of GOsa do you use?"
-msgstr ""
+msgstr "Quel fonctionnalités de GOsa utilisez vous ?"
 
 #: setup/setup_feedback.tpl:138
 msgid "What features do you want to see in future versions of GOsa?"
-msgstr ""
+msgstr "Quelle fonctionnalités voulez vous voir dans les prochaines versions de GOsa ?"
 
 #: setup/setup_feedback.tpl:145
 msgid "Send feedback"
-msgstr ""
+msgstr "Envoyer  vos réponses"
 
 #: setup/class_setupStep_Config3.inc:67 setup/class_setupStep_Config3.inc:68
-#, fuzzy
 msgid "GOsa settings 3/3"
-msgstr "Paramètres de messagerie"
+msgstr "Paramètres de GOsa 3/3"
 
 #: setup/class_setupStep_Config3.inc:69
 msgid "Tweak some GOsa core behaviour"
 msgstr ""
 
 #: setup/class_setupStep_Config3.inc:171
-#, fuzzy
 msgid "Session lifetime must be a numeric value."
-msgstr "Le score requis doit être un nombre positif."
+msgstr "La durée de la session doit être une valeur numérique."
 
 #: setup/class_setupStep_Config3.inc:175
-#, fuzzy
 msgid "Maximal ldap query time must be a numeric value. "
-msgstr "Le score requis doit être un nombre positif."
+msgstr "Le temps maximumpour une requête ldap doit être une valeur numérique."
 
 #: setup/class_setupStep_Finish.inc:38
-#, fuzzy
 msgid "Write configuration file"
-msgstr "Fichier de configuration"
+msgstr "Ecrire le fichier de configuration"
 
 #: setup/class_setupStep_Finish.inc:39
-#, fuzzy
 msgid "Finish - write the configuration file"
-msgstr ""
-"Les fonctionnalités XML sont nécessaires pour lire le fichier de "
-"configuration."
+msgstr "Fini - écrire le fichier de configuration"
 
 #: setup/class_setupStep_Finish.inc:100
 msgid ""
 "Your configuration file is currently world readable. Please updated the file "
 "permissions!"
-msgstr ""
+msgstr "Votre fichier de configuration est lisible par tout le monde. Veuillez modifier les permissions!"
 
 #: setup/class_setupStep_Finish.inc:102
-#, fuzzy
 msgid "The configuration is currently not readable or it does not exists."
-msgstr "Le fichier de configuration %s/gosa.conf ne peut être lu. Abandon."
+msgstr "Le fichier de configuration ne peut être lu ou n'existe pas."
 
 #: setup/class_setupStep_Finish.inc:111
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "After downloading and placing the file under %s, please make sure that the "
 "user the webserver is running with is able to read %s, while other users "
 "shouldn't. You may want to execute these commands to achieve this "
 "requirement:"
 msgstr ""
-"Après avoir placé le fichier dans le répertoire /etc/gosa, assurez vous que "
-"seul le serveur web puisse lire gosa.conf. Vous pouvez exécuter les "
+"Après avoir placé le fichier dans le répertoire %s, assurez vous que "
+"seul le serveur web puisse lire %s. Vous pouvez exécuter les "
 "commandes suivantes pour réaliser cette opération:"
 
 #: setup/class_setupStep_Checks.inc:38 setup/class_setupStep_Checks.inc:39
 msgid "Installation check"
-msgstr ""
+msgstr "Vérification de l'installation"
 
 #: setup/class_setupStep_Checks.inc:40
 msgid "Basic checks for PHP version and required extensions."
-msgstr ""
+msgstr "Vérification de base de la version de PHP et des extensions nécéssaires."
 
 #: setup/class_setupStep_Checks.inc:64
-#, fuzzy
 msgid "Checking PHP version"
-msgstr "Vérification de la version de PHP (>=4.1.0)"
+msgstr "Vérification de la version de PHP"
 
 #: setup/class_setupStep_Checks.inc:65
 #, php-format
 msgid "PHP must be of version %s / %s or above."
-msgstr ""
+msgstr "PHP doit être à la version %s / %s ou supérieure."
 
 #: setup/class_setupStep_Checks.inc:66
 msgid ""
 "GOsa requires functionality that is not available (or buggy) in older PHP "
 "versions. Please update to a supported version."
-msgstr ""
+msgstr "GOsa nécessite des fonctionnalités qui ne sont pas disponibles (ou défectueuses) dans d'anciennes versions de PHP. Veuillez mettre à jour PHP vers un version supportée."
 
 #: setup/class_setupStep_Checks.inc:72
-#, fuzzy
 msgid "Checking for LDAP support"
-msgstr "Vérification du support iconv"
+msgstr "Vérification du support LDAP"
 
 #: setup/class_setupStep_Checks.inc:73
-#, fuzzy
 msgid "This is the main extension used by GOsa and therefore really required."
 msgstr "Ce module est le module de base utilisé par GOsa et est donc indispensable."
 
@@ -14591,27 +14573,25 @@ msgstr "Ce module est le module de base utilisé par GOsa et est donc indispensa
 msgid ""
 "The ldap extension (php4-ldap/php5-ldap) is required to communicate with "
 "your LDAP server."
-msgstr ""
+msgstr "L'extension ldap (php4-ldap/php5-ldap) est nécessaire pour communiquer avec votre serveur LDAP."
 
 #: setup/class_setupStep_Checks.inc:80
 msgid "Checking for gettext support"
 msgstr "Vérification du support gettext"
 
 #: setup/class_setupStep_Checks.inc:81
-#, fuzzy
 msgid "Gettext support is required for internationalization."
-msgstr "Gettext est requis afin que GOsa soit localisé."
+msgstr "Gettext est requis afin que GOsa soit multilingue."
 
 #: setup/class_setupStep_Checks.inc:82 setup/class_setupStep_Checks.inc:90
 msgid "Please make sure that the extension is activated."
-msgstr ""
+msgstr "Veuillez vous assurer que cette extension est activée."
 
 #: setup/class_setupStep_Checks.inc:88
 msgid "Checking for iconv support"
 msgstr "Vérification du support iconv"
 
 #: setup/class_setupStep_Checks.inc:89
-#, fuzzy
 msgid ""
 "This module is used by GOsa to convert samba munged dial informations and is "
 "therefore required. "
@@ -14620,48 +14600,43 @@ msgstr ""
 "il est indispensable."
 
 #: setup/class_setupStep_Checks.inc:96
-#, fuzzy
 msgid "Checking for mhash support"
-msgstr "Vérification du support iconv"
+msgstr "Vérification du support mhash"
 
 #: setup/class_setupStep_Checks.inc:97
 msgid "You'll need this module to make use of SSHA encryption"
-msgstr ""
+msgstr "Ce module est nécessaire pour l'utilisation de l'encryption SSHA"
 
 #: setup/class_setupStep_Checks.inc:98
 msgid ""
 "The mhash module for PHP 4/5 is not available.Please install php4-mhash/php5-"
 "mhash."
-msgstr ""
+msgstr "L'extension mhash pour php4 / php5 n'est pas disponible. Veuillez installer php4-mhash / php5-mhash."
 
 #: setup/class_setupStep_Checks.inc:104
-#, fuzzy
 msgid "Checking for IMAP support"
-msgstr "Vérification du support iconv"
+msgstr "Vérification du support IMAP"
 
 #: setup/class_setupStep_Checks.inc:105
-#, fuzzy
 msgid ""
 "The IMAP module is needed to communicate with the IMAP server. GOsa "
 "retrieves status information, creates and deletes mail users, etc."
 msgstr ""
-"Le module IMAP est nécessaire pour communiquer avec un serveur IMAP. Il "
-"permet de récupérer des informations de statuts, créer et supprimer les "
-"comptes de messagerie des utilisateurs."
+"L'extension IMAP est nécessaire pour communiquer avec un serveur IMAP. GOsa  "
+"récupère des informations de statuts, crée et supprime les "
+"comptes de messagerie des utilisateurs etc..."
 
 #: setup/class_setupStep_Checks.inc:106
 msgid ""
 "This module is used to communicate with your mail server. Please install "
 "php4-imap/php5-imap."
-msgstr ""
+msgstr "Cette extension est utilisée pour communiquer avec votre serveur de messagerie. Veuillez installer php4-imap/php5-imap."
 
 #: setup/class_setupStep_Checks.inc:112
-#, fuzzy
 msgid "Checking for getacl in IMAP implementation"
-msgstr "Vérification de la fonction getacl dans imap"
+msgstr "Vérification de la fonction getacl dans votre implémentation imap"
 
 #: setup/class_setupStep_Checks.inc:113
-#, fuzzy
 msgid ""
 "The getacl support is needed to handle shared folder permissions. Old IMAP "
 "extensions are not capable of reading acl's. You need a recent PHP version "
@@ -14673,27 +14648,22 @@ msgstr ""
 "fonctionnalité."
 
 #: setup/class_setupStep_Checks.inc:120
-#, fuzzy
 msgid "Checking for MySQL support"
-msgstr "Vérification du support iconv"
+msgstr "Vérification du support MySQL"
 
 #: setup/class_setupStep_Checks.inc:121
-#, fuzzy
 msgid "MySQL support is needed to communicate with several supported databases."
-msgstr ""
-"Le support de MySQL est nécessaire pour lire  les rapports GOfax en "
-"provenance d'une base de données."
+msgstr "Le support de MySQL est nécessaire pour communiquer avec plusieurs base de données."
 
 #: setup/class_setupStep_Checks.inc:122
 msgid ""
 "This module is required to communicate with database servers (GOfax, "
 "asterisk, GLPI, etc.). Please install php4-mysql/php5-mysql"
-msgstr ""
+msgstr "Cette extension est nécessaire pour communiquer avec le serveur de base de données (GOfax, asterisk, GLPI, etc.). Veuillez installer php4-mysql/php5-mysql"
 
 #: setup/class_setupStep_Checks.inc:128
-#, fuzzy
 msgid "Checking for kadm5 support"
-msgstr "Vérification du support iconv"
+msgstr "Vérification du support kadm5"
 
 #: setup/class_setupStep_Checks.inc:129
 msgid ""
@@ -14704,52 +14674,44 @@ msgstr ""
 "téléchargeable sur les réseaux PEAR."
 
 #: setup/class_setupStep_Checks.inc:130
-#, fuzzy
 msgid ""
 "This module is required to manage user in kerberos, it is downloadable via "
 "PEAR network"
-msgstr ""
-"Gérer les utilisateurs dans kerberos nécessite le module kadm5 "
-"téléchargeable sur les réseaux PEAR."
+msgstr "Cette extension est nécessaire pour gérer les utilisateurs dans kerberos, elle est téléchargeable sur les réseaux PEAR."
 
 #: setup/class_setupStep_Checks.inc:136
-#, fuzzy
 msgid "Checking for SNMP support"
-msgstr "Vérification du support iconv"
+msgstr "Vérification du support SNMP"
 
 #: setup/class_setupStep_Checks.inc:137
-#, fuzzy
 msgid ""
 "The simple network management protocol is needed to get status information "
 "from clients."
-msgstr "Le protocole SNMP est nécessaire pour pouvoir surveiller les clients."
+msgstr "Le protocole SNMP est nécessaire pour pouvoir obtenir des informations depuis les clients."
 
 #: setup/class_setupStep_Checks.inc:138
 msgid ""
 "This module is required for client monitoring. Please install php4-snmp/php5-"
 "snmp."
-msgstr ""
+msgstr "Cette extension est nécessaire pour obtenir des informations depuis les clients. Veuillez installer php4-snmp/php5-snmp."
 
 #: setup/class_setupStep_Checks.inc:144
-#, fuzzy
 msgid "Checking for CUPS support"
-msgstr "Vérification du support iconv"
+msgstr "Vérification du support CUPS"
 
 #: setup/class_setupStep_Checks.inc:145
-#, fuzzy
 msgid ""
 "In order to read available printers via the IPP protocol instead of printcap "
 "files, you've to install the CUPS module."
 msgstr ""
 "Afin d'obtenir la liste des imprimantes disponibles avec le protocole IPP à "
-"la place des fichiers printcap, vous devez installer le module CUPS."
+"la place des fichiers printcap, vous devez installer l'extension CUPS."
 
 #: setup/class_setupStep_Checks.inc:154
 msgid "Checking for fping utility"
 msgstr "Vérification de l'utilitaire fping"
 
 #: setup/class_setupStep_Checks.inc:155
-#, fuzzy
 msgid ""
 "The fping utility is used if you've got a thin client based terminal "
 "environment."
@@ -14758,18 +14720,16 @@ msgstr ""
 "clients légers fonctionnant en terminaux."
 
 #: setup/class_setupStep_Checks.inc:156
-#, fuzzy
 msgid "The fping utility is only used in thin client based terminal environment."
 msgstr ""
-"L'utilitaire fping est utilisé dans le cas d'un environnement composé de "
+"L'utilitaire fping est seulement utilisé dans le cas d'un environnement composé de "
 "clients légers fonctionnant en terminaux."
 
 #: setup/class_setupStep_Checks.inc:171
 msgid "SAMBA password hash generation"
-msgstr ""
+msgstr "Génération de mot de passe SAMBA"
 
 #: setup/class_setupStep_Checks.inc:172
-#, fuzzy
 msgid ""
 "In order to use SAMBA 2/3 passwords, you've to install additional packages "
 "to generate password hashes."
@@ -14778,22 +14738,18 @@ msgstr ""
 "prenant en charge le cryptage des mots de passe."
 
 #: setup/class_setupStep_Checks.inc:173
-#, fuzzy
 msgid ""
 "In order to use SAMBA 2/3 you've to install additional perl libraries. Take "
 "a look at mkntpasswd."
-msgstr ""
-"Afin d'utiliser Samba 2/3, vous devez installer des paquets additionnels "
-"prenant en charge le cryptage des mots de passe."
+msgstr "Afin d'utiliser Samba 2/3, vous devez installer des libraries perl additionnelles. Veuillez regarder mkntpasswd."
 
 #: setup/class_setupStep_Checks.inc:183 setup/class_setupStep_Checks.inc:202
 #: setup/class_setupStep_Checks.inc:218 setup/class_setupStep_Checks.inc:234
 #: setup/class_setupStep_Checks.inc:251
 msgid "Off"
-msgstr ""
+msgstr "Eteint"
 
 #: setup/class_setupStep_Checks.inc:184
-#, fuzzy
 msgid ""
 "register_globals is a PHP mechanism to register all global variables to be "
 "accessible from scripts without changing the scope. This may be a security "
@@ -14801,36 +14757,29 @@ msgid ""
 msgstr ""
 "register_globals est un mécanisme PHP pour enregistrer toutes les variables "
 "globales afin que les scripts puissent y accéder sans changer la porté des "
-"variables. Cela peut constituer un risque de sécurité. GOsa s'exécutera dans "
-"les deux modes."
+"variables. Cela peut constituer un risque de sécurité."
 
 #: setup/class_setupStep_Checks.inc:185
-#, fuzzy
 msgid "Search for 'register_globals' in your php.ini and switch it to 'Off'."
-msgstr "Vérification de l'option register_globals, elle doit être à 'off'"
+msgstr "Recherchez l'option 'register_globals' dans votre php.ini et mettez la à 'Off'."
 
 #: setup/class_setupStep_Checks.inc:193
 msgid "PHP uses this value for the garbage collector to delete old sessions."
-msgstr ""
+msgstr "PHP utilise cette variable pour effacer des anciennes sessions."
 
 #: setup/class_setupStep_Checks.inc:194
-#, fuzzy
 msgid ""
 "Setting this value to one day will prevent loosing session and cookies "
 "before they really timeout."
-msgstr ""
-"PHP utilise cette valeur pour le garbage collector afin d'effacer les "
-"anciennes sessions, mettre cette valeur à 1 jour permet d'éviter de perde "
-"les cookies et les sessions avant qu'elles soient réellement expirées."
+msgstr "Mettre cette valeur à 1 jour permet d'éviter de perde les cookies et les sessions avant qu'elles soient réellement expirées."
 
 #: setup/class_setupStep_Checks.inc:195
 msgid ""
 "Search for 'session.gc_maxlifetime' in your php.ini and set it to 86400 or "
 "higher."
-msgstr ""
+msgstr "Cherchez pour 'session.gc_maxlifetime' dans votre php.ini et mettez le à 86400 ou plus haut."
 
 #: setup/class_setupStep_Checks.inc:203
-#, fuzzy
 msgid ""
 "In Order to use GOsa without any trouble, the session.auto_register option "
 "in your php.ini should be set to 'Off'."
@@ -14839,67 +14788,50 @@ msgstr ""
 "doit être a 'Off' dans votre php.ini."
 
 #: setup/class_setupStep_Checks.inc:204
-#, fuzzy
 msgid "Search for 'session.auto_start' in your php.ini and set it to 'Off'."
-msgstr ""
-"Pour pouvoir utiliser GOSa sans problèmes, la variable session.auto_register "
-"doit être a 'Off' dans votre php.ini."
+msgstr "Recherchez la variable session.auto_register  et mettez la à 'Off' dans votre php.ini."
 
 #: setup/class_setupStep_Checks.inc:211
-#, fuzzy
 msgid ""
 "GOsa needs at least 32MB of memory. Setting it below this limit may cause "
 "errors that are not reproducable! Increase it for larger setups."
-msgstr ""
-"GOsa a besoin au minimum de 16MB de mémoire, moins causera des erreurs "
-"imprévisibles, voire sans message d'erreurs! Augmentez la mémoire pour les "
-"installations plus complexes."
+msgstr "GOsa a besoin au minimum de 32MB de mémoire. Moins que 32MB causera des erreurs imprévisibles, qui ne seront pas reproductibles! Augmentez la mémoire pour les installations plus complexes."
 
 #: setup/class_setupStep_Checks.inc:212
 msgid "Search for 'memory_limit' in your php.ini and set it to '32M' or higher."
-msgstr ""
+msgstr "Recherchez pour 'memory_limit' dans votre php.ini et mettez le à '32M' or plus haut."
 
 #: setup/class_setupStep_Checks.inc:219
-#, fuzzy
 msgid ""
 "This option influences the PHP output handling. Turn this Option off, to "
 "increase performance."
-msgstr ""
-"Cette option défini la gestion des sorties, mettez cette option a off pour "
-"améliorer la performance."
+msgstr "Cette option défini la gestion des sorties, mettez cette option à 'Off', pour améliorer la performance."
 
 #: setup/class_setupStep_Checks.inc:220
 msgid "Search for 'implicit_flush' in your php.ini and set it to 'Off'."
-msgstr ""
+msgstr "Recherchez 'implicit_flush' dans votre php.ini et mettez le à 'Off'."
 
 #: setup/class_setupStep_Checks.inc:227
-#, fuzzy
 msgid "The Execution time should be at least 30 seconds."
-msgstr ""
-"Le temps d'exécution doit être au moins de 30 secondes minimum, parce que "
-"certaines actions vont prendre plus de temps."
+msgstr "Le temps d'exécution doit être au moins de 30 secondes."
 
 #: setup/class_setupStep_Checks.inc:228
 msgid "Search for 'max_execution_time' in your php.ini and set it to '30' or higher."
-msgstr ""
+msgstr "Rechercher l'option 'max_execution_time' dans votre php.ini et mettez le à '30' ou plus."
 
 #: setup/class_setupStep_Checks.inc:235
-#, fuzzy
 msgid ""
 "Increase the server security by setting expose_php to 'off'. PHP won't send "
 "any information about the server you are running in this case."
-msgstr ""
-"PHP n'enverra pas d'information a propos du serveur qui fait tourner "
-"l'application, ceci peut être considérer comme une mesure de sécurité."
+msgstr "Augmentez la sécurité de votre serveur en mettant l'option expose_php à 'Off'. PHP n'enverra pas d'information a propos du serveur."
 
 #: setup/class_setupStep_Checks.inc:236
 msgid "Search for 'expose_php' in your php.ini and set if to 'Off'."
-msgstr ""
+msgstr "Recherchez 'expose_php' dans votre php.ini et mettez le à 'Off'."
 
 #: setup/class_setupStep_Checks.inc:242
-#, fuzzy
 msgid "On"
-msgstr "Ouvrir"
+msgstr "Ouvert"
 
 #: setup/class_setupStep_Checks.inc:243
 msgid ""
@@ -14911,28 +14843,23 @@ msgstr ""
 
 #: setup/class_setupStep_Checks.inc:244
 msgid "Search for 'magic_quotes_gpc' in your php.ini and set it to 'On'."
-msgstr ""
+msgstr "Recherchez l'option 'magic_quotes_gpc' dans votre php.ini et mettez le à 'On'."
 
 #: setup/class_setupStep_Checks.inc:252
-#, fuzzy
 msgid "Increase your server performance by setting magic_quotes_gpc to 'off'."
-msgstr ""
-"Améliorez la sécurité de votre serveur en mettant magic_quotes_gpc à 'on'. "
-"PHP préfixera tout les guillemets dans les chaînes avec la séquence escape."
+msgstr "Améliorez la performance de votre serveur en mettant magic_quotes_gpc à 'off'."
 
 #: setup/class_setupStep_Checks.inc:253
 msgid "Search for 'zend.ze1_compatibility_mode' in your php.ini and set it to 'Off'."
-msgstr ""
+msgstr "Recherchez l'option 'zend.ze1_compatibility_mode' dans votre hp.ini et mettez la à 'Off'."
 
 #: setup/class_setupStep_Checks.inc:264
-#, fuzzy
 msgid "Configuration writeable"
-msgstr "Fichier de configuration"
+msgstr "Le fichier de configuration peut être écrit"
 
 #: setup/class_setupStep_Checks.inc:265
-#, fuzzy
 msgid "The configuration file can't be written"
-msgstr "voir les informations de configuration"
+msgstr "Le fichier de configuration ne peut pas être écrit"
 
 #: setup/class_setupStep_Checks.inc:266
 #, php-format
@@ -14940,24 +14867,24 @@ msgid ""
 "GOsa reads its configuration from a file located in (%s/%s). The setup can "
 "write the configuration directly if it is writeable."
 msgstr ""
+"GOsa lit sas configuration d'un fichier situé dans (%s/%s). Le programme d'installation "
+"peut écrire la configuration directement si le fichier est permet l'écriture."
 
 #: setup/class_setupStep_License.inc:53 setup/class_setupStep_License.inc:54
-#, fuzzy
 msgid "License"
-msgstr "Ligne"
+msgstr "licence"
 
 #: setup/class_setupStep_License.inc:55
 msgid "Terms and conditions for usage"
-msgstr ""
+msgstr "Termes et Conditions d'utilisation"
 
 #: setup/setup_ldap.tpl:7
 msgid "Please choose the LDAP user to be used by GOsa"
-msgstr ""
+msgstr "Veuillez choisir l'utilisateur LDAP qui sera utilise par GOSa"
 
 #: setup/setup_ldap.tpl:25
-#, fuzzy
 msgid "LDAP connection"
-msgstr "Déconnexion"
+msgstr "Connexion LDAP"
 
 #: setup/setup_ldap.tpl:29 ihtml/themes/default/setup_step4.tpl:11
 #: ihtml/themes/altlinux/setup_step4.tpl:11
@@ -14965,24 +14892,20 @@ msgid "Location name"
 msgstr "Nom de l'emplacement"
 
 #: setup/setup_ldap.tpl:37
-#, fuzzy
 msgid "Connection URL"
 msgstr "URL de connexion"
 
 #: setup/setup_ldap.tpl:45
-#, fuzzy
 msgid "TLS connection"
-msgstr "Connexion"
+msgstr "Connexion TLS"
 
 #: setup/setup_ldap.tpl:65
-#, fuzzy
 msgid "Reload"
-msgstr "Lire"
+msgstr "Recharger"
 
 #: setup/setup_ldap.tpl:69
-#, fuzzy
 msgid "Authentication"
-msgstr "Authentification nagios"
+msgstr "Authentification"
 
 #: setup/setup_ldap.tpl:73 ihtml/themes/default/setup_step4.tpl:23
 #: ihtml/themes/altlinux/setup_step4.tpl:23
@@ -14990,9 +14913,8 @@ msgid "Admin DN"
 msgstr "DN de l'administrateur"
 
 #: setup/setup_ldap.tpl:77
-#, fuzzy
 msgid "Select user"
-msgstr "Supprimer un utilisateur"
+msgstr "Sélectionner un utilisateur"
 
 #: setup/setup_ldap.tpl:85
 msgid "Automatically append LDAP base to admin DN"
@@ -15006,80 +14928,78 @@ msgstr "Mot de passe administrateur"
 #: setup/setup_ldap.tpl:100
 #, fuzzy
 msgid "Schema based settings"
-msgstr "Configuration Samba"
+msgstr "Paramètres basé sur les schéma"
 
 #: setup/setup_ldap.tpl:104
 msgid "Use rfc2307bis compliant groups"
-msgstr ""
+msgstr "Utilisez des groupes rfc2307bis"
 
 #: setup/setup_ldap.tpl:116
-#, fuzzy
 msgid "Current status"
-msgstr "Version actuelle"
+msgstr "Statut actuel"
 
 #: setup/setup_checks.tpl:9
 msgid "PHP module and extension checks"
-msgstr ""
+msgstr "Extension PHP et vérification de ceux ci"
 
 #: setup/setup_checks.tpl:41 setup/setup_checks.tpl:103
 msgid "GOsa will NOT run without fixing this."
-msgstr ""
+msgstr "GOsa ne fonctionnera pas si vous ne corriger pas cela."
 
 #: setup/setup_checks.tpl:45 setup/setup_checks.tpl:107
 msgid "GOsa will run without fixing this."
-msgstr ""
+msgstr "GOsa fonctionnera même si vous ne corrigez pas cela."
 
 #: setup/setup_checks.tpl:67
-#, fuzzy
 msgid "PHP setup configuration"
-msgstr "Vérification de l'installation de PHP"
+msgstr "Configuration de PHP"
 
 #: setup/setup_checks.tpl:67
-#, fuzzy
 msgid "show information"
-msgstr "Informations personnelles"
+msgstr "Montrer les informations"
 
 #: setup/setup_welcome.tpl:4
+#, fuzzy
 msgid ""
 "This seems to be the first time you start GOsa - we didn't find any "
 "configuration right now. This simple wizard intends to help you while "
 "setting it up."
-msgstr ""
+msgstr "Il semble que c'est votre première installation de GOsa - nous n'avons pas trouvé de configuration. Ce "
 
 #: setup/setup_welcome.tpl:8
+#, fuzzy
 msgid "What will the wizard do for you?"
-msgstr ""
+msgstr "Quest ce que le wizard fera pour vous ? "
 
 #: setup/setup_welcome.tpl:11
 msgid "Create a basic, single site configuration"
-msgstr ""
+msgstr "Créer une simple configuration mono site"
 
 #: setup/setup_welcome.tpl:12
 msgid "Tries to find problems within your PHP and LDAP setup"
-msgstr ""
+msgstr "Essaye de trouver si il existe des problèmes dans votre configuration PHP ou LDAP"
 
 #: setup/setup_welcome.tpl:13
 msgid "Let you choose from a set of basic and advanced configuration switches"
-msgstr ""
+msgstr "Vous permet de choisir un jeu d'option de base ou avancées"
 
 #: setup/setup_welcome.tpl:14
 msgid "Guided migration of existing LDAP trees"
-msgstr ""
+msgstr "Migration assistée d'un annuaire LDAP existant"
 
 #: setup/setup_welcome.tpl:17
 msgid "What will the wizard NOT do for you?"
-msgstr ""
+msgstr "Qu'est ce que le wizard ne fera pas pour vous ?"
 
 #: setup/setup_welcome.tpl:20
 msgid "Find every possible configuration error"
-msgstr ""
+msgstr "Trouver toutes les erreur possible dans votre configuration"
 
 #: setup/setup_welcome.tpl:21
 msgid "Migrate every possible LDAP setup - create backup dumps!"
-msgstr ""
+msgstr "Migrer tout les scénario LDAP possible - créez des sauvegardes !"
 
 #: setup/setup_welcome.tpl:25
-#, fuzzy
 msgid "To continue..."
 msgstr "Suite de la configuration..."
 
@@ -15089,284 +15009,259 @@ msgid ""
 "creating the file '/tmp/gosa.auth', containing the current session ID on the "
 "servers local filesystem. This can be done by executing the following "
 "command:"
-msgstr ""
+msgstr "Pour des raisons de sécurité vous devez vous authentifier en créant le fichier '/tmp/gosa.auth', contenant l'ID de la session sur le(s) serveur(s). Ceci peut être réalisé en exécutant la commande suivante:"
 
 #: setup/setup_welcome.tpl:34
 msgid "Click the 'Continue' button when you've finished."
-msgstr ""
+msgstr "Cliquer sur 'Continuer' quand vous avez fini."
 
 #: setup/class_setupStep_Ldap.inc:53
-#, fuzzy
 msgid "LDAP setup"
-msgstr "Serveur LDAP"
+msgstr "Configuration LDAP"
 
 #: setup/class_setupStep_Ldap.inc:54
-#, fuzzy
 msgid "LDAP connection setup"
-msgstr "Déconnexion"
+msgstr "Configuration de la connexion LDAP"
 
 #: setup/class_setupStep_Ldap.inc:55
 msgid ""
 "This dialog performs the basic configuration of the LDAP connectivity for "
 "GOsa."
-msgstr ""
+msgstr "Cette boite de dialogue permet d'indiquer la configuration de base LDAP pour GOsa."
 
 #: setup/class_setupStep_Ldap.inc:99
-#, fuzzy, php-format
+#, php-format
 msgid "Anonymous bind failed on server '%s'."
-msgstr "L'insertion de la nouvelle macro à échoué pour le serveur '%s'."
+msgstr "La connexion anonyme à échoué sur le serveur '%s'."
 
 #: setup/class_setupStep_Ldap.inc:101
-#, fuzzy, php-format
+#, php-format
 msgid "Bind as user '%s' failed on server '%s'."
-msgstr "L'insertion de la nouvelle macro à échoué pour le serveur '%s'."
+msgstr "la connexion comme l'utilisateur '%s' à échoué sur le serveur '%s'."
 
 #: setup/class_setupStep_Ldap.inc:106
 #, php-format
 msgid "Anonymous bind on server '%s' succeeded."
-msgstr ""
+msgstr "La connexion anonyme sur le serveur '%s' à réussi."
 
 #: setup/class_setupStep_Ldap.inc:107
-#, fuzzy
 msgid "Please specify user and password."
-msgstr "Veuillez introduire votre mot de passe!"
+msgstr "Veuillez introduire un utilisateur et un mot de passe."
 
 #: setup/class_setupStep_Ldap.inc:109
-#, fuzzy, php-format
+#, php-format
 msgid "Bind as user '%s' on server '%s' succeeded."
-msgstr ""
-"Impossible de sélectionner la base de données '%s' située sur le serveur '%"
-"s'."
+msgstr "La connexion comme l'utilisateur '%s' sur le serveur '%s' à réussi."
 
 #: setup/class_setupStep_Schema.inc:40 setup/class_setupStep_Schema.inc:41
 msgid "LDAP schema check"
-msgstr ""
+msgstr "Vérification des schémas LDAP"
 
 #: setup/class_setupStep_Schema.inc:42
 msgid "Perform test on your current LDAP schema"
-msgstr ""
+msgstr "Exécuter des test sur vos schéma LDAP actuels"
 
 #: setup/class_setupStep_Welcome.inc:38
-#, fuzzy
 msgid "Welcome"
-msgstr "Bienvenue %s!"
+msgstr "Bienvenue"
 
 #: setup/class_setupStep_Welcome.inc:39
-#, fuzzy
 msgid "The welcome message"
-msgstr "Enlever le message de la file d'attente"
+msgstr "Le message d'accueil"
 
 #: setup/class_setupStep_Welcome.inc:40
-#, fuzzy
 msgid "Welcome to GOsa setup wizard"
-msgstr "Bienvenue dans le menu de configuration de GOsa!"
+msgstr "Bienvenue dans l'installation de GOsa"
 
 #: setup/setup_frame.tpl:11
-#, fuzzy
 msgid "GOsa setup wizard"
-msgstr "Aide en ligne de GOsa"
+msgstr "Installation de GOsa"
 
 #: setup/setup_frame.tpl:18
-#, fuzzy
 msgid "Installation"
-msgstr "Stations Windows"
+msgstr ""
 
 #: setup/setup_frame.tpl:18
-#, fuzzy
 msgid "Steps"
-msgstr "Arrêter"
+msgstr "Etapes"
 
 #: setup/class_setupStep_Language.inc:40 setup/class_setupStep_Language.inc:41
-#, fuzzy
 msgid "Language setup"
-msgstr "Langue"
+msgstr "Configuration de la langue"
 
 #: setup/class_setupStep_Language.inc:42
-#, fuzzy
 msgid "This step allows you to select your preferred language."
-msgstr "Veuillez sélectionner une imprimante ou cliquez sur annuler."
+msgstr "Cette étape vous permet de sélectionner votre langue préférée."
 
 #: setup/class_setupStep_Language.inc:47
-#, fuzzy
 msgid "Automatic"
-msgstr "automatique"
+msgstr "Automatique"
 
 #: setup/setup_migrate.tpl:5
 msgid ""
 "During the LDAP inspection, we're going to check for several common pitfalls "
 "that may occur when migration to GOsa base LDAP administration. You may want "
 "to fix the problems below, in order to provide smooth services."
-msgstr ""
+msgstr "Pendant l'inspection LDAP, nous allons regarder pour les problèmes classiques qui peuvent arriver lorsque l'on migre vers une administration basée sur GOsa. Vous pouvez fixer les problèmes si dessous afin de procurer une administration facilitée."
 
 #: setup/setup_migrate.tpl:33
-#, fuzzy
 msgid "Check again"
-msgstr "Vérification"
+msgstr "Vérifier à nouveau"
 
 #: setup/setup_migrate.tpl:37
 msgid "Move windows workstations into a valid windows workstation department"
-msgstr ""
+msgstr "Bouger les stations windows dans un département valide pour les stations windows."
 
 #: setup/setup_migrate.tpl:39
 msgid ""
 "This dialog allows you to move the displayed windows workstations into a "
 "valid department"
-msgstr ""
+msgstr "Ce dialogue vous permet de bouger les stations windows affichées dans un département valide"
 
 #: setup/setup_migrate.tpl:41
 msgid ""
 "Be careful with this tool, there may be references pointing to this "
 "workstations that can't be migrated."
-msgstr ""
+msgstr "Soyez prudent avec cet outil, il peut y avoir des références pointant vers ces machines qui ne seront pas migrées."
 
 #: setup/setup_migrate.tpl:65 setup/setup_migrate.tpl:120
 #: setup/setup_migrate.tpl:171 setup/setup_migrate.tpl:294
 #: setup/setup_migrate.tpl:347
-#, fuzzy
 msgid "Select all"
-msgstr "Sélectionner"
+msgstr "Sélectionner tout"
 
 #: setup/setup_migrate.tpl:67
 msgid "Move selected windows workstations into the following GOsa department"
-msgstr ""
+msgstr "Bouger les machines windows dans le département GOsa suivant"
 
 #: setup/setup_migrate.tpl:72
-#, fuzzy
 msgid "Move selected workstations"
-msgstr "Sélectionnez pour voir les stations de travail"
+msgstr "Bouger les stations de travail sélectionnées"
 
 #: setup/setup_migrate.tpl:73
 msgid "What will be done here"
-msgstr ""
+msgstr "Que ce qui sera exécuté ici"
 
 #: setup/setup_migrate.tpl:85
 msgid "Move groups into configured group tree"
-msgstr ""
+msgstr "Bouger les groupes dans le groupe configuré"
 
 #: setup/setup_migrate.tpl:88
 msgid ""
 "This dialog allows moving a couple of groups to the configured group tree. "
 "Doing this may straighten your LDAP service."
-msgstr ""
+msgstr "Ce dialogue permet de bouger un couple de groupes dans le groupe configuré. Excécuter cela peut votre service LDAP."
 
 #: setup/setup_migrate.tpl:91
 msgid ""
 "Be careful with this option! There may be references pointing to these "
 "groups. The GOsa setup can't migrate references, so you may want to cancel "
 "the migration in this case in this case."
-msgstr ""
+msgstr "Soyez prudent avec cette option ! Il peut y avoir des références qui pointent vers ces groupes. L'installation de GOsa ne peut pas migrer ces références, vous préférerez sans doute annuler la migration dans ce cas."
 
 #: setup/setup_migrate.tpl:94
+#, fuzzy
 msgid "Move selected groups into this group tree"
-msgstr ""
+msgstr "Bouger les groupes sélectionnés dans le groupe "
 
 #: setup/setup_migrate.tpl:123 setup/setup_migrate.tpl:175
 #: setup/setup_migrate.tpl:298 setup/setup_migrate.tpl:351
 msgid "Hide changes"
-msgstr ""
+msgstr "Camoufler les changements"
 
 #: setup/setup_migrate.tpl:125 setup/setup_migrate.tpl:177
 #: setup/setup_migrate.tpl:300 setup/setup_migrate.tpl:353
-#, fuzzy
 msgid "Show changes"
-msgstr "Afficher les paquets"
+msgstr "Montrer les changements"
 
 #: setup/setup_migrate.tpl:138
 msgid "Move users into configured user tree"
-msgstr ""
+msgstr "Bouger les utilisateurs dans la branche utilisateur configurée"
 
 #: setup/setup_migrate.tpl:140
 msgid ""
 "This dialog allows moving a couple of users to the configured user tree. "
 "Doing this may straighten your LDAP service."
-msgstr ""
+msgstr "Ce dialogue permet de bouger un ensemble d'utilisateurs dans la branche utilisateur configurée. Exécuter cette opération peut améliorer votre service LDAP."
 
 #: setup/setup_migrate.tpl:143
 msgid ""
 "Be careful with this option! There may be references pointing to these "
 "users. The GOsa setup can't migrate references, so you may want to cancel "
 "the migration in this case."
-msgstr ""
+msgstr "Soyez prudent avec cette opération ! Il peut exister des références qui pointent vers ces utilisateurs. Le programme d'installation de GOsa ne peut pas migrer ces références, vous préférerez peut être annuler la migration dans ce cas."
 
 #: setup/setup_migrate.tpl:146
-#, fuzzy
 msgid "Move selected users into this people tree"
-msgstr "Créer un nouvel utilisateur avec ce modèle"
+msgstr "Bouger les utilisateurs sélectionnés dans la branche utilisateurs."
 
 #: setup/setup_migrate.tpl:196
-#, fuzzy
 msgid "Next"
-msgstr "suivant"
+msgstr "Suivant"
 
 #: setup/setup_migrate.tpl:199
-#, fuzzy
 msgid "Create a new GOsa administrator account"
-msgstr "Créer un compte netatalk"
+msgstr "Créer un nouveau compte adminstrateur pour GOsa"
 
 #: setup/setup_migrate.tpl:202
 msgid ""
 "This dialog will automatically add a new super administrator to your LDAP "
 "tree."
-msgstr ""
+msgstr "Ce dialogue vas automatiquement créer un nouveau super utilisateur dans votre arbre LDAP."
 
 #: setup/setup_migrate.tpl:231
-#, fuzzy
 msgid "Password (again)"
-msgstr "Format de stockage des mots de passe"
+msgstr "Mot de passe (de nouveau)"
 
 #: setup/setup_migrate.tpl:259
 msgid ""
 "The listed departments are currenlty invisble in the GOsa user interface. If "
 "you want to change this for a couple of entries, select them and use the "
 "migrate button below."
-msgstr ""
+msgstr "Les département listés sont actuellement invisibles dans l'interface utilisateur de GOsa. Si vous voulez changer cela pour un certain nombre d'entrée, sélectionnez les et utilisez le bouton migration ci dessous."
 
 #: setup/setup_migrate.tpl:260 setup/setup_migrate.tpl:315
 msgid ""
 "If you want to know what will be done when migrating the selected entries, "
 "use the 'Show changes' button to see the LDIF."
-msgstr ""
+msgstr "Si vous voulez savoir ce qui sera effectué lorsque vous migrerez les entrées sélectionnées, utilisez le bouton 'Montrer les changements' pour voir le fichier LDIF."
 
 #: setup/setup_migrate.tpl:270 setup/setup_migrate.tpl:324
-#, fuzzy
 msgid "Current"
-msgstr "Version actuelle"
+msgstr "Actuel"
 
 #: setup/setup_migrate.tpl:277 setup/setup_migrate.tpl:331
-#, fuzzy
 msgid "After migration"
-msgstr "Administration des utilisateurs"
+msgstr "Après migration"
 
 #: setup/setup_migrate.tpl:314
 msgid ""
 "The listed users are currenlty invisble in the GOsa user interface. If you "
 "want to change this for a couple of users, just select them and use the "
 "'Migrate' button below."
-msgstr ""
+msgstr "Les utilisateurs listés sont actuellement invisibles dans l'interface utilisateur de GOsa. Si vous voulez changer ceci pour un ensemble d'utilisateurs, veuillez les sélectionner et utiliser le bouton 'migration' ci dessous."
 
 #: setup/class_setupStep_Config1.inc:73 setup/class_setupStep_Config1.inc:74
-#, fuzzy
 msgid "GOsa settings 1/3"
-msgstr "Paramètres de messagerie"
+msgstr "Paramètres de GOsa 1/3"
 
 #: setup/class_setupStep_Config1.inc:75
-#, fuzzy
 msgid "GOsa generic settings"
-msgstr "Préférences utilisateur"
+msgstr "Préférences de base GOsa"
 
 #: setup/class_setupStep_Config1.inc:117
-#, fuzzy, php-format
+#, php-format
 msgid "The specified value for '%s' must be a numeric value"
-msgstr "Le valeur spécifiée pour '%s' doit être une numérique."
+msgstr "Le valeur spécifiée pour '%s' doit être une valeur numérique."
 
 #: setup/class_setupStep_Config1.inc:117 setup/setup_config1.tpl:85
 msgid "GID / UID min id"
-msgstr ""
+msgstr "GID / UID id min"
 
 #: setup/class_setupStep_Config1.inc:121 setup/class_setupStep_Config1.inc:125
 #, php-format
 msgid "Don't add a trailing comma to '%s'."
-msgstr ""
+msgstr "N'ajoutez pas une virgule à la fin de '%s'."
 
 #: setup/class_setupStep_Config1.inc:121
 #: ihtml/themes/default/setup_step4.tpl:43
@@ -15381,276 +15276,235 @@ msgid "Group storage ou"
 msgstr "Branches de l'arbre ldap ou sont stockes les groupes"
 
 #: setup/class_setupStep_Config1.inc:129
-#, fuzzy
 msgid "Uid base must be numeric"
-msgstr "Le délai d'attente doit être un chiffre"
+msgstr "l'uid de base doit être une valeur numérique"
 
 #: setup/class_setupStep_Config1.inc:133
-#, fuzzy
 msgid "The given password minimum length is not numeric."
-msgstr "Le port sieve doit être numérique."
+msgstr "La longueur minimale du mot de passe n'est pas une valeur numérique."
 
 #: setup/class_setupStep_Config1.inc:136
-#, fuzzy
 msgid "The given password differ value is not numeric."
-msgstr "Le port sieve doit être numérique."
+msgstr "L'option password differ n'est pas une valeur numérique."
 
 #: setup/setup_language.tpl:3
-#, fuzzy
 msgid "Please select the preferred language"
-msgstr "Veuillez sélectionner une imprimante ou cliquez sur annuler."
+msgstr "Veuillez sélectionner la langue par défaut"
 
 #: setup/setup_language.tpl:5
 msgid ""
 "At this point, you can select the site wide default language. Choosing "
 "'automatic' will use the language requested by the browser. This setting can "
 "be overriden per user."
-msgstr ""
+msgstr "Maintenant vous pouvez choisir la langue par défaut pour GOSa. Automatique utilisera la langue demandée par le navigateur. Ce paramètre peut être configuré par utilisateur."
 
 #: setup/setup_language.tpl:9
-#, fuzzy
 msgid "Please your preferred language here"
-msgstr "Veuillez indiquer une chaîne de caractères a chercher"
+msgstr "Veuillez indiquer votre langue préférée ici"
 
 #: setup/setup_config3.tpl:2
-#, fuzzy
 msgid "GOsa core settings"
-msgstr "Préférences utilisateur"
+msgstr "Paramètres essentiels de GOsa"
 
 #: setup/setup_config3.tpl:6
-#, fuzzy
 msgid "Disable primary group filter"
-msgstr "Afficher les groupes contenant des utilisateurs"
+msgstr "Désactiver le filtre sur les groupes primaires"
 
 #: setup/setup_config3.tpl:18
-#, fuzzy
 msgid "Honour administrative units"
-msgstr "Administration du groupe"
+msgstr "Honorer les entités administratives"
 
 #: setup/setup_config3.tpl:30
-#, fuzzy
 msgid "Smarty compile directory"
-msgstr "Répertoire Home"
+msgstr "Répertoire de compilation de smarty"
 
 #: setup/setup_config3.tpl:39
-#, fuzzy
 msgid "Path for PPD storage"
-msgstr "Format de stockage des mots de passe"
+msgstr "Répertoire pour le stockage des PPD"
 
 #: setup/setup_config3.tpl:55
-#, fuzzy
 msgid "Path for kiosk profile storage"
-msgstr "Paramètres du profil Kiosk"
+msgstr "Répertoire pour le stockage des profiles kiosk"
 
 #: setup/setup_config3.tpl:74
-#, fuzzy
 msgid "Network resolv hook"
-msgstr "Adresse réseau"
+msgstr ""
 
 #: setup/setup_config3.tpl:92
-#, fuzzy
 msgid "Mail queue script"
-msgstr "Queue du serveur de messagerie"
+msgstr "Script pour la gestion de la queue du serveur de messagerie"
 
 #: setup/setup_config3.tpl:110
-#, fuzzy
 msgid "Notification script"
-msgstr "Période de notification pour les systèmes"
+msgstr "Script de notification"
 
 #: setup/setup_config3.tpl:126
 msgid "Login and session"
-msgstr ""
+msgstr "connexion et session"
 
 #: setup/setup_config3.tpl:129
 msgid "Enforce register_globals to be deactivated"
-msgstr ""
+msgstr "Force register_globals à être désactivé"
 
 #: setup/setup_config3.tpl:141
-#, fuzzy
 msgid "Enforce encrypted connections"
-msgstr "Bloquer les archives encryptées"
+msgstr "Force les connexions cryptées"
 
 #: setup/setup_config3.tpl:153
-#, fuzzy
 msgid "Warn if session is not encrypted"
-msgstr "La session ne sera pas cryptée."
+msgstr "Avertir si la session ne sera pas cryptée"
 
 #: setup/setup_config3.tpl:165
-#, fuzzy
 msgid "Session lifetime"
-msgstr "Conflit détecté entre différentes sessions"
+msgstr "Durée de vie de la session"
 
 #: setup/setup_config3.tpl:173
-#, fuzzy
 msgid "Debugging"
-msgstr "Activer le deboguage"
+msgstr "Deboguage"
 
 #: setup/setup_config3.tpl:177
-#, fuzzy
 msgid "Show PHP errors"
-msgstr "Erreur PHP"
+msgstr "Afficher les erreur PHP"
 
 #: setup/setup_config3.tpl:189
-#, fuzzy
 msgid "Maximum LDAP query time"
-msgstr "Taille maximum des fichiers"
+msgstr "Durée maximale d'une requête LDAP"
 
 #: setup/setup_config3.tpl:207
 msgid "Log LDAP statistics"
 msgstr ""
 
 #: setup/setup_config3.tpl:219
-#, fuzzy
 msgid "Debug level"
-msgstr "Log Level"
+msgstr "Niveau de débogage"
 
 #: setup/setup_config3.tpl:224 setup/setup_config3.tpl:227
-#, fuzzy
 msgid "Disabled"
-msgstr "désactivé"
+msgstr "Désactivé"
 
 #: setup/setup_config3.tpl:225 setup/setup_config3.tpl:228
-#, fuzzy
 msgid "Enabled"
-msgstr "désactivé"
+msgstr "Activé"
 
 #: setup/class_setupStep_Feedback.inc:91
 msgid "UNIX accounts/groups"
-msgstr ""
+msgstr "Compte / Groupes UNIX"
 
 #: setup/class_setupStep_Feedback.inc:93
-#, fuzzy
 msgid "Samba management"
-msgstr "Administration du système"
+msgstr "Gestion SAMBA"
 
 #: setup/class_setupStep_Feedback.inc:95
-#, fuzzy
 msgid "Mailsystem management"
-msgstr "Administration du système"
+msgstr "Gestion de la messagerie"
 
 #: setup/class_setupStep_Feedback.inc:97
-#, fuzzy
 msgid "FAX system administration"
-msgstr "Administration des utilisateurs"
+msgstr "Gestion des FAX"
 
 #: setup/class_setupStep_Feedback.inc:99
-#, fuzzy
 msgid "Asterisk administration"
-msgstr "Administration des utilisateurs"
+msgstr "Gestion d'asterisk"
 
 #: setup/class_setupStep_Feedback.inc:101
-#, fuzzy
 msgid "System inventory"
-msgstr "Supprimer l'inventaire"
+msgstr "Gestion de l'inventaire"
 
 #: setup/class_setupStep_Feedback.inc:103
-#, fuzzy
 msgid "System-/Configmanagement"
-msgstr "Administration du système"
+msgstr "Gestion Système / Configuration"
 
 #: setup/class_setupStep_Feedback.inc:111
 #: setup/class_setupStep_Feedback.inc:113
 msgid "Notification and feedback"
-msgstr ""
+msgstr "Notification et feedback"
 
 #: setup/class_setupStep_Feedback.inc:112
-#, fuzzy
 msgid "Get notifications or send feedback"
-msgstr "Commandes pour la notification des systèmes"
+msgstr "Recevoir des notifications et des feedback"
 
 #: setup/class_setupStep_Feedback.inc:140
 #, php-format
 msgid ""
 "Could not connect to feedback server (%s). There is possibly no connection "
 "to the internet."
-msgstr ""
+msgstr "Impossible de se connecter au serveur (%s) pour envoyer le feedback. Il n'y a probablement pas de connexion internet."
 
 #: setup/class_setupStep_Feedback.inc:147
 msgid ""
 "Error while sending your feedback. The service is possible temporary "
 "unavailable"
-msgstr ""
+msgstr "Erreur lors de l'envoi de votre feedback. Le service est temporairement hors service"
 
 #: setup/class_setupStep_Feedback.inc:149
 msgid "Feedback sucessfully send"
-msgstr ""
+msgstr "L'envoi du feedback à réussi"
 
 #: setup/class_setupStep_Feedback.inc:183
 msgid ""
 "You should have enabled at least one option, to subscribe or send your "
 "feedback."
-msgstr ""
+msgstr "Vous devez au moins avoir activé une option, pour souscrire ou envoyer votre feedback."
 
 #: setup/class_setup.inc:210
-#, fuzzy
 msgid "Completed"
-msgstr "incomplet"
+msgstr "Terminé"
 
 #: setup/class_setupStep_Migrate.inc:105 setup/class_setupStep_Migrate.inc:106
-#, fuzzy
 msgid "LDAP inspection"
-msgstr "Vérification de l'installation de PHP"
+msgstr "Vérification de l'annuaire LDAP"
 
 #: setup/class_setupStep_Migrate.inc:107
 msgid "Analyze your current LDAP for GOsa compatibility"
-msgstr ""
+msgstr "Analyse de votre annuaire LDAP pour la compatibilité avec GOsa"
 
 #: setup/class_setupStep_Migrate.inc:113
-#, fuzzy
 msgid "Checking for root object"
-msgstr "Vérification du support iconv"
+msgstr "Recherche de l'objet racine"
 
 #: setup/class_setupStep_Migrate.inc:119
 msgid "Checking permissions on LDAP database"
-msgstr ""
+msgstr "Vérification des permissions sur l'annuaire LDAP"
 
 #: setup/class_setupStep_Migrate.inc:125
-#, fuzzy
 msgid "Checking for invisible deparmtments"
-msgstr "Vérification du support iconv"
+msgstr "Vérification des départements invisibles"
 
 #: setup/class_setupStep_Migrate.inc:131
-#, fuzzy
 msgid "Checking for invisible users"
-msgstr "Vérification du support iconv"
+msgstr "Vérification des utilisateurs invisibles"
 
 #: setup/class_setupStep_Migrate.inc:137
-#, fuzzy
 msgid "Checking for super administrator"
-msgstr "Vérification de programmes additionnels"
+msgstr "Vérification du superadministrateur"
 
 #: setup/class_setupStep_Migrate.inc:143
-#, fuzzy
 msgid "Checking for users outside the people tree"
-msgstr "Vérification du module cups"
+msgstr "Vérification d'utilisateurs en dehors de la branche people"
 
 #: setup/class_setupStep_Migrate.inc:149
-#, fuzzy
 msgid "Checking for groups outside the groups tree"
-msgstr "Vérification du module cups"
+msgstr "Vérification des groupes en dehors de la branche groups"
 
 #: setup/class_setupStep_Migrate.inc:155
 msgid "Checking for windows workstations outside the winstation tree"
-msgstr ""
+msgstr "Vérification de stations windows en dehors de la branche winstation"
 
 #: setup/class_setupStep_Migrate.inc:161
-#, fuzzy
 msgid "Checking for duplicate uid numbers"
-msgstr "Vérification du module LDAP"
+msgstr "Vérification pour les uid en double"
 
 #: setup/class_setupStep_Migrate.inc:167
-#, fuzzy
 msgid "Checking for duplicate gid numbers"
-msgstr "Vérification du module LDAP"
+msgstr "Vérification pour les gid en double"
 
 #: setup/class_setupStep_Migrate.inc:190 setup/class_setupStep_Migrate.inc:239
 #: setup/class_setupStep_Migrate.inc:301 setup/class_setupStep_Migrate.inc:362
 #: setup/class_setupStep_Migrate.inc:429 setup/class_setupStep_Migrate.inc:503
 #: setup/class_setupStep_Migrate.inc:587 setup/class_setupStep_Migrate.inc:717
 #: setup/class_setupStep_Migrate.inc:807
-#, fuzzy
 msgid "LDAP query failed"
-msgstr "La requête Mysql à échoué."
+msgstr "La requête LDAP à échoué"
 
 #: setup/class_setupStep_Migrate.inc:191 setup/class_setupStep_Migrate.inc:240
 #: setup/class_setupStep_Migrate.inc:302 setup/class_setupStep_Migrate.inc:363
@@ -15658,17 +15512,17 @@ msgstr "La requête Mysql à échoué."
 #: setup/class_setupStep_Migrate.inc:588 setup/class_setupStep_Migrate.inc:718
 #: setup/class_setupStep_Migrate.inc:808
 msgid "Possibly the 'root object' is missing."
-msgstr ""
+msgstr "L'objet racine est probablement manquant."
 
 #: setup/class_setupStep_Migrate.inc:213
-#, fuzzy, php-format
+#, php-format
 msgid "Found %s duplicate values for attribute 'uidNumber'."
-msgstr "Valeur dupliquée trouvée pour l'enregistrement de type '%s'."
+msgstr "J'ai trouvé %s valeur dupliquées pour l'attribut 'uidNumber'."
 
 #: setup/class_setupStep_Migrate.inc:262
-#, fuzzy, php-format
+#, php-format
 msgid "Found %s duplicate values for attribute 'gidNumber'."
-msgstr "Valeur dupliquée trouvée pour l'enregistrement de type '%s'."
+msgstr "J'ai trouvé %s valeur dupliquées pour l'attribut 'gidNumber'."
 
 #: setup/class_setupStep_Migrate.inc:317 setup/class_setupStep_Migrate.inc:517
 #: setup/class_setupStep_Migrate.inc:530 setup/class_setupStep_Migrate.inc:857
@@ -15680,160 +15534,149 @@ msgstr "Echec"
 #: setup/class_setupStep_Migrate.inc:319
 #, php-format
 msgid "Found %s winstations outside the predefined winstation department ou '%s'."
-msgstr ""
+msgstr "J'ai trouvé %s winstations en dehors du département winstation prédéfini '%s'."
 
 #: setup/class_setupStep_Migrate.inc:320 setup/class_setupStep_Migrate.inc:598
 #: setup/class_setupStep_Migrate.inc:727
-#, fuzzy
 msgid "Migrate"
-msgstr "Créer"
+msgstr "Migrer"
 
 #: setup/class_setupStep_Migrate.inc:386
 #, php-format
 msgid "Found %s groups outside the configured tree '%s'."
-msgstr ""
+msgstr "J'ai trouvé %s groupes en dehors de la branche configurée '%s'."
 
 #: setup/class_setupStep_Migrate.inc:387 setup/class_setupStep_Migrate.inc:463
-#, fuzzy
 msgid "Move"
-msgstr "Mode"
+msgstr "Bouger"
 
 #: setup/class_setupStep_Migrate.inc:462
 #, php-format
 msgid "Found %s user(s) outside the configured tree '%s'."
-msgstr ""
+msgstr "J'ai trouvé %s utilsateur(s) en dehors de la branche configurée '%s'."
 
 #: setup/class_setupStep_Migrate.inc:519 setup/class_setupStep_Migrate.inc:532
 #, php-format
 msgid "The specified user '%s' does not have full access to your ldap database."
-msgstr ""
+msgstr "L'utilisateur spécifié '%s' n'a pas l'accès complet à votre annuaire ldap."
 
 #: setup/class_setupStep_Migrate.inc:596
 #, php-format
 msgid "Found %s user(s) that will not be visible in GOsa."
-msgstr ""
+msgstr "J'ai trouvé %s utilisateur(s) qui ne seront pas visibles dans GOsa."
 
 #: setup/class_setupStep_Migrate.inc:646 setup/class_setupStep_Migrate.inc:778
 #, php-format
 msgid ""
 "Failed to migrate the department '%s' into GOsa, error message is as follows "
 "'%s'."
-msgstr ""
+msgstr "La migration du département '%s' dans GOsa à échoué, le message d'erreur est '%s'."
 
 #: setup/class_setupStep_Migrate.inc:726
 #, php-format
 msgid "Found %s department(s) that will not be visible in GOsa."
-msgstr ""
+msgstr "J'ai trouvé %s département(s) qui ne seront pas visible dans GOsa."
 
 #: setup/class_setupStep_Migrate.inc:858
 msgid "There is no GOsa administrator account inside your LDAP."
-msgstr ""
+msgstr "Il n'y a pas d'administrateur GOsa dans votre annuaire LDAP."
 
 #: setup/class_setupStep_Migrate.inc:918
 msgid "Appending user to to group administrational group: \n"
-msgstr ""
+msgstr "Ajout de l'utilisateur au groupe d'administration: \n"
 
 #: setup/class_setupStep_Migrate.inc:919
-#, fuzzy
 msgid "Before"
-msgstr "Rafraichir"
+msgstr "Avant"
 
 #: setup/class_setupStep_Migrate.inc:922
-#, fuzzy
 msgid "After"
-msgstr "Autres"
+msgstr "Après"
 
 #: setup/class_setupStep_Migrate.inc:929 setup/class_setupStep_Migrate.inc:958
-#, fuzzy, php-format
+#, php-format
 msgid "Adding acls for user '%s' failed, ldap says '%s'."
-msgstr "Echec lors de l'ajout d'un verrou. Le serveur LDAP répond '%s'."
+msgstr "L'ajout des acls pour l'utilisateur '%s' à échoué, Le serveur LDAP répond '%s'."
 
 #: setup/class_setupStep_Migrate.inc:949
-#, fuzzy
 msgid ""
 "Creating new administrational group: \n"
 "\n"
-msgstr "Créer un compte netatalk"
+msgstr "Créer un nouveau compte administratif: \n\n"
 
 #: setup/class_setupStep_Migrate.inc:985
 msgid "Specified passwords are empty or not equal."
-msgstr ""
+msgstr "Les mots de passe sont vides ou pas égaux."
 
 #: setup/class_setupStep_Migrate.inc:990
-#, fuzzy
 msgid "Please specify a valid uid."
-msgstr "Veuillez indiquer un iSerial valide."
+msgstr "Veuillez indiquer un uid valide."
 
 #: setup/class_setupStep_Migrate.inc:1032
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Could not add administrative user, there is already an object with the same "
 "dn '%s' in your ldap database."
-msgstr ""
-"Impossible de renommer '%s' en '%s' il y a déjà une entrée avec le même nom "
-"dans la page d'édition de la zone."
+msgstr "Impossible d'ajouter un utilisateur administratif, il y a déjà une entrée avec le même dn '%s' dans votre annuaire ldap."
 
 #: setup/class_setupStep_Migrate.inc:1070
 #: setup/class_setupStep_Migrate.inc:1118
 #: setup/class_setupStep_Migrate.inc:1166
-#, fuzzy
 msgid "Couldn't move users to specified department."
-msgstr "Impossible d'ouvrir le certificat demandé!"
+msgstr "Impossible de bouger les utilisateurs vers le département spécifié."
 
 #: setup/class_setupStep_Migrate.inc:1080
 msgid "Winstation will be moved from"
-msgstr ""
+msgstr "Les stations windows seront bougées depuis"
 
 #: setup/class_setupStep_Migrate.inc:1080
 #: setup/class_setupStep_Migrate.inc:1128
 #: setup/class_setupStep_Migrate.inc:1176
-#, fuzzy
 msgid "to"
-msgstr "automatique"
+msgstr "vers"
 
 #: setup/class_setupStep_Migrate.inc:1091
 #: setup/class_setupStep_Migrate.inc:1139
 msgid "Updating following references too"
-msgstr ""
+msgstr "Mise à jour des références suivantes aussi"
 
 #: setup/class_setupStep_Migrate.inc:1128
 msgid "Group will be moved from"
-msgstr ""
+msgstr "Les groupes seront bougés depuis"
 
 #: setup/class_setupStep_Migrate.inc:1176
 msgid "User will be moved from"
-msgstr ""
+msgstr "Les utilisateurs seront bougés depuis"
 
 #: setup/class_setupStep_Migrate.inc:1186
 msgid "The following references will be updated"
-msgstr ""
+msgstr "Les références suivantes seront mises à jour"
 
 #: setup/class_setupStep_Migrate.inc:1592
 msgid "The LDAP root object is missing. It is required to use your LDAP service."
-msgstr ""
+msgstr "L'objet LDAP racine est manquant. Il est indispensable pour utiliser votre annuaire LDAP."
 
 #: setup/class_setupStep_Migrate.inc:1593
 #: setup/class_setupStep_Migrate.inc:1606
 msgid "Try to create root object"
-msgstr ""
+msgstr "Essai de création de l'objet racine"
 
 #: setup/class_setupStep_Migrate.inc:1605
 msgid "Root object couldn't be created, you should try it on your own."
-msgstr ""
+msgstr "L'objet racine n'a pas pu être crée, vous devrez essayer vous même."
 
 #: setup/class_setupStep_Migrate.inc:1895
 #, php-format
 msgid "Failed to copy '%s' to '%s'. LDAP says '%s'."
-msgstr ""
+msgstr "La copie de '%s' vers '%s' à échoué. L'annuaire LDAP dit '%s'."
 
 #: setup/class_setupStep_Migrate.inc:1898
 msgid "Something went wrong while copying dns."
-msgstr ""
+msgstr "Une erreur s'est produite lors de la copie du dns."
 
 #: setup/setup_finish.tpl:3
-#, fuzzy
 msgid "Create your configuration file"
-msgstr "Fichier de configuration"
+msgstr "Création du fichier de configuration"
 
 #: setup/setup_finish.tpl:13 ihtml/themes/default/setup_finish.tpl:17
 #: ihtml/themes/altlinux/setup_finish.tpl:17
@@ -15841,130 +15684,112 @@ msgid "Download configuration"
 msgstr "Télécharger la configuration"
 
 #: setup/setup_finish.tpl:18
-#, fuzzy
 msgid "Status: "
-msgstr "Statut"
+msgstr "Statut: "
 
 #: setup/setup_schema.tpl:3
-#, fuzzy
 msgid "Schema specific settings"
-msgstr "Configuration Samba"
+msgstr "Paramètres spécifiques des schémas"
 
 #: setup/setup_schema.tpl:7
 msgid "Enable schema validation when logging in"
-msgstr ""
+msgstr "Activer la validation des schéma lors de la connexion"
 
 #: setup/setup_schema.tpl:16
-#, fuzzy
 msgid "Check status"
-msgstr "avec les statuts"
+msgstr "Vérifier les statuts"
 
 #: setup/setup_schema.tpl:20
 msgid "Schema check succeeded"
-msgstr ""
+msgstr "La vérification des schéma à réussi"
 
 #: setup/setup_schema.tpl:23
-#, fuzzy
 msgid "Schema check failed"
-msgstr "La sauvegarde du téléphone à échoué"
+msgstr "La vérification des schéma à échoué"
 
 #: setup/class_setupStep_Config2.inc:74 setup/class_setupStep_Config2.inc:75
-#, fuzzy
 msgid "GOsa settings 2/3"
-msgstr "Paramètres de messagerie"
+msgstr "Paramètres de GOsa 2/3"
 
 #: setup/class_setupStep_Config2.inc:76
-#, fuzzy
 msgid "Customize special parameters"
-msgstr "Vérifier le paramètre"
+msgstr "Customiser les paramètres spéciaux"
 
 #: setup/setup_config1.tpl:2
 msgid "Look and feel"
 msgstr ""
 
 #: setup/setup_config1.tpl:6
-#, fuzzy
 msgid "Theme"
-msgstr "Modèle"
+msgstr "Thème"
 
 #: setup/setup_config1.tpl:15
-#, fuzzy
 msgid "People and group storage"
-msgstr "Branches de l'arbre ldap ou sont stockes les utilisateurs"
+msgstr "Branches de l'arbre ldap ou sont stockes les utilisateurs et les groupes"
 
 #: setup/setup_config1.tpl:18
-#, fuzzy
 msgid "People DN attribute"
 msgstr "Type d'attribut pour le DN des utilisateurs"
 
 #: setup/setup_config1.tpl:29
-#, fuzzy
 msgid "People storage subtree"
 msgstr "Branches de l'arbre ldap ou sont stockes les utilisateurs"
 
 #: setup/setup_config1.tpl:38
-#, fuzzy
 msgid "Group storage subtree"
 msgstr "Branches de l'arbre ldap ou sont stockes les groupes"
 
 #: setup/setup_config1.tpl:47
 msgid "Include personal title in user DN"
-msgstr ""
+msgstr "Inclure le personal title dans le DN de l'utilisateur"
 
 #: setup/setup_config1.tpl:58
 msgid "Relaxed naming policies"
-msgstr ""
+msgstr "Règles de de nommage souples"
 
 #: setup/setup_config1.tpl:69
-#, fuzzy
 msgid "Automatic uids"
-msgstr "automatique"
+msgstr "Uid automatiques"
 
 #: setup/setup_config1.tpl:101
-#, fuzzy
 msgid "Number base for people/groups"
-msgstr "ID de départ pour les utilisateurs/groupes"
+msgstr "Nombre de départ pour les utilisateurs/groupes"
 
 #: setup/setup_config1.tpl:109
 msgid "Hook for number base"
 msgstr ""
 
 #: setup/setup_config1.tpl:124
-#, fuzzy
 msgid "Password settings"
-msgstr "Préférences utilisateur"
+msgstr "Préférences pour les mots de passe"
 
 #: setup/setup_config1.tpl:128
-#, fuzzy
 msgid "Password encryption algorithm"
-msgstr "Algorithme de cryptage"
+msgstr "Algorithme de cryptage pour les mots de passe"
 
 #: setup/setup_config1.tpl:139
-#, fuzzy
 msgid "Password restrictions"
-msgstr "Le mot de passe expirera le"
+msgstr "Restrictions pour les mot de passe"
 
 #: setup/setup_config1.tpl:146 setup/setup_config1.tpl:150
 msgid "Password minimum length"
-msgstr ""
+msgstr "Taille minimum des mots de passe"
 
 #: setup/setup_config1.tpl:157 setup/setup_config1.tpl:161
 msgid "Different characters from old password"
-msgstr ""
+msgstr "Nombre de caractères différents de l'ancien mot de passe"
 
 #: setup/setup_config1.tpl:170
-#, fuzzy
 msgid "Password change hook"
-msgstr "Le changement du mot de passe n'est pas autorisé"
+msgstr ""
 
 #: setup/setup_config1.tpl:186
 msgid "Use SASL for kerberos"
-msgstr ""
+msgstr "Utiliser SASL pour kerberos"
 
 #: setup/setup_config1.tpl:197
-#, fuzzy
 msgid "Use account expiration"
-msgstr "Le compte expire après"
+msgstr "Utiliser l'expiration du compte"
 
 #: setup/setup_config1.tpl:209 ihtml/themes/default/setup_step4.tpl:67
 #: ihtml/themes/altlinux/setup_step4.tpl:67
@@ -15978,7 +15803,6 @@ msgstr ""
 "pouvez spécifier ici une méthode qui sera utilisée par défaut."
 
 #: setup/setup_config1.tpl:210
-#, fuzzy
 msgid ""
 "GOsa always acts as admin and manages access rights internally. This is a "
 "workaround till OpenLDAP's in directory ACI's are    fully implemented. For "
@@ -16002,7 +15826,6 @@ msgstr ""
 "afin quelles correspondent à vos besoins."
 
 #: setup/setup_config1.tpl:212
-#, fuzzy
 msgid ""
 "GOsa has modular support for several mail methods. These methods provide "
 "interfaces to users mailboxes and general handling    for quotas. You can "
