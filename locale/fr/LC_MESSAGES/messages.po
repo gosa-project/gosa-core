@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-05-25 11:42+0200\n"
-"PO-Revision-Date: 2007-05-28 14:15+0200\n"
+"PO-Revision-Date: 2007-05-28 20:44+0200\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team: Français <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -6964,11 +6964,11 @@ msgstr "Serveur Cups"
 
 #: plugins/admin/systems/class_divListSystem.inc:123
 msgid "Log Db"
-msgstr "Base de données de logs"
+msgstr "Base de données des journaux systèmes"
 
 #: plugins/admin/systems/class_divListSystem.inc:124
 msgid "Syslog Server"
-msgstr "Serveur de logs systèmes"
+msgstr "Serveur de journaux systèmes"
 
 #: plugins/admin/systems/class_divListSystem.inc:125
 msgid "Mail Server"
@@ -7032,7 +7032,7 @@ msgstr "Services de terminaux"
 
 #: plugins/admin/systems/servservice.tpl:75
 msgid "Temporary disable login"
-msgstr "Désactiver temporairement le login"
+msgstr "Désactiver temporairement l'identifiant"
 
 #: plugins/admin/systems/servservice.tpl:78
 msgid "Font path"
@@ -7040,7 +7040,7 @@ msgstr "Répertoire des polices de caractères"
 
 #: plugins/admin/systems/servservice.tpl:91
 msgid "Syslog Service"
-msgstr "Service de logs systèmes"
+msgstr "Service de journaux systèmes"
 
 #: plugins/admin/systems/servservice.tpl:99
 msgid "Print Service"
@@ -7052,7 +7052,7 @@ msgstr "Serveur de messagerie"
 
 #: plugins/admin/systems/printerPPDDialog.tpl:1
 msgid "Printer driver"
-msgstr "Pilote d'Imprimante"
+msgstr "Pilote d'imprimante"
 
 #: plugins/admin/systems/printerPPDDialog.tpl:6
 msgid "Select"
@@ -7117,9 +7117,7 @@ msgstr ""
 #: plugins/admin/systems/class_servKolab.inc:96
 #, php-format
 msgid "Warn users when using more than %s%% of their mail quota"
-msgstr ""
-"Avertissez les utilisateurs quand ils utilsent plus de %s%% de leur quota "
-"mail"
+msgstr "Avertissez les utilisateurs quand ils utilisent plus de %s%% de leur quota de messagerie"
 
 #: plugins/admin/systems/class_servKolab.inc:111
 msgid "Remove Kolab extension"
@@ -7155,7 +7153,7 @@ msgstr "La suppression du serveur de l'objet kolab à échoué"
 
 #: plugins/admin/systems/class_servKolab.inc:250
 msgid "Future days in Free/Busy settings must be set."
-msgstr "Le paramètre journées futures doit être rempli."
+msgstr "Le paramètre journées futures doit être remplit."
 
 #: plugins/admin/systems/class_servKolab.inc:252
 msgid "Future days in Free/Busy settings must be a positive value."
@@ -7171,11 +7169,11 @@ msgstr "Veuillez choisir un nombre entre 1 et 100 pour les quotas."
 
 #: plugins/admin/systems/class_servKolab.inc:260
 msgid "Future days must be a value."
-msgstr "Le nombre de journées dans le futur doit être une valeur."
+msgstr "Le nombre de journées dans le futur doit être une nombre positif."
 
 #: plugins/admin/systems/class_servKolab.inc:264
 msgid "No SMTP privileged networks set."
-msgstr "pas de réseaux SMTP privilégiés indiqués."
+msgstr "Pas de réseaux SMTP privilégiés indiqués."
 
 #: plugins/admin/systems/class_servKolab.inc:336
 msgid "Saving server to kolab object failed"
@@ -7358,7 +7356,7 @@ msgstr "Enregistrement de zone"
 
 #: plugins/admin/systems/servdnseditzone.tpl:27
 msgid "Can't be edited because the zone wasn't saved right now."
-msgstr "Impossible d'éditer la zone car elle est actuellement éditée."
+msgstr "Impossible d'éditer la zone car elle est actuellement sauvegardée."
 
 #: plugins/admin/systems/servdnseditzone.tpl:39
 msgid "SOA record"
@@ -7387,7 +7385,7 @@ msgstr "Réessayer"
 
 #: plugins/admin/systems/servdnseditzone.tpl:79
 msgid "Expire"
-msgstr "Expire"
+msgstr "Expirer"
 
 #: plugins/admin/systems/servdnseditzone.tpl:100
 msgid "MxRecords"
@@ -7481,7 +7479,7 @@ msgstr "Activer le deboguage"
 
 #: plugins/admin/systems/goVirusServer.tpl:76
 msgid "Enable mail scanning"
-msgstr "Activer la vérification de la messagerie"
+msgstr "Activer la vérification antivirus de la messagerie"
 
 #: plugins/admin/systems/goVirusServer.tpl:85
 msgid "Archive scanning"
@@ -7570,10 +7568,7 @@ msgstr "Cartouches installés"
 msgid ""
 "This may be used by several groups. Please double check if your really want "
 "to do this since there is no way for GOsa to get your data back."
-msgstr ""
-"Cela peut être utilisé par plusieurs groupes. Veuillez vérifier que vous "
-"voulez effectuer cette opération. Toutes les données seront perdues étant "
-"donné qu'il est impossible pour GOsa de récupérer vos données."
+msgstr "Cela peut être utilisé par plusieurs groupes. Veuillez vérifier que vous voulez effectuer cette opération étant donné qu'il est impossible pour GOsa de récupérer vos données."
 
 #: plugins/admin/applications/class_divListApplication.inc:29
 msgid "List of Applications"
@@ -7581,7 +7576,7 @@ msgstr "Liste des applications"
 
 #: plugins/admin/applications/class_divListApplication.inc:30
 msgid "This table displays all applications in the selected tree."
-msgstr "Ce tableau montre tous les départements, dans l'arbre sélectionné."
+msgstr "Ce tableau montre toutes les applications dans l'arbre sélectionné."
 
 #: plugins/admin/applications/class_divListApplication.inc:34
 msgid ""
@@ -7633,11 +7628,11 @@ msgstr "La suppression de l'application du groupe '%s' à échoué"
 
 #: plugins/admin/applications/class_applicationGeneric.inc:267
 msgid "The specified picture has not been uploaded correctly."
-msgstr "L'image spécifiée n'as pas été télé-chargée correctement."
+msgstr "L'image spécifiée n'as pas été téléchargée correctement."
 
 #: plugins/admin/applications/class_applicationGeneric.inc:343
 msgid "Specified execute path must start with '/'."
-msgstr "Le répertoire d'éxecutiondoit commencer par '/'."
+msgstr "Le répertoire d'exécution doit commencer par '/'."
 
 #: plugins/admin/applications/class_applicationGeneric.inc:357
 msgid "You have no permissions to create a application on this 'Base'."
@@ -7812,8 +7807,7 @@ msgid ""
 msgstr ""
 "Cela inclut toutes les données des comptes, les droits d'accès, la "
 "configuration imap,etc. pour cet utilisateur. Veuillez vous assurez que vous "
-"voulez effectuez cette opération. Toutes les données seront perdues étant "
-"donné qu'il est impossible pour GOsa de récupérer vos données."
+"voulez effectuez cette opération étant donné qu'il est impossible pour GOsa de récupérer vos données."
 
 #: plugins/admin/users/template.tpl:2
 msgid "Creating a new user using templates"
@@ -7862,7 +7856,7 @@ msgstr "Vous êtes sur le point de supprimer l'utilisateur %s."
 #: plugins/admin/users/class_userManagement.inc:342
 #: plugins/admin/users/class_userManagement.inc:369
 msgid "You are not allowed to delete this user!"
-msgstr "Vous n'êtes pas autorisé à supprimer cette utilisateur!"
+msgstr "Vous n'êtes pas autorisé à supprimer cet utilisateur!"
 
 #: plugins/admin/users/class_userManagement.inc:553
 msgid "A person with the choosen name is already used in this tree."
@@ -8034,8 +8028,7 @@ msgid ""
 "your data back."
 msgstr ""
 "Ceci inclus tous les comptes systèmes, etc... dans cette branche. Veuillez "
-"vérifier si vous voulez réaliser cette opération. Toutes les données seront "
-"perdues, étant donné qu'il est impossible pour GOsa de récupérer vos données."
+"vérifier si vous voulez réaliser cette opération étant donné qu'il est impossible pour GOsa de récupérer vos données."
 
 #: plugins/admin/departments/dep_iframe.tpl:1
 #: plugins/admin/fai/faiNewBranch.tpl:35
@@ -8135,9 +8128,7 @@ msgstr "Le champ 'Nom' contient le mot réservé '%s'. Veuillez choisir un autre
 
 #: plugins/admin/departments/class_departmentGeneric.inc:285
 msgid "Fatal error: Can't find an unused tag to mark the administrative unit!"
-msgstr ""
-"Erreur fatale: Impossible de trouver un marqueur libre pour marquer l'entité "
-"administrative!"
+msgstr "Erreur fatale: Impossible de trouver un marqueur libre pour marquer l'entité administrative !"
 
 #: plugins/admin/departments/class_departmentGeneric.inc:330
 msgid "Saving department failed"
@@ -8186,9 +8177,7 @@ msgstr "Catégorie pour cette branche de l'annuaire"
 #: plugins/admin/departments/generic.tpl:30
 #: plugins/gofon/conference/generic.tpl:135
 msgid "Choose subtree to place department in"
-msgstr ""
-"Sélectionnez la branche de l'annuaire dans laquelle sera placée le "
-"département"
+msgstr "Sélectionnez la branche de l'annuaire dans laquelle sera placée le département"
 
 #: plugins/admin/departments/generic.tpl:51
 #: plugins/personal/generic/generic.tpl:291 html/getxls.php:174
@@ -8202,7 +8191,7 @@ msgstr "Lieu où est située cette branche de l'annuaire"
 
 #: plugins/admin/departments/generic.tpl:56
 msgid "Location of this subtree"
-msgstr "Localisation de cette branche"
+msgstr "Lieu de cette branche"
 
 #: plugins/admin/departments/generic.tpl:60
 msgid "Postal address of this subtree"
@@ -8305,7 +8294,7 @@ msgstr "Sélectionner pour afficher les groupes contenant des imprimantes"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:64
 msgid "Show groups containing printer"
-msgstr "Afficher les groupes contenant une/des imprimantes"
+msgstr "Afficher les groupes contenant des imprimantes"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:65
 msgid "Select to see groups containing phones"
@@ -8313,7 +8302,7 @@ msgstr "Sélectionner pour afficher les groupes contenant des téléphones"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:65
 msgid "Show groups containing phones"
-msgstr "Afficher les groupes contenant un/des téléphones"
+msgstr "Afficher les groupes contenant des téléphones"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:99
 msgid "Create new object group"
@@ -8413,7 +8402,7 @@ msgstr "Mettre l'option (FAIstate) pour l'objet '%s' à échoué, la valeur éta
 
 #: plugins/admin/ogroups/paste_mail.tpl:7
 msgid "Please enter a mail address"
-msgstr "Veuillez entrer un adresse email."
+msgstr "Veuillez entrer une adresse de messagerie"
 
 #: plugins/admin/ogroups/class_mailogroup.inc:48
 msgid "This group has mail features enabled. You can disable them by clicking below."
@@ -8450,7 +8439,7 @@ msgid ""
 "accounts."
 msgstr ""
 "Le serveur primaire spécifié '%s' n'est pas disponible dans la configuration "
-"serveur de GOsa. La sauvegarde de ce compte vas créer une nouvelle entrée "
+"serveur de GOsa. La sauvegarde de ce compte va créer une nouvelle entrée "
 "dans le serveur '%s'. Utilisez annuler si vous ne voulez pas créer un "
 "nouveau compte en ignorant les anciens comptes."
 
@@ -8472,7 +8461,7 @@ msgstr "le plus petit nombre d'appel réussi"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:126
 msgid "random"
-msgstr "au hazard"
+msgstr "au hasard"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:127
 msgid "round robin with memory"
@@ -8497,16 +8486,14 @@ msgid ""
 "mysql error."
 msgstr ""
 "Le serveur MySQL primaire '%s' n'est pas joignable avec l'utilisateur '%s', "
-"veuillez vérifier les logs GOsa pour les erreurs mysql."
+"veuillez vérifier les journaux systèmes GOsa pour les erreurs mysql."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:166
 #: plugins/gofon/macro/class_gofonMacro.inc:189
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:283
 #, php-format
 msgid "Can't select database '%s' on home server '%s'."
-msgstr ""
-"Impossible de sélectionner la base de données '%s' située sur le serveur '%"
-"s'."
+msgstr "Impossible de sélectionner la base de données '%s' située sur le serveur '%s'."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:178
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:295
@@ -8516,15 +8503,13 @@ msgid ""
 "log for mysql error."
 msgstr ""
 "Le serveur MySQL primaire '%s' n'est pas joignable avec l'utilisateur '%s', "
-"veuillez vérifier les logs GOsa pour les erreurs mysql."
+"veuillez vérifier les journaux systèmes GOsa pour les erreurs mysql."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:185
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:302
 #, php-format
 msgid "Can't select database '%s' on initial home server '%s'."
-msgstr ""
-"Impossible de sélectionner la base de données '%s' située sur le serveur '%"
-"s'."
+msgstr "Impossible de sélectionner la base de données '%s' située sur le serveur initial '%s'."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:211
 msgid "Remove the phone queue from this Account"
@@ -8559,23 +8544,23 @@ msgstr ""
 #: plugins/admin/ogroups/class_phonequeue.inc:301
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1116
 msgid "Please select a valid goFonHomeServer."
-msgstr "Veuillez sélectionner un serveur de téléphonique valide."
+msgstr "Veuillez sélectionner un serveur de téléphonique valide (goFonHomeServer)."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:307
 msgid "Timeout must be numeric"
-msgstr "Le délai d'attente doit être un chiffre"
+msgstr "Le délai d'attente doit être un nombre"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:310
 msgid "Retry must be numeric"
-msgstr "Le délai de rappel automatique doit être un chiffre"
+msgstr "Le délai de rappel automatique doit être un nombre"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:313
 msgid "Max queue length must be numeric"
-msgstr "La taille maximale de la queue doit être numérique"
+msgstr "La taille maximale de la queue doit être un nombre"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:316
 msgid "Announce frequency must be numeric"
-msgstr "La fréquence du message d'annonce doit être numérique"
+msgstr "La fréquence du message d'annonce doit être un nombre"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:319
 msgid "There must be least one queue number defined."
@@ -8607,7 +8592,7 @@ msgstr ""
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:395
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:407
 msgid "Please have a look a the gosa logfiles."
-msgstr "Veuillez regarder les logs de GOsa."
+msgstr "Veuillez regarder les journaux systèmes de GOsa."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:434
 msgid "Could not detect old queue entry, query failed."
@@ -8853,7 +8838,7 @@ msgstr "Permettre à la personne qui appelle de raccrocher en appuyant sur *"
 
 #: plugins/admin/ogroups/phonequeue.tpl:259
 msgid "Ring instead of playing background music"
-msgstr "Sonner au lieu de mettre un musique d'ambiance"
+msgstr "Sonner au lieu de mettre une musique d'ambiance"
 
 #: plugins/admin/ogroups/mail.tpl:7
 msgid "Mail distribution list"
@@ -8896,7 +8881,7 @@ msgstr "Le fichier spécifié est vide."
 #: plugins/admin/fai/class_faiTemplateEntry.inc:187
 #: plugins/admin/fai/class_faiVariableEntry.inc:97
 msgid "Please enter a name."
-msgstr " Veuillez entrer un nom."
+msgstr "Veuillez entrer un nom."
 
 #: plugins/admin/fai/class_faiScriptEntry.inc:132
 msgid "Please enter a script."
@@ -9012,7 +8997,7 @@ msgstr "Aucun dépôt ne fournit cette version '%s'."
 
 #: plugins/admin/fai/class_faiPackage.inc:343
 msgid "Removing FAI package base failed"
-msgstr "La suppression du package FAI de base à échoué"
+msgstr "La suppression du paquet FAI de base à échoué"
 
 #: plugins/admin/fai/class_faiPackage.inc:372
 msgid "Please select a least one Package."
@@ -9020,18 +9005,14 @@ msgstr "Veuillez sélectionner au moins un paquet."
 
 #: plugins/admin/fai/class_faiPackage.inc:376
 msgid "Please choose a valid combination for your repository setup."
-msgstr ""
-"Veuillez choisir une combinaison valable pour la création de votre dépôt de "
-"paquets."
+msgstr "Veuillez choisir une combinaison valable pour la création de votre dépôt de paquets."
 
 #: plugins/admin/fai/class_faiPackage.inc:389
 #, php-format
 msgid ""
 "Can't insert a fai package list named '%s' in '%s' there is already a "
 "package list with the given name."
-msgstr ""
-"Impossible d'insérer un paquet fai nommé '%s' dans '%s' il y a déjà un "
-"paquet avec le même nom."
+msgstr "Impossible d'insérer un paquet fai nommé '%s' dans '%s' il y a déjà un paquet avec le même nom."
 
 #: plugins/admin/fai/class_faiPackage.inc:411
 msgid "package is configured"
@@ -9044,11 +9025,11 @@ msgstr "Paquet marqué à enlever"
 #: plugins/admin/fai/class_faiPackage.inc:443
 #, php-format
 msgid "Package file '%s' does not exist."
-msgstr "Le paquets '%s' n'existe pas."
+msgstr "Le paquet '%s' n'existe pas."
 
 #: plugins/admin/fai/class_faiPackage.inc:507
 msgid "Saving FAI package base failed"
-msgstr "La sauvegarde du package FAI de base à échoué"
+msgstr "La sauvegarde du paquet FAI de base à échoué"
 
 #: plugins/admin/fai/class_faiPackage.inc:553
 msgid "Saving FAI package entry failed"
@@ -9056,7 +9037,7 @@ msgstr "La suppression de l'entrée du paquet FAI à échoué"
 
 #: plugins/admin/fai/class_faiPackageEntry.inc:30
 msgid "Please enter your search string here"
-msgstr "Veuillez indiquer une chaîne de caractères a chercher"
+msgstr "Veuillez indiquer une chaîne de caractères a rechercher"
 
 #: plugins/admin/fai/class_faiPackageEntry.inc:43
 msgid "This list displays all assigned package names for this repository settings."
@@ -9109,7 +9090,7 @@ msgstr ""
 #: plugins/admin/fai/class_faiManagement.inc:278
 #, php-format
 msgid "You're about to delete a fai branch / freeze  '%s'."
-msgstr "Vous êtes sur le point d'effacer / vérouiller la branche fai '%s'."
+msgstr "Vous êtes sur le point d'effacer une branche fai '%s'."
 
 #: plugins/admin/fai/class_faiManagement.inc:281
 msgid "You are not allowed to delete this release!"
@@ -9164,7 +9145,7 @@ msgstr "Options de montage"
 
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:205
 msgid "FS option"
-msgstr "option du système de fichier"
+msgstr "Option du système de fichier"
 
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:206
 msgid "Preserve"
@@ -9173,7 +9154,7 @@ msgstr "Préserver"
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:362
 #, php-format
 msgid "please enter a unique mount point for partition %s"
-msgstr "Veuillez entrer un point de montage unique pour la partition %s"
+msgstr "veuillez entrer un point de montage unique pour la partition %s"
 
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:367
 #, php-format
@@ -9185,9 +9166,7 @@ msgstr "Veuillez entrer un point de montage valide pour la partition %s."
 msgid ""
 "File system type 'swap' is already used, change file system type for "
 "partition %s."
-msgstr ""
-"Le système de fichier 'swap' est déjà utilisé, veuillez changer le type pour "
-"la partition %s."
+msgstr "Le système de fichier 'swap' est déjà utilisé, veuillez changer le type pour la partition %s."
 
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:376
 msgid "Please use 'swap' as mount point, if 'swap' is used as fs-type."
@@ -9299,8 +9278,7 @@ msgid ""
 msgstr ""
 "Cela inclut toutes les données des comptes, les droits d'accès, la "
 "configuration imap,etc. pour cette branche. Veuillez vous assurez que vous "
-"voulez effectuez cette opération. Toutes les données seront perdues étant "
-"donné qu'il est impossible pour GOsa de récupérer vos données."
+"voulez effectuez cette opération étant donné qu'il est impossible pour GOsa de récupérer vos données."
 
 #: plugins/admin/fai/class_faiHookEntry.inc:138
 msgid "Please enter a value for script."
@@ -9594,7 +9572,7 @@ msgstr "Montrer seulement les classes avec scripts"
 
 #: plugins/admin/fai/faiProfileEntry.tpl:43
 msgid "Show only classes with hooks"
-msgstr "Montrer seulement les classes avec une connection"
+msgstr "Montrer seulement les classes avec des hooks"
 
 #: plugins/admin/fai/faiProfileEntry.tpl:45
 msgid "Show only classes with variables"
@@ -9618,7 +9596,7 @@ msgstr "Disques"
 
 #: plugins/admin/fai/faiPartitionTable.tpl:40
 msgid "Choose a disk to delete or edit"
-msgstr "Choisissez un disque à effacer ou editer"
+msgstr "Choisissez un disque à effacer ou éditer"
 
 #: plugins/admin/fai/faiNewBranch.tpl:5
 msgid ""
