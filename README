@@ -9,9 +9,6 @@ in the way the underlying conecpts suppose them to be stored (i.e.
 people accounts are stored in "ou=people" subtrees, etc.) This can
 be configured marginally.
 
-Additionally, eGOsa is a java-applet based extension to GOsa made by
-Alejandro Escanero Blanco <alex@ofmin.com>.
-
 Complete setups applying Kerberos, AFS, LDAP, Mail, Proxy and Fax setups
 are not trivial at all. You should be familiar with these components and
 with your UNIX installation, of cause. This file is (and will not be)

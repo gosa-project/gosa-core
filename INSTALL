@@ -37,35 +37,6 @@ prerequisites. The setup asks some questions and provides a
 basic gosa.conf to save in /etc/gosa. Follow the instructions
 until you're able to log in.
 
-As a final step - which is not done automatically yet, you've to
-create a group which members will be GOsa administrators. Here's
-an example ldif which creates a user named "admin" with the password
-"tester" and a group where this user is in:
-
-dn: cn=admin,ou=people,dc=example,dc=net
-objectClass: person
-objectClass: organizationalPerson
-objectClass: inetOrgPerson
-objectClass: gosaAccount
-uid: admin
-cn: admin
-givenName: admin
-sn: GOsa main administrator
-lmPassword: 10974C6EFC0AEE1917306D272A9441BB
-ntPassword: 38F3951141D0F71A039CFA9D1EC06378
-userPassword:: dGVzdGVy
-
-dn: cn=administrators,ou=groups,dc=example,dc=net
-objectClass: gosaObject
-objectClass: posixGroup
-gosaSubtreeACL: :all
-cn: administrators
-gidNumber: 999
-memberUid: admin
-
-After adding these entries, you should be able to use GOsa. Log in as
-admin and try experiment with the GUI.
-
 
 * Migrating an existing tree
 
