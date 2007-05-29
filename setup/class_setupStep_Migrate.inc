@@ -915,7 +915,7 @@ class Step_Migrate extends setup_step
         }
 
         if($only_ldif){
-          $this->acl_create_changes = _("Appending user to group administrational group: \n");
+          $this->acl_create_changes = _("Appending user to group administrational group:")." \n";
           $this->acl_create_changes.= "\n"._("Before").":\n";
           $this->acl_create_changes.= $fetched_attrs['dn']."\n";
           $this->acl_create_changes.= $this->array_to_ldif($attrs_admin_group)."\n";
@@ -946,7 +946,7 @@ class Step_Migrate extends setup_step
         $new_group_attrs['memberUid'] = array($object_attrs['uid'][0]);
 
         if($only_ldif){
-          $this->acl_create_changes = _("Creating new administrational group: \n\n");
+          $this->acl_create_changes = _("Creating new administrational group:")." \n\n";
           $this->acl_create_changes.= $new_group_dn."\n";
           $this->acl_create_changes.= $this->array_to_ldif($new_group_attrs);
         }else{ 
