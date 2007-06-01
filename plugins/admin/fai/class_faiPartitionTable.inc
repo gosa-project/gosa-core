@@ -515,6 +515,9 @@ class faiPartitionTable extends plugin
           if(empty($partition_attrs['description'])){
             $partition_attrs['description']=array();
           }
+          if(empty($partition_attrs['FAIfsOptions'])){
+            $partition_attrs['FAIfsOptions']=array();
+          }
           $ldap->cd($partition_dn);
           $this->cleanup();
           $ldap->modify ($partition_attrs); 
