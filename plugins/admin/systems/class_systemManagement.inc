@@ -902,7 +902,7 @@ class systems extends plugin
       case 'install':
       case 'sysinfo':
       case 'softupdate':
-      case 'update':
+      case 'scheduledupdate':
                 $type= 'Y'.$type;
                 break;
     }

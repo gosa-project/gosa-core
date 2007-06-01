@@ -88,16 +88,16 @@ class grouptabs extends tabs
 	{
 		tabs::saveCopyDialog();
 		
-        /* Update reference, transfer variables */
-        $baseobject= $this->by_object['group'];
-        foreach ($this->by_object as $name => $obj){
-            /* Don't touch base object */
-            if ($name != 'group'){
-                $obj->parent= &$this;
-                $obj->cn= $baseobject->cn;
-                $this->by_object[$name]= $obj;
-            }
-        }
+		/* Update reference, transfer variables */
+		$baseobject= $this->by_object['group'];
+		foreach ($this->by_object as $name => $obj){
+			/* Don't touch base object */
+			if ($name != 'group'){
+				$obj->parent= &$this;
+				$obj->cn= $baseobject->cn;
+				$this->by_object[$name]= $obj;
+			}
+		}
 	}
 	
 }

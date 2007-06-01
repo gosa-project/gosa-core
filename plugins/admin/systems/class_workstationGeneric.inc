@@ -45,9 +45,9 @@ class workgeneric extends plugin
       "ghGfxAdapter", "ghSoundAdapter", "gotoLastUser", "l","FAIscript");
   var $objectclasses= array("top", "gotoWorkstation", "GOhard","FAIobject");
 
-  var $mapActions   = array("reboot"          => "localboot",
+  var $mapActions   = array("reboot"          => "",
                             "localboot"       => "localboot",
-                            "halt"            => "localboot",
+                            "halt"            => "",
                             "instant_update"  => "softupdate",
                             "update"          => "scheduledupdate",
                             "reinstall"       => "install",
@@ -158,8 +158,8 @@ class workgeneric extends plugin
             $res = $ldap->fetch();
 
             $attrs = array();
-            $attrs['FAIstate'] = "";
-            if(isset($this->mapActions[$_POST['saction']])){
+            $attrs['FAIstate'] = $this->FAIstate;
+            if(isset($this->mapActions[$_POST['saction']]) && $this->mapActions[$_POST['saction']] != ""){
               $attrs['FAIstate'] = $this->mapActions[$_POST ['saction']];
             }
 
