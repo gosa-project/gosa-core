@@ -191,7 +191,7 @@ class faiPartitionTableEntry extends plugin
   {
     /* Define Arrays with allowed syntax */
     $PartitionTypes   = array("primary"=>_("primary"),"logical"=>_("logical"));
-    $FAIfsTypes       = array("ext2","ext3","xfs","swap","reiserfs","dosfat16","winfat32");
+    $FAIfsTypes       = array("ext2","ext3","xfs","swap","reiser","dosfat16","winfat32");
 
     /* Display Header */
     $str = "<table summary='' style='width:100%'>";
