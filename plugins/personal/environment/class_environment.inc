@@ -1026,7 +1026,11 @@ class environment extends plugin
     /* Prepare HotPlug devices */
     $this->attrs['gotoHotplugDevice'] = array();
     foreach($this->gotoHotplugDevices as $name => $device){
-      $this->attrs['gotoHotplugDevice'][] = $device['name']."|".$device['description']."|".$device['id']."|".$device['produkt']."|".$device['vendor'];
+      $tmp= $device['name']."|".$device['description']."|".$device['id'];
+      if (isset($device['produkt']) && isset($device['vendor'])){
+        $tmp.= "|".$device['produkt']."|".$device['vendor'];
+      }
+      $this->attrs['gotoHotplugDevice'][]= $tmp;
     }
 
     /* Prepare LogonScripts */
