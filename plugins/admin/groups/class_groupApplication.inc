@@ -17,6 +17,7 @@ class appgroup extends plugin
   var $curbase                = "";
   var $curCatDir                  ;
   var $curCatDepth              =0;         //
+  var $Categories;
 
   /* attribute list for save action */
   var $attributes               = array("gosaMemberApplication","gosaApplicationParameter");
@@ -146,6 +147,7 @@ class appgroup extends plugin
       $this->InitialFAIrelease = $this->FAIrelease;
       $this->Releases       = $this->getReleases();
     }
+
   }
 
 
