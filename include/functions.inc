@@ -185,6 +185,11 @@ function get_browser_language()
     }
   }
 
+  /* We've just one zh variation. Fix code... */
+  if (preg_match('/zh/', $lang)){
+    return ("zh_CN");
+  }
+
   return (strtolower($lang)."_".strtoupper($lang));
 }
 
