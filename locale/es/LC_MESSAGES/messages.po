@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-31 01:07+0200\n"
+"POT-Creation-Date: 2007-06-04 08:50+0200\n"
 "PO-Revision-Date: 2006-06-12 19:27GMT\n"
 "Last-Translator: Alejandro Escanero Blanco <thoth@bbvnet.com>\n"
 "Language-Team: Español\n"
@@ -296,7 +296,7 @@ msgstr "Paquetes"
 msgid "German"
 msgstr "Alemán"
 
-#: contrib/gosa.conf:423 setup/class_setupStep_Language.inc:51
+#: contrib/gosa.conf:423 setup/class_setupStep_Language.inc:52
 msgid "Russian"
 msgstr "Ruso"
 
@@ -557,7 +557,7 @@ msgstr "Tiempo de envio"
 #: plugins/admin/departments/dep_iframe.tpl:19
 #: plugins/admin/fai/faiNewBranch.tpl:52
 #: plugins/personal/password/changed.tpl:9
-#: plugins/personal/generic/main.inc:170 include/functions.inc:1530
+#: plugins/personal/generic/main.inc:170 include/functions.inc:1535
 #: setup/class_setup.inc:275 setup/class_setup.inc:277
 #: ihtml/themes/default/setup_useradmin.tpl:40
 #: ihtml/themes/default/setup_step4.tpl:114
@@ -1290,7 +1290,7 @@ msgstr "Esta intentando añadir un número de teléfono no valido."
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:446
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:528
-#: plugins/admin/groups/class_groupApplication.inc:638
+#: plugins/admin/groups/class_groupApplication.inc:640
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:142
 msgid "back"
 msgstr "Atrás"
@@ -2220,51 +2220,51 @@ msgstr "Identificador (ID) de usuario"
 
 #: plugins/addons/addressbook/class_addressbook.inc:555
 #: plugins/admin/users/class_userManagement.inc:541
-#: plugins/personal/generic/class_user.inc:1031
+#: plugins/personal/generic/class_user.inc:1032
 msgid "The required field 'Name' is not set."
 msgstr "El campo requerido 'Nombre' no ha sido rellenado."
 
 #: plugins/addons/addressbook/class_addressbook.inc:559
 #: plugins/admin/users/class_userManagement.inc:544
-#: plugins/personal/generic/class_user.inc:1046
+#: plugins/personal/generic/class_user.inc:1047
 msgid "The required field 'Given name' is not set."
 msgstr "El campo requerido 'Sobrenombre' no ha sido rellenado."
 
 #: plugins/addons/addressbook/class_addressbook.inc:565
 #: plugins/addons/addressbook/class_addressbook.inc:593
 #: plugins/admin/departments/class_departmentGeneric.inc:243
-#: plugins/personal/generic/class_user.inc:1067
-#: plugins/personal/generic/class_user.inc:1092
+#: plugins/personal/generic/class_user.inc:1068
+#: plugins/personal/generic/class_user.inc:1093
 msgid "The field 'Name' contains invalid characters."
 msgstr "El campo 'Nombre' contiene caracteres no validos."
 
 #: plugins/addons/addressbook/class_addressbook.inc:568
 #: plugins/addons/addressbook/class_addressbook.inc:590
-#: plugins/personal/generic/class_user.inc:1070
-#: plugins/personal/generic/class_user.inc:1089
+#: plugins/personal/generic/class_user.inc:1071
+#: plugins/personal/generic/class_user.inc:1090
 msgid "The field 'Given name' contains invalid characters."
 msgstr "El campo 'Sobrenombre' contiene caracteres no validos"
 
 #: plugins/addons/addressbook/class_addressbook.inc:573
 #: plugins/addons/addressbook/class_addressbook.inc:576
 #: plugins/admin/departments/class_departmentGeneric.inc:246
-#: plugins/personal/generic/class_user.inc:1075
+#: plugins/personal/generic/class_user.inc:1076
 msgid "The field 'Phone' contains an invalid phone number."
 msgstr "El campo 'Teléfono' contiene un número de teléfono no valido."
 
 #: plugins/addons/addressbook/class_addressbook.inc:579
 #: plugins/admin/departments/class_departmentGeneric.inc:249
-#: plugins/personal/generic/class_user.inc:1078
+#: plugins/personal/generic/class_user.inc:1079
 msgid "The field 'Fax' contains an invalid phone number."
 msgstr "El campo 'Fax' contiene un número de teléfono no valido."
 
 #: plugins/addons/addressbook/class_addressbook.inc:582
-#: plugins/personal/generic/class_user.inc:1081
+#: plugins/personal/generic/class_user.inc:1082
 msgid "The field 'Mobile' contains an invalid phone number."
 msgstr "El campo 'Teléfono móvil' contiene un número de teléfono invalido."
 
 #: plugins/addons/addressbook/class_addressbook.inc:585
-#: plugins/personal/generic/class_user.inc:1084
+#: plugins/personal/generic/class_user.inc:1085
 msgid "The field 'Pager' contains an invalid phone number."
 msgstr ""
 "El campo 'Dispositivo de Búsqueda' contiene un número de teléfono invalido."
@@ -2319,7 +2319,7 @@ msgid "Add entry"
 msgstr "Añadir entrada"
 
 #: plugins/addons/addressbook/contents.tpl:50
-#: plugins/admin/groups/class_groupApplication.inc:720
+#: plugins/admin/groups/class_groupApplication.inc:722
 msgid "Edit entry"
 msgstr "Editar entrada"
 
@@ -2606,15 +2606,15 @@ msgstr "Está a punto de borrar el grupo '%s'."
 msgid "You are not allowed to delete this group!"
 msgstr "¡No le está permitido eliminar este grupo!"
 
-#: plugins/admin/groups/class_groupApplication.inc:396
+#: plugins/admin/groups/class_groupApplication.inc:398
 msgid "This 'dn' is no appgroup."
 msgstr "Esta'dn' no es un grupo de aplicaciones."
 
-#: plugins/admin/groups/class_groupApplication.inc:404
+#: plugins/admin/groups/class_groupApplication.inc:406
 msgid "Remove applications"
 msgstr "Borrar aplicaciones"
 
-#: plugins/admin/groups/class_groupApplication.inc:405
+#: plugins/admin/groups/class_groupApplication.inc:407
 msgid ""
 "This group has application features enabled. You can disable them by "
 "clicking below."
@@ -2622,11 +2622,11 @@ msgstr ""
 "Este grupo tiene la características de aplicación activa. Puede "
 "desactivarlas apretando a continuación."
 
-#: plugins/admin/groups/class_groupApplication.inc:407
+#: plugins/admin/groups/class_groupApplication.inc:409
 msgid "Create applications"
 msgstr "Crear aplicaciones"
 
-#: plugins/admin/groups/class_groupApplication.inc:408
+#: plugins/admin/groups/class_groupApplication.inc:410
 msgid ""
 "This group has application features disabled. You can enable them by "
 "clicking below."
@@ -2634,82 +2634,82 @@ msgstr ""
 "Este grupo tiene la característica de aplicacióon desactivada. Puede "
 "activarlas apretando a continuación."
 
-#: plugins/admin/groups/class_groupApplication.inc:420
+#: plugins/admin/groups/class_groupApplication.inc:422
 msgid "Invalid character in category name."
 msgstr "El campo 'Nombre de categoría' contiene caracteres no validos."
 
-#: plugins/admin/groups/class_groupApplication.inc:428
+#: plugins/admin/groups/class_groupApplication.inc:430
 msgid "The specified category already exists."
 msgstr "La categoría especificada ya existe."
 
-#: plugins/admin/groups/class_groupApplication.inc:523
+#: plugins/admin/groups/class_groupApplication.inc:525
 msgid "The selected application name is not uniq. Please check your LDAP."
 msgstr ""
 "El nombre seleccionado de aplicación no es único. Por favor compruebe su "
 "base de datos LDAP."
 
-#: plugins/admin/groups/class_groupApplication.inc:559
+#: plugins/admin/groups/class_groupApplication.inc:561
 msgid "The selected application has no options."
 msgstr "La aplicación seleccionada no tiene opciones."
 
-#: plugins/admin/groups/class_groupApplication.inc:644
+#: plugins/admin/groups/class_groupApplication.inc:646
 #: plugins/admin/departments/class_divListDepartment.inc:118
 msgid "department"
 msgstr "departamento"
 
-#: plugins/admin/groups/class_groupApplication.inc:652
+#: plugins/admin/groups/class_groupApplication.inc:654
 msgid "application"
 msgstr "aplicación"
 
-#: plugins/admin/groups/class_groupApplication.inc:683
-#: plugins/admin/groups/class_groupApplication.inc:719
+#: plugins/admin/groups/class_groupApplication.inc:685
+#: plugins/admin/groups/class_groupApplication.inc:721
 msgid "Delete entry"
 msgstr "Borrar entrada"
 
-#: plugins/admin/groups/class_groupApplication.inc:687
-#: plugins/admin/groups/class_groupApplication.inc:717
+#: plugins/admin/groups/class_groupApplication.inc:689
+#: plugins/admin/groups/class_groupApplication.inc:719
 #: include/sieve/templates/object_container_clear.tpl:9
 #: include/sieve/templates/object_container.tpl:9
 msgid "Move up"
 msgstr "Arriba"
 
-#: plugins/admin/groups/class_groupApplication.inc:688
-#: plugins/admin/groups/class_groupApplication.inc:718
+#: plugins/admin/groups/class_groupApplication.inc:690
+#: plugins/admin/groups/class_groupApplication.inc:720
 #: include/sieve/templates/object_container_clear.tpl:13
 #: include/sieve/templates/object_container.tpl:13
 msgid "Move down"
 msgstr "Abajo"
 
-#: plugins/admin/groups/class_groupApplication.inc:715
+#: plugins/admin/groups/class_groupApplication.inc:717
 msgid "Insert seperator"
 msgstr ""
 
-#: plugins/admin/groups/class_groupApplication.inc:743
+#: plugins/admin/groups/class_groupApplication.inc:745
 msgid "This application is no longer available."
 msgstr "La aplicación ya no está disponible."
 
-#: plugins/admin/groups/class_groupApplication.inc:746
+#: plugins/admin/groups/class_groupApplication.inc:748
 #, php-format
 msgid "This application is not available in any release named %s."
 msgstr ""
 
-#: plugins/admin/groups/class_groupApplication.inc:750
+#: plugins/admin/groups/class_groupApplication.inc:752
 msgid "Check parameter"
 msgstr "Comprobar parámetros"
 
-#: plugins/admin/groups/class_groupApplication.inc:752
+#: plugins/admin/groups/class_groupApplication.inc:754
 msgid "This application has changed parameters."
 msgstr "Los parámetros de la aplicación han cambiado."
 
-#: plugins/admin/groups/class_groupApplication.inc:844
+#: plugins/admin/groups/class_groupApplication.inc:846
 msgid "Removing application information failed"
 msgstr "Ha fallado la eliminación de información de la aplicación"
 
-#: plugins/admin/groups/class_groupApplication.inc:889
+#: plugins/admin/groups/class_groupApplication.inc:891
 msgid "Saving application information failed"
 msgstr "Ha fallado la grabación de información de la aplicación"
 
-#: plugins/admin/groups/class_groupApplication.inc:932
+#: plugins/admin/groups/class_groupApplication.inc:934
 #, php-format
 msgid ""
 "Can't resolve the release name '%s', setting release name to '%s'. Possibly "
@@ -3614,42 +3614,42 @@ msgstr ""
 msgid "Section"
 msgstr "Sección"
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:457
-#: plugins/admin/systems/class_printerPPDDialog.inc:460
+#: plugins/admin/systems/class_printerPPDDialog.inc:461
+#: plugins/admin/systems/class_printerPPDDialog.inc:464
 #: include/sieve/class_sieveElement_If.inc:915
 #: include/sieve/class_sieveManagement.inc:609
 msgid "True"
 msgstr "Verdadero"
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:458
-#: plugins/admin/systems/class_printerPPDDialog.inc:461
+#: plugins/admin/systems/class_printerPPDDialog.inc:462
+#: plugins/admin/systems/class_printerPPDDialog.inc:465
 #: include/sieve/class_sieveElement_If.inc:915
 #: include/sieve/class_sieveManagement.inc:610
 msgid "False"
 msgstr "Falso"
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:466
+#: plugins/admin/systems/class_printerPPDDialog.inc:470
 #, php-format
 msgid "Unsupported ppd type '%s' used for '%s' "
 msgstr ""
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:483
+#: plugins/admin/systems/class_printerPPDDialog.inc:487
 #, fuzzy, php-format
 msgid "Removing old ppd file '%s' failed."
 msgstr "Ha fallado la eliminación de la impresora"
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:486
+#: plugins/admin/systems/class_printerPPDDialog.inc:490
 #, php-format
 msgid "Removing old ppd file '%s' failed. File is not accessible."
 msgstr ""
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:489
+#: plugins/admin/systems/class_printerPPDDialog.inc:493
 #, php-format
 msgid ""
 "Removing old ppd file '%s' failed. File does not exists or is not accessible."
 msgstr ""
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:497
+#: plugins/admin/systems/class_printerPPDDialog.inc:501
 msgid ""
 "Please select a valid ppd file or use 'Cancel' to go back to printer "
 "configuration."
@@ -8962,7 +8962,7 @@ msgstr "Paquetes usados"
 msgid "Choosen packages"
 msgstr "Paquetes elegidos"
 
-#: plugins/admin/fai/faiPackage.tpl:73 include/functions.inc:669
+#: plugins/admin/fai/faiPackage.tpl:73 include/functions.inc:674
 msgid "Configure"
 msgstr "Configurar"
 
@@ -9595,8 +9595,8 @@ msgstr "Ha fallado la grabación de la tabla de particiones FAI"
 msgid "Removing FAI partition table entry failed"
 msgstr "Ha fallado la eliminación de la entrada en la tabla de particiones FAI"
 
-#: plugins/admin/fai/class_faiPartitionTable.inc:521
-#: plugins/admin/fai/class_faiPartitionTable.inc:535
+#: plugins/admin/fai/class_faiPartitionTable.inc:530
+#: plugins/admin/fai/class_faiPartitionTable.inc:544
 msgid "Saving FAI partition table entry failed"
 msgstr "Ha fallado la grabación de la entrada en la tabla de particiones FAI"
 
@@ -10810,19 +10810,19 @@ msgstr ""
 msgid "Can't save new kiosk profiles, possibly permission denied for folder"
 msgstr ""
 
-#: plugins/personal/environment/class_environment.inc:1095
+#: plugins/personal/environment/class_environment.inc:1099
 msgid "Adding environment information failed"
 msgstr "Ha fallado al añadir la información de estado"
 
-#: plugins/personal/environment/class_environment.inc:1108
+#: plugins/personal/environment/class_environment.inc:1112
 msgid "group share"
 msgstr "grupos compartidos"
 
-#: plugins/personal/environment/class_environment.inc:1140
+#: plugins/personal/environment/class_environment.inc:1144
 msgid "Administrator"
 msgstr "Administrador"
 
-#: plugins/personal/environment/class_environment.inc:1145
+#: plugins/personal/environment/class_environment.inc:1149
 msgid "Default printer"
 msgstr "Impresora por defecto"
 
@@ -11689,81 +11689,81 @@ msgstr "mujer"
 msgid "male"
 msgstr "hombre"
 
-#: plugins/personal/generic/class_user.inc:276
+#: plugins/personal/generic/class_user.inc:277
 msgid "This account has no valid GOsa extensions."
 msgstr "Esta cuenta no tiene extensiones GOsa validas"
 
-#: plugins/personal/generic/class_user.inc:330
+#: plugins/personal/generic/class_user.inc:331
 msgid "The specified file has not been uploaded via HTTP POST! Aborted."
 msgstr ""
 "¡El archivo especificado no ha podido ser subido vía HTTP POST! Abortado."
 
-#: plugins/personal/generic/class_user.inc:426
+#: plugins/personal/generic/class_user.inc:427
 msgid "Please enter a valid serial number"
 msgstr "Por favor introduzca un número de serie válido"
 
-#: plugins/personal/generic/class_user.inc:466
+#: plugins/personal/generic/class_user.inc:467
 msgid ""
 "(Some types of certificates are currently not supported and may be displayed "
 "as 'invalid'.)"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:476
+#: plugins/personal/generic/class_user.inc:477
 #, php-format
 msgid "Certificate is valid from %s to %s and is currently %s."
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:479
+#: plugins/personal/generic/class_user.inc:480
 msgid "valid"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:480
+#: plugins/personal/generic/class_user.inc:481
 msgid "invalid"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:484
+#: plugins/personal/generic/class_user.inc:485
 msgid "No certificate installed"
 msgstr "No hay certificados instalados"
 
-#: plugins/personal/generic/class_user.inc:567
+#: plugins/personal/generic/class_user.inc:568
 msgid "Removing generic user account failed"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:599
-#: plugins/personal/generic/class_user.inc:935
+#: plugins/personal/generic/class_user.inc:600
+#: plugins/personal/generic/class_user.inc:936
 msgid "Kerberos database communication failed"
 msgstr "La comunicación con la base de datos Kerberos ha fallado"
 
-#: plugins/personal/generic/class_user.inc:613
-#: plugins/personal/generic/class_user.inc:952
+#: plugins/personal/generic/class_user.inc:614
+#: plugins/personal/generic/class_user.inc:953
 msgid "Can't remove user from kerberos database."
 msgstr "No se puede eliminar el usuario de la base de datos Kerberos"
 
-#: plugins/personal/generic/class_user.inc:888
+#: plugins/personal/generic/class_user.inc:889
 msgid "Saving generic user account failed"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:963
+#: plugins/personal/generic/class_user.inc:964
 msgid "Can't add user to kerberos database."
 msgstr "No se puede añadir el usuario de la base de datos Kerberos"
 
-#: plugins/personal/generic/class_user.inc:1020
+#: plugins/personal/generic/class_user.inc:1021
 msgid "You have no permissions to create a user on this 'Base'."
 msgstr "No tiene permisos para crear un usuario en esta 'Base'."
 
-#: plugins/personal/generic/class_user.inc:1025
+#: plugins/personal/generic/class_user.inc:1026
 msgid "You have no permissions to move a user from the original 'Base'."
 msgstr "No tiene permisos para transladar a un usuario de su base original"
 
-#: plugins/personal/generic/class_user.inc:1040
+#: plugins/personal/generic/class_user.inc:1041
 msgid "There's already a person with this 'Login' in the database."
 msgstr "Ya existe un usuario con este 'Login' en la base de datos."
 
-#: plugins/personal/generic/class_user.inc:1049
+#: plugins/personal/generic/class_user.inc:1050
 msgid "The required field 'Login' is not set."
 msgstr " El campo requerido 'Login' no ha sido rellenado."
 
-#: plugins/personal/generic/class_user.inc:1054
+#: plugins/personal/generic/class_user.inc:1055
 msgid ""
 "There's already a person with this 'Name'/'Given name' combination in the "
 "database."
@@ -11771,7 +11771,7 @@ msgstr ""
 "Ya existe un usuario con la misma combinación 'Nombre' / 'Sobrenombre' en la "
 "base de datos."
 
-#: plugins/personal/generic/class_user.inc:1061
+#: plugins/personal/generic/class_user.inc:1062
 msgid ""
 "The field 'Login' contains invalid characters. Lowercase, numbers and dashes "
 "are allowed."
@@ -11779,11 +11779,11 @@ msgstr ""
 "El campo 'Login' contiene caracteres no validos. Solo minúsculas, números y "
 "guiones están permitidos."
 
-#: plugins/personal/generic/class_user.inc:1064
+#: plugins/personal/generic/class_user.inc:1065
 msgid "The field 'Homepage' contains an invalid URL definition."
 msgstr "El campo 'Pagina web principal' contiene un URL no valida"
 
-#: plugins/personal/generic/class_user.inc:1211
+#: plugins/personal/generic/class_user.inc:1212
 msgid "Could not open specified certificate!"
 msgstr "¡No puedo abrir el certificado especificado!"
 
@@ -13698,7 +13698,7 @@ msgstr ""
 "¡La generación de esta página provoca que el interprete PHP muestre algunos "
 "errores!"
 
-#: include/php_setup.inc:71 html/main.php:388
+#: include/php_setup.inc:71 html/main.php:389
 msgid "Toggle information"
 msgstr "Información de intercambio"
 
@@ -13815,25 +13815,25 @@ msgstr ""
 "La configuración para SMBHASH en /etc/gosa/gosa.conf es incorrecta. No se "
 "pueden cambiar las contraseñas de SAMBA."
 
-#: include/functions.inc:300
+#: include/functions.inc:305
 #, php-format
 msgid "FATAL: Error when connecting the LDAP. Server said '%s'."
 msgstr ""
 "FATAL: Hay un error tratando de conectarse al servidor LDAP. El error del "
 "servidor es: '%s'"
 
-#: include/functions.inc:317
+#: include/functions.inc:322
 #, php-format
 msgid "User login failed. LDAP server said '%s'."
 msgstr "Autenticación del usuario fallida. El servidor LDAP contesto '%s'."
 
-#: include/functions.inc:338
+#: include/functions.inc:343
 msgid "Username / UID is not unique. Please check your LDAP database."
 msgstr ""
 "Nombre de usuario o UID no son únicos. Por favor, compruebe su base de datos "
 "LDAP."
 
-#: include/functions.inc:470
+#: include/functions.inc:475
 msgid ""
 "Error while adding a lock. Parameters are not set correctly, please check "
 "the source!"
@@ -13841,7 +13841,7 @@ msgstr ""
 "Error al tratar de agregar un bloqueo. Los parámetros no son correctos, por "
 "favor, compruebe el código fuente."
 
-#: include/functions.inc:480
+#: include/functions.inc:485
 #, fuzzy, php-format
 msgid ""
 "Can't set locking information in LDAP database. Please check the 'config' "
@@ -13850,17 +13850,17 @@ msgstr ""
 "No se pudo generar el bloqueo a la base de datos LDAP. Por favor, compruebe "
 "la entrada 'config' en gosa.conf. El servidor LDAP contesto '%s'."
 
-#: include/functions.inc:495
+#: include/functions.inc:500
 #, php-format
 msgid "Adding a lock failed. LDAP server says '%s'."
 msgstr "Fallo al tratar de agregar un bloqueo. El servidor LDAP contesto '%s'."
 
-#: include/functions.inc:521
+#: include/functions.inc:526
 #, php-format
 msgid "Removing a lock failed. LDAP server says '%s'."
 msgstr "Fallo al tratar de agregar un bloqueo. El servidor LDAP contesto '%s'."
 
-#: include/functions.inc:551
+#: include/functions.inc:556
 msgid ""
 "Getting the lock from LDAP failed. Parameters are not set correctly, please "
 "check the source!"
@@ -13868,7 +13868,7 @@ msgstr ""
 "Fallo al tratar de obtener un bloqueo de LDAP. Los parámetros no fueron "
 "correctamente configurados, por favor, compruebe el código fuente."
 
-#: include/functions.inc:561
+#: include/functions.inc:566
 #, fuzzy, php-format
 msgid ""
 "Can't get locking information in LDAP database. Please check the 'config' "
@@ -13877,7 +13877,7 @@ msgstr ""
 "No puedo bloquear la información en la base de datos LDAP. Por favor, "
 "compruebe la entrada 'config' en el archivos gosa.conf."
 
-#: include/functions.inc:569
+#: include/functions.inc:574
 msgid ""
 "Found multiple locks for object to be locked. This should not be possible - "
 "cleaning up multiple references."
@@ -13885,12 +13885,12 @@ msgstr ""
 "Se encontraron varios bloqueos para el objeto a bloquear. Esto no debería "
 "ser posible, eliminando referencias múltiples."
 
-#: include/functions.inc:655
+#: include/functions.inc:660
 #, php-format
 msgid "The size limit of %d entries is exceed!"
 msgstr "¡Ha excedido el tamaño máximo de %d entradas!"
 
-#: include/functions.inc:657
+#: include/functions.inc:662
 #, php-format
 msgid ""
 "Set the new size limit to %s and show me this message if the limit still "
@@ -13899,43 +13899,43 @@ msgstr ""
 "Indique el nuevo tamaño limite a %s y enséñame este mensaje si el tamaño "
 "limite es todavía superado"
 
-#: include/functions.inc:674
+#: include/functions.inc:679
 msgid "incomplete"
 msgstr "incompleto"
 
-#: include/functions.inc:1117 include/functions.inc:1311
+#: include/functions.inc:1122 include/functions.inc:1316
 msgid "LDAP error:"
 msgstr "Error LDAP:"
 
-#: include/functions.inc:1118
+#: include/functions.inc:1123
 msgid ""
 "Problems with the LDAP server mean that you probably lost the last changes. "
 "Please check your LDAP setup for possible errors and try again."
 msgstr ""
 
-#: include/functions.inc:1126
+#: include/functions.inc:1131
 msgid ""
 "Please check your input and fix the error. Press 'OK' to close this message "
 "box."
 msgstr ""
 
-#: include/functions.inc:1135
+#: include/functions.inc:1140
 msgid "An error occured while processing your request"
 msgstr "Un error ha ocurrido mientras se procesaba su petición"
 
-#: include/functions.inc:1139
+#: include/functions.inc:1144
 msgid "OK"
 msgstr "Perfecto"
 
-#: include/functions.inc:1200
+#: include/functions.inc:1205
 msgid "Continue anyway"
 msgstr "Continuar de cualquier modo"
 
-#: include/functions.inc:1202
+#: include/functions.inc:1207
 msgid "Edit anyway"
 msgstr "Editar de cualquier modo"
 
-#: include/functions.inc:1204
+#: include/functions.inc:1209
 #, php-format
 msgid ""
 "You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
@@ -13944,95 +13944,95 @@ msgstr ""
 "Va ha editar la entrada LDAP '%s' que parece estar siendo usada por '%s'. "
 "Por favor, contacte con esta persona para clarificar los procedimientos."
 
-#: include/functions.inc:1493
+#: include/functions.inc:1498
 msgid "Entries per page"
 msgstr ""
 
-#: include/functions.inc:1521
+#: include/functions.inc:1526
 msgid "Apply filter"
 msgstr ""
 
-#: include/functions.inc:1795
+#: include/functions.inc:1800
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-#: include/functions.inc:1838
+#: include/functions.inc:1843
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "Versión de desarrollo de GOsa (Rev %s)"
 
-#: include/functions.inc:2240 include/functions.inc:2244
+#: include/functions.inc:2245 include/functions.inc:2249
 msgid "Warning - base_hook is not available. Using default base."
 msgstr ""
 
-#: include/functions.inc:2250
+#: include/functions.inc:2255
 msgid "Warning - no base_hook defined. Using default base."
 msgstr ""
 
-#: include/functions.inc:2275 setup/class_setupStep_Schema.inc:95
+#: include/functions.inc:2280 setup/class_setupStep_Schema.inc:95
 msgid "Can't get schema information from server. No schema check possible!"
 msgstr ""
 "No se pudo obtener la información del esquema del servidor. No se pudo "
 "comprobar el esquema."
 
-#: include/functions.inc:2301
+#: include/functions.inc:2306
 msgid "Used to store account specific informations."
 msgstr ""
 
-#: include/functions.inc:2308
+#: include/functions.inc:2313
 msgid ""
 "Used to lock currently edited entries to avoid multiple changes at the same "
 "time."
 msgstr ""
 
-#: include/functions.inc:2351
+#: include/functions.inc:2356
 #, fuzzy, php-format
 msgid "The required objectClass '%s' is not present in your schema setup"
 msgstr ""
 "No se encuentra el objeto de clase (object class) requerido '%s' en la "
 "configuración del servidor LDAP."
 
-#: include/functions.inc:2353
+#: include/functions.inc:2358
 #, fuzzy, php-format
 msgid "The optional objectClass '%s' is not present in your schema setup"
 msgstr ""
 "No se encuentra el objeto de clase (object class) requerido '%s' en la "
 "configuración del servidor LDAP."
 
-#: include/functions.inc:2359
+#: include/functions.inc:2364
 #, fuzzy, php-format
 msgid "The required objectclass '%s' does not have version %s"
 msgstr "El objeto de clase (objectclass) requerido '%s' no tiene la versión %s"
 
-#: include/functions.inc:2361
+#: include/functions.inc:2366
 #, fuzzy, php-format
 msgid "The optional objectclass '%s' does not have version %s"
 msgstr "El objeto de clase (objectclass) requerido '%s' no tiene la versión %s"
 
-#: include/functions.inc:2365
+#: include/functions.inc:2370
 #, php-format
 msgid "Class(es) available"
 msgstr ""
 
-#: include/functions.inc:2388
+#: include/functions.inc:2393
 msgid ""
 "You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema    configuration do not support this option."
 msgstr ""
 
-#: include/functions.inc:2389
+#: include/functions.inc:2394
 msgid ""
 "In order to use rfc2307bis conform groups the objectClass 'posixGroup' must "
 "be      AUXILIARY"
 msgstr ""
 
-#: include/functions.inc:2393
+#: include/functions.inc:2398
 msgid ""
 "You have disabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema   configuration do not support this option."
 msgstr ""
 
-#: include/functions.inc:2394
+#: include/functions.inc:2399
 msgid "The objectClass 'posixGroup' must be STRUCTURAL"
 msgstr ""
 
@@ -15001,6 +15001,11 @@ msgstr "¡Por favor seleccione una impresora o presione cancelar."
 #, fuzzy
 msgid "Automatic"
 msgstr "automático"
+
+#: setup/class_setupStep_Language.inc:51
+#, fuzzy
+msgid "Chinese"
+msgstr "Chipset"
 
 #: setup/setup_migrate.tpl:5
 msgid ""
@@ -16424,7 +16429,7 @@ msgstr ""
 msgid "Can't read file '%s', check permissions."
 msgstr "No puedo acceder al archivo '%s', por favor compruebe los permisos."
 
-#: html/main.php:164
+#: html/main.php:165
 msgid ""
 "FATAL: Register globals is on. GOsa will refuse to login unless this is "
 "fixed by an administrator."
@@ -16432,21 +16437,21 @@ msgstr ""
 "FATAL: 'Register globals' está activado. No se permitirá ningún acceso hasta "
 "que sea solucionado por un administrador."
 
-#: html/main.php:220
+#: html/main.php:221
 msgid "Warning: memory is getting low - please increase the memory_limit!"
 msgstr ""
 "Advertencia: Poca memoria disponible -  por favor aumente 'memory_limit'"
 
-#: html/main.php:349
+#: html/main.php:350
 #, php-format
 msgid "FATAL: Can't find any plugin definitions for plugin '%s'!"
 msgstr "FATAL: No se pudo encontrar ninguna definición de extensión para '%s'"
 
-#: html/main.php:364
+#: html/main.php:365
 msgid "Your password is about to expire, please change your password"
 msgstr "Su contraseña está a punto de expirar, por favor cambiela."
 
-#: html/main.php:388
+#: html/main.php:389
 msgid ""
 "Generating this page caused the W3C          conformance checker to raise "
 "some errors!"
