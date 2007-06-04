@@ -154,8 +154,10 @@ class workstartup extends plugin
          ['PACKAGES'][0] "pkg1";
          ['PACKAGES'][1] "postfix";
        */
-
-      $ldap->search("(&(FAIrepository=*)(objectClass=FAIrepositoryServer))",array("FAIrepository"));
+      $filter= "";
+      $ui= get_userinfo();
+      if (isset($config->current['STRICT_UNITS']) && preg_match('/TRUE/i', $config->current['STRICT_UNITS']) && $ui->gosaUnitTag != ""){                                                                                                                                  $filter= "(gosaUnitTag=".$ui->gosaUnitTag.")";
+      }                                                                                                                                $ldap->search("(&(FAIrepository=*)(objectClass=FAIrepositoryServer)$filter)",array("FAIrepository"));
       $test = array();
       while($attr = $ldap->fetch()){
         if(isset($attr['FAIrepository'])){
