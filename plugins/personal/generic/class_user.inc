@@ -263,7 +263,8 @@ class user extends plugin
     /* Assign prefered langage */
     $language= array(0 => "&nbsp;", "fr_FR" => ("fr_FR"), "en_EN" => ("en_EN"), 
                                     "de_DE" => ("de_DE"), "it_IT" => ("it_IT"), 
-                                    "nl_NL" => ("nl_NL"), "ru_RU" => ("ru_RU"));
+                                    "nl_NL" => ("nl_NL"), "ru_RU" => ("ru_RU"),
+                                    "zh_CN" => ("zh_CN"));
     $smarty->assign("preferredLanguage_list", $language);
 
     /* Get random number for pictures */
