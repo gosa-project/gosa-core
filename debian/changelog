@@ -1,3 +1,11 @@
+gosa (2.5.11-2) unstable; urgency=low
+
+  * Added chinese translation
+  * Fixed french translation that breaks most menu entries
+  * Fixed language detection
+
+ -- Cajus Pollmeier <cajus@debian.org>  Tue, 05 Jun 2007 08:57:23 +0200
+
 gosa (2.5.11-1) unstable; urgency=low
 
   * New upstream release (Closes: #413808)
