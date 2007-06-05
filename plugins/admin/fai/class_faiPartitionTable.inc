@@ -457,7 +457,6 @@ class faiPartitionTable extends plugin
           }
 
           /* Create partition dn and add necessary attributes */
-          $partition_dn_del = "FAIpartitionNr=".$partition_attrs['FAIpartitionNr'].",".$disk_dn;      
           $partition_attrs['FAIpartitionNr']= $part_nr;  
           $partition_dn= "FAIpartitionNr=".$partition_attrs['FAIpartitionNr'].",".$disk_dn;      
           $partition_attrs['objectClass']= array("top","FAIclass","FAIpartitionEntry");
@@ -487,6 +486,9 @@ class faiPartitionTable extends plugin
 
           /* Collect all operations */
           if(($partition['status'] == "delete")&&($disk['status']!="new")){
+
+            $partition_dn_del = "FAIpartitionNr=".$partition['FAIpartitionNr'].",".$disk_dn;      
+
             $Todo['delete'][$partition_dn_del] = $partition_attrs;
           }elseif($partition['status'] == "new"){
             $Todo['rest'][$partition_dn] = $partition_attrs;
