@@ -218,7 +218,7 @@ class Step_Checks extends setup_step
     $N = "implicit_flush = <b>"._("Off")."</b>";
     $D = _("This option influences the PHP output handling. Turn this Option off, to increase performance.");
     $S = _("Search for 'implicit_flush' in your php.ini and set it to 'Off'."); 
-    $R = ini_get('implicit_flush');
+    $R = !ini_get('implicit_flush');
     $M = FALSE;
     $this->config_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
