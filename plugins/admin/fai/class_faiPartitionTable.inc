@@ -87,7 +87,8 @@ class faiPartitionTable extends plugin
            */
           $partition['status']="edited";
           $this->disks[$name]['partitions'][$partition['FAIpartitionNr']] = $partition; 
-        }  
+        } 
+        ksort($this->disks[$name]['partitions']);
       }
     }
     ksort($this->disks);
@@ -95,8 +96,8 @@ class faiPartitionTable extends plugin
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     /* Fill templating stuff */
     $smarty= get_smarty();
@@ -443,7 +444,7 @@ class faiPartitionTable extends plugin
       if($disk['status']!="delete"){
 
         /* Add all partitions */
-        foreach($disk['partitions'] as $key => $partition){
+        foreach($disk['partitions'] as $part_nr => $partition){
 
           /* Create attribute array */
           $partition_attrs = array();
@@ -456,6 +457,8 @@ class faiPartitionTable extends plugin
           }
 
           /* Create partition dn and add necessary attributes */
+          $partition_dn_del = "FAIpartitionNr=".$partition_attrs['FAIpartitionNr'].",".$disk_dn;      
+          $partition_attrs['FAIpartitionNr']= $part_nr;  
           $partition_dn= "FAIpartitionNr=".$partition_attrs['FAIpartitionNr'].",".$disk_dn;      
           $partition_attrs['objectClass']= array("top","FAIclass","FAIpartitionEntry");
           $partition_attrs['cn']= $partition_attrs['FAIpartitionNr'];
@@ -484,7 +487,7 @@ class faiPartitionTable extends plugin
 
           /* Collect all operations */
           if(($partition['status'] == "delete")&&($disk['status']!="new")){
-            $Todo['delete'][$partition_dn] = $partition_attrs;
+            $Todo['delete'][$partition_dn_del] = $partition_attrs;
           }elseif($partition['status'] == "new"){
             $Todo['rest'][$partition_dn] = $partition_attrs;
           }elseif($partition['status'] == "edited"){
@@ -496,7 +499,7 @@ class faiPartitionTable extends plugin
       /* First of all, delete old entries */
       foreach($Todo['delete'] as $partition_dn => $attrs){
           $ldap->cd($partition_dn);
-          $ldap->rmdir_recursive($partition_dn);
+          $res = $ldap->rmdir_recursive($partition_dn);
           show_ldap_error($ldap->get_error(), _("Removing FAI partition table entry failed"));
       }
     
