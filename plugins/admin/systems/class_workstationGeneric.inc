@@ -41,7 +41,7 @@ class workgeneric extends plugin
   var $ignore_account= TRUE;
   var $attributes= array("gotoMode", "gotoSyslogServer", "gotoNtpServer",
       "gotoFloppyEnable", "gotoCdromEnable", "cn", "gotoSndModule",
-      "ghCpuType", "ghMemSize", "ghUsbSupport",
+      "ghCpuType", "ghMemSize", "ghUsbSupport", "FAIstate",
       "ghGfxAdapter", "ghSoundAdapter", "gotoLastUser", "l","FAIscript");
   var $objectclasses= array("top", "gotoWorkstation", "GOhard","FAIobject");
 
@@ -172,7 +172,7 @@ class workgeneric extends plugin
             }
 
             if($attrs['FAIstate'] == ""){
-#FIXME we should check if FAIobject is used anymore
+              #FIXME we should check if FAIobject is used anymore
               $attrs['FAIstate'] = array();
             }
 
@@ -397,6 +397,11 @@ class workgeneric extends plugin
       if (!isset($this->attrs[$val]) || $this->attrs[$val] == "default"){
         $this->attrs[$val]= array();
       }
+    }
+
+    /* Remove FAIstate */
+    if (isset($this->attrs['FAIstate'])){
+      unset ($this->attrs['FAIstate']);
     }
 
     /* Add missing arrays */
