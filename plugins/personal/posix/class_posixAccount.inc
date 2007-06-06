@@ -1120,10 +1120,8 @@ class posixAccount extends plugin
 
  function reload()
   {
-
     /* Set base for all searches */
     $base     = $_SESSION['CurrentMainBase'];
-    $base     = $base;
     $ldap     = $this->config->get_ldap_link();    
     $attrs    =  array("cn", "description", "gidNumber");
     $Flags    = GL_SIZELIMIT;
