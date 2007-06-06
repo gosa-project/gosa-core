@@ -204,8 +204,6 @@ body {
 	margin-top:0px;
 	margin-bottom:0px;
 	background-color:white;
-	background-image:url("images/border.png"); 
-	background-repeat:repeat-y;
 	color:#00008F;
 	font-family:arial,helvetica,sans-serif;
 	font-size:12px;
@@ -238,6 +236,7 @@ a.maintitlebar, div.maintitlebar {
 a.maintitlebar:hover {
 	text-decoration:none;
 	background-color:#B0D3A0;
+	cursor:pointer;
 }
 
 p.menuheader {
@@ -272,6 +271,7 @@ p.menuitem {
 
 p.menuitem:hover {
 	background-color:#d2f6c2;
+	cursor:pointer;
 }
 
 table.menuitem {
@@ -353,6 +353,7 @@ a.iconmenu:link {
 
 td.iconmenu:hover {
 	background-color:#e0e0e0;
+	cursor:pointer;
 }
 
 a.iconmenu:visited {
