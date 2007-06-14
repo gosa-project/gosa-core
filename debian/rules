@@ -81,6 +81,8 @@ install-stamp:
 	-rm -rf debian/gosa/usr/share/gosa/contrib
 	-rm -rf debian/gosa/usr/share/gosa/locale/en
 	-rm -rf debian/gosa/usr/share/gosa/gen_locale.sh
+	-rm -rf debian/gosa/usr/share/gosa/gen_pdf_help.sh
+	-rm -rf debian/gosa/usr/share/gosa/patch-stamp
 	-rm -rf debian/gosa/usr/share/gosa/gen_locale_mo.sh
 	-rm -rf debian/gosa/usr/share/gosa/gen_online_help.sh
 	-rm -rf debian/gosa/usr/share/gosa/gen_function_list.php
