@@ -1278,8 +1278,8 @@ function gen_xls ($dn, $filter= "(objectClass=*)", $attributes= array('*'), $rec
   
   function get_objectclasses_old()
   {
-  	  $objectclasses = array();
-  	
+    $objectclasses = array();
+
 	  # Get base to look for schema 
 	  $sr           = @ldap_read ($this->cid, NULL, "objectClass=*", array("subschemaSubentry"));
 	  $attr         = @ldap_get_entries($this->cid,$sr);
@@ -1312,6 +1312,10 @@ function gen_xls ($dn, $filter= "(objectClass=*)", $attributes= array('*'), $rec
   function get_objectclasses()
   {
     $objectclasses = array();
+
+    if(!isset($ithis->config->data['MAIN']['SCHEMA_CHECK']) || !preg_match("/true/i",$config->data['MAIN']['SCHEMA_CHECK'])){
+      return($objectclasses);
+    }
 
 # Get base to look for schema
     $sr = @ldap_read ($this->cid, NULL, "objectClass=*", array("subschemaSubentry"));
