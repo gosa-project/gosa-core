@@ -1313,9 +1313,11 @@ function gen_xls ($dn, $filter= "(objectClass=*)", $attributes= array('*'), $rec
   {
     global $config;
     $objectclasses = array();
-      
-    if(!isset($config->data['MAIN']['SCHEMA_CHECK']) || !preg_match("/true/i",$config->data['MAIN']['SCHEMA_CHECK'])){
-      return($objectclasses);
+
+    if(isset($config) && preg_match("/config/i",get_class($config))){
+      if(!isset($config->data['MAIN']['SCHEMA_CHECK']) || !preg_match("/true/i",$config->data['MAIN']['SCHEMA_CHECK'])){
+        return($objectclasses);
+      }
     }
 
 # Get base to look for schema
