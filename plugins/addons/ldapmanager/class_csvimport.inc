@@ -143,7 +143,7 @@ class csvimport extends plugin
         /* row count */
         $tbl_rows   = $tbl_entries / $tblcolcount;
 
-        /* No error occured */
+        /* No error occurred */
         $failing = FALSE;
 
         /* For every row */

@@ -1137,7 +1137,7 @@ function print_red()
             "position:absolute' id='e_layer'><table style='width:100%' summary='' border=0>".
             "<tr><td style='vertical-align:top;padding:10px'><img alt='' src='".
             get_template_path($img)."'></td>".
-            "<td style='width:100%'><h1>"._("An error occured while processing your request").
+            "<td style='width:100%'><h1>"._("An error occurred while processing your request").
             "</h1><b>$string</b><br><br>$addmsg</td></tr><tr><td colspan='2' align='center'><br><button ".
             (($_SESSION['js']==FALSE)?"type='submit'":"type='button'").
             " style='width:80px' onClick='hide(\"e_layer\")'>".

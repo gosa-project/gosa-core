@@ -159,7 +159,7 @@ class faiPartitionTable extends plugin
     }
 
     /* Dialog saved
-     * Save given data from Dialog, if no error is occured
+     * Save given data from Dialog, if no error is occurred
      */
     if(isset($_POST['SaveDisk'])){
 

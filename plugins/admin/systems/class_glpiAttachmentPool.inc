@@ -144,7 +144,7 @@ class glpiAttachmentPool extends plugin
                 }
               } // File already exists
             }
-          } // Check if any error occured
+          } // Check if any error occurred
         } // check if valid filename was uploaded
       } // ende check if file was uploaded 
     }// upload post

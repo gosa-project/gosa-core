@@ -589,7 +589,7 @@ class LDAP{
           }
 
           if($this->error != "Success"){
-            /* Some error occured */
+            /* Some error occurred */
             print "---------------------------------------------";
             print $this->get_error()."<br>";
             print $sourcedn."<br>";
