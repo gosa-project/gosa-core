@@ -47,11 +47,12 @@
 
   <tr style="vertical-align:top;">
     <!-- Menu -->
-    <td style="background-color:#EEFFE6; vertical-align:top;" id="menucell">
+    <td style="background-color:#EEFFE6; vertical-align:top;border-bottom:1px solid #778F6E;" id="menucell">
       <div style="background-color:#CDF6BD; height:12px; width:100%;">&nbsp;</div>
+      <div style="height:650px">
       {$menu}
+      </div>
 	  <br />
-	  <div style="height:1px; width:140px;"></div>
     </td>
     <!-- Plugin window -->
     <td style="background-color:white; width:100%; vertical-align:top; height:15px; border-left:1px solid #778F6E; border-top:1px solid #778F6E" colspan="2">
