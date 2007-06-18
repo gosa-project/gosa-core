@@ -11,17 +11,17 @@
 #
 Summary: 		Web Based LDAP Administration Program 
 Name:			gosa
-Version: 		2.5.11
+Version: 		2.5.11a
 Release:		1
 License: 		GPL
-Source: 		ftp://oss.GONICUS.de/pub/gosa/%{sourcename}.tar.bz2
-URL: 			http://oss.GONICUS.de/project/?group_id=6
+Source: 		http://oss.gonicus.de/pub/gosa/%{sourcename}.tar.bz2
+URL: 			http://www.gosa-project.org
 Group: 			System/Administration
 Vendor:			GONICUS GmbH
 Packager:		Lars Scheiter <lars.scheiter@GONICUS.de>
 Buildarch: 		noarch
 %if %{suse}
-Requires:		apache2,apache2-mod_php4,php4,php4-gd,php4-ldap,php4-mcrypt,php4-mysql,php4-imap,php4-iconv,php4-mbstring,php4-gettext,php4-session,ImageMagick
+Requires:		apache2,apache2-mod_php5 >= 5.2.0,php5,php5-gd,php5-ldap,php5-mcrypt,php5-mysql,php5-imap,php5-iconv,php5-mbstring,php5-gettext,php5-mhash,php5-snmp,php5-posix,fping,ImageMagick
 %else
 Requires: 		httpd,php,php-ldap,php-imap,php-snmp,php-mysql,php-mbstring,ImageMagick
 %endif
@@ -55,14 +55,15 @@ and can write user adapted sieve scripts.
 Group: 			System/Administration
 Summary: 		Schema Definitions for the GOSA package
 %if %{suse}
-Requires:		openldap2 >= 2.1.22
+Requires:		openldap2 >= 2.2.0
 %else
 Requires:		openldap-servers >= 2.2.0
 %endif
 Obsoletes:		gosa-ldap
 
 %description schema
-Contains the Schema definition files for the GOSA admin package.
+Contains the Schema definition files for the GOSA admin package. This one is needed
+on the master LDAP and all slave LDAP Servers.
 
 %package mkntpasswd
 Group: 			System/Administration
@@ -180,6 +181,7 @@ rm -rf %{buildroot}/usr/share/gosa/contrib
 #rm -rf %{buildroot}/usr/share/gosa/doc
 #rmdir contrib/openldap
 bzip2 -9 contrib/opensides/goSamba.pl
+cp contrib/encodings %{buildroot}/etc/gosa
 
 %clean
 rm -rf %{buildroot}
@@ -239,6 +241,12 @@ rm -rf %{buildroot}
 /usr/share/gosa/doc/guide/user/nl
 
 %changelog
+* Tue Jun 12 2007 Lars Scheiter <lars.scheiter@GONICUS.de> 2.5.11a
+- New upstream
+- Added encodings file
+- Added SuSE dependency for needed php5 >= 5.2.0, and modules
+- Fixed URLs to GOsa packages and homepage
+
 * Wed May 16 2007 Lars Scheiter <lars.scheiter@GONICUS.de> 2.5.11
 - New upstream
 - Added new setup
