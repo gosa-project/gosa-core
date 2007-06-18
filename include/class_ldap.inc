@@ -1311,9 +1311,10 @@ function gen_xls ($dn, $filter= "(objectClass=*)", $attributes= array('*'), $rec
 
   function get_objectclasses()
   {
+    global $config;
     $objectclasses = array();
-
-    if(!isset($this->config->data['MAIN']['SCHEMA_CHECK']) || !preg_match("/true/i",$this->config->data['MAIN']['SCHEMA_CHECK'])){
+      
+    if(!isset($config->data['MAIN']['SCHEMA_CHECK']) || !preg_match("/true/i",$config->data['MAIN']['SCHEMA_CHECK'])){
       return($objectclasses);
     }
 
