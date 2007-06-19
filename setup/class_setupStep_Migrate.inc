@@ -674,7 +674,7 @@ class Step_Migrate extends setup_step
     /* Skip GOsa internal departments */
     $skip_dns = array("/".$cv['peopleou']."/","/".$cv['groupou']."/","/^ou=people,/",
         "/^ou=groups,/","/(,|)ou=configs,/","/(,|)ou=systems,/",
-        "/^ou=apps,/","/^ou=mime,/","/^ou=aclroles,/","/^ou=incoming,/",
+        "/(,|)ou=apps,/","/(,|)ou=mime,/","/^ou=aclroles,/","/^ou=incoming,/",
         "/ou=snapshots,/","/(,|)dc=addressbook,/","/^(,|)ou=machineaccounts,/",
         "/(,|)ou=winstations,/");
 
