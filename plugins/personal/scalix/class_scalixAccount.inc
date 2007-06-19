@@ -45,13 +45,17 @@ class scalixAccount extends plugin
   var $members= array();
   var $admins= array();
   var $vacations= array();
-  var $perms= array( "lrs" => "read", "lrsp" => "post", "lrsip" => "append",
-      "lrswipcd" => "write", "lrswipcda" => "all" );
+  var $perms= array(  "lrs"       => "read", 
+                      "lrsp"      => "post", 
+                      "lrsip"     => "append",
+                      "lrswipcd"  => "write", 
+                      "lrswipcda" => "all" );
 
   /* attribute list for save action */
-  var $attributes= array("scalixMailnode", "scalixServerLanguage", "scalixLimitMailboxSize", "scalixMailboxClass");
-  var $fakeBooleanAttributes= array("scalixAdministrator", "scalixMailboxAdministrator", "scalixLimitOutboundMail", "scalixLimitInboundMail", "scalixLimitNotifyUser", "scalixHideUserEntry");
-  var $objectclasses= array("scalixUserClass");
+  var $attributes           = array("scalixMailnode", "scalixServerLanguage", "scalixLimitMailboxSize", "scalixMailboxClass");
+  var $fakeBooleanAttributes= array("scalixAdministrator", "scalixMailboxAdministrator", "scalixLimitOutboundMail",
+                                    "scalixLimitInboundMail", "scalixLimitNotifyUser", "scalixHideUserEntry");
+  var $objectclasses        = array("scalixUserClass");
 
 
   /* constructor, if 'dn' is set, the node loads the given
