@@ -39,6 +39,7 @@ class scalixAccount extends plugin
   var $scalixHideUserEntry= FALSE;
   var $scalixMailboxClass= "";
 
+  var $uid  ="";
   var $default_permissions= "none";
   var $member_permissions= "post";
   var $members= array();
@@ -68,7 +69,10 @@ class scalixAccount extends plugin
     /* Load attributes */
     if ($dn != "new"){
 
-      $this->uid = $this->attrs['uid'];
+      /* Set user id */
+      if(isset($this->attrs['uid'][0])){
+        $this->uid = $this->attrs['uid'][0];
+      }
 	
       foreach ($this->fakeBooleanAttributes as $val){
         if (isset($this->attrs["$val"][0])&&$this->attrs["$val"][0]=="TRUE"){
@@ -348,8 +352,9 @@ class scalixAccount extends plugin
 
     $ldap->cd($this->config->current['BASE']);
     foreach($this->scalixEmailAddress as $k => $mail) {    	
-      $ldap->search ("(&(!(objectClass=gosaUserTemplate))(objectClass=scalixUserClass)(|(scalixEmailAddress=".
-        $mail."))(!(uid=".$this->uid."))(!(cn=".$this->uid.")))", array("uid"));
+      $ldap->search ("(&(!(objectClass=gosaUserTemplate))(objectClass=scalixUserClass)(scalixEmailAddress=".
+        $mail.")(!(uid=".$this->uid."))(!(cn=".$this->uid.")))", array("uid"));
+  
       if ($ldap->count() != 0){
         $message[]= _("The email address '$mail' you've entered is already in use.");
       }
