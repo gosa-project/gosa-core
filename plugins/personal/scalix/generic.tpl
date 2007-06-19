@@ -39,7 +39,7 @@
 	   {$scalixMailboxAdministratorACL} title="{t}Select for mailbox admin capability.{/t}"> {t}Scalix Mailbox Administrator{/t}
 	  <br>
 	  <input type=checkbox name="scalixHideUserEntry" value="1" {$scalixHideUserEntry}
-	   {$scalixHideUserEntryACL} title="{t}Hide user entry from addressbook.{/t}"> {t}hide this user entry in Scalix{/t}
+	   {$scalixHideUserEntryACL} title="{t}Hide user entry from addressbook.{/t}"> {t}Hide this user entry in Scalix{/t}
 	  <br>
    </table>
    
@@ -48,7 +48,7 @@
    <table summary="">
     <tr>
      <td><label for="scalixLimitMailboxSize">{t}Limit mailbox size{/t}</label></td>
-     <td><input id="scalixLimitMailboxSize" name="scalixLimitMailboxSize" size=35 maxlength=65 {$scalixLimitMailboxSizeACL} value="{$scalixLimitMailboxSize}"></td>
+     <td><input id="scalixLimitMailboxSize" name="scalixLimitMailboxSize" size=5 maxlength=10 {$scalixLimitMailboxSizeACL} value="{$scalixLimitMailboxSize}">&nbsp;{t}MB{/t}</td>
     </tr>
     <tr>
      <td >
