@@ -1,6 +1,8 @@
 #! /bin/sh
 # GOsa postinst script
 
+#DEBHELPER#
+
 # We exit unless the package is being configured
 case "$1" in
         abort*upgrade)         exit 0;;
