@@ -797,7 +797,7 @@ class appgroup extends plugin
     $dn   = $this->config->current['BASE'];
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($dn);
-    $ldap->search("(&(objectClass=organizationalUnit)(objectClass=FAIbranch))",array("ou"));
+    $ldap->search("(&(objectClass=organizationalUnit)(objectClass=FAIbranch))",array("ou","dn"));
     $ret =array();
     while($attrs = $ldap->fetch()){
       if(preg_match("/ou=apps,/",$attrs['dn'])){
