@@ -43,7 +43,7 @@ class Step_Config3 extends setup_step
               "mailQueueScriptPath" => "/usr/bin/sudo /usr/local/sbin/mailqueue %action %id %server",
               "mailQueueScriptPath_active" => FALSE,
 
-              "auto_network_hook" => "/etc/gosa/net-resolv.sh",
+              "auto_network_hook" => "/usr/bin/net-resolver.sh",
               "auto_network_hook_active" => FALSE,
 
               "notifydir" => "",
