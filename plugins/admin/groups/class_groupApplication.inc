@@ -800,8 +800,8 @@ class appgroup extends plugin
     $ldap->search("(&(objectClass=organizationalUnit)(objectClass=FAIbranch))",array("ou","dn"));
     $ret =array();
     while($attrs = $ldap->fetch()){
-      if(preg_match("/ou=apps,/",$attrs['dn'])){
-        $bb = preg_replace("/ou=apps,.*/","",$attrs['dn']);
+      if(preg_match("/ou=fai,/",$attrs['dn'])){
+        $bb = preg_replace("/ou=fai,.*/","",$attrs['dn']);
         $parts = array_reverse(split("ou=",$bb));
 
         $str ="";
