@@ -112,7 +112,23 @@ class ogrouptabs extends tabs
         $this->by_object['faiSummary']->parent= &$this;
       }
     }
+
+    /* Add application tab if user or group is member in this object group*/ 
+    if((preg_match("/G/",$objects) || preg_match("/U/",$objects)) && !isset($this->by_name['appgroup'])){
+      $this->by_name['appgroup']= _("Application");
+      $this->by_object['appgroup']= new appgroup($this->config, $this->dn);
+      $this->by_object['appgroup']->acl = "#all#";
+      $this->by_object['appgroup']->parent= &$this;
+    }
+
+    /* Remove application tab if not required any longer */
+    if(!preg_match("/G/",$objects) && !preg_match("/U/",$objects) && isset($this->by_name['appgroup'])){
+      $this->by_object['appgroup']->remove_from_parent();
+      unset($this->by_name['appgroup']);
+      unset($this->by_object['appgroup']);
+    }  
   
+ 
     /* Move reference tab to last position*/
     if(isset($this->by_name['reference'])){
       $tmp = $this->by_name['reference'];
