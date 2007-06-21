@@ -20,7 +20,7 @@ class faiTemplateEntry extends plugin
   var $user          = "root";
   var $group         = "root";
   var $binary        = false;
-
+  var $parent        = NULL;
   var $FAIstate      = "";
   
   function faiTemplateEntry ($config, $dn= NULL,$object=false)
@@ -174,6 +174,10 @@ class faiTemplateEntry extends plugin
   {
     /* Call common method to give check the hook */
     $message= plugin::check();
+
+    if(isset($this->parent->SubObjects[$this->cn]) && $this->cn != $this->orig_cn){
+      $message[] =_("There is already a template with the given name.");
+    }
 
     if(empty($this->FAItemplateFile)){
       $message[]=_("Please specify a value for attribute 'file'.");

@@ -164,6 +164,7 @@ class faiTemplate extends plugin
     if(isset($_POST['AddSubObject'])){
       $this->dialog= new $this->subClassName($this->config,"new");
       $this->dialog->acl = $this->acl;
+      $this->dialog->parent = &$this;
       $this->is_dialog=true;
     }
 

@@ -15,7 +15,7 @@ class faiScriptEntry extends plugin
   var $FAIscript     = "";
   var $description   = "";
   var $status        = "new";
-
+  var $parent        = NULL;
   var $FAIstate      = "";
   
   function faiScriptEntry ($config, $dn= NULL,$object=false)
@@ -124,6 +124,10 @@ class faiScriptEntry extends plugin
     /* Call common method to give check the hook */
     $message= plugin::check();
   
+    if(isset($this->parent->SubObjects[$this->cn]) && $this->cn != $this->orig_cn){
+      $message[] =_("There is already a script with the given name.");
+    }
+
     if(empty($this->cn)){
       $message[] = _("Please enter a name.");
     }

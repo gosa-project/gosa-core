@@ -13,7 +13,7 @@ class faiVariableEntry extends plugin
   var $FAIvariableContent   = "";
   var $description   = "";
   var $status        = "new";
-
+  var $parent        = NULL;
   var $FAIstate      = "";
   
   function faiVariableEntry ($config, $dn= NULL,$object=false)
@@ -88,6 +88,10 @@ class faiVariableEntry extends plugin
   {
     /* Call common method to give check the hook */
     $message= plugin::check();
+
+    if(isset($this->parent->SubObjects[$this->cn]) && $this->cn != $this->orig_cn){
+      $message[] =_("There is already a variable with the given name.");
+    }
     
     if(empty($this->FAIvariableContent)) {
       $message[]=_("Please specify a value for the attribute 'content'."); 

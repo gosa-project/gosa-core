@@ -103,8 +103,9 @@ class faiVariable extends plugin
 
     /* Add new sub object */
     if(isset($_POST['AddSubObject'])){
-      $this->dialog= new $this->subClassName($this->config,"new");
-      $this->dialog->acl = $this->acl;
+      $this->dialog         = new $this->subClassName($this->config,"new");
+      $this->dialog->acl    = $this->acl;
+      $this->dialog->parent = $this;
       $this->is_dialog=true;
     }
 
@@ -119,6 +120,7 @@ class faiVariable extends plugin
       $var = $_POST['SubObject'][0];
       $this->dialog= new $this->subClassName($this->config,$this->dn,$this->SubObjects[$var]);
       $this->dialog->acl = $this->acl;
+      $this->dialog->parent = $this;
       $_SESSION['objectinfo'] = $this->SubObjects[$var]['dn'];
       $this->is_dialog=true;
     }
