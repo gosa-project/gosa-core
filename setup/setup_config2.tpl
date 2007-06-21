@@ -81,6 +81,17 @@
         </div>
     </div>
 
+	<div class='step4_container'>
+        <div class='step4_name'>
+            {t}Enable user netatalk plugin{/t}
+        </div>
+        <div class='step4_value'>
+            <select name="use_netatalk" size="1" title="">
+                {html_options options=$bool selected=$use_netatalk}
+            </select>
+        </div>
+    </div>
+
     <div class='step4_container'>
         <div class='step4_name'>
             {t}Government mode{/t}
