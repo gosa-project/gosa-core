@@ -74,6 +74,7 @@
 		</div>
 		<div class='step4_value'>
 			<input type='text' name='admin_given' maxlength='160' size='40' value='{$admin_given}'>
+			{if $append_base_to_admin_dn}{$base}{/if}
 			<input type='image' class='center' src='images/folder.png' title='{t}Select user{/t}' name='resolve_user' alt='{t}Select user{/t}'>
 		</div>
 	</div>
@@ -82,7 +83,7 @@
 		<div class='step4_name'> 
 		</div>
 		<div class='step4_value'>
-			<input {if $append_base_to_admin_dn} checked {/if} type='checkbox' name='append_base_to_admin_dn' value='1'>&nbsp;{t}Automatically append LDAP base to admin DN{/t}
+			<input onClick='document.mainform.submit();' {if $append_base_to_admin_dn} checked {/if} type='checkbox' name='append_base_to_admin_dn' value='1'>&nbsp;{t}Automatically append LDAP base to admin DN{/t}
 		</div>
 	</div>
 
