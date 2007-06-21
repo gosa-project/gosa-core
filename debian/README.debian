@@ -1,6 +1,16 @@
 README.Debian for GOsa 2.5
 --------------------------
 
+* Configure GOsa
+
+By default you can point your favorite browser to the GOsa setup by
+using this URL:
+
+http://you.server.address/gosa
+
+Follow the instructions on the screen.
+
+
 * Generic informations
 
 Getting GOsa running itself is not very complicated. Problems normally
