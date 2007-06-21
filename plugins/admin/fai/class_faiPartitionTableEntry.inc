@@ -362,7 +362,7 @@ class faiPartitionTableEntry extends plugin
         $message[]=sprintf(_("please enter a unique mount point for partition %s"),($key));
       }
 
-      if($part['FAIfsType']!="swap"){
+      if($part['FAIfsType']!="swap" && $part['FAImountPoint'] != "-"){
         if((empty($part['FAImountPoint']))||(!((preg_match("/^\/.*/",$part['FAImountPoint']))||(preg_match("/^swap$/",$part['FAImountPoint']))))){
           $message[]=sprintf(_("Please enter a valid mount point for partition %s." ),($key));
         }
