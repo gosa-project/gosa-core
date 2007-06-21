@@ -784,9 +784,9 @@ class appgroup extends plugin
     /* Show main page */
     if ($this->dialog){
       $smarty->assign("table", $this->table);
-      $display.= $smarty->fetch (get_template_path('application_options.tpl', TRUE));
+      $display.= $smarty->fetch (get_template_path('application_options.tpl', TRUE,dirname(__FILE__)));
     } else {
-      $display.= $smarty->fetch (get_template_path('application.tpl', TRUE));
+      $display.= $smarty->fetch (get_template_path('application.tpl', TRUE, dirname(__FILE__)));
     }
     return ($display);
   }
@@ -800,8 +800,9 @@ class appgroup extends plugin
     $ldap->search("(&(objectClass=organizationalUnit)(objectClass=FAIbranch))",array("ou","dn"));
     $ret =array();
     while($attrs = $ldap->fetch()){
-      if(preg_match("/ou=fai,/",$attrs['dn'])){
-        $bb = preg_replace("/ou=fai,.*/","",$attrs['dn']);
+  
+      if(preg_match("/ou=apps,/",$attrs['dn'])){
+        $bb = preg_replace("/ou=apps,.*/","",$attrs['dn']);
         $parts = array_reverse(split("ou=",$bb));
 
         $str ="";
