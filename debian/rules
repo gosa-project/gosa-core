@@ -3,7 +3,6 @@
 # Sample debian/rules that uses debhelper. GNU copyright 1997 by Joey Hess.
 # Some lines taken from debmake, by Cristoph Lameter.
 
-export DH_COMPAT=4
 SARGE_PACKAGE=`cat debian/changelog  | head -n1 | grep sarge`
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
