@@ -42,10 +42,11 @@ class Step_Config2 extends setup_step
                                   "smbhash"          => 'SMBHASH',
                                   "samba_rid_active" => FALSE); 
 
-  var $sambaDomain_found = FALSE;
-  var $use_netatalk = FALSE;
+  var $sambaDomain_found    = FALSE;
+  var $use_netatalk         = FALSE;
+  var $enableFAI_management = FALSE;
 
-  var $attributes = array("governmentmode","sambaidmapping","cyrusunixstyle","mail","use_netatalk");
+  var $attributes = array("governmentmode","sambaidmapping","cyrusunixstyle","mail","use_netatalk","enableFAI_management");
   var $called = FALSE;
 
   function Step_Config2()
@@ -106,6 +107,12 @@ class Step_Config2 extends setup_step
       if(is_array($tmp) && isset($tmp['apple-user'])) {
         $this->use_netatalk = TRUE;
       }
+
+      /* Check the FAI schema is used */
+      if(is_array($tmp) && isset($tmp['FAIclass'])){
+#        $this->enableFAI_management = TRUE;
+      }
+
       $this->called = TRUE;
     }
 
