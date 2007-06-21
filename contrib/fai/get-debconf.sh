@@ -1,7 +1,7 @@
 #!/bin/bash
 # Call with:
 # find /path/to/your/debmirror -name \*.deb | xargs ./get-debconf
-# Move result to /etc/gosa/fai/server/debconf.d
+# Move result to /etc/gosa/fai/version/debconf.d
 
 [ -d /tmp/debconf.d ] && mkdir /tmp/debconf.d
 for i in $@; do

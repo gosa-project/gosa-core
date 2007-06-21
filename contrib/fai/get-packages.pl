@@ -6,18 +6,26 @@ use File::Basename;
 
 # Check for parameters
 if ($ARGV[0] eq ""){
-	die ("Usage: parse-pkg <config-file>\n");
+	die ("Usage: get-packages <source.list path>  <binary-arch> <fai repository version>\n");
+}
+
+if ($ARGV[1] eq ""){
+	die ("missing architecture parameter ex: binary-i386\n");
+}
+
+if ($ARGV[2] eq ""){
+        die ("missing repository directory ex: sarge_i386\n");
 }
 
 # Generate cache
-gen_cache($ARGV[0]);
+gen_cache($ARGV[0],$ARGV[1],$ARGV[2]);
 exit 0;
 
 #-----------------------------------------------------------------------------
 
 sub gen_cache
 {
-	my ($conffile)= @_;
+	my ($conffile, $arch, $repodir)= @_;
 	my $line;
 
 	print "Generating GOsa package cache - this may take some time\n";
@@ -46,7 +54,7 @@ sub gen_cache
 			
 			my $section;
 			foreach $section (split(" ", $sections)){
-				parse_package_info ("$baseurl", "$dist", "$section");
+				parse_package_info ("$baseurl", "$dist", "$section","$arch","$repodir");
 			}
 		}
 	}
@@ -58,15 +66,15 @@ sub gen_cache
 
 sub parse_package_info
 {
-	my ($baseurl, $dist, $section)= @_;
+	my ($baseurl, $dist, $section,$arch,$repodir)= @_;
 	my ($package, $server);
 
 	foreach $package ("Packages.gz"){
-		print ("* trying to retrieve $baseurl/dists/$dist/$section/binary-i386/$package\n");
+		print ("* trying to retrieve $baseurl/dists/$dist/$section/$arch/$package\n");
 	
 		($server)= ($baseurl =~ /^[^\/]+\/\/([^\/]+)\/.*$/);
-		get_package("$baseurl/dists/$dist/$section/binary-i386/$package", "/etc/gosa/fai/$server/$dist/$section");
-		parse_package("/etc/gosa/fai/$server/$dist/$section");
+		get_package("$baseurl/dists/$dist/$section/$arch/$package", "/etc/gosa/fai/$repodir/$section");
+		parse_package("/etc/gosa/fai/$repodir/$section");
 		last;
 	}
 }
