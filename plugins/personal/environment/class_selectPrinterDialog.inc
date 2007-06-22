@@ -10,6 +10,7 @@ class selectPrinterDialog extends plugin
   var $regex                = "*";
   var $depselect            = "/";
   var $deplist              = "/";
+  var $subtreesearch        = FALSE;
 
   function selectPrinterDialog ($config, $dn= NULL,$alreadyused=array() )
   {
@@ -32,6 +33,12 @@ class selectPrinterDialog extends plugin
       $this->depselect = $_POST['depselectPrinter'];
     }
 
+    if(isset($_POST['subtrees'])){
+      $this->subtreesearch= TRUE;
+    } else {
+      $this->subtreesearch= FALSE;
+    }
+
     if((isset($_GET['search']))&&(!empty($_GET['search']))){
       $this->regex=$_GET['search']."*";
       $this->regex=preg_replace("/\*\*/","*",$this->regex);
@@ -46,6 +53,7 @@ class selectPrinterDialog extends plugin
     $smarty->assign("gotoPrinterKeys",array_flip($this->getPrinter()));
     $smarty->assign("apply", apply_filter());
     $smarty->assign("alphabet", generate_alphabet());
+    $smarty->assign("subtrees", $this->subtreesearch?"checked":"");
     $smarty->assign("search_image", get_template_path('images/search.png'));
     $smarty->assign("tree_image", get_template_path('images/tree.png'));
     $smarty->assign("infoimage", get_template_path('images/info.png'));
@@ -79,7 +87,6 @@ class selectPrinterDialog extends plugin
   {
     $a_return=array();
     $ldap = $this->config->get_ldap_link();
-    $ldap->cd($this->depselect);
 
     /* Set tag attribute if we've tagging activated */
     $tag= "";
@@ -89,7 +96,13 @@ class selectPrinterDialog extends plugin
       $tag= "(gosaUnitTag=".$ui->gosaUnitTag.")";
     }
 
-    $ldap->search("(&(objectClass=gotoPrinter)$tag(cn=".$this->regex."))",array("*"));
+    if ($this->subtreesearch){
+      $ldap->cd($this->depselect);
+      $ldap->search("(&(objectClass=gotoPrinter)$tag(cn=".$this->regex."))",array("*"));
+    } else {
+      $ldap->cd("ou=printers,ou=systems,".$this->depselect);
+      $ldap->search("(&(objectClass=gotoPrinter)$tag(cn=".$this->regex."))",array("*"));
+    }
     while($printer = $ldap->fetch()){
 
       if(isset($this->AlreadyAssigned[$printer['cn'][0]])) continue;

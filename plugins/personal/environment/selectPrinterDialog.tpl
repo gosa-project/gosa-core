@@ -37,6 +37,11 @@
 						</td>
 					</tr>
 				</table>
+     				<table summary="" style="width:100%;border-top:1px solid #B0B0B0;background-color:#F8F8F8">
+				<tr><td>
+      				<input type=checkbox name="subtrees" value="1" {$subtrees} onClick="mainform.submit()" title="{t}Select to search within subtrees{/t}">{t}Ignore subtrees{/t}
+				</tr></td>
+     				</table>
     					<table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 							<tr>
 								<td>
