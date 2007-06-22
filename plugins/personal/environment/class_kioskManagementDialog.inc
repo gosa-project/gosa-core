@@ -47,7 +47,7 @@ class kioskManagementDialog extends plugin
         $this->filesToAttach[$file['name']]['contents'] = file_get_contents($file['tmp_name']);
       }
     }
-     
+
     $only_once = true;
     foreach($_POST as $name => $value){
       
@@ -59,8 +59,25 @@ class kioskManagementDialog extends plugin
         $name = preg_replace("/^.*\//i","",base64_decode($id));
         
         $filename = $this->baseDir."/".$name;
+   
+        /* check if profile is still in use */ 
+        $ldap = $this->config->get_ldap_link();
+        $ldap->cd($this->config->current['BASE']);
+        $ldap->search("(gotoKioskProfile=*lhs.schema*)",array("cn","uid","gotoKioskProfile"));
+        $used_by = "";
+        $cnt = 3;
+        while(($attrs = $ldap->fetch()) && ($cnt)){
+          $cnt --;
+          $check = preg_replace("/^.*\//i","",$attrs['gotoKioskProfile'][0]);
+          if($check == $name){
+            $used_by .= $attrs['cn'][0].", ";
+          }
+        }
+        $used_by = preg_replace("/, $/","",$used_by);
 
-        if(isset($this->filesToAttach[$name])){
+        if(!empty($used_by)){
+          print_red(sprintf(_("Can't remove kioks profile, it is still in use by the following objects '%s'."),$used_by));
+        }elseif(isset($this->filesToAttach[$name])){
           unset($this->filesToAttach[$name]);
         }else{
 
