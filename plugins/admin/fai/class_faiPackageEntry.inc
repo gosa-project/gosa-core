@@ -113,14 +113,17 @@ $CHKS = "<input type='hidden' value='chkchange' name='chkchange'><table summary=
       }
     }
 
+    /* Prepare search filter */
+    $search_str = preg_replace("/\\\\\*/",".*",normalizePreg($this->searchStrPKG));
+
     $cnt = 0; 
     foreach($pkgs as $pkg){
       if($cnt > 200) {
         print_red(sprintf(_("Your specified search string '%s' returned too many results. Only the first 200 entries are shown, to keep the memory usage low."),$this->searchStrPKG));
         break;
       }
-      if((preg_match("/^".str_replace("*",".*",$this->searchStrPKG)."/i",$pkg[0]))||
-         (preg_match("/^".str_replace("*",".*",$this->searchStrPKG)."/i",$pkg[3]))){
+      if((preg_match("/^".$search_str."/i",$pkg[0]))||
+         (preg_match("/^".$search_str."/i",$pkg[3]))){
         if($this->categories[$pkg[2]]){
           if(in_array($pkg[0],$this->selected)){
             $check = " checked ";
