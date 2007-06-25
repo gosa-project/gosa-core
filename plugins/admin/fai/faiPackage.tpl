@@ -66,6 +66,7 @@
 			<br>
 			<select id="usedPackages" name="usedPackages[]" title="{t}Choosen packages{/t}" multiple style="width:100%;height:300px;">
        			{html_options options=$usedPackages}
+				<option value="" >&nbsp;</option>
       		</select>
 			<br>
 			<input type="submit" name="Addpkg" value="{t}Add{/t}" {$OptionsACL} {$cnACL}>
