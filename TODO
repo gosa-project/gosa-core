@@ -1,6 +1,14 @@
 Target for 2.6:
 ===============
 
+* /debian
+  Add docbase?
+  get-orig-source?
+  debian/substvars -> dpkg-source
+  desktop package with icon and start script?
+
+* Check standards
+
 * Can't use a dn longer than 100 characters as Glpi contact/technical responsible person.
 
 * Verify DNS plugin

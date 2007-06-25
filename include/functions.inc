@@ -1137,7 +1137,7 @@ function print_red()
                 style='
                       position: absolute;
                       background: transparent;
-                      background-color: #000000; 
+                      background-color: black; 
                       left: 0px;
                       top: 0px;
                       right:0px;
@@ -1146,8 +1146,8 @@ function print_red()
                       filter:Alpha(opacity=55);
                       opacity: 0.55'>
           </div>
-          <div style='margin-left:15%;margin-top:100px;".
-            "background-color:white;padding:5px;border:5px solid red;width:55%;z-index:150;".
+          <div style='left:20%;right:20%;top:30%;".
+            "background-color:white;padding:5px;border:5px solid red;z-index:150;".
             "position:absolute' id='e_layer'><table style='width:100%' summary='' border=0>".
             "<tr><td style='vertical-align:top;padding:10px'><img alt='' src='".
             get_template_path($img)."'></td>".
