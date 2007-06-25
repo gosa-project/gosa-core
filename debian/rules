@@ -94,6 +94,8 @@ install-stamp:
 		sed 's%require("smarty/Smarty.class.php");%require("/usr/share/php/smarty/libs/Smarty.class.php");%g' debian/gosa/usr/share/gosa/include/php_setup.inc > debian/gosa/usr/share/gosa/include/php_setup.inc.new; \
 		mv debian/gosa/usr/share/gosa/include/php_setup.inc.new debian/gosa/usr/share/gosa/include/php_setup.inc; \
 	fi
+	install -D -m 644 debian/overrides-lintian debian/gosa/usr/share/lintian/overrides/gosa
+	install -D -m 644 debian/overrides-linda debian/gosa/usr/share/linda/overrides/gosa
 	touch install-stamp
 
 patch: patch-stamp
