@@ -1133,18 +1133,17 @@ function print_red()
       
         if(isset($_SESSION['errors']) && strlen($_SESSION['errors'])==0) {
           $_SESSION['errors'].= "
-          <div  id='e_layer2'
+ <div  id='e_layer2'
                 style='
                       position: absolute;
-                      background: transparent;
-                      background-color: black; 
                       left: 0px;
                       top: 0px;
                       right:0px;
-                      bottom:0px; 
+                      bottom:0px;
                       z-index:149;
-                      filter:Alpha(opacity=55);
-                      opacity: 0.55'>
+                      background-image: url(images/opacity_black_75.png);
+'
+>
           </div>
           <div style='left:20%;right:20%;top:30%;".
             "background-color:white;padding:5px;border:5px solid red;z-index:150;".
