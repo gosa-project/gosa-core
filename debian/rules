@@ -74,8 +74,8 @@ install-stamp:
 	-rm -rf debian/gosa/usr/share/gosa/doc/guide/user/*/lyx-source
 	-rm -rf debian/gosa/usr/share/gosa/doc/guide/admin
 	-rm -rf debian/gosa/usr/share/gosa/doc/guide/devel
-	-for lang in de fr nl; do mkdir -p debian/gosa-help-$$lang/usr/share/gosa/doc/guide/user/$$lang; done
-	-for lang in de fr nl; do mv debian/gosa/usr/share/gosa/doc/guide/user/$$lang/* debian/gosa-help-$$lang/usr/share/gosa/doc/guide/user/$$lang/; done
+	-for lang in en de fr nl; do mkdir -p debian/gosa-help-$$lang/usr/share/gosa/doc/guide/user/$$lang; done
+	-for lang in en de fr nl; do mv debian/gosa/usr/share/gosa/doc/guide/user/$$lang/* debian/gosa-help-$$lang/usr/share/gosa/doc/guide/user/$$lang/; done
 	-cp -R debian/gosa/usr/share/gosa/doc/* debian/gosa/usr/share/doc/gosa
 	-rm -rf debian/gosa/usr/share/gosa/contrib
 	-rm -rf debian/gosa/usr/share/gosa/locale/en
