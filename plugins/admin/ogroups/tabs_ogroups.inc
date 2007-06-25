@@ -127,7 +127,23 @@ class ogrouptabs extends tabs
       unset($this->by_name['appgroup']);
       unset($this->by_object['appgroup']);
     }  
-  
+ 
+ 
+    /* Add environment tab if user or group is member in this object group*/ 
+    if((preg_match("/G/",$objects) || preg_match("/U/",$objects)) && !isset($this->by_name['environment'])){
+      $this->by_name['environment']= _("Environment");
+      $this->by_object['environment']= new environment($this->config, $this->dn);
+      $this->by_object['environment']->acl = "#all#";
+      $this->by_object['environment']->parent= &$this;
+    }
+
+    /* Remove environment tab if not required any longer */
+    if(!preg_match("/G/",$objects) && !preg_match("/U/",$objects) && isset($this->by_name['environment'])){
+      $this->by_object['environment']->remove_from_parent();
+      unset($this->by_name['environment']);
+      unset($this->by_object['environment']);
+    }  
+
  
     /* Move reference tab to last position*/
     if(isset($this->by_name['reference'])){
