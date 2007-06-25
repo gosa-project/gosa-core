@@ -1132,7 +1132,19 @@ function print_red()
         }
       
         if(isset($_SESSION['errors']) && strlen($_SESSION['errors'])==0) {
-          $_SESSION['errors'].= "<div style='margin-left:15%;margin-top:100px;".
+          $_SESSION['errors'].= "
+          <div  id='e_layer2'
+                style='
+                      position: absolute;
+                      background-color: #000000; 
+                      left: 0px;
+                      top: 0px;
+                      right:0px;
+                      bottom:0px; 
+                      z-index:149;
+                      opacity: 0.75'>
+          </div>
+          <div style='margin-left:15%;margin-top:100px;".
             "background-color:white;padding:5px;border:5px solid red;width:55%;z-index:150;".
             "position:absolute' id='e_layer'><table style='width:100%' summary='' border=0>".
             "<tr><td style='vertical-align:top;padding:10px'><img alt='' src='".
@@ -1140,7 +1152,7 @@ function print_red()
             "<td style='width:100%'><h1>"._("An error occurred while processing your request").
             "</h1><b>$string</b><br><br>$addmsg</td></tr><tr><td colspan='2' align='center'><br><button ".
             (($_SESSION['js']==FALSE)?"type='submit'":"type='button'").
-            " style='width:80px' onClick='hide(\"e_layer\")'>".
+            " style='width:80px' onClick='hide(\"e_layer\");hide(\"e_layer2\");'>".
             _("OK")."</button></td></tr></table></div>";
         }
 
