@@ -58,6 +58,7 @@
       </tr>
      </table>
 		<input type='hidden' name='javascript' value='false'/>		
+		{$focus}
     </form>
 
     <!-- Display error message on demand -->

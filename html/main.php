@@ -379,6 +379,16 @@ if ($error_collector != ""){
 } else {
   $smarty->assign("php_errors", "");
 }
+
+/* Set focus to the error button if we've an error message */
+$focus= "";
+if (isset($_SESSION['errors']) && $_SESSION['errors'] != ""){
+  $focus= '<script language="JavaScript" type="text/javascript">';
+  $focus.= 'document.forms[0].error_accept.focus();';
+  $focus.= '</script>';
+}
+$smarty->assign("focus", $focus);
+
 $display= $header.$smarty->fetch(get_template_path('framework.tpl'));
 
 if ((isset($config->data['MAIN']['W3CTEST']) && preg_match('/true/i', $config->data['MAIN']['W3CTEST']))&&(!empty($display))&&(is_callable("tidy_parse_string"))) {
@@ -395,13 +405,6 @@ if ((isset($config->data['MAIN']['W3CTEST']) && preg_match('/true/i', $config->d
 
 /* Show page... */
 echo $display;
-
-/* Set focus to the error button if we've an error message */
-if (isset($_SESSION['errors']) && $_SESSION['errors'] != ""){
-  echo '<script language="JavaScript" type="text/javascript">';
-  echo 'document.forms[0].error_accept.focus();';
-  echo '</script>';
-}
 
 /* Save plist and config */
 $_SESSION['plist']= $plist;

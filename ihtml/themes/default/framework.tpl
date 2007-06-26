@@ -65,4 +65,4 @@
      </table>
     </td>
   </tr>
-</table></form></body></html>
+</table>{$focus}</form></body></html>

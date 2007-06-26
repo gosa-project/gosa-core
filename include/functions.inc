@@ -1152,7 +1152,7 @@ function print_red()
             get_template_path($img)."'></td>".
             "<td style='width:100%'><h1>"._("An error occurred while processing your request").
             "</h1><b>$string</b><br><br>$addmsg</td></tr><tr><td colspan='2' align='center'><br><button ".
-            (($_SESSION['js']==FALSE)?"type='submit'":"type='button'").
+            (($_SESSION['js']==FALSE)?"type='submit'":"type='button' name='error_accept'").
             " style='width:80px' onClick='hide(\"e_layer\");hide(\"e_layer2\");'>".
             _("OK")."</button></td></tr></table></div>";
         }
