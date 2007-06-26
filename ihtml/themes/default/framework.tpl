@@ -49,7 +49,7 @@
     <!-- Menu -->
     <td style="background-color:#EEFFE6; vertical-align:top;border-bottom:1px solid #778F6E;" id="menucell">
       <div style="background-color:#CDF6BD; height:12px; width:100%;">&nbsp;</div>
-      <div style="height:650px">
+      <div style="min-height:650px">
       {$menu}
       </div>
 	  <br />
