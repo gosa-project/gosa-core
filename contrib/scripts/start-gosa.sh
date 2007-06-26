@@ -34,7 +34,11 @@ browser=$result
 if [ ! -d $HOME/.mozilla/$browser/*.gosa ]; then
 	echo "No browser profile found for GOsa - creating one..."
 	$browser -CreateProfile gosa
-	config=`echo $HOME/.mozilla/$browser/*.gosa/`
+	if [ "$browser" == "iceweasel" ]; then
+		config=`echo $HOME/.mozilla/firefox/*.gosa/`
+	else
+		config=`echo $HOME/.mozilla/$browser/*.gosa/`
+	fi
 
 	cat << EOF > $config/prefs.js
 # Mozilla User Preferences
