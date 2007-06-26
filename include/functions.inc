@@ -1162,6 +1162,7 @@ function print_red()
                   height:100%;
                   filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src='images/opacity_black.png'); \">
               </div>";
+              $hide = "hide(\"e_layer\");hide(\"e_layer2\");hide(\"e_layer3\");";
           }else{
 
             $_SESSION['errors'].= "
@@ -1175,6 +1176,7 @@ function print_red()
                   z-index:0;
                   background-image: url(images/opacity_black.png);\">
                </div>";
+              $hide = "hide(\"e_layer\");hide(\"e_layer2\");";
           }
 
           $_SESSION['errors'].= "
@@ -1186,7 +1188,7 @@ function print_red()
             "<td style='width:100%'><h1>"._("An error occurred while processing your request").
             "</h1><b>$string</b><br><br>$addmsg</td></tr><tr><td colspan='2' align='center'><br><button ".
             (($_SESSION['js']==FALSE)?"type='submit'":"type='button' name='error_accept'").
-            " style='width:80px' onClick='hide(\"e_layer\");hide(\"e_layer2\");'>".
+            " style='width:80px' onClick='".$hide."'>".
             _("OK")."</button></td></tr></table></div>";
         }
 
