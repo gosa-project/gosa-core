@@ -77,6 +77,9 @@ install-stamp:
 	-for lang in en de fr nl; do mkdir -p debian/gosa-help-$$lang/usr/share/gosa/doc/guide/user/$$lang; done
 	-for lang in en de fr nl; do mv debian/gosa/usr/share/gosa/doc/guide/user/$$lang/* debian/gosa-help-$$lang/usr/share/gosa/doc/guide/user/$$lang/; done
 	-cp -R debian/gosa/usr/share/gosa/doc/* debian/gosa/usr/share/doc/gosa
+	-cp -R contrib/scripts/desktoprc debian/gosa-desktop/etc/gosa/desktoprc
+	-cp -R contrib/scripts/start-gosa.sh debian/gosa-desktop/usr/bin/gosa
+	-cp -R debian/gosa*.xpm debian/gosa-desktop/usr/share/pixmaps
 	-rm -rf debian/gosa/usr/share/gosa/contrib
 	-rm -rf debian/gosa/usr/share/gosa/locale/en
 	-rm -rf debian/gosa/usr/share/gosa/gen_locale.sh
@@ -109,6 +112,7 @@ binary-indep: install
 	dh_installdocs 
 	dh_installcron
 	dh_installexamples
+	dh_installmenu
 	dh_installman debian/mkntpasswd.1
 	dh_link
 	dh_strip

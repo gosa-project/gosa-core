@@ -17,6 +17,16 @@ Description: Web Based LDAP Administration Program
  GOsa is a combination of system-administrator and end-user web
  interface, designed to handle LDAP based setups.
 
+Package: gosa-desktop
+Architecture: all
+Depends: iceweasel | mozilla | firefox
+Description: Desktop integration for GOsa
+ This package includes a menu definition for your desktop
+ environment.
+ .
+ GOsa is a combination of system-administrator and end-user web
+ interface, designed to handle LDAP based setups.
+
 Package: gosa-schema
 Architecture: all
 Depends: slapd
