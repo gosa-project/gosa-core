@@ -380,6 +380,12 @@ if ($error_collector != ""){
 }
 displayLogin();
 
+/* Set focus to the error button if we've an error message */
+if (isset($_SESSION['errors']) && $_SESSION['errors'] != ""){
+  echo '<script language="JavaScript" type="text/javascript">';
+  echo 'document.forms[0].error_accept.focus();';
+  echo '</script>';
+}
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
