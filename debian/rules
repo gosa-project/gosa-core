@@ -39,6 +39,8 @@ install-stamp:
 	-gzip -c9 debian/changelog > debian/gosa/usr/share/doc/gosa/changelog.Debian.gz
 	-mkdir -p debian/gosa-schema/usr/share/doc/gosa-schema
 	-gzip -c9 debian/changelog > debian/gosa-schema/usr/share/doc/gosa-schema/changelog.Debian.gz
+	-mkdir -p debian/gosa-desktop/usr/share/doc/gosa-desktop
+	-gzip -c9 debian/changelog > debian/gosa-desktop/usr/share/doc/gosa-desktop/changelog.Debian.gz
 	-mkdir -p debian/gosa-help-de/usr/share/doc/gosa-help-de
 	-gzip -c9 debian/changelog > debian/gosa-help-de/usr/share/doc/gosa-help-de/changelog.Debian.gz
 	-mkdir -p debian/gosa-help-en/usr/share/doc/gosa-help-en
