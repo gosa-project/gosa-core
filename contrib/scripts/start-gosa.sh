@@ -1,10 +1,19 @@
 #!/bin/sh
 # Start script for GOsa to be started via gecko based browsers
 
+[ -r /etc/gosa/desktoprc ] && . /etc/gosa/desktoprc
+[ -r $HOME/.gosa-desktop ] && . $HOME/.gosa-desktop
+
 url=""
-if [ $# -ne 1 ]; then
+if [ $# -ne 1 -a -z "$URL" ]; then
 	echo "Usage: $(basename $0) <URL>"
 	exit 1
+fi
+
+if [ $# -ne 1 ]; then
+	url="$URL"
+else
+	url="$1"
 fi
 
 # What browser are we using?
