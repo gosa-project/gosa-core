@@ -135,8 +135,8 @@ cat << EOF > $config/localstore.rdf
                    screenX="50"
                    screenY="25"
                    sizemode="normal"
-                   width="994"
-                   height="962" />
+                   width="1000"
+                   height="760" />
   <RDF:Description RDF:about="chrome://help/content/help.xul">
     <NC:persist RDF:resource="chrome://help/content/help.xul#help"/>
   </RDF:Description>
