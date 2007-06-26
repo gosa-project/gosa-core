@@ -396,6 +396,13 @@ if ((isset($config->data['MAIN']['W3CTEST']) && preg_match('/true/i', $config->d
 /* Show page... */
 echo $display;
 
+/* Set focus to the error button if we've an error message */
+if (isset($_SESSION['errors']) && $_SESSION['errors'] != ""){
+  echo '<script language="JavaScript" type="text/javascript">';
+  echo 'document.forms[0].error_accept.focus();';
+  echo '</script>';
+}
+
 /* Save plist and config */
 $_SESSION['plist']= $plist;
 $_SESSION['config']= $config;
