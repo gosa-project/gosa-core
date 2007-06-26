@@ -1,5 +1,5 @@
 #!/bin/sh
-# Start script for GOsa to be started via mozilla
+# Start script for GOsa to be started via gecko based browsers
 
 url=""
 if [ $# -ne 1 ]; then
@@ -7,10 +7,25 @@ if [ $# -ne 1 ]; then
 	exit 1
 fi
 
+# What browser are we using?
+result=""
+for browser in iceweasel firefox mozilla; do
+	if which $browser &> /dev/null; then
+		result=$browser
+		break
+	fi
+done
+if [ -z "$result" ]; then
+	echo "No suitable browser found to launch GOsa. You'll need iceweasel, firefox or mozilla in your PATH!"
+	exit 1
+fi
+browser=$result
+
 # Check for presence of gosa profile
-if [ ! -d $HOME/.mozilla/firefox/*.gosa ]; then
-	firefox -CreateProfile gosa
-	config=`echo $HOME/.mozilla/firefox/*.gosa/`
+if [ ! -d $HOME/.mozilla/$browser/*.gosa ]; then
+	echo "No browser profile found for GOsa - creating one..."
+	$browser -CreateProfile gosa
+	config=`echo $HOME/.mozilla/$browser/*.gosa/`
 
 	cat << EOF > $config/prefs.js
 # Mozilla User Preferences
@@ -124,5 +139,5 @@ fi
 
 
 # Start mozilla with GOsa profile
-firefox -P gosa
+$browser -P gosa
 
