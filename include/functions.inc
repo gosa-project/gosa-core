@@ -1141,6 +1141,8 @@ function print_red()
                       right:0px;
                       bottom:0px;
                       z-index:149;
+                      width:100%;
+                      height:100%;
                       background-image: url(images/opacity_black.png);
 '
 >
@@ -1397,9 +1399,9 @@ function print_header($image, $headline, $info= "")
     $display.= "&nbsp;";
     $display.= "</div>\n";
   }
-  if (isset($_SESSION['errors'])){
-    $display.= $_SESSION['errors'];
-  }
+#  if (isset($_SESSION['errors'])){
+#    $display.= $_SESSION['errors'];
+#  }
 
   return ($display);
 }
