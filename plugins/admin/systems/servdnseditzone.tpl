@@ -16,7 +16,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>{t}Network class{/t}
+					<td>{t}Netmask{/t}
 					</td>
 					<td>
 						<select name="NetworkClass" {if $NotNew} disabled {/if}>

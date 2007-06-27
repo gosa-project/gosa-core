@@ -331,7 +331,7 @@ class servdnseditZone extends plugin
     $smarty->assign("Mxrecords",  $div->DrawList());
     $smarty->assign("records"  ,  $this->generateRecordsList());
     $smarty->assign("NetworkClass",  $this->NetworkClass);
-    $smarty->assign("NetworkClasses",  array("A"=>"A","B"=>"B","C"=>"C"));
+    $smarty->assign("NetworkClasses",  array("A"=>"255.0.0.0 (Class A)","B"=>"255.255.0.0 (Class B)","C"=>"255.255.255.0 (Class C)"));
 
     /* Display tempalte */
     $display.= $smarty->fetch(get_template_path('servdnseditzone.tpl', TRUE));
