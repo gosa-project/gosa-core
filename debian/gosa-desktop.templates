@@ -1,7 +1,7 @@
 Template: gosa-desktop/url
 Type: string
 Default: https://www.gosa-project.org/demo/2.5
-Description: What is the URL to your GOsa installation?
+_Description: URL to your GOsa installation:
  The gosa start script can automatically point your
  browser to a system wide default location of your
  GOsa instance.

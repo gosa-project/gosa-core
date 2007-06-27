@@ -19,7 +19,7 @@ Description: Web Based LDAP Administration Program
 
 Package: gosa-desktop
 Architecture: all
-Depends: iceweasel | mozilla | firefox, debconf
+Depends: iceweasel | mozilla | firefox, debconf, po-debconf
 Description: Desktop integration for GOsa
  This package includes a menu definition for your desktop
  environment.
