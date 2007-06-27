@@ -102,15 +102,17 @@ class servdnseditZone extends plugin
 
     /* Detect Network class */
     if(!empty($this->ReverseZone)){
-      $addr = preg_replace("/^[^\/]+\//","",$this->ReverseZone);
-      if(preg_match("/^[0-9]*\.0\.0\.0$/",$addr)){
-        $this->NetworkClass = "A";
-      }
-      if(preg_match("/^[0-9]*\.[0-9]*\.0\.0$/",$addr)){
-        $this->NetworkClass = "B";
-      }
-      if(preg_match("/^[0-9]*\.[0-9]*\.[0-9]*\.0$/",$addr)){
-        $this->NetworkClass = "C";
+
+      $dots = count(split(".",$this->ReverseZone));
+      if($dots == 0){
+        $this->NetworkClass = "A";  
+        $this->ReverseZone .= ".0.0.0"; 
+      }elseif($dots == 1){
+        $this->NetworkClass = "B";  
+        $this->ReverseZone .= ".0.0"; 
+      }else{
+        $this->NetworkClass = "C";  
+        $this->ReverseZone .= ".0"; 
       }
     }
   }
@@ -505,7 +507,15 @@ class servdnseditZone extends plugin
       $this->Records [] = $rec;
     }
 
+  
     $ret['RECORDS'] = $this->Records; 
+ 
+    switch($this->NetworkClass){
+      case 'C' : $ret['ReverseZone']= preg_replace("/\.[0-9]*$/","",$this->ReverseZone);break;
+      case 'B' : $ret['ReverseZone']= preg_replace("/\.[0-9]*\.[0-9]*$/","",$this->ReverseZone);break;
+      case 'A' : $ret['ReverseZone']= preg_replace("/\.[0-9]*\.[0-9]*\.[0-9]*$/","",$this->ReverseZone);break;
+      default : trigger_error("Invalid network class given '".$this->NetworkClass."'");
+    }
 
     $ret['InitialReverseZone']=  $this->InitialReverseZone;
     $ret['InitialzoneName']   =  $this->InitialzoneName;
