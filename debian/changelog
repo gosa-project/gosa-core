@@ -1,3 +1,9 @@
+gosa (2.5.12-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cajus Pollmeier <cajus@debian.org>  Wed, 27 Jun 2007 10:41:54 +0200
+
 gosa (2.5.11-2) unstable; urgency=low
 
   * Added chinese translation
