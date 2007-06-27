@@ -15,6 +15,15 @@
 					<td><input type="text" name="ReverseZone" value="{$ReverseZone}" {if $NotNew} disabled {/if}>
 					</td>
 				</tr>
+				<tr>
+					<td>{t}Network class{/t}
+					</td>
+					<td>
+						<select name="NetworkClass" {if $NotNew} disabled {/if}>
+							{html_options options=$NetworkClasses selected=$NetworkClass }
+						</select>
+					</td>
+				</tr>
 			</table>
 		</td>
 		<td style="vertical-align:top;">
