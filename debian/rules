@@ -114,6 +114,7 @@ binary-indep: install
 	dh_installdocs 
 	dh_installcron
 	dh_installexamples
+	dh_installdebconf
 	dh_installmenu
 	dh_installman --package=gosa debian/mkntpasswd.1
 	dh_installman --package=gosa-desktop debian/gosa.1
