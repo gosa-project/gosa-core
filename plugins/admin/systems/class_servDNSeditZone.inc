@@ -99,6 +99,20 @@ class servdnseditZone extends plugin
         $this->sOAserial = date("Ymd")."01";
       }
     }
+
+    /* Detect Network class */
+    if(!empty($this->ReverseZone)){
+      $addr = preg_replace("/^[^\/]+\//","",$this->ReverseZone);
+      if(preg_match("/^[0-9]*\.0\.0\.0$/",$addr)){
+        $this->NetworkClass = "A";
+      }
+      if(preg_match("/^[0-9]*\.[0-9]*\.0\.0$/",$addr)){
+        $this->NetworkClass = "B";
+      }
+      if(preg_match("/^[0-9]*\.[0-9]*\.[0-9]*\.0$/",$addr)){
+        $this->NetworkClass = "C";
+      }
+    }
   }
 
   /* TRansports the geiven Arraykey one position up*/
