@@ -68,10 +68,18 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
    
     /* Mailto body header */ 
     $error_collector_mailto .=prepare4mailbody(
-                                "GOsa bug report".
-                                "\nGOsa Version : ".get_gosa_version().
-                                "\nDate : ".date("H:i:s d.m.Y").
-                                "\n\n");
+                                "Oups. Seems like you've catched some kind of bug inside GOsa/PHP. You may want to help ".
+                                "us to improve the software stability. If so, please provide some more information below.".
+                                "\n\n".
+                                "*** GOsa bug report ***".
+                                "\nGOsa Version: ".get_gosa_version().
+                                "\nDate: ".date("d.m.Y").
+                                "\nTime: ".date("H:i:s").
+                                "\n\n".
+                                "Please describe what you did to produce this error as detailed as possible. Can you ".
+                                "reproduce this bug using the demo on http://www.gosa-project.org ?".
+                                "\n\n".
+                                "*** PHP error information ***\n\n");
 
     if (isset($_SESSION['js']) && $_SESSION['js']==FALSE){
       $error_collector= "<div>";
