@@ -71,9 +71,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
                                 "GOsa bug report".
                                 "\nGOsa Version : ".get_gosa_version().
                                 "\nDate : ".date("H:i:s d.m.Y").
-                                "\n".
-                                "\nTrace : ".
-                                "\n");
+                                "\n\n");
 
     if (isset($_SESSION['js']) && $_SESSION['js']==FALSE){
       $error_collector= "<div>";
@@ -91,8 +89,8 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
               <button onClick='toggle(\"errorbox\")'>".
                 _("Toggle information")."
               </button>
-              <a href=\"mailto:gosa-bugs@oss.gonicus.de?subject=GOsa%20bugreport&body=%BUGBODY%\">
-                <img src='images/mailto.png' title='"._("Send bug report to the GOsa Team")."' class='center'>&nbsp;"._("Send bugreport")."
+              <a href=\"mailto:gosa-bugs@oss.gonicus.de?subject=GOsa%20bugreport&amp;body=%BUGBODY%\">
+                <img src='images/mailto.png' title='"._("Send bug report to the GOsa Team")."' class='center' alt=''>&nbsp;"._("Send bugreport")."
               </a>
             </td>
           </tr>
@@ -104,12 +102,20 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
   /* Create error header */
   $error_collector.= "<table summary=\"\" width=\"100%\" cellspacing=0 style='background-color:#402005;color:white;border:2px solid red'><tr><td colspan=3><h1 style='color:white'>"._("PHP error")." \"$errstr\"</h1></td></tr>";
   
+  $error_collector_mailto .= prepare4mailbody("=== Error === \n");
+  $error_collector_mailto .= prepare4mailbody("PHP error: $errstr ($errfile, line $errline)\n");
+  $error_collector_mailto .= prepare4mailbody("=== /Error === \n\n");
+
   /* Extract traceback data - if available */
   if (function_exists('debug_backtrace')){
     $trace= debug_backtrace();
 
+    $error_collector_mailto .= prepare4mailbody("=== Trace ===");
+
     /* Generate trace history */
     for ($index= 0; $index<count($trace); $index++){
+
+
       $ct= $trace[$index];
       $loc= "";
       if (isset($ct['class'])){
@@ -175,6 +181,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
                                    "\n");
       }
   }
+  $error_collector_mailto .= prepare4mailbody("=== /Trace === \n");
 
   /* Close error table */
   $error_collector.= "</table>";

@@ -2454,14 +2454,13 @@ function get_base_from_hook($dn, $attrib)
 
 function prepare4mailbody($string)
 {
-  $string = html_entity_decode($string);
+  $string = urlencode(html_entity_decode($string));
 
-  $from = array("/\n/" , "/&/" ,"/(\'|\")/");
-  $to   = array("%0A"  , "%26" ,"%22");
+  $from = array("/\#/" , "/&/" ,"/(\'|\")/" ,"/\+/");
+  $to   = array("::"  , "%26" ,"%22" ," ");
 
   $string = preg_replace($from,$to,$string);
 
-  echo "<pre>".$string."</pre>";
   return($string);
 }
 
