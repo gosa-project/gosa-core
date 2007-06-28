@@ -123,6 +123,8 @@ class faiScript extends plugin
     /* Call parent execute */
     plugin::execute();
 
+    $as[$bd][d] =2;
+
     /* Fill templating stuff */
     $smarty= get_smarty();
     $display= "";
