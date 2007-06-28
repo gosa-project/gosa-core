@@ -18,14 +18,15 @@ fi
 
 # What browser are we using?
 result=""
+echo -n "Looking for browser: "
 for browser in iceweasel firefox mozilla; do
-	if which $browser &> /dev/null; then
+	if which $browser 2> /dev/null; then
 		result=$browser
 		break
 	fi
 done
 if [ -z "$result" ]; then
-	echo "No suitable browser found to launch GOsa. You'll need iceweasel, firefox or mozilla in your PATH!"
+	echo "none found. You'll need iceweasel, firefox or mozilla in your PATH!"
 	exit 1
 fi
 browser=$result
