@@ -2468,7 +2468,7 @@ function prepare4mailbody($string)
                 "/</",
                 "/>/",
                 "/\?/",
-                "/(\'|\")/");
+                "/\"/");
   
   $to = array(  
                 "%25",
