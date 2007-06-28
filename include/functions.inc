@@ -2454,10 +2454,35 @@ function get_base_from_hook($dn, $attrib)
 
 function prepare4mailbody($string)
 {
-  $string = urlencode(html_entity_decode($string));
+  $string = html_entity_decode($string);
 
-  $from = array("/\#/" , "/&/" ,"/(\'|\")/" ,"/\+/");
-  $to   = array("::"  , "%26" ,"%22" ," ");
+  $from = array(
+                "/%/",
+                "/ /",
+                "/\n/",  
+                "/\r/",
+                "/!/",
+                "/#/",
+                "/*/",
+                "/\//",
+                "/</",
+                "/>/",
+                "/?/",
+                "/(\'|\")/");
+  
+  $to = array(  
+                "%25",
+                "%20",
+                "%0A",
+                "%0D",
+                "%21",
+                "%23",
+                "%2A",
+                "%2F",
+                "%3C",
+                "%3E",
+                "%3F",
+                "%22");
 
   $string = preg_replace($from,$to,$string);
 
