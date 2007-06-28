@@ -86,12 +86,14 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
               </font>
             </td>
             <td align=right>
+              <a href=\"mailto:gosa-bugs@oss.gonicus.de?subject=GOsa%20bugreport&amp;body=%BUGBODY%\">
+                <img border='0' src='images/mailto.png' title='"._("Send bug report to the GOsa Team")."' class='center' alt=''>&nbsp;"._("Send bugreport")."
+              </a>
+            </td>
+            <td align=right>
               <button onClick='toggle(\"errorbox\")'>".
                 _("Toggle information")."
               </button>
-              <a href=\"mailto:gosa-bugs@oss.gonicus.de?subject=GOsa%20bugreport&amp;body=%BUGBODY%\">
-                <img src='images/mailto.png' title='"._("Send bug report to the GOsa Team")."' class='center' alt=''>&nbsp;"._("Send bugreport")."
-              </a>
             </td>
           </tr>
         </table>
