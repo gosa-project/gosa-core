@@ -30,15 +30,21 @@ if [ -z "$result" ]; then
 	exit 1
 fi
 browser=$result
+dbrowser=$browser
+
+# Workaround for debian
+if [ "$browser" == "iceweasel" ]; then
+	dbrowser=firefox
+fi
 
 # Check for presence of gosa profile
-if [ ! -d $HOME/.mozilla/$browser/*.gosa ]; then
+if [ ! -d $HOME/.mozilla/$dbrowser/*.gosa ]; then
 	echo "No browser profile found for GOsa - creating one..."
 	$browser -CreateProfile gosa
 	if [ "$browser" == "iceweasel" ]; then
 		config=`echo $HOME/.mozilla/firefox/*.gosa/`
 	else
-		config=`echo $HOME/.mozilla/$browser/*.gosa/`
+		config=`echo $HOME/.mozilla/$dbrowser/*.gosa/`
 	fi
 
 	cat << EOF > $config/prefs.js
