@@ -47,6 +47,20 @@ if [ ! -d $HOME/.mozilla/$dbrowser/*.gosa ]; then
 		config=`echo $HOME/.mozilla/$dbrowser/*.gosa/`
 	fi
 
+	# Catch resolution
+	width=1024
+	height=768
+	if which xrandr > /dev/null; then
+		if xrandr 1> /dev/null 2> /dev/null; then
+			resolution=$(xrandr | sed -n '/current/s/^.*current \([0-9]*\)[^0-9]*\([0-9]*\).*$/\1 \2/p')
+			width=${resolution%% *}
+			height=${resolution##* }
+
+			[ $width -gt 1050 ] && width=1050
+			[ $height -gt 850 ] && height=850
+		fi
+	fi
+
 	cat << EOF > $config/prefs.js
 # Mozilla User Preferences
 
@@ -142,8 +156,8 @@ cat << EOF > $config/localstore.rdf
                    screenX="50"
                    screenY="25"
                    sizemode="normal"
-                   width="1000"
-                   height="760" />
+                   width="$width"
+                   height="$height" />
   <RDF:Description RDF:about="chrome://help/content/help.xul">
     <NC:persist RDF:resource="chrome://help/content/help.xul#help"/>
   </RDF:Description>
