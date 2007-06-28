@@ -2452,6 +2452,17 @@ function get_base_from_hook($dn, $attrib)
   }
 
 
+function prepare4mailbody($string)
+{
+  $string = $string;
+
+  $from = array("/\n/" , "/&/" ,"/(\'|\")/");
+  $to   = array("%0A"  , "%26" ,"");
+
+  $string = preg_replace($from,$to,$string);
+
+  return($string);
+}
 
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

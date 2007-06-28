@@ -20,7 +20,7 @@
 
 function gosaRaiseError($errno, $errstr, $errfile, $errline)
 {
-  global $error_collector,$config;
+  global $error_collector,$error_collector_mailto,$config;
 
   /* Return if error reporting is set to zero */
   if (error_reporting() == 0){
@@ -65,10 +65,39 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
 
   /* Create header as needed */
   if ($error_collector == ""){
+   
+    /* Mailto body header */ 
+    $error_collector_mailto .=prepare4mailbody(
+                                "GOsa bug report".
+                                "\nGOsa Version : ".get_gosa_version().
+                                "\nDate : ".date("H:i:s d.m.Y").
+                                "\n".
+                                "\nTrace : ".
+                                "\n");
+
     if (isset($_SESSION['js']) && $_SESSION['js']==FALSE){
       $error_collector= "<div>";
     } else {
-      $error_collector= "<table summary=\"\" width=\"100%\" style='background-color:#E0E0E0;border-bottom:1px solid black;z-index:150;'><tr><td><img alt=\"\" align=\"middle\" src='".get_template_path('images/warning.png')."'>&nbsp;<font style='font-size:14px;font-weight:bold'>"._("Generating this page caused the PHP interpreter to raise some errors!")."</font></td><td align=right><button onClick='toggle(\"errorbox\")'>"._("Toggle information")."</button></td></tr></table><div id='errorbox' style='position:absolute; z-index:150; visibility: hidden'>";
+      $error_collector= "
+        <table summary=\"\" width=\"100%\" style='background-color:#E0E0E0;border-bottom:1px solid black;z-index:150;'>
+          <tr>
+            <td>
+              <img alt=\"\" align=\"middle\" src='".get_template_path('images/warning.png')."'>&nbsp;
+              <font style='font-size:14px;font-weight:bold'>".
+                _("Generating this page caused the PHP interpreter to raise some errors!")."
+              </font>
+            </td>
+            <td align=right>
+              <button onClick='toggle(\"errorbox\")'>".
+                _("Toggle information")."
+              </button>
+              <a href=\"mailto:gosa-bugs@oss.gonicus.de?subject=GOsa%20bugreport&body=%BUGBODY%\">
+                <img src='images/mailto.png' title='"._("Send bug report to the GOsa Team")."' class='center'>&nbsp;"._("Send bugreport")."
+              </a>
+            </td>
+          </tr>
+        </table>
+        <div id='errorbox' style='position:absolute; z-index:150; visibility: hidden'>";
     }
   }
  
@@ -135,7 +164,16 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
       $error_collector.= "<tr style='background-color:$color'><td style='padding-left:20px' width=\"30%\">"._("Trace")."[$index]: $loc</td>";
       $error_collector.= "<td>"._("File").": $file ("._('Line')." $line)</td><td width=\"10%\">"._("Type").": $type</td></tr>";
       $error_collector.= "<tr style='background-color:$color'><td colspan=3 style='padding-left:20px;'>"._("Arguments").": $args</td></tr>";
-    }
+
+      /* Add trace part to mailto body */
+      $error_collector_mailto .= prepare4mailbody(
+                                   "\nTrace[".$index."]:".$loc.
+                                   "\nFile : ".$file.
+                                   "\nLine : ".$line.
+                                   "\nType : ".$type.
+                                   "\n  ".$args.
+                                   "\n");
+      }
   }
 
   /* Close error table */
@@ -162,6 +200,7 @@ error_reporting (E_ALL);
 
 /* Register error handler */
 $error_collector= "";
+$error_collector_mailto= "";
 set_error_handler('gosaRaiseError');
 
 $variables_order= "ES";

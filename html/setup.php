@@ -120,7 +120,7 @@ $smarty->assign("header", $_SESSION['setup']->get_header_html());
 $smarty->assign("bottom", $_SESSION['setup']->get_bottom_html());
 
 if ($error_collector != ""){
-  $smarty->assign("php_errors", $error_collector."</div>");
+  $smarty->assign("php_errors", preg_replace("/%BUGBODY%/",$error_collector_mailto,$error_collector)."</div>");
 } else {
   $smarty->assign("php_errors", "");
 }
