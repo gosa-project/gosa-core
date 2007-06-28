@@ -24,7 +24,7 @@ class Step_Config3 extends setup_step
 {
   var $header_image= "images/ldapserver.png";
 
-  var $errorlvl   = FALSE;
+  var $errorlvl   = TRUE;
 
   var $optional = array(
               "strict_units" => false,
