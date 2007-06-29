@@ -173,5 +173,5 @@ fi
 
 
 # Start mozilla with GOsa profile
-$browser -P gosa
+$browser -P gosa $url
 
