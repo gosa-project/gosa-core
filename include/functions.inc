@@ -2509,7 +2509,7 @@ function mac2company($mac)
       $line = fgets($handle, 4096);
 
       if (preg_match("/^$mac/", $line)){
-        echo "$line<br>";
+        $vendor= substr($line, 32);
       }
     }
     fclose($handle);
