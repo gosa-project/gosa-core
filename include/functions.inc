@@ -2490,5 +2490,34 @@ function prepare4mailbody($string)
 }
 
 
+function mac2company($mac)
+{
+  $vendor= "";
+
+  /* Generate a normailzed mac... */
+  $mac= substr(preg_replace('/[:-]/', '', $mac), 0, 6);
+
+  /* Check for existance of the oui file */
+  if (!is_readable(CONFIG_DIR."/oui.txt")){
+    return ("");
+  }
+
+  /* Open file and look for mac addresses... */
+  $handle = @fopen(CONFIG_DIR."/oui.txt", "r");
+  if ($handle) {
+    while (!feof($handle)) {
+      $line = fgets($handle, 4096);
+
+      if (preg_match("/^$mac/", $line)){
+        echo "$line<br>";
+      }
+    }
+    fclose($handle);
+  }
+
+  return ($vendor);
+}
+
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

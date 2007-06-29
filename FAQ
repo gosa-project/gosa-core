@@ -367,3 +367,9 @@ Q: I'd like to use rfc2307bis compliant groups. Is this possible?
 A: Yes - place the rfc2307bis="true" inside of the location section of
    your gosa.conf. Remember, that you can't create empty groups in this mode.
 
+
+Q: Can GOsa show some vendor information for given MAC addresses?
+
+A: Yes. Download http://standards.ieee.org/regauth/oui/oui.txt and place
+   it in /etc/gosa/oui.txt.
+
