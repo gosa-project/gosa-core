@@ -2508,7 +2508,7 @@ function mac2company($mac)
     while (!feof($handle)) {
       $line = fgets($handle, 4096);
 
-      if (preg_match("/^$mac/", $line)){
+      if (preg_match("/^$mac/i", $line)){
         $vendor= substr($line, 32);
       }
     }
