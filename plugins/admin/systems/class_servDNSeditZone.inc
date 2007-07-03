@@ -441,19 +441,19 @@ class servdnseditZone extends plugin
     switch($this->NetworkClass){
       case 'A': { 
                   if(!preg_match("/^[0-9]*\.0\.0\.0$/",$addr)){
-                    $message[] = sprintf(_("The specified network address is not matching with the specified zone class, try it this was x.0.0.0"));
+                    $message[] = sprintf(_("The specified network address is not matching with the specified zone class, try it this way x.0.0.0"));
                   }
                 }
                 break;
       case 'B': {
                   if(!preg_match("/^[0-9]*\.[0-9]*\.0\.0$/",$addr)){
-                    $message[] = sprintf(_("The specified network address is not matching with the specified zone class, try it this was x.x.0.0"));
+                    $message[] = sprintf(_("The specified network address is not matching with the specified zone class, try it this way x.x.0.0"));
                   }
                 }
                 break;
       case 'C': {
                   if(!preg_match("/^[0-9]*\.[0-9]*\.[0-9]*\.0$/",$addr)){
-                    $message[] = sprintf(_("The specified network address is not matching with the specified zone class, try it this was x.x.x.0"));
+                    $message[] = sprintf(_("The specified network address is not matching with the specified zone class, try it this way x.x.x.0"));
                   }
                 }
                 break;
