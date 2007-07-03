@@ -52,7 +52,6 @@ class divListMimeTypes extends MultiSelectWindow
                onClick='toggle_all_(\"^item_selected_[0-9]*$\",\"select_all\");' >";
 
     /* set Page header */
-    $this->AddHeader(array("string"=> $chk,          "attach"=>"style='width:20px;'"));
     $this->AddHeader(array("string" => "&nbsp;",                "attach" => "style='text-align:center;width:20px;'"));
     $this->AddHeader(array("string" => _("Mime type name")." / "._("Department"), "attach" => "style=''"));
     $this->AddHeader(array("string" => _("Actions"),            "attach" => "style='width:".$action_col_size."px;border-right:0px;text-align:right;'"));
@@ -158,13 +157,10 @@ class divListMimeTypes extends MultiSelectWindow
         $desc = " - [ ".$val['description'][0]." ]";
       }
 
-      /* Create each field */
-      $field0 = array("string" => "<input type='checkbox' id='item_selected_".$key."' name='item_selected_".$key."'>" ,
-                      "attach" => "style='width:20px;'");
       $field1 = array("string" => sprintf($mimeimg,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)), "attach" => "style='' ".$title);
       $field3 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:".$action_col_size."px;border-right:0px;text-align:right;'");
-      $this->AddElement(array($field0,$field1,$field2,$field3));
+      $this->AddElement(array($field1,$field2,$field3));
     }
   }
 

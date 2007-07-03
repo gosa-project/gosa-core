@@ -65,9 +65,7 @@ class mimetype extends plugin
     $this->orig_dn = $dn;	
 
     $this->ui = get_userinfo();
-    $acl= get_permissions ($dn, $this->ui->subtreeACL);
-    $this->acl= get_module_permission($acl, "mimetypes", $dn);
-
+ 
     /* get gotoMimeLeftClickActions I/E/Q */
     if(isset($this->gotoMimeLeftClickAction)){
       $str = $this->gotoMimeLeftClickAction;

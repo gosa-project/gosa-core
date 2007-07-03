@@ -173,6 +173,10 @@ class mimetypeManagement extends plugin
 
       /* Create new usertab object */
       $this->mimetabs= new mimetabs($this->config, $this->config->data['TABS']['MIMETABS'], $this->dn);
+
+      /* Set up the users ACL's for this 'dn' */
+      $acl= get_permissions ($this->DivListMimeTypes->selectedBase, $this->ui->subtreeACL);
+      $this->mimetabs->set_acl($acl);
     }   
 
 
@@ -248,6 +252,11 @@ class mimetypeManagement extends plugin
 
       /* Register mimetabs to trigger edit dialog */
       $this->mimetabs= new mimetabs($this->config,$this->config->data['TABS']['MIMETABS'], $this->dn);
+
+      /* Set up the users ACL's for this 'dn' */
+      $acl= get_permissions ($this->DivListMimeTypes->selectedBase, $this->ui->subtreeACL);
+      $this->mimetabs->set_acl($acl);
+
       $_SESSION['objectinfo']= $this->dn;
     }
 
@@ -448,7 +457,7 @@ class mimetypeManagement extends plugin
     }
   
     /* Get results and create index */ 
-    $res= get_list($Filter, "mimetypes", $use_base, array("cn","description","dn","objectClass"), $Flags);
+    $res= get_list($Filter, $this->ui->subtreeACL, $use_base, array("cn","description","dn","objectClass"), $Flags);
     foreach ($res as $val){
       $tmp[strtolower($val['cn'][0]).$val['cn'][0].$val['dn']]=$val;
     }
