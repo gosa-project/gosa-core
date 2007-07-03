@@ -12,9 +12,7 @@
 						{t}Mime type{/t}{$must}
 					</td>
 					<td>
-{render acl=$gotoMimeGroupACL}
-						<input type="text" name='cn' value="{$cn}" title='{t}Please enter a name for the mime type here{/t}'>
-{/render}
+						<input type="text" name='cn' value="{$cn}" title='{t}Please enter a name for the mime type here{/t}' {$gotoMimeGroupACL}>
 					</td>
 				</tr>
 				<tr>
@@ -22,11 +20,9 @@
 						{t}Mime group{/t}
 					</td>
 					<td>
-{render acl=$gotoMimeGroupACL}
-						<select name='gotoMimeGroup' title='{t}Categorize this mime type{/t}'>
+						<select name='gotoMimeGroup' title='{t}Categorize this mime type{/t}' {$gotoMimeGroupACL}>
 							{html_options output=$gotoMimeGroups values=$gotoMimeGroups selected=$gotoMimeGroup}
 						</select>
-{/render}
 					</td>
 				</tr>
 				<tr>
@@ -34,28 +30,19 @@
 						{t}Description{/t}
 					</td>
 					<td>
-{render acl=$descriptionACL}
-						<input type="text" name='description' value="{$description}" title='{t}Please specify a description{/t}'>
-{/render}
+						<input type="text" name='description' value="{$description}" title='{t}Please specify a description{/t}' {$descriptionACL}>
 					</td>
 				</tr>
 {if !$isReleaseMimeType} 
 				<tr>
 				  	<td><LABEL for="base">{t}Base{/t}{$must}</LABEL></td>
 				  	<td>
-	{render acl=$baseACL}
-		<select size="1" id="base" name="base" title="{t}Choose subtree to place application in{/t}">
-			{html_options options=$bases selected=$base_select}
-		</select>
-	{/render}
-	{if !$isReleaseMimeType}
-		{render acl=$baseACL disable_picture='images/folder_gray.png'}
-			<input type="image" name="chooseBase" src="images/folder.png" class="center" title="{t}Select a base{/t}">
-		{/render}
-	{/if}
+						<select size="1" id="base" name="base" title="{t}Choose subtree to place application in{/t}">
+							{html_options options=$bases selected=$base_select}
+						</select>
+						<input type="image" name="chooseBase" src="images/folder.png" class="center" title="{t}Select a base{/t}">
 				  	</td>
 				 </tr>
-
 {/if}
 			</table>
 			
@@ -71,14 +58,10 @@
 					<td style="vertical-align:top">
 						&nbsp;<br>
 						<input type="hidden" name="MAX_FILE_SIZE" value="100000">
-{render acl=$gotoMimeIconACL}
-						<input name="picture_file" type="file" size="20" maxlength="255" 
+						<input name="picture_file" type="file" size="20" maxlength="255" {$gotoMimeIconACL} 
 							accept="image/*.png" id="picture_file">
-{/render}
-{render acl=$gotoMimeIconACL}
-						<input type="submit" name="update_icon" value="{t}Update{/t}" 
+						<input type="submit" name="update_icon" value="{t}Update{/t}" {$gotoMimeIconACL}
 							title="{t}Update mime type icon{/t}">
-{/render}
 					</td>
 				</tr>
 			</table>
@@ -97,28 +80,16 @@
 	<tr>
 		<td style='width:50%; vertical-align:top;' >
 			{t}File patterns{/t}{$must}
-{render acl=$gotoMimeFilePatternACL}	
 			{$gotoMimeFilePatterns}	
-{/render}
 
-{render acl=$gotoMimeFilePatternACL}	
-			<input type='text'	 name='NewFilePattern'	  value='' title='{t}Please specify a new file pattern{/t}'>
-{/render}
-{render acl=$gotoMimeFilePatternACL}	
-			<input type='submit' name='AddNewFilePattern' value='{t}Add{/t}' title='{t}Add a new file pattern{/t}'>
-{/render}
+			<input type='text'	 name='NewFilePattern'	  value='' title='{t}Please specify a new file pattern{/t}' {$gotoMimeFilePatternACL}>
+			<input type='submit' name='AddNewFilePattern' value='{t}Add{/t}' title='{t}Add a new file pattern{/t}' {$gotoMimeFilePatternACL}>
 		</td>
 		<td style="border-left:1px solid #A0A0A0;vertical-align:top;">
 			{t}Applications{/t}
-{render acl=$gotoMimeApplicationACL}	
 			{$gotoMimeApplications}		
-{/render}
-{render acl=$gotoMimeApplicationACL}	
-			<input type='text'	 name='NewApplication'	  value='' title='{t}Enter an application name here{/t}'>
-{/render}
-{render acl=$gotoMimeApplicationACL}	
-			<input type='submit' name='AddNewApplication' value='{t}Add{/t}' title='{t}Add application{/t}'>
-{/render}
+			<input type='text'	 name='NewApplication'	  value='' title='{t}Enter an application name here{/t}' {$gotoMimeApplicationACL}>
+			<input type='submit' name='AddNewApplication' value='{t}Add{/t}' title='{t}Add application{/t}' {$gotoMimeApplicationACL}>
 		</td>
 	</tr>
 	<tr>	
@@ -137,24 +108,18 @@
 			<table>
 				<tr>
 					<td style='vertical-align:top; '>
-{render acl=$gotoMimeLeftClickActionACL}
-						<input type='radio' name='gotoMimeLeftClickAction_IE' value='I' 
+						<input type='radio' name='gotoMimeLeftClickAction_IE' value='I' {$gotoMimeLeftClickActionACL}
 							{if $gotoMimeLeftClickAction_I} checked {/if}>
-{/render}
 						{t}Show file in embedded viewer{/t}
 						<br>
 
-{render acl=$gotoMimeLeftClickActionACL}
-						<input type='radio' name='gotoMimeLeftClickAction_IE' value='E' 
+						<input type='radio' name='gotoMimeLeftClickAction_IE' value='E' {$gotoMimeLeftClickActionACL}
 							{if $gotoMimeLeftClickAction_E} checked {/if}>
-{/render}
 						{t}Show file in external viewer{/t}
 						<br>
 
-{render acl=$gotoMimeLeftClickActionACL}
-						<input type='checkbox' name='gotoMimeLeftClickAction_Q' value='1' 
+						<input type='checkbox' name='gotoMimeLeftClickAction_Q' value='1' {$gotoMimeLeftClickActionACL}
 							{if $gotoMimeLeftClickAction_Q} checked {/if}>
-{/render}
 						{t}Ask whether to save to local disk{/t}
 					</td>
 				</tr>
@@ -163,17 +128,11 @@
 		</td>
 		<td style="border-left:1px solid #A0A0A0;vertical-align:top;">
 			{t}Applications{/t}
-{render acl=$gotoMimeEmbeddedApplicationACL}
 			{$gotoMimeEmbeddedApplications}		
-{/render}
-{render acl=$gotoMimeEmbeddedApplicationACL}
-			<input type='text'	 name='NewEmbeddedApplication'	  value='' 
+			<input type='text'	 name='NewEmbeddedApplication'	  value='' {$gotoMimeEmbeddedApplicationACL}
 				title='{t}Enter an application name here{/t}'>
-{/render}
-{render acl=$gotoMimeEmbeddedApplicationACL}
-			<input type='submit' name='AddNewEmbeddedApplication' value='{t}Add{/t}' 
+			<input type='submit' name='AddNewEmbeddedApplication' value='{t}Add{/t}' {$gotoMimeEmbeddedApplicationACL}
 				title='{t}Add application{/t}'>
-{/render}
 		</td>
 	</tr>
 </table>

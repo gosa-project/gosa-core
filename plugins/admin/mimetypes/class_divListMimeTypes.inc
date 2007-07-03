@@ -95,6 +95,7 @@ class divListMimeTypes extends MultiSelectWindow
       }
     }
 
+    $listhead = MultiSelectWindow::get_default_header();
     $listhead .= " <input class='center' type='image' align='middle' src='images/list_new_mime.png' alt='"._("new").
       "' title='"._("Create new mime type")."' name='mime_new'>&nbsp;";
     $add_sep = true;
