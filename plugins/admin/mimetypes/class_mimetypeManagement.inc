@@ -254,7 +254,7 @@ class mimetypeManagement extends plugin
       $this->mimetabs= new mimetabs($this->config,$this->config->data['TABS']['MIMETABS'], $this->dn);
 
       /* Set up the users ACL's for this 'dn' */
-      $acl= get_permissions ($this->DivListMimeTypes->selectedBase, $this->ui->subtreeACL);
+      $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
       $this->mimetabs->set_acl($acl);
 
       $_SESSION['objectinfo']= $this->dn;
@@ -309,8 +309,8 @@ class mimetypeManagement extends plugin
 
       /* Load permissions for selected 'dn' and check if
          we're allowed to remove this 'dn' */
-      $acl= get_permissions ($dn, $this->ui->subtreeACL);
-      $acl= get_module_permission($acl, "mimetypes", $dn);
+      $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
+      $acl= get_module_permission($acl, "mimetype", $this->dn);
 
       if (chkacl($acl,"remove") == ""){
 
@@ -344,13 +344,13 @@ class mimetypeManagement extends plugin
 
       /* Load permissions for selected 'dn' and check if
          we're allowed to remove this 'dn' */
-      $acl= get_permissions ($dn, $this->ui->subtreeACL);
-      $acl= get_module_permission($acl, "mimetypes", $dn);
-
+      $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
+      $acl= get_module_permission($acl, "mimetype", $this->dn);
+  
       if (chkacl($acl,"remove") == ""){
 
         /* Delete request is permitted, perform LDAP action */
-        $this->mimetabs= new mimetabs($this->config, $this->config->data['TABS']['MIMETABS'], $this->dn,"mimetypes");
+        $this->mimetabs= new mimetabs($this->config, $this->config->data['TABS']['MIMETABS'], $this->dn,"mimetype");
         $this->mimetabs->set_acl_base($this->dn);
         $this->mimetabs->delete ();
         unset ($this->mimetabs);
@@ -361,7 +361,6 @@ class mimetypeManagement extends plugin
         /* Normally this shouldn't be reached, send some extra
            logs to notify the administrator */
         print_red (_("You are not allowed to delete this mime type!"));
-        new log("security","mimetypes/".get_class($this),$dn,array(),"Tried to trick deletion.");
       }
 
       /* Remove lock file after successfull deletion */
@@ -491,7 +490,7 @@ class mimetypeManagement extends plugin
       /* Cleanup object queue */
       $this->CopyPasteHandler->cleanup_queue();
       $dn = $this->mimetypes[$s_entry]['dn'];
-      $this->CopyPasteHandler->add_to_queue($dn,$s_action,"mimetabs","MIMETABS","mimetypes");
+      $this->CopyPasteHandler->add_to_queue($dn,$s_action,"mimetabs","MIMETABS","mimetype");
     }
 
     /* Add entries to queue */
@@ -505,10 +504,10 @@ class mimetypeManagement extends plugin
         $dn = $this->mimetypes[$id]['dn'];
 
         if($s_action == "copy_multiple"){
-          $this->CopyPasteHandler->add_to_queue($dn,"copy","mimetabs","MIMETABS","mimetypes");
+          $this->CopyPasteHandler->add_to_queue($dn,"copy","mimetabs","MIMETABS","mimetype");
         }
         if($s_action == "cut_multiple"){
-          $this->CopyPasteHandler->add_to_queue($dn,"cut","mimetabs","MIMETABS","mimetypes");
+          $this->CopyPasteHandler->add_to_queue($dn,"cut","mimetabs","MIMETABS","mimetype");
         }
       }
     }

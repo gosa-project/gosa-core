@@ -455,5 +455,5 @@ $ACLD['scalix']	= array(
 		"scalixLimitNotifyUser" 	=> _("Notify user"),
 		"scalixEmailAddress"		=> _("Scalix email addresses"));
  
-
+$ACLD['mimetype'] = array("create","remove","cn","gotoMimeApplication","gotoMimeLeftClickAction","gotoMimeIcon","description","gotoMimeFilePattern","gotoMimeEmbeddedApplication","gotoMimeGroup","gotoMimeFilePattern","gotoMimeApplication","gotoMimeEmbeddedApplication");
 ?>
