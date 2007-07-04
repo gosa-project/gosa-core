@@ -6,7 +6,7 @@
      <table summary="">
       <tr>
        <td><LABEL for="ou">{t}Name of department{/t}</LABEL>{$must}</td>
-       <td><input id="ou" name="ou" size=25 maxlength=60 value="{$ou}" title="{t}Name of subtree to create{/t}" {$ouACL}></td>
+       <td><input id="ou" name="ou" size=25 maxlength=180 value="{$ou}" title="{t}Name of subtree to create{/t}" {$ouACL}></td>
       </tr>
       <tr>
        <td><LABEL for="description">{t}Description{/t}</LABEL>{$must}</td>
