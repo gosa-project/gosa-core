@@ -43,7 +43,7 @@
 						<td>
 							<input type="checkbox" name="SubSearch" value="1" {$SubSearchCHK}
 								onClick="mainform.submit();">
-							{t}Ignore subtrees{/t}
+							{t}Search in subtrees{/t}
 						</td>
 					</tr>
                 </table>

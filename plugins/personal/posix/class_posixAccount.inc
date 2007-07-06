@@ -646,6 +646,9 @@ class posixAccount extends plugin
           $this->is_modified= TRUE;
         }
         $this->primaryGroup= $_POST['primaryGroup'];
+        if ($this->primaryGroup != 0){
+          $this->gidNumber= $this->primaryGroup;
+        }
       }
 
       /* Save pwmode dependent attributes, curently hardcoded because there're

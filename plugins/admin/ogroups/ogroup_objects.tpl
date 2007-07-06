@@ -35,7 +35,7 @@
     <input type=checkbox name="phones" value="1" {$phones} onClick="mainform.submit()" title="{t}Select to see phones{/t}">{t}Show phones{/t}<br>
  </p>
  <p class="contentboxb" style="border-top:1px solid #B0B0B0; background-color:#F8F8F8">
-    <input type=checkbox name="subtrees" value="1" {$subtrees} onClick="mainform.submit()" title="{t}Select to search within subtrees{/t}">{t}Ignore subtrees{/t}<br>
+    <input type=checkbox name="subtrees" value="1" {$subtrees} onClick="mainform.submit()" title="{t}Select to search within subtrees{/t}">{t}Search in subtrees{/t}<br>
  </p>
 
     <table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8"><tr><td width="50%"><img alt="" src="{$tree_image}" align=middle title="{t}Display objects of department{/t}">&nbsp;

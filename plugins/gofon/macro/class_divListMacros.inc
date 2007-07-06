@@ -48,7 +48,7 @@ class divListMacro extends MultiSelectWindow
     $this->AddHeader(array("string" => _("Actions"), "attach" => "style='width:60px;border-right:0px;text-align:right;'" ));
 
     /* Add Checkboxes / SubSearch checkbox */
-    $this->AddCheckBox("SubSearch",  _("Select to search within subtrees"), _("Ignore subtrees"), false);
+    $this->AddCheckBox("SubSearch",  _("Select to search within subtrees"), _("Search in subtrees"), false);
 
     /*                  Name                 ,Text                              ,Default  , Connect with alphabet  */
     $this->AddRegex   ("Regex",     _("Regular expression for matching macro names"),"*" , true);

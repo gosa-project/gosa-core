@@ -51,7 +51,7 @@ class divListBlocklist extends MultiSelectWindow
     $this->AddCheckBox("ShowReceiveBlocklists" , _("Select to see receive blocklists"), _("Show receive blocklists"),true);
   
     $this->AddCheckBox(SEPERATOR);
-    $this->AddCheckBox("SubSearch",  _("Select to search within subtrees"), _("Ignore subtrees"), false);
+    $this->AddCheckBox("SubSearch",  _("Select to search within subtrees"), _("Search in subtrees"), false);
 
     /*                  Name                 ,Text                              ,Default  , Connect with alphabet  */
     $this->AddRegex   ("Regex",     _("Regular expression for matching list names"),"*" , true);
