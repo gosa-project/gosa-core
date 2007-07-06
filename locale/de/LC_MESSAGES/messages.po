@@ -2375,7 +2375,7 @@ msgstr "Zeige Gruppen der Abteilung"
 #: plugins/admin/users/class_divListUsers.inc:63
 #: plugins/admin/mimetypes/class_divListMimeTypes.inc:60
 msgid "Search in subtrees"
-msgstr "Unterbäume durchsuchen"
+msgstr "Unterbäume in Suche einbeziehen"
 
 #: plugins/personal/posix/posix_groups.tpl:53
 msgid "Display groups matching"
