@@ -14,7 +14,7 @@ build: patch
 	#*************************************************
 
 clean: clean-patched unpatch
-clean-patched: clean-patched
+clean-patched:
 	dh_testdir
 	rm -f install-stamp 
 	-rm -f debian/files
