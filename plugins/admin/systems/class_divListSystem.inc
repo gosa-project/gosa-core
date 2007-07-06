@@ -68,11 +68,11 @@ class divListSystem extends MultiSelectWindow
 
     /* Add SubSearch checkbox */
     $this->AddCheckBox(SEPERATOR);
-    $this->AddCheckBox("SubSearch",  _("Select to search within subtrees"), _("Ignore subtrees"), false);
+    $this->AddCheckBox("SubSearch",  _("Select to search within subtrees"), _("Search in subtrees"), false);
 
     /*                  Name                 ,Text                              ,Default  , Connect with alphabet  */
     $this->AddRegex   ("Regex",     _("Display systems matching"),"*" , true);
-    $this->AddRegex   ("UserRegex", _("Display systems of user"), "*" , false, "images/search_user.png");
+    /*$this->AddRegex   ("UserRegex", _("Display systems of user"), "*" , false, "images/search_user.png");*/
   }
 
   function GenHeader()
