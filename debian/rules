@@ -8,7 +8,10 @@ SARGE_PACKAGE=`cat debian/changelog  | head -n1 | grep sarge`
 #export DH_VERBOSE=1
 
 build: patch 
-	#**** Off we go... ****
+	#*************************************************
+	#* Building GOsa into a Debian/GNU Linux Package *
+	#*                 please stand by               *
+	#*************************************************
 
 clean: clean-patched unpatch
 clean-patched: clean-patched
