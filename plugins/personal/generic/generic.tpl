@@ -432,7 +432,7 @@
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
-  document.mainform.sn.focus();
+	focus_field('sn');
   	if (document.mainform.yearSel != "")
 				populate(document.mainform,document.mainform.dateOfBirth);
   -->

@@ -26,6 +26,6 @@
     </p>
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
-  document.mainform.gotoKioskProfile.focus();
+	focus_field('gotoKioskProfile');
   -->
 </script>

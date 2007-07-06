@@ -10,5 +10,5 @@
 </table>
 
 <script language="JavaScript" type="text/javascript">
-  document.mainform.cn.focus();
+	focus_field('cn');
 </script>

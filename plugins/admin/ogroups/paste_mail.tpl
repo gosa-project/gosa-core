@@ -10,5 +10,5 @@
 </table>
 
 <script language="JavaScript" type="text/javascript">
-  document.mainform.mail.focus();
+	focus_field('mail');
 </script>

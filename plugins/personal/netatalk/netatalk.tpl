@@ -24,6 +24,6 @@
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
-  document.mainform.apple_user_homeurl_raw.focus();
+	focus_field('apple_user_homeurl_raw');
   -->
 </script>

@@ -67,6 +67,6 @@
     </p>
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
-  document.mainform.gotoPrinter.focus();
+	focus_field('gotoPrinter');
   -->
 </script>

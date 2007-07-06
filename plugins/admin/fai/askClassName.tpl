@@ -84,7 +84,6 @@
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
 	<!--
-	document.mainform.UseTextInputName.select();
-	document.mainform.UseTextInputName.focus();
+	focus_field('UseTextInputName');
 	-->
 </script>

@@ -108,6 +108,6 @@
 <input type="hidden" name="glpi_tpl_posted" value="1">
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
-  document.mainform.type.focus();
+	focus_field('type');
   -->
 </script></td></tr></table><p style="text-align:right">

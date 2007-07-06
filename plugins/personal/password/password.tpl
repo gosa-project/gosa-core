@@ -38,7 +38,7 @@
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
   nextfield= 'current_password';
-  document.mainform.current_password.focus();
+	focus_field('current_password');
   -->
 </script>
 

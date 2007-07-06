@@ -114,13 +114,13 @@
 <!-- Place cursor -->
 		<script language="JavaScript" type="text/javascript">
 		  <!-- // First input field on page
-		  document.mainform.l.focus();
+			focus_field('l');
 		  -->
 		</script>
      {else}
 		<script language="JavaScript" type="text/javascript">
 		  <!-- // First input field on page
-		  document.mainform.cn.focus();
+			focus_field('cn');
 		  -->
 		</script>
      {/if}

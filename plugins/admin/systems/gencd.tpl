@@ -14,7 +14,7 @@
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
-  nextfield= 'new_password';
-  document.mainform.new_password.focus();
+  	nextfield= 'new_password';
+	focus_field('new_password');
   -->
 </script>

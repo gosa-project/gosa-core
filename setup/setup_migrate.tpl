@@ -239,7 +239,7 @@
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
-  document.mainform.new_user_password.focus();
+	focus_field('new_user_password');
   -->
 </script>
 			<p class='seperator'>&nbsp;</p>	

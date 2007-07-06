@@ -87,6 +87,6 @@
 
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
-  document.mainform.phonenumber.focus();
+	focus_field('phonenumber');
   -->
 </script>

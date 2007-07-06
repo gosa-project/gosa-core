@@ -30,7 +30,7 @@
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
 <!-- // First input field on page
-document.mainform.search_string.focus();
+  focus_field('search_string');
 -->
 </script>
 

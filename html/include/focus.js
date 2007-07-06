@@ -335,4 +335,37 @@ function adjust_width(e) {
 	}
 }
 
+
+
+/* Set focus to first valid input field 
+		avoid IExplorer warning about hidding or disabled fields 
+*/
+function focus_field()
+{	
+		var i = 0;
+		while(focus_field.arguments[i] && document.getElementById(focus_field.arguments[i]).disabled == true) {
+			i++;
+		}
+		if(focus_field.arguments[i]){
+
+				var name		= focus_field.arguments[i];
+				var element = document.getElementsByName(name);
+
+				for(i = 0; i < element.length; i++) {
+						if(element[i].id == name && (
+								element[i].type != 'none' || 
+								element[i].type != 'hidden')
+						) {
+							element[i].blur();		
+							element[i].focus();		
+							break;
+						}
+				}
+		}
+}
+
+
+
+
+
 // vim:ts=2:syntax

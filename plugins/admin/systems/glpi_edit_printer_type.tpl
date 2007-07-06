@@ -16,7 +16,7 @@
 	</div>
 	<script language="JavaScript" type="text/javascript">
 	  <!-- // First input field on page
-	  document.mainform.type_string.focus();
+		focus_field('type_string');
 	  -->
 	</script>
 
@@ -32,7 +32,7 @@
     </p>
 	<script language="JavaScript" type="text/javascript">
 	  <!-- // First input field on page
-	  document.mainform.string.focus();
+		focus_field('string');
 	  -->
 	</script>
 

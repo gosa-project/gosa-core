@@ -15,5 +15,7 @@
    <input type='submit' name='create_script_cancel' value='{t}Cancel{/t}'>
 </div>
 <script language="JavaScript" type="text/javascript">
-	document.mainform.NewScriptName.focus();
+	<!--
+	focus_field('NewScriptName');
+	-->
 </script>

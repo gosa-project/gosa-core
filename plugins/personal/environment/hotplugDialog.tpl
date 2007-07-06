@@ -65,6 +65,6 @@
     </p>
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
-  document.mainform.hotplugName.focus();
+	focus_field('hotplugName');
   -->
 </script>

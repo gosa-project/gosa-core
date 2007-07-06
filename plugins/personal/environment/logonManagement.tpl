@@ -78,7 +78,7 @@
 
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
-  document.mainform.LogonName.focus();
+	focus_field('LogonName');
   -->
 </script>
 

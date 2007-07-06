@@ -24,7 +24,7 @@
 
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
-  document.mainform.zoneName.focus();
+	focus_field('zoneName');
   -->
 </script>
                                                                             

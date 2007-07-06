@@ -15,7 +15,7 @@
 </div>
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
-  document.mainform.cartridge_type_string.focus();
+	focus_field('cartridge_type_string');
   -->
 </script>
 

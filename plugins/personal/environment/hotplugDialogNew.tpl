@@ -55,7 +55,7 @@
 	</p>
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
-  document.mainform.HOT_name.focus();
+	focus_field('HOT_name');
   -->
 </script>
 

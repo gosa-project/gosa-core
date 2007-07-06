@@ -26,8 +26,7 @@
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
 	<!--
-	document.mainform.BranchName.select();
-	document.mainform.BranchName.focus();
+	focus_field('BranchName');
 	-->
 </script>
 {else}
