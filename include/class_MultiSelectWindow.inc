@@ -423,67 +423,65 @@ class MultiSelectWindow{
 	   Store data also into a session var, to keep the checkboxes check after reload  */
 	function save_object()
 	{
-		/* Update current base */
-		if($this->DepartmentsAdded){
-			$s_action ="";
-			foreach($_POST as $key => $value){
-				if(preg_match("/^dep_back.*/i",$key)){
-					$s_action="back";
-				}elseif(preg_match("/^dep_root.*/",$key)){
-					$s_action="root";
-				}elseif(preg_match("/^dep_home.*/i",$key)){
-					$s_action="home";
-				}
-			}
+    /* Save base selection from headpage selectbox*/
+    if(isset($_POST['CurrentMainBase'])){
+      $this->selectedBase = $_POST['CurrentMainBase'];
+    }
 
-			/* Save base selection from headpage selectbox*/
-			if(isset($_POST['CurrentMainBase'])){
-				$this->selectedBase = $_POST['CurrentMainBase'];
-			}
+    /* Update current base */
+    $s_action ="";
+    foreach($_POST as $key => $value){
+      if(preg_match("/^dep_back.*/i",$key)){
+        $s_action="back";
+      }elseif(preg_match("/^dep_root.*/",$key)){
+        $s_action="root";
+      }elseif(preg_match("/^dep_home.*/i",$key)){
+        $s_action="home";
+      }
+    }
 
-			/* Homebutton is posted */
-			if($s_action=="home"){
-        $ui= get_userinfo();
-        $base = get_base_from_people($ui->dn);
-				$this->selectedBase= $base;
-			}
+    /* Homebutton is posted */
+    if($s_action=="home"){
+      $ui= get_userinfo();
+      $base = get_base_from_people($ui->dn);
+      $this->selectedBase= $base;
+    }
 
-			/* Open selected department
-			   this is posted by the parent class MultiSelectWindow */
-			if(isset($_GET['act'])&& ($_GET['act'] == "dep_open")){
-				$s_entry = base64_decode($_GET['dep_id']);
-        if (!isset($this->config->departments[$s_entry])){
-          print_red(_("Error: The requested subtree has an inconsistent DN encoding, check your LDAP!"));
-        } else {
-  				$this->selectedBase = $this->config->departments[$s_entry];
-        }
-			}
+    /* Open selected department
+       this is posted by the parent class MultiSelectWindow */
+    if(isset($_GET['act'])&& ($_GET['act'] == "dep_open")){
+      $s_entry = base64_decode($_GET['dep_id']);
+      if (!isset($this->config->departments[$s_entry])){
+        print_red(_("Error: The requested subtree has an inconsistent DN encoding, check your LDAP!"));
+      } else {
+        $this->selectedBase = $this->config->departments[$s_entry];
+      }
+    }
 
-			/* back to the roots ^^ */
-			if($s_action=="root"){
-				$this->selectedBase=($this->config->current['BASE']);
-			}
+    /* back to the roots ^^ */
+    if($s_action=="root"){
+      $this->selectedBase=($this->config->current['BASE']);
+    }
 
 
-			/* If Back-button is pressed, move back one step in DN */
-			if($s_action=="back"){
-				//FIXME: This is not 100% correct. We'll only display ou's, but there may be
-				//       a step between. You'll stumble in a "hidden" department in this case.
-				$base_back= preg_replace("/^[^,]+,/", "", $_SESSION['CurrentMainBase']);
+    /* If Back-button is pressed, move back one step in DN */
+    if($s_action=="back"){
+      //FIXME: This is not 100% correct. We'll only display ou's, but there may be
+      //       a step between. You'll stumble in a "hidden" department in this case.
+      $base_back= preg_replace("/^[^,]+,/", "", $_SESSION['CurrentMainBase']);
 
-				/* The department array keeps non DN entries as index. We need to convert
-				   it before checking the existance. */
-				$base_back= trim(convert_department_dn($base_back));
+      /* The department array keeps non DN entries as index. We need to convert
+         it before checking the existance. */
+      $base_back= trim(convert_department_dn($base_back));
 
-				/* Check if the department exists, otherwise revert to the configure base DN */
-				if(isset($this->config->departments[$base_back])){
-					$this->selectedBase= $this->config->departments[$base_back];
-				}else{
-					$this->selectedBase= $this->config->departments['/'];
-				}
-			}
-      $_SESSION['CurrentMainBase'] = $this->selectedBase;
-		}
+      /* Check if the department exists, otherwise revert to the configure base DN */
+      if(isset($this->config->departments[$base_back])){
+        $this->selectedBase= $this->config->departments[$base_back];
+      }else{
+        $this->selectedBase= $this->config->departments['/'];
+      }
+    }
+    $_SESSION['CurrentMainBase'] = $this->selectedBase;
 
 		if(isset($_POST['MultiSelectWindow'.$this->filterName])){
 
