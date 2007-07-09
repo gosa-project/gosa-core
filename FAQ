@@ -393,3 +393,11 @@ A: Use Firefox, Konqueror, Safari, Opera, IE >= 7, etc. IE is broken and
 
    If you have much time, you can provide a seamless integration with MS
    filter css extension.
+
+
+Q: Is there a way to let users change passwords without logging into GOsa?
+
+A: Yes. Browse to "password.php". You can preset a couple of things i.e.:
+
+   http://your.admin.server/password.php?uid=cajus&method=md5&directory=GONICUS+GmbH
+

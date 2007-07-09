@@ -122,7 +122,6 @@ function change_password ($dn, $password, $mode=0, $hash= "")
       $hash= strtolower($matches[1]);
     }
 
-
     // Crypt with the detected Method
     $test = new  $available[$hash]($config);
     $test->attrs= $attrs;

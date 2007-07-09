@@ -18,11 +18,11 @@
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
 function displayPWchanger()
 {
   global $smarty;
-  $smarty->display(get_template_path('passwords.tpl'));
+
+  $smarty->display(get_template_path('password.tpl'));
   exit();
 }
 
@@ -41,6 +41,7 @@ if(is_array($_SESSION) && count($_SESSION)){
 }
 
 /* Reset errors */
+$_SESSION['js']                 = true;
 $_SESSION['errors']             = "";
 $_SESSION['errorsAlreadyPosted']= array();
 $_SESSION['LastError']          = "";
@@ -93,6 +94,28 @@ $domain = 'messages';
 bindtextdomain($domain, "$BASE_DIR/locale");
 textdomain($domain);
 
+/* Generate server list */
+$servers= array();
+if (isset($_POST['server'])){
+	$directory= validate($_POST['server']);
+} else {
+	$directory= $config->data['MAIN']['DEFAULT'];
+}
+foreach ($config->data['LOCATIONS'] as $key => $ignored){
+	$servers[$key]= $key;
+}
+if (isset($_GET['directory']) && isset($servers[$_GET['directory']])){
+	$smarty->assign ("show_directory_chooser", false);
+	$directory= validate($_GET['directory']);
+} else {
+	$smarty->assign ("server_options", $servers);
+	$smarty->assign ("server_id", $directory);
+	$smarty->assign ("show_directory_chooser", true);
+}
+
+/* Set config to selected one */
+$config->set_current($directory);
+$_SESSION['config']= $config;
 
 if ($_SERVER["REQUEST_METHOD"] != "POST"){
   @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
@@ -119,31 +142,132 @@ if ($config->data['MAIN']['FORCESSL'] == 'true' && $ssl != ''){
   exit;
 }
 
-/* Got a formular answer, validate and try to log in */
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
+/* Check for selected password method */
+$method= "";
+if (isset($_GET['method'])){
+	$method= validate($_GET['method']);
+	$tmp = new passwordMethod($config);
+	$available = $tmp->get_available_methods_if_not_loaded();
+	if (!isset($available[$method])){
+		echo _("Error: Password method not available!");
+		exit;
+	}
+}
 
-  /* Reset error messages */
-  $message= "";
+
+/* Check for selected user... */
+if (isset($_GET['uid']) && $_GET['uid'] != ""){
+	$uid= validate($_GET['uid']);
+	$smarty->assign('display_username', false);
+} elseif (isset($_POST['uid'])){
+	$uid= validate($_POST['uid']);
+	$smarty->assign('display_username', true);
+} else {
+	$uid= "";
+	$smarty->assign('display_username', true);
+}
+$current_password= "";
+$smarty->assign("changed", false);
+
+/* Got a formular answer, validate and try to log in */
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])){
 
   /* Destroy old sessions, they cause a successfull login to relog again ...*/
   if(isset($_SESSION['_LAST_PAGE_REQUEST'])){
     $_SESSION['_LAST_PAGE_REQUEST'] = time();
   }
 
-  echo "Well - I'm lazy...";
+  $message= array();
+  $current_password= $_POST['current_password'];
+
+  /* Do new and repeated password fields match? */
+  $new_password= $_POST['new_password'];
+  if ($_POST['new_password'] != $_POST['new_password_repeated']){
+	  $message[]= _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
+  } else {
+	  if ($_POST['new_password'] == ""){
+		  $message[]= _("The password you've entered as 'New password' is empty.");
+	  }
+  }
+
+  /* Password policy fulfilled? */
+  if (isset($config->data['MAIN']['PWDIFFER'])){
+	  $l= $config->data['MAIN']['PWDIFFER'];
+	  if (substr($_POST['current_password'], 0, $l) == substr($_POST['new_password'], 0, $l)){
+		  $message[]= _("The password used as new and current are too similar.");
+	  }
+  }
+  if (isset($config->data['MAIN']['PWMINLEN'])){
+	  if (strlen($_POST['new_password']) < $config->data['MAIN']['PWMINLEN']){
+		  $message[]= _("The password used as new is to short.");
+	  }
+  }
+
+  /* Validate */
+  if (!ereg("^[A-Za-z0-9_.-]+$", $uid)){
+	  $message[]= _("Please specify a valid username!");
+  } elseif (mb_strlen($_POST["current_password"], 'UTF-8') == 0){
+	  $message[]= _("Please specify your password!");
+  } else {
+
+	  /* Do we have the selected user somewhere? */
+	  $ui= ldap_login_user ($uid, $current_password);
+	  if ($ui == NULL){
+		$message[]= _("");
+	  } else {
+		/* Check acl... */
+		$ca= get_permissions ($ui->dn, $ui->subtreeACL);
+		$ca= get_module_permission($ca, "user", $ui->dn);
+		if (chkacl($ca, "password") != ""){
+			$message[]= _("You have no permissions to change your password.");
+		}
+	  }
+  }
+
+  /* Do we need to show error messages? */
+  if (count ($message) != 0){
+	  /* Show error message and continue editing */
+	  show_errors($message);
+  } else {
+
+	  /* Passed quality check, just try to change the password now */
+	  $output= "";
+	  if (isset($config->data['MAIN']['EXTERNALPWDHOOK'])){
+		  exec($config->data['MAIN']['EXTERNALPWDHOOK']." ".$ui->username." ".
+				  $_POST['current_password']." ".$_POST['new_password'], $resarr);
+		  if(count($resarr) > 0) {
+			  $output= join('\n', $resarr);
+		  }
+	  }
+	  if ($output != ""){
+		  $message[]= _("External password changer reported a problem: ".$output);
+		  show_errors($message);
+	  } else {
+		  if ($method != ""){
+			  change_password ($ui->dn, $_POST['new_password'], 0, $method);
+		  } else {
+			  change_password ($ui->dn, $_POST['new_password']);
+		  }
+		  gosa_log ("User/password has been changed");
+		  $smarty->assign("changed", true);
+	  }
+  }
+
+
 }
+
+/* Parameter fill up */
+$params= "";
+foreach (array('uid', 'method', 'directory') as $index){
+	$params.= "&amp;$index=".urlencode($$index);
+}
+$params= preg_replace('/^&amp;/', '?', $params);
+$smarty->assign('params', $params);
 
 /* Fill template with required values */
 $smarty->assign ('date', gmdate("D, d M Y H:i:s"));
-$smarty->assign ('username', $username);
+$smarty->assign ('uid', $uid);
 $smarty->assign ('password_img', get_template_path('images/password.png'));
-
-/* Some error to display? */
-if (!isset($message)){
-  $message= "";
-}
-
-$smarty->assign ("message", $message);
 
 /* Displasy SSL mode warning? */
 if ($ssl != "" && $config->data['MAIN']['WARNSSL'] == 'true'){
@@ -174,8 +298,8 @@ $smarty->assign("focus", $focus);
 
 displayPWchanger();
 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
 
 </body>
 </html>
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

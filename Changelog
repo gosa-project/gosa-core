@@ -6,6 +6,7 @@ GOsa2 changelog
   - Fixed several IE6 related Java-Script problems
   - Removed png.js by default. Looks ugly, but performs. Take
     a look at the FAQ on how to re-enable it for IE.
+  - Added non-login password change dialog
 
 * gosa 2.5.11a
   - Added chinese translation

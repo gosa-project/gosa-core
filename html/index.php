@@ -108,9 +108,6 @@ if (!file_exists(CONFIG_DIR."/".CONFIG_FILE)){
   exit();
 }
 
-/* Reset errors */
-$_SESSION['errors']= "";
-
 /* Check for java script */
 if(isset($_POST['javascript']) && $_POST['javascript'] == "true") {
   $_SESSION['js']= TRUE;
