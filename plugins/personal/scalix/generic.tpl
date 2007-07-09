@@ -8,7 +8,7 @@
      <td><input id="scalixMailnode" name="scalixMailnode" size=35 maxlength=65 {$scalixMailnodeACL} value="{$scalixMailnode}"></td>
     </tr>
     <tr>
-     <td><label for="scalixMailboxClass">{t}Salix mailbox class{/t}</label></td>
+     <td><label for="scalixMailboxClass">{t}Scalix mailbox class{/t}</label></td>
      <td>
       <select size="1" id="scalixMailboxClass" name="scalixMailboxClass" {$scalixMailboxClassACL} 
 			title="{t}Limited users con not make use of the group calendar functionality in Scalix{/t}">
