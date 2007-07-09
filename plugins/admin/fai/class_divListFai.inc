@@ -75,10 +75,17 @@ class divListFai extends MultiSelectWindow
     $this->AddRegex   ("Regex",     _("Display users matching"),"*" , true);
   }
 
-  function AddUserBoxToFilter($position){
+  function AddUserBoxToFilter($position)
+  {
     $str = "";
     if($position  == 2){
+
+      $r = "" != search_config($this->config->data,"faiManagement","POSTREMOVE");
+      $c = "" != search_config($this->config->data,"faiManagement","POSTCREATE");
+
       $smarty = get_smarty();
+      $smarty->assign("allow_create", $c);
+      $smarty->assign("allow_remove", $r);
       $smarty->assign("selectedBranch",$this->selectedBranch);
       $smarty->assign("branchimage","images/branch.png");
       $smarty->assign("branches",$this->AvailableBranches);

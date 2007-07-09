@@ -268,17 +268,22 @@ class faiManagement extends plugin
     /* Remove branch 
      */
     if($s_action == "remove_branch"){
-      $base= $this->DivListFai->selectedBranch;
 
-      /* Load permissions for selected 'dn' and check if
-         we're allowed to remove this 'dn' */
-      $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
-      $this->acl= get_module_permission($acl, "FAIclass", $base);
-      if (chkacl($this->acl, "delete") == ""){
-        $smarty->assign("info", sprintf(_("You're about to delete a fai branch / freeze  '%s'."), $this->DivListFai->selectedBranch));
-        return($smarty->fetch(get_template_path('remove_branch.tpl',TRUE)));
-      } else {
-        print_red (_("You are not allowed to delete this release!"));
+      $r = "" != search_config($this->config->data,"faiManagement","POSTREMOVE");
+      if($r){
+
+        $base= $this->DivListFai->selectedBranch;
+
+        /* Load permissions for selected 'dn' and check if
+           we're allowed to remove this 'dn' */
+        $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
+        $this->acl= get_module_permission($acl, "FAIclass", $base);
+        if (chkacl($this->acl, "delete") == ""){
+          $smarty->assign("info", sprintf(_("You're about to delete a fai branch / freeze  '%s'."), $this->DivListFai->selectedBranch));
+          return($smarty->fetch(get_template_path('remove_branch.tpl',TRUE)));
+        } else {
+          print_red (_("You are not allowed to delete this release!"));
+        }
       }
     }
 
@@ -288,6 +293,9 @@ class faiManagement extends plugin
      ****************/
 
     if(isset($_POST['delete_branch_confirm'])){
+
+      $r = "" != search_config($this->config->data,"faiManagement","POSTREMOVE");
+
       $bb =  $this->DivListFai->selectedBranch;
       if(!isset($ldap)){
         $ldap = $this->config->get_ldap_link();
@@ -310,6 +318,7 @@ class faiManagement extends plugin
         $this->postremove();
       }
     }
+  }
 
 
     /****************
@@ -450,27 +459,34 @@ class faiManagement extends plugin
       Display dialog to enter new Branch name
      ****************/
 
-    $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
-    $this->acl= get_module_permission($acl, "FAIclass", $this->DivListFai->selectedBase);
-    if((($s_action == "branch_branch")||($this->dispNewBranch)) && chkacl($this->acl,"FAIclass") == ""){
-      $this->dispNewBranch=true;
-      $smarty->assign("iframe",false);
-		  $display 	.= $smarty->fetch(get_template_path('faiNewBranch.tpl', TRUE, dirname(__FILE__)));
-      return($display);
+    $c = "" != search_config($this->config->data,"faiManagement","POSTCREATE");
+
+    if($c){
+      $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
+      $this->acl= get_module_permission($acl, "FAIclass", $this->DivListFai->selectedBase);
+      if((($s_action == "branch_branch")||($this->dispNewBranch)) && chkacl($this->acl,"FAIclass") == ""){
+        $this->dispNewBranch=true;
+        $smarty->assign("iframe",false);
+        $display 	.= $smarty->fetch(get_template_path('faiNewBranch.tpl', TRUE, dirname(__FILE__)));
+        return($display);
+      }
     }
-   
- 
+
     /****************
       Display dialog to enter new Freeze name
      ****************/
 
-    $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
-    $this->acl= get_module_permission($acl, "FAIclass", $this->DivListFai->selectedBase);
-    if((($s_action == "freeze_branch")||($this->dispNewFreeze)) && chkacl($this->acl,"FAIclass") == ""){
-      $this->dispNewFreeze = true;
-      $smarty->assign("iframe",false);
-		  $display 	.= $smarty->fetch(get_template_path('faiNewBranch.tpl', TRUE, dirname(__FILE__)));
-      return($display);
+    $c = "" != search_config($this->config->data,"faiManagement","POSTCREATE");
+
+    if($c){
+      $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
+      $this->acl= get_module_permission($acl, "FAIclass", $this->DivListFai->selectedBase);
+      if((($s_action == "freeze_branch")||($this->dispNewFreeze)) && chkacl($this->acl,"FAIclass") == ""){
+        $this->dispNewFreeze = true;
+        $smarty->assign("iframe",false);
+        $display 	.= $smarty->fetch(get_template_path('faiNewBranch.tpl', TRUE, dirname(__FILE__)));
+        return($display);
+      }
     }
 
 
