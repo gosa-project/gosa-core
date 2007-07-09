@@ -16,7 +16,7 @@
         <table summary="" style="width:100%;">
      <tr>
       <td>
-	{if $allow_remove}
+	{if $allow_create}
 		<input type="image" align="middle" value="branch" name="branch_branch" src="images/branch_small.png">
 		&nbsp;
 		{t}Create new branch{/t}
