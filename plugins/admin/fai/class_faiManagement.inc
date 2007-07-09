@@ -459,7 +459,7 @@ class faiManagement extends plugin
       Display dialog to enter new Branch name
      ****************/
 
-    $c = "" != search_config($this->config->data,"faiManagement","POSTCREATE");
+    $c = "" != search_config($this->config->data,"faiManagement","POSTMODIFY");
 
     if($c){
       $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
@@ -476,7 +476,7 @@ class faiManagement extends plugin
       Display dialog to enter new Freeze name
      ****************/
 
-    $c = "" != search_config($this->config->data,"faiManagement","POSTCREATE");
+    $c = "" != search_config($this->config->data,"faiManagement","POSTMODIFY");
 
     if($c){
       $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
