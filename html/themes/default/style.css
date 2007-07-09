@@ -231,6 +231,7 @@ a.maintitlebar, div.maintitlebar {
 	font-size:12px;
 	text-align:center;
 	vertical-align:middle;
+	cursor:pointer;
 }
 
 a.maintitlebar:hover {
@@ -267,6 +268,7 @@ p.menuitem {
 	margin:2px;
 	background-color:#dfffdf;
 	padding-right:5px;
+	cursor:pointer;
 }
 
 p.menuitem:hover {
@@ -349,6 +351,10 @@ a.menuitem:hover {
 a.iconmenu:link {
 	text-decoration:none;
 	color:#00008f;
+}
+
+td.iconmenu {
+	cursor:pointer;
 }
 
 td.iconmenu:hover {
@@ -610,6 +616,7 @@ td.gosaLoginBack {
 	width:606px;
 	height:406px;
 	background:url(images/login.png);
+	background-repeat:no-repeat;
 	vertical-align:top;
 }
 
