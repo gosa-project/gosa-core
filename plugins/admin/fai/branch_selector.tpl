@@ -21,10 +21,17 @@
 		&nbsp;
 		{t}Create new branch{/t}
 		<br>
-		<input type="image" align="middle" value="freeze" name="freeze_branch" src="images/closedlock.png">
+		<input type="image" align="middle" value="freeze" name="freeze_branch" src="images/freeze.png">
+	{else}
+		<img src="images/branch_small_grey.png" alt='{t}Branch{/t}' class='center'>
 		&nbsp;
-		{t}Create new locked branch{/t}
+		{t}Create new branch{/t}
+		<br>
+		<img src="images/freeze_grey.png" alt='{t}Freeze{/t}' class='center'>
 	{/if}
+	&nbsp;
+	{t}Create new locked branch{/t}
+
     {if $selectedBranch != "main" && $allow_remove}
     <br>
 	    <input type="image" align="middle" value="delete" name="remove_branch" src="images/edittrash.png">

@@ -318,7 +318,7 @@ class faiManagement extends plugin
         $this->postremove();
       }
     }
-  }
+  
 
 
     /****************
