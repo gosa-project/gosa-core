@@ -32,6 +32,12 @@ function displayLogin()
     if(isset($_POST["username"])){
       $username= $_POST["username"];
     }
+
+    /* Place ie workaround if needed */
+    if (isset($config->data['MAIN']['IE_PNG_WORKAROUND']) && preg_match("/true/i",$config->data['MAIN']['IE_PNG_WORKAROUND'])){
+      $smarty->assign('ieworkaround', 1);
+    }
+
     $smarty->assign ('date', gmdate("D, d M Y H:i:s"));
     $smarty->assign ('username', $username);
     $smarty->assign ('personal_img', get_template_path('images/personal.png'));

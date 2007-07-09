@@ -263,16 +263,9 @@ if (isset($_GET['reset'])){
   }
 }
 
-/* Install eGOsa hooks, convert _POST to _SESSION['POST'] */
-if(isset($_GET['explorer'])){
-  $_SESSION{'eGosa'}=1;
-}
-if(isset($_SESSION['POST'])){
-  $_SERVER["REQUEST_METHOD"] = "POST";
-  foreach ($_SESSION['POST'] as $key => $dummy){
-    $_POST[$key]=$_SESSION['POST'][$key];
-  }
-  unset($_SESSION['POST']);
+/* Place IE workaround */
+if (isset($config->data['MAIN']['IE_PNG_WORKAROUND']) && preg_match("/true/i",$config->data['MAIN']['IE_PNG_WORKAROUND'])){
+  $smarty->assign('ieworkaround', 1);
 }
 
 /* show web frontend */
