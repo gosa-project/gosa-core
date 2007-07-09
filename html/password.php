@@ -143,7 +143,7 @@ if ($config->data['MAIN']['FORCESSL'] == 'true' && $ssl != ''){
 }
 
 /* Check for selected password method */
-$method= "";
+$method= $config->current['HASH'];
 if (isset($_GET['method'])){
 	$method= validate($_GET['method']);
 	$tmp = new passwordMethod($config);
