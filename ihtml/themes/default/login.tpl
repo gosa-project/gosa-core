@@ -87,7 +87,7 @@
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
   nextfield= "{$nextfield}";
-  focus_field({$nextfield});
+  focus_field("{$nextfield}");
   -->
 </script>
 

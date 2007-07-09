@@ -342,30 +342,29 @@ function adjust_width(e) {
 */
 function focus_field()
 {	
-		var i = 0;
-		while(focus_field.arguments[i] && document.getElementById(focus_field.arguments[i]).disabled == true) {
-			i++;
-		}
-		if(focus_field.arguments[i]){
+		var i 		= 0;
+		var e 		= 0;
+		var found = false; 
+		var element_name = "";
+		var element =null;
 
-				var name		= focus_field.arguments[i];
-				var element = document.getElementsByName(name);
+		while(focus_field.arguments[i] && !found){
 
-				for(i = 0; i < element.length; i++) {
-						if(element[i].id == name && (
-								element[i].type != 'none' || 
-								element[i].type != 'hidden')
-						) {
-							element[i].blur();		
-							element[i].focus();		
-							break;
+				var tmp = document.getElementsByName(focus_field.arguments[i]);	
+				for(e = 0 ; e < tmp.length ; e ++ ){
+
+						if(tmp[e].disabled != true &&  tmp[e].type != "none" && tmp[e].type != "hidden" ){
+								found = true;
+								element = tmp[e];
 						}
 				}
+				i++;
+		}
+
+		if(element && found){
+				element.blur();		
+				element.focus();		
 		}
 }
-
-
-
-
 
 // vim:ts=2:syntax
