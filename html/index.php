@@ -382,14 +382,6 @@ if ($error_collector != ""){
   $smarty->assign("php_errors", "");
 }
 
-/* Set focus to the error button if we've an error message */
-$focus= "";
-if (isset($_SESSION['errors']) && $_SESSION['errors'] != ""){
-  $focus= '<script language="JavaScript" type="text/javascript">';
-  $focus.= 'document.forms[0].error_accept.focus();';
-  $focus.= '</script>';
-}
-$smarty->assign("focus", $focus);
 displayLogin();
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

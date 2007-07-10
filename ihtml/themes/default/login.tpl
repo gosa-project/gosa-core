@@ -58,7 +58,6 @@
       </tr>
      </table>
 		<input type='hidden' name='javascript' value='false'/>		
-		{$focus}
     </form>
 
     <!-- Display error message on demand -->
@@ -87,7 +86,7 @@
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
   nextfield= "{$nextfield}";
-  focus_field("{$nextfield}");
+  focus_field("error_accept","{$nextfield}");
   -->
 </script>
 
