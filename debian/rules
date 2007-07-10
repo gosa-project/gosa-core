@@ -53,7 +53,7 @@ install-stamp:
 	-mkdir -p debian/gosa-help-nl/usr/share/doc/gosa-help-nl
 	-gzip -c9 debian/changelog > debian/gosa-help-nl/usr/share/doc/gosa-help-nl/changelog.Debian.gz
 	-gzip -c9 Changelog > debian/gosa/usr/share/doc/gosa/changelog.gz
-	-cp AUTHORS TODO README FAQ README.safemode DEVEL debian/gosa/usr/share/doc/gosa/
+	-cp AUTHORS README FAQ doc/README.safemode doc/README.devel doc/README.openxchange debian/gosa/usr/share/doc/gosa/
 	-rm debian/gosa/usr/share/gosa/README debian/gosa/usr/share/gosa/INSTALL
 	-rm debian/gosa/usr/share/gosa/README.safemode
 	-rm debian/gosa/usr/share/gosa/AUTHORS debian/gosa/usr/share/gosa/Changelog
