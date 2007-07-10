@@ -1,9 +1,8 @@
 * How to get plugged in
 
-Lets explain how to create a simple GOsa plugin. The example shows a dummy plugin which is not
-directly related with LDAP. Independently of beeing an LDAP style or LDAP unrelated plugin, you
-may start a new plugin, by creating a new directory below the plugin directory structure. To be up to
-date, get a fresh SVN checkout:
+Independently of beeing an LDAP style or LDAP unrelated plugin, you may start a new plugin,
+by creating a new directory below the plugin directory structure. To be up to date, get a
+fresh SVN checkout:
 
 Change to the directory which will contain your GOsa checkout, then get the source:
 
@@ -19,8 +18,14 @@ for the bleeding edge development tree.
 The gosa directory will contain your initial checkout now. In order to update from SVN
 you simply can call "svn up".
 
-Now you've an up to date GOsa. Note that there may be most obviously something brokein if
-you use trunk. Continue by choosing a name and creating the directories:
+Now you've an up to date GOsa. Note that there may be most obviously something broken if
+you use trunk.
+
+
+* First example
+
+Lets explain how to create a simple GOsa plugin. The example shows a dummy plugin which is not
+directly related with LDAP.
 
 # cd plugins/addons
 # mkdir dummyplug && cd dummyplug
@@ -126,4 +131,5 @@ Now add the following entry to your Addons section in gosa.conf:
 --
 
 After logging into GOsa, you'll see your plugin in the addons section.
+
 
