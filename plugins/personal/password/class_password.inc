@@ -105,6 +105,7 @@ class password extends plugin
             gosa_log ("User/password has been changed");
             $ui->password= $_POST['new_password'];
             $_SESSION['ui']= $ui;
+#$this->handle_post_events("modify",array("pwd" => $_POST['new_password']));
             return($smarty->fetch(get_template_path("changed.tpl", TRUE)));
           }
         }
@@ -112,6 +113,15 @@ class password extends plugin
     }
     return($smarty->fetch(get_template_path("password.tpl", TRUE)));
   } 
+
+  function remove_from_parent()
+  {
+    $this->handle_post_events("remove");
+  }
+
+  function save()
+  {
+  }
 }
 
 
