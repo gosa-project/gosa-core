@@ -24,7 +24,7 @@
   <script language="javascript"src="include/warning.js" type="text/javascript"></script>
 </head>
 
-<body>
+<body style='height: 100%;width:100%;'>
 {* GOsa login - smarty template *}
 {$php_errors}
 {$errors}
