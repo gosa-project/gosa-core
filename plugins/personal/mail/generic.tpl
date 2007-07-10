@@ -165,7 +165,7 @@
         {html_options values=$spamlevel output=$spamlevel selected=$gosaSpamSortLevel}
    </select>
    <label for="gosaSpamMailbox">{t}to folder{/t}</label>
-   <select size="1" id="gosaSpamMailbox" {if $own_script != ""} disabled {/if} name="gosaSpamMailbox" {$gosaSpamMailboxACL} id="gosaSpamMailbox">
+   <select size="1" id="gosaSpamMailbox" {if $own_script != ""} disabled {/if} name="gosaSpamMailbox" {$gosaSpamMailboxACL}>
         	{html_options values=$spambox output=$spambox selected=$gosaSpamMailbox}
 			<option disabled>&nbsp;</option>
    </select>
