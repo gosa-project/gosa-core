@@ -7,6 +7,16 @@ GOsa2 changelog
   - Removed png.js by default. Looks ugly, but performs. Take
     a look at the FAQ on how to re-enable it for IE.
   - Added non-login password change dialog
+  - Various spelling fixes
+  - Added some extra robustness to the PPD reader code
+  - FAI partition ordering fixed, partition sizes fixed
+  - FAI release management updates
+  - Fixed installations that fail the schema check
+  - Updated error messages to fade out the interface
+  - Repository cleanup
+  - Added feedback link to easily report PHP errors
+  - Added more content sorting where needed
+  - Made gidNumber be the current in posix check hook
 
 * gosa 2.5.11a
   - Added chinese translation
