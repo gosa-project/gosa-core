@@ -68,7 +68,7 @@ class password extends plugin
       }
 
       /* Check given values */    
-      if(empty($_POST['current_password'])){
+      if(!isset($_POST['current_password']) || empty($_POST['current_password'])){
         print_red(_("You need to specify your current password in order to proceed."));
       }elseif ($_POST['new_password'] != $_POST['repeated_password']){
         print_red(_("The passwords you've entered as 'New password' and 'Repeated new password' do not match."));
@@ -79,7 +79,7 @@ class password extends plugin
       }elseif($check_length && (strlen($_POST['new_password']) < $length)){
         print_red(_("The password used as new is to short."));
       }elseif($check_hook && $check_hook_output != ""){
-        print_red(_("External password changer reported a problem: ".$output));
+        print_red(_("External password changer reported a problem: ".$check_hook_output));
       }else{
 
         /* Try to connect via current password */
@@ -110,7 +110,6 @@ class password extends plugin
         }
       }
     }
-
     return($smarty->fetch(get_template_path("password.tpl", TRUE)));
   } 
 }
