@@ -24,10 +24,9 @@
   <script language="javascript"src="include/warning.js" type="text/javascript"></script>
 </head>
 
-<body style='height: 100%;width:100%;'>
+<body style='height:100%; width:100%;'>
 {* GOsa login - smarty template *}
 {$php_errors}
-{$errors}
 
 {if $changed}
 <div class='success'">
@@ -41,11 +40,11 @@
     </h1>
 
     <!-- Display SSL warning message on demand -->
-    <p class='gosaLoginWarning'> {$ssl} </p>
+    <p class='warning'> {$ssl} </p>
     <input type='hidden' name='javascript' value='false'/>		
 
     <!-- Display error message on demand -->
-    <p class='gosaLoginWarning'> {$message} </p>
+    <p class='warning'> {$message} </p>
 
 
     <p class="infotext">
@@ -94,7 +93,7 @@
                  title='{t}Click here to change your password{/t}'>
     </div>
     <!-- check, if cookies are enabled -->
-    <p class='gosaLoginWarning'>
+    <p class='warning'>
      <script language="JavaScript" type="text/javascript">
         <!--
             document.cookie = "gosatest=empty;path=/";
@@ -110,6 +109,8 @@
 
 {/if}
 
+<table class='iesucks'><tr><td>{$errors}</td></tr></table>
+
 <!-- Place cursor in username field -->
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
@@ -117,6 +118,5 @@
   -->
 </script>
 
-<!-- Spacer for some browsers -->
-<div class='gosaLoginSpacer'></div>
 </body>
+</html>
