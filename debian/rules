@@ -64,7 +64,7 @@ install-stamp:
 	-mkdir -p debian/gosa/var/spool/gosa/config
 	-mkdir -p debian/gosa/var/spool/gosa/cache
 	-rm -rf debian/gosa/usr/share/gosa/compile
-	-rm -rf debian/gosa/usr/share/gosa/fix_config.sh
+	-cp -rf debian/gosa/usr/share/gosa/fix_config.sh debian/gosa/usr/share/doc/gosa/contrib
 	-mkdir -p debian/gosa/etc/gosa/vacation
 	-cp -R debian/apache.conf debian/gosa/etc/gosa/apache.conf
 	-cp -R contrib/encodings debian/gosa/etc/gosa/encodings
