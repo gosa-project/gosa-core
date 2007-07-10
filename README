@@ -34,6 +34,12 @@ You may want your translations to be included in the main GOsa repository,
 then just send the .po file to me.
 
 
+* Further README's
+
+Take a look at the doc/ subdirectory to find more information about
+PHP's safemode, openxchange, etc.
+
+
 * NOTES
 
 You'll need php-cups (http://www.cups.org) and php-krb5 (pear) in order
