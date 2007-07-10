@@ -16,11 +16,6 @@ class scalixAccount extends plugin
   var $plHeadline   = "Scalix";
   var $plDescription= "This does something";
 
-  /* CLI vars */
-  var $cli_summary    = "Manage users scalix account";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters = array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* plugin specific values - scalixUserClass */
   /* MUST */
   var $scalixScalixObject= TRUE; //TRUE or FALSE
