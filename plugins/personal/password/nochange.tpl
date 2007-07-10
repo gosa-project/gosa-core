@@ -1,5 +1,5 @@
 <div class="plugtop">
-  <img class="center" alt="" src="{$headimage}" align="middle">{t}Password change not allowed{/t}
+  <img class="center" alt="" src="images/error.png" align="middle">{t}Password change not allowed{/t}>
 </div>
 
 <p>
