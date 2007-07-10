@@ -375,7 +375,7 @@ class Step_Migrate extends setup_step
          ){
         $attrs['selected'] = FALSE;
         $attrs['ldif']     = "";
-        $this->outside_users[base64_encode($attrs['dn'])] = $attrs;
+        $this->outside_groups[base64_encode($attrs['dn'])] = $attrs;
       }
     }
 
