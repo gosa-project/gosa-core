@@ -81,6 +81,7 @@ class acl extends plugin
 	} else {
 		$smarty->assign("selfflag", "");
 	}
+	asort($obj);
 	$smarty->assign("objects", $obj);
 	$display= $smarty->fetch (get_template_path('acl.tpl', TRUE));
 
