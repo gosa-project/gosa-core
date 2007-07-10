@@ -3,26 +3,24 @@
 Lets explain how to create a simple GOsa plugin. The example shows a dummy plugin which is not
 directly related with LDAP. Independently of beeing an LDAP style or LDAP unrelated plugin, you
 may start a new plugin, by creating a new directory below the plugin directory structure. To be up to
-date, get a fresh CVS checkout:
+date, get a fresh SVN checkout:
 
-Create a ~/.cvsrc with the following content:
-cvs -z4 -q
-diff -u3 -p
-update -dP
-checkout -P
+Change to the directory which will contain your GOsa checkout, then get the source:
 
-Change to the directory which will contain your GOsa checkout.
-# cd ~projects
-# export CVSROOT=:pserver:anonymous@cvs.alioth.debian.org:/cvsroot/gosa
-# cvs login
-# cvs co gosa
+# svn co https://oss.gonicus.de/repositories/gosa/branches/2.5 gosa
 
-The gosa directory will contain your initial checkout now. In order to update from CVS
-you simply can call "cvs up". There's no need to set the CVSROOT directory anymore,
-as long as you cal all cvs commands inside the gosa directory and its subdirectories.
+for the current 2.5 development line or
 
-Now you've an up to date GOsa. Not that this is CVS HEAD, so there may be something
-broken. Continue by choosing a name and creating the directories:
+# svn co https://oss.gonicus.de/repositories/gosa/trunk gosa
+
+for the bleeding edge development tree.
+
+
+The gosa directory will contain your initial checkout now. In order to update from SVN
+you simply can call "svn up".
+
+Now you've an up to date GOsa. Note that there may be most obviously something brokein if
+you use trunk. Continue by choosing a name and creating the directories:
 
 # cd plugins/addons
 # mkdir dummyplug && cd dummyplug
