@@ -43,7 +43,6 @@
     <!-- Display SSL warning message on demand -->
     <p class='gosaLoginWarning'> {$ssl} </p>
     <input type='hidden' name='javascript' value='false'/>		
-    {$focus}
 
     <!-- Display error message on demand -->
     <p class='gosaLoginWarning'> {$message} </p>
@@ -114,7 +113,7 @@
 <!-- Place cursor in username field -->
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
-  focus_field('directory', 'username', 'current_password');
+  focus_field('error_accept','uid','directory', 'username', 'current_password');
   -->
 </script>
 
