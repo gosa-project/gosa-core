@@ -364,8 +364,9 @@ class Step_Migrate extends setup_step
       return(false);
     }
 
+    $this->outside_groups = array();
     while($attrs = $ldap->fetch()){
-      $group_db_base = preg_replace("/^[^,]+,".normalizePreg($group_ou)."/","",$attrs['dn']);
+      $group_db_base = preg_replace("/^[^,]+,".normalizePreg($group_ou)."+,/i","",$attrs['dn']);
 
       /* Check if entry is not an addressbook only user
        *  and verify that he is in a valid department
@@ -441,7 +442,7 @@ class Step_Migrate extends setup_step
     } 
 
     while($attrs = $ldap->fetch()){
-      $people_db_base = preg_replace("/^[^,]+,".normalizePreg($people_ou)."/","",$attrs['dn']);
+      $people_db_base = preg_replace("/^[^,]+,".normalizePreg($people_ou)."/i","",$attrs['dn']);
  
       /* Check if entry is not an addressbook only user 
        *  and verify that he is in a valid department
