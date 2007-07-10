@@ -420,14 +420,6 @@ attributetype ( 1.3.6.1.4.1.19414.2.1.605
   EQUALITY integerMatch
   SYNTAX 1.3.6.1.4.1.1466.115.121.1.27 )
 
-# cyrus imapd access control list
-# acls work with users and groups
-attributetype ( 1.3.6.1.4.1.19414.2.1.651
-  NAME 'acl'
-  EQUALITY caseIgnoreIA5Match
-  SUBSTR caseIgnoreIA5SubstringsMatch
-  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{256} )
-
 # enable secure imap 
 attributetype ( 1.3.6.1.4.1.19414.2.1.606
   NAME 'cyrus-imaps'
