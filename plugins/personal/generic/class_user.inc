@@ -1020,8 +1020,8 @@ class user extends plugin
     if ($this->dn == "new" && chkacl($acl, "create") != ""){
       $message[]= _("You have no permissions to create a user on this 'Base'.");
     } elseif ($this->dn != $this->new_dn && $this->dn != "new"){
-      $acl= get_permissions ($this->dn, $ui->subtreeACL);
-      $acl= get_module_permission($acl, "user", $this->dn);
+      $acl= get_permissions ($this->new_dn, $ui->subtreeACL);
+      $acl= get_module_permission($acl, "user", $this->new_dn);
       if (chkacl($acl, "create") != ""){
         $message[]= _("You have no permissions to move a user from the original 'Base'.");
       }
