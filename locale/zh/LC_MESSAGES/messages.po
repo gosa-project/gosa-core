@@ -2,13 +2,13 @@
 # Copyright (C) 2003 GONICUS GmbH, Germany
 # This file is distributed under the same license as the GOsa2 package.
 #
-#: html/password.php:216
 # Jiang Xin <worldhello.net@gmail.com>, 2007.
+#: html/password.php:216
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-11 08:23+0200\n"
+"POT-Creation-Date: 2007-07-11 17:17+0200\n"
 "PO-Revision-Date: 2007-07-11 18:45+0800\n"
 "Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
 "Language-Team: Chinese Simplified <zh@li.org>\n"
@@ -473,7 +473,7 @@ msgstr ""
 #: plugins/personal/generic/generic_picture.tpl:35
 #: plugins/personal/generic/generic_certs.tpl:78
 #: plugins/personal/generic/password.tpl:19
-#: plugins/personal/generic/main.inc:161
+#: plugins/personal/generic/main.inc:164
 #: plugins/gofax/blocklists/generic.tpl:87
 #: plugins/gofax/blocklists/remove.tpl:16
 #: plugins/gofax/faxaccount/locals.tpl:62
@@ -586,7 +586,9 @@ msgid ""
 "This dialog provides a simple way to change your password. Enter the current "
 "password and the new password (twice) in the fields below and press the "
 "'Change' button."
-msgstr "这个对话框为您提供一个修改的口令的简单方法。在下面的对话框中输入当前口令以及新口令（两次），然后按“修改”按钮。"
+msgstr ""
+"这个对话框为您提供一个修改的口令的简单方法。在下面的对话框中输入当前口令以及"
+"新口令（两次），然后按“修改”按钮。"
 
 #: ihtml/themes/default/password.tpl:58 ihtml/themes/default/password.tpl:60
 #: ihtml/themes/default/login.tpl:44 ihtml/themes/default/login.tpl:47
@@ -673,7 +675,8 @@ msgstr ""
 msgid ""
 "Ignoring this message will change/destroy the data you're currently editing, "
 "so please close multiple windows and log in again."
-msgstr "忽略这条信息将会修改/破坏您当前编辑的数据，所以请关闭多个窗口并重新登录。"
+msgstr ""
+"忽略这条信息将会修改/破坏您当前编辑的数据，所以请关闭多个窗口并重新登录。"
 
 #: ihtml/themes/default/conflict.tpl:14
 msgid "Logout"
@@ -705,7 +708,7 @@ msgstr ""
 #: plugins/personal/scalix/main.inc:105 plugins/personal/samba/main.inc:105
 #: plugins/personal/generic/generic_picture.tpl:33
 #: plugins/personal/generic/generic_certs.tpl:76
-#: plugins/personal/generic/main.inc:159
+#: plugins/personal/generic/main.inc:162
 #: plugins/gofax/blocklists/generic.tpl:85
 #: plugins/gofax/faxaccount/main.inc:89
 #: plugins/gofon/phoneaccount/main.inc:105
@@ -1250,7 +1253,8 @@ msgid ""
 msgstr "GOsa 无法获取安装的 schema 文件信息。请确认。"
 
 #: html/index.php:241
-msgid "Your ldap setup contains old schema definitions. Please re-run the setup."
+msgid ""
+"Your ldap setup contains old schema definitions. Please re-run the setup."
 msgstr "您 LDAP 的设置包含老的 schema 定义。请重新执行安装。"
 
 #: html/index.php:260
@@ -1284,7 +1288,8 @@ msgid ""
 msgstr "无法连接到 glpi 数据库，PHP 没有安装 mysql 扩展。"
 
 #: html/get_attachment.php:55
-msgid "Can't connect to specified database, please check your glpi configuration."
+msgid ""
+"Can't connect to specified database, please check your glpi configuration."
 msgstr "无法连接到指定数据库，请检查您 glpi 设置。"
 
 #: html/get_attachment.php:64
@@ -1454,7 +1459,7 @@ msgstr "触发所有主机命令"
 #: plugins/personal/connectivity/main.inc:129
 #: plugins/personal/scalix/main.inc:115 plugins/personal/samba/main.inc:115
 #: plugins/personal/netatalk/main.inc:111
-#: plugins/personal/generic/main.inc:181 plugins/gofax/faxaccount/main.inc:96
+#: plugins/personal/generic/main.inc:183 plugins/gofax/faxaccount/main.inc:96
 #: plugins/gofon/phoneaccount/main.inc:112
 msgid "Click the 'Edit' button below to change informations in this dialog"
 msgstr "点击下面的“编辑”按钮修改该对话框内的信息"
@@ -1466,7 +1471,7 @@ msgstr "点击下面的“编辑”按钮修改该对话框内的信息"
 #: plugins/personal/connectivity/main.inc:130
 #: plugins/personal/scalix/main.inc:117 plugins/personal/samba/main.inc:116
 #: plugins/personal/netatalk/main.inc:112
-#: plugins/personal/generic/main.inc:173
+#: plugins/personal/generic/main.inc:175
 #: plugins/gofax/faxaccount/generic.tpl:86
 #: plugins/gofax/faxaccount/generic.tpl:92
 #: plugins/gofax/faxaccount/main.inc:97
@@ -1726,95 +1731,96 @@ msgstr "匹配地址的正则表达式"
 msgid "UNIX"
 msgstr "UNIX"
 
-#: plugins/personal/posix/class_posixAccount.inc:125
+#: plugins/personal/posix/class_posixAccount.inc:126
 msgid "expired"
 msgstr "过期"
 
-#: plugins/personal/posix/class_posixAccount.inc:127
+#: plugins/personal/posix/class_posixAccount.inc:128
 msgid "grace time active"
 msgstr "时间限制激活"
 
-#: plugins/personal/posix/class_posixAccount.inc:130
+#: plugins/personal/posix/class_posixAccount.inc:131
 msgid "active, password not changable"
 msgstr "活动，口令不可更改"
 
-#: plugins/personal/posix/class_posixAccount.inc:132
+#: plugins/personal/posix/class_posixAccount.inc:133
 msgid "active, password expired"
 msgstr "活动，口令过期"
 
-#: plugins/personal/posix/class_posixAccount.inc:134
+#: plugins/personal/posix/class_posixAccount.inc:135
 msgid "active"
 msgstr "活动"
 
-#: plugins/personal/posix/class_posixAccount.inc:145
-#: plugins/personal/posix/class_posixAccount.inc:996
+#: plugins/personal/posix/class_posixAccount.inc:146
+#: plugins/personal/posix/class_posixAccount.inc:1007
 msgid "Group of user"
 msgstr "用户组"
 
-#: plugins/personal/posix/class_posixAccount.inc:180
+#: plugins/personal/posix/class_posixAccount.inc:181
 msgid "unconfigured"
 msgstr "未配置"
 
-#: plugins/personal/posix/class_posixAccount.inc:200
+#: plugins/personal/posix/class_posixAccount.inc:201
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:248
-#: plugins/admin/systems/class_workstationService.inc:177
+#: plugins/admin/systems/class_workstationService.inc:186
 #: plugins/admin/systems/class_terminalService.inc:190
 #: plugins/admin/systems/class_workstationStartup.inc:829
 msgid "automatic"
 msgstr "自动"
 
-#: plugins/personal/posix/class_posixAccount.inc:247
+#: plugins/personal/posix/class_posixAccount.inc:248
 msgid "This account has no unix extensions."
 msgstr "这个账户未包含 unix 扩展。"
 
-#: plugins/personal/posix/class_posixAccount.inc:267
-#: plugins/personal/posix/class_posixAccount.inc:270
+#: plugins/personal/posix/class_posixAccount.inc:268
+#: plugins/personal/posix/class_posixAccount.inc:271
 msgid "Remove posix account"
 msgstr "删除 posix 账户"
 
-#: plugins/personal/posix/class_posixAccount.inc:268
+#: plugins/personal/posix/class_posixAccount.inc:269
 msgid ""
 "This account has unix features enabled. To disable them, you'll need to "
 "remove the samba / environment account first."
-msgstr "这个账户已经启用 unix 功能。要禁用，您需要先删除 samba / 环境变量账户。"
+msgstr ""
+"这个账户已经启用 unix 功能。要禁用，您需要先删除 samba / 环境变量账户。"
 
-#: plugins/personal/posix/class_posixAccount.inc:271
+#: plugins/personal/posix/class_posixAccount.inc:272
 msgid ""
 "This account has posix features enabled. You can disable them by clicking "
 "below."
 msgstr "这个账户已经启用 posix 功能。要禁用请点击下面按钮。"
 
-#: plugins/personal/posix/class_posixAccount.inc:274
+#: plugins/personal/posix/class_posixAccount.inc:275
 msgid "Create posix account"
 msgstr "创建 posix 账户"
 
-#: plugins/personal/posix/class_posixAccount.inc:275
+#: plugins/personal/posix/class_posixAccount.inc:276
 msgid ""
 "This account has posix features disabled. You can enable them by clicking "
 "below."
 msgstr "这个账户已经禁用 posix 功能。要启用请点击下面按钮。"
 
-#: plugins/personal/posix/class_posixAccount.inc:438
+#: plugins/personal/posix/class_posixAccount.inc:439
 #, php-format
 msgid "Password can't be changed up to %s days after last change"
 msgstr "自上次更改以来 %s 天，不能修改口令"
 
-#: plugins/personal/posix/class_posixAccount.inc:440
+#: plugins/personal/posix/class_posixAccount.inc:441
 #, php-format
 msgid "Password must be changed after %s days"
 msgstr "口令必须在 %s 天之后更改"
 
-#: plugins/personal/posix/class_posixAccount.inc:442
+#: plugins/personal/posix/class_posixAccount.inc:443
 #, php-format
 msgid "Disable account after %s days of inactivity after password expiery"
 msgstr "口令过期 %s 天后，禁用账号"
 
-#: plugins/personal/posix/class_posixAccount.inc:444
+#: plugins/personal/posix/class_posixAccount.inc:445
 #, php-format
 msgid "Warn user %s days before password expiery"
 msgstr "在口令过期 %s 天之前警告用户"
 
-#: plugins/personal/posix/class_posixAccount.inc:476
+#: plugins/personal/posix/class_posixAccount.inc:477
 #: plugins/personal/mail/class_mailAccount.inc:559
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
@@ -1824,7 +1830,7 @@ msgstr "在口令过期 %s 天之前警告用户"
 msgid "January"
 msgstr "一月"
 
-#: plugins/personal/posix/class_posixAccount.inc:476
+#: plugins/personal/posix/class_posixAccount.inc:477
 #: plugins/personal/mail/class_mailAccount.inc:559
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
@@ -1834,7 +1840,7 @@ msgstr "一月"
 msgid "February"
 msgstr "二月"
 
-#: plugins/personal/posix/class_posixAccount.inc:476
+#: plugins/personal/posix/class_posixAccount.inc:477
 #: plugins/personal/mail/class_mailAccount.inc:559
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
@@ -1844,7 +1850,7 @@ msgstr "二月"
 msgid "March"
 msgstr "三月"
 
-#: plugins/personal/posix/class_posixAccount.inc:476
+#: plugins/personal/posix/class_posixAccount.inc:477
 #: plugins/personal/mail/class_mailAccount.inc:559
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
@@ -1854,7 +1860,7 @@ msgstr "三月"
 msgid "April"
 msgstr "四月"
 
-#: plugins/personal/posix/class_posixAccount.inc:477
+#: plugins/personal/posix/class_posixAccount.inc:478
 #: plugins/personal/mail/class_mailAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
@@ -1864,7 +1870,7 @@ msgstr "四月"
 msgid "May"
 msgstr "五月"
 
-#: plugins/personal/posix/class_posixAccount.inc:477
+#: plugins/personal/posix/class_posixAccount.inc:478
 #: plugins/personal/mail/class_mailAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
@@ -1874,7 +1880,7 @@ msgstr "五月"
 msgid "June"
 msgstr "六月"
 
-#: plugins/personal/posix/class_posixAccount.inc:477
+#: plugins/personal/posix/class_posixAccount.inc:478
 #: plugins/personal/mail/class_mailAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
@@ -1884,7 +1890,7 @@ msgstr "六月"
 msgid "July"
 msgstr "七月"
 
-#: plugins/personal/posix/class_posixAccount.inc:477
+#: plugins/personal/posix/class_posixAccount.inc:478
 #: plugins/personal/mail/class_mailAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
@@ -1894,7 +1900,7 @@ msgstr "七月"
 msgid "August"
 msgstr "八月"
 
-#: plugins/personal/posix/class_posixAccount.inc:477
+#: plugins/personal/posix/class_posixAccount.inc:478
 #: plugins/personal/mail/class_mailAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
@@ -1904,7 +1910,7 @@ msgstr "八月"
 msgid "September"
 msgstr "九月"
 
-#: plugins/personal/posix/class_posixAccount.inc:478
+#: plugins/personal/posix/class_posixAccount.inc:479
 #: plugins/personal/mail/class_mailAccount.inc:561
 #: plugins/personal/samba/class_sambaAccount.inc:395
 #: plugins/personal/samba/class_sambaAccount.inc:413
@@ -1914,7 +1920,7 @@ msgstr "九月"
 msgid "October"
 msgstr "十月"
 
-#: plugins/personal/posix/class_posixAccount.inc:478
+#: plugins/personal/posix/class_posixAccount.inc:479
 #: plugins/personal/mail/class_mailAccount.inc:561
 #: plugins/personal/samba/class_sambaAccount.inc:395
 #: plugins/personal/samba/class_sambaAccount.inc:413
@@ -1924,7 +1930,7 @@ msgstr "十月"
 msgid "November"
 msgstr "十一月"
 
-#: plugins/personal/posix/class_posixAccount.inc:478
+#: plugins/personal/posix/class_posixAccount.inc:479
 #: plugins/personal/mail/class_mailAccount.inc:561
 #: plugins/personal/samba/class_sambaAccount.inc:395
 #: plugins/personal/samba/class_sambaAccount.inc:413
@@ -1934,96 +1940,96 @@ msgstr "十一月"
 msgid "December"
 msgstr "十二月"
 
-#: plugins/personal/posix/class_posixAccount.inc:559
+#: plugins/personal/posix/class_posixAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:491
 #: plugins/admin/systems/class_terminalGeneric.inc:99
 #: setup/setup_config2.tpl:126
 msgid "disabled"
 msgstr "禁用"
 
-#: plugins/personal/posix/class_posixAccount.inc:559
+#: plugins/personal/posix/class_posixAccount.inc:560
 msgid "full access"
 msgstr "完全访问权限"
 
-#: plugins/personal/posix/class_posixAccount.inc:560
+#: plugins/personal/posix/class_posixAccount.inc:561
 msgid "allow access to these hosts"
 msgstr "允许访问这些主机"
 
-#: plugins/personal/posix/class_posixAccount.inc:606
+#: plugins/personal/posix/class_posixAccount.inc:607
 msgid "Removing UNIX account failed"
 msgstr "删除 UNIX 账户失败"
 
-#: plugins/personal/posix/class_posixAccount.inc:758
+#: plugins/personal/posix/class_posixAccount.inc:759
 msgid "Failed: overriding lock"
 msgstr "失败：覆盖缩"
 
-#: plugins/personal/posix/class_posixAccount.inc:847
+#: plugins/personal/posix/class_posixAccount.inc:848
 msgid "Saving UNIX account failed"
 msgstr "保存 UNIX 账户失败"
 
-#: plugins/personal/posix/class_posixAccount.inc:910
+#: plugins/personal/posix/class_posixAccount.inc:921
 msgid "The required field 'Home directory' is not set."
 msgstr "需要的字段“用户主目录”没有设置。"
 
-#: plugins/personal/posix/class_posixAccount.inc:913
+#: plugins/personal/posix/class_posixAccount.inc:924
 msgid "Please enter a valid path in 'Home directory' field."
 msgstr "请在“用户主目录”输入一个有效的地址。"
 
-#: plugins/personal/posix/class_posixAccount.inc:921
+#: plugins/personal/posix/class_posixAccount.inc:932
 msgid "Value specified as 'UID' is not valid."
 msgstr "'UID' 赋值无效。"
 
-#: plugins/personal/posix/class_posixAccount.inc:924
+#: plugins/personal/posix/class_posixAccount.inc:935
 msgid "Value specified as 'UID' is too small."
 msgstr "'UID' 赋值太小。"
 
-#: plugins/personal/posix/class_posixAccount.inc:928
-#: plugins/admin/groups/class_groupGeneric.inc:807
+#: plugins/personal/posix/class_posixAccount.inc:939
+#: plugins/admin/groups/class_groupGeneric.inc:814
 msgid "Value specified as 'GID' is not valid."
 msgstr "'GID' 赋值无效。"
 
-#: plugins/personal/posix/class_posixAccount.inc:931
-#: plugins/admin/groups/class_groupGeneric.inc:810
+#: plugins/personal/posix/class_posixAccount.inc:942
+#: plugins/admin/groups/class_groupGeneric.inc:817
 msgid "Value specified as 'GID' is too small."
 msgstr "'UID' 赋值太小。"
 
-#: plugins/personal/posix/class_posixAccount.inc:939
+#: plugins/personal/posix/class_posixAccount.inc:950
 msgid "Value specified as 'shadowMin' is not valid."
 msgstr "'shadowMin' 赋值无效。"
 
-#: plugins/personal/posix/class_posixAccount.inc:944
+#: plugins/personal/posix/class_posixAccount.inc:955
 msgid "Value specified as 'shadowMax' is not valid."
 msgstr "'shadowMax' 赋值无效。"
 
-#: plugins/personal/posix/class_posixAccount.inc:949
+#: plugins/personal/posix/class_posixAccount.inc:960
 msgid "Value specified as 'shadowWarning' is not valid."
 msgstr "'shadowWarning' 赋值无效。"
 
-#: plugins/personal/posix/class_posixAccount.inc:952
+#: plugins/personal/posix/class_posixAccount.inc:963
 msgid "'shadowWarning' without 'shadowMax' makes no sense."
 msgstr "不提供 'shadowMax' 的 'shadowWarning' 没有意义。"
 
-#: plugins/personal/posix/class_posixAccount.inc:955
+#: plugins/personal/posix/class_posixAccount.inc:966
 msgid "Value specified as 'shadowWarning' should be smaller than 'shadowMax'."
 msgstr "提供的 'shadowWarning' 应该小于'shadowMax'。"
 
-#: plugins/personal/posix/class_posixAccount.inc:958
+#: plugins/personal/posix/class_posixAccount.inc:969
 msgid "Value specified as 'shadowWarning' should be greater than 'shadowMin'."
 msgstr "提供的 'shadowWarning' 应该大于'shadowMin'。"
 
-#: plugins/personal/posix/class_posixAccount.inc:963
+#: plugins/personal/posix/class_posixAccount.inc:974
 msgid "Value specified as 'shadowInactive' is not valid."
 msgstr "'shadowInactive' 赋值无效。"
 
-#: plugins/personal/posix/class_posixAccount.inc:966
+#: plugins/personal/posix/class_posixAccount.inc:977
 msgid "'shadowInactive' without 'shadowMax' makes no sense."
 msgstr "不提供 'shadowMax' 的 'shadowInactive' 没有意义。"
 
-#: plugins/personal/posix/class_posixAccount.inc:971
+#: plugins/personal/posix/class_posixAccount.inc:982
 msgid "Value specified as 'shadowMin' should be smaller than 'shadowMax'."
 msgstr "提供的 'shadowMin' 应该小于'shadowMax'。"
 
-#: plugins/personal/posix/class_posixAccount.inc:1119
+#: plugins/personal/posix/class_posixAccount.inc:1130
 msgid "Too many users, can't allocate a free ID!"
 msgstr "太多用户，无法分配一个可用的 ID！"
 
@@ -2209,7 +2215,8 @@ msgstr "请选择一个打印机或者取消。"
 
 #: plugins/personal/environment/class_kioskManagementDialog.inc:79
 #, php-format
-msgid "Can't remove kioks profile, it is still in use by the following objects '%s'."
+msgid ""
+"Can't remove kioks profile, it is still in use by the following objects '%s'."
 msgstr "您不能删除 kioks profile，它仍被这些对象 '%s' 使用。"
 
 #: plugins/personal/environment/class_kioskManagementDialog.inc:87
@@ -2225,7 +2232,8 @@ msgid "Can't delete '%s'. Errow was: file doesn't exist."
 msgstr "无法删除 '%s'。错误：文件不存在。"
 
 #: plugins/personal/environment/class_kioskManagementDialog.inc:151
-msgid "There is no KIOSKPATH defined in your gosa.conf. Can't manage kiosk profiles!"
+msgid ""
+"There is no KIOSKPATH defined in your gosa.conf. Can't manage kiosk profiles!"
 msgstr "您的 gosa.conf 文件中没有定义 KIOSKPATH。无法管理 kiosk profiles！"
 
 #: plugins/personal/environment/class_kioskManagementDialog.inc:157
@@ -2333,7 +2341,7 @@ msgid "auto"
 msgstr "自动"
 
 #: plugins/personal/environment/class_environment.inc:204
-#: plugins/admin/systems/class_workstationService.inc:83
+#: plugins/admin/systems/class_workstationService.inc:92
 #: plugins/admin/systems/class_terminalService.inc:91
 #, php-format
 msgid ""
@@ -2505,7 +2513,7 @@ msgstr "会话期间分辨率可调"
 
 #: plugins/personal/environment/environment.tpl:87
 #: plugins/admin/systems/terminalService.tpl:94
-#: plugins/admin/systems/workstationService.tpl:94
+#: plugins/admin/systems/workstationService.tpl:97
 msgid "Resolution"
 msgstr "分辨率"
 
@@ -2641,7 +2649,7 @@ msgid ""
 msgstr "您已经成功更改口令。还要记住更改相关程序设定。"
 
 #: plugins/personal/password/changed.tpl:9
-#: plugins/personal/generic/main.inc:170
+#: plugins/personal/generic/main.inc:172
 #: plugins/gofax/faxreports/detail.tpl:67
 #: plugins/addons/mailqueue/header.tpl:5
 #: plugins/addons/ldapmanager/contentimport.tpl:44
@@ -2739,7 +2747,8 @@ msgid "No delivery to own mailbox"
 msgstr "不要发送到本人邮箱"
 
 #: plugins/personal/mail/generic.tpl:115
-msgid "Select to automatically response with the vacation message defined below"
+msgid ""
+"Select to automatically response with the vacation message defined below"
 msgstr "选择用下面定义的假期信息作为自动回复"
 
 #: plugins/personal/mail/generic.tpl:115
@@ -2882,7 +2891,8 @@ msgid ""
 msgstr "这个账户邮件功能已禁用。您可以点击下面的按钮来启用。"
 
 #: plugins/personal/mail/class_mailAccount.inc:353
-msgid "You're trying to add an invalid email address to the list of forwarders."
+msgid ""
+"You're trying to add an invalid email address to the list of forwarders."
 msgstr "您正在尝试向转发列表添加一条无效邮件地址。"
 
 #: plugins/personal/mail/class_mailAccount.inc:359
@@ -2915,7 +2925,8 @@ msgid "Saving mail account failed"
 msgstr "保存邮件账号失败"
 
 #: plugins/personal/mail/class_mailAccount.inc:940
-msgid "There is no valid mailserver specified, please add one in the system setup."
+msgid ""
+"There is no valid mailserver specified, please add one in the system setup."
 msgstr "没有指定有效的邮件服务器，请通过系统设置添加一个。"
 
 #: plugins/personal/mail/class_mailAccount.inc:945
@@ -3139,13 +3150,15 @@ msgstr "Opengroupware 账号"
 msgid ""
 "OpenGroupware: Your configuration is missing a postgresql extension. Can't "
 "perform any database queries."
-msgstr "OpenGroupware: 您的配置缺少一个 postgresql 扩展。无法执行任何数据库查询。"
+msgstr ""
+"OpenGroupware: 您的配置缺少一个 postgresql 扩展。无法执行任何数据库查询。"
 
 #: plugins/personal/connectivity/class_opengwAccount.inc:153
 msgid ""
 "OpenGroupware: Missing database configuration for opengroupware. Can't get "
 "or set any informations."
-msgstr "OpenGroupware: opengroupware 缺少数据库配置。无法获取或者设置任何信息。"
+msgstr ""
+"OpenGroupware: opengroupware 缺少数据库配置。无法获取或者设置任何信息。"
 
 #: plugins/personal/connectivity/class_opengwAccount.inc:161
 msgid ""
@@ -3270,7 +3283,8 @@ msgid "Creating oxchange addressbook tree failed"
 msgstr "创建 oxchange 地址簿树失败"
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:125
-msgid "You're trying to add an invalid email address to the list of delegations."
+msgid ""
+"You're trying to add an invalid email address to the list of delegations."
 msgstr "您正在向代理人列表添加一个无效邮件地址。"
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:133
@@ -3493,7 +3507,8 @@ msgid "Scalix mailbox class"
 msgstr "Scalix 邮箱类别"
 
 #: plugins/personal/scalix/generic.tpl:14
-msgid "Limited users con not make use of the group calendar functionality in Scalix"
+msgid ""
+"Limited users con not make use of the group calendar functionality in Scalix"
 msgstr "限制级用户不能使用 Scalix 的组日历功能"
 
 #: plugins/personal/scalix/generic.tpl:20
@@ -3664,7 +3679,8 @@ msgstr "闲"
 
 #: plugins/personal/samba/class_sambaAccount.inc:711
 #, php-format
-msgid "The timeout property '%s' is checked and contains invalid or no characters!"
+msgid ""
+"The timeout property '%s' is checked and contains invalid or no characters!"
 msgstr "超时属性 '%s' 检查发现包含无效字符或者为空！"
 
 #: plugins/personal/samba/class_sambaAccount.inc:717
@@ -4179,7 +4195,7 @@ msgstr "用户图片"
 msgid "You are not allowed to set your password!"
 msgstr "您无权修改您的口令！"
 
-#: plugins/personal/generic/main.inc:191
+#: plugins/personal/generic/main.inc:193
 msgid "Generic user information"
 msgstr "用户一般信息"
 
@@ -4508,8 +4524,8 @@ msgstr "选择子树来放置黑名单"
 #: plugins/admin/systems/servnfs.tpl:47
 #: plugins/admin/systems/terminalService.tpl:42
 #: plugins/admin/systems/terminalService.tpl:120
-#: plugins/admin/systems/workstationService.tpl:42
-#: plugins/admin/systems/workstationService.tpl:120
+#: plugins/admin/systems/workstationService.tpl:45
+#: plugins/admin/systems/workstationService.tpl:123
 #: plugins/admin/systems/glpi_devices.tpl:427
 #: plugins/admin/systems/glpi_devices.tpl:492
 #: plugins/admin/systems/glpi_devices.tpl:542
@@ -4928,7 +4944,8 @@ msgstr "您输入的邮件地址无效。"
 msgid ""
 "Deliver fax to printer, is only possible if valid printer is given. Please "
 "correct your choice."
-msgstr "发送传真到打印机，只有在提供一个有效的打印机才能够实现。请修改您的选择。"
+msgstr ""
+"发送传真到打印机，只有在提供一个有效的打印机才能够实现。请修改您的选择。"
 
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:750
 msgid "Saving FAX account failed"
@@ -5178,7 +5195,8 @@ msgstr "无法保存修改到 asterisk 数据库，当前 php 没有安装 mysql
 msgid ""
 "The MySQL home server '%s' isn't reachable as user '%s', check GOsa log for "
 "mysql error."
-msgstr "MySQL 主服务器 '%s' 无法被用户 '%s' 访问到，通过 GOsa 日志来查看 mysql 错误。"
+msgstr ""
+"MySQL 主服务器 '%s' 无法被用户 '%s' 访问到，通过 GOsa 日志来查看 mysql 错误。"
 
 #: plugins/gofon/macro/class_gofonMacro.inc:189
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:283
@@ -5290,7 +5308,7 @@ msgstr "电话号码"
 #: plugins/gofon/phoneaccount/generic.tpl:24
 #: plugins/gofon/phoneaccount/paste_generic.tpl:27
 #: plugins/admin/systems/terminalService.tpl:66
-#: plugins/admin/systems/workstationService.tpl:66
+#: plugins/admin/systems/workstationService.tpl:69
 msgid "Telephone hardware"
 msgstr "电话硬件"
 
@@ -5298,7 +5316,7 @@ msgstr "电话硬件"
 #: plugins/gofon/phoneaccount/generic.tpl:28
 #: plugins/gofon/phoneaccount/paste_generic.tpl:29
 #: plugins/admin/systems/terminalService.tpl:69
-#: plugins/admin/systems/workstationService.tpl:69
+#: plugins/admin/systems/workstationService.tpl:72
 msgid "Telephone"
 msgstr "电话"
 
@@ -5355,7 +5373,8 @@ msgstr ""
 msgid ""
 "The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql "
 "error."
-msgstr "MySQL 服务器'%s' 无法被用户 '%s' 访问，通过 GOsa 日志来查看 mysql 错误。"
+msgstr ""
+"MySQL 服务器'%s' 无法被用户 '%s' 访问，通过 GOsa 日志来查看 mysql 错误。"
 
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:118
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:1273
@@ -5674,7 +5693,8 @@ msgstr ""
 msgid ""
 "Could not remove the conference entry from database on home server (%s). "
 "Please check your asterisk database configuration."
-msgstr "无法从主服务器(%s)中数据库中删除会议条目。请检查您 asterisk 数据库的配置。"
+msgstr ""
+"无法从主服务器(%s)中数据库中删除会议条目。请检查您 asterisk 数据库的配置。"
 
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:295
 #: plugins/admin/ogroups/class_phonequeue.inc:178
@@ -5682,7 +5702,8 @@ msgstr "无法从主服务器(%s)中数据库中删除会议条目。请检查�
 msgid ""
 "The MySQL initial home server '%s' isn't reachable as user '%s', check GOsa "
 "log for mysql error."
-msgstr "MySQL 主服务器 '%s' 无法被用户 '%s' 访问到，通过 GOsa 日志来查看 mysql 错误。"
+msgstr ""
+"MySQL 主服务器 '%s' 无法被用户 '%s' 访问到，通过 GOsa 日志来查看 mysql 错误。"
 
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:302
 #: plugins/admin/ogroups/class_phonequeue.inc:185
@@ -5692,7 +5713,8 @@ msgstr "无法在初始的主服务器 '%s' 上选择数据库 '%s'。"
 
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:319
 #, php-format
-msgid "The previously selected asterisk home server (%s) is no longer available."
+msgid ""
+"The previously selected asterisk home server (%s) is no longer available."
 msgstr "之前选择的 asterisk 主服务器 (%s) 不存在了。"
 
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:324
@@ -5721,7 +5743,8 @@ msgstr "在 Lifetime 中只允许数字。"
 msgid ""
 "Can not check if there are already some entries with given telephone number "
 "and/or cn in the destination home server."
-msgstr "无法检查是否已经有一些条目包含给出的电话号码 和/或 cn 在目标主服务器中。"
+msgstr ""
+"无法检查是否已经有一些条目包含给出的电话号码 和/或 cn 在目标主服务器中。"
 
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:395
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:407
@@ -6006,11 +6029,13 @@ msgid "Cell phone"
 msgstr "移动电话"
 
 #: plugins/addons/addressbook/class_addressbook.inc:606
-msgid "Cannot create a unique DN for your entry. Please fill more formular fields."
+msgid ""
+"Cannot create a unique DN for your entry. Please fill more formular fields."
 msgstr "无法为您的条目创建一个唯一 DN。请填写更多字段。"
 
 #: plugins/addons/addressbook/class_addressbook.inc:614
-msgid "You have no permissions to create or modify a global address book entry."
+msgid ""
+"You have no permissions to create or modify a global address book entry."
 msgstr "您无权创建或者更改一个全局电话簿条目。"
 
 #: plugins/addons/addressbook/class_addressbook.inc:659
@@ -6257,7 +6282,8 @@ msgid "Mail queue"
 msgstr "邮件队列"
 
 #: plugins/addons/mailqueue/class_mailqueue.inc:58
-msgid "Please check your 'gosa.conf', there is no 'MAILQUEUESCRIPTPATH' specified."
+msgid ""
+"Please check your 'gosa.conf', there is no 'MAILQUEUESCRIPTPATH' specified."
 msgstr "请检查您的 'gosa.conf'，没有定义 'MAILQUEUESCRIPTPATH'。"
 
 #: plugins/addons/mailqueue/class_mailqueue.inc:85
@@ -6265,7 +6291,8 @@ msgstr "请检查您的 'gosa.conf'，没有定义 'MAILQUEUESCRIPTPATH'。"
 #: plugins/addons/mailqueue/class_mailqueue.inc:171
 #: plugins/addons/mailqueue/class_mailqueue.inc:198
 #, php-format
-msgid "You do not have permission to execute the command '%s' on the mailqueue."
+msgid ""
+"You do not have permission to execute the command '%s' on the mailqueue."
 msgstr "您无权在这个邮件队列执行命令 '%s'。"
 
 #: plugins/addons/mailqueue/class_mailqueue.inc:93
@@ -7135,16 +7162,16 @@ msgstr "不允许连接的主机"
 msgid "MSN"
 msgstr "MSN"
 
-#: plugins/admin/systems/class_workstationService.inc:87
+#: plugins/admin/systems/class_workstationService.inc:96
 #: plugins/admin/systems/class_terminalService.inc:65
-#: plugins/admin/systems/workstationService.tpl:121
+#: plugins/admin/systems/workstationService.tpl:124
 msgid "unknown"
 msgstr "未知"
 
-#: plugins/admin/systems/class_workstationService.inc:90
-#: plugins/admin/systems/class_workstationService.inc:91
-#: plugins/admin/systems/class_workstationService.inc:92
-#: plugins/admin/systems/class_workstationService.inc:93
+#: plugins/admin/systems/class_workstationService.inc:99
+#: plugins/admin/systems/class_workstationService.inc:100
+#: plugins/admin/systems/class_workstationService.inc:101
+#: plugins/admin/systems/class_workstationService.inc:102
 #: plugins/admin/systems/class_terminalService.inc:97
 #: plugins/admin/systems/class_terminalService.inc:98
 #: plugins/admin/systems/class_terminalService.inc:99
@@ -7152,45 +7179,45 @@ msgstr "未知"
 msgid "bit"
 msgstr "比特"
 
-#: plugins/admin/systems/class_workstationService.inc:133
+#: plugins/admin/systems/class_workstationService.inc:142
 #: plugins/admin/systems/class_terminalService.inc:152
 msgid "show chooser"
 msgstr "显示选择"
 
-#: plugins/admin/systems/class_workstationService.inc:134
+#: plugins/admin/systems/class_workstationService.inc:143
 #: plugins/admin/systems/class_terminalService.inc:153
 msgid "direct"
 msgstr "直接"
 
-#: plugins/admin/systems/class_workstationService.inc:137
+#: plugins/admin/systems/class_workstationService.inc:146
 #: plugins/admin/systems/class_terminalService.inc:156
 msgid "load balanced"
 msgstr "负载均衡"
 
-#: plugins/admin/systems/class_workstationService.inc:140
+#: plugins/admin/systems/class_workstationService.inc:149
 #: plugins/admin/systems/class_terminalService.inc:159
 msgid "Windows RDP"
 msgstr "Windows RDP"
 
-#: plugins/admin/systems/class_workstationService.inc:141
+#: plugins/admin/systems/class_workstationService.inc:150
 #: plugins/admin/systems/class_terminalService.inc:160
 msgid "ICA client"
 msgstr "ICA client"
 
-#: plugins/admin/systems/class_workstationService.inc:196
-#: plugins/admin/systems/class_workstationService.inc:199
-#: plugins/admin/systems/class_workstationService.inc:202
 #: plugins/admin/systems/class_workstationService.inc:205
 #: plugins/admin/systems/class_workstationService.inc:208
 #: plugins/admin/systems/class_workstationService.inc:211
 #: plugins/admin/systems/class_workstationService.inc:214
-#: plugins/admin/systems/class_workstationService.inc:224
-#: plugins/admin/systems/class_workstationService.inc:225
-#: plugins/admin/systems/class_workstationService.inc:226
-#: plugins/admin/systems/class_workstationService.inc:227
-#: plugins/admin/systems/class_workstationService.inc:228
-#: plugins/admin/systems/class_workstationService.inc:229
-#: plugins/admin/systems/class_workstationService.inc:230
+#: plugins/admin/systems/class_workstationService.inc:217
+#: plugins/admin/systems/class_workstationService.inc:220
+#: plugins/admin/systems/class_workstationService.inc:223
+#: plugins/admin/systems/class_workstationService.inc:233
+#: plugins/admin/systems/class_workstationService.inc:234
+#: plugins/admin/systems/class_workstationService.inc:235
+#: plugins/admin/systems/class_workstationService.inc:236
+#: plugins/admin/systems/class_workstationService.inc:237
+#: plugins/admin/systems/class_workstationService.inc:238
+#: plugins/admin/systems/class_workstationService.inc:239
 #: plugins/admin/systems/class_terminalService.inc:68
 #: plugins/admin/systems/class_terminalService.inc:96
 #: plugins/admin/systems/class_terminalService.inc:102
@@ -7217,12 +7244,12 @@ msgstr "ICA client"
 msgid "inherited"
 msgstr "继承"
 
-#: plugins/admin/systems/class_workstationService.inc:199
+#: plugins/admin/systems/class_workstationService.inc:208
 #: plugins/admin/systems/class_terminalService.inc:215
 msgid "Bit"
 msgstr "字节"
 
-#: plugins/admin/systems/class_workstationService.inc:247
+#: plugins/admin/systems/class_workstationService.inc:256
 #: plugins/admin/systems/class_terminalService.inc:255
 #: plugins/admin/systems/class_workstationStartup.inc:514
 #: plugins/admin/systems/class_terminalStartup.inc:168
@@ -7231,26 +7258,26 @@ msgstr "字节"
 msgid "This 'dn' has no terminal features."
 msgstr "这个 'dn' 没有终端功能。"
 
-#: plugins/admin/systems/class_workstationService.inc:297
+#: plugins/admin/systems/class_workstationService.inc:306
 #: plugins/admin/systems/class_terminalService.inc:306
 msgid "Choose the phone located at the current terminal"
 msgstr "在当前终端中选择电话"
 
-#: plugins/admin/systems/class_workstationService.inc:365
-#: plugins/admin/systems/class_workstationService.inc:370
+#: plugins/admin/systems/class_workstationService.inc:380
+#: plugins/admin/systems/class_workstationService.inc:385
 #: plugins/admin/systems/class_terminalService.inc:390
 #: plugins/admin/systems/class_terminalService.inc:395
 msgid "Please specify a valid VSync range."
 msgstr "请指定一个有效的 VSync 范围。"
 
-#: plugins/admin/systems/class_workstationService.inc:380
-#: plugins/admin/systems/class_workstationService.inc:385
+#: plugins/admin/systems/class_workstationService.inc:395
+#: plugins/admin/systems/class_workstationService.inc:400
 #: plugins/admin/systems/class_terminalService.inc:405
 #: plugins/admin/systems/class_terminalService.inc:410
 msgid "Please specify a valid HSync range."
 msgstr "请指定一个有效的 HSync 范围。"
 
-#: plugins/admin/systems/class_workstationService.inc:428
+#: plugins/admin/systems/class_workstationService.inc:443
 msgid "Saving workstation services failed"
 msgstr "保存工作站服务失败"
 
@@ -7403,7 +7430,8 @@ msgstr "指定 '%s' 的值必须是数字类型。"
 #: plugins/admin/systems/class_goVirusServer.inc:305
 #: plugins/admin/systems/class_goSpamServer.inc:446
 #, php-format
-msgid "Command '%s', specified as ACTION_HOOK for plugin '%s' doesn't seem to exist."
+msgid ""
+"Command '%s', specified as ACTION_HOOK for plugin '%s' doesn't seem to exist."
 msgstr "命令 '%s'，作为插件 '%s' 的 ACTION_HOOK 好像并不存在。"
 
 #: plugins/admin/systems/class_goVirusServer.inc:329
@@ -7416,7 +7444,8 @@ msgid "List of devices"
 msgstr "设备列表"
 
 #: plugins/admin/systems/glpiDeviceManagement.tpl:23
-msgid "This dialog allows you to attach a device to your currently edited computer."
+msgid ""
+"This dialog allows you to attach a device to your currently edited computer."
 msgstr "这个对话框允许您为您当前编辑的计算机添加一个设备。"
 
 #: plugins/admin/systems/glpiDeviceManagement.tpl:35
@@ -7747,121 +7776,121 @@ msgid "Saving server failed"
 msgstr "保存服务器失败"
 
 #: plugins/admin/systems/terminalService.tpl:4
-#: plugins/admin/systems/workstationService.tpl:4
+#: plugins/admin/systems/workstationService.tpl:7
 msgid "Keyboard"
 msgstr "键盘"
 
 #: plugins/admin/systems/terminalService.tpl:7
 #: plugins/admin/systems/terminalService.tpl:215
 #: plugins/admin/systems/printerPPDDialog.tpl:5
-#: plugins/admin/systems/workstationService.tpl:7
+#: plugins/admin/systems/workstationService.tpl:10
 msgid "Model"
 msgstr "模型"
 
 #: plugins/admin/systems/terminalService.tpl:9
-#: plugins/admin/systems/workstationService.tpl:9
+#: plugins/admin/systems/workstationService.tpl:12
 msgid "Choose keyboard model"
 msgstr "选择键盘类型"
 
 #: plugins/admin/systems/terminalService.tpl:15
-#: plugins/admin/systems/workstationService.tpl:15
+#: plugins/admin/systems/workstationService.tpl:18
 msgid "Layout"
 msgstr "布局"
 
 #: plugins/admin/systems/terminalService.tpl:17
-#: plugins/admin/systems/workstationService.tpl:17
+#: plugins/admin/systems/workstationService.tpl:20
 msgid "Choose keyboard layout"
 msgstr "选择键盘布局"
 
 #: plugins/admin/systems/terminalService.tpl:23
-#: plugins/admin/systems/workstationService.tpl:23
+#: plugins/admin/systems/workstationService.tpl:26
 msgid "Variant"
 msgstr "Variant"
 
 #: plugins/admin/systems/terminalService.tpl:25
-#: plugins/admin/systems/workstationService.tpl:25
+#: plugins/admin/systems/workstationService.tpl:28
 msgid "Choose keyboard variant"
 msgstr "选择键盘变种"
 
 #: plugins/admin/systems/terminalService.tpl:39
-#: plugins/admin/systems/workstationService.tpl:39
+#: plugins/admin/systems/workstationService.tpl:42
 msgid "Mouse"
 msgstr "鼠标"
 
 #: plugins/admin/systems/terminalService.tpl:44
-#: plugins/admin/systems/workstationService.tpl:44
+#: plugins/admin/systems/workstationService.tpl:47
 msgid "Choose mouse type"
 msgstr "选择鼠标类型"
 
 #: plugins/admin/systems/terminalService.tpl:50
-#: plugins/admin/systems/workstationService.tpl:50
+#: plugins/admin/systems/workstationService.tpl:53
 msgid "Port"
 msgstr "端口"
 
 #: plugins/admin/systems/terminalService.tpl:52
-#: plugins/admin/systems/workstationService.tpl:52
+#: plugins/admin/systems/workstationService.tpl:55
 msgid "Choose mouse port"
 msgstr "选择鼠标端口"
 
 #: plugins/admin/systems/terminalService.tpl:83
-#: plugins/admin/systems/workstationService.tpl:83
+#: plugins/admin/systems/workstationService.tpl:86
 #: plugins/admin/systems/info.tpl:73
 msgid "Graphic device"
 msgstr "显卡"
 
 #: plugins/admin/systems/terminalService.tpl:86
-#: plugins/admin/systems/workstationService.tpl:86
+#: plugins/admin/systems/workstationService.tpl:89
 #: plugins/admin/systems/printer.tpl:51
 msgid "Driver"
 msgstr "驱动"
 
 #: plugins/admin/systems/terminalService.tpl:88
-#: plugins/admin/systems/workstationService.tpl:88
+#: plugins/admin/systems/workstationService.tpl:91
 msgid "Choose graphic driver that is needed by the installed graphic board"
 msgstr "选择安装的显卡需要的显卡驱动"
 
 #: plugins/admin/systems/terminalService.tpl:96
-#: plugins/admin/systems/workstationService.tpl:96
+#: plugins/admin/systems/workstationService.tpl:99
 msgid "Choose screen resolution used in graphic mode"
 msgstr "选择图形模式的屏幕分辨率"
 
 #: plugins/admin/systems/terminalService.tpl:102
-#: plugins/admin/systems/workstationService.tpl:102
+#: plugins/admin/systems/workstationService.tpl:105
 msgid "Color depth"
 msgstr "颜色深度"
 
 #: plugins/admin/systems/terminalService.tpl:104
-#: plugins/admin/systems/workstationService.tpl:104
+#: plugins/admin/systems/workstationService.tpl:107
 msgid "Choose colordepth used in graphic mode"
 msgstr "选择图形模式的色彩深度"
 
 #: plugins/admin/systems/terminalService.tpl:117
-#: plugins/admin/systems/workstationService.tpl:117
+#: plugins/admin/systems/workstationService.tpl:120
 msgid "Display device"
 msgstr "显示设备"
 
 #: plugins/admin/systems/terminalService.tpl:125
-#: plugins/admin/systems/workstationService.tpl:125
+#: plugins/admin/systems/workstationService.tpl:128
 msgid "Use DDC for automatic detection"
 msgstr "使用 DDC 用于自动检测"
 
 #: plugins/admin/systems/terminalService.tpl:129
-#: plugins/admin/systems/workstationService.tpl:128
+#: plugins/admin/systems/workstationService.tpl:131
 msgid "HSync"
 msgstr "HSync"
 
 #: plugins/admin/systems/terminalService.tpl:131
-#: plugins/admin/systems/workstationService.tpl:130
+#: plugins/admin/systems/workstationService.tpl:133
 msgid "Horizontal refresh frequency for installed monitor"
 msgstr "安装的显示器的水平刷新率"
 
 #: plugins/admin/systems/terminalService.tpl:134
-#: plugins/admin/systems/workstationService.tpl:133
+#: plugins/admin/systems/workstationService.tpl:136
 msgid "VSync"
 msgstr "VSync"
 
 #: plugins/admin/systems/terminalService.tpl:136
-#: plugins/admin/systems/workstationService.tpl:135
+#: plugins/admin/systems/workstationService.tpl:138
 msgid "Vertical refresh frequency for installed monitor"
 msgstr "安装的显示器的水平垂直刷新率"
 
@@ -7914,17 +7943,17 @@ msgid "Select NFS filesystem to place spool files on"
 msgstr "选择放置 spool 文件的 NFS 文件系统"
 
 #: plugins/admin/systems/terminalService.tpl:208
-#: plugins/admin/systems/workstationService.tpl:147
+#: plugins/admin/systems/workstationService.tpl:150
 msgid "Scan device"
 msgstr "扫描设备"
 
 #: plugins/admin/systems/terminalService.tpl:209
-#: plugins/admin/systems/workstationService.tpl:148
+#: plugins/admin/systems/workstationService.tpl:151
 msgid "Select to start SANE scan service on terminal"
 msgstr "选择在终端启动 SANE 扫描服务"
 
 #: plugins/admin/systems/terminalService.tpl:210
-#: plugins/admin/systems/workstationService.tpl:149
+#: plugins/admin/systems/workstationService.tpl:152
 msgid "Provide scan services"
 msgstr "提供扫描服务"
 
@@ -7960,7 +7989,8 @@ msgstr "您将要删除 glpi 附件组件 '%s'。"
 
 #: plugins/admin/systems/class_glpiAttachmentPool.inc:107
 #, php-format
-msgid "You can't delete this attachment, it is still in use by these system(s) '%s'"
+msgid ""
+"You can't delete this attachment, it is still in use by these system(s) '%s'"
 msgstr "您不能删除这个附件，它仍然被这些系统使用 '%s'"
 
 #: plugins/admin/systems/class_glpiAttachmentPool.inc:119
@@ -8056,7 +8086,8 @@ msgstr "删除 DNS 服务"
 
 #: plugins/admin/systems/class_servDNS.inc:71
 #: plugins/admin/systems/class_inventory.inc:33
-msgid "This server has DNS features enabled. You can disable them by clicking below."
+msgid ""
+"This server has DNS features enabled. You can disable them by clicking below."
 msgstr "该账号已经启用 DNS 功能。您可以点击下面按钮禁用。"
 
 #: plugins/admin/systems/class_servDNS.inc:73
@@ -8066,7 +8097,8 @@ msgstr "添加 DNS 服务"
 
 #: plugins/admin/systems/class_servDNS.inc:74
 #: plugins/admin/systems/class_inventory.inc:36
-msgid "This server has DNS features disabled. You can enable them by clicking below."
+msgid ""
+"This server has DNS features disabled. You can enable them by clicking below."
 msgstr "该账号已经禁用 DNS 功能。您可以点击下面按钮启用。"
 
 #: plugins/admin/systems/class_servDNS.inc:162
@@ -8154,7 +8186,8 @@ msgstr "保存工作站启动设置失败"
 
 #: plugins/admin/systems/class_workstationStartup.inc:1134
 #, php-format
-msgid "Can't execute specified REPOSITORY_HOOK '%s' please check your gosa.conf."
+msgid ""
+"Can't execute specified REPOSITORY_HOOK '%s' please check your gosa.conf."
 msgstr "无法执行指定的 REPOSITOR_HOOK '%s'，请检查您的 gosa.conf。"
 
 #: plugins/admin/systems/class_workstationStartup.inc:1136
@@ -8186,7 +8219,8 @@ msgstr "请为“URL”提供一个有效的值。"
 
 #: plugins/admin/systems/class_servRepositorySetup.inc:182
 #, php-format
-msgid "Can't execute specified REPOSITORY_HOOK '%s'. Please check your gosa.conf."
+msgid ""
+"Can't execute specified REPOSITORY_HOOK '%s'. Please check your gosa.conf."
 msgstr "无法执行指定的 REPOSITOR_HOOK '%s'，请检查您的 gosa.conf。"
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:57
@@ -8203,7 +8237,8 @@ msgstr "无法获取 ppd 信息。"
 msgid ""
 "The specified path '%s' which results from PPD_PATH in your gosa.conf is "
 "invalid, can't read/write any ppd informations."
-msgstr "从您的 gosa.conf 中的 PPD_PATH 给出的路径 '%s' 无效，不能读/写任何 ppd 信息。"
+msgstr ""
+"从您的 gosa.conf 中的 PPD_PATH 给出的路径 '%s' 无效，不能读/写任何 ppd 信息。"
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:111
 msgid "Please specify a valid ppd file."
@@ -8287,7 +8322,8 @@ msgstr "删除旧 ppd 文件 '%s' 失败。文件不可访问。"
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:493
 #, php-format
-msgid "Removing old ppd file '%s' failed. File does not exists or is not accessible."
+msgid ""
+"Removing old ppd file '%s' failed. File does not exists or is not accessible."
 msgstr "删除旧的 ppd 文件 '%s' 失败。文件不存在或者不可访问。"
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:501
@@ -8313,7 +8349,8 @@ msgstr "选择放置终端的子树"
 
 #: plugins/admin/systems/class_termDNS.inc:138
 #, php-format
-msgid "Can't execute specified AUTO_NETWORK_HOOK '%s'. Please check your gosa.conf."
+msgid ""
+"Can't execute specified AUTO_NETWORK_HOOK '%s'. Please check your gosa.conf."
 msgstr "无法执行指定的 AUTO_NETWORK_HOOK '%s'，请检查您的 gosa.conf。"
 
 #: plugins/admin/systems/class_termDNS.inc:224
@@ -8519,7 +8556,8 @@ msgstr ""
 
 #: plugins/admin/systems/class_servRepository.inc:207
 #, php-format
-msgid "Be careful editing this release, it is still used by these workstations [%s]."
+msgid ""
+"Be careful editing this release, it is still used by these workstations [%s]."
 msgstr "请小心编辑此发行版，它仍然被这些工作站使用 [%s]。"
 
 #: plugins/admin/systems/class_servDB.inc:138
@@ -8658,7 +8696,8 @@ msgstr "重新加载列表"
 msgid ""
 "Step in the prefered tree and click save to use the current subtree as base. "
 "Or click the image at the end of each entry."
-msgstr "进入选择的树并点击保存来以当前的子树作为基准。或者点击每个条目后面的图像。"
+msgstr ""
+"进入选择的树并点击保存来以当前的子树作为基准。或者点击每个条目后面的图像。"
 
 #: plugins/admin/systems/class_baseSelectDialog.inc:51
 msgid "Filter entries with this syntax"
@@ -8968,7 +9007,8 @@ msgid "List of users"
 msgstr "用户列表"
 
 #: plugins/admin/systems/glpiSelectUser.tpl:23
-msgid "This dialog allows you to select a user as technical responsible person."
+msgid ""
+"This dialog allows you to select a user as technical responsible person."
 msgstr "这个对话框允许您选择一个用户作为技术负责人。"
 
 #: plugins/admin/systems/glpiSelectUser.tpl:37
@@ -9021,6 +9061,11 @@ msgid ""
 msgstr ""
 "这包含所有系统和设置信息。请再次检查您是否要这么做，因为 GOsa 没有办法将您的"
 "数据找回。"
+
+#: plugins/admin/systems/workstationService.tpl:2
+#, fuzzy
+msgid "Inherit all"
+msgstr "中间名"
 
 #: plugins/admin/systems/network.tpl:1
 msgid "Network\tsettings"
@@ -9143,7 +9188,8 @@ msgstr "添加新系统类型失败，这个系统类型名称已被使用。"
 
 #: plugins/admin/systems/class_glpiAccount.inc:307
 #, php-format
-msgid "You can't delete this system type, it is still in use by these system(s) '%s'"
+msgid ""
+"You can't delete this system type, it is still in use by these system(s) '%s'"
 msgstr "您不能删除这个系统类型，它仍然被这些系统使用 '%s'"
 
 #: plugins/admin/systems/class_glpiAccount.inc:318
@@ -9614,7 +9660,8 @@ msgstr "无法检测对象名称。"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:133
 #, php-format
-msgid "You can't delete this device, it is still in use by these system(s) '%s'"
+msgid ""
+"You can't delete this device, it is still in use by these system(s) '%s'"
 msgstr "您不能删除这个设备，它仍然被这些系统使用 '%s'"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:182
@@ -9814,7 +9861,8 @@ msgid "Please specify a numeric value for retry."
 msgstr "请为重试提供一个数值。"
 
 #: plugins/admin/systems/class_servDNSeditZone.inc:437
-msgid "The given network address is not a valid, please specify a valid IP address."
+msgid ""
+"The given network address is not a valid, please specify a valid IP address."
 msgstr "给定的网络地址无效，请输入一个有效的上IP 地址。"
 
 #: plugins/admin/systems/class_servDNSeditZone.inc:444
@@ -10642,7 +10690,8 @@ msgid "Create options"
 msgstr "创建选项"
 
 #: plugins/admin/applications/class_applicationParameters.inc:55
-msgid "This application has options disabled. You can enable them by clicking below."
+msgid ""
+"This application has options disabled. You can enable them by clicking below."
 msgstr "该应用程序有选项已禁用。您可以点击下面按钮启用。"
 
 #: plugins/admin/applications/class_applicationParameters.inc:101
@@ -10851,7 +10900,8 @@ msgid ""
 "As soon as the copy operation has finished, you can scroll down to end of "
 "the page and press the 'Continue' button to continue with the fai management "
 "dialog."
-msgstr "一旦拷贝完成，您可以滚动页面到最下端，按“继续”按钮继续 fai 管理对话框。"
+msgstr ""
+"一旦拷贝完成，您可以滚动页面到最下端，按“继续”按钮继续 fai 管理对话框。"
 
 #: plugins/admin/fai/faiNewBranch.tpl:41
 #: plugins/admin/departments/dep_iframe.tpl:8
@@ -11237,7 +11287,8 @@ msgstr "请为您仓库的设置选择一个有效的组合。"
 msgid ""
 "Can't insert a fai package list named '%s' in '%s' there is already a "
 "package list with the given name."
-msgstr "无法插入一个名为 '%s' 新 fai 软件包列表在 '%s' 中。已经存在一个同名的了。"
+msgstr ""
+"无法插入一个名为 '%s' 新 fai 软件包列表在 '%s' 中。已经存在一个同名的了。"
 
 #: plugins/admin/fai/class_faiPackage.inc:412
 msgid "package is configured"
@@ -11661,7 +11712,8 @@ msgid "Please enter your search string here"
 msgstr "请在这里输入您的查询字符串"
 
 #: plugins/admin/fai/class_faiPackageEntry.inc:43
-msgid "This list displays all assigned package names for this repository settings."
+msgid ""
+"This list displays all assigned package names for this repository settings."
 msgstr "对于该仓库的设置，这个列表显示所有已分配的软件包名称。"
 
 #: plugins/admin/fai/class_faiPackageEntry.inc:122
@@ -11868,7 +11920,8 @@ msgstr "! 未知 id"
 
 #: plugins/admin/groups/class_groupGeneric.inc:489
 #, php-format
-msgid "Your search method returned more than '%s' users, only '%s' users are shown."
+msgid ""
+"Your search method returned more than '%s' users, only '%s' users are shown."
 msgstr "您的查询方式返回超过 '%s' 用户，只有 '%s' 用户被显示。"
 
 #: plugins/admin/groups/class_groupGeneric.inc:518
@@ -11889,24 +11942,29 @@ msgstr "没有发现为 '%s' 配置的 RIDBASE"
 msgid "Saving group failed"
 msgstr "保存组失败"
 
-#: plugins/admin/groups/class_groupGeneric.inc:756
+#: plugins/admin/groups/class_groupGeneric.inc:757
 #: plugins/admin/ogroups/class_ogroup.inc:612
 msgid "You have no permissions to create a group on this 'Base'."
 msgstr "您无权在此 'Base' 下创建一个组"
 
-#: plugins/admin/groups/class_groupGeneric.inc:766
+#: plugins/admin/groups/class_groupGeneric.inc:762
+#, fuzzy
+msgid "You have no permissions to move a group from the original 'Base'."
+msgstr "您无权从原 'Base' 移动一个用户。"
+
+#: plugins/admin/groups/class_groupGeneric.inc:773
 msgid ""
 "The field 'Name' contains invalid characters. Lowercase, numbers and dashes "
 "are allowed."
 msgstr "字段 'Name' 包含无效字符。只允许小写字母，数字和短线。"
 
-#: plugins/admin/groups/class_groupGeneric.inc:777
-#: plugins/admin/groups/class_groupGeneric.inc:791
+#: plugins/admin/groups/class_groupGeneric.inc:784
 #: plugins/admin/groups/class_groupGeneric.inc:798
+#: plugins/admin/groups/class_groupGeneric.inc:805
 msgid "Value specified as 'Name' is already used."
 msgstr "指定为“名称”的值已经在使用了。"
 
-#: plugins/admin/groups/class_groupGeneric.inc:852
+#: plugins/admin/groups/class_groupGeneric.inc:859
 msgid "Too many groups, can't allocate a free ID!"
 msgstr "太多用户组，无法分配可用 ID！"
 
@@ -12108,7 +12166,8 @@ msgstr "保存应用程序信息失败"
 msgid ""
 "Can't resolve the release name '%s', setting release name to '%s'. Possibly "
 "the objects base has changed."
-msgstr "无法解析发行版名称 '%s'，设置发行版名称为 '%s'。可能是基于的对象被修改了。"
+msgstr ""
+"无法解析发行版名称 '%s'，设置发行版名称为 '%s'。可能是基于的对象被修改了。"
 
 #: plugins/admin/groups/mail_admins.tpl:4
 msgid "Folder administrators"
@@ -12201,7 +12260,8 @@ msgid "Please enter a valid email addres in 'Primary address' field."
 msgstr "请在“主要地址”栏输入一个有效邮件地址。"
 
 #: plugins/admin/groups/class_groupMail.inc:892
-msgid "Please choose valid permission settings. Default permission can't be emtpy."
+msgid ""
+"Please choose valid permission settings. Default permission can't be emtpy."
 msgstr "请选择一个有效的权限设置。缺省权限不能为空。"
 
 #: plugins/admin/groups/class_groupMail.inc:896
@@ -12218,11 +12278,13 @@ msgstr ""
 "被分配到该对象组的对象继承。"
 
 #: plugins/admin/ogroups/class_mailogroup.inc:48
-msgid "This group has mail features enabled. You can disable them by clicking below."
+msgid ""
+"This group has mail features enabled. You can disable them by clicking below."
 msgstr "这个组启用了邮件功能。您可以点击下面按钮来禁用。"
 
 #: plugins/admin/ogroups/class_mailogroup.inc:50
-msgid "This group has mail features disabled. You can enable them by clicking below."
+msgid ""
+"This group has mail features disabled. You can enable them by clicking below."
 msgstr "这个组禁用了邮件功能。您可以点击下面按钮来启用。"
 
 #: plugins/admin/ogroups/class_mailogroup.inc:105
@@ -12242,7 +12304,8 @@ msgid "Member objects"
 msgstr "成员对象"
 
 #: plugins/admin/ogroups/phonequeue.tpl:2
-msgid "Only users with the same asterisk home server will be included to this queue."
+msgid ""
+"Only users with the same asterisk home server will be included to this queue."
 msgstr "只有有着相同 asterisk 主服务器的用户才会被包含在这个队列中。"
 
 #: plugins/admin/ogroups/phonequeue.tpl:5
@@ -12656,7 +12719,8 @@ msgid "Remove the phone queue from this Account"
 msgstr "删除来自该账号的电话队列"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:212
-msgid "Phone queue is enabled for this group. You can disable it by clicking below."
+msgid ""
+"Phone queue is enabled for this group. You can disable it by clicking below."
 msgstr "电话队列已经为这个组启用。您可以点击下面按钮禁用。"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:214
@@ -12775,7 +12839,8 @@ msgid ""
 "As soon as the move operation has finished, you can scroll down to end of "
 "the page and press the 'Continue' button to continue with the department "
 "management dialog."
-msgstr "一旦移动操作完成，您可以滚动页面到最下端，按“继续”按钮继续部门管理对话框。"
+msgstr ""
+"一旦移动操作完成，您可以滚动页面到最下端，按“继续”按钮继续部门管理对话框。"
 
 #: plugins/admin/departments/class_departmentManagement.inc:333
 msgid ".."
@@ -12822,7 +12887,8 @@ msgstr "需要的字段“描述”没有设置。"
 
 #: plugins/admin/departments/class_departmentGeneric.inc:239
 #, php-format
-msgid "The field 'Name' contains the reserved word '%s'. Please choose another name."
+msgid ""
+"The field 'Name' contains the reserved word '%s'. Please choose another name."
 msgstr "字段“名称”包含保留字 '%s'。请选择其他名字。"
 
 #: plugins/admin/departments/class_departmentGeneric.inc:285
@@ -13140,7 +13206,9 @@ msgid ""
 "This menu allows you to add, edit and remove selected mime types. You may "
 "want to use the range selector on top of the mime type listbox, when working "
 "with a large number of mime types."
-msgstr "这个菜单允许您添加，编辑和删除所选的 mime type。对于一个长列表，您可以通过mime type 列表框上面的范围选择来调整。"
+msgstr ""
+"这个菜单允许您添加，编辑和删除所选的 mime type。对于一个长列表，您可以通过"
+"mime type 列表框上面的范围选择来调整。"
 
 #: plugins/admin/mimetypes/class_divListMimeTypes.inc:56
 msgid "Mime type name"
@@ -13203,7 +13271,8 @@ msgstr "找到 %s 域的一个以上的反向解析域。退出域解析。"
 
 #: include/functions_dns.inc:610
 #, php-format
-msgid "Undefined zone name '%s'. Zone name must look like this 'server/zone.com'."
+msgid ""
+"Undefined zone name '%s'. Zone name must look like this 'server/zone.com'."
 msgstr "未定义的域名 '%s'。域名必须看起来像这样 'server/zone.com'。"
 
 #: include/functions.inc:305
@@ -13315,7 +13384,8 @@ msgstr "仍然编辑"
 msgid ""
 "You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
 "Please contact the person in order to clarify proceedings."
-msgstr "您将要修改的 LDAP 条目 '%s' 看起来正在被 '%s' 使用。请联系这个人再继续。"
+msgstr ""
+"您将要修改的 LDAP 条目 '%s' 看起来正在被 '%s' 使用。请联系这个人再继续。"
 
 #: include/functions.inc:1545
 msgid "Entries per page"
@@ -13500,7 +13570,8 @@ msgstr "未知 FAIstate %s"
 
 #: include/class_ldap.inc:739
 #, php-format
-msgid "Autocreation of subtree failed. No objectClass found for attribute '%s'."
+msgid ""
+"Autocreation of subtree failed. No objectClass found for attribute '%s'."
 msgstr "自动创建子树失败。没有找到属性 '%s' 的 objectClass。"
 
 #: include/class_ldap.inc:787 include/class_ldap.inc:877
@@ -13520,7 +13591,8 @@ msgstr "创建子树 '%s' 失败。"
 msgid ""
 "The referral url '%s' is missing the ldap base. It should look like this "
 "'ldap://server:port/base'."
-msgstr "参照的 url '%s' 缺少 LDAP base。看起来应该像这样 'ldap://server:port/base'。"
+msgstr ""
+"参照的 url '%s' 缺少 LDAP base。看起来应该像这样 'ldap://server:port/base'。"
 
 #: include/class_ldap.inc:946
 #, php-format
@@ -13588,7 +13660,8 @@ msgstr "设置口令失败。LDAP 服务器报告说 '%s'。"
 
 #: include/class_password-methods.inc:182 include/class_plugin.inc:589
 #, php-format
-msgid "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
+msgid ""
+"Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
 msgstr "命令 '%s'，作为插件 '%s' 的 POSTMODIFY 好像并不存在。"
 
 #: include/class_password-methods.inc:203
@@ -13759,7 +13832,8 @@ msgstr "参数"
 msgid ""
 "Warning: Can't set kerberos password. Your PHP version has no kerberos "
 "support, password has not been changed."
-msgstr "警告: 无法设置 kerberos 口令。您的 PHP 版本不支持 kerberos，口令没有被修改。"
+msgstr ""
+"警告: 无法设置 kerberos 口令。您的 PHP 版本不支持 kerberos，口令没有被修改。"
 
 #: include/class_password-methods-kerberos.inc:53
 msgid "Kerberos database communication failed!"
@@ -13771,17 +13845,20 @@ msgstr "修改 kerberos 数据库中的口令失败！"
 
 #: include/class_plugin.inc:404
 #, php-format
-msgid "Command '%s', specified as CHECK hook for plugin '%s' doesn't seem to exist."
+msgid ""
+"Command '%s', specified as CHECK hook for plugin '%s' doesn't seem to exist."
 msgstr "命令 '%s'，作为插件 '%s' 的 CHECK hook 好像并不存在。"
 
 #: include/class_plugin.inc:555
 #, php-format
-msgid "Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
+msgid ""
+"Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
 msgstr "命令 '%s'，作为插件 '%s' 的 POSTCREATE 好像并不存在。"
 
 #: include/class_plugin.inc:623
 #, php-format
-msgid "Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
+msgid ""
+"Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
 msgstr "命令 '%s'，作为插件 '%s' 的 POSTREMOVE 好像并不存在。"
 
 #: include/class_plugin.inc:931
@@ -13828,7 +13905,8 @@ msgstr "解析成功"
 
 #: include/sieve/class_sieveManagement.inc:161
 #, php-format
-msgid "The specified mail server '%s' does not exist within the GOsa configuration."
+msgid ""
+"The specified mail server '%s' does not exist within the GOsa configuration."
 msgstr "指定的邮件服务器 '%s' 在 GOsa 配置中不存在。"
 
 #: include/sieve/class_sieveManagement.inc:206
@@ -14245,7 +14323,8 @@ msgid ""
 msgstr "无法建立到 sieve 服务器的连接，认证属性为空。"
 
 #: include/sieve/templates/management.tpl:6
-msgid "Please verfiy that the attributes uid and mail are not empty and try again."
+msgid ""
+"Please verfiy that the attributes uid and mail are not empty and try again."
 msgstr "请确认 uid 和 mail 属性不为空，然后重试。"
 
 #: include/sieve/templates/management.tpl:12
@@ -14465,11 +14544,13 @@ msgid "Please specify a valid operator."
 msgstr "请输入一个有效的操作符。"
 
 #: include/sieve/class_sieveElement_If.inc:654
-msgid "Invalid character found in address attribute. Quotes are not allowed here."
+msgid ""
+"Invalid character found in address attribute. Quotes are not allowed here."
 msgstr "地址属性中发现无效字符。这里不允许引号。"
 
 #: include/sieve/class_sieveElement_If.inc:669
-msgid "Invalid character found in value attribute. Quotes are not allowed here."
+msgid ""
+"Invalid character found in value attribute. Quotes are not allowed here."
 msgstr "在取值中发现无效字符。这里不允许出现引号。"
 
 #: include/sieve/class_sieveElement_If.inc:727
@@ -14904,7 +14985,8 @@ msgstr "移动用户到已配置用户树"
 msgid ""
 "This dialog allows moving a couple of users to the configured user tree. "
 "Doing this may straighten your LDAP service."
-msgstr "这个对话框允许移动部分用户到配置的用户子树。这么做可以整理您的 LDAP 服务。"
+msgstr ""
+"这个对话框允许移动部分用户到配置的用户子树。这么做可以整理您的 LDAP 服务。"
 
 #: setup/setup_migrate.tpl:143
 msgid ""
@@ -14950,7 +15032,8 @@ msgstr ""
 msgid ""
 "If you want to know what will be done when migrating the selected entries, "
 "use the 'Show changes' button to see the LDIF."
-msgstr "如果您想要知道迁移选择条目到底做了些什么，使用“显示更改”按钮来显示 LDIF。"
+msgstr ""
+"如果您想要知道迁移选择条目到底做了些什么，使用“显示更改”按钮来显示 LDIF。"
 
 #: setup/setup_migrate.tpl:270 setup/setup_migrate.tpl:324
 msgid "Current"
@@ -15078,7 +15161,8 @@ msgid "Checking for MySQL support"
 msgstr "检查 MySQL 支持"
 
 #: setup/class_setupStep_Checks.inc:121
-msgid "MySQL support is needed to communicate with several supported databases."
+msgid ""
+"MySQL support is needed to communicate with several supported databases."
 msgstr "需要 MySQL 来和多个支持数据库通讯。"
 
 #: setup/class_setupStep_Checks.inc:122
@@ -15129,7 +15213,8 @@ msgstr "检查 CUPS 支持"
 msgid ""
 "In order to read available printers via the IPP protocol instead of printcap "
 "files, you've to install the CUPS module."
-msgstr "为了从 IPP 协议而非 printcap 文件中读取可用打印机，您必须安装 CUPS 模块。"
+msgstr ""
+"为了从 IPP 协议而非 printcap 文件中读取可用打印机，您必须安装 CUPS 模块。"
 
 #: setup/class_setupStep_Checks.inc:154
 msgid "Checking for fping utility"
@@ -15142,7 +15227,8 @@ msgid ""
 msgstr "工具 fping 只有在您部署了基于瘦客户机的终端环境下才使用。"
 
 #: setup/class_setupStep_Checks.inc:156
-msgid "The fping utility is only used in thin client based terminal environment."
+msgid ""
+"The fping utility is only used in thin client based terminal environment."
 msgstr "工具 fping 只用于部署了基于瘦客户机的终端环境。"
 
 #: setup/class_setupStep_Checks.inc:171
@@ -15159,7 +15245,8 @@ msgstr "为了使用 SAMBA 2/3 口令, 您必须安装一些额外的软件包�
 msgid ""
 "In order to use SAMBA 2/3 you've to install additional perl libraries. Take "
 "a look at mkntpasswd."
-msgstr "为了使用 SAMBA 2/3, 您必须安装一些额外的 perl 库文件。看一下 mkntpasswd。"
+msgstr ""
+"为了使用 SAMBA 2/3, 您必须安装一些额外的 perl 库文件。看一下 mkntpasswd。"
 
 #: setup/class_setupStep_Checks.inc:183 setup/class_setupStep_Checks.inc:202
 #: setup/class_setupStep_Checks.inc:218 setup/class_setupStep_Checks.inc:234
@@ -15194,7 +15281,8 @@ msgstr "设置这个值为一天，将会防止在真正超时之前丢失会话
 msgid ""
 "Search for 'session.gc_maxlifetime' in your php.ini and set it to 86400 or "
 "higher."
-msgstr "在您的 php.ini 中查找 'session.gc_maxlifetime'，并设置它为 86400 或更高。"
+msgstr ""
+"在您的 php.ini 中查找 'session.gc_maxlifetime'，并设置它为 86400 或更高。"
 
 #: setup/class_setupStep_Checks.inc:203
 msgid ""
@@ -15215,7 +15303,8 @@ msgid ""
 msgstr "GOsa 需要至少 32MB 内存，太少会导致无法预料的错误！将其设置为更大。"
 
 #: setup/class_setupStep_Checks.inc:212
-msgid "Search for 'memory_limit' in your php.ini and set it to '32M' or higher."
+msgid ""
+"Search for 'memory_limit' in your php.ini and set it to '32M' or higher."
 msgstr "在您的 php.ini 中查找 'memory_limit'，并设置它为 '32M' 或更高。"
 
 #: setup/class_setupStep_Checks.inc:219
@@ -15233,7 +15322,8 @@ msgid "The Execution time should be at least 30 seconds."
 msgstr "执行时间应该至少 30 秒。"
 
 #: setup/class_setupStep_Checks.inc:228
-msgid "Search for 'max_execution_time' in your php.ini and set it to '30' or higher."
+msgid ""
+"Search for 'max_execution_time' in your php.ini and set it to '30' or higher."
 msgstr "在您的 php.ini 中查找 'max_execution_time'，并设置它为 '30' 或更高。"
 
 #: setup/class_setupStep_Checks.inc:235
@@ -15269,7 +15359,8 @@ msgid "Increase your server performance by setting magic_quotes_gpc to 'off'."
 msgstr "将 magic_quotes_gpc 设置为 'off' 会提高服务器性能。"
 
 #: setup/class_setupStep_Checks.inc:253
-msgid "Search for 'zend.ze1_compatibility_mode' in your php.ini and set it to 'Off'."
+msgid ""
+"Search for 'zend.ze1_compatibility_mode' in your php.ini and set it to 'Off'."
 msgstr "在您的 php.ini 中查找 'zend.ze1_compatibility_mode'，并设置它为关闭。"
 
 #: setup/class_setupStep_Checks.inc:264
@@ -15285,7 +15376,8 @@ msgstr "配置信息不可写"
 msgid ""
 "GOsa reads its configuration from a file located in (%s/%s). The setup can "
 "write the configuration directly if it is writeable."
-msgstr "GOsa 从位于 (%s/%s) 的文件中读取配置。如果可写，安装程序可以直接修改配置。"
+msgstr ""
+"GOsa 从位于 (%s/%s) 的文件中读取配置。如果可写，安装程序可以直接修改配置。"
 
 #: setup/class_setupStep_Finish.inc:38
 msgid "Write configuration file"
@@ -15434,7 +15526,8 @@ msgstr "发送反馈到 GOsa 项目组"
 msgid ""
 "When checking this option, GOsa will try to connect http://oss.gonicus.de in "
 "order to submit your form anonymously."
-msgstr "当选择这个选项，GOsa 将要连接到 http://oss.gonicus.de，以便匿名提交您的表单。"
+msgstr ""
+"当选择这个选项，GOsa 将要连接到 http://oss.gonicus.de，以便匿名提交您的表单。"
 
 #: setup/setup_feedback.tpl:52
 msgid "Did the setup procedure help you to get started?"
@@ -15840,7 +15933,8 @@ msgstr "失败"
 
 #: setup/class_setupStep_Migrate.inc:319
 #, php-format
-msgid "Found %s winstations outside the predefined winstation department ou '%s'."
+msgid ""
+"Found %s winstations outside the predefined winstation department ou '%s'."
 msgstr "发现 %s winstation 位于预定义的 winstation 部门 ou '%s' 之外。"
 
 #: setup/class_setupStep_Migrate.inc:320 setup/class_setupStep_Migrate.inc:599
@@ -15864,7 +15958,8 @@ msgstr "发现 %s 用户在定义的树 '%s' 之外。"
 
 #: setup/class_setupStep_Migrate.inc:520 setup/class_setupStep_Migrate.inc:533
 #, php-format
-msgid "The specified user '%s' does not have full access to your ldap database."
+msgid ""
+"The specified user '%s' does not have full access to your ldap database."
 msgstr "指定用户 '%s' 在您的 LDAP 数据库中没有完全权限。"
 
 #: setup/class_setupStep_Migrate.inc:597
@@ -15958,7 +16053,8 @@ msgid "The following references will be updated"
 msgstr "下列参照将被更新"
 
 #: setup/class_setupStep_Migrate.inc:1593
-msgid "The LDAP root object is missing. It is required to use your LDAP service."
+msgid ""
+"The LDAP root object is missing. It is required to use your LDAP service."
 msgstr "LDAP 根对象缺失。它是使用 LDAP 服务必须的。"
 
 #: setup/class_setupStep_Migrate.inc:1594
@@ -15979,439 +16075,449 @@ msgstr "拷贝 '%s' 到 '%s' 失败。LDAP 报告说 '%s'。"
 msgid "Something went wrong while copying dns."
 msgstr "拷贝 dns 时出错。"
 
-msgid "User scalixsettings"
-msgstr "用户 scalix 设置"
-
-msgid "Welcome to the GOsa setup!"
-msgstr "欢迎进入 Gosa 安装程序！"
-
-msgid ""
-"It looks like you're calling GOsa for the first time - no configuration was "
-"found. This setup like script will try to aid you in creating a working "
-"configuration by performing three major steps: first we'll check the PHP "
-"installation for required modules, than we're going to check for optional/"
-"needed programms and after you've provided basic informations for your LDAP "
-"connectivity, we're going to check your LDAP setup."
-msgstr ""
-"看起来您是第一次访问 GOsa ── 没有发现配置文件。安装程序将通过三个主要步骤帮助"
-"您创建一个可用配置文件： 首先我们将检查 PHP 安装，查看依赖的模块是否安装了，"
-"然后我们检查需要的成讯，然后在您提供 LDAP 连接需要的基本信息后，我们将检查您 "
-"LDAP 的设置。"
-
-msgid "Setup finished"
-msgstr "安装完毕"
-
-msgid ""
-"Basically the setup is finished. You can check the result of the schema "
-"check here and download the autogenerated gosa.conf below."
-msgstr ""
-"基本上该安装结束了。您可以检查这里的 schema 检查结果，然后从下面下载自动创建"
-"的 gosa.conf 配置文件。"
-
-msgid "Schema Configuration"
-msgstr "Schema 配置"
-
-msgid "Configuration File"
-msgstr "配置文件"
-
-msgid ""
-"GOsa setup has collected all data needed to create an initial configuration "
-"file. Save the the link below as your gosa.conf and place that file in /etc/"
-"gosa. Change it as needed."
-msgstr "GOsa 安装已经收集了所有创建配置文件所需要的数据。将下面的 gosa.conf 文件下载保存在 GOsa 配置目录中。如果需要可以手动修改配置文件。"
-
-msgid ""
-"After placing the file under /etc/gosa, place make sure that the webserver "
-"user is able to read gosa.conf, while other users shouldn't. You may want to "
-"execute these commands to achieve this requirement:"
-msgstr ""
-"将文件保存在 GOsa 配置文件目录中，确认 Web 服务器运行的账号能够读取 gosa."
-"conf，其他用户则无权访问。您可以执行如下命令来实现："
-
-msgid "Setup continued..."
-msgstr "安装继续..."
-
-msgid ""
-"Step two looks for a set of helper programms and checks if they have the "
-"correct minimum version."
-msgstr "第二步查找一系列帮助程序并检查他们的版本是否达到最低要求。"
-
-msgid ""
-"If this lock detection is false, the other person has obviously closed the "
-"webbrowser during the edit operation. You may delete the lockfile in this "
-"case by pressing the 'Remove' button."
-msgstr ""
-"如果锁检查失败，明显的是另外的人在进行编辑操作时关闭了浏览器。您可以通过按“删"
-"除”按钮删除锁文件。"
-
-msgid "You already have an Administrative Account and a Group."
-msgstr "您已经有了一个管理员账号和组。"
-
-msgid ""
-"To provide full administrative access to GOsa, you need to create a special "
-"group which contains the administrative user. The setup program can assist "
-"you with this task. Enter the desired username and the password below to "
-"create the missing entries."
-msgstr ""
-"要具有管理 GOsa 的全部权限，您需要创建一个特殊的组，并包含管理员账号。安装程"
-"序可以帮助您实现。输入想用的用户名和口令以创建缺失的记录。"
-
-msgid ""
-"The following fields allow the basic configuration of GOsa's behaviour and "
-"affect various properties in your main configuration."
-msgstr "如下字段允许对 GOsa 的行为进行基本配置，并会影响主配置中各种参数。"
-
-msgid "Enter a description for the location you're configuring here"
-msgstr "为这里您配置的位置输入一个描述"
-
-msgid ""
-"GOsa always acts as admin and manages access rights internally. This is a "
-"workaround till OpenLDAP's in directory ACI's are fully implemented. For "
-"this to work, we need the admin DN and the corresponding password."
-msgstr ""
-"GOsa 总是作为 LDAP 管理员，并且管理内部权限。这是一个临时方案直到 OpenLDAP 目"
-"录 ACI 被完全实现。为了让其实现，我们需要管理员 DN 和正确的口令。"
-
-msgid "Base "
-msgstr "Base "
-
-msgid "People dn attribute"
-msgstr "People dn attribute"
-
-msgid "ID base for users/groups"
-msgstr "用户/组起始 ID"
-
-msgid "Encryption algorithm"
-msgstr "加密算法"
-
-msgid ""
-"GOsa has modular support for several mail methods. These methods provide "
-"interfaces to users mailboxes and general handling for quotas. You can "
-"choose the dummy plugin to leave all your mail settings untouched."
-msgstr ""
-"GOsa 通过模组支持几种邮件方法。这些方法提供用户邮箱的界面以及管理用户空间。您"
-"可以选择选择 dummy 插件以保持您的邮件设置不被更改。"
-
-msgid ""
-"GOsa may cause PHP interpreter errors, particularly in case of Beta "
-"versions. In some cases it would be helpful to enable the error reporting. "
-"(But it  could be a security risk)  "
-msgstr ""
-"GOsa 可能导致 PHP 解析错误，尤其在 Beta 版本。有时候打开错误报告将会非常有"
-"用。（但是可能造成安全风险）"
-
-msgid "Display PHP errors"
-msgstr "显示 PHP 错误"
-
-msgid "true"
-msgstr "真"
-
-msgid "false"
-msgstr "假"
-
-msgid "Check"
-msgstr "检查"
-
-msgid ""
-"Probably there's another active instance of your session. Multiple window "
-"operation is technical not possible and heavily depends on the browser "
-"you're using. Usage of different browsers at a time (i.e. IE and Mozilla) is "
-"possible. Pressing the 'Logout' button will close this session."
-msgstr ""
-"可能已经存在另外一个您的活动的会话。多窗口操作在技术上不可能并且和严重依赖您"
-"使用浏览器。使用不同的浏览器（如 IE 和 Mozilla）是可能的。按“退出”按钮关闭此"
-"会话。"
-
-msgid ""
-"Now we're going include your LDAP server and create an initial "
-"configuration. After you've entered the server URI below, a quick check is "
-"performed if required LDAP schemas are in place. Samba versions are "
-"autodetected by the installed objectclasses. Details on how your LDAP tree "
-"is organized will be asked later on."
-msgstr ""
-"现在我们要包含您的 LDAP 服务器并创建一个初始配置。当您在下面输入 URI，将会执"
-"行一个针对需要的 LDAP schema 的快速检查。Samba 版本会根据安装的对象类自动判"
-"断。关于您的 LDAP 树的组织将在稍后被问到。"
-
-msgid ""
-"Please enter the server URI to allow the setup to connect your LDAP server "
-"(Example: ldap://your.server:389)."
-msgstr ""
-"请输入服务器 URI 来允许安装程序连接 LDAP 服务器 （如： ldap://your."
-"server:389）。"
-
-msgid "Display systems of user"
-msgstr "显示用户系统"
-
-msgid "An error occurred while processing your request"
-msgstr "处理您的请求时发生一个错误"
-
-msgid "Ignore subtrees"
-msgstr "忽略子树"
-
-msgid "Mime type generic"
-msgstr "Mime type generic"
-
-msgid "Left click action"
-msgstr "左键单击事件"
-
-msgid "Embedded applications"
-msgstr "嵌入应用程序"
-
-msgid "Primary dns server must end with '.' to be a valid entry."
-msgstr "要成为一个有效记录，主 dns 服务器必须以 '.' 结束。"
-
-msgid "Your specified mail address must end with '.' to be a valid record."
-msgstr "您定义的一个有效的邮件地址记录必须以 '.' 结束。"
-
-msgid ""
-"Your mail address contains '@' replace this with '.' to enable GOsa to "
-"create a valid SOA record."
-msgstr "您提供的邮件地址中的 '@' 被替换为 '.' 以便 GOsa 创建一个有效的 SOA 记录。"
-
-msgid ""
-"It looks like you're calling GOsa for the first time - no configuration was "
-"found. This setup like script will try to aid you in creating a working "
-"configuration by performing three major steps: first we'll check the PHP "
-"installation for required modules, than we're going to check for optional/"
-"needed programms and after you've provided basic information for your LDAP "
-"connectivity, we're going to check your LDAP setup."
-msgstr ""
-"看起来您是第一次访问 GOsa ── 没有发现配置文件。安装程序将通过三个主要步骤帮助"
-"您创建一个可用配置文件： 首先我们将检查 PHP 安装，查看依赖的模块是否安装了，"
-"然后我们检查需要的成讯，然后在您提供 LDAP 连接需要的基本信息后，我们将检查您 "
-"LDAP 的设置。"
-
-msgid ""
-"You can also use the new and more-advanced way of inspecting your PHP-"
-"installation. It will give you information about the exact function that "
-"could not be found (functions that could be found are not mentioned). This "
-"is useful if you know what you're doing."
-msgstr ""
-"您也可以使用新的和更高级的方法来检测 PHP 安装。它将给出关于哪些函数没有被发现"
-"的信息（发现的函数将不被提及）。如果您知道您在做什么的话，这非常有帮助。"
-
-msgid "Toggle Show/Hide"
-msgstr "切换显示/隐藏"
-
-msgid ""
-"GOsa may cause PHP interpreter errors, particularly in case of Beta "
-"versions. In some cases it would be helpful to enable the error reporting."
-msgstr ""
-"GOsa 可能导致 PHP 解析错误，尤其在 Beta 版本。有时候打开错误报告将会非常有"
-"用。"
-
-msgid "{LOCATIONNAME}"
-msgstr "{LOCATIONNAME}"
-
-msgid ""
-"Directory '%s' specified as smarty compile directory is not accessible, "
-"please check existence and rights of this directory!"
-msgstr "目录 '%s' 作为 smarty 编译目录无法访问，请检查该目录是否存在以及权限！"
-
-msgid "Display macros  matching"
-msgstr "显示匹配的宏"
-
-msgid ""
-"Optional objectclass '%s' required by plugin '%s' is not present in LDAP "
-"setup"
-msgstr "可选对象类 '%s' 为插件 '%s' 所必须，在您的 LDAP 设置中不存在"
-
-msgid "Optional objectclass '%s' required by plugin '%s' does not have version %s"
-msgstr "可选对象类 '%s' 为插件 '%s' 所必须，没有版本 %s"
-
-msgid "Support for '%s' enabled"
-msgstr "启用 '%s' 的支持"
-
-msgid "SAMBA 3 support disabled, no schema seems to be installed"
-msgstr "SAMBA 3 支持已禁用，没有安装 schema"
-
-msgid "SAMBA 3 support enabled"
-msgstr "SAMBA 3 支持启用"
-
-msgid "SAMBA 2 support disabled, no schema seems to be installed"
-msgstr "SAMBA 2 支持已禁用，没有安装 schema"
-
-msgid "SAMBA 2 support enabled"
-msgstr "SAMBA 2 支持启用"
-
-msgid "Support for pureftp disabled, no schema seems to be installed"
-msgstr "pureftp 支持已禁用，没有安装 schema"
-
-msgid "Support for pureftp enabled"
-msgstr "Pureftp 支持启用"
-
-msgid "Support for WebDAV disabled, no schema seems to be installed"
-msgstr "WebDAV 支持已禁用，没有安装 schema"
-
-msgid "Support for WebDAV enabled"
-msgstr "WebDAV 支持启用"
-
-msgid "Support for phpgroupware disabled, no schema seems to be installed"
-msgstr "phpgroupware 支持已禁用，没有安装 schema"
-
-msgid "Support for phpgroupware enabled"
-msgstr "Phpgroupware 支持启用"
-
-msgid "Support for trustAccount disabled, no schema seems to be installed"
-msgstr "trustAccount 支持已禁用，没有安装 schema"
-
-msgid "Support for trustAccount enabled"
-msgstr "TrustAccount 支持启用"
-
-msgid "Support for gofon disabled, no schema seems to be installed"
-msgstr "Gofon 支持已禁用，没有安装 schema"
-
-msgid "Support for gofon enabled"
-msgstr "Gofon 支持启用"
-
-msgid "Support for nagios disabled, no schema seems to be installed"
-msgstr "Nagios 支持已禁用，没有安装 schema"
-
-msgid "Support for nagios enabled"
-msgstr "Nagios 支持启用"
-
-msgid "Support for netatalk disabled, no schema seems to be installed"
-msgstr "Netatalk 支持已禁用，没有安装 schema"
-
-msgid "Support for netatalk enabled"
-msgstr "Netatalk 支持启用"
-
-msgid ""
-"Support for Kolab disabled, no schema seems to be installed, setting mail-"
-"method to cyrus"
-msgstr "Kolab 支持被禁用，看起来没有安装 schema，设置邮件方法为 cyrus"
-
-msgid "Support for Kolab enabled"
-msgstr "Kolab 支持启用"
-
-msgid "Ignored"
-msgstr "忽略"
-
-msgid ""
-"PHP must be of version 4.1.0 or above for some functions and known bugs in "
-"PHP language."
-msgstr "PHP 必须是 4.1.0 或以上版本，因为一些函数和 PHP 语言的一些已知 bug。"
-
-msgid "PHP session.gc_maxlifetime (>= 86400 seconds)."
-msgstr "PHP session.gc_maxlifetime (>= 86400 秒)。"
-
-msgid "Checking for XML functions"
-msgstr "检查 XML 函数"
-
-msgid "Checking for mhash module"
-msgstr "检查 mhash 模块"
-
-msgid ""
-"To use SSHA encryption, you'll need this module. If you are just using crypt "
-"or md5 encryption, ignore this message. GOsa will run without it."
-msgstr ""
-"要使用 SSHA 加密，您需要这个模块。如果您只使用 crypt 或者 md5 加密，可以忽略"
-"这个信息。GOsa 可以不需要它来运行。"
-
-msgid "Checking for imap module"
-msgstr "检查 imap 模块"
-
-msgid "Checking for mysql module"
-msgstr "检查 mysql 模块"
-
-msgid "Checking for kadm5 module"
-msgstr "检查 kadm5 模块"
-
-msgid "Checking for snmp Module"
-msgstr "检查 snmp 模块"
-
-msgid "PHP detailed function inspection"
-msgstr "检查 PHP 详细功能"
-
-msgid "Checking for function %s"
-msgstr "检查函数 %s"
-
-msgid ""
-"The function %s is used by GOsa. There is no information if it's optional or "
-"required yet."
-msgstr "这个功能 %s 为 GOsa 使用。没有可选或者必须的信息。"
-
-msgid "Checking for GraphicsMagick (>=1.1.2)"
-msgstr "检查 GraphicsMagick (>=1.1.2)"
-
-msgid ""
-"GraphicsMagick is used to convert user supplied images to fit the suggested "
-"size and the unified JPEG format."
-msgstr "GraphicsMagick 被用于转换用户提供的图像到合适的大小以及统一的 JPEG 格式。"
-
-msgid "Checking for ImageMagick (>=5.4.0)"
-msgstr "检查 ImageMagick (>=5.4.0)"
-
-msgid ""
-"ImageMagick is used to convert user supplied images to fit the suggested "
-"size and the unified JPEG format."
-msgstr "ImageMagick 被用于转换用户提供的图像到合适的大小以及统一的 JPEG 格式。"
-
-msgid "Checking imagick module for PHP"
-msgstr "检查 PHP 的 imagick 模块"
-
-msgid ""
-"Imagick is used to convert user supplied images to fit the suggested size "
-"and the unified JPEG format from PHP script."
-msgstr "Imagick 提供 PHP 脚本将用户提供的图片转换为适合的大小和统一的 JPEG 格式。"
-
-msgid "Checking for a way to generate LM/NT password hashes"
-msgstr "检查一种方法来生成 LM/NT 口令"
-
-msgid "php.ini check -> session.auto_register"
-msgstr "php.ini check -> session.auto_register"
-
-msgid "php.ini check -> implicit_flush"
-msgstr "php.ini check -> implicit_flush"
-
-msgid "php.ini check -> max_execution_time"
-msgstr "php.ini check -> max_execution_time"
-
-msgid "php.ini check -> memory_limit"
-msgstr "php.ini check -> memory_limit"
-
-msgid "php.ini check -> expose_php"
-msgstr "php.ini check -> expose_php"
-
-msgid "php.ini check -> magic_quotes_gpc"
-msgstr "php.ini check -> magic_quotes_gpc"
-
-msgid ""
-"Can't connect to the specified LDAP server! Please make sure that is "
-"reachable for GOsa."
-msgstr "无法连接到指定的 LDAP 服务器！请确认是否可以从 GOsa 访问到。"
-
-msgid ""
-"Can't bind to the specified LDAP server! Please make sure that it is "
-"reachable for GOsa."
-msgstr "无法绑定到给出的 LDAP 服务器！请确认 GOsa 可以连接到。"
-
-msgid ""
-"You're missing the required attribute '%s' from this formular. Please "
-"complete!"
-msgstr "这个公式中您缺了必须属性 '%s'。请完成！"
-
-msgid "Can't set ldap protocol version 3."
-msgstr "无法设置 LDAP 版本 3。"
-
-msgid ""
-"Could not bind to the specified LDAP server! Please make sure that it is "
-"reachable for GOsa."
-msgstr "无法绑定到给出的 LDAP 服务器！请确认 GOsa 可以连接到。"
-
-msgid ""
-"Can't read schema informations, GOsa needs to know your schema setup. Please "
-"verify that it is readable for GOsa"
-msgstr ""
-"无法读取 schema 信息，GOsa 需要知道 schema 安装设定。请确认其是否可为 GOsa 读"
-"取。"
-
-msgid "Can't log into LDAP server. Reason was: %s."
-msgstr "无法登录到 LDAP 服务器。原因是: '%s'。"
-
-msgid ""
-"User and/or group could not be created, please check your configuration "
-"twice !"
-msgstr "用户和/或组无法创建，请再次检查您的配置!"
-
+#~ msgid "User scalixsettings"
+#~ msgstr "用户 scalix 设置"
+
+#~ msgid "Welcome to the GOsa setup!"
+#~ msgstr "欢迎进入 Gosa 安装程序！"
+
+#~ msgid ""
+#~ "It looks like you're calling GOsa for the first time - no configuration "
+#~ "was found. This setup like script will try to aid you in creating a "
+#~ "working configuration by performing three major steps: first we'll check "
+#~ "the PHP installation for required modules, than we're going to check for "
+#~ "optional/needed programms and after you've provided basic informations "
+#~ "for your LDAP connectivity, we're going to check your LDAP setup."
+#~ msgstr ""
+#~ "看起来您是第一次访问 GOsa ── 没有发现配置文件。安装程序将通过三个主要步骤"
+#~ "帮助您创建一个可用配置文件： 首先我们将检查 PHP 安装，查看依赖的模块是否安"
+#~ "装了，然后我们检查需要的成讯，然后在您提供 LDAP 连接需要的基本信息后，我们"
+#~ "将检查您 LDAP 的设置。"
+
+#~ msgid "Setup finished"
+#~ msgstr "安装完毕"
+
+#~ msgid ""
+#~ "Basically the setup is finished. You can check the result of the schema "
+#~ "check here and download the autogenerated gosa.conf below."
+#~ msgstr ""
+#~ "基本上该安装结束了。您可以检查这里的 schema 检查结果，然后从下面下载自动创"
+#~ "建的 gosa.conf 配置文件。"
+
+#~ msgid "Schema Configuration"
+#~ msgstr "Schema 配置"
+
+#~ msgid "Configuration File"
+#~ msgstr "配置文件"
+
+#~ msgid ""
+#~ "GOsa setup has collected all data needed to create an initial "
+#~ "configuration file. Save the the link below as your gosa.conf and place "
+#~ "that file in /etc/gosa. Change it as needed."
+#~ msgstr ""
+#~ "GOsa 安装已经收集了所有创建配置文件所需要的数据。将下面的 gosa.conf 文件下"
+#~ "载保存在 GOsa 配置目录中。如果需要可以手动修改配置文件。"
+
+#~ msgid ""
+#~ "After placing the file under /etc/gosa, place make sure that the "
+#~ "webserver user is able to read gosa.conf, while other users shouldn't. "
+#~ "You may want to execute these commands to achieve this requirement:"
+#~ msgstr ""
+#~ "将文件保存在 GOsa 配置文件目录中，确认 Web 服务器运行的账号能够读取 gosa."
+#~ "conf，其他用户则无权访问。您可以执行如下命令来实现："
+
+#~ msgid "Setup continued..."
+#~ msgstr "安装继续..."
+
+#~ msgid ""
+#~ "Step two looks for a set of helper programms and checks if they have the "
+#~ "correct minimum version."
+#~ msgstr "第二步查找一系列帮助程序并检查他们的版本是否达到最低要求。"
+
+#~ msgid ""
+#~ "If this lock detection is false, the other person has obviously closed "
+#~ "the webbrowser during the edit operation. You may delete the lockfile in "
+#~ "this case by pressing the 'Remove' button."
+#~ msgstr ""
+#~ "如果锁检查失败，明显的是另外的人在进行编辑操作时关闭了浏览器。您可以通过"
+#~ "按“删除”按钮删除锁文件。"
+
+#~ msgid "You already have an Administrative Account and a Group."
+#~ msgstr "您已经有了一个管理员账号和组。"
+
+#~ msgid ""
+#~ "To provide full administrative access to GOsa, you need to create a "
+#~ "special group which contains the administrative user. The setup program "
+#~ "can assist you with this task. Enter the desired username and the "
+#~ "password below to create the missing entries."
+#~ msgstr ""
+#~ "要具有管理 GOsa 的全部权限，您需要创建一个特殊的组，并包含管理员账号。安装"
+#~ "程序可以帮助您实现。输入想用的用户名和口令以创建缺失的记录。"
+
+#~ msgid ""
+#~ "The following fields allow the basic configuration of GOsa's behaviour "
+#~ "and affect various properties in your main configuration."
+#~ msgstr "如下字段允许对 GOsa 的行为进行基本配置，并会影响主配置中各种参数。"
+
+#~ msgid "Enter a description for the location you're configuring here"
+#~ msgstr "为这里您配置的位置输入一个描述"
+
+#~ msgid ""
+#~ "GOsa always acts as admin and manages access rights internally. This is a "
+#~ "workaround till OpenLDAP's in directory ACI's are fully implemented. For "
+#~ "this to work, we need the admin DN and the corresponding password."
+#~ msgstr ""
+#~ "GOsa 总是作为 LDAP 管理员，并且管理内部权限。这是一个临时方案直到 "
+#~ "OpenLDAP 目录 ACI 被完全实现。为了让其实现，我们需要管理员 DN 和正确的口"
+#~ "令。"
+
+#~ msgid "Base "
+#~ msgstr "Base "
+
+#~ msgid "People dn attribute"
+#~ msgstr "People dn attribute"
+
+#~ msgid "ID base for users/groups"
+#~ msgstr "用户/组起始 ID"
+
+#~ msgid "Encryption algorithm"
+#~ msgstr "加密算法"
+
+#~ msgid ""
+#~ "GOsa has modular support for several mail methods. These methods provide "
+#~ "interfaces to users mailboxes and general handling for quotas. You can "
+#~ "choose the dummy plugin to leave all your mail settings untouched."
+#~ msgstr ""
+#~ "GOsa 通过模组支持几种邮件方法。这些方法提供用户邮箱的界面以及管理用户空"
+#~ "间。您可以选择选择 dummy 插件以保持您的邮件设置不被更改。"
+
+#~ msgid ""
+#~ "GOsa may cause PHP interpreter errors, particularly in case of Beta "
+#~ "versions. In some cases it would be helpful to enable the error "
+#~ "reporting. (But it  could be a security risk)  "
+#~ msgstr ""
+#~ "GOsa 可能导致 PHP 解析错误，尤其在 Beta 版本。有时候打开错误报告将会非常有"
+#~ "用。（但是可能造成安全风险）"
+
+#~ msgid "Display PHP errors"
+#~ msgstr "显示 PHP 错误"
+
+#~ msgid "true"
+#~ msgstr "真"
+
+#~ msgid "false"
+#~ msgstr "假"
+
+#~ msgid "Check"
+#~ msgstr "检查"
+
+#~ msgid ""
+#~ "Probably there's another active instance of your session. Multiple window "
+#~ "operation is technical not possible and heavily depends on the browser "
+#~ "you're using. Usage of different browsers at a time (i.e. IE and Mozilla) "
+#~ "is possible. Pressing the 'Logout' button will close this session."
+#~ msgstr ""
+#~ "可能已经存在另外一个您的活动的会话。多窗口操作在技术上不可能并且和严重依赖"
+#~ "您使用浏览器。使用不同的浏览器（如 IE 和 Mozilla）是可能的。按“退出”按钮关"
+#~ "闭此会话。"
+
+#~ msgid ""
+#~ "Now we're going include your LDAP server and create an initial "
+#~ "configuration. After you've entered the server URI below, a quick check "
+#~ "is performed if required LDAP schemas are in place. Samba versions are "
+#~ "autodetected by the installed objectclasses. Details on how your LDAP "
+#~ "tree is organized will be asked later on."
+#~ msgstr ""
+#~ "现在我们要包含您的 LDAP 服务器并创建一个初始配置。当您在下面输入 URI，将会"
+#~ "执行一个针对需要的 LDAP schema 的快速检查。Samba 版本会根据安装的对象类自"
+#~ "动判断。关于您的 LDAP 树的组织将在稍后被问到。"
+
+#~ msgid ""
+#~ "Please enter the server URI to allow the setup to connect your LDAP "
+#~ "server (Example: ldap://your.server:389)."
+#~ msgstr ""
+#~ "请输入服务器 URI 来允许安装程序连接 LDAP 服务器 （如： ldap://your."
+#~ "server:389）。"
+
+#~ msgid "Display systems of user"
+#~ msgstr "显示用户系统"
+
+#~ msgid "An error occurred while processing your request"
+#~ msgstr "处理您的请求时发生一个错误"
+
+#~ msgid "Ignore subtrees"
+#~ msgstr "忽略子树"
+
+#~ msgid "Mime type generic"
+#~ msgstr "Mime type generic"
+
+#~ msgid "Left click action"
+#~ msgstr "左键单击事件"
+
+#~ msgid "Embedded applications"
+#~ msgstr "嵌入应用程序"
+
+#~ msgid "Primary dns server must end with '.' to be a valid entry."
+#~ msgstr "要成为一个有效记录，主 dns 服务器必须以 '.' 结束。"
+
+#~ msgid "Your specified mail address must end with '.' to be a valid record."
+#~ msgstr "您定义的一个有效的邮件地址记录必须以 '.' 结束。"
+
+#~ msgid ""
+#~ "Your mail address contains '@' replace this with '.' to enable GOsa to "
+#~ "create a valid SOA record."
+#~ msgstr ""
+#~ "您提供的邮件地址中的 '@' 被替换为 '.' 以便 GOsa 创建一个有效的 SOA 记录。"
+
+#~ msgid ""
+#~ "It looks like you're calling GOsa for the first time - no configuration "
+#~ "was found. This setup like script will try to aid you in creating a "
+#~ "working configuration by performing three major steps: first we'll check "
+#~ "the PHP installation for required modules, than we're going to check for "
+#~ "optional/needed programms and after you've provided basic information for "
+#~ "your LDAP connectivity, we're going to check your LDAP setup."
+#~ msgstr ""
+#~ "看起来您是第一次访问 GOsa ── 没有发现配置文件。安装程序将通过三个主要步骤"
+#~ "帮助您创建一个可用配置文件： 首先我们将检查 PHP 安装，查看依赖的模块是否安"
+#~ "装了，然后我们检查需要的成讯，然后在您提供 LDAP 连接需要的基本信息后，我们"
+#~ "将检查您 LDAP 的设置。"
+
+#~ msgid ""
+#~ "You can also use the new and more-advanced way of inspecting your PHP-"
+#~ "installation. It will give you information about the exact function that "
+#~ "could not be found (functions that could be found are not mentioned). "
+#~ "This is useful if you know what you're doing."
+#~ msgstr ""
+#~ "您也可以使用新的和更高级的方法来检测 PHP 安装。它将给出关于哪些函数没有被"
+#~ "发现的信息（发现的函数将不被提及）。如果您知道您在做什么的话，这非常有帮"
+#~ "助。"
+
+#~ msgid "Toggle Show/Hide"
+#~ msgstr "切换显示/隐藏"
+
+#~ msgid ""
+#~ "GOsa may cause PHP interpreter errors, particularly in case of Beta "
+#~ "versions. In some cases it would be helpful to enable the error reporting."
+#~ msgstr ""
+#~ "GOsa 可能导致 PHP 解析错误，尤其在 Beta 版本。有时候打开错误报告将会非常有"
+#~ "用。"
+
+#~ msgid "{LOCATIONNAME}"
+#~ msgstr "{LOCATIONNAME}"
+
+#~ msgid ""
+#~ "Directory '%s' specified as smarty compile directory is not accessible, "
+#~ "please check existence and rights of this directory!"
+#~ msgstr ""
+#~ "目录 '%s' 作为 smarty 编译目录无法访问，请检查该目录是否存在以及权限！"
+
+#~ msgid "Display macros  matching"
+#~ msgstr "显示匹配的宏"
+
+#~ msgid ""
+#~ "Optional objectclass '%s' required by plugin '%s' is not present in LDAP "
+#~ "setup"
+#~ msgstr "可选对象类 '%s' 为插件 '%s' 所必须，在您的 LDAP 设置中不存在"
+
+#~ msgid ""
+#~ "Optional objectclass '%s' required by plugin '%s' does not have version %s"
+#~ msgstr "可选对象类 '%s' 为插件 '%s' 所必须，没有版本 %s"
+
+#~ msgid "Support for '%s' enabled"
+#~ msgstr "启用 '%s' 的支持"
+
+#~ msgid "SAMBA 3 support disabled, no schema seems to be installed"
+#~ msgstr "SAMBA 3 支持已禁用，没有安装 schema"
+
+#~ msgid "SAMBA 3 support enabled"
+#~ msgstr "SAMBA 3 支持启用"
+
+#~ msgid "SAMBA 2 support disabled, no schema seems to be installed"
+#~ msgstr "SAMBA 2 支持已禁用，没有安装 schema"
+
+#~ msgid "SAMBA 2 support enabled"
+#~ msgstr "SAMBA 2 支持启用"
+
+#~ msgid "Support for pureftp disabled, no schema seems to be installed"
+#~ msgstr "pureftp 支持已禁用，没有安装 schema"
+
+#~ msgid "Support for pureftp enabled"
+#~ msgstr "Pureftp 支持启用"
+
+#~ msgid "Support for WebDAV disabled, no schema seems to be installed"
+#~ msgstr "WebDAV 支持已禁用，没有安装 schema"
+
+#~ msgid "Support for WebDAV enabled"
+#~ msgstr "WebDAV 支持启用"
+
+#~ msgid "Support for phpgroupware disabled, no schema seems to be installed"
+#~ msgstr "phpgroupware 支持已禁用，没有安装 schema"
+
+#~ msgid "Support for phpgroupware enabled"
+#~ msgstr "Phpgroupware 支持启用"
+
+#~ msgid "Support for trustAccount disabled, no schema seems to be installed"
+#~ msgstr "trustAccount 支持已禁用，没有安装 schema"
+
+#~ msgid "Support for trustAccount enabled"
+#~ msgstr "TrustAccount 支持启用"
+
+#~ msgid "Support for gofon disabled, no schema seems to be installed"
+#~ msgstr "Gofon 支持已禁用，没有安装 schema"
+
+#~ msgid "Support for gofon enabled"
+#~ msgstr "Gofon 支持启用"
+
+#~ msgid "Support for nagios disabled, no schema seems to be installed"
+#~ msgstr "Nagios 支持已禁用，没有安装 schema"
+
+#~ msgid "Support for nagios enabled"
+#~ msgstr "Nagios 支持启用"
+
+#~ msgid "Support for netatalk disabled, no schema seems to be installed"
+#~ msgstr "Netatalk 支持已禁用，没有安装 schema"
+
+#~ msgid "Support for netatalk enabled"
+#~ msgstr "Netatalk 支持启用"
+
+#~ msgid ""
+#~ "Support for Kolab disabled, no schema seems to be installed, setting mail-"
+#~ "method to cyrus"
+#~ msgstr "Kolab 支持被禁用，看起来没有安装 schema，设置邮件方法为 cyrus"
+
+#~ msgid "Support for Kolab enabled"
+#~ msgstr "Kolab 支持启用"
+
+#~ msgid "Ignored"
+#~ msgstr "忽略"
+
+#~ msgid ""
+#~ "PHP must be of version 4.1.0 or above for some functions and known bugs "
+#~ "in PHP language."
+#~ msgstr ""
+#~ "PHP 必须是 4.1.0 或以上版本，因为一些函数和 PHP 语言的一些已知 bug。"
+
+#~ msgid "PHP session.gc_maxlifetime (>= 86400 seconds)."
+#~ msgstr "PHP session.gc_maxlifetime (>= 86400 秒)。"
+
+#~ msgid "Checking for XML functions"
+#~ msgstr "检查 XML 函数"
+
+#~ msgid "Checking for mhash module"
+#~ msgstr "检查 mhash 模块"
+
+#~ msgid ""
+#~ "To use SSHA encryption, you'll need this module. If you are just using "
+#~ "crypt or md5 encryption, ignore this message. GOsa will run without it."
+#~ msgstr ""
+#~ "要使用 SSHA 加密，您需要这个模块。如果您只使用 crypt 或者 md5 加密，可以忽"
+#~ "略这个信息。GOsa 可以不需要它来运行。"
+
+#~ msgid "Checking for imap module"
+#~ msgstr "检查 imap 模块"
+
+#~ msgid "Checking for mysql module"
+#~ msgstr "检查 mysql 模块"
+
+#~ msgid "Checking for kadm5 module"
+#~ msgstr "检查 kadm5 模块"
+
+#~ msgid "Checking for snmp Module"
+#~ msgstr "检查 snmp 模块"
+
+#~ msgid "PHP detailed function inspection"
+#~ msgstr "检查 PHP 详细功能"
+
+#~ msgid "Checking for function %s"
+#~ msgstr "检查函数 %s"
+
+#~ msgid ""
+#~ "The function %s is used by GOsa. There is no information if it's optional "
+#~ "or required yet."
+#~ msgstr "这个功能 %s 为 GOsa 使用。没有可选或者必须的信息。"
+
+#~ msgid "Checking for GraphicsMagick (>=1.1.2)"
+#~ msgstr "检查 GraphicsMagick (>=1.1.2)"
+
+#~ msgid ""
+#~ "GraphicsMagick is used to convert user supplied images to fit the "
+#~ "suggested size and the unified JPEG format."
+#~ msgstr ""
+#~ "GraphicsMagick 被用于转换用户提供的图像到合适的大小以及统一的 JPEG 格式。"
+
+#~ msgid "Checking for ImageMagick (>=5.4.0)"
+#~ msgstr "检查 ImageMagick (>=5.4.0)"
+
+#~ msgid ""
+#~ "ImageMagick is used to convert user supplied images to fit the suggested "
+#~ "size and the unified JPEG format."
+#~ msgstr ""
+#~ "ImageMagick 被用于转换用户提供的图像到合适的大小以及统一的 JPEG 格式。"
+
+#~ msgid "Checking imagick module for PHP"
+#~ msgstr "检查 PHP 的 imagick 模块"
+
+#~ msgid ""
+#~ "Imagick is used to convert user supplied images to fit the suggested size "
+#~ "and the unified JPEG format from PHP script."
+#~ msgstr ""
+#~ "Imagick 提供 PHP 脚本将用户提供的图片转换为适合的大小和统一的 JPEG 格式。"
+
+#~ msgid "Checking for a way to generate LM/NT password hashes"
+#~ msgstr "检查一种方法来生成 LM/NT 口令"
+
+#~ msgid "php.ini check -> session.auto_register"
+#~ msgstr "php.ini check -> session.auto_register"
+
+#~ msgid "php.ini check -> implicit_flush"
+#~ msgstr "php.ini check -> implicit_flush"
+
+#~ msgid "php.ini check -> max_execution_time"
+#~ msgstr "php.ini check -> max_execution_time"
+
+#~ msgid "php.ini check -> memory_limit"
+#~ msgstr "php.ini check -> memory_limit"
+
+#~ msgid "php.ini check -> expose_php"
+#~ msgstr "php.ini check -> expose_php"
+
+#~ msgid "php.ini check -> magic_quotes_gpc"
+#~ msgstr "php.ini check -> magic_quotes_gpc"
+
+#~ msgid ""
+#~ "Can't connect to the specified LDAP server! Please make sure that is "
+#~ "reachable for GOsa."
+#~ msgstr "无法连接到指定的 LDAP 服务器！请确认是否可以从 GOsa 访问到。"
+
+#~ msgid ""
+#~ "Can't bind to the specified LDAP server! Please make sure that it is "
+#~ "reachable for GOsa."
+#~ msgstr "无法绑定到给出的 LDAP 服务器！请确认 GOsa 可以连接到。"
+
+#~ msgid ""
+#~ "You're missing the required attribute '%s' from this formular. Please "
+#~ "complete!"
+#~ msgstr "这个公式中您缺了必须属性 '%s'。请完成！"
+
+#~ msgid "Can't set ldap protocol version 3."
+#~ msgstr "无法设置 LDAP 版本 3。"
+
+#~ msgid ""
+#~ "Could not bind to the specified LDAP server! Please make sure that it is "
+#~ "reachable for GOsa."
+#~ msgstr "无法绑定到给出的 LDAP 服务器！请确认 GOsa 可以连接到。"
+
+#~ msgid ""
+#~ "Can't read schema informations, GOsa needs to know your schema setup. "
+#~ "Please verify that it is readable for GOsa"
+#~ msgstr ""
+#~ "无法读取 schema 信息，GOsa 需要知道 schema 安装设定。请确认其是否可为 "
+#~ "GOsa 读取。"
+
+#~ msgid "Can't log into LDAP server. Reason was: %s."
+#~ msgstr "无法登录到 LDAP 服务器。原因是: '%s'。"
+
+#~ msgid ""
+#~ "User and/or group could not be created, please check your configuration "
+#~ "twice !"
+#~ msgstr "用户和/或组无法创建，请再次检查您的配置!"

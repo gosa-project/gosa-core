@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polski\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-11 08:23+0200\n"
+"POT-Creation-Date: 2007-07-11 17:17+0200\n"
 "PO-Revision-Date: 2006-06-08 02:33+0100\n"
 "Last-Translator: Piotr Rybicki <meritus@innervision.pl>\n"
 "Language-Team: Piotr Rybicki <meritus@innervision.pl>\n"
@@ -480,7 +480,7 @@ msgstr ""
 #: plugins/personal/generic/generic_picture.tpl:35
 #: plugins/personal/generic/generic_certs.tpl:78
 #: plugins/personal/generic/password.tpl:19
-#: plugins/personal/generic/main.inc:161
+#: plugins/personal/generic/main.inc:164
 #: plugins/gofax/blocklists/generic.tpl:87
 #: plugins/gofax/blocklists/remove.tpl:16
 #: plugins/gofax/faxaccount/locals.tpl:62
@@ -725,7 +725,7 @@ msgstr ""
 #: plugins/personal/scalix/main.inc:105 plugins/personal/samba/main.inc:105
 #: plugins/personal/generic/generic_picture.tpl:33
 #: plugins/personal/generic/generic_certs.tpl:76
-#: plugins/personal/generic/main.inc:159
+#: plugins/personal/generic/main.inc:162
 #: plugins/gofax/blocklists/generic.tpl:85
 #: plugins/gofax/faxaccount/main.inc:89
 #: plugins/gofon/phoneaccount/main.inc:105
@@ -1500,7 +1500,7 @@ msgstr "przełącz wszystkie polecenia hosta"
 #: plugins/personal/connectivity/main.inc:129
 #: plugins/personal/scalix/main.inc:115 plugins/personal/samba/main.inc:115
 #: plugins/personal/netatalk/main.inc:111
-#: plugins/personal/generic/main.inc:181 plugins/gofax/faxaccount/main.inc:96
+#: plugins/personal/generic/main.inc:183 plugins/gofax/faxaccount/main.inc:96
 #: plugins/gofon/phoneaccount/main.inc:112
 msgid "Click the 'Edit' button below to change informations in this dialog"
 msgstr "Kliknij przycisk 'Edytuj' poniżej, aby zmienić informacje w tym oknie"
@@ -1512,7 +1512,7 @@ msgstr "Kliknij przycisk 'Edytuj' poniżej, aby zmienić informacje w tym oknie"
 #: plugins/personal/connectivity/main.inc:130
 #: plugins/personal/scalix/main.inc:117 plugins/personal/samba/main.inc:116
 #: plugins/personal/netatalk/main.inc:112
-#: plugins/personal/generic/main.inc:173
+#: plugins/personal/generic/main.inc:175
 #: plugins/gofax/faxaccount/generic.tpl:86
 #: plugins/gofax/faxaccount/generic.tpl:92
 #: plugins/gofax/faxaccount/main.inc:97
@@ -1772,53 +1772,53 @@ msgstr "Wyrażenie regularne dla dopasowania adresów"
 msgid "UNIX"
 msgstr "UNIX"
 
-#: plugins/personal/posix/class_posixAccount.inc:125
+#: plugins/personal/posix/class_posixAccount.inc:126
 msgid "expired"
 msgstr "wygasło"
 
-#: plugins/personal/posix/class_posixAccount.inc:127
+#: plugins/personal/posix/class_posixAccount.inc:128
 msgid "grace time active"
 msgstr "Czas prolongaty aktywny"
 
-#: plugins/personal/posix/class_posixAccount.inc:130
+#: plugins/personal/posix/class_posixAccount.inc:131
 msgid "active, password not changable"
 msgstr "aktywne, hasło niezmienialne"
 
-#: plugins/personal/posix/class_posixAccount.inc:132
+#: plugins/personal/posix/class_posixAccount.inc:133
 msgid "active, password expired"
 msgstr "aktywne, hasło wygasło"
 
-#: plugins/personal/posix/class_posixAccount.inc:134
+#: plugins/personal/posix/class_posixAccount.inc:135
 msgid "active"
 msgstr "Aktywne"
 
-#: plugins/personal/posix/class_posixAccount.inc:145
-#: plugins/personal/posix/class_posixAccount.inc:996
+#: plugins/personal/posix/class_posixAccount.inc:146
+#: plugins/personal/posix/class_posixAccount.inc:1007
 msgid "Group of user"
 msgstr "Grupa użytkownika"
 
-#: plugins/personal/posix/class_posixAccount.inc:180
+#: plugins/personal/posix/class_posixAccount.inc:181
 msgid "unconfigured"
 msgstr "nieskonfigurowane"
 
-#: plugins/personal/posix/class_posixAccount.inc:200
+#: plugins/personal/posix/class_posixAccount.inc:201
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:248
-#: plugins/admin/systems/class_workstationService.inc:177
+#: plugins/admin/systems/class_workstationService.inc:186
 #: plugins/admin/systems/class_terminalService.inc:190
 #: plugins/admin/systems/class_workstationStartup.inc:829
 msgid "automatic"
 msgstr "automatyczne"
 
-#: plugins/personal/posix/class_posixAccount.inc:247
+#: plugins/personal/posix/class_posixAccount.inc:248
 msgid "This account has no unix extensions."
 msgstr "To konto nie posiada rozszerzeń unix"
 
-#: plugins/personal/posix/class_posixAccount.inc:267
-#: plugins/personal/posix/class_posixAccount.inc:270
+#: plugins/personal/posix/class_posixAccount.inc:268
+#: plugins/personal/posix/class_posixAccount.inc:271
 msgid "Remove posix account"
 msgstr "Usuń konto posixowe"
 
-#: plugins/personal/posix/class_posixAccount.inc:268
+#: plugins/personal/posix/class_posixAccount.inc:269
 msgid ""
 "This account has unix features enabled. To disable them, you'll need to "
 "remove the samba / environment account first."
@@ -1826,45 +1826,45 @@ msgstr ""
 "To konto posiada rozszerzenia unix, Aby je wyłączyć należy najpierw usunąć "
 "konto Samba/Środowisko."
 
-#: plugins/personal/posix/class_posixAccount.inc:271
+#: plugins/personal/posix/class_posixAccount.inc:272
 msgid ""
 "This account has posix features enabled. You can disable them by clicking "
 "below."
 msgstr ""
 "To konto posiada rozszerzenia posix. Można je wyłączyć klikająć poniżej."
 
-#: plugins/personal/posix/class_posixAccount.inc:274
+#: plugins/personal/posix/class_posixAccount.inc:275
 msgid "Create posix account"
 msgstr "Utwórz konto posixowe"
 
-#: plugins/personal/posix/class_posixAccount.inc:275
+#: plugins/personal/posix/class_posixAccount.inc:276
 msgid ""
 "This account has posix features disabled. You can enable them by clicking "
 "below."
 msgstr ""
 "To konto nie posiada rozszerzenia posix. Można je włączyć klikająć poniżej."
 
-#: plugins/personal/posix/class_posixAccount.inc:438
+#: plugins/personal/posix/class_posixAccount.inc:439
 #, php-format
 msgid "Password can't be changed up to %s days after last change"
 msgstr "Hasło nie może być zmienione do %s dni po ostatniej zmianie"
 
-#: plugins/personal/posix/class_posixAccount.inc:440
+#: plugins/personal/posix/class_posixAccount.inc:441
 #, php-format
 msgid "Password must be changed after %s days"
 msgstr "Hasło musi zostać zmienione po %s dniach"
 
-#: plugins/personal/posix/class_posixAccount.inc:442
+#: plugins/personal/posix/class_posixAccount.inc:443
 #, php-format
 msgid "Disable account after %s days of inactivity after password expiery"
 msgstr "Wyłącz konto po %s dniach nieaktywności po wygaśnięciu hasła"
 
-#: plugins/personal/posix/class_posixAccount.inc:444
+#: plugins/personal/posix/class_posixAccount.inc:445
 #, php-format
 msgid "Warn user %s days before password expiery"
 msgstr "Ostrzeż użytkownika na %s dni przed wygaśnięciem hasła"
 
-#: plugins/personal/posix/class_posixAccount.inc:476
+#: plugins/personal/posix/class_posixAccount.inc:477
 #: plugins/personal/mail/class_mailAccount.inc:559
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
@@ -1874,7 +1874,7 @@ msgstr "Ostrzeż użytkownika na %s dni przed wygaśnięciem hasła"
 msgid "January"
 msgstr "Styczeń"
 
-#: plugins/personal/posix/class_posixAccount.inc:476
+#: plugins/personal/posix/class_posixAccount.inc:477
 #: plugins/personal/mail/class_mailAccount.inc:559
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
@@ -1884,7 +1884,7 @@ msgstr "Styczeń"
 msgid "February"
 msgstr "Luty"
 
-#: plugins/personal/posix/class_posixAccount.inc:476
+#: plugins/personal/posix/class_posixAccount.inc:477
 #: plugins/personal/mail/class_mailAccount.inc:559
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
@@ -1894,7 +1894,7 @@ msgstr "Luty"
 msgid "March"
 msgstr "Marzec"
 
-#: plugins/personal/posix/class_posixAccount.inc:476
+#: plugins/personal/posix/class_posixAccount.inc:477
 #: plugins/personal/mail/class_mailAccount.inc:559
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
@@ -1904,7 +1904,7 @@ msgstr "Marzec"
 msgid "April"
 msgstr "Kwiecień"
 
-#: plugins/personal/posix/class_posixAccount.inc:477
+#: plugins/personal/posix/class_posixAccount.inc:478
 #: plugins/personal/mail/class_mailAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
@@ -1914,7 +1914,7 @@ msgstr "Kwiecień"
 msgid "May"
 msgstr "Maj"
 
-#: plugins/personal/posix/class_posixAccount.inc:477
+#: plugins/personal/posix/class_posixAccount.inc:478
 #: plugins/personal/mail/class_mailAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
@@ -1924,7 +1924,7 @@ msgstr "Maj"
 msgid "June"
 msgstr "Czerwiec"
 
-#: plugins/personal/posix/class_posixAccount.inc:477
+#: plugins/personal/posix/class_posixAccount.inc:478
 #: plugins/personal/mail/class_mailAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
@@ -1934,7 +1934,7 @@ msgstr "Czerwiec"
 msgid "July"
 msgstr "Lipiec"
 
-#: plugins/personal/posix/class_posixAccount.inc:477
+#: plugins/personal/posix/class_posixAccount.inc:478
 #: plugins/personal/mail/class_mailAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
@@ -1944,7 +1944,7 @@ msgstr "Lipiec"
 msgid "August"
 msgstr "Sierpień"
 
-#: plugins/personal/posix/class_posixAccount.inc:477
+#: plugins/personal/posix/class_posixAccount.inc:478
 #: plugins/personal/mail/class_mailAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
@@ -1954,7 +1954,7 @@ msgstr "Sierpień"
 msgid "September"
 msgstr "Wrzesień"
 
-#: plugins/personal/posix/class_posixAccount.inc:478
+#: plugins/personal/posix/class_posixAccount.inc:479
 #: plugins/personal/mail/class_mailAccount.inc:561
 #: plugins/personal/samba/class_sambaAccount.inc:395
 #: plugins/personal/samba/class_sambaAccount.inc:413
@@ -1964,7 +1964,7 @@ msgstr "Wrzesień"
 msgid "October"
 msgstr "Październik"
 
-#: plugins/personal/posix/class_posixAccount.inc:478
+#: plugins/personal/posix/class_posixAccount.inc:479
 #: plugins/personal/mail/class_mailAccount.inc:561
 #: plugins/personal/samba/class_sambaAccount.inc:395
 #: plugins/personal/samba/class_sambaAccount.inc:413
@@ -1974,7 +1974,7 @@ msgstr "Październik"
 msgid "November"
 msgstr "Listopad"
 
-#: plugins/personal/posix/class_posixAccount.inc:478
+#: plugins/personal/posix/class_posixAccount.inc:479
 #: plugins/personal/mail/class_mailAccount.inc:561
 #: plugins/personal/samba/class_sambaAccount.inc:395
 #: plugins/personal/samba/class_sambaAccount.inc:413
@@ -1984,98 +1984,98 @@ msgstr "Listopad"
 msgid "December"
 msgstr "Grudzień"
 
-#: plugins/personal/posix/class_posixAccount.inc:559
+#: plugins/personal/posix/class_posixAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:491
 #: plugins/admin/systems/class_terminalGeneric.inc:99
 #: setup/setup_config2.tpl:126
 msgid "disabled"
 msgstr "wyłączone"
 
-#: plugins/personal/posix/class_posixAccount.inc:559
+#: plugins/personal/posix/class_posixAccount.inc:560
 msgid "full access"
 msgstr "pełen dostęp"
 
-#: plugins/personal/posix/class_posixAccount.inc:560
+#: plugins/personal/posix/class_posixAccount.inc:561
 msgid "allow access to these hosts"
 msgstr "zezwól na dostęp do tych hostów"
 
-#: plugins/personal/posix/class_posixAccount.inc:606
+#: plugins/personal/posix/class_posixAccount.inc:607
 msgid "Removing UNIX account failed"
 msgstr "Usuwanie konta UNIX nieudane"
 
-#: plugins/personal/posix/class_posixAccount.inc:758
+#: plugins/personal/posix/class_posixAccount.inc:759
 msgid "Failed: overriding lock"
 msgstr "Niepowodzenie: nadpisuję blokadę"
 
-#: plugins/personal/posix/class_posixAccount.inc:847
+#: plugins/personal/posix/class_posixAccount.inc:848
 msgid "Saving UNIX account failed"
 msgstr "Zapisywanie konta UNIX nieudane"
 
-#: plugins/personal/posix/class_posixAccount.inc:910
+#: plugins/personal/posix/class_posixAccount.inc:921
 msgid "The required field 'Home directory' is not set."
 msgstr "Wymagane pole 'Katalog domowy' nie jest ustawione."
 
-#: plugins/personal/posix/class_posixAccount.inc:913
+#: plugins/personal/posix/class_posixAccount.inc:924
 msgid "Please enter a valid path in 'Home directory' field."
 msgstr "Proszę podać prawidłową ścieżkę w polu 'Katalog domowy'."
 
-#: plugins/personal/posix/class_posixAccount.inc:921
+#: plugins/personal/posix/class_posixAccount.inc:932
 msgid "Value specified as 'UID' is not valid."
 msgstr "Wartość podana jako 'UID' jest nieprawidłowa."
 
-#: plugins/personal/posix/class_posixAccount.inc:924
+#: plugins/personal/posix/class_posixAccount.inc:935
 msgid "Value specified as 'UID' is too small."
 msgstr "Wartość podana jako 'UID' jest za mała."
 
-#: plugins/personal/posix/class_posixAccount.inc:928
-#: plugins/admin/groups/class_groupGeneric.inc:807
+#: plugins/personal/posix/class_posixAccount.inc:939
+#: plugins/admin/groups/class_groupGeneric.inc:814
 msgid "Value specified as 'GID' is not valid."
 msgstr "Wartość podana jako 'GID' jest nieprawidłowa."
 
-#: plugins/personal/posix/class_posixAccount.inc:931
-#: plugins/admin/groups/class_groupGeneric.inc:810
+#: plugins/personal/posix/class_posixAccount.inc:942
+#: plugins/admin/groups/class_groupGeneric.inc:817
 msgid "Value specified as 'GID' is too small."
 msgstr "Wartość podana jako 'GID' jest za mała."
 
-#: plugins/personal/posix/class_posixAccount.inc:939
+#: plugins/personal/posix/class_posixAccount.inc:950
 msgid "Value specified as 'shadowMin' is not valid."
 msgstr "Wartość podana jako 'shadowMin' jest nieprawidłowa."
 
-#: plugins/personal/posix/class_posixAccount.inc:944
+#: plugins/personal/posix/class_posixAccount.inc:955
 msgid "Value specified as 'shadowMax' is not valid."
 msgstr "Wartość podana jako 'shadowMax' jest nieprawidłowa."
 
-#: plugins/personal/posix/class_posixAccount.inc:949
+#: plugins/personal/posix/class_posixAccount.inc:960
 msgid "Value specified as 'shadowWarning' is not valid."
 msgstr "Wartość podana jako 'shadowWarning' jest nieprawidłowa."
 
-#: plugins/personal/posix/class_posixAccount.inc:952
+#: plugins/personal/posix/class_posixAccount.inc:963
 msgid "'shadowWarning' without 'shadowMax' makes no sense."
 msgstr "'shadowWarning' bez 'shadowMax' nie ma sensu."
 
-#: plugins/personal/posix/class_posixAccount.inc:955
+#: plugins/personal/posix/class_posixAccount.inc:966
 msgid "Value specified as 'shadowWarning' should be smaller than 'shadowMax'."
 msgstr ""
 "Wartość podana jako 'shadowWarning' powinna być mniejsza niż 'shadowMax'."
 
-#: plugins/personal/posix/class_posixAccount.inc:958
+#: plugins/personal/posix/class_posixAccount.inc:969
 msgid "Value specified as 'shadowWarning' should be greater than 'shadowMin'."
 msgstr ""
 "Wartość podana jako 'shadowWarning' powinna być większa niż 'shadowMin'."
 
-#: plugins/personal/posix/class_posixAccount.inc:963
+#: plugins/personal/posix/class_posixAccount.inc:974
 msgid "Value specified as 'shadowInactive' is not valid."
 msgstr "Wartość podana jako ;shadowInactive' jest nieprawidłowa."
 
-#: plugins/personal/posix/class_posixAccount.inc:966
+#: plugins/personal/posix/class_posixAccount.inc:977
 msgid "'shadowInactive' without 'shadowMax' makes no sense."
 msgstr "'shadowInactive' bez 'shadowMax' nie ma sensu."
 
-#: plugins/personal/posix/class_posixAccount.inc:971
+#: plugins/personal/posix/class_posixAccount.inc:982
 msgid "Value specified as 'shadowMin' should be smaller than 'shadowMax'."
 msgstr "Wartość podana jako 'shadowMin' powinna być mniejsza niż 'shadowMax'."
 
-#: plugins/personal/posix/class_posixAccount.inc:1119
+#: plugins/personal/posix/class_posixAccount.inc:1130
 msgid "Too many users, can't allocate a free ID!"
 msgstr "Zbyt wielu użytkowników, nie można nadać wolnego ID"
 
@@ -2398,7 +2398,7 @@ msgid "auto"
 msgstr "automatycznie"
 
 #: plugins/personal/environment/class_environment.inc:204
-#: plugins/admin/systems/class_workstationService.inc:83
+#: plugins/admin/systems/class_workstationService.inc:92
 #: plugins/admin/systems/class_terminalService.inc:91
 #, php-format
 msgid ""
@@ -2580,7 +2580,7 @@ msgstr "Rozdzielczość zmienialna podczas pracy"
 
 #: plugins/personal/environment/environment.tpl:87
 #: plugins/admin/systems/terminalService.tpl:94
-#: plugins/admin/systems/workstationService.tpl:94
+#: plugins/admin/systems/workstationService.tpl:97
 msgid "Resolution"
 msgstr "Rozdzielczość"
 
@@ -2721,7 +2721,7 @@ msgstr ""
 "programach skonfigurowanych do używania tego hasła."
 
 #: plugins/personal/password/changed.tpl:9
-#: plugins/personal/generic/main.inc:170
+#: plugins/personal/generic/main.inc:172
 #: plugins/gofax/faxreports/detail.tpl:67
 #: plugins/addons/mailqueue/header.tpl:5
 #: plugins/addons/ldapmanager/contentimport.tpl:44
@@ -4331,7 +4331,7 @@ msgstr "Zdjęcie użytkownika"
 msgid "You are not allowed to set your password!"
 msgstr "Brak uprawnień do zmiany własnego hasła"
 
-#: plugins/personal/generic/main.inc:191
+#: plugins/personal/generic/main.inc:193
 msgid "Generic user information"
 msgstr "Ogólne informacje o użytkowniku"
 
@@ -4663,8 +4663,8 @@ msgstr "Sybierz poddrzewo do umiszczenia bloklisty"
 #: plugins/admin/systems/servnfs.tpl:47
 #: plugins/admin/systems/terminalService.tpl:42
 #: plugins/admin/systems/terminalService.tpl:120
-#: plugins/admin/systems/workstationService.tpl:42
-#: plugins/admin/systems/workstationService.tpl:120
+#: plugins/admin/systems/workstationService.tpl:45
+#: plugins/admin/systems/workstationService.tpl:123
 #: plugins/admin/systems/glpi_devices.tpl:427
 #: plugins/admin/systems/glpi_devices.tpl:492
 #: plugins/admin/systems/glpi_devices.tpl:542
@@ -5484,7 +5484,7 @@ msgstr "Numery telefonów"
 #: plugins/gofon/phoneaccount/generic.tpl:24
 #: plugins/gofon/phoneaccount/paste_generic.tpl:27
 #: plugins/admin/systems/terminalService.tpl:66
-#: plugins/admin/systems/workstationService.tpl:66
+#: plugins/admin/systems/workstationService.tpl:69
 msgid "Telephone hardware"
 msgstr "Sprzęt telefoniczny"
 
@@ -5492,7 +5492,7 @@ msgstr "Sprzęt telefoniczny"
 #: plugins/gofon/phoneaccount/generic.tpl:28
 #: plugins/gofon/phoneaccount/paste_generic.tpl:29
 #: plugins/admin/systems/terminalService.tpl:69
-#: plugins/admin/systems/workstationService.tpl:69
+#: plugins/admin/systems/workstationService.tpl:72
 msgid "Telephone"
 msgstr "Telefon"
 
@@ -7406,16 +7406,16 @@ msgstr "Hosty które nie mogą się połączyć."
 msgid "MSN"
 msgstr "MSN"
 
-#: plugins/admin/systems/class_workstationService.inc:87
+#: plugins/admin/systems/class_workstationService.inc:96
 #: plugins/admin/systems/class_terminalService.inc:65
-#: plugins/admin/systems/workstationService.tpl:121
+#: plugins/admin/systems/workstationService.tpl:124
 msgid "unknown"
 msgstr "nieznane"
 
-#: plugins/admin/systems/class_workstationService.inc:90
-#: plugins/admin/systems/class_workstationService.inc:91
-#: plugins/admin/systems/class_workstationService.inc:92
-#: plugins/admin/systems/class_workstationService.inc:93
+#: plugins/admin/systems/class_workstationService.inc:99
+#: plugins/admin/systems/class_workstationService.inc:100
+#: plugins/admin/systems/class_workstationService.inc:101
+#: plugins/admin/systems/class_workstationService.inc:102
 #: plugins/admin/systems/class_terminalService.inc:97
 #: plugins/admin/systems/class_terminalService.inc:98
 #: plugins/admin/systems/class_terminalService.inc:99
@@ -7423,45 +7423,45 @@ msgstr "nieznane"
 msgid "bit"
 msgstr "bit"
 
-#: plugins/admin/systems/class_workstationService.inc:133
+#: plugins/admin/systems/class_workstationService.inc:142
 #: plugins/admin/systems/class_terminalService.inc:152
 msgid "show chooser"
 msgstr "pokaż wybor"
 
-#: plugins/admin/systems/class_workstationService.inc:134
+#: plugins/admin/systems/class_workstationService.inc:143
 #: plugins/admin/systems/class_terminalService.inc:153
 msgid "direct"
 msgstr "bezpośredni"
 
-#: plugins/admin/systems/class_workstationService.inc:137
+#: plugins/admin/systems/class_workstationService.inc:146
 #: plugins/admin/systems/class_terminalService.inc:156
 msgid "load balanced"
 msgstr "równoważone obciążenie"
 
-#: plugins/admin/systems/class_workstationService.inc:140
+#: plugins/admin/systems/class_workstationService.inc:149
 #: plugins/admin/systems/class_terminalService.inc:159
 msgid "Windows RDP"
 msgstr "Windows RDP"
 
-#: plugins/admin/systems/class_workstationService.inc:141
+#: plugins/admin/systems/class_workstationService.inc:150
 #: plugins/admin/systems/class_terminalService.inc:160
 msgid "ICA client"
 msgstr "Klient ICA"
 
-#: plugins/admin/systems/class_workstationService.inc:196
-#: plugins/admin/systems/class_workstationService.inc:199
-#: plugins/admin/systems/class_workstationService.inc:202
 #: plugins/admin/systems/class_workstationService.inc:205
 #: plugins/admin/systems/class_workstationService.inc:208
 #: plugins/admin/systems/class_workstationService.inc:211
 #: plugins/admin/systems/class_workstationService.inc:214
-#: plugins/admin/systems/class_workstationService.inc:224
-#: plugins/admin/systems/class_workstationService.inc:225
-#: plugins/admin/systems/class_workstationService.inc:226
-#: plugins/admin/systems/class_workstationService.inc:227
-#: plugins/admin/systems/class_workstationService.inc:228
-#: plugins/admin/systems/class_workstationService.inc:229
-#: plugins/admin/systems/class_workstationService.inc:230
+#: plugins/admin/systems/class_workstationService.inc:217
+#: plugins/admin/systems/class_workstationService.inc:220
+#: plugins/admin/systems/class_workstationService.inc:223
+#: plugins/admin/systems/class_workstationService.inc:233
+#: plugins/admin/systems/class_workstationService.inc:234
+#: plugins/admin/systems/class_workstationService.inc:235
+#: plugins/admin/systems/class_workstationService.inc:236
+#: plugins/admin/systems/class_workstationService.inc:237
+#: plugins/admin/systems/class_workstationService.inc:238
+#: plugins/admin/systems/class_workstationService.inc:239
 #: plugins/admin/systems/class_terminalService.inc:68
 #: plugins/admin/systems/class_terminalService.inc:96
 #: plugins/admin/systems/class_terminalService.inc:102
@@ -7488,12 +7488,12 @@ msgstr "Klient ICA"
 msgid "inherited"
 msgstr "odziedziczony"
 
-#: plugins/admin/systems/class_workstationService.inc:199
+#: plugins/admin/systems/class_workstationService.inc:208
 #: plugins/admin/systems/class_terminalService.inc:215
 msgid "Bit"
 msgstr "Bit"
 
-#: plugins/admin/systems/class_workstationService.inc:247
+#: plugins/admin/systems/class_workstationService.inc:256
 #: plugins/admin/systems/class_terminalService.inc:255
 #: plugins/admin/systems/class_workstationStartup.inc:514
 #: plugins/admin/systems/class_terminalStartup.inc:168
@@ -7502,26 +7502,26 @@ msgstr "Bit"
 msgid "This 'dn' has no terminal features."
 msgstr "Ten 'dn' nie posiada cech terminala."
 
-#: plugins/admin/systems/class_workstationService.inc:297
+#: plugins/admin/systems/class_workstationService.inc:306
 #: plugins/admin/systems/class_terminalService.inc:306
 msgid "Choose the phone located at the current terminal"
 msgstr "Wybierz telefon umieszczony przy obecnym terminalu"
 
-#: plugins/admin/systems/class_workstationService.inc:365
-#: plugins/admin/systems/class_workstationService.inc:370
+#: plugins/admin/systems/class_workstationService.inc:380
+#: plugins/admin/systems/class_workstationService.inc:385
 #: plugins/admin/systems/class_terminalService.inc:390
 #: plugins/admin/systems/class_terminalService.inc:395
 msgid "Please specify a valid VSync range."
 msgstr "Proszę podać prawidłowy parametr VSync"
 
-#: plugins/admin/systems/class_workstationService.inc:380
-#: plugins/admin/systems/class_workstationService.inc:385
+#: plugins/admin/systems/class_workstationService.inc:395
+#: plugins/admin/systems/class_workstationService.inc:400
 #: plugins/admin/systems/class_terminalService.inc:405
 #: plugins/admin/systems/class_terminalService.inc:410
 msgid "Please specify a valid HSync range."
 msgstr "Proszę podać prawidłowy parametr HSync."
 
-#: plugins/admin/systems/class_workstationService.inc:428
+#: plugins/admin/systems/class_workstationService.inc:443
 msgid "Saving workstation services failed"
 msgstr "Zapisywanie usług stacji roboczej nieudane"
 
@@ -8037,121 +8037,121 @@ msgid "Saving server failed"
 msgstr "Zapisywanie serwera nieudane"
 
 #: plugins/admin/systems/terminalService.tpl:4
-#: plugins/admin/systems/workstationService.tpl:4
+#: plugins/admin/systems/workstationService.tpl:7
 msgid "Keyboard"
 msgstr "Klawiatura"
 
 #: plugins/admin/systems/terminalService.tpl:7
 #: plugins/admin/systems/terminalService.tpl:215
 #: plugins/admin/systems/printerPPDDialog.tpl:5
-#: plugins/admin/systems/workstationService.tpl:7
+#: plugins/admin/systems/workstationService.tpl:10
 msgid "Model"
 msgstr "Model"
 
 #: plugins/admin/systems/terminalService.tpl:9
-#: plugins/admin/systems/workstationService.tpl:9
+#: plugins/admin/systems/workstationService.tpl:12
 msgid "Choose keyboard model"
 msgstr "Wybierz model klawiatury"
 
 #: plugins/admin/systems/terminalService.tpl:15
-#: plugins/admin/systems/workstationService.tpl:15
+#: plugins/admin/systems/workstationService.tpl:18
 msgid "Layout"
 msgstr "Układ"
 
 #: plugins/admin/systems/terminalService.tpl:17
-#: plugins/admin/systems/workstationService.tpl:17
+#: plugins/admin/systems/workstationService.tpl:20
 msgid "Choose keyboard layout"
 msgstr "Wybierz układ klawiatury"
 
 #: plugins/admin/systems/terminalService.tpl:23
-#: plugins/admin/systems/workstationService.tpl:23
+#: plugins/admin/systems/workstationService.tpl:26
 msgid "Variant"
 msgstr "Wariant"
 
 #: plugins/admin/systems/terminalService.tpl:25
-#: plugins/admin/systems/workstationService.tpl:25
+#: plugins/admin/systems/workstationService.tpl:28
 msgid "Choose keyboard variant"
 msgstr "Wybierz wariant klawiatury"
 
 #: plugins/admin/systems/terminalService.tpl:39
-#: plugins/admin/systems/workstationService.tpl:39
+#: plugins/admin/systems/workstationService.tpl:42
 msgid "Mouse"
 msgstr "Mysz"
 
 #: plugins/admin/systems/terminalService.tpl:44
-#: plugins/admin/systems/workstationService.tpl:44
+#: plugins/admin/systems/workstationService.tpl:47
 msgid "Choose mouse type"
 msgstr "Wybierz typ myszy"
 
 #: plugins/admin/systems/terminalService.tpl:50
-#: plugins/admin/systems/workstationService.tpl:50
+#: plugins/admin/systems/workstationService.tpl:53
 msgid "Port"
 msgstr "Port"
 
 #: plugins/admin/systems/terminalService.tpl:52
-#: plugins/admin/systems/workstationService.tpl:52
+#: plugins/admin/systems/workstationService.tpl:55
 msgid "Choose mouse port"
 msgstr "Wybierz port myszy"
 
 #: plugins/admin/systems/terminalService.tpl:83
-#: plugins/admin/systems/workstationService.tpl:83
+#: plugins/admin/systems/workstationService.tpl:86
 #: plugins/admin/systems/info.tpl:73
 msgid "Graphic device"
 msgstr "Karta graficzna"
 
 #: plugins/admin/systems/terminalService.tpl:86
-#: plugins/admin/systems/workstationService.tpl:86
+#: plugins/admin/systems/workstationService.tpl:89
 #: plugins/admin/systems/printer.tpl:51
 msgid "Driver"
 msgstr "Sterownik"
 
 #: plugins/admin/systems/terminalService.tpl:88
-#: plugins/admin/systems/workstationService.tpl:88
+#: plugins/admin/systems/workstationService.tpl:91
 msgid "Choose graphic driver that is needed by the installed graphic board"
 msgstr "Wybierz sterownik wymagany przez zainstalowaną kartę graficzną"
 
 #: plugins/admin/systems/terminalService.tpl:96
-#: plugins/admin/systems/workstationService.tpl:96
+#: plugins/admin/systems/workstationService.tpl:99
 msgid "Choose screen resolution used in graphic mode"
 msgstr "Wybierz rozdzielczość ekranu użytą w trybie graficznym"
 
 #: plugins/admin/systems/terminalService.tpl:102
-#: plugins/admin/systems/workstationService.tpl:102
+#: plugins/admin/systems/workstationService.tpl:105
 msgid "Color depth"
 msgstr "Głębia kolorów"
 
 #: plugins/admin/systems/terminalService.tpl:104
-#: plugins/admin/systems/workstationService.tpl:104
+#: plugins/admin/systems/workstationService.tpl:107
 msgid "Choose colordepth used in graphic mode"
 msgstr "Wybierz głębię kolorów użytą w trybie graficznym"
 
 #: plugins/admin/systems/terminalService.tpl:117
-#: plugins/admin/systems/workstationService.tpl:117
+#: plugins/admin/systems/workstationService.tpl:120
 msgid "Display device"
 msgstr "Urządzenie wyświetlające"
 
 #: plugins/admin/systems/terminalService.tpl:125
-#: plugins/admin/systems/workstationService.tpl:125
+#: plugins/admin/systems/workstationService.tpl:128
 msgid "Use DDC for automatic detection"
 msgstr ""
 
 #: plugins/admin/systems/terminalService.tpl:129
-#: plugins/admin/systems/workstationService.tpl:128
+#: plugins/admin/systems/workstationService.tpl:131
 msgid "HSync"
 msgstr "HSync"
 
 #: plugins/admin/systems/terminalService.tpl:131
-#: plugins/admin/systems/workstationService.tpl:130
+#: plugins/admin/systems/workstationService.tpl:133
 msgid "Horizontal refresh frequency for installed monitor"
 msgstr "Częstotliwość odświeżania poziomego dla zainstalowanego monitora"
 
 #: plugins/admin/systems/terminalService.tpl:134
-#: plugins/admin/systems/workstationService.tpl:133
+#: plugins/admin/systems/workstationService.tpl:136
 msgid "VSync"
 msgstr "VSync"
 
 #: plugins/admin/systems/terminalService.tpl:136
-#: plugins/admin/systems/workstationService.tpl:135
+#: plugins/admin/systems/workstationService.tpl:138
 msgid "Vertical refresh frequency for installed monitor"
 msgstr "Częstotliwość odświeżania pionowego dla zainstalowanego monitora"
 
@@ -8204,17 +8204,17 @@ msgid "Select NFS filesystem to place spool files on"
 msgstr "Proszę wybrać system plików NFS dla przechowywania plików kolejki"
 
 #: plugins/admin/systems/terminalService.tpl:208
-#: plugins/admin/systems/workstationService.tpl:147
+#: plugins/admin/systems/workstationService.tpl:150
 msgid "Scan device"
 msgstr "Urządzenie skanujące"
 
 #: plugins/admin/systems/terminalService.tpl:209
-#: plugins/admin/systems/workstationService.tpl:148
+#: plugins/admin/systems/workstationService.tpl:151
 msgid "Select to start SANE scan service on terminal"
 msgstr "Zaznacz aby uruchomić usługę skanowania SANE na terminalu"
 
 #: plugins/admin/systems/terminalService.tpl:210
-#: plugins/admin/systems/workstationService.tpl:149
+#: plugins/admin/systems/workstationService.tpl:152
 msgid "Provide scan services"
 msgstr "Dostarcza usługi skanowania"
 
@@ -9375,6 +9375,11 @@ msgstr ""
 "To zawiera <b>cały</b> system i informacje instalacyjne. Proszę upewnić się, "
 "że faktycznie chcesz wykonać tą operację. Nie ma możliwości odwrócenia tego "
 "procesu."
+
+#: plugins/admin/systems/workstationService.tpl:2
+#, fuzzy
+msgid "Inherit all"
+msgstr "Inicjały"
 
 #: plugins/admin/systems/network.tpl:1
 msgid "Network\tsettings"
@@ -12334,12 +12339,17 @@ msgstr "Nie znaleziono RIDBASE dla '%s'."
 msgid "Saving group failed"
 msgstr "Zapisywanie grupy nieudane"
 
-#: plugins/admin/groups/class_groupGeneric.inc:756
+#: plugins/admin/groups/class_groupGeneric.inc:757
 #: plugins/admin/ogroups/class_ogroup.inc:612
 msgid "You have no permissions to create a group on this 'Base'."
 msgstr "Brak uprawnień do tworzenia grupy w tej 'bazie'."
 
-#: plugins/admin/groups/class_groupGeneric.inc:766
+#: plugins/admin/groups/class_groupGeneric.inc:762
+#, fuzzy
+msgid "You have no permissions to move a group from the original 'Base'."
+msgstr "Brak uprawnień do przenoszenia konta z obecnego 'Kontenera'."
+
+#: plugins/admin/groups/class_groupGeneric.inc:773
 msgid ""
 "The field 'Name' contains invalid characters. Lowercase, numbers and dashes "
 "are allowed."
@@ -12347,13 +12357,13 @@ msgstr ""
 "Pole 'Nazwa' zawiera niedozwolone znaki. Tylko małe litery, liczny i "
 "myślniki są dozwolone."
 
-#: plugins/admin/groups/class_groupGeneric.inc:777
-#: plugins/admin/groups/class_groupGeneric.inc:791
+#: plugins/admin/groups/class_groupGeneric.inc:784
 #: plugins/admin/groups/class_groupGeneric.inc:798
+#: plugins/admin/groups/class_groupGeneric.inc:805
 msgid "Value specified as 'Name' is already used."
 msgstr "Wartość podana jako 'Nazwa' jest już użyta."
 
-#: plugins/admin/groups/class_groupGeneric.inc:852
+#: plugins/admin/groups/class_groupGeneric.inc:859
 #, fuzzy
 msgid "Too many groups, can't allocate a free ID!"
 msgstr "Zbyt wielu użytkowników, nie można nadać wolnego ID"
