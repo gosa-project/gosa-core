@@ -59,6 +59,7 @@ class posixAccount extends plugin
   var $GroupRegex       = "*";
   var $GroupUserRegex   = "*";
   var $SubSearch        = false;
+  var $memberGroup      = array();
 
   /* attribute list for save action */
   var $CopyPasteVars  = array("grouplist","groupMembership","use_shadowMin","use_shadowMax","use_shadowWarning","use_shadowInactive","use_shadowExpire","must_change_password","grouplist","savedGidNumber","savedUidNumber");
@@ -902,8 +903,18 @@ class posixAccount extends plugin
     /* Include global link_info */
     $ldap= $this->config->get_ldap_link();
 
+    /* Append groups as memberGroup: to check hook 
+     */
+    $tmp_attributes  = $this->attributes;    
+    $this->attributes[] = "memberGroup";
+    $this->memberGroup = array();
+    foreach($this->groupMembership as $dn => $name){
+      $this->memberGroup[] = $name;
+    }
+
     /* Call common method to give check the hook */
     $message= plugin::check();
+    $this->attributes = $tmp_attributes;
 
     /* must: homeDirectory */
     if ($this->homeDirectory == ""){
