@@ -85,8 +85,8 @@ if (!$remove_lock){
       del_lock ($ui->dn);
       sess_del ('edit');
 
-      /* Write back to session */
-      $_SESSION['posixAccount']= $posixAccount;
+      /* Remove from session */
+      sess_del ('posixAccount');
     } else {
       /* Errors found, show message */
       show_errors ($message);

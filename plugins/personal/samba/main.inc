@@ -80,8 +80,8 @@ if (!$remove_lock){
       del_lock ($ui->dn);
       sess_del ('edit');
 
-      /* Reload */
-      $_SESSION['sambaAccount']= $sambaAccount;
+      /* Remove from session */
+      sess_del ('sambaAccount');
     } else {
       /* Errors found, show message */
       show_errors ($message);

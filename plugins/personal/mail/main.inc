@@ -79,8 +79,8 @@ if (!$remove_lock){
       del_lock ($ui->dn);
       sess_del ('edit');
 
-      /* Store object */
-      $_SESSION['mailAccount']= $mailAccount;
+      /* Remove object */
+      sess_del ('mailAccount');
     } else {
       /* Errors found, show message */
       show_errors ($message);

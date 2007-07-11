@@ -109,6 +109,7 @@ if (!$remove_lock){
 
     $user->acl= "#none#";
     del_lock ($ui->dn);
+    sess_del ('user');
   }
 
   /* save changes to LDAP and disable edit mode */
@@ -126,13 +127,15 @@ if (!$remove_lock){
       del_lock ($ui->dn);
       sess_del ('edit');
 
-      /* Save object */
-      $_SESSION['user']= $user;
-
       /* Need to reset the password? */
       if($user->password_change_needed()){
+        /* Save object */
+        $_SESSION['user']= $user;
+
         $display.= $smarty->fetch(get_template_path('password.tpl', TRUE));
         return ($display);
+      } else {
+	sess_del ('user');
       }
 
     } else {

@@ -78,8 +78,8 @@ if (!$remove_lock) {
       del_lock($ui->dn);
       sess_del('edit');
 
-      /* Store object */
-      $_SESSION['netatalk'] = $netatalk;
+      /* Remove object */
+      sess_del('netatalk');
     } else {
       /* Errors found, show message */
       show_errors($message);
