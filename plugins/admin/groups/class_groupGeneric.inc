@@ -749,11 +749,18 @@ class group extends plugin
       $new_dn= $this->dn;
     }
 
+    /* Check permissions */
     $ui= get_userinfo();
-    $acl= get_permissions ($ui->dn, $ui->subtreeACL);
-    $acl= get_module_permission($acl, "group", $ui->dn);
-    if ($this-> dn == "new" && chkacl($this->acl, "create") != ""){
+    $acl= get_permissions ($new_dn, $ui->subtreeACL);
+    $acl= get_module_permission($acl, "group", $new_dn);
+    if ($this->dn == "new" && chkacl($acl, "create") != ""){
       $message[]= _("You have no permissions to create a group on this 'Base'.");
+    } elseif ($this->dn != $new_dn && $this->dn != "new"){
+      $acl= get_permissions ($new_dn, $ui->subtreeACL);
+      $acl= get_module_permission($acl, "group", $new_dn);
+      if (chkacl($acl, "create") != ""){
+        $message[]= _("You have no permissions to move a group from the original 'Base'.");
+      }
     }
 
     /* must: cn */
