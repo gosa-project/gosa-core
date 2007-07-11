@@ -59,11 +59,12 @@ class workservice extends plugin
   {
     plugin::plugin ($config, $dn, $parent);
 
-
-    $ldap = $this->config->get_ldap_link();
-    $ldap->cd ($this->config->current['BASE']);
-    $ldap->search("(&(objectClass=gosaGroupOfNames)(member=".$this->dn."))",array("cn"));
-    $this->member_of_ogroup = $ldap->count() >= 1;
+    if(!isset($this->parent->by_object['ogroup'])){
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cd ($this->config->current['BASE']);
+      $ldap->search("(&(objectClass=gosaGroupOfNames)(member=".$this->dn."))",array("cn"));
+      $this->member_of_ogroup = $ldap->count() >= 1;
+    }
 
     $this->XResolutions= array( 
         "640x480"   =>  "640x480",
