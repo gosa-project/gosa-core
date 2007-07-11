@@ -65,14 +65,21 @@ class userinfo
   {
     $ldap= $this->config->get_ldap_link();
 
+    /* Check if we should include the unittag */
+    $tag= "";
+    if ($this->gosaUnitTag != "" && isset($this->config->current['STRICT_UNITS']) &&
+        preg_match('/TRUE/i', $this->config->current['STRICT_UNITS'])){
+      $tag= "(gosaUnitTag=".$this->gosaUnitTag.")";
+    }
+
     /* Load ACL's from all groups we're in */
     $this->subtreeACL= array();
     $ldap->cd($this->config->current['BASE']);
     if ($this->gidNumber == -1){
-      $ldap->search("(&(objectClass=posixGroup)(objectClass=gosaObject)".
+      $ldap->search("(&(objectClass=posixGroup)(objectClass=gosaObject)".$tag.
           "(memberUid=$this->username))");
     } else {
-      $ldap->search("(&(objectClass=posixGroup)(objectClass=gosaObject)".
+      $ldap->search("(&(objectClass=posixGroup)(objectClass=gosaObject)".$tag.
           "(|(memberUid=$this->username)(gidNumber=$this->gidNumber)))");
     }
 
