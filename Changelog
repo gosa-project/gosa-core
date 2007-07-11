@@ -19,6 +19,9 @@ GOsa2 changelog
   - Made gidNumber be the current in posix check hook
   - Removed inconsistency in gosa/gosa+samba3 schema
   - Fixed multiple saving of "My account" data
+  - Forbid moving of objects from administrative units to other
+    administrative units where ACL's permit it. Objects "seemed"
+    to disapear because the tagging changes.
 
 * gosa 2.5.11a
   - Added chinese translation
