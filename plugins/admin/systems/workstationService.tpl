@@ -1,3 +1,6 @@
+{if $member_of_ogroup}
+<input type='submit' name='inheritAll' value='{t}Inherit all{/t}'>
+{/if}
 <table style="width:100%;" summary="">
  <tr>
   <td style="width:33%; vertical-align:top;">
