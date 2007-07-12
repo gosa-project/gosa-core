@@ -34,7 +34,6 @@
 {if $member_of_ogroup}
 	<tr>
 		<td>
-			{t}Inheritance{/t}
 		</td>
 		<td>
 	<input type='submit' name='inheritAll' value='{t}Inherit all{/t}'>

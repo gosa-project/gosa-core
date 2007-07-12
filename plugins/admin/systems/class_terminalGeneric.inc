@@ -357,10 +357,6 @@ class termgeneric extends plugin
     plugin::save_object();
     $this->netConfigDNS->save_object();
 
-    if(isset($_POST["inheritAll"])){
-      $this->set_everything_to_inherited();
-    }
-
     /* Save base, since this is no LDAP attribute */
     if (isset($_POST['base']) && chkacl($this->acl, "create") == ""){
       $this->base= $_POST['base'];
@@ -379,6 +375,11 @@ class termgeneric extends plugin
         $this->inheritTimeServer = false;
       }
     }  
+
+    if(isset($_POST["inheritAll"])){
+      $this->set_everything_to_inherited();
+    }
+
   }
 
 
@@ -524,6 +525,11 @@ class termgeneric extends plugin
 
   function set_everything_to_inherited()
   {
+    $this->gotoTerminalPath  = "default";
+    $this->gotoSwapServer    = "default" ;
+    $this->gotoSyslogServer  = "default";
+    $this->inheritTimeServer = TRUE;
+
     /* Set workstation service attributes to inherited */
     if($this->member_of_ogroup && isset($this->parent->by_object['termservice'])){
       foreach(array("gotoXKbLayout","gotoXKbModel","gotoXKbVariant",
