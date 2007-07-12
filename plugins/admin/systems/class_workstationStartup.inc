@@ -32,6 +32,7 @@ class workstartup extends plugin
   var $customParameters   = "";
   var $orig_dn            = "";
   var $ignore_account     = TRUE;
+  var $member_of_ogroup   = FALSE;
  
   /* FAI class selection */ 
   var $FAIclass           = array();
@@ -64,6 +65,13 @@ class workstartup extends plugin
     }
 
     plugin::plugin ($config, $dn, $parent);
+
+    if(!isset($this->parent->by_object['ogroup'])){
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cd ($this->config->current['BASE']);
+      $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".$this->dn."))",array("cn"));
+      $this->member_of_ogroup = $ldap->count() >= 1;
+    }
 
     /* Creating a list of valid Mirrors 
      * none will not be saved to ldap.
@@ -792,6 +800,8 @@ class workstartup extends plugin
       $smarty->assign($value."ACL", chkacl($this->acl, "$value"));
     }
 
+    $smarty->assign("member_of_ogroup",$this->member_of_ogroup);
+
     /* Show main page */
     return($smarty->fetch (get_template_path('workstationStartup.tpl', TRUE,dirname(__FILE__))));
   }
@@ -930,6 +940,9 @@ class workstartup extends plugin
       $this->customParameters= $_POST["customParameters"];
     }
 
+    if(isset($_POST["inheritAll"])){
+      $this->set_everything_to_inherited();
+    }
   }
 
 
@@ -1145,6 +1158,13 @@ class workstartup extends plugin
     return($ret);
   }
 
+
+  function set_everything_to_inherited()
+  {
+    $this->gotoBootKernel = "default-inherited";
+    $this->gotoLdapServer = "default-inherited";
+    $this->FAIdebianMirror= "inherited";
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
