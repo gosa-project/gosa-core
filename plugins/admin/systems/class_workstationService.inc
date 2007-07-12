@@ -53,18 +53,9 @@ class workservice extends plugin
   var $XKbLayouts       =array();
   var $XKbVariants      =array();
 
-  var $member_of_ogroup = FALSE;
-
   function workservice ($config, $dn= NULL, $parent= NULL)
   {
     plugin::plugin ($config, $dn, $parent);
-
-    if(!isset($this->parent->by_object['ogroup'])){
-      $ldap = $this->config->get_ldap_link();
-      $ldap->cd ($this->config->current['BASE']);
-      $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".$this->dn."))",array("cn"));
-      $this->member_of_ogroup = $ldap->count() >= 1;
-    }
 
     $this->XResolutions= array( 
         "640x480"   =>  "640x480",
@@ -331,8 +322,6 @@ class workservice extends plugin
       $smarty->assign("hiddenState","");
     }
 
-    $smarty->assign("member_of_ogroup",$this->member_of_ogroup);
-
     /* Show main page */
     return($smarty->fetch (get_template_path('workstationService.tpl',TRUE,dirname(__FILE__))));
   }
@@ -346,10 +335,6 @@ class workservice extends plugin
   function save_object()
   {
     plugin::save_object();
-
-    if(isset($_POST["inheritAll"])){
-      $this->set_everything_to_inherited();
-    }
 
     if(isset($_POST['gotoXDriver']) && chkacl($this->acl,"AutoSync") == ""){
       if(isset($_POST['AutoSync'])){
@@ -444,19 +429,6 @@ class workservice extends plugin
     $this->handle_post_events("modify");
   }
 
-  
-  function set_everything_to_inherited()
-  {
-      $this->gotoXKbLayout = "default";
-      $this->gotoXKbModel = "default";
-      $this->gotoXKbVariant = "default";      
-
-      $this->gotoXDriver ="default";
-      $this->gotoXResolution ="default";
-      $this->gotoXColordepth ="default";
-      $this->gotoXMouseType ="default";
-      $this->gotoXMouseport ="default";
-  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
