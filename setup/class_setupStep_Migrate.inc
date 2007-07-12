@@ -914,6 +914,9 @@ class Step_Migrate extends setup_step
         if(!in_array($object_attrs['uid'][0],$attrs_admin_group_new['memberUid'])){
           $attrs_admin_group_new['memberUid'][] = $object_attrs['uid'][0];
         }
+	if ($cv['rfc2307bis']){
+	  $attrs_admin_group_new['member'][] = $dn;
+	}
 
         if($only_ldif){
           $this->acl_create_changes = _("Appending user to group administrational group:")." \n";
@@ -932,7 +935,7 @@ class Step_Migrate extends setup_step
           }
         }
         
-      }else{
+      } else {
 
         $group_ou = trim($cv['groupou']);
         if(!empty($group_ou)){
@@ -940,7 +943,12 @@ class Step_Migrate extends setup_step
         }
 
         $new_group_dn = "cn=GOsa Administrators,".$group_ou.$cv['base'];
-        $new_group_attrs['objectClass'] = array("gosaObject","posixGroup");
+	if ($cv['rfc2307bis']){
+		$new_group_attrs['objectClass'] = array("gosaObject","posixGroup", "groupOfNames");
+		$new_group_attrs['member'][] = $dn;
+	} else {
+		$new_group_attrs['objectClass'] = array("gosaObject","posixGroup");
+	}
         $new_group_attrs['cn'] = "GOsa Administrators";
         $new_group_attrs['gosaSubtreeACL'] = ":all";
         $new_group_attrs['gidNumber'] = "999";
@@ -1039,7 +1047,7 @@ class Step_Migrate extends setup_step
     $ldap->cd($dn);  
     $res = $ldap->add($new_user);
     $this->acl_create_selected = $dn;
-    $this->create_admin();
+    $this->create_admin(FALSE, $dn);
     
     if(!$res){
       print_red($ldap->get_error());
@@ -1922,5 +1930,5 @@ class Step_Migrate extends setup_step
   }
 }
 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+//vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
