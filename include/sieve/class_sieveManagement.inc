@@ -803,6 +803,13 @@ class sieveManagement extends plugin
       $ele[] = new sieve_block_end(NULL,preg_replace("/[^0-9]/","",microtime()),$parent);
       $ele[] = new $this->add_element_type(NULL, preg_replace("/[^0-9]/","",microtime()),$parent);
       $ele[] = new sieve_block_start(NULL,preg_replace("/[^0-9]/","",microtime()),$parent);
+    }elseif($this->add_element_type == "sieve_vacation"){
+      $data = NULL;
+      $tmp = new $this->add_element_type($data, preg_replace("/[^0-9]/","",microtime()),$parent);
+      if(isset($this->parent->gosaMailAlternateAddress)){
+        $tmp->addresses = $this->parent->gosaMailAlternateAddress;
+      }
+      $ele[] = $tmp ;
     }else{
       $ele[] = new $this->add_element_type(NULL, preg_replace("/[^0-9]/","",microtime()),$parent);
     }
