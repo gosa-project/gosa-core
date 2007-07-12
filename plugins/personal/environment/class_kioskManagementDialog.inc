@@ -76,7 +76,7 @@ class kioskManagementDialog extends plugin
         $used_by = preg_replace("/, $/","",$used_by);
 
         if(!empty($used_by)){
-          print_red(sprintf(_("Can't remove kioks profile, it is still in use by the following objects '%s'."),$used_by));
+          print_red(sprintf(_("Can't remove kiosk profile, it is still in use by the following objects '%s'."),$used_by));
         }elseif(isset($this->filesToAttach[$name])){
           unset($this->filesToAttach[$name]);
         }else{

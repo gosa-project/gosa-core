@@ -11,7 +11,7 @@
      <td><label for="scalixMailboxClass">{t}Scalix mailbox class{/t}</label></td>
      <td>
       <select size="1" id="scalixMailboxClass" name="scalixMailboxClass" {$scalixMailboxClassACL} 
-			title="{t}Limited users con not make use of the group calendar functionality in Scalix{/t}">
+			title="{t}Limited users can not make use of the group calendar functionality in Scalix{/t}">
 		    {html_options values=$mailboxClasses output=$mailboxClasses selected=$scalixMailboxClass}
       </select>
      </td>
