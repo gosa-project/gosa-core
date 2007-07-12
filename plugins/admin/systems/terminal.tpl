@@ -26,16 +26,13 @@
         {/if}
 		</td>
     </tr>
-{if $member_of_ogroup}
-   <tr>
-	   <td>
-	   </td>
-	   <td>
-   			<input type='submit' name='inheritAll' value='{t}Inherit all{/t}'>
-	   </td>
-   </tr>
-{/if}
    </table>
+{if $member_of_ogroup}
+   <br>
+   <br>
+   <br>
+   <input type='submit' name='inheritAll' value='{t}Inherit all{/t}'>
+{/if}
   </td>
   <td style="vertical-align:top;border-left:1px solid #A0A0A0;" >
    <table summary="">
