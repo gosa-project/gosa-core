@@ -804,6 +804,8 @@ class sieveManagement extends plugin
       $ele[] = new $this->add_element_type(NULL, preg_replace("/[^0-9]/","",microtime()),$parent);
       $ele[] = new sieve_block_start(NULL,preg_replace("/[^0-9]/","",microtime()),$parent);
     }elseif($this->add_element_type == "sieve_vacation"){
+
+      /* Automatically add addresses to sieve alternate addresses */
       $data = NULL;
       $tmp = new $this->add_element_type($data, preg_replace("/[^0-9]/","",microtime()),$parent);
       if(isset($this->parent->gosaMailAlternateAddress)){
