@@ -59,14 +59,17 @@ class LDAP{
      Currently used codes:
       ,   => CO
       \2C => CO
+      \22 => TO
+      \"  => TO
+      \+  => PL
       (   => OB
       )   => CB
       /   => SL                                                                  */
   function convert($dn)
   {
     if (SPECIALS_OVERRIDE == TRUE){
-      $tmp= preg_replace(array("/\\\\,/", "/\\\\2C/", "/\(/", "/\)/", "/\//"),
-                           array("\001CO", "\001CO", "\001OB", "\001CB", "\001SL"),
+      $tmp= preg_replace(array("/\\\\,/", "/\\\\2C/", "/\(/", "/\)/", "/\//", "/\\\\22/", '/\\\\"/', "/\\\\3D/", "/\\\\2B/", '/\\\\+/'),
+                           array("\001CO", "\001CO", "\001OB", "\001CB", "\001SL", "\001TO", "\001TO", "\001GL", "\001PL", "\001PL"),
                            $dn);
       return (preg_replace('/,\s+/', ',', $tmp));
     } else {
@@ -82,8 +85,8 @@ class LDAP{
   function fix($dn)
   {
     if (SPECIALS_OVERRIDE == TRUE){
-      return (preg_replace(array("/\001CO/", "/\001OB/", "/\001CB/", "/\001SL/"),
-                           array("\,", "(", ")", "/"),
+      return (preg_replace(array("/\001CO/", "/\001OB/", "/\001CB/", "/\001SL/", "/\001TO/", "/\001PL/", "/\001GL/"),
+                           array("\,", "(", ")", "/", '\"', "\+", "="),
                            $dn));
     } else {
       return ($dn);
