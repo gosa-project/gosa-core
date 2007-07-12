@@ -328,10 +328,6 @@ class workgeneric extends plugin
   {
     plugin::save_object();
 
-    if(isset($_POST["inheritAll"])){
-      $this->set_everything_to_inherited();
-    }
-
     /* Save base, since this is no LDAP attribute */
     if (isset($_POST['base']) && chkacl($this->acl, "create") == ""){
       $this->base= $_POST['base'];
@@ -345,6 +341,10 @@ class workgeneric extends plugin
       }else{
         $this->inheritTimeServer = false;
       }
+    }
+
+    if(isset($_POST["inheritAll"])){
+      $this->set_everything_to_inherited();
     }
   }
 
@@ -498,6 +498,9 @@ class workgeneric extends plugin
 
   function set_everything_to_inherited()
   {
+    $this->gotoSyslogServer  = "default";
+    $this->inheritTimeServer = TRUE;
+
     /* Set workstation service attributes to inherited */
     if($this->member_of_ogroup && isset($this->parent->by_object['workservice'])){
       foreach(array("gotoXKbLayout","gotoXKbModel","gotoXKbVariant",
