@@ -335,6 +335,9 @@ class config  {
     /* Fill imap servers */
     $ldap= $this->get_ldap_link();
     $ldap->cd ($this->current['BASE']);
+    if (!isset($this->current['MAILMETHOD'])){
+	$this->current['MAILMETHOD']= "";
+    }
     if ($this->current['MAILMETHOD'] == ""){
 	    $ldap->search ("(objectClass=goMailServer)", array('cn'));
 	    $this->data['SERVERS']['IMAP']= array();
