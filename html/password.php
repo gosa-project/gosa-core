@@ -210,18 +210,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])){
 	  $message[]= _("Please specify your password!");
   } else {
 
-	  /* Do we have the selected user somewhere? */
-	  $ui= ldap_login_user ($uid, $current_password);
-	  if ($ui == NULL){
-		$message[]= _("");
-	  } else {
-		/* Check acl... */
-		$ca= get_permissions ($ui->dn, $ui->subtreeACL);
-		$ca= get_module_permission($ca, "user", $ui->dn);
-		if (chkacl($ca, "password") != ""){
-			$message[]= _("You have no permissions to change your password.");
-		}
-	  }
+    /* Do we have the selected user somewhere? */
+    $ui= ldap_login_user ($uid, $current_password);
+    if ($ui == NULL){
+      $message[]= _("Please check the username/password combination.");
+    } else {
+      /* Check acl... */
+      $ca= get_permissions ($ui->dn, $ui->subtreeACL);
+      $ca= get_module_permission($ca, "user", $ui->dn);
+      if (chkacl($ca, "password") != ""){
+        $message[]= _("You have no permissions to change your password.");
+      }
+    }
   }
 
   /* Do we need to show error messages? */
