@@ -101,6 +101,12 @@ class mailMethodKolab extends mailMethodCyrus
         $mailObject->attrs[$dest]= $mailObject->attrs[$source];
         $mailObject->$dest=        $mailObject->attrs[$source];
 
+        /* Ensure that cleanup will recognize the ampped attributes too */
+        if(isset($mailObject->saved_attributes)){
+          $mailObject->saved_attributes[$dest] = $mailObject->attrs[$source];
+          $mailObject->saved_attributes[$source] = $mailObject->attrs[$source];
+        }
+
         unset ($mailObject->$dest['count']);
         unset ($mailObject->attrs[$source]);
       }
