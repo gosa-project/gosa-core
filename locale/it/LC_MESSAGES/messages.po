@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-07-12 10:56+0200\n"
-"PO-Revision-Date: 2007-07-13 17:33+0100\n"
+"PO-Revision-Date: 2007-07-13 18:38+0100\n"
 "Last-Translator: Guido Serra <zeph@purotesto.it>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15632,7 +15632,7 @@ msgstr "Simple Network Management Protocol (SNMP) è richiesto per il controllo 
 
 #: setup/class_setupStep_Checks.inc:138
 msgid "This module is required for client monitoring. Please install php4-snmp/php5-snmp."
-msgstr ""
+msgstr "Questo modulo è richiesto per la supervisione dei client. Per favore, installa php4-snmp/php5-snmp."
 
 #: setup/class_setupStep_Checks.inc:144
 #, fuzzy
@@ -15660,7 +15660,7 @@ msgstr "L'utilità fping è usata solo se hai un thin????? client basato su una 
 
 #: setup/class_setupStep_Checks.inc:171
 msgid "SAMBA password hash generation"
-msgstr ""
+msgstr "Generazione dell'hash della password di SAMBA"
 
 #: setup/class_setupStep_Checks.inc:172
 #, fuzzy
@@ -15693,7 +15693,7 @@ msgstr "Controllate se register_globals è impostata a 'off'"
 
 #: setup/class_setupStep_Checks.inc:193
 msgid "PHP uses this value for the garbage collector to delete old sessions."
-msgstr ""
+msgstr "PHP utilizza questo valore per indicare al garbage collector di cancellare le vecchie sessioni."
 
 #: setup/class_setupStep_Checks.inc:194
 #, fuzzy
@@ -15702,7 +15702,7 @@ msgstr "PHP usa questo valore per collezionare scarti derivanti dall'eliminiazio
 
 #: setup/class_setupStep_Checks.inc:195
 msgid "Search for 'session.gc_maxlifetime' in your php.ini and set it to 86400 or higher."
-msgstr ""
+msgstr "Cerca il parametro 'session.gc_maxlifetime' nel tuo php.ini e impostalo a 86400 o più."
 
 #: setup/class_setupStep_Checks.inc:203
 #, fuzzy
@@ -15721,7 +15721,7 @@ msgstr "GOsa richiede almeno 16 MB di memoria, utilizzarne meno può generare im
 
 #: setup/class_setupStep_Checks.inc:212
 msgid "Search for 'memory_limit' in your php.ini and set it to '32M' or higher."
-msgstr ""
+msgstr "Cerca il parametro 'memory_limit' nel tuo php.ini e impostalo a '32M' o più."
 
 #: setup/class_setupStep_Checks.inc:219
 #, fuzzy
@@ -15730,7 +15730,7 @@ msgstr "Questa opzione influenza la gestione degli output. Disattivate l'opzione
 
 #: setup/class_setupStep_Checks.inc:220
 msgid "Search for 'implicit_flush' in your php.ini and set it to 'Off'."
-msgstr ""
+msgstr "Cerca il parametro 'implicit_flush' nel tuo php.ini e impostalo a 'Off'."
 
 #: setup/class_setupStep_Checks.inc:227
 #, fuzzy
@@ -15739,7 +15739,7 @@ msgstr "Il tempo di esecuzione dovrebbe essere di almeno 30 secondi perchè alcu
 
 #: setup/class_setupStep_Checks.inc:228
 msgid "Search for 'max_execution_time' in your php.ini and set it to '30' or higher."
-msgstr ""
+msgstr "Cerca il parametro 'max_execution_time' nel tuo php.ini e impostalo a '30' o più."
 
 #: setup/class_setupStep_Checks.inc:235
 #, fuzzy
@@ -15748,7 +15748,7 @@ msgstr "Aumentate la sicurezza del server settando 'expose_php' a 'off''. PHP in
 
 #: setup/class_setupStep_Checks.inc:236
 msgid "Search for 'expose_php' in your php.ini and set if to 'Off'."
-msgstr ""
+msgstr "Cerca il parametro 'expose_php' nel tuo php.ini e impostalo a 'Off'."
 
 #: setup/class_setupStep_Checks.inc:242
 #, fuzzy
@@ -15761,7 +15761,7 @@ msgstr "Aumentate la sicurezza del server settando 'magic_quotes_gpc' a 'on'. In
 
 #: setup/class_setupStep_Checks.inc:244
 msgid "Search for 'magic_quotes_gpc' in your php.ini and set it to 'On'."
-msgstr ""
+msgstr "Cerca il parametro 'magic_quotes_gpc' nel tuo php.ini e impostalo a 'On'."
 
 #: setup/class_setupStep_Checks.inc:252
 #, fuzzy
@@ -15770,7 +15770,7 @@ msgstr "Aumentate la sicurezza del server settando 'magic_quotes_gpc' a 'on'. In
 
 #: setup/class_setupStep_Checks.inc:253
 msgid "Search for 'zend.ze1_compatibility_mode' in your php.ini and set it to 'Off'."
-msgstr ""
+msgstr "Cerca il parametro 'zend.ze1_compatibility_mode' nel tuo php.ini e impostalo a 'Off'."
 
 #: setup/class_setupStep_Checks.inc:264
 #, fuzzy
@@ -15785,43 +15785,43 @@ msgstr "visualizza le informazioni di configurazione"
 #: setup/class_setupStep_Checks.inc:266
 #, php-format
 msgid "GOsa reads its configuration from a file located in (%s/%s). The setup can write the configuration directly if it is writeable."
-msgstr ""
+msgstr "GOsa legge la sua configurazione da un file situato in (%s/%s). L'installazione può accedervi direttamente in scrittura se ne ha i diritti."
 
 #: setup/setup_welcome.tpl:4
 msgid "This seems to be the first time you start GOsa - we didn't find any configuration right now. This simple wizard intends to help you while setting it up."
-msgstr ""
+msgstr "Questa sembra essere la prima volta che esegui GOsa - non abbiamo trovato alcun file di configurazione in questo istante. Questa semplice procedura guidata dovrebbe esserti d'aiuto nel creare tale configurazione."
 
 #: setup/setup_welcome.tpl:8
 msgid "What will the wizard do for you?"
-msgstr ""
+msgstr "Che cosa può fare per te la procedura guidata?"
 
 #: setup/setup_welcome.tpl:11
 msgid "Create a basic, single site configuration"
-msgstr ""
+msgstr "Crea una configurazione per un unico sito base"
 
 #: setup/setup_welcome.tpl:12
 msgid "Tries to find problems within your PHP and LDAP setup"
-msgstr ""
+msgstr "Tenta di trovare i problemi riguardanti al più il tuo PHP e l'installazione di LDAP"
 
 #: setup/setup_welcome.tpl:13
 msgid "Let you choose from a set of basic and advanced configuration switches"
-msgstr ""
+msgstr "Permette di scegliere da un set di opzioni di configurazione base o avanzate"
 
 #: setup/setup_welcome.tpl:14
 msgid "Guided migration of existing LDAP trees"
-msgstr ""
+msgstr "Migrazione guidata per alberi LDAP esistenti"
 
 #: setup/setup_welcome.tpl:17
 msgid "What will the wizard NOT do for you?"
-msgstr ""
+msgstr "Che cosa NON può fare per te la procedura guidata?"
 
 #: setup/setup_welcome.tpl:20
 msgid "Find every possible configuration error"
-msgstr ""
+msgstr "Cerca ogni possibile errore di configurazione"
 
 #: setup/setup_welcome.tpl:21
 msgid "Migrate every possible LDAP setup - create backup dumps!"
-msgstr ""
+msgstr "Migra ogni possibile installazione LDAP - crea dei dump di backup!"
 
 #: setup/setup_welcome.tpl:25
 #, fuzzy
@@ -15830,11 +15830,11 @@ msgstr "Setup in progresso....."
 
 #: setup/setup_welcome.tpl:28
 msgid "For security reasons you need to authenticate for the installation by creating the file '/tmp/gosa.auth', containing the current session ID on the servers local filesystem. This can be done by executing the following command:"
-msgstr ""
+msgstr "Per ragioni di sicurezza devi autenticarti, per installare, creando il file '/tmp/gosa.auth' con all'interno l'ID della sessione corrente sul filesystem locale del server. Questo può essere ottenuto eseguendo il seguente comando:"
 
 #: setup/setup_welcome.tpl:34
 msgid "Click the 'Continue' button when you've finished."
-msgstr ""
+msgstr "Premi 'Continua' per proseguire."
 
 #: setup/setup_checks.tpl:9
 msgid "PHP module and extension checks"
