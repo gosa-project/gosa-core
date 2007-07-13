@@ -1,5 +1,7 @@
 <?php
 
+require_once("class_timezones.inc");
+
 class sambaLogonHours extends plugin
 {
 
@@ -15,7 +17,15 @@ class sambaLogonHours extends plugin
 
     /* Get Timezone to be able to shift to the correct beginning */
     if(isset($this->config->current['TIMEZONE'])){
-      $this->timezone = $this->config->current['TIMEZONE'];
+      $tz   = $this->config->current['TIMEZONE'];
+      $tz_a = timezones_array($tz);  
+      
+      if(!count($tz_a)){
+        $this->timezone = 0;
+        print_red(sprintf(_("The configured timezone '%s' seems not to valid."),$tz));
+      }else{
+        $this->timezone = $tz_a['value'] / (60*60);
+      }
     }
 
     /* Convert to bin */
