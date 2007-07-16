@@ -1,15 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 MimeType=text/plain
-GenericName=GOsa Navigator
-GenericName[de]=GOsa
-GenericName[es]=GOsa Navegador 
-GenericName[fr]=GOsa Navigateur
-GenericName[it]=GOsa Navigatore
-GenericName[nl]=GOsa Navigator
-GenericName[pl]=GOsa Navigator
-GenericName[ru]=GOsa Навигатор
-GenericName[zh_CN]=GOsa 航海家
+GenericName=GOsa²
 Exec=/usr/bin/gosa
 Icon=gosa
 Path=
@@ -17,4 +9,4 @@ Type=Application
 Terminal=false
 Name=GOsa
 X-KDE-StartupNotify=true
-Categories=Qt;KDE;Network;
+Categories=Qt;KDE;Utilitiy;System
