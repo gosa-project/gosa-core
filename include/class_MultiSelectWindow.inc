@@ -353,7 +353,7 @@ class MultiSelectWindow{
 				</label>
 				</td>
 				<td width=\"99%\">
-				<input type='text' style='width:99%' name='".$regex['name']."' maxlength='20'
+				<input id='".$regex['name']."' type='text' style='width:99%' name='".$regex['name']."' maxlength='20'
 				value='".$regex['value']."' title=\"".$regex['string']."\"> 
 				</td>
 				</tr>
