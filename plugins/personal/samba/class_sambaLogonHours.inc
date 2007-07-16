@@ -15,18 +15,9 @@ class sambaLogonHours extends plugin
     plugin::plugin($config,$dn);
     $this->sambaLogonHours = $slh;
 
-    /* Get Timezone to be able to shift to the correct beginning */
-    if(isset($this->config->current['TIMEZONE'])){
-      $tz   = $this->config->current['TIMEZONE'];
-      $tz_a = timezones_array($tz);  
-      
-      if(!count($tz_a)){
-        $this->timezone = 0;
-        print_red(sprintf(_("The configured timezone '%s' seems not to valid."),$tz));
-      }else{
-        $this->timezone = $tz_a['value'] / (60*60);
-      }
-    }
+    /* Get default timezone */
+    $zone = get_default_timezone();
+    $this->timezone = $zone['value'];
 
     /* Convert to bin */
     $tmp = '';

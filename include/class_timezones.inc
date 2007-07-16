@@ -1,8 +1,45 @@
 <?php 
 
-function timezones_array($selected = null) 
+function get_timezones_array()
+{
+	return(_timezones_array(NULL));
+}
+
+function get_timezone($zonename)
+{
+	$zone = _timezones_array($zonename);
+	if(!count($zone)){
+		trigger_error("Requested timezone '".$zonename."' does not exist");
+		return(FALSE);
+	}
+	return($zone);
+}
+
+function get_default_timezone()
+{
+	global $config;
+	$tz ="";
+	$zone = array("name" => "unconfigured", "value" => 0);
+	if(isset($config->current['TIMEZONE']) || isset($config->data['MAIN']['TIMEZONE'])){
+		if(isset($config->current['TIMEZONE'])){
+			$tz = $config->current['TIMEZONE'];
+		}else{
+			$tz = $config->data['MAIN']['TIMEZONE'];
+		}
+
+		$zone = get_timezone($tz);
+		if(!count($zone)){
+			trigger_error(sprintf("The timezone you have configured in your gosa.conf (%s) is not valid.",$tz));
+			$zone = array("name" => "unconfigured", "value" => 0);
+		}
+	}
+	return($zone);
+}
+
+function _timezones_array($selected = NULL) 
 {  
-	$timezones = array('Africa/Abidjan' => 0,
+	$timezones = array(
+			'Africa/Abidjan' => 0,
 			'Africa/Accra' => 0,
 			'Africa/Addis_Ababa' => 10800,
 			'Africa/Algiers' => 3600,
@@ -435,7 +472,7 @@ function timezones_array($selected = null)
 			'Pacific/Wallis' => 43200,
 			'Pacific/Yap' => 36000 );          
 
-	$timezones_dst = array (  
+	$_unused_timezones = array (  
 			'America/Adak' => 1,
 			'America/Atka' => 1,
 			'America/Anchorage' => 1,
@@ -603,23 +640,15 @@ function timezones_array($selected = null)
 			);  
 
 	$tz_arr = array();  
-	if($selected != null){
+	if($selected != NULL){
 		foreach($timezones as $timezone => $value) { 
 			if (preg_match("#".normalizePreg($timezone)."#i",$selected)){
-				return($tz_arr[$timezone] = array('name'=>$timezone,'value'=>$value)); 
+				return($tz_arr[$timezone] = array('name'=>$timezone,'value'=>$value / (60*60))); 
 			}
 		}  
-		foreach($timezones_dst as $timezone => $value){
-			if (preg_match("/".normalizePreg($timezone)."/i",$selected)){
-				return($tz_arr[$timezone] = array('name'=>$timezone,'value'=>$value));
-			}
-		}
 	}else{
 		foreach($timezones as $timezone => $value) {  
-			$tz_arr[$timezone] = array('name'=>$timezone,'value'=>$value); 
-		}
-		foreach($timezones_dst as $timezone => $value) {  
-			$tz_arr[$timezone] = array('name'=>$timezone,'value'=>$value); 
+			$tz_arr[$timezone] = array('name'=>$timezone,'value'=>($value / (60*60))); 
 		}
 	}
 	return $tz_arr;  
