@@ -1,0 +1,20 @@
+[Desktop Entry]
+Encoding=UTF-8
+MimeType=text/plain
+GenericName=Gosa Navigator
+GenericName[de]=GOsa Nautiker
+GenericName[es]=GOsa Navegador 
+GenericName[fr]=GOsa Navigateur
+GenericName[it]=GOsa Navigatore
+GenericName[nl]=GOsa Navigator
+GenericName[pl]=GOsa Navigator
+GenericName[ru]=GOsa Навигатор
+GenericName[zh_CN]=GOsa 航海家
+Exec=/usr/bin/gosa
+Icon=gosa
+Path=
+Type=Application
+Terminal=false
+Name=GOsa
+X-KDE-StartupNotify=true
+Categories=Qt;KDE;Network;

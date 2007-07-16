@@ -84,6 +84,7 @@ install-stamp:
 	-cp -R contrib/scripts/desktoprc debian/gosa-desktop/etc/gosa/desktoprc
 	-cp -R contrib/scripts/start-gosa.sh debian/gosa-desktop/usr/bin/gosa
 	-cp -R debian/gosa*.xpm debian/gosa-desktop/usr/share/pixmaps
+	-cp -R debian/gosa-desktop.desktop debian/gosa-desktop/usr/share/applications/gosa.desktop
 	-rm -rf debian/gosa/usr/share/gosa/contrib
 	-rm -rf debian/gosa/usr/share/gosa/locale/en
 	-rm -rf debian/gosa/usr/share/gosa/gen_locale.sh
