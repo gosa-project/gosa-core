@@ -153,7 +153,12 @@ class faiPartitionTableEntry extends plugin
       $tmp["old_cn"]               = "";     
       $tmp['status']               ="new";
       $tmp['FAIpartitionNr']       = $new_nr;
-      $this->partitions[]=$tmp;
+    
+      if(empty($this->partitions)){
+        $this->partitions[1]=$tmp;
+      }else{
+        $this->partitions[]=$tmp;
+      }
     }
 
     /* $setup contains a table with the partitions. 
@@ -348,6 +353,11 @@ class faiPartitionTableEntry extends plugin
     foreach($this->UsedAttrs as $attrs){
       $alreadyUsed[$attrs] = array();
     }      
+
+    /* Check disk name, to prevent from saving empty names */
+    if(empty($this->DISK_cn)){
+      $message[] = _("Please specify a valid disk name");
+    }
 
     foreach($this->partitions as $key => $part){
   
