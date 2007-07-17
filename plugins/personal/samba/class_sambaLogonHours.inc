@@ -59,6 +59,7 @@ class sambaLogonHours extends plugin
 
   function execute()
   {
+
     $week_days = array();
     $week_days[0]= _("Sunday");
     $week_days[1]= _("Monday");
