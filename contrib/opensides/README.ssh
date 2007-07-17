@@ -1,0 +1,13 @@
+To use the ssh connectivity extension
+
+1) Add the openssh-lpk_openldap.schema to your schema directory
+
+2) Add the following entry after the glpiaccount
+
+   <tab class="sshAccount" />
+
+Mortier Benoit
+OpenSides July 2007
+
+
+
