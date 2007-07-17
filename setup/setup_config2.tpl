@@ -66,6 +66,31 @@
             </select>
         </div>
     </div>
+	<div class='step4_container'>
+        <div class='step4_name'>
+            {t}Timezone{/t}
+        </div>
+        <div class='step4_value'>
+            <select name='timezone' title='{t}Please your preferred timezone here{/t}' style="width:100%">
+        {foreach from=$timezones.TIMEZONES item=val key=key}
+            {if $key == $timezone}
+				{if isset($timezones.DST_ZONES.$key)}
+            		<option selected value="{$key}">{$key}</option>
+				{else}
+            		<option selected value="{$key}">{$key}</option>
+				{/if}
+            {else}
+				{if isset($timezones.DST_ZONES.$key)}
+            		<option value="{$key}">{$key} (DST)</option>
+				{else}
+            		<option value="{$key}">{$key} (GMT)</option>
+				{/if}
+            {/if}
+        {/foreach}
+            </select>
+        </div>
+    </div>
+
 
     <p><b>{t}Additional GOsa settings{/t}</b></p>
 

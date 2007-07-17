@@ -25,6 +25,9 @@ class Step_License extends setup_step
   var $license_found  = false;
   var $License        = "";
   var $header_image   = "images/ldif.png";
+  var $accepted       = FALSE;
+  var $attributes     = array("accepted");
+  
 
   function Step_License()
   {
@@ -63,6 +66,7 @@ class Step_License extends setup_step
     $smarty = get_smarty();
     $smarty -> assign("License",nl2br($this->License));
     $smarty -> assign("license_found",$this->license_found);
+    $smarty -> assign("accepted",$this->accepted);
 
     return($smarty -> fetch (get_template_path("../setup/setup_license.tpl")));
   }
@@ -70,7 +74,15 @@ class Step_License extends setup_step
   
   function save_object()
   {
-    if($this->license_found){
+    if(isset($_POST['step_license'])){
+      if(isset($_POST['accepted'])){
+        $this->accepted = TRUE;
+      }else{
+        $this->accepted = FALSE;
+      }
+    } 
+  
+    if($this->license_found && $this->accepted){
       $this->is_completed = true;
     }else{
       $this->is_completed = false;
