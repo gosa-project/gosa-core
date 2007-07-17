@@ -8,11 +8,11 @@
 
  <!-- Headline container -->
  <tr>
-   <td style="width:50%; vertical-align:top;">
-     <table summary="" style="margin-left:4px;">
+   <td style="width:100%; vertical-align:top;">
+     <table summary="" style="margin-left:4px;width:100%">
        <tr>
-         <td style="vertical-align:top;"><label for="sshPublickey">{t}Your SSH Key{/t}</label></td>
-	 <td><textarea name="sshPublickey" id="sshPublickey" rows="3" style="width:100%" {$sshPublickeyACL} {$sstate}>{$sshPublickey}</textarea></td>
+         <td style="vertical-align:top;">
+	 <td><textarea name="sshPublickey" id="sshPublickey" rows="4" style="width:80%" {$sshPublickeyACL} {$sstate}>{$sshPublickey}</textarea></td>
        </tr>
      </table>
    </td>
