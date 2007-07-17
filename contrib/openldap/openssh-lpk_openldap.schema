@@ -17,3 +17,10 @@ objectclass ( 1.3.6.1.4.1.24552.500.1.1.2.0 NAME 'ldapPublicKey' SUP top AUXILIA
 	DESC 'MANDATORY: OpenSSH LPK objectclass'
 	MUST ( sshPublicKey $ uid ) 
 	)
+
+# printableString SYNTAX yes|no
+objectclass ( 1.3.6.1.4.1.24552.500.1.1.3.0 NAME 'HostldapPublicKey' SUP top AUXILIARY
+	DESC 'MANDATORY: OpenSSH LPK objectclass'
+	MUST ( sshPublicKey $ cn ) 
+	)
+
