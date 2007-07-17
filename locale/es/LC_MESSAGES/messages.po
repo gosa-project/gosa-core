@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-16 12:07+0200\n"
+"POT-Creation-Date: 2007-07-17 16:31+0200\n"
 "PO-Revision-Date: 2006-06-12 19:27GMT\n"
 "Last-Translator: Alejandro Escanero Blanco <thoth@bbvnet.com>\n"
 "Language-Team: Español\n"
@@ -1076,7 +1076,7 @@ msgstr "Seleccione una base"
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:37
 #: plugins/admin/systems/workstationService.tpl:42
 #: plugins/admin/systems/workstationService.tpl:120
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:200
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:205
 #: plugins/admin/fai/class_faiSummaryTab.inc:334
 #: plugins/gofon/conference/generic.tpl:22 include/php_setup.inc:181
 msgid "Type"
@@ -2863,7 +2863,7 @@ msgid "Available applications"
 msgstr "Aplicaciones disponibles"
 
 #: plugins/admin/groups/paste_mail.tpl:1 plugins/personal/mail/copypaste.tpl:1
-#: setup/setup_config2.tpl:118
+#: setup/setup_config2.tpl:143
 msgid "Mail settings"
 msgstr "Parámetros de correo"
 
@@ -3215,7 +3215,7 @@ msgstr ""
 #: plugins/admin/systems/glpiPrinter.tpl:122
 #: plugins/admin/applications/class_applicationParameters.inc:108
 #: plugins/admin/fai/faiPackage.tpl:73
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:274
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:279
 #: plugins/personal/connectivity/class_kolabAccount.inc:240
 #: plugins/personal/environment/kioskManagement.tpl:15
 #: plugins/personal/environment/environment.tpl:120
@@ -4323,7 +4323,7 @@ msgstr "Micrófono integrado"
 #: include/sieve/templates/element_header.tpl:41 setup/setup_feedback.tpl:55
 #: setup/setup_feedback.tpl:73 setup/class_setupStep_Config3.inc:76
 #: setup/class_setupStep_Ldap.inc:74 setup/class_setupStep_Schema.inc:63
-#: setup/class_setupStep_Config1.inc:87 setup/class_setupStep_Config2.inc:125
+#: setup/class_setupStep_Config1.inc:87 setup/class_setupStep_Config2.inc:129
 msgid "Yes"
 msgstr "Si"
 
@@ -4339,7 +4339,7 @@ msgstr "Si"
 #: include/sieve/templates/element_header.tpl:43 setup/setup_feedback.tpl:57
 #: setup/setup_feedback.tpl:75 setup/class_setupStep_Config3.inc:76
 #: setup/class_setupStep_Ldap.inc:74 setup/class_setupStep_Schema.inc:63
-#: setup/class_setupStep_Config1.inc:87 setup/class_setupStep_Config2.inc:125
+#: setup/class_setupStep_Config1.inc:87 setup/class_setupStep_Config2.inc:129
 msgid "No"
 msgstr "No"
 
@@ -6192,7 +6192,7 @@ msgstr ""
 #: plugins/admin/systems/class_terminalGeneric.inc:109
 #: plugins/personal/posix/class_posixAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:491
-#: setup/setup_config2.tpl:126
+#: setup/setup_config2.tpl:151
 msgid "disabled"
 msgstr "desactivado"
 
@@ -9361,85 +9361,90 @@ msgstr "Clases FAI"
 msgid "Choose a priority"
 msgstr "Elija una prioridad"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:193
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:198
 #, fuzzy
 msgid "primary"
 msgstr "Grupo primario"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:193
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:198
 #, fuzzy
 msgid "logical"
 msgstr "Añadir Cuenta Local"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:201
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:206
 msgid "FS type"
 msgstr "Tipo de FS"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:202
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:207
 #: plugins/admin/fai/class_faiSummaryTab.inc:333
 msgid "Mount point"
 msgstr "Punto de montaje"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:203
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:208
 #: plugins/admin/fai/class_faiSummaryTab.inc:332
 msgid "Size in MB"
 msgstr "Tamaño en Mb"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:204
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:209
 #: plugins/admin/fai/class_faiSummaryTab.inc:331
 msgid "Mount options"
 msgstr "Opciones de Montaje"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:205
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:210
 msgid "FS option"
 msgstr "Opciones de FS"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:206
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:211
 msgid "Preserve"
 msgstr "Preservar"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:362
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:359
+#, fuzzy
+msgid "Please specify a valid disk name"
+msgstr "Por favor especifique un nombre de usuario valido."
+
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:372
 #, php-format
 msgid "please enter a unique mount point for partition %s"
 msgstr ""
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:367
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:377
 #, php-format
 msgid "Please enter a valid mount point for partition %s."
 msgstr "Por favor introduzca un punto de montaje valido para la partición %s."
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:372
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:382
 #, php-format
 msgid ""
 "File system type 'swap' is already used, change file system type for "
 "partition %s."
 msgstr ""
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:376
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:386
 msgid "Please use 'swap' as mount point, if 'swap' is used as fs-type."
 msgstr ""
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:382
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:386
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:392
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:396
 #, php-format
 msgid "Please enter a valid partition size for partition %s."
 msgstr ""
 "Por favor introduzca un tamaño de partición valido para la partición %s."
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:392
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:394
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:402
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:404
 #, php-format
 msgid "Please enter a valid range for partition %s."
 msgstr "Por favor introduzca un rango valido para la partición %s."
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:399
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:409
 #, php-format
 msgid "Please enter a range for partition size for partition %s."
 msgstr ""
 "Por favor introduzca un rango para el tamaño de la partición valido para la "
 "partición %s."
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:414
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:424
 msgid ""
 "You have more than 3 primary partition table entries in your configuration, "
 "please check your configuration twice."
@@ -11845,42 +11850,36 @@ msgstr "Mostrar grupos que concuerden con"
 msgid "Display groups of user"
 msgstr "Mostrar grupos de usuarios"
 
-#: plugins/personal/samba/class_sambaLogonHours.inc:25
-#, fuzzy, php-format
-msgid "The configured timezone '%s' seems not to valid."
-msgstr ""
-"La entrada de la política de invitación para la dirección '%s' no es valida."
-
-#: plugins/personal/samba/class_sambaLogonHours.inc:72
+#: plugins/personal/samba/class_sambaLogonHours.inc:64
 #, fuzzy
 msgid "Sunday"
 msgstr "día"
 
-#: plugins/personal/samba/class_sambaLogonHours.inc:73
+#: plugins/personal/samba/class_sambaLogonHours.inc:65
 #, fuzzy
 msgid "Monday"
 msgstr "día"
 
-#: plugins/personal/samba/class_sambaLogonHours.inc:74
+#: plugins/personal/samba/class_sambaLogonHours.inc:66
 #, fuzzy
 msgid "Tuesday"
 msgstr "día"
 
-#: plugins/personal/samba/class_sambaLogonHours.inc:75
+#: plugins/personal/samba/class_sambaLogonHours.inc:67
 msgid "Wednesday"
 msgstr ""
 
-#: plugins/personal/samba/class_sambaLogonHours.inc:76
+#: plugins/personal/samba/class_sambaLogonHours.inc:68
 #, fuzzy
 msgid "Thursday"
 msgstr "horas"
 
-#: plugins/personal/samba/class_sambaLogonHours.inc:77
+#: plugins/personal/samba/class_sambaLogonHours.inc:69
 #, fuzzy
 msgid "Friday"
 msgstr "día"
 
-#: plugins/personal/samba/class_sambaLogonHours.inc:78
+#: plugins/personal/samba/class_sambaLogonHours.inc:70
 #, fuzzy
 msgid "Saturday"
 msgstr "Estrategia"
@@ -14707,40 +14706,50 @@ msgstr "Nombre de la estación de trabajo"
 msgid "Samba SID mapping"
 msgstr ""
 
-#: setup/setup_config2.tpl:70
+#: setup/setup_config2.tpl:71
+#, fuzzy
+msgid "Timezone"
+msgstr "Zona de uso horario del usuario"
+
+#: setup/setup_config2.tpl:74
+#, fuzzy
+msgid "Please your preferred timezone here"
+msgstr "Por favor introduzca una cadena de búsqueda"
+
+#: setup/setup_config2.tpl:95
 #, fuzzy
 msgid "Additional GOsa settings"
 msgstr "Parámetros de aplicaciones"
 
-#: setup/setup_config2.tpl:74
+#: setup/setup_config2.tpl:99
 msgid "Enable Copy & Paste"
 msgstr ""
 
-#: setup/setup_config2.tpl:86
+#: setup/setup_config2.tpl:111
 #, fuzzy
 msgid "Enable FAI release management"
 msgstr "Gestión de conferencias"
 
-#: setup/setup_config2.tpl:98
+#: setup/setup_config2.tpl:123
 #, fuzzy
 msgid "Enable user netatalk plugin"
 msgstr "Gestionar cuenta Netatalk"
 
-#: setup/setup_config2.tpl:109
+#: setup/setup_config2.tpl:134
 #, fuzzy
 msgid "Government mode"
 msgstr "Nombre del departamento"
 
-#: setup/setup_config2.tpl:122
+#: setup/setup_config2.tpl:147
 msgid "Mail method"
 msgstr "Método de correo"
 
-#: setup/setup_config2.tpl:136
+#: setup/setup_config2.tpl:161
 #, fuzzy
 msgid "Vacation templates"
 msgstr "Plantilla de estación de trabajo"
 
-#: setup/setup_config2.tpl:152
+#: setup/setup_config2.tpl:177
 msgid "Use Cyrus UNIX style"
 msgstr ""
 
@@ -15269,12 +15278,12 @@ msgid ""
 "write the configuration directly if it is writeable."
 msgstr ""
 
-#: setup/class_setupStep_License.inc:53 setup/class_setupStep_License.inc:54
+#: setup/class_setupStep_License.inc:56 setup/class_setupStep_License.inc:57
 #, fuzzy
 msgid "License"
 msgstr "Linea"
 
-#: setup/class_setupStep_License.inc:55
+#: setup/class_setupStep_License.inc:58
 msgid "Terms and conditions for usage"
 msgstr ""
 
@@ -16183,12 +16192,12 @@ msgstr ""
 msgid "Schema check failed"
 msgstr "Ha fallado la grabación del nombre de teléfono"
 
-#: setup/class_setupStep_Config2.inc:75 setup/class_setupStep_Config2.inc:76
+#: setup/class_setupStep_Config2.inc:79 setup/class_setupStep_Config2.inc:80
 #, fuzzy
 msgid "GOsa settings 2/3"
 msgstr "Parámetros de correo"
 
-#: setup/class_setupStep_Config2.inc:77
+#: setup/class_setupStep_Config2.inc:81
 #, fuzzy
 msgid "Customize special parameters"
 msgstr "Comprobar parámetros"
@@ -16321,6 +16330,10 @@ msgstr ""
 "Estos proveen de herramientas de control de la cuentas de correo y control "
 "general de cuotas. Puede elegir el método 'dummy' para dejar su "
 "configuración de correo limpia."
+
+#: setup/setup_license.tpl:8
+msgid "I have read the license and accept it"
+msgstr ""
 
 #: ihtml/themes/default/framework.tpl:19
 msgid "Main"
@@ -16810,6 +16823,12 @@ msgstr "No hay archivo de ayuda para esta clase"
 #, php-format
 msgid "Helpdir '%s' is not accessible, can't read any helpfiles."
 msgstr ""
+
+#, fuzzy
+#~ msgid "The configured timezone '%s' seems not to valid."
+#~ msgstr ""
+#~ "La entrada de la política de invitación para la dirección '%s' no es "
+#~ "valida."
 
 #~ msgid "to the list of forwarders."
 #~ msgstr "a la lista de remitentes."

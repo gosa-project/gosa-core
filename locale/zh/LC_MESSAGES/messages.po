@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-16 12:07+0200\n"
+"POT-Creation-Date: 2007-07-17 16:31+0200\n"
 "PO-Revision-Date: 2007-07-11 18:45+0800\n"
 "Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
 "Language-Team: Chinese Simplified <zh@li.org>\n"
@@ -1062,7 +1062,7 @@ msgstr "选择一个位置"
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:37
 #: plugins/admin/systems/workstationService.tpl:42
 #: plugins/admin/systems/workstationService.tpl:120
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:200
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:205
 #: plugins/admin/fai/class_faiSummaryTab.inc:334
 #: plugins/gofon/conference/generic.tpl:22 include/php_setup.inc:181
 msgid "Type"
@@ -2797,7 +2797,7 @@ msgid "Available applications"
 msgstr "可用的应用程序"
 
 #: plugins/admin/groups/paste_mail.tpl:1 plugins/personal/mail/copypaste.tpl:1
-#: setup/setup_config2.tpl:118
+#: setup/setup_config2.tpl:143
 msgid "Mail settings"
 msgstr "邮件选项"
 
@@ -3136,7 +3136,7 @@ msgstr "您正在添加的地址已经被用户使用"
 #: plugins/admin/systems/glpiPrinter.tpl:122
 #: plugins/admin/applications/class_applicationParameters.inc:108
 #: plugins/admin/fai/faiPackage.tpl:73
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:274
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:279
 #: plugins/personal/connectivity/class_kolabAccount.inc:240
 #: plugins/personal/environment/kioskManagement.tpl:15
 #: plugins/personal/environment/environment.tpl:120
@@ -4228,7 +4228,7 @@ msgstr "整合麦克风"
 #: include/sieve/templates/element_header.tpl:41 setup/setup_feedback.tpl:55
 #: setup/setup_feedback.tpl:73 setup/class_setupStep_Config3.inc:76
 #: setup/class_setupStep_Ldap.inc:74 setup/class_setupStep_Schema.inc:63
-#: setup/class_setupStep_Config1.inc:87 setup/class_setupStep_Config2.inc:125
+#: setup/class_setupStep_Config1.inc:87 setup/class_setupStep_Config2.inc:129
 msgid "Yes"
 msgstr "是"
 
@@ -4244,7 +4244,7 @@ msgstr "是"
 #: include/sieve/templates/element_header.tpl:43 setup/setup_feedback.tpl:57
 #: setup/setup_feedback.tpl:75 setup/class_setupStep_Config3.inc:76
 #: setup/class_setupStep_Ldap.inc:74 setup/class_setupStep_Schema.inc:63
-#: setup/class_setupStep_Config1.inc:87 setup/class_setupStep_Config2.inc:125
+#: setup/class_setupStep_Config1.inc:87 setup/class_setupStep_Config2.inc:129
 msgid "No"
 msgstr "否"
 
@@ -6045,7 +6045,7 @@ msgstr "允许从其他未认证 SMTP 发送邮件"
 #: plugins/admin/systems/class_terminalGeneric.inc:109
 #: plugins/personal/posix/class_posixAccount.inc:560
 #: plugins/personal/samba/class_sambaAccount.inc:491
-#: setup/setup_config2.tpl:126
+#: setup/setup_config2.tpl:151
 msgid "disabled"
 msgstr "禁用"
 
@@ -9101,80 +9101,85 @@ msgstr "自动化安装（FAI）类"
 msgid "Choose a priority"
 msgstr "选择一个优先级"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:193
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:198
 msgid "primary"
 msgstr "主要"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:193
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:198
 msgid "logical"
 msgstr "逻辑"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:201
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:206
 msgid "FS type"
 msgstr "文件系统类型"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:202
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:207
 #: plugins/admin/fai/class_faiSummaryTab.inc:333
 msgid "Mount point"
 msgstr "挂载点"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:203
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:208
 #: plugins/admin/fai/class_faiSummaryTab.inc:332
 msgid "Size in MB"
 msgstr "单位 MB"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:204
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:209
 #: plugins/admin/fai/class_faiSummaryTab.inc:331
 msgid "Mount options"
 msgstr "挂载选项"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:205
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:210
 msgid "FS option"
 msgstr "文件系统选项"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:206
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:211
 msgid "Preserve"
 msgstr "保留"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:362
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:359
+#, fuzzy
+msgid "Please specify a valid disk name"
+msgstr "请输入一个有效的用户名！"
+
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:372
 #, php-format
 msgid "please enter a unique mount point for partition %s"
 msgstr "请输入分区 %s 的一个唯一挂载点"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:367
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:377
 #, php-format
 msgid "Please enter a valid mount point for partition %s."
 msgstr "请输入分区 %s 的一个有效挂载点"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:372
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:382
 #, php-format
 msgid ""
 "File system type 'swap' is already used, change file system type for "
 "partition %s."
 msgstr "文件系统类型 'swap' 已经使用过了，修改分区 %s 的文件系统类型。"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:376
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:386
 msgid "Please use 'swap' as mount point, if 'swap' is used as fs-type."
 msgstr "请用 'swap' 作为挂载点，如果 'swap' 作为文件系统类型。"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:382
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:386
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:392
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:396
 #, php-format
 msgid "Please enter a valid partition size for partition %s."
 msgstr "请为分区 %s 输入一个有效的分区大小。"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:392
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:394
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:402
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:404
 #, php-format
 msgid "Please enter a valid range for partition %s."
 msgstr "请为分区 %s 输入一个有效范围。"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:399
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:409
 #, php-format
 msgid "Please enter a range for partition size for partition %s."
 msgstr "请为分区 %s 输入分区大小范围。"
 
-#: plugins/admin/fai/class_faiPartitionTableEntry.inc:414
+#: plugins/admin/fai/class_faiPartitionTableEntry.inc:424
 msgid ""
 "You have more than 3 primary partition table entries in your configuration, "
 "please check your configuration twice."
@@ -11496,36 +11501,31 @@ msgstr "显示匹配的组"
 msgid "Display groups of user"
 msgstr "显示用户组"
 
-#: plugins/personal/samba/class_sambaLogonHours.inc:25
-#, fuzzy, php-format
-msgid "The configured timezone '%s' seems not to valid."
-msgstr "提供的网络地址 '%s' 无效。"
-
-#: plugins/personal/samba/class_sambaLogonHours.inc:72
+#: plugins/personal/samba/class_sambaLogonHours.inc:64
 msgid "Sunday"
 msgstr "星期日"
 
-#: plugins/personal/samba/class_sambaLogonHours.inc:73
+#: plugins/personal/samba/class_sambaLogonHours.inc:65
 msgid "Monday"
 msgstr "星期一"
 
-#: plugins/personal/samba/class_sambaLogonHours.inc:74
+#: plugins/personal/samba/class_sambaLogonHours.inc:66
 msgid "Tuesday"
 msgstr "星期二"
 
-#: plugins/personal/samba/class_sambaLogonHours.inc:75
+#: plugins/personal/samba/class_sambaLogonHours.inc:67
 msgid "Wednesday"
 msgstr "星期三"
 
-#: plugins/personal/samba/class_sambaLogonHours.inc:76
+#: plugins/personal/samba/class_sambaLogonHours.inc:68
 msgid "Thursday"
 msgstr "星期四"
 
-#: plugins/personal/samba/class_sambaLogonHours.inc:77
+#: plugins/personal/samba/class_sambaLogonHours.inc:69
 msgid "Friday"
 msgstr "星期五"
 
-#: plugins/personal/samba/class_sambaLogonHours.inc:78
+#: plugins/personal/samba/class_sambaLogonHours.inc:70
 msgid "Saturday"
 msgstr "星期六"
 
@@ -14171,35 +14171,45 @@ msgstr "工作站容器"
 msgid "Samba SID mapping"
 msgstr "Samba SID 映射"
 
-#: setup/setup_config2.tpl:70
+#: setup/setup_config2.tpl:71
+#, fuzzy
+msgid "Timezone"
+msgstr "用户时区"
+
+#: setup/setup_config2.tpl:74
+#, fuzzy
+msgid "Please your preferred timezone here"
+msgstr "在此选择您的首选语种"
+
+#: setup/setup_config2.tpl:95
 msgid "Additional GOsa settings"
 msgstr "附加 GOsa 设置"
 
-#: setup/setup_config2.tpl:74
+#: setup/setup_config2.tpl:99
 msgid "Enable Copy & Paste"
 msgstr "启用拷贝和粘贴"
 
-#: setup/setup_config2.tpl:86
+#: setup/setup_config2.tpl:111
 msgid "Enable FAI release management"
 msgstr "启用 FAI 发布管理"
 
-#: setup/setup_config2.tpl:98
+#: setup/setup_config2.tpl:123
 msgid "Enable user netatalk plugin"
 msgstr "启用 user netatalk 插件"
 
-#: setup/setup_config2.tpl:109
+#: setup/setup_config2.tpl:134
 msgid "Government mode"
 msgstr "政府模式"
 
-#: setup/setup_config2.tpl:122
+#: setup/setup_config2.tpl:147
 msgid "Mail method"
 msgstr "邮件方法"
 
-#: setup/setup_config2.tpl:136
+#: setup/setup_config2.tpl:161
 msgid "Vacation templates"
 msgstr "假期模板"
 
-#: setup/setup_config2.tpl:152
+#: setup/setup_config2.tpl:177
 msgid "Use Cyrus UNIX style"
 msgstr "使用 Cyrus Unix 风格"
 
@@ -14659,11 +14669,11 @@ msgid ""
 msgstr ""
 "GOsa 从位于 (%s/%s) 的文件中读取配置。如果可写，安装程序可以直接修改配置。"
 
-#: setup/class_setupStep_License.inc:53 setup/class_setupStep_License.inc:54
+#: setup/class_setupStep_License.inc:56 setup/class_setupStep_License.inc:57
 msgid "License"
 msgstr "License"
 
-#: setup/class_setupStep_License.inc:55
+#: setup/class_setupStep_License.inc:58
 msgid "Terms and conditions for usage"
 msgstr "使用的术语和条件"
 
@@ -15504,11 +15514,11 @@ msgstr "Schema 检查成功"
 msgid "Schema check failed"
 msgstr "Schema 检查失败"
 
-#: setup/class_setupStep_Config2.inc:75 setup/class_setupStep_Config2.inc:76
+#: setup/class_setupStep_Config2.inc:79 setup/class_setupStep_Config2.inc:80
 msgid "GOsa settings 2/3"
 msgstr "GOsa 设置 2/3"
 
-#: setup/class_setupStep_Config2.inc:77
+#: setup/class_setupStep_Config2.inc:81
 msgid "Customize special parameters"
 msgstr "定制特殊参数"
 
@@ -15619,6 +15629,10 @@ msgid ""
 msgstr ""
 "GOsa 通过模组支持几种邮件方法。这些方法提供用户邮箱的界面以及管理用户空间。您"
 "可以选择选择 dummy 插件以保持您的邮件设置不被更改。"
+
+#: setup/setup_license.tpl:8
+msgid "I have read the license and accept it"
+msgstr ""
 
 #: ihtml/themes/default/framework.tpl:19
 msgid "Main"
@@ -16078,6 +16092,10 @@ msgstr "此类没有帮助文件"
 #, php-format
 msgid "Helpdir '%s' is not accessible, can't read any helpfiles."
 msgstr "帮助目录 '%s' 不能访问，无法读取任何帮助文件。"
+
+#, fuzzy
+#~ msgid "The configured timezone '%s' seems not to valid."
+#~ msgstr "提供的网络地址 '%s' 无效。"
 
 #, fuzzy
 #~ msgid "Inheritance"
