@@ -75,9 +75,9 @@
         {foreach from=$timezones.TIMEZONES item=val key=key}
             {if $key == $timezone}
 				{if isset($timezones.DST_ZONES.$key)}
-            		<option selected value="{$key}">{$key}</option>
+            		<option selected value="{$key}">{$key} (DST)</option>
 				{else}
-            		<option selected value="{$key}">{$key}</option>
+            		<option selected value="{$key}">{$key} (GMT)</option>
 				{/if}
             {else}
 				{if isset($timezones.DST_ZONES.$key)}
