@@ -255,6 +255,7 @@ $ACLD['mailAccount']=       array(
 			"gosaSpamMailbox",
 			"gosaSpamSortLevel",
 			"gosaVacationMessage",
+			"sieveManagement",
                         "drop_own_mails",
 			"mail",
 			"only_local");
@@ -359,19 +360,20 @@ $ACLD['conference']= array(
 			"goFonConferenceOwner");
 
 $ACLD['environment']=array(
-					"create",
-					"gotoPrinter",
-					"gotoEnvironment",
-					"gotoShare",
-					"gotoProfileServer",
-					"gotoProfileFlags",
-					"gotoXResolution",
-					"gotoLogonScript",
-					"gotoKioskProfile",
-					"gotoProfileQuota",
-					"gotoHotplugDevice",
-					"gotoShareAppleMounts"
-					);
+			"create",
+			"gotoPrinter",
+			"gotoPrinterToggle",
+			"gotoEnvironment",
+			"gotoShare",
+			"gotoProfileServer",
+			"gotoProfileFlags",
+			"gotoXResolution",
+			"gotoLogonScript",
+			"gotoKioskProfile",
+			"gotoProfileQuota",
+			"gotoHotplugDevice",
+			"gotoShareAppleMounts"
+			);
 /* Connectivity accounts */
 $ACLD['phpgwAccount']			=array("create");
 $ACLD['webdavAccount']			=array("create");
@@ -390,7 +392,7 @@ $ACLD['opengwAccount']			=array("create"	=>"Enable/disable account",
 		"is_locked"		=>"Lock status",
 		"TeamIDs"		=>"Teams");
 
-
+$ACLD['sshAccount']		=array("create","sshPublicKey");
 $ACLD['systems']			=array("systems" 		);
 $ACLD['FAIclass']			=array("FAIclass" 		);
 
@@ -440,5 +442,18 @@ $ACLD['phonequeue'] = array( "create","goFonTimeOut","goFonMaxLen","goFonAnnounc
       "telephoneNumber","goFonQueueLanguage","goFonQueueStrategy","goFonQueueAnnounceHoldtime","goFonQueueAnnounce","goFonDialOption","goFonQueueRetry");					
 $ACLD['goFonMacro']	=array("goFonMacro","edit","delete");
 $ACLD['mailogroup']	= array("create");
-
+$ACLD['scalix']	= array(
+		"scalixMailnode"			=> _("Scalix Mail node"),
+		"scalixMailboxClass"		=> _("Mailbox class"),
+		"scalixServerLanguage"		=> _("Server language"),
+		"scalixAdministrator"		=> _("Administrator"),
+		"scalixMailboxAdministrator"=> _("Mailbox administrator"),
+		"scalixHideUserEntry"		=> _("Hide user entry in Scalix"),
+		"scalixLimitMailboxSize"	=> _("Mailbox size limitations"),
+		"scalixLimitOutboundMail"	=> _("Limit outbound"),
+		"scalixLimitInboundMail"	=> _("Limit inbound"),
+		"scalixLimitNotifyUser" 	=> _("Notify user"),
+		"scalixEmailAddress"		=> _("Scalix email addresses"));
+ 
+$ACLD['mimetype'] = array("create","remove","cn","gotoMimeApplication","gotoMimeLeftClickAction","gotoMimeIcon","description","gotoMimeFilePattern","gotoMimeEmbeddedApplication","gotoMimeGroup","gotoMimeFilePattern","gotoMimeApplication","gotoMimeEmbeddedApplication");
 ?>
