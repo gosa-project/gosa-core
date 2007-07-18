@@ -49,7 +49,9 @@ function get_default_timezone($stamp = NULL)
 
     /* Check if we could use the PHP5 default timezone functions */
     if(function_exists("date_default_timezone_set")){
-      date_default_timezone_set($tz);
+      if(!@date_default_timezone_set($tz)){
+        print_red(sprintf(_("The timezone setting \"".$tz."\" in your gosa.conf is not valid. Can not calculate correct timezone offest."),$tz));
+      }
       $tz_delta = date("Z", $stamp);
       $tz_delta = $tz_delta / 3600 ;
       return(array("name" => $tz, "value" => $tz_delta));
