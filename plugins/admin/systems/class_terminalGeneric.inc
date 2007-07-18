@@ -98,6 +98,11 @@ class termgeneric extends plugin
       $this->gotoNtpServer=array();
     }
 
+    /* You can't inherit the NTP service, if we are not member in an object group */
+    if(!$this->member_of_ogroup){
+      $this->inheritTimeServer = FALSE;
+    }
+
     /* Create available ntp options */
     $this->gotoNtpServers = $this->config->data['SERVERS']['NTP'];
     foreach($this->gotoNtpServers as $key => $server){
@@ -122,7 +127,7 @@ class termgeneric extends plugin
     $tmp = $this->config->data['SERVERS']['SYSLOG'];
     foreach($tmp as $server){
       $visible = $server;
-      if($server == "default") {
+      if($server == "default" && $this->member_of_ogroup) {
         $visible = "["._("inherited")."]";
       }
       $this->gotoSyslogServers[$server] = $visible;
@@ -294,7 +299,9 @@ class termgeneric extends plugin
       if($server != "default"){
         $tmp2[$server]= $server;
       }else{
-        $tmp2[$server]="["._("inherited")."]";
+        if($this->member_of_ogroup){
+          $tmp2[$server]="["._("inherited")."]";
+        }
       }
     }
   
@@ -369,7 +376,7 @@ class termgeneric extends plugin
     }
   
     if(isset($_POST['termgeneric_posted']) && chkacl($this->acl,"gotoNtpServer") == ""){
-      if(isset($_POST["inheritTimeServer"])){
+      if(isset($_POST["inheritTimeServer"]) && $this->member_of_ogroup){
         $this->inheritTimeServer = true;
       }else{
         $this->inheritTimeServer = false;

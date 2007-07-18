@@ -62,6 +62,9 @@
    <table width="100%">
     <tr>
      <td colspan="2">
+
+{if $member_of_ogroup}
+
         <input type="checkbox" value="1" name="inheritTimeServer"  {$gotoNtpServerACL}
             {if $inheritTimeServer } checked {/if}
             onClick="javascript:
@@ -69,6 +72,9 @@
                     changeState('gotoNtpServers');
                     changeState('addNtpServer');
                     changeState('delNtpServer');">{t}Inherit time server attributes{/t}
+{else}
+		<input disabled type='checkbox' name='option_disabled'>{t}Inherit time server attributes{/t}
+{/if}
      </td>
     </tr>
     <tr>

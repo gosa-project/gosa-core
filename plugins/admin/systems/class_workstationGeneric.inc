@@ -106,6 +106,11 @@ class workgeneric extends plugin
       $this->gotoNtpServer=array();
     }
 
+    /* You can't inherit the NTP service, if we are not member in an object group */
+    if(!$this->member_of_ogroup){
+      $this->inheritTimeServer = FALSE;
+    }
+
     /* Create available ntp options */
     $tmp = $this->config->data['SERVERS']['NTP'];
     $this->gotoNtpServers = array();
@@ -129,7 +134,7 @@ class workgeneric extends plugin
     $tmp = $this->config->data['SERVERS']['SYSLOG'];
     foreach($tmp as $server){
       $visible = $server;
-      if($server == "default") {
+      if($server == "default" && $this->member_of_ogroup) {
         $visible = "["._("inherited")."]";
       }
       $this->gotoSyslogServers[$server] = $visible;
@@ -336,7 +341,7 @@ class workgeneric extends plugin
 
     /* Set inherit mode */
     if(isset($_POST['workgeneric_posted']) && chkacl($this->acl,"gotoNtpServer") == ""){
-      if(isset($_POST["inheritTimeServer"])){
+      if(isset($_POST["inheritTimeServer"]) && $this->member_of_ogroup){
         $this->inheritTimeServer = true;
       }else{
         $this->inheritTimeServer = false;
