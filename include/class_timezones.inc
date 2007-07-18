@@ -67,6 +67,7 @@ function get_default_timezone($stamp = NULL)
       $dst_zones  = $tmp['DST_ZONES'];
 
       /* Detect zone and calculate offset */
+      $found = FALSE;
       foreach($zones as $name => $value){
         if(preg_match("#".normalizePreg($name)."#i",$tz)){
           $offset = $value / 3600 ;
@@ -74,7 +75,13 @@ function get_default_timezone($stamp = NULL)
             $offset ++;
           }
           $zone = array("name" => $name, "value" => $offset);
+          $found = TRUE;
+          break;
         }
+      }
+      if(!$found){
+        print_red(sprintf(_("The timezone setting \"".$tz."\" in your gosa.conf is not valid. Can not calculate correct timezone offest."),
+$tz));
       }
     }
   }
