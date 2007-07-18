@@ -269,16 +269,18 @@ class faiManagement extends plugin
      */
     if($s_action == "remove_branch"){
 
-      $r = "" != search_config($this->config->data,"faiManagement","POSTREMOVE");
-      if($r){
+      /* Check if we have a post remove method configured
+       *  else skip this operation. (Skip:Button in the ui should be disabled in this case)
+       */
+      if("" != search_config($this->config->data,"faiManagement","POSTREMOVE")){
 
-        $base= $this->DivListFai->selectedBranch;
+          $base= $this->DivListFai->selectedBranch;
 
-        /* Load permissions for selected 'dn' and check if
-           we're allowed to remove this 'dn' */
-        $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
-        $this->acl= get_module_permission($acl, "FAIclass", $base);
-        if (chkacl($this->acl, "delete") == ""){
+          /* Load permissions for selected 'dn' and check if
+             we're allowed to remove this 'dn' */
+          $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
+          $this->acl= get_module_permission($acl, "FAIclass", $base);
+          if (chkacl($this->acl, "delete") == ""){
           $smarty->assign("info", sprintf(_("You're about to delete a fai branch / freeze  '%s'."), $this->DivListFai->selectedBranch));
           return($smarty->fetch(get_template_path('remove_branch.tpl',TRUE)));
         } else {
@@ -294,31 +296,34 @@ class faiManagement extends plugin
 
     if(isset($_POST['delete_branch_confirm'])){
 
-      $r = "" != search_config($this->config->data,"faiManagement","POSTREMOVE");
+      /* Check if we have a post remove method configured
+       *  else skip this operation. (Skip:Button in the ui should be disabled in this case)
+       */
+      if("" != search_config($this->config->data,"faiManagement","POSTREMOVE")){
 
-      $bb =  $this->DivListFai->selectedBranch;
-      if(!isset($ldap)){
-        $ldap = $this->config->get_ldap_link();
-      }
+        $bb =  $this->DivListFai->selectedBranch;
+        if(!isset($ldap)){
+          $ldap = $this->config->get_ldap_link();
+        }
 
-      $br = $this->DivListFai->AvailableBranches;
+        $br = $this->DivListFai->AvailableBranches;
 
-      if(isset($br[$bb])){
-        $name = $br[$bb];
-        $ldap->cd($bb);
-        $ldap->recursive_remove();
-        $ldap->cd(preg_replace('/,ou=fai,ou=configs,ou=systems,/', ',ou=apps,', $bb));
-        $ldap->recursive_remove();
-        $this->DivListFai->selectedBranch = "main";
-        $this->DivListFai->AvailableBranches = $this->getBranches();
+        if(isset($br[$bb])){
+          $name = $br[$bb];
+          $ldap->cd($bb);
+          $ldap->recursive_remove();
+          $ldap->cd(preg_replace('/,ou=fai,ou=configs,ou=systems,/', ',ou=apps,', $bb));
+          $ldap->recursive_remove();
+          $this->DivListFai->selectedBranch = "main";
+          $this->DivListFai->AvailableBranches = $this->getBranches();
 
-        /* Post remove */
-        $this->lock_name   = $name;
-        $this->lock_dn     = $bb;
-        $this->postremove();
+          /* Post remove */
+          $this->lock_name   = $name;
+          $this->lock_dn     = $bb;
+          $this->postremove();
+        }
       }
     }
-  
 
 
     /****************
@@ -458,10 +463,11 @@ class faiManagement extends plugin
     /****************
       Display dialog to enter new Branch name
      ****************/
-
-    $c = "" != search_config($this->config->data,"faiManagement","POSTMODIFY");
-
-    if($c){
+  
+    /* Check if we have a post create method configured 
+     *  else skip this operation. (Skip:Button in the ui should be disabled in this case)
+     */
+    if("" != search_config($this->config->data,"faiManagement","POSTCREATE")){
       $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
       $this->acl= get_module_permission($acl, "FAIclass", $this->DivListFai->selectedBase);
       if((($s_action == "branch_branch")||($this->dispNewBranch)) && chkacl($this->acl,"FAIclass") == ""){
@@ -476,9 +482,10 @@ class faiManagement extends plugin
       Display dialog to enter new Freeze name
      ****************/
 
-    $c = "" != search_config($this->config->data,"faiManagement","POSTMODIFY");
-
-    if($c){
+    /* Check if we have a post create method configured 
+     *  else skip this operation. (Skip:Button in the ui should be disabled in this case)
+     */
+    if("" != search_config($this->config->data,"faiManagement","POSTCREATE")){
       $acl= get_permissions ($this->DivListFai->selectedBase, $this->ui->subtreeACL);
       $this->acl= get_module_permission($acl, "FAIclass", $this->DivListFai->selectedBase);
       if((($s_action == "freeze_branch")||($this->dispNewFreeze)) && chkacl($this->acl,"FAIclass") == ""){
