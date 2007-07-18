@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-07-17 16:31+0200\n"
-"PO-Revision-Date: 2007-07-18 12:23+0200\n"
+"PO-Revision-Date: 2007-07-18 14:36+0200\n"
 "Last-Translator: Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>\n"
 "Language-Team: CareWorks ICT Services <info@careworks.nl>\n"
 "MIME-Version: 1.0\n"
@@ -9457,9 +9457,8 @@ msgid "Preserve"
 msgstr "Bewaar"
 
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:359
-#, fuzzy
 msgid "Please specify a valid disk name"
-msgstr "Geef a.u.b. een geldige gebruikersnaam op!"
+msgstr "Geef a.u.b. een geldige hardeschijfnaam op!"
 
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:372
 #, php-format
@@ -13103,7 +13102,7 @@ msgstr "Reguliere expressie voor       overeenkomende gebruikersnamen"
 msgid ""
 "Could not remove the conference entry from database on home server (%s). "
 "Please check your asterisk database configuration."
-msgstr ""
+msgstr "Kon de conferentie niet uit de database verwijderen op asterisk locatie server (%s). Controleer uw asterisk database configuratie a.u.b."
 
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:319
 #, php-format
@@ -13139,25 +13138,25 @@ msgstr "Alleen nummerieke waardes zijn toegestaan in geldigheidsduur"
 msgid ""
 "Can not check if there are already some entries with given telephone number "
 "and/or cn in the destination home server."
-msgstr ""
+msgstr "Kan niet controleren of er al objecten met het opgegeven telefoonnummer en/of cn in de doel locatie server aanwezig zijn."
 
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:406
 msgid ""
 "Can not remove entries with some telephone number and/or cn from destination "
 "home server."
-msgstr ""
+msgstr "Kan objecten met hetzelfde telefoonnummer en/of cn niet verwijderen uit de doel locatie server."
 
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:524
 msgid ""
 "Can not check if entry exists in old database. Please have a look a the gosa "
 "logfiles."
-msgstr ""
+msgstr "Kan niet controleren of het object bestaat in de oude database. Controleer a.u.b. het GOsa logbestand."
 
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:537
 msgid ""
 "Can not remove old entries from initial home server. Please have a look a "
 "the gosa logfiles."
-msgstr ""
+msgstr "Kon oude objecten niet verwijderen van de initiele locatie server. Controleer a.u.b. de GOsa logbestanden."
 
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:633
 msgid "Saving phone conference failed"
@@ -13934,11 +13933,11 @@ msgstr "Header"
 
 #: include/sieve/templates/element_header.tpl:60
 msgid "operator"
-msgstr ""
+msgstr "vergelijking"
 
 #: include/sieve/class_sieveElement_Reject.inc:21
 msgid "Invalid character found, quotes are not allowed in a reject message."
-msgstr ""
+msgstr "Ongeldig karakter aangetroffen. Aanhalingstekens zijn niet toegestaan in een afwijsbericht."
 
 #: include/sieve/class_sieveElement_Reject.inc:37
 msgid "Your reject text here"
@@ -13958,7 +13957,7 @@ msgstr "parsen was succesvol"
 #, php-format
 msgid ""
 "The specified mail server '%s' does not exist within the GOsa configuration."
-msgstr ""
+msgstr "De opgegeven mail server '%s' bestaat niet binnen de GOsa configuratie."
 
 #: include/sieve/class_sieveManagement.inc:206
 msgid "You should specify a name for your new script."
@@ -13998,7 +13997,7 @@ msgstr "Kan het sieve script niet verwijderen van de server. De server meldt: '%
 #: include/sieve/class_sieveManagement.inc:372
 #, php-format
 msgid "You are going to remove the sieve script '%s' from your mail server."
-msgstr ""
+msgstr "U staat op het punt om sieve script '%s' van uw mail server te verwijderen."
 
 #: include/sieve/class_sieveManagement.inc:408
 msgid "Edited"
@@ -14007,7 +14006,7 @@ msgstr "Bewerkt"
 #: include/sieve/class_sieveManagement.inc:415
 #, php-format
 msgid "Please fix all errors before saving. Last error was: %s"
-msgstr ""
+msgstr "Los a.u.b. alle fouten op voordat u het script opslaat. De laatste fout was: %s"
 
 #: include/sieve/class_sieveManagement.inc:442
 msgid "Specified file seems to be empty."
@@ -14015,7 +14014,7 @@ msgstr "De opgegeven naam is leeg."
 
 #: include/sieve/class_sieveManagement.inc:444
 msgid "Upload failed. The temporary file can't be accessed."
-msgstr ""
+msgstr "Uploaden mislukt. Het tijdelijke bestand kon niet benaderd worden."
 
 #: include/sieve/class_sieveManagement.inc:446 html/get_attachment.php:69
 #, php-format
@@ -14029,11 +14028,11 @@ msgstr "Opslaan in"
 
 #: include/sieve/class_sieveManagement.inc:532
 msgid "Failed to add new element."
-msgstr ""
+msgstr "Kon het nieuwe element niet toevoegen."
 
 #: include/sieve/class_sieveManagement.inc:648
 msgid "This script is marked as active"
-msgstr ""
+msgstr "Het script is actief gemaakt"
 
 #: include/sieve/class_sieveManagement.inc:653
 msgid "Script length"
@@ -14054,7 +14053,7 @@ msgstr "Script bewerken"
 #: include/sieve/class_sieveManagement.inc:785
 #, php-format
 msgid "Can't add the specified element at the given position."
-msgstr ""
+msgstr "Kan het opgegeven element niet op de opgegeven positie toevoegen."
 
 #: include/sieve/class_sieveManagement.inc:1069
 msgid "Failed to save sieve script"
@@ -14071,7 +14070,7 @@ msgstr "Geef hier een e-mail adres op"
 
 #: include/sieve/class_sieveElement_Comment.inc:21
 msgid "Your comment here"
-msgstr ""
+msgstr "Uw opmerking hier"
 
 #: include/class_ldap.inc:199
 #, php-format
@@ -14113,7 +14112,7 @@ msgstr "Onbekende FAI status %s"
 #, php-format
 msgid ""
 "Autocreation of subtree failed. No objectClass found for attribute '%s'."
-msgstr ""
+msgstr "Automatisch aanmaken van de locatie is mislukt. Er is geen ObjectClass gevonden voor attribuut '%s'."
 
 #: include/class_ldap.inc:790 include/class_ldap.inc:880
 #, php-format
@@ -14134,7 +14133,7 @@ msgstr "Het aanmaken van subtree '%s' is mislukt"
 msgid ""
 "The referral url '%s' is missing the ldap base. It should look like this "
 "'ldap://server:port/base'."
-msgstr ""
+msgstr "De referral url '%s' heeft geen ldap basis. Het moet er als volgt uit zien: 'ldap://server:poort/basis'."
 
 #: include/class_ldap.inc:949
 #, php-format
@@ -14202,7 +14201,7 @@ msgstr ""
 
 #: include/php_setup.inc:98
 msgid "Send bug report to the GOsa Team"
-msgstr ""
+msgstr "Verstuur een fouten rapport naar het GOsa team"
 
 #: include/php_setup.inc:98
 msgid "Send bugreport"
@@ -14264,7 +14263,7 @@ msgstr ""
 #, php-format
 msgid ""
 "Undefined zone name '%s'. Zone name must look like this 'server/zone.com'."
-msgstr ""
+msgstr "Ongedefinieerde zonenaam '%s'. Een zone naam moet eruitzien als 'server/zonenaam.nl'."
 
 #: include/class_certificate.inc:35
 msgid "Can't open specified file, check accessibility and or existence"
@@ -14478,11 +14477,11 @@ msgstr "GOsa ontwikkelversie (Revisie %s)"
 
 #: include/functions.inc:2292 include/functions.inc:2296
 msgid "Warning - base_hook is not available. Using default base."
-msgstr ""
+msgstr "Waarschuwing - base_hook is niet beschikbaar. De standaard basis wordt gebruikt."
 
 #: include/functions.inc:2302
 msgid "Warning - no base_hook defined. Using default base."
-msgstr ""
+msgstr "Waarschuwing - Er is geen base_hook gedefnieerd. De standaard basis wordt gebruikt."
 
 #: include/functions.inc:2327 setup/class_setupStep_Schema.inc:95
 msgid "Can't get schema information from server. No schema check possible!"
@@ -14492,13 +14491,13 @@ msgstr ""
 
 #: include/functions.inc:2353
 msgid "Used to store account specific informations."
-msgstr ""
+msgstr "Wordt gebruikt om account specifieke informatie op te slaan."
 
 #: include/functions.inc:2360
 msgid ""
 "Used to lock currently edited entries to avoid multiple changes at the same "
 "time."
-msgstr ""
+msgstr "Wordt gebruikt om de huidge informatie die bewerkt wordt te blokkeren, zodat meerdere gebruikers niet gelijktijdig dezelfde informatie bewerken."
 
 #: include/functions.inc:2403
 #, php-format
@@ -14529,23 +14528,23 @@ msgstr "Klasse(n) beschikbaar"
 msgid ""
 "You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema    configuration do not support this option."
-msgstr ""
+msgstr "U heeft de rfc2307bis optie bij de 'LDAP installatie' geselecteerd, maar uw schema configuratie ondersteunt deze optie niet."
 
 #: include/functions.inc:2441
 msgid ""
 "In order to use rfc2307bis conform groups the objectClass 'posixGroup' must "
 "be      AUXILIARY"
-msgstr ""
+msgstr "Om rfc2307bis conforme groepen te kunnen gebruiken moet de ObjectClass 'posixGroup' AUXILIARY zijn"
 
 #: include/functions.inc:2445
 msgid ""
 "You have disabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema   configuration do not support this option."
-msgstr ""
+msgstr "U heeft de rfc2307bis optie uitgeschakeld in de 'LDAP installatie', maar uw schema configuratie ondersteunt deze optie niet."
 
 #: include/functions.inc:2446
 msgid "The objectClass 'posixGroup' must be STRUCTURAL"
-msgstr ""
+msgstr "De objectClass 'posixGroup; moet STRUCTURAL zijn."
 
 #: include/class_tabs.inc:198
 #, php-format
@@ -14691,7 +14690,7 @@ msgstr ""
 
 #: setup/setup_config2.tpl:6
 msgid "Samba hash generator"
-msgstr ""
+msgstr "Samba hash-generator"
 
 #: setup/setup_config2.tpl:15
 msgid "Samba SID"
@@ -14707,25 +14706,23 @@ msgstr "Werkstation locatie"
 
 #: setup/setup_config2.tpl:61
 msgid "Samba SID mapping"
-msgstr ""
+msgstr "Samba SID vertaling"
 
 #: setup/setup_config2.tpl:71
 msgid "Timezone"
 msgstr "Tijdzone"
 
 #: setup/setup_config2.tpl:74
-#, fuzzy
 msgid "Please your preferred timezone here"
-msgstr "Geef hier uw zoekwaarde op"
+msgstr "Geef hier uw voorkeur tijdzone op"
 
 #: setup/setup_config2.tpl:95
-#, fuzzy
 msgid "Additional GOsa settings"
 msgstr "Additionele GOsa instellingen"
 
 #: setup/setup_config2.tpl:99
 msgid "Enable Copy & Paste"
-msgstr ""
+msgstr "Schakel kopieren en plakken in"
 
 #: setup/setup_config2.tpl:111
 msgid "Enable FAI release management"
@@ -14749,72 +14746,72 @@ msgstr "Afwezigheidsbericht sjablonen"
 
 #: setup/setup_config2.tpl:177
 msgid "Use Cyrus UNIX style"
-msgstr ""
+msgstr "Gebruik Cyrus UNIX style modus"
 
 #: setup/setup_feedback.tpl:8
 msgid "Subscribe to the gosa-announce mailinglist"
-msgstr ""
+msgstr "Schrijf uzelf in op de gosa-announce mailinglijst"
 
 #: setup/setup_feedback.tpl:11
 msgid ""
 "When checking this option, GOsa will try to connect http://oss.gonicus.de in "
 "order to subscribe you to the gosa-announce mailing list. You've to confirm "
 "this by mail."
-msgstr ""
+msgstr "Indien u deze optie selecteer zal GOsa verbinden met http://oss.gonicus.de om u in te schrijven op de gosa-anounce mailinglijst. U dient de inschrijving per e-mail te bevestigen."
 
 #: setup/setup_feedback.tpl:43
 msgid "Send feedback to the GOsa project team"
-msgstr ""
+msgstr "Stuur terugkoppel informatie naar het GOsa project team"
 
 #: setup/setup_feedback.tpl:46
 msgid ""
 "When checking this option, GOsa will try to connect http://oss.gonicus.de in "
 "order to submit your form anonymously."
-msgstr ""
+msgstr "Indien u deze optie selecteert, zal GOsa een verbinding maken met http://oss.gonicus.de om het formulier annoniem te versturen."
 
 #: setup/setup_feedback.tpl:52
 msgid "Did the setup procedure help you to get started?"
-msgstr ""
+msgstr "Heeft het installatieprogramma u geholpen om te kunnen starten?"
 
 #: setup/setup_feedback.tpl:62
 msgid "If not, what problems did you encounter"
-msgstr ""
+msgstr "Indien nee: Welke problemen bent u tegengekomen"
 
 #: setup/setup_feedback.tpl:70
 msgid "Is this the first time you use GOsa?"
-msgstr ""
+msgstr "Is dit de eerste maal dat u GOsa gebruikt?"
 
 #: setup/setup_feedback.tpl:76
 msgid "I use it since"
-msgstr ""
+msgstr "Ik gebruik het sinds"
 
 #: setup/setup_feedback.tpl:77
 msgid "Select the year since when you are using GOsa"
-msgstr ""
+msgstr "Selecteer het jaar sinds wanneer u GOsa gebruikt"
 
 #: setup/setup_feedback.tpl:84
 msgid "What operating system / distribution do you use?"
-msgstr ""
+msgstr "Welk besturingssysteem/distributie gebruikt u?"
 
 #: setup/setup_feedback.tpl:92
 msgid "What web server do you use?"
-msgstr ""
+msgstr "Welke webserver gebruikt u?"
 
 #: setup/setup_feedback.tpl:100
 msgid "What PHP version do you use?"
-msgstr ""
+msgstr "Welke PHP versie gebruikt u?"
 
 #: setup/setup_feedback.tpl:108
 msgid "LDAP"
-msgstr ""
+msgstr "LDAP"
 
 #: setup/setup_feedback.tpl:112
 msgid "What kind of LDAP server(s) do you use?"
-msgstr ""
+msgstr "Welk type LDAP server(s) gebruikt u?"
 
 #: setup/setup_feedback.tpl:118
 msgid "How many objects are in your LDAP?"
-msgstr ""
+msgstr "Hoeveel objecten bevat uw LDAP database?"
 
 #: setup/setup_feedback.tpl:125
 msgid "Features"
@@ -14822,15 +14819,15 @@ msgstr "Mogelijkheden"
 
 #: setup/setup_feedback.tpl:128
 msgid "What features of GOsa do you use?"
-msgstr ""
+msgstr "Welke mogelijkheden van GOsa gebruikt u?"
 
 #: setup/setup_feedback.tpl:138
 msgid "What features do you want to see in future versions of GOsa?"
-msgstr ""
+msgstr "Welke mogelijkheden zou u graag terugzien in toekomstige versies van GOsa?"
 
 #: setup/setup_feedback.tpl:145
 msgid "Send feedback"
-msgstr ""
+msgstr "Verstruur terugkoppeling"
 
 #: setup/class_setupStep_Config3.inc:67 setup/class_setupStep_Config3.inc:68
 msgid "GOsa settings 3/3"
@@ -14838,7 +14835,7 @@ msgstr "GOsa instellingen 3/3"
 
 #: setup/class_setupStep_Config3.inc:69
 msgid "Tweak some GOsa core behaviour"
-msgstr ""
+msgstr "Enkele GOsa basis instellingen fijnafstemmen"
 
 #: setup/class_setupStep_Config3.inc:171
 msgid "Session lifetime must be a numeric value."
@@ -14861,7 +14858,7 @@ msgstr ""
 msgid ""
 "Your configuration file is currently world readable. Please updated the file "
 "permissions!"
-msgstr ""
+msgstr "Uw configuratiebestand is momenteel door iedereen leesbaar. Werk a.u.b. de bestandspermissies bij!"
 
 #: setup/class_setupStep_Finish.inc:102
 msgid "The configuration is currently not readable or it does not exists."
@@ -15362,11 +15359,11 @@ msgid ""
 "creating the file '/tmp/gosa.auth', containing the current session ID on the "
 "servers local filesystem. This can be done by executing the following "
 "command:"
-msgstr ""
+msgstr "Uit veiligheidsoverwegingen dient u de GOsa installatie the authoriseren door het bestand '/tmp/gosa.auth' aan te maken met daarin het huidige sessie ID. Dit kunt u bewerkstelligen door het volgende commando uit te voeren:"
 
 #: setup/setup_welcome.tpl:34
 msgid "Click the 'Continue' button when you've finished."
-msgstr ""
+msgstr "Druk op de 'Doorgaan' knop zodra u klaar bent."
 
 #: setup/class_setupStep_Ldap.inc:53
 msgid "LDAP setup"
@@ -15380,7 +15377,7 @@ msgstr "LDAP verbinding instellingen"
 msgid ""
 "This dialog performs the basic configuration of the LDAP connectivity for "
 "GOsa."
-msgstr ""
+msgstr "Deze dialoog voet de basis configuratie voor LDAP connectiviteit voor GOsa uit."
 
 #: setup/class_setupStep_Ldap.inc:99
 #, php-format
@@ -15395,7 +15392,7 @@ msgstr "Aanmelding als gebruiker '%s' is mislukt op server '%s'."
 #: setup/class_setupStep_Ldap.inc:106
 #, php-format
 msgid "Anonymous bind on server '%s' succeeded."
-msgstr ""
+msgstr "Anonieme aanmelding op server '%s' succesvol."
 
 #: setup/class_setupStep_Ldap.inc:107
 msgid "Please specify user and password."
@@ -15408,11 +15405,11 @@ msgstr "Aanmelding als gebruiker '%s' op server '%s' succesvol."
 
 #: setup/class_setupStep_Schema.inc:40 setup/class_setupStep_Schema.inc:41
 msgid "LDAP schema check"
-msgstr ""
+msgstr "LDAP schema validatie"
 
 #: setup/class_setupStep_Schema.inc:42
 msgid "Perform test on your current LDAP schema"
-msgstr ""
+msgstr "Voer een test op uw huidige LDAP schema uit."
 
 #: setup/class_setupStep_Welcome.inc:38
 msgid "Welcome"
@@ -15455,7 +15452,7 @@ msgid ""
 "During the LDAP inspection, we're going to check for several common pitfalls "
 "that may occur when migration to GOsa base LDAP administration. You may want "
 "to fix the problems below, in order to provide smooth services."
-msgstr ""
+msgstr "Tijdens de LDAP controle wordt gecontroleerd op verschillende veel voorkomende valkuilen die op kunnen duiken bij een migratie naar een GOsa gebaseerd LDAP beheer systeem. U dient de onderstaande problemen op te lossen om een prettige migratie te bewerkstelligen."
 
 #: setup/setup_migrate.tpl:33
 msgid "Check again"
@@ -15463,19 +15460,19 @@ msgstr "Controleer opnieuw"
 
 #: setup/setup_migrate.tpl:37
 msgid "Move windows workstations into a valid windows workstation department"
-msgstr ""
+msgstr "Verplaatst Windows werkstations naar een geldige windows werkstation afdeling"
 
 #: setup/setup_migrate.tpl:39
 msgid ""
 "This dialog allows you to move the displayed windows workstations into a "
 "valid department"
-msgstr ""
+msgstr "Deze dialoog stelt u in staat om de getoonde windows werkstations naar een geldige afdeling te verplaatsen."
 
 #: setup/setup_migrate.tpl:41
 msgid ""
 "Be careful with this tool, there may be references pointing to this "
 "workstations that can't be migrated."
-msgstr ""
+msgstr "Wees voorzichtig met dit hulpprogramma. Er kunnen referenties naar de werkstations wijzen die niet gemigreerd kunnen worden."
 
 #: setup/setup_migrate.tpl:65 setup/setup_migrate.tpl:120
 #: setup/setup_migrate.tpl:171 setup/setup_migrate.tpl:294
@@ -15485,7 +15482,7 @@ msgstr "Selecteer alles"
 
 #: setup/setup_migrate.tpl:67
 msgid "Move selected windows workstations into the following GOsa department"
-msgstr ""
+msgstr "Verplaats de geselecteerde windows werkstations naar de volgende GOsa afdeling"
 
 #: setup/setup_migrate.tpl:72
 msgid "Move selected workstations"
@@ -15493,33 +15490,33 @@ msgstr "Verplaats geselecteerde werkstations"
 
 #: setup/setup_migrate.tpl:73
 msgid "What will be done here"
-msgstr ""
+msgstr "Wat zal hier gedaan worden"
 
 #: setup/setup_migrate.tpl:85
 msgid "Move groups into configured group tree"
-msgstr ""
+msgstr "Verplaats groepen naar de geconfigureerde groep locatie"
 
 #: setup/setup_migrate.tpl:88
 msgid ""
 "This dialog allows moving a couple of groups to the configured group tree. "
 "Doing this may straighten your LDAP service."
-msgstr ""
+msgstr "Deze dialoog stelt u in staat om een aantal groepen naar de geconfigureerde groep locatie te verplaatsen."
 
 #: setup/setup_migrate.tpl:91
 msgid ""
 "Be careful with this option! There may be references pointing to these "
 "groups. The GOsa setup can't migrate references, so you may want to cancel "
 "the migration in this case in this case."
-msgstr ""
+msgstr "Wees voorzichtig met dit hulpprogramma. Er kunnen referenties wijzen naar deze groepen. GOsa kan deze referenties niet migreren."
 
 #: setup/setup_migrate.tpl:94
 msgid "Move selected groups into this group tree"
-msgstr ""
+msgstr "Verplaats de geselecteerde groepen naar deze groep locatie"
 
 #: setup/setup_migrate.tpl:123 setup/setup_migrate.tpl:175
 #: setup/setup_migrate.tpl:298 setup/setup_migrate.tpl:351
 msgid "Hide changes"
-msgstr ""
+msgstr "Verberg veranderingen"
 
 #: setup/setup_migrate.tpl:125 setup/setup_migrate.tpl:177
 #: setup/setup_migrate.tpl:300 setup/setup_migrate.tpl:353
@@ -15528,20 +15525,20 @@ msgstr "Toon wijzigingen"
 
 #: setup/setup_migrate.tpl:138
 msgid "Move users into configured user tree"
-msgstr ""
+msgstr "Verplaats gebruikers naar de geconfigureerde gebruiker locatie"
 
 #: setup/setup_migrate.tpl:140
 msgid ""
 "This dialog allows moving a couple of users to the configured user tree. "
 "Doing this may straighten your LDAP service."
-msgstr ""
+msgstr "Deze dialoog stelt u in staat om geselecteerde gebruikers naar de geconfigureerde gebruiker locatie te verplaatsen."
 
 #: setup/setup_migrate.tpl:143
 msgid ""
 "Be careful with this option! There may be references pointing to these "
 "users. The GOsa setup can't migrate references, so you may want to cancel "
 "the migration in this case."
-msgstr ""
+msgstr "Wees voorzichtig met dit hulpprogramma! Er kunnen referenties wijzen naar deze gebruikers. GOsa kan deze referenties niet migreren."
 
 #: setup/setup_migrate.tpl:146
 msgid "Move selected users into this people tree"
@@ -15559,7 +15556,7 @@ msgstr "Maak een nieuw GOsa beheerder account"
 msgid ""
 "This dialog will automatically add a new super administrator to your LDAP "
 "tree."
-msgstr ""
+msgstr "Deze dialoog stelt u in staat een nieuwe GOsa systeembeheerder aan uw LDAP database toe te voegen."
 
 #: setup/setup_migrate.tpl:231
 msgid "Password (again)"
@@ -15570,13 +15567,13 @@ msgid ""
 "The listed departments are currenlty invisble in the GOsa user interface. If "
 "you want to change this for a couple of entries, select them and use the "
 "migrate button below."
-msgstr ""
+msgstr "De getoonde afdelingen zijn momenteel onzichtbaar binnen GOsa. Indien u dit wenst aan te passen, dient u de betreffende regels te selecteren en de migreer knop te gebruiken."
 
 #: setup/setup_migrate.tpl:260 setup/setup_migrate.tpl:315
 msgid ""
 "If you want to know what will be done when migrating the selected entries, "
 "use the 'Show changes' button to see the LDIF."
-msgstr ""
+msgstr "Indien u wilt weten welke stappen de migratie door zal voeren dan kunt u op de 'Toon wijzigingen' knop drukken om het LDIF bestand in te zien."
 
 #: setup/setup_migrate.tpl:270 setup/setup_migrate.tpl:324
 msgid "Current"
@@ -15591,7 +15588,7 @@ msgid ""
 "The listed users are currenlty invisble in the GOsa user interface. If you "
 "want to change this for a couple of users, just select them and use the "
 "'Migrate' button below."
-msgstr ""
+msgstr "De getoonde gebruikers zijn momenteel onzichtbaar binnen GOsa. Indien u dit voor gebruikers aan wil passen, dan dient u de betreffende gebruikers te selecteren en op de migreer knop te drukken."
 
 #: setup/class_setupStep_Config1.inc:73 setup/class_setupStep_Config1.inc:74
 msgid "GOsa settings 1/3"
@@ -15608,12 +15605,12 @@ msgstr "De opgegeven waarde voor '%s' dient nummeriek te zijn"
 
 #: setup/class_setupStep_Config1.inc:117 setup/setup_config1.tpl:85
 msgid "GID / UID min id"
-msgstr ""
+msgstr "GID / UID min id"
 
 #: setup/class_setupStep_Config1.inc:121 setup/class_setupStep_Config1.inc:125
 #, php-format
 msgid "Don't add a trailing comma to '%s'."
-msgstr ""
+msgstr "Voeg geen comma op het einde to aan '%s'."
 
 #: setup/class_setupStep_Config1.inc:121
 msgid "People storage ou"
@@ -15644,7 +15641,7 @@ msgid ""
 "At this point, you can select the site wide default language. Choosing "
 "'automatic' will use the language requested by the browser. This setting can "
 "be overriden per user."
-msgstr ""
+msgstr "Hier kunt u de globale standaard taal instellen. Indien u 'automatisch' kiest dan zal de voorkeurstaal van de browser gebruikers worden. Deze instelling kan per gebruiker ingesteld worden."
 
 #: setup/setup_language.tpl:9
 msgid "Please your preferred language here"
@@ -15688,15 +15685,15 @@ msgstr "Notificatie script"
 
 #: setup/setup_config3.tpl:126
 msgid "Login and session"
-msgstr ""
+msgstr "Inloggen en sessie"
 
 #: setup/setup_config3.tpl:129
 msgid "Enforce register_globals to be deactivated"
-msgstr ""
+msgstr "Forceer dat register_globals uit staat"
 
 #: setup/setup_config3.tpl:141
 msgid "Enforce encrypted connections"
-msgstr ""
+msgstr "Forceer beveiligde verbindingen"
 
 #: setup/setup_config3.tpl:153
 msgid "Warn if session is not encrypted"
@@ -15708,7 +15705,7 @@ msgstr "Sessie levensduur"
 
 #: setup/setup_config3.tpl:173
 msgid "Debugging"
-msgstr ""
+msgstr "Debuggen"
 
 #: setup/setup_config3.tpl:177
 msgid "Show PHP errors"
@@ -16181,7 +16178,7 @@ msgstr ""
 
 #: setup/setup_license.tpl:8
 msgid "I have read the license and accept it"
-msgstr ""
+msgstr "Ik heb de licentie overeenkomst gelezen en geaccepteerd"
 
 #: ihtml/themes/default/framework.tpl:19
 msgid "Main"
