@@ -509,7 +509,7 @@ class workgeneric extends plugin
     /* Set workstation service attributes to inherited */
     if($this->member_of_ogroup && isset($this->parent->by_object['workservice'])){
       foreach(array("gotoXKbLayout","gotoXKbModel","gotoXKbVariant",
-            "gotoXResolution","gotoXColordepth","gotoXMouseType","gotoXMouseType") as $name){
+            "gotoXResolution","gotoXColordepth","gotoXMouseType","gotoXMouseport") as $name){
         $this->parent->by_object['workservice']->$name = "default"; 
       }
     }
