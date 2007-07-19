@@ -159,11 +159,17 @@ class tabs
 
 		$title= preg_replace("/ /", "&nbsp;", $title);
 		
+		/* Take care about notifications */
+		if ($this->by_object[$class]->pl_notify){
+			$notify= "id=\"notify\"";
+		} else {
+			$notify= "";
+		}
 		if ($_SESSION['js']==FALSE){	
-			$display.= "<div class=\"$style[$index]\"><input type=\"submit\" name=\"$class\"".
+			$display.= "<div class=\"$style[$index]\" $notify><input type=\"submit\" name=\"$class\"".
 		                   " class=\"$style[$index]\" value=\"$title\"";
 		} else {			 
-			$display.= "<div class=\"$style[$index]\"><a class=\"$style[$index]\" onclick=\"return true;\" href=\"javascript:document.mainform.arg.value='$class';document.mainform.submit();\">$title</a";
+			$display.= "<div $notify class=\"$style[$index]\"><a class=\"$style[$index]\" onclick=\"return true;\" href=\"javascript:document.mainform.arg.value='$class';document.mainform.submit();\">$title</a";
 		}
 		$display.= "></div></td>";
 	}

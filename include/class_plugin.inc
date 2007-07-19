@@ -107,6 +107,9 @@ class plugin
   var $new= TRUE;
   var $saved_attributes= array();
 
+  /* This can be set to render the tabulators in another stylesheet */
+  var $pl_notify= FALSE;
+
   /*! \brief plugin constructor
 
     If 'dn' is set, the node loads the given 'dn' from LDAP
