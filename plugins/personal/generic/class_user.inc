@@ -1100,7 +1100,7 @@ class user extends plugin
   /* Indicate whether a password change is needed or not */
   function password_change_needed()
   {
-    return ($this->pw_storage != $this->last_pw_storage);
+    return (!preg_match("/".$this->pw_storage."/i", $this->last_pw_storage));
   }
 
 
