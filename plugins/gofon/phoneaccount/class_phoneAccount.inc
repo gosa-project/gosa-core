@@ -109,13 +109,13 @@ class phoneAccount extends plugin
 
         $r_con =  @mysql_pconnect($cur_cfg['SERVER'],$cur_cfg['LOGIN'],$cur_cfg['PASSWORD']);
         if(!$r_con){
-          print_red( sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
-                $cur_cfg['SERVER'],$cur_cfg['LOGIN']));
+#          print_red( sprintf(_("The MySQL Server '%s' isn't reachable as user '%s', check GOsa log for mysql error."),
+#                $cur_cfg['SERVER'],$cur_cfg['LOGIN']));
           gosa_log(mysql_error());
         }
         $db  =  @mysql_select_db($cur_cfg['DB'],$r_con);
         if(!$db){
-          print_red(sprintf(_("Can't select database %s on %s."),$cur_cfg['DB'],$cur_cfg['SERVER']));
+#         print_red(sprintf(_("Can't select database %s on %s."),$cur_cfg['DB'],$cur_cfg['SERVER']));
           gosa_log(mysql_error());
         }
 
@@ -248,11 +248,6 @@ class phoneAccount extends plugin
     $this->hardware_list["automatic"]= _("automatic");
     ksort($this->hardware_list);
     $this->a_old_telenums = $this->phoneNumbers;
-
-    if($this->is_account){
-      $this->is_modified = true;
-    }
-
 
     /* Get voicemail PIN from MySQL DB 
      * Because every user can change his PIN directly from the phone
@@ -1050,6 +1045,7 @@ class phoneAccount extends plugin
   function save_object()
   {
     if (isset($_POST["phoneTab"])){
+    
       plugin::save_object();
 
       /* Save checkbox */
@@ -1070,6 +1066,10 @@ class phoneAccount extends plugin
         $this->macrostillavailable=true;
       }
 
+      if(isset($_POST['macro']) && $_POST['macro'] != $this->macro){
+        $this->is_modified =true;
+      }
+
       if(is_array($this->phoneNumbers)){
         foreach($this->phoneNumbers as $telenumms) {
           $nummsinorder[]=$telenumms; 
@@ -1079,8 +1079,12 @@ class phoneAccount extends plugin
       }
 
       /* get all Postvars */
-      if(isset($this->macroarray[$this->macro])){ 
+      if(isset($this->macroarray[$this->macro])){
+ 
         foreach($this->macroarray[$this->macro] as $key => $paras){
+
+          $backup = $this->macroarray[$this->macro][$key];  
+
           if(isset($_POST[$paras['var']])){
             $this->macroarray[$this->macro][$key]['choosen'] = $_POST[$paras['var']];
           }
@@ -1097,6 +1101,9 @@ class phoneAccount extends plugin
                 $this->macroarray[$this->macro][$key]['choosen']=false;
               }
             }
+          }
+          if(count(array_diff($this->macroarray[$this->macro][$key],$backup))){
+            $this->modified = TRUE;
           }
         }
       }
@@ -1132,8 +1139,10 @@ class phoneAccount extends plugin
       }
     }
 
-    if(!$this->generate_mysql_entension_entries()){
-      $message[] = $this->generate_error;
+    if ($this->initially_was_account != $this->is_account || $this->is_modified){
+      if(!$this->generate_mysql_entension_entries()){
+        $message[] = $this->generate_error;
+      }
     }
 
     /* We need at least one phone number */
@@ -1189,9 +1198,11 @@ class phoneAccount extends plugin
 
     $this->attrs['goFonForwarding']=array();
 
-    $str = $this->generate_mysql_entension_entries(true);
-    if(empty($str)){
-      print_red($str);
+    if ($this->initially_was_account != $this->is_account || $this->is_modified){
+      $str = $this->generate_mysql_entension_entries(true);
+      if(empty($str)){
+        print_red($str);
+      }
     }
 
     if($this->attrs['goFonMacro']==""){
