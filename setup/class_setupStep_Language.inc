@@ -48,6 +48,7 @@ class Step_Language extends setup_step
                              "de_DE" => _("German"),
                              "fr_FR" => _("French"),
                              "en_EN" => _("English"),
+                             "nl_NL" => _("Dutch"),
                              "zh_CN" => _("Chinese"),
                              "ru_RU" => _("Russian"));
     asort($this->languages);
