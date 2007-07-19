@@ -42,11 +42,11 @@ class passwordMethodssha extends passwordMethod
     if (function_exists("sha1")) {
       $salt= substr(pack("h*", md5(mt_rand())), 0, 8);
       $salt= substr(pack("H*", sha1($salt.$pwd)), 0, 4);
-      $pwd= "{ssha}".base64_encode(pack("H*", sha1($pwd.$salt)).$salt);
+      $pwd= "{SSHA}".base64_encode(pack("H*", sha1($pwd.$salt)).$salt);
       return $pwd;       
     } elseif(function_exists("mhash")) {
       $salt=mhash_keygen_s2k(MHASH_SHA1,$pwd, substr(pack("h*",md5(mt_rand())),0,8),4);
-      $pwd= "{ssha}".base64_encode(mhash(MHASH_SHA1, $pwd.$salt).$salt);
+      $pwd= "{SSHA}".base64_encode(mhash(MHASH_SHA1, $pwd.$salt).$salt);
     } else {
       print_red(_("Can't use ssha for encryption. (Missing function mhash / sha1)"));
       return(false);

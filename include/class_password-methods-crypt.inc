@@ -36,7 +36,7 @@ class passwordMethodCrypt extends passwordMethod
 
   function generate_hash($pwd)
   {
-    return "{crypt}".crypt($pwd, substr(session_id(),0,2));
+    return "{CRYPT}".crypt($pwd, substr(session_id(),0,2));
   }
 }
 
