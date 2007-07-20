@@ -251,7 +251,9 @@ class tabs
 			}else{
         $this->by_object[$key]->pl_notify= FALSE;
       }
-		}
+		}else{
+      $this->by_object[$key]->pl_notify= FALSE;
+    }
 	}
 
 	return ($messages);
