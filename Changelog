@@ -22,7 +22,9 @@ GOsa2 changelog
   - Don't allow moving of objects from administrative units to other
     administrative units where ACL's permit it. Objects "seemed" to
     disapear because the tagging changes.
-  - Added GOsa-desktop package to have icons on the differents menus
+  - Added gosa-desktop package to be able to start it by link
+  - Added method to highlight tabs
+  - Generel translation update for de, es, fr, it, nl, pl, ru, zh
 
 * gosa 2.5.11a
   - Added chinese translation
