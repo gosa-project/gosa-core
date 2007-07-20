@@ -229,20 +229,28 @@ class tabs
 	$this->save_object(TRUE);
 	$messages= array();
 
+  $current_set = FALSE;
+
 	/* Check all plugins */
 	foreach ($this->by_object as $key => $obj){
 		if ($obj->is_account || $ignore_account || $obj->ignore_account){
 	        	@DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,
 	        	        $key, "Checking");
 
-			$messages= $obj->check();
+			$msg= $obj->check();
       if (is_php4()){
         $this->by_object[$key]= $obj;
       }
-			if (count($messages)){
-				$this->current= $key;
-				break;
-			}
+			if (count($msg)){
+        $this->by_object[$key]->pl_notify= TRUE;
+        if(!$current_set){
+          $current_set = TRUE;
+  				$this->current= $key; 
+          $messages = $msg;
+        }
+			}else{
+        $this->by_object[$key]->pl_notify= FALSE;
+      }
 		}
 	}
 
