@@ -71,13 +71,7 @@ $_SESSION['errorsAlreadyPosted']= array();
 $_SESSION['LastError']          = "";
 
 /* Set template compile directory */
-if (isset ($config->data['MAIN']['COMPILE'])){
-  $smarty->compile_dir= $config->data['MAIN']['COMPILE'];
-} else {
-  $smarty->compile_dir= '/var/spool/gosa/';
-}
-
-
+$smarty->compile_dir= '/var/spool/gosa/';
 
 /* Get posted language */
 if(!isset($_SESSION['lang'])){
