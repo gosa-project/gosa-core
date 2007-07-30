@@ -1,4 +1,4 @@
-<script src="TreeMenu.js" language="JavaScript" type="text/javascript"></script>
+<script src="include/TreeMenu.js" language="JavaScript" type="text/javascript"></script>
 
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
 <tr>
