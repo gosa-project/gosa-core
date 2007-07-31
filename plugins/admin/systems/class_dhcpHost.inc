@@ -25,6 +25,7 @@ class dhcpHost extends plugin
   var $dhcpHWAddress= "";
   var $options= array();
   var $statements= array();
+  var $dn= "new";
 
   /* attribute list for save action */
   var $attributes= array();
@@ -34,6 +35,7 @@ class dhcpHost extends plugin
   {
     /* Load statements / options */
     if ($attrs != NULL){
+      $this->dn= "";
 
       /* Load attributes */
       foreach (array("cn", "dhcpHWAddress") as $attr){
@@ -85,160 +87,136 @@ class dhcpHost extends plugin
           "fddi" => _("FDDI"),
           "token-ring" => _("Token Ring")));
 
-    /* Prepare mac address */
-    if ($this->dhcpHWAddress != ""){
-      list($hw0, $hw1, $hw2, $hw3, $hw4, $hw5)= 
-        split (":", preg_replace('/^[^\s]+\s/', '', $this->dhcpHWAddress));
-      for ($i= 0; $i<6; $i++){
-        $name= "hw$i";
-        $smarty->assign("$name", $$name);
-      }
-    }
-
     /* Show main page */
     return($smarty->fetch(get_template_path('dhcphost.tpl', TRUE)));
   }
 
 
-#-------------------
-
   function remove_from_parent()
   {
-	/* Just remove the dn from the ldap, then we're done. Host
-	   entries do not have any entries below themselfes. */
-	$ldap= $this->config->get_ldap_link();
-	$ldap->rmDir($this->orig_dn);
-	show_ldap_error($ldap->get_error());
-
-	/* Optionally execute a command after we're done */
-	$this->postremove();
   }
 
 
   /* Save data to object */
   function save_object()
   {
-  	plugin::save_object();
+    plugin::save_object();
 
-	/* Save remaining attributes */
-	if (isset($_POST['hwtype'])){
+    /* Save remaining attributes */
+    if (isset($_POST['hwtype'])){
 
-		/* Assemble hwAddress */
-		$addr= $_POST['hwtype']." ";
-		for ($i= 0; $i<6; $i++){
-			$addr.= $_POST["hw$i"].":";
-		}
-		$this->dhcpHWAddress= preg_replace('/:$/', '', $addr);
+      /* Assemble hwAddress */
+      $this->dhcpHWAddress= $_POST['hwtype']." ".$_POST['dhcpHWAddress'];
+      $this->cn= validate($_POST['cn']);
 
-		/* Save fixed address */
-		if ($_POST['fixedaddr'] != ""){
-			$this->statements['fixed-address']= $_POST['fixedaddr'];
-		} else {
-			unset ($this->statements['fixed-address']);
-		}
-	}
+      /* Save fixed address */
+      if ($_POST['fixedaddr'] != ""){
+        $this->statements['fixed-address']= $_POST['fixedaddr'];
+      } else {
+        unset ($this->statements['fixed-address']);
+      }
+    }
   }
 
 
   /* Check values */
   function check()
   {
-	$message= array();
+    $message= array();
 
-	/* All required fields are set? */
-	if ($this->cn == ""){
-		$message[]= _("Required field 'Name' is not filled.");
-	}
+    /* All required fields are set? */
+    if ($this->cn == ""){
+      $message[]= _("Required field 'Name' is not filled.");
+    }
 
-	/* cn already used? */
-	if ($this->dn != "new"){
-		$ldap= $this->config->get_ldap_link();
-		$ldap->cd($this->config->current['BASE']);
-		$ldap->search("(&(objectClass=dhcpHost)(cn=".$this->cn."))");
-		if ($ldap->count() >= 1){
-			while ($attrs= $ldap->fetch()){
-				if ($ldap->getDN() != $this->dn){
-					$message[]= _("The name for this host section is already used!");
-					break;
-				}
+    /* cn already used? */
+    if ($this->dn != "new"){
+      # Ask parents container object
+      echo "FIXME: Need to check container object!";
+      $message[]= _("The name for this host section is already used!");
+    }
 
-			}
-		}
-		$ldap->fetch();
-	}
+    /* Check syntax of MAC address */
+    $check= preg_replace('/^[^\s]*\s/', '', $this->dhcpHWAddress);
+    if (!preg_match('/^([0-9a-fA-F]{1,2}:){5}[0-9a-fA-F]{1,2}$/', $check)){
+      $message[]= _("The hardware address specified by you is not valid!");
+    }
 
-	/* Check syntax of MAC address */
-	$check= preg_replace('/^[^\s]*\s/', '', $this->dhcpHWAddress);
-	if (!preg_match('/^([0-9a-fA-F]{1,2}:){5}[0-9a-fA-F]{1,2}$/', $check)){
-		$message[]= _("The hardware address specified by you is not valid!");
-	}
-
-	return $message;
+    return $message;
   }
 
 
   /* Save to LDAP */
   function save()
   {
-	plugin::save();
+    echo "FIXME: Need to implement modified save()!";
+    return;
 
-	/* Generate new dn */
-	if ($this->parent->parent != NULL){
-		$this->dn= "cn=".$this->cn.",".$this->parent->parent;
-	} else {
-		$tmp= preg_replace('/^cn=[^,]+/', '', $this->dn);
-		$this->dn= "cn=".$this->cn.$tmp;
-	}
-	
-	/* Get ldap mode */
-	if ($this->orig_dn != $this->dn){
-		$mode= "add";
-	} else {
-		$mode= "modify";
-	}
+    # If this->dn == "new", create new entry
+    # If this->dn != "new", modify existing entry and place a "modifyied" inside to notify
+    #                       the parent to move/handle it.
+    #                       If CN has changed from former CN, empty out old entry and
+    #                       create a new one.
 
-	/* Assemble new entry - options */
-	if (isset ($this->options) && count ($this->options)){
-		$this->attrs['dhcpOption']= array();
-		foreach ($this->options as $key => $val){
-			$this->attrs['dhcpOption'][]= "$key $val";
-		}
-	} else {
-		if ($mode == "modify"){
-			$this->attrs['dhcpOption']= array();
-		}
-	}
-	
-	/* Assemble new entry - statements */
-	if (isset ($this->statements) && count ($this->statements)){
-		$this->attrs['dhcpStatements']= array();
-		foreach ($this->statements as $key => $val){
-			$this->attrs['dhcpStatements'][]= "$key $val";
-		}
-	} else {
-		if ($mode == "modify"){
-			$this->attrs['dhcpStatements']= array();
-		}
-	}
+    #-------------------------------- Not yet modified from this line on -------------------------------
 
-	/* Do LDAP action */
-	$ldap= $this->config->get_ldap_link();
-        if ($mode == "add"){
-		$ldap->cd($this->config->current['BASE']);
-                $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
-        }
-	$ldap->cd($this->dn);
-	$ldap->$mode($this->attrs);
-	show_ldap_error($ldap->get_error());
-	
-	/* Name changed? Remove orig? */
-	if ($this->orig_dn != $this->dn && $this->orig_dn != "new"){
-		echo "Remove old<br>";
-		$ldap->rmdir($this->orig_dn);
-		show_ldap_error($ldap->get_error());
-	}
+    /* Generate new dn */
+    if ($this->parent->parent != NULL){
+      $this->dn= "cn=".$this->cn.",".$this->parent->parent;
+    } else {
+      $tmp= preg_replace('/^cn=[^,]+/', '', $this->dn);
+      $this->dn= "cn=".$this->cn.$tmp;
+    }
+
+    /* Get ldap mode */
+    if ($this->orig_dn != $this->dn){
+      $mode= "add";
+    } else {
+      $mode= "modify";
+    }
+
+    /* Assemble new entry - options */
+    if (isset ($this->options) && count ($this->options)){
+      $this->attrs['dhcpOption']= array();
+      foreach ($this->options as $key => $val){
+        $this->attrs['dhcpOption'][]= "$key $val";
+      }
+    } else {
+      if ($mode == "modify"){
+        $this->attrs['dhcpOption']= array();
+      }
+    }
+
+    /* Assemble new entry - statements */
+    if (isset ($this->statements) && count ($this->statements)){
+      $this->attrs['dhcpStatements']= array();
+      foreach ($this->statements as $key => $val){
+        $this->attrs['dhcpStatements'][]= "$key $val";
+      }
+    } else {
+      if ($mode == "modify"){
+        $this->attrs['dhcpStatements']= array();
+      }
+    }
+
+    /* Do LDAP action */
+    $ldap= $this->config->get_ldap_link();
+    if ($mode == "add"){
+      $ldap->cd($this->config->current['BASE']);
+      $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
+    }
+    $ldap->cd($this->dn);
+    $ldap->$mode($this->attrs);
+    show_ldap_error($ldap->get_error());
+
+    /* Name changed? Remove orig? */
+    if ($this->orig_dn != $this->dn && $this->orig_dn != "new"){
+      echo "Remove old<br>";
+      $ldap->rmdir($this->orig_dn);
+      show_ldap_error($ldap->get_error());
+    }
   }
-  
+
 }
 
 ?>
