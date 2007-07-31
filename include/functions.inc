@@ -2467,6 +2467,9 @@ function prepare4mailbody($string)
                 "/</",
                 "/>/",
                 "/\?/",
+                "/\&/",
+                "/\(/",
+                "/\)/",
                 "/\"/");
   
   $to = array(  
@@ -2481,6 +2484,9 @@ function prepare4mailbody($string)
                 "%3C",
                 "%3E",
                 "%3F",
+                "%38",
+                "%28",
+                "%29",
                 "%22");
 
   $string = preg_replace($from,$to,$string);
@@ -2516,7 +2522,6 @@ function mac2company($mac)
 
   return ($vendor);
 }
-
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
