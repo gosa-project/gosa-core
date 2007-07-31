@@ -4,8 +4,7 @@
 	<td style="width:100%;vertical-align:top;">
 		{$ZoneList}
 		<input type="submit" name="AddZone" value="{t}Add{/t}" {$servdnsACL}>
-<!--		<input type="submit" name="EditZone" value="{t}Edit{/t}" {$servdnsACL}>-->
-<!--		<input type="submit" name="RemoveZone" value="{t}Remove{/t}" {$servdnsACL}>-->
+<!--		<input type="submit" name="TakeOver" value="{t}Take over{/t}" {$servdnsACL}>-->
 	</td>
 </tr>
 </table>

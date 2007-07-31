@@ -150,7 +150,7 @@ class servdns extends plugin
     /* Create Listbox with existing Zones 
      */
     $ZoneList = new divSelectBox("dNSZones");
-    $ZoneList -> SetHeight(254);
+    $ZoneList -> SetHeight(300);
 
     /* Add entries to divlist
      */
