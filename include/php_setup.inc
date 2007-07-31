@@ -65,7 +65,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
 
   /* Create header as needed */
   if ($error_collector == ""){
-   
+
     /* Mailto body header */ 
     $error_collector_mailto .=prepare4mailbody(
                                 "Oups. Seems like you've catched some kind of bug inside GOsa/PHP. You may want to help ".
@@ -75,9 +75,17 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
                                 "\nGOsa Version: ".get_gosa_version().
                                 "\nDate: ".date("d.m.Y").
                                 "\nTime: ".date("H:i:s").
+                                "\nUser-Agent: ".$_SERVER['HTTP_USER_AGENT']." ".
+                                "(Javascript is ".( (isset($_SESSION['js']) && $_SESSION['js']==FALSE) ? "inactive" : "active" ).")".
                                 "\n\n".
                                 "Please describe what you did to produce this error as detailed as possible. Can you ".
                                 "reproduce this bug using the demo on http://www.gosa-project.org ?".
+                                "\n\n".
+                                "*** PHP runtime information ***".
+                                "\nPHP Version: ".phpversion().
+                                "\nRunning on: ".php_uname().
+                                "\nLoaded Extensions: ".print_array(get_loaded_extensions()).
+                                "\nLDAP Module Version: ".get_module_setting('ldap','RCS Version').
                                 "\n\n".
                                 "*** PHP error information ***\n\n");
 
