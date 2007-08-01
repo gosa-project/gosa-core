@@ -42,6 +42,9 @@ documentation and additional help.
 * Igor Muratov <migor@altlinux.org>
   Various fixes and speed enhancements
 
+* Daniel Nylander <po@danielnylander.se>
+  Swedish translation
+
 * Michael Pasdziernik <mp@secio.de>
   Documentation for GOsa and safe-mode, fixes
 
@@ -50,6 +53,9 @@ documentation and additional help.
 
 * Henning Schmiedehausen <hps@intermeta.de>
   Various fixes, support for user defined people/group base
+
+* Guido Serra
+  Italian translation
 
 * Alfred Schröder <schroeder@gonicus.de>
   German translation

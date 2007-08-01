@@ -52,7 +52,7 @@ class Step_Language extends setup_step
                              "en_EN" => _("English"),
                              "nl_NL" => _("Dutch"),
                              "pl_PL" => _("Polish"),
-                             "sv_SV" => _("Swedish"),
+                             "sv_SE" => _("Swedish"),
                              "zh_CN" => _("Chinese"),
                              "ru_RU" => _("Russian"));
     asort($this->languages);

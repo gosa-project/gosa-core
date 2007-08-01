@@ -189,6 +189,9 @@ function get_browser_language()
   if (preg_match('/zh/', $lang)){
     return ("zh_CN");
   }
+  if (preg_match('/sv/', $lang)){
+    return ("sv_SE");
+  }
 
   return (strtolower($lang)."_".strtoupper($lang));
 }

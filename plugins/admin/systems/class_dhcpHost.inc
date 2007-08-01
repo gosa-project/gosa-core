@@ -27,6 +27,10 @@ class dhcpHost extends plugin
   var $statements= array();
   var $dn= "new";
 
+  /* Subobjects */
+  var $network;
+  var $advanced;
+
   /* attribute list for save action */
   var $attributes= array();
   var $objectclasses= array();
@@ -65,6 +69,11 @@ class dhcpHost extends plugin
       }
 
     }
+
+    /* Load network module */
+    $this->network= new dhcpNetwork();
+    $this->network->options= $this->options;
+    $this->network->statements= $this->statements;
   }
 
   function execute()
@@ -88,7 +97,7 @@ class dhcpHost extends plugin
           "token-ring" => _("Token Ring")));
 
     /* Show main page */
-    return($smarty->fetch(get_template_path('dhcphost.tpl', TRUE)));
+    return($smarty->fetch(get_template_path('dhcphost.tpl', TRUE)).$this->network->execute());
   }
 
 
