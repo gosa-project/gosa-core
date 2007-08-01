@@ -47,8 +47,12 @@ class Step_Language extends setup_step
     $this->languages = array(""      => _("Automatic"),
                              "de_DE" => _("German"),
                              "fr_FR" => _("French"),
+                             "it_IT" => _("Italian"),
+                             "es_ES" => _("Spanish"),
                              "en_EN" => _("English"),
                              "nl_NL" => _("Dutch"),
+                             "pl_PL" => _("Polish"),
+                             "sv_SV" => _("Swedish"),
                              "zh_CN" => _("Chinese"),
                              "ru_RU" => _("Russian"));
     asort($this->languages);
