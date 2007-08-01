@@ -48,9 +48,10 @@
 <!-- Include advanced settings -->
 
 
+<div style='background-color:#F09090;width:100%;height:20px;text-align:right'>
 Temporary escape:
 <input type=submit name="cancel_section" value="{t}Escape{/t}">
-
+</div>
 
 <!-- Place cursor in correct field -->
 <script language="JavaScript" type="text/javascript">

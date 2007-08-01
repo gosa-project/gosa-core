@@ -74,6 +74,9 @@ class dhcpHost extends plugin
     $this->network= new dhcpNetwork();
     $this->network->options= $this->options;
     $this->network->statements= $this->statements;
+    $this->advanced= new dhcpAdvanced();
+    $this->advanced->options= $this->options;
+    $this->advanced->statements= $this->statements;
   }
 
   function execute()
@@ -97,7 +100,7 @@ class dhcpHost extends plugin
           "token-ring" => _("Token Ring")));
 
     /* Show main page */
-    return($smarty->fetch(get_template_path('dhcphost.tpl', TRUE)).$this->network->execute());
+    return($smarty->fetch(get_template_path('dhcphost.tpl', TRUE)).$this->network->execute().$this->advanced->execute());
   }
 
 
