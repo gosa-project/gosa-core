@@ -27,7 +27,7 @@ config:
 # Set alias to gosa
 Alias /gosa /usr/share/gosa/html
 
-Assumed you've installed PHP >= 4.1.0, restart your apache webserver
+Assumed you've installed PHP >= 4.3.10, restart your apache webserver
 and do your first GOsa dry run without configuration:
 
 http[s]://your-server/gosa/setup.php
