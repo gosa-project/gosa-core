@@ -22,10 +22,11 @@ class dhcpHost extends plugin
 {
   /* Used attributes */
   var $cn= "";
+  var $orig_cn= "";
   var $dhcpHWAddress= "";
   var $options= array();
   var $statements= array();
-  var $dn= "new";
+  var $dn= "";
 
   /* Subobjects */
   var $network;
@@ -38,8 +39,9 @@ class dhcpHost extends plugin
   function dhcpHost($attrs)
   {
     /* Load statements / options */
-    if ($attrs != NULL){
-      $this->dn= "";
+    if (is_array($attrs)){
+      $this->dn= $attrs['dn'];
+      $this->new= FALSE;
 
       /* Load attributes */
       foreach (array("cn", "dhcpHWAddress") as $attr){
@@ -68,6 +70,10 @@ class dhcpHost extends plugin
         }
       }
 
+    } else {
+      /* We keep the parent dn here if it's new */
+      $this->dn= $attrs;
+      $this->new= TRUE;
     }
 
     /* Load network module */
@@ -77,6 +83,10 @@ class dhcpHost extends plugin
     $this->advanced= new dhcpAdvanced();
     $this->advanced->options= $this->options;
     $this->advanced->statements= $this->statements;
+    $this->advanced->setAutoStatements(array("fixed-address"));
+
+    /* Save CN for later reference */
+    $this->orig_cn= $this->cn;
   }
 
   function execute()
@@ -98,9 +108,23 @@ class dhcpHost extends plugin
     $smarty->assign("hwtypes", array("ethernet" => _("Ethernet"),
           "fddi" => _("FDDI"),
           "token-ring" => _("Token Ring")));
-
     /* Show main page */
-    return($smarty->fetch(get_template_path('dhcphost.tpl', TRUE)).$this->network->execute().$this->advanced->execute());
+    $display= $smarty->fetch(get_template_path('dhcphost.tpl', TRUE)).$this->network->execute();
+
+    /* Merge arrays for advanced view */
+    foreach (array("options", "statements") as $type){
+      $tmp= array_merge($this->$type, $this->network->$type);
+      $this->advanced->$type= $tmp;
+    }
+
+    $display.= $this->advanced->execute();
+
+    /* Add footer */
+    $display.= "<div style='width:100%;text-align:right;margin-top:5px;'><input type=submit name='save_dhcp' value='"._("Save")."'>".
+               "&nbsp;<input type=submit name='cancel_dhcp' value='"._("Cancel")."'></div>";
+
+
+    return ($display);
   }
 
 
@@ -128,11 +152,21 @@ class dhcpHost extends plugin
         unset ($this->statements['fixed-address']);
       }
     }
+
+    /* Save sub-objects */
+    $this->network->save_object();
+    $this->advanced->save_object();
+
+    /* Merge arrays for advanced view */
+    foreach (array("options", "statements") as $type){
+      $tmp= array_merge($this->$type, $this->network->$type);
+      $this->advanced->$type= $tmp;
+    }
   }
 
 
   /* Check values */
-  function check()
+  function check($cache)
   {
     $message= array();
 
@@ -142,10 +176,14 @@ class dhcpHost extends plugin
     }
 
     /* cn already used? */
-    if ($this->dn != "new"){
-      # Ask parents container object
-      echo "FIXME: Need to check container object!";
-      $message[]= _("The name for this host section is already used!");
+    if ($this->orig_cn != $this->cn || $this->new){
+      
+      foreach($cache as $dn => $dummy){
+        if (preg_match("/^cn=".$this->cn.",/", $dn)){
+          $message[]= _("The name for this host section is already used!");
+          break;
+        }
+      }
     }
 
     /* Check syntax of MAC address */
@@ -154,6 +192,11 @@ class dhcpHost extends plugin
       $message[]= _("The hardware address specified by you is not valid!");
     }
 
+    /* Check external plugins */
+    $net= $this->network->check();
+    $adv= $this->advanced->check();
+    $message= array_merge($message, $net, $adv);
+
     return $message;
   }
 
@@ -161,30 +204,17 @@ class dhcpHost extends plugin
   /* Save to LDAP */
   function save()
   {
-    echo "FIXME: Need to implement modified save()!";
-    return;
-
-    # If this->dn == "new", create new entry
-    # If this->dn != "new", modify existing entry and place a "modifyied" inside to notify
-    #                       the parent to move/handle it.
-    #                       If CN has changed from former CN, empty out old entry and
-    #                       create a new one.
-
-    #-------------------------------- Not yet modified from this line on -------------------------------
-
-    /* Generate new dn */
-    if ($this->parent->parent != NULL){
-      $this->dn= "cn=".$this->cn.",".$this->parent->parent;
-    } else {
-      $tmp= preg_replace('/^cn=[^,]+/', '', $this->dn);
-      $this->dn= "cn=".$this->cn.$tmp;
+    /* Merge arrays for network and advanced view */
+    foreach (array("options", "statements") as $type){
+      $tmp= array_merge($this->$type, $this->network->$type, $this->advanced->$type);
+      $this->$type= $tmp;
     }
 
-    /* Get ldap mode */
-    if ($this->orig_dn != $this->dn){
-      $mode= "add";
+    /* Add cn if we're new */
+    if ($this->new){
+      $this->dn= "cn=".$this->cn.",".$this->dn;
     } else {
-      $mode= "modify";
+      $this->dn= "cn=".$this->cn.preg_replace('/^cn=[^,]+/', '', $this->dn);
     }
 
     /* Assemble new entry - options */
@@ -192,10 +222,6 @@ class dhcpHost extends plugin
       $this->attrs['dhcpOption']= array();
       foreach ($this->options as $key => $val){
         $this->attrs['dhcpOption'][]= "$key $val";
-      }
-    } else {
-      if ($mode == "modify"){
-        $this->attrs['dhcpOption']= array();
       }
     }
 
@@ -205,28 +231,12 @@ class dhcpHost extends plugin
       foreach ($this->statements as $key => $val){
         $this->attrs['dhcpStatements'][]= "$key $val";
       }
-    } else {
-      if ($mode == "modify"){
-        $this->attrs['dhcpStatements']= array();
-      }
     }
 
-    /* Do LDAP action */
-    $ldap= $this->config->get_ldap_link();
-    if ($mode == "add"){
-      $ldap->cd($this->config->current['BASE']);
-      $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
-    }
-    $ldap->cd($this->dn);
-    $ldap->$mode($this->attrs);
-    show_ldap_error($ldap->get_error());
+    /* Move dn to the result */
+    $this->attrs['dn']= $this->dn;
 
-    /* Name changed? Remove orig? */
-    if ($this->orig_dn != $this->dn && $this->orig_dn != "new"){
-      echo "Remove old<br>";
-      $ldap->rmdir($this->orig_dn);
-      show_ldap_error($ldap->get_error());
-    }
+    return ($this->attrs);
   }
 
 }

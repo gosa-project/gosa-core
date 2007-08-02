@@ -23,6 +23,9 @@ class dhcpAdvanced extends plugin
   /* Used attributes */
   var $options= array();
   var $statements= array();
+  var $show_advanced= FALSE;
+  var $autoStatements= array();
+  var $autoOptions= array();
 
   /* attribute list for save action */
   var $attributes= array();
@@ -32,6 +35,8 @@ class dhcpAdvanced extends plugin
   {
     /* This is always an account */
     $this->is_account= TRUE;
+    $this->setAutoStatements();
+    $this->setAutoOptions();
   }
 
   function execute()
@@ -44,7 +49,11 @@ class dhcpAdvanced extends plugin
     }
     if (isset($_POST['delete_statement']) && isset($_POST['dhcpstatements'])){
       $key= preg_replace('/([a-z0-9-]+)\s(.*)$/', '\\1', $_POST['dhcpstatements']);
-      unset($this->statements[$key]);	
+      if (in_array($key, $this->autoStatements)){
+        print_red(_("Can't delete automatic statements. Please use the fields above."));
+      } else {
+        unset($this->statements[$key]);	
+      }
     }
     if (isset($_POST['add_option']) && $_POST['addoption'] != ""){
       $key= preg_replace('/^([a-z0-9-]+)\s(.*)$/', '\\1', $_POST['addoption']);
@@ -53,7 +62,11 @@ class dhcpAdvanced extends plugin
     }
     if (isset($_POST['delete_option']) && isset($_POST['dhcpoptions'])){
       $key= preg_replace('/([a-z0-9-]+)\s(.*)$/', '\\1', $_POST['dhcpoptions']);
-      unset($this->options[$key]);	
+      if (in_array($key, $this->autoOptions)){
+        print_red(_("Can't delete automatic options. Please use the fields above."));
+      } else {
+        unset($this->options[$key]);	
+      }
     }
 
     $smarty= get_smarty();
@@ -61,16 +74,25 @@ class dhcpAdvanced extends plugin
     /* Assign arrays */
     $statements= array();
     foreach ($this->statements as $key => $val){
-      $statements[$key]= "$key $val";
+      if (in_array($key, $this->autoStatements)){
+        $statements[$key]= "$key $val ["._("automatic")."]";
+      } else {
+        $statements[$key]= "$key $val";
+      }
     }
     $smarty->assign("dhcpstatements", $statements);
     $options= array();
     foreach ($this->options as $key => $val){
-      $options[$key]= "$key $val";
+      if (in_array($key, $this->autoOptions)){
+        $options[$key]= "$key $val ["._("automatic")."]";
+      } else {
+        $options[$key]= "$key $val";
+      }
     }
     $smarty->assign("dhcpoptions", $options);
 
     /* Show main page */
+    $smarty->assign("show_advanced", $this->show_advanced);
     return ($smarty->fetch (get_template_path('dhcp_advanced.tpl', TRUE)));
   }
 
@@ -82,6 +104,12 @@ class dhcpAdvanced extends plugin
   /* Save data to object */
   function save_object()
   {
+    if (isset($_POST['show_advanced'])){
+      $this->show_advanced= TRUE;
+    }
+    if (isset($_POST['hide_advanced'])){
+      $this->show_advanced= FALSE;
+    }
   }
 
 
@@ -97,6 +125,20 @@ class dhcpAdvanced extends plugin
   /* Save to LDAP */
   function save()
   {
+  }
+
+
+  function setAutoOptions($addopt= array())
+  {
+    $options= array("routers", "domain-name", "subnet-mask", "broadcast-address");
+    $this->autoOptions= array_merge($options, $addopt);
+  }
+
+
+  function setAutoStatements($addstat= array())
+  {
+    $statements= array("filename", "next-server", "get-lease-hostnames", "use-host-decl-names");
+    $this->autoStatements= array_merge($statements, $addstat);
   }
 
 }

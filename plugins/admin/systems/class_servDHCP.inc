@@ -34,15 +34,37 @@ class servdhcp extends plugin
     if (isset($_POST['create_section']) && isset($_POST['section'])){
       $section= $_POST['section'];
       if (isset(dhcpNewSectionDialog::$sectionMap[$section])){
-        $this->dialog= new $section(NULL);
+        $this->dialog= new $section($this->dn);
+        $this->current_object= "";
       } else {
         $this->dialog= NULL;
       }
     }
 
     /* Cancel section creation? */
-    if (isset($_POST['cancel_section'])){
+    if (isset($_POST['cancel_section']) || isset($_POST['cancel_dhcp'])){
       $this->dialog= NULL;
+    }
+
+    /* Save changes */
+    if (isset($_POST['save_dhcp'])){
+      $this->dialog->save_object();
+      $messages= $this->dialog->check($this->dhcpObjectCache);
+      if (count($messages)){
+        show_errors($messages);
+      } else {
+        $dn= $this->dialog->dn;
+        $data= $this->dialog->save();
+        if ($this->current_object= ""){
+          echo "SAVE new entry";
+        } else {
+          if ($dn != $data['dn']){
+            echo "SAVE old entry with new dn";
+          } else {
+            echo "SAVE old entry";
+          }
+        }
+      }
     }
 
     /* Remove section? */
@@ -82,6 +104,7 @@ class servdhcp extends plugin
         $dn= base64_decode(preg_replace('/^editDhcp_([^_]+)_x$/', '\1', $name));
         if (isset($this->dhcpObjectCache[$dn])){
           $section= $this->objectType($dn);
+          $this->current_object= $dn;
           $this->dialog= new $section($this->dhcpObjectCache[$dn]);
         }
       }

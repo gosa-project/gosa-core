@@ -154,7 +154,8 @@ class dhcpNetwork extends plugin
        */
 
       /* Options */
-      foreach (array("routers" => "routers", "domain-name" => "domain") as $key => $val){
+      foreach (array("routers" => "routers", "domain-name" => "domain", "subnet-mask" => "subnet_mask",
+                     "broadcast-address" => "broadcast_address") as $key => $val){
 
         if ($_POST["$val"] == ''){
           unset($this->options["$key"]);
@@ -169,21 +170,6 @@ class dhcpNetwork extends plugin
           unset($this->statements["$key"]);
         } else {
           $this->statements["$key"]= '"'.$_POST["$val"].'"';
-        }
-      }
-
-      /* Netmask / Broadcast */
-      foreach (array("subnet-mask" => "nm", "broadcast-address" => "bc")
-          as $key => $val){
-
-        $tmp= "";
-        for ($i= 0; $i<4; $i++){
-          $tmp.= $_POST["$val$i"].".";
-        }
-        if ($tmp == "...."){
-          unset($this->options["$key"]);
-        } else {
-          $this->options["$key"]= preg_replace('/\.$/', '', $tmp);
         }
       }
 
@@ -214,23 +200,11 @@ class dhcpNetwork extends plugin
       }
       $tmp= preg_replace('/^[^\s]+\s/', '', $this->options["$key"]);
 
-      list($n0,$n1,$n2,$n3)= split('\.', $tmp);
-      for ($i= 0; $i<4; $i++){
-        $name= "n$i";
-        if (preg_match('/^[0-9]+$/', $$name)){
-          $val= (int)($$name);
-          if ($val < 0 || $val > 255){
-            $message[]= sprintf(_("Error in definition of '%s'!"), $typ);
-            break;
-          }
-        } else {
-          $message[]= sprintf(_("Illegal characters in definition of '%s'!"), $typ);
-          break;
-        }
+      if (!is_ip($tmp)){
+        $message[]= sprintf(_("Error in definition of '%s'!"), $typ);
       }
     }
 
-    #FIXME: There are some more things we could test -> valid netmask, range
     return $message;
   }
 
