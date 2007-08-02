@@ -1,6 +1,9 @@
 GOsa2 changelog
 ===============
 
+* gosa 2.5.13
+  - Added the ssh plugin
+
 * gosa 2.5.12
   - Fixed problems with automatic reverse zones
   - Fixed several IE6 related Java-Script problems
