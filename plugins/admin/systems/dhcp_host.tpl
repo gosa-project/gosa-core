@@ -31,7 +31,7 @@
      </td>
     </tr>
     <tr>
-     <td>{t}Hardware address{/t}</td>
+     <td>{t}Hardware address{/t}{$must}</td>
      <td>
       <input type='text' name='dhcpHWAddress' size='20' maxlength='18' value='{$dhcpHWAddress}'>
      </td>

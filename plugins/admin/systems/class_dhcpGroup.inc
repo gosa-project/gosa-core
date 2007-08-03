@@ -1,7 +1,7 @@
 <?php
 /*
   This code is part of GOsa (https://gosa.gonicus.de)
-  Copyright (C) 2003-2007 Cajus Pollmeier
+  Copyright (C) 2003  Cajus Pollmeier
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -18,17 +18,13 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-class dhcpHost extends plugin
+class dhcpGroup extends plugin
 {
   /* Used attributes */
   var $cn= "";
-  var $orig_cn= "";
-  var $dhcpHWAddress= "";
   var $options= array();
   var $statements= array();
-  var $dn= "";
-
-  /* Subobjects */
+  var $orig_cn= "";
   var $network;
   var $advanced;
 
@@ -36,40 +32,30 @@ class dhcpHost extends plugin
   var $attributes= array();
   var $objectclasses= array();
 
-  function dhcpHost($attrs)
+  function dhcpGroup($attrs)
   {
     /* Load statements / options */
     if (is_array($attrs)){
       $this->dn= $attrs['dn'];
       $this->new= FALSE;
 
-      /* Load attributes */
-      foreach (array("cn", "dhcpHWAddress") as $attr){
-        if (isset($attrs[$attr][0])){
-          $this->$attr= $attrs[$attr][0];
-        }
-      }
 
       /* Load options */
       if (isset($attrs['dhcpOption'])){
-        foreach ($attrs['dhcpOption'] as $opt){
-          if ($opt == "count"){
-            continue;
-          }
-          $idx= preg_replace('/\s.+$/', '', $opt);
-          $value= preg_replace('/^[^\s]+\s/', '', $opt);
+        for($i= 0; $i<$attrs['dhcpOption']['count']; $i++){
+          $tmp= $attrs['dhcpOption'][$i];
+          $idx= preg_replace('/\s.+$/', '', $tmp);
+          $value= preg_replace('/^[^\s]+\s/', '', $tmp);
           $this->options[$idx]= $value;
         }
       }
 
       /* Load statements */
       if (isset($attrs['dhcpStatements'])){
-        foreach ($attrs['dhcpStatements'] as $opt){
-          if ($opt == "count"){
-            continue;
-          }
-          $idx= preg_replace('/\s.+$/', '', $opt);
-          $value= preg_replace('/^[^\s]+\s/', '', $opt);
+        for($i= 0; $i<$attrs['dhcpStatements']['count']; $i++){
+          $tmp= $attrs['dhcpStatements'][$i];
+          $idx= preg_replace('/\s.+$/', '', $tmp);
+          $value= preg_replace('/^[^\s]+\s/', '', $tmp);
           $this->statements[$idx]= $value;
         }
       }
@@ -97,23 +83,13 @@ class dhcpHost extends plugin
   {
     $smarty= get_smarty();
     $smarty->assign("cn", $this->cn);
-    $smarty->assign("dhcpHWAddress", preg_replace('/^[^ ]+ /', '', $this->dhcpHWAddress));
 
-    /* Create fixed address */
-    if (isset($this->statements['fixed-address'])){
-      $smarty->assign("fixedaddr", $this->statements['fixed-address']);
-    } else {
-      $smarty->assign("fixedaddr", "");
+    if ($this->dn != "new"){
+      $smarty->assign("mode", "readonly");
     }
 
-    /* Prepare hw type selector */
-    $hwtype= preg_replace('/\s.*$/', '', $this->dhcpHWAddress);
-    $smarty->assign("hwtype", $hwtype);
-    $smarty->assign("hwtypes", array("ethernet" => _("Ethernet"),
-          "fddi" => _("FDDI"),
-          "token-ring" => _("Token Ring")));
     /* Show main page */
-    $display= $smarty->fetch(get_template_path('dhcp_host.tpl', TRUE)).$this->network->execute();
+    $display= $smarty->fetch (get_template_path('dhcp_group.tpl', TRUE)).$this->network->execute();
 
     /* Merge arrays for advanced view */
     foreach (array("options", "statements") as $type){
@@ -146,31 +122,6 @@ class dhcpHost extends plugin
   /* Save data to object */
   function save_object()
   {
-    plugin::save_object();
-
-    /* Save remaining attributes */
-    if (isset($_POST['hwtype'])){
-
-      /* Assemble hwAddress */
-      $this->dhcpHWAddress= $_POST['hwtype']." ".$_POST['dhcpHWAddress'];
-      $this->cn= validate($_POST['cn']);
-
-      /* Save fixed address */
-      if ($_POST['fixedaddr'] != ""){
-        $this->statements['fixed-address']= $_POST['fixedaddr'];
-      } else {
-        unset ($this->statements['fixed-address']);
-      }
-    }
-
-    /* Strip network objects */
-    foreach (array("routers", "domain-name", "subnet-mask", "broadcast-address") as $toberemoved){
-      unset($this->options[$toberemoved]);
-    }
-    foreach (array("filename", "next-server") as $toberemoved){
-      unset($this->statements[$toberemoved]);
-    }
-
     /* Save sub-objects */
     $this->network->save_object();
     $this->advanced->save_object();
@@ -184,7 +135,7 @@ class dhcpHost extends plugin
 
 
   /* Check values */
-  function check($cache)
+  function check()
   {
     $message= array();
 
@@ -194,26 +145,22 @@ class dhcpHost extends plugin
     }
 
     /* cn already used? */
-    if ($this->orig_cn != $this->cn || $this->new){
-      
-      foreach($cache as $dn => $dummy){
-        if (preg_match("/^cn=".$this->cn.",/", $dn) && count($dummy)){
-          $message[]= _("The name for this host section is already used!");
-          break;
+    echo "TODO: no ldap check";
+    if ($this->dn != "new"){
+      $ldap= $this->config->get_ldap_link();
+      $ldap->cd($this->config->current['BASE']);
+      $ldap->search("(&(objectClass=dhcpGroup)(cn=".$this->cn."))");
+      if ($ldap->count() >= 1){
+        while ($attrs= $ldap->fetch()){
+          if ($ldap->getDN() != $this->dn){
+            $message[]= _("The name for this group section is already used!");
+            break;
+          }
+
         }
       }
+      $ldap->fetch();
     }
-
-    /* Check syntax of MAC address */
-    $check= preg_replace('/^[^\s]*\s/', '', $this->dhcpHWAddress);
-    if (!preg_match('/^([0-9a-fA-F]{1,2}:){5}[0-9a-fA-F]{1,2}$/', $check)){
-      $message[]= _("The hardware address specified by you is not valid!");
-    }
-
-    /* Check external plugins */
-    $net= $this->network->check();
-    $adv= $this->advanced->check();
-    $message= array_merge($message, $net, $adv);
 
     return $message;
   }
@@ -222,47 +169,55 @@ class dhcpHost extends plugin
   /* Save to LDAP */
   function save()
   {
-    /* Merge arrays for network and advanced view */
-    foreach (array("options", "statements") as $type){
-      $tmp= array_merge($this->$type, $this->network->$type, $this->advanced->$type);
-      $this->$type= $tmp;
+    echo "TODO: save";
+    return;
+
+    /* Get ldap mode */
+    if ($this->dn == "new"){
+      $mode= "add";
+    } else {
+      $mode= "modify";
     }
 
-    /* Add cn if we're new */
-    if ($this->new){
-      $this->dn= "cn=".$this->cn.",".$this->dn;
-    } else {
-      $this->dn= "cn=".$this->cn.preg_replace('/^cn=[^,]+/', '', $this->dn);
+    /* Generate new dn */
+    if ($this->parent->parent != NULL && $this->dn == "new"){
+      $this->dn= "cn=".$this->cn.",".$this->parent->parent;
     }
+
 
     /* Assemble new entry - options */
-    $this->attrs['dhcpOption']= array();
     if (isset ($this->options) && count ($this->options)){
+      $this->attrs['dhcpOption']= array();
       foreach ($this->options as $key => $val){
         $this->attrs['dhcpOption'][]= "$key $val";
+      }
+    } else {
+      if ($mode == "modify"){
+        $this->attrs['dhcpOption']= array();
       }
     }
 
     /* Assemble new entry - statements */
-    $this->attrs['dhcpStatements']= array();
     if (isset ($this->statements) && count ($this->statements)){
+      $this->attrs['dhcpStatements']= array();
       foreach ($this->statements as $key => $val){
         $this->attrs['dhcpStatements'][]= "$key $val";
       }
-    }
-
-    /* Move dn to the result */
-    $this->attrs['dn']= $this->dn;
-    $this->attrs['cn']= array($this->cn);
-    if ($this->dhcpHWAddress != ""){
-      $this->attrs['dhcpHWAddress']= array($this->dhcpHWAddress);
     } else {
-      $this->attrs['dhcpHWAddress']= array();
+      if ($mode == "modify"){
+        $this->attrs['dhcpStatements']= array();
+      }
     }
-    $this->attrs['objectClass']= array('top', 'dhcpHost');
-    $this->attrs['MODIFIED']= TRUE;
 
-    return ($this->attrs);
+    /* Do LDAP action */
+    $ldap= $this->config->get_ldap_link();
+    if ($mode == "add"){
+      $ldap->cd($this->config->current['BASE']);
+      $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
+    }
+    $ldap->cd($this->dn);
+    $ldap->$mode($this->attrs);
+    show_ldap_error($ldap->get_error());
   }
 
 }
