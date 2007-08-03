@@ -11,10 +11,24 @@ class servdhcp extends plugin
   var $dhcpSections= array();
   var $dhcpObjectCache= array();
   var $current_object= "";
+  var $types= array();
+  var $serviceDN= "";
 
   function servdhcp ($config, $dn= NULL, $parent= NULL)
   {
     plugin::plugin ($config, $dn, $parent);
+
+    $this->types= array(  "dhcpLog" => _("Logging"),
+            "dhcpService" => _("Global options"),
+            "dhcpClass" => _("Class"),
+            "dhcpSubClass" => _("Subclass"),
+            "dhcpLeases" => _("Lease"),
+            "dhcpHost" => _("Host"),
+            "dhcpGroup" => _("Group"),
+            "dhcpPool" => _("Pool"),
+            "dhcpSubnet" => _("Subnet"),
+            "dhcpFailOverPeer" => _("Failover peer"),
+            "dhcpSharedNetwork" => _("Shared network"));
 
     /* Load information about available services */
     $this->reload(); 
@@ -34,7 +48,7 @@ class servdhcp extends plugin
     if (isset($_POST['create_section']) && isset($_POST['section'])){
       $section= $_POST['section'];
       if (isset(dhcpNewSectionDialog::$sectionMap[$section])){
-        $this->dialog= new $section($this->dn);
+        $this->dialog= new $section($this->current_object);
         $this->current_object= "";
       } else {
         $this->dialog= NULL;
@@ -54,16 +68,32 @@ class servdhcp extends plugin
         show_errors($messages);
       } else {
         $dn= $this->dialog->dn;
+        $class= get_class($this->dialog);
+        $type= $this->types[$class];
+        $indent= substr_count(preg_replace("/".$this->serviceDN."/", '', $dn), ",");
+        $spaces= "";
+        for ($i= 0; $i<$indent; $i++){
+          $spaces.= "&nbsp;&nbsp;&nbsp;&nbsp;";
+        }
         $data= $this->dialog->save();
-        if ($this->current_object= ""){
-          echo "SAVE new entry";
+        if ($this->current_object == ""){
+          /* New object */
+          $this->dhcpObjectCache[$data['dn']]= $data;
+          $spaces.= "&nbsp;&nbsp;&nbsp;&nbsp;";
+          $this->dhcpSections[$data['dn']]= "$spaces$type '".preg_replace('/^[^=]+=([^,]+),.*$/', '\1', $data['dn'])."'";
         } else {
           if ($dn != $data['dn']){
-            echo "SAVE old entry with new dn";
+            /* Old object, new name */
+            $this->dhcpObjectCache[$dn]= array();
+            unset($this->dhcpSections[$dn]);
+            $this->dhcpObjectCache[$data['dn']]= $data;
+            $this->dhcpSections[$data['dn']]= "$spaces$type '".preg_replace('/^[^=]+=([^,]+),.*$/', '\1', $data['dn'])."'";
           } else {
-            echo "SAVE old entry";
+            /* Old object, old name */
+            $this->dhcpObjectCache[$data['dn']]= $data;
           }
         }
+        $this->dialog= NULL;
       }
     }
 
@@ -206,10 +236,58 @@ class servdhcp extends plugin
   /* Save to LDAP */
   function save()
   {
-    plugin::save();
+    $ldap= $this->config->get_ldap_link();
 
-    /* Optionally execute a command after we're done */
-    #$this->handle_post_events($mode);
+    foreach ($this->dhcpObjectCache as $dn => $data){
+
+      /* Remove entry? */
+      if (count($data) == 0){
+        /* Check if exists, then remove... */
+        if($ldap->cat($dn)){
+          $ldap->rmdir($dn);
+          show_ldap_error($ldap->get_error(), _("Can't remove DHCP object!"));
+        }
+        continue;
+      }
+
+      /* Modify existing entry? */
+      if (isset($data['MODIFIED'])){
+
+        if($ldap->cat($dn)){
+          $modify= TRUE;
+        } else {
+          $modify= FALSE;
+        }
+
+        /* Build new entry */
+        $attrs= array();
+        foreach ($data as $attribute => $values){
+          if ($attribute == "MODIFIED" || $attribute == "dn"){
+            continue;
+          }
+          if (count($values)){
+            if (count($values) == 1){
+              $attrs[$attribute]= $values[0];
+            } else {
+              $attrs[$attribute]= $values;
+            }
+          } else {
+            if ($modify){
+              $attrs[$attribute]= array();
+            }
+          }
+        }
+
+        $ldap->cd($dn);
+        if ($modify){
+          $ldap->modify($attrs);
+          show_ldap_error($ldap->get_error(), _("Can't save DHCP object!"));
+        } else {
+          $ldap->add($attrs);
+          show_ldap_error($ldap->get_error(), _("Can't save DHCP object!"));
+        }
+      }
+    }
   }
 
 
@@ -234,28 +312,24 @@ class servdhcp extends plugin
       /* Read all sub entries to place here */
       $ldap->cd($value['dn']);
       $ldap->search("(|(objectClass=dhcpLog)(objectClass=dhcpClass)(objectClass=dhcpSubClass)(objectClass=dhcpLeases)(objectClass=dhcpHost)(objectClass=dhcpGroup)(objectClass=dhcpPool)(objectClass=dhcpSubnet)(objectClass=dhcpSharedNetwork)(objectClass=dhcpOptions)(objectClass=dhcpTSigKey)(objectClass=dhcpDnsZone)(objectClass=dhcpFailOverPeer))", array());
+      $this->serviceDN= $value['dn'];
 
       while ($attrs= $ldap->fetch()){
-        $this->dhcpObjectCache[$ldap->getDN()]= $attrs;
-        $tmp= preg_replace("/".$value['dn']."/", "", $ldap->getDN());
+        $sattrs= array();
+        for ($i= 0; $i<$attrs['count']; $i++){
+          $sattrs[$attrs[$i]]= $attrs[$attrs[$i]];
+          unset($sattrs[$attrs[$i]]['count']);
+        }
+        $sattrs['dn']= $ldap->getDN();
+        $this->dhcpObjectCache[$ldap->getDN()]= $sattrs;
+        $tmp= preg_replace("/".$this->serviceDN."/", "", $ldap->getDN());
         $indent= substr_count($tmp, ",");
         $spaces= "";
         for ($i= 0; $i<$indent; $i++){
           $spaces.= "&nbsp;&nbsp;&nbsp;&nbsp;";
         }
-        $types= array(  "dhcpLog" => _("Logging"),
-            "dhcpService" => _("Global options"),
-            "dhcpClass" => _("Class"),
-            "dhcpSubClass" => _("Subclass"),
-            "dhcpLeases" => _("Lease"),
-            "dhcpHost" => _("Host"),
-            "dhcpGroup" => _("Group"),
-            "dhcpPool" => _("Pool"),
-            "dhcpSubnet" => _("Subnet"),
-            "dhcpFailOverPeer" => _("Failover peer"),
-            "dhcpSharedNetwork" => _("Shared network"));
 
-        foreach ($types as $key => $val){
+        foreach ($this->types as $key => $val){
           if (in_array("$key", $attrs['objectClass'])){
             $type= $val;
             break;

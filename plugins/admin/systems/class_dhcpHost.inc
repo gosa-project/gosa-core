@@ -52,20 +52,24 @@ class dhcpHost extends plugin
 
       /* Load options */
       if (isset($attrs['dhcpOption'])){
-        for($i= 0; $i<$attrs['dhcpOption']['count']; $i++){
-          $tmp= $attrs['dhcpOption'][$i];
-          $idx= preg_replace('/\s.+$/', '', $tmp);
-          $value= preg_replace('/^[^\s]+\s/', '', $tmp);
+        foreach ($attrs['dhcpOption'] as $opt){
+          if ($opt == "count"){
+            continue;
+          }
+          $idx= preg_replace('/\s.+$/', '', $opt);
+          $value= preg_replace('/^[^\s]+\s/', '', $opt);
           $this->options[$idx]= $value;
         }
       }
 
       /* Load statements */
       if (isset($attrs['dhcpStatements'])){
-        for($i= 0; $i<$attrs['dhcpStatements']['count']; $i++){
-          $tmp= $attrs['dhcpStatements'][$i];
-          $idx= preg_replace('/\s.+$/', '', $tmp);
-          $value= preg_replace('/^[^\s]+\s/', '', $tmp);
+        foreach ($attrs['dhcpStatements'] as $opt){
+          if ($opt == "count"){
+            continue;
+          }
+          $idx= preg_replace('/\s.+$/', '', $opt);
+          $value= preg_replace('/^[^\s]+\s/', '', $opt);
           $this->statements[$idx]= $value;
         }
       }
@@ -118,6 +122,12 @@ class dhcpHost extends plugin
     }
 
     $display.= $this->advanced->execute();
+
+    /* Merge back for removals */
+    foreach (array("options", "statements") as $type){
+      $this->$type= $this->advanced->$type;
+      $this->network->$type= $this->advanced->$type;
+    }
 
     /* Add footer */
     $display.= "<div style='width:100%;text-align:right;margin-top:5px;'><input type=submit name='save_dhcp' value='"._("Save")."'>".
@@ -179,7 +189,7 @@ class dhcpHost extends plugin
     if ($this->orig_cn != $this->cn || $this->new){
       
       foreach($cache as $dn => $dummy){
-        if (preg_match("/^cn=".$this->cn.",/", $dn)){
+        if (preg_match("/^cn=".$this->cn.",/", $dn) && count($dummy)){
           $message[]= _("The name for this host section is already used!");
           break;
         }
@@ -218,16 +228,16 @@ class dhcpHost extends plugin
     }
 
     /* Assemble new entry - options */
+    $this->attrs['dhcpOption']= array();
     if (isset ($this->options) && count ($this->options)){
-      $this->attrs['dhcpOption']= array();
       foreach ($this->options as $key => $val){
         $this->attrs['dhcpOption'][]= "$key $val";
       }
     }
 
     /* Assemble new entry - statements */
+    $this->attrs['dhcpStatements']= array();
     if (isset ($this->statements) && count ($this->statements)){
-      $this->attrs['dhcpStatements']= array();
       foreach ($this->statements as $key => $val){
         $this->attrs['dhcpStatements'][]= "$key $val";
       }
@@ -235,6 +245,14 @@ class dhcpHost extends plugin
 
     /* Move dn to the result */
     $this->attrs['dn']= $this->dn;
+    $this->attrs['cn']= array($this->cn);
+    if ($this->dhcpHWAddress != ""){
+      $this->attrs['dhcpHWAddress']= array($this->dhcpHWAddress);
+    } else {
+      $this->attrs['dhcpHWAddress']= array();
+    }
+    $this->attrs['objectClass']= array('top', 'dhcpHost');
+    $this->attrs['MODIFIED']= TRUE;
 
     return ($this->attrs);
   }
