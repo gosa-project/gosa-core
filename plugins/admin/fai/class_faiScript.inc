@@ -257,8 +257,23 @@ class faiScript extends plugin
     $divlist = new divlist("FAIscripts");
     $plug = $_GET['plug'];
 
-    $divlist->SetHeader(array(  array("string"=>"<a href='?plug=".$plug."&amp;sort=name'>"._("Name")."</a>"),
-          array("string"=>"<a href='?plug=".$plug."&amp;sort=priority'>"._("Priority")."</a>"),
+     if($this->sort_order == "up"){
+       $dir = "<img src='images/sort_up.png' title='"._("Sort direction")."' alt='\/' border=0>";
+     }else{
+       $dir = "<img src='images/sort_down.png' title='"._("Sort direction")."' alt='/\' border=0>";
+     }
+
+     if($this->sort_by == "name"){
+       $sort_name = $dir;
+       $sort_prio = "";
+     }else{
+       $sort_name = "";
+       $sort_prio = $dir;
+     }
+
+     $divlist->SetHeader(array(  
+          array("string"=>"<a href='?plug=".$plug."&amp;sort=name'>"._("Name").$sort_name."</a>"),
+          array("string"=>"<a href='?plug=".$plug."&amp;sort=priority'>".$sort_prio._("Priority")."</a>"),
           array("string"=>_("Download")),
           array("string"=>_("Action"))));
     $divlist->SetHeight(300);
