@@ -53,9 +53,6 @@ class dhcpHost extends plugin
       /* Load options */
       if (isset($attrs['dhcpOption'])){
         foreach ($attrs['dhcpOption'] as $opt){
-          if ($opt == "count"){
-            continue;
-          }
           $idx= preg_replace('/\s.+$/', '', $opt);
           $value= preg_replace('/^[^\s]+\s/', '', $opt);
           $this->options[$idx]= $value;
@@ -65,9 +62,6 @@ class dhcpHost extends plugin
       /* Load statements */
       if (isset($attrs['dhcpStatements'])){
         foreach ($attrs['dhcpStatements'] as $opt){
-          if ($opt == "count"){
-            continue;
-          }
           $idx= preg_replace('/\s.+$/', '', $opt);
           $value= preg_replace('/^[^\s]+\s/', '', $opt);
           $this->statements[$idx]= $value;

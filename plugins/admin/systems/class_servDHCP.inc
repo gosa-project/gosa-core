@@ -85,9 +85,32 @@ class servdhcp extends plugin
           if ($dn != $data['dn']){
             /* Old object, new name */
             $this->dhcpObjectCache[$dn]= array();
-            unset($this->dhcpSections[$dn]);
             $this->dhcpObjectCache[$data['dn']]= $data;
-            $this->dhcpSections[$data['dn']]= "$spaces$type '".preg_replace('/^[^=]+=([^,]+),.*$/', '\1', $data['dn'])."'";
+
+            /* If we renamed a section, we've to rename a couple of objects, too */
+            foreach ($this->dhcpObjectCache as $key => $dsc){
+              if (preg_match("/,$dn$/", $key)){
+                $new_dn= preg_replace("/,$dn$/", ",".$data['dn'], $key);
+                $dsc['MODIFIED']= TRUE;
+                $this->dhcpObjectCache[$new_dn]= $dsc;
+                unset($this->dhcpObjectCache[$key]);
+              }
+            }
+            $newsects= array();
+            foreach ($this->dhcpSections as $key => $dsc){
+              if ($key == $dn){
+                $newsects[$data['dn']]= "$spaces$type '".preg_replace('/^[^=]+=([^,]+),.*$/', '\1', $data['dn'])."'";
+                continue;
+              }
+              if (preg_match("/,$dn$/", $key)){
+                $new_dn= preg_replace("/,$dn$/", ",".$data['dn'], $key);
+                $newsects[$new_dn]= $dsc;
+              } else {
+                $newsects[$key]= $dsc;
+              }
+            }
+            $this->dhcpSections= $newsects;
+
           } else {
             /* Old object, old name */
             $this->dhcpObjectCache[$data['dn']]= $data;
@@ -244,7 +267,7 @@ class servdhcp extends plugin
       if (count($data) == 0){
         /* Check if exists, then remove... */
         if($ldap->cat($dn)){
-          $ldap->rmdir($dn);
+          $ldap->rmdir_recursive($dn);
           show_ldap_error($ldap->get_error(), _("Can't remove DHCP object!"));
         }
         continue;

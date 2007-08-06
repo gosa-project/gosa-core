@@ -7,7 +7,7 @@
   </td> 
   <td>
    <input type='text' name='cn' size='25' maxlength='80' value='{$cn}'
-        {$mode} title='{t}Name of group{/t}'>
+        title='{t}Name of group{/t}'>
   </td>
  </tr>
 </table>

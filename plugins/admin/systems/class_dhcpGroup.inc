@@ -37,25 +37,23 @@ class dhcpGroup extends plugin
     /* Load statements / options */
     if (is_array($attrs)){
       $this->dn= $attrs['dn'];
+      $this->cn= $attrs['cn'][0];
       $this->new= FALSE;
-
 
       /* Load options */
       if (isset($attrs['dhcpOption'])){
-        for($i= 0; $i<$attrs['dhcpOption']['count']; $i++){
-          $tmp= $attrs['dhcpOption'][$i];
-          $idx= preg_replace('/\s.+$/', '', $tmp);
-          $value= preg_replace('/^[^\s]+\s/', '', $tmp);
+        foreach ($attrs['dhcpOption'] as $opt){
+          $idx= preg_replace('/\s.+$/', '', $opt);
+          $value= preg_replace('/^[^\s]+\s/', '', $opt);
           $this->options[$idx]= $value;
         }
       }
 
       /* Load statements */
       if (isset($attrs['dhcpStatements'])){
-        for($i= 0; $i<$attrs['dhcpStatements']['count']; $i++){
-          $tmp= $attrs['dhcpStatements'][$i];
-          $idx= preg_replace('/\s.+$/', '', $tmp);
-          $value= preg_replace('/^[^\s]+\s/', '', $tmp);
+        foreach ($attrs['dhcpStatements'] as $opt){
+          $idx= preg_replace('/\s.+$/', '', $opt);
+          $value= preg_replace('/^[^\s]+\s/', '', $opt);
           $this->statements[$idx]= $value;
         }
       }
@@ -83,10 +81,6 @@ class dhcpGroup extends plugin
   {
     $smarty= get_smarty();
     $smarty->assign("cn", $this->cn);
-
-    if ($this->dn != "new"){
-      $smarty->assign("mode", "readonly");
-    }
 
     /* Show main page */
     $display= $smarty->fetch (get_template_path('dhcp_group.tpl', TRUE)).$this->network->execute();
@@ -122,6 +116,11 @@ class dhcpGroup extends plugin
   /* Save data to object */
   function save_object()
   {
+    /* Save cn */
+    if (isset($_POST['cn'])){
+      $this->cn= validate($_POST['cn']);
+    }
+
     /* Save sub-objects */
     $this->network->save_object();
     $this->advanced->save_object();
@@ -135,7 +134,7 @@ class dhcpGroup extends plugin
 
 
   /* Check values */
-  function check()
+  function check($cache)
   {
     $message= array();
 
@@ -143,23 +142,8 @@ class dhcpGroup extends plugin
     if ($this->cn == ""){
       $message[]= _("Required field 'Name' is not filled.");
     }
-
-    /* cn already used? */
-    echo "TODO: no ldap check";
-    if ($this->dn != "new"){
-      $ldap= $this->config->get_ldap_link();
-      $ldap->cd($this->config->current['BASE']);
-      $ldap->search("(&(objectClass=dhcpGroup)(cn=".$this->cn."))");
-      if ($ldap->count() >= 1){
-        while ($attrs= $ldap->fetch()){
-          if ($ldap->getDN() != $this->dn){
-            $message[]= _("The name for this group section is already used!");
-            break;
-          }
-
-        }
-      }
-      $ldap->fetch();
+    if (!preg_match('/^[a-z0-9_-]*$/i', $this->cn)){
+      $message[]= _("Field 'Name' contains illegal characters.");
     }
 
     return $message;
@@ -169,56 +153,44 @@ class dhcpGroup extends plugin
   /* Save to LDAP */
   function save()
   {
-    echo "TODO: save";
-    return;
+    /* Merge arrays for network and advanced view */
+    foreach (array("options", "statements") as $type){
+      $tmp= array_merge($this->$type, $this->network->$type, $this->advanced->$type);
+      $this->$type= $tmp;
+    }
 
-    /* Get ldap mode */
-    if ($this->dn == "new"){
-      $mode= "add";
+    /* Add cn if we're new */
+    if ($this->new){
+      $this->dn= "cn=".$this->cn.",".$this->dn;
     } else {
-      $mode= "modify";
+      $this->dn= "cn=".$this->cn.preg_replace('/^cn=[^,]+/', '', $this->dn);
     }
-
-    /* Generate new dn */
-    if ($this->parent->parent != NULL && $this->dn == "new"){
-      $this->dn= "cn=".$this->cn.",".$this->parent->parent;
-    }
-
 
     /* Assemble new entry - options */
+    $this->attrs['dhcpOption']= array();
     if (isset ($this->options) && count ($this->options)){
-      $this->attrs['dhcpOption']= array();
       foreach ($this->options as $key => $val){
         $this->attrs['dhcpOption'][]= "$key $val";
-      }
-    } else {
-      if ($mode == "modify"){
-        $this->attrs['dhcpOption']= array();
       }
     }
 
     /* Assemble new entry - statements */
+    $this->attrs['dhcpStatements']= array();
     if (isset ($this->statements) && count ($this->statements)){
-      $this->attrs['dhcpStatements']= array();
       foreach ($this->statements as $key => $val){
         $this->attrs['dhcpStatements'][]= "$key $val";
       }
-    } else {
-      if ($mode == "modify"){
-        $this->attrs['dhcpStatements']= array();
-      }
     }
 
-    /* Do LDAP action */
-    $ldap= $this->config->get_ldap_link();
-    if ($mode == "add"){
-      $ldap->cd($this->config->current['BASE']);
-      $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
-    }
-    $ldap->cd($this->dn);
-    $ldap->$mode($this->attrs);
-    show_ldap_error($ldap->get_error());
+    /* Move dn to the result */
+    $this->attrs['dn']= $this->dn;
+    $this->attrs['cn']= array($this->cn);
+    $this->attrs['objectClass']= array('top', 'dhcpGroup', 'dhcpOptions');
+    $this->attrs['MODIFIED']= TRUE;
+
+    return ($this->attrs);
   }
+
 
 }
 
