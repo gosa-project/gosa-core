@@ -1,0 +1,3923 @@
+#LyX 1.4.4 created this file. For more info see http://www.lyx.org/
+\lyxformat 245
+\begin_document
+\begin_header
+\textclass article
+\language french
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single
+\papersize a4paper
+\use_geometry true
+\use_amsmath 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\leftmargin 10mm
+\topmargin 10mm
+\rightmargin 10mm
+\bottommargin 20mm
+\headheight 10mm
+\headsep 10mm
+\footskip 10mm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\bullet 1 0 8 -1
+\bullet 2 0 8 -1
+\bullet 3 0 8 4
+\tracking_changes false
+\output_changes true
+\end_header
+
+\begin_body
+
+\begin_layout Title
+
+\series bold
+INSTALLATION COMPLETE EN MODE AUTOMATIQUE
+\end_layout
+
+\begin_layout Section
+FAI
+\end_layout
+
+\begin_layout Standard
+Cliquez sur le bouton 
+\series bold
+\color blue
+FAI
+\series default
+\color inherit
+ à gauche dans la partie 
+\series bold
+Administration
+\series default
+ .
+ La page 
+\family sans
+Installation complète en mode automatique
+\family default
+ s'affiche.
+ La page est constituée de plusieurs tableaux :
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\shape smallcaps
+le tableau principal
+\series default
+\shape default
+ est destiné à la création et à la gestion des installations en mode automatique.
+\end_layout
+
+\begin_layout Standard
+Les icônes en entête ( 
+\begin_inset Graphics
+	filename images/list_back.png
+
+\end_inset
+
+, 
+\begin_inset Graphics
+	filename images/list_root.png
+
+\end_inset
+
+, 
+\begin_inset Graphics
+	filename images/list_home.png
+
+\end_inset
+
+ ) servent à modifier l'affichage selon le département, elles prédominent
+ sur toutes autres formes de sélection d'affichage.
+ Ces icônes sont reliées au champ "Base".
+\end_layout
+
+\begin_layout Standard
+Le champ "Base" sert à afficher les différents départements existant dans
+ l'organisation.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+Pour créer une classe, l'administrateur doit cliquer selon son choix sur
+ un des boutons suivant: 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_new_profile.png
+
+\end_inset
+
+ pour créer des profils, 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_new_partitionTable.png
+
+\end_inset
+
+ pour créer des tables des partitions, 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_new_script.png
+
+\end_inset
+
+ pour créer des scripts, 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_new_hook.png
+
+\end_inset
+
+ pour créer des connexions, 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_new_variable.png
+
+\end_inset
+
+ pour créer des variables, 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_new_template.png
+
+\end_inset
+
+ pour créer des modèles,
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_packages.png
+
+\end_inset
+
+ pour créer des listes des paquets.
+\newline
+
+\end_layout
+
+\begin_layout Standard
+L'icône 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/cant_editpaste.png
+
+\end_inset
+
+ sert à copier/coller des classes dans la liste.
+ La fonction est utilisée conjointement avec l'icône 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/editcopy.png
+
+\end_inset
+
+ dans la colonne intitulée "Actions" :
+\end_layout
+
+\begin_layout Standard
+1.
+ choisissez une classe et sélectionnez la grâce à l'icône 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/editcopy.png
+
+\end_inset
+
+ ,
+\end_layout
+
+\begin_layout Standard
+2.
+ l'icône 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/cant_editpaste.png
+
+\end_inset
+
+ s'active,
+\end_layout
+
+\begin_layout Standard
+3.
+ cliquez sur l'icône activée 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/editpaste.png
+
+\end_inset
+
+, elle renvoie à l'assistant pour le copier/coller,
+\end_layout
+
+\begin_layout Standard
+4.
+ choisissez un nouveau nom pour votre classe,
+\end_layout
+
+\begin_layout Standard
+5.
+ cliquez sur le bouton 'Enregistrer',
+\end_layout
+
+\begin_layout Standard
+6.
+ la nouvelle classe apparaît dans la liste.
+\newline
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\shape smallcaps
+le deuxième tableau
+\series default
+\shape default
+ dans la partie supérieure à droite est le cadre " information", il apporte
+ des informations sur ce qu'il est possible de faire sur la page courante.
+ Le contenu du tableau change en fonction de la page affichée.
+\newline
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\shape smallcaps
+le troisième tableau
+\series default
+\shape default
+ dans la partie médiane à droite reprend dans un menu déroulant les différentes
+ versions de la distribution Debian GNU/Linux pour lesquelles une configuration
+ pour FAI existe.
+ 
+\end_layout
+
+\begin_layout Standard
+Il est aussi possible à partir de ce tableau d'indiquer que l'on désire
+ créer une nouvelle branche ou de figer une configuration existante.
+\newline
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\shape smallcaps
+le quatrième tableau
+\series default
+\shape default
+ dans la partie inférieure droite sert à modifier selon la préférence l'affichag
+e des données dans le tableau principal.
+ Le type de recherche s'adapte en fonction du contenu du tableau principal.
+\end_layout
+
+\begin_layout Standard
+Ce tableau intitulé "Filtres 
+\begin_inset Graphics
+	filename images/rocket.png
+
+\end_inset
+
+" permet d'effectuer une recherche :
+\end_layout
+
+\begin_layout Standard
+- en cliquant sur l'astérisque (étoile : *) pour voir apparaître toutes
+ les classes FAI;
+\end_layout
+
+\begin_layout Standard
+- en cliquant sur une lettre et toutes les classes dont le nom débute par
+ cette lettre s'afficheront;
+\end_layout
+
+\begin_layout Standard
+- en cliquant sur un numéro et toutes les classes dont le nom débute par
+ ce numéro s'afficheront;
+\end_layout
+
+\begin_layout Standard
+- en cochant une ou plusieurs proposition(s) pour une recherche d'ensemble;
+\end_layout
+
+\begin_layout Standard
+- ou encore la recherche rapide 
+\begin_inset Graphics
+	filename images/search.png
+
+\end_inset
+
+ : remplissez le champ par le nom d'une classe et ensuite cliquez sur le
+ bouton 'Appliquer' les filtres.
+\newline
+
+\end_layout
+
+\begin_layout Standard
+Le tableau principal se décline en quatre colonnes :
+\end_layout
+
+\begin_layout Itemize
+La première colonne contient les icônes indiquant de manière graphique le
+ type de la classe.
+ Les icônes utilisées sont :
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+.
+ 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_profile.png
+
+\end_inset
+
+ pour désigner les classes profil,
+\end_layout
+
+\begin_layout Standard
+.
+ 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_partitionTable.png
+
+\end_inset
+
+ pour désigner les classes de table de partitions,
+\end_layout
+
+\begin_layout Standard
+.
+ 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_script.png
+
+\end_inset
+
+ pour désigner les classes de scripts,
+\end_layout
+
+\begin_layout Standard
+.
+ 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_hook.png
+
+\end_inset
+
+ pour désigner les classes de connexions,
+\end_layout
+
+\begin_layout Standard
+.
+ 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_variable.png
+
+\end_inset
+
+ pour désigner les classes de variables,
+\end_layout
+
+\begin_layout Standard
+.
+ 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_template.png
+
+\end_inset
+
+ pour désigner les classes de modèles,
+\end_layout
+
+\begin_layout Standard
+.
+ 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_packages.png
+
+\end_inset
+
+ pour désigner les classes de liste de paquets
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+La deuxième colonne contient les noms de toutes les classes existantes dans
+ cette configuration,
+\end_layout
+
+\begin_layout Itemize
+La troisième colonne indique le type de la classe,
+\end_layout
+
+\begin_layout Itemize
+La quatrième colonne contient les actions que l'on peut éxecuter sur les
+ classes :
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+- l'icône 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/editcut.png
+
+\end_inset
+
+ 
+\series bold
+\color red
+? , 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/cutpaste.png
+
+\end_inset
+
+ ,
+\end_layout
+
+\begin_layout Standard
+- l'icône 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/editcopy.png
+
+\end_inset
+
+ est utilisée conjointement avec l'icône 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/editpaste.png
+
+\end_inset
+
+ pour faire du copier/coller ( voir plus haut),
+\end_layout
+
+\begin_layout Standard
+- l'icône 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/edit.png
+
+\end_inset
+
+ est utilisée pour éditer les informations de la classe sélectionnée,
+\end_layout
+
+\begin_layout Standard
+- l'icône 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/edittrash.png
+
+\end_inset
+
+ est utilisée pour supprimer la classe sélectionnée.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+
+\newpage
+
+\end_layout
+
+\begin_layout Section
+Créer une classe profil
+\end_layout
+
+\begin_layout Subsection
+Concept d'une classe profil
+\end_layout
+
+\begin_layout Standard
+Si on doit considérer tout le processus d'installation en mode automatique,
+ la classe profil rassemble l'ensemble des classes constituant un système
+ à installer.
+ 
+\end_layout
+
+\begin_layout Standard
+La classe profil regroupe l'ensemble des classes FAI (ou fichiers de configurati
+on) choisies par l'administrateur pour l'installation et la configuration
+ du système.
+\end_layout
+
+\begin_layout Subsection
+Création d'une classe profil dans GOsa² (
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_new_profile.png
+
+\end_inset
+
+ pour créer la classe)
+\end_layout
+
+\begin_layout Subsubsection
+Informations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Nom
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Donnez un nom à votre nouveau profil
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Ajoutez une description succincte sur votre profil
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Classes FAI
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Ajoutez les classes FAI choisies pour constituer votre profil :
+\end_layout
+
+\begin_layout Standard
+- cliquez sur le bouton 'Ajoutez',
+\end_layout
+
+\begin_layout Standard
+- une liste des différentes classes déjà créées s'affiche.
+ Pour chaque classe est précisé son contenu dans la colonne Objets.
+\end_layout
+
+\begin_layout Standard
+- faites un choix en cochant une ou plusieurs cases,
+\end_layout
+
+\begin_layout Standard
+- cliquez sur le bouton 'Appliquer'.
+\end_layout
+
+\begin_layout Standard
+La nouvelle classe sera ajoutée à votre liste.
+\end_layout
+
+\begin_layout Standard
+- enfin, cliquez sur le bouton 'Enregistrer' pour sauver votre choix et
+ revenir sur la page principale.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Sommaire
+\end_layout
+
+\begin_layout Standard
+Le sommaire reprend la liste des classes FAI contenues dans le profil.
+ Il suffit de cliquer sur une des classes (ou objet parent) pour que son
+ contenu se décline.
+\end_layout
+
+\begin_layout Standard
+Le bouton 'Raffraichissement' sert à revenir à l'état initial.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+La gestion de la classe profil
+\end_layout
+
+\begin_layout Standard
+A partir de la page principale de FAI, éditez dans la liste une classe profil.
+\end_layout
+
+\begin_layout Subsubsection
+Informations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Nom
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indique le nom du profil
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Apporte une description succincte sur le profil
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Classes FAI
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+La liste reprend les classes FAI et leur contenu.
+ 
+\end_layout
+
+\begin_layout Standard
+Les actions possibles sur cette liste sont :
+\end_layout
+
+\begin_layout Standard
+- la suppression d'une classe en cliquant sur 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/edittrash.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+- le changement de la position dans la liste en cliquant sur les flèches.
+ 
+\series bold
+\color red
+?
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Sommaire
+\end_layout
+
+\begin_layout Standard
+Le sommaire reprend dans une liste l'ensemble des classes FAI contenues
+ dans le profil.
+ Il suffit de cliquer sur une des classes (ou objet parent) pour que son
+ contenu se décline.
+\end_layout
+
+\begin_layout Standard
+Le bouton 'Raffraichissement' sert à revenir à l'état initial.
+ 
+\end_layout
+
+\begin_layout Standard
+Cliquez sur le bouton 'Enregistrer' pour sauver les modifications et revenir
+ sur la page principale.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\newpage
+
+\end_layout
+
+\begin_layout Section
+Créer une classe de table de partitions
+\end_layout
+
+\begin_layout Subsection
+Concept de la classe de table de partitions
+\end_layout
+
+\begin_layout Standard
+La classe table de partitions contient les données servant à partitionner
+ l'espace disque du système lors de l'installation en mode automatique.
+\end_layout
+
+\begin_layout Subsection
+Création d'une classe de table de partitions dans GOsa² (
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_new_partitionTable.png
+
+\end_inset
+
+ pour créer la classe)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Entrez le nom de la classe FAI manuellement
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Si vous choisissez de créer une nouvelle classe de table de partitions,
+ sélectionnez la première option et insérez le nom de la nouvelle classe.
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\color black
+Choisissez le nom de la classe FAI parmi les classes existantes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Si vous choisissez d'inclure la nouvelle classe dans une classe existante,
+ sélectionnez la deuxième option et sélectionnez dans le menu déroulant
+ le nom de la classe existante 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ensuite cliquez sur le bouton 'Continuer'.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Informations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Nom
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Le champ est déjà complété par le nom de la nouvelle classe de table de
+ partitions
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Ajoutez une description succincte sur la nouvelle classe de table de partitions
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Disques
+\end_layout
+
+\begin_layout Standard
+Le champ "Disques" est à remplir en cliquant sur le bouton 'Ajouter' :
+\end_layout
+
+\begin_layout Subsubsection*
+Périphérique
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Nom
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Insérez le nom du nouveau disque dur
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Apportez une description succincte sur le disque dur
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Liste de partitions
+\end_layout
+
+\begin_layout Standard
+Pour créer une nouvelle partition dans le disque dur cliquez sur le bouton
+ 'Ajouter une partition' :
+\begin_inset VSpace smallskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Type
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Sélectionnez dans la liste déroulante le type de la partition
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+FS type
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Sélectionnez dans la liste déroulante le type de système de fichier
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Point de montage
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indiquez le point de montage dans l'arborescence du disque
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Taille en MB
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indiquez la taille de la partition en MB
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Options de montage
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indiquez les options à passer au système de fichier lors du montage 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Option du système de fichier
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indiquez les options du système de fichier 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Protéger
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Cochez si vous désirez protéger cette partition
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Supprimer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Cliquez sur le bouton 'Supprimer' pour effacer la partition
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Cliquez sur le bouton 'Enregistrer' pour sauver la partition et revenir
+ sur le champ "Disques".
+\end_layout
+
+\begin_layout Standard
+Cliquez enfin sur le bouton 'Enregistrer' pour sauver l'ensemble du contenu
+ de la nouvelle partition et revenir sur la page principale.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+La gestion de la table de partitions
+\end_layout
+
+\begin_layout Standard
+A partir de la page principale de FAI éditez dans la liste une classe de
+ table de partitions.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Disques
+\end_layout
+
+\begin_layout Standard
+Sélectionnez un disque dans la liste existante et cliquez sur le bouton
+ 'Editer' pour accéder aux informations sur ce disque ou bien cliquez sur
+ le bouton 'Supprimer' pour l'effacer.
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Liste de partitions
+\end_layout
+
+\begin_layout Standard
+Les informations sur le disque sélectionné peuvent être modifiées à condition
+ d'avoir décoché le bouton 'Protéger'.
+ Vous pouvez supprimer une partition ou en ajouter une en cliquant sur le
+ bouton 'Ajouter une partition'.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Type
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Sélectionnez dans la liste déroulante le type de la partition
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+FS type
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Sélectionnez dans la liste déroulante le type de système de fichier
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Point de montage
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indiquez le point de montage dans l'arborescence du disque
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Taille en MB
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indiquez la taille de la partition en MB
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Options de montage
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indiquez les options à passer au système de fichier lors du montage 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Option du système de fichier
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indiquez les options du système de fichier 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Protéger
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Cochez si vous désirez protéger cette partition
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Supprimer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Cliquez sur le bouton 'Supprimer' pour effacer la partition
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Cliquez sur le bouton 'Enregistrer' pour sauver la partition et revenir
+ sur le champ "Disques".
+\end_layout
+
+\begin_layout Standard
+Cliquez enfin sur le bouton 'Enregistrer' pour sauver les modifications
+ et revenir sur la page principale.
+ 
+\newpage
+
+\end_layout
+
+\begin_layout Section
+Créer une classe de scripts
+\end_layout
+
+\begin_layout Subsection
+Concept de la classe de scripts
+\end_layout
+
+\begin_layout Standard
+La classe de scripts aide à la configuration et à l'installation du système.
+ De base certains processus ne sont pas définis par défaut dans FAI.
+ Pour combler ce manque, les scripts sont écrits par l'administrateur selon
+ les exigences de la configuration.
+\end_layout
+
+\begin_layout Subsection
+Création d'une classe de scripts dans GOsa² (
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_new_script.png
+
+\end_inset
+
+ pour créer la classe)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Entrez le nom de la classe FAI manuellement
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Si vous choisissez de créer une nouvelle classe de scripts, sélectionnez
+ la première option et insérez le nom de la nouvelle classe.
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\color black
+Choisissez le nom de la classe FAI parmi les classes existantes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Si vous choisissez d'inclure la nouvelle classe dans une classe existante,
+ sélectionnez la deuxième option et sélectionnez dans le menu déroulant
+ le nom de la classe existante 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ensuite cliquez sur le bouton 'Continuer'.
+\end_layout
+
+\begin_layout Subsubsection
+Informations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Nom
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Le champ est déjà complété par le nom de la nouvelle classe de scripts
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Ajoutez une description succincte sur la nouvelle classe de scripts
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Liste des scripts
+\end_layout
+
+\begin_layout Standard
+Le champ "Liste des scripts" est à remplir en cliquant sur le bouton 'Ajouter'
+ :
+\end_layout
+
+\begin_layout Subsubsection*
+Informations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Nom
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Insérez le nom du nouveau script
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Apportez une description succincte sur le script
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Attributs du script
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features>
+<column alignment="center" valignment="top" leftline="true" width="5cm">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Priorité
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\color black
+Indiquez l'ordre d'exécution du script
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Script
+\end_layout
+
+\begin_layout Standard
+Pour ajouter un nouveau script dans le champ 'Script' :
+\end_layout
+
+\begin_layout Standard
+- Cliquez sur le bouton 'Naviguer'.
+ 
+\end_layout
+
+\begin_layout Standard
+- Vous sélectionnez un script dans votre arborescence.
+ 
+\end_layout
+
+\begin_layout Standard
+- Faites un double clic sur le script sélectionné dans votre arborescence
+ ou utilisez le bouton 'Ouvrir' pour afficher le chemin du script dans le
+ champ 'Naviguer'.
+ 
+\end_layout
+
+\begin_layout Standard
+- Ensuite cliquez sur le bouton 'Importez un script'.
+ Le code du script se rajoutera automatiquement dans le champ 'Script'.
+\end_layout
+
+\begin_layout Standard
+- Ensuite, cliquez sur le bouton 'Appliquer' pour sauver le script et revenir
+ sur le champ "Liste des scripts".
+\end_layout
+
+\begin_layout Standard
+- Cliquez enfin sur le bouton 'Enregistrer' pour sauver l'ensemble des attributs
+ du nouveau script et revenir sur la page principale.
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+La gestion de classe de scripts
+\end_layout
+
+\begin_layout Standard
+A partir de la page principale de FAI éditez dans la liste une classe de
+ scripts.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Script
+\end_layout
+
+\begin_layout Subsubsection*
+Informations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Nom
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indique le nom du script
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Apporte une description succincte sur le script
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Liste des scripts
+\end_layout
+
+\begin_layout Standard
+Le champ "Liste des scripts" contient les scripts sur lesquelles trois actions
+ peuvent se faire :
+\end_layout
+
+\begin_layout Standard
+- 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/save.png
+
+\end_inset
+
+ pour le téléchargement du script
+\end_layout
+
+\begin_layout Standard
+- 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/edit.png
+
+\end_inset
+
+ pour éditer le code du script
+\end_layout
+
+\begin_layout Standard
+- 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/edittrash.png
+
+\end_inset
+
+ pour supprimer le script
+\newline
+
+\end_layout
+
+\begin_layout Standard
+Un fois édité, le code du script peut être modifié ou remplacé.
+\end_layout
+
+\begin_layout Standard
+Cliquez sur le bouton 'Appliquer' pour sauver les modifications apportées
+ au script ou sur le bouton 'Annuler' si aucune modification n'a été apportée
+ au script.
+ Vous voilà à nouveau sur le champ "Liste des scripts".
+\end_layout
+
+\begin_layout Standard
+Cliquez ensuite sur le bouton 'Enregistrer' pour sauver l'ensemble des attributs
+ du script et revenir sur la page principale.
+\newpage
+
+\end_layout
+
+\begin_layout Section
+Créer une classe de connexions
+\end_layout
+
+\begin_layout Subsection
+Concept de la classe de connexions
+\end_layout
+
+\begin_layout Standard
+La classe de connexions est un ensemble de scripts qui sont utilisés comme
+ raccord ou connexion entre les scripts existants dans la classe de scripts.
+ 
+\end_layout
+
+\begin_layout Subsection
+Création d'une classe de connexions dans GOsa² (
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_new_hook.png
+
+\end_inset
+
+ pour créer la classe)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Entrez le nom de la classe FAI manuellement
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Si vous choisissez de créer une nouvelle classe de connexions, sélectionnez
+ la première option et insérez le nom de la nouvelle classe.
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\color black
+Choisissez le nom de la classe FAI parmi les classes existantes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Si vous choisissez d'inclure la nouvelle classe dans une classe existante,
+ sélectionnez la deuxième option et sélectionnez dans le menu déroulant
+ le nom de la classe existante 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ensuite cliquez sur le bouton 'Continuer'.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Informations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Nom
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Le champ est déjà complété par le nom de la nouvelle classe de connexions
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Ajoutez une description succincte sur la nouvelle classe de connexions
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Listes des scripts de connexions
+\end_layout
+
+\begin_layout Standard
+Le champ "Liste des scripts de connexions" est à remplir en cliquant sur
+ le bouton 'Ajouter' :
+\end_layout
+
+\begin_layout Subsubsection*
+Informations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Nom
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Insérez le nom du nouveau script
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Apportez une description succincte sur le script
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Attributs des connexions
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Tâche
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Sélectionnez dans la liste déroulante 
+\color black
+la méthode avec laquelle le script sera éxecuté lors de l'installation du
+ système
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Pour ajouter un nouveau script dans le champ 'Script' :
+\end_layout
+
+\begin_layout Standard
+- Cliquez sur le bouton 'Naviguer'.
+ 
+\end_layout
+
+\begin_layout Standard
+- Vous sélectionnez un script dans votre arborescence.
+ 
+\end_layout
+
+\begin_layout Standard
+- Faites un double clic sur le script sélectionné dans votre arborescence
+ ou utilisez le bouton 'Ouvrir' pour afficher le chemin du script dans le
+ champ 'Naviguer'.
+ 
+\end_layout
+
+\begin_layout Standard
+- Ensuite cliquez sur le bouton 'Importez un script'.
+ Le code du script se rajoutera automatiquement dans le champ 'Script'.
+\end_layout
+
+\begin_layout Standard
+- Cliquez sur le bouton 'Appliquer' pour sauver le script et revenir sur
+ le champ "Liste des scripts de connexions".
+\end_layout
+
+\begin_layout Standard
+- Cliquez enfin sur le bouton 'Enregistrer' pour sauver l'ensemble des attributs
+ du nouveau script et revenir sur la page principale.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+La gestion des connexions
+\end_layout
+
+\begin_layout Standard
+A partir de la page principale de FAI éditez dans la liste une classe de
+ connexions.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Connexions
+\end_layout
+
+\begin_layout Standard
+Sélectionnez un script dans la liste existante et cliquez sur le bouton
+ 'Editer' pour accéder aux informations sur ce script ou bien cliquez sur
+ le bouton 'Supprimer' pour l'effacer.
+\end_layout
+
+\begin_layout Subsubsection*
+Informations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Nom
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indique le nom du script
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Apporte une description succincte sur le script
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Liste des scripts de connexion
+\end_layout
+
+\begin_layout Standard
+Le champ "Liste des scripts de connexion" contient les scripts sur lesquelles
+ trois actions peuvent se faire :
+\end_layout
+
+\begin_layout Standard
+- 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/save.png
+
+\end_inset
+
+ pour le téléchargement du script
+\end_layout
+
+\begin_layout Standard
+- 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/edit.png
+
+\end_inset
+
+ pour éditer le code du script
+\end_layout
+
+\begin_layout Standard
+- 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/edittrash.png
+
+\end_inset
+
+ pour supprimer le script
+\newline
+
+\end_layout
+
+\begin_layout Standard
+Un fois édité, le code du script peut être modifié ou remplacé.
+\end_layout
+
+\begin_layout Standard
+Cliquez sur le bouton 'Appliquer' pour sauver les modifications apportées
+ au script ou sur le bouton 'Annuler' si aucune modification n'a été apportée
+ au script.
+ Vous voilà à nouveau sur le champ "Liste des scripts de connexions".
+\end_layout
+
+\begin_layout Standard
+Cliquez ensuite sur le bouton 'Enregistrer' pour sauver l'ensemble des attributs
+ du script et revenir sur la page principale.
+\newpage
+
+\end_layout
+
+\begin_layout Section
+Créer une classe de variables
+\end_layout
+
+\begin_layout Subsection
+Concept de la classe de variables
+\end_layout
+
+\begin_layout Standard
+La classe de variables contient les variables définies pour être utilisées
+ par la classe de scripts.
+ 
+\end_layout
+
+\begin_layout Subsection
+Création d'une classe de variables dans GOsa² (
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_new_variable.png
+
+\end_inset
+
+ pour créer la classe)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Entrez le nom de la classe FAI manuellement
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Si vous choisissez de créer une nouvelle classe de variables, sélectionnez
+ la première option et insérez le nom de la nouvelle classe
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\color black
+Choisissez le nom de la classe FAI parmi les classes existantes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Si vous choisissez d'inclure la nouvelle classe dans une classe existante,
+ sélectionnez la deuxième option et sélectionnez dans le menu déroulant
+ le nom de la classe existante 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ensuite cliquez sur le bouton 'Continuer'.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Informations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Nom
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Le champ est déjà complété par le nom de la nouvelle classe de variables
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Ajoutez une description succincte sur la nouvelle classe de variables
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Listes des noms de variables utilisées
+\end_layout
+
+\begin_layout Standard
+Le champ "Liste des noms de variables utilisées" est à remplir en cliquant
+ sur le bouton 'Ajouter' :
+\end_layout
+
+\begin_layout Subsubsection*
+Informations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Nom
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Insérez le nom de la nouvelle variable
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Apportez une description succincte sur la variable
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Attributs des variables
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Contenu de la variable
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\color black
+Précisez les variables et leur valeur sous la forme toto = 1000
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Cliquez sur le bouton 'Appliquer' pour sauver la nouvelle variable et revenir
+ sur le champ "Liste des noms de variables utilisées".
+\end_layout
+
+\begin_layout Standard
+Cliquez enfin sur le bouton 'Enregistrer' pour sauver la nouvelle classe
+ de variable et revenir sur la page principale.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+La gestion des variables
+\end_layout
+
+\begin_layout Standard
+A partir de la page principale de FAI éditez dans la liste une classe de
+ variables.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Variables
+\end_layout
+
+\begin_layout Subsubsection*
+Informations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Nom
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indique le nom de la variable
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Apporte une description succincte sur la variable
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Liste des noms de variables utilisées
+\end_layout
+
+\begin_layout Standard
+Sélectionnez une variable qui se trouve dans le champ "Liste des noms de
+ variables utilisées", cliquez sur le bouton 'Editer' pour accéder aux informati
+ons sur cette variable ou cliquez sur le bouton 'Supprimer' pour effacer
+ la variable.
+ 
+\end_layout
+
+\begin_layout Standard
+Cliquez ensuite sur le bouton 'Enregistrer' pour sauver les modifications
+ apportées à la variable et revenir sur la page principale.
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+
+\newpage
+
+\end_layout
+
+\begin_layout Section
+Créer une classe de modèles
+\end_layout
+
+\begin_layout Subsection
+Concept de la classe de modèles
+\end_layout
+
+\begin_layout Standard
+La classe de modèles sert à ajouter des fichiers de configuration standardisés
+ pour le système à installer.
+\end_layout
+
+\begin_layout Subsection
+Création d'une classe de modèles dans GOsa² (
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_new_template.png
+
+\end_inset
+
+ pour créer la classe)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Entrez le nom de la classe FAI manuellement
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Si vous choisissez de créer une nouvelle classe de modèles, sélectionnez
+ la première option et insérez le nom de la nouvelle classe
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\color black
+Choisissez le nom de la classe FAI parmi les classes existantes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Si vous choisissez d'inclure la nouvelle classe dans une classe existante,
+ sélectionnez la deuxième option et sélectionnez dans le menu déroulant
+ le nom de la classe existante 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ensuite cliquez sur le bouton 'Continuer'.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Informations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Nom
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Le champ est déjà complété par le nom de la nouvelle classe de modèles
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Ajoutez une description succincte sur la nouvelle classe de modèles
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Listes des modèles
+\end_layout
+
+\begin_layout Standard
+Le champ "Liste des modèles" est à remplir en cliquant sur le bouton 'Ajouter'
+ :
+\end_layout
+
+\begin_layout Subsubsection*
+Informations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Nom
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Insérez le nom du nouveau modèle
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Apportez une description succincte sur le modèle
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Attributs des modèles
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Fichier
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+la taille du fichier est indiqué dans ce champ après téléchargement.
+ 
+\end_layout
+
+\begin_layout Standard
+La recherche du modèle se fait dans votre arborescence grâce au bouton 'Naviguer
+'.
+\end_layout
+
+\begin_layout Standard
+Une fois le modèle téléchargé il peut être sauvé.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Répertoire de destination
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Précisez le chemin et la destination du modèle
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Propriétaire
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indiquez quel est le propriétaire du modèle
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Groupes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indiquez à quel groupe le modèle appartient
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Accès
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Précisez les droits d'accès : 
+\end_layout
+
+\begin_layout Standard
+- Lire
+\end_layout
+
+\begin_layout Standard
+- Ecrire
+\end_layout
+
+\begin_layout Standard
+- Exécuter
+\end_layout
+
+\begin_layout Standard
+- Spécial
+\end_layout
+
+\begin_layout Standard
+(SUID)
+\end_layout
+
+\begin_layout Standard
+(SGUID)
+\end_layout
+
+\begin_layout Standard
+(permanent)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Cliquez sur le bouton 'Appliquer' pour sauver le nouveau modèle et revenir
+ sur le champ "Liste des modèles".
+\end_layout
+
+\begin_layout Standard
+Cliquez enfin sur le bouton 'Enregistrer' pour sauver l'ensemble des attributs
+ du nouveau modèle et revenir sur la page principale.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+La gestion des modèles
+\end_layout
+
+\begin_layout Standard
+A partir de la page principale de FAI éditez dans la liste une classe de
+ modèles.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Modèles
+\end_layout
+
+\begin_layout Subsubsection*
+Informations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Nom
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indique le nom du modèle
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Apporte une description succincte sur le modèle
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Liste des modèles
+\end_layout
+
+\begin_layout Standard
+Le champ "Liste des modèles" contient les modèles sur lesquelles trois actions
+ peuvent se faire :
+\end_layout
+
+\begin_layout Standard
+- 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/save.png
+
+\end_inset
+
+ pour le téléchargement du modèle
+\end_layout
+
+\begin_layout Standard
+- 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/edit.png
+
+\end_inset
+
+ pour éditer les attributs du modèle
+\end_layout
+
+\begin_layout Standard
+- 
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/edittrash.png
+
+\end_inset
+
+ pour supprimer le modèle
+\newline
+
+\end_layout
+
+\begin_layout Standard
+Sélectionnez un modèle dans la liste existante et cliquez sur le bouton
+ 'Editer' pour accéder aux informations sur ce modèle.
+\end_layout
+
+\begin_layout Standard
+Cliquez sur le bouton 'Appliquer' pour sauver les modifications apportées
+ au modèle ou sur le bouton 'Annuler' si aucune modification n'a été apportée
+ au modèle.
+ Vous voilà à nouveau sur le champ "Liste des modèles".
+\end_layout
+
+\begin_layout Standard
+Cliquez ensuite sur le bouton 'Enregistrer' pour sauver l'ensemble des attributs
+ du modèle et revenir sur la page principale.
+\newpage
+
+\end_layout
+
+\begin_layout Section
+Créer une classe de liste de paquets
+\end_layout
+
+\begin_layout Subsection
+Concept de la classe de liste de paquets
+\end_layout
+
+\begin_layout Standard
+La classe de liste de paquets regroupe les applications à installer sur
+ le système.
+ 
+\end_layout
+
+\begin_layout Subsection
+Création d'une classe de liste de paquets dans GOsa² (
+\begin_inset Graphics
+	filename /usr/share/gosa/html/images/fai_packages.png
+
+\end_inset
+
+ pour créer la classe)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Entrez le nom de la classe FAI manuellement
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Si vous choisissez de créer une nouvelle classe de liste de paquets, sélectionne
+z la première option et insérez le nom de la nouvelle classe
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\color black
+Choisissez le nom de la classe FAI parmi les classes existantes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Si vous choisissez d'inclure la nouvelle classe dans une classe existante,
+ sélectionnez la deuxième option et sélectionnez dans le menu déroulant
+ le nom de la classe existante 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ensuite cliquez sur le bouton 'Continuer'.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Informations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Nom
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Le champ est déjà complété par le nom de la nouvelle classe de liste de
+ paquets
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Ajoutez une description succincte sur la nouvelle classe de liste de paquets
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Dépôt
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="center" valignment="top" leftline="true" width="5cm">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Version
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indique la version de la distribution utilisée
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Section
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indique le section dans Debian
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Méthode d'installation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Sélectionnez dans la liste déroulante la commande qui sera utilisée pour
+ l'installation des paquets
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Paquets utilisés
+\end_layout
+
+\begin_layout Standard
+Le champ "Paquets utilisés" est à remplir en cliquant sur le bouton 'Ajouter',
+ ce clic renvoie à la liste des paquets disponibles :
+\end_layout
+
+\begin_layout Standard
+- Faites votre choix en sélectionnant les paquets désirés, 
+\end_layout
+
+\begin_layout Standard
+- Ensuite cliquez sur le bouton 'Appliquer' pour valider votre choix et
+ revenir à la liste des paquets utilisés.
+\newline
+
+\end_layout
+
+\begin_layout Standard
+Pour supprimer un ou plusieurs paquets, sélectionnez dans la liste les paquets
+ à effacer, ensuite cliquez sur le bouton 'Supprimer'.
+\newline
+
+\end_layout
+
+\begin_layout Standard
+Pour le bouton 'Configurer' 
+\series bold
+\color red
+?
+\series default
+\color inherit
+
+\newline
+
+\end_layout
+
+\begin_layout Standard
+Le bouton 'Activer/désactiver le marqueur à effacer' sert à marquer les
+ paquets que vous désirez effacer : 
+\end_layout
+
+\begin_layout Standard
+- Sélectionnez un paquet, 
+\end_layout
+
+\begin_layout Standard
+- Cliquez sur 'Activer/désactiver le marqueur à effacer'.
+ La paquet est marqué dans la liste comme élément à enlever,
+\end_layout
+
+\begin_layout Standard
+- Pour l'activer il faut à nouveau sélectionner le paquet et cliquer sur
+ 'Activer/désactiver le marqueur à effacer'.
+\end_layout
+
+\begin_layout Standard
+- Cliquez enfin sur le bouton 'Enregistrer' pour sauver l'ensemble des attributs
+ de la nouvelle liste de paquets et revenir sur la page principale.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+La gestion des listes de paquets
+\end_layout
+
+\begin_layout Standard
+A partir de la page principale de FAI éditez dans la liste une classe de
+ liste de paquets.
+\end_layout
+
+\begin_layout Subsubsection
+Informations
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Nom
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indique le nom de la classe de liste de paquets
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Description
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Apporte une description succincte sur la classe de liste de paquets
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Dépôt
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="center" valignment="top" leftline="true" width="5cm">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Version
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indique la version de la distribution utilisée
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Section
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indique la section dans Debian
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Méthode d'installation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Indique la commande qui sera utilisée pour l'installation des paquets
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Paquets utilisés
+\end_layout
+
+\begin_layout Standard
+Le champ "Paquets utilisés" 
+\color black
+reprend la liste des paquets inclus dans la classe.
+\end_layout
+
+\begin_layout Standard
+Pour supprimer un ou plusieurs paquets, sélectionnez dans la liste les paquets
+ à effacer, ensuite cliquez sur le bouton 'Supprimer'.
+\newline
+
+\end_layout
+
+\begin_layout Standard
+Pour le bouton 'Configurer' 
+\series bold
+\color red
+?
+\series default
+\color inherit
+
+\newline
+
+\end_layout
+
+\begin_layout Standard
+Le bouton 'Activer/désactiver le marqueur à effacer' sert à marquer les
+ paquets que vous désirez effacer : 
+\end_layout
+
+\begin_layout Standard
+- Sélectionnez un paquet, 
+\end_layout
+
+\begin_layout Standard
+- Cliquez sur 'Activer/désactiver le marqueur à effacer'.
+ La paquet est marqué dans la liste comme élément à enlever,
+\end_layout
+
+\begin_layout Standard
+- Pour l'activer il faut à nouveau sélectionner le paquet et cliquer sur
+ 'Activer/désactiver le marqueur à effacer'.
+\end_layout
+
+\begin_layout Standard
+- Cliquez enfin sur le bouton 'Enregistrer' pour sauver l'ensemble des attributs
+ de liste de paquets ou sur le bouton 'Annuler' si aucune modification n'a
+ été apportée.
+ Vous retournez sur la page principale.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_body
+\end_document
