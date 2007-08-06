@@ -31,7 +31,9 @@ class faiScript extends plugin
   var $dialog           = NULL;     // a dialog, e.g. new disk dialog
   var $SubObjects       = array();  // All leafobjects of this object
 
-  var $FAIstate         ="";
+  var $FAIstate         = "";
+  var $sort_by          = "name";
+  var $sort_order       = "up";
 
   var $base             ="";
   var $release          ="";
@@ -213,11 +215,24 @@ class faiScript extends plugin
 
     /* Sort entries */
     $tmp = $keys = array();
-    foreach($this->SubObjects as $key => $entry){
-      $keys[$key]=$key;
+
+    if($this->sort_by == "name"){
+      foreach($this->SubObjects as $key => $entry){
+        $keys[$key]=$entry['cn'];
+      }
+    }elseif($this->sort_by == "priority"){
+      foreach($this->SubObjects as $key => $entry){
+        $keys[$key]=$entry['FAIpriority'];
+      }
     }
+
     natcasesort($keys);
-    foreach($keys as $key){
+
+    if($this->sort_order == "down"){
+      $keys =array_reverse($keys);
+    }
+
+    foreach($keys as $key => $order_var){
       $tmp[$key]=$this->SubObjects[$key];
     }
     $this->SubObjects = $tmp;
@@ -239,8 +254,16 @@ class faiScript extends plugin
     /* Divlist            added 23.02.2006 
        Containing FAIscripts 
      */
-    $divlist = new divSelectBox("FAIscripts");
-    $divlist->setHeight(400);
+    $divlist = new divlist("FAIscripts");
+    $plug = $_GET['plug'];
+
+    $divlist->SetHeader(array(  array("string"=>"<a href='?plug=".$plug."&amp;sort=name'>"._("Name")."</a>"),
+          array("string"=>"<a href='?plug=".$plug."&amp;sort=priority'>"._("Priority")."</a>"),
+          array("string"=>_("Download")),
+          array("string"=>_("Action"))));
+    $divlist->SetHeight(300);
+    $divlist->SetWidth("100%");
+
     if((chkacl($this->acl,"cn")!="") || ($this->FAIstate == "freeze")){
       $img_edit = "<input type='image' src='images/edit.png'      name='editscript_%s'    title='"._("edit")."' alt='"._("edit")."'>";
       $img_remo = "";
@@ -260,6 +283,7 @@ class faiScript extends plugin
       } 
 
       $divlist->AddEntry(array( array("string"=>$name['name']),
+            array("string"=>$name['FAIpriority'] , "attach" => "style='width:20px;'"),
             array("string"=>$down , "attach" => "style='width:20px;'"),
             array("string"=>str_replace("%s",base64_encode($key),$img_edit.$img_remo),
               "attach"=>"style='border-right: 0px;width:50px;text-align:right;'")));
@@ -298,6 +322,7 @@ class faiScript extends plugin
             $a_return[$obj['cn']]['name']= $obj['cn'];
           }
           $a_return[$obj['cn']]['dn']= $obj['dn'];
+          $a_return[$obj['cn']]['FAIpriority']= $obj['FAIpriority'];
         }else{
           if((isset($obj['description']))&&(!empty($obj['description']))){
             $a_return[$obj['cn']]= $obj['cn']." [".stripslashes($obj['description'])."]";
@@ -333,6 +358,18 @@ class faiScript extends plugin
           $this->$attrs = $_POST[$attrs];
         }
       }
+    }
+    
+    /* Get sort order */
+    if(isset($_GET['sort']) && in_array($_GET['sort'],array("name","priority"))){
+      if($this->sort_by == $_GET['sort']){
+        if($this->sort_order == "up"){
+          $this->sort_order = "down";
+        }elseif($this->sort_order == "down"){
+          $this->sort_order = "up";
+        }
+      }
+      $this->sort_by = $_GET['sort'];
     }
   }
 

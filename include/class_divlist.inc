@@ -24,7 +24,7 @@ class divlist {
 		$this->i_currentPage    = 0;
 		$this->i_entriesPerPage = 10;
     $this->s_height         = "450";
-    $this->s_width          = "600";
+    $this->s_width          = "600px";
 		$this->s_summary        = "";
 		$this->a_entries        = array();
 		$this->a_header         = array();
@@ -56,6 +56,9 @@ class divlist {
   
   function SetWidth($s_width) {
 		$this->s_width= $s_width;
+    if(preg_match("/^[0-9]*$/",$this->s_width)){
+      $this->s_width .="px";
+    }
 	}
 
 	function SetEntriesPerPage($i_num){
@@ -66,11 +69,11 @@ class divlist {
 		$s_return = "";
     if(!$this->force_height){
 		  $s_return.= "<table summary='".$this->s_summary."' style='width:".
-                  $this->s_width."px;height:".$this->s_height.
+                  $this->s_width.";height:".$this->s_height.
                   "px;' cellspacing='0' id='t_scrolltable'>";
     } else {
 		  $s_return.= "<table summary='".$this->s_summary."' style='width:".
-                  $this->s_width."px;height:".$this->s_height.
+                  $this->s_width.";height:".$this->s_height.
                   "px;' cellspacing='0' id='t_scrolltable_onlywidth'>";
     }
 
@@ -105,9 +108,9 @@ class divlist {
     // Using scrolltable?
     if($this->i_entriesPerPage == 0) {
       if(!$this->force_height) {
-        $s_return.= "\n<tr><td class='scrollhead'><table summary='' style='width:".$this->s_width."px;' cellspacing='0' id='t_scrollhead'>";
+        $s_return.= "\n<tr><td class='scrollhead'><table summary='' style='width:".$this->s_width.";' cellspacing='0' id='t_scrollhead'>";
       } else {
-        $s_return.= "\n<tr><td class='scrollhead'><table summary='' style='width:".$this->s_width."px;' cellspacing='0' id='t_scrollhead_onlywidth'>";
+        $s_return.= "\n<tr><td class='scrollhead'><table summary='' style='width:".$this->s_width.";' cellspacing='0' id='t_scrollhead_onlywidth'>";
       }
     }
 
@@ -149,10 +152,10 @@ class divlist {
     if($this->i_entriesPerPage == 0) {
       // We need to construct a "body"-table that is width-of-scrollbar thinner than the "head"-table.
       if(!$this->force_height) {
-        $s_return .= "\n<tr><td colspan='".$this->cols."' class='scrollbody'><div style='width:".$this->s_width."px;height:".($this->s_height-20)."px;' id='d_scrollbody' class='scrollbody'>";
+        $s_return .= "\n<tr><td colspan='".$this->cols."' class='scrollbody'><div style='width:".$this->s_width.";height:".($this->s_height-20)."px;' id='d_scrollbody' class='scrollbody'>";
         $s_return .= "<table summary='' style='height:100%;width:581px;' cellspacing='0' id='t_scrollbody'>";
       } else {
-        $s_return .= "\n<tr><td colspan='".$this->cols."' class='scrollbody'><div style='width:".$this->s_width."px;height:".($this->s_height-20)."px;' id='d_scrollbody_onlywidth' class='scrollbody'>";
+        $s_return .= "\n<tr><td colspan='".$this->cols."' class='scrollbody'><div style='width:".$this->s_width.";height:".($this->s_height-20)."px;' id='d_scrollbody_onlywidth' class='scrollbody'>";
         $s_return .= "<table summary='' style='height:100%;width:581px;' cellspacing='0' id='t_scrollbody_onlywidth'>";
       }
   	}
