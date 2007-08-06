@@ -1714,7 +1714,7 @@ function gen_uids($rule, $attributes)
 
     if ($rule[$pos] == "}" ){
       $variables[$pos]= expand_id($part, $attributes);
-      $stripped.= "\{$pos}";
+      $stripped.= "{".$pos."}";
       $trigger= false;
       continue;
     }
