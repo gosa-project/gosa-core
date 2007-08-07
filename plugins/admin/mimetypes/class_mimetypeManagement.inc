@@ -534,9 +534,9 @@ class mimetypeManagement extends plugin
     }
 
     /* Automatically disable status for pasting */
-    if(!$this->CopyPasteHandler->entries_queued()){
-      $this->start_pasting_copied_objects = FALSE;
-    }
+    #if(!$this->CopyPasteHandler->entries_queued()){
+    #  $this->start_pasting_copied_objects = FALSE;
+    #}
     return("");
   }
 

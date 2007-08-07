@@ -188,8 +188,14 @@ class divListGroup extends MultiSelectWindow
         $desc .= " (".$val['FAIrelease'][0].")";
       }
 
+      /* Cutted objects should be displayed in light grey */
+      $display = $val['cn']['0'].$desc;
+      if($this->parent->CopyPasteHandler->cutCurrent && $val['dn'] == $this->parent->CopyPasteHandler->objectdn){
+        $display = "<font color='#999999'>".$display."</font>";
+      }
+
       $field1 = array("string" => sprintf($userimg,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)), "attach" => "style='' ".$title);
+      $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' ".$title);
       $field3 = array("string" => preg_replace("/%KEY%/", $key, $posix."&nbsp;".$enviro."&nbsp;".$mail."&nbsp;".$samba."&nbsp;".$appl."&nbsp;".$phone),     "attach" => "style='width:136px;'");
       $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:80px;border-right:0px;text-align:right;'");
 

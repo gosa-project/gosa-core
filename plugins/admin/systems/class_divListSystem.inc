@@ -189,6 +189,11 @@ class divListSystem extends MultiSelectWindow
         $display.= "  (".$val['message'].")";
       }
 
+      /* Cutted objects should be displayed in light grey */
+      if(isset($this->parent->CopyPasteHandler) && $this->parent->CopyPasteHandler->cutCurrent && $val['dn'] == $this->parent->CopyPasteHandler->objectdn){
+        $display = "<font color='#999999'>".$display."</font>";
+      }
+
       $img    = $this->parent->convert_list($val);
       $field1 = array("string" => sprintf($img['img'],$val['dn']), "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' title='".preg_replace('/ /', '&nbsp;', @LDAP::fix($val['dn']))."'");

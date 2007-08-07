@@ -233,14 +233,18 @@ class divListFai extends MultiSelectWindow
          $edi = $editlink;
        }
 
-
+       /* Cutted objects should be displayed in light grey */
+       $display = $value['cn'].$desc;
+       if($this->parent->CopyPasteHandler->cutCurrent && $value['dn'] == $this->parent->CopyPasteHandler->objectdn){
+         $display = "<font color='#999999'>".$display."</font>";
+       }
 
        $field1 = array("string" => $img , "attach" => "style='text-align:center;width:20px;'");
-       $field2 = array("string" => preg_replace(array("/%KEY%/","/%NAME%/","/%TITLE%/"),array($key,$value['cn'].$desc,preg_replace('/ /', '&nbsp;', @LDAP::fix($value['dn']))),$edi) , "attach" => "style=''");
+       $field2 = array("string" => preg_replace(array("/%KEY%/","/%NAME%/","/%TITLE%/"),array($key,$display,preg_replace('/ /', '&nbsp;', @LDAP::fix($value['dn']))),$edi) , "attach" => "style=''");
        $field3 = array("string" => $info, "attach" => "style='width:200px;'");
        $field4 = array("string" => preg_replace("/%KEY%/",$key,$acti) , "attach" => "style='width:80px;border-right:0px;text-align:right;'");
        $this->AddElement(array($field1,$field2,$field3,$field4));
-    }
+     }
   }
 
   function Save()

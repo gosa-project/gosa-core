@@ -157,8 +157,15 @@ class divListOGroup extends MultiSelectWindow
       }else{
         $desc = " - [ ".$val['description'][0]." ]";
       }
+
+      /* Cutted objects should be displayed in light grey */
+      $display = $val['cn'][0].$desc;
+      if($this->parent->CopyPasteHandler->cutCurrent && $val['dn'] == $this->parent->CopyPasteHandler->objectdn){
+        $display = "<font color='#999999'>".$display."</font>";
+      }
+
       $field1 = array("string" => "<img src='images/list_ogroup.png' alt='"._("Object group")."' ".$title.">", "attach" => "style='text-align:center;width: 20px;'");
-      $field2 = array("string" => sprintf($editlink,$key,($val['cn']['0'].$desc)), "attach" => "style='' ".$title);
+      $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' ".$title);
       $field3 = array("string" => preg_replace("/%KEY/", $key, $this->parent->convert_list($val))."&nbsp;".$mail, "attach" => "style='width:136px;'");
       $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:107px;border-right:0px;text-align:right;'");
 
