@@ -80,6 +80,7 @@ class dhcpHost extends plugin
     $this->network->statements= $this->statements;
     $this->advanced= new dhcpAdvanced();
     $this->advanced->options= $this->options;
+    $this->advanced->setAutoOptions(array("host-name"));
     $this->advanced->statements= $this->statements;
     $this->advanced->setAutoStatements(array("fixed-address"));
 
@@ -153,6 +154,7 @@ class dhcpHost extends plugin
       } else {
         unset ($this->statements['fixed-address']);
       }
+      $this->options['host-name']= $this->cn;
     }
 
     /* Strip network objects */

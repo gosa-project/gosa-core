@@ -71,7 +71,6 @@ class dhcpGroup extends plugin
     $this->advanced= new dhcpAdvanced();
     $this->advanced->options= $this->options;
     $this->advanced->statements= $this->statements;
-    $this->advanced->setAutoStatements(array("fixed-address"));
 
     /* Save CN for later reference */
     $this->orig_cn= $this->cn;

@@ -215,14 +215,23 @@ class servdhcp extends plugin
     $editImgIns = "<input type='image' src='images/list_new.png' name='insertDhcp_%s' title='"._("Insert new DHCP section")."'>".
       "<input type='image' src='images/edit.png' name='editDhcp_%s' title='"._("Edit DHCP section")."'>".
       "<input type='image' src='images/edittrash.png' name='delDhcp_%s' title='"._("Remove DHCP section")."'>";
+    $editImgInsNoDel = "<input type='image' src='images/list_new.png' name='insertDhcp_%s' title='"._("Insert new DHCP section")."'>".
+      "<input type='image' src='images/edit.png' name='editDhcp_%s' title='"._("Edit DHCP section")."'>";
     $editImg = "<input type='image' src='images/edit.png' name='editDhcp_%s' title='"._("Edit DHCP section")."'>".
       "<input type='image' src='images/edittrash.png' name='delDhcp_%s' title='"._("Remove DHCP section")."'>";
     foreach($this->dhcpSections as $section => $values ){
       if (count(dhcpNewSectionDialog::$sectionMap[$this->objectType($section)])){
-        $DhcpList->AddEntry(array(
+        if ($this->objectType($section) == "dhcpService"){
+          $DhcpList->AddEntry(array(
+              array("string" => $values),
+              array("string" => str_replace("%s",base64_encode($section),$editImgInsNoDel), "attach" => "style='text-align:right;'")
+              ));
+        } else {
+          $DhcpList->AddEntry(array(
               array("string" => $values),
               array("string" => str_replace("%s",base64_encode($section),$editImgIns), "attach" => "style='text-align:right;'")
               ));
+        }
       } else {
         $DhcpList->AddEntry(array(
               array("string" => $values),
