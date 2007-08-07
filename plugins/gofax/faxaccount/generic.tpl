@@ -16,7 +16,7 @@
          <td><label for="goFaxLanguage">{t}Language{/t}</label></td>
 	 <td>
            <select size="1" name="goFaxLanguage" id="goFaxLanguage" {$goFaxLanguageACL} title="{t}Specify the GOfax communication language for fax to mail gateway{/t}">
-	    {html_options values=$languages output=$languages selected=$goFaxLanguage}
+	    {html_options options=$languages selected=$goFaxLanguage}
            </select>
          </td>
        </tr>
