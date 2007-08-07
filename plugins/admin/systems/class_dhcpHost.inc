@@ -140,8 +140,6 @@ class dhcpHost extends plugin
   /* Save data to object */
   function save_object()
   {
-    plugin::save_object();
-
     /* Save remaining attributes */
     if (isset($_POST['hwtype'])){
 

@@ -23,10 +23,17 @@ class dhcpSubnet extends plugin
   /* Used attributes */
   var $cn= "";
   var $orig_cn= "";
-  var $dhcpNetMask= "";
+  var $dhcpNetMask= 24;
   var $dhcpRange= "";
+  var $range_start= "";
+  var $range_stop= "";
   var $options= array();
   var $statements= array();
+  var $use_range= FALSE;
+
+  /* Subobjects */
+  var $network;
+  var $advanced;
 
   /* attribute list for save action */
   var $attributes= array();
@@ -36,13 +43,17 @@ class dhcpSubnet extends plugin
   {
     if (is_array($attrs)){
       $this->dn= $attrs['dn'];
-      $this->new= FALSE;
+
 
       /* Load attributes */
       foreach (array("cn", "dhcpNetMask", "dhcpRange") as $attr){
         if (isset($attrs[$attr][0])){
           $this->$attr= $attrs[$attr][0];
         }
+      }
+      if (isset($attrs['dhcpRange'])){
+        $this->use_range= TRUE;
+        list($this->range_start, $this->range_stop)= preg_split('/\s+/', $this->dhcpRange);
       }
 
       /* Load options */
@@ -86,160 +97,162 @@ class dhcpSubnet extends plugin
 
   function execute()
   {
-	$smarty= get_smarty();
-	$smarty->assign("cn", $this->cn);
+    $smarty= get_smarty();
+    $smarty->assign("cn", $this->cn);
+    $smarty->assign("dhcp_netmask", $this->dhcpNetMask);
 
-	if ($this->dn != "new"){
-		$smarty->assign("mode", "readonly");
+    /* Prepare range */
+    if ($this->use_range){
+      $smarty->assign("use_range", "checked");
+      $smarty->assign("range_disabled", "");
+    } else {
+      $smarty->assign("use_range", "");
+      $smarty->assign("range_disabled", "disabled");
+    }
+    $smarty->assign("range_start", $this->range_start);
+    $smarty->assign("range_stop", $this->range_stop);
 
-		list($na0, $na1, $na2, $na3)= split('\.', $this->cn);
-                for ($i= 0; $i<4; $i++){
-                        $name= "na$i";
-                        $smarty->assign("na$i", $$name);
-                }
+    /* Show main page */
+    $display= $smarty->fetch(get_template_path('dhcp_subnet.tpl', TRUE)).$this->network->execute();
 
-		/* Assign netmask */
-		list($nm0, $nm1, $nm2, $nm3)= split('\.', $this->dhcpNetMask);
-		for ($i= 0; $i<4; $i++){
-			$name= "nm$i";
-			$smarty->assign("nm$i", $$name);
-		}
+    /* Merge arrays for advanced view */
+    foreach (array("options", "statements") as $type){
+      $tmp= array_merge($this->$type, $this->network->$type);
+      $this->advanced->$type= $tmp;
+    }
 
-		/* Prepare range */
-		if ($this->dhcpRange != ""){
-			list($r1, $r2)= preg_split('/\s+/', $this->dhcpRange);
-			list($r00, $r01, $r02, $r03)= split('\.', $r1);
-			for ($i= 0; $i<4; $i++){
-				$name= "r0$i";
-				$smarty->assign("r0$i", $$name);
-			}
-			list($r10, $r11, $r12, $r13)= split('\.', $r2);
-			for ($i= 0; $i<4; $i++){
-				$name= "r1$i";
-				$smarty->assign("r1$i", $$name);
-			}
-		}
-	}
+    $display.= $this->advanced->execute();
 
-	/* Show main page */
-	return $smarty->fetch (get_template_path('dhcp_subnet.tpl', TRUE));
+    /* Merge back for removals */
+    foreach (array("options", "statements") as $type){
+      $this->$type= $this->advanced->$type;
+      $this->network->$type= $this->advanced->$type;
+    }
+
+    /* Add footer */
+    $display.= "<div style='width:100%;text-align:right;margin-top:5px;'><input type=submit name='save_dhcp' value='"._("Save")."'>".
+               "&nbsp;<input type=submit name='cancel_dhcp' value='"._("Cancel")."'></div>";
+
+    /* Show main page */
+    return $display;
   }
+
 
   function remove_from_parent()
   {
-	/* Just remove the dn from the ldap, then we're done. Host
-	   entries do not have any entries below themselfes. */
-	$ldap= $this->config->get_ldap_link();
-	$ldap->cd($this->dn);
-	$ldap->recursive_remove();
-	show_ldap_error($ldap->get_error());
-
-	/* Optionally execute a command after we're done */
-	$this->postremove();
   }
 
 
   /* Save data to object */
   function save_object()
   {
-  	plugin::save_object();
+    if (isset($_POST['cn'])){
+      $this->cn= validate($_POST['cn']);
+    } 
+    if (isset($_POST['dhcp_netmask'])){
+      $this->dhcpNetMask= validate($_POST['dhcp_netmask']);
+    } 
+    if (isset($_POST['use_range'])){
+      $this->use_range= TRUE;
+      $this->range_start= validate($_POST['range_start']);
+      $this->range_stop= validate($_POST['range_stop']);
+    } else {
+      $this->use_range= FALSE;
+    }
 
-	if (isset($_POST['na0'])){
-		$this->cn= $_POST['na0'].".".$_POST['na1'].".".$_POST['na2'].".".$_POST['na3'];
-		$this->dhcpNetMask= $_POST['nm0'].".".$_POST['nm1'].".".$_POST['nm2'].".".$_POST['nm3'];
-		$this->dhcpRange= $_POST['r00'].".".$_POST['r01'].".".$_POST['r02'].".".$_POST['r03']." ".$_POST['r10'].".".$_POST['r11'].".".$_POST['r12'].".".$_POST['r13'];
-	}
+    /* Save sub-objects */
+    $this->network->save_object();
+    $this->advanced->save_object();
+
+    /* Merge arrays for advanced view */
+    foreach (array("options", "statements") as $type){
+      $tmp= array_merge($this->$type, $this->network->$type);
+      $this->advanced->$type= $tmp;
+    }
+
   }
 
 
   /* Check values */
-  function check()
+  function check($cache)
   {
-	$message= array();
+    $message= array();
 
-	/* All required fields are set? */
-	if ($this->cn == ""){
-		$message[]= _("Required field 'Network address' is not filled.");
-	}
-	if ($this->dhcpNetMask == ""){
-		$message[]= _("Required field 'Netmask' is not filled.");
-	}
+    /* All required fields are set? */
+    if ($this->cn == ""){
+      $message[]= _("Required field 'Network address' is not filled.");
+    }
+    if ($this->dhcpNetMask == ""){
+      $message[]= _("Required field 'Netmask' is not filled.");
+    }
 
-	/* cn already used? */
-	if ($this->dn != "new"){
-		$ldap= $this->config->get_ldap_link();
-		$ldap->cd($this->config->current['BASE']);
-		$ldap->search("(&(objectClass=dhcpSubnet)(cn=".$this->cn."))");
-		if ($ldap->count() >= 1){
-			while ($attrs= $ldap->fetch()){
-				if ($ldap->getDN() != $this->dn){
-					$message[]= _("The network defined in this section is already used!");
-					break;
-				}
+    /* cn already used? */
+    if ($this->orig_cn != $this->cn || $this->new){
 
-			}
-		}
-		$ldap->fetch();
-	}
+      foreach($cache as $dn => $dummy){
+        if (preg_match("/^cn=".$this->cn.",/", $dn) && count($dummy)){
+          $message[]= _("The name for this section is already used!");
+          break;
+        }
+      }
+    }
 
-	#FIXME: There are some more things we could test -> valid netmask, range
-	return $message;
+    /* IP's? */
+    foreach(array('dhcpNetMask' => _("Netmask"), 'cn' => _("Network address"), 'range_start' => _("Range"), 'range_stop' => _("Range")) as $attr => $str){
+      if ($this->$attr != "" && !is_ip($this->$attr)){
+        print_red(sprintf(_("The field '%s' contains an invalid IP address"), $str));
+      }
+    }
+
+    return $message;
   }
 
 
   /* Save to LDAP */
   function save()
   {
-	plugin::save();
+    /* Merge arrays for network and advanced view */
+    foreach (array("options", "statements") as $type){
+      $tmp= array_merge($this->$type, $this->network->$type, $this->advanced->$type);
+      $this->$type= $tmp;
+    }
 
-	/* Get ldap mode */
-	if ($this->dn == "new"){
-		$mode= "add";
-	} else {
-		$mode= "modify";
-	}
+    /* Add cn if we're new */
+    if ($this->new){
+      $this->dn= "cn=".$this->cn.",".$this->dn;
+    } else {
+      $this->dn= "cn=".$this->cn.preg_replace('/^cn=[^,]+/', '', $this->dn);
+    }
 
-	/* Generate new dn */
-	if ($this->parent->parent != NULL && $this->dn == "new"){
-                $this->dn= "cn=".$this->cn.",".$this->parent->parent;
-        }
+    /* Assemble new entry - options */
+    $this->attrs['dhcpOption']= array();
+    if (isset ($this->options) && count ($this->options)){
+      foreach ($this->options as $key => $val){
+        $this->attrs['dhcpOption'][]= "$key $val";
+      }
+    }
 
-	/* Reconvert netmask to number of filled bits */
-	$this->attrs['dhcpNetMask']= netmask_to_bits($this->dhcpNetMask);
-	
-	/* Assemble new entry - options */
-	if (isset ($this->options) && count ($this->options)){
-		$this->attrs['dhcpOption']= array();
-		foreach ($this->options as $key => $val){
-			$this->attrs['dhcpOption'][]= "$key $val";
-		}
-	} else {
-		if ($mode == "modify"){
-			$this->attrs['dhcpOption']= array();
-		}
-	}
-	
-	/* Assemble new entry - statements */
-	if (isset ($this->statements) && count ($this->statements)){
-		$this->attrs['dhcpStatements']= array();
-		foreach ($this->statements as $key => $val){
-			$this->attrs['dhcpStatements'][]= "$key $val";
-		}
-	} else {
-		if ($mode == "modify"){
-			$this->attrs['dhcpStatements']= array();
-		}
-	}
+    /* Assemble new entry - statements */
+    $this->attrs['dhcpStatements']= array();
+    if (isset ($this->statements) && count ($this->statements)){
+      foreach ($this->statements as $key => $val){
+        $this->attrs['dhcpStatements'][]= "$key $val";
+      }
+    }
 
-	/* Do LDAP action */
-	$ldap= $this->config->get_ldap_link();
-        if ($mode == "add"){
-		$ldap->cd($this->config->current['BASE']);
-                $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
-        }
-	$ldap->cd($this->dn);
-	$ldap->$mode($this->attrs);
-	show_ldap_error($ldap->get_error());
+    /* Move dn to the result */
+    $this->attrs['dn']= $this->dn;
+    $this->attrs['cn']= array($this->cn);
+    $this->attrs['dhcpNetMask']= array(netmask_to_bits($this->dhcpNetMask));
+    if ($this->dhcpRange != ""){
+      $this->attrs['dhcpRange']= array($this->range_start." ".$this->range_stop);
+    } else {
+      $this->attrs['dhcpRange']= array();
+    }
+    $this->attrs['objectClass']= array('top', 'dhcpSubnet', 'dhcpOptions');
+    $this->attrs['MODIFIED']= TRUE;
+
+    return ($this->attrs);
   }
   
 }

@@ -1,10 +1,8 @@
 {* GOsa dhcp sharedNetwork - smarty template *}
-<br>
 <table width="100%">
  <tr>
   <td width="50%" style="vertical-align:top">
-   <b>{t}Network base configuration{/t}</b>
-   <br>
+   <p><b>{t}Network configuration{/t}</b></p>
    <table>
     <tr>
      <td>{t}Router{/t}</td>
@@ -28,7 +26,7 @@
    </table>
    <br>
    <br>
-   <b>{t}Bootup{/t}</b>
+   <p><b>{t}Bootup{/t}</b></p>
    <table>
     <tr>
      <td>{t}Filename{/t}</td>
@@ -48,8 +46,7 @@
   
   </td>
   <td style="vertical-align:top">
-   <b>{t}Domain Name Service{/t}</b>
-   <br>
+   <p><b>{t}Domain Name Service{/t}</b></p>
    <table>
     <tr>
      <td>{t}Domain{/t}</td>
@@ -73,8 +70,7 @@
     </tr>
     <tr>
      <td colspan=2>
-      <br>
-      <b>{t}Domain Name Service options{/t}</b><br>
+      <p><b>{t}Domain Name Service options{/t}</b></p>
       <input type=checkbox name="autohost" value="1" {$autohost}>{t}Assign hostnames found via reverse mapping{/t}
       <br>
       <input type=checkbox name="autohostdecl" value="1" {$autohostdecl}>{t}Assign hostnames from host declarations{/t}
