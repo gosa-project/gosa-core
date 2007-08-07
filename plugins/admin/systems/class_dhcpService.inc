@@ -27,11 +27,6 @@ class dhcpService extends plugin
   var $orig_dhcpPrimaryDN= "";
   var $options= array();
   var $statements= array();
-  var $default_lease_time= 600;
-  var $max_lease_time= 1700;
-  var $authoritative= TRUE;
-  var $get_lease_hostnames= TRUE;
-  var $ddns_update_style= "none";
   var $ddns_styles= array('none', 'interim', 'ad-hoc');
 
   /* Subobjects */
@@ -79,6 +74,11 @@ class dhcpService extends plugin
       /* We keep the parent dn here if it's new */
       $this->dn= $attrs;
       $this->new= TRUE;
+      $this->statements['default_lease_time']= 600;
+      $this->statements['max_lease_time']= 1700;
+      $this->statements['authoritative']= TRUE;
+      $this->statements['get_lease_hostnames']= TRUE;
+      $this->statements['ddns_update_style']= 'none';
     }
 
     /* Load network module */
@@ -95,12 +95,32 @@ class dhcpService extends plugin
     $this->orig_cn= $this->cn;
   }
 
+
   function execute()
   {
     /* Show main page */
     $smarty= get_smarty();
 
     $smarty->assign('ddns_styles', $this->ddns_styles);
+    foreach (array('max_lease_time', 'default_lease_time', 'ddns_update_style') as $value){
+      if (isset($this->statements[preg_replace('/_/', '-', $value)])){
+        $smarty->assign("$value", $this->statements[preg_replace('/_/', '-', $value)]);
+      } else {
+        $smarty->assign("$value", "");
+      }
+    }
+
+    if (isset($this->statements['authoritative'])){
+      $smarty->assign("authoritative", "checked");
+    } else {
+      $smarty->assign("authoritative", "");
+    }
+
+    if (isset($this->statements['get-lease-hostnames']) && preg_match('/on/i', $this->statements['get-lease-hostnames'])){
+      $smarty->assign("get_lease_hostnames", "checked");
+    } else {
+      $smarty->assign("get_lease_hostnames", "");
+    }
 
     /* Show main page */
     $display= $smarty->fetch(get_template_path('dhcp_service.tpl', TRUE)).$this->network->execute();
@@ -130,149 +150,99 @@ class dhcpService extends plugin
 
   function remove_from_parent()
   {
-        /* Just remove the dn from the ldap, then we're done. Host
-           entries do not have any entries below themselfes. */
-        $ldap= $this->config->get_ldap_link();
-        $ldap->cd($this->dn);
-        $ldap->recursive_remove();
-        show_ldap_error($ldap->get_error());
-
-	$ldap->cat($this->dhcpPrimaryDN);
-	$attrs= $ldap->fetch();
-	$objectclasses= array();
-	for($i= 0; $i<$attrs['objectClass']['count']; $i++){
-		if ($attrs['objectClass'][$i] != "dhcpServer"){
-			$objectclasses[]= $attrs['objectClass'][$i];
-		}
-	}
-	$attrs= array();
-	$attrs['dhcpServiceDN']= array();
-	$attrs['objectClass']= $objectclasses;
-	$ldap->cd($this->dhcpPrimaryDN);
-	$ldap->modify($attrs);
-	show_ldap_error($ldap->get_error());
-
-
-	/* Optionally execute a command after we're done */
-	$this->postremove();
   }
 
 
   /* Save data to object */
   function save_object()
   {
-  	plugin::save_object();
+    /* No need to save in the first time */
+    if (!isset($_POST['ddns_update_style'])){
+      return;
+    }
 
-	/* Save base */
-	if (isset($_POST['base'])){
-		$this->base= $_POST['base'];
-	}
+    /* Save remaining attributes */
+    foreach (array('max_lease_time', 'default_lease_time', 'ddns_update_style') as $val){
+      $tval= preg_replace('/_/', '-', $val);
+      if ($_POST[$val] != ""){
+        $this->statements[$tval]= validate($_POST[$val]);
+      } else {
+        unset ($this->statements[$tval]);
+      }
+    }
+    if (isset($_POST['authoritative'])){
+      $this->statements['authoritative']= "";
+    } else {
+      unset($this->statements['authoritative']);
+    }
+    if (isset($_POST['get_lease_hostnames'])){
+      $this->statements['get-lease-hostnames']= "on";
+    } else {
+      $this->statements['get-lease-hostnames']= "off";
+    }
+
+    /* Strip network objects */
+    foreach (array("routers", "domain-name", "subnet-mask", "broadcast-address") as $toberemoved){
+      unset($this->options[$toberemoved]);
+    }
+    foreach (array("filename", "next-server") as $toberemoved){
+      unset($this->statements[$toberemoved]);
+    }
+
+    /* Save sub-objects */
+    $this->network->save_object();
+    $this->advanced->save_object();
+
+    /* Merge arrays for advanced view */
+    foreach (array("options", "statements") as $type){
+      $tmp= array_merge($this->$type, $this->network->$type);
+      $this->advanced->$type= $tmp;
+    }
+
   }
 
 
   /* Check values */
   function check()
   {
-	$message= array();
-	/* All required fields are set? */
-        if ($this->cn == ""){
-                $message[]= _("Required field 'Name' is not filled.");
-        }
-        if ($this->dhcpPrimaryDN == ""){
-                $message[]= _("No server specified to host dhcp service!");
-        }
-
-	return $message;
+    $message= array();
+    return $message;
   }
 
 
   /* Save to LDAP */
   function save()
   {
-echo "server-name";
-echo "server-identifier";
-        plugin::save();
+    $this->attrs= array();
+    echo "server-name";
+    echo "server-identifier";
 
-        /* Get ldap mode */
-        if ($this->dn == "new"){
-                $mode= "add";
-		$this->dn= "cn=".$this->cn.",ou=dhcp,ou=configs,ou=systems,".$this->base;
-        } else {
-                $mode= "modify";
-        }
+    /* Merge arrays for network and advanced view */
+    foreach (array("options", "statements") as $type){
+      $tmp= array_merge($this->$type, $this->network->$type, $this->advanced->$type);
+      $this->$type= $tmp;
+    }
 
-        /* Assemble new entry - options */
-        if (isset ($this->options) && count ($this->options)){
-                $this->attrs['dhcpOption']= array();
-                foreach ($this->options as $key => $val){
-                        $this->attrs['dhcpOption'][]= "$key $val";
-                }
-        } else {
-                if ($mode == "modify"){
-                        $this->attrs['dhcpOption']= array();
-                }
-        }
+    /* Assemble new entry - options */
+    $this->attrs['dhcpOption']= array();
+    if (isset ($this->options) && count ($this->options)){
+      foreach ($this->options as $key => $val){
+        $this->attrs['dhcpOption'][]= "$key $val";
+      }
+    }
 
-        /* Assemble new entry - statements */
-        if (isset ($this->statements) && count ($this->statements)){
-                $this->attrs['dhcpStatements']= array();
-                foreach ($this->statements as $key => $val){
-                        $this->attrs['dhcpStatements'][]= "$key $val";
-                }
-        } else {
-                if ($mode == "modify"){
-                        $this->attrs['dhcpStatements']= array();
-                }
-        }
+    /* Assemble new entry - statements */
+    $this->attrs['dhcpStatements']= array();
+    if (isset ($this->statements) && count ($this->statements)){
+      foreach ($this->statements as $key => $val){
+        $this->attrs['dhcpStatements'][]= "$key $val";
+      }
+    }
 
-        /* Do LDAP action */
-        $ldap= $this->config->get_ldap_link();
-        if ($mode == "add"){
-		$ldap->cd($this->config->current['BASE']);
-                $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
-        }
-        $ldap->cd($this->dn);
-        $ldap->$mode($this->attrs);
-        show_ldap_error($ldap->get_error());
+    $this->attrs['objectClass']= array('top', 'dhcpService');
+    $this->attrs['MODIFIED']= TRUE;
 
-	/* Modify server entry to keep our 'dn' */
-	$ldap->cat($this->dhcpPrimaryDN);
-	$attrs= $ldap->fetch();
-	$objectclasses= array();
-	for($i= 0; $i<$attrs['objectClass']['count']; $i++){
-		if ($attrs['objectClass'][$i] != "dhcpServer"){
-			$objectclasses[]= $attrs['objectClass'][$i];
-		}
-	}
-	$objectclasses[]= "dhcpServer";
-	$attrs= array();
-	$attrs['dhcpServiceDN']= $this->dn;
-	$attrs['objectClass']= $objectclasses;
-	$ldap->cd($this->dhcpPrimaryDN);
-	$ldap->modify($attrs);
-	show_ldap_error($ldap->get_error());
-
-	/* Modify old server entry */
-	if ( ($this->orig_dhcpPrimaryDN != "")
-		&& ($this->orig_dhcpPrimaryDN != $this->dhcpPrimaryDN)){
-
-		$ldap->cat($this->orig_dhcpPrimaryDN);
-		$attrs= $ldap->fetch();
-		if (isset($attrs['dhcpServiceDN'])){
-			$objectclasses= array();
-			for($i= 0; $i<$attrs['objectClass']['count']; $i++){
-				if ($attrs['objectClass'][$i] != "dhcpServer"){
-					$objectclasses[]= $attrs['objectClass'][$i];
-				}
-			}
-			$attrs= array();
-			$attrs['dhcpServiceDN']= array();
-			$attrs['objectClass']= $objectclasses;
-			$ldap->cd($this->orig_dhcpPrimaryDN);
-			$ldap->modify($attrs);
-			show_ldap_error($ldap->get_error());
-		}
-	}
+    return ($this->attrs);
   }
   
 }
