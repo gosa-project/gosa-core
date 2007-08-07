@@ -560,79 +560,6 @@ class mimetypeManagement extends plugin
   }
 
 
-
-
-
-
-
-
-
-
-
-  function copyPasteHandling_from_queue($s_action,$s_entry)
-  {
-    /* Check if Copy & Paste is disabled */
-    if(!is_object($this->CopyPasteHandler)){
-      return("");
-    }
-
-    /* Add a single entry to queue */
-    if($s_action == "cut" || $s_action == "copy"){
-
-      /* Cleanup object queue */
-      $this->CopyPasteHandler->cleanup_queue();
-      $dn = $this->mimetypes[$s_entry]['dn'];
-      $this->CopyPasteHandler->add_to_queue($dn,$s_action,"mimetabs","MIMETABS","mimetype");
-    }
-
-    /* Add entries to queue */
-    if($s_action == "copy_multiple" || $s_action == "cut_multiple"){
-
-      /* Cleanup object queue */
-      $this->CopyPasteHandler->cleanup_queue();
-
-      /* Add new entries to CP queue */
-      foreach($this->list_get_selected_items() as $id){
-        $dn = $this->mimetypes[$id]['dn'];
-
-        if($s_action == "copy_multiple"){
-          $this->CopyPasteHandler->add_to_queue($dn,"copy","mimetabs","MIMETABS","mimetype");
-        }
-        if($s_action == "cut_multiple"){
-          $this->CopyPasteHandler->add_to_queue($dn,"cut","mimetabs","MIMETABS","mimetype");
-        }
-      }
-    }
-
-    /* Start pasting entries */
-    if($s_action == "editPaste"){
-      $this->start_pasting_copied_objects = TRUE;
-    }
-
-    /* Return C&P dialog */
-    if($this->start_pasting_copied_objects && $this->CopyPasteHandler->entries_queued()){
-
-      /* Load entry from queue and set base */
-      $this->CopyPasteHandler->load_entry_from_queue();
-      $this->CopyPasteHandler->SetVar("base",$this->DivListMimeTypes->selectedBase);
-
-      /* Get dialog */
-      $data = $this->CopyPasteHandler->execute();
-
-      /* Return dialog data */
-      if(!empty($data)){
-        return($data);
-      }
-    }
-
-    /* Automatically disable status for pasting */
-    #if(!$this->CopyPasteHandler->entries_queued()){
-    #  $this->start_pasting_copied_objects = FALSE;
-    #}
-    return("");
-  }
-
-
   /* Check if the release management is activated. */
   function IsReleaseManagementActivated()
   {
@@ -642,19 +569,6 @@ class mimetypeManagement extends plugin
       return(true);
     }
     return(false);
-  }
-
-
-  function list_get_selected_items()
-  {
-    $ids = array();
-    foreach($_POST as $name => $value){
-      if(preg_match("/^item_selected_[0-9]*$/",$name)){
-        $id   = preg_replace("/^item_selected_/","",$name);
-        $ids[$id] = $id;
-      }
-    }
-    return($ids);
   }
 
 
