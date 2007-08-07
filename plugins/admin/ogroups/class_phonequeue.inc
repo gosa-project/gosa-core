@@ -259,7 +259,7 @@ class phonequeue extends plugin
 
     /* Assign samrty variables */
     $smarty= get_smarty();
-    $smarty->assign("goFonQueueLanguageOptions",array('de'=>_('German')));
+    $smarty->assign("goFonQueueLanguageOptions",get_languages(FALSE,TRUE));
     $smarty->assign("goFonQueueStrategyOptions", $this->goFonQueueStrategyOptions);
 
     foreach($this->attributes as $key => $val){

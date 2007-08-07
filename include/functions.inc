@@ -2527,7 +2527,7 @@ function mac2company($mac)
 }
 
 
-function get_languages($languages_in_own_language = FALSE)
+function get_languages($languages_in_own_language = FALSE,$strip_region_tag = FALSE)
 {
   $tmp = array(
         "de_DE" => "German",
@@ -2547,12 +2547,21 @@ function get_languages($languages_in_own_language = FALSE)
     foreach($tmp as $key => $name){
       $lang = $key.".UTF-8";
       setlocale(LC_ALL, $lang);
-      $ret[$key] = _($name);
+
+      if($strip_region_tag){
+        $ret[preg_replace("/^([^_]*).*$/","\\1",$key)] = _($name);
+      }else{
+        $ret[$key] = _($name);
+      }
     }
     setlocale(LC_ALL, $old_lang);
   }else{
     foreach($tmp as $key => $name){
-      $ret[$key] = _($name);
+      if($strip_region_tag){
+        $ret[preg_replace("/^([^_]*).*/","\\1",$key)] = _($name);
+      }else{
+        $ret[$key] = _($name);
+      }
     }
   }
   return($ret);
