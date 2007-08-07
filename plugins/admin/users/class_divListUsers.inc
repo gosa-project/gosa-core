@@ -116,6 +116,9 @@ class divListUsers extends MultiSelectWindow
     /********************
       Variable init
      ********************/
+    
+    $num_users      = 0;
+    $num_templates  = 0;
 
     /* Variable initialation */
     $enviro     = $posix = $maila = $faxac = $samba = $netatalk = "";
@@ -161,7 +164,7 @@ class divListUsers extends MultiSelectWindow
     /********************
       Append entries to divlist 
      ********************/
- 
+
     // Test Every Entry and generate divlist Array
     foreach($list as $key => $val){
 
@@ -221,9 +224,11 @@ class divListUsers extends MultiSelectWindow
       if(in_array("gosaUserTemplate",$val['objectClass'])){
         $tpl                          = preg_replace("/%KEY%/", "$key", $tplimg);
         $s_img_create_from_template   = preg_replace("/%KEY%/", "$key", $tplcreateuserimg);
+        $num_templates ++;
       }else{
         $s_img_create_from_template   = "";
         $tpl                          = $userimg;
+        $num_users ++;
       }
 
       /* Insert key into userimg */
@@ -261,7 +266,8 @@ class divListUsers extends MultiSelectWindow
         $users[strtolower( $val['sn']['0'].$val['uid']['0'])]=$add;
       }
     }
-    
+        
+    $this->set_List_Bottom_Info(sprintf(_("%s User(s), %s Template(s), %s Department(s)"),$num_users,$num_templates,count($this->Added_Departments) * !$this->SubSearch));
   }
 
   function Save()

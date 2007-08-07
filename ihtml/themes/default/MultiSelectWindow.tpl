@@ -98,6 +98,9 @@
 		{/if}
 	</tr>
 </table>
+<div style='padding-left:5px;'>
+{$List_Bottom_Info}
+</div>
 {if $Display_Save | $Display_Close}
 <p class="seperator">&nbsp;
 </p>

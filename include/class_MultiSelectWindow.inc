@@ -27,12 +27,13 @@ class MultiSelectWindow{
 	var $is_headpage			  = false;	// if true the design changes
 	var $filterName				  = "Liste";
 	var $DepartmentsAdded		= false;
+  var $Added_Departments  = array();
 	var $selectedBase       = "";
 
   var $DivHeight          = "";
 
   var $HideFilterPart     = false;
-
+  var $List_Bottom_Info   = "";
   var $SaveAdditionalVars = array();  // Additional Post vars to store 
 
 	function ClearElementsList()
@@ -376,6 +377,7 @@ class MultiSelectWindow{
 		$smarty->assign("Summary"			, $this->string_Summary);
 		$smarty->assign("Title"				, $this->string_Title);
 		$smarty->assign("Information"		, $this->string_Information);
+		$smarty->assign("List_Bottom_Info", $this->get_List_Bottom_Info());
 
 		/* Check for exeeded sizelimit */
 		$smarty->assign("hint"				, print_sizelimit_warning());
@@ -548,6 +550,7 @@ class MultiSelectWindow{
 	function AddDepartments($base = false,$numtabs = 3)
 	{
 		$this->DepartmentsAdded = true;
+    $this->Added_Departments = array();
 
 		/* check for a valid base */
 		if(!$base){
@@ -617,8 +620,19 @@ class MultiSelectWindow{
 			}
 
 			$this->AddElement($row);
+      $this->Added_Departments[] = $row;
 		}
 	}
+
+  function set_List_Bottom_Info($str)
+  {
+    $this->List_Bottom_Info = $str;
+  }
+
+  function get_List_Bottom_Info()
+  {
+    return($this->List_Bottom_Info); 
+  }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
