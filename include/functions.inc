@@ -2534,7 +2534,7 @@ function get_languages($languages_in_own_language = FALSE,$strip_region_tag = FA
         "fr_FR" => "French",
         "it_IT" => "Italian",
         "es_ES" => "Spanish",
-        "en_EN" => "English",
+        "en_US" => "English",
         "nl_NL" => "Dutch",
         "pl_PL" => "Polish",
         "sv_SE" => "Swedish",
@@ -2547,11 +2547,10 @@ function get_languages($languages_in_own_language = FALSE,$strip_region_tag = FA
     foreach($tmp as $key => $name){
       $lang = $key.".UTF-8";
       setlocale(LC_ALL, $lang);
-
       if($strip_region_tag){
-        $ret[preg_replace("/^([^_]*).*$/","\\1",$key)] = _($name);
+        $ret[preg_replace("/^([^_]*).*$/","\\1",$key)] = _($name)." (".$name.")";
       }else{
-        $ret[$key] = _($name);
+        $ret[$key] = _($name)." &nbsp;(".$name.")";
       }
     }
     setlocale(LC_ALL, $old_lang);
