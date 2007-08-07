@@ -29,7 +29,6 @@ class posixAccount extends plugin
   var $shadowInactive= "0";
   var $shadowExpire= "0";
   var $gosaDefaultPrinter= "";
-  var $gosaDefaultLanguage= "";
   var $accessTo= array();
   var $trustModel= "";
 
@@ -65,7 +64,7 @@ class posixAccount extends plugin
   var $CopyPasteVars  = array("grouplist","groupMembership","use_shadowMin","use_shadowMax","use_shadowWarning","use_shadowInactive","use_shadowExpire","must_change_password","grouplist","savedGidNumber","savedUidNumber");
   var $attributes     = array("homeDirectory", "loginShell", "uidNumber", "gidNumber", "gecos",
       "shadowMin", "shadowMax", "shadowWarning", "shadowInactive", "shadowLastChange",
-      "shadowExpire", "gosaDefaultPrinter", "gosaDefaultLanguage", "uid","accessTo","trustModel");
+      "shadowExpire", "gosaDefaultPrinter", "uid","accessTo","trustModel");
   var $objectclasses= array("posixAccount", "shadowAccount");
 
   var $uid ="";
@@ -498,7 +497,6 @@ class posixAccount extends plugin
     } else {
       $smarty->assign("groups", "");
     }
-    $smarty->assign("languages", $this->config->data['MAIN']['LANGUAGES']);
 
 	/* Avoid "Undefined index: forceMode" */
     $smarty->assign("forceMode", "");
