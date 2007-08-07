@@ -10,30 +10,26 @@ class dhcpNewSectionDialog extends plugin
   /* Mapping array */
   var $types= array();
   var $classtype= "";
-  static $sectionMap= array(  "dhcpService" => array("dhcpSharedNetwork", "dhcpSubnet", "dhcpGroup", "dhcpHost", "dhcpClass", "dhcpLeases"),
+  static $sectionMap= array(  "dhcpService" => array("dhcpSharedNetwork", "dhcpSubnet", "dhcpGroup", "dhcpHost", "dhcpClass"),
                               "dhcpClass" => array("dhcpSubClass"),
                               "dhcpSubClass" => array(),
-                              "dhcpLeases" => array(),
                               "dhcpHost" => array(),
                               "dhcpGroup" => array("dhcpHost"),
-                              "dhcpPool" => array("dhcpLeases"),
-                              "dhcpSubnet" => array("dhcpPool", "dhcpGroup", "dhcpHost", "dhcpClass", "dhcpLeases"),
+                              "dhcpPool" => array(),
+                              "dhcpSubnet" => array("dhcpPool", "dhcpGroup", "dhcpHost", "dhcpClass"),
                               "dhcpSharedNetwork" => array("dhcpSubnet", "dhcpPool"));
 
 
 
   function dhcpNewSectionDialog($type)
   {
-    $this->types= array(  "dhcpLog" => _("Logging"),
-                          "dhcpService" => _("Global options"),
+    $this->types= array(  "dhcpService" => _("Global options"),
                           "dhcpClass" => _("Class"),
                           "dhcpSubClass" => _("Subclass"),
-                          "dhcpLeases" => _("Lease"),
                           "dhcpHost" => _("Host"),
                           "dhcpGroup" => _("Group"),
                           "dhcpPool" => _("Pool"),
                           "dhcpSubnet" => _("Subnet"),
-                          "dhcpFailOverPeer" => _("Failover peer"),
                           "dhcpSharedNetwork" => _("Shared network"));
 
     $this->classtype= $type;
@@ -50,6 +46,7 @@ class dhcpNewSectionDialog extends plugin
     foreach ($sections as $section){
       $t_sections[$section]= $this->types[$section]; 
     }
+    asort($t_sections);
     $smarty->assign("sections", $t_sections);
     $smarty->assign("dhcpSectionACL", chkacl($this->acl,"DHCP"));
     $display.= $smarty->fetch(get_template_path('dhcpNewSection.tpl', TRUE));

@@ -77,9 +77,16 @@ class servdhcp extends plugin
         $data= $this->dialog->save();
         if ($this->current_object == ""){
           /* New object */
+          $newsects= array();
+          foreach ($this->dhcpSections as $key => $dsc){
+            $newsects[$key]= $dsc;
+            if ($key == $dn){
+              $spaces.= "&nbsp;&nbsp;&nbsp;&nbsp;";
+              $newsects[$data['dn']]= "$spaces$type '".preg_replace('/^[^=]+=([^,]+),.*$/', '\1', $data['dn'])."'";
+            }
+          }
           $this->dhcpObjectCache[$data['dn']]= $data;
-          $spaces.= "&nbsp;&nbsp;&nbsp;&nbsp;";
-          $this->dhcpSections[$data['dn']]= "$spaces$type '".preg_replace('/^[^=]+=([^,]+),.*$/', '\1', $data['dn'])."'";
+          $this->dhcpSections= $newsects;
         } else {
           if ($dn != $data['dn']){
             /* Old object, new name */
