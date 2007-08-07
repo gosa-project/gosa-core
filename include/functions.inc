@@ -2526,5 +2526,37 @@ function mac2company($mac)
   return ($vendor);
 }
 
+
+function get_languages($languages_in_own_language = FALSE)
+{
+  $tmp = array(
+        "de_DE" => "German",
+        "fr_FR" => "French",
+        "it_IT" => "Italian",
+        "es_ES" => "Spanish",
+        "en_EN" => "English",
+        "nl_NL" => "Dutch",
+        "pl_PL" => "Polish",
+        "sv_SE" => "Swedish",
+        "zh_CN" => "Chinese",
+        "ru_RU" => "Russian");
+
+  $ret = array();
+  if($languages_in_own_language){
+    $old_lang = setlocale(LC_ALL, 0);
+    foreach($tmp as $key => $name){
+      $lang = $key.".UTF-8";
+      setlocale(LC_ALL, $lang);
+      $ret[$key] = _($name);
+    }
+    setlocale(LC_ALL, $old_lang);
+  }else{
+    foreach($tmp as $key => $name){
+      $ret[$key] = _($name);
+    }
+  }
+  return($ret);
+}
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

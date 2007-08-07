@@ -44,17 +44,7 @@ class Step_Language extends setup_step
   
   function execute()
   {
-    $this->languages = array(""      => _("Automatic"),
-                             "de_DE" => _("German"),
-                             "fr_FR" => _("French"),
-                             "it_IT" => _("Italian"),
-                             "es_ES" => _("Spanish"),
-                             "en_EN" => _("English"),
-                             "nl_NL" => _("Dutch"),
-                             "pl_PL" => _("Polish"),
-                             "sv_SE" => _("Swedish"),
-                             "zh_CN" => _("Chinese"),
-                             "ru_RU" => _("Russian"));
+    $this->languages = array_merge(array(""      => _("Automatic")),get_languages(TRUE));
     asort($this->languages);
     $smarty = get_smarty();
     $smarty->assign("languages",    $this->languages);
