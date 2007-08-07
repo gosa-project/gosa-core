@@ -672,7 +672,7 @@ class mimetype extends plugin
   {
     plugin::PrepareForCopyPaste($source);
 
-    $source_o = new mimetype($this->config,$source['dn'],$this->parent);
+    $source_o = new mimetype($this->config,$source->dn,$this->parent);
 
     foreach(array("gotoMimeLeftClickAction_Q","gotoMimeEmbeddedApplication","gotoMimeApplication","gotoMimeFilePattern","gotoMimeIcon","iconData") as $name){
       $use_attr     = "use_".$name;

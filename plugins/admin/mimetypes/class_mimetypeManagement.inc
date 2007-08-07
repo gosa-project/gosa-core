@@ -152,10 +152,27 @@ class mimetypeManagement extends plugin
       Copy & Paste handling  
      ****************/
 
-    /* Display the copy & paste dialog, if it is currently open */
-    $ret = $this->copyPasteHandling_from_queue($s_action,$s_entry);
-    if($ret){
-      return($ret);
+    /* Get 'dn' from posted 'uid' */
+    if(in_array_ics($s_action,array("editPaste","cut","copy")) || ($this->CopyPasteHandler && $this->CopyPasteHandler->stillOpen())){
+
+      if(isset($this->mimetypes[trim($s_entry)]['dn'])){
+        $dn= $this->mimetypes[trim($s_entry)]['dn'];
+      }else{
+        $dn = $this->DivListMimeTypes->selectedBase;
+      }
+
+      $acl= get_permissions ($dn, $this->ui->subtreeACL);
+      $acl= get_module_permission($acl, "mimetype", $dn);
+
+      if($acl != "#all#"){
+        print_red (_("You are not allowed to execute this method!"));
+      }else{
+        /* Display the copy & paste dialog, if it is currently open */
+        $ret = $this->copyPasteHandling($s_action,$s_entry);
+        if($ret){
+          return($ret);
+        }
+      }
     }
 
 
@@ -171,10 +188,10 @@ class mimetypeManagement extends plugin
          react on this. */
       $this->dn= "new";
 
-      /* Create new usertab object */
+      /* Create new mimetab object */
       $this->mimetabs= new mimetabs($this->config, $this->config->data['TABS']['MIMETABS'], $this->dn);
 
-      /* Set up the users ACL's for this 'dn' */
+      /* Set up the mimetypes ACL's for this 'dn' */
       $acl= get_permissions ($this->DivListMimeTypes->selectedBase, $this->ui->subtreeACL);
       $this->mimetabs->set_acl($acl);
     }   
@@ -198,7 +215,7 @@ class mimetypeManagement extends plugin
      ****************/
 
     /* Finish mime edit is triggered by the tabulator dialog, so
-       the user wants to save edited data. Check and save at this point. */
+       the mimetypes wants to save edited data. Check and save at this point. */
     if ((isset($_POST['edit_finish']) || isset($_POST['edit_apply']) ) && (isset($this->mimetabs->config))){
 
       /* Check tabs, will feed message array */
@@ -233,7 +250,7 @@ class mimetypeManagement extends plugin
       Edit entry  
      ****************/
 
-    /* User wants to edit data? */
+    /* mimetypes wants to edit data? */
     if (($s_action=="edit") && (!isset($this->mimetabs->config))){
 
       /* Get 'dn' from posted 'mimelist', must be unique */
@@ -253,7 +270,7 @@ class mimetypeManagement extends plugin
       /* Register mimetabs to trigger edit dialog */
       $this->mimetabs= new mimetabs($this->config,$this->config->data['TABS']['MIMETABS'], $this->dn);
 
-      /* Set up the users ACL's for this 'dn' */
+      /* Set up the mimetypes ACL's for this 'dn' */
       $acl= get_permissions ($this->dn, $this->ui->subtreeACL);
       $this->mimetabs->set_acl($acl);
 
@@ -301,7 +318,7 @@ class mimetypeManagement extends plugin
       Delete mime type 
      ****************/
 
-    /* Remove user was requested */
+    /* Remove mimetypes was requested */
     if ($s_action == "del"){
 
       /* Get 'dn' from posted 'uid' */
@@ -328,7 +345,7 @@ class mimetypeManagement extends plugin
         return($smarty->fetch (get_template_path('remove.tpl', TRUE)));
       } else {
 
-        /* Obviously the user isn't allowed to delete. Show message and
+        /* Obviously the mimetypes isn't allowed to delete. Show message and
            clean session. */
         print_red (_("You are not allowed to delete this mime type!"));
       }
@@ -475,6 +492,81 @@ class mimetypeManagement extends plugin
     /* Optionally execute a command after we're done */
     $this->postremove();
   }
+
+
+ /* Perform copy & paste requests
+      If copy&paste is in progress this returns a dialog to fix required attributes
+   */
+  function copyPasteHandling($s_action,$s_entry)
+  {
+    /* Only perform copy/paste if it is enabled */
+    if($this->CopyPasteHandler){
+
+      /* Prepare current object to be pasted */
+      if( $s_action == "editPaste" || $this->CopyPasteHandler->stillOpen()){
+
+        $this->CopyPasteHandler->save_object();
+        $this->CopyPasteHandler->SetVar("base", $this->DivListMimeTypes->selectedBase);
+
+        /* Execute copy & paste dialog and display returned data, normaly a dialog which allows
+            us to solve all attribute mismatches for this object.
+            If nothing is returned, copy & paste was succesfully or aborted */
+        if(($ret= $this->CopyPasteHandler->execute())){
+          return ($ret);
+        }
+
+        /* Use the last dn to search for it's ID in the newly generated list. */
+        $dn= $this->CopyPasteHandler->lastdn;
+
+        /* Get new mimetypes list */
+        $this->reload();
+        foreach($this->mimetypes as $id => $entry){
+          if($entry['dn'] == $dn){
+            $s_entry= $id;
+            break;
+          }
+        }
+
+        /* Set CPPasswordChange to s_entry which indicates that this entry requires a new password. */
+        if(isset($_POST['passwordTodo']) && ($_POST['passwordTodo'] == "new")){
+          $this->CPPasswordChange = $s_entry;
+        }
+      }
+      /* Copy selected object
+          Create a new empty object and the current selected object.
+          Send both to copy&paste class*/
+      if($s_action == "copy"){
+        $this->CopyPasteHandler->Clear();
+        $dn= $this->mimetypes[trim($s_entry)]['dn'];
+        $acl= get_permissions ($dn, $this->ui->subtreeACL);
+        $obj    = new mimetabs($this->config, $this->config->data['TABS']['MIMETABS'], $dn);
+        $objNew = new mimetabs($this->config, $this->config->data['TABS']['MIMETABS'], "new");
+        $obj->    set_acl($acl);
+        $objNew-> set_acl($acl);
+        $this->CopyPasteHandler->Copy($obj,$objNew);
+      }
+
+      /* Cut selected object.
+          Open mimetabs object and send it to the copy & paste handler */
+      if($s_action == "cut"){
+        $this->CopyPasteHandler->Clear();
+        $dn= $this->mimetypes[trim($s_entry)]['dn'];
+        $acl= get_permissions ($dn, $this->ui->subtreeACL);
+        $obj= new mimetabs($this->config, $this->config->data['TABS']['MIMETABS'], $dn);
+        $obj->set_acl($acl);
+        $this->CopyPasteHandler->Cut($obj);
+      }
+    }
+  }
+
+
+
+
+
+
+
+
+
 
 
   function copyPasteHandling_from_queue($s_action,$s_entry)

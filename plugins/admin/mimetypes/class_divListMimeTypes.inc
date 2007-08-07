@@ -94,10 +94,18 @@ class divListMimeTypes extends MultiSelectWindow
       }
     }
 
+    /* Get copy & paste icon */
+    if($this->parent->CopyPasteHandler){
+      $Copy_Paste = $this->parent->CopyPasteHandler->generatePasteIcon();
+    }else{
+      $Copy_Paste ="";
+    }
+
     $listhead = MultiSelectWindow::get_default_header();
     $listhead .= " <input class='center' type='image' align='middle' src='images/list_new_mime.png' alt='"._("new").
       "' title='"._("Create new mime type")."' name='mime_new'>&nbsp;";
     $add_sep = true;
+    $listhead.=$Copy_Paste;
 
     /* And at least add a department selection box */
     $listhead .=  _("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
@@ -142,6 +150,18 @@ class divListMimeTypes extends MultiSelectWindow
 
       /* Create action icons */
       $actions = "";
+
+      $dn= $val['dn'];
+      $acl= get_permissions ($dn, $this->ui->subtreeACL);
+      $acl= get_module_permission($acl, "mimetype", $dn);
+
+      /* Append copy&paste icons if allowed */
+      if($acl == "#all#" && $this->parent->CopyPasteHandler){
+        $actions .= "<input class='center' type='image'
+          src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+        $actions.= "<input class='center' type='image'
+          src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
+      }
 
       $actions.= "<input class='center' type='image'
         src='images/edit.png' alt='"._("edit")."' name='mime_edit_%KEY%' title='"._("Edit this entry")."'>";
