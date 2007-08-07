@@ -38,7 +38,7 @@ class config  {
 
   /* Configuration data */
   var $data= array( 'TABS' => array(), 'LOCATIONS' => array(), 'SERVERS' => array(),
-      'MAIN' => array( 'LANGUAGES' => array(), 'FAXFORMATS' => array() ),
+      'MAIN' => array( 'FAXFORMATS' => array() ),
       'MENU' => array(), 'SERVICE' => array());
   var $basedir= "";
 
@@ -140,15 +140,6 @@ class config  {
                     }
 
                     $this->data['LOCATIONS'][$this->currentLocation]['REFERRAL'][$server]= $attrs;
-                  }
-                  break;
-
-                  /* Handle language */
-      case 'LANGUAGE':
-                  if ($this->tags[$this->level-2] == 'MAIN'){
-                    /* Add languages */
-                    $this->data['MAIN']['LANGUAGES'][$attrs['NAME']]= 
-                      $attrs['TAG'];
                   }
                   break;
 
