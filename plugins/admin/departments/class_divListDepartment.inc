@@ -125,8 +125,9 @@ class divListDepartment extends MultiSelectWindow
 
     /* Create summary string for list footer */
     $num_deps=count($list);
-    $str = $num_deps." ";
-    $num_deps       != 1  ? $str.=_("Departments")    : $str .= _("Department");
+    $num_dep_str = _("Number of listed departments");
+    $str = "<img class='center' src='images/folder.png'
+              title='".$num_dep_str."' alt='".$num_dep_str."'>&nbsp;".$num_deps."&nbsp;&nbsp;&nbsp;&nbsp;";
     $this->set_List_Bottom_Info($str);
 
   }

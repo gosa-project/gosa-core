@@ -161,11 +161,16 @@ class divListConference extends MultiSelectWindow
     if(!$this->SubSearch){
       $num_deps = count($this->Added_Departments);
     }
-    $num_lists = count($list);
-    $str = $num_lists." ";
-    $num_lists      != 1  ? $str.=_("Conferences").", "    : $str .= _("Conference").", ";
-    $str.= $num_deps." ";
-    $num_deps       != 1  ? $str.=_("Departments")    : $str .= _("Department");
+    $num_objs = count($list);
+
+    $num_obj_str = _("Number of listed conferences");
+    $num_dep_str = _("Number of listed departments");
+
+    $str = "<img class='center' src='images/select_conference.png'
+              title='".$num_obj_str."' alt='".$num_obj_str."'>&nbsp;".$num_objs."&nbsp;&nbsp;&nbsp;&nbsp;";
+    $str.= "<img class='center' src='images/folder.png'
+              title='".$num_dep_str."' alt='".$num_dep_str."'>&nbsp;".$num_deps."&nbsp;&nbsp;&nbsp;&nbsp;";
+
     $this->set_List_Bottom_Info($str);
   }
 

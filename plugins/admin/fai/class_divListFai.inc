@@ -259,38 +259,32 @@ class divListFai extends MultiSelectWindow
        $num_deps = count($this->Added_Departments);
      }
 
-     /* Profile */
-     $str = $cnts['FAIprofile']." ";
-     $cnts['FAIprofile']        != 1  ? $str.=_("Profiles").", "    : $str .= _("Profile").", ";
+     $profile_str    = _("Number of listed profiles");
+     $partition_str  = _("Number of listed partitions");
+     $script_str     = _("Number of listed scripts");
+     $hook_str       = _("Number of listed hooks");
+     $variable_str   = _("Number of listed variables");
+     $template_str   = _("Number of listed templates");
+     $package_str    = _("Number of listed packages");
+     $dep_str        = _("Number of listed departments");
 
-     /* Scripts */
-     $str.= $cnts['FAIpartitionTable']." ";
-     $cnts['FAIpartitionTable'] != 1  ? $str.=_("Partitions").", "  : $str .= _("Partition").", ";
-
-     /* Scripts */
-     $str.= $cnts['FAIscript']." ";
-     $cnts['FAIscript']         != 1  ? $str.=_("Scripts").", "     : $str .= _("Script").", ";
-
-     /* Hooks */
-     $str.= $cnts['FAIhook']." ";
-     $cnts['FAIhook']           != 1  ? $str.=_("Hooks").", "       : $str .= _("Hook").", ";
-
-     /* Variables */
-     $str.= $cnts['FAIvariable']." ";
-     $cnts['FAIvariable']       != 1  ? $str.=_("Variables").", "   : $str .= _("Variable").", ";
-
-     /* Templates */
-     $str.= $cnts['FAItemplate']." ";
-     $cnts['FAItemplate']       != 1  ? $str.=_("Templates").", "   : $str .= _("Template").", ";
-
-     /* Packages */
-     $str.= $cnts['FAIpackageList']." ";
-     $cnts['FAIpackageList']    != 1  ? $str.=_("Package lists").", ": $str .= _("Package list").", ";
-
-     $str.= $num_deps." ";
-     $num_deps       != 1  ? $str.=_("Departments")    : $str .= _("Department");
+     $str = "<img class='center' src='".$objects['FAIprofile']['IMG']."'
+       title='".$profile_str."' alt='".$profile_str."'>&nbsp;".$cnts['FAIprofile']."&nbsp;&nbsp;&nbsp;&nbsp;";
+     $str.= "<img class='center' src='".$objects['FAIpartitionTable']['IMG']."'
+       title='".$partition_str."' alt='".$partition_str."'>&nbsp;".$cnts['FAIpartitionTable']."&nbsp;&nbsp;&nbsp;&nbsp;";
+     $str.= "<img class='center' src='".$objects['FAIscript']['IMG']."'
+       title='".$script_str."' alt='".$script_str."'>&nbsp;".$cnts['FAIscript']."&nbsp;&nbsp;&nbsp;&nbsp;";
+     $str.= "<img class='center' src='".$objects['FAIhook']['IMG']."'
+       title='".$hook_str."' alt='".$hook_str."'>&nbsp;".$cnts['FAIhook']."&nbsp;&nbsp;&nbsp;&nbsp;";
+     $str.= "<img class='center' src='".$objects['FAIvariable']['IMG']."'
+       title='".$variable_str."' alt='".$variable_str."'>&nbsp;".$cnts['FAIvariable']."&nbsp;&nbsp;&nbsp;&nbsp;";
+     $str.= "<img class='center' src='".$objects['FAItemplate']['IMG']."'
+       title='".$template_str."' alt='".$template_str."'>&nbsp;".$cnts['FAItemplate']."&nbsp;&nbsp;&nbsp;&nbsp;";
+     $str.= "<img class='center' src='".$objects['FAIpackageList']['IMG']."'
+       title='".$package_str."' alt='".$package_str."'>&nbsp;".$cnts['FAIpackageList']."&nbsp;&nbsp;&nbsp;&nbsp;";
+     $str.= "<img class='center' src='images/folder.png'
+       title='".$dep_str."' alt='".$dep_str."'>&nbsp;".$num_deps."&nbsp;&nbsp;&nbsp;&nbsp;";
      $this->set_List_Bottom_Info($str);
-
   }
 
   function Save()

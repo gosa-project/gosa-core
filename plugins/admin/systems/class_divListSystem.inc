@@ -209,50 +209,42 @@ class divListSystem extends MultiSelectWindow
     }
 
 
-  /* Create summary string for list footer */
-     $num_deps=0;
-     if(!$this->SubSearch){
-       $num_deps = count($this->Added_Departments);
-     }
+    /* Create summary string for list footer */
+    $num_deps=0;
+    if(!$this->SubSearch){
+      $num_deps = count($this->Added_Departments);
+    }
 
-    $str ="";  
-  
-     /* Servers  */
-     $str.= $cnts['server']." ";
-     $cnts['server']            != 1  ? $str.=_("Servers").", "     : $str .= _("Server").", ";
+    $num_ser_str = _("Number of listed servers");
+    $num_ws_str  = _("Number of listed workstations");
+    $num_ter_str = _("Number of listed terminals");
+    $num_pho_str = _("Number of listed phones");
+    $num_prt_str = _("Number of listed printers");
+    $num_com_str = _("Number of listed network components");
+    $num_new_str = _("Number of listed new devices");
+    $num_wws_str = _("Number of listed windows workstations");
+    $num_dep_str = _("Number of listed departments");
 
-     /* Workstations */
-     $str.= $cnts['workstation']." ";
-     $cnts['workstation']       != 1  ? $str.=_("Workstations").", ": $str .= _("Workstation").", ";
+    $str = "<img class='center' src='images/select_server.png'
+              title='".$num_ser_str."' alt='".$num_ser_str."'>&nbsp;".$cnts['server']."&nbsp;&nbsp;&nbsp;&nbsp;";
+    $str.= "<img class='center' src='images/select_workstation.png'
+              title='".$num_ws_str."' alt='".$num_ws_str."'>&nbsp;".$cnts['workstation']."&nbsp;&nbsp;&nbsp;&nbsp;";
+    $str.= "<img class='center' src='images/select_terminal.png'
+              title='".$num_ter_str."' alt='".$num_ter_str."'>&nbsp;".$cnts['terminal']."&nbsp;&nbsp;&nbsp;&nbsp;";
+    $str.= "<img class='center' src='images/select_phone.png'
+              title='".$num_pho_str."' alt='".$num_pho_str."'>&nbsp;".$cnts['phone']."&nbsp;&nbsp;&nbsp;&nbsp;";
+    $str.= "<img class='center' src='images/select_printer.png'
+              title='".$num_prt_str."' alt='".$num_prt_str."'>&nbsp;".$cnts['printer']."&nbsp;&nbsp;&nbsp;&nbsp;";
+    $str.= "<img class='center' src='images/select_component.png'
+              title='".$num_com_str."' alt='".$num_com_str."'>&nbsp;".$cnts['component']."&nbsp;&nbsp;&nbsp;&nbsp;";
+    $str.= "<img class='center' src='images/select_newsystem.png'
+              title='".$num_new_str."' alt='".$num_new_str."'>&nbsp;".$cnts['NewDevice']."&nbsp;&nbsp;&nbsp;&nbsp;";
+    $str.= "<img class='center' src='images/select_winstation.png'
+              title='".$num_wws_str."' alt='".$num_wws_str."'>&nbsp;".$cnts['winstation']."&nbsp;&nbsp;&nbsp;&nbsp;";
+    $str.= "<img class='center' src='images/folder.png'
+              title='".$num_dep_str."' alt='".$num_dep_str."'>&nbsp;".$num_deps."&nbsp;&nbsp;&nbsp;&nbsp;";
 
-     /* Terminals */
-     $str.= $cnts['terminal']." ";
-     $cnts['terminal']          != 1  ? $str.=_("Terminals").", "   : $str .= _("Terminal").", ";
-
-     /* Phones */
-     $str.= $cnts['phone']." ";
-     $cnts['phone']             != 1  ? $str.=_("Phones").", "      : $str .= _("Phone").", ";
-
-     /* Printer */
-     $str.= $cnts['printer']." ";
-     $cnts['printer']           != 1  ? $str.=_("Printers").", "    : $str .= _("Printer").", ";
-
-     /* Components */
-     $str.= $cnts['component']." ";
-     $cnts['component']         != 1  ? $str.=_("Components").", "  : $str .= _("Component").", ";
-
-     /* New devices */
-     $str.= $cnts['NewDevice']." ";
-     $cnts['NewDevice']         != 1  ? $str.=_("New devices").", " : $str .= _("New device").", ";
-
-     /* Windows workstations  */
-     $str.= $cnts['winstation']." ";
-     $cnts['winstation']        != 1  ? $str.=_("Windows workstations").", "    : $str .= _("Windows workstation").", ";
-
-     $str.= $num_deps." ";
-     $num_deps       != 1  ? $str.=_("Departments")    : $str .= _("Department");
-     $this->set_List_Bottom_Info($str);
-
+    $this->set_List_Bottom_Info($str);
   }
 
   function Save()
