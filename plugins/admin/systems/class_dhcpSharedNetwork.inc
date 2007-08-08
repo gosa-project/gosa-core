@@ -20,17 +20,7 @@
 
 class dhcpSharedNetwork extends plugin
 {
-  /* Used attributes */
-  var $cn= "";
-  var $options= array();
-  var $statements= array();
-
-  /* Subobjects */
-  var $network;
-  var $advanced;
-
   /* attribute list for save action */
-  var $attributes= array();
   var $objectclasses= array();
 
   function dhcpSharedNetwork($attrs)
