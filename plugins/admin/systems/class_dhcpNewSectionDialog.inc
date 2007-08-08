@@ -10,13 +10,13 @@ class dhcpNewSectionDialog extends plugin
   /* Mapping array */
   var $types= array();
   var $classtype= "";
-  static $sectionMap= array(  "dhcpService" => array("dhcpSharedNetwork", "dhcpSubnet", "dhcpGroup", "dhcpHost", "dhcpClass"),
-                              "dhcpClass" => array("dhcpSubClass"),
+  static $sectionMap= array(  "dhcpService" => array("dhcpSharedNetwork", "dhcpSubnet", "dhcpGroup", "dhcpHost" /*, "dhcpClass"*/),
+                              #"dhcpClass" => array("dhcpSubClass"),
                               "dhcpSubClass" => array(),
                               "dhcpHost" => array(),
                               "dhcpGroup" => array("dhcpHost"),
                               "dhcpPool" => array(),
-                              "dhcpSubnet" => array("dhcpPool", "dhcpGroup", "dhcpHost", "dhcpClass"),
+                              "dhcpSubnet" => array("dhcpPool", "dhcpGroup", "dhcpHost" /*, "dhcpClass"*/),
                               "dhcpSharedNetwork" => array("dhcpSubnet", "dhcpPool"));
 
 
@@ -24,7 +24,7 @@ class dhcpNewSectionDialog extends plugin
   function dhcpNewSectionDialog($type)
   {
     $this->types= array(  "dhcpService" => _("Global options"),
-                          "dhcpClass" => _("Class"),
+                          /*"dhcpClass" => _("Class"),*/
                           "dhcpSubClass" => _("Subclass"),
                           "dhcpHost" => _("Host"),
                           "dhcpGroup" => _("Group"),
