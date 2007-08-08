@@ -78,14 +78,30 @@ sub read_config {
 sub parseconfig {
 	my $c_location = shift;
 	my $xmldata = shift;
+	chomp $c_location;
+	chomp $xmldata;
+	my $data = $xmldata;
 	my $xml = new XML::Simple ();
-	my $c_data = $xml -> XMLin( $xmldata );
+	my $c_data = $xml -> XMLin( $xmldata);
 	my $config = {};
-	my $server = $c_data->{main}->{location}->{$c_location}->{server};
-	my $config_base = $c_data->{main}->{location}->{$c_location}->{config};
-	my $ldap_admin = $c_data->{main}->{location}->{$c_location}->{referral}->{admin};
-	my $ldap_admin_pwd = $c_data->{main}->{location}->{$c_location}->{referral}->{password};
-	my $mailMethod = $c_data->{main}->{location}->{$c_location}->{mailMethod};
+	my $server;
+	my $config_base;
+	my $ldap_admin;
+	my $ldap_admin_pwd;
+	my $mailMethod;
+	if ( ! ( ref($c_data->{main}->{location}->{server}) ) ) {
+		$server = $c_data->{main}->{location}->{server};
+		$config_base = $c_data->{main}->{location}->{config};
+		$ldap_admin = $c_data->{main}->{location}->{referral}->{admin};
+		$ldap_admin_pwd = $c_data->{main}->{location}->{referral}->{password};
+		$mailMethod = $c_data->{main}->{location}->{mailMethod};
+	} else {
+		$server = $c_data->{main}->{location}->{$c_location}->{server};
+		$config_base = $c_data->{main}->{location}->{$c_location}->{config};
+		$ldap_admin = $c_data->{main}->{location}->{$c_location}->{referral}->{admin};
+		$ldap_admin_pwd = $c_data->{main}->{location}->{$c_location}->{referral}->{password};
+		$mailMethod = $c_data->{main}->{location}->{$c_location}->{mailMethod};
+	}
 	$config->{server} = $server;
 	$config->{config_base} = $config_base;
 	$config->{mailMethod} = $mailMethod;
@@ -172,15 +188,15 @@ sub get_ldap_base {
 	my $base = "";
 
 	$config_base =~ s/\,\ +/\,/g;
-	print $url."\n";
-	print $config_base."\n";
+	#print $url."\n";
+	#print $config_base."\n";
 	my $result = ldap_search ( $url, $filter, $scope, $init_base, $attributes, $bind_dn, $bind_dn_pwd );
 	my @entries = $result->entries;
 	my $noe = @entries;
-	print $noe."\n";
+	#print $noe."\n";
 	foreach $entry ( @entries ) {
 		my $tmp = $entry->get_value ( 'namingcontexts' );
-		print $tmp."\n";
+		#print $tmp."\n";
 		$tmp =~ s/\,\ +/\,/g;
 		if ( $config_base =~ m/$tmp/ ) {
 			$base = $entry->get_value ( 'namingcontexts' );
@@ -200,7 +216,7 @@ sub opensieve {
 	my $server = shift;
 	my $port = shift;
 
-	print ( "##### Proxy => $user, Server => $server, Login => $admin, Password => $pass, Port => $port ####\n" );
+	#print ( "##### Proxy => $user, Server => $server, Login => $admin, Password => $pass, Port => $port ####\n" );
 
 	my $sieve = IMAP::Sieve->new ( 'Proxy' => $user, 'Server' => $server, 'Login' => $admin, 'Password' => $pass, 'Port' => $port );
 	return $sieve;
@@ -236,9 +252,9 @@ sub putscript {
 	my $sieve = shift;
 	my $scriptname = shift;
 	my $script = shift;
-	print "$sieve\n";
-	print "$scriptname\n";
-	print "$script\n";
+	#print "$sieve\n";
+	#print "$scriptname\n";
+	#print "$script\n";
 
 	my $res=$sieve->putscript($scriptname,$script);
 	if ($res) {print $sieve->{'Error'}}
@@ -272,7 +288,7 @@ if ( $opt{l} ) {
 } else {
 	$location = get_default_location ( $input_stream );
 }
-print "$location\n";
+#print "$location\n";
 
 # parse config
 my $config = parseconfig ( $location, $input_stream );
@@ -339,9 +355,9 @@ foreach $entry ( @entries ) {
 		$server_v = "";
 		next;
 	}
-	print $uid_v . " | " .
-		$addresses . " | " .
-		"\n";
+	#print $uid_v . " | " .
+	#	$addresses . " | " .
+	#	"\n";
 
 	my ($sieve_user, $tmp) = split ( /\@/, $mail_v );
 
@@ -405,12 +421,12 @@ foreach $entry ( @entries ) {
 						#print ( "$sieve_script\n" );
 						# including vacation message
 						if ( $sieve_script =~ m/$gosa_sieve_spam_header/ ) {
-							print "MATCH\n";
+							#print "MATCH\n";
 							$sieve_script =~ s/($gosa_sieve_spam_header[^{}]*{[^{}]*})/$1\n\n$sieve_vacation/;
 						} else {
 							$sieve_script =~ s/require(.*\[.*\])/require$1\n\n$sieve_vacation/;
 						}
-						print ( "START SIEVE $sieve_script\nSTOP SIEVE" );
+						#print ( "START SIEVE $sieve_script\nSTOP SIEVE" );
 						# uploading new sieve script
 						putscript( $sieve, $gosa_sieve_script_name, $sieve_script );
 						# activating new sieve script
@@ -458,10 +474,9 @@ foreach $entry ( @entries ) {
 						# removing vacation part
 						my $sieve_script = getscript( $sieve, $gosa_sieve_script_name );
 						if ( $sieve_script ) {
-							print "OLD SIEVE SCRIPT:\n$sieve_script\n\n";
-							#$sieve_script =~ s/$vacation_header_template[^#]Yp.*$vacation_footer_template//;
+							#print "OLD SIEVE SCRIPT:\n$sieve_script\n\n";
 							$sieve_script =~ s/$vacation_header_template[^#]*$vacation_footer_template//;
-							print "NEW SIEVE SCRIPT:\n$sieve_script\n\n";
+							#print "NEW SIEVE SCRIPT:\n$sieve_script\n\n";
 							# uploading new sieve script
 							putscript( $sieve, $gosa_sieve_script_name, $sieve_script );
 							# activating new sieve script
