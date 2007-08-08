@@ -8,7 +8,7 @@
   <br>
   {t}Dynamic DNS update{/t} 
   <select name='ddns_update_style'  title='{t}Dynamic DNS update style{/t}' size="1">
-       {html_options options=$ddns_styles selected=$ddns_update_style}
+       {html_options values=$ddns_styles output=$ddns_styles selected=$ddns_update_style}
   </select>
   </td>
 

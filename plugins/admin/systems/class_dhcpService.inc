@@ -65,7 +65,11 @@ class dhcpService extends plugin
       if (isset($attrs['dhcpStatements'])){
         foreach ($attrs['dhcpStatements'] as $opt){
           $idx= preg_replace('/\s.+$/', '', $opt);
-          $value= preg_replace('/^[^\s]+\s/', '', $opt);
+          if ($idx == $opt){
+            $value= "";
+          } else {
+            $value= preg_replace('/^[^\s]+\s/', '', $opt);
+          }
           $this->statements[$idx]= $value;
         }
       }
@@ -74,11 +78,11 @@ class dhcpService extends plugin
       /* We keep the parent dn here if it's new */
       $this->dn= $attrs;
       $this->new= TRUE;
-      $this->statements['default_lease_time']= 600;
-      $this->statements['max_lease_time']= 1700;
+      $this->statements['default-lease-time']= 600;
+      $this->statements['max-lease-time']= 1700;
       $this->statements['authoritative']= TRUE;
-      $this->statements['get_lease_hostnames']= TRUE;
-      $this->statements['ddns_update_style']= 'none';
+      $this->statements['get-lease-hostnames']= 'on';
+      $this->statements['ddns-update-style']= 'none';
     }
 
     /* Load network module */
@@ -88,7 +92,8 @@ class dhcpService extends plugin
     $this->advanced= new dhcpAdvanced();
     $this->advanced->options= $this->options;
     $this->advanced->statements= $this->statements;
-    $this->advanced->setAutoStatements(array("default-lease-time", "max-lease-time", "authoritative", "server-name", "get-lease-hostnames", "server-identifier", "ddns-update-style"));
+    $this->advanced->setAutoStatements(array("default-lease-time", "max-lease-time", "authoritative", "get-lease-hostnames", "server-identifier", "ddns-update-style"));
+    $this->advanced->setAutoOptions(array("server-name"));
 
     /* Save for later action */
     $this->orig_dhcpPrimaryDN= $this->dhcpPrimaryDN;
@@ -213,10 +218,15 @@ class dhcpService extends plugin
   /* Save to LDAP */
   function save()
   {
+    global $config;
     $this->attrs= array();
-    echo "server-name";
-    echo "server-identifier";
 
+    /* Get and set server name */
+    $ldap= $config->get_ldap_link();
+    $ldap->cat($this->dhcpPrimaryDN, array('cn'));
+    $res= $ldap->fetch();
+    $server_name= $res['cn'][0];
+    
     /* Merge arrays for network and advanced view */
     foreach (array("options", "statements") as $type){
       $tmp= array_merge($this->$type, $this->network->$type, $this->advanced->$type);
@@ -227,7 +237,9 @@ class dhcpService extends plugin
     $this->attrs['dhcpOption']= array();
     if (isset ($this->options) && count ($this->options)){
       foreach ($this->options as $key => $val){
-        $this->attrs['dhcpOption'][]= "$key $val";
+        if ($key != "server-name"){
+          $this->attrs['dhcpOption'][]= "$key $val";
+        }
       }
     }
 
@@ -235,12 +247,20 @@ class dhcpService extends plugin
     $this->attrs['dhcpStatements']= array();
     if (isset ($this->statements) && count ($this->statements)){
       foreach ($this->statements as $key => $val){
-        $this->attrs['dhcpStatements'][]= "$key $val";
+        if ($val != ""){
+          $this->attrs['dhcpStatements'][]= "$key $val";
+        } else {
+          $this->attrs['dhcpStatements'][]= "$key";
+        }
       }
     }
 
+    $this->attrs['dn']= $this->dn;
+    $this->attrs['cn']= array($this->cn);
+    $this->attrs['dhcpPrimaryDN']= array($this->dhcpPrimaryDN);
     $this->attrs['objectClass']= array('top', 'dhcpService');
     $this->attrs['MODIFIED']= TRUE;
+    $this->attrs['dhcpOption'][]= "server-name $server_name";
 
     return ($this->attrs);
   }
