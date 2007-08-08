@@ -2566,5 +2566,23 @@ function get_languages($languages_in_own_language = FALSE,$strip_region_tag = FA
   return($ret);
 }
 
+
+/* Check if $ip1 and $ip2 represents a valid IP range 
+ *  returns TRUE in case of a valid range, FALSE in case of an error. 
+ */
+function is_ip_range($ip1,$ip2)
+{
+  if(!is_ip($ip1) || !is_ip($ip2)){
+    return(FALSE);
+  }else{
+    $ar1 = split("\.",$ip1);
+    $var1 = $ar1[0] * (16777216) + $ar1[1] * (65536) + $ar1[2] * (256) + $ar1[3];
+
+    $ar2 = split("\.",$ip2);
+    $var2 = $ar2[0] * (16777216) + $ar2[1] * (65536) + $ar2[2] * (256) + $ar2[3];
+    return($var1 < $var2);
+  }
+}
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
