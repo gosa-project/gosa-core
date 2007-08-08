@@ -18,72 +18,28 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-class dhcpPool extends plugin
+class dhcpPool extends dhcpPlugin
 {
   /* Used attributes */
-  var $cn= "";
   var $dhcpRange= "";
   var $range_start= "";
   var $range_stop= "";
-  var $options= array();
-  var $statements= array();
-
-  /* Subobjects */
-  var $network;
-  var $advanced;
 
   /* attribute list for save action */
-  var $attributes= array();
-  var $objectclasses= array();
+  var $objectclasses= array('top', 'dhcpPool');
 
   function dhcpPool($attrs)
   {
-    /* Load statements / options */
-    if (is_array($attrs)){
-      $this->dn= $attrs['dn'];
-      $this->new= FALSE;
+    dhcpPlugin::dhcpPlugin($attrs);
 
-      /* Load attributes */
-      $this->cn= $attrs['cn'][0];
+    /* Load attributes */
+    if (!$this->new){
       $this->dhcpRange= $attrs['dhcpRange'][0];
       list($this->range_start, $this->range_stop)= preg_split('/\s+/', $this->dhcpRange);
-
-      /* Load options */
-      if (isset($attrs['dhcpOption'])){
-        foreach ($attrs['dhcpOption'] as $opt){
-          $idx= preg_replace('/\s.+$/', '', $opt);
-          $value= preg_replace('/^[^\s]+\s/', '', $opt);
-          $this->options[$idx]= $value;
-        }
-      }
-
-      /* Load statements */
-      if (isset($attrs['dhcpStatements'])){
-        foreach ($attrs['dhcpStatements'] as $opt){
-          $idx= preg_replace('/\s.+$/', '', $opt);
-          $value= preg_replace('/^[^\s]+\s/', '', $opt);
-          $this->statements[$idx]= $value;
-        }
-      }
-
-    } else {
-      /* We keep the parent dn here if it's new */
-      $this->dn= $attrs;
-      $this->new= TRUE;
     }
 
-    /* Load network module */
-    $this->network= new dhcpNetwork();
-    $this->network->options= $this->options;
-    $this->network->statements= $this->statements;
-    $this->advanced= new dhcpAdvanced();
-    $this->advanced->options= $this->options;
     $this->advanced->setAutoOptions(array("host-name"));
-    $this->advanced->statements= $this->statements;
     $this->advanced->setAutoStatements(array("fixed-address"));
-
-    /* Save CN for later reference */
-    $this->orig_cn= $this->cn;
   }
 
   function execute()
@@ -131,15 +87,7 @@ class dhcpPool extends plugin
       $this->range_stop= validate($_POST['range_stop']);
     }
 
-    /* Save sub-objects */
-    $this->network->save_object();
-    $this->advanced->save_object();
-
-    /* Merge arrays for advanced view */
-    foreach (array("options", "statements") as $type){
-      $tmp= array_merge($this->$type, $this->network->$type);
-      $this->advanced->$type= $tmp;
-    }
+    dhcpPlugin::save_object();
 
     /* Move range to internal variable */
     $this->dhcpRange= $this->range_start." ".$this->range_stop;
@@ -181,41 +129,8 @@ class dhcpPool extends plugin
   /* Save to LDAP */
   function save()
   {
-    /* Merge arrays for network and advanced view */
-    foreach (array("options", "statements") as $type){
-      $tmp= array_merge($this->$type, $this->network->$type, $this->advanced->$type);
-      $this->$type= $tmp;
-    }
-
-    /* Add cn if we're new */
-    if ($this->new){
-      $this->dn= "cn=".$this->cn.",".$this->dn;
-    } else {
-      $this->dn= "cn=".$this->cn.preg_replace('/^cn=[^,]+/', '', $this->dn);
-    }
-
-    /* Assemble new entry - options */
-    $this->attrs['dhcpOption']= array();
-    if (isset ($this->options) && count ($this->options)){
-      foreach ($this->options as $key => $val){
-        $this->attrs['dhcpOption'][]= "$key $val";
-      }
-    }
-
-    /* Assemble new entry - statements */
-    $this->attrs['dhcpStatements']= array();
-    if (isset ($this->statements) && count ($this->statements)){
-      foreach ($this->statements as $key => $val){
-        $this->attrs['dhcpStatements'][]= "$key $val";
-      }
-    }
-
-    /* Move dn to the result */
-    $this->attrs['dn']= $this->dn;
-    $this->attrs['cn']= array($this->cn);
+    dhcpPlugin::save();
     $this->attrs['dhcpRange']= array($this->dhcpRange);
-    $this->attrs['objectClass']= array('top', 'dhcpPool');
-    $this->attrs['MODIFIED']= TRUE;
 
     return ($this->attrs);
   }
