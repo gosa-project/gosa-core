@@ -263,6 +263,12 @@ function adjust_height(e) {
 				suggested= inner_height-230;
 			}
 		}
+
+		/* Reduce height if a list footer is set */
+		if(document.getElementById("t_scrollfoot")){
+			suggested = suggested -20;
+		}
+
 		document.getElementById("d_scrollbody").style.height=suggested+"px";
 	}
 	return true;
