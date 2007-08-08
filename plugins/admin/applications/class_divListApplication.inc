@@ -184,6 +184,18 @@ class divListApplication extends MultiSelectWindow
       $field3 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:80px;border-right:0px;text-align:right;'");
       $this->AddElement(array($field1,$field2,$field3));
     }
+
+    /* Create summary string for list footer */
+    $num_deps=0;
+    if(!$this->SubSearch){
+      $num_deps = count($this->Added_Departments);
+    }
+    $num_apps = count($list);
+    $str = $num_apps." ";
+    $num_apps      != 1  ? $str.=_("Applications").", "    : $str .= _("Application").", ";
+    $str.= $num_deps." ";
+    $num_deps       != 1  ? $str.=_("Departments")    : $str .= _("Department");
+    $this->set_List_Bottom_Info($str);
   }
 
   function Save()

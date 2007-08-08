@@ -186,11 +186,18 @@ class divListFai extends MultiSelectWindow
       Attach objects
      ********************/
 
+    $cnts = array();
+    foreach($objects as $key => $data){
+      $cnts[$key] = 0;
+    }
+
      foreach($list as $key => $value){
        $info     = "";
        $img      = "";
        $type     = $value['type'];
        $abort    =false;
+
+       $cnts[$type] ++;
 
        if(isset($objects[$type])){
          $img   = "<img class='center' src='".$objects[$type]['IMG']."' title='".$objects[$type]['NAME']."' alt='".$objects[$type]['KZL']."'>";
@@ -245,6 +252,45 @@ class divListFai extends MultiSelectWindow
        $field4 = array("string" => preg_replace("/%KEY%/",$key,$acti) , "attach" => "style='width:80px;border-right:0px;text-align:right;'");
        $this->AddElement(array($field1,$field2,$field3,$field4));
      }
+
+     /* Create summary string for list footer */
+     $num_deps=0;
+     if(!$this->SubSearch){
+       $num_deps = count($this->Added_Departments);
+     }
+
+     /* Profile */
+     $str = $cnts['FAIprofile']." ";
+     $cnts['FAIprofile']        != 1  ? $str.=_("Profiles").", "    : $str .= _("Profile").", ";
+
+     /* Scripts */
+     $str.= $cnts['FAIpartitionTable']." ";
+     $cnts['FAIpartitionTable'] != 1  ? $str.=_("Partitions").", "  : $str .= _("Partition").", ";
+
+     /* Scripts */
+     $str.= $cnts['FAIscript']." ";
+     $cnts['FAIscript']         != 1  ? $str.=_("Scripts").", "     : $str .= _("Script").", ";
+
+     /* Hooks */
+     $str.= $cnts['FAIhook']." ";
+     $cnts['FAIhook']           != 1  ? $str.=_("Hooks").", "       : $str .= _("Hook").", ";
+
+     /* Variables */
+     $str.= $cnts['FAIvariable']." ";
+     $cnts['FAIvariable']       != 1  ? $str.=_("Variables").", "   : $str .= _("Variable").", ";
+
+     /* Templates */
+     $str.= $cnts['FAItemplate']." ";
+     $cnts['FAItemplate']       != 1  ? $str.=_("Templates").", "   : $str .= _("Template").", ";
+
+     /* Packages */
+     $str.= $cnts['FAIpackageList']." ";
+     $cnts['FAIpackageList']    != 1  ? $str.=_("Package lists").", ": $str .= _("Package list").", ";
+
+     $str.= $num_deps." ";
+     $num_deps       != 1  ? $str.=_("Departments")    : $str .= _("Department");
+     $this->set_List_Bottom_Info($str);
+
   }
 
   function Save()

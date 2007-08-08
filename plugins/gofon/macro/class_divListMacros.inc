@@ -127,6 +127,19 @@ class divListMacro extends MultiSelectWindow
 
       $this->AddElement(array($field1,$field2,$field3,$field4));
     }
+
+    /* Create summary string for list footer */
+    $num_deps=0;
+    if(!$this->SubSearch){
+      $num_deps = count($this->Added_Departments);
+    }
+    $num_lists = count($list);
+    $str = $num_lists." ";
+    $num_lists      != 1  ? $str.=_("Macros").", "    : $str .= _("Macro").", ";
+    $str.= $num_deps." ";
+    $num_deps       != 1  ? $str.=_("Departments")    : $str .= _("Department");
+    $this->set_List_Bottom_Info($str);
+
   }
 
   function Save()

@@ -201,6 +201,18 @@ class divListGroup extends MultiSelectWindow
 
       $this->AddElement(array($field1,$field2,$field3,$field4));
     }
+
+    /* Create summary string for list footer */
+    $num_deps=0;
+    if(!$this->SubSearch){
+      $num_deps = count($this->Added_Departments);
+    }
+    $num_groups = count($groups);
+    $str = $num_groups." ";
+    $num_groups      != 1  ? $str.=_("Groups").", "    : $str .= _("Group").", ";
+    $str.= $num_deps." ";
+    $num_deps       != 1  ? $str.=_("Departments")    : $str .= _("Department");
+    $this->set_List_Bottom_Info($str);
   }
 
   function Save()

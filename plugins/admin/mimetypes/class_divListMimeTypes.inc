@@ -188,6 +188,18 @@ class divListMimeTypes extends MultiSelectWindow
       $field3 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:".$action_col_size."px;border-right:0px;text-align:right;'");
       $this->AddElement(array($field1,$field2,$field3));
     }
+
+    /* Create summary string for list footer */
+    $num_deps=0;
+    if(!$this->SubSearch){
+      $num_deps = count($this->Added_Departments);
+    }
+    $num_objs = count($list);
+    $str = $num_objs." ";
+    $num_objs      != 1  ? $str.=_("Mimetypes").", "    : $str .= _("Mimetype").", ";
+    $str.= $num_deps." ";
+    $num_deps       != 1  ? $str.=_("Departments")    : $str .= _("Department");
+    $this->set_List_Bottom_Info($str);
   }
 
   function Save()

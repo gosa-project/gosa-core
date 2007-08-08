@@ -156,8 +156,17 @@ class divListConference extends MultiSelectWindow
       $this->AddElement(array($a_field1,$a_field2,$a_field3,$a_field4,$a_field5));
     }
  
-
- 
+    /* Create summary string for list footer */
+    $num_deps=0;
+    if(!$this->SubSearch){
+      $num_deps = count($this->Added_Departments);
+    }
+    $num_lists = count($list);
+    $str = $num_lists." ";
+    $num_lists      != 1  ? $str.=_("Conferences").", "    : $str .= _("Conference").", ";
+    $str.= $num_deps." ";
+    $num_deps       != 1  ? $str.=_("Departments")    : $str .= _("Department");
+    $this->set_List_Bottom_Info($str);
   }
 
   function Save()

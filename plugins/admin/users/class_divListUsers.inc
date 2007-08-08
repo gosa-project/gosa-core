@@ -268,32 +268,16 @@ class divListUsers extends MultiSelectWindow
     }
  
     /* Create summary string for list footer */ 
-    $str = $num_users." ";
-    if($num_users != 1){
-      $str .= _("Users").", ";
-    }else{
-      $str .= _("User").", ";
-    }
-    
-    $str.= $num_templates." ";
-    if($num_templates != 1){
-      $str .= _("Templates").", ";
-    }else{
-      $str .= _("Template").", ";
-    }
-  
     $num_deps=0;
     if(!$this->SubSearch){ 
       $num_deps = count($this->Added_Departments);
     }
-
+    $str = $num_users." ";
+    $num_users      != 1  ? $str.=_("Users").", "     : $str .= _("User").", ";
+    $str.= $num_templates." ";
+    $num_templates  != 1  ? $str.=_("Templates").", " : $str .= _("Template").", ";
     $str.= $num_deps." ";
-    if($num_deps != 1){
-      $str .= _("Departments");
-    }else{
-      $str .= _("Department");
-    }
-          
+    $num_deps       != 1  ? $str.=_("Departments")    : $str .= _("Department"); 
     $this->set_List_Bottom_Info($str);
   }
 

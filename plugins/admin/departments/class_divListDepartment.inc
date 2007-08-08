@@ -122,8 +122,14 @@ class divListDepartment extends MultiSelectWindow
 
       $this->AddElement( array($field0,$field1,$field2));
     }
-  }
 
+    /* Create summary string for list footer */
+    $num_deps=count($list);
+    $str = $num_deps." ";
+    $num_deps       != 1  ? $str.=_("Departments")    : $str .= _("Department");
+    $this->set_List_Bottom_Info($str);
+
+  }
   function Save()
   {
     MultiSelectWindow::Save();
