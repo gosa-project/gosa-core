@@ -191,10 +191,15 @@ class divListApplication extends MultiSelectWindow
       $num_deps = count($this->Added_Departments);
     }
     $num_apps = count($list);
-    $str = $num_apps." ";
-    $num_apps      != 1  ? $str.=_("Applications").", "    : $str .= _("Application").", ";
-    $str.= $num_deps." ";
-    $num_deps       != 1  ? $str.=_("Departments")    : $str .= _("Department");
+
+    $num_app_str = _("Number of listed applications");
+    $num_dep_str = _("Number of listed departments");
+  
+    $str = "&nbsp;<img class='center' src='images/select_application.png' 
+                    title='".$num_app_str."' alt='".$num_app_str."'>&nbsp;#".$num_apps;
+    $str.= "&nbsp;<img class='center' src='images/select_department.png' 
+                    title='".$num_dep_str."' alt='".$num_dep_str."'>&nbsp;#".$num_deps;
+
     $this->set_List_Bottom_Info($str);
   }
 
