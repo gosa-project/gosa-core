@@ -298,7 +298,8 @@ class MultiSelectWindow{
 
 		$divlist = new divlist($this->string_Title);
 		$divlist->SetSummary($this->string_Summary);
-		$divlist->SetEntriesPerPage(0); // 0 for scrollable list 
+		$divlist->SetEntriesPerPage(0); // 0 for scrollable list
+    $divlist->SetFooter($this->get_List_Bottom_Info());
   
     if($this->DivHeight != ""){
       $divlist->SetHeight($this->DivHeight);
@@ -377,7 +378,6 @@ class MultiSelectWindow{
 		$smarty->assign("Summary"			, $this->string_Summary);
 		$smarty->assign("Title"				, $this->string_Title);
 		$smarty->assign("Information"		, $this->string_Information);
-		$smarty->assign("List_Bottom_Info", $this->get_List_Bottom_Info());
 
 		/* Check for exeeded sizelimit */
 		$smarty->assign("hint"				, print_sizelimit_warning());

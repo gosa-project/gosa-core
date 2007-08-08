@@ -266,8 +266,35 @@ class divListUsers extends MultiSelectWindow
         $users[strtolower( $val['sn']['0'].$val['uid']['0'])]=$add;
       }
     }
-        
-    $this->set_List_Bottom_Info(sprintf(_("%s User(s), %s Template(s), %s Department(s)"),$num_users,$num_templates,count($this->Added_Departments) * !$this->SubSearch));
+ 
+    /* Create summary string for list footer */ 
+    $str = $num_users." ";
+    if($num_users != 1){
+      $str .= _("Users").", ";
+    }else{
+      $str .= _("User").", ";
+    }
+    
+    $str.= $num_templates." ";
+    if($num_templates != 1){
+      $str .= _("Templates").", ";
+    }else{
+      $str .= _("Template").", ";
+    }
+  
+    $num_deps=0;
+    if(!$this->SubSearch){ 
+      $num_deps = count($this->Added_Departments);
+    }
+
+    $str.= $num_deps." ";
+    if($num_deps != 1){
+      $str .= _("Departments");
+    }else{
+      $str .= _("Department");
+    }
+          
+    $this->set_List_Bottom_Info($str);
   }
 
   function Save()

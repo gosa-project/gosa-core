@@ -23,6 +23,13 @@ td.listheader {
 	height:22px;
 }
 
+td.listfooter {
+	background:#E5E5E5;
+	border-top:1px solid #C0C0C0;
+	padding:3px;
+	height:16px;
+}
+
 td.scrollhead {
 	vertical-align:top;
 	padding:0px;

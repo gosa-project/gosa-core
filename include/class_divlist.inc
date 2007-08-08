@@ -17,6 +17,7 @@ class divlist {
 	var $i_entriesPerPage;
 
   var $force_height = false;
+  var $list_footer = "";
   
 	// Added php 4 constructor
 	function divlist($pageid){
@@ -36,6 +37,11 @@ class divlist {
 	function __destruct(){
 	
 	}
+
+  function SetFooter($str)
+  {
+    $this->list_footer = $str;
+  }
 
 	function AddEntry($a_entriedata) {
 		$this->a_entries[] = $a_entriedata;
@@ -78,8 +84,8 @@ class divlist {
     }
 
     $s_return.= $this->_generateHeader();
-    $s_return.=$this->_generatePage();
-		
+    $s_return.= $this->_generatePage();
+	  $s_return.= $this->_generateFooter();	
 		$s_return.= "</table>";
 		
 		return ($s_return);
@@ -99,6 +105,33 @@ class divlist {
 	function _numentries(){
 		return count($this->a_entries);
 	}
+
+  function _generateFooter()
+  {
+    $s_return = "";
+    if(!empty($this->list_footer)){
+
+      // Using scrolltable?
+      if($this->i_entriesPerPage == 0) {
+        if(!$this->force_height) {
+          $s_return.= "\n<tr><td class='scrollhead'><table summary='' style='width:100%' cellspacing='0' id='t_scrollfoot'>";
+        } else {
+          $s_return.= "\n<tr><td class='scrollhead'><table summary='' style='width:100%' cellspacing='0'                      id='t_scrollfoot_onlywidth'>";
+        }
+      }
+      $s_return .= "<tr><td class='listfooter' style='border-bottom:0px;'>".$this->list_footer."</td>";
+          // Attach a 13px-wide column (used as scrollbar space in body-table),
+    // but do this only if we are really using scrolltables.
+    if($this->i_entriesPerPage == 0) {
+      $s_return.= "\n<td class='listfooter' style='width:13px;border-right:0px;'>&nbsp;</td>";
+      $s_return.= "\n</table></td>";
+    }
+
+    $s_return.= "\n</tr>";
+
+    }
+    return($s_return);
+  }
 	
 	function _generateHeader(){
 		$s_return = "";
