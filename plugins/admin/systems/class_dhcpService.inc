@@ -166,6 +166,7 @@ class dhcpService extends dhcpPlugin
     dhcpPlugin::save();
 
     $this->attrs['dhcpPrimaryDN']= array($this->dhcpPrimaryDN);
+    $this->removeOption('server-name');
     $this->attrs['dhcpOption'][]= "server-name $server_name";
 
     return ($this->attrs);
