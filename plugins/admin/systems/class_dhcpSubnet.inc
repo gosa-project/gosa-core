@@ -146,7 +146,7 @@ class dhcpSubnet extends dhcpPlugin
     /* IP's? */
     foreach(array('dhcpNetMask' => _("Netmask"), 'cn' => _("Network address"), 'range_start' => _("Range"), 'range_stop' => _("Range")) as $attr => $str){
       if ($this->$attr != "" && !is_ip($this->$attr)){
-        print_red(sprintf(_("The field '%s' contains an invalid IP address"), $str));
+        $message[]= sprintf(_("The field '%s' contains an invalid IP address"), $str);
       }
     }
 
