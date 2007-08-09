@@ -101,13 +101,13 @@ class dhcpSharedNetwork extends dhcpPlugin
   function save_object()
   {
     if (isset($_POST['cn'])){
-      $this->cn= validate($_POST['cn']);
+      $this->cn= validate(get_post('cn'));
       dhcpPlugin::save_object();
 
       foreach (array("server-identifier", "default-lease-time",
             "max-lease-time", "min-lease-time") as $attr){
         if (isset($_POST[$attr]) && $_POST[$attr] != ""){
-          $this->statements[$attr]= $_POST[$attr];
+          $this->statements[$attr]= get_post($attr);
         } else {
           unset($this->statements[$attr]);
         }

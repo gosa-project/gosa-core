@@ -103,15 +103,15 @@ class dhcpSubnet extends dhcpPlugin
   {
     if(isset($_POST['dhcp_subnet_posted'])){
       if (isset($_POST['cn'])){
-        $this->cn= validate($_POST['cn']);
+        $this->cn= validate(get_post('cn'));
       } 
       if (isset($_POST['dhcp_netmask'])){
-        $this->dhcpNetMask= validate($_POST['dhcp_netmask']);
+        $this->dhcpNetMask= validate(get_post('dhcp_netmask'));
       } 
       if (isset($_POST['use_range'])){
         $this->use_range= TRUE;
-        $this->range_start= validate($_POST['range_start']);
-        $this->range_stop= validate($_POST['range_stop']);
+        $this->range_start= validate(get_post('range_start'));
+        $this->range_stop= validate(get_post('range_stop'));
       } else {
         $this->use_range= FALSE;
       }

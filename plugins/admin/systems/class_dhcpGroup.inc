@@ -69,7 +69,7 @@ class dhcpGroup extends dhcpPlugin
   {
     /* Save cn */
     if (isset($_POST['cn'])){
-      $this->cn= validate($_POST['cn']);
+      $this->cn= validate(get_post('cn'));
     }
 
     /* Handle global saving */

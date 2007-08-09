@@ -115,7 +115,7 @@ class dhcpService extends dhcpPlugin
     foreach (array('max_lease_time', 'default_lease_time', 'ddns_update_style') as $val){
       $tval= preg_replace('/_/', '-', $val);
       if ($_POST[$val] != ""){
-        $this->statements[$tval]= validate($_POST[$val]);
+        $this->statements[$tval]= validate(get_post($val));
       } else {
         unset ($this->statements[$tval]);
       }

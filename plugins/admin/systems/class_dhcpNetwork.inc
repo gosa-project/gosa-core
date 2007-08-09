@@ -38,7 +38,7 @@ class dhcpNetwork extends plugin
   {
     /* Check for iteraction */
     if (isset($_POST['add_dns']) && $_POST['addserver'] != ""){
-      if (!preg_match('/^[0-9a-z.-]+$/', $_POST['addserver'])){
+      if (!preg_match('/^[0-9a-z.-]+$/', get_post('addserver'))){
         print_red(_("The name of the DNS server your're going to add is not valid!"));
       } else {
         $servers= array();
@@ -47,7 +47,7 @@ class dhcpNetwork extends plugin
             $servers[$val]= $val;
           }
         }
-        $servers[$_POST['addserver']]= $_POST['addserver'];
+        $servers[get_post('addserver')]= get_post('addserver');
         $tmp= "";
         foreach($servers as $val){
           $tmp.= $val.",";
@@ -56,7 +56,7 @@ class dhcpNetwork extends plugin
       }
     }
     if (isset($_POST['delete_dns']) && isset($_POST['dnsserver'])){
-      $tmp= preg_replace("/(\s*,\s*)?".$_POST['dnsserver']."/i", '',
+      $tmp= preg_replace("/(\s*,\s*)?".get_post('dnsserver')."/i", '',
           $this->options['domain-name-servers']);
       $tmp= preg_replace("/(\s*)?,(\s*)?$/", '', $tmp);
       if ($tmp != ""){
@@ -160,7 +160,7 @@ class dhcpNetwork extends plugin
         if ($_POST["$val"] == ''){
           unset($this->options["$key"]);
         } else {
-          $this->options["$key"]= $_POST["$val"];
+          $this->options["$key"]= get_post("$val");
         }
       }
 
@@ -169,7 +169,7 @@ class dhcpNetwork extends plugin
         if ($_POST["$val"] == ''){
           unset($this->statements["$key"]);
         } else {
-          $this->statements["$key"]= '"'.$_POST["$val"].'"';
+          $this->statements["$key"]= '"'.get_post("$val").'"';
         }
       }
 

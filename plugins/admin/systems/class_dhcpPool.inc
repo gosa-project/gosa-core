@@ -81,9 +81,9 @@ class dhcpPool extends dhcpPlugin
   function save_object()
   {
     if (isset($_POST['cn'])){
-      $this->cn= validate($_POST['cn']);
-      $this->range_start= validate($_POST['range_start']);
-      $this->range_stop= validate($_POST['range_stop']);
+      $this->cn= validate(get_post('cn'));
+      $this->range_start= validate(get_post('range_start'));
+      $this->range_stop= validate(get_post('range_stop'));
     }
 
     dhcpPlugin::save_object();

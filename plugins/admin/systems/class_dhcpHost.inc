@@ -35,6 +35,8 @@ class dhcpHost extends dhcpPlugin
       $this->dhcpHWaddress= $attrs['dhcpHWAddress'][0];
     }
 
+	print_a($this);
+
     $this->advanced->setAutoOptions(array("host-name"));
     $this->advanced->setAutoStatements(array("fixed-address"));
   }
@@ -95,12 +97,12 @@ class dhcpHost extends dhcpPlugin
     if (isset($_POST['hwtype'])){
 
       /* Assemble hwAddress */
-      $this->dhcpHWAddress= $_POST['hwtype']." ".$_POST['dhcpHWAddress'];
-      $this->cn= validate($_POST['cn']);
+      $this->dhcpHWAddress= get_post('hwtype')." ".get_post('dhcpHWAddress');
+      $this->cn= validate(get_post('cn'));
 
       /* Save fixed address */
       if ($_POST['fixedaddr'] != ""){
-        $this->statements['fixed-address']= $_POST['fixedaddr'];
+        $this->statements['fixed-address']= get_post('fixedaddr');
       } else {
         unset ($this->statements['fixed-address']);
       }
