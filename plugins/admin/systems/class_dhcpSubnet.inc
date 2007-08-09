@@ -41,7 +41,7 @@ class dhcpSubnet extends dhcpPlugin
           $this->$attr= $attrs[$attr][0];
         }
       }
-      if (isset($attrs['dhcpRange'])){
+      if (isset($attrs['dhcpRange']) && count($attrs['dhcpRange'])){
         $this->use_range= TRUE;
         list($this->range_start, $this->range_stop)= preg_split('/\s+/', $this->dhcpRange);
       }
