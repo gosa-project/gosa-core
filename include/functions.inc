@@ -2584,6 +2584,29 @@ function is_ip_range($ip1,$ip2)
   }
 }
 
+
+/* Check if the specified IP address $address is inside the given network */
+function is_in_network($network, $netmask, $address)
+{
+  $nw= split('\.', $network);
+  $nm= split('\.', $netmask);
+  $ad= split('\.', $address);
+
+  /* Generate inverted netmask */
+  for ($i= 0; $i<4; $i++){
+    $ni[$i]= 255-$nm[$i];
+    $la[$i]= $nw[$i] | $ni[$i];
+  }
+
+  /* Transform to integer */
+  $first= $nw[0] * (16777216) + $nw[1] * (65536) + $nw[2] * (256) + $nw[3];
+  $curr=  $ad[0] * (16777216) + $ad[1] * (65536) + $ad[2] * (256) + $ad[3];
+  $last=  $la[0] * (16777216) + $la[1] * (65536) + $la[2] * (256) + $la[3];
+
+  return ($first < $curr&& $last > $curr);
+}
+
+
 /* Returns contents of the given POST variable and check magic quotes settings */
 function get_post($name)
 {
