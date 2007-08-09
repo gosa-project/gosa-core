@@ -78,7 +78,12 @@ class dhcpService extends dhcpPlugin
 
     /* Merge arrays for advanced view */
     foreach (array("options", "statements") as $type){
-      $tmp= array_merge($this->$type, $this->network->$type);
+
+      $tmp = $this->$type;
+      foreach($this->network->$type as $name => $value){
+        $tmp[$name] = $value;
+      }	
+
       $this->advanced->$type= $tmp;
     }
 
@@ -161,5 +166,5 @@ class dhcpService extends dhcpPlugin
   }
   
 }
-
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
