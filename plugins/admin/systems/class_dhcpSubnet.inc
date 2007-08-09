@@ -154,9 +154,15 @@ class dhcpSubnet extends dhcpPlugin
       }
     }
 
-	/* Check ip range */
+    /* Check ip range */
     if(!is_ip_range($this->range_start,$this->range_stop)){
         $message[] = _("Field 'Range' contains invalid IP range.");
+    }
+
+    /* Check if range is in the network */
+    if (!is_in_network($this->cn, $this->dhcpNetMask, $this->range_start) ||
+        !is_in_network($this->cn, $this->dhcpNetMask, $this->range_stop)){
+      $message[] = _("'Range' is not inside the configured network.");
     }
 
     return $message;

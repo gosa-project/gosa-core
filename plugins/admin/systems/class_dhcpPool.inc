@@ -122,9 +122,17 @@ class dhcpPool extends dhcpPlugin
       $message[]= _("Field 'Range' contains invalid IP addresses.");
     }
 
-	if(!is_ip_range($this->range_start,$this->range_stop)){
-		$message[] = _("Field 'Range' contains invalid IP range.");
-	}
+    if(!is_ip_range($this->range_start,$this->range_stop)){
+      $message[] = _("Field 'Range' contains invalid IP range.");
+    }
+
+    /* Check if range is in the network */
+    #TODO: look for preceeding subnet entries in $cache and check if the
+    #      range is valid.
+    #if (!is_in_network($this->cn, $this->dhcpNetMask, $this->range_start) ||
+    #    !is_in_network($this->cn, $this->dhcpNetMask, $this->range_stop)){
+    #  $message[] = _("'Range' is not inside the configured network.");
+    #}
 
     return $message;
   }
