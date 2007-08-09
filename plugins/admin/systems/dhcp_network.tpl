@@ -7,7 +7,7 @@
     <tr>
      <td>{t}Router{/t}</td>
      <td>
-      <input type='text' name='routers' size='25' maxlength='80' value='{$routers}'
+      <input id='routers' type='text' name='routers' size='25' maxlength='80' value='{$routers}'
               title='{t}Enter name or IP address of router to be used in this section{/t}'>
      </td>
     </tr>
@@ -81,4 +81,10 @@
   </td>
  </tr>
 </table>
+<!-- Place cursor in correct field -->
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+     focus_field('cn','routers');
+  -->
+</script>
 

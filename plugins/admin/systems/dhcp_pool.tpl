@@ -4,7 +4,7 @@
  <tr>
   <td width="50%">
    {t}Name{/t}{$must}&nbsp;
-   <input type='text' name='cn' size='25' maxlength='80' value='{$cn}'
+   <input id='cn' type='text' name='cn' size='25' maxlength='80' value='{$cn}'
         title='{t}Name of pool{/t}'>
   </td>
   <td>

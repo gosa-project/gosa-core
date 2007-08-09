@@ -6,7 +6,7 @@
    <table>
     <tr>
      <td>{t}Network address{/t}{$must}</td>
-     <td><input type='text' name='cn' size='25' maxlength='80' value='{$cn}'></td>
+     <td><input id='cn' type='text' name='cn' size='25' maxlength='80' value='{$cn}'></td>
     </tr>
     <tr>
      <td>{t}Netmask{/t}{$must}</td>
@@ -36,6 +36,6 @@
 <!-- Place cursor in correct field -->
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
-  document.mainform.cn.focus();
+	 focus_field('cn');
   -->
 </script>

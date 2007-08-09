@@ -20,6 +20,6 @@
 <!-- Place cursor -->
 <script language="JavaScript" type="text/javascript">
 	<!--
-	focus_field('UseTextInputName');
+	focus_field('section');
 	-->
 </script>

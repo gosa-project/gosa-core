@@ -9,7 +9,7 @@
     <tr>
      <td>{t}Name{/t}{$must}</td>
      <td>
-      <input type='text' name='cn' size='25' maxlength='80' value='{$cn}' title='{t}Name for shared network{/t}'>
+      <input id='cn' type='text' name='cn' size='25' maxlength='80' value='{$cn}' title='{t}Name for shared network{/t}'>
      </td>
     </tr>
     <tr>

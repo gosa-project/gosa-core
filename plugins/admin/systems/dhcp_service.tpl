@@ -3,7 +3,7 @@
 <table width="100%">
  <tr>
   <td width="50%">
-  <input type=checkbox name="authoritative" value="1" {$authoritative}> {t}Authoritative service{/t}<br>
+  <input id='authoritative' type=checkbox name="authoritative" value="1" {$authoritative}> {t}Authoritative service{/t}<br>
   <br>
   {t}Dynamic DNS update{/t} 
   <select name='ddns_update_style'  title='{t}Dynamic DNS update style{/t}' size="1">
@@ -38,6 +38,6 @@
 <!-- Place cursor in correct field -->
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
-  document.mainform.authoritative.focus();
+	focus_field('authoritative');
   -->
 </script>
