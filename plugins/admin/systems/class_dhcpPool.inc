@@ -122,6 +122,10 @@ class dhcpPool extends dhcpPlugin
       $message[]= _("Field 'Range' contains invalid IP addresses.");
     }
 
+	if(!is_ip_range($this->range_start,$this->range_stop)){
+		$message[] = _("Field 'Range' contains invalid IP range.");
+	}
+
     return $message;
   }
 

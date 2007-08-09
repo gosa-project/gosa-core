@@ -150,6 +150,11 @@ class dhcpSubnet extends dhcpPlugin
       }
     }
 
+	/* Check ip range */
+    if(!is_ip_range($this->range_start,$this->range_stop)){
+        $message[] = _("Field 'Range' contains invalid IP range.");
+    }
+
     return $message;
   }
 
