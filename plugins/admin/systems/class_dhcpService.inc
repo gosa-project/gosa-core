@@ -42,11 +42,10 @@ class dhcpService extends dhcpPlugin
       $this->statements['default-lease-time']= 600;
       $this->statements['max-lease-time']= 1700;
       $this->statements['authoritative']= TRUE;
-      $this->statements['get-lease-hostnames']= 'on';
       $this->statements['ddns-update-style']= 'none';
     }
 
-    $this->advanced->setAutoStatements(array("default-lease-time", "max-lease-time", "authoritative", "get-lease-hostnames", "server-identifier", "ddns-update-style"));
+    $this->advanced->setAutoStatements(array("default-lease-time", "max-lease-time", "authoritative", "server-identifier", "ddns-update-style"));
     $this->advanced->setAutoOptions(array("server-name"));
 
     /* Save for later action */
@@ -72,12 +71,6 @@ class dhcpService extends dhcpPlugin
       $smarty->assign("authoritative", "checked");
     } else {
       $smarty->assign("authoritative", "");
-    }
-
-    if (isset($this->statements['get-lease-hostnames']) && preg_match('/on/i', $this->statements['get-lease-hostnames'])){
-      $smarty->assign("get_lease_hostnames", "checked");
-    } else {
-      $smarty->assign("get_lease_hostnames", "");
     }
 
     /* Show main page */
@@ -132,11 +125,6 @@ class dhcpService extends dhcpPlugin
       $this->statements['authoritative']= "";
     } else {
       unset($this->statements['authoritative']);
-    }
-    if (isset($_POST['get_lease_hostnames'])){
-      $this->statements['get-lease-hostnames']= "on";
-    } else {
-      $this->statements['get-lease-hostnames']= "off";
     }
 
     dhcpPlugin::save_object();

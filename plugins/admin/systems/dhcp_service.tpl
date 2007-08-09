@@ -4,7 +4,6 @@
  <tr>
   <td width="50%">
   <input type=checkbox name="authoritative" value="1" {$authoritative}> {t}Authoritative service{/t}<br>
-  <input type=checkbox name="get_lease_hostnames" value="1" {$get_lease_hostnames}> {t}Assign hostnames via DNS{/t}<br>
   <br>
   {t}Dynamic DNS update{/t} 
   <select name='ddns_update_style'  title='{t}Dynamic DNS update style{/t}' size="1">
