@@ -3,7 +3,6 @@
 class servdhcp extends plugin
 {
   /* attribute list for save action */
-  var $ignore_account= TRUE;
   var $attributes= array();
   var $objectclasses= array();
 
@@ -31,6 +30,9 @@ class servdhcp extends plugin
 
     /* Load information about available services */
     $this->reload(); 
+    if (!count($this->dhcpSections)){
+      $this->is_account= FALSE;
+    }
   }
 
 
@@ -190,6 +192,22 @@ class servdhcp extends plugin
     if ($this->is_account){
       $display= $this->show_header(_("Remove DHCP service"),
           _("This server has DHCP features enabled. You can disable them by clicking below."));
+
+      if (!count($this->dhcpObjectCache)){
+        $attrs= array();
+        $attrs['dn']= 'cn=dhcp,'.$this->dn;
+        $attrs['cn']= array('dhcp');
+        $attrs['objectClass']= array('top', 'dhcpService');
+        $attrs['dhcpPrimaryDN']= array($this->dn);
+        $attrs['dhcpStatements']= array("default-lease-time 600",
+                                        "max-lease-time 1200",
+                                        "authoritative",
+                                        "ddns-update-style none");
+        $attrs['MODIFIED']= TRUE;
+        $this->dhcpSections['cn=dhcp,'.$this->dn]= _("Global options");
+        $this->dhcpObjectCache['cn=dhcp,'.$this->dn]= $attrs;
+      }
+
     } else {
       $display= $this->show_header(_("Add DHCP service"),
           _("This server has DHCP features disabled. You can enable them by clicking below."));
@@ -248,9 +266,16 @@ class servdhcp extends plugin
     return($display);
   }
 
+
   function remove_from_parent()
   {
-    /* This cannot be removed... */
+    $ldap= $this->config->get_ldap_link();
+    foreach ($this->dhcpObjectCache as $dn => $content){
+      if ($this->objectType($dn) == 'dhcpService'){
+        $ldap->rmdir_recursive($dn);
+        show_ldap_error($ldap->get_error(), _("Removing DHCP entries failed"));
+      }
+    }
   }
 
 
