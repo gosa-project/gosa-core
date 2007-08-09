@@ -145,6 +145,11 @@ class dhcpService extends dhcpPlugin
       $message[]= _('Default lease time needs to smaller than the maximum lease time.');
     }
 
+    /* Check external plugins */
+    $net= $this->network->check();
+    $adv= $this->advanced->check();
+    $message= array_merge($message, $net, $adv);
+
     return $message;
   }
 

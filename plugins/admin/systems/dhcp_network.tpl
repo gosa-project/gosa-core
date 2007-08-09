@@ -58,7 +58,7 @@
     <tr>
      <td colspan=2>
       <br>
-      {t}Server{/t}<br>
+      {t}DNS server{/t}<br>
       <select name='dnsserver'  title='{t}List of DNS servers to be propagated{/t}' style="width:350px;" size="4">
        {html_options options=$dnsservers}
       </select>

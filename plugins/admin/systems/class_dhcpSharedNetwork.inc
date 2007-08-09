@@ -148,7 +148,7 @@ class dhcpSharedNetwork extends dhcpPlugin
           "min-lease-time" => _("Min. lease time")) as $key => $val){
       if (isset($this->statements[$key]) && $this->statements[$key] != "" && 
           !is_id($this->statements[$key])){
-        $message[]= sprintf(_("The value specified as '%s' is no valid integer!"), $val);
+        $message[]= sprintf(_("The value specified as '%s' is not numeric!"), $val);
       }
     }
 
@@ -162,6 +162,11 @@ class dhcpSharedNetwork extends dhcpPlugin
         }
       }
     }
+
+    /* Check external plugins */
+    $net= $this->network->check();
+    $adv= $this->advanced->check();
+    $message= array_merge($message, $net, $adv);
 
     return $message;
   }

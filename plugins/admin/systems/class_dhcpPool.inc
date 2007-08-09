@@ -147,6 +147,12 @@ class dhcpPool extends dhcpPlugin
       }
       $dn= preg_replace('/^[^,]+,/', '', $dn);
     }
+
+    /* Check external plugins */
+    $net= $this->network->check();
+    $adv= $this->advanced->check();
+    $message= array_merge($message, $net, $adv);
+
     return $message;
   }
 

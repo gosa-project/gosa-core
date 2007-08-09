@@ -35,8 +35,6 @@ class dhcpHost extends dhcpPlugin
       $this->dhcpHWaddress= $attrs['dhcpHWAddress'][0];
     }
 
-	print_a($this);
-
     $this->advanced->setAutoOptions(array("host-name"));
     $this->advanced->setAutoStatements(array("fixed-address"));
   }

@@ -101,6 +101,10 @@ class dhcpGroup extends dhcpPlugin
       }
     }
 
+    /* Check external plugins */
+    $net= $this->network->check();
+    $adv= $this->advanced->check();
+    $message= array_merge($message, $net, $adv);
 
     return $message;
   }

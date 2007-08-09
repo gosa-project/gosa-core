@@ -123,7 +123,6 @@ class dhcpPlugin extends plugin
   function check($cache)
   {
     $message= array();
-
     return $message;
   }
 
