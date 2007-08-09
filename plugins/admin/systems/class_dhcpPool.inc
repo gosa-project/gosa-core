@@ -127,13 +127,26 @@ class dhcpPool extends dhcpPlugin
     }
 
     /* Check if range is in the network */
-    #TODO: look for preceeding subnet entries in $cache and check if the
-    #      range is valid.
-    #if (!is_in_network($this->cn, $this->dhcpNetMask, $this->range_start) ||
-    #    !is_in_network($this->cn, $this->dhcpNetMask, $this->range_stop)){
-    #  $message[] = _("'Range' is not inside the configured network.");
-    #}
+    $dn= $this->dn;
+    while (preg_match('/,/', $dn)){
+      $type= $this->objectType($cache, $dn);
 
+      /* Check for subnet */
+      if ($type == 'dhcpSubnet'){
+        $network= $cache[$dn]['cn'][0];
+        $netmask= normalize_netmask($cache[$dn]['dhcpNetMask'][0]);
+        if (!is_in_network($network, $netmask, $this->range_start) ||
+            !is_in_network($network, $netmask, $this->range_stop)){
+          $message[] = _("'Range' is not inside the configured network.");
+        }
+      }
+
+      /* Stop if we've examined the service base object */
+      if ($type == 'dhcpService'){
+        break;
+      }
+      $dn= preg_replace('/^[^,]+,/', '', $dn);
+    }
     return $message;
   }
 
@@ -145,6 +158,24 @@ class dhcpPool extends dhcpPlugin
 
     return ($this->attrs);
   }
+
+
+  function objectType($cache, $dn)
+  {
+    $type= "";
+    $types= array("dhcpService", "dhcpClass", "dhcpSubClass", "dhcpHost",
+                  "dhcpGroup", "dhcpPool", "dhcpSubnet", "dhcpSharedNetwork");
+
+    foreach ($cache[$dn]['objectClass'] as $oc){
+      if (in_array($oc, $types)){
+        $type= $oc;
+        break;
+      }
+    }
+
+    return ($type);
+  }
+
   
 }
 
