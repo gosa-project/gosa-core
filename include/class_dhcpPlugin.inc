@@ -46,7 +46,11 @@ class dhcpPlugin extends plugin
       if (isset($attrs['dhcpOption'])){
         foreach ($attrs['dhcpOption'] as $opt){
           $idx= preg_replace('/\s.+$/', '', $opt);
-          $value= preg_replace('/^[^\s]+\s/', '', $opt);
+          if ($idx == $opt){
+            $value= "";
+          } else {
+            $value= preg_replace('/^[^\s]+\s/', '', $opt);
+          }
           $this->options[$idx]= $value;
         }
       }
@@ -55,7 +59,11 @@ class dhcpPlugin extends plugin
       if (isset($attrs['dhcpStatements'])){
         foreach ($attrs['dhcpStatements'] as $opt){
           $idx= preg_replace('/\s.+$/', '', $opt);
-          $value= preg_replace('/^[^\s]+\s/', '', $opt);
+          if ($idx == $opt){
+            $value= "";
+          } else {
+            $value= preg_replace('/^[^\s]+\s/', '', $opt);
+          }
           $this->statements[$idx]= $value;
         }
       }
@@ -164,6 +172,30 @@ class dhcpPlugin extends plugin
     $this->attrs['MODIFIED']= TRUE;
 
     return ($this->attrs);
+  }
+
+
+  function removeAttrs($name, $type)
+  {
+    $new= array();
+    foreach ($this->attrs[$type] as $value){
+      if (!preg_match("/^$name /", $value)){
+        $new[]= $value;
+      }
+    }
+    $this->attrs[$type]= $new;
+  }
+
+
+  function removeOption($name)
+  {
+    $this->removeAttrs($name, 'dhcpOption');
+  }
+
+
+  function removeStatement($name)
+  {
+    $this->removeAttrs($name, 'dhcpStatement');
   }
 
 }
