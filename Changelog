@@ -2,7 +2,17 @@ GOsa2 changelog
 ===============
 
 * gosa 2.5.13
+  - Re-added ISC DHCP support
+  - Fixes for the mail based bugtracker
+  - Fixed autouid problem with slashes
+  - Added list sorting for FAI script lists
+  - Added copy'n paste for mimetypes
+  - Cut'n paste objects are now greyed out
+  - Added swedish locale
+  - Unified language code
+  - Added a statistic footer to lists
   - Added the ssh plugin
+  - Layout fixes
 
 * gosa 2.5.12
   - Fixed problems with automatic reverse zones
