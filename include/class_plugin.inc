@@ -383,6 +383,11 @@ class plugin
         }
       }
     }
+
+    /* Update saved attributes and ensure that next cleanups will be successful too */
+    foreach($this->attrs as $name => $value){
+      $this->saved_attributes[$name] = $value;
+    }
   }
 
   /* Check formular input */
