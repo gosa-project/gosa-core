@@ -226,7 +226,7 @@ class servdhcp extends plugin
     /* Create Listbox with existing Zones
      */
     $DhcpList = new divSelectBox("dhcpSections");
-    $DhcpList->SetHeight(300);
+    $DhcpList->SetHeight(400);
 
     /* Add entries to divlist
      */
