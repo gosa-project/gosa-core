@@ -101,21 +101,25 @@ class dhcpSubnet extends dhcpPlugin
   /* Save data to object */
   function save_object()
   {
-    if (isset($_POST['cn'])){
-      $this->cn= validate($_POST['cn']);
-    } 
-    if (isset($_POST['dhcp_netmask'])){
-      $this->dhcpNetMask= validate($_POST['dhcp_netmask']);
-    } 
-    if (isset($_POST['use_range'])){
-      $this->use_range= TRUE;
-      $this->range_start= validate($_POST['range_start']);
-      $this->range_stop= validate($_POST['range_stop']);
-    } else {
-      $this->use_range= FALSE;
-    }
+    if(isset($_POST['dhcp_subnet_posted'])){
+      if (isset($_POST['cn'])){
+        $this->cn= validate($_POST['cn']);
+      } 
+      if (isset($_POST['dhcp_netmask'])){
+        $this->dhcpNetMask= validate($_POST['dhcp_netmask']);
+      } 
+      if (isset($_POST['use_range'])){
+        $this->use_range= TRUE;
+        $this->range_start= validate($_POST['range_start']);
+        $this->range_stop= validate($_POST['range_stop']);
+      } else {
+        $this->use_range= FALSE;
+      }
 
-    dhcpPlugin::save_object();
+      /* Move range to internal variable */
+      $this->dhcpRange= $this->range_start." ".$this->range_stop;
+      dhcpPlugin::save_object();
+    }
   }
 
 
@@ -176,5 +180,5 @@ class dhcpSubnet extends dhcpPlugin
   }
   
 }
-
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

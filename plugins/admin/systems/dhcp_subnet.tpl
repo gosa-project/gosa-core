@@ -30,7 +30,7 @@
   </td>
   </tr>
 </table>
-
+<input type='hidden' name='dhcp_subnet_posted' value='1'>
 <p class="seperator"></p>
 
 <!-- Place cursor in correct field -->
