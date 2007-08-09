@@ -78,13 +78,7 @@ class dhcpService extends dhcpPlugin
 
     /* Merge arrays for advanced view */
     foreach (array("options", "statements") as $type){
-
-      $tmp = $this->$type;
-      foreach($this->network->$type as $name => $value){
-        $tmp[$name] = $value;
-      }	
-
-      $this->advanced->$type= $tmp;
+      $this->advanced->$type= $this->$type + $this->network->$type;;
     }
 
     $display.= $this->advanced->execute();

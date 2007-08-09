@@ -114,8 +114,7 @@ class dhcpPlugin extends plugin
 
     /* Merge arrays for advanced view */
     foreach (array("options", "statements") as $type){
-      $tmp= array_merge($this->$type, $this->network->$type);
-      $this->advanced->$type= $tmp;
+      $this->advanced->$type= $this->$type + $this->network->$type;;
     }
   }
 
@@ -134,8 +133,7 @@ class dhcpPlugin extends plugin
   {
     /* Merge arrays for network and advanced view */
     foreach (array("options", "statements") as $type){
-      $tmp= array_merge($this->$type, $this->network->$type, $this->advanced->$type);
-      $this->$type= $tmp;
+      $this->$type= $this->$type + $this->network->$type + $this->advanced->$type;
     }
 
     /* Add cn if we're new */

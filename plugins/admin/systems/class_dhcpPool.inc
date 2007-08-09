@@ -54,8 +54,7 @@ class dhcpPool extends dhcpPlugin
 
     /* Merge arrays for advanced view */
     foreach (array("options", "statements") as $type){
-      $tmp= array_merge($this->$type, $this->network->$type);
-      $this->advanced->$type= $tmp;
+      $this->advanced->$type= $this->$type + $this->network->$type;;
     }
 
     $display.= $this->advanced->execute();
