@@ -30,13 +30,9 @@ class dhcpHost extends dhcpPlugin
   {
     dhcpPlugin::dhcpPlugin($attrs);
 
+    /* Load attributes */
     if (!$this->new){
-      /* Load attributes */
-      foreach (array("cn", "dhcpHWAddress") as $attr){
-        if (isset($attrs[$attr][0])){
-          $this->$attr= $attrs[$attr][0];
-        }
-      }
+      $this->dhcpHWaddress= $attrs['dhcpHWAddress'][0];
     }
 
     $this->advanced->setAutoOptions(array("host-name"));

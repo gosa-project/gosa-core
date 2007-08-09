@@ -1,7 +1,7 @@
 <?php
 /*
   This code is part of GOsa (https://gosa.gonicus.de)
-  Copyright (C) 2003  Cajus Pollmeier
+  Copyright (C) 2003-2007 Cajus Pollmeier
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -18,53 +18,18 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-class dhcpSharedNetwork extends plugin
+class dhcpSharedNetwork extends dhcpPlugin
 {
   /* attribute list for save action */
-  var $objectclasses= array();
+  var $objectclasses= array('top', 'dhcpSharedNetwork');
 
   function dhcpSharedNetwork($attrs)
   {
-    /* Load statements / options */
-    if (is_array($attrs)){
-      $this->dn= $attrs['dn'];
-      $this->cn= $attrs['cn'][0];
-      $this->new= FALSE;
+    dhcpPlugin::dhcpPlugin($attrs);
 
-      /* Load options */
-      if (isset($attrs['dhcpOption'])){
-        foreach ($attrs['dhcpOption'] as $opt){
-          $idx= preg_replace('/\s.+$/', '', $opt);
-          $value= preg_replace('/^[^\s]+\s/', '', $opt);
-          $this->options[$idx]= $value;
-        }
-      }
-
-      /* Load statements */
-      if (isset($attrs['dhcpStatements'])){
-        foreach ($attrs['dhcpStatements'] as $opt){
-          $idx= preg_replace('/\s.+$/', '', $opt);
-          $value= preg_replace('/^[^\s]+\s/', '', $opt);
-          $this->statements[$idx]= $value;
-        }
-      }
-
-    } else {
-      /* We keep the parent dn here if it's new */
-      $this->dn= $attrs;
-      $this->new= TRUE;
-    }
-
-    /* Load network module */
-    $this->network= new dhcpNetwork();
-    $this->network->options= $this->options;
-    $this->network->statements= $this->statements;
-    $this->advanced= new dhcpAdvanced();
-    $this->advanced->options= $this->options;
-    $this->advanced->statements= $this->statements;
-
-    /* Save CN for later reference */
-    $this->orig_cn= $this->cn;
+    $this->advanced->setAutoStatements(array("server-identifier", "default-lease-time",
+          "max-lease-time", "min-lease-time", "authoritative", "deny-unknown-clients",
+          "deny-bootp", "deny-booting"));
   }
 
 
@@ -74,26 +39,32 @@ class dhcpSharedNetwork extends plugin
 
     /* Fill template */
     $smarty->assign ("cn", $this->cn);
-    foreach (array("server-identifier", "default-lease-time", 
-          "max-lease-time", "min-lease-time") as $attr){
+    foreach (array("server-identifier", "default-lease-time", "max-lease-time", "min-lease-time") as $attr){
       if (isset($this->statements[$attr])){
         $smarty->assign(preg_replace('/-/', '_', $attr), $this->statements[$attr]);
+      } else {
+        $smarty->assign(preg_replace('/-/', '_', $attr), "");
       }
-    }
-    if ($this->dn != 'new'){
-      $smarty->assign("mode", "readonly");
     }
     if (isset($this->statements["authoritative"])){
       $smarty->assign("authoritative", "checked");
+    } else {
+      $smarty->assign("authoritative", "");
     }
     if (!isset($this->statements["deny-unknown-clients"])){
       $smarty->assign("allow_unknown_state", "checked");
+    } else {
+      $smarty->assign("allow_unknown_state", "");
     }
     if (!isset($this->statements["deny-bootp"])){
       $smarty->assign("allow_bootp_state", "checked");
+    } else {
+      $smarty->assign("allow_bootp_state", "");
     }
     if (!isset($this->statements["deny-booting"])){
       $smarty->assign("allow_booting_state", "checked");
+    } else {
+      $smarty->assign("allow_booting_state", "");
     }
 
     /* Show main page */
@@ -124,127 +95,87 @@ class dhcpSharedNetwork extends plugin
 
   function remove_from_parent()
   {
-	/* Just remove the dn from the ldap, then we're done. Host
-           entries do not have any entries below themselfes. */
-        $ldap= $this->config->get_ldap_link();
-        $ldap->cd($this->dn);
-        $ldap->recursive_remove();
-        show_ldap_error($ldap->get_error());
-
-	/* Optionally execute a command after we're done */
-	$this->postremove();
   }
 
 
   /* Save data to object */
   function save_object()
   {
-  	if (isset($_POST['cn'])){
-	  	plugin::save_object();
+    if (isset($_POST['cn'])){
+      $this->cn= validate($_POST['cn']);
+      dhcpPlugin::save_object();
 
-		foreach (array("server-identifier", "default-lease-time",
-	                        "max-lease-time", "min-lease-time") as $attr){
-			if (isset($_POST[$attr]) && $_POST[$attr] != ""){
-				$this->statements[$attr]= $_POST[$attr];
-			} else {
-				unset($this->statements[$attr]);
-			}
-		}
-	
-		if (isset($_POST["authoritative"])){
-			$this->statements["authoritative"]= "";
-		} else {
-			unset ($this->statements["authoritative"]);
-		}
-	
-		foreach(array("unknown-clients", "bootp", "booting") as $name){
-			if (isset($_POST[$name])){
-				$this->statements["allow-$name"]= "";
-				unset($this->statements["deny-$name"]);
-			} else {
-				$this->statements["deny-$name"]= "";
-				unset($this->statements["allow-$name"]);
-			}
-		}
-	}
+      foreach (array("server-identifier", "default-lease-time",
+            "max-lease-time", "min-lease-time") as $attr){
+        if (isset($_POST[$attr]) && $_POST[$attr] != ""){
+          $this->statements[$attr]= $_POST[$attr];
+        } else {
+          unset($this->statements[$attr]);
+        }
+      }
+
+      if (isset($_POST["authoritative"])){
+        $this->statements["authoritative"]= "";
+      } else {
+        unset ($this->statements["authoritative"]);
+      }
+
+      foreach(array("unknown-clients", "bootp", "booting") as $name){
+        if (isset($_POST[$name])){
+          $this->statements["allow-$name"]= "";
+          unset($this->statements["deny-$name"]);
+        } else {
+          $this->statements["deny-$name"]= "";
+          unset($this->statements["allow-$name"]);
+        }
+      }
+    }
   }
 
 
   /* Check values */
-  function check()
+  function check($cache)
   {
-	$message= array();
+    $message= array();
 
-	/* Check lease times */
-	foreach (array("default-lease-time" => _("Default lease time"),
-			"max-lease-time" => _("Max. lease time"),
-			"min-lease-time" => _("Min. lease time")) as $key => $val){
-		if (isset($this->statements[$key]) && $this->statements[$key] != "" && 
-			!is_id($this->statements[$key])){
-			$message[]= sprintf(_("The value specified as '%s' is no valid integer!"), $val);
-		}
-	}
+    /* All required fields are set? */
+    if ($this->cn == ""){
+      $message[]= _("Required field 'Name' is not filled.");
+    }
 
-	return $message;
+    /* Check lease times */
+    foreach (array("default-lease-time" => _("Default lease time"),
+          "max-lease-time" => _("Max. lease time"),
+          "min-lease-time" => _("Min. lease time")) as $key => $val){
+      if (isset($this->statements[$key]) && $this->statements[$key] != "" && 
+          !is_id($this->statements[$key])){
+        $message[]= sprintf(_("The value specified as '%s' is no valid integer!"), $val);
+      }
+    }
+
+    /* cn already used? */
+    if ($this->orig_cn != $this->cn || $this->new){
+
+      foreach($cache as $dn => $dummy){
+        if (preg_match("/^cn=".$this->cn.",/", $dn) && count($dummy)){
+          $message[]= _("The name for this host section is already used!");
+          break;
+        }
+      }
+    }
+
+    return $message;
   }
 
 
   /* Save to LDAP */
   function save()
   {
-        plugin::save();
+    dhcpPlugin::save();
 
-        /* Get ldap mode */
-        if ($this->dn == "new"){
-                $mode= "add";
-        } else {
-                $mode= "modify";
-        }
-
-        /* Generate new dn */
-        if ($this->parent->parent != NULL && $this->dn == "new"){
-                $this->dn= "cn=".$this->cn.",".$this->parent->parent;
-        }
-
-        /* Assemble new entry - options */
-        if (isset ($this->options) && count ($this->options)){
-                $this->attrs['dhcpOption']= array();
-                foreach ($this->options as $key => $val){
-                        $this->attrs['dhcpOption'][]= "$key $val";
-                }
-        } else {
-                if ($mode == "modify"){
-                        $this->attrs['dhcpOption']= array();
-                }
-        }
-
-        /* Assemble new entry - statements */
-        if (isset ($this->statements) && count ($this->statements)){
-                $this->attrs['dhcpStatements']= array();
-                foreach ($this->statements as $key => $val){
-			if (preg_match('/^allow-/', $key) || preg_match('/^deny-/', $key)){
-				$val= preg_replace('/^[^-]+-/', '', $key);
-				$key= preg_replace('/^([^-]+)-.*$/', '\\1', $key);
-			}
-                        $this->attrs['dhcpStatements'][]= "$key $val";
-                }
-        } else {
-                if ($mode == "modify"){
-                        $this->attrs['dhcpStatements']= array();
-                }
-        }
-	
-	/* Do LDAP action */
-        $ldap= $this->config->get_ldap_link();
-        if ($mode == "add"){
-		$ldap->cd($this->config->current['BASE']);
-                $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
-        }
-        $ldap->cd($this->dn);
-        $ldap->$mode($this->attrs);
-        show_ldap_error($ldap->get_error());
+    return ($this->attrs);
   }
-  
+
 }
 
 ?>
