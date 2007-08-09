@@ -9,7 +9,7 @@ GOsa2 changelog
   - Added copy'n paste for mimetypes
   - Cut'n paste objects are now greyed out
   - Added swedish locale
-  - Unified language code
+  - Improved language detection
   - Added a statistic footer to lists
   - Added the ssh plugin
   - Layout fixes

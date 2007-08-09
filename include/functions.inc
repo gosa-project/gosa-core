@@ -45,6 +45,7 @@ require_once ("class_mail-methods.inc");
 require_once("class_password-methods.inc");
 require_once ("functions_debug.inc");
 require_once ("functions_dns.inc");
+require_once ("accept-to-gettext.inc");
 require_once ("class_MultiSelectWindow.inc");
 
 /* Define constants for debugging */
@@ -146,54 +147,19 @@ function DEBUG($level, $line, $function, $file, $data, $info="")
 }
 
 
-/* Simple function to get browser language and convert it to
-   xx_XY needed by locales. Ignores sublanguages and weights. */
 function get_browser_language()
 {
-  global $BASE_DIR;
+  /* Load supported languages */
+  $gosa_languages= get_languages();
 
-  /* Try to use users primary language */
-  $ui= get_userinfo();
-  if ($ui != NULL){
-    if ($ui->language != ""){
-      return ($ui->language);
-    }
+  /* Move supported languages to flat list */
+  $langs= array();
+  foreach($gosa_languages as $lang => $dummy){
+    $langs[]= $lang.'.UTF-8';
   }
 
-  /* Get list of languages */
-  if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])){
-    $lang= preg_replace("/\s+/", "", $_SERVER['HTTP_ACCEPT_LANGUAGE']);
-    $languages= split (',', $lang);
-    $languages[]= "C";
-  } else {
-    $languages= array("C");
-  }
-
-  /* Walk through languages and get first supported */
-  foreach ($languages as $val){
-
-    /* Strip off weight */
-    $lang= preg_replace("/;q=.*$/i", "", $val);
-
-    /* Simplify sub language handling */
-    $lang= preg_replace("/-.*$/", "", $lang);
-
-    /* Cancel loop if available in GOsa, or the last
-       entry has been reached */
-    if (is_dir("$BASE_DIR/locale/$lang")){
-      break;
-    }
-  }
-
-  /* We've just one zh variation. Fix code... */
-  if (preg_match('/zh/', $lang)){
-    return ("zh_CN");
-  }
-  if (preg_match('/sv/', $lang)){
-    return ("sv_SE");
-  }
-
-  return (strtolower($lang)."_".strtoupper($lang));
+  /* Return gettext based string */
+  return (al2gt($langs, 'text/html'));
 }
 
 

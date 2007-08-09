@@ -74,3 +74,6 @@ documentation and additional help.
 * Vincent Seynhaeve
   Xls export plugin <vincent.seynhaeve@opensides.be>
   
+* Wouter Verhelst <wouter@debian.org>
+  accept-to-gettext code that helps for language conversation
+

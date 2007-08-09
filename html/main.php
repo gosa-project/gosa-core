@@ -135,8 +135,6 @@ if ($config->data['MAIN']['LANG'] == ""){
   $lang= $config->data['MAIN']['LANG'];
 }
 
-$lang.=".UTF-8";
-
 putenv("LANGUAGE=");
 putenv("LANG=$lang");
 setlocale(LC_ALL, $lang);
