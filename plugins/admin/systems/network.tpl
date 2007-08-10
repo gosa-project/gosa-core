@@ -21,19 +21,21 @@
 				</tr>
         {if $dhcpEnabled}
         <tr>
-          <td colspan=2>
-  
+          <td colspan=2 style='padding-top:12px;'>
             <table>
               <tr>
                 <td>
                   <input onClick='document.mainform.submit();'
                     {if $dhcp_is_Account} checked {/if} type='checkbox' name='dhcp_is_Account' class='center'>
+                </td>
+                <td>
                   {t}Enable DHCP for this device{/t}
-                  <input type='submit' value='reload'>
+                  <input type='image' src='images/list_reload.png' class='center'>
                 </td>
               </tr>
               {if $dhcp_is_Account}
               <tr>
+                <td>&nbsp;</td>
                 <td>
                   {t}Parent node{/t}
                   <select name='dhcpParentNode'>      
@@ -42,6 +44,7 @@
                 </td>
               </tr>
               <tr>
+                <td>&nbsp;</td>
                 <td>
                   <input type='submit' name='dhcpEditOptions' value='{t}Edit settings{/t}'>
                 </td>
@@ -71,7 +74,7 @@
       "/>
         {/if}
       {t}Enable DNS for this device{/t}
-      <input type="submit" name="reloadThisDNSStuff" value="{t}Refresh{/t}" {$DNSaccountACL}/>
+      <input type='image' src='images/list_reload.png' class='center' name="reloadThisDNSStuff" {$DNSaccountACL}/>
       {if $DNSAccount == true}
       <div style="padding-left:20px;visibility:visible;" id="test2">
       {else}
