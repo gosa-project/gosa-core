@@ -300,6 +300,14 @@ class workgeneric extends plugin
     $smarty->assign("netconfig", $this->netConfigDNS->execute());
     $smarty->assign("fai_activated",$this->fai_activated);
 
+    /* Display sub dialog from network settings */
+    if($this->netConfigDNS->dialog){
+      $this->dialog = TRUE;
+      return($this->netConfigDNS->execute());
+    }else{ 
+      $this->dialog = FALSE;
+    }
+
     $smarty->assign("member_of_ogroup",$this->member_of_ogroup);
   
     return($smarty->fetch (get_template_path('workstation.tpl', TRUE)));

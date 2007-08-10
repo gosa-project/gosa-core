@@ -221,10 +221,18 @@ class phoneGeneric extends plugin
     $smarty->assign("baseACL", chkacl($this->acl,"base"));
    
     $smarty->assign("goFonDefaultIPs",array("dynamic"=>_("dynamic"),"network"=>_("Networksettings")));
- 
-    /* Show main page */
     $this->netConfigDNS->cn= $this->cn;
     $smarty->assign("netconfig", $this->netConfigDNS->execute());
+
+    /* Display sub dialog from network settings */
+    if($this->netConfigDNS->dialog){
+      $this->dialog = TRUE;
+      return($this->netConfigDNS->execute());
+    }else{ 
+      $this->dialog = FALSE;
+    }
+
+    /* Show main page */
     $smarty->assign("phonesettings", dirname(__FILE__)."/phonesettings.tpl");
     return($smarty->fetch (get_template_path('phone.tpl', TRUE)));
   }

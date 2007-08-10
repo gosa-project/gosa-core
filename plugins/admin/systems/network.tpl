@@ -11,14 +11,43 @@
 				</tr>
 				<tr>
 					<td><LABEL	for="macAddress">{t}MAC-address{/t}</LABEL>{$staticAddress}</td>
-					<td><input	name="macAddress"	id="macAddress"	size=25	maxlength=80	value="{$macAddress}" {$macAddressACL}></td>
+					<td>
+            <input	name="macAddress"	id="macAddress"	size=25	maxlength=80	value="{$macAddress}" {$macAddressACL}>
+            {if $autonet==true}
+					    <input type="submit" name="autonet" value="{t}-><-{/t}" 
+                {if ($ipHostNumberACL !="" || $macAddressACL!= "")} disabled {/if}>
+            {/if}
+          </td>
 				</tr>
-        {if $autonet==true}
-				<tr>
-					<td>&nbsp;</td>
-					<td><input type="submit" name="autonet" value="{t}Autodetect{/t}" 
-            {if ($ipHostNumberACL !="" || $macAddressACL!= "")} disabled {/if}></td>
-				</tr>
+        {if $dhcpEnabled}
+        <tr>
+          <td colspan=2>
+  
+            <table>
+              <tr>
+                <td>
+                  <input {if $dhcp_is_Account} checked {/if} type='checkbox' name='dhcp_is_Account' class='center'>
+                  {t}Enable DHCP for this device{/t}
+                </td>
+              </tr>
+              {if $dhcp_is_Account}
+              <tr>
+                <td>
+                  {t}Parent node{/t}
+                  <select name='dhcpParentNode'>      
+                    {html_options options=$dhcpParentNodes selected=$dhcpParentNode}
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input type='submit' name='dhcpEditOptions' value='{t}Edit settings{/t}'>
+                </td>
+              </tr>
+              {/if}
+            </table>
+          </td>
+        </tr>
         {/if}
       </table> 
     </td>

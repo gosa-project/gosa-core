@@ -17,6 +17,19 @@ class termDNS extends plugin
   var $OrigCn         = "";    // Initial cn
   var $IPisMust       = false;
   var $MACisMust      = false;
+  var $dialog;
+
+  /* DCHP Attributes 
+   */
+  var $dhcpAttributes           = array("dhcpParentNode");
+  var $dhcpEnabled              = FALSE;
+  var $dhcp_is_Account          = FALSE;
+  var $dhcpParentNodes          = array();
+  var $dhcpParentNode           = "";
+  var $dhcpHostEntry            = array();
+  var $initial_dhcpParentNode   = "";
+  var $initial_dhcpHostEntry    = array();
+
 
   /* DNS attributes  
    */
@@ -42,12 +55,45 @@ class termDNS extends plugin
       $this->OrigCn = preg_replace("/\\\$\$/","",$this->attrs['cn'][0]);
       $this->cn = preg_replace("/\\\$\$/","",$this->attrs['cn'][0]);
     }
-  
+
+ 
+    /************
+     * DHCP 
+     ************/
+
+    /* Hide all dhcp specific code, if dhcp plugin is not present in config */
+    $dhcpEnabled = FALSE;
+    foreach($this->config->data['TABS']['SERVTABS'] as $tab){
+      if(preg_match("/^servdhcp$/",$tab['CLASS'])){
+        $this->dhcpEnabled = TRUE;
+      }
+    }
+    if($this->dhcpEnabled){
+      $this->dhcpParentNodes = $this->get_dhcp_parent_nodes();
+      $this->dhcpParentNode  = $this->get_dhcp_parent_node();
+      if($this->dhcpParentNode){
+        $this->dhcp_is_Account = TRUE;
+        $this->dhcpHostEntry  = $this->get_dhcp_host_entry();    
+      }
+      $this->initial_dhcpHostEntry = $this->dhcpHostEntry;
+      $this->initial_dhcpParentNode= $this->dhcpParentNode;
+    }
+
+
+    /************
+     * Autonetwork hook 
+     ************/
+ 
     /* Do we have autonet support? */
     if (isset($this->config->data['MAIN']['AUTO_NETWORK_HOOK'])){
       $this->autonet= true;
     }
 
+
+    /************
+     * DNS
+     ************/
+ 
     /* Hide all dns specific code, if dns is not available 
      */
     $DNSenabled = false;
@@ -148,6 +194,38 @@ class termDNS extends plugin
       }
     }
 
+    
+  
+    /**********
+     * DHCP Handling
+     **********/
+ 
+    if(isset($_POST['dhcpEditOptions'])){
+      $this->dialog = new dhcpHost($this->dhcpHostEntry);
+    }
+
+    if(isset($_POST['cancel_dhcp'])){
+      $this->dialog = FALSE; 
+    }
+
+    if(isset($_POST['save_dhcp'])){
+      $this->dialog = FALSE; 
+    }
+
+    if(isset($this->dialog) && $this->dialog != FALSE){
+      return($this->dialog->execute());
+    }
+ 
+    $smarty->assign("dhcpEnabled",    $this->dhcpEnabled);
+    $smarty->assign("dhcp_is_Account",$this->dhcp_is_Account);
+    $smarty->assign("dhcpParentNode", $this->dhcpParentNode);
+    $smarty->assign("dhcpParentNodes",$this->dhcpParentNodes);
+
+
+
+
+
+
     /* There is no dns available 
      */
     if($this->DNSenabled == false){
@@ -164,78 +242,77 @@ class termDNS extends plugin
       $smarty->assign("staticAddress","<font class=\"must\">*</font>");
 
       $display.= $smarty->fetch(get_template_path('network.tpl', TRUE));
-      return($display);
     }else{
       $smarty->assign("DNS_is_account",true); 
-    }
- 
-    /* Add new empty array to our record list */
-    if(isset($_POST['AddNewRecord'])){
-      $this->dnsEntry['RECORDS'][]  =array("type"=>"aRecord","value"=>"");
-    }
-   
-    /* Handle all posts */ 
-    $only_once =true;
-    foreach($_POST as $name => $value){
 
-      /* Check if we have to delete a record entry */
-      if((preg_match("/RemoveRecord_/",$name))&&($only_once)) {
-      
-        /* Avoid performing this once again */
-        $only_once = false;
+      /* Add new empty array to our record list */
+      if(isset($_POST['AddNewRecord'])){
+        $this->dnsEntry['RECORDS'][]  =array("type"=>"aRecord","value"=>"");
+      }
 
-        /* Extract id for specified entry */
-        $id = preg_replace("/RemoveRecord_/","",$name);
-        $id = preg_replace("/_.*$/","",$id);
-    
-        /* Delete this record, mark edited entries to be able to delete them */
-        if(isset($this->dnsEntry['RECORDS'][$id])){
-          unset($this->dnsEntry['RECORDS'][$id]);
+      /* Handle all posts */ 
+      $only_once =true;
+      foreach($_POST as $name => $value){
+
+        /* Check if we have to delete a record entry */
+        if((preg_match("/RemoveRecord_/",$name))&&($only_once)) {
+
+          /* Avoid performing this once again */
+          $only_once = false;
+
+          /* Extract id for specified entry */
+          $id = preg_replace("/RemoveRecord_/","",$name);
+          $id = preg_replace("/_.*$/","",$id);
+
+          /* Delete this record, mark edited entries to be able to delete them */
+          if(isset($this->dnsEntry['RECORDS'][$id])){
+            unset($this->dnsEntry['RECORDS'][$id]);
+          }
         }
       }
-    }
 
-    /* Assign smarty all non DNs attributes */
-    foreach($this->attributes as $attr){
-      $smarty->assign($attr,$this->$attr);
-      $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
-    }
-
-    /* Assign smarty all DNS attributes */
-    foreach($this->DNSattributes as $attr){
-      $smarty->assign($attr,$this->dnsEntry[$attr]);
-      $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
-    }
-    
-    /* Assign all needed vars */
-    $smarty->assign("DNSaccountACL",chkacl($this->acl,"termDNS"));
-
-    $smarty->assign("DNSAccount",$this->DNS_is_account);
-    $smarty->assign("Zones",$this->Zones);
-    $smarty->assign("ZoneKeys",($this->Zones));
-    $smarty->assign("IPisMust",(($this->IPisMust)||($this->DNS_is_account)));
- 
-    /* Create zone array */
-    $idZones = array();
-    foreach($this->Zones as $id => $zone){
-      if($this->netmaskIsCoherent($id)) {
-        $idZones[$id] = $zone;
-      }else{
-        $idZones[$id] = $zone."&nbsp;("._("Not matching").")";
+      /* Assign smarty all non DNs attributes */
+      foreach($this->attributes as $attr){
+        $smarty->assign($attr,$this->$attr);
+        $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
       }
-    }    
-    $smarty->assign("Zones",$idZones);
-    $smarty->assign("ZoneKeys", $this->Zones);
 
-    $tmp = $this->generateRecordsList();
-    
-    $changeStateForRecords = $tmp['changeStateForRecords'];
+      /* Assign smarty all DNS attributes */
+      foreach($this->DNSattributes as $attr){
+        $smarty->assign($attr,$this->dnsEntry[$attr]);
+        $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
+      }
 
-    $smarty->assign("records",$tmp['str']);
-    $smarty->assign("changeStateForRecords",$changeStateForRecords);
-    $smarty->assign("staticAddress","<font class=\"must\">*</font>");
+      /* Assign all needed vars */
+      $smarty->assign("DNSaccountACL",chkacl($this->acl,"termDNS"));
 
-    $display.= $smarty->fetch(get_template_path('network.tpl', TRUE));
+      $smarty->assign("DNSAccount",$this->DNS_is_account);
+      $smarty->assign("Zones",$this->Zones);
+      $smarty->assign("ZoneKeys",($this->Zones));
+      $smarty->assign("IPisMust",(($this->IPisMust)||($this->DNS_is_account)));
+
+      /* Create zone array */
+      $idZones = array();
+      foreach($this->Zones as $id => $zone){
+        if($this->netmaskIsCoherent($id)) {
+          $idZones[$id] = $zone;
+        }else{
+          $idZones[$id] = $zone."&nbsp;("._("Not matching").")";
+        }
+      }    
+      $smarty->assign("Zones",$idZones);
+      $smarty->assign("ZoneKeys", $this->Zones);
+
+      $tmp = $this->generateRecordsList();
+
+      $changeStateForRecords = $tmp['changeStateForRecords'];
+
+      $smarty->assign("records",$tmp['str']);
+      $smarty->assign("changeStateForRecords",$changeStateForRecords);
+      $smarty->assign("staticAddress","<font class=\"must\">*</font>");
+
+      $display.= $smarty->fetch(get_template_path('network.tpl', TRUE));
+    }
     return($display);
   }
 
@@ -258,7 +335,23 @@ class termDNS extends plugin
   {
     /* Save all posted vars */
     plugin::save_object();
-    
+  
+
+    /* Handle DHCP Posts*/ 
+    if($this->dhcpEnabled && isset($_POST['network_tpl_posted'])){
+      if(isset($_POST['dhcp_is_Account'])){
+        $this->dhcp_is_Account = TRUE;
+      }else{
+        $this->dhcp_is_Account = FALSE;
+      }
+      foreach($this->dhcpAttributes as $attr){
+        if(isset($_POST[$attr])){
+          $this->$attr = $_POST[$attr];
+        }
+      }
+    }
+ 
+ 
     /* Get dns attributes */
     if(($this->DNSenabled) && (isset($_POST['network_tpl_posted'])) && chkacl($this->acl,"termDNS") == ""){
 
@@ -519,6 +612,99 @@ class termDNS extends plugin
     }
     $str.="</select>";
     return($str); 
+  }
+
+  
+  function get_dhcp_host_entry()
+  {
+    $attrs = array();
+    $dn = $this->get_dhcp_host_entry_dn();
+    if($dn){
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cd($this->config->current['BASE']);
+      $ldap->cat($dn,array("*"));
+      if($ldap->count()){
+        $attrs = $ldap->fetch();
+        foreach($attrs as $key => $value){
+          if(is_numeric($key) || ($key == "count")){
+            unset($attrs[$key]);
+          }
+          if(is_array($value) && isset($value['count'])){
+            unset($attrs[$key]['count']);
+          }
+        }
+      }
+    }
+    return($attrs);
+  }
+
+
+  function get_dhcp_host_entry_dn()
+  {
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search ("(&(objectClass=dhcpHost)(cn=".$this->cn."))",array("cn","dn"));
+
+    if($ldap->count()){
+      $attr = $ldap->fetch();
+      return($attr['dn']);
+    }else{
+      return("");
+    }
+  }  
+
+
+  function get_dhcp_parent_node()
+  {
+    return(preg_replace("/^cn=".normalizePreg($this->cn).",/","",$this->get_dhcp_host_entry_dn()));
+  }
+
+
+  function get_dhcp_parent_nodes()
+  {
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(objectClass=dhcpService)",array("dhcpPrimaryDN"));
+    
+    $dhcp_dns = array();
+    while($attr = $ldap->fetch()){
+      $dhcp_dns[$attr['dn']] = $attr['dhcpPrimaryDN'][0];
+    }
+  
+    foreach($dhcp_dns as $key => $pri_dns){
+      $ldap->cat($pri_dns,array("cn"));
+      $tmp = $ldap->fetch();
+      $dhcp_dns[$key] = $tmp['cn'][0];
+    }
+ 
+    foreach($dhcp_dns as $dn => $cn){
+      $ldap->cd($dn);
+      $ldap->search("(|(objectClass=dhcpService)(objectClass=dhcpGroup)".
+                    "(objectClass=dhcpSubnet)(objectClass=dhcpSharedNetwork))",array("cn"));
+      $tmp = array();
+      while($attr = $ldap->fetch()){
+        $tmp[$attr['dn']] = $attr['cn'][0];
+      }
+      $tmp2 = $this->create_tree($tmp,preg_replace("/^[^,]+,/i","",$dn),"(".$cn.")&nbsp;");
+    }
+    return($tmp2);
+  }
+
+  
+  function create_tree($arr,$base,$current = "")
+  {
+    $ret = array();
+    foreach($arr as $r => $name){
+      $base_part = str_replace($base,"",$r);
+      if(preg_match("/^[a-z]*=".normalizePreg($name)."(|,)$/i",$base_part)){
+        $ret[$r] = $current.$name;
+        $tmp = $this->create_tree($arr,$r,$current.".&nbsp;");
+        foreach($tmp as $sub_key => $sub_name){
+          $ret[$sub_key] = $sub_name;
+        }
+      } 
+    }
+    return($ret);
   }
 }
 

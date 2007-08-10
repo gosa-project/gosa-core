@@ -326,6 +326,14 @@ class termgeneric extends plugin
     $smarty->assign("fai_activated",$this->fai_activated);
     $smarty->assign("actionACL", chkacl($this->acl, 'action'));
 
+    /* Display sub dialog from network settings */
+    if($this->netConfigDNS->dialog){
+      $this->dialog = TRUE;
+      return($this->netConfigDNS->execute());
+    }else{ 
+      $this->dialog = FALSE;
+    }
+
     $smarty->assign("member_of_ogroup",$this->member_of_ogroup);
 
     return($smarty->fetch (get_template_path('terminal.tpl', TRUE)));

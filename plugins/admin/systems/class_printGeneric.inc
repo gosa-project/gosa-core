@@ -533,9 +533,18 @@ class printgeneric extends plugin
     if($this->BelongsTo == "Printer"){
       $this->netConfigDNS->cn= $this->cn;
       $smarty->assign("netconfig", $this->netConfigDNS->execute());
+
+      /* Display sub dialog from network settings */
+      if($this->netConfigDNS->dialog){
+        $this->dialog = TRUE;
+        return($this->netConfigDNS->execute());
+      }else{ 
+        $this->dialog = FALSE;
+      }
     } else {
       $smarty->assign("netconfig", "");
     }
+
 
     return($display.$smarty->fetch (get_template_path('printer.tpl', TRUE)));
   }
