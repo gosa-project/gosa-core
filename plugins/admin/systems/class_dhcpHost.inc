@@ -22,11 +22,12 @@ class dhcpHost extends dhcpPlugin
 {
   /* Used attributes */
   var $dhcpHWAddress= "";
-
+  var $realGosaHost = FALSE;
+	
   /* attribute list for save action */
   var $objectclasses= array("top", "dhcpHost");
 
-  function dhcpHost($attrs)
+  function dhcpHost($attrs,$host_exists_in_gosa = FALSE)
   {
     dhcpPlugin::dhcpPlugin($attrs);
 
@@ -37,6 +38,8 @@ class dhcpHost extends dhcpPlugin
 
     $this->advanced->setAutoOptions(array("host-name"));
     $this->advanced->setAutoStatements(array("fixed-address"));
+
+	$this->realGosaHost = $host_exists_in_gosa;
   }
 
   function execute()
@@ -44,6 +47,7 @@ class dhcpHost extends dhcpPlugin
     $smarty= get_smarty();
     $smarty->assign("cn", $this->cn);
     $smarty->assign("dhcpHWAddress", preg_replace('/^[^ ]+ /', '', $this->dhcpHWAddress));
+    $smarty->assign("realGosaHost",$this->realGosaHost);
 
     /* Create fixed address */
     if (isset($this->statements['fixed-address'])){
@@ -96,10 +100,13 @@ class dhcpHost extends dhcpPlugin
 
       /* Assemble hwAddress */
       $this->dhcpHWAddress= get_post('hwtype')." ".get_post('dhcpHWAddress');
-      $this->cn= validate(get_post('cn'));
+		
+      if(!$this->realGosaHost){
+        $this->cn= validate(get_post('cn'));
+      }
 
       /* Save fixed address */
-      if ($_POST['fixedaddr'] != ""){
+      if (!$this->realGosaHost && $_POST['fixedaddr'] != ""){
         $this->statements['fixed-address']= get_post('fixedaddr');
       } else {
         unset ($this->statements['fixed-address']);

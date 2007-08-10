@@ -7,14 +7,15 @@
     <tr>
      <td>{t}Name{/t}{$must}</td>
      <td>
-      <input id='cn' type='text' name='cn' size='25' maxlength='80' value='{$cn}'
+      <input {if $realGosaHost} disabled {/if} id='cn' type='text' name='cn' size='25' maxlength='80' value='{$cn}'
              title='{t}Name of host{/t}'>
      </td>
     </tr>
     <tr>
      <td>{t}Fixed address{/t}</td>
      <td>
-      <input type='text' name='fixedaddr' size='25' maxlength='80' value='{$fixedaddr}'
+      <input {if $realGosaHost} disabled {/if} 
+			type='text' name='fixedaddr' size='25' maxlength='80' value='{$fixedaddr}'
              title='{t}Use hostname or IP-address to assign fixed address{/t}'>
      </td>
     </tr>

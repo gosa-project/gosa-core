@@ -205,11 +205,14 @@ class termDNS extends plugin
     if(isset($_POST['dhcpEditOptions'])){
 
       if(count($this->dhcpHostEntry) == 0){
-        $this->dialog = new dhcpHost($this->dhcpParentNode);
+        $this->dialog = new dhcpHost($this->dhcpParentNode,TRUE);
       }else{
-        $this->dialog = new dhcpHost($this->dhcpHostEntry);
+        $this->dialog = new dhcpHost($this->dhcpHostEntry,TRUE);
       }
-    
+      $this->dialog->cn = $this->cn; 
+      if(!empty($this->ipHostNumber)){
+        $this->dialog->statements['fixed-address'] = $this->ipHostNumber; 
+      }
     }
 
     if(isset($_POST['cancel_dhcp'])){
@@ -559,6 +562,7 @@ class termDNS extends plugin
         if($this->initial_dhcpParentNode != $this->dhcpParentNode){
           $attrs = $this->dhcpHostEntry;
           unset($attrs['dn']);
+          unset($attrs['MODIFIED']);
           $ldap->cd("cn=".$this->cn.",".$this->dhcpParentNode);
           $res = $ldap->add($attrs);
           show_ldap_error($ldap->get_error(),_("Tried to add new dhcp entry failed."));
