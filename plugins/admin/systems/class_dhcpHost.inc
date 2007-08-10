@@ -99,7 +99,9 @@ class dhcpHost extends dhcpPlugin
     if (isset($_POST['hwtype'])){
 
       /* Assemble hwAddress */
-      $this->dhcpHWAddress= get_post('hwtype')." ".get_post('dhcpHWAddress');
+      if (isset($_POST['dhcpHWAddress'])){
+        $this->dhcpHWAddress= get_post('hwtype')." ".get_post('dhcpHWAddress');
+      }
 		
       if(!$this->realGosaHost){
         $this->cn= validate(get_post('cn'));

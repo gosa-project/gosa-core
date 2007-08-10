@@ -210,6 +210,7 @@ class termDNS extends plugin
         $this->dialog = new dhcpHost($this->dhcpHostEntry,TRUE);
       }
       $this->dialog->cn = $this->cn; 
+      $this->dialog->dhcpHWAddress = $this->macAddress; 
       if(!empty($this->ipHostNumber)){
         $this->dialog->statements['fixed-address'] = $this->ipHostNumber; 
       }

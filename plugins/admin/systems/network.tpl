@@ -41,11 +41,7 @@
                   <select name='dhcpParentNode'>      
                     {html_options options=$dhcpParentNodes selected=$dhcpParentNode}
                   </select>
-                </td>
-              </tr>
-              <tr>
-                <td>&nbsp;</td>
-                <td>
+                  &nbsp;
                   <input type='submit' name='dhcpEditOptions' value='{t}Edit settings{/t}'>
                 </td>
               </tr>

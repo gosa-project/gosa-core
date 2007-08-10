@@ -26,7 +26,7 @@
     <tr>
      <td>{t}Hardware type{/t}</td>
      <td>
-      <select name='hwtype'>
+      <select name='hwtype'  {if $realGosaHost} disabled {/if} >
        {html_options options=$hwtypes selected=$hwtype}
       </select>
      </td>
@@ -34,7 +34,7 @@
     <tr>
      <td>{t}Hardware address{/t}{$must}</td>
      <td>
-      <input type='text' name='dhcpHWAddress' size='20' maxlength='18' value='{$dhcpHWAddress}'>
+      <input  {if $realGosaHost}  disabled {/if} type='text' name='dhcpHWAddress' size='20' maxlength='18' value='{$dhcpHWAddress}'>
      </td>
     </tr>
    </table>
