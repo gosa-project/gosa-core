@@ -32,7 +32,7 @@ class dhcpHost extends dhcpPlugin
 
     /* Load attributes */
     if (!$this->new){
-      $this->dhcpHWaddress= $attrs['dhcpHWAddress'][0];
+      $this->dhcpHWAddress= $attrs['dhcpHWAddress'][0];
     }
 
     $this->advanced->setAutoOptions(array("host-name"));
