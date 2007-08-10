@@ -29,6 +29,7 @@ class termDNS extends plugin
   var $dhcpHostEntry            = array();
   var $initial_dhcpParentNode   = "";
   var $initial_dhcpHostEntry    = array();
+  var $initial_dhcp_is_Account  = FALSE;
 
 
   /* DNS attributes  
@@ -73,6 +74,7 @@ class termDNS extends plugin
       $this->dhcpParentNode  = $this->get_dhcp_parent_node();
       if($this->dhcpParentNode){
         $this->dhcp_is_Account = TRUE;
+        $this->initial_dhcp_is_Account = TRUE;
         $this->dhcpHostEntry  = $this->get_dhcp_host_entry();    
       }
       $this->initial_dhcpHostEntry = $this->dhcpHostEntry;
@@ -201,7 +203,13 @@ class termDNS extends plugin
      **********/
  
     if(isset($_POST['dhcpEditOptions'])){
-      $this->dialog = new dhcpHost($this->dhcpHostEntry);
+
+      if(count($this->dhcpHostEntry) == 0){
+        $this->dialog = new dhcpHost($this->dhcpParentNode);
+      }else{
+        $this->dialog = new dhcpHost($this->dhcpHostEntry);
+      }
+    
     }
 
     if(isset($_POST['cancel_dhcp'])){
@@ -209,10 +217,21 @@ class termDNS extends plugin
     }
 
     if(isset($_POST['save_dhcp'])){
-      $this->dialog = FALSE; 
+      $this->dialog->save_object();
+      
+      $msgs = $this->dialog->check(array());
+      if(count($msgs)){
+        foreach($msgs as $msg){
+          print_red($msg);
+        }
+      }else{
+        $this->dhcpHostEntry = $this->dialog->save();
+        $this->dialog = FALSE; 
+      }
     }
 
     if(isset($this->dialog) && $this->dialog != FALSE){
+      $this->dialog->save_object();
       return($this->dialog->execute());
     }
  
@@ -339,15 +358,15 @@ class termDNS extends plugin
 
     /* Handle DHCP Posts*/ 
     if($this->dhcpEnabled && isset($_POST['network_tpl_posted'])){
-      if(isset($_POST['dhcp_is_Account'])){
-        $this->dhcp_is_Account = TRUE;
-      }else{
-        $this->dhcp_is_Account = FALSE;
-      }
       foreach($this->dhcpAttributes as $attr){
         if(isset($_POST[$attr])){
           $this->$attr = $_POST[$attr];
         }
+      }
+      if(isset($_POST['dhcp_is_Account'])){
+        $this->dhcp_is_Account = TRUE;
+      }else{
+        $this->dhcp_is_Account = FALSE;
       }
     }
  
@@ -391,6 +410,10 @@ class termDNS extends plugin
   {
     /* Call common method to give check the hook */
     $message= plugin::check();
+
+    if($this->dhcpEnabled && $this->dhcpParentNode != "" && count($this->dhcpHostEntry) == 0){
+      $message[] =_("You haven not configured your dhcp settings yet.");
+    }
 
     /* Check if ip must be given
      */  
@@ -499,6 +522,65 @@ class termDNS extends plugin
     $ldap->cd($this->dn);
     $this->cleanup();
     $ldap->modify ($this->attrs); 
+
+    /****************/ 
+    /* DHCP HANDLING */
+    /****************/ 
+  
+    /* New entry */
+    if($this->dhcpEnabled){
+
+      /* Unset dhcpStatements if this attribute is empty  */
+      if(isset($this->dhcpHostEntry['dhcpStatements']) && 
+          ($this->dhcpHostEntry['dhcpStatements'] == "" || count($this->dhcpHostEntry['dhcpStatements']) == 0) ){
+        unset($this->dhcpHostEntry['dhcpStatements']);
+      }
+  
+      /* DHCP removed */
+      if($this->initial_dhcp_is_Account && !$this->dhcp_is_Account){
+        $ldap->rmdir_recursive($this->dhcpHostEntry['dn']);
+        show_ldap_error($ldap->get_error(),_("Removing dhcp entry for this object failed."));
+      }
+
+      /* DHCP Added */
+      if(!$this->initial_dhcp_is_Account && $this->dhcp_is_Account){
+        $attrs = $this->dhcpHostEntry;
+        unset($attrs['MODIFIED']);
+        unset($attrs['dn']);
+        $ldap->cd("cn=".$this->cn.",".$this->dhcpParentNode);
+        $res = $ldap->add($attrs);
+        show_ldap_error($ldap->get_error(),_("Tried to add new dhcp entry failed."));
+      }
+
+      /* DHCP still activated */
+      if($this->initial_dhcp_is_Account && $this->dhcp_is_Account){
+
+        /* DHCP node changed */
+        if($this->initial_dhcpParentNode != $this->dhcpParentNode){
+          $attrs = $this->dhcpHostEntry;
+          unset($attrs['dn']);
+          $ldap->cd("cn=".$this->cn.",".$this->dhcpParentNode);
+          $res = $ldap->add($attrs);
+          show_ldap_error($ldap->get_error(),_("Tried to add new dhcp entry failed."));
+          if($res){
+            $ldap->rmdir_recursive($this->dhcpHostEntry['dn']);
+            show_ldap_error($ldap->get_error(),_("Removing old dhcp entry failed."));
+          }
+        }
+         
+        /* SAME node but modified */ 
+        if(isset($this->dhcpHostEntry['MODIFIED']) && $this->dhcpHostEntry['MODIFIED'] == 1  && 
+            $this->initial_dhcpParentNode == $this->dhcpParentNode){
+          $attrs = $this->dhcpHostEntry;
+          unset($attrs['dn']);
+          unset($attrs['MODIFIED']);
+          $ldap->cd($this->dhcpHostEntry['dn']);
+          $ldap->modify($attrs);
+          show_ldap_error($ldap->get_error(),_("Modifying dhcp entry failed."));
+        }    
+      }
+    }
+      
 
     /****************/ 
     /* DNS HANDLING */

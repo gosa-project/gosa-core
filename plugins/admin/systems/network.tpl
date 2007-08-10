@@ -14,7 +14,7 @@
 					<td>
             <input	name="macAddress"	id="macAddress"	size=25	maxlength=80	value="{$macAddress}" {$macAddressACL}>
             {if $autonet==true}
-					    <input type="submit" name="autonet" value="{t}-><-{/t}" 
+					    <input type="submit" name="autonet" value="{t}Autodetect{/t}" 
                 {if ($ipHostNumberACL !="" || $macAddressACL!= "")} disabled {/if}>
             {/if}
           </td>
@@ -26,8 +26,10 @@
             <table>
               <tr>
                 <td>
-                  <input {if $dhcp_is_Account} checked {/if} type='checkbox' name='dhcp_is_Account' class='center'>
+                  <input onClick='document.mainform.submit();'
+                    {if $dhcp_is_Account} checked {/if} type='checkbox' name='dhcp_is_Account' class='center'>
                   {t}Enable DHCP for this device{/t}
+                  <input type='submit' value='reload'>
                 </td>
               </tr>
               {if $dhcp_is_Account}
