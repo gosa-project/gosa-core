@@ -309,7 +309,7 @@ class servgeneric extends plugin
         }
       }else{
         if ($this->orig_dn != $this->dn){
-          $this->move($this->orig_dn, $this->dn);
+          $this->recursive_move($this->orig_dn, $this->dn);
           plugin::save();
         }
       }

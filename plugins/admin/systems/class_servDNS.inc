@@ -284,8 +284,17 @@ class servdns extends plugin
     if($old_dn == "new"){
       $old_dn = $this->dn;
     }
-  
+ 
+    /* Update dns to current object dn */ 
     $tmp = getDNSZoneEntriesDiff($this->config,$this->Zones,$old_dn);
+    $tmp2 = array();
+    foreach($tmp as $key1 => $data1){
+      $tmp2[$key1] = array();
+      foreach($data1 as $key2 => $data2){
+        $tmp2[$key1][preg_replace("/".normalizePreg($old_dn)."$/",$this->dn,$key2)] = $data2;
+      }
+    }
+    $tmp = $tmp2;
 
     /* Updated zone entries if reverser or forward name has changed  
      * Must be done before moving entries, else the given dn is invalid
@@ -317,14 +326,15 @@ class servdns extends plugin
     foreach($tmp['add'] as $dn => $attrs){
       $ldap->cd($dn);
       $ldap->cat($dn, array('dn'));
-      if(count($ldap->fetch())){
+      if($ldap->count()){
         $ldap->cd($dn);
         $ldap->modify ($attrs);
+        show_ldap_error($ldap->get_error(), _("Saving DNS entries failed"));
       }else{
         $ldap->cd($dn);
         $ldap->add($attrs);
+        show_ldap_error($ldap->get_error(), _("Saving DNS entries failed"));
       }
-      show_ldap_error($ldap->get_error(), _("Saving DNS entries failed"));
     }
   }
 }
