@@ -84,8 +84,17 @@ function find_match($curlscore,$curcscore,$curgtlang,$langval,$charval,
 }
 
 
-function al2gt($gettextlangs, $mime) {
+function al2gt($gettextlangs, $mime) 
+{
   error_reporting(0);
+
+  /* Try to use users primary language */
+  $ui= get_userinfo();
+  if ($ui != NULL){
+    if ($ui->language != ""){
+      return ($ui->language.".UTF-8");
+    }
+  }
 
   /* default to "everything is acceptable", as RFC2616 specifies */
   $acceptLang=(($_SERVER["HTTP_ACCEPT_LANGUAGE"] == '') ? '*' :
@@ -185,4 +194,5 @@ function al2gt($gettextlangs, $mime) {
   return $curgtlang;
 }
 
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
