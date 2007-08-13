@@ -86,7 +86,6 @@ function find_match($curlscore,$curcscore,$curgtlang,$langval,$charval,
 
 function al2gt($gettextlangs, $mime) 
 {
-  error_reporting(0);
 
   /* Try to use users primary language */
   $ui= get_userinfo();
@@ -158,6 +157,18 @@ function al2gt($gettextlangs, $mime)
     $gtcs=strtoupper($tmp2[1]);
     $noct=@preg_split("/-/",$allang);
 
+    if(!isset($alscores["*"])){
+      $alscores["*"] = "";
+    }
+
+    if(!isset($alscores[$allang])){
+      $alscores[$allang] = "";
+    }
+    
+    if(!isset($alscores[$noct[0]])){
+      $alscores[$noct[0]] = "";
+    }
+  
     $testvals=array(
         array($alscores[$allang], $acscores[$gtcs]),
         array($alscores[$noct[0]], $acscores[$gtcs]),
@@ -190,7 +201,6 @@ function al2gt($gettextlangs, $mime)
   header("Content-Language: $lang");
   header("Content-Type: $mime; charset=$charset");
 
-  error_reporting(E_ALL);
   return $curgtlang;
 }
 
