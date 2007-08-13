@@ -87,14 +87,6 @@ function find_match($curlscore,$curcscore,$curgtlang,$langval,$charval,
 function al2gt($gettextlangs, $mime) 
 {
 
-  /* Try to use users primary language */
-  $ui= get_userinfo();
-  if ($ui != NULL){
-    if ($ui->language != ""){
-      return ($ui->language.".UTF-8");
-    }
-  }
-
   /* default to "everything is acceptable", as RFC2616 specifies */
   $acceptLang=(($_SERVER["HTTP_ACCEPT_LANGUAGE"] == '') ? '*' :
     $_SERVER["HTTP_ACCEPT_LANGUAGE"]);

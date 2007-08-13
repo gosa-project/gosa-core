@@ -149,6 +149,14 @@ function DEBUG($level, $line, $function, $file, $data, $info="")
 
 function get_browser_language()
 {
+  /* Try to use users primary language */
+  $ui= get_userinfo();
+  if ($ui != NULL){
+    if ($ui->language != ""){
+      return ($ui->language.".UTF-8");
+    }
+  }
+
   /* Load supported languages */
   $gosa_languages= get_languages();
 
