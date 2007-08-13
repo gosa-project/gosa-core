@@ -553,6 +553,8 @@ class termDNS extends plugin
         unset($attrs['dn']);
         $ldap->cd("cn=".$this->cn.",".$this->dhcpParentNode);
         $res = $ldap->add($attrs);
+#        print_a($attrs);
+#        print("cn=".$this->cn.",".$this->dhcpParentNode);
         show_ldap_error($ldap->get_error(),_("Tried to add new dhcp entry failed."));
       }
 

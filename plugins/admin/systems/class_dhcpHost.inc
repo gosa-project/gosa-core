@@ -96,7 +96,7 @@ class dhcpHost extends dhcpPlugin
   function save_object()
   {
     /* Save remaining attributes */
-    if (isset($_POST['hwtype'])){
+    if (isset($_POST['dhcp_host_posted'])){
 
       /* Assemble hwAddress */
       if (isset($_POST['dhcpHWAddress'])){
@@ -108,10 +108,12 @@ class dhcpHost extends dhcpPlugin
       }
 
       /* Save fixed address */
-      if (!$this->realGosaHost && $_POST['fixedaddr'] != ""){
-        $this->statements['fixed-address']= get_post('fixedaddr');
-      } else {
-        unset ($this->statements['fixed-address']);
+      if(!$this->realGosaHost){
+        if ($_POST['fixedaddr'] != ""){
+          $this->statements['fixed-address']= get_post('fixedaddr');
+        } else {
+          unset ($this->statements['fixed-address']);
+        }
       }
       $this->options['host-name']= $this->cn;
     }
@@ -170,5 +172,5 @@ class dhcpHost extends dhcpPlugin
   }
 
 }
-
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
