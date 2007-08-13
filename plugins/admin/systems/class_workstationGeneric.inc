@@ -66,6 +66,8 @@ class workgeneric extends plugin
     $tmp = search_config($config->data,"faiManagement","CLASS");
     if(!empty($tmp)){
       $this->fai_activated = TRUE;
+    }else{
+      $this->objectclasses= array("top", "gotoWorkstation", "GOhard");
     }
 
     plugin::plugin ($config, $dn, $parent);
