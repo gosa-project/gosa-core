@@ -562,8 +562,10 @@ class termDNS extends plugin
       if($this->initial_dhcp_is_Account && $this->dhcp_is_Account){
 
         /* DHCP node changed */
-        if($this->initial_dhcpParentNode != $this->dhcpParentNode){
+        if(($this->initial_dhcpParentNode != $this->dhcpParentNode) || 
+           ($this->cn != $this->OrigCn)){
           $attrs = $this->dhcpHostEntry;
+          $attrs['cn'] = $this->cn;
           unset($attrs['dn']);
           unset($attrs['MODIFIED']);
           $ldap->cd("cn=".$this->cn.",".$this->dhcpParentNode);
