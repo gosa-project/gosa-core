@@ -49,7 +49,7 @@ class divListUsers extends MultiSelectWindow
     $this->AddHeader(array("string"=>"&nbsp;",          "attach"=>"style='width:20px;'"));
     $this->AddHeader(array("string"=>_("Username")." / "._("Department")));
     $this->AddHeader(array("string"=>_("Properties"),   "attach" => "style='width:166px;'"));
-    $this->AddHeader(array("string"=>_("Actions"),      "attach" => "style='width:102px;border-right:0px;text-align:right;'"));
+    $this->AddHeader(array("string"=>_("Actions"),      "attach" => "style='width:122px;border-right:0px;text-align:right;'"));
     
     $this->AddCheckBox("ShowTemplates"      ,_("Select to see template pseudo users")               ,_("Show templates")        , false);
     $this->AddCheckBox("ShowFunctionalUsers",_("Select to see users that have only a GOsa object"),_("Show functional users") , true);
@@ -167,13 +167,28 @@ class divListUsers extends MultiSelectWindow
 
     // Test Every Entry and generate divlist Array
     foreach($list as $key => $val){
-
+  
       /* Create action icons */
       $action = "";
 
       $dn= $val['dn'];
       $acl= get_permissions ($dn, $this->ui->subtreeACL);
       $acl= get_module_permission($acl, "user", $dn);
+
+      /* Add deactivate status */
+      $lock_status = "";
+
+      if(isset($val['userPassword'][0]) && preg_match("/^\{[^\}]/",$val['userPassword'][0])){
+        if(preg_match("/^[^\}]*+\}!/",$val['userPassword'][0])){
+          $lock_status = "<input class='center' type='image' src='images/closedlock.png' 
+            alt='"._("Deactivated")."' name='toggle_lock_status_%KEY%'>";
+        }else{
+          $lock_status = "<input class='center' type='image' src='images/openlock.png' 
+            alt='"._("Active")."' name='toggle_lock_status_%KEY%'>";
+        }
+      }else{
+        $lock_status = "<img src='images/empty.png' alt=' ' class='center'>";
+      }
 
       /* Append copy&paste icons if allowed */
       if($acl == "#all#" && $this->parent->CopyPasteHandler){
@@ -191,6 +206,11 @@ class divListUsers extends MultiSelectWindow
       if (chkacl($acl, "password") == ""){
         $action.= "<input class='center' type='image' src='images/list_password.png' alt='"._("password")."'
           name='user_chgpw_%KEY%' title='"._("Change password")."'>";
+      }
+
+      /* Add deactivate status if we are allowed to */
+      if (chkacl($acl, "lock_status") == ""){
+        $action.= $lock_status; 
       }
 
       /* Add delete icon if delete user is allowed */
@@ -254,7 +274,7 @@ class divListUsers extends MultiSelectWindow
       $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' title='".preg_replace('/ /', '&nbsp;', @LDAP::fix($val['dn']))."'");
       $field3 = array("string" => $UseImg, "attach" => "style='width:166px;'");
       $field4 = array("string" => $s_img_create_from_template.preg_replace("/%KEY%/", "$key", $action),
-                      "attach" => "style='width:102px;border-right:0px;    text-align:right;'");
+                      "attach" => "style='width:122px;border-right:0px;    text-align:right;'");
       /* Add to list */
       $add = array($field1,$field2,$field3,$field4);
       $this->AddElement($add);
