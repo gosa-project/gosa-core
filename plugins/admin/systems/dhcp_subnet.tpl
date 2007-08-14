@@ -17,7 +17,7 @@
    <table>
     <tr>
      <td><input type="checkbox" name="use_range" value="1" onChange="changeState('range_start');changeState('range_stop');" {$use_range}></td>
-     <td>{t}Range for dynamic address assignement{/t}</td>
+     <td>{t}Range for dynamic address assignment{/t}</td>
   </tr>
   <tr>
   <td>&nbsp;</td>

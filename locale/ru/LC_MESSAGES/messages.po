@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-24 08:50+0200\n"
+"POT-Creation-Date: 2007-08-14 09:49+0200\n"
 "PO-Revision-Date: 2007-07-16 10:53+0300\n"
 "Last-Translator: Vitaly Kuznetsov <vitty@altlinux.ru>\n"
 "Language-Team: ALT Linux Team\n"
@@ -54,6 +54,11 @@ msgstr "Дополнительно"
 #: plugins/admin/systems/servdnseditzone.tpl:1
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:4
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:34
+#: plugins/admin/systems/dhcp_group.tpl:2
+#: plugins/admin/systems/dhcp_subnet.tpl:2
+#: plugins/admin/systems/dhcp_pool.tpl:2 plugins/admin/systems/dhcp_host.tpl:2
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:2
+#: plugins/admin/systems/dhcp_service.tpl:1
 #: plugins/admin/ogroups/termgroup.tpl:6
 #: plugins/admin/mimetypes/paste_generic.tpl:4
 #: plugins/admin/mimetypes/generic.tpl:4
@@ -69,17 +74,17 @@ msgstr "Unix"
 #: contrib/gosa.conf:106 contrib/gosa.conf:133
 #: plugins/personal/environment/class_environment.inc:7
 #: plugins/admin/groups/class_divListGroup.inc:131
-#: plugins/admin/users/class_divListUsers.inc:141
-#: plugins/admin/ogroups/tabs_ogroups.inc:134
+#: plugins/admin/users/class_divListUsers.inc:144
+#: plugins/admin/ogroups/tabs_ogroups.inc:133
 msgid "Environment"
 msgstr "Окружение"
 
 #: contrib/gosa.conf:107 contrib/gosa.conf:135
 #: plugins/personal/mail/class_mailAccount.inc:22
 #: plugins/admin/groups/class_divListGroup.inc:123
-#: plugins/admin/users/class_divListUsers.inc:143
-#: plugins/admin/ogroups/tabs_ogroups.inc:77
-#: plugins/admin/ogroups/tabs_ogroups.inc:210
+#: plugins/admin/users/class_divListUsers.inc:146
+#: plugins/admin/ogroups/tabs_ogroups.inc:79
+#: plugins/admin/ogroups/tabs_ogroups.inc:209
 #: plugins/admin/ogroups/paste_mail.tpl:4
 #: plugins/admin/ogroups/class_divListOGroup.inc:124
 #: plugins/generic/references/class_reference.inc:24
@@ -88,7 +93,7 @@ msgstr "Почта"
 
 #: contrib/gosa.conf:108 plugins/personal/samba/class_sambaAccount.inc:24
 #: plugins/admin/groups/class_divListGroup.inc:125
-#: plugins/admin/users/class_divListUsers.inc:149
+#: plugins/admin/users/class_divListUsers.inc:152
 #: plugins/generic/references/class_reference.inc:26
 #: plugins/generic/references/class_reference.inc:28
 msgid "Samba"
@@ -96,7 +101,7 @@ msgstr "Samba"
 
 #: contrib/gosa.conf:110 contrib/gosa.conf:113
 #: plugins/personal/netatalk/class_netatalk.inc:36
-#: plugins/admin/users/class_divListUsers.inc:151
+#: plugins/admin/users/class_divListUsers.inc:154
 msgid "Netatalk"
 msgstr "Nettalk"
 
@@ -110,7 +115,7 @@ msgstr "Подключение"
 #: plugins/gofax/faxaccount/generic.tpl:10
 #: plugins/gofax/faxaccount/paste_generic.tpl:8
 #: plugins/addons/addressbook/contents.tpl:14
-#: plugins/admin/users/class_divListUsers.inc:147
+#: plugins/admin/users/class_divListUsers.inc:150
 #: plugins/admin/departments/generic.tpl:67
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:39 html/getxls.php:174
 #: html/getxls.php:236
@@ -125,7 +130,7 @@ msgstr "Факс"
 #: plugins/addons/addressbook/address_info.tpl:37
 #: plugins/addons/addressbook/address_info.tpl:85
 #: plugins/admin/groups/class_divListGroup.inc:129
-#: plugins/admin/users/class_divListUsers.inc:145
+#: plugins/admin/users/class_divListUsers.inc:148
 #: plugins/admin/departments/generic.tpl:63
 #: plugins/admin/systems/class_systemManagement.inc:869
 #: plugins/admin/systems/chooser.tpl:12
@@ -175,12 +180,12 @@ msgid "Parameter"
 msgstr "Параметр"
 
 #: contrib/gosa.conf:159 contrib/gosa.conf:169 contrib/gosa.conf:188
-#: plugins/admin/ogroups/tabs_ogroups.inc:100
+#: plugins/admin/ogroups/tabs_ogroups.inc:107
 msgid "Startup"
 msgstr "Запуск"
 
 #: contrib/gosa.conf:160 contrib/gosa.conf:189
-#: plugins/admin/ogroups/tabs_ogroups.inc:104
+#: plugins/admin/ogroups/tabs_ogroups.inc:101
 msgid "Devices"
 msgstr "Устройства"
 
@@ -195,7 +200,6 @@ msgstr "Принтер"
 #: contrib/gosa.conf:162 contrib/gosa.conf:181 contrib/gosa.conf:191
 #: plugins/gofax/blocklists/generic.tpl:75
 #: plugins/addons/addressbook/contents.tpl:33
-#: plugins/addons/godfs/contents.tpl:22
 #: plugins/admin/fai/faiProfileEntry.tpl:21
 #: plugins/admin/fai/faiPackageEntry.tpl:22
 #: plugins/admin/systems/glpiPrinter.tpl:104
@@ -308,50 +312,13 @@ msgid "Profiles"
 msgstr "Профили"
 
 #: contrib/gosa.conf:301 contrib/gosa.conf:331
-#: plugins/admin/ogroups/tabs_ogroups.inc:109
+#: plugins/admin/ogroups/tabs_ogroups.inc:110
 msgid "Summary"
 msgstr "Резюме"
 
 #: contrib/gosa.conf:305 contrib/gosa.conf:335
 msgid "Packages"
 msgstr "Пакеты"
-
-#: contrib/gosa.conf:498 plugins/admin/ogroups/class_phonequeue.inc:262
-#: setup/class_setupStep_Language.inc:48
-msgid "German"
-msgstr "Немецкий"
-
-#: contrib/gosa.conf:499 setup/class_setupStep_Language.inc:53
-msgid "Russian"
-msgstr "Русский"
-
-#: contrib/gosa.conf:500 setup/class_setupStep_Language.inc:52
-msgid "Chinese"
-msgstr "Китайский"
-
-#: contrib/gosa.conf:501
-msgid "Spanish"
-msgstr "Испанский"
-
-#: contrib/gosa.conf:502 setup/class_setupStep_Language.inc:49
-msgid "French"
-msgstr "Французский"
-
-#: contrib/gosa.conf:503 setup/class_setupStep_Language.inc:51
-msgid "Dutch"
-msgstr "Датский"
-
-#: contrib/gosa.conf:504 setup/class_setupStep_Language.inc:50
-msgid "English"
-msgstr "Английский"
-
-#: contrib/gosa.conf:505
-msgid "Italian"
-msgstr "Итальянский"
-
-#: contrib/gosa.conf:506
-msgid "Polish"
-msgstr "Польский"
 
 #: plugins/personal/nagios/main.inc:105 plugins/personal/mail/main.inc:105
 #: plugins/personal/posix/main.inc:111 plugins/personal/samba/main.inc:105
@@ -382,12 +349,18 @@ msgstr "Польский"
 #: plugins/admin/systems/class_systemManagement.inc:597
 #: plugins/admin/systems/servDNSeditZoneEntries.tpl:20
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:80
+#: plugins/admin/systems/class_dhcpService.inc:93
+#: plugins/admin/systems/class_dhcpGroup.inc:54
+#: plugins/admin/systems/class_dhcpSubnet.inc:88
+#: plugins/admin/systems/class_dhcpPool.inc:69
+#: plugins/admin/systems/class_dhcpHost.inc:82
+#: plugins/admin/systems/class_dhcpSharedNetwork.inc:87
 #: plugins/admin/ogroups/class_ogroupManagement.inc:331
 #: plugins/gofon/phoneaccount/main.inc:105
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:233
 #: include/sieve/templates/edit_frame_base.tpl:39
 #: include/sieve/templates/management.tpl:24
-#: include/class_MultiSelectWindow.inc:78
+#: include/class_MultiSelectWindow.inc:79
 #: ihtml/themes/default/copyPasteDialog.tpl:15
 msgid "Save"
 msgstr "Сохранить"
@@ -418,7 +391,6 @@ msgstr "Сохранить"
 #: plugins/addons/addressbook/dial.tpl:10
 #: plugins/addons/addressbook/remove.tpl:16
 #: plugins/addons/addressbook/address_edit.tpl:234
-#: plugins/addons/godfs/class_dfsManagment.inc:249
 #: plugins/admin/fai/class_faiManagement.inc:610
 #: plugins/admin/fai/class_faiManagement.inc:615
 #: plugins/admin/fai/remove.tpl:17 plugins/admin/fai/faiProfileEntry.tpl:71
@@ -469,10 +441,18 @@ msgstr "Сохранить"
 #: plugins/admin/systems/chooser.tpl:18 plugins/admin/systems/gencd.tpl:11
 #: plugins/admin/systems/glpiAttachmentPool.tpl:52
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:68
+#: plugins/admin/systems/remove_dhcp.tpl:16
+#: plugins/admin/systems/class_dhcpService.inc:94
+#: plugins/admin/systems/class_dhcpGroup.inc:55
+#: plugins/admin/systems/class_dhcpSubnet.inc:89
+#: plugins/admin/systems/class_dhcpPool.inc:70
+#: plugins/admin/systems/class_dhcpHost.inc:83
+#: plugins/admin/systems/dhcpNewSection.tpl:17
+#: plugins/admin/systems/class_dhcpSharedNetwork.inc:88
 #: plugins/admin/ogroups/remove.tpl:16
 #: plugins/admin/ogroups/ogroup_objects.tpl:56
 #: plugins/admin/ogroups/class_ogroupManagement.inc:333
-#: plugins/admin/mimetypes/class_mimetypeManagement.inc:394
+#: plugins/admin/mimetypes/class_mimetypeManagement.inc:411
 #: plugins/admin/mimetypes/remove.tpl:16 plugins/admin/mimetypes/remove.tpl:20
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:269
 #: plugins/gofon/macro/remove.tpl:15 plugins/gofon/phoneaccount/main.inc:107
@@ -520,7 +500,6 @@ msgstr "Нажмите 'Изменить' чтобы отредактирова�
 #: plugins/admin/systems/glpiPrinter.tpl:73
 #: plugins/admin/systems/glpiPrinter.tpl:82 plugins/admin/systems/glpi.tpl:48
 #: plugins/admin/systems/glpi.tpl:56 plugins/admin/systems/glpi.tpl:85
-#: plugins/admin/systems/servdns.tpl:7
 #: plugins/admin/systems/class_glpiPrinterCartridges.inc:162
 #: plugins/admin/systems/glpiManufacturer.tpl:7
 #: plugins/admin/systems/servdnseditzone.tpl:40
@@ -637,7 +616,6 @@ msgstr "триггер всех команд компьютеру"
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:7
 #: plugins/gofax/faxreports/class_faxreport.inc:7
 #: plugins/addons/addressbook/class_addressbook.inc:7
-#: plugins/addons/godfs/class_dfsManagment.inc:11
 #: plugins/addons/mailqueue/class_mailqueue.inc:7
 #: plugins/addons/ldapmanager/class_csvimport.inc:7
 #: plugins/addons/ldapmanager/class_exportxls.inc:8
@@ -718,7 +696,6 @@ msgstr "Выберите адреса для добавления"
 #: plugins/personal/environment/selectPrinterDialog.tpl:24
 #: plugins/gofax/faxaccount/locals.tpl:19
 #: plugins/addons/addressbook/contents.tpl:58
-#: plugins/addons/godfs/contents.tpl:31
 #: plugins/admin/fai/faiProfileEntry.tpl:31
 #: plugins/admin/fai/faiPackageEntry.tpl:32
 #: plugins/admin/groups/group_objects.tpl:20
@@ -799,7 +776,7 @@ msgstr "Имя пользователя, адрес которого показ�
 #: plugins/gofax/faxaccount/lists.tpl:13 plugins/admin/fai/faiVariable.tpl:44
 #: plugins/admin/fai/faiPartitionTable.tpl:43
 #: plugins/admin/fai/faiPackage.tpl:72 plugins/admin/fai/faiProfile.tpl:38
-#: plugins/admin/fai/faiScript.tpl:43 plugins/admin/fai/faiTemplate.tpl:35
+#: plugins/admin/fai/faiScript.tpl:42 plugins/admin/fai/faiTemplate.tpl:35
 #: plugins/admin/fai/faiHook.tpl:43 plugins/admin/groups/application.tpl:27
 #: plugins/admin/groups/mail.tpl:51 plugins/admin/groups/mail.tpl:95
 #: plugins/admin/groups/class_groupMail.inc:568
@@ -820,8 +797,8 @@ msgstr "Имя пользователя, адрес которого показ�
 #: plugins/admin/systems/terminalStartup.tpl:61
 #: plugins/admin/systems/terminalStartup.tpl:80
 #: plugins/admin/systems/glpiManufacturer.tpl:6
-#: plugins/admin/systems/class_termDNS.inc:479
-#: plugins/admin/systems/class_termDNS.inc:499
+#: plugins/admin/systems/class_termDNS.inc:663
+#: plugins/admin/systems/class_termDNS.inc:683
 #: plugins/admin/systems/goSpamServer.tpl:36
 #: plugins/admin/systems/goSpamServer.tpl:88
 #: plugins/admin/systems/servdnseditzone.tpl:115
@@ -835,6 +812,9 @@ msgstr "Имя пользователя, адрес которого показ�
 #: plugins/admin/systems/phonesettings.tpl:176
 #: plugins/admin/systems/phonesettings.tpl:191
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:67
+#: plugins/admin/systems/dhcp_network.tpl:67
+#: plugins/admin/systems/dhcp_advanced.tpl:22
+#: plugins/admin/systems/dhcp_advanced.tpl:35
 #: plugins/admin/ogroups/termgroup.tpl:23
 #: plugins/admin/ogroups/phonequeue.tpl:28
 #: plugins/admin/ogroups/ogroup_objects.tpl:54
@@ -926,7 +906,7 @@ msgstr "Список альтернативных адресов эл. почт�
 #: plugins/admin/systems/terminalStartup.tpl:62
 #: plugins/admin/systems/remove_ppd.tpl:12
 #: plugins/admin/systems/class_glpiPrinterCartridges.inc:163
-#: plugins/admin/systems/class_termDNS.inc:493
+#: plugins/admin/systems/class_termDNS.inc:677
 #: plugins/admin/systems/servservice.tpl:22
 #: plugins/admin/systems/servservice.tpl:48
 #: plugins/admin/systems/glpi_edit_os.tpl:10
@@ -939,6 +919,10 @@ msgstr "Список альтернативных адресов эл. почт�
 #: plugins/admin/systems/class_servDNSeditZone.inc:547
 #: plugins/admin/systems/phonesettings.tpl:177
 #: plugins/admin/systems/phonesettings.tpl:192
+#: plugins/admin/systems/dhcp_network.tpl:68
+#: plugins/admin/systems/remove_dhcp.tpl:14
+#: plugins/admin/systems/dhcp_advanced.tpl:23
+#: plugins/admin/systems/dhcp_advanced.tpl:36
 #: plugins/admin/ogroups/termgroup.tpl:25
 #: plugins/admin/ogroups/phonequeue.tpl:29 plugins/admin/ogroups/remove.tpl:14
 #: plugins/admin/ogroups/generic.tpl:44 plugins/admin/mimetypes/remove.tpl:14
@@ -1149,7 +1133,7 @@ msgid "The address you're trying to add is already used by user"
 msgstr "Добавляемый вами адрес уже используется пользователем"
 
 #: plugins/personal/mail/class_mailAccount.inc:559
-#: plugins/personal/posix/class_posixAccount.inc:477
+#: plugins/personal/posix/class_posixAccount.inc:476
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/samba/class_sambaAccount.inc:429
@@ -1159,7 +1143,7 @@ msgid "January"
 msgstr "Январь"
 
 #: plugins/personal/mail/class_mailAccount.inc:559
-#: plugins/personal/posix/class_posixAccount.inc:477
+#: plugins/personal/posix/class_posixAccount.inc:476
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/samba/class_sambaAccount.inc:429
@@ -1169,7 +1153,7 @@ msgid "February"
 msgstr "Февраль"
 
 #: plugins/personal/mail/class_mailAccount.inc:559
-#: plugins/personal/posix/class_posixAccount.inc:477
+#: plugins/personal/posix/class_posixAccount.inc:476
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/samba/class_sambaAccount.inc:429
@@ -1179,7 +1163,7 @@ msgid "March"
 msgstr "Март"
 
 #: plugins/personal/mail/class_mailAccount.inc:559
-#: plugins/personal/posix/class_posixAccount.inc:477
+#: plugins/personal/posix/class_posixAccount.inc:476
 #: plugins/personal/samba/class_sambaAccount.inc:393
 #: plugins/personal/samba/class_sambaAccount.inc:411
 #: plugins/personal/samba/class_sambaAccount.inc:429
@@ -1189,7 +1173,7 @@ msgid "April"
 msgstr "Апрель"
 
 #: plugins/personal/mail/class_mailAccount.inc:560
-#: plugins/personal/posix/class_posixAccount.inc:478
+#: plugins/personal/posix/class_posixAccount.inc:477
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
 #: plugins/personal/samba/class_sambaAccount.inc:430
@@ -1199,7 +1183,7 @@ msgid "May"
 msgstr "Май"
 
 #: plugins/personal/mail/class_mailAccount.inc:560
-#: plugins/personal/posix/class_posixAccount.inc:478
+#: plugins/personal/posix/class_posixAccount.inc:477
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
 #: plugins/personal/samba/class_sambaAccount.inc:430
@@ -1209,7 +1193,7 @@ msgid "June"
 msgstr "Июнь"
 
 #: plugins/personal/mail/class_mailAccount.inc:560
-#: plugins/personal/posix/class_posixAccount.inc:478
+#: plugins/personal/posix/class_posixAccount.inc:477
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
 #: plugins/personal/samba/class_sambaAccount.inc:430
@@ -1219,7 +1203,7 @@ msgid "July"
 msgstr "Июль"
 
 #: plugins/personal/mail/class_mailAccount.inc:560
-#: plugins/personal/posix/class_posixAccount.inc:478
+#: plugins/personal/posix/class_posixAccount.inc:477
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
 #: plugins/personal/samba/class_sambaAccount.inc:430
@@ -1229,7 +1213,7 @@ msgid "August"
 msgstr "Август"
 
 #: plugins/personal/mail/class_mailAccount.inc:560
-#: plugins/personal/posix/class_posixAccount.inc:478
+#: plugins/personal/posix/class_posixAccount.inc:477
 #: plugins/personal/samba/class_sambaAccount.inc:394
 #: plugins/personal/samba/class_sambaAccount.inc:412
 #: plugins/personal/samba/class_sambaAccount.inc:430
@@ -1239,7 +1223,7 @@ msgid "September"
 msgstr "Сентябрь"
 
 #: plugins/personal/mail/class_mailAccount.inc:561
-#: plugins/personal/posix/class_posixAccount.inc:479
+#: plugins/personal/posix/class_posixAccount.inc:478
 #: plugins/personal/samba/class_sambaAccount.inc:395
 #: plugins/personal/samba/class_sambaAccount.inc:413
 #: plugins/personal/samba/class_sambaAccount.inc:431
@@ -1249,7 +1233,7 @@ msgid "October"
 msgstr "Октябрь"
 
 #: plugins/personal/mail/class_mailAccount.inc:561
-#: plugins/personal/posix/class_posixAccount.inc:479
+#: plugins/personal/posix/class_posixAccount.inc:478
 #: plugins/personal/samba/class_sambaAccount.inc:395
 #: plugins/personal/samba/class_sambaAccount.inc:413
 #: plugins/personal/samba/class_sambaAccount.inc:431
@@ -1259,7 +1243,7 @@ msgid "November"
 msgstr "Ноябрь"
 
 #: plugins/personal/mail/class_mailAccount.inc:561
-#: plugins/personal/posix/class_posixAccount.inc:479
+#: plugins/personal/posix/class_posixAccount.inc:478
 #: plugins/personal/samba/class_sambaAccount.inc:395
 #: plugins/personal/samba/class_sambaAccount.inc:413
 #: plugins/personal/samba/class_sambaAccount.inc:431
@@ -1362,14 +1346,14 @@ msgstr ""
 #: plugins/admin/fai/faiNewBranch.tpl:51
 #: plugins/admin/departments/dep_iframe.tpl:19
 #: plugins/admin/systems/class_systemManagement.inc:243
-#: include/functions.inc:1582 setup/class_setup.inc:275
-#: setup/class_setup.inc:277
+#: include/functions.inc:1559 setup/class_setup.inc:261
+#: setup/class_setup.inc:263
 msgid "Back"
 msgstr "Назад"
 
 #: plugins/personal/password/class_password.inc:24
 #: plugins/personal/generic/paste_generic.tpl:20
-#: plugins/admin/systems/class_divListSystem.inc:178
+#: plugins/admin/systems/class_divListSystem.inc:184
 #: plugins/admin/systems/servdb.tpl:18 plugins/admin/systems/servdb.tpl:34
 #: plugins/admin/systems/servdb.tpl:50 plugins/admin/systems/servdb.tpl:86
 #: plugins/admin/systems/servdb.tpl:109 plugins/admin/systems/servdb.tpl:128
@@ -1610,53 +1594,55 @@ msgstr "Показать подходяшие системы"
 msgid "UNIX"
 msgstr "Unix"
 
-#: plugins/personal/posix/class_posixAccount.inc:126
+#: plugins/personal/posix/class_posixAccount.inc:125
 msgid "expired"
 msgstr "истёк"
 
-#: plugins/personal/posix/class_posixAccount.inc:128
+#: plugins/personal/posix/class_posixAccount.inc:127
 msgid "grace time active"
 msgstr "актуальное время работы"
 
-#: plugins/personal/posix/class_posixAccount.inc:131
+#: plugins/personal/posix/class_posixAccount.inc:130
 msgid "active, password not changable"
 msgstr "активный, пароль не меняется"
 
-#: plugins/personal/posix/class_posixAccount.inc:133
+#: plugins/personal/posix/class_posixAccount.inc:132
 msgid "active, password expired"
 msgstr "активный, срок действия пароля истёк"
 
-#: plugins/personal/posix/class_posixAccount.inc:135
+#: plugins/personal/posix/class_posixAccount.inc:134
 msgid "active"
 msgstr "активный"
 
-#: plugins/personal/posix/class_posixAccount.inc:146
-#: plugins/personal/posix/class_posixAccount.inc:1007
+#: plugins/personal/posix/class_posixAccount.inc:145
+#: plugins/personal/posix/class_posixAccount.inc:1005
 msgid "Group of user"
 msgstr "Группа пользователя"
 
-#: plugins/personal/posix/class_posixAccount.inc:181
+#: plugins/personal/posix/class_posixAccount.inc:180
 msgid "unconfigured"
 msgstr "Не настроено"
 
-#: plugins/personal/posix/class_posixAccount.inc:201
+#: plugins/personal/posix/class_posixAccount.inc:200
 #: plugins/admin/systems/class_workstationService.inc:177
 #: plugins/admin/systems/class_workstationStartup.inc:840
 #: plugins/admin/systems/class_terminalService.inc:190
+#: plugins/admin/systems/class_dhcpAdvanced.inc:78
+#: plugins/admin/systems/class_dhcpAdvanced.inc:87
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:248
 msgid "automatic"
 msgstr "автоматически"
 
-#: plugins/personal/posix/class_posixAccount.inc:248
+#: plugins/personal/posix/class_posixAccount.inc:247
 msgid "This account has no unix extensions."
 msgstr "В этой учетной записи нет расширений UNIX."
 
-#: plugins/personal/posix/class_posixAccount.inc:268
-#: plugins/personal/posix/class_posixAccount.inc:271
+#: plugins/personal/posix/class_posixAccount.inc:267
+#: plugins/personal/posix/class_posixAccount.inc:270
 msgid "Remove posix account"
 msgstr "Удалить учетную запись POSIX"
 
-#: plugins/personal/posix/class_posixAccount.inc:269
+#: plugins/personal/posix/class_posixAccount.inc:268
 msgid ""
 "This account has unix features enabled. To disable them, you'll need to "
 "remove the samba / environment account first."
@@ -1665,7 +1651,7 @@ msgstr ""
 "использование, сначала нужно удалить учётную запись Samba / учётную запись "
 "окружения."
 
-#: plugins/personal/posix/class_posixAccount.inc:272
+#: plugins/personal/posix/class_posixAccount.inc:271
 msgid ""
 "This account has posix features enabled. You can disable them by clicking "
 "below."
@@ -1673,11 +1659,11 @@ msgstr ""
 "В этой учетной записи используются атрибуты POSIX. Вы можете отключить их "
 "использование, щелкнув ниже."
 
-#: plugins/personal/posix/class_posixAccount.inc:275
+#: plugins/personal/posix/class_posixAccount.inc:274
 msgid "Create posix account"
 msgstr "Создать учетную запись POSIX"
 
-#: plugins/personal/posix/class_posixAccount.inc:276
+#: plugins/personal/posix/class_posixAccount.inc:275
 msgid ""
 "This account has posix features disabled. You can enable them by clicking "
 "below."
@@ -1685,125 +1671,125 @@ msgstr ""
 "В этой учетной записи не используются атрибуты POSIX. Вы можете использовать "
 "их, щелкнув ниже."
 
-#: plugins/personal/posix/class_posixAccount.inc:439
+#: plugins/personal/posix/class_posixAccount.inc:438
 #, php-format
 msgid "Password can't be changed up to %s days after last change"
 msgstr "Пароль нельзя изменить в течение %s дн. с последней смены (shadowMin)"
 
-#: plugins/personal/posix/class_posixAccount.inc:441
+#: plugins/personal/posix/class_posixAccount.inc:440
 #, php-format
 msgid "Password must be changed after %s days"
 msgstr "Пароль должен быть изменен по истечении %s дн. (shadowMax)"
 
-#: plugins/personal/posix/class_posixAccount.inc:443
+#: plugins/personal/posix/class_posixAccount.inc:442
 #, php-format
 msgid "Disable account after %s days of inactivity after password expiery"
 msgstr ""
 "Отключить учетную запись, если срок действия пароля истек и прошло %s дн. "
 "бездействия (shadowInactive)"
 
-#: plugins/personal/posix/class_posixAccount.inc:445
+#: plugins/personal/posix/class_posixAccount.inc:444
 #, php-format
 msgid "Warn user %s days before password expiery"
 msgstr ""
 "Предупреждать пользователей за %s дн. до истечения срока действия пароля "
 "(shadowWarning)"
 
-#: plugins/personal/posix/class_posixAccount.inc:560
+#: plugins/personal/posix/class_posixAccount.inc:558
 #: plugins/personal/samba/class_sambaAccount.inc:491
 #: plugins/admin/systems/class_terminalGeneric.inc:114
 #: setup/setup_config2.tpl:151
 msgid "disabled"
 msgstr "отключен"
 
-#: plugins/personal/posix/class_posixAccount.inc:560
+#: plugins/personal/posix/class_posixAccount.inc:558
 msgid "full access"
 msgstr "полный доступ"
 
-#: plugins/personal/posix/class_posixAccount.inc:561
+#: plugins/personal/posix/class_posixAccount.inc:559
 msgid "allow access to these hosts"
 msgstr "разрешить доступ только на эти хосты"
 
-#: plugins/personal/posix/class_posixAccount.inc:607
+#: plugins/personal/posix/class_posixAccount.inc:605
 msgid "Removing UNIX account failed"
 msgstr "Не удалось удалить учётную запись UNIX"
 
-#: plugins/personal/posix/class_posixAccount.inc:759
+#: plugins/personal/posix/class_posixAccount.inc:757
 msgid "Failed: overriding lock"
 msgstr "Ошибка: замещение блокировки"
 
-#: plugins/personal/posix/class_posixAccount.inc:848
+#: plugins/personal/posix/class_posixAccount.inc:846
 msgid "Saving UNIX account failed"
 msgstr "Не удалось сохранить учётную запись UNIX"
 
-#: plugins/personal/posix/class_posixAccount.inc:921
+#: plugins/personal/posix/class_posixAccount.inc:919
 msgid "The required field 'Home directory' is not set."
 msgstr "Обязательное поле \"Домашний каталог\" не заполнено."
 
-#: plugins/personal/posix/class_posixAccount.inc:924
+#: plugins/personal/posix/class_posixAccount.inc:922
 msgid "Please enter a valid path in 'Home directory' field."
 msgstr "Введите корректный путь в поле \"Домашний каталог\"."
 
-#: plugins/personal/posix/class_posixAccount.inc:932
+#: plugins/personal/posix/class_posixAccount.inc:930
 msgid "Value specified as 'UID' is not valid."
 msgstr "Значение поля \"UID\" некорректно."
 
-#: plugins/personal/posix/class_posixAccount.inc:935
+#: plugins/personal/posix/class_posixAccount.inc:933
 msgid "Value specified as 'UID' is too small."
 msgstr "Значение 'UID' слишком маленькое."
 
-#: plugins/personal/posix/class_posixAccount.inc:939
+#: plugins/personal/posix/class_posixAccount.inc:937
 #: plugins/admin/groups/class_groupGeneric.inc:814
 msgid "Value specified as 'GID' is not valid."
 msgstr "Значение поля 'GID' некорректно."
 
-#: plugins/personal/posix/class_posixAccount.inc:942
+#: plugins/personal/posix/class_posixAccount.inc:940
 #: plugins/admin/groups/class_groupGeneric.inc:817
 msgid "Value specified as 'GID' is too small."
 msgstr "Значение 'GID' слишком маленькое."
 
-#: plugins/personal/posix/class_posixAccount.inc:950
+#: plugins/personal/posix/class_posixAccount.inc:948
 msgid "Value specified as 'shadowMin' is not valid."
 msgstr "Значение поля \"shadowMin\" некорректно."
 
-#: plugins/personal/posix/class_posixAccount.inc:955
+#: plugins/personal/posix/class_posixAccount.inc:953
 msgid "Value specified as 'shadowMax' is not valid."
 msgstr "Значение поля \"shadowMax\" некорректно."
 
-#: plugins/personal/posix/class_posixAccount.inc:960
+#: plugins/personal/posix/class_posixAccount.inc:958
 msgid "Value specified as 'shadowWarning' is not valid."
 msgstr "Значение поля \"shadowWarning\" некорректно."
 
-#: plugins/personal/posix/class_posixAccount.inc:963
+#: plugins/personal/posix/class_posixAccount.inc:961
 msgid "'shadowWarning' without 'shadowMax' makes no sense."
 msgstr "Использование \"shadowWarning\" без \"shadowMax\" бессмысленно."
 
-#: plugins/personal/posix/class_posixAccount.inc:966
+#: plugins/personal/posix/class_posixAccount.inc:964
 msgid "Value specified as 'shadowWarning' should be smaller than 'shadowMax'."
 msgstr ""
 "Значение поля \"shadowWarning\" должно быть меньше значения поля \"shadowMax"
 "\"."
 
-#: plugins/personal/posix/class_posixAccount.inc:969
+#: plugins/personal/posix/class_posixAccount.inc:967
 msgid "Value specified as 'shadowWarning' should be greater than 'shadowMin'."
 msgstr ""
 "Значение поля \"shadowWarning\" должно быть больше значения поля \"shadowMin"
 "\"."
 
-#: plugins/personal/posix/class_posixAccount.inc:974
+#: plugins/personal/posix/class_posixAccount.inc:972
 msgid "Value specified as 'shadowInactive' is not valid."
 msgstr "Значение поля \"shadowInactive\" некорректно."
 
-#: plugins/personal/posix/class_posixAccount.inc:977
+#: plugins/personal/posix/class_posixAccount.inc:975
 msgid "'shadowInactive' without 'shadowMax' makes no sense."
 msgstr "Использование \"shadowInactive\" без \"shadowMax\" бессмысленно."
 
-#: plugins/personal/posix/class_posixAccount.inc:982
+#: plugins/personal/posix/class_posixAccount.inc:980
 msgid "Value specified as 'shadowMin' should be smaller than 'shadowMax'."
 msgstr ""
 "Значение поля \"shadowMin\" должно быть меньше значения поля \"shadowMax\"."
 
-#: plugins/personal/posix/class_posixAccount.inc:1130
+#: plugins/personal/posix/class_posixAccount.inc:1128
 msgid "Too many users, can't allocate a free ID!"
 msgstr "Слишком много пользователей, невозможно создать идентификатор!"
 
@@ -1817,7 +1803,6 @@ msgid "Path"
 msgstr "Путь"
 
 #: plugins/personal/netatalk/main.inc:104
-#: plugins/addons/godfs/class_dfsManagment.inc:247
 #: ihtml/themes/default/copyPasteDialog.tpl:24
 #: setup/class_setupStep_Finish.inc:37
 msgid "Finish"
@@ -1957,7 +1942,7 @@ msgstr "Час"
 #: plugins/admin/groups/application_options.tpl:11
 #: plugins/admin/systems/servRepositorySetup.tpl:41
 #: plugins/admin/systems/printerPPDDialog.tpl:22
-#: plugins/admin/mimetypes/class_mimetypeManagement.inc:391
+#: plugins/admin/mimetypes/class_mimetypeManagement.inc:408
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:266
 #: include/sieve/templates/create_script.tpl:13 setup/setup_ldap.tpl:16
 #: setup/setup_migrate.tpl:131 setup/setup_migrate.tpl:182
@@ -1967,6 +1952,7 @@ msgid "Apply"
 msgstr "Применить"
 
 #: plugins/personal/samba/samba3.tpl:23
+#: plugins/admin/systems/dhcp_network.tpl:52
 msgid "Domain"
 msgstr "Домен"
 
@@ -2276,7 +2262,6 @@ msgstr "Точка монтирования"
 #: plugins/admin/groups/class_groupMail.inc:572
 #: plugins/admin/applications/class_applicationParameters.inc:108
 #: plugins/admin/systems/glpiPrinter.tpl:122
-#: plugins/admin/systems/servdns.tpl:8
 #: plugins/admin/systems/workstationStartup.tpl:148
 #: plugins/admin/systems/terminalStartup.tpl:81
 #: plugins/admin/systems/glpiManufacturer.tpl:8
@@ -2575,8 +2560,8 @@ msgstr "Имя скрипта"
 
 #: plugins/personal/environment/logonManagement.tpl:17
 #: plugins/personal/environment/hotplugDialogNew.tpl:17
-#: plugins/gofax/blocklists/generic.tpl:46 plugins/addons/godfs/generic.tpl:12
-#: plugins/addons/godfs/generic.tpl:38 plugins/admin/fai/faiVariable.tpl:19
+#: plugins/gofax/blocklists/generic.tpl:46
+#: plugins/admin/fai/faiVariable.tpl:19
 #: plugins/admin/fai/faiPartitionTable.tpl:19
 #: plugins/admin/fai/faiScriptEntry.tpl:17 plugins/admin/fai/faiPackage.tpl:19
 #: plugins/admin/fai/faiProfile.tpl:19
@@ -2603,6 +2588,7 @@ msgid "Description"
 msgstr "Описание"
 
 #: plugins/personal/environment/logonManagement.tpl:24
+#: plugins/admin/fai/class_faiScript.inc:276
 #: plugins/admin/fai/faiScriptEntry.tpl:34
 msgid "Priority"
 msgstr "Приоритет"
@@ -2712,7 +2698,7 @@ msgstr "Просмотр"
 #: plugins/admin/systems/glpi_edit_os.tpl:15
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:81
 #: plugins/admin/systems/glpi_edit_cartridge_type.tpl:13
-#: include/class_MultiSelectWindow.inc:79 setup/setup_migrate.tpl:79
+#: include/class_MultiSelectWindow.inc:80 setup/setup_migrate.tpl:79
 msgid "Close"
 msgstr "Закрыть"
 
@@ -2724,21 +2710,21 @@ msgstr "женский"
 msgid "male"
 msgstr "мужской"
 
-#: plugins/personal/generic/class_user.inc:277
+#: plugins/personal/generic/class_user.inc:276
 msgid "This account has no valid GOsa extensions."
 msgstr "Для этой учетной записи нет корректных расширений GOsa."
 
-#: plugins/personal/generic/class_user.inc:331
+#: plugins/personal/generic/class_user.inc:330
 msgid "The specified file has not been uploaded via HTTP POST! Aborted."
 msgstr ""
 "Указанный файл не был загружен на сервер (метод HTTP POST)! Операция "
 "прервана."
 
-#: plugins/personal/generic/class_user.inc:427
+#: plugins/personal/generic/class_user.inc:426
 msgid "Please enter a valid serial number"
 msgstr "Введите корректный серийный номер"
 
-#: plugins/personal/generic/class_user.inc:467
+#: plugins/personal/generic/class_user.inc:466
 msgid ""
 "(Some types of certificates are currently not supported and may be displayed "
 "as 'invalid'.)"
@@ -2746,75 +2732,75 @@ msgstr ""
 "(Некоторые типы сертификатов в настоящий момент не поддерживаются и могут "
 "быть отображены как 'неправильные'.)"
 
-#: plugins/personal/generic/class_user.inc:477
+#: plugins/personal/generic/class_user.inc:476
 #, php-format
 msgid "Certificate is valid from %s to %s and is currently %s."
 msgstr "Сертификат действителен с %s до %s и в настоящий момент %s."
 
-#: plugins/personal/generic/class_user.inc:480
+#: plugins/personal/generic/class_user.inc:479
 msgid "valid"
 msgstr "правильный"
 
-#: plugins/personal/generic/class_user.inc:481
+#: plugins/personal/generic/class_user.inc:480
 msgid "invalid"
 msgstr "неправильный"
 
-#: plugins/personal/generic/class_user.inc:485
+#: plugins/personal/generic/class_user.inc:484
 msgid "No certificate installed"
 msgstr "Сертификаты не установлены"
 
-#: plugins/personal/generic/class_user.inc:568
+#: plugins/personal/generic/class_user.inc:567
 msgid "Removing generic user account failed"
 msgstr "Удаление общей пользовательской учётной записи отключено."
 
-#: plugins/personal/generic/class_user.inc:600
-#: plugins/personal/generic/class_user.inc:936
+#: plugins/personal/generic/class_user.inc:599
+#: plugins/personal/generic/class_user.inc:935
 msgid "Kerberos database communication failed"
 msgstr "Ошибка соединения с базой данных Kerberos"
 
-#: plugins/personal/generic/class_user.inc:614
-#: plugins/personal/generic/class_user.inc:953
+#: plugins/personal/generic/class_user.inc:613
+#: plugins/personal/generic/class_user.inc:952
 msgid "Can't remove user from kerberos database."
 msgstr "Не удается удалить пользователя из базы данных Kerberos."
 
-#: plugins/personal/generic/class_user.inc:889
+#: plugins/personal/generic/class_user.inc:888
 msgid "Saving generic user account failed"
 msgstr "Не удалось сохранить общую пользовательскую учётную запись"
 
-#: plugins/personal/generic/class_user.inc:964
+#: plugins/personal/generic/class_user.inc:963
 msgid "Can't add user to kerberos database."
 msgstr "Не удается добавить пользователя в базу данных Kerberos."
 
-#: plugins/personal/generic/class_user.inc:1021
+#: plugins/personal/generic/class_user.inc:1020
 msgid "You have no permissions to create a user on this 'Base'."
 msgstr "У вас недостаточно прав для создания пользователя в этой ветке."
 
-#: plugins/personal/generic/class_user.inc:1026
+#: plugins/personal/generic/class_user.inc:1025
 msgid "You have no permissions to move a user from the original 'Base'."
 msgstr "У вас недостаточно прав для перемещения пользователя из этой 'Ветви'."
 
-#: plugins/personal/generic/class_user.inc:1032
+#: plugins/personal/generic/class_user.inc:1031
 #: plugins/addons/addressbook/class_addressbook.inc:555
 #: plugins/admin/users/class_userManagement.inc:541
 msgid "The required field 'Name' is not set."
 msgstr "Обязательное поле \"Имя\" не заполнено."
 
-#: plugins/personal/generic/class_user.inc:1041
+#: plugins/personal/generic/class_user.inc:1040
 msgid "There's already a person with this 'Login' in the database."
 msgstr ""
 "Пользователь с таким регистрационным именем в базе данных уже существует."
 
-#: plugins/personal/generic/class_user.inc:1047
+#: plugins/personal/generic/class_user.inc:1046
 #: plugins/addons/addressbook/class_addressbook.inc:559
 #: plugins/admin/users/class_userManagement.inc:544
 msgid "The required field 'Given name' is not set."
 msgstr "Обязательное поле \"Личное имя\" не заполнено."
 
-#: plugins/personal/generic/class_user.inc:1050
+#: plugins/personal/generic/class_user.inc:1049
 msgid "The required field 'Login' is not set."
 msgstr "Обязательное поле \"Регистрационное имя\" не заполнено."
 
-#: plugins/personal/generic/class_user.inc:1055
+#: plugins/personal/generic/class_user.inc:1054
 msgid ""
 "There's already a person with this 'Name'/'Given name' combination in the "
 "database."
@@ -2822,7 +2808,7 @@ msgstr ""
 "Пользователь с такой комбинацией имени и личного имени в базе данных уже "
 "существует."
 
-#: plugins/personal/generic/class_user.inc:1062
+#: plugins/personal/generic/class_user.inc:1061
 msgid ""
 "The field 'Login' contains invalid characters. Lowercase, numbers and dashes "
 "are allowed."
@@ -2830,49 +2816,49 @@ msgstr ""
 "Значение поля \"Регистрационное имя\" содержит недопустимые символы. "
 "Допустимыми являются буквы в нижнем регистре, цифры и дефисы."
 
-#: plugins/personal/generic/class_user.inc:1065
+#: plugins/personal/generic/class_user.inc:1064
 msgid "The field 'Homepage' contains an invalid URL definition."
 msgstr "Значение поля \"Домашняя страница\" содержит некорректный URL."
 
-#: plugins/personal/generic/class_user.inc:1068
-#: plugins/personal/generic/class_user.inc:1093
+#: plugins/personal/generic/class_user.inc:1067
+#: plugins/personal/generic/class_user.inc:1092
 #: plugins/addons/addressbook/class_addressbook.inc:565
 #: plugins/addons/addressbook/class_addressbook.inc:593
 #: plugins/admin/departments/class_departmentGeneric.inc:243
 msgid "The field 'Name' contains invalid characters."
 msgstr "Значение поля \"Имя\" содержит недопустимые символы."
 
-#: plugins/personal/generic/class_user.inc:1071
-#: plugins/personal/generic/class_user.inc:1090
+#: plugins/personal/generic/class_user.inc:1070
+#: plugins/personal/generic/class_user.inc:1089
 #: plugins/addons/addressbook/class_addressbook.inc:568
 #: plugins/addons/addressbook/class_addressbook.inc:590
 msgid "The field 'Given name' contains invalid characters."
 msgstr "Значение поля \"Личное имя\" содержит недопустимые символы."
 
-#: plugins/personal/generic/class_user.inc:1076
+#: plugins/personal/generic/class_user.inc:1075
 #: plugins/addons/addressbook/class_addressbook.inc:573
 #: plugins/addons/addressbook/class_addressbook.inc:576
 #: plugins/admin/departments/class_departmentGeneric.inc:246
 msgid "The field 'Phone' contains an invalid phone number."
 msgstr "Значение поля \"Телефон\" содержит недопустимый номер телефона."
 
-#: plugins/personal/generic/class_user.inc:1079
+#: plugins/personal/generic/class_user.inc:1078
 #: plugins/addons/addressbook/class_addressbook.inc:579
 #: plugins/admin/departments/class_departmentGeneric.inc:249
 msgid "The field 'Fax' contains an invalid phone number."
 msgstr "Значение поля \"Факс\" содержит недопустимый номер телефона."
 
-#: plugins/personal/generic/class_user.inc:1082
+#: plugins/personal/generic/class_user.inc:1081
 #: plugins/addons/addressbook/class_addressbook.inc:582
 msgid "The field 'Mobile' contains an invalid phone number."
 msgstr "Значение поля \"Мобильный\" содержит некорректный номер телефона."
 
-#: plugins/personal/generic/class_user.inc:1085
+#: plugins/personal/generic/class_user.inc:1084
 #: plugins/addons/addressbook/class_addressbook.inc:585
 msgid "The field 'Pager' contains an invalid phone number."
 msgstr "Значение поля \"Пейджер\" содержит некорректный номер телефона."
 
-#: plugins/personal/generic/class_user.inc:1212
+#: plugins/personal/generic/class_user.inc:1211
 msgid "Could not open specified certificate!"
 msgstr "Невозможно открыть указаный сертификат!"
 
@@ -2948,7 +2934,6 @@ msgstr "Предпочитаемый язык"
 #: plugins/personal/generic/generic.tpl:127
 #: plugins/gofax/blocklists/generic.tpl:14
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:79
-#: plugins/addons/godfs/class_dfsManagment.inc:217
 #: plugins/admin/fai/class_divListFai.inc:153
 #: plugins/admin/groups/class_divListGroup.inc:96
 #: plugins/admin/groups/generic.tpl:21
@@ -2968,7 +2953,7 @@ msgstr "Предпочитаемый язык"
 #: plugins/admin/systems/wingeneric.tpl:13
 #: plugins/admin/ogroups/generic.tpl:21
 #: plugins/admin/ogroups/class_divListOGroup.inc:102
-#: plugins/admin/mimetypes/class_divListMimeTypes.inc:103
+#: plugins/admin/mimetypes/class_divListMimeTypes.inc:111
 #: plugins/admin/mimetypes/generic.tpl:38 plugins/gofon/macro/generic.tpl:20
 #: plugins/gofon/macro/class_divListMacros.inc:76
 #: plugins/gofon/conference/generic.tpl:33
@@ -3095,7 +3080,6 @@ msgid "Mobile"
 msgstr "Мобильный"
 
 #: plugins/personal/generic/generic.tpl:287
-#: plugins/addons/godfs/generic.tpl:34
 #: plugins/admin/departments/generic.tpl:47
 #: plugins/admin/departments/generic.tpl:55
 #: plugins/admin/systems/workstation.tpl:17 html/getxls.php:174
@@ -3466,7 +3450,7 @@ msgid "Template user"
 msgstr "Шаблон пользователя"
 
 #: plugins/personal/connectivity/opengw.tpl:34
-#: plugins/admin/systems/class_workstationGeneric.inc:123
+#: plugins/admin/systems/class_workstationGeneric.inc:125
 #: plugins/admin/systems/class_servGeneric.inc:48
 #: plugins/admin/ogroups/class_termgroup.inc:48
 msgid "Locked"
@@ -3872,7 +3856,7 @@ msgstr "Выберите ветку стоп-листа"
 #: plugins/admin/systems/glpi_devices.tpl:492
 #: plugins/admin/systems/glpi_devices.tpl:542
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:37
-#: plugins/gofon/conference/generic.tpl:22 include/php_setup.inc:181
+#: plugins/gofon/conference/generic.tpl:22 include/php_setup.inc:189
 msgid "Type"
 msgstr "Тип"
 
@@ -4011,7 +3995,6 @@ msgid "New Blocklist"
 msgstr "Новый стоп-лист"
 
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:81
-#: plugins/addons/godfs/class_dfsManagment.inc:218
 #: plugins/admin/fai/class_divListFai.inc:154
 #: plugins/admin/groups/class_divListGroup.inc:98
 #: plugins/admin/users/class_divListUsers.inc:101
@@ -4020,14 +4003,13 @@ msgstr "Новый стоп-лист"
 #: plugins/admin/systems/class_divListSystem.inc:109
 #: plugins/admin/systems/class_glpiSelectUser.inc:164
 #: plugins/admin/ogroups/class_divListOGroup.inc:104
-#: plugins/admin/mimetypes/class_divListMimeTypes.inc:105
+#: plugins/admin/mimetypes/class_divListMimeTypes.inc:113
 #: plugins/gofon/macro/class_divListMacros.inc:78
 #: plugins/gofon/conference/class_divListConferences.inc:79
 msgid "Submit department"
 msgstr "Подтвердить подразделения"
 
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:81
-#: plugins/addons/godfs/class_dfsManagment.inc:218
 #: plugins/admin/fai/class_divListFai.inc:154
 #: plugins/admin/groups/class_divListGroup.inc:98
 #: plugins/admin/users/class_divListUsers.inc:101
@@ -4038,58 +4020,58 @@ msgstr "Подтвердить подразделения"
 #: plugins/admin/systems/class_glpiSelectUser.inc:164
 #: plugins/admin/systems/class_baseSelectDialog.inc:31
 #: plugins/admin/ogroups/class_divListOGroup.inc:104
-#: plugins/admin/mimetypes/class_divListMimeTypes.inc:105
+#: plugins/admin/mimetypes/class_divListMimeTypes.inc:113
 #: plugins/gofon/macro/class_divListMacros.inc:78
 #: plugins/gofon/conference/class_divListConferences.inc:79
-#: include/class_MultiSelectWindow.inc:211
+#: include/class_MultiSelectWindow.inc:212
 msgid "Submit"
 msgstr "Отправить"
 
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:95
-#: plugins/admin/fai/class_faiScript.inc:245
-#: plugins/admin/fai/class_faiScript.inc:248
+#: plugins/admin/fai/class_faiScript.inc:283
+#: plugins/admin/fai/class_faiScript.inc:286
 #: plugins/admin/fai/class_faiTemplate.inc:241
 #: plugins/admin/fai/class_faiTemplate.inc:244
 #: plugins/admin/fai/class_faiHook.inc:266
 #: plugins/admin/fai/class_faiHook.inc:269
-#: plugins/admin/fai/class_divListFai.inc:223
-#: plugins/admin/fai/class_divListFai.inc:228
+#: plugins/admin/fai/class_divListFai.inc:230
+#: plugins/admin/fai/class_divListFai.inc:235
 #: plugins/admin/groups/class_divListGroup.inc:157
-#: plugins/admin/users/class_divListUsers.inc:184
+#: plugins/admin/users/class_divListUsers.inc:187
 #: plugins/admin/applications/class_divListApplication.inc:156
 #: plugins/admin/departments/class_divListDepartment.inc:98
 #: plugins/admin/systems/glpiPrinter.tpl:15
 #: plugins/admin/systems/glpiPrinter.tpl:25 plugins/admin/systems/glpi.tpl:15
 #: plugins/admin/systems/glpi.tpl:25 plugins/admin/systems/glpi.tpl:35
-#: plugins/admin/systems/class_divListSystem.inc:143
+#: plugins/admin/systems/class_divListSystem.inc:147
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:43
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:53
 #: plugins/admin/ogroups/class_divListOGroup.inc:142
-#: plugins/admin/mimetypes/class_divListMimeTypes.inc:147
+#: plugins/admin/mimetypes/class_divListMimeTypes.inc:167
 #: plugins/gofon/macro/class_divListMacros.inc:93
 #: plugins/gofon/conference/class_divListConferences.inc:94
 msgid "edit"
 msgstr "редактировать"
 
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:95
-#: plugins/admin/users/class_divListUsers.inc:185
+#: plugins/admin/users/class_divListUsers.inc:188
 msgid "Edit user"
 msgstr "Редактировать пользователя"
 
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:96
 #: plugins/addons/mailqueue/contents.tpl:93
-#: plugins/admin/fai/class_faiScript.inc:249
+#: plugins/admin/fai/class_faiScript.inc:287
 #: plugins/admin/fai/class_faiTemplate.inc:245
 #: plugins/admin/fai/class_faiHook.inc:270
-#: plugins/admin/fai/class_divListFai.inc:230
+#: plugins/admin/fai/class_divListFai.inc:237
 #: plugins/admin/groups/class_divListGroup.inc:161
-#: plugins/admin/users/class_divListUsers.inc:195
+#: plugins/admin/users/class_divListUsers.inc:198
 #: plugins/admin/applications/class_divListApplication.inc:163
 #: plugins/admin/departments/class_divListDepartment.inc:102
-#: plugins/admin/systems/class_divListSystem.inc:145
+#: plugins/admin/systems/class_divListSystem.inc:149
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:132
 #: plugins/admin/ogroups/class_divListOGroup.inc:146
-#: plugins/admin/mimetypes/class_divListMimeTypes.inc:150
+#: plugins/admin/mimetypes/class_divListMimeTypes.inc:170
 #: plugins/gofon/macro/class_divListMacros.inc:95
 #: plugins/gofon/conference/class_divListConferences.inc:96
 #: plugins/gofon/conference/class_divListConferences.inc:98
@@ -4097,9 +4079,29 @@ msgid "delete"
 msgstr "удалить"
 
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:96
-#: plugins/admin/users/class_divListUsers.inc:196
+#: plugins/admin/users/class_divListUsers.inc:199
 msgid "Delete user"
 msgstr "Удалить пользователя"
+
+#: plugins/gofax/blocklists/class_divListBlocklists.inc:119
+#, fuzzy
+msgid "Number of listed blocklists"
+msgstr "Имя стоп-листа"
+
+#: plugins/gofax/blocklists/class_divListBlocklists.inc:120
+#: plugins/admin/fai/class_divListFai.inc:269
+#: plugins/admin/groups/class_divListGroup.inc:213
+#: plugins/admin/users/class_divListUsers.inc:279
+#: plugins/admin/applications/class_divListApplication.inc:196
+#: plugins/admin/departments/class_divListDepartment.inc:128
+#: plugins/admin/systems/class_divListSystem.inc:226
+#: plugins/admin/ogroups/class_divListOGroup.inc:184
+#: plugins/admin/mimetypes/class_divListMimeTypes.inc:201
+#: plugins/gofon/macro/class_divListMacros.inc:139
+#: plugins/gofon/conference/class_divListConferences.inc:167
+#, fuzzy
+msgid "Number of listed departments"
+msgstr "Подразделение"
 
 #: plugins/gofax/blocklists/remove.tpl:2
 #: plugins/addons/addressbook/remove.tpl:2 plugins/admin/fai/remove.tpl:2
@@ -4108,11 +4110,12 @@ msgstr "Удалить пользователя"
 #: plugins/admin/departments/remove.tpl:2
 #: plugins/admin/systems/remove_ppd.tpl:2
 #: plugins/admin/systems/remove_glpi.tpl:2 plugins/admin/systems/remove.tpl:2
+#: plugins/admin/systems/remove_dhcp.tpl:2
 #: plugins/admin/ogroups/termgroup.tpl:2 plugins/admin/ogroups/remove.tpl:2
 #: plugins/admin/mimetypes/remove.tpl:2 plugins/gofon/macro/remove.tpl:2
 #: plugins/gofon/conference/remove.tpl:2
 #: include/sieve/templates/remove_script.tpl:2 html/index.php:55
-#: html/index.php:352 html/index.php:358 html/password.php:274
+#: html/index.php:351 html/index.php:357 html/password.php:274
 #: ihtml/themes/default/islocked.tpl:6 ihtml/themes/default/conflict.tpl:6
 #: setup/class_setupStep_Migrate.inc:211 setup/class_setupStep_Migrate.inc:260
 #: setup/class_setupStep_Migrate.inc:385 setup/class_setupStep_Migrate.inc:461
@@ -4376,7 +4379,7 @@ msgstr "Поиск"
 #: plugins/gofax/faxreports/contents.tpl:30
 #: plugins/gofax/faxreports/detail.tpl:21
 #: plugins/admin/fai/faiTemplateEntry.tpl:94
-#: plugins/admin/systems/class_printGeneric.inc:846
+#: plugins/admin/systems/class_printGeneric.inc:855
 #: plugins/admin/ogroups/class_ogroupManagement.inc:363
 msgid "User"
 msgstr "Пользователь"
@@ -4501,6 +4504,7 @@ msgstr "Г-М-Д"
 #: plugins/addons/addressbook/class_addressbook.inc:522
 #: plugins/addons/addressbook/address_info.tpl:16
 #: plugins/admin/fai/faiVariable.tpl:9
+#: plugins/admin/fai/class_faiScript.inc:275
 #: plugins/admin/fai/faiPartitionTable.tpl:9
 #: plugins/admin/fai/class_faiSummaryTab.inc:329
 #: plugins/admin/fai/faiScriptEntry.tpl:9 plugins/admin/fai/faiPackage.tpl:9
@@ -4529,6 +4533,9 @@ msgstr "Г-М-Д"
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:7
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:7
 #: plugins/admin/systems/class_glpiAttachmentPool.inc:196
+#: plugins/admin/systems/dhcp_group.tpl:6
+#: plugins/admin/systems/dhcp_pool.tpl:6 plugins/admin/systems/dhcp_host.tpl:8
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:10
 #: plugins/gofon/macro/parameter.tpl:5 html/getxls.php:174 html/getxls.php:233
 #: setup/setup_feedback.tpl:24 setup/setup_migrate.tpl:207
 msgid "Name"
@@ -4772,122 +4779,6 @@ msgstr ""
 #: plugins/addons/addressbook/class_addressbook.inc:659
 msgid "Saving addressbook entry failed"
 msgstr "Не удалось сохранить запись адресной книги"
-
-#: plugins/addons/godfs/contents.tpl:8
-msgid "DFS Shares"
-msgstr "Общие ресурсы DFS"
-
-#: plugins/addons/godfs/contents.tpl:26
-msgid ""
-"This menu allows you to create, delete and edit selected dfs shares. Having "
-"a large numbers of dfs shares, you might prefer the range selectors on top "
-"of the dfs share list."
-msgstr ""
-"С помощью этого меню вы можете добавлять, изменять и удалять выбранные общие "
-"ресурсы dfs. Если у вас достаточно большое количество общих ресурсов dfs, вы "
-"можете использовать групповое выделение."
-
-#: plugins/addons/godfs/contents.tpl:40
-msgid "Display dfs shares matching"
-msgstr "Показать подходяшие общие ресурсы dfs"
-
-#: plugins/addons/godfs/contents.tpl:44
-msgid "Regular expression for matching dfs share names"
-msgstr "Регулярное выражение, соответствующее общим ресурсам dfs"
-
-#: plugins/addons/godfs/generic.tpl:4
-msgid "DFS Properties"
-msgstr "Свойства DFS"
-
-#: plugins/addons/godfs/generic.tpl:8
-msgid "Name of dfs Share"
-msgstr "Имя общего ресурса dfs"
-
-#: plugins/addons/godfs/generic.tpl:16
-msgid "Fileserver"
-msgstr "Файловый сервер"
-
-#: plugins/addons/godfs/generic.tpl:20
-msgid "Share on Fileserver"
-msgstr "Общий ресурс на файловом сервере"
-
-#: plugins/addons/godfs/generic.tpl:30
-msgid "DFS Location"
-msgstr "Адрес DFS"
-
-#: plugins/addons/godfs/class_dfsManagment.inc:10
-msgid "DFS Managment"
-msgstr "Управление DFS"
-
-#: plugins/addons/godfs/class_dfsManagment.inc:151
-msgid "Removing DFS share failed"
-msgstr "Не удалось удалить общий ресурс DFS"
-
-#: plugins/addons/godfs/class_dfsManagment.inc:170
-msgid "No DFS entries found"
-msgstr "Не найдено объектов DFS"
-
-#: plugins/addons/godfs/class_dfsManagment.inc:213
-msgid "Go up one dfs share"
-msgstr "Перейти вверх на один общий ресурс dfs"
-
-#: plugins/addons/godfs/class_dfsManagment.inc:213
-#: plugins/admin/fai/class_faiProfile.inc:305
-#: plugins/admin/systems/class_glpiSelectUser.inc:157
-#: plugins/admin/systems/class_servDNSeditZone.inc:314
-#: plugins/admin/systems/class_baseSelectDialog.inc:28
-#: plugins/admin/ogroups/phonequeue.tpl:21
-#: include/sieve/templates/object_container.tpl:8
-#: include/sieve/templates/object_container_clear.tpl:8
-#: include/class_MultiSelectWindow.inc:196
-#: include/class_MultiSelectWindow.inc:198
-msgid "Up"
-msgstr "Вверх"
-
-#: plugins/addons/godfs/class_dfsManagment.inc:214
-msgid "Go to dfs root"
-msgstr "Перейти к корню dfs"
-
-#: plugins/addons/godfs/class_dfsManagment.inc:214
-#: plugins/admin/systems/class_glpiSelectUser.inc:155
-#: plugins/admin/systems/class_baseSelectDialog.inc:26
-#: include/class_MultiSelectWindow.inc:188
-#: include/class_MultiSelectWindow.inc:190
-msgid "Root"
-msgstr "Корень"
-
-#: plugins/addons/godfs/class_dfsManagment.inc:215
-msgid "Create new dfs share"
-msgstr "Создать новый общий ресурс dfs"
-
-#: plugins/addons/godfs/class_dfsgeneric.inc:97
-#: plugins/addons/godfs/class_dfsgeneric.inc:99
-msgid "Dfs share already exists."
-msgstr "Общий ресурс Dfs уже существует."
-
-#: plugins/addons/godfs/class_dfsgeneric.inc:112
-msgid "Required Field \"Name of dfs Share\" is not set."
-msgstr "Не заполнено обязательное поле \"Название общего ресурса DFS\" ."
-
-#: plugins/addons/godfs/class_dfsgeneric.inc:115
-msgid "Required Field \"Description\" is not set."
-msgstr "Не заполнено обязательное поле \"Описание\" ."
-
-#: plugins/addons/godfs/class_dfsgeneric.inc:118
-msgid "Required Field \"Fileserver\" is not set."
-msgstr "Не заполнено обязательное поле \"Файловый сервер\" ."
-
-#: plugins/addons/godfs/class_dfsgeneric.inc:121
-msgid "Required Field \"Share on fileserver\" is not set."
-msgstr "Не заполнено обязательное поле \"Общий ресурс на файловом сервере\" ."
-
-#: plugins/addons/godfs/class_dfsgeneric.inc:124
-msgid "Required Field \"Location\" is not set."
-msgstr "Не заполнено обязательное поле \"Расположение\" ."
-
-#: plugins/addons/godfs/main.inc:27 plugins/addons/godfs/main.inc:33
-msgid "Distributed File System Administration"
-msgstr "Администрирование Распределённой Файловой Системы (dfs)"
 
 #: plugins/addons/mailqueue/contents.tpl:12
 msgid "Please enter a search string here."
@@ -5385,7 +5276,14 @@ msgstr "Выберите переменную для редактировани�
 msgid "Fully Automatic Installation"
 msgstr "Полностью Автоматическая Установка (FAI)"
 
-#: plugins/admin/fai/class_faiScript.inc:258
+#: plugins/admin/fai/class_faiScript.inc:261
+#: plugins/admin/fai/class_faiScript.inc:263
+#, fuzzy
+msgid "Sort direction"
+msgstr "Секция"
+
+#: plugins/admin/fai/class_faiScript.inc:277
+#: plugins/admin/fai/class_faiScript.inc:296
 #: plugins/admin/fai/class_faiTemplate.inc:257
 #: plugins/admin/fai/class_faiScriptEntry.inc:84
 #: plugins/admin/fai/class_faiHook.inc:279
@@ -5394,11 +5292,20 @@ msgstr "Полностью Автоматическая Установка (FAI)
 msgid "Download"
 msgstr "Скачать"
 
-#: plugins/admin/fai/class_faiScript.inc:320
+#: plugins/admin/fai/class_faiScript.inc:278
+#: plugins/admin/systems/terminal.tpl:128 plugins/admin/systems/server.tpl:51
+#: plugins/admin/systems/workstation.tpl:109
+#: plugins/admin/systems/class_glpiPrinterCartridges.inc:158
+#: plugins/admin/systems/class_baseSelectDialog.inc:45
+#: plugins/admin/ogroups/termgroup.tpl:75
+msgid "Action"
+msgstr "Действие"
+
+#: plugins/admin/fai/class_faiScript.inc:360
 msgid "Removing FAI script base failed"
 msgstr "Не удалось удалить ветку скиптов FAI"
 
-#: plugins/admin/fai/class_faiScript.inc:356
+#: plugins/admin/fai/class_faiScript.inc:408
 #: plugins/admin/fai/class_faiProfile.inc:396
 #, php-format
 msgid ""
@@ -5408,15 +5315,15 @@ msgstr ""
 "Невозможно вставить скрипт FAI '%s в '%s'', уже существует скрипт с данным "
 "именем."
 
-#: plugins/admin/fai/class_faiScript.inc:389
+#: plugins/admin/fai/class_faiScript.inc:441
 msgid "Creating FAI script base failed"
 msgstr "Не удалось создать ветку скрипта FAI"
 
-#: plugins/admin/fai/class_faiScript.inc:473
+#: plugins/admin/fai/class_faiScript.inc:525
 msgid "Removing FAI script failed"
 msgstr "Не удалось удалить скрипт FAI"
 
-#: plugins/admin/fai/class_faiScript.inc:492
+#: plugins/admin/fai/class_faiScript.inc:544
 msgid "Saving FAI script failed"
 msgstr "Не удалось сохранить скрипт FAI"
 
@@ -5505,7 +5412,7 @@ msgstr "Указанное имя уже используется"
 #: plugins/admin/departments/class_departmentGeneric.inc:523
 #: plugins/admin/systems/SelectDeviceType.tpl:44
 #: include/sieve/templates/add_element.tpl:11
-#: include/sieve/templates/select_test_type.tpl:11 setup/class_setup.inc:280
+#: include/sieve/templates/select_test_type.tpl:11 setup/class_setup.inc:266
 msgid "Continue"
 msgstr "Продолжить"
 
@@ -5581,7 +5488,9 @@ msgstr ""
 "вам это нужно, так как GOsa не сможет отменить результаты этой операции."
 
 #: plugins/admin/fai/remove.tpl:11 plugins/admin/departments/remove.tpl:10
-#: plugins/admin/systems/remove.tpl:10 plugins/gofon/conference/remove.tpl:10
+#: plugins/admin/systems/remove.tpl:10
+#: plugins/admin/systems/remove_dhcp.tpl:10
+#: plugins/gofon/conference/remove.tpl:10
 msgid ""
 "Best thing to do before performing this action would be to save the current "
 "contents of your LDAP tree in a file. So - if you've done so - press "
@@ -5814,6 +5723,7 @@ msgstr "Релиз"
 
 #: plugins/admin/fai/faiPackage.tpl:41
 #: plugins/admin/systems/class_printerPPDDialog.inc:408
+#: plugins/admin/systems/dhcpNewSection.tpl:9
 msgid "Section"
 msgstr "Секция"
 
@@ -5829,7 +5739,7 @@ msgstr "Использованные пакеты"
 msgid "Choosen packages"
 msgstr "Выбраные пакеты"
 
-#: plugins/admin/fai/faiPackage.tpl:74 include/functions.inc:674
+#: plugins/admin/fai/faiPackage.tpl:74 include/functions.inc:651
 msgid "Configure"
 msgstr "Настроить"
 
@@ -5895,6 +5805,18 @@ msgstr "Группа пакетов"
 #: plugins/admin/fai/class_faiProfile.inc:302
 msgid "Remove class from profile"
 msgstr "Удалить класс из профиля"
+
+#: plugins/admin/fai/class_faiProfile.inc:305
+#: plugins/admin/systems/class_glpiSelectUser.inc:157
+#: plugins/admin/systems/class_servDNSeditZone.inc:314
+#: plugins/admin/systems/class_baseSelectDialog.inc:28
+#: plugins/admin/ogroups/phonequeue.tpl:21
+#: include/sieve/templates/object_container.tpl:8
+#: include/sieve/templates/object_container_clear.tpl:8
+#: include/class_MultiSelectWindow.inc:197
+#: include/class_MultiSelectWindow.inc:199
+msgid "Up"
+msgstr "Вверх"
 
 #: plugins/admin/fai/class_faiProfile.inc:306
 #: plugins/admin/systems/class_servDNSeditZone.inc:315
@@ -6017,7 +5939,7 @@ msgstr "Объекты раздела"
 msgid "Add partition"
 msgstr "Добавить раздел"
 
-#: plugins/admin/fai/faiScript.tpl:36
+#: plugins/admin/fai/faiScript.tpl:35
 msgid "List of scripts"
 msgstr "Список скриптов"
 
@@ -6248,46 +6170,82 @@ msgstr "Новый список пакетов"
 msgid "PK"
 msgstr "PK"
 
-#: plugins/admin/fai/class_divListFai.inc:216
+#: plugins/admin/fai/class_divListFai.inc:223
 #: plugins/admin/groups/class_divListGroup.inc:152
-#: plugins/admin/users/class_divListUsers.inc:178
+#: plugins/admin/users/class_divListUsers.inc:181
 #: plugins/admin/applications/class_divListApplication.inc:147
 #: plugins/admin/ogroups/class_divListOGroup.inc:137
+#: plugins/admin/mimetypes/class_divListMimeTypes.inc:161
 msgid "cut"
 msgstr "вырезать"
 
-#: plugins/admin/fai/class_divListFai.inc:216
+#: plugins/admin/fai/class_divListFai.inc:223
 #: plugins/admin/groups/class_divListGroup.inc:152
-#: plugins/admin/users/class_divListUsers.inc:178
+#: plugins/admin/users/class_divListUsers.inc:181
 #: plugins/admin/applications/class_divListApplication.inc:147
 #: plugins/admin/ogroups/class_divListOGroup.inc:137
+#: plugins/admin/mimetypes/class_divListMimeTypes.inc:161
 msgid "Cut this entry"
 msgstr "Вырезать этот объект"
 
-#: plugins/admin/fai/class_divListFai.inc:219
+#: plugins/admin/fai/class_divListFai.inc:226
 #: plugins/admin/groups/class_divListGroup.inc:154
-#: plugins/admin/users/class_divListUsers.inc:180
+#: plugins/admin/users/class_divListUsers.inc:183
 #: plugins/admin/applications/class_divListApplication.inc:151
 #: plugins/admin/ogroups/class_divListOGroup.inc:139
+#: plugins/admin/mimetypes/class_divListMimeTypes.inc:163
 msgid "copy"
 msgstr "скопировать"
 
-#: plugins/admin/fai/class_divListFai.inc:219
+#: plugins/admin/fai/class_divListFai.inc:226
 #: plugins/admin/groups/class_divListGroup.inc:154
-#: plugins/admin/users/class_divListUsers.inc:180
+#: plugins/admin/users/class_divListUsers.inc:183
 #: plugins/admin/applications/class_divListApplication.inc:151
 #: plugins/admin/ogroups/class_divListOGroup.inc:139
+#: plugins/admin/mimetypes/class_divListMimeTypes.inc:163
 msgid "Copy this entry"
 msgstr "Скопировать этот объект"
 
-#: plugins/admin/fai/class_divListFai.inc:224
-#: plugins/admin/fai/class_divListFai.inc:229
+#: plugins/admin/fai/class_divListFai.inc:231
+#: plugins/admin/fai/class_divListFai.inc:236
 msgid "Edit class"
 msgstr "Редактировать класс"
 
-#: plugins/admin/fai/class_divListFai.inc:231
+#: plugins/admin/fai/class_divListFai.inc:238
 msgid "Delete class"
 msgstr "Удалить класс"
+
+#: plugins/admin/fai/class_divListFai.inc:262
+msgid "Number of listed profiles"
+msgstr ""
+
+#: plugins/admin/fai/class_divListFai.inc:263
+msgid "Number of listed partitions"
+msgstr ""
+
+#: plugins/admin/fai/class_divListFai.inc:264
+#, fuzzy
+msgid "Number of listed scripts"
+msgstr "Список скриптов sieve"
+
+#: plugins/admin/fai/class_divListFai.inc:265
+msgid "Number of listed hooks"
+msgstr ""
+
+#: plugins/admin/fai/class_divListFai.inc:266
+#, fuzzy
+msgid "Number of listed variables"
+msgstr "Список назначеных атрибутов"
+
+#: plugins/admin/fai/class_divListFai.inc:267
+#, fuzzy
+msgid "Number of listed templates"
+msgstr "Имя создаваемой ветки"
+
+#: plugins/admin/fai/class_divListFai.inc:268
+#, fuzzy
+msgid "Number of listed packages"
+msgstr "Использованные пакеты"
 
 #: plugins/admin/fai/faiHook.tpl:36
 msgid "List of hook scripts"
@@ -6536,7 +6494,7 @@ msgid "Template attributes"
 msgstr "Атрибуты шаблона"
 
 #: plugins/admin/fai/faiTemplateEntry.tpl:29
-#: plugins/admin/systems/glpiAttachmentEdit.tpl:30 include/php_setup.inc:181
+#: plugins/admin/systems/glpiAttachmentEdit.tpl:30 include/php_setup.inc:189
 msgid "File"
 msgstr "Файл"
 
@@ -6562,8 +6520,10 @@ msgstr "Владелец"
 
 #: plugins/admin/fai/faiTemplateEntry.tpl:71
 #: plugins/admin/fai/faiTemplateEntry.tpl:103
-#: plugins/admin/systems/class_printGeneric.inc:841
-#: plugins/admin/systems/class_printGeneric.inc:843
+#: plugins/admin/systems/class_servDHCP.inc:25
+#: plugins/admin/systems/class_printGeneric.inc:850
+#: plugins/admin/systems/class_printGeneric.inc:852
+#: plugins/admin/systems/class_dhcpNewSectionDialog.inc:30
 #: plugins/admin/ogroups/class_ogroupManagement.inc:364
 #: plugins/generic/references/class_reference.inc:36
 msgid "Group"
@@ -6574,6 +6534,7 @@ msgid "Access"
 msgstr "Доступ"
 
 #: plugins/admin/fai/faiTemplateEntry.tpl:86
+#: plugins/admin/systems/class_servDHCP.inc:22
 #: plugins/admin/systems/class_servDNS.inc:164
 msgid "Class"
 msgstr "Класс"
@@ -6721,6 +6682,7 @@ msgstr "Группы"
 #: plugins/admin/groups/class_groupManagement.inc:142
 #: plugins/admin/users/class_userManagement.inc:126
 #: plugins/admin/ogroups/class_ogroupManagement.inc:137
+#: plugins/admin/mimetypes/class_mimetypeManagement.inc:168
 msgid "You are not allowed to execute this method!"
 msgstr "У вас недостаточно прав для использования этого метода!"
 
@@ -6886,13 +6848,13 @@ msgid "Create new group"
 msgstr "Создать новую группу"
 
 #: plugins/admin/groups/class_divListGroup.inc:121
-#: plugins/admin/users/class_divListUsers.inc:139
+#: plugins/admin/users/class_divListUsers.inc:142
 msgid "Posix"
 msgstr "Posix"
 
 #: plugins/admin/groups/class_divListGroup.inc:127
 #: plugins/admin/applications/class_divListApplication.inc:119
-#: plugins/admin/ogroups/tabs_ogroups.inc:118
+#: plugins/admin/ogroups/tabs_ogroups.inc:117
 #: plugins/admin/ogroups/class_ogroupManagement.inc:365
 #: plugins/gofon/fonreports/contents.tpl:34
 #: plugins/generic/references/class_reference.inc:42
@@ -6903,7 +6865,7 @@ msgstr "Приложение"
 #: plugins/admin/applications/class_divListApplication.inc:156
 #: plugins/admin/departments/class_divListDepartment.inc:98
 #: plugins/admin/ogroups/class_divListOGroup.inc:142
-#: plugins/admin/mimetypes/class_divListMimeTypes.inc:147
+#: plugins/admin/mimetypes/class_divListMimeTypes.inc:167
 #: plugins/gofon/conference/class_divListConferences.inc:94
 msgid "Edit this entry"
 msgstr "Редактиовать этот объект"
@@ -6912,11 +6874,16 @@ msgstr "Редактиовать этот объект"
 #: plugins/admin/applications/class_divListApplication.inc:163
 #: plugins/admin/departments/class_divListDepartment.inc:102
 #: plugins/admin/ogroups/class_divListOGroup.inc:146
-#: plugins/admin/mimetypes/class_divListMimeTypes.inc:150
+#: plugins/admin/mimetypes/class_divListMimeTypes.inc:170
 #: plugins/gofon/conference/class_divListConferences.inc:96
 #: plugins/gofon/conference/class_divListConferences.inc:98
 msgid "Delete this entry"
 msgstr "Удалить этот объект"
+
+#: plugins/admin/groups/class_divListGroup.inc:212
+#, fuzzy
+msgid "Number of listed groups"
+msgstr "Название группы"
 
 #: plugins/admin/groups/acl.tpl:4
 #: plugins/admin/departments/class_departmentGeneric.inc:503
@@ -6992,6 +6959,10 @@ msgstr ""
 #: plugins/admin/groups/class_groupMail.inc:405
 msgid "You're trying to add an invalid email address "
 msgstr "Вы пытаетесь добавить некорректный адрес электронной почты "
+
+#: plugins/admin/groups/class_groupMail.inc:406
+msgid "to the list of forwarders."
+msgstr "к списку тех, кому должны пересылаться сообщения."
 
 #: plugins/admin/groups/class_groupMail.inc:642
 msgid "Removing group mail settings failed"
@@ -7394,57 +7365,61 @@ msgstr "Создать новый шаблон"
 msgid "New template"
 msgstr "Создать шаблон"
 
-#: plugins/admin/users/class_divListUsers.inc:137
+#: plugins/admin/users/class_divListUsers.inc:140
 msgid "GOsa"
 msgstr "GOsa"
 
-#: plugins/admin/users/class_divListUsers.inc:138
+#: plugins/admin/users/class_divListUsers.inc:141
 msgid "Edit generic properties"
 msgstr "Изменить общие свойства"
 
-#: plugins/admin/users/class_divListUsers.inc:140
+#: plugins/admin/users/class_divListUsers.inc:143
 msgid "Edit UNIX properties"
 msgstr "Изменить свойства UNIX"
 
-#: plugins/admin/users/class_divListUsers.inc:142
+#: plugins/admin/users/class_divListUsers.inc:145
 msgid "Edit environment properties"
 msgstr "Изменить свойства окружения"
 
-#: plugins/admin/users/class_divListUsers.inc:144
+#: plugins/admin/users/class_divListUsers.inc:147
 msgid "Edit mail properties"
 msgstr "Изменить свойства почты"
 
-#: plugins/admin/users/class_divListUsers.inc:146
+#: plugins/admin/users/class_divListUsers.inc:149
 msgid "Edit phone properties"
 msgstr "Изменить свойства телефона"
 
-#: plugins/admin/users/class_divListUsers.inc:148
+#: plugins/admin/users/class_divListUsers.inc:151
 msgid "Edit fax properies"
 msgstr "Изменить свойства факса"
 
-#: plugins/admin/users/class_divListUsers.inc:150
+#: plugins/admin/users/class_divListUsers.inc:153
 msgid "Edit samba properties"
 msgstr "Изменить свойства Samba"
 
-#: plugins/admin/users/class_divListUsers.inc:152
+#: plugins/admin/users/class_divListUsers.inc:155
 msgid "Edit netatalk properties"
 msgstr "Изменить свойства Nettalk"
 
-#: plugins/admin/users/class_divListUsers.inc:153
+#: plugins/admin/users/class_divListUsers.inc:156
 msgid "Create user from template"
 msgstr "Создать пользователя по шаблону"
 
-#: plugins/admin/users/class_divListUsers.inc:154
+#: plugins/admin/users/class_divListUsers.inc:157
 msgid "Create user with this template"
 msgstr "Создать пользователя по этому шаблону"
 
-#: plugins/admin/users/class_divListUsers.inc:189
+#: plugins/admin/users/class_divListUsers.inc:192
 msgid "password"
 msgstr "пароль"
 
-#: plugins/admin/users/class_divListUsers.inc:190
+#: plugins/admin/users/class_divListUsers.inc:193
 msgid "Change password"
 msgstr "Сменить пароль"
+
+#: plugins/admin/users/class_divListUsers.inc:278
+msgid "Number of listed users"
+msgstr ""
 
 #: plugins/admin/applications/generic.tpl:7
 #: plugins/admin/applications/generic.tpl:8
@@ -7528,13 +7503,18 @@ msgstr ""
 
 #: plugins/admin/applications/class_divListApplication.inc:89
 #: plugins/admin/ogroups/class_divListOGroup.inc:99
-#: plugins/admin/mimetypes/class_divListMimeTypes.inc:98
+#: plugins/admin/mimetypes/class_divListMimeTypes.inc:105
 msgid "new"
 msgstr "новый"
 
 #: plugins/admin/applications/class_divListApplication.inc:90
 msgid "Create new application"
 msgstr "Создать новое приложение"
+
+#: plugins/admin/applications/class_divListApplication.inc:195
+#, fuzzy
+msgid "Number of listed applications"
+msgstr "Используемые приложения"
 
 #: plugins/admin/applications/class_applicationParameters.inc:51
 msgid "Remove options"
@@ -7633,6 +7613,10 @@ msgid "You have no permissions to create a application on this 'Base'."
 msgstr "У вас недостаточно прав для создания приложения в этой ветке."
 
 #: plugins/admin/applications/class_applicationGeneric.inc:362
+#: plugins/admin/systems/class_dhcpGroup.inc:87
+#: plugins/admin/systems/class_dhcpPool.inc:103
+#: plugins/admin/systems/class_dhcpHost.inc:132
+#: plugins/admin/systems/class_dhcpSharedNetwork.inc:142
 msgid "Required field 'Name' is not filled."
 msgstr "Обязательное поле \"Имя\" не заполнено."
 
@@ -7850,31 +7834,40 @@ msgstr "IP-адрес"
 msgid "MAC-address"
 msgstr "MAC-адрес"
 
-#: plugins/admin/systems/network.tpl:19
+#: plugins/admin/systems/network.tpl:17
 msgid "Autodetect"
 msgstr "Автоопределение"
 
-#: plugins/admin/systems/network.tpl:42
+#: plugins/admin/systems/network.tpl:32
+#, fuzzy
+msgid "Enable DHCP for this device"
+msgstr "Включить DNS для данного устройства"
+
+#: plugins/admin/systems/network.tpl:40
+#, fuzzy
+msgid "Parent node"
+msgstr "Родительский сервер."
+
+#: plugins/admin/systems/network.tpl:45
+#, fuzzy
+msgid "Edit settings"
+msgstr "Редактировать настройки..."
+
+#: plugins/admin/systems/network.tpl:72
 msgid "Enable DNS for this device"
 msgstr "Включить DNS для данного устройства"
 
-#: plugins/admin/systems/network.tpl:43
-#: plugins/admin/systems/servdnseditzone.tpl:76
-#: plugins/gofon/phoneaccount/generic.tpl:76
-msgid "Refresh"
-msgstr "Обновить"
-
-#: plugins/admin/systems/network.tpl:51
+#: plugins/admin/systems/network.tpl:81
 msgid "Zone"
 msgstr "Зона"
 
-#: plugins/admin/systems/network.tpl:59
+#: plugins/admin/systems/network.tpl:89
 #: plugins/admin/systems/servdnseditzone.tpl:94
 #: plugins/admin/systems/class_servDNS.inc:163
 msgid "TTL"
 msgstr "TTL"
 
-#: plugins/admin/systems/network.tpl:64
+#: plugins/admin/systems/network.tpl:94
 msgid "Dns records"
 msgstr "Записи DNS"
 
@@ -8209,14 +8202,6 @@ msgstr "Сервер NTP"
 msgid "Choose server to use for synchronizing time"
 msgstr "Выберите сервер для синхронизации времени"
 
-#: plugins/admin/systems/terminal.tpl:128 plugins/admin/systems/server.tpl:51
-#: plugins/admin/systems/workstation.tpl:109
-#: plugins/admin/systems/class_glpiPrinterCartridges.inc:158
-#: plugins/admin/systems/class_baseSelectDialog.inc:45
-#: plugins/admin/ogroups/termgroup.tpl:75
-msgid "Action"
-msgstr "Действие"
-
 #: plugins/admin/systems/terminal.tpl:132
 #: plugins/admin/systems/workstation.tpl:113
 #: plugins/admin/ogroups/termgroup.tpl:79
@@ -8310,7 +8295,7 @@ msgstr "Клиент ICA"
 #: plugins/admin/systems/class_workstationStartup.inc:328
 #: plugins/admin/systems/class_workstationStartup.inc:332
 #: plugins/admin/systems/class_workstationStartup.inc:837
-#: plugins/admin/systems/class_workstationGeneric.inc:138
+#: plugins/admin/systems/class_workstationGeneric.inc:140
 #: plugins/admin/systems/class_terminalService.inc:68
 #: plugins/admin/systems/class_terminalService.inc:96
 #: plugins/admin/systems/class_terminalService.inc:102
@@ -8697,6 +8682,10 @@ msgstr "Имя рабочий станции"
 msgid "Zones"
 msgstr "Зоны"
 
+#: plugins/admin/systems/servdns.tpl:7 plugins/admin/systems/servdhcp.tpl:6
+msgid "Take over"
+msgstr ""
+
 #: plugins/admin/systems/workstationStartup.tpl:4
 #: plugins/admin/systems/terminalStartup.tpl:1
 msgid "Boot parameters"
@@ -8847,19 +8836,24 @@ msgstr "с"
 msgid "Select objects to add"
 msgstr "Выбрать объекты для добавления"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:122
+#: plugins/admin/systems/servdhcp.tpl:1
+#, fuzzy
+msgid "DHCP sections"
+msgstr "Проверка LDAP"
+
+#: plugins/admin/systems/class_workstationGeneric.inc:124
 #: plugins/admin/systems/class_servGeneric.inc:47
 #: plugins/admin/ogroups/class_termgroup.inc:47
 msgid "Activated"
 msgstr "Активирован"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:161
+#: plugins/admin/systems/class_workstationGeneric.inc:163
 #: plugins/admin/systems/class_servGeneric.inc:81
 #: plugins/admin/ogroups/class_termgroup.inc:212
 msgid "No ACTIONCMD definition found in your gosa.conf"
 msgstr "Определение ACTIONCMD в вашем файле gosa.conf не найдено"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:165
+#: plugins/admin/systems/class_workstationGeneric.inc:167
 #: plugins/admin/systems/class_terminalGeneric.inc:192
 #: plugins/admin/systems/class_terminalGeneric.inc:204
 #: plugins/admin/systems/class_terminalGeneric.inc:216
@@ -8869,54 +8863,54 @@ msgstr "Определение ACTIONCMD в вашем файле gosa.conf не
 msgid "Execution of '%s' failed!"
 msgstr "Ошибка при выполнении \"%s\"!"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:207
+#: plugins/admin/systems/class_workstationGeneric.inc:209
 msgid "This 'dn' has no workstation features."
 msgstr "Это DN не содержит атрибутоов рабочей станции."
 
-#: plugins/admin/systems/class_workstationGeneric.inc:266
+#: plugins/admin/systems/class_workstationGeneric.inc:268
 #: plugins/admin/systems/class_terminalGeneric.inc:284
 #: plugins/admin/systems/class_servGeneric.inc:170
 #: plugins/admin/ogroups/class_termgroup.inc:262
 msgid "Switch off"
 msgstr "Выключить"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:266
+#: plugins/admin/systems/class_workstationGeneric.inc:268
 #: plugins/admin/systems/class_terminalGeneric.inc:285
 #: plugins/admin/systems/class_servGeneric.inc:170
 #: plugins/admin/ogroups/class_termgroup.inc:263
 msgid "Reboot"
 msgstr "Перезагрузить"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:267
+#: plugins/admin/systems/class_workstationGeneric.inc:269
 #: plugins/admin/systems/class_servGeneric.inc:171
 #: plugins/admin/ogroups/class_termgroup.inc:264
 msgid "Instant update"
 msgstr "Непосредственное обновление"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:268
-#: plugins/admin/systems/class_workstationGeneric.inc:277
+#: plugins/admin/systems/class_workstationGeneric.inc:270
+#: plugins/admin/systems/class_workstationGeneric.inc:279
 #: plugins/admin/systems/class_servGeneric.inc:172
 #: plugins/admin/systems/class_servGeneric.inc:181
 #: plugins/admin/ogroups/class_termgroup.inc:265
 msgid "Scheduled update"
 msgstr "Планируемое обновление"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:269
-#: plugins/admin/systems/class_workstationGeneric.inc:276
+#: plugins/admin/systems/class_workstationGeneric.inc:271
+#: plugins/admin/systems/class_workstationGeneric.inc:278
 #: plugins/admin/systems/class_servGeneric.inc:173
 #: plugins/admin/systems/class_servGeneric.inc:180
 #: plugins/admin/ogroups/class_termgroup.inc:266
 msgid "Reinstall"
 msgstr "Переустановить"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:270
+#: plugins/admin/systems/class_workstationGeneric.inc:272
 #: plugins/admin/systems/class_servGeneric.inc:174
 #: plugins/admin/ogroups/class_termgroup.inc:267
 msgid "Rescan hardware"
 msgstr "Пересканировать оборудование"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:271
-#: plugins/admin/systems/class_workstationGeneric.inc:278
+#: plugins/admin/systems/class_workstationGeneric.inc:273
+#: plugins/admin/systems/class_workstationGeneric.inc:280
 #: plugins/admin/systems/class_terminalGeneric.inc:286
 #: plugins/admin/systems/class_terminalGeneric.inc:290
 #: plugins/admin/systems/class_servGeneric.inc:175
@@ -8925,15 +8919,15 @@ msgstr "Пересканировать оборудование"
 msgid "Memory test"
 msgstr "Проверка памяти"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:272
-#: plugins/admin/systems/class_workstationGeneric.inc:279
+#: plugins/admin/systems/class_workstationGeneric.inc:274
+#: plugins/admin/systems/class_workstationGeneric.inc:281
 #: plugins/admin/systems/class_servGeneric.inc:176
 #: plugins/admin/systems/class_servGeneric.inc:183
 msgid "Force localboot"
 msgstr "Принудительная локальная загрузка"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:273
-#: plugins/admin/systems/class_workstationGeneric.inc:280
+#: plugins/admin/systems/class_workstationGeneric.inc:275
+#: plugins/admin/systems/class_workstationGeneric.inc:282
 #: plugins/admin/systems/class_terminalGeneric.inc:287
 #: plugins/admin/systems/class_terminalGeneric.inc:291
 #: plugins/admin/systems/class_servGeneric.inc:177
@@ -8942,46 +8936,46 @@ msgstr "Принудительная локальная загрузка"
 msgid "System analysis"
 msgstr "Анализ системы"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:275
+#: plugins/admin/systems/class_workstationGeneric.inc:277
 #: plugins/admin/systems/class_terminalGeneric.inc:289
 #: plugins/admin/systems/class_servGeneric.inc:179
 msgid "Wake up"
 msgstr "Вернуть в обычный режим"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:315
+#: plugins/admin/systems/class_workstationGeneric.inc:325
 msgid "Removing workstation failed"
 msgstr "Не удалось удалить рабочую станцию"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:372
+#: plugins/admin/systems/class_workstationGeneric.inc:382
 #: plugins/admin/ogroups/class_termgroup.inc:115
 msgid "You have no permissions to create a workstation on this 'Base'."
 msgstr "У вас недостаточно прав для создания рабочей станции в этой ветке."
 
-#: plugins/admin/systems/class_workstationGeneric.inc:376
+#: plugins/admin/systems/class_workstationGeneric.inc:386
 msgid "The required field 'Workstation name' is not set."
 msgstr "Обязательное поле 'Название рабочей станции' не заполнено."
 
-#: plugins/admin/systems/class_workstationGeneric.inc:394
-#: plugins/admin/systems/class_componentGeneric.inc:166
-#: plugins/admin/systems/class_winGeneric.inc:177
-#: plugins/admin/systems/class_terminalGeneric.inc:435
-#: plugins/admin/systems/class_servGeneric.inc:256
-#: plugins/admin/systems/class_printGeneric.inc:660
-#: plugins/admin/systems/class_phoneGeneric.inc:312
+#: plugins/admin/systems/class_workstationGeneric.inc:404
+#: plugins/admin/systems/class_componentGeneric.inc:174
+#: plugins/admin/systems/class_winGeneric.inc:185
+#: plugins/admin/systems/class_terminalGeneric.inc:443
+#: plugins/admin/systems/class_servGeneric.inc:263
+#: plugins/admin/systems/class_printGeneric.inc:669
+#: plugins/admin/systems/class_phoneGeneric.inc:320
 #, php-format
 msgid "There is already an entry '%s' in the base choosen by you"
 msgstr "В выбранной вами ветке уже есть запись \"%s\""
 
-#: plugins/admin/systems/class_workstationGeneric.inc:405
-#: plugins/admin/systems/class_terminalGeneric.inc:445
+#: plugins/admin/systems/class_workstationGeneric.inc:415
+#: plugins/admin/systems/class_terminalGeneric.inc:453
 msgid ""
 "There must be at least one NTP server selected, or the inherit mode "
 "activated."
 msgstr ""
 "Должен быть выбран хотя бы один NTP сервер или включен режим наследования."
 
-#: plugins/admin/systems/class_workstationGeneric.inc:477
-#: plugins/admin/systems/class_workstationGeneric.inc:501
+#: plugins/admin/systems/class_workstationGeneric.inc:487
+#: plugins/admin/systems/class_workstationGeneric.inc:511
 #: plugins/admin/ogroups/class_termgroup.inc:334
 msgid "Saving workstation failed"
 msgstr "Не удалось сохранить рабочую станцию"
@@ -9138,25 +9132,65 @@ msgstr "Сервер факса"
 msgid "Ldap Server"
 msgstr "LDAP-сервер"
 
-#: plugins/admin/systems/class_divListSystem.inc:143
+#: plugins/admin/systems/class_divListSystem.inc:147
 msgid "Edit system"
 msgstr "Редактировать систему"
 
-#: plugins/admin/systems/class_divListSystem.inc:145
+#: plugins/admin/systems/class_divListSystem.inc:149
 msgid "Delete system"
 msgstr "Удалить систему"
 
-#: plugins/admin/systems/class_divListSystem.inc:178
+#: plugins/admin/systems/class_divListSystem.inc:184
 msgid "Set root       password"
 msgstr "Установить пароль root"
 
-#: plugins/admin/systems/class_divListSystem.inc:184
+#: plugins/admin/systems/class_divListSystem.inc:190
 msgid "Create CD"
 msgstr "Создать CD"
 
-#: plugins/admin/systems/class_divListSystem.inc:184
+#: plugins/admin/systems/class_divListSystem.inc:190
 msgid "Create FAI CD"
 msgstr "Создать CD для FAI"
+
+#: plugins/admin/systems/class_divListSystem.inc:218
+#, fuzzy
+msgid "Number of listed servers"
+msgstr "Выберите, чтобы просмотреть серверы"
+
+#: plugins/admin/systems/class_divListSystem.inc:219
+#, fuzzy
+msgid "Number of listed workstations"
+msgstr "Выберите чтобы посмотреть рабочие станции"
+
+#: plugins/admin/systems/class_divListSystem.inc:220
+#, fuzzy
+msgid "Number of listed terminals"
+msgstr "Выберите чтобы посмотреть терминалы"
+
+#: plugins/admin/systems/class_divListSystem.inc:221
+#, fuzzy
+msgid "Number of listed phones"
+msgstr "Выберите чтобы посмотреть телефоны"
+
+#: plugins/admin/systems/class_divListSystem.inc:222
+#, fuzzy
+msgid "Number of listed printers"
+msgstr "Выберите чтобы посмотреть принтеры"
+
+#: plugins/admin/systems/class_divListSystem.inc:223
+#, fuzzy
+msgid "Number of listed network components"
+msgstr "Прочие сетевые компоненты"
+
+#: plugins/admin/systems/class_divListSystem.inc:224
+#, fuzzy
+msgid "Number of listed new devices"
+msgstr "Выберите чтобы посмотреть сетевые устройства"
+
+#: plugins/admin/systems/class_divListSystem.inc:225
+#, fuzzy
+msgid "Number of listed windows workstations"
+msgstr "Показать рабочие станции с windows"
 
 #: plugins/admin/systems/class_goVirusServer.inc:46
 #: plugins/admin/systems/class_goVirusServer.inc:244
@@ -9572,30 +9606,30 @@ msgstr "Выберите драйвер для используемого ска
 msgid "This 'dn' has no network features."
 msgstr "Этот DN не имеет сетевых своств."
 
-#: plugins/admin/systems/class_componentGeneric.inc:102
+#: plugins/admin/systems/class_componentGeneric.inc:110
 msgid "Removing generic component failed"
 msgstr "Не удалось удалить общий компонент"
 
-#: plugins/admin/systems/class_componentGeneric.inc:140
+#: plugins/admin/systems/class_componentGeneric.inc:148
 msgid "The required field 'Component name' is not set."
 msgstr "Обязательное поле 'Наименование компонента' не заполнено."
 
-#: plugins/admin/systems/class_componentGeneric.inc:145
-#: plugins/admin/systems/class_phoneGeneric.inc:284
+#: plugins/admin/systems/class_componentGeneric.inc:153
+#: plugins/admin/systems/class_phoneGeneric.inc:292
 msgid "The required field IP address is empty."
 msgstr "Обязательное поле IP-адрес не заполнено."
 
-#: plugins/admin/systems/class_componentGeneric.inc:148
-#: plugins/admin/systems/class_phoneGeneric.inc:287
+#: plugins/admin/systems/class_componentGeneric.inc:156
+#: plugins/admin/systems/class_phoneGeneric.inc:295
 msgid "The field IP address contains an invalid address."
 msgstr "Значение поля IP-адрес содержит недопустимые символы."
 
-#: plugins/admin/systems/class_componentGeneric.inc:156
-#: plugins/admin/systems/class_winGeneric.inc:167
+#: plugins/admin/systems/class_componentGeneric.inc:164
+#: plugins/admin/systems/class_winGeneric.inc:175
 msgid "You have no permissions to create a component on this 'Base'."
 msgstr "У вас недостаточно прав для создания компонентов в этой ветке."
 
-#: plugins/admin/systems/class_componentGeneric.inc:225
+#: plugins/admin/systems/class_componentGeneric.inc:233
 msgid "Saving generic component failed"
 msgstr "Не удалось сохранить основной компонетн"
 
@@ -9751,6 +9785,7 @@ msgid "Attachment"
 msgstr "Вложение"
 
 #: plugins/admin/systems/glpiAttachmentEdit.tpl:46
+#: plugins/admin/systems/dhcp_network.tpl:32
 msgid "Filename"
 msgstr "Имя файла"
 
@@ -9758,7 +9793,7 @@ msgstr "Имя файла"
 msgid "Mime-type"
 msgstr "Тип MIME"
 
-#: plugins/admin/systems/class_termDNS.inc:138
+#: plugins/admin/systems/class_termDNS.inc:186
 #, php-format
 msgid ""
 "Can't execute specified AUTO_NETWORK_HOOK '%s'. Please check your gosa.conf."
@@ -9766,23 +9801,27 @@ msgstr ""
 "Не удается выполнить '%s' указанную как триггер ACTION_HOOK . Проверьте gosa."
 "conf"
 
-#: plugins/admin/systems/class_termDNS.inc:224
+#: plugins/admin/systems/class_termDNS.inc:323
 msgid "Not matching"
 msgstr "Нет соответствия"
 
-#: plugins/admin/systems/class_termDNS.inc:309
+#: plugins/admin/systems/class_termDNS.inc:419
+msgid "You haven not configured your dhcp settings yet."
+msgstr ""
+
+#: plugins/admin/systems/class_termDNS.inc:429
 msgid "The required field 'IP-address' is not set."
 msgstr "Обязательное поле 'IP-адрес' не заполнено."
 
-#: plugins/admin/systems/class_termDNS.inc:316
+#: plugins/admin/systems/class_termDNS.inc:436
 msgid "Wrong IP format in field IP-address."
 msgstr "Неверный формат IP в поле IP-адрес"
 
-#: plugins/admin/systems/class_termDNS.inc:322
+#: plugins/admin/systems/class_termDNS.inc:442
 msgid "The required field 'MAC-address' is not set."
 msgstr "Обязательное поле 'MAC-адрес' не заполнено."
 
-#: plugins/admin/systems/class_termDNS.inc:328
+#: plugins/admin/systems/class_termDNS.inc:448
 msgid ""
 "The given macaddress is invalid. There must be 6 2byte segments seperated by "
 "':'."
@@ -9790,7 +9829,7 @@ msgstr ""
 "Указан неверный MAC-адрес. Он должен представлять из себя 6 2-х байтовых "
 "сегментов разделённых ':'."
 
-#: plugins/admin/systems/class_termDNS.inc:341
+#: plugins/admin/systems/class_termDNS.inc:461
 #, php-format
 msgid ""
 "The specified IP address '%s' is not matching the selected reverse zone "
@@ -9799,17 +9838,17 @@ msgstr ""
 "Указаный IP-адрес  '%s' не соответствует выбраному объекту обратной зоны '%"
 "s'."
 
-#: plugins/admin/systems/class_termDNS.inc:356
+#: plugins/admin/systems/class_termDNS.inc:476
 #, php-format
 msgid "Found duplicate value for record type '%s'."
 msgstr "Найдена дублирующее значение для типа записи '%s'."
 
-#: plugins/admin/systems/class_termDNS.inc:364
+#: plugins/admin/systems/class_termDNS.inc:484
 #, php-format
 msgid "Found more than one entry for the uniqe record type '%s'."
 msgstr "Найдено более одной записи для уникального типа '%s'."
 
-#: plugins/admin/systems/class_termDNS.inc:375
+#: plugins/admin/systems/class_termDNS.inc:495
 #, php-format
 msgid ""
 "The device IP '%s' is added as 'A Record', this will be done automatically, "
@@ -9818,13 +9857,34 @@ msgstr ""
 "IP устройства '%s' добавлен как 'А запись' Т.к. это будет сделано "
 "автоматически, удалите запись."
 
-#: plugins/admin/systems/class_termDNS.inc:382
+#: plugins/admin/systems/class_termDNS.inc:502
 #: plugins/admin/systems/class_servDNSeditZone.inc:428
 #, php-format
 msgid "Only lowercase is allowed, please check your '%ss'."
 msgstr "Разрешён только нижний регистр, проверьте ваш '%ss'."
 
-#: plugins/admin/systems/class_termDNS.inc:467
+#: plugins/admin/systems/class_termDNS.inc:546
+#, fuzzy
+msgid "Removing dhcp entry for this object failed."
+msgstr "Не удалось удалить сервер из объекта kolab"
+
+#: plugins/admin/systems/class_termDNS.inc:558
+#: plugins/admin/systems/class_termDNS.inc:573
+#, fuzzy
+msgid "Tried to add new dhcp entry failed."
+msgstr "Не удалось добавить новый элемент."
+
+#: plugins/admin/systems/class_termDNS.inc:576
+#, fuzzy
+msgid "Removing old dhcp entry failed."
+msgstr "Не удалось удалить запись сервера kolab"
+
+#: plugins/admin/systems/class_termDNS.inc:588
+#, fuzzy
+msgid "Modifying dhcp entry failed."
+msgstr "Не удалось модифицировать объект шаблона FAI"
+
+#: plugins/admin/systems/class_termDNS.inc:651
 msgid "Saving terminal to DNS object failed"
 msgstr "Не удалось записать терминал в объект DNS"
 
@@ -9986,10 +10046,16 @@ msgid "Zone name"
 msgstr "Название зоны"
 
 #: plugins/admin/systems/servdnseditzone.tpl:13
+#: plugins/admin/systems/class_dhcpSubnet.inc:151
+#: plugins/admin/systems/dhcp_subnet.tpl:8
 msgid "Network address"
 msgstr "Сетевой адрес."
 
 #: plugins/admin/systems/servdnseditzone.tpl:19
+#: plugins/admin/systems/dhcp_network.tpl:15
+#: plugins/admin/systems/class_dhcpNetwork.inc:197
+#: plugins/admin/systems/class_dhcpSubnet.inc:151
+#: plugins/admin/systems/dhcp_subnet.tpl:12
 #, fuzzy
 msgid "Netmask"
 msgstr "Nettalk"
@@ -10014,6 +10080,11 @@ msgstr "Адрес первичного сервера DNS"
 msgid "Serial number (automatically incremented)"
 msgstr "Серийный номер (увеличивается автоматически)"
 
+#: plugins/admin/systems/servdnseditzone.tpl:76
+#: plugins/gofon/phoneaccount/generic.tpl:76
+msgid "Refresh"
+msgstr "Обновить"
+
 #: plugins/admin/systems/servdnseditzone.tpl:82
 #: plugins/admin/ogroups/phonequeue.tpl:67
 msgid "Retry"
@@ -10031,11 +10102,11 @@ msgstr "Записи MX"
 msgid "Global zone records"
 msgstr "Глобальные записи зоны"
 
-#: plugins/admin/systems/class_winGeneric.inc:129
+#: plugins/admin/systems/class_winGeneric.inc:137
 msgid "Removing Samba workstation failed"
 msgstr "Не удалось удалить рабочую станцию Samba"
 
-#: plugins/admin/systems/class_winGeneric.inc:228
+#: plugins/admin/systems/class_winGeneric.inc:236
 msgid "Saving Samba workstation failed"
 msgstr "Не удалось сохранить рабочую станцию Samba"
 
@@ -10045,32 +10116,39 @@ msgstr "использовать"
 
 #: plugins/admin/systems/class_glpiSelectUser.inc:155
 #: plugins/admin/systems/class_baseSelectDialog.inc:26
-#: include/class_MultiSelectWindow.inc:188
+#: include/class_MultiSelectWindow.inc:189
 msgid "Go to root department"
 msgstr "Перейти в корневое подразделение"
 
+#: plugins/admin/systems/class_glpiSelectUser.inc:155
+#: plugins/admin/systems/class_baseSelectDialog.inc:26
+#: include/class_MultiSelectWindow.inc:189
+#: include/class_MultiSelectWindow.inc:191
+msgid "Root"
+msgstr "Корень"
+
 #: plugins/admin/systems/class_glpiSelectUser.inc:157
 #: plugins/admin/systems/class_baseSelectDialog.inc:28
-#: include/class_MultiSelectWindow.inc:196
+#: include/class_MultiSelectWindow.inc:197
 msgid "Go up one department"
 msgstr "Перейти вверх на одно подразделение"
 
 #: plugins/admin/systems/class_glpiSelectUser.inc:159
 #: plugins/admin/systems/class_baseSelectDialog.inc:30
-#: include/class_MultiSelectWindow.inc:204
+#: include/class_MultiSelectWindow.inc:205
 msgid "Go to users department"
 msgstr "Перейти в подразделение пользователей"
 
 #: plugins/admin/systems/class_glpiSelectUser.inc:159
 #: plugins/admin/systems/class_baseSelectDialog.inc:30
-#: include/class_MultiSelectWindow.inc:204
-#: include/class_MultiSelectWindow.inc:206
+#: include/class_MultiSelectWindow.inc:205
+#: include/class_MultiSelectWindow.inc:207
 msgid "Home"
 msgstr "Домой"
 
 #: plugins/admin/systems/class_glpiSelectUser.inc:160
 #: plugins/admin/systems/class_baseSelectDialog.inc:31
-#: include/class_MultiSelectWindow.inc:211
+#: include/class_MultiSelectWindow.inc:212
 msgid "Reload list"
 msgstr "Перегрузить список"
 
@@ -10398,19 +10476,19 @@ msgstr "Определение REBOOTCMD в вашем файле gosa.conf не
 msgid "No HALTCMD definition found in your gosa.conf"
 msgstr "Определение HALTCMD в вашем файле gosa.conf не найдено"
 
-#: plugins/admin/systems/class_terminalGeneric.inc:344
+#: plugins/admin/systems/class_terminalGeneric.inc:352
 msgid "Removing terminal failed"
 msgstr "Не удалось удалить терминал"
 
-#: plugins/admin/systems/class_terminalGeneric.inc:410
+#: plugins/admin/systems/class_terminalGeneric.inc:418
 msgid "You have no permissions to create a terminal on this 'Base'."
 msgstr "У вас недостаточно прав для создания терминала в этой ветке."
 
-#: plugins/admin/systems/class_terminalGeneric.inc:414
+#: plugins/admin/systems/class_terminalGeneric.inc:422
 msgid "The required field 'Terminal name' is not set."
 msgstr "Обязательное поле 'Название терминала' не заполнено."
 
-#: plugins/admin/systems/class_terminalGeneric.inc:529
+#: plugins/admin/systems/class_terminalGeneric.inc:537
 msgid "Saving terminal failed"
 msgstr "не удалось сохранить терминал"
 
@@ -10638,6 +10716,7 @@ msgid "IMAP admin access"
 msgstr "Доступ администратора IMAP"
 
 #: plugins/admin/systems/servdb.tpl:74
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:16
 msgid "Server identifier"
 msgstr "Идентификатор сервера"
 
@@ -10669,19 +10748,19 @@ msgstr "База данных"
 msgid "This 'dn' has no server features."
 msgstr "Этот DN не имеет свойств сервера."
 
-#: plugins/admin/systems/class_servGeneric.inc:202
+#: plugins/admin/systems/class_servGeneric.inc:209
 msgid "Removing server failed"
 msgstr "Не удалось удалить сервер"
 
-#: plugins/admin/systems/class_servGeneric.inc:238
+#: plugins/admin/systems/class_servGeneric.inc:245
 msgid "The required field 'Server name' is not set."
 msgstr "Обязательное поле 'Имя сервера' не заполнено."
 
-#: plugins/admin/systems/class_servGeneric.inc:245
+#: plugins/admin/systems/class_servGeneric.inc:252
 msgid "You have no permissions to create a server on this 'Base'."
 msgstr "У вас недостаточно прав для создания сервера в этой ветке."
 
-#: plugins/admin/systems/class_servGeneric.inc:315
+#: plugins/admin/systems/class_servGeneric.inc:322
 msgid "Saving server failed"
 msgstr "Не удалось сохранить сервер"
 
@@ -10689,27 +10768,126 @@ msgstr "Не удалось сохранить сервер"
 msgid "Reference"
 msgstr "Ссылки"
 
-#: plugins/admin/systems/class_servDHCP.inc:31
+#: plugins/admin/systems/class_servDHCP.inc:20
+#, fuzzy
+msgid "Logging"
+msgstr "Имя пользователя"
+
+#: plugins/admin/systems/class_servDHCP.inc:21
+#: plugins/admin/systems/class_servDHCP.inc:207
+#: plugins/admin/systems/class_servDHCP.inc:373
+#: plugins/admin/systems/class_dhcpNewSectionDialog.inc:26
+#, fuzzy
+msgid "Global options"
+msgstr "Почтовые настройки"
+
+#: plugins/admin/systems/class_servDHCP.inc:23
+#: plugins/admin/systems/class_dhcpNewSectionDialog.inc:28
+#, fuzzy
+msgid "Subclass"
+msgstr "класс"
+
+#: plugins/admin/systems/class_servDHCP.inc:24
+#: plugins/admin/systems/class_dhcpNewSectionDialog.inc:29
+#, fuzzy
+msgid "Host"
+msgstr "отправка"
+
+#: plugins/admin/systems/class_servDHCP.inc:26
+#: plugins/admin/systems/class_dhcpNewSectionDialog.inc:31
+#, fuzzy
+msgid "Pool"
+msgstr "Логический"
+
+#: plugins/admin/systems/class_servDHCP.inc:27
+#: plugins/admin/systems/class_dhcpNewSectionDialog.inc:32
+#, fuzzy
+msgid "Subnet"
+msgstr "Установить"
+
+#: plugins/admin/systems/class_servDHCP.inc:28
+#, fuzzy
+msgid "Failover peer"
+msgstr "Фильтры"
+
+#: plugins/admin/systems/class_servDHCP.inc:29
+#: plugins/admin/systems/class_dhcpNewSectionDialog.inc:33
+#, fuzzy
+msgid "Shared network"
+msgstr "Привелигерованые SMTP сети"
+
+#: plugins/admin/systems/class_servDHCP.inc:145
+#, fuzzy
+msgid "You're not allowed to remove DHCP sections!"
+msgstr "У вас недостаточно прав для удаления этого приложения!"
+
+#: plugins/admin/systems/class_servDHCP.inc:179
+#, fuzzy, php-format
+msgid "You're about to delete the DHCP section '%s'."
+msgstr "Вы собираетесь удалить приложение \"%s\"."
+
+#: plugins/admin/systems/class_servDHCP.inc:193
 msgid "Remove DHCP service"
 msgstr "Удалить сервис DHCP"
 
-#: plugins/admin/systems/class_servDHCP.inc:32
+#: plugins/admin/systems/class_servDHCP.inc:194
 msgid ""
 "This server has DHCP features enabled. You can disable them by clicking "
 "below."
 msgstr ""
 "У этого сервера есть настройки DHCP. Вы можете удалить их, щелкнув ниже."
 
-#: plugins/admin/systems/class_servDHCP.inc:34
+#: plugins/admin/systems/class_servDHCP.inc:212
 msgid "Add DHCP service"
 msgstr "Добавить сервис DHCP"
 
-#: plugins/admin/systems/class_servDHCP.inc:35
+#: plugins/admin/systems/class_servDHCP.inc:213
 msgid ""
 "This server has DHCP features disabled. You can enable them by clicking "
 "below."
 msgstr ""
 "У этого сервера нет настроек DHCP. Вы можете добавить их, щелкнув ниже."
+
+#: plugins/admin/systems/class_servDHCP.inc:233
+#: plugins/admin/systems/class_servDHCP.inc:236
+msgid "Insert new DHCP section"
+msgstr ""
+
+#: plugins/admin/systems/class_servDHCP.inc:234
+#: plugins/admin/systems/class_servDHCP.inc:237
+#: plugins/admin/systems/class_servDHCP.inc:238
+#, fuzzy
+msgid "Edit DHCP section"
+msgstr "Проверка LDAP"
+
+#: plugins/admin/systems/class_servDHCP.inc:235
+#: plugins/admin/systems/class_servDHCP.inc:239
+#, fuzzy
+msgid "Remove DHCP section"
+msgstr "Удалить сервис DHCP"
+
+#: plugins/admin/systems/class_servDHCP.inc:276
+#, fuzzy
+msgid "Removing DHCP entries failed"
+msgstr "Не удалось удалить сервис DNS"
+
+#: plugins/admin/systems/class_servDHCP.inc:311
+#, fuzzy
+msgid "Can't remove DHCP object!"
+msgstr "Удалить объект"
+
+#: plugins/admin/systems/class_servDHCP.inc:347
+#: plugins/admin/systems/class_servDHCP.inc:350
+#, fuzzy
+msgid "Can't save DHCP object!"
+msgstr "Невозможно сохранить пустые тесты."
+
+#: plugins/admin/systems/class_servDHCP.inc:435
+#, fuzzy
+msgid ""
+"DHCP configuration set is unknown. Please contact your system administrator."
+msgstr ""
+"Учётная запись заблокирована. Обратитесь к вашему системному администратору."
 
 #: plugins/admin/systems/class_servDNSeditZoneEntries.inc:77
 #: plugins/admin/systems/servDNSeditZoneEntries.tpl:14
@@ -10952,15 +11130,16 @@ msgstr ""
 "Невозможно удалить выбраную зону так как она используется следующими "
 "объектами: '%s'"
 
-#: plugins/admin/systems/class_servDNS.inc:297
+#: plugins/admin/systems/class_servDNS.inc:306
 msgid "Updating DNS service failed"
 msgstr "Не удалось обновить сервис DNS"
 
-#: plugins/admin/systems/class_servDNS.inc:306
+#: plugins/admin/systems/class_servDNS.inc:315
 msgid "Removing DNS entries failed"
 msgstr "Не удалось удалить сервис DNS"
 
-#: plugins/admin/systems/class_servDNS.inc:327
+#: plugins/admin/systems/class_servDNS.inc:332
+#: plugins/admin/systems/class_servDNS.inc:336
 msgid "Saving DNS entries failed"
 msgstr "Не удалось сохранить сервис DNS"
 
@@ -11165,30 +11344,30 @@ msgid "This printer belongs to workstation %s. You can't rename this printer."
 msgstr ""
 "Принтер принадлежит рабочей станции %s. Невозможно переименовать принтер."
 
-#: plugins/admin/systems/class_printGeneric.inc:578
+#: plugins/admin/systems/class_printGeneric.inc:587
 msgid "Removing printer failed"
 msgstr "Не удалось удалить принтер"
 
-#: plugins/admin/systems/class_printGeneric.inc:642
+#: plugins/admin/systems/class_printGeneric.inc:651
 msgid "You have no permissions to create a printer on this 'Base'."
 msgstr "У вас недостаточно прав для создания принтера в этой ветке."
 
-#: plugins/admin/systems/class_printGeneric.inc:821
+#: plugins/admin/systems/class_printGeneric.inc:830
 msgid "Saving printer failed"
 msgstr "Не удалось сохранить принтер"
 
-#: plugins/admin/systems/class_printGeneric.inc:866
+#: plugins/admin/systems/class_printGeneric.inc:875
 #, php-format
 msgid "Illegal printer type while adding '%s' to the list of '%s' printers,"
 msgstr ""
 "Неверный тип принтера в процессе добавления '%s' в список '%s' принтеров."
 
-#: plugins/admin/systems/class_printGeneric.inc:888
+#: plugins/admin/systems/class_printGeneric.inc:897
 #, php-format
 msgid "Can't add '%s' to the list of members, it is already used."
 msgstr "Невозможно добавить '%s' к списку членов, он уже используется."
 
-#: plugins/admin/systems/class_printGeneric.inc:896
+#: plugins/admin/systems/class_printGeneric.inc:905
 #, php-format
 msgid "Can't add '%s' to list of members, it is not reachable."
 msgstr "Невозможно добавить '%s' к списку членов, он недоступен. "
@@ -11410,7 +11589,9 @@ msgstr "Сетевой принтер"
 msgid "Other network component"
 msgstr "Прочие сетевые компоненты"
 
-#: plugins/admin/systems/chooser.tpl:16 setup/class_setupStep_Migrate.inc:860
+#: plugins/admin/systems/chooser.tpl:16
+#: plugins/admin/systems/dhcpNewSection.tpl:15
+#: setup/class_setupStep_Migrate.inc:860
 msgid "Create"
 msgstr "Создать"
 
@@ -11466,6 +11647,11 @@ msgid ""
 "Can't execute specified REPOSITORY_HOOK '%s'. Please check your gosa.conf."
 msgstr "Невозможно исполнить REPOSITORY_HOOK '%s'. Проверьте ваш gosa.conf"
 
+#: plugins/admin/systems/dhcp_group.tpl:10
+#, fuzzy
+msgid "Name of group"
+msgstr "Название группы"
+
 #: plugins/admin/systems/class_phoneGeneric.inc:103
 msgid "This 'dn' has no phone features."
 msgstr "Этот DN не имеет свойств телефона."
@@ -11488,7 +11674,7 @@ msgstr "динамический"
 msgid "Networksettings"
 msgstr "Сетевые настройки"
 
-#: plugins/admin/systems/class_phoneGeneric.inc:240
+#: plugins/admin/systems/class_phoneGeneric.inc:248
 #, php-format
 msgid ""
 "Can't delete because there are user which are depending on this phone. One "
@@ -11497,23 +11683,23 @@ msgstr ""
 "Невозможно удалить т.к. есть пользователи, зависящие от этого телефона. Один "
 "из них '%s'."
 
-#: plugins/admin/systems/class_phoneGeneric.inc:247
+#: plugins/admin/systems/class_phoneGeneric.inc:255
 msgid "Removing phone failed"
 msgstr "Не удалось удалить телефон"
 
-#: plugins/admin/systems/class_phoneGeneric.inc:292
+#: plugins/admin/systems/class_phoneGeneric.inc:300
 msgid "The required field 'Phone name' is not set."
 msgstr "Обязательное поле 'Название телефона' не заполнено."
 
-#: plugins/admin/systems/class_phoneGeneric.inc:295
+#: plugins/admin/systems/class_phoneGeneric.inc:303
 msgid "The 'Phone name' '0' is reserved and cannot be used."
 msgstr "Название телефона '0' зарезервировано и не может быть использовано."
 
-#: plugins/admin/systems/class_phoneGeneric.inc:302
+#: plugins/admin/systems/class_phoneGeneric.inc:310
 msgid "You have no permissions to create a phone on this 'Base'."
 msgstr "У вас недостаточно прав для создания телефонов в этой ветке."
 
-#: plugins/admin/systems/class_phoneGeneric.inc:398
+#: plugins/admin/systems/class_phoneGeneric.inc:406
 msgid "Saving phone failed"
 msgstr "Не сохранить удалить телефон"
 
@@ -11532,6 +11718,88 @@ msgstr "Показать соответствие членов"
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:55
 msgid "Regular expression for matching member names"
 msgstr "Регулярные выражения, соответствующее именам членов"
+
+#: plugins/admin/systems/dhcp_network.tpl:5
+#, fuzzy
+msgid "Network configuration"
+msgstr "Скачать конфигурацию"
+
+#: plugins/admin/systems/dhcp_network.tpl:8
+#, fuzzy
+msgid "Router"
+msgstr "Компьютеры"
+
+#: plugins/admin/systems/dhcp_network.tpl:11
+msgid "Enter name or IP address of router to be used in this section"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_network.tpl:21
+#: plugins/admin/systems/class_dhcpNetwork.inc:197
+msgid "Broadcast"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_network.tpl:29
+#, fuzzy
+msgid "Bootup"
+msgstr "Логический"
+
+#: plugins/admin/systems/dhcp_network.tpl:35
+msgid ""
+"Enter name of file that will be loaded via tftp after client has started"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_network.tpl:39
+#, fuzzy
+msgid "Next server"
+msgstr "Новый сервер"
+
+#: plugins/admin/systems/dhcp_network.tpl:42
+msgid "Enter name of server to retrieve bootimages from"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_network.tpl:49
+#, fuzzy
+msgid "Domain Name Service"
+msgstr "Сканер"
+
+#: plugins/admin/systems/dhcp_network.tpl:55
+#, fuzzy
+msgid "Name of domain"
+msgstr "Подразделение"
+
+#: plugins/admin/systems/dhcp_network.tpl:61
+#, fuzzy
+msgid "DNS server"
+msgstr "Сервер NTP"
+
+#: plugins/admin/systems/dhcp_network.tpl:62
+msgid "List of DNS servers to be propagated"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_network.tpl:66
+msgid "DNS server do be added"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_network.tpl:67
+msgid "Click here add the selected server to the list"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_network.tpl:68
+msgid "Click here remove the selected servers from the list"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_network.tpl:73
+#, fuzzy
+msgid "Domain Name Service options"
+msgstr "Сканер"
+
+#: plugins/admin/systems/dhcp_network.tpl:74
+msgid "Assign hostnames found via reverse mapping"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_network.tpl:76
+msgid "Assign hostnames from host declarations"
+msgstr ""
 
 #: plugins/admin/systems/class_glpiManufacturer.inc:53
 #, php-format
@@ -11629,6 +11897,340 @@ msgstr "Выбраный производитель '%s' не сущестуве
 msgid "Printer ppd selection."
 msgstr "Секция ppd принтера"
 
+#: plugins/admin/systems/remove_dhcp.tpl:6
+#, fuzzy
+msgid ""
+"This includes 'all' DHCP subsections that are located within this section. "
+"Please double check if your really want to do this since there is no way for "
+"GOsa to get your data back."
+msgstr ""
+"Сюда входит 'вся' информация об объекте. Подумайте еще раз, действительно ли "
+"вам это нужно, так как GOsa не сможет отменить результаты этой операции."
+
+#: plugins/admin/systems/class_servSsh.inc:25
+#, fuzzy
+msgid "SSH systems keys"
+msgstr "Системы"
+
+#: plugins/admin/systems/class_servSsh.inc:26
+msgid "This plugin store ssh public keys for systems"
+msgstr ""
+
+#: plugins/admin/systems/class_servSsh.inc:110
+#, fuzzy
+msgid "Removing SSH account failed"
+msgstr "Не удалось удалить учётную запись Samba"
+
+#: plugins/admin/systems/class_servSsh.inc:175
+#, fuzzy
+msgid "Saving SSH account failed"
+msgstr "Не удалось сохраненить учётную запись Samba"
+
+#: plugins/admin/systems/servssh.tpl:4
+#, fuzzy
+msgid "SSH account"
+msgstr "Моя учетная запись"
+
+#: plugins/admin/systems/class_dhcpService.inc:139
+#, fuzzy
+msgid "Default lease time needs to be numeric."
+msgstr "Порт sieve должен быть численным"
+
+#: plugins/admin/systems/class_dhcpService.inc:142
+#, fuzzy
+msgid "Maximum lease time needs to be numeric."
+msgstr "Порт sieve должен быть численным"
+
+#: plugins/admin/systems/class_dhcpService.inc:145
+msgid "Default lease time needs to smaller than the maximum lease time."
+msgstr ""
+
+#: plugins/admin/systems/class_dhcpNetwork.inc:42
+msgid "The name of the DNS server your're going to add is not valid!"
+msgstr ""
+
+#: plugins/admin/systems/class_dhcpNetwork.inc:204
+#, php-format
+msgid "Error in definition of '%s'!"
+msgstr ""
+
+#: plugins/admin/systems/class_dhcpGroup.inc:90
+#, fuzzy
+msgid "Field 'Name' contains illegal characters."
+msgstr "Значение поля \"Имя\" содержит недопустимые символы."
+
+#: plugins/admin/systems/class_dhcpGroup.inc:98
+#: plugins/admin/systems/class_dhcpHost.inc:140
+#: plugins/admin/systems/class_dhcpSharedNetwork.inc:160
+#, fuzzy
+msgid "The name for this host section is already used!"
+msgstr "Переименование не удалось, такой тип системы уже используется."
+
+#: plugins/admin/systems/class_dhcpSubnet.inc:133
+#, fuzzy
+msgid "Required field 'Network address' is not filled."
+msgstr "Обязательное поле \"Имя\" не заполнено."
+
+#: plugins/admin/systems/class_dhcpSubnet.inc:136
+#, fuzzy
+msgid "Required field 'Netmask' is not filled."
+msgstr "Обязательное поле \"Имя\" не заполнено."
+
+#: plugins/admin/systems/class_dhcpSubnet.inc:144
+#: plugins/admin/systems/class_dhcpPool.inc:111
+#, fuzzy
+msgid "The name for this section is already used!"
+msgstr "Переименование не удалось, такой тип системы уже используется."
+
+#: plugins/admin/systems/class_dhcpSubnet.inc:151
+#: plugins/admin/systems/dhcp_pool.tpl:11
+#, fuzzy
+msgid "Range"
+msgstr "Управление"
+
+#: plugins/admin/systems/class_dhcpSubnet.inc:153
+#, fuzzy, php-format
+msgid "The field '%s' contains an invalid IP address"
+msgstr "Значение поля IP-адрес содержит недопустимые символы."
+
+#: plugins/admin/systems/class_dhcpSubnet.inc:160
+#: plugins/admin/systems/class_dhcpPool.inc:126
+#, fuzzy
+msgid "Field 'Range' contains invalid IP range."
+msgstr "Значение поля \"Имя\" содержит недопустимые символы."
+
+#: plugins/admin/systems/class_dhcpSubnet.inc:166
+#: plugins/admin/systems/class_dhcpPool.inc:140
+#, fuzzy
+msgid "'Range' is not inside the configured network."
+msgstr "Найдено %s груп вне сконфигурированного дерева '%s'."
+
+#: plugins/admin/systems/class_dhcpPool.inc:118
+#, fuzzy
+msgid "Required field 'Range' is not filled."
+msgstr "Обязательное поле \"Имя\" не заполнено."
+
+#: plugins/admin/systems/class_dhcpPool.inc:122
+#, fuzzy
+msgid "Field 'Range' contains invalid IP addresses."
+msgstr "Значение поля \"Имя\" содержит недопустимые символы."
+
+#: plugins/admin/systems/class_dhcpHost.inc:62
+#, fuzzy
+msgid "Ethernet"
+msgstr "Intranet"
+
+#: plugins/admin/systems/class_dhcpHost.inc:63
+msgid "FDDI"
+msgstr ""
+
+#: plugins/admin/systems/class_dhcpHost.inc:64
+msgid "Token Ring"
+msgstr ""
+
+#: plugins/admin/systems/class_dhcpHost.inc:149
+#, fuzzy
+msgid "The hardware address specified by you is not valid!"
+msgstr "Значение поля \"Отношение\" некорректно."
+
+#: plugins/admin/systems/dhcp_subnet.tpl:20
+msgid "Range for dynamic address assignment"
+msgstr ""
+
+#: plugins/admin/systems/class_dhcpAdvanced.inc:53
+msgid "Can't delete automatic statements. Please use the fields above."
+msgstr ""
+
+#: plugins/admin/systems/class_dhcpAdvanced.inc:66
+msgid "Can't delete automatic options. Please use the fields above."
+msgstr ""
+
+#: plugins/admin/systems/dhcp_pool.tpl:8
+#, fuzzy
+msgid "Name of pool"
+msgstr "Имя стоп-листа"
+
+#: plugins/admin/systems/dhcp_host.tpl:11
+#, fuzzy
+msgid "Name of host"
+msgstr "Имя стоп-листа"
+
+#: plugins/admin/systems/dhcp_host.tpl:15
+#, fuzzy
+msgid "Fixed address"
+msgstr "Почтовый адрес"
+
+#: plugins/admin/systems/dhcp_host.tpl:19
+msgid "Use hostname or IP-address to assign fixed address"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_host.tpl:27
+msgid "Hardware type"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_host.tpl:35
+#, fuzzy
+msgid "Hardware address"
+msgstr "Основной адрес"
+
+#: plugins/admin/systems/dhcpNewSection.tpl:2
+#, fuzzy
+msgid "Create new DHCP section"
+msgstr "Создать новое приложение"
+
+#: plugins/admin/systems/dhcpNewSection.tpl:6
+#, fuzzy
+msgid "Please choose one of the following DHCP section types."
+msgstr ""
+"Используйте один из предложенных методов для выбора имени нового класса  FAI."
+
+#: plugins/admin/systems/dhcpNewSection.tpl:10
+#, fuzzy
+msgid "Choose section type to create"
+msgstr "Выберите тип мыши"
+
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:12
+#, fuzzy
+msgid "Name for shared network"
+msgstr "Имя общего ресурса dfs"
+
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:19
+msgid "Propagated server identifier for this shared network"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:31
+msgid "Select if this server is authoritative for this shared network"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:31
+msgid "Authoritative server"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:46
+#, fuzzy
+msgid "Leases"
+msgstr "Релиз"
+
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:49
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:52
+#: plugins/admin/systems/class_dhcpSharedNetwork.inc:146
+#, fuzzy
+msgid "Default lease time"
+msgstr "Выберите имя релиза"
+
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:52
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:59
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:66
+#, fuzzy
+msgid "seconds"
+msgstr "(в секундах)"
+
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:56
+#: plugins/admin/systems/class_dhcpSharedNetwork.inc:147
+msgid "Max. lease time"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:59
+#, fuzzy
+msgid "Maximum lease time"
+msgstr "Максимальный размер файла"
+
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:63
+#: plugins/admin/systems/class_dhcpSharedNetwork.inc:148
+msgid "Min. lease time"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:66
+#, fuzzy
+msgid "Minimum lease time"
+msgstr "Максимальный размер файла"
+
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:74
+#, fuzzy
+msgid "Access control"
+msgstr "Параметры доступа"
+
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:79
+msgid "Select if unknown clients should get dynamic IP addresses"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:79
+#, fuzzy
+msgid "Allow unknown clients"
+msgstr "! неизвестный id"
+
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:85
+msgid "Select if bootp clients should get dynamic IP addresses"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:85
+msgid "Allow bootp clients"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:91
+#, fuzzy
+msgid "Select if clients are allowed to boot using this DHCP server"
+msgstr "Пользователи, которым разрешено использовать данный принтер"
+
+#: plugins/admin/systems/dhcp_sharedNetwork.tpl:91
+msgid "Allow booting"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_service.tpl:6
+#, fuzzy
+msgid "Authoritative service"
+msgstr "Служба печати"
+
+#: plugins/admin/systems/dhcp_service.tpl:8
+msgid "Dynamic DNS update"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_service.tpl:9
+msgid "Dynamic DNS update style"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_service.tpl:18
+msgid "Default lease time (s)"
+msgstr ""
+
+#: plugins/admin/systems/dhcp_service.tpl:20
+msgid "Enter default lease time in seconds."
+msgstr ""
+
+#: plugins/admin/systems/dhcp_service.tpl:24
+#, fuzzy
+msgid "Maximum lease time (s)"
+msgstr "Максимальный размер файла"
+
+#: plugins/admin/systems/dhcp_service.tpl:26
+msgid "Enter maximum lease time in seconds."
+msgstr ""
+
+#: plugins/admin/systems/dhcp_advanced.tpl:8
+#, fuzzy
+msgid "Hide advanced settings"
+msgstr "Расширеные настройки телефона"
+
+#: plugins/admin/systems/dhcp_advanced.tpl:15
+#, fuzzy
+msgid "DHCP statements"
+msgstr "Подразделения"
+
+#: plugins/admin/systems/dhcp_advanced.tpl:28
+#, fuzzy
+msgid "DHCP options"
+msgstr "опции ФС"
+
+#: plugins/admin/systems/dhcp_advanced.tpl:43
+#, fuzzy
+msgid "Show advanced settings"
+msgstr "Настройки телефона"
+
+#: plugins/admin/systems/class_dhcpSharedNetwork.inc:151
+#, fuzzy, php-format
+msgid "The value specified as '%s' is not numeric!"
+msgstr "Значение '%s' содержит недопустимые символы."
+
 #: plugins/admin/ogroups/termgroup.tpl:2
 msgid ""
 "Actions you choose here influence all systems in this object group. "
@@ -11647,16 +12249,16 @@ msgstr "Список рассылки"
 msgid "Primary mail address for this distribution list"
 msgstr "Основной адрес эл. почты для списка рассылки"
 
-#: plugins/admin/ogroups/tabs_ogroups.inc:63
-#: plugins/admin/ogroups/tabs_ogroups.inc:200
+#: plugins/admin/ogroups/tabs_ogroups.inc:65
+#: plugins/admin/ogroups/tabs_ogroups.inc:199
 msgid "Phone queue"
 msgstr "Очередь звонков"
 
-#: plugins/admin/ogroups/tabs_ogroups.inc:89
+#: plugins/admin/ogroups/tabs_ogroups.inc:91
 msgid "System"
 msgstr "Система"
 
-#: plugins/admin/ogroups/tabs_ogroups.inc:179
+#: plugins/admin/ogroups/tabs_ogroups.inc:178
 msgid "Terminals"
 msgstr "Терминалы"
 
@@ -11991,10 +12593,15 @@ msgstr "Показать группы с телефонами"
 msgid "Create new object group"
 msgstr "Создать новый объект группы"
 
-#: plugins/admin/ogroups/class_divListOGroup.inc:160
+#: plugins/admin/ogroups/class_divListOGroup.inc:167
 #: plugins/generic/references/class_reference.inc:50
 msgid "Object group"
 msgstr "Объект группы"
+
+#: plugins/admin/ogroups/class_divListOGroup.inc:183
+#, fuzzy
+msgid "Number of listed object groups"
+msgstr "Название объектов типа группа"
 
 #: plugins/admin/ogroups/class_ogroup.inc:149
 msgid "This 'dn' is no object group."
@@ -12331,28 +12938,28 @@ msgstr "Тип MIME"
 msgid "Manage mime types"
 msgstr "Управление типами ОС"
 
-#: plugins/admin/mimetypes/class_mimetypeManagement.inc:290
+#: plugins/admin/mimetypes/class_mimetypeManagement.inc:307
 #, fuzzy, php-format
 msgid "You're about to delete the following entry %s"
 msgstr "Вы собираетесь удалить объект %s."
 
-#: plugins/admin/mimetypes/class_mimetypeManagement.inc:292
+#: plugins/admin/mimetypes/class_mimetypeManagement.inc:309
 #, fuzzy, php-format
 msgid "You're about to delete the following entries %s"
 msgstr "Вы собираетесь удалить объект %s."
 
-#: plugins/admin/mimetypes/class_mimetypeManagement.inc:326
+#: plugins/admin/mimetypes/class_mimetypeManagement.inc:343
 #, fuzzy, php-format
 msgid "You're about to delete the mime type '%s'."
 msgstr "Вы собираетесь удалить объект %s."
 
-#: plugins/admin/mimetypes/class_mimetypeManagement.inc:333
-#: plugins/admin/mimetypes/class_mimetypeManagement.inc:363
+#: plugins/admin/mimetypes/class_mimetypeManagement.inc:350
+#: plugins/admin/mimetypes/class_mimetypeManagement.inc:380
 #, fuzzy
 msgid "You are not allowed to delete this mime type!"
 msgstr "У вас недостаточно прав для удаления этого объекта!"
 
-#: plugins/admin/mimetypes/class_mimetypeManagement.inc:388
+#: plugins/admin/mimetypes/class_mimetypeManagement.inc:405
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:263
 #: setup/class_setupStep_Migrate.inc:217 setup/class_setupStep_Migrate.inc:266
 #: setup/class_setupStep_Migrate.inc:324 setup/class_setupStep_Migrate.inc:392
@@ -12365,7 +12972,7 @@ msgid "Ok"
 msgstr "Ok"
 
 #: plugins/admin/mimetypes/paste_generic.tpl:13
-#: plugins/admin/mimetypes/class_divListMimeTypes.inc:131
+#: plugins/admin/mimetypes/class_divListMimeTypes.inc:139
 #: plugins/admin/mimetypes/generic.tpl:12
 #, fuzzy
 msgid "Mime type"
@@ -12409,10 +13016,15 @@ msgstr "Тип MIME"
 msgid "Display mime types matching"
 msgstr "Показать соответствие типов картриджей"
 
-#: plugins/admin/mimetypes/class_divListMimeTypes.inc:99
+#: plugins/admin/mimetypes/class_divListMimeTypes.inc:106
 #, fuzzy
 msgid "Create new mime type"
 msgstr "Создать новый шаблон"
+
+#: plugins/admin/mimetypes/class_divListMimeTypes.inc:200
+#, fuzzy
+msgid "Number of listed mimetypes"
+msgstr "Готовые \"черные списки\""
 
 #: plugins/admin/mimetypes/generic.tpl:20
 #, fuzzy
@@ -12605,6 +13217,11 @@ msgstr "видимый"
 #: plugins/gofon/macro/class_divListMacros.inc:101
 msgid "invisible"
 msgstr "невидимый"
+
+#: plugins/gofon/macro/class_divListMacros.inc:138
+#, fuzzy
+msgid "Number of listed macros"
+msgstr "Название группы"
 
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:25
 msgid "Phone macros"
@@ -13094,6 +13711,11 @@ msgstr "Новая конференция"
 #: plugins/gofon/conference/class_divListConferences.inc:138
 msgid "Conference"
 msgstr "Конференция"
+
+#: plugins/gofon/conference/class_divListConferences.inc:166
+#, fuzzy
+msgid "Number of listed conferences"
+msgstr "Подразделение"
 
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:25
 msgid "Phone conferences"
@@ -14030,51 +14652,101 @@ msgstr "Невозможно активировать сценарий  GOsa SIE
 msgid "This package has no debconf options."
 msgstr "В этой учетной записи нет атрибутов debconf"
 
-#: include/class_plugin.inc:407
+#: include/class_plugin.inc:412
 #, php-format
 msgid ""
 "Command '%s', specified as CHECK hook for plugin '%s' doesn't seem to exist."
 msgstr ""
 "Не удается найти команду '%s', указанную как триггер CHECK модуля '%s'."
 
-#: include/class_plugin.inc:558
+#: include/class_plugin.inc:563
 #, php-format
 msgid ""
 "Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
 msgstr ""
 "Не удается найти команду \"%s\", указанную в поле POSTCREATE модуля \"%s\"."
 
-#: include/class_plugin.inc:592 include/class_password-methods.inc:182
+#: include/class_plugin.inc:597 include/class_password-methods.inc:182
 #, php-format
 msgid ""
 "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
 msgstr "Не удается найти команду '%s', указанную как POSTMODIFY модуля '%s'."
 
-#: include/class_plugin.inc:626
+#: include/class_plugin.inc:631
 #, php-format
 msgid ""
 "Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
 msgstr ""
 "Не удается найти команду \"%s\", указанную в поле POSTREMOVE модуля \"%s\"."
 
-#: include/class_plugin.inc:934
+#: include/class_plugin.inc:939
 #, php-format
 msgid "Object '%s' is already tagged"
 msgstr "Объект '%s' уже помечен"
 
-#: include/class_plugin.inc:941
+#: include/class_plugin.inc:946
 #, php-format
 msgid "Adding tag (%s) to object '%s'"
 msgstr "Добавление метки (%s) к объекту '%s'"
 
-#: include/class_plugin.inc:955 include/class_plugin.inc:984
+#: include/class_plugin.inc:960 include/class_plugin.inc:989
 msgid "Handle object tagging failed"
 msgstr "Обработка метки объекта не удалось"
 
-#: include/class_plugin.inc:971
+#: include/class_plugin.inc:976
 #, php-format
 msgid "Removing tag from object '%s'"
 msgstr "Удалить метку с объекта '%s'"
+
+#: include/php_setup.inc:101
+msgid "Generating this page caused the PHP interpreter to raise some errors!"
+msgstr "Генрирование строки вызвало ошибки PHP!"
+
+#: include/php_setup.inc:106
+#, fuzzy
+msgid "Send bug report to the GOsa Team"
+msgstr "Отправить feedback разработчикам GOsa"
+
+#: include/php_setup.inc:106
+#, fuzzy
+msgid "Send bugreport"
+msgstr "Отправитель"
+
+#: include/php_setup.inc:111 html/main.php:391
+msgid "Toggle information"
+msgstr "Переключить информацию"
+
+#: include/php_setup.inc:121
+msgid "PHP error"
+msgstr "Ошибка PHP"
+
+#: include/php_setup.inc:140
+msgid "class"
+msgstr "класс"
+
+#: include/php_setup.inc:146
+msgid "function"
+msgstr "функция"
+
+#: include/php_setup.inc:151
+msgid "static"
+msgstr "статический"
+
+#: include/php_setup.inc:155
+msgid "method"
+msgstr "метод"
+
+#: include/php_setup.inc:188
+msgid "Trace"
+msgstr "Трассировка"
+
+#: include/php_setup.inc:189
+msgid "Line"
+msgstr "строка"
+
+#: include/php_setup.inc:190
+msgid "Arguments"
+msgstr "Аргументы"
 
 #: include/class_password-methods.inc:166
 #, php-format
@@ -14086,7 +14758,7 @@ msgstr "Ошибка при установке пароля. Ответ LDAP-с�
 msgid "Setting for SMBHASH in %s is incorrect! Can't change Samba password."
 msgstr "Параметр SMBHASH в %s некорректен! Не удается сменить пароль Samba."
 
-#: include/class_MultiSelectWindow.inc:455
+#: include/class_MultiSelectWindow.inc:457
 msgid ""
 "Error: The requested subtree has an inconsistent DN encoding, check your "
 "LDAP!"
@@ -14094,28 +14766,28 @@ msgstr ""
 "Ошибка: запрошенное поддерево имеет не целостную кодировку DN, проверьте "
 "LDAP!"
 
-#: include/functions.inc:305
+#: include/functions.inc:282
 #, php-format
 msgid "FATAL: Error when connecting the LDAP. Server said '%s'."
 msgstr "Ошибка: при подключении к LDAP-серверу. Ответ сервера: '%s'."
 
-#: include/functions.inc:322
+#: include/functions.inc:299
 #, php-format
 msgid "User login failed. LDAP server said '%s'."
 msgstr "Ошибка при регистрации. Ответ сервера: \"%s\"."
 
-#: include/functions.inc:343
+#: include/functions.inc:320
 msgid "Username / UID is not unique. Please check your LDAP database."
 msgstr ""
 "Имя/идентификатор пользователя не уникальны. Проверьте свою базу данных LDAP."
 
-#: include/functions.inc:475
+#: include/functions.inc:452
 msgid ""
 "Error while adding a lock. Parameters are not set correctly, please check "
 "the source!"
 msgstr "Ошибка при создании блокировки. Заданные параметры некорректны."
 
-#: include/functions.inc:485
+#: include/functions.inc:462
 #, php-format
 msgid ""
 "Can't set locking information in LDAP database. Please check the 'config' "
@@ -14124,17 +14796,17 @@ msgstr ""
 "Не удается создать блокировку в базе данных LDAP. Проверьте, раздел config в "
 "файле %s Ответ LDAP сервера: %s"
 
-#: include/functions.inc:500
+#: include/functions.inc:477
 #, php-format
 msgid "Adding a lock failed. LDAP server says '%s'."
 msgstr "Ошибка при создании блокировки. Ответ сервера: \"%s\"."
 
-#: include/functions.inc:526
+#: include/functions.inc:503
 #, php-format
 msgid "Removing a lock failed. LDAP server says '%s'."
 msgstr "Ошибка при удалении блокировки. Ответ сервера: \"%s\"."
 
-#: include/functions.inc:556
+#: include/functions.inc:533
 msgid ""
 "Getting the lock from LDAP failed. Parameters are not set correctly, please "
 "check the source!"
@@ -14142,7 +14814,7 @@ msgstr ""
 "Ошибка при чтении блокировки. Заданные параметры некорректны, проверьте "
 "источник!"
 
-#: include/functions.inc:566
+#: include/functions.inc:543
 #, php-format
 msgid ""
 "Can't get locking information in LDAP database. Please check the 'config' "
@@ -14151,7 +14823,7 @@ msgstr ""
 "Не удается считать блокировку в базе данных LDAP. Проверьте, раздел 'config' "
 "в файле %s!"
 
-#: include/functions.inc:574
+#: include/functions.inc:551
 msgid ""
 "Found multiple locks for object to be locked. This should not be possible - "
 "cleaning up multiple references."
@@ -14159,12 +14831,12 @@ msgstr ""
 "Для блокируемого объекта обнаружено несколько блокировок. Этого быть не "
 "должно, проверьте работу LDAP."
 
-#: include/functions.inc:660
+#: include/functions.inc:637
 #, php-format
 msgid "The size limit of %d entries is exceed!"
 msgstr "Найдено более %d объектов."
 
-#: include/functions.inc:662
+#: include/functions.inc:639
 #, php-format
 msgid ""
 "Set the new size limit to %s and show me this message if the limit still "
@@ -14173,15 +14845,15 @@ msgstr ""
 "Установить новое значение лимита в %s и показать мне это сообщение если "
 "лимит будет исчерпан."
 
-#: include/functions.inc:679
+#: include/functions.inc:656
 msgid "incomplete"
 msgstr "не полный"
 
-#: include/functions.inc:1122 include/functions.inc:1363
+#: include/functions.inc:1099 include/functions.inc:1340
 msgid "LDAP error:"
 msgstr "Ошибка LDAP:"
 
-#: include/functions.inc:1123
+#: include/functions.inc:1100
 msgid ""
 "Problems with the LDAP server mean that you probably lost the last changes. "
 "Please check your LDAP setup for possible errors and try again."
@@ -14189,26 +14861,26 @@ msgstr ""
 "Проблемы с LDAP-сервером означают что вы скорее всего потеряли последние "
 "изменения. Проверьте LDAP-сервер на возможные ошибки и попробуйте ещё раз."
 
-#: include/functions.inc:1131
+#: include/functions.inc:1108
 msgid ""
 "Please check your input and fix the error. Press 'OK' to close this message "
 "box."
 msgstr ""
 "Проверьте данные и поправьте ошибку. Нажмите 'Ok' для закрытия этого диалога."
 
-#: include/functions.inc:1191
+#: include/functions.inc:1168
 msgid "OK"
 msgstr "OK"
 
-#: include/functions.inc:1252
+#: include/functions.inc:1229
 msgid "Continue anyway"
 msgstr "Продолжить в любом случае"
 
-#: include/functions.inc:1254
+#: include/functions.inc:1231
 msgid "Edit anyway"
 msgstr "Редактиовать в любом случае"
 
-#: include/functions.inc:1256
+#: include/functions.inc:1233
 #, php-format
 msgid ""
 "You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
@@ -14217,41 +14889,41 @@ msgstr ""
 "Вы собираетесь редактировать запись LDAP \"%s\", которая используется \"%s"
 "\". Пожалуйста, обратитесь к пользователю и уточните отношения."
 
-#: include/functions.inc:1545
+#: include/functions.inc:1522
 msgid "Entries per page"
 msgstr "Элементов на страницу"
 
-#: include/functions.inc:1573
+#: include/functions.inc:1550
 msgid "Apply filter"
 msgstr "Пременить фильтр"
 
-#: include/functions.inc:1847
+#: include/functions.inc:1824
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ0123456789"
 
-#: include/functions.inc:1890
+#: include/functions.inc:1867
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "Development-спапшот GOsa (Rev %s)"
 
-#: include/functions.inc:2292 include/functions.inc:2296
+#: include/functions.inc:2269 include/functions.inc:2273
 msgid "Warning - base_hook is not available. Using default base."
 msgstr "Предупреждение base_hook недоступен. Использование ветки по умолчанию."
 
-#: include/functions.inc:2302
+#: include/functions.inc:2279
 msgid "Warning - no base_hook defined. Using default base."
 msgstr ""
 "Предупреждение base_hook неопределён. Использование ветки по умолчанию."
 
-#: include/functions.inc:2327 setup/class_setupStep_Schema.inc:95
+#: include/functions.inc:2304 setup/class_setupStep_Schema.inc:95
 msgid "Can't get schema information from server. No schema check possible!"
 msgstr "Не удается получить информацию о схемах. Проверка схем невозможна!"
 
-#: include/functions.inc:2353
+#: include/functions.inc:2330
 msgid "Used to store account specific informations."
 msgstr "Используется для хранения информации специфичной для учётной записи."
 
-#: include/functions.inc:2360
+#: include/functions.inc:2337
 msgid ""
 "Used to lock currently edited entries to avoid multiple changes at the same "
 "time."
@@ -14259,32 +14931,32 @@ msgstr ""
 "Используется для блокировки редактируемых объектов для предотвращения "
 "одновременного редактирования."
 
-#: include/functions.inc:2403
+#: include/functions.inc:2380
 #, php-format
 msgid "The required objectClass '%s' is not present in your schema setup"
 msgstr "Обязательный класс объектов '%s' отсутствует в схемах LDAP."
 
-#: include/functions.inc:2405
+#: include/functions.inc:2382
 #, php-format
 msgid "The optional objectClass '%s' is not present in your schema setup"
 msgstr "Дополнительный класс объектов '%s' отсутствует в схемах LDAP."
 
-#: include/functions.inc:2411
+#: include/functions.inc:2388
 #, php-format
 msgid "The required objectclass '%s' does not have version %s"
 msgstr "У обязательного класса объектов '%s' версия не %s"
 
-#: include/functions.inc:2413
+#: include/functions.inc:2390
 #, php-format
 msgid "The optional objectclass '%s' does not have version %s"
 msgstr "У дополнительного класса объектов '%s' версия не %s"
 
-#: include/functions.inc:2417
+#: include/functions.inc:2394
 #, php-format
 msgid "Class(es) available"
 msgstr "Доступные классы"
 
-#: include/functions.inc:2440
+#: include/functions.inc:2417
 msgid ""
 "You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema    configuration do not support this option."
@@ -14292,7 +14964,7 @@ msgstr ""
 "Вы включили опцию rfc2307bis в ldap_setup , но конфигурация схемы не "
 "поддерживает эту опцию."
 
-#: include/functions.inc:2441
+#: include/functions.inc:2418
 msgid ""
 "In order to use rfc2307bis conform groups the objectClass 'posixGroup' must "
 "be      AUXILIARY"
@@ -14300,7 +14972,7 @@ msgstr ""
 "Для использования групп rfc2307bis objectClass 'posixGroup' должен быть "
 "AUXILIARY"
 
-#: include/functions.inc:2445
+#: include/functions.inc:2422
 msgid ""
 "You have disabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema   configuration do not support this option."
@@ -14308,7 +14980,7 @@ msgstr ""
 "Вы выключили опцию fc2307bis в 'ldap_setup', но ваша конфигурация схемы не "
 "поддерживает эту опцию."
 
-#: include/functions.inc:2446
+#: include/functions.inc:2423
 msgid "The objectClass 'posixGroup' must be STRUCTURAL"
 msgstr "Класс объекта 'posixGroup' должен быть STRUCTURAL"
 
@@ -14505,56 +15177,6 @@ msgstr "PickMany ещё не поддерживается!"
 msgid "Parsing PPD file %s failed - no information found."
 msgstr "Не удалась обработка PPD файла '%s' - информация не найдена."
 
-#: include/php_setup.inc:93
-msgid "Generating this page caused the PHP interpreter to raise some errors!"
-msgstr "Генрирование строки вызвало ошибки PHP!"
-
-#: include/php_setup.inc:98
-#, fuzzy
-msgid "Send bug report to the GOsa Team"
-msgstr "Отправить feedback разработчикам GOsa"
-
-#: include/php_setup.inc:98
-#, fuzzy
-msgid "Send bugreport"
-msgstr "Отправитель"
-
-#: include/php_setup.inc:103 html/main.php:393
-msgid "Toggle information"
-msgstr "Переключить информацию"
-
-#: include/php_setup.inc:113
-msgid "PHP error"
-msgstr "Ошибка PHP"
-
-#: include/php_setup.inc:132
-msgid "class"
-msgstr "класс"
-
-#: include/php_setup.inc:138
-msgid "function"
-msgstr "функция"
-
-#: include/php_setup.inc:143
-msgid "static"
-msgstr "статический"
-
-#: include/php_setup.inc:147
-msgid "method"
-msgstr "метод"
-
-#: include/php_setup.inc:180
-msgid "Trace"
-msgstr "Трассировка"
-
-#: include/php_setup.inc:181
-msgid "Line"
-msgstr "строка"
-
-#: include/php_setup.inc:182
-msgid "Arguments"
-msgstr "Аргументы"
-
 #: include/class_tabs.inc:204
 #, php-format
 msgid "Delete process has been canceled by plugin '%s': %s"
@@ -14611,10 +15233,23 @@ msgid ""
 msgstr ""
 "Неизвестное имя зоны '%s'. Имя зоны должно выглядеть как 'server/zone.com'."
 
-#: include/class_timezones.inc:53 include/class_timezones.inc:83
+#: include/class_timezones.inc:53
+#, php-format
+msgid ""
+"The timezone setting '%s' in your gosa.conf is not valid. Can not calculate "
+"correct timezone offset."
+msgstr ""
+
+#: include/class_timezones.inc:83
 #, fuzzy, php-format
 msgid "The timezone setting \""
 msgstr "Настройки телефона"
+
+#: include/class_timezones.inc:83
+#, php-format
+msgid ""
+"\" in your gosa.conf is not valid. Can not calculate correct timezone offest."
+msgstr ""
 
 #: include/class_pluglist.inc:116
 #, php-format
@@ -14657,13 +15292,13 @@ msgstr "Невозможно вставить"
 msgid "XML error in %s: %s at line %d"
 msgstr "Ошибка XML в %s: %s в строке %d"
 
-#: include/class_config.inc:208 html/index.php:210
+#: include/class_config.inc:199 html/index.php:209
 msgid "Can't bind to LDAP. Please contact the system administrator."
 msgstr ""
 "Не удается начать сеанс на LDAP-сервере. Обратитесь к системному "
 "администратору."
 
-#: include/class_config.inc:525
+#: include/class_config.inc:516
 msgid "SID and/or RIDBASE missing in your configuration!"
 msgstr "В вашем файле настройки отсутствуют значения SID и/или RIDBASE!"
 
@@ -14795,11 +15430,11 @@ msgstr "Список Пользователей из %s на %s"
 msgid "Computers of %s on %s"
 msgstr "Компьютеры из %s на %s"
 
-#: html/index.php:55 html/index.php:352 html/password.php:274
+#: html/index.php:55 html/index.php:351 html/password.php:274
 msgid "Session will not be encrypted."
 msgstr "Данные, передаваемые в течение этого сеанса, не будут зашифрованы."
 
-#: html/index.php:55 html/index.php:352 html/password.php:274
+#: html/index.php:55 html/index.php:351 html/password.php:274
 msgid "Enter SSL session"
 msgstr "Использовать шифрование SSL"
 
@@ -14813,7 +15448,7 @@ msgstr "Не удаётся прочитать файл настройки GOsa 
 msgid "Directory '%s' specified as compile directory is not accessible!"
 msgstr "Недоступен каталог '%s', указанный как каталог компиляции!"
 
-#: html/index.php:225
+#: html/index.php:224
 msgid ""
 "GOsa cannot retrieve information about the installed schema files. Please "
 "make sure, that this is possible."
@@ -14821,13 +15456,13 @@ msgstr ""
 "GOsa не может получить информацию об установленных схемах, убедитесь что это "
 "возможно."
 
-#: html/index.php:241
+#: html/index.php:240
 msgid ""
 "Your ldap setup contains old schema definitions. Please re-run the setup."
 msgstr ""
 "Ваш LDAP-сервер содержит старые определения схем. Перезапустите установщик."
 
-#: html/index.php:260
+#: html/index.php:259
 msgid ""
 "You're missing an administrative account for GOsa, you'll not be able to "
 "administrate anything!"
@@ -14835,29 +15470,56 @@ msgstr ""
 "У вас нет учетной записи администратора для GOsa, так что вы не сможете что-"
 "либо администрировать!"
 
-#: html/index.php:268 html/password.php:208
+#: html/index.php:267 html/password.php:208
 msgid "Please specify a valid username!"
 msgstr "Введите корректное имя пользователя!"
 
-#: html/index.php:270 html/password.php:210
+#: html/index.php:269 html/password.php:210
 msgid "Please specify your password!"
 msgstr "Введите свой пароль!"
 
-#: html/index.php:277 html/password.php:216
+#: html/index.php:276 html/password.php:216
 msgid "Please check the username/password combination."
 msgstr "Проверьте, правильно ли вы ввели имя пользователя и пароль."
 
-#: html/index.php:306
+#: html/index.php:305
 msgid "Account locked. Please contact your system administrator."
 msgstr ""
 "Учётная запись заблокирована. Обратитесь к вашему системному администратору."
 
-#: html/index.php:358
+#: html/index.php:357
 msgid ""
 "Your browser has cookies disabled. Please enable cookies and reload this "
 "page before logging in!"
 msgstr ""
 "В вашем браузере отключены cookie. Включите cookie и перегрузите страницу!"
+
+#: html/main.php:163
+msgid ""
+"FATAL: Register globals is on. GOsa will refuse to login unless this is "
+"fixed by an administrator."
+msgstr ""
+"Ошибка: Используется механизм register_globals. GOsa не допустит "
+"пользователей в систему, пока он не будет отключен администратором."
+
+#: html/main.php:219
+msgid "Warning: memory is getting low - please increase the memory_limit!"
+msgstr "Предупреждение: нехватка памяти, увеличьте значение memory_limit!"
+
+#: html/main.php:341
+#, php-format
+msgid "FATAL: Can't find any plugin definitions for plugin '%s'!"
+msgstr "Ошибка: Не удается найти определение для модуля '%s'!"
+
+#: html/main.php:356
+msgid "Your password is about to expire, please change your password"
+msgstr "Ваш пароль скоро прекратит действие, пожалуйста смените пароль"
+
+#: html/main.php:391
+msgid ""
+"Generating this page caused the W3C          conformance checker to raise "
+"some errors!"
+msgstr "Создание этой странице привело к ошибкам соответствия W3C!"
 
 #: html/getkiosk.php:25
 #, php-format
@@ -14884,33 +15546,6 @@ msgstr "Невозможно выполнить запрос к базе дан�
 #: html/password.php:152
 msgid "Error: Password method not available!"
 msgstr ""
-
-#: html/main.php:165
-msgid ""
-"FATAL: Register globals is on. GOsa will refuse to login unless this is "
-"fixed by an administrator."
-msgstr ""
-"Ошибка: Используется механизм register_globals. GOsa не допустит "
-"пользователей в систему, пока он не будет отключен администратором."
-
-#: html/main.php:221
-msgid "Warning: memory is getting low - please increase the memory_limit!"
-msgstr "Предупреждение: нехватка памяти, увеличьте значение memory_limit!"
-
-#: html/main.php:343
-#, php-format
-msgid "FATAL: Can't find any plugin definitions for plugin '%s'!"
-msgstr "Ошибка: Не удается найти определение для модуля '%s'!"
-
-#: html/main.php:358
-msgid "Your password is about to expire, please change your password"
-msgstr "Ваш пароль скоро прекратит действие, пожалуйста смените пароль"
-
-#: html/main.php:393
-msgid ""
-"Generating this page caused the W3C          conformance checker to raise "
-"some errors!"
-msgstr "Создание этой странице привело к ошибкам соответствия W3C!"
 
 #: html/get_attachment.php:47
 msgid ""
@@ -15154,7 +15789,7 @@ msgstr "Сменить пароль"
 msgid "Click here to Change your password"
 msgstr "Щёлкните сюда для смены пароля"
 
-#: setup/class_setup.inc:210
+#: setup/class_setup.inc:196
 msgid "Completed"
 msgstr "Завершено"
 
@@ -16711,6 +17346,103 @@ msgstr "Проверка схем прошла успешно"
 msgid "Schema check failed"
 msgstr "Проверка схем не удалась"
 
+#~ msgid "German"
+#~ msgstr "Немецкий"
+
+#~ msgid "Russian"
+#~ msgstr "Русский"
+
+#~ msgid "Chinese"
+#~ msgstr "Китайский"
+
+#~ msgid "Spanish"
+#~ msgstr "Испанский"
+
+#~ msgid "French"
+#~ msgstr "Французский"
+
+#~ msgid "Dutch"
+#~ msgstr "Датский"
+
+#~ msgid "English"
+#~ msgstr "Английский"
+
+#~ msgid "Italian"
+#~ msgstr "Итальянский"
+
+#~ msgid "Polish"
+#~ msgstr "Польский"
+
+#~ msgid "DFS Shares"
+#~ msgstr "Общие ресурсы DFS"
+
+#~ msgid ""
+#~ "This menu allows you to create, delete and edit selected dfs shares. "
+#~ "Having a large numbers of dfs shares, you might prefer the range "
+#~ "selectors on top of the dfs share list."
+#~ msgstr ""
+#~ "С помощью этого меню вы можете добавлять, изменять и удалять выбранные "
+#~ "общие ресурсы dfs. Если у вас достаточно большое количество общих "
+#~ "ресурсов dfs, вы можете использовать групповое выделение."
+
+#~ msgid "Display dfs shares matching"
+#~ msgstr "Показать подходяшие общие ресурсы dfs"
+
+#~ msgid "Regular expression for matching dfs share names"
+#~ msgstr "Регулярное выражение, соответствующее общим ресурсам dfs"
+
+#~ msgid "DFS Properties"
+#~ msgstr "Свойства DFS"
+
+#~ msgid "Fileserver"
+#~ msgstr "Файловый сервер"
+
+#~ msgid "Share on Fileserver"
+#~ msgstr "Общий ресурс на файловом сервере"
+
+#~ msgid "DFS Location"
+#~ msgstr "Адрес DFS"
+
+#~ msgid "DFS Managment"
+#~ msgstr "Управление DFS"
+
+#~ msgid "Removing DFS share failed"
+#~ msgstr "Не удалось удалить общий ресурс DFS"
+
+#~ msgid "No DFS entries found"
+#~ msgstr "Не найдено объектов DFS"
+
+#~ msgid "Go up one dfs share"
+#~ msgstr "Перейти вверх на один общий ресурс dfs"
+
+#~ msgid "Go to dfs root"
+#~ msgstr "Перейти к корню dfs"
+
+#~ msgid "Create new dfs share"
+#~ msgstr "Создать новый общий ресурс dfs"
+
+#~ msgid "Dfs share already exists."
+#~ msgstr "Общий ресурс Dfs уже существует."
+
+#~ msgid "Required Field \"Name of dfs Share\" is not set."
+#~ msgstr "Не заполнено обязательное поле \"Название общего ресурса DFS\" ."
+
+#~ msgid "Required Field \"Description\" is not set."
+#~ msgstr "Не заполнено обязательное поле \"Описание\" ."
+
+#~ msgid "Required Field \"Fileserver\" is not set."
+#~ msgstr "Не заполнено обязательное поле \"Файловый сервер\" ."
+
+#~ msgid "Required Field \"Share on fileserver\" is not set."
+#~ msgstr ""
+#~ "Не заполнено обязательное поле \"Общий ресурс на файловом сервере\" ."
+
+#~ msgid "Required Field \"Location\" is not set."
+#~ msgstr "Не заполнено обязательное поле \"Расположение\" ."
+
+#~ msgid "Distributed File System Administration"
+#~ msgstr "Администрирование Распределённой Файловой Системы (dfs)"
+
 #~ msgid "Ignore subtrees"
 #~ msgstr "Игнорировать поддеревья"
 
@@ -17262,9 +17994,6 @@ msgstr "Проверка схем не удалась"
 #~ msgid "Vacationmessage"
 #~ msgstr "Сообщение автоответчика"
 
-#~ msgid "to the list of forwarders."
-#~ msgstr "к списку тех, кому должны пересылаться сообщения."
-
 #, fuzzy
 #~ msgid "Repository settings"
 #~ msgstr "Сетевые настройки"
@@ -17559,10 +18288,6 @@ msgstr "Проверка схем не удалась"
 #~ msgstr "сброс"
 
 #, fuzzy
-#~ msgid "Subnet"
-#~ msgstr "Установить"
-
-#, fuzzy
 #~ msgid "SOA record for this zone"
 #~ msgstr "Местоположение ветки"
 
@@ -17605,10 +18330,6 @@ msgstr "Проверка схем не удалась"
 #, fuzzy
 #~ msgid "Nfs Export"
 #~ msgstr "Экспорт"
-
-#, fuzzy
-#~ msgid "Domain name service"
-#~ msgstr "Сканер"
 
 #, fuzzy
 #~ msgid "DNS-Zone"
@@ -18021,10 +18742,6 @@ msgstr "Проверка схем не удалась"
 #, fuzzy
 #~ msgid "You need to specify a Phone PIN."
 #~ msgstr "Необходимо указать не менее одного телефонного номера!"
-
-#, fuzzy
-#~ msgid "Name of Conference"
-#~ msgstr "Подразделение"
 
 #, fuzzy
 #~ msgid "Additional phone attributes "
