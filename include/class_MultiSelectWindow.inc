@@ -299,7 +299,11 @@ class MultiSelectWindow{
 		$divlist = new divlist($this->string_Title);
 		$divlist->SetSummary($this->string_Summary);
 		$divlist->SetEntriesPerPage(0); // 0 for scrollable list
-    $divlist->SetFooter($this->get_List_Bottom_Info());
+
+    /* Display list footer with summary of all listed entries */
+    if(isset($this->config->data['MAIN']['LIST_SUMMARY']) && preg_match("/true/i",$this->config->data['MAIN']['LIST_SUMMARY'])){
+      $divlist->SetFooter($this->get_List_Bottom_Info());
+    }
   
     if($this->DivHeight != ""){
       $divlist->SetHeight($this->DivHeight);

@@ -28,6 +28,7 @@ class Step_Config3 extends setup_step
 
   var $optional = array(
               "strict_units" => false,
+              "list_summary" => true,
               "forceglobals" => true,
               "forcessl" => false,
               "ldapstats" => false,
@@ -93,7 +94,7 @@ class Step_Config3 extends setup_step
         }
       }
       
-      foreach(array("strict_units","noprimarygroup","forceglobals","forcessl","ldapstats","warnssl","compile","debuglevel","session_lifetime") as $name){
+      foreach(array("list_summary","strict_units","noprimarygroup","forceglobals","forcessl","ldapstats","warnssl","compile","debuglevel","session_lifetime") as $name){
         if(isset($_POST[$name])){
           $this->optional[$name] = get_post($name);
         }

@@ -15,6 +15,18 @@
 
     <div class='step4_container'>
         <div class='step4_name'>
+            {t}Display summary in listings{/t}
+        </div>
+        <div class='step4_value'>
+	
+            <select name="list_summary" size="1" title="">
+            	{html_options options=$bool selected=$optional.list_summary}
+            </select>
+        </div>
+    </div>
+
+    <div class='step4_container'>
+        <div class='step4_name'>
             {t}Honour administrative units{/t}
         </div>
         <div class='step4_value'>
