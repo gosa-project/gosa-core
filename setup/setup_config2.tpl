@@ -108,6 +108,30 @@
 
 	<div class='step4_container'>
         <div class='step4_name'>
+            {t}Enable DNS extension{/t}
+        </div>
+        <div class='step4_value'>
+
+            <select name="enableDNS" size="1" title="">
+                {html_options options=$bool selected=$generic_settings.enableDNS}
+            </select>
+        </div>
+    </div>
+
+	<div class='step4_container'>
+        <div class='step4_name'>
+            {t}Enable DHCP extension{/t}
+        </div>
+        <div class='step4_value'>
+
+            <select name="enableDHCP" size="1" title="">
+                {html_options options=$bool selected=$generic_settings.enableDHCP}
+            </select>
+        </div>
+    </div>
+
+	<div class='step4_container'>
+        <div class='step4_name'>
             {t}Enable FAI release management{/t}
         </div>
         <div class='step4_value'>
