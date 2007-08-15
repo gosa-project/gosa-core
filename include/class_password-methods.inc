@@ -113,16 +113,16 @@ function change_password ($dn, $password, $mode=0, $hash= "")
     $deactivated = FALSE;
   }
 
-  // Get current password hash method if available 
-  if($hash == "" && isset($attrs['userPassword'][0]) && preg_match("/[\{\}]/",$attrs['userPassword'][0])){
-    $hash = preg_replace("/^[^\{]*+\{([^\}]*).*$/","\\1",$attrs['userPassword'][0]);
-    $hash = strtolower($hash);
-  }
+#  // Get current password hash method if available 
+#  if($hash == "" && isset($attrs['userPassword'][0]) && preg_match("/[\{\}]/",$attrs['userPassword'][0])){
+#    $hash = preg_replace("/^[^\{]*+\{([^\}]*).*$/","\\1",$attrs['userPassword'][0]);
+#    $hash = strtolower($hash);
+#  }
 
-  // Set encryption type to clear if required 
-  if (!isset($attrs['userPassword'][0]) || $hash == ""){
-    $hash= "clear";
-  }
+#  // Set encryption type to clear if required 
+#  if (!isset($attrs['userPassword'][0]) || $hash == ""){
+#    $hash= "clear";
+#  }
 
   // Detect the encryption Method
   if ( (isset($attrs['userPassword'][0]) &&  preg_match ("/^{([^}]+)}(.+)/", $attrs['userPassword'][0], $matches)) ||  $hash != ""){
