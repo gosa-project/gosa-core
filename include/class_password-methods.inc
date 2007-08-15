@@ -106,8 +106,21 @@ function change_password ($dn, $password, $mode=0, $hash= "")
   $ldap->cat ($dn, array("shadowLastChange", "userPassword", "uid"));
   $attrs      = $ldap->fetch ();
 
+  // Check if user account was deactivated, indicated by ! after } ... {crypt}!###
+  if(isset($attrs['userPassword'][0]) && preg_match("/^[^\}]*+\}!/",$attrs['userPassword'][0])){
+    $deactivated = TRUE;
+  }else{
+    $deactivated = FALSE;
+  }
+
+  // Get current password hash method if available 
+  if($hash == "" && isset($attrs['userPassword'][0]) && preg_match("/[\{\}]/",$attrs['userPassword'][0])){
+    $hash = preg_replace("/^[^\{]*+\{([^\}]*).*$/","\\1",$attrs['userPassword'][0]);
+    $hash = strtolower($hash);
+  }
+
   // Set encryption type to clear if required 
-  if (isset($attrs['userPassword'][0]) && preg_match('/^[^{}]+$/', $attrs['userPassword'][0]) && $hash == ""){
+  if (!isset($attrs['userPassword'][0]) || $hash == ""){
     $hash= "clear";
   }
 
@@ -153,6 +166,11 @@ function change_password ($dn, $password, $mode=0, $hash= "")
 
     // Create SMB Password 
     $attrs= generate_smb_nt_hash($password);
+  }
+
+  /* Readd ! if user was deactivated */
+  if($deactivated){
+    $newpass = preg_replace("/(^[^\}]+\})(.*$)/","\\1!\\2",$newpass);
   }
 
   $attrs['userPassword']= array();
