@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-14 09:49+0200\n"
+"POT-Creation-Date: 2007-08-20 11:09+0200\n"
 "PO-Revision-Date: 2007-08-06 12:32+0200\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team: Français <fr@li.org>\n"
@@ -28,9 +28,9 @@ msgstr "Extensions"
 
 #: contrib/gosa.conf:104 contrib/gosa.conf:128 contrib/gosa.conf:132
 #: contrib/gosa.conf:141 contrib/gosa.conf:147 contrib/gosa.conf:152
-#: contrib/gosa.conf:158 contrib/gosa.conf:168 contrib/gosa.conf:187
-#: contrib/gosa.conf:202 contrib/gosa.conf:208 contrib/gosa.conf:231
-#: contrib/gosa.conf:237 contrib/gosa.conf:243 contrib/gosa.conf:247
+#: contrib/gosa.conf:158 contrib/gosa.conf:168 contrib/gosa.conf:197
+#: contrib/gosa.conf:212 contrib/gosa.conf:218 contrib/gosa.conf:241
+#: contrib/gosa.conf:247 contrib/gosa.conf:253 contrib/gosa.conf:257
 #: plugins/personal/mail/generic.tpl:4 plugins/personal/posix/generic.tpl:4
 #: plugins/personal/samba/samba2.tpl:6 plugins/personal/samba/samba3.tpl:6
 #: plugins/personal/generic/class_user.inc:16
@@ -158,9 +158,9 @@ msgid "ACL"
 msgstr ""
 
 #: contrib/gosa.conf:137 contrib/gosa.conf:143 contrib/gosa.conf:148
-#: contrib/gosa.conf:154 contrib/gosa.conf:164 contrib/gosa.conf:183
-#: contrib/gosa.conf:198 contrib/gosa.conf:204 contrib/gosa.conf:210
-#: contrib/gosa.conf:233 contrib/gosa.conf:239
+#: contrib/gosa.conf:154 contrib/gosa.conf:164 contrib/gosa.conf:193
+#: contrib/gosa.conf:208 contrib/gosa.conf:214 contrib/gosa.conf:220
+#: contrib/gosa.conf:243 contrib/gosa.conf:249
 msgid "References"
 msgstr "Références"
 
@@ -176,17 +176,17 @@ msgstr "Options"
 msgid "Parameter"
 msgstr "Paramètres"
 
-#: contrib/gosa.conf:159 contrib/gosa.conf:169 contrib/gosa.conf:188
+#: contrib/gosa.conf:159 contrib/gosa.conf:169 contrib/gosa.conf:198
 #: plugins/admin/ogroups/tabs_ogroups.inc:107
 msgid "Startup"
 msgstr "Démarrage"
 
-#: contrib/gosa.conf:160 contrib/gosa.conf:189
+#: contrib/gosa.conf:160 contrib/gosa.conf:199
 #: plugins/admin/ogroups/tabs_ogroups.inc:101
 msgid "Devices"
 msgstr "Périphériques"
 
-#: contrib/gosa.conf:161 contrib/gosa.conf:190
+#: contrib/gosa.conf:161 contrib/gosa.conf:200
 #: plugins/personal/environment/environment.tpl:171
 #: plugins/admin/systems/class_systemManagement.inc:878
 #: plugins/admin/ogroups/class_ogroupManagement.inc:371
@@ -194,7 +194,7 @@ msgstr "Périphériques"
 msgid "Printer"
 msgstr "Imprimante"
 
-#: contrib/gosa.conf:162 contrib/gosa.conf:181 contrib/gosa.conf:191
+#: contrib/gosa.conf:162 contrib/gosa.conf:191 contrib/gosa.conf:201
 #: plugins/gofax/blocklists/generic.tpl:75
 #: plugins/addons/addressbook/contents.tpl:33
 #: plugins/admin/fai/faiProfileEntry.tpl:21
@@ -212,9 +212,9 @@ msgstr "Imprimante"
 msgid "Information"
 msgstr "Information"
 
-#: contrib/gosa.conf:163 contrib/gosa.conf:182 contrib/gosa.conf:197
-#: contrib/gosa.conf:203 contrib/gosa.conf:209 contrib/gosa.conf:232
-#: contrib/gosa.conf:238
+#: contrib/gosa.conf:163 contrib/gosa.conf:192 contrib/gosa.conf:207
+#: contrib/gosa.conf:213 contrib/gosa.conf:219 contrib/gosa.conf:242
+#: contrib/gosa.conf:248
 msgid "Inventory"
 msgstr "Inventaire"
 
@@ -236,16 +236,24 @@ msgstr "Kolab"
 msgid "Repository"
 msgstr "Dépôt"
 
-#: contrib/gosa.conf:177 contrib/gosa.conf:179 contrib/gosa.conf:193
-#: contrib/gosa.conf:195
+#: contrib/gosa.conf:177 contrib/gosa.conf:179 contrib/gosa.conf:203
+#: contrib/gosa.conf:205
 msgid "FAI summary"
 msgstr "Sommaire FAI"
 
-#: contrib/gosa.conf:260
+#: contrib/gosa.conf:182 contrib/gosa.conf:184
+msgid "DNS"
+msgstr ""
+
+#: contrib/gosa.conf:187 contrib/gosa.conf:189
+msgid "DHCP"
+msgstr ""
+
+#: contrib/gosa.conf:270
 msgid "OGo"
 msgstr "OGo"
 
-#: contrib/gosa.conf:272 plugins/addons/ldapmanager/contentexportxls.tpl:19
+#: contrib/gosa.conf:282 plugins/addons/ldapmanager/contentexportxls.tpl:19
 #: plugins/addons/ldapmanager/contentexportxls.tpl:32
 #: plugins/addons/ldapmanager/contentexportxls.tpl:47
 #: plugins/addons/ldapmanager/contentexport.tpl:16
@@ -255,11 +263,11 @@ msgstr "OGo"
 msgid "Export"
 msgstr "Exporter"
 
-#: contrib/gosa.conf:273
+#: contrib/gosa.conf:283
 msgid "Excel Export"
 msgstr "Exporter en Excel"
 
-#: contrib/gosa.conf:274 plugins/personal/mail/generic.tpl:192
+#: contrib/gosa.conf:284 plugins/personal/mail/generic.tpl:192
 #: plugins/personal/environment/logonManagement.tpl:65
 #: plugins/addons/ldapmanager/contentimport.tpl:49
 #: plugins/addons/ldapmanager/contentcsv.tpl:109
@@ -270,15 +278,15 @@ msgstr "Exporter en Excel"
 msgid "Import"
 msgstr "Importer"
 
-#: contrib/gosa.conf:275
+#: contrib/gosa.conf:285
 msgid "CSV Import"
 msgstr "Importer un fichier CSV"
 
-#: contrib/gosa.conf:280 contrib/gosa.conf:310
+#: contrib/gosa.conf:290 contrib/gosa.conf:320
 msgid "Partitions"
 msgstr "Partitions"
 
-#: contrib/gosa.conf:284 contrib/gosa.conf:314
+#: contrib/gosa.conf:294 contrib/gosa.conf:324
 #: plugins/personal/environment/logonManagement.tpl:55
 #: plugins/admin/fai/faiScriptEntry.tpl:50
 #: plugins/admin/fai/faiHookEntry.tpl:50
@@ -286,33 +294,33 @@ msgstr "Partitions"
 msgid "Script"
 msgstr "Script"
 
-#: contrib/gosa.conf:288 contrib/gosa.conf:318
+#: contrib/gosa.conf:298 contrib/gosa.conf:328
 #: plugins/admin/fai/class_faiSummaryTab.inc:40
 msgid "Hooks"
 msgstr "Connexions"
 
-#: contrib/gosa.conf:292 contrib/gosa.conf:322
+#: contrib/gosa.conf:302 contrib/gosa.conf:332
 #: plugins/admin/fai/class_faiSummaryTab.inc:41
 msgid "Variables"
 msgstr "Variables"
 
-#: contrib/gosa.conf:296 contrib/gosa.conf:326
+#: contrib/gosa.conf:306 contrib/gosa.conf:336
 #: plugins/admin/fai/class_faiSummaryTab.inc:42
 msgid "Templates"
 msgstr "Modèles"
 
-#: contrib/gosa.conf:300 contrib/gosa.conf:330
+#: contrib/gosa.conf:310 contrib/gosa.conf:340
 #: plugins/personal/environment/environment.tpl:7
 #: plugins/admin/fai/class_faiSummaryTab.inc:45
 msgid "Profiles"
 msgstr "Profils"
 
-#: contrib/gosa.conf:301 contrib/gosa.conf:331
+#: contrib/gosa.conf:311 contrib/gosa.conf:341
 #: plugins/admin/ogroups/tabs_ogroups.inc:110
 msgid "Summary"
 msgstr "Sommaire"
 
-#: contrib/gosa.conf:305 contrib/gosa.conf:335
+#: contrib/gosa.conf:315 contrib/gosa.conf:345
 msgid "Packages"
 msgstr "Paquets"
 
@@ -331,7 +339,7 @@ msgstr "Paquets"
 #: plugins/admin/fai/class_faiManagement.inc:608
 #: plugins/admin/fai/faiPartitionTableEntry.tpl:29
 #: plugins/admin/groups/class_groupManagement.inc:343
-#: plugins/admin/users/class_userManagement.inc:647
+#: plugins/admin/users/class_userManagement.inc:688
 #: plugins/admin/applications/class_applicationManagement.inc:360
 #: plugins/admin/departments/class_departmentManagement.inc:297
 #: plugins/admin/systems/servnfs.tpl:120
@@ -406,7 +414,7 @@ msgstr "Enregistrer"
 #: plugins/admin/groups/application_options.tpl:13
 #: plugins/admin/groups/mail_locals.tpl:68 plugins/admin/users/password.tpl:23
 #: plugins/admin/users/remove.tpl:16 plugins/admin/users/template.tpl:50
-#: plugins/admin/users/class_userManagement.inc:649
+#: plugins/admin/users/class_userManagement.inc:690
 #: plugins/admin/applications/remove.tpl:15
 #: plugins/admin/applications/class_applicationManagement.inc:362
 #: plugins/admin/departments/remove.tpl:16
@@ -1047,7 +1055,7 @@ msgstr ""
 "locaux"
 
 #: plugins/personal/mail/copypaste.tpl:1 plugins/admin/groups/paste_mail.tpl:1
-#: setup/setup_config2.tpl:143
+#: setup/setup_config2.tpl:167
 msgid "Mail settings"
 msgstr "Paramètres de messagerie"
 
@@ -1386,7 +1394,7 @@ msgstr "Vous devez spécifier votre mode de passe actuel pour continuer."
 
 #: plugins/personal/password/class_password.inc:74
 #: plugins/personal/generic/main.inc:84
-#: plugins/admin/users/class_userManagement.inc:243 html/password.php:186
+#: plugins/admin/users/class_userManagement.inc:284 html/password.php:186
 msgid ""
 "The passwords you've entered as 'New password' and 'Repeated new password' "
 "do not match."
@@ -1396,7 +1404,7 @@ msgstr ""
 
 #: plugins/personal/password/class_password.inc:76
 #: plugins/personal/generic/main.inc:89
-#: plugins/admin/users/class_userManagement.inc:248 html/password.php:189
+#: plugins/admin/users/class_userManagement.inc:289 html/password.php:189
 msgid "The password you've entered as 'New password' is empty."
 msgstr ""
 "Le mot de passe que vous avez entré comme 'Nouveau mot de passe' est vide."
@@ -1720,7 +1728,7 @@ msgstr "Avertir l'utilisateur %s jours avant l'expiration de son mot de passe"
 #: plugins/personal/posix/class_posixAccount.inc:558
 #: plugins/personal/samba/class_sambaAccount.inc:491
 #: plugins/admin/systems/class_terminalGeneric.inc:114
-#: setup/setup_config2.tpl:151
+#: setup/setup_config2.tpl:175
 msgid "disabled"
 msgstr "désactivé"
 
@@ -2820,7 +2828,7 @@ msgstr ""
 
 #: plugins/personal/generic/class_user.inc:1031
 #: plugins/addons/addressbook/class_addressbook.inc:555
-#: plugins/admin/users/class_userManagement.inc:541
+#: plugins/admin/users/class_userManagement.inc:582
 msgid "The required field 'Name' is not set."
 msgstr "Le champ obligatoire 'Nom' n'est pas rempli."
 
@@ -2830,7 +2838,7 @@ msgstr "Une personne ayant cet 'Identifiant' existe déjà dans l'annuaire."
 
 #: plugins/personal/generic/class_user.inc:1046
 #: plugins/addons/addressbook/class_addressbook.inc:559
-#: plugins/admin/users/class_userManagement.inc:544
+#: plugins/admin/users/class_userManagement.inc:585
 msgid "The required field 'Given name' is not set."
 msgstr "Le champ obligatoire 'Nom Complet' n'est pas rempli."
 
@@ -4084,7 +4092,7 @@ msgstr "Soumettre"
 #: plugins/admin/fai/class_divListFai.inc:230
 #: plugins/admin/fai/class_divListFai.inc:235
 #: plugins/admin/groups/class_divListGroup.inc:157
-#: plugins/admin/users/class_divListUsers.inc:187
+#: plugins/admin/users/class_divListUsers.inc:202
 #: plugins/admin/applications/class_divListApplication.inc:156
 #: plugins/admin/departments/class_divListDepartment.inc:98
 #: plugins/admin/systems/glpiPrinter.tpl:15
@@ -4101,7 +4109,7 @@ msgid "edit"
 msgstr "éditer"
 
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:95
-#: plugins/admin/users/class_divListUsers.inc:188
+#: plugins/admin/users/class_divListUsers.inc:203
 msgid "Edit user"
 msgstr "Editer un utilisateur"
 
@@ -4112,7 +4120,7 @@ msgstr "Editer un utilisateur"
 #: plugins/admin/fai/class_faiHook.inc:270
 #: plugins/admin/fai/class_divListFai.inc:237
 #: plugins/admin/groups/class_divListGroup.inc:161
-#: plugins/admin/users/class_divListUsers.inc:198
+#: plugins/admin/users/class_divListUsers.inc:218
 #: plugins/admin/applications/class_divListApplication.inc:163
 #: plugins/admin/departments/class_divListDepartment.inc:102
 #: plugins/admin/systems/class_divListSystem.inc:149
@@ -4126,7 +4134,7 @@ msgid "delete"
 msgstr "supprimer"
 
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:96
-#: plugins/admin/users/class_divListUsers.inc:199
+#: plugins/admin/users/class_divListUsers.inc:219
 msgid "Delete user"
 msgstr "Supprimer un utilisateur"
 
@@ -4138,7 +4146,7 @@ msgstr "Nom de la liste rouge"
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:120
 #: plugins/admin/fai/class_divListFai.inc:269
 #: plugins/admin/groups/class_divListGroup.inc:213
-#: plugins/admin/users/class_divListUsers.inc:279
+#: plugins/admin/users/class_divListUsers.inc:299
 #: plugins/admin/applications/class_divListApplication.inc:196
 #: plugins/admin/departments/class_divListDepartment.inc:128
 #: plugins/admin/systems/class_divListSystem.inc:226
@@ -4915,6 +4923,7 @@ msgstr "Erreur"
 
 #: plugins/addons/mailqueue/contents.tpl:76
 #: plugins/addons/mailqueue/class_mailqueue.inc:373
+#: plugins/admin/users/class_divListUsers.inc:187
 #: include/sieve/class_sieveManagement.inc:647
 msgid "Active"
 msgstr "Actif"
@@ -6260,7 +6269,7 @@ msgstr "PK"
 
 #: plugins/admin/fai/class_divListFai.inc:223
 #: plugins/admin/groups/class_divListGroup.inc:152
-#: plugins/admin/users/class_divListUsers.inc:181
+#: plugins/admin/users/class_divListUsers.inc:196
 #: plugins/admin/applications/class_divListApplication.inc:147
 #: plugins/admin/ogroups/class_divListOGroup.inc:137
 #: plugins/admin/mimetypes/class_divListMimeTypes.inc:161
@@ -6269,7 +6278,7 @@ msgstr "couper"
 
 #: plugins/admin/fai/class_divListFai.inc:223
 #: plugins/admin/groups/class_divListGroup.inc:152
-#: plugins/admin/users/class_divListUsers.inc:181
+#: plugins/admin/users/class_divListUsers.inc:196
 #: plugins/admin/applications/class_divListApplication.inc:147
 #: plugins/admin/ogroups/class_divListOGroup.inc:137
 #: plugins/admin/mimetypes/class_divListMimeTypes.inc:161
@@ -6278,7 +6287,7 @@ msgstr "Couper cette entrée"
 
 #: plugins/admin/fai/class_divListFai.inc:226
 #: plugins/admin/groups/class_divListGroup.inc:154
-#: plugins/admin/users/class_divListUsers.inc:183
+#: plugins/admin/users/class_divListUsers.inc:198
 #: plugins/admin/applications/class_divListApplication.inc:151
 #: plugins/admin/ogroups/class_divListOGroup.inc:139
 #: plugins/admin/mimetypes/class_divListMimeTypes.inc:163
@@ -6287,7 +6296,7 @@ msgstr "copier"
 
 #: plugins/admin/fai/class_divListFai.inc:226
 #: plugins/admin/groups/class_divListGroup.inc:154
-#: plugins/admin/users/class_divListUsers.inc:183
+#: plugins/admin/users/class_divListUsers.inc:198
 #: plugins/admin/applications/class_divListApplication.inc:151
 #: plugins/admin/ogroups/class_divListOGroup.inc:139
 #: plugins/admin/mimetypes/class_divListMimeTypes.inc:163
@@ -6768,7 +6777,7 @@ msgid "Groups"
 msgstr "Groupes"
 
 #: plugins/admin/groups/class_groupManagement.inc:142
-#: plugins/admin/users/class_userManagement.inc:126
+#: plugins/admin/users/class_userManagement.inc:127
 #: plugins/admin/ogroups/class_ogroupManagement.inc:137
 #: plugins/admin/mimetypes/class_mimetypeManagement.inc:168
 msgid "You are not allowed to execute this method!"
@@ -7028,7 +7037,7 @@ msgid "admin"
 msgstr "administrateur"
 
 #: plugins/admin/groups/class_groupMail.inc:293
-#: plugins/admin/users/class_userManagement.inc:475
+#: plugins/admin/users/class_userManagement.inc:516
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:388
 #: plugins/admin/systems/class_SelectDeviceType.inc:24
 #: plugins/admin/ogroups/class_ogroup.inc:281
@@ -7358,23 +7367,31 @@ msgstr "Modèle"
 msgid "Users"
 msgstr "Utilisateurs"
 
-#: plugins/admin/users/class_userManagement.inc:221
-#: plugins/admin/users/class_userManagement.inc:297
+#: plugins/admin/users/class_userManagement.inc:170
+msgid "Could not set user status from locked to unlocked."
+msgstr ""
+
+#: plugins/admin/users/class_userManagement.inc:172
+msgid "Could not set user status from unlocked to locked."
+msgstr ""
+
+#: plugins/admin/users/class_userManagement.inc:262
+#: plugins/admin/users/class_userManagement.inc:338
 msgid "You are not allowed to set this users password!"
 msgstr ""
 "Vous n'êtes pas autorisé à indiquer un mot de passe pour cet utilisateur!"
 
-#: plugins/admin/users/class_userManagement.inc:336
+#: plugins/admin/users/class_userManagement.inc:377
 #, php-format
 msgid "You're about to delete the user %s."
 msgstr "Vous êtes sur le point de supprimer l'utilisateur %s."
 
-#: plugins/admin/users/class_userManagement.inc:342
-#: plugins/admin/users/class_userManagement.inc:369
+#: plugins/admin/users/class_userManagement.inc:383
+#: plugins/admin/users/class_userManagement.inc:410
 msgid "You are not allowed to delete this user!"
 msgstr "Vous n'êtes pas autorisé à supprimer cet utilisateur!"
 
-#: plugins/admin/users/class_userManagement.inc:553
+#: plugins/admin/users/class_userManagement.inc:594
 msgid "A person with the choosen name is already used in this tree."
 msgstr "Une personne ayant ce nom existe déjà dans l'annuaire."
 
@@ -7510,15 +7527,20 @@ msgstr "Créer un nouvel utilisateur depuis un modèle"
 msgid "Create user with this template"
 msgstr "Créer un nouvel utilisateur avec ce modèle"
 
-#: plugins/admin/users/class_divListUsers.inc:192
+#: plugins/admin/users/class_divListUsers.inc:184
+#, fuzzy
+msgid "Deactivated"
+msgstr "Activé"
+
+#: plugins/admin/users/class_divListUsers.inc:207
 msgid "password"
 msgstr "mot de passe"
 
-#: plugins/admin/users/class_divListUsers.inc:193
+#: plugins/admin/users/class_divListUsers.inc:208
 msgid "Change password"
 msgstr "Modifier le mot de passe"
 
-#: plugins/admin/users/class_divListUsers.inc:278
+#: plugins/admin/users/class_divListUsers.inc:298
 msgid "Number of listed users"
 msgstr ""
 
@@ -10369,7 +10391,7 @@ msgstr "Micro intégré"
 #: include/sieve/templates/element_header.tpl:41
 #: include/sieve/templates/element_envelope.tpl:41
 #: setup/class_setupStep_Ldap.inc:74 setup/class_setupStep_Config1.inc:87
-#: setup/class_setupStep_Config2.inc:129 setup/class_setupStep_Config3.inc:76
+#: setup/class_setupStep_Config2.inc:140 setup/class_setupStep_Config3.inc:77
 #: setup/setup_feedback.tpl:55 setup/setup_feedback.tpl:73
 #: setup/class_setupStep_Schema.inc:63
 msgid "Yes"
@@ -10386,7 +10408,7 @@ msgstr "Oui"
 #: include/sieve/templates/element_header.tpl:43
 #: include/sieve/templates/element_envelope.tpl:43
 #: setup/class_setupStep_Ldap.inc:74 setup/class_setupStep_Config1.inc:87
-#: setup/class_setupStep_Config2.inc:129 setup/class_setupStep_Config3.inc:76
+#: setup/class_setupStep_Config2.inc:140 setup/class_setupStep_Config3.inc:77
 #: setup/setup_feedback.tpl:57 setup/setup_feedback.tpl:75
 #: setup/class_setupStep_Schema.inc:63
 msgid "No"
@@ -14878,7 +14900,7 @@ msgstr ""
 "La commande '%s', utilisée dans le POSTCREATE de l'extension '%s' n'existe "
 "pas."
 
-#: include/class_plugin.inc:597 include/class_password-methods.inc:182
+#: include/class_plugin.inc:597 include/class_password-methods.inc:200
 #, php-format
 msgid ""
 "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
@@ -14963,21 +14985,21 @@ msgstr "Ligne"
 msgid "Arguments"
 msgstr "Arguments"
 
-#: include/class_password-methods.inc:166
+#: include/class_password-methods.inc:184
 #, php-format
 msgid "Setting the password failed. LDAP server says '%s'."
 msgstr ""
 "La modification a échoué du mot de passe à échoué. Le serveur LDAP répond '%"
 "s'."
 
-#: include/class_password-methods.inc:203
+#: include/class_password-methods.inc:221
 #, php-format
 msgid "Setting for SMBHASH in %s is incorrect! Can't change Samba password."
 msgstr ""
 "La configuration de SMBHASH dans %s est incorrecte ! Impossible de changer "
 "le mot de passe Samba."
 
-#: include/class_MultiSelectWindow.inc:457
+#: include/class_MultiSelectWindow.inc:461
 msgid ""
 "Error: The requested subtree has an inconsistent DN encoding, check your "
 "LDAP!"
@@ -16333,11 +16355,11 @@ msgstr "La longueur minimale du mot de passe n'est pas une valeur numérique."
 msgid "The given password differ value is not numeric."
 msgstr "L'option password differ n'est pas une valeur numérique."
 
-#: setup/class_setupStep_Config2.inc:79 setup/class_setupStep_Config2.inc:80
+#: setup/class_setupStep_Config2.inc:82 setup/class_setupStep_Config2.inc:83
 msgid "GOsa settings 2/3"
 msgstr "Paramètres de GOsa 2/3"
 
-#: setup/class_setupStep_Config2.inc:81
+#: setup/class_setupStep_Config2.inc:84
 msgid "Customize special parameters"
 msgstr "Customiser les paramètres spéciaux"
 
@@ -16581,19 +16603,19 @@ msgstr "Une erreur s'est produite lors de la copie du dns."
 msgid "I have read the license and accept it"
 msgstr "J'ai lu la licence et je l'accepte"
 
-#: setup/class_setupStep_Config3.inc:67 setup/class_setupStep_Config3.inc:68
+#: setup/class_setupStep_Config3.inc:68 setup/class_setupStep_Config3.inc:69
 msgid "GOsa settings 3/3"
 msgstr "Paramètres de GOsa 3/3"
 
-#: setup/class_setupStep_Config3.inc:69
+#: setup/class_setupStep_Config3.inc:70
 msgid "Tweak some GOsa core behaviour"
 msgstr "Customiser certains paramètres essentiels de GOsa"
 
-#: setup/class_setupStep_Config3.inc:171
+#: setup/class_setupStep_Config3.inc:172
 msgid "Session lifetime must be a numeric value."
 msgstr "La durée de la session doit être une valeur numérique."
 
-#: setup/class_setupStep_Config3.inc:175
+#: setup/class_setupStep_Config3.inc:176
 msgid "Maximal ldap query time must be a numeric value. "
 msgstr "Le temps maximumpour une requête ldap doit être une valeur numérique."
 
@@ -16634,26 +16656,36 @@ msgid "Enable Copy & Paste"
 msgstr "Activer le Copier / Coller"
 
 #: setup/setup_config2.tpl:111
+#, fuzzy
+msgid "Enable DNS extension"
+msgstr "Activer le DNS pour ce périphérique"
+
+#: setup/setup_config2.tpl:123
+#, fuzzy
+msgid "Enable DHCP extension"
+msgstr "Editer une section DHCP"
+
+#: setup/setup_config2.tpl:135
 msgid "Enable FAI release management"
 msgstr "Activer la gestion des versions FAI"
 
-#: setup/setup_config2.tpl:123
+#: setup/setup_config2.tpl:147
 msgid "Enable user netatalk plugin"
 msgstr "Activer la gestion des comptes Netatalk"
 
-#: setup/setup_config2.tpl:134
+#: setup/setup_config2.tpl:158
 msgid "Government mode"
 msgstr "Mode Gouvernemental"
 
-#: setup/setup_config2.tpl:147
+#: setup/setup_config2.tpl:171
 msgid "Mail method"
 msgstr "Méthode de messagerie"
 
-#: setup/setup_config2.tpl:161
+#: setup/setup_config2.tpl:185
 msgid "Vacation templates"
 msgstr "Modèles de messages d'absence "
 
-#: setup/setup_config2.tpl:177
+#: setup/setup_config2.tpl:201
 msgid "Use Cyrus UNIX style"
 msgstr "Utiliser Cyrus en mode UNIX"
 
@@ -17077,78 +17109,83 @@ msgid "Disable primary group filter"
 msgstr "Désactiver le filtre sur les groupes primaires"
 
 #: setup/setup_config3.tpl:18
+#, fuzzy
+msgid "Display summary in listings"
+msgstr "Afficher les macros correspondantes"
+
+#: setup/setup_config3.tpl:30
 msgid "Honour administrative units"
 msgstr "Honorer les entités administratives"
 
-#: setup/setup_config3.tpl:30
+#: setup/setup_config3.tpl:42
 msgid "Smarty compile directory"
 msgstr "Répertoire de compilation de smarty"
 
-#: setup/setup_config3.tpl:39
+#: setup/setup_config3.tpl:51
 msgid "Path for PPD storage"
 msgstr "Répertoire pour le stockage des PPD"
 
-#: setup/setup_config3.tpl:55
+#: setup/setup_config3.tpl:67
 msgid "Path for kiosk profile storage"
 msgstr "Répertoire pour le stockage des profiles kiosk"
 
-#: setup/setup_config3.tpl:74
+#: setup/setup_config3.tpl:86
 msgid "Network resolv hook"
 msgstr "Connexions pour les Résolution réseaux"
 
-#: setup/setup_config3.tpl:92
+#: setup/setup_config3.tpl:104
 msgid "Mail queue script"
 msgstr "Script pour la gestion de la queue du serveur de messagerie"
 
-#: setup/setup_config3.tpl:110
+#: setup/setup_config3.tpl:122
 msgid "Notification script"
 msgstr "Script de notification"
 
-#: setup/setup_config3.tpl:126
+#: setup/setup_config3.tpl:138
 msgid "Login and session"
 msgstr "connexion et session"
 
-#: setup/setup_config3.tpl:129
+#: setup/setup_config3.tpl:141
 msgid "Enforce register_globals to be deactivated"
 msgstr "Force register_globals à être désactivé"
 
-#: setup/setup_config3.tpl:141
+#: setup/setup_config3.tpl:153
 msgid "Enforce encrypted connections"
 msgstr "Force les connexions cryptées"
 
-#: setup/setup_config3.tpl:153
+#: setup/setup_config3.tpl:165
 msgid "Warn if session is not encrypted"
 msgstr "Avertir si la session ne sera pas cryptée"
 
-#: setup/setup_config3.tpl:165
+#: setup/setup_config3.tpl:177
 msgid "Session lifetime"
 msgstr "Durée de vie de la session"
 
-#: setup/setup_config3.tpl:173
+#: setup/setup_config3.tpl:185
 msgid "Debugging"
 msgstr "Deboguage"
 
-#: setup/setup_config3.tpl:177
+#: setup/setup_config3.tpl:189
 msgid "Show PHP errors"
 msgstr "Afficher les erreur PHP"
 
-#: setup/setup_config3.tpl:189
+#: setup/setup_config3.tpl:201
 msgid "Maximum LDAP query time"
 msgstr "Durée maximale d'une requête LDAP"
 
-#: setup/setup_config3.tpl:207
+#: setup/setup_config3.tpl:219
 msgid "Log LDAP statistics"
 msgstr "Inscrit les statistique de l'annuaire LDAP dans les journaux systèmes"
 
-#: setup/setup_config3.tpl:219
+#: setup/setup_config3.tpl:231
 msgid "Debug level"
 msgstr "Niveau de débogage"
 
-#: setup/setup_config3.tpl:224 setup/setup_config3.tpl:227
+#: setup/setup_config3.tpl:236 setup/setup_config3.tpl:239
 msgid "Disabled"
 msgstr "Désactivé"
 
-#: setup/setup_config3.tpl:225 setup/setup_config3.tpl:228
+#: setup/setup_config3.tpl:237 setup/setup_config3.tpl:240
 msgid "Enabled"
 msgstr "Activé"
 

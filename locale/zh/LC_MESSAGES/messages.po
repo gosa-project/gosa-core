@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-14 09:49+0200\n"
+"POT-Creation-Date: 2007-08-20 11:09+0200\n"
 "PO-Revision-Date: 2007-07-11 18:45+0800\n"
 "Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
 "Language-Team: Chinese Simplified <zh@li.org>\n"
@@ -30,9 +30,9 @@ msgstr "插件"
 
 #: contrib/gosa.conf:104 contrib/gosa.conf:128 contrib/gosa.conf:132
 #: contrib/gosa.conf:141 contrib/gosa.conf:147 contrib/gosa.conf:152
-#: contrib/gosa.conf:158 contrib/gosa.conf:168 contrib/gosa.conf:187
-#: contrib/gosa.conf:202 contrib/gosa.conf:208 contrib/gosa.conf:231
-#: contrib/gosa.conf:237 contrib/gosa.conf:243 contrib/gosa.conf:247
+#: contrib/gosa.conf:158 contrib/gosa.conf:168 contrib/gosa.conf:197
+#: contrib/gosa.conf:212 contrib/gosa.conf:218 contrib/gosa.conf:241
+#: contrib/gosa.conf:247 contrib/gosa.conf:253 contrib/gosa.conf:257
 #: plugins/personal/mail/generic.tpl:4 plugins/personal/posix/generic.tpl:4
 #: plugins/personal/samba/samba2.tpl:6 plugins/personal/samba/samba3.tpl:6
 #: plugins/personal/generic/class_user.inc:16
@@ -160,9 +160,9 @@ msgid "ACL"
 msgstr "ACL"
 
 #: contrib/gosa.conf:137 contrib/gosa.conf:143 contrib/gosa.conf:148
-#: contrib/gosa.conf:154 contrib/gosa.conf:164 contrib/gosa.conf:183
-#: contrib/gosa.conf:198 contrib/gosa.conf:204 contrib/gosa.conf:210
-#: contrib/gosa.conf:233 contrib/gosa.conf:239
+#: contrib/gosa.conf:154 contrib/gosa.conf:164 contrib/gosa.conf:193
+#: contrib/gosa.conf:208 contrib/gosa.conf:214 contrib/gosa.conf:220
+#: contrib/gosa.conf:243 contrib/gosa.conf:249
 msgid "References"
 msgstr "引用"
 
@@ -178,17 +178,17 @@ msgstr "选项"
 msgid "Parameter"
 msgstr "参数"
 
-#: contrib/gosa.conf:159 contrib/gosa.conf:169 contrib/gosa.conf:188
+#: contrib/gosa.conf:159 contrib/gosa.conf:169 contrib/gosa.conf:198
 #: plugins/admin/ogroups/tabs_ogroups.inc:107
 msgid "Startup"
 msgstr "启动"
 
-#: contrib/gosa.conf:160 contrib/gosa.conf:189
+#: contrib/gosa.conf:160 contrib/gosa.conf:199
 #: plugins/admin/ogroups/tabs_ogroups.inc:101
 msgid "Devices"
 msgstr "设备"
 
-#: contrib/gosa.conf:161 contrib/gosa.conf:190
+#: contrib/gosa.conf:161 contrib/gosa.conf:200
 #: plugins/personal/environment/environment.tpl:171
 #: plugins/admin/systems/class_systemManagement.inc:878
 #: plugins/admin/ogroups/class_ogroupManagement.inc:371
@@ -196,7 +196,7 @@ msgstr "设备"
 msgid "Printer"
 msgstr "打印机"
 
-#: contrib/gosa.conf:162 contrib/gosa.conf:181 contrib/gosa.conf:191
+#: contrib/gosa.conf:162 contrib/gosa.conf:191 contrib/gosa.conf:201
 #: plugins/gofax/blocklists/generic.tpl:75
 #: plugins/addons/addressbook/contents.tpl:33
 #: plugins/admin/fai/faiProfileEntry.tpl:21
@@ -214,9 +214,9 @@ msgstr "打印机"
 msgid "Information"
 msgstr "提示信息"
 
-#: contrib/gosa.conf:163 contrib/gosa.conf:182 contrib/gosa.conf:197
-#: contrib/gosa.conf:203 contrib/gosa.conf:209 contrib/gosa.conf:232
-#: contrib/gosa.conf:238
+#: contrib/gosa.conf:163 contrib/gosa.conf:192 contrib/gosa.conf:207
+#: contrib/gosa.conf:213 contrib/gosa.conf:219 contrib/gosa.conf:242
+#: contrib/gosa.conf:248
 msgid "Inventory"
 msgstr "清单"
 
@@ -238,16 +238,24 @@ msgstr "Kolab"
 msgid "Repository"
 msgstr "仓库"
 
-#: contrib/gosa.conf:177 contrib/gosa.conf:179 contrib/gosa.conf:193
-#: contrib/gosa.conf:195
+#: contrib/gosa.conf:177 contrib/gosa.conf:179 contrib/gosa.conf:203
+#: contrib/gosa.conf:205
 msgid "FAI summary"
 msgstr "自动化安装说明"
 
-#: contrib/gosa.conf:260
+#: contrib/gosa.conf:182 contrib/gosa.conf:184
+msgid "DNS"
+msgstr ""
+
+#: contrib/gosa.conf:187 contrib/gosa.conf:189
+msgid "DHCP"
+msgstr ""
+
+#: contrib/gosa.conf:270
 msgid "OGo"
 msgstr "OGo"
 
-#: contrib/gosa.conf:272 plugins/addons/ldapmanager/contentexportxls.tpl:19
+#: contrib/gosa.conf:282 plugins/addons/ldapmanager/contentexportxls.tpl:19
 #: plugins/addons/ldapmanager/contentexportxls.tpl:32
 #: plugins/addons/ldapmanager/contentexportxls.tpl:47
 #: plugins/addons/ldapmanager/contentexport.tpl:16
@@ -257,11 +265,11 @@ msgstr "OGo"
 msgid "Export"
 msgstr "导出"
 
-#: contrib/gosa.conf:273
+#: contrib/gosa.conf:283
 msgid "Excel Export"
 msgstr "导出为 Excel"
 
-#: contrib/gosa.conf:274 plugins/personal/mail/generic.tpl:192
+#: contrib/gosa.conf:284 plugins/personal/mail/generic.tpl:192
 #: plugins/personal/environment/logonManagement.tpl:65
 #: plugins/addons/ldapmanager/contentimport.tpl:49
 #: plugins/addons/ldapmanager/contentcsv.tpl:109
@@ -272,15 +280,15 @@ msgstr "导出为 Excel"
 msgid "Import"
 msgstr "导入"
 
-#: contrib/gosa.conf:275
+#: contrib/gosa.conf:285
 msgid "CSV Import"
 msgstr "CSV 导入"
 
-#: contrib/gosa.conf:280 contrib/gosa.conf:310
+#: contrib/gosa.conf:290 contrib/gosa.conf:320
 msgid "Partitions"
 msgstr "分区"
 
-#: contrib/gosa.conf:284 contrib/gosa.conf:314
+#: contrib/gosa.conf:294 contrib/gosa.conf:324
 #: plugins/personal/environment/logonManagement.tpl:55
 #: plugins/admin/fai/faiScriptEntry.tpl:50
 #: plugins/admin/fai/faiHookEntry.tpl:50
@@ -288,33 +296,33 @@ msgstr "分区"
 msgid "Script"
 msgstr "脚本"
 
-#: contrib/gosa.conf:288 contrib/gosa.conf:318
+#: contrib/gosa.conf:298 contrib/gosa.conf:328
 #: plugins/admin/fai/class_faiSummaryTab.inc:40
 msgid "Hooks"
 msgstr "钩子"
 
-#: contrib/gosa.conf:292 contrib/gosa.conf:322
+#: contrib/gosa.conf:302 contrib/gosa.conf:332
 #: plugins/admin/fai/class_faiSummaryTab.inc:41
 msgid "Variables"
 msgstr "变量"
 
-#: contrib/gosa.conf:296 contrib/gosa.conf:326
+#: contrib/gosa.conf:306 contrib/gosa.conf:336
 #: plugins/admin/fai/class_faiSummaryTab.inc:42
 msgid "Templates"
 msgstr "模板"
 
-#: contrib/gosa.conf:300 contrib/gosa.conf:330
+#: contrib/gosa.conf:310 contrib/gosa.conf:340
 #: plugins/personal/environment/environment.tpl:7
 #: plugins/admin/fai/class_faiSummaryTab.inc:45
 msgid "Profiles"
 msgstr "Profiles"
 
-#: contrib/gosa.conf:301 contrib/gosa.conf:331
+#: contrib/gosa.conf:311 contrib/gosa.conf:341
 #: plugins/admin/ogroups/tabs_ogroups.inc:110
 msgid "Summary"
 msgstr "总结"
 
-#: contrib/gosa.conf:305 contrib/gosa.conf:335
+#: contrib/gosa.conf:315 contrib/gosa.conf:345
 msgid "Packages"
 msgstr "软件包"
 
@@ -333,7 +341,7 @@ msgstr "软件包"
 #: plugins/admin/fai/class_faiManagement.inc:608
 #: plugins/admin/fai/faiPartitionTableEntry.tpl:29
 #: plugins/admin/groups/class_groupManagement.inc:343
-#: plugins/admin/users/class_userManagement.inc:647
+#: plugins/admin/users/class_userManagement.inc:688
 #: plugins/admin/applications/class_applicationManagement.inc:360
 #: plugins/admin/departments/class_departmentManagement.inc:297
 #: plugins/admin/systems/servnfs.tpl:120
@@ -408,7 +416,7 @@ msgstr "保存"
 #: plugins/admin/groups/application_options.tpl:13
 #: plugins/admin/groups/mail_locals.tpl:68 plugins/admin/users/password.tpl:23
 #: plugins/admin/users/remove.tpl:16 plugins/admin/users/template.tpl:50
-#: plugins/admin/users/class_userManagement.inc:649
+#: plugins/admin/users/class_userManagement.inc:690
 #: plugins/admin/applications/remove.tpl:15
 #: plugins/admin/applications/class_applicationManagement.inc:362
 #: plugins/admin/departments/remove.tpl:16
@@ -1031,7 +1039,7 @@ msgid "User is only allowed to send and receive local mails"
 msgstr "用户只能发送和接收本地邮件"
 
 #: plugins/personal/mail/copypaste.tpl:1 plugins/admin/groups/paste_mail.tpl:1
-#: setup/setup_config2.tpl:143
+#: setup/setup_config2.tpl:167
 msgid "Mail settings"
 msgstr "邮件选项"
 
@@ -1343,7 +1351,7 @@ msgstr "您需要输入当前口令才能继续。"
 
 #: plugins/personal/password/class_password.inc:74
 #: plugins/personal/generic/main.inc:84
-#: plugins/admin/users/class_userManagement.inc:243 html/password.php:186
+#: plugins/admin/users/class_userManagement.inc:284 html/password.php:186
 msgid ""
 "The passwords you've entered as 'New password' and 'Repeated new password' "
 "do not match."
@@ -1351,7 +1359,7 @@ msgstr "您输入的“新口令”和“重复新口令”不匹配。"
 
 #: plugins/personal/password/class_password.inc:76
 #: plugins/personal/generic/main.inc:89
-#: plugins/admin/users/class_userManagement.inc:248 html/password.php:189
+#: plugins/admin/users/class_userManagement.inc:289 html/password.php:189
 msgid "The password you've entered as 'New password' is empty."
 msgstr "输入的“新口令”为空。"
 
@@ -1658,7 +1666,7 @@ msgstr "在口令过期 %s 天之前警告用户"
 #: plugins/personal/posix/class_posixAccount.inc:558
 #: plugins/personal/samba/class_sambaAccount.inc:491
 #: plugins/admin/systems/class_terminalGeneric.inc:114
-#: setup/setup_config2.tpl:151
+#: setup/setup_config2.tpl:175
 msgid "disabled"
 msgstr "禁用"
 
@@ -2701,7 +2709,7 @@ msgstr "您无权从原 'Base' 移动一个用户。"
 
 #: plugins/personal/generic/class_user.inc:1031
 #: plugins/addons/addressbook/class_addressbook.inc:555
-#: plugins/admin/users/class_userManagement.inc:541
+#: plugins/admin/users/class_userManagement.inc:582
 msgid "The required field 'Name' is not set."
 msgstr "需要的“姓名”字段没有设置"
 
@@ -2711,7 +2719,7 @@ msgstr "数据库中已经有同样登录名的用户。"
 
 #: plugins/personal/generic/class_user.inc:1046
 #: plugins/addons/addressbook/class_addressbook.inc:559
-#: plugins/admin/users/class_userManagement.inc:544
+#: plugins/admin/users/class_userManagement.inc:585
 msgid "The required field 'Given name' is not set."
 msgstr "需要的“教名”字段没有设置"
 
@@ -3919,7 +3927,7 @@ msgstr "提交"
 #: plugins/admin/fai/class_divListFai.inc:230
 #: plugins/admin/fai/class_divListFai.inc:235
 #: plugins/admin/groups/class_divListGroup.inc:157
-#: plugins/admin/users/class_divListUsers.inc:187
+#: plugins/admin/users/class_divListUsers.inc:202
 #: plugins/admin/applications/class_divListApplication.inc:156
 #: plugins/admin/departments/class_divListDepartment.inc:98
 #: plugins/admin/systems/glpiPrinter.tpl:15
@@ -3936,7 +3944,7 @@ msgid "edit"
 msgstr "编辑"
 
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:95
-#: plugins/admin/users/class_divListUsers.inc:188
+#: plugins/admin/users/class_divListUsers.inc:203
 msgid "Edit user"
 msgstr "编辑用户"
 
@@ -3947,7 +3955,7 @@ msgstr "编辑用户"
 #: plugins/admin/fai/class_faiHook.inc:270
 #: plugins/admin/fai/class_divListFai.inc:237
 #: plugins/admin/groups/class_divListGroup.inc:161
-#: plugins/admin/users/class_divListUsers.inc:198
+#: plugins/admin/users/class_divListUsers.inc:218
 #: plugins/admin/applications/class_divListApplication.inc:163
 #: plugins/admin/departments/class_divListDepartment.inc:102
 #: plugins/admin/systems/class_divListSystem.inc:149
@@ -3961,7 +3969,7 @@ msgid "delete"
 msgstr "删除"
 
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:96
-#: plugins/admin/users/class_divListUsers.inc:199
+#: plugins/admin/users/class_divListUsers.inc:219
 msgid "Delete user"
 msgstr "删除用户"
 
@@ -3973,7 +3981,7 @@ msgstr "黑名单名称"
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:120
 #: plugins/admin/fai/class_divListFai.inc:269
 #: plugins/admin/groups/class_divListGroup.inc:213
-#: plugins/admin/users/class_divListUsers.inc:279
+#: plugins/admin/users/class_divListUsers.inc:299
 #: plugins/admin/applications/class_divListApplication.inc:196
 #: plugins/admin/departments/class_divListDepartment.inc:128
 #: plugins/admin/systems/class_divListSystem.inc:226
@@ -4714,6 +4722,7 @@ msgstr "错误"
 
 #: plugins/addons/mailqueue/contents.tpl:76
 #: plugins/addons/mailqueue/class_mailqueue.inc:373
+#: plugins/admin/users/class_divListUsers.inc:187
 #: include/sieve/class_sieveManagement.inc:647
 msgid "Active"
 msgstr "活动"
@@ -5999,7 +6008,7 @@ msgstr "PK"
 
 #: plugins/admin/fai/class_divListFai.inc:223
 #: plugins/admin/groups/class_divListGroup.inc:152
-#: plugins/admin/users/class_divListUsers.inc:181
+#: plugins/admin/users/class_divListUsers.inc:196
 #: plugins/admin/applications/class_divListApplication.inc:147
 #: plugins/admin/ogroups/class_divListOGroup.inc:137
 #: plugins/admin/mimetypes/class_divListMimeTypes.inc:161
@@ -6008,7 +6017,7 @@ msgstr "剪切"
 
 #: plugins/admin/fai/class_divListFai.inc:223
 #: plugins/admin/groups/class_divListGroup.inc:152
-#: plugins/admin/users/class_divListUsers.inc:181
+#: plugins/admin/users/class_divListUsers.inc:196
 #: plugins/admin/applications/class_divListApplication.inc:147
 #: plugins/admin/ogroups/class_divListOGroup.inc:137
 #: plugins/admin/mimetypes/class_divListMimeTypes.inc:161
@@ -6017,7 +6026,7 @@ msgstr "剪切条目"
 
 #: plugins/admin/fai/class_divListFai.inc:226
 #: plugins/admin/groups/class_divListGroup.inc:154
-#: plugins/admin/users/class_divListUsers.inc:183
+#: plugins/admin/users/class_divListUsers.inc:198
 #: plugins/admin/applications/class_divListApplication.inc:151
 #: plugins/admin/ogroups/class_divListOGroup.inc:139
 #: plugins/admin/mimetypes/class_divListMimeTypes.inc:163
@@ -6026,7 +6035,7 @@ msgstr "复制"
 
 #: plugins/admin/fai/class_divListFai.inc:226
 #: plugins/admin/groups/class_divListGroup.inc:154
-#: plugins/admin/users/class_divListUsers.inc:183
+#: plugins/admin/users/class_divListUsers.inc:198
 #: plugins/admin/applications/class_divListApplication.inc:151
 #: plugins/admin/ogroups/class_divListOGroup.inc:139
 #: plugins/admin/mimetypes/class_divListMimeTypes.inc:163
@@ -6491,7 +6500,7 @@ msgid "Groups"
 msgstr "用户组"
 
 #: plugins/admin/groups/class_groupManagement.inc:142
-#: plugins/admin/users/class_userManagement.inc:126
+#: plugins/admin/users/class_userManagement.inc:127
 #: plugins/admin/ogroups/class_ogroupManagement.inc:137
 #: plugins/admin/mimetypes/class_mimetypeManagement.inc:168
 msgid "You are not allowed to execute this method!"
@@ -6738,7 +6747,7 @@ msgid "admin"
 msgstr "管理员"
 
 #: plugins/admin/groups/class_groupMail.inc:293
-#: plugins/admin/users/class_userManagement.inc:475
+#: plugins/admin/users/class_userManagement.inc:516
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:388
 #: plugins/admin/systems/class_SelectDeviceType.inc:24
 #: plugins/admin/ogroups/class_ogroup.inc:281
@@ -7046,22 +7055,30 @@ msgstr "模板"
 msgid "Users"
 msgstr "用户"
 
-#: plugins/admin/users/class_userManagement.inc:221
-#: plugins/admin/users/class_userManagement.inc:297
+#: plugins/admin/users/class_userManagement.inc:170
+msgid "Could not set user status from locked to unlocked."
+msgstr ""
+
+#: plugins/admin/users/class_userManagement.inc:172
+msgid "Could not set user status from unlocked to locked."
+msgstr ""
+
+#: plugins/admin/users/class_userManagement.inc:262
+#: plugins/admin/users/class_userManagement.inc:338
 msgid "You are not allowed to set this users password!"
 msgstr "您无权设置这些用户口令！"
 
-#: plugins/admin/users/class_userManagement.inc:336
+#: plugins/admin/users/class_userManagement.inc:377
 #, php-format
 msgid "You're about to delete the user %s."
 msgstr "您将删除用户 %s。"
 
-#: plugins/admin/users/class_userManagement.inc:342
-#: plugins/admin/users/class_userManagement.inc:369
+#: plugins/admin/users/class_userManagement.inc:383
+#: plugins/admin/users/class_userManagement.inc:410
 msgid "You are not allowed to delete this user!"
 msgstr "您无权删除这个用户！"
 
-#: plugins/admin/users/class_userManagement.inc:553
+#: plugins/admin/users/class_userManagement.inc:594
 msgid "A person with the choosen name is already used in this tree."
 msgstr "使用所选名称的用户已经在树中被使用了。"
 
@@ -7194,15 +7211,20 @@ msgstr "从模板创建用户"
 msgid "Create user with this template"
 msgstr "创建使用该模板的用户"
 
-#: plugins/admin/users/class_divListUsers.inc:192
+#: plugins/admin/users/class_divListUsers.inc:184
+#, fuzzy
+msgid "Deactivated"
+msgstr "活动"
+
+#: plugins/admin/users/class_divListUsers.inc:207
 msgid "password"
 msgstr "口令"
 
-#: plugins/admin/users/class_divListUsers.inc:193
+#: plugins/admin/users/class_divListUsers.inc:208
 msgid "Change password"
 msgstr "修改口令"
 
-#: plugins/admin/users/class_divListUsers.inc:278
+#: plugins/admin/users/class_divListUsers.inc:298
 msgid "Number of listed users"
 msgstr ""
 
@@ -9905,7 +9927,7 @@ msgstr "整合麦克风"
 #: include/sieve/templates/element_header.tpl:41
 #: include/sieve/templates/element_envelope.tpl:41
 #: setup/class_setupStep_Ldap.inc:74 setup/class_setupStep_Config1.inc:87
-#: setup/class_setupStep_Config2.inc:129 setup/class_setupStep_Config3.inc:76
+#: setup/class_setupStep_Config2.inc:140 setup/class_setupStep_Config3.inc:77
 #: setup/setup_feedback.tpl:55 setup/setup_feedback.tpl:73
 #: setup/class_setupStep_Schema.inc:63
 msgid "Yes"
@@ -9922,7 +9944,7 @@ msgstr "是"
 #: include/sieve/templates/element_header.tpl:43
 #: include/sieve/templates/element_envelope.tpl:43
 #: setup/class_setupStep_Ldap.inc:74 setup/class_setupStep_Config1.inc:87
-#: setup/class_setupStep_Config2.inc:129 setup/class_setupStep_Config3.inc:76
+#: setup/class_setupStep_Config2.inc:140 setup/class_setupStep_Config3.inc:77
 #: setup/setup_feedback.tpl:57 setup/setup_feedback.tpl:75
 #: setup/class_setupStep_Schema.inc:63
 msgid "No"
@@ -14201,7 +14223,7 @@ msgid ""
 "Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
 msgstr "命令 '%s'，作为插件 '%s' 的 POSTCREATE 好像并不存在。"
 
-#: include/class_plugin.inc:597 include/class_password-methods.inc:182
+#: include/class_plugin.inc:597 include/class_password-methods.inc:200
 #, php-format
 msgid ""
 "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
@@ -14280,17 +14302,17 @@ msgstr "行"
 msgid "Arguments"
 msgstr "参数"
 
-#: include/class_password-methods.inc:166
+#: include/class_password-methods.inc:184
 #, php-format
 msgid "Setting the password failed. LDAP server says '%s'."
 msgstr "设置口令失败。LDAP 服务器报告说 '%s'。"
 
-#: include/class_password-methods.inc:203
+#: include/class_password-methods.inc:221
 #, php-format
 msgid "Setting for SMBHASH in %s is incorrect! Can't change Samba password."
 msgstr "在 %s 中的 SMBHASH 的设置不正确！无法修改 Samba 口令。"
 
-#: include/class_MultiSelectWindow.inc:457
+#: include/class_MultiSelectWindow.inc:461
 msgid ""
 "Error: The requested subtree has an inconsistent DN encoding, check your "
 "LDAP!"
@@ -15523,11 +15545,11 @@ msgstr "给出的口令最小长度不是数字。"
 msgid "The given password differ value is not numeric."
 msgstr "给出的口令差异值不是数字。"
 
-#: setup/class_setupStep_Config2.inc:79 setup/class_setupStep_Config2.inc:80
+#: setup/class_setupStep_Config2.inc:82 setup/class_setupStep_Config2.inc:83
 msgid "GOsa settings 2/3"
 msgstr "GOsa 设置 2/3"
 
-#: setup/class_setupStep_Config2.inc:81
+#: setup/class_setupStep_Config2.inc:84
 msgid "Customize special parameters"
 msgstr "定制特殊参数"
 
@@ -15760,19 +15782,19 @@ msgstr "拷贝 dns 时出错。"
 msgid "I have read the license and accept it"
 msgstr ""
 
-#: setup/class_setupStep_Config3.inc:67 setup/class_setupStep_Config3.inc:68
+#: setup/class_setupStep_Config3.inc:68 setup/class_setupStep_Config3.inc:69
 msgid "GOsa settings 3/3"
 msgstr "GOsa 设置 3/3"
 
-#: setup/class_setupStep_Config3.inc:69
+#: setup/class_setupStep_Config3.inc:70
 msgid "Tweak some GOsa core behaviour"
 msgstr "调整一些 GOsa 核心行为"
 
-#: setup/class_setupStep_Config3.inc:171
+#: setup/class_setupStep_Config3.inc:172
 msgid "Session lifetime must be a numeric value."
 msgstr "会话生存期必须是数字。"
 
-#: setup/class_setupStep_Config3.inc:175
+#: setup/class_setupStep_Config3.inc:176
 msgid "Maximal ldap query time must be a numeric value. "
 msgstr "最长 ldap 查询时间必须是数字。"
 
@@ -15815,26 +15837,36 @@ msgid "Enable Copy & Paste"
 msgstr "启用拷贝和粘贴"
 
 #: setup/setup_config2.tpl:111
+#, fuzzy
+msgid "Enable DNS extension"
+msgstr "启用该设备 DNS"
+
+#: setup/setup_config2.tpl:123
+#, fuzzy
+msgid "Enable DHCP extension"
+msgstr "LDAP 检查"
+
+#: setup/setup_config2.tpl:135
 msgid "Enable FAI release management"
 msgstr "启用 FAI 发布管理"
 
-#: setup/setup_config2.tpl:123
+#: setup/setup_config2.tpl:147
 msgid "Enable user netatalk plugin"
 msgstr "启用 user netatalk 插件"
 
-#: setup/setup_config2.tpl:134
+#: setup/setup_config2.tpl:158
 msgid "Government mode"
 msgstr "政府模式"
 
-#: setup/setup_config2.tpl:147
+#: setup/setup_config2.tpl:171
 msgid "Mail method"
 msgstr "邮件方法"
 
-#: setup/setup_config2.tpl:161
+#: setup/setup_config2.tpl:185
 msgid "Vacation templates"
 msgstr "假期模板"
 
-#: setup/setup_config2.tpl:177
+#: setup/setup_config2.tpl:201
 msgid "Use Cyrus UNIX style"
 msgstr "使用 Cyrus Unix 风格"
 
@@ -16224,78 +16256,83 @@ msgid "Disable primary group filter"
 msgstr "禁用主要组过滤器"
 
 #: setup/setup_config3.tpl:18
+#, fuzzy
+msgid "Display summary in listings"
+msgstr "显示匹配的宏"
+
+#: setup/setup_config3.tpl:30
 msgid "Honour administrative units"
 msgstr "Honour administrative units"
 
-#: setup/setup_config3.tpl:30
+#: setup/setup_config3.tpl:42
 msgid "Smarty compile directory"
 msgstr "Smarty 编译目录"
 
-#: setup/setup_config3.tpl:39
+#: setup/setup_config3.tpl:51
 msgid "Path for PPD storage"
 msgstr "PPD 存储路径"
 
-#: setup/setup_config3.tpl:55
+#: setup/setup_config3.tpl:67
 msgid "Path for kiosk profile storage"
 msgstr "Kiosk profile 存储路径"
 
-#: setup/setup_config3.tpl:74
+#: setup/setup_config3.tpl:86
 msgid "Network resolv hook"
 msgstr "Network 解析钩子"
 
-#: setup/setup_config3.tpl:92
+#: setup/setup_config3.tpl:104
 msgid "Mail queue script"
 msgstr "邮件队列脚本"
 
-#: setup/setup_config3.tpl:110
+#: setup/setup_config3.tpl:122
 msgid "Notification script"
 msgstr "通知脚本"
 
-#: setup/setup_config3.tpl:126
+#: setup/setup_config3.tpl:138
 msgid "Login and session"
 msgstr "登录和会话"
 
-#: setup/setup_config3.tpl:129
+#: setup/setup_config3.tpl:141
 msgid "Enforce register_globals to be deactivated"
 msgstr "强制 register_globals 为不活动"
 
-#: setup/setup_config3.tpl:141
+#: setup/setup_config3.tpl:153
 msgid "Enforce encrypted connections"
 msgstr "强制加密连接"
 
-#: setup/setup_config3.tpl:153
+#: setup/setup_config3.tpl:165
 msgid "Warn if session is not encrypted"
 msgstr "如果会话不加密警告"
 
-#: setup/setup_config3.tpl:165
+#: setup/setup_config3.tpl:177
 msgid "Session lifetime"
 msgstr "会话生存期"
 
-#: setup/setup_config3.tpl:173
+#: setup/setup_config3.tpl:185
 msgid "Debugging"
 msgstr "Debugging"
 
-#: setup/setup_config3.tpl:177
+#: setup/setup_config3.tpl:189
 msgid "Show PHP errors"
 msgstr "显示 PHP 错误"
 
-#: setup/setup_config3.tpl:189
+#: setup/setup_config3.tpl:201
 msgid "Maximum LDAP query time"
 msgstr "最大 LDAP 查询时间"
 
-#: setup/setup_config3.tpl:207
+#: setup/setup_config3.tpl:219
 msgid "Log LDAP statistics"
 msgstr "Log LDAP 状态"
 
-#: setup/setup_config3.tpl:219
+#: setup/setup_config3.tpl:231
 msgid "Debug level"
 msgstr "Debug 级别"
 
-#: setup/setup_config3.tpl:224 setup/setup_config3.tpl:227
+#: setup/setup_config3.tpl:236 setup/setup_config3.tpl:239
 msgid "Disabled"
 msgstr "禁用"
 
-#: setup/setup_config3.tpl:225 setup/setup_config3.tpl:228
+#: setup/setup_config3.tpl:237 setup/setup_config3.tpl:240
 msgid "Enabled"
 msgstr "启用"
 
@@ -17068,9 +17105,6 @@ msgstr "Schema 检查失败"
 #~ "please check existence and rights of this directory!"
 #~ msgstr ""
 #~ "目录 '%s' 作为 smarty 编译目录无法访问，请检查该目录是否存在以及权限！"
-
-#~ msgid "Display macros  matching"
-#~ msgstr "显示匹配的宏"
 
 #~ msgid ""
 #~ "Optional objectclass '%s' required by plugin '%s' is not present in LDAP "
