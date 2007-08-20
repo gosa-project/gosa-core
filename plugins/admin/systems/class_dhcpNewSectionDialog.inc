@@ -10,7 +10,7 @@ class dhcpNewSectionDialog extends plugin
   /* Mapping array */
   var $types= array();
   var $classtype= "";
-  static $sectionMap= array(  "dhcpService" => array("dhcpSharedNetwork", "dhcpSubnet", "dhcpGroup", "dhcpHost" /*, "dhcpClass"*/),
+  var $sectionMap= array(  "dhcpService" => array("dhcpSharedNetwork", "dhcpSubnet", "dhcpGroup", "dhcpHost" /*, "dhcpClass"*/),
                               #"dhcpClass" => array("dhcpSubClass"),
                               "dhcpSubClass" => array(),
                               "dhcpHost" => array(),
@@ -41,7 +41,7 @@ class dhcpNewSectionDialog extends plugin
     $smarty = get_smarty();
     $display= "";
 
-    $sections= dhcpNewSectionDialog::$sectionMap[$this->classtype];
+    $sections= $this->sectionMap[$this->classtype];
     $t_sections= array();
     foreach ($sections as $section){
       $t_sections[$section]= $this->types[$section]; 

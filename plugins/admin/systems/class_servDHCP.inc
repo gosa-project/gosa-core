@@ -28,6 +28,12 @@ class servdhcp extends plugin
             "dhcpFailOverPeer" => _("Failover peer"),
             "dhcpSharedNetwork" => _("Shared network"));
 
+
+    /* Backport: PHP4 compatibility  */
+    foreach($this->types as $type => $translation){
+	    $this->types[strtolower($type)] = $translation;
+    }
+
     /* Load information about available services */
     $this->reload(); 
     if (!count($this->dhcpSections)){
@@ -48,7 +54,8 @@ class servdhcp extends plugin
     /* Section Creation? */
     if (isset($_POST['create_section']) && isset($_POST['section'])){
       $section= $_POST['section'];
-      if (isset(dhcpNewSectionDialog::$sectionMap[$section])){
+      $tmp = new dhcpNewSectionDialog(NULL);
+      if (isset($tmp->sectionMap[$section])){
         $this->dialog= new $section($this->current_object);
         $this->current_object= "";
       } else {
@@ -237,8 +244,11 @@ class servdhcp extends plugin
       "<input type='image' src='images/edit.png' name='editDhcp_%s' title='"._("Edit DHCP section")."'>";
     $editImg = "<input type='image' src='images/edit.png' name='editDhcp_%s' title='"._("Edit DHCP section")."'>".
       "<input type='image' src='images/edittrash.png' name='delDhcp_%s' title='"._("Remove DHCP section")."'>";
+      	
+    $tmp = new dhcpNewSectionDialog(NULL);
     foreach($this->dhcpSections as $section => $values ){
-      if (count(dhcpNewSectionDialog::$sectionMap[$this->objectType($section)])){
+    	
+      if (count($tmp->sectionMap[$this->objectType($section)])){
         if ($this->objectType($section) == "dhcpService"){
           $DhcpList->AddEntry(array(
               array("string" => $values),
