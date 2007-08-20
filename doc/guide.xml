@@ -1,4 +1,4 @@
-/<?xml version="1.0"?>
+<?xml version="1.0"?>
 <!--
 This xml file specifies which class is documented in which help file.
 
@@ -34,7 +34,7 @@ specified for this class below.
 	<ENTRY NAME="faiHook" 			VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/users" FILE="node32.html" />
 	<ENTRY NAME="faiPartitionTableEntry" 	VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/users" FILE="node12.html" />
 	<ENTRY NAME="faiVariableEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/users" FILE="node45.html" />
-	<ENTRY NAME="faiPartitionTable" 	VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/users" FILE="node12.html" />
+	<ENTRY NAME="faiPartitionTable" 	VALUE="Partitions" PATH="../doc/guide/user/__LANG__/html/users" FILE="node12.html" />
 	<ENTRY NAME="faiProfileEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/users" FILE="node4.html" />
 	<ENTRY NAME="askClassName" 		VALUE="Fai" PATH="" FILE="" />
 	<ENTRY NAME="faiPackageConfiguration" 	VALUE="Fai" PATH="" FILE="" />
