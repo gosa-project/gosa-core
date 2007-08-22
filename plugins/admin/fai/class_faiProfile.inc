@@ -390,7 +390,7 @@ class faiProfile extends plugin
         $dn = 'cn='.$this->cn.",ou=profiles,".$this->release;
         $ldap = $this->config->get_ldap_link();
         $ldap->cat($dn);
-        if($ldap->count()){
+        if($ldap->count() || in_array($this->cn,$this->FAIAllclasses)){
 
           $r =convert_department_dn($this->release);;
           $message[] = sprintf(_("Can't insert a script named '%s' in '%s' there is already a script with the given name."),$this->cn,$r);
@@ -416,8 +416,8 @@ class faiProfile extends plugin
       } else {
         $ldap->search("(&(objectClass=FAIprofile)(cn=".$this->cn.")(!cn=".$this->old_cn."))",array("*"));
       }
-      if($ldap->count()){
-        $message[]=_("There is already a profile with this class name defined.");
+      if($ldap->count() || isset($this->FAIAllclasses[$this->cn])){
+        $message[]=_("There is already a FAI object with this class name defined.");
       }
     }
     return ($message);
