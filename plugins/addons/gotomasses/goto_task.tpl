@@ -173,5 +173,5 @@
 {if !$new}
 	<input type='submit' name='apply_goto_task' value='{t}Apply{/t}'>
 {/if}
-	<input type='submit' name='close_goto_task' value='{t}Abort{/t}'>
+	<input type='submit' name='close_goto_task' value='{t}Cancel{/t}'>
 </p>
