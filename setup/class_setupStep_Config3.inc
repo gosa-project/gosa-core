@@ -53,6 +53,9 @@ class Step_Config3 extends setup_step
               "kioskpath" => "/var/spool/kiosk",
               "kioskpath_active" => FALSE,
 
+              "gotomasses_file"   => "/etc/gosa/gotomasses",
+              "gotomasses_active" => FALSE,
+
               "noprimarygroup"  => FALSE);
 
   var $attributes = array("errorlvl");
@@ -134,6 +137,15 @@ class Step_Config3 extends setup_step
         }
       }else{
         $this->optional['kioskpath_active'] = FALSE;
+      }
+
+      if(isset($_POST['gotomasses_active'])){
+        $this->optional['gotomasses_active'] = TRUE;
+        if(isset($_POST['gotomasses_file'])){
+          $this->optional['gotomasses_file'] = get_post('gotomasses_file');
+        }
+      }else{
+        $this->optional['gotomasses_active'] = FALSE;
       }
 
       if(isset($_POST['auto_network_hook_active'])){

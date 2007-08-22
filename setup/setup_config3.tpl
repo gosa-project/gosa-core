@@ -80,6 +80,24 @@
         </div>
     </div>
 
+    <div class='step4_container'>
+        <div class='step4_name'>
+            {t}Enable system deployment{/t}
+        </div>
+        <div class='step4_value'>
+            {if $optional.gotomasses_active == FALSE}
+                <input type='checkbox' value='1' name='gotomasses_active'
+                    onClick='changeState("gotomasses_file");'>
+                <input size=40 id='gotomasses_file' name='gotomasses_file' 
+					type='text' value='{$optional.gotomasses_file}' disabled>
+            {else}
+                <input type='checkbox' value='1' name='gotomasses_active' checked>
+                <input size=40 id='gotomasses_file' name='gotomasses_file' 
+					type='text' value='{$optional.gotomasses_file}'  >
+            {/if}
+        </div>
+    </div>
+
 
     <div class='step4_container'>
         <div class='step4_name'>
