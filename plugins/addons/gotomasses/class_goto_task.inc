@@ -247,6 +247,14 @@ class goto_task extends plugin
   {
     if(isset($_POST['goto_task_posted'])){
       plugin::save_object();
+      foreach($this->attributes as $attr){
+        if(in_array($attr,array("Initial_Target","Target"))){
+          continue;
+        }
+        if(isset($_POST[$attr])){
+          $this->$attr = get_post($attr);
+        }
+      }
     }
   }  
 
