@@ -25,30 +25,73 @@ class servssh extends plugin
   var $plHeadline= "SSH systems keys";
   var $plDescription= "This plugin store ssh public keys for systems";
 
-  var $sshPublickey = "";
-  var $ignore_account= TRUE;
+  var $sshPublicKey = "";
+  var $ignore_account= FALSE;
 
   /* attribute list for save action */
-  var $attributes= array("sshPublickey");
-  var $objectclasses= array("HostldapPublicKey");
+  var $attributes = array("sshPublicKey");
+  var $objectclasses = array("HostldapPublicKey");
 
   var $uid ="";
+
+  /* Used to remember if this was an account (simply: is this an edited entry) */
+  var $initialy_was_account = false;
 
   function servssh ($config, $dn= NULL, $parent= NULL)
   {
     plugin::plugin ($config, $dn, $parent);
     
-    /* Always is account... */
-    $this->is_account= TRUE;
+    /* Copy needed attributes */
+    foreach($this->attributes as $val) {
+      $name = preg_replace('/_/', '-', $val);
+      if (isset($this->attrs["$name"][0])) {
+        $this->$val = $this->attrs["$name"][0];
+      }
+    }
+
+    $this->is_account            = false;
+    $this->initially_was_account = false;
+
+		if(isset($this->attrs['sshPublicKey'])) {
+        $this->is_account            = true;
+        $this->initially_was_account = true;
+    }
+
+
   }
 
   function execute()
   {
-	/* Call parent execute */
-	plugin::execute();
+		/* Call parent execute */
+		plugin::execute();
 
-    /* Show main page */
+    /* Fill templating stuff 
+     */
     $smarty= get_smarty();
+    $display= "";
+
+    /* Do we need to flip is_account state? 
+     */
+    if (isset($_POST['modify_state'])){
+
+      /* Only change account state if allowed */
+      if($this->is_account && $this->acl == "#all#"){
+        $this->is_account= !$this->is_account;
+        $this->is_modified = true;
+      }elseif(!$this->is_account && chkacl($this->acl,"create") == ""){
+        $this->is_account= !$this->is_account;
+        $this->is_modified = true;
+      }
+    }
+
+    if ($this->is_account){
+      $display= $this->show_header(_("Remove SSH keys"),
+          _("This server has SSH features enabled. You can disable them by clicking below."));
+    } else {
+      $display= $this->show_header(_("Add SSH keys"),
+          _("This server has SSH features disabled. You can enable them by clicking below."));
+      return ($display);
+    }
 
     /* Load attributes */
     foreach($this->attributes as $attr){
@@ -56,38 +99,14 @@ class servssh extends plugin
       $smarty->assign($attr."ACL", chkacl($this->acl, "$attr"));
     }
 
-    $smarty->assign("sstate", "");
-    if ($this->is_account){
-      $smarty->assign("sshState", "checked");
-      $smarty->assign("sstate", "");
-    } else {
-      $smarty->assign("sshState", "");
-      if($_SESSION['js']==1){
-        if($this->acl!="#none#")
-        $smarty->assign("sstate", "disabled");
-      }else{
-        $smarty->assign("sstate", "");
-      }
-    }
 
-    /* Allow account status toogle?  */
-    $smarty->assign("sshACL", "disabled");
-    if(!$this->is_account && chkacl($this->acl,"create") == ""){
-      $smarty->assign("sshACL", "");
-    }elseif($this->is_account && $this->acl == "#all#" ){
-      $smarty->assign("sshACL", "");
-    }
+    $smarty->assign("sshPublicKeyACL",chkacl($this->acl,"sshPublicKey"));
 
-    $changeState = "";
-    foreach($this->attributes as $attr){
-      $smarty->assign($attr."ACL",chkacl($this->acl,$attr));
-      if(chkacl($this->acl,$attr)==""){
-        $changeState .= "changeState('".$attr."');\n";
-      }
-    }
-    $smarty->assign("changeState",$changeState);
-
-    return($smarty->fetch (get_template_path('servssh.tpl', TRUE)));
+    /* Display tempalte 
+     */
+    //$smarty->assign("ZoneList",$ZoneList->DrawList());
+    $display.= $smarty->fetch(get_template_path('servssh.tpl', TRUE));
+    return($display);
 
   }
 
@@ -99,44 +118,63 @@ class servssh extends plugin
     }
 
       plugin::remove_from_parent();
+
       $ldap= $this->config->get_ldap_link();
 
       $ldap->cd($this->dn);
-      @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
-          $this->attributes, "Save");
       $this->cleanup();
-      $ldap->modify ($this->attrs); 
+			
+//			$this->attrs['sshPublicKey']="";
+
+    	$ldap->modify ($this->attrs);
 
       show_ldap_error($ldap->get_error(), _("Removing SSH account failed"));
 
       /* Optionally execute a command after we're done */
-      $this->handle_post_events('remove',array("uid" => $this->uid));
+//      $this->handle_post_events('remove',array("uid" => $this->uid));
   }
 
 
   /* Save data to object */
   function save_object()
   {
-    /* Do we need to flip is_account state? */
-    if (isset($_POST['connectivityTab'])){
+   	plugin::save_object();
+	}
 
-      /* Change state if needed */
-      if(!$this->is_account && isset($_POST["ssh"]) && chkacl($this->acl,"create") == ""){
-        $this->is_account = true;
-      }elseif($this->is_account && !isset($_POST["ssh"]) && $this->acl == "#all#"){
-        $this->is_account = false;
+  /* Save to LDAP */
+  function save()
+  {
+
+    plugin::save();
+
+
+    foreach($this->attributes as $attr){
+      if(chkacl($this->acl,$attr)!=""){
+        unset($this->attrs[$attr]);
       }
     }
 
-    plugin::save_object();
-    
-    #FIXME seams to be unused code !
-    #if (isset($_POST["sshStatus"])){
-    #  $this->sshStatus = "disabled";
-    #} else {
-    #  $this->sshStatus = "enabled";
-    #}
+
+      /* Write back to ldap */
+      $ldap= $this->config->get_ldap_link();
+      $ldap->cd($this->dn);
+      $this->cleanup();
+      $ldap->modify ($this->attrs); 
+
+      show_ldap_error($ldap->get_error(), _("Saving SSH key failed"));
+
+      /* Optionally execute a command after we're done */
+      if ($this->initially_was_account == $this->is_account){
+        if ($this->is_modified){
+          $this->handle_post_events("modify",array("uid" => $this->uid));
+        }
+      } else {
+        $this->handle_post_events("add",array("uid" => $this->uid));
+      }
   }
+
+}
+
 
   /* Check values */
   function check()
@@ -154,37 +192,6 @@ class servssh extends plugin
     return $message;
   }
 
-  /* Save to LDAP */
-  function save()
-  {
-
-      plugin::save();
-
-    foreach($this->attributes as $attr){
-      if(chkacl($this->acl,$attr)!=""){
-        unset($this->attrs[$attr]);
-      }
-    }
-
-      /* Write back to ldap */
-      $ldap= $this->config->get_ldap_link();
-      $ldap->cd($this->dn);
-      $this->cleanup();
-      $ldap->modify ($this->attrs); 
-
-      show_ldap_error($ldap->get_error(), _("Saving SSH account failed"));
-
-      /* Optionally execute a command after we're done */
-      if ($this->initially_was_account == $this->is_account){
-        if ($this->is_modified){
-          $this->handle_post_events("modify",array("uid" => $this->uid));
-        }
-      } else {
-        $this->handle_post_events("add",array("uid" => $this->uid));
-      }
-  }
-
-}
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
