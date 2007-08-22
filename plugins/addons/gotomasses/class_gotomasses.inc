@@ -21,11 +21,16 @@ class gotomasses extends plugin
 
   function gotomasses($config, $dn= NULL)
   {
-    /* Define source file */
-    $this->data_file = CONFIG_DIR."/gotomasses_machines";
-  
     /* Include config object */
     $this->config= $config;
+
+    /* Define source file */
+    $this->data_file = CONFIG_DIR."/gotomasses_machines";
+    $file = search_config($this->config->data['MENU'], "gotomasses", "STORAGE_FILE");
+    if(!empty($file)){
+      $this->data_file = $file;
+    }
+  
     $this->load_gotomasses_data();
   }
 
