@@ -234,10 +234,10 @@ class goto_task extends plugin
       }
     }
     if(count($this->Target) == 0 && $this->Action != "initial_install"){
-      $message[] = sprintf(_("You must specify at least one traget"));
+      $message[] = sprintf(_("You must specify at least one target"));
     }
     if(count($this->Initial_Target) == 0 && $this->Action == "initial_install"){
-      $message[] = sprintf(_("You must specify at least one traget"));
+      $message[] = sprintf(_("You must specify at least one target"));
     }
     return($message);
   }

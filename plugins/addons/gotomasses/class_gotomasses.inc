@@ -217,7 +217,7 @@ class gotomasses extends plugin
     foreach($this->tasks as $key => $task){
       $action = "<input type='image' src='images/edit.png' name='edit_task_".$key."' class='center' alt='"._("Edit")."'>";
       if(!preg_match("/disable/i",chkacl($this->acl,"remove"))){
-        $action.= "<input type='image' src='images/edittrash.png' name='remove_task_".$key."' class='center' alt='"._("Reomve")."'>";
+        $action.= "<input type='image' src='images/edittrash.png' name='remove_task_".$key."' class='center' alt='"._("Remove")."'>";
       }
       /* Create each field */
       $field0 = array("string" => "<input type='checkbox' id='item_selected_".$key."' name='item_selected_".$key."'>" ,

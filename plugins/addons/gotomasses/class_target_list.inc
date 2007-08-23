@@ -45,7 +45,7 @@ class target_list extends MultiSelectWindow
     $this->AddHeader(array("string" => _("Object name"), "attach" => "style=''"));
 
     /* Text ,Value, Name, Is selected */
-    $this->AddCheckBox("ogroups",       _("Select to see object groups"),  _("Show object object groups"), true);
+    $this->AddCheckBox("ogroups",       _("Select to see object groups"),  _("Show object groups"), true);
     $this->AddCheckBox("servers",       _("Select to see servers")  ,   _("Show servers"), true);
     $this->AddCheckBox("workstations",  _("Select to see workstations"),_("Show workstations"), true);
 
