@@ -37,6 +37,21 @@
      <td>{t}Quota size{/t}</td>
      <td><input id="gosaMailQuota" name="gosaMailQuota" size="6" align=middle maxlength="30" {$gosaMailQuotaACL} value="{$gosaMailQuota}"> MB</td>
     </tr>
+	{if $kolab}
+	<tr>
+		<td>
+			{t}Folder type{/t}
+		</td>
+		<td>
+			<select name="kolabFolderType_Type">
+				{html_options options=$kolabFolderType_Types selected=$kolabFolderType_Type}
+			</select>
+			<select name="kolabFolderType_SubType">
+				{html_options options=$kolabFolderType_SubTypes selected=$kolabFolderType_SubType}
+			</select>
+		</td>
+	</tr>
+	{/if}
    </table>
      
   </td>

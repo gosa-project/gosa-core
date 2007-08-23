@@ -54,6 +54,8 @@ class mailgroup extends plugin
 
   var $objectclasses= array("gosaMailAccount");
 
+  var $kolabFolderType_SubType = "";
+  var $kolabFolderType_Type = "";
 
   function mailgroup ($config, $dn= NULL, $parent= NULL)
   {
@@ -90,6 +92,14 @@ class mailgroup extends plugin
       $this->uid= $this->attrs['cn'][0];
     }
 
+    /* Get folder type */
+    if(isset($this->config->current['MAILMETHOD'])&&preg_match("/olab/i",$this->config->current['MAILMETHOD'])){
+      if(isset($this->attrs['kolabFolderType'])){
+        $tmp = split("\.",$this->attrs['kolabFolderType'][0]);
+        $this->kolabFolderType_Type = $tmp[0];
+        $this->kolabFolderType_SubType = $tmp[1];
+      }
+    }
 
     /* If this ins't new mailgroup, read all required data from ldap
      */
@@ -596,6 +606,22 @@ class mailgroup extends plugin
       $smarty->assign("quotadefined", "false");
     }
 
+    if(isset($this->config->current['MAILMETHOD'])&&preg_match("/olab/i",$this->config->current['MAILMETHOD'])){
+      $smarty->assign("kolab", TRUE);
+      $smarty->assign("kolabFolderType_Types",    array (   ''      => _('Unspecified'),  'mail' => _('Mails'),
+                                                            'task'  => _('Tasks') ,       'journal' => _('Journals'),
+                                                            'event' => _('Events'),       'contact' => _('Contacts'), 
+                                                            'note'  => _('Notes')));
+      $smarty->assign("kolabFolderType_SubTypes", array(    ''          => _('Unspecified'),  'inbox'     => _("Inbox")   , 
+                                                            'drafts'    => _("Drafts"),       'sentitems' => _("Sent items"),
+                                                            'junkemail' => _("Junk mail")));
+      $smarty->assign("kolabFolderType_Type",     $this->kolabFolderType_Type);
+      $smarty->assign("kolabFolderType_SubType",  $this->kolabFolderType_SubType);
+    }else{
+      $smarty->assign("kolab", FALSE);
+    }
+
+
     $display.= $smarty->fetch (get_template_path('mail.tpl', TRUE));
     return ($display);
   }
@@ -650,6 +676,14 @@ class mailgroup extends plugin
   function save_object()
   {
 
+    /* Add special kolab attributes */    
+    if(isset($this->config->current['MAILMETHOD'])&&preg_match("/olab/i",$this->config->current['MAILMETHOD'])){
+      if(isset($_POST['kolabFolderType_Type'])){
+        $this->kolabFolderType_Type = get_post("kolabFolderType_Type");
+        $this->kolabFolderType_SubType = get_post("kolabFolderType_SubType");
+      }
+    }
+  
     /* Check if user wants to remove the shared folder from imap too */
     if($this->initially_was_account && !$this->is_account){
       if(isset($_POST['remove_folder_from_imap'])){
@@ -753,6 +787,12 @@ I: Only insider delivery */
         }else{
           $this->attrs['acl'][]= "$user $acl";
         }
+      }
+   
+      if(!empty($this->kolabFolderType_Type)){ 
+        $this->attrs['kolabFolderType'] = $this->kolabFolderType_Type.".".$this->kolabFolderType_SubType;
+      }else{
+        $this->attrs['kolabFolderType'] = array();
       }
     }else{
       /* Save acl's */
