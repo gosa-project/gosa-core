@@ -3,8 +3,10 @@
 class servdhcp extends plugin
 {
   /* attribute list for save action */
-  var $attributes= array();
-  var $objectclasses= array();
+  var $attributes= array("dhcpServiceDN");
+  var $objectclasses= array("dhcpServer");
+
+  var $dhcpServiceDN= "";
 
   /* Section storage */
   var $dhcpSections= array();
@@ -279,6 +281,12 @@ class servdhcp extends plugin
 
   function remove_from_parent()
   {
+    /* Cancel if there's nothing to do here */
+    if (!$this->initially_was_account){
+      return;
+    }
+
+    /* Remove subtrees */
     $ldap= $this->config->get_ldap_link();
     foreach ($this->dhcpObjectCache as $dn => $content){
       if ($this->objectType($dn) == 'dhcpService'){
@@ -286,6 +294,22 @@ class servdhcp extends plugin
         show_ldap_error($ldap->get_error(), _("Removing DHCP entries failed"));
       }
     }
+
+    /* Remove from self */
+    $ldap= $this->config->get_ldap_link();
+
+    /* Remove and write to LDAP */
+    plugin::remove_from_parent();
+    
+    @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__, $this->attributes, "Save");
+    $ldap->cd($this->dn);
+    $this->cleanup();
+    $ldap->modify ($this->attrs);
+
+    show_ldap_error($ldap->get_error(), _("Removing DHCP entries failed"));
+
+    /* Optionally execute a command after we're done */
+    $this->handle_post_events("remove");
   }
 
 
@@ -361,6 +385,27 @@ class servdhcp extends plugin
         }
       }
     }
+
+    /* Self modify and place service dn entry */
+    $this->dhcpServiceDN= $this->serviceDN;
+    plugin::save();
+    
+    /* Save data to LDAP */
+    $ldap->cd($this->dn);
+    $this->cleanup();
+    $ldap->modify ($this->attrs);
+
+    show_ldap_error($ldap->get_error(), _("Saving DHCP service failed"));
+
+    /* Optionally execute a command after we're done */
+    if ($this->initially_was_account == $this->is_account){
+      if ($this->is_modified){
+        $this->handle_post_events("modify");
+      }
+    } else {
+      $this->handle_post_events("add");
+    }
+ 
   }
 
 
