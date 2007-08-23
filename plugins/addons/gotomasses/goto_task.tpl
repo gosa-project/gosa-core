@@ -57,7 +57,7 @@
 	</tr>
 	<tr>
 		<td colspan="2">
-            <table  summary="" style="border:1px solid #B0B0B0;width:100%; " id="t_test_scrolltable" cellspacing=0 cellpadding=0>
+            <table  summary="" style="border:1px solid #B0B0B0;width:100%; " id="t_scrolltable_onlywidth" cellspacing=0 cellpadding=0>
                 <tr>
                     <td>
 						{$Target_list}	

@@ -315,7 +315,7 @@ function adjust_width(e) {
 		var width= parseInt(window.innerWidth);
 
 		// Resize the body cells
-		var diff= width-div_width-470;
+		var diff= width-div_width-200;
 		
 		// window has been upscaled
 		if(div_width+diff>=600) {
