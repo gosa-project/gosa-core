@@ -14,12 +14,12 @@ class servkolab extends plugin {
   var $kolabFreeBusyFuture              = "1";
   var $k                                = "kolab";
   var $cyrus_imap                       = "TRUE";
-  var $cyrus_pop3                       = "TRUE";
+  var $cyrus_pop3                       = "FALSE";
   var $cyrus_imaps                      = "TRUE";
   var $cyrus_pop3s                      = "TRUE";
   var $cyrus_sieve                      = "TRUE";
   var $apache_allow_unauthenticated_fb  = "TRUE";
-  var $proftpd_ftp                      = "TRUE";
+  var $proftpd_ftp                      = "FALSE";
   var $apache_http                      = "TRUE";
   var $kolabHost                        = array();
   var $orig_cn                          = "";
