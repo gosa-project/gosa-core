@@ -43,12 +43,15 @@
 			{t}Folder type{/t}
 		</td>
 		<td>
-			<select name="kolabFolderType_Type">
+			<select name="kolabFolderType_Type" onChange="document.mainform.submit();">
 				{html_options options=$kolabFolderType_Types selected=$kolabFolderType_Type}
 			</select>
-			<select name="kolabFolderType_SubType">
+			<select name="kolabFolderType_SubType" onChange="document.mainform.submit();">
 				{html_options options=$kolabFolderType_SubTypes selected=$kolabFolderType_SubType}
 			</select>
+			{if !$JS}
+				<input type='image' src='images/list_reload.png' class='center' alt='{t}Reload{/t}'>
+			{/if}
 		</td>
 	</tr>
 	{/if}

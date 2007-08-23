@@ -607,14 +607,21 @@ class mailgroup extends plugin
     }
 
     if(isset($this->config->current['MAILMETHOD'])&&preg_match("/olab/i",$this->config->current['MAILMETHOD'])){
+
       $smarty->assign("kolab", TRUE);
+      $smarty->assign("JS",$_SESSION['js']);
       $smarty->assign("kolabFolderType_Types",    array (   ''      => _('Unspecified'),  'mail' => _('Mails'),
                                                             'task'  => _('Tasks') ,       'journal' => _('Journals'),
                                                             'event' => _('Events'),       'contact' => _('Contacts'), 
                                                             'note'  => _('Notes')));
-      $smarty->assign("kolabFolderType_SubTypes", array(    ''          => _('Unspecified'),  'inbox'     => _("Inbox")   , 
-                                                            'drafts'    => _("Drafts"),       'sentitems' => _("Sent items"),
-                                                            'junkemail' => _("Junk mail")));
+      if($this->kolabFolderType_Type == "mail"){
+        $smarty->assign("kolabFolderType_SubTypes", array(    
+              ''          => _('Unspecified'),  'inbox'     => _("Inbox")   , 
+              'drafts'    => _("Drafts"),       'sentitems' => _("Sent items"),
+              'junkemail' => _("Junk mail")));
+      }else{
+        $smarty->assign("kolabFolderType_SubTypes", array(  'default' => _("Default")));
+      }
       $smarty->assign("kolabFolderType_Type",     $this->kolabFolderType_Type);
       $smarty->assign("kolabFolderType_SubType",  $this->kolabFolderType_SubType);
     }else{
