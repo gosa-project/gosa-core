@@ -124,11 +124,9 @@ class servssh extends plugin
       $ldap->cd($this->dn);
       $this->cleanup();
 			
-//			$this->attrs['sshPublicKey']="";
-
     	$ldap->modify ($this->attrs);
 
-      show_ldap_error($ldap->get_error(), _("Removing SSH account failed"));
+      show_ldap_error($ldap->get_error(), _("Removing SSH key failed"));
 
       /* Optionally execute a command after we're done */
 //      $this->handle_post_events('remove',array("uid" => $this->uid));
@@ -140,6 +138,20 @@ class servssh extends plugin
   {
    	plugin::save_object();
 	}
+
+  /* Check values */
+  function check()
+  {
+    /* Call common method to give check the hook */
+    $message = plugin::check();
+
+    /* Check for empty or not */
+		if(empty($this->sshPublicKey)){
+        $message[]= _("Value specified as 'SSH Key' is not valid.");
+      }
+
+    return($message);
+  }
 
   /* Save to LDAP */
   function save()
@@ -174,24 +186,6 @@ class servssh extends plugin
   }
 
 }
-
-
-  /* Check values */
-  function check()
-  {
-    /* Call common method to give check the hook */
-    $message= plugin::check();
-
-    /* Check for positive integer values */
-    /* if ($this->is_account){
-      if ((!is_id($this->sshPublickey))&&(chkacl($this->acl,"sshPublickey")=="")){
-        $message[]= _("Value specified as 'SSH Key' is not valid.");
-      }
-    }*/
-
-    return $message;
-  }
-
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
