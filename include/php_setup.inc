@@ -22,6 +22,10 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
 {
   global $error_collector,$error_collector_mailto,$config;
 
+  if(function_exists("gosa_log")){
+    gosa_log($errno." ".$errstr." ".$errfile." ".$errline);
+  }
+
   /* Return if error reporting is set to zero */
   if (error_reporting() == 0){
     return;
@@ -67,6 +71,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
   if ($error_collector == ""){
 
     /* Mailto body header */ 
+    if(function_exists("prepare4mailbody")){
     $error_collector_mailto .=prepare4mailbody(
                                 "Oups. Seems like you've catched some kind of bug inside GOsa/PHP. You may want to help ".
                                 "us to improve the software stability. If so, please provide some more information below.".
@@ -88,6 +93,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
                                 "\nLDAP Module Version: ".get_module_setting('ldap','RCS Version').
                                 "\n\n".
                                 "*** PHP error information ***\n\n");
+      }
 
     if (isset($_SESSION['js']) && $_SESSION['js']==FALSE){
       $error_collector= "<div>";
