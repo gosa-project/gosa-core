@@ -14,6 +14,13 @@ class goto_task extends plugin
   var $Month    = "*";
   var $Weekday  = "*";
   var $Action   = "install";
+
+  var $Zone     = "";
+  var $Section  = "";
+
+  var $Zones    = array();
+  var $Sections = array();
+
   var $Comment  = "";
   var $OGroup   = "keep_current";
   var $OGroups  = array();
@@ -23,6 +30,8 @@ class goto_task extends plugin
   var $new      = FALSE;
   var $attributes     = array("OGroup","Minute","Hour","Day","Month","Weekday","Action","Comment","Target","Initial_Target");
 
+  var $configure_dhcp = FALSE;
+  var $configure_dns = FALSE;
 
   function goto_task($config,$parent,$data = array())
   {
@@ -33,7 +42,6 @@ class goto_task extends plugin
     /* Intialize plugin */
     $this->config = $config;
     if(count($data)){
-    
       $tmp = $this->get_array_values();
       foreach($this->attributes as $attr){
         if(!isset($data[$attr])){
@@ -45,6 +53,13 @@ class goto_task extends plugin
     }else{
       $this->new = TRUE;
     }
+
+    /* Set dns and dhcp attributes */
+    foreach(getAvailableZones($this->config) as $zone){
+      $name = preg_replace("#^[^/]+/#","",$zone);
+      $this->Zones[$name] = $zone; 
+    }
+    $this->Sections = $this->get_dhcp_sections();
 
     /* Create ogroup select list */
     $this->OGroups = array("\"\""     => "["._("Keep current")."]");
@@ -89,14 +104,23 @@ class goto_task extends plugin
         $MAC = $_POST['task_MAC'];
         $NAME= "";
         $IP  = "";
+        $DNS   = "";
+        $DHCP  = "";
         if(isset($_POST['task_Name'])){
           $NAME = $_POST['task_Name'];
         }
         if(isset($_POST['task_IP']) && is_ip($_POST['task_IP'])){
           $IP = $_POST['task_IP'];
         }
+        if(isset($_POST['configure_dns']) && isset($_POST['Zone']) && isset($this->Zones[$_POST['Zone']])){
+          $DNS = $_POST['Zone'];
+        }
+        if(isset($_POST['configure_dhcp']) && isset($_POST['Section']) && isset($this->Sections[$_POST['Section']])){
+          $DHCP = $_POST['Section'];
+        }
         if(is_mac($MAC)){
-          $this->Initial_Target[] = array("MAC"=>$MAC,"IP"=>$IP,"NAME"=>$NAME);
+          $this->Initial_Target[] = array("MAC"=>$MAC,"IP"=>$IP,"NAME"=>$NAME,
+                                          "ZONE" => $DNS , "SECTION" => $DHCP);
         }
       }
     }
@@ -111,18 +135,24 @@ class goto_task extends plugin
           $line = fgets($fp,512);
           $tmp = preg_split("/(,|;)/",$line);
 
-          $MAC = $IP = $NAME = "";
+          $MAC = $IP = $NAME = $ZONE = $SECTION ="";
           if(isset($tmp[0])){
-            $MAC = $tmp[0];
+            $MAC = trim($tmp[0]);
           }
           if(isset($tmp[1])){
-            $IP = $tmp[1];
+            $IP = trim($tmp[1]);
           }
           if(isset($tmp[2])){
-            $NAME = $tmp[2];
+            $NAME = trim($tmp[2]);
+          }
+          if(isset($tmp[3])){
+            $ZONE = trim($tmp[3]);
+          }
+          if(isset($tmp[4])){
+            $SECTION = trim($tmp[4]);
           }
           if(is_mac($MAC)){
-            $this->Initial_Target[] = array("MAC"=>$MAC,"IP"=>$IP,"NAME"=>$NAME);
+            $this->Initial_Target[] = array("MAC"=>$MAC,"IP"=>$IP,"NAME"=>$NAME,"ZONE"=> $ZONE,"SECTION"=>$SECTION);
           }
         }
       }
@@ -177,15 +207,31 @@ class goto_task extends plugin
     /* Add entries to divlist */
     if($this->Action == "initial_install"){
       $divlist->SetHeader(array(
-                            array("string" => _("Target systems")),
+                            array("string" => _("Target systems") ,"attach" => "style='width:120px;'"),
                             array("string" => _("IP")      , "attach" => "style='width:90px;'"),
+                            array("string" => _("DNS")     ),
+                            array("string" => _("DHCP")    , "attach" => "style='width:120px;'"),
                             array("string" => _("Name")    , "attach" => "style='width:150px;'"),
                             array("string" => _("Actions") , "attach" => "style='width:44px;border-right:0px;text-align:right;'")));
       foreach($this->Initial_Target as $key => $target){
-        $field1 = array("string" => $target['MAC']  );
+        $field1 = array("string" => $target['MAC']  ,"attach" => "style='width:120px;'");
         $field2 = array("string" => $target['IP']   ,"attach" => "style='width:90px;'");
-        $field3 = array("string" => $target['NAME'] ,"attach" => "style='width:150px;'");
-        $divlist->AddEntry(array($field1,$field2,$field3,preg_replace("/%KEY%/",$key,$field_del)));
+        if(isset($this->Zones[$target['ZONE']])){
+          $field2a = array("string" =>"<div style='overflow:hidden'><nobr>". 
+                                      $this->Zones[$target['ZONE']]."</nobr></div>");
+        }else{
+          $field2a = array("string" => "<div style='overflow:hidden'><nobr>".
+                                      $target['ZONE']."</nobr></div>");
+        }
+        if(isset($this->Sections[$target['SECTION']])){
+          $field2b = array("string" => "<div style='overflow:hidden'><nobr>".
+                                      $this->Sections[$target['SECTION']]."</nobr></div>","attach" => "style='width:120px;'");
+        }else{
+          $field2b = array("string" => "<div style='overflow:hidden'><nobr>".
+                                      $target['SECTION']."</nobr></div>"   ,"attach" => "style='width:120px;'");
+        }
+        $field3 = array("string" =>  $target['NAME'] ,"attach" => "style='width:150px;'");
+        $divlist->AddEntry(array($field1,$field2,$field2a,$field2b,$field3,preg_replace("/%KEY%/",$key,$field_del)));
       } 
     }else{
       $divlist->SetHeader(array(
@@ -203,6 +249,15 @@ class goto_task extends plugin
       $smarty->assign($attr,$this->$attr);
     }
 
+    $smarty->assign("Zones", $this->Zones);
+    $smarty->assign("Sections", $this->Sections);
+
+    $smarty->assign("Zone", $this->Zone);
+    $smarty->assign("Section", $this->Section);
+
+    $smarty->assign("configure_dhcp", $this->configure_dhcp);
+    $smarty->assign("configure_dns", $this->configure_dns);
+
     $tmp = $this->get_array_values();
     $smarty->assign("JS"      , $_SESSION['js']);
     $smarty->assign("Minutes" , $tmp['Minute']);
@@ -215,6 +270,62 @@ class goto_task extends plugin
     $smarty->assign("Target_list" , $divlist->DrawList());
     $smarty->assign("new"      , $this->new);
     return ($smarty->fetch (get_template_path('goto_task.tpl', TRUE)));
+  }
+
+
+   function create_tree($arr,$base,$current = "")
+  {
+    $ret = array();
+    foreach($arr as $r => $name){
+      $base_part = str_replace($base,"",$r);
+      if(preg_match("/^[a-z]*=".normalizePreg($name)."(|,)$/i",$base_part)){
+        $ret[$r] = $current.$name;
+        $tmp = $this->create_tree($arr,$r,$current.".&nbsp;");
+        foreach($tmp as $sub_key => $sub_name){
+          $ret[$sub_key] = $sub_name;
+        }
+      }
+    }
+    return($ret);
+  }
+
+
+
+  function get_dhcp_sections()
+  {
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(objectClass=dhcpService)",array("dhcpPrimaryDN"));
+
+    $tmp   = array();
+    $tmp2  = array();
+
+    $dhcp_dns = array();
+    while($attr = $ldap->fetch()){
+      $dhcp_dns[$attr['dn']] = $attr['dhcpPrimaryDN'][0];
+    }
+
+    foreach($dhcp_dns as $key => $pri_dns){
+      $ldap->cat($pri_dns,array("cn"));
+      $tmp = $ldap->fetch();
+      $dhcp_dns[$key] = $tmp['cn'][0];
+    }
+
+    foreach($dhcp_dns as $dn => $cn){
+      $ldap->cd($dn);
+      $ldap->search("(|(objectClass=dhcpService)(objectClass=dhcpGroup)".
+                    "(objectClass=dhcpSubnet)(objectClass=dhcpSharedNetwork))",array("cn"));
+      $tmp = array();
+      while($attr = $ldap->fetch()){
+        $tmp[$attr['dn']] = $attr['cn'][0];
+      }
+      $tmp2 = $this->create_tree($tmp,preg_replace("/^[^,]+,/i","",$dn),"(".$cn.")&nbsp;");
+    }
+    $ret = array();
+    foreach($tmp2 as $key => $label){
+      $ret[$tmp[$key]] = $label;
+    }
+    return($ret);
   }
 
   
@@ -246,7 +357,25 @@ class goto_task extends plugin
   function save_object()
   {
     if(isset($_POST['goto_task_posted'])){
-      plugin::save_object();
+
+      if(isset($_POST['configure_dns'])){
+        $this->configure_dns = TRUE;
+        if(isset($_POST['Zone'])){
+          $this->Zone = get_post("Zone");
+        }
+      }else{
+        $this->configure_dns = FALSE;
+      }
+
+      if(isset($_POST['configure_dhcp'])){
+        $this->configure_dhcp = TRUE;
+        if(isset($_POST['Section'])){
+          $this->Section = get_post("Section");
+        }
+      }else{
+        $this->configure_dhcp = FALSE;
+      }
+
       foreach($this->attributes as $attr){
         if(in_array($attr,array("Initial_Target","Target"))){
           continue;

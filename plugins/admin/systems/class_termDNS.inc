@@ -245,10 +245,6 @@ class termDNS extends plugin
     $smarty->assign("dhcpParentNodes",$this->dhcpParentNodes);
 
 
-
-
-
-
     /* There is no dns available 
      */
     if($this->DNSenabled == false){

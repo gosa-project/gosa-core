@@ -19,6 +19,7 @@ class gotomasses extends plugin
   var $dialog = FALSE;
   var $ids_to_remove = array();
 
+
   function gotomasses($config, $dn= NULL)
   {
     /* Include config object */
@@ -331,7 +332,12 @@ class gotomasses extends plugin
           $tmp2 = split(";",$parts[7]);
           foreach($tmp2 as $target){
             $tmp = split(",",$target);
-            $entry['Initial_Target'][]  = array("MAC" => $tmp[0],"IP"=>$tmp[1],"NAME" => $tmp[2]);
+            $entry['Initial_Target'][]  = array(
+                          "MAC"     => $tmp[0],
+                          "IP"      => $tmp[1],
+                          "NAME"    => $tmp[2],
+                          "ZONE"    => $tmp[3],
+                          "SECTION" => $tmp[4]);
           }
           $entry['Target']  = array();
         }else{
@@ -364,7 +370,8 @@ class gotomasses extends plugin
       $str .= str_pad($task['OGroup'] ,5," ")." ";
       if($task['Action'] == "initial_install"){
         foreach($task['Initial_Target'] as $target){
-          $str .= trim($target['MAC']).",".trim($target['IP']).",".trim($target['NAME']).";";
+          $str .= trim($target['MAC']).",".trim($target['IP']).",".trim($target['NAME']).",".
+                  trim($target['ZONE']).",".trim($target['SECTION']).";";
         }
       }else{
         foreach($task['Target'] as $target){
