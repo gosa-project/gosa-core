@@ -316,7 +316,7 @@ class gotomasses extends plugin
       $row    = preg_replace('/  */umi'," ",$row);
       $parts  = split(" ",$row);
 
-      if(count($parts) != 8){
+      if(count($parts) != 10){
         print_red(_("Entry broken, skipped."));
       }else{
 
@@ -328,16 +328,16 @@ class gotomasses extends plugin
         $entry['Weekday'] = $parts[4];  
         $entry['Action']  = $parts[5];  
         $entry['OGroup']  = $parts[6];  
+        $entry['Zone']    = $parts[7];  
+        $entry['Section'] = $parts[8];  
         if($entry['Action'] == "initial_install"){
-          $tmp2 = split(";",$parts[7]);
+          $tmp2 = split(";",$parts[9]);
           foreach($tmp2 as $target){
             $tmp = split(",",$target);
             $entry['Initial_Target'][]  = array(
                           "MAC"     => $tmp[0],
                           "IP"      => $tmp[1],
-                          "NAME"    => $tmp[2],
-                          "ZONE"    => $tmp[3],
-                          "SECTION" => $tmp[4]);
+                          "NAME"    => $tmp[2]);
           }
           $entry['Target']  = array();
         }else{
@@ -368,10 +368,11 @@ class gotomasses extends plugin
       }
       $str .= str_pad($task['Action'] ,5," ")." ";
       $str .= str_pad($task['OGroup'] ,5," ")." ";
+      $str .= str_pad($task['Zone']   ,5," ")." ";
+      $str .= str_pad($task['Section'],5," ")." ";
       if($task['Action'] == "initial_install"){
         foreach($task['Initial_Target'] as $target){
-          $str .= trim($target['MAC']).",".trim($target['IP']).",".trim($target['NAME']).",".
-                  trim($target['ZONE']).",".trim($target['SECTION']).";";
+          $str .= trim($target['MAC']).",".trim($target['IP']).",".trim($target['NAME']).";";
         }
       }else{
         foreach($task['Target'] as $target){

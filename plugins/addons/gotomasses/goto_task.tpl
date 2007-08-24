@@ -25,6 +25,28 @@
 						</select>
 					</td>
 				</tr>
+				<tr>
+					<td><input class='center' {if $configure_dns} checked {/if} id='configure_dns'
+						type='checkbox' name='configure_dns' value='1' onClick="changeState('Zone');">
+						<label for='configure_dns'>{t}Configure DNS{/t}</label>
+					</td>
+					<td>
+						<select name="Zone" id="Zone" {if !$configure_dns} disabled {/if}>
+							{html_options options=$Zones selected=$Zone}
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><input class='center' {if $configure_dhcp} checked {/if} id='configure_dhcp' 
+							type='checkbox' name='configure_dhcp' value='1' onClick="changeState('Section');">
+						<label for='configure_dhcp'>{t}Configure DHCP{/t}</label>
+					</td>
+					<td>
+						<select name="Section" id="Section" {if !$configure_dhcp} disabled {/if}>
+							{html_options options=$Sections selected=$Section}
+						</select>
+					</td>
+				</tr>
 			</table>
 		</td>
 		<td style='vertical-align:top'>
@@ -85,28 +107,6 @@
 					<td>{t}IP address{/t}
 					</td>
 					<td><input type="text" name="task_IP" value="">	
-					</td>
-				</tr>
-				<tr>
-					<td><input class='center' {if $configure_dns} checked {/if} id='configure_dns'
-						type='checkbox' name='configure_dns' value='1' >
-						<label for='configure_dns'>{t}Configure DNS{/t}</label>
-					</td>
-					<td>
-						<select name="Zone">
-							{html_options options=$Zones selected=$Zone}
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td><input class='center' {if $configure_dhcp} checked {/if} id='configure_dhcp' 
-							type='checkbox' name='configure_dhcp' value='1' >
-						<label for='configure_dhcp'>{t}Configure DHCP{/t}</label>
-					</td>
-					<td>
-						<select name="Section">
-							{html_options options=$Sections selected=$Section}
-						</select>
 						<input type="submit" name="add_target" value="{t}Add{/t}">
 					</td>
 				</tr>

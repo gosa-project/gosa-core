@@ -28,7 +28,7 @@ class goto_task extends plugin
   var $Initial_Target   = array();
   var $Actions  = array();
   var $new      = FALSE;
-  var $attributes     = array("OGroup","Minute","Hour","Day","Month","Weekday","Action","Comment","Target","Initial_Target");
+  var $attributes     = array("Zone","Section","OGroup","Minute","Hour","Day","Month","Weekday","Action","Comment","Target","Initial_Target");
 
   var $configure_dhcp = FALSE;
   var $configure_dns = FALSE;
@@ -52,6 +52,13 @@ class goto_task extends plugin
       }
     }else{
       $this->new = TRUE;
+    }
+
+    if(!empty($this->Zone) && !preg_match("/^\"\"$/",$this->Zone)){
+      $this->configure_dns = TRUE;
+    }
+    if(!empty($this->Section) && !preg_match("/^\"\"$/",$this->Section)){
+      $this->configure_dhcp = TRUE;
     }
 
     /* Set dns and dhcp attributes */
@@ -119,8 +126,7 @@ class goto_task extends plugin
           $DHCP = $_POST['Section'];
         }
         if(is_mac($MAC)){
-          $this->Initial_Target[] = array("MAC"=>$MAC,"IP"=>$IP,"NAME"=>$NAME,
-                                          "ZONE" => $DNS , "SECTION" => $DHCP);
+          $this->Initial_Target[] = array("MAC"=>$MAC,"IP"=>$IP,"NAME"=>$NAME);
         }
       }
     }
@@ -135,7 +141,7 @@ class goto_task extends plugin
           $line = fgets($fp,512);
           $tmp = preg_split("/(,|;)/",$line);
 
-          $MAC = $IP = $NAME = $ZONE = $SECTION ="";
+          $MAC = $IP = $NAME; 
           if(isset($tmp[0])){
             $MAC = trim($tmp[0]);
           }
@@ -145,14 +151,8 @@ class goto_task extends plugin
           if(isset($tmp[2])){
             $NAME = trim($tmp[2]);
           }
-          if(isset($tmp[3])){
-            $ZONE = trim($tmp[3]);
-          }
-          if(isset($tmp[4])){
-            $SECTION = trim($tmp[4]);
-          }
           if(is_mac($MAC)){
-            $this->Initial_Target[] = array("MAC"=>$MAC,"IP"=>$IP,"NAME"=>$NAME,"ZONE"=> $ZONE,"SECTION"=>$SECTION);
+            $this->Initial_Target[] = array("MAC"=>$MAC,"IP"=>$IP,"NAME"=>$NAME);
           }
         }
       }
@@ -209,29 +209,13 @@ class goto_task extends plugin
       $divlist->SetHeader(array(
                             array("string" => _("Target systems") ,"attach" => "style='width:120px;'"),
                             array("string" => _("IP")      , "attach" => "style='width:90px;'"),
-                            array("string" => _("DNS")     ),
-                            array("string" => _("DHCP")    , "attach" => "style='width:120px;'"),
                             array("string" => _("Name")    , "attach" => "style='width:150px;'"),
                             array("string" => _("Actions") , "attach" => "style='width:44px;border-right:0px;text-align:right;'")));
       foreach($this->Initial_Target as $key => $target){
         $field1 = array("string" => $target['MAC']  ,"attach" => "style='width:120px;'");
         $field2 = array("string" => $target['IP']   ,"attach" => "style='width:90px;'");
-        if(isset($this->Zones[$target['ZONE']])){
-          $field2a = array("string" =>"<div style='overflow:hidden'><nobr>". 
-                                      $this->Zones[$target['ZONE']]."</nobr></div>");
-        }else{
-          $field2a = array("string" => "<div style='overflow:hidden'><nobr>".
-                                      $target['ZONE']."</nobr></div>");
-        }
-        if(isset($this->Sections[$target['SECTION']])){
-          $field2b = array("string" => "<div style='overflow:hidden'><nobr>".
-                                      $this->Sections[$target['SECTION']]."</nobr></div>","attach" => "style='width:120px;'");
-        }else{
-          $field2b = array("string" => "<div style='overflow:hidden'><nobr>".
-                                      $target['SECTION']."</nobr></div>"   ,"attach" => "style='width:120px;'");
-        }
         $field3 = array("string" =>  $target['NAME'] ,"attach" => "style='width:150px;'");
-        $divlist->AddEntry(array($field1,$field2,$field2a,$field2b,$field3,preg_replace("/%KEY%/",$key,$field_del)));
+        $divlist->AddEntry(array($field1,$field2,$field3,preg_replace("/%KEY%/",$key,$field_del)));
       } 
     }else{
       $divlist->SetHeader(array(
@@ -273,7 +257,7 @@ class goto_task extends plugin
   }
 
 
-   function create_tree($arr,$base,$current = "")
+  function create_tree($arr,$base,$current = "")
   {
     $ret = array();
     foreach($arr as $r => $name){
@@ -364,6 +348,7 @@ class goto_task extends plugin
           $this->Zone = get_post("Zone");
         }
       }else{
+        $this->Zone = "\"\"";
         $this->configure_dns = FALSE;
       }
 
@@ -374,6 +359,7 @@ class goto_task extends plugin
         }
       }else{
         $this->configure_dhcp = FALSE;
+        $this->Section = "\"\"";
       }
 
       foreach($this->attributes as $attr){
@@ -410,6 +396,12 @@ class goto_task extends plugin
     $tmp = array();
     foreach($this->attributes as $attr){
       $tmp[$attr] = $this->$attr;
+    }
+    if(!$this->configure_dns){
+      $tmp['Zone'] = "\"\"";
+    }
+    if(!$this->configure_dhcp){
+      $tmp['Section'] = "\"\"";
     }
     return($tmp);
   }
