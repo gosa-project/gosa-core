@@ -141,41 +141,61 @@ class faiScript extends plugin
       $_SESSION['objectinfo']= $this->dn;
     }
 
-
-    /* New Listhandling 
-     */
-    $once = true;
+    /* Handle posts */
+    $s_action = $s_entry = "";
     foreach($_POST as $name => $value){
-      if(preg_match("/^editscript_/",$name)&&($once)){
-        $once = false;
-        $entry = preg_replace("/^editscript_/","",$name);
-        $entry = base64_decode(preg_replace("/_.*/","",$entry));
 
-        $obj  = $this->SubObjects[$entry];
-        if($obj['status'] == "FreshLoaded"){
-          $obj  = $this->get_object_attributes($obj,$this->sub_Load_Later);
-        }
-
-        $this->dialog= new $this->subClassName($this->config,$this->dn,$obj);
-        $this->dialog->acl = $this->acl;
-        $_SESSION['objectinfo'] = $obj['dn'];
-        $this->dialog->parent = &$this;
-        $this->is_dialog=true;
-
+      /* Edit script posted */
+      if(preg_match("/^editscript_/",$name)){
+        $s_action = "edit";
+        $s_entry = preg_replace("/^editscript_/","",$name);
+        $s_entry = base64_decode(preg_replace("/_.*/","",$s_entry));
+        break;
       }
-      if(preg_match("/^deletescript_/",$name)&&($once)){
-        $once = false;
-        $entry = preg_replace("/^deletescript_/","",$name);
-        $entry = base64_decode(preg_replace("/_.*/","",$entry));
 
-        $status = $this->SubObjects[$entry]['status'];
-        if($status == "edited" || $status == "FreshLoaded"){
-          $this->SubObjects[$entry]['status']= "delete";
-        }else{
-          unset($this->SubObjects[$entry]);
-        }
+      /* Delete script requested */
+      if(preg_match("/^deletescript_/",$name)){
+        $s_action = "remove";
+        $s_entry = preg_replace("/^deletescript_/","",$name);
+        $s_entry = base64_decode(preg_replace("/_.*/","",$s_entry));
+        break;
       }
     }
+
+    if(isset($_GET['act']) && $_GET['act'] == "edit" && isset($_GET['id'])){
+      $s_entry = $_GET['id'];
+      if(isset($this->SubObjects[$s_entry])){
+        $s_action = "edit";
+      }
+    }
+
+    if($s_action =="edit" && isset($this->SubObjects[$s_entry])){
+
+      /* Get object, and load missing entry values */
+      $obj  = $this->SubObjects[$s_entry];
+      if($obj['status'] == "FreshLoaded"){
+        $obj  = $this->get_object_attributes($obj,$this->sub_Load_Later);
+      }
+      
+      /* Create new dialog and set acl attributes  */
+      $this->dialog= new $this->subClassName($this->config,$this->dn,$obj);
+      $this->dialog->acl = $this->acl;
+      $_SESSION['objectinfo'] = $obj['dn'];
+      $this->dialog->parent = &$this;
+      $this->is_dialog=true;
+    }
+
+    /* Check acls, are we allowed to delete an entry */
+    if($s_action == "remove" && isset($this->SubObjects[$s_entry])){
+      $entry = $this->SubObjects[$s_entry];
+      $status = $entry['status'];
+      if($status == "edited" || $status == "FreshLoaded"){
+        $this->SubObjects[$s_entry]['status']= "delete";
+      }else{
+        unset($this->SubObjects[$s_entry]);
+      }
+    }
+
     ///// Ende new list handling
     if(isset($_POST['SaveSubObject'])){
       $this->dialog->save_object();
@@ -297,7 +317,7 @@ class faiScript extends plugin
           </a>"; 
       } 
 
-      $divlist->AddEntry(array( array("string"=>$name['name']),
+      $divlist->AddEntry(array( array("string"=>"<a href='?plug=".$_GET['plug']."&act=edit&id=".$key."'>".$name['name']."</a>"),
             array("string"=>$name['FAIpriority'] , "attach" => "style='width:20px;'"),
             array("string"=>$down , "attach" => "style='width:20px;'"),
             array("string"=>str_replace("%s",base64_encode($key),$img_edit.$img_remo),
