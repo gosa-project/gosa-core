@@ -85,7 +85,6 @@
 					<td>{t}IP address{/t}
 					</td>
 					<td><input type="text" name="task_IP" value="">	
-						<input type="submit" name="add_target" value="{t}Add{/t}">
 					</td>
 				</tr>
 				<tr>
@@ -108,11 +107,12 @@
 						<select name="Section">
 							{html_options options=$Sections selected=$Section}
 						</select>
+						<input type="submit" name="add_target" value="{t}Add{/t}">
 					</td>
 				</tr>
 			</table>
 		</td>
-		<td>
+		<td style='vertical-align:top'>
 			<table>
 				<tr><td>{t}CVS import from file{/t}</td></tr>
 				<tr>
