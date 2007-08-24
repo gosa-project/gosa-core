@@ -342,24 +342,26 @@ class goto_task extends plugin
   {
     if(isset($_POST['goto_task_posted'])){
 
-      if(isset($_POST['configure_dns'])){
-        $this->configure_dns = TRUE;
-        if(isset($_POST['Zone'])){
-          $this->Zone = get_post("Zone");
+      if($this->Action == "initial_install"){
+        if(isset($_POST['configure_dns'])){
+          $this->configure_dns = TRUE;
+          if(isset($_POST['Zone'])){
+            $this->Zone = get_post("Zone");
+          }
+        }else{
+          $this->Zone = "\"\"";
+          $this->configure_dns = FALSE;
         }
-      }else{
-        $this->Zone = "\"\"";
-        $this->configure_dns = FALSE;
-      }
 
-      if(isset($_POST['configure_dhcp'])){
-        $this->configure_dhcp = TRUE;
-        if(isset($_POST['Section'])){
-          $this->Section = get_post("Section");
+        if(isset($_POST['configure_dhcp'])){
+          $this->configure_dhcp = TRUE;
+          if(isset($_POST['Section'])){
+            $this->Section = get_post("Section");
+          }
+        }else{
+          $this->configure_dhcp = FALSE;
+          $this->Section = "\"\"";
         }
-      }else{
-        $this->configure_dhcp = FALSE;
-        $this->Section = "\"\"";
       }
 
       foreach($this->attributes as $attr){
@@ -397,10 +399,11 @@ class goto_task extends plugin
     foreach($this->attributes as $attr){
       $tmp[$attr] = $this->$attr;
     }
-    if(!$this->configure_dns){
+
+    if($this->Action != "initial_install" || !$this->configure_dns){
       $tmp['Zone'] = "\"\"";
     }
-    if(!$this->configure_dhcp){
+    if($this->Action != "initial_install" || !$this->configure_dhcp){
       $tmp['Section'] = "\"\"";
     }
     return($tmp);
