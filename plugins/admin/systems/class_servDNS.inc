@@ -139,6 +139,13 @@ class servdns extends plugin
       }
     }
 
+    if(isset($_GET['act']) && $_GET['act'] == "edit" && isset($_GET['id'])){
+      $id = base64_decode($_GET['id']);
+      if(isset($this->Zones[$id])){
+         $this->dialog= new servdnseditZone($this->config,$this->dn,$this->Zones[$id]);
+      }
+    }
+
     /* Show dialog 
      */
     if($this->dialog!= NULL){
@@ -157,9 +164,10 @@ class servdns extends plugin
     $editImg = "<input type='image' src='images/edit.png' name='editZone_%s'>
       <input type='image' src='images/edittrash.png' name='delZone_%s'>";
     foreach($this->Zones as $zone => $values ){
+      $link = "<a href='?plug=".$_GET['plug']."&act=edit&id=%s'>%s</a>";
       $ZoneList->AddEntry(array(
-            array("string" => getNameFromMix($zone)),
-            array("string" => _("Reverse zone")." : ".getNameFromMix($values['ReverseZone'])),
+            array("string" => sprintf($link,base64_encode($zone),getNameFromMix($zone))),
+            array("string" => sprintf($link,base64_encode($zone),_("Reverse zone")." : ".getNameFromMix($values['ReverseZone']))),
             array("string" => _("TTL")." : ".$values['sOAttl']),
             array("string" => _("Class")." : ".$values['dNSClass']),
             array("string" => str_replace("%s",base64_encode($zone),$editImg))
