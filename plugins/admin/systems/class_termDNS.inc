@@ -602,6 +602,10 @@ class termDNS extends plugin
        */
       if(!empty($this->ipHostNumber)){
         $this->dnsEntry['RECORDS'][] = array("type"=>"aRecord","value"=>$this->ipHostNumber);
+        $ldap->cat(getDNSZoneDN($this->config,$this->dnsEntry['zoneName']));
+        $attrs = $ldap->fetch();
+        $str = trim(preg_replace("/(^[^ ]*).*$/","\\1",$attrs['sOARecord'][0]));
+        $this->dnsEntry['RECORDS'][] = array("type"=>"nsRecord","value"=>$str);
       }
 
       /* Create diff and follow instructions 
