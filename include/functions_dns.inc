@@ -250,6 +250,7 @@ function getDNSZoneEntriesDiff($config,$newZones,$HostDn)
       $soa.=" ".$zone[$attr];
     }  
     $obj['sOARecord'] = trim($soa);
+    $obj['nSRecord'] = $zone['sOAprimary'];
 
     /* If reverse zone was renamed, move entry 
      */
