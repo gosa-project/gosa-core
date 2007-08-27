@@ -80,9 +80,13 @@ class servdhcp extends plugin
         $dn= $this->dialog->dn;
         $class= get_class($this->dialog);
         $type= $this->types[$class];
-        $indent= substr_count(preg_replace("/".$this->serviceDN."/", '', $dn), ",");
-        $spaces= "";
-        for ($i= 0; $i<$indent; $i++){
+		if(empty($this->serviceDN)){
+			$indent= substr_count(preg_replace("/".$this->dn."/", '', $dn), ",") -1;
+		}else{
+			$indent= substr_count(preg_replace("/".$this->serviceDN."/", '', $dn), ",");
+		}
+		$spaces= "";
+		for ($i= 0; $i<$indent; $i++){
           $spaces.= "&nbsp;&nbsp;&nbsp;&nbsp;";
         }
         $data= $this->dialog->save();
