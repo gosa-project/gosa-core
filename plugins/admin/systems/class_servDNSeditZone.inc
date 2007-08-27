@@ -430,8 +430,8 @@ class servdnseditZone extends plugin
     }
 
     /* Check class for given Zone Address */
-    $addr = preg_replace("/^[^\/]+\//","",$this->ReverseZone);
-
+    $addr = preg_replace("/^[^\/]*+\//","",$this->ReverseZone);
+  
     /* Check for valid&complete IP address */
     if(!is_ip($addr)){
       $message[] = _("The given network address is not a valid, please specify a valid IP address.");
