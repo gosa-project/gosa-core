@@ -121,8 +121,12 @@ class termDNS extends plugin
 
       /* Remove A record which equals $this->ipHostNumber
        */
+      $ptr = $this->get_pTRRecord();
       foreach($this->dnsEntry['RECORDS'] as $key => $rec){
         if(($rec['type'] == "aRecord") && ($rec['value'] == $this->ipHostNumber)){
+          unset($this->dnsEntry['RECORDS'][$key]);
+        }
+        if(($rec['type'] == "pTRRecord") && ($rec['value'] == $ptr)){
           unset($this->dnsEntry['RECORDS'][$key]);
         }
       }
@@ -602,10 +606,10 @@ class termDNS extends plugin
        */
       if(!empty($this->ipHostNumber)){
         $this->dnsEntry['RECORDS'][] = array("type"=>"aRecord","value"=>$this->ipHostNumber);
-        $ldap->cat(getDNSZoneDN($this->config,$this->dnsEntry['zoneName']));
-        $attrs = $ldap->fetch();
-        $str = trim(preg_replace("/(^[^ ]*).*$/","\\1",$attrs['sOARecord'][0]));
-        $this->dnsEntry['RECORDS'][] = array("type"=>"nsRecord","value"=>$str);
+        $ptr = $this->get_pTRRecord();
+        if(!empty($ptr)){
+          $this->dnsEntry['RECORDS'][] = array("type"=>"pTRRecord","value"=>$ptr);
+        }
       }
 
       /* Create diff and follow instructions 
@@ -779,6 +783,24 @@ class termDNS extends plugin
       $tmp2 = $this->create_tree($tmp,preg_replace("/^[^,]+,/i","",$dn),"(".$cn.")&nbsp;");
     }
     return($tmp2);
+  }
+
+  
+  /* this function returns the default ptr record entry */
+  function get_pTRRecord()
+  {
+    if(!empty($this->ipHostNumber) && isset($this->dnsEntry['zoneName'])){
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cat(getDNSZoneDN($this->config,$this->dnsEntry['zoneName']));
+      $attrs = $ldap->fetch();
+      $tmp = array_flip($this->Zones);
+      $tmp = preg_replace("/^[^\/]*+\//","",$tmp[$this->dnsEntry['zoneName']]);
+      $tmp = trim(preg_replace("/\.in-addr.arpa$/","",$tmp));
+      $ptr = preg_replace("/^".normalizePreg(FlipIp($tmp))."\./","",$this->ipHostNumber);
+      return($ptr);
+    }else{
+      return(FALSE);
+    }
   }
 
   
