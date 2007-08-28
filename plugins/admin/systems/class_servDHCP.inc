@@ -419,8 +419,10 @@ class servdhcp extends plugin
       }
     }
 
-    /* Self modify and place service dn entry */
-    $this->dhcpServiceDN= $this->dn;
+    $this->dhcpServiceDN= $this->serviceDN;
+    if($this->dn != $this->orig_dn){
+      $this->dhcpServiceDN= preg_replace("/".normalizePreg($this->orig_dn)."$/i",$this->dn,$this->dhcpServiceDN);
+    }
 
     plugin::save();
     
