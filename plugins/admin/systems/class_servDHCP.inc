@@ -21,6 +21,8 @@ class servdhcp extends plugin
   {
     plugin::plugin ($config, $dn, $parent);
 
+    $this->serviceDN = "cn=dhcp,".$dn;
+
     $this->types= array(  "dhcpLog" => _("Logging"),
             "dhcpService" => _("Global options"),
             "dhcpClass" => _("Class"),
@@ -527,5 +529,5 @@ class servdhcp extends plugin
 
 }
 
-//vim:tabstop=2:expandtab:softtab=2:shiftwidth=2:filetype=php:syntax:ruler:
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
