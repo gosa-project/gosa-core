@@ -51,17 +51,17 @@ class dhcpSharedNetwork extends dhcpPlugin
     } else {
       $smarty->assign("authoritative", "");
     }
-    if (!isset($this->statements["deny-unknown-clients"])){
+    if (!isset($this->statements["deny unknown-clients"])){
       $smarty->assign("allow_unknown_state", "checked");
     } else {
       $smarty->assign("allow_unknown_state", "");
     }
-    if (!isset($this->statements["deny-bootp"])){
+    if (!isset($this->statements["deny bootp"])){
       $smarty->assign("allow_bootp_state", "checked");
     } else {
       $smarty->assign("allow_bootp_state", "");
     }
-    if (!isset($this->statements["deny-booting"])){
+    if (!isset($this->statements["deny booting"])){
       $smarty->assign("allow_booting_state", "checked");
     } else {
       $smarty->assign("allow_booting_state", "");
@@ -121,11 +121,11 @@ class dhcpSharedNetwork extends dhcpPlugin
 
       foreach(array("unknown-clients", "bootp", "booting") as $name){
         if (isset($_POST[$name])){
-          $this->statements["allow-$name"]= "";
-          unset($this->statements["deny-$name"]);
+          $this->statements["allow $name"]= "";
+          unset($this->statements["deny $name"]);
         } else {
-          $this->statements["deny-$name"]= "";
-          unset($this->statements["allow-$name"]);
+          $this->statements["deny $name"]= "";
+          unset($this->statements["allow $name"]);
         }
       }
     }
