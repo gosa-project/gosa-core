@@ -789,7 +789,7 @@ class termDNS extends plugin
   /* this function returns the default ptr record entry */
   function get_pTRRecord()
   {
-    if(!empty($this->ipHostNumber) && isset($this->dnsEntry['zoneName'])){
+    if(!empty($this->ipHostNumber) && isset($this->dnsEntry['zoneName']) && !empty($this->dnsEntry['zoneName'])){
       $ldap = $this->config->get_ldap_link();
       $ldap->cat(getDNSZoneDN($this->config,$this->dnsEntry['zoneName']));
       $attrs = $ldap->fetch();
