@@ -183,7 +183,7 @@ class dhcpSubnet extends dhcpPlugin
 
     /* Move dn to the result */
     $this->attrs['dhcpNetMask']= array(netmask_to_bits($this->dhcpNetMask));
-    if ($this->dhcpRange != ""){
+    if ($this->use_range && !empty($this->dhcpRange)){
       $this->attrs['dhcpRange']= array($this->range_start." ".$this->range_stop);
     } else {
       $this->attrs['dhcpRange']= array();
