@@ -15,6 +15,8 @@ class servdhcp extends plugin
   var $types= array();
   var $serviceDN= "";
 
+	var $quote_option = array("domain-name");
+
   function servdhcp ($config, $dn= NULL, $parent= NULL)
   {
     plugin::plugin ($config, $dn, $parent);
@@ -41,6 +43,7 @@ class servdhcp extends plugin
     if (!count($this->dhcpSections)){
       $this->is_account= FALSE;
     }
+		
   }
 
 
@@ -367,6 +370,16 @@ class servdhcp extends plugin
             continue;
           }
           if (count($values)){
+	
+			if($attribute == "dhcpOption"){
+				foreach($values as $key => $value){
+					$option_name = trim(preg_replace("/[^ ]*$/","",$value));
+					$option_value= trim(preg_replace("/^[^ ]*/","",$value));
+					if(in_array($option_name,$this->quote_option)){
+						$values[$key] = $option_name." \"".$option_value."\"";
+					}
+				}
+			}
             if (count($values) == 1){
               $attrs[$attribute]= $values[0];
             } else {
@@ -443,6 +456,21 @@ class servdhcp extends plugin
           unset($sattrs[$attrs[$i]]['count']);
         }
         $sattrs['dn']= $ldap->getDN();
+
+		foreach($sattrs as $name => $values){
+			if($name == "dhcpOption"){
+				foreach($values as $key => $value){
+					$value_name = trim(preg_replace("/[^ ]*$/","",$value));
+					$value_value= trim(preg_replace("/^[^ ]*/","",$value));
+					if(in_array($value_name,$this->quote_option)){
+						$value_value = preg_replace("/^\"/","",$value_value);
+						$value_value = preg_replace("/\"$/","",$value_value);
+						$sattrs[$name][$key] = $value_name." ".$value_value;
+					}
+				}
+			}
+		}
+
         $this->dhcpObjectCache[$ldap->getDN()]= $sattrs;
         $tmp= preg_replace("/".$this->serviceDN."/", "", $ldap->getDN());
         $indent= substr_count($tmp, ",");
