@@ -277,6 +277,9 @@ function getDNSZoneEntriesDiff($config,$newZones,$HostDn)
     /* Add new Records 
      */
     foreach($zone['RECORDS'] as $rec){
+      if(!isset($obj[$rec['type']])||!is_array($obj[$rec['type']])){
+        $obj[$rec['type']] = array();
+      }
       $obj[$rec['type']][] = $rec['value'];
     }
 
