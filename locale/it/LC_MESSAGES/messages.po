@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-23 10:23+0200\n"
+"POT-Creation-Date: 2007-08-28 10:47+0200\n"
 "PO-Revision-Date: 2007-07-13 18:38+0100\n"
 "Last-Translator: Guido Serra <zeph@purotesto.it>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -273,7 +273,7 @@ msgstr "Esporta formato Excel"
 
 #: contrib/gosa.conf:290 plugins/personal/mail/generic.tpl:192
 #: plugins/personal/environment/logonManagement.tpl:65
-#: plugins/addons/gotomasses/goto_task.tpl:105
+#: plugins/addons/gotomasses/goto_task.tpl:129
 #: plugins/addons/ldapmanager/contentimport.tpl:49
 #: plugins/addons/ldapmanager/contentcsv.tpl:109
 #: plugins/addons/ldapmanager/contentcsv.tpl:112
@@ -400,7 +400,7 @@ msgstr "Salva"
 #: plugins/addons/addressbook/dial.tpl:10
 #: plugins/addons/addressbook/remove.tpl:16
 #: plugins/addons/addressbook/address_edit.tpl:234
-#: plugins/addons/gotomasses/goto_task.tpl:176
+#: plugins/addons/gotomasses/goto_task.tpl:200
 #: plugins/addons/gotomasses/remove.tpl:19
 #: plugins/admin/fai/class_faiManagement.inc:610
 #: plugins/admin/fai/class_faiManagement.inc:615
@@ -508,7 +508,7 @@ msgstr ""
 #: plugins/gofax/faxaccount/generic.tpl:86
 #: plugins/gofax/faxaccount/generic.tpl:92
 #: plugins/gofax/faxaccount/main.inc:97
-#: plugins/addons/gotomasses/class_gotomasses.inc:218
+#: plugins/addons/gotomasses/class_gotomasses.inc:219
 #: plugins/addons/logview/contents.tpl:62 plugins/admin/fai/faiVariable.tpl:45
 #: plugins/admin/fai/faiPartitionTable.tpl:44
 #: plugins/admin/systems/glpiPrinter.tpl:73
@@ -790,15 +790,15 @@ msgstr "Nome dell'utente i cui indirizzi sono mostrati"
 #: plugins/gofax/faxaccount/generic.tpl:76
 #: plugins/gofax/faxaccount/locals.tpl:60
 #: plugins/gofax/faxaccount/lists.tpl:13
-#: plugins/addons/gotomasses/goto_task.tpl:88
-#: plugins/addons/gotomasses/goto_task.tpl:163
+#: plugins/addons/gotomasses/goto_task.tpl:112
+#: plugins/addons/gotomasses/goto_task.tpl:187
 #: plugins/admin/fai/faiVariable.tpl:44
 #: plugins/admin/fai/faiPartitionTable.tpl:43
 #: plugins/admin/fai/faiPackage.tpl:72 plugins/admin/fai/faiProfile.tpl:38
 #: plugins/admin/fai/faiScript.tpl:42 plugins/admin/fai/faiTemplate.tpl:35
 #: plugins/admin/fai/faiHook.tpl:43 plugins/admin/groups/application.tpl:27
-#: plugins/admin/groups/mail.tpl:51 plugins/admin/groups/mail.tpl:95
-#: plugins/admin/groups/class_groupMail.inc:568
+#: plugins/admin/groups/mail.tpl:69 plugins/admin/groups/mail.tpl:113
+#: plugins/admin/groups/class_groupMail.inc:578
 #: plugins/admin/groups/generic.tpl:108 plugins/admin/groups/paste_mail.tpl:30
 #: plugins/admin/groups/paste_mail.tpl:41
 #: plugins/admin/groups/group_objects.tpl:55
@@ -816,8 +816,8 @@ msgstr "Nome dell'utente i cui indirizzi sono mostrati"
 #: plugins/admin/systems/terminalStartup.tpl:61
 #: plugins/admin/systems/terminalStartup.tpl:80
 #: plugins/admin/systems/glpiManufacturer.tpl:6
-#: plugins/admin/systems/class_termDNS.inc:663
-#: plugins/admin/systems/class_termDNS.inc:683
+#: plugins/admin/systems/class_termDNS.inc:667
+#: plugins/admin/systems/class_termDNS.inc:687
 #: plugins/admin/systems/goSpamServer.tpl:36
 #: plugins/admin/systems/goSpamServer.tpl:88
 #: plugins/admin/systems/servdnseditzone.tpl:115
@@ -827,7 +827,7 @@ msgstr "Nome dell'utente i cui indirizzi sono mostrati"
 #: plugins/admin/systems/glpi_edit_os.tpl:8
 #: plugins/admin/systems/class_servDNSeditZoneEntries.inc:394
 #: plugins/admin/systems/glpi_edit_cartridge_type.tpl:6
-#: plugins/admin/systems/class_servDNSeditZone.inc:553
+#: plugins/admin/systems/class_servDNSeditZone.inc:559
 #: plugins/admin/systems/phonesettings.tpl:176
 #: plugins/admin/systems/phonesettings.tpl:191
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:67
@@ -880,12 +880,12 @@ msgid "Quota size"
 msgstr "Dimensione Quota"
 
 #: plugins/personal/mail/generic.tpl:49 plugins/personal/mail/copypaste.tpl:25
-#: plugins/admin/groups/mail.tpl:44 plugins/admin/groups/paste_mail.tpl:23
+#: plugins/admin/groups/mail.tpl:62 plugins/admin/groups/paste_mail.tpl:23
 msgid "Alternative addresses"
 msgstr "Indirizzo alternativi"
 
 #: plugins/personal/mail/generic.tpl:51 plugins/personal/mail/copypaste.tpl:55
-#: plugins/admin/groups/mail.tpl:45 plugins/admin/groups/paste_mail.tpl:24
+#: plugins/admin/groups/mail.tpl:63 plugins/admin/groups/paste_mail.tpl:24
 #: plugins/admin/systems/phonesettings.tpl:170
 #: plugins/admin/systems/phonesettings.tpl:185
 msgid "List of alternative mail addresses"
@@ -913,8 +913,8 @@ msgstr "Lista degli indirizzi e-mail alternativi"
 #: plugins/addons/gotomasses/remove.tpl:17
 #: plugins/admin/fai/faiVariable.tpl:46 plugins/admin/fai/remove.tpl:15
 #: plugins/admin/fai/faiPartitionTable.tpl:45
-#: plugins/admin/fai/remove_branch.tpl:14 plugins/admin/groups/mail.tpl:52
-#: plugins/admin/groups/mail.tpl:97 plugins/admin/groups/remove.tpl:14
+#: plugins/admin/fai/remove_branch.tpl:14 plugins/admin/groups/mail.tpl:70
+#: plugins/admin/groups/mail.tpl:115 plugins/admin/groups/remove.tpl:14
 #: plugins/admin/groups/generic.tpl:110 plugins/admin/groups/paste_mail.tpl:31
 #: plugins/admin/groups/paste_mail.tpl:43 plugins/admin/users/remove.tpl:14
 #: plugins/admin/applications/remove.tpl:13
@@ -928,7 +928,7 @@ msgstr "Lista degli indirizzi e-mail alternativi"
 #: plugins/admin/systems/terminalStartup.tpl:62
 #: plugins/admin/systems/remove_ppd.tpl:12
 #: plugins/admin/systems/class_glpiPrinterCartridges.inc:163
-#: plugins/admin/systems/class_termDNS.inc:677
+#: plugins/admin/systems/class_termDNS.inc:681
 #: plugins/admin/systems/servservice.tpl:22
 #: plugins/admin/systems/servservice.tpl:48
 #: plugins/admin/systems/glpi_edit_os.tpl:10
@@ -937,8 +937,8 @@ msgstr "Lista degli indirizzi e-mail alternativi"
 #: plugins/admin/systems/printer.tpl:78 plugins/admin/systems/printer.tpl:96
 #: plugins/admin/systems/remove.tpl:14
 #: plugins/admin/systems/glpi_edit_cartridge_type.tpl:8
-#: plugins/admin/systems/class_servDNSeditZone.inc:317
-#: plugins/admin/systems/class_servDNSeditZone.inc:547
+#: plugins/admin/systems/class_servDNSeditZone.inc:320
+#: plugins/admin/systems/class_servDNSeditZone.inc:553
 #: plugins/admin/systems/phonesettings.tpl:177
 #: plugins/admin/systems/phonesettings.tpl:192
 #: plugins/admin/systems/dhcp_network.tpl:68
@@ -1046,7 +1046,7 @@ msgstr "Inoltra messaggi a "
 
 #: plugins/personal/mail/generic.tpl:210
 #: plugins/personal/mail/copypaste.tpl:44
-#: plugins/gofax/faxaccount/generic.tpl:77 plugins/admin/groups/mail.tpl:96
+#: plugins/gofax/faxaccount/generic.tpl:77 plugins/admin/groups/mail.tpl:114
 #: plugins/admin/groups/paste_mail.tpl:42
 msgid "Add local"
 msgstr "Aggiungi locali"
@@ -1075,7 +1075,7 @@ msgid "User mail settings"
 msgstr "Definizione mail utenti"
 
 #: plugins/personal/mail/class_mailAccount.inc:88
-#: plugins/admin/groups/class_groupMail.inc:78
+#: plugins/admin/groups/class_groupMail.inc:80
 #, php-format
 msgid "There is no mail method '%s' specified in your gosa.conf available."
 msgstr ""
@@ -1092,7 +1092,7 @@ msgstr "Questo utente non ha estensioni di posta elettronica."
 
 #: plugins/personal/mail/class_mailAccount.inc:296
 #: plugins/personal/mail/class_mailAccount.inc:299
-#: plugins/admin/groups/class_groupMail.inc:333
+#: plugins/admin/groups/class_groupMail.inc:343
 #: plugins/admin/ogroups/class_mailogroup.inc:47
 msgid "Remove mail account"
 msgstr "Rimuovi utente di posta"
@@ -1106,7 +1106,7 @@ msgstr ""
 "Rimuovere prima le delegazioni."
 
 #: plugins/personal/mail/class_mailAccount.inc:300
-#: plugins/admin/groups/class_groupMail.inc:334
+#: plugins/admin/groups/class_groupMail.inc:344
 msgid ""
 "This account has mail features enabled. You can disable them by clicking "
 "below."
@@ -1115,13 +1115,13 @@ msgstr ""
 "cliccando sotto."
 
 #: plugins/personal/mail/class_mailAccount.inc:303
-#: plugins/admin/groups/class_groupMail.inc:336
+#: plugins/admin/groups/class_groupMail.inc:346
 #: plugins/admin/ogroups/class_mailogroup.inc:50
 msgid "Create mail account"
 msgstr "Crea un utente di posta"
 
 #: plugins/personal/mail/class_mailAccount.inc:303
-#: plugins/admin/groups/class_groupMail.inc:337
+#: plugins/admin/groups/class_groupMail.inc:347
 msgid ""
 "This account has mail features disabled. You can enable them by clicking "
 "below."
@@ -1137,7 +1137,7 @@ msgstr ""
 "lista degli inoltri."
 
 #: plugins/personal/mail/class_mailAccount.inc:359
-#: plugins/admin/groups/class_groupMail.inc:411
+#: plugins/admin/groups/class_groupMail.inc:421
 msgid "Adding your one of your own addresses to the forwarders makes no sense."
 msgstr ""
 "Aggiungere uno dei vostri indirizzi di posta agli indirizzi di inoltro non è "
@@ -1147,7 +1147,7 @@ msgstr ""
 #: plugins/personal/mail/class_mailAccount.inc:402
 #: plugins/personal/scalix/class_scalixAccount.inc:158
 #: plugins/personal/scalix/class_scalixAccount.inc:163
-#: plugins/admin/groups/class_groupMail.inc:439
+#: plugins/admin/groups/class_groupMail.inc:449
 msgid ""
 "You're trying to add an invalid email address to the list of alternate "
 "addresses."
@@ -1157,7 +1157,7 @@ msgstr ""
 
 #: plugins/personal/mail/class_mailAccount.inc:412
 #: plugins/personal/scalix/class_scalixAccount.inc:173
-#: plugins/admin/groups/class_groupMail.inc:444
+#: plugins/admin/groups/class_groupMail.inc:454
 msgid "The address you're trying to add is already used by user"
 msgstr "L'indirizzo che state provando ad aggiungere è già utilizzato"
 
@@ -1297,7 +1297,7 @@ msgstr ""
 "uno al setup."
 
 #: plugins/personal/mail/class_mailAccount.inc:945
-#: plugins/admin/groups/class_groupMail.inc:856
+#: plugins/admin/groups/class_groupMail.inc:903
 msgid "The required field 'Primary address' is not set."
 msgstr "Il campo obbligatorio 'Indirizzo principale' non è configurato."
 
@@ -1311,25 +1311,25 @@ msgstr ""
 "primario'."
 
 #: plugins/personal/mail/class_mailAccount.inc:959
-#: plugins/admin/groups/class_groupMail.inc:865
+#: plugins/admin/groups/class_groupMail.inc:912
 #: plugins/admin/ogroups/class_mailogroup.inc:85
 msgid "The primary address you've entered is already in use."
 msgstr "L'indirizzo primario inserito è già in uso."
 
 #: plugins/personal/mail/class_mailAccount.inc:965
-#: plugins/admin/groups/class_groupMail.inc:871
+#: plugins/admin/groups/class_groupMail.inc:918
 msgid "Value in 'Quota size' is not valid."
 msgstr "Valore di 'Quota' non valido."
 
 #: plugins/personal/mail/class_mailAccount.inc:974
-#: plugins/admin/groups/class_groupMail.inc:880
+#: plugins/admin/groups/class_groupMail.inc:927
 msgid "Please specify a vaild mail size for mails to be rejected."
 msgstr ""
 "Per favore specificate una corretta dimensione della posta che deve essere "
 "rifiutata."
 
 #: plugins/personal/mail/class_mailAccount.inc:984
-#: plugins/admin/groups/class_groupMail.inc:888
+#: plugins/admin/groups/class_groupMail.inc:935
 msgid "You need to set the maximum mail size in order to reject anything."
 msgstr ""
 "Non avete definito la dimensione massima della posta che deve essere "
@@ -1968,8 +1968,8 @@ msgid "Specify the hours this user is allowed to log in"
 msgstr "Specificate il server di posta dove l'utente sarà ospitato"
 
 #: plugins/personal/samba/sambaLogonHours.tpl:27
-#: plugins/addons/gotomasses/class_goto_task.inc:227
-#: plugins/addons/gotomasses/goto_task.tpl:127
+#: plugins/addons/gotomasses/class_goto_task.inc:322
+#: plugins/addons/gotomasses/goto_task.tpl:151
 #, fuzzy
 msgid "Hour"
 msgstr "ora"
@@ -1977,7 +1977,7 @@ msgstr "ora"
 #: plugins/personal/samba/sambaLogonHours.tpl:90
 #: plugins/personal/environment/logonManagement.tpl:75
 #: plugins/gofax/faxaccount/lists.tpl:31
-#: plugins/addons/gotomasses/goto_task.tpl:174
+#: plugins/addons/gotomasses/goto_task.tpl:198
 #: plugins/admin/fai/faiProfileEntry.tpl:70
 #: plugins/admin/fai/faiPackageConfiguration.tpl:6
 #: plugins/admin/fai/faiScriptEntry.tpl:68
@@ -2309,10 +2309,10 @@ msgstr "Monta una path"
 #: plugins/personal/generic/generic_certs.tpl:37
 #: plugins/personal/generic/generic_certs.tpl:57
 #: plugins/personal/connectivity/class_kolabAccount.inc:240
-#: plugins/addons/gotomasses/class_gotomasses.inc:220
+#: plugins/addons/gotomasses/class_gotomasses.inc:221
 #: plugins/admin/fai/faiPackage.tpl:73
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:279
-#: plugins/admin/groups/class_groupMail.inc:572
+#: plugins/admin/groups/class_groupMail.inc:582
 #: plugins/admin/applications/class_applicationParameters.inc:108
 #: plugins/admin/systems/glpiPrinter.tpl:122
 #: plugins/admin/systems/workstationStartup.tpl:148
@@ -2627,7 +2627,7 @@ msgstr "Nome script"
 #: plugins/personal/environment/logonManagement.tpl:17
 #: plugins/personal/environment/hotplugDialogNew.tpl:17
 #: plugins/gofax/blocklists/generic.tpl:46
-#: plugins/addons/gotomasses/class_goto_task.inc:229
+#: plugins/addons/gotomasses/class_goto_task.inc:324
 #: plugins/addons/gotomasses/goto_task.tpl:12
 #: plugins/admin/fai/faiVariable.tpl:19
 #: plugins/admin/fai/faiPartitionTable.tpl:19
@@ -2656,7 +2656,7 @@ msgid "Description"
 msgstr "Descrizione"
 
 #: plugins/personal/environment/logonManagement.tpl:24
-#: plugins/admin/fai/class_faiScript.inc:276
+#: plugins/admin/fai/class_faiScript.inc:296
 #: plugins/admin/fai/faiScriptEntry.tpl:34
 msgid "Priority"
 msgstr "priorità"
@@ -3921,7 +3921,7 @@ msgid "Select subtree to place blocklist in"
 msgstr "Seleziona la posizione della lista di blocco"
 
 #: plugins/gofax/blocklists/generic.tpl:37
-#: plugins/addons/gotomasses/class_gotomasses.inc:210
+#: plugins/addons/gotomasses/class_gotomasses.inc:211
 #: plugins/admin/fai/class_faiSummaryTab.inc:334
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:205
 #: plugins/admin/systems/workstationService.tpl:42
@@ -3933,7 +3933,7 @@ msgstr "Seleziona la posizione della lista di blocco"
 #: plugins/admin/systems/glpi_devices.tpl:492
 #: plugins/admin/systems/glpi_devices.tpl:542
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:37
-#: plugins/gofon/conference/generic.tpl:22 include/php_setup.inc:189
+#: plugins/gofon/conference/generic.tpl:22 include/php_setup.inc:195
 msgid "Type"
 msgstr "Tipo"
 
@@ -4028,7 +4028,7 @@ msgstr "Nome della lista di blocco"
 
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:47
 #: plugins/addons/addressbook/contents.tpl:42
-#: plugins/addons/gotomasses/class_goto_task.inc:183
+#: plugins/addons/gotomasses/class_goto_task.inc:213
 #: plugins/admin/fai/class_divListFai.inc:60
 #: plugins/admin/groups/class_divListGroup.inc:51
 #: plugins/admin/users/class_divListUsers.inc:52
@@ -4108,8 +4108,8 @@ msgid "Submit"
 msgstr "Invia"
 
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:95
-#: plugins/admin/fai/class_faiScript.inc:283
-#: plugins/admin/fai/class_faiScript.inc:286
+#: plugins/admin/fai/class_faiScript.inc:303
+#: plugins/admin/fai/class_faiScript.inc:306
 #: plugins/admin/fai/class_faiTemplate.inc:241
 #: plugins/admin/fai/class_faiTemplate.inc:244
 #: plugins/admin/fai/class_faiHook.inc:266
@@ -4140,7 +4140,7 @@ msgstr "Modifica utente"
 
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:96
 #: plugins/addons/mailqueue/contents.tpl:93
-#: plugins/admin/fai/class_faiScript.inc:287
+#: plugins/admin/fai/class_faiScript.inc:307
 #: plugins/admin/fai/class_faiTemplate.inc:245
 #: plugins/admin/fai/class_faiHook.inc:270
 #: plugins/admin/fai/class_divListFai.inc:237
@@ -4592,10 +4592,10 @@ msgstr "Y-M-D"
 #: plugins/addons/addressbook/contents.tpl:14
 #: plugins/addons/addressbook/class_addressbook.inc:522
 #: plugins/addons/addressbook/address_info.tpl:16
-#: plugins/addons/gotomasses/class_goto_task.inc:182
-#: plugins/addons/gotomasses/goto_task.tpl:79
+#: plugins/addons/gotomasses/class_goto_task.inc:212
+#: plugins/addons/gotomasses/goto_task.tpl:103
 #: plugins/admin/fai/faiVariable.tpl:9
-#: plugins/admin/fai/class_faiScript.inc:275
+#: plugins/admin/fai/class_faiScript.inc:295
 #: plugins/admin/fai/faiPartitionTable.tpl:9
 #: plugins/admin/fai/class_faiSummaryTab.inc:329
 #: plugins/admin/fai/faiScriptEntry.tpl:9 plugins/admin/fai/faiPackage.tpl:9
@@ -4879,24 +4879,24 @@ msgstr "Salvataggio del valore della rubrica fallito"
 msgid "System deployment"
 msgstr "Sistema/Dipartimento"
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:71
-#: plugins/addons/gotomasses/class_gotomasses.inc:103
+#: plugins/addons/gotomasses/class_gotomasses.inc:72
+#: plugins/addons/gotomasses/class_gotomasses.inc:104
 #, fuzzy
 msgid "You are not allowed to remove a task."
 msgstr "Non ti è permesso di cancellare questa applicazione!"
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:84
-#: plugins/addons/gotomasses/class_gotomasses.inc:107
+#: plugins/addons/gotomasses/class_gotomasses.inc:85
+#: plugins/addons/gotomasses/class_gotomasses.inc:108
 #, fuzzy, php-format
 msgid "Your are about to delete the following tasks: %s"
 msgstr "State per cancellare la voce %s."
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:180
+#: plugins/addons/gotomasses/class_gotomasses.inc:181
 #, fuzzy
 msgid "List of system deployment tasks"
 msgstr "Elenco dei sistemi"
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:184
+#: plugins/addons/gotomasses/class_gotomasses.inc:185
 #, fuzzy
 msgid ""
 "This menu allows you to add, remove and change the properties of system "
@@ -4905,21 +4905,21 @@ msgstr ""
 "Questo menù permette di aggiungere, rimuovere e cambiare le proprietà di "
 "specifici sistemi. Puoi solo aggiungere sistemi che siano già stati avviati."
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:207
+#: plugins/addons/gotomasses/class_gotomasses.inc:208
 #, fuzzy
 msgid "Target"
 msgstr "Vero"
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:208
-#: plugins/addons/gotomasses/goto_task.tpl:118
+#: plugins/addons/gotomasses/class_gotomasses.inc:209
+#: plugins/addons/gotomasses/goto_task.tpl:142
 #, fuzzy
 msgid "Schedule"
 msgstr "Aggiornamento pianificato"
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:212
-#: plugins/addons/gotomasses/class_goto_task.inc:229
-#: plugins/addons/gotomasses/goto_task.tpl:34
-#: plugins/admin/fai/class_faiScript.inc:278
+#: plugins/addons/gotomasses/class_gotomasses.inc:213
+#: plugins/addons/gotomasses/class_goto_task.inc:324
+#: plugins/addons/gotomasses/goto_task.tpl:58
+#: plugins/admin/fai/class_faiScript.inc:298
 #: plugins/admin/systems/terminal.tpl:128 plugins/admin/systems/server.tpl:51
 #: plugins/admin/systems/workstation.tpl:109
 #: plugins/admin/systems/class_glpiPrinterCartridges.inc:158
@@ -4928,33 +4928,33 @@ msgstr "Aggiornamento pianificato"
 msgid "Action"
 msgstr "Azione"
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:265
+#: plugins/addons/gotomasses/class_gotomasses.inc:266
 #: include/class_pluglist.inc:130 include/class_pluglist.inc:131
 #: include/class_pluglist.inc:241
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:276
+#: plugins/addons/gotomasses/class_gotomasses.inc:277
 #, fuzzy, php-format
 msgid "Can't locate or read gotomasses storage file '%s'."
 msgstr "Non posso creare il file '%s'."
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:283
-#: plugins/addons/gotomasses/class_gotomasses.inc:387
+#: plugins/addons/gotomasses/class_gotomasses.inc:284
+#: plugins/addons/gotomasses/class_gotomasses.inc:395
 #, fuzzy, php-format
 msgid "Can't read gotomasses storage file '%s'."
 msgstr "Non posso creare il file '%s'."
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:319
+#: plugins/addons/gotomasses/class_gotomasses.inc:320
 msgid "Entry broken, skipped."
 msgstr ""
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:380
+#: plugins/addons/gotomasses/class_gotomasses.inc:388
 #, fuzzy, php-format
 msgid "Can't locate or write gotomasses storage file '%s'."
 msgstr "Non posso creare il file '%s'."
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:439
+#: plugins/addons/gotomasses/class_gotomasses.inc:447
 #: plugins/admin/systems/class_workstationGeneric.inc:268
 #: plugins/admin/systems/class_terminalGeneric.inc:285
 #: plugins/admin/systems/class_servGeneric.inc:170
@@ -4962,42 +4962,42 @@ msgstr "Non posso creare il file '%s'."
 msgid "Reboot"
 msgstr "Riavvio"
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:440
+#: plugins/addons/gotomasses/class_gotomasses.inc:448
 msgid "Localboot"
 msgstr ""
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:441
+#: plugins/addons/gotomasses/class_gotomasses.inc:449
 #, fuzzy
 msgid "Halt system"
 msgstr "Cancella il sistema"
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:442
+#: plugins/addons/gotomasses/class_gotomasses.inc:450
 #, fuzzy
 msgid "Initial installation"
 msgstr "Winstation"
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:443
+#: plugins/addons/gotomasses/class_gotomasses.inc:451
 #: plugins/admin/applications/generic.tpl:63
 #: plugins/admin/mimetypes/generic.tpl:63
 msgid "Update"
 msgstr "Aggiorna"
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:444
+#: plugins/addons/gotomasses/class_gotomasses.inc:452
 #, fuzzy
 msgid "(Re)Install"
 msgstr "reinstalla"
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:445
+#: plugins/addons/gotomasses/class_gotomasses.inc:453
 #, fuzzy
 msgid "Rescan"
 msgstr "Russo"
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:446
+#: plugins/addons/gotomasses/class_gotomasses.inc:454
 #, fuzzy
 msgid "Wake"
 msgstr "Sveglia"
 
-#: plugins/addons/gotomasses/class_gotomasses.inc:447
+#: plugins/addons/gotomasses/class_gotomasses.inc:455
 #, fuzzy
 msgid "Memory check"
 msgstr "Test della memoria"
@@ -5007,59 +5007,59 @@ msgstr "Test della memoria"
 msgid "System mass deployment"
 msgstr "Gestione del sistema"
 
-#: plugins/addons/gotomasses/class_goto_task.inc:50
+#: plugins/addons/gotomasses/class_goto_task.inc:72
 #, fuzzy
 msgid "Keep current"
 msgstr "release corrente"
 
-#: plugins/addons/gotomasses/class_goto_task.inc:180
-#: plugins/addons/gotomasses/goto_task.tpl:150
+#: plugins/addons/gotomasses/class_goto_task.inc:210
+#: plugins/addons/gotomasses/goto_task.tpl:174
 #, fuzzy
 msgid "Target systems"
 msgstr "Cancella il sistema"
 
-#: plugins/addons/gotomasses/class_goto_task.inc:181
+#: plugins/addons/gotomasses/class_goto_task.inc:211
 #, fuzzy
 msgid "IP"
 msgstr "P"
 
-#: plugins/addons/gotomasses/class_goto_task.inc:226
+#: plugins/addons/gotomasses/class_goto_task.inc:321
 #: plugins/addons/gotomasses/class_target_list.inc:175
 #: plugins/admin/ogroups/class_divListOGroup.inc:167
 #: plugins/generic/references/class_reference.inc:50
 msgid "Object group"
 msgstr "Gruppo di oggetti"
 
-#: plugins/addons/gotomasses/class_goto_task.inc:226
-#: plugins/addons/gotomasses/goto_task.tpl:123
+#: plugins/addons/gotomasses/class_goto_task.inc:321
+#: plugins/addons/gotomasses/goto_task.tpl:147
 #, fuzzy
 msgid "Minute"
 msgstr "Stampanti"
 
-#: plugins/addons/gotomasses/class_goto_task.inc:227
-#: plugins/addons/gotomasses/goto_task.tpl:131
+#: plugins/addons/gotomasses/class_goto_task.inc:322
+#: plugins/addons/gotomasses/goto_task.tpl:155
 #, fuzzy
 msgid "Day"
 msgstr "giorno"
 
-#: plugins/addons/gotomasses/class_goto_task.inc:228
-#: plugins/addons/gotomasses/goto_task.tpl:135
+#: plugins/addons/gotomasses/class_goto_task.inc:323
+#: plugins/addons/gotomasses/goto_task.tpl:159
 #, fuzzy
 msgid "Month"
 msgstr "mese"
 
-#: plugins/addons/gotomasses/class_goto_task.inc:228
-#: plugins/addons/gotomasses/goto_task.tpl:139
+#: plugins/addons/gotomasses/class_goto_task.inc:323
+#: plugins/addons/gotomasses/goto_task.tpl:163
 msgid "Week day"
 msgstr ""
 
-#: plugins/addons/gotomasses/class_goto_task.inc:233
+#: plugins/addons/gotomasses/class_goto_task.inc:328
 #, fuzzy, php-format
 msgid "The given value for attribute '%s' is invalid."
 msgstr "La definizione della politica di invito per '%s' non è valido."
 
-#: plugins/addons/gotomasses/class_goto_task.inc:237
-#: plugins/addons/gotomasses/class_goto_task.inc:240
+#: plugins/addons/gotomasses/class_goto_task.inc:332
+#: plugins/addons/gotomasses/class_goto_task.inc:335
 #, fuzzy, php-format
 msgid "You must specify at least one target"
 msgstr "Dovete specificare un valido punto di montaggio."
@@ -5069,32 +5069,42 @@ msgstr "Dovete specificare un valido punto di montaggio."
 msgid "Object group membership"
 msgstr "Appartenenza al gruppo"
 
-#: plugins/addons/gotomasses/goto_task.tpl:55
+#: plugins/addons/gotomasses/goto_task.tpl:32
+#, fuzzy
+msgid "Configure DNS"
+msgstr "Configura"
+
+#: plugins/addons/gotomasses/goto_task.tpl:43
+#, fuzzy
+msgid "Configure DHCP"
+msgstr "Configura"
+
+#: plugins/addons/gotomasses/goto_task.tpl:79
 #: plugins/admin/systems/class_systemManagement.inc:32
 msgid "Systems"
 msgstr "Sistemi"
 
-#: plugins/addons/gotomasses/goto_task.tpl:73
+#: plugins/addons/gotomasses/goto_task.tpl:97
 #: plugins/admin/systems/glpi_devices.tpl:589
 msgid "MAC address"
 msgstr "MAC address"
 
-#: plugins/addons/gotomasses/goto_task.tpl:85
+#: plugins/addons/gotomasses/goto_task.tpl:109
 #, fuzzy
 msgid "IP address"
 msgstr "Indirizzi IP"
 
-#: plugins/addons/gotomasses/goto_task.tpl:95
+#: plugins/addons/gotomasses/goto_task.tpl:119
 #, fuzzy
 msgid "CVS import from file"
 msgstr "importa file CSV"
 
-#: plugins/addons/gotomasses/goto_task.tpl:164
+#: plugins/addons/gotomasses/goto_task.tpl:188
 #, fuzzy
 msgid "Add from list"
 msgstr "Seleziona il modello"
 
-#: plugins/addons/gotomasses/goto_task.tpl:172
+#: plugins/addons/gotomasses/goto_task.tpl:196
 #: plugins/admin/mimetypes/class_mimetypeManagement.inc:405
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:263
 #: setup/class_setupStep_Migrate.inc:217 setup/class_setupStep_Migrate.inc:266
@@ -5683,14 +5693,14 @@ msgstr "Scegli la variabile da cancellare o modificare"
 msgid "Fully Automatic Installation"
 msgstr "Installazione completamente automatica"
 
-#: plugins/admin/fai/class_faiScript.inc:261
-#: plugins/admin/fai/class_faiScript.inc:263
+#: plugins/admin/fai/class_faiScript.inc:281
+#: plugins/admin/fai/class_faiScript.inc:283
 #, fuzzy
 msgid "Sort direction"
 msgstr "Sezione"
 
-#: plugins/admin/fai/class_faiScript.inc:277
-#: plugins/admin/fai/class_faiScript.inc:296
+#: plugins/admin/fai/class_faiScript.inc:297
+#: plugins/admin/fai/class_faiScript.inc:316
 #: plugins/admin/fai/class_faiTemplate.inc:257
 #: plugins/admin/fai/class_faiScriptEntry.inc:84
 #: plugins/admin/fai/class_faiHook.inc:279
@@ -5699,11 +5709,11 @@ msgstr "Sezione"
 msgid "Download"
 msgstr "Scarica"
 
-#: plugins/admin/fai/class_faiScript.inc:360
+#: plugins/admin/fai/class_faiScript.inc:380
 msgid "Removing FAI script base failed"
 msgstr "RImozione dello script FAI di base fallito"
 
-#: plugins/admin/fai/class_faiScript.inc:408
+#: plugins/admin/fai/class_faiScript.inc:428
 #: plugins/admin/fai/class_faiProfile.inc:396
 #, php-format
 msgid ""
@@ -5713,15 +5723,15 @@ msgstr ""
 "Non posso inserire lo script chiamato '%s' in '%s' perché c'è già uno script "
 "con questo nome."
 
-#: plugins/admin/fai/class_faiScript.inc:441
+#: plugins/admin/fai/class_faiScript.inc:461
 msgid "Creating FAI script base failed"
 msgstr "Creazione dello script FAI di base fallito"
 
-#: plugins/admin/fai/class_faiScript.inc:525
+#: plugins/admin/fai/class_faiScript.inc:545
 msgid "Removing FAI script failed"
 msgstr "Rimozione dello script FAI fallito"
 
-#: plugins/admin/fai/class_faiScript.inc:544
+#: plugins/admin/fai/class_faiScript.inc:564
 msgid "Saving FAI script failed"
 msgstr "Salvataggio dello script FAI fallito"
 
@@ -6209,7 +6219,7 @@ msgstr "Rimuovi la classe dal profilo"
 
 #: plugins/admin/fai/class_faiProfile.inc:305
 #: plugins/admin/systems/class_glpiSelectUser.inc:157
-#: plugins/admin/systems/class_servDNSeditZone.inc:314
+#: plugins/admin/systems/class_servDNSeditZone.inc:317
 #: plugins/admin/systems/class_baseSelectDialog.inc:28
 #: plugins/admin/ogroups/phonequeue.tpl:21
 #: include/sieve/templates/object_container.tpl:8
@@ -6220,7 +6230,7 @@ msgid "Up"
 msgstr "Su"
 
 #: plugins/admin/fai/class_faiProfile.inc:306
-#: plugins/admin/systems/class_servDNSeditZone.inc:315
+#: plugins/admin/systems/class_servDNSeditZone.inc:318
 #: plugins/admin/ogroups/phonequeue.tpl:22
 #: include/sieve/templates/object_container.tpl:12
 #: include/sieve/templates/object_container_clear.tpl:12
@@ -6907,7 +6917,7 @@ msgid "Template attributes"
 msgstr "Attributi del modello"
 
 #: plugins/admin/fai/faiTemplateEntry.tpl:29
-#: plugins/admin/systems/glpiAttachmentEdit.tpl:30 include/php_setup.inc:189
+#: plugins/admin/systems/glpiAttachmentEdit.tpl:30 include/php_setup.inc:195
 msgid "File"
 msgstr "File"
 
@@ -6933,7 +6943,7 @@ msgstr "Proprietario"
 
 #: plugins/admin/fai/faiTemplateEntry.tpl:71
 #: plugins/admin/fai/faiTemplateEntry.tpl:103
-#: plugins/admin/systems/class_servDHCP.inc:25
+#: plugins/admin/systems/class_servDHCP.inc:31
 #: plugins/admin/systems/class_printGeneric.inc:850
 #: plugins/admin/systems/class_printGeneric.inc:852
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:30
@@ -6947,8 +6957,8 @@ msgid "Access"
 msgstr "Accesso"
 
 #: plugins/admin/fai/faiTemplateEntry.tpl:86
-#: plugins/admin/systems/class_servDHCP.inc:22
-#: plugins/admin/systems/class_servDNS.inc:164
+#: plugins/admin/systems/class_servDHCP.inc:28
+#: plugins/admin/systems/class_servDNS.inc:172
 msgid "Class"
 msgstr "Classe"
 
@@ -7016,19 +7026,29 @@ msgstr "Indirzzo postale primario per questa cartella condivisa"
 msgid "Select mail server to place user on"
 msgstr "Scegli un server di posta dove inserire l'utente"
 
-#: plugins/admin/groups/mail.tpl:63
+#: plugins/admin/groups/mail.tpl:43
+#, fuzzy
+msgid "Folder type"
+msgstr "alla cartella"
+
+#: plugins/admin/groups/mail.tpl:53 setup/setup_ldap.tpl:65
+#, fuzzy
+msgid "Reload"
+msgstr "Lettura"
+
+#: plugins/admin/groups/mail.tpl:81
 msgid "IMAP shared folders"
 msgstr "Cartelle con divise IMAP"
 
-#: plugins/admin/groups/mail.tpl:67
+#: plugins/admin/groups/mail.tpl:85
 msgid "Default permission"
 msgstr "Permessi di default"
 
-#: plugins/admin/groups/mail.tpl:76
+#: plugins/admin/groups/mail.tpl:94
 msgid "Member permission"
 msgstr "Permessi dei componenti"
 
-#: plugins/admin/groups/mail.tpl:88 plugins/admin/groups/paste_mail.tpl:34
+#: plugins/admin/groups/mail.tpl:106 plugins/admin/groups/paste_mail.tpl:34
 msgid "Forward messages to non group members"
 msgstr "Inoltra i messaggi anche ai non componenti dei gruppi"
 
@@ -7332,32 +7352,32 @@ msgstr "Cartelle degli amministratori"
 msgid "Select a specific department"
 msgstr "Seleziona uno specifcio dipartimento"
 
-#: plugins/admin/groups/class_groupMail.inc:287
+#: plugins/admin/groups/class_groupMail.inc:297
 msgid "read"
 msgstr "leggi"
 
-#: plugins/admin/groups/class_groupMail.inc:288
+#: plugins/admin/groups/class_groupMail.inc:298
 msgid "post"
 msgstr "post"
 
-#: plugins/admin/groups/class_groupMail.inc:289
+#: plugins/admin/groups/class_groupMail.inc:299
 msgid "external post"
 msgstr "post 'esterno'"
 
-#: plugins/admin/groups/class_groupMail.inc:290
+#: plugins/admin/groups/class_groupMail.inc:300
 msgid "append"
 msgstr "append"
 
-#: plugins/admin/groups/class_groupMail.inc:291
+#: plugins/admin/groups/class_groupMail.inc:301
 msgid "write"
 msgstr "scrivi"
 
-#: plugins/admin/groups/class_groupMail.inc:292
+#: plugins/admin/groups/class_groupMail.inc:302
 #, fuzzy
 msgid "admin"
 msgstr "Amministratori"
 
-#: plugins/admin/groups/class_groupMail.inc:293
+#: plugins/admin/groups/class_groupMail.inc:303
 #: plugins/admin/users/class_userManagement.inc:516
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:388
 #: plugins/admin/systems/class_SelectDeviceType.inc:24
@@ -7365,11 +7385,11 @@ msgstr "Amministratori"
 msgid "none"
 msgstr "nessuno"
 
-#: plugins/admin/groups/class_groupMail.inc:325
+#: plugins/admin/groups/class_groupMail.inc:335
 msgid "This 'dn' has no valid mail extensions."
 msgstr "Questo 'dn' non ha una valida estensione mail"
 
-#: plugins/admin/groups/class_groupMail.inc:349
+#: plugins/admin/groups/class_groupMail.inc:359
 msgid ""
 "Remove shared folder from mail server database when entry gets removed in "
 "LDAP"
@@ -7377,42 +7397,102 @@ msgstr ""
 "Rimuovi le cartelle condivise dal server di posta quando questi valori sono "
 "rimossi da LDAP"
 
-#: plugins/admin/groups/class_groupMail.inc:350
+#: plugins/admin/groups/class_groupMail.inc:360
 msgid "Remove the shared folder and all its contents after saving this account"
 msgstr ""
 "Rimuovi le cartelle condivise e tutto il loro contenuto dopo aver salvato "
 "questo utente"
 
-#: plugins/admin/groups/class_groupMail.inc:405
+#: plugins/admin/groups/class_groupMail.inc:415
 msgid "You're trying to add an invalid email address "
 msgstr "Stai provando ad aggiungere un indirizzo mail non valido"
 
-#: plugins/admin/groups/class_groupMail.inc:406
+#: plugins/admin/groups/class_groupMail.inc:416
 msgid "to the list of forwarders."
 msgstr ""
 
-#: plugins/admin/groups/class_groupMail.inc:642
+#: plugins/admin/groups/class_groupMail.inc:613
+#: plugins/admin/groups/class_groupMail.inc:619
+#, fuzzy
+msgid "Unspecified"
+msgstr "Non definito"
+
+#: plugins/admin/groups/class_groupMail.inc:613
+#, fuzzy
+msgid "Mails"
+msgstr "Posta/Mail"
+
+#: plugins/admin/groups/class_groupMail.inc:614
+#, fuzzy
+msgid "Tasks"
+msgstr "Compito (task)"
+
+#: plugins/admin/groups/class_groupMail.inc:614
+#, fuzzy
+msgid "Journals"
+msgstr "ore"
+
+#: plugins/admin/groups/class_groupMail.inc:615
+msgid "Events"
+msgstr ""
+
+#: plugins/admin/groups/class_groupMail.inc:615
+#: plugins/admin/systems/glpiPrinter.tpl:66 plugins/admin/systems/glpi.tpl:40
+msgid "Contacts"
+msgstr "Contatti"
+
+#: plugins/admin/groups/class_groupMail.inc:616
+#, fuzzy
+msgid "Notes"
+msgstr "Nessuno"
+
+#: plugins/admin/groups/class_groupMail.inc:619
+#, fuzzy
+msgid "Inbox"
+msgstr "Indice"
+
+#: plugins/admin/groups/class_groupMail.inc:620
+#, fuzzy
+msgid "Drafts"
+msgstr "data"
+
+#: plugins/admin/groups/class_groupMail.inc:620
+msgid "Sent items"
+msgstr ""
+
+#: plugins/admin/groups/class_groupMail.inc:621
+msgid "Junk mail"
+msgstr ""
+
+#: plugins/admin/groups/class_groupMail.inc:623
+#: include/sieve/class_sieveElement_If.inc:27
+#: include/sieve/class_sieveElement_If.inc:33
+#, fuzzy
+msgid "Default"
+msgstr "default"
+
+#: plugins/admin/groups/class_groupMail.inc:675
 msgid "Removing group mail settings failed"
 msgstr "Rimozione delle specifiche dei gruppi di posta fallita"
 
-#: plugins/admin/groups/class_groupMail.inc:830
+#: plugins/admin/groups/class_groupMail.inc:877
 msgid "Saving group mail settings failed"
 msgstr "Salvataggio delle specifiche dei gruppi di posta fallita"
 
-#: plugins/admin/groups/class_groupMail.inc:859
+#: plugins/admin/groups/class_groupMail.inc:906
 msgid "Please enter a valid email addres in 'Primary address' field."
 msgstr ""
 "Per favore inserite un validoi indirizzo e-mail nel campo 'Indirizzo "
 "principale'."
 
-#: plugins/admin/groups/class_groupMail.inc:892
+#: plugins/admin/groups/class_groupMail.inc:939
 msgid ""
 "Please choose valid permission settings. Default permission can't be emtpy."
 msgstr ""
 "Per favore scegli delle valide impostazioni di permesso. Le impostazioni di "
 "permesso non possono essere vuote."
 
-#: plugins/admin/groups/class_groupMail.inc:896
+#: plugins/admin/groups/class_groupMail.inc:943
 msgid "Please select a valid mail server."
 msgstr "Per favore selezionate un valido server di posta."
 
@@ -8284,7 +8364,7 @@ msgstr "Zona"
 
 #: plugins/admin/systems/network.tpl:89
 #: plugins/admin/systems/servdnseditzone.tpl:94
-#: plugins/admin/systems/class_servDNS.inc:163
+#: plugins/admin/systems/class_servDNS.inc:171
 msgid "TTL"
 msgstr "TTL"
 
@@ -8374,10 +8454,6 @@ msgstr "Parallele"
 #: plugins/admin/systems/glpiPrinter.tpl:54
 msgid "USB"
 msgstr "USB"
-
-#: plugins/admin/systems/glpiPrinter.tpl:66 plugins/admin/systems/glpi.tpl:40
-msgid "Contacts"
-msgstr "Contatti"
 
 #: plugins/admin/systems/glpiPrinter.tpl:69 plugins/admin/systems/glpi.tpl:52
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:57
@@ -10229,7 +10305,7 @@ msgstr "Nome del file"
 msgid "Mime-type"
 msgstr "Tipo Mime"
 
-#: plugins/admin/systems/class_termDNS.inc:186
+#: plugins/admin/systems/class_termDNS.inc:190
 #, php-format
 msgid ""
 "Can't execute specified AUTO_NETWORK_HOOK '%s'. Please check your gosa.conf."
@@ -10293,7 +10369,7 @@ msgstr ""
 "automaticamente: per favore rimuovere il record."
 
 #: plugins/admin/systems/class_termDNS.inc:502
-#: plugins/admin/systems/class_servDNSeditZone.inc:428
+#: plugins/admin/systems/class_servDNSeditZone.inc:431
 #, php-format
 msgid "Only lowercase is allowed, please check your '%ss'."
 msgstr ""
@@ -10320,7 +10396,7 @@ msgstr "Rimozione dei valori dell'host Kolab fallita"
 msgid "Modifying dhcp entry failed."
 msgstr "Modifica del valore del modello FAI fallita"
 
-#: plugins/admin/systems/class_termDNS.inc:651
+#: plugins/admin/systems/class_termDNS.inc:655
 msgid "Saving terminal to DNS object failed"
 msgstr "Salvataggio del terminale come oggetto DNS fallito"
 
@@ -11209,69 +11285,69 @@ msgstr "Salvataggio del server fallito."
 msgid "Reference"
 msgstr "referenza"
 
-#: plugins/admin/systems/class_servDHCP.inc:20
+#: plugins/admin/systems/class_servDHCP.inc:26
 #, fuzzy
 msgid "Logging"
 msgstr "Accesso"
 
-#: plugins/admin/systems/class_servDHCP.inc:21
-#: plugins/admin/systems/class_servDHCP.inc:214
-#: plugins/admin/systems/class_servDHCP.inc:383
+#: plugins/admin/systems/class_servDHCP.inc:27
+#: plugins/admin/systems/class_servDHCP.inc:225
+#: plugins/admin/systems/class_servDHCP.inc:447
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:26
 #, fuzzy
 msgid "Global options"
 msgstr "Opzioni Mail"
 
-#: plugins/admin/systems/class_servDHCP.inc:23
+#: plugins/admin/systems/class_servDHCP.inc:29
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:28
 #, fuzzy
 msgid "Subclass"
 msgstr "Classe"
 
-#: plugins/admin/systems/class_servDHCP.inc:24
+#: plugins/admin/systems/class_servDHCP.inc:30
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:29
 #, fuzzy
 msgid "Host"
 msgstr "post"
 
-#: plugins/admin/systems/class_servDHCP.inc:26
+#: plugins/admin/systems/class_servDHCP.inc:32
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:31
 #, fuzzy
 msgid "Pool"
 msgstr "Booleano"
 
-#: plugins/admin/systems/class_servDHCP.inc:27
+#: plugins/admin/systems/class_servDHCP.inc:33
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:32
 #, fuzzy
 msgid "Subnet"
 msgstr "Invia"
 
-#: plugins/admin/systems/class_servDHCP.inc:28
+#: plugins/admin/systems/class_servDHCP.inc:34
 #, fuzzy
 msgid "Failover peer"
 msgstr "Filtri"
 
-#: plugins/admin/systems/class_servDHCP.inc:29
+#: plugins/admin/systems/class_servDHCP.inc:35
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:33
 #, fuzzy
 msgid "Shared network"
 msgstr "Rete privilegiata SMTP"
 
-#: plugins/admin/systems/class_servDHCP.inc:152
+#: plugins/admin/systems/class_servDHCP.inc:163
 #, fuzzy
 msgid "You're not allowed to remove DHCP sections!"
 msgstr "Non ti è permesso di cancellare questa applicazione!"
 
-#: plugins/admin/systems/class_servDHCP.inc:186
+#: plugins/admin/systems/class_servDHCP.inc:197
 #, fuzzy, php-format
 msgid "You're about to delete the DHCP section '%s'."
 msgstr "Stai per cancellare l'applicazione '%s'."
 
-#: plugins/admin/systems/class_servDHCP.inc:200
+#: plugins/admin/systems/class_servDHCP.inc:211
 msgid "Remove DHCP service"
 msgstr "Rimuovi il servizio DHCP"
 
-#: plugins/admin/systems/class_servDHCP.inc:201
+#: plugins/admin/systems/class_servDHCP.inc:212
 msgid ""
 "This server has DHCP features enabled. You can disable them by clicking "
 "below."
@@ -11279,11 +11355,11 @@ msgstr ""
 "Il server ha le caratteristiche DHCP abilitate. Le puoi disabilitare "
 "cliccando sotto."
 
-#: plugins/admin/systems/class_servDHCP.inc:219
+#: plugins/admin/systems/class_servDHCP.inc:230
 msgid "Add DHCP service"
 msgstr "Aggiungi il servizio DHCP"
 
-#: plugins/admin/systems/class_servDHCP.inc:220
+#: plugins/admin/systems/class_servDHCP.inc:231
 msgid ""
 "This server has DHCP features disabled. You can enable them by clicking "
 "below."
@@ -11291,41 +11367,47 @@ msgstr ""
 "Il server ha le caratteristiche DHCP disabilitate. Le puoi abilitare "
 "cliccando sotto."
 
-#: plugins/admin/systems/class_servDHCP.inc:240
-#: plugins/admin/systems/class_servDHCP.inc:243
+#: plugins/admin/systems/class_servDHCP.inc:251
+#: plugins/admin/systems/class_servDHCP.inc:254
 msgid "Insert new DHCP section"
 msgstr ""
 
-#: plugins/admin/systems/class_servDHCP.inc:241
-#: plugins/admin/systems/class_servDHCP.inc:244
-#: plugins/admin/systems/class_servDHCP.inc:245
+#: plugins/admin/systems/class_servDHCP.inc:252
+#: plugins/admin/systems/class_servDHCP.inc:255
+#: plugins/admin/systems/class_servDHCP.inc:256
 #, fuzzy
 msgid "Edit DHCP section"
 msgstr "Ispezione setup PHP"
 
-#: plugins/admin/systems/class_servDHCP.inc:242
-#: plugins/admin/systems/class_servDHCP.inc:246
+#: plugins/admin/systems/class_servDHCP.inc:253
+#: plugins/admin/systems/class_servDHCP.inc:257
 #, fuzzy
 msgid "Remove DHCP section"
 msgstr "Rimuovi il servizio DHCP"
 
-#: plugins/admin/systems/class_servDHCP.inc:286
+#: plugins/admin/systems/class_servDHCP.inc:303
+#: plugins/admin/systems/class_servDHCP.inc:318
 #, fuzzy
 msgid "Removing DHCP entries failed"
 msgstr "Rimozione dei valori DNS fallita"
 
-#: plugins/admin/systems/class_servDHCP.inc:321
+#: plugins/admin/systems/class_servDHCP.inc:354
 #, fuzzy
 msgid "Can't remove DHCP object!"
 msgstr "Componente dell'oggetto??????"
 
-#: plugins/admin/systems/class_servDHCP.inc:357
-#: plugins/admin/systems/class_servDHCP.inc:360
+#: plugins/admin/systems/class_servDHCP.inc:400
+#: plugins/admin/systems/class_servDHCP.inc:403
 #, fuzzy
 msgid "Can't save DHCP object!"
 msgstr "Non posso salvare i file '%s'."
 
-#: plugins/admin/systems/class_servDHCP.inc:445
+#: plugins/admin/systems/class_servDHCP.inc:417
+#, fuzzy
+msgid "Saving DHCP service failed"
+msgstr "Salvataggio del server fallito."
+
+#: plugins/admin/systems/class_servDHCP.inc:524
 #, fuzzy
 msgid ""
 "DHCP configuration set is unknown. Please contact your system administrator."
@@ -11555,11 +11637,11 @@ msgstr ""
 "Questo server ha le caratteristiche DNS disabilitate. Potete abilitarle "
 "cliccando sotto."
 
-#: plugins/admin/systems/class_servDNS.inc:162
+#: plugins/admin/systems/class_servDNS.inc:170
 msgid "Reverse zone"
 msgstr "Zona di reverse"
 
-#: plugins/admin/systems/class_servDNS.inc:229
+#: plugins/admin/systems/class_servDNS.inc:237
 #, php-format
 msgid ""
 "Can't delete the selected zone, because it is still in use by these entry/"
@@ -11568,16 +11650,16 @@ msgstr ""
 "Non puoi cancellare la zona selezionata perchè è ancora in uso da questi "
 "valori/valore '%s'"
 
-#: plugins/admin/systems/class_servDNS.inc:306
+#: plugins/admin/systems/class_servDNS.inc:314
 msgid "Updating DNS service failed"
 msgstr "Aggiornamento servizio DNS fallito"
 
-#: plugins/admin/systems/class_servDNS.inc:315
+#: plugins/admin/systems/class_servDNS.inc:323
 msgid "Removing DNS entries failed"
 msgstr "Rimozione dei valori DNS fallita"
 
-#: plugins/admin/systems/class_servDNS.inc:332
-#: plugins/admin/systems/class_servDNS.inc:336
+#: plugins/admin/systems/class_servDNS.inc:340
+#: plugins/admin/systems/class_servDNS.inc:344
 msgid "Saving DNS entries failed"
 msgstr "Salvataggio dei valori DNS fallita"
 
@@ -11610,68 +11692,68 @@ msgstr ""
 "Verifica attentamente i dati prima di procedere perché GOsa non è in grado "
 "di annullare l'operazione."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:394
+#: plugins/admin/systems/class_servDNSeditZone.inc:397
 #, php-format
 msgid "Please choose a valid zone name."
 msgstr "per favore scegli un nome di zona valido"
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:398
+#: plugins/admin/systems/class_servDNSeditZone.inc:401
 #, php-format
 msgid "Please choose a valid reverse zone name."
 msgstr "Per favore scegli un nome valido per la 'reverse zone'."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:402
+#: plugins/admin/systems/class_servDNSeditZone.inc:405
 msgid "Only lowercase strings are allowed as zone name."
 msgstr "Solo stringe in caratteri minuscoli sono ammesse nel nome della zona."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:406
+#: plugins/admin/systems/class_servDNSeditZone.inc:409
 msgid "Please specify a numeric value for serial number."
 msgstr "Per favore specifica un valore numerico come numero seriale."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:410
+#: plugins/admin/systems/class_servDNSeditZone.inc:413
 msgid "Please specify a numeric value for refresh."
 msgstr "Per favore specifica un valore numerico per l'aggiornamento."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:414
+#: plugins/admin/systems/class_servDNSeditZone.inc:417
 msgid "Please specify a numeric value for ttl."
 msgstr "Per favore specifica un valore numerico per ttl."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:418
+#: plugins/admin/systems/class_servDNSeditZone.inc:421
 msgid "Please specify a numeric value for expire."
 msgstr "Per favore specifica un valore numerico per la scadenza."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:422
+#: plugins/admin/systems/class_servDNSeditZone.inc:425
 msgid "Please specify a numeric value for retry."
 msgstr "Per favore specifica un valore numerico per riprova."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:437
+#: plugins/admin/systems/class_servDNSeditZone.inc:440
 #, fuzzy
 msgid ""
 "The given network address is not a valid, please specify a valid IP address."
 msgstr "Il campo 'indirizzo IP' contiene un indirizzo non valido."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:444
+#: plugins/admin/systems/class_servDNSeditZone.inc:447
 #, php-format
 msgid ""
 "The specified network address is not matching with the specified zone class, "
 "try it this way x.0.0.0"
 msgstr ""
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:450
+#: plugins/admin/systems/class_servDNSeditZone.inc:453
 #, php-format
 msgid ""
 "The specified network address is not matching with the specified zone class, "
 "try it this way x.x.0.0"
 msgstr ""
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:456
+#: plugins/admin/systems/class_servDNSeditZone.inc:459
 #, php-format
 msgid ""
 "The specified network address is not matching with the specified zone class, "
 "try it this way x.x.x.0"
 msgstr ""
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:460
+#: plugins/admin/systems/class_servDNSeditZone.inc:463
 #, fuzzy, php-format
 msgid "The given network class '%s' is not valid."
 msgstr "La definizione della politica di invito per '%s' non è valido."
@@ -12388,12 +12470,17 @@ msgstr ""
 "Questo server ha le caratteristiche DNS disabilitate. Potete abilitarle "
 "cliccando sotto."
 
-#: plugins/admin/systems/class_servSsh.inc:131
+#: plugins/admin/systems/class_servSsh.inc:129
 #, fuzzy
-msgid "Removing SSH account failed"
-msgstr "Rimozione utente samba fallita"
+msgid "Removing SSH key failed"
+msgstr "Salvataggio utente samba fallito"
 
-#: plugins/admin/systems/class_servSsh.inc:164
+#: plugins/admin/systems/class_servSsh.inc:150
+#, fuzzy
+msgid "Value specified as 'SSH Key' is not valid."
+msgstr "Il valore specificato come 'Dimensione (Size)' non è valido."
+
+#: plugins/admin/systems/class_servSsh.inc:176
 #, fuzzy
 msgid "Saving SSH key failed"
 msgstr "Salvataggio utente samba fallito"
@@ -14890,12 +14977,6 @@ msgstr "Utilizza uno script personalizzato Sieve"
 msgid "Complete address"
 msgstr "Indirizzo e-mail"
 
-#: include/sieve/class_sieveElement_If.inc:27
-#: include/sieve/class_sieveElement_If.inc:33
-#, fuzzy
-msgid "Default"
-msgstr "default"
-
 #: include/sieve/class_sieveElement_If.inc:28
 #, fuzzy
 msgid "Domain part"
@@ -15222,54 +15303,54 @@ msgstr "Operazione fallita nell'etichettare l'Handle dell'oggetto"
 msgid "Removing tag from object '%s'"
 msgstr "Etichetta rimossa dall'oggetto '%s'"
 
-#: include/php_setup.inc:101
+#: include/php_setup.inc:107
 msgid "Generating this page caused the PHP interpreter to raise some errors!"
 msgstr ""
 "La generazione di questa pagine ha causato uno o più errori dell'interprete "
 "PHP!"
 
-#: include/php_setup.inc:106
+#: include/php_setup.inc:112
 msgid "Send bug report to the GOsa Team"
 msgstr ""
 
-#: include/php_setup.inc:106
+#: include/php_setup.inc:112
 #, fuzzy
 msgid "Send bugreport"
 msgstr "Mittente"
 
-#: include/php_setup.inc:111 html/main.php:391
+#: include/php_setup.inc:117 html/main.php:391
 msgid "Toggle information"
 msgstr "Toggle informazione??????????"
 
-#: include/php_setup.inc:121
+#: include/php_setup.inc:127
 msgid "PHP error"
 msgstr "Errore PHP"
 
-#: include/php_setup.inc:140
+#: include/php_setup.inc:146
 msgid "class"
 msgstr "Classe"
 
-#: include/php_setup.inc:146
+#: include/php_setup.inc:152
 msgid "function"
 msgstr "Funzione"
 
-#: include/php_setup.inc:151
+#: include/php_setup.inc:157
 msgid "static"
 msgstr "Statico"
 
-#: include/php_setup.inc:155
+#: include/php_setup.inc:161
 msgid "method"
 msgstr "Metodo"
 
-#: include/php_setup.inc:188
+#: include/php_setup.inc:194
 msgid "Trace"
 msgstr "Traccia"
 
-#: include/php_setup.inc:189
+#: include/php_setup.inc:195
 msgid "Line"
 msgstr "Linea"
 
-#: include/php_setup.inc:190
+#: include/php_setup.inc:196
 msgid "Arguments"
 msgstr "Argomenti"
 
@@ -15754,7 +15835,7 @@ msgstr ""
 "Ho trovato più di una zona di reverse per la zona dns '%s'. Operazione di "
 "ricerca nella zona interrotta."
 
-#: include/functions_dns.inc:610
+#: include/functions_dns.inc:611
 #, php-format
 msgid ""
 "Undefined zone name '%s'. Zone name must look like this 'server/zone.com'."
@@ -15824,6 +15905,11 @@ msgstr ""
 #: include/class_config.inc:516
 msgid "SID and/or RIDBASE missing in your configuration!"
 msgstr "SID e/o RIDBASE mancante nella configurazione!"
+
+#: html/setup.php:78 html/index.php:141 html/password.php:71
+#, php-format
+msgid "Directory '%s' specified as compile directory is not accessible!"
+msgstr "La directory '%s' specificata per la compilazione non è accessibile!"
 
 #: html/getvcard.php:36
 msgid "Error: getcvard.php needs a parameter to export a vcard!"
@@ -15967,11 +16053,6 @@ msgid "GOsa configuration %s/%s is not readable. Aborted."
 msgstr ""
 "La configurazione di GOsa  %s/gosa.conf non è leggibile. Operazione "
 "interrotta."
-
-#: html/index.php:141 html/password.php:71
-#, php-format
-msgid "Directory '%s' specified as compile directory is not accessible!"
-msgstr "La directory '%s' specificata per la compilazione non è accessibile!"
 
 #: html/index.php:224
 msgid ""
@@ -16436,11 +16517,6 @@ msgstr "URL di connessione"
 #, fuzzy
 msgid "TLS connection"
 msgstr "Connessione"
-
-#: setup/setup_ldap.tpl:65
-#, fuzzy
-msgid "Reload"
-msgstr "Lettura"
 
 #: setup/setup_ldap.tpl:69
 #, fuzzy
@@ -18027,6 +18103,10 @@ msgstr "Controllo schema terminato correttamente"
 #, fuzzy
 msgid "Schema check failed"
 msgstr "Salvataggio del telefono fallito"
+
+#, fuzzy
+#~ msgid "Removing SSH account failed"
+#~ msgstr "Rimozione utente samba fallita"
 
 #, fuzzy
 #~ msgid "Reomve"
