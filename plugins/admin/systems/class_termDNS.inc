@@ -765,22 +765,26 @@ class termDNS extends plugin
     while($attr = $ldap->fetch()){
       $dhcp_dns[$attr['dn']] = $attr['dhcpPrimaryDN'][0];
     }
-  
+ 
     foreach($dhcp_dns as $key => $pri_dns){
       $ldap->cat($pri_dns,array("cn"));
       $tmp = $ldap->fetch();
-      $dhcp_dns[$key] = $tmp['cn'][0];
+      if(isset($tmp['cn'][0])){
+        $dhcp_dns[$key] = $tmp['cn'][0];
+      }else{
+        unset($dhcp_dns[$key]);
+      }
     }
- 
+
+    $tmp = $tmp2 = array();
     foreach($dhcp_dns as $dn => $cn){
       $ldap->cd($dn);
       $ldap->search("(|(objectClass=dhcpService)(objectClass=dhcpGroup)".
                     "(objectClass=dhcpSubnet)(objectClass=dhcpSharedNetwork))",array("cn"));
-      $tmp = array();
       while($attr = $ldap->fetch()){
         $tmp[$attr['dn']] = $attr['cn'][0];
       }
-      $tmp2 = $this->create_tree($tmp,preg_replace("/^[^,]+,/i","",$dn),"(".$cn.")&nbsp;");
+      $tmp2 = array_merge($tmp2,$this->create_tree($tmp,preg_replace("/^[^,]+,/i","",$dn),"(".$cn.")&nbsp;"));
     }
     return($tmp2);
   }
