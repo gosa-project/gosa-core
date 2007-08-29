@@ -24,6 +24,12 @@ class servDNSeditZoneEntries extends plugin
     /* Initialise class
      */
     $this->RecordTypes  = getDnsRecordTypes();
+
+    /* Remove nSRecord from listed types */
+    if(isset($this->RecordTypes['nSRecord'])){
+      unset($this->RecordTypes['nSRecord']);
+    }
+
     $this->dn           = "zoneName=".getNameFromMix($zoneObject['InitialzoneName']).",".$dn; 
     $this->zoneName     = $zoneObject['InitialzoneName'];
     $this->reverseName  = $zoneObject['InitialReverseZone'];
