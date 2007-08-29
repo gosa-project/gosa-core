@@ -116,7 +116,7 @@ class dhcpNetwork extends plugin
       $smarty->assign("filename", "");
     }
     if (isset($this->statements['next-server'])){
-      $smarty->assign("nextserver", trim($this->statements['next-server'], '"'));
+      $smarty->assign("nextserver", $this->statements['next-server']);
     } else {
       $smarty->assign("nextserver", "");
     }
@@ -169,7 +169,13 @@ class dhcpNetwork extends plugin
         if ($_POST["$val"] == ''){
           unset($this->statements["$key"]);
         } else {
-          $this->statements["$key"]= '"'.get_post("$val").'"';
+    
+          /* Only quote filename values */
+          if(in_array($key,array("filename"))){
+            $this->statements["$key"]= '"'.get_post("$val").'"';
+          }else{
+            $this->statements["$key"]= get_post("$val");
+          }
         }
       }
 
@@ -215,5 +221,5 @@ class dhcpNetwork extends plugin
   }
   
 }
-
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
