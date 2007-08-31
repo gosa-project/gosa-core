@@ -122,18 +122,12 @@ if((!isset($_SESSION['Last_init_lang']))){
   $_SESSION['Last_init_lang'] = get_browser_language();
 }
 
-/* Language setup */
-if ($config->data['MAIN']['LANG'] == ""){
-  
-  /* If last language != current force navi reload */
-  if($_SESSION['Last_init_lang'] != get_browser_language()){
-    $reload_navigation = true;
-  }
-  $lang= get_browser_language();
-  $_SESSION['Last_init_lang'] = $lang;
-} else {
-  $lang= $config->data['MAIN']['LANG'];
+/* If last language != current force navi reload */
+if($_SESSION['Last_init_lang'] != get_browser_language()){
+  $reload_navigation = true;
 }
+$lang= get_browser_language();
+$_SESSION['Last_init_lang'] = $lang;
 
 putenv("LANGUAGE=");
 putenv("LANG=$lang");

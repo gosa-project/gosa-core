@@ -146,12 +146,7 @@ if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))){
 /* Check for old files in compile directory */
 clean_smarty_compile_dir($smarty->compile_dir);
 
-/* Language setup */
-if ($config->data['MAIN']['LANG'] == ""){
-  $lang= get_browser_language();
-} else {
-  $lang= $config->data['MAIN']['LANG'];
-}
+$lang= get_browser_language();
 putenv("LANGUAGE=");
 putenv("LANG=$lang");
 setlocale(LC_ALL, $lang);
