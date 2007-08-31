@@ -574,7 +574,11 @@ function getDNSHostEntriesDiff($config,$oldName,$newEntry,$newName)
       $ptrObj = $baseObj;
       $reverseName = getNameFromMix($reverseNameMix);
       $ptrObj['zoneName']           = $reverseName;
-      $ptrObj['pTRRecord']          = preg_replace("/\.\.$/",".",$newName.".".$zoneName.".");
+      if(!preg_match("/\.$/",$newName)){
+        $ptrObj['pTRRecord']          = preg_replace("/\.\.$/",".",$newName.".".$zoneName.".");
+      }else{
+        $ptrObj['pTRRecord']          = preg_replace("/\.\.$/",".",$newName.".");
+      .}
       $ptrObj['relativeDomainName'] = $rec['value'];
     
       $add[$PTRdn] = $ptrObj;
