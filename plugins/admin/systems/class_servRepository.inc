@@ -276,6 +276,7 @@ class servrepository extends plugin
     $divlist = new divList("repositories");
     $divlist->SetEntriesPerPage(0);
     $divlist->setHeight(400);
+    $divlist->SetPluginMode();
 
     $divlist->setHeader(array(array("string"=>_("Release"),"attach"=>"style='width:80px;'"),
                               array("string"=>_("Sections")),

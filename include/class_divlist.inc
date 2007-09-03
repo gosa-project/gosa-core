@@ -18,7 +18,8 @@ class divlist {
 
   var $force_height = false;
   var $list_footer = "";
-  
+  var $fix_list_for_plugins = FALSE; 
+ 
 	// Added php 4 constructor
 	function divlist($pageid){
 
@@ -37,6 +38,11 @@ class divlist {
 	function __destruct(){
 	
 	}
+
+  function SetPluginMode($val = TRUE)
+  {
+    $this->fix_list_for_plugins = $val;
+  }
 
   function SetFooter($str)
   {
@@ -73,7 +79,7 @@ class divlist {
 	
 	function DrawList(){
 		$s_return = "";
-    if(!$this->force_height){
+    if(!$this->force_height || $this->fix_list_for_plugins){
 		  $s_return.= "<table summary='".$this->s_summary."' style='width:".
                   $this->s_width.";height:".$this->s_height.
                   "px;' cellspacing='0' id='t_scrolltable'>";
