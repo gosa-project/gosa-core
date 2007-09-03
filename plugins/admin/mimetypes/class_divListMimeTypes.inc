@@ -179,7 +179,7 @@ class divListMimeTypes extends MultiSelectWindow
 
       /* Cutted objects should be displayed in light grey */
       $display = $val['cn'][0].$desc;
-      if($this->parent->CopyPasteHandler->cutCurrent && $val['dn'] == $this->parent->CopyPasteHandler->objectdn){
+      if(isset($this->parent->CopyPasteHandler) && $this->parent->CopyPasteHandler->cutCurrent && $val['dn'] == $this->parent->CopyPasteHandler->objectdn){
         $display = "<font color='#999999'>".$display."</font>";
       }
 

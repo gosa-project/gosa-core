@@ -265,7 +265,7 @@ class divListUsers extends MultiSelectWindow
       $UseImg = $usrimg2."&nbsp;".$posix."&nbsp;".$enviro."&nbsp;".$maila."&nbsp;".$fonac."&nbsp;".$faxac."&nbsp;".$samba."&nbsp;".$netatalk;
 
       /* Cutted objects should be displayed in light grey */ 
-      if($this->parent->CopyPasteHandler->cutCurrent && $val['dn'] == $this->parent->CopyPasteHandler->objectdn){
+      if(isset($this->parent->CopyPasteHandler) && $this->parent->CopyPasteHandler->cutCurrent && $val['dn'] == $this->parent->CopyPasteHandler->objectdn){
         $display = "<font color='#999999'>".$display."</font>";
       }
 
