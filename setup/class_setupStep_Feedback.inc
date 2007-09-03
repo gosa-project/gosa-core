@@ -239,7 +239,7 @@ class Step_Feedback  extends setup_step
       }else{
         $str .= "\nGet started: FALSE";
       }
-      $str .= "\nProblems : ".base64_encode($this->problems_encountered);
+      $str .= "\nProblems : ".($this->problems_encountered);
 
       if($this->first_use){
         $str .= "\nFirst use: TRUE";
@@ -253,7 +253,7 @@ class Step_Feedback  extends setup_step
       $str .="\nPHP_Version: ".$this->php_version;
       $str .="\nLDAP Server: ".$this->ldap_server;
       $str .="\nObject count: ".$this->object_count;
-      $str .="\nMissing features: ".base64_encode($this->want_to_see_next);
+      $str .="\nMissing features: ".($this->want_to_see_next);
     }
 
     $str .= "\n\nFeatures used";
