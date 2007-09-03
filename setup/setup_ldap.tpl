@@ -74,7 +74,7 @@
 		</div>
 		<div class='step4_value'>
 			<input type='text' name='admin_given' maxlength='160' size='40' value='{$admin_given}'>
-			{if $append_base_to_admin_dn}{$base}{/if}
+			{if $append_base_to_admin_dn},{$base}{/if}
 			<input type='image' class='center' src='images/folder.png' title='{t}Select user{/t}' name='resolve_user' alt='{t}Select user{/t}'>
 		</div>
 	</div>
