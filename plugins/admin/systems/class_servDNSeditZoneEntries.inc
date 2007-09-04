@@ -61,6 +61,25 @@ class servDNSeditZoneEntries extends plugin
     plugin::execute();
 
 
+
+    /* Fill templating stuff */
+    $smarty= get_smarty();
+    $display= "";
+
+    $table = "";
+    foreach($this->Devices as $key => $dev){
+      $table .= $this->generateRecordConfigurationRow($key);
+    }
+
+    $smarty->assign("disableDialog",$this->disableDialog);
+    $smarty->assign("table",$table);;
+    $display.= $smarty->fetch(get_template_path('servDNSeditZoneEntries.tpl', TRUE));
+    return($display);
+  }
+
+
+  function save_object()
+  {
     /* Check posts for operations ...  
      */
     $once = true;
@@ -119,28 +138,8 @@ class servDNSeditZoneEntries extends plugin
           $this->Devices[$Name]['RECORDS'][] = $tmp;
         }
       }
-
-      
     }
 
-    /* Fill templating stuff */
-    $smarty= get_smarty();
-    $display= "";
-
-    $table = "";
-    foreach($this->Devices as $key => $dev){
-      $table .= $this->generateRecordConfigurationRow($key);
-    }
-
-    $smarty->assign("disableDialog",$this->disableDialog);
-    $smarty->assign("table",$table);;
-    $display.= $smarty->fetch(get_template_path('servDNSeditZoneEntries.tpl', TRUE));
-    return($display);
-  }
-
-
-  function save_object()
-  {
     /* Possible attributes posted 
      */
     foreach($_POST as $name => $value){
@@ -224,7 +223,7 @@ class servDNSeditZoneEntries extends plugin
 
       /* Checking entry name
        */
-      if((!is_uid($DevName)) | (empty($DevName))){
+      if((!is_uid($DevName)) || (empty($DevName))){
         $message[] = sprintf(_("Entry name '%s' contains invalid characters."), $DevName);
       }      
 
