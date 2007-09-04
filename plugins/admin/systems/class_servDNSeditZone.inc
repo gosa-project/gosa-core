@@ -210,6 +210,7 @@ class servdnseditZone extends plugin
       $smarty->assign("AllowZoneEdit" , true);
       if(isset($_POST['EditZoneEntries'])){
         $this->dialog= new servDNSeditZoneEntries($this->config,$this->dn,$this->ZoneObject);
+        $this->dialog->parent = $this;
       }
     }
 
