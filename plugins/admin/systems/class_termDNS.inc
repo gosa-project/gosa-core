@@ -416,7 +416,7 @@ class termDNS extends plugin
     /* Call common method to give check the hook */
     $message= plugin::check();
 
-    if($this->dhcpEnabled && $this->dhcpParentNode != "" && count($this->dhcpHostEntry) == 0){
+    if($this->dhcpEnabled && $this->dhcp_is_Account && $this->dhcpParentNode != "" && count($this->dhcpHostEntry) == 0){
       $message[] =_("You haven not configured your dhcp settings yet.");
     }
 
