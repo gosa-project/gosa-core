@@ -223,7 +223,7 @@ class servDNSeditZoneEntries extends plugin
 
       /* Checking entry name
        */
-      if((!is_uid($DevName)) || (empty($DevName))){
+      if(!preg_match("/^[a-z0-9_\.-]+$/i", $DevName) || (empty($DevName))){
         $message[] = sprintf(_("Entry name '%s' contains invalid characters."), $DevName);
       }      
 
