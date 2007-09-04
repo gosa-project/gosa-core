@@ -104,6 +104,23 @@ class servDNSeditZoneEntries extends plugin
         }
       }
 
+      /* Add PTR record 
+       */
+      if((preg_match("/^AddPtr_/",$name)) && ($once)){
+        $once   = false;
+        if(isset($this->Devices[$Name]['RECORDS'][$RecordID])){
+          $tmp = $this->Devices[$Name]['RECORDS'][$RecordID];
+          $ip = $tmp['value'];
+          $match = preg_replace("/^[^\/]*+\//","",$this->reverseName);
+          $ip = preg_replace("/^".normalizePreg($match)."/","",$ip);
+          $ip = preg_replace("/^\./","",$ip);
+          $tmp['type'] = "pTRRecord";
+          $tmp['value'] = $ip;
+          $this->Devices[$Name]['RECORDS'][] = $tmp;
+        }
+      }
+
+      
     }
 
     /* Fill templating stuff */
@@ -396,10 +413,20 @@ class servDNSeditZoneEntries extends plugin
         <td>
           <input type='text'  value='".$record['value']."' name='ValueSelection_".$name."' style='width:250px;'>
         </td>
-        <td style='width:50px;text-align:right;'>
+        <td style='width:75px;text-align:right;'>
           <input type='image' name='AddRecord_".$name."'   src='images/list_new.png' alt='"._("Add")."' title='"._("Add")."'>
           <input type='image' name='RemoveRecord_".$name."' src='images/edittrash.png'      alt='"._("Remove")."' title='"._("Remove")."'>
-        </td>
+        ";
+
+        if($record['type'] == "aRecord"){
+          $str .="<input type='image' name='AddPtr_".$name."' src='images/network.png' 
+                    alt='"._("Add PTR")."' title='"._("Add PTR record")."'>";
+        }else{
+          $str .= "<img src='images/empty.png' alt=''>";
+        }
+
+      $str.=
+        "</td>
       </tr>";
     }
     $str .="</table>";
