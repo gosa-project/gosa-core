@@ -321,6 +321,7 @@ class servdns extends plugin
       $ldap->cd($dn);
       $ldap->rmdir_recursive($dn);
       show_ldap_error($ldap->get_error(), _("Removing DNS entries failed"));
+      $this->handle_post_events("remove",array("dn" => $dn));
     }
 
     /* move follwoing entries
@@ -338,10 +339,12 @@ class servdns extends plugin
         $ldap->cd($dn);
         $ldap->modify ($attrs);
         show_ldap_error($ldap->get_error(), _("Saving DNS entries failed"));
+        $this->handle_post_events("modify",array("dn" => $dn));
       }else{
         $ldap->cd($dn);
         $ldap->add($attrs);
         show_ldap_error($ldap->get_error(), _("Saving DNS entries failed"));
+        $this->handle_post_events("add",array("dn" => $dn));
       }
     }
   }
