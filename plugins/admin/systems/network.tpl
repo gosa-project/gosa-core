@@ -67,8 +67,9 @@
 		<td	style="width:50%;vertical-align:top;border-left:1px solid #b0b0b0;" valign="top">
 
       {if $ZoneCnt}
-        {if $DNSAccount == true}checked="checked"
+        {if $DNSAccount == true}
         <input type="checkbox" name="enableDNS" value="1" {$DNSaccountACL} class='center' 
+          checked="checked"
           onclick="toggle('test2');
             changeState('zoneName');
             changeState('dNSTTL');
