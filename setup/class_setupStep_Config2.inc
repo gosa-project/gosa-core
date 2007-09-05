@@ -48,11 +48,12 @@ class Step_Config2 extends setup_step
   var $sambaDomain_found    = FALSE;
   var $use_netatalk         = FALSE;
   var $enableFAI_management = FALSE;
+  var $enableMimeType       = FALSE;
 
   var $timezone       = "Europe/Berlin";
   var $timezones      = array();
 
-  var $attributes = array("governmentmode","sambaidmapping","cyrusunixstyle","mail","use_netatalk","enableFAI_management","timezone");
+  var $attributes = array("governmentmode","sambaidmapping","cyrusunixstyle","mail","use_netatalk","enableFAI_management","timezone","enableMimeType");
   var $called = FALSE;
 
   function Step_Config2()
@@ -118,6 +119,11 @@ class Step_Config2 extends setup_step
       /* Check the FAI schema is used */
       if(is_array($tmp) && isset($tmp['FAIclass'])){
 #        $this->enableFAI_management = TRUE;
+      }
+
+      /* Check the MimeType schema is used */
+      if(is_array($tmp) && isset($tmp['gotoMimeType'])){
+        $this->enableMimeType = TRUE;
       }
 
       if(is_array($tmp) && isset($tmp['dhcpClass'])){
