@@ -225,6 +225,11 @@ class servdnseditZone extends plugin
         }
       }else{
         $this->dialog->save();
+        $rev = FlipIp(getNameFromMix($this->InitialReverseZone)).".in-addr.arpa";
+        $for = getNameFromMix($this->InitialzoneName);
+       
+        $this->parent->handle_post_events("modify",array("dn" => $this->dn,"zoneName" => $rev));
+        $this->parent->handle_post_events("modify",array("dn" => $this->dn,"zoneName" => $for));
         $this->dialog = false;
       }
     }

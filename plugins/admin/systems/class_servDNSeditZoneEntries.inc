@@ -346,9 +346,6 @@ class servDNSeditZoneEntries extends plugin
     foreach($tmp['del'] as $dn => $del){
       $ldap->cd($dn);
       $ldap->rmdir_recursive($dn);
-      if(is_object($this->parent->parent)){
-        $this->parent->parent->handle_post_events("remove",array("dn" => $dn));
-      }
     }
 
     /* Add || Update new DNS entries
@@ -359,15 +356,9 @@ class servDNSeditZoneEntries extends plugin
       if(count($ldap->fetch())){
         $ldap->cd($dn);
         $ldap->modify ($attrs);
-        if(is_object($this->parent->parent)){
-          $this->parent->parent->handle_post_events("modify",array("dn" => $dn));
-        }
       }else{
         $ldap->cd($dn);
         $ldap->add($attrs);
-        if(is_object($this->parent->parent)){
-          $this->parent->parent->handle_post_events("create",array("dn" => $dn));
-        }
       }
     }
   }

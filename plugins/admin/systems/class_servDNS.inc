@@ -265,6 +265,7 @@ class servdns extends plugin
   function remove_from_parent()
   {
     if($this->DNSinitially_was_account){
+      $this->is_account = FALSE;
       $bool = true;
       foreach($this->Zones as $key => $zone){
         $bool= $bool & $this->RemoveZone($key);
@@ -318,10 +319,17 @@ class servdns extends plugin
     /* Delete dns 
      */
     foreach($tmp['del'] as $dn => $del){
+      $for = getNameFromMix($del['InitialzoneName']);
+      $rev = FlipIp(getNameFromMix($del['InitialReverseZone'])).".in-addr.arpa";
       $ldap->cd($dn);
       $ldap->rmdir_recursive($dn);
       show_ldap_error($ldap->get_error(), _("Removing DNS entries failed"));
-      $this->handle_post_events("remove",array("dn" => $dn));
+
+      /* Handle Post events */
+      if(preg_match("/^zoneName=/",$dn)){
+        $this->handle_post_events("remove",array("dn" => $dn,"zoneName" => $for));
+        $this->handle_post_events("remove",array("dn" => $dn,"zoneName" => $rev));
+      }
     }
 
     /* move follwoing entries
@@ -339,12 +347,20 @@ class servdns extends plugin
         $ldap->cd($dn);
         $ldap->modify ($attrs);
         show_ldap_error($ldap->get_error(), _("Saving DNS entries failed"));
-        $this->handle_post_events("modify",array("dn" => $dn));
+
+        /* Handle Post events */
+        if(preg_match("/^zoneName=/",$dn)){
+          $this->handle_post_events("modify",array("dn" => $dn,"zoneName" => $attrs['zoneName']));
+        }
       }else{
         $ldap->cd($dn);
         $ldap->add($attrs);
         show_ldap_error($ldap->get_error(), _("Saving DNS entries failed"));
-        $this->handle_post_events("add",array("dn" => $dn));
+
+        /* Handle Post events */
+        if(preg_match("/^zoneName=/",$dn)){
+          $this->handle_post_events("add",array("dn" => $dn,"zoneName" => $attrs['zoneName']));
+        }
       }
     }
   }
