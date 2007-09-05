@@ -665,6 +665,9 @@ class printgeneric extends plugin
       $ldap->ls("(cn=".$this->cn.")","ou=printers,ou=systems,".$this->base, array("cn"));
       if ($ldap->count() != 0){
         while ($attrs= $ldap->fetch()){
+          if(preg_match("/cn=dhcp,/",$attrs['dn'])){
+            continue;
+          }
           if ($attrs['dn'] != $this->orig_dn){
             $message[]= sprintf (_("There is already an entry '%s' in the base choosen by you"), $this->cn);
             break;
