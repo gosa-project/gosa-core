@@ -21,6 +21,7 @@
 </table>
 {else}
 <table summary="" width="100%">
+{if $dhcp_server_list_cnt}
 <tr>
 	<td style="width:100%;vertical-align:top;">
 		<b>{t}Take over dhcp configuration from following server{/t}</b>&nbsp;
@@ -30,6 +31,7 @@
 		<input type="submit" name="take_over" value="{t}Apply{/t}">
 	</td>
 </tr>
+{/if}
 <tr>
 	<td style="width:100%;vertical-align:top;">
 	<h2>{t}DHCP sections{/t}</h2>

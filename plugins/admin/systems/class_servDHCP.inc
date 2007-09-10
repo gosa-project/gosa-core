@@ -69,6 +69,12 @@ class servdhcp extends plugin
     $ldap->cd($this->config->current['BASE']);
     $ldap->search("(&(objectClass=goServer)(dhcpServiceDN=*))",array("dn","cn","dhcpServiceDN"));
     while($attrs = $ldap->fetch()){
+
+      /* Skip own config */
+      if($this->dn != "new" && preg_match("/".normalizePreg($this->dn)."$/",$attrs['dn'])){
+        continue;
+      }
+  
       $ret['ENTRIES'][] = $attrs;
     }
     foreach($ret['ENTRIES'] as $key => $data){
@@ -109,6 +115,7 @@ class servdhcp extends plugin
 
     /* Give smarty the required informations */
     $smarty->assign("dhcp_server_list", $this->dhcp_server_list['FOR_LIST']);
+    $smarty->assign("dhcp_server_list_cnt", count($this->dhcp_server_list['FOR_LIST']));
     
     /* Take over requested, save id */
     if(isset($_POST['take_over_src']) && isset($_POST['take_over'])){
