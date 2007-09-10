@@ -38,9 +38,8 @@
               <tr>
                 <td>
                   <input type='checkbox' name='dummy' class='center' disabled>
-                  {t}Enable DHCP for this device{/t}
-                  <input type='image' src='images/list_reload.png' class='center'><br>
-                  <i>{t}No dhcp service present in your ldap database, you will have to setup the dhcp service first.{/t}</i>
+                  {t}Enable DHCP for this device{/t} ({t}not configured{/t})
+                  <input type='image' src='images/list_reload.png' class='center'>
                 </td>
               </tr>
               {/if}
@@ -114,9 +113,8 @@
       </div>
     {else}        
       <input type="checkbox" name="dummy" value="1" disabled class='center'>
-      {t}Enable DNS for this device{/t}
-      <input type='image' src='images/list_reload.png' class='center'><br>
-      <i>{t}No dns service present in your ldap database, you will have to setup the dns service first.{/t}</i>
+      {t}Enable DNS for this device{/t} ({t}not configured{/t})
+      <input type='image' src='images/list_reload.png' class='center'>
     {/if}
 
 		</td>
