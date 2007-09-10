@@ -64,7 +64,7 @@ class servdhcp extends plugin
 
   function get_list_of_dhcp_servers()
   {
-    $ret = array();
+    $ret = array("ENTRIES"=> array(),"FOR_LIST"=> array());
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
     $ldap->search("(&(objectClass=goServer)(dhcpServiceDN=*))",array("dn","cn","dhcpServiceDN"));
