@@ -140,8 +140,8 @@ class servdhcp extends plugin
       $info = $this->get_dhcp_info_string($id);
       $smarty->assign("dns_take_over",TRUE);
       $smarty->assign("info",$info);
-      $warning = sprintf(_("You are going to take over the dhcp setup from server '%s'."),$this->dhcp_server_list['ENTRIES'][$id]['cn'][0]);
-      $warning2 = _("The take over will be startet when you save this system. To abort this action, use the cancel button below."); 
+      $warning = sprintf(_("You are going to migrate the DHCP setup from server '%s'."),$this->dhcp_server_list['ENTRIES'][$id]['cn'][0]);
+      $warning2 = _("The migration will be startet when you save this system. To cancel this action, use the cancel button below."); 
       $smarty->assign("warning",$warning);
       $smarty->assign("warning2",$warning2);
       return($smarty->fetch(get_template_path('servdhcp.tpl', TRUE)));

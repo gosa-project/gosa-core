@@ -24,11 +24,11 @@
 {if $dhcp_server_list_cnt}
 <tr>
 	<td style="width:100%;vertical-align:top;">
-		<b>{t}Take over dhcp configuration from following server{/t}</b>&nbsp;
+		<b>{t}Take over DHCP configuration from{/t}</b>&nbsp;
 		<select name='take_over_src'>
 			{html_options options=$dhcp_server_list}
 		</select>
-		<input type="submit" name="take_over" value="{t}Apply{/t}">
+		<input type="submit" name="take_over" value="{t}Take over{/t}">
 	</td>
 </tr>
 {/if}
@@ -36,7 +36,6 @@
 	<td style="width:100%;vertical-align:top;">
 	<h2>{t}DHCP sections{/t}</h2>
 		{$DhcpList}
-<!--		<input type="submit" name="takeOver" value="{t}Take over{/t}" {$dhcpACL}>-->
 	</td>
 </tr>
 </table>
