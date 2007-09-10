@@ -66,10 +66,10 @@ class dhcpHost extends dhcpPlugin
     $display= $smarty->fetch(get_template_path('dhcp_host.tpl', TRUE)).$this->network->execute();
 
     /* Merge arrays for advanced view */
+    $this->fix_options();
     foreach (array("options", "statements") as $type){
       $this->advanced->$type= $this->$type + $this->network->$type;
     }
-
     $display.= $this->advanced->execute();
 
     /* Merge back for removals */

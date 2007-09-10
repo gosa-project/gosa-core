@@ -39,15 +39,6 @@
 					</tr>
 				</table>
 				<table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
-                    <tr>
-						<td>
-							<input type="checkbox" name="SubSearch" value="1" {$SubSearchCHK}
-								onClick="mainform.submit();">
-							{t}Search in subtrees{/t}
-						</td>
-					</tr>
-                </table>
-				<table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
 					<tr>
 						<td width="50%">
 							<img alt="" src="{$search_image}" align=middle>&nbsp;{t}Display groups matching{/t}
@@ -69,6 +60,15 @@
 						</td>
 					</tr>
 				</table>
+				<table summary="" width="100%" style="border-top:1px solid #B0B0B0;background-color:#F8F8F8">
+                    <tr>
+						<td>
+							<input type="checkbox" name="SubSearch" value="1" {$SubSearchCHK}
+								onClick="mainform.submit();">
+							{t}Search in subtrees{/t}
+						</td>
+					</tr>
+                </table>
 			   {$apply}
    			</div>
   		</td>

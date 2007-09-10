@@ -130,7 +130,7 @@ class dhcpAdvanced extends plugin
 
   function setAutoOptions($addopt= array())
   {
-    $options= array("routers", "domain-name", "subnet-mask", "broadcast-address");
+    $options= array("routers", "domain-name", "domain-name-servers", "subnet-mask", "broadcast-address");
     $this->autoOptions= array_merge($options, $addopt);
   }
 

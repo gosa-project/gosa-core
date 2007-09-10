@@ -48,6 +48,7 @@ class dhcpNetwork extends plugin
           }
         }
         $servers[get_post('addserver')]= get_post('addserver');
+
         $tmp= "";
         foreach($servers as $val){
           $tmp.= $val.",";

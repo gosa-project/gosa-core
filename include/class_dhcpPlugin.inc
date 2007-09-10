@@ -195,6 +195,14 @@ class dhcpPlugin extends plugin
     $this->removeAttrs($name, 'dhcpStatement');
   }
 
+
+  function fix_options()
+  {
+    foreach (array('domain-name-servers') as $key){
+      unset ($this->options[$key]);
+    }
+  }
+
 }
 
 ?>
