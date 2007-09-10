@@ -19,6 +19,9 @@ class servdhcp extends plugin
 
   var $orig_dn = "";
 
+  var $dhcp_server_list   = array();
+  var $take_over_id       = -1;
+
   function servdhcp ($config, $dn= NULL, $parent= NULL)
   {
     plugin::plugin ($config, $dn, $parent);
@@ -49,6 +52,43 @@ class servdhcp extends plugin
       $this->is_account= FALSE;
     }
 		
+    $this->dhcp_server_list = $this->get_list_of_dhcp_servers();
+  }
+
+  
+  function take_over_service()
+  {
+    
+  }
+
+
+  function get_list_of_dhcp_servers()
+  {
+    $ret = array();
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(&(objectClass=goServer)(dhcpServiceDN=*))",array("dn","cn","dhcpServiceDN"));
+    while($attrs = $ldap->fetch()){
+      $ret['ENTRIES'][] = $attrs;
+    }
+    foreach($ret['ENTRIES'] as $key => $data){
+      $ret['FOR_LIST'][$key] = $data['cn'][0];
+    }
+    return($ret);
+  }  
+
+
+  function get_dhcp_info_string($id)
+  {
+    $ret = "";
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd("cn=dhcp,".$this->dhcp_server_list['ENTRIES'][$id]['dn']);
+    $ldap->search("(|(objectClass=dhcpSharedNetwork)(objectClass=dhcpSubnet)(objectClass=dhcpPool)(objectClass=dhcpGroup)(objectClass=dhcpHost))",array("dn","cn"));
+    $ldap->search("(objectClass=*)",array("dn","cn"));
+    while($attrs = $ldap->fetch()){
+      $ret .= $attrs['dn']."\n";
+    }
+    return($ret);
   }
 
 
@@ -59,7 +99,52 @@ class servdhcp extends plugin
 
     /* Fill templating stuff */
     $smarty= get_smarty();
+    $smarty->assign("dns_take_over",FALSE);
     $display= "";
+
+
+    /*****************/
+    /* Handle Take Over Actions 
+    /*****************/
+
+    /* Give smarty the required informations */
+    $smarty->assign("dhcp_server_list", $this->dhcp_server_list['FOR_LIST']);
+    
+    /* Take over requested, save id */
+    if(isset($_POST['take_over_src']) && isset($_POST['take_over'])){
+      $id = $_POST['take_over_src'];
+      if(isset($this->dhcp_server_list['ENTRIES'][$id])){
+        $this->take_over_id = $id;      
+      }
+    }
+ 
+    /* Abort take over action */ 
+    if(isset($_POST['cancel_take_over'])){
+      $this->dialog =false;
+      $this->take_over_id = -1;
+      $this->dhcp_server_list = $this->get_list_of_dhcp_servers();
+    }
+
+    /* Display informartion about take over that will be started when saving this server 
+     *  and hide default dhcp output
+     */
+    if($this->take_over_id != -1){
+      $this->dialog = FALSE;
+      $id = $this->take_over_id;
+      $info = $this->get_dhcp_info_string($id);
+      $smarty->assign("dns_take_over",TRUE);
+      $smarty->assign("info",$info);
+      $warning = sprintf(_("You are going to take over the dhcp setup from server '%s'."),$this->dhcp_server_list['ENTRIES'][$id]['cn'][0]);
+      $warning2 = _("The take over will be startet when you save this system. To abort this action, use the cancel button below."); 
+      $smarty->assign("warning",$warning);
+      $smarty->assign("warning2",$warning2);
+      return($smarty->fetch(get_template_path('servdhcp.tpl', TRUE)));
+    }
+
+    
+    /*****************/
+    /* List handling  
+    /*****************/
 
     /* Section Creation? */
     if (isset($_POST['create_section']) && isset($_POST['section'])){
@@ -345,8 +430,21 @@ class servdhcp extends plugin
   /* Save to LDAP */
   function save()
   {
-    $ldap= $this->config->get_ldap_link();
+    /* Take over handling 
+     * - Load servdhcp class and dhcpObjectCache for the source dhcp setup.
+     * - Assign dhcpObjectCache to this configuration. 
+     * - Save this setup and remove source setup from ldap.
+     */
+    if($this->take_over_id != -1){
+      $id = $this->take_over_id;
+      $src = preg_replace("/cn=dhcp,/","",$this->dhcp_server_list['ENTRIES'][$id]['dn']);
+      $tmp = new servdhcp ($this->config, $src);
+      $this->orig_dn = $src;
+      $this->dhcpObjectCache =  $tmp->dhcpObjectCache;
+    }
 
+    /* Save dhcp setttings */
+    $ldap= $this->config->get_ldap_link();
     foreach ($this->dhcpObjectCache as $dn => $data){
 
       if($this->dn != $this->orig_dn){
@@ -441,7 +539,16 @@ class servdhcp extends plugin
     } else {
       $this->handle_post_events("add");
     }
- 
+
+    /* Take over handling
+     * - Remove old dhcp config from source server 
+     */
+    if($this->take_over_id != -1){
+      $id = $this->take_over_id;
+      $src = $this->dhcp_server_list['ENTRIES'][$id]['dn'];
+      $tmp = new servdhcp ($this->config, $src);
+      $tmp->remove_from_parent();
+    }
   }
 
 
