@@ -87,7 +87,7 @@ class kioskManagementDialog extends plugin
               print_red(sprintf(_("Can't delete '%s'. Error was: permission denied."), $filename));
             }
             if(!file_exists($filename)){
-              print_red(sprintf(_("Can't delete '%s'. Errow was: file doesn't exist."), $filename));
+              print_red(sprintf(_("Can't delete '%s'. Error was: file doesn't exist."), $filename));
             }
           }
         }
@@ -106,7 +106,7 @@ class kioskManagementDialog extends plugin
           print_red(sprintf(_("Can't delete '%s'. Error was: permission denied."), $filename));
         }
         if(!file_exists($filename)){
-          print_red(sprintf(_("Can't delete '%s'. Errow was: file doesn't exist."), $filename));
+          print_red(sprintf(_("Can't delete '%s'. Error was: file doesn't exist."), $filename));
         }
       
       }

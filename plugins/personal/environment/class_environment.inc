@@ -47,6 +47,7 @@ class environment extends plugin
   var $gotoKioskProfile   = "none";     // The selected Kiosk Profile
   var $gotoKioskProfiles  = array();// All available Kiosk profiles
   var $newKioskProfiles   = array();
+  var $kioskProfileList   = array(); // Displayed List of Profiles
 
   /* Hotplug Devices */
   var $gotoHotplugDevice  = array();     // Selected hotplug
@@ -210,6 +211,10 @@ class environment extends plugin
     $this->gotoShareSelections= $config->getShareList(true);
     $this->gotoAvailableShares= $config->getShareList(false);  
 
+    $tmp = new kioskManagementDialog($this->config,$this->dn);
+    $list = $tmp->getKioskProfiles($this->newKioskProfiles);
+    $list['none']=_("None");
+    $this->kioskProfileList = array_reverse($list);
   }
 
 
@@ -462,12 +467,8 @@ class environment extends plugin
       $this->dialog->acl = $this->acl;
       $this->is_dialog = true;
     }
-    $tmp = new kioskManagementDialog($this->config,$this->dn);
-    $list = $tmp->getKioskProfiles($this->newKioskProfiles);
-    $list['none']=_("None");
-    $list = array_reverse($list);
-    $smarty->assign("gotoKioskProfiles",$list);
-    $smarty->assign("gotoKioskProfileKeys",array_flip($list));
+    $smarty->assign("gotoKioskProfiles",$this->kioskProfileList);
+    $smarty->assign("gotoKioskProfileKeys",array_flip($this->kioskProfileList));
 
     /* Logonscript Management
      * Get available LogonScripts (possibly grey out (or mark) these script that are defined for the group) 
