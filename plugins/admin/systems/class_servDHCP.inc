@@ -19,7 +19,7 @@ class servdhcp extends plugin
 
   var $orig_dn = "";
 
-  var $dhcp_server_list   = array();
+  var $dhcp_server_list   = array("ENTRIES"=> array(),"FOR_LIST"=> array());
   var $take_over_id       = -1;
 
   function servdhcp ($config, $dn= NULL, $parent= NULL)
@@ -50,9 +50,8 @@ class servdhcp extends plugin
     $this->reload(); 
     if (!count($this->dhcpSections)){
       $this->is_account= FALSE;
+      $this->dhcp_server_list = $this->get_list_of_dhcp_servers();
     }
-		
-    $this->dhcp_server_list = $this->get_list_of_dhcp_servers();
   }
 
   
@@ -527,6 +526,11 @@ class servdhcp extends plugin
     $this->dhcpServiceDN= $this->serviceDN;
     if($this->dn != $this->orig_dn){
       $this->dhcpServiceDN= preg_replace("/".normalizePreg($this->orig_dn)."$/i",$this->dn,$this->dhcpServiceDN);
+    }
+
+    /* Replace 'new' dn */ 
+    if(preg_match("/new$/",$this->dhcpServiceDN)){
+      $this->dhcpServiceDN = preg_replace("/new$/",$this->dn,$this->dhcpServiceDN);
     }
 
     plugin::save();
