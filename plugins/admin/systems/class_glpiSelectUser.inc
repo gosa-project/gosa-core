@@ -101,6 +101,7 @@ class glpiSelectUser extends plugin
     $display= "";
 
     $divlist = new divlist("glpi users");
+    $divlist->SetPluginMode();
     $divlist->SetEntriesPerPage(0);
     $divlist->SetHeader(array(
           array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),

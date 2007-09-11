@@ -191,6 +191,7 @@ class glpiAttachmentPool extends plugin
 
     /* Create list with checkboxes to select / deselect some attachents */
     $divlist = new divlist("Attachment");  
+    $divlist->SetPluginMode();
     $divlist->SetHeader(array(
           array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),
           array("string" => _("Name")),

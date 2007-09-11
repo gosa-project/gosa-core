@@ -275,6 +275,7 @@ class faiScript extends plugin
        Containing FAIscripts 
      */
     $divlist = new divlist("FAIscripts");
+    
     $plug = $_GET['plug'];
 
      if($this->sort_order == "up"){

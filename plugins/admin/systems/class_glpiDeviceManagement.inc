@@ -176,6 +176,7 @@ class glpiDeviceManagement extends plugin
      */
 
     $divlist = new divlist("glpi devices");
+    $divlist->SetPluginMode();
     $divlist->SetEntriesPerPage(0);
     $divlist->SetHeader(array(
           array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"),

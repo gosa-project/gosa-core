@@ -164,6 +164,7 @@ class faiProfileEntry extends plugin
   
     /* Create a divlist to display all available class names with the depending object types */
     $divlist = new divlist("ProfileEntry");
+    $divlist->SetPluginMode();
     $divlist->SetSummary(_("This list displays all assigned class names for this profile."));
     $divlist->SetEntriesPerPage(0);
     $divlist->SetHeader(array(array("string"=> _("Class name")),
