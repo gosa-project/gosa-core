@@ -1,6 +1,7 @@
 gosa (2.5.13-1) unstable; urgency=low
 
   * New upstream release
+  * Added pt debconf translation (Closes: #435727)
 
  -- Cajus Pollmeier <cajus@debian.org>  Wed, 22 Aug 2007 10:47:55 +0200
 

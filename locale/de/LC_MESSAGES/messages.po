@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-10 16:44+0200\n"
+"POT-Creation-Date: 2007-09-11 14:52+0200\n"
 "PO-Revision-Date: 2007-09-07 11:24+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -511,7 +511,6 @@ msgstr ""
 #: plugins/admin/systems/gencd.tpl:11
 #: plugins/admin/systems/goSpamServerRule.tpl:24
 #: plugins/admin/systems/glpi_devices.tpl:761
-#: plugins/admin/systems/servdhcp.tpl:11
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:75
 #: plugins/admin/systems/goVirusServer.tpl:146
 #: plugins/admin/applications/remove.tpl:15
@@ -897,7 +896,7 @@ msgid "Language"
 msgstr "Sprache"
 
 #: html/getxls.php:68 html/getxls.php:70 html/getxls.php:243
-#: plugins/admin/systems/class_glpiSelectUser.inc:107
+#: plugins/admin/systems/class_glpiSelectUser.inc:108
 #: plugins/admin/systems/printer.tpl:72
 #: plugins/admin/users/class_userManagement.inc:28
 msgid "Users"
@@ -935,7 +934,7 @@ msgstr "Gruppen von %s vom %s"
 #: plugins/gofax/blocklists/generic.tpl:46 plugins/gofon/macro/generic.tpl:41
 #: plugins/gofon/conference/generic.tpl:64
 #: plugins/addons/gotomasses/goto_task.tpl:12
-#: plugins/addons/gotomasses/class_goto_task.inc:324
+#: plugins/addons/gotomasses/class_goto_task.inc:325
 #: plugins/generic/references/contents.tpl:11
 #: plugins/admin/systems/servnfs.tpl:17 plugins/admin/systems/phone.tpl:30
 #: plugins/admin/systems/server.tpl:10 plugins/admin/systems/wingeneric.tpl:25
@@ -990,9 +989,9 @@ msgstr "Angezeigter Name"
 #: plugins/addons/addressbook/class_addressbook.inc:522
 #: plugins/addons/addressbook/address_info.tpl:16
 #: plugins/addons/gotomasses/goto_task.tpl:103
-#: plugins/addons/gotomasses/class_goto_task.inc:212
+#: plugins/addons/gotomasses/class_goto_task.inc:213
 #: plugins/admin/systems/servnfs.tpl:9
-#: plugins/admin/systems/class_glpiAttachmentPool.inc:196
+#: plugins/admin/systems/class_glpiAttachmentPool.inc:197
 #: plugins/admin/systems/dhcp_group.tpl:6
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:7
 #: plugins/admin/systems/dhcp_sharedNetwork.tpl:10
@@ -1015,7 +1014,7 @@ msgstr "Angezeigter Name"
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:7
 #: plugins/admin/systems/dhcp_host.tpl:8 plugins/admin/fai/faiProfile.tpl:9
 #: plugins/admin/fai/faiHookEntry.tpl:9 plugins/admin/fai/faiScript.tpl:9
-#: plugins/admin/fai/class_faiScript.inc:295
+#: plugins/admin/fai/class_faiScript.inc:296
 #: plugins/admin/fai/faiVariable.tpl:9
 #: plugins/admin/fai/faiTemplateEntry.tpl:7
 #: plugins/admin/fai/faiTemplate.tpl:9
@@ -1542,9 +1541,9 @@ msgstr ""
 #: plugins/admin/systems/glpiPrinter.tpl:82
 #: plugins/admin/systems/glpiManufacturer.tpl:7
 #: plugins/admin/systems/servservice.tpl:21
-#: plugins/admin/systems/class_glpiPrinterCartridges.inc:162
+#: plugins/admin/systems/class_glpiPrinterCartridges.inc:163
 #: plugins/admin/systems/servdnseditzone.tpl:40
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:186
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:187
 #: plugins/admin/systems/printer.tpl:52 plugins/admin/systems/glpi.tpl:48
 #: plugins/admin/systems/glpi.tpl:56 plugins/admin/systems/glpi.tpl:85
 #: plugins/admin/fai/faiVariable.tpl:45
@@ -1648,7 +1647,7 @@ msgstr "(Warnung: mehr als 16 Gruppen werden von NFS nicht unterstützt!)"
 #: plugins/admin/systems/workstationStartup.tpl:105
 #: plugins/admin/systems/workstationStartup.tpl:128
 #: plugins/admin/systems/workstationStartup.tpl:147
-#: plugins/admin/systems/servdns.tpl:6
+#: plugins/admin/systems/servdns.tpl:26
 #: plugins/admin/systems/glpi_edit_printer_type.tpl:7
 #: plugins/admin/systems/glpiManufacturer.tpl:6
 #: plugins/admin/systems/servRepositorySetup.tpl:36
@@ -1727,8 +1726,8 @@ msgstr "Hinzufügen"
 #: plugins/admin/systems/servservice.tpl:22
 #: plugins/admin/systems/servservice.tpl:48
 #: plugins/admin/systems/workstation.tpl:92
-#: plugins/admin/systems/class_glpiPrinterCartridges.inc:163
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:187
+#: plugins/admin/systems/class_glpiPrinterCartridges.inc:164
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:188
 #: plugins/admin/systems/glpi_edit_cartridge_type.tpl:8
 #: plugins/admin/systems/dhcp_advanced.tpl:23
 #: plugins/admin/systems/dhcp_advanced.tpl:36
@@ -2223,7 +2222,7 @@ msgid "Script name"
 msgstr "Skriptname"
 
 #: plugins/personal/environment/logonManagement.tpl:24
-#: plugins/admin/fai/class_faiScript.inc:296
+#: plugins/admin/fai/class_faiScript.inc:297
 #: plugins/admin/fai/faiScriptEntry.tpl:34
 msgid "Priority"
 msgstr "Priorität"
@@ -2458,7 +2457,7 @@ msgstr ""
 
 #: plugins/personal/environment/class_environment.inc:216
 #: plugins/personal/environment/class_environment.inc:801
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:401
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:402
 msgid "None"
 msgstr "keine"
 
@@ -2560,7 +2559,7 @@ msgid "group share"
 msgstr "Gruppen-Freigabe"
 
 #: plugins/personal/environment/class_environment.inc:1145
-#: plugins/admin/groups/acl_definition.inc:449
+#: plugins/admin/groups/acl_definition.inc:445
 msgid "Administrator"
 msgstr "Administrator"
 
@@ -2607,7 +2606,7 @@ msgstr "Profil-Kontingent"
 #: plugins/personal/connectivity/class_proxyAccount.inc:90
 #: plugins/personal/connectivity/pureftpd.tpl:44
 #: plugins/personal/scalix/generic.tpl:51
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:222
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:223
 msgid "MB"
 msgstr "MB"
 
@@ -3757,7 +3756,7 @@ msgid "Notify User"
 msgstr "Benachrichtige Benutzer"
 
 #: plugins/personal/scalix/generic.tpl:74
-#: plugins/admin/groups/acl_definition.inc:456
+#: plugins/admin/groups/acl_definition.inc:452
 msgid "Scalix email addresses"
 msgstr "Scalix Email-Adressen"
 
@@ -3885,7 +3884,7 @@ msgstr ""
 "Die Benutzerverwaltung von Windows erlaubt nur acht Clients. Sie haben mehr "
 "als acht angegeben."
 
-#: plugins/personal/samba/class_sambaAccount.inc:924
+#: plugins/personal/samba/class_sambaAccount.inc:939
 msgid ""
 "Warning: This account has an undefined samba SID assigned. The problem can "
 "not be fixed by GOsa!"
@@ -3893,7 +3892,7 @@ msgstr ""
 "Achtung: Diesem Konto ist eine unbekannte Samba-SID zugeordnet. GOsa kann "
 "dieses Problem nicht beheben!"
 
-#: plugins/personal/samba/class_sambaAccount.inc:948
+#: plugins/personal/samba/class_sambaAccount.inc:963
 msgid ""
 "Warning: Can't identify users primary group - no conversion to a samba group "
 "possible!"
@@ -3901,7 +3900,7 @@ msgstr ""
 "Warnung: Die primäre Benutzergruppe kann nicht identifiziert werden, daher "
 "kann keine Umwandlung in eine Samba-Gruppe vorgenommen werden!"
 
-#: plugins/personal/samba/class_sambaAccount.inc:1052
+#: plugins/personal/samba/class_sambaAccount.inc:1067
 msgid "Saving Samba account failed"
 msgstr "Speichern des Samba-Kontos fehlgeschlagen"
 
@@ -4052,7 +4051,7 @@ msgstr "Wählen Sie die Stunden, in denen sich der Benutzer anmelden darf"
 
 #: plugins/personal/samba/sambaLogonHours.tpl:27
 #: plugins/addons/gotomasses/goto_task.tpl:151
-#: plugins/addons/gotomasses/class_goto_task.inc:322
+#: plugins/addons/gotomasses/class_goto_task.inc:323
 msgid "Hour"
 msgstr "Stunde"
 
@@ -4198,7 +4197,7 @@ msgstr "Bevorzugte Sprache"
 #: plugins/admin/systems/server.tpl:14 plugins/admin/systems/wingeneric.tpl:13
 #: plugins/admin/systems/servservice.tpl:61
 #: plugins/admin/systems/workstation.tpl:23
-#: plugins/admin/systems/class_glpiSelectUser.inc:161
+#: plugins/admin/systems/class_glpiSelectUser.inc:162
 #: plugins/admin/systems/component.tpl:13
 #: plugins/admin/systems/class_divListSystem.inc:106
 #: plugins/admin/systems/printer.tpl:20
@@ -4882,9 +4881,9 @@ msgstr "Name der Sperrliste"
 #: plugins/gofon/macro/class_divListMacros.inc:48
 #: plugins/gofon/conference/class_divListConferences.inc:49
 #: plugins/addons/addressbook/contents.tpl:42
-#: plugins/addons/gotomasses/class_goto_task.inc:213
-#: plugins/admin/systems/class_glpiAttachmentPool.inc:198
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:183
+#: plugins/addons/gotomasses/class_goto_task.inc:214
+#: plugins/admin/systems/class_glpiAttachmentPool.inc:199
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:184
 #: plugins/admin/systems/class_divListSystem.inc:58
 #: plugins/admin/applications/class_divListApplication.inc:45
 #: plugins/admin/fai/class_divListFai.inc:60
@@ -4928,7 +4927,7 @@ msgstr "Neue Sperrliste"
 #: plugins/gofon/macro/class_divListMacros.inc:78
 #: plugins/gofon/conference/class_divListConferences.inc:79
 #: plugins/addons/gotomasses/class_target_list.inc:126
-#: plugins/admin/systems/class_glpiSelectUser.inc:164
+#: plugins/admin/systems/class_glpiSelectUser.inc:165
 #: plugins/admin/systems/class_divListSystem.inc:109
 #: plugins/admin/applications/class_divListApplication.inc:95
 #: plugins/admin/fai/class_divListFai.inc:154
@@ -4945,8 +4944,8 @@ msgstr "Aktualisieren"
 #: plugins/gofon/conference/class_divListConferences.inc:79
 #: plugins/addons/gotomasses/class_target_list.inc:126
 #: plugins/admin/systems/class_baseSelectDialog.inc:31
-#: plugins/admin/systems/class_glpiSelectUser.inc:160
-#: plugins/admin/systems/class_glpiSelectUser.inc:164
+#: plugins/admin/systems/class_glpiSelectUser.inc:161
+#: plugins/admin/systems/class_glpiSelectUser.inc:165
 #: plugins/admin/systems/class_divListSystem.inc:109
 #: plugins/admin/applications/class_divListApplication.inc:95
 #: plugins/admin/fai/class_divListFai.inc:154
@@ -4970,8 +4969,8 @@ msgstr "Übertragen"
 #: plugins/admin/systems/glpi.tpl:15 plugins/admin/systems/glpi.tpl:25
 #: plugins/admin/systems/glpi.tpl:35
 #: plugins/admin/applications/class_divListApplication.inc:156
-#: plugins/admin/fai/class_faiScript.inc:303
-#: plugins/admin/fai/class_faiScript.inc:306
+#: plugins/admin/fai/class_faiScript.inc:304
+#: plugins/admin/fai/class_faiScript.inc:307
 #: plugins/admin/fai/class_faiHook.inc:266
 #: plugins/admin/fai/class_faiHook.inc:269
 #: plugins/admin/fai/class_faiTemplate.inc:241
@@ -4999,7 +4998,7 @@ msgstr "Benutzer bearbeiten"
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:132
 #: plugins/admin/systems/class_divListSystem.inc:149
 #: plugins/admin/applications/class_divListApplication.inc:163
-#: plugins/admin/fai/class_faiScript.inc:307
+#: plugins/admin/fai/class_faiScript.inc:308
 #: plugins/admin/fai/class_faiHook.inc:270
 #: plugins/admin/fai/class_faiTemplate.inc:245
 #: plugins/admin/fai/class_divListFai.inc:237
@@ -6951,13 +6950,13 @@ msgstr "Plan"
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:213
 #: plugins/addons/gotomasses/goto_task.tpl:58
-#: plugins/addons/gotomasses/class_goto_task.inc:324
+#: plugins/addons/gotomasses/class_goto_task.inc:325
 #: plugins/admin/systems/terminal.tpl:128
 #: plugins/admin/systems/class_baseSelectDialog.inc:45
 #: plugins/admin/systems/server.tpl:51
 #: plugins/admin/systems/workstation.tpl:109
-#: plugins/admin/systems/class_glpiPrinterCartridges.inc:158
-#: plugins/admin/fai/class_faiScript.inc:298
+#: plugins/admin/systems/class_glpiPrinterCartridges.inc:159
+#: plugins/admin/fai/class_faiScript.inc:299
 #: plugins/admin/ogroups/termgroup.tpl:75
 msgid "Action"
 msgstr "Aktion"
@@ -7061,27 +7060,27 @@ msgid "CVS import from file"
 msgstr "CSV-Import aus Datei"
 
 #: plugins/addons/gotomasses/goto_task.tpl:147
-#: plugins/addons/gotomasses/class_goto_task.inc:321
+#: plugins/addons/gotomasses/class_goto_task.inc:322
 msgid "Minute"
 msgstr "Minute"
 
 #: plugins/addons/gotomasses/goto_task.tpl:155
-#: plugins/addons/gotomasses/class_goto_task.inc:322
+#: plugins/addons/gotomasses/class_goto_task.inc:323
 msgid "Day"
 msgstr "Tag"
 
 #: plugins/addons/gotomasses/goto_task.tpl:159
-#: plugins/addons/gotomasses/class_goto_task.inc:323
+#: plugins/addons/gotomasses/class_goto_task.inc:324
 msgid "Month"
 msgstr "Monat"
 
 #: plugins/addons/gotomasses/goto_task.tpl:163
-#: plugins/addons/gotomasses/class_goto_task.inc:323
+#: plugins/addons/gotomasses/class_goto_task.inc:324
 msgid "Week day"
 msgstr "Wochentag"
 
 #: plugins/addons/gotomasses/goto_task.tpl:174
-#: plugins/addons/gotomasses/class_goto_task.inc:210
+#: plugins/addons/gotomasses/class_goto_task.inc:211
 msgid "Target systems"
 msgstr "Zielsysteme"
 
@@ -7144,7 +7143,7 @@ msgid "Workstation"
 msgstr "Arbeitsstation"
 
 #: plugins/addons/gotomasses/class_target_list.inc:175
-#: plugins/addons/gotomasses/class_goto_task.inc:321
+#: plugins/addons/gotomasses/class_goto_task.inc:322
 #: plugins/generic/references/class_reference.inc:50
 #: plugins/admin/ogroups/class_divListOGroup.inc:167
 msgid "Object group"
@@ -7158,17 +7157,17 @@ msgstr "Systemverteilung"
 msgid "Keep current"
 msgstr "Aktuelle Einstellung"
 
-#: plugins/addons/gotomasses/class_goto_task.inc:211
+#: plugins/addons/gotomasses/class_goto_task.inc:212
 msgid "IP"
 msgstr "IP"
 
-#: plugins/addons/gotomasses/class_goto_task.inc:328
+#: plugins/addons/gotomasses/class_goto_task.inc:329
 #, php-format
 msgid "The given value for attribute '%s' is invalid."
 msgstr "Der eingegebene Wert für das Attribut '%s' ist ungültig."
 
-#: plugins/addons/gotomasses/class_goto_task.inc:332
-#: plugins/addons/gotomasses/class_goto_task.inc:335
+#: plugins/addons/gotomasses/class_goto_task.inc:333
+#: plugins/addons/gotomasses/class_goto_task.inc:336
 #, php-format
 msgid "You must specify at least one target"
 msgstr "Sie müssen mindestens ein Ziel angeben"
@@ -7184,7 +7183,7 @@ msgstr "Dieses Objekt hat keine Referenzen zu anderen Objekten."
 #: plugins/generic/references/class_reference.inc:36
 #: plugins/admin/systems/class_printGeneric.inc:853
 #: plugins/admin/systems/class_printGeneric.inc:855
-#: plugins/admin/systems/class_servDHCP.inc:37
+#: plugins/admin/systems/class_servDHCP.inc:38
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:30
 #: plugins/admin/fai/faiTemplateEntry.tpl:71
 #: plugins/admin/fai/faiTemplateEntry.tpl:103
@@ -8111,8 +8110,8 @@ msgstr "Regulärer Ausdruck zum Erkennen von Gerätenamen"
 
 #: plugins/admin/systems/glpiDeviceManagement.tpl:51
 #: plugins/admin/systems/class_baseSelectDialog.inc:40
-#: plugins/admin/systems/class_glpiSelectUser.inc:108
-#: plugins/admin/systems/class_glpiSelectUser.inc:135
+#: plugins/admin/systems/class_glpiSelectUser.inc:109
+#: plugins/admin/systems/class_glpiSelectUser.inc:136
 #: plugins/admin/systems/glpiAttachmentPool.tpl:51
 #: plugins/admin/systems/glpiPrinterCartridges.tpl:51
 #: plugins/admin/fai/askClassName.tpl:70 plugins/admin/fai/askClassName.tpl:77
@@ -8743,13 +8742,24 @@ msgstr "Bilderfassungsdienste bereitstellen"
 msgid "Select scanner driver to use"
 msgstr "Wählen Sie den Scanner-Treiber, der benutzt werden soll"
 
-#: plugins/admin/systems/servdns.tpl:1
-msgid "Zones"
-msgstr "Zonen"
+#: plugins/admin/systems/servdns.tpl:5
+msgid ""
+"DNS take over will take place when saving this entry. Choose 'Cancel' to "
+"abort."
+msgstr ""
 
-#: plugins/admin/systems/servdns.tpl:7 plugins/admin/systems/servdhcp.tpl:31
+#: plugins/admin/systems/servdns.tpl:14
+#, fuzzy
+msgid "Take over DNS configuration from"
+msgstr "Erstellen Sie Ihre Konfigurationsdatei"
+
+#: plugins/admin/systems/servdns.tpl:18 plugins/admin/systems/servdhcp.tpl:18
 msgid "Take over"
 msgstr "Übernahme"
+
+#: plugins/admin/systems/servdns.tpl:24
+msgid "Zones"
+msgstr "Zonen"
 
 #: plugins/admin/systems/password.tpl:2
 msgid ""
@@ -8822,34 +8832,34 @@ msgstr "Datei konnte nicht gelesen werden, vielleicht ist nicht vorhanden."
 msgid "Currently no file uploaded."
 msgstr "Es wurde noch keine Datei hochgeladen."
 
-#: plugins/admin/systems/class_glpiAttachmentPool.inc:197
+#: plugins/admin/systems/class_glpiAttachmentPool.inc:198
 msgid "Mime"
 msgstr "MIME"
 
-#: plugins/admin/systems/class_glpiAttachmentPool.inc:200
+#: plugins/admin/systems/class_glpiAttachmentPool.inc:201
 msgid "This table displays all available attachments."
 msgstr "Diese Tabelle enthält alle verfügbaren Anhänge."
 
-#: plugins/admin/systems/class_glpiAttachmentPool.inc:217
+#: plugins/admin/systems/class_glpiAttachmentPool.inc:218
 #: include/sieve/class_sieveElement_If.inc:447
 msgid "empty"
 msgstr "leer"
 
-#: plugins/admin/systems/class_glpiAttachmentPool.inc:254
+#: plugins/admin/systems/class_glpiAttachmentPool.inc:255
 msgid "Create new attachment"
 msgstr "Neuen Anhang erstellen"
 
-#: plugins/admin/systems/class_glpiAttachmentPool.inc:255
+#: plugins/admin/systems/class_glpiAttachmentPool.inc:256
 msgid "New Attachment"
 msgstr "Neuer Anhang"
 
-#: plugins/admin/systems/class_glpiAttachmentPool.inc:346
+#: plugins/admin/systems/class_glpiAttachmentPool.inc:347
 #: plugins/admin/systems/class_servRepository.inc:240
 #: plugins/admin/fai/class_faiManagement.inc:362
 msgid "This name is already in use."
 msgstr "Der angegebene Name wird bereits verwendet."
 
-#: plugins/admin/systems/class_glpiAttachmentPool.inc:349
+#: plugins/admin/systems/class_glpiAttachmentPool.inc:350
 msgid "Please specify a valid name for this attachment."
 msgstr "Bitte geben Sie einen gültigen Namen für diesen Anhang an."
 
@@ -8873,12 +8883,24 @@ msgstr "Bitte geben Sie einen neuen Namen ein"
 msgid "Manage manufacturers"
 msgstr "Hersteller verwalten"
 
-#: plugins/admin/systems/class_servDNS.inc:70
+#: plugins/admin/systems/class_servDNS.inc:122
+#, fuzzy, php-format
+msgid "You are going to migrate the DNS setup from server '%s'."
+msgstr "Sie kopieren gerade den Eintrag %s."
+
+#: plugins/admin/systems/class_servDNS.inc:124
+#: plugins/admin/systems/class_servDHCP.inc:124
+msgid ""
+"The migration will be startet when you save this system. To cancel this "
+"action, use the cancel button below."
+msgstr ""
+
+#: plugins/admin/systems/class_servDNS.inc:149
 #: plugins/admin/systems/class_inventory.inc:32
 msgid "Remove DNS service"
 msgstr "DNS-Dienst entfernen"
 
-#: plugins/admin/systems/class_servDNS.inc:71
+#: plugins/admin/systems/class_servDNS.inc:150
 #: plugins/admin/systems/class_inventory.inc:33
 msgid ""
 "This server has DNS features enabled. You can disable them by clicking below."
@@ -8886,12 +8908,12 @@ msgstr ""
 "Dieser Server besitzt aktivierte DNS-Funktionen. Sie können diese durch "
 "einen Klick auf die untere Schaltfläche deaktivieren."
 
-#: plugins/admin/systems/class_servDNS.inc:73
+#: plugins/admin/systems/class_servDNS.inc:152
 #: plugins/admin/systems/class_inventory.inc:35
 msgid "Add DNS service"
 msgstr "DNS-Dienst hinzufügen"
 
-#: plugins/admin/systems/class_servDNS.inc:74
+#: plugins/admin/systems/class_servDNS.inc:153
 #: plugins/admin/systems/class_inventory.inc:36
 msgid ""
 "This server has DNS features disabled. You can enable them by clicking below."
@@ -8899,23 +8921,23 @@ msgstr ""
 "Aktuell besitzt dieser Server keine aktivierten DNS-Funktionen. Sie können "
 "diese durch einen Klick auf die Schaltfläche unten aktivieren."
 
-#: plugins/admin/systems/class_servDNS.inc:170
+#: plugins/admin/systems/class_servDNS.inc:249
 msgid "Reverse zone"
 msgstr "Reverse Zone"
 
-#: plugins/admin/systems/class_servDNS.inc:171
+#: plugins/admin/systems/class_servDNS.inc:250
 #: plugins/admin/systems/network.tpl:102
 #: plugins/admin/systems/servdnseditzone.tpl:94
 msgid "TTL"
 msgstr "TTL"
 
-#: plugins/admin/systems/class_servDNS.inc:172
-#: plugins/admin/systems/class_servDHCP.inc:34
+#: plugins/admin/systems/class_servDNS.inc:251
+#: plugins/admin/systems/class_servDHCP.inc:35
 #: plugins/admin/fai/faiTemplateEntry.tpl:86
 msgid "Class"
 msgstr "Klasse"
 
-#: plugins/admin/systems/class_servDNS.inc:237
+#: plugins/admin/systems/class_servDNS.inc:316
 #, php-format
 msgid ""
 "Can't delete the selected zone, because it is still in use by these entry/"
@@ -8924,16 +8946,16 @@ msgstr ""
 "Sie können die gewählte Zone nicht entfernen, sie wird noch von folgendem(n) "
 "Eintrag / Einträgen verwendet: '%s'"
 
-#: plugins/admin/systems/class_servDNS.inc:315
+#: plugins/admin/systems/class_servDNS.inc:422
 msgid "Updating DNS service failed"
 msgstr "Aktualisierung des DNS-Dienstes ist fehlgeschlagen"
 
-#: plugins/admin/systems/class_servDNS.inc:326
+#: plugins/admin/systems/class_servDNS.inc:433
 msgid "Removing DNS entries failed"
 msgstr "Entfernen von DNS-Einträge ist fehlgeschlagen"
 
-#: plugins/admin/systems/class_servDNS.inc:349
-#: plugins/admin/systems/class_servDNS.inc:358
+#: plugins/admin/systems/class_servDNS.inc:456
+#: plugins/admin/systems/class_servDNS.inc:465
 msgid "Saving DNS entries failed"
 msgstr "Speichern von DNS-Einträgen ist fehlgeschlagen"
 
@@ -9558,7 +9580,7 @@ msgid "Saving server db settings failed"
 msgstr "Speichern der Server-Datenbank Einstellungen ist fehlgeschlagen"
 
 #: plugins/admin/systems/class_SelectDeviceType.inc:24
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:388
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:389
 #: plugins/admin/groups/class_groupMail.inc:303
 #: plugins/admin/ogroups/class_ogroup.inc:281
 #: plugins/admin/users/class_userManagement.inc:516
@@ -9620,26 +9642,26 @@ msgid "Choose a base"
 msgstr "Wählen Sie eine Basis"
 
 #: plugins/admin/systems/class_baseSelectDialog.inc:26
-#: plugins/admin/systems/class_glpiSelectUser.inc:155
+#: plugins/admin/systems/class_glpiSelectUser.inc:156
 #: include/class_MultiSelectWindow.inc:189
 msgid "Go to root department"
 msgstr "Gehe zur Wurzel-Abteilung"
 
 #: plugins/admin/systems/class_baseSelectDialog.inc:26
-#: plugins/admin/systems/class_glpiSelectUser.inc:155
+#: plugins/admin/systems/class_glpiSelectUser.inc:156
 #: include/class_MultiSelectWindow.inc:189
 #: include/class_MultiSelectWindow.inc:191
 msgid "Root"
 msgstr "Wurzel"
 
 #: plugins/admin/systems/class_baseSelectDialog.inc:28
-#: plugins/admin/systems/class_glpiSelectUser.inc:157
+#: plugins/admin/systems/class_glpiSelectUser.inc:158
 #: include/class_MultiSelectWindow.inc:197
 msgid "Go up one department"
 msgstr "Eine Abteilung nach oben"
 
 #: plugins/admin/systems/class_baseSelectDialog.inc:28
-#: plugins/admin/systems/class_glpiSelectUser.inc:157
+#: plugins/admin/systems/class_glpiSelectUser.inc:158
 #: plugins/admin/systems/class_servDNSeditZone.inc:323
 #: plugins/admin/fai/class_faiProfile.inc:305
 #: plugins/admin/ogroups/phonequeue.tpl:21
@@ -9651,20 +9673,20 @@ msgid "Up"
 msgstr "Auf"
 
 #: plugins/admin/systems/class_baseSelectDialog.inc:30
-#: plugins/admin/systems/class_glpiSelectUser.inc:159
+#: plugins/admin/systems/class_glpiSelectUser.inc:160
 #: include/class_MultiSelectWindow.inc:205
 msgid "Go to users department"
 msgstr "Gehe zur Abteilung des Benutzers"
 
 #: plugins/admin/systems/class_baseSelectDialog.inc:30
-#: plugins/admin/systems/class_glpiSelectUser.inc:159
+#: plugins/admin/systems/class_glpiSelectUser.inc:160
 #: include/class_MultiSelectWindow.inc:205
 #: include/class_MultiSelectWindow.inc:207
 msgid "Home"
 msgstr "Heimat"
 
 #: plugins/admin/systems/class_baseSelectDialog.inc:31
-#: plugins/admin/systems/class_glpiSelectUser.inc:160
+#: plugins/admin/systems/class_glpiSelectUser.inc:161
 #: include/class_MultiSelectWindow.inc:212
 msgid "Reload list"
 msgstr "Liste neu laden"
@@ -10525,13 +10547,13 @@ msgstr "Kann diesen Eintrag nicht entfernen, da er noch benutzt wird."
 msgid "The selected name is already in use."
 msgstr "Der angegebene Name wird bereits verwendet."
 
-#: plugins/admin/systems/class_glpiSelectUser.inc:107
+#: plugins/admin/systems/class_glpiSelectUser.inc:108
 #: plugins/admin/ogroups/class_divListOGroup.inc:52
 #: plugins/admin/departments/class_departmentManagement.inc:25
 msgid "Departments"
 msgstr "Abteilungen"
 
-#: plugins/admin/systems/class_glpiSelectUser.inc:135
+#: plugins/admin/systems/class_glpiSelectUser.inc:136
 msgid "use"
 msgstr "verwenden"
 
@@ -10620,17 +10642,17 @@ msgstr ""
 "Sie können diesen Patronentyp nicht entfernen, er wird noch von folgendem(n) "
 "Drucker(n) verwendet: '%s'"
 
-#: plugins/admin/systems/class_glpiPrinterCartridges.inc:157
+#: plugins/admin/systems/class_glpiPrinterCartridges.inc:158
 msgid "Cartridges"
 msgstr "Patronen"
 
-#: plugins/admin/systems/class_glpiPrinterCartridges.inc:205
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:220
+#: plugins/admin/systems/class_glpiPrinterCartridges.inc:206
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:221
 msgid "New monitor"
 msgstr "Neuer Monitor"
 
-#: plugins/admin/systems/class_glpiPrinterCartridges.inc:205
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:220
+#: plugins/admin/systems/class_glpiPrinterCartridges.inc:206
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:221
 msgid "M"
 msgstr "M"
 
@@ -10824,181 +10846,175 @@ msgstr ""
 "Sie können dieses Gerät nicht entfernen, es wird noch von folgendem(n) System"
 "(en) verwendet: '%s'"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:182
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:183
 msgid "devices"
 msgstr "Geräte"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:222
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:223
 msgid "New mainbord"
 msgstr "Neues Mainboard"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:224
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:225
 msgid "New processor"
 msgstr "Neuer Prozessor"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:224
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:225
 #: plugins/admin/fai/class_divListFai.inc:127
 msgid "P"
 msgstr "P"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:226
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:227
 msgid "New case"
 msgstr "Neues Gehäuse"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:226
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:227
 msgid "C"
 msgstr "C"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:228
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:229
 msgid "New network interface"
 msgstr "Neues Netzwerk-Interface"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:228
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:229
 msgid "NI"
 msgstr "NI"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:230
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:231
 msgid "New ram"
 msgstr "Neuer Arbeitsspeicher"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:230
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:231
 msgid "R"
 msgstr "R"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:232
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:233
 msgid "New hard disk"
 msgstr "Neue Festplatte"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:232
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:233
 msgid "HDD"
 msgstr "HDD"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:234
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:235
 msgid "New drive"
 msgstr "Neues Laufwerk"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:234
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:235
 msgid "D"
 msgstr "D"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:236
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:237
 msgid "New controller"
 msgstr "Neuer Controller"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:236
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:237
 msgid "CS"
 msgstr "CS"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:238
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:239
 msgid "New graphics card"
 msgstr "Neue Grafikkarte"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:238
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:239
 msgid "GC"
 msgstr "GC"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:240
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:241
 msgid "New sound card"
 msgstr "Neue Soundkarte"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:240
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:241
 msgid "SC"
 msgstr "SC"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:242
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:243
 msgid "New power supply"
 msgstr "Neues Netzteil"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:242
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:243
 msgid "PS"
 msgstr "PS"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:244
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:245
 msgid "New misc device"
 msgstr "Neues allgemeines Gerät"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:244
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:245
 msgid "OC"
 msgstr "OC"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:342
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:343
 msgid "You have to specify a valid name for this device."
 msgstr "Bitte geben Sie einen gültigen Namen für dieses Gerät an."
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:362
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:365
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:363
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:366
 msgid "This device name is already in use."
 msgstr "Der angegebene Gerätename wird bereits verwendet."
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:401
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:402
 msgid "Other"
 msgstr "Andere"
 
-#: plugins/admin/systems/class_servDHCP.inc:32
+#: plugins/admin/systems/class_servDHCP.inc:33
 msgid "Logging"
 msgstr "Protokollierung"
 
-#: plugins/admin/systems/class_servDHCP.inc:33
-#: plugins/admin/systems/class_servDHCP.inc:319
-#: plugins/admin/systems/class_servDHCP.inc:582
+#: plugins/admin/systems/class_servDHCP.inc:34
+#: plugins/admin/systems/class_servDHCP.inc:302
+#: plugins/admin/systems/class_servDHCP.inc:565
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:26
 msgid "Global options"
 msgstr "Globale Einstellungen"
 
-#: plugins/admin/systems/class_servDHCP.inc:35
+#: plugins/admin/systems/class_servDHCP.inc:36
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:28
 msgid "Subclass"
 msgstr "Unterklasse"
 
-#: plugins/admin/systems/class_servDHCP.inc:36
+#: plugins/admin/systems/class_servDHCP.inc:37
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:29
 msgid "Host"
 msgstr "Host"
 
-#: plugins/admin/systems/class_servDHCP.inc:38
+#: plugins/admin/systems/class_servDHCP.inc:39
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:31
 msgid "Pool"
 msgstr "Pool"
 
-#: plugins/admin/systems/class_servDHCP.inc:39
+#: plugins/admin/systems/class_servDHCP.inc:40
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:32
 msgid "Subnet"
 msgstr "Subnetz"
 
-#: plugins/admin/systems/class_servDHCP.inc:40
+#: plugins/admin/systems/class_servDHCP.inc:41
 msgid "Failover peer"
 msgstr "Hochverfügbarkeitspartner"
 
-#: plugins/admin/systems/class_servDHCP.inc:41
+#: plugins/admin/systems/class_servDHCP.inc:42
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:33
 msgid "Shared network"
 msgstr "Verteiltes Netzwerk"
 
-#: plugins/admin/systems/class_servDHCP.inc:143
+#: plugins/admin/systems/class_servDHCP.inc:123
 #, fuzzy, php-format
 msgid "You are going to migrate the DHCP setup from server '%s'."
 msgstr "Sie kopieren gerade den Eintrag %s."
 
-#: plugins/admin/systems/class_servDHCP.inc:144
-msgid ""
-"The migration will be startet when you save this system. To cancel this "
-"action, use the cancel button below."
-msgstr ""
-
-#: plugins/admin/systems/class_servDHCP.inc:257
+#: plugins/admin/systems/class_servDHCP.inc:240
 msgid "You're not allowed to remove DHCP sections!"
 msgstr "Sie haben keine Berechtigung. um DHCP-Sektionen zu löschen!"
 
-#: plugins/admin/systems/class_servDHCP.inc:291
+#: plugins/admin/systems/class_servDHCP.inc:274
 #, php-format
 msgid "You're about to delete the DHCP section '%s'."
 msgstr "Sind sind dabei, die DHCP-Sektion '%s' zu löschen."
 
-#: plugins/admin/systems/class_servDHCP.inc:305
+#: plugins/admin/systems/class_servDHCP.inc:288
 msgid "Remove DHCP service"
 msgstr "DHCP-Dienst entfernen"
 
-#: plugins/admin/systems/class_servDHCP.inc:306
+#: plugins/admin/systems/class_servDHCP.inc:289
 msgid ""
 "This server has DHCP features enabled. You can disable them by clicking "
 "below."
@@ -11006,11 +11022,11 @@ msgstr ""
 "Dieser Server besitzt aktivierte DHCP-Funktionen. Sie können diese durch "
 "einen Klick auf die untere Schaltfläche deaktivieren."
 
-#: plugins/admin/systems/class_servDHCP.inc:324
+#: plugins/admin/systems/class_servDHCP.inc:307
 msgid "Add DHCP service"
 msgstr "DHCP Dienst hinzufügen"
 
-#: plugins/admin/systems/class_servDHCP.inc:325
+#: plugins/admin/systems/class_servDHCP.inc:308
 msgid ""
 "This server has DHCP features disabled. You can enable them by clicking "
 "below."
@@ -11018,41 +11034,41 @@ msgstr ""
 "Aktuell besitzt dieser Server keine aktivierten DHCP-Funktionen. Sie können "
 "diese durch einen Klick auf die Schaltfläche unten aktivieren."
 
-#: plugins/admin/systems/class_servDHCP.inc:345
-#: plugins/admin/systems/class_servDHCP.inc:348
+#: plugins/admin/systems/class_servDHCP.inc:328
+#: plugins/admin/systems/class_servDHCP.inc:331
 msgid "Insert new DHCP section"
 msgstr "Neue DHCP-Sektion einfügen"
 
-#: plugins/admin/systems/class_servDHCP.inc:346
-#: plugins/admin/systems/class_servDHCP.inc:349
-#: plugins/admin/systems/class_servDHCP.inc:350
+#: plugins/admin/systems/class_servDHCP.inc:329
+#: plugins/admin/systems/class_servDHCP.inc:332
+#: plugins/admin/systems/class_servDHCP.inc:333
 msgid "Edit DHCP section"
 msgstr "DHCP-Sektion bearbeiten"
 
-#: plugins/admin/systems/class_servDHCP.inc:347
-#: plugins/admin/systems/class_servDHCP.inc:351
+#: plugins/admin/systems/class_servDHCP.inc:330
+#: plugins/admin/systems/class_servDHCP.inc:334
 msgid "Remove DHCP section"
 msgstr "DHCP-Sektion entfernen"
 
-#: plugins/admin/systems/class_servDHCP.inc:397
-#: plugins/admin/systems/class_servDHCP.inc:412
+#: plugins/admin/systems/class_servDHCP.inc:380
+#: plugins/admin/systems/class_servDHCP.inc:395
 msgid "Removing DHCP entries failed"
 msgstr "Entfernen der DHCP-Einträge ist fehlgeschlagen"
 
-#: plugins/admin/systems/class_servDHCP.inc:465
+#: plugins/admin/systems/class_servDHCP.inc:448
 msgid "Can't remove DHCP object!"
 msgstr "Kann DHCP-Objekt nicht entfernen!"
 
-#: plugins/admin/systems/class_servDHCP.inc:518
-#: plugins/admin/systems/class_servDHCP.inc:521
+#: plugins/admin/systems/class_servDHCP.inc:501
+#: plugins/admin/systems/class_servDHCP.inc:504
 msgid "Can't save DHCP object!"
 msgstr "Kann DHCP-Objekt nicht speichern!"
 
-#: plugins/admin/systems/class_servDHCP.inc:543
+#: plugins/admin/systems/class_servDHCP.inc:526
 msgid "Saving DHCP service failed"
 msgstr "Speichern des DHCP-Dienstes ist fehlgeschlagen"
 
-#: plugins/admin/systems/class_servDHCP.inc:659
+#: plugins/admin/systems/class_servDHCP.inc:642
 msgid ""
 "DHCP configuration set is unknown. Please contact your system administrator."
 msgstr ""
@@ -11578,30 +11594,17 @@ msgstr ""
 "Formular oberhalb."
 
 #: plugins/admin/systems/servdhcp.tpl:5
-msgid "DHCP take over initiated"
-msgstr ""
-
-#: plugins/admin/systems/servdhcp.tpl:7
-#, fuzzy
 msgid ""
-"This includes 'all' DHCP subsections that are located within this server. "
-"Please double check if your really want to do this."
+"DHCP take over will take place when saving this entry. Choose 'Cancel' to "
+"abort."
 msgstr ""
-"Dies umfasst 'alle' DHCP-Untersektionen die sich in dieser Sektion befinden. "
-"Bitte prüfen Sie genau, da es keine Möglichkeit für GOsa gibt, die Daten zu "
-"restaurieren. "
 
 #: plugins/admin/systems/servdhcp.tpl:14
-#, fuzzy
-msgid "Following objects will be taken over"
-msgstr "Die folgenden Referenzen werden aktualisiert"
-
-#: plugins/admin/systems/servdhcp.tpl:27
 #, fuzzy
 msgid "Take over DHCP configuration from"
 msgstr "Erstellen Sie Ihre Konfigurationsdatei"
 
-#: plugins/admin/systems/servdhcp.tpl:37
+#: plugins/admin/systems/servdhcp.tpl:24
 msgid "DHCP sections"
 msgstr "DHCP-Segmente"
 
@@ -11901,8 +11904,8 @@ msgstr "Platziere einen Eintrag in der Kontrollleiste der Gruppenmitglieder"
 
 #: plugins/admin/applications/generic.tpl:103
 #: plugins/admin/fai/class_faiHookEntry.inc:79
-#: plugins/admin/fai/class_faiScript.inc:297
-#: plugins/admin/fai/class_faiScript.inc:316
+#: plugins/admin/fai/class_faiScript.inc:298
+#: plugins/admin/fai/class_faiScript.inc:317
 #: plugins/admin/fai/class_faiHook.inc:279
 #: plugins/admin/fai/class_faiTemplate.inc:257
 #: plugins/admin/fai/class_faiScriptEntry.inc:84
@@ -12186,7 +12189,7 @@ msgstr ""
 "Klasse aktualisieren und Konfiguration vom übergeordneten Objekt freigeben."
 
 #: plugins/admin/fai/faiScript.tpl:34 plugins/admin/fai/faiVariable.tpl:32
-#: plugins/admin/fai/class_faiProfileEntry.inc:170
+#: plugins/admin/fai/class_faiProfileEntry.inc:171
 #: plugins/admin/fai/faiTemplate.tpl:29
 #: plugins/admin/fai/faiPartitionTable.tpl:32 plugins/admin/fai/faiHook.tpl:34
 msgid "Objects"
@@ -12324,16 +12327,16 @@ msgstr "Gewünschte Operation durchführen."
 msgid "Initiate operation"
 msgstr "Operation initiieren"
 
-#: plugins/admin/fai/class_faiScript.inc:281
-#: plugins/admin/fai/class_faiScript.inc:283
+#: plugins/admin/fai/class_faiScript.inc:282
+#: plugins/admin/fai/class_faiScript.inc:284
 msgid "Sort direction"
 msgstr "Sortierungsrichtung"
 
-#: plugins/admin/fai/class_faiScript.inc:380
+#: plugins/admin/fai/class_faiScript.inc:381
 msgid "Removing FAI script base failed"
 msgstr "Entfernen der FAI-Skript-Basis fehlgeschlagen"
 
-#: plugins/admin/fai/class_faiScript.inc:428
+#: plugins/admin/fai/class_faiScript.inc:429
 #: plugins/admin/fai/class_faiProfile.inc:396
 #, php-format
 msgid ""
@@ -12343,15 +12346,15 @@ msgstr ""
 "Kann kein Skript mit dem Namen '%s' in '%s' einfügen, da bereits ein Skript "
 "mit diesem Namen existiert."
 
-#: plugins/admin/fai/class_faiScript.inc:461
+#: plugins/admin/fai/class_faiScript.inc:462
 msgid "Creating FAI script base failed"
 msgstr "Erzeugen der Basis für FAI-Skripte ist fehlgeschlagen"
 
-#: plugins/admin/fai/class_faiScript.inc:545
+#: plugins/admin/fai/class_faiScript.inc:546
 msgid "Removing FAI script failed"
 msgstr "Entfernen des FAI-Skripts fehlgeschlagen"
 
-#: plugins/admin/fai/class_faiScript.inc:564
+#: plugins/admin/fai/class_faiScript.inc:565
 msgid "Saving FAI script failed"
 msgstr "Speichern des FAI-Skripts fehlgeschlagen"
 
@@ -12393,12 +12396,12 @@ msgstr "Paket-Gruppe"
 msgid "Partition table"
 msgstr "Partitionstabelle"
 
-#: plugins/admin/fai/class_faiProfileEntry.inc:167
+#: plugins/admin/fai/class_faiProfileEntry.inc:168
 #: plugins/admin/fai/class_faiProfile.inc:291
 msgid "This list displays all assigned class names for this profile."
 msgstr "Diese Liste zeigt alle diesem Profil zugeordneten Klassen-Namen."
 
-#: plugins/admin/fai/class_faiProfileEntry.inc:169
+#: plugins/admin/fai/class_faiProfileEntry.inc:170
 #: plugins/admin/fai/askClassName.tpl:32 plugins/admin/fai/askClassName.tpl:54
 msgid "Class name"
 msgstr "Klassen-Name"
@@ -13184,12 +13187,12 @@ msgstr ""
 msgid "Please enter your search string here"
 msgstr "Bitte geben Sie hier einen Such-Text ein."
 
-#: plugins/admin/fai/class_faiPackageEntry.inc:43
+#: plugins/admin/fai/class_faiPackageEntry.inc:44
 msgid ""
 "This list displays all assigned package names for this repository settings."
 msgstr "Diese Liste zeigt alle diesem Repository zugeordneten Paket-Namen."
 
-#: plugins/admin/fai/class_faiPackageEntry.inc:122
+#: plugins/admin/fai/class_faiPackageEntry.inc:123
 #, php-format
 msgid ""
 "Your specified search string '%s' returned too many results. Only the first "
@@ -13488,47 +13491,47 @@ msgstr "Sie sind dabei die Gruppe '%s' zu löschen."
 msgid "You are not allowed to delete this group!"
 msgstr "Sie haben keine Berechtigung, diese Gruppe zu löschen!"
 
-#: plugins/admin/groups/acl_definition.inc:446
+#: plugins/admin/groups/acl_definition.inc:442
 msgid "Scalix Mail node"
 msgstr "Scalix Mailknoten"
 
-#: plugins/admin/groups/acl_definition.inc:447
+#: plugins/admin/groups/acl_definition.inc:443
 msgid "Mailbox class"
 msgstr "Postfach-Klasse"
 
-#: plugins/admin/groups/acl_definition.inc:448
+#: plugins/admin/groups/acl_definition.inc:444
 msgid "Server language"
 msgstr "Server-Sprache"
 
-#: plugins/admin/groups/acl_definition.inc:450
+#: plugins/admin/groups/acl_definition.inc:446
 msgid "Mailbox administrator"
 msgstr "Postfach Administrator"
 
-#: plugins/admin/groups/acl_definition.inc:451
+#: plugins/admin/groups/acl_definition.inc:447
 msgid "Hide user entry in Scalix"
 msgstr "Verberge Benutzereintrag in Scalix"
 
-#: plugins/admin/groups/acl_definition.inc:452
+#: plugins/admin/groups/acl_definition.inc:448
 msgid "Mailbox size limitations"
 msgstr "Postfach Größenbeschränkungen"
 
-#: plugins/admin/groups/acl_definition.inc:453
+#: plugins/admin/groups/acl_definition.inc:449
 msgid "Limit outbound"
 msgstr "Ausgehenden Verkehr einschränken"
 
-#: plugins/admin/groups/acl_definition.inc:454
+#: plugins/admin/groups/acl_definition.inc:450
 msgid "Limit inbound"
 msgstr "Eingehenenden Verkehr einschränken"
 
-#: plugins/admin/groups/acl_definition.inc:455
+#: plugins/admin/groups/acl_definition.inc:451
 msgid "Notify user"
 msgstr "Benachrichtige Benutzer"
 
-#: plugins/admin/groups/acl_definition.inc:457
+#: plugins/admin/groups/acl_definition.inc:453
 msgid "Create/edit new task"
 msgstr "Neuen Auftrag erstellen/Auftrag bearbeiten"
 
-#: plugins/admin/groups/acl_definition.inc:457
+#: plugins/admin/groups/acl_definition.inc:453
 msgid "Remove tasks"
 msgstr "Aufgaben entfernen"
 
@@ -17980,6 +17983,19 @@ msgstr "Fehler beim Kopieren von '%s' nach '%s'. Der LDAP-Dienst meldete '%s'."
 #: setup/class_setupStep_Migrate.inc:1907
 msgid "Something went wrong while copying dns."
 msgstr "Etwas ging schief während des Kopierens von DNs."
+
+#, fuzzy
+#~ msgid ""
+#~ "This includes 'all' DHCP subsections that are located within this server. "
+#~ "Please double check if your really want to do this."
+#~ msgstr ""
+#~ "Dies umfasst 'alle' DHCP-Untersektionen die sich in dieser Sektion "
+#~ "befinden. Bitte prüfen Sie genau, da es keine Möglichkeit für GOsa gibt, "
+#~ "die Daten zu restaurieren. "
+
+#, fuzzy
+#~ msgid "Following objects will be taken over"
+#~ msgstr "Die folgenden Referenzen werden aktualisiert"
 
 #~ msgid "to the list of forwarders."
 #~ msgstr "zur Liste der Weiterleitungen."

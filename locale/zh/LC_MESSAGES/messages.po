@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-10 16:44+0200\n"
+"POT-Creation-Date: 2007-09-11 14:52+0200\n"
 "PO-Revision-Date: 2007-07-11 18:45+0800\n"
 "Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
 "Language-Team: Chinese Simplified <zh@li.org>\n"
@@ -499,7 +499,6 @@ msgstr ""
 #: plugins/admin/systems/gencd.tpl:11
 #: plugins/admin/systems/goSpamServerRule.tpl:24
 #: plugins/admin/systems/glpi_devices.tpl:761
-#: plugins/admin/systems/servdhcp.tpl:11
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:75
 #: plugins/admin/systems/goVirusServer.tpl:146
 #: plugins/admin/applications/remove.tpl:15
@@ -868,7 +867,7 @@ msgid "Language"
 msgstr "语言"
 
 #: html/getxls.php:68 html/getxls.php:70 html/getxls.php:243
-#: plugins/admin/systems/class_glpiSelectUser.inc:107
+#: plugins/admin/systems/class_glpiSelectUser.inc:108
 #: plugins/admin/systems/printer.tpl:72
 #: plugins/admin/users/class_userManagement.inc:28
 msgid "Users"
@@ -906,7 +905,7 @@ msgstr "%s 的用户组于 %s 上"
 #: plugins/gofax/blocklists/generic.tpl:46 plugins/gofon/macro/generic.tpl:41
 #: plugins/gofon/conference/generic.tpl:64
 #: plugins/addons/gotomasses/goto_task.tpl:12
-#: plugins/addons/gotomasses/class_goto_task.inc:324
+#: plugins/addons/gotomasses/class_goto_task.inc:325
 #: plugins/generic/references/contents.tpl:11
 #: plugins/admin/systems/servnfs.tpl:17 plugins/admin/systems/phone.tpl:30
 #: plugins/admin/systems/server.tpl:10 plugins/admin/systems/wingeneric.tpl:25
@@ -961,9 +960,9 @@ msgstr "显示名称"
 #: plugins/addons/addressbook/class_addressbook.inc:522
 #: plugins/addons/addressbook/address_info.tpl:16
 #: plugins/addons/gotomasses/goto_task.tpl:103
-#: plugins/addons/gotomasses/class_goto_task.inc:212
+#: plugins/addons/gotomasses/class_goto_task.inc:213
 #: plugins/admin/systems/servnfs.tpl:9
-#: plugins/admin/systems/class_glpiAttachmentPool.inc:196
+#: plugins/admin/systems/class_glpiAttachmentPool.inc:197
 #: plugins/admin/systems/dhcp_group.tpl:6
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:7
 #: plugins/admin/systems/dhcp_sharedNetwork.tpl:10
@@ -986,7 +985,7 @@ msgstr "显示名称"
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:7
 #: plugins/admin/systems/dhcp_host.tpl:8 plugins/admin/fai/faiProfile.tpl:9
 #: plugins/admin/fai/faiHookEntry.tpl:9 plugins/admin/fai/faiScript.tpl:9
-#: plugins/admin/fai/class_faiScript.inc:295
+#: plugins/admin/fai/class_faiScript.inc:296
 #: plugins/admin/fai/faiVariable.tpl:9
 #: plugins/admin/fai/faiTemplateEntry.tpl:7
 #: plugins/admin/fai/faiTemplate.tpl:9
@@ -1483,9 +1482,9 @@ msgstr "点击下面的“编辑”按钮修改该对话框内的信息"
 #: plugins/admin/systems/glpiPrinter.tpl:82
 #: plugins/admin/systems/glpiManufacturer.tpl:7
 #: plugins/admin/systems/servservice.tpl:21
-#: plugins/admin/systems/class_glpiPrinterCartridges.inc:162
+#: plugins/admin/systems/class_glpiPrinterCartridges.inc:163
 #: plugins/admin/systems/servdnseditzone.tpl:40
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:186
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:187
 #: plugins/admin/systems/printer.tpl:52 plugins/admin/systems/glpi.tpl:48
 #: plugins/admin/systems/glpi.tpl:56 plugins/admin/systems/glpi.tpl:85
 #: plugins/admin/fai/faiVariable.tpl:45
@@ -1589,7 +1588,7 @@ msgstr "（警告：NFS不支持超过 16 个组！）"
 #: plugins/admin/systems/workstationStartup.tpl:105
 #: plugins/admin/systems/workstationStartup.tpl:128
 #: plugins/admin/systems/workstationStartup.tpl:147
-#: plugins/admin/systems/servdns.tpl:6
+#: plugins/admin/systems/servdns.tpl:26
 #: plugins/admin/systems/glpi_edit_printer_type.tpl:7
 #: plugins/admin/systems/glpiManufacturer.tpl:6
 #: plugins/admin/systems/servRepositorySetup.tpl:36
@@ -1668,8 +1667,8 @@ msgstr "添加"
 #: plugins/admin/systems/servservice.tpl:22
 #: plugins/admin/systems/servservice.tpl:48
 #: plugins/admin/systems/workstation.tpl:92
-#: plugins/admin/systems/class_glpiPrinterCartridges.inc:163
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:187
+#: plugins/admin/systems/class_glpiPrinterCartridges.inc:164
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:188
 #: plugins/admin/systems/glpi_edit_cartridge_type.tpl:8
 #: plugins/admin/systems/dhcp_advanced.tpl:23
 #: plugins/admin/systems/dhcp_advanced.tpl:36
@@ -2146,7 +2145,7 @@ msgid "Script name"
 msgstr "脚本名称"
 
 #: plugins/personal/environment/logonManagement.tpl:24
-#: plugins/admin/fai/class_faiScript.inc:296
+#: plugins/admin/fai/class_faiScript.inc:297
 #: plugins/admin/fai/faiScriptEntry.tpl:34
 msgid "Priority"
 msgstr "优先级"
@@ -2370,7 +2369,7 @@ msgstr "您已经定义的一个外部钩子解决方案无法访问，请检查
 
 #: plugins/personal/environment/class_environment.inc:216
 #: plugins/personal/environment/class_environment.inc:801
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:401
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:402
 msgid "None"
 msgstr "无"
 
@@ -2459,7 +2458,7 @@ msgid "group share"
 msgstr "组共享"
 
 #: plugins/personal/environment/class_environment.inc:1145
-#: plugins/admin/groups/acl_definition.inc:449
+#: plugins/admin/groups/acl_definition.inc:445
 msgid "Administrator"
 msgstr "管理员"
 
@@ -2506,7 +2505,7 @@ msgstr "Profil quota"
 #: plugins/personal/connectivity/class_proxyAccount.inc:90
 #: plugins/personal/connectivity/pureftpd.tpl:44
 #: plugins/personal/scalix/generic.tpl:51
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:222
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:223
 msgid "MB"
 msgstr "MB"
 
@@ -3593,7 +3592,7 @@ msgid "Notify User"
 msgstr "通知用户"
 
 #: plugins/personal/scalix/generic.tpl:74
-#: plugins/admin/groups/acl_definition.inc:456
+#: plugins/admin/groups/acl_definition.inc:452
 msgid "Scalix email addresses"
 msgstr "Scalix 邮件地址"
 
@@ -3710,19 +3709,19 @@ msgid ""
 "than eight."
 msgstr "Windows 用户管理员只允许八个客户。您指定的超过八个。"
 
-#: plugins/personal/samba/class_sambaAccount.inc:924
+#: plugins/personal/samba/class_sambaAccount.inc:939
 msgid ""
 "Warning: This account has an undefined samba SID assigned. The problem can "
 "not be fixed by GOsa!"
 msgstr "警告：这个账号分配了一个未定义的 samba SID。这个问题不能被 GOsa 解决。"
 
-#: plugins/personal/samba/class_sambaAccount.inc:948
+#: plugins/personal/samba/class_sambaAccount.inc:963
 msgid ""
 "Warning: Can't identify users primary group - no conversion to a samba group "
 "possible!"
 msgstr "警告: 无法识别用户主要组──无法转换到一个 samba 组。"
 
-#: plugins/personal/samba/class_sambaAccount.inc:1052
+#: plugins/personal/samba/class_sambaAccount.inc:1067
 msgid "Saving Samba account failed"
 msgstr "保存 Samba 账号失败"
 
@@ -3873,7 +3872,7 @@ msgstr "指定用户允许登录几个小时"
 
 #: plugins/personal/samba/sambaLogonHours.tpl:27
 #: plugins/addons/gotomasses/goto_task.tpl:151
-#: plugins/addons/gotomasses/class_goto_task.inc:322
+#: plugins/addons/gotomasses/class_goto_task.inc:323
 msgid "Hour"
 msgstr "小时"
 
@@ -4015,7 +4014,7 @@ msgstr "首选语种"
 #: plugins/admin/systems/server.tpl:14 plugins/admin/systems/wingeneric.tpl:13
 #: plugins/admin/systems/servservice.tpl:61
 #: plugins/admin/systems/workstation.tpl:23
-#: plugins/admin/systems/class_glpiSelectUser.inc:161
+#: plugins/admin/systems/class_glpiSelectUser.inc:162
 #: plugins/admin/systems/component.tpl:13
 #: plugins/admin/systems/class_divListSystem.inc:106
 #: plugins/admin/systems/printer.tpl:20
@@ -4670,9 +4669,9 @@ msgstr "黑名单名称"
 #: plugins/gofon/macro/class_divListMacros.inc:48
 #: plugins/gofon/conference/class_divListConferences.inc:49
 #: plugins/addons/addressbook/contents.tpl:42
-#: plugins/addons/gotomasses/class_goto_task.inc:213
-#: plugins/admin/systems/class_glpiAttachmentPool.inc:198
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:183
+#: plugins/addons/gotomasses/class_goto_task.inc:214
+#: plugins/admin/systems/class_glpiAttachmentPool.inc:199
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:184
 #: plugins/admin/systems/class_divListSystem.inc:58
 #: plugins/admin/applications/class_divListApplication.inc:45
 #: plugins/admin/fai/class_divListFai.inc:60
@@ -4716,7 +4715,7 @@ msgstr "新建黑名单"
 #: plugins/gofon/macro/class_divListMacros.inc:78
 #: plugins/gofon/conference/class_divListConferences.inc:79
 #: plugins/addons/gotomasses/class_target_list.inc:126
-#: plugins/admin/systems/class_glpiSelectUser.inc:164
+#: plugins/admin/systems/class_glpiSelectUser.inc:165
 #: plugins/admin/systems/class_divListSystem.inc:109
 #: plugins/admin/applications/class_divListApplication.inc:95
 #: plugins/admin/fai/class_divListFai.inc:154
@@ -4733,8 +4732,8 @@ msgstr "提交部门"
 #: plugins/gofon/conference/class_divListConferences.inc:79
 #: plugins/addons/gotomasses/class_target_list.inc:126
 #: plugins/admin/systems/class_baseSelectDialog.inc:31
-#: plugins/admin/systems/class_glpiSelectUser.inc:160
-#: plugins/admin/systems/class_glpiSelectUser.inc:164
+#: plugins/admin/systems/class_glpiSelectUser.inc:161
+#: plugins/admin/systems/class_glpiSelectUser.inc:165
 #: plugins/admin/systems/class_divListSystem.inc:109
 #: plugins/admin/applications/class_divListApplication.inc:95
 #: plugins/admin/fai/class_divListFai.inc:154
@@ -4758,8 +4757,8 @@ msgstr "提交"
 #: plugins/admin/systems/glpi.tpl:15 plugins/admin/systems/glpi.tpl:25
 #: plugins/admin/systems/glpi.tpl:35
 #: plugins/admin/applications/class_divListApplication.inc:156
-#: plugins/admin/fai/class_faiScript.inc:303
-#: plugins/admin/fai/class_faiScript.inc:306
+#: plugins/admin/fai/class_faiScript.inc:304
+#: plugins/admin/fai/class_faiScript.inc:307
 #: plugins/admin/fai/class_faiHook.inc:266
 #: plugins/admin/fai/class_faiHook.inc:269
 #: plugins/admin/fai/class_faiTemplate.inc:241
@@ -4787,7 +4786,7 @@ msgstr "编辑用户"
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:132
 #: plugins/admin/systems/class_divListSystem.inc:149
 #: plugins/admin/applications/class_divListApplication.inc:163
-#: plugins/admin/fai/class_faiScript.inc:307
+#: plugins/admin/fai/class_faiScript.inc:308
 #: plugins/admin/fai/class_faiHook.inc:270
 #: plugins/admin/fai/class_faiTemplate.inc:245
 #: plugins/admin/fai/class_divListFai.inc:237
@@ -6633,13 +6632,13 @@ msgstr "计划更新"
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:213
 #: plugins/addons/gotomasses/goto_task.tpl:58
-#: plugins/addons/gotomasses/class_goto_task.inc:324
+#: plugins/addons/gotomasses/class_goto_task.inc:325
 #: plugins/admin/systems/terminal.tpl:128
 #: plugins/admin/systems/class_baseSelectDialog.inc:45
 #: plugins/admin/systems/server.tpl:51
 #: plugins/admin/systems/workstation.tpl:109
-#: plugins/admin/systems/class_glpiPrinterCartridges.inc:158
-#: plugins/admin/fai/class_faiScript.inc:298
+#: plugins/admin/systems/class_glpiPrinterCartridges.inc:159
+#: plugins/admin/fai/class_faiScript.inc:299
 #: plugins/admin/ogroups/termgroup.tpl:75
 msgid "Action"
 msgstr "行动"
@@ -6755,31 +6754,31 @@ msgid "CVS import from file"
 msgstr "CSV 导入"
 
 #: plugins/addons/gotomasses/goto_task.tpl:147
-#: plugins/addons/gotomasses/class_goto_task.inc:321
+#: plugins/addons/gotomasses/class_goto_task.inc:322
 #, fuzzy
 msgid "Minute"
 msgstr "打印机"
 
 #: plugins/addons/gotomasses/goto_task.tpl:155
-#: plugins/addons/gotomasses/class_goto_task.inc:322
+#: plugins/addons/gotomasses/class_goto_task.inc:323
 #, fuzzy
 msgid "Day"
 msgstr "天"
 
 #: plugins/addons/gotomasses/goto_task.tpl:159
-#: plugins/addons/gotomasses/class_goto_task.inc:323
+#: plugins/addons/gotomasses/class_goto_task.inc:324
 #, fuzzy
 msgid "Month"
 msgstr "月"
 
 #: plugins/addons/gotomasses/goto_task.tpl:163
-#: plugins/addons/gotomasses/class_goto_task.inc:323
+#: plugins/addons/gotomasses/class_goto_task.inc:324
 #, fuzzy
 msgid "Week day"
 msgstr "星期三"
 
 #: plugins/addons/gotomasses/goto_task.tpl:174
-#: plugins/addons/gotomasses/class_goto_task.inc:210
+#: plugins/addons/gotomasses/class_goto_task.inc:211
 #, fuzzy
 msgid "Target systems"
 msgstr "删除系统"
@@ -6847,7 +6846,7 @@ msgid "Workstation"
 msgstr "工作站"
 
 #: plugins/addons/gotomasses/class_target_list.inc:175
-#: plugins/addons/gotomasses/class_goto_task.inc:321
+#: plugins/addons/gotomasses/class_goto_task.inc:322
 #: plugins/generic/references/class_reference.inc:50
 #: plugins/admin/ogroups/class_divListOGroup.inc:167
 msgid "Object group"
@@ -6863,18 +6862,18 @@ msgstr "系统管理"
 msgid "Keep current"
 msgstr "当前"
 
-#: plugins/addons/gotomasses/class_goto_task.inc:211
+#: plugins/addons/gotomasses/class_goto_task.inc:212
 #, fuzzy
 msgid "IP"
 msgstr "P"
 
-#: plugins/addons/gotomasses/class_goto_task.inc:328
+#: plugins/addons/gotomasses/class_goto_task.inc:329
 #, fuzzy, php-format
 msgid "The given value for attribute '%s' is invalid."
 msgstr "提供的网络地址 '%s' 无效。"
 
-#: plugins/addons/gotomasses/class_goto_task.inc:332
-#: plugins/addons/gotomasses/class_goto_task.inc:335
+#: plugins/addons/gotomasses/class_goto_task.inc:333
+#: plugins/addons/gotomasses/class_goto_task.inc:336
 #, fuzzy, php-format
 msgid "You must specify at least one target"
 msgstr "您必须提供一个有效的挂载点。"
@@ -6890,7 +6889,7 @@ msgstr "这个对象和其他对象没有关系。"
 #: plugins/generic/references/class_reference.inc:36
 #: plugins/admin/systems/class_printGeneric.inc:853
 #: plugins/admin/systems/class_printGeneric.inc:855
-#: plugins/admin/systems/class_servDHCP.inc:37
+#: plugins/admin/systems/class_servDHCP.inc:38
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:30
 #: plugins/admin/fai/faiTemplateEntry.tpl:71
 #: plugins/admin/fai/faiTemplateEntry.tpl:103
@@ -7764,8 +7763,8 @@ msgstr "匹配设备名的正则表达式"
 
 #: plugins/admin/systems/glpiDeviceManagement.tpl:51
 #: plugins/admin/systems/class_baseSelectDialog.inc:40
-#: plugins/admin/systems/class_glpiSelectUser.inc:108
-#: plugins/admin/systems/class_glpiSelectUser.inc:135
+#: plugins/admin/systems/class_glpiSelectUser.inc:109
+#: plugins/admin/systems/class_glpiSelectUser.inc:136
 #: plugins/admin/systems/glpiAttachmentPool.tpl:51
 #: plugins/admin/systems/glpiPrinterCartridges.tpl:51
 #: plugins/admin/fai/askClassName.tpl:70 plugins/admin/fai/askClassName.tpl:77
@@ -8382,13 +8381,24 @@ msgstr "提供扫描服务"
 msgid "Select scanner driver to use"
 msgstr "选择要用的扫描器驱动"
 
-#: plugins/admin/systems/servdns.tpl:1
-msgid "Zones"
-msgstr "域"
+#: plugins/admin/systems/servdns.tpl:5
+msgid ""
+"DNS take over will take place when saving this entry. Choose 'Cancel' to "
+"abort."
+msgstr ""
 
-#: plugins/admin/systems/servdns.tpl:7 plugins/admin/systems/servdhcp.tpl:31
+#: plugins/admin/systems/servdns.tpl:14
+#, fuzzy
+msgid "Take over DNS configuration from"
+msgstr "创建您的配置文件"
+
+#: plugins/admin/systems/servdns.tpl:18 plugins/admin/systems/servdhcp.tpl:18
 msgid "Take over"
 msgstr ""
+
+#: plugins/admin/systems/servdns.tpl:24
+msgid "Zones"
+msgstr "域"
 
 #: plugins/admin/systems/password.tpl:2
 msgid ""
@@ -8453,34 +8463,34 @@ msgstr "文件无法读取，可能是文件缺失。"
 msgid "Currently no file uploaded."
 msgstr "目前没有文件上传。"
 
-#: plugins/admin/systems/class_glpiAttachmentPool.inc:197
+#: plugins/admin/systems/class_glpiAttachmentPool.inc:198
 msgid "Mime"
 msgstr "Mime"
 
-#: plugins/admin/systems/class_glpiAttachmentPool.inc:200
+#: plugins/admin/systems/class_glpiAttachmentPool.inc:201
 msgid "This table displays all available attachments."
 msgstr "这个表显示所有可用的附件。"
 
-#: plugins/admin/systems/class_glpiAttachmentPool.inc:217
+#: plugins/admin/systems/class_glpiAttachmentPool.inc:218
 #: include/sieve/class_sieveElement_If.inc:447
 msgid "empty"
 msgstr "空"
 
-#: plugins/admin/systems/class_glpiAttachmentPool.inc:254
+#: plugins/admin/systems/class_glpiAttachmentPool.inc:255
 msgid "Create new attachment"
 msgstr "创建新附件"
 
-#: plugins/admin/systems/class_glpiAttachmentPool.inc:255
+#: plugins/admin/systems/class_glpiAttachmentPool.inc:256
 msgid "New Attachment"
 msgstr "新附件"
 
-#: plugins/admin/systems/class_glpiAttachmentPool.inc:346
+#: plugins/admin/systems/class_glpiAttachmentPool.inc:347
 #: plugins/admin/systems/class_servRepository.inc:240
 #: plugins/admin/fai/class_faiManagement.inc:362
 msgid "This name is already in use."
 msgstr "该名称已经被使用。"
 
-#: plugins/admin/systems/class_glpiAttachmentPool.inc:349
+#: plugins/admin/systems/class_glpiAttachmentPool.inc:350
 msgid "Please specify a valid name for this attachment."
 msgstr "请为这个附件指定一个有效名称。"
 
@@ -8504,61 +8514,73 @@ msgstr "请输入一个新名称"
 msgid "Manage manufacturers"
 msgstr "管理生产商"
 
-#: plugins/admin/systems/class_servDNS.inc:70
+#: plugins/admin/systems/class_servDNS.inc:122
+#, fuzzy, php-format
+msgid "You are going to migrate the DNS setup from server '%s'."
+msgstr "您将要拷贝条目 '%s'。"
+
+#: plugins/admin/systems/class_servDNS.inc:124
+#: plugins/admin/systems/class_servDHCP.inc:124
+msgid ""
+"The migration will be startet when you save this system. To cancel this "
+"action, use the cancel button below."
+msgstr ""
+
+#: plugins/admin/systems/class_servDNS.inc:149
 #: plugins/admin/systems/class_inventory.inc:32
 msgid "Remove DNS service"
 msgstr "删除 DNS 服务"
 
-#: plugins/admin/systems/class_servDNS.inc:71
+#: plugins/admin/systems/class_servDNS.inc:150
 #: plugins/admin/systems/class_inventory.inc:33
 msgid ""
 "This server has DNS features enabled. You can disable them by clicking below."
 msgstr "该账号已经启用 DNS 功能。您可以点击下面按钮禁用。"
 
-#: plugins/admin/systems/class_servDNS.inc:73
+#: plugins/admin/systems/class_servDNS.inc:152
 #: plugins/admin/systems/class_inventory.inc:35
 msgid "Add DNS service"
 msgstr "添加 DNS 服务"
 
-#: plugins/admin/systems/class_servDNS.inc:74
+#: plugins/admin/systems/class_servDNS.inc:153
 #: plugins/admin/systems/class_inventory.inc:36
 msgid ""
 "This server has DNS features disabled. You can enable them by clicking below."
 msgstr "该账号已经禁用 DNS 功能。您可以点击下面按钮启用。"
 
-#: plugins/admin/systems/class_servDNS.inc:170
+#: plugins/admin/systems/class_servDNS.inc:249
 msgid "Reverse zone"
 msgstr "反向解析域"
 
-#: plugins/admin/systems/class_servDNS.inc:171
+#: plugins/admin/systems/class_servDNS.inc:250
 #: plugins/admin/systems/network.tpl:102
 #: plugins/admin/systems/servdnseditzone.tpl:94
 msgid "TTL"
 msgstr "TTL"
 
-#: plugins/admin/systems/class_servDNS.inc:172
-#: plugins/admin/systems/class_servDHCP.inc:34
+#: plugins/admin/systems/class_servDNS.inc:251
+#: plugins/admin/systems/class_servDHCP.inc:35
 #: plugins/admin/fai/faiTemplateEntry.tpl:86
 msgid "Class"
 msgstr "类"
 
-#: plugins/admin/systems/class_servDNS.inc:237
+#: plugins/admin/systems/class_servDNS.inc:316
 #, php-format
 msgid ""
 "Can't delete the selected zone, because it is still in use by these entry/"
 "entries '%s'"
 msgstr "不能删除所选的域，因为它仍然被这些条目使用 '%s'"
 
-#: plugins/admin/systems/class_servDNS.inc:315
+#: plugins/admin/systems/class_servDNS.inc:422
 msgid "Updating DNS service failed"
 msgstr "更新 DNS 服务失败"
 
-#: plugins/admin/systems/class_servDNS.inc:326
+#: plugins/admin/systems/class_servDNS.inc:433
 msgid "Removing DNS entries failed"
 msgstr "删除 DNS 记录失败"
 
-#: plugins/admin/systems/class_servDNS.inc:349
-#: plugins/admin/systems/class_servDNS.inc:358
+#: plugins/admin/systems/class_servDNS.inc:456
+#: plugins/admin/systems/class_servDNS.inc:465
 msgid "Saving DNS entries failed"
 msgstr "保存 DNS 记录失败"
 
@@ -9143,7 +9165,7 @@ msgid "Saving server db settings failed"
 msgstr "保存服务器数据库设置失败"
 
 #: plugins/admin/systems/class_SelectDeviceType.inc:24
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:388
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:389
 #: plugins/admin/groups/class_groupMail.inc:303
 #: plugins/admin/ogroups/class_ogroup.inc:281
 #: plugins/admin/users/class_userManagement.inc:516
@@ -9203,26 +9225,26 @@ msgid "Choose a base"
 msgstr "选择一个 base"
 
 #: plugins/admin/systems/class_baseSelectDialog.inc:26
-#: plugins/admin/systems/class_glpiSelectUser.inc:155
+#: plugins/admin/systems/class_glpiSelectUser.inc:156
 #: include/class_MultiSelectWindow.inc:189
 msgid "Go to root department"
 msgstr "转到根部门"
 
 #: plugins/admin/systems/class_baseSelectDialog.inc:26
-#: plugins/admin/systems/class_glpiSelectUser.inc:155
+#: plugins/admin/systems/class_glpiSelectUser.inc:156
 #: include/class_MultiSelectWindow.inc:189
 #: include/class_MultiSelectWindow.inc:191
 msgid "Root"
 msgstr "根"
 
 #: plugins/admin/systems/class_baseSelectDialog.inc:28
-#: plugins/admin/systems/class_glpiSelectUser.inc:157
+#: plugins/admin/systems/class_glpiSelectUser.inc:158
 #: include/class_MultiSelectWindow.inc:197
 msgid "Go up one department"
 msgstr "向上跳转一个部门"
 
 #: plugins/admin/systems/class_baseSelectDialog.inc:28
-#: plugins/admin/systems/class_glpiSelectUser.inc:157
+#: plugins/admin/systems/class_glpiSelectUser.inc:158
 #: plugins/admin/systems/class_servDNSeditZone.inc:323
 #: plugins/admin/fai/class_faiProfile.inc:305
 #: plugins/admin/ogroups/phonequeue.tpl:21
@@ -9234,20 +9256,20 @@ msgid "Up"
 msgstr "上"
 
 #: plugins/admin/systems/class_baseSelectDialog.inc:30
-#: plugins/admin/systems/class_glpiSelectUser.inc:159
+#: plugins/admin/systems/class_glpiSelectUser.inc:160
 #: include/class_MultiSelectWindow.inc:205
 msgid "Go to users department"
 msgstr "转到用户部门"
 
 #: plugins/admin/systems/class_baseSelectDialog.inc:30
-#: plugins/admin/systems/class_glpiSelectUser.inc:159
+#: plugins/admin/systems/class_glpiSelectUser.inc:160
 #: include/class_MultiSelectWindow.inc:205
 #: include/class_MultiSelectWindow.inc:207
 msgid "Home"
 msgstr "主页"
 
 #: plugins/admin/systems/class_baseSelectDialog.inc:31
-#: plugins/admin/systems/class_glpiSelectUser.inc:160
+#: plugins/admin/systems/class_glpiSelectUser.inc:161
 #: include/class_MultiSelectWindow.inc:212
 msgid "Reload list"
 msgstr "重新加载列表"
@@ -10068,13 +10090,13 @@ msgstr "无法删除条目，仍在使用。"
 msgid "The selected name is already in use."
 msgstr "选择的名称已经被使用。"
 
-#: plugins/admin/systems/class_glpiSelectUser.inc:107
+#: plugins/admin/systems/class_glpiSelectUser.inc:108
 #: plugins/admin/ogroups/class_divListOGroup.inc:52
 #: plugins/admin/departments/class_departmentManagement.inc:25
 msgid "Departments"
 msgstr "部门"
 
-#: plugins/admin/systems/class_glpiSelectUser.inc:135
+#: plugins/admin/systems/class_glpiSelectUser.inc:136
 msgid "use"
 msgstr "使用"
 
@@ -10159,17 +10181,17 @@ msgid ""
 "'%s'."
 msgstr "您不能删除这个硒鼓类型，它仍然在被这个打印机 '%s' 使用。"
 
-#: plugins/admin/systems/class_glpiPrinterCartridges.inc:157
+#: plugins/admin/systems/class_glpiPrinterCartridges.inc:158
 msgid "Cartridges"
 msgstr "硒鼓"
 
-#: plugins/admin/systems/class_glpiPrinterCartridges.inc:205
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:220
+#: plugins/admin/systems/class_glpiPrinterCartridges.inc:206
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:221
 msgid "New monitor"
 msgstr "新监视器"
 
-#: plugins/admin/systems/class_glpiPrinterCartridges.inc:205
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:220
+#: plugins/admin/systems/class_glpiPrinterCartridges.inc:206
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:221
 msgid "M"
 msgstr "M"
 
@@ -10350,246 +10372,240 @@ msgid ""
 "You can't delete this device, it is still in use by these system(s) '%s'"
 msgstr "您不能删除这个设备，它仍然被这些系统使用 '%s'"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:182
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:183
 msgid "devices"
 msgstr "设备"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:222
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:223
 msgid "New mainbord"
 msgstr "新主板"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:224
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:225
 msgid "New processor"
 msgstr "新处理器"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:224
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:225
 #: plugins/admin/fai/class_divListFai.inc:127
 msgid "P"
 msgstr "P"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:226
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:227
 msgid "New case"
 msgstr "新机箱"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:226
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:227
 msgid "C"
 msgstr "C"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:228
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:229
 msgid "New network interface"
 msgstr "新建网络接口"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:228
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:229
 msgid "NI"
 msgstr "NI"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:230
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:231
 msgid "New ram"
 msgstr "新内存"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:230
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:231
 msgid "R"
 msgstr "R"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:232
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:233
 msgid "New hard disk"
 msgstr "新硬盘"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:232
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:233
 msgid "HDD"
 msgstr "HDD"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:234
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:235
 msgid "New drive"
 msgstr "新驱动器"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:234
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:235
 msgid "D"
 msgstr "D"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:236
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:237
 msgid "New controller"
 msgstr "新控制器"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:236
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:237
 msgid "CS"
 msgstr "CS"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:238
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:239
 msgid "New graphics card"
 msgstr "新显卡"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:238
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:239
 msgid "GC"
 msgstr "GC"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:240
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:241
 msgid "New sound card"
 msgstr "新声卡"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:240
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:241
 msgid "SC"
 msgstr "SC"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:242
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:243
 msgid "New power supply"
 msgstr "新电源"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:242
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:243
 msgid "PS"
 msgstr "PS"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:244
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:245
 msgid "New misc device"
 msgstr "新建其他设备"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:244
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:245
 msgid "OC"
 msgstr "OC"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:342
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:343
 msgid "You have to specify a valid name for this device."
 msgstr "您必须为这个设备提供一个有效的名称。"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:362
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:365
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:363
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:366
 msgid "This device name is already in use."
 msgstr "这个设备名已经被使用。"
 
-#: plugins/admin/systems/class_glpiDeviceManagement.inc:401
+#: plugins/admin/systems/class_glpiDeviceManagement.inc:402
 msgid "Other"
 msgstr "其他"
 
-#: plugins/admin/systems/class_servDHCP.inc:32
+#: plugins/admin/systems/class_servDHCP.inc:33
 #, fuzzy
 msgid "Logging"
 msgstr "登录名"
 
-#: plugins/admin/systems/class_servDHCP.inc:33
-#: plugins/admin/systems/class_servDHCP.inc:319
-#: plugins/admin/systems/class_servDHCP.inc:582
+#: plugins/admin/systems/class_servDHCP.inc:34
+#: plugins/admin/systems/class_servDHCP.inc:302
+#: plugins/admin/systems/class_servDHCP.inc:565
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:26
 #, fuzzy
 msgid "Global options"
 msgstr "邮件选项"
 
-#: plugins/admin/systems/class_servDHCP.inc:35
+#: plugins/admin/systems/class_servDHCP.inc:36
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:28
 #, fuzzy
 msgid "Subclass"
 msgstr "类"
 
-#: plugins/admin/systems/class_servDHCP.inc:36
+#: plugins/admin/systems/class_servDHCP.inc:37
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:29
 #, fuzzy
 msgid "Host"
 msgstr "贴"
 
-#: plugins/admin/systems/class_servDHCP.inc:38
+#: plugins/admin/systems/class_servDHCP.inc:39
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:31
 #, fuzzy
 msgid "Pool"
 msgstr "布尔值"
 
-#: plugins/admin/systems/class_servDHCP.inc:39
+#: plugins/admin/systems/class_servDHCP.inc:40
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:32
 #, fuzzy
 msgid "Subnet"
 msgstr "提交"
 
-#: plugins/admin/systems/class_servDHCP.inc:40
+#: plugins/admin/systems/class_servDHCP.inc:41
 #, fuzzy
 msgid "Failover peer"
 msgstr "文件模板"
 
-#: plugins/admin/systems/class_servDHCP.inc:41
+#: plugins/admin/systems/class_servDHCP.inc:42
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:33
 #, fuzzy
 msgid "Shared network"
 msgstr "SMTP 授权网络"
 
-#: plugins/admin/systems/class_servDHCP.inc:143
+#: plugins/admin/systems/class_servDHCP.inc:123
 #, fuzzy, php-format
 msgid "You are going to migrate the DHCP setup from server '%s'."
 msgstr "您将要拷贝条目 '%s'。"
 
-#: plugins/admin/systems/class_servDHCP.inc:144
-msgid ""
-"The migration will be startet when you save this system. To cancel this "
-"action, use the cancel button below."
-msgstr ""
-
-#: plugins/admin/systems/class_servDHCP.inc:257
+#: plugins/admin/systems/class_servDHCP.inc:240
 #, fuzzy
 msgid "You're not allowed to remove DHCP sections!"
 msgstr "您无权删除这个应用程序！"
 
-#: plugins/admin/systems/class_servDHCP.inc:291
+#: plugins/admin/systems/class_servDHCP.inc:274
 #, fuzzy, php-format
 msgid "You're about to delete the DHCP section '%s'."
 msgstr "您将要删除应用程序 '%s'。"
 
-#: plugins/admin/systems/class_servDHCP.inc:305
+#: plugins/admin/systems/class_servDHCP.inc:288
 msgid "Remove DHCP service"
 msgstr "删除 DHCP 服务"
 
-#: plugins/admin/systems/class_servDHCP.inc:306
+#: plugins/admin/systems/class_servDHCP.inc:289
 msgid ""
 "This server has DHCP features enabled. You can disable them by clicking "
 "below."
 msgstr "该服务器已经启用 DHCP 功能。您可以点击下面按钮禁用。"
 
-#: plugins/admin/systems/class_servDHCP.inc:324
+#: plugins/admin/systems/class_servDHCP.inc:307
 msgid "Add DHCP service"
 msgstr "添加 DHCP 服务"
 
-#: plugins/admin/systems/class_servDHCP.inc:325
+#: plugins/admin/systems/class_servDHCP.inc:308
 msgid ""
 "This server has DHCP features disabled. You can enable them by clicking "
 "below."
 msgstr "该服务器已经禁用 DHCP 功能。您可以点击下面按钮启用。"
 
-#: plugins/admin/systems/class_servDHCP.inc:345
-#: plugins/admin/systems/class_servDHCP.inc:348
+#: plugins/admin/systems/class_servDHCP.inc:328
+#: plugins/admin/systems/class_servDHCP.inc:331
 msgid "Insert new DHCP section"
 msgstr ""
 
-#: plugins/admin/systems/class_servDHCP.inc:346
-#: plugins/admin/systems/class_servDHCP.inc:349
-#: plugins/admin/systems/class_servDHCP.inc:350
+#: plugins/admin/systems/class_servDHCP.inc:329
+#: plugins/admin/systems/class_servDHCP.inc:332
+#: plugins/admin/systems/class_servDHCP.inc:333
 #, fuzzy
 msgid "Edit DHCP section"
 msgstr "LDAP 检查"
 
-#: plugins/admin/systems/class_servDHCP.inc:347
-#: plugins/admin/systems/class_servDHCP.inc:351
+#: plugins/admin/systems/class_servDHCP.inc:330
+#: plugins/admin/systems/class_servDHCP.inc:334
 #, fuzzy
 msgid "Remove DHCP section"
 msgstr "删除 DHCP 服务"
 
-#: plugins/admin/systems/class_servDHCP.inc:397
-#: plugins/admin/systems/class_servDHCP.inc:412
+#: plugins/admin/systems/class_servDHCP.inc:380
+#: plugins/admin/systems/class_servDHCP.inc:395
 #, fuzzy
 msgid "Removing DHCP entries failed"
 msgstr "删除 DNS 记录失败"
 
-#: plugins/admin/systems/class_servDHCP.inc:465
+#: plugins/admin/systems/class_servDHCP.inc:448
 #, fuzzy
 msgid "Can't remove DHCP object!"
 msgstr "删除对象"
 
-#: plugins/admin/systems/class_servDHCP.inc:518
-#: plugins/admin/systems/class_servDHCP.inc:521
+#: plugins/admin/systems/class_servDHCP.inc:501
+#: plugins/admin/systems/class_servDHCP.inc:504
 #, fuzzy
 msgid "Can't save DHCP object!"
 msgstr "无法保存空测试。"
 
-#: plugins/admin/systems/class_servDHCP.inc:543
+#: plugins/admin/systems/class_servDHCP.inc:526
 #, fuzzy
 msgid "Saving DHCP service failed"
 msgstr "保存服务器失败"
 
-#: plugins/admin/systems/class_servDHCP.inc:659
+#: plugins/admin/systems/class_servDHCP.inc:642
 #, fuzzy
 msgid ""
 "DHCP configuration set is unknown. Please contact your system administrator."
@@ -11110,29 +11126,17 @@ msgid "Can't delete automatic options. Please use the fields above."
 msgstr ""
 
 #: plugins/admin/systems/servdhcp.tpl:5
-msgid "DHCP take over initiated"
-msgstr ""
-
-#: plugins/admin/systems/servdhcp.tpl:7
-#, fuzzy
 msgid ""
-"This includes 'all' DHCP subsections that are located within this server. "
-"Please double check if your really want to do this."
+"DHCP take over will take place when saving this entry. Choose 'Cancel' to "
+"abort."
 msgstr ""
-"这包含“所有”对象信息。请再次检查您是否要这么做，因为 GOsa 没有办法将您的数据"
-"找回。"
 
 #: plugins/admin/systems/servdhcp.tpl:14
-#, fuzzy
-msgid "Following objects will be taken over"
-msgstr "下列参照将被更新"
-
-#: plugins/admin/systems/servdhcp.tpl:27
 #, fuzzy
 msgid "Take over DHCP configuration from"
 msgstr "创建您的配置文件"
 
-#: plugins/admin/systems/servdhcp.tpl:37
+#: plugins/admin/systems/servdhcp.tpl:24
 #, fuzzy
 msgid "DHCP sections"
 msgstr "LDAP 检查"
@@ -11434,8 +11438,8 @@ msgstr "在成员的启动条放置条目"
 
 #: plugins/admin/applications/generic.tpl:103
 #: plugins/admin/fai/class_faiHookEntry.inc:79
-#: plugins/admin/fai/class_faiScript.inc:297
-#: plugins/admin/fai/class_faiScript.inc:316
+#: plugins/admin/fai/class_faiScript.inc:298
+#: plugins/admin/fai/class_faiScript.inc:317
 #: plugins/admin/fai/class_faiHook.inc:279
 #: plugins/admin/fai/class_faiTemplate.inc:257
 #: plugins/admin/fai/class_faiScriptEntry.inc:84
@@ -11707,7 +11711,7 @@ msgid "Reload class and release configuration from parent object."
 msgstr "从父类重新加载类和发行版配置。"
 
 #: plugins/admin/fai/faiScript.tpl:34 plugins/admin/fai/faiVariable.tpl:32
-#: plugins/admin/fai/class_faiProfileEntry.inc:170
+#: plugins/admin/fai/class_faiProfileEntry.inc:171
 #: plugins/admin/fai/faiTemplate.tpl:29
 #: plugins/admin/fai/faiPartitionTable.tpl:32 plugins/admin/fai/faiHook.tpl:34
 msgid "Objects"
@@ -11833,17 +11837,17 @@ msgstr "执行请求的操作。"
 msgid "Initiate operation"
 msgstr "初始操作"
 
-#: plugins/admin/fai/class_faiScript.inc:281
-#: plugins/admin/fai/class_faiScript.inc:283
+#: plugins/admin/fai/class_faiScript.inc:282
+#: plugins/admin/fai/class_faiScript.inc:284
 #, fuzzy
 msgid "Sort direction"
 msgstr "节"
 
-#: plugins/admin/fai/class_faiScript.inc:380
+#: plugins/admin/fai/class_faiScript.inc:381
 msgid "Removing FAI script base failed"
 msgstr "删除 FAI script base 失败"
 
-#: plugins/admin/fai/class_faiScript.inc:428
+#: plugins/admin/fai/class_faiScript.inc:429
 #: plugins/admin/fai/class_faiProfile.inc:396
 #, php-format
 msgid ""
@@ -11851,15 +11855,15 @@ msgid ""
 "given name."
 msgstr "无法插入一个 脚本 '%s' 于 '%s' 中。已经存在一个同名的脚本。"
 
-#: plugins/admin/fai/class_faiScript.inc:461
+#: plugins/admin/fai/class_faiScript.inc:462
 msgid "Creating FAI script base failed"
 msgstr "创建 FAI script base 失败"
 
-#: plugins/admin/fai/class_faiScript.inc:545
+#: plugins/admin/fai/class_faiScript.inc:546
 msgid "Removing FAI script failed"
 msgstr "删除 FAI 脚本失败"
 
-#: plugins/admin/fai/class_faiScript.inc:564
+#: plugins/admin/fai/class_faiScript.inc:565
 msgid "Saving FAI script failed"
 msgstr "保存 FAI 脚本失败"
 
@@ -11901,12 +11905,12 @@ msgstr "软件包集合"
 msgid "Partition table"
 msgstr "分区表"
 
-#: plugins/admin/fai/class_faiProfileEntry.inc:167
+#: plugins/admin/fai/class_faiProfileEntry.inc:168
 #: plugins/admin/fai/class_faiProfile.inc:291
 msgid "This list displays all assigned class names for this profile."
 msgstr "这个列表显示该 profile 所有分配的类名。"
 
-#: plugins/admin/fai/class_faiProfileEntry.inc:169
+#: plugins/admin/fai/class_faiProfileEntry.inc:170
 #: plugins/admin/fai/askClassName.tpl:32 plugins/admin/fai/askClassName.tpl:54
 msgid "Class name"
 msgstr "类名"
@@ -12670,12 +12674,12 @@ msgstr "对于此对象类，指定的类名已经被使用了。"
 msgid "Please enter your search string here"
 msgstr "请在这里输入您的查询字符串"
 
-#: plugins/admin/fai/class_faiPackageEntry.inc:43
+#: plugins/admin/fai/class_faiPackageEntry.inc:44
 msgid ""
 "This list displays all assigned package names for this repository settings."
 msgstr "对于该仓库的设置，这个列表显示所有已分配的软件包名称。"
 
-#: plugins/admin/fai/class_faiPackageEntry.inc:122
+#: plugins/admin/fai/class_faiPackageEntry.inc:123
 #, php-format
 msgid ""
 "Your specified search string '%s' returned too many results. Only the first "
@@ -12958,48 +12962,48 @@ msgstr "您将要删除组 '%s'。"
 msgid "You are not allowed to delete this group!"
 msgstr "您无权删除这个组！"
 
-#: plugins/admin/groups/acl_definition.inc:446
+#: plugins/admin/groups/acl_definition.inc:442
 msgid "Scalix Mail node"
 msgstr "Scalix 邮件节点"
 
-#: plugins/admin/groups/acl_definition.inc:447
+#: plugins/admin/groups/acl_definition.inc:443
 msgid "Mailbox class"
 msgstr "邮箱类别"
 
-#: plugins/admin/groups/acl_definition.inc:448
+#: plugins/admin/groups/acl_definition.inc:444
 msgid "Server language"
 msgstr "服务器语言"
 
-#: plugins/admin/groups/acl_definition.inc:450
+#: plugins/admin/groups/acl_definition.inc:446
 msgid "Mailbox administrator"
 msgstr "邮箱管理员"
 
-#: plugins/admin/groups/acl_definition.inc:451
+#: plugins/admin/groups/acl_definition.inc:447
 msgid "Hide user entry in Scalix"
 msgstr "在 Scalix 中隐藏用户条目"
 
-#: plugins/admin/groups/acl_definition.inc:452
+#: plugins/admin/groups/acl_definition.inc:448
 msgid "Mailbox size limitations"
 msgstr "邮箱大小限制"
 
-#: plugins/admin/groups/acl_definition.inc:453
+#: plugins/admin/groups/acl_definition.inc:449
 msgid "Limit outbound"
 msgstr "限制出栈"
 
-#: plugins/admin/groups/acl_definition.inc:454
+#: plugins/admin/groups/acl_definition.inc:450
 msgid "Limit inbound"
 msgstr "限制入栈"
 
-#: plugins/admin/groups/acl_definition.inc:455
+#: plugins/admin/groups/acl_definition.inc:451
 msgid "Notify user"
 msgstr "通知用户"
 
-#: plugins/admin/groups/acl_definition.inc:457
+#: plugins/admin/groups/acl_definition.inc:453
 #, fuzzy
 msgid "Create/edit new task"
 msgstr "创建新用户"
 
-#: plugins/admin/groups/acl_definition.inc:457
+#: plugins/admin/groups/acl_definition.inc:453
 #, fuzzy
 msgid "Remove tasks"
 msgstr "删除选项"
@@ -17163,6 +17167,18 @@ msgstr "拷贝 '%s' 到 '%s' 失败。LDAP 报告说 '%s'。"
 #: setup/class_setupStep_Migrate.inc:1907
 msgid "Something went wrong while copying dns."
 msgstr "拷贝 dns 时出错。"
+
+#, fuzzy
+#~ msgid ""
+#~ "This includes 'all' DHCP subsections that are located within this server. "
+#~ "Please double check if your really want to do this."
+#~ msgstr ""
+#~ "这包含“所有”对象信息。请再次检查您是否要这么做，因为 GOsa 没有办法将您的数"
+#~ "据找回。"
+
+#, fuzzy
+#~ msgid "Following objects will be taken over"
+#~ msgstr "下列参照将被更新"
 
 #, fuzzy
 #~ msgid "Removing SSH account failed"
