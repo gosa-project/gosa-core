@@ -15,6 +15,9 @@ class servdns extends plugin
 
   var $DNSinitially_was_account;
 
+  var $dns_server_list   = array("ENTRIES"=> array(),"FOR_LIST"=> array());
+  var $take_over_id       = -1;
+
 
   function servdns ($config, $dn= NULL, $parent= NULL)
   {
@@ -34,10 +37,55 @@ class servdns extends plugin
      */
     if(count($this->Zones) == 0){
       $this->is_account = false;
+      $this->dns_server_list = $this->get_list_of_dns_servers();
     }else{
       $this->is_account = true;
     }
     $this->DNSinitially_was_account = $this->is_account;
+  }
+
+
+  function get_list_of_dns_servers()
+  {
+    $ret = array("ENTRIES"=> array(),"FOR_LIST"=> array());
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(&(objectClass=dNSZone)(zoneName=*))",array("dn","zoneName"));
+    $dns = array();
+    while($attrs = $ldap->fetch()){
+      /* Skip own config */
+      if($this->dn != "new" && preg_match("/".normalizePreg($this->dn)."$/",$attrs['dn'])){
+        continue;
+      }
+      $dn = preg_replace("/^zoneName=[^,]+,/","",$attrs['dn']);
+      if(preg_match("/^cn=/",$dn) && !in_array($dn,$dns)){
+        $dns[] = $dn;
+      }
+    }
+    $i = 0;
+    foreach($dns as $dn){
+      $ldap->cat($dn,array('*'));
+      if($ldap->count()){
+        $i ++;
+        $attrs = $ldap->fetch();
+          $ret['ENTRIES'][$i]   = $attrs;
+          $ret['FOR_LIST'][$i] = $attrs['cn'][0];
+      }
+    }
+    return($ret);
+  }  
+
+
+  function get_dns_info_string($id)
+  {
+    $ret="";
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->dns_server_list['ENTRIES'][$id]['dn']);
+    $ldap->search("(|(zoneName=*)(relativeDomainName=*))",array("dn"));
+    while($attrs = $ldap->fetch()){
+      $ret .= $attrs['dn']."\n";
+    }
+    return($ret);
   }
 
 
@@ -50,7 +98,49 @@ class servdns extends plugin
     /* Fill templating stuff 
      */
     $smarty= get_smarty();
+    $smarty->assign("dns_take_over",FALSE);
     $display= "";
+
+
+    /*****************/
+    /* Handle Take Over Actions
+    /*****************/
+
+    /* Give smarty the required informations */
+    $smarty->assign("dns_server_list", $this->dns_server_list['FOR_LIST']);
+    $smarty->assign("dns_server_list_cnt", count($this->dns_server_list['FOR_LIST']));
+
+    /* Take over requested, save id */
+    if(isset($_POST['take_over_src']) && isset($_POST['take_over'])){
+      $id = $_POST['take_over_src'];
+      if(isset($this->dns_server_list['ENTRIES'][$id])){
+        $this->take_over_id = $id;
+      }
+    }
+
+    /* Abort take over action */
+    if(isset($_POST['cancel_take_over'])){
+      $this->dialog =false;
+      $this->take_over_id = -1;
+      $this->dns_server_list = $this->get_list_of_dns_servers();
+    }
+
+    /* Display informartion about take over that will be started when saving this server
+     *  and hide default dns output
+     */
+    if($this->take_over_id != -1){
+      $this->dialog = FALSE;
+      $id = $this->take_over_id;
+      $info = $this->get_dns_info_string($id);
+      $smarty->assign("dns_take_over",TRUE);
+      $smarty->assign("info",$info);
+      $warning = sprintf(_("You are going to migrate the DNS setup from server '%s'."),$this->dhcp_server_list['ENTRIES'][$id]['cn'][0]);
+      $warning2 = _("The migration will be startet when you save this system. To cancel this action, use the cancel button below.");
+      $smarty->assign("warning",$warning);
+      $smarty->assign("warning2",$warning2);
+      return($smarty->fetch(get_template_path('servdns.tpl', TRUE)));
+    }
+
 
     /* Do we need to flip is_account state? 
      */
@@ -283,6 +373,34 @@ class servdns extends plugin
   /* Save to LDAP */
   function save()
   {
+
+    /* Take over handling
+     * - Create list of zones managed by source server 
+     * - Copy ldap entries to destination server 
+     * - Remove old zone entries from source
+     */
+    if($this->take_over_id != -1){
+      $del = array();
+      $id = $this->take_over_id;
+      $src = $this->dns_server_list['ENTRIES'][$id]['dn'];
+      $ldap = $this->config->get_ldap_link(); 
+      $ldap->ls("(objectClass=dnsZone)",$src,array('cn'));
+      while($attrs = $ldap->fetch()){
+        $src_zone = $attrs['dn'];
+        $dst_zone = preg_replace("/".normalizePreg($src)."$/",$this->dn,$src_zone);
+        $res = plugin::recursive_move($src_zone, $dst_zone);
+
+        if($res){
+          $del [] = $src_zone;
+        }
+      }
+      foreach($del as $src_zone){
+        $ldap->rmdir_recursive($src_zone);
+      }
+      return;
+    }
+
+
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);  
   

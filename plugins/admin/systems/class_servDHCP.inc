@@ -55,12 +55,6 @@ class servdhcp extends plugin
   }
 
   
-  function take_over_service()
-  {
-    
-  }
-
-
   function get_list_of_dhcp_servers()
   {
     $ret = array("ENTRIES"=> array(),"FOR_LIST"=> array());
