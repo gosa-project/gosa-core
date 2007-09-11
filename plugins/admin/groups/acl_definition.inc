@@ -288,7 +288,6 @@ $ACLD['sambaAccount']=
 			"profilePath"		=> "samba2:profilePath",
 			"scriptPath" 		=> "samba2:scriptPath",
 			"smbHome" 			=> "samba2:smbHome",
-			"temporary_disable",
 			"sambaHomePath"		,//=> _("Home path"), 
 			"sambaHomeDrive"	,//=> _("Home drive"), 
 			"sambaDomainName"	,//=> _("Samba domain name"),
