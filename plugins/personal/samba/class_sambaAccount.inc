@@ -722,6 +722,19 @@ class sambaAccount extends plugin
   }
 
 
+  /* Force password set, if this account doesn't have any samba passwords  */
+  function password_change_needed()
+  {
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cat($this->dn,array("sambaLMPassword","sambaNTPassword"));
+    $attrs = $ldap->fetch();
+    if(!isset($attrs['sambaLMPassword']) || !isset($attrs['sambaNTPassword'])){
+      return(TRUE);
+    }
+    return(FALSE);
+  }
+
+
   /* Save data to object */
   function save_object()
   {
