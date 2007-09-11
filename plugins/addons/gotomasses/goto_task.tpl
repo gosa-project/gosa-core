@@ -116,7 +116,7 @@
 		</td>
 		<td style='vertical-align:top'>
 			<table>
-				<tr><td>{t}CVS import from file{/t}</td></tr>
+				<tr><td>{t}CSV import from file{/t}</td></tr>
 				<tr>
 					<td>
             &nbsp;
