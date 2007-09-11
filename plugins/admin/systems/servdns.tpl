@@ -2,7 +2,7 @@
 <table summary="" width="100%">
     <tr>
         <td style="width:100%;vertical-align:top;">
-            <h2>{t}DNS take over initiated{/t}</h2>
+            <h2>{t}DNS take over will take place when saving this entry. Choose 'Cancel' to abort.{/t}</h2>
         </td>
     </tr>
 </table>
