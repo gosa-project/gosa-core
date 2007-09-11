@@ -24,7 +24,7 @@
 {if $dns_server_list_cnt}
 <tr>
     <td style="width:100%;vertical-align:top;">
-        <b>{t}Take over DHCP configuration from{/t}</b>&nbsp;
+        <b>{t}Take over DNS configuration from{/t}</b>&nbsp;
         <select name='take_over_src'>
             {html_options options=$dns_server_list}
         </select>
