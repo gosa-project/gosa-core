@@ -3,11 +3,6 @@
     <tr>
         <td style="width:100%;vertical-align:top;">
             <h2>{t}DNS take over initiated{/t}</h2>
-            {$warning}
-            {t}This includes 'all' DNS zones that are located within this server. Please double check if your really want to do this.{/t}
-            <p>
-            {$warning2}
-            </p>
         </td>
     </tr>
 </table>
