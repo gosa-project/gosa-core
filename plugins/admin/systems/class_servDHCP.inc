@@ -119,8 +119,9 @@ class servdhcp extends plugin
       $this->dialog = FALSE;
       $id = $this->take_over_id;
       $smarty->assign("dns_take_over",TRUE);
-      $warning= "&nbsp;"._("This includes 'all' DNS zones that are located within this server. Please double check if your really want to do this.");
-      $warning.= "&nbsp;"._("The migration will be startet when you save this system. To cancel this action, use the cancel button below.");
+
+     $warning = sprintf(_("You are going to migrate the DHCP setup from server '%s'."),$this->dhcp_server_list['ENTRIES'][$id]['cn'][0]);
+     $warning.= _("The migration will be startet when you save this system. To cancel this action, use the cancel button below.");
 
       if($this->display_warning){
         print_red($warning);
