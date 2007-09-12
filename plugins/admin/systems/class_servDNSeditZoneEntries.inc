@@ -64,8 +64,6 @@ class servDNSeditZoneEntries extends plugin
   {
     plugin::execute();
 
-    print_a($this->Devices);
-
     /* Fill templating stuff */
     $smarty= get_smarty();
     $display= "";
