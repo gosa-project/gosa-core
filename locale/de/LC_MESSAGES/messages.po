@@ -11,12 +11,12 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-11 14:52+0200\n"
-"PO-Revision-Date: 2007-09-07 11:24+0200\n"
+"PO-Revision-Date: 2007-09-12 10:29+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: contrib/gosa.conf:4
 msgid "My account"
@@ -2325,11 +2325,10 @@ msgstr ""
 
 #: plugins/personal/environment/class_kioskManagementDialog.inc:90
 #: plugins/personal/environment/class_kioskManagementDialog.inc:109
-#, fuzzy, php-format
+#, php-format
 msgid "Can't delete '%s'. Error was: file doesn't exist."
 msgstr ""
-"Kann Datei '%s' nicht entfernen. Die Fehlermeldung war: Datei existiert "
-"nicht."
+"Kann '%s' nicht entfernen. Die Fehlermeldung war: Datei existiert nicht."
 
 #: plugins/personal/environment/class_kioskManagementDialog.inc:151
 msgid ""
@@ -8746,12 +8745,11 @@ msgstr "Wählen Sie den Scanner-Treiber, der benutzt werden soll"
 msgid ""
 "DNS take over will take place when saving this entry. Choose 'Cancel' to "
 "abort."
-msgstr ""
+msgstr "Die DNS Übernahme wird durchgeführt, wenn Sie diesen Eintrag speichern. Drücken Sie auf 'Abbrechen', um die Übernahme nicht durchzuführen."
 
 #: plugins/admin/systems/servdns.tpl:14
-#, fuzzy
 msgid "Take over DNS configuration from"
-msgstr "Erstellen Sie Ihre Konfigurationsdatei"
+msgstr "Übernehme DNS-Konfiguration von"
 
 #: plugins/admin/systems/servdns.tpl:18 plugins/admin/systems/servdhcp.tpl:18
 msgid "Take over"
@@ -8884,16 +8882,16 @@ msgid "Manage manufacturers"
 msgstr "Hersteller verwalten"
 
 #: plugins/admin/systems/class_servDNS.inc:122
-#, fuzzy, php-format
+#, php-format
 msgid "You are going to migrate the DNS setup from server '%s'."
-msgstr "Sie kopieren gerade den Eintrag %s."
+msgstr "Sie sind dabei, eine Migration der DNS-Konfiguration von Server '%s' durchzuführen."
 
 #: plugins/admin/systems/class_servDNS.inc:124
 #: plugins/admin/systems/class_servDHCP.inc:124
 msgid ""
 "The migration will be startet when you save this system. To cancel this "
 "action, use the cancel button below."
-msgstr ""
+msgstr "Die Migration wird durchgeführt, wenn Sie dieses System speichern. Drücken Sie auf 'Abbrechen', um die Migration nicht durchzuführen."
 
 #: plugins/admin/systems/class_servDNS.inc:149
 #: plugins/admin/systems/class_inventory.inc:32
@@ -10161,7 +10159,6 @@ msgid "Enable DHCP for this device"
 msgstr "DHCP für dieses Gerät aktivieren"
 
 #: plugins/admin/systems/network.tpl:41 plugins/admin/systems/network.tpl:116
-#, fuzzy
 msgid "not configured"
 msgstr "unkonfiguriert"
 
@@ -10997,9 +10994,9 @@ msgid "Shared network"
 msgstr "Verteiltes Netzwerk"
 
 #: plugins/admin/systems/class_servDHCP.inc:123
-#, fuzzy, php-format
+#, php-format
 msgid "You are going to migrate the DHCP setup from server '%s'."
-msgstr "Sie kopieren gerade den Eintrag %s."
+msgstr "Sie·sind·dabei,·eine·Migration·der·DHCP-Konfiguration·von·Server·'%s'·durchzuführen."
 
 #: plugins/admin/systems/class_servDHCP.inc:240
 msgid "You're not allowed to remove DHCP sections!"
@@ -11597,12 +11594,11 @@ msgstr ""
 msgid ""
 "DHCP take over will take place when saving this entry. Choose 'Cancel' to "
 "abort."
-msgstr ""
+msgstr "Die·DHCP·Übernahme·wird·durchgeführt,·wenn·Sie·diesen·Eintrag·speichern.·Drücken·Sie·auf·'Abbrechen',·um·die·Übernahme·nicht·durchzuführen."
 
 #: plugins/admin/systems/servdhcp.tpl:14
-#, fuzzy
 msgid "Take over DHCP configuration from"
-msgstr "Erstellen Sie Ihre Konfigurationsdatei"
+msgstr "Übernehme DHCP-Konfiguration von"
 
 #: plugins/admin/systems/servdhcp.tpl:24
 msgid "DHCP sections"
