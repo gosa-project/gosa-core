@@ -72,6 +72,7 @@ class servDNSeditZoneEntries extends plugin
     foreach($this->Devices as $key => $dev){
       $table .= $this->generateRecordConfigurationRow($key);
     }
+    print_a($this->Devices);
 
     $smarty->assign("disableDialog",$this->disableDialog);
     $smarty->assign("table",$table);;
@@ -123,6 +124,18 @@ class servDNSeditZoneEntries extends plugin
         $once   = false;
         if(isset($this->Devices[$Name]['RECORDS'][$RecordID])){
           unset($this->Devices[$Name]['RECORDS'][$RecordID]);
+        }
+
+        /* Check if there is at least one visible record. Else remove complete entry */
+        $visible = false;
+        foreach($this->Devices[$Name]['RECORDS'] as $rec){
+          if(in_array($rec['type'],$this->RecordTypes)){
+            $visible = true;  
+            break;
+          }
+        }
+        if(!$visible && isset($this->Devices[$Name]['RECORDS'])){
+          $this->Devices[$Name]['RECORDS'] = array();
         }
       }
     }
@@ -313,6 +326,7 @@ class servDNSeditZoneEntries extends plugin
     if($this->disableDialog) return;
 
     $todo = array(); 
+
 
     /* Create todolist
      */
