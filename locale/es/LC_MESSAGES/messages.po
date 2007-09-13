@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-11 14:52+0200\n"
+"POT-Creation-Date: 2007-09-11 15:31+0200\n"
 "PO-Revision-Date: 2007-07-30 01:11+0200\n"
 "Last-Translator: ALEJANDRO ESCANERO BLANCO\n"
 "Language-Team:  <aescanero@chaosdimension.org>\n"
@@ -10996,8 +10996,8 @@ msgid "Logging"
 msgstr "Inicio de sesión"
 
 #: plugins/admin/systems/class_servDHCP.inc:34
-#: plugins/admin/systems/class_servDHCP.inc:302
-#: plugins/admin/systems/class_servDHCP.inc:565
+#: plugins/admin/systems/class_servDHCP.inc:312
+#: plugins/admin/systems/class_servDHCP.inc:577
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:26
 #, fuzzy
 msgid "Global options"
@@ -11053,11 +11053,11 @@ msgstr "No tiene permisos para mover este objeto a '%s'."
 msgid "You're about to delete the DHCP section '%s'."
 msgstr "Has decidido eliminar la aplicación '%s'."
 
-#: plugins/admin/systems/class_servDHCP.inc:288
+#: plugins/admin/systems/class_servDHCP.inc:298
 msgid "Remove DHCP service"
 msgstr "Eliminar servicio DHCP"
 
-#: plugins/admin/systems/class_servDHCP.inc:289
+#: plugins/admin/systems/class_servDHCP.inc:299
 msgid ""
 "This server has DHCP features enabled. You can disable them by clicking "
 "below."
@@ -11065,11 +11065,11 @@ msgstr ""
 "Este servidor tiene la extensión DHCP activada. Puede desactivarla pulsando "
 "aquí."
 
-#: plugins/admin/systems/class_servDHCP.inc:307
+#: plugins/admin/systems/class_servDHCP.inc:317
 msgid "Add DHCP service"
 msgstr "Añadir servicio DHCP"
 
-#: plugins/admin/systems/class_servDHCP.inc:308
+#: plugins/admin/systems/class_servDHCP.inc:318
 msgid ""
 "This server has DHCP features disabled. You can enable them by clicking "
 "below."
@@ -11077,47 +11077,47 @@ msgstr ""
 "Este servidor tiene la extensión DHCP desactivada. Puede activarla pulsando "
 "aquí."
 
-#: plugins/admin/systems/class_servDHCP.inc:328
-#: plugins/admin/systems/class_servDHCP.inc:331
+#: plugins/admin/systems/class_servDHCP.inc:338
+#: plugins/admin/systems/class_servDHCP.inc:341
 msgid "Insert new DHCP section"
 msgstr ""
 
-#: plugins/admin/systems/class_servDHCP.inc:329
-#: plugins/admin/systems/class_servDHCP.inc:332
-#: plugins/admin/systems/class_servDHCP.inc:333
+#: plugins/admin/systems/class_servDHCP.inc:339
+#: plugins/admin/systems/class_servDHCP.inc:342
+#: plugins/admin/systems/class_servDHCP.inc:343
 #, fuzzy
 msgid "Edit DHCP section"
 msgstr "Inspección LDAP"
 
-#: plugins/admin/systems/class_servDHCP.inc:330
-#: plugins/admin/systems/class_servDHCP.inc:334
+#: plugins/admin/systems/class_servDHCP.inc:340
+#: plugins/admin/systems/class_servDHCP.inc:344
 #, fuzzy
 msgid "Remove DHCP section"
 msgstr "Eliminar servicio DHCP"
 
-#: plugins/admin/systems/class_servDHCP.inc:380
-#: plugins/admin/systems/class_servDHCP.inc:395
+#: plugins/admin/systems/class_servDHCP.inc:392
+#: plugins/admin/systems/class_servDHCP.inc:407
 #, fuzzy
 msgid "Removing DHCP entries failed"
 msgstr "Ha fallado la eliminación de la entrada DNS"
 
-#: plugins/admin/systems/class_servDHCP.inc:448
+#: plugins/admin/systems/class_servDHCP.inc:460
 #, fuzzy
 msgid "Can't remove DHCP object!"
 msgstr "Eliminar objeto"
 
-#: plugins/admin/systems/class_servDHCP.inc:501
-#: plugins/admin/systems/class_servDHCP.inc:504
+#: plugins/admin/systems/class_servDHCP.inc:513
+#: plugins/admin/systems/class_servDHCP.inc:516
 #, fuzzy
 msgid "Can't save DHCP object!"
 msgstr "No se puede grabar la prueba vacía."
 
-#: plugins/admin/systems/class_servDHCP.inc:526
+#: plugins/admin/systems/class_servDHCP.inc:538
 #, fuzzy
 msgid "Saving DHCP service failed"
 msgstr "Ha fallado la grabación del servidor"
 
-#: plugins/admin/systems/class_servDHCP.inc:642
+#: plugins/admin/systems/class_servDHCP.inc:654
 #, fuzzy
 msgid ""
 "DHCP configuration set is unknown. Please contact your system administrator."

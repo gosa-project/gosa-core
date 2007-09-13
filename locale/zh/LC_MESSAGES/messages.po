@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-11 14:52+0200\n"
+"POT-Creation-Date: 2007-09-11 15:31+0200\n"
 "PO-Revision-Date: 2007-07-11 18:45+0800\n"
 "Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
 "Language-Team: Chinese Simplified <zh@li.org>\n"
@@ -10488,8 +10488,8 @@ msgid "Logging"
 msgstr "登录名"
 
 #: plugins/admin/systems/class_servDHCP.inc:34
-#: plugins/admin/systems/class_servDHCP.inc:302
-#: plugins/admin/systems/class_servDHCP.inc:565
+#: plugins/admin/systems/class_servDHCP.inc:312
+#: plugins/admin/systems/class_servDHCP.inc:577
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:26
 #, fuzzy
 msgid "Global options"
@@ -10545,67 +10545,67 @@ msgstr "您无权删除这个应用程序！"
 msgid "You're about to delete the DHCP section '%s'."
 msgstr "您将要删除应用程序 '%s'。"
 
-#: plugins/admin/systems/class_servDHCP.inc:288
+#: plugins/admin/systems/class_servDHCP.inc:298
 msgid "Remove DHCP service"
 msgstr "删除 DHCP 服务"
 
-#: plugins/admin/systems/class_servDHCP.inc:289
+#: plugins/admin/systems/class_servDHCP.inc:299
 msgid ""
 "This server has DHCP features enabled. You can disable them by clicking "
 "below."
 msgstr "该服务器已经启用 DHCP 功能。您可以点击下面按钮禁用。"
 
-#: plugins/admin/systems/class_servDHCP.inc:307
+#: plugins/admin/systems/class_servDHCP.inc:317
 msgid "Add DHCP service"
 msgstr "添加 DHCP 服务"
 
-#: plugins/admin/systems/class_servDHCP.inc:308
+#: plugins/admin/systems/class_servDHCP.inc:318
 msgid ""
 "This server has DHCP features disabled. You can enable them by clicking "
 "below."
 msgstr "该服务器已经禁用 DHCP 功能。您可以点击下面按钮启用。"
 
-#: plugins/admin/systems/class_servDHCP.inc:328
-#: plugins/admin/systems/class_servDHCP.inc:331
+#: plugins/admin/systems/class_servDHCP.inc:338
+#: plugins/admin/systems/class_servDHCP.inc:341
 msgid "Insert new DHCP section"
 msgstr ""
 
-#: plugins/admin/systems/class_servDHCP.inc:329
-#: plugins/admin/systems/class_servDHCP.inc:332
-#: plugins/admin/systems/class_servDHCP.inc:333
+#: plugins/admin/systems/class_servDHCP.inc:339
+#: plugins/admin/systems/class_servDHCP.inc:342
+#: plugins/admin/systems/class_servDHCP.inc:343
 #, fuzzy
 msgid "Edit DHCP section"
 msgstr "LDAP 检查"
 
-#: plugins/admin/systems/class_servDHCP.inc:330
-#: plugins/admin/systems/class_servDHCP.inc:334
+#: plugins/admin/systems/class_servDHCP.inc:340
+#: plugins/admin/systems/class_servDHCP.inc:344
 #, fuzzy
 msgid "Remove DHCP section"
 msgstr "删除 DHCP 服务"
 
-#: plugins/admin/systems/class_servDHCP.inc:380
-#: plugins/admin/systems/class_servDHCP.inc:395
+#: plugins/admin/systems/class_servDHCP.inc:392
+#: plugins/admin/systems/class_servDHCP.inc:407
 #, fuzzy
 msgid "Removing DHCP entries failed"
 msgstr "删除 DNS 记录失败"
 
-#: plugins/admin/systems/class_servDHCP.inc:448
+#: plugins/admin/systems/class_servDHCP.inc:460
 #, fuzzy
 msgid "Can't remove DHCP object!"
 msgstr "删除对象"
 
-#: plugins/admin/systems/class_servDHCP.inc:501
-#: plugins/admin/systems/class_servDHCP.inc:504
+#: plugins/admin/systems/class_servDHCP.inc:513
+#: plugins/admin/systems/class_servDHCP.inc:516
 #, fuzzy
 msgid "Can't save DHCP object!"
 msgstr "无法保存空测试。"
 
-#: plugins/admin/systems/class_servDHCP.inc:526
+#: plugins/admin/systems/class_servDHCP.inc:538
 #, fuzzy
 msgid "Saving DHCP service failed"
 msgstr "保存服务器失败"
 
-#: plugins/admin/systems/class_servDHCP.inc:642
+#: plugins/admin/systems/class_servDHCP.inc:654
 #, fuzzy
 msgid ""
 "DHCP configuration set is unknown. Please contact your system administrator."

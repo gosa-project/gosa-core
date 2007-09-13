@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-11 14:52+0200\n"
+"POT-Creation-Date: 2007-09-11 15:31+0200\n"
 "PO-Revision-Date: 2007-09-12 10:29+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -10958,8 +10958,8 @@ msgid "Logging"
 msgstr "Protokollierung"
 
 #: plugins/admin/systems/class_servDHCP.inc:34
-#: plugins/admin/systems/class_servDHCP.inc:302
-#: plugins/admin/systems/class_servDHCP.inc:565
+#: plugins/admin/systems/class_servDHCP.inc:312
+#: plugins/admin/systems/class_servDHCP.inc:577
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:26
 msgid "Global options"
 msgstr "Globale Einstellungen"
@@ -11007,11 +11007,11 @@ msgstr "Sie haben keine Berechtigung. um DHCP-Sektionen zu löschen!"
 msgid "You're about to delete the DHCP section '%s'."
 msgstr "Sind sind dabei, die DHCP-Sektion '%s' zu löschen."
 
-#: plugins/admin/systems/class_servDHCP.inc:288
+#: plugins/admin/systems/class_servDHCP.inc:298
 msgid "Remove DHCP service"
 msgstr "DHCP-Dienst entfernen"
 
-#: plugins/admin/systems/class_servDHCP.inc:289
+#: plugins/admin/systems/class_servDHCP.inc:299
 msgid ""
 "This server has DHCP features enabled. You can disable them by clicking "
 "below."
@@ -11019,11 +11019,11 @@ msgstr ""
 "Dieser Server besitzt aktivierte DHCP-Funktionen. Sie können diese durch "
 "einen Klick auf die untere Schaltfläche deaktivieren."
 
-#: plugins/admin/systems/class_servDHCP.inc:307
+#: plugins/admin/systems/class_servDHCP.inc:317
 msgid "Add DHCP service"
 msgstr "DHCP Dienst hinzufügen"
 
-#: plugins/admin/systems/class_servDHCP.inc:308
+#: plugins/admin/systems/class_servDHCP.inc:318
 msgid ""
 "This server has DHCP features disabled. You can enable them by clicking "
 "below."
@@ -11031,41 +11031,41 @@ msgstr ""
 "Aktuell besitzt dieser Server keine aktivierten DHCP-Funktionen. Sie können "
 "diese durch einen Klick auf die Schaltfläche unten aktivieren."
 
-#: plugins/admin/systems/class_servDHCP.inc:328
-#: plugins/admin/systems/class_servDHCP.inc:331
+#: plugins/admin/systems/class_servDHCP.inc:338
+#: plugins/admin/systems/class_servDHCP.inc:341
 msgid "Insert new DHCP section"
 msgstr "Neue DHCP-Sektion einfügen"
 
-#: plugins/admin/systems/class_servDHCP.inc:329
-#: plugins/admin/systems/class_servDHCP.inc:332
-#: plugins/admin/systems/class_servDHCP.inc:333
+#: plugins/admin/systems/class_servDHCP.inc:339
+#: plugins/admin/systems/class_servDHCP.inc:342
+#: plugins/admin/systems/class_servDHCP.inc:343
 msgid "Edit DHCP section"
 msgstr "DHCP-Sektion bearbeiten"
 
-#: plugins/admin/systems/class_servDHCP.inc:330
-#: plugins/admin/systems/class_servDHCP.inc:334
+#: plugins/admin/systems/class_servDHCP.inc:340
+#: plugins/admin/systems/class_servDHCP.inc:344
 msgid "Remove DHCP section"
 msgstr "DHCP-Sektion entfernen"
 
-#: plugins/admin/systems/class_servDHCP.inc:380
-#: plugins/admin/systems/class_servDHCP.inc:395
+#: plugins/admin/systems/class_servDHCP.inc:392
+#: plugins/admin/systems/class_servDHCP.inc:407
 msgid "Removing DHCP entries failed"
 msgstr "Entfernen der DHCP-Einträge ist fehlgeschlagen"
 
-#: plugins/admin/systems/class_servDHCP.inc:448
+#: plugins/admin/systems/class_servDHCP.inc:460
 msgid "Can't remove DHCP object!"
 msgstr "Kann DHCP-Objekt nicht entfernen!"
 
-#: plugins/admin/systems/class_servDHCP.inc:501
-#: plugins/admin/systems/class_servDHCP.inc:504
+#: plugins/admin/systems/class_servDHCP.inc:513
+#: plugins/admin/systems/class_servDHCP.inc:516
 msgid "Can't save DHCP object!"
 msgstr "Kann DHCP-Objekt nicht speichern!"
 
-#: plugins/admin/systems/class_servDHCP.inc:526
+#: plugins/admin/systems/class_servDHCP.inc:538
 msgid "Saving DHCP service failed"
 msgstr "Speichern des DHCP-Dienstes ist fehlgeschlagen"
 
-#: plugins/admin/systems/class_servDHCP.inc:642
+#: plugins/admin/systems/class_servDHCP.inc:654
 msgid ""
 "DHCP configuration set is unknown. Please contact your system administrator."
 msgstr ""
