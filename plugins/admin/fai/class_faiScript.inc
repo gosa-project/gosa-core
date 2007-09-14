@@ -275,7 +275,7 @@ class faiScript extends plugin
        Containing FAIscripts 
      */
     $divlist = new divlist("FAIscripts");
-    
+    $divlist -> SetEntriesPerPage(0); 
     $plug = $_GET['plug'];
 
      if($this->sort_order == "up"){
@@ -294,9 +294,12 @@ class faiScript extends plugin
 
      $divlist->SetHeader(array(  
           array("string"=>"<a href='?plug=".$plug."&amp;sort=name'>"._("Name").$sort_name."</a>"),
-          array("string"=>"<a href='?plug=".$plug."&amp;sort=priority'>".$sort_prio._("Priority")."</a>"),
-          array("string"=>_("Download")),
-          array("string"=>_("Action"))));
+          array("string"=>"<a href='?plug=".$plug."&amp;sort=priority'>".$sort_prio._("Priority")."</a>",
+                "attach" => "style='width:100px;'"),
+          array("string"=>_("Download"),
+                "attach" => "style='width:100px;'"),
+          array("string"=>_("Action"),
+                "attach"=>"style='border-right: 0px;width:100px;text-align:right;'")));
     $divlist->SetHeight(300);
     $divlist->SetWidth("100%");
 
@@ -319,10 +322,10 @@ class faiScript extends plugin
       } 
 
       $divlist->AddEntry(array( array("string"=>"<a href='?plug=".$_GET['plug']."&act=edit&id=".$key."'>".$name['name']."</a>"),
-            array("string"=>$name['FAIpriority'] , "attach" => "style='width:20px;'"),
-            array("string"=>$down , "attach" => "style='width:20px;'"),
+            array("string"=>$name['FAIpriority'] , "attach" => "style='width:100px;'"),
+            array("string"=>$down , "attach" => "style='width:100px;'"),
             array("string"=>str_replace("%s",base64_encode($key),$img_edit.$img_remo),
-              "attach"=>"style='border-right: 0px;width:50px;text-align:right;'")));
+              "attach"=>"style='border-right: 0px;width:100px;text-align:right;'")));
     }
     $smarty->assign("Entry_divlist",$divlist->DrawList());
 
