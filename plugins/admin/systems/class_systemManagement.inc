@@ -497,7 +497,7 @@ class systems extends plugin
           }
         }   
         if(!$found){
-          print_red(sprintf(_("Can't set gotoMode to status 'avtice', the current object couldn't be identified.")));
+          print_red(sprintf(_("Can't set gotoMode to status 'active', the current object couldn't be identified.")));
         }
 
       }

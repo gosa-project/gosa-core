@@ -25,7 +25,7 @@ if (!$remove_lock){
 	}
 	$ldif= $_SESSION['ldif'];
 
-	#print_red(_("Warning: Please check the SIZELIMIT option set on your LDAP server. You may not get all entries, if this value is to low!"));
+	#print_red(_("Warning: Please check the SIZELIMIT option set on your LDAP server. You may not get all entries, if this value is too low!"));
 
     /* set permissions */
     $acl= get_permissions ($ui->dn, $ui->subtreeACL);

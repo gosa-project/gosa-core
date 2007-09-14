@@ -245,7 +245,7 @@ class printerPPDDialog extends plugin
 
     /* Check if parse was successfull */
     if(empty($name) || empty($vendor)){
-      print_red(sprintf(_("The given ppd file '%s' seams to be invalid, can't get any modell or vendor informations."),$_PathOnHdd));
+      print_red(sprintf(_("The given ppd file '%s' seams to be invalid, can't get any model or vendor informations."),$_PathOnHdd));
       return(false);
     }
 

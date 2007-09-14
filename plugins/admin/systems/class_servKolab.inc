@@ -177,7 +177,7 @@ class servkolab extends plugin {
       return;
     }
 
-    /* Integration check, not translatet because they can't pop up at all, only for debug */ 
+    /* Integration check, not translated because they can't pop up at all, only for debug */ 
     if(count($this->kolabHost) == 0){
       print_red("Server - Kolab tab : This is not possible, we can't remove an account which doesn't exists.");
       return;

@@ -181,7 +181,7 @@ class divListSystem extends MultiSelectWindow
       }
 
       if(((in_array("gotoTerminal",$val['objectClass']))||(in_array("gotoWorkstation",$val['objectClass']))) && chkacl($acl,"password") == ""){
-        $action2 = "<input class='center' type='image' src='images/certs.png' alt='"._("Password")."'   name='user_setpwd_%KEY%' title='"._("Set root       password")."'>";
+        $action2 = "<input class='center' type='image' src='images/certs.png' alt='"._("Password")."'   name='user_setpwd_%KEY%' title='"._("Set root password")."'>";
       }else{
         $action2 = "";
       }

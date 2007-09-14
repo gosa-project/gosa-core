@@ -220,7 +220,7 @@ class phoneGeneric extends plugin
     $smarty->assign("base_select", $this->base);
     $smarty->assign("baseACL", chkacl($this->acl,"base"));
    
-    $smarty->assign("goFonDefaultIPs",array("dynamic"=>_("dynamic"),"network"=>_("Networksettings")));
+    $smarty->assign("goFonDefaultIPs",array("dynamic"=>_("dynamic"),"network"=>_("Network settings")));
     $this->netConfigDNS->cn= $this->cn;
     $smarty->assign("netconfig", $this->netConfigDNS->execute());
 
@@ -245,7 +245,7 @@ class phoneGeneric extends plugin
 
     $ldap->search ("(&(objectClass=goFonAccount)(goFonHardware=".$this->cn."))", array("uid","cn"));
     while ($attr =  $ldap->fetch()){
-      print_red(sprintf(_("Can't delete because there are user which are depending on this phone. One of them is user '%s'."),
+      print_red(sprintf(_("Can't delete because there are users which are depending on this phone. One of them is user '%s'."),
         ($attr['uid'][0]." - ".$attr['cn'][0])));
       return;
     }

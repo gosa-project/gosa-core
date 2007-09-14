@@ -2522,17 +2522,30 @@ function get_languages($languages_in_own_language = FALSE,$strip_region_tag = FA
         "sv_SE" => "Swedish",
         "zh_CN" => "Chinese",
         "ru_RU" => "Russian");
+  
+  $tmp2= array(
+        "de_DE" => _("German"),
+        "fr_FR" => _("French"),
+        "it_IT" => _("Italian"),
+        "es_ES" => _("Spanish"),
+        "en_US" => _("English"),
+        "nl_NL" => _("Dutch"),
+        "pl_PL" => _("Polish"),
+        "sv_SE" => _("Swedish"),
+        "zh_CN" => _("Chinese"),
+        "ru_RU" => _("Russian"));
 
   $ret = array();
   if($languages_in_own_language){
+
     $old_lang = setlocale(LC_ALL, 0);
     foreach($tmp as $key => $name){
       $lang = $key.".UTF-8";
       setlocale(LC_ALL, $lang);
       if($strip_region_tag){
-        $ret[preg_replace("/^([^_]*).*$/","\\1",$key)] = _($name)." (".$name.")";
+        $ret[preg_replace("/^([^_]*).*$/","\\1",$key)] = _($name)." (".$tmp2[$key].")";
       }else{
-        $ret[$key] = _($name)." &nbsp;(".$name.")";
+        $ret[$key] = _($name)." &nbsp;(".$tmp2[$key].")";
       }
     }
     setlocale(LC_ALL, $old_lang);
