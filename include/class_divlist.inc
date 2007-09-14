@@ -241,7 +241,7 @@ class divlist {
     		    // Alternation of background color		
     				if($i_alternate) $i_alternate=0; else $i_alternate=1;
     				
-    				$s_return .= "\n<tr>";
+            $s_return .= "\n<tr class='rowxp".$i_alternate."'>";
     				
     				$cnt = 0; 					
     					
