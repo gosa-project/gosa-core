@@ -172,6 +172,22 @@ class faiHook extends plugin
         }
       }
     }
+
+    /* Edit entries via GET */
+    if(isset($_GET['act']) && isset($_GET['id'])){
+      if($_GET['act'] == "edit" && isset($this->SubObjects[$_GET['id']])){
+        $obj = $this->SubObjects[$_GET['id']];
+          if($obj['status'] == "FreshLoaded"){
+          $obj  = $this->get_object_attributes($obj,$this->sub_Load_Later);
+        }
+        $this->dialog= new $this->subClassName($this->config,$this->dn,$obj);
+        $this->dialog->acl = $this->acl;
+        $_SESSION['objectinfo'] = $obj['dn'];
+        $this->dialog->parent = &$this;
+        $this->is_dialog=true;
+      }
+    }
+
     ///// Ende new list handling
 
     /* Add new sub object */
@@ -280,7 +296,9 @@ class faiHook extends plugin
           </a>";
       }
 
-      $divlist->AddEntry(array( array("string"=>$name['name']),
+      $edit_link = "<a href='?plug=".$_GET['plug']."&act=edit&id=".$key."'>".$name['name']."</a>";
+
+      $divlist->AddEntry(array( array("string"=>$edit_link),
             array("string"=>$down , "attach" => "style='width:20px;'"),
             array("string"=>str_replace("%s",base64_encode($key),$img_edit.$img_remo),
               "attach"=>"style='border-right: 0px;width:50px;text-align:right;'")));
