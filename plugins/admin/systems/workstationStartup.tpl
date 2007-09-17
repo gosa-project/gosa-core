@@ -9,7 +9,6 @@
      <td style="width:70%">
         <select id="gotoBootKernel" name="gotoBootKernel" {$gotoBootKernelACL}>
          {html_options options=$gotoBootKernels selected=$gotoBootKernel}
-         <option disabled>&nbsp;</option>
 	</select>
       </td>
     </tr>
