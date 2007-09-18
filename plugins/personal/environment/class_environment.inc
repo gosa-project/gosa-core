@@ -451,7 +451,12 @@ class environment extends plugin
     /* Save */
     if(isset($_POST['KioskClose'])){
       $this->newKioskProfiles = array_merge($this->newKioskProfiles,$this->dialog->save());
-  
+
+      /* Update list of kiosk profiles */ 
+      $list = $this->dialog->getKioskProfiles($this->newKioskProfiles);
+      $list['none']=_("None");
+      $this->kioskProfileList = array_reverse($list);
+
       unset($this->dialog);
       $this->dialog=NULL;
       $this->is_dialog = false;
