@@ -65,17 +65,23 @@ class usertabs extends tabs
         }
       }
     }
+
+    /* Move number from fax plugin */
     if ($this->last == "gofaxAccount"){
 
-      /* Move number from fax plugin */
       $this->by_object['user']->facsimileTelephoneNumber=
         $this->by_object['gofaxAccount']->facsimileTelephoneNumber;
     }
+
+    /* Move number from fax plugin */
     if ($this->last == "phoneAccount" && $this->by_object['phoneAccount']->is_account){
-      /* Move number from fax plugin */
       reset($this->by_object['phoneAccount']->phoneNumbers);
       $number= key($this->by_object['phoneAccount']->phoneNumbers);
-      $this->by_object['user']->telephoneNumber= $number;
+
+      /* Only the first phoneAccount number, if it is not empty */
+      if(!empty($number)){
+        $this->by_object['user']->telephoneNumber= $number;
+      }
     }
   }
 
