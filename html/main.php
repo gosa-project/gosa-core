@@ -74,7 +74,7 @@ if ($_SERVER['REMOTE_ADDR'] != $ui->ip){
   exit;
 }
 $config= $_SESSION['config'];
-get_default_timezone();
+
 
 /* Check for invalid sessions */
 if(empty($_SESSION['_LAST_PAGE_REQUEST'])){
