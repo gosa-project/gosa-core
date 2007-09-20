@@ -66,6 +66,16 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
     }
   }
 
+  /* Hide timezone warnings, gosa */
+  if(preg_match("/date.timezone/",$errstr)){
+    
+    $tmp=  get_default_timezone();
+    echo $tmp['name'];
+    echo $errfile;
+    echo "<br>";
+    return;
+  }
+
 
   /* Create header as needed */
   if ($error_collector == ""){
@@ -250,7 +260,7 @@ $smarty->php_handling= SMARTY_PHP_REMOVE;
 
 /* Set timezone */
 if (function_exists("date_default_timezone_set")){
-  date_default_timezone_set("GMT");
+#  date_default_timezone_set("GMT");
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
