@@ -44,6 +44,7 @@ class environment extends plugin
   var $gotoAvailableShares= array();// Available Shares for this account
   
   /* Kiosk profile */
+  var $kiosk_enabled      = FALSE;
   var $gotoKioskProfile   = "none";     // The selected Kiosk Profile
   var $gotoKioskProfiles  = array();// All available Kiosk profiles
   var $newKioskProfiles   = array();
@@ -211,10 +212,17 @@ class environment extends plugin
     $this->gotoShareSelections= $config->getShareList(true);
     $this->gotoAvailableShares= $config->getShareList(false);  
 
-    $tmp = new kioskManagementDialog($this->config,$this->dn);
-    $list = $tmp->getKioskProfiles($this->newKioskProfiles);
-    $list['none']=_("None");
-    $this->kioskProfileList = array_reverse($list);
+
+    if(search_config($this->config->data,"environment", "KIOSKPATH" != "")){
+      $tmp = new kioskManagementDialog($this->config,$this->dn);
+      $list = $tmp->getKioskProfiles($this->newKioskProfiles);
+      $list['none']=_("None");
+      $this->kioskProfileList = array_reverse($list);
+      $this->kiosk_enabled = TRUE;
+    }else{
+      $this->kiosk_enabled = FALSE;
+      $this->kioskProfileList = array();
+    }
   }
 
 
@@ -238,6 +246,7 @@ class environment extends plugin
 
   /* Fill templating stuff */
   $smarty= get_smarty();
+  $smarty->assign("kiosk_enabled",$this->kiosk_enabled);
   $display= "";
 
   /* Prepare all variables for smarty */
