@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-19 19:27+0200\n"
-"PO-Revision-Date: 2007-07-30 01:11+0200\n"
+"PO-Revision-Date: 2007-09-24 00:54+0200\n"
 "Last-Translator: ALEJANDRO ESCANERO BLANCO\n"
-"Language-Team:  <aescanero@chaosdimension.org>\n"
+"Language-Team:  <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -246,11 +246,11 @@ msgstr "Sumario FAI"
 
 #: contrib/gosa.conf:198 contrib/gosa.conf:200
 msgid "DNS"
-msgstr ""
+msgstr "DNS"
 
 #: contrib/gosa.conf:203 contrib/gosa.conf:205
 msgid "DHCP"
-msgstr ""
+msgstr "DHCP"
 
 #: contrib/gosa.conf:286
 msgid "OGo"
@@ -388,8 +388,7 @@ msgstr ""
 #: plugins/addons/logview/class_logview.inc:71
 #: plugins/gofon/fonreports/class_fonreport.inc:160
 msgid "There is no mysql extension available, please check your php setup."
-msgstr ""
-"No hay extensión mysql disponible, por favor compruebe su configuración php."
+msgstr "No hay extensión mysql disponible, por favor compruebe su configuración php."
 
 #: plugins/gofax/faxreports/class_faxreport.inc:116
 msgid "Can't connect to fax database, no reports can be shown!"
@@ -399,8 +398,7 @@ msgstr ""
 
 #: plugins/gofax/faxreports/class_faxreport.inc:120
 msgid "Can't select fax database for report generation!"
-msgstr ""
-"¡No puedo seleccionar la base de datos de fax para la generación de informes!"
+msgstr "¡No puedo seleccionar la base de datos de fax para la generación de informes!"
 
 #: plugins/gofax/faxreports/class_faxreport.inc:125
 msgid "Can't query fax table 'faxlog' for report generation!"
@@ -1024,9 +1022,8 @@ msgid "Delete user"
 msgstr "Eliminar usuario"
 
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:119
-#, fuzzy
 msgid "Number of listed blocklists"
-msgstr "Nombre de la lista de bloqueos"
+msgstr "Número de listas de bloqueos"
 
 #: plugins/gofax/blocklists/class_divListBlocklists.inc:120
 #: plugins/admin/groups/class_divListGroup.inc:213
@@ -1039,9 +1036,8 @@ msgstr "Nombre de la lista de bloqueos"
 #: plugins/admin/fai/class_divListFai.inc:269
 #: plugins/gofon/macro/class_divListMacros.inc:139
 #: plugins/gofon/conference/class_divListConferences.inc:167
-#, fuzzy
 msgid "Number of listed departments"
-msgstr "Nombre del departamento"
+msgstr "Número de departamentos mostrados"
 
 #: plugins/gofax/blocklists/main.inc:26 plugins/gofax/blocklists/main.inc:28
 msgid "Blocklist management"
@@ -1513,8 +1509,7 @@ msgstr "Aplicar"
 #: plugins/personal/samba/main.inc:115 plugins/personal/generic/main.inc:183
 #: plugins/gofon/phoneaccount/main.inc:112
 msgid "Click the 'Edit' button below to change informations in this dialog"
-msgstr ""
-"Pulse en el botón - Editar - para cambiar la información en esta ventana"
+msgstr "Pulse en el botón - Editar - para cambiar la información en esta ventana"
 
 #: plugins/gofax/faxaccount/main.inc:97
 #: plugins/gofax/faxaccount/generic.tpl:86
@@ -1631,19 +1626,16 @@ msgstr ""
 "posteriormente la información."
 
 #: plugins/addons/gotomasses/goto_task.tpl:20
-#, fuzzy
 msgid "Object group membership"
-msgstr "Miembros del grupo"
+msgstr "Miembros del grupo de objetos"
 
 #: plugins/addons/gotomasses/goto_task.tpl:32
-#, fuzzy
 msgid "Configure DNS"
-msgstr "Configurar"
+msgstr "Configurar DNS"
 
 #: plugins/addons/gotomasses/goto_task.tpl:43
-#, fuzzy
 msgid "Configure DHCP"
-msgstr "Configurar"
+msgstr "Configurar DHCP"
 
 #: plugins/addons/gotomasses/goto_task.tpl:58
 #: plugins/addons/gotomasses/class_goto_task.inc:325
@@ -1713,26 +1705,22 @@ msgid "Name"
 msgstr "Nombre"
 
 #: plugins/addons/gotomasses/goto_task.tpl:109
-#, fuzzy
 msgid "IP address"
 msgstr "Dirección IP"
 
 #: plugins/addons/gotomasses/goto_task.tpl:119
-#, fuzzy
 msgid "CSV import from file"
-msgstr "Importar desde CSV"
+msgstr "Importar desde archivo CSV"
 
 #: plugins/addons/gotomasses/goto_task.tpl:142
 #: plugins/addons/gotomasses/class_gotomasses.inc:209
-#, fuzzy
 msgid "Schedule"
-msgstr "PHP Schedule it"
+msgstr "Programación"
 
 #: plugins/addons/gotomasses/goto_task.tpl:147
 #: plugins/addons/gotomasses/class_goto_task.inc:322
-#, fuzzy
 msgid "Minute"
-msgstr "Impresora"
+msgstr "Minuto"
 
 #: plugins/addons/gotomasses/goto_task.tpl:151
 #: plugins/addons/gotomasses/class_goto_task.inc:323
@@ -1742,32 +1730,27 @@ msgstr "Hora"
 
 #: plugins/addons/gotomasses/goto_task.tpl:155
 #: plugins/addons/gotomasses/class_goto_task.inc:323
-#, fuzzy
 msgid "Day"
-msgstr "día"
+msgstr "Día"
 
 #: plugins/addons/gotomasses/goto_task.tpl:159
 #: plugins/addons/gotomasses/class_goto_task.inc:324
-#, fuzzy
 msgid "Month"
-msgstr "mes"
+msgstr "Mes"
 
 #: plugins/addons/gotomasses/goto_task.tpl:163
 #: plugins/addons/gotomasses/class_goto_task.inc:324
-#, fuzzy
 msgid "Week day"
-msgstr "Miércoles"
+msgstr "Día de la semana"
 
 #: plugins/addons/gotomasses/goto_task.tpl:174
 #: plugins/addons/gotomasses/class_goto_task.inc:211
-#, fuzzy
 msgid "Target systems"
-msgstr "Eliminar sistema"
+msgstr "Sistema objetivo"
 
 #: plugins/addons/gotomasses/goto_task.tpl:188
-#, fuzzy
 msgid "Add from list"
-msgstr "Seleccionar de la lista"
+msgstr "Añadir de la lista"
 
 #: plugins/addons/gotomasses/goto_task.tpl:196
 #: plugins/admin/mimetypes/class_mimetypeManagement.inc:405
@@ -1783,19 +1766,16 @@ msgid "Ok"
 msgstr "Ok"
 
 #: plugins/addons/gotomasses/class_goto_task.inc:6
-#, fuzzy
 msgid "System mass deployment"
-msgstr "Administración del sistema"
+msgstr "Sistema de despliegue masivo"
 
 #: plugins/addons/gotomasses/class_goto_task.inc:72
-#, fuzzy
 msgid "Keep current"
-msgstr "Actual"
+msgstr "Mantener actual"
 
 #: plugins/addons/gotomasses/class_goto_task.inc:212
-#, fuzzy
 msgid "IP"
-msgstr "P"
+msgstr "IP"
 
 #: plugins/addons/gotomasses/class_goto_task.inc:322
 #: plugins/addons/gotomasses/class_target_list.inc:175
@@ -1805,25 +1785,24 @@ msgid "Object group"
 msgstr "Grupo de objetos"
 
 #: plugins/addons/gotomasses/class_goto_task.inc:329
-#, fuzzy, php-format
+#, php-format
 msgid "The given value for attribute '%s' is invalid."
-msgstr "La clase de red introducida '%s' no es válida."
+msgstr "El valor introducido para el atributo '%s' no es válido."
 
 #: plugins/addons/gotomasses/class_goto_task.inc:333
 #: plugins/addons/gotomasses/class_goto_task.inc:336
-#, fuzzy, php-format
+#, php-format
 msgid "You must specify at least one target"
-msgstr "Por favor introduzca un punto de montaje válido."
+msgstr "Por favor introduzca al menos un objetivo"
 
 #: plugins/addons/gotomasses/class_target_list.inc:34
 msgid "Select the target objects for your scheduled action."
-msgstr ""
+msgstr "Seleccionar los objetos objetivo para su acción programada."
 
 #: plugins/addons/gotomasses/class_target_list.inc:35
 #: plugins/addons/gotomasses/class_target_list.inc:36
-#, fuzzy
 msgid "Available targets"
-msgstr "Tipos de pruebas disponibles"
+msgstr "Objetivos disponibles"
 
 #: plugins/addons/gotomasses/class_target_list.inc:45
 #: plugins/generic/references/contents.tpl:11
@@ -1831,14 +1810,12 @@ msgid "Object name"
 msgstr "Nombre de objeto"
 
 #: plugins/addons/gotomasses/class_target_list.inc:48
-#, fuzzy
 msgid "Select to see object groups"
-msgstr "Seleccione para ver los grupos GOsa"
+msgstr "Seleccione para ver los grupos de objetos"
 
 #: plugins/addons/gotomasses/class_target_list.inc:48
-#, fuzzy
 msgid "Show object groups"
-msgstr "Elija un grupo de objetos"
+msgstr "Mostrar grupos de objetos"
 
 #: plugins/addons/gotomasses/class_target_list.inc:49
 #: plugins/admin/groups/group_objects.tpl:30
@@ -1892,40 +1869,33 @@ msgstr "Estación de trabajo"
 
 #: plugins/addons/gotomasses/main.inc:42
 #: plugins/addons/gotomasses/class_gotomasses.inc:6
-#, fuzzy
 msgid "System deployment"
-msgstr "Sistema / Departamento"
+msgstr "Despliegue del sistema"
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:72
 #: plugins/addons/gotomasses/class_gotomasses.inc:104
-#, fuzzy
 msgid "You are not allowed to remove a task."
-msgstr "No tiene permisos para mover este objeto a '%s'."
+msgstr "No tiene permisos para eliminar una tarea."
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:85
 #: plugins/addons/gotomasses/class_gotomasses.inc:108
-#, fuzzy, php-format
+#, php-format
 msgid "Your are about to delete the following tasks: %s"
-msgstr "Has decidido eliminar las siguientes entradas %s"
+msgstr "Has decidido eliminar la siguiente tarea: %s"
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:181
-#, fuzzy
 msgid "List of system deployment tasks"
-msgstr "Lista de sistemas"
+msgstr "Lista de tareas de despliegue de sistemas"
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:185
-#, fuzzy
 msgid ""
 "This menu allows you to add, remove and change the properties of system "
 "deployment tasks."
-msgstr ""
-"Este menú permite añadir, modificar o eliminar las propiedades de sistemas "
-"específicos. Solo puede añadir sistemas que han sido ya iniciados alguna vez."
+msgstr "Este menú permite añadir, modificar o eliminar las propiedades de tareas de despliegue de sistemas."
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:208
-#, fuzzy
 msgid "Target"
-msgstr "Verdadero"
+msgstr "Objetivo"
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:221
 #: plugins/admin/groups/class_groupMail.inc:582
@@ -1955,24 +1925,24 @@ msgid "Unknown"
 msgstr "Desconocido"
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:277
-#, fuzzy, php-format
+#, php-format
 msgid "Can't locate or read gotomasses storage file '%s'."
-msgstr "No puedo crear el fichero '%s'."
+msgstr "No puedo encontrar o leer el fichero de almacenamiento de gotomasses '%s'."
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:284
 #: plugins/addons/gotomasses/class_gotomasses.inc:395
-#, fuzzy, php-format
+#, php-format
 msgid "Can't read gotomasses storage file '%s'."
-msgstr "No puedo crear el fichero '%s'."
+msgstr "No puedo leer el fichero de almacenamiento de gotomasses '%s'."
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:320
 msgid "Entry broken, skipped."
-msgstr ""
+msgstr "Entrada dañada, evitada"
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:388
-#, fuzzy, php-format
+#, php-format
 msgid "Can't locate or write gotomasses storage file '%s'."
-msgstr "No puedo crear el fichero '%s'."
+msgstr "No puedo encontrar o escribir el fichero de almacenamiento de gotomasses '%s'"
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:447
 #: plugins/admin/systems/class_servGeneric.inc:170
@@ -1983,19 +1953,16 @@ msgid "Reboot"
 msgstr "Reiniciar"
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:448
-#, fuzzy
 msgid "Localboot"
-msgstr "Forzar inicio local"
+msgstr "Inicio local"
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:449
-#, fuzzy
 msgid "Halt system"
-msgstr "Eliminar sistema"
+msgstr "Para sistema"
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:450
-#, fuzzy
 msgid "Initial installation"
-msgstr "Instalación"
+msgstr "Instalación inicial"
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:451
 #: plugins/admin/applications/generic.tpl:63
@@ -2004,22 +1971,18 @@ msgid "Update"
 msgstr "Actualizar"
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:452
-#, fuzzy
 msgid "(Re)Install"
-msgstr "Reinstalar"
+msgstr "(Re)instalar"
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:453
-#, fuzzy
 msgid "Rescan"
-msgstr "Ruso"
+msgstr "Explorar"
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:454
-#, fuzzy
 msgid "Wake"
 msgstr "Despertar"
 
 #: plugins/addons/gotomasses/class_gotomasses.inc:455
-#, fuzzy
 msgid "Memory check"
 msgstr "Chequeo de memoria"
 
@@ -2050,8 +2013,7 @@ msgstr "Eliminar todos los mensajes"
 
 #: plugins/addons/mailqueue/contents.tpl:30
 msgid "Remove all messages from selected servers queue"
-msgstr ""
-"Eliminar todos los mensajes de las colas de los servidores seleccionados"
+msgstr "Eliminar todos los mensajes de las colas de los servidores seleccionados"
 
 #: plugins/addons/mailqueue/contents.tpl:31
 msgid "Hold all messages"
@@ -2059,8 +2021,7 @@ msgstr "Guardar todos los mensajes"
 
 #: plugins/addons/mailqueue/contents.tpl:32
 msgid "Hold all messages in selected servers queue"
-msgstr ""
-"Guardar todos los mensajes en las colas de los servidores seleccionados"
+msgstr "Guardar todos los mensajes en las colas de los servidores seleccionados"
 
 #: plugins/addons/mailqueue/contents.tpl:33
 msgid "Release all messages"
@@ -2076,8 +2037,7 @@ msgstr "Encolar todos los mensajes"
 
 #: plugins/addons/mailqueue/contents.tpl:36
 msgid "Requeue all messages in selected servers queue"
-msgstr ""
-"Encolar todos los mensajes de las colas de los servidores seleccionados"
+msgstr "Encolar todos los mensajes de las colas de los servidores seleccionados"
 
 #: plugins/addons/mailqueue/contents.tpl:46
 msgid "Search returned no results"
@@ -2154,8 +2114,7 @@ msgid "Display header from this message"
 msgstr "Mostrar cabeceras para este mensaje"
 
 #: plugins/addons/mailqueue/class_mailqueue.inc:58
-msgid ""
-"Please check your 'gosa.conf', there is no 'MAILQUEUESCRIPTPATH' specified."
+msgid "Please check your 'gosa.conf', there is no 'MAILQUEUESCRIPTPATH' specified."
 msgstr ""
 "Por favor compruebe su gosa.conf, no existe ningún 'MAILQUEUESCRIPTPATH' "
 "especificado."
@@ -2165,8 +2124,7 @@ msgstr ""
 #: plugins/addons/mailqueue/class_mailqueue.inc:171
 #: plugins/addons/mailqueue/class_mailqueue.inc:198
 #, php-format
-msgid ""
-"You do not have permission to execute the command '%s' on the mailqueue."
+msgid "You do not have permission to execute the command '%s' on the mailqueue."
 msgstr "No tiene permisos para ejecutar el comando '%s' en la cola de correo."
 
 #: plugins/addons/mailqueue/class_mailqueue.inc:93
@@ -2574,8 +2532,7 @@ msgstr "El campo 'Teléfono móvil' tiene un número de teléfono invalido."
 #: plugins/addons/addressbook/class_addressbook.inc:585
 #: plugins/personal/generic/class_user.inc:1090
 msgid "The field 'Pager' contains an invalid phone number."
-msgstr ""
-"El campo 'Dispositivo de Búsqueda' tiene un número de teléfono invalido."
+msgstr "El campo 'Dispositivo de Búsqueda' tiene un número de teléfono invalido."
 
 #: plugins/addons/addressbook/class_addressbook.inc:598
 #: plugins/admin/ogroups/class_mailogroup.inc:78
@@ -2587,15 +2544,13 @@ msgstr ""
 "'Cuenta Principal'."
 
 #: plugins/addons/addressbook/class_addressbook.inc:606
-msgid ""
-"Cannot create a unique DN for your entry. Please fill more formular fields."
+msgid "Cannot create a unique DN for your entry. Please fill more formular fields."
 msgstr ""
 "No se puede crear un 'DN' único para esta entrada. Por favor rellene los "
 "campos del formulario."
 
 #: plugins/addons/addressbook/class_addressbook.inc:614
-msgid ""
-"You have no permissions to create or modify a global address book entry."
+msgid "You have no permissions to create or modify a global address book entry."
 msgstr ""
 "No tiene permisos para crear o modificar una entrada en la libreta de "
 "direcciones global."
@@ -2695,8 +2650,7 @@ msgstr "Selecciona plantilla"
 
 #: plugins/addons/ldapmanager/contentcsv.tpl:34
 msgid "All entries have been written to the LDAP database successfully."
-msgstr ""
-"Todas las entradas han sido escritas correctamente en la base de datos LDAP."
+msgstr "Todas las entradas han sido escritas correctamente en la base de datos LDAP."
 
 #: plugins/addons/ldapmanager/contentcsv.tpl:36
 msgid "Oups. There was an error during the import of your data."
@@ -2766,8 +2720,7 @@ msgstr "Exportación completada"
 
 #: plugins/addons/ldapmanager/contentexportxls.tpl:62
 msgid "Click here to save the complete LDAP database to a xls file"
-msgstr ""
-"Pulse aquí para guardar la base de datos LDAP completa en un archivo XLS"
+msgstr "Pulse aquí para guardar la base de datos LDAP completa en un archivo XLS"
 
 #: plugins/addons/ldapmanager/contentexportxls.tpl:62
 msgid "Click here to save the LDAP Export to a xls file"
@@ -3103,14 +3056,12 @@ msgid "Scalix email addresses"
 msgstr "Direcciones de correo electrónico de Scalix"
 
 #: plugins/admin/groups/acl_definition.inc:453
-#, fuzzy
 msgid "Create/edit new task"
-msgstr "Crear nuevo usuario"
+msgstr "Crear/Editar nueva tarea"
 
 #: plugins/admin/groups/acl_definition.inc:453
-#, fuzzy
 msgid "Remove tasks"
-msgstr "Eliminar opciones"
+msgstr "Eliminar tareas"
 
 #: plugins/admin/groups/application.tpl:3
 msgid "Release focus"
@@ -3348,9 +3299,8 @@ msgid "Delete this entry"
 msgstr "Eliminar esta entrada"
 
 #: plugins/admin/groups/class_divListGroup.inc:212
-#, fuzzy
 msgid "Number of listed groups"
-msgstr "Nombre del grupo"
+msgstr "Número de grupos mostrados"
 
 #: plugins/admin/groups/mail_admins.tpl:4
 msgid "Folder administrators"
@@ -3480,28 +3430,24 @@ msgstr ""
 
 #: plugins/admin/groups/class_groupMail.inc:613
 #: plugins/admin/groups/class_groupMail.inc:619
-#, fuzzy
 msgid "Unspecified"
-msgstr "sin definir"
+msgstr "Sin definir"
 
 #: plugins/admin/groups/class_groupMail.inc:613
-#, fuzzy
 msgid "Mails"
-msgstr "Correo Electrónico"
+msgstr "Correos"
 
 #: plugins/admin/groups/class_groupMail.inc:614
-#, fuzzy
 msgid "Tasks"
-msgstr "Tarea"
+msgstr "Tareas"
 
 #: plugins/admin/groups/class_groupMail.inc:614
-#, fuzzy
 msgid "Journals"
-msgstr "horas"
+msgstr "Diario"
 
 #: plugins/admin/groups/class_groupMail.inc:615
 msgid "Events"
-msgstr ""
+msgstr "Eventos"
 
 #: plugins/admin/groups/class_groupMail.inc:615
 #: plugins/admin/systems/glpi.tpl:40 plugins/admin/systems/glpiPrinter.tpl:66
@@ -3509,27 +3455,24 @@ msgid "Contacts"
 msgstr "Contactos"
 
 #: plugins/admin/groups/class_groupMail.inc:616
-#, fuzzy
 msgid "Notes"
-msgstr "No"
+msgstr "Notas"
 
 #: plugins/admin/groups/class_groupMail.inc:619
-#, fuzzy
 msgid "Inbox"
-msgstr "índice"
+msgstr "Correo Entrante"
 
 #: plugins/admin/groups/class_groupMail.inc:620
-#, fuzzy
 msgid "Drafts"
-msgstr "Fecha"
+msgstr "Borrador"
 
 #: plugins/admin/groups/class_groupMail.inc:620
 msgid "Sent items"
-msgstr ""
+msgstr "Enviar elementos"
 
 #: plugins/admin/groups/class_groupMail.inc:621
 msgid "Junk mail"
-msgstr ""
+msgstr "Correo Basura"
 
 #: plugins/admin/groups/class_groupMail.inc:623
 #: include/sieve/class_sieveElement_If.inc:27
@@ -3582,8 +3525,7 @@ msgstr ""
 "rechazar mensajes."
 
 #: plugins/admin/groups/class_groupMail.inc:939
-msgid ""
-"Please choose valid permission settings. Default permission can't be emtpy."
+msgid "Please choose valid permission settings. Default permission can't be emtpy."
 msgstr ""
 "Por favor seleccione una configuración valida de permisos. No se puede dejar "
 "en blanco los permisos por defecto."
@@ -3666,9 +3608,8 @@ msgid "Quota size"
 msgstr "Tamaño de cuota"
 
 #: plugins/admin/groups/mail.tpl:43
-#, fuzzy
 msgid "Folder type"
-msgstr "Carpeta"
+msgstr "Tipo de Carpeta"
 
 #: plugins/admin/groups/mail.tpl:53 setup/setup_ldap.tpl:65
 msgid "Reload"
@@ -3721,8 +3662,7 @@ msgstr "¡id desconocido!"
 
 #: plugins/admin/groups/class_groupGeneric.inc:489
 #, php-format
-msgid ""
-"Your search method returned more than '%s' users, only '%s' users are shown."
+msgid "Your search method returned more than '%s' users, only '%s' users are shown."
 msgstr ""
 "Su sistema de busqueda ha devuelto mas de '%s' usuarios, se mostraran solo '%"
 "s' usuarios."
@@ -3879,8 +3819,7 @@ msgstr "El nombre de maquina '%s' debería estar escrito en minúsculas."
 #: plugins/admin/systems/class_servDNSeditZoneEntries.inc:302
 #, php-format
 msgid "The record type '%s' is a unique type and can't be defined twice."
-msgstr ""
-"El tipo de registro '%s' es un tipo único y no puede ser definido dos veces."
+msgstr "El tipo de registro '%s' es un tipo único y no puede ser definido dos veces."
 
 #: plugins/admin/systems/class_servDNSeditZoneEntries.inc:309
 #, php-format
@@ -3998,8 +3937,7 @@ msgstr "Por favor introduzca un nombre de archivo PPD valido."
 #: plugins/admin/systems/class_printerPPDDialog.inc:181
 #, php-format
 msgid "Can't select PPD file '%s', the file is not readable"
-msgstr ""
-"No se puede seleccionar el archiv PPD '%s', el archivo no es accesible."
+msgstr "No se puede seleccionar el archiv PPD '%s', el archivo no es accesible."
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:198
 #: plugins/admin/systems/class_printerPPDDialog.inc:270
@@ -4010,23 +3948,19 @@ msgstr "No se puede crear la carpeta '%s' para el archivo ppd subido."
 #: plugins/admin/systems/class_printerPPDDialog.inc:206
 #, php-format
 msgid "Can't create file '%s' to store modifed ppd informations."
-msgstr ""
-"No se puede crear el archivo '%s' para guardar la información PPD modificada."
+msgstr "No se puede crear el archivo '%s' para guardar la información PPD modificada."
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:230
 #, php-format
 msgid "Can't add new ppd file, the source file '%s' is not accessible."
-msgstr ""
-"No puede añadir un nuevo archivo PPD, el archivo origen'%s' no es accesible."
+msgstr "No puede añadir un nuevo archivo PPD, el archivo origen'%s' no es accesible."
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:248
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "The given ppd file '%s' seams to be invalid, can't get any model or vendor "
 "informations."
-msgstr ""
-"El archivo ppd introducido '%s' no es válido, no puedo encontrar información "
-"de vendedor o modelo."
+msgstr "El archivo ppd introducido '%s' no es válido, no puedo encontrar información de vendedor o modelo."
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:262
 #, php-format
@@ -4075,13 +4009,11 @@ msgstr "Ha fallado la eliminación del antiguo archivo ppd'%s'."
 #: plugins/admin/systems/class_printerPPDDialog.inc:490
 #, php-format
 msgid "Removing old ppd file '%s' failed. File is not accessible."
-msgstr ""
-"Ha fallado la eliminación del antiguo archivo ppd'%s'. Archivo no accesible."
+msgstr "Ha fallado la eliminación del antiguo archivo ppd'%s'. Archivo no accesible."
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:493
 #, php-format
-msgid ""
-"Removing old ppd file '%s' failed. File does not exists or is not accessible."
+msgid "Removing old ppd file '%s' failed. File does not exists or is not accessible."
 msgstr ""
 "Ha fallado la eliminación del antiguo archivo ppd'%s'. El fichero no existe "
 "o no es accesible."
@@ -4190,8 +4122,7 @@ msgstr "estado desconocido"
 
 #: plugins/admin/systems/class_terminalInfo.inc:84
 msgid "This is a virtual terminal which has no properties to show here."
-msgstr ""
-"Este es un terminal virtual que no tiene propiedades que puedan ser mostradas"
+msgstr "Este es un terminal virtual que no tiene propiedades que puedan ser mostradas"
 
 #: plugins/admin/systems/class_terminalInfo.inc:102
 msgid "online"
@@ -4264,18 +4195,16 @@ msgid "Continue"
 msgstr "Continuar"
 
 #: plugins/admin/systems/dhcp_network.tpl:5
-#, fuzzy
 msgid "Network configuration"
-msgstr "Descargar configuración"
+msgstr "Configuración de red"
 
 #: plugins/admin/systems/dhcp_network.tpl:8
-#, fuzzy
 msgid "Router"
-msgstr "Ordenadores"
+msgstr "Encaminadores"
 
 #: plugins/admin/systems/dhcp_network.tpl:11
 msgid "Enter name or IP address of router to be used in this section"
-msgstr ""
+msgstr "Introduzca el nombre o la dirección del router seleccionado en esta sección"
 
 #: plugins/admin/systems/dhcp_network.tpl:15
 #: plugins/admin/systems/class_dhcpSubnet.inc:152
@@ -4288,12 +4217,11 @@ msgstr "Mascara de red"
 #: plugins/admin/systems/dhcp_network.tpl:21
 #: plugins/admin/systems/class_dhcpNetwork.inc:204
 msgid "Broadcast"
-msgstr ""
+msgstr "Dirección de difusión"
 
 #: plugins/admin/systems/dhcp_network.tpl:29
-#, fuzzy
 msgid "Bootup"
-msgstr "Booleano"
+msgstr "Bootup"
 
 #: plugins/admin/systems/dhcp_network.tpl:32
 #: plugins/admin/systems/glpiAttachmentEdit.tpl:46
@@ -4301,23 +4229,20 @@ msgid "Filename"
 msgstr "Nombre del archivo"
 
 #: plugins/admin/systems/dhcp_network.tpl:35
-msgid ""
-"Enter name of file that will be loaded via tftp after client has started"
-msgstr ""
+msgid "Enter name of file that will be loaded via tftp after client has started"
+msgstr "Introduzca el nombre del fichero que será cargado vía tftp despues de que el cliente haya iniciado"
 
 #: plugins/admin/systems/dhcp_network.tpl:39
-#, fuzzy
 msgid "Next server"
-msgstr "Nuevo Servidor"
+msgstr "Siguiente Servidor"
 
 #: plugins/admin/systems/dhcp_network.tpl:42
 msgid "Enter name of server to retrieve bootimages from"
-msgstr ""
+msgstr "Introduzca el nombre del servidor para recuperar desde el la imágenes de inicio"
 
 #: plugins/admin/systems/dhcp_network.tpl:49
-#, fuzzy
 msgid "Domain Name Service"
-msgstr "Servicio Horario"
+msgstr "Servicio de nombre de dominio"
 
 #: plugins/admin/systems/dhcp_network.tpl:52
 #: plugins/personal/samba/samba3.tpl:23
@@ -4325,57 +4250,52 @@ msgid "Domain"
 msgstr "Dominio"
 
 #: plugins/admin/systems/dhcp_network.tpl:55
-#, fuzzy
 msgid "Name of domain"
-msgstr "Nombre del departamento"
+msgstr "Nombre del dominio"
 
 #: plugins/admin/systems/dhcp_network.tpl:61
-#, fuzzy
 msgid "DNS server"
-msgstr "Servidor NTP"
+msgstr "Servidor DNS"
 
 #: plugins/admin/systems/dhcp_network.tpl:62
 msgid "List of DNS servers to be propagated"
-msgstr ""
+msgstr "Lista de servidores DNS para la propagación"
 
 #: plugins/admin/systems/dhcp_network.tpl:66
 msgid "DNS server do be added"
-msgstr ""
+msgstr "Servidor DNS que será añadido"
 
 #: plugins/admin/systems/dhcp_network.tpl:67
 msgid "Click here add the selected server to the list"
-msgstr ""
+msgstr "Pulse aquí para añadir el servidor seleccionado a la lista"
 
 #: plugins/admin/systems/dhcp_network.tpl:68
 msgid "Click here remove the selected servers from the list"
-msgstr ""
+msgstr "Pulse aquí para eliminar los servidores seleccionados de la lista"
 
 #: plugins/admin/systems/dhcp_network.tpl:73
-#, fuzzy
 msgid "Domain Name Service options"
-msgstr "Administradores del dominio"
+msgstr "Opciones del servicio de Nombres de Dominio"
 
 #: plugins/admin/systems/dhcp_network.tpl:74
 msgid "Assign hostnames found via reverse mapping"
-msgstr ""
+msgstr "Asignar nombres de maquina encontrados a través de resolución inversa"
 
 #: plugins/admin/systems/dhcp_network.tpl:76
 msgid "Assign hostnames from host declarations"
-msgstr ""
+msgstr "Asignar nombres de maquina a partir de las declaraciones de host"
 
 #: plugins/admin/systems/class_dhcpService.inc:140
-#, fuzzy
 msgid "Default lease time needs to be numeric."
-msgstr "El puerto sieve necesita ser un numero."
+msgstr "El tiempo de asignación por omisión necesita ser un numero."
 
 #: plugins/admin/systems/class_dhcpService.inc:143
-#, fuzzy
 msgid "Maximum lease time needs to be numeric."
-msgstr "El puerto sieve necesita ser un numero."
+msgstr "El tiempo máximo de asignación necesita ser un numero."
 
 #: plugins/admin/systems/class_dhcpService.inc:146
 msgid "Default lease time needs to smaller than the maximum lease time."
-msgstr ""
+msgstr "El tiempo de asignación por omisión necesita ser menor que el tiempo máximo de asignación."
 
 #: plugins/admin/systems/class_dhcpPool.inc:104
 #: plugins/admin/systems/class_dhcpHost.inc:132
@@ -4387,32 +4307,26 @@ msgstr "No ha introducido el campo obligatorio 'Nombre'."
 
 #: plugins/admin/systems/class_dhcpPool.inc:112
 #: plugins/admin/systems/class_dhcpSubnet.inc:145
-#, fuzzy
 msgid "The name for this section is already used!"
-msgstr ""
-"El cambio de nombre ha fallado, ha introducido uno que ya está siendo usado."
+msgstr "¡El nombre para está sección ya está siendo usado!"
 
 #: plugins/admin/systems/class_dhcpPool.inc:119
-#, fuzzy
 msgid "Required field 'Range' is not filled."
-msgstr "No ha introducido el campo obligatorio 'Nombre'."
+msgstr "No ha introducido el campo obligatorio 'Rango'."
 
 #: plugins/admin/systems/class_dhcpPool.inc:123
-#, fuzzy
 msgid "Field 'Range' contains invalid IP addresses."
-msgstr "El campo 'Nombre' no tiene caracteres validos."
+msgstr "El campo 'Rango' no tiene una dirección IP válida."
 
 #: plugins/admin/systems/class_dhcpPool.inc:127
 #: plugins/admin/systems/class_dhcpSubnet.inc:161
-#, fuzzy
 msgid "Field 'Range' contains invalid IP range."
-msgstr "El campo 'Nombre' no tiene caracteres validos."
+msgstr "El campo 'Rango' no tiene un rango IP válido."
 
 #: plugins/admin/systems/class_dhcpPool.inc:141
 #: plugins/admin/systems/class_dhcpSubnet.inc:167
-#, fuzzy
 msgid "'Range' is not inside the configured network."
-msgstr "Encontrados '%s' grupos fuera del árbol configurado '%s'."
+msgstr "El rango no está dentro de la red configurada."
 
 #: plugins/admin/systems/class_phoneGeneric.inc:103
 msgid "This 'dn' has no phone features."
@@ -4433,12 +4347,11 @@ msgid "dynamic"
 msgstr "dinámico"
 
 #: plugins/admin/systems/class_phoneGeneric.inc:223
-#, fuzzy
 msgid "Network settings"
-msgstr "Configuración de red"
+msgstr "Parametros de red"
 
 #: plugins/admin/systems/class_phoneGeneric.inc:248
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Can't delete because there are users which are depending on this phone. One "
 "of them is user '%s'."
@@ -4466,8 +4379,7 @@ msgstr "No ha introducido el campo obligatorio'Nombre del teléfono'."
 
 #: plugins/admin/systems/class_phoneGeneric.inc:303
 msgid "The 'Phone name' '0' is reserved and cannot be used."
-msgstr ""
-"El 'Nombre de Teléfono' '0' es un nombre reservado y no puede ser utilizado."
+msgstr "El 'Nombre de Teléfono' '0' es un nombre reservado y no puede ser utilizado."
 
 #: plugins/admin/systems/class_phoneGeneric.inc:310
 msgid "You have no permissions to create a phone on this 'Base'."
@@ -4498,8 +4410,7 @@ msgstr "Por favor introduzca un valor para la 'url' valido."
 
 #: plugins/admin/systems/class_servRepositorySetup.inc:182
 #, php-format
-msgid ""
-"Can't execute specified REPOSITORY_HOOK '%s'. Please check your gosa.conf."
+msgid "Can't execute specified REPOSITORY_HOOK '%s'. Please check your gosa.conf."
 msgstr ""
 "No puedo ejecutar el REPOSITORY_HOOK '%s' indicado. Por favor compruebe el "
 "archivo gosa.conf."
@@ -4746,27 +4657,24 @@ msgid "GUI"
 msgstr "GUI"
 
 #: plugins/admin/systems/dhcp_host.tpl:11
-#, fuzzy
 msgid "Name of host"
-msgstr "Nombre de la lista de bloqueos"
+msgstr "Nombre de la máquina"
 
 #: plugins/admin/systems/dhcp_host.tpl:15
-#, fuzzy
 msgid "Fixed address"
-msgstr "Dirección de correo"
+msgstr "Dirección estática"
 
 #: plugins/admin/systems/dhcp_host.tpl:19
 msgid "Use hostname or IP-address to assign fixed address"
-msgstr ""
+msgstr "Usar nombre de máquina o dirección IP para asignar la dirección estática"
 
 #: plugins/admin/systems/dhcp_host.tpl:27
 msgid "Hardware type"
-msgstr ""
+msgstr "Tipo de hardware"
 
 #: plugins/admin/systems/dhcp_host.tpl:35
-#, fuzzy
 msgid "Hardware address"
-msgstr "Cuenta Principal"
+msgstr "Dirección hardware"
 
 #: plugins/admin/systems/gencd.tpl:2
 msgid "CD-Install-Image generation"
@@ -5026,24 +4934,20 @@ msgid "Autodetect"
 msgstr "Autodetección"
 
 #: plugins/admin/systems/network.tpl:33 plugins/admin/systems/network.tpl:41
-#, fuzzy
 msgid "Enable DHCP for this device"
-msgstr "Activar DNS para este dispositivo"
+msgstr "Activar DHCP para este dispositivo"
 
 #: plugins/admin/systems/network.tpl:41 plugins/admin/systems/network.tpl:116
-#, fuzzy
 msgid "not configured"
-msgstr "Sin configurar"
+msgstr "no configurado"
 
 #: plugins/admin/systems/network.tpl:50
-#, fuzzy
 msgid "Parent node"
-msgstr "Servidor Origen"
+msgstr "Nodo superior"
 
 #: plugins/admin/systems/network.tpl:55
-#, fuzzy
 msgid "Edit settings"
-msgstr "Editar configuración..."
+msgstr "Editar parámetros"
 
 #: plugins/admin/systems/network.tpl:85 plugins/admin/systems/network.tpl:116
 msgid "Enable DNS for this device"
@@ -5166,25 +5070,22 @@ msgid "Mountpoint"
 msgstr "Punto de montaje"
 
 #: plugins/admin/systems/remove_dhcp.tpl:6
-#, fuzzy
 msgid ""
 "This includes 'all' DHCP subsections that are located within this section. "
 "Please double check if your really want to do this since there is no way for "
 "GOsa to get your data back."
 msgstr ""
-"Esto incluye <b>todo</b> la información de objeto. Si está seguro de lo que "
+"Esto incluye 'todas' las subsecciones DHCP que están localizadas dentro de esta sección. Si está seguro de lo que "
 "quiere hacer pulse dos veces, ya que una vez hecho esto, no hay forma de que "
 "GOsa recupere la información."
 
 #: plugins/admin/systems/class_dhcpSubnet.inc:134
-#, fuzzy
 msgid "Required field 'Network address' is not filled."
-msgstr "No ha introducido el campo obligatorio 'Nombre'."
+msgstr "No ha introducido el campo obligatorio 'Dirección de Red'."
 
 #: plugins/admin/systems/class_dhcpSubnet.inc:137
-#, fuzzy
 msgid "Required field 'Netmask' is not filled."
-msgstr "No ha introducido el campo obligatorio 'Nombre'."
+msgstr "No ha introducido el campo obligatorio 'Macara de Red'."
 
 #: plugins/admin/systems/class_dhcpSubnet.inc:152
 #: plugins/admin/systems/dhcp_subnet.tpl:8
@@ -5194,14 +5095,13 @@ msgstr "Dirección de red"
 
 #: plugins/admin/systems/class_dhcpSubnet.inc:152
 #: plugins/admin/systems/dhcp_pool.tpl:11
-#, fuzzy
 msgid "Range"
-msgstr "Gestionar"
+msgstr "Rango"
 
 #: plugins/admin/systems/class_dhcpSubnet.inc:154
-#, fuzzy, php-format
+#, php-format
 msgid "The field '%s' contains an invalid IP address"
-msgstr "El campo 'Dirección IP' tiene una dirección no valida."
+msgstr "El campo '%s' tiene una dirección IP no valida."
 
 #: plugins/admin/systems/glpiSelectUser.tpl:6
 #: plugins/admin/users/class_divListUsers.inc:35
@@ -5210,8 +5110,7 @@ msgid "List of users"
 msgstr "Lista de usuarios"
 
 #: plugins/admin/systems/glpiSelectUser.tpl:23
-msgid ""
-"This dialog allows you to select a user as technical responsible person."
+msgid "This dialog allows you to select a user as technical responsible person."
 msgstr ""
 "Este dialogo le permite seleccionar un usuario como personal técnico "
 "responsable."
@@ -5246,8 +5145,7 @@ msgstr "¡No tiene permisos para modificar las contraseñas del sistema!"
 #: plugins/admin/systems/class_systemManagement.inc:401
 #, php-format
 msgid "You're about to delete all information about the component at '%s'."
-msgstr ""
-"Has decidido eliminar toda información sobre el componente que está en '%s'."
+msgstr "Has decidido eliminar toda información sobre el componente que está en '%s'."
 
 #: plugins/admin/systems/class_systemManagement.inc:407
 #: plugins/admin/systems/class_systemManagement.inc:467
@@ -5257,7 +5155,7 @@ msgid "You are not allowed to delete this component!"
 msgstr "¡No tiene permisos para eliminar este componente!"
 
 #: plugins/admin/systems/class_systemManagement.inc:500
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Can't set gotoMode to status 'active', the current object couldn't be "
 "identified."
@@ -5353,7 +5251,6 @@ msgid "Add printer extension"
 msgstr "Añadir extensión de impresora"
 
 #: plugins/admin/systems/class_printGeneric.inc:252
-#, fuzzy
 msgid ""
 "Could not initialize printer tab, parameter parent was missing while "
 "construction."
@@ -5369,8 +5266,7 @@ msgstr ""
 
 #: plugins/admin/systems/class_printGeneric.inc:265
 msgid "This is a terminal template, printer tab is disabled."
-msgstr ""
-"Esto es una plantilla de termina, la pestaña de impresión está desactivada."
+msgstr "Esto es una plantilla de termina, la pestaña de impresión está desactivada."
 
 #: plugins/admin/systems/class_printGeneric.inc:303
 msgid "This 'dn' has no printer features."
@@ -5429,15 +5325,13 @@ msgid "Your currently selected PPD file '%s' doesn't exist."
 msgstr "El archivo PPD seleccionado '%s' no existe."
 
 #: plugins/admin/systems/class_printGeneric.inc:502
-#, fuzzy
 msgid "Not defined"
-msgstr "sin definir"
+msgstr "No definido"
 
 #: plugins/admin/systems/class_printGeneric.inc:518
 #, php-format
 msgid "This printer belongs to terminal %s. You can't rename this printer."
-msgstr ""
-"Esta impresora pertenece al terminal '%s'. No puede renombrar esta impresora."
+msgstr "Esta impresora pertenece al terminal '%s'. No puede renombrar esta impresora."
 
 #: plugins/admin/systems/class_printGeneric.inc:520
 #, php-format
@@ -5472,8 +5366,7 @@ msgstr "Grupo"
 #: plugins/admin/systems/class_printGeneric.inc:878
 #, php-format
 msgid "Illegal printer type while adding '%s' to the list of '%s' printers,"
-msgstr ""
-"tipo de impresora ilegal mientras añadia '%s' a la lista de '%s' impresoras,"
+msgstr "tipo de impresora ilegal mientras añadia '%s' a la lista de '%s' impresoras,"
 
 #: plugins/admin/systems/class_printGeneric.inc:900
 #, php-format
@@ -5486,24 +5379,20 @@ msgid "Can't add '%s' to list of members, it is not reachable."
 msgstr "No puede añadir '%s' a la lista de miembros, no es accesible."
 
 #: plugins/admin/systems/dhcp_advanced.tpl:8
-#, fuzzy
 msgid "Hide advanced settings"
-msgstr "Configuración telefónica avanzada"
+msgstr "Ocultar configuración avanzada"
 
 #: plugins/admin/systems/dhcp_advanced.tpl:15
-#, fuzzy
 msgid "DHCP statements"
-msgstr "Departamentos"
+msgstr "Informes DHCP"
 
 #: plugins/admin/systems/dhcp_advanced.tpl:28
-#, fuzzy
 msgid "DHCP options"
-msgstr "Opciones FS"
+msgstr "Opciones DHCP"
 
 #: plugins/admin/systems/dhcp_advanced.tpl:43
-#, fuzzy
 msgid "Show advanced settings"
-msgstr "Configuración telefónica"
+msgstr "Mostrar configuración avanzada"
 
 #: plugins/admin/systems/class_servGeneric.inc:47
 #: plugins/admin/systems/class_workstationGeneric.inc:124
@@ -5627,21 +5516,16 @@ msgid "Phone name"
 msgstr "Número de teléfono"
 
 #: plugins/admin/systems/dhcpNewSection.tpl:2
-#, fuzzy
 msgid "Create new DHCP section"
-msgstr "Crear nueva aplicación"
+msgstr "Crear una nueva sección DHCP"
 
 #: plugins/admin/systems/dhcpNewSection.tpl:6
-#, fuzzy
 msgid "Please choose one of the following DHCP section types."
-msgstr ""
-"Porfavor elija uno de los siguientes métodos para seleccionar el nombre de "
-"la nueva clase FAI."
+msgstr "Porfavor elija uno de los siguientes tipos de sección DHCP."
 
 #: plugins/admin/systems/dhcpNewSection.tpl:10
-#, fuzzy
 msgid "Choose section type to create"
-msgstr "Elija tipo de ratón"
+msgstr "Seleccione el tipo de sección para crear"
 
 #: plugins/admin/systems/dhcpNewSection.tpl:15
 #: plugins/admin/systems/chooser.tpl:16 setup/class_setupStep_Migrate.inc:860
@@ -5649,30 +5533,26 @@ msgid "Create"
 msgstr "Crear"
 
 #: plugins/admin/systems/class_dhcpHost.inc:62
-#, fuzzy
 msgid "Ethernet"
-msgstr "intranet"
+msgstr "Ethernet"
 
 #: plugins/admin/systems/class_dhcpHost.inc:63
 msgid "FDDI"
-msgstr ""
+msgstr "FDDI"
 
 #: plugins/admin/systems/class_dhcpHost.inc:64
 msgid "Token Ring"
-msgstr ""
+msgstr "Token Ring"
 
 #: plugins/admin/systems/class_dhcpHost.inc:140
 #: plugins/admin/systems/class_dhcpSharedNetwork.inc:161
 #: plugins/admin/systems/class_dhcpGroup.inc:99
-#, fuzzy
 msgid "The name for this host section is already used!"
-msgstr ""
-"El cambio de nombre ha fallado, ha introducido uno que ya está siendo usado."
+msgstr "¡El nombre para esta máquina ya está siendo usado!"
 
 #: plugins/admin/systems/class_dhcpHost.inc:149
-#, fuzzy
 msgid "The hardware address specified by you is not valid!"
-msgstr "El valor introducido como 'Relación' no es válido."
+msgstr "¡El valor introducido como 'Dirección Hardware' no es válido!"
 
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:1
 msgid "Add/Edit manufacturer"
@@ -5800,8 +5680,7 @@ msgstr "Puntuación mínima debe ser un valor numérico."
 #: plugins/admin/systems/class_goSpamServer.inc:446
 #: plugins/admin/systems/class_goVirusServer.inc:305
 #, php-format
-msgid ""
-"Command '%s', specified as ACTION_HOOK for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as ACTION_HOOK for plugin '%s' doesn't seem to exist."
 msgstr ""
 "No existe el comando '%s', especificado como 'ACTION_HOOK' para la extensión "
 "'%s'."
@@ -5901,16 +5780,16 @@ msgid "Saving Samba workstation failed"
 msgstr "Ha fallado la grabación de la estación de trabajo Samba"
 
 #: plugins/admin/systems/class_servDNS.inc:122
-#, fuzzy, php-format
+#, php-format
 msgid "You are going to migrate the DNS setup from server '%s'."
-msgstr "Ha decidido copiar la entrada '%s'."
+msgstr "Ha decidido migrar la configuración DNS desde el servidor '%s'."
 
 #: plugins/admin/systems/class_servDNS.inc:124
 #: plugins/admin/systems/class_servDHCP.inc:124
 msgid ""
 "The migration will be started when you save this system. To cancel this "
 "action, use the cancel button below."
-msgstr ""
+msgstr "La migración comenzara cuando grabe el sistema. Para cancelar esta acción, use el botón Cancelar."
 
 #: plugins/admin/systems/class_servDNS.inc:149
 #: plugins/admin/systems/class_inventory.inc:32
@@ -5919,8 +5798,7 @@ msgstr "Eliminar servicio DNS"
 
 #: plugins/admin/systems/class_servDNS.inc:150
 #: plugins/admin/systems/class_inventory.inc:33
-msgid ""
-"This server has DNS features enabled. You can disable them by clicking below."
+msgid "This server has DNS features enabled. You can disable them by clicking below."
 msgstr ""
 "Esta servidor tiene la extensión DNS activada. Puede desactivarla pulsando "
 "aquí."
@@ -5932,8 +5810,7 @@ msgstr "Añadir servicio DNS"
 
 #: plugins/admin/systems/class_servDNS.inc:153
 #: plugins/admin/systems/class_inventory.inc:36
-msgid ""
-"This server has DNS features disabled. You can enable them by clicking below."
+msgid "This server has DNS features disabled. You can enable them by clicking below."
 msgstr ""
 "Este servidor tiene la extensión DNS desactivada. Puede activarla pulsando "
 "aquí."
@@ -5976,8 +5853,7 @@ msgstr "Su navegador no soporta iframes."
 
 #: plugins/admin/systems/class_termDNS.inc:190
 #, php-format
-msgid ""
-"Can't execute specified AUTO_NETWORK_HOOK '%s'. Please check your gosa.conf."
+msgid "Can't execute specified AUTO_NETWORK_HOOK '%s'. Please check your gosa.conf."
 msgstr ""
 "No puedo ejecutar el AUTO_NETWORK_HOOK '%s' indicado. Por favor compruebe el "
 "archivo gosa.conf."
@@ -5988,7 +5864,7 @@ msgstr "No mostrar los coincidentes"
 
 #: plugins/admin/systems/class_termDNS.inc:420
 msgid "You have not configured your dhcp settings yet."
-msgstr ""
+msgstr "No ha configurado los parametros DHCP todavía."
 
 #: plugins/admin/systems/class_termDNS.inc:430
 msgid "The required field 'IP-address' is not set."
@@ -6045,78 +5921,63 @@ msgid "Only lowercase is allowed, please check your '%ss'."
 msgstr "Solo están permitidas minúsculas, por favor compruebe su '%ss'."
 
 #: plugins/admin/systems/class_termDNS.inc:547
-#, fuzzy
 msgid "Removing dhcp entry for this object failed."
-msgstr "Ha fallado la eliminación del servidor desde el objeto Kolab"
+msgstr "Ha fallado la eliminación de la entrada DHCP de este objeto."
 
 #: plugins/admin/systems/class_termDNS.inc:559
 #: plugins/admin/systems/class_termDNS.inc:574
-#, fuzzy
 msgid "Tried to add new dhcp entry failed."
-msgstr "Ha fallado al añadir nuevo elemento"
+msgstr "Ha fallado al intentar añadir nueva entrada DHCP."
 
 #: plugins/admin/systems/class_termDNS.inc:577
-#, fuzzy
 msgid "Removing old dhcp entry failed."
-msgstr "Ha fallado la eliminación de la entrada de maquina Kolab"
+msgstr "Ha fallado la eliminación de la entrada antigua de DHCP."
 
 #: plugins/admin/systems/class_termDNS.inc:589
-#, fuzzy
 msgid "Modifying dhcp entry failed."
-msgstr "Ha fallado la modificación de la entrada de plantilla FAI"
+msgstr "Ha fallado la modificación de la entrada DHCP"
 
 #: plugins/admin/systems/class_termDNS.inc:656
 msgid "Saving terminal to DNS object failed"
 msgstr "Ha fallado la grabación del objeto DNS desde terminal"
 
 #: plugins/admin/systems/class_servSsh.inc:25
-#, fuzzy
 msgid "SSH systems keys"
-msgstr "Sistemas"
+msgstr "Claves del sistema SSH"
 
 #: plugins/admin/systems/class_servSsh.inc:26
 msgid "This plugin store ssh public keys for systems"
-msgstr ""
+msgstr "Esta extensión guarda las claves SSH públicas de sistemas"
 
 #: plugins/admin/systems/class_servSsh.inc:88
-#, fuzzy
 msgid "Remove SSH keys"
-msgstr "Eliminar entrada"
+msgstr "Eliminar claves SSHentr"
 
 #: plugins/admin/systems/class_servSsh.inc:89
-#, fuzzy
-msgid ""
-"This server has SSH features enabled. You can disable them by clicking below."
-msgstr ""
-"Esta servidor tiene la extensión DNS activada. Puede desactivarla pulsando "
-"aquí."
+msgid "This server has SSH features enabled. You can disable them by clicking below."
+msgstr "Esta servidor tiene la extensión SSH activada. Puede desactivarla pulsando aquí."
 
 #: plugins/admin/systems/class_servSsh.inc:91
 msgid "Add SSH keys"
-msgstr ""
+msgstr "Añadir claves SSH"
 
 #: plugins/admin/systems/class_servSsh.inc:92
-#, fuzzy
-msgid ""
-"This server has SSH features disabled. You can enable them by clicking below."
+msgid "This server has SSH features disabled. You can enable them by clicking below."
 msgstr ""
-"Este servidor tiene la extensión DNS desactivada. Puede activarla pulsando "
+"Este servidor tiene la extensión SSH desactivada. Puede activarla pulsando "
 "aquí."
 
 #: plugins/admin/systems/class_servSsh.inc:129
-#, fuzzy
 msgid "Removing SSH key failed"
-msgstr "Ha fallado la grabación de la cuenta Samba"
+msgstr "Ha fallado la eliminación de la clave SSH"
 
 #: plugins/admin/systems/class_servSsh.inc:150
-#, fuzzy
 msgid "Value specified as 'SSH Key' is not valid."
-msgstr "El valor introducido como 'Tamaño' no es válido."
+msgstr "El valor introducido como 'clave SSH' no es válido."
 
 #: plugins/admin/systems/class_servSsh.inc:176
-#, fuzzy
 msgid "Saving SSH key failed"
-msgstr "Ha fallado la grabación de la cuenta Samba"
+msgstr "Ha fallado la grabación de la clave SSH"
 
 #: plugins/admin/systems/class_glpiAttachmentPool.inc:68
 #, php-format
@@ -6125,8 +5986,7 @@ msgstr "Ha decidido eliminar el componente adjunto glpi '%s'."
 
 #: plugins/admin/systems/class_glpiAttachmentPool.inc:107
 #, php-format
-msgid ""
-"You can't delete this attachment, it is still in use by these system(s) '%s'"
+msgid "You can't delete this attachment, it is still in use by these system(s) '%s'"
 msgstr ""
 "No puede eliminar este adjunto, está todavía en uso por el(los) sistema(s) '%"
 "s'"
@@ -6208,62 +6068,53 @@ msgstr ""
 "presione 'Eliminar' para continuar o 'Cancelar' para abortar."
 
 #: plugins/admin/systems/class_servDHCP.inc:33
-#, fuzzy
 msgid "Logging"
-msgstr "Inicio de sesión"
+msgstr "Registrando"
 
 #: plugins/admin/systems/class_servDHCP.inc:34
 #: plugins/admin/systems/class_servDHCP.inc:312
 #: plugins/admin/systems/class_servDHCP.inc:577
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:26
-#, fuzzy
 msgid "Global options"
-msgstr "Opciones de correo"
+msgstr "Opciones globales"
 
 #: plugins/admin/systems/class_servDHCP.inc:36
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:28
-#, fuzzy
 msgid "Subclass"
-msgstr "clase"
+msgstr "Subclase"
 
 #: plugins/admin/systems/class_servDHCP.inc:37
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:29
-#, fuzzy
 msgid "Host"
-msgstr "enviar"
+msgstr "Maquina"
 
 #: plugins/admin/systems/class_servDHCP.inc:39
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:31
-#, fuzzy
 msgid "Pool"
-msgstr "Booleano"
+msgstr "Conjunto"
 
 #: plugins/admin/systems/class_servDHCP.inc:40
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:32
-#, fuzzy
 msgid "Subnet"
-msgstr "Poner"
+msgstr "Subred"
 
 #: plugins/admin/systems/class_servDHCP.inc:41
-#, fuzzy
 msgid "Failover peer"
-msgstr "Patrones de archivos"
+msgstr "Nodo de recuperación"
 
 #: plugins/admin/systems/class_servDHCP.inc:42
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:33
-#, fuzzy
 msgid "Shared network"
-msgstr "Redes privilegiadas SMTP"
+msgstr "Red compartida"
 
 #: plugins/admin/systems/class_servDHCP.inc:123
-#, fuzzy, php-format
+#, php-format
 msgid "You are going to migrate the DHCP setup from server '%s'."
-msgstr "Ha decidido copiar la entrada '%s'."
+msgstr "Ha decidido migrar la configuración DHCP desde el servidor '%s'."
 
 #: plugins/admin/systems/class_servDHCP.inc:240
-#, fuzzy
 msgid "You're not allowed to remove DHCP sections!"
-msgstr "No tiene permisos para mover este objeto a '%s'."
+msgstr "¡No tiene permisos para eliminar está sección DHCP!"
 
 #: plugins/admin/systems/class_servDHCP.inc:274
 #, fuzzy, php-format
@@ -6297,7 +6148,7 @@ msgstr ""
 #: plugins/admin/systems/class_servDHCP.inc:338
 #: plugins/admin/systems/class_servDHCP.inc:341
 msgid "Insert new DHCP section"
-msgstr ""
+msgstr "Insertar nueva sección DHCP"
 
 #: plugins/admin/systems/class_servDHCP.inc:339
 #: plugins/admin/systems/class_servDHCP.inc:342
@@ -6336,8 +6187,7 @@ msgstr "Ha fallado la grabación del servidor"
 
 #: plugins/admin/systems/class_servDHCP.inc:654
 #, fuzzy
-msgid ""
-"DHCP configuration set is unknown. Please contact your system administrator."
+msgid "DHCP configuration set is unknown. Please contact your system administrator."
 msgstr "Cuenta bloqueada. Contacte con su administrador de sistemas."
 
 #: plugins/admin/systems/class_terminalService.inc:65
@@ -6452,8 +6302,7 @@ msgstr "No puedo encontrar el nombre de objeto "
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:133
 #, php-format
-msgid ""
-"You can't delete this device, it is still in use by these system(s) '%s'"
+msgid "You can't delete this device, it is still in use by these system(s) '%s'"
 msgstr ""
 "No puede eliminar este dispositivo, esta todavía en uso por este sistema(s) "
 "'%s'"
@@ -6588,16 +6437,15 @@ msgstr "Otro"
 msgid ""
 "DHCP take over will take place when saving this entry. Choose 'Cancel' to "
 "abort."
-msgstr ""
+msgstr "DHCP tomara el control cuando grabe esta entrada. Elija 'Cancelar' para anular."
 
 #: plugins/admin/systems/servdhcp.tpl:14
-#, fuzzy
 msgid "Take over DHCP configuration from"
-msgstr "Crear su fichero de configuración"
+msgstr "Configuración de DHCP para coger control desde"
 
 #: plugins/admin/systems/servdhcp.tpl:18 plugins/admin/systems/servdns.tpl:18
 msgid "Take over"
-msgstr ""
+msgstr "Coger control"
 
 #: plugins/admin/systems/servdhcp.tpl:24
 #, fuzzy
@@ -6650,13 +6498,11 @@ msgstr ""
 
 #: plugins/admin/systems/class_workstationStartup.inc:1095
 msgid "Saving workstation startup settings failed"
-msgstr ""
-"Ha fallado la grabación de configuración de inicio de estación de trabajo"
+msgstr "Ha fallado la grabación de configuración de inicio de estación de trabajo"
 
 #: plugins/admin/systems/class_workstationStartup.inc:1145
 #, php-format
-msgid ""
-"Can't execute specified REPOSITORY_HOOK '%s' please check your gosa.conf."
+msgid "Can't execute specified REPOSITORY_HOOK '%s' please check your gosa.conf."
 msgstr ""
 "No se puede ejecutar el método REPOSITORY_HOOK '%s', por favor compruebe su "
 "gosa.conf."
@@ -6782,8 +6628,7 @@ msgstr "Teléfono"
 #: plugins/admin/systems/terminalService.tpl:88
 #: plugins/admin/systems/workstationService.tpl:88
 msgid "Choose graphic driver that is needed by the installed graphic board"
-msgstr ""
-"Elija controlador gráfico que se necesita para la tarjeta gráfica instalada"
+msgstr "Elija controlador gráfico que se necesita para la tarjeta gráfica instalada"
 
 #: plugins/admin/systems/terminalService.tpl:94
 #: plugins/admin/systems/workstationService.tpl:94
@@ -6884,8 +6729,7 @@ msgstr "Servidor de Cola"
 
 #: plugins/admin/systems/terminalService.tpl:196
 msgid "Select NFS filesystem to place spool files on"
-msgstr ""
-"Seleccione un sistema de archivos 'NFS' para colocar los ficheros de cola"
+msgstr "Seleccione un sistema de archivos 'NFS' para colocar los ficheros de cola"
 
 #: plugins/admin/systems/terminalService.tpl:208
 #: plugins/admin/systems/workstationService.tpl:147
@@ -6978,8 +6822,7 @@ msgstr ""
 
 #: plugins/admin/systems/class_servDB.inc:274
 msgid "Saving server db settings failed"
-msgstr ""
-"Ha fallado la grabación de la configuración de la base de datos de servidor"
+msgstr "Ha fallado la grabación de la configuración de la base de datos de servidor"
 
 #: plugins/admin/systems/servkolab.tpl:9
 msgid "Postfix mydomain"
@@ -7081,12 +6924,12 @@ msgstr "Seleccione nombre de la versión"
 #: plugins/admin/systems/class_dhcpSharedNetwork.inc:148
 #: plugins/admin/systems/dhcp_sharedNetwork.tpl:56
 msgid "Max. lease time"
-msgstr ""
+msgstr "Tiempo de asignación máximo"
 
 #: plugins/admin/systems/class_dhcpSharedNetwork.inc:149
 #: plugins/admin/systems/dhcp_sharedNetwork.tpl:63
 msgid "Min. lease time"
-msgstr ""
+msgstr "Tiempo de asignación mínimo"
 
 #: plugins/admin/systems/class_dhcpSharedNetwork.inc:152
 #, fuzzy, php-format
@@ -7411,8 +7254,7 @@ msgstr "No tiene permisos para crear una estación de trabajo en esta 'Base'."
 
 #: plugins/admin/systems/class_workstationGeneric.inc:386
 msgid "The required field 'Workstation name' is not set."
-msgstr ""
-"No ha introducido el campo obligatorio 'Nombre de la estación de trabajo'."
+msgstr "No ha introducido el campo obligatorio 'Nombre de la estación de trabajo'."
 
 #: plugins/admin/systems/class_workstationGeneric.inc:487
 #: plugins/admin/systems/class_workstationGeneric.inc:511
@@ -7424,12 +7266,11 @@ msgstr "Ha fallado la grabación de la estación de trabajo"
 msgid ""
 "DNS take over will take place when saving this entry. Choose 'Cancel' to "
 "abort."
-msgstr ""
+msgstr "DNS tomara el control cuando grabe esta entrada. Elija 'Cancelar' para anular."
 
 #: plugins/admin/systems/servdns.tpl:14
-#, fuzzy
 msgid "Take over DNS configuration from"
-msgstr "Crear su fichero de configuración"
+msgstr "Configuración de DNS para coger control desde"
 
 #: plugins/admin/systems/servdns.tpl:24
 msgid "Zones"
@@ -7500,8 +7341,7 @@ msgstr ""
 
 #: plugins/admin/systems/class_servRepository.inc:207
 #, php-format
-msgid ""
-"Be careful editing this release, it is still used by these workstations [%s]."
+msgid "Be careful editing this release, it is still used by these workstations [%s]."
 msgstr ""
 "Tenga cuidado editando esta versión, esta aún en uso por las estaciones de "
 "trabajo [%s]."
@@ -7564,8 +7404,7 @@ msgid "Please specify a numeric value for retry."
 msgstr "Por favor introduzca un valor numérico para reintento."
 
 #: plugins/admin/systems/class_servDNSeditZone.inc:446
-msgid ""
-"The given network address is not a valid, please specify a valid IP address."
+msgid "The given network address is not a valid, please specify a valid IP address."
 msgstr ""
 "La dirección de red introducida no es válida, porfavor introduzca una "
 "dirección IP valida."
@@ -8108,15 +7947,15 @@ msgstr "Nombre del recurso compartido DFS"
 
 #: plugins/admin/systems/dhcp_sharedNetwork.tpl:19
 msgid "Propagated server identifier for this shared network"
-msgstr ""
+msgstr "Identificador de servidor propagado para esta red compartida"
 
 #: plugins/admin/systems/dhcp_sharedNetwork.tpl:31
 msgid "Select if this server is authoritative for this shared network"
-msgstr ""
+msgstr "Selecciones si este servidor está autorizado para esta red compartida"
 
 #: plugins/admin/systems/dhcp_sharedNetwork.tpl:31
 msgid "Authoritative server"
-msgstr ""
+msgstr "Servidor autorizado"
 
 #: plugins/admin/systems/dhcp_sharedNetwork.tpl:46
 #, fuzzy
@@ -8131,14 +7970,12 @@ msgid "seconds"
 msgstr "(en segundos)"
 
 #: plugins/admin/systems/dhcp_sharedNetwork.tpl:59
-#, fuzzy
 msgid "Maximum lease time"
-msgstr "Tamaño máximo del archivo"
+msgstr "Tiempo de asignación máximo"
 
 #: plugins/admin/systems/dhcp_sharedNetwork.tpl:66
-#, fuzzy
 msgid "Minimum lease time"
-msgstr "Tamaño máximo del archivo"
+msgstr "Tiempo de asignación mínimo"
 
 #: plugins/admin/systems/dhcp_sharedNetwork.tpl:74
 #, fuzzy
@@ -8147,7 +7984,7 @@ msgstr "Opciones de acceso"
 
 #: plugins/admin/systems/dhcp_sharedNetwork.tpl:79
 msgid "Select if unknown clients should get dynamic IP addresses"
-msgstr ""
+msgstr "Seleccione si clientes desconocidos deberían obtener direcciones IP"
 
 #: plugins/admin/systems/dhcp_sharedNetwork.tpl:79
 #, fuzzy
@@ -8156,11 +7993,11 @@ msgstr "¡id desconocido!"
 
 #: plugins/admin/systems/dhcp_sharedNetwork.tpl:85
 msgid "Select if bootp clients should get dynamic IP addresses"
-msgstr ""
+msgstr "Seleccione si clientes BOOTP deberían obtener direcciones IP dinámicas"
 
 #: plugins/admin/systems/dhcp_sharedNetwork.tpl:85
 msgid "Allow bootp clients"
-msgstr ""
+msgstr "Permitir clientes BOOTP"
 
 #: plugins/admin/systems/dhcp_sharedNetwork.tpl:91
 #, fuzzy
@@ -8169,7 +8006,7 @@ msgstr "Usuarios que tienen permiso para acceder a esta impresora"
 
 #: plugins/admin/systems/dhcp_sharedNetwork.tpl:91
 msgid "Allow booting"
-msgstr ""
+msgstr "Permitir inicialización"
 
 #: plugins/admin/systems/glpiPrinterCartridges.tpl:6
 msgid "List of available cartridge type for this type of printer"
@@ -8199,15 +8036,14 @@ msgstr "Expresiones regulares que coincidan con tipos de cartuchos"
 
 #: plugins/admin/systems/dhcp_subnet.tpl:20
 msgid "Range for dynamic address assignment"
-msgstr ""
+msgstr "Rango de asignación de direcciones dinámicas"
 
 #: plugins/admin/systems/glpiDeviceManagement.tpl:6
 msgid "List of devices"
 msgstr "Lista de dispositivos"
 
 #: plugins/admin/systems/glpiDeviceManagement.tpl:23
-msgid ""
-"This dialog allows you to attach a device to your currently edited computer."
+msgid "This dialog allows you to attach a device to your currently edited computer."
 msgstr ""
 "Este dialogo le permite unir un dispositivo al ordenador que está "
 "actualmente editando."
@@ -8223,14 +8059,12 @@ msgstr "Expresiones regulares que coincidan con nombres de dispositivos"
 #: plugins/admin/systems/class_servKolab.inc:90
 #, php-format
 msgid "Include data from %s days in the past when creating free/busy lists"
-msgstr ""
-"Incluye información desde hace '%s' días cuando cree listas de presencia"
+msgstr "Incluye información desde hace '%s' días cuando cree listas de presencia"
 
 #: plugins/admin/systems/class_servKolab.inc:96
 #, php-format
 msgid "Warn users when using more than %s%% of their mail quota"
-msgstr ""
-"Avisar a los usuarios de que están usando mas de %s%% de su cuota de correo"
+msgstr "Avisar a los usuarios de que están usando mas de %s%% de su cuota de correo"
 
 #: plugins/admin/systems/class_servKolab.inc:111
 msgid "Remove Kolab extension"
@@ -8270,8 +8104,7 @@ msgstr "En la configuración de presencia se debe poner días futuros."
 
 #: plugins/admin/systems/class_servKolab.inc:252
 msgid "Future days in Free/Busy settings must be a positive value."
-msgstr ""
-"En la configuración de presencia, Días futuros debe ser un número positivo."
+msgstr "En la configuración de presencia, Días futuros debe ser un número positivo."
 
 #: plugins/admin/systems/class_servKolab.inc:256
 msgid "The given Quota settings value must be a number."
@@ -8279,8 +8112,7 @@ msgstr "El valor introducido como cuota debe ser un número."
 
 #: plugins/admin/systems/class_servKolab.inc:258
 msgid "Please choose a value between 1 and 100 for Quota settings."
-msgstr ""
-"Por favor introduzca un valor entre 1 y 100 para el parámetro de cuota."
+msgstr "Por favor introduzca un valor entre 1 y 100 para el parámetro de cuota."
 
 #: plugins/admin/systems/class_servKolab.inc:260
 msgid "Future days must be a value."
@@ -8310,12 +8142,12 @@ msgstr ""
 
 #: plugins/admin/systems/class_dhcpNetwork.inc:42
 msgid "The name of the DNS server your're going to add is not valid!"
-msgstr ""
+msgstr "¡El nombre del servidor DNS que está añadiendo no es válido!"
 
 #: plugins/admin/systems/class_dhcpNetwork.inc:211
 #, php-format
 msgid "Error in definition of '%s'!"
-msgstr ""
+msgstr "¡Error en la definición de '%s'!"
 
 #: plugins/admin/systems/chooser.tpl:1
 msgid "Choose the kind of system component you want to create"
@@ -8416,16 +8248,14 @@ msgstr ""
 
 #: plugins/admin/systems/class_glpiAccount.inc:307
 #, php-format
-msgid ""
-"You can't delete this system type, it is still in use by these system(s) '%s'"
+msgid "You can't delete this system type, it is still in use by these system(s) '%s'"
 msgstr ""
 "No puede eliminar este tipo de sistema, está todavía en uso por el sistema"
 "(s) '%s'"
 
 #: plugins/admin/systems/class_glpiAccount.inc:318
 msgid "Rename failed, this system type name is already used."
-msgstr ""
-"El cambio de nombre ha fallado, ha introducido uno que ya está siendo usado."
+msgstr "El cambio de nombre ha fallado, ha introducido uno que ya está siendo usado."
 
 #: plugins/admin/systems/class_glpiAccount.inc:374
 msgid "Adding new operating system failed, specifed name is already used."
@@ -8583,32 +8413,31 @@ msgstr "Nombre de la lista de bloqueos"
 
 #: plugins/admin/systems/class_dhcpAdvanced.inc:53
 msgid "Can't delete automatic statements. Please use the fields above."
-msgstr ""
+msgstr "No se puede eliminar informes automáticos. Por favor use los campos superiores."
 
 #: plugins/admin/systems/class_dhcpAdvanced.inc:66
 msgid "Can't delete automatic options. Please use the fields above."
-msgstr ""
+msgstr "No se puede eliminar opciones automáticas. Por favor use los campos superiores."
 
 #: plugins/admin/systems/dhcp_service.tpl:6
-#, fuzzy
 msgid "Authoritative service"
-msgstr "Servicio de impresión"
+msgstr "Servicio autorizado"
 
 #: plugins/admin/systems/dhcp_service.tpl:8
 msgid "Dynamic DNS update"
-msgstr ""
+msgstr "Actualización DNS dinámica"
 
 #: plugins/admin/systems/dhcp_service.tpl:9
 msgid "Dynamic DNS update style"
-msgstr ""
+msgstr "Estilo de actualización DNS dinámica"
 
 #: plugins/admin/systems/dhcp_service.tpl:18
 msgid "Default lease time (s)"
-msgstr ""
+msgstr "Tiempo de asignación por omisión (s)"
 
 #: plugins/admin/systems/dhcp_service.tpl:20
 msgid "Enter default lease time in seconds."
-msgstr ""
+msgstr "Introduzca el Tiempo de asignación por omisión en segundos."
 
 #: plugins/admin/systems/dhcp_service.tpl:24
 #, fuzzy
@@ -8617,7 +8446,7 @@ msgstr "Tamaño máximo del archivo"
 
 #: plugins/admin/systems/dhcp_service.tpl:26
 msgid "Enter maximum lease time in seconds."
-msgstr ""
+msgstr "Introduzca el Tiempo de asignación máximo en segundos."
 
 #: plugins/admin/systems/goVirusServer.tpl:5
 msgid "Generic virus filtering"
@@ -8676,8 +8505,7 @@ msgstr ""
 
 #: plugins/admin/systems/class_servService.inc:108
 msgid "Please correct the share-/profile settings of these users"
-msgstr ""
-"Por favor solucione la configuración de compartido/perfiles de estos usuarios"
+msgstr "Por favor solucione la configuración de compartido/perfiles de estos usuarios"
 
 #: plugins/admin/systems/class_servService.inc:336
 msgid "Terminal server, must have fontpath specified."
@@ -8843,8 +8671,7 @@ msgstr "Parametros de la aplicación"
 #: plugins/admin/applications/class_applicationGeneric.inc:473
 #: plugins/admin/applications/generic.tpl:13
 msgid "Application name to be displayed (i.e. below icons)"
-msgstr ""
-"Nombre con el que se mostrara la aplicación(esto es debajo de los iconos)"
+msgstr "Nombre con el que se mostrara la aplicación(esto es debajo de los iconos)"
 
 #: plugins/admin/applications/class_applicationManagement.inc:299
 #, php-format
@@ -8874,10 +8701,8 @@ msgid "Create options"
 msgstr "Crear opciones"
 
 #: plugins/admin/applications/class_applicationParameters.inc:55
-msgid ""
-"This application has options disabled. You can enable them by clicking below."
-msgstr ""
-"Esta aplicación tiene opciones desactivadas. Puede activarlas pulsando aqui."
+msgid "This application has options disabled. You can enable them by clicking below."
+msgstr "Esta aplicación tiene opciones desactivadas. Puede activarlas pulsando aqui."
 
 #: plugins/admin/applications/class_applicationParameters.inc:101
 msgid "Variable"
@@ -8992,11 +8817,11 @@ msgstr "Inicio de sesión"
 
 #: plugins/admin/users/class_userManagement.inc:170
 msgid "Could not set user status from locked to unlocked."
-msgstr ""
+msgstr "No se puede cambiar el estado del usuario de bloqueado a desbloqueado."
 
 #: plugins/admin/users/class_userManagement.inc:172
 msgid "Could not set user status from unlocked to locked."
-msgstr ""
+msgstr "No se puede cambiar el estado del usuario de desbloqueado a bloqueado."
 
 #: plugins/admin/users/class_userManagement.inc:262
 #: plugins/admin/users/class_userManagement.inc:338
@@ -9173,7 +8998,7 @@ msgstr "Cambiar contraseña"
 
 #: plugins/admin/users/class_divListUsers.inc:298
 msgid "Number of listed users"
-msgstr ""
+msgstr "Número de usuarios mostrados"
 
 #: plugins/admin/users/main.inc:41 plugins/admin/users/main.inc:47
 msgid "User administration"
@@ -9433,8 +9258,7 @@ msgstr "Crear nuevo departamento"
 #: plugins/admin/fai/tabsHook.inc:34 plugins/admin/fai/tabsTemplate.inc:34
 #: plugins/admin/fai/tabsVariable.inc:34
 msgid "Try to move tree failed. Destination tree is subtree of source tree."
-msgstr ""
-"Ha fallado al mover el árbol. El árbol destino es subárbol del elegido."
+msgstr "Ha fallado al mover el árbol. El árbol destino es subárbol del elegido."
 
 #: plugins/admin/departments/class_departmentManagement.inc:153
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:128
@@ -9470,8 +9294,7 @@ msgstr "No ha introducido el campo obligatorio 'Descripción'."
 
 #: plugins/admin/departments/class_departmentGeneric.inc:239
 #, php-format
-msgid ""
-"The field 'Name' contains the reserved word '%s'. Please choose another name."
+msgid "The field 'Name' contains the reserved word '%s'. Please choose another name."
 msgstr ""
 "El campo 'Nombre' tiene la palabra reservada '%s'. Por favor elija otro "
 "nombre."
@@ -9754,28 +9577,24 @@ msgid "Please enter a mail address"
 msgstr "Por favor introduzca una dirección de correo"
 
 #: plugins/admin/ogroups/class_mailogroup.inc:48
-msgid ""
-"This group has mail features enabled. You can disable them by clicking below."
+msgid "This group has mail features enabled. You can disable them by clicking below."
 msgstr ""
 "Este grupo tiene la extensión de correo activa. Puede desactivarla pulsando "
 "a continuación."
 
 #: plugins/admin/ogroups/class_mailogroup.inc:50
-msgid ""
-"This group has mail features disabled. You can enable them by clicking below."
+msgid "This group has mail features disabled. You can enable them by clicking below."
 msgstr ""
 "Este grupo tiene la extensión de correo desactivada.Puede activarla pulsando "
 "aqui."
 
 #: plugins/admin/ogroups/class_mailogroup.inc:105
 msgid "Saving mail objectgroup settings failed"
-msgstr ""
-"Ha fallado la grabación de la configuración del grupo de objetos de correo"
+msgstr "Ha fallado la grabación de la configuración del grupo de objetos de correo"
 
 #: plugins/admin/ogroups/class_mailogroup.inc:138
 msgid "Removing mail objectgroup settings failed"
-msgstr ""
-"Ha fallado la eliminación de la configuración del grupo de objetos de correo"
+msgstr "Ha fallado la eliminación de la configuración del grupo de objetos de correo"
 
 #: plugins/admin/ogroups/main.inc:35 plugins/admin/ogroups/main.inc:40
 #: plugins/admin/ogroups/class_ogroupManagement.inc:25
@@ -9869,8 +9688,7 @@ msgid "Remove the phone queue from this Account"
 msgstr "Eliminar la cola telefónica de esta cuenta"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:212
-msgid ""
-"Phone queue is enabled for this group. You can disable it by clicking below."
+msgid "Phone queue is enabled for this group. You can disable it by clicking below."
 msgstr ""
 "Esta grupo tiene la cola telefónica activada. Puede desactivarla pulsando "
 "aquí."
@@ -10066,8 +9884,7 @@ msgid "Removing object group failed"
 msgstr "Ha fallado la eliminación del grupo de objetos"
 
 #: plugins/admin/ogroups/phonequeue.tpl:2
-msgid ""
-"Only users with the same asterisk home server will be included to this queue."
+msgid "Only users with the same asterisk home server will be included to this queue."
 msgstr ""
 "Los usuarios con el mismo servidor principal asterisk serán incluidos en "
 "esta cola."
@@ -10414,8 +10231,7 @@ msgid "Please enter your search string here"
 msgstr "Por favor introduzca una cadena de búsqueda"
 
 #: plugins/admin/fai/class_faiPackageEntry.inc:44
-msgid ""
-"This list displays all assigned package names for this repository settings."
+msgid "This list displays all assigned package names for this repository settings."
 msgstr ""
 "Esta lista muestra todos los nombre de paquetes configurados en este "
 "catálogo."
@@ -10466,8 +10282,7 @@ msgstr "Va a eliminar toda información sobre la clase FAI en '%s'."
 #: plugins/admin/fai/class_faiManagement.inc:284
 #, php-format
 msgid "You're about to delete a fai branch / freeze  '%s'."
-msgstr ""
-"Está a punto de eliminar la rama de desarrollo/ rama suspendida FAI '%s'."
+msgstr "Está a punto de eliminar la rama de desarrollo/ rama suspendida FAI '%s'."
 
 #: plugins/admin/fai/class_faiManagement.inc:287
 msgid "You are not allowed to delete this release!"
@@ -10561,8 +10376,7 @@ msgstr ""
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:396
 #, php-format
 msgid "Please enter a valid partition size for partition %s."
-msgstr ""
-"Por favor introduzca un tamaño de partición valido para la partición %s."
+msgstr "Por favor introduzca un tamaño de partición valido para la partición %s."
 
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:402
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:404
@@ -11271,20 +11085,19 @@ msgstr "Eliminar clase"
 
 #: plugins/admin/fai/class_divListFai.inc:262
 msgid "Number of listed profiles"
-msgstr ""
+msgstr "Número de perfiles mostrados"
 
 #: plugins/admin/fai/class_divListFai.inc:263
 msgid "Number of listed partitions"
-msgstr ""
+msgstr "Número de particiones mostradas"
 
 #: plugins/admin/fai/class_divListFai.inc:264
-#, fuzzy
 msgid "Number of listed scripts"
-msgstr "Lista de scripts sieve"
+msgstr "Número de scripts mostrados"
 
 #: plugins/admin/fai/class_divListFai.inc:265
 msgid "Number of listed hooks"
-msgstr ""
+msgstr "Número de métodos mostrados"
 
 #: plugins/admin/fai/class_divListFai.inc:266
 #, fuzzy
@@ -11358,8 +11171,7 @@ msgid "Scalix mailbox class"
 msgstr "Clase del buzón de Scalix"
 
 #: plugins/personal/scalix/generic.tpl:14
-msgid ""
-"Limited users can not make use of the group calendar functionality in Scalix"
+msgid "Limited users can not make use of the group calendar functionality in Scalix"
 msgstr ""
 "Usuarios limitados no pueden usar la funcionalidad calendario de grupo de "
 "Scalix"
@@ -11410,8 +11222,7 @@ msgstr "Limitar el correo saliente"
 
 #: plugins/personal/scalix/generic.tpl:59
 msgid "As sanction on mailbox quota overuse, stop user from receiving mail."
-msgstr ""
-"Prohibir al usuario recibir correo cuando sobrepase la cuota de correo."
+msgstr "Prohibir al usuario recibir correo cuando sobrepase la cuota de correo."
 
 #: plugins/personal/scalix/generic.tpl:59
 msgid "Limit Inbound Mail"
@@ -11435,8 +11246,7 @@ msgstr "Necesita introducir su contraseña actual para continuar."
 
 #: plugins/personal/password/class_password.inc:78 html/password.php:197
 msgid "The password used as new and current are too similar."
-msgstr ""
-"La contraseña actual y la introducida como nueva son demasiado parecidas."
+msgstr "La contraseña actual y la introducida como nueva son demasiado parecidas."
 
 #: plugins/personal/password/class_password.inc:80 html/password.php:202
 msgid "The password used as new is to short."
@@ -11537,8 +11347,7 @@ msgid "No delivery to own mailbox"
 msgstr "No se enviara a su propia carpeta de correo"
 
 #: plugins/personal/mail/generic.tpl:115
-msgid ""
-"Select to automatically response with the vacation message defined below"
+msgid "Select to automatically response with the vacation message defined below"
 msgstr ""
 "Seleccione para responder automáticamente con el mensaje de ausencia "
 "definido aquí"
@@ -11557,8 +11366,7 @@ msgstr "hasta"
 
 #: plugins/personal/mail/generic.tpl:162
 msgid "Select if you want to filter this mails through spamassassin"
-msgstr ""
-"Seleccione aquí si quiere que su correo se filtre a través de spamassassin"
+msgstr "Seleccione aquí si quiere que su correo se filtre a través de spamassassin"
 
 #: plugins/personal/mail/generic.tpl:162
 msgid "Move mails tagged with spam level greater than"
@@ -11596,8 +11404,7 @@ msgstr ""
 
 #: plugins/personal/mail/generic.tpl:226
 msgid "User is only allowed to send and receive local mails"
-msgstr ""
-"El usuario solo esta permitido a enviar y recibir correo de forma local"
+msgstr "El usuario solo esta permitido a enviar y recibir correo de forma local"
 
 #: plugins/personal/mail/class_mailAccount.inc:214
 msgid "No DESC tag in vacation file:"
@@ -11616,8 +11423,7 @@ msgstr ""
 "Elimine primero las delegaciones."
 
 #: plugins/personal/mail/class_mailAccount.inc:353
-msgid ""
-"You're trying to add an invalid email address to the list of forwarders."
+msgid "You're trying to add an invalid email address to the list of forwarders."
 msgstr ""
 "Esta intentando añadir una dirección de correo no valida a la lista de "
 "reenvío."
@@ -11751,8 +11557,7 @@ msgid "Saving mail account failed"
 msgstr "Ha fallado la grabación de la cuenta de correo"
 
 #: plugins/personal/mail/class_mailAccount.inc:940
-msgid ""
-"There is no valid mailserver specified, please add one in the system setup."
+msgid "There is no valid mailserver specified, please add one in the system setup."
 msgstr ""
 "No se ha configurado ningún servidor de correo válido, por favor añada uno "
 "en la configuración de sistemas."
@@ -11765,8 +11570,7 @@ msgstr ""
 
 #: plugins/personal/mail/class_mailAccount.inc:992
 msgid "Time interval to show vacation message is not valid."
-msgstr ""
-"No es válido el intervalo de fechas para mostrar el mensaje de ausencia."
+msgstr "No es válido el intervalo de fechas para mostrar el mensaje de ausencia."
 
 #: plugins/personal/mail/class_mailAccount.inc:1146
 msgid "Waiting for kolab to remove mail properties."
@@ -11939,8 +11743,7 @@ msgstr "Ha fallado la grabación de la cuenta open-Xchange"
 
 #: plugins/personal/connectivity/class_oxchangeAccount.inc:855
 msgid "Creating oxchange addressbook tree failed"
-msgstr ""
-"Ha fallado la creación del árbol de libreta de direcciones de Open-Xchange"
+msgstr "Ha fallado la creación del árbol de libreta de direcciones de Open-Xchange"
 
 #: plugins/personal/connectivity/pptp.tpl:3
 msgid "PPTP account"
@@ -11999,8 +11802,7 @@ msgid "per"
 msgstr "por"
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:125
-msgid ""
-"You're trying to add an invalid email address to the list of delegations."
+msgid "You're trying to add an invalid email address to the list of delegations."
 msgstr ""
 "Esta intentando añadir una dirección de correo no valida a la lista de "
 "delegaciones."
@@ -12048,14 +11850,12 @@ msgstr "El valor introducido como disponibilidad futura debe ser un entero."
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:291
 msgid "The value specified as Free Busy Information URL is invalid."
-msgstr ""
-"Ha introducido una URL no válida como valor información de disponibilidad."
+msgstr "Ha introducido una URL no válida como valor información de disponibilidad."
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:305
 #, php-format
 msgid "The invitation policy entry for address '%s' is not valid."
-msgstr ""
-"La entrada de política de invitación para la dirección '%s' no es valida."
+msgstr "La entrada de política de invitación para la dirección '%s' no es valida."
 
 #: plugins/personal/connectivity/class_kolabAccount.inc:313
 #, php-format
@@ -12307,8 +12107,7 @@ msgstr "Ha fallado la grabación de la cuenta webDAV"
 
 #: plugins/personal/environment/hotplugDialogNew.tpl:1
 msgid "Create new hotplug entry"
-msgstr ""
-"Crear una nueva entrada en dispositivos de conexión en caliente (HotPlug)"
+msgstr "Crear una nueva entrada en dispositivos de conexión en caliente (HotPlug)"
 
 #: plugins/personal/environment/hotplugDialogNew.tpl:8
 msgid "Create new hotplug device"
@@ -12336,8 +12135,7 @@ msgstr "(idProducto)"
 
 #: plugins/personal/environment/class_kioskManagementDialog.inc:79
 #, php-format
-msgid ""
-"Can't remove kiosk profile, it is still in use by the following objects '%s'."
+msgid "Can't remove kiosk profile, it is still in use by the following objects '%s'."
 msgstr ""
 "No se ha podido eliminar el perfil Kiosk, esta todavía en uso por los "
 "siguientes objetos '%s'."
@@ -12355,16 +12153,13 @@ msgid "Can't delete '%s'. Error was: file doesn't exist."
 msgstr "No se puede eliminar '%s'. El error fue: el fichero no existe."
 
 #: plugins/personal/environment/class_kioskManagementDialog.inc:151
-msgid ""
-"There is no KIOSKPATH defined in your gosa.conf. Can't manage kiosk profiles!"
-msgstr ""
-"No hay KIOSKPATH definido en gosa.conf. ¡NO se pueden manejar perfiles Kiosk!"
+msgid "There is no KIOSKPATH defined in your gosa.conf. Can't manage kiosk profiles!"
+msgstr "No hay KIOSKPATH definido en gosa.conf. ¡NO se pueden manejar perfiles Kiosk!"
 
 #: plugins/personal/environment/class_kioskManagementDialog.inc:157
 #, php-format
 msgid "Kiosk path '%s' is not accessible. Please check the permissions."
-msgstr ""
-"La ruta a Kiosk '%s' no es accesible. Por favor compruebe los permisos."
+msgstr "La ruta a Kiosk '%s' no es accesible. Por favor compruebe los permisos."
 
 #: plugins/personal/environment/kioskManagement.tpl:1
 #: plugins/personal/environment/kioskManagement.tpl:5
@@ -12385,8 +12180,7 @@ msgstr "Expresiones regulares que coincidan con nombres de impresoras"
 
 #: plugins/personal/environment/class_logonManagementDialog.inc:95
 msgid "Specified name should only consist of uper-/lowercase characters."
-msgstr ""
-"El nombre indicado solo debería tener caracteres mayúsculas/minúsculas."
+msgstr "El nombre indicado solo debería tener caracteres mayúsculas/minúsculas."
 
 #: plugins/personal/environment/class_logonManagementDialog.inc:99
 msgid "Please specify a valid script name."
@@ -12465,8 +12259,7 @@ msgstr "Eliminar extensión de entorno"
 #: plugins/personal/environment/class_environment.inc:306
 #: plugins/personal/environment/class_environment.inc:350
 msgid "Environment extension enabled. You can disable it by clicking below."
-msgstr ""
-"La extensión de entorno está activada. Puede desactivarla pulsando aquí."
+msgstr "La extensión de entorno está activada. Puede desactivarla pulsando aquí."
 
 #: plugins/personal/environment/class_environment.inc:315
 #: plugins/personal/environment/class_environment.inc:320
@@ -12478,8 +12271,7 @@ msgstr "Añadir extensión de entorno"
 #: plugins/personal/environment/class_environment.inc:316
 #: plugins/personal/environment/class_environment.inc:356
 msgid "Environment extension disabled. You can enable it by clicking below."
-msgstr ""
-"La extensión de entorno está desactivada. Puede activarla pulsando aquí."
+msgstr "La extensión de entorno está desactivada. Puede activarla pulsando aquí."
 
 #: plugins/personal/environment/class_environment.inc:321
 #: plugins/personal/environment/class_environment.inc:361
@@ -12923,8 +12715,7 @@ msgstr ""
 #: plugins/personal/posix/class_posixAccount.inc:438
 #, php-format
 msgid "Password can't be changed up to %s days after last change"
-msgstr ""
-"La contraseñas no pueden ser cambiadas hasta %s días desde el último cambio"
+msgstr "La contraseñas no pueden ser cambiadas hasta %s días desde el último cambio"
 
 #: plugins/personal/posix/class_posixAccount.inc:440
 #, php-format
@@ -12969,8 +12760,7 @@ msgstr "No ha introducido el campo 'Directorio de usuario'."
 
 #: plugins/personal/posix/class_posixAccount.inc:922
 msgid "Please enter a valid path in 'Home directory' field."
-msgstr ""
-"Por favor introduzca una ruta valida en el campo 'Directorio de usuario'"
+msgstr "Por favor introduzca una ruta valida en el campo 'Directorio de usuario'"
 
 #: plugins/personal/posix/class_posixAccount.inc:930
 msgid "Value specified as 'UID' is not valid."
@@ -12998,13 +12788,11 @@ msgstr "'shadowWarning' sin 'shadowMax' no tiene sentido."
 
 #: plugins/personal/posix/class_posixAccount.inc:964
 msgid "Value specified as 'shadowWarning' should be smaller than 'shadowMax'."
-msgstr ""
-"El valor introducido como 'shadowWarning' debería ser menor que 'shadowMax'."
+msgstr "El valor introducido como 'shadowWarning' debería ser menor que 'shadowMax'."
 
 #: plugins/personal/posix/class_posixAccount.inc:967
 msgid "Value specified as 'shadowWarning' should be greater than 'shadowMin'."
-msgstr ""
-"El valor introducido como 'shadowWarning' debería ser mayor que 'shadowMin'."
+msgstr "El valor introducido como 'shadowWarning' debería ser mayor que 'shadowMin'."
 
 #: plugins/personal/posix/class_posixAccount.inc:972
 msgid "Value specified as 'shadowInactive' is not valid."
@@ -13016,8 +12804,7 @@ msgstr "'shadowInactive' sin 'shadowMax' no tiene sentido."
 
 #: plugins/personal/posix/class_posixAccount.inc:980
 msgid "Value specified as 'shadowMin' should be smaller than 'shadowMax'."
-msgstr ""
-"El valor introducido como 'shadowMin' debería ser menor que 'shadowMax'."
+msgstr "El valor introducido como 'shadowMin' debería ser menor que 'shadowMax'."
 
 #: plugins/personal/posix/class_posixAccount.inc:1128
 msgid "Too many users, can't allocate a free ID!"
@@ -13301,8 +13088,7 @@ msgstr "¡El valor introducido como '%s' tiene caracteres no validos!"
 
 #: plugins/personal/samba/class_sambaAccount.inc:711
 #, php-format
-msgid ""
-"The timeout property '%s' is checked and contains invalid or no characters!"
+msgid "The timeout property '%s' is checked and contains invalid or no characters!"
 msgstr ""
 "¡La propiedad 'tiempo de desconexión' '%s' esta activada y tiene caracteres "
 "no válidos o está vacía!"
@@ -13341,8 +13127,7 @@ msgstr "Parametros de samba"
 
 #: plugins/personal/samba/sambaLogonHours.tpl:21
 msgid "Specify the hours this user is allowed to log in"
-msgstr ""
-"Introducir las horas en que este usuario tendrá permiso de inicio de sesión"
+msgstr "Introducir las horas en que este usuario tendrá permiso de inicio de sesión"
 
 #: plugins/personal/generic/generic_certs.tpl:3
 #: plugins/personal/generic/generic.tpl:178
@@ -14262,8 +14047,7 @@ msgstr ""
 
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:319
 #, php-format
-msgid ""
-"The previously selected asterisk home server (%s) is no longer available."
+msgid "The previously selected asterisk home server (%s) is no longer available."
 msgstr ""
 "El servidor principal asterisk seleccionado previamente (%s) no está "
 "disponible."
@@ -14417,32 +14201,28 @@ msgstr "Contar usuarios"
 
 #: include/class_plugin.inc:412
 #, php-format
-msgid ""
-"Command '%s', specified as CHECK hook for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as CHECK hook for plugin '%s' doesn't seem to exist."
 msgstr ""
 "El comando '%s', especificado como método 'CHECK' para la extensión '%s' no "
 "está disponible."
 
 #: include/class_plugin.inc:564
 #, php-format
-msgid ""
-"Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
 msgstr ""
 "El comando '%s', especificado como 'POSTCREATE' para la extensión '%s' no "
 "parece existir."
 
 #: include/class_plugin.inc:599 include/class_password-methods.inc:200
 #, php-format
-msgid ""
-"Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
 msgstr ""
 "El comando '%s', especificado como POSTMODIFY para la extensión '%s' no "
 "parece existir."
 
 #: include/class_plugin.inc:639
 #, php-format
-msgid ""
-"Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
 msgstr ""
 "El comando '%s', especificado como POSTREMOVE para la extensión '%s' no "
 "parece existir."
@@ -14468,8 +14248,7 @@ msgstr "Ha fallado la eliminación de la etiqueta desde el objeto '%s'"
 
 #: include/class_password-methods-sha.inc:50
 msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
-msgstr ""
-"No puedo usar sha para codificación, falta la función sha1 / mhash / crypt"
+msgstr "No puedo usar sha para codificación, falta la función sha1 / mhash / crypt"
 
 #: include/class_CopyPasteHandler.inc:161
 #, php-format
@@ -14498,8 +14277,7 @@ msgstr "¡La comunicación con la base de datos Kerberos fallo!."
 
 #: include/class_password-methods-kerberos.inc:60
 msgid "Changing password in kerberos database failed!"
-msgstr ""
-"¡Fallo al tratar de cambiar la contraseña en la base de datos de kerberos!."
+msgstr "¡Fallo al tratar de cambiar la contraseña en la base de datos de kerberos!."
 
 #: include/sieve/class_sieveElement_Require.inc:73
 msgid "Please specify at least one valid requirement."
@@ -14608,15 +14386,13 @@ msgid "Please specify a valid operator."
 msgstr "Por favor introduzca un operador valido."
 
 #: include/sieve/class_sieveElement_If.inc:654
-msgid ""
-"Invalid character found in address attribute. Quotes are not allowed here."
+msgid "Invalid character found in address attribute. Quotes are not allowed here."
 msgstr ""
 "Se han encontrado caracteres no válidos en el atributo dirección. Las "
 "comillas no están permitidas aquí."
 
 #: include/sieve/class_sieveElement_If.inc:669
-msgid ""
-"Invalid character found in value attribute. Quotes are not allowed here."
+msgid "Invalid character found in value attribute. Quotes are not allowed here."
 msgstr ""
 "Se han encontrado caracteres no válidos en el atributo valor. Las comillas "
 "no están permitidas aquí."
@@ -14643,8 +14419,7 @@ msgstr "Bytes"
 
 #: include/sieve/class_sieveElement_If.inc:745
 msgid "Please select a valid match type in the list box below."
-msgstr ""
-"Por favor seleccione un tipo de comparador válido del desplegable siguiente."
+msgstr "Por favor seleccione un tipo de comparador válido del desplegable siguiente."
 
 #: include/sieve/class_sieveElement_If.inc:759
 msgid "Only numeric values are allowed here."
@@ -14706,8 +14481,7 @@ msgstr "Necesita debe ser el primer comando en el script."
 
 #: include/sieve/class_sieveElement_Vacation.inc:148
 msgid "Alternative sender address must be a valid email addresses."
-msgstr ""
-"La dirección de envío alternativo debe tener una dirección de correo válida."
+msgstr "La dirección de envío alternativo debe tener una dirección de correo válida."
 
 #: include/sieve/templates/element_stop.tpl:9
 msgid "Stop execution here"
@@ -14951,8 +14725,7 @@ msgstr ""
 "autenticación esta vacío."
 
 #: include/sieve/templates/management.tpl:6
-msgid ""
-"Please verfiy that the attributes uid and mail are not empty and try again."
+msgid "Please verfiy that the attributes uid and mail are not empty and try again."
 msgstr ""
 "Por favor compruebe que los atributos uid y correo no están vacíos y pruebe "
 "de nuevo."
@@ -15138,10 +14911,8 @@ msgstr "El análisis ha sido correcto"
 
 #: include/sieve/class_sieveManagement.inc:161
 #, php-format
-msgid ""
-"The specified mail server '%s' does not exist within the GOsa configuration."
-msgstr ""
-"El servidor de correo indicado '%s' no existe en la configuración de GOsa."
+msgid "The specified mail server '%s' does not exist within the GOsa configuration."
+msgstr "El servidor de correo indicado '%s' no existe en la configuración de GOsa."
 
 #: include/sieve/class_sieveManagement.inc:206
 msgid "You should specify a name for your new script."
@@ -15298,8 +15069,7 @@ msgstr "Estado FAI %s desconocido"
 
 #: include/class_ldap.inc:742
 #, php-format
-msgid ""
-"Autocreation of subtree failed. No objectClass found for attribute '%s'."
+msgid "Autocreation of subtree failed. No objectClass found for attribute '%s'."
 msgstr ""
 "La autocreación del subárbol ha fallado. No se ha encontrado una clase de "
 "objeto para el atributo '%s'."
@@ -15389,8 +15159,7 @@ msgstr "No se encuentran en su configuración SID y/o RIDBASE ."
 
 #: include/class_password-methods-ssha.inc:51
 msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
-msgstr ""
-"No se puede usar ssha para codificación. (Falta la función mhash / sha1)"
+msgstr "No se puede usar ssha para codificación. (Falta la función mhash / sha1)"
 
 #: include/class_MultiSelectWindow.inc:461
 msgid ""
@@ -15468,8 +15237,7 @@ msgstr ""
 
 #: include/functions_dns.inc:618
 #, php-format
-msgid ""
-"Undefined zone name '%s'. Zone name must look like this 'server/zone.com'."
+msgid "Undefined zone name '%s'. Zone name must look like this 'server/zone.com'."
 msgstr ""
 "Nombre de zona sin definir '%s'. El nombre de zona debe ser como: 'servidor/"
 "zona.com'."
@@ -15526,8 +15294,7 @@ msgstr ""
 #: include/class_password-methods.inc:184
 #, php-format
 msgid "Setting the password failed. LDAP server says '%s'."
-msgstr ""
-"Fallo al tratar de configurar la contraseña. El servidor LDAP contesto '%s'."
+msgstr "Fallo al tratar de configurar la contraseña. El servidor LDAP contesto '%s'."
 
 #: include/class_password-methods.inc:221
 #, php-format
@@ -15579,8 +15346,7 @@ msgstr "Fallo al tratar de agregar un bloqueo. El servidor LDAP contesto '%s'."
 #: include/functions.inc:511
 #, php-format
 msgid "Removing a lock failed. LDAP server says '%s'."
-msgstr ""
-"Ha fallado la eliminación de un bloqueo. El servidor LDAP contesto '%s'."
+msgstr "Ha fallado la eliminación de un bloqueo. El servidor LDAP contesto '%s'."
 
 #: include/functions.inc:541
 msgid ""
@@ -15797,7 +15563,7 @@ msgstr "Polaco"
 
 #: include/functions.inc:2534
 msgid "Swedish"
-msgstr ""
+msgstr "Sueco"
 
 #: include/functions.inc:2535
 msgid "Chinese"
@@ -15860,8 +15626,7 @@ msgstr ""
 #: include/class_mail-methods-cyrus.inc:151
 #, php-format
 msgid "Can't create IMAP mailbox. Server says '%s'."
-msgstr ""
-"No se puede crear el buzón de correo IMAP. El error del servidor es: '%s'"
+msgstr "No se puede crear el buzón de correo IMAP. El error del servidor es: '%s'"
 
 #: include/class_mail-methods-cyrus.inc:170
 #, php-format
@@ -15883,8 +15648,7 @@ msgstr ""
 #: include/class_mail-methods-cyrus.inc:236
 #, php-format
 msgid "Can't remove IMAP mailbox. Server says '%s'."
-msgstr ""
-"No se puede eliminar el buzón de correo IMAP. El error del servidor es: '%s'"
+msgstr "No se puede eliminar el buzón de correo IMAP. El error del servidor es: '%s'"
 
 #: include/class_mail-methods-cyrus.inc:277
 #, php-format
@@ -15899,8 +15663,7 @@ msgstr "No puedo enviar el script sieve. El error del servidor es: '%s'"
 #: include/class_mail-methods-cyrus.inc:352
 #, php-format
 msgid "Can't activate GOsa sieve script. Server says '%s'."
-msgstr ""
-"No se puede activar el script sieve de GOsa. El error del servidor es: '%s'"
+msgstr "No se puede activar el script sieve de GOsa. El error del servidor es: '%s'"
 
 #: include/class_ppdManager.inc:13
 #, php-format
@@ -16238,8 +16001,7 @@ msgstr "Comprobando soporte mhash"
 
 #: setup/class_setupStep_Checks.inc:97
 msgid "You'll need this module to make use of SSHA encryption"
-msgstr ""
-"Este módulo es necesario para poder hacer uso del método de codificación SSHA"
+msgstr "Este módulo es necesario para poder hacer uso del método de codificación SSHA"
 
 #: setup/class_setupStep_Checks.inc:98
 msgid ""
@@ -16289,8 +16051,7 @@ msgid "Checking for MySQL support"
 msgstr "Comprobando soporte MySQL"
 
 #: setup/class_setupStep_Checks.inc:121
-msgid ""
-"MySQL support is needed to communicate with several supported databases."
+msgid "MySQL support is needed to communicate with several supported databases."
 msgstr "MySQL es necesario para el acceso a algunas bases de datos soportadas."
 
 #: setup/class_setupStep_Checks.inc:122
@@ -16366,8 +16127,7 @@ msgstr ""
 "basados en clientes ligeros."
 
 #: setup/class_setupStep_Checks.inc:156
-msgid ""
-"The fping utility is only used in thin client based terminal environment."
+msgid "The fping utility is only used in thin client based terminal environment."
 msgstr ""
 "La utilidad fping es solo utilizada en un entorno de terminales basados en "
 "clientes ligeros."
@@ -16430,8 +16190,7 @@ msgstr ""
 msgid ""
 "Search for 'session.gc_maxlifetime' in your php.ini and set it to 86400 or "
 "higher."
-msgstr ""
-"Busque 'sessio.gc_maxlifetime' en su php.ini y modifíquelo a 86400 o mayor."
+msgstr "Busque 'sessio.gc_maxlifetime' en su php.ini y modifíquelo a 86400 o mayor."
 
 #: setup/class_setupStep_Checks.inc:203
 msgid ""
@@ -16454,8 +16213,7 @@ msgstr ""
 "provocara errores inesperados. Aumentar para configuraciones mayores."
 
 #: setup/class_setupStep_Checks.inc:212
-msgid ""
-"Search for 'memory_limit' in your php.ini and set it to '32M' or higher."
+msgid "Search for 'memory_limit' in your php.ini and set it to '32M' or higher."
 msgstr "Busque 'memory_limit' en su php.ini y modifíquelo a '32M' o mayor."
 
 #: setup/class_setupStep_Checks.inc:219
@@ -16475,10 +16233,8 @@ msgid "The Execution time should be at least 30 seconds."
 msgstr "El tiempo de ejecución debe ser de al menos 30 segundos."
 
 #: setup/class_setupStep_Checks.inc:228
-msgid ""
-"Search for 'max_execution_time' in your php.ini and set it to '30' or higher."
-msgstr ""
-"Busque 'max_execution_time' en su php.ini y modifíquelo a '30' o mayor."
+msgid "Search for 'max_execution_time' in your php.ini and set it to '30' or higher."
+msgstr "Busque 'max_execution_time' en su php.ini y modifíquelo a '30' o mayor."
 
 #: setup/class_setupStep_Checks.inc:235
 msgid ""
@@ -16511,14 +16267,11 @@ msgstr "Busque 'magic_quotes_gpc' en su php.ini y modifíquelo a 'On'."
 
 #: setup/class_setupStep_Checks.inc:252
 msgid "Increase your server performance by setting magic_quotes_gpc to 'off'."
-msgstr ""
-"Aumente el rendimiento de su servidor modificando 'magic_quotes_gpc' a 'off'"
+msgstr "Aumente el rendimiento de su servidor modificando 'magic_quotes_gpc' a 'off'"
 
 #: setup/class_setupStep_Checks.inc:253
-msgid ""
-"Search for 'zend.ze1_compatibility_mode' in your php.ini and set it to 'Off'."
-msgstr ""
-"Busque 'zend.ze1_compatibility_mode' en su php.ini y modifíquelo a 'Off'."
+msgid "Search for 'zend.ze1_compatibility_mode' in your php.ini and set it to 'Off'."
+msgstr "Busque 'zend.ze1_compatibility_mode' en su php.ini y modifíquelo a 'Off'."
 
 #: setup/class_setupStep_Checks.inc:264
 msgid "Configuration writeable"
@@ -16719,8 +16472,7 @@ msgstr "Por Favor introduzca un usuario y contraseña"
 #: setup/class_setupStep_Ldap.inc:115
 #, php-format
 msgid "Bind as user '%s' on server '%s' succeeded."
-msgstr ""
-"La Autenticación como usuario '%s' en el servidor '%s'. ha tenido éxito."
+msgstr "La Autenticación como usuario '%s' en el servidor '%s'. ha tenido éxito."
 
 #: setup/class_setupStep_Schema.inc:40 setup/class_setupStep_Schema.inc:41
 msgid "LDAP schema check"
@@ -17254,8 +17006,7 @@ msgstr "Error"
 
 #: setup/class_setupStep_Migrate.inc:319
 #, php-format
-msgid ""
-"Found %s winstations outside the predefined winstation department ou '%s'."
+msgid "Found %s winstations outside the predefined winstation department ou '%s'."
 msgstr ""
 "Se encontraron '%s' estaciones de trabajo windows fuera del contenedor ou de "
 "estaciones de trabajo windows '%s'"
@@ -17281,10 +17032,8 @@ msgstr "Encontrados '%s' usuario(s) fuera del árbol configurado '%s'."
 
 #: setup/class_setupStep_Migrate.inc:520 setup/class_setupStep_Migrate.inc:533
 #, php-format
-msgid ""
-"The specified user '%s' does not have full access to your ldap database."
-msgstr ""
-"El usuario introducido '%s' no tiene acceso total a la base de datos LDAP."
+msgid "The specified user '%s' does not have full access to your ldap database."
+msgstr "El usuario introducido '%s' no tiene acceso total a la base de datos LDAP."
 
 #: setup/class_setupStep_Migrate.inc:597
 #, php-format
@@ -17324,8 +17073,7 @@ msgstr "Despues"
 #: setup/class_setupStep_Migrate.inc:933 setup/class_setupStep_Migrate.inc:967
 #, php-format
 msgid "Adding acls for user '%s' failed, ldap says '%s'."
-msgstr ""
-"Ha fallado al añadir acls para el usuario '%s', el servidor LDAP avisa: '%s'."
+msgstr "Ha fallado al añadir acls para el usuario '%s', el servidor LDAP avisa: '%s'."
 
 #: setup/class_setupStep_Migrate.inc:958
 msgid "Creating new administrational group:"
@@ -17382,8 +17130,7 @@ msgid "The following references will be updated"
 msgstr "Las siguientes referencias se actualizaran"
 
 #: setup/class_setupStep_Migrate.inc:1601
-msgid ""
-"The LDAP root object is missing. It is required to use your LDAP service."
+msgid "The LDAP root object is missing. It is required to use your LDAP service."
 msgstr ""
 "EL objeto raíz de LDAP ha desaparecido. Es necesario para poder usar el "
 "servicio LDAP."
@@ -17395,8 +17142,7 @@ msgstr "Intentando crear el objeto raíz"
 
 #: setup/class_setupStep_Migrate.inc:1614
 msgid "Root object couldn't be created, you should try it on your own."
-msgstr ""
-"El objeto raíz no ha podido ser creado, tendra que crearlo usted mismo."
+msgstr "El objeto raíz no ha podido ser creado, tendra que crearlo usted mismo."
 
 #: setup/class_setupStep_Migrate.inc:1904
 #, php-format
@@ -17565,7 +17311,7 @@ msgstr ""
 
 #: setup/setup_license.tpl:8
 msgid "I accept this license"
-msgstr ""
+msgstr "Acepto esta licencia"
 
 #: ihtml/themes/default/framework.tpl:19
 msgid "Main"
@@ -17688,8 +17434,7 @@ msgstr "Por favor elija la forma de reaccionar en esta sesión"
 
 #: ihtml/themes/default/sizelimit.tpl:9
 msgid "ignore this error and show all entries the LDAP server returns"
-msgstr ""
-"ignore este error y muestre todas las entradas devueltas por el servidor LDAP"
+msgstr "ignore este error y muestre todas las entradas devueltas por el servidor LDAP"
 
 #: ihtml/themes/default/sizelimit.tpl:10
 msgid ""
@@ -17971,8 +17716,7 @@ msgstr ""
 
 #: html/main.php:213
 msgid "Warning: memory is getting low - please increase the memory_limit!"
-msgstr ""
-"¡Advertencia: Poca memoria disponible -  por favor aumente 'memory_limit'!"
+msgstr "¡Advertencia: Poca memoria disponible -  por favor aumente 'memory_limit'!"
 
 #: html/main.php:335
 #, php-format
@@ -18000,8 +17744,7 @@ msgstr ""
 "en la configuración php."
 
 #: html/get_attachment.php:55
-msgid ""
-"Can't connect to specified database, please check your glpi configuration."
+msgid "Can't connect to specified database, please check your glpi configuration."
 msgstr ""
 "No se puede conectar a la base de datos indicada, porfavor compruebe la "
 "configuración de glpi."
@@ -18021,8 +17764,7 @@ msgstr ""
 "instalados. Porfavor asegure que se puede obtener."
 
 #: html/index.php:235
-msgid ""
-"Your ldap setup contains old schema definitions. Please re-run the setup."
+msgid "Your ldap setup contains old schema definitions. Please re-run the setup."
 msgstr ""
 "Su configuración de ldap tiene antiguas definiciones de esquemas. Por favor "
 "use el asistente de configuración."
@@ -18031,8 +17773,7 @@ msgstr ""
 msgid ""
 "You're missing an administrative account for GOsa, you'll not be able to "
 "administrate anything!"
-msgstr ""
-"Si no tiene una cuenta administrativa para GOsa, ¡no podrá administrar nada!"
+msgstr "Si no tiene una cuenta administrativa para GOsa, ¡no podrá administrar nada!"
 
 #: html/index.php:300
 msgid "Account locked. Please contact your system administrator."
@@ -18061,531 +17802,3 @@ msgstr ""
 "El directorio de ayuda '%s' no está disponible, no podrá leer ningún archivo "
 "de ayuda."
 
-#~ msgid "can't get ppd informations."
-#~ msgstr "no puedo acceder a la información PPD"
-
-#, fuzzy
-#~ msgid "Add PTR"
-#~ msgstr "Añadir"
-
-#, fuzzy
-#~ msgid "Add PTR record"
-#~ msgstr "Registro SOA"
-
-#, fuzzy
-#~ msgid ""
-#~ "This includes 'all' DHCP subsections that are located within this server. "
-#~ "Please double check if your really want to do this."
-#~ msgstr ""
-#~ "Esto incluye <b>todo</b> la información de objeto. Si está seguro de lo "
-#~ "que quiere hacer pulse dos veces, ya que una vez hecho esto, no hay forma "
-#~ "de que GOsa recupere la información."
-
-#, fuzzy
-#~ msgid "Following objects will be taken over"
-#~ msgstr "Las siguientes referencias se actualizaran"
-
-#~ msgid "I have read the license and accept it"
-#~ msgstr "He leído la licencia y la acepto"
-
-#, fuzzy
-#~ msgid "Removing SSH account failed"
-#~ msgstr "Ha fallado la eliminación de la cuenta Samba"
-
-#, fuzzy
-#~ msgid "Reomve"
-#~ msgstr "Eliminar"
-
-#, fuzzy
-#~ msgid "SSH account"
-#~ msgstr "Mi cuenta"
-
-#~ msgid "DFS Managment"
-#~ msgstr "Administración de DFS"
-
-#~ msgid "Removing DFS share failed"
-#~ msgstr "Ha fallado la eliminación del recurso compartido DFS"
-
-#~ msgid "No DFS entries found"
-#~ msgstr "No se han encontrado entradas DFS"
-
-#~ msgid "Go up one dfs share"
-#~ msgstr "Subir un recurso compartido dfs"
-
-#~ msgid "Go to dfs root"
-#~ msgstr "Ir a la raíz dfs"
-
-#~ msgid "Create new dfs share"
-#~ msgstr "Crear nuevo recurso compartido dfs"
-
-#~ msgid "Distributed File System Administration"
-#~ msgstr "Administración del sistema de archivos distribuidos"
-
-#~ msgid "DFS Shares"
-#~ msgstr "Recursos compartidos DFS"
-
-#~ msgid ""
-#~ "This menu allows you to create, delete and edit selected dfs shares. "
-#~ "Having a large numbers of dfs shares, you might prefer the range "
-#~ "selectors on top of the dfs share list."
-#~ msgstr ""
-#~ "Este menú permite añadir, editar o eliminar los recursos compartidos DFS "
-#~ "seleccionados. Cuando trabaje con un gran número de recursos compartidos "
-#~ "DFS puede usar el selector de rango en la parte superior de la lista."
-
-#~ msgid "Display dfs shares matching"
-#~ msgstr "Mostrar recursos compartidos DFS que coincidan con"
-
-#~ msgid "Regular expression for matching dfs share names"
-#~ msgstr "Expresión regular para encontrar nombre de recursos compartidos DFS"
-
-#~ msgid "DFS Properties"
-#~ msgstr "Propiedades DFS"
-
-#~ msgid "Fileserver"
-#~ msgstr "Servidor de Archivos"
-
-#~ msgid "Share on Fileserver"
-#~ msgstr "Recurso compartido en el Servicio de Archivos"
-
-#~ msgid "DFS Location"
-#~ msgstr "Localización del DFS"
-
-#~ msgid "Dfs share already exists."
-#~ msgstr "Ese recurso compartido DFS ya existe."
-
-#~ msgid "Required Field \"Name of dfs Share\" is not set."
-#~ msgstr "El campo obligatorio \"Nombre del recurso compartido DFS\"."
-
-#~ msgid "Required Field \"Description\" is not set."
-#~ msgstr "No ha introducido el campo obligatorio \"Descripción\"."
-
-#~ msgid "Required Field \"Fileserver\" is not set."
-#~ msgstr "No ha introducido el campo obligatorio 'Servidor de ficheros'."
-
-#~ msgid "Required Field \"Share on fileserver\" is not set."
-#~ msgstr ""
-#~ "No ha introducido el campo obligatorio 'Compartido en el servidor de "
-#~ "ficheros."
-
-#~ msgid "Required Field \"Location\" is not set."
-#~ msgstr "No ha introducido el campo obligatorio 'Localización'."
-
-#~ msgid "System-/Configmanagement"
-#~ msgstr "Sistemas-/Administración de Configuraciones"
-
-#~ msgid "Saving of user/nagios account with dn '%s' failed."
-#~ msgstr "Ha fallado al grabar la cuenta de usuario/Nagios con dn '%s'."
-
-#~ msgid "Removing of user/nagios account with dn '%s' failed."
-#~ msgstr "Ha fallado al eliminar la cuenta Nagios con dn '%s'."
-
-#~ msgid "Nagios account settings"
-#~ msgstr "Configuración de cuenta Nagios"
-
-#~ msgid "Pager number"
-#~ msgstr "Número del busca"
-
-#~ msgid "View all hosts"
-#~ msgstr "Ver todas las máquinas"
-
-#~ msgid "View all services"
-#~ msgstr "Ver todos los servicios"
-
-#~ msgid "Trigger system commands"
-#~ msgstr "Activar comandos de sistema"
-
-#~ msgid "Trigger all host commands"
-#~ msgstr "Activar todos los comandos de máquina"
-
-#~ msgid "Trigger all service commands"
-#~ msgstr "Activar todos los comandos de servicio"
-
-#~ msgid "View configuration information"
-#~ msgstr "Ver la información de configuración"
-
-#~ msgid "View system informations"
-#~ msgstr "Ver la información de sistemas"
-
-#~ msgid "Removing of user/mail account with dn '%s' failed."
-#~ msgstr "No se ha podido eliminar la cuenta de usuario/correo con dn '%s'."
-
-#~ msgid "Saving of user/mail account with dn '%s' failed."
-#~ msgstr "No se ha podido guardar la cuenta de usuario/correo con dn '%s'."
-
-#~ msgid "You are not allowed to write mail forwarding."
-#~ msgstr "No tiene permisos para añadir una dirección de reenvío"
-
-#~ msgid "You are not allowed to write mail alternate address."
-#~ msgstr "No tiene permisos para añadir una dirección alternativa."
-
-#~ msgid "Add vacation information"
-#~ msgstr "Añadir información de ausencia"
-
-#~ msgid "Use spam filter"
-#~ msgstr "Usar filtro antispam"
-
-#~ msgid "Spam level"
-#~ msgstr "Nivel de spam"
-
-#~ msgid "Spam mail box"
-#~ msgstr "Tamaño de la carpeta de spam"
-
-#~ msgid "Sieve management"
-#~ msgstr "Administración Sieve"
-
-#~ msgid "Reject due to mailsize"
-#~ msgstr "rechazar correos mayores que"
-
-#~ msgid "Mail max size"
-#~ msgstr "Tamaño máximo del mensaje"
-
-#~ msgid "Forwarding address"
-#~ msgstr "Direcciones de reenvío"
-
-#~ msgid "Local delivery"
-#~ msgstr "Entrega local"
-
-#~ msgid "No delivery to own mailbox "
-#~ msgstr "No recibir en su propia cuenta"
-
-#~ msgid "Mail alternative addresses"
-#~ msgstr "Direcciones alternativas"
-
-#~ msgid "User password"
-#~ msgstr "Contraseña del usuario"
-
-#~ msgid "Removing of user/posix account with dn '%s' failed."
-#~ msgstr ""
-#~ "Ha fallado la eliminación de la cuenta de usuario / posix con dn '%s'."
-
-#~ msgid "Saving of user/posix account with dn '%s' failed."
-#~ msgstr "Ha fallado la grabación de la cuenta de usuario/posix con dn '%s'."
-
-#~ msgid "POSIX account"
-#~ msgstr "Cuenta POSIX"
-
-#~ msgid "Group ID"
-#~ msgstr "Identificador (ID) de Grupo"
-
-#~ msgid "Force password change on login"
-#~ msgstr "Forzar el cambio de contraseña al iniciar"
-
-#~ msgid "Shadow min"
-#~ msgstr "Shadow min"
-
-#~ msgid "Shadow max"
-#~ msgstr "Shadow max"
-
-#~ msgid "Shadow warning"
-#~ msgstr "Shadow warning"
-
-#~ msgid "Shadow inactive"
-#~ msgstr "Shadow inactive"
-
-#~ msgid "Shadow expire"
-#~ msgstr "Shadow expire"
-
-#~ msgid "System trust model"
-#~ msgstr "Sistema de confianza"
-
-#~ msgid "Saving of user/netatalk account with dn '%s' failed."
-#~ msgstr ""
-#~ "Ha fallado la grabación de la cuenta de usuario/Netatalk con dn '%s'."
-
-#~ msgid "Removing of user/netatalk account with dn '%s' failed."
-#~ msgstr ""
-#~ "Ha fallado la eliminación de la cuenta de usuario/Netatalk con dn '%s'."
-
-#~ msgid "User home path"
-#~ msgstr "Ruta del directorio del usuario"
-
-#~ msgid "Removing of user/samba account with dn '%s' failed."
-#~ msgstr ""
-#~ "Ha fallado la eliminación de la cuenta de usuario/samba con dn '%s'."
-
-#~ msgid "Saving of user/samba account with dn '%s' failed."
-#~ msgstr "Ha fallado la grabación de la cuenta de usuario/samaba con dn '%s'."
-
-#~ msgid "Allow user to change password"
-#~ msgstr "Permitir al usuario cambiar su contraseña"
-
-#~ msgid "Account expires"
-#~ msgstr "La cuenta expirará después de"
-
-#~ msgid "Password expires"
-#~ msgstr "La contraseña expira en"
-
-#~ msgid "Logon hours"
-#~ msgstr "Horario de inicio de sesión"
-
-#~ msgid "Generic home directory"
-#~ msgstr "Directorio predeterminado de usuario"
-
-#~ msgid "Generic samba home drive"
-#~ msgstr "Unidad predeterminada de usuario samba"
-
-#~ msgid "Generic script path"
-#~ msgstr "Ruta predeterminada del Script"
-
-#~ msgid "Generic profile path"
-#~ msgstr "Ruta predeterminada del Perfil"
-
-#~ msgid "Allow connection from"
-#~ msgstr "Permitir la conexión desde"
-
-#~ msgid ""
-#~ "Your selected profile server '%s' is no longer available. Setting profile "
-#~ "server to '%s'."
-#~ msgstr ""
-#~ "El servidor de perfiles seleccionado '%s' no es accesible. Configurando "
-#~ "el servidor de perfiles a '%s'."
-
-#~ msgid ""
-#~ "Your selected profile server '%s' is no longer available. Profile server "
-#~ "configuration is resetted."
-#~ msgstr ""
-#~ "El servidor de perfiles seleccionado '%s' no es accesible. La "
-#~ "configuración del servidor de perfiles se ha borrado."
-
-#~ msgid "You are not allowed to write Logon scripts."
-#~ msgstr "No tiene permisos para escribir scripts de inicio de sesión."
-
-#~ msgid "GOsa default printer flag is not allowed within groups."
-#~ msgstr ""
-#~ "El indicador de impresora por defecto de GOsa no está permitido dentro de "
-#~ "los grupos."
-
-#~ msgid "Removing of user/environment account with dn '%s' failed."
-#~ msgstr "Ha fallado al eliminar la extensión de usuario/entorno con dn '%s'."
-
-#~ msgid "Saving of user/environment account with dn '%s' failed."
-#~ msgstr ""
-#~ "Ha fallado la grabación de la cuenta de usuario/entorno con dn '%s'."
-
-#~ msgid "Environment settings"
-#~ msgstr "Configuración de entorno"
-
-#~ msgid "Command to extend the list of possible screen resolutions"
-#~ msgstr "Comando para extender la lista de resoluciones de pantalla posibles"
-
-#~ msgid "Profile quota"
-#~ msgstr "Cuota del Perfil"
-
-#~ msgid "Specified name should only consist of upper-/lowercase characters."
-#~ msgstr ""
-#~ "El nombre introducido solo debe tener caracteres mayúsculas-/minúsculas."
-
-#~ msgid ""
-#~ "Can't remove kioks profile, it is still in use by the following objects '%"
-#~ "s'."
-#~ msgstr ""
-#~ "No se puede eliminar el perfil Kiosk, está todavía en uso por el objeto '%"
-#~ "s'."
-
-#~ msgid "Removing of user/generic account with dn '%s' failed."
-#~ msgstr ""
-#~ "La eliminación de la cuenta genérica/usuario con dn '%s' ha fallado."
-
-#~ msgid "Saving of user/generic account with dn '%s' failed."
-#~ msgstr "La grabación de la cuenta genérica/usuario con dn '%s' ha fallado."
-
-#~ msgid "Generic user settings"
-#~ msgstr "Configuración genéricos del usuario"
-
-#~ msgid "User identification"
-#~ msgstr "Identificación de Usuario"
-
-#~ msgid "Home phone number"
-#~ msgstr "Número de teléfono personal"
-
-#~ msgid "Gender"
-#~ msgstr "Sexo"
-
-#~ msgid "Preferred language"
-#~ msgstr "Idioma preferido"
-
-#~ msgid "Department number"
-#~ msgstr "Número del departamento"
-
-#~ msgid "Employee number"
-#~ msgstr "Número de empleado"
-
-#~ msgid "Room number"
-#~ msgstr "Número de habitación"
-
-#~ msgid "Telefon number"
-#~ msgstr "Número de teléfono"
-
-#~ msgid "Mobile number"
-#~ msgstr "Teléfono móvil"
-
-#~ msgid "User certificates"
-#~ msgstr "Certificados de usuario"
-
-#~ msgid "Fax number"
-#~ msgstr "Número de Fax"
-
-#~ msgid "Removing of user/webDAV account with dn '%s' failed."
-#~ msgstr "Ha fallado al eliminar la cuenta usuario/WebDAV con dn '%s'."
-
-#~ msgid "Saving of user/webDAV account with dn '%s' failed."
-#~ msgstr "Ha fallado al guardar la cuenta de usuario/WebDAV con dn '%s'."
-
-#~ msgid "Connectivity addon"
-#~ msgstr "Conectividad adicional"
-
-#~ msgid "Removing of user/proxy account with dn '%s' failed."
-#~ msgstr ""
-#~ "Ha fallado la eliminación de la cuenta de usuario/Proxy con dn '%s'."
-
-#~ msgid "Saving of user/proxy account with dn '%s' failed."
-#~ msgstr "Ha fallado la grabación de la cuenta de usuario/proxy con dn '%s'."
-
-#~ msgid "Filter unwanted content"
-#~ msgstr "Filtrar contenido no requerido"
-
-#~ msgid "Limit proxy access"
-#~ msgstr "Limitar acceso al Proxy"
-
-#~ msgid "Removing of user/PPTP account with dn '%s' failed."
-#~ msgstr "Ha fallado la eliminación de la cuenta de usuario/PPTP con dn '%s'."
-
-#~ msgid "Saving of user/PPTP account with dn '%s' failed."
-#~ msgstr "Ha fallado la grabación de la cuenta de usuario/PPTP con dn '%s'."
-
-#~ msgid "Removing of user/intranet account with dn '%s' failed."
-#~ msgstr ""
-#~ "Ha fallado la eliminación de la cuenta de usuario/intranet con dn '%s'."
-
-#~ msgid "Saving of user/intranet account with dn '%s' failed."
-#~ msgstr ""
-#~ "Ha fallado la grabación de la cuenta de usuario/intranet con dn '%s'."
-
-#~ msgid "Intranet account settings"
-#~ msgstr "Configuración de la cuenta de intranet"
-
-#~ msgid "Removing of user/PHPgw account with dn '%s' failed."
-#~ msgstr ""
-#~ "Ha fallado la eliminación de la cuenta de usuario/PHPgw con dn '%s'."
-
-#~ msgid "Saving of user/PHPgw account with dn '%s' failed."
-#~ msgstr ""
-#~ "Ha fallado la eliminación de la cuenta de usuario/PHPgw con dn '%s'."
-
-#~ msgid "PHP GW"
-#~ msgstr "PHP GW"
-
-#~ msgid "PHP GW account settings"
-#~ msgstr "Configuración de la cuenta PHP GW"
-
-#~ msgid "Kolab account settings"
-#~ msgstr "Configuración cuenta Kolab"
-
-#~ msgid "Free busy future"
-#~ msgstr "Disponibilidad futura"
-
-#~ msgid "Mail size restriction"
-#~ msgstr "Restricciones al tamaño de mensaje"
-
-#~ msgid "Free busy information"
-#~ msgstr "Información de disponibilidad"
-
-#~ msgid "Removing of user/pureftpd account with dn '%s' failed."
-#~ msgstr ""
-#~ "Ha fallado la eliminación de la cuenta de usuario/pureftpd con dn '%s'."
-
-#~ msgid "Value specified as 'Quota files' is not valid."
-#~ msgstr "El valor introducido como 'Cuota de Archivos' no es válido."
-
-#~ msgid "Value specified as 'Quota size' is not valid."
-#~ msgstr "El valor introducido como 'Cuota de Tamaño' no es válido."
-
-#~ msgid "Value specified as 'Upload ratio' is not valid."
-#~ msgstr "El valor introducido en 'Relación de subida'no es válido."
-
-#~ msgid "Value specified as 'Download ratio' is not valid."
-#~ msgstr "El valor introducido en 'Relación de descarga' no es válido."
-
-#~ msgid "Saving of user/pureftpd account with dn '%s' failed."
-#~ msgstr ""
-#~ "Ha fallado la eliminación de la cuenta de usuario/pureftpd con dn '%s'."
-
-#~ msgid "Ftp"
-#~ msgstr "Ftp"
-
-#~ msgid "Pure ftp account"
-#~ msgstr "Cuenta Pure ftp"
-
-#~ msgid "Quota files"
-#~ msgstr "Cuota de ficheros"
-
-#~ msgid "Upload ratio"
-#~ msgstr "Relación de subida"
-
-#~ msgid "Quota MBytes"
-#~ msgstr "Cuota en Mbytes"
-
-#~ msgid "Download ratio"
-#~ msgstr "Relación de descarga"
-
-#~ msgid "Upload bandwith"
-#~ msgstr "Ancho de banda de subida"
-
-#~ msgid "Download bandwith"
-#~ msgstr "Ancho de banda de descarga"
-
-#~ msgid "Openexchange"
-#~ msgstr "Open-Xchange"
-
-#~ msgid "Removing of user/oxchange addressbook account with dn '%s' failed."
-#~ msgstr ""
-#~ "Ha fallado la eliminación de la cuenta de libreta de direcciones de "
-#~ "usuario/open-xchange con dn '%s'."
-
-#~ msgid "Saving of user/oxchange account with dn '%s' failed."
-#~ msgstr ""
-#~ "Ha fallado la grabación de la cuenta de usuario/open-xchange con dn '%s'."
-
-#~ msgid "Creating of user/oxchange account with dn '%s' failed."
-#~ msgstr ""
-#~ "Ha fallado la creación de la cuenta de usuario/open-xchange con dn '%s'."
-
-#~ msgid ""
-#~ "Something went wrong while saving oxchange account. Please check the "
-#~ "error log file."
-#~ msgstr ""
-#~ "Algo fue mal mientras grababa la cuenta de oxchange. Por favor compruebe "
-#~ "el archivo de log."
-
-#~ msgid "Open xchange"
-#~ msgstr "Open-Xchange"
-
-#~ msgid "Open xchange account settings"
-#~ msgstr "Activar la configuración de cuenta de Open-Xchange"
-
-#~ msgid "OXAppointmentDays"
-#~ msgstr "Días de recordatorio OX"
-
-#~ msgid "OXTaskDays"
-#~ msgstr "Días para tareas OX"
-
-#~ msgid "OXTimeZone"
-#~ msgstr "Zona de uso horario del usuario OX"
-
-#~ msgid "Open groupware account settings"
-#~ msgstr "Activar la configuración de la Cuenta OpenGroupware"
-
-#~ msgid "Removing of user/PHPscheduleit account with dn '%s' failed."
-#~ msgstr ""
-#~ "Ha fallado la eliminación de la cuenta usuario/PHPscheduleit con dn '%s'."
-
-#~ msgid "Saving of user/PHPscheduleit account with dn '%s' failed."
-#~ msgstr ""
-#~ "Ha fallado la grabación de la cuenta de usuario/PHPscheduleit con dn '%s'."
-
-#~ msgid "PHP Schedule it settings"
-#~ msgstr "Configuración PHP Schedule it"
-
-#~ msgid "Scalix account"
-#~ msgstr "Cuenta Scalix"
