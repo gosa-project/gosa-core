@@ -612,7 +612,7 @@ class mailgroup extends plugin
       $smarty->assign("JS",$_SESSION['js']);
       $smarty->assign("kolabFolderType_Types",    array (   ''      => _('Unspecified'),  'mail' => _('Mails'),
                                                             'task'  => _('Tasks') ,       'journal' => _('Journals'),
-                                                            'event' => _('Events'),       'contact' => _('Contacts'), 
+                                                            'calendar' => _('Calendar'),       'contact' => _('Contacts'), 
                                                             'note'  => _('Notes')));
       if($this->kolabFolderType_Type == "mail"){
         $smarty->assign("kolabFolderType_SubTypes", array(    
