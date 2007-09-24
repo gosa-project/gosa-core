@@ -46,10 +46,14 @@ class servdb extends plugin
                           "goGlpiServer" => array("goGlpiAdmin","goGlpiDatabase","goGlpiPassword"),
                           "goFonServer" => array("goFonAdmin", "goFonPassword",
                                                 "goFonAreaCode", "goFonCountryCode"));
+  var $orig_dn = "";
 
   function servdb ($config, $dn= NULL, $parent= NULL)
   {
     plugin::plugin ($config, $dn, $parent);
+
+    /* Save original dn */
+    $this->orig_dn = $dn;
 
     /* Make dynamic list of objectClasses */
     foreach ($this->additionaloc as $oc => $dummy){
@@ -272,6 +276,25 @@ class servdb extends plugin
     $ldap->modify ($this->attrs); 
 
     show_ldap_error($ldap->get_error(), _("Saving server db settings failed"));
+
+    /* Update goFonAccounts if server was is renamed.
+       Set attribute goFonHomeServer to current dn
+     */
+    if(in_array("goFonServer",$this->objectclasses)){
+      if($this->orig_dn != "new" && $this->orig_dn != $this->dn){
+        $ldap->cd($this->config->current['BASE']);
+        $ldap->search("(&(goFonHomeServer=*)(|(objectClass=goFonAccount)(objectClass=goFonConference)))",array("goFonHomeServer"));
+        $dns = array();
+        while($attrs = $ldap->fetch()){
+          $dns[] = $attrs['dn'];
+        }
+        foreach($dns as $dn){
+          $ldap->cd($dn);
+          $ldap->modify(array("goFonHomeServer" => $this->dn));
+          show_ldap_error($ldap->get_error(),sprintf(_("Updating gofon home server failed for '%s'."),$dn));
+        }
+      }
+    }
 
     /* Optionally execute a command after we're done */
     if ($this->initially_was_account == $this->is_account){
