@@ -72,7 +72,6 @@ class servDNSeditZoneEntries extends plugin
     foreach($this->Devices as $key => $dev){
       $table .= $this->generateRecordConfigurationRow($key);
     }
-    print_a($this->Devices);
 
     $smarty->assign("disableDialog",$this->disableDialog);
     $smarty->assign("table",$table);;
