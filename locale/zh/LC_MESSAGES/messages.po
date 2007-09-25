@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-19 19:27+0200\n"
+"POT-Creation-Date: 2007-09-25 13:10+0200\n"
 "PO-Revision-Date: 2007-07-11 18:45+0800\n"
 "Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
 "Language-Team: Chinese Simplified <zh@li.org>\n"
@@ -192,7 +192,7 @@ msgstr "设备"
 #: contrib/gosa.conf:177 contrib/gosa.conf:216
 #: plugins/admin/systems/class_systemManagement.inc:878
 #: plugins/admin/ogroups/class_ogroupManagement.inc:371
-#: plugins/personal/environment/environment.tpl:171
+#: plugins/personal/environment/environment.tpl:204
 #: plugins/generic/references/class_reference.inc:52
 msgid "Printer"
 msgstr "打印机"
@@ -648,10 +648,10 @@ msgstr "所以，如果您确定，请按“删除”继续，否则按“取消
 #: plugins/personal/mail/copypaste.tpl:62 plugins/personal/mail/generic.tpl:59
 #: plugins/personal/mail/generic.tpl:212
 #: plugins/personal/connectivity/kolab.tpl:35
-#: plugins/personal/environment/class_environment.inc:654
-#: plugins/personal/environment/environment.tpl:137
-#: plugins/personal/environment/environment.tpl:165
-#: plugins/personal/environment/environment.tpl:181
+#: plugins/personal/environment/class_environment.inc:662
+#: plugins/personal/environment/environment.tpl:170
+#: plugins/personal/environment/environment.tpl:198
+#: plugins/personal/environment/environment.tpl:214
 #: plugins/personal/posix/paste_generic.tpl:64
 #: plugins/personal/posix/generic.tpl:74
 #: plugins/personal/posix/generic.tpl:104
@@ -1193,9 +1193,9 @@ msgstr "封锁号码"
 #: plugins/personal/environment/kioskManagement.tpl:14
 #: plugins/personal/environment/selectPrinterDialog.tpl:65
 #: plugins/personal/environment/hotplugDialog.tpl:63
-#: plugins/personal/environment/environment.tpl:119
-#: plugins/personal/environment/environment.tpl:136
-#: plugins/personal/environment/environment.tpl:180
+#: plugins/personal/environment/environment.tpl:152
+#: plugins/personal/environment/environment.tpl:169
+#: plugins/personal/environment/environment.tpl:213
 #: plugins/personal/posix/trust_machines.tpl:39
 #: plugins/personal/posix/paste_generic.tpl:63
 #: plugins/personal/posix/generic.tpl:73
@@ -1514,7 +1514,7 @@ msgstr "点击下面的“编辑”按钮修改该对话框内的信息"
 #: plugins/personal/netatalk/main.inc:112
 #: plugins/personal/connectivity/main.inc:130
 #: plugins/personal/environment/main.inc:116
-#: plugins/personal/environment/environment.tpl:138
+#: plugins/personal/environment/environment.tpl:171
 #: plugins/personal/nagios/main.inc:116 plugins/personal/posix/main.inc:123
 #: plugins/personal/samba/main.inc:116 plugins/personal/generic/main.inc:175
 #: plugins/gofon/phoneaccount/main.inc:113
@@ -1916,7 +1916,7 @@ msgstr "真"
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:279
 #: plugins/personal/connectivity/class_kolabAccount.inc:240
 #: plugins/personal/environment/kioskManagement.tpl:15
-#: plugins/personal/environment/environment.tpl:120
+#: plugins/personal/environment/environment.tpl:153
 #: plugins/personal/generic/generic_certs.tpl:17
 #: plugins/personal/generic/generic_certs.tpl:37
 #: plugins/personal/generic/generic_certs.tpl:57
@@ -3003,7 +3003,7 @@ msgid "Server language"
 msgstr "服务器语言"
 
 #: plugins/admin/groups/acl_definition.inc:445
-#: plugins/personal/environment/class_environment.inc:1150
+#: plugins/personal/environment/class_environment.inc:1158
 msgid "Administrator"
 msgstr "管理员"
 
@@ -3206,7 +3206,7 @@ msgid "Create new group"
 msgstr "创建新组"
 
 #: plugins/admin/groups/class_divListGroup.inc:93
-#: plugins/personal/environment/environment.tpl:163
+#: plugins/personal/environment/environment.tpl:196
 #: plugins/gofon/macro/class_divListMacros.inc:74
 msgid "New"
 msgstr "新"
@@ -3419,7 +3419,7 @@ msgid "Journals"
 msgstr "小时"
 
 #: plugins/admin/groups/class_groupMail.inc:615
-msgid "Events"
+msgid "Calendar"
 msgstr ""
 
 #: plugins/admin/groups/class_groupMail.inc:615
@@ -5027,7 +5027,7 @@ msgstr "添加在启动中要加载的模块"
 #: plugins/admin/systems/terminalStartup.tpl:66
 #: plugins/admin/systems/servservice.tpl:11
 #: plugins/admin/systems/workstationStartup.tpl:132
-#: plugins/personal/environment/environment.tpl:106
+#: plugins/personal/environment/environment.tpl:139
 msgid "Shares"
 msgstr "共享"
 
@@ -5575,8 +5575,8 @@ msgstr "继承"
 
 #: plugins/admin/systems/class_terminalStartup.inc:204
 #: plugins/admin/systems/class_workstationStartup.inc:647
-#: plugins/personal/environment/class_environment.inc:557
-#: plugins/personal/environment/class_environment.inc:570
+#: plugins/personal/environment/class_environment.inc:565
+#: plugins/personal/environment/class_environment.inc:578
 msgid "You must specify a valid mount point."
 msgstr "您必须提供一个有效的挂载点。"
 
@@ -6017,7 +6017,7 @@ msgstr "登录名"
 
 #: plugins/admin/systems/class_servDHCP.inc:34
 #: plugins/admin/systems/class_servDHCP.inc:312
-#: plugins/admin/systems/class_servDHCP.inc:577
+#: plugins/admin/systems/class_servDHCP.inc:598
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:26
 #, fuzzy
 msgid "Global options"
@@ -6122,18 +6122,18 @@ msgstr "删除 DNS 记录失败"
 msgid "Can't remove DHCP object!"
 msgstr "删除对象"
 
-#: plugins/admin/systems/class_servDHCP.inc:513
-#: plugins/admin/systems/class_servDHCP.inc:516
+#: plugins/admin/systems/class_servDHCP.inc:534
+#: plugins/admin/systems/class_servDHCP.inc:537
 #, fuzzy
 msgid "Can't save DHCP object!"
 msgstr "无法保存空测试。"
 
-#: plugins/admin/systems/class_servDHCP.inc:538
+#: plugins/admin/systems/class_servDHCP.inc:559
 #, fuzzy
 msgid "Saving DHCP service failed"
 msgstr "保存服务器失败"
 
-#: plugins/admin/systems/class_servDHCP.inc:654
+#: plugins/admin/systems/class_servDHCP.inc:675
 #, fuzzy
 msgid ""
 "DHCP configuration set is unknown. Please contact your system administrator."
@@ -6147,7 +6147,7 @@ msgstr "未知"
 
 #: plugins/admin/systems/class_terminalService.inc:91
 #: plugins/admin/systems/class_workstationService.inc:83
-#: plugins/personal/environment/class_environment.inc:205
+#: plugins/personal/environment/class_environment.inc:206
 #, php-format
 msgid ""
 "You have specified an external resolution hook which can't be read, please "
@@ -6369,9 +6369,9 @@ msgid "This device name is already in use."
 msgstr "这个设备名已经被使用。"
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:402
-#: plugins/personal/environment/class_environment.inc:216
-#: plugins/personal/environment/class_environment.inc:457
-#: plugins/personal/environment/class_environment.inc:806
+#: plugins/personal/environment/class_environment.inc:218
+#: plugins/personal/environment/class_environment.inc:465
+#: plugins/personal/environment/class_environment.inc:814
 msgid "None"
 msgstr "无"
 
@@ -6569,7 +6569,8 @@ msgstr "选择安装的显卡需要的显卡驱动"
 
 #: plugins/admin/systems/terminalService.tpl:94
 #: plugins/admin/systems/workstationService.tpl:94
-#: plugins/personal/environment/environment.tpl:87
+#: plugins/personal/environment/environment.tpl:90
+#: plugins/personal/environment/environment.tpl:120
 msgid "Resolution"
 msgstr "分辨率"
 
@@ -6710,46 +6711,51 @@ msgstr "提供的名称已经被使用，请选择另外一个。"
 msgid "Saving workstation services failed"
 msgstr "保存工作站服务失败"
 
-#: plugins/admin/systems/class_servDB.inc:138
-#: plugins/admin/systems/class_servDB.inc:147
-#: plugins/admin/systems/class_servDB.inc:164
-#: plugins/admin/systems/class_servDB.inc:174
-#: plugins/admin/systems/class_servDB.inc:179
-#: plugins/admin/systems/class_servDB.inc:185
+#: plugins/admin/systems/class_servDB.inc:142
+#: plugins/admin/systems/class_servDB.inc:151
+#: plugins/admin/systems/class_servDB.inc:168
+#: plugins/admin/systems/class_servDB.inc:178
+#: plugins/admin/systems/class_servDB.inc:183
+#: plugins/admin/systems/class_servDB.inc:189
 #, php-format
 msgid "The attribute '%s' is empty or contains invalid characters."
 msgstr "属性 '%s' 为空或者包含无效字符。"
 
-#: plugins/admin/systems/class_servDB.inc:154
+#: plugins/admin/systems/class_servDB.inc:158
 #, php-format
 msgid "The imap connect string needs to be in the form '%s'."
 msgstr "Imap 连接字符串格式应该为 '%s' 。"
 
-#: plugins/admin/systems/class_servDB.inc:158
+#: plugins/admin/systems/class_servDB.inc:162
 msgid "The sieve port needs to be numeric."
 msgstr "Sieve 端口应为数字。"
 
-#: plugins/admin/systems/class_servDB.inc:169
+#: plugins/admin/systems/class_servDB.inc:173
 #, php-format
 msgid "The specified kerberos password is empty."
 msgstr "提供的 kerberos 口令为空。"
 
-#: plugins/admin/systems/class_servDB.inc:211
-#: plugins/admin/systems/class_servDB.inc:309
+#: plugins/admin/systems/class_servDB.inc:215
+#: plugins/admin/systems/class_servDB.inc:332
 #, php-format
 msgid ""
 "You can't remove the asterisk database extension, it is still in use by "
 "these objects '%s'."
 msgstr "您不能删除 asterisk 数据库扩展，它仍被这些对象 '%s' 使用。"
 
-#: plugins/admin/systems/class_servDB.inc:220
+#: plugins/admin/systems/class_servDB.inc:224
 #, php-format
 msgid "The imap name string needs to be a hostname or an IP-address."
 msgstr "Imap 名字字符串应该为一个主机名或者 IP 地址。"
 
-#: plugins/admin/systems/class_servDB.inc:274
+#: plugins/admin/systems/class_servDB.inc:278
 msgid "Saving server db settings failed"
 msgstr "保存服务器数据库设置失败"
+
+#: plugins/admin/systems/class_servDB.inc:294
+#, fuzzy, php-format
+msgid "Updating gofon home server failed for '%s'."
+msgstr "更新 DNS 服务失败"
 
 #: plugins/admin/systems/servkolab.tpl:9
 msgid "Postfix mydomain"
@@ -11928,7 +11934,7 @@ msgstr "用户环境设置"
 
 #: plugins/personal/environment/logonManagement.tpl:1
 #: plugins/personal/environment/logonManagement.tpl:5
-#: plugins/personal/environment/environment.tpl:127
+#: plugins/personal/environment/environment.tpl:160
 msgid "Logon script management"
 msgstr "登录脚本管理"
 
@@ -11977,88 +11983,88 @@ msgstr "选择一个部门来做查询"
 msgid "Regular expression for        matching hotplugs"
 msgstr "用于匹配热插拔的正则表达式"
 
-#: plugins/personal/environment/class_environment.inc:183
+#: plugins/personal/environment/class_environment.inc:184
 msgid "auto"
 msgstr "自动"
 
-#: plugins/personal/environment/class_environment.inc:305
-#: plugins/personal/environment/class_environment.inc:349
+#: plugins/personal/environment/class_environment.inc:313
+#: plugins/personal/environment/class_environment.inc:357
 msgid "Remove environment extension"
 msgstr "删除环境变量扩展"
 
-#: plugins/personal/environment/class_environment.inc:306
-#: plugins/personal/environment/class_environment.inc:350
+#: plugins/personal/environment/class_environment.inc:314
+#: plugins/personal/environment/class_environment.inc:358
 msgid "Environment extension enabled. You can disable it by clicking below."
 msgstr "环境变量扩展已经启用。您可以点击下面按钮禁用。"
 
-#: plugins/personal/environment/class_environment.inc:315
-#: plugins/personal/environment/class_environment.inc:320
-#: plugins/personal/environment/class_environment.inc:355
-#: plugins/personal/environment/class_environment.inc:360
+#: plugins/personal/environment/class_environment.inc:323
+#: plugins/personal/environment/class_environment.inc:328
+#: plugins/personal/environment/class_environment.inc:363
+#: plugins/personal/environment/class_environment.inc:368
 msgid "Add environment extension"
 msgstr "添加环境变量扩展"
 
-#: plugins/personal/environment/class_environment.inc:316
-#: plugins/personal/environment/class_environment.inc:356
+#: plugins/personal/environment/class_environment.inc:324
+#: plugins/personal/environment/class_environment.inc:364
 msgid "Environment extension disabled. You can enable it by clicking below."
 msgstr "环境变量扩展已禁用。您可以点击下面按钮重新启用。"
 
-#: plugins/personal/environment/class_environment.inc:321
-#: plugins/personal/environment/class_environment.inc:361
+#: plugins/personal/environment/class_environment.inc:329
+#: plugins/personal/environment/class_environment.inc:369
 msgid ""
 "Environment extension disabled. You have to setup a posix account before you "
 "can enable this feature."
 msgstr "环境变量扩展已禁用。在启用这个功能前，您必须设置一个 posix 账号。"
 
-#: plugins/personal/environment/class_environment.inc:559
+#: plugins/personal/environment/class_environment.inc:567
 msgid "Spaces are not allowed in the mount path!"
 msgstr "挂载路径不允许有空格！"
 
-#: plugins/personal/environment/class_environment.inc:640
-#: plugins/personal/environment/class_environment.inc:641
+#: plugins/personal/environment/class_environment.inc:648
 #: plugins/personal/environment/class_environment.inc:649
-#: plugins/personal/environment/class_environment.inc:650
+#: plugins/personal/environment/class_environment.inc:657
+#: plugins/personal/environment/class_environment.inc:658
 msgid "Reset password hash"
 msgstr "重置口令"
 
-#: plugins/personal/environment/class_environment.inc:655
+#: plugins/personal/environment/class_environment.inc:663
 msgid "Delete share entry"
 msgstr "删除共享条目"
 
-#: plugins/personal/environment/class_environment.inc:809
+#: plugins/personal/environment/class_environment.inc:817
 #, php-format
 msgid ""
 "The selected kiosk profile '%s' is no longer available, setting current "
 "profile to 'none'."
 msgstr "选择的 kiosk profile '%s' 不存在，设置当前 profile 为 'none'。"
 
-#: plugins/personal/environment/class_environment.inc:855
+#: plugins/personal/environment/class_environment.inc:863
 msgid "Removing environment information failed"
 msgstr "删除环境变量信息失败"
 
-#: plugins/personal/environment/class_environment.inc:907
+#: plugins/personal/environment/class_environment.inc:915
 msgid "Please set a valid profile quota size."
 msgstr "请输入一个有效的 profile quota 大小。"
 
-#: plugins/personal/environment/class_environment.inc:914
+#: plugins/personal/environment/class_environment.inc:922
 msgid ""
 "You need to setup a valid posix extension in order to enable evironment "
 "features."
 msgstr "为了启用环境功能，您需要设置一个有效的 posix 扩展。"
 
-#: plugins/personal/environment/class_environment.inc:952
+#: plugins/personal/environment/class_environment.inc:960
 msgid "Can't save new kiosk profiles, possibly permission denied for folder"
 msgstr "无法保存新的 kiosk profiles，可能是目录的权限不对"
 
-#: plugins/personal/environment/class_environment.inc:1105
+#: plugins/personal/environment/class_environment.inc:1113
 msgid "Adding environment information failed"
 msgstr "添加环境信息失败"
 
-#: plugins/personal/environment/class_environment.inc:1118
+#: plugins/personal/environment/class_environment.inc:1126
 msgid "group share"
 msgstr "组共享"
 
-#: plugins/personal/environment/class_environment.inc:1155
+#: plugins/personal/environment/class_environment.inc:1163
 msgid "Default printer"
 msgstr "缺省打印机"
 
@@ -12095,8 +12101,8 @@ msgid "The environment extension is currently disabled."
 msgstr "环境变量扩展当前被禁用。"
 
 #: plugins/personal/environment/environment.tpl:8
-#: plugins/personal/environment/environment.tpl:103
-#: plugins/personal/environment/environment.tpl:148
+#: plugins/personal/environment/environment.tpl:136
+#: plugins/personal/environment/environment.tpl:181
 msgid "Environment managment settings"
 msgstr "环境变量管理设置"
 
@@ -12124,60 +12130,64 @@ msgstr "Profil quota"
 msgid "Cache profile localy"
 msgstr "本地缓存 profile"
 
-#: plugins/personal/environment/environment.tpl:63
+#: plugins/personal/environment/environment.tpl:66
+#: plugins/personal/environment/environment.tpl:101
 msgid "Kiosk profile settings"
 msgstr "Kiosk profile 设置"
 
-#: plugins/personal/environment/environment.tpl:66
+#: plugins/personal/environment/environment.tpl:69
+#: plugins/personal/environment/environment.tpl:104
 msgid "Kiosk profile"
 msgstr "Kiosk profile"
 
-#: plugins/personal/environment/environment.tpl:72
+#: plugins/personal/environment/environment.tpl:75
+#: plugins/personal/environment/environment.tpl:108
 msgid "Manage"
 msgstr "管理"
 
-#: plugins/personal/environment/environment.tpl:82
+#: plugins/personal/environment/environment.tpl:85
+#: plugins/personal/environment/environment.tpl:115
 msgid "Resolution changeable during session"
 msgstr "会话期间分辨率可调"
 
-#: plugins/personal/environment/environment.tpl:111
+#: plugins/personal/environment/environment.tpl:144
 msgid "User used to connect to the share"
 msgstr "用户习惯连接这个共享"
 
-#: plugins/personal/environment/environment.tpl:112
+#: plugins/personal/environment/environment.tpl:145
 msgid "Select a share"
 msgstr "选择一个共享"
 
-#: plugins/personal/environment/environment.tpl:118
+#: plugins/personal/environment/environment.tpl:151
 msgid "Mount path"
 msgstr "挂载路径"
 
-#: plugins/personal/environment/environment.tpl:126
+#: plugins/personal/environment/environment.tpl:159
 msgid "Logon scripts"
 msgstr "登录脚本"
 
-#: plugins/personal/environment/environment.tpl:151
+#: plugins/personal/environment/environment.tpl:184
 msgid "Hotplug devices"
 msgstr "热插拔设备"
 
-#: plugins/personal/environment/environment.tpl:152
+#: plugins/personal/environment/environment.tpl:185
 msgid "Hotplug device settings"
 msgstr "热插拔设备设置"
 
-#: plugins/personal/environment/environment.tpl:164
+#: plugins/personal/environment/environment.tpl:197
 msgid "Existing"
 msgstr "现存"
 
-#: plugins/personal/environment/environment.tpl:172
+#: plugins/personal/environment/environment.tpl:205
 msgid "Printer settings"
 msgstr "打印机设置"
 
-#: plugins/personal/environment/environment.tpl:182
+#: plugins/personal/environment/environment.tpl:215
 msgid "Toggle admin"
 msgstr "切换管理员"
 
-#: plugins/personal/environment/environment.tpl:184
-#: plugins/personal/environment/environment.tpl:186
+#: plugins/personal/environment/environment.tpl:217
+#: plugins/personal/environment/environment.tpl:219
 msgid "Toggle default"
 msgstr "切换缺省"
 

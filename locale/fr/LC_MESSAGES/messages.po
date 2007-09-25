@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-19 19:27+0200\n"
-"PO-Revision-Date: 2007-09-19 19:30+0200\n"
+"POT-Creation-Date: 2007-09-25 13:10+0200\n"
+"PO-Revision-Date: 2007-09-25 13:33+0200\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team: Français <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -190,7 +190,7 @@ msgstr "Périphériques"
 #: contrib/gosa.conf:177 contrib/gosa.conf:216
 #: plugins/admin/systems/class_systemManagement.inc:878
 #: plugins/admin/ogroups/class_ogroupManagement.inc:371
-#: plugins/personal/environment/environment.tpl:171
+#: plugins/personal/environment/environment.tpl:204
 #: plugins/generic/references/class_reference.inc:52
 msgid "Printer"
 msgstr "Imprimante"
@@ -659,10 +659,10 @@ msgstr ""
 #: plugins/personal/mail/copypaste.tpl:62 plugins/personal/mail/generic.tpl:59
 #: plugins/personal/mail/generic.tpl:212
 #: plugins/personal/connectivity/kolab.tpl:35
-#: plugins/personal/environment/class_environment.inc:654
-#: plugins/personal/environment/environment.tpl:137
-#: plugins/personal/environment/environment.tpl:165
-#: plugins/personal/environment/environment.tpl:181
+#: plugins/personal/environment/class_environment.inc:662
+#: plugins/personal/environment/environment.tpl:170
+#: plugins/personal/environment/environment.tpl:198
+#: plugins/personal/environment/environment.tpl:214
 #: plugins/personal/posix/paste_generic.tpl:64
 #: plugins/personal/posix/generic.tpl:74
 #: plugins/personal/posix/generic.tpl:104
@@ -1203,9 +1203,9 @@ msgstr "Numéros bloqués"
 #: plugins/personal/environment/kioskManagement.tpl:14
 #: plugins/personal/environment/selectPrinterDialog.tpl:65
 #: plugins/personal/environment/hotplugDialog.tpl:63
-#: plugins/personal/environment/environment.tpl:119
-#: plugins/personal/environment/environment.tpl:136
-#: plugins/personal/environment/environment.tpl:180
+#: plugins/personal/environment/environment.tpl:152
+#: plugins/personal/environment/environment.tpl:169
+#: plugins/personal/environment/environment.tpl:213
 #: plugins/personal/posix/trust_machines.tpl:39
 #: plugins/personal/posix/paste_generic.tpl:63
 #: plugins/personal/posix/generic.tpl:73
@@ -1531,7 +1531,7 @@ msgstr ""
 #: plugins/personal/netatalk/main.inc:112
 #: plugins/personal/connectivity/main.inc:130
 #: plugins/personal/environment/main.inc:116
-#: plugins/personal/environment/environment.tpl:138
+#: plugins/personal/environment/environment.tpl:171
 #: plugins/personal/nagios/main.inc:116 plugins/personal/posix/main.inc:123
 #: plugins/personal/samba/main.inc:116 plugins/personal/generic/main.inc:175
 #: plugins/gofon/phoneaccount/main.inc:113
@@ -1916,7 +1916,7 @@ msgstr "Cible"
 #: plugins/admin/fai/class_faiPartitionTableEntry.inc:279
 #: plugins/personal/connectivity/class_kolabAccount.inc:240
 #: plugins/personal/environment/kioskManagement.tpl:15
-#: plugins/personal/environment/environment.tpl:120
+#: plugins/personal/environment/environment.tpl:153
 #: plugins/personal/generic/generic_certs.tpl:17
 #: plugins/personal/generic/generic_certs.tpl:37
 #: plugins/personal/generic/generic_certs.tpl:57
@@ -3032,7 +3032,7 @@ msgid "Server language"
 msgstr "Langue du serveur"
 
 #: plugins/admin/groups/acl_definition.inc:445
-#: plugins/personal/environment/class_environment.inc:1150
+#: plugins/personal/environment/class_environment.inc:1158
 msgid "Administrator"
 msgstr "Administrateur"
 
@@ -3238,7 +3238,7 @@ msgid "Create new group"
 msgstr "Créer un nouveau groupe"
 
 #: plugins/admin/groups/class_divListGroup.inc:93
-#: plugins/personal/environment/environment.tpl:163
+#: plugins/personal/environment/environment.tpl:196
 #: plugins/gofon/macro/class_divListMacros.inc:74
 msgid "New"
 msgstr "Nouveau"
@@ -3458,8 +3458,8 @@ msgid "Journals"
 msgstr "Journaux"
 
 #: plugins/admin/groups/class_groupMail.inc:615
-msgid "Events"
-msgstr "Evénements"
+msgid "Calendar"
+msgstr "Calendrier"
 
 #: plugins/admin/groups/class_groupMail.inc:615
 #: plugins/admin/systems/glpi.tpl:40 plugins/admin/systems/glpiPrinter.tpl:66
@@ -5090,7 +5090,7 @@ msgstr "Ajouter des modules à charger au démarrage"
 #: plugins/admin/systems/terminalStartup.tpl:66
 #: plugins/admin/systems/servservice.tpl:11
 #: plugins/admin/systems/workstationStartup.tpl:132
-#: plugins/personal/environment/environment.tpl:106
+#: plugins/personal/environment/environment.tpl:139
 msgid "Shares"
 msgstr "Partages"
 
@@ -5414,7 +5414,7 @@ msgstr "Cacher les paramètres avancés"
 
 #: plugins/admin/systems/dhcp_advanced.tpl:15
 msgid "DHCP statements"
-msgstr "Options DHCP"
+msgstr "Directives DHCP"
 
 #: plugins/admin/systems/dhcp_advanced.tpl:28
 msgid "DHCP options"
@@ -5651,8 +5651,8 @@ msgstr "hérité"
 
 #: plugins/admin/systems/class_terminalStartup.inc:204
 #: plugins/admin/systems/class_workstationStartup.inc:647
-#: plugins/personal/environment/class_environment.inc:557
-#: plugins/personal/environment/class_environment.inc:570
+#: plugins/personal/environment/class_environment.inc:565
+#: plugins/personal/environment/class_environment.inc:578
 msgid "You must specify a valid mount point."
 msgstr "Veuillez indiquer un point de montage valide."
 
@@ -6109,7 +6109,7 @@ msgstr "Journaux systèmes"
 
 #: plugins/admin/systems/class_servDHCP.inc:34
 #: plugins/admin/systems/class_servDHCP.inc:312
-#: plugins/admin/systems/class_servDHCP.inc:577
+#: plugins/admin/systems/class_servDHCP.inc:598
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:26
 msgid "Global options"
 msgstr "Options globales"
@@ -6208,16 +6208,16 @@ msgstr "La suppression des entrées du DHCP à échoué"
 msgid "Can't remove DHCP object!"
 msgstr "Impossible d'enlever l'objet DHCP !"
 
-#: plugins/admin/systems/class_servDHCP.inc:513
-#: plugins/admin/systems/class_servDHCP.inc:516
+#: plugins/admin/systems/class_servDHCP.inc:534
+#: plugins/admin/systems/class_servDHCP.inc:537
 msgid "Can't save DHCP object!"
 msgstr "Impossible de sauver l'objet DHCP !"
 
-#: plugins/admin/systems/class_servDHCP.inc:538
+#: plugins/admin/systems/class_servDHCP.inc:559
 msgid "Saving DHCP service failed"
 msgstr "La sauvegarde du service DHCP à échoué"
 
-#: plugins/admin/systems/class_servDHCP.inc:654
+#: plugins/admin/systems/class_servDHCP.inc:675
 msgid "DHCP configuration set is unknown. Please contact your system administrator."
 msgstr ""
 "La configuration DHCP est inconnue. Veuillez contacter votre administrateur "
@@ -6231,7 +6231,7 @@ msgstr "inconnu"
 
 #: plugins/admin/systems/class_terminalService.inc:91
 #: plugins/admin/systems/class_workstationService.inc:83
-#: plugins/personal/environment/class_environment.inc:205
+#: plugins/personal/environment/class_environment.inc:206
 #, php-format
 msgid ""
 "You have specified an external resolution hook which can't be read, please "
@@ -6460,9 +6460,9 @@ msgid "This device name is already in use."
 msgstr "Le nom de ce périphérique est déjà utilisé."
 
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:402
-#: plugins/personal/environment/class_environment.inc:216
-#: plugins/personal/environment/class_environment.inc:457
-#: plugins/personal/environment/class_environment.inc:806
+#: plugins/personal/environment/class_environment.inc:218
+#: plugins/personal/environment/class_environment.inc:465
+#: plugins/personal/environment/class_environment.inc:814
 msgid "None"
 msgstr "Aucun"
 
@@ -6670,7 +6670,8 @@ msgstr ""
 
 #: plugins/admin/systems/terminalService.tpl:94
 #: plugins/admin/systems/workstationService.tpl:94
-#: plugins/personal/environment/environment.tpl:87
+#: plugins/personal/environment/environment.tpl:90
+#: plugins/personal/environment/environment.tpl:120
 msgid "Resolution"
 msgstr "Résolution"
 
@@ -6813,32 +6814,32 @@ msgstr "Le nom indiqué est déjà utilisé, veuillez en choisir un autre."
 msgid "Saving workstation services failed"
 msgstr "La sauvegarde des services de la station de travail à échoué"
 
-#: plugins/admin/systems/class_servDB.inc:138
-#: plugins/admin/systems/class_servDB.inc:147
-#: plugins/admin/systems/class_servDB.inc:164
-#: plugins/admin/systems/class_servDB.inc:174
-#: plugins/admin/systems/class_servDB.inc:179
-#: plugins/admin/systems/class_servDB.inc:185
+#: plugins/admin/systems/class_servDB.inc:142
+#: plugins/admin/systems/class_servDB.inc:151
+#: plugins/admin/systems/class_servDB.inc:168
+#: plugins/admin/systems/class_servDB.inc:178
+#: plugins/admin/systems/class_servDB.inc:183
+#: plugins/admin/systems/class_servDB.inc:189
 #, php-format
 msgid "The attribute '%s' is empty or contains invalid characters."
 msgstr "La valeur '%s' est vide ou contient des caractères invalides."
 
-#: plugins/admin/systems/class_servDB.inc:154
+#: plugins/admin/systems/class_servDB.inc:158
 #, php-format
 msgid "The imap connect string needs to be in the form '%s'."
 msgstr "La chaîne de connexion imap doit être de la forme '%s'."
 
-#: plugins/admin/systems/class_servDB.inc:158
+#: plugins/admin/systems/class_servDB.inc:162
 msgid "The sieve port needs to be numeric."
 msgstr "Le port sieve doit être numérique."
 
-#: plugins/admin/systems/class_servDB.inc:169
+#: plugins/admin/systems/class_servDB.inc:173
 #, php-format
 msgid "The specified kerberos password is empty."
 msgstr "Le mot de passe Kerberos est vide."
 
-#: plugins/admin/systems/class_servDB.inc:211
-#: plugins/admin/systems/class_servDB.inc:309
+#: plugins/admin/systems/class_servDB.inc:215
+#: plugins/admin/systems/class_servDB.inc:332
 #, php-format
 msgid ""
 "You can't remove the asterisk database extension, it is still in use by "
@@ -6847,14 +6848,19 @@ msgstr ""
 "Impossible d'enlever l'extension de la base de données asterisk ,elle est "
 "utilisé par ce(s) objets '%s'."
 
-#: plugins/admin/systems/class_servDB.inc:220
+#: plugins/admin/systems/class_servDB.inc:224
 #, php-format
 msgid "The imap name string needs to be a hostname or an IP-address."
 msgstr "La chaîne de connexion imap doit être un nom d'hôte ou une adresse IP."
 
-#: plugins/admin/systems/class_servDB.inc:274
+#: plugins/admin/systems/class_servDB.inc:278
 msgid "Saving server db settings failed"
 msgstr "La sauvegarde des paramètres de la base de données à échoué"
+
+#: plugins/admin/systems/class_servDB.inc:294
+#, php-format
+msgid "Updating gofon home server failed for '%s'."
+msgstr "La mise à jour du serveur de téléphonie pour l'utilisateur '%s' à échoué."
 
 #: plugins/admin/systems/servkolab.tpl:9
 msgid "Postfix mydomain"
@@ -12253,7 +12259,7 @@ msgstr "Utiliser les préférences d'environnement"
 
 #: plugins/personal/environment/logonManagement.tpl:1
 #: plugins/personal/environment/logonManagement.tpl:5
-#: plugins/personal/environment/environment.tpl:127
+#: plugins/personal/environment/environment.tpl:160
 msgid "Logon script management"
 msgstr "Administration des scripts de démarrage"
 
@@ -12302,38 +12308,38 @@ msgstr "Sélectionner le département où sera effectuée la recherche"
 msgid "Regular expression for        matching hotplugs"
 msgstr "Expression régulière concordant avec les noms des périphériques hotplug"
 
-#: plugins/personal/environment/class_environment.inc:183
+#: plugins/personal/environment/class_environment.inc:184
 msgid "auto"
 msgstr "automatique"
 
-#: plugins/personal/environment/class_environment.inc:305
-#: plugins/personal/environment/class_environment.inc:349
+#: plugins/personal/environment/class_environment.inc:313
+#: plugins/personal/environment/class_environment.inc:357
 msgid "Remove environment extension"
 msgstr "Enlever l'extension d'environnement"
 
-#: plugins/personal/environment/class_environment.inc:306
-#: plugins/personal/environment/class_environment.inc:350
+#: plugins/personal/environment/class_environment.inc:314
+#: plugins/personal/environment/class_environment.inc:358
 msgid "Environment extension enabled. You can disable it by clicking below."
 msgstr ""
 "Extension d'environnement activée. Vous pouvez la désactiver en cliquant sur "
 "le bouton ci-dessous."
 
-#: plugins/personal/environment/class_environment.inc:315
-#: plugins/personal/environment/class_environment.inc:320
-#: plugins/personal/environment/class_environment.inc:355
-#: plugins/personal/environment/class_environment.inc:360
+#: plugins/personal/environment/class_environment.inc:323
+#: plugins/personal/environment/class_environment.inc:328
+#: plugins/personal/environment/class_environment.inc:363
+#: plugins/personal/environment/class_environment.inc:368
 msgid "Add environment extension"
 msgstr "Ajouter une extension d'environnement"
 
-#: plugins/personal/environment/class_environment.inc:316
-#: plugins/personal/environment/class_environment.inc:356
+#: plugins/personal/environment/class_environment.inc:324
+#: plugins/personal/environment/class_environment.inc:364
 msgid "Environment extension disabled. You can enable it by clicking below."
 msgstr ""
 "Extension d'environnement désactivé. Vous pouvez l'activer en cliquant sur "
 "le bouton ci-dessous."
 
-#: plugins/personal/environment/class_environment.inc:321
-#: plugins/personal/environment/class_environment.inc:361
+#: plugins/personal/environment/class_environment.inc:329
+#: plugins/personal/environment/class_environment.inc:369
 msgid ""
 "Environment extension disabled. You have to setup a posix account before you "
 "can enable this feature."
@@ -12341,22 +12347,22 @@ msgstr ""
 "Extension d'environnement désactivée. Vous devez d'abord créer un compte "
 "posix avant de pouvoir activer cette extension."
 
-#: plugins/personal/environment/class_environment.inc:559
+#: plugins/personal/environment/class_environment.inc:567
 msgid "Spaces are not allowed in the mount path!"
 msgstr "Les espaces ne sont pas autorisées dans le point de montage !"
 
-#: plugins/personal/environment/class_environment.inc:640
-#: plugins/personal/environment/class_environment.inc:641
+#: plugins/personal/environment/class_environment.inc:648
 #: plugins/personal/environment/class_environment.inc:649
-#: plugins/personal/environment/class_environment.inc:650
+#: plugins/personal/environment/class_environment.inc:657
+#: plugins/personal/environment/class_environment.inc:658
 msgid "Reset password hash"
 msgstr "Réinitialiser le mot de passe"
 
-#: plugins/personal/environment/class_environment.inc:655
+#: plugins/personal/environment/class_environment.inc:663
 msgid "Delete share entry"
 msgstr "Supprimer ce partage"
 
-#: plugins/personal/environment/class_environment.inc:809
+#: plugins/personal/environment/class_environment.inc:817
 #, php-format
 msgid ""
 "The selected kiosk profile '%s' is no longer available, setting current "
@@ -12365,15 +12371,15 @@ msgstr ""
 "Le profil kiosk sélectionné '%s' n'est plus disponible, le profil actuel est "
 "changé en 'aucun'."
 
-#: plugins/personal/environment/class_environment.inc:855
+#: plugins/personal/environment/class_environment.inc:863
 msgid "Removing environment information failed"
 msgstr "La suppression de l'extension d'environnement à échoué"
 
-#: plugins/personal/environment/class_environment.inc:907
+#: plugins/personal/environment/class_environment.inc:915
 msgid "Please set a valid profile quota size."
 msgstr "Veuillez indiquer un quota valide pour le profil."
 
-#: plugins/personal/environment/class_environment.inc:914
+#: plugins/personal/environment/class_environment.inc:922
 msgid ""
 "You need to setup a valid posix extension in order to enable evironment "
 "features."
@@ -12381,21 +12387,21 @@ msgstr ""
 "Vous devez configurer correctement l'extension posix pour activer "
 "l'extension d'environnement."
 
-#: plugins/personal/environment/class_environment.inc:952
+#: plugins/personal/environment/class_environment.inc:960
 msgid "Can't save new kiosk profiles, possibly permission denied for folder"
 msgstr ""
 "Impossible de sauver de nouveaux profiles kiosk, je n'ai pas les droits sur "
 "le répertoire"
 
-#: plugins/personal/environment/class_environment.inc:1105
+#: plugins/personal/environment/class_environment.inc:1113
 msgid "Adding environment information failed"
 msgstr "L'ajout de l'extension d'environnement à échoué"
 
-#: plugins/personal/environment/class_environment.inc:1118
+#: plugins/personal/environment/class_environment.inc:1126
 msgid "group share"
 msgstr "partage de groupe"
 
-#: plugins/personal/environment/class_environment.inc:1155
+#: plugins/personal/environment/class_environment.inc:1163
 msgid "Default printer"
 msgstr "Imprimante par défaut"
 
@@ -12440,8 +12446,8 @@ msgid "The environment extension is currently disabled."
 msgstr "L'extension d'environnement est actuellement désactivée."
 
 #: plugins/personal/environment/environment.tpl:8
-#: plugins/personal/environment/environment.tpl:103
-#: plugins/personal/environment/environment.tpl:148
+#: plugins/personal/environment/environment.tpl:136
+#: plugins/personal/environment/environment.tpl:181
 msgid "Environment managment settings"
 msgstr "Paramètres des préférences d'environnement"
 
@@ -12469,60 +12475,64 @@ msgstr "Quota du profil"
 msgid "Cache profile localy"
 msgstr "Cacher le profile localement"
 
-#: plugins/personal/environment/environment.tpl:63
+#: plugins/personal/environment/environment.tpl:66
+#: plugins/personal/environment/environment.tpl:101
 msgid "Kiosk profile settings"
 msgstr "Paramètres du profil Kiosk"
 
-#: plugins/personal/environment/environment.tpl:66
+#: plugins/personal/environment/environment.tpl:69
+#: plugins/personal/environment/environment.tpl:104
 msgid "Kiosk profile"
 msgstr "Profil Kiosk"
 
-#: plugins/personal/environment/environment.tpl:72
+#: plugins/personal/environment/environment.tpl:75
+#: plugins/personal/environment/environment.tpl:108
 msgid "Manage"
 msgstr "Gérer"
 
-#: plugins/personal/environment/environment.tpl:82
+#: plugins/personal/environment/environment.tpl:85
+#: plugins/personal/environment/environment.tpl:115
 msgid "Resolution changeable during session"
 msgstr "La résolution peut être changée pendant la session"
 
-#: plugins/personal/environment/environment.tpl:111
+#: plugins/personal/environment/environment.tpl:144
 msgid "User used to connect to the share"
 msgstr "Utilisateur sélectionné pour la connexion au partage"
 
-#: plugins/personal/environment/environment.tpl:112
+#: plugins/personal/environment/environment.tpl:145
 msgid "Select a share"
 msgstr "Sélectionnez un partage"
 
-#: plugins/personal/environment/environment.tpl:118
+#: plugins/personal/environment/environment.tpl:151
 msgid "Mount path"
 msgstr "Point de montage"
 
-#: plugins/personal/environment/environment.tpl:126
+#: plugins/personal/environment/environment.tpl:159
 msgid "Logon scripts"
 msgstr "Scripts de démarrage"
 
-#: plugins/personal/environment/environment.tpl:151
+#: plugins/personal/environment/environment.tpl:184
 msgid "Hotplug devices"
 msgstr "Périphériques Hotplug"
 
-#: plugins/personal/environment/environment.tpl:152
+#: plugins/personal/environment/environment.tpl:185
 msgid "Hotplug device settings"
 msgstr "Paramètre des périphériques Hotplug"
 
-#: plugins/personal/environment/environment.tpl:164
+#: plugins/personal/environment/environment.tpl:197
 msgid "Existing"
 msgstr "Existant"
 
-#: plugins/personal/environment/environment.tpl:172
+#: plugins/personal/environment/environment.tpl:205
 msgid "Printer settings"
 msgstr "Paramètres de l'imprimante"
 
-#: plugins/personal/environment/environment.tpl:182
+#: plugins/personal/environment/environment.tpl:215
 msgid "Toggle admin"
 msgstr "Afficher/Cacher l'administrateur"
 
-#: plugins/personal/environment/environment.tpl:184
-#: plugins/personal/environment/environment.tpl:186
+#: plugins/personal/environment/environment.tpl:217
+#: plugins/personal/environment/environment.tpl:219
 msgid "Toggle default"
 msgstr "Afficher/Cacher défaut"
 
