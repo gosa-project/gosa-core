@@ -462,6 +462,27 @@ class servdhcp extends plugin
         continue;
       }
 
+      /* Opdate dhcp option 'server-name' to actual server name */
+      if($this->dn != $this->orig_dn){
+        $fixed = FALSE;
+        foreach(array("dhcpHost","dhcpSubnet","dhcpGroup","dhcpSharedNetwork") as $object){
+          if(in_array($object,$data['objectClass']) && isset($data['dhcpOption'])){
+            foreach($data['dhcpOption'] as $key => $option){
+              if(preg_match("/^server-name /",$option)){
+                $data['dhcpOption'][$key] = "server-name ".$this->cn;
+                $data['MODIFIED'] = TRUE; 
+                break;
+              }
+            }
+          }
+
+          /* Skip next loops if entry is updated */
+          if($fixed){
+            break;
+          }
+        }
+      }
+
       /* Modify existing entry? */
       if (isset($data['MODIFIED']) || $this->orig_dn != $this->dn){
 
