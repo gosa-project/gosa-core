@@ -92,11 +92,6 @@ class usertabs extends tabs
     $baseobject= $this->by_object['user'];
 
     if ($this->dn != 'new'){
-  
-      /* Call user->check(); to enforce a value for new_dn */
-      if($baseobject->new_dn == ""){
-        $baseobject->check();
-      }
       $new_dn= $baseobject->new_dn;
       if (strtolower($this->dn) != strtolower($new_dn)){
 

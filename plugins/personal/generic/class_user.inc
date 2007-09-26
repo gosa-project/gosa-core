@@ -111,6 +111,8 @@ class user extends plugin
     /* Load base attributes */
     plugin::plugin ($config, $dn);
 
+    $this->new_dn = $dn;
+
     if ($this->config->current['GOVERNMENTMODE']){
       /* Fix public visible attribute if unset */
       if (!isset($this->attrs['publicVisible'])){
