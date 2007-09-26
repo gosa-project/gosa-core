@@ -485,6 +485,18 @@ class application extends plugin
     if(isset($_POST['cn'])){
       $this->cn = $_POST['cn'];
     }
+
+    $tmp = search_config($this->config->data,"faiManagement","CLASS");
+    if(!empty($tmp)) {
+      if(!preg_match("/^ou=apps,/",$_SESSION['appfilter']['release'])){
+        $this->isReleaseApplikation = true;  
+      }
+    }
+
+    if($_SESSION['CurrentMainBase']){
+      $this->base= $_SESSION['CurrentMainBase'];
+    }
+    
   }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
