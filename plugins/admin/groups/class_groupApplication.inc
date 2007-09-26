@@ -931,8 +931,9 @@ class appgroup extends plugin
         $r = $tmp[$k];
         $this->FAIrelease = $k;
         $base = $r; 
-    
-        print_red(sprintf(_("Can't resolve the release name '%s', setting release name to '%s'. Possibly the objects base has changed."),$old_r,$k));
+        if($old_r != "/"){ 
+          print_red(sprintf(_("Can't resolve the release name '%s', setting release name to '%s'. Possibly the objects base has changed."),$old_r,$k));
+        }
       }
 
       $base = preg_replace("/ou=apps,.*$/","ou=apps,".$this->curbase,$base);
