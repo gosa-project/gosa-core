@@ -113,11 +113,11 @@ class servdnseditZone extends plugin
     /* Detect Network class */
     if(!empty($this->ReverseZone)){
 
-      $dots = count(split(".",$this->ReverseZone));
-      if($dots == 0){
+      $dots = count(split("\.",preg_replace("/^[^\/]*+\//","",$this->ReverseZone)));
+      if($dots == 1){
         $this->NetworkClass = "A";  
         $this->ReverseZone .= ".0.0.0"; 
-      }elseif($dots == 1){
+      }elseif($dots == 2){
         $this->NetworkClass = "B";  
         $this->ReverseZone .= ".0.0"; 
       }else{
