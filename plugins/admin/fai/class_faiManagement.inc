@@ -412,6 +412,17 @@ class faiManagement extends plugin
       $appsrc = preg_replace("/ou=fai,ou=configs,ou=systems,/","ou=apps,",$baseToUse); 
       $appdst = preg_replace("/ou=fai,ou=configs,ou=systems,/","ou=apps,","ou=".$name.",".$baseToUse) ; 
 
+      /* Check if source depeartments exist */
+      foreach(array($baseToUse,$appsrc) as $dep){
+        $ldap->cd($this->config->current['BASE']);
+        $ldap->cat($dep);
+        if(!$ldap->count()){
+          $ldap->create_missing_trees($dep);
+        }
+      }
+    
+
+
       /* Print out html introduction */
       echo '  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
         <html>
