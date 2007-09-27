@@ -436,6 +436,7 @@ class appgroup extends plugin
 
     $this->diffAppsInReleases();
     $only_once = false;
+    $once =FALSE;
     foreach($_POST as $name => $value){
       
       if((preg_match("/AddSep_/",$name))&&(!$only_once)){
@@ -474,18 +475,34 @@ class appgroup extends plugin
           }
         }
       }
-  
-      if(preg_match("/DelCat_/",$name)){
-        $n = preg_replace("/DelCat_/","",$name);
-        $app = base64_decode( preg_replace("/_.*$/","",$n));
-        foreach($this->Categories as $key =>  $cat){
-          if($cat == $app){
-            foreach($this->Categories as $p => $n){
-              if(preg_match("/^".$key."\/.*/",$p)){
-                unset($this->Categories[$p]);    
+
+ 
+      if(preg_match("/DelCat_/",$name) && !$once){
+        $once =TRUE;
+        $cat = preg_replace("/DelCat_/","",$name);
+        $cat = trim(base64_decode( preg_replace("/_.*$/","",$cat)));
+
+        $free_apps = array();
+
+        if(isset($this->gosaMemberApplication[$cat]) && is_array($this->gosaMemberApplication[$cat])){
+          foreach($this->gosaMemberApplication[$cat] as $app){
+            $free_apps[] = $app['App'];
+          }
+          @unset($this->gosaMemberApplication[$cat]);
+          @unset($this->Categories[$cat]);
+          foreach($this->Categories as $key => $name){
+            if(preg_match("/^".$cat."\/.*/",$key)){
+              foreach($this->gosaMemberApplication[$key] as $app){
+                $free_apps[] = $app['App'];
               }
+              @unset($this->gosaMemberApplication[$key]);
+              @unset($this->Categories[$key]);
             }
-            unset($this->Categories[$key]);
+          }
+        }
+        foreach($free_apps as $app){
+          if(isset($this->used_apps[$app])){
+            unset($this->used_apps[$app]);
           }
         }
       }
