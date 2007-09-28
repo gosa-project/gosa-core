@@ -2,6 +2,12 @@ GOsa2 changelog
 ===============
 
 * gosa 2.5.13
+  - Fixed renaming of asterisk servers
+  - Fixed phoneAccount removing/saving.
+  - Added take over option to dns/dhcp service
+  - Checked and updated dns client/server management
+  - Added support for kolabSharedFolderTypes
+  - Fixed FAI dependencies/problems with deactivated fai support
   - Re-added ISC DHCP support
   - Fixes for the mail based bugtracker
   - Fixed autouid problem with slashes
