@@ -106,6 +106,10 @@ class workstartup extends plugin
 
         $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'][] = $attr;
 
+        if(!isset($attr['description'])){
+          $attr['description'][0] = "";
+        }
+
         if(in_array('FAIpackageList',$attr['objectClass'])){
           $tmp2[$cn]['FAIpackageList']['obj']   = 'FAIpackageList'; 
           $tmp2[$cn]['FAIpackageList']['kzl']   = 'Pl';
