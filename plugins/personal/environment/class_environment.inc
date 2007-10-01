@@ -110,6 +110,16 @@ class environment extends plugin
         $tmp2['name']        = $tmp[0]; 
         $tmp2['description'] = $tmp[1]; 
         $tmp2['id']          = $tmp[2]; 
+        if(isset($tmp[3])){
+          $tmp2['produkt']     = $tmp[3];
+        }else{
+          $tmp2['produkt']     = "";
+        }
+        if(isset($tmp[4])){
+          $tmp2['vendor']      = $tmp[4];
+        }else{
+          $tmp2['vendor']      = "";
+        }
         $this->gotoHotplugDevices[$tmp[0]]=$tmp2;
       }
     }

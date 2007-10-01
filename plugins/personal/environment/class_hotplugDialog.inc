@@ -10,7 +10,7 @@ class hotplugDialog extends plugin
 
   var $HOT_name                 = "";
   var $HOT_description          = "";
-  var $HOT_id                   = "";
+  var $HOT_id                   = "0x0000";
   var $HOT_produkt              = "";
   var $HOT_vendor               = "";
 
@@ -126,10 +126,8 @@ class hotplugDialog extends plugin
       }
 
       /* Skip serial check if vendor and product id are given */
-      if((empty($this->HOT_vendor)) || (empty($this->HOT_produkt))){
-        if(empty($this->HOT_id) || preg_match("/[\|\*]/i",$this->HOT_id)){
-          $message[]=_("Please specify a valid iSerial.");
-        }
+      if(empty($this->HOT_id) || preg_match("/[\|\*]/i",$this->HOT_id)){
+        $message[]=_("Please specify a valid iSerial.");
       }
       if(empty($this->HOT_vendor) || !$this->is_2byteHex($this->HOT_vendor)){
         $message[]=_("Please specify a valid vendor ID. (2 byte hex like '0xFFFF')");
