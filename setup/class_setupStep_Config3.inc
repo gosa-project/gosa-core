@@ -28,7 +28,7 @@ class Step_Config3 extends setup_step
 
   var $optional = array(
               "strict_units" => false,
-              "list_summary" => true,
+              "list_summary" => false,
               "forceglobals" => true,
               "forcessl" => false,
               "ldapstats" => false,
