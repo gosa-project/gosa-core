@@ -3,22 +3,22 @@ GOsa2 changelog
 
 * gosa 2.5.13
   - Fixed renaming of asterisk servers
-  - Fixed phoneAccount removing/saving.
+  - Fixed phoneAccount removing/saving
+  - Re-added ISC DHCP support
   - Added take over option to dns/dhcp service
-  - Checked and updated dns client/server management
+  - Check for updated dns client/server management
   - Added support for kolabSharedFolderTypes
   - Fixed FAI dependencies/problems with deactivated fai support
-  - Re-added ISC DHCP support
   - Fixes for the mail based bugtracker
   - Fixed autouid problem with slashes
   - Added list sorting for FAI script lists
   - Added copy'n paste for mimetypes
-  - Cut'n paste objects are now greyed out
+  - Objects beeing are now greyed out until pasted
   - Added swedish locale
   - Improved language detection
   - Added a statistic footer to lists
-  - Added the ssh plugin
-  - Layout fixes
+  - Added plugin for managing SSH keys
+  - Fixes in the screenlayout for browser compatibility
 
 * gosa 2.5.12
   - Fixed problems with automatic reverse zones
