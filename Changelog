@@ -1,6 +1,9 @@
 GOsa2 changelog
 ===============
 
+* gosa 2.5.14
+  - Fixed saving of A/B networks reverse zone entries
+
 * gosa 2.5.13
   - Fixed renaming of asterisk servers
   - Fixed phoneAccount removing/saving
