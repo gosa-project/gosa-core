@@ -39,6 +39,7 @@ require_once ("class_ldap.inc");
 require_once ("class_config.inc");
 require_once ("class_userinfo.inc");
 require_once ("class_plugin.inc");
+require_once ("class_dhcpPlugin.inc");
 require_once ("class_pluglist.inc");
 require_once ("class_tabs.inc");
 require_once ("class_mail-methods.inc");
