@@ -172,13 +172,13 @@ class divListFai extends MultiSelectWindow
      ********************/
 
      $objects = array(
-           "FAIpartitionTable"  => array("IMG"=> "images/fai_partitionTable.png", "NAME"=>"Partition table","KZL"=> "PT", "VAR"=>"ShowPartitions"),
-           "FAIpackageList"     => array("IMG"=> "images/fai_packages.png",       "NAME"=>"Package list" ,  "KZL"=> "PL", "VAR"=>"ShowPackages"),
-           "FAIscript"          => array("IMG"=> "images/fai_script.png",         "NAME"=>"Scripts" ,       "KZL"=> "S",  "VAR"=>"ShowScripts"),
-           "FAIvariable"        => array("IMG"=> "images/fai_variable.png",       "NAME"=>"Variables" ,     "KZL"=> "V",  "VAR"=>"ShowVariables"),
-           "FAIhook"            => array("IMG"=> "images/fai_hook.png",           "NAME"=>"Hooks",          "KZL"=> "H",  "VAR"=>"ShowHooks"),
-           "FAIprofile"         => array("IMG"=> "images/fai_profile.png",        "NAME"=>"Profile" ,       "KZL"=> "P",  "VAR"=>"ShowProfiles"),
-           "FAItemplate"        => array("IMG"=> "images/fai_template.png",       "NAME"=>"Templates" ,     "KZL"=> "T",  "VAR"=>"ShowTemplates"));
+           "FAIpartitionTable"  => array("IMG"=> "images/fai_partitionTable.png", "NAME"=>_("Partition table"),"KZL"=> "PT", "VAR"=>"ShowPartitions"),
+           "FAIpackageList"     => array("IMG"=> "images/fai_packages.png",       "NAME"=>_("Package list") ,  "KZL"=> "PL", "VAR"=>"ShowPackages"),
+           "FAIscript"          => array("IMG"=> "images/fai_script.png",         "NAME"=>_("Scripts") ,       "KZL"=> "S",  "VAR"=>"ShowScripts"),
+           "FAIvariable"        => array("IMG"=> "images/fai_variable.png",       "NAME"=>_("Variables") ,     "KZL"=> "V",  "VAR"=>"ShowVariables"),
+           "FAIhook"            => array("IMG"=> "images/fai_hook.png",           "NAME"=>_("Hooks"),          "KZL"=> "H",  "VAR"=>"ShowHooks"),
+           "FAIprofile"         => array("IMG"=> "images/fai_profile.png",        "NAME"=>_("Profile") ,       "KZL"=> "P",  "VAR"=>"ShowProfiles"),
+           "FAItemplate"        => array("IMG"=> "images/fai_template.png",       "NAME"=>_("Templates") ,     "KZL"=> "T",  "VAR"=>"ShowTemplates"));
 
     $editlink ="<a href='?plug=".$_GET['plug']."&amp;edit_entry=%KEY%' title='%TITLE%'>%NAME%</a>";
 
