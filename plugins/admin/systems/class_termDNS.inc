@@ -214,7 +214,7 @@ class termDNS extends plugin
         $this->dialog = new dhcpHost($this->dhcpHostEntry,TRUE);
       }
       $this->dialog->cn = $this->cn; 
-      $this->dialog->dhcpHWAddress = $this->macAddress; 
+      $this->dialog->dhcpHWAddress = "ethernet ".$this->macAddress; 
       if(!empty($this->ipHostNumber)){
         $this->dialog->statements['fixed-address'] = $this->ipHostNumber; 
       }
@@ -534,6 +534,16 @@ class termDNS extends plugin
   
     /* New entry */
     if($this->dhcpEnabled){
+
+      /* Write mac address to dhcp settings */
+      if($this->dhcp_is_Account){
+        if(!isset($this->dhcpHostEntry['dhcpHWAddress'][0]) || 
+            !preg_match("/ethernet ".$this->macAddress."/",$this->dhcpHostEntry['dhcpHWAddress'][0])){
+          $this->dhcpHostEntry['dhcpHWAddress'] = array("ethernet ".$this->macAddress);
+          $this->dhcpHostEntry['MODIFIED'] = TRUE;
+        }
+      }
+  
 
       /* Unset dhcpStatements if this attribute is empty  */
       if(isset($this->dhcpHostEntry['dhcpStatements']) && 
