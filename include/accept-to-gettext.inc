@@ -86,6 +86,10 @@ function find_match($curlscore,$curcscore,$curgtlang,$langval,$charval,
 
 function al2gt($gettextlangs, $mime) 
 {
+  /* Check if ACCEPT_LANGUAGE isset */
+  if(!isset($_SERVER["HTTP_ACCEPT_LANGUAGE"])){
+    $_SERVER["HTTP_ACCEPT_LANGUAGE"] = "";
+  }
 
   /* default to "everything is acceptable", as RFC2616 specifies */
   $acceptLang=(($_SERVER["HTTP_ACCEPT_LANGUAGE"] == '') ? '*' :
