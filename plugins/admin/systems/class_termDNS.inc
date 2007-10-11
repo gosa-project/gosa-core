@@ -13,6 +13,10 @@ class termDNS extends plugin
 
   var $ipHostNumber   = "";    // IP address 
   var $macAddress     = "";    // Mac address 
+
+  var $orig_ipHostNumber   = "";    // IP address 
+  var $orig_macAddress     = "";    // Mac address 
+
   var $cn             = "";    // CN of currently edited device 
   var $OrigCn         = "";    // Initial cn
   var $IPisMust       = false;
@@ -31,6 +35,7 @@ class termDNS extends plugin
   var $initial_dhcpHostEntry    = array();
   var $initial_dhcp_is_Account  = FALSE;
 
+  var $used_ip_mac              = array();  
 
   /* DNS attributes  
    */
@@ -144,6 +149,24 @@ class termDNS extends plugin
       }
    
     }
+
+    /* Create a list of used mac and ip addresses */
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(|(macAddress=*)(ipHostNumber=*))",array("macAddress","ipHostNumber"));
+    while($attrs = $ldap->fetch()){
+      if(isset($attrs['ipHostNumber'][0])){
+        $this->used_ip_mac["ip:".$attrs['ipHostNumber'][0]] = "ip:".$attrs['ipHostNumber'][0];
+      }
+      if(isset($attrs['macAddress'][0])){
+        $this->used_ip_mac["mac:".$attrs['macAddress'][0]] = "mac:".$attrs['macAddress'][0];
+      }
+    } 
+
+    /* Save initial ip and mac values, to be able 
+        check if the used values are already in use */ 
+    $this->orig_ipHostNumber   = $this->ipHostNumber;  
+    $this->orig_macAddress     = $this->macAddress;
  
     /* Store initally account settings 
      */
@@ -418,6 +441,18 @@ class termDNS extends plugin
 
     if($this->dhcpEnabled && $this->dhcp_is_Account && $this->dhcpParentNode != "" && count($this->dhcpHostEntry) == 0){
       $message[] =_("You have not configured your dhcp settings yet.");
+    }
+    
+    /* Check if mac and ip are already used */
+    if(!empty($this->ipHostNumber) && 
+        $this->ipHostNumber != $this->orig_ipHostNumber && 
+        in_array("ip:".$this->ipHostNumber,$this->used_ip_mac)){
+      $message[] =_("The specified IP address is already in use.");
+    }
+    if(!empty($this->macAddress) && 
+        $this->macAddress != $this->orig_macAddress && 
+        in_array("mac:".$this->macAddress,$this->used_ip_mac)){
+      $message[] =_("The specified MAC address is already in use.");
     }
 
     /* Check if ip must be given
