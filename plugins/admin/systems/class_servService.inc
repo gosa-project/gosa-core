@@ -97,7 +97,7 @@ class servservice extends plugin
     /* Check if the share is used by someone */
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(|(gotoProfileServer=*|$id)(gotoShare=*|$id|*))", array("cn"));
+    $ldap->search("(|(gotoProfileServer=*|$id)(gotoShare=*|$id|*||*))", array("cn"));
     $cnt= $ldap->count();
     if ($cnt){
       $msg= sprintf(_("The share can't be removed since it is still used by %d users:"), $cnt);
