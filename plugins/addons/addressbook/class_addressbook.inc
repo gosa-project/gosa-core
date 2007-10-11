@@ -363,7 +363,16 @@ class addressbook extends plugin
 
 					$this->telephone_list[$attrs['sn'][0].$attrs['dn']]=
 
-						"<td class=\"phonelist\" title=\"".$attrs['sn'][0].", ".$attrs['givenName'][0]."\" onClick='location.href=\"main.php?plug=".validate($_GET['plug'])."&amp;start=".validate($_GET['start'])."&amp;show=".base64_encode($attrs['dn'])."\"'><a style='vertical-align:middle;' href=\"main.php?plug=".validate($_GET['plug'])."&amp;start=".validate($_GET['start'])."&amp;show=".base64_encode($attrs['dn'])."\">".$attrs['sn'][0].", ".$attrs['givenName'][0].
+            "<td class=\"phonelist\" title=\"".$attrs['sn'][0].", ".$attrs['givenName'][0].
+              "\"onClick='location.href=\"main.php?plug=".validate($_GET['plug']).
+                       "&amp;start=".validate($_GET['start']).
+                       "&amp;show=".urlencode(base64_encode($attrs['dn']))."\"'>
+            <a style='vertical-align:middle;' href=\"main.php?plug=".validate($_GET['plug']).
+                       "&amp;start=".validate($_GET['start']).
+                       "&amp;show=".urlencode(base64_encode($attrs['dn']))."\">".
+            $attrs['sn'][0].", ".$attrs['givenName'][0].
+
+
 						"</a>
 						</td>
 						<td class=\"phonelist\" title=\""._("Dial")." ".$attrs['telephoneNumber'][0]."\">
