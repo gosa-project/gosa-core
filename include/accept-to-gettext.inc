@@ -165,8 +165,8 @@ function al2gt($gettextlangs, $mime)
       $alscores[$noct[0]] = "";
     }
   
-    if(!isset($alscores[$gtcs])){
-      $alscores[$gtcs] = "";
+    if(!isset($acscores[$gtcs])){
+      $acscores[$gtcs] = "";
     }
     $testvals=array(
         array($alscores[$allang], $acscores[$gtcs]),
