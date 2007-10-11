@@ -327,19 +327,33 @@ class config  {
     $ldap= $this->get_ldap_link();
     $ldap->cd ($this->current['BASE']);
     if (!isset($this->current['MAILMETHOD'])){
-    	$this->current['MAILMETHOD']= "";
+	$this->current['MAILMETHOD']= "";
     }
-    $this->data['SERVERS']['IMAP']= array();
-    $old_err = error_reporting(0);
-    while ($attrs= $ldap->fetch()){
-      $name= $attrs['goImapName'][0];
-      $this->data['SERVERS']['IMAP'][$name]= array( "connect" => $attrs['goImapConnect'][0],
-          "admin" => $attrs['goImapAdmin'][0],
-          "password" => $attrs['goImapPassword'][0],
-          "sieve_server" => $attrs['goImapSieveServer'][0],
-          "sieve_port" => $attrs['goImapSievePort'][0]);
+    if ($this->current['MAILMETHOD'] == ""){
+	    $ldap->search ("(objectClass=goMailServer)", array('cn'));
+	    $this->data['SERVERS']['IMAP']= array();
+	    error_reporting(0);
+	    while ($attrs= $ldap->fetch()){
+	      $name= $attrs['cn'][0];
+	      $this->data['SERVERS']['IMAP'][$name]= $name;
+	    }
+	    error_reporting(E_ALL);
+    } else {
+	    $ldap->search ("(objectClass=goImapServer)", array('goImapName', 'goImapConnect', 'goImapAdmin', 'goImapPassword',
+							       'goImapSieveServer', 'goImapSievePort'));
+
+	    $this->data['SERVERS']['IMAP']= array();
+	    error_reporting(0);
+	    while ($attrs= $ldap->fetch()){
+	      $name= $attrs['goImapName'][0];
+	      $this->data['SERVERS']['IMAP'][$name]= array( "connect" => $attrs['goImapConnect'][0],
+		  "admin" => $attrs['goImapAdmin'][0],
+		  "password" => $attrs['goImapPassword'][0],
+		  "sieve_server" => $attrs['goImapSieveServer'][0],
+		  "sieve_port" => $attrs['goImapSievePort'][0]);
+	    }
+	    error_reporting(E_ALL);
     }
-    error_reporting($old_err);
 
     /* Get kerberos server. FIXME: only one is supported currently */
     $ldap->cd ($this->current['BASE']);
