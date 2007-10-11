@@ -444,12 +444,12 @@ class termDNS extends plugin
     }
     
     /* Check if mac and ip are already used */
-    if(!empty($this->ipHostNumber) && 
+    if(!empty($this->ipHostNumber) && $this->DNS_is_account && 
         $this->ipHostNumber != $this->orig_ipHostNumber && 
         in_array("ip:".$this->ipHostNumber,$this->used_ip_mac)){
       $message[] =_("The specified IP address is already in use.");
     }
-    if(!empty($this->macAddress) && 
+    if(!empty($this->macAddress) && $this->dhcp_is_Account && 
         $this->macAddress != $this->orig_macAddress && 
         in_array("mac:".$this->macAddress,$this->used_ip_mac)){
       $message[] =_("The specified MAC address is already in use.");
