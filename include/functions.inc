@@ -755,9 +755,27 @@ function get_permissions ($dn, $subtreeACL)
 }
 
 
-function get_module_permission($acl_array, $module, $dn)
-{
-  global $ui;
+function get_module_permission($acl_array, $module, $dn, $checkTag= TRUE)
+  global $ui, $config;
+
+  /* Check for strict tagging */
+  if ($checkTag && isset($config->current['STRICT_UNITS']) &&
+      preg_match('/^(yes|true)$/i', $config->current['STRICT_UNITS']) &&
+      $ui->gosaUnitTag != ""){
+    $size= 0;
+    foreach ($config->tdepartments as $tdn => $tag){
+      if (preg_match("/$tdn$/", $dn)){
+        if (strlen($tdn) > $size){
+          $ttag= $tag;
+        }
+      }
+    }
+
+    /* We have no permission for areas that don't carry our tag */
+    if ($ttag != $ui->gosaUnitTag){
+      return ("#none#");
+    }
+  }
 
   $final= "";
   foreach($acl_array as $acl){
