@@ -187,7 +187,7 @@ class tabs
 
     /* Setup for all plugins */
     foreach ($this->by_object as $key => $obj){
-      $sacl= get_module_permission($acl, "$key", $this->dn);
+      $sacl= get_module_permission($acl, "$key", $this->dn, false);
       $obj->acl= $sacl;
       if (is_php4()){
         $this->by_object[$key]= $obj;
