@@ -318,22 +318,8 @@ class departmentManagement extends plugin
     $base         = $this->DivListDepartment->selectedBase;
     $base_back    = preg_replace("/^[^,]+,/","",$base);
     $Regex        = $this->DivListDepartment->Regex;
+    $this->departments= array();
   
-    // Create Array to Test if we have a valid back button
-    $tmp = $_SESSION['config']->idepartments;
-
-    // In case of a valid back button create entry
-    if(isset($tmp[$base_back])){
-      $tmp2    ['dn']          = convert_department_dn($base_back);
-
-      // If empty always go to top
-      if(empty($tmp2['dn'])){
-        $tmp2['dn']="/";
-      }
-      $tmp2    ['description'][0] = _("..");
-      $result[$tmp[$base_back]]=$tmp2;
-    }
-
     if($this->DivListDepartment->SubSearch){
       $res= get_list("(&(|(ou=$Regex)(description=$Regex))(objectClass=gosaDepartment))",
           $this->ui->subtreeACL, $base, array("ou", "description"), GL_SIZELIMIT | GL_SUBSEARCH);
@@ -342,7 +328,6 @@ class departmentManagement extends plugin
           $this->ui->subtreeACL, $base, array("ou", "description"), GL_SIZELIMIT );
     }
 
-    $this->departments= array();
     foreach ($res as $key => $value){
 
       /* Don't display base as entry on subsearch */
