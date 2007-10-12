@@ -63,7 +63,7 @@ class kioskManagementDialog extends plugin
         /* check if profile is still in use */ 
         $ldap = $this->config->get_ldap_link();
         $ldap->cd($this->config->current['BASE']);
-        $ldap->search("(gotoKioskProfile=*lhs.schema*)",array("cn","uid","gotoKioskProfile"));
+        $ldap->search("(gotoKioskProfile=*".$name."*)",array("cn","uid","gotoKioskProfile"));
         $used_by = "";
         $cnt = 3;
         while(($attrs = $ldap->fetch()) && ($cnt)){
