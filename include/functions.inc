@@ -755,7 +755,7 @@ function get_permissions ($dn, $subtreeACL)
 }
 
 
-function get_module_permission($acl_array, $module, $dn, $checkTag= TRUE)
+function get_module_permission($acl_array, $module, $dn, $checkTag= TRUE){
   global $ui, $config;
 
   /* Check for strict tagging */
