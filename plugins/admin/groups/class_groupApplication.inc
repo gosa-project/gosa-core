@@ -713,8 +713,9 @@ class appgroup extends plugin
       $tmp = split("/",$this->curCatDir);
       $bbk = "";
       for($i = 0 ; $i < ($cnt -1 ) ; $i++){
-        $bbk .= $tmp[$i];
+        $bbk .= $tmp[$i]."/";
       }
+      $bbk = preg_replace("/\/$/","",$bbk);
       $div2 ->AddEntry(array(array("string"=>sprintf($linkopen,base64_encode($bbk),".. ["._("Back")."]")),array("string"=>"&nbsp;","attach"=>"style='border-right:0px;'")));
     }
 
