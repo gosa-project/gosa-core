@@ -189,7 +189,7 @@ class printerPPDDialog extends plugin
       $Model  = trim(preg_replace("/".$Vendor."/","",$Name));
     }    
 
-    $PrinterName  = $this->cn."-".$Name; 
+    $PrinterName  = $this->cn."-".preg_replace("/[^a-z0-9-_\.]/i","_",$Name); 
     $PPDName      = $Vendor."/".$PrinterName.".ppd";
     
     /* Create the vendors path, if it doesn't exists already */
