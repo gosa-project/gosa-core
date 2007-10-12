@@ -490,14 +490,14 @@ class appgroup extends plugin
           }
           unset($this->gosaMemberApplication[$cat]);
           unset($this->Categories[$cat]);
-          foreach($this->Categories as $key => $name){
-            if(preg_match("/^".$cat."\/.*/",$key)){
-              foreach($this->gosaMemberApplication[$key] as $app){
-                $free_apps[] = $app['App'];
-              }
-              unset($this->gosaMemberApplication[$key]);
-              unset($this->Categories[$key]);
+        }
+        foreach($this->Categories as $key => $name){
+          if(preg_match("/^".normalizePreg($cat)."\/.*/",$key)){
+            foreach($this->gosaMemberApplication[$key] as $app){
+              $free_apps[] = $app['App'];
             }
+            unset($this->gosaMemberApplication[$key]);
+            unset($this->Categories[$key]);
           }
         }
         foreach($free_apps as $app){
