@@ -766,6 +766,7 @@ function get_module_permission($acl_array, $module, $dn, $checkTag= TRUE)
     foreach ($config->tdepartments as $tdn => $tag){
       if (preg_match("/$tdn$/", $dn)){
         if (strlen($tdn) > $size){
+          $size= strlen($tdn);
           $ttag= $tag;
         }
       }
