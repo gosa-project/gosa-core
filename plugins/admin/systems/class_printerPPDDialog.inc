@@ -349,7 +349,8 @@ class printerPPDDialog extends plugin
 
 
   /* Save modified ppd */
-  function save_ppd(){
+  function save_ppd()
+  {
     if($this->ppdManager){
       $this->ppdManager->saveProperties($this->pathToPPD.$this->pathToModified.$this->selectedPPD['link'],$this->ppdConfig);
     }
@@ -492,6 +493,11 @@ class printerPPDDialog extends plugin
     }else{
       print_red(sprintf(_("Removing old ppd file '%s' failed. File does not exists or is not accessible."),$path));
     }
+  }
+
+  function update_ppd_url()
+  {
+    $this->SelectPPD("modified/".$this->selectedPPD['link']);
   }
   
   function check()
