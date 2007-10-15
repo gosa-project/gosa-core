@@ -22,6 +22,14 @@ class printerPPDDialog extends plugin
   var $cn                   = "" ;          // Used to tag the ppds modified by the printer object, 
   var $dialog               = NULL;         // Contains sub dialogs 
 
+  /* If there is already a ppd file for the same type of printer,
+   *  remember the path to ppd file and display a dialog which allows
+   *  to overwrite the current ppd file.
+   */
+  var $add_ppd_later            = "";
+  var $add_later_msg_dialog     = NULL;
+
+
   function printerPPDDialog ($config, $dn= NULL,$ppdfile=NULL )
   {
     plugin::plugin ($config, $dn);
@@ -111,6 +119,15 @@ class printerPPDDialog extends plugin
         print_red(_("Please specify a valid ppd file."));
       }
     }
+
+    /* Overwrite existing PPD file and select it as currently used for this object */
+    if(is_object($this->add_later_msg_dialog) && ($this->add_later_msg_dialog->is_confirmed()) && $this->add_ppd_later != ""){
+      if($name = $this->AddPPD($this->add_ppd_later,TRUE)){
+        $this->SelectPPD($name);
+      }
+      $this->add_ppd_later = "";
+      $this->add_later_msg_dialog = NULL;
+    } 
 
     /* Open a dialog that allow us to select different PPDs */
     if(isset($_POST['SelectPPD'])){
@@ -223,7 +240,7 @@ class printerPPDDialog extends plugin
   /* This function adds a new ppd file to the list of available ppds. 
      All required paths and files will be created 
       $_PathOnHdd e.g. = /tmp/PHP_tmpfile213452 */
-  function AddPPD($_PathOnHdd)
+  function AddPPD($_PathOnHdd,$overwrite = FALSE)
   {
     /* Check if file exists && is readable */
     if((!is_file($_PathOnHdd)) || (!is_readable($_PathOnHdd))){
@@ -254,15 +271,33 @@ class printerPPDDialog extends plugin
       $this->ppdList[$vendor] = array();
     }
 
+    /* Create ppd file and fill in the source contents */
+    $ppdname      = $vendor."/".$name.".ppd";
+    $filename     = $this->pathToPPD.preg_replace("/[^a-z0-9-_\.\/]/i","_",$ppdname);
+    $filename     = $this->pathToPPD.$ppdname;
+    $contents     = file_get_contents($_PathOnHdd);
+
+
     /* Check if this ppd already exists */
     $found = false;
     foreach($this->ppdList[$vendor] as $key => $val){
       if(preg_match("/".$model.".*/i",$key)){
         $found = true;
-        print_red(sprintf(_("There is already a ppd file for this kind of printer.")));
-        return;
+        if(!$overwrite){
+          if(!copy($_PathOnHdd,$_PathOnHdd."_back")){
+            print_red(sprintf(_("Can't add new ppd file, the source file '%s' is not accessible."),$_PathOnHdd));         
+          }else{
+            $this->add_ppd_later = $_PathOnHdd."_back";
+            $this->add_later_msg_dialog = new msg_dialog(_("PPD file already exists"),
+                _("There is already a ppd file for this kind of printer."),CONFIRM_DIALOG);
+          }
+          return;
+        }
       }
     }
+
+    /* Open file handle */
+    $fp           = fopen($filename,"w+");
 
     /* Create the vendors path, if it doesn't exists already */
     if(!is_dir($this->pathToPPD.$vendor)){
@@ -272,12 +307,6 @@ class printerPPDDialog extends plugin
       }
     }
   
-    /* Create ppd file and fill in the source contents */
-    $ppdname      = $vendor."/".$name.".ppd";
-    $filename     = $this->pathToPPD.$ppdname;
-    $fp           = fopen($filename,"w+");
-    $contents     = file_get_contents($_PathOnHdd);
-
     /* Check file handle & contents */
     if(!$fp){
       print_red(sprintf(_("Can't save file '%s'."),$filename));

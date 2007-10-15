@@ -4,6 +4,7 @@ class ppdManager
 {
 	var $path= "";
 	var $cachedList= array();
+	var $timestamps = array();
 
 	function ppdManager($path)
 	{
@@ -288,6 +289,16 @@ class ppdManager
 		$model= "";
 		$manufacturer= "";
 
+		
+		/* Only parse complete PPD file again, if it was changed */
+		$modified = filemtime($ppdFile);
+		if(isset($this->cachedList[$ppdFile]) && isset($this->timestamps[$ppdFile]) && $modified == $this->timestamps[$ppdFile]){
+			return($this->cachedList[$ppdFile]);
+		}
+
+		/* Remember modified timestamp, to speed up next request */
+		$this->timestamps[$ppdFile] = filemtime($ppdFile);
+
 		$fh= fopen ($ppdFile, 'r');
 		while ((!feof($fh))&&($fh)) {
 
@@ -329,10 +340,11 @@ class ppdManager
 			$list= $this->findPPD($this->path);
 
 			/* Load descriptive informations to build final printer list */
-			$this->cachedList= array();
+			$new = array();
 			foreach ($list as $ppdFile){
-				$this->cachedList[$ppdFile]= $this->loadDescription($ppdFile);
+				$new[$ppdFile] = $this->loadDescription($ppdFile); 
 			}
+			$this->cachedList= $new ;
 
 		}
 

@@ -127,9 +127,13 @@ class printerPPDSelectionDialog extends plugin
     $div ->SetHeight(450);
     $div ->SetSummary(_("Printer ppd selection."));
     
-    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=open&amp;id=%s'>%s</a>";
+    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=open&amp;id=%s'>
+      <img src='images/folder.png' class='center' border=0>&nbsp;%s
+      </a>";
     $uselink  = "<a href='?plug=".$_GET['plug']."&amp;act=use&amp;id=%s'>%s</a>";
-    $dellink  = "<a href='?plug=".$_GET['plug']."&amp;act=del&amp;id=%s'><img src='images/edittrash.png' alt='"._("delete")."' border=0></a>";
+    $dellink  = "<a href='?plug=".$_GET['plug']."&amp;act=del&amp;id=%s'>
+      <img src='images/edittrash.png' alt='"._("delete")."' border=0>
+      </a>";
 
     if(empty($this->Vendor)){
       foreach($this-> header as $key => $entry){
