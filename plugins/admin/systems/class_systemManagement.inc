@@ -24,6 +24,7 @@ require "tabs_phone.inc";
 require "tabs_server.inc";
 require "tabs_component.inc";
 require "tabs_winstation.inc";
+require "tabs_arpnewdevice.inc";
 
 
 class systems extends plugin
@@ -205,7 +206,9 @@ class systems extends plugin
           "component"   => array("CLASS"=>"COMPONENTTABS","TABCLASS" =>"componenttabs"));
 
 
-      if($type == "NewDevice"){
+      if($type == "ArpNewDevice"){
+        $this->systab = new ArpNewDeviceTabs($this->config,$this->config->data['TABS']['ARPNEWDEVICETABS'],$this->dn);
+      }elseif($type == "NewDevice"){
         $this->systab = new SelectDeviceType($this->config,$this->dn) ;
       }elseif(isset($tabs[$type])){
 
@@ -845,6 +848,8 @@ class systems extends plugin
       $type= "phone";
     }elseif (in_array_ics('goServer', $classes)){
       $type= "server";
+    }elseif (in_array_ics('GOhard', $classes)&& !in_array('gotoMode', $classes)){
+      $type= "ArpNewDevice";
     }elseif (in_array_ics('GOhard', $classes)){
       $type= "NewDevice";
     }elseif (in_array_ics('sambaAccount', $classes) ||

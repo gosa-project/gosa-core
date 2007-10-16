@@ -136,9 +136,9 @@ class divListSystem extends MultiSelectWindow
 
     $cnts = array("component" => 0 , "terminal" => 0 , "workstation" => 0 , 
                   "printer" => 0 , "phone" => 0 , "server" => 0,
-                  "NewDevice" => 0, "winstation"=> 0);
+                  "NewDevice" => 0, "winstation"=> 0,"ArpNewDevice"=>0);
 
-    // Test Every Entry and generate divlist Array
+     // Test Every Entry and generate divlist Array
     foreach($terminals as $key => $val){
 
       $acl= get_permissions ($val['dn'], $this->ui->subtreeACL);
@@ -238,7 +238,7 @@ class divListSystem extends MultiSelectWindow
     $str.= "<img class='center' src='images/select_component.png'
               title='".$num_com_str."' alt='".$num_com_str."'>&nbsp;".$cnts['component']."&nbsp;&nbsp;&nbsp;&nbsp;";
     $str.= "<img class='center' src='images/select_newsystem.png'
-              title='".$num_new_str."' alt='".$num_new_str."'>&nbsp;".$cnts['NewDevice']."&nbsp;&nbsp;&nbsp;&nbsp;";
+              title='".$num_new_str."' alt='".$num_new_str."'>&nbsp;".($cnts['NewDevice']+$cnts['ArpNewDevice'])."&nbsp;&nbsp;&nbsp;&nbsp;";
     $str.= "<img class='center' src='images/select_winstation.png'
               title='".$num_wws_str."' alt='".$num_wws_str."'>&nbsp;".$cnts['winstation']."&nbsp;&nbsp;&nbsp;&nbsp;";
     $str.= "<img class='center' src='images/folder.png'
