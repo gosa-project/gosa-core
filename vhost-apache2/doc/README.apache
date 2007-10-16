@@ -1,0 +1,13 @@
+To use the apache vhost server extension
+
+1) Add the mod_vhost_ldap.schema to your schema directory
+
+2) Add the following string to your server tab entry
+
+ <tab class="servapache" name="Apache Vhost" />
+
+Benoit Mortier <benoit Mortier@opensides.be> & Alejandro Escanero <aescanero@gmail.com>
+OpenSides October 2007
+
+
+
