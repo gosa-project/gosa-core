@@ -559,10 +559,15 @@ class termDNS extends plugin
 
       /* DHCP Added */
       if(!$this->initial_dhcp_is_Account && $this->dhcp_is_Account){
+
+        $dn = "cn=".$this->cn.",".$this->dhcpParentNode;
+
         $attrs = $this->dhcpHostEntry;
+        $attrs['cn'] = $this->cn;
+        
         unset($attrs['MODIFIED']);
         unset($attrs['dn']);
-        $ldap->cd("cn=".$this->cn.",".$this->dhcpParentNode);
+        $ldap->cd($dn);
         $res = $ldap->add($attrs);
 #        print_a($attrs);
 #        print("cn=".$this->cn.",".$this->dhcpParentNode);
