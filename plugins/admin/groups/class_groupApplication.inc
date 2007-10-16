@@ -878,20 +878,24 @@ class appgroup extends plugin
     $this->Categories[""]=""; 
     $this->attrs["gosaMemberApplication"]= array();
     $this->attrs["gosaApplicationParameter"]= array();
+    $cat_id= 0 ;
     foreach($this->Categories as $name => $cats){
       $i =0;
       if(isset($this->gosaMemberApplication[$name])){
         foreach($this->gosaMemberApplication[$name] as $entry){
           if(!preg_match("/__SEPARATOR__/",$entry['App'])){
             $this->attrs["gosaMemberApplication"][]= $entry['App']."|".$name."|".$i;
+            $i ++;
           }
-          $i ++;
         }
       }
       if(($i==0)&&(!empty($name))){
-        $this->attrs["gosaMemberApplication"][]= "|".$name."|".$i;
+        $this->attrs["gosaMemberApplication"][]= "|".$name."|".$cat_id;
       }
+      $cat_id++;
     }
+
+
 
     /* Are there application parameters to be saved */
     $this->attrs['gosaApplicationParameter']= array();
