@@ -6,7 +6,6 @@ class ArpNewDevice extends plugin
   var $netConfigDNS = NULL;
   var $attributes= array("cn","description");
   var $objectclasses = array("gotoHard");
-
   var $ignore_account = TRUE;
 
   function ArpNewDevice ($config, $dn= NULL, $parent= NULL)
@@ -19,6 +18,13 @@ class ArpNewDevice extends plugin
 
   function execute()
   {
+    $smarty = get_smarty();
+    foreach($this->attributes as $attr){
+      $smarty->assign($attr,$this->$attr);
+    }
+    $this->netConfigDNS->cn= $this->cn;
+    $smarty->assign("netconfig", $this->netConfigDNS->execute());
+
     /* Display sub dialog from network settings */
     $this->netConfigDNS->acl = $this->acl;
     if($this->netConfigDNS->dialog){
@@ -28,12 +34,6 @@ class ArpNewDevice extends plugin
       $this->dialog = FALSE;
     }
 
-    $smarty = get_smarty();
-    foreach($this->attributes as $attr){
-      $smarty->assign($attr,$this->$attr);
-    }
-    $this->netConfigDNS->cn= $this->cn;
-    $smarty->assign("netconfig", $this->netConfigDNS->execute());
     return($smarty->fetch (get_template_path('ArpNewDevice.tpl', TRUE)));
   }
 

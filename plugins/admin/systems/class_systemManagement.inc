@@ -835,6 +835,8 @@ class systems extends plugin
 
   function get_system_type($classes)
   {
+    $enable_arp_device_handling = preg_match("/ArpNewDevice/i",search_config($this->config->data['TABS'], "ArpNewDevice", "CLASS"));
+
     $type= "";
     if (in_array_ics('ieee802Device', $classes)){
       $type= "component";
@@ -848,7 +850,7 @@ class systems extends plugin
       $type= "phone";
     }elseif (in_array_ics('goServer', $classes)){
       $type= "server";
-    }elseif (in_array_ics('GOhard', $classes)&& !in_array('gotoMode', $classes)){
+    }elseif (in_array_ics('GOhard', $classes)&& !in_array('gotoMode', $classes) && $enable_arp_device_handling){
       $type= "ArpNewDevice";
     }elseif (in_array_ics('GOhard', $classes)){
       $type= "NewDevice";
