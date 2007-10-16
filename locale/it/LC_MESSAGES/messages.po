@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-09 08:07+0200\n"
+"POT-Creation-Date: 2007-10-16 19:14+0200\n"
 "PO-Revision-Date: 2007-07-13 18:38+0100\n"
 "Last-Translator: Guido Serra <zeph@purotesto.it>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,12 +29,12 @@ msgstr "Moduli aggiuntivi"
 
 #: contrib/gosa.conf:120 contrib/gosa.conf:144 contrib/gosa.conf:148
 #: contrib/gosa.conf:157 contrib/gosa.conf:163 contrib/gosa.conf:168
-#: contrib/gosa.conf:174 contrib/gosa.conf:183 contrib/gosa.conf:212
-#: contrib/gosa.conf:227 contrib/gosa.conf:233 contrib/gosa.conf:256
-#: contrib/gosa.conf:262 contrib/gosa.conf:268 contrib/gosa.conf:272
-#: plugins/personal/mail/generic.tpl:4 plugins/personal/posix/generic.tpl:4
-#: plugins/personal/samba/samba2.tpl:6 plugins/personal/samba/samba3.tpl:6
-#: plugins/personal/scalix/generic.tpl:4
+#: contrib/gosa.conf:175 contrib/gosa.conf:180 contrib/gosa.conf:189
+#: contrib/gosa.conf:218 contrib/gosa.conf:233 contrib/gosa.conf:239
+#: contrib/gosa.conf:262 contrib/gosa.conf:268 contrib/gosa.conf:274
+#: contrib/gosa.conf:278 plugins/personal/mail/generic.tpl:4
+#: plugins/personal/posix/generic.tpl:4 plugins/personal/samba/samba2.tpl:6
+#: plugins/personal/samba/samba3.tpl:6 plugins/personal/scalix/generic.tpl:4
 #: plugins/personal/generic/class_user.inc:16
 #: plugins/gofax/blocklists/generic.tpl:1
 #: plugins/gofax/faxaccount/paste_generic.tpl:4
@@ -130,7 +130,7 @@ msgstr "Fax"
 #: plugins/admin/groups/class_divListGroup.inc:129
 #: plugins/admin/users/class_divListUsers.inc:148
 #: plugins/admin/departments/generic.tpl:63
-#: plugins/admin/systems/class_systemManagement.inc:869
+#: plugins/admin/systems/class_systemManagement.inc:876
 #: plugins/admin/systems/chooser.tpl:12
 #: plugins/admin/ogroups/class_ogroupManagement.inc:368
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:6
@@ -159,9 +159,9 @@ msgid "ACL"
 msgstr "Liste controllo accessi (ACL)"
 
 #: contrib/gosa.conf:153 contrib/gosa.conf:159 contrib/gosa.conf:164
-#: contrib/gosa.conf:170 contrib/gosa.conf:179 contrib/gosa.conf:208
-#: contrib/gosa.conf:223 contrib/gosa.conf:229 contrib/gosa.conf:235
-#: contrib/gosa.conf:258 contrib/gosa.conf:264
+#: contrib/gosa.conf:170 contrib/gosa.conf:185 contrib/gosa.conf:214
+#: contrib/gosa.conf:229 contrib/gosa.conf:235 contrib/gosa.conf:241
+#: contrib/gosa.conf:264 contrib/gosa.conf:270
 msgid "References"
 msgstr "Referenze"
 
@@ -177,17 +177,17 @@ msgstr "Opzioni"
 msgid "Parameter"
 msgstr "Parametri"
 
-#: contrib/gosa.conf:175 contrib/gosa.conf:184 contrib/gosa.conf:213
+#: contrib/gosa.conf:181 contrib/gosa.conf:190 contrib/gosa.conf:219
 #: plugins/admin/ogroups/tabs_ogroups.inc:107
 msgid "Startup"
 msgstr "Avvio"
 
-#: contrib/gosa.conf:176 contrib/gosa.conf:214
+#: contrib/gosa.conf:182 contrib/gosa.conf:220
 #: plugins/admin/ogroups/tabs_ogroups.inc:101
 msgid "Devices"
 msgstr "Componenti (device)"
 
-#: contrib/gosa.conf:177 contrib/gosa.conf:206 contrib/gosa.conf:216
+#: contrib/gosa.conf:183 contrib/gosa.conf:212 contrib/gosa.conf:222
 #: plugins/gofax/blocklists/generic.tpl:75
 #: plugins/addons/addressbook/contents.tpl:33
 #: plugins/admin/fai/faiProfileEntry.tpl:21
@@ -205,56 +205,56 @@ msgstr "Componenti (device)"
 msgid "Information"
 msgstr "Informazione"
 
-#: contrib/gosa.conf:178 contrib/gosa.conf:207 contrib/gosa.conf:222
-#: contrib/gosa.conf:228 contrib/gosa.conf:234 contrib/gosa.conf:257
-#: contrib/gosa.conf:263
+#: contrib/gosa.conf:184 contrib/gosa.conf:213 contrib/gosa.conf:228
+#: contrib/gosa.conf:234 contrib/gosa.conf:240 contrib/gosa.conf:263
+#: contrib/gosa.conf:269
 #, fuzzy
 msgid "Inventory"
 msgstr "Aggiungi elenco/inventario"
 
-#: contrib/gosa.conf:185
+#: contrib/gosa.conf:191
 msgid "Databases"
 msgstr "Database"
 
-#: contrib/gosa.conf:186 plugins/admin/systems/servkolab.tpl:33
+#: contrib/gosa.conf:192 plugins/admin/systems/servkolab.tpl:33
 msgid "Services"
 msgstr "Servizi"
 
-#: contrib/gosa.conf:188
+#: contrib/gosa.conf:194
 #: plugins/personal/connectivity/class_kolabAccount.inc:5
 msgid "Kolab"
 msgstr "Kolab"
 
-#: contrib/gosa.conf:190 plugins/admin/fai/faiPackage.tpl:29
+#: contrib/gosa.conf:196 plugins/admin/fai/faiPackage.tpl:29
 #: plugins/admin/systems/servRepositorySetup.tpl:1
 msgid "Repository"
 msgstr "Repository"
 
-#: contrib/gosa.conf:192 contrib/gosa.conf:194 contrib/gosa.conf:218
-#: contrib/gosa.conf:220
+#: contrib/gosa.conf:198 contrib/gosa.conf:200 contrib/gosa.conf:224
+#: contrib/gosa.conf:226
 msgid "FAI summary"
 msgstr "Sommario installazioni remote (FAI)"
 
-#: contrib/gosa.conf:197 contrib/gosa.conf:199
+#: contrib/gosa.conf:203 contrib/gosa.conf:205
 msgid "DNS"
 msgstr ""
 
-#: contrib/gosa.conf:202 contrib/gosa.conf:204
+#: contrib/gosa.conf:208 contrib/gosa.conf:210
 msgid "DHCP"
 msgstr ""
 
-#: contrib/gosa.conf:215 plugins/personal/environment/environment.tpl:204
-#: plugins/admin/systems/class_systemManagement.inc:878
+#: contrib/gosa.conf:221 plugins/personal/environment/environment.tpl:204
+#: plugins/admin/systems/class_systemManagement.inc:885
 #: plugins/admin/ogroups/class_ogroupManagement.inc:371
 #: plugins/generic/references/class_reference.inc:52
 msgid "Printer"
 msgstr "Stampanti"
 
-#: contrib/gosa.conf:285
+#: contrib/gosa.conf:291
 msgid "OGo"
 msgstr "OpenGroupware (OGo)"
 
-#: contrib/gosa.conf:297 plugins/addons/ldapmanager/contentexportxls.tpl:19
+#: contrib/gosa.conf:303 plugins/addons/ldapmanager/contentexportxls.tpl:19
 #: plugins/addons/ldapmanager/contentexportxls.tpl:32
 #: plugins/addons/ldapmanager/contentexportxls.tpl:47
 #: plugins/addons/ldapmanager/contentexport.tpl:16
@@ -264,11 +264,11 @@ msgstr "OpenGroupware (OGo)"
 msgid "Export"
 msgstr "Esporta"
 
-#: contrib/gosa.conf:298
+#: contrib/gosa.conf:304
 msgid "Excel Export"
 msgstr "Esporta formato Excel"
 
-#: contrib/gosa.conf:299 plugins/personal/mail/generic.tpl:192
+#: contrib/gosa.conf:305 plugins/personal/mail/generic.tpl:192
 #: plugins/personal/environment/logonManagement.tpl:65
 #: plugins/addons/gotomasses/goto_task.tpl:129
 #: plugins/addons/ldapmanager/contentimport.tpl:49
@@ -280,15 +280,15 @@ msgstr "Esporta formato Excel"
 msgid "Import"
 msgstr "Importa"
 
-#: contrib/gosa.conf:300
+#: contrib/gosa.conf:306
 msgid "CSV Import"
 msgstr "Importa formato CSV"
 
-#: contrib/gosa.conf:305 contrib/gosa.conf:335
+#: contrib/gosa.conf:311 contrib/gosa.conf:341
 msgid "Partitions"
 msgstr "Partizioni"
 
-#: contrib/gosa.conf:309 contrib/gosa.conf:339
+#: contrib/gosa.conf:315 contrib/gosa.conf:345
 #: plugins/personal/environment/logonManagement.tpl:55
 #: plugins/admin/fai/faiScriptEntry.tpl:50
 #: plugins/admin/fai/faiHookEntry.tpl:50
@@ -296,33 +296,36 @@ msgstr "Partizioni"
 msgid "Script"
 msgstr "Script"
 
-#: contrib/gosa.conf:313 contrib/gosa.conf:343
+#: contrib/gosa.conf:319 contrib/gosa.conf:349
 #: plugins/admin/fai/class_faiSummaryTab.inc:40
+#: plugins/admin/fai/class_divListFai.inc:179
 msgid "Hooks"
 msgstr "Gancio..staccato (Hooks)?????? "
 
-#: contrib/gosa.conf:317 contrib/gosa.conf:347
+#: contrib/gosa.conf:323 contrib/gosa.conf:353
 #: plugins/admin/fai/class_faiSummaryTab.inc:41
+#: plugins/admin/fai/class_divListFai.inc:178
 msgid "Variables"
 msgstr "Variabili"
 
-#: contrib/gosa.conf:321 contrib/gosa.conf:351
+#: contrib/gosa.conf:327 contrib/gosa.conf:357
 #: plugins/admin/fai/class_faiSummaryTab.inc:42
+#: plugins/admin/fai/class_divListFai.inc:181
 msgid "Templates"
 msgstr "Modelli"
 
-#: contrib/gosa.conf:325 contrib/gosa.conf:355
+#: contrib/gosa.conf:331 contrib/gosa.conf:361
 #: plugins/personal/environment/environment.tpl:7
 #: plugins/admin/fai/class_faiSummaryTab.inc:45
 msgid "Profiles"
 msgstr "Profili"
 
-#: contrib/gosa.conf:326 contrib/gosa.conf:356
+#: contrib/gosa.conf:332 contrib/gosa.conf:362
 #: plugins/admin/ogroups/tabs_ogroups.inc:110
 msgid "Summary"
 msgstr "Sommario"
 
-#: contrib/gosa.conf:330 contrib/gosa.conf:360
+#: contrib/gosa.conf:336 contrib/gosa.conf:366
 msgid "Packages"
 msgstr "Pacchetti"
 
@@ -362,7 +365,7 @@ msgstr "Pacchetti"
 #: plugins/admin/users/class_userManagement.inc:29
 #: plugins/admin/applications/class_applicationManagement.inc:26
 #: plugins/admin/departments/class_departmentManagement.inc:26
-#: plugins/admin/systems/class_systemManagement.inc:33
+#: plugins/admin/systems/class_systemManagement.inc:34
 #: plugins/admin/ogroups/class_ogroupManagement.inc:26
 #: plugins/gofon/fonreports/class_fonreport.inc:7
 #: plugins/gofon/macro/class_gofonMacroManagement.inc:26
@@ -450,7 +453,7 @@ msgstr "Rimozione dell'utente Nagios fallita"
 #: plugins/admin/systems/glpi_devices.tpl:760
 #: plugins/admin/systems/goSpamServerRule.tpl:22
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:74
-#: plugins/admin/systems/class_systemManagement.inc:597
+#: plugins/admin/systems/class_systemManagement.inc:600
 #: plugins/admin/systems/servDNSeditZoneEntries.tpl:20
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:80
 #: plugins/admin/systems/class_dhcpSharedNetwork.inc:88
@@ -541,7 +544,7 @@ msgstr "Salva"
 #: plugins/admin/systems/remove_glpi.tpl:16
 #: plugins/admin/systems/dhcpNewSection.tpl:17
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:75
-#: plugins/admin/systems/class_systemManagement.inc:599
+#: plugins/admin/systems/class_systemManagement.inc:602
 #: plugins/admin/systems/servDNSeditZoneEntries.tpl:21
 #: plugins/admin/systems/class_baseSelectDialog.inc:41
 #: plugins/admin/systems/remove.tpl:16
@@ -767,8 +770,8 @@ msgstr "Indirizzo alternativi"
 #: plugins/admin/systems/terminalStartup.tpl:61
 #: plugins/admin/systems/terminalStartup.tpl:80
 #: plugins/admin/systems/glpiManufacturer.tpl:6
-#: plugins/admin/systems/class_termDNS.inc:668
-#: plugins/admin/systems/class_termDNS.inc:688
+#: plugins/admin/systems/class_termDNS.inc:683
+#: plugins/admin/systems/class_termDNS.inc:703
 #: plugins/admin/systems/goSpamServer.tpl:36
 #: plugins/admin/systems/goSpamServer.tpl:88
 #: plugins/admin/systems/servdnseditzone.tpl:115
@@ -842,7 +845,7 @@ msgstr "Aggiungi locali"
 #: plugins/admin/systems/terminalStartup.tpl:62
 #: plugins/admin/systems/remove_ppd.tpl:12
 #: plugins/admin/systems/class_glpiPrinterCartridges.inc:164
-#: plugins/admin/systems/class_termDNS.inc:682
+#: plugins/admin/systems/class_termDNS.inc:697
 #: plugins/admin/systems/servservice.tpl:22
 #: plugins/admin/systems/servservice.tpl:48
 #: plugins/admin/systems/glpi_edit_os.tpl:10
@@ -878,7 +881,7 @@ msgstr "Lista degli indirizzi e-mail alternativi"
 #: plugins/personal/mail/generic.tpl:11
 #: plugins/addons/gotomasses/class_target_list.inc:171
 #: plugins/addons/mailqueue/contents.tpl:53 plugins/admin/groups/mail.tpl:14
-#: plugins/admin/systems/class_systemManagement.inc:870
+#: plugins/admin/systems/class_systemManagement.inc:877
 #: plugins/admin/systems/class_SelectDeviceType.inc:29
 #: plugins/admin/ogroups/class_ogroupManagement.inc:367
 #: plugins/generic/references/class_reference.inc:44
@@ -1228,7 +1231,7 @@ msgstr "Il campo obbligatorio 'Indirizzo principale' non è configurato."
 
 #: plugins/personal/mail/class_mailAccount.inc:949
 #: plugins/personal/mail/class_mailAccount.inc:953
-#: plugins/addons/addressbook/class_addressbook.inc:598
+#: plugins/addons/addressbook/class_addressbook.inc:607
 #: plugins/admin/ogroups/class_mailogroup.inc:78
 msgid "Please enter a valid email address in 'Primary address' field."
 msgstr ""
@@ -1479,9 +1482,10 @@ msgstr ""
 #: plugins/addons/ldapmanager/contentcsv.tpl:114
 #: plugins/addons/ldapmanager/contentexport.tpl:66
 #: plugins/admin/fai/faiNewBranch.tpl:51
+#: plugins/admin/groups/class_groupApplication.inc:719
 #: plugins/admin/departments/dep_iframe.tpl:19
-#: plugins/admin/systems/class_systemManagement.inc:243
-#: include/functions.inc:1568 setup/class_setup.inc:261
+#: plugins/admin/systems/class_systemManagement.inc:246
+#: include/functions.inc:1587 setup/class_setup.inc:261
 #: setup/class_setup.inc:263
 msgid "Back"
 msgstr "Indietro"
@@ -2783,6 +2787,7 @@ msgstr "Nome script"
 #: plugins/admin/systems/component.tpl:30 plugins/admin/systems/phone.tpl:30
 #: plugins/admin/systems/printer.tpl:13
 #: plugins/admin/systems/wingeneric.tpl:25
+#: plugins/admin/systems/ArpNewDevice.tpl:16
 #: plugins/admin/mimetypes/paste_generic.tpl:21
 #: plugins/admin/mimetypes/generic.tpl:30 plugins/admin/ogroups/generic.tpl:13
 #: plugins/gofon/macro/generic.tpl:41 plugins/gofon/conference/generic.tpl:64
@@ -3321,7 +3326,7 @@ msgid "You have no permissions to move a user from the original 'Base'."
 msgstr "Non hai il permesso di spostare un utente dalla 'Base' originale."
 
 #: plugins/personal/generic/class_user.inc:1039
-#: plugins/addons/addressbook/class_addressbook.inc:555
+#: plugins/addons/addressbook/class_addressbook.inc:564
 #: plugins/admin/users/class_userManagement.inc:582
 msgid "The required field 'Name' is not set."
 msgstr "Il capo obbligatorio 'Nome' non è compilato."
@@ -3331,7 +3336,7 @@ msgid "There's already a person with this 'Login' in the database."
 msgstr "C'è già una persona con questo 'codice utente (login)' nel database."
 
 #: plugins/personal/generic/class_user.inc:1054
-#: plugins/addons/addressbook/class_addressbook.inc:559
+#: plugins/addons/addressbook/class_addressbook.inc:568
 #: plugins/admin/users/class_userManagement.inc:585
 msgid "The required field 'Given name' is not set."
 msgstr "Il campo obligatorio 'Nome (given name??)' non è completato."
@@ -3362,39 +3367,39 @@ msgstr "Il campo 'Homepage' contiente una definizione URL inesatta."
 
 #: plugins/personal/generic/class_user.inc:1075
 #: plugins/personal/generic/class_user.inc:1100
-#: plugins/addons/addressbook/class_addressbook.inc:565
-#: plugins/addons/addressbook/class_addressbook.inc:593
+#: plugins/addons/addressbook/class_addressbook.inc:574
+#: plugins/addons/addressbook/class_addressbook.inc:602
 #: plugins/admin/departments/class_departmentGeneric.inc:243
 msgid "The field 'Name' contains invalid characters."
 msgstr "Il campo 'Nome' contiene dei caratteri non validi."
 
 #: plugins/personal/generic/class_user.inc:1078
 #: plugins/personal/generic/class_user.inc:1097
-#: plugins/addons/addressbook/class_addressbook.inc:568
-#: plugins/addons/addressbook/class_addressbook.inc:590
+#: plugins/addons/addressbook/class_addressbook.inc:577
+#: plugins/addons/addressbook/class_addressbook.inc:599
 msgid "The field 'Given name' contains invalid characters."
 msgstr "Il campo 'Nome(Given name)' contiene dei caratteri non validi."
 
 #: plugins/personal/generic/class_user.inc:1083
-#: plugins/addons/addressbook/class_addressbook.inc:573
-#: plugins/addons/addressbook/class_addressbook.inc:576
+#: plugins/addons/addressbook/class_addressbook.inc:582
+#: plugins/addons/addressbook/class_addressbook.inc:585
 #: plugins/admin/departments/class_departmentGeneric.inc:246
 msgid "The field 'Phone' contains an invalid phone number."
 msgstr "Il campo 'Telefono' contiene un numero di telefono non valido."
 
 #: plugins/personal/generic/class_user.inc:1086
-#: plugins/addons/addressbook/class_addressbook.inc:579
+#: plugins/addons/addressbook/class_addressbook.inc:588
 #: plugins/admin/departments/class_departmentGeneric.inc:249
 msgid "The field 'Fax' contains an invalid phone number."
 msgstr "Il campo 'Fax' contiene un numero di telefono non valido."
 
 #: plugins/personal/generic/class_user.inc:1089
-#: plugins/addons/addressbook/class_addressbook.inc:582
+#: plugins/addons/addressbook/class_addressbook.inc:591
 msgid "The field 'Mobile' contains an invalid phone number."
 msgstr "Il campo 'Mobile' contiene un numero di telefono non valido."
 
 #: plugins/personal/generic/class_user.inc:1092
-#: plugins/addons/addressbook/class_addressbook.inc:585
+#: plugins/addons/addressbook/class_addressbook.inc:594
 msgid "The field 'Pager' contains an invalid phone number."
 msgstr "Il campo 'Pager' contiene un numero di telefono non valido."
 
@@ -4102,7 +4107,7 @@ msgstr "Modifica utente"
 #: plugins/admin/applications/class_divListApplication.inc:163
 #: plugins/admin/departments/class_divListDepartment.inc:102
 #: plugins/admin/systems/class_divListSystem.inc:149
-#: plugins/admin/systems/class_printerPPDSelectionDialog.inc:132
+#: plugins/admin/systems/class_printerPPDSelectionDialog.inc:135
 #: plugins/admin/mimetypes/class_divListMimeTypes.inc:170
 #: plugins/admin/ogroups/class_divListOGroup.inc:146
 #: plugins/gofon/macro/class_divListMacros.inc:95
@@ -4376,7 +4381,7 @@ msgstr "State provando ad aggiungere un numero di telefono inesatto."
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:446
 #: plugins/gofax/faxaccount/class_gofaxAccount.inc:528
 #: plugins/admin/groups/class_groupApplication.inc:657
-#: plugins/admin/systems/class_printerPPDSelectionDialog.inc:142
+#: plugins/admin/systems/class_printerPPDSelectionDialog.inc:146
 msgid "back"
 msgstr "Indietro"
 
@@ -4429,7 +4434,7 @@ msgstr "FAX ID"
 #: plugins/gofax/faxreports/detail.tpl:21
 #: plugins/gofax/faxreports/contents.tpl:30
 #: plugins/admin/fai/faiTemplateEntry.tpl:94
-#: plugins/admin/systems/class_printGeneric.inc:858
+#: plugins/admin/systems/class_printGeneric.inc:864
 #: plugins/admin/ogroups/class_ogroupManagement.inc:363
 msgid "User"
 msgstr "utentge"
@@ -4592,10 +4597,10 @@ msgid "Dial connection..."
 msgstr "Connessione telefonica..."
 
 #: plugins/addons/addressbook/dial.tpl:10
-#: plugins/addons/addressbook/class_addressbook.inc:369
-#: plugins/addons/addressbook/class_addressbook.inc:376
-#: plugins/addons/addressbook/class_addressbook.inc:380
-#: plugins/addons/addressbook/class_addressbook.inc:462
+#: plugins/addons/addressbook/class_addressbook.inc:378
+#: plugins/addons/addressbook/class_addressbook.inc:385
+#: plugins/addons/addressbook/class_addressbook.inc:389
+#: plugins/addons/addressbook/class_addressbook.inc:471
 msgid "Dial"
 msgstr "Componi"
 
@@ -4648,7 +4653,7 @@ msgid "Country"
 msgstr "Nazione"
 
 #: plugins/addons/addressbook/contents.tpl:14
-#: plugins/addons/addressbook/class_addressbook.inc:522
+#: plugins/addons/addressbook/class_addressbook.inc:531
 #: plugins/addons/addressbook/address_info.tpl:16
 #: plugins/addons/gotomasses/class_goto_task.inc:213
 #: plugins/addons/gotomasses/goto_task.tpl:103
@@ -4708,7 +4713,7 @@ msgid "Add entry"
 msgstr "Aggiungi valore"
 
 #: plugins/addons/addressbook/contents.tpl:50
-#: plugins/admin/groups/class_groupApplication.inc:739
+#: plugins/admin/groups/class_groupApplication.inc:740
 msgid "Edit entry"
 msgstr "Modifica valore"
 
@@ -4794,34 +4799,34 @@ msgstr "Non è permesso cancellare questa voce!"
 msgid "You're about to delete the entry %s."
 msgstr "State per cancellare la voce %s."
 
-#: plugins/addons/addressbook/class_addressbook.inc:386
+#: plugins/addons/addressbook/class_addressbook.inc:395
 #, php-format
 msgid "Save contact for %s as vcard"
 msgstr "Salva il contatto %s come vcard"
 
-#: plugins/addons/addressbook/class_addressbook.inc:390
+#: plugins/addons/addressbook/class_addressbook.inc:399
 #, php-format
 msgid "Send mail to %s"
 msgstr "Invia e-mail a %s"
 
-#: plugins/addons/addressbook/class_addressbook.inc:474
+#: plugins/addons/addressbook/class_addressbook.inc:483
 msgid "global addressbook"
 msgstr "Rubrica globale"
 
-#: plugins/addons/addressbook/class_addressbook.inc:477
+#: plugins/addons/addressbook/class_addressbook.inc:486
 msgid "user database"
 msgstr "Database utenti"
 
-#: plugins/addons/addressbook/class_addressbook.inc:481
+#: plugins/addons/addressbook/class_addressbook.inc:490
 #, php-format
 msgid "Contact stored in '%s'"
 msgstr "Contatto salvato in '%s'"
 
-#: plugins/addons/addressbook/class_addressbook.inc:483
+#: plugins/addons/addressbook/class_addressbook.inc:492
 msgid "Creating new entry in"
 msgstr "Crea una nuova voce in"
 
-#: plugins/addons/addressbook/class_addressbook.inc:522
+#: plugins/addons/addressbook/class_addressbook.inc:531
 #: plugins/addons/mailqueue/class_mailqueue.inc:305
 #: plugins/addons/mailqueue/class_mailqueue.inc:370
 #: plugins/addons/logview/class_logview.inc:99
@@ -4829,43 +4834,43 @@ msgstr "Crea una nuova voce in"
 msgid "All"
 msgstr "Tutti"
 
-#: plugins/addons/addressbook/class_addressbook.inc:522 html/getxls.php:65
+#: plugins/addons/addressbook/class_addressbook.inc:531 html/getxls.php:65
 #: html/getxls.php:174 html/getxls.php:224 html/getxls.php:236
 msgid "Given name"
 msgstr "Nome di battesimo"
 
-#: plugins/addons/addressbook/class_addressbook.inc:523
+#: plugins/addons/addressbook/class_addressbook.inc:532
 msgid "Work phone"
 msgstr "Telefono ufficio"
 
-#: plugins/addons/addressbook/class_addressbook.inc:523
+#: plugins/addons/addressbook/class_addressbook.inc:532
 msgid "Cell phone"
 msgstr "Telefono cellulare"
 
-#: plugins/addons/addressbook/class_addressbook.inc:524 html/getxls.php:174
+#: plugins/addons/addressbook/class_addressbook.inc:533 html/getxls.php:174
 msgid "Home phone"
 msgstr "Telefono di casa"
 
-#: plugins/addons/addressbook/class_addressbook.inc:524
+#: plugins/addons/addressbook/class_addressbook.inc:533
 #: setup/setup_migrate.tpl:215 html/getxls.php:80 html/getxls.php:108
 #: html/getxls.php:123 html/getxls.php:282 html/getxls.php:299
 msgid "User ID"
 msgstr "Utente ID"
 
-#: plugins/addons/addressbook/class_addressbook.inc:606
+#: plugins/addons/addressbook/class_addressbook.inc:615
 msgid ""
 "Cannot create a unique DN for your entry. Please fill more formular fields."
 msgstr ""
 "Non posso creare un distinto DN per questo valore. Per favore compilate i "
 "campi previsti."
 
-#: plugins/addons/addressbook/class_addressbook.inc:614
+#: plugins/addons/addressbook/class_addressbook.inc:623
 msgid ""
 "You have no permissions to create or modify a global address book entry."
 msgstr ""
 "Non avete il permesso di creare o modificare un valore nella rubrica globale."
 
-#: plugins/addons/addressbook/class_addressbook.inc:659
+#: plugins/addons/addressbook/class_addressbook.inc:668
 msgid "Saving addressbook entry failed"
 msgstr "Salvataggio del valore della rubrica fallito"
 
@@ -5076,7 +5081,7 @@ msgid "Configure DHCP"
 msgstr "Configura"
 
 #: plugins/addons/gotomasses/goto_task.tpl:79
-#: plugins/admin/systems/class_systemManagement.inc:32
+#: plugins/admin/systems/class_systemManagement.inc:33
 msgid "Systems"
 msgstr "Sistemi"
 
@@ -5174,7 +5179,7 @@ msgid "Show workstations"
 msgstr "Mostra le workstation"
 
 #: plugins/addons/gotomasses/class_target_list.inc:173
-#: plugins/admin/systems/class_systemManagement.inc:865
+#: plugins/admin/systems/class_systemManagement.inc:872
 #: plugins/admin/systems/class_SelectDeviceType.inc:29
 #: plugins/admin/ogroups/class_ogroupManagement.inc:369
 #: plugins/generic/references/class_reference.inc:48
@@ -5762,8 +5767,8 @@ msgstr ""
 
 #: plugins/admin/fai/class_faiManagement.inc:179
 #: plugins/admin/fai/class_faiManagement.inc:225
-#: plugins/admin/systems/class_systemManagement.inc:407
-#: plugins/admin/systems/class_systemManagement.inc:467
+#: plugins/admin/systems/class_systemManagement.inc:410
+#: plugins/admin/systems/class_systemManagement.inc:470
 msgid "You are not allowed to delete this component!"
 msgstr "Non ti è consentito di cancellare questo componente!"
 
@@ -5934,16 +5939,19 @@ msgid "Package"
 msgstr "Pacchetti"
 
 #: plugins/admin/fai/class_faiSummaryTab.inc:39
+#: plugins/admin/fai/class_divListFai.inc:177
 msgid "Scripts"
 msgstr "Script"
 
 #: plugins/admin/fai/class_faiSummaryTab.inc:43
 #: plugins/admin/fai/class_faiProfile.inc:299
+#: plugins/admin/fai/class_divListFai.inc:175
 #: plugins/admin/fai/class_faiProfileEntry.inc:139
 msgid "Partition table"
 msgstr "Partition table"
 
 #: plugins/admin/fai/class_faiSummaryTab.inc:44
+#: plugins/admin/fai/class_divListFai.inc:176
 msgid "Package list"
 msgstr "Lista pacchetti"
 
@@ -6023,6 +6031,7 @@ msgstr "Scegli la variabile da cancellare o modificare"
 #: plugins/admin/departments/generic.tpl:4
 #: plugins/admin/systems/terminal.tpl:1
 #: plugins/admin/systems/workstation.tpl:1
+#: plugins/admin/systems/ArpNewDevice.tpl:1
 #: plugins/admin/ogroups/class_divListOGroup.inc:53
 #: plugins/gofon/conference/generic.tpl:4
 msgid "Properties"
@@ -6098,7 +6107,7 @@ msgid "Release"
 msgstr "Release"
 
 #: plugins/admin/fai/faiPackage.tpl:41
-#: plugins/admin/systems/class_printerPPDDialog.inc:408
+#: plugins/admin/systems/class_printerPPDDialog.inc:402
 #: plugins/admin/systems/dhcpNewSection.tpl:9
 msgid "Section"
 msgstr "Sezione"
@@ -6554,6 +6563,11 @@ msgstr "Nuovo elenco di pacchetti"
 msgid "PK"
 msgstr "PK"
 
+#: plugins/admin/fai/class_divListFai.inc:180
+#, fuzzy
+msgid "Profile"
+msgstr "Profili"
+
 #: plugins/admin/fai/class_divListFai.inc:223
 #: plugins/admin/groups/class_divListGroup.inc:152
 #: plugins/admin/users/class_divListUsers.inc:196
@@ -6936,8 +6950,8 @@ msgstr "Proprietario"
 #: plugins/admin/fai/faiTemplateEntry.tpl:103
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:30
 #: plugins/admin/systems/class_servDHCP.inc:38
-#: plugins/admin/systems/class_printGeneric.inc:853
-#: plugins/admin/systems/class_printGeneric.inc:855
+#: plugins/admin/systems/class_printGeneric.inc:859
+#: plugins/admin/systems/class_printGeneric.inc:861
 #: plugins/admin/ogroups/class_ogroupManagement.inc:364
 #: plugins/generic/references/class_reference.inc:36
 msgid "Group"
@@ -7649,54 +7663,54 @@ msgid "application"
 msgstr "applicazione"
 
 #: plugins/admin/groups/class_groupApplication.inc:702
-#: plugins/admin/groups/class_groupApplication.inc:738
+#: plugins/admin/groups/class_groupApplication.inc:739
 msgid "Delete entry"
 msgstr "Cancella il valore"
 
 #: plugins/admin/groups/class_groupApplication.inc:706
-#: plugins/admin/groups/class_groupApplication.inc:736
+#: plugins/admin/groups/class_groupApplication.inc:737
 #: include/sieve/templates/object_container.tpl:9
 #: include/sieve/templates/object_container_clear.tpl:9
 msgid "Move up"
 msgstr "Muoviti su"
 
 #: plugins/admin/groups/class_groupApplication.inc:707
-#: plugins/admin/groups/class_groupApplication.inc:737
+#: plugins/admin/groups/class_groupApplication.inc:738
 #: include/sieve/templates/object_container.tpl:13
 #: include/sieve/templates/object_container_clear.tpl:13
 msgid "Move down"
 msgstr "Muoviti giù"
 
-#: plugins/admin/groups/class_groupApplication.inc:734
+#: plugins/admin/groups/class_groupApplication.inc:735
 msgid "Insert seperator"
 msgstr "Inserisci un separatore"
 
-#: plugins/admin/groups/class_groupApplication.inc:762
+#: plugins/admin/groups/class_groupApplication.inc:763
 msgid "This application is no longer available."
 msgstr "Questa applicazione non è più disponibile."
 
-#: plugins/admin/groups/class_groupApplication.inc:765
+#: plugins/admin/groups/class_groupApplication.inc:766
 #, php-format
 msgid "This application is not available in any release named %s."
 msgstr "Questa applicazione non è disponibile in ogni release chiamata '%s'."
 
-#: plugins/admin/groups/class_groupApplication.inc:769
+#: plugins/admin/groups/class_groupApplication.inc:770
 msgid "Check parameter"
 msgstr "Verifica i parametri"
 
-#: plugins/admin/groups/class_groupApplication.inc:771
+#: plugins/admin/groups/class_groupApplication.inc:772
 msgid "This application has changed parameters."
 msgstr "Questa applicazione ha modificato i parametri."
 
-#: plugins/admin/groups/class_groupApplication.inc:864
+#: plugins/admin/groups/class_groupApplication.inc:865
 msgid "Removing application information failed"
 msgstr "Rimozione delle informazioni sull'applicazione fallita"
 
-#: plugins/admin/groups/class_groupApplication.inc:909
+#: plugins/admin/groups/class_groupApplication.inc:914
 msgid "Saving application information failed"
 msgstr "Salvataggio delle informazioni sull'applicazione fallita"
 
-#: plugins/admin/groups/class_groupApplication.inc:952
+#: plugins/admin/groups/class_groupApplication.inc:957
 #, php-format
 msgid ""
 "Can't resolve the release name '%s', setting release name to '%s'. Possibly "
@@ -7764,7 +7778,7 @@ msgstr ""
 "non usare un modello."
 
 #: plugins/admin/users/template.tpl:15
-#: plugins/admin/systems/class_systemManagement.inc:863
+#: plugins/admin/systems/class_systemManagement.inc:870
 msgid "Template"
 msgstr "Modello"
 
@@ -8309,10 +8323,6 @@ msgstr ""
 #: plugins/gofon/conference/class_phoneConferenceManagment.inc:147
 msgid "You have no permission to remove this department."
 msgstr "Non hai il permesso di cancellare questo dipartimento."
-
-#: plugins/admin/departments/class_departmentManagement.inc:333
-msgid ".."
-msgstr ".."
 
 #: plugins/admin/systems/class_terminalInfo.inc:49
 #: plugins/admin/systems/class_terminalInfo.inc:194
@@ -9170,7 +9180,7 @@ msgid "Can't select PPD file '%s', the file is not readable"
 msgstr "Non puoi selezionare il file PPD '%s' perché il file non è leggibile"
 
 #: plugins/admin/systems/class_printerPPDDialog.inc:198
-#: plugins/admin/systems/class_printerPPDDialog.inc:270
+#: plugins/admin/systems/class_printerPPDDialog.inc:269
 #, php-format
 msgid "Can't create folder '%s' for the uploaded ppd file."
 msgstr "Non posso creare la cartella '%s' per il file ppd caricato."
@@ -9197,58 +9207,53 @@ msgstr ""
 "Il file ppd '%s' non sembra valido; non posso ottenere informazioni sul "
 "modello o produttore."
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:262
-#, php-format
-msgid "There is already a ppd file for this kind of printer."
-msgstr "C'è già un file ppd per questo genere di stampante."
-
-#: plugins/admin/systems/class_printerPPDDialog.inc:283
+#: plugins/admin/systems/class_printerPPDDialog.inc:276
 #, php-format
 msgid "Can't save file '%s'."
 msgstr "Non posso salvare i file '%s'."
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:287
+#: plugins/admin/systems/class_printerPPDDialog.inc:280
 msgid "Uploaded ppd file is empty, can't create new ppd file."
 msgstr "Il file ppd caricato è vuoto; non posso creare un nuovo file ppd."
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:461
-#: plugins/admin/systems/class_printerPPDDialog.inc:464
+#: plugins/admin/systems/class_printerPPDDialog.inc:455
+#: plugins/admin/systems/class_printerPPDDialog.inc:458
 #: include/sieve/class_sieveElement_If.inc:915
 #: include/sieve/class_sieveManagement.inc:609
 msgid "True"
 msgstr "Vero"
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:462
-#: plugins/admin/systems/class_printerPPDDialog.inc:465
+#: plugins/admin/systems/class_printerPPDDialog.inc:456
+#: plugins/admin/systems/class_printerPPDDialog.inc:459
 #: include/sieve/class_sieveElement_If.inc:915
 #: include/sieve/class_sieveManagement.inc:610
 msgid "False"
 msgstr "Falso"
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:470
+#: plugins/admin/systems/class_printerPPDDialog.inc:464
 #, php-format
 msgid "Unsupported ppd type '%s' used for '%s' "
 msgstr "Tipo ppd non supportato '%s' usato per '%s'."
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:487
+#: plugins/admin/systems/class_printerPPDDialog.inc:481
 #, fuzzy, php-format
 msgid "Removing old ppd file '%s' failed."
 msgstr "Rimozione del profilo FAI fallita"
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:490
+#: plugins/admin/systems/class_printerPPDDialog.inc:484
 #, fuzzy, php-format
 msgid "Removing old ppd file '%s' failed. File is not accessible."
 msgstr ""
 "Non posso aggiungere un nuovo file ppd; il file di origine '%s' non è "
 "accessibile."
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:493
+#: plugins/admin/systems/class_printerPPDDialog.inc:487
 #, php-format
 msgid ""
 "Removing old ppd file '%s' failed. File does not exists or is not accessible."
 msgstr ""
 
-#: plugins/admin/systems/class_printerPPDDialog.inc:501
+#: plugins/admin/systems/class_printerPPDDialog.inc:500
 msgid ""
 "Please select a valid ppd file or use 'Cancel' to go back to printer "
 "configuration."
@@ -9438,6 +9443,7 @@ msgid "Terminal template"
 msgstr "Modello terminale"
 
 #: plugins/admin/systems/terminal.tpl:10
+#: plugins/admin/systems/ArpNewDevice.tpl:6
 msgid "Terminal name"
 msgstr "Nome del terminale"
 
@@ -9725,7 +9731,7 @@ msgid "New Terminal template"
 msgstr "Nuovo modello Terminal"
 
 #: plugins/admin/systems/class_divListSystem.inc:95
-#: plugins/admin/systems/class_systemManagement.inc:876
+#: plugins/admin/systems/class_systemManagement.inc:883
 msgid "New Terminal"
 msgstr "Nuovo terminale"
 
@@ -9734,7 +9740,7 @@ msgid "New Workstation template"
 msgstr "Nuovo modello Workstation"
 
 #: plugins/admin/systems/class_divListSystem.inc:97
-#: plugins/admin/systems/class_systemManagement.inc:877
+#: plugins/admin/systems/class_systemManagement.inc:884
 msgid "New Workstation"
 msgstr "Nuova workstation"
 
@@ -10592,27 +10598,27 @@ msgstr ""
 "Sono permesse solo lettere minuscole; per favore controllate la striunga '%"
 "ss'."
 
-#: plugins/admin/systems/class_termDNS.inc:547
+#: plugins/admin/systems/class_termDNS.inc:557
 #, fuzzy
 msgid "Removing dhcp entry for this object failed."
 msgstr "Rimozione del server dagli oggetti Kolab fallita"
 
-#: plugins/admin/systems/class_termDNS.inc:559
 #: plugins/admin/systems/class_termDNS.inc:574
+#: plugins/admin/systems/class_termDNS.inc:589
 msgid "Tried to add new dhcp entry failed."
 msgstr ""
 
-#: plugins/admin/systems/class_termDNS.inc:577
+#: plugins/admin/systems/class_termDNS.inc:592
 #, fuzzy
 msgid "Removing old dhcp entry failed."
 msgstr "Rimozione dei valori dell'host Kolab fallita"
 
-#: plugins/admin/systems/class_termDNS.inc:589
+#: plugins/admin/systems/class_termDNS.inc:604
 #, fuzzy
 msgid "Modifying dhcp entry failed."
 msgstr "Modifica del valore del modello FAI fallita"
 
-#: plugins/admin/systems/class_termDNS.inc:656
+#: plugins/admin/systems/class_termDNS.inc:671
 msgid "Saving terminal to DNS object failed"
 msgstr "Salvataggio del terminale come oggetto DNS fallito"
 
@@ -11707,34 +11713,34 @@ msgstr "C'è un valore vuoto '%s' per l'host '%s'."
 msgid "There is a duplicate entry in '%s' for '%s'."
 msgstr "C'è un valore duplicato in '%s' per '%s'."
 
-#: plugins/admin/systems/class_systemManagement.inc:220
+#: plugins/admin/systems/class_systemManagement.inc:223
 msgid "You can't edit this object type yet!"
 msgstr "Non puoi ancora modificare questo tipo di oggetto!"
 
-#: plugins/admin/systems/class_systemManagement.inc:292
+#: plugins/admin/systems/class_systemManagement.inc:295
 msgid "Creating the image failed. Please see the report below."
 msgstr ""
 "Creazione dell'immagine fallita. Per favore guardate il rapporto sottostante."
 
-#: plugins/admin/systems/class_systemManagement.inc:299
+#: plugins/admin/systems/class_systemManagement.inc:302
 #, php-format
 msgid "Command '%s', specified for ISO creation doesn't seem to exist."
 msgstr "Il comando '%s' specificato per la creazione ISO non sembra esistere."
 
-#: plugins/admin/systems/class_systemManagement.inc:330
+#: plugins/admin/systems/class_systemManagement.inc:333
 msgid "Passwords entered as new and repeated do not match!"
 msgstr "La password inserita come nuova e ripetuta non coincide!"
 
-#: plugins/admin/systems/class_systemManagement.inc:347
+#: plugins/admin/systems/class_systemManagement.inc:350
 msgid "You are not allowed to set this systems password!"
 msgstr "Non hai il permesso di impostare la password di sistema!"
 
-#: plugins/admin/systems/class_systemManagement.inc:401
+#: plugins/admin/systems/class_systemManagement.inc:404
 #, php-format
 msgid "You're about to delete all information about the component at '%s'."
 msgstr "Stai per cancellare tutte le informazioni relative al componente '%s'."
 
-#: plugins/admin/systems/class_systemManagement.inc:500
+#: plugins/admin/systems/class_systemManagement.inc:503
 #, fuzzy, php-format
 msgid ""
 "Can't set gotoMode to status 'active', the current object couldn't be "
@@ -11743,65 +11749,65 @@ msgstr ""
 "Non puoi impostare gotoMode allo stato 'attivo' perché l'oggetto corrente "
 "non può essere identificato."
 
-#: plugins/admin/systems/class_systemManagement.inc:737
+#: plugins/admin/systems/class_systemManagement.inc:740
 msgid "New terminal"
 msgstr "Nuovo terminale"
 
-#: plugins/admin/systems/class_systemManagement.inc:739
+#: plugins/admin/systems/class_systemManagement.inc:742
 msgid "New workstation"
 msgstr "Nuova workstation"
 
-#: plugins/admin/systems/class_systemManagement.inc:741
+#: plugins/admin/systems/class_systemManagement.inc:744
 msgid "New Device"
 msgstr "Nuovo componente"
 
-#: plugins/admin/systems/class_systemManagement.inc:762
+#: plugins/admin/systems/class_systemManagement.inc:765
 msgid "Terminal template for"
 msgstr "Modello workstation per"
 
-#: plugins/admin/systems/class_systemManagement.inc:774
+#: plugins/admin/systems/class_systemManagement.inc:777
 msgid "Workstation template for"
 msgstr "Modello per workstation"
 
-#: plugins/admin/systems/class_systemManagement.inc:862
+#: plugins/admin/systems/class_systemManagement.inc:869
 msgid "New System from incoming"
 msgstr "Nuovo sistema da... (from incoming)"
 
-#: plugins/admin/systems/class_systemManagement.inc:864
+#: plugins/admin/systems/class_systemManagement.inc:871
 #: plugins/admin/systems/class_SelectDeviceType.inc:29
 #: plugins/admin/ogroups/class_ogroupManagement.inc:370
 msgid "Terminal"
 msgstr "Terminali"
 
-#: plugins/admin/systems/class_systemManagement.inc:866
+#: plugins/admin/systems/class_systemManagement.inc:873
 msgid "Workstation is installing"
 msgstr "La workstation sta installando"
 
-#: plugins/admin/systems/class_systemManagement.inc:867
+#: plugins/admin/systems/class_systemManagement.inc:874
 msgid "Workstation is waiting for action"
 msgstr "La workstation sta aspettando per eseguire un'azione"
 
-#: plugins/admin/systems/class_systemManagement.inc:868
+#: plugins/admin/systems/class_systemManagement.inc:875
 msgid "Workstation installation failed"
 msgstr "Installazione sulla workstation fallita"
 
-#: plugins/admin/systems/class_systemManagement.inc:871
+#: plugins/admin/systems/class_systemManagement.inc:878
 msgid "Server is installing"
 msgstr "Il server sta installando"
 
-#: plugins/admin/systems/class_systemManagement.inc:872
+#: plugins/admin/systems/class_systemManagement.inc:879
 msgid "Server is waiting for action"
 msgstr "Il server sta aspettando per eseguire un'azione"
 
-#: plugins/admin/systems/class_systemManagement.inc:873
+#: plugins/admin/systems/class_systemManagement.inc:880
 msgid "Server installation failed"
 msgstr "Installazione sul server fallita"
 
-#: plugins/admin/systems/class_systemManagement.inc:874
+#: plugins/admin/systems/class_systemManagement.inc:881
 msgid "Winstation"
 msgstr "Winstation"
 
-#: plugins/admin/systems/class_systemManagement.inc:875
+#: plugins/admin/systems/class_systemManagement.inc:882
 msgid "Network Device"
 msgstr "Componente di rete"
 
@@ -12198,22 +12204,22 @@ msgstr "Rimozione della stampante fallita"
 msgid "You have no permissions to create a printer on this 'Base'."
 msgstr "Non avete il permesso di creare la stampante a questo livello."
 
-#: plugins/admin/systems/class_printGeneric.inc:833
+#: plugins/admin/systems/class_printGeneric.inc:839
 msgid "Saving printer failed"
 msgstr "Salvataggio della stampante fallito"
 
-#: plugins/admin/systems/class_printGeneric.inc:878
+#: plugins/admin/systems/class_printGeneric.inc:884
 #, php-format
 msgid "Illegal printer type while adding '%s' to the list of '%s' printers,"
 msgstr ""
 "Tipo di stampante illegale aggiungendo '%s' alla lista '%s' delle stampanti,"
 
-#: plugins/admin/systems/class_printGeneric.inc:900
+#: plugins/admin/systems/class_printGeneric.inc:906
 #, php-format
 msgid "Can't add '%s' to the list of members, it is already used."
 msgstr "Non posso aggiungere '%s' alla lista degli oggetti; è già in uso."
 
-#: plugins/admin/systems/class_printGeneric.inc:908
+#: plugins/admin/systems/class_printGeneric.inc:914
 #, php-format
 msgid "Can't add '%s' to list of members, it is not reachable."
 msgstr ""
@@ -12829,6 +12835,11 @@ msgstr ""
 #: plugins/admin/systems/gencd.tpl:9
 msgid "Create ISO-Image"
 msgstr "Crea una immagine ISO"
+
+#: plugins/admin/systems/class_ArpNewDevice.inc:64
+msgid ""
+"Could not remove arp-alert device after writing dns and dhcp configuration."
+msgstr ""
 
 #: plugins/admin/mimetypes/class_mimetypeGeneric.inc:463
 #, fuzzy, php-format
@@ -15409,22 +15420,22 @@ msgstr "%s di risultati per la ricerca con la chiave %s"
 msgid "%s%% hit rate in file %s"
 msgstr "%s%% alta corrispondenza nel file %s  ??????"
 
-#: include/class_ppdManager.inc:13
+#: include/class_ppdManager.inc:14
 #, php-format
 msgid "PPD manager : The specified path '%s' doesn't exists."
 msgstr "Gestore PPD: il percorso specificato '%s' non esiste."
 
-#: include/class_ppdManager.inc:144
+#: include/class_ppdManager.inc:145
 #, php-format
 msgid "Specified ppd file '%s' can't be opened for reading."
 msgstr "Lo specificato file ppd '%s' non può essere aperto per la lettura."
 
-#: include/class_ppdManager.inc:146
+#: include/class_ppdManager.inc:147
 #, php-format
 msgid "The required tmp file file '%s' can't be opened for writing."
 msgstr "Il file richiesto tmp '%s' non può essere aperto per la scrittura."
 
-#: include/class_ppdManager.inc:170 include/class_ppdManager.inc:297
+#: include/class_ppdManager.inc:171 include/class_ppdManager.inc:308
 #, php-format
 msgid ""
 "Parsing PPD file %s failed - line too long. Trailing characters have been "
@@ -15433,27 +15444,27 @@ msgstr ""
 "Esame del dile POD %s fallito: linea troppo lunga. I caratteri finali sono "
 "stati ignorati"
 
-#: include/class_ppdManager.inc:178
+#: include/class_ppdManager.inc:179
 msgid "Nested groups are not supported!"
 msgstr "I gruppi nidificati non sono supportati!"
 
-#: include/class_ppdManager.inc:182
+#: include/class_ppdManager.inc:183
 msgid "Group name not unique!"
 msgstr "Il nome del gruppo non è unico!"
 
-#: include/class_ppdManager.inc:188 include/class_ppdManager.inc:218
+#: include/class_ppdManager.inc:189 include/class_ppdManager.inc:219
 msgid "Symbol values are not supported yet!"
 msgstr "I valori Symbol non sono ancora supportati!"
 
-#: include/class_ppdManager.inc:212
+#: include/class_ppdManager.inc:213
 msgid "Nested options are not supported!"
 msgstr "Le opzioni nidifate non sono supportate!"
 
-#: include/class_ppdManager.inc:237
+#: include/class_ppdManager.inc:238
 msgid "PickMany is not supported yet!"
 msgstr "PickMany non è ancora supportato!"
 
-#: include/class_ppdManager.inc:318
+#: include/class_ppdManager.inc:329
 #, php-format
 msgid "Parsing PPD file %s failed - no information found."
 msgstr "Analisi del file PPD %s fallita - Nessuna informazione trovata."
@@ -15632,11 +15643,11 @@ msgstr ""
 msgid "incomplete"
 msgstr "incompleto"
 
-#: include/functions.inc:1108 include/functions.inc:1349
+#: include/functions.inc:1127 include/functions.inc:1368
 msgid "LDAP error:"
 msgstr "Errore LDAP:"
 
-#: include/functions.inc:1109
+#: include/functions.inc:1128
 msgid ""
 "Problems with the LDAP server mean that you probably lost the last changes. "
 "Please check your LDAP setup for possible errors and try again."
@@ -15644,7 +15655,7 @@ msgstr ""
 "I problemi con il server LDAP possono aver fato perdere le ultime modifiche. "
 "Per favore controlla il setup LDAP per possibili errori e riprova."
 
-#: include/functions.inc:1117
+#: include/functions.inc:1136
 msgid ""
 "Please check your input and fix the error. Press 'OK' to close this message "
 "box."
@@ -15652,19 +15663,19 @@ msgstr ""
 "Verifica i dati inseriti e sistema gli errori. Premi il pulsante 'OK per "
 "chidere questa finestra."
 
-#: include/functions.inc:1177
+#: include/functions.inc:1196
 msgid "OK"
 msgstr "OK"
 
-#: include/functions.inc:1238
+#: include/functions.inc:1257
 msgid "Continue anyway"
 msgstr "Continua in ogni caso"
 
-#: include/functions.inc:1240
+#: include/functions.inc:1259
 msgid "Edit anyway"
 msgstr "Modifica in ogni caso"
 
-#: include/functions.inc:1242
+#: include/functions.inc:1261
 #, php-format
 msgid ""
 "You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
@@ -15673,132 +15684,132 @@ msgstr ""
 "Stai per modificare il valore '%s' di LDAP che appare essere usato da '%s'. "
 "Per favore contatta l'utente per capire come procedere."
 
-#: include/functions.inc:1531
+#: include/functions.inc:1550
 msgid "Entries per page"
 msgstr "Valori per pagina"
 
-#: include/functions.inc:1559
+#: include/functions.inc:1578
 msgid "Apply filter"
 msgstr "Applica filtro"
 
-#: include/functions.inc:1833
+#: include/functions.inc:1852
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-#: include/functions.inc:1876
+#: include/functions.inc:1895
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "Snapshot di sviluppo di GOsa (Rev %s)"
 
-#: include/functions.inc:2278 include/functions.inc:2282
+#: include/functions.inc:2297 include/functions.inc:2301
 msgid "Warning - base_hook is not available. Using default base."
 msgstr ""
 
-#: include/functions.inc:2288
+#: include/functions.inc:2307
 msgid "Warning - no base_hook defined. Using default base."
 msgstr ""
 
-#: include/functions.inc:2313 setup/class_setupStep_Schema.inc:95
+#: include/functions.inc:2332 setup/class_setupStep_Schema.inc:95
 msgid "Can't get schema information from server. No schema check possible!"
 msgstr ""
 "Non posso ottenere le informazioni schema dal server. Non posso controllare "
 "lo schema! "
 
-#: include/functions.inc:2339
+#: include/functions.inc:2358
 msgid "Used to store account specific informations."
 msgstr ""
 
-#: include/functions.inc:2346
+#: include/functions.inc:2365
 msgid ""
 "Used to lock currently edited entries to avoid multiple changes at the same "
 "time."
 msgstr ""
 
-#: include/functions.inc:2389
+#: include/functions.inc:2408
 #, fuzzy, php-format
 msgid "The required objectClass '%s' is not present in your schema setup"
 msgstr "Objectclass '%s' richiesta non presente nel setup LDAP"
 
-#: include/functions.inc:2391
+#: include/functions.inc:2410
 #, fuzzy, php-format
 msgid "The optional objectClass '%s' is not present in your schema setup"
 msgstr "Objectclass '%s' richiesta non presente nel setup LDAP"
 
-#: include/functions.inc:2397
+#: include/functions.inc:2416
 #, fuzzy, php-format
 msgid "The required objectclass '%s' does not have version %s"
 msgstr "L'objectclass '%s' richiesta non ha la versione %s"
 
-#: include/functions.inc:2399
+#: include/functions.inc:2418
 #, fuzzy, php-format
 msgid "The optional objectclass '%s' does not have version %s"
 msgstr "L'objectclass '%s' richiesta non ha la versione %s"
 
-#: include/functions.inc:2403
+#: include/functions.inc:2422
 #, fuzzy, php-format
 msgid "Class(es) available"
 msgstr "Il file è disponibilie."
 
-#: include/functions.inc:2426
+#: include/functions.inc:2445
 msgid ""
 "You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema    configuration do not support this option."
 msgstr ""
 
-#: include/functions.inc:2427
+#: include/functions.inc:2446
 msgid ""
 "In order to use rfc2307bis conform groups the objectClass 'posixGroup' must "
 "be      AUXILIARY"
 msgstr ""
 
-#: include/functions.inc:2431
+#: include/functions.inc:2450
 msgid ""
 "You have disabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema   configuration do not support this option."
 msgstr ""
 
-#: include/functions.inc:2432
+#: include/functions.inc:2451
 msgid "The objectClass 'posixGroup' must be STRUCTURAL"
 msgstr ""
 
-#: include/functions.inc:2528
+#: include/functions.inc:2547
 msgid "German"
 msgstr "Tedesco"
 
-#: include/functions.inc:2529
+#: include/functions.inc:2548
 msgid "French"
 msgstr "Francese"
 
-#: include/functions.inc:2530
+#: include/functions.inc:2549
 msgid "Italian"
 msgstr "Italiano"
 
-#: include/functions.inc:2531
+#: include/functions.inc:2550
 msgid "Spanish"
 msgstr "Spagnolo"
 
-#: include/functions.inc:2532
+#: include/functions.inc:2551
 msgid "English"
 msgstr "Inglese"
 
-#: include/functions.inc:2533
+#: include/functions.inc:2552
 msgid "Dutch"
 msgstr "Olandese"
 
-#: include/functions.inc:2534
+#: include/functions.inc:2553
 msgid "Polish"
 msgstr "Polacco"
 
-#: include/functions.inc:2535
+#: include/functions.inc:2554
 msgid "Swedish"
 msgstr ""
 
-#: include/functions.inc:2536
+#: include/functions.inc:2555
 #, fuzzy
 msgid "Chinese"
 msgstr "Chipset"
 
-#: include/functions.inc:2537
+#: include/functions.inc:2556
 #, fuzzy
 msgid "Russian"
 msgstr "Russo"
@@ -18189,6 +18200,12 @@ msgstr ""
 "Se questo avviso di lock è inesatto significa che qualche persona ha chiuso "
 "il webbrowser durante una operazione di editing. Puoi superare questo blocco "
 "premendo il bottone ' Modifica in ogni caso'."
+
+#~ msgid "There is already a ppd file for this kind of printer."
+#~ msgstr "C'è già un file ppd per questo genere di stampante."
+
+#~ msgid ".."
+#~ msgstr ".."
 
 #~ msgid "can't get ppd informations."
 #~ msgstr "Non posso ottenere le informazioni dal file PPD."
