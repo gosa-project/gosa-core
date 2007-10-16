@@ -1,7 +1,7 @@
 <?php
 
 
-/* This function returns the zones specified for given host
+/* This function returns the vhost entries specified for given host
  */
 function getVhostEntries($config,$HostDn,$silent = false)
 {
@@ -35,8 +35,8 @@ function getVhostEntries($config,$HostDn,$silent = false)
    */
   foreach($tmp_res as $attrs){
 
-    $apacheServerName                   = $attrs['apacheServerName'][0];
-    $apacheDocumentRoot                   = $attrs['apacheDocumentRoot'][0];
+    $apacheServerName                    = $attrs['apacheServerName'][0];
+    $apacheDocumentRoot                  = $attrs['apacheDocumentRoot'][0];
     $apacheServerAdmin                   = $attrs['apacheServerAdmin'][0];
     $Vhosts[$apacheServerName]           = $VhostBase;
     $Vhosts[$apacheServerName]['exists'] = true;
@@ -74,13 +74,13 @@ function getVhostEntries($config,$HostDn,$silent = false)
 
 /* This function compares two dns zone objects and returns an 
  *  array with following indexes 
- *   - delete, for dns which must be deleted (only if dns zone is removed)
+ *   - delete, for vhost entries which must be deleted (only if vhost entries is removed)
  *   - rename, if a dn must be renamed, for example, the apacheServerName has changed
- *   - add,    if there is a new dns account created    
+ *   - add,    if there is a new vhost entries created    
  */
 function getVhostEntriesDiff($config,$newVhosts,$HostDn)
 {
-  $oldVhosts = getAPACHE2VhostEntries($config,$HostDn,true);
+  $oldVhosts = getVhostEntries($config,$HostDn,true);
 
   $move   = array();
   $add    = array();

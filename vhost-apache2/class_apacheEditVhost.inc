@@ -1,6 +1,6 @@
 <?php
 
-class servapacheeditVhost extends plugin
+class apacheVhostEdit extends plugin
 {
   /* attribute list for save action */
   var $ignore_account= TRUE;
@@ -31,7 +31,7 @@ class servapacheeditVhost extends plugin
   var $cn;
   var $VhostObject               = array();
 
-  function servapache2editVhost ($config, $dn= NULL,$attrs = array())
+  function apacheVhostEdit ($config, $dn= NULL,$attrs = array())
   {
     plugin::plugin ($config, $dn);
  
@@ -61,7 +61,7 @@ class servapacheeditVhost extends plugin
     }
   }
 
-  /* TRansports the geiven Arraykey one position up*/
+  /* Transports the given Arraykey one position up*/
   function ArrayUp($atr,$attrs)
   {
     $ret = $attrs;
@@ -78,7 +78,7 @@ class servapacheeditVhost extends plugin
   }
 
 
-  /* TRansports the geiven Arraykey one position up*/
+  /* Transports the given Arraykey one position down*/
   function ArrayDown($atr,$attrs)
   {
     $ret = $attrs;
@@ -143,7 +143,7 @@ class servapacheeditVhost extends plugin
     }else{
       $smarty->assign("AllowVhostEdit" , true);
       if(isset($_POST['EditVhostEntries'])){
-        $this->dialog= new servAPACHE2editVhostEntries($this->config,$this->dn,$this->VhostObject);
+        $this->dialog= new apacheVhostEditEntries($this->config,$this->dn,$this->VhostObject);
       }
     }
 
@@ -305,8 +305,6 @@ class servapacheeditVhost extends plugin
 
     $smarty->assign("apacheServerAlias",  $div->DrawList());
 
-    
-    
     $div = new DivSelectBox("apacheScriptAlias");
     $div->setHeight(120);
     $recs = $this->apacheScriptAlias;
@@ -326,12 +324,9 @@ class servapacheeditVhost extends plugin
             ));
     }
 
-
       $smarty->assign("NotNew", false);
 
-    $smarty->assign("apacheScriptAlias",  $div->DrawList());
-    
-    
+    $smarty->assign("apacheScriptAlias",  $div->DrawList());    
     
     /* Display template */
     $display.= $smarty->fetch(get_template_path('apache_editVhost.tpl', TRUE));
@@ -362,7 +357,7 @@ class servapacheeditVhost extends plugin
     $message= plugin::check();
         
     /* Check if apacheServerName is already in use */
-    $usedVhosts = $this->getUsedapacheServerNames();
+    $usedVhosts = $this->getUsedServerNames();
     if(($this->isNew == true)||($this->apacheServerName  != $this->InitialApacheServerName)){
 /*      if((isset($usedVhosts[$this->apacheServerName]))&&($this->apacheServerName  != $this->InitialApacheServerName)){
         $message[] =_("This apacheServerName is already in use");
@@ -414,7 +409,7 @@ class servapacheeditVhost extends plugin
   }
 
   /* This funtion returns all used apacheServerNames */
-  function getUsedapacheServerNames()
+  function getUsedServerNames()
   {
     $ret = array();
     $ldap = $this->config->get_ldap_link();

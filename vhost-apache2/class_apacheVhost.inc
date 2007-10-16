@@ -16,7 +16,7 @@ class servapache extends plugin
   var $APACHE2initially_was_account;
 
 
-  function servapache2 ($config, $dn= NULL, $parent= NULL)
+  function servapache ($config, $dn= NULL, $parent= NULL)
   {
     plugin::plugin ($config, $dn, $parent);
 
@@ -24,7 +24,7 @@ class servapache extends plugin
 
     /* Get all vhost Informations
      */
-    $this->Vhosts = getAPACHE2VhostEntries($config,$dn);
+    $this->Vhosts = getVhostEntries($config,$dn);
 
     /* If there is at least one entry in this -> types, we have APACHE2 enabled 
      */
@@ -63,11 +63,11 @@ class servapache extends plugin
     }
 
     if ($this->is_account){
-      $display= $this->show_header(_("Remove APACHE2 service"),
-          _("This server has APACHE2 features enabled. You can disable them by clicking below."));
+      $display= $this->show_header(_("Remove Apache service"),
+          _("This server has Apache features enabled. You can disable them by clicking below."));
     } else {
-      $display= $this->show_header(_("Add APACHE2 service"),
-          _("This server has APACHE2 features disabled. You can enable them by clicking below."));
+      $display= $this->show_header(_("Add Apache service"),
+          _("This server has Apache features disabled. You can enable them by clicking below."));
       return ($display);
     }
 
@@ -103,7 +103,7 @@ class servapache extends plugin
     /* Add empty new vhost 
      */
     if(isset($_POST['AddVhost']) && chkacl($this->acl,"servapache2") == ""){
-      $this->dialog = new servapache2editVhost($this->config,$this->dn);
+      $this->dialog = new apacheEditVhost($this->config,$this->dn);
     }
 
     /* Check for edit vhost request 
@@ -117,7 +117,7 @@ class servapache extends plugin
         $once =true;
         $tmp = preg_replace("/^editVhost_/","",$name);
         $tmp = base64_decode(preg_replace("/_.*$/","",$tmp));
-        $this->dialog= new servapache2editVhost($this->config,$this->dn,$this->Vhosts[$tmp]);
+        $this->dialog= new apacheEditVhost($this->config,$this->dn,$this->Vhosts[$tmp]);
       }
 
       /* check posts for delete vhost 
@@ -172,7 +172,7 @@ class servapache extends plugin
    */
   function RemoveVhost($id)
   {
-    $vhosts =  $this->getUsedapacheServerNames();
+    $vhosts =  $this->getUsedServerNames();
   
     $vhostname = "";
     if(isset($this->Vhosts[$id]['InitialApacheServerName'])){
@@ -216,9 +216,9 @@ class servapache extends plugin
   } 
 
 
-  /* This funtion returns all used Vhostnames 
+  /* This function returns all used Vhostnames 
    */
-  function getUsedapacheServerNames()
+  function getUsedServerNames()
   {
     $ret = array();
     $ldap = $this->config->get_ldap_link();
@@ -232,7 +232,7 @@ class servapache extends plugin
 
 
 
-    /* Remove apache2 service
+    /* Remove apache service
    */
   function remove_from_parent()
   {
@@ -265,7 +265,7 @@ class servapache extends plugin
       $old_dn = $this->dn;
     }
 
-    $tmp = getAPACHE2VhostEntriesDiff($this->config,$this->Vhosts,$old_dn);
+    $tmp = getVhostEntriesDiff($this->config,$this->Vhosts,$old_dn);
 
     /* Updated vhost entries if reverser or forward name has changed  
      * Must be done before moving entries, else the given dn is invalid
@@ -274,16 +274,16 @@ class servapache extends plugin
       foreach($tmp['vhostUpdates'] as $dn => $attrs){
         $ldap->cd($dn);
         $ldap->modify($attrs);
-        show_ldap_error("Vhost:".$ldap->get_error(), _("Updating APACHE2 service failed"));
+        show_ldap_error("Vhost:".$ldap->get_error(), _("Updating Apache service failed"));
       }
     }
 
-    /* Delete apache2 
+    /* Delete apache vhost
      */
     foreach($tmp['del'] as $dn => $del){
       $ldap->cd($dn);
       $ldap->rmdir_recursive($dn);
-      show_ldap_error($ldap->get_error(), _("Removing APACHE2 entries failed"));
+      show_ldap_error($ldap->get_error(), _("Removing Apache entries failed"));
     }
 
     /* move follwoing entries
@@ -292,7 +292,7 @@ class servapache extends plugin
       $this->recursive_move($src,$dst);
     }
 
-    /* Add || Update new APACHE2 entries
+    /* Add || Update new apache entries
      */
     foreach($tmp['add'] as $dn => $attrs){
       $ldap->cd($dn);
@@ -306,7 +306,7 @@ class servapache extends plugin
         $ldap->cd($dn);
         $ldap->add($attrs);
       }
-      show_ldap_error($ldap->get_error(), _("Saving APACHE2 entries failed"));
+      show_ldap_error($ldap->get_error(), _("Saving apache entries failed"));
     }
   }
 }
