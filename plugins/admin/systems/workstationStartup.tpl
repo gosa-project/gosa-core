@@ -80,14 +80,26 @@
 			<tr>
 				<td>
 					<select name="FAIdebianMirror" {$FAIdebianMirrorACL} onchange='document.mainform.submit()'>
-						{html_options options=$FAIdebianMirrors output=$FAIdebianMirrors selected=$FAIdebianMirror}
+						{foreach from=$FAIdebianMirrors item=val key=key}
+							{if $val.USE}
+								<option value="{$key}" {if $FAIdebianMirror == $key} selected {/if}>{$val.NAME}</option>
+							{else}
+								<option value="auto" disabled>{$val.NAME}</option>
+							{/if}
+						{/foreach}
 						<option disabled>&nbsp;</option>
 					</select>
 				<!--<input type="submit" value="{t}set{/t}" name="refresh">-->
 				</td>
 				<td>
 					<select name="FAIrelease"  onchange='document.mainform.submit()' {$FAIclassACL}>
-					{html_options options=$FAIreleases output=$FAIreleases selected=$FAIrelease}
+						{foreach from=$FAIreleases item=val key=key}
+							{if $val.USE}
+								<option value="{$val.NAME}" {if $FAIrelease == $key} selected {/if}>{$val.NAME}</option>
+							{else}
+								<option value="auto" disabled>{$val.NAME}</option>
+							{/if}
+						{/foreach}
 					</select>
 				</td>
 			</tr>

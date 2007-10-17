@@ -454,12 +454,20 @@ class workstartup extends plugin
         else select the first one ..
      */
     $tmp2 = $this->getFAIreleases();
+    if(!isset($tmp2[$this->FAIrelease]) || !$tmp2[$this->FAIrelease]['USE']){
+      foreach($tmp2 as $key => $data){
+        if($data['USE']){
+          $this->FAIrelease = $key;
+        }
+      }
+    }
     if(!in_array($this->FAIrelease, $tmp2)){  
-      $this->FAIrelease = key($tmp2);
+    #  $this->FAIrelease = key($tmp2);
     }
  
     /* Get all Packages for this server/release combination
      */
+
     if(!isset($this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'][$this->FAIrelease]['PACKAGES'])){
       $pkgs = array();
       print_red(_("There are packages in your configuration, which can't be resolved with current server/release settings."));
@@ -854,10 +862,12 @@ class workstartup extends plugin
     /* Only add inherit option, if we are part in an object group 
      */
     if($this->member_of_ogroup)    {
-      $ret['inherited']="["._("inherited")."]";
+      $ret['inherited']['NAME']="["._("inherited")."]";
+      $ret['inherited']['USE'] = TRUE;
     }
 
-    $ret['auto']=_("automatic");
+    $ret['auto']['NAME']=_("automatic");
+    $ret['auto']['use'] = TRUE;
     $secs  = array();
 
     /* Walk through all available servers 
@@ -865,16 +875,14 @@ class workstartup extends plugin
         if not, dont't add them to our list
      */
     foreach($this->FAIServRepConfig as $mirror => $rest){
-
       $use = false;
-
       if(count($this->FAIclass) == 0){
         $use = true;
       }else{
         $tmp = $this->getFAIreleases();
-        foreach($tmp as $release){
+        foreach($tmp as $release => $data){
           if(isset($rest['RELEASE'][$release])){
-            $use =true;
+            $use = $data['USE']; 
           }
         } 
       }
@@ -882,9 +890,8 @@ class workstartup extends plugin
       /* If current server, doesn't support this class
           remove it from list
        */
-      if($use){
-        $ret[$mirror] = $mirror;
-      }
+      $ret[$mirror]['NAME'] = $mirror;
+      $ret[$mirror]['USE'] = $use;
     }
     return($ret);
   }
@@ -899,28 +906,35 @@ class workstartup extends plugin
       $this->FAIdebianMirror = "auto";
     }
 
-    $errorClasses = array();  
-    if(isset($this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'])) {
-      foreach($this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'] as $release => $sections){
-        $use = true;
+    $errorClasses = array();
+    foreach($this->FAIServRepConfig as $mirror => $rest){
+      if(isset($this->FAIServRepConfig[$mirror]['RELEASE'])){ 
+        foreach($this->FAIServRepConfig[$mirror]['RELEASE'] as $release => $sections){
+          $use = true;
 
-        if(!count($this->FAIclass) == 0){
-          foreach($this->FAIclass as $class){
-            if(!in_array($class, $sections['PACKAGES'])){
-              $use = false;
-              $errorClasses[$class] = $class;
-            }else{
-              if(isset($errorClasses[$class])){
-                unset($errorClasses[$class]); 
+          if(!count($this->FAIclass) == 0){
+            foreach($this->FAIclass as $class){
+              if(!in_array($class, $sections['PACKAGES'])){
+                $use = false;
+                $errorClasses[$class] = $class;
+              }else{
+                if(isset($errorClasses[$class])){
+                  unset($errorClasses[$class]); 
+                }
               }
             }
           }
+
+          if($mirror != $this->FAIdebianMirror){
+            $use = false;
+          }else{
+            $use = true;
+          }
+          $ret[$release]['NAME']=$release;
+          $ret[$release]['USE']=$use;
         }
-        if($use){
-          $ret[$release]=$release;
-        }
-      }
-    } 
+      } 
+    }
     if((count($ret) == 0 ) && ($this->FAIdebianMirror != "auto")){
 
       $eClasses = " ";
