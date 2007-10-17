@@ -90,6 +90,9 @@ function al2gt($gettextlangs, $mime)
   if(!isset($_SERVER["HTTP_ACCEPT_LANGUAGE"])){
     $_SERVER["HTTP_ACCEPT_LANGUAGE"] = "";
   }
+  if(!isset($_SERVER["HTTP_ACCEPT_CHARSET"])){
+    $_SERVER["HTTP_ACCEPT_CHARSET"] = "";
+  }
 
   /* default to "everything is acceptable", as RFC2616 specifies */
   $acceptLang=(($_SERVER["HTTP_ACCEPT_LANGUAGE"] == '') ? '*' :
