@@ -42,6 +42,8 @@ class macro extends plugin
 
   var $goFonHomeServers = array(); // Contains all available asterisk database server 
 
+  var $is_new = FALSE;
+
   //! The Konstructor   
   /*!  Konstructor, load class with  attributes of the given dn*/
   function macro ($config, $dn= NULL, $parent= NULL)
@@ -53,6 +55,7 @@ class macro extends plugin
 
     /* Edit or new one ?*/
     if ($this->dn == "new"){
+      $this->is_new = TRUE;
       if(isset($_SESSION['CurrentMainBase'])){
         $this->base = $_SESSION['CurrentMainBase'];
       }else{
@@ -339,7 +342,7 @@ class macro extends plugin
       plugin::save_object();
 
       /* The cn can't be changed if this entry is not new */
-      if($this->dn!= "new"){
+      if(!$this->is_new){
         $this->cn = $this->orig_cn;
       }
 
