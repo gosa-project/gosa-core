@@ -126,7 +126,7 @@ class hotplugDialog extends plugin
       }
 
       /* Skip serial check if vendor and product id are given */
-      if(!preg_match("/^[a-z0-9]+$/i",$this->HOT_id)){
+      if(!preg_match("/^\s*$/i",$this->HOT_id)){
         $message[]=_("Please specify a valid iSerial.");
       }
       if(empty($this->HOT_vendor) || !$this->is_2byteHex($this->HOT_vendor)){
