@@ -423,7 +423,7 @@ class termDNS extends plugin
     $message= plugin::check();
 
     if($this->dhcpEnabled && $this->dhcp_is_Account && $this->dhcpParentNode != "" && count($this->dhcpHostEntry) == 0){
-      $message[] =_("You have not configured your dhcp settings yet.");
+#      $message[] =_("You have not configured your dhcp settings yet.");
     }
 
     /* Check if ip must be given
@@ -540,6 +540,21 @@ class termDNS extends plugin
   
     /* New entry */
     if($this->dhcpEnabled){
+
+      if(count($this->dhcpHostEntry) == 0){
+        $this->dialog = new dhcpHost($this->dhcpParentNode,TRUE);
+        $this->dialog->cn = $this->cn;
+        $this->dialog->dhcpHWAddress = "ethernet ".$this->macAddress;
+        if(!empty($this->ipHostNumber)){
+          $this->dialog->statements['fixed-address'] = $this->ipHostNumber;
+        }
+        $this->dialog->execute();
+        $this->dialog->save_object(); 
+        $this->dhcpHostEntry = $this->dialog->save();
+        if(count($this->dhcpHostEntry['dhcpOption']) == 0){
+          $this->dhcpHostEntry['dhcpOption']= array("host-name ".$this->cn);
+        }
+      }
 
       /* Write mac address to dhcp settings */
       if($this->dhcp_is_Account){
