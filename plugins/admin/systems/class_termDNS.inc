@@ -576,6 +576,9 @@ class termDNS extends plugin
       if($this->initial_dhcp_is_Account && !$this->dhcp_is_Account){
         $ldap->rmdir_recursive($this->dhcpHostEntry['dn']);
         show_ldap_error($ldap->get_error(),_("Removing dhcp entry for this object failed."));
+
+        $tmp = new servdhcp($this->config,$this->dhcpParentNode);
+        $tmp->handle_post_events("remove");
       }
 
       /* DHCP Added */
@@ -590,6 +593,10 @@ class termDNS extends plugin
         unset($attrs['dn']);
         $ldap->cd($dn);
         $res = $ldap->add($attrs);
+
+        $tmp = new servdhcp($this->config,$this->dhcpParentNode);
+        $tmp->handle_post_events("add");
+
 #        print_a($attrs);
 #        print("cn=".$this->cn.",".$this->dhcpParentNode);
         show_ldap_error($ldap->get_error(),_("Tried to add new dhcp entry failed."));
@@ -607,6 +614,10 @@ class termDNS extends plugin
           unset($attrs['MODIFIED']);
           $ldap->cd("cn=".$this->cn.",".$this->dhcpParentNode);
           $res = $ldap->add($attrs);
+
+          $tmp = new servdhcp($this->config,$this->dhcpParentNode);
+          $tmp->handle_post_events("modify");
+
           show_ldap_error($ldap->get_error(),_("Tried to add new dhcp entry failed."));
           if($res){
             $ldap->rmdir_recursive($this->dhcpHostEntry['dn']);
@@ -622,6 +633,10 @@ class termDNS extends plugin
           unset($attrs['MODIFIED']);
           $ldap->cd($this->dhcpHostEntry['dn']);
           $ldap->modify($attrs);
+          
+          $tmp = new servdhcp($this->config,$this->dhcpParentNode);
+          $tmp->handle_post_events("modify");
+
           show_ldap_error($ldap->get_error(),_("Modifying dhcp entry failed."));
         }    
       }
