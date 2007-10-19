@@ -434,8 +434,8 @@ class servdns extends plugin
 
       /* Handle Post events */
       if(preg_match("/^zoneName=/",$dn)){
-        $this->handle_post_events("remove",array("dn" => $dn,"zoneName" => $for));
-        $this->handle_post_events("remove",array("dn" => $dn,"zoneName" => $rev));
+#        $this->handle_post_events("remove",array("dn" => $dn,"zoneName" => $for));
+#        $this->handle_post_events("remove",array("dn" => $dn,"zoneName" => $rev));
       }
     }
 
@@ -457,7 +457,7 @@ class servdns extends plugin
 
         /* Handle Post events */
         if(preg_match("/^zoneName=/",$dn)){
-          $this->handle_post_events("modify",array("dn" => $dn,"zoneName" => $attrs['zoneName']));
+#          $this->handle_post_events("modify",array("dn" => $dn,"zoneName" => $attrs['zoneName']));
         }
       }else{
         $ldap->cd($dn);
@@ -466,10 +466,11 @@ class servdns extends plugin
 
         /* Handle Post events */
         if(preg_match("/^zoneName=/",$dn)){
-          $this->handle_post_events("add",array("dn" => $dn,"zoneName" => $attrs['zoneName']));
+#          $this->handle_post_events("add",array("dn" => $dn,"zoneName" => $attrs['zoneName']));
         }
       }
     }
+    $this->handle_post_events("modify");
   }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
