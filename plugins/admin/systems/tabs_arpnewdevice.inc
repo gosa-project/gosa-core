@@ -10,6 +10,7 @@ class ArpNewDeviceTabs extends tabs
 
   function execute()
   {
+    tabs::execute(); 
     return($this->by_object[$this->current]->execute());
   }
 }

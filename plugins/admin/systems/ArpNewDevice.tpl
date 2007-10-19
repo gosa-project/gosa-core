@@ -24,4 +24,4 @@
 {$netconfig}
 
 <input type='hidden' name='ArpNewDevice_posted' value='1'>
-
+<input type='hidden' name='ArpNewDevice' value='1'>
