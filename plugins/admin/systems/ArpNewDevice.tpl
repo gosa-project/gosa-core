@@ -3,7 +3,7 @@
 <tr>
  <td style>
   <LABEL for="cn">
-   {t}Terminal name{/t}
+   {t}Dns name{/t}
   </LABEL>
  </td>
  <td>

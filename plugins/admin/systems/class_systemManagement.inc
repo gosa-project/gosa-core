@@ -740,6 +740,8 @@ class systems extends plugin
           $add= "- "._("New terminal");
         }elseif (in_array_ics('gotoWorkstation', $value['objectClass'])){
           $add= "- "._("New workstation");
+        }elseif (in_array_ics('GOhard', $value['objectClass']) && !in_array_ics("gotoMode",$value['objectClass'])){
+          $add= "- "._("Unknown device");
         }elseif (in_array_ics('GOhard', $value['objectClass'])){
           $add= "- "._("New Device");
         }

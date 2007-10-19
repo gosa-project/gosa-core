@@ -11,9 +11,11 @@ class ArpNewDevice extends plugin
   function ArpNewDevice ($config, $dn= NULL, $parent= NULL)
   {
     plugin :: plugin($config,$dn);
+    $this->cn ="";
     $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses);
     $this->acl = "#all#";
     $this->netConfigDNS->acl = $this->acl;
+    $this->netConfigDNS->force_dns();
   }
 
   function execute()
@@ -41,6 +43,9 @@ class ArpNewDevice extends plugin
   {
     $message= plugin::check();
     $message= array_merge($message, $this->netConfigDNS->check());
+    if(empty($this->cn)){
+      $message[] = _("Please specify a valid dns name.");
+    }
     return($message);
   }
 

@@ -65,7 +65,10 @@
     {if $DNS_is_account==true}
 		<td	style="width:50%;vertical-align:top;border-left:1px solid #b0b0b0;" valign="top">
 
-      {if $ZoneCnt}
+      {if $ZoneCnt }
+
+      {if !$hide_dns_check_box}  
+  
         {if $DNSAccount == true}
         <input type="checkbox" name="enableDNS" value="1" {$DNSaccountACL} class='center' 
           checked="checked"
@@ -83,7 +86,8 @@
         "/>
         {/if}
       {t}Enable DNS for this device{/t}
-      <input type='image' src='images/list_reload.png' class='center' name="reloadThisDNSStuff" {$DNSaccountACL}/>
+        <input type='image' src='images/list_reload.png' class='center' name="reloadThisDNSStuff" {$DNSaccountACL}/>
+      {/if}
       {if $DNSAccount == true}
       <div style="padding-left:20px;visibility:visible;" id="test2">
       {else}

@@ -30,7 +30,7 @@ class termDNS extends plugin
   var $initial_dhcpParentNode   = "";
   var $initial_dhcpHostEntry    = array();
   var $initial_dhcp_is_Account  = FALSE;
-
+  
 
   /* DNS attributes  
    */
@@ -39,6 +39,7 @@ class termDNS extends plugin
   var $DNSinitially_was_account = false;
   var $dnsEntry                 = array();
   var $DNSenabled               = false;
+  var $hide_dns_check_box       = FALSE;
 
   /*  Terminal dns 
    */
@@ -310,6 +311,8 @@ class termDNS extends plugin
       $smarty->assign("DNSaccountACL",chkacl($this->acl,"termDNS"));
 
       $smarty->assign("DNSAccount",$this->DNS_is_account);
+      $smarty->assign("hide_dns_check_box",$this->hide_dns_check_box);
+  
       $smarty->assign("Zones",$this->Zones);
       $smarty->assign("ZoneCnt",count($this->Zones));
       $smarty->assign("ZoneKeys",($this->Zones));
@@ -405,6 +408,9 @@ class termDNS extends plugin
         $this->DNS_is_account = true;
       }else{
         $this->DNS_is_account = false;
+      }
+      if($this->hide_dns_check_box){
+        $this->DNS_is_account = true;
       }
     }
   }
@@ -838,6 +844,14 @@ class termDNS extends plugin
       } 
     }
     return($ret);
+  }
+
+  function force_dns()
+  {
+    if($this->DNSenabled){
+      $this->DNS_is_account  = TRUE;
+      $this->hide_dns_check_box = TRUE;
+    }
   }
 }
 
