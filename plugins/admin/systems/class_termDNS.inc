@@ -706,6 +706,10 @@ class termDNS extends plugin
       if($ldap->get_error() != "Success"){
         show_ldap_error("Record:".$ldap->get_error(), _("Saving terminal to DNS object failed")); 
       }
+
+      /* Handle post event */
+      $tmp = new servdns($this->config,$this->dn);
+      $tmp->handle_post_events("modify");
     }
   }
 
