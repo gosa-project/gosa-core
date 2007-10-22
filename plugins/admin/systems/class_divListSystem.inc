@@ -149,7 +149,7 @@ class divListSystem extends MultiSelectWindow
         $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'   name='user_del_%KEY%' title='"._("Delete system")."'>";
       }
 
-      $type = $this->parent->get_system_type($val['objectClass']);
+      $type = $this->parent->get_system_type($val);
       $cnts[$type] ++;
  
       /* Generate picture list, which is currently disabled */

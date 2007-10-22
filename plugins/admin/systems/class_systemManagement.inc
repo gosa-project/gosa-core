@@ -190,9 +190,9 @@ class systems extends plugin
 
       /* Find out more about the object type */
       $ldap= $this->config->get_ldap_link();
-      $ldap->cat($this->dn, array('objectClass'));
+      $ldap->cat($this->dn, array('objectClass','gotoMode'));
       $attrs= $ldap->fetch();
-      $type= $this->get_system_type($attrs['objectClass']);
+      $type= $this->get_system_type($attrs);
 
       /* Lock the current entry, so everyone will get the
          above dialog */
@@ -424,9 +424,9 @@ class systems extends plugin
 
         /* Find out more about the object type */
         $ldap= $this->config->get_ldap_link();
-        $ldap->cat($this->dn, array('objectClass'));
+        $ldap->cat($this->dn, array('objectClass','gotoMode'));
         $attrs= $ldap->fetch();
-        $type= $this->get_system_type($attrs['objectClass']);
+        $type= $this->get_system_type($attrs);
 
         $tabs = array(
             "terminal"    => array("CLASS"=>"TERMTABS",     "TABCLASS" =>"termtabs"),
@@ -703,14 +703,14 @@ class systems extends plugin
           if($oc['CLASS'] != ""){
             $filter = "(&".$userregex."(objectClass=".$oc['CLASS'].")(cn=".$this->DivListSystem->Regex."))";
             $res = array_merge($res,get_list($filter,$this->ui->subtreeACL, $base,
-                  array("cn", "description", "macAddress", "objectClass", "sambaDomainName", "FAIstate"), GL_NONE | GL_SUBSEARCH | GL_SIZELIMIT));
+                  array("cn", "description", "macAddress", "objectClass", "sambaDomainName", "FAIstate","gotoMode"), GL_NONE | GL_SUBSEARCH | GL_SIZELIMIT));
           }
         }else{
           /* User filter? */
           if($oc['CLASS'] != ""){
             $filter = "(&".$userregex."(objectClass=".$oc['CLASS'].")(cn=".$this->DivListSystem->Regex."))";
             $res = array_merge($res,get_list($filter,$this->ui->subtreeACL, $oc['TREE'].$base,
-                  array("cn", "description", "macAddress", "objectClass", "sambaDomainName", "FAIstate"), GL_NONE | GL_SIZELIMIT));
+                  array("cn", "description", "macAddress", "objectClass", "sambaDomainName", "FAIstate", "gotoMode"), GL_NONE | GL_SIZELIMIT));
           }
         }
       } 
@@ -719,7 +719,7 @@ class systems extends plugin
     /* Search for incoming objects */ 
     $filter = "(|(&".$userregex."(objectClass=goHard)(cn=".$this->DivListSystem->Regex.")))";
     $res = array_merge($res,get_list($filter,$this->ui->subtreeACL, "ou=incoming,".$base,
-          array("cn", "description", "macAddress", "objectClass", "sambaDomainName"), GL_NONE | GL_SIZELIMIT));
+          array("cn", "description", "macAddress", "objectClass", "sambaDomainName","gotoMode"), GL_NONE | GL_SIZELIMIT));
 
     /* Get all gotoTerminal's */
     foreach ($res as $value){
@@ -740,7 +740,7 @@ class systems extends plugin
           $add= "- "._("New terminal");
         }elseif (in_array_ics('gotoWorkstation', $value['objectClass'])){
           $add= "- "._("New workstation");
-        }elseif (in_array_ics('GOhard', $value['objectClass']) && !in_array_ics("gotoMode",$value['objectClass'])){
+        }elseif (in_array_ics('GOhard', $value['objectClass']) && !isset($value['gotoMode'])){
           $add= "- "._("Unknown device");
         }elseif (in_array_ics('GOhard', $value['objectClass'])){
           $add= "- "._("New Device");
@@ -835,9 +835,10 @@ class systems extends plugin
   }
 
 
-  function get_system_type($classes)
+  function get_system_type($attrs)
   {
     $enable_arp_device_handling = preg_match("/ArpNewDevice/i",search_config($this->config->data['TABS'], "ArpNewDevice", "CLASS"));
+    $classes = $attrs['objectClass'];
 
     $type= "";
     if (in_array_ics('ieee802Device', $classes)){
@@ -852,7 +853,7 @@ class systems extends plugin
       $type= "phone";
     }elseif (in_array_ics('goServer', $classes)){
       $type= "server";
-    }elseif (in_array_ics('GOhard', $classes)&& !in_array('gotoMode', $classes) && $enable_arp_device_handling){
+    }elseif (in_array_ics('GOhard', $classes) && !isset($attrs['gotoMode']) && $enable_arp_device_handling){
       $type= "ArpNewDevice";
     }elseif (in_array_ics('GOhard', $classes)){
       $type= "NewDevice";
