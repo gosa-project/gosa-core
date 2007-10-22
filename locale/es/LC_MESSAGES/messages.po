@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-16 19:14+0200\n"
+"POT-Creation-Date: 2007-10-22 11:05+0200\n"
 "PO-Revision-Date: 2007-09-24 00:54+0200\n"
 "Last-Translator: ALEJANDRO ESCANERO BLANCO\n"
 "Language-Team:  <es@li.org>\n"
@@ -131,7 +131,7 @@ msgstr "Fax"
 #: plugins/admin/groups/class_divListGroup.inc:129
 #: plugins/admin/users/class_divListUsers.inc:148
 #: plugins/admin/departments/generic.tpl:63
-#: plugins/admin/systems/class_systemManagement.inc:876
+#: plugins/admin/systems/class_systemManagement.inc:879
 #: plugins/admin/systems/chooser.tpl:12
 #: plugins/admin/ogroups/class_ogroupManagement.inc:368
 #: plugins/gofon/phoneaccount/class_phoneAccount.inc:6
@@ -243,7 +243,7 @@ msgid "DHCP"
 msgstr "DHCP"
 
 #: contrib/gosa.conf:221 plugins/personal/environment/environment.tpl:204
-#: plugins/admin/systems/class_systemManagement.inc:885
+#: plugins/admin/systems/class_systemManagement.inc:888
 #: plugins/admin/ogroups/class_ogroupManagement.inc:371
 #: plugins/generic/references/class_reference.inc:52
 msgid "Printer"
@@ -762,16 +762,16 @@ msgstr "Direcciones alternativas"
 #: plugins/admin/systems/glpiPrinter.tpl:121
 #: plugins/admin/systems/glpi_edit_type.tpl:8
 #: plugins/admin/systems/glpi_edit_printer_type.tpl:7
-#: plugins/admin/systems/workstationStartup.tpl:104
-#: plugins/admin/systems/workstationStartup.tpl:127
-#: plugins/admin/systems/workstationStartup.tpl:146
+#: plugins/admin/systems/workstationStartup.tpl:116
+#: plugins/admin/systems/workstationStartup.tpl:139
+#: plugins/admin/systems/workstationStartup.tpl:158
 #: plugins/admin/systems/terminal.tpl:109 plugins/admin/systems/servdns.tpl:26
 #: plugins/admin/systems/workstation.tpl:90
 #: plugins/admin/systems/terminalStartup.tpl:61
 #: plugins/admin/systems/terminalStartup.tpl:80
 #: plugins/admin/systems/glpiManufacturer.tpl:6
-#: plugins/admin/systems/class_termDNS.inc:683
-#: plugins/admin/systems/class_termDNS.inc:703
+#: plugins/admin/systems/class_termDNS.inc:723
+#: plugins/admin/systems/class_termDNS.inc:743
 #: plugins/admin/systems/goSpamServer.tpl:36
 #: plugins/admin/systems/goSpamServer.tpl:88
 #: plugins/admin/systems/servdnseditzone.tpl:115
@@ -838,14 +838,14 @@ msgstr "Añadir Cuenta Local"
 #: plugins/admin/systems/remove_dhcp.tpl:14
 #: plugins/admin/systems/glpi_edit_type.tpl:10
 #: plugins/admin/systems/glpi_edit_printer_type.tpl:9
-#: plugins/admin/systems/workstationStartup.tpl:105
-#: plugins/admin/systems/workstationStartup.tpl:128
+#: plugins/admin/systems/workstationStartup.tpl:117
+#: plugins/admin/systems/workstationStartup.tpl:140
 #: plugins/admin/systems/terminal.tpl:111
 #: plugins/admin/systems/workstation.tpl:92
 #: plugins/admin/systems/terminalStartup.tpl:62
 #: plugins/admin/systems/remove_ppd.tpl:12
 #: plugins/admin/systems/class_glpiPrinterCartridges.inc:164
-#: plugins/admin/systems/class_termDNS.inc:697
+#: plugins/admin/systems/class_termDNS.inc:737
 #: plugins/admin/systems/servservice.tpl:22
 #: plugins/admin/systems/servservice.tpl:48
 #: plugins/admin/systems/glpi_edit_os.tpl:10
@@ -881,7 +881,7 @@ msgstr "Lista de direcciones de correo alternativas."
 #: plugins/personal/mail/generic.tpl:11
 #: plugins/addons/gotomasses/class_target_list.inc:171
 #: plugins/addons/mailqueue/contents.tpl:53 plugins/admin/groups/mail.tpl:14
-#: plugins/admin/systems/class_systemManagement.inc:877
+#: plugins/admin/systems/class_systemManagement.inc:880
 #: plugins/admin/systems/class_SelectDeviceType.inc:29
 #: plugins/admin/ogroups/class_ogroupManagement.inc:367
 #: plugins/generic/references/class_reference.inc:44
@@ -1661,7 +1661,7 @@ msgstr "Sin configurar"
 
 #: plugins/personal/posix/class_posixAccount.inc:200
 #: plugins/admin/systems/class_workstationService.inc:177
-#: plugins/admin/systems/class_workstationStartup.inc:860
+#: plugins/admin/systems/class_workstationStartup.inc:869
 #: plugins/admin/systems/class_terminalService.inc:190
 #: plugins/admin/systems/class_dhcpAdvanced.inc:78
 #: plugins/admin/systems/class_dhcpAdvanced.inc:87
@@ -2476,7 +2476,7 @@ msgstr ""
 
 #: plugins/personal/environment/class_environment.inc:575
 #: plugins/personal/environment/class_environment.inc:588
-#: plugins/admin/systems/class_workstationStartup.inc:658
+#: plugins/admin/systems/class_workstationStartup.inc:666
 #: plugins/admin/systems/class_terminalStartup.inc:204
 msgid "You must specify a valid mount point."
 msgstr "Por favor introduzca un punto de montaje válido."
@@ -2641,7 +2641,7 @@ msgid "Resolution"
 msgstr "Resolución"
 
 #: plugins/personal/environment/environment.tpl:139
-#: plugins/admin/systems/workstationStartup.tpl:132
+#: plugins/admin/systems/workstationStartup.tpl:144
 #: plugins/admin/systems/terminalStartup.tpl:66
 #: plugins/admin/systems/servservice.tpl:11
 msgid "Shares"
@@ -2671,7 +2671,7 @@ msgstr "Punto de montaje"
 #: plugins/admin/groups/class_groupMail.inc:582
 #: plugins/admin/applications/class_applicationParameters.inc:108
 #: plugins/admin/systems/glpiPrinter.tpl:122
-#: plugins/admin/systems/workstationStartup.tpl:147
+#: plugins/admin/systems/workstationStartup.tpl:159
 #: plugins/admin/systems/terminalStartup.tpl:81
 #: plugins/admin/systems/glpiManufacturer.tpl:8
 #: plugins/admin/systems/goSpamServer.tpl:37
@@ -2764,7 +2764,7 @@ msgstr "Nombre del Script"
 #: plugins/admin/systems/component.tpl:30 plugins/admin/systems/phone.tpl:30
 #: plugins/admin/systems/printer.tpl:13
 #: plugins/admin/systems/wingeneric.tpl:25
-#: plugins/admin/systems/ArpNewDevice.tpl:16
+#: plugins/admin/systems/ArpNewDevice.tpl:17
 #: plugins/admin/mimetypes/paste_generic.tpl:21
 #: plugins/admin/mimetypes/generic.tpl:30 plugins/admin/ogroups/generic.tpl:13
 #: plugins/gofon/macro/generic.tpl:41 plugins/gofon/conference/generic.tpl:64
@@ -5127,7 +5127,7 @@ msgid "Show workstations"
 msgstr "Mostrar estaciones de trabajo"
 
 #: plugins/addons/gotomasses/class_target_list.inc:173
-#: plugins/admin/systems/class_systemManagement.inc:872
+#: plugins/admin/systems/class_systemManagement.inc:875
 #: plugins/admin/systems/class_SelectDeviceType.inc:29
 #: plugins/admin/ogroups/class_ogroupManagement.inc:369
 #: plugins/generic/references/class_reference.inc:48
@@ -5981,7 +5981,6 @@ msgstr "Elegir una variable para eliminar o editar"
 #: plugins/admin/departments/generic.tpl:4
 #: plugins/admin/systems/terminal.tpl:1
 #: plugins/admin/systems/workstation.tpl:1
-#: plugins/admin/systems/ArpNewDevice.tpl:1
 #: plugins/admin/ogroups/class_divListOGroup.inc:53
 #: plugins/gofon/conference/generic.tpl:4
 msgid "Properties"
@@ -7705,7 +7704,7 @@ msgstr ""
 "anular el uso de plantillas."
 
 #: plugins/admin/users/template.tpl:15
-#: plugins/admin/systems/class_systemManagement.inc:870
+#: plugins/admin/systems/class_systemManagement.inc:873
 msgid "Template"
 msgstr "Plantilla"
 
@@ -8255,7 +8254,7 @@ msgstr "presente"
 
 #: plugins/admin/systems/class_terminalInfo.inc:62
 #: plugins/admin/systems/class_workstationService.inc:247
-#: plugins/admin/systems/class_workstationStartup.inc:530
+#: plugins/admin/systems/class_workstationStartup.inc:538
 #: plugins/admin/systems/class_terminalService.inc:255
 #: plugins/admin/systems/class_terminalStartup.inc:168
 #: plugins/admin/systems/class_terminalGeneric.inc:251
@@ -8406,7 +8405,7 @@ msgstr "Autodetección"
 msgid "Enable DHCP for this device"
 msgstr "Activar DHCP para este dispositivo"
 
-#: plugins/admin/systems/network.tpl:41 plugins/admin/systems/network.tpl:116
+#: plugins/admin/systems/network.tpl:41 plugins/admin/systems/network.tpl:120
 msgid "not configured"
 msgstr "no configurado"
 
@@ -8418,21 +8417,21 @@ msgstr "Nodo superior"
 msgid "Edit settings"
 msgstr "Editar parámetros"
 
-#: plugins/admin/systems/network.tpl:85 plugins/admin/systems/network.tpl:116
+#: plugins/admin/systems/network.tpl:88 plugins/admin/systems/network.tpl:120
 msgid "Enable DNS for this device"
 msgstr "Activar DNS para este dispositivo"
 
-#: plugins/admin/systems/network.tpl:94
+#: plugins/admin/systems/network.tpl:98
 msgid "Zone"
 msgstr "Zona"
 
-#: plugins/admin/systems/network.tpl:102
+#: plugins/admin/systems/network.tpl:106
 #: plugins/admin/systems/servdnseditzone.tpl:94
 #: plugins/admin/systems/class_servDNS.inc:250
 msgid "TTL"
 msgstr "TTL"
 
-#: plugins/admin/systems/network.tpl:107
+#: plugins/admin/systems/network.tpl:111
 msgid "Dns records"
 msgstr "Registros DNS"
 
@@ -8789,7 +8788,7 @@ msgstr "Cliente ICA"
 #: plugins/admin/systems/class_workstationService.inc:230
 #: plugins/admin/systems/class_workstationStartup.inc:339
 #: plugins/admin/systems/class_workstationStartup.inc:343
-#: plugins/admin/systems/class_workstationStartup.inc:857
+#: plugins/admin/systems/class_workstationStartup.inc:865
 #: plugins/admin/systems/class_workstationGeneric.inc:140
 #: plugins/admin/systems/class_terminalService.inc:68
 #: plugins/admin/systems/class_terminalService.inc:96
@@ -8995,7 +8994,7 @@ msgstr ""
 "El comando '%s', especificado como método 'KERNELS' para la extensión '%s' "
 "no existe."
 
-#: plugins/admin/systems/class_workstationStartup.inc:465
+#: plugins/admin/systems/class_workstationStartup.inc:473
 msgid ""
 "There are packages in your configuration, which can't be resolved with "
 "current server/release settings."
@@ -9003,11 +9002,11 @@ msgstr ""
 "Existen paquetes en su configuración actual que no se pueden resolver con la "
 "configuración actual de servidor/versión."
 
-#: plugins/admin/systems/class_workstationStartup.inc:510
+#: plugins/admin/systems/class_workstationStartup.inc:518
 msgid "Please select a 'FAI server' or remove the 'FAI classes'."
 msgstr "Por favor selecciones un 'servidor FAI' o elimine las 'clases FAI'."
 
-#: plugins/admin/systems/class_workstationStartup.inc:570
+#: plugins/admin/systems/class_workstationStartup.inc:578
 msgid ""
 "There is already a profile in your selection that contain partition table "
 "configurations."
@@ -9015,11 +9014,11 @@ msgstr ""
 "Ya existe un usuario con este perfil en su selección que tiene "
 "configuraciones de tabla de particiones."
 
-#: plugins/admin/systems/class_workstationStartup.inc:764
+#: plugins/admin/systems/class_workstationStartup.inc:772
 msgid "Not available in current setup"
 msgstr "No esta disponible en la configuración actual"
 
-#: plugins/admin/systems/class_workstationStartup.inc:931
+#: plugins/admin/systems/class_workstationStartup.inc:945
 #, php-format
 msgid ""
 "Can't resolve one or more of the given FAIclass(es) [%s] in FAI server '%s'. "
@@ -9028,7 +9027,7 @@ msgstr ""
 "No se puede resolver una o mas de las clase(es) FAI [%s] introducidas en el "
 "servidor FAI '%s'. El servidor fue configurado a 'automático'."
 
-#: plugins/admin/systems/class_workstationStartup.inc:944
+#: plugins/admin/systems/class_workstationStartup.inc:958
 #, php-format
 msgid ""
 "Can't resolve the given FAIclass(es) [%s] anyway, please check your FAI "
@@ -9039,12 +9038,12 @@ msgstr ""
 "compruebe la configuración FAI, posiblemente algunas clases serán eliminadas "
 "o renombradas. El servidor fue configurado a 'automático'."
 
-#: plugins/admin/systems/class_workstationStartup.inc:1115
+#: plugins/admin/systems/class_workstationStartup.inc:1129
 msgid "Saving workstation startup settings failed"
 msgstr ""
 "Ha fallado la grabación de configuración de inicio de estación de trabajo"
 
-#: plugins/admin/systems/class_workstationStartup.inc:1165
+#: plugins/admin/systems/class_workstationStartup.inc:1179
 #, php-format
 msgid ""
 "Can't execute specified REPOSITORY_HOOK '%s' please check your gosa.conf."
@@ -9052,7 +9051,7 @@ msgstr ""
 "No se puede ejecutar el método REPOSITORY_HOOK '%s', por favor compruebe su "
 "gosa.conf."
 
-#: plugins/admin/systems/class_workstationStartup.inc:1167
+#: plugins/admin/systems/class_workstationStartup.inc:1181
 #: plugins/admin/systems/class_servRepositorySetup.inc:184
 #, php-format
 msgid ""
@@ -9237,25 +9236,25 @@ msgid "FAI server"
 msgstr "Servidor FAI"
 
 #: plugins/admin/systems/workstationStartup.tpl:64
-#: plugins/admin/systems/workstationStartup.tpl:96
+#: plugins/admin/systems/workstationStartup.tpl:108
 msgid "Assigned FAI classes"
 msgstr "Asignar clases FAI"
 
-#: plugins/admin/systems/workstationStartup.tpl:86
+#: plugins/admin/systems/workstationStartup.tpl:92
 msgid "set"
 msgstr "poner"
 
-#: plugins/admin/systems/workstationStartup.tpl:118
+#: plugins/admin/systems/workstationStartup.tpl:130
 #: plugins/admin/systems/terminalStartup.tpl:53
 msgid "Kernel modules (format: name parameters)"
 msgstr "Módulos del núcleo (formato: nombre parámetros)"
 
-#: plugins/admin/systems/workstationStartup.tpl:120
+#: plugins/admin/systems/workstationStartup.tpl:132
 #: plugins/admin/systems/terminalStartup.tpl:55
 msgid "Add additional modules to load on startup"
 msgstr "Añadir módulos adicionales que serán cargados al arrancar"
 
-#: plugins/admin/systems/workstationStartup.tpl:145
+#: plugins/admin/systems/workstationStartup.tpl:157
 #: plugins/admin/systems/terminalStartup.tpl:79
 msgid "Mountpoint"
 msgstr "Punto de montaje"
@@ -9356,7 +9355,6 @@ msgid "Terminal template"
 msgstr "Plantilla de terminal"
 
 #: plugins/admin/systems/terminal.tpl:10
-#: plugins/admin/systems/ArpNewDevice.tpl:6
 msgid "Terminal name"
 msgstr "Nombre de terminal"
 
@@ -9647,7 +9645,7 @@ msgid "New Terminal template"
 msgstr "Nueva plantilla de Terminal"
 
 #: plugins/admin/systems/class_divListSystem.inc:95
-#: plugins/admin/systems/class_systemManagement.inc:883
+#: plugins/admin/systems/class_systemManagement.inc:886
 msgid "New Terminal"
 msgstr "Nuevo Terminal"
 
@@ -9656,7 +9654,7 @@ msgid "New Workstation template"
 msgstr "Nueva plantilla de Estación de trabajo"
 
 #: plugins/admin/systems/class_divListSystem.inc:97
-#: plugins/admin/systems/class_systemManagement.inc:884
+#: plugins/admin/systems/class_systemManagement.inc:887
 msgid "New Workstation"
 msgstr "Nueva Estación de trabajo"
 
@@ -10109,7 +10107,7 @@ msgstr "Su navegador no soporta iframes."
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:26
 #: plugins/admin/systems/class_servDHCP.inc:34
 #: plugins/admin/systems/class_servDHCP.inc:312
-#: plugins/admin/systems/class_servDHCP.inc:598
+#: plugins/admin/systems/class_servDHCP.inc:604
 msgid "Global options"
 msgstr "Opciones globales"
 
@@ -10440,7 +10438,7 @@ msgstr "Adjunto"
 msgid "Mime-type"
 msgstr "Tipo MIME"
 
-#: plugins/admin/systems/class_termDNS.inc:190
+#: plugins/admin/systems/class_termDNS.inc:191
 #, php-format
 msgid ""
 "Can't execute specified AUTO_NETWORK_HOOK '%s'. Please check your gosa.conf."
@@ -10448,27 +10446,23 @@ msgstr ""
 "No puedo ejecutar el AUTO_NETWORK_HOOK '%s' indicado. Por favor compruebe el "
 "archivo gosa.conf."
 
-#: plugins/admin/systems/class_termDNS.inc:324
+#: plugins/admin/systems/class_termDNS.inc:327
 msgid "Not matching"
 msgstr "No mostrar los coincidentes"
 
-#: plugins/admin/systems/class_termDNS.inc:420
-msgid "You have not configured your dhcp settings yet."
-msgstr "No ha configurado los parametros DHCP todavía."
-
-#: plugins/admin/systems/class_termDNS.inc:430
+#: plugins/admin/systems/class_termDNS.inc:436
 msgid "The required field 'IP-address' is not set."
 msgstr "No ha introducido el campo obligatorio'Dirección IP'."
 
-#: plugins/admin/systems/class_termDNS.inc:437
+#: plugins/admin/systems/class_termDNS.inc:443
 msgid "Wrong IP format in field IP-address."
 msgstr "El campo 'Dirección IP' no tiene el formato correcto."
 
-#: plugins/admin/systems/class_termDNS.inc:443
+#: plugins/admin/systems/class_termDNS.inc:449
 msgid "The required field 'MAC-address' is not set."
 msgstr "No ha introducido el campo obligatorio'Dirección MAC'."
 
-#: plugins/admin/systems/class_termDNS.inc:449
+#: plugins/admin/systems/class_termDNS.inc:455
 msgid ""
 "The given macaddress is invalid. There must be 6 2byte segments seperated by "
 "':'."
@@ -10476,7 +10470,7 @@ msgstr ""
 "La dirección MAX introducida no es válida. Debe tener 6 2 bytes segmentos "
 "separados por ':'."
 
-#: plugins/admin/systems/class_termDNS.inc:462
+#: plugins/admin/systems/class_termDNS.inc:468
 #, php-format
 msgid ""
 "The specified IP address '%s' is not matching the selected reverse zone "
@@ -10485,17 +10479,17 @@ msgstr ""
 "La dirección IP introducida '%s' no coincide con la entrada '%s' de la zona "
 "inversa seleccionada."
 
-#: plugins/admin/systems/class_termDNS.inc:477
+#: plugins/admin/systems/class_termDNS.inc:483
 #, php-format
 msgid "Found duplicate value for record type '%s'."
 msgstr "Encontrado un valor duplicado para el tipo de registro '%s'."
 
-#: plugins/admin/systems/class_termDNS.inc:485
+#: plugins/admin/systems/class_termDNS.inc:491
 #, php-format
 msgid "Found more than one entry for the uniqe record type '%s'."
 msgstr "Encontrado mas de una entrada para el tipo de registro único '%s'."
 
-#: plugins/admin/systems/class_termDNS.inc:496
+#: plugins/admin/systems/class_termDNS.inc:502
 #, php-format
 msgid ""
 "The device IP '%s' is added as 'A Record', this will be done automatically, "
@@ -10504,30 +10498,30 @@ msgstr ""
 "El dispositivo IP '%s' se ha añadido como 'Registro A', esto se hará "
 "automáticamente, por favor elimine el registro."
 
-#: plugins/admin/systems/class_termDNS.inc:503
+#: plugins/admin/systems/class_termDNS.inc:509
 #: plugins/admin/systems/class_servDNSeditZone.inc:437
 #, php-format
 msgid "Only lowercase is allowed, please check your '%ss'."
 msgstr "Solo están permitidas minúsculas, por favor compruebe su '%ss'."
 
-#: plugins/admin/systems/class_termDNS.inc:557
+#: plugins/admin/systems/class_termDNS.inc:578
 msgid "Removing dhcp entry for this object failed."
 msgstr "Ha fallado la eliminación de la entrada DHCP de este objeto."
 
-#: plugins/admin/systems/class_termDNS.inc:574
-#: plugins/admin/systems/class_termDNS.inc:589
+#: plugins/admin/systems/class_termDNS.inc:602
+#: plugins/admin/systems/class_termDNS.inc:621
 msgid "Tried to add new dhcp entry failed."
 msgstr "Ha fallado al intentar añadir nueva entrada DHCP."
 
-#: plugins/admin/systems/class_termDNS.inc:592
+#: plugins/admin/systems/class_termDNS.inc:624
 msgid "Removing old dhcp entry failed."
 msgstr "Ha fallado la eliminación de la entrada antigua de DHCP."
 
-#: plugins/admin/systems/class_termDNS.inc:604
+#: plugins/admin/systems/class_termDNS.inc:640
 msgid "Modifying dhcp entry failed."
 msgstr "Ha fallado la modificación de la entrada DHCP"
 
-#: plugins/admin/systems/class_termDNS.inc:671
+#: plugins/admin/systems/class_termDNS.inc:707
 msgid "Saving terminal to DNS object failed"
 msgstr "Ha fallado la grabación del objeto DNS desde terminal"
 
@@ -11447,17 +11441,17 @@ msgid "Can't remove DHCP object!"
 msgstr "Eliminar objeto"
 
 #: plugins/admin/systems/class_servDHCP.inc:534
-#: plugins/admin/systems/class_servDHCP.inc:537
+#: plugins/admin/systems/class_servDHCP.inc:540
 #, fuzzy
 msgid "Can't save DHCP object!"
 msgstr "No se puede grabar la prueba vacía."
 
-#: plugins/admin/systems/class_servDHCP.inc:559
+#: plugins/admin/systems/class_servDHCP.inc:565
 #, fuzzy
 msgid "Saving DHCP service failed"
 msgstr "Ha fallado la grabación del servidor"
 
-#: plugins/admin/systems/class_servDHCP.inc:675
+#: plugins/admin/systems/class_servDHCP.inc:681
 #, fuzzy
 msgid ""
 "DHCP configuration set is unknown. Please contact your system administrator."
@@ -11663,56 +11657,61 @@ msgid "New workstation"
 msgstr "Nueva estación de trabajo"
 
 #: plugins/admin/systems/class_systemManagement.inc:744
+#, fuzzy
+msgid "Unknown device"
+msgstr "Desconocido"
+
+#: plugins/admin/systems/class_systemManagement.inc:746
 msgid "New Device"
 msgstr "Nuevo Dispositivo"
 
-#: plugins/admin/systems/class_systemManagement.inc:765
+#: plugins/admin/systems/class_systemManagement.inc:767
 msgid "Terminal template for"
 msgstr "Plantilla de terminal para"
 
-#: plugins/admin/systems/class_systemManagement.inc:777
+#: plugins/admin/systems/class_systemManagement.inc:779
 msgid "Workstation template for"
 msgstr "Plantilla de estación de trabajo para"
 
-#: plugins/admin/systems/class_systemManagement.inc:869
+#: plugins/admin/systems/class_systemManagement.inc:872
 msgid "New System from incoming"
 msgstr "Nuevo sistema desde entrada"
 
-#: plugins/admin/systems/class_systemManagement.inc:871
+#: plugins/admin/systems/class_systemManagement.inc:874
 #: plugins/admin/systems/class_SelectDeviceType.inc:29
 #: plugins/admin/ogroups/class_ogroupManagement.inc:370
 msgid "Terminal"
 msgstr "Terminal"
 
-#: plugins/admin/systems/class_systemManagement.inc:873
+#: plugins/admin/systems/class_systemManagement.inc:876
 msgid "Workstation is installing"
 msgstr "La estación de trabajo se está instalando"
 
-#: plugins/admin/systems/class_systemManagement.inc:874
+#: plugins/admin/systems/class_systemManagement.inc:877
 msgid "Workstation is waiting for action"
 msgstr "La estación de trabajo esta esperando por una acción"
 
-#: plugins/admin/systems/class_systemManagement.inc:875
+#: plugins/admin/systems/class_systemManagement.inc:878
 msgid "Workstation installation failed"
 msgstr "Ha fallado la instalación de la estación de trabajo"
 
-#: plugins/admin/systems/class_systemManagement.inc:878
+#: plugins/admin/systems/class_systemManagement.inc:881
 msgid "Server is installing"
 msgstr "El servidor se está instalando"
 
-#: plugins/admin/systems/class_systemManagement.inc:879
+#: plugins/admin/systems/class_systemManagement.inc:882
 msgid "Server is waiting for action"
 msgstr "El servidor está esperando por una acción"
 
-#: plugins/admin/systems/class_systemManagement.inc:880
+#: plugins/admin/systems/class_systemManagement.inc:883
 msgid "Server installation failed"
 msgstr "Ha fallado la instalación del servidor"
 
-#: plugins/admin/systems/class_systemManagement.inc:881
+#: plugins/admin/systems/class_systemManagement.inc:884
 msgid "Winstation"
 msgstr "Estación de trabajo Windows"
 
-#: plugins/admin/systems/class_systemManagement.inc:882
+#: plugins/admin/systems/class_systemManagement.inc:885
 msgid "Network Device"
 msgstr "Dispositivo de Red"
 
@@ -12746,7 +12745,29 @@ msgstr ""
 msgid "Create ISO-Image"
 msgstr "Crear imagen ISO"
 
-#: plugins/admin/systems/class_ArpNewDevice.inc:64
+#: plugins/admin/systems/ArpNewDevice.tpl:1
+msgid "Integrating unknown devices"
+msgstr ""
+
+#: plugins/admin/systems/ArpNewDevice.tpl:3
+msgid ""
+"The current device has been detected by the ARP monitor used by GOsa. You "
+"can integrate this device into your running DHCP/DNS infrastructure by "
+"submitting this form. The device entry will disapear from the list of the "
+"systems and move to the DNS/DHCP configuration."
+msgstr ""
+
+#: plugins/admin/systems/ArpNewDevice.tpl:9
+#, fuzzy
+msgid "DNS name"
+msgstr "Nombre"
+
+#: plugins/admin/systems/class_ArpNewDevice.inc:47
+#, fuzzy
+msgid "Please specify a valid dns name."
+msgstr "Por favor introduzca un nombre de disco válido"
+
+#: plugins/admin/systems/class_ArpNewDevice.inc:69
 msgid ""
 "Could not remove arp-alert device after writing dns and dhcp configuration."
 msgstr ""
@@ -13259,7 +13280,7 @@ msgid "round robin with memory"
 msgstr "round robin en memoria"
 
 #: plugins/admin/ogroups/class_phonequeue.inc:148
-#: plugins/gofon/macro/class_gofonMacro.inc:172
+#: plugins/gofon/macro/class_gofonMacro.inc:175
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:265
 msgid ""
 "Can't save any changes to asterisk database, there is currently no mysql "
@@ -13269,7 +13290,7 @@ msgstr ""
 "ninguna extensión mysql en su configuración php."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:159
-#: plugins/gofon/macro/class_gofonMacro.inc:182
+#: plugins/gofon/macro/class_gofonMacro.inc:185
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:276
 #, php-format
 msgid ""
@@ -13280,7 +13301,7 @@ msgstr ""
 "registro de GOsa por el error mysql."
 
 #: plugins/admin/ogroups/class_phonequeue.inc:166
-#: plugins/gofon/macro/class_gofonMacro.inc:189
+#: plugins/gofon/macro/class_gofonMacro.inc:192
 #: plugins/gofon/conference/class_phoneConferenceGeneric.inc:283
 #, php-format
 msgid "Can't select database '%s' on home server '%s'."
@@ -13693,39 +13714,39 @@ msgstr "Está a punto de eliminar la macro '%s'."
 msgid "You are not allowed to delete this macro!"
 msgstr "¡No le está permitido eliminar esta macro!"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:219
+#: plugins/gofon/macro/class_gofonMacro.inc:222
 #, php-format
 msgid "Removing macro from '%s' failed. Check GOsa log for mysql error."
 msgstr ""
 "Ha fallado la eliminación de la macro de '%s'. Compruebe el registro de GOsa "
 "por errores mysql."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:287
+#: plugins/gofon/macro/class_gofonMacro.inc:290
 #, php-format
 msgid "More than one '(' is currently not supported. Line : '%s'."
 msgstr "Mas de una '(' no está soportada. Linea: '%s'."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:290
+#: plugins/gofon/macro/class_gofonMacro.inc:293
 #, php-format
 msgid "More than one ')' is currently not supported. Line : '%s'."
 msgstr "Mas de una ')' no está soportada. Linea: '%s'."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:294
+#: plugins/gofon/macro/class_gofonMacro.inc:297
 #, php-format
 msgid "There is no application given in line : '%s'."
 msgstr "No existe ninguna aplicación en la linea: '%s'."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:298
+#: plugins/gofon/macro/class_gofonMacro.inc:301
 #, php-format
 msgid "There is no extension type given in line : '%s'."
 msgstr "No existe ninguna tipo de extensión en la linea: '%s'."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:327
+#: plugins/gofon/macro/class_gofonMacro.inc:330
 #, php-format
 msgid "Insert of new macro failed for server '%s'."
 msgstr "Ha fallado la inserción de una nueva macro para el servidor '%s'."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:362
+#: plugins/gofon/macro/class_gofonMacro.inc:365
 msgid ""
 "There must be at least one server with an asterisk database to save this "
 "phone macro."
@@ -13733,27 +13754,27 @@ msgstr ""
 "Debería haber al menos un servidor con una base de datos asterisk para poder "
 "grabar esta macro telefónica."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:376
+#: plugins/gofon/macro/class_gofonMacro.inc:379
 #, php-format
 msgid "The given cn '%s' already exists."
 msgstr "Ya existe un cn '%s'."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:382
+#: plugins/gofon/macro/class_gofonMacro.inc:385
 msgid "You must specify the 'Display Name' in order to save this macro"
 msgstr "Debe introducir el 'Nombre a Mostrar' para poder guardar esta macro"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:386
+#: plugins/gofon/macro/class_gofonMacro.inc:389
 msgid "The given cn is too long, to create a Makro entry, maximum 20 chars."
 msgstr ""
 "EL cn introducido es demasiado largo, máximo 20 caracteres para crear una "
 "entrada de macro."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:392
+#: plugins/gofon/macro/class_gofonMacro.inc:395
 #, php-format
 msgid "Insufficient permissions, can't change attribute '%s' in goFonMacro"
 msgstr "No tiene permisos, No puede cambiar el atributo '%s' en goFonMacro"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:403
+#: plugins/gofon/macro/class_gofonMacro.inc:406
 msgid ""
 "This macro is still in use. It is necessary to mark this macro as visible "
 "for users."
@@ -13761,11 +13782,11 @@ msgstr ""
 "Esta macro está todavía en uso. Es necesario marcar esta macro como visible "
 "por usuarios."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:411
+#: plugins/gofon/macro/class_gofonMacro.inc:414
 msgid "Makro length must be lower than 100 lines"
 msgstr "La longitud de la macro debe ser menor que 100 lineas"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:429
+#: plugins/gofon/macro/class_gofonMacro.inc:432
 msgid ""
 "This macro is still in use. To delete this Macro ensure that nobody has "
 "selected it."
@@ -13773,7 +13794,7 @@ msgstr ""
 "La macro está todavía en uso. Para eliminar esta Macro asegúrese que nadie "
 "la ha seleccionado."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:442
+#: plugins/gofon/macro/class_gofonMacro.inc:445
 msgid ""
 "Could not remove the macro entry from asterisk databases. Please check your "
 "asterisk database configurations."
@@ -13781,15 +13802,15 @@ msgstr ""
 "No se puede eliminar la entrada de macro de la bases de datos asterisk. Por "
 "favor compruebe las configuraciones de bases de datos asterisk."
 
-#: plugins/gofon/macro/class_gofonMacro.inc:448
+#: plugins/gofon/macro/class_gofonMacro.inc:451
 msgid "Removing phone macro failed"
 msgstr "Ha fallado la eliminación de la macro telefónica"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:457
+#: plugins/gofon/macro/class_gofonMacro.inc:460
 msgid "Removing phone macro reverences failed"
 msgstr "Ha fallado la eliminación de las referencias de la macro telefónica"
 
-#: plugins/gofon/macro/class_gofonMacro.inc:491
+#: plugins/gofon/macro/class_gofonMacro.inc:494
 msgid "Saving phone macro failed"
 msgstr "Ha fallado la grabación de la macro telefónica"
 
@@ -17983,6 +18004,9 @@ msgstr ""
 "Si esta detección de bloqueo es falsa, la otra persona cerro su navegador "
 "mientras estaba editando. Puede eliminar el archivo de bloqueo en ese caso, "
 "pulsando en el botón <i>Eliminar</i>."
+
+#~ msgid "You have not configured your dhcp settings yet."
+#~ msgstr "No ha configurado los parametros DHCP todavía."
 
 #~ msgid "There is already a ppd file for this kind of printer."
 #~ msgstr "Ya existe un archivo PPD para ese tipo de impresora."
