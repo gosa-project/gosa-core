@@ -875,6 +875,12 @@ class workstartup extends plugin
         if not, dont't add them to our list
      */
     foreach($this->FAIServRepConfig as $mirror => $rest){
+
+      /* Automatically selection is available everytime */
+      if($mirror == "auto"){
+        continue;
+      }
+
       $use = false;
       if(count($this->FAIclass) == 0){
         $use = true;
