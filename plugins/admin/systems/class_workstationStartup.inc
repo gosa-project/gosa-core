@@ -867,7 +867,7 @@ class workstartup extends plugin
     }
 
     $ret['auto']['NAME']=_("automatic");
-    $ret['auto']['use'] = TRUE;
+    $ret['auto']['USE'] = TRUE;
     $secs  = array();
 
     /* Walk through all available servers 
@@ -900,41 +900,36 @@ class workstartup extends plugin
   {
     $ret = array();
 
-    if($this->FAIdebianMirror == "inherited") return(array());
+    if($this->FAIdebianMirror == "inherited") {
+      return(array());
+    }
 
     if(!isset($this->FAIServRepConfig[$this->FAIdebianMirror])){
       $this->FAIdebianMirror = "auto";
     }
 
     $errorClasses = array();
-    foreach($this->FAIServRepConfig as $mirror => $rest){
-      if(isset($this->FAIServRepConfig[$mirror]['RELEASE'])){ 
-        foreach($this->FAIServRepConfig[$mirror]['RELEASE'] as $release => $sections){
-          $use = true;
+    if(isset($this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'])) {
+      foreach($this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'] as $release => $sections){
+        $use = true;
 
-          if(!count($this->FAIclass) == 0){
-            foreach($this->FAIclass as $class){
-              if(!in_array($class, $sections['PACKAGES'])){
-                $use = false;
-                $errorClasses[$class] = $class;
-              }else{
-                if(isset($errorClasses[$class])){
-                  unset($errorClasses[$class]); 
-                }
+        if(!count($this->FAIclass) == 0){
+          foreach($this->FAIclass as $class){
+            if(!in_array($class, $sections['PACKAGES'])){
+              $use = false;
+              $errorClasses[$class] = $class;
+            }else{
+              if(isset($errorClasses[$class])){
+                unset($errorClasses[$class]);
               }
             }
           }
-
-          if($mirror != $this->FAIdebianMirror){
-            $use = false;
-          }else{
-            $use = true;
-          }
-          $ret[$release]['NAME']=$release;
-          $ret[$release]['USE']=$use;
         }
-      } 
+        $ret[$release]['NAME']=$release;
+        $ret[$release]['USE']=$use;
+      }
     }
+
     if((count($ret) == 0 ) && ($this->FAIdebianMirror != "auto")){
 
       $eClasses = " ";
@@ -951,7 +946,7 @@ class workstartup extends plugin
       foreach($errorClasses as $class){
         $eClasses .= $class." ";
       }
-      
+
       $this->unresolved_classes = $errorClasses;
       $this->FAIdebianMirror = "auto";
       //$this->FAIclass= array();
