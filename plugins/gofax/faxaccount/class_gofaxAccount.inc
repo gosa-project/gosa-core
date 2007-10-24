@@ -23,6 +23,7 @@ class gofaxAccount extends plugin
   var $goFaxSBlockgroups= array();
   var $mail= "";
   var $facsimileAlternateTelephoneNumber= array();
+  var $fax_formats = array("pdf","ps","png","mtiff","tiff");  
 
   /* Internal variables */
   var $printerList= array();
@@ -574,7 +575,7 @@ class gofaxAccount extends plugin
     /* Show main page */
     $smarty->assign("languages", get_languages(TRUE));
 
-    $smarty->assign("formats", $this->config->data['MAIN']['FAXFORMATS']);
+    $smarty->assign("formats",  $this->fax_formats);
     $smarty->assign("printers", $this->printerList);
 
     /* Load attributes */

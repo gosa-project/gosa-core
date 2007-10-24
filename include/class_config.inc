@@ -38,7 +38,7 @@ class config  {
 
   /* Configuration data */
   var $data= array( 'TABS' => array(), 'LOCATIONS' => array(), 'SERVERS' => array(),
-      'MAIN' => array( 'FAXFORMATS' => array() ),
+      'MAIN' => array(),
       'MENU' => array(), 'SERVICE' => array());
   var $basedir= "";
 
@@ -140,14 +140,6 @@ class config  {
                     }
 
                     $this->data['LOCATIONS'][$this->currentLocation]['REFERRAL'][$server]= $attrs;
-                  }
-                  break;
-
-                  /* Handle faxformat */
-      case 'FAXFORMAT':	
-                  if ($this->tags[$this->level-2] == 'MAIN'){
-                    /* Add fax formats */
-                    $this->data['MAIN']['FAXFORMATS'][]= $attrs['TYPE'];
                   }
                   break;
 
