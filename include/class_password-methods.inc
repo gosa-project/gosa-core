@@ -124,6 +124,11 @@ function change_password ($dn, $password, $mode=0, $hash= "")
 #    $hash= "clear";
 #  }
 
+  /* Is ensure that clear passwords will stay clear */
+  if($hash == "" && isset($attrs['userPassword'][0]) && !preg_match ("/^{([^}]+)}(.+)/", $attrs['userPassword'][0])){
+    $hash = "clear";
+  }
+
   // Detect the encryption Method
   if ( (isset($attrs['userPassword'][0]) &&  preg_match ("/^{([^}]+)}(.+)/", $attrs['userPassword'][0], $matches)) ||  $hash != ""){
 
