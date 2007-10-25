@@ -955,6 +955,10 @@ function is_phone_nr($nr)
   return preg_match ("/^[\/0-9 ()+*-]+$/", $nr);
 }
 
+function is_dns_name($str)
+{
+  return(preg_match("/^[a-z0-9\.\-_\:]*$/i",$str));
+}
 
 function is_url($url)
 {
