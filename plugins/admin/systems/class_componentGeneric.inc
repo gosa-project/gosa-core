@@ -148,6 +148,11 @@ class componentGeneric extends plugin
       $message[]= _("The required field 'Component name' is not set.");
     }
 
+    /* Check if given name is a valid host/dns name */
+    if(!is_dns_name($this->cn) && chkacl ($this->acl, "cn") == ""){
+      $message[] = _("Please specify a valid name for this object.");
+    }
+
     /* To check for valid ip*/
     if($this->netConfigDNS->ipHostNumber == ""){
        $message[]= _("The required field IP address is empty.");

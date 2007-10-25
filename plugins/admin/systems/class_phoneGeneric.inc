@@ -303,6 +303,11 @@ class phoneGeneric extends plugin
       $message[]= _("The 'Phone name' '0' is reserved and cannot be used.");
     }
 
+    /* Check if given name is a valid host/dns name */
+    if(!is_dns_name($this->cn) && chkacl ($this->acl, "cn") == ""){
+      $message[] = _("Please specify a valid name for this object.");
+    }
+
     $ui= get_userinfo();
     $acl= get_permissions ($this->dn, $ui->subtreeACL);
     $acl= get_module_permission($acl, "phone", $this->dn);

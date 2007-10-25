@@ -422,6 +422,11 @@ class termgeneric extends plugin
       $message[]= _("The required field 'Terminal name' is not set.");
     }
 
+    /* Check if given name is a valid host/dns name */
+    if(!is_dns_name($this->cn) && chkacl ($this->acl, "cn") == ""){
+      $message[] = _("Please specify a valid name for this object.");
+    }
+
     if ($this->orig_dn == 'new'){
       $ldap= $this->config->get_ldap_link();
       $ldap->cd ($this->config->current['BASE']);

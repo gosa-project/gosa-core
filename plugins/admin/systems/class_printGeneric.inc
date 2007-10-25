@@ -644,7 +644,7 @@ class printgeneric extends plugin
     }
 
     /* must: cn */
-    if(($this->BelongsTo == "Printer") && !preg_match("/^[a-z0-9\.\-_]*$/i",$this->cn)){
+    if(($this->BelongsTo == "Printer") && !is_dns_name($this->cn)){
       $message[]= _("Invalid character in printer name.");
     }
 
