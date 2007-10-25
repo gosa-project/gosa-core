@@ -42,7 +42,7 @@ class termgroup extends plugin
     $this->is_account = true;
     $ui               = get_userinfo();
     $acl              = get_permissions ($this->dn, $ui->subtreeACL);
-    $this->acl        = get_module_permission($acl, "group", $this->dn);
+    $this->acl        = get_module_permission($acl, "ogroup", $this->dn);
 
     $this->modes["active"]= _("Activated");
     $this->modes["locked"]= _("Locked");

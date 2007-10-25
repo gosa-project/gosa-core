@@ -102,11 +102,13 @@ class ogrouptabs extends tabs
       $this->by_object['workservice']= new workservice($this->config, $this->dn);
       $this->by_object['workservice']->inheritTimeServer = false;
       $this->by_object['workservice']->parent= &$this;
+      $this->by_object['workservice']->acl = "#all#";
     }
     if((preg_match("/S/",$objects) || preg_match("/W/",$objects))&&(!isset($this->by_object['workstartup']))){
       $this->by_name['workstartup']= _("Startup");
       $this->by_object['workstartup']= new workstartup($this->config, $this->dn);
       $this->by_object['workstartup']->parent= &$this;
+      $this->by_object['workstartup']->acl = "#all#";
       $this->by_name['faiSummary']= _("Summary");
       $this->by_object['faiSummary']= new faiSummaryTab($this->config, $this->dn);
       $this->by_object['faiSummary']->parent= &$this;
