@@ -894,7 +894,7 @@ class workstartup extends plugin
       }else{
         $tmp = $this->getFAIreleases();
         foreach($tmp as $release => $data){
-          if(isset($rest['RELEASE'][$release])){
+          if(isset($rest['RELEASE'][$release]) && $release == $this->FAIrelease){
             $use = $data['USE']; 
           }
         } 
