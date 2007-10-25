@@ -640,7 +640,12 @@ class printgeneric extends plugin
 
     /* must: cn */
     if(($this->BelongsTo == "Printer") && (empty($this->cn))){
-      $message[]= "The required field 'Printer name' is not set.";
+      $message[]= _("The required field 'Printer name' is not set.");
+    }
+
+    /* must: cn */
+    if(($this->BelongsTo == "Printer") && !preg_match("/^[a-z0-9\.\-_]*$/i",$this->cn)){
+      $message[]= _("Invalid character in printer name.");
     }
 
     if($this->BelongsTo == "Printer"){
