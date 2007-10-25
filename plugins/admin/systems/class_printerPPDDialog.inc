@@ -301,7 +301,7 @@ class printerPPDDialog extends plugin
   function getPrinterReload()
   {
     if(is_readable($this->pathToPPD)){
-      $tmp = $this->ppdManager->getPrinterList(true);
+      $tmp = @$this->ppdManager->getPrinterList(true);
 
       $this->ppdListHeader = $this->ppdList = array();
 
