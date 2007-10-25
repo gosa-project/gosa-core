@@ -50,7 +50,13 @@
 			<tr>
 				<td>
 					<select name="FAIdebianMirror"   onchange='document.mainform.submit()' {$FAIdebianMirrorACL}>
-						{html_options options=$FAIdebianMirrors output=$FAIdebianMirrors selected=$FAIdebianMirror}
+						{foreach from=$FAIdebianMirrors item=val key=key}
+							{if $val.USE}
+								<option value="{$key}" {if $FAIdebianMirror == $key} selected {/if}>{$val.NAME}</option>
+							{else}
+								<option value="auto" disabled>{$val.NAME}</option>
+							{/if}
+						{/foreach}
 					</select>
 				</td>
 				<td>

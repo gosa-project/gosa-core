@@ -53,6 +53,8 @@ class workstartup extends plugin
   var $fai_activated      = FALSE;
   var $member_of_ogroup   = FALSE;
 
+  var $o_group_dn         = "";
+
   function workstartup ($config, $dn= NULL, $parent= NULL)
   {
     /* Cehck if FAI is activated, else do not save any FAI attributes */
@@ -69,8 +71,12 @@ class workstartup extends plugin
     if(!isset($this->parent->by_object['ogroup'])){
       $ldap = $this->config->get_ldap_link();
       $ldap->cd ($this->config->current['BASE']);
-      $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".$this->dn."))",array("cn"));
-      $this->member_of_ogroup = $ldap->count() >= 1;
+      $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".$this->dn."))",array("cn","dn"));
+      if($ldap->count()){
+        $this->member_of_ogroup = TRUE;
+        $attrs = $ldap->fetch();
+        $this->o_group_dn = $attrs['dn'];
+      }
     }
 
     /* Creating a list of valid Mirrors 
@@ -327,6 +333,8 @@ class workstartup extends plugin
         $map= array("gotoLdapServer","gotoBootKernel");
       }
 
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cat($this->o_group_dn);
       $attrs= $ldap->fetch();
 
       foreach ($map as $name){
@@ -523,7 +531,6 @@ class workstartup extends plugin
 
   function execute()
   {
-
   	/* Call parent execute */
   	plugin::execute();
 
