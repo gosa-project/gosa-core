@@ -759,6 +759,7 @@ function get_module_permission($acl_array, $module, $dn, $checkTag= TRUE){
   global $ui, $config;
 
   /* Check for strict tagging */
+  $ttag= "";
   if ($checkTag && isset($config->current['STRICT_UNITS']) &&
       preg_match('/^(yes|true)$/i', $config->current['STRICT_UNITS']) &&
       $ui->gosaUnitTag != ""){
