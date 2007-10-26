@@ -187,7 +187,7 @@ class faiSummaryTab extends plugin{
       }elseif($_GET['type'] == "FAItemplate"){
         $str = $attrs['FAItemplateFile'][0];
       }
-      echo "<pre>".$str."</pre>";
+      echo  "<pre>".$str."</pre>";
       exit();
     }
 
