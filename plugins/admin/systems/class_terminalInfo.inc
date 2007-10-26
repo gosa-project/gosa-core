@@ -107,7 +107,7 @@ class terminfo extends plugin
           $community= 'goto';
 
           /* Get memory informations */
-          if(is_callable("snmpget")){
+          if(!is_callable("snmpget")){
             $MemFree = false;
           }else{
             $MemFree= @snmpget($host, $community, "UCD-SNMP-MIB::memory.memAvailReal.0");
