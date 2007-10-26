@@ -84,10 +84,9 @@ class terminfo extends plugin
         $display.= _("This is a virtual terminal which has no properties to show here.");
         $display.= "</b></div>";
       } else {
+
         /* Get template object */
-
         $smarty->assign("staticAddress", "");
-
 
         /* Prevent undefined variable .... */ 
         $smarty->assign("load", progressbar(0,100,15,true));
@@ -104,7 +103,13 @@ class terminfo extends plugin
 
           /* Fill data if we have snmp */
           $host= $this->cn;
+
+          /* Use goto as snmp community or the configured value from the config */
           $community= 'goto';
+          $str = search_config($this->config->data['TABS'],"terminfo","SNMPCOMMUNITY");
+          if(!empty($str)){
+            $community = $str;
+          }
 
           /* Get memory informations */
           if(!is_callable("snmpget")){
