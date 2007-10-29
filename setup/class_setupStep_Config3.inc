@@ -36,6 +36,7 @@ class Step_Config3 extends setup_step
               "ppd_path" => "/var/spool/ppd/",
               "ppd_path_active" => FALSE,
               "compile" =>  "/var/spool/gosa",
+              "snmpcommunity" =>  "goto",
               "debuglevel" => 0,
               "session_lifetime" => 7200,
               "max_ldap_query_time" => "5.0",
@@ -97,7 +98,7 @@ class Step_Config3 extends setup_step
         }
       }
       
-      foreach(array("list_summary","strict_units","noprimarygroup","forceglobals","forcessl","ldapstats","warnssl","compile","debuglevel","session_lifetime") as $name){
+      foreach(array("list_summary","strict_units","noprimarygroup","forceglobals","forcessl","ldapstats","warnssl","snmpcommunity","compile","debuglevel","session_lifetime") as $name){
         if(isset($_POST[$name])){
           $this->optional[$name] = get_post($name);
         }

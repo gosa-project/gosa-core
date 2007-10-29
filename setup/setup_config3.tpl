@@ -48,6 +48,15 @@
     </div>
     <div class='step4_container'>
         <div class='step4_name'>
+            {t}SNMP community{/t}
+        </div>
+        <div class='step4_value'>
+			<input size=40 id='compile' name='snmpcommunity' 
+				type='text' value='{$optional.snmpcommunity}'>
+        </div>
+    </div>
+    <div class='step4_container'>
+        <div class='step4_name'>
             {t}Path for PPD storage{/t}
         </div>
         <div class='step4_value'>
