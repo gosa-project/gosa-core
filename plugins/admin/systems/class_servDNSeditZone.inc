@@ -34,6 +34,8 @@ class servdnseditZone extends plugin
 
   var $dialog                   = false;
 
+  var $zoneEditor               = NULL;
+
   var $isNew                    = true;
   var $cn;
   var $ZoneObject               = array();
@@ -56,7 +58,9 @@ class servdnseditZone extends plugin
     }else{
       $this->ZoneObject         = $attrs;
 
-
+      if(isset($attrs['zoneEditor'])){
+        $this->zoneEditor         = $attrs['zoneEditor'];
+      }
       $this->OldZoneName        = $attrs['zoneName'];
       $this->OldReverseZone     = $attrs['ReverseZone'];
 
@@ -209,8 +213,11 @@ class servdnseditZone extends plugin
     }else{
       $smarty->assign("AllowZoneEdit" , true);
       if(isset($_POST['EditZoneEntries'])){
-        $this->dialog= new servDNSeditZoneEntries($this->config,$this->dn,$this->ZoneObject);
-        $this->dialog->parent = $this;
+        if($this->zoneEditor == NULL){
+          $this->zoneEditor= new servDNSeditZoneEntries($this->config,$this->dn,$this->ZoneObject);
+          $this->zoneEditor->parent = $this;
+        }
+        $this->dialog = $this->zoneEditor;
       }
     }
 
@@ -224,13 +231,14 @@ class servdnseditZone extends plugin
           print_red($msg);
         }
       }else{
-        $this->dialog->save();
-        $rev = FlipIp(getNameFromMix($this->InitialReverseZone)).".in-addr.arpa";
-        $for = getNameFromMix($this->InitialzoneName);
-       
-        $this->parent->handle_post_events("modify",array("dn" => $this->dn,"zoneName" => $rev));
-        $this->parent->handle_post_events("modify",array("dn" => $this->dn,"zoneName" => $for));
-        $this->dialog = false;
+        $this->zoneEditor = clone $this->dialog;
+        $this->dialog = FALSE;
+#       $rev = FlipIp(getNameFromMix($this->InitialReverseZone)).".in-addr.arpa";
+#       $for = getNameFromMix($this->InitialzoneName);
+#      
+#       $this->parent->handle_post_events("modify",array("dn" => $this->dn,"zoneName" => $rev));
+#       $this->parent->handle_post_events("modify",array("dn" => $this->dn,"zoneName" => $for));
+#       $this->dialog = false;
       }
     }
 
@@ -531,6 +539,8 @@ class servdnseditZone extends plugin
     }
 
     $ret['RECORDS'][] = array("type" => "nSRecord","value" => $ret['sOAprimary']) ;
+
+    $ret['zoneEditor'] = $this->zoneEditor;
     return($ret);
   }
 

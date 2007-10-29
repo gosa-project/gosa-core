@@ -298,7 +298,7 @@ class servDNSeditZoneEntries extends plugin
           if(!isset($tmp[$Rec['type']])){
             $tmp[$Rec['type']] = "";
           }else{
-            $message[] = sprintf(_("The record type '%s' is a unique type and can't be defined twice."),$type);
+            $message[] = sprintf(_("The record type '%s' is a unique type and can't be defined twice."),$Rec['type']);
           }
         }
 

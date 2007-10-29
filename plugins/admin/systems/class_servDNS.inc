@@ -400,6 +400,14 @@ class servdns extends plugin
     if($old_dn == "new"){
       $old_dn = $this->dn;
     }
+
+    /* Save zone editor changes now */
+    foreach($this->Zones as $name => $zone){
+      if(isset($zone['zoneEditor'] ) && $zone['zoneEditor'] != NULL && is_object($zone['zoneEditor'])){
+        $zone['zoneEditor']->save();
+        unset($this->Zones[$name]['zoneEditor']);;
+      }
+    }
  
     /* Update dns to current object dn */ 
     $tmp = getDNSZoneEntriesDiff($this->config,$this->Zones,$old_dn);

@@ -1,7 +1,4 @@
 <h2>{t}This dialog allows you to configure all components of this DNS zone on a single list.{/t}</h2>
-{t}Be careful editing record types with this dialog. All changes will be saved immediately when using the save button.{/t}
-<br>
-<br>
 <p class="seperator">&nbsp;</p>
 {if $disableDialog}
 	<br><b>
