@@ -412,3 +412,18 @@ Q: Is it possible to see some kind of information about how many objects
    get shown in the list I'm currently looking at?
 
 A: Just add "list_summary = 'true'" inside the main section of your gosa.conf.
+
+Q: Is it possible to login with the users mail address too?
+
+A: Yes, just add the following line to your gosa.conf:
+   <location ...
+	login_attribute="mail"
+   ...>
+
+	or for both, uid and mail:
+
+   <location ...
+	login_attribute="uid,mail"
+   ...>
+
+
