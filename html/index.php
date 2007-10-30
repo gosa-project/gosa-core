@@ -258,7 +258,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
 
   /* Check for valid input */
   $username= $_POST["username"];
-  if (!ereg("^[A-Za-z0-9_.-]+$", $username)){
+  if (!ereg("^[@A-Za-z0-9_.-]+$", $username)){
     $message= _("Please specify a valid username!");
   } elseif (mb_strlen($_POST["password"], 'UTF-8') == 0){
     $message= _("Please specify your password!");

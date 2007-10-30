@@ -26,7 +26,11 @@ class Step_Config3 extends setup_step
 
   var $errorlvl   = TRUE;
 
+  var $login_attributes = array("uid"       => "uid", 
+                                "mail"      => "mail",
+                                "uid,mail"  => "both");
   var $optional = array(
+              "login_attribute" => "uid",
               "strict_units" => false,
               "list_summary" => false,
               "forceglobals" => true,
@@ -83,6 +87,7 @@ class Step_Config3 extends setup_step
     foreach($this->attributes as $attr){
       $smarty->assign($attr,$this->$attr);
     }
+    $smarty->assign("login_attributes",$this->login_attributes);
     return($smarty -> fetch (get_template_path("../setup/setup_config3.tpl")));
   }
 
@@ -98,7 +103,7 @@ class Step_Config3 extends setup_step
         }
       }
       
-      foreach(array("list_summary","strict_units","noprimarygroup","forceglobals","forcessl","ldapstats","warnssl","snmpcommunity","compile","debuglevel","session_lifetime") as $name){
+      foreach(array("login_attribute","list_summary","strict_units","noprimarygroup","forceglobals","forcessl","ldapstats","warnssl","snmpcommunity","compile","debuglevel","session_lifetime") as $name){
         if(isset($_POST[$name])){
           $this->optional[$name] = get_post($name);
         }

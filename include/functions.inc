@@ -312,7 +312,27 @@ function ldap_login_user ($username, $password)
     exit();
   }
   $ldap->cd($config->current['BASE']);
-  $ldap->search("(&(uid=$username)(objectClass=gosaAccount))", array("uid"));
+  $allowed_attributes = array("uid","mail");
+  $verify_attr = array();
+  if(isset($config->current['LOGIN_ATTRIBUTE'])){
+    $tmp = split(",",$config->current['LOGIN_ATTRIBUTE']); 
+    foreach($tmp as $attr){
+      if(in_array($attr,$allowed_attributes)){
+        $verify_attr[] = $attr;
+      }
+    }
+  }
+  if(count($verify_attr) == 0){
+    $verify_attr = array("uid");
+  }
+  $tmp= $verify_attr;
+  $tmp[] = "uid";
+  $filter = "";
+  foreach($verify_attr as $attr) {
+    $filter.= "(".$attr."=".$username.")";
+  }
+  $filter = "(&(|".$filter.")(objectClass=gosaAccount))";
+  $ldap->search($filter,$tmp);
 
   /* get results, only a count of 1 is valid */
   switch ($ldap->count()){
@@ -332,13 +352,19 @@ function ldap_login_user ($username, $password)
 
   /* LDAP schema is not case sensitive. Perform additional check. */
   $attrs= $ldap->fetch();
-  if ($attrs['uid'][0] != $username){
-    return(NULL);
+  $success = FALSE;
+  foreach($verify_attr as $attr){
+    if ($attrs[$attr][0] == $username){
+      $success = TRUE;
+    }
+  }
+  if(!$success){
+    return(FALSE);
   }
 
   /* got user dn, fill acl's */
   $ui= new userinfo($config, $ldap->getDN());
-  $ui->username= $username;
+  $ui->username= $attrs['uid'][0];
 
   /* password check, bind as user with supplied password  */
   $ldap->disconnect();
