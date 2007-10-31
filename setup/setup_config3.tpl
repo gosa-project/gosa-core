@@ -165,11 +165,11 @@
     <p><b>{t}Login and session{/t}</b></p>
     <div class='step4_container'>
         <div class='step4_name'>
-            {t}Login attribute{/t}
+            {t}Allow login with users mail address{/t}
         </div>
         <div class='step4_value'>
-            <select name="login_attribute" size="1" title="">
-            	{html_options options=$login_attributes selected=$optional.login_attribute}
+            <select name="auth_mail" size="1" title="">
+            	{html_options options=$bool selected=$optional.auth_mail}
             </select>
         </div>
     </div>

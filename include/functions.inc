@@ -311,28 +311,19 @@ function ldap_login_user ($username, $password)
     echo "<body>".$_SESSION['errors']."</body></html>";
     exit();
   }
+
+  /* Check if mail address is also a valid auth name */
+  $auth_mail = FALSE;
+  if(isset($config->current['AUTH_MAIL']) && preg_match("/true/",$config->current['AUTH_MAIL'])){
+    $auth_mail = TRUE;
+  }
+
   $ldap->cd($config->current['BASE']);
-  $allowed_attributes = array("uid","mail");
-  $verify_attr = array();
-  if(isset($config->current['LOGIN_ATTRIBUTE'])){
-    $tmp = split(",",$config->current['LOGIN_ATTRIBUTE']); 
-    foreach($tmp as $attr){
-      if(in_array($attr,$allowed_attributes)){
-        $verify_attr[] = $attr;
-      }
-    }
+  if(!$auth_mail){
+    $ldap->search("(&(uid=$username)(objectClass=gosaAccount))", array("uid"));
+  }else{
+    $ldap->search("(&(|(uid=".$username.")(mail=".$username."))(objectClass=gosaAccount))", array("uid","mail"));
   }
-  if(count($verify_attr) == 0){
-    $verify_attr = array("uid");
-  }
-  $tmp= $verify_attr;
-  $tmp[] = "uid";
-  $filter = "";
-  foreach($verify_attr as $attr) {
-    $filter.= "(".$attr."=".$username.")";
-  }
-  $filter = "(&(|".$filter.")(objectClass=gosaAccount))";
-  $ldap->search($filter,$tmp);
 
   /* get results, only a count of 1 is valid */
   switch ($ldap->count()){
@@ -352,14 +343,14 @@ function ldap_login_user ($username, $password)
 
   /* LDAP schema is not case sensitive. Perform additional check. */
   $attrs= $ldap->fetch();
-  $success = FALSE;
-  foreach($verify_attr as $attr){
-    if ($attrs[$attr][0] == $username){
-      $success = TRUE;
+  if($auth_mail){
+    if ($attrs['uid'][0] != $username && $attrs['mail'][0] != $username){
+      return(NULL);
     }
-  }
-  if(!$success){
-    return(FALSE);
+  }else{
+    if ($attrs['uid'][0] != $username){
+      return(NULL);
+    }
   }
 
   /* got user dn, fill acl's */
