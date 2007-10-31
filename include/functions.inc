@@ -314,7 +314,7 @@ function ldap_login_user ($username, $password)
 
   /* Check if mail address is also a valid auth name */
   $auth_mail = FALSE;
-  if(isset($config->current['AUTH_MAIL']) && preg_match("/true/",$config->current['AUTH_MAIL'])){
+  if(isset($config->current['AUTH_MAIL']) && preg_match("/^true$/i",$config->current['AUTH_MAIL'])){
     $auth_mail = TRUE;
   }
 
@@ -344,7 +344,7 @@ function ldap_login_user ($username, $password)
   /* LDAP schema is not case sensitive. Perform additional check. */
   $attrs= $ldap->fetch();
   if($auth_mail){
-    if ($attrs['uid'][0] != $username && $attrs['mail'][0] != $username){
+    if ($attrs['uid'][0] != $username && strcasecmp($attrs['mail'][0], $username) != 0){
       return(NULL);
     }
   }else{
