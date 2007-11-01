@@ -4,13 +4,17 @@ To use the nagios plugin
 
 2) Remove the comment in front of nagiosAccount in gosa.conf
 
-<!--                     <plugin acl="default" class="nagiosAccount" icon="monitoring.png"
-                                path="plugins/personal/nagios" /> -->
+<!--  <plugin acl="default" class="nagiosAccount" icon="monitoring.png"
+         path="plugins/personal/nagios" /> -->
 
 
 <!--    <nagios>
                 <tab class="nagiosAccount" />
         </nagios> -->
+
+3) configure the ldap2nagios.conf file
+
+4) Configure the ldap2nagios_bind.conf
 
 Benoit Mortier
 Guillaume Delecourt
