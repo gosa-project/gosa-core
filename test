@@ -1,0 +1,28 @@
+#!/usr/bin/php
+<?php
+
+/* This is good for testing... */
+error_reporting (E_ALL | E_STRICT);
+
+/* Initiate autoloader... */
+require_once("include/autoload.inc");
+
+try {
+
+	/* Get new test instance of the Configuration */
+	#$cr= Registry::getInstance("ConfigManager");
+	#$cr->load("gosa.conf");
+
+	/* Get a new test instance of ObjectListViewports */
+	$vp= new ObjectListViewport(array("dummy", "dummy"));
+	echo $vp->render();
+
+} catch (Exception $e) {
+	echo "\n-GOsa Exception-----------------------------------------------------------\n\n".
+	     $e->__toString().
+	     "\n\n--------------------------------------------------------------------------\n\n";
+}
+
+exit (0);
+
+?>
