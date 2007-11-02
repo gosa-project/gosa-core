@@ -33,12 +33,14 @@ use strict;
 my $nb_user=0;
 my $nb_group=0;
 
-my ($i,$file,$ldap,@nagiosmail,
-	$line,$text,$mesg,$entry,$userlist1,$userlist2,$userlist3,$userlist4,
-	$userlist5,$userlist6,$userlist7,$msg,@groupname,@groupmembers,@contactlias,
+my ($i,$file,$ldap,	$line,$text,$mesg,$entry,$msg,$stdout,$members,$j,@entries,
+	@groupname,@groupmembers,@contactlias,@nagiosmail,
 	@groupdescription,@servicenotificationoptions,@servicenotificationperiod,
-	@hostnotificationoptions,@hostnotificationperiod,$stdout,
-	$usercontact,$members,@contactname,@nagiosalias,$j,@entries
+	@hostnotificationoptions,@hostnotificationperiod,@contactname,@nagiosalias,
+	@authorizedsysteminformation,@authorizedconfigurationinformation,
+	@authorizedsystemcommands,@authorizedallservices,
+	@authorizedallhosts,@authorizedallservicecommands,
+	@authorizedallhostcommands
 );
 
 my $error_open = "Problem opening file ";
@@ -70,6 +72,13 @@ my $contacts_groups_file=$config{contacts_groups_file};
 my $admin=$config_bind{masterDN};
 my $password=$config_bind{masterPw};
 
+my $usersysteminformation = $nagiosadmin.",";
+my $userconfigurationinformation = $nagiosadmin.",";
+my $usersystemcommands = $nagiosadmin.",";
+my $userallservices = $nagiosadmin.",";
+my $userallhosts = $nagiosadmin.",";
+my $userallhostscommands = $nagiosadmin.",";
+my $userallservicescommands = $nagiosadmin.",";
 
 	$ldap = Net::LDAP->new($server);
 	$mesg = $ldap->bind($admin,password=>$password) or syslog('error',$mesg->err) && print $mesg->code && die $mesg->error;
@@ -86,8 +95,35 @@ my $password=$config_bind{masterPw};
 		$servicenotificationperiod[$i]=$entry->get_value('ServiceNotificationPeriod');
 		$hostnotificationoptions[$i]=$entry->get_value('HostNotificationOptions');
 		$servicenotificationoptions[$i]=$entry->get_value('ServiceNotificationOptions');
-		$usercontact.=$entry->get_value('uid').",";
+		$authorizedsysteminformation[$i]=$entry->get_value('AuthorizedSystemInformation');
+		$authorizedconfigurationinformation[$i]=$entry->get_value('AuthorizedConfigurationInformation');
+		$authorizedsystemcommands[$i]=$entry->get_value('AuthorizedSystemCommands');
+		$authorizedallservices[$i]=$entry->get_value('AuthorizedAllServices');
+		$authorizedallhosts[$i]=$entry->get_value('AuthorizedAllHosts');
+		$authorizedallservicecommands[$i]=$entry->get_value('AuthorizedAllServiceCommands');
+		$authorizedallhostcommands[$i]=$entry->get_value('AuthorizedAllHostCommands');
 		
+		if($authorizedsysteminformation[$i] eq "checked")
+			{$usersysteminformation.= $contactname[$i]};
+		
+		if($authorizedconfigurationinformation[$i] eq "checked")
+			{$userconfigurationinformation.= $contactname[$i]};
+		
+		if($authorizedsystemcommands[$i] eq "checked")
+			{$usersystemcommands.= $contactname[$i]};
+					
+		if($authorizedallservices[$i] eq "checked")
+			{$userallservices.= $contactname[$i]};
+			
+		if($authorizedallhosts[$i] eq "checked")
+			{$userallhosts.= $contactname[$i]};
+			
+		if($authorizedallservicecommands[$i] eq "checked")
+			{$userallservicescommands.= $contactname[$i]};
+			
+		if($authorizedallhostcommands[$i] eq "checked")
+			{$userallhostscommands.= $contactname[$i]};
+			
 		$i++;
 	}
 	$nb_user=$i;
@@ -112,57 +148,6 @@ my $password=$config_bind{masterPw};
 		$i++;
 	}
 	$nb_group=$i;
-
-	#Searching for the objectClass nagiosAuth
-	$mesg = $ldap->search(filter=>"(&(objectClass~=nagiosAuth)(AuthorizedSystemInformation~=checked))", base=>$peopleou,scope=>$scope);
-	@entries = $mesg->entries;
-	foreach $entry (@entries) {
-	$userlist1.=$entry->get_value('uid').",";
-	}
-	$userlist1.=$nagiosadmin."\n\r";
-
-	$mesg = $ldap->search(filter=>"(&(objectClass~=nagiosAuth)(AuthorizedConfigurationInformation~=checked))", base=>$peopleou,scope=>$scope);
-	@entries = $mesg->entries;
-	foreach $entry (@entries) {
-	$userlist2.=$entry->get_value('uid').",";
-	}
-	$userlist2.=$nagiosadmin."\n\r";
-
-	$mesg = $ldap->search(filter=>"(&(objectClass~=nagiosAuth)(AuthorizedSystemCommands~=checked))", base=>$peopleou,scope=>$scope);
-	@entries = $mesg->entries;
-	foreach $entry (@entries) {
-	$userlist3.=$entry->get_value('uid').",";
-	}
-	$userlist3.=$nagiosadmin."\n\r";
-
-	$mesg = $ldap->search(filter=>"(&(objectClass~=nagiosAuth)(AuthorizedAllServices~=checked))", base=>$peopleou,scope=>$scope);
-	@entries = $mesg->entries;
-	foreach $entry (@entries) {
-	$userlist4.=$entry->get_value('uid').",";
-	}
-	$userlist4.=$nagiosadmin."\n\r";
-
-	$mesg = $ldap->search(filter=>"(&(objectClass~=nagiosAuth)(AuthorizedAllHosts~=checked))", base=>$peopleou,scope=>$scope);
-	@entries = $mesg->entries;
-	foreach $entry (@entries) {
-	$userlist5.=$entry->get_value('uid').",";
-	}
-	$userlist5.=$nagiosadmin."\n\r";
-
-
-	$mesg = $ldap->search(filter=>"(&(objectClass~=nagiosAuth)(AuthorizedAllServiceCommands~=checked))", base=>$peopleou,scope=>$scope);
-	@entries = $mesg->entries;
-	foreach $entry (@entries) {
-	$userlist6.=$entry->get_value('uid').",";
-	}
-	$userlist6.=$nagiosadmin."\n\r";
-
-	$mesg = $ldap->search(filter=>"(&(objectClass~=nagiosAuth)(AuthorizedAllHostCommands~=checked))",base=>$peopleou,scope=>$scope);
-	@entries = $mesg->entries;
-	foreach $entry (@entries) {
-	$userlist7.=$entry->get_value('uid').",";
-	}
-	$userlist7.=$nagiosadmin."\n\r";
 
 	&modiffile_cgi($cgi_file);
 	&modiffile_contact($contacts_file);
@@ -240,13 +225,13 @@ sub modiffile_cgi()
 	while(<FH>)
 	{	
 		$line=$_;
-		if($line =~ /^authorized_for_system_information=*/i){$text.="authorized_for_system_information=".$userlist1}
-		elsif($line =~ /^authorized_for_configuration_information=*/i){$text.="authorized_for_configuration_information=".$userlist2}
-		elsif($line =~ /^authorized_for_system_commands=*/i){$text.="authorized_for_system_commands=".$userlist3}
-		elsif($line =~ /^authorized_for_all_services=*/i){$text.="authorized_for_all_services=".$userlist4}
-		elsif($line =~ /^authorized_for_all_hosts=*/i){$text.="authorized_for_all_hosts=".$userlist5}
-		elsif($line =~ /^authorized_for_all_service_commands=*/i){$text.="authorized_for_all_host_commands=".$userlist6}
-		elsif($line =~ /^authorized_for_all_host_commands=*/i){$text.="authorized_for_all_service_commands=".$userlist7}
+		if($line =~ /^authorized_for_system_information=*/i){$text.="authorized_for_system_information=".$usersysteminformation}
+		elsif($line =~ /^authorized_for_configuration_information=*/i){$text.="authorized_for_configuration_information=".$userconfigurationinformation}
+		elsif($line =~ /^authorized_for_system_commands=*/i){$text.="authorized_for_system_commands=".$usersystemcommands}
+		elsif($line =~ /^authorized_for_all_services=*/i){$text.="authorized_for_all_services=".$userallservices."\n"}
+		elsif($line =~ /^authorized_for_all_hosts=*/i){$text.="authorized_for_all_hosts=".$userallhosts."\n"}
+		elsif($line =~ /^authorized_for_all_service_commands=*/i){$text.="authorized_for_all_host_commands=".$userallhostscommands."\n"}
+		elsif($line =~ /^authorized_for_all_host_commands=*/i){$text.="authorized_for_all_service_commands=".$userallservicescommands."\n"}
 		else {$text.=$line};
 	}
 	close(FH);
@@ -358,13 +343,13 @@ sub write_stdout
 	
 	$stdout.="\n\n\n\n\nAuthorization for the various Informations in Nagios\n"."-" x 53;$stdout.="\n";
 	
-	$stdout.="\nSystem infos :\t\t $userlist1";
-	$stdout.="\nConfiguration infos :\t $userlist2";
-	$stdout.="\nSystem commands : \t $userlist3";
-	$stdout.="\nAll services :\t\t $userlist4";
-	$stdout.="\nAll hosts :\t\t $userlist5";
-	$stdout.="\nAll services commands :\t $userlist6";
-	$stdout.="\nAll host commands :\t $userlist7";
+	$stdout.="\nSystem infos :\t\t $usersysteminformation";
+	$stdout.="\nConfiguration infos :\t $userconfigurationinformation";
+	$stdout.="\nSystem commands : \t $usersystemcommands";
+	$stdout.="\nAll services :\t\t $userallservices";
+	$stdout.="\nAll hosts :\t\t $userallhosts";
+	$stdout.="\nAll services commands :\t $userallservices";
+	$stdout.="\nAll host commands :\t $userallservicescommands";
 	
 	$stdout.="\n\n"; $stdout.=" "x10;$stdout.="-"x25;$stdout.=" "x10;
 	$stdout.="\n$nb_user user(s) added in the file $file\n";
