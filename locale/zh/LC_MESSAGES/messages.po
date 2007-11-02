@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-22 11:05+0200\n"
+"POT-Creation-Date: 2007-11-02 09:42+0100\n"
 "PO-Revision-Date: 2007-07-11 18:45+0800\n"
 "Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
 "Language-Team: Chinese Simplified <zh@li.org>\n"
@@ -30,10 +30,10 @@ msgstr "插件"
 
 #: contrib/gosa.conf:120 contrib/gosa.conf:144 contrib/gosa.conf:148
 #: contrib/gosa.conf:157 contrib/gosa.conf:163 contrib/gosa.conf:168
-#: contrib/gosa.conf:175 contrib/gosa.conf:180 contrib/gosa.conf:189
-#: contrib/gosa.conf:218 contrib/gosa.conf:233 contrib/gosa.conf:239
-#: contrib/gosa.conf:262 contrib/gosa.conf:268 contrib/gosa.conf:274
-#: contrib/gosa.conf:278 plugins/personal/mail/generic.tpl:4
+#: contrib/gosa.conf:175 contrib/gosa.conf:180 contrib/gosa.conf:190
+#: contrib/gosa.conf:220 contrib/gosa.conf:236 contrib/gosa.conf:242
+#: contrib/gosa.conf:265 contrib/gosa.conf:271 contrib/gosa.conf:277
+#: contrib/gosa.conf:281 plugins/personal/mail/generic.tpl:4
 #: plugins/personal/posix/generic.tpl:4 plugins/personal/samba/samba2.tpl:6
 #: plugins/personal/samba/samba3.tpl:6 plugins/personal/scalix/generic.tpl:4
 #: plugins/personal/generic/class_user.inc:16
@@ -74,7 +74,7 @@ msgstr "Unix"
 #: plugins/personal/environment/class_environment.inc:7
 #: plugins/admin/groups/class_divListGroup.inc:131
 #: plugins/admin/users/class_divListUsers.inc:144
-#: plugins/admin/ogroups/tabs_ogroups.inc:133
+#: plugins/admin/ogroups/tabs_ogroups.inc:135
 msgid "Environment"
 msgstr "环境设置"
 
@@ -83,7 +83,7 @@ msgstr "环境设置"
 #: plugins/admin/groups/class_divListGroup.inc:123
 #: plugins/admin/users/class_divListUsers.inc:146
 #: plugins/admin/ogroups/tabs_ogroups.inc:79
-#: plugins/admin/ogroups/tabs_ogroups.inc:209
+#: plugins/admin/ogroups/tabs_ogroups.inc:211
 #: plugins/admin/ogroups/class_divListOGroup.inc:124
 #: plugins/admin/ogroups/paste_mail.tpl:4
 #: plugins/generic/references/class_reference.inc:24
@@ -159,9 +159,9 @@ msgid "ACL"
 msgstr "ACL"
 
 #: contrib/gosa.conf:153 contrib/gosa.conf:159 contrib/gosa.conf:164
-#: contrib/gosa.conf:170 contrib/gosa.conf:185 contrib/gosa.conf:214
-#: contrib/gosa.conf:229 contrib/gosa.conf:235 contrib/gosa.conf:241
-#: contrib/gosa.conf:264 contrib/gosa.conf:270
+#: contrib/gosa.conf:170 contrib/gosa.conf:186 contrib/gosa.conf:216
+#: contrib/gosa.conf:232 contrib/gosa.conf:238 contrib/gosa.conf:244
+#: contrib/gosa.conf:267 contrib/gosa.conf:273
 msgid "References"
 msgstr "引用"
 
@@ -177,17 +177,17 @@ msgstr "选项"
 msgid "Parameter"
 msgstr "参数"
 
-#: contrib/gosa.conf:181 contrib/gosa.conf:190 contrib/gosa.conf:219
-#: plugins/admin/ogroups/tabs_ogroups.inc:107
+#: contrib/gosa.conf:181 contrib/gosa.conf:191 contrib/gosa.conf:221
+#: plugins/admin/ogroups/tabs_ogroups.inc:108
 msgid "Startup"
 msgstr "启动"
 
-#: contrib/gosa.conf:182 contrib/gosa.conf:220
+#: contrib/gosa.conf:182 contrib/gosa.conf:222
 #: plugins/admin/ogroups/tabs_ogroups.inc:101
 msgid "Devices"
 msgstr "设备"
 
-#: contrib/gosa.conf:183 contrib/gosa.conf:212 contrib/gosa.conf:222
+#: contrib/gosa.conf:183 contrib/gosa.conf:213 contrib/gosa.conf:224
 #: plugins/gofax/blocklists/generic.tpl:75
 #: plugins/addons/addressbook/contents.tpl:33
 #: plugins/admin/fai/faiProfileEntry.tpl:21
@@ -205,55 +205,55 @@ msgstr "设备"
 msgid "Information"
 msgstr "提示信息"
 
-#: contrib/gosa.conf:184 contrib/gosa.conf:213 contrib/gosa.conf:228
-#: contrib/gosa.conf:234 contrib/gosa.conf:240 contrib/gosa.conf:263
-#: contrib/gosa.conf:269
+#: contrib/gosa.conf:185 contrib/gosa.conf:215 contrib/gosa.conf:231
+#: contrib/gosa.conf:237 contrib/gosa.conf:243 contrib/gosa.conf:266
+#: contrib/gosa.conf:272
 msgid "Inventory"
 msgstr "清单"
 
-#: contrib/gosa.conf:191
+#: contrib/gosa.conf:192
 msgid "Databases"
 msgstr "数据库"
 
-#: contrib/gosa.conf:192 plugins/admin/systems/servkolab.tpl:33
+#: contrib/gosa.conf:193 plugins/admin/systems/servkolab.tpl:33
 msgid "Services"
 msgstr "服务"
 
-#: contrib/gosa.conf:194
+#: contrib/gosa.conf:195
 #: plugins/personal/connectivity/class_kolabAccount.inc:5
 msgid "Kolab"
 msgstr "Kolab"
 
-#: contrib/gosa.conf:196 plugins/admin/fai/faiPackage.tpl:29
+#: contrib/gosa.conf:197 plugins/admin/fai/faiPackage.tpl:29
 #: plugins/admin/systems/servRepositorySetup.tpl:1
 msgid "Repository"
 msgstr "仓库"
 
-#: contrib/gosa.conf:198 contrib/gosa.conf:200 contrib/gosa.conf:224
-#: contrib/gosa.conf:226
+#: contrib/gosa.conf:199 contrib/gosa.conf:201 contrib/gosa.conf:227
+#: contrib/gosa.conf:229
 msgid "FAI summary"
 msgstr "自动化安装说明"
 
-#: contrib/gosa.conf:203 contrib/gosa.conf:205
+#: contrib/gosa.conf:204 contrib/gosa.conf:206
 msgid "DNS"
 msgstr ""
 
-#: contrib/gosa.conf:208 contrib/gosa.conf:210
+#: contrib/gosa.conf:209 contrib/gosa.conf:211
 msgid "DHCP"
 msgstr ""
 
-#: contrib/gosa.conf:221 plugins/personal/environment/environment.tpl:204
+#: contrib/gosa.conf:223 plugins/personal/environment/environment.tpl:204
 #: plugins/admin/systems/class_systemManagement.inc:888
 #: plugins/admin/ogroups/class_ogroupManagement.inc:371
 #: plugins/generic/references/class_reference.inc:52
 msgid "Printer"
 msgstr "打印机"
 
-#: contrib/gosa.conf:291
+#: contrib/gosa.conf:294
 msgid "OGo"
 msgstr "OGo"
 
-#: contrib/gosa.conf:303 plugins/addons/ldapmanager/contentexportxls.tpl:19
+#: contrib/gosa.conf:306 plugins/addons/ldapmanager/contentexportxls.tpl:19
 #: plugins/addons/ldapmanager/contentexportxls.tpl:32
 #: plugins/addons/ldapmanager/contentexportxls.tpl:47
 #: plugins/addons/ldapmanager/contentexport.tpl:16
@@ -263,11 +263,11 @@ msgstr "OGo"
 msgid "Export"
 msgstr "导出"
 
-#: contrib/gosa.conf:304
+#: contrib/gosa.conf:307
 msgid "Excel Export"
 msgstr "导出为 Excel"
 
-#: contrib/gosa.conf:305 plugins/personal/mail/generic.tpl:192
+#: contrib/gosa.conf:308 plugins/personal/mail/generic.tpl:192
 #: plugins/personal/environment/logonManagement.tpl:65
 #: plugins/addons/gotomasses/goto_task.tpl:129
 #: plugins/addons/ldapmanager/contentimport.tpl:49
@@ -279,15 +279,15 @@ msgstr "导出为 Excel"
 msgid "Import"
 msgstr "导入"
 
-#: contrib/gosa.conf:306
+#: contrib/gosa.conf:309
 msgid "CSV Import"
 msgstr "CSV 导入"
 
-#: contrib/gosa.conf:311 contrib/gosa.conf:341
+#: contrib/gosa.conf:314 contrib/gosa.conf:344
 msgid "Partitions"
 msgstr "分区"
 
-#: contrib/gosa.conf:315 contrib/gosa.conf:345
+#: contrib/gosa.conf:318 contrib/gosa.conf:348
 #: plugins/personal/environment/logonManagement.tpl:55
 #: plugins/admin/fai/faiScriptEntry.tpl:50
 #: plugins/admin/fai/faiHookEntry.tpl:50
@@ -295,36 +295,36 @@ msgstr "分区"
 msgid "Script"
 msgstr "脚本"
 
-#: contrib/gosa.conf:319 contrib/gosa.conf:349
+#: contrib/gosa.conf:322 contrib/gosa.conf:352
 #: plugins/admin/fai/class_faiSummaryTab.inc:40
 #: plugins/admin/fai/class_divListFai.inc:179
 msgid "Hooks"
 msgstr "钩子"
 
-#: contrib/gosa.conf:323 contrib/gosa.conf:353
+#: contrib/gosa.conf:326 contrib/gosa.conf:356
 #: plugins/admin/fai/class_faiSummaryTab.inc:41
 #: plugins/admin/fai/class_divListFai.inc:178
 msgid "Variables"
 msgstr "变量"
 
-#: contrib/gosa.conf:327 contrib/gosa.conf:357
+#: contrib/gosa.conf:330 contrib/gosa.conf:360
 #: plugins/admin/fai/class_faiSummaryTab.inc:42
 #: plugins/admin/fai/class_divListFai.inc:181
 msgid "Templates"
 msgstr "模板"
 
-#: contrib/gosa.conf:331 contrib/gosa.conf:361
+#: contrib/gosa.conf:334 contrib/gosa.conf:364
 #: plugins/personal/environment/environment.tpl:7
 #: plugins/admin/fai/class_faiSummaryTab.inc:45
 msgid "Profiles"
 msgstr "Profiles"
 
-#: contrib/gosa.conf:332 contrib/gosa.conf:362
-#: plugins/admin/ogroups/tabs_ogroups.inc:110
+#: contrib/gosa.conf:335 contrib/gosa.conf:365
+#: plugins/admin/ogroups/tabs_ogroups.inc:112
 msgid "Summary"
 msgstr "总结"
 
-#: contrib/gosa.conf:336 contrib/gosa.conf:366
+#: contrib/gosa.conf:339 contrib/gosa.conf:369
 msgid "Packages"
 msgstr "软件包"
 
@@ -449,7 +449,7 @@ msgstr "删除 nagios 账号失败"
 #: plugins/admin/systems/goSpamServerRule.tpl:22
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:74
 #: plugins/admin/systems/class_systemManagement.inc:600
-#: plugins/admin/systems/servDNSeditZoneEntries.tpl:20
+#: plugins/admin/systems/servDNSeditZoneEntries.tpl:17
 #: plugins/admin/systems/glpiManufacturerAdd.tpl:80
 #: plugins/admin/systems/class_dhcpSharedNetwork.inc:88
 #: plugins/admin/ogroups/class_ogroupManagement.inc:331
@@ -540,7 +540,7 @@ msgstr "保存"
 #: plugins/admin/systems/dhcpNewSection.tpl:17
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:75
 #: plugins/admin/systems/class_systemManagement.inc:602
-#: plugins/admin/systems/servDNSeditZoneEntries.tpl:21
+#: plugins/admin/systems/servDNSeditZoneEntries.tpl:18
 #: plugins/admin/systems/class_baseSelectDialog.inc:41
 #: plugins/admin/systems/remove.tpl:16
 #: plugins/admin/systems/glpiAttachmentPool.tpl:52
@@ -755,9 +755,9 @@ msgstr "替代地址"
 #: plugins/admin/systems/glpiPrinter.tpl:121
 #: plugins/admin/systems/glpi_edit_type.tpl:8
 #: plugins/admin/systems/glpi_edit_printer_type.tpl:7
-#: plugins/admin/systems/workstationStartup.tpl:116
-#: plugins/admin/systems/workstationStartup.tpl:139
-#: plugins/admin/systems/workstationStartup.tpl:158
+#: plugins/admin/systems/workstationStartup.tpl:122
+#: plugins/admin/systems/workstationStartup.tpl:145
+#: plugins/admin/systems/workstationStartup.tpl:164
 #: plugins/admin/systems/terminal.tpl:109 plugins/admin/systems/servdns.tpl:26
 #: plugins/admin/systems/workstation.tpl:90
 #: plugins/admin/systems/terminalStartup.tpl:61
@@ -773,7 +773,7 @@ msgstr "替代地址"
 #: plugins/admin/systems/servservice.tpl:47
 #: plugins/admin/systems/glpi_edit_os.tpl:8
 #: plugins/admin/systems/class_servDNSeditZoneEntries.inc:446
-#: plugins/admin/systems/class_servDNSeditZone.inc:565
+#: plugins/admin/systems/class_servDNSeditZone.inc:575
 #: plugins/admin/systems/glpi_edit_cartridge_type.tpl:6
 #: plugins/admin/systems/phonesettings.tpl:176
 #: plugins/admin/systems/phonesettings.tpl:191
@@ -831,8 +831,8 @@ msgstr "添加本地"
 #: plugins/admin/systems/remove_dhcp.tpl:14
 #: plugins/admin/systems/glpi_edit_type.tpl:10
 #: plugins/admin/systems/glpi_edit_printer_type.tpl:9
-#: plugins/admin/systems/workstationStartup.tpl:117
-#: plugins/admin/systems/workstationStartup.tpl:140
+#: plugins/admin/systems/workstationStartup.tpl:123
+#: plugins/admin/systems/workstationStartup.tpl:146
 #: plugins/admin/systems/terminal.tpl:111
 #: plugins/admin/systems/workstation.tpl:92
 #: plugins/admin/systems/terminalStartup.tpl:62
@@ -845,8 +845,8 @@ msgstr "添加本地"
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:188
 #: plugins/admin/systems/remove_glpi.tpl:14
 #: plugins/admin/systems/printer.tpl:78 plugins/admin/systems/printer.tpl:96
-#: plugins/admin/systems/class_servDNSeditZone.inc:326
-#: plugins/admin/systems/class_servDNSeditZone.inc:559
+#: plugins/admin/systems/class_servDNSeditZone.inc:334
+#: plugins/admin/systems/class_servDNSeditZone.inc:569
 #: plugins/admin/systems/glpi_edit_cartridge_type.tpl:8
 #: plugins/admin/systems/phonesettings.tpl:177
 #: plugins/admin/systems/phonesettings.tpl:192
@@ -890,7 +890,7 @@ msgid "Quota usage"
 msgstr "使用 Quota"
 
 #: plugins/personal/mail/generic.tpl:30 plugins/admin/groups/mail.tpl:32
-#: plugins/admin/systems/class_terminalInfo.inc:164
+#: plugins/admin/systems/class_terminalInfo.inc:169
 msgid "not defined"
 msgstr "未定义"
 
@@ -1189,57 +1189,57 @@ msgstr "删除邮件账号失败"
 msgid "Saving mail account failed"
 msgstr "保存邮件账号失败"
 
-#: plugins/personal/mail/class_mailAccount.inc:940
+#: plugins/personal/mail/class_mailAccount.inc:941
 msgid ""
 "There is no valid mailserver specified, please add one in the system setup."
 msgstr "没有指定有效的邮件服务器，请通过系统设置添加一个。"
 
-#: plugins/personal/mail/class_mailAccount.inc:945
+#: plugins/personal/mail/class_mailAccount.inc:946
 #: plugins/admin/groups/class_groupMail.inc:903
 msgid "The required field 'Primary address' is not set."
 msgstr "要求的字段“主要地址”没有设置。"
 
-#: plugins/personal/mail/class_mailAccount.inc:949
-#: plugins/personal/mail/class_mailAccount.inc:953
+#: plugins/personal/mail/class_mailAccount.inc:950
+#: plugins/personal/mail/class_mailAccount.inc:954
 #: plugins/addons/addressbook/class_addressbook.inc:607
 #: plugins/admin/ogroups/class_mailogroup.inc:78
 msgid "Please enter a valid email address in 'Primary address' field."
 msgstr "请在“主邮件地址”中输入一个有效的邮件地址。"
 
-#: plugins/personal/mail/class_mailAccount.inc:959
+#: plugins/personal/mail/class_mailAccount.inc:960
 #: plugins/admin/groups/class_groupMail.inc:912
 #: plugins/admin/ogroups/class_mailogroup.inc:85
 msgid "The primary address you've entered is already in use."
 msgstr "您输入的主要地址已经在使用了。"
 
-#: plugins/personal/mail/class_mailAccount.inc:965
+#: plugins/personal/mail/class_mailAccount.inc:966
 #: plugins/admin/groups/class_groupMail.inc:918
 msgid "Value in 'Quota size' is not valid."
 msgstr "'Quota 大小' 的值无效。"
 
-#: plugins/personal/mail/class_mailAccount.inc:974
+#: plugins/personal/mail/class_mailAccount.inc:975
 #: plugins/admin/groups/class_groupMail.inc:927
 msgid "Please specify a vaild mail size for mails to be rejected."
 msgstr "请指定一个将要被退回的邮件大小。"
 
-#: plugins/personal/mail/class_mailAccount.inc:984
+#: plugins/personal/mail/class_mailAccount.inc:985
 #: plugins/admin/groups/class_groupMail.inc:935
 msgid "You need to set the maximum mail size in order to reject anything."
 msgstr "为了退信，您需要设定最大的邮件大小。"
 
-#: plugins/personal/mail/class_mailAccount.inc:988
+#: plugins/personal/mail/class_mailAccount.inc:989
 msgid "You specified Spam settings, but there is no Folder specified."
 msgstr "您定义了 Spam 设置，但是没有指定目录。"
 
-#: plugins/personal/mail/class_mailAccount.inc:992
+#: plugins/personal/mail/class_mailAccount.inc:993
 msgid "Time interval to show vacation message is not valid."
 msgstr "显示假期信息的时间间隔无效。"
 
-#: plugins/personal/mail/class_mailAccount.inc:1146
+#: plugins/personal/mail/class_mailAccount.inc:1147
 msgid "Waiting for kolab to remove mail properties."
 msgstr "等待 kolab 来删除邮件属性。"
 
-#: plugins/personal/mail/class_mailAccount.inc:1148
+#: plugins/personal/mail/class_mailAccount.inc:1149
 msgid ""
 "Please remove the mail account first, to allow kolab to call its remove "
 "methods."
@@ -1435,7 +1435,7 @@ msgstr "您已经成功更改口令。还要记住更改相关程序设定。"
 #: plugins/admin/groups/class_groupApplication.inc:719
 #: plugins/admin/departments/dep_iframe.tpl:19
 #: plugins/admin/systems/class_systemManagement.inc:246
-#: include/functions.inc:1587 setup/class_setup.inc:261
+#: include/functions.inc:1609 setup/class_setup.inc:261
 #: setup/class_setup.inc:263
 msgid "Back"
 msgstr "返回"
@@ -1613,7 +1613,7 @@ msgstr "未配置"
 
 #: plugins/personal/posix/class_posixAccount.inc:200
 #: plugins/admin/systems/class_workstationService.inc:177
-#: plugins/admin/systems/class_workstationStartup.inc:869
+#: plugins/admin/systems/class_workstationStartup.inc:876
 #: plugins/admin/systems/class_terminalService.inc:190
 #: plugins/admin/systems/class_dhcpAdvanced.inc:78
 #: plugins/admin/systems/class_dhcpAdvanced.inc:87
@@ -2376,7 +2376,7 @@ msgstr "环境变量扩展已禁用。在启用这个功能前，您必须设置
 
 #: plugins/personal/environment/class_environment.inc:575
 #: plugins/personal/environment/class_environment.inc:588
-#: plugins/admin/systems/class_workstationStartup.inc:666
+#: plugins/admin/systems/class_workstationStartup.inc:673
 #: plugins/admin/systems/class_terminalStartup.inc:204
 msgid "You must specify a valid mount point."
 msgstr "您必须提供一个有效的挂载点。"
@@ -2535,7 +2535,7 @@ msgid "Resolution"
 msgstr "分辨率"
 
 #: plugins/personal/environment/environment.tpl:139
-#: plugins/admin/systems/workstationStartup.tpl:144
+#: plugins/admin/systems/workstationStartup.tpl:150
 #: plugins/admin/systems/terminalStartup.tpl:66
 #: plugins/admin/systems/servservice.tpl:11
 msgid "Shares"
@@ -2565,7 +2565,7 @@ msgstr "挂载路径"
 #: plugins/admin/groups/class_groupMail.inc:582
 #: plugins/admin/applications/class_applicationParameters.inc:108
 #: plugins/admin/systems/glpiPrinter.tpl:122
-#: plugins/admin/systems/workstationStartup.tpl:159
+#: plugins/admin/systems/workstationStartup.tpl:165
 #: plugins/admin/systems/terminalStartup.tpl:81
 #: plugins/admin/systems/glpiManufacturer.tpl:8
 #: plugins/admin/systems/goSpamServer.tpl:37
@@ -4177,69 +4177,69 @@ msgstr "传真设置"
 msgid "FAX"
 msgstr "传真"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:152
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:153
 msgid "This account has no fax extensions."
 msgstr "这个账号没有传真扩展。"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:161
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:162
 msgid "Remove fax account"
 msgstr "删除传真账号"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:162
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:163
 msgid ""
 "This account has fax features enabled. You can disable them by clicking "
 "below."
 msgstr "这个账户传真功能已启用。您可以点击下面的按钮禁用。"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:164
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:165
 msgid "Create fax account"
 msgstr "创建传真账号"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:165
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:166
 msgid ""
 "This account has fax features disabled. You can enable them by clicking "
 "below."
 msgstr "这个账户传真功能已禁用。您可以点击下面的按钮来启用。"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:233
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:234
 msgid "You're trying to add an invalid phone number."
 msgstr "您正在添加一个无效的电话号码。"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:446
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:528
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:447
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:529
 #: plugins/admin/groups/class_groupApplication.inc:657
 #: plugins/admin/systems/class_printerPPDSelectionDialog.inc:146
 msgid "back"
 msgstr "返回"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:633
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:634
 msgid "Removing FAX account failed"
 msgstr "删除传真账号失败"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:648
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:649
 msgid "The required field 'Fax' is not set."
 msgstr "需要的字段“传真”没有设置"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:652
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:653
 msgid "Please enter a valid telephone number in the 'Fax' field."
 msgstr "请在“传真”处填入一个有效的电话号码。"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:660
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:661
 msgid "Mail delivery is checked, but no address has been specified."
 msgstr "选择了邮件传递，但是没有定义地址。"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:662
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:663
 msgid "The mail address you've entered is invalid."
 msgstr "您输入的邮件地址无效。"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:668
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:669
 msgid ""
 "Deliver fax to printer, is only possible if valid printer is given. Please "
 "correct your choice."
 msgstr ""
 "发送传真到打印机，只有在提供一个有效的打印机才能够实现。请修改您的选择。"
 
-#: plugins/gofax/faxaccount/class_gofaxAccount.inc:751
+#: plugins/gofax/faxaccount/class_gofaxAccount.inc:752
 msgid "Saving FAX account failed"
 msgstr "保存传真账号失败"
 
@@ -4258,7 +4258,7 @@ msgstr "传真 ID"
 #: plugins/gofax/faxreports/detail.tpl:21
 #: plugins/gofax/faxreports/contents.tpl:30
 #: plugins/admin/fai/faiTemplateEntry.tpl:94
-#: plugins/admin/systems/class_printGeneric.inc:864
+#: plugins/admin/systems/class_printGeneric.inc:871
 #: plugins/admin/ogroups/class_ogroupManagement.inc:363
 msgid "User"
 msgstr "用户"
@@ -5875,7 +5875,7 @@ msgstr "保存 FAI package entry 失败"
 
 #: plugins/admin/fai/faiPackage.tpl:33
 #: plugins/admin/systems/workstationStartup.tpl:46
-#: plugins/admin/systems/workstationStartup.tpl:76
+#: plugins/admin/systems/workstationStartup.tpl:82
 #: plugins/admin/systems/class_servRepository.inc:281
 #: plugins/admin/systems/servRepositorySetup.tpl:17
 msgid "Release"
@@ -5899,7 +5899,7 @@ msgstr "使用软件包"
 msgid "Choosen packages"
 msgstr "选择的软件包"
 
-#: plugins/admin/fai/faiPackage.tpl:74 include/functions.inc:660
+#: plugins/admin/fai/faiPackage.tpl:74 include/functions.inc:677
 msgid "Configure"
 msgstr "配置"
 
@@ -5966,7 +5966,7 @@ msgstr "从 profile 中删除分类"
 
 #: plugins/admin/fai/class_faiProfile.inc:305
 #: plugins/admin/systems/class_glpiSelectUser.inc:158
-#: plugins/admin/systems/class_servDNSeditZone.inc:323
+#: plugins/admin/systems/class_servDNSeditZone.inc:331
 #: plugins/admin/systems/class_baseSelectDialog.inc:28
 #: plugins/admin/ogroups/phonequeue.tpl:21
 #: include/sieve/templates/object_container.tpl:8
@@ -5977,7 +5977,7 @@ msgid "Up"
 msgstr "上"
 
 #: plugins/admin/fai/class_faiProfile.inc:306
-#: plugins/admin/systems/class_servDNSeditZone.inc:324
+#: plugins/admin/systems/class_servDNSeditZone.inc:332
 #: plugins/admin/ogroups/phonequeue.tpl:22
 #: include/sieve/templates/object_container.tpl:12
 #: include/sieve/templates/object_container_clear.tpl:12
@@ -6688,8 +6688,8 @@ msgstr "所有者"
 #: plugins/admin/fai/faiTemplateEntry.tpl:103
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:30
 #: plugins/admin/systems/class_servDHCP.inc:38
-#: plugins/admin/systems/class_printGeneric.inc:859
-#: plugins/admin/systems/class_printGeneric.inc:861
+#: plugins/admin/systems/class_printGeneric.inc:866
+#: plugins/admin/systems/class_printGeneric.inc:868
 #: plugins/admin/ogroups/class_ogroupManagement.inc:364
 #: plugins/generic/references/class_reference.inc:36
 msgid "Group"
@@ -6998,7 +6998,7 @@ msgstr "Posix"
 
 #: plugins/admin/groups/class_divListGroup.inc:127
 #: plugins/admin/applications/class_divListApplication.inc:119
-#: plugins/admin/ogroups/tabs_ogroups.inc:117
+#: plugins/admin/ogroups/tabs_ogroups.inc:119
 #: plugins/admin/ogroups/class_ogroupManagement.inc:365
 #: plugins/gofon/fonreports/contents.tpl:34
 #: plugins/generic/references/class_reference.inc:42
@@ -8009,13 +8009,13 @@ msgid "You have no permission to remove this department."
 msgstr "您无权删除这个部门。"
 
 #: plugins/admin/systems/class_terminalInfo.inc:49
-#: plugins/admin/systems/class_terminalInfo.inc:194
+#: plugins/admin/systems/class_terminalInfo.inc:199
 msgid "present"
 msgstr "可用的"
 
 #: plugins/admin/systems/class_terminalInfo.inc:62
 #: plugins/admin/systems/class_workstationService.inc:247
-#: plugins/admin/systems/class_workstationStartup.inc:538
+#: plugins/admin/systems/class_workstationStartup.inc:545
 #: plugins/admin/systems/class_terminalService.inc:255
 #: plugins/admin/systems/class_terminalStartup.inc:168
 #: plugins/admin/systems/class_terminalGeneric.inc:251
@@ -8027,7 +8027,7 @@ msgid "There is no php snmp module installed, can't gather any informations."
 msgstr "尚未安装 php snmp 模块，不能获取任何信息。"
 
 #: plugins/admin/systems/class_terminalInfo.inc:75
-#: plugins/admin/systems/class_terminalInfo.inc:169
+#: plugins/admin/systems/class_terminalInfo.inc:174
 msgid "unknown status"
 msgstr "未知状态"
 
@@ -8035,19 +8035,19 @@ msgstr "未知状态"
 msgid "This is a virtual terminal which has no properties to show here."
 msgstr "这是一个虚拟终端，没有属性可以显示。"
 
-#: plugins/admin/systems/class_terminalInfo.inc:102
+#: plugins/admin/systems/class_terminalInfo.inc:101
 msgid "online"
 msgstr "在线"
 
-#: plugins/admin/systems/class_terminalInfo.inc:158
+#: plugins/admin/systems/class_terminalInfo.inc:163
 msgid "running"
 msgstr "运行"
 
-#: plugins/admin/systems/class_terminalInfo.inc:161
+#: plugins/admin/systems/class_terminalInfo.inc:166
 msgid "not running"
 msgstr "没有运行"
 
-#: plugins/admin/systems/class_terminalInfo.inc:186
+#: plugins/admin/systems/class_terminalInfo.inc:191
 msgid "offline"
 msgstr "离线"
 
@@ -8554,9 +8554,9 @@ msgstr "ICA client"
 #: plugins/admin/systems/class_workstationService.inc:228
 #: plugins/admin/systems/class_workstationService.inc:229
 #: plugins/admin/systems/class_workstationService.inc:230
-#: plugins/admin/systems/class_workstationStartup.inc:339
-#: plugins/admin/systems/class_workstationStartup.inc:343
-#: plugins/admin/systems/class_workstationStartup.inc:865
+#: plugins/admin/systems/class_workstationStartup.inc:347
+#: plugins/admin/systems/class_workstationStartup.inc:351
+#: plugins/admin/systems/class_workstationStartup.inc:872
 #: plugins/admin/systems/class_workstationGeneric.inc:140
 #: plugins/admin/systems/class_terminalService.inc:68
 #: plugins/admin/systems/class_terminalService.inc:96
@@ -8751,7 +8751,7 @@ msgstr "选择在终端启动 SANE 扫描服务"
 msgid "Provide scan services"
 msgstr "提供扫描服务"
 
-#: plugins/admin/systems/class_workstationStartup.inc:364
+#: plugins/admin/systems/class_workstationStartup.inc:372
 #: plugins/admin/systems/class_terminalStartup.inc:88
 #, php-format
 msgid ""
@@ -8759,34 +8759,34 @@ msgid ""
 "exist."
 msgstr "命令 '%s'，作为插件 '%s' 的 KERNELS hook 好像并不存在。"
 
-#: plugins/admin/systems/class_workstationStartup.inc:473
+#: plugins/admin/systems/class_workstationStartup.inc:481
 msgid ""
 "There are packages in your configuration, which can't be resolved with "
 "current server/release settings."
 msgstr "您的配置中有软件包不能通过当前服务器/发行版设置解析。"
 
-#: plugins/admin/systems/class_workstationStartup.inc:518
+#: plugins/admin/systems/class_workstationStartup.inc:526
 msgid "Please select a 'FAI server' or remove the 'FAI classes'."
 msgstr "请选择一个“自动化安装（FAI）服务器”或者删除“自动化安装（FAI）类”。"
 
-#: plugins/admin/systems/class_workstationStartup.inc:578
+#: plugins/admin/systems/class_workstationStartup.inc:585
 msgid ""
 "There is already a profile in your selection that contain partition table "
 "configurations."
 msgstr "在您的选择中已经有一个 profile 包含分区表设置。"
 
-#: plugins/admin/systems/class_workstationStartup.inc:772
+#: plugins/admin/systems/class_workstationStartup.inc:779
 msgid "Not available in current setup"
 msgstr "当前安装不可用"
 
-#: plugins/admin/systems/class_workstationStartup.inc:945
+#: plugins/admin/systems/class_workstationStartup.inc:953
 #, php-format
 msgid ""
 "Can't resolve one or more of the given FAIclass(es) [%s] in FAI server '%s'. "
 "Server was reset to 'auto'."
 msgstr "无法解析一个或多个给出的 FAIcless [%s]，于 FAI 服务器 '%s'。"
 
-#: plugins/admin/systems/class_workstationStartup.inc:958
+#: plugins/admin/systems/class_workstationStartup.inc:966
 #, php-format
 msgid ""
 "Can't resolve the given FAIclass(es) [%s] anyway, please check your FAI "
@@ -8796,17 +8796,17 @@ msgstr ""
 "依旧无法解析提供的 FAIclass [%s]，请检查您的 FAI 配置，可能一些类被删除或者更"
 "名了。服务器被重置为“自动”。"
 
-#: plugins/admin/systems/class_workstationStartup.inc:1129
+#: plugins/admin/systems/class_workstationStartup.inc:1137
 msgid "Saving workstation startup settings failed"
 msgstr "保存工作站启动设置失败"
 
-#: plugins/admin/systems/class_workstationStartup.inc:1179
+#: plugins/admin/systems/class_workstationStartup.inc:1187
 #, php-format
 msgid ""
 "Can't execute specified REPOSITORY_HOOK '%s' please check your gosa.conf."
 msgstr "无法执行指定的 REPOSITOR_HOOK '%s'，请检查您的 gosa.conf。"
 
-#: plugins/admin/systems/class_workstationStartup.inc:1181
+#: plugins/admin/systems/class_workstationStartup.inc:1189
 #: plugins/admin/systems/class_servRepositorySetup.inc:184
 #, php-format
 msgid ""
@@ -8971,30 +8971,30 @@ msgid "LDAP server"
 msgstr "LDAP 服务器"
 
 #: plugins/admin/systems/workstationStartup.tpl:42
-#: plugins/admin/systems/workstationStartup.tpl:72
+#: plugins/admin/systems/workstationStartup.tpl:78
 msgid "FAI server"
 msgstr "自动化安装服务器"
 
-#: plugins/admin/systems/workstationStartup.tpl:64
-#: plugins/admin/systems/workstationStartup.tpl:108
+#: plugins/admin/systems/workstationStartup.tpl:70
+#: plugins/admin/systems/workstationStartup.tpl:114
 msgid "Assigned FAI classes"
 msgstr "分配的 FAI 类"
 
-#: plugins/admin/systems/workstationStartup.tpl:92
+#: plugins/admin/systems/workstationStartup.tpl:98
 msgid "set"
 msgstr "设置"
 
-#: plugins/admin/systems/workstationStartup.tpl:130
+#: plugins/admin/systems/workstationStartup.tpl:136
 #: plugins/admin/systems/terminalStartup.tpl:53
 msgid "Kernel modules (format: name parameters)"
 msgstr "内核模块（格式： 名称 参数）"
 
-#: plugins/admin/systems/workstationStartup.tpl:132
+#: plugins/admin/systems/workstationStartup.tpl:138
 #: plugins/admin/systems/terminalStartup.tpl:55
 msgid "Add additional modules to load on startup"
 msgstr "添加在启动中要加载的模块"
 
-#: plugins/admin/systems/workstationStartup.tpl:157
+#: plugins/admin/systems/workstationStartup.tpl:163
 #: plugins/admin/systems/terminalStartup.tpl:79
 msgid "Mountpoint"
 msgstr "挂载点"
@@ -9276,26 +9276,35 @@ msgstr "您无权在此 'Base' 下创建一个工作站"
 msgid "The required field 'Workstation name' is not set."
 msgstr "需要的字段“工作站名称”没有设置。"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:404
-#: plugins/admin/systems/class_componentGeneric.inc:177
+#: plugins/admin/systems/class_workstationGeneric.inc:391
+#: plugins/admin/systems/class_componentGeneric.inc:153
+#: plugins/admin/systems/class_terminalGeneric.inc:427
+#: plugins/admin/systems/class_servGeneric.inc:250
+#: plugins/admin/systems/class_phoneGeneric.inc:308
+#, fuzzy
+msgid "Please specify a valid name for this object."
+msgstr "请为这个 mime type 指定一个有效名称。"
+
+#: plugins/admin/systems/class_workstationGeneric.inc:409
+#: plugins/admin/systems/class_componentGeneric.inc:182
 #: plugins/admin/systems/class_winGeneric.inc:188
-#: plugins/admin/systems/class_terminalGeneric.inc:443
-#: plugins/admin/systems/class_servGeneric.inc:263
-#: plugins/admin/systems/class_printGeneric.inc:672
-#: plugins/admin/systems/class_phoneGeneric.inc:325
+#: plugins/admin/systems/class_terminalGeneric.inc:448
+#: plugins/admin/systems/class_servGeneric.inc:268
+#: plugins/admin/systems/class_printGeneric.inc:677
+#: plugins/admin/systems/class_phoneGeneric.inc:330
 #, php-format
 msgid "There is already an entry '%s' in the base choosen by you"
 msgstr "在您选择的部门中已经存在条目 '%s'"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:415
-#: plugins/admin/systems/class_terminalGeneric.inc:453
+#: plugins/admin/systems/class_workstationGeneric.inc:420
+#: plugins/admin/systems/class_terminalGeneric.inc:458
 msgid ""
 "There must be at least one NTP server selected, or the inherit mode "
 "activated."
 msgstr "必须由至少选择一个 NTP 服务器，或者激活继承模式。"
 
-#: plugins/admin/systems/class_workstationGeneric.inc:487
-#: plugins/admin/systems/class_workstationGeneric.inc:511
+#: plugins/admin/systems/class_workstationGeneric.inc:492
+#: plugins/admin/systems/class_workstationGeneric.inc:516
 #: plugins/admin/ogroups/class_termgroup.inc:334
 msgid "Saving workstation failed"
 msgstr "保存工作站失败"
@@ -9952,22 +9961,22 @@ msgstr "删除通用组件失败"
 msgid "The required field 'Component name' is not set."
 msgstr "需要的字段“组件名称”没有设置。"
 
-#: plugins/admin/systems/class_componentGeneric.inc:153
+#: plugins/admin/systems/class_componentGeneric.inc:158
 #: plugins/admin/systems/class_phoneGeneric.inc:292
 msgid "The required field IP address is empty."
 msgstr "需要的 IP 地址字段为空。"
 
-#: plugins/admin/systems/class_componentGeneric.inc:156
+#: plugins/admin/systems/class_componentGeneric.inc:161
 #: plugins/admin/systems/class_phoneGeneric.inc:295
 msgid "The field IP address contains an invalid address."
 msgstr "IP 地址字段包含无效地址。"
 
-#: plugins/admin/systems/class_componentGeneric.inc:164
+#: plugins/admin/systems/class_componentGeneric.inc:169
 #: plugins/admin/systems/class_winGeneric.inc:175
 msgid "You have no permissions to create a component on this 'Base'."
 msgstr "您无权在这个 'Base' 下创建一个组件。"
 
-#: plugins/admin/systems/class_componentGeneric.inc:236
+#: plugins/admin/systems/class_componentGeneric.inc:241
 msgid "Saving generic component failed"
 msgstr "保存通用组件失败"
 
@@ -10179,7 +10188,7 @@ msgid ""
 msgstr "设备 IP '%s' 将自动作为'A'记录添加，请删除这条记录。"
 
 #: plugins/admin/systems/class_termDNS.inc:509
-#: plugins/admin/systems/class_servDNSeditZone.inc:437
+#: plugins/admin/systems/class_servDNSeditZone.inc:445
 #, php-format
 msgid "Only lowercase is allowed, please check your '%ss'."
 msgstr "只允许小写字母，请检查您的 '%ss'。"
@@ -10519,7 +10528,7 @@ msgstr "整合麦克风"
 #: include/sieve/templates/element_header.tpl:41
 #: include/sieve/templates/element_envelope.tpl:41
 #: setup/class_setupStep_Ldap.inc:74 setup/class_setupStep_Config1.inc:87
-#: setup/class_setupStep_Config2.inc:146 setup/class_setupStep_Config3.inc:80
+#: setup/class_setupStep_Config2.inc:146 setup/class_setupStep_Config3.inc:82
 #: setup/setup_feedback.tpl:55 setup/setup_feedback.tpl:73
 #: setup/class_setupStep_Schema.inc:63
 msgid "Yes"
@@ -10536,7 +10545,7 @@ msgstr "是"
 #: include/sieve/templates/element_header.tpl:43
 #: include/sieve/templates/element_envelope.tpl:43
 #: setup/class_setupStep_Ldap.inc:74 setup/class_setupStep_Config1.inc:87
-#: setup/class_setupStep_Config2.inc:146 setup/class_setupStep_Config3.inc:80
+#: setup/class_setupStep_Config2.inc:146 setup/class_setupStep_Config3.inc:82
 #: setup/setup_feedback.tpl:57 setup/setup_feedback.tpl:75
 #: setup/class_setupStep_Schema.inc:63
 msgid "No"
@@ -10782,7 +10791,7 @@ msgstr "您无权在此 'Base' 下创建一个终端"
 msgid "The required field 'Terminal name' is not set."
 msgstr "需要的字段“终端名称”没有设置。"
 
-#: plugins/admin/systems/class_terminalGeneric.inc:537
+#: plugins/admin/systems/class_terminalGeneric.inc:542
 msgid "Saving terminal failed"
 msgstr "保存终端失败"
 
@@ -10996,11 +11005,11 @@ msgstr "删除服务器错误"
 msgid "The required field 'Server name' is not set."
 msgstr "需要的字段“服务器名称”没有定义。"
 
-#: plugins/admin/systems/class_servGeneric.inc:252
+#: plugins/admin/systems/class_servGeneric.inc:257
 msgid "You have no permissions to create a server on this 'Base'."
 msgstr "您无权在此 'Base' 下创建一个服务器。"
 
-#: plugins/admin/systems/class_servGeneric.inc:322
+#: plugins/admin/systems/class_servGeneric.inc:327
 msgid "Saving server failed"
 msgstr "保存服务器失败"
 
@@ -11219,7 +11228,7 @@ msgid "Allow booting"
 msgstr ""
 
 #: plugins/admin/systems/class_servDNSeditZoneEntries.inc:105
-#: plugins/admin/systems/servDNSeditZoneEntries.tpl:14
+#: plugins/admin/systems/servDNSeditZoneEntries.tpl:11
 msgid "New entry"
 msgstr "新条目"
 
@@ -11376,13 +11385,7 @@ msgid ""
 "single list."
 msgstr "此对话框允许您修改这个 DNS 区域中所有内容。"
 
-#: plugins/admin/systems/servDNSeditZoneEntries.tpl:2
-msgid ""
-"Be careful editing record types with this dialog. All changes will be saved "
-"immediately when using the save button."
-msgstr "小心使用这个对话框修改记录类型。当按下保存键时，所有修改马上被保存。"
-
-#: plugins/admin/systems/servDNSeditZoneEntries.tpl:8
+#: plugins/admin/systems/servDNSeditZoneEntries.tpl:5
 msgid ""
 "This dialog can't be used until the currently edited zone was saved or the "
 "zone entry exists in the ldap database."
@@ -11390,7 +11393,7 @@ msgstr ""
 "这个对话框不能使用，除非当前编辑的域被保存或者域中条目已经存在于 ldap 数据库"
 "中。"
 
-#: plugins/admin/systems/servDNSeditZoneEntries.tpl:14
+#: plugins/admin/systems/servDNSeditZoneEntries.tpl:11
 msgid "Create a new DNS zone entry"
 msgstr "创建一个新 DNS zone 条目"
 
@@ -11447,16 +11450,16 @@ msgid ""
 "entries '%s'"
 msgstr "不能删除所选的域，因为它仍然被这些条目使用 '%s'"
 
-#: plugins/admin/systems/class_servDNS.inc:422
+#: plugins/admin/systems/class_servDNS.inc:430
 msgid "Updating DNS service failed"
 msgstr "更新 DNS 服务失败"
 
-#: plugins/admin/systems/class_servDNS.inc:433
+#: plugins/admin/systems/class_servDNS.inc:441
 msgid "Removing DNS entries failed"
 msgstr "删除 DNS 记录失败"
 
-#: plugins/admin/systems/class_servDNS.inc:456
-#: plugins/admin/systems/class_servDNS.inc:465
+#: plugins/admin/systems/class_servDNS.inc:464
+#: plugins/admin/systems/class_servDNS.inc:473
 msgid "Saving DNS entries failed"
 msgstr "保存 DNS 记录失败"
 
@@ -11504,67 +11507,67 @@ msgstr "允许管理该打印机的用户"
 msgid "Admins"
 msgstr "管理员"
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:403
+#: plugins/admin/systems/class_servDNSeditZone.inc:411
 #, php-format
 msgid "Please choose a valid zone name."
 msgstr "请选择一个有效的时区。"
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:407
+#: plugins/admin/systems/class_servDNSeditZone.inc:415
 #, php-format
 msgid "Please choose a valid reverse zone name."
 msgstr "请选择一个有效的反向解析域名称。"
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:411
+#: plugins/admin/systems/class_servDNSeditZone.inc:419
 msgid "Only lowercase strings are allowed as zone name."
 msgstr "只有小写字符串被允许作为域名。"
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:415
+#: plugins/admin/systems/class_servDNSeditZone.inc:423
 msgid "Please specify a numeric value for serial number."
 msgstr "请给出一个数字型数值作为系列号。"
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:419
+#: plugins/admin/systems/class_servDNSeditZone.inc:427
 msgid "Please specify a numeric value for refresh."
 msgstr "请为刷新提供一个数值。"
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:423
+#: plugins/admin/systems/class_servDNSeditZone.inc:431
 msgid "Please specify a numeric value for ttl."
 msgstr "请为 ttl 提供一个数值。"
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:427
+#: plugins/admin/systems/class_servDNSeditZone.inc:435
 msgid "Please specify a numeric value for expire."
 msgstr "请为过期时间提供一个数值。"
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:431
+#: plugins/admin/systems/class_servDNSeditZone.inc:439
 msgid "Please specify a numeric value for retry."
 msgstr "请为重试提供一个数值。"
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:446
+#: plugins/admin/systems/class_servDNSeditZone.inc:454
 msgid ""
 "The given network address is not a valid, please specify a valid IP address."
 msgstr "给定的网络地址无效，请输入一个有效的上IP 地址。"
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:453
+#: plugins/admin/systems/class_servDNSeditZone.inc:461
 #, php-format
 msgid ""
 "The specified network address is not matching with the specified zone class, "
 "try it this way x.0.0.0"
 msgstr "提供的网络地址和 zone 分类不匹配，尝试用这种格式 x.0.0.0"
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:459
+#: plugins/admin/systems/class_servDNSeditZone.inc:467
 #, php-format
 msgid ""
 "The specified network address is not matching with the specified zone class, "
 "try it this way x.x.0.0"
 msgstr "提供的网络地址和 zone 分类不匹配，尝试用这种格式 x.x.0.0"
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:465
+#: plugins/admin/systems/class_servDNSeditZone.inc:473
 #, php-format
 msgid ""
 "The specified network address is not matching with the specified zone class, "
 "try it this way x.x.x.0"
 msgstr "提供的网络地址和 zone 分类不匹配，尝试用这种格式 x.x.x.0"
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:469
+#: plugins/admin/systems/class_servDNSeditZone.inc:477
 #, php-format
 msgid "The given network class '%s' is not valid."
 msgstr "提供的网络地址 '%s' 无效。"
@@ -11728,25 +11731,35 @@ msgstr "该打印机属于工作站%s。您不能重命名该打印机。"
 msgid "Removing printer failed"
 msgstr "删除打印机失败"
 
-#: plugins/admin/systems/class_printGeneric.inc:651
+#: plugins/admin/systems/class_printGeneric.inc:643
+#, fuzzy
+msgid "The required field 'Printer name' is not set."
+msgstr "需要的字段“电话名称”没有设置。"
+
+#: plugins/admin/systems/class_printGeneric.inc:648
+#, fuzzy
+msgid "Invalid character in printer name."
+msgstr "分类名包含无效字符。"
+
+#: plugins/admin/systems/class_printGeneric.inc:656
 msgid "You have no permissions to create a printer on this 'Base'."
 msgstr "您无权在此 'Base' 下创建一个打印机。"
 
-#: plugins/admin/systems/class_printGeneric.inc:839
+#: plugins/admin/systems/class_printGeneric.inc:846
 msgid "Saving printer failed"
 msgstr "保存打印机失败"
 
-#: plugins/admin/systems/class_printGeneric.inc:884
+#: plugins/admin/systems/class_printGeneric.inc:891
 #, php-format
 msgid "Illegal printer type while adding '%s' to the list of '%s' printers,"
 msgstr "错误的打印机类型，当添加 '%s' 到 '%s' 打印机列表时，"
 
-#: plugins/admin/systems/class_printGeneric.inc:906
+#: plugins/admin/systems/class_printGeneric.inc:913
 #, php-format
 msgid "Can't add '%s' to the list of members, it is already used."
 msgstr "无法添加 '%s' 到成员列表，已经被使用。"
 
-#: plugins/admin/systems/class_printGeneric.inc:914
+#: plugins/admin/systems/class_printGeneric.inc:921
 #, php-format
 msgid "Can't add '%s' to list of members, it is not reachable."
 msgstr "无法添加 '%s' 到成员列表，无法访问。"
@@ -12201,11 +12214,11 @@ msgstr "需要的字段“电话名称”没有设置。"
 msgid "The 'Phone name' '0' is reserved and cannot be used."
 msgstr "'0' 作为保留 '电话名' 不能使用。"
 
-#: plugins/admin/systems/class_phoneGeneric.inc:310
+#: plugins/admin/systems/class_phoneGeneric.inc:315
 msgid "You have no permissions to create a phone on this 'Base'."
 msgstr "您无权在此 'Base' 下创建一个电话"
 
-#: plugins/admin/systems/class_phoneGeneric.inc:411
+#: plugins/admin/systems/class_phoneGeneric.inc:416
 msgid "Saving phone failed"
 msgstr "保存电话失败"
 
@@ -12535,7 +12548,7 @@ msgid "Mimetype management"
 msgstr "邮件 mime type"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:65
-#: plugins/admin/ogroups/tabs_ogroups.inc:199
+#: plugins/admin/ogroups/tabs_ogroups.inc:201
 msgid "Phone queue"
 msgstr "电话队列"
 
@@ -12543,7 +12556,7 @@ msgstr "电话队列"
 msgid "System"
 msgstr "系统"
 
-#: plugins/admin/ogroups/tabs_ogroups.inc:178
+#: plugins/admin/ogroups/tabs_ogroups.inc:180
 msgid "Terminals"
 msgstr "终端"
 
@@ -14654,7 +14667,7 @@ msgid ""
 "Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
 msgstr "命令 '%s'，作为插件 '%s' 的 POSTCREATE 好像并不存在。"
 
-#: include/class_plugin.inc:599 include/class_password-methods.inc:200
+#: include/class_plugin.inc:599 include/class_password-methods.inc:205
 #, php-format
 msgid ""
 "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
@@ -14685,12 +14698,12 @@ msgstr "处理对象标记失败"
 msgid "Removing tag from object '%s'"
 msgstr "从对象 '%s' 删除标记"
 
-#: include/class_password-methods.inc:184
+#: include/class_password-methods.inc:189
 #, php-format
 msgid "Setting the password failed. LDAP server says '%s'."
 msgstr "设置口令失败。LDAP 服务器报告说 '%s'。"
 
-#: include/class_password-methods.inc:221
+#: include/class_password-methods.inc:226
 #, php-format
 msgid "Setting for SMBHASH in %s is incorrect! Can't change Samba password."
 msgstr "在 %s 中的 SMBHASH 的设置不正确！无法修改 Samba 口令。"
@@ -14876,17 +14889,17 @@ msgstr "致命错误：连接 LDAP 错误。服务器返回 '%s'。"
 msgid "User login failed. LDAP server said '%s'."
 msgstr "用户登录失败。LDAP 服务器返回 '%s'。"
 
-#: include/functions.inc:329
+#: include/functions.inc:340
 msgid "Username / UID is not unique. Please check your LDAP database."
 msgstr "用户名 / UID 不唯一。请检查您的 LDAP 数据库。"
 
-#: include/functions.inc:461
+#: include/functions.inc:478
 msgid ""
 "Error while adding a lock. Parameters are not set correctly, please check "
 "the source!"
 msgstr "添加锁时发生错误。参数没有正确设置，请检查源！"
 
-#: include/functions.inc:471
+#: include/functions.inc:488
 #, php-format
 msgid ""
 "Can't set locking information in LDAP database. Please check the 'config' "
@@ -14895,56 +14908,56 @@ msgstr ""
 "无法在 LDAP 数据库中设置锁定信息。请检查 %s 中的 'config' 条目！LDAP 服务器报"
 "告说 '%s'。"
 
-#: include/functions.inc:486
+#: include/functions.inc:503
 #, php-format
 msgid "Adding a lock failed. LDAP server says '%s'."
 msgstr "添加锁失败。 LDAP 服务器报告说 '%s'。"
 
-#: include/functions.inc:512
+#: include/functions.inc:529
 #, php-format
 msgid "Removing a lock failed. LDAP server says '%s'."
 msgstr "删除锁失败。 LDAP 服务器报告说 '%s'。"
 
-#: include/functions.inc:542
+#: include/functions.inc:559
 msgid ""
 "Getting the lock from LDAP failed. Parameters are not set correctly, please "
 "check the source!"
 msgstr "从 LDAP 获取锁失败。参数没有正确设置，请检查源！"
 
-#: include/functions.inc:552
+#: include/functions.inc:569
 #, php-format
 msgid ""
 "Can't get locking information in LDAP database. Please check the 'config' "
 "entry in %s!"
 msgstr "无法获得 LDAP 数据库的锁信息。检查 %s 中的 'config' 条目！"
 
-#: include/functions.inc:560
+#: include/functions.inc:577
 msgid ""
 "Found multiple locks for object to be locked. This should not be possible - "
 "cleaning up multiple references."
 msgstr "发现要锁定的对象由多个锁。这虽然不可能──清除多个引用。"
 
-#: include/functions.inc:646
+#: include/functions.inc:663
 #, php-format
 msgid "The size limit of %d entries is exceed!"
 msgstr "超过了 %d 个条目的大小限制！"
 
-#: include/functions.inc:648
+#: include/functions.inc:665
 #, php-format
 msgid ""
 "Set the new size limit to %s and show me this message if the limit still "
 "exceeds"
 msgstr "设置新的大小限制为 %s 并且如果限制依然超出还显示这条信息。"
 
-#: include/functions.inc:665
+#: include/functions.inc:682
 msgid "incomplete"
 msgstr "不完整"
 
-#: include/functions.inc:1127 include/functions.inc:1368
+#: include/functions.inc:1149 include/functions.inc:1390
 msgid "LDAP error:"
 msgstr "LDAP 错误:"
 
-#: include/functions.inc:1128
+#: include/functions.inc:1150
 msgid ""
 "Problems with the LDAP server mean that you probably lost the last changes. "
 "Please check your LDAP setup for possible errors and try again."
@@ -14952,25 +14965,25 @@ msgstr ""
 "LDAP 服务器发生错误，意味着您最后的修改可能丢失。请检查您 LDAP 安装可能的错误"
 "再重试。"
 
-#: include/functions.inc:1136
+#: include/functions.inc:1158
 msgid ""
 "Please check your input and fix the error. Press 'OK' to close this message "
 "box."
 msgstr "请检查您的输入并修正错误。按“OK”关闭此对话框。"
 
-#: include/functions.inc:1196
+#: include/functions.inc:1218
 msgid "OK"
 msgstr "好"
 
-#: include/functions.inc:1257
+#: include/functions.inc:1279
 msgid "Continue anyway"
 msgstr "仍然继续"
 
-#: include/functions.inc:1259
+#: include/functions.inc:1281
 msgid "Edit anyway"
 msgstr "仍然编辑"
 
-#: include/functions.inc:1261
+#: include/functions.inc:1283
 #, php-format
 msgid ""
 "You're going to edit the LDAP entry '%s' which appears to be used by '%s'. "
@@ -14978,71 +14991,71 @@ msgid ""
 msgstr ""
 "您将要修改的 LDAP 条目 '%s' 看起来正在被 '%s' 使用。请联系这个人再继续。"
 
-#: include/functions.inc:1550
+#: include/functions.inc:1572
 msgid "Entries per page"
 msgstr "每页条目数"
 
-#: include/functions.inc:1578
+#: include/functions.inc:1600
 msgid "Apply filter"
 msgstr "应用过滤器"
 
-#: include/functions.inc:1852
+#: include/functions.inc:1874
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-#: include/functions.inc:1895
+#: include/functions.inc:1917
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "GOsa 开发版（版本 %s）"
 
-#: include/functions.inc:2297 include/functions.inc:2301
+#: include/functions.inc:2319 include/functions.inc:2323
 msgid "Warning - base_hook is not available. Using default base."
 msgstr "警告： base_hook不可用。使用缺省 base。"
 
-#: include/functions.inc:2307
+#: include/functions.inc:2329
 msgid "Warning - no base_hook defined. Using default base."
 msgstr "警告──没有定义  base_hook。使用缺省 base。"
 
-#: include/functions.inc:2332 setup/class_setupStep_Schema.inc:95
+#: include/functions.inc:2354 setup/class_setupStep_Schema.inc:95
 msgid "Can't get schema information from server. No schema check possible!"
 msgstr "不能从服务器得到 schema 信息。无法对 schema 检查！"
 
-#: include/functions.inc:2358
+#: include/functions.inc:2380
 msgid "Used to store account specific informations."
 msgstr "用于存储账号相关信息。"
 
-#: include/functions.inc:2365
+#: include/functions.inc:2387
 msgid ""
 "Used to lock currently edited entries to avoid multiple changes at the same "
 "time."
 msgstr "用于锁定当前编辑条目以避免同时多次更改。"
 
-#: include/functions.inc:2408
+#: include/functions.inc:2430
 #, php-format
 msgid "The required objectClass '%s' is not present in your schema setup"
 msgstr "必须的对象类 '%s' 在您的 schema 设置中不存在"
 
-#: include/functions.inc:2410
+#: include/functions.inc:2432
 #, php-format
 msgid "The optional objectClass '%s' is not present in your schema setup"
 msgstr "可选的对象类 '%s' 在您的 schema 设置中不存在"
 
-#: include/functions.inc:2416
+#: include/functions.inc:2438
 #, php-format
 msgid "The required objectclass '%s' does not have version %s"
 msgstr "必须的对象类 '%s' 没有版本 %s"
 
-#: include/functions.inc:2418
+#: include/functions.inc:2440
 #, php-format
 msgid "The optional objectclass '%s' does not have version %s"
 msgstr "可选的对象类 '%s' 没有版本 %s"
 
-#: include/functions.inc:2422
+#: include/functions.inc:2444
 #, php-format
 msgid "Class(es) available"
 msgstr "可用的类"
 
-#: include/functions.inc:2445
+#: include/functions.inc:2467
 msgid ""
 "You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema    configuration do not support this option."
@@ -15050,13 +15063,13 @@ msgstr ""
 "你在 'ldap 设置' 步骤已经启用了 rfc2307bis 选项，但是您的 schema 配置不支持这"
 "个选项。"
 
-#: include/functions.inc:2446
+#: include/functions.inc:2468
 msgid ""
 "In order to use rfc2307bis conform groups the objectClass 'posixGroup' must "
 "be      AUXILIARY"
 msgstr "为了使用 rfc2307bis 标准的组，对象类 'posixGroup' 必须是 AUXILIARY"
 
-#: include/functions.inc:2450
+#: include/functions.inc:2472
 msgid ""
 "You have disabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema   configuration do not support this option."
@@ -15064,47 +15077,47 @@ msgstr ""
 "您已经在 'ldap setup' 步骤中禁用 rfc2307bis 选项，但是您的 schema 配置不支持"
 "这个选项。"
 
-#: include/functions.inc:2451
+#: include/functions.inc:2473
 msgid "The objectClass 'posixGroup' must be STRUCTURAL"
 msgstr "对象类 'posixGroup' 必须是 STRUCTURAL"
 
-#: include/functions.inc:2547
+#: include/functions.inc:2569
 msgid "German"
 msgstr "德语"
 
-#: include/functions.inc:2548
+#: include/functions.inc:2570
 msgid "French"
 msgstr "法语"
 
-#: include/functions.inc:2549
+#: include/functions.inc:2571
 msgid "Italian"
 msgstr "意大利语"
 
-#: include/functions.inc:2550
+#: include/functions.inc:2572
 msgid "Spanish"
 msgstr "西班牙语"
 
-#: include/functions.inc:2551
+#: include/functions.inc:2573
 msgid "English"
 msgstr "英语"
 
-#: include/functions.inc:2552
+#: include/functions.inc:2574
 msgid "Dutch"
 msgstr "荷兰语"
 
-#: include/functions.inc:2553
+#: include/functions.inc:2575
 msgid "Polish"
 msgstr "波兰语"
 
-#: include/functions.inc:2554
+#: include/functions.inc:2576
 msgid "Swedish"
 msgstr ""
 
-#: include/functions.inc:2555
+#: include/functions.inc:2577
 msgid "Chinese"
 msgstr "中文"
 
-#: include/functions.inc:2556
+#: include/functions.inc:2578
 #, fuzzy
 msgid "Russian"
 msgstr "俄语"
@@ -15169,11 +15182,11 @@ msgstr "无法粘贴"
 msgid "XML error in %s: %s at line %d"
 msgstr "XML 出错于 %s: %s ，行 %d"
 
-#: include/class_config.inc:199 html/index.php:204
+#: include/class_config.inc:191 html/index.php:204
 msgid "Can't bind to LDAP. Please contact the system administrator."
 msgstr "无法绑定 LDAP。请联系系统管理员。"
 
-#: include/class_config.inc:516
+#: include/class_config.inc:508
 msgid "SID and/or RIDBASE missing in your configuration!"
 msgstr "您的配置文件缺少 SID 和/或 RIDBASE！"
 
@@ -15768,19 +15781,19 @@ msgstr "拷贝 '%s' 到 '%s' 失败。LDAP 报告说 '%s'。"
 msgid "Something went wrong while copying dns."
 msgstr "拷贝 dns 时出错。"
 
-#: setup/class_setupStep_Config3.inc:71 setup/class_setupStep_Config3.inc:72
+#: setup/class_setupStep_Config3.inc:73 setup/class_setupStep_Config3.inc:74
 msgid "GOsa settings 3/3"
 msgstr "GOsa 设置 3/3"
 
-#: setup/class_setupStep_Config3.inc:73
+#: setup/class_setupStep_Config3.inc:75
 msgid "Tweak some GOsa core behaviour"
 msgstr "调整一些 GOsa 核心行为"
 
-#: setup/class_setupStep_Config3.inc:184
+#: setup/class_setupStep_Config3.inc:186
 msgid "Session lifetime must be a numeric value."
 msgstr "会话生存期必须是数字。"
 
-#: setup/class_setupStep_Config3.inc:188
+#: setup/class_setupStep_Config3.inc:190
 msgid "Maximal ldap query time must be a numeric value. "
 msgstr "最长 ldap 查询时间必须是数字。"
 
@@ -16104,75 +16117,84 @@ msgid "Smarty compile directory"
 msgstr "Smarty 编译目录"
 
 #: setup/setup_config3.tpl:51
+msgid "SNMP community"
+msgstr ""
+
+#: setup/setup_config3.tpl:60
 msgid "Path for PPD storage"
 msgstr "PPD 存储路径"
 
-#: setup/setup_config3.tpl:67
+#: setup/setup_config3.tpl:76
 msgid "Path for kiosk profile storage"
 msgstr "Kiosk profile 存储路径"
 
-#: setup/setup_config3.tpl:85
+#: setup/setup_config3.tpl:94
 #, fuzzy
 msgid "Enable system deployment"
 msgstr "邮件系统管理"
 
-#: setup/setup_config3.tpl:104
+#: setup/setup_config3.tpl:113
 msgid "Network resolv hook"
 msgstr "Network 解析钩子"
 
-#: setup/setup_config3.tpl:122
+#: setup/setup_config3.tpl:131
 msgid "Mail queue script"
 msgstr "邮件队列脚本"
 
-#: setup/setup_config3.tpl:140
+#: setup/setup_config3.tpl:149
 msgid "Notification script"
 msgstr "通知脚本"
 
-#: setup/setup_config3.tpl:156
+#: setup/setup_config3.tpl:165
 msgid "Login and session"
 msgstr "登录和会话"
 
-#: setup/setup_config3.tpl:159
+#: setup/setup_config3.tpl:168
+#, fuzzy
+msgid "Allow login with users mail address"
+msgstr "允许登录到终端服务器"
+
+#: setup/setup_config3.tpl:179
 msgid "Enforce register_globals to be deactivated"
 msgstr "强制 register_globals 为不活动"
 
-#: setup/setup_config3.tpl:171
+#: setup/setup_config3.tpl:191
 msgid "Enforce encrypted connections"
 msgstr "强制加密连接"
 
-#: setup/setup_config3.tpl:183
+#: setup/setup_config3.tpl:203
 msgid "Warn if session is not encrypted"
 msgstr "如果会话不加密警告"
 
-#: setup/setup_config3.tpl:195
+#: setup/setup_config3.tpl:215
 msgid "Session lifetime"
 msgstr "会话生存期"
 
-#: setup/setup_config3.tpl:203
+#: setup/setup_config3.tpl:223
 msgid "Debugging"
 msgstr "Debugging"
 
-#: setup/setup_config3.tpl:207
+#: setup/setup_config3.tpl:227
 msgid "Show PHP errors"
 msgstr "显示 PHP 错误"
 
-#: setup/setup_config3.tpl:219
+#: setup/setup_config3.tpl:239
 msgid "Maximum LDAP query time"
 msgstr "最大 LDAP 查询时间"
 
-#: setup/setup_config3.tpl:237
+#: setup/setup_config3.tpl:257
 msgid "Log LDAP statistics"
 msgstr "Log LDAP 状态"
 
-#: setup/setup_config3.tpl:249
+#: setup/setup_config3.tpl:269
 msgid "Debug level"
 msgstr "Debug 级别"
 
-#: setup/setup_config3.tpl:254 setup/setup_config3.tpl:257
+#: setup/setup_config3.tpl:274 setup/setup_config3.tpl:277
 msgid "Disabled"
 msgstr "禁用"
 
-#: setup/setup_config3.tpl:255 setup/setup_config3.tpl:258
+#: setup/setup_config3.tpl:275 setup/setup_config3.tpl:278
 msgid "Enabled"
 msgstr "启用"
 
@@ -17236,6 +17258,12 @@ msgid ""
 msgstr ""
 "如果锁检查失败，明显的是另外的人在进行编辑操作时关闭了浏览器。您可以通过按“仍"
 "然编辑”按钮来接管这个锁文件。"
+
+#~ msgid ""
+#~ "Be careful editing record types with this dialog. All changes will be "
+#~ "saved immediately when using the save button."
+#~ msgstr ""
+#~ "小心使用这个对话框修改记录类型。当按下保存键时，所有修改马上被保存。"
 
 #~ msgid "There is already a ppd file for this kind of printer."
 #~ msgstr "这种打印机类型已经有一个 ppd 文件。"
