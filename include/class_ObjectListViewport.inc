@@ -25,6 +25,11 @@ class ObjectListViewportException extends Exception {
  */
 class ObjectListViewport {
 
+  # DUMMY values ---->
+  private $headline= "|{16px}|{90%}Name|{64px}Actions|";
+  private $footer= "Statistics with no information currently";
+  # <--- DUMMY values.
+
   /*!
     \brief Container for objects
 
@@ -63,7 +68,10 @@ class ObjectListViewport {
       \return HTML rendered headline
 	 */
   private function renderHeadline(){
-    return $this->objects->getHeadline()."\n";
+    # Dummy implementation. Use pre-defined headline.
+    $buffer= $this->headline."\n";
+
+    return $buffer;
   }
 
 
@@ -74,7 +82,9 @@ class ObjectListViewport {
       \return HTML rendered footer
 	 */
   private function renderFooter(){
-    return $this->objects->getFooter()."\n";
+    # Dummy implementation. Use pre-defined footer.
+    $buffer= $this->footer;
+    return "|".$buffer."|\n";
   }
 
 
@@ -85,13 +95,11 @@ class ObjectListViewport {
       \return HTML rendered list entries
 	 */
   private function renderEntry($entry){
-    $buffer= "|";
-    foreach ($entry as $column){
-      $buffer.= "$column|";
-    }
-    $buffer.= "\n";
 
-    return $buffer;
+    # Dummy implenetation. It is interested in icon, cn and action
+    $buffer= "|".$entry['_icon']."|".$entry['cn']."|".$entry['_actions']."|";
+
+    return $buffer."\n";
   }
 
 
@@ -103,7 +111,8 @@ class ObjectListViewport {
     /* Generate fixed headline */
     $buffer= $this->renderHeadline();
 
-    /* Generate scrollable contents */
+    /* Apply current filter */
+    $filterIterator = new ObjectListFilterIterator($this->objects->getIterator(), 'dummy');
     foreach ($this->objects as $value){
       $buffer.= $this->renderEntry($value);
     }

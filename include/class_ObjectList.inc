@@ -35,24 +35,6 @@ class ObjectList implements IteratorAggregate {
 	private $objects;
 
   /*!
-    \brief List headline
-
-    String that keeps the desired headline. Returned by ObjectList::getHeadline.
-
-    \sa ObjectList::getHeadline
-   */
-  private $headline;
-
-  /*!
-    \brief List footer
-
-    String that keeps the desired footer. Returned by ObjectList::getFooter.
-
-    \sa ObjectList::getFooter
-   */
-  private $footer;
-
-  /*!
     \brief Config
 
     Config array that keeps the classes we do lists for, filter information, etc.
@@ -87,12 +69,12 @@ class ObjectList implements IteratorAggregate {
 	 */
 	private function load(){
     # Crap filling
-    $this->objects= array( array("i", "Testobjekt mit was auch immer", "UPS"),
-                           array("i", "Noch ein Testobjekt", "UPS"),
-                           array("d", "Ein drittes Testobjekt", "UL"));
-    $this->headline= "|{16px}|{90%}Name|{64px}Actions|";
-
-    $this->footer= "Statistical footer";
+    $this->objects= array(
+                            array("dn" => "cn=Demo client,ou=systems,dc=gonicus,dc=de", "cn" => "Demo client", "_icon" => "s_terminal.png", "_actions" => "ED"),
+                            array("dn" => "cn=Demo client2,ou=systems,dc=gonicus,dc=de", "cn" => "Demo client2", "_icon" => "s_terminal.png", "_actions" => "ED"),
+                            array("dn" => "cn=Printer,ou=systems,dc=gonicus,dc=de", "cn" => "Printer", "_icon" => "s_printer.png", "_actions" => "ED"),
+                            array("dn" => "cn=Server,ou=systems,dc=gonicus,dc=de", "cn" => "Server", "_icon" => "s_server.png", "_actions" => "ED"),
+                           );
 	}
 
 
@@ -115,28 +97,6 @@ class ObjectList implements IteratorAggregate {
 	 */
   public function getIterator() {
     return new ObjectListIterator($this->objects);
-  }
-
-
-	/*! \brief Function to get the desired headline
-
-      Return the property of headline to the public world.
-
-      \return headline for current list
-	 */
-  public function getHeadline() {
-    return $this->headline;
-  }
-
-
-	/*! \brief Function to get the desired footer
-
-      Return the property of footer to the public world.
-
-      \return headline for current list
-	 */
-  public function getFooter() {
-    return $this->footer;
   }
 
 }
