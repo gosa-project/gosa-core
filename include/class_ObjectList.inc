@@ -70,10 +70,10 @@ class ObjectList implements IteratorAggregate {
 	private function load(){
     # Crap filling
     $this->objects= array(
-                            array("dn" => "cn=Demo client,ou=systems,dc=gonicus,dc=de", "cn" => "Demo client", "_icon" => "s_terminal.png", "_actions" => "ED"),
-                            array("dn" => "cn=Demo client2,ou=systems,dc=gonicus,dc=de", "cn" => "Demo client2", "_icon" => "s_terminal.png", "_actions" => "ED"),
-                            array("dn" => "cn=Printer,ou=systems,dc=gonicus,dc=de", "cn" => "Printer", "_icon" => "s_printer.png", "_actions" => "ED"),
-                            array("dn" => "cn=Server,ou=systems,dc=gonicus,dc=de", "cn" => "Server", "_icon" => "s_server.png", "_actions" => "ED"),
+                            array("dn" => "cn=Demo client,ou=systems,dc=gonicus,dc=de", "cn" => "Demo client", "_icon" => "s_terminal.png", "_actions" => "ED", "objectClass" => array('gotoWorkstation')),
+                            array("dn" => "cn=Demo client2,ou=systems,dc=gonicus,dc=de", "cn" => "Demo client2", "_icon" => "s_terminal.png", "_actions" => "ED", "objectClass" => array('gotoWorkstation')),
+                            array("dn" => "cn=Printer,ou=systems,dc=gonicus,dc=de", "cn" => "Printer", "_icon" => "s_printer.png", "_actions" => "ED", "objectClass" => array('gotoPrinter')),
+                            array("dn" => "cn=Server,ou=systems,dc=gonicus,dc=de", "cn" => "Server", "_icon" => "s_server.png", "_actions" => "ED", "objectClass" => array("goServer")),
                            );
 	}
 

@@ -26,8 +26,10 @@ class ObjectListViewportException extends Exception {
 class ObjectListViewport {
 
   # DUMMY values ---->
-  private $headline= "|{16px}|{90%}Name|{64px}Actions|";
+  private $headline= "|{16px}|{90%}Name|{64px:R}Actions|";
   private $footer= "Statistics with no information currently";
+  private $entryFormat= "|{_icon}|{cn} ({_filter(uppercase,{cn})})|{_actions}|";
+  private $attributes= array('cn', '_icon', '_actions', 'dn');
   # <--- DUMMY values.
 
   /*!
@@ -71,6 +73,7 @@ class ObjectListViewport {
     # Dummy implementation. Use pre-defined headline.
     $buffer= $this->headline."\n";
 
+    #TODO: Make $buffer a proper HTML table output
     return $buffer;
   }
 
@@ -83,8 +86,10 @@ class ObjectListViewport {
 	 */
   private function renderFooter(){
     # Dummy implementation. Use pre-defined footer.
-    $buffer= $this->footer;
-    return "|".$buffer."|\n";
+    $buffer= "|".$this->footer."|";
+
+    #TODO: Make $buffer a proper HTML table output
+    return $buffer."|\n";
   }
 
 
@@ -96,10 +101,43 @@ class ObjectListViewport {
 	 */
   private function renderEntry($entry){
 
-    # Dummy implenetation. It is interested in icon, cn and action
-    $buffer= "|".$entry['_icon']."|".$entry['cn']."|".$entry['_actions']."|";
+    /* Copy template */
+    $buffer= $this->entryFormat;
+
+    /* Replace set of attributes */
+    foreach ($this->attributes as $attribute){
+      if (!isset($entry[$attribute])){
+        throw new ObjectListViewportException(sprintf(_("Can't locate attribute '%s' to replace in entry!"), $attribute));
+      } else {
+        $buffer= preg_replace('/\{'.$attribute.'\}/', $entry[$attribute],$buffer);
+      }
+    }
+
+    /* Execute optional filters */
+    preg_match_all ( '/\{_filter\(([^)]+)\)\}/', $buffer, $matches, PREG_SET_ORDER);
+    foreach ($matches as $match){
+      $filterName= preg_replace('/,.+$/', '', $match[1]);
+      $filterParameter= preg_replace('/^[^,]+,/', '', $match[1]);
+      $buffer= preg_replace('/\{_filter\('.$match[1].'\)\}/', $this->applyEntryFilter($filterName, $filterParameter), $buffer);
+    }
+
+    #TODO: Make $buffer a proper HTML table output
 
     return $buffer."\n";
+  }
+
+
+	/*! \brief Applies filter to the given entry format string.
+
+	    Instanciates the given ObjectListEntryFilter and calls the method.
+
+      \return rendered output
+      \sa ObjectListEntryFilter
+	 */
+  private function applyEntryFilter($filterName, $string){
+    $className= "ObjectListEntryFilter_".$filterName;
+    $cl= new $className;
+    return $cl->filter("$string");
   }
 
 
@@ -112,8 +150,8 @@ class ObjectListViewport {
     $buffer= $this->renderHeadline();
 
     /* Apply current filter */
-    $filterIterator = new ObjectListFilterIterator($this->objects->getIterator(), 'dummy');
-    foreach ($this->objects as $value){
+    $objects= new ObjectListFilterIterator($this->objects->getIterator());
+    foreach ($objects as $value){
       $buffer.= $this->renderEntry($value);
     }
 

@@ -8,16 +8,15 @@
     This class handles filtering of ObjectList iterators.
  */
 class ObjectListFilterIterator extends FilterIterator {
-  private $filter;
  
-  public function __construct(ObjectListIterator $objectListIterator, $filter) {
+  public function __construct(ObjectListIterator $objectListIterator) {
     parent::__construct($objectListIterator);
-    $this->filter = $filter;
   }
  
   public function accept() {
     $current = $this->getInnerIterator()->current();
- 
+
+    /* This is a dummy, currently. Accept everything. */
     return TRUE;
   }
 }
