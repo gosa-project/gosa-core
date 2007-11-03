@@ -50,7 +50,7 @@ class ObjectListViewport {
 
     /* Dummy here */
     $cr= Registry::getInstance("ConfigManager");
-    $cr->setSection("plugin/sample");
+    $cr->setSection($config);
     $this->headline= $cr->getValue("headline");
     $this->footer= $cr->getValue("footer");
     $this->entryFormat= $cr->getValue("entryFormat");

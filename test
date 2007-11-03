@@ -14,7 +14,7 @@ try {
 	$cr->load("gosa.conf");
 
 	/* Get a new test instance of ObjectListViewports */
-	$vp= new ObjectListViewport(array("dummy", "dummy"));
+	$vp= new ObjectListViewport("plugin/sample");
 	echo $vp->render();
 
 } catch (Exception $e) {
