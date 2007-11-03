@@ -39,6 +39,11 @@ class ObjectListViewport {
    */
 	private $objects;
 
+  /*!
+    \brief Switch to handle multiselect or not
+   */
+	private $multiselect;
+
 
   /*! \brief ObjectListViewport constructor
 
@@ -46,8 +51,9 @@ class ObjectListViewport {
 
     \param config Config section that is used to configure this ObjectListViewport
    */
-	public function __construct($config){
+	public function __construct($config, $multiselect= TRUE){
 
+	$this->multiselect= $multiselect;
     /* Dummy here */
     $cr= Registry::getInstance("ConfigManager");
     $cr->setSection($config);
