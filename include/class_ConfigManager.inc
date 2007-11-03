@@ -20,7 +20,9 @@ class ConfigManagerException extends Exception {
 class ConfigManager {
 
 	/* Config container */
-	protected $config= NULL;
+	private $config;
+	private $current;
+	private $section;
 
 	public function __construct(){}
 
@@ -48,36 +50,56 @@ class ConfigManager {
 			throw new ConfigManagerException($ret);
 		}
 
-		echo "Test config and load additional configuration data from LDAP\n";
+		#echo "Test config and load additional configuration data from LDAP\n";
 		#$this->test_config();
 		#$this->load_servers();        -> Section servers/...;
 		#$this->load_plugin_configs(); -> Section pugins/name/value;
 
-		print_r($this->config);
+		#print_r($this->config);
 	}
 
 
 	public function save($file){
+		throw new ConfigManagerException(_("Save not supported yet!"));
 	}
 
 
-	public function set_section($section_name){
+	public function setSection($name){
+		if (isset($this->config[$name])){
+			$this->section= $name;
+			$this->current= &$this->config[$name];
+			return TRUE;
+		} else {
+			$this->section= "";
+			$this->current= NULL;
+			return FALSE;
+		}
 	}
 
 
-	public function &get_section(){
+	public function getSection(){
+		return $this->section;
 	}
 
 
-	public function &get_sections(){
+	public function getSections(){
 	}
 
 
-	public function &get_value($section){
+	public function getValue($name){
+		if (!$this->current){
+			throw new ConfigManagerException(_("Can't get value without current section set!"));
+		}
+		
+		if (isset($this->current[$name])){
+			return $this->current[$name];
+		} else {
+			return NULL;
+		}
 	}
 
 
-	public function set_value($section, $value){
+	public function setValue($section, $value){
 	}
 
 }

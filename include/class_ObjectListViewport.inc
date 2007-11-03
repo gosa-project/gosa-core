@@ -25,12 +25,12 @@ class ObjectListViewportException extends Exception {
  */
 class ObjectListViewport {
 
-  # DUMMY values ---->
-  private $headline= "|{16px}|{90%}Name|{64px:R}Actions|";
-  private $footer= "Statistics with no information currently";
-  private $entryFormat= "|{_icon}|{cn} ({_filter(uppercase,{cn})})|{_actions}|";
+  /* Dummy here ----> */
+  private $headline;
+  private $footer;
+  private $entryFormat;
   private $attributes= array('cn', '_icon', '_actions', 'dn');
-  # <--- DUMMY values.
+  /* <---- Dummy here */
 
   /*!
     \brief Container for objects
@@ -47,6 +47,13 @@ class ObjectListViewport {
     \param config Config section that is used to configure this ObjectListViewport
    */
 	public function __construct($config){
+
+    /* Dummy here */
+    $cr= Registry::getInstance("ConfigManager");
+    $cr->setSection("plugin/sample");
+    $this->headline= $cr->getValue("headline");
+    $this->footer= $cr->getValue("footer");
+    $this->entryFormat= $cr->getValue("entryFormat");
 
     /* Load and instanciate classes, extract filter, icons, view hooks, etc. */
     $this->objects= new ObjectList($config);

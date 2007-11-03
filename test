@@ -10,8 +10,8 @@ require_once("include/autoload.inc");
 try {
 
 	/* Get new test instance of the Configuration */
-	#$cr= Registry::getInstance("ConfigManager");
-	#$cr->load("gosa.conf");
+	$cr= Registry::getInstance("ConfigManager");
+	$cr->load("gosa.conf");
 
 	/* Get a new test instance of ObjectListViewports */
 	$vp= new ObjectListViewport(array("dummy", "dummy"));
