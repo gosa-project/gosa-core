@@ -189,7 +189,7 @@ function getVhostDN($config,$apacheServerNameMix)
 {
   $ret = "";
   if(!strstr($apacheServerNameMix, '/')) {
-    print_red(sprintf(_("Undefined vhost name '%s'. Vhost name must look like this 'server/zone.com'."),$apacheServerNameMix));
+    print_red(sprintf(_("Undefined vhost name '%s'. Vhost name must look like this 'www.example.com or example.com'."),$apacheServerNameMix));
     return($ret);
   }
 
