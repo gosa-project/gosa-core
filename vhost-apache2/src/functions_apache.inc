@@ -13,7 +13,7 @@ function getVhostEntries($config,$HostDn,$silent = false)
   $ldap->cat($HostDn);
   $host_attr = $ldap->fetch();
 
-  /* Create tempalte for all fetched zone Data 
+  /* Create template for all fetched vhosts Data 
    */
   $VhostBase = array();
   $VhostBase['exists']  = false;
@@ -23,7 +23,7 @@ function getVhostEntries($config,$HostDn,$silent = false)
     
   $Vhosts    = array();
 
-  /* Get & Parse all zone entries 
+  /* Get & Parse all vhosts entries 
    */
   $ldap->ls("(&(objectClass=apacheConfig)(apacheServerName=*))",$HostDn,array("*"));
   $tmp_res = array();
@@ -31,7 +31,7 @@ function getVhostEntries($config,$HostDn,$silent = false)
     $tmp_res[] = $attrs;
   }
 
-  /* Parse fetched zones 
+  /* Parse fetched vhosts 
    */
   foreach($tmp_res as $attrs){
 
@@ -47,7 +47,7 @@ function getVhostEntries($config,$HostDn,$silent = false)
       $Vhosts[$apacheServerName]["apacheConfig"] = $attrs["apacheConfig"][0];
     }
 
-    /* Set initial zone name, to be able to detect if this entry was renamed 
+    /* Set initial vhosts name, to be able to detect if this entry was renamed 
      */
     $Vhosts[$apacheServerName]['InitialApacheServerName'] = $apacheServerName;
     $Vhosts[$apacheServerName]['apacheServerName'] = $apacheServerName;
@@ -72,7 +72,7 @@ function getVhostEntries($config,$HostDn,$silent = false)
 }
 
 
-/* This function compares two dns zone objects and returns an 
+/* This function compares two apache vhosts objects and returns an 
  *  array with following indexes 
  *   - delete, for vhost entries which must be deleted (only if vhost entries is removed)
  *   - rename, if a dn must be renamed, for example, the apacheServerName has changed
@@ -86,26 +86,26 @@ function getVhostEntriesDiff($config,$newVhosts,$HostDn)
   $add    = array();
   $del    = array();
 
-  /* Generate a template for zones with default values
+  /* Generate a template for vhosts with default values
    */
   $zoneBase                       = array();
   $zoneBase['objectClass']        = array("top","apacheConfig");
   $zoneBase['apacheServerName']           = "";
 
   /* Contains all renamed apacheServerNames 
-   * For zone entry udpdates
+   * For vhosts entry udpdates
    */
   $PrePareVhostEntries = array();
 
-  /* Walk through all zones and detect renamed/added/deleted zones ... 
+  /* Walk through all vhosts and detect renamed/added/deleted vhosts ... 
    */
   foreach($newVhosts as $name => $zone){
     
-    /* This zone was renamed 
+    /* This vhosts was renamed 
      */
     if((!empty($zone['InitialApacheServerName'])) && ($zone['InitialApacheServerName'] != $zone['apacheServerName'])){
       
-      /* Move old zone to new position 
+      /* Move old vhosts to new position 
        */ 
       $oldDn = "apacheServerName=".$zone['InitialApacheServerName'].",".$HostDn;
       $newDn = "apacheServerName=".$zone['apacheServerName'].",".$HostDn;
@@ -113,7 +113,7 @@ function getVhostEntriesDiff($config,$newVhosts,$HostDn)
       $move [$oldDn] = $newDn;      
     }
 
-    /* Get old zone if available
+    /* Get old vhosts if available
      */
     $oldVhost=array();
     if(isset($oldVhosts[$zone['InitialApacheServerName']])){
@@ -122,31 +122,36 @@ function getVhostEntriesDiff($config,$newVhosts,$HostDn)
 	    }
     }
 
-    /* Create forward zone entry and put it in our add queue
+    /* Create vhosts entry and put it in our add queue
      */
     $newDn  = "apacheServerName=".$zone['apacheServerName'].",".$HostDn;
     $obj    =  $zoneBase;
     $obj['apacheServerName'] = $zone['apacheServerName'];
-	$obj['apacheDocumentRoot'] = $zone['apacheDocumentRoot'];
-	$obj['apacheServerAdmin'] = $zone['apacheServerAdmin'];
-
+		$obj['apacheDocumentRoot'] = $zone['apacheDocumentRoot'];
+		$obj['apacheServerAdmin'] = $zone['apacheServerAdmin'];
  
-   	foreach($zone['apacheServerAlias'] as $rec){
-      $obj['apacheServerAlias'][] = $rec;
+		if(!empty($zone['apacheServerAlias'])) {
+ 		
+			foreach($zone['apacheServerAlias'] as $rec){
+      	$obj['apacheServerAlias'][] = $rec;
+    	}
     }
-   	foreach($zone['apacheScriptAlias'] as $rec){
-      $obj['apacheScriptAlias'][] = $rec;
-    }
-
-    /* Append udpated Vhost Forward Entry to our add queue
+    
+		if(!empty($zone['apacheScriptAlias'])) {
+			foreach($zone['apacheScriptAlias'] as $rec){
+      	$obj['apacheScriptAlias'][] = $rec;
+    	}
+		}
+		
+    /* Append udpated Vhost Entry to our add queue
      */    
     $add[$newDn] = $obj;   
  
-    /* Remove currently managed zone from oldVhosts.
-     *  this gives us the ability to detect removed zones
+    /* Remove currently managed vhosts from oldVhosts.
+     *  this gives us the ability to detect removed vhosts
      */
     if(isset($oldVhosts[$zone['InitialApacheServerName']])){
-      unset($oldVhosts[$zone['InitialApacheServerName']]); 
+      unset($oldVhosts[$zone['InitialApacheServerName']]);
     }
   }
  
@@ -174,7 +179,7 @@ function getVhostEntriesDiff($config,$newVhosts,$HostDn)
   }
 
   $ret = array("del" => $del , "move" => $move , "add" => $add,"vhostUpdates"=>$zoneUpdates);
-  	user_error(print_r($ret,true));
+//  	user_error(print_r($ret,true));
   return($ret);
 }
 
@@ -184,7 +189,7 @@ function getVhostDN($config,$apacheServerNameMix)
 {
   $ret = "";
   if(!strstr($apacheServerNameMix, '/')) {
-    print_red(sprintf(_("Undefined zone name '%s'. Vhost name must look like this 'server/zone.com'."),$apacheServerNameMix));
+    print_red(sprintf(_("Undefined vhost name '%s'. Vhost name must look like this 'server/zone.com'."),$apacheServerNameMix));
     return($ret);
   }
 
@@ -213,7 +218,7 @@ function getVhostDN($config,$apacheServerNameMix)
 }
 
 
-/* returns all available zones 
+/* returns all available vhosts
  *  array[reverseName] = apacheServerName;
  */
 function getAvailableVhosts($config)
@@ -222,7 +227,7 @@ function getAvailableVhosts($config)
   $ldap = $config->get_ldap_link();
   $ldap->cd ($config->current['BASE']);
 
-  /* Search for zones ...
+  /* Search for vhosts ...
    */
   $ldap->search("(&(objectClass=apacheConfig)(apacheServerName=*))",array("apacheServerName"));
 
@@ -241,5 +246,5 @@ function getAvailableVhosts($config)
   }
   return($zones);
 }
-
+  
 ?>

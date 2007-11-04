@@ -13,7 +13,7 @@ class servapache extends plugin
 
   var $orig_dn          = "";
 
-  var $APACHE2initially_was_account;
+  var $APACHEinitially_was_account;
 
 
   function servapache ($config, $dn= NULL, $parent= NULL)
@@ -26,14 +26,14 @@ class servapache extends plugin
      */
     $this->Vhosts = getVhostEntries($config,$dn);
 
-    /* If there is at least one entry in this -> types, we have APACHE2 enabled 
+    /* If there is at least one entry in this -> types, we have apache vhosts enabled 
      */
     if(count($this->Vhosts) == 0){
       $this->is_account = false;
     }else{
       $this->is_account = true;
     }
-    $this->APACHE2initially_was_account = $this->is_account;
+    $this->APACHEinitially_was_account = $this->is_account;
   }
 
 
@@ -102,27 +102,27 @@ class servapache extends plugin
 
     /* Add empty new vhost 
      */
-    if(isset($_POST['AddVhost']) && chkacl($this->acl,"servapache2") == ""){
-      $this->dialog = new apacheEditVhost($this->config,$this->dn);
+    if(isset($_POST['AddVhost']) && chkacl($this->acl,"servapache") == ""){
+      $this->dialog = new servapacheVhostEdit($this->config,$this->dn);
     }
 
     /* Check for edit vhost request 
      */
     $once = false;
     foreach( $_POST as $name => $value){
-  	user_error(print_r($this->Vhosts,true));
+  	//user_error(print_r($this->Vhosts,true));
       /* check all post for edit request 
        */
-      if(preg_match("/^editVhost_/",$name)&&!$once && chkacl($this->acl,"servapache2") == ""){
+      if(preg_match("/^editVhost_/",$name)&&!$once && chkacl($this->acl,"servapache") == ""){
         $once =true;
         $tmp = preg_replace("/^editVhost_/","",$name);
         $tmp = base64_decode(preg_replace("/_.*$/","",$tmp));
-        $this->dialog= new apacheEditVhost($this->config,$this->dn,$this->Vhosts[$tmp]);
+        $this->dialog= new servapacheVhostEdit($this->config,$this->dn,$this->Vhosts[$tmp]);
       }
 
       /* check posts for delete vhost 
        */
-      if(preg_match("/^delVhost_/",$name)&&!$once && chkacl($this->acl,"servapache2") == ""){
+      if(preg_match("/^delVhost_/",$name)&&!$once && chkacl($this->acl,"servapache") == ""){
 
         $once =true;
         $tmp = preg_replace("/^delVhost_/","",$name);
@@ -158,12 +158,12 @@ class servapache extends plugin
             ));
     }    
   
-    $smarty->assign("servapache2ACL",chkacl($this->acl,"servapache2"));
+    $smarty->assign("servapacheACL",chkacl($this->acl,"servapache"));
   
     /* Display tempalte 
      */
     $smarty->assign("VhostList",$VhostList->DrawList());
-    $display.= $smarty->fetch(get_template_path('apache_vhost.tpl', TRUE));
+    $display.= $smarty->fetch(get_template_path('servApacheVhost.tpl', TRUE));
     return($display);
   }
 
@@ -201,7 +201,7 @@ class servapache extends plugin
         }
       }
 
-      /*  Only show 2 apache2 in the error message 
+      /*  Only show 2 apache in the error message 
        */
       if(count($used)> 2) {
         $str .=" ... ";
@@ -231,12 +231,11 @@ class servapache extends plugin
   }
 
 
-
     /* Remove apache service
    */
   function remove_from_parent()
   {
-    if($this->APACHE2initially_was_account){
+    if($this->APACHEinitially_was_account){
       $bool = true;
       foreach($this->Vhosts as $key => $vhost){
         $bool= $bool & $this->RemoveVhost($key);
@@ -248,7 +247,6 @@ class servapache extends plugin
       return($bool);
     }
   }
-
 
 
   /* Save to LDAP */
@@ -296,10 +294,9 @@ class servapache extends plugin
      */
     foreach($tmp['add'] as $dn => $attrs){
       $ldap->cd($dn);
-      user_error(print_r($dn,true));
+//      user_error(print_r($dn,true));
       $ldap->cat($dn, array('dn'));
       if(count($ldap->fetch())){
-      user_error("MODIFY".print_r($attrs,true));
         $ldap->cd($dn);
         $ldap->modify ($attrs);
       }else{

@@ -1,6 +1,6 @@
 <?php
 
-class apacheVhostEdit extends plugin
+class servapacheVhostEdit extends plugin
 {
   /* attribute list for save action */
   var $ignore_account= TRUE;
@@ -31,7 +31,7 @@ class apacheVhostEdit extends plugin
   var $cn;
   var $VhostObject               = array();
 
-  function apacheVhostEdit ($config, $dn= NULL,$attrs = array())
+  function servapacheVhostEdit ($config, $dn= NULL,$attrs = array())
   {
     plugin::plugin ($config, $dn);
  
@@ -261,7 +261,7 @@ class apacheVhostEdit extends plugin
     $once = true;
     foreach($_POST as $name => $value){
 
-      /* Delete record if requested */
+      /* Delete vhosts if requested */
       if((preg_match("/RemoveRecord_/",$name))&&($once)){
         $once = false;
         $id= preg_replace("/RemoveRecord_/","",$name);
@@ -289,8 +289,7 @@ class apacheVhostEdit extends plugin
     $oneup    = "<input name='SAup_%s'    type='image' src='images/sort_up.png'    title='"._("Up")."'      class='center'>&nbsp;"; 
     $onedown  = "<input name='SAdown_%s'  type='image' src='images/sort_down.png'  title='"._("Down")."'    class='center'>&nbsp;"; 
     $onedel   = "<img src='images/empty.png' width='20' class='center'>
-                 <input name='SAdel_%s'   type='image' src='images/edittrash.png'  title='"._("Delete")."'  class='center'>"; 
-    user_error(print_r($recs,true));
+                 <input name='SAdel_%s'   type='image' src='images/edittrash.png'  title='"._("Delete")."'  class='center'>";
     foreach($recs as $key => $rec){
       $div ->AddEntry(array(
             array("string"=>$rec),
@@ -329,7 +328,7 @@ class apacheVhostEdit extends plugin
     $smarty->assign("apacheScriptAlias",  $div->DrawList());    
     
     /* Display template */
-    $display.= $smarty->fetch(get_template_path('apache_editVhost.tpl', TRUE));
+    $display.= $smarty->fetch(get_template_path('servApacheVhostEdit.tpl', TRUE));
     return($display);
   }
 
@@ -365,7 +364,7 @@ class apacheVhostEdit extends plugin
 */
     }
 
-    if(!is_domain($this->apacheServerName) || empty($this->apacheServerName)){
+    if(is_domain($this->apacheServerName) || empty($this->apacheServerName)){
       $message[] =sprintf(_("Please choose a valid Virtual Host Name."));
     }
 
