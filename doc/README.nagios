@@ -16,9 +16,10 @@ To use the nagios plugin
 
 4) Configure the ldap2nagios_bind.conf
 
+5) Run the goNagiosUser.pl to create authentification for nagios
+
 Benoit Mortier
 Guillaume Delecourt
-OpenSides October-November 2005
-
-
+Vincent Senave
+OpenSides 2005-2007
 
