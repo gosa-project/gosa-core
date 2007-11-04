@@ -364,7 +364,7 @@ class servapacheVhostEdit extends plugin
 */
     }
 
-    if(is_domain($this->apacheServerName) || empty($this->apacheServerName)){
+    if(!GetVhostsDomain($this->apacheServerName) || empty($this->apacheServerName)){
       $message[] =sprintf(_("Please choose a valid Virtual Host Name."));
     }
 

@@ -130,7 +130,7 @@ class servapache extends plugin
      
         /* Initiate deletion
          */ 
-        $this->RemoveVhost($tmp); 
+        $this->RemoveVhost($tmp);
       }
     }
 
@@ -160,7 +160,7 @@ class servapache extends plugin
   
     $smarty->assign("servapacheACL",chkacl($this->acl,"servapache"));
   
-    /* Display tempalte 
+    /* Display template 
      */
     $smarty->assign("VhostList",$VhostList->DrawList());
     $display.= $smarty->fetch(get_template_path('servApacheVhost.tpl', TRUE));
@@ -169,51 +169,12 @@ class servapache extends plugin
 
 
   /* Delete specified vhost
-   */
+   */  
   function RemoveVhost($id)
   {
-    $vhosts =  $this->getUsedServerNames();
-  
-    $vhostname = "";
-    if(isset($this->Vhosts[$id]['InitialApacheServerName'])){
-      $vhostname= $this->Vhosts[$id]['InitialApacheServerName'];
-    }
-
-    $used = array();
-
-    /* Add Records which use this apacheServerName
-     */
-    if(isset($vhosts[$vhostname])){
-      $used = array_merge($used,$vhosts[$vhostname]);
-    }
-
-
-    /* There are still entries using this configuration
-     *  Abort deletion
-     */ 
-    if(count($used)){
-      $i = 2;
-      $str ="";
-      foreach($used as $dn){
-        if($i > 0 ){
-          $i --;
-          $str.=$dn." ";
-        }
-      }
-
-      /*  Only show 2 apache in the error message 
-       */
-      if(count($used)> 2) {
-        $str .=" ... ";
-      }
-      print_red(sprintf(_("Can't delete the selected vhost, because it is still in use by these entry/entries '%s'"),trim($str)));
-
-    }else{
       unset($this->Vhosts[$id]);
       return(true);
-    }
-    return(false);
-  } 
+  }
 
 
   /* This function returns all used Vhostnames 

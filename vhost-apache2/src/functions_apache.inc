@@ -247,4 +247,11 @@ function getAvailableVhosts($config)
   return($zones);
 }
   
+/* Simple is domain check, it checks if the given string looks like "string.string.string"
+   or string.string */
+function GetVhostsDomain($str)
+{
+  return(preg_match("/[^\.\/]+\.[^\.\/]+$/",$str));
+}
+
 ?>
