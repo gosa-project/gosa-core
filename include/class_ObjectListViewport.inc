@@ -84,11 +84,13 @@ class ObjectListViewport {
       \return HTML rendered headline
 	 */
   private function renderHeadline(){
-    $buffer ="<tr>\n";
+    $buffer ="<table class='ObjectListViewport_Headline_Table'>\n";
+    $buffer.="<tr>\n";
     foreach($this->headline as $key => $value){
-      $buffer .= "<td style='".$value['style']."'>".$value['name']."</td>\n";
+      $buffer .= "<td class='ObjectListViewport_Headline_Cell' style='".$value['style']."'>".$value['name']."</td>\n";
     }
     $buffer.="</tr>\n";
+    $buffer.="</table>\n";
     return $buffer;
   }
 
@@ -100,10 +102,11 @@ class ObjectListViewport {
       \return HTML rendered footer
 	 */
   private function renderFooter(){
-
-    $buffer ="<tr>\n";
-    $buffer .= "<td colspan='".count($this->headline)."'>".$this->footer."</td>\n";
+    $buffer ="<table class='ObjectListViewport_Footer_Table'>\n"; 
+    $buffer.="<tr>\n";
+    $buffer.= "<td class='ObjectListViewport_Footer_Cell' colspan='".count($this->headline)."'>".$this->footer."</td>\n";
     $buffer.="</tr>\n";
+    $buffer.="</table>\n";
     return $buffer;
   }
 
@@ -148,9 +151,10 @@ class ObjectListViewport {
 
     $tmp = split("\|",trim($buffer,"|"));  
 
-    $buffer ="<tr>\n";
+
+    $buffer="<tr>\n";
     foreach($tmp as $key => $value){
-      $buffer .= "<td class='ObjectListViewportEntry' style='".$this->headline[$key]['style']."'>".$value."</td>\n";
+      $buffer .= "<td class='ObjectListViewport_Entry_Cell' style='".$this->headline[$key]['style']."'>".$value."</td>\n";
     }
     $buffer.="</tr>\n";
 
@@ -184,15 +188,18 @@ class ObjectListViewport {
     /* Apply current filter */
     $objects= new ObjectListFilterIterator($this->objects->getIterator());
     
+    $buffer.="<div style='overflow:scroll; height:400px;'>
+              <table class='ObjectListViewport_Entry_Table'>\n"; 
     foreach ($objects as $value){
       $buffer.= $this->renderEntry($value);
     }
+    $buffer.="</table>
+              </div>\n"; 
 
     /* Generate footer */
     $buffer.= $this->renderFooter();
 
-
-    return ("<table class='ObjectListViewportTable'>".$buffer."</table>");
+    return ($buffer);
   }
 
 
