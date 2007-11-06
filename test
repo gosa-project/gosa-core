@@ -4,9 +4,17 @@
 /* This is good for testing... */
 error_reporting (E_ALL | E_STRICT);
 
+/* Escape all preg_* relevant characters */
+function normalizePreg($input)
+{
+  return (addcslashes($input, '[]()|/.*+-'));
+}
+
+
+
 /* Initiate autoloader... */
 require_once("include/autoload.inc");
-
+restore_error_handler();
 try {
 
 	/* Get new test instance of the Configuration */

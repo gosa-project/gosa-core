@@ -57,7 +57,7 @@ class ObjectListViewport {
     /* Dummy here */
     $cr= Registry::getInstance("ConfigManager");
     $cr->setSection($config);
-    $this->headline= $cr->getValue("headline");
+    $this->headline= $this->parseHeadline($cr->getValue("headline"));
     $this->footer= $cr->getValue("footer");
     $this->entryFormat= $cr->getValue("entryFormat");
 
@@ -117,6 +117,14 @@ class ObjectListViewport {
     /* Copy template */
     $buffer= $this->entryFormat;
 
+    $tmp = split("\|",trim($this->entryFormat,"|"));  
+
+    $buffer ="<tr>\n";
+    foreach($tmp as $key => $value){
+      $buffer .= "<td style='".$this->headline[$key]['style']."'>".$value."</td>\n";
+    }
+    $buffer.="</tr>\n";
+
     /* Replace set of attributes */
     foreach ($this->attributes as $attribute){
       if (!isset($entry[$attribute])){
@@ -131,7 +139,7 @@ class ObjectListViewport {
     foreach ($matches as $match){
       $filterName= preg_replace('/,.+$/', '', $match[1]);
       $filterParameter= preg_replace('/^[^,]+,/', '', $match[1]);
-      $buffer= preg_replace('/\{_filter\('.$match[1].'\)\}/', $this->applyEntryFilter($filterName, $filterParameter), $buffer);
+      $buffer= preg_replace('/\{_filter\('.normalizePreg($match[1]).'\)\}/', $this->applyEntryFilter($filterName, $filterParameter), $buffer);
     }
 
     #TODO: Make $buffer a proper HTML table output
@@ -159,6 +167,7 @@ class ObjectListViewport {
       \return HTML rendered list
 	 */
   public function render() {
+
     /* Generate fixed headline */
     $buffer= $this->renderHeadline();
 
@@ -171,9 +180,67 @@ class ObjectListViewport {
     /* Generate footer */
     $buffer.= $this->renderFooter();
 
-    return ($buffer);
+    return ("<table border=1 style='width:100%'>".$buffer."</table>");
   }
 
+
+	/*! \brief Parses the given headline format string 
+
+      \return Array with cell properties (width, alignment,name)
+	 */
+  private function parseHeadline($data)
+  {
+    /* Each cell definition is seperated by | 
+     *  split by and go through each definition
+     */
+    $tmp = split("\|",trim($data,"|"));  
+    $cell_formats = array();
+    foreach($tmp as $key => $data){
+
+      $s_width    = "";
+      $s_alignment= "";
+      $s_name     = preg_replace("/\{[^\}]*+\}/","",$data);
+      $s_style    = "height:40px;";
+    
+      /* Parse format string and detect width & alignment */
+      if(preg_match("/\{.*\}/",$data)){
+        $s_format=  preg_replace("/^[^\{]*+\{([^\}]*).*$/","\\1",$data);
+    
+        /* Get aligment */
+        if(preg_match("/:/",$s_format)){
+          $s_al = preg_replace("/^[^:]*+:([a-z]*).*$/i","\\1",$s_format);
+
+          if(preg_match("/T/i",$s_al)){
+            $s_alignment.= "top-"  ;
+            $s_style.= "vertical-align: top;";
+          }
+          if(preg_match("/B/i",$s_al)){
+            $s_alignment.= "bottom-"  ;
+            $s_style.= "vertical-align: bottom;";
+          }
+          if(preg_match("/R/i",$s_al)){
+            $s_alignment.= "right"  ;
+            $s_style.= "text-align: right;";
+          }elseif(preg_match("/L/i",$s_al)){
+            $s_alignment.= "left"  ;
+            $s_style.= "text-align: left;";
+          }elseif(preg_match("/C/i",$s_al) || preg_match("/M/i",$s_al) ){
+            $s_alignment.= "center"  ;
+            $s_style.= "text-align: center;";
+          }
+        }
+
+        /* Get width */
+        $s_width = preg_replace("/^([^:]*).*$/","\\1",$s_format);
+        if(!empty($s_width)){
+          $s_style = "width: ".$s_width.";";
+        }
+        
+        $cell_formats[$key] = array("name" => $s_name, "width" => $s_width, "alignment" => $s_alignment,"style" => $s_style);
+      }
+    }
+    return($cell_formats);
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
