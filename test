@@ -1,5 +1,7 @@
 #!/usr/bin/php
+
 <?php
+
 
 /* This is good for testing... */
 error_reporting (E_ALL | E_STRICT);

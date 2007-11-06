@@ -30,6 +30,7 @@ class ObjectListViewport {
   private $footer;
   private $entryFormat;
   private $attributes= array('cn', '_icon', '_actions', 'dn');
+
   /* <---- Dummy here */
 
   /*!
@@ -83,10 +84,11 @@ class ObjectListViewport {
       \return HTML rendered headline
 	 */
   private function renderHeadline(){
-    # Dummy implementation. Use pre-defined headline.
-    $buffer= $this->headline."\n";
-
-    #TODO: Make $buffer a proper HTML table output
+    $buffer ="<tr>\n";
+    foreach($this->headline as $key => $value){
+      $buffer .= "<td style='".$value['style']."'>".$value['name']."</td>\n";
+    }
+    $buffer.="</tr>\n";
     return $buffer;
   }
 
@@ -98,18 +100,21 @@ class ObjectListViewport {
       \return HTML rendered footer
 	 */
   private function renderFooter(){
-    # Dummy implementation. Use pre-defined footer.
-    $buffer= "|".$this->footer."|";
 
-    #TODO: Make $buffer a proper HTML table output
-    return $buffer."|\n";
+    $buffer ="<tr>\n";
+    $buffer .= "<td colspan='".count($this->headline)."'>".$this->footer."</td>\n";
+    $buffer.="</tr>\n";
+    return $buffer;
+  }
+
+
+  private function getEntryIcon($entry,$alt = ""){
+    return("<img src='images/".$entry['_icon']."' alt='".$alt."' class='center'>");
   }
 
 
 	/*! \brief Renders entries from the ObjectList iterator into a string
-
 	    Gets the entry descriptions from the ObjectList object and renders them.
-
       \return HTML rendered list entries
 	 */
   private function renderEntry($entry){
@@ -117,20 +122,17 @@ class ObjectListViewport {
     /* Copy template */
     $buffer= $this->entryFormat;
 
-    $tmp = split("\|",trim($this->entryFormat,"|"));  
-
-    $buffer ="<tr>\n";
-    foreach($tmp as $key => $value){
-      $buffer .= "<td style='".$this->headline[$key]['style']."'>".$value."</td>\n";
-    }
-    $buffer.="</tr>\n";
-
     /* Replace set of attributes */
     foreach ($this->attributes as $attribute){
       if (!isset($entry[$attribute])){
         throw new ObjectListViewportException(sprintf(_("Can't locate attribute '%s' to replace in entry!"), $attribute));
       } else {
-        $buffer= preg_replace('/\{'.$attribute.'\}/', $entry[$attribute],$buffer);
+
+        if(preg_match("/_icon/i",$attribute)){
+          $buffer= preg_replace('/\{'.$attribute.'\}/', $this->getEntryIcon($entry),$buffer); 
+        }else{
+          $buffer= preg_replace('/\{'.$attribute.'\}/', $entry[$attribute],$buffer);
+        }
       }
     }
 
@@ -143,6 +145,14 @@ class ObjectListViewport {
     }
 
     #TODO: Make $buffer a proper HTML table output
+
+    $tmp = split("\|",trim($buffer,"|"));  
+
+    $buffer ="<tr>\n";
+    foreach($tmp as $key => $value){
+      $buffer .= "<td class='ObjectListViewportEntry' style='".$this->headline[$key]['style']."'>".$value."</td>\n";
+    }
+    $buffer.="</tr>\n";
 
     return $buffer."\n";
   }
@@ -173,6 +183,7 @@ class ObjectListViewport {
 
     /* Apply current filter */
     $objects= new ObjectListFilterIterator($this->objects->getIterator());
+    
     foreach ($objects as $value){
       $buffer.= $this->renderEntry($value);
     }
@@ -180,7 +191,8 @@ class ObjectListViewport {
     /* Generate footer */
     $buffer.= $this->renderFooter();
 
-    return ("<table border=1 style='width:100%'>".$buffer."</table>");
+
+    return ("<table class='ObjectListViewportTable'>".$buffer."</table>");
   }
 
 
@@ -200,7 +212,7 @@ class ObjectListViewport {
       $s_width    = "";
       $s_alignment= "";
       $s_name     = preg_replace("/\{[^\}]*+\}/","",$data);
-      $s_style    = "height:40px;";
+      $s_style    = "";
     
       /* Parse format string and detect width & alignment */
       if(preg_match("/\{.*\}/",$data)){
@@ -241,6 +253,9 @@ class ObjectListViewport {
     }
     return($cell_formats);
   }
+
+
+  
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
