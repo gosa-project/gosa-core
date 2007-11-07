@@ -45,7 +45,9 @@ class ObjectListViewport {
    */
 	private $multiselect;
 
-
+  /*! \brief ID used to identify objects of same list */
+  private $id = "";
+  
   /*! \brief ObjectListViewport constructor
 
     The ObjectListViewport class renders/handles the ObjectList defined by $config.
@@ -64,6 +66,9 @@ class ObjectListViewport {
 
     /* Load and instanciate classes, extract filter, icons, view hooks, etc. */
     $this->objects= new ObjectList($config);
+
+    /* generate an unique id */
+    $this->id = preg_replace("/[^0-9]/","",microtime());
   }
 
 	/*! \brief Handles _POST / _GET events
@@ -204,30 +209,28 @@ class ObjectListViewport {
       $entries .= $this->renderEntry($value);
     }
 
-    
-
     /* Generate fixed headline */
     $buffer = "
-    <table class='ObjectListViewport' id='ObjectListViewport' cellspacing=o cellpadding=0>
+    <table class='ObjectListViewport' id='ObjectListViewport".$this->id."' cellspacing=o cellpadding=0>
       <tr>
         <td>
-              <table class='ObjectListViewport_Table' id='ObjectListViewport_Table' cellpadding=0 cellspacing=0 >
+              <table class='ObjectListViewport_Table' id='ObjectListViewport_Table".$this->id."' cellpadding=0 cellspacing=0 >
                 <tr>
-                  <td class='ObjectListViewport_TD_Header' id='ObjectListViewport_TD_Header'>
+                  <td class='ObjectListViewport_TD_Header' id='ObjectListViewport_TD_Header".$this->id."'>
                     ".$header."
                   </td>
                 </tr>
                 <tr>
-                  <td class='ObjectListViewport_TD_Entries' id='ObjectListViewport_TD_Entries'>
-                    <div style='overflow:auto' id='ObjectListViewport_Entry_Cover'> 
-                      <table class='ObjectListViewport_Entry_Table' id='ObjectListViewport_Entry_Table'>
+                  <td class='ObjectListViewport_TD_Entries' id='ObjectListViewport_TD_Entries".$this->id."'>
+                    <div class='ObjectListViewport_Entry_Cover' id='ObjectListViewport_Entry_Cover".$this->id."'> 
+                      <table class='ObjectListViewport_Entry_Table' id='ObjectListViewport_Entry_Table".$this->id."'>
                         ".$entries."
                       </table> 
                     </div>
                   </td>
                 </tr>
                 <tr>
-                  <td class='ObjectListViewport_TD_Footer' id='ObjectListViewport_TD_Footer'>
+                  <td class='ObjectListViewport_TD_Footer' id='ObjectListViewport_TD_Footer".$this->id."'>
                     ".$footer."
                   </td>
                 </tr>
