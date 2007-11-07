@@ -199,14 +199,14 @@ class ObjectListViewport {
 
     /* Apply current filter */
     $objects= new ObjectListFilterIterator($this->objects->getIterator());
-    
-    $buffer.="<table><tr><td>
-              <table class='ObjectListViewport_Entry_Table'>\n"; 
+   
+    $buffer.="<div style='overflow:auto' id='ObjectListViewport_Entry_Cover'>"; 
+    $buffer.="<table class='ObjectListViewport_Entry_Table'>\n"; 
     foreach ($objects as $value){
-      $buffer.= "<br>";//$this->renderEntry($value);
+      $buffer.= $this->renderEntry($value);
     }
-    $buffer.="</table>
-              </td></tr></table>\n"; 
+    $buffer.="</table>\n"; 
+    $buffer.="</div>"; 
 
     /* Generate footer */
     $buffer.= $this->renderFooter();

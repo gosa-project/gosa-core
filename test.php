@@ -7,7 +7,6 @@
 .ObjectListViewport_Headline_Table {
 	background-color: #FF0000;
 	width:100%;
-	height:20px;
 	border-collapse:collapse;
 }
 .ObjectListViewport_Headline_Cell {
@@ -23,7 +22,6 @@
 }
 .ObjectListViewport_Footer_Table {
 	background-color: #0000FF;
-	height:20px;
 	width:100%;
 	border-collapse:collapse;
 }
@@ -33,24 +31,20 @@
 </style>
 <script type="text/javascript">
 	function setHeight() {
-	//	document.getElementById("tolletable").style.height=document.defaultView.getComputedStyle(document.getElementById("tolletable"),"").getPropertyValue("height"))+"px";
-		alert(document.getElementById("tolletable").style.height());
+		dbg = document.getElementById('debug');
+		OVP = document.getElementById('ObjectListViewport');
+		style = getComputedStyle(OVP,"");
+		dbg.value = style.height;
+		document.getElementById('ObjectListViewport_Entry_Cover').style.height= '200px' ;
 	}
 </script>
 </head>
-<body>
-
-<table onmouseover="setHeight();" id="tolletable" style='height:50%;background-color: #00FF00;'><tr><td></td></tr></table>
-
-<table style='height:30px; width:50%; background-color:#FF0000;'>
-<tr>
-<td>
+<body onmouseover="setHeight();" >
+<input type='text' id='debug' value="">
+<div id='ObjectListViewport' style='height:20%;'>
 <?php
 echo passthru("./test");
 ?>
-</td>
-</tr>
-</table>
 </div>
 </body>
 </html>
