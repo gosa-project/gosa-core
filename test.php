@@ -95,9 +95,6 @@ window.onresize = updateObjectListViewportSize;
          *  that resize will work correctly in konqueror 
          */
 		document.getElementById('ObjectListViewport_Entry_Cover').style.height= "50px";
-		document.getElementById('ObjectListViewport_Entry_Cover').style.display= "none";
-		document.getElementById('ObjectListViewport_Entry_Cover').style.display= "block";
-	
 
 		/* Get values of displayed header and footer heights to be 
 		 *  able to recalculate the Viewport 
@@ -108,7 +105,6 @@ window.onresize = updateObjectListViewportSize;
 
 		/* Calculate the new visible entry part height. */
 		var calc = (viewport  - ( header + footer ));
-		calc = 200;
 		document.getElementById('ObjectListViewport_Entry_Cover').style.height = calc;
 
 		/* Reduce width of entry list, we need some space to 
