@@ -76,6 +76,8 @@
 </style>
 <script type="text/javascript">
 
+<!--
+
 /* Register resize event to force redraw of all 
  *  displayed lists 
  */
@@ -85,6 +87,7 @@ window.onresize = updateObjectListViewportSize;
 	function updateObjectListViewportSize() {
 
 		var dbg = document.getElementById('debug');
+		dbg.value ="";
 		
 		/* Somehow IE do not need to be resized 
          *  So skip the following part if the client uses ie
@@ -121,6 +124,7 @@ window.onresize = updateObjectListViewportSize;
 			/* Reduce width of entry list, we need some space to 
 			 *  display the scrollbar without breaking the layout
 			 */
+			dbg.value += " " + calc;
 			var viewport = getObjectWidth('ObjectListViewport_Table' + id_pref);
 			document.getElementById('ObjectListViewport_Entry_Table' + id_pref).style.width = (viewport - 16) + 'px';
 		}
@@ -149,6 +153,8 @@ window.onresize = updateObjectListViewportSize;
 		obj = getComputedStyle(document.getElementById(obj),"").height;
 		return(parseInt(obj.replace(/px/,'')));
 	}	
+
+-->
 </script>
 </head>
 <body>
@@ -156,7 +162,7 @@ window.onresize = updateObjectListViewportSize;
 	<table style='height:90%;width:90%;background-color:#DDDDDD; border: solid 1px;'
 		cellspacing=0 cellpadding=0>
 		<tr>
-			<td style='width:30%;height:50%;background-color:#EEEEEE;'>
+			<td style='width:30%;height:30%;background-color:#EEEEEE;'>
 				hallo<br>
 				hallo<br>
 				hallo<br>
@@ -169,19 +175,19 @@ window.onresize = updateObjectListViewportSize;
 			</td>
 		</tr>
 		<tr>
-			<td style='background-color:#999777;'>
-				hallo<br>
+			<td style='height:30%;background-color:#999777;'>
 				<?php echo passthru("./test"); ?>
-				hallo<br>
 			</td>
 			<td style='background-color:#AAA006;'>
-				hallo<br>
-				hallo<br>
+			</td>
+		</tr>
+		<tr>
+			<td style='background-color:#999777;'>
+			</td>
+			<td style='background-color:#999777;'>
+				<?php echo passthru("./test"); ?>
 			</td>
 		</tr>
 	</table>
-<script type="text/javascript">
-updateObjectListViewportSize();
-</script>
 </body>
 </html>
