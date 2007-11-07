@@ -198,7 +198,7 @@ class ObjectList implements IteratorAggregate {
               "objectClass" => array('gotoWorkstation')),
 
  array("dn" => "cn=vserver-04.intranet.gonicus.de,ou=servers,ou=systems,o=Landeshauptstadt München,c=de",
-              "cn" => "vserver-04.intranet.gonicus.de [Mail Server]",
+              "cn" => "vserver-04.",
               "_icon" => "select_server.png",
               "_actions" => "CPSREDX",
               "objectClass" => array('gotoWorkstation')),
@@ -335,7 +335,7 @@ class ObjectList implements IteratorAggregate {
               "objectClass" => array('gotoWorkstation')),
 
  array("dn" => "cn=vserver-04.intranet.gonicus.de,ou=servers,ou=systems,o=Landeshauptstadt München,c=de",
-              "cn" => "vserver-04.intranet.gonicus.de [Mail Server]",
+              "cn" => "vsernicus.de",
               "_icon" => "select_server.png",
               "_actions" => "CPSREDX",
               "objectClass" => array('gotoWorkstation')),

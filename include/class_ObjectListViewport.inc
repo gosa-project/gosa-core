@@ -84,12 +84,12 @@ class ObjectListViewport {
       \return HTML rendered headline
 	 */
   private function renderHeadline(){
-    $buffer ="<table class='ObjectListViewport_Headline_Table'>\n";
+    $buffer ="<table class='ObjectListViewport_Header_Table'>\n";
     $buffer.="<tr>\n";
     foreach($this->headline as $key => $value){
-      $buffer .= "<td class='ObjectListViewport_Headline_Cell' style='".$value['style']."'>".$value['name']."</td>\n";
+      $buffer .= "<td  style='".$value['style']."'>".$value['name']."</td>\n";
     }
-    $buffer.="<td style='width:12px;'>&nbsp;</td>";
+    $buffer.="<td style='width:13px;'>&nbsp;</td>";
     $buffer.="</tr>\n";
     $buffer.="</table>\n";
     return $buffer;
@@ -156,10 +156,10 @@ class ObjectListViewport {
     $buffer="<tr>\n";
     foreach($tmp as $key => $value){
 
-      if(empty($this->headline[$key]['width']) || preg_match("/\%/",$this->headline[$key]['width'])){
-        $buffer .= "<td nowrap class='ObjectListViewport_Entry_Cell' style='".$this->headline[$key]['style']."'>".
-          "<div style='overflow:hidden;width:100%;'>".
-          $value.
+      if(1 || empty($this->headline[$key]['width']) || preg_match("/\%/",$this->headline[$key]['width'])){
+        $buffer .= "<td class='ObjectListViewport_Entry_Cell' style='".$this->headline[$key]['style']."'>".
+          "<div style='overflow:hidden;".$this->headline[$key]['style']."'>".
+            $value.
           "</div>".
           "</td>\n";
       }else{
@@ -194,22 +194,51 @@ class ObjectListViewport {
 	 */
   public function render() {
 
-    /* Generate fixed headline */
-    $buffer= $this->renderHeadline();
+    $header = $this->renderHeadline();
+    $footer = $this->renderFooter();
 
     /* Apply current filter */
+    $entries = "";
     $objects= new ObjectListFilterIterator($this->objects->getIterator());
-   
-    $buffer.="<div style='overflow:auto' id='ObjectListViewport_Entry_Cover'>"; 
-    $buffer.="<table class='ObjectListViewport_Entry_Table'>\n"; 
     foreach ($objects as $value){
-      $buffer.= $this->renderEntry($value);
+      $entries .= $this->renderEntry($value);
     }
-    $buffer.="</table>\n"; 
-    $buffer.="</div>"; 
 
-    /* Generate footer */
-    $buffer.= $this->renderFooter();
+    
+
+    /* Generate fixed headline */
+    $buffer = "
+    <table class='ObjectListViewport' id='ObjectListViewport' cellspacing=o cellpadding=0
+          style=' width:100%;height:100%;; 
+                  border-collapse:collapse;'>
+      <tr>
+        <td>
+              <table class='ObjectListViewport_Table' id='ObjectListViewport_Table' cellpadding=0 cellspacing=0 >
+                <tr>
+                  <td class='ObjectListViewport_TD_Header' id='ObjectListViewport_TD_Header'>
+                    ".$header."
+                  </td>
+                </tr>
+                <tr>
+                  <td class='ObjectListViewport_TD_Entries' id='ObjectListViewport_TD_Entries'>
+                    <div style='overflow:auto' id='ObjectListViewport_Entry_Cover'> 
+                      <table class='ObjectListViewport_Entry_Table' id='ObjectListViewport_Entry_Table'>
+                        ".$entries."
+                      </table> 
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class='ObjectListViewport_TD_Footer' id='ObjectListViewport_TD_Footer'>
+                    ".$footer."
+                  </td>
+                </tr>
+              </table>
+
+        </td>
+      </tr>
+    </table>
+";
 
     return ($buffer);
   }
