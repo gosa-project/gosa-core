@@ -81,7 +81,15 @@ window.onresize = updateObjectListViewportSize;
 
 	function updateObjectListViewportSize() {
 
-		dbg = document.getElementById('debug');
+		var dbg = document.getElementById('debug');
+
+		/* Somehow IE do not need to be resized 
+         *  So skip the following part if the client uses ie
+         */
+		if(document.all){
+			document.getElementById('ObjectListViewport_Entry_Cover').style.height= "100%";
+			return;
+		}
 	
 		/* Set Viewport to min height, to ensure 
          *  that resize will work correctly in konqueror 
@@ -90,35 +98,38 @@ window.onresize = updateObjectListViewportSize;
 		document.getElementById('ObjectListViewport_Entry_Cover').style.display= "none";
 		document.getElementById('ObjectListViewport_Entry_Cover').style.display= "block";
 	
+
 		/* Get values of displayed header and footer heights to be 
 		 *  able to recalculate the Viewport 
          */
-		viewport	= getObjectHeight('ObjectListViewport_Table');
-		header  	= getObjectHeight('ObjectListViewport_TD_Header');
-		footer  	= getObjectHeight('ObjectListViewport_TD_Footer');
+		var viewport	= getObjectHeight('ObjectListViewport_Table');
+		var header  	= getObjectHeight('ObjectListViewport_TD_Header');
+		var footer  	= getObjectHeight('ObjectListViewport_TD_Footer');
 
 		/* Calculate the new visible entry part height. */
-		calc = (viewport  - ( header + footer ));
-		document.getElementById('ObjectListViewport_Entry_Cover').style.height= calc + 'px' ;
+		var calc = (viewport  - ( header + footer ));
+		calc = 200;
+		document.getElementById('ObjectListViewport_Entry_Cover').style.height = calc;
 
 		/* Reduce width of entry list, we need some space to 
          *  display the scrollbar without breaking the layout
          */
-		viewport_ = getObjectWidth('ObjectListViewport_Table');
-		document.getElementById('ObjectListViewport_Entry_Table').style.width = (OVP_T_w - 16) + 'px';
+		var viewport = getObjectWidth('ObjectListViewport_Table');
+		document.getElementById('ObjectListViewport_Entry_Table').style.width = (viewport - 16) + 'px';
 	}
+
 
 	/* Return integer value of style attribute width for specified ID  */
 	function getObjectWidth(obj){
 		obj = getComputedStyle(document.getElementById(obj),"").width;
-		return(parseInt(obj.replace(/px/,'')));
+		return(parseInt(obj.replace(/px/,'')));	
 	}
 
 	/* Return integer value of style attribute height for specified ID  */
 	function getObjectHeight(obj){
 		obj = getComputedStyle(document.getElementById(obj),"").height;
 		return(parseInt(obj.replace(/px/,'')));
-	}
+	}	
 </script>
 </head>
 <body>
