@@ -31,12 +31,26 @@
 	border: 1px solid #000000;
 }
 </style>
+<script type="text/javascript">
+	function setHeight() {
+	//	document.getElementById("tolletable").style.height=document.defaultView.getComputedStyle(document.getElementById("tolletable"),"").getPropertyValue("height"))+"px";
+		alert(document.getElementById("tolletable").style.height());
+	}
+</script>
 </head>
 <body>
-<div style='height:500px; width:700px;'>
+
+<table onmouseover="setHeight();" id="tolletable" style='height:50%;background-color: #00FF00;'><tr><td></td></tr></table>
+
+<table style='height:30px; width:50%; background-color:#FF0000;'>
+<tr>
+<td>
 <?php
 echo passthru("./test");
 ?>
+</td>
+</tr>
+</table>
 </div>
 </body>
 </html>

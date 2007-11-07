@@ -89,6 +89,7 @@ class ObjectListViewport {
     foreach($this->headline as $key => $value){
       $buffer .= "<td class='ObjectListViewport_Headline_Cell' style='".$value['style']."'>".$value['name']."</td>\n";
     }
+    $buffer.="<td style='width:12px;'>&nbsp;</td>";
     $buffer.="</tr>\n";
     $buffer.="</table>\n";
     return $buffer;
@@ -154,7 +155,18 @@ class ObjectListViewport {
 
     $buffer="<tr>\n";
     foreach($tmp as $key => $value){
-      $buffer .= "<td class='ObjectListViewport_Entry_Cell' style='".$this->headline[$key]['style']."'>".$value."</td>\n";
+
+      if(empty($this->headline[$key]['width']) || preg_match("/\%/",$this->headline[$key]['width'])){
+        $buffer .= "<td nowrap class='ObjectListViewport_Entry_Cell' style='".$this->headline[$key]['style']."'>".
+          "<div style='overflow:hidden;width:100%;'>".
+          $value.
+          "</div>".
+          "</td>\n";
+      }else{
+        $buffer .= "<td class='ObjectListViewport_Entry_Cell' style='".$this->headline[$key]['style']."'>".
+          $value.
+          "</td>\n";
+      }
     }
     $buffer.="</tr>\n";
 
@@ -188,13 +200,13 @@ class ObjectListViewport {
     /* Apply current filter */
     $objects= new ObjectListFilterIterator($this->objects->getIterator());
     
-    $buffer.="<div style='overflow:scroll; height:400px;'>
+    $buffer.="<table><tr><td>
               <table class='ObjectListViewport_Entry_Table'>\n"; 
     foreach ($objects as $value){
-      $buffer.= $this->renderEntry($value);
+      $buffer.= "<br>";//$this->renderEntry($value);
     }
     $buffer.="</table>
-              </div>\n"; 
+              </td></tr></table>\n"; 
 
     /* Generate footer */
     $buffer.= $this->renderFooter();
