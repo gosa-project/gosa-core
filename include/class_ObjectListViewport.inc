@@ -208,9 +208,7 @@ class ObjectListViewport {
 
     /* Generate fixed headline */
     $buffer = "
-    <table class='ObjectListViewport' id='ObjectListViewport' cellspacing=o cellpadding=0
-          style=' width:100%;height:100%;; 
-                  border-collapse:collapse;'>
+    <table class='ObjectListViewport' id='ObjectListViewport' cellspacing=o cellpadding=0>
       <tr>
         <td>
               <table class='ObjectListViewport_Table' id='ObjectListViewport_Table' cellpadding=0 cellspacing=0 >
