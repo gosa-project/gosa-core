@@ -211,7 +211,7 @@ class ObjectListViewport {
 
     /* Generate fixed headline */
     $buffer = "
-    <table class='ObjectListViewport' id='ObjectListViewport".$this->id."' cellspacing=o cellpadding=0>
+    <table class='ObjectListViewport' id='ObjectListViewport".$this->id."' cellspacing=0 cellpadding=0>
       <tr>
         <td>
               <table class='ObjectListViewport_Table' id='ObjectListViewport_Table".$this->id."' cellpadding=0 cellspacing=0 >

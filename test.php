@@ -59,15 +59,15 @@
 }
 .ObjectListViewport_Entry_Cover{
 	overflow:auto;
-	height:20px;
+	height:100px;
 }
 .ObjectListViewport_Entry_Cell {
 	border-left: solid 1px;
 	font-size:10px;
-	height:18px;
+	height:12px;
 }
-
 </style>
+</head>
 <script type="text/javascript">
 
 <!--
@@ -82,6 +82,13 @@ window.onresize = updateObjectListViewportSize;
 
 		var dbg = document.getElementById('debug');
 		dbg.value ="";
+
+//	var all = getElementsByStyleClass('ObjectListViewport');
+//	for (var i = 0; i < all.length; ++i){
+//		alert(all[i].id);
+//		document.getElementById(all[i].id).style.display= "block";
+//		document.getElementById(all[i].id).style.height= "50px";
+//	}
 		
 		/* Somehow IE do not need to be resized 
          *  So skip the following part if the client uses ie
@@ -119,8 +126,8 @@ window.onresize = updateObjectListViewportSize;
 			 *  display the scrollbar without breaking the layout
 			 */
 			dbg.value += " " + calc;
-			var viewport = getObjectWidth('ObjectListViewport_Table' + id_pref);
-			document.getElementById('ObjectListViewport_Entry_Table' + id_pref).style.width = (viewport - 16) + 'px';
+			var viewport_w = getObjectWidth('ObjectListViewport_Table' + id_pref);
+			document.getElementById('ObjectListViewport_Entry_Table' + id_pref).style.width = (viewport_w - 16) + 'px';
 		}
 	}
 
@@ -150,34 +157,41 @@ window.onresize = updateObjectListViewportSize;
 
 -->
 </script>
-</head>
 <body>
+<input type='button' onclick='updateObjectListViewportSize();'>
+<?php
+$a1 = shell_exec("./test");
+$a2 = shell_exec("./test");
+$a3 = shell_exec("./test");
+$a4 = shell_exec("./test");
+$a5 = shell_exec("./test");
+$a6 = shell_exec("./test");
+?>
 <input type='text' id='debug' value="" style='width:100%;'>
-
     <table style='height:90%;width:90%;background-color:#DDDDDD; border: solid 1px;'
         cellspacing=2 cellpadding=2>
         <tr>
             <td style='width:30%;height:30%;'>
-                <?php echo passthru("./test"); ?>
+                <?php echo $a1; ?>
             </td>
             <td>
-                <?php echo passthru("./test"); ?>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <?php echo passthru("./test"); ?>
-            </td>
-            <td>
-                <?php echo passthru("./test"); ?>
+                <?php echo $a2; ?>
             </td>
         </tr>
         <tr>
             <td>
-                <?php echo passthru("./test"); ?>
+                <?php echo $a3; ?>
             </td>
             <td>
-                <?php echo passthru("./test"); ?>
+                <?php echo $a4; ?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <?php echo $a5; ?>
+            </td>
+            <td>
+                <?php echo $a6; ?>
             </td>
         </tr>
     </table>
