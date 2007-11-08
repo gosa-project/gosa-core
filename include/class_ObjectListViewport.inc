@@ -92,9 +92,9 @@ class ObjectListViewport {
     $buffer ="<table class='ObjectListViewport_Header_Table'>\n";
     $buffer.="<tr>\n";
     foreach($this->headline as $key => $value){
-      $buffer .= "<td  style='".$value['style']."'>".$value['name']."</td>\n";
+      $buffer .= "<td class='ObjectListViewport_Header_Cell' style='".$value['style']."'>".$value['name']."</td>\n";
     }
-    $buffer.="<td style='width:13px;'>&nbsp;</td>";
+    $buffer.="<td class='ObjectListViewport_Header_Cell' style='border-right:0px;width:14px;'>&nbsp;</td>";
     $buffer.="</tr>\n";
     $buffer.="</table>\n";
     return $buffer;
@@ -160,18 +160,11 @@ class ObjectListViewport {
 
     $buffer="<tr>\n";
     foreach($tmp as $key => $value){
-
-      if(1 || empty($this->headline[$key]['width']) || preg_match("/\%/",$this->headline[$key]['width'])){
         $buffer .= "<td class='ObjectListViewport_Entry_Cell' style='".$this->headline[$key]['style']."'>".
-          "<div style='overflow:hidden;".$this->headline[$key]['style']."'>".
+          "<div style='width:100%;overflow:hidden;".$this->headline[$key]['style']."'>".
             $value.
           "</div>".
           "</td>\n";
-      }else{
-        $buffer .= "<td class='ObjectListViewport_Entry_Cell' style='".$this->headline[$key]['style']."'>".
-          $value.
-          "</td>\n";
-      }
     }
     $buffer.="</tr>\n";
 
@@ -294,7 +287,7 @@ class ObjectListViewport {
         /* Get width */
         $s_width = preg_replace("/^([^:]*).*$/","\\1",$s_format);
         if(!empty($s_width)){
-          $s_style = "width: ".$s_width.";";
+          $s_style.= "width: ".$s_width.";";
         }
       }
       $cell_formats[$key] = array("name" => $s_name, "width" => $s_width, "alignment" => $s_alignment,"style" => $s_style);

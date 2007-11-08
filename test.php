@@ -62,9 +62,81 @@
 	height:100px;
 }
 .ObjectListViewport_Entry_Cell {
-	border-left: solid 1px;
-	font-size:10px;
-	height:12px;
+  	background-color: white;
+    background-image: none;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    -x-background-x-position: 0%;
+    -x-background-y-position: 0%;
+    -moz-background-clip: -moz-initial;
+    -moz-background-origin: -moz-initial;
+    -moz-background-inline-policy: -moz-initial;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: rgb(192, 192, 192);
+    padding-top: 3px;
+    padding-right-value: 3px;
+    padding-bottom: 3px;
+    padding-left-value: 3px;
+    padding-left-ltr-source: physical;
+    padding-left-rtl-source: physical;
+    padding-right-ltr-source: physical;
+    padding-right-rtl-source: physical;
+    height: 22px;
+}
+
+.ObjectListViewport_Footer_Cell {
+
+    background-color: rgb(240, 240, 240);
+    background-image: none;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    -x-background-x-position: 0%;
+    -x-background-y-position: 0%;
+    -moz-background-clip: -moz-initial;
+    -moz-background-origin: -moz-initial;
+    -moz-background-inline-policy: -moz-initial;
+    font-weight: bold;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: rgb(170, 170, 170);
+    padding-top: 3px;
+    padding-right-value: 3px;
+    padding-bottom: 3px;
+    padding-left-value: 3px;
+    padding-left-ltr-source: physical;
+    padding-left-rtl-source: physical;
+    padding-right-ltr-source: physical;
+    padding-right-rtl-source: physical;
+    height: 22px;
+}
+
+.ObjectListViewport_Header_Cell {
+    background-color: rgb(240, 240, 240);
+    background-image: none;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    -x-background-x-position: 0%;
+    -x-background-y-position: 0%;
+    -moz-background-clip: -moz-initial;
+    -moz-background-origin: -moz-initial;
+    -moz-background-inline-policy: -moz-initial;
+    font-weight: bold;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: rgb(170, 170, 170);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(170, 170, 170);
+    padding-top: 3px;
+    padding-right-value: 3px;
+    padding-bottom: 3px;
+    padding-left-value: 3px;
+    padding-left-ltr-source: physical;
+    padding-left-rtl-source: physical;
+    padding-right-ltr-source: physical;
+    padding-right-rtl-source: physical;
+    height: 22px;
 }
 </style>
 </head>
@@ -168,8 +240,8 @@ $a5 = shell_exec("./test");
 $a6 = shell_exec("./test");
 ?>
 <input type='text' id='debug' value="" style='width:100%;'>
-    <table style='height:90%;width:90%;background-color:#DDDDDD; border: solid 1px;'
-        cellspacing=2 cellpadding=2>
+    <table style='height:90%;width:90%;background-color: rgb(170, 170, 170);'
+        cellspacing=1 cellpadding=0>
         <tr>
             <td style='width:30%;height:30%;'>
                 <?php echo $a1; ?>
