@@ -21,13 +21,6 @@
 	border-collapse:collapse;
 }
 
-.ObjectListViewport_Entry_Cover{
-
-	border: 0px;
-	margin:0px;
-	padding:0px;
-}
-
 .ObjectListViewport_Footer_Table {
     width:100%;
     border: 0px;
@@ -66,6 +59,7 @@
 }
 .ObjectListViewport_Entry_Cover{
 	overflow:auto;
+	height:20px;
 }
 .ObjectListViewport_Entry_Cell {
 	border-left: solid 1px;
@@ -92,7 +86,7 @@ window.onresize = updateObjectListViewportSize;
 		/* Somehow IE do not need to be resized 
          *  So skip the following part if the client uses ie
          */
-		if(document.all){
+		if(document.all && !window.opera){
 			var all = getElementsByStyleClass('ObjectListViewport_Entry_Cover');
 			for (var i = 0; i < all.length; ++i){
 				document.getElementById(all[i].id).style.height= "100%";
@@ -159,35 +153,34 @@ window.onresize = updateObjectListViewportSize;
 </head>
 <body>
 <input type='text' id='debug' value="" style='width:100%;'>
-	<table style='height:90%;width:90%;background-color:#DDDDDD; border: solid 1px;'
-		cellspacing=0 cellpadding=0>
-		<tr>
-			<td style='width:30%;height:30%;background-color:#EEEEEE;'>
-				hallo<br>
-				hallo<br>
-				hallo<br>
-				hallo<br>
-				hallo<br>
-				hallo<br>
-			</td>
-			<td style='background-color:#EEEEEE;'>
-				<?php echo passthru("./test"); ?>
-			</td>
-		</tr>
-		<tr>
-			<td style='height:30%;background-color:#999777;'>
-				<?php echo passthru("./test"); ?>
-			</td>
-			<td style='background-color:#AAA006;'>
-			</td>
-		</tr>
-		<tr>
-			<td style='background-color:#999777;'>
-			</td>
-			<td style='background-color:#999777;'>
-				<?php echo passthru("./test"); ?>
-			</td>
-		</tr>
-	</table>
+
+    <table style='height:90%;width:90%;background-color:#DDDDDD; border: solid 1px;'
+        cellspacing=2 cellpadding=2>
+        <tr>
+            <td style='width:30%;height:30%;'>
+                <?php echo passthru("./test"); ?>
+            </td>
+            <td>
+                <?php echo passthru("./test"); ?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <?php echo passthru("./test"); ?>
+            </td>
+            <td>
+                <?php echo passthru("./test"); ?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <?php echo passthru("./test"); ?>
+            </td>
+            <td>
+                <?php echo passthru("./test"); ?>
+            </td>
+        </tr>
+    </table>
+
 </body>
 </html>

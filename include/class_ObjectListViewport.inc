@@ -254,7 +254,7 @@ class ObjectListViewport {
     /* Each cell definition is seperated by | 
      *  split by and go through each definition
      */
-    $tmp = split("\|",trim($data,"|"));  
+    $tmp = split("\|",trim($data,"|")); 
     $cell_formats = array();
     foreach($tmp as $key => $data){
 
@@ -296,9 +296,8 @@ class ObjectListViewport {
         if(!empty($s_width)){
           $s_style = "width: ".$s_width.";";
         }
-        
-        $cell_formats[$key] = array("name" => $s_name, "width" => $s_width, "alignment" => $s_alignment,"style" => $s_style);
       }
+      $cell_formats[$key] = array("name" => $s_name, "width" => $s_width, "alignment" => $s_alignment,"style" => $s_style);
     }
     return($cell_formats);
   }
