@@ -176,7 +176,7 @@ class ObjectListViewport {
        $buffer .= "<td class='ObjectListViewport_Entry_Cell' style='".$this->headline[$i]['style']."'>".
        "<div style='width:100%;overflow:hidden;'>".
             $value.
-          "test</div>".
+          "</div>".
           "</td>\n";
       }else{
        $buffer .= "<td class='ObjectListViewport_Entry_Cell' style='".$this->headline[$i]['style']."'>".
