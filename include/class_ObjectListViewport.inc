@@ -30,7 +30,9 @@ class ObjectListViewport {
   private $footer;
   private $entryFormat;
   private $attributes= array('cn', '_icon', '_actions', 'dn');
-
+  
+  private $b_displayHeader  = TRUE;
+  private $b_displayFooter    = TRUE;
   /* <---- Dummy here */
 
   /*!
@@ -192,8 +194,21 @@ class ObjectListViewport {
 	 */
   public function render() {
 
-    $header = $this->renderHeadline();
-    $footer = $this->renderFooter();
+    $header = $footer = "";
+    if($this->b_displayHeader){
+      $header ="<tr>
+                  <td class='ObjectListViewport_TD_Header' id='ObjectListViewport_TD_Header".$this->id."'>
+                    ".$this->renderHeadline()."
+                  </td>
+                </tr>";
+    }
+    if($this->b_displayFooter){
+      $footer ="<tr>
+                  <td class='ObjectListViewport_TD_Footer' id='ObjectListViewport_TD_Footer".$this->id."'>
+                    ".$this->renderFooter()."
+                  </td>
+                </tr>";
+    }
 
     /* Apply current filter */
     $entries = "";
@@ -208,11 +223,7 @@ class ObjectListViewport {
       <tr>
         <td>
               <table class='ObjectListViewport_Table' id='ObjectListViewport_Table".$this->id."' cellpadding=0 cellspacing=0 >
-                <tr>
-                  <td class='ObjectListViewport_TD_Header' id='ObjectListViewport_TD_Header".$this->id."'>
-                    ".$header."
-                  </td>
-                </tr>
+                ".$header."
                 <tr>
                   <td class='ObjectListViewport_TD_Entries' id='ObjectListViewport_TD_Entries".$this->id."'>
                     <div class='ObjectListViewport_Entry_Cover' id='ObjectListViewport_Entry_Cover".$this->id."'> 
@@ -222,11 +233,7 @@ class ObjectListViewport {
                     </div>
                   </td>
                 </tr>
-                <tr>
-                  <td class='ObjectListViewport_TD_Footer' id='ObjectListViewport_TD_Footer".$this->id."'>
-                    ".$footer."
-                  </td>
-                </tr>
+                ".$footer."
               </table>
 
         </td>
@@ -296,6 +303,12 @@ class ObjectListViewport {
   }
 
 
+  public function enableFooter($bool = TRUE){
+    $this->b_displayFooter = $bool;
+  }
+  public function enableHeader($bool = TRUE){
+    $this->b_displayHeader = $bool;
+  }
   
 }
 
