@@ -92,14 +92,20 @@ class ObjectListViewport {
       \return HTML rendered headline
 	 */
   private function renderHeadline(){
-    $buffer ="<table class='ObjectListViewport_Header_Table' id='ObjectListViewport_Header_Table".$this->id."'>\n";
-    $buffer.="<tr>\n";
+    $tpl =" <tr>
+              <td class='ObjectListViewport_TD_Header' id='ObjectListViewport_TD_Header".$this->id."'>
+                <table class='ObjectListViewport_Header_Table' id='ObjectListViewport_Header_Table".$this->id."'>
+                  <tr>
+                    {content}
+                  </tr>
+                </table>
+             </td>
+           </tr>";
+    $buffer ="";
     foreach($this->headline as $key => $value){
       $buffer .= "<td class='ObjectListViewport_Header_Cell' style='".$value['style']."'>".$value['name']."</td>\n";
     }
-    $buffer.="</tr>\n";
-    $buffer.="</table>\n";
-    return $buffer;
+    return(preg_replace("/\{content\}/", $buffer,$tpl));
   }
 
 
@@ -110,11 +116,15 @@ class ObjectListViewport {
       \return HTML rendered footer
 	 */
   private function renderFooter(){
-    $buffer ="<table class='ObjectListViewport_Footer_Table'>\n"; 
-    $buffer.="<tr>\n";
-    $buffer.= "<td class='ObjectListViewport_Footer_Cell' colspan='".count($this->headline)."'>".$this->footer."</td>\n";
-    $buffer.="</tr>\n";
-    $buffer.="</table>\n";
+    $buffer ="<tr>
+              <td class='ObjectListViewport_TD_Footer' id='ObjectListViewport_TD_Footer".$this->id."'>
+                <table class='ObjectListViewport_Footer_Table'>
+                  <tr>
+                    <td class='ObjectListViewport_Footer_Cell' colspan='".count($this->headline)."'>".$this->footer."</td>
+                  </tr>
+                </table>     
+              </td>
+           </tr>";
     return $buffer;
   }
 
@@ -128,7 +138,7 @@ class ObjectListViewport {
 	    Gets the entry descriptions from the ObjectList object and renders them.
       \return HTML rendered list entries
 	 */
-  private function renderEntry($entry){
+  private function renderEntry($entry,$entry_id){
 
     /* Copy template */
     $buffer= $this->entryFormat;
@@ -156,41 +166,39 @@ class ObjectListViewport {
     }
 
     #TODO: Make $buffer a proper HTML table output
-
     $tmp = split("\|",trim($buffer,"|"));  
 
+    /* define entry template */
+    $tpl = "<td class='ObjectListViewport_Entry_Cell' style='{style_1}'>
+              <div style='{style_2}'>
+                {content}
+              </div>
+            </td>
+            ";
+    /* Template vriables to replace */
+    $attrs = array("/\{style_1\}/","/\{style_2\}/","/\{content\}/");
 
-    $buffer="<tr>\n";
-//   foreach($tmp as $key => $value){
-//       $buffer .= "<td class='ObjectListViewport_Entry_Cell' style='".$this->headline[$key]['style']."'>".
-//         "<div style='width:100%;overflow:hidden;".$this->headline[$key]['style']."'>".
-//           $value.
-//         "</div>".
-//         "</td>\n";
-//   }
+    /* Append template for each given col */
+    $buffer ="";
     for($i = 0 ; $i < $this->i_numberOfCols ; $i ++){
-  
-      $value = $tmp[$i];
-      if($i == ($this->i_numberOfCols -1 )){
 
-       $buffer .= "<td class='ObjectListViewport_Entry_Cell' style='".$this->headline[$i]['style']."'>".
-       "<div style='width:100%;overflow:hidden;'>".
-            $value.
-          "</div>".
-          "</td>\n";
+      /* If current entry is the last to appen, then skip adding styles */
+      if($i == ($this->i_numberOfCols -1 )){
+        $buffer.= preg_replace( $attrs,
+            array($this->headline[$i]['style'],"width:100%;overflow:hidden;",$tmp[$i]),$tpl);
       }else{
-       $buffer .= "<td class='ObjectListViewport_Entry_Cell' style='".$this->headline[$i]['style']."'>".
-       "<div style='width:100%;overflow:hidden;".$this->headline[$i]['style']."'>".
-            $value.
-          "</div>".
-          "</td>\n";
+        $buffer.= preg_replace( $attrs,
+            array($this->headline[$i]['style'],"width:100%;overflow:hidden;".$this->headline[$i]['style'],$tmp[$i]),$tpl);
       }
     }
 
+    if($entry_id % 2){
+      $a = "class='ObjectListViewport_Entry_Row1'";
+    }else{
+      $a = "class='ObjectListViewport_Entry_Row2'";
+    }
 
-    $buffer.="</tr>\n";
-
-    return $buffer."\n";
+    return "<tr ".$a.">".$buffer."</tr>\n";
   }
 
 
@@ -216,25 +224,17 @@ class ObjectListViewport {
 
     $header = $footer = "";
     if($this->b_displayHeader){
-      $header ="<tr>
-                  <td class='ObjectListViewport_TD_Header' id='ObjectListViewport_TD_Header".$this->id."'>
-                    ".$this->renderHeadline()."
-                  </td>
-                </tr>";
+      $header = $this->renderHeadline();
     }
     if($this->b_displayFooter){
-      $footer ="<tr>
-                  <td class='ObjectListViewport_TD_Footer' id='ObjectListViewport_TD_Footer".$this->id."'>
-                    ".$this->renderFooter()."
-                  </td>
-                </tr>";
+      $footer = $this->renderFooter();
     }
 
     /* Apply current filter */
     $entries = "";
     $objects= new ObjectListFilterIterator($this->objects->getIterator());
-    foreach ($objects as $value){
-      $entries .= $this->renderEntry($value);
+    foreach ($objects as $key => $value){
+      $entries .= $this->renderEntry($value,$key);
     }
 
     /* Generate fixed headline */

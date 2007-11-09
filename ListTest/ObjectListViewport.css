@@ -58,8 +58,19 @@
     overflow:auto;
     height:100px;
 }
+tr.ObjectListViewport_Entry_Row1{
+	background-color: #F0F0F0;
+}
+tr.ObjectListViewport_Entry_Row2{
+	background-color: #FFFFFF;
+}
+tr.ObjectListViewport_Entry_Row1:hover{
+	background-color: #D8D8D8;
+}
+tr.ObjectListViewport_Entry_Row2:hover{
+	background-color: #D8D8D8;
+}
 .ObjectListViewport_Entry_Cell {
-    background-color: white;
     background-image: none;
     background-repeat: repeat;
     background-attachment: scroll;
