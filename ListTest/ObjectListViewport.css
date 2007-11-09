@@ -1,0 +1,134 @@
+
+.ObjectListViewport {
+    width:100%;
+    height:100%;
+    border-collapse:collapse;
+}
+
+.ObjectListViewport_Header_Table {
+    width:100%;
+    border: 0px;
+    border-collapse:collapse;
+}
+
+.ObjectListViewport_Entry_Table {
+    width:100%;
+    border: 0px;
+    border-collapse:collapse;
+}
+
+.ObjectListViewport_Footer_Table {
+    width:100%;
+    border: 0px;
+    border-collapse:collapse;
+}
+
+
+.ObjectListViewport_Table {
+    border-collapse:collapse;
+    width:100%;
+    height:100%;
+    border: 0px;
+}
+
+.ObjectListViewport_TD_Header {	
+    height:20px;
+	background-color: rgb(240, 240, 240);
+    vertical-align:middle;
+    border-bottom: 1px solid rgb(170, 170, 170);
+    margin:0px;
+    padding:0px;
+}
+.ObjectListViewport_TD_Entries {
+	background-color: rgb(240, 240, 240);
+    vertical-align:middle;
+    border: 0px;
+    margin:0px;
+    padding:0px;
+}
+.ObjectListViewport_TD_Footer {
+    height:20px;
+    background-color: #CCCCCC;
+    vertical-align:middle;
+    border: 0px;
+    margin:0px;
+    padding:0px;
+}
+.ObjectListViewport_Entry_Cover{
+    overflow:auto;
+    height:100px;
+}
+.ObjectListViewport_Entry_Cell {
+    background-color: white;
+    background-image: none;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    -x-background-x-position: 0%;
+    -x-background-y-position: 0%;
+    -moz-background-clip: -moz-initial;
+    -moz-background-origin: -moz-initial;
+    -moz-background-inline-policy: -moz-initial;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: rgb(192, 192, 192);
+    padding-top: 3px;
+    padding-right-value: 3px;
+    padding-bottom: 3px;
+    padding-left-value: 3px;
+    padding-left-ltr-source: physical;
+    padding-left-rtl-source: physical;
+    padding-right-ltr-source: physical;
+    padding-right-rtl-source: physical;
+    height: 22px;
+}
+.ObjectListViewport_Footer_Cell {
+
+    background-color: rgb(240, 240, 240);
+    background-image: none;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    -x-background-x-position: 0%;
+    -x-background-y-position: 0%;
+    -moz-background-clip: -moz-initial;
+    -moz-background-origin: -moz-initial;
+    -moz-background-inline-policy: -moz-initial;
+    font-weight: bold;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: rgb(170, 170, 170);
+    padding-top: 3px;
+    padding-right-value: 3px;
+    padding-bottom: 3px;
+    padding-left-value: 3px;
+    padding-left-ltr-source: physical;
+    padding-left-rtl-source: physical;
+    padding-right-ltr-source: physical;
+    padding-right-rtl-source: physical;
+    height: 22px;
+}
+.ObjectListViewport_Header_Cell {
+    background-color: rgb(240, 240, 240);
+    background-image: none;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    -x-background-x-position: 0%;
+    -x-background-y-position: 0%;
+    -moz-background-clip: -moz-initial;
+    -moz-background-origin: -moz-initial;
+    -moz-background-inline-policy: -moz-initial;
+    font-weight: bold;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: rgb(170, 170, 170);
+    padding-top: 3px;
+    padding-right-value: 3px;
+    padding-bottom: 3px;
+    padding-left-value: 3px;
+    padding-left-ltr-source: physical;
+    padding-left-rtl-source: physical;
+    padding-right-ltr-source: physical;
+    padding-right-rtl-source: physical;
+    height: 22px;
+}
+
+

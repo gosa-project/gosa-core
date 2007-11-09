@@ -1,0 +1,288 @@
+<form action='?' name='mainform' method='post' enctype='multipart/form-data'>
+<div class='setup_header'>
+  <div style="float:left;"><img src='themes/default/images/go_logo.png' class='center' alt='GOsa'>
+       <a class="maintitlebar" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?reset=1");' ><img src='themes/default/images/gohome.png' class='center' border="0" alt="Main">&nbsp;Hauptmenü    </a>
+       &nbsp;
+    <a class="maintitlebar" style="margin-left:35px"  onclick="return popup('helpviewer.php?plug=15','GOsa help');">
+
+       <img src='themes/default/images/help.png' class='center' border="0" alt="Help">&nbsp;Hilfe    </a>
+    &nbsp;
+       <a class="maintitlebar" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "logout.php?request");' style="margin-left:35px;">
+      <img src='themes/default/images/stop.png' class='center' border="0" alt="Sign out">&nbsp;Abmelden    </a>
+      </div>
+  <div style="padding-top:8px;text-align:right;height:28px"><a>Angemeldet: <b>admin</b></a></div>
+</div>
+
+<!--<div class='setup_menu'>
+  <b>GOsa main menu</b>
+</div>-->
+
+<table summary="" class="framework" cellspacing="0" cellpadding="0" style='margin-top:7px'>
+  <tr style="vertical-align:top;">
+    <!-- Menu -->
+    <td style="background-color:white; vertical-align:top;" id="menucell">
+      <p class="menuheader" >Mein Konto</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=0&amp;reset=1");'>Allgemein</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=1&amp;reset=1");'>UNIX</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=2&amp;reset=1");'>Umgebung</p>
+
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=3&amp;reset=1");'>Mail</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=4&amp;reset=1");'>Samba</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=5&amp;reset=1");'>Netatalk</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=6&amp;reset=1");'>Konnektivität</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=7&amp;reset=1");'>Fax</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=8&amp;reset=1");'>Telefon</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=9&amp;reset=1");'>Passwort</p>
+<p class="menuheader" style='border-top:1px solid #AAA; margin-top:0.8em;'>Administration</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=10&amp;reset=1");'>Benutzer</p>
+
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=11&amp;reset=1");'>Gruppen</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=12&amp;reset=1");'>Objektgruppen</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=13&amp;reset=1");'>Abteilungen</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=14&amp;reset=1");'>Anwendungen</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=15&amp;reset=1");'>Systeme</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=16&amp;reset=1");'>MIME-Typen</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=17&amp;reset=1");'>Geräte</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=18&amp;reset=1");'>FAI</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=19&amp;reset=1");'>Fax-Sperrlisten</p>
+
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=20&amp;reset=1");'>Telefon-Makros</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=21&amp;reset=1");'>Telefon-Konferenzen</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=22&amp;reset=1");'>Zugriffskontrolle</p>
+<p class="menuheader" style='border-top:1px solid #AAA; margin-top:0.8em;'>Zusätzliches</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=23&amp;reset=1");'>Adressbuch</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=24&amp;reset=1");'>Fax-Berichte</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=25&amp;reset=1");'>Telefon-Berichte</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=26&amp;reset=1");'>Systemprotokolle</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=27&amp;reset=1");'>Mail-Warteschlange</p>
+
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=28&amp;reset=1");'>LDAP-Manager</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=29&amp;reset=1");'>Meldungen</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=30&amp;reset=1");'>System deployment</p>
+<p class="menuitem" onClick='return question("Sie bearbeiten gerade einen Datenbankeintrag. Sollen die Daten verworfen werden?", "main.php?plug=31&amp;reset=1");'><a href='https://oss.gonicus.de/labs/gosa/newticket' target='_blank'>Bugsubmitter</a></p>
+
+	  <br />
+	  <div style="height:1px; width:140px;"></div>
+    </td>
+    <!-- Plugin window -->
+
+    <td style="background-color:white; width:100%; vertical-align:top; height:15px;" colspan="2">
+      <table style="vertical-align:top; text-align:justify; background-color: white; border:1px solid #AAA; margin-top:0px; margin-left:7px; margin-right:7px; width:99%" summary="">
+       <tr>
+        <td>
+	
+	 <div class="plugtop">
+  <p class="center" style="margin:0px 0px 0px 5px;padding:0px;font-size:24px;"><img class="center" src="images/system.png" align="middle" alt="*">&nbsp;Systemverwaltung</p>
+</div>
+<div class="pluginfo">
+<img alt="" align="middle" src="images/closedlock.png"> cn=1aherbertskiste,ou=workstations,ou=systems,o=Landeshauptstadt München,c=de</div>
+
+<input type="hidden" name="arg" value=""><table summary="" cellpadding=0 cellspacing=0 border=0 style="width:100%;"><tr><td style="vertical-align:bottom;width:1px;white-space:nowrap;"><div  class="tab_left"><a class="tab_left" onclick="return true;" href="javascript:document.mainform.arg.value='workgeneric';document.mainform.submit();">Allgemein</a></div></td><td style="vertical-align:bottom;width:1px;white-space:nowrap;"><div  class="tab_active"><a class="tab_active" onclick="return true;" href="javascript:document.mainform.arg.value='workstartup';document.mainform.submit();">Start</a></div></td><td style="vertical-align:bottom;width:1px;white-space:nowrap;"><div  class="tab_near_active"><a class="tab_near_active" onclick="return true;" href="javascript:document.mainform.arg.value='workservice';document.mainform.submit();">Geräte</a></div></td><td style="vertical-align:bottom;width:1px;white-space:nowrap;"><div  class="tab_right"><a class="tab_right" onclick="return true;" href="javascript:document.mainform.arg.value='printgeneric';document.mainform.submit();">Drucker</a></div></td><td style="vertical-align:bottom;width:1px;white-space:nowrap;"><div  class="tab_right"><a class="tab_right" onclick="return true;" href="javascript:document.mainform.arg.value='terminfo';document.mainform.submit();">Information</a></div></td><td style="vertical-align:bottom;width:1px;white-space:nowrap;"><div  class="tab_right"><a class="tab_right" onclick="return true;" href="javascript:document.mainform.arg.value='faiSummaryTab';document.mainform.submit();">FAI&nbsp;Übersicht</a></div></td><td style="vertical-align:bottom;width:1px;white-space:nowrap;"><div  class="tab_right"><a class="tab_right" onclick="return true;" href="javascript:document.mainform.arg.value='glpiAccount';document.mainform.submit();">Inventory</a></div></td><td style="vertical-align:bottom;width:1px;white-space:nowrap;"><div  class="tab_right"><a class="tab_right" onclick="return true;" href="javascript:document.mainform.arg.value='acl';document.mainform.submit();">Zugriffsregeln</a></div></td><td style="vertical-align:bottom;width:1px;white-space:nowrap;"><div  class="tab_right"><a class="tab_right" onclick="return true;" href="javascript:document.mainform.arg.value='reference';document.mainform.submit();">Referenzen</a></div></td><td style="vertical-align:bottom;">
+<div class="tab_border">&nbsp;</div></td></tr></table><table summary="" cellpadding=4 cellspacing=0 border=0 style="width:100%; background-color:#F8F8F8; border-style:solid; border-color:#AAA; border-top-width:0px; border-bottom-width:1px; border-left-width:1px; border-right-width:1px;">
+<tr><td>
+<table summary="" style="width:100%;">
+ <tr>
+  <td style="width:50%; vertical-align:top;">
+
+<h2><img class="center" alt="" align="middle" src="images/penguin.png"> Boot-Parameter</h2>
+
+   <table summary="" style="width:100%">
+    <tr>
+     <td><LABEL for="gotoBootKernel">Boot-Kernel</LABEL></td>
+     <td style="width:70%">
+        <select id="gotoBootKernel" name="gotoBootKernel">
+         <option label="[geerbt]" value="default-inherited">[geerbt]</option>
+
+	</select>
+      </td>
+    </tr>
+    <tr>
+     <td><LABEL for="customParameters">Angepasste Optionen</LABEL></td>
+     <td>
+	<input name="customParameters" id="customParameters" size=25 maxlength=500
+                value="" title="Geben Sie die Parameter ein, die dem Kernel beim Starten übergeben werden sollen">
+     </td>
+    </tr>
+    <tr>
+     <td colspan="2" style='vertical-align:top;padding-top:3px;'>LDAP-Server
+(<input type='checkbox' name='gotoLdap_inherit'  value="1"
+	onClick="document.mainform.submit();" class='center'>
+&nbsp;inherit from group)
+		%LIST%	
+	</td>
+</tr>
+<tr>
+<td colspan="2">
+
+	<select name='ldap_server_to_add' id='ldap_server_to_add'>
+	  <option label="ldap1.m-ldap.jp:ldap://kein-besonders-toller-server.de/" value="1">ldap1.m-ldap.jp:ldap://kein-besonders-toller-server.de/</option>
+	
+    </select>
+	<input type='submit' name='add_ldap_server' value="Hinzufügen" id='add_ldap_server'>
+     </td>
+    </tr>
+   </table>
+
+  </td>
+
+  <td style="border-left:1px solid #A0A0A0">
+     &nbsp;
+  </td>
+  
+  <td style="vertical-align:top;">
+
+	
+		
+			<table>
+				<tr>
+
+					<td>
+						<h2><img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;FAI-Server						</h2>
+					</td>
+					<td>
+						<h2><img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;Release						</h2>
+					</td>
+				</tr>
+				<tr>
+
+					<td>
+							<select name="FAIdebianMirror" onchange='document.mainform.submit()'>
+																								<option value="auto" >automatisch</option>
+																																<option value="auto" disabled>http://repository.dns.jp./fai/rel-1.0.0.0</option>
+																																<option value="auto" disabled>/ht</option>
+																																<option value="auto" disabled>http://rc2</option>
+																																<option value="http://rc1" >http://rc1</option>
+
+																																<option value="asd"  selected >asd</option>
+																						<option disabled>&nbsp;</option>
+						</select>
+							</td>
+					<td>
+							<select name="FAIrelease"  onchange='document.mainform.submit()' >
+																								<option value="siga/0.9.2rc1"  selected >siga/0.9.2rc1</option>
+																					</select>
+
+						</td>
+				</tr>
+			</table>
+			<h2>
+				<img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;Zugewiesene FAI-Klassen			</h2>
+
+				%LIST2%
+
+				<select name="FAIclassesSel">
+				<option label="0.9.1-FACH-PACKAGES [-Pl-]" value="0.9.1-FACH-PACKAGES">0.9.1-FACH-PACKAGES [-Pl-]</option>
+<option label="0.9.1-OPT-PACKAGES [-Pl-]" value="0.9.1-OPT-PACKAGES">0.9.1-OPT-PACKAGES [-Pl-]</option>
+
+<option label="0.9.1-STANDARD-PACKAGES [-Pl-]" value="0.9.1-STANDARD-PACKAGES">0.9.1-STANDARD-PACKAGES [-Pl-]</option>
+<option label="ADMIN-PACKAGES [-Pl-]" value="ADMIN-PACKAGES">ADMIN-PACKAGES [-Pl-]</option>
+<option label="afd3-248 [-Pt-]" value="afd3-248">afd3-248 [-Pt-]</option>
+<option label="asdfasdfasdf [-H-]" value="asdfasdfasdf">asdfasdfasdf [-H-]</option>
+<option label="asdf [-S-]" value="asdf">asdf [-S-]</option>
+<option label="Basisclient_einfach [-P-]" value="Basisclient_einfach">Basisclient_einfach [-P-]</option>
+<option label="Basisclient_inkl_administrativer_Pakete [-P-]" value="Basisclient_inkl_administrativer_Pakete">Basisclient_inkl_administrativer_Pakete [-P-]</option>
+<option label="Basisclient_inkl_aller_verfuegbaren_Pakete [-P-]" value="Basisclient_inkl_aller_verfuegbaren_Pakete">Basisclient_inkl_aller_verfuegbaren_Pakete [-P-]</option>
+<option label="Basisclient_inkl_Entwicklungsumgebungen [-P-]" value="Basisclient_inkl_Entwicklungsumgebungen">Basisclient_inkl_Entwicklungsumgebungen [-P-]</option>
+
+<option label="Basisclient_inkl_Fachanwendungen [-P-]" value="Basisclient_inkl_Fachanwendungen">Basisclient_inkl_Fachanwendungen [-P-]</option>
+<option label="Basisclient_inkl_optionale_Pakete [-P-]" value="Basisclient_inkl_optionale_Pakete">Basisclient_inkl_optionale_Pakete [-P-]</option>
+<option label="Basisclient_Release_0.9.1 [-P-]" value="Basisclient_Release_0.9.1">Basisclient_Release_0.9.1 [-P-]</option>
+<option label="CDALPHA [-Pt Pl V H S-]" value="CDALPHA">CDALPHA [-Pt Pl V H S-]</option>
+<option label="DEV-PACKAGES [-Pl-]" value="DEV-PACKAGES">DEV-PACKAGES [-Pl-]</option>
+<option label="FACH-PACKAGES [-Pl-]" value="FACH-PACKAGES">FACH-PACKAGES [-Pl-]</option>
+<option label="gwdb [-T-]" value="gwdb">gwdb [-T-]</option>
+<option label="HARDENING [-S-]" value="HARDENING">HARDENING [-S-]</option>
+<option label="Kartoffel [-Pl-]" value="Kartoffel">Kartoffel [-Pl-]</option>
+
+<option label="LAST [-H-]" value="LAST">LAST [-H-]</option>
+<option label="NOLAPIC [-S-]" value="NOLAPIC">NOLAPIC [-S-]</option>
+<option label="NOTEBOOK [-Pt H-]" value="NOTEBOOK">NOTEBOOK [-Pt H-]</option>
+<option label="OPT-PACKAGES [-Pl-]" value="OPT-PACKAGES">OPT-PACKAGES [-Pl-]</option>
+<option label="OPT-SPEZIAL-PACKAGES [-Pl-]" value="OPT-SPEZIAL-PACKAGES">OPT-SPEZIAL-PACKAGES [-Pl-]</option>
+<option label="PROTOTYP [-Pt S T V H-]" value="PROTOTYP">PROTOTYP [-Pt S T V H-]</option>
+<option label="sdfadsfasdf [-S-]" value="sdfadsfasdf">sdfadsfasdf [-S-]</option>
+<option label="sdfdsfa [-H-]" value="sdfdsfa">sdfdsfa [-H-]</option>
+<option label="shd [-H-]" value="shd">shd [-H-]</option>
+
+<option label="siga [-V-]" value="siga">siga [-V-]</option>
+<option label="STANDARD-DESKTOP-LIZENZFREI [-Pl-]" value="STANDARD-DESKTOP-LIZENZFREI">STANDARD-DESKTOP-LIZENZFREI [-Pl-]</option>
+<option label="STANDARD-DESKTOP [-Pl P-]" value="STANDARD-DESKTOP">STANDARD-DESKTOP [-Pl P-]</option>
+<option label="STANDARD-PACKAGES [-Pl-]" value="STANDARD-PACKAGES">STANDARD-PACKAGES [-Pl-]</option>
+<option label="STANDARD-SPEZIAL-PACKAGES [-Pl-]" value="STANDARD-SPEZIAL-PACKAGES">STANDARD-SPEZIAL-PACKAGES [-Pl-]</option>
+<option label="tester [-S-]" value="tester">tester [-S-]</option>
+<option label="test [-T-]" value="test">test [-T-]</option>
+
+				<option disabled>&nbsp;</option>
+
+			</select>	
+					<input name="AddClass" value="Hinzufügen" type="submit"> 
+		<!--		<input name="DelClass" value="Entfernen" type="submit"> -->
+		
+		  		</td>
+	</tr>
+</table>
+
+<table summary="" style="width:100%;">
+ <tr><td colspan=2><p class="plugbottom" style="margin-top:0px;"></p></td></tr>
+
+ <tr>
+  <td style="width:50%; vertical-align:top; border-right:1px solid #B0B0B0">
+
+   <h2>
+    <img class="center" alt="" align="middle" src="images/hardware.png"> Kernel-Module (Format: Name Parameter)   </h2>
+    <select style="width:100%; height:150px;" name="modules_list[]" size=15 multiple title="Zusätzliche Module hinzufügen, die während des Starts geladen werden sollen">
+     
+	 <option disabled>&nbsp;</option>
+    </select>
+    <br>
+    <input name="module" size=30 align=middle maxlength=30>
+    <input type=submit value="Hinzufügen" name="add_module">&nbsp;
+
+    <input type=submit value="Entfernen" name="delete_module">
+  </td>
+
+  <td style="vertical-align:top;">
+        <h2><img class="center" alt="" src="images/fai_partitionTable.png" align="middle">&nbsp;<LABEL for="gotoShare">Freigaben</LABEL></h2>
+        <table summary="" style="width:100%">
+                <tr>
+                        <td>
+                        <select style="width:100%;height:150px;" name="gotoShare" multiple size=4 id="gotoShare">
+
+   					     
+								<option disabled>&nbsp;</option>
+                                </select>
+                                <br>
+                        <select name="gotoShareSelection">
+    						    <option label="afs1 - shares.jp." value="afs1|shares.jp.">afs1 - shares.jp.</option>
+<option label="afs2 - shares.jp." value="afs2|shares.jp.">afs2 - shares.jp.</option>
+
+						        <option disabled>&nbsp;</option>
+                                </select>
+
+                                <input type="text" size=15 name="gotoShareMountPoint" value="Mount-Pfad">
+                                <input type="submit" name="gotoShareAdd" value="Hinzufügen">
+                                <input type="submit" name="gotoShareDel" value="Entfernen"  disabled >
+                        </td>
+                </tr>
+        </table>
+  </td>
+ </tr>
+</table>
+
+<input name="WorkstationStarttabPosted" type="hidden" value="1">
+<!-- Place cursor -->
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+  -->
+</script></td></tr></table><p style="text-align:right">
+<input type="submit" name="edit_finish" style="width:80px" value="Ok">
+&nbsp;
+<input type="submit" name="edit_cancel" value="Abbrechen">
+</p>
+       </td>
+      </tr>
+     </table>
+    </td>
+  </tr>
+
+</table><script language="JavaScript" type="text/javascript">next_msg_dialog();</script></form>
