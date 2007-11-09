@@ -104,10 +104,11 @@
      </td>
     </tr>
     <tr>
-     <td colspan="2" style='vertical-align:top;padding-top:3px;'>LDAP-Server
-(<input type='checkbox' name='gotoLdap_inherit'  value="1"
-	onClick="document.mainform.submit();" class='center'>
-&nbsp;inherit from group)
+     <td colspan="2" style='vertical-align:top;padding-top:3px;'>LDAP-Server (<input type='checkbox' name='gotoLdap_inherit'  value="1" onClick="document.mainform.submit();" class='center'> &nbsp;inherit from group)
+	</td>
+</tr>
+    <tr>
+     <td colspan="2" style='vertical-align:top;padding-top:3px;height:160px;'>
 		%LIST%	
 	</td>
 </tr>
@@ -167,8 +168,9 @@
 			</table>
 			<h2>
 				<img class="center" alt="" align="middle" src="images/fai_profile.png">&nbsp;Zugewiesene FAI-Klassen			</h2>
-
+				<div style='height:140px; width:100%;'>
 				%LIST2%
+				</div>
 
 				<select name="FAIclassesSel">
 				<option label="0.9.1-FACH-PACKAGES [-Pl-]" value="0.9.1-FACH-PACKAGES">0.9.1-FACH-PACKAGES [-Pl-]</option>
