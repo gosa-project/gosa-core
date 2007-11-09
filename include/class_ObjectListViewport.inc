@@ -31,9 +31,10 @@ class ObjectListViewport {
   private $entryFormat;
   private $attributes= array('cn', '_icon', '_actions', 'dn');
   
-  private $b_displayHeader  = TRUE;
-  private $b_displayFooter    = TRUE;
   /* <---- Dummy here */
+  private $b_displayHeader    = TRUE;
+  private $b_displayFooter    = TRUE;
+  private $i_numberOfCols     = 0;
 
   /*!
     \brief Container for objects
@@ -62,7 +63,7 @@ class ObjectListViewport {
     /* Dummy here */
     $cr= Registry::getInstance("ConfigManager");
     $cr->setSection($config);
-    $this->headline= $this->parseHeadline($cr->getValue("headline"));
+    $this->parseHeadline($cr->getValue("headline"));
     $this->footer= $cr->getValue("footer");
     $this->entryFormat= $cr->getValue("entryFormat");
 
@@ -91,12 +92,11 @@ class ObjectListViewport {
       \return HTML rendered headline
 	 */
   private function renderHeadline(){
-    $buffer ="<table class='ObjectListViewport_Header_Table'>\n";
+    $buffer ="<table class='ObjectListViewport_Header_Table' id='ObjectListViewport_Header_Table".$this->id."'>\n";
     $buffer.="<tr>\n";
     foreach($this->headline as $key => $value){
       $buffer .= "<td class='ObjectListViewport_Header_Cell' style='".$value['style']."'>".$value['name']."</td>\n";
     }
-    $buffer.="<td class='ObjectListViewport_Header_Cell' style='border-right:0px;width:14px;'>&nbsp;</td>";
     $buffer.="</tr>\n";
     $buffer.="</table>\n";
     return $buffer;
@@ -161,13 +161,33 @@ class ObjectListViewport {
 
 
     $buffer="<tr>\n";
-    foreach($tmp as $key => $value){
-        $buffer .= "<td class='ObjectListViewport_Entry_Cell' style='".$this->headline[$key]['style']."'>".
-          "<div style='width:100%;overflow:hidden;".$this->headline[$key]['style']."'>".
+//   foreach($tmp as $key => $value){
+//       $buffer .= "<td class='ObjectListViewport_Entry_Cell' style='".$this->headline[$key]['style']."'>".
+//         "<div style='width:100%;overflow:hidden;".$this->headline[$key]['style']."'>".
+//           $value.
+//         "</div>".
+//         "</td>\n";
+//   }
+    for($i = 0 ; $i < $this->i_numberOfCols ; $i ++){
+  
+      $value = $tmp[$i];
+      if($i == ($this->i_numberOfCols -1 )){
+
+       $buffer .= "<td class='ObjectListViewport_Entry_Cell' style='".$this->headline[$i]['style']."'>".
+       "<div style='width:100%;overflow:hidden;'>".
+            $value.
+          "test</div>".
+          "</td>\n";
+      }else{
+       $buffer .= "<td class='ObjectListViewport_Entry_Cell' style='".$this->headline[$i]['style']."'>".
+       "<div style='width:100%;overflow:hidden;".$this->headline[$i]['style']."'>".
             $value.
           "</div>".
           "</td>\n";
+      }
     }
+
+
     $buffer.="</tr>\n";
 
     return $buffer."\n";
@@ -254,6 +274,8 @@ class ObjectListViewport {
     /* Each cell definition is seperated by | 
      *  split by and go through each definition
      */
+    $this->headline = array();
+    $this->i_numberOfCols = 0;
     $tmp = split("\|",trim($data,"|")); 
     $cell_formats = array();
     foreach($tmp as $key => $data){
@@ -298,8 +320,9 @@ class ObjectListViewport {
         }
       }
       $cell_formats[$key] = array("name" => $s_name, "width" => $s_width, "alignment" => $s_alignment,"style" => $s_style);
+      $this->i_numberOfCols ++;
     }
-    return($cell_formats);
+    $this->headline = $cell_formats;
   }
 
 
