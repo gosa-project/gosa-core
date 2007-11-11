@@ -25,6 +25,9 @@ class ObjectListViewportException extends Exception {
  */
 class ObjectListViewport {
 
+  /* Internal variable for color alternation */
+  protected $colorAlternator= 0;
+
   /* Dummy here ----> */
   private $headline;
   private $footer;
@@ -32,9 +35,9 @@ class ObjectListViewport {
   private $attributes= array('cn', '_icon', '_actions', 'dn');
   
   /* <---- Dummy here */
-  private $b_displayHeader    = TRUE;
-  private $b_displayFooter    = TRUE;
-  private $i_numberOfCols     = 0;
+  private $displayHeaderFlag= TRUE;
+  private $displayFooterFlag= TRUE;
+  private $numberOfCols= 0;
 
   /*!
     \brief Container for objects
@@ -138,7 +141,7 @@ class ObjectListViewport {
 	    Gets the entry descriptions from the ObjectList object and renders them.
       \return HTML rendered list entries
 	 */
-  private function renderEntry($entry,$entry_id){
+  private function renderEntry($entry){
 
     /* Copy template */
     $buffer= $this->entryFormat;
@@ -180,10 +183,10 @@ class ObjectListViewport {
 
     /* Append template for each given col */
     $buffer ="";
-    for($i = 0 ; $i < $this->i_numberOfCols ; $i ++){
+    for($i= 0; $i < $this->numberOfCols; $i++){
 
       /* If current entry is the last to appen, then skip adding styles */
-      if($i == ($this->i_numberOfCols -1 )){
+      if($i == ($this->numberOfCols-1)){
         $buffer.= preg_replace( $attrs,
             array($this->headline[$i]['style'],"width:100%;overflow:hidden;",$tmp[$i]),$tpl);
       }else{
@@ -192,7 +195,7 @@ class ObjectListViewport {
       }
     }
 
-    if($entry_id % 2){
+    if($this->colorAlternator++ & 1){
       $a = "class='ObjectListViewport_Entry_Row1'";
     }else{
       $a = "class='ObjectListViewport_Entry_Row2'";
@@ -223,18 +226,18 @@ class ObjectListViewport {
   public function render() {
 
     $header = $footer = "";
-    if($this->b_displayHeader){
+    if($this->displayHeaderFlag){
       $header = $this->renderHeadline();
     }
-    if($this->b_displayFooter){
+    if($this->displayFooterFlag){
       $footer = $this->renderFooter();
     }
 
     /* Apply current filter */
     $entries = "";
     $objects= new ObjectListFilterIterator($this->objects->getIterator());
-    foreach ($objects as $key => $value){
-      $entries .= $this->renderEntry($value,$key);
+    foreach ($objects as $value){
+      $entries .= $this->renderEntry($value);
     }
 
     /* Generate fixed headline */
@@ -274,63 +277,67 @@ class ObjectListViewport {
     /* Each cell definition is seperated by | 
      *  split by and go through each definition
      */
-    $this->headline = array();
-    $this->i_numberOfCols = 0;
-    $tmp = split("\|",trim($data,"|")); 
-    $cell_formats = array();
-    foreach($tmp as $key => $data){
+    $this->headline= array();
+    $this->numberOfCols= 0;
+    $tmp= split("\|", trim($data, "|")); 
+    $cell_formats= array();
 
-      $s_width    = "";
-      $s_alignment= "";
-      $s_name     = preg_replace("/\{[^\}]*+\}/","",$data);
-      $s_style    = "";
+    foreach($tmp as $key => $dta){
+
+      $width= "";
+      $alignment= "";
+      $name= preg_replace("/\{[^\}]*+\}/", "", $dta);
+      $style= "";
     
       /* Parse format string and detect width & alignment */
-      if(preg_match("/\{.*\}/",$data)){
-        $s_format=  preg_replace("/^[^\{]*+\{([^\}]*).*$/","\\1",$data);
+      if(preg_match("/\{.*\}/", $dta)){
+        $format= preg_replace("/^[^\{]*+\{([^\}]*).*$/", "\\1", $dta);
     
         /* Get aligment */
-        if(preg_match("/:/",$s_format)){
-          $s_al = preg_replace("/^[^:]*+:([a-z]*).*$/i","\\1",$s_format);
+        if(preg_match("/:/",$format)){
+          $al= preg_replace("/^[^:]*+:([a-z]*).*$/i", "\\1", $format);
 
-          if(preg_match("/T/i",$s_al)){
-            $s_alignment.= "top-"  ;
-            $s_style.= "vertical-align: top;";
+          if(preg_match("/T/i", $al)){
+            $alignment.= "top-";
+            $style.= "vertical-align: top;";
           }
-          if(preg_match("/B/i",$s_al)){
-            $s_alignment.= "bottom-"  ;
-            $s_style.= "vertical-align: bottom;";
+          if(preg_match("/B/i", $al)){
+            $alignment.= "bottom-";
+            $style.= "vertical-align: bottom;";
           }
-          if(preg_match("/R/i",$s_al)){
-            $s_alignment.= "right"  ;
-            $s_style.= "text-align: right;";
-          }elseif(preg_match("/L/i",$s_al)){
-            $s_alignment.= "left"  ;
-            $s_style.= "text-align: left;";
-          }elseif(preg_match("/C/i",$s_al) || preg_match("/M/i",$s_al) ){
-            $s_alignment.= "center"  ;
-            $s_style.= "text-align: center;";
+          if(preg_match("/R/i", $al)){
+            $alignment.= "right";
+            $style.= "text-align: right;";
+          }elseif(preg_match("/L/i", $al)){
+            $alignment.= "left";
+            $style.= "text-align: left;";
+          }elseif(preg_match("/C/i", $al) || preg_match("/M/i", $al) ){
+            $alignment.= "center";
+            $style.= "text-align: center;";
           }
         }
 
         /* Get width */
-        $s_width = preg_replace("/^([^:]*).*$/","\\1",$s_format);
-        if(!empty($s_width)){
-          $s_style.= "width: ".$s_width.";";
+        $width = preg_replace("/^([^:]*).*$/","\\1", $format);
+        if(!empty($width)){
+          $style.= "width: ".$width.";";
         }
       }
-      $cell_formats[$key] = array("name" => $s_name, "width" => $s_width, "alignment" => $s_alignment,"style" => $s_style);
-      $this->i_numberOfCols ++;
+
+      $cell_formats[$key]= array("name" => $name, "width" => $width, "alignment" => $alignment, "style" => $style);
+      $this->numberOfCols++;
     }
-    $this->headline = $cell_formats;
+    $this->headline= $cell_formats;
   }
 
 
-  public function enableFooter($bool = TRUE){
-    $this->b_displayFooter = $bool;
+  public function enableFooter($bool= TRUE){
+    $this->displayFooterFlag= $bool;
   }
-  public function enableHeader($bool = TRUE){
-    $this->b_displayHeader = $bool;
+
+
+  public function enableHeader($bool= TRUE){
+    $this->displayHeaderFlag= $bool;
   }
   
 }
