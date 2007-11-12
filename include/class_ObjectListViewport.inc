@@ -28,13 +28,14 @@ class ObjectListViewport {
   /* Internal variable for color alternation */
   protected $colorAlternator= 0;
 
-  /* Dummy here ----> */
   private $headline;
   private $footer;
   private $entryFormat;
+
+  /* Dummy here ----> */
   private $attributes= array('cn', '_icon', '_actions', 'dn');
-  
   /* <---- Dummy here */
+
   private $displayHeaderFlag= TRUE;
   private $displayFooterFlag= TRUE;
   private $numberOfCols= 0;
@@ -53,6 +54,7 @@ class ObjectListViewport {
 
   /*! \brief ID used to identify objects of same list */
   private $id = "";
+
   
   /*! \brief ObjectListViewport constructor
 
@@ -60,10 +62,14 @@ class ObjectListViewport {
 
     \param config Config section that is used to configure this ObjectListViewport
    */
-	public function __construct($config, $multiselect= TRUE){
+	public function __construct($config, $multiselect= TRUE, $displayHeader= TRUE, $displayFooter= FALSE){
 
-	$this->multiselect= $multiselect;
-    /* Dummy here */
+    /* Transfer initialization values */
+    $this->displayFooterFlag= $displayFooter;
+    $this->displayHeaderFlag= $displayHeader;
+    $this->multiselect= $multiselect;
+
+    /* Load list configuration from ConfigManager */
     $cr= Registry::getInstance("ConfigManager");
     $cr->setSection($config);
     $this->parseHeadline($cr->getValue("headline"));
@@ -74,8 +80,9 @@ class ObjectListViewport {
     $this->objects= new ObjectList($config);
 
     /* generate an unique id */
-    $this->id = preg_replace("/[^0-9]/","",microtime());
+    $this->id= uniqid();
   }
+
 
 	/*! \brief Handles _POST / _GET events
 
@@ -88,6 +95,19 @@ class ObjectListViewport {
   }
 
 
+	/*! \brief Processes post events
+
+	    Processes all post events and acts as needed.
+
+      \return bool for if changes are present or not
+	 */
+  private function process(){
+
+    /* TODO: process input */
+    return FALSE;
+  }
+
+
 	/*! \brief Renders headline into a string
 
 	    Gets the headline description from the ObjectList object and renders it.
@@ -96,8 +116,8 @@ class ObjectListViewport {
 	 */
   private function renderHeadline(){
     $tpl =" <tr>
-              <td class='ObjectListViewport_TD_Header' id='ObjectListViewport_TD_Header".$this->id."'>
-                <table class='ObjectListViewport_Header_Table' id='ObjectListViewport_Header_Table".$this->id."'>
+              <td class='ObjectListViewport_TD_Header' id='ObjectListViewport_TD_Header_".$this->id."'>
+                <table class='ObjectListViewport_Header_Table' id='ObjectListViewport_Header_Table_".$this->id."'>
                   <tr>
                     {content}
                   </tr>
@@ -120,7 +140,7 @@ class ObjectListViewport {
 	 */
   private function renderFooter(){
     $buffer ="<tr>
-              <td class='ObjectListViewport_TD_Footer' id='ObjectListViewport_TD_Footer".$this->id."'>
+              <td class='ObjectListViewport_TD_Footer' id='ObjectListViewport_TD_Footer_".$this->id."'>
                 <table class='ObjectListViewport_Footer_Table'>
                   <tr>
                     <td class='ObjectListViewport_Footer_Cell' colspan='".count($this->headline)."'>".$this->footer."</td>
@@ -132,6 +152,7 @@ class ObjectListViewport {
   }
 
 
+  /* TODO: replace this -> not our task */
   private function getEntryIcon($entry,$alt = ""){
     return("<img src='images/".$entry['_icon']."' alt='".$alt."' class='center'>");
   }
@@ -243,15 +264,15 @@ class ObjectListViewport {
 
     /* Generate fixed headline */
     $buffer = "
-    <table class='ObjectListViewport' id='ObjectListViewport".$this->id."' cellspacing=0 cellpadding=0>
+    <table class='ObjectListViewport' id='ObjectListViewport_".$this->id."' cellspacing=0 cellpadding=0>
       <tr>
         <td>
-              <table class='ObjectListViewport_Table' id='ObjectListViewport_Table".$this->id."' cellpadding=0 cellspacing=0 >
+              <table class='ObjectListViewport_Table' id='ObjectListViewport_Table_".$this->id."' cellpadding=0 cellspacing=0 >
                 ".$header."
                 <tr>
-                  <td class='ObjectListViewport_TD_Entries' id='ObjectListViewport_TD_Entries".$this->id."'>
-                    <div class='ObjectListViewport_Entry_Cover' id='ObjectListViewport_Entry_Cover".$this->id."'> 
-                      <table class='ObjectListViewport_Entry_Table' id='ObjectListViewport_Entry_Table".$this->id."'>
+                  <td class='ObjectListViewport_TD_Entries' id='ObjectListViewport_TD_Entries_".$this->id."'>
+                    <div class='ObjectListViewport_Entry_Cover' id='ObjectListViewport_Entry_Cover_".$this->id."'> 
+                      <table class='ObjectListViewport_Entry_Table' id='ObjectListViewport_Entry_Table_".$this->id."'>
                         ".$entries."
                       </table> 
                     </div>
@@ -331,16 +352,6 @@ class ObjectListViewport {
     $this->headline= $cell_formats;
   }
 
-
-  public function enableFooter($bool= TRUE){
-    $this->displayFooterFlag= $bool;
-  }
-
-
-  public function enableHeader($bool= TRUE){
-    $this->displayHeaderFlag= $bool;
-  }
-  
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
