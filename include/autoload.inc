@@ -2,6 +2,8 @@
 
 /* This function needs the pre-defined class mapping from autoload-data.inc */
 require_once("autoload-data.inc");
+
+/* FIXME: this does not belong here */
 require_once("smarty/Smarty.class.php");
 
 /* Set BASE_DIR for the complete code as constant */

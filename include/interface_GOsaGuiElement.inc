@@ -8,9 +8,18 @@
     This interface describes what we need to display an element in the GUI
     for use with list objects.
  */
-interface GOsaGuiElement {
+interface GOsaGuiElementInteraction {
+
+  /**
+   * Allows the GOsaGuiElement to process all _POST events that are
+   * related to itself.
+   * @param string $class
+   * @return obj $$class
+   */
   public function process();
+
   public function render();
+
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
