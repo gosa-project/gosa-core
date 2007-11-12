@@ -10,6 +10,7 @@ $class_mapping= array(
                 "ObjectListViewportException" => "include/class_ObjectListViewport.inc",
                 "ObjectListViewport" => "include/class_ObjectListViewport.inc",
                 "ObjectListIterator" => "include/class_ObjectListIterator.inc",
+                "GOsaGuiElement" => "include/interface_GOsaGuiElement.inc",
                 "ObjectListEntryFilter" => "include/interface_ObjectListEntryFilter.inc",
                 "ObjectListEntryFilter_uppercase" => "include/class_ObjectListEntryFilter_uppercase.inc",
 );
