@@ -45,13 +45,13 @@ function normalizePreg($input)
 
 
 /* Initiate autoloader... */
-require_once("../../include/autoload.inc");
+require_once("../../../include/autoload.inc");
 restore_error_handler();
 try {
 
 	/* Get new test instance of the Configuration */
 	$cr= Registry::getInstance("ConfigManager");
-	$cr->load("../../gosa.conf");
+	$cr->load("../../../gosa.conf");
 
 	/* Get a new test instance of ObjectListViewports */
 	$vp1= new ObjectListViewport("plugin/sample");

@@ -23,14 +23,28 @@ function normalizePreg($input)
 }
 
 
+function get_smarty()
+{
+	echo "Smarty fake in each ./tests/ListTest[1-9]/index.php";
+	date_default_timezone_set("europe/berlin");
+	$smarty = new smarty;
+	/* Set template compile directory */
+	$smarty->compile_dir= '/var/spool/gosa/';
+	$smarty->template_dir = '../';
+	$smarty->caching= false;
+	$smarty->php_handling= SMARTY_PHP_REMOVE;
+	return($smarty);
+}
+
+
 /* Initiate autoloader... */
-require_once("../../include/autoload.inc");
+require_once("../../../include/autoload.inc");
 restore_error_handler();
 try {
 
 	/* Get new test instance of the Configuration */
 	$cr= Registry::getInstance("ConfigManager");
-	$cr->load("../../gosa.conf");
+	$cr->load("../../../gosa.conf");
 
 	/* Get a new test instance of ObjectListViewports */
 	$vp= new ObjectListViewport("plugin/sample");

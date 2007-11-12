@@ -108,48 +108,48 @@ class ObjectListViewport implements GOsaGuiElement {
   }
 
 
-	/*! \brief Renders headline into a string
+#/*! \brief Renders headline into a string
+#
+#    Gets the headline description from the ObjectList object and renders it.
+#
+#    \return HTML rendered headline
+# */
+#private function renderHeadline(){
+#  $tpl =" <tr>
+#            <td class='ObjectListViewport_TD_Header' id='ObjectListViewport_TD_Header_".$this->id."'>
+#              <table class='ObjectListViewport_Header_Table' id='ObjectListViewport_Header_Table_".$this->id."'>
+#                <tr>
+#                  {content}
+#                </tr>
+#              </table>
+#           </td>
+#         </tr>";
+#  $buffer ="";
+#  foreach($this->headline as $key => $value){
+#    $buffer .= "<td class='ObjectListViewport_Header_Cell' style='".$value['style']."'>".$value['name']."</td>\n";
+#  }
+#  return(preg_replace("/\{content\}/", $buffer,$tpl));
+#}
 
-	    Gets the headline description from the ObjectList object and renders it.
 
-      \return HTML rendered headline
-	 */
-  private function renderHeadline(){
-    $tpl =" <tr>
-              <td class='ObjectListViewport_TD_Header' id='ObjectListViewport_TD_Header_".$this->id."'>
-                <table class='ObjectListViewport_Header_Table' id='ObjectListViewport_Header_Table_".$this->id."'>
-                  <tr>
-                    {content}
-                  </tr>
-                </table>
-             </td>
-           </tr>";
-    $buffer ="";
-    foreach($this->headline as $key => $value){
-      $buffer .= "<td class='ObjectListViewport_Header_Cell' style='".$value['style']."'>".$value['name']."</td>\n";
-    }
-    return(preg_replace("/\{content\}/", $buffer,$tpl));
-  }
-
-
-	/*! \brief Renders footer into a string
-
-	    Gets the footer description from the ObjectList object and renders it.
-
-      \return HTML rendered footer
-	 */
-  private function renderFooter(){
-    $buffer ="<tr>
-              <td class='ObjectListViewport_TD_Footer' id='ObjectListViewport_TD_Footer_".$this->id."'>
-                <table class='ObjectListViewport_Footer_Table'>
-                  <tr>
-                    <td class='ObjectListViewport_Footer_Cell' colspan='".count($this->headline)."'>".$this->footer."</td>
-                  </tr>
-                </table>     
-              </td>
-           </tr>";
-    return $buffer;
-  }
+#/*! \brief Renders footer into a string
+#
+#    Gets the footer description from the ObjectList object and renders it.
+#
+#    \return HTML rendered footer
+# */
+#private function renderFooter(){
+#  $buffer ="<tr>
+#            <td class='ObjectListViewport_TD_Footer' id='ObjectListViewport_TD_Footer_".$this->id."'>
+#              <table class='ObjectListViewport_Footer_Table'>
+#                <tr>
+#                  <td class='ObjectListViewport_Footer_Cell' colspan='".count($this->headline)."'>".$this->footer."</td>
+#                </tr>
+#              </table>     
+#            </td>
+#         </tr>";
+#  return $buffer;
+#}
 
 
   /* TODO: replace this -> not our task */
@@ -247,14 +247,6 @@ class ObjectListViewport implements GOsaGuiElement {
 	 */
   public function render() {
 
-    $header = $footer = "";
-    if($this->displayHeaderFlag){
-      $header = $this->renderHeadline();
-    }
-    if($this->displayFooterFlag){
-      $footer = $this->renderFooter();
-    }
-
     /* Apply current filter */
     $entries = "";
     $objects= new ObjectListFilterIterator($this->objects->getIterator());
@@ -262,31 +254,25 @@ class ObjectListViewport implements GOsaGuiElement {
       $entries .= $this->renderEntry($value);
     }
 
-    /* Generate fixed headline */
-    $buffer = "
-    <table class='ObjectListViewport' id='ObjectListViewport_".$this->id."' cellspacing=0 cellpadding=0>
-      <tr>
-        <td>
-              <table class='ObjectListViewport_Table' id='ObjectListViewport_Table_".$this->id."' cellpadding=0 cellspacing=0 >
-                ".$header."
-                <tr>
-                  <td class='ObjectListViewport_TD_Entries' id='ObjectListViewport_TD_Entries_".$this->id."'>
-                    <div class='ObjectListViewport_Entry_Cover' id='ObjectListViewport_Entry_Cover_".$this->id."'> 
-                      <table class='ObjectListViewport_Entry_Table' id='ObjectListViewport_Entry_Table_".$this->id."'>
-                        ".$entries."
-                      </table> 
-                    </div>
-                  </td>
-                </tr>
-                ".$footer."
-              </table>
+    $smarty = get_smarty();
+    $smarty->assign("OLV_Entries",$entries);
+    $smarty->assign("OLV_List_Id",$this->id);
 
-        </td>
-      </tr>
-    </table>
-";
+    /* Footer variables */
+    $smarty->assign("OLV_Footer_Enabled",$this->displayFooterFlag);
+    $smarty->assign("OLV_Footer_Message",$this->footer);
+    $smarty->assign("OLV_Num_Cols",$this->numberOfCols);
 
-    return ($buffer);
+    /* Assign Headline values */
+    $smarty->assign("OLV_Header_Enabled",$this->displayHeaderFlag);
+    $smarty->assign("OLV_Header",$this->headline);
+ 
+    $buffer ="";
+    foreach($this->headline as $key => $value){
+      $buffer .= "<td class='ObjectListViewport_Header_Cell' style='".$value['style']."'>".$value['name']."</td>\n";
+    }
+
+    return($smarty->fetch("ObjectListViewport.tpl"));
   }
 
 
