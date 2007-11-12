@@ -45,6 +45,10 @@ function get_classes($folder= ".")
         $class= preg_replace('/^\s*class\s*(\w+).*$/', '\1', $line);
         $result[$class]= preg_replace("%$base_dir/%", "", "$currdir/$folder/$file");
       }
+      if (preg_match('/^\s*interface\s*\w.*$/', $line)){
+        $class= preg_replace('/^\s*interface\s*(\w+).*$/', '\1', $line);
+        $result[$class]= preg_replace("%$base_dir/%", "", "$currdir/$folder/$file");
+      }
     }
   }
 
