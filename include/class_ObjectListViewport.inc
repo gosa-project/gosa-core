@@ -195,13 +195,14 @@ class ObjectListViewport {
       }
     }
 
+    /* Add class depending on given id, to alternate background colors */
     if($this->colorAlternator++ & 1){
       $a = "class='ObjectListViewport_Entry_Row1'";
     }else{
       $a = "class='ObjectListViewport_Entry_Row2'";
     }
 
-    return "<tr ".$a.">".$buffer."</tr>\n";
+    return "<tr ".$a.">\n".$buffer."</tr>\n";
   }
 
 

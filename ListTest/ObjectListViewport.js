@@ -13,7 +13,7 @@ window.onresize = updateObjectListViewportSize;
 		var viewport_w	= 0;
 		var all 		= new Array();
 		var i			= 0;
-		var id_pref		= "";
+		var list_id		= "";
 		var calc		= 0;
 	
         /* Somehow IE do not need to be resized
@@ -30,44 +30,44 @@ window.onresize = updateObjectListViewportSize;
         all = getElementsByStyleClass('ObjectListViewport');
         for (i = 0; i < all.length; ++i){
 
-            id_pref = all[i].id.replace(/[^0-9]*/,"");
+            list_id = all[i].id.replace(/[^0-9]*/,"");
 
             /* Set Viewport to min height, to ensure
              *  that resize will work correctly in konqueror
              */
-            document.getElementById('ObjectListViewport_Entry_Cover' + id_pref).style.height= "50px";
+            document.getElementById('ObjectListViewport_Entry_Cover' + list_id).style.height= "50px";
 
             /* Get values of displayed header and footer heights to be
              *  able to recalculate the Viewport
              */
-            viewport    = getObjectHeight('ObjectListViewport_Table' + id_pref);
+            viewport    = getObjectHeight('ObjectListViewport_Table' + list_id);
 
 			/* Get Header height for ViewPort height calculation */
-			if(document.getElementById('ObjectListViewport_TD_Header' + id_pref)){
-            	header = getObjectHeight('ObjectListViewport_TD_Header' + id_pref);
+			if(document.getElementById('ObjectListViewport_TD_Header' + list_id)){
+            	header = getObjectHeight('ObjectListViewport_TD_Header' + list_id);
 			}else{
 				header =0;
 			}
 		
 			/* Get Footer height for ViewPort height calculation */
-			if(document.getElementById('ObjectListViewport_TD_Footer' + id_pref)){
-            	footer = getObjectHeight('ObjectListViewport_TD_Footer' + id_pref);
+			if(document.getElementById('ObjectListViewport_TD_Footer' + list_id)){
+            	footer = getObjectHeight('ObjectListViewport_TD_Footer' + list_id);
 			}else{
 				footer = 0
 			}
 
             /* Calculate the new visible entry part height. */
             calc = (viewport  - ( header + footer ));
-            document.getElementById('ObjectListViewport_Entry_Cover' + id_pref).style.height = calc;
+            document.getElementById('ObjectListViewport_Entry_Cover' + list_id).style.height = calc;
 
             /* Reduce width of entry list, we need some space to
              *  display the scrollbar without breaking the layout
 			 * Only required if a header is shown.
              */
-			if(document.getElementById('ObjectListViewport_TD_Header' + id_pref)){
-				viewport_w = getObjectWidth('ObjectListViewport_Table' + id_pref);
-				document.getElementById('ObjectListViewport_Entry_Table' + id_pref).style.width = (viewport_w - 18) + 'px';
-				document.getElementById('ObjectListViewport_Header_Table' + id_pref).style.width = (viewport_w - 18) + 'px';
+			if(document.getElementById('ObjectListViewport_TD_Header' + list_id)){
+				viewport_w = getObjectWidth('ObjectListViewport_Table' + list_id);
+				document.getElementById('ObjectListViewport_Entry_Table' + list_id).style.width = (viewport_w - 18) + 'px';
+				document.getElementById('ObjectListViewport_Header_Table' + list_id).style.width = (viewport_w - 18) + 'px';
 			}
         }
     }
