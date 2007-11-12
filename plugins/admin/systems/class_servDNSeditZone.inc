@@ -223,7 +223,7 @@ class servdnseditZone extends plugin
 
     /* Save Zone Entry Edit Dialog
      */
-    if(isset($_POST['SaveZoneEntryChanges'])){
+    if(isset($_POST['SaveZoneEntryChanges']) && is_object($this->dialog)){
       $this->dialog->save_object();
       if(count($this->dialog->check())){
         $msgs = $this->dialog->check();
@@ -231,7 +231,11 @@ class servdnseditZone extends plugin
           print_red($msg);
         }
       }else{
-        $this->zoneEditor = clone $this->dialog;
+        if (version_compare(phpversion(), '5.0') < 0) {
+          $this->zoneEditor = $this->dialog;
+        }else{
+          $this->zoneEditor = clone($this->dialog);
+        }
         $this->dialog = FALSE;
 #       $rev = FlipIp(getNameFromMix($this->InitialReverseZone)).".in-addr.arpa";
 #       $for = getNameFromMix($this->InitialzoneName);
