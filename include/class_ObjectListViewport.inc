@@ -23,37 +23,37 @@ class ObjectListViewportException extends Exception {
 
     \sa ObjectList
  */
-class ObjectListViewport implements GOsaGuiElement {
+class ObjectListViewport extends GOsaGuiElement {
 
   /* Internal variable for color alternation */
-  protected $colorAlternator= 0;
+  private $colorAlternator= 0;
 
-  private $headline;
-  private $footer;
-  private $entryFormat;
+  protected $headline;
+  protected $footer;
+  protected $entryFormat;
 
   /* Dummy here ----> */
   private $attributes= array('cn', '_icon', '_actions', 'dn');
   /* <---- Dummy here */
 
-  private $displayHeaderFlag= TRUE;
-  private $displayFooterFlag= TRUE;
-  private $numberOfCols= 0;
+  protected $displayHeaderFlag= TRUE;
+  protected $displayFooterFlag= TRUE;
+  protected $numberOfCols= 0;
 
   /*!
     \brief Container for objects
 
     This variable stores the ObjectList object to be displayed.
    */
-	private $objects;
+	protected $objects;
 
   /*!
     \brief Switch to handle multiselect or not
    */
-	private $multiselect;
+	protected $multiselect;
 
   /*! \brief ID used to identify objects of same list */
-  private $id = "";
+  protected $id = "";
 
   
   /*! \brief ObjectListViewport constructor
@@ -101,7 +101,7 @@ class ObjectListViewport implements GOsaGuiElement {
 
       \return bool for if changes are present or not
 	 */
-  public function process(){
+  protected function __process(){
 
     /* TODO: process input */
     return FALSE;
@@ -245,7 +245,7 @@ class ObjectListViewport implements GOsaGuiElement {
 
       \return HTML rendered list
 	 */
-  public function render() {
+  protected function __render() {
 
     /* Apply current filter */
     $entries = "";

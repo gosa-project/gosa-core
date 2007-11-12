@@ -13,11 +13,16 @@ interface GOsaGuiElementInteraction {
   /**
    * Allows the GOsaGuiElement to process all _POST events that are
    * related to itself.
-   * @param string $class
-   * @return obj $$class
+   *
+   * @return TRUE if something has changed
    */
   public function process();
 
+
+  /**
+   * Allows the GOsaGuiElement to render themselves depending on several
+   * parameters.
+   */
   public function render();
 
 }
