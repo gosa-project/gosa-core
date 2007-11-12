@@ -539,7 +539,7 @@ class systems extends plugin
         }
 
         $this->systab->save();
-        gosa_log ("System object'".$this->dn."' has been saved");
+        gosa_log ("System object'".$this->systab->dn."' has been saved");
 
         if(isset($_SESSION['SelectedSystemType'])){
           unset($_SESSION['SelectedSystemType']);
