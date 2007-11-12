@@ -255,7 +255,7 @@ class ObjectListViewport implements GOsaGuiElement {
     }
 
     $smarty = get_smarty();
-    $smarty->assign("OLV_Entries",$entries);
+    $smarty->assign("OLV_Entries",$objects);
     $smarty->assign("OLV_List_Id",$this->id);
 
     /* Footer variables */
@@ -267,11 +267,6 @@ class ObjectListViewport implements GOsaGuiElement {
     $smarty->assign("OLV_Header_Enabled",$this->displayHeaderFlag);
     $smarty->assign("OLV_Header",$this->headline);
  
-    $buffer ="";
-    foreach($this->headline as $key => $value){
-      $buffer .= "<td class='ObjectListViewport_Header_Cell' style='".$value['style']."'>".$value['name']."</td>\n";
-    }
-
     return($smarty->fetch("ObjectListViewport.tpl"));
   }
 
