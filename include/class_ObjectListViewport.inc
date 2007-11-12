@@ -38,7 +38,7 @@ class ObjectListViewport extends GOsaGuiElement {
 
   protected $displayHeaderFlag= TRUE;
   protected $displayFooterFlag= TRUE;
-  protected $numberOfCols= 0;
+  private $numberOfCols= 0;
 
   /*!
     \brief Container for objects
@@ -52,10 +52,6 @@ class ObjectListViewport extends GOsaGuiElement {
    */
 	protected $multiselect;
 
-  /*! \brief ID used to identify objects of same list */
-  protected $id = "";
-
-  
   /*! \brief ObjectListViewport constructor
 
     The ObjectListViewport class renders/handles the ObjectList defined by $config.
@@ -63,6 +59,9 @@ class ObjectListViewport extends GOsaGuiElement {
     \param config Config section that is used to configure this ObjectListViewport
    */
 	public function __construct($config, $multiselect= TRUE, $displayHeader= TRUE, $displayFooter= FALSE){
+
+    /* Initialize from parents method */
+    parent::__construct();
 
     /* Transfer initialization values */
     $this->displayFooterFlag= $displayFooter;
@@ -78,20 +77,6 @@ class ObjectListViewport extends GOsaGuiElement {
 
     /* Load and instanciate classes, extract filter, icons, view hooks, etc. */
     $this->objects= new ObjectList($config);
-
-    /* generate an unique id */
-    $this->id= uniqid();
-  }
-
-
-	/*! \brief Handles _POST / _GET events
-
-	    Processes the list of registered plugins to do their eventHandler and adapt
-      internal objectlist according to this.
-	 */
-  public function eventHandler(){
-    /* Reloads the list if things have changed interally */
-    $this->objects->reload();
   }
 
 
@@ -102,6 +87,9 @@ class ObjectListViewport extends GOsaGuiElement {
       \return bool for if changes are present or not
 	 */
   protected function __process(){
+
+    /* FIXME: Dummy Action*/
+    $this->objects->reload();
 
     /* TODO: process input */
     return FALSE;
@@ -152,7 +140,7 @@ class ObjectListViewport extends GOsaGuiElement {
 #}
 
 
-  /* TODO: replace this -> not our task */
+  /* FIXME: replace this -> not our task */
   private function getEntryIcon($entry,$alt = ""){
     return("<img src='images/".$entry['_icon']."' alt='".$alt."' class='center'>");
   }
@@ -186,13 +174,15 @@ class ObjectListViewport extends GOsaGuiElement {
     foreach ($matches as $match){
       $filterName= preg_replace('/,.+$/', '', $match[1]);
       $filterParameter= preg_replace('/^[^,]+,/', '', $match[1]);
-      $buffer= preg_replace('/\{_filter\('.normalizePreg($match[1]).'\)\}/', $this->applyEntryFilter($filterName, $filterParameter), $buffer);
+      $buffer= preg_replace('/\{_filter\('.normalizePreg($match[1]).'\)\}/',
+                            $this->applyEntryFilter($filterName, $filterParameter),
+                            $buffer);
     }
 
     #TODO: Make $buffer a proper HTML table output
     $tmp = split("\|",trim($buffer,"|"));  
 
-    /* define entry template */
+    /* Define entry template */
     $tpl = "<td class='ObjectListViewport_Entry_Cell' style='{style_1}'>
               <div style='{style_2}'>
                 {content}
@@ -254,20 +244,31 @@ class ObjectListViewport extends GOsaGuiElement {
       $entries .= $this->renderEntry($value);
     }
 
-    $smarty = get_smarty();
-    $smarty->assign("OLV_Entries",array("Doesn't work" => "Does not work."));//$objects);
-    $smarty->assign("OLV_List_Id",$this->id);
+    return "README ;-)\n";
 
-    /* Footer variables */
-    $smarty->assign("OLV_Footer_Enabled",$this->displayFooterFlag);
-    $smarty->assign("OLV_Footer_Message",$this->footer);
-    $smarty->assign("OLV_Num_Cols",$this->numberOfCols);
+    #Fabian: _POST/_GET Variablen bitte mit $this->createVariable('name');
+    #        erstellen.
+    #        Damit kann das von der übergreifenden Funktion extrahiert werden
+    #        und wir haben keinen doppelten Code dafür.
+    #        
+    #        Wurde z.B. eine Variable via $this->createVariable('cn') erzeugt und via
+    #        smarty eingebunden, dann kann Sie nach einem _POST oder _GET via
+    #        $this->getRequestVariable_cn() wieder abgefragt werden.
 
-    /* Assign Headline values */
-    $smarty->assign("OLV_Header_Enabled",$this->displayHeaderFlag);
-    $smarty->assign("OLV_Header",$this->headline);
+    #$smarty = get_smarty();
+    #$smarty->assign("OLV_Entries",array("Doesn't work" => "Does not work."));//$objects);
+    #$smarty->assign("OLV_List_Id",$this->id);
+
+    #/* Footer variables */
+    #$smarty->assign("OLV_Footer_Enabled",$this->displayFooterFlag);
+    #$smarty->assign("OLV_Footer_Message",$this->footer);
+    #$smarty->assign("OLV_Num_Cols",$this->numberOfCols);
+
+    #/* Assign Headline values */
+    #$smarty->assign("OLV_Header_Enabled",$this->displayHeaderFlag);
+    #$smarty->assign("OLV_Header",$this->headline);
  
-    return($smarty->fetch("ObjectListViewport.tpl"));
+    #return($smarty->fetch("ObjectListViewport.tpl"));
   }
 
 
@@ -304,10 +305,12 @@ class ObjectListViewport extends GOsaGuiElement {
             $alignment.= "top-";
             $style.= "vertical-align: top;";
           }
+
           if(preg_match("/B/i", $al)){
             $alignment.= "bottom-";
             $style.= "vertical-align: bottom;";
           }
+
           if(preg_match("/R/i", $al)){
             $alignment.= "right";
             $style.= "text-align: right;";
