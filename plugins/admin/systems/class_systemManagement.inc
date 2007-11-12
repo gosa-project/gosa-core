@@ -517,7 +517,6 @@ class systems extends plugin
 
         if(isset($_SESSION['SelectedSystemType'])){
           $SelectedSystemType= $_SESSION['SelectedSystemType'];
-          unset($_SESSION['SelectedSystemType']);
           if($SelectedSystemType['ogroup'] != "none"){
             $og = new ogroup($this->config,$SelectedSystemType['ogroup']);
             if($og){
@@ -543,6 +542,7 @@ class systems extends plugin
         gosa_log ("System object'".$this->dn."' has been saved");
 
         if(isset($_SESSION['SelectedSystemType'])){
+          unset($_SESSION['SelectedSystemType']);
           if(!isset($ldap)){
             $ldap = $this->config->get_ldap_link();
           }
