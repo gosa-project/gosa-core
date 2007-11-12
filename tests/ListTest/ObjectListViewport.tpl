@@ -18,10 +18,11 @@
 			  <td class='ObjectListViewport_TD_Entries' id='ObjectListViewport_TD_Entries_{$OLV_List_Id}'>
 				<div class='ObjectListViewport_Entry_Cover' id='ObjectListViewport_Entry_Cover_{$OLV_List_Id}'>
 				  <table class='ObjectListViewport_Entry_Table' id='ObjectListViewport_Entry_Table_{$OLV_List_Id}'>
-
+<!--
 					{foreach from=$OLV_Entries key=key item=item}
 						{$key}
 					{/foreach}
+-->
 				  </table>
 				</div>
 			  </td>

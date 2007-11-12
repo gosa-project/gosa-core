@@ -255,7 +255,7 @@ class ObjectListViewport implements GOsaGuiElement {
     }
 
     $smarty = get_smarty();
-    $smarty->assign("OLV_Entries",$objects);
+    $smarty->assign("OLV_Entries",array("Doesn't work" => "Does not work."));//$objects);
     $smarty->assign("OLV_List_Id",$this->id);
 
     /* Footer variables */
