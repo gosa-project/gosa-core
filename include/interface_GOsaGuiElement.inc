@@ -5,11 +5,12 @@
     \version 1.00
     \date    2007/11/02
 
-    This interface describes what we need to filter a string
+    This interface describes what we need to display an element in the GUI
     for use with list objects.
  */
 interface GOsaGuiElement {
-  static public function filter($string);
+  public function process();
+  public function render();
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

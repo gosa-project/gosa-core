@@ -23,7 +23,7 @@ class ObjectListViewportException extends Exception {
 
     \sa ObjectList
  */
-class ObjectListViewport {
+class ObjectListViewport implements GOsaGuiElement {
 
   /* Internal variable for color alternation */
   protected $colorAlternator= 0;
@@ -101,7 +101,7 @@ class ObjectListViewport {
 
       \return bool for if changes are present or not
 	 */
-  private function process(){
+  public function process(){
 
     /* TODO: process input */
     return FALSE;
