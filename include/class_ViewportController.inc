@@ -55,7 +55,7 @@ class ViewportController {
 
     /* Do Smarty setup */
     $this->Smarty= new Smarty;
-    $this->Smarty->template_dir= $BASE_DIR.'/templates/';
+    $this->Smarty->template_dir= BASE_DIR.'/templates/';
     $this->Smarty->caching= $config->getValue('cache-templates', FALSE);
     $this->Smarty->php_handling= SMARTY_PHP_REMOVE;
 
@@ -64,7 +64,7 @@ class ViewportController {
 
     /* Check if our template directory is accessible */
     if (!(is_dir($this->Smarty->compile_dir) && is_writable($this->Smarty->compile_dir))){
-      throw new ViewportControllerException(sprintf(_("Directory '%s' specified as compile-directory is not accessible!"), $smarty->compile_dir));
+      throw new ViewportControllerException(sprintf(_("Directory '%s' specified as compile-directory is not accessible!"), $this->Smarty->compile_dir));
     }
 
     /* Check for old files in compile directory */
@@ -74,7 +74,6 @@ class ViewportController {
 
   private function cleanSmartyCompileDir() {
     #TODO: Clean compile dir
-    echo "TODO: clean compile dir\n";
   }
 
 
@@ -83,7 +82,7 @@ class ViewportController {
     /* Get the browser language if */
     $lang= Utils::getBrowserLanguage();
     if ($this->language != $lang){
-      echo "Emit EventObject for changed language\n";
+      #TODO: Emit EventObject for changed language
       $this->language= $lang;
     }
 
