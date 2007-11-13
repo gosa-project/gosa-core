@@ -37,6 +37,22 @@
 /* This is good for testing... */
 error_reporting (E_ALL | E_STRICT);
 
+
+function get_smarty()
+{
+    echo "Smarty fake in each ./tests/ListTest[1-9]/index.php";
+    date_default_timezone_set("europe/berlin");
+    $smarty = new smarty;
+    /* Set template compile directory */
+    $smarty->compile_dir= '/var/spool/gosa/';
+    $smarty->template_dir = '../';
+    $smarty->caching= false;
+    $smarty->php_handling= SMARTY_PHP_REMOVE;
+    return($smarty);
+}
+
+
+
 /* Escape all preg_* relevant characters */
 function normalizePreg($input)
 {

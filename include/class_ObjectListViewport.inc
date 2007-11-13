@@ -38,7 +38,7 @@ class ObjectListViewport extends GOsaGuiElement {
 
   protected $displayHeaderFlag= TRUE;
   protected $displayFooterFlag= TRUE;
-  private $numberOfCols= 0;
+  private $numberOfColumns= 0;
 
   /*!
     \brief Container for objects
@@ -96,50 +96,6 @@ class ObjectListViewport extends GOsaGuiElement {
   }
 
 
-#/*! \brief Renders headline into a string
-#
-#    Gets the headline description from the ObjectList object and renders it.
-#
-#    \return HTML rendered headline
-# */
-#private function renderHeadline(){
-#  $tpl =" <tr>
-#            <td class='ObjectListViewport_TD_Header' id='ObjectListViewport_TD_Header_".$this->id."'>
-#              <table class='ObjectListViewport_Header_Table' id='ObjectListViewport_Header_Table_".$this->id."'>
-#                <tr>
-#                  {content}
-#                </tr>
-#              </table>
-#           </td>
-#         </tr>";
-#  $buffer ="";
-#  foreach($this->headline as $key => $value){
-#    $buffer .= "<td class='ObjectListViewport_Header_Cell' style='".$value['style']."'>".$value['name']."</td>\n";
-#  }
-#  return(preg_replace("/\{content\}/", $buffer,$tpl));
-#}
-
-
-#/*! \brief Renders footer into a string
-#
-#    Gets the footer description from the ObjectList object and renders it.
-#
-#    \return HTML rendered footer
-# */
-#private function renderFooter(){
-#  $buffer ="<tr>
-#            <td class='ObjectListViewport_TD_Footer' id='ObjectListViewport_TD_Footer_".$this->id."'>
-#              <table class='ObjectListViewport_Footer_Table'>
-#                <tr>
-#                  <td class='ObjectListViewport_Footer_Cell' colspan='".count($this->headline)."'>".$this->footer."</td>
-#                </tr>
-#              </table>     
-#            </td>
-#         </tr>";
-#  return $buffer;
-#}
-
-
   /* FIXME: replace this -> not our task */
   private function getEntryIcon($entry,$alt = ""){
     return("<img src='images/".$entry['_icon']."' alt='".$alt."' class='center'>");
@@ -183,16 +139,16 @@ class ObjectListViewport extends GOsaGuiElement {
     $tmp = split("\|",trim($buffer,"|"));  
     $cols = array();
 
-    for($i= 0; $i < $this->numberOfCols; $i++){
+    for($i= 0; $i < $this->numberOfColumns; $i++){
 
       /* If current entry is the last to appen, then skip adding styles */
-      if($i == ($this->numberOfCols-1)){
-        $cols[$i]['style1'] = $this->headline[$i]['style'];
+      if($i == ($this->numberOfColumns-1)){
+        $cols[$i]['style1'] = $this->columnInformation[$i]['style'];
         $cols[$i]['style2'] = "width:100%;overflow:hidden;";
         $cols[$i]['value']   = $tmp[$i];
       }else{
-        $cols[$i]['style1'] = $this->headline[$i]['style'];
-        $cols[$i]['style2'] = "width:100%;overflow:hidden;".$this->headline[$i]['style'];
+        $cols[$i]['style1'] = $this->columnInformation[$i]['style'];
+        $cols[$i]['style2'] = "width:100%;overflow:hidden;".$this->columnInformation[$i]['style'];
         $cols[$i]['value']   = $tmp[$i];
       }
     }
@@ -249,15 +205,16 @@ class ObjectListViewport extends GOsaGuiElement {
     $smarty = get_smarty();
     $smarty->assign("OLV_Entries",$entries);
     $smarty->assign("OLV_List_Id",$this->id);
+    $smarty->assign("OLV_Multiselect_Enabled",$this->multiselect);
 
     /* Footer variables */
     $smarty->assign("OLV_Footer_Enabled",$this->displayFooterFlag);
     $smarty->assign("OLV_Footer_Message",$this->footer);
-    $smarty->assign("OLV_Num_Cols",$this->numberOfCols);
+    $smarty->assign("OLV_Num_Cols",$this->numberOfColumns);
 
     /* Assign Headline values */
     $smarty->assign("OLV_Header_Enabled",$this->displayHeaderFlag);
-    $smarty->assign("OLV_Header",$this->headline);
+    $smarty->assign("OLV_Header",$this->columnInformation);
  
     return($smarty->fetch("ObjectListViewport.tpl"));
   }
@@ -272,8 +229,8 @@ class ObjectListViewport extends GOsaGuiElement {
     /* Each cell definition is seperated by | 
      *  split by and go through each definition
      */
-    $this->headline= array();
-    $this->numberOfCols= 0;
+    $this->columnInformation= array();
+    $this->numberOfColumns= 0;
     $tmp= split("\|", trim($data, "|")); 
     $cell_formats= array();
 
@@ -322,9 +279,9 @@ class ObjectListViewport extends GOsaGuiElement {
       }
 
       $cell_formats[$key]= array("name" => $name, "width" => $width, "alignment" => $alignment, "style" => $style);
-      $this->numberOfCols++;
+      $this->numberOfColumns++;
     }
-    $this->headline= $cell_formats;
+    $this->columnInformation= $cell_formats;
   }
 
 }
