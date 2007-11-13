@@ -65,15 +65,15 @@ class ConfigManager {
 
 
 	public function setSection($name){
+    $this->section= $name;
+
 		if (isset($this->config[$name])){
-			$this->section= $name;
 			$this->current= &$this->config[$name];
 			return TRUE;
-		} else {
-			$this->section= "";
-			$this->current= NULL;
-			return FALSE;
-		}
+    } else {
+      $this->current= array();
+      return FALSE;
+    }
 	}
 
 
@@ -86,14 +86,16 @@ class ConfigManager {
 	}
 
 
-	public function getValue($name){
-		if (!$this->current){
+	public function getValue($name, $default= ""){
+		if (!$this->section){
 			throw new ConfigManagerException(_("Can't get value without current section set!"));
 		}
 		
 		if (isset($this->current[$name])){
 			return $this->current[$name];
-		} else {
+		} elseif ($default) {
+      return $default;
+    } else {
 			return NULL;
 		}
 	}
