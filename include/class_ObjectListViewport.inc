@@ -188,10 +188,10 @@ class ObjectListViewport extends GOsaGuiElement {
     /* Apply current filter */
     $entries = "";
     $objects= new ObjectListFilterIterator($this->objects->getIterator());
-    foreach ($objects as $value){
-      $entries[] = $this->renderEntry($value);
+    foreach ($objects as $key =>  $value){
+      $entries[$key] = $this->renderEntry($value);
+      $this->createVariable("OLV_Entry_".$key);
     }
-
 
     #Fabian: _POST/_GET Variablen bitte mit $this->createVariable('name');
     #        erstellen.

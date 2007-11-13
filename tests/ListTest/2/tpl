@@ -111,7 +111,7 @@
   			</div>
   			<div style='height:4px;'>
 			</div>
-			<div class="contentboxb" style="border-top:1px solid #B0B0B0;height:500px;">
+			<div style="height:500px;">
 				%LIST%
   			</div>
   		</td>

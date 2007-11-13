@@ -37,6 +37,7 @@
 /* This is good for testing... */
 error_reporting (E_ALL | E_STRICT);
 
+session_start();
 
 function get_smarty()
 {
@@ -70,8 +71,14 @@ try {
 	$cr->load("../../../gosa.conf");
 
 	/* Get a new test instance of ObjectListViewports */
-	$vp1= new ObjectListViewport("plugin/sample");
-	$vp2= new ObjectListViewport("plugin/sample");
+
+	if(!isset($_SESSION['vp1'])){
+		$_SESSION['vp1'] = new ObjectListViewport("plugin/sample");
+		$_SESSION['vp2'] = new ObjectListViewport("plugin/sample");
+	}
+	$vp1 = $_SESSION['vp1'];
+	$vp2 = $_SESSION['vp2'];
+
 	if(isset($_GET['d']) && preg_match("/f/",$_GET['d'])){
 		$vp1->enableFooter(FALSE);
 		$vp2->enableFooter(FALSE);

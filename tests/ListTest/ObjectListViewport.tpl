@@ -11,8 +11,7 @@
                     <input class="ObjectListViewport_Entry_Checkbox" type="checkbox" 
                       id="ObjectListViewport_Entry_Checkbox_{$OLV_List_Id}_select_all"
                       onclick='toggle_all_("^ObjectListViewport_Entry_Checkbox_{$OLV_List_Id}_.*$",
-                        "ObjectListViewport_Entry_Checkbox_{$OLV_List_Id}_select_all");'
-                      name="ObjectListViewportEntry_{$OLV_List_Id}_{$key}" value="1">
+                        "ObjectListViewport_Entry_Checkbox_{$OLV_List_Id}_select_all");'>
                   </td> 
                 {/if}                
                 {foreach from=$OLV_Header key=key item=item}
@@ -32,7 +31,7 @@
                       <td class="ObjectListViewport_Entry_Cell" style='width:24px;text-align:center;'>
                         <input class="ObjectListViewport_Entry_Checkbox" type="checkbox"
                           id="ObjectListViewport_Entry_Checkbox_{$OLV_List_Id}_{$key}"  
-                          name="ObjectListViewportEntry_{$OLV_List_Id}_{$key}" value="1">
+                          name="{$OLV_List_Id}OLV_Entry_{$key}" value="1">
                       </td> 
                     {/if}                
                     {foreach from=$item.cols key=key2 item=item2}

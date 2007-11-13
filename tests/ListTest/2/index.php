@@ -1,3 +1,9 @@
+<?php
+
+require_once("../../../include/autoload.inc");
+restore_error_handler();
+session_start();
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -37,7 +43,6 @@
 /* This is good for testing... */
 error_reporting (E_ALL | E_STRICT);
 
-
 function get_smarty()
 {
     echo "Smarty fake in each ./tests/ListTest[1-9]/index.php";
@@ -61,8 +66,6 @@ function normalizePreg($input)
 
 
 /* Initiate autoloader... */
-require_once("../../../include/autoload.inc");
-restore_error_handler();
 try {
 
 	/* Get new test instance of the Configuration */
@@ -70,7 +73,10 @@ try {
 	$cr->load("../../../gosa.conf");
 
 	/* Get a new test instance of ObjectListViewports */
-	$vp= new ObjectListViewport("plugin/sample");
+	if(!isset($_SESSION['vp'])){
+		$_SESSION['vp'] = new ObjectListViewport("plugin/sample");
+	}
+	$vp = $_SESSION['vp'];
 	if(isset($_GET['d']) && preg_match("/f/",$_GET['d'])){
 		$vp->enableFooter(FALSE);
 	}

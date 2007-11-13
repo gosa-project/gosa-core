@@ -2,7 +2,8 @@
 .ObjectListViewport {
     width:100%;
     height:100%;
-    border-collapse:collapse;
+    border: solid 1px rgb(176, 176, 176);;
+	
 }
 
 .ObjectListViewport_Header_Table {
