@@ -30,7 +30,7 @@ window.onresize = updateObjectListViewportSize;
         all = getElementsByStyleClass('ObjectListViewport');
         for (i = 0; i < all.length; ++i){
 
-            list_id = all[i].id.replace(/^.*_/,"_");
+            list_id = all[i].id.replace(/^ObjectListViewport/,"");
 
             /* Set Viewport to min height, to ensure
              *  that resize will work correctly in konqueror

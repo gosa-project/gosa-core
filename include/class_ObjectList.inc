@@ -79,7 +79,7 @@ class ObjectList implements IteratorAggregate {
 '<img src="images/edittrash.png" alt="">';
 
     # Crap filling
-    $this->objects= array(
+    $tmp= array(
 
  array("dn" => "cn=1aherbertskiste,ou=workstations,ou=systems,o=Landeshauptstadt München,c=de",
               "cn" => "1aherbertskiste",
@@ -357,6 +357,15 @@ class ObjectList implements IteratorAggregate {
               "objectClass" => array('gotoWorkstation'))
 
         );
+
+    $tmp2 = array();
+    foreach($tmp as $entry){
+      $id = uniqid();
+      $entry['id']= $id;
+      $tmp2[] = $entry;
+    }
+
+    $this->objects = $tmp2;
   }
 
 

@@ -181,39 +181,31 @@ class ObjectListViewport extends GOsaGuiElement {
 
     #TODO: Make $buffer a proper HTML table output
     $tmp = split("\|",trim($buffer,"|"));  
+    $cols = array();
 
-    /* Define entry template */
-    $tpl = "<td class='ObjectListViewport_Entry_Cell' style='{style_1}'>
-              <div style='{style_2}'>
-                {content}
-              </div>
-            </td>
-            ";
-    /* Template vriables to replace */
-    $attrs = array("/\{style_1\}/","/\{style_2\}/","/\{content\}/");
-
-    /* Append template for each given col */
-    $buffer ="";
     for($i= 0; $i < $this->numberOfCols; $i++){
 
       /* If current entry is the last to appen, then skip adding styles */
       if($i == ($this->numberOfCols-1)){
-        $buffer.= preg_replace( $attrs,
-            array($this->headline[$i]['style'],"width:100%;overflow:hidden;",$tmp[$i]),$tpl);
+        $cols[$i]['style1'] = $this->headline[$i]['style'];
+        $cols[$i]['style2'] = "width:100%;overflow:hidden;";
+        $cols[$i]['value']   = $tmp[$i];
       }else{
-        $buffer.= preg_replace( $attrs,
-            array($this->headline[$i]['style'],"width:100%;overflow:hidden;".$this->headline[$i]['style'],$tmp[$i]),$tpl);
+        $cols[$i]['style1'] = $this->headline[$i]['style'];
+        $cols[$i]['style2'] = "width:100%;overflow:hidden;".$this->headline[$i]['style'];
+        $cols[$i]['value']   = $tmp[$i];
       }
     }
 
     /* Add class depending on given id, to alternate background colors */
     if($this->colorAlternator++ & 1){
-      $a = "class='ObjectListViewport_Entry_Row1'";
+      $data['row']['class'] = "ObjectListViewport_Entry_Row1";
     }else{
-      $a = "class='ObjectListViewport_Entry_Row2'";
+      $data['row']['class'] = "ObjectListViewport_Entry_Row2";
     }
 
-    return "<tr ".$a.">\n".$buffer."</tr>\n";
+    $data['cols'] = $cols;
+    return($data);
   }
 
 
@@ -241,10 +233,9 @@ class ObjectListViewport extends GOsaGuiElement {
     $entries = "";
     $objects= new ObjectListFilterIterator($this->objects->getIterator());
     foreach ($objects as $value){
-      $entries .= $this->renderEntry($value);
+      $entries[] = $this->renderEntry($value);
     }
 
-    return "README ;-)\n";
 
     #Fabian: _POST/_GET Variablen bitte mit $this->createVariable('name');
     #        erstellen.
@@ -255,20 +246,20 @@ class ObjectListViewport extends GOsaGuiElement {
     #        smarty eingebunden, dann kann Sie nach einem _POST oder _GET via
     #        $this->getRequestVariable_cn() wieder abgefragt werden.
 
-    #$smarty = get_smarty();
-    #$smarty->assign("OLV_Entries",array("Doesn't work" => "Does not work."));//$objects);
-    #$smarty->assign("OLV_List_Id",$this->id);
+    $smarty = get_smarty();
+    $smarty->assign("OLV_Entries",$entries);
+    $smarty->assign("OLV_List_Id",$this->id);
 
-    #/* Footer variables */
-    #$smarty->assign("OLV_Footer_Enabled",$this->displayFooterFlag);
-    #$smarty->assign("OLV_Footer_Message",$this->footer);
-    #$smarty->assign("OLV_Num_Cols",$this->numberOfCols);
+    /* Footer variables */
+    $smarty->assign("OLV_Footer_Enabled",$this->displayFooterFlag);
+    $smarty->assign("OLV_Footer_Message",$this->footer);
+    $smarty->assign("OLV_Num_Cols",$this->numberOfCols);
 
-    #/* Assign Headline values */
-    #$smarty->assign("OLV_Header_Enabled",$this->displayHeaderFlag);
-    #$smarty->assign("OLV_Header",$this->headline);
+    /* Assign Headline values */
+    $smarty->assign("OLV_Header_Enabled",$this->displayHeaderFlag);
+    $smarty->assign("OLV_Header",$this->headline);
  
-    #return($smarty->fetch("ObjectListViewport.tpl"));
+    return($smarty->fetch("ObjectListViewport.tpl"));
   }
 
 
