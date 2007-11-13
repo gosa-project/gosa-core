@@ -359,9 +359,8 @@ class ObjectList implements IteratorAggregate {
         );
 
     $tmp2 = array();
-    foreach($tmp as $entry){
-      $id = uniqid();
-      $entry['id']= $id;
+    foreach($tmp as $key => $entry){
+      $entry['id']= $key;
       $tmp2[] = $entry;
     }
 
