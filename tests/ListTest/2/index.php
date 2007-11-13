@@ -34,10 +34,6 @@ session_start();
 </head>
 <body>
 <button onclick='updateObjectListViewportSize();'>Tester</button>
-<a href="?d=hf">No Footer &amp; Header</a> - 
-<a href="?d=f">No Footer</a> - 
-<a href="?d=h">No Header</a> - 
-<a href="?d=">Normal</a> 
 <?php
 
 /* This is good for testing... */
@@ -77,12 +73,6 @@ try {
 		$_SESSION['vp'] = new ObjectListViewport("plugin/sample");
 	}
 	$vp = $_SESSION['vp'];
-	if(isset($_GET['d']) && preg_match("/f/",$_GET['d'])){
-		$vp->enableFooter(FALSE);
-	}
-	if(isset($_GET['d']) && preg_match("/h/",$_GET['d'])){
-		$vp->enableHeader(FALSE);
-	}
 	$content= $vp->render();
 
 	echo preg_replace("/%LIST%/",$content,file_get_contents('tpl'));	

@@ -1,3 +1,8 @@
+<?php
+require_once("../../../include/autoload.inc");
+restore_error_handler();
+session_start();
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -7,10 +12,6 @@
 </head>
 <body>
 <button onclick='updateObjectListViewportSize();'>Tester</button>
-<a href="?d=hf">No Footer &amp; Header</a> - 
-<a href="?d=f">No Footer</a> - 
-<a href="?d=h">No Header</a> - 
-<a href="?d=">Normal</a> 
 <?php
 
 /* This is good for testing... */
@@ -37,23 +38,17 @@ function get_smarty()
 }
 
 
-/* Initiate autoloader... */
-require_once("../../../include/autoload.inc");
-restore_error_handler();
 try {
 
 	/* Get new test instance of the Configuration */
 	$cr= Registry::getInstance("ConfigManager");
 	$cr->load("../../../gosa.conf");
 
-	/* Get a new test instance of ObjectListViewports */
-	$vp= new ObjectListViewport("plugin/sample");
-	if(isset($_GET['d']) && preg_match("/f/",$_GET['d'])){
-		$vp->enableFooter(FALSE);
-	}
-	if(isset($_GET['d']) && preg_match("/h/",$_GET['d'])){
-		$vp->enableHeader(FALSE);
-	}
+    /* Get a new test instance of ObjectListViewports */
+    if(!isset($_SESSION['vp3'])){
+        $_SESSION['vp3'] = new ObjectListViewport("plugin/sample",TRUE);
+    }
+    $vp = $_SESSION['vp3'];
 	$content= $vp->render();
 
 } catch (Exception $e) {
@@ -63,7 +58,7 @@ try {
 }
 
 ?>
-    <table style='height:90%;width:90%;background-color: rgb(170, 170, 170);' cellspacing=1 cellpadding=0>
+    <table style='height:90%;width:90%;' cellpadding=0>
         <tr>
             <td>
                <?php echo $content; ?>
