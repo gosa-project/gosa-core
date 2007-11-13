@@ -96,12 +96,6 @@ class ObjectListViewport extends GOsaGuiElement {
   }
 
 
-  /* FIXME: replace this -> not our task */
-  private function getEntryIcon($entry,$alt = ""){
-    return("<img src='images/".$entry['_icon']."' alt='".$alt."' class='center'>");
-  }
-
-
 	/*! \brief Renders entries from the ObjectList iterator into a string
 	    Gets the entry descriptions from the ObjectList object and renders them.
       \return HTML rendered list entries
@@ -116,12 +110,7 @@ class ObjectListViewport extends GOsaGuiElement {
       if (!isset($entry[$attribute])){
         throw new ObjectListViewportException(sprintf(_("Can't locate attribute '%s' to replace in entry!"), $attribute));
       } else {
-
-        if(preg_match("/_icon/i",$attribute)){
-          $buffer= preg_replace('/\{'.$attribute.'\}/', $this->getEntryIcon($entry),$buffer); 
-        }else{
-          $buffer= preg_replace('/\{'.$attribute.'\}/', $entry[$attribute],$buffer);
-        }
+        $buffer= preg_replace('/\{'.$attribute.'\}/', $entry[$attribute],$buffer);
       }
     }
 

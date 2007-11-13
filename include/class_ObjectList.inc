@@ -361,6 +361,7 @@ class ObjectList implements IteratorAggregate {
     $tmp2 = array();
     foreach($tmp as $key => $entry){
       $entry['id']= $key;
+      $entry['_icon'] = "<img src='images/".$entry['_icon']."' alt=''>";
       $tmp2[] = $entry;
     }
 
