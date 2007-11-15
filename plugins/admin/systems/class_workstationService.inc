@@ -26,13 +26,8 @@ class workservice extends plugin
   var $cn= "";
   var $orig_dn= "";
   var $XMethods= array();
-  var $XDrivers= array("ati", "atimisc", "chips", "cirrus", "cyrix", "fbdev", "fglrx",
-      "i128", "i740", "i810", "imstt", "mga", "neomagic", "newport", "nsc",  "nv", "nvidia",
-      "r128", "radeon", "rendition", "s3", "s3virge", "savage", "siliconmotion",
-      "sis", "tdfx", "tga", "trident", "tseng", "vesa", "vga", "vmware");
-
+  var $XDrivers= array();
   var $XResolutions = array();
-
   var $MouseTypes= array();
   var $MousePorts= array();
   var $hardware_list= array();
@@ -83,6 +78,9 @@ class workservice extends plugin
         print_red(sprintf(_("You have specified an external resolution hook which can't be read, please check the permission of the file '%s'."),$file));
       }
     }
+
+    /* Get list of available xdrivers */
+    $this->XDrivers = $this->getListOfXDrivers();
 
     array_unshift($this->XDrivers, "["._("unknown")."]");
  
@@ -429,6 +427,27 @@ class workservice extends plugin
     $this->handle_post_events("modify");
   }
 
+
+  function getListOfXDrivers()
+  {
+    $drivers = array();
+
+    /* Generate list of xdrivers from from CONFIG_DIR./xdrivers */
+    if (file_exists(CONFIG_DIR.'/xdrivers')){
+      $xdrivers = file (CONFIG_DIR.'/xdrivers');
+      foreach ($xdrivers as $line){
+        if (!preg_match ("/^#/", $line)){
+          $drivers[]= trim($line);
+        }
+      }
+    } else {
+      $drivers = array("ati", "atimisc", "chips", "cirrus", "cyrix", "fbdev", "fglrx",
+          "i128", "i740", "i810", "imstt", "mga", "neomagic", "newport", "nsc",  "nv", "nvidia",
+          "r128", "radeon", "rendition", "s3", "s3virge", "savage", "siliconmotion",
+          "sis", "tdfx", "tga", "trident", "tseng", "vesa", "vga", "vmware");
+    }
+    return($drivers);
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
