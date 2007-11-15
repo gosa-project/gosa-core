@@ -1,6 +1,6 @@
 <?php
 
-require_once("accept-to-gettext.inc");
+require_once(BASE_DIR."/include/accept-to-gettext.inc");
 
 class Utils {
 

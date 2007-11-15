@@ -1,7 +1,7 @@
 <?php
 
 /* Provide Smarty capabilities */
-require("smarty/Smarty.class.php");
+require(BASE_DIR."/include/smarty/Smarty.class.php");
 
 /*! \brief   Exception implementation for ViewPortController
     \author  Cajus Pollmeier <pollmeier@gonicus.de>
