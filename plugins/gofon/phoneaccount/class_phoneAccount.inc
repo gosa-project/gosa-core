@@ -1131,12 +1131,8 @@ class phoneAccount extends plugin
       }
     }
 
-    if((strlen($this->goFonPIN)<=0)){
-      $message[]=(_("Phone PIN must be at least one character long."));
-    }else{
-      if(preg_match("/[^0-9a-z]/i",$this->goFonPIN)){
-        $message[]=(_("The specified phone PIN contains invalid characters, only aphanumeric values are allowed here."));
-      }
+    if(preg_match("/[^0-9a-z]/i",$this->goFonPIN)){
+      $message[]=(_("The specified phone PIN contains invalid characters, only aphanumeric values are allowed here."));
     }
 
     if ($this->initially_was_account != $this->is_account || $this->is_modified){
