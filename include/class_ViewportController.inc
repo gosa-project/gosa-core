@@ -27,10 +27,11 @@ class ViewportControllerException extends Exception {
  */
 class ViewportController {
 
-  private $theme= 'default';
+  private $theme;
   private $smarty;
   private $language= '';
   private $timezone;
+  private $mainTemplate= 'main';
 
   /*! \brief ViewportController constructor
 
@@ -67,6 +68,9 @@ class ViewportController {
       throw new ViewportControllerException(sprintf(_("Directory '%s' specified as compile-directory is not accessible!"), $this->Smarty->compile_dir));
     }
 
+    /* Get more display settings */
+    $this->theme= $config->getValue('theme', 'default');
+    
     /* Check for old files in compile directory */
     $this->cleanSmartyCompileDir();
   }
@@ -107,8 +111,14 @@ class ViewportController {
   }
 
 
+  public function getTemplatePath($name) {
+  	return "horst";
+  }
+  
+  
   public function render() {
-    echo "Render called\n";
+    #Header generator from template
+    echo $this->getTemplatePath('main');
   }
 
 }
