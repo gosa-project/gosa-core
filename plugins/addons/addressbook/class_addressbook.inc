@@ -374,21 +374,23 @@ class addressbook extends plugin
 
 
 						"</a>
+              &nbsp;
 						</td>
 						<td class=\"phonelist\" title=\""._("Dial")." ".$attrs['telephoneNumber'][0]."\">
 						<a style='vertical-align:middle;' href=\"main.php?plug=".validate($_GET['plug'])."&amp;dial=telephoneNumber&amp;start=".validate($_GET['start'])."&amp;target=".base64_encode($attrs['dn'])."\">".$attrs['telephoneNumber'][0]."
 						</a>
+            &nbsp;
 						</td>
 						<td class=\"phonelist\" title=\"".$attrs['facsimileTelephoneNumber'][0]."\">
-						".$attrs['facsimileTelephoneNumber'][0]."
+						".$attrs['facsimileTelephoneNumber'][0]."&nbsp;
 						</td>
 						<td class=\"phonelist\" title=\""._("Dial")." ".$attrs['mobile'][0]."\">
 						<a style='vertical-align:middle;' href=\"main.php?plug=".validate($_GET['plug'])."&amp;dial=mobile&amp;start=".validate($_GET['start'])."&amp;target=".base64_encode($attrs['dn'])."\">".$attrs['mobile'][0]."
-						</a>
+						</a>&nbsp;
 						</td>
 						<td class=\"phonelist\" title=\""._("Dial")." ".$attrs['homePhone'][0]."\">
 						<a style='vertical-align:middle;' href=\"main.php?plug=".validate($_GET['plug'])."&amp;dial=homePhone&amp;start=".validate($_GET['start'])."&amp;target=".base64_encode($attrs['dn'])."\">".$attrs['homePhone'][0]."
-						</a>
+						</a>&nbsp;
 						</td>
 						<td>
 						<a href=\"getvcard.php?dn=".base64_encode($attrs['dn'])."\">
@@ -402,7 +404,7 @@ class addressbook extends plugin
 							"<a href=\"mailto:".htmlentities($attrs['mail'][0])."\">".
 							"<img  align=\"top\" border=0 src=\"images/mailto.png\" alt=\"vcf\" title=\"$dest\"></a>";
 					}
-					$this->telephone_list[$attrs['sn'][0].$attrs['dn']].= "</td>";
+					$this->telephone_list[$attrs['sn'][0].$attrs['dn']].= "&nbsp;</td>";
 				}
 			}
 			error_reporting(E_ALL);
