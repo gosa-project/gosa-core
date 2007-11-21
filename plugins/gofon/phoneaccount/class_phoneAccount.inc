@@ -236,14 +236,12 @@ class phoneAccount extends plugin
      *  so we must detect which phones are currently in use.
      */
     $ldap->cd($this->config->current['BASE']);
-    foreach ($this->hardware_list as $cn => $desc){
-      $ldap->search("(goFonHardware=$cn)", array('cn'));
-      if ($ldap->count() > 0){
-        $ldap->fetch();
-        if ($ldap->getDN() != $this->dn){
-          $this->used_hardware[$cn]= $ldap->getDN();
+    $ldap->search("(goFonHardware=*)",array('cn','dn','goFonHardware'));
+    while($attrs = $ldap->fetch()){
+        $cn = $attrs['goFonHardware'][0];
+        if(isset($this->hardware_list[$cn])){
+          $this->used_hardware[$cn]= $cn;
         }
-      }
     }
     $this->hardware_list["automatic"]= _("automatic");
     ksort($this->hardware_list);

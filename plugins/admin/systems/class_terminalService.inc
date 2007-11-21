@@ -176,14 +176,12 @@ class termservice extends plugin
 
     /* Eventually colorize phones */
     $ldap->cd($this->config->current['BASE']);
-    foreach ($this->hardware_list as $cn => $desc){
-      $ldap->search("(goFonHardware=$cn)", array('cn'));
-      if ($ldap->count() > 0){
-        $ldap->fetch();
-        if ($ldap->getDN() != $this->dn){
-          $this->used_hardware[$cn]= $ldap->getDN();
+    $ldap->search("(goFonHardware=*)",array('cn','dn','goFonHardware'));
+    while($attrs = $ldap->fetch()){
+        $cn = $attrs['goFonHardware'][0];
+        if(isset($this->hardware_list[$cn])){
+          $this->used_hardware[$cn]= $cn;
         }
-      }
     }
 
     $this->hardware_list["automatic"]= _("automatic");
