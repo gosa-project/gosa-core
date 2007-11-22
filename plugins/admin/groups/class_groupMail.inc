@@ -376,6 +376,7 @@ class mailgroup extends plugin
     /* Add ACL? */
     if (isset($_POST["add_acl"])){
       $this->imapacl[""]= "lrsw";
+      $this->indexed_user[] = "";
     }
     foreach ($this->indexed_user as $nr => $user){
       if (isset($_POST["del_$nr"])){
@@ -764,6 +765,7 @@ I: Only insider delivery */
             $this->is_modified= TRUE;
           }
           $this->imapacl[$_POST["user_$nr"]]= $_POST["perm_$nr"];
+          $this->indexed_user[$nr] = $_POST["user_$nr"];
         }
       }
     }
