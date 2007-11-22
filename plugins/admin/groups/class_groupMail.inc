@@ -789,50 +789,73 @@ I: Only insider delivery */
 
     /* Exchange '%member%' pseudo entry */
     $memberacl= $this->imapacl['%members%'];
-
     foreach ($this->members as $user){
       if (!isset($this->imapacl[$user])){
         $this->imapacl[$user]= $memberacl;
       }
     }
- 
-    if(preg_match("/olab/i",$this->mmethod)){
 
-      /* Save acl's */
+    /* Prepare kolab attributes to be written  */
+    if(preg_match("/olab/i",$this->mmethod)){
       $this->attrs['acl']= array();
-      foreach ($this->imapacl as $user => $acl){
-        if ($user == "" || preg_match("/%members%/",$user)){
-          continue;
-        }
-        $ldap->search("(&(objectClass=person)(|(uid=".$user.")(mail=".$user.")))",array("mail"));
-        $mail = $ldap->fetch();
-        if(isset($mail['mail'][0])){
-          $sacl = $mail['mail'][0]." ".$acl;
-        }else{
-          $sacl= "$user $acl";
-        }
-        if(!in_array($sacl,$this->attrs['acl'])){
-          $this->attrs['acl'][]= $sacl;
-        }
-      }
-   
       if(!empty($this->kolabFolderType_Type)){ 
         $this->attrs['kolabFolderType'] = $this->kolabFolderType_Type.".".$this->kolabFolderType_SubType;
       }else{
         $this->attrs['kolabFolderType'] = array();
       }
     }else{
-
-      /* Save acl's */
-      $this->attrs['acl']= array();
-      foreach ($this->imapacl as $user => $acl){
-        if ($user == "" || preg_match("/%members%/",$user)){
-          continue;
-        }
-        $this->attrs['acl'][]= "$user $acl";
-      }
+      $this->attrs['acl']= array();;
+      unset($this->attrs['acl']);
     }
 
+    /* Get naming attribute for mail accounts */  
+    $tmp = new $this->method($this->config);
+    $uattrib = $tmp->uattrib;
+
+    /* Create ACL array 
+     *  In case of kolab also create attrs['acl'] to save acls in ldap.
+     */
+    foreach ($this->imapacl as $user => $acl){
+
+      /* Skip placeholder */
+      if ($user == "" || preg_match("/%members%/",$user)){
+        continue;
+      }
+
+      /* Check if your is a real GOsa user  
+       * If user is a real GOsa user but do not have an email address - SKIP adding acls
+       * If user is a real GOsa user with an emal address - add acls  
+       */
+      $ldap->search("(&(objectClass=person)(|(uid=".$user.")(mail=".$user.")))",array("mail","uid"));
+      if($ldap->count()){
+        $attrs = $ldap->fetch();
+
+        /* Has the user a valid mail account? */
+        if(isset($attrs['mail'][0])){
+
+          $name = $attrs[$uattrib][0];
+
+          /* In case of kolab methods add acl attribute too */
+          if(preg_match("/olab/i",$this->mmethod)){
+            $this->attrs['acl'][]= $name." ".$acl;
+          }
+          $this->imapacl[$name] = $acl;
+        }else{
+
+          /* User has no mail extension */
+          unset($this->imapacl[$user]);
+        }
+      }else{
+        /* Seems to be a manually added acl */
+
+        /* In case of kolab methods add acl attribute too */
+        if(preg_match("/olab/i",$this->mmethod)){
+          $this->attrs['acl'][]= $user." ".$acl;
+        }
+        $this->imapacl[$user] = $acl;
+      }
+    }
+  
     if ((!$this->is_template)&&(!empty($this->gosaMailServer))){
       $method= new $this->method($this->config);
       $method->fixAttributesOnStore($this);
