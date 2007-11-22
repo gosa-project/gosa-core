@@ -778,40 +778,6 @@ I: Only insider delivery */
     $this->attrs['gosaMailForwardingAddress'] = $this->gosaMailForwardingAddress;
     $this->attrs['gosaSharedFolderTarget']    = "share+".$this->uid;
 
-    if(preg_match("/olab/i",$this->mmethod)){
-      /* Save acl's */
-      $this->attrs['acl']= array();
-      foreach ($this->imapacl as $user => $acl){
-        if ($user == ""){
-          continue;
-        }
-        $ldap->search("(&(objectClass=person)(|(uid=".$user.")(mail=".$user.")))",array("mail"));
-        $mail = $ldap->fetch();
-        if($mail){
-          if(isset($mail['mail'][0])){
-            $this->attrs['acl'][]= $mail['mail'][0]." $acl";
-          }
-        }else{
-          $this->attrs['acl'][]= "$user $acl";
-        }
-      }
-   
-      if(!empty($this->kolabFolderType_Type)){ 
-        $this->attrs['kolabFolderType'] = $this->kolabFolderType_Type.".".$this->kolabFolderType_SubType;
-      }else{
-        $this->attrs['kolabFolderType'] = array();
-      }
-    }else{
-      /* Save acl's */
-      $this->attrs['acl']= array();
-      foreach ($this->imapacl as $user => $acl){
-        if ($user == ""){
-          continue;
-        }
-        $this->attrs['acl'][]= "$user $acl";
-      }
-    }
-
     /* Only do IMAP actions if we are not a template */
     if(preg_match("/olab/i",$this->mmethod)){
       if (empty($this->gosaMailServer)||is_array($this->gosaMailServer)){
@@ -821,42 +787,50 @@ I: Only insider delivery */
       }
     }  
 
-
     /* Exchange '%member%' pseudo entry */
     $memberacl= $this->imapacl['%members%'];
 
     foreach ($this->members as $user){
-      if(preg_match("/olab/i",$this->mmethod)){
-        $ldap->cd($this->config->current['BASE']);
-        $ldap->search("(&(objectClass=person)(|(mail=".$user.")(uid=".$user.")))",array("mail"));
-        $at = $ldap->fetch();
-        if(isset($at['mail'][0])){
-          $user = $at['mail'][0];
-        }
-      }
       if (!isset($this->imapacl[$user])){
         $this->imapacl[$user]= $memberacl;
       }
     }
-    $this->attrs['acl'] = array();
-    
-    
-    foreach($this->imapacl as $user => $acl){
+ 
+    if(preg_match("/olab/i",$this->mmethod)){
 
-      /* Remove empty user entry, to avoid entry like this im imap 
-       *   "" lrs
-       */
-      if(empty($user)){
-        unset($this->imapacl[$user]);
+      /* Save acl's */
+      $this->attrs['acl']= array();
+      foreach ($this->imapacl as $user => $acl){
+        if ($user == "" || preg_match("/%members%/",$user)){
+          continue;
+        }
+        $ldap->search("(&(objectClass=person)(|(uid=".$user.")(mail=".$user.")))",array("mail"));
+        $mail = $ldap->fetch();
+        if(isset($mail['mail'][0])){
+          $sacl = $mail['mail'][0]." ".$acl;
+        }else{
+          $sacl= "$user $acl";
+        }
+        if(!in_array($sacl,$this->attrs['acl'])){
+          $this->attrs['acl'][]= $sacl;
+        }
       }
    
-      /* Skip invalid values */
-      if(preg_match("/%members%/",$user) || empty($user)){
-        continue;
+      if(!empty($this->kolabFolderType_Type)){ 
+        $this->attrs['kolabFolderType'] = $this->kolabFolderType_Type.".".$this->kolabFolderType_SubType;
+      }else{
+        $this->attrs['kolabFolderType'] = array();
       }
+    }else{
 
-      /* Append ldap acl entries */
-      $this->attrs['acl'][] = $user." ".$acl;
+      /* Save acl's */
+      $this->attrs['acl']= array();
+      foreach ($this->imapacl as $user => $acl){
+        if ($user == "" || preg_match("/%members%/",$user)){
+          continue;
+        }
+        $this->attrs['acl'][]= "$user $acl";
+      }
     }
 
     if ((!$this->is_template)&&(!empty($this->gosaMailServer))){
@@ -1079,6 +1053,17 @@ I: Only insider delivery */
     /* Reset alternate mail addresses */
     $this->gosaMailAlternateAddress = array();
   }
+
+  
+  /* Remove given ACL for given member (uid,mail) ..
+   */
+  function removeUserAcl($index )
+  {
+    if(isset($this->imapacl[$index])){
+      unset($this->imapacl[$index]);
+    }
+  }
+
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
