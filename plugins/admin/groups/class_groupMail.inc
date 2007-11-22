@@ -272,7 +272,8 @@ class mailgroup extends plugin
       }
       /* Append an empty entry, for special acl handling */
       if(count($this->imapacl)==2){
-        $this->imapacl[''] ="";
+        $this->imapacl[''] ="lrsw";
+        $this->indexed_user[] = ''; 
       }
   
     }else{ // Not kolab 
@@ -366,7 +367,7 @@ class mailgroup extends plugin
 
     /* Add ACL? */
     if (isset($_POST["add_acl"])){
-      $this->imapacl[""]= "l";
+      $this->imapacl[""]= "lrsw";
     }
     foreach ($this->indexed_user as $nr => $user){
       if (isset($_POST["del_$nr"])){
@@ -576,7 +577,7 @@ class mailgroup extends plugin
         $tmp.= "</select>&nbsp;";
         if ($nr == $count - 1){
         }
-        if ($count > 3){
+        if ($count > 2){
           $tmp.= "<input type=submit value=\""._("Remove")."\" ".
             "name=\"del_$nr\" $perm></td></tr>";
         }
@@ -841,6 +842,7 @@ I: Only insider delivery */
           /* In case of kolab methods add acl attribute too */
           if(preg_match("/olab/i",$this->mmethod)){
             $this->attrs['acl'][]= $name." ".$acl;
+            unset($this->imapacl[$user]);
           }
           $this->imapacl[$name] = $acl;
         }else{
@@ -858,7 +860,7 @@ I: Only insider delivery */
         $this->imapacl[$user] = $acl;
       }
     }
-  
+ 
     if ((!$this->is_template)&&(!empty($this->gosaMailServer))){
       $method= new $this->method($this->config);
       $method->fixAttributesOnStore($this);
