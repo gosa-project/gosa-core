@@ -19,8 +19,9 @@ class mailgroup extends plugin
 
   var $gosaVacationMessage        = "";       // Vocation message 
 
-  var $imapacl                    = array('anyone'    => 'p',     // Set acls for everyone
+  var $imapacl                    = array(
       '%members%' => 'lrspw',  // %members% are all group-members
+      'anyone'    => 'p',     // Set acls for everyone
       ''          => 'p');    // Every user added gets this right
 
 
@@ -289,7 +290,7 @@ class mailgroup extends plugin
     /**
      * ENDE: Detect group member with same acl and replace them with %members%
      **/
-
+    $this->indexed_user = array("%members%","anyone");
 
     /* Append an empty entry, for special acl handling */
     if(count($this->imapacl)==2){
@@ -769,9 +770,7 @@ I: Only insider delivery */
         }
       }
     }
-
   }
-
 
 
   /* Save data to LDAP, depending on is_account we save or delete */
