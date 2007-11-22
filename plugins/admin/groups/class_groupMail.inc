@@ -365,10 +365,10 @@ class mailgroup extends plugin
     }
 
     /* Add ACL? */
+    if (isset($_POST["add_acl"])){
+      $this->imapacl[""]= "l";
+    }
     foreach ($this->indexed_user as $nr => $user){
-      if (isset($_POST["add_$nr"])){
-        $this->imapacl[""]= "l";
-      }
       if (isset($_POST["del_$nr"])){
         unset ($this->imapacl[$user]);
       }
@@ -575,8 +575,6 @@ class mailgroup extends plugin
         }
         $tmp.= "</select>&nbsp;";
         if ($nr == $count - 1){
-          $tmp.= "<input type=submit value=\""._("Add")."\" ".
-            "name=\"add_$nr\" $perm>";
         }
         if ($count > 3){
           $tmp.= "<input type=submit value=\""._("Remove")."\" ".
@@ -586,6 +584,7 @@ class mailgroup extends plugin
       $this->indexed_user[$nr]= $user;
       $this->indexed_acl[$nr++]= $acl;
     }
+    $tmp.= "<tr><td></td><td></td><td><input type=submit value='"._("Add")."' name='add_acl' $perm>";
     $smarty->assign("plusattributes", $tmp);
 
     /* Show main page */
@@ -817,8 +816,12 @@ I: Only insider delivery */
      */
     foreach ($this->imapacl as $user => $acl){
 
+      if (empty($user) || $user == ""){
+        unset($this->imapacl[$user]);
+      }
+  
       /* Skip placeholder */
-      if ($user == "" || preg_match("/%members%/",$user)){
+      if (empty($user) || $user == "" || preg_match("/%members%/",$user)){
         continue;
       }
 
