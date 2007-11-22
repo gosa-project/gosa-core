@@ -761,6 +761,9 @@ class mailAccount extends plugin
       }
     }
 
+    /* Update shared folder membership, ACL may need to be updated */
+    $this->updateSharedFolder(); 
+
     /* Optionally execute a command after we're done */
     $this->handle_post_events("remove", array('uid'=> $this->uid));
   }
@@ -924,6 +927,7 @@ class mailAccount extends plugin
       $this->handle_post_events("add", array('uid'=>$this->uid));
     }
 
+    $this->updateSharedFolder();
   }
 
 
@@ -1151,6 +1155,28 @@ class mailAccount extends plugin
         }
       }
     }
+  }
+
+  /* Upated shared folder ACLs 
+   */
+  function updateSharedFolder()
+  {
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(&(objectClass=posixGroup)(objectClass=gosaMailAccount)(memberUid=".$this->uid."))",array('dn','cn'));
+    if(class_exists("grouptabs")){
+      while($attrs = $ldap->fetch()){
+        $tmp = new grouptabs($this->config, $this->config->data['TABS']['GROUPTABS'], $attrs['dn']);
+        if(isset($tmp->by_object['mailgroup'])){
+          $tmp->by_object['mailgroup']->members= $tmp->by_object['group']->memberUid;
+          if(!$this->is_account){
+            $tmp->by_object['mailgroup']->removeUserAcl($this->uid);
+            $tmp->by_object['mailgroup']->removeUserAcl($this->mail);
+          }
+          $tmp->by_object['mailgroup']->save();
+        }
+      }
+    } 
   }
 }
 
