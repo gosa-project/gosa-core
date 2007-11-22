@@ -236,57 +236,65 @@ class mailgroup extends plugin
           }
         }
       }
-
-      /* In this section we dectect which acl is tho most used 
-         This will be used as %members% acl  
-       */
-      $tmp2 = array(); 
-      foreach($tmp as $acl => $user){
-        $tmp2[count($tmp[$acl])]=$acl;
-      }
-      /* Most used at last 
-       */
-      ksort($tmp2);      
-  
-      /* Assign last (most used acl) to %members% acl 
-       */
-      $str = array_pop($tmp2);
-      if(!empty($str)) {
-        $this->imapacl['%members%']=$str;
-      }
-
-      /* Open ldap connection 
-       */
-      $ldap = $this->config->get_ldap_link();
-      $ldap->cd($this->config->current['BASE']);
-
-      /* Remove those users, that use %members% acl && are member of this group. */
-      foreach($this->imapacl as $mail => $permission){
-        $ldap->search("(&(objectClass=person)(mail=".$mail."))",array("uid"));
-        $atr = $ldap->fetch();
-        if((isset($this->attrs['memberUid'])) && (is_array($this->attrs['memberUid']))){
-          if((isset($atr['uid'][0]))&&(in_array($atr['uid'][0],$this->attrs['memberUid']))&&($permission == $this->imapacl['%members%'])){
-            unset($this->imapacl[$mail]);
-          }
+    }else{
+      foreach($this->imapacl as $user => $permission){
+        if ($user != "anyone" && $user != "%members%"){
+          $tmp[$permission][] = $user;
+        }
+        if ($user != "anyone" && $user != "%members%"){
+          unset($this->imapacl['']);
         }
       }
-      /* Append an empty entry, for special acl handling */
-      if(count($this->imapacl)==2){
-        $this->imapacl[''] ="lrsw";
-        $this->indexed_user[] = ''; 
-      }
-  
-    }else{ // Not kolab 
-      /* Load permissions */ 
-      if (isset($this->attrs['acl'])){
-        for ($i= 0; $i<$this->attrs['acl']['count']; $i++){
-          list($user, $permission)= split(' ', $this->attrs['acl'][$i]);
-          $this->imapacl[$user]= $permission;
-          if ($user != "anyone" && $user != "%members%"){
-            unset($this->imapacl['']);
-          }
+    }
+
+
+    /**
+     * Detect group member with same acl and replace them with %members%
+     **/
+
+    /* In this section we dectect which acl is tho most used 
+       This will be used as %members% acl  
+     */
+    $tmp2 = array(); 
+    foreach($tmp as $acl => $user){
+      $tmp2[count($tmp[$acl])]=$acl;
+    }
+    /* Most used at last 
+     */
+    ksort($tmp2);      
+
+    /* Assign last (most used acl) to %members% acl 
+     */
+    $str = array_pop($tmp2);
+    if(!empty($str)) {
+      $this->imapacl['%members%']=$str;
+    }
+
+    /* Open ldap connection 
+     */
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+
+    /* Remove those users, that use %members% acl && are member of this group. */
+    foreach($this->imapacl as $mail => $permission){
+      $ldap->search("(&(objectClass=person)(|(mail=".$mail.")(uid=".$mail.")))",array("uid"));
+      $atr = $ldap->fetch();
+      if((isset($this->attrs['memberUid'])) && (is_array($this->attrs['memberUid']))){
+        if((isset($atr['uid'][0]))&&(in_array($atr['uid'][0],$this->attrs['memberUid']))&&($permission == $this->imapacl['%members%'])){
+          unset($this->imapacl[$mail]);
         }
       }
+    }
+
+    /**
+     * ENDE: Detect group member with same acl and replace them with %members%
+     **/
+
+
+    /* Append an empty entry, for special acl handling */
+    if(count($this->imapacl)==2){
+      $this->imapacl[''] ="lrsw";
+      $this->indexed_user[] = ''; 
     }
 
     /* Load Mailserver  
