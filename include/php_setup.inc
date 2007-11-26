@@ -101,8 +101,11 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
       $error_collector= "
         <table summary=\"\" width=\"100%\" style='background-color:#E0E0E0;border-bottom:1px solid black;z-index:150;'>
           <tr>
-            <td>
-              <img alt=\"\" align=\"middle\" src='".get_template_path('images/warning.png')."'>&nbsp;
+            <td>";
+      if (function_exists("get_template_path")){
+              $error_collector.= "<img alt=\"\" align=\"middle\" src='".get_template_path('images/warning.png')."'>&nbsp;";
+      }
+      $error_collector.= "
               <font style='font-size:14px;font-weight:bold'>".
                 _("Generating this page caused the PHP interpreter to raise some errors!")."
               </font>
