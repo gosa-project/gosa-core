@@ -747,6 +747,7 @@ class LDAP{
           /* Assemble_entry */
           if ($tag != ""){
             $na['objectClass']= array($ocname, "gosaAdministrativeUnitTag");
+            $na["gosaUnitTag"]= $tag;
           } else {
             $na['objectClass']= array($ocname);
           }
