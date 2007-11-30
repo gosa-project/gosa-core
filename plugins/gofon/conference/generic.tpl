@@ -50,6 +50,15 @@
                 </select>
 	</td>
 	</tr>
+	 <tr>
+	   <td>{t}Language{/t}
+	   </td>
+	   <td>
+		 <select name="language" title="{t}Select language{/t}">
+		   {html_options options=$languages selected=$language}
+		 </select>
+	   </td>
+	 </tr>
 	</table>
 
 </td>

@@ -60,6 +60,9 @@ class conference extends plugin
       "goFonConferenceOption_M","goFonConferenceOption_s","goFonConferenceOption_i","goFonConferenceOption_c","goFonHomeServer",
       "goFonConferenceOption_D","goFonConferenceOptionFormat","goFonConferenceOptionLifetime","telephoneNumber","goFonConferenceOwner");
 
+  var $language  = "de";
+  var $languages = array();
+
   var $objectclasses= array("top", "goFonConference");
 
   function conference ($config, $dn, $plugin= NULL)
@@ -69,7 +72,9 @@ class conference extends plugin
     $this->ui			    = get_userinfo();
     $this->orig_dn		= $dn;
 
-    
+    $this->languages= get_languages(TRUE,TRUE);
+
+
     /* Check server configurations
      * Load all server configuration in $this->goFonHomeServers if available
      *  and use first server as default if necessary.
@@ -139,6 +144,10 @@ class conference extends plugin
       }
 
       $this->goFonConferenceOptionLifetime  = $tmp1[1];
+      if(isset($tmp1[2]) && isset($this->languages[$tmp1[2]])){
+        $this->language = $tmp1[2];
+      }
+  
       $this->old_tele_number                = $this->telephoneNumber;
     }
     $this->old_dn = $this->dn;
@@ -187,6 +196,8 @@ class conference extends plugin
         $tmp[$dn]  = $val['SERVER'];
       }
     }
+    $smarty->assign("language",$this->language);
+    $smarty->assign("languages",$this->languages);
     $smarty->assign("goFonHomeServers",$tmp);
     $smarty->assign("goFonConferenceOptions",		    array("D"=>"Conference ","d"=>"Conference without PIN"));
     $smarty->assign("goFonConferenceOptionFormats",	array("WAV"=>"Wave","GSM"=>"GSM","WAV49"=>"Wave49"));
@@ -246,6 +257,12 @@ class conference extends plugin
   {
     plugin::save_object();
     if(isset($_POST['cn'])){
+
+      /* Get selected language */
+      if(isset($_POST['language']) && isset($this->languages[get_post('language')])){
+        $this->language = get_post('language');
+      }
+
       foreach(array("goFonConferenceOption_P","goFonConferenceOption_r","goFonConferenceOption_M","goFonConferenceOption_s",
             "goFonConferenceOption_i","goFonConferenceOption_c","goFonConferenceOption_D","goFonPIN") as $attrs){
         if(isset($_POST[$attrs])){
@@ -429,7 +446,7 @@ class conference extends plugin
       $EXT[$i]['context'] = $context;
       $EXT[$i]['priority']= $i;
       $EXT[$i]['app']     ="SetLanguage";
-      $EXT[$i]['appdata'] ="de";
+      $EXT[$i]['appdata'] =$this->language;
       $i++;      
 
       if($this->goFonConferenceOption_r == "r"){
@@ -603,6 +620,7 @@ class conference extends plugin
     }
 
     $this->attrs['goFonConferenceOption'].="|".$this->goFonConferenceOptionLifetime;
+    $this->attrs['goFonConferenceOption'].="|".$this->language;
     unset($this->attrs['goFonConferenceOptionLifetime']);
 
     /* Write back to ldap */
