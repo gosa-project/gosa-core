@@ -1,3 +1,11 @@
+gosa (2.5.14-1) unstable; urgency=low
+
+  * New upstream release
+  * Added dutch debconf translation (Closes #449415)
+  * Removed set of dependencies for lenny/sid (Closes #452581)
+
+ -- Cajus Pollmeier <cajus@debian.org>  Mon,  3 Dec 2007 10:26:02 +0100
+
 gosa (2.5.13-1) unstable; urgency=low
 
   * New upstream release

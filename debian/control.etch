@@ -7,8 +7,8 @@ Standards-Version: 3.7.2.2
 
 Package: gosa
 Architecture: all
-Depends: php5, apache2, exim4 | mail-transport-agent, php5-gd, php5-imap, php5-ldap, php5-mhash, php5-mysql, php5-imagick | imagemagick (>= 5.4.4.5-1) | graphicsmagick-im-compat, fping, libcrypt-smbhash-perl, smarty, php5-recode, wwwconfig-common, smarty-gettext
-Suggests: cyrus22-imapd, postfix-ldap, etherwake, slapd, gosa-schema
+Depends: php5 | php4 (>= 4:4.3.10-16), apache | apache-ssl | apache2-mpm-worker | apache2-mpm-threadpool | apache2-mpm-prefork | apache2-mpm-perchild, exim4 | mail-transport-agent, php5-gd | php4-gd, php4-imap | php5-imap, php4-ldap | php5-ldap, php4-mhash | php5-mhash, php4-mysql | php5-mysql, php4-imagick | php5-imagick | imagemagick (>= 5.4.4.5-1) | graphicsmagick-im-compat, fping, libcrypt-smbhash-perl, smarty, php4-recode | php5-recode, wwwconfig-common, smarty-gettext
+Suggests: cyrus21-imapd (>= 2.1.11), postfix-ldap, php4-kadm5, etherwake, slapd, gosa-schema
 Description: Web Based LDAP Administration Program
  Provided is access to posix, shadow, samba, proxy, fax, pureftp and
  kerberos accounts. It is able to manage the postfix/cyrus server

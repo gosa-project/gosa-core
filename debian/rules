@@ -4,6 +4,7 @@
 # Some lines taken from debmake, by Cristoph Lameter.
 
 SARGE_PACKAGE=`cat debian/changelog  | head -n1 | grep sarge`
+ETCH_PACKAGE=`cat debian/changelog  | head -n1 | grep etch`
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
@@ -133,7 +134,11 @@ binary-indep: install
 	chmod 644 debian/gosa/DEBIAN/conffiles
 
 	-if [ -z "${SARGE_PACKAGE}" ]; then \
-		dh_gencontrol; \
+		-if [ -z "${ETCH_PACKAGE}" ]; then \
+			dh_gencontrol; \
+		else \
+			dh_gencontrol -- -cdebian/control.etch; \
+		fi
 	else \
 		dh_gencontrol -- -cdebian/control.sarge; \
 	fi
