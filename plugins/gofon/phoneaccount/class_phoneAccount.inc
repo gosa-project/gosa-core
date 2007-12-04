@@ -467,7 +467,7 @@ class phoneAccount extends plugin
        **********************/
 
       /* Check if there is an old entry 
-       * If there is en old entry, get callerid and remove voicemail and extensions too 
+       * If there is an old entry, get callerid and remove voicemail and extensions 
        */
       if($old_connection){
         $query  = "SELECT id,name,callerid FROM ".$a_Remove['SIP_TABLE']." WHERE name='".$this->uid."';";
@@ -486,7 +486,6 @@ class phoneAccount extends plugin
 
           foreach($query_a as $qry){
             if(!mysql_query($qry,$old_connection)){
-              echo $qry;
               echo mysql_error($old_connection);
             } 
           }
@@ -667,6 +666,9 @@ class phoneAccount extends plugin
       /* Remove old entries */
       $query = array();
       $query[]= "DELETE FROM ".$a_New['EXT_TABLE']." WHERE exten=\"".$this->uid."\";";
+      foreach($oldnums as $s_telenums){
+        $query[]= "DELETE FROM ".$a_New['EXT_TABLE']." WHERE exten=\"".$s_telenums."\";";
+      }
       foreach($newnums as $s_telenums){
         $query[]= "DELETE FROM ".$a_New['EXT_TABLE']." WHERE exten=\"".$s_telenums."\";";
       }
