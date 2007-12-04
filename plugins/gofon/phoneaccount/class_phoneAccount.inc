@@ -257,8 +257,12 @@ class phoneAccount extends plugin
       $r_con =  @mysql_pconnect($cur_cfg['SERVER'],$cur_cfg['LOGIN'],$cur_cfg['PASSWORD']);
       if($r_con){
         $r_db  =  @mysql_select_db($cur_cfg['DB'],$r_con);
-        $vp = mysql_fetch_row(mysql_query("SELECT ".$cur_cfg['VOICE_TABLE'].".password FROM  ".$cur_cfg['VOICE_TABLE'].", ".$cur_cfg['SIP_TABLE']."  WHERE customer_id = sip_users.mailbox AND name='".$this->uid."'"));
+  
+        $query_tmp = "SELECT ".$cur_cfg['VOICE_TABLE'].".password FROM  ".$cur_cfg['VOICE_TABLE'].", ".
+                     $cur_cfg['SIP_TABLE']."  WHERE customer_id = sip_users.mailbox AND name='".$this->uid."'";
 
+        $vp = mysql_fetch_row(mysql_query($query_tmp));
+        @DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__,$query_tmp, "Database query");
         if((isset($vp[0]))&&(!empty($vp[0]))){
           $this->goFonPINVoice = $vp[0];
         }
@@ -472,6 +476,7 @@ class phoneAccount extends plugin
       if($old_connection){
         $query  = "SELECT id,name,callerid FROM ".$a_Remove['SIP_TABLE']." WHERE name='".$this->uid."';";
         $rid    = mysql_query($query,$old_connection);
+        @DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__,$query, "Database query");
 
         /* Old entry found, remove it */
         $query_a = array();
@@ -485,6 +490,7 @@ class phoneAccount extends plugin
           }
 
           foreach($query_a as $qry){
+	          @DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__,$qry, "Database query");
             if(!mysql_query($qry,$old_connection)){
               echo mysql_error($old_connection);
             } 
@@ -504,7 +510,9 @@ class phoneAccount extends plugin
 
       /* Check if there is already an entry in sip_users for this uid */
       $SQL_query_array = array();
-      $rid = mysql_query("SELECT * FROM ".$a_New['SIP_TABLE']." WHERE name='".$this->uid."';\n",$new_connection);
+      $query = "SELECT * FROM ".$a_New['SIP_TABLE']." WHERE name='".$this->uid."';\n"; 
+      $rid = mysql_query($query,$new_connection);
+      @DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__,$query, "Database query");
       if(mysql_affected_rows($new_connection)){
 
         /********************** 
@@ -611,7 +619,9 @@ class phoneAccount extends plugin
       }
 
       /* Check if there is already an entry in sip_users for this uid */
-      $rid = mysql_query("SELECT * FROM ".$a_New['VOICE_TABLE']." WHERE customer_id='".$customer_id."';\n",$new_connection);
+      $query_tmp = "SELECT * FROM ".$a_New['VOICE_TABLE']." WHERE customer_id='".$customer_id."';\n";
+      $rid = mysql_query($query_tmp,$new_connection);
+      @DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__,$query_tmp, "Database query");
       if(mysql_affected_rows($new_connection)){
 
         /********************** 
@@ -673,6 +683,7 @@ class phoneAccount extends plugin
         $query[]= "DELETE FROM ".$a_New['EXT_TABLE']." WHERE exten=\"".$s_telenums."\";";
       }
       foreach($query as $qry){
+        @DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__,$qry, "Database query");
         if(!mysql_query($qry,$new_connection)){
           echo mysql_error($new_connection);
         } 
@@ -759,6 +770,7 @@ class phoneAccount extends plugin
       // Perform queries ...
       if($this->goFonHardware != "automatic"){
         foreach($SQL_query_array as $query){
+          @DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__,$query, "Database query");
           if(!@mysql_query($query,$new_connection)){
             print_red(_("Error while performing query:")." ".mysql_error());
             return false;
@@ -1307,6 +1319,7 @@ class phoneAccount extends plugin
       $SQL[] = "DELETE FROM ".$a_SETUP['SIP_TABLE']." WHERE name='".$this->uid."';\n";
 
       foreach($SQL as $query){
+        @DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__,$query, "Database query");
         if(!@mysql_query($query,$r_con)){
           print_red(_("Stop".mysql_error()));
           return false;

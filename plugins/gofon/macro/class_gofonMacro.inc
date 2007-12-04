@@ -217,6 +217,7 @@ class macro extends plugin
         $r_current  =  @mysql_pconnect($Server['SERVER'],$Server['LOGIN'],$Server['PASSWORD']);
         $db_current =  @mysql_select_db($Server['DB'],$r_current);
         $res = @mysql_query($query,$r_current);
+        @DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__,$query, "Database query");
         if(!$res){
           gosa_log(@mysql_error($r_current));
           return(sprintf(_("Removing macro from '%s' failed. Check GOsa log for mysql error."),$Server['SERVER']));
@@ -325,6 +326,7 @@ class macro extends plugin
         $db     = @mysql_select_db($cfg['DB'],$r_con);
         $query  = preg_replace("/%TABLENAME%/",$cfg['EXT_TABLE'],$sql);
         $res    = @mysql_query($query,$r_con);
+        @DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__,$query, "Database query");
         if(!$res){
           gosa_log(@mysql_error($r_con));
           return(sprintf(_("Insert of new macro failed for server '%s'."),$cfg['SERVER']));
