@@ -2,6 +2,8 @@ GOsa2 changelog
 ===============
 
 * gosa 2.5.14
+  - Phone conference language is now selectable.
+  - Old phone numbers will be removed correctly from asterisk extensions table.
   - Fixed saving of A/B networks reverse zone entries
   - Fixed problem with non loaded class_dhcpPlugin in some cases.
   - Added fglrx driver to driver list
