@@ -61,9 +61,8 @@
 		</td>
 		<td style="vertical-align:top">
 
-			{if $kiosk_enabled}
-
 			<table summary="{t}Kiosk profile settings{/t}">
+			{if $kiosk_enabled}
 				<tr>
 					<td>
 						<label for="gotoKioskProfile">{t}Kiosk profile{/t}</label>
@@ -75,6 +74,17 @@
 						<input type="submit" name="KioskManagementDialog" value="{t}Manage{/t}" {$gotoKioskProfileACL}>
 					</td>
 				</tr>
+			{else}
+				<tr>
+					<td>
+						<label for="dummy1">{t}Kiosk profile{/t}</label>
+					</td>
+					<td>
+						<select name="dummy1" disabled id="dummy1"><option disabled>&nbsp;</option></select>
+						<input type="button" disabled name="dummy2" value="{t}Manage{/t}">
+					</td>
+				</tr>
+			{/if}
 				<tr>
 					<td colspan=2>
 						<br>
@@ -97,36 +107,6 @@
 					</td>
 				</tr>
 			</table>	
-			{else}
-			<table summary="{t}Kiosk profile settings{/t}">
-				<tr>
-					<td>
-						<label for="dummy1">{t}Kiosk profile{/t}</label>
-					</td>
-					<td>
-						<select name="dummy1" disabled id="dummy1"><option disabled>&nbsp;</option></select>
-						<input type="button" disabled name="dummy2" value="{t}Manage{/t}">
-					</td>
-				</tr>
-				<tr>
-					<td colspan=2>
-						<br>
-						<input type="checkbox" disabled name="dummy3" id="dummy3"> 
-						<label for="dummy3">{t}Resolution changeable during session{/t}</label>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="dummy4">{t}Resolution{/t}</label>
-					</td>
-					<td>
-						<select name="dummy4" id="dummy4" disabled>
-                            <option disabled>&nbsp;</option>
-                    	</select>
-					</td>
-				</tr>
-			</table>	
-			{/if}
    </td>
   </tr>
 </table>
