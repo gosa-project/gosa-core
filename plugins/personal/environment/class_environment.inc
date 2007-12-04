@@ -647,12 +647,20 @@ class environment extends plugin
         $hide = true;    
       }
 
+      /* Skip apssword only entries */
+      if( empty($this->gotoShares[$key]['server']) && 
+          empty($this->gotoShares[$key]['name']) &&
+          empty($this->gotoShares[$key]['mountPoint']) &&
+          empty($this->gotoShares[$key]['Username'])){
+        continue;
+      } 
+
       /* Check if entry starts with an ! */
       if(preg_match("/^!/",$this->gotoShares[$key]['server'])){
 
         /* If we are currently editing groups environment, skip those ! entries */ 
         if($this->is_group) continue;
-    
+   
         /* Create pwd reset images */
         if($this->gotoShares[$key]['PwdHash'] != "" && !$hide){
           $img.= "<input type='image' name='gotoShareResetPwd_".base64_encode($key)." 'src='images/list_reset_password.png' alt='"._("Reset password hash")."' 
