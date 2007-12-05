@@ -97,11 +97,14 @@ function al2gt($gettextlangs, $mime)
   /* default to "everything is acceptable", as RFC2616 specifies */
   $acceptLang=(($_SERVER["HTTP_ACCEPT_LANGUAGE"] == '') ? '*' :
     $_SERVER["HTTP_ACCEPT_LANGUAGE"]);
-  $acceptChar=(($_SERVER["HTTP_ACCEPT_CHARSET"] == '') ? '*' :
+  /* Commented out due to problems with IE7, defaulting to the one below... */
+  #$acceptChar=(($_SERVER["HTTP_ACCEPT_CHARSET"] == '') ? '*' :
+  #  $_SERVER["HTTP_ACCEPT_CHARSET"]);
+  $acceptChar=(($_SERVER["HTTP_ACCEPT_CHARSET"] == '') ? 'ISO-8859-1,utf-8;q=0.7,*;q=0.7' :
     $_SERVER["HTTP_ACCEPT_CHARSET"]);
   $alparts=@preg_split("/,/",$acceptLang);
   $acparts=@preg_split("/,/",$acceptChar);
-  
+
   /* Parse the contents of the Accept-Language header.*/
   foreach($alparts as $part) {
     $part=trim($part);

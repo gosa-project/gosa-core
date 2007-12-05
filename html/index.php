@@ -379,6 +379,7 @@ if ($error_collector != ""){
 displayLogin();
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+
 ?>
 
 </body>
