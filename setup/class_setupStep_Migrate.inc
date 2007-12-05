@@ -350,7 +350,7 @@ class Step_Migrate extends setup_step
     $valid_deps['/'] = $cv['base'];
     $ldap->search("(&(objectClass=gosaDepartment)(ou=*))",array("dn","ou"));
     while($attrs = $ldap->fetch()){
-      $valid_deps[$attrs['ou'][0]] = $attrs['dn'];
+      $valid_deps[] = $attrs['dn'];
     }
   
     /***********
@@ -418,7 +418,7 @@ class Step_Migrate extends setup_step
     $valid_deps['/'] = $cv['base'];
     $ldap->search("(&(objectClass=gosaDepartment)(ou=*))",array("dn","ou"));
     while($attrs = $ldap->fetch()){
-      $valid_deps[$attrs['ou'][0]] = $attrs['dn'];
+      $valid_deps[] = $attrs['dn'];
     }
   
     /***********
