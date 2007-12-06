@@ -449,6 +449,14 @@ class mailAccount extends plugin
           $contents= preg_replace("/%$val/",
               $this->parent->by_object['user']->$val, $contents);
         }
+        
+        /* Replace vacation start and end time */
+        if(preg_match("/%start/",$contents)){
+          $contents = preg_replace("/%start/",date("d.m.Y",$this->gosaVacationStart),$contents);
+        }
+        if(preg_match("/%end/",$contents)){
+          $contents = preg_replace("/%end/",date("d.m.Y",$this->gosaVacationStop),$contents);
+        }
       }
 
       /* Save message */
@@ -993,7 +1001,7 @@ class mailAccount extends plugin
       $message[]= _("You specified Spam settings, but there is no Folder specified.");
     }
 
-    if (preg_match('/V/', $this->gosaMailDeliveryMode) && $this->gosaVacationStart >= $this->gosaVacationStop){
+    if (preg_match('/V/', $this->gosaMailDeliveryMode) && $this->gosaVacationStart > $this->gosaVacationStop){
       $message[]= _("Time interval to show vacation message is not valid.");
     }
 
