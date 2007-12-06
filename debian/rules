@@ -134,11 +134,11 @@ binary-indep: install
 	chmod 644 debian/gosa/DEBIAN/conffiles
 
 	-if [ -z "${SARGE_PACKAGE}" ]; then \
-		-if [ -z "${ETCH_PACKAGE}" ]; then \
+		if [ -z "${ETCH_PACKAGE}" ]; then \
 			dh_gencontrol; \
 		else \
 			dh_gencontrol -- -cdebian/control.etch; \
-		fi
+		fi ; \
 	else \
 		dh_gencontrol -- -cdebian/control.sarge; \
 	fi
