@@ -93,9 +93,6 @@ class workstartup extends plugin
     /* Perform some special FAI stuff, only if it is activated */
     if($this->fai_activated){
 
-      $_SESSION['getAvailableClassesForThisRelease_CACHE'] = array();
-      $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'] = array();
-
       $ui = get_userinfo();
       $res = get_list(          "(|(objectClass=FAIpackageList)".
           "(objectClass=FAItemplate)".
@@ -109,8 +106,6 @@ class workstartup extends plugin
 
       foreach($res as $attr){
         $cn = $attr['cn'][0];
-
-        $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'][] = $attr;
 
         if(!isset($attr['description'])){
           $attr['description'][0] = "";
@@ -170,46 +165,59 @@ class workstartup extends plugin
         $this->FAIclassInfo = array();
       }
 
-      /* Build up an array like this one :
-         [$url]['SERVER'] = 'srv1-002';
-         [$url]['RELEASE']['siga/rc9.0.2']
-         ['SECTIONS'][0] "main";
-         ['SECTIONS'][1] "non-free";
-         [$url]['RELEASE']['siga/rc9.0.2']
-         ['PACKAGES'][0] "pkg1";
-         ['PACKAGES'][1] "postfix";
-       */
+      /* Build up a release array */
       $filter= "";
       $ui= get_userinfo();
       if (isset($config->current['STRICT_UNITS']) && preg_match('/TRUE/i', $config->current['STRICT_UNITS']) && $ui->gosaUnitTag != ""){                                                                                                                                  $filter= "(gosaUnitTag=".$ui->gosaUnitTag.")";
-      }                                                                                                                                $ldap->search("(&(FAIrepository=*)(objectClass=FAIrepositoryServer)$filter)",array("FAIrepository"));
+      }
+      
+      /* Fill up releases array */
+      $release_bases= array();
+      $res= get_list("(&(objectClass=FAIbranch)$filter)", $ui->subtreeACL, $this->config->current['BASE'], array());
+      foreach ($res as $value){
+        if (!preg_match('/,ou=(apps|mime),/', $value['dn'])){
+          $release_bases[$value['dn']]= $value['dn'];
+        }
+      }
+
+      /* Load all classes for each release */
+      $releases= array();
+      foreach($release_bases as $base){
+        $tmp= preg_replace('/,ou=fai,ou=configs,ou=systems,.*$/', '', $base);
+        $tmp= explode('ou=', trim(preg_replace('/ou=fai,ou=configs,ou=systems,.*$/', '', $tmp), ','));
+        $release= trim(implode('/', array_reverse($tmp)), '/');
+        foreach (array("disk", "hooks", "scripts", "packages", "profiles", "templates", "variables") as $type){
+          $res= get_list("(&(objectClass=FAIclass)$filter)", $ui->subtreeACL,
+                         "ou=$type,".$base, array(), GL_NONE);
+          foreach ($res as $value){
+            $name= preg_replace('/^[^=]+=([^,]+),.*$/', '\1', $value['dn']);
+            $releases[$release][]= $name;
+          }
+        }
+
+        sort($releases[$release]);
+        $releases[$release]= array_unique($releases[$release]);
+      }
+
+      /* Load all classes for this release */
+      $res= get_list("(&(objectClass=FAIbranch)$filter)", $ui->subtreeACL, $this->config->current['BASE'], array());
+
+      /* Fill up server array */
+      $ldap->search("(&(FAIrepository=*)(objectClass=FAIrepositoryServer)$filter)",array("FAIrepository"));
       $test = array();
       while($attr = $ldap->fetch()){
         if(isset($attr['FAIrepository'])){
-
           unset($attr['FAIrepository']['count']);
-
           foreach($attr['FAIrepository'] as $rep){
-            $tmp = split("\|",$rep);
+            list($url, $server, $release, $sections)= split("\|",$rep);
 
-            if(count($tmp)==4){
-              $sections = split(",",$tmp[3]);
-              $release  = $tmp[2];
-              $server   = $tmp[1];
-              $url      = $tmp[0];
+            /* Assign non-auto releases */
+            $test[$url][$release]['SECTIONS'] = split(',', $sections);
+            $test[$url][$release]['CLASSES'] = isset($releases[$release])?$releases[$release]:array();
 
-              $test[$url]['RELEASE'][$release]['SECTIONS'] = $sections;
-
-              /* Result will be cached
-               */
-              $test[$url]['RELEASE'][$release]['PACKAGES'] = $this->getAvailableClassesForThisRelease($release);
-              $test[$url]['SERVER'] = $server;
-
-              /* auto gets all releases/classes 
-               */
-              $test['auto']['RELEASE'][$release]['SECTION'] = $sections;
-              $test['auto']['RELEASE'][$release]['PACKAGES'] = $this->getAvailableClassesForThisRelease($release);
-            }
+            /* auto gets all releases/classes */
+            $test['auto'][$release]['SECTION'] = $sections;
+            $test['auto'][$release]['CLASSES'] = isset($releases[$release])?$releases[$release]:array();
           }
         }
       }
@@ -219,7 +227,7 @@ class workstartup extends plugin
       foreach ($lines as $hline){
         $entries= split(";", $hline);
         if (isset($entries[1]) && !isset($test[$entries[1]])){
-          $test[$entries[1]]['RELEASE']= array();
+          $test[$entries[1]]= array();
 
           /* Split releases */
           if (isset($entries[2])){
@@ -229,11 +237,11 @@ class workstartup extends plugin
               $rname= preg_replace('/:.*$/', '', $release);
               $sections= split(':', preg_replace('/^[^:]+:([^|]+)|.*$/', '\1', $release));
               $classes= split('\|', preg_replace('/^[^|]+\|(.*)$/', '\1', $release));
-              $test[$entries[1]]['RELEASE'][$rname]= array();
-              $test[$entries[1]]['RELEASE'][$rname]['SECTION']= $sections;
+              $test[$entries[1]][$rname]= array();
+              $test[$entries[1]][$rname]['SECTION']= $sections;
               foreach ($classes as $class){
                 if ($class != ""){
-                  $test[$entries[1]]['RELEASE'][$rname]['PACKAGES'][$class]= $class;
+                  $test[$entries[1]][$rname]['CLASSES'][$class]= $class;
                 }
               }
             }
@@ -406,45 +414,6 @@ class workstartup extends plugin
   }
 
   
-  /* This class is called by the contrucktor ONLY.
-   *   It return the available classes for each 
-   *    Server / Release combination ... 
-   *   (Release specifies which classes are available) 
-   */
-  function getAvailableClassesForThisRelease($release)
-  {
-    /* There could be more than one server providing this release,
-        so use cached result if available
-     */ 
-    if(isset($_SESSION['getAvailableClassesForThisRelease_CACHE'][$release]))  {
-      return($_SESSION['getAvailableClassesForThisRelease_CACHE'][$release]);
-    }
-
-    /* Walk through cache and get out what we need.
-     *   
-     *   Function od : "$this->generateDNSyn($release)"
-     *    It returns an array like this one :
-     *       array("ou=packges,ou=rc0.9.2,ou=siga,", 
-     *            "ou=scripts.. " 
-     *             ...);
-     *   This helps us to select the correct classes for each release. 
-     *   It prevents errors like:  'siga' is selected as release, but all classes
-     *     with ou='siga' in their dn are shown, also ou=rc...,ou=siga...  
-     */
-    $tmp2 = $this->generateDNSyn($release)     ; 
-    $test2 = array();
-    foreach($_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'] as $attr){  
-      foreach($tmp2 as $dns){
-        if(preg_match("/".$dns."/",$attr['dn'])){
-          $test2[$attr['cn'][0]] = $attr['cn'][0];
-        }
-      }
-    }
-    $_SESSION['getAvailableClassesForThisRelease_CACHE'][$release] = $test2;
-    return($test2);
-  }
-
-
   /*  Create array to display available classes/profiles in a selectbox 
    *   This function only displays the available classes.
    *   If a class is available is defined by these facts : 
@@ -476,11 +445,11 @@ class workstartup extends plugin
     /* Get all Packages for this server/release combination
      */
 
-    if(!isset($this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'][$this->FAIrelease]['PACKAGES'])){
+    if(!isset($this->FAIServRepConfig[$this->FAIdebianMirror][$this->FAIrelease]['CLASSES'])){
       $pkgs = array();
       print_red(_("There are packages in your configuration, which can't be resolved with current server/release settings."));
     }else{
-      $pkgs = $this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'][$this->FAIrelease]['PACKAGES'];
+      $pkgs = $this->FAIServRepConfig[$this->FAIdebianMirror][$this->FAIrelease]['CLASSES'];
     }
 
     /* Check each and every single class name 
@@ -894,7 +863,7 @@ class workstartup extends plugin
       }else{
         $tmp = $this->getFAIreleases();
         foreach($tmp as $release => $data){
-          if(isset($rest['RELEASE'][$release]) && $release == $this->FAIrelease){
+          if(isset($rest[$release]) && $release == $this->FAIrelease){
             $use = $data['USE']; 
           }
         } 
@@ -922,13 +891,13 @@ class workstartup extends plugin
     }
 
     $errorClasses = array();
-    if(isset($this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'])) {
-      foreach($this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'] as $release => $sections){
+    if(isset($this->FAIServRepConfig[$this->FAIdebianMirror])) {
+      foreach($this->FAIServRepConfig[$this->FAIdebianMirror] as $release => $sections){
         $use = true;
 
         if(!count($this->FAIclass) == 0){
           foreach($this->FAIclass as $class){
-            if(!in_array($class, $sections['PACKAGES'])){
+            if(!in_array($class, $sections['CLASSES'])){
               $use = false;
               $errorClasses[$class] = $class;
             }else{
