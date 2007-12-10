@@ -433,7 +433,7 @@ class faiHook extends plugin
     show_ldap_error($ldap->get_error(), _("Saving FAI hook base failed")); 
 
     /* Do object tagging */
-    $this->handle_object_tagging();
+    $this->handle_object_tagging($this->dn,$this->gosaUnitTag);
 
     $ldap->cd($this->dn);
 

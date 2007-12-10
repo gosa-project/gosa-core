@@ -403,7 +403,7 @@ class faiTemplate extends plugin
     show_ldap_error($ldap->get_error(), _("Saving FAI template base failed"));
 
     /* Do object tagging */
-    $this->handle_object_tagging();
+    $this->handle_object_tagging($this->dn,$this->gosaUnitTag);
 
     /* Prepare FAIscriptEntry to write it to ldap
      * First sort array.

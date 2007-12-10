@@ -67,6 +67,20 @@ class CopyPasteHandler {
         }
       }
     }
+
+    /* Ensure that UnitTags will be kept when pasted */
+    if(isset($obj->gosaUnitTag) && !empty($obj->gosaUnitTag)){
+      foreach($this->current->by_object as $name => $obj){
+        if(!in_array("gosaAdministrativeUnitTag",$this->current->by_object[$name]->objectclasses)){
+          $this->current->by_object[$name]->objectclasses[] = "gosaAdministrativeUnitTag";
+          $this->current->by_object[$name]->gosaUnitTag = $obj->gosaUnitTag;
+          if(!in_array("gosaUnitTag",$this->current->by_object[$name]->attributes)){
+            $this->current->by_object[$name]->attributes[] =  "gosaUnitTag";
+          }
+        }
+      }
+    }
+
     if($this->isCurrentObjectPastAble()){
       return(true);
     }else{
