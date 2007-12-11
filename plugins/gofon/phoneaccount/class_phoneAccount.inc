@@ -30,6 +30,8 @@ class phoneAccount extends plugin
   var $goFonHomeServer        = "0";            // Contains the dn of the server that manage this account 
   var $init_HomeServer        = "0";            // Contains the dn of the server that manage this account 
   var $goFonHomeServers       = array();        // Contains all available server configurations 
+
+  var $context                = "default";
     
   /* attribute list for save action */
   var $CopyPasteVars          = array("phoneNumbers","macroarray","macrostillavailable"/*"phoneNumbers" -Reset- */,
@@ -252,19 +254,26 @@ class phoneAccount extends plugin
      *  without any update to the ldap
      * This means, the PIN in the DB is up to date
      */
-    // Connect to DB server
-    if((is_callable("mysql_pconnect"))&&(isset($cur_cfg))&&(isset($cur_cfg['SERVER']))&&(isset($cur_cfg['LOGIN']))&&(isset($cur_cfg['PASSWORD']))){
+    if( (is_callable("mysql_pconnect"))&&
+        (isset($cur_cfg))&&
+        (isset($cur_cfg['SERVER']))&&
+        (isset($cur_cfg['LOGIN']))&&
+        (isset($cur_cfg['PASSWORD']))){
       $r_con =  @mysql_pconnect($cur_cfg['SERVER'],$cur_cfg['LOGIN'],$cur_cfg['PASSWORD']);
       if($r_con){
+        restore_error_handler();
         $r_db  =  @mysql_select_db($cur_cfg['DB'],$r_con);
-  
-        $query_tmp = "SELECT ".$cur_cfg['VOICE_TABLE'].".password FROM  ".$cur_cfg['VOICE_TABLE'].", ".
-                     $cur_cfg['SIP_TABLE']."  WHERE customer_id = sip_users.mailbox AND name='".$this->uid."'";
-
-        $vp = mysql_fetch_row(mysql_query($query_tmp));
+        $query_tmp = "SELECT ".$cur_cfg['SIP_TABLE'].".context,".$cur_cfg['VOICE_TABLE'].".password 
+                      FROM  ".$cur_cfg['VOICE_TABLE'].", ".$cur_cfg['SIP_TABLE']."  
+                      WHERE customer_id = sip_users.mailbox AND name='".$this->uid."'";
+        $res = mysql_query($query_tmp);
+        $vp  = mysql_fetch_assoc($res);
         @DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__,$query_tmp, "Database query");
-        if((isset($vp[0]))&&(!empty($vp[0]))){
-          $this->goFonPINVoice = $vp[0];
+        if((isset($vp['password']))&&(!empty($vp['password']))){
+          $this->goFonPINVoice = $vp['password'];
+        }
+        if((isset($vp['context']))&&(!empty($vp['context']))){
+          $this->context = $vp['context'];
         }
       }
     }
@@ -525,6 +534,7 @@ class phoneAccount extends plugin
         $sip_data_array['type']         = $s_type ;
         $sip_data_array['username']     = $this->uid;
         $sip_data_array['ipaddr']       = $s_ip;
+        $sip_data_array['context']      = $this->context;
 
         /* Remove not changed attributes, to avoid updating table with same values */
         foreach($sip_data_array as $name => $value){
@@ -554,7 +564,7 @@ class phoneAccount extends plugin
         $sip_data_array['amaflags']     = NULL;
         $sip_data_array['callgroup']    = NULL;
         $sip_data_array['canreinvite']  = "no";
-        $sip_data_array['context']      = "default";
+        $sip_data_array['context']      = $this->context;
         $sip_data_array['defaultip']    = NULL;
         $sip_data_array['fromuser']     = NULL;
         $sip_data_array['fromdomain']   = NULL;
@@ -611,6 +621,7 @@ class phoneAccount extends plugin
           "mailbox"     => $customer_id,
           "password"    => $this->goFonVoicemailPIN,
           "fullname"    => $CNname,
+          "context"     => $this->context,
           "email"       => $s_mail);
 
       /* Set pager number if available */
@@ -650,7 +661,7 @@ class phoneAccount extends plugin
         /********************** 
          * Insert Voice mail entry  
          **********************/
-        $voice_data_array['context'] = "default";
+        $voice_data_array['context'] = "default";//$this->context;
   
         /* There is currently no voice mail entry for this user. 
          * We should create one 
@@ -705,7 +716,7 @@ class phoneAccount extends plugin
       $EXT = array();
     
       if(!is_numeric($this->uid)){
-        $EXT[$i]['context'] = 'GOsa';
+        $EXT[$i]['context'] = "GOsa";//$this->context;
         $EXT[$i]['exten']   = $this->uid;
         $EXT[$i]['priority']= 1;
         $EXT[$i]['app']     = "Goto";
@@ -717,13 +728,13 @@ class phoneAccount extends plugin
       foreach($newnums as $s_telenums){
 
         /* Hint Entry */
-        $EXT[$i]['context'] = 'GOsa';
+        $EXT[$i]['context'] = "GOsa";//$this->context;
         $EXT[$i]['exten']   = $s_telenums;
         $EXT[$i]['priority']= "Hint";
         $EXT[$i]['app']     = 'SIP/'.$this->uid;
         $i ++;  
         /* SetCID */
-        //$EXT[$i]['context'] = 'GOsa';
+        //$EXT[$i]['context'] = "GOsa";//$this->context;
         //$EXT[$i]['exten']   = $s_telenums;
         //$EXT[$i]['priority']= 1;
         //$EXT[$i]['app']     = "SetCIDName";
@@ -741,7 +752,7 @@ class phoneAccount extends plugin
           $s_par = 'SIP/'.$this->uid."|20|r";
         }
 
-        $EXT[$i]['context'] = 'GOsa';
+        $EXT[$i]['context'] = "GOsa";//$this->context;
         $EXT[$i]['exten']   = $s_telenums;
         $EXT[$i]['priority']= 1;
         $EXT[$i]['app']     = $s_app;
@@ -780,6 +791,27 @@ class phoneAccount extends plugin
     }
     @mysql_close($new_connection);
     return true;
+  }
+
+
+  /* Return asterisk contexts 
+   * Additionaly read contexts from file.
+   */
+  function get_asterisk_contexts()
+  {
+    $contexts = array();
+    $contexts[] = "default";
+    $contexts[] = "parkedcalls";
+    $contexts[] = "from-sip";
+    $contexts[] = "from-capi";
+    $file = "/etc/gosa/asterisk_contexts.conf";
+    if(file_exists($file) && is_readable($file)){
+      foreach(file($file) as $context){
+        $contexts[] = trim($context);
+      }
+    }
+    array_unique($contexts);
+    return($contexts);
   }
 
 
@@ -857,6 +889,11 @@ class phoneAccount extends plugin
     if((!$this->macrostillavailable)&&($this->macro!="none")){
       print_red(_("The macro you selected, is no longer available for you, please choose another one."));
     }
+
+    /* Assign contexts */
+    $smarty->assign("contexts",$this->get_asterisk_contexts());
+    $smarty->assign("context" ,$this->context);
+    $smarty->assign("goFonContextACL", chkacl($this->acl,"context"));
 
     /* Assing macroselectbox values  */
     $smarty->assign("macros",$this->macros);   
@@ -986,12 +1023,12 @@ class phoneAccount extends plugin
 
     /* Add phone number */
     if (isset($_POST["add_phonenumber"]) && $_POST['phonenumber']){
-      if (is_phone_nr($_POST['phonenumber'])){
+      if (is_phone_nr($_POST['phonenumber']) && strlen($_POST['phonenumber']) <=10){
         $number= $_POST["phonenumber"];
         $this->phoneNumbers[$number]= $number;
         $this->is_modified= TRUE;
       } else {
-        print_red(_("Please enter a valid phone number!"));
+        print_red(_("Please enter a valid phone number! Because of the realtime extension tables, the number must be less than 11 digits."));
       }
     }
 
@@ -1076,6 +1113,14 @@ class phoneAccount extends plugin
       /* Every macro in the select box are available */
       if((isset($_POST['macro']))){
         $this->macrostillavailable=true;
+      }
+
+      /* Save context */
+      if(isset($_POST['context'])){
+        if($this->context != $_POST['context']){
+          $this->is_modified= TRUE;
+        }
+        $this->context= $_POST['context'];
       }
 
       if(isset($_POST['macro']) && $_POST['macro'] != $this->macro){
