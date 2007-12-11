@@ -368,7 +368,7 @@ class faiPartitionTable extends plugin
     show_ldap_error($ldap->get_error(), _("Saving FAI partition table base failed"));
   
     /* Do object tagging */
-    $this->handle_object_tagging($this->dn,$this->gosaUnitTag);
+    $this->handle_object_tagging();
   
     /* Sort entries, because we must delete entries with status="delete" first */
     $order = array();
