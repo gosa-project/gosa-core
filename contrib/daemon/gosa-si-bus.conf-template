@@ -1,0 +1,13 @@
+[general]
+log_file = /var/log/gosa-si-bus.log
+pid_file = /var/run/gosa-si-bus.pid
+child_max = 10
+child_min = 2
+child_timeout = 10
+
+[bus]
+bus_activ = on
+bus_passwd = secret-bus-password
+bus_ip = 127.0.0.1
+bus_port = 20080
+

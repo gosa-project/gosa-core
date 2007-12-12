@@ -1,0 +1,43 @@
+## 
+##
+## goconfig.schema - Needed by the GONICUS System Administator
+##
+## Version 030719
+##
+##
+## Maintainer:		Lars Scheiter 	(scheiter@GONICUS.de)
+##			Cajus Pollmeier	(pollmeier@GONICUS.de)
+##
+##
+
+
+# Attributes for the GONICUS server extensions
+
+# Syntax: regex
+attributetype ( 1.3.6.1.4.1.10098.1.1.10.8 NAME 'goLogcheckIgnoreMatch'
+	DESC 'Contains a regular expression to ignore'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+
+# Syntax: regex
+attributetype ( 1.3.6.1.4.1.10098.1.1.10.9 NAME 'goLogcheckMatch'
+	DESC 'Contains a regular expression to ignore'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+
+# Syntax: value
+attributetype ( 1.3.6.1.4.1.10098.1.1.10.10 NAME 'goLogcheckCategory'
+	DESC 'Contains a regular expression to ignore'
+	EQUALITY caseExactIA5Match
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE)
+
+##
+##		Objectclasses
+##
+
+# Logging object
+objectclass (1.3.6.1.4.1.10098.1.2.2.2 NAME 'goLogcheckObject' SUP top STRUCTURAL
+	DESC 'Logcheck rule container (v2.4)'
+	MUST ( cn $ goLogcheckCategory )
+	MAY  ( goLogcheckMatch $ goLogcheckIgnoreMatch ))
+

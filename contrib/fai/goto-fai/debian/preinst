@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+#DEBHELPER#
+#
+if [ ! -e /usr/lib/fai/sbin/setup_harddisks.goto-fai ]; then
+	dpkg-divert --package goto-fai --add --rename \
+		--divert /usr/lib/fai/sbin/setup_harddisks.goto-fai \
+		/usr/lib/fai/sbin/setup_harddisks
+fi
+
+exit 0

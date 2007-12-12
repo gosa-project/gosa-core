@@ -1,0 +1,510 @@
+#!/bin/sh
+###############################################################################
+#                             GOsa agent library                              #
+###############################################################################
+
+SSH='ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile /dev/null" -o "BatchMode yes" '
+
+get_hostname_from_ip() {
+	v=$(host -i $1); w=${v##*[ 	]}
+	echo ${w%%.*} | grep -q 'NX'
+	if [ $? -eq 0  ]; then
+		echo "unknown"
+	else
+		echo "$v" | grep -q ';;'
+		if [ $? -eq 0 ]; then
+			if [ -n "$HOSTNAME" ]; then
+				echo "$HOSTNAME"
+			else
+				echo "unknown"
+			fi
+		else
+			echo ${w%%.*}
+		fi
+	fi
+}
+
+get_hostname_from_display()
+{
+        if [ -n "$DISPLAY" ]; then
+
+                HOST=${DISPLAY%%:*}
+                NUMBER=${DISPLAY##*:}
+
+                # IP addresses are not supported here
+                echo $HOST | grep -q '^[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*$'
+                if [ $? -ne 0 ]; then
+                        echo ${DISPLAY%%.*}
+				else
+					get_hostname_from_ip $HOST
+				fi
+
+        else
+                echo "unknown"
+        fi
+}
+
+
+kill_user_processes() {
+	# don't let root do this
+	if [ "$USER" == "root" -o $UID -eq 0 ]; then
+		return
+	fi
+
+	# Preset, or load from file
+	candidates="kdeinit\: soffice.bin mozilla-bin"
+	[ -r /etc/goto/kill-process.conf ] && candidates=$(cat /etc/goto/kill-process.conf)
+
+	# kill old existing user processes
+	for process in $candidates; do
+		ps -fu $USER | grep "$process" | grep -v 'kprogress' | awk ' FS=" " { system("kill "$2) } '
+	done
+
+	# kill old existing user processes that didn't left us with SIGTERM
+	for process in $candidates; do
+		ps -fu $USER | grep "$process" | grep -v 'kprogress' | awk ' FS=" " { system("kill "$2) } '
+	done
+}
+
+fix_ldif() {
+        (cat -; echo "bank") | awk '
+/^[a-zA-Z]/     {
+        if(line!=""){
+                print line
+        }
+
+        line    = $0
+}
+/^ /    {
+        line    = line substr($0,2)
+}
+'
+}
+
+
+ldap_init() {
+	if [ $# -ne 2 ]; then
+		for config in /etc/*ldap/ldap.conf /etc/ldap.conf; do
+
+			# Not readable? Continue
+			[ ! -r $config ] && continue
+
+			# Try to read config
+			touch /tmp/agent.$$
+			cat $config | while read line; do
+				echo $line | grep -q '^BASE'
+				[ $? -eq 0 ] && echo LDAP_BASE="\"$(echo $line|tr '\t' ' '|cut -d\  -f2-)\"" >>/tmp/agent.$$
+				echo $line | grep -q '^HOST'
+				[ $? -eq 0 ] && echo LDAP_HOST="$(echo $line|tr '\t' ' '|cut -d\  -f2-)" >>/tmp/agent.$$
+				echo $line | grep -q '^URI'
+				[ $? -eq 0 ] && echo LDAP_HOST="$(v=`echo $line|tr '\t' ' '|cut -d\  -f2-`;echo ${v##*://})" >> /tmp/agent.$$
+			done
+			eval $(cat /tmp/agent.$$)
+			rm /tmp/agent.$$
+
+			# One successful configuration should be enough
+			break
+		done
+		if [ -z "$LDAP_HOST" -o -z "$LDAP_BASE" ]; then
+			echo "Critical: no LDAP configuration found!"
+			exit
+		fi
+	else
+		LDAP_HOST=$1
+		LDAP_BASE=$2
+	fi
+}
+
+
+ldap_count() {
+	ldapsearch -x -LLL -h "$LDAP_HOST" -b "$LDAP_BASE" "$1" dn | grep '^dn:' | wc -l
+}
+
+
+decode_blob() {
+	base64-decode > /tmp/agent-lib-decode.$$
+	file /tmp/agent-lib-decode.$$ 2>/dev/null| grep -qi 'text'
+	[ $? -eq 0 ] && cat /tmp/agent-lib-decode.$$ | recode 'utf8..latin1'
+	[ -f /tmp/agent-lib-decode.$$ ] && rm /tmp/agent-lib-decode.$$
+}
+
+ldap_import() {
+  for v in $(set grep ldap_import_ | cut -d= -f1); do unset $v; done
+  vname_lastrun=""
+  counter=0
+  > /tmp/agent-lib.$$
+  (ldapsearch -x -LLL -h "$LDAP_HOST" -b "$LDAP_BASE" $2 "$1" $3 2> /dev/null) | fix_ldif | sed 's/^\([^:]*\):\(.*\)$/\1="\2"/' | while read line; do
+		vname=$(echo $line|cut -d= -f1)
+		vvalue=$(echo $line|cut -d= -f2-)
+
+		echo $line | grep -q '=": '
+		if [ $? -eq 0 ]; then
+			vvalue=`echo $line|sed 's/^[^="]*=": //'|decode_blob`
+			vvalue="$vvalue\""
+		else
+			vvalue=`echo $line|sed 's/^[^="]*=" //'`
+		fi
+
+		if [ "$vname_lastrun" == "$vname" ]; then
+			counter=$(( $counter + 1 ));
+		else
+			counter=0
+			vname_lastrun=$vname
+		fi
+		
+		echo "ldap_import_$vname[$counter]=\"$vvalue" >> /tmp/agent-lib.$$
+	done
+
+	eval $(cat /tmp/agent-lib.$$)
+	rm /tmp/agent-lib.$$
+}
+
+ldap_cat() {
+   vname_lastrun=""
+   counter=0
+   > /tmp/agent-lib.$$
+   (ldapsearch -x -LLL -h "$LDAP_HOST" -b "$1" -s base 2> /dev/null) | fix_ldif | sed 's/
+^\([^:]*\):\(.*\)$/\1="\2"/' | while read line; do
+               vname=$(echo $line|cut -d= -f1)
+               vvalue=$(echo $line|cut -d= -f2-)
+
+               echo $line | grep -q '=": '
+               if [ $? -eq 0 ]; then
+                       vvalue=`echo $line|sed 's/^[^="]*=": //'|decode_blob`
+                       vvalue="$vvalue\""
+               else
+                       vvalue=`echo $line|sed 's/^[^="]*=" //'`
+               fi
+
+               if [ "$vname_lastrun" == "$vname" ]; then
+                       counter=$(( $counter + 1 ));
+               else
+                       counter=0
+                       vname_lastrun=$vname
+               fi
+
+               echo "ldap_import_$vname[$counter]=\"$vvalue" >> /tmp/agent-lib.$$
+       done
+
+       eval $(cat /tmp/agent-lib.$$)
+       rm /tmp/agent-lib.$$
+ }
+
+
+
+ldap_get_group_membership_of() {
+	ldapsearch -x -LLL -h "$LDAP_HOST" -b "$LDAP_BASE" "(memberUid=$1)" \
+				cn 2> /dev/null | fix_ldif | awk '/^cn: / {print $2}'
+}
+
+
+ldap_get_applications_of() {
+	ldapsearch -x -LLL "(memberUid=$1)" gosaMemberApplication | fix_ldif | \
+				awk '/^gosaMemberApplication:/ {print $2}'| sort | uniq
+}
+
+
+ldap_get_appservers() {
+	ldapsearch -x -LLL "(objectclass=goTerminalServer)" cn | fix_ldif | grep -w cn: |cut -d' ' -f 2
+}
+
+
+translate() {
+	# Look for translation
+	while read line; do
+		string="${line%%=*}"
+		if [ "$string" == "$*" ]; then
+			echo "${line##*=}"
+			return
+		fi
+	done < /etc/goto/goto-locales.dat
+	echo $*
+}
+
+
+show_progress() {
+	# No translation available
+	echo $PROGRESS $(translate "$*")
+}
+
+
+create_desktop_link() {
+	echo "$gosaApplicationFlags" | grep -q "D"
+	if [ $? -eq 0 ]; then
+		[ $DEBUG -eq 1 ] && echo "goto_setup: creating desktop link for application $application" 1>&2
+		cat << EOF > ~/Desktop/$cn
+[Desktop Entry]
+Comment=$description
+Encoding=UTF-8
+Exec=$gosaApplicationExecute
+Icon=$HOME/.kde/share/icons/${cn}.png
+Name=$gosaApplicationName
+Type=Application
+EOF
+	fi
+}
+
+
+create_menu_entry() {
+	echo "$gosaApplicationFlags" | grep -q "M"
+	if [ $? -eq 0 ]; then
+		[ $DEBUG -eq 1 ] && echo "goto_setup: creating menu link for application $application" 1>&2
+		cat << EOF > ~/.local/share/applications/$cn.desktop
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Exec=$gosaApplicationExecute
+Name=$gosaApplicationName
+GenericName=
+Comment=$description
+Icon=$HOME/.kde/share/icons/${cn}.png
+Terminal=false
+Categories=$appcat;
+EOF
+	fi
+}
+
+ 
+delete_all_applinks() {
+	list=`ldapsearch -x "objectClass=gosaApplication" cn | fix_ldif | awk '/^cn: / {print $2}'`
+	for link in $list; do
+		[ -f $HOME/Desktop/$link ] && rm -f $HOME/Desktop/$link
+		[ -f $HOME/.kde/share/applnk/$link.desktop ] && rm -rf $HOME/.kde/share/applnk/$link.desktop
+	done
+}
+
+
+function terminal_load_hardware_profile() {
+	rm -f $RAM/etc/sysconfig/GOto && touch $RAM/etc/sysconfig/GOto
+	ldapsearch -x -LLL -h $LDAP_HOST -b "$LDAP_BASE" -D "cn=terminal-admin,$LDAP_BASE" -w "$(cat /etc/goto/secret)" "(&(objectClass=gotoWorkstation)(macAddress=$1))" 2> /dev/null | fix_ldif | sed -e 's/^\([^:]*\): \(.*\)$/\U\1\E="\2"/' -e 's/^GOTO//g' >> /etc/sysconfig/GOto
+
+	# Get DN and load all parent defaults from tree
+	current=$(grep "^DN=" /etc/sysconfig/GOto|sed 's/\"//g;s/, /,/g;s/^.*,ou=terminals,ou=systems,//g')
+
+	# Load potential object group entries 
+	ldapsearch -x -LLL -h $LDAP_HOST -b "$LDAP_BASE" -D "cn=terminal-admin,$LDAP_BASE" -w "$(cat /etc/goto/secret)" "(&(objectClass=gosaGroupOfNames)(member=$(echo -n $current|sed 's/^DN=//')))" 2> /dev/null | fix_ldif | sed -e 's/^\([^:]*\): \(.*\)$/\U\1\E="\2"/' -e 's/^GOTO//g' >> /etc/sysconfig/GOto
+
+	# get reverse list of potential default entries - for backward compatibility
+	{ while true; do
+		# write out current value
+		echo "ou=terminals,ou=systems,$current"
+
+		# prepare next entry
+		echo $current | grep -q ','
+		[ $? -ne 0 ] && break
+		[ "$LDAP_BASE" == "$current" ] && break
+		current=${current#*,}
+	done } | tac | while read line; do
+
+    # Read potential default entries and append
+    # them to sysconfig/GOto
+	ldapsearch -x -LLL -h $LDAP_HOST -D "cn=terminal-admin,$LDAP_BASE" -w "$(cat /etc/goto/secret)" -b $line "(&(objectClass=gotoWorkstation)(cn=wdefault))" 2> /dev/null | fix_ldif | sed -e 's/^\([^:]*\): \(.*\)$/\U\1\E="\2"/' -e 's/^GOTO//g' >> /etc/sysconfig/GOto
+  done
+
+  # Reverse sysconfig/GOto
+  tac /etc/sysconfig/GOto > /etc/sysconfig/GOto.tmp
+  mv /etc/sysconfig/GOto.tmp /etc/sysconfig/GOto
+}
+
+
+terminal_has_hardware_profile() {
+	# Do we have a configuration?
+	terminal_load_hardware_profile $1
+	grep -v "cn=default," /etc/sysconfig/GOto | grep -q "DN="
+}
+
+
+terminal_activated() {
+	# Do we have a configuration?
+	terminal_load_hardware_profile $1
+	grep -v ',ou=incoming,' /etc/sysconfig/GOto | grep -v 'cn=default,' | grep -q "DN="
+}
+
+
+terminal_dump_hwprofile() {
+	# Save mac address
+	mac=$1
+	name=$(hostname)
+	
+	# Source hardware information detected by hwsetup
+	for module in xserver sound netcard mouse; do
+		[ -f /etc/sysconfig/$module ] && . /etc/sysconfig/$module
+	done
+
+	# Get hardware information directly from /proc
+	cpu=$(cat /proc/cpuinfo | awk 'BEGIN { FS=": "; ORS="" } /^vendor_id/ {print $2" / "} /^model name/{print $2" - "} /^cpu MHz/ {print $2" MHz"}')
+	mem=$(cat /proc/meminfo | awk '/^MemTotal:/ {print $2" KB"}')
+	modlist=$(lsmod | sed -e '/^Module/d;/^snd/d;s/^\(\w*\).*$/\1/g')
+	hsync=$(ddcxinfo-knoppix -hsync|tr -d ' ')
+	vsync=$(ddcxinfo-knoppix -vsync|tr -d ' ')
+
+	# USB support?
+	[ -d /proc/bus/usb ] && usb="true" || usb="false"
+
+	# Add floppy/cdrom
+	grep -q 'floppy' /etc/sysconfig/autofs && FLOPPY='YES' || FLOPPY='NO'
+	grep -q 'cdrom' /etc/sysconfig/autofs && CDROM='YES' || CDROM='NO'
+
+	cat << EOF
+dn: cn=$name,ou=incoming,$LDAP_BASE
+objectClass: gotoWorkstation
+objectClass: goHard
+cn: $name
+macAddress: $mac
+gotoMode: locked
+gotoXDriver: $XMODULE
+gotoXMouseType: $XMOUSETYPE
+gotoXMouseport: $DEVICE
+gotoXHsync: $hsync
+gotoXVsync: $vsync
+ghUsbSupport: $usb
+gotoFloppyEnable: $FLOPPY
+gotoCdromEnable: $CDROM
+gotoSndModule: $SNDMODULE
+EOF
+
+	# Insert IDE-Devices
+	for f in /proc/ide/ide?/hd?/model; do
+		[ -f $f ] && echo "ghIdeDev: "$(echo $f | cut -d/ -f5)" ("$(cat $f)")"
+	done
+
+	(cat /proc/scsi/scsi | sed -ne 's/.*Vendor: \([^ ]*\) *Model: \([^ ]*\) *.*$/\1 \2/p') 2> /dev/null|while read line; do
+		echo ghScsiDev: $line
+	done
+
+	# Insert modules
+	for m in $modlist; do
+		echo "gotoModules: $m"
+	done | sort | uniq
+
+	# Add potential swap filesystems
+	[ -f /etc/sysconfig/swap ] && cat /etc/sysconfig/swap | while read line; do
+		echo "gotoFilesystem: $line"
+	done
+
+	# Add autofs devices
+	[ -f /etc/sysconfig/autofs ] && cat /etc/sysconfig/autofs | while read line; do
+		echo "gotoAutoFs: $line"
+	done
+
+	cat << EOF
+ghGfxAdapter: $XDESC
+ghNetNic: `cat /etc/sysconfig/netcard|grep "^FULLNAME"|cut -d= -f2|tr -d "\""`
+ghSoundAdapter: `cat /etc/sysconfig/sound|grep "^FULLNAME"|cut -d= -f2|tr -d "\""`
+ghMemSize: $mem
+ghCpuType: $cpu
+EOF
+}
+
+
+terminal_save_hardware_profile() {
+	# Get hardware ldif and strip out possibly broken entries
+    terminal_dump_hwprofile $1 | grep -v '^[^:]*: *$' &> /tmp/upload.ldif
+
+	# Upload ldif
+	while true; do
+		error=$(ldapadd -x -h "$LDAP_HOST" -D "cn=terminal-admin,$LDAP_BASE" -w "$(cat /etc/goto/secret)" < /tmp/upload.ldif 2>&1)
+		if [ $? -ne 0 ]; then
+			dialog --msgbox "Das Terminal konnte sich nicht am LDAP anmelden. Bitte prüfen Sie de Einstellungen: $error" 14 60
+		else
+			break
+		fi
+	done
+}
+
+
+terminal_alsa_setup() {
+	audio=$(lspci -n | awk '/ 0401/ {print $3}' | sed 's/://g' | head -1)
+	KVER=$(uname -r)
+	MODULE=$(cat /lib/modules/$KVER/modules.pcimap | (while read driver vendor device dummy; do
+		if expr $driver : 'snd-.*' > /dev/null; then
+			printf '%04x%04x %s\n' $vendor $device $driver | grep "^$audio" | cut -d\  -f2
+		fi
+	done))
+	echo "SNDMODULE=\"$MODULE\"" >> /etc/sysconfig/sound
+}
+
+
+terminal_autofs_setup(){
+	wcount=1
+	lcount=1
+
+	# Remove old ones
+	rm -f /etc/sysconfig/autofs /etc/sysconfig/swap
+
+	# Generate autofs entries for removable devices
+	for d in /dev/floppy/?; do
+		[ "$d" == "/dev/floppy/?" ] && break
+		nr=$(echo $d | sed 's/^.*\/\([^/]*$\)/\1/g')
+		echo "floppy$nr -fstype=auto,sync,nodev,nosuid,umask=000,quiet,rw :$d" >> /etc/sysconfig/autofs
+	done
+
+	for d in /dev/cdroms/*; do
+		[ "$d" == "/dev/cdroms/*" ] && break
+		name=`echo $d | sed 's/^.*\/\([^/]*$\)/\1/g'`
+		echo "$name -fstype=iso9660,sync,nodev,nosuid,umask=000,quiet,ro :$d" >> /etc/sysconfig/autofs
+	done
+
+	# Generate autofs entries for fixed drives
+	(sfdisk -qLl | grep "^/" | tr -d '\*') | while read device d1 d2 d3 d4 type d5; do
+	 case $type in
+	  [4bce])
+		echo "win$wcount -fstype=vfat,sync,nodev,nosuid,umask=000,quiet,rw :$device" >> /etc/sysconfig/autofs
+		wcount=$(( $wcount + 1 ))
+		;;
+	  7)
+		echo "win$wcount -fstype=ntfs,sync,nodev,nosuid,umask=000,quiet,ro :$device" >> /etc/sysconfig/autofs
+		wcount=$(( $wcount + 1 ))
+		;;
+	  83)
+		echo "linux$lcount -fstype=ext3,sync,nodev,nosuid,umask=000,quiet,rw :$device" >> /etc/sysconfig/autofs
+		lcount=$(( $lcount + 1 ))
+		;;
+      82)
+		 echo "$device none swap sw 0 0" >> /etc/sysconfig/swap
+		;;
+	 esac
+	done
+}
+
+
+get_xdmcp_server(){
+	SERVERS=$(ldapsearch -LLL -b "$LDAP_BASE" -H $LDAP_HOST -x '(&(objectclass=goTerminalServer)(goXdmcpIsEnabled=true))'| awk '/^cn/{print $2}' 2> /dev/null)
+
+	# Generate load sorted server list
+	{ for s in $SERVERS; do
+		xdmping $s -v -t 1 2> /dev/null | awk '!/contacting/ {print $5"|"$1"|"$2}' | sed 's/[:,]//g'
+	done } | egrep "^[0-9]" | sort -n > /tmp/xservers.tmp
+
+	case $(cat /tmp/xservers.tmp | wc -w | awk '{print $1}') in
+		0)
+			return
+			;;
+		1)
+			cat /tmp/xservers.tmp | cut -d\| -f2
+			return
+            ;;
+		*)
+			AVAILABLE=""
+			for i in $(cat /tmp/xservers.tmp); do
+				NEW=$(echo "$i" | awk -F "|" '{if ($1 < 0.5) print $1"|"$2}')
+				[ -n "$NEW" ] && AVAILABLE="$NEW\n$AVAILABLE"
+			done
+			if [ -n "$AVAILABLE" ]; then
+				echo -e "$AVAILABLE" > /tmp/xservers.tmp
+				NUM=$(cat /tmp/xservers.tmp | wc -l | awk '{print $1 - 1}')
+				ROW=$(echo $NUM | awk '{print rand() * $1 + 1 ;}' | cut -d . -f1)
+				cat /tmp/xservers.tmp | sed -n "${ROW}p" | cut -d\| -f2
+			else
+				cat /tmp/xservers.tmp|egrep "^[0-9]"|tr "." ","|sort -n|head -1|cut -d\| -f2
+			fi
+			;;
+	esac
+}
+
+
+get_fontpath() {
+	ldapsearch -x -LLL -h $LDAP_HOST -b "$LDAP_BASE" "(&(objectClass=goTerminalServer)(cn=$1))" |
+		grep "^goFontPath" | cut -d\  -f2- | sed 's!\/!\/!g'
+}
+

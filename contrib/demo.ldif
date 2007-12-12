@@ -1,0 +1,48 @@
+dn: dc=gonicus,dc=de
+objectClass: dcObject
+objectClass: organization
+description: Base object
+dc: gonicus
+o: GONICUS GmbH
+
+dn: cn=terminal-admin,dc=gonicus,dc=de
+objectClass: person
+cn: terminal-admin
+sn: Upload user
+description: GOto Upload Benutzer
+userPassword:: e2tlcmJlcm9zfXRlcm1pbmFsYWRtaW5AR09OSUNVUy5MT0NBTAo=
+
+dn: ou=groups,dc=gonicus,dc=de
+objectClass: organizationalUnit
+ou: groups
+
+dn: ou=people,dc=gonicus,dc=de
+objectClass: organizationalUnit
+ou: people
+
+dn: cn=admin,ou=people,dc=gonicus,dc=de
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: gosaAccount
+uid: admin
+cn: admin
+givenName: admin
+sn: GOsa main administrator
+sambaLMPassword: 10974C6EFC0AEE1917306D272A9441BB
+sambaNTPassword: 38F3951141D0F71A039CFA9D1EC06378
+userPassword:: dGVzdGVy
+
+dn: cn=administrators,ou=groups,dc=gonicus,dc=de
+objectClass: gosaObject
+objectClass: posixGroup
+objectClass: top
+gosaSubtreeACL: :all
+cn: administrators
+gidNumber: 999
+memberUid: admin
+
+dn: ou=incoming,dc=gonicus,dc=de
+objectClass: organizationalUnit
+ou: incoming
+

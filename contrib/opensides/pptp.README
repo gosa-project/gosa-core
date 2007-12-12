@@ -1,0 +1,13 @@
+To use the pptp connectivity extension
+
+1) Add the pptp.schema to your schema directory
+
+2) Remove the comment in front of pptpAccount in gosa.conf
+
+<!--    <tab class="pptpAccount" /> -->
+
+Guillaume Delecourt
+OpenSides November 2005
+
+
+

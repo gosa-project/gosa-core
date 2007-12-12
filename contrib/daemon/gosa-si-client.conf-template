@@ -1,0 +1,13 @@
+[general]
+log_file = /var/log/gosa-si-client.log
+pid_file = /var/run/gosa-si-client.pid
+
+[client]
+client_port = 20083
+
+[server]
+server_ip = 127.0.0.1
+server_port = 20081
+server_passwd = secret-server-password
+server_timeout = 5
+server_domain = intranet.gonicus.de

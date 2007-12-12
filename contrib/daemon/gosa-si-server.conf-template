@@ -1,0 +1,30 @@
+[general]
+log_file = /var/log/gosa-si-daemon.log
+pid_file = /var/run/gosa-si-daemon.pid
+child_max = 10
+child_min = 2
+child_timeout = 10
+
+[bus]
+bus_activ = on
+bus_passwd = secret-bus-password
+bus_ip = 127.0.0.1
+bus_port = 20080
+
+[server]
+server_activ = on
+server_port = 20081
+server_passwd = secret-server-password
+max_clients = 5
+
+[arp]
+arp_activ = off
+arp_fifo_path = /var/run/gosa-si/arp-notify
+
+[gosa]
+gosa_activ = on
+gosa_ip = 127.0.0.1
+gosa_port = 20082
+gosa_passwd = secret-gosa-password
+gosa_timeout = 5                   
+

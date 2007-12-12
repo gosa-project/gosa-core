@@ -1,0 +1,12 @@
+debian/goto                     etc/default
+build-goto-client               usr/sbin
+plugins/001-ltsp-addon-packages usr/share/ltsp/plugins/ltsp-build-client/common
+plugins/020-ssh-pubkey-login    usr/share/ltsp/plugins/ltsp-build-client/common
+plugins/001-goto-ldap-packages  usr/share/ltsp/plugins/ltsp-build-client/common
+plugins/001-sane-packages       usr/share/ltsp/plugins/ltsp-build-client/common
+plugins/020-nx-client           usr/share/ltsp/plugins/ltsp-build-client/common
+plugins/010-goto-ldap-files     usr/share/ltsp/plugins/ltsp-build-client/common
+plugins/999-goto-ldap-final     usr/share/ltsp/plugins/ltsp-build-client/common
+plugins/001-snmp-packages       usr/share/ltsp/plugins/ltsp-build-client/common
+plugins/030-late-packages-goto  usr/share/ltsp/plugins/ltsp-build-client/common
+plugins/000-goto-ldap-vars      usr/share/ltsp/plugins/ltsp-build-client/common

@@ -1,0 +1,91 @@
+#!/bin/sh
+# Start/stop the GOsa support daemon infrastructure.
+#
+### BEGIN INIT INFO
+# Provides:          gosa-si
+# Required-Start:    $syslog $time
+# Required-Stop:     $syslog $time
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: GOsa message bus and server component
+# Description:       gosa-si establishes the communication between a couple of
+#                    GOsa hosting servers and optionally clients to do event
+#                    signaling for all communication partners.
+### END INIT INFO
+
+# Sanity checks
+test -f /usr/sbin/gosa-si-server || exit 0
+test -f /usr/sbin/gosa-si-bus || exit 0
+
+# Load defaults
+START_BUS=0
+[ -r /etc/default/gosa-si ] && . /etc/default/gosa-si
+
+# Load LSB support functions
+. /lib/lsb/init-functions
+
+
+start_bus() {
+	start-stop-daemon --start --quiet --pidfile /var/run/gosa-si-bus.pid --name gosa-si-bus --startas /usr/sbin/gosa-si-bus
+}
+
+
+start_server() {
+	start-stop-daemon --start --quiet --pidfile /var/run/gosa-si-server.pid --name gosa-si-server --startas /usr/sbin/gosa-si-server -- $1
+}
+
+
+stop_bus() {
+	start-stop-daemon --stop --retry 5 --quiet --pidfile /var/run/gosa-si-bus.pid --name gosa-si-bus
+}
+
+
+stop_server() {
+	start-stop-daemon --stop --retry 5 --quiet --pidfile /var/run/gosa-si-server.pid --name gosa-si-server
+}
+
+
+case "$1" in
+start)  log_daemon_msg "Starting GOsa support infrastructure"
+	if [ "$START_BUS" == "1" ]; then
+		log_progress_msg "bus"
+		start_bus
+		log_progress_msg "daemon"
+		start_server
+	else
+		log_progress_msg "daemon"
+		start_server --no-bus
+	fi
+        log_end_msg $?
+	;;
+stop)   log_daemon_msg "Stopping GOsa support infrastructure"
+	if [ "$START_BUS" == "1" ]; then
+		log_progress_msg "daemon"
+		stop_server
+		log_progress_msg "bus"
+		stop_bus
+	else
+		log_progress_msg "daemon"
+		stop_server
+	fi
+        log_end_msg $?
+        ;;
+reload|force-reload|restart) log_daemon_msg "Restarting GOsa support infrastructure" 
+	if [ "$START_BUS" == "1" ]; then
+		stop_server
+		stop_bus
+		start_bus
+		start_server --no-bus
+		log_progress_msg "done"
+	else
+		stop_server
+		start_server --no-bus
+		log_progress_msg "done"
+	fi
+        log_end_msg $?
+        ;;
+*)	log_action_msg "Usage: /etc/init.d/gosa-si {start|stop|restart|reload|force-reload}"
+        exit 2
+        ;;
+esac
+exit 0

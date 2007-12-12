@@ -1,0 +1,50 @@
+
+Heya,
+
+as we don't want to run into licensing issues the apple.schema is not included
+here. In case you want to manage your apple users' homedirectories with GOsa
+please copy the apple.schema file from your MacOSX installation into the
+schema-directory of your openldap installation and include it in the slapd-
+configuration. Usually you'll have to change a few objectclasses as some
+attribute-types are missing.
+
+For example to use the apple.schema from osx 10.4 you'll have to
+- remove the objectclass authAuthorityObject
+- remove the objectclass apple-acl
+- remove the following attributes from all ObjectClasses:
+    - acctFlags
+    - pwdLastSet
+    - logonTime
+    - logoffTime
+    - kickoffTime
+    - homeDrive
+    - scriptPath
+    - profilePath
+    - userWorkstations
+    - smbHome
+    - rid
+    - primaryGroupID
+- uncomment the apple-user-homeDirectory attribute
+- add the apple-user-homeDirectory attribute to the apple-user objectclass
+
+YMMV depending on the version of the apple.schema. As far as I can remember the
+apple.schema from 10.2 does not include all neccessary attributes and object-
+classes, so you probably want to use a more recent one.
+
+
+As I actually don't have the time to provide a complete howto I've googled for
+a howto - probably http://www.spack.org/wiki/AppleOsxIntegrationWithOpenLdap
+will give you some hints how to setup your apple.
+
+The netatalk plugin was developed by Gina Haeussge <osd@foosel.net> and Bernd
+Zeimetz <osd@bzed.de> for use at the Darmstadt University of Technology,
+Department of Architecture.
+
+In case you have any questions or find any bugs feel free to contact me at
+<osd@bzed.de>.
+
+
+Best regards,
+
+
+Bernd Zeimetz

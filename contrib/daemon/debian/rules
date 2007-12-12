@@ -1,0 +1,77 @@
+#!/usr/bin/make -f
+# Sample debian/rules that uses debhelper. GNU copyright 1997 by Joey Hess.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+build: patch 
+	#********************************************************
+	#*  Building ltsp-goto into a Debian/GNU Linux Package  *
+	#*                    please stand by                   *
+	#********************************************************
+
+clean: clean-patched unpatch
+clean-patched:
+	dh_testdir
+	rm -f install-stamp 
+	-rm -f debian/files
+	-rm -rf debian/tmp
+	-rm -f debian/substvars
+	dh_clean
+
+unpatch:
+	dpatch deapply-all
+	rm -rf patch-stamp debian/patched
+
+install: install-stamp
+install-stamp: 
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+
+	# Create a copy, remove svn stuff
+	-mkdir debian/tmp
+	-for i in `ls | grep -v debian`; do \
+		cp -R $$i debian/tmp ; \
+	done
+	-find debian/tmp -name '*.svn' -type d -exec rm -rf {} \; 2> /dev/null
+
+	touch install-stamp
+
+patch: patch-stamp
+patch-stamp:
+	dpatch apply-all
+	dpatch cat-all >patch-stamp
+
+binary-indep: install
+	dh_testdir
+	dh_testroot
+	
+	dh_install
+	dh_installdocs 
+	dh_installcron
+	dh_installexamples
+	dh_installchangelogs
+	#dh_installdebconf
+	#dh_installcron -p goto-agents-printmanager
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms 
+	dh_perl
+	dh_installdeb
+	dh_shlibdeps
+	
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+source diff:                                                                  
+	@echo >&2 'source and diff are obsolete - use dpkg-source -b'; false
+
+binary: binary-indep 
+.PHONY: build install clean binary-indep binary
+
+binary-arch:
+

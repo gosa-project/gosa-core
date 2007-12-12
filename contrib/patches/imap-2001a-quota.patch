@@ -1,0 +1,20 @@
+diff -Naur imap-2001a/src/c-client/imap4r1.c imap-2001a.patched/src/c-client/imap4r1.c
+--- imap-2001a/src/c-client/imap4r1.c	Wed Nov 14 23:50:55 2001
++++ imap-2001a.patched/src/c-client/imap4r1.c	Wed May 21 09:54:35 2003
+@@ -2358,10 +2358,12 @@
+       do {			/* for each list item */
+ 	*s++ = c;		/* write prefix character */
+ 	if (list) {		/* sigh, QUOTA has bizarre syntax! */
+-	  for (t = (char *) list->text.data; *t; *s++ = *t++);
+-	  sprintf (s," %lu",list->text.size);
+-	  s += strlen (s);
+-	  c = ' ';		/* prefix character for subsequent strings */
++	  if (list->text.size != 0){
++	    for (t = (char *) list->text.data; *t; *s++ = *t++);
++	    sprintf (s," %lu",list->text.size);
++	    s += strlen (s);
++	    c = ' ';		/* prefix character for subsequent strings */
++	  }
+ 	}
+       }
+       while (list = list->next);

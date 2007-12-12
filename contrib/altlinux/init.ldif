@@ -1,0 +1,124 @@
+dn: dc=example,dc=com
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+objectClass: gosaDepartment
+dc: example
+o: Example Inc.
+ou: example
+description: Main building
+
+dn: ou=Apps,dc=example,dc=com
+objectClass: organizationalUnit
+ou: Apps
+
+dn: cn=gosa,ou=Apps,dc=example,dc=com
+objectClass: top
+objectClass: applicationProcess
+objectClass: simpleSecurityObject
+userPassword: gosa
+cn: gosa
+
+dn: cn=smbpasswd,ou=Apps,dc=example,dc=com
+objectClass: top
+objectClass: applicationProcess
+objectClass: simpleSecurityObject
+cn: smbpasswd
+userPassword: smbpasswd
+
+dn: cn=cyrus,ou=Apps,dc=example,dc=com
+objectClass: top
+objectClass: applicationProcess
+objectClass: simpleSecurityObject
+cn: cyrus
+userPassword: cyrus
+
+dn: cn=saslauthd,ou=Apps,dc=example,dc=com
+objectClass: top
+objectClass: applicationProcess
+objectClass: simpleSecurityObject
+cn: saslauthd
+userPassword: saslauthd
+
+dn: ou=Admins,dc=example,dc=com
+objectClass: organizationalUnit
+ou: Admins
+description: Directory administrators
+
+dn: cn=admin,ou=Admins,dc=example,dc=com
+objectClass: person
+cn: admin
+sn: admin
+userPassword: secret
+
+dn: ou=People,dc=example,dc=com
+objectClass: organizationalUnit
+ou: People
+
+dn: uid=administrator,ou=People,dc=example,dc=com
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: gosaAccount
+userPassword: secret
+sn: System
+cn: administrator
+givenName: Administrator
+uid: administrator
+
+dn: ou=Groups,dc=example,dc=com
+objectClass: organizationalUnit
+ou: Groups
+
+dn: cn=administrator,ou=Groups,dc=example,dc=com
+objectClass: top
+objectClass: gosaObject
+objectClass: posixGroup
+gosaSubtreeACL:: OmFsbA==
+cn: administrator
+gidNumber: 999
+memberUid: administrator
+
+dn: ou=Computers,dc=example,dc=com
+objectClass: organizationalUnit
+ou: Computers
+
+dn: uid=pdc$,ou=Computers,dc=example,dc=com
+objectClass: top
+objectClass: account
+objectClass: goImapServer
+uid: pdc$
+cn: localhost
+goImapName: mail.example.lan
+goImapConnect: {localhost:143}
+goImapAdmin: cyrus
+goImapSieveServer: localhost
+goImapSievePort: 2000
+goImapPassword: cyrus
+
+dn: dc=branch,dc=example,dc=com
+objectClass: top
+objectClass: dcObject
+objectClass: organizationalUnit
+objectClass: gosaDepartment
+dc: branch
+ou: branch
+description: Remote branch
+
+dn: ou=Addressbook,dc=example,dc=com
+objectClass: organizationalUnit
+ou: Addressbook
+
+dn: ou=Systems,dc=example,dc=com
+objectClass: organizationalUnit
+ou: Systems
+
+dn: ou=configs,ou=systems,dc=example,dc=com
+objectClass: organizationalUnit
+ou: configs
+
+dn: ou=gosa,ou=configs,ou=systems,dc=example,dc=com
+objectClass: organizationalUnit
+ou: gosa
+

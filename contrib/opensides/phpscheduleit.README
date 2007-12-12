@@ -1,0 +1,10 @@
+To use the phpscheduleit connectivity extension
+
+1) Add the schema phpscheduleit.schema in your schema directory
+
+2) Remove the comment in front of phpscheduleitAccount in gosa.conf
+
+<!--    <tab class="pptpAccount" /> -->
+
+Guillaume Delecourt
+OpenSides November 2005

@@ -1,0 +1,4 @@
+usr/share/ltsp/plugins/ltsp-build-client/common
+usr/share/ltsp/scripts
+usr/sbin
+etc/default

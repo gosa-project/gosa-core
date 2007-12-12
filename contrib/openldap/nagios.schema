@@ -1,0 +1,183 @@
+#
+## schema file for OpenLDAP 2.x
+## Schema for storing Nagios User Configuration in LDAP
+## OIDs are owned by OpenSides
+##
+## number from 1 to 30 are for objectclasses
+## attributeype start at 31
+#
+# $Id: nagios.schema,v 1.5 2005/09/09 10:31:55 guiguidoc Exp $
+#
+# nagios/contacts.cfg
+#
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.1.31 NAME 'NagiosMail'
+        DESC 'short name used to identify the contact'
+        EQUALITY caseIgnoreIA5Match
+        SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.1.32 NAME 'NagiosPager'
+        DESC 'pager number for the contact'
+        EQUALITY caseIgnoreIA5Match
+        SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.1.33 NAME 'NagiosAlias'
+        DESC 'longer name or description for the contact'
+        EQUALITY caseIgnoreIA5Match
+        SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.1.34 NAME 'ServiceNotificationPeriod'
+        DESC 'time period during wich the contact can be notified'
+        EQUALITY caseIgnoreIA5Match
+        SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.35 NAME 'HostNotificationPeriod'
+        DESC 'time period during which the contact can be notified'
+        EQUALITY caseIgnoreIA5Match
+        SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.1.36 NAME 'ServiceNotificationOptions'
+        DESC 'define the service states for which notifications can be sent out'
+        EQUALITY caseIgnoreIA5Match
+        SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.1.37 NAME 'HostNotificationOptions'
+        DESC 'define the service states for which notifications can be sent out'
+        EQUALITY caseIgnoreIA5Match
+        SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.1.38 NAME 'ServiceNotificationCommands'
+        DESC 'commands used to notify the contact'
+        EQUALITY caseIgnoreIA5Match
+        SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.1.39 NAME 'HostNotificationCommands'
+        DESC 'commands used to notify the contact'
+        EQUALITY caseIgnoreIA5Match
+        SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+
+#
+# nagios/cgi.cfg
+#
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.1.40 NAME 'AuthorizedSystemInformation'
+        DESC 'users who can view system/process information'
+        EQUALITY caseIgnoreIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.1.41 NAME 'AuthorizedConfigurationInformation'
+        DESC 'users who can view configuration information'
+        EQUALITY caseIgnoreIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.1.42 NAME 'AuthorizedSystemCommands'
+        DESC 'users who can issue system/process commands'
+        EQUALITY caseIgnoreIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.1.43 NAME 'AuthorizedAllServices'
+        DESC 'users who can view status and configuration information'
+        EQUALITY caseIgnoreIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.44 NAME 'AuthorizedAllHosts'
+        DESC 'users who can view status and configuration information'
+        EQUALITY caseIgnoreIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.1.45 NAME 'AuthorizedAllServiceCommands'
+        DESC 'users who can issue commands for all services'
+        EQUALITY caseIgnoreIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.46 NAME 'AuthorizedAllHostCommands'
+        DESC 'users who can issue commands for all hosts'
+        EQUALITY caseIgnoreIA5Match
+	SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+#
+# nagios/contactgroups.cfg
+#
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.1.47 NAME 'ContactGroupName'
+        DESC 'name used to identify the contact group'
+        EQUALITY caseIgnoreIA5Match
+        SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.1.48 NAME 'ContactGroupAlias'
+        DESC 'description used to identify the contact group'
+        EQUALITY caseIgnoreIA5Match
+        SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.22262.1.1.1.1.49 NAME 'ContactGroupMembers'
+        DESC 'a list of the short names of contacts'
+        EQUALITY caseIgnoreIA5Match
+        SUBSTR caseExactIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
+
+#
+# all objectclass 
+#
+
+objectclass ( 1.3.6.1.4.1.22262.1.1.1.1.1 NAME 'nagiosAuth' SUP top AUXILIARY
+ DESC 'nagiosAuth'
+ MAY (	AuthorizedSystemInformation $ AuthorizedConfigurationInformation $ 
+	AuthorizedSystemCommands $ AuthorizedAllServices $ AuthorizedAllHosts $
+	AuthorizedAllServiceCommands $ AuthorizedAllHostCommands ) )
+
+#objectclass ( 1.3.6.1.4.1.22262.1.1.1.1.2 NAME 'nagiosHost' SUP top AUXILIARY
+# DESC 'Host'
+
+#objectclass ( 1.3.6.1.4.1.22262.1.1.1.1.3 NAME 'nagiosService' SUP top AUXILIARY
+# DESC 'Service'
+
+objectclass ( 1.3.6.1.4.1.22262.1.1.1.1.4 NAME 'nagiosContact' SUP top AUXILIARY
+ DESC 'Contact'
+ MUST (	uid $ NagiosAlias $ ServiceNotificationPeriod $ HostNotificationPeriod $ 
+	ServiceNotificationOptions $ HostNotificationOptions  ) 
+ MAY (	ServiceNotificationCommands $ HostNotificationCommands $ NagiosMail $ NagiosPager  ))
+
+#objectclass ( 1.3.6.1.4.1.22262.1.1.1.1.5 NAME 'nagiosHostGroup' SUP top AUXILIARY
+# DESC 'HostGroup'
+
+objectclass ( 1.3.6.1.4.1.22262.1.1.1.1.6 NAME 'nagiosContactGroup' SUP top AUXILIARY
+ DESC 'ContactGroup'
+ MAY ( ContactGroupName $ ContactGroupAlias $ ContactGroupMembers  ))
+
+#objectclass ( 1.3.6.1.4.1.22262.1.1.1.1.7 NAME 'nagiosTimePeriod' SUP top AUXILIARY
+# DESC 'TimePeriod'
+
+#objectclass ( 1.3.6.1.4.1.22262.1.1.1.1.8 NAME 'nagiosCommand' SUP top AUXILIARY
+# DESC 'Command'
+
+#objectclass ( 1.3.6.1.4.1.22262.1.1.1.1.9 NAME 'nagiosServiceDependency' SUP top AUXILIARY
+# DESC 'ServiceDependency'
+
+#objectclass ( 1.3.6.1.4.1.22262.1.1.1.1.10 NAME 'nagiosServiceEscalation' SUP top AUXILIARY
+# DESC 'ServiceEscalation'
+
+#objectclass ( 1.3.6.1.4.1.22262.1.1.1.1.11 NAME 'nagiosHostDependency' SUP top AUXILIARY
+# DESC 'HostDependency'
+
+#objectclass ( 1.3.6.1.4.1.22262.1.1.1.1.12 NAME 'nagiosHostEscalation' SUP top AUXILIARY
+# DESC 'HostEscalation'
+
+#objectclass ( 1.3.6.1.4.1.22262.1.1.1.1.13 NAME 'nagiosHostGroupEscalation' SUP top AUXILIARY
+# DESC 'HostGroupEscalation'
+

@@ -1,0 +1,11 @@
+README.Debian for GOto 3.0
+--------------------------
+
+* Configuring GOto 3.0
+
+You need a proper LDAP/FAI/GOsa setup to make this run. More
+text will follow later. Sorry.
+
+----
+Cajus Pollmeier <cajus@debian.org>  Fri 02 Jun 2006 16:23:50 +0200
+
