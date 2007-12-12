@@ -80,6 +80,7 @@ class posixAccount extends plugin
 
   var $uid= "";
   var $multiple_support = TRUE;
+  var $groupMembership_some = array();
 
   /* constructor, if 'dn' is set, the node loads the given
      'dn' from LDAP */
@@ -509,10 +510,15 @@ class posixAccount extends plugin
     $smarty->assign("shells", $this->loginShellList);
     $smarty->assign("secondaryGroups", $this->secondaryGroups);
     $smarty->assign("primaryGroup", $this->primaryGroup);
-    if (!count($this->groupMembership)){
-      $smarty->assign("groupMembership", array("&nbsp;"));
-    } else {
+    if(!$this->multiple_support_active){
+      if (!count($this->groupMembership)){
+        $smarty->assign("groupMembership", array("&nbsp;"));
+      } else {
+        $smarty->assign("groupMembership", $this->groupMembership);
+      }
+    }else{
       $smarty->assign("groupMembership", $this->groupMembership);
+      $smarty->assign("groupMembership_some", $this->groupMembership_some);
     }
     if (count($this->groupMembership) > 16){
       $smarty->assign("groups", "too_many_for_nfs");
@@ -1038,6 +1044,7 @@ class posixAccount extends plugin
 
     /* Walk through groups and add the descriptive entry if not exists */
     foreach ($groups as $value){
+
       if (!array_key_exists($value, $this->groupMembership)){
         $ldap->cat($value, array('cn', 'description', 'dn'));
         $attrs= $ldap->fetch();
@@ -1052,6 +1059,9 @@ class posixAccount extends plugin
 
         if(obj_is_writable($attrs['dn'],"groups/group","memberUid")){
           $this->groupMembership[$attrs['dn']]= $entry;
+          if($this->multiple_support_active && isset($this->groupMembership_some[$attrs['dn']])){
+            unset($this->groupMembership_some[$attrs['dn']]);
+          }
         }
       }
     }
@@ -1069,6 +1079,11 @@ class posixAccount extends plugin
     foreach($groups as $dn_to_del){
       if(isset($this->groupMembership[$dn_to_del]) && obj_is_writable($dn_to_del,"groups/group","memberUid")){
         unset($this->groupMembership[$dn_to_del]);
+      }
+      if($this->multiple_support_active){
+        if(isset($this->groupMembership_some[$dn_to_del]) && obj_is_writable($dn_to_del,"groups/group","memberUid")){
+          unset($this->groupMembership_some[$dn_to_del]);
+        }
       }
     }
   }
@@ -1403,6 +1418,8 @@ class posixAccount extends plugin
   function get_multi_edit_values()
   {
     $ret = plugin::get_multi_edit_values();
+    $ret['groupMembership']     = $this->groupMembership;
+    $ret['groupMembership_some']= $this->groupMembership_some;
     return($ret);
   }
 
@@ -1426,6 +1443,73 @@ class posixAccount extends plugin
         $this->primaryGroup= $_POST['primaryGroup'];
       }
     }
+  }
+
+  function init_multiple_support($attrs,$all)
+  {
+    plugin::init_multiple_support($attrs,$all);
+
+    restore_error_handler();
+
+    $groups_some = array();
+    $groups_all  = array();
+    $groups_uid  = array();
+    $uids = array();
+    $first = TRUE;
+
+    $uid_filter="";  
+    for($i =0; $i < $this->multi_attrs_all['uid']['count'] ; $i ++){
+      $uid = $this->multi_attrs_all['uid'][$i];
+      $uids[] = $uid;
+      $uid_filter.= "(memberUid=".$uid.")"; 
+    }
+    $uid_filter = "(&(objectClass=posixGroup)(|".$uid_filter."))";
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search($uid_filter,array("dn","cn","memberUid"));
+    while($group = $ldap->fetch()){
+      $groups_some[$group['dn']] = $group['cn'][0];
+      for($i = 0 ; $i < $group['memberUid']['count'] ; $i++){
+        $groups_uid[$group['dn']][] = $group['memberUid'][$i];
+      }
+    }
+
+    $groups_all = $groups_some;
+    foreach($groups_all as $id => $group){
+      foreach($uids as $uid){
+        if(!in_array($uid,$groups_uid[$id])){
+          unset($groups_all[$id]);
+          break;
+        }
+      }
+    }
+
+    $this->groupMembership = $groups_all;
+    foreach( $groups_all as $dn => $cn){
+      if(isset($groups_some[$dn])){
+        unset($groups_some[$dn]);
+      }
+    }
+    $this->groupMembership_some = $groups_some;
+  }
+
+
+  function set_multi_edit_values($attrs)
+  {
+    $groups = array();
+
+    /* Update groupMembership, keep optinal group */
+    foreach($attrs['groupMembership_some'] as $dn => $cn){
+      if(isset($this->groupMembership[$dn])){
+        $groups[$dn] = $cn;
+      }
+    }
+    /* Update groupMembership, add forced groups */
+    foreach($attrs['groupMembership'] as $dn => $cn){
+      $groups[$dn] = $cn;
+    }
+    plugin::set_multi_edit_values($attrs);
+    $this->groupMembership = $groups;
   }
 }
 

@@ -1726,6 +1726,16 @@ class plugin
     return($ret);
   }
 
+  
+  /*! \brief  Update class variables with values collected by multiple edit.
+   */
+  function set_multi_edit_values($attrs)
+  {
+    foreach($attrs as $name => $value){
+      $this->$name = $value;
+    }
+  }
+
 
   /*! \brief execute plugin
 

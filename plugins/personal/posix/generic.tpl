@@ -89,8 +89,13 @@
 {if !$multiple_support}
     {html_options options=$groupMembership}
 {else}
-
-	
+	{foreach from=$groupMembership item=group key=key}
+		<option value="{$key}">{$group}&nbsp;({t}In all groups{/t})</option>
+	{/foreach}
+	{foreach from=$groupMembership_some item=group key=key}
+		<option value="{$key}" 
+			style='color: #888888; background: #DDDDDD;background-color: #DDDDDD;'>{$group}&nbsp;({t}Not in all groups{/t})</option>
+	{/foreach}
 {/if}
    </select>
 {/render}
