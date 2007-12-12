@@ -138,14 +138,21 @@ class multi_plug
           if(!isset($handle->by_object[$first]->attrs[$key]) || !($attr === $handle->by_object[$first]->attrs[$key])){
             unset($attrs[$key]);
           }
-          if(!is_numeric($key)){
-            if(!isset($all[$key])){
+        }
+      }
+
+      foreach($handle->by_object[$first]->attrs as $key => $attr) {
+        if(!is_numeric($key)){
+          if(!isset($all[$key])){
+            if(is_array($attr)){
               $all[$key] = $attr; 
-            }elseif(isset($attr['count'])){
-              for($i = 0; $i < $attr['count'] ; $i ++){
+            }
+          }elseif(isset($attr['count'])){
+            for($i = 0; $i < $attr['count'] ; $i ++){
+              if(!in_array($attr[$i],$all[$key])){
                 $all[$key][] = $attr[$i];
+                $all[$key]['count']++;
               }
-              $all[$key] = array_unique($all[$key]);
             }
           }
         }
