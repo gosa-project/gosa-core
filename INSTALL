@@ -1,0 +1,109 @@
+GOsa2.1 QUICK INSTALL
+=====================
+
+* Installing GOsa
+
+Unpack the GOsa tarball and move the main gosa directory to
+a place your webserver is configured to find it. The default
+location will be /usr/share/gosa. For later reference, I assume
+that you've choosen this path, too.
+
+Create the directory /var/spool/gosa for the smarty compile directory.
+Make it read/write for the webserver (additional chmod 770). You may
+want to move it elsewhere, configure it in gosa.conf.
+
+Create the configuration directory /etc/gosa and make sure
+that your webserver can read it.
+
+As a summmary, you now have these directories for GOsa:
+
+/etc/gosa
+/var/spool/gosa
+/usr/share/gosa
+
+After this has been done, include settings for GOsa in your apache
+config:
+
+# Set alias to gosa
+Alias /gosa /usr/share/gosa/html
+
+Assumed you've installed PHP >= 4.1.0, restart your apache webserver
+and do your first GOsa dry run without configuration:
+
+http[s]://your-server/gosa/setup.php
+
+GOsa setup will perform some basic system checks about general
+prerequisites. The setup asks some questions and provides a
+basic gosa.conf to save in /etc/gosa. Follow the instructions
+until you're able to log in.
+
+As a final step - which is not done automatically yet, you've to
+create a group which members will be GOsa administrators. Here's
+an example ldif which creates a user named "admin" with the password
+"tester" and a group where this user is in:
+
+dn: cn=admin,ou=people,dc=example,dc=net
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: gosaAccount
+uid: admin
+cn: admin
+givenName: admin
+sn: GOsa main administrator
+lmPassword: 10974C6EFC0AEE1917306D272A9441BB
+ntPassword: 38F3951141D0F71A039CFA9D1EC06378
+userPassword:: dGVzdGVy
+
+dn: cn=administrators,ou=groups,dc=example,dc=net
+objectClass: gosaObject
+objectClass: posixGroup
+gosaSubtreeACL: :all
+cn: administrators
+gidNumber: 999
+memberUid: admin
+
+After adding these entries, you should be able to use GOsa. Log in as
+admin and try experiment with the GUI.
+
+
+* Migrating an existing tree
+
+To migrate an existing LDAP tree, you've to do all steps from above,
+plus some modifications:
+
+- GOsa only shows users that have the objectClass gosaAccount
+  This one has been introduced for several reasons. First, there are
+  cases you want to hide special accounts from regular admins (i.e.
+  a samba admin account which is used to log windows machines into
+  their domain, where chaning a password by accident has bad consequences).
+  Secondly the gosaAccount keeps the lm/nt password hashes and the
+  attributes for the last password change - with the consequence that
+  adding a samba account "later" will not require the user to reset
+  the password.
+
+- GOsa only recognizes subtrees (or departments in GOsa's view of things)
+  that have the objectClass gosaDepartment. You can hide subtrees from GOsa
+  by not putting this objectClass inside.
+
+- You need at least one group with objectClass gosaObject and attribute
+  gosaSubtreeACL set to :all in the base of your tree. All members of this
+  group are able to change everything in GOsa. Look at the cn=administrators
+  from above.
+
+That should be all. Entries should be visible in GOsa now. Be aware that if
+your naming policy of user cn's differs from the way GOsa handles it, the
+entries get rewritten to a GOsa style dn.
+
+
+* More informations
+
+To improve this piece of software, please report all kind of errors.
+Looking for a mailing list? Go to
+
+https://oss.gonicus.de/cgi-bin/mailman/listinfo/gosa/
+
+Thanks
+
+---
+Cajus Pollmeier <pollmeier@gonicus.de>

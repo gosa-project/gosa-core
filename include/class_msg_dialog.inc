@@ -1,0 +1,162 @@
+<?php
+
+define("INFO_DIALOG"		, 10001);
+define("WARNING_DIALOG"		, 10002);
+define("ERROR_DIALOG"		, 10003);
+define("CONFIRM_DIALOG"		, 10004);
+define("FATAL_ERROR_DIALOG"	, 10005);
+
+class msg_dialog
+{
+	private $s_Title 	= "Undefined";
+	private $s_Message 	= "Undefined";
+	private $i_Type 	= INFO_DIALOG ;
+	private $i_ID		= 0;
+	private $a_Trace	= array();
+
+	public function __construct($s_title,$s_message,$i_type)
+	{
+		global $config;
+	
+		if(!in_array($i_type,array(INFO_DIALOG,WARNING_DIALOG,ERROR_DIALOG,CONFIRM_DIALOG,FATAL_ERROR_DIALOG))){
+			trigger_error("Invalid msg_dialog type.");
+			$i_type = INFO_DIALOG;
+		}
+
+		if((!isset($_SESSION['errorsAlreadyPosted'])) || !is_array($_SESSION['errorsAlreadyPosted'])){
+			$_SESSION['errorsAlreadyPosted'] = array();
+		}
+
+		if(!isset($_SESSION['errorsAlreadyPosted'][$s_title.$s_message])){
+			$_SESSION['errorsAlreadyPosted'][$s_title.$s_message] = 0;
+		}
+		$_SESSION['errorsAlreadyPosted'][$s_title.$s_message]++;
+
+		if($_SESSION['errorsAlreadyPosted'][$s_title.$s_message] <=1  ){
+
+			$this->i_ID 	 = preg_replace("/[^0-9]*/","",microtime()); 
+			$this->s_Title	 = $s_title;
+			$this->s_Message = $s_message;
+			$this->i_Type	 = $i_type;
+
+			/* Append trace information, only if error messages are enabled */
+			if(	isset($config) && 
+				is_object($config) && 
+				isset($config->data['MAIN']['DISPLAYERRORS']) &&
+				preg_match("/^true$/i",$config->data['MAIN']['DISPLAYERRORS'])){
+				$this->a_Trace	 = debug_backtrace();
+			}
+			if(!isset($_SESSION['msg_dialogs'])){
+				$_SESSION['msg_dialogs'] = array();
+			}
+			if($this->i_Type == FATAL_ERROR_DIALOG){
+				restore_error_handler();
+				error_reporting(E_ALL);
+				echo $this->execute();
+			}else{
+				$_SESSION['msg_dialogs'][] = $this;
+			}
+		}
+	}
+
+	public static function display($s_title,$s_message,$i_type = INFO_DIALOG)
+	{
+		new msg_dialog($s_title,$s_message,$i_type);	
+	}
+
+	public function get_ID()
+	{
+		return($this->i_ID);
+	}
+
+	public function execute()
+	{
+		if($this->i_Type == FATAL_ERROR_DIALOG)	{
+			$display = 
+				"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"
+				\"http://www.w3.org/TR/html4/transitional.dtd\">
+				<html><head>
+				<title>GOsa startup failed</title>
+				</head><body>
+				<table style='width:100%; border:2px solid red;' summary=''>
+				<tr><td style='vertical-align:top;padding:10px'>
+				<img src='images/error.png' alt='{t}Error{/t}'>
+				</td><td style='width:100%'>
+				<b>Fatal Error - GOsa execution abortet - ".$this->s_Title."</b><br>
+				".$this->s_Message."<br><br>
+				"._("Please fix the above error and reload the page.")."
+				</td></tr>
+				</table></body></html>";
+			return($display);;
+		}else{
+
+			$smarty = get_smarty();
+			$smarty->assign("s_Trace"	,print_a($this->a_Trace,TRUE));
+			$smarty->assign("i_TraceCnt",count($this->a_Trace));
+			$smarty->assign("i_Type",$this->i_Type);
+			$smarty->assign("s_Message",$this->s_Message);
+			$smarty->assign("s_Title",$this->s_Title);
+			$smarty->assign("i_ID",$this->i_ID);
+			$smarty->assign("frame",false);
+			$smarty->assign("JS",$_SESSION['js']);
+			$smarty->assign("IE",preg_match("/MSIE/", $_SERVER['HTTP_USER_AGENT']));
+			return($smarty->fetch(get_template_path('msg_dialog.tpl')));
+		}
+	}
+
+	
+	public function is_confirmed()
+	{
+		if(isset($_POST['MSG_OK'.$this->i_ID])){
+			return(TRUE);
+		}else{
+			return(FALSE);
+		}
+	}
+	
+
+	public static function get_dialogs()
+	{
+		$return  ="";
+		$dialog_ids= "";
+
+		$seen = "";
+		if(isset($_POST['closed_msg_dialogs'])){
+#			$seen = $_POST['closed_msg_dialogs'];
+		}
+
+		if(isset($_SESSION['msg_dialogs']) && is_array($_SESSION['msg_dialogs']) && count($_SESSION['msg_dialogs'])){
+
+			/* Get frame one */
+			$smarty = get_smarty();
+			$smarty->assign("frame", true);
+			$smarty->assign("IE",preg_match("/MSIE/", $_SERVER['HTTP_USER_AGENT']));
+			$return = $smarty->fetch(get_template_path('msg_dialog.tpl'));
+
+			if(!$_SESSION['js']){
+				$dialog = array_pop($_SESSION['msg_dialogs']);
+				$return.= $dialog->execute();
+			}else{
+				foreach($_SESSION['msg_dialogs'] as $key => $dialog){
+
+					if(preg_match("/".$dialog->get_ID()."/",$seen)){
+						unset($_SESSION['msg_dialogs'][$key]);
+					}else{
+						$return.= $dialog->execute();
+						$dialog_ids= $dialog->get_ID().",".$dialog_ids;
+					}
+					unset($_SESSION['msg_dialogs'][$key]);
+				}
+			}
+			$dialog_ids = preg_replace("/,$/","",$dialog_ids);
+
+			$return .= "</div>";
+			$return .="<input type='hidden' style='width:400px;' name='pending_msg_dialogs' id='pending_msg_dialogs' value='".$dialog_ids."'>";
+			$return .="<input type='hidden' style='width:400px;' name='closed_msg_dialogs' id='closed_msg_dialogs' value=''>";
+			$return .="<input type='hidden' style='width:400px;' name='current_msg_dialogs' id='current_msg_dialogs' value=''>";
+			$return .="<input type='hidden' style='width:700px;' name='js_debug' id='js_debug'>";
+		}
+		return($return);
+	}
+}
+?>
