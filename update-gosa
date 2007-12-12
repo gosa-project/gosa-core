@@ -1,0 +1,81 @@
+#!/usr/bin/php5
+<?php
+
+/* Function to include all class_ files starting at a given directory base */
+function get_classes($folder= ".")
+{
+  static $base_dir= "";
+  static $result= array();
+
+  if ($base_dir == ""){
+    $base_dir= getcwd();
+  }
+
+  $currdir=getcwd();
+  if ($folder){
+    chdir("$folder");
+  }
+
+  $dh = opendir(".");
+  while(false !== ($file = readdir($dh))){
+
+    if (preg_match("/.*\.svn.*/", $file) ||
+        preg_match("/.*smarty.*/i",$file) ||
+        preg_match("/.*\.tpl.*/",$file) ||
+        ($file==".") ||($file =="..")){
+      continue;
+    }
+
+    /* Recurse through all "common" directories */
+    if (is_dir($file)){
+      get_classes($file);
+      continue;
+    }
+
+    /* Only take care about .inc and .php files... */
+    if (!(preg_match('/\.php$/', $file) || preg_match('/\.inc$/', $file))){
+      continue;
+    }
+
+    /* Include existing class_ files */
+    $contents= file($file);
+    foreach($contents as $line){
+      $line= chop($line);
+      if (preg_match('/^\s*class\s*\w.*$/', $line)){
+        $class= preg_replace('/^\s*class\s*(\w+).*$/', '\1', $line);
+        $result[$class]= preg_replace("%$base_dir/%", "", "$currdir/$folder/$file");
+      }
+    }
+  }
+
+  closedir($dh);
+  chdir($currdir);
+
+  return ($result);
+}
+
+$class_mapping= get_classes();
+$filename= "include/class_location.inc";
+
+/* Sanity checks */
+if (is_writable($filename)) {
+
+    if (!$handle= fopen($filename, 'w')) {
+         echo "Cannot open file \"$filename\" - aborted\n";
+         exit (1);
+    }
+
+} else {
+    echo "File \"$filename\" is not writable - aborted\n";
+    exit (2);
+}
+
+fwrite ($handle, "<?php\n\$class_mapping= array(\n");
+foreach ($class_mapping as $key => $value){
+  fwrite ($handle, "                \"$key\" => \"$value\",\n");
+}
+fwrite ($handle, " );\n?>");
+
+fclose($handle);
+
+?>
