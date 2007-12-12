@@ -1,0 +1,2033 @@
+#LyX 1.4.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 245
+\begin_document
+\begin_header
+\textclass article
+\language ngerman
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\leftmargin 10mm
+\topmargin 10mm
+\rightmargin 10mm
+\bottommargin 20mm
+\headheight 10mm
+\headsep 10mm
+\footskip 10mm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes true
+\end_header
+
+\begin_body
+
+\begin_layout Title
+
+\series bold
+Automatische Installation
+\end_layout
+
+\begin_layout Section
+Einführung
+\end_layout
+
+\begin_layout Standard
+Die Automatische Installation (orig.
+ FAI) ist ein Softwarepaket, das eine vorkonfigurierte und automatisierte
+ Installation von Debian GNU/Linux Systemen ermöglicht.
+ Dazu werden Sammlungen (sog.
+ Profile) von verschiedenen Aspekten der Installation gebildet, um eine
+ Installation gleich oder ähnlich ausgestatteter Rechner möglichst flexibel
+ zu ermöglichen.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $GOsa^{\text{2}}$
+\end_inset
+
+ unterstützt mit der FAI-Erweiterung alle Aspekte dieser automatischen Installat
+ion.
+ Im Folgenden wird beschrieben, wie Sie die nötigen Vorbereitungen treffen,
+ um Ihre Rechner automatisch mit Debian GNU/Linux zu installieren.
+\end_layout
+
+\begin_layout Subsection
+Liste der FAI-Klassen
+\end_layout
+
+\begin_layout Standard
+Die Liste der FAI-Klassen dient als Ausgangspunkt für alle weiteren Schritte.
+ Sie wird erreicht über den Menüeintrag 
+\series bold
+\color blue
+FAI
+\series default
+\color none
+ aus der Kategorie 
+\series bold
+Administration
+\series default
+ (Menü am linken Rand des Bildschirms).
+ Bei Auswahl wird die Liste der FAI-Klassen geladen (Überschrift: 
+\emph on
+Benutzerverwaltung)
+\emph default
+.
+ Auf dieser Seite können Benutzer hinzugefügt, bearbeitet oder entfernt
+ werden.
+\end_layout
+
+\begin_layout Standard
+Die Liste ist in drei Spalten geteilt:
+\end_layout
+
+\begin_layout Itemize
+Die erste Spalte enthält zunächst die verfügbaren Abteilungen, dann die
+ Namen der FAI-Klassen (alphabetisch sortiert)
+\end_layout
+
+\begin_layout Itemize
+Die zweite Spalte enthält den ausgeschriebenen Typ der Klasse (z.B.
+ partition table)
+\end_layout
+
+\begin_layout Itemize
+Die dritte Spalte enthält Knöpfe für die möglichen Aktionen, um Verwaltungsaufga
+ben durchzuführen (Ausschneiden, Kopieren, Bearbeiten, Entfernen)
+\end_layout
+
+\begin_layout Standard
+Die vier Knöpfe 
+\begin_inset Graphics
+	filename images/list_root.png
+
+\end_inset
+
+, 
+\begin_inset Graphics
+	filename images/list_back.png
+
+\end_inset
+
+ , 
+\begin_inset Graphics
+	filename images/list_home.png
+
+\end_inset
+
+ und 
+\begin_inset Graphics
+	filename images/list_reload.png
+
+\end_inset
+
+ oberhalb der Liste dienen zur Navigation innerhalb der Abteilungshierarchie:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename images/list_root.png
+
+\end_inset
+
+: Zur Wurzel
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename images/list_back.png
+
+\end_inset
+
+: Eine Abteilung nach oben
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename images/list_home.png
+
+\end_inset
+
+: Zur Basis des angemeldeten Benutzers
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename images/list_reload.png
+
+\end_inset
+
+: Aktuelle Abteilung neu laden
+\end_layout
+
+\begin_layout Standard
+
+\color black
+Es ist weiterhin möglich, die Anzeige der FAI-Klassen mithilfe von Filtern
+ zu beeinflussen (Kasten 
+\series bold
+Filter
+\series default
+ 
+\begin_inset Graphics
+	filename images/rocket.png
+
+\end_inset
+
+ am rechten Rand): 
+\end_layout
+
+\begin_layout Itemize
+
+\color black
+Nach Namen suchen:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\color black
+Klick auf * zeigt alle FAI-Klassen an
+\end_layout
+
+\begin_layout Itemize
+
+\color black
+Klick auf einen Buchstaben zeigt alle FAI-Klassen an, deren Name mit dem
+ gewählten Buchstaben beginnt
+\end_layout
+
+\begin_layout Itemize
+Klick auf eine Ziffer zeigt alle
+\color black
+ FAI-Klassen
+\color none
+ an, deren Name mit der gewählten Ziffer beginnt
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Weitere Suchoptionen:
+\newline
+(Die folgenden Filter arbeiten so, dass nur 
+\color black
+FAI-Klassen
+\color none
+ angezeigt werden, die über mindestens eine der ausgewählten Optionen verfügen;
+ Standardmässig werden alle 
+\color black
+FAI-Klassen
+\color none
+ angezeigt)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\emph on
+Zeige Profile
+\emph default
+: Zeigt FAI-Profile (Zusammenfassung von FAI-Objekten zu einem logischen
+ Paket)
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Zeige Vorlagen
+\emph default
+: Zeigt FAI-Vorlagen
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Zeige Skripte
+\emph default
+: Zeigt FAI-Skripte
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Zeige Hooks
+\emph default
+: 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Zeige Variablen
+\emph default
+: 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Zeige Pakete
+\emph default
+: 
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Zeige Partitionen
+\emph default
+: 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Zusätzlich zu der o.g.
+ funktionalen Filterung kann die Liste durch lexikalische Filterung weiter
+ eingeschränkt werden.
+ Dazu dienen zum Einen die vordefinierten Buchstaben/Zahlen, die die Liste
+ für Benutzer einschränken, die mit dem gewählten Buchstaben/der Ziffer
+ beginnen.
+ Komplexere Einschränkungen über reguläre Ausdrücke bietet das Textfeld
+ im unteren Bereich des Kastens 
+\series bold
+Filter
+\series default
+ (beginnt mit dem Symbol 
+\begin_inset Graphics
+	filename images/search.png
+
+\end_inset
+
+).
+ In dieses Feld können Sie beliebige Buchstaben/Ziffern-Kombinationen eingeben,
+ um die Suche einzuschränken.
+ Um die Suchergebnisse in der Liste anzeigen zu lassen, klicken Sie auf
+ 
+\emph on
+Filter anwenden
+\emph default
+.
+\end_layout
+
+\begin_layout Subsection*
+Neues FAI-Objekt anlegen
+\end_layout
+
+\begin_layout Standard
+Um ein neues FAI-Objekt anzulegen, drücken Sie auf den dem Typ des anzulegenden
+ FAI-Objektes entsprechenden Knopf.
+ Die Möglichkeiten sind:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename images/fai_new_profile.png
+
+\end_inset
+
+: Ein neues FAI-Profil anlegen
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename images/fai_new_partitionTable.png
+
+\end_inset
+
+: Eine neue FAI-Partitionstabelle anlegen
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename images/fai_new_script.png
+
+\end_inset
+
+: Ein neues FAI-Skript anlegen
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename images/fai_new_hook.png
+
+\end_inset
+
+: Einen neuen FAI-Hook anlegen
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename images/fai_new_variable.png
+
+\end_inset
+
+: Eine neue FAI-Variable anlegen
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename images/fai_new_template.png
+
+\end_inset
+
+: Eine neue FAI-Vorlage anlegen
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename images/fai_new_packages.png
+
+\end_inset
+
+: Eine neue FAI-Paketliste anlegen
+\end_layout
+
+\begin_layout Standard
+Sie werden nun aufgefordert, einen eindeutigen Namen für das neue Objekt
+ zu vergeben.
+ Die Eindeutigkeit bezieht sich dabei ausschließlich auf den momentan gültigen
+ Objekttyp! Sie können also verschiedene gleichnamige Objekte erstellen
+ - diese müssen lediglich unterschiedliche Typen von FAI-Objekten sein (also
+ Partitionstabelle, Paketliste etc.).
+\end_layout
+
+\begin_layout Standard
+Wenn Sie einen Namen vergeben haben, drücken Sie auf den Knopf 
+\emph on
+Fortsetzen
+\emph default
+.
+ Befolgen Sie dann die nachfolgende Beschreibung für die Bearbeitung bestehender
+ FAI-Objekte.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Ein bestehendes FAI-Objekt bearbeiten
+\end_layout
+
+\begin_layout Standard
+Klicken Sie in der Liste FAI-Objekte auf den Namen des gewünschten Objektes.
+ Es öffnet sich die Eigenschaftsseite des Objektes, die für alle verschiedenen
+ Typen unterschiedlich ist.
+ Im Folgenden sind die Eigenschaften aller FAI-Objekttypen aufgeführt.
+\end_layout
+
+\begin_layout Subsubsection*
+Generelle Informationen
+\end_layout
+
+\begin_layout Itemize
+Um die Bearbeitung des FAI-Objektes (auch neuer Objekte) abzuschliessen,
+ drücken Sie auf den Knopf 
+\emph on
+Speichern
+\emph default
+ unten rechts; um den Vorgang zu verwerfen, drücken Sie auf den Knopf 
+\emph on
+Abbrechen
+\emph default
+, der sich ebenfalls unten rechts befindet.
+\end_layout
+
+\begin_layout Itemize
+Alle Felder, die mit einem roten Sternchen 
+\color red
+*
+\color none
+ enden, sind Pflichtfelder und müssen daher zwingend ausgefüllt werden.
+\end_layout
+
+\begin_layout Itemize
+In der rechten, oberen Ecke findet sich der komplette 
+\emph on
+dn
+\emph default
+ des aktuell geöffneten Objektes.
+\end_layout
+
+\begin_layout Standard
+
+\newpage
+
+\end_layout
+
+\begin_layout Section
+Partitionstabellen
+\end_layout
+
+\begin_layout Standard
+Partitionstabellen dienen dazu (wie es der Name vermuten lässt), die automatisch
+e Partitionierung während der Installation mit FAI zu konfigurieren.
+ Dazu werden in diesem Objekt die nötigen Informationen eingebettet - diese
+ umfassen die im Zielsystem vorhandenen Festplatten mit den zugehörigen
+ Partitionen.
+\end_layout
+
+\begin_layout Subsection
+Allgemein
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\color black
+Name
+\color red
+*
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Eindeutiger Name der FAI-Partitionstabelle
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Beschreibung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Kurze Beschreibung der FAI-Partitionstabelle
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Festplatten
+\end_layout
+
+\begin_layout Standard
+Zu jeder Partitionstabelle gehören eine oder mehrere Festplatten (wobei
+ GOsa es durchaus erlaubt, leere Partitionstabellen zu erstellen).
+ Diese enthalten die tatsächlich später anzulegenden Partitionen.
+ Um eine Festplatte hinzuzufügen, werden zum einen die allgemeinen Angaben
+ zur Festplatte sowie die einzelnen Partitionseinträge benötigt.
+\end_layout
+
+\begin_layout Subsubsection
+Gerät
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\color black
+Name
+\color red
+*
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Gerätedatei (z.B.
+ /dev/hda)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Beschreibung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Kurze Beschreibung der Festplatte
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Partitions-Einträge
+\end_layout
+
+\begin_layout Standard
+Um eine neue Partition hinzuzufügen, drücken Sie auf den Knopf 
+\emph on
+Partition hinzufügen
+\emph default
+.
+ Um eine bestehende Partition wieder zu entfernen, drücken Sie auf den Knopf
+ 
+\emph on
+Entfernen
+\emph default
+ in der entsprechenden Zeile.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="3cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="12cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Typ
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Wählen Sie aus der Liste, ob die Partition primär (primary) oder logisch
+ (logical) ist.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Dateisystem
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Wählen Sie aus der Liste das Dateisystem, mit dem die Partition formatiert
+ wird.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Mount-Punkt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Geben Sie den Mount-Punkt der Partition an (z.B.
+ /, /var, /home, /export, etc.).
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Größe in MB
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Geben Sie die Größe der Partition in MB an.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Mount-Optionen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Geben Sie optionale Mount-Optionen der Partition an.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Dateisystem-Option
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Geben Sie optionale Dateisystem-Optionen der Partition an.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Bewahren
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Aktivieren Sie diese Option, wenn die Partition bei einer Neuinstallation
+ nicht formatiert werden soll (wenn Sie bereits vorhanden ist).
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Skript-Sammlung
+\end_layout
+
+\begin_layout Standard
+Eine Skript-Sammlung dient dazu, zu einer logischen Einheit gehörende Skripte
+ zusammenzufassen.
+ Skripte dienen im Allgemeinen dazu, spezifische Vorbereitungen zu treffen.
+ Diese eingebundenen Skripte werden beim Startvorgang des Systems mit einer
+ definierten Priorität ausgeführt.
+ 
+\end_layout
+
+\begin_layout Subsection
+Allgemein
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\color black
+Name
+\color red
+*
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Eindeutiger Name der FAI-Skriptsammlung
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Beschreibung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Kurze Beschreibung der FAI-Skriptsammlung
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Liste der Skripte
+\end_layout
+
+\begin_layout Standard
+Die Liste der Skripte dient dazu, einzelne Skripte zu dieser Sammlung hinzuzufüg
+en und bereits zugeordnete Skripte wieder zu entfernen.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Skript hinzufügen
+\end_layout
+
+\begin_layout Standard
+Um ein Skript hinzuzufügen, drücken Sie auf den Knopf 
+\emph on
+Hinzufügen
+\emph default
+ unterhalb der Liste.
+\end_layout
+
+\begin_layout Subsubsection
+Skript bearbeiten
+\end_layout
+
+\begin_layout Standard
+Um ein bestehendes Skript zu bearbeiten, drücken Sie auf den Knopf 
+\begin_inset Graphics
+	filename images/edit.png
+
+\end_inset
+
+ am Ende der Zeile des Skriptes, das Sie bearbeiten möchten.
+ Folgen Sie nun den Anweisungen, um ein neues Skript zu erstellen.
+\end_layout
+
+\begin_layout Subsubsection
+Skript entfernen
+\end_layout
+
+\begin_layout Standard
+Um ein bestehendes Skript zu entfernen, drücken Sie auf den Knopf 
+\begin_inset Graphics
+	filename images/edittrash.png
+
+\end_inset
+
+ am Ende der Zeile des Skriptes, das Sie entfernen möchten.
+\end_layout
+
+\begin_layout Subsection
+Skript erstellen
+\end_layout
+
+\begin_layout Standard
+Nachdem Sie ein neues Skript erstellt haben (oder ein bestehendes Skript
+ zum Bearbeiten geöffnet haben), öffnet sich die Eigenschaftsseite, auf
+ der die allgemeinen Einstellungen, die Attribute sowie der eigentliche
+ Skript-Inhalt bearbeitet werden können.
+\end_layout
+
+\begin_layout Section
+Hooks
+\end_layout
+
+\begin_layout Standard
+Hooks dienen dazu, die Installation eines FAI-Systems kurzzeitig an definierten
+ Haltepunkten zu unterbrechen, um ein oder mehrere Skripte auszuführen.
+ Der Einsatzweck liegt darin, eine generische Installation perfekt an die
+ Gegebenheiten eines einzelnen Systems anzupassen, indem die Skripte verschieden
+e Umgebungsbedingungen, die erst zum Installationszeitpunkt bekannt sind,
+ ermitteln und für die Weiterverarbeitung an den Installationsprozess zurückgebe
+n.
+\end_layout
+
+\begin_layout Standard
+GOsa verwaltet Hooks als Gruppe von Hook-Skripten, dies dient automatisch
+ dem Ziel, Hook-Skripte zusammengefasst abzulegen.
+\end_layout
+
+\begin_layout Subsection
+Allgemein
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\color black
+Name
+\color red
+*
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Eindeutiger Name der Hook-Gruppe
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Beschreibung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Kurze Beschreibung der Hook-Gruppe
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Liste der Hook-Skripte
+\end_layout
+
+\begin_layout Standard
+Die Liste der Hook-Skripte dient dazu, einzelne Hook-Skripte zu dieser Sammlung
+ hinzuzufügen und bereits zugeordnete Hook-Skripte wieder zu entfernen.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Hook-Skript hinzufügen
+\end_layout
+
+\begin_layout Standard
+Um ein Hook-Skript hinzuzufügen, drücken Sie auf den Knopf 
+\emph on
+Hinzufügen
+\emph default
+ unterhalb der Liste.
+ Sie können nun die folgenden Einstellungen vornehmen:
+\end_layout
+
+\begin_layout Paragraph
+Allgemein
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\color black
+Name
+\color red
+*
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Eindeutiger Name des Hooks
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Beschreibung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Kurze Beschreibung des Hooks
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Hook-Attribute
+\end_layout
+
+\begin_layout Standard
+Wählen Sie aus der Liste den Zeitpunkt, wann der Hook aufgerufen werden
+ soll.
+\end_layout
+
+\begin_layout Paragraph
+Skript
+\end_layout
+
+\begin_layout Standard
+Geben Sie das Skript in das Textfeld ein, oder laden Sie die Datei hoch,
+ indem Sie zuerst mit dem Knopf 
+\emph on
+Durchsuchen
+\emph default
+ die Datei auswählen und dann mit dem Knopf 
+\emph on
+Skript importieren
+\emph default
+ die Datei hochladen.
+\end_layout
+
+\begin_layout Subsubsection
+Hook-Skript bearbeiten
+\end_layout
+
+\begin_layout Standard
+Um ein bestehendes Hook-Skript zu bearbeiten, drücken Sie auf den Knopf
+ 
+\begin_inset Graphics
+	filename images/edit.png
+
+\end_inset
+
+ am Ende der Zeile des Hook-Skriptes, das Sie bearbeiten möchten.
+ Folgen Sie nun den Anweisungen, um ein neues Hook-Skript zu erstellen.
+\end_layout
+
+\begin_layout Subsubsection
+Hook-Skript entfernen
+\end_layout
+
+\begin_layout Standard
+Um ein bestehendes Hook-Skript zu entfernen, drücken Sie auf den Knopf 
+\begin_inset Graphics
+	filename images/edittrash.png
+
+\end_inset
+
+ am Ende der Zeile des Hook-Skriptes, das Sie entfernen möchten.
+\end_layout
+
+\begin_layout Section
+Variablen
+\end_layout
+
+\begin_layout Standard
+FAI-Variablen dienen dazu, systemweite Variablen zur Laufzeit der Installation
+ bereitzustellen (meist um auszuführende Skripte oder Hooks zu steuern).
+ Diese sind in Variablen-Gruppen zusammengefasst.
+\end_layout
+
+\begin_layout Subsection
+FAI-Variablengruppe erstellen
+\end_layout
+
+\begin_layout Standard
+Um eine neue FAI-Vorlagengruppe zu erstellen, befolgen Sie zunächst die
+ generischen Anweisungen zum Erstellen eines FAI-Objektes (natürlich mit
+ dem Knopf 
+\begin_inset Graphics
+	filename images/fai_new_variable.png
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsubsection
+FAI-Variable hinzufügen
+\end_layout
+
+\begin_layout Standard
+Um eine Variable zu einer Variablengruppe hinzuzufügen, drücken Sie auf
+ den Knopf 
+\emph on
+Hinzufügen
+\emph default
+ unterhalb der 
+\emph on
+Liste benutzter Variablen
+\emph default
+.
+ Geben Sie den zumindest Namen der Variablen, sowie den Inhalt ein (optional
+ können Sie in das Feld 
+\emph on
+Beschreibung
+\emph default
+ eine kurze Beschreibung der Variablen eingeben) und drücken Sie auf den
+ Kopf 
+\emph on
+Anwenden
+\emph default
+, um die neue Variable zu speichern.
+\end_layout
+
+\begin_layout Subsubsection
+FAI-Variable bearbeiten
+\end_layout
+
+\begin_layout Standard
+Um eine bestehende Variable zu bearbeiten, markieren Sie diese in der 
+\emph on
+Liste benutzter Variablen
+\emph default
+ und drücken Sie auf den Knopf 
+\emph on
+Bearbeiten
+\emph default
+.
+ Bearbeiten Sie die Variable und speichern Sie die Änderungen, indem Sie
+ auf den Knopf 
+\emph on
+Anwenden
+\emph default
+ drücken.
+ Wenn Sie die Änderungen verwerfen möchten, drücken Sie auf den Knopf 
+\emph on
+Abbrechen
+\emph default
+.
+\end_layout
+
+\begin_layout Subsubsection
+FAI-Variable entfernen
+\end_layout
+
+\begin_layout Standard
+Um eine bestehende Variable zu entfernen, markieren Sie diese in der 
+\emph on
+Liste benutzer Variablen
+\emph default
+ und drücken Sie auf den Knopf 
+\emph on
+Entfernen
+\emph default
+.
+ Die Variable wird nun nicht mehr in der Liste aufgeführt.
+\end_layout
+
+\begin_layout Section
+Vorlagen
+\end_layout
+
+\begin_layout Standard
+FAI-Vorlagen dienen dazu, während der Installation Dateien im installierten
+ System mit zuvor abgelegten Dateien auszutauschen.
+ Der häufigste Fall für deren Verwendung ist das Ablegen von Konfigurationsdatei
+en, aber auch das Ablegen von z.B.
+ beliebiger Dateien (Begrüßung der Benutzer, Vorlagen für Textdokumente)
+ sind gängige Praxis.
+ Für die Dateien können UNIX-spezifische Angaben wie Eigentümer, Gruppe
+ und die Zugriffsrechte festgelegt werden.
+ Die Vorlagen werden als Gruppe von Vorlagen verwaltet.
+\end_layout
+
+\begin_layout Subsection
+FAI-Vorlagengruppe erstellen
+\end_layout
+
+\begin_layout Standard
+Um eine neue FAI-Vorlagengruppe zu erstellen, befolgen Sie zunächst die
+ generischen Anweisungen zum Erstellen eines FAI-Objektes (natürlich mit
+ dem Knopf 
+\begin_inset Graphics
+	filename images/fai_new_template.png
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsubsection
+FAI-Vorlage hinzufügen
+\end_layout
+
+\begin_layout Standard
+Um eine Vorlage zu einer Vorlagengruppe hinzuzufügen, öffnen Sie die Eigenschaft
+sseite der gewünschen Vorlagengruppe (wenn Sie dabei sind, eine neue Vorlagengru
+ppe zu erstellen, sind Sie bereits richtig).
+ Drücken Sie auf den Knopf 
+\emph on
+Hinzufügen
+\emph default
+ unterhalb der 
+\emph on
+Liste der Vorlagen
+\emph default
+.
+ Es öffnet sich die Eigenschaftsseite mit den folgenden Einstellmöglichkeiten:
+\end_layout
+
+\begin_layout Paragraph
+Allgemein
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Name
+\color red
+*
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Eindeutiger Name der Vorlage
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Beschreibung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Kurze Beschreibung der Vorlage
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Vorlagen-Attribute
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Datei
+\color red
+*
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Drücken Sie auf den Knopf 
+\emph on
+Durchsuchen
+\emph default
+ und wählen Sie die gewünschte Datei.
+ Drücken Sie, wenn die Datei ausgewählt wurde, auf den Knopf 
+\emph on
+Hochladen
+\emph default
+ und warten Sie einen Moment, bis die Datei auf den Server hochgeladen wurde.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Ziel-Pfad
+\color red
+*
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Geben Sie das Verzeichnis ein (komplett, also z.B.
+ /etc/gosa), in das die Datei kopiert wird.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Besitzer
+\color red
+*
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Geben Sie den Benutzernamen des gewünschten Besitzers an (z.B.
+ root)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Gruppe
+\color red
+*
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Geben Sie den Gruppennamen der gewünschten Gruppe an (z.B.
+ wheel)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Zugriff
+\color red
+*
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Stellen Sie in dieser Tabelle die Zugriffsrechte der Datei für 
+\emph on
+Besitzer
+\emph default
+, 
+\emph on
+Gruppe
+\emph default
+ und 
+\emph on
+Andere
+\emph default
+ ein.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+FAI-Vorlage bearbeiten
+\end_layout
+
+\begin_layout Subsubsection
+FAI-Vorlage entfernen
+\end_layout
+
+\begin_layout Section
+Paketlisten
+\end_layout
+
+\begin_layout Standard
+FAI-Paketlisten dienen dazu, verschiedene Installationsprofile anhand der
+ installierten Software zu bilden.
+ Eine Paketliste hält dazu alle Pakete vor, die installiert werden.
+ Dabei werden automatisch die Abhängigkeiten aufgelöst, so dass es nicht
+ erforderlich ist, dies manuell zu tun.
+\end_layout
+
+\begin_layout Standard
+Weiterhin werden FAI-Paketlisten gegliedert in Releases (=Revisionen), die
+ unterschiedliche Versionsstände repräsentieren, sowie Sections (=Sektionen),
+ die Teilbereiche darstellen.
+ Diese sind meist entweder vom Einsatzzweck oder Lizenzmodell abhängig.
+ Unter Debian GNU/Linux gibt es beispielsweise die Sektionen 'main', 'contrib'
+ und 'non-free'.
+\end_layout
+
+\begin_layout Subsection
+Erstellen einer Paketliste
+\end_layout
+
+\begin_layout Standard
+Nachdem Sie den Namen für die Paketliste (wie oben beschrieben) vergeben
+ haben, werden Sie aufgefordert, ein Release zu wählen.
+ Tun Sie dies, indem Sie aus der Liste ein Release auswählen.
+ Daraufhin müssen Sie noch die Sektionen, über die die Paketliste verfügen
+ soll auswählen.
+ Wählen Sie dazu eine oder mehrere (wenn mehrere vorhanden sind) Sektionen,
+ indem Sie das Häkchen vor dem Namen ankreuzen.
+\end_layout
+
+\begin_layout Standard
+Wenn Sie mit der Auswahl zufrieden sind, drücken Sie auf den Knopf 
+\emph on
+Fortfahren
+\emph default
+.
+\end_layout
+
+\begin_layout Subsection
+Pakete
+\end_layout
+
+\begin_layout Subsubsection
+Allgemein
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\color black
+Name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Eindeutiger Name der Paketliste
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Beschreibung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Kurze Beschreibung der Paketliste
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Repository
+\end_layout
+
+\begin_layout Standard
+Unter dieser Sektion steht lediglich die Installations-Methode zur Auswahl,
+ 
+\emph on
+Release
+\emph default
+ und 
+\emph on
+Section
+\emph default
+ sind informativer Natur.
+\end_layout
+
+\begin_layout Standard
+Um eine geeignete Installations-Methode für Ihre Paketliste zu wählen, sind
+ die zur Auswahl stehenden Möglichkeiten in folgender Tabelle zusammengefasst:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="10" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+install
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Die gewählten Pakete werden mit den Abhängigkeiten installiert.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+ninstall
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Es wird eine Installation der noch fehlenden Pakete simuliert (z.B.
+ weil der Download fehlgeschlagen ist oder die Prüfsumme nicht stimmte)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+remove
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Entfernt die gewählten Pakete inklusive der Konfiguration (Purge).
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+dselect-upgrade
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Führt Installation basierend auf den Paketstatusinformationen von dselect
+ aus (z.B.
+ Installieren von neuen Paketen, Entfernen von alten Paketen)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+taskinst
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Installiert bereits vordefinierte 'tasks' mithilfe des Kommandos 'tasksel'.
+ Tasks sind von Debian GNU/Linux bereitgestellte Paketlisten für bestimmte
+ Aufgaben.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+hold
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Setzt die Pakete auf den Status 'hold'.
+ Dies bedeutet, dass diese von zukünftigen Upgrades nicht berücksichtigt
+ werden.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+aptitude
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Installiert alle Pakete mit dem Kommando 'aptitude'.
+ Dieses unterstützt auch Tasks.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+aptitude-r
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Installiert genau so wie obiges Kommando 'aptitude'.
+ Zusätzlich werden jedoch noch die Empfehlungen eines Paketes installiert.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+pending
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Konfiguriert die Pakete, die noch ausstehend sind.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+dpkgc
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Schliesst die Installation von nur teilweise installierten Paketen ab.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Verwendete Pakete
+\end_layout
+
+\begin_layout Standard
+Diese Sektion enthält die eigentliche Paketliste.
+ Die zugeordneten Pakete werden in der Liste aufgeführt.
+\end_layout
+
+\begin_layout Subsubsection
+Hinzufügen
+\end_layout
+
+\begin_layout Standard
+Um eines oder mehrere Pakete zu der Liste hinzuzufügen, drücken Sie auf
+ den Knopf 
+\emph on
+Hinzufügen
+\emph default
+ unterhalb der Liste.
+ Die nun geladene Seite enthält zunächst eine leere Liste, da eine Gesamtauswahl
+ einige Zeit in Anspruch nehmen würde (Generell ist die Liste darauf beschränkt,
+ maximal 200 Treffer anzuzeigen).
+ Um Pakete anzuzeigen, die Sie hinzufügen können, müssen Sie die Suche einschrän
+ken: Dazu befinden sich im Kasten Filter zum einen Checkboxen, die verschiedene
+ Anwendungsgebiete in die Liste aufnehmen (wenn sie gewählt sind) oder diese
+ aus der Liste ausblenden (wenn sie abgewählt sind) und zum anderen ein
+ Eingabefeld, in das ein Such-Text eingegeben werden kann bzw.
+ sollte.
+ Wenn Sie mithilfe der Filtermethoden das gewünschte Paket gefunden haben,
+ markieren Sie einfach die Checkbox am Anfang der Zeile des Pakets.
+ 
+\end_layout
+
+\begin_layout Standard
+Zum letztendlichen Hinzufügen der gewählten Pakete drücken Sie auf den Knopf
+ 
+\emph on
+Anwenden
+\emph default
+ unten rechts.
+ Um Ihre Auswahl zu verwerfen drücken Sie auf den Knopf 
+\emph on
+Abbrechen
+\emph default
+.
+\end_layout
+
+\begin_layout Paragraph
+Mehrere Pakete hinzufügen
+\end_layout
+
+\begin_layout Standard
+Wenn Sie mehrere Pakete hinzufügen möchten, speichert GOsa automatisch Ihre
+ bisherige Auswahl.
+ Sie können also, nachdem Sie eine Auswahl getroffen haben, weiter nach
+ Paketen suchen und diese markieren.
+ Verfahren Sie weiter wie oben beschrieben.
+\end_layout
+
+\begin_layout Subsubsection
+Entfernen
+\end_layout
+
+\begin_layout Standard
+Um eines oder mehrere Pakete aus der Paketliste zu entfernen (nicht zum
+ deinstallieren!), markieren Sie diese und drücken Sie auf den Knopf 
+\emph on
+Entfernen
+\emph default
+ unterhalb der Liste.
+\end_layout
+
+\begin_layout Subsubsection
+Konfigurieren
+\end_layout
+
+\begin_layout Subsubsection
+Entfernen-Flag umschalten
+\end_layout
+
+\begin_layout Section
+Profile
+\end_layout
+
+\begin_layout Standard
+FAI-Profile sind sozusagen das Bindeglied aller FAI-Objekttypen - sie fassen
+ die verschiedenen Typen zusammen, damit man alle Aspekte eines Systems
+ oder vielmehr einer Gruppe von Systemen gebündelt definieren kann.
+ Dazu werden einfach die gewünschten FAI-Klassenobjekte (Paketliste, Partitionst
+abelle etc.) dem Profil zugeordnet.
+ Bei der Installation wird dann für ein System dieses Profil ausgewählt
+ und die Installation kann beginnen.
+\end_layout
+
+\begin_layout Subsection
+Erstellen eines FAI-Profils
+\end_layout
+
+\begin_layout Standard
+Um ein neues FAI-Profil zu erstellen, drücken Sie auf die Schaltfläche 
+\begin_inset Graphics
+	filename images/fai_profile.png
+
+\end_inset
+
+ (
+\emph on
+Neues FAI-Profil erstellen
+\emph default
+) oberhalb der Liste.
+ Geben Sie dann einen eindeutigen Namen und optional eine Beschreibung für
+ das Profil ein.
+ Fügen Sie dann mithilfe des Knopfes 
+\emph on
+Hinzufügen
+\emph default
+ mindestens ein Objekt hinzu.
+ Zum Auswählen der gewünschten Klasse(n) markieren Sie die Auswahlbox in
+ der passenden Zeile der Klasse(n).
+ Drücken Sie dann auf den Knopf 
+\emph on
+Anwenden
+\emph default
+ unterhalb der Liste.
+ Um den Vorgang abzubrechen und die Auswahl zu verwerfen, drücken Sie auf
+ den Knopf 
+\emph on
+Abbrechen
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Wenn dem Profil mindestens eine Klasse zugeordnet wurde, können Sie das
+ Profil speichern, indem Sie auf den Knopf 
+\emph on
+Speichern
+\emph default
+ drücken.
+ Das Profil wird nun in der Liste angezeigt.
+\end_layout
+
+\begin_layout Subsection
+Bearbeiten eines FAI-Profils
+\end_layout
+
+\begin_layout Standard
+Um ein bestehendes Profil zu bearbeiten, drücken Sie entweder auf den Namen
+ des Profils oder auf den Knopf 
+\begin_inset Graphics
+	filename images/edit.png
+
+\end_inset
+
+ am Ende der Zeile des Profils.
+\end_layout
+
+\end_body
+\end_document

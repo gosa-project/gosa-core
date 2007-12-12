@@ -1,0 +1,64 @@
+#! /bin/sh
+# GOsa postinst script
+
+#DEBHELPER#
+
+# We exit unless the package is being configured
+case "$1" in
+        abort*upgrade)         exit 0;;
+        abort*remove)          exit 0;;
+        abort*deconfigure)     exit 0;;
+        configure) ;;
+        *)                     exit 0;
+esac
+
+# Get apache versions running
+servers=""
+for srv in apache apache-ssl apache2; do
+	if [ -x /usr/sbin/$srv ]; then
+                servers="$srv $servers"
+	fi
+done
+
+for server in $servers; do
+
+        # Set ID's
+        WEBUSER="www-data"
+        WEBGROUP="www-data"
+
+	# Copy GOsa apache.conf to conf.d directories
+	if [ ! -f /etc/$server/conf.d/gosa.conf ]; then
+		echo "Making /gosa available in /etc/$server/conf.d"
+
+		# Add GOsa include file
+		cp /etc/gosa/apache.conf /etc/$server/conf.d/gosa.conf
+	fi
+
+done
+
+# Make compile directory writeable for webuser
+chown root.$WEBGROUP -R /var/spool/gosa
+chmod 770 -R /var/spool/gosa
+
+# Add links for safe mode
+[ ! -d /usr/share/gosa/bin ] && mkdir -p /usr/share/gosa/bin
+for source in /usr/bin/convert /usr/bin/lpstat; do
+	if [ -e $source ]; then
+		target=/usr/share/gosa/bin/${source##*/}
+		[ ! -L $target ] && ln -sf $source $target
+	fi
+done
+
+# Update gosa
+/usr/sbin/update-gosa
+
+# Finally restart servers
+for server in $servers; do
+	if [ -x /usr/sbin/invoke-rc.d ]; then
+		invoke-rc.d $server restart
+	else
+		/etc/init.d/$server restart
+	fi
+done
+
+exit 0

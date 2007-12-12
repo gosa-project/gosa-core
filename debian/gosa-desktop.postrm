@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+#DEBHELPER#
+
+if [ "$1" = "purge" ]; then
+	rm -f /etc/gosa/desktoprc
+fi

@@ -1,0 +1,3998 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass article
+\language ngerman
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize a4paper
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 1
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\leftmargin 10mm
+\topmargin 10mm
+\rightmargin 10mm
+\bottommargin 20mm
+\headheight 10mm
+\headsep 10mm
+\footskip 10mm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+
+\series bold 
+Systemverwaltung
+\layout Section
+
+Liste der Systeme
+\layout Standard
+
+Die Liste der Systeme dient als Ausgangspunkt für alle weiteren Schritte.
+ Sie wird erreicht über den Menüeintrag 
+\series bold 
+\color blue
+Systeme
+\series default 
+\color default
+ aus der Kategorie 
+\series bold 
+Administration
+\series default 
+ (Menü am linken Rand des Bildschirms).
+ Auf dieser Seite können Systeme hinzugefügt, bearbeitet oder entfernt werden.
+\layout Standard
+
+Die Liste ist in zwei Spalten geteilt:
+\layout Itemize
+
+Die erste Spalte enthält die Namen der Systeme
+\layout Itemize
+
+Die zweite Spalte enthält Knöpfe für die möglichen Aktionen, um Verwaltungsaufga
+ben durchzuführen (Root-Passwort setzen, Bearbeiten, Entfernen)
+\layout Standard
+
+Die vier Knöpfe 
+\begin_inset Graphics
+	filename images/list_root.png
+
+\end_inset 
+
+, 
+\begin_inset Graphics
+	filename images/list_back.png
+
+\end_inset 
+
+, 
+\begin_inset Graphics
+	filename images/list_home.png
+
+\end_inset 
+
+, und 
+\begin_inset Graphics
+	filename images/list_reload.png
+
+\end_inset 
+
+ oberhalb der Liste dienen zur Navigation innerhalb der Abteilungshierarchie:
+\layout Itemize
+
+
+\begin_inset Graphics
+	filename images/list_root.png
+
+\end_inset 
+
+: Zur Wurzel
+\layout Itemize
+
+
+\begin_inset Graphics
+	filename images/list_back.png
+
+\end_inset 
+
+: Eine Abteilung nach oben
+\layout Itemize
+
+
+\begin_inset Graphics
+	filename images/list_home.png
+
+\end_inset 
+
+: Zur Basis des angemeldeten Benutzers
+\layout Itemize
+
+
+\begin_inset Graphics
+	filename images/list_reload.png
+
+\end_inset 
+
+: Aktuelle Abteilung neu laden
+\layout Standard
+
+Es ist weiterhin möglich, die Anzeige der Abteilungen mithilfe von Filtern
+ zu beeinflussen (Kasten Filter 
+\begin_inset Graphics
+	filename images/rocket.png
+
+\end_inset 
+
+ am rechten Rand):
+\layout Itemize
+
+
+\color black
+Nach Namen suchen:
+\begin_deeper 
+\layout Itemize
+
+Klick auf * zeigt alle Systeme an
+\layout Itemize
+
+Klick auf einen Buchstaben zeigt alle Systeme an, deren Name mit dem gewählten
+ Buchstaben beginnt
+\layout Itemize
+
+Klick auf eine Ziffer zeigt alle Systeme an, deren Name mit der gewählten
+ Ziffer beginnt
+\end_deeper 
+\layout Itemize
+
+Weitere Suchoptionen:
+\newline 
+(Die folgenden Filter arbeiten so, dass nur Systeme angezeigt werden, die
+ über mindestens eine der ausgewählten Eigenschaften verfügen: Standardmässig
+ werden alle Systeme angezeigt)
+\begin_deeper 
+\layout Itemize
+
+Zeige Server:
+\layout Itemize
+
+Zeige Terminals:
+\layout Itemize
+
+Zeige Arbeitsstationen:
+\layout Itemize
+
+Zeige Windows basierte Arbeitsstationen:
+\layout Itemize
+
+Zeige Netzwerk-Drucker:
+\layout Itemize
+
+Zeige Telefone:
+\layout Itemize
+
+Zeige Netzwerk-Geräte:
+\end_deeper 
+\layout Itemize
+
+Schnellsuche 
+\begin_inset Graphics
+	filename images/search.png
+
+\end_inset 
+
+: Geben Sie eine Zeichenkette in das Feld ein (die in dem/den System/en
+ vorkommt, das/die Sie suchen) und drücken Sie auf den Knopf 
+\emph on 
+Filter anwenden
+\emph default 
+, um die Liste auf Treffer zu beschränken.
+\layout Subsection
+
+Ein neues System erstellen
+\layout Standard
+\added_space_top medskip 
+Um ein neues System zu erstellen dienen die folgenden Knöpfe oberhalb der
+ Liste:
+\layout Itemize
+
+
+\begin_inset Graphics
+	filename images/select_new_terminal.png
+
+\end_inset 
+
+ zum Erstellen eines neues Terminals, 
+\layout Itemize
+
+
+\begin_inset Graphics
+	filename images/select_new_workstation.png
+
+\end_inset 
+
+ zum Erstellen einer neuen Arbeitsstation, 
+\layout Itemize
+
+
+\begin_inset Graphics
+	filename images/select_new_server.png
+
+\end_inset 
+
+ zum Erstellen eines neuen Servers, 
+\layout Itemize
+
+
+\begin_inset Graphics
+	filename images/select_new_printer.png
+
+\end_inset 
+
+ zum Erstellen eines neuen Druckers, 
+\layout Itemize
+
+
+\begin_inset Graphics
+	filename images/select_new_phone.png
+
+\end_inset 
+
+ zum Erstellen eines neuen Telefons, 
+\layout Itemize
+
+
+\begin_inset Graphics
+	filename images/select_new_component.png
+
+\end_inset 
+
+ zum Erstellen einer neuen Netzwerkkomponente.
+\layout Standard
+
+Wenn Sie ein vorhandenes System bearbeiten möchten, klicken Sie auf den
+ Namen des Systems oder auf den Knopf 
+\begin_inset Graphics
+	filename images/edit.png
+
+\end_inset 
+
+.
+\layout Subsubsection
+\pagebreak_top 
+Terminal konfigurieren
+\layout Paragraph
+
+Allgemein
+\layout Subparagraph
+
+Eigenschaften
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="7" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Terminal-Name
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der eindeutige Name dieses Terminals
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Basis
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie aus der Liste die Abteilung, der das Terminal zugeordnet werden
+ soll.
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Root-Server
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie den Server, von dem das Root-Dateisystem eingebunden wird.
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Auslagerungs-Server
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie den Server, der für die Auslagerung von Speicher verwendet wird.
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Modus
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie den Startmodus des Terminals aus der Liste: 
+\emph on 
+grafisch
+\emph default 
+ für die grafische Anmeldung, 
+\emph on 
+textuell
+\emph default 
+ für die textbasierte Anmeldung und 
+\emph on 
+deaktiviert
+\emph default 
+, um die Anmeldung zu deaktivieren.
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Protokoll-Server
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der Syslog-Server, der verwendet werden soll, um Protokolle dieses Terminals
+ aufzuzeichnen.
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Zeit-Server
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie 
+\emph on 
+Zeit-Server-Attribute übernehmen
+\emph default 
+, um die Einstellungen von der Vorlage zu übernehmen.
+ Ansonsten können Sie den oder die gewünschten Server aus der Liste wählen
+ und mit 
+\emph on 
+Hinzufügen
+\emph default 
+ in die Liste aufnehmen.
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Netzwerk-Einstellungen
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+IP-Adresse
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die IP-Adresse des Terminals
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+MAC-Adresse
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die MAC-Adresse des Terminals
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Aktion
+\layout Standard
+
+Mit Hilfe des Aktionsmenüs können Terminals entfernt gestartet, neugestartet
+ und runtergefahren werden.
+ Wählen Sie dazu einfach die durchzuführende Aktion (Wenn das Terminal aus
+ ist, umfasst die Liste lediglich die Aktion 
+\emph on 
+Aufwecken
+\emph default 
+) und drücken Sie auf den Knopf 
+\emph on 
+Ausführen
+\emph default 
+.
+\layout Paragraph
+
+Geräte
+\layout Subparagraph
+
+Tastatur
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Modell
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Das Modell der angeschlossenen Tastatur
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Layout
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die Sprache der Tastatur.
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Variante
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die Variante (z.B.
+ nodeadkeys) der Tastatur.
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Maus
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Typ
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der Typ der Maus (Anschlussart).
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Anschluss
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Das Gerät dass den Anschluss repräsentiert (/dev/ttyS0 für COM1, /dev/ttyS1
+ für COM2, /dev/psaux für PS/2 und /dev/input/mice für USB)
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Telefon-Hardware
+\layout Standard
+
+Wählen Sie das Telefon aus der Liste oder 
+\emph on 
+automatisch
+\emph default 
+, wenn das Telefon über den angemeldeten Benutzer ermittelt werden soll.
+\layout Subparagraph
+
+Grafikkarte
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="11cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Treiber
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie den Treiber für die Grafikkarte aus der Liste
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Auflösung
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie die Auflösung des Monitors aus der Liste
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Farbtiefe
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie die Farbtiefe der Darstellung aus der Liste
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Anzeige
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="7cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="8cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Typ
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+HSync
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die horizontale Wiederholfrequenz der Anzeige in kHz
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+VSync
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die vertikale Wiederholfrequenz der Anzeige in Hz
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Entfernte Arbeitsfläche
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Verbindungsmethode
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie den Typ der Terminal-Verbindung:
+\layout Standard
+
+Standard: X11 mit festem Server
+\layout Standard
+
+zeige Auswahl: X11 mit Auswahl des Servers
+\layout Standard
+
+direkt: X11 mit direkter Verbindung (XQuery)
+\layout Standard
+
+lastverteilt: X11-Server mit geringster Last
+\layout Standard
+
+Windows RDP: Windows Terminal-Server
+\layout Standard
+
+Citrix Metaframe: Citrix Windows Terminal Server
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Terminal-Server
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie den Server aus der Liste, auf dem die entfernte Arbeitsfläche
+ bereitgestellt wird
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Schriften-Server
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie den Server aus der Liste, der die X11-Schriften bereitstellt.
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Drucker
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="6cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="9cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Druckdienste bereitstellen
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie diese Option, wenn das Terminal generell über Druckdienste verfügen
+ soll
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Spool-Server
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie den Spool-Server aus der Liste
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Scanner
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="6cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="9cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Bilderfassungsdienste bereitstellen
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie diese Option, wenn das Terminal generell über Scan-Dients verfügen
+ soll
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Modell
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie den Scanner aus der Liste
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Paragraph
+
+Start
+\layout Subparagraph
+
+Boot-Parameter
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+LDAP server
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie den LDAP-Server aus der Liste, auf dem das Terminal konfiguriert
+ ist
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Boot-Kernel 
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der Kernel, der gestartet werden soll
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Angepasste Optionen
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Hier können Sie Terminal-spezifische Kerneloptionen eintragen, die dem Kernel
+ beim Start übergeben werden.
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Itemize
+
+Grafisches Booten nutzen: bei Auswahl wird das Terminal mit der grafischen
+ Variante gebootet, die weniger Meldungen anzeigt
+\layout Itemize
+
+Standard Textmodus nutzen: bei Auswahl wird das Terminal mit der textbasierten
+ Variante gebootet
+\layout Itemize
+
+benutze Fehlersuch-Modus: bei Auswahl wird das Terminal beim nächsten Start
+ in einem Modus gestartet, dass die Fehlersuche vereinfacht
+\layout Subparagraph
+
+Kernel Module (Format: Name Parameter)
+\layout Standard
+
+In der Liste werden Kernel-Module aufgeführt, die automatisch beim Startvorgang
+ geladen werden (Dies umfasst nur die Hardware, die nicht automatisch erkannt
+ wird).
+\layout Subparagraph
+
+Freigaben
+\layout Standard
+
+?
+\layout Paragraph
+
+Drucker
+\layout Subparagraph
+
+Allgemein
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="11cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Druckername
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der eindeutige Name des Druckers
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Beschreibung
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Eine kurze Beschreibung
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Basis
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie aus der Liste die gewünschte Abteilung, in die der Drucker eingefügt
+ werden soll
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Details
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Drucker-Standort
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Kurze Beschreibung, an welchem Ort der Drucker aufgestellt ist
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Drucker URL
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die IPP-Adresse des Druckers
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Treiber
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Drücken Sie den Knopf Bearbeiten, um den passenden Druckertreiber auszuwählen
+ (und ggfs.
+ hinzuzufügen)
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Berechtigungen
+\layout Itemize
+
+Benutzer mit Berechtigung, diesen Drucker zu nutzen
+\layout Standard
+
+In dieser Liste werden alle Benutzer aufgeführt, die den Drucker verwenden
+ dürfen.
+ Um einen Benutzer hinzuzufügen, drücken Sie den Knopf 
+\emph on 
+Benutzer hinzufügen
+\emph default 
+.
+ Um eine Gruppe hinzuzufügen, drücken Sie den Knopf 
+\emph on 
+Gruppe hinzufügen
+\emph default 
+.
+ Um einen Benutzer oder eine Gruppe aus der Liste zu entfernen, markieren
+ Sie die entsprechenden Einträge in der Liste und drücken Sie den Knopf
+ 
+\emph on 
+Entfernen
+\emph default 
+.
+\layout Itemize
+
+Benutzer mit Berechtigung, diesen Drucker zu verwalten
+\layout Standard
+
+In dieser Liste werden alle Benutzer aufgeführt, die die Drucker-Einstellungen
+ verändern dürfen.
+ Um einen Benutzer hinzuzufügen, drücken Sie den Knopf 
+\emph on 
+Benutzer hinzufügen
+\emph default 
+.
+ Um eine Gruppe hinzuzufügen, drücken Sie den Knopf 
+\emph on 
+Gruppe hinzufügen
+\emph default 
+.
+ Um einen Benutzer oder eine Gruppe aus der Liste zu entfernen, markieren
+ Sie die entsprechenden Einträge in der Liste und drücken Sie den Knopf
+ 
+\emph on 
+Entfernen
+\emph default 
+.
+\layout Subparagraph
+
+Netzwerk-Einstellungen
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+IP-Adresse
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die IP-Adresse des Druckers
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+MAC-Adresse
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die MAC-Adresse des Druckers
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Paragraph
+
+Referenzen
+\layout Standard
+
+Unter 
+\emph on 
+Referenzen
+\emph default 
+ werden alle Verbindungen dieses Druckers zu anderen Objekten im LDAP angezeigt.
+\layout Subsubsection
+\pagebreak_top 
+Arbeitsstation konfigurieren
+\layout Paragraph
+
+Allgemein
+\layout Subparagraph
+
+Eigenschaften
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="6" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Name der Arbeitsstation
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der eindeutige Name der Arbeitsstation
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Ort
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der Ort, an dem die Arbeitsstation steht
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Basis
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie die Abteilung aus der Liste, zu der die Arbeitsstation zugeordnet
+ wird
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Modus
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie den Modus aus der Liste: 
+\emph on 
+Gesperrt
+\emph default 
+ deaktiviert die Anmeldung, 
+\emph on 
+Aktiv
+\emph default 
+ lässt die Anmeldung zu
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Protokoll-Server
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der Syslog-Server, der verwendet werden soll, um Protokolle dieser Arbeitsstatio
+n aufzuzeichnen.
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Zeit-Server
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie 
+\emph on 
+Zeit-Server-Attribute übernehmen
+\emph default 
+, um die Einstellungen von der Vorlage zu übernehmen.
+ Ansonsten können Sie den oder die gewünschten Server aus der Liste wählen
+ und mit 
+\emph on 
+Hinzufügen
+\emph default 
+ in die Liste aufnehmen.
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Netzwerk-Einstellungen
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+IP-Adresse
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die IP-Adresse dieser Arbeitsstation
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+MAC-Adresse
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die MAC-Adresse dieser Arbeitsstation
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Aktion
+\layout Standard
+
+Wählen Sie gewünschte Aktion aus der Liste und drücken Sie den Knopf 
+\emph on 
+Ausführen
+\emph default 
+, um die Aktion unverzüglich durchzuführen.
+ Die folgenden Aktionen stehen zur Verfügung:
+\layout Itemize
+
+
+\emph on 
+Aufwecken
+\emph default 
+: Schaltet die Arbeitsstation ein.
+\layout Itemize
+
+
+\emph on 
+Neu-Installation
+\emph default 
+: Beim nächsten Neustart wird das Betriebssystem neu installiert.
+\layout Itemize
+
+
+\emph on 
+Geplantes Update
+\emph default 
+: ?
+\layout Itemize
+
+
+\emph on 
+Speichertest
+\emph default 
+: Beim nächsten Neustart wird ein Speichertest gestartet
+\layout Itemize
+
+
+\emph on 
+Systemanalyse
+\emph default 
+: ?
+\layout Paragraph
+
+Geräte
+\layout Subparagraph
+
+Tastatur
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Modell
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Das Modell der angeschlossenen Tastatur
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Layout
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die Sprache der Tastatur.
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Variante
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die Variante (z.B.
+ nodeadkeys) der Tastatur.
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Maus
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Typ
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der Typ der Maus (Anschlussart).
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Anschluss
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Das Gerät dass den Anschluss repräsentiert (/dev/ttyS0 für COM1, /dev/ttyS1
+ für COM2, /dev/psaux für PS/2 und /dev/input/mice für USB)
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Telefon-Hardware
+\layout Standard
+
+Wählen Sie das Telefon aus der Liste oder 
+\emph on 
+automatisch
+\emph default 
+, wenn das Telefon über den angemeldeten Benutzer ermittelt werden soll.
+\layout Subparagraph
+
+Grafikkarte
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="11cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Treiber
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie den Treiber für die Grafikkarte aus der Liste
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Auflösung
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie die Auflösung des Monitors aus der Liste
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Farbtiefe
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie die Farbtiefe der Darstellung aus der Liste
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Anzeige
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="7cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="8cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Typ
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Automatische Modelines
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie diese Option, wenn die Modelines automatisch erzeugt werden sollen.
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+HSync
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die horizontale Wiederholfrequenz der Anzeige in kHz
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+VSync
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die vertikale Wiederholfrequenz der Anzeige in Hz
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Scanner
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="6cm">
+<column alignment="block" valignment="top" rightline="true" width="9cm">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Bilderfassungsdienste bereitstellen
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie diese Option, wenn ein angeschlossener Scanner verwendet werden
+ soll.
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Paragraph
+
+Start
+\layout Subparagraph
+
+Boot-Parameter
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+LDAP server
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie den LDAP-Server, auf dem diese Arbeitsstation konfiguriert ist.
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Boot-Kernel
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie den Kernel, mit dem die Arbeitsstation gestartet werden soll.
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Angepasste Optionen
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Geben Sie optional zusätzliche Argumente für den Kernel an
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+FAI-Server
+\layout Standard
+
+Wählen Sie den FAI-Server, der verwendet werden soll
+\layout Subparagraph
+
+Release
+\layout Standard
+
+Wählen Sie das Release des Betriebssystems.
+\layout Subparagraph
+
+Zugewiesene FAI-Klassen
+\layout Standard
+
+?
+\layout Subparagraph
+
+Kernel-Module (Format: Name Parameter)
+\layout Standard
+
+
+\color red
+?
+\layout Subparagraph
+
+Freigaben
+\layout Standard
+
+
+\color red
+?
+\layout Paragraph
+
+Drucker
+\layout Subparagraph
+
+Details
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Drucker-Standort
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Kurze Beschreibung, an welchem Ort der Drucker aufgestellt ist
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Drucker URL
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die IPP-Adresse des Druckers
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Treiber
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Drücken Sie den Knopf Bearbeiten, um den passenden Druckertreiber auszuwählen
+ (und ggfs.
+ hinzuzufügen)
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Berechtigungen
+\layout Itemize
+
+Benutzer mit Berechtigung, diesen Drucker zu nutzen
+\layout Standard
+
+In dieser Liste werden alle Benutzer aufgeführt, die den Drucker verwenden
+ dürfen.
+ Um einen Benutzer hinzuzufügen, drücken Sie den Knopf 
+\emph on 
+Benutzer hinzufügen
+\emph default 
+.
+ Um eine Gruppe hinzuzufügen, drücken Sie den Knopf 
+\emph on 
+Gruppe hinzufügen
+\emph default 
+.
+ Um einen Benutzer oder eine Gruppe aus der Liste zu entfernen, markieren
+ Sie die entsprechenden Einträge in der Liste und drücken Sie den Knopf
+ 
+\emph on 
+Entfernen
+\emph default 
+.
+\layout Itemize
+
+Benutzer mit Berechtigung, diesen Drucker zu verwalten
+\layout Standard
+
+In dieser Liste werden alle Benutzer aufgeführt, die die Drucker-Einstellungen
+ verändern dürfen.
+ Um einen Benutzer hinzuzufügen, drücken Sie den Knopf 
+\emph on 
+Benutzer hinzufügen
+\emph default 
+.
+ Um eine Gruppe hinzuzufügen, drücken Sie den Knopf 
+\emph on 
+Gruppe hinzufügen
+\emph default 
+.
+ Um einen Benutzer oder eine Gruppe aus der Liste zu entfernen, markieren
+ Sie die entsprechenden Einträge in der Liste und drücken Sie den Knopf
+ 
+\emph on 
+Entfernen
+\emph default 
+.
+\layout Subparagraph
+
+Netzwerk-Einstellungen
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+IP-Adresse
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die IP-Adresse des Druckers
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+MAC-Adresse
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die MAC-Adresse des Druckers
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Paragraph
+
+Information
+\layout Standard
+\added_space_bottom medskip 
+Unter diesem Tab werden (wenn verfügbar) aktuelle Informationen der Arbeitsstati
+on angezeigt.
+\layout Paragraph
+
+Referenzen
+\layout Standard
+
+Unter Referenzen werden alle Verbindungen dieser Arbeitsstation zu anderen
+ Objekten im LDAP aufgeführt.
+\layout Subsubsection
+\pagebreak_top 
+Server konfigurieren
+\layout Paragraph
+
+Allgemein
+\layout Subparagraph
+
+Allgemein
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Servername
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Eindeutiger Servername
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Basis
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie die Abteilung aus der Liste, der der Server zugeordnet werden
+ sols
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Beschreibung
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Kurze Beschreibung des Servers
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Netzwerk-Einstellungen
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+IP-Adresse
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die IP-Adresse des Servers
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+MAC-Adresse
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die MAC-Adresse des Servers
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Aktionen
+\layout Standard
+
+
+\color red
+?
+\layout Paragraph
+
+Datenbanken
+\layout Standard
+
+Dieser Reiter enthält die Datenbanken, auf die dieser Server zugreifen muss.
+ Es können, je nach Konfiguration, beliebig viele oder wenige der angebotenen
+ Möglichkeiten verwendet werden.
+\layout Standard
+
+Im Moment können folgende Datenbank konfiguriert werden:
+\layout Itemize
+
+Kerberos-Zugang vie kadmin
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Kerberos Realm
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die Realm der Kerberos-Datenbank (EXAMPLE.COM)
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Administrator
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der Benutzername des Adminstrators
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Passwort
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Das Passwort des Administrators
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_deeper 
+\layout Itemize
+\added_space_top medskip 
+FAX-Datenbank
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+FAX-DB Benutzer
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der Name des Benutzers, der auf die Datenbank verbinden darf und über ausreichen
+de Rechte verfügt
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Passwort
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Das zugehörige Passwort des Benutzers
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_deeper 
+\layout Itemize
+\added_space_top medskip 
+Asterisk Verwaltung
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Asterisk- DB Benutzer
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der Name des Benutzers für den Asterisk-Zugang
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Passwort
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Das zugehörige Passwort des Benutzers
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Landesvorwahl
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die Vorwahl für das Land (z.B.
+ 049 für Deutschland)
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Ortsvorwahl
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die Vorwahl für den Ort (z.B.
+ 02932 für Arnsberg)
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_deeper 
+\layout Itemize
+\added_space_top medskip 
+IMAP-Administrationszugang
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="5" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Serverbezeichnung
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der Hostname des IMAP-Servers
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Verbindungs-URL
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Eine spezielle URL in der Form '{Servername:Port/Optionen}'.
+ Der Port ist in der Regel 143 (für IMAPS 993).
+ Als Option ist im Moment nur 'notls' für Klartextverbindungen bekannt.
+\layout Standard
+
+Hinweis: Die URL enthält geschweifte Klammern.
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Administrator
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der administrative Benutzer, der verwendet werden soll (IMAP- und Sieve-Administ
+rator)
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Passwort
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Das zugehörige Passwort
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sieve-Port
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der Port, auf dem der Sieve-Dienst angesprochen wird
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_deeper 
+\layout Itemize
+\added_space_top medskip 
+Protokoll-Datenbank
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Protokoll-DB Benutzer
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der Name des Benutzers, der auf die Datenbank verbinden darf und über ausreichen
+de Rechte verfügt.
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Passwort
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Das zugehörige Passwort des Benutzers.
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_deeper 
+\layout Paragraph
+
+Dienste
+\layout Itemize
+
+Freigaben
+\newline 
+Dieses Modul erlaubt es, beliebige Verzeichnisse dieses Servers über verschieden
+e Protokolle (derzeit stehen NFS, Samba, netatalk sowie NCP) zur Verfügung.
+\begin_deeper 
+\layout Itemize
+
+Liste der Freigaben: Die Liste umfasst alle momentan definierten Freigaben
+ dieses Servers
+\layout Itemize
+
+Freigabe hinzufügen: Um eine Freigabe hinzuzufügen, drücken Sie auf den
+ Knopf 
+\emph on 
+Hinzufügen
+\emph default 
+ unterhalb der Liste.
+ Füllen Sie die folgenden Felder:
+\begin_inset  Tabular
+<lyxtabular version="3" rows="7" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Name
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der eindeutige Name der Freigabe
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Beschreibung
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Kurze Beschreibung der Freigabe
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Pfad
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der UNIX-Pfad der Freigabe (z.B.
+ '/export')
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Volume (nur sichtbar bei Typ 'NCP')
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Geben Sie das Volume der Freigabe ein
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Typ
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie aus der Liste den Typ der Freigabe
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Codepage
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie aus der Liste den Zeichensatz der Freigabe
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Option
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Geben Sie in dieses Feld weitere Optionen dieser Freigabe ein
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\newline 
+Wenn Ihre Eingaben vollständig sind, drücken Sie zum Übernehmen der Einstellunge
+n den Knopf 
+\emph on 
+Speichern
+\emph default 
+.
+\layout Itemize
+
+Freigabe bearbeiten: Um eine bestehende Freigabe nachträglich zu bearbeiten,
+ markieren Sie diese in der Liste und drücken Sie den Knopf 
+\emph on 
+Bearbeiten
+\emph default 
+.
+ Gehen Sie für die weiteren Schritte analog zu 
+\emph on 
+Freigabe hinzufügen
+\emph default 
+ vor.
+\layout Itemize
+
+Freigabe entfernen: Um eine bestehende Freigabe wieder zu entfernen, markieren
+ Sie diese in der Liste und drücken Sie den Knopf 
+\emph on 
+Entfernen
+\end_deeper 
+\layout Itemize
+\added_space_top medskip 
+Zeit-Dienst:
+\newline 
+Damit dieser Server seine Zeit mit externen NTP-Servern synchronisiert,
+ wird der Zeit-Dienst verwendet.
+ Tragen Sie mindestens einen NTP-Server ein.
+\layout Itemize
+\added_space_top medskip 
+LDAP-Dienst:
+\newline 
+Binden Sie diesen Server an Ihr LDAP-Verzeichnis, indem Sie einfach die
+ Basis eintragen.
+\layout Standard
+
+
+\color red
+?
+\layout Itemize
+\added_space_top medskip 
+Terminal-Dienst
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="6cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Anmeldung sperren (temporär)
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sperrt die Anmeldung, ohne die Einstellungen zu verwerfen (sinnvoll z.B.
+ für Updates).
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Schrift-Suchpfad
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Geben Sie den Pfad zum Schrift-Server ein.
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Itemize
+\added_space_top medskip 
+Protokoll-Dienst
+\layout Standard
+
+
+\color red
+?
+\layout Itemize
+\added_space_top medskip 
+Druck-Dienst
+\layout Standard
+
+
+\color red
+?
+\layout Paragraph
+
+Information
+\layout Standard
+
+Dieser Reiter zeigt aktuelle Informationen über den Server an.
+\layout Paragraph
+
+Referenzen
+\layout Standard
+
+Unter Referenzen werden alle Verbindungen dieses Servers zu anderen Objekten
+ im LDAP-Verzeichnis aufgeführt.
+\layout Subsubsection
+\pagebreak_top 
+Drucker konfigurieren
+\layout Paragraph
+
+Allgemein
+\layout Subparagraph
+
+Allgemein
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Druckername
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der eindeutige Name des Druckers
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Beschreibung
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Kurze Beschreibung des Druckers
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Basis
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie die Abteilung aus der Liste, der der Drucker zugeordnet werden
+ soll
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Details
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Drucker-Standort
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Kurze Beschreibung, an welchem Ort der Drucker aufgestellt ist
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Drucker URL
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die IPP-Adresse des Druckers
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Treiber
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Drücken Sie den Knopf Bearbeiten, um den passenden Druckertreiber auszuwählen
+ (und ggfs.
+ hinzuzufügen)
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Berechtigungen
+\layout Itemize
+
+Benutzer mit Berechtigung, diesen Drucker zu nutzen
+\layout Standard
+
+In dieser Liste werden alle Benutzer aufgeführt, die den Drucker verwenden
+ dürfen.
+ Um einen Benutzer hinzuzufügen, drücken Sie den Knopf 
+\emph on 
+Benutzer hinzufügen
+\emph default 
+.
+ Um eine Gruppe hinzuzufügen, drücken Sie den Knopf 
+\emph on 
+Gruppe hinzufügen
+\emph default 
+.
+ Um einen Benutzer oder eine Gruppe aus der Liste zu entfernen, markieren
+ Sie die entsprechenden Einträge in der Liste und drücken Sie den Knopf
+ 
+\emph on 
+Entfernen
+\emph default 
+.
+\layout Itemize
+
+Benutzer mit Berechtigung, diesen Drucker zu verwalten
+\layout Standard
+
+In dieser Liste werden alle Benutzer aufgeführt, die die Drucker-Einstellungen
+ verändern dürfen.
+ Um einen Benutzer hinzuzufügen, drücken Sie den Knopf 
+\emph on 
+Benutzer hinzufügen
+\emph default 
+.
+ Um eine Gruppe hinzuzufügen, drücken Sie den Knopf 
+\emph on 
+Gruppe hinzufügen
+\emph default 
+.
+ Um einen Benutzer oder eine Gruppe aus der Liste zu entfernen, markieren
+ Sie die entsprechenden Einträge in der Liste und drücken Sie den Knopf
+ 
+\emph on 
+Entfernen
+\emph default 
+.
+\layout Subparagraph
+
+Netzwerk-Einstellungen
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+IP-Adresse
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die IP-Adresse des Druckers
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+MAC-Adresse
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die MAC-Adresse des Druckers
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Paragraph
+
+Referenzen
+\layout Standard
+
+Unter Referenzen werden alle Verbindungen dieses Druckers zu anderen Objekten
+ im LDAP-Verzeichnis angezeigt.
+\layout Subsubsection
+\pagebreak_top 
+Telefon konfigurieren
+\layout Paragraph
+
+Allgemein
+\layout Subparagraph
+
+Allgemein
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color black
+Telefon-Name
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der eindeutige Name des Telefons
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Basis
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie die Abteilung aus der Liste, der das Telefon zugeordnet werden
+ soll.
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Beschreibung
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Kurze Beschreibung des Telefons
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Erweiterte Telefon-Einstellungen
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Telefon-Modell
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie den grundlegenden Typ des Telefons
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Itemize
+\added_space_top bigskip 
+Wenn Sie SIP gewählt haben, sind die folgenden Felder verfügbar:
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Modus
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+DTMF-Modus
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Standard IP-Adresse
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie 
+\emph on 
+dynamisch
+\emph default 
+, wenn das Telefon die IP-Adresse über einen DHCP-Server beziehen soll.
+ Anderenfalls werden die unten angegebenen Einstellungen verwendet.
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wartezeit bis Antwort
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_deeper 
+\layout Itemize
+\added_space_top bigskip 
+Wenn Sie IAX gewählt haben, sind die folgenden Felder verfügbar:
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="9" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Modus
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Standard IP-Adresse
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Geben Sie 
+\emph on 
+dynamisch
+\emph default 
+ ein, wenn das Telefon die IP-Adresse über einen DHCP-Server beziehen soll.
+ Anderenfalls werden die unten angegebenen Einstellungen verwendet.
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wartezeit bis Antwort
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Authtype
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Authentifizierung
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Passwort
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Konto-Identifikation
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Leitungen zusammenfassen
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Erlaube diesen Rechnern die Verbindung
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Utilisez le bouton Ajouter pour insérer le nom d'hôte pouvant se connecter.
+ Le bouton Supprimer sert à effacer le nom d'hôte sélectionné.
+ 
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Verbiete diesen Rechnern die Verbindung
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Utilisez le bouton Ajouter pour insérer le nom d'hôte ne pouvant pas se
+ connecter.
+ Le bouton Supprimer sert à effacer le nom d'hôte sélectionné.
+ 
+\color red
+?
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_deeper 
+\layout Itemize
+\added_space_top bigskip 
+Wenn Sie CAPI gewählt haben, ist das folgende Feld verfügbar:
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="4cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+MSN
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die MSN des Telefons
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_deeper 
+\layout Subparagraph
+
+Netzwerk-Einstellungen
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+IP
+\color black
+-Adresse
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die IP-Adresse des Telefons
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+MAC
+\color black
+-Adresse
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die MAC-Adresse des Telefons
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Paragraph
+
+Referenzen
+\layout Standard
+
+Unter Referenzen werden alle Verbindungen dieses Telefons zu anderen Objekten
+ im LDAP-Verzeichnis aufgeführt.
+\layout Subsubsection
+\pagebreak_top 
+Netzwerkkomponente konfigurieren
+\layout Subparagraph
+
+Allgemein
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Gerätename
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Der eindeutige Name der Netzwerkkomponente
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Basis
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Wählen Sie die Abteilung aus der Liste, der die Komponente zugeordnet werden
+ soll.
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Beschreibung
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Kurze Beschreibung des Geräts
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subparagraph
+
+Netzwerk-Einstellungen
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+IP
+\color black
+-Adresse
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die IP-Adresse der Netzwerkkomponente
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+MAC
+\color black
+-Adresse
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Die MAC-Adresse der Netzwerkkomponente
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Paragraph*
+
+Referenzen
+\layout Standard
+
+Unter 
+\emph on 
+Referenzen
+\emph default 
+ werden alle Verbindungen dieser Netzwerkkomponente zu anderen Objekten
+ im LDAP-Verzeichnis aufgeführt.
+\the_end

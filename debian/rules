@@ -1,0 +1,166 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# Configure smarty location
+export SMARTY_LOCATION=/usr/share/php/smarty/libs
+
+build: patch 
+	#*************************************************
+	#* Building GOsa into a Debian/GNU Linux Package *
+	#*                 please stand by               *
+	#*************************************************
+
+clean: clean-patched unpatch
+clean-patched:
+	dh_testdir
+	rm -f install-stamp 
+	-rm -f debian/files
+	-rm -f debian/substvars
+	dh_clean
+
+unpatch:
+	dpatch deapply-all
+	rm -rf patch-stamp debian/patched
+
+install: install-stamp
+install-stamp: 
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+
+	# Move everything but debian to the destination directory
+	for i in `ls | grep -v debian`; do \
+	  cp -R $$i debian/gosa/usr/share/gosa ; \
+	done
+
+	# Clean up with SVN directories
+	-find debian/gosa -type d -name ".svn" -exec rm -rf {} \; &> /dev/null || /bin/true
+
+	# Move schema files to the schema package
+	-mv debian/gosa/usr/share/gosa/contrib/openldap/go*.schema debian/gosa-schema/etc/ldap/schema
+
+	# Install changelogs
+	-for package in gosa gosa-schema gosa-desktop gosa-help-de gosa-help-en gosa-help-fr gosa-help-nl smarty-render; do \
+		[[ ! -d debian/$package/usr/share/doc/$package ]] && mkdir -p debian/$package/usr/share/doc/$package ; \
+		gzip -c9 debian/changelog > debian/$package/usr/share/doc/$package/changelog.Debian.gz ; \
+	done
+
+	# Move contrib to doc
+	-mv -R debian/gosa/usr/share/gosa/contrib debian/gosa/usr/share/doc/gosa/
+
+	# Put docs in shape
+	-cp -R INSTALL debian/gosa/usr/share/doc/gosa/README.INSTALL
+	-cp AUTHORS README FAQ doc/README.pptp doc/README.xls-export doc/README.glpi doc/README.nagios doc/README.phpscheduleit doc/README.safemode doc/README.devel doc/README.openxchange debian/gosa/usr/share/doc/gosa/
+
+	# Remove docs that are located in the wrong location
+	-rm debian/gosa/usr/share/gosa/doc/README.ssh
+	-for doc in README INSTALL AUTHORS Changelog COPYING TODO FAQ; do \
+		rm debian/gosa/usr/share/gosa/$doc ; \
+	done
+
+	# Create missing directories
+	-for dir in compile config cache; do \
+		mkdir -p debian/gosa/var/spool/gosa/dir ; \
+	done
+	-mkdir -p debian/gosa/etc/gosa/vacation
+	-mkdir -p debian/gosa/usr/lib/gosa
+	-mkdir -p debian/smarty-render/usr/share/php/smarty/libs/plugins
+
+	# Feed etc directory
+	-cp -R debian/apache.conf debian/gosa/etc/gosa/apache.conf
+	-cp -R contrib/encodings debian/gosa/etc/gosa/encodings
+	-cp -R plugins/personal/mail/sieve-*.txt debian/gosa/etc/gosa
+	-cp contrib/shells debian/gosa/etc/gosa
+
+	# Install binaries
+	-mv debian/gosa/usr/share/gosa/bin/* debian/gosa/usr/bin
+	-mkdir debian/gosa/usr/sbin
+	-mv debian/gosa/usr/share/gosa/update-gosa debian/gosa/usr/sbin
+
+	# Install documentation
+	-for lang in en de fr nl; do mkdir -p debian/gosa-help-$$lang/usr/share/gosa/doc/guide/user/$$lang; done
+	-for lang in en de fr nl; do mv debian/gosa/usr/share/gosa/doc/guide/user/$$lang/* debian/gosa-help-$$lang/usr/share/gosa/doc/guide/user/$$lang/; done
+
+	# Create gosa-desktop package
+	-cp -R contrib/scripts/desktoprc debian/gosa-desktop/etc/gosa/desktoprc
+	-cp -R contrib/scripts/gosa debian/gosa-desktop/usr/bin/gosa
+	-cp -R debian/gosa*.xpm debian/gosa-desktop/usr/share/pixmaps
+	-cp -R debian/gosa-desktop.desktop debian/gosa-desktop/usr/share/applications/gosa.desktop
+
+	# Clean up
+	-rm -rf debian/gosa/usr/share/gosa/contrib
+	-rm -rf debian/gosa/usr/share/gosa/locale/en
+	-rm -rf debian/gosa/usr/share/gosa/update-locale
+	-rm -rf debian/gosa/usr/share/gosa/update-pdf-help
+	-rm -rf debian/gosa/usr/share/gosa/patch-stamp
+	-rm -rf debian/gosa/usr/share/gosa/update-online-help
+	-rm -rf debian/gosa/usr/share/gosa/bin
+	-rm -rf debian/gosa/usr/share/gosa/doc/guide/user/*/lyx-source
+	-rm -rf debian/gosa/usr/share/gosa/doc/guide/admin
+	-rm -rf debian/gosa/usr/share/gosa/doc/guide/devel
+	-rm -rf debian/gosa/usr/share/doc/gosa/guide*
+	-rm -rf debian/gosa/usr/share/doc/gosa/marketing
+
+	# Configure smarty location - hey ubuntu's please change SMARTY_LOCATION up there
+	sed -i 's%"CONFIG_TEMPLATE_DIR", "../contrib/"%"CONFIG_TEMPLATE_DIR", "/usr/share/doc/gosa/contrib/"%g' debian/gosa/usr/share/gosa/include/functions.inc 
+	cp include/smarty/plugins/block.render.php debian/smarty-render/usr/share/php/smarty/libs/plugins
+	rm -rf debian/gosa/usr/share/gosa/include/smarty; \
+	sed -i "s%require(\"smarty/Smarty.class.php\");%require(\"$SMARTY_LOCATION/Smarty.class.php\");%g" debian/gosa/usr/share/gosa/include/php_setup.inc
+
+	# Configure update location
+	sed -i 's%include/class_location.inc%/etc/gosa/classes%g' debian/gosa/usr/sbin/update-gosa
+	sed -i 's%$class_mapping= get_classes();%$class_mapping= get_classes("/usr/share/gosa");%g' debian/gosa/usr/sbin/update-gosa
+	sed -i 's%class_location.inc%/etc/gosa/classes%g' debian/gosa/usr/share/gosa/include/functions.inc
+
+	# Fix permissions
+	-find debian/gosa -type f -exec chmod -x {} \; &> /dev/null
+	-find debian/smarty-render -type f -exec chmod -x {} \; &> /dev/null
+	-chmod +x debian/gosa/usr/bin/mkntpasswd
+
+	# Install lintian/linda overrides
+	install -D -m 644 debian/overrides-lintian debian/gosa/usr/share/lintian/overrides/gosa
+	install -D -m 644 debian/overrides-linda debian/gosa/usr/share/linda/overrides/gosa
+
+	touch install-stamp
+
+patch: patch-stamp
+patch-stamp:
+	dpatch apply-all
+	dpatch cat-all >patch-stamp
+
+binary-indep: install
+	dh_testdir
+	dh_testroot
+	dh_installdocs 
+	dh_installcron
+	dh_installexamples
+	dh_installdebconf
+	dh_installmenu
+	dh_installman --package=gosa debian/mkntpasswd.1
+	dh_installman --package=gosa-desktop debian/gosa.1
+	dh_link
+	dh_strip
+	dh_compress --exclude=gosa.conf
+	dh_fixperms 
+	dh_perl
+	dh_installdeb
+	dh_shlibdeps
+
+	cd debian/gosa && find ./etc -type f -print | sed -e 's#^./#/#' > DEBIAN/conffiles
+	chmod 644 debian/gosa/DEBIAN/conffiles
+
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+source diff:                                                                  
+	@echo >&2 'source and diff are obsolete - use dpkg-source -b'; false
+
+binary: binary-indep 
+.PHONY: build install clean binary-indep binary
+
+binary-arch:
+

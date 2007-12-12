@@ -1,0 +1,62 @@
+/* Century Schoolbook font is very similar to Computer Modern Math: cmmi */
+.MATH    { font-family: "Century Schoolbook", serif; }
+.MATH I  { font-family: "Century Schoolbook", serif; font-style: italic }
+.BOLDMATH { font-family: "Century Schoolbook", serif; font-weight: bold }
+
+/* implement both fixed-size and relative sizes */
+SMALL.XTINY		{ font-size : xx-small }
+SMALL.TINY		{ font-size : x-small  }
+SMALL.SCRIPTSIZE	{ font-size : smaller  }
+SMALL.FOOTNOTESIZE	{ font-size : small    }
+SMALL.SMALL		{  }
+BIG.LARGE		{  }
+BIG.XLARGE		{ font-size : large    }
+BIG.XXLARGE		{ font-size : x-large  }
+BIG.HUGE		{ font-size : larger   }
+BIG.XHUGE		{ font-size : xx-large }
+
+/* heading styles */
+H1		{  }
+H2		{  }
+H3		{  }
+H4		{  }
+H5		{  }
+
+/* mathematics styles */
+DIV.displaymath		{ }	/* math displays */
+TD.eqno			{ }	/* equation-number cells */
+
+
+/* document-specific styles come next */
+DIV.navigation		{   }
+SPAN.textit		{ font-style: italic  }
+SPAN.arabic		{   }
+SPAN.textbf		{ font-weight: bold  }
+#hue104		{ color: #000000;  }
+#hue121		{ color: #000000;  }
+#hue139		{ color: #000000;  }
+#hue151		{ color: #000000;  }
+#hue17		{ color: #0000ff;  }
+#hue223		{ color: #000000;  }
+#hue257		{ color: #000000;  }
+#hue258		{ color: #000000;  }
+#hue259		{ color: #ff0000;  }
+#hue261		{ color: #ff0000;  }
+#hue263		{ color: #ff0000;  }
+#hue266		{ color: #ff0000;  }
+#hue268		{ color: #ff0000;  }
+#hue270		{ color: #ff0000;  }
+#hue272		{ color: #ff0000;  }
+#hue274		{ color: #ff0000;  }
+#hue275		{ color: #ff0000;  }
+#hue276		{ color: #ff0000;  }
+#hue277		{ color: #ff0000;  }
+#hue278		{ color: #ff0000;  }
+#hue33		{ color: #000000;  }
+#hue35		{ color: #000000;  }
+#hue40		{ color: #000000;  }
+#hue45		{ color: #000000;  }
+#hue47		{ color: #000000;  }
+#hue50		{ color: #000000;  }
+#hue52		{ color: #000000;  }
+#hue93		{ color: #000000;  }

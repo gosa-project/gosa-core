@@ -1,0 +1,3688 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass article
+\language frenchb
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize a4paper
+\paperpackage a4
+\use_geometry 1
+\use_amsmath 0
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\leftmargin 10mm
+\topmargin 10mm
+\rightmargin 10mm
+\bottommargin 20mm
+\headheight 10mm
+\headsep 10mm
+\footskip 10mm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\bullet 1
+	0
+	8
+	-1
+\end_bullet
+\bullet 2
+	0
+	8
+	-1
+\end_bullet
+\bullet 3
+	0
+	8
+	4
+\end_bullet
+
+\layout Title
+
+
+\series bold 
+ADMINISTRATION DES SYSTEMES
+\layout Section
+
+Systèmes
+\layout Standard
+
+L'administrateur peut ajouter et configurer les systèmes à partir du bouton
+ 
+\series bold 
+\color blue
+Systèmes
+\series default 
+\color default
+ dans le menu de gauche dans la partie 
+\series bold 
+Administration
+\series default 
+.
+ La page 
+\family sans 
+Administration du système
+\family default 
+ s'affiche.
+ 
+\layout Standard
+
+La page est divisée en deux colonnes :
+\layout Standard
+
+- la première colonne est destinée à afficher les systèmes,
+\layout Standard
+
+- la deuxième colonne contient les icônes qui sont les actions que l'on
+ peut exécuter sur ces systèmes.
+\layout Standard
+
+Les flêches en entête ( 
+\begin_inset Graphics
+	filename images/list_back.png
+
+\end_inset 
+
+, 
+\begin_inset Graphics
+	filename images/list_root.png
+
+\end_inset 
+
+, 
+\begin_inset Graphics
+	filename images/list_home.png
+
+\end_inset 
+
+ ) servent à modifier l'affichage selon le département.
+ Ces icônes prédominent sur toutes autres formes de séléction d'affichage.
+ 
+\layout Standard
+\added_space_top medskip 
+C'est à partir de la page 
+\family sans 
+Administration du système
+\family default 
+ que l'administrateur gère les systèmes.
+\layout Standard
+
+Il est possible de modifier l'affichage des systèmes en utilisant le tableau
+ intitulé Filtres 
+\begin_inset Graphics
+	filename images/rocket.png
+
+\end_inset 
+
+.
+\layout Standard
+
+L'administrateur peut faire une recherche sur le nom :
+\layout Standard
+
+- cliquez sur l'astérisque (étoile : *) pour voir apparaître tous les systèmes;
+\layout Standard
+
+- cliquez sur une lettre et tous les noms de systèmes débutant par cette
+ lettre s'afficheront;
+\layout Standard
+
+- cliquez sur un numéro et tous les noms de systèmes débutant par ce numéro
+ s'afficheront.
+\layout Standard
+
+L'administrateur peut faire une recherche à partir du type de système :
+\layout Standard
+
+- cochez une ou plusieurs propositions 
+\layout Standard
+
+Ou encore la recherche rapide 
+\begin_inset Graphics
+	filename images/search.png
+
+\end_inset 
+
+ : remplissez le champ par le nom du système et ensuite cliquez sur le bouton
+ 
+\emph on 
+Appliquer
+\emph default 
+.
+\layout Standard
+\added_space_top medskip 
+Pour sélectionner un système à configurer, l'administrateur doit cliquer
+ selon les systèmes sur les boutons suivant: 
+\layout Itemize
+
+
+\begin_inset Graphics
+	filename images/select_new_terminal.png
+
+\end_inset 
+
+ pour ouvrir, créer ou configurer un terminal, 
+\layout Itemize
+
+
+\begin_inset Graphics
+	filename images/select_new_workstation.png
+
+\end_inset 
+
+ pour ouvrir, créer ou configurer une station de travail, 
+\layout Itemize
+
+
+\begin_inset Graphics
+	filename images/select_new_server.png
+
+\end_inset 
+
+ pour ouvrir, créer ou configurer un serveur, 
+\layout Itemize
+
+
+\begin_inset Graphics
+	filename images/select_new_printer.png
+
+\end_inset 
+
+ pour ouvrir, créer ou configurer une imprimante, 
+\layout Itemize
+
+
+\begin_inset Graphics
+	filename images/select_new_phone.png
+
+\end_inset 
+
+ pour ouvrir, créer ou configurer un poste de téléphone, 
+\layout Itemize
+
+
+\begin_inset Graphics
+	filename images/select_new_component.png
+
+\end_inset 
+
+ pour ouvrir, créer ou configurer un composant réseau.
+\layout Standard
+
+Apparaît l'espace de configuration pour ces systèmes.
+\layout Standard
+
+Pour enregistrer la configuration, cliquez sur le bouton 
+\emph on 
+Terminé
+\emph default 
+, pour revenir à la page précédente cliquez sur le bouton 
+\emph on 
+Annuler
+\emph default 
+.
+\layout Subsection
+\pagebreak_top 
+Configurer un terminal
+\layout Subsubsection
+
+Informations générales
+\layout Subsubsection*
+
+Propriétés
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="7" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Modèle de terminaux
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Base
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Faites votre séléction dans la liste déroulante.
+ Le terminal sera associé à ce département.
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Serveur Primaire
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez le serveur primaire dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Serveur de Swap
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez le serveur de swap dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Mode
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Faites votre séléction dans la liste déroulante.
+ L'administrateur peut désactiver le terminal ou choisir le mode d'affichage
+ adéquat.
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Serveur de logs systèmes
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez le serveur de logs dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Seveur NTP
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez le serveur de temps dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Configuration réseau
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse IP
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse IP du terminal
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse MAC
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse MAC du terminal
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Action
+\layout Standard
+
+Choisissez l'action à exécuter sur le terminal.
+\layout Subsubsection
+\added_space_top bigskip 
+Périphériques
+\layout Subsubsection*
+
+Clavier
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Modèle
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez le modèle du clavier dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Disposition
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez la langue du clavier dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Variante
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez la particularité du clavier
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Souris
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Type
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez le modèle de la souris dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Port
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez le port sur lequel sera branchée la souris dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Matériel téléphonique
+\layout Standard
+
+Précisez de quel type de téléphone il s'agit.
+ 
+\layout Subsubsection*
+\added_space_top medskip 
+Carte graphique
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Pilote
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionner le pilote de la carte graphique
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Résolution
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez la résolution de l'écran du terminal dans la liste déroulante.
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Profondeur des couleurs
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionner le nombre de couleurs à afficher
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Ecran
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="7cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="8cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Type
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Fréquence de synchronisation Horizontale
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Indiquez la fréquence
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Fréquence de synchronisation Verticale
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Indiquez la fréquence
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Bureau distant
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Méthode de connexion
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez le protocole utilisé dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Serveur de terminaux
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez le serveur du terminal dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Police du serveur
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez le serveur de police dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Imprimante
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="6cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="9cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Fournir un service d'impression
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Cochez pour indiquer si le terminal peut imprimer
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Serveur de file d'attente
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez le serveur d'impression dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Scanner
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="6cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="9cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Fournir un service de scanner
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Cochez pour indiquer si le terminal peut scanner
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Modèle
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez le modèle du scanner dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection
+\added_space_top bigskip 
+Démarrage
+\layout Subsubsection*
+
+Paramètre de démarrage
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Serveur LDAP
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez le serveur ldap correspondant dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Kernel utilisé au démarrage
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Nom du kernel utilisé au démarrage
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Options personnalisées
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Options à passer au kernel lors du démarrage
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Itemize
+
+Cochez pour sélectionnez le mode de démarrage, par défaut le mode graphique
+ est activé.
+\layout Subsubsection*
+\added_space_top medskip 
+Modules du kernel (format : nom paramètre)
+\layout Standard
+
+Introduisez le nom du module à charger au démarrage suivi de ses paramètres,
+ ensuite cliquez sur 
+\emph on 
+Ajouter
+\emph default 
+.
+ Utilisez le bouton 
+\emph on 
+Supprimer
+\emph default 
+ après avoir sélectionné le module.
+\layout Subsubsection*
+\added_space_top medskip 
+Partages
+\layout Standard
+
+Utilisez le bouton 
+\emph on 
+Supprimer
+\emph default 
+ après avoir sélectionné le partage.
+\layout Subsubsection
+\added_space_top bigskip 
+Imprimante
+\layout Subsubsection*
+
+Général
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Nom de l'imprimante
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le nom de l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Description
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez une description, un commentaire sur l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Base
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Faites votre sélection dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Détails
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="7cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="8cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+\align left 
+Localisation de l'imprimante
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Indiquez le lieu où se trouve physiquement l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+URL de l'imprimante
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'url qui permet d'accéder à l'imprimante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Itemize
+
+Le bouton 
+\emph on 
+Editer
+\emph default 
+ permet de télécharger un pilote d'imprimante depuis votre arborescence.
+ Utilisez le bouton 
+\emph on 
+Supprimer
+\emph default 
+ pour effacer le pilote choisi.
+\layout Subsubsection*
+\added_space_top medskip 
+Permissions
+\layout Standard
+
+L'administrateur peut donner la permission à un utilisateur ou à un groupe
+ d'utiliser et/ou d'administrer une imprimante.
+\layout Standard
+
+Le bouton 
+\emph on 
+Ajouter un utilisateur
+\emph default 
+ renvoie à la liste des utilisateurs et le bouton 
+\emph on 
+Ajouter un groupe
+\emph default 
+ renvoie à la liste des groupes.
+\layout Subsubsection*
+\added_space_top medskip 
+Configuration réseau
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse IP
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'adresse IP de l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse MAC
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'adresse MAC de l'imprimante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection
+\added_space_top bigskip 
+Information
+\layout Standard
+
+Cet onglet donne un compte rendu de l'état du système.
+\layout Subsubsection
+\added_space_top bigskip 
+Références
+\layout Standard
+
+Les références résument les relations existantes entre objets.
+\layout Subsection
+\pagebreak_top 
+Configurer une station de travail
+\layout Subsubsection
+
+Informations générales
+\layout Subsubsection*
+
+Propriétés
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="5" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Modèle de station de travail
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Base
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélection d'un département dans la liste déroulante.
+ La station de travail sera associée à ce département.
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Mode
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélection du mode dans la liste déroulante.
+ L'administrateur peut activer la station, verrouiller la station ou effectuer
+ un test mémoire.
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Serveur de logs systèmes
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez le serveur de logs dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Seveur NTP
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez le serveur de temps dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Configuration réseau
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse IP
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse IP de la station de travail
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse MAC
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse MAC de la station de travail
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Action
+\layout Standard
+
+Choisissez l'action à exécuter sur le poste de travail.
+\layout Subsubsection
+\added_space_top bigskip 
+Périphériques
+\layout Subsubsection*
+
+Clavier
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Modèle
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez le modèle du clavier dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Disposition
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez la langue du clavier dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Variante
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez la particularité du clavier
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Souris
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Type
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez le modèle de la souris dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Port
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez le port sur lequel sera branchée la souris dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Matériel téléphonique
+\layout Standard
+
+Précisez de quel type de téléphone il s'agit.
+ 
+\layout Subsubsection*
+\added_space_top medskip 
+Carte graphique
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Pilote
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionner le pilote de la carte graphique
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Résolution
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez la résolution de l'écran de la station de travail dans la liste
+ déroulante.
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Profondeur des couleurs
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionner le nombre de couleurs à afficher
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Ecran
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="7cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="8cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Type
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Fréquence de synchronisation Horizontale
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Indiquez la fréquence
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Fréquence de synchronisation Verticale
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Indiquez la fréquence
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Scanner
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="6cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="9cm">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Fournir un service de scanner
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Cochez pour indiquer si la station de travail peut scanner
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection
+\added_space_top bigskip 
+Démarrage
+\layout Subsubsection*
+
+Paramètre de démarrage
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Serveur LDAP
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez le serveur ldap correspondant dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Kernel utilisé au démarrage
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Nom du kernel utilisé au démarrage
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Options personnalisées
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Options à passer au kernel lors du démarrage
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Itemize
+
+Cochez pour sélectionnez le mode de démarrage, par défaut le mode graphique
+ est activé.
+\layout Subsubsection*
+\added_space_top medskip 
+Serveur FAI
+\layout Standard
+
+Sélectionnez le serveur FAI dans la liste déroulante pour le démarrage initial
+ de la station de travail.
+\layout Subsubsection*
+\added_space_top medskip 
+Liste des classes FAI utilisées
+\layout Standard
+
+Utilisez le bouton 
+\emph on 
+Ajouter
+\emph default 
+ pour sélectionner la liste des classes FAI utilisées pour cette station
+ de travail.
+\layout Subsubsection*
+\added_space_top medskip 
+Modules du kernel (format : nom paramètre)
+\layout Standard
+
+Introduisez le nom du module à charger au démarrage suivi de ses paramètres,
+ ensuite cliquez sur 
+\emph on 
+Ajouter
+\emph default 
+.
+ Utilisez le bouton 
+\emph on 
+Supprimer
+\emph default 
+ après avoir sélectionné le module.
+\layout Subsubsection*
+\added_space_top medskip 
+Partages
+\layout Standard
+
+Utilisez le bouton 
+\emph on 
+Supprimer
+\emph default 
+ après avoir sélectionné le partage.
+\layout Subsubsection
+\added_space_top bigskip 
+Imprimante
+\layout Subsubsection*
+
+Général
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Nom de l'imprimante
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le nom de l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Description
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez une description, un commentaire sur l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Base
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Faites votre sélection dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Détails
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="7cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="8cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+\align left 
+Localisation de l'imprimante
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Indiquez le lieu où se trouve physiquement l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+URL de l'imprimante
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'url qui permet d'accéder à l'imprimante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Itemize
+
+Le bouton 
+\emph on 
+Editer
+\emph default 
+ permet de télécharger un pilote d'imprimante depuis votre arborescence.
+ Utilisez le bouton 
+\emph on 
+Supprimer
+\emph default 
+ pour effacer le pilote choisi.
+\layout Subsubsection*
+\added_space_top medskip 
+Permissions
+\layout Standard
+
+L'administrateur peut donner la permission à un utilisateur ou à un groupe
+ d'utiliser et/ou d'administrer une imprimante.
+\layout Standard
+
+Le bouton 
+\emph on 
+Ajouter un utilisateur
+\emph default 
+ renvoie à la liste des utilisateurs et le bouton 
+\emph on 
+Ajouter un groupe
+\emph default 
+ renvoie à la liste des groupes.
+\layout Subsubsection*
+\added_space_top medskip 
+Configuration réseau
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse IP
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'adresse IP de l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse MAC
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'adresse MAC de l'imprimante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection
+\added_space_top bigskip 
+Information
+\layout Standard
+
+Cet onglet donne un compte rendu de l'état du système.
+\layout Subsubsection
+\added_space_top bigskip 
+Références
+\layout Standard
+
+Les références résument les relations existantes entre objets.
+\layout Subsection
+\pagebreak_top 
+Configurer un serveur
+\layout Subsubsection
+
+Informations générales
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color black
+Nom du serveur
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le nom du serveur
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Base
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Sélectionnez dans la liste déroulante le département auquel le serveur sera
+ associé
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Description
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez une description, un commentaire sur le serveur
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Configuration réseau
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse IP
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'adresse IP du serveur
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse MAC
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'adresse MAC du serveur
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Action
+\layout Standard
+
+Choisissez l'action à exécuter sur le serveur.
+\layout Subsubsection
+\added_space_top bigskip 
+Databases
+\layout Standard
+
+Ce point regroupe toutes les bases de données qui peuvent être associées
+ à certaines fonctionnalités de GOsa.
+\layout Standard
+
+L'administrateur à le choix entre :
+\layout Itemize
+
+Accès kadmin Kerberos
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Realm Kerberos 
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le realm Kerberos
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Administrateur
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le login de l'administrateur Kerberos
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Mot de passe
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le mot de passe de l'administrateur Kerberos
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_deeper 
+\layout Itemize
+\added_space_top medskip 
+Base de données des FAX
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Utilisateur 
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le login du propriétaire de la base de données
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Mot de passe
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le mot de passe du propriétaire de la base de données
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_deeper 
+\layout Itemize
+\added_space_top medskip 
+Administration d'Asterisk 
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Utilisateur
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le login du propriétaire de la base de données
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Mot de passe
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le mot de passe du propriétaire de la base de données
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Préfixe du pays
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le préfixe du pays
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Préfixe local
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le préfixe local
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_deeper 
+\layout Itemize
+\added_space_top medskip 
+Accès administrateur IMAP
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="5" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Nom du serveur
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le nom complet du serveur en notation internet (smtp.acme.com)
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+URL de connexion
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Administrateur
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le login de l'administrateur du serveur imap
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Mot de passe
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le mot de passe de l'administrateur du serveur imap
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+port Sieve
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le port sur lequel Sieve répond
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_deeper 
+\layout Itemize
+\added_space_top medskip 
+Base de données des logs
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Utilisateur
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le login du propriétaire de la base de données
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Mot de passe
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le mot de passe du propriétaire de la base de données
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_deeper 
+\layout Subsubsection
+\added_space_top bigskip 
+Services
+\layout Itemize
+
+Exportation Nfs
+\layout Standard
+\added_space_bottom smallskip 
+Utilisez le bouton 
+\emph on 
+Ajouter 
+\emph default 
+pour pouvoir configurer les exports Nfs.
+ 
+\layout Subsubsection*
+\added_space_bottom smallskip 
+Freigabe bearbeiten
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="6" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Nom
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le nom du partage
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Description
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez une description, un commentaire sur le partage
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Type
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Faites votre sélection dans la liste déroulante du type de partage
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Type de caractères
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Faites votre sélection dans la liste déroulante du type d'encodage
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Chemin
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Indiquez le répertoire correspondant au partage
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Option
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Indiquez les options éventuelles pour ce partage
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Standard
+\added_space_top smallskip 
+Cliquez sur le bouton 
+\emph on 
+Enregistrer
+\emph default 
+ pour terminer la configuration du partage.
+\layout Itemize
+\added_space_top medskip 
+Services de temps
+\layout Standard
+
+Utilisez le bouton 
+\emph on 
+Ajouter
+\emph default 
+ pour pouvoir introduire l'adresse du serveur de temps.
+\layout Itemize
+\added_space_top medskip 
+Service LDAP
+\layout Standard
+
+Cochez pour pouvoir introduire l'adresse du serveur ldap
+\layout Itemize
+\added_space_top medskip 
+Services de terminaux
+\layout Standard
+\added_space_bottom smallskip 
+Cochez pour indiquer que ce serveur est un serveur de terminaux.
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="7cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="8cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Désactiver temporairement le login
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Cochez pour empêcher les terminaux de se connecter temporairement
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Répertoire des polices de caractères
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le répertoire de polices de caractères utilisé par les terminaux
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Itemize
+\added_space_top medskip 
+Service de logs systèmes
+\layout Standard
+
+Cochez pour indiquer que le serveur comprend un service de logs systèmes.
+\layout Itemize
+\added_space_top medskip 
+Services d'impression
+\layout Standard
+
+Cochez pour indiquer que le serveur comprend un service d'impression.
+\layout Itemize
+\added_space_top medskip 
+Serveur de messagerie
+\layout Standard
+
+Cochez pour indiquer que le serveur comprend un service de messagerie.
+\layout Subsubsection
+\added_space_top bigskip 
+Information
+\layout Standard
+
+Cet onglet donne un compte rendu de l'état du système.
+\layout Subsubsection
+\added_space_top bigskip 
+Références
+\layout Standard
+
+Les références résument les relations existantes entre objets.
+\layout Subsection
+\pagebreak_top 
+Configurer une imprimante
+\layout Subsubsection
+
+Informations
+\layout Subsubsection*
+
+Général
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Nom de l'imprimante
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le nom de l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Description
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez une description, un commentaire sur l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Base
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Faites votre sélection dans la liste déroulante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Détails
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="7cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="8cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+\align left 
+Localisation de l'imprimante
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Indiquez le lieu où se trouve physiquement l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+URL de l'imprimante
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'url qui permet d'accéder à l'imprimante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Itemize
+
+Le bouton 
+\emph on 
+Editer
+\emph default 
+ permet de télécharger un pilote d'imprimante depuis votre arborescence.
+ Utilisez le bouton 
+\emph on 
+Supprimer
+\emph default 
+ pour effacer le pilote choisi.
+\layout Subsubsection*
+\added_space_top medskip 
+Permissions
+\layout Standard
+
+L'administrateur peut donner la permission à un utilisateur ou à un groupe
+ d'utiliser et/ou d'administrer une imprimante.
+\layout Standard
+
+Le bouton 
+\emph on 
+Ajouter un utilisateur
+\emph default 
+ renvoie à la liste des utilisateurs et le bouton 
+\emph on 
+Ajouter un groupe
+\emph default 
+ renvoie à la liste des groupes.
+\layout Subsubsection*
+\added_space_top medskip 
+Configuration réseau
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse IP
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'adresse IP de l'imprimante
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse MAC
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'adresse MAC de l'imprimante
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection
+\added_space_top bigskip 
+Références
+\layout Standard
+
+Les références résument les relations existantes entre objets.
+\layout Subsection
+\pagebreak_top 
+Configurer un téléphone
+\layout Subsubsection
+
+Informations générales
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Nom du téléphone
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le nom du téléphone
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Base
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Choisissez dans la liste déroulante le nom du département auquel sera associé
+ le téléphone
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Description
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez une description, un commentaire sur le téléphone
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Configuration avancée du téléphone
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Type
+\color black
+ de téléphone
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Choisissez dans la liste déroulante le type du téléphone : SIP, IAX ou CAPI
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Itemize
+\added_space_top bigskip 
+Si SIP est sélectionné vous devez remplir les champs suivants :
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="6cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="9cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Mode
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Choisissez dans la liste déroulante le mode de fonctionnement du téléphone
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Mode DTMF 
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Choisissez dans la liste déroulante le type de modulation DTMF utilisé par
+ le téléphone
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+\align left 
+Adresse IP par défaut
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Choisissez dans la liste déroulante le type de configuration de l'adresse
+ IP
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+\align left 
+Temps de réponse maximum
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le délai d'attente maximum
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_deeper 
+\layout Itemize
+\added_space_top bigskip 
+Si IAX est sélectionné vous devez remplir les champs suivants :
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="9" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="6cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="9cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color black
+Mode
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Choisissez dans la liste déroulante le mode de fonctionnement du téléphone
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse IP par défaut
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Temps de réponse maximum
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le délai d'attente maximum
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Type d'authentification
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Choisissez dans la liste déroulante la méthode d'authentification du téléphone
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Secret
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le secret utilisé lors de l'authentification du téléphone
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Code du compte téléphonique
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color red
+?
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Regrouper des lignes
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Choisissez dans la liste déroulante si il faut grouper des lignes téléphoniques
+ ou pas
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Machines qui peuvent se connecter
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Utilisez le bouton 
+\emph on 
+Ajouter
+\emph default 
+ pour insérer le nom d'hôte pouvant se connecter.
+ Le bouton 
+\emph on 
+Supprimer
+\emph default 
+ sert à effacer le nom d'hôte sélectionné.
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Machines qui ne peuvent pas se connecter
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Utilisez le bouton 
+\emph on 
+Ajouter
+\emph default 
+ pour insérer le nom d'hôte ne pouvant pas se connecter.
+ Le bouton 
+\emph on 
+Supprimer
+\emph default 
+ sert à effacer le nom d'hôte sélectionné.
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_deeper 
+\layout Itemize
+\added_space_top bigskip 
+Si CAPI est sélectionné vous devez remplir le champ suivant :
+\begin_deeper 
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="1" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="4cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+MSN
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez le numéro MSN de la ligne téléphonique
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\end_deeper 
+\layout Subsubsection*
+\added_space_top medskip 
+Configuration réseau
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse IP
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'adresse IP du téléphone
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse MAC
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'adresse MAC du téléphone
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection
+\added_space_top bigskip 
+Références
+\layout Standard
+
+Les références résument les relations existantes entre objets.
+\layout Subsection
+\pagebreak_top 
+Configuration d'un composant
+\layout Subsubsection
+
+Informations générales
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color black
+Nom du périphérique
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Insérez le nom du composant.
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Base
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Choisissez dans la liste déroulante le nom du département auquel sera associé
+ le composant.
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Description
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Rédigez une description à propos du composant.
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection*
+\added_space_top medskip 
+Configuration réseau
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse IP
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'adresse IP du composant
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Adresse MAC
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Introduisez l'adresse MAC du composant
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection
+\added_space_top bigskip 
+Références
+\layout Standard
+
+Les références résument les relations existantes entre objets.
+\the_end

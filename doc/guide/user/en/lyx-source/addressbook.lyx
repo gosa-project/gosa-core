@@ -1,0 +1,622 @@
+#LyX 1.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 221
+\textclass article
+\language frenchb
+\inputencoding auto
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize a4paper
+\paperpackage a4
+\use_geometry 1
+\use_amsmath 0
+\use_natbib 0
+\use_numerical_citations 0
+\paperorientation portrait
+\leftmargin 10mm
+\topmargin 10mm
+\rightmargin 10mm
+\bottommargin 20mm
+\headheight 10mm
+\headsep 10mm
+\footskip 10mm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\bullet 0
+	1
+	20
+	-1
+\end_bullet
+\bullet 1
+	1
+	20
+	-1
+\end_bullet
+\bullet 2
+	1
+	20
+	-1
+\end_bullet
+\bullet 3
+	1
+	20
+	4
+\end_bullet
+
+\layout Title
+
+
+\series bold 
+ADDONS
+\layout Section
+
+Addressbook
+\layout Standard
+
+The administrator can create or modify the user data or access to informations
+ about users when clicking on 
+\series bold 
+\color blue
+Addressbook
+\series default 
+\color default
+ button in the 
+\series bold 
+Addons
+\series default 
+ on the left.
+ 
+\color black
+The
+\family sans 
+ Addressbook page
+\family default 
+\color default
+ is displayed.
+ You will find on this page the name, the phone, the fax, the mobile and
+ the private number of users.
+ The last column contents the following icons :
+\layout Itemize
+
+
+\begin_inset Graphics
+	filename images/save.png
+
+\end_inset 
+
+ the possibility to save entries in the vcard format,
+\layout Itemize
+
+
+\begin_inset Graphics
+	filename images/mailto.png
+
+\end_inset 
+
+ the possibility to send a mail to the user.
+\layout Standard
+
+To select an user you have to click on his name, it will show you the complete
+ data of the selected user.
+ 
+\layout Standard
+
+To create or modify an entry, the administrator use ( 
+\begin_inset Graphics
+	filename images/action.png
+
+\end_inset 
+
+) the following icon :
+\layout Itemize
+
+
+\begin_inset Graphics
+	filename images/editpaste.png
+
+\end_inset 
+
+ to add an entry,
+\layout Standard
+
+Pay attention, the users created in the Administration part can't be modified
+ here, only the consultation of data is allowed.
+\layout Standard
+
+
+\color black
+Under the Actions table you will find a table called Filters 
+\begin_inset Graphics
+	filename images/rocket.png
+
+\end_inset 
+
+.
+ 
+\layout Itemize
+
+
+\color black
+This table purpose is to change the display of the users and their data
+ :
+\begin_deeper 
+\layout Standard
+
+
+\color black
+- Click on a letter to show all the users name starting with this letter;
+\layout Standard
+
+
+\color black
+- Click on the asterisk and the list of user name will be ordoned alphabetically.
+\end_deeper 
+\layout Itemize
+
+Lower, others possibilities of display exist :
+\begin_deeper 
+\layout Standard
+
+- Check one or more options to get a restricted selection :
+\layout Standard
+
+Check '
+\shape italic 
+Show organizational entries
+\shape default 
+' and all the users created in the Administration part are displayed.
+\layout Standard
+
+Check '
+\shape italic 
+Show addressbook entries
+\shape default 
+' and all the users created on the addressbook are displayed.
+\layout Standard
+
+- 
+\begin_inset Graphics
+	filename images/dtree.png
+
+\end_inset 
+
+ You can search by department;
+\layout Standard
+
+- 
+\begin_inset Graphics
+	filename images/list_ogroup.png
+
+\end_inset 
+
+ Your search can be based on informations of one or many users;
+\layout Standard
+
+- Your search can be based on one element.
+ Insert a letter or a number followed by an asterisk or a name in the field
+ 
+\begin_inset Graphics
+	filename images/search.png
+
+\end_inset 
+
+.
+ Then Click on the 
+\shape italic 
+Apply filter
+\shape default 
+ button to display users.
+\end_deeper 
+\layout Standard
+
+All the fields followed by a red asterisk must be filled.
+\layout Standard
+
+The icon 
+\begin_inset Graphics
+	filename images/closedlock.png
+
+\end_inset 
+
+ show you are in secure mode.
+\layout Subsection
+\pagebreak_top 
+Add entry
+\layout Standard
+
+When clicking on 'Add entry', the interface 
+\shape slanted 
+creating a new entry in
+\shape default 
+ display.
+ The administrator has to fill the fields with informations about the user.
+ This new entry has no link with users created in the Administration part.
+ This entry is only build into the addressbook of the organization.
+ 
+\layout Standard
+
+Before the administrator can choose the department where the new entry will
+ be saved, he can make a choice of department on the scroll list int the
+ title bar.
+\layout Standard
+
+To save data click on the 
+\shape italic 
+Save
+\shape default 
+ button, to delete data click on the 
+\shape italic 
+Cancel
+\shape default 
+ button and you come back at the complete list of users.
+\layout Subsubsection
+
+Personal
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color black
+Last name
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Insert the user's name
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+
+\color black
+First name
+\color red
+*
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Insert the first name of the user
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Initials
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Insert the initials of the user
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Personal title
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Mention the professional title of the person
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection
+\added_space_top medskip 
+Private
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Address
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Insert the user's private address
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Téléphone
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Insert the user's private phone
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Portable
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Insert the user's mobile phone
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Email
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Insert the user's email address
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\layout Subsubsection
+
+Organizational
+\layout Standard
+
+
+\begin_inset  Tabular
+<lyxtabular version="3" rows="9" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Company
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Insert the company's name of the user
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Department
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Insert the department where the user is located
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+City
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Insert the city where the company is 
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Postal code
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Insert the postal code of the company
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Country
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Insert the country where the company is implanted
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Address
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Insert company's address
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Phone
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Insert the user's phone number 
+\end_inset 
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+FAX
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Insert the user's fax number
+\end_inset 
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Pager
+\end_inset 
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\layout Standard
+
+Insert the user's pager
+\end_inset 
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset 
+
+
+\the_end
