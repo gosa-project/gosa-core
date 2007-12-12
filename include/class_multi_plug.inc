@@ -254,7 +254,6 @@ class multi_plug
    */
   public function check()
   {
-    $this->populate_values();
     $messages = $this->o_tab->check();
     return($messages);
   }

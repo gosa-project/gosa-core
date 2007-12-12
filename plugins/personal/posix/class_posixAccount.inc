@@ -1420,6 +1420,10 @@ class posixAccount extends plugin
     $ret = plugin::get_multi_edit_values();
     $ret['groupMembership']     = $this->groupMembership;
     $ret['groupMembership_some']= $this->groupMembership_some;
+
+    if(in_array("primaryGroup",$this->multi_boxes)){
+      $ret['primaryGroup'] = $this->primaryGroup;
+    }
     return($ret);
   }
 
@@ -1491,6 +1495,8 @@ class posixAccount extends plugin
       }
     }
     $this->groupMembership_some = $groups_some;
+
+    $this->primaryGroup = $this->gidNumber;
   }
 
 
