@@ -1,0 +1,4 @@
+# Vacation message
+vacation :addresses [$addrlist]
+"$vacmsg" ;
+

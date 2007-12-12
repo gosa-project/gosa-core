@@ -1,0 +1,17 @@
+#  Reject mails with bigger size
+if size :over {$maxsize}M{
+        reject text:
+Dear sender,
+
+the mail you sent to our mailsystem has been rejected due
+to a user configured maximum mail size ($maxsize MB).
+
+Either ask the user to remove the sizelimit, or send smaller pieces.
+
+Thank you,
+ the mailserver
+.
+        ;
+        discard;
+}
+

@@ -1,0 +1,5 @@
+# Sort mails with higher spam level
+if header :contains "X-Spam-Level" "$spamlevel" {
+  fileinto "$spambox";
+}
+

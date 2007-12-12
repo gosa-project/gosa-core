@@ -1,0 +1,1360 @@
+<?php
+class workstartup extends plugin
+{
+  /* CLI vars */
+  var $cli_summary= "Manage terminal startup options";
+  var $cli_description= "Some longer text\nfor help";
+  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
+
+  /* Ldap server list */
+  var $gotoLdapServers    = array();
+  var $gotoLdapServerList = array();
+  var $gotoLdap_inherit   = FALSE;
+
+  /* Generic terminal attributes */
+  var $bootmode             = "G";
+  var $gotoBootKernel       = "default-inherited";
+  var $gotoKernelParameters = "";
+  var $gotoLdapServer       = "default-inherited";
+  var $gotoModules          = array();
+  var $gotoAutoFs           = array();
+  var $gotoFilesystem       = array();
+  var $gotoTerminalPath     = "";
+  var $FAIstatus            = "";
+  var $gotoBootKernels      = array();
+
+  /* attribute list for save action */
+  var $attributes     = array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters", "FAIclass", "FAIstatus", "gotoShare","FAIdebianMirror", "FAIrelease");
+  var $objectclasses  = array("GOhard", "FAIobject");
+
+  /* Share */
+  var $gotoShares         = array();// Currently Share Option
+  var $gotoShare          = "";     // currently selected Share Option
+  var $gotoShareSelections= array();// Available Shares for this account in Listbox format
+  var $gotoAvailableShares= array();// Available Shares for this account
+
+  /* Helper */
+  var $customParameters   = "";
+  var $orig_dn            = "";
+  var $ignore_account     = TRUE;
+ 
+  /* FAI class selection */ 
+  var $FAIclass           = array();
+  var $FAIclasses         = array();
+  var $FAIclassInfo       = array();
+  var $FAIrelease         = "";
+  var $FAIdebianMirror    = "auto";
+
+  var $unresolved_classes = array();
+  var $view_logged        = FALSE;
+  
+  /* FAI class selection */
+  var $InheritedFAIclass           = array();
+  var $InheritedFAIrelease         = "";
+  var $InheritedFAIdebianMirror    = "auto";
+
+  /* Contains all possible server/release/class settings */
+  var $FAIServRepConfig   = array();
+
+  var $CopyPasteVars = array("gotoModules","gotoShares");
+
+  var $fai_activated = FALSE;
+  var $o_group_dn     ="";
+  var $member_of_ogroup   = FALSE;
+
+  function workstartup (&$config, $dn= NULL, $parent= NULL)
+  {
+    /* Check if FAI is active */
+    $tmp= $config->search("faiManagement", "CLASS",array('menu','tabs'));
+    if(!empty($tmp)){
+      $this->fai_activated = TRUE;
+    }else{
+      $this->attributes = array("gotoLdapServer", "gotoBootKernel", "gotoKernelParameters", "gotoShare");
+      $this->objectclasses  = array("GOhard");
+    }
+
+    plugin::plugin ($config, $dn, $parent);
+
+    if(!isset($this->parent->by_object['ogroup'])){
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cd ($this->config->current['BASE']);
+      $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".$this->dn."))",array("cn","dn"));
+      if($ldap->count()){
+        $this->member_of_ogroup = TRUE;
+        $attrs = $ldap->fetch();
+        $this->o_group_dn = $attrs['dn'];
+      }
+    }
+
+    /* Creating a list of valid Mirrors 
+     * none will not be saved to ldap.
+     */
+    $ldap   = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+
+    foreach($this->config->data['SERVERS']['LDAP'] as $server) {
+      $this->gotoLdapServerList[]= $server; 
+    }
+ 
+    if(isset($this->attrs['gotoLdapServer'])){
+      unset($this->attrs['gotoLdapServer']['count']);
+      sort($this->attrs['gotoLdapServer']);
+      foreach($this->attrs['gotoLdapServer'] as $value){
+        $this->gotoLdapServers[] = preg_replace("/^[0-9]*:/","",$value);
+      }
+    }
+    if(!count($this->gotoLdapServers) && $this->member_of_ogroup){ 
+      $this->gotoLdap_inherit = TRUE;
+    }
+
+    /* FAI Initialization
+       Skip this if FAI is not activated 
+     */
+    if($this->fai_activated) {
+
+      $_SESSION['getAvailableClassesForThisRelease_CACHE'] = array();
+      $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'] = array();
+
+      /* Search all FAI objects */
+      $ldap->search("(|(objectClass=FAIpackageList)(objectClass=FAItemplate)(objectClass=FAIvariable)(objectClass=FAIscript)(objectClass=FAIhook)(objectClass=FAIprofile)(objectClass=FAIpartitionTable))",array("cn","objectClass","FAIdebianSection",'description'));
+      /* Sort all entries, and attach elementtype.
+       * To be able to show the types in the listbox.
+       */
+      while($attr = $ldap->fetch()){
+        $cn = $attr['cn'][0];
+      
+        if(!isset($attr['description'])){
+          $attr['description'][0] ="";
+        }
+
+        $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'][] = $attr;
+   
+        if(in_array('FAIpackageList',$attr['objectClass'])){
+          $tmp2[$cn]['FAIpackageList']['obj']   = 'FAIpackageList'; 
+          $tmp2[$cn]['FAIpackageList']['kzl']   = 'Pl';
+          $tmp2[$cn]['FAIpackageList']['sec']   = $attr['FAIdebianSection'];
+          $tmp2[$cn]['FAIpackageList']['desc']  = $attr['description'];
+          $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+        }
+        if(in_array('FAItemplate',$attr['objectClass'])){
+          $tmp2[$cn]['FAItemplate']['obj']      = 'FAItemplate'; 
+          $tmp2[$cn]['FAItemplate']['kzl']      = 'T'; 
+          $tmp2[$cn]['FAItemplate']['desc']  = $attr['description'];
+          $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+        }
+        if(in_array('FAIvariable',$attr['objectClass'])){
+          $tmp2[$cn]['FAIvariable']['obj']      = 'FAIvariable'; 
+          $tmp2[$cn]['FAIvariable']['kzl']      = 'V'; 
+          $tmp2[$cn]['FAIvariable']['desc']  = $attr['description'];
+          $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+        }
+        if(in_array('FAIscript',$attr['objectClass'])){
+          $tmp2[$cn]['FAIscript']['obj']        = 'FAIscript'; 
+          $tmp2[$cn]['FAIscript']['kzl']        = 'S'; 
+          $tmp2[$cn]['FAIscript']['desc']  = $attr['description'];
+          $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+        }
+        if(in_array('FAIhook',$attr['objectClass'])){
+          $tmp2[$cn]['FAIhook']['obj']          = 'FAIhook'; 
+          $tmp2[$cn]['FAIhook']['kzl']          = 'H'; 
+          $tmp2[$cn]['FAIhook']['desc']  = $attr['description'];
+          $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+        }
+        if(in_array('FAIpartitionTable',$attr['objectClass'])){
+          $tmp2[$cn]['FAIpartitionTable']['obj']= 'FAIpartitionTable'; 
+          $tmp2[$cn]['FAIpartitionTable']['kzl']= 'Pt'; 
+          $tmp2[$cn]['FAIpartitionTable']['desc']  = $attr['description'];
+          $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+        }
+        if(in_array('FAIprofile',$attr['objectClass'])){
+          $tmp2[$cn]['FAIprofile']['obj']= 'FAIprofile'; 
+          $tmp2[$cn]['FAIprofile']['kzl']= 'P'; 
+          $tmp2[$cn]['FAIprofile']['desc']  = $attr['description'];
+          $this->FAIclasses[$attr['cn'][0]]=$attr['cn'][0];
+        }
+      }
+      if(is_array($this->FAIclasses)){
+        natcasesort($this->FAIclasses);
+      }
+
+      if(isset($tmp2)){
+        $this->FAIclassInfo = $tmp2;
+      } else {
+        $this->FAIclassInfo = array();
+      }
+
+      /* Build up an array like this one :
+          [$url]['SERVER'] = 'srv1-002';
+          [$url]['RELEASE']['siga/rc9.0.2']
+                                             ['SECTIONS'][0] "main";
+                                             ['SECTIONS'][1] "non-free";
+          [$url]['RELEASE']['siga/rc9.0.2']
+                                             ['PACKAGES'][0] "pkg1";
+                                             ['PACKAGES'][1] "postfix";
+       */
+
+      $ldap->search("(&(FAIrepository=*)(objectClass=FAIrepositoryServer))",array("FAIrepository"));
+      $test = array();
+      while($attr = $ldap->fetch()){
+        if(isset($attr['FAIrepository'])){
+
+          unset($attr['FAIrepository']['count']);
+
+          foreach($attr['FAIrepository'] as $rep){
+            $tmp = split("\|",$rep);
+
+            if(count($tmp)==4){
+              $sections = split(",",$tmp[3]);
+              $release  = $tmp[2];
+              $server   = $tmp[1];
+              $url      = $tmp[0];
+             
+              $test[$url]['RELEASE'][$release]['SECTIONS'] = $sections;
+      
+              /* Result will be cached
+               */
+              $rel_classes = $this->getAvailableClassesForThisRelease($release);
+              $test[$url]['RELEASE'][$release]['PACKAGES'] = $rel_classes;
+              $test[$url]['SERVER'] = $server;
+
+              /* auto gets all releases/classes 
+               */
+              $test['auto']['RELEASE'][$release]['SECTION'] = $sections;
+              $test['auto']['RELEASE'][$release]['PACKAGES'] = $rel_classes;
+            }
+          }
+        }
+      }
+      
+      /* Add possible elements from hook */
+      $lines= $this->GetHookElements();
+      foreach ($lines as $hline){
+        $entries= split(";", $hline);
+        if (isset($entries[1]) && !isset($test[$entries[1]])){
+          $test[$entries[1]]['RELEASE']= array();
+
+          /* Split releases */
+          if (isset($entries[2])){
+            $releases= split(",", $entries[2]);
+
+            foreach ($releases as $release){
+              $rname= preg_replace('/:.*$/', '', $release);
+              $sections= split(':', preg_replace('/^[^:]+:([^|]+)|.*$/', '\1', $release));
+              $classes= split('\|', preg_replace('/^[^|]+\|(.*)$/', '\1', $release));
+              $test[$entries[1]]['RELEASE'][$rname]= array();
+              $test[$entries[1]]['RELEASE'][$rname]['SECTION']= $sections;
+              foreach ($classes as $class){
+                if ($class != ""){
+                  $test[$entries[1]]['RELEASE'][$rname]['PACKAGES'][$class]= $class;
+                }
+              }
+            }
+          }
+        }
+      }
+      
+      $this->FAIServRepConfig= $test;
+
+      if((isset($this->FAIclass))&&(!is_array($this->FAIclass))){
+        $tmp = array();
+        $tmp = split(" ",$this->FAIclass);
+        $tmp2 =array();  
+
+        foreach($tmp as $class){
+          if( ":" == $class[0] ) {
+            $this->FAIrelease = substr( $class, 1 );
+          }
+          else
+          {
+            $tmp2[$class] = $class;
+          }
+        }
+        $this->FAIclass = $tmp2;
+      }
+
+      if(!is_array($this->FAIclass)){
+        $this->FAIclass =array();
+      }
+    }// END of FAI initialization stuff 
+
+
+    /* Get arrays */
+    foreach (array("gotoModules", "gotoAutoFs", "gotoFilesystem") as $val){
+      if (isset($this->attrs["$val"]["count"])){
+        for ($i= 0; $i<$this->attrs["count"]; $i++){
+          if (isset($this->attrs["$val"][$i])){
+            array_push($this->$val, $this->attrs["$val"][$i]);
+          }
+        }
+      }
+      sort ($this->$val);
+      $this->$val= array_unique($this->$val);
+    }
+
+    /* Parse Kernel Parameters to decide what boot mode is enabled */
+    if (preg_match("/ splash=silent/", $this->gotoKernelParameters)){
+      $this->bootmode= "G";
+    } elseif (preg_match("/ debug/", $this->gotoKernelParameters)){
+      $this->bootmode= "D";
+    } elseif ($this->gotoKernelParameters == "") {
+      $this->bootmode= "G";
+    } else {
+      $this->bootmode= "T";
+    }
+    if (preg_match("/ o /", $this->gotoKernelParameters)){
+      $this->customParameters= preg_replace ("/^.* o /", "", $this->gotoKernelParameters);
+    } else {
+      $this->customParameters= "";
+    }
+
+    /* Prepare Shares */
+    if((isset($this->attrs['gotoShare']))&&(is_array($this->attrs['gotoShare']))){
+      unset($this->attrs['gotoShare']['count']);
+      foreach($this->attrs['gotoShare'] as $share){
+        $tmp = $tmp2 = array();
+        $tmp = split("\|",$share);
+        $tmp2['server']      =$tmp[0];
+        $tmp2['name']        =$tmp[1];
+        $tmp2['mountPoint']  =$tmp[2];
+        $this->gotoShares[$tmp[1]."|".$tmp[0]]=$tmp2;
+      }
+    }
+
+    $this->gotoShareSelections= $config->getShareList(true);
+    $this->gotoAvailableShares= $config->getShareList(false);
+    $tmp2 = array();
+  
+
+    $this->orig_dn= $this->dn;
+
+    /* Handle inheritance value "default" */
+    if ($this->member_of_ogroup){
+      $this->gotoBootKernels= array("default-inherited" => '['._("inherited").']'); 
+    }
+
+    /* Load hardware list */
+    if ($this->member_of_ogroup){
+
+      if(count($this->FAIclass)==0 && $this->FAIrelease == ""){
+        $this->FAIdebianMirror = "inherited";
+      }
+
+      if($this->fai_activated){
+        $map= array("gotoBootKernel","FAIclass","FAIdebianMirror");
+      }else{
+        $map= array("gotoBootKernel");
+      }
+
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cat($this->o_group_dn);
+      $attrs= $ldap->fetch();
+
+      foreach ($map as $name){
+        if (!isset($attrs[$name][0])){
+          continue;
+        }
+
+        switch ($name){
+          case 'gotoBootKernel':
+            $this->gotoBootKernels['default-inherited']=  _("inherited").' ['.$attrs[$name][0].']' ;
+            break;
+
+          case 'FAIclass':
+            $str = split(":",$attrs[$name][0]);
+            $this->InheritedFAIclass    = split("\ ",trim($str[0]));
+            $this->InheritedFAIrelease  = trim($str[1]);
+            break;
+
+          case 'FAIdebianMirror':
+            $this->InheritedFAIdebianMirror = $attrs[$name][0];
+            break;
+        }
+      }
+    }
+
+    /* Get list of boot kernels */
+    if (isset($this->config->data['TABS'])){
+      $command= $this->config->search(get_class($this), "KERNELS",array('tabs'));
+
+      if (!check_command($command)){
+        $message[]= sprintf(_("Command '%s', specified as KERNELS hook for plugin '%s' doesn't seem to exist."), $command,
+            get_class($this));
+      } else {
+        $fh= popen($command, "r");
+        while (!feof($fh)) {
+          $buffer= trim(fgets($fh, 256));
+          
+          if(!empty($buffer)){
+          
+            $name=$value = $buffer;
+
+            if(preg_match("/:/",$buffer)){
+              $name = preg_replace("/:.*$/","",$buffer);
+              $value= preg_replace("/^.*:/","",$buffer);
+              $this->gotoBootKernels[$name]= $name.":".$value;
+            }else{
+              $this->gotoBootKernels[$name]= $value;
+            }
+          }
+
+        }
+        pclose($fh);
+      }
+    }
+
+    /* Turn to default, if we've nothing to inherit */
+    if (!isset($this->gotoBootKernels['default-inherited']) && $this->gotoBootKernel == "default-inherited"){
+      $this->gotoBootKernel= "default";
+    }
+
+    /* Preselect release if none was selected yet */
+    if(empty($this->FAIrelease) && $this->FAIdebianMirror == "auto"){
+      if(isset($this->FAIServRepConfig['auto']['RELEASE']) && is_array($this->FAIServRepConfig['auto']['RELEASE'])){
+        $this->FAIrelease = key($this->FAIServRepConfig['auto']['RELEASE']);
+      }
+    }
+  }
+
+  
+  /* This class is called by the contrucktor ONLY.
+   *   It return the available classes for each 
+   *    Server / Release combination ... 
+   *   (Release specifies which classes are available) 
+   */
+  function getAvailableClassesForThisRelease($release)
+  {
+    /* There could be more than one server providing this release,
+        so use cached result if available
+     */
+    if(isset($_SESSION['getAvailableClassesForThisRelease_CACHE'][$release]))  {
+      return($_SESSION['getAvailableClassesForThisRelease_CACHE'][$release]);
+    }
+
+    $test2  = array();
+    $bb     = $this->generateDNSyn($release);
+
+    $ldap   = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+  
+    /* Get classes fpr given release */
+    $p_classes = get_all_objects_for_given_base($bb,
+        "(|(objectClass=FAIpackageList)(objectClass=FAItemplate)".
+          "(objectClass=FAIvariable)(objectClass=FAIscript)(objectClass=FAIhook)".
+          "(objectClass=FAIprofile)(objectClass=FAIpartitionTable))");
+
+    /* Create list of classes */
+    foreach($p_classes as $class){
+      $ldap->cat($class['dn'],array("cn"));
+      $attr = $ldap->fetch();
+      $test2[$attr['cn'][0]] = $attr['cn'][0];
+    }
+    $_SESSION['getAvailableClassesForThisRelease_CACHE'][$release] = $test2;
+    return($test2);
+  }
+
+
+  /*  Create array to display available classes/profiles in a selectbox 
+   *   This function only displays the available classes.
+   *   If a class is available is defined by these facts : 
+   *     1. Is this class available for the selected release ?
+   *       - if it is available, check if the release is available for the selected server 
+   *         (done by $this->getFAIreleases())
+   *     2. Is this class currently not assigned to $this->FAIclass
+   */
+  function selectFriendlyClasses(){
+    $tmp=array();
+
+    if($this->FAIdebianMirror == "inherited" || $this->FAIrelease == ""){
+      return($tmp);
+    }
+
+    /* check if the current release exists,
+        else select the first one ..
+     */
+    $tmp2 = $this->getFAIreleases();
+    if(!isset($tmp2[$this->FAIrelease]) || !$tmp2[$this->FAIrelease]['USE']){
+      foreach($tmp2 as $key => $data){
+        if($data['USE']){
+          $this->FAIrelease = $key;
+        }
+      }
+    }
+    if(!in_array($this->FAIrelease, $tmp2)){
+#  $this->FAIrelease = key($tmp2);
+    }
+
+    /* Get all Packages for this server/release combination
+     */
+    if(!isset($this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'][$this->FAIrelease]['PACKAGES'])){
+      $pkgs = array();
+      print_red(_("There are packages in your configuration, which can't be resolved with current server/release settings."));
+    }else{
+      $pkgs = $this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'][$this->FAIrelease]['PACKAGES'];
+    }
+
+    /* Check each and every single class name 
+     */
+    foreach($pkgs as $pkg){
+  
+      /* Class already assigned to the classes list ?
+       * If not ... go on
+       */
+      if(!in_array($pkg,$this->FAIclass)){
+        
+        /* Create the displayed list entry value
+            HKLMOP [-Pl P V T-] or something like that 
+         */
+        $str = "";
+        foreach($this->FAIclassInfo[$pkg] as $entry){
+          if(isset($entry['kzl'])){
+            $str .= $entry['kzl']." ";
+          }
+        }
+        
+        /* Append class if everyting was fine
+         */        
+        $tmp[$pkg] = $pkg." [-".trim($str)."-]";
+      }
+    }
+    /* Just sort and return new classes list ...
+       ( possibly we should cache the result ... )
+     */
+    natcasesort ($tmp);
+    return($tmp);
+  }
+
+  function check()
+  {
+    $messages = array();
+    
+    /* Call common method to give check the hook */
+    $messages= plugin::check();
+
+    /* If there are packages selected, but no mirror show error */   
+    if(($this->FAIdebianMirror == "none")&&(count($this->FAIclass)>0)){
+      $messages[]=_("Please select a 'FAI server' or remove the 'FAI classes'.");
+    }
+
+    return($messages);
+  }
+
+  function execute()
+  {
+  	/* Call parent execute */
+  	plugin::execute();
+
+    if($this->is_account && !$this->view_logged){
+      $this->view_logged = TRUE;
+      new log("view","workstation/".get_class($this),$this->dn);
+    }
+
+    /* Do we need to flip is_account state? */
+    if(isset($_POST['modify_state'])){
+      if($this->is_account && $this->acl_is_removeable()){
+        $this->is_account= FALSE;
+      }elseif(!$this->is_account && $this->acl_is_createable()){
+        $this->is_account= TRUE;
+      }
+    }
+
+    /* Do we represent a valid terminal? */
+    if (!$this->is_account && $this->parent === NULL){
+      $display= "<img alt=\"\" src=\"images/stop.png\" align=middle>&nbsp;<b>".
+        _("This 'dn' has no terminal features.")."</b>";
+      return ($display);
+    }
+
+    /* Add module */
+    if (isset ($_POST['add_module'])){
+      if ($_POST['module'] != "" && $this->acl_is_writeable("gotoModule")){
+        $this->add_list ($this->gotoModules, $_POST['module']);
+      }
+    }
+
+    /* Delete module */
+    if (isset ($_POST['delete_module'])){
+      if (count($_POST['modules_list']) && $this->acl_is_writeable("gotoModule")){
+        $this->del_list ($this->gotoModules, $_POST['modules_list']);
+      }
+    }
+
+    /* FAI class management */
+    if($this->fai_activated){
+      if(((isset($_POST['AddClass']))&&(isset($_POST['FAIclassesSel']))) && ($this->acl_is_writeable("FAIclass"))){
+        $found = 0 ; 
+
+        /* If this new class/profile will attach a second partition table
+         * to our list of classes, abort and show a message.
+         */
+        foreach($this->FAIclass as $name){
+          if(isset($this->FAIclassInfo[$name])){
+            foreach($this->FAIclassInfo[$name] as $atr){
+              if(isset($atr['obj'])){
+                if($atr['obj'] == "FAIpartitionTable"){
+                  $found ++ ; 
+                }
+              }
+            }
+          }
+        }
+
+        if((isset($this->FAIclassInfo[$_POST['FAIclassesSel']]['FAIpartitionTable']))&&($found>0)){
+          print_red(_("There is already a profile in your selection that contain partition table configurations."));
+        }else{
+          $this->FAIclass[$_POST['FAIclassesSel']]=$_POST['FAIclassesSel'];
+        }
+      }
+
+      $sort = false;
+
+      /* Move one used class class one position up or down */
+      if($this->acl_is_writeable("FAIclass")){
+        foreach($_POST as $name => $val){
+
+          $sort_type = false;
+          if((preg_match("/sort_up/",$name))&&(!$sort)){
+            $sort_type = "sort_up_";
+          }
+          if((preg_match("/sort_down/",$name))&&(!$sort)){
+            $sort_type = "sort_down_";
+          }
+
+          if(($sort_type)&&(!$sort)){
+            $value = base64_decode(preg_replace("/_.*$/i","",preg_replace("/".$sort_type."/i","",$name)));
+            $sort = true;
+
+            $last = -1;
+            $change_down  = -1;
+
+            /* Create array with numeric index */ 
+            $tmp = array();
+            foreach($this->FAIclass as $class){
+              $tmp [] = $class;
+            }
+
+            /* Walk trough array */
+            foreach($tmp as $key => $faiName){
+              if($faiName == $value){
+                if($sort_type == "sort_up_"){
+                  if($last != -1){
+                    $change_down= $last;
+                  }
+                }else{
+                  if(isset($tmp[$key+1])){
+                    $change_down = $key;
+                  }
+                }
+              }
+              $last = $key;
+            }
+
+            $tmp2 = array();
+            $skip = false;    
+
+            foreach($tmp as $ky => $vl){
+
+              if($ky == $change_down){
+                $skip = $vl;
+              }else{
+                $tmp2[$vl] = $vl;
+              }
+              if(($skip != false)&&($ky != $change_down)){
+                $tmp2[$skip]  = $skip;
+                $skip =false;
+              }
+            }   
+            $this->FAIclass = $tmp2; 
+          }
+
+          if(preg_match("/fai_remove/i",$name)){
+            $value = base64_decode(preg_replace("/_.*$/i","",preg_replace("/fai_remove_/i","",$name)));
+            unset($this->FAIclass[$value]);
+          }
+        }
+      }
+
+      /* Delete selected class from our list */
+      if($this->acl_is_writeable("FAIclass")){
+        if((isset($_POST['DelClass']))&&(isset($_POST['FAIclassSel']))){
+          if(isset($this->FAIclass[$_POST['FAIclassSel']])){
+            unset($this->FAIclass[$_POST['FAIclassSel']]);
+          }
+        }
+      }
+    }// END fai handling
+
+    /* Show main page */
+    $smarty= get_smarty();
+
+    /* Assign ACLs to smarty */
+    $tmp = $this->plInfo();
+    foreach($tmp['plProvidedAcls'] as $name => $translation){
+      $smarty->assign($name."ACL",$this->getacl($name));
+    } 
+
+    $smarty->assign("member_of_ogroup",$this->member_of_ogroup);
+
+    /* In this section server shares will be defined
+     * A user can select one of the given shares and a mount point
+     *  and attach this combination to his setup.
+     */
+    $smarty->assign("gotoShareSelections",    $this->gotoShareSelections);
+    $smarty->assign("gotoShareSelectionKeys", array_flip($this->gotoShareSelections));
+
+    /* if $_POST['gotoShareAdd'] is set, we will try to add a new entry
+     * This entry will be, a combination of mountPoint and sharedefinitions
+     */
+    if((isset($_POST['gotoShareAdd'])) && ($this->acl_is_writeable("gotoShare"))) {
+      /* We assign a share to this user, if we don't know where to mount the share */
+      if((!isset($_POST['gotoShareMountPoint']))||(empty($_POST['gotoShareMountPoint']))||(preg_match("/[\|]/i",$_POST['gotoShareMountPoint']))){
+        print_red(_("You must specify a valid mount point."));
+      }else{
+        if(count($this->gotoAvailableShares)){
+          $a_share = $this->gotoAvailableShares[$_POST['gotoShareSelection']];
+          $s_mount = $_POST['gotoShareMountPoint'];
+          /* Preparing the new assignment */
+          $this->gotoShares[$a_share['name']."|".$a_share['server']]=$a_share;
+          $this->gotoShares[$a_share['name']."|".$a_share['server']]['mountPoint']=$s_mount;
+        }
+      }
+    }
+
+    /* if the Post  gotoShareDel is set, someone asked GOsa to delete the selected entry (if there is one selected)
+     * If there is no defined share selected, we will abort the deletion without any message
+     */
+    if(($this->acl_is_writeable("gotoShare"))&& (isset($_POST['gotoShareDel']))&&(isset($_POST['gotoShare']))){
+      unset($this->gotoShares[$_POST['gotoShare']]);
+    }
+
+    $smarty->assign("gotoShares",$this->printOutAssignedShares());
+    $smarty->assign("gotoSharesCount",count($this->printOutAssignedShares()));
+    $smarty->assign("gotoShareKeys",array_flip($this->printOutAssignedShares()));
+    $smarty->assign("gotoBootKernels",$this->gotoBootKernels);
+
+    /* Create divSelectBox for ldap server selection
+     */
+    $SelectBoxLdapServer = new divSelectBox("LdapServer");
+    $SelectBoxLdapServer->SetHeight(130);
+
+    /* Add new ldap server to the list */
+    if(!$this->gotoLdap_inherit && isset($_POST['add_ldap_server']) && isset($_POST['ldap_server_to_add'])){
+      if(isset($this->gotoLdapServerList[$_POST['ldap_server_to_add']])){
+        $to_add = $this->gotoLdapServerList[$_POST['ldap_server_to_add']];
+        if(!in_array($to_add,$this->gotoLdapServers)){
+          $this->gotoLdapServers[] = $to_add;
+        }
+      }
+    }
+    
+    /* Move ldap servers up and down */
+    if(!$this->gotoLdap_inherit){
+      foreach($_POST as $name => $value){
+        if(preg_match("/sort_ldap_up_/",$name)){
+          $id = preg_replace("/^sort_ldap_up_([0-9]*)_(x|y)$/","\\1",$name);
+          $from =  $id;  
+          $to   =  $id -1;
+          $tmp = $this->array_switch_item($this->gotoLdapServers,$from,$to);
+          if($tmp){
+            $this->gotoLdapServers = $tmp;
+          }
+          break;
+        }
+        if(preg_match("/sort_ldap_down_/",$name)){
+          $id = preg_replace("/^sort_ldap_down_([0-9]*)_(x|y)$/","\\1",$name);
+          $from =  $id;  
+          $to   =  $id +1;
+          $tmp = $this->array_switch_item($this->gotoLdapServers,$from,$to);
+          if($tmp){
+            $this->gotoLdapServers = $tmp;
+          }
+          break;
+        }
+        if(preg_match("/gotoLdapRemove_/",$name)){
+          $id = preg_replace("/^gotoLdapRemove_([0-9]*)_(x|y)$/","\\1",$name);
+          $value = $this->gotoLdapServers[$id];
+          $this->gotoLdapServers = array_remove_entries(array($value),$this->gotoLdapServers);
+          break;
+        }
+      } 
+    }
+  
+    /* Add Entries 
+     */
+    foreach($this->gotoLdapServers as $key => $server){
+      if(!in_array($server,$this->gotoLdapServerList)){
+        $server = $server."&nbsp;<font style='color:red'>(missing)</font>";
+      }
+
+      $SelectBoxLdapServer->AddEntry(
+          array(array("string" => $server),
+            array("string" => 
+              "<input class='center' type='image' src='images/sort_up.png' name='sort_ldap_up_".$key."'>&nbsp;".
+              "<input class='center' type='image' src='images/sort_down.png' name='sort_ldap_down_".$key."'>&nbsp;".
+              "<input class='center' type='image' src='images/edittrash.png' name='gotoLdapRemove_".$key."'>",
+              "attach" => "style='text-align:right;width:40px;border-right:0px;'")));
+    }    
+
+    if($this->gotoLdap_inherit){
+      $smarty->assign("gotoLdapServerACL_inherit", preg_replace("/w/","",$this->getacl("gotoLdapServer")));;
+    }else{
+      $smarty->assign("gotoLdapServerACL_inherit", $this->getacl("gotoLdapServer"));
+    }
+    
+    $list = array();
+    foreach($this->gotoLdapServerList as $key => $entry){
+      if(!in_array($entry,$this->gotoLdapServers)){
+        $list[$key] = $entry;
+      }
+    }
+    $smarty->assign("gotoLdapServers",    $SelectBoxLdapServer->DrawList());
+    $smarty->assign("gotoLdapServerList", $list);
+    $smarty->assign("gotoLdap_inherit",   $this->gotoLdap_inherit);
+    $smarty->assign("JS",  $_SESSION['js']);
+
+    foreach (array("gotoModules", "gotoAutoFs", "gotoFilesystem") as $val){
+      $smarty->assign("$val", $this->$val);
+    }
+
+    /* Values */
+    foreach(array("gotoBootKernel", "customParameters", "gotoShare","FAIclasses","FAIclass","FAIdebianMirror","FAIrelease") as $val){
+      $smarty->assign($val, $this->$val);
+    }
+
+    $smarty->assign("fai_activated",$this->fai_activated);
+
+    /* Create FAI output */
+    if($this->fai_activated){
+      $smarty->assign("FAIdebianMirrors",$this->getFAIdebianMirrors());
+      $smarty->assign("FAIdebianMirror",$this->FAIdebianMirror);
+      $smarty->assign("FAIreleases",$this->getFAIreleases());
+      $smarty->assign("FAIrelease",$this->FAIrelease);
+      $smarty->assign("FAIclasses",$this->selectFriendlyClasses());
+      $smarty->assign("FAIclassesKeys",array_flip($this->selectFriendlyClasses()));
+      $smarty->assign("FAIclassKeys",$this->FAIclass);
+
+      $inheritedRelease = array();
+      if(!empty($this->InheritedFAIrelease)){
+        $inheritedRelease[$this->InheritedFAIrelease]= $this->InheritedFAIrelease;
+      } 
+      $smarty->assign("InheritedFAIrelease",$inheritedRelease);
+
+      $div = new divSelectBox("WSFAIscriptClasses");
+      $div -> SetHeight("110");
+      $str_up     = " &nbsp;<input type='image' src='images/sort_up.png'    name='sort_up_%s'    value='%s'>";
+      $str_down   = " &nbsp;<input type='image' src='images/sort_down.png'  name='sort_down_%s'  value='%s'>";
+      $str_remove = " &nbsp;<input type='image' src='images/edittrash.png'  name='fai_remove_%s' value='%s'>";
+      $str_empty  = " &nbsp;<img src='images/empty.png' alt=\"\" width='7'>"; 
+
+      $i = 1;
+
+      if($this->FAIdebianMirror == "inherited"){
+        $tmp = $this->InheritedFAIclass;
+      }else{
+        $tmp = $this->FAIclass;
+      }
+
+      foreach($tmp as $class){
+
+        $marker = "";
+        if(in_array_ics($class,$this->unresolved_classes)){
+          $marker = "&nbsp;<font color='red'>("._("Not available in current setup").")</font>";
+        }
+
+        if($this->FAIdebianMirror == "inherited"){
+          $str = "";
+        }else{
+          if($i==1){
+            $str = $str_empty.$str_down.$str_remove;
+          }elseif($i == count($this->FAIclass)){
+            $str = $str_up.$str_empty.$str_remove;
+          }else{
+            $str = $str_up.$str_down.$str_remove;
+          }
+        }
+        $i ++ ; 
+  
+        $desc = ""; 
+        if(isset($this->FAIclassInfo[$class])){
+          foreach($this->FAIclassInfo[$class] as $types ){
+            if(isset($types['desc'][0])){
+              $desc.= $types['desc'][0]." ";
+            }
+          }
+        }
+        if(!empty($desc)){
+          $desc = "&nbsp;[".trim($desc)."]";
+        }        
+
+        $div->AddEntry(array(
+              array("string"=>$class.$desc.$marker),
+              array("string"=>preg_replace("/\%s/",base64_encode($class),$str),"attach"=>"style='width:50px;border-right:none;'")
+              ));
+      }  
+      $smarty->assign("FAIScriptlist",$div->DrawList()); 
+    }// END FAI output generation 
+
+    /* Radio button group */
+    if (preg_match("/G/", $this->bootmode)) {
+      $smarty->assign("graphicalbootup", "checked");
+    } else {
+      $smarty->assign("graphicalbootup", "");
+    }
+    if (preg_match("/T/", $this->bootmode)) {
+      $smarty->assign("textbootup", "checked");
+    } else {
+      $smarty->assign("textbootup", "");
+    }
+    if (preg_match("/D/", $this->bootmode)) {
+      $smarty->assign("debugbootup", "checked");
+    } else {
+      $smarty->assign("debugbootup", "");
+    }
+
+    /* Show main page */
+    return($smarty->fetch (get_template_path('workstationStartup.tpl', TRUE,dirname(__FILE__))));
+  }
+
+  function remove_from_parent()
+  {
+    $this->handle_post_events("remove");
+    new log("remove","workstation/".get_class($this),$this->dn);
+  }
+
+  function generateDNSyn($release)
+  {
+    $str = "";
+    $tmp = split("\/",$release);
+    $tmp = array_reverse($tmp);
+    $base = "ou=fai,ou=configs,ou=systems,";   
+    foreach($tmp as $departmentname){
+      $str .= ",ou=".$departmentname;
+    }
+    $str = preg_replace("/^,/","",($str.",".$base));
+
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(&(objectClass=FAIbranch))",array("ou"));
+    while($attrs = $ldap->fetch()){
+      if(preg_match("/".normalizePreg($str)."/",$attrs['dn'])){
+        return($attrs['dn']);
+      }
+    }
+
+    return($str.$this->config->current['BASE']);
+  }
+
+  function getFAIdebianMirrors()
+  {
+    $ret = array();
+
+    /* Only add inherit option, if we are part in an object group 
+     */
+    if($this->member_of_ogroup)    {
+      $ret['inherited']['NAME']="["._("inherited")."]";
+      $ret['inherited']['USE'] = TRUE;
+    }
+
+    $ret['auto']['NAME']=_("automatic");
+    $ret['auto']['USE'] = TRUE;
+    $secs  = array();
+
+    /* Walk through all available servers 
+        and check if they support the currently selected classes
+        if not, dont't add them to our list
+     */
+    foreach($this->FAIServRepConfig as $mirror => $rest){
+
+      /* Automatically selection is available everytime */
+      if($mirror == "auto"){
+        continue;
+      }
+
+      $use = false;
+      if(count($this->FAIclass) == 0){
+        $use = true;
+      }else{
+        $tmp = $this->getFAIreleases();
+        foreach($tmp as $release => $data){
+          if(isset($rest['RELEASE'][$release]) && $release == $this->FAIrelease){
+            $use = $data['USE']; 
+          }
+        } 
+      }
+
+      /* If current server, doesn't support this class
+          remove it from list
+       */
+      $ret[$mirror]['NAME'] = $mirror;
+      $ret[$mirror]['USE'] = $use;
+    }
+    return($ret);
+  }
+
+  function getFAIreleases() 
+  {
+    $ret = array();
+
+    if($this->FAIdebianMirror == "inherited") {
+      return(array());
+    }
+
+    if(!isset($this->FAIServRepConfig[$this->FAIdebianMirror])){
+      $this->FAIdebianMirror = "auto";
+    }
+
+    $errorClasses = array();
+    if(isset($this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'])) {
+      foreach($this->FAIServRepConfig[$this->FAIdebianMirror]['RELEASE'] as $release => $sections){
+        $use = true;
+
+        if(!count($this->FAIclass) == 0){
+          foreach($this->FAIclass as $class){
+            if(!in_array($class, $sections['PACKAGES'])){
+              $use = false;
+              $errorClasses[$class] = $class;
+            }else{
+              if(isset($errorClasses[$class])){
+                unset($errorClasses[$class]);
+              }
+            }
+          }
+        }
+        $ret[$release]['NAME']=$release;
+        $ret[$release]['USE']=$use;
+      }
+    }
+
+    if((count($ret) == 0 ) && ($this->FAIdebianMirror != "auto")){
+      $eClasses = " ";
+      foreach($errorClasses as $class){
+        $eClasses .= $class." ";
+      }
+
+      print_red(sprintf(_("Can't resolve one or more of the given FAIclass(es) [%s] in FAI server '%s'. Server was reset to 'auto'."),$eClasses, $this->FAIdebianMirror));
+      $this->FAIdebianMirror = "auto";
+      return($this->getFAIreleases());
+    }elseif((count($ret) == 0 ) && ($this->FAIdebianMirror == "auto")){
+
+      $eClasses = " ";
+      foreach($errorClasses as $class){
+        $eClasses .= $class." ";
+      }
+
+      $eClasses = preg_replace("/  */","",$eClasses);
+     
+      if(!empty($eClasses)) {
+
+        $this->unresolved_classes = $errorClasses;
+        $this->FAIdebianMirror = "auto";
+        print_red(sprintf(_("Can't resolve the given FAIclass(es) [%s] anyway, please check your FAI configurations, possibly some classes where deleted or renamed. Server was reset to 'auto'."),$eClasses));
+      }
+    }
+    return($ret);
+  }
+
+  /* Save data to object */
+  function save_object()
+  {
+    plugin::save_object();
+
+    if(isset($_POST['WorkstationStarttabPosted'])){
+      if(isset($_POST['gotoLdap_inherit'])){
+        $this->gotoLdap_inherit = TRUE;
+      }else{
+        $this->gotoLdap_inherit = FALSE;
+      }
+
+      /* Save group radio buttons */
+      if ($this->acl_is_writeable("bootmode") && isset($_POST["bootmode"])){
+        $this->bootmode= $_POST["bootmode"];
+      }
+
+      /* Save kernel parameters */
+      if ($this->acl_is_writeable("gotoKernelParameters") && isset($_POST["customParameters"])){
+        $this->customParameters= $_POST["customParameters"];
+      }
+    }
+  }
+
+
+  /* Save to LDAP */
+  function save()
+  {
+
+    /* Depending on the baseobject (Ogroup / WS) we
+     *  use another set of objectClasses
+     * In case of WS itself, we use  "array("GOhard", "FAIobject");"
+     * if we are currently editing from ogroup menu we use (array("gotWorkstationTemplate","GOhard", "FAIobject"))
+     */
+    if(isset($this->parent->by_object['ogroup'])){
+      $this->objectclasses = array("gotoWorkstationTemplate");
+    }elseif(isset($this->parent->by_object['workgeneric'])){
+      $this->objectclasses = array("GOhard");
+    }elseif(isset($this->parent->by_object['servgeneric'])){
+      $this->objectclasses = array("GOhard","gotoWorkstationTemplate");
+    }else{
+      print "Object Type Configuration : unknown";
+      exit();
+    }
+
+    /* Append FAI class */
+    if($this->fai_activated){
+      $this->objectclasses[]  = "FAIobject";
+    }
+
+    /* Find proper terminal path for tftp configuration
+       FIXME: This is suboptimal when the default has changed to
+       another location! */
+    if (($this->gotoTerminalPath == "default")){
+      $ldap= $this->config->get_ldap_link();
+
+      /* Strip relevant part from dn, keep trailing ',' */
+      $tmp= preg_replace("/^cn=[^,]+,ou=terminals,ou=systems,/i", "", $this->dn);
+      $tmp= preg_replace("/".$this->config->current['BASE']."$/i", "", $tmp);
+
+      /* Walk from top to base and try to load default values for
+         'gotoTerminalPath'. Abort when an entry is found. */
+      while (TRUE){
+        $tmp= preg_replace ("/^[^,]+,/", "", $tmp);
+
+        $ldap->cat("cn=default,ou=terminals,ou=systems,$tmp".
+            $this->config->current['BASE'], array('gotoTerminalPath'));
+        $attrs= $ldap->fetch();
+        if (isset($attrs['gotoTerminalPath'])){
+          $this->gotoTerminalPath= $attrs['gotoTerminalPath'][0];
+          break;
+        }
+
+        /* Nothing left? */
+        if ($tmp == ""){
+          break;
+        }
+      }
+    }
+
+    /* Add semi automatic values */
+    // FIXME: LDAP Server may not be set here...
+    $this->gotoKernelParameters= "ldap=".base64_encode($this->gotoLdapServer);
+
+    switch ($this->bootmode){
+      case "D":
+        $this->gotoKernelParameters.= " debug";
+      break;
+      case "G":
+        $this->gotoKernelParameters.= " splash=silent";
+      break;
+    }
+    if ($this->customParameters != ""){
+      $this->gotoKernelParameters.= " o ".$this->customParameters;
+    }
+
+    plugin::save();
+
+    unset( $this->attrs['FAIrelease'] );
+    
+    $str = "";
+
+    /* Skip FAI attribute handling if not necessary */
+    if($this->fai_activated){
+      if($this->FAIdebianMirror == "inherited"){
+        $this->attrs['FAIclass'] = $this->attrs['FAIrelease'] =  $this->attrs['FAIdebianMirror'] = array(); 
+      }else{
+        foreach($this->FAIclass as $class){
+          $str .= $class." ";
+        }
+        $str .= ":" . $this->FAIrelease;
+        $this->attrs['FAIclass']= "";
+        $this->attrs['FAIclass']= trim($str);
+
+        if(empty($this->attrs['FAIclass'])){
+          $this->attrs['FAIclass'] = array();
+        }
+      }
+    }
+  
+    /* Add missing arrays */
+    foreach (array("gotoFilesystem", "gotoAutoFs", "gotoModules") as $val){
+      if (isset ($this->$val) && count ($this->$val) != 0){
+    
+        $this->attrs["$val"]= array_unique($this->$val);
+      }
+      if(!isset($this->attrs["$val"])) $this->attrs["$val"]=array();
+    }
+
+    /* Prepare list of ldap servers */
+    $this->attrs['gotoLdapServer'] = array();
+    if(!$this->gotoLdap_inherit){
+      $i = 0;
+      foreach($this->gotoLdapServers as $server){
+        $i ++;
+        $this->attrs['gotoLdapServer'][] = $i.":".$server;
+      }
+    }
+
+    if (($this->attrs['gotoBootKernel'] == "default-inherited") || ($this->attrs['gotoBootKernel'] == "%default%")){
+      $this->attrs['gotoBootKernel']= array();
+    }
+
+    /* if mirror == none stop saving this attribute */
+    if($this->FAIdebianMirror == "none"){
+      $this->FAIdebianMirror = "";
+    }
+   
+    /* Get FAIstate from object, the generic tab could have changed it during execute */
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd($this->dn);
+
+
+    /* Skip FAI attribute handling if not necessary */
+    if($this->fai_activated){
+      $ldap->cat($this->dn,array("FAIstate"));
+      $checkFAIstate = $ldap->fetch();
+
+      /* Remove FAI objects if no FAI class is selected */ 
+      if((count($this->FAIclass)==0) && (!isset($checkFAIstate['FAIstate']))){
+        $this->attrs['FAIclass']        = array();
+        $this->attrs['FAIdebianMirror'] = array();
+      }
+    }
+
+
+    /* prepare share settings */
+    $tmp = array();
+    foreach($this->gotoShares as $name => $settings){
+      $tmp2= split("\|",$name);
+      $name = $tmp2[0];
+      $tmp[] = $settings['server']."|".$name."|".$settings['mountPoint'];
+    }
+    $this->attrs['gotoShare']=$tmp;
+
+    $this->cleanup();
+    $ldap->modify ($this->attrs); 
+    new log("modify","workstation/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
+
+    show_ldap_error($ldap->get_error(), sprintf(_("Saving of system workstation/startup with dn '%s' failed."),$this->dn));
+    $this->handle_post_events("modify");
+  }
+
+  /* Add value to array, check if unique */
+  function add_list (&$array, $value)
+  {
+    if ($value != ""){
+      $array[]= $value;
+      sort($array);
+      array_unique ($array);
+    }
+  }
+
+
+  /* Delete value to array, check if unique */
+  function del_list (&$array, $list)
+  {
+    $tmp= array();
+    foreach ($array as $mod){
+      if (!in_array($mod, $list)){
+        $tmp[]= $mod;
+      }
+    }
+    $array= $tmp;
+  }
+
+  /* Generate ListBox frindly output for the defined shares
+   * Possibly Add or remove an attribute here,
+   */
+  function printOutAssignedShares()
+  {
+    $a_return = array();
+    if(is_array($this->gotoShares)){
+      foreach($this->gotoShares as $share){
+        $a_return[$share['name']."|".$share['server']]= $share['name']." [".$share['server']."]";
+      }
+    }
+    return($a_return);
+  }
+
+
+  function GetHookElements()
+  {
+    $ret = array();
+    $cmd= $this->config->search("servrepository", "REPOSITORY_HOOK",array('tabs'));
+    if(!empty($cmd)){
+      $res = shell_exec($cmd);
+      $res2 = trim($res);
+      if((!$res)){
+        print_red(sprintf(_("Can't execute specified REPOSITORY_HOOK '%s' please check your gosa.conf."),$cmd));
+      }elseif(empty($res2)){
+        print_red(sprintf(_("The specified REPOSITORY_HOOK '%s', specified in your gosa.conf, returns an empty string."),$cmd));
+      }else{
+        $tmp = split("\n",$res);
+        foreach($tmp as $line){
+          if(empty($line)) continue;
+          $ret[]= $line;
+        }
+      }
+    }
+    return($ret);
+  }
+
+
+  function PrepareForCopyPaste($source)
+  {
+    plugin::PrepareForCopyPaste($source);    
+
+    $source_o = new workstartup ($this->config, $source['dn']);
+    
+    foreach(array("FAIclass","gotoModules", "gotoAutoFs", "gotoFilesystem","gotoKernelParameters","gotoShares","customParameters") as $attr){
+      $this->$attr = $source_o->$attr;
+    }
+  }
+
+  
+  function array_switch_item($ar,$from,$to)
+  {
+    if(!is_array($ar)){
+      return(false);
+    }
+    if(!isset($ar[$from])){
+      return(false);
+    }
+    if(!isset($ar[$to])){
+      return(false);
+    }
+
+    $tmp = $ar[$from];
+    $ar[$from] = $ar[$to];    
+    $ar[$to] = $tmp;    
+    return($ar);
+  }
+
+
+  /* Return plugin informations for acl handling */ 
+  static function plInfo()
+  {
+    return (array( 
+          "plShortName"   => _("Startup"),
+          "plDescription" => _("System startup"),
+          "plSelfModify"  => FALSE,
+          "plDepends"     => array(),
+          "plPriority"    => 9,
+          "plSection"     => array("administration"),           
+          "plCategory"    => array("workstation","server","ogroups"),
+
+          "plProvidedAcls"=> array(
+            "gotoLdapServer"        => _("Ldap server"),
+            "gotoBootKernel"        => _("Boot kernel"),
+            "gotoKernelParameters"  => _("Kernel parameter"),
+
+            "gotoModules"           => _("Kernel modules"),
+            "gotoShare"             => _("Shares"),
+
+            "FAIclass"              => _("FAI classes"),
+            "FAIdebianMirror"       => _("Debian mirror"),
+            "FAIrelease"            => _("Debian release"),
+
+            "FAIstatus"             => _("FAI status flag")) // #FIXME is this acl realy necessary ?
+          ));
+  }
+}
+
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+?>

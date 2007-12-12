@@ -1,0 +1,256 @@
+<?php
+
+class pureftpdAccount extends plugin
+{
+  /* Definitions */
+  var $plHeadline= "FTP";
+  var $plDescription= "This does something";
+
+  /* FTP attributes */
+  var $FTPQuotaFiles = 0;
+  var $FTPQuotaMBytes = 0;
+  var $FTPUploadRatio = 0;
+  var $FTPDownloadRatio = 0;
+  var $FTPUploadBandwidth = 0;
+  var $FTPDownloadBandwidth = 0;
+  var $FTPStatus = "enabled";
+  var $FTPuid = "";
+  var $FTPgid = "";
+
+  var $uid = "";
+
+  /* attribute list for save action */
+  var $attributes= array("FTPQuotaFiles","FTPQuotaMBytes","FTPUploadRatio","FTPDownloadRatio",
+      "FTPUploadBandwidth","FTPDownloadBandwidth","FTPStatus","FTPuid","FTPgid");
+  var $objectclasses= array("PureFTPdUser");
+  var $ReadOnly;
+  var $view_logged = FALSE;
+
+  function pureftpdAccount (&$config, $dn= NULL, $parent= NULL)
+  {
+    plugin::plugin ($config, $dn, $parent);
+    
+    /* Setting uid to default */
+    if(isset($this->attrs['uid'][0])){
+      $this->uid = $this->attrs['uid'][0];
+    }
+  }
+
+  function execute()
+  {
+    /* Log view */
+    if($this->is_account && !$this->view_logged){
+      $this->view_logged = TRUE;
+      new log("view","users/".get_class($this),$this->dn);
+    }
+
+    /* Show tab dialog headers */
+    $display= "";
+
+    /* Show main page */
+    $smarty= get_smarty();
+
+    /* Load attributes */
+    foreach($this->attributes as $val){
+      $smarty->assign("$val", $this->$val);
+    }
+
+
+    $tmp = $this->plInfo();
+    $changeState = "";
+    foreach($tmp['plProvidedAcls'] as $key => $desc){
+      $smarty->assign($key."ACL", $this->getacl($key,$this->ReadOnly));
+      $smarty->assign($key."_W", $this->acl_is_writeable($key,$this->ReadOnly));
+  
+      if($this->acl_is_writeable($key)){
+        $changeState.= " changeState('".$key."'); \n";
+      }
+    }
+    $smarty->assign("changeState",$changeState);
+
+
+    $smarty->assign("fstate", "");
+    if ($this->is_account){
+      $smarty->assign("pureftpdState", "checked");
+      $smarty->assign("fstate", "");
+    } else {
+      $smarty->assign("pureftpdState", "");
+      if($_SESSION['js']==1){
+        if($this->acl!="#none#")
+        $smarty->assign("fstate", "disabled");
+      }else{
+        $smarty->assign("fstate", "");
+      }
+    }
+    $smarty->assign("use_FTPStatus", ($this->FTPStatus == "disabled") ? "checked" : "");
+    
+    if((!$this->ReadOnly)&&(($this->is_account && $this->acl_is_removeable()) || (!$this->is_account && $this->acl_is_createable())) ){
+      $smarty->assign('pureftpdACL', "");
+    }else{
+      $smarty->assign('pureftpdACL', " disabled ");
+    }
+
+    $display.= $smarty->fetch (get_template_path('pureftpd.tpl', TRUE, dirname(__FILE__)));
+    return ($display);
+  }
+
+  function remove_from_parent()
+  {
+    /* Cancel if there's nothing to do here */
+    if ((!$this->initially_was_account) || (!$this->acl_is_removeable())){
+      return;
+    }
+
+    plugin::remove_from_parent();
+    $ldap= $this->config->get_ldap_link();
+
+    $ldap->cd($this->dn);
+    @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
+        $this->attributes, "Save");
+    $this->cleanup();
+    $ldap->modify ($this->attrs); 
+
+    /* Log last action */
+    new log("remove","users/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
+  
+    show_ldap_error($ldap->get_error(), sprintf(_("Removing of user/pureftpd account with dn '%s' failed."),$this->dn));
+
+    /* Optionally execute a command after we're done */
+    $this->handle_post_events('remove',array("uid" => $this->uid));
+  }
+
+
+  /* Save data to object */
+  function save_object()
+  {
+    /* Do we need to flip is_account state? */
+    if (isset($_POST['connectivityTab'])){
+      if (isset($_POST['pureftpd'])){
+        if (!$this->is_account && $_POST['pureftpd'] == "B"){
+          $this->is_account= TRUE;
+        }
+      } else {
+        $this->is_account= FALSE;
+      }
+
+      plugin::save_object();
+
+      $old= $this->FTPStatus;
+      if (isset($_POST["FTPStatus"])){
+        $this->FTPStatus = "disabled";
+      } else {
+        $this->FTPStatus = "enabled";
+      }
+      $this->is_modified= ($old != $this->FTPStatus)?TRUE:$this->is_modified;
+
+      /* Ensure that these vars are numeric. Values starting with 0 like '0123' cause ldap errors */
+      foreach(array("FTPQuotaFiles","FTPQuotaMBytes","FTPUploadRatio","FTPDownloadRatio","FTPUploadBandwidth","FTPDownloadBandwidth") as $testVar){
+        $this->$testVar = (int) ($this->$testVar);
+      }
+    
+
+    }
+  }
+
+
+  /* Check values */
+  function check()
+  {
+    /* Call common method to give check the hook */
+    $message= plugin::check();
+
+    /* Check for positive integer values */
+    if ($this->is_account){
+
+      if($this->acl_is_writeable("FTPUploadBandwidth") && !is_id($this->FTPUploadBandwidth)){
+        $message[]= _("Value specified as 'Upload bandwidth' is not valid.");
+      }
+      if($this->acl_is_writeable("FTPDownloadBandwidth") && !is_id($this->FTPDownloadBandwidth)){
+        $message[]= _("Value specified as 'Download bandwidth' is not valid.");
+      }
+
+      if($this->acl_is_writeable("FTPQuotaFiles") && !is_id($this->FTPQuotaFiles)){
+        $message[]= _("Value specified as 'Quota files' is not valid.");
+      }
+      if($this->acl_is_writeable("FTPQuotaMBytes") && !is_id($this->FTPQuotaMBytes)){
+        $message[]= _("Value specified as 'Quota size' is not valid.");
+      }
+      if($this->acl_is_writeable("FTPUploadRatio") && !is_id($this->FTPUploadRatio)){
+        $message[]= _("Value specified as 'Upload ratio' is not valid.");
+      }
+      if($this->acl_is_writeable("FTPDownloadRatio") && !is_id($this->FTPDownloadRatio)){
+        $message[]= _("Value specified as 'Download ratio' is not valid.");
+      }
+    }
+
+    return $message;
+  }
+
+
+  /* Save to LDAP */
+  function save()
+  {
+    plugin::save();
+
+    $tmp = $this->plInfo();
+    foreach($tmp['plProvidedAcls'] as $key => $desc){
+      if(!$this->acl_is_writeable($key)){
+        unset($this->attrs[$key]);
+      }
+    }
+
+    /* Write back to ldap */
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd($this->dn);
+    $this->cleanup();
+    $ldap->modify ($this->attrs); 
+    
+    /* Log last action */
+    if($this->initially_was_account){
+      new log("modify","users/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
+    }else{
+      new log("create","users/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
+    }
+
+    show_ldap_error($ldap->get_error(), sprintf(_("Saving of user/pureftpd account with dn '%s' failed."),$this->dn));
+
+    /* Optionally execute a command after we're done */
+    if ($this->initially_was_account == $this->is_account){
+      if ($this->is_modified){
+        $this->handle_post_events("modify",array("uid" => $this->uid));
+      }
+    } else {
+      $this->handle_post_events("add",array("uid" => $this->uid));
+    }
+
+  }
+
+
+  /* Return plugin informations for acl handling
+  #FIME There possibly some attributes that can be combined to one acl. */
+  static function plInfo()
+  {
+    return (array(
+          "plShortName"     => _("Ftp"),
+          "plDescription"   => _("Pure ftp account")."&nbsp;:&nbsp;<u>"._("Connectivity addon")."</u>",
+          "plSelfModify"    => TRUE,
+          "plDepends"       => array("user"),
+          "plPriority"      => 22,                                 // Position in tabs
+          "plSection"     => array("personal" => _("My account")),
+          "plCategory"    => array("users"),
+          "plOptions"       => array(),
+
+          "plProvidedAcls"  => array(
+            "FTPQuotaFiles"         => _("Quota files"),
+            "FTPUploadRatio"        => _("Upload ratio"),
+            "FTPQuotaMBytes"        => _("Quota MBytes"),
+            "FTPDownloadRatio"      => _("Download ratio"),
+            "FTPUploadBandwidth"    => _("Upload bandwith"),
+            "FTPDownloadBandwidth"  => _("Download bandwith"),
+            "FTPStatus"             => _("Status"))
+          ));
+  }
+}
+
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+?>

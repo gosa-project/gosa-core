@@ -1,0 +1,535 @@
+<?php
+/*
+   This code is part of GOsa (https://gosa.gonicus.de)
+   Copyright (C) 2003  Cajus Pollmeier
+
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+class departmentManagement extends plugin
+{
+  /* Definitions */
+  var $plHeadline= "Departments";
+  var $plDescription= "This does something";
+
+  /* CLI vars */
+  var $cli_summary= "Handling of LDAP subtrees";
+  var $cli_description= "Some longer text\nfor help";
+  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
+
+  /* Headpage attributes */
+  var $last_dep_sorting= "invalid";
+  var $departments= array();
+  var $deptabs= NULL;
+
+  /* attribute list for save action */
+  var $attributes= array();
+  var $objectclasses= array();
+
+  /* Vars to handle operations after saving the department 
+     Recursive move && tagging   */
+  var $ObjectInSaveMode         = false;    // Is true, if current object wasn't saved right now
+  var $ObjectTaggingRequested   = false;    // Object must be tagged, an iframe will be shown. 
+  var $RecursiveRemoveRequested = false;    // Is true, if this object must be moved, an iframe will be displayed in this case
+
+  function departmentManagement (&$config, &$ui)
+  {
+    $this->ui= &$ui;
+    $this->dn= "";
+    $this->config= &$config;
+    $this->DivListDepartment = new divListDepartment($this->config,$this);
+  }
+
+  function execute()
+  {
+    global $config;
+  
+    /* Call parent execute */
+    plugin::execute();
+
+    /***************
+      Var init 
+     ***************/
+
+    $_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^dep_edit_.*/","/^dep_del_.*/","/^item_selected/","/^remove_multiple_departments/");
+
+    /* Reload departments */
+    $smarty						= get_smarty();
+    $display 					= "";
+    $s_action 					= "";  // Will contain an action, like del or edit
+    $s_entry  					= "";  // The entry name for edit delete -...
+
+
+    /***************
+      Check posts  
+     ***************/
+
+    // Check Post action
+    foreach($_POST as $key => $val){
+      // Post for delete
+      if(preg_match("/dep_del.*/",$key)){
+        $s_action = "del";
+        $s_entry  = preg_replace("/dep_".$s_action."_/i","",$key);
+        $s_entry  = preg_replace("/_.*$/","",$s_entry);
+        $s_entry  = base64_decode($s_entry);
+        // Post for edit
+      }elseif(preg_match("/dep_edit_.*/",$key)){
+        $s_action="edit";
+        $s_entry  = preg_replace("/dep_".$s_action."_/i","",$key);
+        $s_entry  = preg_replace("/_.*$/","",$s_entry);
+        $s_entry  = base64_decode($s_entry);
+        // Post for new
+      }elseif(preg_match("/^remove_multiple_departments/",$key)){
+        $s_action="del_multiple";
+      }elseif(preg_match("/dep_new.*/",$key)){
+        $s_action="new";
+      }
+    }
+
+    /* Create options */
+    if(isset($_POST['menu_action']) && $_POST['menu_action'] == "dep_new"){
+      $s_action = "new";
+    }
+
+    /* handle remove from layers menu */
+    if(isset($_POST['menu_action']) && preg_match("/^remove_multiple/",$_POST['menu_action'])){
+      $s_action = "del_multiple";
+    }
+
+
+    /***************
+      Create a new department
+     ***************/
+
+    /* New Entry if Posted action (s_action) == new
+     */
+    if ($s_action=="new"){
+      $this->dn= "new";
+      $this->deptabs= new deptabs($this->config,$this->config->data['TABS']['DEPTABS'], $this->dn,"department");
+      $this->deptabs->set_acl_base($this->DivListDepartment->selectedBase);
+    }
+
+
+    /***************
+      Edit entry
+     ***************/
+
+    /* Edit Entry if Posted action (s_action) == edit 
+     * The entry which will be edited is defined in $s_entry
+     */
+    if (( $s_action=="edit") && (!isset($this->deptabs->config))){
+      $this->dn= $this->config->departments[trim($s_entry)];
+
+      if (($user= get_lock($this->dn)) != ""){
+        return(gen_locked_message ($user, $this->dn));
+      }
+
+      /* Lock the current entry, so everyone will get the  above dialog */
+      add_lock ($this->dn, $this->ui->dn);
+
+      /* Register deptabs to trigger edit dialog */
+      $this->deptabs= new deptabs($this->config,$this->config->data['TABS']['DEPTABS'], $this->dn,"department");
+      $this->deptabs->set_acl_base($this->dn);
+
+      $_SESSION['objectinfo']= $this->dn;
+    }
+
+
+    /********************
+      Delete MULTIPLE entries requested, display confirm dialog
+     ********************/
+
+    if ($s_action=="del_multiple"){
+      $ids = $this->list_get_selected_items();
+
+
+      if(count($ids)){
+        foreach($ids as $id){
+          $id = base64_decode($id);
+          $dn = $this->config->departments[$id];
+  
+          if (($user= get_lock($dn)) != ""){
+            return(gen_locked_message ($user, $dn));
+          }
+          $this->dns[$id] = $dn;
+        }
+
+        $dns_names = "<br><pre>";
+        foreach($this->dns as $dn){
+          add_lock ($dn, $this->ui->dn);
+          $dns_names .= $dn."\n";
+        }
+        $dns_names .="</pre>";
+
+        /* Lock the current entry, so nobody will edit it during deletion */
+        if (count($this->dns) == 1){
+          $smarty->assign("info",     sprintf(_("You're about to delete the following entry %s"), @LDAP::fix($dns_names)));
+        } else {
+          $smarty->assign("info",     sprintf(_("You're about to delete the following entries %s"), @LDAP::fix($dns_names)));
+        }
+        $smarty->assign("multiple", true);
+        return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
+      }
+    }
+   
+
+    /********************
+      Delete MULTIPLE entries confirmed
+     ********************/
+
+    /* Confirmation for deletion has been passed. Users should be deleted. */
+    if (isset($_POST['delete_multiple_department_confirm'])){
+
+      /* Remove user by user and check acls before removeing them */
+      foreach($this->dns as $key => $dn){
+        $acl = $this->ui->get_permissions($dn,"department/department");
+        if (preg_match('/d/', $acl)){
+
+          /* Delete request is permitted, perform LDAP action */
+          $this->deptabs= new deptabs($this->config,$this->config->data['TABS']['DEPTABS'], $dn,"department");
+          $this->deptabs->set_acl_base();
+          $this->deptabs->delete ();
+          $this->deptabs = NULL;
+        } else {
+          print_red (_("You have no permission to remove this department."));
+        }
+        /* Remove lock file after successfull deletion */
+        del_lock ($dn);
+        unset($this->dns[$key]);
+      }
+    }
+
+ 
+    /********************
+      Delete MULTIPLE entries Canceled
+     ********************/
+
+    /* Remove lock */
+    if(isset($_POST['delete_multiple_department_cancel'])){
+      foreach($this->dns as $key => $dn){
+        del_lock ($dn);
+        unset($this->dns[$key]);
+      }
+    }
+
+
+    /***************
+      Delete entry 
+     ***************/
+
+    /* Delete Entry if Posted action (s_action) == del 
+     * The entry which will be deleted is defined in $s_entry
+     */
+    if ($s_action =="del"){
+      $this->dn= $this->config->departments[trim($s_entry)];
+
+      /* check acls */
+      $acl = $this->ui->get_permissions($this->dn,"department/department");
+      if(preg_match("/d/",$acl)){
+
+        /* Check locking */
+        if (($user= get_lock($this->dn)) != ""){
+          $_SESSION['dn']= $this->dn;
+          return(gen_locked_message($user, $this->dn));
+        } else {
+          add_lock ($this->dn, $this->ui->dn);
+          $smarty->assign("info", sprintf(_("You're about to delete the whole LDAP subtree placed under '%s'."), @LDAP::fix($this->dn)));
+          $smarty->assign("multiple", false);
+          $display.= $smarty->fetch (get_template_path('remove.tpl', TRUE));
+          return ($display);
+        }
+      }else{
+        print_red (_("You have no permission to remove this department."));
+      }
+    }
+
+
+    /***************
+      Delete department confirmed  
+     ***************/
+
+    /* If department deletion is accepted ...
+     * Finally delete department 
+     */
+    if (isset($_POST['delete_department_confirm'])){
+
+      /* check acls */
+      $acl = $this->ui->get_permissions($this->dn,"department/department");
+      if(preg_match("/d/",$acl)){
+        $this->remove_from_parent();
+      } else {
+        print_red (_("You have no permission to remove this department."));
+      }
+    }
+
+
+    /***************
+      Edit department finished 
+     ***************/
+
+    if ((isset($_POST['edit_finish'])) && (isset($this->deptabs->config)) && !isset($_POST['dep_move_confirm'])){
+      $this->deptabs->save_object();
+      $obj = $this->deptabs->by_object['department'];
+      if($obj->orig_dn != "new"){
+        if($obj->orig_ou != $obj->ou || $obj->base != $obj->orig_base){
+          return($smarty->fetch(get_template_path("dep_move_confirm.tpl",TRUE)));
+        }
+      }
+    }
+
+    /* Save changes */
+    if ((isset($_POST['edit_finish'])|| isset($_POST['dep_move_confirm'])) && (isset($this->deptabs->config))){
+
+      /* Check tabs, will feed message array */
+      $message= $this->deptabs->check();
+
+      /* Save, or display error message? */
+      if (count($message) == 0){
+
+        $this->deptabs->save(true);
+        global $config;
+        $config->get_departments();
+        $config->make_idepartments();
+        $this->config = $config;
+
+        /* This object must be tagged, so set ObjectTaggingRequested to true */
+        if($this->deptabs->by_object['department']->must_be_tagged()){
+          $this->ObjectTaggingRequested   = true; 
+        }		
+
+        /* Get recursive move is required, set RecursiveRemoveRequested to true */
+        if($this->deptabs->by_object['department']->am_i_moved()){	
+          $this->RecursiveRemoveRequested = true;
+        }		
+      
+        /* This var indicated that there is an object which isn't saved right now. */
+        $this->ObjectInSaveMode = true;
+
+      } else {
+        /* Ok. There seem to be errors regarding to the tab data,
+           show message and continue as usual. */
+        show_errors($message);
+      }
+    }
+
+
+    /***************
+      Handle Tagging (Return output for an iframe)
+     ***************/
+
+    /* This department must be tagged (Is called from iframe, generates output)*/
+    if(isset($_GET['TagDepartment'])){
+      $this->deptabs->by_object['department']->tag_objects();
+      exit();  
+    }
+
+
+    /***************
+      Handle recursive move (Return output for an iframe)
+     ***************/
+
+    /* initiate recursive remove  (Is called from iframe, generates output)*/
+    if(isset($_GET['PerformRecMove'])){
+      $this->deptabs->by_object['department']->recursive_move("","",true);
+      $this->DivListDepartment->selectedBase = $this->deptabs->by_object['department']->dn;  
+      exit();
+    }
+
+
+    /***************
+      Return iframes, which call tagging / recusrsive move 
+     ***************/
+
+    /* While one of these vars below isset, we must return an iframe, 
+       to perform requested operation */
+    if($this->ObjectTaggingRequested){
+      $this->ObjectTaggingRequested = false;
+      return($this->deptabs->by_object['department']->ShowTagFrame());
+    }
+    if($this->RecursiveRemoveRequested){
+      $this->RecursiveRemoveRequested = false;
+      return($this->deptabs->by_object['department']->ShowMoveFrame());
+    }
+
+
+    /***************
+      In case of tagging/moving the object wasn't deleted, do it know
+     ***************/
+
+    /* If there is an unsaved object and all operations are done
+       remove locks & save object tab & unset current object */
+    if($this->ObjectInSaveMode && (!$this->RecursiveRemoveRequested) && (!$this->ObjectTaggingRequested)){
+      $this->deptabs->save();
+      $this->config->get_departments();
+      $this->ObjectInSaveMode = false;
+      if ($this->dn != "new"){
+        del_lock ($this->dn);
+      }
+      unset ($this->deptabs);
+      $this->deptabs= NULL;
+      unset ($_SESSION['objectinfo']);
+    }
+
+
+    /***************
+      Dialog canceled  
+     ***************/
+
+    /* User canceled edit oder delete
+     * Cancel dialog 
+     */
+    if (isset($_POST['edit_cancel']) || isset($_POST['delete_cancel']) || isset($_POST['delete_department_confirm'])){
+      del_lock ($this->dn);
+      unset($this->depdabs);
+      $this->deptabs= NULL;
+      unset ($_SESSION['objectinfo']);
+    }
+
+    /* Headpage or normal plugin screen? */
+    if ($this->deptabs !== NULL){
+
+      /* Show main page (tabs) */
+      $display= $this->deptabs->execute();
+      if (!$this->deptabs->by_object[$this->deptabs->current]->dialog){
+        $display.= "<p style=\"text-align:right\">\n";
+        $display.= "<input type=submit name=\"edit_finish\" value=\""._("Save")."\">\n";
+        $display.= "&nbsp;\n";
+        $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
+        $display.= "</p>";
+      }
+      return ($display);
+    }else{
+      /* Display dialog with group list */
+      $this->DivListDepartment->parent = $this;
+      $this->DivListDepartment->execute();
+      $this->reload();
+      $this->DivListDepartment->DepartmentsAdded = true;
+      $this->DivListDepartment->setEntries($this->departments);
+      return($this->DivListDepartment->Draw());
+    }
+  }
+
+
+  function reload()
+  {
+    /* Vairaible init */
+    $base         = $this->DivListDepartment->selectedBase;
+    $base_back    = preg_replace("/^[^,]+,/","",$base);
+    $Regex        = $this->DivListDepartment->Regex;
+  
+    // Create Array to Test if we have a valid back button
+    $tmp = $_SESSION['config']->idepartments;
+
+    // In case of a valid back button create entry
+    if(isset($tmp[$base_back])){
+      $tmp2    ['dn']          = convert_department_dn($base_back);
+
+      // If empty always go to top
+      if(empty($tmp2['dn'])){
+        $tmp2['dn']="/";
+      }
+      $tmp2    ['description'][0] = ".. "._("Back");
+      $result[$tmp[$base_back]]=$tmp2;
+    }
+
+    if($this->DivListDepartment->SubSearch){
+      $res= get_list("(&(|(ou=$Regex)(description=$Regex))(objectClass=gosaDepartment))",
+          "department", $base, array("ou", "description"), GL_SIZELIMIT | GL_SUBSEARCH);
+    }else{
+      $res= get_list("(&(|(ou=$Regex)(description=$Regex))(objectClass=gosaDepartment))",
+          "department", $base, array("ou", "description"), GL_SIZELIMIT );
+    }
+
+    $this->departments= array();
+
+    /* Add current base to the list of available departments, but only if its naming attribute is 'ou' */
+    if(preg_match("/^ou=/",$base)){
+      $this->departments [ convert_department_dn($base) ] = ".";
+    }
+
+    foreach ($res as $key => $value){
+
+      /* Don't display base as entry on subsearch */
+      if(($value['dn'] == $base) && ($this->DivListDepartment->SubSearch)){
+        continue;
+      }
+
+      $cdn= convert_department_dn($value['dn']);
+
+      /* Append to dep list */
+      if(isset($value["description"][0])){
+        $this->departments[$cdn]= get_sub_department($cdn)." - [".$value["description"][0]."]";
+      }else{
+        $this->departments[$cdn]= get_sub_department($cdn);//$value["description"][0];
+      }
+    }
+    natcasesort ($this->departments);
+    reset ($this->departments);
+  }
+
+  function remove_from_parent()
+  {
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd ($this->dn);
+    $ldap->recursive_remove();
+
+    /* Optionally execute a command after we're done */
+    $this->postremove();
+
+    /* Delete references to object groups */
+    $ldap->cd ($this->config->current['BASE']);
+    $ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".$this->dn."))", array("cn"));
+    while ($ldap->fetch()){
+      $og= new ogroup($this->config, $ldap->getDN());
+      unset($og->member[$this->dn]);
+      $og->save ();
+    }
+
+  }
+
+
+  function list_get_selected_items()
+  {
+    $ids = array();
+    foreach($_POST as $name => $value){
+      if(preg_match("/^item_selected_[a-z0-9\\/\=]*$/i",$name)){
+        $id   = preg_replace("/^item_selected_/","",$name);
+        $ids[$id] = $id;
+      }
+    }
+    return($ids);
+  }
+
+
+  function remove_lock()
+  {
+    if (isset($this->dn)){
+      del_lock ($this->dn);
+    }
+  }
+
+  function save_object()
+  {
+    /* reload department */
+    $this->config->get_departments();
+
+    $this->config->make_idepartments();
+    $this->DivListDepartment->config= $this->config;
+    $this->DivListDepartment->save_object();
+  }
+
+}
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+?>

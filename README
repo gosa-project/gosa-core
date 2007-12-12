@@ -1,0 +1,52 @@
+GOsa2.1 README
+==============
+
+* Information
+
+GOsa is a LDAP administration frontend for user administration. It
+is NO GENERIC frontend to dictionary servers. Informations are stored
+in the way the underlying conecpts suppose them to be stored (i.e.
+people accounts are stored in "ou=people" subtrees, etc.) This can
+be configured marginally.
+
+Complete setups applying Kerberos, AFS, LDAP, Mail, Proxy and Fax setups
+are not trivial at all. You should be familiar with these components and
+with your UNIX installation, of cause. This file is (and will not be)
+an introduction to any of these components. See INSTALL for a quick
+overview about what to do, to get the things up and running. A complete
+GOsa infrastructure howto is work in progress and not released yet.
+
+
+* Translations
+
+GOsa is not available in your native language? Just take the message.po
+file out of the locales directory and put your translations into the
+msgstr fields. You may look at the de/LC_MESSAGES for the way how it
+works.
+
+If you're ready with that, create a directory for your language using
+the ISO shortcuts (i.e. es for spain) with a subdirectory LC_MESSAGES.
+Put your messages.po in there and run "msgfmt messages.po" from that
+directory. Make sure your apache has locale support or, in case of debian,
+that the specific locale will be generated (via dpkg-reconfigure locales).
+
+You may want your translations to be included in the main GOsa repository,
+then just send the .po file to me.
+
+
+* NOTES
+
+You'll need php-cups (http://www.cups.org) and php-krb5 (pear) in order
+to get full functionality. To make shared folders work in a proper way,
+you either need a recent PHP or a patched one for the get_acl functions
+(see contrib/patches). Basically GOsa will run without these.
+
+Be sure that 'gosaUserTemplates' are not able to log into your server,
+since they may have no password set. Example configs can be found in
+the contrib directory.
+
+Have fun!
+
+---
+Cajus Pollmeier <pollmeier@gonicus.de>
+

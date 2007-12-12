@@ -1,0 +1,351 @@
+<?php
+
+class divListGroup extends MultiSelectWindow
+{
+
+  /* Current base */
+  var $selectedBase       = "";
+  var $departments        = array();
+
+  /* Regex */
+  var $Regex              = "*";
+  var $UserRegex          = "*";
+
+  /* CheckBoxes, to change default values modify $this->AddCheckBox */
+  var $ShowPrimaryGroups;
+  var $ShowSambaGroups;  
+  var $ShowApplicationGroups; 
+  var $ShowMailGroups;
+  var $ShowFunctionalGroups;
+
+  /* Subsearch checkbox */
+  var $SubSearch              = false;
+
+  var $parent             ;
+  var $ui                 ;
+
+  function divListGroup (&$config, &$parent)
+  {
+    MultiSelectWindow::MultiSelectWindow($config, "Groups", "groups");
+    
+    $this->parent       = &$parent;
+    $this->ui           = get_userinfo();
+
+    /* Set list strings */
+    $this->SetTitle(_("List of groups"));
+    $this->SetSummary(_("List of groups"));
+    $this->EnableAplhabet   (true);
+
+    /* Result page will look like a headpage */
+    $this->SetHeadpageMode();
+    $this->SetInformation(_("This menu allows you to add, edit and remove selected groups. You may want to use the range selector on top of the group listbox, when working with a large number of groups."));
+  
+    /* Disable buttonsm */
+    $this->EnableCloseButton(false);
+    $this->EnableSaveButton (false);
+
+    /* Dynamic action col, depending on snapshot icons */
+    $action_col_size = 80;
+    if($this->parent->snapshotEnabled()){
+      $action_col_size += 38;
+    }
+
+    /* Toggle all selected / deselected */
+    $chk = "<input type='checkbox' id='select_all' name='select_all'
+               onClick='toggle_all_(\"^item_selected_[0-9]*$\",\"select_all\");' >";
+
+    /* set Page header */
+    $this->AddHeader(array("string"=> $chk,          "attach"=>"style='width:20px;'"));
+    $this->AddHeader(array("string"=>"&nbsp;","attach"=>"style='width:20px;'"));
+    $this->AddHeader(array("string"=>_("Groupname / Department")));
+    $this->AddHeader(array("string"=>_("Properties"),"attach"=>"style='width:136px;'"));
+    $this->AddHeader(array("string"=>_("Actions"),"attach"=>"style='width:".$action_col_size."px;border-right:0px;'"));
+
+    /*                  Text        ,Value    ,Name         ,Is selected */
+    $this->AddCheckBox("ShowPrimaryGroups",     _("Select to see groups that are primary groups of users"),          _("Show primary groups"),      true);
+    $this->AddCheckBox("ShowSambaGroups",       _("Select to see groups that have samba groups mappings"),          _("Show samba groups"),      true);
+    $this->AddCheckBox("ShowApplicationGroups", _("Select to see groups that have applications configured"),        _("Show application groups"),true);
+    $this->AddCheckBox("ShowMailGroups",        _("Select to see groups that have mail settings"),                  _("Show mail groups"),       true);
+    $this->AddCheckBox("ShowFunctionalGroups",  _("Select to see normal groups that have only functional aspects"), _("Show functional groups"), true);
+    $this->AddCheckBox(SEPERATOR);
+
+    /* Add SubSearch checkbox */    
+    $this->AddCheckBox("SubSearch",  _("Select to search within subtrees"), _("Search in subtrees"), false);
+
+    /*                  Name                 ,Text                              ,Default  , Connect with alphabet  */
+    $this->AddRegex   ("Regex",     _("Regular expression for matching group names"), "*" , true);
+    $this->AddRegex   ("UserRegex", _("User name of which groups are shown"),         "*" , false, "images/search_user.png");
+  }
+
+
+  function GenHeader()
+  {
+    /* Prepare departments,
+       which are shown in the listbox on top of the listbox
+     */
+    $options= "";
+
+
+    
+    /* Get all departments within this subtree */
+    $ui= get_userinfo();
+    $first = "";
+    $found = FALSE;
+    $base = $this->config->current['BASE'];
+
+
+    
+    /* Add base */
+    $tmp = array();
+    $tmp[] = array("dn"=>$this->config->current['BASE']);
+    $tmp=  array_merge($tmp,get_list("(&(|(ou=*)(description=*))(objectClass=gosaDepartment))", $this->module, $base,
+                    array("ou", "description"), GL_SIZELIMIT | GL_SUBSEARCH));
+
+    $deps = array();
+    foreach($tmp as $tm){
+      $deps[$tm['dn']] = $tm['dn'];
+    }
+
+        /* Load possible departments */
+    $ui= get_userinfo();
+    $tdeps= $ui->get_module_departments("groups");
+    $ids = $this->config->idepartments;
+    $first = "";
+    $found = FALSE;
+    foreach($ids as $dep => $name){
+      if(isset($deps[$dep]) && in_array_ics($dep, $tdeps)){
+
+        /* Keep first base dn in mind, we could need this
+         *  info if no valid base was found
+         */
+        if(empty($first)) {
+          $first = $dep['dn'];
+        }
+
+        $value = $ids[$dep];
+        if ($this->selectedBase == $dep){
+          $found = TRUE;
+          $options.= "<option selected='selected' value='".$dep."'>$value</option>";
+        } else {
+          $options.= "<option value='".$dep."'>$value</option>";
+        }
+      }
+    }
+
+    /* The currently used base is not visible with your acl setup.
+     * Set base to first useable base.
+     */
+    if(!$found){
+      $this->selectedBase = $first;
+    }
+  
+    /* Get acls */
+    $acls   = $ui->get_permissions($this->selectedBase,"groups/group");
+    $acl_all= $ui->has_complete_category_acls($this->selectedBase,"groups");
+
+
+    /* Add default header */
+    $listhead = MultiSelectWindow::get_default_header();
+    
+    /* Add department selection */
+    $listhead .= _("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
+      " <input type='image' class='center' src='images/list_submit.png' title='"._("Submit department")."' name='submit_department' alt='"._("Submit").
+      "'>&nbsp;";
+
+
+        /* Create Layers menu */
+    $s  = ".|"._("Actions")."|\n";
+    $s .= "..|<img src='images/list_new.png' alt='' border='0' class='center'>".
+      "&nbsp;"._("Create")."|\n";
+
+
+    /* Append create options */
+    if(preg_match("/c/",$acl_all)) {
+      $s.= "...|<input class='center' type='image' src='images/list_new_group.png' alt=''>".
+        "&nbsp;"._("Group")."|group_new|\n";
+    }
+
+    /* Multiple options */
+    $s.= "..|---|\n";
+    $s.= "..|<img src='images/edittrash.png' alt='' border='0' class='center'>".
+      "&nbsp;"._("Remove")."|"."remove_multiple|\n";
+
+    /* Add multiple copy & cut icons */
+    if(is_object($this->parent->CopyPasteHandler) && preg_match("/(c.*w|w.*c)/",$acl_all)){
+      $s.= "..|---|\n";
+      $s.= "..|<img src='images/editcopy.png' alt='' border='0' class='center'>".
+        "&nbsp;"._("Copy")."|"."multiple_copy_systems|\n";
+      $s.= "..|<img src='images/editcut.png' alt='' border='0' class='center'>".
+        "&nbsp;"._("Cut")."|"."multiple_cut_systems|\n";
+
+      if($this->parent->CopyPasteHandler->entries_queued()){
+        $img = "<img border='0' class='center' src='images/editpaste.png' alt=''>";
+        $s.="..|".$img."&nbsp;"._("Paste")."|editPaste|\n";
+      }else{
+        $img = "<img border='0' class='center' src='images/cant_editpaste.png' alt=''>";
+        $s.="..|".$img."&nbsp;"._("Paste")."\n";
+      }
+    }
+
+    /* Add snapshot icons */
+    if(preg_match("/(c.*w|w.*c)/",$acl_all)){
+      $s .= "..|---|\n";
+      $s .= $this->get_snapshot_header(TRUE);
+    }
+
+    $this->SetDropDownHeaderMenu($s);
+
+    $this->SetListHeader($listhead);
+  }
+
+  function execute()
+  {
+    $this->ClearElementsList();
+    $this->GenHeader();
+  }
+
+  function setEntries($groups)
+  {
+    // Defining Links
+    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
+
+    // image Buttons
+    $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
+    $userimg  = "<img class='center' src='images/select_groups.png' alt='User'    title='%s'>";
+
+    /* Dynamic action col, depending on snapshot icons */
+    $action_col_size = 80;
+    if($this->parent->snapshotEnabled()){
+      $action_col_size += 38;
+    }
+
+    /* Assign extension images */
+    $posiximg = "<input type='image' class='center' src='images/select_groups.png'
+                 name='group_group_edit_%KEY%' alt='P'  title='"._("Posix")  ."'>";
+    $mailimg  = "<input type='image' class='center' src='images/mailto.png'
+                 name='mailgroup_group_edit_%KEY%' alt='M'  title='"._("Mail")   ."'>";
+    $sambaimg = "<input type='image'  class='center' src='images/select_winstation.png'
+                 name='group_group_edit_%KEY%' alt='S'  title='"._("Samba")  ."'>";
+    $applimg  = "<input type='image'  class='center' src='images/select_application.png'
+                 name='appgroup_group_edit_%KEY%' alt='A'  title='"._("Application")."'>";
+    $phoneimg = "<input type='image'  class='center' src='images/select_phone.png'
+                 name='group_group_edit_%KEY%' alt='Ph' title='"._("Phone")  ."'>";
+    $envimg   = "<input type='image'  class='center' src='images/smallenv.png'
+                 name='environment_group_edit_%KEY%' alt='E' title='"._("Environment")  ."'>";
+
+    // Space
+    $empty    = "<img class='center' src='images/empty.png' style='width:16px;height:16px;' alt=''>";
+
+    // User and Template  Images
+    $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
+
+    $ui = get_userinfo();
+
+    // Test Every Entry and generate divlist Array
+    foreach($groups as $key => $val){
+    
+      /* Create action icons - copy & paste icons */
+      $acl = $ui->get_permissions($val['dn'],"groups/group");
+      $acl_all= $ui->has_complete_category_acls($val['dn'],"groups");
+
+      $actions= "";
+      if(($this->parent->CopyPasteHandler) && preg_match("/(c.*w|w.*c)/",$acl_all)){
+        $actions.= "<input class='center' type='image'
+          src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+        $actions.= "<input class='center' type='image'
+          src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
+      }
+
+      /* Add edit icon */
+      $actions.= "<input class='center' type='image'
+        src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
+
+      /* Add snapshot functionality */
+      if(preg_match("/(c.*w|w.*c)/", $acl_all)){
+        $actions.= $this->GetSnapShotActions($val['dn']);
+      }
+
+      if(preg_match("/d/",$acl)){
+        $actions.= "<input class='center' type='image'
+          src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
+      }
+
+
+      $posix=$mail=$samba=$appl=$phone=$enviro=$empty;
+
+      if(isset($val['objectClass'])){
+        if(in_array("posixGroup",           $val['objectClass']))   $posix = $posiximg;
+        if(in_array("gosaMailAccount",      $val['objectClass']))   $mail  = $mailimg;
+        if(in_array("sambaGroupMapping",    $val['objectClass']))   $samba = $sambaimg;
+        if(in_array("gosaApplicationGroup", $val['objectClass']))   $appl  = $applimg;
+        if(in_array("goFonPickupGroup",     $val['objectClass']))   $phone = $phoneimg;
+        if(in_array("gotoEnvironment",      $val['objectClass']))   $enviro= $envimg;
+      }
+
+      $title = "title='".preg_replace('/ /', '&nbsp;', @LDAP::fix($val['dn']))."'";
+
+      if(!isset($val['description'][0])){
+        $desc = "";
+      }else{
+        $desc = " - [ ".$val['description'][0]." ]";
+      }
+
+      /* FAIrelease tag from groupApplications */
+      if(isset($val['FAIrelease'][0])){
+        $desc .= " (".$val['FAIrelease'][0].")";
+      }
+
+      $field0 = array("string" => "<input type='checkbox' id='item_selected_".$key."' name='item_selected_".$key."'>" ,
+          "attach" => "style='width:20px;'");
+
+      /* Cutted objects should be displayed in light grey */
+      $display = $val['cn'][0].$desc;
+      if($this->parent->CopyPasteHandler){
+        foreach($this->parent->CopyPasteHandler->queue as $queue_key => $queue_data){
+          if($queue_data['dn'] == $val['dn']) {
+            $display = "<font color='#999999'>".$display."</font>";
+            break;
+          }
+        }
+      }
+
+      $field1 = array("string" => sprintf($userimg,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
+      $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' ".$title);
+      $field3 = array("string" => preg_replace("/%KEY%/", $key, $posix."&nbsp;".$enviro."&nbsp;".$mail."&nbsp;".$samba."&nbsp;".$appl."&nbsp;".$phone),     "attach" => "style='width:136px;'");
+      $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:".$action_col_size."px;border-right:0px;text-align:right;'");
+
+      $this->AddElement(array($field0,$field1,$field2,$field3,$field4));
+    }
+
+    /* Create summary string for list footer */
+    $num_deps=0;
+    if(!$this->SubSearch){
+      $num_deps = count($this->Added_Departments);
+    }
+    $num_grps = count($groups);
+
+    $num_grp_str = _("Number of listed groups");
+    $num_dep_str = _("Number of listed departments");
+
+    $str = "<img class='center' src='images/select_groups.png'
+              title='".$num_grp_str."' alt='".$num_grp_str."'>&nbsp;".$num_grps."&nbsp;&nbsp;&nbsp;&nbsp;";
+    $str.= "<img class='center' src='images/folder.png'
+              title='".$num_dep_str."' alt='".$num_dep_str."'>&nbsp;".$num_deps."&nbsp;&nbsp;&nbsp;&nbsp;";
+
+    $this->set_List_Bottom_Info($str);
+
+  }
+
+  function Save()
+  {
+    MultiSelectWindow :: Save();  
+  }
+
+  function save_object()
+  {
+    /* Save automatic created POSTs like regex, checkboxes */
+    MultiSelectWindow::save_object();   
+  }
+}
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+?>
