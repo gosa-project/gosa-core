@@ -1444,8 +1444,6 @@ class posixAccount extends plugin
     if(in_array("mustchangepassword",$this->multi_boxes)){
       $ret['mustchangepassword'] = $this->mustchangepassword;
     }
-    print_a($this->multi_boxes);
-    print_a($ret);
     return($ret);
   }
 
@@ -1453,6 +1451,9 @@ class posixAccount extends plugin
   function multiple_save_object()
   {
     if(isset($_POST['posix_mulitple_edit'])){
+  
+      $expire_tmp = $this->shadowExpire;
+  
       plugin::multiple_save_object();
       foreach(array("primaryGroup","trustmode","mustchangepassword","activate_shadowWarning","activate_shadowInactive","activate_shadowMin", "activate_shadowMax","activate_shadowExpire") as $val){
         if(isset($_POST["use_".$val])){
@@ -1464,14 +1465,20 @@ class posixAccount extends plugin
       foreach(array("shadowMin","shadowMax","shadowExpire","shadowInactive","shadowWarning") as $var) {
         if($this->acl_is_writeable($var)){
           $activate_var = "activate_".$var;
-          if(isset($_POST['activate_'.$var])){
-            $this->$activate_var  = true;
-            $this->$var      = $_POST[$var];
-          }else{
-            $this->$activate_var  = false;
-            $this->$var      = 0;
+          if(in_array($activate_var, $this->multi_boxes)){
+            if(isset($_POST['activate_'.$var])){
+              $this->$activate_var  = true;
+              $this->$var      = $_POST[$var];
+            }else{
+              $this->$activate_var  = false;
+              $this->$var      = 0;
+            }
           }
         }
+      }
+
+      if(!in_array("activate_shadowExpire",$this->multi_boxes)){
+        $this->shadowExpire = $expire_tmp;
       }
 
       /* Force change password ? */
@@ -1575,6 +1582,19 @@ class posixAccount extends plugin
         $this->accessTo[$tmp]= $tmp;
       }
     }
+
+    /* Adjust shadow checkboxes */
+    foreach (array("shadowMin", "shadowMax", "shadowWarning", "shadowInactive",
+          "shadowExpire") as $val){
+
+      if ($this->$val != 0){
+        $oval= "activate_".$val;
+        $this->$oval= "1";
+      }
+    }
+
+    /* Convert to seconds */
+    $this->shadowExpire= $this->convertToSeconds($this->shadowExpire);
   }
 
 
