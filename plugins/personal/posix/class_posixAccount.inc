@@ -1594,7 +1594,9 @@ class posixAccount extends plugin
     }
 
     /* Convert to seconds */
-    $this->shadowExpire= $this->convertToSeconds($this->shadowExpire);
+    if(isset($this->multi_attrs['shadowExpire'])){
+      $this->shadowExpire = $this->convertToSeconds($this->multi_attrs['shadowExpire'][0]);
+    }
   }
 
 
