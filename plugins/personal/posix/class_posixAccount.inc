@@ -541,12 +541,11 @@ class posixAccount extends plugin
       }
       $smarty->assign("force_ids", "");
     }
-
     
 
     $smarty->assign("force_idsACL", $this->getacl("uidNumber",$SkipWrite).$this->getacl("gidNumber",$SkipWrite));
 
-    foreach(array("primaryGroup") as $val){
+    foreach(array("primaryGroup","trustmode") as $val){
       if(in_array($val,$this->multi_boxes)){
         $smarty->assign("use_".$val,TRUE);
       }else{
@@ -1424,6 +1423,10 @@ class posixAccount extends plugin
     if(in_array("primaryGroup",$this->multi_boxes)){
       $ret['primaryGroup'] = $this->primaryGroup;
     }
+    if(in_array("trustmode",$this->multi_boxes)){
+      $ret['trustModel'] = $this->trustModel;
+      $ret['accessTo'] = $this->accessTo;
+    }
     return($ret);
   }
 
@@ -1432,11 +1435,29 @@ class posixAccount extends plugin
   {
     if(isset($_POST['posix_mulitple_edit'])){
       plugin::multiple_save_object();
-      foreach(array("primaryGroup") as $val){
+      foreach(array("primaryGroup","trustmode") as $val){
         if(isset($_POST["use_".$val])){
           $this->multi_boxes[] = $val;
         }
       }
+
+      /* Trust mode - special handling */
+      if($this->acl_is_writeable("trustModel")){
+        if (isset($_POST['trustmode'])){
+          $saved= $this->trustModel;
+          if ($_POST['trustmode'] == "1"){
+            $this->trustModel= "fullaccess";
+          } elseif ($_POST['trustmode'] == "2"){
+            $this->trustModel= "byhost";
+          } else {
+            $this->trustModel= "";
+          }
+          if ($this->trustModel != $saved){
+            $this->is_modified= TRUE;
+          }
+        }
+      }
+
 
       /* Save primary group settings */
       if($this->acl_is_writeable("primaryGroup") && isset($_POST['primaryGroup'])){
@@ -1495,8 +1516,25 @@ class posixAccount extends plugin
       }
     }
     $this->groupMembership_some = $groups_some;
-
     $this->primaryGroup = $this->gidNumber;
+
+    /* Is this account a trustAccount? */
+    if (isset($this->multi_attrs['trustModel'])){
+      $this->trustModel= $this->multi_attrs['trustModel'][0];
+      $this->was_trust_account= TRUE;
+      $this->multi_boxes[] = "trustmode";
+    } else {
+      $this->was_trust_account= FALSE;
+      $this->trustModel= "";
+    }
+
+    $this->accessTo = array();
+    if (isset($this->multi_attrs['accessTo'])){
+      for ($i= 0; $i<$this->multi_attrs['accessTo']['count']; $i++){
+        $tmp= $this->multi_attrs['accessTo'][$i];
+        $this->accessTo[$tmp]= $tmp;
+      }
+    }
   }
 
 

@@ -22,7 +22,7 @@
      </td>
     </tr>
     <tr>
-     <td><label for="">{t}Primary group{/t}</label></td>
+     <td><label for="primaryGroup">{t}Primary group{/t}</label></td>
      <td>
 {render acl=$gidNumberACL checkbox=$multiple_support checked=$use_primaryGroup}
       <select id="primaryGroup" size="1" name="primaryGroup">
@@ -123,27 +123,62 @@
   </td>
   <td style="vertical-align:top;">
    <h2><img alt="" class="center" align="middle" src="images/closedlock.png" /> {t}System trust{/t}</h2>
-    {t}Trust mode{/t}&nbsp;
-{render acl=$trustmodeACL}
-	<select name="trustmode" id="trustmode" size=1 onchange="changeSelectState('trustmode', 'wslist'); changeSelectState('trustmode', 'add_ws'); changeSelectState('trustmode', 'del_ws');">
-      {html_options options=$trustmodes selected=$trustmode}
-    </select>
-{/render}
-{render acl=$trustmodeACL}
-   <select style="width:100%" id="wslist" name="workstation_list[]" size=8 multiple {$trusthide}>
-    {html_options values=$workstations output=$workstations}
-	{if $emptyArrAccess}
-		<option disabled>&nbsp;</option>
-	{/if}
-   </select>
-{/render}
-   <br>
-{render acl=$trustmodeACL}
-   <input type="submit" id="add_ws" value="{t}Add{/t}" name="add_ws" {$trusthide}>&nbsp;
-{/render}
-{render acl=$trustmodeACL}
-   <input type="submit" id="del_ws" value="{t}Delete{/t}" name="delete_ws" {$trusthide}>
-{/render}
+{if !$multiple_support}
+	{t}Trust mode{/t}&nbsp;
+	{render acl=$trustmodeACL}
+		<select name="trustmode" id="trustmode" size=1 
+			onChange="changeSelectState('trustmode', 'wslist'); 
+					  changeSelectState('trustmode', 'add_ws'); 
+				      changeSelectState('trustmode', 'del_ws');">
+		  {html_options options=$trustmodes selected=$trustmode}
+		</select>
+	{/render}
+	{render acl=$trustmodeACL}
+	   <select style="width:100%" id="wslist" name="workstation_list[]" size=8 multiple {$trusthide}>
+		{html_options values=$workstations output=$workstations}
+		{if $emptyArrAccess}
+			<option disabled>&nbsp;</option>
+		{/if}
+	   </select>
+	{/render}
+	   <br>
+	{render acl=$trustmodeACL}
+	   <input type="submit" id="add_ws" value="{t}Add{/t}" name="add_ws" {$trusthide}>&nbsp;
+	{/render}
+	{render acl=$trustmodeACL}
+	   <input type="submit" id="del_ws" value="{t}Delete{/t}" name="delete_ws" {$trusthide}>
+	{/render}
+
+{else}
+    <input type="checkbox" name="use_trustmode" {if $use_trustmode} checked {/if}
+    	class="center" onClick="toggle('div_trustmode');">
+   	{t}Trust mode{/t}&nbsp;
+    <div {if !$use_trustmode} style="visibility:hidden;" {/if} id="div_trustmode">
+	{render acl=$trustmodeACL}
+		<select name="trustmode" id="trustmode" size=1 
+			onChange="changeSelectState('trustmode', 'wslist'); 
+					  changeSelectState('trustmode', 'add_ws'); 
+				      changeSelectState('trustmode', 'del_ws');">
+		  {html_options options=$trustmodes selected=$trustmode}
+		</select>
+	{/render}
+	{render acl=$trustmodeACL}
+	   <select style="width:100%" id="wslist" name="workstation_list[]" size=8 multiple {$trusthide}>
+		{html_options values=$workstations output=$workstations}
+		{if $emptyArrAccess}
+			<option disabled>&nbsp;</option>
+		{/if}
+	   </select>
+	{/render}
+	   <br>
+	{render acl=$trustmodeACL}
+	   <input type="submit" id="add_ws" value="{t}Add{/t}" name="add_ws" {$trusthide}>&nbsp;
+	{/render}
+	{render acl=$trustmodeACL}
+	   <input type="submit" id="del_ws" value="{t}Delete{/t}" name="delete_ws" {$trusthide}>
+	{/render}
+	</div>
+{/if}
   </td>
  </tr>
 </table>
