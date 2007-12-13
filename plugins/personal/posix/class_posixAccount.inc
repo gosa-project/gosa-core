@@ -44,11 +44,11 @@ class posixAccount extends plugin
   var $savedGroupMembership= array();
   var $savedUidNumber= "";
   var $savedGidNumber= "";
-  var $use_shadowMin= "0";
-  var $use_shadowMax= "0";
-  var $use_shadowWarning= "0";
-  var $use_shadowInactive= "0";
-  var $use_shadowExpire= "0";
+  var $activate_shadowMin= "0";
+  var $activate_shadowMax= "0";
+  var $activate_shadowWarning= "0";
+  var $activate_shadowInactive= "0";
+  var $activate_shadowExpire= "0";
   var $mustchangepassword= "0";
   var $force_ids= 0;
   var $group_dialog= FALSE;
@@ -68,8 +68,8 @@ class posixAccount extends plugin
 
   /* attribute list for save action */
   var $CopyPasteVars  = 
-      array("grouplist","groupMembership","use_shadowMin",
-      "use_shadowMax","use_shadowWarning","use_shadowInactive","use_shadowExpire",
+      array("grouplist","groupMembership","activate_shadowMin",
+      "activate_shadowMax","activate_shadowWarning","activate_shadowInactive","activate_shadowExpire",
       "must_change_password","printerList","grouplist","savedGidNumber","savedUidNumber");
 
   var $attributes     = array("homeDirectory", "loginShell", "uidNumber", "gidNumber", "gecos",
@@ -172,7 +172,7 @@ class posixAccount extends plugin
           "shadowExpire") as $val){
 
       if ($this->$val != 0){
-        $oval= "use_".$val;
+        $oval= "activate_".$val;
         $this->$oval= "1";
       }
     }
@@ -460,8 +460,8 @@ class posixAccount extends plugin
       $smarty->assign("shadowwarnings", sprintf(_("Warn user %s days before password expiery"), 
                                               "<input name=\"shadowWarning\" size=3 maxlength=4 value=\"".$this->shadowWarning."\">"));
 
-      foreach( array("use_shadowMin", "use_shadowMax",
-                     "use_shadowExpire", "use_shadowInactive","use_shadowWarning") as $val){
+      foreach( array("activate_shadowMin", "activate_shadowMax",
+                     "activate_shadowExpire", "activate_shadowInactive","activate_shadowWarning") as $val){
         if ($this->$val == 1){
           $smarty->assign("$val", "checked");
         } else {
@@ -470,11 +470,6 @@ class posixAccount extends plugin
         $smarty->assign("$val"."ACL", $this->getacl($val,$SkipWrite));
       }
 
-      if($this->mustchangepassword){
-        $smarty->assign("mustchangepassword", "checked");
-      } else {
-        $smarty->assign("mustchangepassword", "");
-      }
       $smarty->assign("mustchangepasswordACL", $this->getacl("mustchangepassword",$SkipWrite));
     }
 
@@ -545,7 +540,7 @@ class posixAccount extends plugin
 
     $smarty->assign("force_idsACL", $this->getacl("uidNumber",$SkipWrite).$this->getacl("gidNumber",$SkipWrite));
 
-    foreach(array("primaryGroup","trustmode") as $val){
+    foreach(array("primaryGroup","trustmode","activate_shadowWarning","activate_shadowInactive","activate_shadowMin","activate_shadowMax","activate_shadowExpire","mustchangepassword") as $val){
       if(in_array($val,$this->multi_boxes)){
         $smarty->assign("use_".$val,TRUE);
       }else{
@@ -605,7 +600,11 @@ class posixAccount extends plugin
     else
       $smarty->assign("emptyArrAccess",false);
 
-
+      if($this->mustchangepassword){
+        $smarty->assign("mustchangepassword", " checked ");
+      } else {
+        $smarty->assign("mustchangepassword", "");
+      }
 
     $smarty->assign("workstations", $this->accessTo);
 
@@ -694,17 +693,25 @@ class posixAccount extends plugin
         $this->primaryGroup= $_POST['primaryGroup'];
       }
 
-      foreach(array("shadowMin","shadowMax","shadowExpire","shadowInactive","shadowWarning","mustchangepassword") as $var) {
+      /* Get seelcted shadow checkboxes */
+      foreach(array("shadowMin","shadowMax","shadowExpire","shadowInactive","shadowWarning") as $var) {
         if($this->acl_is_writeable($var)){
-          $use_var = "use_".$var;
-          if(isset($_POST['use_'.$var])){
-            $this->$use_var  = true;
+          $activate_var = "activate_".$var;
+          if(isset($_POST['activate_'.$var])){
+            $this->$activate_var  = true;
             $this->$var      = $_POST[$var];
           }else{
-            $this->$use_var  = false;
+            $this->$activate_var  = false;
             $this->$var      = 0;
           }
         }
+      }
+
+      /* Force change password ? */
+      if(isset($_POST['mustchangepassword'])){
+        $this->mustchangepassword = TRUE;
+      }else{
+        $this->mustchangepassword = FALSE;
       }
 
       /* Trust mode - special handling */
@@ -758,13 +765,13 @@ class posixAccount extends plugin
     $ldap= $this->config->get_ldap_link();
 
     /* Adapt shadow values */
-    if (!$this->use_shadowExpire){
+    if (!$this->activate_shadowExpire){
       $this->shadowExpire= "0";
     } else {
       /* Transform seconds to days here */
       $this->shadowExpire= (int)($this->shadowExpire / (60 * 60 * 24)) ;
     }
-    if (!$this->use_shadowMax){
+    if (!$this->activate_shadowMax){
       $this->shadowMax= "0";
     }
     if ($this->mustchangepassword){
@@ -772,7 +779,7 @@ class posixAccount extends plugin
     } else {
       $this->shadowLastChange= (int)(date("U") / 86400);
     }
-    if (!$this->use_shadowWarning){
+    if (!$this->activate_shadowWarning){
       $this->shadowWarning= "0";
     }
 
@@ -812,23 +819,23 @@ class posixAccount extends plugin
       }
     }
 
-    if ($this->use_shadowMin != "1" ) {
+    if ($this->activate_shadowMin != "1" ) {
       $this->shadowMin = "";
     }
 
-    if (($this->use_shadowMax != "1") && ($this->mustchangepassword != "1")) {
+    if (($this->activate_shadowMax != "1") && ($this->mustchangepassword != "1")) {
       $this->shadowMax = "";
     }
 
-    if ($this->use_shadowWarning != "1" ) {
+    if ($this->activate_shadowWarning != "1" ) {
       $this->shadowWarning = "";
     }
 
-    if ($this->use_shadowInactive != "1" ) {
+    if ($this->activate_shadowInactive != "1" ) {
       $this->shadowInactive = "";
     }
 
-    if ($this->use_shadowExpire != "1" ) {
+    if ($this->activate_shadowExpire != "1" ) {
       $this->shadowExpire = "";
     }
 
@@ -991,39 +998,39 @@ class posixAccount extends plugin
     }
 
     /* Check shadow settings, well I like spaghetties... */
-    if ($this->use_shadowMin){
+    if ($this->activate_shadowMin){
       if (!is_id($this->shadowMin)){
         $message[]= _("Value specified as 'shadowMin' is not valid.");
       }
     }
-    if ($this->use_shadowMax){
+    if ($this->activate_shadowMax){
       if (!is_id($this->shadowMax)){
         $message[]= _("Value specified as 'shadowMax' is not valid.");
       }
     }
-    if ($this->use_shadowWarning){
+    if ($this->activate_shadowWarning){
       if (!is_id($this->shadowWarning)){
         $message[]= _("Value specified as 'shadowWarning' is not valid.");
       }
-      if (!$this->use_shadowMax){
+      if (!$this->activate_shadowMax){
         $message[]= _("'shadowWarning' without 'shadowMax' makes no sense.");
       }
       if ($this->shadowWarning > $this->shadowMax){
         $message[]= _("Value specified as 'shadowWarning' should be smaller than 'shadowMax'.");
       }
-      if ($this->use_shadowMin && $this->shadowWarning < $this->shadowMin){
+      if ($this->activate_shadowMin && $this->shadowWarning < $this->shadowMin){
         $message[]= _("Value specified as 'shadowWarning' should be greater than 'shadowMin'.");
       }
     }
-    if ($this->use_shadowInactive){
+    if ($this->activate_shadowInactive){
       if (!is_id($this->shadowInactive)){
         $message[]= _("Value specified as 'shadowInactive' is not valid.");
       }
-      if (!$this->use_shadowMax){
+      if (!$this->activate_shadowMax){
         $message[]= _("'shadowInactive' without 'shadowMax' makes no sense.");
       }
     }
-    if ($this->use_shadowMin && $this->use_shadowMax){
+    if ($this->activate_shadowMin && $this->activate_shadowMax){
       if ($this->shadowMin > $this->shadowMax){
         $message[]= _("Value specified as 'shadowMin' should be smaller than 'shadowMax'.");
       }
@@ -1128,7 +1135,7 @@ class posixAccount extends plugin
     /* Adjust shadow checkboxes */
     foreach (array("shadowMin", "shadowMax", "shadowWarning", "shadowInactive") as $val){
       if ($this->$val != 0){
-        $oval= "use_".$val;
+        $oval= "activate_".$val;
         $this->$oval= "1";
       }
     }
@@ -1146,7 +1153,7 @@ class posixAccount extends plugin
     
     /* Only enable checkbox, if shadowExpire is in the future */
     if($this->shadowExpire > time()) {
-      $this->use_shadowExpire= "1";
+      $this->activate_shadowExpire= "1";
     }
   }
 
@@ -1427,6 +1434,18 @@ class posixAccount extends plugin
       $ret['trustModel'] = $this->trustModel;
       $ret['accessTo'] = $this->accessTo;
     }
+    foreach(array("shadowWarning","shadowInactive","shadowMin","shadowMax", "shadowExpire") as $entry){
+      $active = "activate_".$entry;
+      if(in_array($active,$this->multi_boxes)){
+        $ret[$entry] = $this->$entry;
+        $ret[$active] = $this->$active;
+      }
+    }
+    if(in_array("mustchangepassword",$this->multi_boxes)){
+      $ret['mustchangepassword'] = $this->mustchangepassword;
+    }
+    print_a($this->multi_boxes);
+    print_a($ret);
     return($ret);
   }
 
@@ -1435,10 +1454,31 @@ class posixAccount extends plugin
   {
     if(isset($_POST['posix_mulitple_edit'])){
       plugin::multiple_save_object();
-      foreach(array("primaryGroup","trustmode") as $val){
+      foreach(array("primaryGroup","trustmode","mustchangepassword","activate_shadowWarning","activate_shadowInactive","activate_shadowMin", "activate_shadowMax","activate_shadowExpire") as $val){
         if(isset($_POST["use_".$val])){
           $this->multi_boxes[] = $val;
         }
+      }
+
+      /* Get selected shadow checkboxes */
+      foreach(array("shadowMin","shadowMax","shadowExpire","shadowInactive","shadowWarning") as $var) {
+        if($this->acl_is_writeable($var)){
+          $activate_var = "activate_".$var;
+          if(isset($_POST['activate_'.$var])){
+            $this->$activate_var  = true;
+            $this->$var      = $_POST[$var];
+          }else{
+            $this->$activate_var  = false;
+            $this->$var      = 0;
+          }
+        }
+      }
+
+      /* Force change password ? */
+      if(isset($_POST['mustchangepassword'])){
+        $this->mustchangepassword = TRUE;
+      }else{
+        $this->mustchangepassword = FALSE;
       }
 
       /* Trust mode - special handling */
