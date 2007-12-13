@@ -1421,6 +1421,8 @@ class posixAccount extends plugin
             );
   }
 
+
+  /* Return selected values for multiple edit */
   function get_multi_edit_values()
   {
     $ret = plugin::get_multi_edit_values();
@@ -1448,20 +1450,26 @@ class posixAccount extends plugin
   }
 
 
+  /* Save posts for multiple edit 
+   */
   function multiple_save_object()
   {
     if(isset($_POST['posix_mulitple_edit'])){
-  
+ 
+      /* Backup expire value */ 
       $expire_tmp = $this->shadowExpire;
   
+      /* Update all values */
       plugin::multiple_save_object();
+
+      /* Get selected checkboxes */
       foreach(array("primaryGroup","trustmode","mustchangepassword","activate_shadowWarning","activate_shadowInactive","activate_shadowMin", "activate_shadowMax","activate_shadowExpire") as $val){
         if(isset($_POST["use_".$val])){
           $this->multi_boxes[] = $val;
         }
       }
 
-      /* Get selected shadow checkboxes */
+      /* Update special values, checkboxes for posixShadow */
       foreach(array("shadowMin","shadowMax","shadowExpire","shadowInactive","shadowWarning") as $var) {
         if($this->acl_is_writeable($var)){
           $activate_var = "activate_".$var;
@@ -1477,6 +1485,7 @@ class posixAccount extends plugin
         }
       }
 
+      /* Restore shadow value, if the shadow attribute isn't used */
       if(!in_array("activate_shadowExpire",$this->multi_boxes)){
         $this->shadowExpire = $expire_tmp;
       }
@@ -1505,7 +1514,6 @@ class posixAccount extends plugin
         }
       }
 
-
       /* Save primary group settings */
       if($this->acl_is_writeable("primaryGroup") && isset($_POST['primaryGroup'])){
         $data= $_POST['primaryGroup'];
@@ -1517,18 +1525,21 @@ class posixAccount extends plugin
     }
   }
 
+  
+  /* Initialize plugin with given atribute arrays 
+   */
   function init_multiple_support($attrs,$all)
   {
     plugin::init_multiple_support($attrs,$all);
 
-    restore_error_handler();
-
+    /* Some dummy values */
     $groups_some = array();
     $groups_all  = array();
     $groups_uid  = array();
-    $uids = array();
-    $first = TRUE;
+    $uids        = array();
+    $first       = TRUE;
 
+    /* Get all groups used by currently edited users */
     $uid_filter="";  
     for($i =0; $i < $this->multi_attrs_all['uid']['count'] ; $i ++){
       $uid = $this->multi_attrs_all['uid'][$i];
@@ -1546,6 +1557,7 @@ class posixAccount extends plugin
       }
     }
 
+    /* Create an array, containing all used groups */
     $groups_all = $groups_some;
     foreach($groups_all as $id => $group){
       foreach($uids as $uid){
@@ -1556,7 +1568,10 @@ class posixAccount extends plugin
       }
     }
 
+    /* Assign group array */
     $this->groupMembership = $groups_all;
+
+    /* Create an array of all grouops used by all users */
     foreach( $groups_all as $dn => $cn){
       if(isset($groups_some[$dn])){
         unset($groups_some[$dn]);
@@ -1575,6 +1590,7 @@ class posixAccount extends plugin
       $this->trustModel= "";
     }
 
+    /* Create access informations */
     $this->accessTo = array();
     if (isset($this->multi_attrs['accessTo'])){
       for ($i= 0; $i<$this->multi_attrs['accessTo']['count']; $i++){
@@ -1586,7 +1602,6 @@ class posixAccount extends plugin
     /* Adjust shadow checkboxes */
     foreach (array("shadowMin", "shadowMax", "shadowWarning", "shadowInactive",
           "shadowExpire") as $val){
-
       if ($this->$val != 0){
         $oval= "activate_".$val;
         $this->$oval= "1";
@@ -1596,6 +1611,8 @@ class posixAccount extends plugin
     /* Convert to seconds */
     if(isset($this->multi_attrs['shadowExpire'])){
       $this->shadowExpire = $this->convertToSeconds($this->multi_attrs['shadowExpire'][0]);
+    }else{
+      $this->activate_shadowExpire = FALSE;
     }
   }
 
