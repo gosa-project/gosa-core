@@ -80,6 +80,8 @@ class environment extends plugin
   var $OrigCn;
   var $add_del_printer_member_was_called = false;
 
+  var $multiple_support =TRUE;
+
   function environment (&$config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
@@ -458,6 +460,12 @@ class environment extends plugin
         }
       }
     }
+  
+    /* Reset header toggle */
+    if($this->multiple_support_active){
+      $display = "";
+    }
+
     /* Account is Account : is_accounbt=true.
      * Else we won't reach this. 
      */
@@ -615,7 +623,6 @@ class environment extends plugin
 
     $smarty->assign("gotoShareSelections",    $this->gotoShareSelections);
     if(!is_array($this->gotoShareSelections)){
-      print $this->gotoShareSelections;
       $this->gotoShareSelections = array();
     }
     $smarty->assign("gotoShareSelectionKeys", array_flip($this->gotoShareSelections));
@@ -652,6 +659,10 @@ class environment extends plugin
         $this->gotoShares[$a_share['name']."|".$a_share['server']]['Username']=$s_user;
         $this->gotoShares[$a_share['name']."|".$a_share['server']]['PwdHash']="";
         $this->gotoShares[$a_share['name']."|".$a_share['server']]['mountPoint']=$s_mount;
+
+        if($this->multiple_support_active){
+          $this->gotoShares[$a_share['name']."|".$a_share['server']]['UsedByAllUsers']= TRUE;
+        }
       }
     }  
 
@@ -710,6 +721,16 @@ class environment extends plugin
         continue;
       } 
 
+      $color = "";
+      if($this->multiple_support_active){
+        if($this->gotoShares[$key]['UsedByAllUsers']){
+          $value .= "&nbsp;(<b>"._("Used by all users")."</b>)";
+        }else{
+          $color = "color: #999999;";
+          $value .= "&nbsp;(<b>"._("Used by some users")."</b>)";
+        }
+      }
+
       /* Check if entry starts with an ! */
       if(preg_match("/^!/",$this->gotoShares[$key]['server'])){
 
@@ -721,7 +742,7 @@ class environment extends plugin
           $img.= "<input type='image' name='gotoShareResetPwd_".base64_encode($key)." 'src='images/list_reset_password.png' alt='"._("Reset password hash")."' 
             title='"._("Reset password hash")."'>";
         }
-        $field1 = array("string" => "<font style=\"color:#C0C0C0\">".$value."</font>" );
+        $field1 = array("string" => "<font style=\"color:#C0C0C0\">".$value."</font>" , "attach" => "style='".$color."'");
         $field2 = array("string" => $img   , "attach" => "style='border-right:0px;'");
       }else{
 
@@ -733,7 +754,7 @@ class environment extends plugin
         }
         $img.= "<input type='image' name='gotoShareDel_".base64_encode($key)." 'src='images/edittrash.png' alt='"._("Delete")."' 
           title='"._("Delete share entry")."'>";
-        $field1 = array("string" => $value);
+        $field1 = array("string" => $value , "attach" => "style='".$color."'");
         $field2 = array("string" => $img   , "attach" => "style='border-right:0px;'");
       }
       $divlistShares->AddEntry(array($field1,$field2));
@@ -937,6 +958,7 @@ class environment extends plugin
     }
 
     /* Als smarty vars are set. Get smarty template and generate output */
+    $smarty->assign("multiple_support",$this->multiple_support_active);
     $display.= $smarty->fetch(get_template_path('environment.tpl', TRUE,dirname(__FILE__)));
     return($display);
   }
@@ -1326,6 +1348,107 @@ class environment extends plugin
       }
     }
     return($a_return);
+  }
+
+
+  function multiple_execute()
+  {
+    /* Reset header toggle */
+    $this->is_account = TRUE;
+    return($this->execute());
+  }
+
+
+    /* Initialize plugin with given atribute arrays
+   */
+  function init_multiple_support($attrs,$all)
+  {
+    plugin::init_multiple_support($attrs,$all);
+
+    /* Prepare Shares */
+    if((isset($this->multi_attrs_all['gotoShare']))&&(is_array($this->multi_attrs_all['gotoShare']))){
+      unset($this->multi_attrs_all['gotoShare']['count']);
+      foreach($this->multi_attrs_all['gotoShare'] as $share){
+        $tmp = $tmp2 = array();
+        $tmp = split("\|",$share);
+        $tmp2['server']      =$tmp[0];
+        $tmp2['name']        =$tmp[1];
+
+        /* Decode base64 if needed */
+        if (!preg_match('%/%', $tmp[2])){
+          $tmp2['mountPoint']  =base64_decode($tmp[2]);
+        } else {
+          $tmp2['mountPoint']  =$tmp[2];
+        }
+
+        if(isset($tmp[3])){
+          $tmp2['PwdHash']  =$tmp[3];
+        }else{
+          $tmp2['PwdHash']  ="";
+        }
+        if(isset($tmp[4])){
+          $tmp2['Username']  =$tmp[4];
+        }else{
+          $tmp2['Username']  ="";
+        }
+        $tmp2['UsedByAllUsers'] = FALSE;
+        $this->gotoShares[$tmp[1]."|".$tmp[0]]=$tmp2;
+      }
+    }
+
+    /* Prepare Shares */
+    if((isset($this->multi_attrs['gotoShare']))&&(is_array($this->multi_attrs['gotoShare']))){
+      unset($this->multi_attrs['gotoShare']['count']);
+      foreach($this->multi_attrs['gotoShare'] as $share){
+        $tmp = $tmp2 = array();
+        $tmp = split("\|",$share);
+        $tmp2['server']      =$tmp[0];
+        $tmp2['name']        =$tmp[1];
+
+        /* Decode base64 if needed */
+        if (!preg_match('%/%', $tmp[2])){
+          $tmp2['mountPoint']  =base64_decode($tmp[2]);
+        } else {
+          $tmp2['mountPoint']  =$tmp[2];
+        }
+
+        if(isset($tmp[3])){
+          $tmp2['PwdHash']  =$tmp[3];
+        }else{
+          $tmp2['PwdHash']  ="";
+        }
+        if(isset($tmp[4])){
+          $tmp2['Username']  =$tmp[4];
+        }else{
+          $tmp2['Username']  ="";
+        }
+        $tmp2['UsedByAllUsers'] = TRUE;
+        $this->gotoShares[$tmp[1]."|".$tmp[0]]=$tmp2;
+      }
+    }
+  }
+
+
+  function set_multi_edit_values($attrs)
+  {
+    $shares = $this->gotoShares;
+    plugin::set_multi_edit_values($attrs);
+
+    $this->gotoShares = $shares;
+    foreach($attrs['gotoShares'] as $name => $share){
+      if($share['UsedByAllUsers'] == TRUE){
+        $this->gotoShares[$name] = $share;
+      }
+    }
+  }
+
+
+    /* Return selected values for multiple edit */
+  function get_multi_edit_values()
+  {
+    $ret = plugin::get_multi_edit_values();
+    $ret['gotoShares'] = $this->gotoShares;
+    return($ret);
   }
 
 
