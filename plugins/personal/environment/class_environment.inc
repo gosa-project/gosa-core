@@ -817,6 +817,9 @@ class environment extends plugin
 
         if(is_array($a_tmp)){
           foreach($a_tmp as $name => $hotplug){
+            if($this->multiple_support_active){
+              $hotplug['UsedByAllUsers'] = TRUE;
+            }
             $this->gotoHotplugDevices[$name]= $hotplug; 
           }
         }
@@ -825,8 +828,13 @@ class environment extends plugin
         $this->is_dialog = false;
       }
     }
-    $smarty->assign("gotoHotplugDevices",$this->printOutHotPlugDevices());
-    $smarty->assign("gotoHotplugDeviceKeys",array_flip($this->printOutHotPlugDevices()));
+
+    if($this->multiple_support_active){
+      $smarty->assign("gotoHotplugDevices",$this->gotoHotplugDevices);
+    }else{
+      $smarty->assign("gotoHotplugDevices",$this->printOutHotPlugDevices());
+      $smarty->assign("gotoHotplugDeviceKeys",array_flip($this->printOutHotPlugDevices()));
+    }
 
     /* Printer Assignment will managed below 
      * A printer can be assigned in two different ways and two different types
@@ -1486,6 +1494,57 @@ class environment extends plugin
         $this->gotoLogonScripts[$tmp[0]]=$tmp2;
       }
     }
+
+    /* Prepare hotplugs */
+    if(isset($this->multi_attrs_all['gotoHotplugDeviceDN']) && is_array($this->multi_attrs_all['gotoHotplugDeviceDN'])){
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cd($this->config->current['BASE']);
+      for($i = 0 ; $i < $this->multi_attrs_all['gotoHotplugDeviceDN']['count'] ; $i ++){
+        $ldap->cat($this->multi_attrs_all['gotoHotplugDeviceDN'][$i]);
+        if($ldap->count()){
+          $multi_attrs_all = $ldap->fetch();
+
+          if(isset($multi_attrs_all['gotoHotplugDevice'][0])){
+            $tmp      = preg_split("/\|/",$multi_attrs_all['gotoHotplugDevice'][0]);
+            $tmp2     = array();
+            $tmp2['name']         = $multi_attrs_all['cn'][0];
+            $tmp2['description']  = $tmp[0];
+            $tmp2['id']           = $tmp[1];
+            $tmp2['produkt']      = $tmp[2];
+            $tmp2['vendor']       = $tmp[3];
+            $tmp2['dn']           = $multi_attrs_all['dn'];
+            $tmp2['UsedByAllUsers'] = FALSE;
+            $this->gotoHotplugDevices[$tmp2['dn']] = $tmp2;
+          }
+        }
+      }
+    }
+
+    /* Prepare hotplugs */
+    if(isset($this->multi_attrs['gotoHotplugDeviceDN']) && is_array($this->multi_attrs['gotoHotplugDeviceDN'])){
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cd($this->config->current['BASE']);
+      for($i = 0 ; $i < $this->multi_attrs['gotoHotplugDeviceDN']['count'] ; $i ++){
+        $ldap->cat($this->multi_attrs['gotoHotplugDeviceDN'][$i]);
+        if($ldap->count()){
+          $multi_attrs = $ldap->fetch();
+
+          if(isset($multi_attrs['gotoHotplugDevice'][0])){
+            $tmp      = preg_split("/\|/",$multi_attrs['gotoHotplugDevice'][0]);
+            $tmp2     = array();
+            $tmp2['name']         = $multi_attrs['cn'][0];
+            $tmp2['description']  = $tmp[0];
+            $tmp2['id']           = $tmp[1];
+            $tmp2['produkt']      = $tmp[2];
+            $tmp2['vendor']       = $tmp[3];
+            $tmp2['dn']           = $multi_attrs['dn'];
+            $tmp2['UsedByAllUsers'] = TRUE;
+            $this->gotoHotplugDevices[$tmp2['dn']] = $tmp2;
+          }
+        }
+      }
+    }
+   $this->gotoHotplugDevices = array_values($this->gotoHotplugDevices);
   }
 
 
@@ -1493,10 +1552,13 @@ class environment extends plugin
   {
     $shares = $this->gotoShares;
     $scripts= $this->gotoLogonScripts;
+    $plugs= $this->gotoHotplugDevices;
     plugin::set_multi_edit_values($attrs);
 
     $this->gotoShares = $shares;
     $this->gotoLogonScripts = $scripts;
+    $this->gotoHotplugDevices = $plugs;
+
     foreach($attrs['gotoShares'] as $name => $share){
       if($share['UsedByAllUsers'] == TRUE){
         $this->gotoShares[$name] = $share;
@@ -1507,16 +1569,38 @@ class environment extends plugin
         unset($this->gotoShares[$name]);
       }
     }
-    foreach($attrs['gotoLogonScripts'] as $name => $share){
-      if($share['UsedByAllUsers'] == TRUE){
-        $this->gotoLogonScripts[$name] = $share;
+    foreach($attrs['gotoLogonScripts'] as $name => $script){
+      if($script['UsedByAllUsers'] == TRUE){
+        $this->gotoLogonScripts[$name] = $script;
       }
     }
-    foreach($this->gotoLogonScripts as $name => $share){
+    foreach($this->gotoLogonScripts as $name => $script){
       if(!isset($attrs['gotoLogonScripts'][$name])){
         unset($this->gotoLogonScripts[$name]);
       }
     }
+    $tmp = array();
+    foreach($this->gotoHotplugDevices as $entry){
+      $tmp[$entry['dn']] = $entry;
+    }
+  
+    foreach($attrs['gotoHotplugDevices'] as $name => $plug){
+      if($plug['UsedByAllUsers'] == TRUE){
+        $tmp[$plug['dn']] = $plug;
+      }
+    }
+    foreach($tmp as $name => $plug){
+      $found = false;
+      foreach($attrs['gotoHotplugDevices'] as $test){
+        if($test['dn'] == $name){
+          $found = true;
+        }
+      }
+      if(!$found){
+        unset($tmp[$name]);
+      }
+    }
+    $this->gotoHotplugDevices = array_values($tmp);
   }
 
 
@@ -1526,6 +1610,7 @@ class environment extends plugin
     $ret = plugin::get_multi_edit_values();
     $ret['gotoShares'] = $this->gotoShares;
     $ret['gotoLogonScripts'] = $this->gotoLogonScripts;
+    $ret['gotoHotplugDevices'] = $this->gotoHotplugDevices;
     return($ret);
   }
 

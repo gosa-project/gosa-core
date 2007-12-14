@@ -244,8 +244,18 @@
      <td>
 {render acl=$gotoHotplugDeviceACL}
       <select name="gotoHotplugDevice_post[]" size=5  style="width:100%;" id="gotoHotplugDevice_post" multiple>
-       {html_options values=$gotoHotplugDeviceKeys output=$gotoHotplugDevices}
-       <option disabled>&nbsp;</option>
+		{if $multiple_support}
+			{foreach from=$gotoHotplugDevices item=item key=key}
+				{if $item.UsedByAllUsers}
+				<option value="{$key}">{$item.name}&nbsp;[{$item.description}]</option>
+				{else}
+				<option style='color: #888888; background: #DDDDDD;background-color: #DDDDDD;' value="{$key}">{$item.name}&nbsp;[{$item.description}]</option>
+				{/if}
+			{/foreach}
+		{else}
+		   {html_options values=$gotoHotplugDeviceKeys output=$gotoHotplugDevices}
+		   <option disabled>&nbsp;</option>
+		{/if}
       </select>
 {/render}
      </td>
