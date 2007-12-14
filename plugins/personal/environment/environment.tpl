@@ -197,8 +197,19 @@
      <td>
 {render acl=$gotoLogonScriptACL}
       <select style="width:100%;" name="gotoLogonScript" multiple size=5 id="gotoLogonScript">
-       {html_options values=$gotoLogonScriptKeys output=$gotoLogonScripts }
-       <option disabled>&nbsp;</option>
+
+		{if $multiple_support}
+			{foreach from=$gotoLogonScripts item=item key=key}
+				{if $item.UsedByAllUsers}
+				<option value="{$key}">{$item.LogonPriority}&nbsp;{$item.LogonName}&nbsp;[{$item.LogonDescription}]</option>
+				{else}
+				<option style='color: #888888; background: #DDDDDD;background-color: #DDDDDD;' value="{$key}">{$item.LogonPriority}&nbsp;{$item.LogonName}&nbsp;[{$item.LogonDescription}]</option>
+				{/if}
+			{/foreach}
+		{else}
+    	   {html_options values=$gotoLogonScriptKeys output=$gotoLogonScripts }
+	       <option disabled>&nbsp;</option>
+		{/if}
       </select>
 {/render}
 

@@ -568,6 +568,10 @@ class environment extends plugin
           unset($this->dialog);
           $this->dialog=FALSE;
           $this->is_dialog=false;
+
+          if($this->multiple_support_active){
+            $tmp['UsedByAllUsers'] = TRUE;
+          }
           $this->gotoLogonScripts[$tmp['LogonName']]=$tmp; 
         }
       }
@@ -611,10 +615,15 @@ class environment extends plugin
     }
 
     /* Append List to smarty*/
-    $ls = $this->printOutLogonScripts();
-    $smarty->assign("gotoLogonScripts",  $ls);
-    $smarty->assign("gotoLogonScriptKeys",array_flip($ls));
-    $smarty->assign("gotoLogonScriptKeysCnt",count($ls));
+    if($this->multiple_support_active){
+      $smarty->assign("gotoLogonScripts",  $this->gotoLogonScripts);
+      $smarty->assign("gotoLogonScriptKeysCnt",count($this->gotoLogonScripts));
+    }else{
+      $ls = $this->printOutLogonScripts();
+      $smarty->assign("gotoLogonScripts",  $ls);
+      $smarty->assign("gotoLogonScriptKeys",array_flip($ls));
+      $smarty->assign("gotoLogonScriptKeysCnt",count($ls));
+    }
 
     /* In this section server shares will be defined 
      * A user can select one of the given shares and a mount point
@@ -1426,15 +1435,68 @@ class environment extends plugin
         $this->gotoShares[$tmp[1]."|".$tmp[0]]=$tmp2;
       }
     }
+
+
+    /* prepare LogonScripts */
+    if((isset($this->multi_attrs_all['gotoLogonScript']))&&(is_array($this->multi_attrs_all['gotoLogonScript']))){
+      unset($this->multi_attrs_all['gotoLogonScript']['count']);
+      foreach($this->multi_attrs_all['gotoLogonScript'] as $device){
+        $tmp = $tmp2 = array();
+        $tmp = split("\|",$device);
+        $tmp2['LogonName']        = $tmp[0];
+        $tmp2['LogonPriority']    = $tmp[2];
+        if(preg_match("/O/i",$tmp[1])){
+          $tmp2['LogonOverload'] = "O";
+        }else{
+          $tmp2['LogonOverload'] = "";
+        }
+        if(preg_match("/L/i",$tmp[1])){
+          $tmp2['LogonLast'] = "L";
+        }else{
+          $tmp2['LogonLast'] = "";
+        }
+        $tmp2['LogonData']        = base64_decode($tmp[3]);
+        $tmp2['LogonDescription'] = $tmp[4];
+        $tmp2['UsedByAllUsers'] = FALSE;
+        $this->gotoLogonScripts[$tmp[0]]=$tmp2;
+      }
+    }
+
+    /* prepare LogonScripts */
+    if((isset($this->multi_attrs['gotoLogonScript']))&&(is_array($this->multi_attrs['gotoLogonScript']))){
+      unset($this->multi_attrs['gotoLogonScript']['count']);
+      foreach($this->multi_attrs['gotoLogonScript'] as $device){
+        $tmp = $tmp2 = array();
+        $tmp = split("\|",$device);
+        $tmp2['LogonName']        = $tmp[0];
+        $tmp2['LogonPriority']    = $tmp[2];
+        if(preg_match("/O/i",$tmp[1])){
+          $tmp2['LogonOverload'] = "O";
+        }else{
+          $tmp2['LogonOverload'] = "";
+        }
+        if(preg_match("/L/i",$tmp[1])){
+          $tmp2['LogonLast'] = "L";
+        }else{
+          $tmp2['LogonLast'] = "";
+        }
+        $tmp2['LogonData']        = base64_decode($tmp[3]);
+        $tmp2['LogonDescription'] = $tmp[4];
+        $tmp2['UsedByAllUsers'] = TRUE;
+        $this->gotoLogonScripts[$tmp[0]]=$tmp2;
+      }
+    }
   }
 
 
   function set_multi_edit_values($attrs)
   {
     $shares = $this->gotoShares;
+    $scripts= $this->gotoLogonScripts;
     plugin::set_multi_edit_values($attrs);
 
     $this->gotoShares = $shares;
+    $this->gotoLogonScripts = $scripts;
     foreach($attrs['gotoShares'] as $name => $share){
       if($share['UsedByAllUsers'] == TRUE){
         $this->gotoShares[$name] = $share;
@@ -1445,6 +1507,16 @@ class environment extends plugin
         unset($this->gotoShares[$name]);
       }
     }
+    foreach($attrs['gotoLogonScripts'] as $name => $share){
+      if($share['UsedByAllUsers'] == TRUE){
+        $this->gotoLogonScripts[$name] = $share;
+      }
+    }
+    foreach($this->gotoLogonScripts as $name => $share){
+      if(!isset($attrs['gotoLogonScripts'][$name])){
+        unset($this->gotoLogonScripts[$name]);
+      }
+    }
   }
 
 
@@ -1453,6 +1525,7 @@ class environment extends plugin
   {
     $ret = plugin::get_multi_edit_values();
     $ret['gotoShares'] = $this->gotoShares;
+    $ret['gotoLogonScripts'] = $this->gotoLogonScripts;
     return($ret);
   }
 
