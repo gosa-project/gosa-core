@@ -162,16 +162,17 @@ class multi_plug
       }elseif(is_string($base[$key]) && $base[$key]!=$minus[$key]){
         unset($base[$key]);
       }elseif(is_array($base[$key])){
+        $tmp = array();
         for($i = 0 ; $i < $base[$key]['count'] ; $i ++){
-          if(isset($base[$key][$i]) && !in_array($base[$key][$i],$minus[$key])){
-            $base[$key]['count'] --;
-            if($base[$key]['count'] == 0){
-              unset($base[$key]);
-              break;
-            }else{
-              unset($base[$key][$i]);
-            }
+          if(isset($base[$key][$i]) && in_array($base[$key][$i],$minus[$key])){
+            $tmp[] = $base[$key][$i];
           }
+        }
+        if(count($tmp)){
+          $tmp['count'] = count($tmp);
+          $base[$key] = $tmp;
+        }else{
+          unset($base[$key]);
         }
       }
     }

@@ -1440,6 +1440,11 @@ class environment extends plugin
         $this->gotoShares[$name] = $share;
       }
     }
+    foreach($this->gotoShares as $name => $share){
+      if(!isset($attrs['gotoShares'][$name])){
+        unset($this->gotoShares[$name]);
+      }
+    }
   }
 
 

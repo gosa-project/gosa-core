@@ -1706,7 +1706,9 @@ class plugin
     foreach ($this->attributes as $val){
       $found= array_key_ics($val, $this->multi_attrs);
       if ($found != ""){
-        $this->$val= $this->multi_attrs["$found"][0];
+        if(isset($this->multi_attrs["$found"][0])){
+          $this->$val= $this->multi_attrs["$found"][0];
+        }
       }
     }
   }
