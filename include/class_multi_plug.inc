@@ -121,6 +121,63 @@ class multi_plug
     $this->detect_multiple_used_attributes();
   }
 
+
+  /*! \brief    Combine two ldap result arrays. 
+   * @param     array   $base   Base array 
+   * @param     array   $add    Array to add
+   * @returns   array   Combination of $base and $add
+   */  
+  private function array_combine($base,$add)
+  {
+    foreach($add as $key => $attr) {
+      if(!is_numeric($key)){
+        if(!isset($base[$key])){
+          $base[$key] = $add[$key]; 
+        }elseif(is_array($add[$key])){
+          for($i=0;$i<$add[$key]['count'];$i++){
+            if(!in_array($add[$key][$i],$base[$key])){
+              $base[$key][] = $add[$key][$i];
+              $base[$key]['count']++;
+            }
+          }
+        }
+      }
+    }
+    return($base);
+  }
+
+
+  /*! \brief    Intersect two ldap result arrays/Inner join of two ldap result arrays
+   * @param     array   $base   Base array 
+   * @param     array   $minus  Array number two
+   * @returns   array   Result intersection
+   */  
+  private function array_intersect($base,$minus)
+  {
+    foreach($base as $key => $entry){
+      if(is_numeric($key) || !isset($minus[$key])){
+        unset($base[$key]);
+      }elseif(gettype($base[$key]) != gettype($minus[$key])){
+        unset($base[$key]);
+      }elseif(is_string($base[$key]) && $base[$key]!=$minus[$key]){
+        unset($base[$key]);
+      }elseif(is_array($base[$key])){
+        for($i = 0 ; $i < $base[$key]['count'] ; $i ++){
+          if(isset($base[$key][$i]) && !in_array($base[$key][$i],$minus[$key])){
+            $base[$key]['count'] --;
+            if($base[$key]['count'] == 0){
+              unset($base[$key]);
+              break;
+            }else{
+              unset($base[$key][$i]);
+            }
+          }
+        }
+      }
+    }
+    return($base);
+  }
+
   
   /*! \brief    Detect values that are used in all edited objects.
    * @returns   array   All multiple used attributes
@@ -128,35 +185,15 @@ class multi_plug
   private function detect_multiple_used_attributes()
   {
     $attrs = array();
-    $all   = array();
     $first = $this->o_tab->current;
+    $all   = array();
     foreach($this->a_handles as $handle){
       if(count($attrs) == 0){
         $attrs = $handle->by_object[$first]->attrs;
       }else{
-        foreach($attrs as $key => $attr){
-          if(!isset($handle->by_object[$first]->attrs[$key]) || !($attr === $handle->by_object[$first]->attrs[$key])){
-            unset($attrs[$key]);
-          }
-        }
+        $attrs = $this->array_intersect($attrs,$handle->by_object[$first]->attrs);
       }
-
-      foreach($handle->by_object[$first]->attrs as $key => $attr) {
-        if(!is_numeric($key)){
-          if(!isset($all[$key])){
-            if(is_array($attr)){
-              $all[$key] = $attr; 
-            }
-          }elseif(isset($attr['count'])){
-            for($i = 0; $i < $attr['count'] ; $i ++){
-              if(!in_array($attr[$i],$all[$key])){
-                $all[$key][] = $attr[$i];
-                $all[$key]['count']++;
-              }
-            }
-          }
-        }
-      }
+      $all = $this->array_combine($all,$handle->by_object[$first]->attrs);
     }
     foreach($this->o_tab->by_object as $name => $obj){
       $this->o_tab->by_object[$name]->init_multiple_support($attrs,$all);
