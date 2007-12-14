@@ -82,6 +82,8 @@ class environment extends plugin
 
   var $multiple_support =TRUE;
 
+  var $use_gotoPrinter;
+
   function environment (&$config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
@@ -882,7 +884,9 @@ class environment extends plugin
               $type = "AddGroup";
             }
           }else{
-            if(isset($this->NewDeletedPrinters[$pname])){
+            if($this->multiple_support_active){
+              $type = "AddUser";
+            }elseif(isset($this->NewDeletedPrinters[$pname])){
               $type = "AddUser";
             }elseif($printerObj->by_object['printgeneric']->AddMember("AddUser",$this->dn)){
               $type = "AddUser";
@@ -972,6 +976,16 @@ class environment extends plugin
       $this->dialog->save_object();
       $disp =$this->dialog->execute();
       return($disp);
+    }
+
+    /* Assign used attributes for multiple edit */
+    foreach(array("gotoPrinter") as $box){
+      $ubox ="use_".$box;
+      if(in_array($box,$this->multi_boxes)){
+        $smarty->assign($ubox,TRUE);
+      }else{
+        $smarty->assign($ubox,FALSE);
+      }
     }
 
     /* Als smarty vars are set. Get smarty template and generate output */
@@ -1611,9 +1625,29 @@ class environment extends plugin
     $ret['gotoShares'] = $this->gotoShares;
     $ret['gotoLogonScripts'] = $this->gotoLogonScripts;
     $ret['gotoHotplugDevices'] = $this->gotoHotplugDevices;
+  
+    if(in_array("gotoPrinter",$this->multi_boxes)){
+      $ret['gotoPrinter'] = $this->gotoPrinter;
+      $ret['gotoPrinterSel'] = $this->gotoPrinterSel;
+      $ret['gosaDefaultPrinter'] = $this->gosaDefaultPrinter;
+  
+      /* Force printer reset */
+      $ret['add_del_printer_member_was_called'] = TRUE;
+    }
+   
     return($ret);
   }
 
+
+  function multiple_save_object()
+  {
+    if(isset($_POST['environment_multiple_posted'])){
+      plugin::multiple_save_object();
+      if(isset($_POST['use_gotoPrinter'])){
+        $this->multi_boxes[] = "gotoPrinter";
+      }
+    }
+  }
 
   /* Return plugin informations for acl handling 
 #FIXME these ACLs should work for groups too */ 

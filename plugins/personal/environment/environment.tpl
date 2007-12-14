@@ -201,9 +201,9 @@
 		{if $multiple_support}
 			{foreach from=$gotoLogonScripts item=item key=key}
 				{if $item.UsedByAllUsers}
-				<option value="{$key}">{$item.LogonPriority}&nbsp;{$item.LogonName}&nbsp;[{$item.LogonDescription}]</option>
+				<option value="{$key}">{$item.LogonPriority}&nbsp;{$item.LogonName}&nbsp;[{$item.LogonDescription}] ({t}Used by all users{/t})</option>
 				{else}
-				<option style='color: #888888; background: #DDDDDD;background-color: #DDDDDD;' value="{$key}">{$item.LogonPriority}&nbsp;{$item.LogonName}&nbsp;[{$item.LogonDescription}]</option>
+				<option style='color: #888888; background: #DDDDDD;background-color: #DDDDDD;' value="{$key}">{$item.LogonPriority}&nbsp;{$item.LogonName}&nbsp;[{$item.LogonDescription}] ({t}Used by some users{/t})</option>
 				{/if}
 			{/foreach}
 		{else}
@@ -247,9 +247,9 @@
 		{if $multiple_support}
 			{foreach from=$gotoHotplugDevices item=item key=key}
 				{if $item.UsedByAllUsers}
-				<option value="{$key}">{$item.name}&nbsp;[{$item.description}]</option>
+				<option value="{$key}">{$item.name}&nbsp;[{$item.description}] ({t}Used by all users{/t})</option>
 				{else}
-				<option style='color: #888888; background: #DDDDDD;background-color: #DDDDDD;' value="{$key}">{$item.name}&nbsp;[{$item.description}]</option>
+				<option style='color: #888888; background: #DDDDDD;background-color: #DDDDDD;' value="{$key}">{$item.name}&nbsp;[{$item.description}] ({t}Used by some users{/t})</option>
 				{/if}
 			{/foreach}
 		{else}
@@ -274,6 +274,48 @@
    </table>
   </td>
   <td>
+
+
+{if $multiple_support}
+
+   <h2>
+	<input type="checkbox" name="use_gotoPrinter" value="1" {if $use_gotoPrinter} checked {/if}
+		class="center" onClick="toggle('div_gotoPrinter');">
+    <img alt="" src="images/select_printer.png" align="middle" class="center" />&nbsp;
+    <label for="gotoPrinter">{t}Printer{/t}</label>
+   </h2>
+
+   <div id="div_gotoPrinter" {if !$use_gotoPrinter} style="visibility:hidden;" {/if}>
+	<b>{t}Using this option will overwrite the complete printer settings for all currently edited objects!{/t}</b>
+   <table style="width:100%" summary="{t}Printer settings{/t}">
+    <tr>
+     <td>
+{render acl=$gotoPrinterACL}
+      <select style="width:100%;" name="gotoPrinterSel[]" multiple size=5 id="gotoPrinter">
+       {html_options values=$gotoPrinterKeys output=$gotoPrinter}
+       <option disabled>&nbsp;</option>
+      </select>
+{/render}
+      <br>
+{render acl=$gotoPrinterACL}
+      <input type="submit"  name="gotoPrinterAdd"     value="{t}Add{/t}">
+{/render}
+{render acl=$gotoPrinterACL}
+      <input type="submit" name="gotoPrinterDel"     value="{t}Delete{/t}" {if !$gotoPrinter } disabled {/if}>
+{/render}
+{render acl=$gotoPrinterACL}
+      <input type="submit" name="gotoPrinterEdit"    value="{t}Toggle admin{/t}" {if !$gotoPrinter } disabled {/if}>
+{/render}
+{render acl=$gosaDefaultPrinterACL}
+      <input type="submit" name="gotoPrinterDefault"    value="{t}Toggle default{/t}" {if !$gotoPrinter | $is_group} disabled {/if}>
+{/render}
+     </td>
+    </tr>
+   </table>
+	</div>
+
+{else}
+
    <h2>
     <img alt="" src="images/select_printer.png" align="middle" class="center" />&nbsp;
     <label for="gotoPrinter">{t}Printer{/t}</label>
@@ -303,9 +345,15 @@
      </td>
     </tr>
    </table>
+
+{/if}
+
   </td>
  </tr>
 </table>
+{if $multiple_support}
+	<input type="hidden" name="environment_multiple_posted" value="1">
+{/if}
 <script language="JavaScript" type="text/javascript">
 <!-- // First input field on page
 focus_field('useProfile');
