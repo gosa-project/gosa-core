@@ -498,7 +498,9 @@ class environment extends plugin
       $smarty->assign("gotoPrinterACL","rw");
     }
 
-    if(empty($this->useProfile)){
+
+    $smarty->assign("useProfile",$this->useProfile);
+    if(empty($this->useProfile) && !$this->multiple_support_active){
       $smarty->assign("useProfileCHK","");
       $smarty->assign("gotoProfileServerACL" , preg_replace("/w/","",$this->getacl("gotoProfileServer",$WriteOnly)));
       $smarty->assign("gotoProfileQuotaACL" , preg_replace("/w/","",$this->getacl("gotoProfileQuota",$WriteOnly)));
@@ -979,7 +981,8 @@ class environment extends plugin
     }
 
     /* Assign used attributes for multiple edit */
-    foreach(array("gotoPrinter") as $box){
+    foreach(array("gotoPrinter","kiosk_server","gotoProfileFlagL","gotoXResolution",
+                  "useProfile","gotoProfileServer","gotoProfileQuota","gotoProfileFlagC") as $box){
       $ubox ="use_".$box;
       if(in_array($box,$this->multi_boxes)){
         $smarty->assign($ubox,TRUE);
@@ -1559,6 +1562,21 @@ class environment extends plugin
       }
     }
    $this->gotoHotplugDevices = array_values($this->gotoHotplugDevices);
+    $this->gotoHotplugDevices = array_values($tmp);
+    for($i = 0 ; $i < strlen($this->gotoProfileFlags) ; $i ++){
+      $chr = $this->gotoProfileFlags[$i];
+      $name = "gotoProfileFlag".$chr;
+      $this->$name=$chr;
+    }
+$this->update_kiosk_profiles();
+$this->gotoKioskProfile= preg_replace("/^.*\//i","",$this->gotoKioskProfile);
+
+    if((!empty($this->gotoProfileServer))||($this->gotoProfileFlagC=="C")){
+      $this->useProfile = true;
+    }else{
+      $this->useProfile = false;
+    }
+
   }
 
 
@@ -1614,7 +1632,6 @@ class environment extends plugin
         unset($tmp[$name]);
       }
     }
-    $this->gotoHotplugDevices = array_values($tmp);
   }
 
 
@@ -1634,7 +1651,30 @@ class environment extends plugin
       /* Force printer reset */
       $ret['add_del_printer_member_was_called'] = TRUE;
     }
-   
+  
+    if(in_array("gotoProfileFlagL",$this->multi_boxes)){
+      $ret['gotoProfileFlagL'] = $this->gotoProfileFlagL;
+    }
+
+    if(in_array("useProfile",$this->multi_boxes)){
+      $ret['useProfile']=$this->useProfile;
+      if(in_array("gotoProfileServer",$this->multi_boxes)){
+        $ret['gotoProfileServer']=$this->gotoProfileServer;
+      }
+      if(in_array("gotoProfileQuota",$this->multi_boxes)){
+        $ret['gotoProfileQuota']=$this->gotoProfileQuota;
+      }
+      if(in_array("gotoProfileFlagC",$this->multi_boxes)){
+        $ret['gotoProfileFlagC'] = $this->gotoProfileFlagC;
+      }
+    }
+    if(in_array("gotoXResolution",$this->multi_boxes)){
+      $ret['gotoXResolution'] = $this->gotoXResolution;
+    }
+    if(in_array("kiosk_server",$this->multi_boxes)){
+      $ret['gotoKioskProfile_Server'] = $this->gotoKioskProfile_Server;
+      $ret['gotoKioskProfile_Profile'] = $this->gotoKioskProfile_Profile;
+    }
     return($ret);
   }
 
@@ -1643,9 +1683,45 @@ class environment extends plugin
   {
     if(isset($_POST['environment_multiple_posted'])){
       plugin::multiple_save_object();
-      if(isset($_POST['use_gotoPrinter'])){
-        $this->multi_boxes[] = "gotoPrinter";
+
+      
+      if(isset($_POST['useProfile'])){
+        $this->useProfile = true;
+      }else{
+        $this->useProfile = false;
       }
+      if(isset($_POST['gotoProfileFlagC'])){
+        $this->gotoProfileFlagC = $_POST['gotoProfileFlagC'];
+      }else{
+        $this->gotoProfileFlagC = false;
+      }
+
+      if(isset($_POST['gotoProfileFlagL'])){
+        $this->gotoProfileFlagL = $_POST['gotoProfileFlagL'];
+      }else{
+        $this->gotoProfileFlagL = false;
+      }
+
+      foreach(array("gotoProfileFlagL","gotoPrinter","kiosk_server","gotoXResolution",
+                    "useProfile","gotoProfileServer","gotoProfileQuota","gotoProfileFlagC") as $attr){
+        $uattr = "use_".$attr;
+        if(isset($_POST[$uattr])){
+          $this->multi_boxes[] = $attr;
+        }
+      }
+      if(isset($_POST['kiosk_server'])){
+        $tmp = $_POST['kiosk_server'];
+        if(isset($this->gotoKioskProfiles['SERVERS'][$tmp])){
+          $this->gotoKioskProfile_Server = $_POST['kiosk_server'];
+        }
+      }
+      if(isset($_POST['kiosk_profile'])){
+        $tmp = $_POST['kiosk_profile'];
+        if(in_array($tmp,$this->gotoKioskProfiles['BY_SERVER'][$this->gotoKioskProfile_Server])){
+          $this->gotoKioskProfile_Profile = $_POST['kiosk_profile'];
+        }
+      }
+
     }
   }
 

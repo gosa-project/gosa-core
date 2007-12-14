@@ -14,6 +14,33 @@
 <table summary="{t}Environment managment settings{/t}" width="100%">
  <tr>
   <td style="width:50%;border-right:1px solid #B0B0B0;vertical-align:top;">
+
+
+{if $multiple_support}
+
+	{render acl=$gotoProfileACL checkbox=$multiple_support checked=$use_useProfile}
+		<input class="center" type="checkbox" value="1" {if $useProfile} checked {/if} name="useProfile" id="useProfile">{t}Use profile managment{/t}
+	{/render}
+	<br>
+	{render acl=$gotoProfileServerACL checkbox=$multiple_support checked=$use_gotoProfileServer}
+		{t}Profil path{/t}
+		<select id="gotoProfileServer" name="gotoProfileServer">
+			{html_options values=$gotoProfileServerKeys output=$gotoProfileServers selected=$gotoProfileServer}
+		</select>
+	{/render}
+	<br>
+	{render acl=$gotoProfileQuotaACL checkbox=$multiple_support checked=$use_gotoProfileQuota}
+			 <input type="text" name="gotoProfileQuota" value="{$gotoProfileQuota}" size="6" id="gotoProfileQuota">{t}MB{/t}
+	{/render}
+	<br>
+	{render acl=$gotoProfileFlagCACL checkbox=$multiple_support checked=$use_gotoProfileFlagC}
+		<input class="center" type="checkbox" name="gotoProfileFlagC" value="C" {$gotoProfileFlagCCHK} id="gotoProfileFlagC">&nbsp;
+		{t}Cache profile localy{/t}
+	{/render}
+
+{else}
+
+
    <table summary="{t}Profile managment{/t}">
     <tr>
      <td style="vertical-align:top">
@@ -77,6 +104,9 @@
      </td>
     </tr>
    </table>
+
+{/if}
+
   </td>
   <td style="vertical-align:top">
 
@@ -88,16 +118,24 @@
      </td>
     </tr>
     <tr>
-     <td>
-      {t}Server{/t}
-      <select name='kiosk_server' id="kiosk_server" onChange='document.mainform.submit();'>
+     <td>	
+{if $multiple_support}
+	  <input type="checkbox" name="use_kiosk_server" value="1" {if $use_kiosk_server} checked {/if} 
+		class="center" 
+			onClick="changeState('kiosk_server');
+					 changeState('kiosk_profile');"> 
+{/if}
+	  {t}Server{/t}
+      <select name='kiosk_server' id="kiosk_server" onChange='document.mainform.submit();'
+		{if !$use_kiosk_server && $multiple_support} disabled {/if}>
        {html_options options=$kiosk_servers selected=$kiosk_server}
       </select>
      </td>
      <td>
       {if $kiosk_server != "none"}
       {t}Profile{/t}
-      <select name='kiosk_profile'>
+      <select name='kiosk_profile' id="kiosk_profile"
+        {if !$use_kiosk_server && $multiple_support} disabled {/if}>
        {html_options values=$kiosk_profiles output=$kiosk_profiles selected=$kiosk_profile}
       </select>
       {else}
@@ -119,19 +157,23 @@
     <tr>
      <td colspan=2>
       <br>
-{render acl=$gotoProfileFlagLACL}
-      <input type="checkbox" name="gotoProfileFlagL" id="gotoProfileFlagL" value="L" {$gotoProfileFlagLCHK}>
+{render acl=$gotoProfileFlagLACL checkbox=$multiple_support checked=$use_gotoProfileFlagL}
+      <input type="checkbox" name="gotoProfileFlagL" id="gotoProfileFlagL" value="L" {$gotoProfileFlagLCHK} class="center">
 {/render}
       <label for="gotoProfileFlagL">{t}Resolution changeable during session{/t}</label>
      </td>
     </tr>
     <tr>
      <td>
+{if $multiple_support}
+	  <input type="checkbox" value="1" class="center" name="use_gotoXResolution"
+		onClick="changeState('gotoXResolution');" {if $use_gotoXResolution} checked {/if}>
+{/if}
       <label for="gotoXResolution">{t}Resolution{/t}</label>
      </td>
      <td>
 {render acl=$gotoXResolutionACL}
-      <select name="gotoXResolution" id="gotoXResolution">
+      <select name="gotoXResolution" id="gotoXResolution" {if !$use_gotoXResolution && $multiple_support} disabled {/if}>
        {html_options values=$gotoXResolutionKeys output=$gotoXResolutions selected=$gotoXResolution}
       <option disabled>&nbsp;</option>
       </select>
