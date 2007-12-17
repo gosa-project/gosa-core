@@ -1679,11 +1679,22 @@ $this->gotoKioskProfile= preg_replace("/^.*\//i","",$this->gotoKioskProfile);
   }
 
 
+  function multiple_check() 
+  {
+    $message = plugin::multiple_check();
+    $this->detect_grouptype();
+
+    if(preg_match("/[^0-9]/",$this->gotoProfileQuota) && in_array("gotoProfileQuota",$this->multi_boxes)) {
+      $message[]=_("Please set a valid profile quota size.");
+    }
+    return($message);
+  }
+
+
   function multiple_save_object()
   {
     if(isset($_POST['environment_multiple_posted'])){
       plugin::multiple_save_object();
-
       
       if(isset($_POST['useProfile'])){
         $this->useProfile = true;
