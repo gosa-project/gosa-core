@@ -348,7 +348,7 @@ function ldap_login_user ($username, $password)
   $attrs= $ldap->fetch();
   $success = FALSE;
   foreach($verify_attr as $attr){
-    if ($attrs[$attr][0] == $username){
+    if(isset($attrs[$attr][0]) && $attrs[$attr][0] == $username){
       $success = TRUE;
     }
   }
