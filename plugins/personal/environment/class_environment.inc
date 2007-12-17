@@ -1561,15 +1561,14 @@ class environment extends plugin
         }
       }
     }
-   $this->gotoHotplugDevices = array_values($this->gotoHotplugDevices);
-    $this->gotoHotplugDevices = array_values($tmp);
+    $this->gotoHotplugDevices = array_values($this->gotoHotplugDevices);
     for($i = 0 ; $i < strlen($this->gotoProfileFlags) ; $i ++){
       $chr = $this->gotoProfileFlags[$i];
       $name = "gotoProfileFlag".$chr;
       $this->$name=$chr;
     }
-$this->update_kiosk_profiles();
-$this->gotoKioskProfile= preg_replace("/^.*\//i","",$this->gotoKioskProfile);
+    $this->update_kiosk_profiles();
+    $this->gotoKioskProfile= preg_replace("/^.*\//i","",$this->gotoKioskProfile);
 
     if((!empty($this->gotoProfileServer))||($this->gotoProfileFlagC=="C")){
       $this->useProfile = true;

@@ -56,6 +56,7 @@ class mailAccount extends plugin
   var $uid              = "";
 
   var $sieve_management = NULL;
+  var $multiple_support = TRUE;
 
   /* constructor, if 'dn' is set, the node loads the given
      'dn' from LDAP */
@@ -281,30 +282,31 @@ class mailAccount extends plugin
     }
 
     /* Do we represent a valid account? */
-    if (!$this->is_account && $this->parent === NULL){
-      $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
-        _("This account has no mail extensions.")."</b>";
+    if(!$this->multiple_support_active){
+      if (!$this->is_account && $this->parent === NULL){
+        $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
+          _("This account has no mail extensions.")."</b>";
 
-      $display.= back_to_main();
-      return ($display);
-    }
-
-    /* Show tab dialog headers */
-    if ($this->parent !== NULL){
-      if ($this->is_account){
-        if($this->accountDelegationsConfigured()){
-          $display= $this->show_disable_header(_("Remove mail account"),
-              _("This account can't be removed while there are delegations configured. Remove those delegations first."),TRUE,TRUE);
-        }else{
-          $display= $this->show_disable_header(_("Remove mail account"),
-              _("This account has mail features enabled. You can disable them by clicking below."));
-        }
-      } else {
-        $display= $this->show_enable_header(_("Create mail account"), _("This account has mail features disabled. You can enable them by clicking below."));
+        $display.= back_to_main();
         return ($display);
       }
-    }
 
+      /* Show tab dialog headers */
+      if ($this->parent !== NULL){
+        if ($this->is_account){
+          if($this->accountDelegationsConfigured()){
+            $display= $this->show_disable_header(_("Remove mail account"),
+                _("This account can't be removed while there are delegations configured. Remove those delegations first."),TRUE,TRUE);
+          }else{
+            $display= $this->show_disable_header(_("Remove mail account"),
+                _("This account has mail features enabled. You can disable them by clicking below."));
+          }
+        } else {
+          $display= $this->show_enable_header(_("Create mail account"), _("This account has mail features disabled. You can enable them by clicking below."));
+          return ($display);
+        }
+      }
+    }
 
     /* Forwarder  subdialog */
 
@@ -654,6 +656,7 @@ class mailAccount extends plugin
     $smarty->assign("spamlevel", $spamlevel);
     $smarty->assign("spambox", $this->mailboxList);
 
+    $smarty->assign("multiple_support",$this->multiple_support_active);
     $display.= $smarty->fetch (get_template_path('generic.tpl', TRUE, dirname(__FILE__)));
     return ($display);
   }
@@ -1201,6 +1204,20 @@ class mailAccount extends plugin
         }
       }
     } 
+  }
+
+  /* Initialize plugin with given atribute arrays
+   */
+  function init_multiple_support($attrs,$all)
+  {
+    plugin::init_multiple_support($attrs,$all);
+
+    
+  }
+
+  function multiple_execute()
+  {
+    return($this->execute());
   }
 }
 

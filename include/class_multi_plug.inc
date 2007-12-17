@@ -29,6 +29,61 @@ Data structure :
       ...
      |->tab object for dn n
 
+
+Other functions implemented:
+============================
+
+CLASS tab
+  - multiple_support_available()  Check if there is at least one plugin with 
+                                  enabled multiple edit support
+  - enable_multiple_support()     Enable multiple edit, for this tab.
+  
+CLASS plugin
+  - enable_multiple_support()     Enable multiple support for this plugin.
+  - init_multiple_support()       Init summy object, to preset some values.
+  - multiple_execute()            Display dummy object ui.
+  - multiple_save_object()        Get posted values in multiple edit mode.
+  - multiple_check()              Check values specified in dummy object.
+  - get_multi_edit_values()       Get values changed from dummy object.
+  - set_multi_edit_values()       Set values collected with get_multi_edit_values.
+                                  to all objects currently edited.
+
+
+Process:
+========
+
+multi_plug::multi_plug()
+  |->o_tab = new tab()                      #Initialize ui handle
+  |
+  |->handles
+  | |->handles[] = new tab()                #Initialize objects we want to edit at once
+  |
+  |->o_tab->enable_multiple_support()       #Enable multiple support for ui handle
+  |->detect_multiple_used_attributes()      #Update ui handle with some default values
+    |->handles->attrs
+    |->ui->attrs
+  |
+  |->execute()                              #Display ui
+  | |->o_tab->execute()
+      |->by_object->multiple_execute()
+  |
+  |->check()                                #Check given values
+    |->o_tab->check()
+      |->by_object->multiple_check()
+  |
+  |->save_object()                          #Save posts 
+    |->o_tab->save_object()
+      |->by_object->multiple_save_object()
+  |
+  |->save()                                 #Save collected values 
+    |->populate_values()                    #Populate values to all handles
+      |->o_tab->get_multi_edit_values()     #Get values to populate
+      |->handles->set_multi_edit_values()   #Set values 
+    |->handles->save()                      #Save handles
+  
+
+
+
 Using this class: 
 =================
   Simple Example:
@@ -181,7 +236,6 @@ class multi_plug
 
   
   /*! \brief    Detect values that are used in all edited objects.
-   * @returns   array   All multiple used attributes
    */  
   private function detect_multiple_used_attributes()
   {

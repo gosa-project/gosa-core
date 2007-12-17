@@ -1713,6 +1713,14 @@ class plugin
     }
   }
 
+ 
+  /*! \brief  Enables multiple support for this plugin
+   */
+  function enable_multiple_support()
+  {
+    $this->multiple_support_active = TRUE;
+  }
+
 
   /*! \brief  Returns all values that have been modfied in multiple edit mode.
       @return array Cotaining all mdofied values. 
