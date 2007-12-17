@@ -1043,6 +1043,60 @@ class posixAccount extends plugin
     return ($message);
   }
 
+
+  function multiple_check()
+  {
+    $message = plugin::multiple_check();
+    if ($this->homeDirectory == "" && in_array("homeDirectory",$this->multi_boxes)){
+      $message[]= _("The required field 'Home directory' is not set.");
+    }
+    if (!is_path($this->homeDirectory) && in_array("homeDirectory",$this->multi_boxes)){
+      $message[]= _("Please enter a valid path in 'Home directory' field.");
+    }
+
+    /* Check shadow settings, well I like spaghetties... */
+    if ($this->activate_shadowMin && in_array("activate_shadowMin",$this->multi_boxes)){
+      if (!is_id($this->shadowMin)){
+        $message[]= _("Value specified as 'shadowMin' is not valid.");
+      }
+    }
+    if ($this->activate_shadowMax && in_array("activate_shadowMax",$this->multi_boxes)){
+      if (!is_id($this->shadowMax)){
+        $message[]= _("Value specified as 'shadowMax' is not valid.");
+      }
+    }
+    if ($this->activate_shadowWarning && in_array("activate_shadowWarning",$this->multi_boxes)){
+      if (!is_id($this->shadowWarning)){
+        $message[]= _("Value specified as 'shadowWarning' is not valid.");
+      }
+      if (!$this->activate_shadowMax && in_array("activate_shadowMax",$this->multi_boxes)){
+        $message[]= _("'shadowWarning' without 'shadowMax' makes no sense.");
+      }
+      if ($this->shadowWarning > $this->shadowMax && in_array("activate_shadowWarning",$this->multi_boxes)){
+        $message[]= _("Value specified as 'shadowWarning' should be smaller than 'shadowMax'.");
+      }
+      if ($this->activate_shadowMin && $this->shadowWarning < $this->shadowMin && in_array("activate_shadowMin",$this->multi_boxes)){
+        $message[]= _("Value specified as 'shadowWarning' should be greater than 'shadowMin'.");
+      }
+    }
+    if ($this->activate_shadowInactive && in_array("activate_shadowInactive",$this->multi_boxes)){
+      if (!is_id($this->shadowInactive)){
+        $message[]= _("Value specified as 'shadowInactive' is not valid.");
+      }
+      if (!$this->activate_shadowMax && in_array("activate_shadowMax",$this->multi_boxes)){
+        $message[]= _("'shadowInactive' without 'shadowMax' makes no sense.");
+      }
+    }
+    if ($this->activate_shadowMin && $this->activate_shadowMax && in_array("activate_shadowMin",$this->multi_boxes)){
+      if ($this->shadowMin > $this->shadowMax){
+        $message[]= _("Value specified as 'shadowMin' should be smaller than 'shadowMax'.");
+      }
+    }
+
+    return($message);
+  }
+
+
   function addGroup ($groups)
   {
     /* include global link_info */
