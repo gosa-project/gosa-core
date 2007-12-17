@@ -130,8 +130,9 @@ class selectPrinterDialog extends plugin
     $module = $this->module;
     $base   = $this->depselect;
     $attrs  = array("cn","description");
+
     if ($this->subtreesearch){
-      $res    = get_list($filter,$module,$base,$attrs, GL_SIZELIMIT, GL_SUBSEARCH);
+      $res    = get_list($filter,$module,$base,$attrs, GL_SIZELIMIT | GL_SUBSEARCH);
     } else {
       $base= "ou=printers,ou=systems,".$base;
       $res    = get_list($filter,$module,$base,$attrs, GL_SIZELIMIT);
