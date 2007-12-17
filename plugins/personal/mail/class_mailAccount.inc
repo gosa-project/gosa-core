@@ -1211,8 +1211,15 @@ class mailAccount extends plugin
   function init_multiple_support($attrs,$all)
   {
     plugin::init_multiple_support($attrs,$all);
+   
+     
+  }
 
-    
+  function get_multi_init_values()
+  {
+    $attrs = plugin::get_multi_init_values();
+    $attrs['gosaMailQuota'] = $this->gosaMailQuota;
+    return($attrs);
   }
 
   function multiple_execute()

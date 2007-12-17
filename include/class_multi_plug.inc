@@ -60,8 +60,10 @@ multi_plug::multi_plug()
   |
   |->o_tab->enable_multiple_support()       #Enable multiple support for ui handle
   |->detect_multiple_used_attributes()      #Update ui handle with some default values
-    |->handles->attrs
-    |->ui->attrs
+    |->handles[]
+      |->by_object->get_multi_init_values() #Get attributes from all handles
+    |->o_tab
+      |->by_object->init_multiple_support() #Assign values to ui handle
   |
   |->execute()                              #Display ui
   | |->o_tab->execute()
@@ -184,11 +186,20 @@ class multi_plug
    */  
   private function array_combine($base,$add)
   {
+
     foreach($add as $key => $attr) {
       if(!is_numeric($key)){
+  
+        if(!is_array($add[$key])){
+          $add[$key] = array('count' => 1,$add[$key]);
+        }
+
         if(!isset($base[$key])){
           $base[$key] = $add[$key]; 
-        }elseif(is_array($add[$key])){
+        }else{
+          if(!isset($add[$key]['count'])){
+            $add[$key]['count'] = count($add[$key]);
+          }
           for($i=0;$i<$add[$key]['count'];$i++){
             if(!in_array($add[$key][$i],$base[$key])){
               $base[$key][] = $add[$key][$i];
@@ -218,6 +229,9 @@ class multi_plug
         unset($base[$key]);
       }elseif(is_array($base[$key])){
         $tmp = array();
+          if(!isset($base[$key]['count'])){
+            $base[$key]['count'] = count($base[$key]);
+          }
         for($i = 0 ; $i < $base[$key]['count'] ; $i ++){
           if(isset($base[$key][$i]) && in_array($base[$key][$i],$minus[$key])){
             $tmp[] = $base[$key][$i];
@@ -239,18 +253,21 @@ class multi_plug
    */  
   private function detect_multiple_used_attributes()
   {
-    $attrs = array();
-    $first = $this->o_tab->current;
-    $all   = array();
-    foreach($this->a_handles as $handle){
-      if(count($attrs) == 0){
-        $attrs = $handle->by_object[$first]->attrs;
-      }else{
-        $attrs = $this->array_intersect($attrs,$handle->by_object[$first]->attrs);
+    foreach($this->o_tab->by_object as $name => $plug){
+
+      if(empty($name))    continue;
+
+      $attrs = array();
+      $all   = array();
+      foreach($this->a_handles as $hid => $handle){
+        $h_attrs = $this->a_handles[$hid]->by_object[$name]->get_multi_init_values();
+        if(count($attrs) == 0){
+          $attrs = $h_attrs;
+        }else{
+          $attrs = $this->array_intersect($attrs,$h_attrs);
+        }
+        $all = $this->array_combine($all,$h_attrs);
       }
-      $all = $this->array_combine($all,$handle->by_object[$first]->attrs);
-    }
-    foreach($this->o_tab->by_object as $name => $obj){
       $this->o_tab->by_object[$name]->init_multiple_support($attrs,$all);
     }
   }

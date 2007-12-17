@@ -151,12 +151,12 @@ class posixAccount extends plugin
       $ldap->cd($this->config->current['BASE']);
       $ldap->search("(&(objectClass=posixGroup)(memberUid=".$this->uid."))", array("cn", "description"));
 
-      while ($this->attrs= $ldap->fetch()){
-        if (!isset($this->attrs["description"][0])){
-          $entry= $this->attrs["cn"][0];
+      while ($attrs= $ldap->fetch()){
+        if (!isset($attrs["description"][0])){
+          $entry= $attrs["cn"][0];
         } else {
-          $dsc= preg_replace ('/^Group of user/', _("Group of user"), $this->attrs["description"][0]);
-          $entry= $this->attrs["cn"][0]." [$dsc]";
+          $dsc= preg_replace ('/^Group of user/', _("Group of user"), $attrs["description"][0]);
+          $entry= $attrs["cn"][0]." [$dsc]";
         }
         $this->groupMembership[$ldap->getDN()]= $entry;
       }

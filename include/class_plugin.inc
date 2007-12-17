@@ -1800,6 +1800,18 @@ class plugin
   }
 
 
+  /*! \brief  Returns all attributes of this plugin, 
+               to be able to detect multiple used attributes 
+               in multi_plugg::detect_multiple_used_attributes().
+      @return array Attributes required for intialization of multi_plug
+   */
+  public function get_multi_init_values()
+  {
+    $attrs = $this->attrs;
+    return($attrs);
+  }
+
+
   /*! \brief  Check given values in multiple edit
       @return array Error messages
    */
