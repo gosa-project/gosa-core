@@ -656,6 +656,16 @@ class mailAccount extends plugin
     $smarty->assign("spamlevel", $spamlevel);
     $smarty->assign("spambox", $this->mailboxList);
 
+    foreach($this->attributes as $attr){
+      $u_attr = "use_".$attr;
+      $smarty->assign($u_attr,in_array($attr,$this->multi_boxes));
+    }
+
+    foreach(array("only_local","gosaMailForwardingAddress","use_mailsize_limit","drop_own_mails","use_vacation","use_spam_filter") as $attr){
+      $u_attr = "use_".$attr;
+      $smarty->assign($u_attr,in_array($attr,$this->multi_boxes));
+    }
+
     $smarty->assign("multiple_support",$this->multiple_support_active);
     $display.= $smarty->fetch (get_template_path('generic.tpl', TRUE, dirname(__FILE__)));
     return ($display);
@@ -1211,8 +1221,10 @@ class mailAccount extends plugin
   function init_multiple_support($attrs,$all)
   {
     plugin::init_multiple_support($attrs,$all);
-   
-     
+
+    if(isset($this->multi_attrs['gosaMailQuota'])){
+      $this->gosaMailQuota = $this->multi_attrs['gosaMailQuota'];
+    }
   }
 
   function get_multi_init_values()
@@ -1225,6 +1237,72 @@ class mailAccount extends plugin
   function multiple_execute()
   {
     return($this->execute());
+  }
+
+  function multiple_save_object()
+  {
+    plugin::multiple_save_object();
+
+    $this->save_object();
+    foreach(array("only_local","gosaMailForwardingAddress","use_mailsize_limit","drop_own_mails","use_vacation","use_spam_filter") as $attr){
+      if(isset($_POST["use_".$attr])){
+        $this->multi_boxes[] = $attr;
+      }
+    }
+  }
+
+  function get_multi_edit_values()
+  {
+    $ret = plugin::get_multi_edit_values();
+
+    if(in_array("gosaMailQuota",$this->multi_boxes)){
+      $ret['gosaMailQuota'] = $this->gosaMailQuota;
+    }
+
+    $flag_add = $flag_remove = array();
+    $tmp= preg_replace("/[^a-z]/i","",$this->gosaMailDeliveryMode);
+    $opts = array(
+        "R"   => "use_mailsize_limit",
+        "S"   => "use_spam_filter",
+        "L"   => "only_local",
+        "V"   => "use_vacation",
+        "C"   => "own_script",
+        "I"   => "drop_own_mails");
+
+    foreach($opts as $flag => $post){
+      if(in_array($post, $this->multi_boxes)){
+        if(preg_match("/".$flag."/",$tmp)){
+          $flag_add[] = $flag;
+        }else{
+          $flag_remove[] = $flag;
+        }
+      }
+    }
+  
+    $ret['flag_add'] = $flag_add;
+    $ret['flag_remove'] = $flag_remove;
+    return($ret);
+  }
+
+  function set_multi_edit_values($values)
+  {
+    plugin::set_multi_edit_values($values);
+    $tmp= preg_replace("/[^a-z]/i","",$this->gosaMailDeliveryMode);
+    if(isset($values['flag_add'])){
+      foreach($values['flag_add'] as $flag){
+        if(!preg_match("/".$flag."/",$tmp)){
+          $tmp .= $flag;
+        }
+      }
+    }
+    if(isset($values['flag_remove'])){
+      foreach($values['flag_remove'] as $flag){
+        if(preg_match("/".$flag."/",$tmp)){
+          $tmp = preg_replace("/".$flag."/","",$tmp);
+        }
+      }
+    }
+    $this->gosaMailDeliveryMode = "[".$tmp."]";
   }
 }
 
