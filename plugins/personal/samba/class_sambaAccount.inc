@@ -92,6 +92,9 @@ class sambaAccount extends plugin
   var $CopyPasteVars = array("kickoff_time_set","logoff_time_set","logon_time_set","mungedObject","orig_sambaDomainName");
 
   var $multiple_support = TRUE;
+  /* Only used  for multiple edit */
+  var $temporary_disable = FALSE;
+  var $no_password_required = FALSE;
 
   function sambaAccount (&$config, $dn= NULL)
   {
@@ -770,9 +773,11 @@ class sambaAccount extends plugin
         $this->sambaPwdCanChange= $tmp;
       }
       $tmp= "UX";
+      $this->no_password_required = FALSE;
       if (isset($_POST["no_password_required"])){
         if ($_POST["no_password_required"] == 1){
           $tmp.= "N";
+          $this->no_password_required = TRUE;
         }
       }
       if (isset($_POST["password_expires"])){
@@ -782,8 +787,10 @@ class sambaAccount extends plugin
       } else {
         $this->password_expires= 0;
       }
+      $this->temporary_disable = FALSE;
       if (isset($_POST["temporary_disable"])){
         if ($_POST["temporary_disable"] == 1){
+          $this->temporary_disable = TRUE;
           if (is_integer(strpos($this->sambaAcctFlags, "L"))) {
             $tmp.= "L";
           } else {
@@ -1267,7 +1274,37 @@ class sambaAccount extends plugin
       $ret["reconn"]    =$this->mungedObject->getReConn();
     }
 
-    print_a($ret);
+    /* Flags */
+    if(in_array("allow_pwchange",$this->multi_boxes)){
+      $ret['sambaPwdCanChange'] = $this->sambaPwdCanChange;
+      $ret['pwdCanChange']      = $this->pwdCanChange;
+    }
+  
+    if(in_array("password_expires",$this->multi_boxes)){
+      $ret['password_expires']  = $this->password_expires;
+      $ret['sambaPwdMustChange']= $this->sambaPwdMustChange;
+    }
+    if(in_array("logon_time_set",$this->multi_boxes)){
+      $ret['logon_time_set'] = $this->logon_time_set;
+      $ret['sambaLogonTime'] = $this->sambaLogonTime;
+    }
+    if(in_array("logoff_time_set",$this->multi_boxes)){
+      $ret['logoff_time_set'] = $this->logoff_time_set;
+      $ret['sambaLogoffTime'] = $this->sambaLogoffTime;
+    }
+    if(in_array("kickoff_time_set",$this->multi_boxes)){
+      $ret['kickoff_time_set'] = $this->kickoff_time_set;
+      $ret['sambaKickoffTime'] = $this->sambaKickoffTime;
+    }
+
+    if(in_array("no_password_required",$this->multi_boxes)){
+      $ret['no_password_required'] = $this->no_password_required;
+    }
+
+    if(in_array("temporary_disable",$this->multi_boxes)){
+      $ret['temporary_disable'] = $this->temporary_disable;
+    }
+
     return($ret);
   }
 
@@ -1301,6 +1338,52 @@ class sambaAccount extends plugin
     if(isset($values['shadow']))        $this->mungedObject->setShadow($values['shadow'],$values['shadow']);
     if(isset($values['brokenconn']))    $this->mungedObject->setBrokenConn($values['brokenconn'],$values['brokenconn']);
     if(isset($values['reconn']))        $this->mungedObject->setReConn($values['reconn'],$values['reconn']);
+
+  
+    if(isset($values['sambaPwdCanChange']))  $this->sambaPwdCanChange  = $values['sambaPwdCanChange'];
+    if(isset($values['pwdCanChange']))       $this->pwdCanChange       = $values['pwdCanChange'];
+
+    
+    
+
+    if(isset($values['password_expires'])){
+      $this->password_expires = $values['password_expires'];
+      $this->sambaPwdMustChange = $values['sambaPwdMustChange'];
+    }
+    if(isset($values['logon_time_set'])){
+      $this->logon_time_set = $values['logon_time_set'];
+      $this->sambaLogonTime = $values['sambaLogonTime'];
+    }
+    if(isset($values['logoff_time_set'])){
+      $this->logoff_time_set = $values['logoff_time_set'];
+      $this->sambaLogoffTime = $values['sambaLogoffTime'];
+    }
+    if(isset($values['kickoff_time_set'])){
+      $this->kickoff_time_set = $values['kickoff_time_set'];
+      $this->sambaKickoffTime = $values['sambaKickoffTime'];
+    }
+
+    if(isset($values['no_password_required'])){
+      if($values['no_password_required']){
+        if(!preg_match("/N/",$this->sambaAcctFlags)) {
+          $this->sambaAcctFlags = preg_replace("/ /","N",$this->sambaAcctFlags,1);
+        }
+      }else{
+        $this->sambaAcctFlags = preg_replace("/N/"," ",$this->sambaAcctFlags,1);
+      }
+    }      
+
+    if(isset($values['temporary_disable'])){
+      if($values['temporary_disable']){
+        if(preg_match("/L/",$this->sambaAcctFlags)) {
+          // Keep L
+        }else{
+          $this->sambaAcctFlags = preg_replace("/ /","D",$this->sambaAcctFlags,1);
+        }
+      }else{
+        $this->sambaAcctFlags = preg_replace("/D/"," ",$this->sambaAcctFlags,1);
+      }
+    }
   }
 }
 
