@@ -91,6 +91,8 @@ class sambaAccount extends plugin
   var $uid= "";
   var $CopyPasteVars = array("kickoff_time_set","logoff_time_set","logon_time_set","mungedObject","orig_sambaDomainName");
 
+  var $multiple_support = TRUE;
+
   function sambaAccount (&$config, $dn= NULL)
   {
     /* Load attributes depending on the samba version */
@@ -213,28 +215,31 @@ class sambaAccount extends plugin
       return ($display);
     }
 
-    /* Show tab dialog headers */
-    $display= "";
-    if ($this->parent !== NULL){
-      if ($this->is_account){
-        $display= $this->show_disable_header(_("Remove samba account"),
-            _("This account has samba features enabled. You can disable them by clicking below."));
-      } else {
-        $obj= $this->parent->by_object['posixAccount'];
+    $display ="";
+    if(!$this->multiple_support_active){
 
-        /* Samba3 dependency on posix accounts are enabled
-           in the moment, because I need to rely on unique
-           uidNumbers. There'll be a better solution later
-           on. */
-        if ($obj->is_account){
-
-          $display= $this->show_enable_header(_("Create samba account"),
-              _("This account has samba features disabled. You can enable them by clicking below."));
+      /* Show tab dialog headers */
+      $display= "";
+      if ($this->parent !== NULL){
+        if ($this->is_account){
+          $display= $this->show_disable_header(_("Remove samba account"),
+              _("This account has samba features enabled. You can disable them by clicking below."));
         } else {
-          $display= $this->show_enable_header(_("Create samba account"),
-              _("This account has samba features disabled. Posix features are needed for samba accounts, enable them first."), TRUE);
+          $obj= $this->parent->by_object['posixAccount'];
+
+          /* Samba3 dependency on posix accounts are enabled
+             in the moment, because I need to rely on unique
+             uidNumbers. There'll be a better solution later
+             on. */
+          if ($obj->is_account){
+            $display= $this->show_enable_header(_("Create samba account"),
+                _("This account has samba features disabled. You can enable them by clicking below."));
+          } else {
+            $display= $this->show_enable_header(_("Create samba account"),
+                _("This account has samba features disabled. Posix features are needed for samba accounts, enable them first."), TRUE);
+          }
+          return ($display);
         }
-        return ($display);
       }
     }
 
@@ -626,7 +631,30 @@ class sambaAccount extends plugin
       }
     }
 
+
+    foreach($this->attributes as $attr){
+      if(in_array($attr,$this->multi_boxes)){
+        $smarty->assign("use_".$attr,TRUE);
+      }else{
+        $smarty->assign("use_".$attr,FALSE);
+      }
+    }
+    foreach(array("allow_pwchange","tslogin","CtxWFHomeDir","CtxWFHomeDirDrive","CtxWFProfilePath",
+          "inherit","CtxWorkDirectory","CtxInitialProgram","CtxMaxConnectionTimeF","CtxMaxConnectionTime","CtxMaxDisconnectionTimeF",
+          "CtxMaxDisconnectionTime","CtxMaxIdleTimeF","CtxMaxIdleTime","connectclientdrives",
+          "onnectclientprinters","defaultprinter","shadow","brokenconn",
+          "reconn","allow_pwchange","connectclientprinters","no_password_required","temporary_disable", 
+          "password_expires","logon_time_set","logoff_time_set","kickoff_time_set","SetSambaLogonHours",
+          "workstation_list") as $attr){
+      if(in_array($attr,$this->multi_boxes)){
+        $smarty->assign("use_".$attr,TRUE);
+      }else{
+        $smarty->assign("use_".$attr,FALSE);
+      }
+    }
+
     /* Show main page */
+    $smarty->assign("multiple_support",$this->multiple_support_active);
     if ($this->samba3){
       $display.= $smarty->fetch (get_template_path('samba3.tpl', TRUE, dirname(__FILE__)));
     } else {
@@ -1136,6 +1164,144 @@ class sambaAccount extends plugin
             "sambaUserWorkstations" => _("Allow connection from")))
               );
   }    
+
+  function enable_multiple_support()
+  {
+    plugin::enable_multiple_support();
+    if($this->samba3){
+      $this->multiple_support_active = TRUE;
+    }else{
+      $this->multiple_support_active = FALSE;
+    }
+  } 
+
+  function multiple_save_object()
+  {
+    $this->save_object();
+    plugin::multiple_save_object();
+    foreach(array("allow_pwchange","tslogin","CtxWFHomeDir","CtxWFHomeDirDrive","CtxWFProfilePath",
+          "inherit","CtxWorkDirectory","CtxInitialProgram","CtxMaxConnectionTimeF","CtxMaxConnectionTime","CtxMaxDisconnectionTimeF",
+          "CtxMaxDisconnectionTime","CtxMaxIdleTimeF","CtxMaxIdleTime","connectclientdrives",
+          "onnectclientprinters","defaultprinter","shadow","brokenconn",
+          "reconn","allow_pwchange","connectclientprinters","no_password_required","temporary_disable",
+          "password_expires","logon_time_set","logoff_time_set","kickoff_time_set","SetSambaLogonHours",
+          "workstation_list") as $attr){
+      if(isset($_POST["use_".$attr])){
+        $this->multi_boxes[] = $attr;
+      }
+    }
+  }
+
+  function multiple_execute()
+  {
+    return($this->execute());
+  } 
+
+  function get_multi_edit_values()
+  {
+    $ret = plugin::get_multi_edit_values();
+
+    /* Terminal Server  */
+    if(in_array("tslogin",$this->multi_boxes)){
+      $ret['tslogin'] = $this->mungedObject->getTsLogin();
+    }
+    if(in_array("CtxWFHomeDirDrive",$this->multi_boxes)){
+      $ret['CtxWFHomeDirDrive'] = $this->mungedObject->ctx['CtxWFHomeDirDrive'];
+    }
+    if(in_array("CtxWFHomeDir",$this->multi_boxes)){
+      $ret['CtxWFHomeDir'] = $this->mungedObject->ctx['CtxWFHomeDir'];
+    }
+    if(in_array("CtxWFProfilePath",$this->multi_boxes)){
+      $ret['CtxWFProfilePath'] = $this->mungedObject->ctx['CtxWFProfilePath'];
+    }
+
+    if(in_array("inherit",$this->multi_boxes)){
+      $ret['inherit'] = $this->mungedObject->getInheritMode();
+    }       
+    if(in_array("CtxInitialProgram",$this->multi_boxes)){
+      $ret['CtxInitialProgram'] = $this->mungedObject->ctx['CtxInitialProgram'];
+    } 
+    if(in_array("CtxWorkDirectory",$this->multi_boxes)){
+      $ret['CtxWorkDirectory'] = $this->mungedObject->ctx['CtxWorkDirectory'];
+    } 
+
+    /* Time Limits. Be careful here, there are some negations  */
+    if(in_array("CtxMaxConnectionTimeF",$this->multi_boxes)){
+      $ret["CtxMaxConnectionTimeF"]   =  !$this->mungedObject->getCtxMaxConnectionTimeF();
+      if(!$ret["CtxMaxConnectionTimeF"]){
+        $ret["CtxMaxConnectionTime"]   =  $this->mungedObject->ctx['CtxMaxConnectionTime'];
+      }
+    }
+    if(in_array("CtxMaxDisconnectionTimeF",$this->multi_boxes)){
+      $ret["CtxMaxDisconnectionTimeF"]=  !$this->mungedObject->getCtxMaxDisconnectionTimeF();
+      if(!$ret["CtxMaxDisconnectionTimeF"]){
+        $ret["CtxMaxDisconnectionTime"]=  $this->mungedObject->ctx['CtxMaxDisconnectionTime'];
+      }
+    }
+    if(in_array("CtxMaxIdleTimeF",$this->multi_boxes)){
+      $ret["CtxMaxIdleTimeF"]         =  !$this->mungedObject->getCtxMaxIdleTimeF();
+      if(!$ret["CtxMaxIdleTimeF"]){
+        $ret["CtxMaxIdleTime"]         =  $this->mungedObject->ctx['CtxMaxIdleTime'];
+      }
+    }
+
+    /* Client Devices */
+    if(in_array("connectclientdrives",$this->multi_boxes)){
+      $ret["connectclientdrives"]     =  $this->mungedObject->getConnectClientDrives();
+    }
+    if(in_array("connectclientprinters",$this->multi_boxes)){
+      $ret["connectclientprinters"]   =  $this->mungedObject->getConnectClientPrinters();
+    }
+    if(in_array("defaultprinter",$this->multi_boxes)){
+      $ret["defaultprinter"]          =  $this->mungedObject->getDefaultPrinter();
+    }
+
+    /* Misc */
+    if(in_array("shadow",$this->multi_boxes)){
+      $ret["shadow"]    =$this->mungedObject->getShadow();
+    }
+    if(in_array("brokenconn",$this->multi_boxes)){
+      $ret["brokenconn"]=$this->mungedObject->getBrokenConn();
+    }
+    if(in_array("reconn",$this->multi_boxes)){
+      $ret["reconn"]    =$this->mungedObject->getReConn();
+    }
+
+    print_a($ret);
+    return($ret);
+  }
+
+  function set_multi_edit_values($values)
+  {
+    plugin::set_multi_edit_values($values);
+
+    /* Enable disabled terminal login, this is inverted somehow */
+    if(isset($values['tslogin']))   $this->mungedObject->setTsLogin(!$values['tslogin']);
+  
+    /* Imherit client configuration */
+    if(isset($values['inherit']))   $this->mungedObject->setInheritMode($values['inherit']);
+  
+    /* Get all ctx values posted */
+    $ctx = array("CtxWFHomeDirDrive","CtxWFHomeDir","CtxWFProfilePath","CtxInitialProgram","CtxWorkDirectory",
+                 "CtxMaxConnectionTime","CtxMaxDisconnectionTime","CtxMaxIdleTime");
+    foreach($ctx as $attr){
+      if(isset($values[$attr])){
+        $this->mungedObject->ctx[$attr] = $values[$attr] ;
+      }
+    }
+
+    if(isset($values['CtxMaxConnectionTimeF']))   $this->mungedObject->setCtxMaxConnectionTimeF($values['CtxMaxConnectionTimeF']);
+    if(isset($values['CtxMaxDisconnectionTimeF']))$this->mungedObject->setCtxMaxDisconnectionTimeF($values['CtxMaxDisconnectionTimeF']);
+    if(isset($values['CtxMaxIdleTimeF']))         $this->mungedObject->setCtxMaxIdleTimeF($values['CtxMaxIdleTimeF']);
+
+    if(isset($values['connectclientdrives']))   $this->mungedObject->setConnectClientDrives($values['connectclientdrives']);
+    if(isset($values['connectclientprinters'])) $this->mungedObject->setConnectClientPrinters($values['connectclientprinters']);
+    if(isset($values['defaultprinter']))        $this->mungedObject->setDefaultPrinter($values['defaultprinter']);
+
+    if(isset($values['shadow']))        $this->mungedObject->setShadow($values['shadow'],$values['shadow']);
+    if(isset($values['brokenconn']))    $this->mungedObject->setBrokenConn($values['brokenconn'],$values['brokenconn']);
+    if(isset($values['reconn']))        $this->mungedObject->setReConn($values['reconn'],$values['reconn']);
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
