@@ -432,24 +432,34 @@ class mailAccount extends plugin
       }
 
       /* Replace attributes */
-      $attrs= $this->parent->by_object['user']->attributes;
-      foreach ($attrs as $val){
-        
-        if(preg_match("/dateOfBirth/",$val)){
-          if($this->parent->by_object['user']->use_dob){
-            $contents= preg_replace("/%$val/",date("Y-d-m",$this->parent->by_object['user']->dateOfBirth),$contents);
+      $attrs = array();
+      $obj = NULL;
+      if(isset($this->parent->by_object['user'])){
+        $attrs  = $this->parent->by_object['user']->attributes;
+        $obj    = $this->parent->by_object['user'];
+      }else{
+        $obj    = new user($this->config,$this->dn);
+        $attrs  = $obj->attributes;
+      }
+
+      if($obj){
+        foreach ($attrs as $val){
+          if(preg_match("/dateOfBirth/",$val)){
+            if($obj->use_dob){
+              $contents= preg_replace("/%$val/",date("Y-d-m",$obj->dateOfBirth),$contents);
+            }
+          }else {
+            $contents= preg_replace("/%$val/",
+                $obj->$val, $contents);
           }
-        }else {
-          $contents= preg_replace("/%$val/",
-              $this->parent->by_object['user']->$val, $contents);
-        }
-        
-        /* Replace vacation start and end time */
-        if(preg_match("/%start/",$contents)){
-          $contents = preg_replace("/%start/",date("d.m.Y",$this->gosaVacationStart),$contents);
-        }
-        if(preg_match("/%end/",$contents)){
-          $contents = preg_replace("/%end/",date("d.m.Y",$this->gosaVacationStop),$contents);
+
+          /* Replace vacation start and end time */
+          if(preg_match("/%start/",$contents)){
+            $contents = preg_replace("/%start/",date("d.m.Y",$this->gosaVacationStart),$contents);
+          }
+          if(preg_match("/%end/",$contents)){
+            $contents = preg_replace("/%end/",date("d.m.Y",$this->gosaVacationStop),$contents);
+          }
         }
       }
 
@@ -810,9 +820,18 @@ class mailAccount extends plugin
           $this->is_modified= TRUE;
         }
         $this->gosaMailDeliveryMode= $tmp;
+
+
+        if($this->acl_is_writeable("gosaVacationMessage") && preg_match("/V/",$this->gosaMailDeliveryMode)){
+          if(isset($_POST['gosaVacationStart'])){
+            $this->gosaVacationStart = $_POST['gosaVacationStart'];
+          }
+          if(isset($_POST['gosaVacationStop'])){
+            $this->gosaVacationStop = $_POST['gosaVacationStop'];
+          }
+        }
       }
     }
-
   }
 
 
