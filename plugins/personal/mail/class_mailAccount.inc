@@ -861,8 +861,12 @@ class mailAccount extends plugin
       $this->gosaMailDeliveryMode= $tmp;
 
       if(chkacl($this->acl,"gosaVacationMessage") == "" && preg_match("/V/",$this->gosaMailDeliveryMode)){
-        $this->gosaVacationStart = $_POST['gosaVacationStart']; 
-        $this->gosaVacationStop = $_POST['gosaVacationStop']; 
+        if(isset($_POST['gosaVacationStart'])){
+          $this->gosaVacationStart = $_POST['gosaVacationStart'];
+        }
+        if(isset($_POST['gosaVacationStop'])){
+          $this->gosaVacationStop = $_POST['gosaVacationStop'];
+        }
       }
     }
   }
