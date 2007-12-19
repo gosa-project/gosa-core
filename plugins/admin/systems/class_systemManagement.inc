@@ -1158,14 +1158,16 @@ class systems extends plugin
       }
     }
 
-    $tmp=array();
+    $tmp  =array();
+    $tmp2 =array();
     foreach($this->terminals as $tkey => $val ){
       $tmp[strtolower($val['cn'][0]).$val['dn']]=$val;
+      $tmp2[strtolower($val['cn'][0]).$val['dn']] = strtolower($val['cn'][0]).$val['dn'];
     }
-    ksort($tmp);
+    natcasesort($tmp2);
     $this->terminals=array();
-    foreach($tmp as $val){
-      $this->terminals[]=$val;
+    foreach($tmp2 as $val){
+      $this->terminals[]=$tmp[$val];
     }
     reset ($this->terminals);
   }
