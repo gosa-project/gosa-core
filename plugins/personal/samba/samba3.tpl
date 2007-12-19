@@ -410,19 +410,35 @@
 {if $multiple_support}
 	<input type="checkbox" name="use_workstation_list" {if $use_workstation_list} checked {/if} class="center"
 		onClick="changeState('workstation_list');">
-{/if}
-{render acl=$sambaUserWorkstationsACL}
-   <select {if $multiple_support && !$use_workstation_list} disabled {/if} id="workstation_list" style="width:100%;" name="workstation_list[]" size=10 multiple>
-    {html_options values=$workstations output=$workstations}
+   <select {if $multiple_support && !$use_workstation_list} disabled {/if} 
+	id="workstation_list" style="width:100%;" name="workstation_list[]" size=10 multiple>
+	
+	{foreach from=$multiple_workstations item=item key=key}
+		{if $item.UsedByAllUsers}
+			<option value="{$key}">{$item.Name} ({t}Used by all users{/t})</option>
+		{else}
+			<option style='color: #888888; background: #DDDDDD;background-color: #DDDDDD;'
+				value="{$key}">{$item.Name} ({t}Used by some users{/t})</option>
+		{/if}
+	{/foreach}
    </select>
-{/render}
    <br>
-{render acl=$sambaUserWorkstationsACL}
    <input type="submit" value="{t}Add{/t}" name="add_ws">
-{/render}
-{render acl=$sambaUserWorkstationsACL}
    <input type="submit" value="{t}Delete{/t}" name="delete_ws">
-{/render}
+{else}
+	{render acl=$sambaUserWorkstationsACL}
+	   <select id="workstation_list" style="width:100%;" name="workstation_list[]" size=10 multiple>
+		{html_options values=$workstations output=$workstations}
+	   </select>
+	{/render}
+	   <br>
+	{render acl=$sambaUserWorkstationsACL}
+	   <input type="submit" value="{t}Add{/t}" name="add_ws">
+	{/render}
+	{render acl=$sambaUserWorkstationsACL}
+	   <input type="submit" value="{t}Delete{/t}" name="delete_ws">
+	{/render}
+{/if}
   </td>
  </tr>
 </table>

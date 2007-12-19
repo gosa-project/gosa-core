@@ -92,9 +92,11 @@ class sambaAccount extends plugin
   var $CopyPasteVars = array("kickoff_time_set","logoff_time_set","logon_time_set","mungedObject","orig_sambaDomainName");
 
   var $multiple_support = TRUE;
+
   /* Only used  for multiple edit */
   var $temporary_disable = FALSE;
   var $no_password_required = FALSE;
+  var $multiple_sambaUserWorkstations = array();
 
   function sambaAccount (&$config, $dn= NULL)
   {
@@ -273,7 +275,6 @@ class sambaAccount extends plugin
       return($this->dialog->execute());
     }
 
-
     /* Prepare templating */
     $smarty= get_smarty();
 
@@ -311,13 +312,21 @@ class sambaAccount extends plugin
 
       if($this->acl_is_writeable("sambaUserWorkstations",$SkipWrite)){
 
-        $tmp= $this->sambaUserWorkstations;
-        foreach($_POST['workstation_list'] as $name){
-          $tmp= preg_replace("/$name/", '', $tmp);
-          $this->is_modified= TRUE;
+        if($this->multiple_support_active){
+          foreach($_POST['workstation_list'] as $name){
+            if(isset($this->multiple_sambaUserWorkstations[trim($name)])){
+              unset($this->multiple_sambaUserWorkstations[trim($name)]);
+            }
+          } 
+        }else{
+          $tmp= $this->sambaUserWorkstations;
+          foreach($_POST['workstation_list'] as $name){
+            $tmp= preg_replace("/$name/", '', $tmp);
+            $this->is_modified= TRUE;
+          }
+          $tmp= preg_replace('/,+/', ',', $tmp);
+          $this->sambaUserWorkstations= trim($tmp, ',');
         }
-        $tmp= preg_replace('/,+/', ',', $tmp);
-        $this->sambaUserWorkstations= trim($tmp, ',');
       }
     }
 
@@ -337,12 +346,19 @@ class sambaAccount extends plugin
 
     /* Add user workstation? */
     if (isset($_POST["add_ws_finish"]) && isset($_POST['wslist'])){
-      $tmp= $this->sambaUserWorkstations;
-      foreach($_POST['wslist'] as $ws){
-        $tmp.= ",$ws";
+
+      if($this->multiple_support_active){
+        foreach($_POST['wslist'] as $ws){
+          $this->multiple_sambaUserWorkstations[trim($we)] = array("Name" => trim($ws), "UsedByAllUsers" => TRUE);
+        }
+      }else{
+        $tmp= $this->sambaUserWorkstations;
+        foreach($_POST['wslist'] as $ws){
+          $tmp.= ",$ws";
+        }
+        $tmp= preg_replace('/,+/', ',', $tmp);
+        $this->sambaUserWorkstations= trim($tmp, ',');
       }
-      $tmp= preg_replace('/,+/', ',', $tmp);
-      $this->sambaUserWorkstations= trim($tmp, ',');
       $this->is_modified= TRUE;
     }
 
@@ -367,8 +383,17 @@ class sambaAccount extends plugin
 
       /* Get workstation list */
       $exclude= "";
-      foreach(split(',', $this->sambaUserWorkstations) as $ws){
-        $exclude.= "(cn=$ws$)";
+
+      if($this->multiple_support_active){
+        foreach($this->multiple_sambaUserWorkstations as $ws){
+          if($ws['UsedByAllUsers']){
+            $exclude.= "(cn=".$ws['Name']."$)";
+          }
+        }
+      }else{
+        foreach(split(',', $this->sambaUserWorkstations) as $ws){
+          $exclude.= "(cn=$ws$)";
+        }
       }
       if ($exclude != ""){
         $exclude= "(!(|$exclude))";
@@ -559,6 +584,7 @@ class sambaAccount extends plugin
       $smarty->assign("CtxMaxIdleTimeF",
                       $this->mungedObject->getCtxMaxIdleTimeF()?"checked":"");
 
+      
       /* Fill sambaUserWorkstations */
       $ws= split(",", $this->sambaUserWorkstations);
       sort($ws);
@@ -566,6 +592,9 @@ class sambaAccount extends plugin
       /* Tidy checks for empty option, and smarty will produce one if array[0]="" */
       if(($ws[0]=="")&&(count($ws)==1)) $ws=array();
 
+      if($this->multiple_support_active){
+        $smarty->assign("multiple_workstations",$this->multiple_sambaUserWorkstations);
+      }  
 
       $smarty->assign("workstations", $ws);
     }
@@ -1184,17 +1213,62 @@ class sambaAccount extends plugin
 
   function multiple_save_object()
   {
-    $this->save_object();
-    plugin::multiple_save_object();
-    foreach(array("allow_pwchange","tslogin","CtxWFHomeDir","CtxWFHomeDirDrive","CtxWFProfilePath",
-          "inherit","CtxWorkDirectory","CtxInitialProgram","CtxMaxConnectionTimeF","CtxMaxConnectionTime","CtxMaxDisconnectionTimeF",
-          "CtxMaxDisconnectionTime","CtxMaxIdleTimeF","CtxMaxIdleTime","connectclientdrives",
-          "onnectclientprinters","defaultprinter","shadow","brokenconn",
-          "reconn","allow_pwchange","connectclientprinters","no_password_required","temporary_disable",
-          "password_expires","logon_time_set","logoff_time_set","kickoff_time_set","SetSambaLogonHours",
-          "workstation_list") as $attr){
-      if(isset($_POST["use_".$attr])){
-        $this->multi_boxes[] = $attr;
+    if (isset($_POST['sambaTab'])){
+      $this->save_object();
+      plugin::multiple_save_object();
+      foreach(array("allow_pwchange","tslogin","CtxWFHomeDir","CtxWFHomeDirDrive","CtxWFProfilePath",
+            "inherit","CtxWorkDirectory","CtxInitialProgram","CtxMaxConnectionTimeF","CtxMaxConnectionTime","CtxMaxDisconnectionTimeF",
+            "CtxMaxDisconnectionTime","CtxMaxIdleTimeF","CtxMaxIdleTime","connectclientdrives",
+            "onnectclientprinters","defaultprinter","shadow","brokenconn",
+            "reconn","allow_pwchange","connectclientprinters","no_password_required","temporary_disable",
+            "password_expires","logon_time_set","logoff_time_set","kickoff_time_set","SetSambaLogonHours",
+            "workstation_list") as $attr){
+        if(isset($_POST["use_".$attr])){
+          $this->multi_boxes[] = $attr;
+        }
+      }
+    }
+  }
+
+  
+  function get_multi_init_values()
+  {
+    $ret = plugin::get_multi_init_values();
+
+    /* Parse given sambaUserWorkstations into array
+     *  to allow "init_multiple_support()" to detect multiple used workstations.
+     *  Those workstations will be displayed in light grey.
+     */
+    $tmp2 = array("count" => 0);
+    $tmp = split(",", $this->sambaUserWorkstations);
+    foreach($tmp as $station){
+      $station = trim($station);
+      if(!empty($station)){
+        $tmp2[] = $station;
+        $tmp2['count'] ++;
+      }
+    } 
+    $ret['sambaUserWorkstations'] = $tmp2;
+    return($ret);
+  }
+
+
+
+  function init_multiple_support($attrs,$all)
+  {
+    plugin::init_multiple_support($attrs,$all);
+
+    $this->multiple_sambaUserWorkstations = array();
+    if(isset($all['sambaUserWorkstations'])){
+      for($i = 0 ; $i < $all['sambaUserWorkstations']['count'] ; $i++){
+        $station = trim($all['sambaUserWorkstations'][$i]);
+        $this->multiple_sambaUserWorkstations[$station] = array("Name" => $station, "UsedByAllUsers" => FALSE);
+      }
+    }
+    if(isset($attrs['sambaUserWorkstations'])){
+      for($i = 0 ; $i < $attrs['sambaUserWorkstations']['count'] ; $i++){
+        $station = trim($attrs['sambaUserWorkstations'][$i]);
+        $this->multiple_sambaUserWorkstations[$station] = array("Name" => $station, "UsedByAllUsers" => TRUE);
       }
     }
   }
@@ -1304,13 +1378,59 @@ class sambaAccount extends plugin
     if(in_array("temporary_disable",$this->multi_boxes)){
       $ret['temporary_disable'] = $this->temporary_disable;
     }
+    
+    if(in_array("SetSambaLogonHours",$this->multi_boxes)){
+      $ret['sambaLogonHours'] = $this->sambaLogonHours;
+    }
 
+    if(in_array("workstation_list",$this->multi_boxes)){
+      $ret['multiple_sambaUserWorkstations'] = $this->multiple_sambaUserWorkstations;
+    }
     return($ret);
   }
 
   function set_multi_edit_values($values)
   {
     plugin::set_multi_edit_values($values);
+
+    /* Prepare current workstation settings to be merged 
+     *  with multiple edit settings.
+     */
+    if(isset($values['multiple_sambaUserWorkstations'])){
+      $cur_ws = array();
+      $m_ws = $values['multiple_sambaUserWorkstations'];
+
+      /* Prepare current settings to be merged */
+      if(isset($this->sambaUserWorkstations)){
+        $ttmp = split(",",$this->sambaUserWorkstations);
+        foreach($ttmp as $station){
+          $station = trim($station);
+          if(!empty($station)){
+            $cur_ws[$station] = array("Name" => $station, "UsedByAllUsers" => TRUE);
+          }
+        }
+      }
+
+      /* Unset removed workstations */
+      foreach($cur_ws as $cur_name => $cur_station){
+        if(!isset($m_ws[$cur_name])){
+          unset($cur_ws[$cur_name]);
+        }
+      }
+
+      /* Add all added workstations */
+      foreach($m_ws as $name => $station){
+        if($station['UsedByAllUsers']){
+          $cur_ws[$name] = $station;
+        }
+      }
+
+      $this->sambaUserWorkstations = "";
+      foreach($cur_ws as $name => $ws){
+        $this->sambaUserWorkstations .= $name.",";
+      }
+      $this->sambaUserWorkstations=preg_replace("/,$/","",$this->sambaUserWorkstations);
+    }
 
     /* Enable disabled terminal login, this is inverted somehow */
     if(isset($values['tslogin']))   $this->mungedObject->setTsLogin(!$values['tslogin']);

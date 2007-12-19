@@ -74,7 +74,6 @@ class sambaLogonHours extends plugin
     $ui =get_userinfo();
 
     $smarty = get_smarty();
-    $smarty->assign("sambaLogonHoursACL",$ui->get_permissions($this->acl_base,"user/generic","sambaLogonHours"));
     $smarty->assign("Matrix",$this->Matrix);
     $smarty->assign("Days"  ,$week_days);
     $smarty->assign("Hours" ,$hours);
@@ -87,7 +86,7 @@ class sambaLogonHours extends plugin
     $ui = get_userinfo();
   
     /* Check if dialog was opened and if there were any changes */
-    if(isset($_POST['sambaLogonHoursPosted']) && preg_match("/w/i",$ui->get_permissions($this->acl_base,"user/generic","sambaLogonHours"))){
+    if(isset($_POST['sambaLogonHoursPosted'])){
       foreach($this->Matrix as $day_key => $days){
         foreach($days as $hour_key => $hour){
           if(isset($_POST['day_'.$day_key.'_'.$hour_key])){

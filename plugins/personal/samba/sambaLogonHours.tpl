@@ -51,16 +51,12 @@
         <td style="text-align:center; height: 22px; background-color: rgb(245, 245, 245); border-right: solid 1px #B0B0B0; text-align: right;">
       {/if}
 
-{render acl=$sambaLogonHoursACL}
       <input type='button' onClick="toggle_chk('^day_[0-9]*_{$hours}$');" value='+/-' style='width:100%;'>
-{/render}
     </td>
     {/foreach}
     <td>
 
-{render acl=$sambaLogonHoursACL}
       <input type='button' onClick="toggle_chk('^day_[0-9]*_[0-9]*$');" value='+/-' style='width:100%;'>
-{/render}
     </td>
   </tr>
 
@@ -77,22 +73,16 @@
         <td style="text-align:center;height: 22px; background-color: rgb(245, 245, 245); border-right: solid 1px;">
       {/if}
         {if $Matrix[$key_day].$key_hour}
-{render acl=$sambaLogonHoursACL}
           <input id='day_{$key_day}_{$key_hour}' type='checkbox' name='day_{$key_day}_{$key_hour}' checked >
-{/render}
         {else}
-{render acl=$sambaLogonHoursACL}
           <input id='day_{$key_day}_{$key_hour}' type='checkbox' name='day_{$key_day}_{$key_hour}' >
-{/render}
         {/if}
       </td>
     {/foreach}
 
     <!-- Add toggle button for days -->
     <td>  
-{render acl=$sambaLogonHoursACL}
       <input type='button' onClick="toggle_chk('^day_{$key_day}_[0-9]*$')" value='+/-'  style='padding:0px;margin:0px;'>
-{/render}
     </td>
   </tr>
 {/foreach}

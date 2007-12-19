@@ -1718,6 +1718,7 @@ class plugin
    */
   function enable_multiple_support()
   {
+    $this->ignore_account = TRUE;
     $this->multiple_support_active = TRUE;
   }
 
