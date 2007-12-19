@@ -521,14 +521,16 @@ class applicationManagement extends plugin
     }
    
     $res= get_list($Filter, "application", $use_base, array("cn","description","dn","objectClass"), $Flags);
+    $tmp2 = array();
     foreach ($res as $val){
       $tmp[strtolower($val['cn'][0]).$val['cn'][0].$val['dn']]=$val;
+      $tmp2[strtolower($val['cn'][0]).$val['cn'][0].$val['dn']] = strtolower($val['cn'][0]).$val['cn'][0].$val['dn'];
     }
 
-    ksort($tmp);
+    natcasesort($tmp2);
     $this->applications=array();
-    foreach($tmp as $val){
-      $this->applications[]=$val;
+    foreach($tmp2 as $val){
+      $this->applications[]=$tmp[$val];
     }
     reset ($this->applications);
   }

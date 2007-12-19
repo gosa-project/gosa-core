@@ -512,15 +512,17 @@ class deviceManagement extends plugin
 
     /* Get results and create index */
     $res= get_list($Filter, "devices", $base, array("cn","description","dn","objectClass"), $Flags);
+    $tmp2 = array();
     foreach ($res as $val){
+      $tmp2[strtolower($val['cn'][0]).$val['cn'][0].$val['dn']] = strtolower($val['cn'][0]).$val['cn'][0].$val['dn'];
       $tmp[strtolower($val['cn'][0]).$val['cn'][0].$val['dn']]=$val;
     }
 
     /* sort entries */
-    ksort($tmp);
+    natcasesort($tmp2);
     $this->devices=array();
-    foreach($tmp as $val){
-      $this->devices[]=$val;
+    foreach($tmp2 as $val){
+      $this->devices[]=$tmp[$val];
     }
     reset ($this->devices);
   }
