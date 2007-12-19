@@ -474,15 +474,17 @@ class mimetypeManagement extends plugin
   
     /* Get results and create index */ 
     $res= get_list($Filter, $this->ui->subtreeACL, $use_base, array("cn","description","dn","objectClass"), $Flags);
+    $tmp2 = array();
     foreach ($res as $val){
+      $tmp2[strtolower($val['cn'][0]).$val['cn'][0].$val['dn']] = strtolower($val['cn'][0]).$val['cn'][0].$val['dn'];
       $tmp[strtolower($val['cn'][0]).$val['cn'][0].$val['dn']]=$val;
     }
 
     /* sort entries */
-    ksort($tmp);
+    ksort($tmp2);
     $this->mimetypes=array();
-    foreach($tmp as $val){
-      $this->mimetypes[]=$val;
+    foreach($tmp2 as $val){
+      $this->mimetypes[]=$tmp[$val];
     }
     reset ($this->mimetypes);
   }

@@ -440,13 +440,15 @@ class ogroupManagement extends plugin
     ksort ($this->ogrouplist);
     reset ($this->ogrouplist);
     $tmp=array();
+    $tmp2 = array();
     foreach($this->ogrouplist as $tkey => $val ){
       $tmp[strtolower($val['cn'][0]).$val['cn'][0]]=$val;
+      $tmp2[strtolower($val['cn'][0]).$val['cn'][0]] = strtolower($val['cn'][0]).$val['cn'][0];
     }
-    ksort($tmp);
+    natcasesort($tmp2);
     $this->ogrouplist=array();
-    foreach($tmp as $val){
-      $this->ogrouplist[]=$val;
+    foreach($tmp2 as $val){
+      $this->ogrouplist[]=$tmp[$val];
     }
     reset ($this->ogrouplist);
   }

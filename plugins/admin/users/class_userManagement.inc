@@ -789,7 +789,7 @@ class userManagement extends plugin
         $SortTemp[$display] = $display;
       }
     }
-    sort($SortTemp);
+    natcasesort($SortTemp);
     reset($SortTemp);
 
     $this->list = array();

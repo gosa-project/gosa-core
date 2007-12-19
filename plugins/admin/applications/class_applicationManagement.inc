@@ -409,14 +409,16 @@ class applicationManagement extends plugin
     }
    
     $res= get_list($Filter, $this->ui->subtreeACL,$use_base, array("cn","description","dn","objectClass","FAIstate"), $Flags);
+    $tmp2 = array();
     foreach ($res as $val){
       $tmp[strtolower($val['cn'][0]).$val['cn'][0]]=$val;
+      $tmp2[strtolower($val['cn'][0]).$val['cn'][0]]=strtolower($val['cn'][0]).$val['cn'][0];
     }
 
-    ksort($tmp);
+    natcasesort($tmp2);
     $this->applications=array();
-    foreach($tmp as $val){
-      $this->applications[]=$val;
+    foreach($tmp2 as $val){
+      $this->applications[]=$tmp[$val];
     }
     reset ($this->applications);
   }
