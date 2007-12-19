@@ -5,6 +5,16 @@
     <img class="center" alt="" align="middle" src="images/banana.png" />
     &nbsp;{t}Phone numbers{/t}
    </h2>
+
+{if $multiple_support}
+
+   <select style="width:100%;" name="dummy1" size=7 >
+    {html_options options=$phoneNumbers}
+    <option disabled>&nbsp;</option>
+   </select>
+
+{else}
+
 {render acl=$telephoneNumberACL}
    <select style="width:100%;" name="phonenumber_list[]" size=7 multiple>
     {html_options options=$phoneNumbers}
@@ -21,6 +31,8 @@
 {render acl=$telephoneNumberACL}
       <input type="submit" value="{t}Delete{/t}" name="delete_phonenumber">
 {/render}
+
+{/if}
   </td>
   <td style="vertical-align:top; width:50%;">
    <table summary="" style="width:100%" border=0>
@@ -30,15 +42,21 @@
    <h2><img class="center" alt="" align="middle" src="images/hardware.png" />&nbsp;{t}Telephone hardware{/t}</h2>
 
       <table summary="{t}Telephone{/t}" border=0>
+	   {if !$multiple_support}
        <tr>
-        <td>{t}Telephone{/t}</td>
-        <td>{$hardware_list}</td>
+        <td>
+			{t}Telephone{/t}
+		</td>
+        <td>
+			{$hardware_list}
+		</td>
        </tr>
+	   {/if}
        <tr>
         <td>{t}Home server{/t}{$must}
         </td>
         <td>
-{render acl=$goFonHomeServerACL}
+{render acl=$goFonHomeServerACL checkbox=$multiple_support checked=$use_goFonHomeServer}
          <select name='goFonHomeServer' title='{t}Select the accounts home server{/t}'>
           {html_options options=$goFonHomeServers selected=$goFonHomeServer}
          </select>
@@ -50,7 +68,7 @@
         <label for="goFonVoicemailPIN">{t}Voicemail PIN{/t}{$must}</label>
        </td>
        <td>
-{render acl=$goFonVoicemailPINACL}
+{render acl=$goFonVoicemailPINACL checkbox=$multiple_support checked=$use_goFonVoicemailPIN}
         <input type="password" id="goFonVoicemailPIN" name="goFonVoicemailPIN" value="{$goFonVoicemailPIN}">
 {/render}
       </td>
@@ -60,7 +78,7 @@
         <label for="goFonPIN">{t}Phone PIN{/t}{$must}</label>
        </td>
        <td>
-{render acl=$goFonPINACL}
+{render acl=$goFonPINACL checkbox=$multiple_support checked=$use_goFonPIN}
         <input type="password" id="goFonPIN" name="goFonPIN" value="{$goFonPIN}">
 {/render}
       </td>
@@ -84,8 +102,8 @@
   <table summary="{t}Phone macro{/t}">
    <tr>
     <td colspan=2>
-{render acl=$goFonMacroACL}
-     <select name="macro" onchange="document.mainform.submit()">
+{render acl=$goFonMacroACL  checkbox=$multiple_support checked=$use_macro}
+     <select id="macro" name="macro" onchange="document.mainform.submit()">
       {html_options options=$macros selected=$macro}
       <option disabled>&nbsp;</option>
      </select>

@@ -47,6 +47,7 @@ class phoneAccount extends plugin
   var $uid;
 
   var $view_logged = FALSE;
+  var $multiple_support = TRUE;
 
   function phoneAccount (&$config, $dn= NULL, $parent= NULL)
   {
@@ -220,6 +221,7 @@ class phoneAccount extends plugin
       /* Check if makro has been removed */
       if(!isset($this->macros[$this->macro])){
         $this->macrostillavailable = false;
+        echo "1";
       }else{
         $this->macrostillavailable = true;
       }
@@ -822,6 +824,7 @@ class phoneAccount extends plugin
         /* Check if macro has been removed */
         if(!isset($this->macroarray[$this->macro])){
           $this->macrostillavailable = false;
+        echo "2";
         }else{
           $this->macrostillavailable = true;
         }
@@ -854,6 +857,33 @@ class phoneAccount extends plugin
       $this->is_account= !$this->is_account;
     }
 
+    /* Do we represent a valid account? */
+    if (!$this->is_account && $this->parent === NULL){
+      $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
+        _("This account has no phone extensions.")."</b>";
+      $display.= back_to_main();
+      return($display);
+    }
+
+    $display= "";
+
+    /* Show tab dialog headers */
+    
+    if (!$this->multiple_support_active && $this->parent !== NULL){
+      if ($this->is_account){
+        $display= $this->show_disable_header(_("Remove phone account"),
+            _("This account has phone features enabled. You can disable them by clicking below."));
+      } else {
+        if(empty($this->uid)){
+          $display= $this->show_enable_header(_("Create phone account"),
+              _("This account has phone features disabled. You can't enable them while no uid is set."),TRUE,TRUE);
+        }else{
+          $display= $this->show_enable_header(_("Create phone account"),
+              _("This account has phone features disabled. You can enable them by clicking below."));
+        }
+        return ($display);
+      }
+    }
     /* Select no macro if, state is empty, this is the case, if the selected macro is no longer available */
     if(empty($this->macro)){
       $this->macro ="none";
@@ -971,32 +1001,6 @@ class phoneAccount extends plugin
     $smarty->assign("macrotab",$macrotab);
 
 
-    /* Do we represent a valid account? */
-    if (!$this->is_account && $this->parent === NULL){
-      $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
-        _("This account has no phone extensions.")."</b>";
-      $display.= back_to_main();
-      return($display);
-    }
-
-    $display= "";
- /* Show tab dialog headers */
-    if ($this->parent !== NULL){
-      if ($this->is_account){
-        $display= $this->show_disable_header(_("Remove phone account"),
-            _("This account has phone features enabled. You can disable them by clicking below."));
-      } else {
-        if(empty($this->uid)){
-          $display= $this->show_enable_header(_("Create phone account"),
-              _("This account has phone features disabled. You can't enable them while no uid is set."),TRUE,TRUE);
-        }else{
-          $display= $this->show_enable_header(_("Create phone account"),
-              _("This account has phone features disabled. You can enable them by clicking below."));
-        }
-        return ($display);
-      }
-    }
-
     /* Add phone number */
     if (isset($_POST["add_phonenumber"]) && $_POST['phonenumber']){
       if (is_phone_nr($_POST['phonenumber'])){
@@ -1071,8 +1075,18 @@ class phoneAccount extends plugin
     $hl.= "</select>\n";
     $smarty->assign ("hardware_list", $hl);
 
+
+    foreach($this->attributes as $attr){
+      if(in_array($attr,$this->multi_boxes)){
+        $smarty->assign("use_".$attr,TRUE);
+      }else{
+        $smarty->assign("use_".$attr,FALSE);
+      }
+    }
+
     /* Show main page */
     $this->lastmacro = $this->macro;
+    $smarty->assign("multiple_support",$this->multiple_support_active);
     $display.= $smarty->fetch(get_template_path('generic.tpl', TRUE, dirname(__FILE__)));
     return($display);
   }
@@ -1505,6 +1519,58 @@ class phoneAccount extends plugin
             "goFonPIN"            => _("Telephone pin"),
             "goFonVoicemailPIN"   => _("Voicemail pin"))
           ));
+  }
+
+
+
+  function multiple_execute()
+  {
+    plugin::multiple_execute();
+    return($this->execute());
+  }
+
+  function get_multi_init_values()
+  {
+    $ret = plugin::get_multi_init_values();
+    $ret['phoneNumbers'] = array();
+    foreach($this->phoneNumbers as $number){
+      $ret['phoneNumbers'][] = $number."  [".$this->attrs['cn'][0]."]"; 
+    }
+    $ret['phoneNumbers']['count'] = count($ret['phoneNumbers']);
+    return($ret);
+  }
+
+  function init_multiple_support($attrs,$all)
+  {
+    plugin::init_multiple_support($attrs,$all);
+
+    $this->phoneNumbers = array();
+    if(isset($all['phoneNumbers'])){
+      for($i = 0 ; $i < $all['phoneNumbers']['count'] ; $i++){
+        $this->phoneNumbers[$all['phoneNumbers'][$i]] = $all['phoneNumbers'][$i];
+      }
+    }
+  }
+
+  function multiple_save_object()
+  {
+    /* Simply call parents save_object */
+    $this->save_object();
+    echo "<pre>Not finsihed yet 
+ Checks, Save_object anpassen.
+  Tests.
+ </pre>";
+  }
+
+  function get_multi_edit_values()
+  {
+    $ret = plugin::get_multi_edit_values();
+    if(in_array("macro",$this->multi_boxes)){
+      $ret['macro'] = $this->macro;
+      $ret['macroarray'] = $this->macroarray;
+      $ret['macros'] = $this->macros;
+    }
+    return($ret);
   }
 }
 
