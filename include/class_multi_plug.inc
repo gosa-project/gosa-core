@@ -131,6 +131,8 @@ class multi_plug
   public $config  = NULL;
   private $s_class= "";
   public $current = "";
+  public $by_object = array();
+  public $by_name = array();
 
   /*! \brief    Creates a multi_plug object
      @param   object  $config GOsa Configuration object
@@ -154,6 +156,9 @@ class multi_plug
      */
     $this->o_tab    = new $class($config,$tab,"new",$acl_category);
     $this->o_tab->set_acl_base($acl_base);
+    $this->by_object = &$this->o_tab->by_object;
+    $this->by_name   = &$this->o_tab->by_name;
+    $this->current   = &$this->o_tab->current;
 
     /* Check if the specified tab object supports multiple edits 
      */
@@ -278,7 +283,8 @@ class multi_plug
    */
   public function execute()
   {
-    return($this->o_tab->execute());
+    $str = $this->o_tab->execute();
+    return($str);
   }
 
 
