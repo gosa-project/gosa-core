@@ -64,6 +64,9 @@ class mailAccount extends plugin
   {
     global $class_mapping;
 
+    $this->gosaVacationStart = time();
+    $this->gosaVacationStop = time();
+
     /* Load bases attributes */
     plugin::plugin($config, $dn);
 
@@ -1283,6 +1286,45 @@ class mailAccount extends plugin
     $ret['flag_remove'] = $flag_remove;
     return($ret);
   }
+
+
+  function multiple_check()
+  {
+    $message = plugin::multiple_check();
+
+    if(empty($this->gosaMailServer) && in_array("gosaMailServer",$this->multi_boxes)){
+      $message[]= _("There is no valid mailserver specified, please add one in the system setup.");
+    }
+
+    /* Check quota */
+    if ($this->gosaMailQuota != ''  && in_array("gosaMailQuota",$this->multi_boxes)){
+      if (!is_numeric($this->gosaMailQuota)) {
+        $message[]= _("Value in 'Quota size' is not valid.");
+      } else {
+        $this->gosaMailQuota= (int) $this->gosaMailQuota;
+      }
+    }
+
+    /* Check rejectsize for integer */
+    if ($this->gosaMailMaxSize != '' && in_array("gosaMailMaxSize",$this->multi_boxes)){
+      if (!is_numeric($this->gosaMailMaxSize)){
+        $message[]= _("Please specify a vaild mail size for mails to be rejected.");
+      } else {
+        $this->gosaMailMaxSize= (int) $this->gosaMailMaxSize;
+      }
+    }
+
+    if(empty($this->gosaSpamMailbox) && in_array("gosaSpamMailbox",$this->multi_boxes)){
+      $message[]= _("You specified Spam settings, but there is no Folder specified.");
+    }
+
+    if (  in_array("use_vacation",$this->multi_boxes) &&
+          preg_match('/V/', $this->gosaMailDeliveryMode) && $this->gosaVacationStart > $this->gosaVacationStop){
+      $message[]= _("Time interval to show vacation message is not valid.");
+    }
+    return($message);
+  }
+
 
   function set_multi_edit_values($values)
   {
