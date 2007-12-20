@@ -50,6 +50,9 @@ class gofaxAccount extends plugin
 
   var $objectclasses= array("goFaxAccount");
 
+  /* Enable multiple edit support */
+  var $multiple_support = TRUE;
+
   function gofaxAccount (&$config, $dn= NULL)
   {
     /* General initialization */
@@ -86,10 +89,7 @@ class gofaxAccount extends plugin
     }
 
     /* Load printer list */
-    if (isset($this->config->data['SERVERS']['CUPS'])){
-      $this->printerList= get_printer_list ($this->config->data['SERVERS']['CUPS']);
-      asort ($this->printerList);
-    }
+    $this->printerList=get_printer_list();
 
     /* Check if the currently selected printer is still available. 
        If not, append current printer to list of available.
@@ -151,29 +151,34 @@ class gofaxAccount extends plugin
       $smarty->assign("has_mailaccount", "true");
     }
 
-    /* Do we need to flip is_account state? */
-    if (isset($_POST['modify_state'])){
-      $this->is_account= !$this->is_account;
-    }
 
-    /* Do we represent a valid account? */
-    if (!$this->is_account && $this->parent === NULL){
-      $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
-        _("This account has no fax extensions.")."</b>";
-      $display.= back_to_main();
-      return ($display);
-    }
+    $display = "";
+    if(!$this->multiple_support_active){    
 
-    /* Show tab dialog headers */
-    $display= "";
-    if ($this->parent !== NULL){
-      if ($this->is_account){
-        $display= $this->show_disable_header(_("Remove fax account"),
-            _("This account has fax features enabled. You can disable them by clicking below."));
-      } else {
-        $display= $this->show_enable_header(_("Create fax account"),
-            _("This account has fax features disabled. You can enable them by clicking below."));
+      /* Do we need to flip is_account state? */
+      if (isset($_POST['modify_state'])){
+        $this->is_account= !$this->is_account;
+      }
+
+      /* Do we represent a valid account? */
+      if (!$this->is_account && $this->parent === NULL){
+        $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
+          _("This account has no fax extensions.")."</b>";
+        $display.= back_to_main();
         return ($display);
+      }
+
+      /* Show tab dialog headers */
+      $display= "";
+      if ($this->parent !== NULL){
+        if ($this->is_account){
+          $display= $this->show_disable_header(_("Remove fax account"),
+              _("This account has fax features enabled. You can disable them by clicking below."));
+        } else {
+          $display= $this->show_enable_header(_("Create fax account"),
+              _("This account has fax features disabled. You can enable them by clicking below."));
+          return ($display);
+        }
       }
     }
 
@@ -607,7 +612,22 @@ class gofaxAccount extends plugin
       $smarty->assign("faxtoprinter", "");
     }
 
-
+    foreach($this->attributes as $attr){
+      if(in_array($attr,$this->multi_boxes)) {
+        $smarty->assign("use_".$attr,TRUE);
+      }else{
+        $smarty->assign("use_".$attr,FALSE);
+      }
+    }
+    foreach(array("goFaxIsEnabled","edit_outgoing","edit_incoming","faxtomail","faxtoprinter") as $attr){
+      if(in_array($attr,$this->multi_boxes)) {
+        $smarty->assign("use_".$attr,TRUE);
+      }else{
+        $smarty->assign("use_".$attr,FALSE);
+      }
+    }
+  
+    $smarty->assign("multiple_support",$this->multiple_support_active);
     $display.= $smarty->fetch (get_template_path('generic.tpl', TRUE, dirname(__FILE__)));
     return ($display);
   }
@@ -850,6 +870,97 @@ class gofaxAccount extends plugin
             "goFaxFormat"                       => _("Delivery format"),
             "goFaxLanguage"                     => _("Language"))
           ));
+  }
+
+  /* Multiple edit support 
+   */
+  
+  /* Execute */
+  function multiple_execute()
+  {
+    return($this->execute());
+  }
+
+  function multiple_save_object()
+  {
+    if (isset($_POST['faxTab'])){
+      plugin::multiple_save_object();
+      foreach(array("goFaxIsEnabled","edit_outgoing","edit_incoming","faxtomail","faxtoprinter") as $attr){
+        if(isset($_POST["use_".$attr])){
+          $this->multi_boxes[] = $attr;
+        }
+      }
+
+      $tmp = 0+$this->goFaxDeliveryMode;
+      if(in_array("faxtomail",$this->multi_boxes)){
+        if (isset($_POST["faxtomail"]) && $_POST["faxtomail"] == 1){
+          $tmp |= 32;
+        }elseif($tmp & 32){
+          $tmp &= (!32);
+        }
+      }
+      if(in_array("faxtoprinter",$this->multi_boxes)){
+        if (isset($_POST["faxtoprinter"]) && $_POST["faxtoprinter"] == 1){
+          $tmp |= 64;
+        }elseif($tmp & 64){
+          $tmp &= !64;
+        }
+      }
+      $this->goFaxDeliveryMode = $tmp;
+
+        if (isset($_POST["goFaxIsEnabled"]) && $_POST["goFaxIsEnabled"] == "1"){
+          $this->goFaxIsEnabled= "0";
+        } else {
+          $this->goFaxIsEnabled= "1";
+        }
+      if (isset($_POST['mail']) && in_array("mail",$this->multi_boxes)){
+        $this->mail= $_POST['mail'];
+      }
+    }
+  }
+
+  function get_multi_edit_values()
+  {
+    $ret = plugin::get_multi_edit_values();
+    if(in_array("goFaxIsEnabled",$this->multi_boxes)){
+      $ret['goFaxIsEnabled'] = $this->goFaxIsEnabled;
+    }
+    if(in_array("faxtoprinter",$this->multi_boxes)){
+      $ret['faxtoprinter'] = $this->goFaxDeliveryMode & 64;
+    }
+    if(in_array("faxtomail",$this->multi_boxes)){
+      $ret['faxtomail'] = $this->goFaxDeliveryMode & 32;
+    }
+
+    if(in_array("edit_incoming",$this->multi_boxes)){
+      $ret['goFaxRBlocklist'] = $this->goFaxRBlocklist;
+      $ret['goFaxRBlockgroups'] = $this->goFaxRBlockgroups;
+    }
+    if(in_array("edit_outgoing",$this->multi_boxes)){
+      $ret['goFaxSBlocklist'] = $this->goFaxSBlocklist;
+      $ret['goFaxSBlockgroups'] = $this->goFaxSBlockgroups;
+    }
+    return($ret);
+  }
+
+  function set_multi_edit_values($values)
+  {
+    plugin::set_multi_edit_values($values);
+
+    if(isset($values['faxtoprinter'])){
+      if($values['faxtoprinter']){
+        $this->goFaxDeliveryMode |= 64;
+      }else{
+        $this->goFaxDeliveryMode &= !64;
+      }
+    }
+    if(isset($values['faxtomail'])){
+      if($values['faxtomail']){
+        $this->goFaxDeliveryMode |= 32;
+      }else{
+        $this->goFaxDeliveryMode &= !32;
+      }
+    }
   }
 }
 
