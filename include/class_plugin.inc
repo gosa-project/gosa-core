@@ -1775,11 +1775,13 @@ class plugin
     /* Save values to object */
     $this->multi_boxes = array();
     foreach ($this->attributes as $val){
-      if ($this->acl_is_writeable($val) && isset ($_POST["$val"])){
+  
+      /* Get selected checkboxes from multiple edit */
+      if(isset($_POST["use_".$val])){
+        $this->multi_boxes[] = $val;
+      }
 
-        if(isset($_POST["use_".$val])){
-          $this->multi_boxes[] = $val;
-        }
+      if ($this->acl_is_writeable($val) && isset ($_POST["$val"])){
 
         /* Check for modifications */
         if (get_magic_quotes_gpc()) {

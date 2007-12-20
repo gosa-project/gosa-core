@@ -26,6 +26,8 @@ class pureftpdAccount extends plugin
   var $ReadOnly;
   var $view_logged = FALSE;
 
+  var $multiple_support=TRUE;
+
   function pureftpdAccount (&$config, $dn= NULL, $parent= NULL)
   {
     plugin::plugin ($config, $dn, $parent);
@@ -58,38 +60,58 @@ class pureftpdAccount extends plugin
 
     $tmp = $this->plInfo();
     $changeState = "";
-    foreach($tmp['plProvidedAcls'] as $key => $desc){
-      $smarty->assign($key."ACL", $this->getacl($key,$this->ReadOnly));
-      $smarty->assign($key."_W", $this->acl_is_writeable($key,$this->ReadOnly));
-  
-      if($this->acl_is_writeable($key)){
-        $changeState.= " changeState('".$key."'); \n";
+    if($this->multiple_support_active){
+
+      /* We do not need the attribute grey out in multiple edit */
+      foreach($tmp['plProvidedAcls'] as $key => $desc){
+        $smarty->assign($key."ACL", $this->getacl($key,$this->ReadOnly));
       }
-    }
-    $smarty->assign("changeState",$changeState);
-
-
-    $smarty->assign("fstate", "");
-    if ($this->is_account){
-      $smarty->assign("pureftpdState", "checked");
-      $smarty->assign("fstate", "");
-    } else {
-      $smarty->assign("pureftpdState", "");
-      if($_SESSION['js']==1){
-        if($this->acl!="#none#")
-        $smarty->assign("fstate", "disabled");
+      if ($this->is_account){
+        $smarty->assign("pureftpdState", "checked");
       }else{
+        $smarty->assign("pureftpdState", "");
+      }
+      $smarty->assign("fstate", "");
+      $smarty->assign("changeState","");
+
+    }else{
+      foreach($tmp['plProvidedAcls'] as $key => $desc){
+        $smarty->assign($key."ACL", $this->getacl($key,$this->ReadOnly));
+        $smarty->assign($key."_W", $this->acl_is_writeable($key,$this->ReadOnly));
+
+        if($this->acl_is_writeable($key)){
+          $changeState.= " changeState('".$key."'); \n";
+        }
+      }
+      $smarty->assign("changeState",$changeState);
+
+
+      $smarty->assign("fstate", "");
+      if ($this->is_account){
+        $smarty->assign("pureftpdState", "checked");
         $smarty->assign("fstate", "");
+      } else {
+        $smarty->assign("pureftpdState", "");
+        if($_SESSION['js']==1){
+          if($this->acl!="#none#")
+            $smarty->assign("fstate", "disabled");
+        }else{
+          $smarty->assign("fstate", "");
+        }
       }
     }
-    $smarty->assign("use_FTPStatus", ($this->FTPStatus == "disabled") ? "checked" : "");
-    
-    if((!$this->ReadOnly)&&(($this->is_account && $this->acl_is_removeable()) || (!$this->is_account && $this->acl_is_createable())) ){
-      $smarty->assign('pureftpdACL', "");
-    }else{
-      $smarty->assign('pureftpdACL', " disabled ");
-    }
 
+    foreach($this->attributes as $attr){
+      if(in_array($attr,$this->multi_boxes)){
+        $smarty->assign("use_".$attr,TRUE);
+      }else{
+        $smarty->assign("use_".$attr,FALSE);
+      }
+    }
+    $smarty->assign("use_pureftpd",in_array("pureftpd",$this->multi_boxes)); 
+    $smarty->assign("multiple_support",$this->multiple_support_active);
+    $smarty->assign("FTPStatus", ($this->FTPStatus == "disabled") ? "checked" : "");
+    $smarty->assign('pureftpdACL', $this->getacl("",$this->ReadOnly));
     $display.= $smarty->fetch (get_template_path('pureftpd.tpl', TRUE, dirname(__FILE__)));
     return ($display);
   }
@@ -250,6 +272,51 @@ class pureftpdAccount extends plugin
             "FTPStatus"             => _("Status"))
           ));
   }
+
+  function multiple_save_object()
+  {
+    if (isset($_POST['connectivityTab'])){
+      plugin::multiple_save_object();
+      if(isset($_POST['use_pureftpd'])){
+        $this->multi_boxes[] = "pureftpd";
+      }
+      $this->save_object();
+    }
+  }
+
+  function get_multi_init_values()
+  {
+    $ret = plugin::get_multi_init_values();
+    $ret['is_account'] = $this->is_account;
+    return($ret);
+  }
+
+  function init_multiple_support($attrs,$attr)
+  {
+    plugin::init_multiple_support($attrs,$attr);
+
+    if(isset($attrs['is_account'])){
+      $this->is_account = $attrs['is_account'];
+    }
+  }
+
+  function get_multi_edit_values()
+  {
+    $ret = plugin::get_multi_edit_values();
+    if(in_array("pureftpd",$this->multi_boxes)){
+      $ret['is_account'] = $this->is_account;
+    }
+    return($ret);
+  }
+
+  function set_multi_edit_values($values)
+  {
+    plugin::set_multi_edit_values($values);
+    if(isset($values['is_account'])){
+      $this->is_account = $values['is_account'];
+    }
+  }
+
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
