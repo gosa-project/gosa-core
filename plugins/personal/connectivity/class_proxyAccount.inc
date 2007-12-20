@@ -23,6 +23,8 @@ class proxyAccount extends plugin
   var $uid = "";
   var $view_logged = FALSE;
 
+  var $multiple_support = TRUE;
+
   function proxyAccount (&$config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
@@ -106,44 +108,63 @@ class proxyAccount extends plugin
       $smarty->assign("proxyState", "");
     }
 
-    /* Prepare correct state */
-    if (!$this->is_account){
-      $smarty->assign("pstate", "disabled");
-    } else {
+
+    if($this->multiple_support_active){
+
+      $changeA = $changeB = "";
       $smarty->assign("pstate", "");
-    }
-
-    $changeA = "";
+      $smarty->assign("ProxyWorkingStateChange","");
   
-    $ProxyWorkingStateChange ="\n";
-    if($this->acl_is_writeable("gosaProxyFlagT")){
-      $changeA .= "changeState('filterT');\n";
+    }else{
 
-      $ProxyWorkingStateChange.=  "changeState('startHour'); \n";
-      $ProxyWorkingStateChange.=  "changeState('startMinute'); \n";
-      $ProxyWorkingStateChange.=  "changeState('stopHour'); \n";
-      $ProxyWorkingStateChange.=  "changeState('stopMinute'); \n";
-    }
+      /* Prepare correct state */
+      if (!$this->is_account){
+        $smarty->assign("pstate", "disabled");
+      } else {
+        $smarty->assign("pstate", "");
+      }
 
-    if(preg_match("/F/",$this->gosaProxyAcctFlags)){
-      $changeA .= $ProxyWorkingStateChange;
-    }
-  
-    $smarty->assign("ProxyWorkingStateChange",$ProxyWorkingStateChange);
+      $changeA = "";
 
-    $changeB = "";
-    if($this->acl_is_writeable("gosaProxyFlagB")){
-      $changeA .= "changeState('filterB');";
-      $changeB = 
-        "changeSubselectState('filterB', 'quota_size');
-         changeSubselectState('filterB', 'quota_unit');
-         changeSubselectState('filterB', 'gosaProxyQuotaPeriod');";
+      $ProxyWorkingStateChange ="\n";
+      if($this->acl_is_writeable("gosaProxyFlagT")){
+        $changeA .= "changeState('filterT');\n";
+
+        $ProxyWorkingStateChange.=  "changeState('startHour'); \n";
+        $ProxyWorkingStateChange.=  "changeState('startMinute'); \n";
+        $ProxyWorkingStateChange.=  "changeState('stopHour'); \n";
+        $ProxyWorkingStateChange.=  "changeState('stopMinute'); \n";
+      }
+
+      if(preg_match("/F/",$this->gosaProxyAcctFlags)){
+        $changeA .= $ProxyWorkingStateChange;
+      }
+
+      $smarty->assign("ProxyWorkingStateChange",$ProxyWorkingStateChange);
+
+      $changeB = "";
+      if($this->acl_is_writeable("gosaProxyFlagB")){
+        $changeA .= "changeState('filterB');";
+        $changeB = 
+          "changeSubselectState('filterB', 'quota_size');
+        changeSubselectState('filterB', 'quota_unit');
+        changeSubselectState('filterB', 'gosaProxyQuotaPeriod');";
+      }
     }
 
     $smarty->assign("changeB",$changeB);
     $smarty->assign("changeA",$changeA);
 
     /* Show main page */
+    foreach(array("T","B","F") as $attr){
+      if(in_array("filter".$attr,$this->multi_boxes)){
+        $smarty->assign("use_filter".$attr,TRUE);
+      }else{
+        $smarty->assign("use_filter".$attr,FALSE);
+      }
+    }
+    $smarty->assign("use_proxy",in_array("proxy",$this->multi_boxes));
+    $smarty->assign("multiple_support",$this->multiple_support_active);
     $display.= $smarty->fetch(get_template_path('proxy.tpl', TRUE, dirname(__FILE__)));
     return($display);
   }
@@ -212,7 +233,7 @@ class proxyAccount extends plugin
     }
 
     /* Save flag value */
-    if ($this->is_account){
+    if ($this->is_account || $this->multiple_support_active){
 
       $flags= "";
       $acl= "";
@@ -318,6 +339,74 @@ class proxyAccount extends plugin
             "gosaProxyFlagT"       => _("Limit proxy access"),
             "gosaProxyFlagB"       => _("Restrict proxy usage by quota"))
           ));
+  }
+
+  function multiple_save_object()
+  {
+    if (isset($_POST['connectivityTab'])){
+      plugin::multiple_save_object();
+      if(isset($_POST['use_proxy'])){
+        $this->multi_boxes[] = "proxy";
+      }
+      foreach(array("T","B","F") as $attr){
+        if(isset($_POST["use_filter".$attr])){
+          $this->multi_boxes[] = "filter".$attr;
+        }
+      }
+      $this->save_object();
+    }
+  }
+
+  function get_multi_edit_values()
+  {
+    $ret = plugin::get_multi_edit_values();
+    if(in_array("proxy",$this->multi_boxes)){
+      $ret['is_account'] = $this->is_account;
+    }
+
+    if(in_array("filterT",$this->multi_boxes)){
+      $ret['gosaProxyWorkingStart']  = $this->gosaProxyWorkingStart;
+      $ret['gosaProxyWorkingStop']   = $this->gosaProxyWorkingStop;
+    }
+    if(in_array("filterB",$this->multi_boxes)){
+      $ret['gosaProxyQuota']        = $this->gosaProxyQuota;
+      $ret['gosaProxyQuotaPeriod']  = $this->gosaProxyQuotaPeriod;
+    }
+
+    foreach(array("B","T","F") as $attr){
+      $name = "filter".$attr;
+      if(in_array($name,$this->multi_boxes)){
+        $ret[$name] = preg_match("/".$attr."/",$this->gosaProxyAcctFlags);
+      }
+    }
+
+    return($ret);
+  }
+
+  function set_multi_edit_values($values)
+  {
+    plugin::set_multi_edit_values($values);
+    if(isset($values['is_account'])){
+      $this->is_account = $values['is_account'];
+    }
+    foreach(array("B","T","F") as $attr){
+      $name = "filter".$attr;
+      if(isset($values[$name])){
+        if($values[$name] && !preg_match("/".$attr."/",$this->gosaProxyAcctFlags)){
+          $this->gosaProxyAcctFlags = preg_replace("/\]/",$attr."]",$this->gosaProxyAcctFlags);
+        }elseif(!$values[$name] && preg_match("/".$attr."/",$this->gosaProxyAcctFlags)){
+          $this->gosaProxyAcctFlags = preg_replace("/".$attr."/","",$this->gosaProxyAcctFlags);
+        }
+      }
+    }
+  }
+
+  function init_multiple_support($attrs,$all)
+  {
+    plugin::init_multiple_support($attrs,$all);
+    if(isset($attrs['objectClass']) && in_array("gosaProxyAccount",$attrs['objectClass'])){
+      $this->is_account = TRUE;
+    }
   }
 }
 
