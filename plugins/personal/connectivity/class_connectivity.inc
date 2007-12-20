@@ -227,6 +227,22 @@ class connectivity extends plugin
     return($message);
   }
 
+  function get_multi_init_values()
+  {
+    $ret = array();
+    foreach($this->plugin as $name => $plugin){
+      $ret = array_merge($ret,$plugin->get_multi_init_values());
+    }
+    return($ret);
+  }
+
+  function init_multiple_support($attrs,$attr)
+  {
+    foreach($this->plugin as $name => $plugin){
+      $this->plugin[$name]->init_multiple_support($attrs,$attr);
+    }
+  }
+
   function get_multi_edit_values()
   {
     $ret['plugin'] = &$this->plugin;

@@ -87,7 +87,6 @@ class intranetAccount extends plugin
     }
 
     $smarty->assign('gosaIntranetACL', $this->getacl("",$this->ReadOnly));
-  
     $smarty->assign("use_intranet",in_array("intranet",$this->multi_boxes));
     $smarty->assign("multiple_support",$this->multiple_support_active);
     $display.= $smarty->fetch (get_template_path('intranet.tpl', TRUE, dirname(__FILE__)));
@@ -211,19 +210,19 @@ class intranetAccount extends plugin
   {
     if (isset($_POST['connectivityTab'])){
       plugin::multiple_save_object();
-      if (isset($_POST['intranet'])){
-        if (!$this->is_account && $_POST['intranet'] == "B"){
-          if($this->acl_is_createable()){
-            $this->is_account= TRUE;
-          }
-        }
-      } else {
-        if($this->acl_is_removeable()){
-          $this->is_account= FALSE;
-        }
-      }
       if(isset($_POST['use_intranet'])){
         $this->multi_boxes[] = "intranet";
+        if (isset($_POST['intranet'])){
+          if (!$this->is_account && $_POST['intranet'] == "B"){
+            if($this->acl_is_createable()){
+              $this->is_account= TRUE;
+            }
+          }
+        } else {
+          if($this->acl_is_removeable()){
+            $this->is_account= FALSE;
+          }
+        }
       }
     }
   }
@@ -242,6 +241,14 @@ class intranetAccount extends plugin
     plugin::set_multi_edit_values($values);
     if(isset($values['is_account'])){
       $this->is_account = $values['is_account'];
+    }
+  }
+
+  function init_multiple_support($attrs,$all)
+  {
+    plugin::init_multiple_support($attrs,$all);
+    if(isset($attrs['objectClass']) && in_array("gosaIntranetAccount",$attrs['objectClass'])){
+      $this->is_account = TRUE;
     }
   }
 }

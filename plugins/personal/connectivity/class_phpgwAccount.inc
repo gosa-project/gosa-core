@@ -17,6 +17,8 @@ class phpgwAccount extends plugin
 
   var $uid  = "";
   var $view_logged = FALSE;
+  
+  var $multiple_support = TRUE;
 
   function phpgwAccount (&$config, $dn= NULL)
   {
@@ -55,12 +57,9 @@ class phpgwAccount extends plugin
       $smarty->assign("phpgwState", "");
     }
 
-    if((!$this->ReadOnly)&&(($this->is_account && $this->acl_is_removeable()) || (!$this->is_account && $this->acl_is_createable()))) {
-      $smarty->assign('phpgwAccountACL', "");
-    }else{
-      $smarty->assign('phpgwAccountACL', " disabled ");
-    }
-
+    $smarty->assign('phpgwAccountACL', $this->getacl("",$this->ReadOnly));
+    $smarty->assign("multiple_support",$this->multiple_support_active);
+    $smarty->assign("use_phpgw",in_array("phpgw",$this->multi_boxes));
     $display.= $smarty->fetch (get_template_path('phpgw.tpl', TRUE, dirname(__FILE__)));
     return ($display);
   }
@@ -165,6 +164,57 @@ class phpgwAccount extends plugin
 
           "plProvidedAcls"  => array()
           ));
+  }
+
+
+  function multiple_save_object()
+  {
+    if (isset($_POST['connectivityTab'])){
+      plugin::multiple_save_object();
+
+      /* Do we need to flip is_account state? */
+      if(isset($_POST['use_phpgw'])){
+        $this->multi_boxes[] = "phpgw";
+        if (isset($_POST['connectivityTab'])){
+          if (isset($_POST['phpgw'])){
+            if (!$this->is_account && $_POST['phpgw'] == "B"){
+              if($this->acl_is_createable()){
+                $this->is_account= TRUE;
+              }
+            }
+          } else {
+            if($this->acl_is_removeable()){
+              $this->is_account= FALSE;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  function get_multi_edit_values()
+  {
+    $ret = plugin::get_multi_edit_values();
+    if(in_array("phpgw",$this->multi_boxes)){
+      $ret['is_account'] = $this->is_account;
+    }
+    return($ret);
+  }
+
+  function set_multi_edit_values($values)
+  {
+    plugin::set_multi_edit_values($values);
+    if(isset($values['is_account'])){
+      $this->is_account = $values['is_account'];
+    }
+  }
+
+  function init_multiple_support($attrs,$all)
+  {
+    plugin::init_multiple_support($attrs,$all);
+    if(isset($attrs['objectClass']) && in_array("phpgwAccount",$attrs['objectClass'])){
+      $this->is_account = TRUE;
+    }
   }
 }
 

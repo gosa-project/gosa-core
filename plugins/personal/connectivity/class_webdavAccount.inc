@@ -13,6 +13,8 @@ class webdavAccount extends plugin
   var $view_logged = FALSE;
   var $uid ="";
 
+  var $multiple_support =TRUE;
+
   function webdavAccount (&$config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
@@ -51,12 +53,9 @@ class webdavAccount extends plugin
       $smarty->assign("tabbed", 1);
     }
 
-    if((!$this->ReadOnly) && (($this->is_account && $this->acl_is_removeable()) || (!$this->is_account && $this->acl_is_createable()))) {
-      $smarty->assign('webdavAccountACL', "");
-    }else{
-      $smarty->assign('webdavAccountACL', " disabled ");
-    }
-
+    $smarty->assign('webdavAccountACL', $this->getacl("",$this->ReadOnly));
+    $smarty->assign("use_webdav",in_array("webdav",$this->multi_boxes));
+    $smarty->assign("multiple_support",$this->multiple_support_active);
     $display.= $smarty->fetch (get_template_path('webdav.tpl', TRUE, dirname(__FILE__)));
     return ($display);
   }
@@ -164,6 +163,53 @@ class webdavAccount extends plugin
 
           "plProvidedAcls"  => array()
           ));
+  }
+
+  function multiple_save_object()
+  {
+    if (isset($_POST['connectivityTab'])){
+      plugin::multiple_save_object();
+
+      if(isset($_POST['use_webdav'])){
+        $this->multi_boxes[] = "webdav";
+        if (isset($_POST['webdav'])){
+          if (!$this->is_account && $_POST['webdav'] == "B"){
+            if($this->acl_is_createable()){
+              $this->is_account= TRUE;
+            }
+          }
+        } else {
+          if($this->acl_is_removeable()){
+            $this->is_account= FALSE;
+          }
+        }
+      }
+    }
+  }
+
+  function get_multi_edit_values()
+  {
+    $ret = plugin::get_multi_edit_values();
+    if(in_array("webdav",$this->multi_boxes)){
+      $ret['is_account'] = $this->is_account;
+    }
+    return($ret);
+  }
+
+  function set_multi_edit_values($values)
+  {
+    plugin::set_multi_edit_values($values);
+    if(isset($values['is_account'])){
+      $this->is_account = $values['is_account'];
+    }
+  }
+
+  function init_multiple_support($attrs,$all)
+  {
+    plugin::init_multiple_support($attrs,$all);
+    if(isset($attrs['objectClass']) && in_array("gosaWebdavAccount",$attrs['objectClass'])){
+      $this->is_account = TRUE;
+    }
   }
 }
 
