@@ -1555,11 +1555,80 @@ class phoneAccount extends plugin
   function multiple_save_object()
   {
     /* Simply call parents save_object */
-    $this->save_object();
-    echo "<pre>Not finsihed yet 
- Checks, Save_object anpassen.
-  Tests.
- </pre>";
+    if (isset($_POST["phoneTab"])){
+
+      plugin::save_object();
+      plugin::multiple_save_object();
+
+      /* Every macro in the select box are available */
+      if((isset($_POST['macro']))){
+        $this->macrostillavailable=true;
+      }
+
+      if(isset($_POST['macro']) && $_POST['macro'] != $this->macro){
+        $this->is_modified =true;
+      }
+
+      /* get all Postvars */
+      if(isset($this->macroarray[$this->macro])){
+        foreach($this->macroarray[$this->macro] as $key => $paras){
+          $backup = $this->macroarray[$this->macro][$key];
+          if(isset($_POST[$paras['var']])){
+            $this->macroarray[$this->macro][$key]['choosen'] = $_POST[$paras['var']];
+          }
+          if(isset($_POST['post_success'])){
+            if($this->macroarray[$this->macro][$key]['type']=="bool"){
+              if(isset($_POST[$this->macroarray[$this->macro][$key]['var']])) {
+                $this->macroarray[$this->macro][$key]['choosen']=$_POST[$paras['var']];
+              }else{
+                $this->macroarray[$this->macro][$key]['choosen']=false;
+              }
+            }
+          }
+        }
+        if(count(array_diff($this->macroarray[$this->macro][$key],$backup))){
+          $this->modified = TRUE;
+        }
+      }
+    }
+  }
+
+  function multiple_check()
+  {
+    $message = plugin::multiple_check();
+
+    if(!count($this->goFonHomeServers) && in_array("goFonHomeServers",$this->multi_boxes)){
+      $message[] = _("There must be at least one server with an asterisk database to create a phone account.");
+    }
+
+    if(empty($this->goFonHomeServer) && in_array("goFonHomeServers",$this->multi_boxes)){
+      $message[] = _("Please select a valid goFonHomeServer.");
+    }
+
+    if(in_array("goFonVoicemailPIN",$this->multi_boxes) && 
+        ( (strlen($this->goFonVoicemailPIN)==0)||
+          (strlen($this->goFonVoicemailPIN)>4))){
+      $message[]=(_("Voicemail PIN must be between 1-4 characters."));
+    }else{
+      if(preg_match("/[^0-9]/",$this->goFonVoicemailPIN) && in_array("goFonVoicemailPIN",$this->multi_boxes) ){
+        $message[]=(_("The specified Voicemail PIN contains invalid characters, only numeric values are allowed here."));
+      }
+    }
+
+    if(preg_match("/[^0-9a-z]/i",$this->goFonPIN) && in_array("goFonPIN",$this->multi_boxes)){
+      $message[]=(_("The specified phone PIN contains invalid characters, only aphanumeric values are allowed here."));
+    }
+
+    /* check for ! in any parameter setting*/
+    if(isset($this->macroarray[$this->macro]) && in_array("macro",$this->multi_boxes)){
+      foreach($this->macroarray[$this->macro] as $val){
+        if((strstr($val['choosen'],"!"))||(strstr($val['choosen'],"#"))){
+          $message[] = sprintf(_("The parameter %s contains invalid char. '!,#' is used as delimiter"),$val['name']);
+        }
+      }
+    }
+
+    return($message);
   }
 
   function get_multi_edit_values()
