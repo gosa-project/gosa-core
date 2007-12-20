@@ -1230,11 +1230,11 @@ function to_string ($value)
 }
 
 
-function get_printer_list($cups_server)
+function get_printer_list()
 {
   global $config;
   $res = array();
-  $data = get_list('(objectClass=gotoPrinter)',"printer",$config->current['BASE'], array('cn'));
+  $data = get_list('(objectClass=gotoPrinter)',"printer",$config->current['BASE'], array('cn'), GL_SUBSEARCH);
   foreach($data as $attrs ){
     $res[$attrs['cn'][0]] = $attrs['cn'][0];
   }

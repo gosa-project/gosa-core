@@ -943,6 +943,12 @@ class gofaxAccount extends plugin
     return($ret);
   }
 
+  function multiple_check()
+  {
+    $message = plugin::multiple_check();
+    return($message);
+  }
+
   function set_multi_edit_values($values)
   {
     plugin::set_multi_edit_values($values);
