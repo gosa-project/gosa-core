@@ -148,7 +148,6 @@ if (isset ($config->data['MAIN']['COMPILE'])){
 } else {
   $smarty->compile_dir= '/var/spool/gosa';
 }
-$smarty->assign ('nextfield', 'username');
 
 /* Check for compile directory */
 if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))){
@@ -172,7 +171,7 @@ $GLOBALS['t_gettext_message_dir'] = $BASE_DIR.'/locale/';
 $domain = 'messages';
 bindtextdomain($domain, "$BASE_DIR/locale");
 textdomain($domain);
-
+$smarty->assign ('nextfield', 'username');
 
 if ($_SERVER["REQUEST_METHOD"] != "POST"){
   @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
@@ -199,8 +198,31 @@ if ($config->data['MAIN']['FORCESSL'] == 'true' && $ssl != ''){
   exit;
 }
 
+/* Do we have htaccess authentification enabled? */
+$htaccess_authenticated= FALSE;
+if (isset($config->data['MAIN']['HTACCESS_AUTH']) && preg_match('/^(yes|true)$/i', $config->data['MAIN']['HTACCESS_AUTH'])){
+  if (!isset($_SERVER['REMOTE_USER'])){
+    echo "GOsa error: "._("There is a problem with the authentication setup. Please inform your system administrator.");
+    exit;
+  }
+
+  $tmp= process_htaccess($_SERVER['REMOTE_USER'], isset($_SERVER['KRB5CCNAME']));
+  $username= $tmp['username'];
+  $server= $tmp['server'];
+  if ($username == ""){
+    echo "GOsa error: "._("Cannot find a valid user for the current authentication setup.");
+    exit;
+  }
+  if ($server == ""){
+    echo "GOsa error: "._("User information is not uniq accross the configured directories. Cannot authenticated.");
+    exit;
+  }
+
+  $htaccess_authenticated= TRUE;
+}
+
 /* Got a formular answer, validate and try to log in */
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
+if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htaccess_authenticated){
 
   /* Reset error messages */
   $message= "";
@@ -210,7 +232,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
     $_SESSION['_LAST_PAGE_REQUEST'] = time();
   }
 
-  $server= validate($_POST["server"]);
+  if (!$htaccess_authenticated){
+    $server= validate($_POST["server"]);
+  }
   $config->set_current($server);
 
   /* Admin-logon and verify */
@@ -250,6 +274,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
       }
     }
   }
+
   /* Check for locking area */
   $ldap->cat($config->current['CONFIG'], array("dn"));
   $attrs= $ldap->fetch();
@@ -259,16 +284,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
   }
 
   /* Check for valid input */
-  $username= $_POST["username"];
-  if (!ereg("^[@A-Za-z0-9_.-]+$", $username)){
-    $message= _("Please specify a valid username!");
-  } elseif (mb_strlen($_POST["password"], 'UTF-8') == 0){
-    $message= _("Please specify your password!");
-    $smarty->assign ('nextfield', 'password');
-  } else {
+  $ok= true;
+  if (!$htaccess_authenticated){
+    $username= $_POST["username"];
+    if (!ereg("^[@A-Za-z0-9_.-]+$", $username)){
+      $message= _("Please specify a valid username!");
+      $ok= false;
+    } elseif (mb_strlen($_POST["password"], 'UTF-8') == 0){
+      $message= _("Please specify your password!");
+      $smarty->assign ('nextfield', 'password');
+      $ok= false;
+    }
+  }
+  
+  if ($ok) {
 
     /* Login as user, initialize user ACL's */
-    $ui= ldap_login_user($username, $_POST["password"]);
+    if ($htaccess_authenticated){
+      $ui= ldap_login_user_htaccess($username);
+      if ($ui === NULL || !$ui){
+        echo "GOsa error: "._("Authentication via htaccess not possible. Unable to retrieve user information.");
+        exit;
+      }
+    } else {
+      $ui= ldap_login_user($username, $_POST["password"]);
+    }
     if ($ui === NULL || !$ui){
       $message= _("Please check the username/password combination.");
       $smarty->assign ('nextfield', 'password');
@@ -287,13 +327,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
       $config->make_idepartments();
       $_SESSION['config']= $config;
 
-      /* Take care about zend.ze1_compatiblity_mode */
-      if (ini_get("zend.ze1_compatibility_mode") != 0){
-        $_SESSION['PHP4COMPATIBLE']= TRUE;
-      }
-
-      /* Restore filter settings from cookie, if available 
-       */
+      /* Restore filter settings from cookie, if available */
       if(isset($config->data['MAIN']['SAVE_FILTER']) && preg_match("/true/",$config->data['MAIN']['SAVE_FILTER'])){
 
         if(isset($_COOKIE['GOsa_Filter_Settings']) || isset($HTTP_COOKIE_VARS['GOsa_Filter_Settings'])){
@@ -340,6 +374,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
           }
         }
       }
+
       /* Not account expired or password forced change go to main page */
       new log("security","login","",array(),"User \"$username\" logged in successfully") ;
       $plist= new pluglist($config, $ui);

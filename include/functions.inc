@@ -292,6 +292,26 @@ function ldap_init ($server, $base, $binddn='', $pass='')
 }
 
 
+function process_htaccess ($username, $kerberos= FALSE)
+{
+  global $config;
+
+  /* - Search for $username and optinal @REALM in all configured LDAP trees */
+  /* - If uniq, fill username and server with the correct values and return */
+  /* - Else return emtpy values where the error occurs */
+
+  return array("username" => "", "server" => "");
+}
+
+
+function ldap_login_user_htaccess ($username)
+{
+  /* Use the username to fill the userinfo class as in ldap_login_user and return */
+  /* Load acl, etc.*/
+  return NULL;
+}
+
+
 function ldap_login_user ($username, $password)
 {
   global $config;
