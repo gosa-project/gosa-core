@@ -221,7 +221,6 @@ class phoneAccount extends plugin
       /* Check if makro has been removed */
       if(!isset($this->macros[$this->macro])){
         $this->macrostillavailable = false;
-        echo "1";
       }else{
         $this->macrostillavailable = true;
       }
@@ -824,7 +823,6 @@ class phoneAccount extends plugin
         /* Check if macro has been removed */
         if(!isset($this->macroarray[$this->macro])){
           $this->macrostillavailable = false;
-        echo "2";
         }else{
           $this->macrostillavailable = true;
         }
