@@ -1,4 +1,6 @@
 <h2>
-	<input type="checkbox" name="intranet" value="B" {$intranetState} {$gosaIntranetACL}>
+	{render acl=$gosaIntranetACL checkbox=$multiple_support checked=$use_intranet}
+	<input type="checkbox" name="intranet" value="B" {$intranetState} class="center"> 
 	{t}Intranet account{/t}
+	{/render}
 </h2>

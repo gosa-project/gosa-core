@@ -24,6 +24,7 @@ class connectivity extends plugin
   var $plugin_name= array();
   var $CopyPasteVars = array("plugin","plugin_name");
 
+  var $multiple_support = TRUE;
 
   function connectivity (&$config, $dn= NULL,$parent =NULL)
   {
@@ -31,6 +32,8 @@ class connectivity extends plugin
     $this->dn= $dn;
     $ui= get_userinfo();
 
+    $this->config = $config;
+  
     /* Load accounts */
     foreach ($config->data['TABS']['CONNECTIVITY'] as $plug){
       $name= $plug['CLASS'];
@@ -96,7 +99,6 @@ class connectivity extends plugin
 
     /* Mark me as connectivity tab */
     $display.= "<input type='hidden' name='connectivityTab'>";
-
     return($display);
   }
 
@@ -182,6 +184,59 @@ class connectivity extends plugin
     $this->plugin = $tmp;
     foreach( $this->plugin as $key => $plug){
       $this->plugin[$key]->PrepareForCopyPaste($obj);
+    }
+  }
+
+
+  function enable_multiple_support()
+  {
+    plugin::enable_multiple_support();
+    
+    foreach($this->plugin_name as $key => $name){
+      if($this->plugin[$name]->multiple_support){
+        $this->plugin[$name]->enable_multiple_support();  
+      }else{
+        unset($this->plugin_name[$key]);
+        unset($this->plugin[$name]);
+      }
+    }
+  }
+  
+  
+  function multiple_execute()
+  {
+    return($this->execute());
+  }
+  
+  /* Save data to object */
+  function multiple_save_object()
+  {
+    if (isset($_POST['connectivityTab'])){
+      foreach ($this->plugin_name as $name){
+        $this->plugin[$name]->multiple_save_object();
+      }
+    }
+  }
+
+  function multiple_check()
+  {
+    $message = plugin::multiple_check();
+    foreach ($this->plugin_name as $name){
+      $message = array_merge($message,$this->plugin[$name]->multiple_check());
+    }
+    return($message);
+  }
+
+  function get_multi_edit_values()
+  {
+    $ret['plugin'] = &$this->plugin;
+    return($ret);
+  }
+
+  function set_multi_edit_values($values)
+  {
+    foreach($values['plugin'] as $name => $plugin){
+      $this->plugin[$name]->set_multi_edit_values($plugin->get_multi_edit_values());
     }
   }
 }

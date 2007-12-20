@@ -26,6 +26,7 @@ class intranetAccount extends plugin
   var $uid ="";
 
   var $view_logged = FALSE;
+  var $multiple_support = TRUE;
 
   /*! \brief Konstructor  
 
@@ -85,13 +86,10 @@ class intranetAccount extends plugin
       $smarty->assign("tabbed", 0);	
     }
 
-
-    $smarty->assign('gosaIntranetACL', " disabled ");
-    if((!$this->ReadOnly) && (    ($this->is_account && $this->acl_is_removeable()) 
-                               || (!$this->is_account && $this->acl_is_createable()))){
-      $smarty->assign('gosaIntranetACL', "");
-    }
-
+    $smarty->assign('gosaIntranetACL', $this->getacl("",$this->ReadOnly));
+  
+    $smarty->assign("use_intranet",in_array("intranet",$this->multi_boxes));
+    $smarty->assign("multiple_support",$this->multiple_support_active);
     $display.= $smarty->fetch (get_template_path('intranet.tpl', TRUE, dirname(__FILE__)));
     return ($display);
   }
@@ -206,6 +204,45 @@ class intranetAccount extends plugin
 
           "plProvidedAcls"  => array()
           ));
+  }
+
+  
+  function multiple_save_object()
+  {
+    if (isset($_POST['connectivityTab'])){
+      plugin::multiple_save_object();
+      if (isset($_POST['intranet'])){
+        if (!$this->is_account && $_POST['intranet'] == "B"){
+          if($this->acl_is_createable()){
+            $this->is_account= TRUE;
+          }
+        }
+      } else {
+        if($this->acl_is_removeable()){
+          $this->is_account= FALSE;
+        }
+      }
+      if(isset($_POST['use_intranet'])){
+        $this->multi_boxes[] = "intranet";
+      }
+    }
+  }
+
+  function get_multi_edit_values()
+  {
+    $ret = plugin::get_multi_edit_values();
+    if(in_array("intranet",$this->multi_boxes)){
+      $ret['is_account'] = $this->is_account;
+    }
+    return($ret);
+  }
+
+  function set_multi_edit_values($values)
+  {
+    plugin::set_multi_edit_values($values);
+    if(isset($values['is_account'])){
+      $this->is_account = $values['is_account'];
+    }
   }
 }
 
