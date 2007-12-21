@@ -128,9 +128,6 @@ class proxyAccount extends plugin
         $ProxyWorkingStateChange.=  "changeState('stopHour'); \n";
         $ProxyWorkingStateChange.=  "changeState('stopMinute'); \n";
       }
-      if(preg_match("/F/",$this->gosaProxyAcctFlags)){
-        $changeA .= $ProxyWorkingStateChange;
-      }
       $smarty->assign("ProxyWorkingStateChange",$ProxyWorkingStateChange);
       $changeB = "";
       if($this->acl_is_writeable("gosaProxyFlagB")){
@@ -150,6 +147,7 @@ class proxyAccount extends plugin
         $smarty->assign("use_filter".$attr,FALSE);
       }
     }
+    $smarty->assign("proxyAccountACL",$this->getacl("",$this->ReadOnly));
     $smarty->assign("use_proxy",in_array("proxy",$this->multi_boxes));
     $smarty->assign("multiple_support",$this->multiple_support_active);
     $display.= $smarty->fetch(get_template_path('proxy.tpl', TRUE, dirname(__FILE__)));

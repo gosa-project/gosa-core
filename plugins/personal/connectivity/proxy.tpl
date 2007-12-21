@@ -9,7 +9,8 @@
 
 {else}
 
-	<input type="checkbox" id="proxy" name="proxy" value="B" {$proxyState} {$proxyAccountACL}
+	{render acl=$proxyAccountACL}
+	<input type="checkbox" id="proxy" name="proxy" value="B" {$proxyState}
 	class="center" 
 	onClick="
 
@@ -31,7 +32,7 @@
 	changeTripleSelectState('proxy', 'filterB', 'gosaProxyQuotaPeriod');
 	{/if}
 	">
-
+	{/render}
 {/if}
  {t}Proxy account{/t}</h2>
 

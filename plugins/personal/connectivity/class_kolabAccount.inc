@@ -17,12 +17,20 @@ class kolabAccount extends plugin
   var $objectclasses  = array("kolabInetOrgPerson");
 
   /* Helper */
-  var $imapping= array();
-  var $mail_Account   = false;
-  var $ReadOnly = false;
-  var $view_logged = FALSE;
-  var $uid = "";
+  var $imapping     = array();
+  var $mail_Account = false;
+  var $ReadOnly     = false;
+  var $view_logged  = FALSE;
+  var $uid          = "";
 
+  var $multiple_support = TRUE;
+
+
+  /*! \brief Initialize Plugin 
+      @param  $config   GOsa configuration object
+      @param  $dn       DN of the currently edited object
+      @param  $parent   The parent object, used to fetch Attributes.
+   */
   function kolabAccount (&$config, $dn= NULL,$parent = NULL)
   {
     plugin::plugin ($config, $dn, $parent);
@@ -70,7 +78,9 @@ class kolabAccount extends plugin
     }
   }
 
-
+    
+  /*! \brief Create thml output 
+   */
   function execute()
   {
 	  /* Call parent execute */
@@ -110,20 +120,26 @@ class kolabAccount extends plugin
 
     /* Check for invitation action */
     $nr= 0;
-    while (isset($_POST["policy$nr"])){
-      if (isset($_POST["add$nr"])){
+  
+    foreach($_POST as $name => $value){
+      if(preg_match("/add_inv_/",$name)){
         $this->kolabInvitationPolicy[]= ": ACT_MANUAL";
       }
-      if (isset($_POST["remove$nr"])){
+    }
+    foreach($_POST as $name => $value){
+      if(preg_match("/del_inv_/",$name)){
+
+        $id = preg_replace("/del_inv_/","",$name);
+        $id = preg_replace("/_(x|y)$/","",$id);
+  
         $new= array();
         foreach ($this->kolabInvitationPolicy as $entry){
-          if (!preg_match("/^".$this->imapping[$nr].":/", $entry)){
+          if (!preg_match("/^".$this->imapping[$id].":/", $entry)){
             $new[]= $entry;
           }
         }
         $this->kolabInvitationPolicy= $new;
       }
-      $nr++;
     }
 
     /* Unify addresses */
@@ -215,10 +231,10 @@ class kolabAccount extends plugin
           changeState('add".$nr."'); \n changeState('remove".$nr."'); \n";
       }
 
-      if(!$this->acl_is_writeable("kolabInvitationPolicy")){
+      if(!$this->acl_is_writeable("kolabInvitationPolicy") && !$this->multiple_support_active){
         $dis = " disabled ";
       }else{
-        if($this->is_account){
+        if($this->is_account || $this->multiple_support_active){
           $dis = " ";
         }else{
           $dis = " disabled ";
@@ -258,22 +274,36 @@ class kolabAccount extends plugin
       /* Assign buttons */
       $button= "";
       if ($nr == count($this->kolabInvitationPolicy)-1){
-        $button= "<input type=submit name=\"add$nr\" value=\""._("Add")."\" id='add".$nr."' ".$dis.">";
+        $button= "<input type='image' name=\"add_inv_".$nr."\" src='images/list_new.png' id='add".$nr."' ".$dis.">";
       }
       if ($nr != 0) {
-        $button.= "<input type=submit name=\"remove$nr\" value=\""._("Remove")."\" id='remove".$nr."' ".$dis.">";
+        $button.= "<input type='image' name=\"del_inv_".$nr."\" src='images/edittrash.png' id='remove".$nr."' ".$dis.">";
       }
       
-      $invitation.= "</select>&nbsp;$button</td></tr>\n";
+      $invitation.= "</select>&nbsp;</td>
+                    <td>$button</td>
+                  </tr>\n";
       $this->imapping[$nr]= $name;
       $nr++;
     }
     $smarty->assign("invitation", $invitation);
     $smarty->assign("changeState", $changeState);
     $smarty->assign("kolabState",$this->is_account);
+
+  
+    $smarty->assign("multiple_support",$this->multiple_support_active);
+    foreach($this->attributes as $attr){
+      $smarty->assign("use_".$attr,in_array($attr,$this->multi_boxes));
+    }
+    foreach(array("kolabState") as $attr){
+      $smarty->assign("use_".$attr,in_array($attr,$this->multi_boxes));
+    }
+
+    if($this->multiple_support_active){
+    }
+
+
     $display.= $smarty->fetch (get_template_path('kolab.tpl', TRUE, dirname(__FILE__)));
-
-
     return ($display);
   }
 
@@ -362,7 +392,6 @@ class kolabAccount extends plugin
           $this->is_account = false;
         }
       }
-      
       if ($this->acl_is_writeable("unrestrictedMailSize")){
         if (isset($_POST['unrestrictedMailSize']) && $_POST['unrestrictedMailSize'] == 1){
           $this->unrestrictedMailSize= 1;
@@ -376,6 +405,7 @@ class kolabAccount extends plugin
 
     /* Save changes done in invitation policies */
     if($this->acl_is_writeable("kolabInvitationPolicy")){
+
       $nr= 0;
       $this->kolabInvitationPolicy= array();
       while (isset($_POST["policy$nr"])){
@@ -479,6 +509,92 @@ class kolabAccount extends plugin
             "kolabDelegate"         => _("Delegations"),
             "kolabInvitationPolicy" => _("Invitation policy"))
           ));
+  }
+
+
+  /*! \brief  Enable multiple edit support. \
+              Also sets $this->mail_account to TRUE, which simulates \
+              a valid mail extension.
+   */
+  public function enable_multiple_support()
+  {
+    plugin::enable_multiple_support();
+    $this->mail_Account = TRUE;
+  }
+
+
+  /*! \brief  Save html POSTs in multiple edit.
+   */
+  public function multiple_save_object()
+  {
+    if (isset($_POST['connectivityTab'])){
+      plugin::multiple_save_object();
+      if(isset($_POST['use_kolabState'])){
+        $this->multi_boxes[] = "kolabState";
+      }
+      $this->save_object();
+    }
+  }
+
+
+  /*! \brief  Returns all modified values. \
+              All selected an modified values will be returned \
+              in an array.
+      @return array   Returns an array containing all attribute modifications  
+   */
+  public function get_multi_edit_values()
+  {
+    $ret = plugin::get_multi_edit_values();
+    if(in_array("kolabState",$this->multi_boxes)){
+      $ret['is_account'] = $this->is_account;
+    }
+
+    print_a($ret);
+  
+    return($ret);
+  }
+
+  /*! \brief  Sets modified attributes in mutliple edit. \
+              All collected values from "get_multi_edit_values()" \
+              will be applied to this plugin.
+      @param  array   An array containing modified attributes returned by get_multi_edit_values();
+   */
+  public function set_multi_edit_values($values)
+  {
+    plugin::set_multi_edit_values($values);
+    if(isset($values['is_account'])){
+      $this->is_account = $values['is_account'];
+    }
+  }
+
+
+  /*! \brief  Initialize multiple edit ui for this plugin. \
+              This function sets plugin defaults in multiple edit.
+      @param  array   Attributes used in all object 
+      @param  array   All used attributes.
+   */
+  public function init_multiple_support($attrs,$all)
+  {
+    plugin::init_multiple_support($attrs,$all);
+    if(isset($attrs['objectClass']) && in_array("kolabInetOrgPerson",$attrs['objectClass'])){
+      $this->is_account = TRUE;
+    }
+
+    /* Pull arrays */
+    foreach(array("kolabDelegate", "kolabInvitationPolicy") as $attr){
+      if (isset($this->multi_attrs["$attr"]["count"])){
+        $tmp = array();
+        for ($i= 0; $i<$this->multi_attrs["$attr"]["count"]; $i++){
+          $tmp[]=$this->multi_attrs["$attr"][$i];
+        }
+        $this->$attr = $tmp;
+      }
+    }
+
+    /* If this one is empty, preset with ACT_MANUAL for anonymous users */
+    if (count ($this->kolabInvitationPolicy) == 0){
+       $this->kolabInvitationPolicy= array("ACT_MANUAL");
+    }
   }
 }
 
