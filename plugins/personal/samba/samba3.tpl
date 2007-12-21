@@ -169,12 +169,14 @@
    <table summary="">
     <tr>
      <td>
+{if $multiple_support}
 <input type="checkbox" name="use_CtxMaxConnectionTimeF" {if $use_CtxMaxConnectionTimeF} checked {/if}
 	onClick="changeState('CtxMaxConnectionTimeF');" class="center"
 	>
+{/if}
 {render acl=$AllowLoginOnTerminalServerACL}
       <input 		id="CtxMaxConnectionTimeF" 	type="checkbox" class="center" name="CtxMaxConnectionTimeF" 
-			{if !$use_CtxMaxConnectionTimeF} disabled {/if}
+			{if !$use_CtxMaxConnectionTimeF && $multiple_support} disabled {/if}
 			value="1" 			{$CtxMaxConnectionTimeF} 	
 			onclick="changeState('CtxMaxConnectionTime')" {$tsloginstate}>
 {/render}
@@ -244,7 +246,7 @@
     <tr>
      <td>
 {render acl=$AllowLoginOnTerminalServerACL  checkbox=$multiple_support checked=$use_defaultprinter}
-      <input id="defaultprinter" type=checkbox name="defaultprinter" value="1" {$defaultprinter} class="center">
+      <input id="defaultprinter" type=checkbox name="defaultprinter" value="1" {$defaultprinter} {$tsloginstate} class="center">
 {/render}
       <label for="defaultprinter">{t}Default to main client printer{/t}</label>
      </td>
