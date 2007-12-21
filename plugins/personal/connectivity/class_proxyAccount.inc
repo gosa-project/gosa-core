@@ -2,30 +2,32 @@
 class proxyAccount extends plugin
 {
   /* Definitions */
-  var $plHeadline= "Proxy";
+  var $plHeadline   = "Proxy";
   var $plDescription= "This does something";
 
   /* Proxy attributes */
-  var $gosaProxyAcctFlags= "[N    ]";
-  var $gosaProxyID= "";
+  var $gosaProxyAcctFlags   = "[N    ]";
+  var $gosaProxyID          = "";
   var $gosaProxyWorkingStart= 420;
-  var $gosaProxyWorkingStop= 1020;
-  var $gosaProxyQuota= "5g";
-  var $gosaProxyQuotaPeriod= "m";
+  var $gosaProxyWorkingStop = 1020;
+  var $gosaProxyQuota       = "5g";
+  var $gosaProxyQuotaPeriod = "m";
 
   /* attribute list for save action */
-  var $attributes= array(   "gosaProxyID", "gosaProxyAcctFlags", "gosaProxyWorkingStart",
+  var $attributes   = array("gosaProxyID", "gosaProxyAcctFlags", "gosaProxyWorkingStart",
                             "gosaProxyWorkingStop", "gosaProxyQuota", "gosaProxyQuotaPeriod");
 
-  var $objectclasses= array("gosaProxyAccount");
-  var $ReadOnly = false;
-
-  var $uid = "";
-  var $view_logged = FALSE;
-
+  var $objectclasses    = array("gosaProxyAccount");
+  var $ReadOnly         = false;
+  var $uid              = "";
+  var $view_logged      = FALSE;
   var $multiple_support = TRUE;
 
-  function proxyAccount (&$config, $dn= NULL)
+  /*! \brief Initialize proxy acoount 
+      @param $config GOsa configuration object 
+      @param $dn     Object dn
+   */
+  public function proxyAccount (&$config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
     
@@ -35,7 +37,10 @@ class proxyAccount extends plugin
     }
   }
 
-  function execute()
+
+  /*! \brief Create html output for this class 
+   */
+  public function execute()
   {
     /* Call parent execute */
     plugin::execute();
@@ -47,29 +52,15 @@ class proxyAccount extends plugin
     }
 
     $display= "";
-
-    /* Prepare templating */
     $smarty= get_smarty();
-
-    $smarty->assign('proxyAccountACL', " disabled ");
     
-    if((!$this->ReadOnly)&& (($this->is_account && $this->acl_is_removeable()) || (!$this->is_account && $this->acl_is_createable()))){
-      $smarty->assign('proxyAccountACL', "");
-    }
-
     /* Assign radio boxes */
     foreach (array("F", "T", "B", "N") as $val){
-
-      if (is_integer(strpos($this->gosaProxyAcctFlags, "$val"))) {
+      if (preg_match("/".$val."/",$this->gosaProxyAcctFlags)){
         $smarty->assign("filter$val", "checked");
-
-        /* Add state variables for on-the-fly state-changing of checkboxes */
         $smarty->assign($val."state", "");
-        
       } else {
         $smarty->assign("filter$val", "");
-
-        /* Same as above */
         if($_SESSION['js']==1){
           $smarty->assign($val."state", "disabled");
         }else{
@@ -78,6 +69,7 @@ class proxyAccount extends plugin
       }
     }
 
+    /* Assign ACLs */
     $tmp = $this->plInfo();
     foreach($tmp['plProvidedAcls'] as $acl => $desc){
       $smarty->assign($acl."ACL",$this->getacl($acl,$this->ReadOnly));
@@ -85,10 +77,10 @@ class proxyAccount extends plugin
     }
 
     /* Assign working time */
-    $smarty->assign("starthour", (int)($this->gosaProxyWorkingStart / 60));
-    $smarty->assign("startminute", (int)($this->gosaProxyWorkingStart % 60));
-    $smarty->assign("stophour", (int)($this->gosaProxyWorkingStop / 60));
-    $smarty->assign("stopminute", (int)($this->gosaProxyWorkingStop % 60));
+    $smarty->assign("starthour" ,($this->gosaProxyWorkingStart / 60));
+    $smarty->assign("startminute", ($this->gosaProxyWorkingStart % 60));
+    $smarty->assign("stophour", ($this->gosaProxyWorkingStop / 60));
+    $smarty->assign("stopminute", ($this->gosaProxyWorkingStop % 60));
     $hours= array();
     for($i=0; $i<24; $i++){
       $hours[]= sprintf("%02d",$i);
@@ -109,42 +101,39 @@ class proxyAccount extends plugin
     }
 
 
+    /* Handle input grey out and javascript enabled/disable of input fields
+     */
     if($this->multiple_support_active){
 
-      $changeA = $changeB = "";
+      /* In Multiple edit, everything is enabled */
+      $changeB = "";
       $smarty->assign("pstate", "");
       $smarty->assign("ProxyWorkingStateChange","");
-  
     }else{
 
-      /* Prepare correct state */
+      /* Depeding on the account status, we disable or 
+       *  enable all input fields 
+       */
       if (!$this->is_account){
         $smarty->assign("pstate", "disabled");
       } else {
         $smarty->assign("pstate", "");
       }
 
-      $changeA = "";
-
+      /* Create JS activation string for everal input fields  */
       $ProxyWorkingStateChange ="\n";
       if($this->acl_is_writeable("gosaProxyFlagT")){
-        $changeA .= "changeState('filterT');\n";
-
         $ProxyWorkingStateChange.=  "changeState('startHour'); \n";
         $ProxyWorkingStateChange.=  "changeState('startMinute'); \n";
         $ProxyWorkingStateChange.=  "changeState('stopHour'); \n";
         $ProxyWorkingStateChange.=  "changeState('stopMinute'); \n";
       }
-
       if(preg_match("/F/",$this->gosaProxyAcctFlags)){
         $changeA .= $ProxyWorkingStateChange;
       }
-
       $smarty->assign("ProxyWorkingStateChange",$ProxyWorkingStateChange);
-
       $changeB = "";
       if($this->acl_is_writeable("gosaProxyFlagB")){
-        $changeA .= "changeState('filterB');";
         $changeB = 
           "changeSubselectState('filterB', 'quota_size');
         changeSubselectState('filterB', 'quota_unit');
@@ -152,10 +141,8 @@ class proxyAccount extends plugin
       }
     }
 
+    /* Assign filter settings */
     $smarty->assign("changeB",$changeB);
-    $smarty->assign("changeA",$changeA);
-
-    /* Show main page */
     foreach(array("T","B","F") as $attr){
       if(in_array("filter".$attr,$this->multi_boxes)){
         $smarty->assign("use_filter".$attr,TRUE);
@@ -169,12 +156,13 @@ class proxyAccount extends plugin
     return($display);
   }
 
-  function remove_from_parent()
+
+  /*! \brief Removes proxy account from current object
+   */
+  public function remove_from_parent()
   {
     if($this->acl_is_removeable() && $this->initially_was_account){   
-
       plugin::remove_from_parent();
-
       $ldap= $this->config->get_ldap_link();
       @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
           $this->attributes, "Save");
@@ -192,8 +180,11 @@ class proxyAccount extends plugin
     }
   }
 
-  /* Check values */
-  function check()
+
+  /*! \brief Check given input
+      @return array Returns an array of error messages  
+   */
+  public function check()
   {
     /* Call common method to give check the hook */
     $message= plugin::check();
@@ -210,12 +201,12 @@ class proxyAccount extends plugin
         }
       }
     }
-
     return $message;
   }
 
-  /* Save data to object */
-  function save_object()
+  /*! \brief Save POST data to object 
+   */
+  public function save_object()
   {
     /* Do we need to flip is_account state? */
     if (isset($_POST['connectivityTab'])){
@@ -289,8 +280,9 @@ class proxyAccount extends plugin
   }
 
 
-  /* Save to LDAP */
-  function save()
+  /*! \brief Save settings to ldap 
+   */
+  public function save()
   {
     plugin::save();
 
@@ -320,8 +312,10 @@ class proxyAccount extends plugin
 
   }
 
-  /* Return plugin informations for acl handling 
-      #FIME There possibly some attributes that can be combined to one acl. */
+    
+  /*! \brief  Static  Function returning an ACL information array.
+      @return Array   Returns an ACL array 
+   */
   static function plInfo()
   {
     return (array(
@@ -341,7 +335,10 @@ class proxyAccount extends plugin
           ));
   }
 
-  function multiple_save_object()
+
+  /*! \brief  Save html POSTs in multiple edit.
+   */
+  public function multiple_save_object()
   {
     if (isset($_POST['connectivityTab'])){
       plugin::multiple_save_object();
@@ -357,7 +354,13 @@ class proxyAccount extends plugin
     }
   }
 
-  function get_multi_edit_values()
+
+  /*! \brief  Returns all modified values. \
+              All selected an modified values will be returned \
+              in an array.
+      @return array   Returns an array containing all attribute modifications  
+   */
+  public function get_multi_edit_values()
   {
     $ret = plugin::get_multi_edit_values();
     if(in_array("proxy",$this->multi_boxes)){
@@ -383,7 +386,13 @@ class proxyAccount extends plugin
     return($ret);
   }
 
-  function set_multi_edit_values($values)
+
+  /*! \brief  Sets modified attributes in mutliple edit. \
+              All collected values from "get_multi_edit_values()" \
+              will be applied to this plugin.
+      @param  array   An array containing modified attributes returned by get_multi_edit_values();
+   */
+  public function set_multi_edit_values($values)
   {
     plugin::set_multi_edit_values($values);
     if(isset($values['is_account'])){
@@ -401,7 +410,13 @@ class proxyAccount extends plugin
     }
   }
 
-  function init_multiple_support($attrs,$all)
+
+  /*! \brief  Initialize multiple edit ui for this plugin. \
+              This function sets plugin defaults in multiple edit.
+      @param  array   Attributes used in all object 
+      @param  array   All used attributes.
+   */
+  public function init_multiple_support($attrs,$all)
   {
     plugin::init_multiple_support($attrs,$all);
     if(isset($attrs['objectClass']) && in_array("gosaProxyAccount",$attrs['objectClass'])){

@@ -2,14 +2,15 @@
 
 {if $multiple_support}
 	
- <input type="checkbox" name="use_proxy" value="1" onClick="changeState('proxy')" 
+ <input type="checkbox" name="use_proxy" value="1" onClick="changeState('proxy')" class="center" 
 	{if $use_proxy} checked {/if}> 	
- <input type="checkbox" id="proxy" name="proxy" value="B" {$proxyState}
+ <input type="checkbox" id="proxy" name="proxy" value="B" {$proxyState} class="center"
 	{if !$use_proxy} disabled {/if}>
 
 {else}
 
-	<input type="checkbox" id="proxy" name="proxy" value="B" {$proxyState} {$proxyAccountACL} 
+	<input type="checkbox" id="proxy" name="proxy" value="B" {$proxyState} {$proxyAccountACL}
+	class="center" 
 	onClick="
 
 	{if $gosaProxyFlagF_W}
@@ -41,7 +42,7 @@
     <tr><td colspan=2>
 
 {render acl=$gosaProxyFlagFACL checkbox=$multiple_support checked=$use_filterF}
-    <input type="checkbox" name="filterF" id="filterF" value="F" {$filterF} {$pstate} >
+    <input type="checkbox" name="filterF" id="filterF" value="F" {$filterF} {$pstate} class="center">
 {/render}
     {t}Filter unwanted content (i.e. pornographic or violence related){/t}
     </td></tr>
@@ -50,7 +51,7 @@
 
 {render acl=$gosaProxyFlagTACL checkbox=$multiple_support checked=$use_filterT}
     <input type="checkbox" name="filterT" id="filterT" value="T" {$filterT} {$pstate}  onClick="javascript:
- {$ProxyWorkingStateChange}">
+ {$ProxyWorkingStateChange}" class="center">
 {/render}
 
     <LABEL for="startHour">{t}Limit proxy access to working time{/t}</LABEL>
@@ -91,7 +92,9 @@
    </td>
       <td>
 {render acl=$gosaProxyFlagBACL checkbox=$multiple_support checked=$use_filterB}
-    <input type="checkbox" id="filterB" name="filterB" value="B" {$filterB} {if $pstate=="disabled"} disabled {/if} onClick="{$changeB}">
+    <input type="checkbox" id="filterB" name="filterB" value="B" {$filterB} {if $pstate=="disabled"} disabled {/if} onClick="{$changeB}"
+		class="center"
+	>
 {/render}
     <LABEL for="quota_size">{t}Restrict proxy usage by quota{/t}</LABEL>
     <br>
