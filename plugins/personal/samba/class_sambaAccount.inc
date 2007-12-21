@@ -560,9 +560,6 @@ class sambaAccount extends plugin
         if($this->acl_is_writeable("AllowLoginOnTerminalServer",$SkipWrite)){
           $smarty->assign("inheritstate", $this->mungedObject->getInheritMode()?"disabled":"");
         }
-  
-
-  
       }else{
         $smarty->assign("tsloginstate", "");
         $smarty->assign("inheritstate", "");
@@ -683,6 +680,10 @@ class sambaAccount extends plugin
       }else{
         $smarty->assign("use_".$attr,FALSE);
       }
+    }
+
+    if($this->multiple_support_active){
+      $smarty->assign("tsloginstate","");
     }
 
     /* Show main page */

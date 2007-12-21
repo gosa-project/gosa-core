@@ -68,7 +68,15 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td style="vertical-align:top;width:50%">
-{render acl=$AllowLoginOnTerminalServerACL  checkbox=$multiple_support checked=$use_tslogin}
+
+{if $multiple_support}
+   	<input class="center" type=checkbox name="use_tslogin" id="use_tslogin" value="1" 
+		{if $use_tslogin} checked {/if}
+		onClick="changeState('tslogin')">
+	<input class="center" type=checkbox name="tslogin" id="tslogin" value="1" {$tslogin}
+		{if !$use_tslogin} disabled {/if}>
+{else}
+{render acl=$AllowLoginOnTerminalServerACL}
    <input class="center" type=checkbox name="tslogin" id="tslogin" value="1" {$tslogin}
    	onclick="
 		changeState('CtxWFHomeDir');
@@ -91,6 +99,7 @@
 		changeState('reconn');
 	">
 {/render}
+{/if}
    <i>{t}Allow login on terminal server{/t}</i>
    <table summary="">
     <tr>
