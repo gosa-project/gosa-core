@@ -720,8 +720,7 @@ class LDAP{
           /* Bail out, if we've nothing to do... */
           if ($ocname == ""){
             print_red(sprintf(_("Autocreation of subtree failed. No objectClass found for attribute '%s'."), $type));
-            echo $_SESSION['errors'];
-            exit;
+            display_error_page();
           }
 
           /* Assemble_entry */
@@ -769,8 +768,7 @@ class LDAP{
               break;
             default:
               print_red(sprintf(_("Autocreation of type '%s' is currently not supported. Please report to the GOsa team."), $type));
-              echo $_SESSION['errors'];
-              exit;
+              display_error_page();
           }
 
         }

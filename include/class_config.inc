@@ -222,9 +222,7 @@ class config  {
     if (is_null($this->ldap) || (is_int($this->ldap) && $this->ldap == 0)){
       $smarty= get_smarty();
       print_red (_("Can't bind to LDAP. Please contact the system administrator."));
-      $smarty->display (get_template_path('headers.tpl'));
-      echo '<body style="background-image:none">'.$_SESSION['errors'].'</body></html>';
-      exit();
+      display_error_page();
     }
 
     if (!isset($_SESSION['size_limit'])){
@@ -550,8 +548,7 @@ class config  {
       if (count($this->data['SERVERS']['SAMBA']) == 0){
         if (!isset($this->current["SID"]) || !isset($this->current["RIDBASE"])){
           print_red(_("SID and/or RIDBASE missing in your configuration!"));
-          echo $_SESSION['errors'];
-          exit;
+          display_error_page();
         } else {
           $this->data['SERVERS']['SAMBA']['DEFAULT']= array(
               "SID" => $this->current["SID"],

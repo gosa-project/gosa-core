@@ -148,8 +148,7 @@ class pluglist {
 					/* Read information from class variable */
 					if (!isset($info['CLASS'])){
 						print_red(_("Your gosa.conf format has changed. Please re-run setup!"));
-						echo $_SESSION['errors'];
-						exit;
+						display_error_page();
 					}
 					$vars= get_class_vars($info['CLASS']);
 					$plHeadline= $vars['plHeadline'];

@@ -296,19 +296,73 @@ function process_htaccess ($username, $kerberos= FALSE)
 {
   global $config;
 
-  /* - Search for $username and optinal @REALM in all configured LDAP trees */
-  /* - If uniq, fill username and server with the correct values and return */
-  /* - Else return emtpy values where the error occurs */
+  /* Search for $username and optional @REALM in all configured LDAP trees */
+  foreach($config->data["LOCATIONS"] as $name => $data){
+  
+    $config->set_current($name);
+    $mode= "kerberos";
+    if (isset($config->current['KRBSASL']) && preg_match('/^true$/i', $config->current['KRBSASL'])){
+      $mode= "sasl";
+    }
 
+    /* Look for entry or realm */
+    $ldap= $config->get_ldap_link();
+    if (!preg_match("/Success/i", $ldap->error)){
+      print_red(sprintf(_("User login failed. LDAP server said '%s'."), $ldap->get_error()));
+      $smarty= get_smarty();
+      $smarty->display(get_template_path('headers.tpl'));
+      echo "<body>".get_global('errors')."</body></html>";
+      exit();
+    }
+    $ldap->search("(&(objectClass=gosaAccount)(|(uid=$username)(userPassword={$mode}$username)))", array("uid"));
+
+    /* Found a uniq match? Return it... */
+    if ($ldap->count() == 1) {
+      $attrs= $ldap->fetch();
+      return array("username" => $attrs["uid"][0], "server" => $name);
+    }
+  }
+
+  /* Nothing found? Return emtpy array */
   return array("username" => "", "server" => "");
 }
 
 
 function ldap_login_user_htaccess ($username)
 {
-  /* Use the username to fill the userinfo class as in ldap_login_user and return */
-  /* Load acl, etc.*/
-  return NULL;
+  global $config;
+
+  /* Look for entry or realm */
+  $ldap= $config->get_ldap_link();
+  if (!preg_match("/Success/i", $ldap->error)){
+    print_red(sprintf(_("User login failed. LDAP server said '%s'."), $ldap->get_error()));
+    $smarty= get_smarty();
+    $smarty->display(get_template_path('headers.tpl'));
+    echo "<body>".get_global('errors')."</body></html>";
+    exit();
+  }
+  $ldap->search("(&(objectClass=gosaAccount)(uid=$username))", array("uid"));
+  /* Found no uniq match? Strange, because we did above... */
+  if ($ldap->count() != 1) {
+    print_red(_("Username / UID is not unique. Please check your LDAP database."));
+    return (NULL);
+  }
+  $attrs= $ldap->fetch();
+
+  /* got user dn, fill acl's */
+  $ui= new userinfo($config, $ldap->getDN());
+  $ui->username= $attrs['uid'][0];
+
+  /* No password check needed - the webserver did it for us */
+  $ldap->disconnect();
+
+  /* Username is set, load subtreeACL's now */
+  $ui->loadACL();
+
+  /* TODO: check java script for htaccess authentication */
+  $_SESSION['js']= true;
+
+  return ($ui);
 }
 
 
@@ -3298,5 +3352,15 @@ function _get_tz_zones()
       );  
   return(array("TIMEZONES" => $timezones, "DST_ZONES" => $dst_timezones));
 }
+
+
+function display_error_page()
+{
+  $smarty= get_smarty();
+  $smarty->display(get_template_path('headers.tpl'));
+  echo "<body>".msg_dialog::get_dialogs()."</body></html>";
+  exit();
+}
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

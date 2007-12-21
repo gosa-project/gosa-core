@@ -202,20 +202,20 @@ if ($config->data['MAIN']['FORCESSL'] == 'true' && $ssl != ''){
 $htaccess_authenticated= FALSE;
 if (isset($config->data['MAIN']['HTACCESS_AUTH']) && preg_match('/^(yes|true)$/i', $config->data['MAIN']['HTACCESS_AUTH'])){
   if (!isset($_SERVER['REMOTE_USER'])){
-    echo "GOsa error: "._("There is a problem with the authentication setup. Please inform your system administrator.");
-    exit;
+    print_red(_("There is a problem with the authentication setup. Please inform your system administrator."));
+    display_error_page();
   }
 
   $tmp= process_htaccess($_SERVER['REMOTE_USER'], isset($_SERVER['KRB5CCNAME']));
   $username= $tmp['username'];
   $server= $tmp['server'];
   if ($username == ""){
-    echo "GOsa error: "._("Cannot find a valid user for the current authentication setup.");
-    exit;
+    print_red(_("Cannot find a valid user for the current authentication setup."));
+    display_error_page();
   }
   if ($server == ""){
-    echo "GOsa error: "._("User information is not uniq accross the configured directories. Cannot authenticated.");
-    exit;
+    print_red(_("User information is not uniq accross the configured directories. Cannot authenticated."));
+    display_error_page();
   }
 
   $htaccess_authenticated= TRUE;
@@ -303,8 +303,8 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
     if ($htaccess_authenticated){
       $ui= ldap_login_user_htaccess($username);
       if ($ui === NULL || !$ui){
-        echo "GOsa error: "._("Authentication via htaccess not possible. Unable to retrieve user information.");
-        exit;
+        print_red(_("Authentication via htaccess not possible. Unable to retrieve user information."));
+        display_error_page();
       }
     } else {
       $ui= ldap_login_user($username, $_POST["password"]);

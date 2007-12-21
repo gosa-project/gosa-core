@@ -41,6 +41,34 @@ if(isset($_SESSION['ui'])){
   new log("security","logout","",array(),"User \"".$ui->username."\" logged out") ;
 }
 
+/* Language setup */
+if ((!isset($config))||(empty($config->data['MAIN']['LANG']))){
+  $lang= get_browser_language();
+} else {
+  $lang= $config->data['MAIN']['LANG'];
+}
+
+$lang.=".UTF-8";
+putenv("LANGUAGE=");
+putenv("LANG=$lang");
+setlocale(LC_ALL, $lang);
+$GLOBALS['t_language']= $lang;
+$GLOBALS['t_gettext_message_dir'] = $BASE_DIR.'/locale/';
+
+/* Set the text domain as 'messages' */
+$domain = 'messages';
+bindtextdomain($domain, "$BASE_DIR/locale");
+textdomain($domain);
+
+/* Create smarty & Set template compile directory */
+$smarty= new smarty();
+if (isset ($config->data['MAIN']['COMPILE'])){
+  $smarty->compile_dir= $config->data['MAIN']['COMPILE'];
+} else {
+  $smarty->compile_dir= '/var/spool/gosa/';
+}
+
+    
 /* If GET request is posted, the logout was forced by pressing the link */
 if (isset($_GET['request'])){
   
@@ -48,38 +76,19 @@ if (isset($_GET['request'])){
   @session_unset ();
   @session_destroy ();
   
-  /* Go back to the base via header */
-  header ("Location: index.php");
-  exit();
+  /* If we're not using htaccess authentication, just redirect... */
+  if (!isset($config->data['MAIN']['HTACCESS_AUTH']) && !isset($_SERVER['REMOTE_USER'])){
+    header ("Location: index.php");
+    exit();
+  }
+
+  /* Else notice that the user has to close the browser... */
+  $smarty->display (get_template_path('headers.tpl'));
+  $smarty->display (get_template_path('logout-close.tpl'));
+  exit;
 
 }else{  // The logout wasn't forced, so the session is invalid 
   
-  /* Language setup */
-  if ((!isset($config))||(empty($config->data['MAIN']['LANG']))){
-    $lang= get_browser_language();
-  } else {
-    $lang= $config->data['MAIN']['LANG'];
-  }
-
-  $lang.=".UTF-8";
-  putenv("LANGUAGE=");
-  putenv("LANG=$lang");
-  setlocale(LC_ALL, $lang);
-  $GLOBALS['t_language']= $lang;
-  $GLOBALS['t_gettext_message_dir'] = $BASE_DIR.'/locale/';
-
-  /* Set the text domain as 'messages' */
-  $domain = 'messages';
-  bindtextdomain($domain, "$BASE_DIR/locale");
-  textdomain($domain);
-    
-  /* Create smarty & Set template compile directory */
-  $smarty= new smarty();
-  if (isset ($config->data['MAIN']['COMPILE'])){
-    $smarty->compile_dir= $config->data['MAIN']['COMPILE'];
-  } else {
-    $smarty->compile_dir= '/var/spool/gosa/';
-  }
   $smarty->display (get_template_path('headers.tpl'));
   $smarty->display (get_template_path('logout.tpl'));
   exit;
