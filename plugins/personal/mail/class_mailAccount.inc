@@ -423,47 +423,14 @@ class mailAccount extends plugin
   
     /* Import vacation message? */
     if (isset($_POST["import_vacation"]) && isset($this->vacation[$_POST["vacation_template"]])){
-      $contents= "";
-      $lines= file($_POST["vacation_template"]);
-      foreach ($lines as $line){
-        if (!preg_match('/^DESC:/', $line)){
-          $contents.= $line;
-        }
-      }
 
-      /* Replace attributes */
-      $attrs = array();
-      $obj = NULL;
-      if(isset($this->parent->by_object['user'])){
-        $attrs  = $this->parent->by_object['user']->attributes;
-        $obj    = $this->parent->by_object['user'];
-      }else{
-        $obj    = new user($this->config,$this->dn);
-        $attrs  = $obj->attributes;
-      }
-
-      if($obj){
-        foreach ($attrs as $val){
-          if(preg_match("/dateOfBirth/",$val)){
-            if($obj->use_dob){
-              $contents= preg_replace("/%$val/",date("Y-d-m",$obj->dateOfBirth),$contents);
-            }
-          }else {
-            $contents= preg_replace("/%$val/",
-                $obj->$val, $contents);
-          }
-
-          /* Replace vacation start and end time */
-          if(preg_match("/%start/",$contents)){
-            $contents = preg_replace("/%start/",date("d.m.Y",$this->gosaVacationStart),$contents);
-          }
-          if(preg_match("/%end/",$contents)){
-            $contents = preg_replace("/%end/",date("d.m.Y",$this->gosaVacationStop),$contents);
-          }
-        }
-      }
-
+      
       /* Save message */
+      if($this->multiple_support_active){
+        $contents = file_get_contents($_POST["vacation_template"]);
+      }else{
+        $contents = $this->prepare_vacation_template(file_get_contents($_POST["vacation_template"]));
+      }
       $this->gosaVacationMessage= htmlspecialchars($contents);
     }
 
@@ -1216,6 +1183,50 @@ class mailAccount extends plugin
         ));
   }
 
+
+  /*! \brief  Prepare importet vacation string. \
+              Replace placeholder like %givenName a.s.o.
+      @param  string  Vacation string
+      @return string  Completed vacation string
+   */  
+  private function prepare_vacation_template($contents)
+  {
+    /* Replace attributes */
+    $attrs = array();
+    $obj   = NULL;
+    if(isset($this->parent->by_object['user'])){
+      $attrs  = $this->parent->by_object['user']->attributes;
+      $obj    = $this->parent->by_object['user'];
+    }else{
+      $obj    = new user($this->config,$this->dn);
+      $attrs  = $obj->attributes;
+    }
+
+    if($obj){
+      foreach ($attrs as $val){
+        if(preg_match("/dateOfBirth/",$val)){
+          if($obj->use_dob){
+            $contents= preg_replace("/%$val/",date("Y-d-m",$obj->dateOfBirth),$contents);
+          }
+        }else {
+          $contents= preg_replace("/%$val/",
+              $obj->$val, $contents);
+        }
+
+        /* Replace vacation start and end time */
+        if(preg_match("/%start/",$contents)){
+          $contents = preg_replace("/%start/",date("d.m.Y",$this->gosaVacationStart),$contents);
+        }
+        if(preg_match("/%end/",$contents)){
+          $contents = preg_replace("/%end/",date("d.m.Y",$this->gosaVacationStop),$contents);
+        }
+      }
+    }
+    return($contents);
+  }
+
+  
+
   /* Upated shared folder ACLs 
    */
   function updateSharedFolder()
@@ -1364,6 +1375,12 @@ class mailAccount extends plugin
       }
     }
     $this->gosaMailDeliveryMode = "[".$tmp."]";
+
+    /* Set vacation message and replace placeholder like %givenName 
+     */
+    if(isset($values['gosaVacationMessage'])){
+      $this->gosaVacationMessage = $this->prepare_vacation_template($values['gosaVacationMessage']);
+    }
   }
 }
 
