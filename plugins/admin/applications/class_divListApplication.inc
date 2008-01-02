@@ -22,7 +22,7 @@ class divListApplication extends MultiSelectWindow
   {
     MultiSelectWindow::MultiSelectWindow($config,"Application", "application");
    
-    $this->selectedRelease = "ou=apps,".$_SESSION['CurrentMainBase'];
+    $this->selectedRelease = get_ou('applicationou').$_SESSION['CurrentMainBase'];
  
     $this->parent       = &$parent;
     $this->ui           = get_userinfo();

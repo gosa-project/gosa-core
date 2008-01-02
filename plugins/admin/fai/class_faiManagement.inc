@@ -456,7 +456,7 @@ class faiManagement extends plugin
           $name = $br[$bb];
           $ldap->cd($bb);
           $ldap->recursive_remove();
-          $ldap->cd(preg_replace('/,ou=fai,ou=configs,ou=systems,/', ',ou=apps,', $bb));
+          $ldap->cd(preg_replace('/,ou=fai,ou=configs,ou=systems,/', ','.get_ou('applicationou'), $bb));
           $ldap->recursive_remove();
           $this->DivListFai->selectedBranch = "main";
 
@@ -555,8 +555,8 @@ class faiManagement extends plugin
           }
         }
 
-        $appsrc = preg_replace("/ou=fai,ou=configs,ou=systems,/","ou=apps,",$baseToUse); 
-        $appdst = preg_replace("/ou=fai,ou=configs,ou=systems,/","ou=apps,","ou=".$name.",".$baseToUse) ; 
+        $appsrc = preg_replace("/ou=fai,ou=configs,ou=systems,/",get_ou('applicationou'),$baseToUse); 
+        $appdst = preg_replace("/ou=fai,ou=configs,ou=systems,/",get_ou('applicationou'),"ou=".$name.",".$baseToUse) ; 
 
         $mimesrc = preg_replace("/ou=fai,ou=configs,ou=systems,/","ou=mime,",$baseToUse); 
         $mimedst = preg_replace("/ou=fai,ou=configs,ou=systems,/","ou=mime,","ou=".$name.",".$baseToUse) ; 

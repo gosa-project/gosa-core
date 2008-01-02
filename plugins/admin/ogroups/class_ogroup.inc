@@ -387,7 +387,7 @@ class ogroup extends plugin
 
     $p_f= array("accounts"        => array("CLASS"=>"gosaAccount"    ,"DN"=> get_people_ou()                  ,"ACL" => "users"), 
                 "groups"          => array("CLASS"=>"posixGroup"     ,"DN"=> get_groups_ou()                  ,"ACL" => "groups"), 
-                "applications"    => array("CLASS"=>"gosaApplication","DN"=> "ou=apps,"                       ,"ACL" => "application"), 
+                "applications"    => array("CLASS"=>"gosaApplication","DN"=> get_ou('applicationou')          ,"ACL" => "application"), 
                 "departments"     => array("CLASS"=>"gosaDepartment" ,"DN"=> ""                               ,"ACL" => "department"), 
                 "servers"         => array("CLASS"=>"goServer"       ,"DN"=> "ou=servers,ou=systems,"         ,"ACL" => "server"),
                 "workstations"    => array("CLASS"=>"gotoWorkstation","DN"=> "ou=workstations,ou=systems,"    ,"ACL" => "workstation"),

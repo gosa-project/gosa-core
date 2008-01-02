@@ -69,9 +69,9 @@ class applicationManagement extends plugin
   function getReleases($base)
   {
     $ldap                   = $this->config->get_ldap_link();
-    $dn                     = "ou=apps,".$base;
+    $dn                     = get_ou('applicationou').$base;
     $ret                    = array();
-    $ret ["ou=apps,".$base] = "/";
+    $ret [get_ou('applicationou').$base] = "/";
 
     $ldap->cd($dn);
     $ldap->search("objectClass=organizationalUnit",array("ou"));
@@ -507,12 +507,12 @@ class applicationManagement extends plugin
     $Releases   = $this->getReleases($base);
 
     if(!$this->enableReleaseManagement){
-      $use_base = "ou=apps,".$base;
+      $use_base = get_ou('applicationou').$base;
     }else{
       if(isset($Releases[$release])){
         $use_base  = $release;
       }else{
-        $use_base  = "ou=apps,".$base;
+        $use_base  = get_ou('applicationou').$base;
       }
     }
 

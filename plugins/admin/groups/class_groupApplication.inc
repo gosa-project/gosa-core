@@ -875,8 +875,8 @@ class appgroup extends plugin
 
     $ret =array();
     foreach($res as $attrs){
-      if(preg_match("/ou=apps,/",$attrs['dn'])){
-        $bb     = preg_replace("/ou=apps,.*/","",$attrs['dn']);
+      if(preg_match("/".get_ou('applicationou')."/",$attrs['dn'])){
+        $bb     = preg_replace("/".get_ou('applicationou').".*/","",$attrs['dn']);
         $parts  = array_reverse(split("ou=",$bb));
 
         $str ="";
@@ -1069,12 +1069,12 @@ class appgroup extends plugin
       }
 
       /* Get applications for this release */
-      $base = preg_replace("/ou=apps,.*$/","ou=apps,".$this->curbase,$base);
+      $base = preg_replace("/".get_ou('applicationou').".*$/",get_ou('applicationou').$this->curbase,$base);
       $res = get_list("(objectClass=gosaApplication)","application",$base,array("*"));
     }else{
     
       /* Get applications for this base */
-      $res = get_list("(objectClass=gosaApplication)","application","ou=apps,".$this->curbase,array("*"));
+      $res = get_list("(objectClass=gosaApplication)","application",get_ou('applicationou').$this->curbase,array("*"));
     }
     
     /* Append applications */
@@ -1097,11 +1097,11 @@ class appgroup extends plugin
       $tmp = array_flip($this->Releases);
       foreach($res as $attrs){
         
-        $testdn = preg_replace("/ou=apps,.*$/","ou=apps",$attrs['dn']);
+        $testdn = preg_replace("/".get_ou('applicationou').".*$/",get_ou('applicationou'),$attrs['dn']);
         $testdn = preg_replace("/^[^,]+/","",$testdn);
         $testdn = preg_replace("/^,/","",$testdn);
 
-        if($testdn == preg_replace("/ou=apps,.*$/","ou=apps",$tmp[$this->FAIrelease])){
+        if($testdn == preg_replace("/".get_ou('applicationou').".*$/",get_ou('applicationou'),$tmp[$this->FAIrelease])){
           $this->AllAppsForRelease[$attrs['dn']] = $attrs['cn'][0];
           $this->AllAppsForReleaseParameter[$this->FAIrelease][$attrs['cn'][0]] = $attrs;
         }

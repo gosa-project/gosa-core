@@ -35,7 +35,7 @@ class application extends plugin
 
     $tmp = $this->config->search("faiManagement", "CLASS",array('menu','tabs'));
     if(!empty($tmp)) {
-      if(!preg_match("/^ou=apps,/",$_SESSION['appfilter']['release'])){
+      if(!preg_match("/^".get_ou('applicationou')."/",$_SESSION['appfilter']['release'])){
         $this->isReleaseApplikation = true;  
       }
     }
@@ -66,7 +66,7 @@ class application extends plugin
     } else {
 
       if($this->isReleaseApplikation){
-        $this->base = preg_replace("/^.*,ou=apps,/","",$this->dn);
+        $this->base = preg_replace("/^.*,".get_ou('applicationou')."/","",$this->dn);
       }else{
         $this->base= preg_replace ("/^[^,]+,[^,]+,/", "", $this->dn);
       }
@@ -383,7 +383,7 @@ class application extends plugin
 
     /* Permissions for that base? */
     if ($this->base != ""){
-      $new_dn= "cn=".$this->cn.",ou=apps,".$this->base;
+      $new_dn= "cn=".$this->cn.",".get_ou('applicationou').$this->base;
     } else {
       $new_dn= $this->dn;
     }
@@ -413,7 +413,7 @@ class application extends plugin
     $tmp = $this->config->search("faiManagement", "CLASS",array('menu','tabs'));
     if((!empty($tmp)) && (isset($_SESSION['appfilter']['release']))){
       $baseDn = str_replace($this->config->current['BASE'],$this->base,$_SESSION['appfilter']['release']);
-      $baseDn = preg_replace("/ou=apps,.*/","ou=apps,".$this->base,$_SESSION['appfilter']['release']);
+      $baseDn = preg_replace("/".get_ou('applicationou').".*/",get_ou('applicationou').$this->base,$_SESSION['appfilter']['release']);
       $ldap->ls("(&(objectClass=gosaApplication)(cn=".$this->cn."))",$baseDn,array("cn"));
       if($ldap->count()){
         $attrs = $ldap->fetch();
@@ -422,7 +422,7 @@ class application extends plugin
         }
       }
     }else{
-      $ldap->ls("(&(objectClass=gosaApplication)(cn=".$this->cn."))","ou=apps,".$this->base,array("cn"));
+      $ldap->ls("(&(objectClass=gosaApplication)(cn=".$this->cn."))",get_ou('applicationou').$this->base,array("cn"));
       if ($ldap->count()){
         $attrs = $ldap->fetch();
         if($this->dn != $attrs['dn']) {

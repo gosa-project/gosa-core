@@ -14,7 +14,7 @@ class apptabs extends tabs
 
   function set_release($newRelease)
   {
-    $this->Release= preg_replace('/,ou=apps,.*$/', '', $newRelease);
+    $this->Release= preg_replace('/,'.get_ou('applicationou').'.*$/', '', $newRelease);
     if ($this->Release != ""){
       $this->Release= ",".$this->Release;
     }
@@ -29,12 +29,12 @@ class apptabs extends tabs
     $tmp = $this->config->search("faiManagement", "CLASS",array('menu','tabs'));
     if((!empty($tmp)) && (isset($_SESSION['appfilter']['release']))){
       if(!$baseobject->isReleaseApplikation){
-        $new_dn= "cn=".$baseobject->cn.",ou=apps,".$baseobject->base;
+        $new_dn= "cn=".$baseobject->cn.",".get_ou('applicationou').$baseobject->base;
       }else{
         $new_dn ="cn=".$baseobject->cn.",".$_SESSION['appfilter']['release'];
       }
     }else{
-      $new_dn= "cn=".$baseobject->cn.",ou=apps,".$baseobject->base;
+      $new_dn= "cn=".$baseobject->cn.",".get_ou('applicationou').$baseobject->base;
     }
 
     /* Move group? */
