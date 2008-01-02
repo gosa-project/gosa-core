@@ -77,15 +77,16 @@ if (isset($_GET['request'])){
   @session_destroy ();
   
   /* If we're not using htaccess authentication, just redirect... */
-  if (!isset($config->data['MAIN']['HTACCESS_AUTH']) && !isset($_SERVER['REMOTE_USER'])){
-    header ("Location: index.php");
-    exit();
+  if (isset($config->data['MAIN']['HTACCESS_AUTH']) && preg_match('/^(true|yes)$/i', $config->data['MAIN']['HTACCESS_AUTH'])){
+
+    /* Else notice that the user has to close the browser... */
+    $smarty->display (get_template_path('headers.tpl'));
+    $smarty->display (get_template_path('logout-close.tpl'));
+    exit;
   }
 
-  /* Else notice that the user has to close the browser... */
-  $smarty->display (get_template_path('headers.tpl'));
-  $smarty->display (get_template_path('logout-close.tpl'));
-  exit;
+  header ("Location: index.php");
+  exit();
 
 }else{  // The logout wasn't forced, so the session is invalid 
   
