@@ -15,7 +15,7 @@ class devicetabs extends tabs
   function save($ignore_account= FALSE)
   {
     $baseobject= $this->by_object['deviceGeneric'];
-    $new_dn= "cn=".$baseobject->cn.",ou=devices,".$baseobject->base;
+    $new_dn= "cn=".$baseobject->cn.",".get_ou('deviceou').$baseobject->base;
 
     /* Move group? */
     if ($this->dn != $new_dn){

@@ -1041,6 +1041,9 @@ function get_ou($name)
                 "printerou"     => "ou=printers,ou=systems,",
                 "phoneou"       => "ou=phones,ou=systems,",
                 "componentou"   => "ou=netdevices,ou=systems,",
+                "macroou"       => "ou=macros,ou=asterisk,ou=configs,ou=systems,",
+                "conferenceou"  => "ou=conferences,ou=asterisk,ou=configs,ou=systems,",
+                "deviceou"      => "ou=devices,",
                 "mimetypeou"    => "ou=mime,");
 
   /* Preset ou... */

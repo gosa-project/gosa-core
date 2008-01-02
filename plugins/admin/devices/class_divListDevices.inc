@@ -120,7 +120,7 @@ class divListDevices extends MultiSelectWindow
 
     /* Get acls */
     $ui       = get_userinfo();
-    $acl      = $ui->get_permissions("cn=dummy,ou=devices,".$this->selectedBase,"devices/deviceGeneric");
+    $acl      = $ui->get_permissions("cn=dummy,".get_ou('deviceou').$this->selectedBase,"devices/deviceGeneric");
     $acl_all  = $ui->has_complete_category_acls($this->selectedBase,"devices") ;
 
 
