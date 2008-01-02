@@ -893,6 +893,7 @@ class appgroup extends plugin
         $ret[$attrs['dn']] = $name;
       }
     }
+    natcasesort($ret);
     return($ret);
   }
 
