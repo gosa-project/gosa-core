@@ -740,6 +740,9 @@ function get_sub_list($filter, $category,$sub_base, $base= "", $attributes= arra
     $ldap->cd ($base);
   }
 
+  /* Remove , ("ou=1,ou=2.." => "ou=1") */
+  $sub_base = preg_replace("/,.*$/","",$sub_base);
+
   /* Check if there is a sub department specified */
   if($sub_base == ""){
     trigger_error("Please specify a valid sub search base, like 'ou=apps'. Parameter 3");
@@ -1031,13 +1034,20 @@ function get_ou($name)
 {
   global $config;
 
+  $map = array( "applicationou" => "ou=apps,",
+                "mimetypeou"    => "ou=mime,");
+
   /* Preset ou... */
   if (isset($config->current[$name])){
     $ou= $config->current[$name];
+  } elseif (isset($map[$name])) {
+    $ou = $map[$name];
+    return($ou);
   } else {
     return "";
   }
-  
+ 
+ 
   if ($ou != ""){
     if (!preg_match('/^[^=]+=[^=]+/', $ou)){
       return @LDAP::convert("ou=$ou,");

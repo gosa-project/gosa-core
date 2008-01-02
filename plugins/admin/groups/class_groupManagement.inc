@@ -590,9 +590,9 @@ class groupManagement extends plugin
     }
 
     if ($SubSearch){
-      $res= get_list($filter, "groups", $base, $attrs, GL_SIZELIMIT| GL_SUBSEARCH);
+      $res= get_sub_list($filter, "groups",get_groups_ou(), $base, $attrs, GL_SIZELIMIT| GL_SUBSEARCH);
     } else {
-      $res= get_list($filter, "groups", get_groups_ou().$base, $attrs, GL_SIZELIMIT);
+      $res= get_sub_list($filter, "groups",get_groups_ou(), get_groups_ou().$base, $attrs, GL_SIZELIMIT);
     }
 
     /* Sort values into grouplist*/

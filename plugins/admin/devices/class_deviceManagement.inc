@@ -511,7 +511,7 @@ class deviceManagement extends plugin
     }
 
     /* Get results and create index */
-    $res= get_list($Filter, "devices", $base, array("cn","description","dn","objectClass"), $Flags);
+    $res= get_sub_list($Filter,"devices","ou=devices", $base, array("cn","description","dn","objectClass"), $Flags);
     $tmp2 = array();
     foreach ($res as $val){
       $tmp2[strtolower($val['cn'][0]).$val['cn'][0].$val['dn']] = strtolower($val['cn'][0]).$val['cn'][0].$val['dn'];
@@ -526,6 +526,7 @@ class deviceManagement extends plugin
     }
     reset ($this->devices);
   }
+
 
   function remove_lock()
   {

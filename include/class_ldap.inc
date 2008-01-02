@@ -1364,7 +1364,7 @@ class LDAP{
   {
     if (isset($_SESSION['config'])){
       $cfg= $_SESSION['config'];
-      if (isset($cfg->current['LDAPSTATS']) && preg_match('/true/i', $cfg->current['LDAPSTATS'])){
+      if (1 || isset($cfg->current['LDAPSTATS']) && preg_match('/true/i', $cfg->current['LDAPSTATS'])){
         syslog (LOG_INFO, $string);
       }
     }

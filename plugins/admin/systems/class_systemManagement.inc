@@ -1001,7 +1001,7 @@ class systems extends plugin
         if($this->DivListSystem->SubSearch){
           if($oc['CLASS'] != ""){
             $filter = "(&".$userregex."(objectClass=".$oc['CLASS'].")(cn=".$this->DivListSystem->Regex."))";
-            $new_res = get_list($filter, $sys_categories , $base,$sys_attrs, GL_NONE | GL_SUBSEARCH | GL_SIZELIMIT);
+            $new_res = get_sub_list($filter, $sys_categories ,preg_replace("/,.*$/","",$base), $base,$sys_attrs, GL_NONE | GL_SUBSEARCH | GL_SIZELIMIT);
       
             /* Remove all objects that are not in the expected sub department */
             foreach($new_res as $key => $obj){
@@ -1014,7 +1014,7 @@ class systems extends plugin
           /* User filter? */
           if($oc['CLASS'] != ""){
             $filter = "(&".$userregex."(objectClass=".$oc['CLASS'].")(cn=".$this->DivListSystem->Regex."))";
-            $res = array_merge($res,get_list($filter,$sys_categories,$oc['TREE'].$base, $sys_attrs, GL_NONE | GL_SIZELIMIT));
+            $res = array_merge($res,get_sub_list($filter,$sys_categories,preg_replace("/,.*$/","",$oc['TREE']),$oc['TREE'].$base, $sys_attrs, GL_NONE | GL_SIZELIMIT));
           }
         }
       } 
@@ -1022,7 +1022,7 @@ class systems extends plugin
 
     /* Search for incoming objects */ 
     $filter = "(|(&".$userregex."(objectClass=goHard)(cn=".$this->DivListSystem->Regex.")))";
-    $res = array_merge($res,get_list($filter,$sys_categories,"ou=incoming,".$base,$sys_attrs, GL_NONE | GL_SIZELIMIT));
+    $res = array_merge($res,get_list($filter,$sys_categories,"ou=incoming","ou=incoming,".$base,$sys_attrs, GL_NONE | GL_SIZELIMIT));
 
     /* Get all gotoTerminal's */
     foreach ($res as $value){

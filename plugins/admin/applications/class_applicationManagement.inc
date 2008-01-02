@@ -520,7 +520,7 @@ class applicationManagement extends plugin
       $Flags    |= GL_SUBSEARCH;  
     }
    
-    $res= get_list($Filter, "application", $use_base, array("cn","description","dn","objectClass"), $Flags);
+    $res= get_sub_list($Filter, "application",get_ou('applicationou'), $use_base, array("cn","description","dn","objectClass"), $Flags);
     $tmp2 = array();
     foreach ($res as $val){
       $tmp[strtolower($val['cn'][0]).$val['cn'][0].$val['dn']]=$val;
