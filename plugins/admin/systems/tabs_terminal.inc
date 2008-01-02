@@ -55,7 +55,7 @@ class termtabs extends tabs
     /* Check for new 'dn', in order to propagate the
        'dn' to all plugins */
     $baseobject= $this->by_object['termgeneric'];
-    $this->dn= "cn=".$baseobject->cn.",ou=terminals,ou=systems,".$baseobject->base;
+    $this->dn= "cn=".$baseobject->cn.",".get_ou('terminalou').$baseobject->base;
     $baseobject->dn= $this->dn;
 
     foreach ($this->by_object as $key => $obj){

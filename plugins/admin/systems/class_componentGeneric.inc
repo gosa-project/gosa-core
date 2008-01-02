@@ -180,7 +180,7 @@ class componentGeneric extends plugin
     $message= plugin::check();
     $message= array_merge($message,$this->netConfigDNS->check());
 
-    $this->dn= "cn=".$this->cn.",ou=netdevices,ou=systems,".$this->base;
+    $this->dn= "cn=".$this->cn.",".get_ou('componentou').$this->base;
 
     if ($this->cn == "" ){
       $message[]= _("The required field 'Component name' is not set.");

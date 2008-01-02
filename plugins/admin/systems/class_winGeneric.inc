@@ -198,7 +198,7 @@ class wingeneric extends plugin
     /* Call common method to give check the hook */
     $message= plugin::check();
     $message= array_merge($message, $this->netConfigDNS->check());
-    $this->dn= "cn=".$this->cn.",ou=netdevices,ou=systems,".$this->base;
+    $this->dn= "cn=".$this->cn.",".get_ou('componentou').$this->base;
     
     /* Set new acl base */
     if($this->dn == "new") {

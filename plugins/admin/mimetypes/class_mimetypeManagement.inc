@@ -64,9 +64,9 @@ class mimetypeManagement extends plugin
   function getReleases($base)
   {
     $ldap                   = $this->config->get_ldap_link();
-    $dn                     = "ou=mime,".$base;
+    $dn                     = get_ou('mimetypeou').$base;
     $ret                    = array();
-    $ret ["ou=mime,".$base] = "/";    
+    $ret [get_ou('mimetypeou').$base] = "/";    
 
     $ldap->cd($dn);
     $ldap->search("objectClass=organizationalUnit",array("ou"));
@@ -521,7 +521,7 @@ class mimetypeManagement extends plugin
       $Flags    |= GL_SUBSEARCH;  
     }else{
       if(!$this->enableReleaseManagement){
-        $use_base ="ou=mime,".$use_base;
+        $use_base = get_ou('mimetypeou').$use_base;
       }
     }
   

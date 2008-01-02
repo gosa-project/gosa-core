@@ -66,11 +66,11 @@ class printgeneric extends plugin
 
     /* Update dn, to ensure storing as printer instead of WS / terminal */
     if(preg_match("/Terminal/i",$this->BelongsTo) || preg_match("/TerminalTemplate/i",$this->BelongsTo)){
-      $this->dn= preg_replace("/ou=terminals,/","ou=printers,",$this->dn);
+      $this->dn= preg_replace("/".normalizePreg(get_ou('terminalou'))."/",get_ou('printerou'),$this->dn);
     }
 
     if(preg_match("/Workstation/i",$this->BelongsTo) || preg_match("/WorkstationTemplate/i",$this->BelongsTo)){
-      $this->dn= preg_replace("/ou=workstations,/","ou=printers,",$this->dn);
+      $this->dn= preg_replace("/".normalizePreg(get_ou('workstationou'))."/",get_ou('printerou'),$this->dn);
     }
 
     $this->orig_dn = $this->dn;
@@ -102,7 +102,7 @@ class printgeneric extends plugin
       if(preg_match("/ou=incoming,/",$this->dn)){
         $this->base= preg_replace("/ou=incoming,/","",dn2base($this->dn));
       }else{
-        $this->base= preg_replace("/ou=printers,ou=systems,/","",dn2base($this->dn));
+        $this->base= preg_replace("/".normalizePreg(get_ou('printerou')).",/","",dn2base($this->dn));
       }
 
       if(!isset($this->config->idepartments[$this->base])){
@@ -222,11 +222,11 @@ class printgeneric extends plugin
       /* Update dn, to ensure storing as printer instead of WS / terminal
        */
       if(preg_match("/terminal/i",$this->BelongsTo)){
-        $this->dn= preg_replace("/ou=terminals,/","ou=printers,",$this->dn);
+        $this->dn= preg_replace("/".normalizePreg(get_ou('terminalou'))."/",get_ou('printerou'),$this->dn);
       }
 
       if(preg_match("/workstation/i",$this->BelongsTo)){
-        $this->dn= preg_replace("/ou=workstations,/","ou=printers,",$this->dn);
+        $this->dn= preg_replace("/".normalizePreg(get_ou('workstationou'))."/",get_ou('printerou'),$this->dn);
       }
 
       /* Detect if this is a valid printer account;
@@ -571,11 +571,11 @@ class printgeneric extends plugin
       /* Update dn, to ensure storing as printer instead of WS / terminal
        */
       if(preg_match("/terminal/i",$this->BelongsTo)){
-        $this->dn= preg_replace("/ou=terminals,/","ou=printers,",$this->dn);
+        $this->dn= preg_replace("/".normalizePreg(get_ou('terminalou')).",/",get_ou('printerou'),$this->dn);
       }
 
       if(preg_match("/workstation/i",$this->BelongsTo)){
-        $this->dn= preg_replace("/ou=workstations,/","ou=printers,",$this->dn);
+        $this->dn= preg_replace("/".normalizePreg(get_ou('workstationou'))."/",get_ou('printerou'),$this->dn);
       }
 
       /* Check if this dn points to a printer, to avoid deleting something else */
@@ -663,7 +663,7 @@ class printgeneric extends plugin
       }
     }
 
-    $dn= "cn=".$this->cn.",ou=printers,ou=systems,".$this->base;
+    $dn= "cn=".$this->cn.get_ou('printerou').",".$this->base;
 
     /* must: cn */
     if(($this->BelongsTo == "Printer") && (empty($this->cn))){
@@ -684,7 +684,7 @@ class printgeneric extends plugin
     if (($this->orig_dn != $dn)&&( preg_match("/printer/i",$this->BelongsTo))){
       $ldap= $this->config->get_ldap_link();
       $ldap->cd ($this->base);
-      $ldap->ls("(cn=".$this->cn.")","ou=printers,ou=systems,".$this->base, array("cn"));
+      $ldap->ls("(cn=".$this->cn.")",get_ou('printerou').$this->base, array("cn"));
       if ($ldap->count() != 0){
         while ($attrs= $ldap->fetch()){
           if(preg_match("/cn=dhcp,/",$attrs['dn'])){
@@ -708,11 +708,11 @@ class printgeneric extends plugin
     /* Update dn, to ensure storing as printer instead of WS / terminal
      */
     if(preg_match("/terminal/i",$this->BelongsTo)){
-      $this->dn= preg_replace("/ou=terminals,/","ou=printers,",$this->dn);
+      $this->dn= preg_replace("/".normalizePreg(get_ou('terminalou')).",/",get_ou('printerou'),$this->dn);
     }
 
     if(preg_match("/workstation/i",$this->BelongsTo)){
-      $this->dn= preg_replace("/ou=workstations,/","ou=printers,",$this->dn);
+      $this->dn= preg_replace("/".normalizePreg(get_ou('workstationou'))."/",get_ou('printerou'),$this->dn);
     }
     
     if(!$this->is_account) return;

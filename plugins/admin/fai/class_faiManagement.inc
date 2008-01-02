@@ -558,8 +558,8 @@ class faiManagement extends plugin
         $appsrc = preg_replace("/ou=fai,ou=configs,ou=systems,/",get_ou('applicationou'),$baseToUse); 
         $appdst = preg_replace("/ou=fai,ou=configs,ou=systems,/",get_ou('applicationou'),"ou=".$name.",".$baseToUse) ; 
 
-        $mimesrc = preg_replace("/ou=fai,ou=configs,ou=systems,/","ou=mime,",$baseToUse); 
-        $mimedst = preg_replace("/ou=fai,ou=configs,ou=systems,/","ou=mime,","ou=".$name.",".$baseToUse) ; 
+        $mimesrc = preg_replace("/ou=fai,ou=configs,ou=systems,/",get_ou('mimetypeou'),$baseToUse); 
+        $mimedst = preg_replace("/ou=fai,ou=configs,ou=systems,/",get_ou('mimetypeou'),"ou=".$name.",".$baseToUse) ; 
 
         /* Check if source depeartments exist */
         foreach(array($baseToUse,$appsrc,$mimesrc) as $dep){

@@ -22,7 +22,7 @@ class componenttabs extends tabs
     /* Check for new 'dn', in order to propagate the
        'dn' to all plugins */
     $baseobject= $this->by_object['componentGeneric'];
-    $this->dn= "cn=$baseobject->cn,ou=netdevices,ou=systems,".$baseobject->base;
+    $this->dn= "cn=$baseobject->cn,".get_ou('componentou').$baseobject->base;
     $baseobject->dn= $this->dn;
 
     foreach ($this->by_object as $key => $obj){

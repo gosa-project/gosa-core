@@ -539,7 +539,7 @@ class mimetype extends plugin
     $ldap->cd($this->config->current["BASE"]);
     if($this->isReleaseMimeType && (isset($_SESSION['mimefilter']['release']))){
       $baseDn = str_replace($this->config->current['BASE'],$this->base,$_SESSION['mimefilter']['release']);
-      $baseDn = preg_replace("/ou=mime,.*/","ou=mime,".$this->base,$_SESSION['mimefilter']['release']);
+      $baseDn = preg_replace("/".get_ou('mimetypeou').".*/",get_ou('mimetypeou').$this->base,$_SESSION['mimefilter']['release']);
       $ldap->ls("(&(objectClass=gotoMimeType)(cn=".$this->cn."))",$baseDn,array("cn"));
       if($ldap->count()){
         $attrs = $ldap->fetch();
@@ -548,7 +548,7 @@ class mimetype extends plugin
         }
       }
     }else{
-      $ldap->ls("(&(objectClass=gotoMimeType)(cn=".$this->cn."))","ou=mime,".$this->base,array("cn"));
+      $ldap->ls("(&(objectClass=gotoMimeType)(cn=".$this->cn."))",get_ou('mimetypeou').$this->base,array("cn"));
       if ($ldap->count()){
         $attrs = $ldap->fetch();
         if($this->dn != $attrs['dn']) {

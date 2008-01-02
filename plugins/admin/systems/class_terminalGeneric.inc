@@ -448,7 +448,7 @@ class termgeneric extends plugin
     }
 
     /* Permissions for that base? */
-    $this->dn= "cn=".$this->cn.",ou=terminals,ou=systems,".$this->base;
+    $this->dn= "cn=".$this->cn.",".get_ou('terminalou').$this->base;
 
     if ($this->cn == ""){
       $message[]= _("The required field 'Terminal name' is not set.");

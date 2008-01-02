@@ -26,7 +26,7 @@ class divListMimeTypes extends MultiSelectWindow
     MultiSelectWindow::MultiSelectWindow($config, "Mimetypes", "mimetypes");
   
     /* initialize required attributes */ 
-    $this->selectedRelease  = "ou=mime,".$_SESSION['CurrentMainBase'];
+    $this->selectedRelease  = get_ou('mimetypeou').$_SESSION['CurrentMainBase'];
     $this->parent           = &$parent;
     $this->ui               = get_userinfo();
     $this->AvailableReleases= $this->parent->getReleases($this->selectedBase);
@@ -143,7 +143,7 @@ class divListMimeTypes extends MultiSelectWindow
 
     /* Get acls */
     $ui       = get_userinfo();
-    $acl      = $ui->get_permissions("cn=dummy,ou=mimetypes,".$this->selectedBase,"mimetypes/mimetype");
+    $acl      = $ui->get_permissions("cn=dummy,".get_ou('mimetypeou').$this->selectedBase,"mimetypes/mimetype");
     $acl_all  = $ui->has_complete_category_acls($this->selectedBase,"mimetypes") ;
 
 

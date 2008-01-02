@@ -429,7 +429,7 @@ class workgeneric extends plugin
       $message= array_merge($message, $this->netConfigDNS->check());
     }
 
-    $this->dn= "cn=".$this->cn.",ou=workstations,ou=systems,".$this->base;
+    $this->dn= "cn=".$this->cn.",".get_ou('workstationou').$this->base;
 
     if ($this->cn == ""){
       $message[]= _("The required field 'Workstation name' is not set.");

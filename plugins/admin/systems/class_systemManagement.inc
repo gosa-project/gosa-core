@@ -896,14 +896,14 @@ class systems extends plugin
     /* Check acls, if we are not allowed to create and write each plugin tab, skip this object */
 
     $tabs = array(
-        "terminal"        => "ou=terminals,ou=systems,",
-        "workstation"     => "ou=workstations,ou=systems,",
+        "terminal"        => get_ou('terminalou'),
+        "workstation"     => get_ou('workstationou'),
         "incoming"        => "ou=incoming,",
-        "server"          =>  get_ou('serverou'),
-        "printer"         => "ou=printers,ou=systems,",
-        "phone"           => "ou=phones,ou=systems,",
+        "server"          => get_ou('serverou'),
+        "printer"         => get_ou('printerou'),
+        "phone"           => get_ou('phoneou'),
         "winworkstation"  => get_winstations_ou(),
-        "component"       => "ou=netdevices,ou=systems,"
+        "component"       => get_ou('componentou')
         ); 
 
     foreach($tabs as $acl_cat => $dn){
@@ -972,12 +972,13 @@ class systems extends plugin
     }
 
     /* This array represents the combination between checkboxes and search filters */
-    $objs = array( "ShowServers"        => array("CLASS" => "goServer"        ,"TREE" => get_ou('serverou')),
-        "ShowTerminals"      => array("CLASS" => "gotoTerminal"    ,"TREE" => "ou=terminals,ou=systems,"), 
-        "ShowPrinters"       => array("CLASS" => "gotoPrinter"     ,"TREE" => "ou=printers,ou=systems," ),
-        "ShowDevices"        => array("CLASS" => "ieee802Device"   ,"TREE" => "ou=netdevices,ou=systems," ),
-        "ShowPhones"         => array("CLASS" => "goFonHardware"   ,"TREE" => "ou=phones,ou=systems," ),
-        "ShowWorkstations"   => array("CLASS" => "gotoWorkstation" ,"TREE" => "ou=workstations,ou=systems," ),
+    $objs = array( 
+        "ShowServers"        => array("CLASS" => "goServer"        ,"TREE" => get_ou('serverou')),
+        "ShowTerminals"      => array("CLASS" => "gotoTerminal"    ,"TREE" => get_ou('terminalou')),
+        "ShowPrinters"       => array("CLASS" => "gotoPrinter"     ,"TREE" => get_ou('printerou')),
+        "ShowDevices"        => array("CLASS" => "ieee802Device"   ,"TREE" => get_ou('componentou')),
+        "ShowPhones"         => array("CLASS" => "goFonHardware"   ,"TREE" => get_ou('phoneou')),
+        "ShowWorkstations"   => array("CLASS" => "gotoWorkstation" ,"TREE" => get_ou('workstationou')),
         "ShowWinWorkstations"=> array("CLASS" => $samba            ,"TREE" => get_winstations_ou() ));
 
     /* Include the 'Display Systems of user' attribute */ 

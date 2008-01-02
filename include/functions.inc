@@ -1036,6 +1036,11 @@ function get_ou($name)
 
   $map = array( "applicationou" => "ou=apps,",
                 "serverou"      => "ou=servers,ou=systems,",
+                "terminalou"    => "ou=terminals,ou=systems,",
+                "workstationou" => "ou=workstations,ou=systems,",
+                "printerou"     => "ou=printers,ou=systems,",
+                "phoneou"       => "ou=phones,ou=systems,",
+                "componentou"   => "ou=netdevices,ou=systems,",
                 "mimetypeou"    => "ou=mime,");
 
   /* Preset ou... */

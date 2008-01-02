@@ -323,7 +323,7 @@ class phoneGeneric extends plugin
     $message= plugin::check();
     $message= array_merge($message, $this->netConfigDNS->check());
 
-    $this->dn= "cn=".$this->cn.",ou=phones,ou=systems,".$this->base;
+    $this->dn= "cn=".$this->cn.",".get_ou('phoneou').$this->base;
 
     /* To check for valid ip*/
     if($this->netConfigDNS->ipHostNumber == ""){

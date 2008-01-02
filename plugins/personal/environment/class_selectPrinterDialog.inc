@@ -134,7 +134,7 @@ class selectPrinterDialog extends plugin
     if ($this->subtreesearch){
       $res    = get_list($filter,$module,$base,$attrs, GL_SIZELIMIT | GL_SUBSEARCH);
     } else {
-      $base= "ou=printers,ou=systems,".$base;
+      $base= get_ou('printerou').$base;
       $res    = get_list($filter,$module,$base,$attrs, GL_SIZELIMIT);
     }
 

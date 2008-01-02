@@ -14,7 +14,7 @@ class mimetabs extends tabs
 
   function set_release($newRelease)
   {
-    $this->Release= preg_replace('/,ou=mime,.*$/', '', $newRelease);
+    $this->Release= preg_replace('/,'.get_ou('mimetypeou').'.*$/', '', $newRelease);
     if ($this->Release != ""){
       $this->Release= ",".$this->Release;
     }
@@ -30,12 +30,12 @@ class mimetabs extends tabs
 
     if((!empty($tmp)) && (isset($_SESSION['mimefilter']['release']))){
       if(!$baseobject->isReleaseMimeType){
-        $new_dn= "cn=".$baseobject->cn.",ou=mime,".$baseobject->base;
+        $new_dn= "cn=".$baseobject->cn.",".get_ou('mimetypeou').$baseobject->base;
       }else{
         $new_dn ="cn=".$baseobject->cn.",".$_SESSION['mimefilter']['release'];
       }
     }else{
-      $new_dn= "cn=".$baseobject->cn.",ou=mime,".$baseobject->base;
+      $new_dn= "cn=".$baseobject->cn.",".get_ou('mimetypeou').$baseobject->base;
     }
 
     /* Move group? */
