@@ -843,6 +843,7 @@ class appgroup extends plugin
       $ret['/']= '/';
     }
 
+    natcasesort($ret);
     return($ret);
   }
 
