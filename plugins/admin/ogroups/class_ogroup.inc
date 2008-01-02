@@ -389,7 +389,7 @@ class ogroup extends plugin
                 "groups"          => array("CLASS"=>"posixGroup"     ,"DN"=> get_groups_ou()                  ,"ACL" => "groups"), 
                 "applications"    => array("CLASS"=>"gosaApplication","DN"=> get_ou('applicationou')          ,"ACL" => "application"), 
                 "departments"     => array("CLASS"=>"gosaDepartment" ,"DN"=> ""                               ,"ACL" => "department"), 
-                "servers"         => array("CLASS"=>"goServer"       ,"DN"=> "ou=servers,ou=systems,"         ,"ACL" => "server"),
+                "servers"         => array("CLASS"=>"goServer"       ,"DN"=> get_ou('serverou')               ,"ACL" => "server"),
                 "workstations"    => array("CLASS"=>"gotoWorkstation","DN"=> "ou=workstations,ou=systems,"    ,"ACL" => "workstation"),
                 "terminals"       => array("CLASS"=>"gotoTerminal"   ,"DN"=> "ou=terminals,ou=systems,"       ,"ACL" => "terminal"),
                 "printers"        => array("CLASS"=>"gotoPrinter"    ,"DN"=> "ou=printers,ou=systems,"        ,"ACL" => "printer"),

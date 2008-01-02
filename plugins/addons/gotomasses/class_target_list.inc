@@ -257,7 +257,7 @@ class target_list extends MultiSelectWindow
             array("cn","objectClass","ipHostNumber","description"), GL_SIZELIMIT );
       $res= array_merge($res,get_list($filter, "workstation",  "ou=workstations,ou=systems,".$base, 
             array("cn","objectClass","ipHostNumber","description"), GL_SIZELIMIT ));
-      $res= array_merge($res,get_list($filter, "server", "ou=servers,ou=systems,".$base, 
+      $res= array_merge($res,get_list($filter, "server", get_ou('serverou').$base, 
             array("cn","objectClass","ipHostNumber","description"), GL_SIZELIMIT ));
     }
 

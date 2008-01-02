@@ -899,7 +899,7 @@ class systems extends plugin
         "terminal"        => "ou=terminals,ou=systems,",
         "workstation"     => "ou=workstations,ou=systems,",
         "incoming"        => "ou=incoming,",
-        "server"          => "ou=servers,ou=systems,",
+        "server"          =>  get_ou('serverou'),
         "printer"         => "ou=printers,ou=systems,",
         "phone"           => "ou=phones,ou=systems,",
         "winworkstation"  => get_winstations_ou(),
@@ -972,7 +972,7 @@ class systems extends plugin
     }
 
     /* This array represents the combination between checkboxes and search filters */
-    $objs = array( "ShowServers"        => array("CLASS" => "goServer"        ,"TREE" => "ou=servers,ou=systems," ),
+    $objs = array( "ShowServers"        => array("CLASS" => "goServer"        ,"TREE" => get_ou('serverou')),
         "ShowTerminals"      => array("CLASS" => "gotoTerminal"    ,"TREE" => "ou=terminals,ou=systems,"), 
         "ShowPrinters"       => array("CLASS" => "gotoPrinter"     ,"TREE" => "ou=printers,ou=systems," ),
         "ShowDevices"        => array("CLASS" => "ieee802Device"   ,"TREE" => "ou=netdevices,ou=systems," ),

@@ -289,7 +289,7 @@ class servgeneric extends plugin
     /* Call common method to give check the hook */
     $message= plugin::check();
     $message= array_merge($message, $this->netConfigDNS->check());
-    $this->dn= "cn=".$this->cn.",ou=servers,ou=systems,".$this->base;
+    $this->dn= "cn=".$this->cn.",".get_ou('serverou').$this->base;
 
     /* must: cn */
     if ($this->cn == ""){
@@ -308,7 +308,7 @@ class servgeneric extends plugin
       if ($ldap->count() != 0){
         while ($attrs= $ldap->fetch()){
           if ($attrs['dn'] != $this->orig_dn){
-            if(!preg_match("/cn=dhcp,/",$attrs['dn']) && !preg_match("/,ou=incoming,/",$attrs['dn']) && preg_match("/,ou=servers,ou=systems,/",$attrs['dn'])){
+            if(!preg_match("/cn=dhcp,/",$attrs['dn']) && !preg_match("/,ou=incoming,/",$attrs['dn']) && preg_match("/,".get_ou('serverou')."/",$attrs['dn'])){
               $message[]= sprintf (_("There is already an entry '%s' in the base choosen by you"), $this->cn);
               break;
             }

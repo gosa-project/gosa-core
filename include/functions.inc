@@ -1035,6 +1035,7 @@ function get_ou($name)
   global $config;
 
   $map = array( "applicationou" => "ou=apps,",
+                "serverou"      => "ou=servers,ou=systems,",
                 "mimetypeou"    => "ou=mime,");
 
   /* Preset ou... */
