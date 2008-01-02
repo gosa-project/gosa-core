@@ -715,6 +715,102 @@ function get_multiple_locks($objects)
 }
 
 
+/* \!brief  This function searches the ldap database.
+            It search in  $sub_base,*,$base  for all objects matching the $filter.
+
+    @param $filter    String The ldap search filter
+    @param $category  String The ACL category the result objects belongs 
+    @param $sub_base  String The sub base we want to search for e.g. "ou=apps"
+    @param $base      String The ldap base from which we start the search
+    @param $attributes Array The attributes we search for.
+    @param $flags     Long   A set of Flags
+ */
+function get_sub_list($filter, $category,$sub_base, $base= "", $attributes= array(), $flags= GL_SUBSEARCH)
+{
+
+  global $config, $ui;
+
+  /* Get LDAP link */
+  $ldap= $config->get_ldap_link($flags & GL_SIZELIMIT);
+
+  /* Set search base to configured base if $base is empty */
+  if ($base == ""){
+    $ldap->cd ($config->current['BASE']);
+  } else {
+    $ldap->cd ($base);
+  }
+
+  /* Check if there is a sub department specified */
+  if($sub_base == ""){
+    trigger_error("Please specify a valid sub search base, like 'ou=apps'. Parameter 3");
+    return(FALSE);
+  }
+
+  /* Get all deparments matching the given sub_base */
+  $departments = array();
+  $ldap->search($sub_base,array("dn"));
+  while($attrs = $ldap->fetch()){
+    $departments[$attrs['dn']] = $attrs['dn'];
+  }
+
+  $result= array();
+  $limit_exceeded = FALSE;
+
+  /* Search in all matching departments */
+  foreach($departments as $dep){
+
+    /* Break if the size limit is exceeded */
+    if($limit_exceeded){
+      return($result);
+    }
+
+    $ldap->cd($dep);
+
+    /* Perform ONE or SUB scope searches? */
+    if ($flags & GL_SUBSEARCH) {
+      $ldap->search ($filter, $attributes);
+    } else {
+      $ldap->ls ($filter,$base,$attributes);
+    }
+
+    /* Check for size limit exceeded messages for GUI feedback */
+    if (preg_match("/size limit/i", $ldap->error)){
+      register_global('limit_exceeded', TRUE);
+      $limit_exceeded = TRUE;
+    }
+
+    /* Crawl through result entries and perform the migration to the
+     result array */
+    while($attrs = $ldap->fetch()) {
+      $dn= $ldap->getDN();
+
+      /* Convert dn into a printable format */
+      if ($flags & GL_CONVERT){
+        $attrs["dn"]= convert_department_dn($dn);
+      } else {
+        $attrs["dn"]= $dn;
+      }
+
+      /* Sort in every value that fits the permissions */
+      if (is_array($category)){
+        foreach ($category as $o){
+          if ($ui->get_category_permissions($dn, $o) != ""){
+            $result[]= $attrs;
+            break;
+          }
+        }
+      } else {
+        if ($ui->get_category_permissions($dn, $category) != ""){
+          $result[]= $attrs;
+        }
+      }
+    }
+  }
+  return($result);
+}
+
+
+
 function get_list($filter, $category, $base= "", $attributes= array(), $flags= GL_SUBSEARCH)
 {
   global $config, $ui;
