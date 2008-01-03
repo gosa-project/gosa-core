@@ -34,42 +34,31 @@ $domain = 'messages';
 bindtextdomain($domain, "$BASE_DIR/locale");
 textdomain($domain);
 
-/* Set cookie lifetime to one day (The parameter is in seconds ) */
-session_set_cookie_params(24*60*60);
-
-/* Set cache limter to one day (parameter is minutes !!)*/
-session_cache_expire(60*24);  // default is 180
-
-/* Set session max lifetime, to prevent the garbage collector to delete session before timeout.
-    !! The garbage collector is a cron job on debian systems, the cronjob will fetch the timeout from 
-    the php.ini, so if you use debian, you must hardcode session.gc_maxlifetime in your php.ini */
-ini_set("session.gc_maxlifetime",24*60*60);
-
 /* Remember everything we did after the last click */
-session_start ();
-
-$_SESSION['limit_exceeded'] =FALSE;
+restore_error_handler();
+session::start();
+session::set('limit_exceeded',FALSE);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
   @DEBUG (DEBUG_POST, __LINE__, __FUNCTION__, __FILE__, $_POST, "_POST");
 }
-@DEBUG (DEBUG_POST, __LINE__, __FUNCTION__, __FILE__, $_SESSION, "_SESSION");
+@DEBUG (DEBUG_POST, __LINE__, __FUNCTION__, __FILE__, session::get_all(), "_SESSION");
 
 /* Logged in? Simple security check */
-if (!isset($_SESSION['config'])){
+if (!session::is_set('config')){
   new log("security","login","",array(),"main.php called without session - logging out") ;
   header ("Location: logout.php");
   exit;
 } 
 
 /* Check for uniqe ip address */
-$ui= $_SESSION["ui"];
+$ui= session::get('ui');
 if ($_SERVER['REMOTE_ADDR'] != $ui->ip){
   new log("security","login","",array(),"main.php called with session which has a changed IP address.") ;
   header ("Location: logout.php");
   exit;
 }
-$config= $_SESSION['config'];
+$config= session::get('config');
 $config->check_and_reload();
 
 /* Enable compressed output */
@@ -78,8 +67,8 @@ if (isset($config->data['MAIN']['COMPRESSED']) && preg_match('/^(true|on)$/i', $
 }
 
 /* Check for invalid sessions */
-if(empty($_SESSION['_LAST_PAGE_REQUEST'])){
-  $_SESSION['_LAST_PAGE_REQUEST']= time();
+if(session::get('_LAST_PAGE_REQUEST') == ""){
+  session::set('_LAST_PAGE_REQUEST',time());
 }else{
 
   /* check GOsa.conf for defined session lifetime */
@@ -90,7 +79,7 @@ if(empty($_SESSION['_LAST_PAGE_REQUEST'])){
   }
 
   /* get time difference between last page reload */
-  $request_time = (time()-$_SESSION['_LAST_PAGE_REQUEST']);
+  $request_time = (time()- session::get('_LAST_PAGE_REQUEST'));
 
   /* If page wasn't reloaded for more than max_life seconds 
    * kill session
@@ -101,7 +90,7 @@ if(empty($_SESSION['_LAST_PAGE_REQUEST'])){
     header ("Location: logout.php");
     exit;
   }
-  $_SESSION['_LAST_PAGE_REQUEST'] = time();
+  session::set('_LAST_PAGE_REQUEST',time());
 }
 
 
@@ -118,23 +107,23 @@ if (isset ($config->data['MAIN']['COMPILE'])){
 $reload_navigation = false;
 
 /* Set last initialised language to current, browser settings */
-if((!isset($_SESSION['Last_init_lang']))){
+if(!session::is_set('Last_init_lang')){
   $reload_navigation = true;
-  $_SESSION['Last_init_lang'] = get_browser_language();
+  session::set('Last_init_lang',get_browser_language());
 }
 
 /* If last language != current force navi reload */
 $lang= get_browser_language();
-if($_SESSION['Last_init_lang'] != $lang){
+if(session::get('Last_init_lang',$lang)){
   $reload_navigation = true;
 }
 
 /* Language setup */
-$_SESSION['Last_init_lang'] = $lang;
+session::set('Last_init_lang',$lang);
 
 /* Preset current main base */
-if(!isset($_SESSION['CurrentMainBase'])){
-  $_SESSION['CurrentMainBase']= get_base_from_people($ui->dn);
+if(session::is_set('CurrentMainBase')){
+  session::set('CurrentMainBase',get_base_from_people($ui->dn));
 }
 
 putenv("LANGUAGE=");
@@ -150,7 +139,7 @@ textdomain($domain);
 @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
 
 /* Prepare plugin list */
-if (!isset($_SESSION['plist'])){
+if (session::is_set('plist')){
   /* Initially load all classes */
   $class_list= get_declared_classes();
   foreach ($class_mapping as $class => $path){
@@ -159,14 +148,14 @@ if (!isset($_SESSION['plist'])){
     }
   }
   
-  $_SESSION['plist']= new pluglist($config, $ui);
+  session::set('plist', new pluglist($config, $ui));
 
   /* Load ocMapping into userinfo */
   $tmp= new acl($config, NULL, $ui->dn);
   $ui->ocMapping= $tmp->ocMapping;
-  $_SESSION['ui']= $ui;
+  session::set('ui',$ui);
 }
-$plist= $_SESSION['plist'];
+$plist= session::get('plist');
 
 /* Check for register globals */
 if (isset($global_check) && $config->data['MAIN']['FORCEGLOBALS'] == 'true'){
@@ -177,23 +166,24 @@ if (isset($global_check) && $config->data['MAIN']['FORCEGLOBALS'] == 'true'){
 }
 
 /* Check Plugin variable */
-if (isset($_SESSION['plugin_dir'])){
-  $old_plugin_dir= $_SESSION['plugin_dir'];
+if (session::is_set('plugin_dir')){
+  $old_plugin_dir= session::get('plugin_dir');
 } else {
   $old_plugin_dir= "";
 }
 if (isset($_GET['plug'])){
   $plug= validate($_GET['plug']);
   $plugin_dir= $plist->get_path($plug);
-  $_SESSION['plugin_dir']= $plugin_dir;
+  session::set('plugin_dir',$plugin_dir);
   if ($plugin_dir == ""){
     new log("security","gosa","",array(),"main.php called with invalid plug parameter \"$plug\"") ;
     header ("Location: logout.php");
     exit;
   }
 } else {
+
   /* set to welcome page as default plugin */
-  $_SESSION['plugin_dir']= "welcome";
+  session::set('plugin_dir',"welcome");
   $plugin_dir= "$BASE_DIR/plugins/generic/welcome";
 }
 
@@ -244,7 +234,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
   }
 
   if (isset($_POST['cancel_lock'])){
-    unset ($_SESSION['dn']);
+    session::un_set('dn');
   }
 }
 
@@ -252,21 +242,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 /* Load department list when plugin has changed. That is some kind of
    compromise between speed and beeing up to date */
 if (isset($_GET['reset'])){
-  if (isset($_SESSION['objectinfo'])){
-    unset ($_SESSION['objectinfo']);
+  if (session::is_set('objectinfo')){
+    session::un_set('objectinfo');
   }
 }
 
 /* Install eGOsa hooks, convert _POST to _SESSION['POST'] */
 if(isset($_GET['explorer'])){
-  $_SESSION{'eGosa'}=1;
+  session::set('eGosa',TRUE);
 }
-if(isset($_SESSION['POST'])){
+if(session::is_set('POST')){
   $_SERVER["REQUEST_METHOD"] = "POST";
-  foreach ($_SESSION['POST'] as $key => $dummy){
-    $_POST[$key]=$_SESSION['POST'][$key];
+  foreach (session::get('POST') as $key => $dummy){
+    $_POST[$key]= $dummy;
   }
-  unset($_SESSION['POST']);
+  session::un_set('POST');
 }
 
 /* show web frontend */
@@ -277,7 +267,7 @@ if (isset($plug)){
 } else {
   $plug= "";
 }
-if ($_SESSION['js']==FALSE){
+if (session::get('js')==FALSE){
   $smarty->assign("javascript", "false");
   $smarty->assign("help_method", "href='helpviewer.php$plug' target='_blank'");
 } else {
@@ -311,12 +301,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
   /* 'delete_lock' is set by the lock removal dialog. We should remove the
      lock at this point globally. Plugins do not need to remove it. */
-  if (isset($_POST['delete_lock']) && isset($_SESSION['dn'])){
-    del_lock ($_SESSION['dn']);
+  if (isset($_POST['delete_lock']) && session::is_set('dn')){
+    del_lock (session::get('dn'));
 
     /* Set old Post data */
-    if(isset($_SESSION['LOCK_VARS_USED'])){
-      foreach($_SESSION['LOCK_VARS_USED'] as $name => $value){
+    if(session::is_set('LOCK_VARS_USED')){
+      foreach(session::get('LOCK_VARS_USED') as $name => $value){
         $_GET[$name]  = $value;
         $_POST[$name] = $value;
       } 
@@ -329,18 +319,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
      to count a hidden field and warn the user if SESSION and INPUT count
      differ. */
   if (isset($_POST['session_cnt'])){
-    if ($_POST['session_cnt'] != $_SESSION['session_cnt']){
+    if ($_POST['session_cnt'] != session::get('session_cnt')){
       $smarty->display(get_template_path('conflict.tpl'));
       exit ();
     }
-    $_SESSION['session_cnt']= $_SESSION['session_cnt'] + 1;
-    $_SESSION['post_cnt']= validate($_POST['session_cnt']) + 1;
+    session::set('session_cnt',$_SESSION['session_cnt'] + 1);
+    session::set('post_cnt' , validate($_POST['session_cnt']) + 1);
   }
 }
 
 /* Only generate hidden click counter, if post_cnt is defined */
-if (isset ($_SESSION['post_cnt'])){
-  echo "<input type=\"hidden\" name=\"session_cnt\" value=\"".$_SESSION['post_cnt']."\">\n";
+if (session::is_set('post_cnt')){
+  echo "<input type=\"hidden\" name=\"session_cnt\" value=\"".session::get('post_cnt')."\">\n";
 }
 
 /* check if we are using account expiration */
@@ -376,8 +366,8 @@ $smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
 $smarty->assign("contents", $display);
 
 /* Assign erros to smarty */
-if (isset($_SESSION['errors'])){
-  $smarty->assign("errors", $_SESSION['errors']);
+if (session::is_set('errors')){
+  $smarty->assign("errors", session::get('errors'));
 }
 if ($error_collector != ""){
   $smarty->assign("php_errors", preg_replace("/%BUGBODY%/",$error_collector_mailto,$error_collector)."</div>");
@@ -387,7 +377,7 @@ if ($error_collector != ""){
 
 /* Set focus to the error button if we've an error message */
 $focus= "";
-if (isset($_SESSION['errors']) && $_SESSION['errors'] != ""){
+if (session::is_set('errors') && session::get('errors') != ""){
   $focus= '<script language="JavaScript" type="text/javascript">';
   $focus.= 'document.forms[0].error_accept.focus();';
   $focus.= '</script>';
@@ -413,23 +403,23 @@ if(isset($_COOKIE['GOsa_Filter_Settings'])){
 if(isset($config->data['MAIN']['SAVE_FILTER']) && preg_match("/true/",$config->data['MAIN']['SAVE_FILTER'])){
   $cookie_vars = array("MultiDialogFilters","CurrentMainBase");
   foreach($cookie_vars as $var){
-    if(isset($_SESSION[$var])){
-      $cookie[$ui->dn][$var] = $_SESSION[$var];
+    if(session::is_set($var)){
+      $cookie[$ui->dn][$var] = session::get($var);
     }
   }
   if(isset($_GET['plug'])){
     $cookie[$ui->dn]['plug'] = $_GET['plug'];
   }
-  setcookie("GOsa_Filter_Settings",base64_encode(serialize($cookie)),time() + (60*60*24));
+  @setcookie("GOsa_Filter_Settings",base64_encode(serialize($cookie)),time() + (60*60*24));
 }
 
 /* Show page... */
 echo $display;
 
 /* Save plist and config */
-$_SESSION['plist']= $plist;
-$_SESSION['config']= $config;
-$_SESSION['errorsAlreadyPosted']= array();
+session::set('plist',$plist);
+session::set('config',$config);
+session::set('errorsAlreadyPosted',array());
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
