@@ -456,7 +456,7 @@ class faiManagement extends plugin
           $name = $br[$bb];
           $ldap->cd($bb);
           $ldap->recursive_remove();
-          $ldap->cd(preg_replace('/,'.get_ou('faiou').'/', ','.get_ou('applicationou'), $bb));
+          $ldap->cd(preg_replace('/,'.normalizePreg(get_ou('faiou')).'/', ','.get_ou('applicationou'), $bb));
           $ldap->recursive_remove();
           $this->DivListFai->selectedBranch = "main";
 
