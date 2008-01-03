@@ -20,13 +20,14 @@
 
 if (!$remove_lock){
 	/* Create phonelist object on demand */
-	if (!isset($_SESSION['addressbook']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-		$_SESSION['addressbook']= new addressbook ($config);
-		$_SESSION['addressbook']->set_acl_base($ui->dn);
-		$_SESSION['addressbook']->set_acl_category("addressbook");
-		unset($_SESSION['show_info']);
+	if (!session::is_set('addressbook') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+		$addressbook = new addressbook ($config);
+		$addressbook -> set_acl_base($ui->dn);
+		$addressbook -> set_acl_category("addressbook");	
+		session::set('addressbook',$addressbook);
+		session::un_set('show_info');
 	}
-	$addressbook= $_SESSION['addressbook'];
+	$addressbook= session::get('addressbook');
 
 	/* Execute formular */
 	$display= $addressbook->execute ();
@@ -36,6 +37,6 @@ if (!$remove_lock){
 	$display= print_header(get_template_path('images/addressbook.png'), _("Address book")).$display;
 
 	/* Store changes  in session */
-	$_SESSION['addressbook']= $addressbook;
+	session::set('addressbook',$addressbook);
 }
 ?>

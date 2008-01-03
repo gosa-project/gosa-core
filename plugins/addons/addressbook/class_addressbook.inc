@@ -165,8 +165,8 @@ class addressbook extends plugin
         }
 
         /* Save to session */
-        $_SESSION['source']= $source;
-        $_SESSION['target']= $target;
+        session::set('source',$source);
+        session::set('target',$target);
 
         /* Perform call */
         if ($target != "" && $source != ""){
@@ -182,10 +182,10 @@ class addressbook extends plugin
     }
 
     /* Finally dial */
-    if (isset($_POST['dial']) && isset($_SESSION['source']) && isset($_SESSION['target'])){
-      exec ($this->config->current['CTIHOOK']." '".$_SESSION['source']."' '".$_SESSION['target']."'", $dummy, $retval);
-      unset($_SESSION['source']);
-      unset($_SESSION['target']);
+    if (isset($_POST['dial']) && session::is_set('source') && session::is_set('target')){
+      exec ($this->config->current['CTIHOOK']." '".session::get('source')."' '".session::get('target')."'", $dummy, $retval);
+      session::un_set('source');
+      session::un_set('target');
     }
 
 
@@ -217,11 +217,11 @@ class addressbook extends plugin
       del_lock ($this->dn);
 
       /* Clean up */
-      if (isset($_SESSION['saved_start'])){
-        $_GET['start']= $_SESSION['saved_start'];
+      if (session::is_set('saved_start')){
+        $_GET['start']= session::get('saved_start');
       }
-      unset($_SESSION['show_info']);
-      unset($_SESSION['saved_start']);
+      session::un_set('show_info');
+      session::un_set('saved_start');
     }
 
 
@@ -244,11 +244,11 @@ class addressbook extends plugin
         $this->save();
 
         /* Clean up */
-        if (isset($_SESSION['saved_start'])){
-          $_GET['start']= $_SESSION['saved_start'];
+        if (session::is_set('saved_start')){
+          $_GET['start']= session::get('saved_start');
         }
-        $_SESSION['show_info']= $this->dn;
-        unset($_SESSION['saved_start']);
+        session::set('show_info',$this->dn);
+        session::un_set('saved_start');
       } else {
         /* Errors found, show message */
         show_errors ($message);
@@ -258,18 +258,18 @@ class addressbook extends plugin
 
     /* Close info window */
     if (isset($_GET['close']) || isset($_POST['cancel'])){
-      if (isset($_SESSION['saved_start'])){
-        $_GET['start']= $_SESSION['saved_start'];
+      if (session::is_set('saved_start')){
+        $_GET['start']= session::get('saved_start');
       }
-      unset($_SESSION['show_info']);
-      unset($_SESSION['saved_start']);
+      session::un_set('show_info');
+      session::un_set('saved_start');
     }
 
 
     /* Start address book edit mode? */
     if (isset($_GET['global'])){
-      if (!isset($_SESSION['saved_start']) && isset($_GET['start'])){
-        $_SESSION['saved_start']= $_GET['start'];
+      if (!session::is_set('saved_start') && isset($_GET['start'])){
+        session::set('saved_start',$_GET['start']);
       }
       switch ($_GET['global']){
         case "add":
@@ -289,12 +289,12 @@ class addressbook extends plugin
           foreach ($this->attributes as $name){
             $this->$name= "";
           }
-        $this->dn= $_SESSION['show_info']; 
+        $this->dn= session::get('show_info'); 
         $this->load();
         $this->orig_cn= $this->cn;
         break;
         case "remove":
-          $this->dn= $_SESSION['show_info']; 
+          $this->dn= session::get('show_info'); 
         $this->load();
 
         /* Load permissions for selected 'dn' and check if
@@ -320,14 +320,14 @@ class addressbook extends plugin
           print_red (_("You are not allowed to delete this entry!"));
         }
       }
-      $_SESSION['show_info']= "ADD";
+      session::set('show_info',"ADD");
     }
 
 
     /* Open info window */
     if (isset($_GET['show'])){
-      if (!isset($_SESSION['saved_start'])){
-        $_SESSION['saved_start']= $_GET['start'];
+      if (!session::is_set('saved_start')){
+        session::set('saved_start',$_GET['start']);
       }
       $this->dn = base64_decode($_GET['show']);
       $this->view_logged =FALSE;
@@ -335,7 +335,7 @@ class addressbook extends plugin
         $this->view_logged = TRUE;
         new log("view","addressbook/".get_class($this),$this->dn);
       }
-      $_SESSION['show_info']= base64_decode($_GET['show']);
+      session::set('show_info',base64_decode($_GET['show']));
     }
 
 
@@ -505,7 +505,7 @@ class addressbook extends plugin
 
     /* View detailed infos */
     $smarty->assign("show_info", "");
-    if (isset($_SESSION['show_info'])){
+    if (session::is_set('show_info')){
 
       $range= 4;
       $smarty->assign("show_info", "1");
@@ -517,7 +517,7 @@ class addressbook extends plugin
         $this->storage_base = $_POST['storage_base'];  
       }
 
-      switch ($_SESSION['show_info']){
+      switch (session::get('show_info')){
 
         case "ADD":
 
@@ -545,8 +545,8 @@ class addressbook extends plugin
       }
 
       /* Fill variables from LDAP */
-      if ($_SESSION['show_info'] != "ADD"){
-        $ldap->cat($_SESSION['show_info'], $this->attributes);
+      if (session::get('show_info') != "ADD"){
+        $ldap->cat(session::get('show_info'), $this->attributes);
         $info= $ldap->fetch();
       }
       foreach ($this->attributes as $name){
@@ -556,32 +556,32 @@ class addressbook extends plugin
           $smarty->assign("info_$name", "");
         }else
 
-        if ($_SESSION['show_info'] != "ADD" && isset($info["$name"][0])){
+        if (session::get('show_info') != "ADD" && isset($info["$name"][0])){
           error_reporting(0);
           /* Special treatment for phone attributes */
           if ($name == "mobile" ||
               $name == "homePhone" ||
               $name == "telephoneNumber"){
             $smarty->assign("info_$name",
-                "<a title=\""._("Dial")." ".$info["$name"][0]."\" href=\"main.php?plug=".validate($_GET['plug'])."&amp;dial=$name&amp;start=".validate($_GET['start'])."&amp;target=".base64_encode($_SESSION['show_info'])."\">".$info["$name"][0]."</a>");
+                "<a title=\""._("Dial")." ".$info["$name"][0]."\" href=\"main.php?plug=".validate($_GET['plug'])."&amp;dial=$name&amp;start=".validate($_GET['start'])."&amp;target=".base64_encode(session::get('show_info'))."\">".$info["$name"][0]."</a>");
           } else {
             $smarty->assign("info_$name", preg_replace("/\n/", "<br>", $info["$name"][0]));
           }
           error_reporting(E_ALL | E_STRICT);
-        } elseif ($_SESSION['show_info'] == "ADD" && isset($this->$name)) {
+        } elseif (session::get('show_info') == "ADD" && isset($this->$name)) {
           $smarty->assign("info_$name", $this->$name);
         } else {
           $smarty->assign("info_$name", "-");
         }
       }
-      if (preg_match("/,".$this->abobjectclass.",/", $_SESSION['show_info'])){
+      if (preg_match("/,".$this->abobjectclass.",/", session::get('show_info'))){
         $storage= _("global addressbook");
         $smarty->assign("internal", 0);
       } else {
         $storage= _("user database");
         $smarty->assign("internal", 1);
       }
-      if ($_SESSION['show_info'] != "ADD"){
+      if (session::get('show_info') != "ADD"){
         $smarty->assign("storage_info", sprintf(_("Contact stored in '%s'"), $storage));
       } else {
         $smarty->assign("storage_info", _("Creating new entry in"));
