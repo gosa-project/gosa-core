@@ -745,8 +745,7 @@ function get_sub_list($filter, $category,$sub_base, $base= "", $attributes= arra
 
   /* Check if there is a sub department specified */
   if($sub_base == ""){
-    trigger_error("Please specify a valid sub search base, like 'ou=apps'. Parameter 3");
-    return(FALSE);
+    return(get_list($filter, $category,$base,$attributes,$flags));
   }
 
   /* Get all deparments matching the given sub_base */
