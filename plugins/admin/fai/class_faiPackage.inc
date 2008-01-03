@@ -185,7 +185,7 @@ class faiPackage extends plugin
     if(!$this->is_account){
 
       /* Assemble release name */
-      $tmp= preg_replace('/,ou=fai,ou=configs,ou=systems,.*$/', '', $_SESSION['faifilter']['branch']);
+      $tmp= preg_replace('/,'.normalizePreg(get_ou('faiou')).'.*$/', '', $_SESSION['faifilter']['branch']);
       $tmp= preg_replace('/ou=/', '', $tmp);
       $rev= array_reverse(split(',', $tmp));
       $this->FAIdebianRelease= "";
@@ -468,7 +468,7 @@ class faiPackage extends plugin
 
     /* Assemble release name */
     if($this->FAIdebianRelease == "ClearFromCopyPaste"){
-      $tmp= preg_replace('/,ou=fai,ou=configs,ou=systems,.*$/', '', $_SESSION['faifilter']['branch']);
+      $tmp= preg_replace('/,'.normalizePreg(get_ou('faiou')).'.*$/', '', $_SESSION['faifilter']['branch']);
       $tmp= preg_replace('/ou=/', '', $tmp);
       $rev= array_reverse(split(',', $tmp));
       $this->FAIdebianRelease= "";

@@ -456,7 +456,7 @@ class faiManagement extends plugin
           $name = $br[$bb];
           $ldap->cd($bb);
           $ldap->recursive_remove();
-          $ldap->cd(preg_replace('/,ou=fai,ou=configs,ou=systems,/', ','.get_ou('applicationou'), $bb));
+          $ldap->cd(preg_replace('/,'.get_ou('faiou').'/', ','.get_ou('applicationou'), $bb));
           $ldap->recursive_remove();
           $this->DivListFai->selectedBranch = "main";
 
@@ -488,7 +488,7 @@ class faiManagement extends plugin
       $name = $_POST['BranchName'];
       $is_ok = true;
       $smarty->assign("BranchName",$name);
-      $base= "ou=fai,ou=configs,ou=systems,".$this->DivListFai->selectedBase;
+      $base= get_ou('faiou').$this->DivListFai->selectedBase;
 
       /* Check used characters */
       if(preg_match("/[^0-9a-z \ö\ä\ü\.-_:,]/i",$name)){
@@ -555,11 +555,11 @@ class faiManagement extends plugin
           }
         }
 
-        $appsrc = preg_replace("/ou=fai,ou=configs,ou=systems,/",get_ou('applicationou'),$baseToUse); 
-        $appdst = preg_replace("/ou=fai,ou=configs,ou=systems,/",get_ou('applicationou'),"ou=".$name.",".$baseToUse) ; 
+        $appsrc = preg_replace("/".normalizePreg(get_ou('faiou'))."/",get_ou('applicationou'),$baseToUse); 
+        $appdst = preg_replace("/".normalizePreg(get_ou('faiou'))."/",get_ou('applicationou'),"ou=".$name.",".$baseToUse) ; 
 
-        $mimesrc = preg_replace("/ou=fai,ou=configs,ou=systems,/",get_ou('mimetypeou'),$baseToUse); 
-        $mimedst = preg_replace("/ou=fai,ou=configs,ou=systems,/",get_ou('mimetypeou'),"ou=".$name.",".$baseToUse) ; 
+        $mimesrc = preg_replace("/".normalizePreg(get_ou('faiou'))."/",get_ou('mimetypeou'),$baseToUse); 
+        $mimedst = preg_replace("/".normalizePreg(get_ou('faiou'))."/",get_ou('mimetypeou'),"ou=".$name.",".$baseToUse) ; 
 
         /* Check if source depeartments exist */
         foreach(array($baseToUse,$appsrc,$mimesrc) as $dep){
@@ -861,12 +861,12 @@ class faiManagement extends plugin
   function get_used_snapshot_bases()
   {
     $tmp = array();
-    $types = array("hooks","scripts","disk","packages","profiles","templates","variables");
+    $types = array("faipartitionou","faiscriptou","faitemplateou","faihookou","faiprofileou","faivariableou","faipackageou");
     foreach($types as $type){
       if($this->DivListFai->selectedBranch == "main"){
-        $tmp[] = "ou=".$type.",ou=fai,ou=configs,ou=systems,".$this->DivListFai->selectedBase;
+        $tmp[] = get_ou($type).get_ou('faiou').$this->DivListFai->selectedBase;
       }else{
-        $tmp[] = "ou=".$type.",".$this->DivListFai->selectedBranch;
+        $tmp[] = get_ou($type).$this->DivListFai->selectedBranch;
       }
     }
     return($tmp);
@@ -914,13 +914,13 @@ class faiManagement extends plugin
     $this->objects  = array();
 
     /* Get base */
-    $base = "ou=fai,ou=configs,ou=systems,".$this->DivListFai->selectedBase;
+    $base = get_ou('faiou').$this->DivListFai->selectedBase;
     if($this->DivListFai->selectedBranch != "main"){
       $br = $this->getBranches();
       if(isset($br[$this->DivListFai->selectedBranch])){
         $base = $this->DivListFai->selectedBranch;
       }else{
-        $base = "ou=fai,ou=configs,ou=systems,".$this->DivListFai->selectedBase;
+        $base = get_ou('faiou').$this->DivListFai->selectedBase;
       }
     }
     $this->base = $base;
@@ -932,13 +932,13 @@ class faiManagement extends plugin
      * Generate List of Partitions,Hooks,Scripts,Templates,Profiles ... 
      */
     $ObjectTypes = array(
-        "FAIpartitionTable"  => array("OU"=>"ou=disk,"        , "CHKBOX"=>"ShowPartitions"  ,"ACL" => "faiPartitionTable"),
-        "FAIpackageList"     => array("OU"=>"ou=packages,"    , "CHKBOX"=>"ShowPackages"    ,"ACL" => "faiPackage"),
-        "FAIscript"          => array("OU"=>"ou=scripts,"     , "CHKBOX"=>"ShowScripts"     ,"ACL" => "faiScript"),
-        "FAIvariable"        => array("OU"=>"ou=variables,"   , "CHKBOX"=>"ShowVariables"   ,"ACL" => "faiVariable"),
-        "FAIhook"            => array("OU"=>"ou=hooks,"       , "CHKBOX"=>"ShowHooks"       ,"ACL" => "faiHook"),
-        "FAIprofile"         => array("OU"=>"ou=profiles,"    , "CHKBOX"=>"ShowProfiles"    ,"ACL" => "faiProfile"),
-        "FAItemplate"        => array("OU"=>"ou=templates,"   , "CHKBOX"=>"ShowTemplates"   ,"ACL" => "faiTemplate"));
+        "FAIpartitionTable"  => array("OU"=> get_ou('faipartitionou') , "CHKBOX"=>"ShowPartitions"  ,"ACL" => "faiPartitionTable"),
+        "FAIpackageList"     => array("OU"=> get_ou('faipackageou')   , "CHKBOX"=>"ShowPackages"    ,"ACL" => "faiPackage"),
+        "FAIscript"          => array("OU"=> get_ou('faiscriptou')    , "CHKBOX"=>"ShowScripts"     ,"ACL" => "faiScript"),
+        "FAIvariable"        => array("OU"=> get_ou('faivariableou')  , "CHKBOX"=>"ShowVariables"   ,"ACL" => "faiVariable"),
+        "FAIhook"            => array("OU"=> get_ou('faihookou')      , "CHKBOX"=>"ShowHooks"       ,"ACL" => "faiHook"),
+        "FAIprofile"         => array("OU"=> get_ou('faiprofileou')   , "CHKBOX"=>"ShowProfiles"    ,"ACL" => "faiProfile"),
+        "FAItemplate"        => array("OU"=> get_ou('faitemplateou')  , "CHKBOX"=>"ShowTemplates"   ,"ACL" => "faiTemplate"));
 
     $filter = "";
     foreach($ObjectTypes as $key => $data){

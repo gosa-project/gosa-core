@@ -209,7 +209,7 @@ class blocklistGeneric extends plugin
       }
       if ($this->dn == 'new'){
         $ldap= $this->config->get_ldap_link();
-        $ldap->cd ("ou=gofax,ou=systems,".$this->config->current["BASE"]);
+        $ldap->cd (get_ou('blocklistou').$this->config->current["BASE"]);
         $ldap->search ("(&(|(objectClass=goFaxSBlock)(objectClass=goFaxRBlock))(cn=".$this->cn."))", array("cn"));
         if ($ldap->count() != 0){
           $message[]= _("Specified name is already used.");

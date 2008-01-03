@@ -21,7 +21,7 @@ class faiProfileEntry extends plugin
     plugin::plugin ($config, $dn);
 
     /* Search only in fai tree */
-    $base = "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
+    $base = get_ou('faiou').$_SESSION['CurrentMainBase'];
     if($_SESSION['faifilter']['branch']!="main"){
       $base = $_SESSION['faifilter']['branch'];
     }
@@ -85,7 +85,7 @@ class faiProfileEntry extends plugin
 
     /* If no search filter is set, create one */
     if (!is_global("SUBfaifilter")){
-      $SUBfaifilter= array("base" => "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'], "Sregex" => "*");
+      $SUBfaifilter= array("base" => get_ou('faiou').$_SESSION['CurrentMainBase'], "Sregex" => "*");
       $SUBfaifilter['SShowTemplates'] = true;
       $SUBfaifilter['SShowScripts']   = true;
       $SUBfaifilter['SShowHooks']     = true;

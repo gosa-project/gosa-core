@@ -898,7 +898,7 @@ class systems extends plugin
     $tabs = array(
         "terminal"        => get_ou('terminalou'),
         "workstation"     => get_ou('workstationou'),
-        "incoming"        => "ou=incoming,",
+        "incoming"        => get_ou('incomingou'),
         "server"          => get_ou('serverou'),
         "printer"         => get_ou('printerou'),
         "phone"           => get_ou('phoneou'),
@@ -1023,7 +1023,7 @@ class systems extends plugin
 
     /* Search for incoming objects */ 
     $filter = "(|(&".$userregex."(objectClass=goHard)(cn=".$this->DivListSystem->Regex.")))";
-    $res = array_merge($res,get_list($filter,$sys_categories,"ou=incoming","ou=incoming,".$base,$sys_attrs, GL_NONE | GL_SIZELIMIT));
+    $res = array_merge($res,get_list($filter,$sys_categories, get_ou('incomingou'),get_ou('incomingou').$base,$sys_attrs, GL_NONE | GL_SIZELIMIT));
 
     /* Get all gotoTerminal's */
     foreach ($res as $value){
@@ -1045,7 +1045,7 @@ class systems extends plugin
       }
 
       /* check if current object is a new one */
-      if (preg_match ("/,ou=incoming,/i", $tmp)){
+      if (preg_match ("/,".get_ou('incomingou')."/i", $tmp)){
         if (in_array_ics('gotoTerminal', $value['objectClass'])){
           $add= "- "._("New terminal");
         }elseif (in_array_ics('gotoWorkstation', $value['objectClass'])){

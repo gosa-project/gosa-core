@@ -22,7 +22,7 @@ class conferencetabs extends tabs
   function save($ignore_account= FALSE)
   {
   	$baseobject= $this->by_object['conference'];
-	$new_dn= 'cn='.$baseobject->cn.',ou=conferences,ou=asterisk,ou=configs,ou=systems,'.$baseobject->base;
+	$new_dn= 'cn='.$baseobject->cn.','.get_ou('conferenceou').$baseobject->base;
 
 	if(strtolower($this->dn)==strtolower($new_dn)){
 		$this->dn=$new_dn;

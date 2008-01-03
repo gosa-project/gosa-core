@@ -22,10 +22,10 @@ class tabsProfile extends tabs
   {
   	$baseobject= $this->by_object['faiProfile'];
 
-	$new_dn= 'cn='.$baseobject->cn.",ou=profiles,ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
+	$new_dn= 'cn='.$baseobject->cn.",".get_ou('faiprofileou').get_ou('faiou').$_SESSION['CurrentMainBase'];
 
 	if($_SESSION['faifilter']['branch']!="main"){
-		$new_dn ='cn='.$baseobject->cn.",ou=profiles,".$_SESSION['faifilter']['branch'];
+		$new_dn ='cn='.$baseobject->cn.",".get_ou('faiprofileou').$_SESSION['faifilter']['branch'];
 	}
 			
  	if ($this->dn != $new_dn && $this->dn != "new"){

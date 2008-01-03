@@ -105,8 +105,8 @@ function get_all_releases_from_base($dn,$appendedName=false)
 {
   global $config;
     
-  if(!preg_match("/ou=fai,ou=configs,ou=systems,/",$dn)){
-    $base = "ou=fai,ou=configs,ou=systems,".$dn;
+  if(!preg_match("/".normalizePreg(get_ou('faiou'))."/",$dn)){
+    $base = get_ou('faiou').$dn;
   }else{
     $base = $dn;
   }
@@ -117,7 +117,7 @@ function get_all_releases_from_base($dn,$appendedName=false)
   $ldap->search("(objectClass=FAIbranch)",array("ou","dn"));
   while($attrs = $ldap->fetch()){
     if($appendedName){
-      $res[$attrs['dn']] = convert_department_dn(preg_replace("/,ou=fai,ou=configs,ou=system.*$/","",$attrs['dn']));
+      $res[$attrs['dn']] = convert_department_dn(preg_replace("/,".normalizePreg(get_ou('faiou')).".*$/","",$attrs['dn']));
     }else{
       $res[$attrs['dn']] = $attrs['ou'][0];
     }

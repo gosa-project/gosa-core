@@ -925,7 +925,7 @@ class workstartup extends plugin
     $str = "";
     $tmp = split("\/",$release);
     $tmp = array_reverse($tmp);
-    $base = "ou=fai,ou=configs,ou=systems,";   
+    $base = get_ou('faiou');   
     foreach($tmp as $departmentname){
       $str .= ",ou=".$departmentname;
     }

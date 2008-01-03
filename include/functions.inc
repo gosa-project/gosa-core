@@ -1034,14 +1034,28 @@ function get_ou($name)
   global $config;
 
   $map = array( "applicationou" => "ou=apps,",
+                "systemsou"     => "ou=systems,",
                 "serverou"      => "ou=servers,ou=systems,",
                 "terminalou"    => "ou=terminals,ou=systems,",
                 "workstationou" => "ou=workstations,ou=systems,",
                 "printerou"     => "ou=printers,ou=systems,",
                 "phoneou"       => "ou=phones,ou=systems,",
                 "componentou"   => "ou=netdevices,ou=systems,",
+                "blocklistou"   => "ou=gofax,ou=systems,",
+                "incomingou"    => "ou=incoming,",
+                "aclroleou"     => "ou=aclroles,",
                 "macroou"       => "ou=macros,ou=asterisk,ou=configs,ou=systems,",
                 "conferenceou"  => "ou=conferences,ou=asterisk,ou=configs,ou=systems,",
+
+                "faiou"         => "ou=fai,ou=configs,ou=systems,",
+                "faiscriptou"   => "ou=scripts,",
+                "faihookou"     => "ou=hooks,",
+                "faitemplateou" => "ou=templates,",
+                "faivariableou" => "ou=variables,",
+                "faiprofileou"  => "ou=profiles,",
+                "faipackageou"  => "ou=packages,",
+                "faipartitionou"=> "ou=disk,",
+
                 "deviceou"      => "ou=devices,",
                 "mimetypeou"    => "ou=mime,");
 
@@ -1052,6 +1066,7 @@ function get_ou($name)
     $ou = $map[$name];
     return($ou);
   } else {
+    trigger_error("No department mapping found for type ".$name);
     return "";
   }
  

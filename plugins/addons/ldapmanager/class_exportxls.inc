@@ -76,8 +76,8 @@ class xlsexport extends plugin
     }
     $smarty->assign("deplist", $bases);
     $smarty->assign("choicelist",array( get_people_ou()             =>"users" ,
-                                        "ou=groups,"                =>"groups" ,
-                                        "ou=systems,"               =>"computers",
+                                        get_groups_ou()             =>"groups" ,
+                                        get_ou('systemsou')         =>"computers",
                                         get_ou('serverou')          =>"servers",
                                         "dc=addressbook,"           =>"addressbook"));
 

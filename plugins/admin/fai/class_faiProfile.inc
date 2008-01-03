@@ -409,7 +409,7 @@ class faiProfile extends plugin
     if($base == "main"){
       $base =$_SESSION['CurrentMainBase'];
     }
-    $base = "ou=profiles,".$base;
+    $base = get_ou('faiprofileou').$base;
   
     $ldap->cd($base);
     if ($this->old_cn == ""){

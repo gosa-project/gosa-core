@@ -346,7 +346,7 @@ class blocklist extends plugin
   /* Return departments, that will be included within snapshot detection */
   function get_used_snapshot_bases()
   {
-    return(array("ou=gofax,ou=systems,". $this->DivListBlocklist->selectedBase));
+    return(array(get_ou('blocklistou').$this->DivListBlocklist->selectedBase));
   }
 
 
@@ -367,7 +367,7 @@ class blocklist extends plugin
     if($SubSearch){
       $Flags |= GL_SUBSEARCH;
     }else{
-      $base = "ou=gofax,ou=systems,".$base;
+      $base = get_ou('blocklistou').$base;
     }  
 
     /* Create filter */

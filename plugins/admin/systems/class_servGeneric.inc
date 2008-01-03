@@ -308,7 +308,7 @@ class servgeneric extends plugin
       if ($ldap->count() != 0){
         while ($attrs= $ldap->fetch()){
           if ($attrs['dn'] != $this->orig_dn){
-            if(!preg_match("/cn=dhcp,/",$attrs['dn']) && !preg_match("/,ou=incoming,/",$attrs['dn']) && preg_match("/,".get_ou('serverou')."/",$attrs['dn'])){
+            if(!preg_match("/cn=dhcp,/",$attrs['dn']) && !preg_match("/,".get_ou('incomingou')."/",$attrs['dn']) && preg_match("/,".get_ou('serverou')."/",$attrs['dn'])){
               $message[]= sprintf (_("There is already an entry '%s' in the base choosen by you"), $this->cn);
               break;
             }

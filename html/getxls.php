@@ -80,7 +80,7 @@ function dump_ldap ($mode= 0)
       /* PEOPLE 
           Get all peoples from this $dn 
           and put them into the xls work sheet */
-      case "ou=people," : 
+      case get_people_ou() : 
 
         $user    =  $ldap->gen_xls($dn,"(objectClass=*)",array("uid","dateOfBirth","gender","givenName","preferredLanguage"));
         $intitul =  array(_("Birthday").":", _("Sex").":", _("Surname")."/"._("Given name").":",_("Language").":");
@@ -114,7 +114,7 @@ function dump_ldap ($mode= 0)
       /* GROUPS 
           Get all groups from th $dn 
           and put them into the xls work sheet */
-      case "ou=groups,": 
+      case get_groups_ou(): 
 
         /* Get group data */
         $groups    = $ldap->gen_xls($dn,"(objectClass=*)",array("cn","memberUid"),TRUE,1);
@@ -150,7 +150,7 @@ function dump_ldap ($mode= 0)
      /* SYSTEMS 
         Get all systems from th $dn
         and put them into the xls work sheet */
-     case "ou=systems,": 
+     case get_ou('systemsou'): 
 
        $name_section=_("Servers");
        $computers= $ldap->gen_xls($dn,"(&(objectClass=*)(cn=*))",array("cn","description","uid"));
@@ -277,10 +277,10 @@ function dump_ldap ($mode= 0)
     $dn =  base64_decode($_GET['dn']);
 
     //data about users
-    $user= $ldap->gen_xls("ou=people,".$dn,"(objectClass=*)",array("uid","dateOfBirth","gender","givenName","preferredLanguage"));
+    $user= $ldap->gen_xls( get_people_ou().$dn,"(objectClass=*)",array("uid","dateOfBirth","gender","givenName","preferredLanguage"));
     $user_intitul=array(_("Day of birth").":",_("Sex").":",_("Surname")."/"._("Given name").":",_("Language").":");
     //data about groups
-    $groups= $ldap->gen_xls("ou=groups,".$dn,"(objectClass=*)",array("cn","memberUid"),TRUE,1);
+    $groups= $ldap->gen_xls(get_groups_ou().$dn,"(objectClass=*)",array("cn","memberUid"),TRUE,1);
     $groups_intitul=array(_("Members").":");
     //data about computers
     $computers= $ldap->gen_xls("ou=computers,".$dn,"(objectClass=*)",array("cn","description","uid"));

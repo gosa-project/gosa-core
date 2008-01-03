@@ -823,7 +823,7 @@ class group extends plugin
       /* Check for used 'cn' */
       $ldap= $this->config->get_ldap_link();
       if(($this->cn  != $this->orig_cn) || ($this->orig_dn == "new")){
-        $ldap->cd("ou=groups,".$this->base);
+        $ldap->cd(get_groups_ou().$this->base);
         $ldap->ls("(&(|(objectClass=gosaGroupOfNames)(objectClass=posixGroup))(cn=$this->cn))",get_groups_ou().$this->base,array("cn"));
         if ($ldap->count() != 0){
           $message[]= _("Value specified as 'Name' is already used.");

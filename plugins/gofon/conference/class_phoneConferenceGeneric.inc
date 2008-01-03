@@ -119,9 +119,8 @@ class conference extends plugin
       }
     } else {
 
-      /* The base is something like this 
-          "cn=Confis,ou=conferences,ou=asterisk,ou=configs,ou=systems," */
-      $this->base= preg_replace ("/^[^,]+,[^,]+,[^,]+,[^,]+,[^,]+,/", "", $this->dn);
+      /* Get base */ 
+      $this->base = preg_replace ("/^[^,]+,".normalizePreg(get_ou('conferenceou'))."/i","",$this->dn);;
     }
 
     $this->goFonConferenceOwner=$this->ui->dn;
@@ -407,7 +406,7 @@ class conference extends plugin
 
     if($this->old_cn != $this->cn || $this->base != $this->old_base){
       $ldap = $this->config->get_ldap_link();
-      $ldap->cd("ou=conferences,ou=asterisk,ou=configs,ou=systems,".$this->base);
+      $ldap->cd(get_ou('conferenceou').$this->base);
       $ldap->search("(&(objectClass=goFonConference)(cn=".$this->cn."))",array("cn"));
       if($ldap->count()){
         $message[] =_("There is already a conference with this name in the current tree.");

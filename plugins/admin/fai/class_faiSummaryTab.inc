@@ -41,13 +41,13 @@ class faiSummaryTab extends plugin{
 
     /* Base object configuration */
     $this->objs = array(	
-        "FAIscript" 		    => array(	"Image"	=>"images/fai_script.png",        "Name"=>_("Scripts")      ,"Tree"	=>"ou=scripts,") ,
-        "FAIhook" 			    => array(	"Image"	=>"images/fai_hook.png" ,         "Name"=>_("Hooks")        ,"Tree"	=>"ou=hooks,"),
-        "FAIvariable" 		  => array(	"Image"	=>"images/fai_variable.png",      "Name"=>_("Variables")    ,"Tree"	=>"ou=variables,") ,
-        "FAItemplate" 		  => array(	"Image"	=>"images/fai_template.png",      "Name"=>_("Templates")    ,"Tree"	=>"ou=templates,") ,
-        "FAIpartitionTable" => array(	"Image"	=>"images/fai_partitionTable.png","Name"=>_("Partition table")  ,"Tree"	=>"ou=disk,") ,
-        "FAIpackageList" 	  => array(	"Image" =>"images/fai_packages.png",      "Name"=>_("Package list") ,"Tree"	=>"ou=packages,") ,
-        "FAIprofile" 		    => array(	"Image"	=>"images/fai_profile.png",       "Name"=>_("Profiles")     ,"Tree"	=>"ou=profiles,"));
+        "FAIscript" 		    => array(	"Image"	=>"images/fai_script.png",        "Name"=>_("Scripts")      ,"Tree"	=>get_ou('faiscriptou')) ,
+        "FAIhook" 			    => array(	"Image"	=>"images/fai_hook.png" ,         "Name"=>_("Hooks")        ,"Tree"	=>get_ou('faihookou')),
+        "FAIvariable" 		  => array(	"Image"	=>"images/fai_variable.png",      "Name"=>_("Variables")    ,"Tree"	=>get_ou('faivariableou')) ,
+        "FAItemplate" 		  => array(	"Image"	=>"images/fai_template.png",      "Name"=>_("Templates")    ,"Tree"	=>get_ou('faitemplateou')) ,
+        "FAIpartitionTable" => array(	"Image"	=>"images/fai_partitionTable.png","Name"=>_("Partition table")  ,"Tree"	=>get_ou('faipartitionou')) ,
+        "FAIpackageList" 	  => array(	"Image" =>"images/fai_packages.png",      "Name"=>_("Package list") ,"Tree"	=>get_ou('faipackageou')) ,
+        "FAIprofile" 		    => array(	"Image"	=>"images/fai_profile.png",       "Name"=>_("Profiles")     ,"Tree"	=>get_ou('faiprofileou')));
   }
 
 
@@ -70,7 +70,7 @@ class faiSummaryTab extends plugin{
       /* Get Classes and release */
       $this->Classes = $this->parent->by_object['faiProfile']->FAIclasses;
       $this->base    = $this->parent->by_object['faiProfile']->base;
-      $str = preg_replace("/^.*ou=profiles,/","",$this->dn);
+      $str = preg_replace("/^.*".normalizePreg(get_ou('faiprofileou'))."/","",$this->dn);
   
     /* Check if parent tab is work tab */
     }elseif(isset($this->parent->by_name['workstartup'])){

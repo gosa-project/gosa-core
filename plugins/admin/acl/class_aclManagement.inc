@@ -468,7 +468,7 @@ class aclManagement extends plugin
     /* Fetch following structures, this will be used if !$SubSearch */
     $fetch_this = array(
       "ME"      => array("TYPE" => "cat"    , "FLAGS" => GL_SIZELIMIT                ,"BASE"=>""),
-      "SYSTEMS" => array("TYPE" => "search" , "FLAGS" => GL_SIZELIMIT | GL_SUBSEARCH ,"BASE"=>"ou=systems,"),
+      "SYSTEMS" => array("TYPE" => "search" , "FLAGS" => GL_SIZELIMIT | GL_SUBSEARCH ,"BASE"=>get_ou('systemsou')),
       "APPS"    => array("TYPE" => "search" , "FLAGS" => GL_SIZELIMIT | GL_SUBSEARCH ,"BASE"=>get_ou('applicationou')),
       "PEOPLE"  => array("TYPE" => "search" , "FLAGS" => GL_SIZELIMIT | GL_SUBSEARCH ,"BASE"=>get_people_ou()),
       "GROUPS"  => array("TYPE" => "search" , "FLAGS" => GL_SIZELIMIT | GL_SUBSEARCH ,"BASE"=>get_groups_ou()));
@@ -490,7 +490,7 @@ class aclManagement extends plugin
 
     }else{
 
-      $tmp_roles = get_list($FilterRoles,  "acl", "ou=aclroles,".$base, $Attrs,GL_SIZELIMIT);
+      $tmp_roles = get_list($FilterRoles,  "acl", get_ou('aclroleou').$base, $Attrs,GL_SIZELIMIT);
 
       foreach($tmp_roles as $entry){
         $res[] = $entry;

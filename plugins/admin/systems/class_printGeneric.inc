@@ -99,8 +99,8 @@ class printgeneric extends plugin
     } else {
     
       /* Set base and check if the extracted base exists */
-      if(preg_match("/ou=incoming,/",$this->dn)){
-        $this->base= preg_replace("/ou=incoming,/","",dn2base($this->dn));
+      if(preg_match("/".normalizePreg('incomingou')."/",$this->dn)){
+        $this->base= preg_replace("/".normalizePreg('incomingou')."/","",dn2base($this->dn));
       }else{
         $this->base= preg_replace("/".normalizePreg(get_ou('printerou')).",/","",dn2base($this->dn));
       }
@@ -825,7 +825,7 @@ class printgeneric extends plugin
     }
 
     /* Ensure to create a new object */
-    if(preg_match("/ou=incoming,/",$this->orig_dn)){
+    if(preg_match("/".normalizePreg('incomingou')."/",$this->orig_dn)){
       $this->orig_dn = "new";
     }
 
