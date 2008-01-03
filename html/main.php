@@ -139,7 +139,7 @@ textdomain($domain);
 @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
 
 /* Prepare plugin list */
-if (session::is_set('plist')){
+if (!session::is_set('plist')){
   /* Initially load all classes */
   $class_list= get_declared_classes();
   foreach ($class_mapping as $class => $path){
