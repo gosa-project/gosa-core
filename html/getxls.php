@@ -469,13 +469,13 @@ function dump_ldap ($mode= 0)
 session_start ();
 
 /* Logged in? Simple security check */
-if (!isset($_SESSION['ui'])){
+if (!session::is_set('ui')){
   new log("security","all/all","",array(),"Error: getxls.php called without session") ;
   header ("Location: index.php");
   exit;
 }
-$ui     = $_SESSION["ui"];
-$config = $_SESSION['config'];
+$ui     = session::get('ui');
+$config = session::get('config');
 
 
 /* Check ACL's */

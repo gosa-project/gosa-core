@@ -25,7 +25,7 @@ error_reporting (0);
 session_start ();
 
 /* Logged in? Simple security check */
-if (!isset($_SESSION['ui'])){
+if (!session::is_set('ui')){
   new log("security","unknown","",array(),"Error: getbin.php called without session") ;
   header ("Location: index.php");
   exit;
@@ -36,15 +36,15 @@ header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
 header("Cache-Control: no-cache");
 header("Pragma: no-cache");
 header("Cache-Control: post-check=0, pre-check=0");
-$bintype = isset($_SESSION['binarytype']) 
-  ? $_SESSION['binarytype'] : "octet-stream";
+$bintype = session::is_set('binarytype')
+  ? session::get('binarytype') : "octet-stream";
 header("Content-type: " . $bintype);
-if (isset($_SESSION['binaryfile'])) {
+if (session::is_set('binaryfile')) {
   header( "Content-disposition: attachment; filename=" 
-    . $_SESSION['binaryfile'] );
+    . session::get('binaryfile'));
 }
 
-echo $_SESSION['binary'];
+echo session::get('binary');
 error_reporting (E_ALL | E_STRICT);
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

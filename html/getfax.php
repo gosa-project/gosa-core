@@ -25,15 +25,15 @@ error_reporting (0);
 session_start ();
 
 /* Logged in? Simple security check */
-if (!isset($_SESSION['ui'])){
+if (!session::is_set('ui')){
   new log("security","faxreport/faxreport","",array(),"Error: getfax.php called without session") ;
   header ("Location: index.php");
   exit;
 }
-$ui= $_SESSION["ui"];
+$ui= session::is_set("ui");
 
 /* User object present? */
-if (!isset($_SESSION['fuserfilter'])){
+if (!session::is_set('fuserfilter')){
   new log("security","faxreport/faxreport","",array(),"getfax.php called without propper session data") ;
   header ("Location: index.php");
   exit;
@@ -41,13 +41,13 @@ if (!isset($_SESSION['fuserfilter'])){
 
 /* Get loaded servers */
 foreach (array("FAX_SERVER", "FAX_LOGIN", "FAX_PASSWORD") as $val){
-  if (isset ($_SESSION[$val])){
-    $$val= $_SESSION[$val];
+  if (session::is_set($val)){
+    $$val= session::get($val);
   }
 }
 
 /* Load fax entry */
-$config= $_SESSION['config'];
+$config= session::get('config');
 $cfg= $config->data['SERVERS']['FAX'];
 $link = mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD'])
                   or die(_("Could not connect to database server!"));
@@ -59,7 +59,7 @@ mysql_select_db("gofax") or die(_("Could not select database!"));
 $query = "SELECT id,uid FROM faxlog WHERE id = '".validate(stripcslashes($_GET['id']))."'";
 $result = mysql_query($query) or die(_("Database query failed!"));
 $line = mysql_fetch_array($result, MYSQL_ASSOC);
-if (!preg_match ("/'".$line["uid"]."'/", $_SESSION['fuserfilter'])){
+if (!preg_match ("/'".$line["uid"]."'/", session::get('fuserfilter'))){
   die ("No permissions to view fax!");
 }
 

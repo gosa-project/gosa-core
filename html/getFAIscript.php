@@ -20,9 +20,12 @@
 restore_error_handler();
 function getFAIScript ($id)
 {
-restore_error_handler();
-  $ldap = $_SESSION['config']->get_ldap_link();
-  $ldap->cd($_SESSION['config']->current['BASE']);
+  restore_error_handler();
+
+  $config = session::get('config');
+
+  $ldap = $config->get_ldap_link();
+  $ldap->cd($config->current['BASE']);
 
   $sr= $ldap->cat($id, array("FAItemplateFile", "FAIscript", "cn", "objectClass"));
   $ei= ldap_first_entry($ldap->cid, $sr);
@@ -66,13 +69,13 @@ error_reporting (E_ALL | E_STRICT);
 session_start ();
 
 /* Logged in? Simple security check */
-if (!isset($_SESSION['ui'])){
+if (!session::is_set('ui')){
   new log("security","fai","",array(),"Error: getFAIScript.php called without session") ;
   header ("Location: index.php");
   exit;
 }
-$ui= $_SESSION["ui"];
-$config= $_SESSION['config'];
+$ui= session::get("ui");
+$config= session::get('config');
 
 /* Check ACL's */
 #FIXME Use more specific acl categories instead of all/all

@@ -28,15 +28,16 @@ restore_error_handler();
 header("Content-type: text/html; charset=UTF-8");
 
 session_start();
-$ui= $_SESSION["ui"];
-$config= $_SESSION['config'];
 
 /* If no config object is found in the session, abort help */
-if (!isset($_SESSION['config'])){
+if (!session::is_set('config')){
   new log("security","all/all","",array(),"Help viewer called without session") ;
   header ("Location: index.php");
   exit;
 }
+
+$ui= session::get('ui');
+$config= session::get('config');
 
 /* Language setup */
 if ($config->data['MAIN']['LANG'] == ""){
@@ -58,7 +59,7 @@ bindtextdomain($domain, "$BASE_DIR/locale");
 textdomain($domain);
 @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
 
-$config= $_SESSION['config'];
+$config= session::get('config');
 if (isset ($config->data['MAIN']['COMPILE'])){
   $smarty->compile_dir= $config->data['MAIN']['COMPILE'];
 } else {
@@ -70,14 +71,17 @@ $smarty->assign("title", "GOsa - "._("Help browser"));
  */
 
 /* Generate helpobject */
-if(isset($_SESSION['helpobject'])){
-  $helpobject = $_SESSION['helpobject'];
+if(session::is_set('helpobject')){
+  $helpobject = session::get('helpobject');
 }else{
+
+  $plist = session::get('plist');
+
   $helpobject['lang']         = $lang; 
   $helpobject['helpconf']     = array();  
   $helpobject['currentplug']  = "";
   $helpobject['file']         = "index.html";
-  $helpobject['helpconf']     = $_SESSION['plist']->gen_headlines();
+  $helpobject['helpconf']     = $plist->gen_headlines();
 }
 
 $lang = $lang[0].$lang[1];
@@ -97,11 +101,11 @@ $forward  ="node1.html";
 
 $helpdir ="";
 /* Every class which is called within a tab, stores its name in the Session.
- * If $_SESSION['current_class_for_help'] isset, 
+ * If session::is_set('current_class_for_help') is true, 
  *  get the helpfile specified in the xml file and display it.
  * Unset this Session entry, to avoid displaying it again.
  */
-if(isset($_SESSION['current_class_for_help'])){
+if(session::is_set('current_class_for_help')){
 
   /* Create new XML parser with the path to the Xml file */
   $xml = new parseXml("../doc/guide.xml");
@@ -110,7 +114,7 @@ if(isset($_SESSION['current_class_for_help'])){
   $str = $xml->parse();
 
   /* __LANG__ is used as placeholder for the used language*/
-  $helpdir= @preg_replace("/__LANG__/i",$lang,$str[($_SESSION['current_class_for_help'])]['PATH']);
+  $helpdir= @preg_replace("/__LANG__/i",$lang,$str[(session::get('current_class_for_help'))]['PATH']);
 
   /* If there is no entry in the xml file for this class, display an error message */
   if($helpdir == ""){
@@ -119,24 +123,24 @@ if(isset($_SESSION['current_class_for_help'])){
     $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
     $display= (  $header.$smarty->fetch(get_template_path('help.tpl')));
     echo $display;
-    unset($_SESSION['current_class_for_help']);
+    session::un_set('current_class_for_help');
     exit();  
   }
  
   /* Save filename */
-  $helpobject['file']= $str[($_SESSION['current_class_for_help'])]['FILE'];
+  $helpobject['file']= $str[(session::get('current_class_for_help'))]['FILE'];
   
   /* Save path to the file */
   $helpobject['currentplug']  = $helpdir;
   
   /* Avoid displaying the same help every time */
   if(isset($_GET['pg'])){
-    unset($_SESSION['current_class_for_help']);
+    session::un_set('current_class_for_help');
   }
 
 }elseif(isset($_GET['plug'])){
   /* This displays helpfiles depending on the current $_GET[plug] */
-  $tmp                          = new pluglist($_SESSION['config'],NULL);
+  $tmp                          = new pluglist(session::get('config'),get_userinfo());
   $path                         = $tmp->get_path($_GET['plug']);
   $helpobject['currentplug']    = $path;
   $helpobject['file']           = "index.html";
@@ -175,7 +179,7 @@ if(isset($_GET['pg'])){
 $helpdir.="/";
 
 /* Save current settings */
-$_SESSION['helpobject'] = $helpobject;
+session::set('helpobject',$helpobject);
 
 /* 
  * Display management 
@@ -243,9 +247,11 @@ if(isset($_POST['search'])){
    * parse it, rework links images and so on */
   $index = readfiles($helpdir,$prefix,$suffix,false,$helpobject['file']);
 
+  $lastresults = session::get('lastresults');
+
   /* if this page is result from a search, mark the search strings */
   if(isset($_GET['mark'])){
-    $matches = $_SESSION['lastresults'][preg_replace("/^.*\//i","",$helpobject['currentplug'])][$helpobject['file']];
+    $matches = $lastresults[preg_replace("/^.*\//i","",$helpobject['currentplug'])][$helpobject['file']];
     $index[$helpobject['file']]['content']   = markup_page($index[$helpobject['file']]['content'],$matches);
   }
 

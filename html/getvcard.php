@@ -25,7 +25,7 @@ error_reporting (0);
 session_start ();
 
 /* Logged in? Simple security check */
-if (!isset($_SESSION['ui'])){
+if (!session::is_set('ui')){
   new log("security","all/all","",array(),"Error: getvcard.php called without session") ;
   header ("Location: index.php");
   exit;
@@ -53,7 +53,7 @@ if (preg_match('/MSIE 5.5/', $HTTP_USER_AGENT) ||
 }
 
 /* Get entry */
-$config= $_SESSION['config'];
+$config= session::get('config');
 $ldap= $config->get_ldap_link();
 $ldap->cat(base64_decode(validate($_GET['dn'])));
 

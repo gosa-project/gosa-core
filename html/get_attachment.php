@@ -25,14 +25,14 @@
 session_start ();
 
 /* Logged in? Simple security check */
-if (!isset($_SESSION['ui'])){
+if (!session::is_set('ui')){
   new log("security","glpi/all","",array(),"Error: get_attachment.php called without session") ;
   header ("Location: index.php");
   exit;
 }
-$ui= $_SESSION["ui"];
+$ui= session::get("ui");
 
-$config = $_SESSION['config'];
+$config = session::get('config');
 /* Abort class construction, if no db is defined */
 if(!isset($config->data['SERVERS']['GLPI'])){
   return;

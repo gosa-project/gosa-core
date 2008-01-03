@@ -40,16 +40,16 @@ session_start();
 
 /* Destroy old session if exists.
     Else you will get your old session back, if you not logged out correctly. */
-if(is_array($_SESSION) && count($_SESSION)){
-  session_destroy();
-  session_start();
+if(is_array(session::get_all()) && count(session::get_all())){
+  session::destroy();
+  session::start();
 }
 
 /* Reset errors */
-$_SESSION['js']                 = true;
-$_SESSION['errors']             = "";
-$_SESSION['errorsAlreadyPosted']= array();
-$_SESSION['LastError']          = "";
+session::set('js',true);
+session::set('errors',"");
+session::set('errorsAlreadyPosted',array());
+session::set('LastError',"");
 
 /* Check if CONFIG_FILE is accessible */
 if (!is_readable(CONFIG_DIR."/".CONFIG_FILE)){
@@ -59,7 +59,7 @@ if (!is_readable(CONFIG_DIR."/".CONFIG_FILE)){
 
 /* Parse configuration file */
 $config= new config(CONFIG_DIR."/".CONFIG_FILE, $BASE_DIR);
-$_SESSION['DEBUGLEVEL']= $config->data['MAIN']['DEBUGLEVEL'];
+session::set('DEBUGLEVEL',$config->data['MAIN']['DEBUGLEVEL']);
 if ($_SERVER["REQUEST_METHOD"] != "POST"){
   @DEBUG (DEBUG_CONFIG, __LINE__, __FUNCTION__, __FILE__, $config->data, "config");
 }
@@ -124,7 +124,7 @@ if (isset($_GET['directory']) && isset($servers[$_GET['directory']])){
 
 /* Set config to selected one */
 $config->set_current($directory);
-$_SESSION['config']= $config;
+session::set('config',$config);
 
 if ($_SERVER["REQUEST_METHOD"] != "POST"){
   @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
@@ -182,8 +182,8 @@ $smarty->assign("changed", false);
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])){
 
   /* Destroy old sessions, they cause a successfull login to relog again ...*/
-  if(isset($_SESSION['_LAST_PAGE_REQUEST'])){
-    $_SESSION['_LAST_PAGE_REQUEST'] = time();
+  if(session::is_set('_LAST_PAGE_REQUEST')){
+    session::set('_LAST_PAGE_REQUEST',time());
   }
 
   $message= array();
@@ -286,8 +286,8 @@ if ($ssl != "" && $config->data['MAIN']['WARNSSL'] == 'true'){
 
 /* show login screen */
 $smarty->assign ("PHPSESSID", session_id());
-if (isset($_SESSION['errors'])){
-  $smarty->assign("errors", $_SESSION['errors']);
+if (session::is_set('errors')){
+  $smarty->assign("errors", session::get('errors'));;
 }
 if ($error_collector != ""){
   $smarty->assign("php_errors", $error_collector."</div>");

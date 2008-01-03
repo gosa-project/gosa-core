@@ -50,24 +50,24 @@ session_cache_expire(60*24);  // default is 180
 ini_set("session.gc_maxlifetime",24*60*60);
 
 /* Start session */
-session_start ();
-$_SESSION['DEBUGLEVEL']= 1;
+session::start();
+session::set('DEBUGLEVEL',1);
 
 /* Check for js */
-if (!isset($_GET['js']) && !isset($_SESSION['js'])){
+if (!isset($_GET['js']) && !session::is_set('js')){
   echo '<script language="JavaScript" type="text/javascript">';
   echo '  location = "setup.php?js=true";';
   echo '</script>';
 
-  $_SESSION['js']= FALSE;
+  session::set('js',FALSE);
 } elseif(isset($_GET['js'])) {
-  $_SESSION['js']= TRUE;
+  session::set('js',TRUE);
 }
 
 /* Attribute initialization, reset errors */
-$_SESSION['errors']             = "";
-$_SESSION['errorsAlreadyPosted']= array();
-$_SESSION['LastError']          = "";
+session::set('errors',"");
+session::set('errorsAlreadyPosted',array());
+session::set('LastError',"");
 
 /* Set template compile directory */
 $smarty->compile_dir= '/var/spool/gosa/';
@@ -80,18 +80,18 @@ if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))){
 }
 
 /* Get posted language */
-if(!isset($_SESSION['lang'])){
-  $_SESSION['lang'] = get_browser_language();
+if(!session::is_set('lang')){
+  session::set('lang',get_browser_language());
 }
 if(isset($_POST['lang_selected'])){
   if($_POST['lang_selected'] != ""){
-    $_SESSION['lang'] = $_POST['lang_selected'];
+    session::set('lang',$_POST['lang_selected']);
   }else{
-    $_SESSION['lang'] = get_browser_language();
+    session::set('lang',get_browser_language());
   }
 }
 
-$lang = $_SESSION['lang'];
+$lang = session::get('lang');
 /* Append .UTF-8 to language string if necessary */
 if(!preg_match("/utf(-)8$/i",$lang)){
   $lang .= ".UTF-8";
@@ -122,7 +122,7 @@ $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('setup_headers.t
 
 /* Set focus to the error button if we've an error message */
 $focus= "";
-if (isset($_SESSION['errors']) && $_SESSION['errors'] != ""){
+if (session::is_set('errors') && session::get('errors') != ""){
   $focus= '<script language="JavaScript" type="text/javascript">';
   $focus.= 'document.forms[0].error_accept.focus();';
   $focus.= '</script>';
@@ -133,10 +133,11 @@ $focus.= 'next_msg_dialog();';
 $focus.= '</script>';
 
 /* show web frontend */
+$setup = session::get('setup');
 $smarty->assign("contents"  , $display);
-$smarty->assign("navigation", $_SESSION['setup']->get_navigation_html());
-$smarty->assign("header", $_SESSION['setup']->get_header_html());
-$smarty->assign("bottom", $focus.$_SESSION['setup']->get_bottom_html());
+$smarty->assign("navigation", $setup->get_navigation_html());
+$smarty->assign("header", $setup->get_header_html());
+$smarty->assign("bottom", $focus.$setup->get_bottom_html());
 $smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
 
 if ($error_collector != ""){

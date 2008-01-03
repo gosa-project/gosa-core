@@ -25,7 +25,7 @@ error_reporting (0);
 session_start ();
 
 /* Logged in? Simple security check */
-if (!isset($_SESSION['ui'])){
+if (!session::is_set('ui')){
   new log("security","all/all","",array(),"Error: combine.php called without session") ;
   header ("Location: index.php");
   exit;

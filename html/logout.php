@@ -26,13 +26,13 @@ header("Content-type: text/html; charset=UTF-8");
 /* try to start session, so we can remove userlocks, 
   if the old session is still available */
 @session_start();
-if(isset($_SESSION['ui'])){
+if(session::is_set('ui')){
   
   /* Get config & ui informations */
-  $ui= $_SESSION["ui"];
+  $ui= session::get("ui");
   
   /* config used for del_user_locks & some lines below to detect the language */  
-  $config= $_SESSION["config"];
+  $config= session::get("config");
 
   /* Remove all locks of this user */
   del_user_locks($ui->dn);

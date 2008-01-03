@@ -247,7 +247,7 @@ if (isset($_GET['reset'])){
   }
 }
 
-/* Install eGOsa hooks, convert _POST to _SESSION['POST'] */
+/* Install eGOsa hooks, convert _POST to session */
 if(isset($_GET['explorer'])){
   session::set('eGosa',TRUE);
 }
@@ -323,7 +323,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
       $smarty->display(get_template_path('conflict.tpl'));
       exit ();
     }
-    session::set('session_cnt',$_SESSION['session_cnt'] + 1);
+    session::set('session_cnt', (session::get('session_cnt') + 1));
     session::set('post_cnt' , validate($_POST['session_cnt']) + 1);
   }
 }

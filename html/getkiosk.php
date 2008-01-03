@@ -53,13 +53,13 @@ error_reporting (E_ALL | E_STRICT);
 session_start ();
 
 /* Logged in? Simple security check */
-if (!isset($_SESSION['ui'])){
+if (!session::is_set('ui')){
   new log("security","fai","",array(),"Error: getkiosk.php called without session") ;
   header ("Location: index.php");
   exit;
 }
-$ui= $_SESSION["ui"];
-$config= $_SESSION['config'];
+$ui= session::get("ui");
+$config= session::get('config');
 
 /* Check ACL's */
 #FIXME Use more specific acl categories instead of all/all

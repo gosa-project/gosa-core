@@ -74,8 +74,8 @@ function displayLogin()
 
   /* show login screen */
   $smarty->assign ("PHPSESSID", session_id());
-  if (isset($_SESSION['errors'])){
-    $smarty->assign("errors", $_SESSION['errors']);
+  if (session::is_set('errors')){
+    $smarty->assign("errors", session::get('errors'));
   }
   if ($error_collector != ""){
     $smarty->assign("php_errors", $error_collector."</div>");
@@ -96,17 +96,17 @@ session_start ();
 
 /* Destroy old session if exists. 
    Else you will get your old session back, if you not logged out correctly. */
-if(is_array($_SESSION) && count($_SESSION)){
-  session_destroy();
-  session_start();
+if(is_array(session::get_all()) && count(session::get_all())){
+  session::destroy();
+  session::start();
 }
 
 $username= "";
 
 /* Reset errors */
-$_SESSION['errors']             = "";
-$_SESSION['errorsAlreadyPosted']= array();
-$_SESSION['LastError']          = "";
+session::set('errors',"");
+session::set('errorsAlreadyPosted',"");
+session::set('LastError',"");
 
 /* Check if we need to run setup */
 if (!file_exists(CONFIG_DIR."/".CONFIG_FILE)){
@@ -115,13 +115,13 @@ if (!file_exists(CONFIG_DIR."/".CONFIG_FILE)){
 }
 
 /* Reset errors */
-$_SESSION['errors']= "";
+session::set('errors',"");
 
 /* Check for java script */
 if(isset($_POST['javascript']) && $_POST['javascript'] == "true") {
-  $_SESSION['js']= TRUE;
+  session::set('js',TRUE);
 }elseif(isset($_POST['javascript'])) {
-  $_SESSION['js']= FALSE;
+  session::set('js',FALSE);
 }
 
 /* Check if gosa.conf (.CONFIG_FILE) is accessible */
@@ -132,7 +132,7 @@ if (!is_readable(CONFIG_DIR."/".CONFIG_FILE)){
 
 /* Parse configuration file */
 $config= new config(CONFIG_DIR."/".CONFIG_FILE, $BASE_DIR);
-$_SESSION['DEBUGLEVEL']= $config->data['MAIN']['DEBUGLEVEL'];
+session::set('DEBUGLEVEL',$config->data['MAIN']['DEBUGLEVEL']);
 if ($_SERVER["REQUEST_METHOD"] != "POST"){
   @DEBUG (DEBUG_CONFIG, __LINE__, __FUNCTION__, __FILE__, $config->data, "config");
 }
@@ -228,8 +228,8 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
   $message= "";
 
   /* Destroy old sessions, they cause a successfull login to relog again ...*/
-  if(isset($_SESSION['_LAST_PAGE_REQUEST'])){
-    $_SESSION['_LAST_PAGE_REQUEST'] = time();
+  if(session::is_set('_LAST_PAGE_REQUEST')){
+    session::set('_LAST_PAGE_REQUEST',time());
   }
 
   if (!$htaccess_authenticated){
@@ -318,14 +318,14 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
       del_user_locks($ui->dn);
 
       /* Save userinfo and plugin structure */
-      $_SESSION['ui']= $ui;
-      $_SESSION['session_cnt']= 0;
+      session::set('ui',$ui);
+      session::set('session_cnt',0);
 
       /* Let GOsa trigger a new connection for each POST, save
          config to session. */
       $config->get_departments();
       $config->make_idepartments();
-      $_SESSION['config']= $config;
+      session::set('config',$config);
 
       /* Restore filter settings from cookie, if available */
       if(isset($config->data['MAIN']['SAVE_FILTER']) && preg_match("/true/",$config->data['MAIN']['SAVE_FILTER'])){
@@ -342,7 +342,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
             $cookie_vars= array("MultiDialogFilters","CurrentMainBase","plug");
             foreach($cookie_vars as $var){
               if(isset($cookie[$var])){
-                $_SESSION[$var] = $cookie[$var];
+                session::set($var,$cookie[$var]);
               }
             }
             if(isset($cookie['plug'])){
@@ -428,8 +428,8 @@ $smarty->assign ("server_id", $selected);
 
 /* show login screen */
 $smarty->assign ("PHPSESSID", session_id());
-if (isset($_SESSION['errors'])){
-  $smarty->assign("errors", $_SESSION['errors']);
+if (session::is_set('errors')){
+  $smarty->assign("errors", session::get('errors'));
 }
 if ($error_collector != ""){
   $smarty->assign("php_errors", preg_replace("/%BUGBODY%/",$error_collector_mailto,$error_collector)."</div>");
@@ -439,7 +439,7 @@ if ($error_collector != ""){
 
 /* Set focus to the error button if we've an error message */
 $focus= "";
-if (isset($_SESSION['errors']) && $_SESSION['errors'] != ""){
+if (session::is_set('errors') && session::get('errors') != ""){
   $focus= '<script language="JavaScript" type="text/javascript">';
   $focus.= 'document.forms[0].error_accept.focus();';
   $focus.= '</script>';
