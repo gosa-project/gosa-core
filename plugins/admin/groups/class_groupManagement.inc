@@ -209,7 +209,7 @@ class groupManagement extends plugin
           //$this->reload ();
           unset ($this->grouptab);
           $this->grouptab= NULL;
-          unset ($_SESSION['objectinfo']);
+          session::un_set('objectinfo');
         }
       } else {
         /* Ok. There seem to be errors regarding to the tab data,
@@ -395,7 +395,7 @@ class groupManagement extends plugin
 
       /* Remove lock file after successfull deletion */
       del_lock ($this->dn);
-      unset($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
 
@@ -406,7 +406,7 @@ class groupManagement extends plugin
     /* Delete group canceled? */
     if (isset($_POST['delete_cancel'])){
       del_lock ($this->dn);
-      unset($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
     
 
@@ -421,7 +421,7 @@ class groupManagement extends plugin
       }
       unset ($this->grouptab);
       $this->grouptab= NULL;
-      unset($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
 

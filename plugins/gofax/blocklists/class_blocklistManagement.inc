@@ -124,7 +124,7 @@ class blocklist extends plugin
 
       del_lock ($this->dn);
       $this->dialog = NULL;
-      unset($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
 
@@ -146,7 +146,7 @@ class blocklist extends plugin
           del_lock ($this->dn);
           $this->dn= "";
           $this->dialog = NULL;
-          unset($_SESSION['objectinfo']);
+          session::un_set('objectinfo');
         }
       } else {
         /* Errors found, show message */

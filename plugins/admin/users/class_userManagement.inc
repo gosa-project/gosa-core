@@ -248,7 +248,7 @@ class userManagement extends plugin
       $this->sn= "";
       $this->givenName= "";
       $this->uid= "";
-      unset ($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
 
@@ -372,7 +372,7 @@ class userManagement extends plugin
       $this->sn= "";
       $this->givenName= "";
       $this->uid= "";
-      unset ($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
 
@@ -622,7 +622,7 @@ class userManagement extends plugin
 
           unset ($this->usertab);
           $this->usertab= NULL;
-          unset ($_SESSION['objectinfo']);
+          session::un_set('objectinfo');
         }
       } else {
         /* Ok. There seem to be errors regarding to the tab data,

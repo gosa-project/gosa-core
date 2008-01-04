@@ -204,7 +204,7 @@ class aclManagement extends plugin
      ********************/
     if(isset($_POST['delete_lock'])){
       del_lock ($this->dn);
-      unset($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
     /* Reset all relevant data, if we get a _cancel request */
@@ -214,7 +214,7 @@ class aclManagement extends plugin
         unset ($this->acltabs);
       }
       $this->acltabs= NULL;
-      unset ($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
 
@@ -387,7 +387,7 @@ class aclManagement extends plugin
 
           unset ($this->acltabs);
           $this->acltabs= NULL;
-          unset ($_SESSION['objectinfo']);
+          session::un_set('objectinfo');
         }
       } else {
         /* Ok. There seem to be errors regarding to the tab data,

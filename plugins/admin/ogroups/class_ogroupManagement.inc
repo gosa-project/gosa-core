@@ -297,7 +297,7 @@ class ogroupManagement extends plugin
 
       /* Remove lock file after successfull deletion */
       del_lock ($this->dn);
-      unset($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
 
@@ -308,7 +308,7 @@ class ogroupManagement extends plugin
     /* Delete group canceled? */
     if (isset($_POST['delete_cancel'])){
       del_lock ($this->dn);
-      unset($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
 
@@ -363,7 +363,7 @@ class ogroupManagement extends plugin
 
           unset ($this->ogroup);
           $this->ogroup= NULL;
-          unset ($_SESSION['objectinfo']);
+          session::un_set('objectinfo');
         }
       } else {
         /* Ok. There seem to be errors regarding to the tab data,
@@ -382,7 +382,7 @@ class ogroupManagement extends plugin
       del_lock ($this->ogroup->dn);
       unset ($this->ogroup);
       $this->ogroup= NULL;
-      unset($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
 

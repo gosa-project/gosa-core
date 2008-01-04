@@ -207,7 +207,7 @@ class mimetypeManagement extends plugin
       del_lock ($this->mimetabs->dn);
       unset ($this->mimetabs);
       $this->mimetabs= NULL;
-      unset ($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
 
@@ -237,7 +237,7 @@ class mimetypeManagement extends plugin
           }
           unset ($this->mimetabs);
           $this->mimetabs= NULL;
-          unset ($_SESSION['objectinfo']);
+          session::un_set('objectinfo');
         }
       } else {
         /* Ok. There seem to be errors regarding to the tab data,
@@ -439,7 +439,7 @@ class mimetypeManagement extends plugin
     /* Delete mime type canceled? */
     if (isset($_POST['delete_cancel'])){
       del_lock ($this->dn);
-      unset($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
     /* Show tab dialog if object is present */

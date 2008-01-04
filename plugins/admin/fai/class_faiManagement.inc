@@ -757,7 +757,7 @@ class faiManagement extends plugin
 			unset($this->dialog);
 			$this->dialog=FALSE;
 			$this->is_dialog = false;
-			unset($_SESSION['objectinfo']);
+			session::un_set('objectinfo');
 			del_lock ($this->dn);
 		}
 
@@ -785,7 +785,7 @@ class faiManagement extends plugin
           unset($this->dialog);
           $this->dialog=FALSE;
           $this->is_dialog=false;
-          unset($_SESSION['objectinfo']);
+          session::un_set('objectinfo');
         }
 			}
 		}

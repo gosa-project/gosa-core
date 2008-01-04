@@ -459,7 +459,7 @@ class systems extends plugin
       }else{
         print_red(_("Can't detect object to change password."));
       }
-      unset($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
 
@@ -470,7 +470,7 @@ class systems extends plugin
     /* Delete terminal canceled? */
     if (isset($_POST['delete_cancel']) || isset($_POST['password_cancel'])){
       del_lock ($this->dn);
-      unset($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
 
@@ -801,7 +801,7 @@ class systems extends plugin
 
         unset ($this->systab);
         $this->systab= NULL;
-        unset($_SESSION['objectinfo']);
+        session::un_set('objectinfo');
       } else {
         /* Ok. There seem to be errors regarding to the tab data,
            show message and continue as usual. */
@@ -820,7 +820,7 @@ class systems extends plugin
         unset ($this->systab);
       }
       $this->systab= NULL;
-      unset($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
 
       /* Remove ogroup selection, which was set while editing a new incoming entry */
       if(isset($_SESSION['SelectedSystemType'])){

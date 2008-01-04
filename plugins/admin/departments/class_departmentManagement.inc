@@ -379,7 +379,7 @@ class departmentManagement extends plugin
       }
       unset ($this->deptabs);
       $this->deptabs= NULL;
-      unset ($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
 
@@ -394,7 +394,7 @@ class departmentManagement extends plugin
       del_lock ($this->dn);
       unset($this->depdabs);
       $this->deptabs= NULL;
-      unset ($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
     /* Headpage or normal plugin screen? */

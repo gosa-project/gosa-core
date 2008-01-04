@@ -162,7 +162,7 @@ class goFonMacro extends plugin
       del_lock ($this->macrotabs->dn);
       unset ($this->macrotabs);
       $this->macrotabs= NULL;
-      unset ($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
 
@@ -195,7 +195,7 @@ class goFonMacro extends plugin
 
           unset ($this->macrotabs);
           $this->macrotabs= NULL;
-          unset ($_SESSION['objectinfo']);
+          session::un_set('objectinfo');
         }
       } else {
         /* Ok. There seem to be errors regarding to the tab data,

@@ -81,10 +81,10 @@ class config  {
       xml_set_element_handler($this->parser, "tag_open", "tag_close");
       $this->parse($this->filename);
       if(session::is_set('plist')){
-        unset($_SESSION['plist']);
+        session::un_set('plist');
       }
       if(session::is_set('plug')){
-        unset($_SESSION['plug']);
+        session::un_set('plug');
       }
       if(isset($_GET['plug'])){
         unset($_GET['plug']);

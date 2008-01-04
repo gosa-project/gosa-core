@@ -146,7 +146,7 @@ class deviceManagement extends plugin
       del_lock ($this->devicetabs->dn);
       unset ($this->devicetabs);
       $this->devicetabs= NULL;
-      unset ($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
 
@@ -176,7 +176,7 @@ class deviceManagement extends plugin
           }
           unset ($this->devicetabs);
           $this->devicetabs= NULL;
-          unset ($_SESSION['objectinfo']);
+          session::un_set('objectinfo');
         }
       } else {
        /* Ok. There seem to be errors regarding to the tab data,
@@ -374,7 +374,7 @@ class deviceManagement extends plugin
     /* Delete device canceled? */
     if (isset($_POST['delete_cancel'])){
       del_lock ($this->dn);
-      unset($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
   }
 
     /* Show tab dialog if object is present */

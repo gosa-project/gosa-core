@@ -124,7 +124,7 @@ class dfsManagment extends plugin {
       unset ($this->dfstab);
       $this->dfstab = NULL;
       $this->dn = "";
-      unset($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
     # delete pressed
@@ -150,7 +150,7 @@ class dfsManagment extends plugin {
       unset ($this->dfstab);
       $this->dfstab = NULL;
       $this->dn = "";
-      unset($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
     # generate main page no tabs

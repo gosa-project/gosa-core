@@ -152,7 +152,7 @@ class phoneConferenceManagment extends plugin
       $this->conftab= NULL;
       $this->lognames= array();;
       $this->cn= "";
-      unset ($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
 
@@ -319,7 +319,7 @@ class phoneConferenceManagment extends plugin
         $this->dn= "new";
         $this->conftab= new conferencetabs($this->config,$this->config->data['TABS']['CONFERENCETABS'], $this->dn,"gofonconference");
         $this->conftab->set_acl_base($dummy_dn);
-        unset($_SESSION['objectinfo']);
+        session::un_set('objectinfo');
       }
     }
 
@@ -351,7 +351,7 @@ class phoneConferenceManagment extends plugin
         del_lock ($this->conftab->dn);;
         unset ($this->conftab);
         $this->conftab= NULL;
-        unset ($_SESSION['objectinfo']);
+        session::un_set('objectinfo');
       } else {
         show_errors($message);
       }

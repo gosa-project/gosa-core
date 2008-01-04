@@ -208,7 +208,7 @@ class applicationManagement extends plugin
       del_lock ($this->apptabs->dn);
       unset ($this->apptabs);
       $this->apptabs= NULL;
-      unset ($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
 
@@ -241,7 +241,7 @@ class applicationManagement extends plugin
           }
           unset ($this->apptabs);
           $this->apptabs= NULL;
-          unset ($_SESSION['objectinfo']);
+          session::un_set('objectinfo');
         }
       } else {
         /* Ok. There seem to be errors regarding to the tab data,
@@ -439,7 +439,7 @@ class applicationManagement extends plugin
     /* Delete application canceled? */
     if (isset($_POST['delete_cancel'])){
       del_lock ($this->dn);
-      unset($_SESSION['objectinfo']);
+      session::un_set('objectinfo');
     }
 
     /* Show tab dialog if object is present */
