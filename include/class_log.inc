@@ -51,7 +51,7 @@ class log {
     }
 
     $entry = array(); 
-    if(!isset($_SESSION['config'])){
+    if(!session::is_set('config')){
       $entry['user']= "unkown";
     }else{
 

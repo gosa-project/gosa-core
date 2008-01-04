@@ -80,10 +80,10 @@ class config  {
       xml_set_object($this->parser, $this);
       xml_set_element_handler($this->parser, "tag_open", "tag_close");
       $this->parse($this->filename);
-      if(isset($_SESSION['plist'])){
+      if(session::is_set('plist')){
         unset($_SESSION['plist']);
       }
-      if(isset($_SESSION['plug'])){
+      if(session::is_set('plug')){
         unset($_SESSION['plug']);
       }
       if(isset($_GET['plug'])){

@@ -1362,7 +1362,7 @@ class LDAP{
 
   function log($string)
   {
-    if (isset($_SESSION['config'])){
+    if (session::is_set('config')){
       $cfg= $_SESSION['config'];
       if (isset($cfg->current['LDAPSTATS']) && preg_match('/true/i', $cfg->current['LDAPSTATS'])){
         syslog (LOG_INFO, $string);
