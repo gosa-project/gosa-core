@@ -221,7 +221,7 @@ class config  {
     /* Check for connection */
     if (is_null($this->ldap) || (is_int($this->ldap) && $this->ldap == 0)){
       $smarty= get_smarty();
-      print_red (_("Can't bind to LDAP. Please contact the system administrator."));
+      msg_dialog::display(_("LDAP error"), _("Can't bind to LDAP. Please contact the system administrator."), ERROR_DIALOG);
       display_error_page();
     }
 
@@ -547,7 +547,7 @@ class config  {
       /* If no samba servers are found, look for configured sid/ridbase */
       if (count($this->data['SERVERS']['SAMBA']) == 0){
         if (!isset($this->current["SID"]) || !isset($this->current["RIDBASE"])){
-          print_red(_("SID and/or RIDBASE missing in your configuration!"));
+          msg_dialog::display(_("Configuration error"), _("SID and/or RIDBASE missing in the configuration!"), ERROR_DIALOG);
           display_error_page();
         } else {
           $this->data['SERVERS']['SAMBA']['DEFAULT']= array(
