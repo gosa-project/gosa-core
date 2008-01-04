@@ -29,7 +29,7 @@ if ($remove_lock){
 
   /* Create macroManagment object on demand */
   if (!session::is_set('macroManagment') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-    session::set('macroManagment',new goFonMacro ($config, session::get('ui')));
+    session::set('macroManagment',new goFonMacro ($config, get_userinfo()));
   }
 
   /* Get object */

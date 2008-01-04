@@ -10,7 +10,7 @@
      # create dfsManagment object
      if (!session::is_set('dfsManagment') || 
         (isset($_GET['reset']) && $_GET['reset'] == 1)) {
-       session::set('dfsManagment',new dfsManagment($config, session::get('ui')));
+       session::set('dfsManagment',new dfsManagment($config, get_userinfo()));
      }
      $dfsManagment  = session::get('dfsManagment');
      $output = $dfsManagment->execute();
