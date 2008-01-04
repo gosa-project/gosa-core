@@ -206,7 +206,7 @@ class tabs
     foreach (array_reverse($this->by_object) as $key => $obj){
       $reason= $obj->allow_remove();
       if ($reason != ""){
-        print_red(sprintf(_("Delete process has been canceled by plugin '%s': %s"), $key, $reason));
+        msg_dialog::display(_("Warning"), sprintf(_("Delete process has been canceled by plugin '%s': %s"), $key, $reason), WARNING_DIALOG);
         return;
       }
     }
