@@ -33,25 +33,17 @@ class session {
 
 	public static function is_set($name)
 	{
-		session::log("Checked if element '".$name."' exists. Returned (".isset($_SESSION[$name]).")");
 		return(isset($_SESSION[$name]));
 	}
 
 	public static function set($name,$value)
 	{
-		session::log("Set '".$name."' to '".gettype($value)."'.");
 		$_SESSION[$name] = $value;
 	}
 
-	public static function &get($name)
+	public static function get($name)
 	{
-		$ret = FALSE;
-		if(session::is_set($name)){
-			$ret = $_SESSION[$name];
-			session::log("Returned '".gettype($ret)."' for '".$name."'.");
-		}else{
-			session::log("Returned FALSE for '".$name."'. Element wasn't set.");
-		}
+		$ret = &$_SESSION[$name];
 		return($ret);
 	}
 
@@ -59,9 +51,6 @@ class session {
 	{
 		if(session::is_set($name)){
 			unset($_SESSION[$name]);
-			session::log("Removed element '".$name."'.");
-		}else{
-			session::log("Tried to remove element '".$name."'. Element wasn't set.");
 		}
 	}
 
@@ -83,7 +72,6 @@ class session {
 		   the php.ini, so if you use debian, you must hardcode session.gc_maxlifetime in your php.ini */
 		ini_set("session.gc_maxlifetime",24*60*60);
 		session_start();
-		session::log("Session startet");
 	}
 
 	public static function destroy()
@@ -96,14 +84,8 @@ class session {
 		echo "Not implemented yet";
 	}
 
-	private static function log($str)
-	{
-#		echo $str."<br>";
-	}
-
 	public static function &get_all()
 	{
-		session::log("Returned complete session.");
 		return($_SESSION);
 	}
 }
