@@ -1427,12 +1427,7 @@ function get_printer_list()
 
 function sess_del ($var)
 {
-  /* New style */
-  unset($_SESSION[$var]);
-
-  /* ... work around, since the first one
-     doesn't seem to work all the time */
-  session_unregister ($var);
+  session::un_set($var);
 }
 
 

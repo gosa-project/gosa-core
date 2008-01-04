@@ -231,7 +231,7 @@ class config  {
     }
 
     if ($sizelimit){
-      $this->ldap->set_size_limit($_SESSION['size_limit']);
+      $this->ldap->set_size_limit(session::get('size_limit'));
     } else {
       $this->ldap->set_size_limit(0);
     }

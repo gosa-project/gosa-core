@@ -42,7 +42,7 @@ if ($remove_lock){
     $display= print_header( get_template_path('images/macros.png'), 
                             _("Phone macro management"), 
                             "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> 
-                            ".@LDAP::fix($_SESSION['objectinfo']));
+                            ".@LDAP::fix(session::get('objectinfo')));
   } else {
     $display= print_header(get_template_path('images/macros.png'), _("Phone macro management"));
   }

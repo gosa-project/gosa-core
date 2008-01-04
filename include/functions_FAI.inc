@@ -151,8 +151,9 @@ function prepare_to_save_FAI_object($Current_DN,$objectAttrs,$removed = false)
       }
     } 
   }
-   
-  $_SESSION['FAI_objects_to_save'][$Current_DN] =  $addObj;
+  $FAI_objects_to_save = session::get('FAI_objects_to_save') ;
+  $FAI_objects_to_save[$Current_DN] =  $addObj;
+  session::set('FAI_objects_to_save',$FAI_objects_to_save);
 }
 
 

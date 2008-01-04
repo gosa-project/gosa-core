@@ -1594,8 +1594,10 @@ class plugin
     }
 
     /* Update userinfo if necessary */
-    if($_SESSION['ui']->dn == $old_dn){
-      $_SESSION['ui']->dn = $new_dn;
+    $ui = session::get('ui');
+    if($ui->dn == $old_dn){
+      $ui->dn = $new_dn;
+      session::set('ui',$ui);
       new log("view","acl/".get_class($this),$this->dn,array(),"Updated current user dn from '".$old_dn."' to '".$new_dn."'");
     }
 

@@ -520,7 +520,7 @@ class MultiSelectWindow{
     if($s_action=="back"){
 
       /* Get parent deprtment and check if we are allowed to step in it */
-      $base_back= preg_replace("/^[^,]+,/", "", $_SESSION['CurrentMainBase']);
+      $base_back= preg_replace("/^[^,]+,/", "", session::get('CurrentMainBase'));
       $dep_id = $this->ui->get_module_departments($this->module);
       if(in_array_ics($base_back,$dep_id)){
 
@@ -541,14 +541,16 @@ class MultiSelectWindow{
 		if(isset($_POST['MultiSelectWindow'.$this->filterName])){
 
       /* Save some additional vars */
+      $MultiDialogFilters = session::get('MultiDialogFilters');
       foreach($this->SaveAdditionalVars as $name){
         if(isset($_POST[$name])){
           if(isset($this->$name)){
             $this->$name = $_POST[$name];
-            $_SESSION['MultiDialogFilters'][$this->filterName][$name] = $_POST[$name];
+            $MultiDialogFilters[$this->filterName][$name] = $_POST[$name];
           }
         }
       }
+      session::set('MultiDialogFilters',$MultiDialogFilters);
 
 			/* Check posts from checkboxes 
 			 */
@@ -560,15 +562,20 @@ class MultiSelectWindow{
 					$this->array_Checkboxes[$key]['default'] = false;
 					$this->$box['name'] = false;
 				}
+
 				/* Save settings in out session */
-				$_SESSION['MultiDialogFilters'][$this->filterName][$box['name']] = $this->$box['name'];
+        $MultiDialogFilters = session::get('MultiDialogFilters');
+				$MultiDialogFilters[$this->filterName][$box['name']] = $this->$box['name'];
+        session::set('MultiDialogFilters',$MultiDialogFilters);
 			}
 
 			/* Check regex posts */
 			foreach($this->array_Regexes as $key => $box){
 				$this->array_Regexes[$key]['value'] = $_POST[$box['name']];
 				$this->$box['name'] = $_POST[$box['name']];
-				$_SESSION['MultiDialogFilters'][$this->filterName][$box['name']] = $this->$box['name'];
+        $MultiDialogFilters = session::get('MultiDialogFilters');
+				$MultiDialogFilters[$this->filterName][$box['name']] = $this->$box['name'];
+        session::set('MultiDialogFilters',$MultiDialogFilters);
 			}
 
 			/* call close/save if buttons are pressed */
@@ -592,7 +599,9 @@ class MultiSelectWindow{
 					$val = preg_replace("/\*\**/","*",$val);
 					$this->array_Regexes[$key]['value'] = $val;
 					$this->$box['name'] = $val;
-          $_SESSION['MultiDialogFilters'][$this->filterName][$box['name']] =  $val;
+          $MultiDialogFilters = session::get('MultiDialogFilters');
+          $MultiDialogFilters[$this->filterName][$box['name']] =  $val;
+          session::set('MultiDialogFilters',$MultiDialogFilters);
 				}
 			}
 		}

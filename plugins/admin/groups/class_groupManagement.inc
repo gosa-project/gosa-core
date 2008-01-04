@@ -512,7 +512,7 @@ class groupManagement extends plugin
     /* Prepare ldap class */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($base);
-    $ldap->set_size_limit($_SESSION['size_limit']);
+    $ldap->set_size_limit(session::get('size_limit'));
 
 
     /********************

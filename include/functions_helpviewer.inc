@@ -61,9 +61,11 @@ function genIndex()
 {
   global $helpobject;
   $str = "";
-  $test = new pluglist($_SESSION['config'],get_userinfo());
+  $config = session::get('config');
+  $helpobject = session::get('helpobject');
+  $test = new pluglist($config,get_userinfo());
   $current_hl = "";
-  foreach($_SESSION['helpobject']['helpconf'] as $id => $attrs){
+  foreach($helpobject['helpconf'] as $id => $attrs){
     $path = $test -> get_path($id);
     $exists = true;
     $helpdir = "../doc/guide/user/".$helpobject['lang']."/html/".preg_replace("/^.*\//i","",$path)."/";
@@ -289,7 +291,7 @@ function search($arr,$word)
 
     /* Filter words smaler than 3 chars */
     if(strlen($tryword)>=$minwordlength) {
-      $_SESSION['parsed_search_keyword'].=$tryword." ";
+      session::set('parsed_search_keyword', session::get('parsed_search_keyword').$tryword." ");
       $useablewords[]=$tryword;
     }
   }
@@ -384,7 +386,7 @@ function searchlist($arr,$res,$maxresults)
   $ret.= "<br>
               ".sprintf(_("%s results for your search with the keyword %s"), 
                             "<b>".count($topten)."</b>", 
-                            "<b>".$_SESSION['parsed_search_keyword']."</b>");
+                            "<b>".session::get('parsed_search_keyword')."</b>");
   $ret.="<br>
         <br>";
   return($ret);

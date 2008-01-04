@@ -120,7 +120,7 @@ class dfsManagment extends plugin {
 
     # cancel pressed
     if (isset($_POST['edit_cancel'])) {
-      del_lock ($_SESSION['objectinfo']);
+      del_lock (session::get('objectinfo'));
       unset ($this->dfstab);
       $this->dfstab = NULL;
       $this->dn = "";
@@ -146,7 +146,7 @@ class dfsManagment extends plugin {
       $ldap->rmdir($this->basedn);
 			show_ldap_error($ldap->get_error(), sprintf(_("Removing of DFS share with dn '%s' failed."),$this->dn));
       
-      del_lock ($_SESSION['objectinfo']);
+      del_lock (session::get('objectinfo'));
       unset ($this->dfstab);
       $this->dfstab = NULL;
       $this->dn = "";

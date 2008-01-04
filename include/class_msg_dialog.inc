@@ -23,7 +23,7 @@ class msg_dialog
 			$i_type = INFO_DIALOG;
 		}
 
-		if((!session::is_set('errorsAlreadyPosted')) || !is_array($_SESSION['errorsAlreadyPosted'])){
+		if((!session::is_set('errorsAlreadyPosted')) || !is_array(session::get('errorsAlreadyPosted'))){
 			session::set('errorsAlreadyPosted',array());
 		}
 
@@ -55,7 +55,9 @@ class msg_dialog
 				error_reporting(E_ALL);
 				echo $this->execute();
 			}else{
-				$_SESSION['msg_dialogs'][] = $this;
+				$msg_dialogs   = session::get('msg_dialogs');
+				$msg_dialogs[] = $this;
+				session::set('msg_dialogs',$msg_dialogs);
 			}
 		}
 		session::set('errorsAlreadyPosted',$errorsAlreadyPosted);
@@ -127,7 +129,7 @@ class msg_dialog
 #			$seen = $_POST['closed_msg_dialogs'];
 		}
 
-		if(session::is_set('msg_dialogs') && is_array($_SESSION['msg_dialogs']) && count($_SESSION['msg_dialogs'])){
+		if(session::is_set('msg_dialogs') && is_array(session::get('msg_dialogs')) && count(session::get('msg_dialogs'))){
 
 			/* Get frame one */
 			$smarty = get_smarty();
@@ -136,19 +138,21 @@ class msg_dialog
 			$return = $smarty->fetch(get_template_path('msg_dialog.tpl'));
 
 			if(!session::get('js')){
-				$dialog = array_pop($_SESSION['msg_dialogs']);
+				$dialog = array_pop(session::get('msg_dialogs'));
 				$return.= $dialog->execute();
 			}else{
-				foreach($_SESSION['msg_dialogs'] as $key => $dialog){
+				$msg_dialogs = session::get('msg_dialogs');
+				foreach($msg_dialogs as $key => $dialog){
 
 					if(preg_match("/".$dialog->get_ID()."/",$seen)){
-						unset($_SESSION['msg_dialogs'][$key]);
+						unset($msg_dialogs[$key]);
 					}else{
 						$return.= $dialog->execute();
 						$dialog_ids= $dialog->get_ID().",".$dialog_ids;
 					}
-					unset($_SESSION['msg_dialogs'][$key]);
+					unset($msg_dialogs[$key]);
 				}
+				session::set('msg_dialogs',$msg_dialogs);
 			}
 			$dialog_ids = preg_replace("/,$/","",$dialog_ids);
 

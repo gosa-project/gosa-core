@@ -274,7 +274,9 @@ class userinfo
       }
     }
 
-    $_SESSION['ACL_CACHE']["$dn+$object+$attribute"]= $ret;
+    $ACL_CACHE = session::get('ACL_CACHE');
+    $ACL_CACHE["$dn+$object+$attribute"]= $ret;
+    session::set('ACL_CACHE',$ACL_CACHE);
 
     /* Remove write if needed */
     if ($skip_write){
@@ -386,7 +388,9 @@ class userinfo
       }
     }
 
-    $_SESSION['ACL_CACHE']['MODULE_DEPARTMENTS'][serialize($module)] = $deps;
+    $ACL_CACHE = session::get('ACL_CACHE');
+    $ACL_CACHE['MODULE_DEPARTMENTS'][serialize($module)] = $deps;
+    session::set('ACL_CACHE',$ACL_CACHE);
     return ($deps);
   }
 

@@ -35,7 +35,7 @@ if (!$remove_lock){
                           _("Object groups"),
                           "<img alt=\"\" align=\"middle\" src=\"".
                           get_template_path('images/closedlock.png').
-                          "\"> ".@LDAP::fix($_SESSION['objectinfo']));
+                          "\"> ".@LDAP::fix(session::get('objectinfo')));
   } else {
     $display= print_header(get_template_path('images/ogroup.png'), _("Object groups"));
   }

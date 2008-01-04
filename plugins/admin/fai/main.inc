@@ -30,7 +30,7 @@ if ($remove_lock){
 	if (!session::is_set('FAI') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 		$_SESSION['FAI']= new faiManagement($config, $ui);
 		$_SESSION['FAI']->set_acl_category("fai");
-		$_SESSION['FAI']->set_acl_base($_SESSION['CurrentMainBase']);
+		$_SESSION['FAI']->set_acl_base(session::get('CurrentMainBase'));
 	}
 	$FAI = session::get('FAI');
 	$FAI->save_object();
@@ -43,7 +43,7 @@ if ($remove_lock){
 	}
 	/* Page header*/
 	if (session::is_set('objectinfo')){
-		$display= print_header(get_template_path('images/fai.png'), _("Fully Automatic Installation"), "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".@LDAP::fix($_SESSION['objectinfo']));
+		$display= print_header(get_template_path('images/fai.png'), _("Fully Automatic Installation"), "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".@LDAP::fix(session::get('objectinfo')));
 	} else {
 		$display= print_header(get_template_path('images/fai.png'), _("Fully Automatic Installation"));
 	}
