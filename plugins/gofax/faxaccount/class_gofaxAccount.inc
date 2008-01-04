@@ -66,7 +66,7 @@ class gofaxAccount extends plugin
     /* Hickert : 11.11.05
      * Added to be able to handle department selection in divSelelect
      */
-    if(!isset($_SESSION["Fax_Filter"])){
+    if(!session::is_set("Fax_Filter")){
       $_SESSION['Fax_Filter']['depselect'] = $this->config->current['BASE'];
     }
 

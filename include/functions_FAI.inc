@@ -214,16 +214,18 @@ function save_release_changes_now()
   $to_save = array();
 
   /* check which objects must be saved */
-  foreach($_SESSION['FAI_objects_to_save'] as $Current_DN => $object){
+  $FAI_objects_to_save = session::get('FAI_objects_to_save');
+  foreach($FAI_objects_to_save as $Current_DN => $object){
     if($object['diff']){
       $sub_name = $Current_DN;
-      while(isset($_SESSION['FAI_objects_to_save'][$sub_name])){
-        $to_save[strlen($sub_name)][$sub_name] = $_SESSION['FAI_objects_to_save'][$sub_name]; 
-        unset($_SESSION['FAI_objects_to_save'][$sub_name]);
+      while(isset($FAI_objects_to_save[$sub_name])){
+        $to_save[strlen($sub_name)][$sub_name] = $FAI_objects_to_save[$sub_name]; 
+        unset($FAI_objects_to_save[$sub_name]);
         $sub_name = preg_replace('/^[^,]+,/', '', $sub_name);
       }
     }
   }
+  session::set('FAI_objects_to_save',$FAI_objects_to_save);
 
   /* Sort list of objects that must be saved, and ensure that 
       container   objects are safed, before their childs are saved */

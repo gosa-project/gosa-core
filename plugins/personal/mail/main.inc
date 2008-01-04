@@ -39,7 +39,7 @@ if (!$remove_lock){
   $mailAccount= $_SESSION['mailAccount'];
 
   /* save changes back to object */
-  if (isset ($_SESSION['edit'])){
+  if (session::is_set('edit')){
     $mailAccount->save_object ();
   }
 
@@ -89,7 +89,7 @@ if (!$remove_lock){
   }
 
   /* Store changes  in session */
-  if (isset ($_SESSION['edit'])){
+  if (session::is_set('edit')){
     session::set('mailAccount',$mailAccount);
   }
 

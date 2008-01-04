@@ -222,7 +222,8 @@ class workservice extends plugin
     }
 
     /* Workaround to fill in inherited values if we've specified an objectclass */
-    if (isset($_SESSION['SelectedSystemType']['ogroup']) && $_SESSION['SelectedSystemType']['ogroup'] != 'none'){
+    $SelectedSystemType = $SelectedSystemType;
+    if (isset($SelectedSystemType['ogroup']) && $SelectedSystemType['ogroup'] != 'none'){
       $this->XResolutions= array('default' => _("inherited"));
       $this->XColordepths= array('default' => _("inherited"));
       $this->XKbModels= array('default' => _("inherited"));

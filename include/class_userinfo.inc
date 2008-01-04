@@ -190,13 +190,14 @@ class userinfo
   function get_permissions($dn, $object, $attribute= "", $skip_write= FALSE)
   {
     /* Push cache answer? */
-    if (isset($_SESSION['ACL_CACHE']["$dn+$object+$attribute"])){
+    $ACL_CACHE = session::get('ACL_CACHE');
+    if (isset($ACL_CACHE["$dn+$object+$attribute"])){
 
       /* Remove write if needed */
       if ($skip_write){
-        $ret = preg_replace('/w/', '', $_SESSION['ACL_CACHE']["$dn+$object+$attribute"]);
+        $ret = preg_replace('/w/', '', $ACL_CACHE["$dn+$object+$attribute"]);
       }else{
-        $ret = $_SESSION['ACL_CACHE']["$dn+$object+$attribute"];
+        $ret = $ACL_CACHE["$dn+$object+$attribute"];
       } 
       return($ret);
     }
@@ -288,8 +289,9 @@ class userinfo
   function get_module_departments($module)
   {
     /* Use cached results if possilbe */
-    if(isset($_SESSION['ACL_CACHE']['MODULE_DEPARTMENTS'][serialize($module)])){
-      return($_SESSION['ACL_CACHE']['MODULE_DEPARTMENTS'][serialize($module)]);
+    $ACL_CACHE = session::get('ACL_CACHE');
+    if(isset($ACL_CACHE['MODULE_DEPARTMENTS'][serialize($module)])){
+      return($ACL_CACHE['MODULE_DEPARTMENTS'][serialize($module)]);
     }
 
     global $plist;

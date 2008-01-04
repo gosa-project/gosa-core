@@ -1539,19 +1539,19 @@ function print_header($image, $headline, $info= "")
 
 function register_global($name, $object)
 {
-  $_SESSION[$name]= $object;
+  session::set($name,$object);
 }
 
 
 function is_global($name)
 {
-  return isset($_SESSION[$name]);
+  return(session::is_set($name));
 }
 
 
-function &get_global($name)
+function get_global($name)
 {
-  return $_SESSION[$name];
+  return(session::get($name));
 }
 
 

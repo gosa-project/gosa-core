@@ -27,12 +27,13 @@ class msg_dialog
 			session::set('errorsAlreadyPosted',array());
 		}
 
-		if(!isset($_SESSION['errorsAlreadyPosted'][$s_title.$s_message])){
-			$_SESSION['errorsAlreadyPosted'][$s_title.$s_message] = 0;
+		$errorsAlreadyPosted = session::get('errorsAlreadyPosted');
+		if(!isset($errorsAlreadyPosted[$s_title.$s_message])){
+			$errorsAlreadyPosted[$s_title.$s_message] = 0;
 		}
-		$_SESSION['errorsAlreadyPosted'][$s_title.$s_message]++;
+		$errorsAlreadyPosted[$s_title.$s_message]++;
 
-		if($_SESSION['errorsAlreadyPosted'][$s_title.$s_message] <=1  ){
+		if($errorsAlreadyPosted[$s_title.$s_message] <=1  ){
 
 			$this->i_ID 	 = preg_replace("/[^0-9]*/","",microtime()); 
 			$this->s_Title	 = $s_title;
@@ -46,7 +47,7 @@ class msg_dialog
 				preg_match("/^true$/i",$config->data['MAIN']['DISPLAYERRORS'])){
 				$this->a_Trace	 = debug_backtrace();
 			}
-			if(!isset($_SESSION['msg_dialogs'])){
+			if(!session::is_set('msg_dialogs')){
 				session::set('msg_dialogs',array());
 			}
 			if($this->i_Type == FATAL_ERROR_DIALOG){
@@ -57,6 +58,7 @@ class msg_dialog
 				$_SESSION['msg_dialogs'][] = $this;
 			}
 		}
+		session::set('errorsAlreadyPosted',$errorsAlreadyPosted);
 	}
 
 	public static function display($s_title,$s_message,$i_type = INFO_DIALOG)
@@ -125,7 +127,7 @@ class msg_dialog
 #			$seen = $_POST['closed_msg_dialogs'];
 		}
 
-		if(isset($_SESSION['msg_dialogs']) && is_array($_SESSION['msg_dialogs']) && count($_SESSION['msg_dialogs'])){
+		if(session::is_set('msg_dialogs') && is_array($_SESSION['msg_dialogs']) && count($_SESSION['msg_dialogs'])){
 
 			/* Get frame one */
 			$smarty = get_smarty();

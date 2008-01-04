@@ -411,9 +411,10 @@ class application extends plugin
     $ldap->cd($this->config->current["BASE"]);
 
     $tmp = $this->config->search("faiManagement", "CLASS",array('menu','tabs'));
-    if((!empty($tmp)) && (isset($_SESSION['appfilter']['release']))){
-      $baseDn = str_replace($this->config->current['BASE'],$this->base,$_SESSION['appfilter']['release']);
-      $baseDn = preg_replace("/".get_ou('applicationou').".*/",get_ou('applicationou').$this->base,$_SESSION['appfilter']['release']);
+    $appfilter = session::get('appfilter');
+    if((!empty($tmp)) && (isset($appfilter['release']))){
+      $baseDn = str_replace($this->config->current['BASE'],$this->base,$appfilter['release']);
+      $baseDn = preg_replace("/".get_ou('applicationou').".*/",get_ou('applicationou').$this->base,$appfilter['release']);
       $ldap->ls("(&(objectClass=gosaApplication)(cn=".$this->cn."))",$baseDn,array("cn"));
       if($ldap->count()){
         $attrs = $ldap->fetch();

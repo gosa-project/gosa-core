@@ -24,7 +24,7 @@ if (!$remove_lock){
 	$gofaxAccount= $_SESSION['gofaxAccount'];
 
 	/* save changes back to object */
-	if (isset ($_SESSION['edit'])){
+	if (session::is_set('edit')){
 		$gofaxAccount->save_object ();
 	}
 
@@ -74,7 +74,7 @@ if (!$remove_lock){
 	$info= "";
 
 	/* Store changes  in session */
-	if (isset ($_SESSION['edit'])){
+	if (session::is_set('edit')){
 		session::set('gofaxAccount',$gofaxAccount);
 	}
 

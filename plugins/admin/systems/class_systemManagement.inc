@@ -766,7 +766,8 @@ class systems extends plugin
         }
 
         /* Save terminal data to ldap */
-        if(isset($_SESSION['SelectedSystemType']['ogroup']) && $_SESSION['SelectedSystemType']['ogroup'] != 'none'){
+        $SelectedSystemType = session::get('SelectedSystemType');
+        if(isset($SelectedSystemType['ogroup']) && $SelectedSystemType['ogroup'] != 'none'){
           foreach (array("workservice", "termservice") as $cls){
             if (isset($this->systab->by_object[$cls])){
               $this->systab->by_object[$cls]->gotoXMouseport= "";
@@ -780,7 +781,7 @@ class systems extends plugin
         $this->systab->save();
 
         if(session::is_set('SelectedSystemType')){
-          unset($_SESSION['SelectedSystemType']);
+          session::un_set('SelectedSystemType');
           if(!isset($ldap)){
             $ldap = $this->config->get_ldap_link();
           }
@@ -824,7 +825,7 @@ class systems extends plugin
 
       /* Remove ogroup selection, which was set while editing a new incoming entry */
       if(session::is_set('SelectedSystemType')){
-        unset($_SESSION['SelectedSystemType']);
+        session::un_set('SelectedSystemType');
       }
     }
 

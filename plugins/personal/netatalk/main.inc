@@ -28,7 +28,7 @@ if (!$remove_lock) {
   }
 
   /* Create netatalk object on demand */
-  if (!isset ($_SESSION['netatalk']) || (isset ($_GET['reset']) && $_GET['reset'] == 1)) {
+  if (!session::is_set('netatalk') || (isset ($_GET['reset']) && $_GET['reset'] == 1)) {
     $_SESSION['netatalk'] = new netatalk($config, $ui->dn);
     $_SESSION['netatalk']->enable_CSN_check();
     $_SESSION['netatalk']->set_acl_base($ui->dn);
@@ -37,7 +37,7 @@ if (!$remove_lock) {
   $netatalk = $_SESSION['netatalk'];
 
   /* save changes back to object */
-  if (isset ($_SESSION['edit'])) {
+  if (session::is_set('edit')) {
     $netatalk->save_object();
   }
 
@@ -81,7 +81,7 @@ if (!$remove_lock) {
   $display = $netatalk->execute();
 
   /* Store changes  in session */
-  if (isset ($_SESSION['edit'])) {
+  if (session::is_set('edit')) {
     session::set('netatalk',$netatalk);
   }
 
@@ -91,7 +91,7 @@ if (!$remove_lock) {
     $display .= "<p class=\"plugbottom\">";
 
     /* Are we in edit mode? */
-    if (isset ($_SESSION['edit'])) {
+    if (session::is_set('edit')) {
       $display .= "<input type=submit name=\"edit_finish\" style=\"width:80px\" value=\""._("Ok")."\">\n";
       $display .= "&nbsp;";
       $display .= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";

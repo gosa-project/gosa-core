@@ -35,9 +35,10 @@ class gosa_logview extends plugin
     $this->ui = get_userinfo();
 
     /* Restore last filter settings */
+    $logview = session::get('logview');
     foreach(array("action","server","time","regex") as $attr){
-      if(isset($_SESSION['logview']['gosa_log'][$attr])){
-        $this->$attr = $_SESSION['logview']['gosa_log'][$attr];
+      if(isset($logview['gosa_log'][$attr])){
+        $this->$attr = $logview['gosa_log'][$attr];
       }
     }
 

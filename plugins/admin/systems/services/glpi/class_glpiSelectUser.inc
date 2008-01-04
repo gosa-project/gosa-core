@@ -25,7 +25,7 @@ class glpiSelectUser extends plugin
 
     $this->PostVarName = $postvar;
 
-    if(!isset($_SESSION['glpi_user_filter'])){
+    if(!session::is_set('glpi_user_filter')){
       $tmp['users_regex'] = "*";
       $tmp['base']       = $this->config->current['BASE'];
       session::set('glpi_user_filter',$tmp);

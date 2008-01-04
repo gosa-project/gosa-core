@@ -133,7 +133,7 @@ class mimetype extends plugin
     /* Set base */	
     if ($this->dn == "new"){
       if(session::is_set('CurrentMainBase')){
-        $this->base= $_SESSION['CurrentMainBase'];
+        $this->base= session::get('CurrentMainBase');
       }else{
         $ui= get_userinfo();
         $this->base= dn2base($ui->dn);
@@ -537,7 +537,10 @@ class mimetype extends plugin
     /* Check if there is already a mime type with this cn */
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current["BASE"]);
-    if($this->isReleaseMimeType && (isset($_SESSION['mimefilter']['release']))){
+
+    $mimefilter = session::get('mimefilter');
+  
+    if($this->isReleaseMimeType && (isset($mimefilter['release']))){
       $baseDn = str_replace($this->config->current['BASE'],$this->base,$_SESSION['mimefilter']['release']);
       $baseDn = preg_replace("/".get_ou('mimetypeou').".*/",get_ou('mimetypeou').$this->base,$_SESSION['mimefilter']['release']);
       $ldap->ls("(&(objectClass=gotoMimeType)(cn=".$this->cn."))",$baseDn,array("cn"));

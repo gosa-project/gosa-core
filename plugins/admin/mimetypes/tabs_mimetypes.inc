@@ -28,11 +28,13 @@ class mimetabs extends tabs
        'dn' to all plugins */
     $tmp = $this->config->search("faiManagement", "CLASS",array('menu','tabs'));
 
-    if((!empty($tmp)) && (isset($_SESSION['mimefilter']['release']))){
+    $mimefilter = session::get('mimefilter');
+
+    if((!empty($tmp)) && (isset($mimefilter['release']))){
       if(!$baseobject->isReleaseMimeType){
         $new_dn= "cn=".$baseobject->cn.",".get_ou('mimetypeou').$baseobject->base;
       }else{
-        $new_dn ="cn=".$baseobject->cn.",".$_SESSION['mimefilter']['release'];
+        $new_dn ="cn=".$baseobject->cn.",".$mimefilter['release'];
       }
     }else{
       $new_dn= "cn=".$baseobject->cn.",".get_ou('mimetypeou').$baseobject->base;

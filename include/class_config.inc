@@ -225,7 +225,7 @@ class config  {
       display_error_page();
     }
 
-    if (!isset($_SESSION['size_limit'])){
+    if (!session::is_set('size_limit')){
       session::set('size_limit',$this->current['SIZELIMIT']);
       session::set('size_ignore',$this->current['SIZEIGNORE']);
     }

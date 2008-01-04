@@ -38,7 +38,7 @@ if (!$remove_lock){
   $scalixAccount= $_SESSION['scalixAccount'];
 
   /* save changes back to object */
-  if (isset ($_SESSION['edit'])){
+  if (session::is_set('edit')){
     $scalixAccount->save_object ();
   }
 
@@ -86,7 +86,7 @@ if (!$remove_lock){
   $display= $scalixAccount->execute ();
 
   /* Store changes  in session */
-  if (isset ($_SESSION['edit'])){
+  if (session::is_set('edit')){
     session::set('scalixAccount',$scalixAccount);
   }
 

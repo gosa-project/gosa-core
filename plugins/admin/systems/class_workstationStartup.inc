@@ -426,8 +426,9 @@ class workstartup extends plugin
     /* There could be more than one server providing this release,
         so use cached result if available
      */
-    if(isset($_SESSION['getAvailableClassesForThisRelease_CACHE'][$release]))  {
-      return($_SESSION['getAvailableClassesForThisRelease_CACHE'][$release]);
+    $getAvailableClassesForThisRelease_CACHE = session::get('getAvailableClassesForThisRelease_CACHE');
+    if(isset($getAvailableClassesForThisRelease_CACHE[$release]))  {
+      return($getAvailableClassesForThisRelease_CACHE[$release]);
     }
 
     $test2  = array();
@@ -436,7 +437,7 @@ class workstartup extends plugin
     $ldap   = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
   
-    /* Get classes fpr given release */
+    /* Get classes for given release */
     $p_classes = get_all_objects_for_given_base($bb,
         "(|(objectClass=FAIpackageList)(objectClass=FAItemplate)".
           "(objectClass=FAIvariable)(objectClass=FAIscript)(objectClass=FAIhook)".

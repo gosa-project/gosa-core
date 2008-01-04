@@ -41,12 +41,12 @@ if (!$remove_lock){
   $user= $_SESSION['user'];
 
   /* save changes back to object */
-  if (isset ($_SESSION['edit'])){
+  if (session::is_set('edit')){
     $user->save_object ();
   }
 
   /* Enter edit mode? */
-  if ((isset($_POST['edit'])) && (!isset( $_SESSION['edit'])) &&preg_match("/w/",$ui->get_permissions($ui->dn,"users/user"))){
+  if ((isset($_POST['edit'])) && (!session::is_set('edit')) &&preg_match("/w/",$ui->get_permissions($ui->dn,"users/user"))){
 
     /* Check locking */
     if (($username= get_lock($ui->dn)) != ""){
@@ -143,7 +143,7 @@ if (!$remove_lock){
   }
 
   /* Store changes  in session */
-  if (isset ($_SESSION['edit'])){
+  if (session::is_set('edit')){
     session::set('user',$user);
   }
 

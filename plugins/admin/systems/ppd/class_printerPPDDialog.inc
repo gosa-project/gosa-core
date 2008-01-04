@@ -39,8 +39,9 @@ class printerPPDDialog extends plugin
     $this->depselect = $this->config->current['BASE'];
 
     /* Get PPD path and remove double //, and add trailing /  */
-    if(isset($_SESSION['config']->data['MAIN']['PPD_PATH'])){
-      $this->pathToPPD = $_SESSION['config']->data['MAIN']['PPD_PATH'];
+    $config = session::get('config');
+    if(isset($config->data['MAIN']['PPD_PATH'])){
+      $this->pathToPPD = $config->data['MAIN']['PPD_PATH'];
       $this->pathToPPD= preg_replace("/\/\//", "/", $this->pathToPPD);
       if(!preg_match("/\/$/",$this->pathToPPD)){
         $this->pathToPPD = $this->pathToPPD."/";

@@ -40,7 +40,7 @@ if (!$remove_lock){
   $nagiosAccount= $_SESSION['nagiosAccount'];
 
   /* save changes back to object */
-  if (isset ($_SESSION['edit'])){
+  if (session::is_set('edit')){
     $nagiosAccount->save_object ();
   }
 
@@ -90,7 +90,7 @@ if (!$remove_lock){
   }
 
   /* Store changes  in session */
-  if (isset ($_SESSION['edit'])){
+  if (session::is_set('edit')){
     session::set('nagiosAccount',$nagiosAccount);
   }
 

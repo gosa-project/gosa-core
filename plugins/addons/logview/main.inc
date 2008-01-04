@@ -20,7 +20,7 @@
 if (!$remove_lock){
 
 	/* Create logview object on demand */
-	if (!isset($_SESSION['log_tabs']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+	if (!session::is_set('log_tabs') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 		$_SESSION['log_tabs']= new log_tabs($config, $config->data['TABS']['LOGTABS'],"");
 	}
 	$log_tabs= $_SESSION['log_tabs'];

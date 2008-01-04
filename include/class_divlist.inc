@@ -204,8 +204,8 @@ class divlist {
 			$_SESSION['start'.$this->pageid]=$_GET['start'];
 			$start = $_GET['start'];
 		} else {
-			if(isset($_SESSION['start'.$this->pageid])){
-				$start = $_SESSION['start'.$this->pageid];
+			if(session::is_set('start'.$this->pageid)){
+				$start = session::get('start'.$this->pageid);
 			} else {
 				$start=0;
 			}

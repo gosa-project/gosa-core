@@ -62,8 +62,9 @@ class MultiSelectWindow{
 
 		/* Check if the given input field name was already used 
 		   for this type of dialog */	
-		if(isset($_SESSION['MultiDialogFilters'][$this->filterName][$name])){
-			$arr['value']	= $_SESSION['MultiDialogFilters'][$this->filterName][$name];
+    $MultiDialogFilters = session::get('MultiDialogFilters');
+		if(isset($MultiDialogFilters[$this->filterName][$name])){
+			$arr['value']	= $MultiDialogFilters[$this->filterName][$name];
 			$this->$name = $arr['value'];
 		}else{
 			$arr['value']	= $value;	
@@ -116,9 +117,10 @@ class MultiSelectWindow{
 		$this->selectedBase = $_SESSION['CurrentMainBase'];
 
     /* Check default values for SaveAdditionalVars */
+    $MultiDialogFilters = session::get('MultiDialogFilters');
     foreach($this->SaveAdditionalVars as $name){
-      if(isset($_SESSION['MultiDialogFilters'][$this->filterName][$name])){
-        $this->$name = $_SESSION['MultiDialogFilters'][$this->filterName][$name];
+      if(isset($MultiDialogFilters[$this->filterName][$name])){
+        $this->$name = $MultiDialogFilters[$this->filterName][$name];
       }
     }
     
@@ -254,8 +256,9 @@ class MultiSelectWindow{
 		}else{
 			/* Check if there was already a variable 
 			   for this dialog which we should use instead of the default*/
-			if(isset($_SESSION['MultiDialogFilters'][$this->filterName][$name])){
-				$arr['default']	= $_SESSION['MultiDialogFilters'][$this->filterName][$name];
+      $MultiDialogFilters = session::get('MultiDialogFilters');
+			if(isset($MultiDialogFilters[$this->filterName][$name])){
+				$arr['default']	= $MultiDialogFilters[$this->filterName][$name];
 				$this->$name = $arr['default'];
 			}else{
 				$arr['default']	= $default; 

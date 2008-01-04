@@ -87,7 +87,7 @@ if (!$remove_lock){
   }
 
   /* Store changes  in session */
-  if (isset ($_SESSION['edit'])){
+  if (session::is_set('edit')){
     session::set('environment',$environment);
   }
 

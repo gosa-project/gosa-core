@@ -84,15 +84,14 @@ class phoneAccount extends plugin
 
   
     /* Set available server */
-    if(isset($_SESSION['config']->data['SERVERS']['FON'])){
-      $this->goFonHomeServers = $_SESSION['config']->data['SERVERS']['FON'];
+    $config = session::get('config');
+    if(isset($config->data['SERVERS']['FON'])){
+      $this->goFonHomeServers = $config->data['SERVERS']['FON'];
     }
 
     $a_SETUP= array();
-    if($this->is_account &&
-       array_key_exists('config',$_SESSION) &&
-       array_key_exists('SERVERS',$_SESSION['config']->data) &&
-       array_key_exists('FON',$_SESSION['config']->data['SERVERS']) &&
+    if($this->is_account && isset($config->data['SERVERS']['FON']) &&
+       array_key_exists('FON',$config->data['SERVERS']) &&
        is_callable("mysql_connect")
        ) {
 

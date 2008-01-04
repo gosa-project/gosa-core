@@ -45,7 +45,7 @@ if (!$remove_lock){
   $connectivity= $_SESSION['connectivity'];
 
   /* save changes back to object */
-  if (isset ($_SESSION['edit'])){
+  if (session::is_set('edit')){
     $connectivity->save_object ();
   }
 
@@ -90,7 +90,7 @@ if (!$remove_lock){
   $display= $connectivity->execute ();
 
   /* Store changes  in session */
-  if (isset ($_SESSION['edit'])){
+  if (session::is_set('edit')){
     session::set('connectivity',$connectivity);
   }
 

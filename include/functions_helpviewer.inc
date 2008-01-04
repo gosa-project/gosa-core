@@ -271,7 +271,7 @@ function search($arr,$word)
   $tryword                    = "";     // Temporary searchword handling
   $result['global']['maxhit'] = 0;
   session::un_set('lastresults');
-  unset($_SESSION['parsed_search_keyword']);
+  session::un_set('parsed_search_keyword');
   session::set('parsed_search_keyword',"");
 
   error_reporting(E_ALL | E_STRICT);
