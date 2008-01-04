@@ -22,10 +22,12 @@ class tabsVariable extends tabs
   {
   	$baseobject= $this->by_object['faiVariable'];
 
-	$new_dn= 'cn='.$baseobject->cn.",".get_ou('faivariableou').get_ou('faiou').$_SESSION['CurrentMainBase'];
+	$new_dn= 'cn='.$baseobject->cn.",".get_ou('faivariableou').get_ou('faiou').session::get('CurrentMainBase');
+
+	$faifilter = session::get('faifilter');
 	
-	if($_SESSION['faifilter']['branch']!="main"){
-		$new_dn ='cn='.$baseobject->cn.",".get_ou('faivariableou').$_SESSION['faifilter']['branch'];
+	if($faifilter['branch']!="main"){
+		$new_dn ='cn='.$baseobject->cn.",".get_ou('faivariableou').$faifilter['branch'];
 	}
 			
  	if ($this->dn != $new_dn && $this->dn != "new"){

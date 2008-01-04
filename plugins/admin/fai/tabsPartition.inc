@@ -22,10 +22,11 @@ class tabsPartition extends tabs
   {
   	$baseobject= $this->by_object['faiPartitionTable'];
 
-	$new_dn= 'cn='.$baseobject->cn.",".get_ou('faipartitionou').get_ou('faiou').$_SESSION['CurrentMainBase'];
-	
-	if($_SESSION['faifilter']['branch']!="main"){
-		$new_dn ='cn='.$baseobject->cn.",".get_ou('faipartitionou').$_SESSION['faifilter']['branch'];
+	$new_dn= 'cn='.$baseobject->cn.",".get_ou('faipartitionou').get_ou('faiou').session::get('CurrentMainBase');
+
+	$faifilter = session::get('faifilter');	
+	if($faifilter['branch']!="main"){
+		$new_dn ='cn='.$baseobject->cn.",".get_ou('faipartitionou').$faifilter['branch'];
 	}
 
  	if ($this->dn != $new_dn && $this->dn != "new"){

@@ -412,7 +412,9 @@ class divListFai extends MultiSelectWindow
   {
     /* Save automatic created POSTs like regex, checkboxes */
     MultiSelectWindow::save_object(); 
-    $_SESSION['faifilter']['branch'] = $this->selectedBranch; 
+    $faifilter = session::get('faifilter');
+    $faifilter['branch'] = $this->selectedBranch; 
+    session::set('faifilter',$faifilter);
   }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

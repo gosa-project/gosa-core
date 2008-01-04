@@ -22,9 +22,12 @@ class tabsPackage extends tabs
   {
   	$baseobject= $this->by_object['faiPackage'];
 
-	$new_dn= 'cn='.$baseobject->cn.",".get_ou('faipackageou').get_ou('faiou').$_SESSION['CurrentMainBase'];
-	if($_SESSION['faifilter']['branch']!="main"){
-		$new_dn ='cn='.$baseobject->cn.",".get_ou('faipackageou').$_SESSION['faifilter']['branch'];
+	$new_dn= 'cn='.$baseobject->cn.",".get_ou('faipackageou').get_ou('faiou').session::get('CurrentMainBase');
+
+	$faifilter = session::get('faifilter');
+
+	if($faifilter['branch']!="main"){
+		$new_dn ='cn='.$baseobject->cn.",".get_ou('faipackageou').$faifilter['branch'];
 	}
 			
  	if ($this->dn != $new_dn && $this->dn != "new"){

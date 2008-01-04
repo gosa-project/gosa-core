@@ -22,10 +22,12 @@ class tabsScript extends tabs
   {
   	$baseobject= $this->by_object['faiScript'];
 
-	$new_dn= 'cn='.$baseobject->cn.",".get_ou('faiscriptou').get_ou('faiou').$_SESSION['CurrentMainBase'];
+	$new_dn= 'cn='.$baseobject->cn.",".get_ou('faiscriptou').get_ou('faiou').session::get('CurrentMainBase');
 
-	if($_SESSION['faifilter']['branch']!="main"){
-		$new_dn ='cn='.$baseobject->cn.",".get_ou('faiscriptou').$_SESSION['faifilter']['branch'];
+	$faifilter = session::get('faifilter');
+
+	if($faifilter['branch']!="main"){
+		$new_dn ='cn='.$baseobject->cn.",".get_ou('faiscriptou').$faifilter['branch'];
 	}
 	
  	if ($this->dn != $new_dn && $this->dn != "new"){

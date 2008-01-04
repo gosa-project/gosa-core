@@ -28,9 +28,10 @@ if ($remove_lock){
 } else {
 	/* Create usermanagement object on demand */
 	if (!session::is_set('FAI') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-		$_SESSION['FAI']= new faiManagement($config, $ui);
-		$_SESSION['FAI']->set_acl_category("fai");
-		$_SESSION['FAI']->set_acl_base(session::get('CurrentMainBase'));
+		$FAI= new faiManagement($config, $ui);
+		$FAI->set_acl_category("fai");
+		$FAI->set_acl_base(session::get('CurrentMainBase'));
+		session::set('FAI',$FAI);
 	}
 	$FAI = session::get('FAI');
 	$FAI->save_object();

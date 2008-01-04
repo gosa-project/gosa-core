@@ -45,7 +45,7 @@ class askClassName extends plugin
      * With a second search detect all object that belong to the different ous. 
      */
 
-    $base = get_ou('faiou').$_SESSION['CurrentMainBase'];
+    $base = get_ou('faiou').session::get('CurrentMainBase');
     if($faifilter['branch'] != "main"){
       $base = $faifilter['branch'];
     }

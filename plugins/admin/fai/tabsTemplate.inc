@@ -21,11 +21,12 @@ class tabsTemplate extends tabs
   function save($ignore_account= FALSE)
   {
   	$baseobject= $this->by_object['faiTemplate'];
-	
-	$new_dn= 'cn='.$baseobject->cn.",".get_ou('faitemplateou').get_ou('faiou').$_SESSION['CurrentMainBase'];
 
-	if($_SESSION['faifilter']['branch']!="main"){
-		$new_dn ='cn='.$baseobject->cn.",".get_ou('faitemplateou').$_SESSION['faifilter']['branch'];
+	$new_dn= 'cn='.$baseobject->cn.",".get_ou('faitemplateou').get_ou('faiou').session::get('CurrentMainBase');
+
+	$faifilter = session::get('faifilter');
+	if($faifilter['branch']!="main"){
+		$new_dn ='cn='.$baseobject->cn.",".get_ou('faitemplateou').$faifilter['branch'];
 	}
 
  	if ($this->dn != $new_dn && $this->dn != "new"){
