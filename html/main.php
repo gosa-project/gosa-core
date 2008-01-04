@@ -35,7 +35,6 @@ bindtextdomain($domain, "$BASE_DIR/locale");
 textdomain($domain);
 
 /* Remember everything we did after the last click */
-restore_error_handler();
 session::start();
 session::set('limit_exceeded',FALSE);
 
