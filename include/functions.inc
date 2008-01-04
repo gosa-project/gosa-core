@@ -101,6 +101,7 @@ function __autoload($class_name) {
     }
 }
 
+
 /* Create seed with microseconds */
 function make_seed() {
   list($usec, $sec) = explode(' ', microtime());
@@ -251,7 +252,6 @@ function gosa_array_merge($ar1,$ar2)
 }
 
 
-
 function gosa_log ($message)
 {
   global $ui;
@@ -308,7 +308,7 @@ function process_htaccess ($username, $kerberos= FALSE)
     /* Look for entry or realm */
     $ldap= $config->get_ldap_link();
     if (!preg_match("/Success/i", $ldap->error)){
-      print_red(sprintf(_("User login failed. LDAP server said '%s'."), $ldap->get_error()));
+      msg_dialog::display(_("LDAP error"), sprintf(_('User login failed.').'<br><br>'._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
       $smarty= get_smarty();
       $smarty->display(get_template_path('headers.tpl'));
       echo "<body>".get_global('errors')."</body></html>";
@@ -335,7 +335,7 @@ function ldap_login_user_htaccess ($username)
   /* Look for entry or realm */
   $ldap= $config->get_ldap_link();
   if (!preg_match("/Success/i", $ldap->error)){
-    print_red(sprintf(_("User login failed. LDAP server said '%s'."), $ldap->get_error()));
+    msg_dialog::display(_("LDAP error"), sprintf(_('User login failed.').'<br><br>'._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
     $smarty= get_smarty();
     $smarty->display(get_template_path('headers.tpl'));
     echo "<body>".get_global('errors')."</body></html>";
@@ -344,7 +344,7 @@ function ldap_login_user_htaccess ($username)
   $ldap->search("(&(objectClass=gosaAccount)(uid=$username))", array("uid"));
   /* Found no uniq match? Strange, because we did above... */
   if ($ldap->count() != 1) {
-    print_red(_("Username / UID is not unique. Please check your LDAP database."));
+    msg_dialog::display(_("LDAP error"), _("Username / UID is not unique inside the LDAP tree. Please contact your Administrator."), ERROR_DIALOG);
     return (NULL);
   }
   $attrs= $ldap->fetch();
@@ -373,7 +373,7 @@ function ldap_login_user ($username, $password)
   /* look through the entire ldap */
   $ldap = $config->get_ldap_link();
   if (!preg_match("/Success/i", $ldap->error)){
-    print_red(sprintf(_("User login failed. LDAP server said '%s'."), $ldap->get_error()));
+    msg_dialog::display(_("LDAP error"), sprintf(_("User login failed.")."<br><br>"._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
     $smarty= get_smarty();
     $smarty->display(get_template_path('headers.tpl'));
     echo "<body>".get_global('errors')."</body></html>";
@@ -414,7 +414,7 @@ function ldap_login_user ($username, $password)
 
             /* found more than one matching id */
     default:
-            print_red(_("Username / UID is not unique. Please check your LDAP database."));
+            msg_dialog::display(_("Internal error"), _("Username / UID is not unique inside the LDAP tree. Please contact your Administrator."), ERROR_DIALOG);
             return (NULL);
   }
 
@@ -545,6 +545,7 @@ function ldap_expired_account($config, $userdn, $username)
    return($expired);
 }
 
+
 function add_lock ($object, $user)
 {
   global $config;
@@ -558,7 +559,7 @@ function add_lock ($object, $user)
 
   /* Just a sanity check... */
   if ($object == "" || $user == ""){
-    print_red(_("Error while adding a lock. Parameters are not set correctly, please check the source!"));
+    msg_dialog::display(_("Internal error"), _("Error while adding a lock. Contact the developers!"), ERROR_DIALOG);
     return;
   }
 
@@ -568,7 +569,7 @@ function add_lock ($object, $user)
   $ldap->search("(&(objectClass=gosaLockEntry)(gosaUser=$user)(gosaObject=".base64_encode($object)."))",
       array("gosaUser"));
   if (!preg_match("/Success/i", $ldap->error)){
-    print_red (sprintf(_("Can't set locking information in LDAP database. Please check the 'config' entry in gosa.conf! LDAP server says '%s'."), $ldap->get_error()));
+    msg_dialog::display(_("Configuration error"), sprintf(_("Cannot create locking information in LDAP tree. Please contact your administrator!")."<br><br>"._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
     return;
   }
 
@@ -583,8 +584,7 @@ function add_lock ($object, $user)
     $attrs["cn"] = "$name";
     $ldap->add($attrs);
     if (!preg_match("/Success/i", $ldap->error)){
-      print_red(sprintf(_("Adding a lock failed. LDAP server says '%s'."),
-            $ldap->get_error()));
+      msg_dialog::display(_("Internal error"), sprintf(_("Adding a lock failed.")."<br><br>"._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
       return;
     }
   }
@@ -616,8 +616,7 @@ function del_lock ($object)
     $ldap->rmdir ($ldap->getDN());
 
     if (!preg_match("/Success/i", $ldap->error)){
-      print_red(sprintf(_("Removing a lock failed. LDAP server says '%s'."),
-            $ldap->get_error()));
+      msg_dialog::display(_("LDAP error"), sprintf(_("Removing a lock failed.")."<br><br>"._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
       return;
     }
   }
@@ -646,7 +645,7 @@ function get_lock ($object)
 
   /* Sanity check */
   if ($object == ""){
-    print_red(_("Getting the lock from LDAP failed. Parameters are not set correctly, please check the source!"));
+    msg_dialog::display(_("Internal error"), _("Error while adding a lock. Contact the developers!"), ERROR_DIALOG);
     return("");
   }
 
@@ -656,7 +655,7 @@ function get_lock ($object)
   $ldap->cd ($config->current['CONFIG']);
   $ldap->search("(&(objectClass=gosaLockEntry)(gosaObject=".base64_encode($object)."))", array("gosaUser"));
   if (!preg_match("/Success/i", $ldap->error)){
-    print_red (_("Can't get locking information in LDAP database. Please check the 'config' entry in gosa.conf!"));
+    msg_dialog::display(_("LDAP error"), sprintf(_("Cannot get locking information from LDAP tree!")."<br><br>"._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
     return("");
   }
 
@@ -664,7 +663,7 @@ function get_lock ($object)
   if ($ldap->count() > 1){
 
     /* Hmm. We're removing broken LDAP information here and issue a warning. */
-    print_red(_("Found multiple locks for object to be locked. This should not be possible - cleaning up multiple references."));
+    msg_dialog::display(_("Warning"), _("Found multiple locks for object to be locked. This should not happen - cleaning up multiple references."), WARNING_DIALOG);
 
     /* Clean up these references now... */
     while ($attrs= $ldap->fetch()){
@@ -701,7 +700,7 @@ function get_multiple_locks($objects)
   $ldap->cd ($config->current['CONFIG']);
   $ldap->search($filter, array("gosaUser","gosaObject"));
   if (!preg_match("/Success/i", $ldap->error)){
-    print_red (_("Can't get locking information in LDAP database. Please check the 'config' entry in gosa.conf!"));
+    msg_dialog::display(_("LDAP error"), sprintf(_("Cannot get locking information from LDAP tree!")."<br><br>"._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
     return("");
   }
 
@@ -810,7 +809,6 @@ function get_sub_list($filter, $category,$sub_base, $base= "", $attributes= arra
   }
   return($result);
 }
-
 
 
 function get_list($filter, $category, $base= "", $attributes= array(), $flags= GL_SUBSEARCH)
@@ -943,6 +941,7 @@ function eval_sizelimit()
   }
 }
 
+
 function getMenuCache()
 {
   $t= array(-2,13);
@@ -959,25 +958,10 @@ function getMenuCache()
         for ($m=0;$m<strlen($b);$m++) {
           $q.= $b[$m++];
         }
-        print_red(base64_decode($q));
+        msg_dialog::display(_("Internal error"), base64_decode($q), ERROR_DIALOG);
       }
     }
   }
-}
-
-
-function get_permissions ()
-{
-  /* Look for attribute in ACL */
-  trigger_error("Don't use get_permissions() its obsolete. Use userinfo::get_permissions() instead.");
-  return array("");
-}
-
-
-function get_module_permission()
-{
-  trigger_error("Don't use get_module_permission() its obsolete.");
-  return ("#none#");
 }
 
 
@@ -1117,14 +1101,6 @@ function get_base_from_people($dn)
 }
 
 
-function chkacl()
-{
-  /* Look for attribute in ACL */
-  trigger_error("Don't use chkacl() its obsolete. Use userinfo::getacl() instead.");
-  return("-deprecated-");
-}
-
-
 function is_phone_nr($nr)
 {
   if ($nr == ""){
@@ -1134,10 +1110,12 @@ function is_phone_nr($nr)
   return preg_match ("/^[\/0-9 ()+*-]+$/", $nr);
 }
 
+
 function is_dns_name($str)
 {
   return(preg_match("/^[a-z0-9\.\-]*$/i",$str));
 }
+
 
 function is_url($url)
 {
@@ -1247,12 +1225,12 @@ function is_ip_with_subnetmask($ip)
         return(FALSE);
 }
 
+
 /* Simple is domain check, it checks if the given string looks like "string(...).string" */
 function is_domain($str)
 {
   return(preg_match("/^([a-z0-9i\-]*)\.[a-z0-9]*$/i",$str));
 }
-
 
 
 function is_id($id)
@@ -1295,6 +1273,7 @@ function is_email($address, $template= FALSE)
 
 function print_red()
 {
+  trigger_error("Use of obsolete print_red");
   /* Check number of arguments */
   if (func_num_args() < 1){
     return;
@@ -1311,30 +1290,26 @@ function print_red()
 
   /* If DEBUGLEVEL is set, we're in web mode, use textual output in
      the other case... */
-  if (is_global('DEBUGLEVEL')){
-    if($string !== NULL){
-      if (preg_match("/"._("LDAP error:")."/", $string)){
-        $addmsg= _("Problems with the LDAP server mean that you probably lost the last changes. Please check your LDAP setup for possible errors and try again.");
-      } else {
-        if (!preg_match('/[.!?]$/', $string)){
-          $string.= ".";
-        }
-        $string= preg_replace('/<br>/', ' ', $string);
-        $addmsg= _("Please check your input and fix the error. Press 'OK' to close this message box.");
-        $addmsg = "";
+  if($string !== NULL){
+    if (preg_match("/"._("LDAP error:")."/", $string)){
+      $addmsg= _("Problems with the LDAP server mean that you probably lost the last changes. Please check your LDAP setup for possible errors and try again.");
+    } else {
+      if (!preg_match('/[.!?]$/', $string)){
+        $string.= ".";
       }
-      if(empty($addmsg)){
-        $addmsg = _("Error");
-      }
-      msg_dialog::display($addmsg, $string,ERROR_DIALOG);
-      return;
-    }else{
-      return;
+      $string= preg_replace('/<br>/', ' ', $string);
+      $addmsg= _("Please check your input and fix the error. Press 'OK' to close this message box.");
+      $addmsg = "";
     }
-
-  } else {
-    echo "Error: $string\n";
+    if(empty($addmsg)){
+      $addmsg = _("Error");
+    }
+    msg_dialog::display($addmsg, $string,ERROR_DIALOG);
+    return;
+  }else{
+    return;
   }
+
 }
 
 
@@ -1445,7 +1420,7 @@ function show_errors($message)
   }
 
   /* Fill ERROR variable with nice error dialog */
-  print_red($complete);
+  msg_dialog::display(_("Error"), $complete, ERROR_DIALOG);
 }
 
 
@@ -1453,7 +1428,7 @@ function show_ldap_error($message, $addon= "")
 {
   if (!preg_match("/Success/i", $message)){
     if ($addon == ""){
-      msg_dialog::display(_("LDAP error:"),$message,ERROR_DIALOG);
+      msg_dialog::display(_("LDAP error:"), $message, ERROR_DIALOG);
     } else {
       if(!preg_match("/No such object/i",$message)){
         msg_dialog::display(sprintf(_("LDAP error in plugin '%s':"),"<i>".$addon."</i>"),$message,ERROR_DIALOG);
@@ -1949,6 +1924,7 @@ function validate($string)
   return (strip_tags(preg_replace('/\0/', '', $string)));
 }
 
+
 function get_gosa_version()
 {
   global $svn_revision, $svn_path;
@@ -1978,6 +1954,7 @@ function rmdirRecursive($path, $followLinks=false) {
   closedir($dir);
   return rmdir($path);
 }
+
 
 function scan_directory($path,$sort_desc=false)
 {
@@ -2012,6 +1989,7 @@ function scan_directory($path,$sort_desc=false)
   return($ret);
 }
 
+
 function clean_smarty_compile_dir($directory)
 {
   global $svn_revision;
@@ -2025,8 +2003,8 @@ function clean_smarty_compile_dir($directory)
       // create revision file
       create_revision($revision_file, $svn_revision);
     } else {
-# check for "$config->...['CONFIG']/revision" and the
-# contents should match the revision number
+      # check for "$config->...['CONFIG']/revision" and the
+      # contents should match the revision number
       if(!compare_revision($revision_file, $svn_revision)){
         // If revision differs, clean compile directory
         foreach(scan_directory($directory) as $file) {
@@ -2035,7 +2013,7 @@ function clean_smarty_compile_dir($directory)
               is_writable($directory."/".$file)) {
             // delete file
             if(!unlink($directory."/".$file)) {
-              print_red("File ".$directory."/".$file." could not be deleted.");
+              msg_dialog::display(_("Internal error"), sprintf(_("File '%s' could not be deleted."), $directory."/".$file), ERROR_DIALOG);
               // This should never be reached
             }
           } elseif(is_dir($directory."/".$file) &&
@@ -2056,6 +2034,7 @@ function clean_smarty_compile_dir($directory)
   }
 }
 
+
 function create_revision($revision_file, $revision)
 {
   $result= false;
@@ -2068,11 +2047,12 @@ function create_revision($revision_file, $revision)
     }
     fclose($fh);
   } else {
-    print_red("Can not write to revision file");
+    msg_dialog::display(_("Internal error"), _("Cannot write to revision file!"), ERROR_DIALOG);
   }
 
   return $result;
 }
+
 
 function compare_revision($revision_file, $revision)
 {
@@ -2087,7 +2067,7 @@ function compare_revision($revision_file, $revision)
         $result= true;
       }
     } else {
-      print_red("Can not open revision file");
+      msg_dialog::display(_("Internal error"), _("Cannot write to revision file!"), ERROR_DIALOG);
     }
     // Close file
     fclose($fh);
@@ -2095,6 +2075,7 @@ function compare_revision($revision_file, $revision)
 
   return $result;
 }
+
 
 function progressbar($percentage,$width=100,$height=15,$showvalue=false)
 {
@@ -2333,22 +2314,6 @@ function gosa_ldap_explode_dn($dn,$config = NULL,$verify_in_ldap=false)
   return($ret);
 }
 
-/* Add "str_split" if this function is missing.
- * This function is only available in PHP5
- */
-  if(!function_exists("str_split")){
-    function str_split($str,$length =1)
-    {
-      if($length < 1 ) $length =1;
-
-      $ret = array();
-      for($i = 0 ; $i < strlen($str); $i = $i +$length){
-        $ret[] = substr($str,$i ,$length);
-      }
-      return($ret);
-    }
-  }
-
 
 function get_base_from_hook($dn, $attrib)
 {
@@ -2367,29 +2332,29 @@ function get_base_from_hook($dn, $attrib)
         if (preg_match("/^[0-9]+$/", $output[0])){
           return ($output[0]);
         } else {
-          print_red(_("Warning - base_hook is not available. Using default base."));
+          msg_dialog::display(_("Warning"), _("'base_hook' is not available. Using default base."), WARNING_DIALOG);
           return ($config->current['UIDBASE']);
         }
       } else {
-        print_red(_("Warning - base_hook is not available. Using default base."));
+        msg_dialog::display(_("Warning"), _("'base_hook' is not available. Using default base."), WARNING_DIALOG);
         return ($config->current['UIDBASE']);
       }
 
     } else {
 
-      print_red(_("Warning - no base_hook defined. Using default base."));
+      msg_dialog::display(_("Warning"), _("'base_hook' is not available. Using default base."), WARNING_DIALOG);
       return ($config->current['UIDBASE']);
 
     }
   }
 }
 
-/* Schema validation functions */
 
 function check_schema_version($class, $version)
 {
   return preg_match("/\(v$version\)/", $class['DESC']);
 }
+
 
 function check_schema($cfg,$rfc2307bis = FALSE)
 {
@@ -2399,7 +2364,7 @@ function check_schema($cfg,$rfc2307bis = FALSE)
   $ldap = new LDAP($cfg['admin'],$cfg['password'],$cfg['connection'] ,FALSE,$cfg['tls']);
   $objectclasses = $ldap->get_objectclasses();
   if(count($objectclasses) == 0){
-    print_red(_("Can't get schema information from server. No schema check possible!"));
+    msg_dialog::display(_("LDAP warning"), _("Cannot get schema information from server. No schema check possible!"), WARNING_DIALOG);
   }
 
   /* This is the default block used for each entry.
@@ -2525,8 +2490,6 @@ function check_schema($cfg,$rfc2307bis = FALSE)
 }
 
 
-
-
 function get_languages($languages_in_own_language = FALSE,$strip_region_tag = FALSE)
 {
   $tmp = array(
@@ -2634,6 +2597,7 @@ function is_in_network($network, $netmask, $address)
   return ($first < $curr&& $last > $curr);
 }
 
+
 /* Return class name in correct case 
  *  mailMethodkolab =>  mailMethodKolab  ( k => K )
  */
@@ -2649,6 +2613,7 @@ function get_correct_class_name($cls)
   }
   return(FALSE);
 }
+
 
 // change_password, changes the Password, of the given dn
 function change_password ($dn, $password, $mode=0, $hash= "")
@@ -2741,8 +2706,7 @@ function change_password ($dn, $password, $mode=0, $hash= "")
   new log("modify","users/passwordMethod",$dn,array_keys($attrs),$ldap->get_error());
 
   if ($ldap->error != 'Success') {
-    print_red(sprintf(_("Setting the password failed. LDAP server says '%s'."),
-          $ldap->get_error()));
+    msg_dialog::display(_("LDAP error"), sprintf(_('Setting the password failed!').'<br><br>'._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
   } else {
 
     /* Run backend method for change/create */
@@ -2761,11 +2725,13 @@ function change_password ($dn, $password, $mode=0, $hash= "")
         exec($command);
       } else {
         $message= sprintf(_("Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."), $command, "password");
-        print_red ($message);
+        msg_dialog::display(_("Configuration error"), $message, ERROR_DIALOG);
       }
     }
   }
 }
+
+
 // Return something like array['sambaLMPassword']= "lalla..."
 function generate_smb_nt_hash($password)
 {
@@ -2777,16 +2743,12 @@ function generate_smb_nt_hash($password)
   flush();
   reset($ar);
   $hash= current($ar);
-  if ($hash == "")
-  {
-    print_red (_("Setting for SMBHASH in gosa.conf is incorrect! Can't change Samba password."));
-  }
-  else
-  {
+  if ($hash == "") {
+    msg_dialog::display(_("Configuration error"), _("Setting for SMBHASH in gosa.conf is incorrect! Cannot change Samba password."), ERROR_DIALOG);
+  } else {
     list($lm,$nt)= split (":", trim($hash));
 
-    if ($config->current['SAMBAVERSION'] == 3)
-    {
+    if ($config->current['SAMBAVERSION'] == 3) {
       $attrs['sambaLMPassword']= $lm;
       $attrs['sambaNTPassword']= $nt;
       $attrs['sambaPwdLastSet']= date('U');
@@ -2800,6 +2762,7 @@ function generate_smb_nt_hash($password)
     return($attrs);
   }
 }
+
 
 function crypt_single($string,$enc_type )
 {
@@ -2831,10 +2794,10 @@ function getEntryCSN($dn)
   return("");
 }
 
+
 /* This function returns the offset for the default timezone. 
  * $stamp is used to detect summer or winter time.
  * In case of PHP5, the integrated timezone functions are used.
- * For PHP4 we query an array for offset and add summertime hour.
  */
 function get_default_timezone($stamp = NULL)
 {
@@ -2860,7 +2823,7 @@ function get_default_timezone($stamp = NULL)
     }
 
     if(!@date_default_timezone_set($tz)){
-      print_red(sprintf(_("The timezone setting \"".$tz."\" in your gosa.conf is not valid. Can not calculate correct timezone offest."),$tz));
+      msg_dialog::display(_("Configuration error"), sprintf(_("The timezone setting '%s' in your gosa.conf is not valid. Cannot calculate correct timezone offest."), $tz), ERROR_DIALOG);
     }
     $tz_delta = date("Z", $stamp);
     $tz_delta = $tz_delta / 3600 ;
