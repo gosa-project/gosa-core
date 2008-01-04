@@ -19,7 +19,7 @@
 */
 
 if ($remove_lock){
-        if(isset($_SESSION['macl'])){
+        if(session::is_set('macl')){
                 $macl= $_SESSION['macl'];
                 $macl->remove_lock();
                 del_lock ($ui->dn);
@@ -29,7 +29,7 @@ if ($remove_lock){
 	$display= "No headpage yet for this module";
 
 	/* Create usermanagement object on demand */
-if (!isset($_SESSION['macl']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+if (!session::is_set('macl') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 	$_SESSION['macl']= new aclManagement($config, $ui);
 	}
 	$macl= $_SESSION['macl'];
@@ -39,7 +39,7 @@ if (!isset($_SESSION['macl']) || (isset($_GET['reset']) && $_GET['reset'] == 1))
 	$output= $macl->execute();
 
 	/* Page header*/
-	if (isset($_SESSION['objectinfo'])){
+	if (session::is_set('objectinfo')){
 		$display= print_header(get_template_path('images/acl.png'), _("ACL management"), "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".@LDAP::fix($_SESSION['objectinfo']));
 	} else {
 		$display= print_header(get_template_path('images/acl.png'), _("ACL management"));

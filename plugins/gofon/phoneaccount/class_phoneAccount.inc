@@ -805,7 +805,7 @@ class phoneAccount extends plugin
     }
 
     $display = "";
-    $SkipWrite = (!isset($this->parent) || !$this->parent) && !isset($_SESSION['edit']);
+    $SkipWrite = (!isset($this->parent) || !$this->parent) && !session::is_set('edit');
     if(empty($this->macro)&&(!empty($this->goFonMacro))){
 
       /* Go through already saved values, for a parameter */
@@ -1092,7 +1092,7 @@ class phoneAccount extends plugin
 
   function save_object()
   {
-    $SkipWrite = (!isset($this->parent) || !$this->parent) && !isset($_SESSION['edit']);
+    $SkipWrite = (!isset($this->parent) || !$this->parent) && !session::is_set('edit');
     if (isset($_POST["phoneTab"])){
     
       plugin::save_object();

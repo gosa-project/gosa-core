@@ -38,7 +38,7 @@ if ($remove_lock){
   $output= $macroManagment->execute();
 
   /* Page header*/
-  if (isset($_SESSION['objectinfo'])){
+  if (session::is_set('objectinfo')){
     $display= print_header( get_template_path('images/macros.png'), 
                             _("Phone macro management"), 
                             "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> 

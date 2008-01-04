@@ -361,7 +361,7 @@ class user extends plugin
     }
 
     /* Remove picture? */
-    if($this->acl_is_writeable("userPicture",(!is_object($this->parent) && !isset($_SESSION['edit']))) ){
+    if($this->acl_is_writeable("userPicture",(!is_object($this->parent) && !session::is_set('edit'))) ){
       if (isset($_POST['picture_remove'])){
         $this->set_picture ();
         $this->jpegPhoto= "*removed*";
@@ -440,7 +440,7 @@ class user extends plugin
 
 
     /* Remove certificate? */
-    if($this->acl_is_writeable("Certificate",(!is_object($this->parent) && !isset($_SESSION['edit'])))){ 
+    if($this->acl_is_writeable("Certificate",(!is_object($this->parent) && !session::is_set('edit')))){ 
       foreach (array ("userCertificate", "userSMIMECertificate", "userPKCS12") as $val){
         if (isset($_POST["remove_$val"])){
 
@@ -452,7 +452,7 @@ class user extends plugin
     }
 
     /* Upload new cert and close dialog? */	
-    if($this->acl_is_writeable("Certificate",(!is_object($this->parent) && !isset($_SESSION['edit'])))){ 
+    if($this->acl_is_writeable("Certificate",(!is_object($this->parent) && !session::is_set('edit')))){ 
       if (isset($_POST['cert_edit_finish'])){
 
         /* for all certificates do */
@@ -500,7 +500,7 @@ class user extends plugin
 
     /* Display cert dialog */
     if ($this->cert_dialog){
-      $smarty->assign("CertificateACL",$this->getacl("Certificate",(!is_object($this->parent) && !isset($_SESSION['edit']))));
+      $smarty->assign("CertificateACL",$this->getacl("Certificate",(!is_object($this->parent) && !session::is_set('edit'))));
       $smarty->assign("Certificate_readable",$this->acl_is_readable("Certificate"));
 
       foreach(array("userCertificate", "userSMIMECertificate", "userPKCS12") as $cert){
@@ -580,17 +580,17 @@ class user extends plugin
     /* Set acls */
     $tmp = $this->plinfo();
     foreach($tmp['plProvidedAcls'] as $val => $translation){
-      $smarty->assign("$val"."ACL", $this->getacl($val,(!is_object($this->parent) && !isset($_SESSION['edit']))));
+      $smarty->assign("$val"."ACL", $this->getacl($val,(!is_object($this->parent) && !session::is_set('edit'))));
     }
 
     $smarty->assign("pwmode", $hashes);
     $smarty->assign("pwmode_select", $this->pw_storage);
     $smarty->assign("pw_configurable", $is_configurable);
-    $smarty->assign("passwordStorageACL", $this->getacl("userPassword",(!is_object($this->parent) && !isset($_SESSION['edit']))));
+    $smarty->assign("passwordStorageACL", $this->getacl("userPassword",(!is_object($this->parent) && !session::is_set('edit'))));
     $smarty->assign("base_select",      $this->base);
-    $smarty->assign("CertificatesACL",  $this->getacl("Certificate",(!is_object($this->parent) && !isset($_SESSION['edit']))));
-    $smarty->assign("userPictureACL",   $this->getacl("userPicture",(!is_object($this->parent) && !isset($_SESSION['edit']))));
-    $smarty->assign("userPicture_is_readable",   $this->acl_is_readable("userPicture",(!is_object($this->parent) && !isset($_SESSION['edit']))));
+    $smarty->assign("CertificatesACL",  $this->getacl("Certificate",(!is_object($this->parent) && !session::is_set('edit'))));
+    $smarty->assign("userPictureACL",   $this->getacl("userPicture",(!is_object($this->parent) && !session::is_set('edit'))));
+    $smarty->assign("userPicture_is_readable",   $this->acl_is_readable("userPicture",(!is_object($this->parent) && !session::is_set('edit'))));
 
     /* Create base acls */
     $tmp = @$this->allowedBasesToMoveTo();
@@ -605,14 +605,14 @@ class user extends plugin
       $smarty->assign("ivbbmodes", $ivbbmodes);
       foreach ($this->govattrs as $val){
         $smarty->assign("$val", $this->$val);
-        $smarty->assign("$val"."ACL", $this->getacl($val,(!is_object($this->parent) && !isset($_SESSION['edit']))));
+        $smarty->assign("$val"."ACL", $this->getacl($val,(!is_object($this->parent) && !session::is_set('edit'))));
       }
     } else {
       $smarty->assign("governmentmode", "false");
     }
 
     /* Special mode for uid */
-    $uidACL= $this->getacl("uid",(!is_object($this->parent) && !isset($_SESSION['edit'])));
+    $uidACL= $this->getacl("uid",(!is_object($this->parent) && !session::is_set('edit')));
     if (isset ($this->dn)){
       if ($this->dn != "new"){
         $uidACL= preg_replace("/w/","",$uidACL);
@@ -706,7 +706,7 @@ class user extends plugin
       /* Save government mode attributes */
       if ($this->config->current['GOVERNMENTMODE']){
         foreach ($this->govattrs as $val){
-          if ($this->acl_is_writeable($val,(!is_object($this->parent) && !isset($_SESSION['edit']))) && isset($_POST["$val"])){
+          if ($this->acl_is_writeable($val,(!is_object($this->parent) && !session::is_set('edit'))) && isset($_POST["$val"])){
             $data= stripcslashes($_POST["$val"]);
             if ($data != $this->$val){
               $this->is_modified= TRUE;
@@ -1258,7 +1258,7 @@ class user extends plugin
   /* Load certificate from file to object */
   function set_cert($cert, $filename)
   {
-    if(!$thsi->acl_is_writeable("Certificate",(!is_object($this->parent) && !isset($_SESSION['edit'])))) return;
+    if(!$thsi->acl_is_writeable("Certificate",(!is_object($this->parent) && !session::is_set('edit')))) return;
     $fd = fopen ($filename, "rb");
     if (filesize($filename)>0) {
       $this->$cert= fread ($fd, filesize ($filename));

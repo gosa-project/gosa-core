@@ -122,7 +122,7 @@ if(session::get('Last_init_lang',$lang)){
 session::set('Last_init_lang',$lang);
 
 /* Preset current main base */
-if(session::is_set('CurrentMainBase')){
+if(!session::is_set('CurrentMainBase')){
   session::set('CurrentMainBase',get_base_from_people($ui->dn));
 }
 

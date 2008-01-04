@@ -19,7 +19,7 @@
 */
 
 if ($remove_lock){
-        if(isset($_SESSION['department'])){
+        if(session::is_set('department')){
                 $department= $_SESSION['department'];
                 $department->remove_lock();
                 del_lock ($ui->dn);
@@ -27,7 +27,7 @@ if ($remove_lock){
         }
 } else {
 	/* Create usermanagement object on demand */
-	if (!isset($_SESSION['department']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+	if (!session::is_set('department') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 		$_SESSION['department']= new departmentManagement($config, $ui);
 	}
 	$department= $_SESSION['department'];
@@ -37,7 +37,7 @@ if ($remove_lock){
 	$output= $department->execute();
 
 	/* Page header*/
-	if (isset($_SESSION['objectinfo'])){
+	if (session::is_set('objectinfo')){
 		$display= print_header(get_template_path('images/department.png'), _("Department management"), "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".@LDAP::fix($_SESSION['objectinfo']));
 	} else {
 		$display= print_header(get_template_path('images/department.png'), _("Department management"));

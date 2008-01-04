@@ -438,7 +438,7 @@ class posixAccount extends plugin
     $smarty= get_smarty();
 
     /* In 'MyAccount' mode, we must remove write acls if we are not in editing mode. */ 
-    $SkipWrite = (!isset($this->parent) || !$this->parent) && !isset($_SESSION['edit']);
+    $SkipWrite = (!isset($this->parent) || !$this->parent) && !session::is_set('edit');
 
     /* Depending on pwmode, currently hardcoded because there are no other methods */
     if ( 1 == 1 ){

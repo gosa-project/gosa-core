@@ -248,7 +248,7 @@ class sambaAccount extends plugin
       }
     }
 
-    $SkipWrite = (!isset($this->parent) || !$this->parent) && !isset($_SESSION['edit']);
+    $SkipWrite = (!isset($this->parent) || !$this->parent) && !session::is_set('edit');
 
     /* Open Samaba Logong hours dialog */
     if(isset($_POST['SetSambaLogonHours']) && $this->samba3 && $this->acl_is_writeable("sambaLogonHours")){
@@ -778,7 +778,7 @@ class sambaAccount extends plugin
   function save_object()
   {
 
-    $SkipWrite = (!isset($this->parent) || !$this->parent) && !isset($_SESSION['edit']);
+    $SkipWrite = (!isset($this->parent) || !$this->parent) && !session::is_set('edit');
 
     /* We only care if we are on the sambaTab... */
     if (isset($_POST['sambaTab'])){

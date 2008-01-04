@@ -2,7 +2,7 @@
 
 if (!$remove_lock){
 	/* Create faxreport object on demand */
-	if (!isset($_SESSION['faxreport']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+	if (!session::is_set('faxreport') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 		$_SESSION['faxreport']= new faxreport ($config, $ui);
 	}
 	$faxreport= $_SESSION['faxreport'];

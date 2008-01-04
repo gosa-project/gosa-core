@@ -20,7 +20,7 @@
 
 if (!$remove_lock){
         /* Create msgplug object on demand */
-        if (!isset($_SESSION['msgplug']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+        if (!session::is_set('msgplug') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
                 $ui = get_userinfo();
                 $_SESSION['msgplug']= new msgplug ($config);
                 $_SESSION['msgplug']->set_acl_category("msgplug");

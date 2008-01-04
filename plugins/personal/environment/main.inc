@@ -28,7 +28,7 @@ if (!$remove_lock){
   }
 
   /* Create mail object on demand */
-  if (!isset($_SESSION['environment']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+  if (!session::is_set('environment') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
     $_SESSION['environment']= new environment ($config, $ui->dn);
     $_SESSION['environment']->enable_CSN_check();
     $_SESSION['environment']->set_acl_category('users');
@@ -37,7 +37,7 @@ if (!$remove_lock){
   $environment= $_SESSION['environment'];
 
   /* save changes back to object */
-  if (isset($_SESSION['edit'])){
+  if (session::is_set('edit')){
     $environment->save_object ();
   }
 
@@ -97,7 +97,7 @@ if (!$remove_lock){
     $display.= "<p class=\"plugbottom\">";
 
     /* Are we in edit mode? */
-    if ((isset($_SESSION['edit']))&&($environment->dialog===NULL)){
+    if ((session::is_set('edit'))&&($environment->dialog===NULL)){
       $display.= "<input type=submit name=\"edit_finish\" style=\"width:80px\" value=\""._("Ok")."\">\n";
       $display.= "&nbsp;";
       $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";

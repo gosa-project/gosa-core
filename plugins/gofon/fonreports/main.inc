@@ -2,7 +2,7 @@
 
 if (!$remove_lock){
 	/* Create fonreport object on demand */
-	if (!isset($_SESSION['fonreport']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+	if (!session::is_set('fonreport') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 		$_SESSION['fonreport']= new fonreport ($config, $ui);
 	}
 	$fonreport= $_SESSION['fonreport'];

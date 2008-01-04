@@ -522,7 +522,7 @@ class mailAccount extends plugin
     /* Display mail account tab */
 
     $smarty->assign("mailServers", $mailserver);
-    $SkipWrite = (!isset($this->parent) || !$this->parent) && !isset($_SESSION['edit']);
+    $SkipWrite = (!isset($this->parent) || !$this->parent) && !session::is_set('edit');
 
     $tmp  = $this->plInfo();
     foreach($tmp['plProvidedAcls'] as $name => $transl){

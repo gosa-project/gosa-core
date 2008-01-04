@@ -35,7 +35,7 @@ if ($remove_lock){
 	$output= $applicationManagement->execute();
 
 	/* Page header*/
-	if (isset($_SESSION['objectinfo'])){
+	if (session::is_set('objectinfo')){
 		$display= print_header(get_template_path('images/application.png'), _("Application management"), "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".@LDAP::fix($_SESSION['objectinfo']));
 	} else {
 		$display= print_header(get_template_path('images/application.png'), _("Application management"));

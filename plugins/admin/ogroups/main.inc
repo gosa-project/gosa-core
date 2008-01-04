@@ -20,7 +20,7 @@
 
 if (!$remove_lock){
   /* Create object object on demand */
-  if (!isset($_SESSION['ogroup']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+  if (!session::is_set('ogroup') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
     $_SESSION['ogroup']= new ogroupManagement ($config);
   }
   $ogroup= $_SESSION['ogroup'];
@@ -30,7 +30,7 @@ if (!$remove_lock){
   $output= $ogroup->execute ();
 
   /* Page header*/
-  if (isset($_SESSION['objectinfo'])){
+  if (session::is_set('objectinfo')){
     $display= print_header(get_template_path('images/ogroup.png'),
                           _("Object groups"),
                           "<img alt=\"\" align=\"middle\" src=\"".

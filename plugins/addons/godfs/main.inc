@@ -22,7 +22,7 @@
      }
  
      # create page header
-     if (isset($_SESSION['objectinfo'])) {
+     if (session::is_set('objectinfo')) {
        $display = print_header(get_template_path('images/dfs.png'), 
                                 _("Distributed File System Administration"),
                                 "<img alt=\"\" class=\"center\" src=\"".

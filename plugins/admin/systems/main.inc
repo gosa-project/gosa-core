@@ -19,7 +19,7 @@
 */
 
 if ($remove_lock){
-        if(isset($_SESSION['systems'])){
+        if(session::is_set('systems')){
                 $systems= $_SESSION['systems'];
                 $systems->remove_lock();
                 del_lock ($ui->dn);
@@ -27,7 +27,7 @@ if ($remove_lock){
         }
 } else {
 	/* Create usermanagement object on demand */
-	if (!isset($_SESSION['systems']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+	if (!session::is_set('systems') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 		$_SESSION['systems']= new systems($config, $ui);
 	}
 	$systems= $_SESSION['systems'];
@@ -41,7 +41,7 @@ if ($remove_lock){
 	}
 
 	/* Page header*/
-	if (isset($_SESSION['objectinfo'])){
+	if (session::is_set('objectinfo')){
 		$display= print_header(get_template_path('images/system.png'), _("System management"), "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".@LDAP::fix($_SESSION['objectinfo']));
 	} else {
 		$display= print_header(get_template_path('images/system.png'), _("System management"));

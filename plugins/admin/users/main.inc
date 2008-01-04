@@ -37,7 +37,7 @@ if ($remove_lock){
   $output= $userManagement->execute();
 
   /* Page header*/
-  if (isset($_SESSION['objectinfo'])){
+  if (session::is_set('objectinfo')){
     $display= print_header(get_template_path('images/user.png'),
                            _("User administration"),
                            "<img alt=\"\" class=\"center\" src=\"".

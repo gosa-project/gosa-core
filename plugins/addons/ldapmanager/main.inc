@@ -20,7 +20,7 @@
 
 if (!$remove_lock){
 	/* Create phonelist object on demand */
-	if (!isset($_SESSION['ldif']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+	if (!session::is_set('ldif') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 		$_SESSION['ldif']= new ldif ($config);
 		$_SESSION['ldif']->set_acl_category("logview");
 	}

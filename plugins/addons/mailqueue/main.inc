@@ -20,7 +20,7 @@
 
 if (!$remove_lock){
 	/* Create mailqueue object on demand */
-	if (!isset($_SESSION['mailqueue']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+	if (!session::is_set('mailqueue') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 		$ui = get_userinfo();
 		$_SESSION['mailqueue']= new mailqueue ($config);
 		$_SESSION['mailqueue']->set_acl_category("mailqueue");

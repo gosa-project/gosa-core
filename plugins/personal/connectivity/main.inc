@@ -29,7 +29,7 @@ if (!$remove_lock){
   }
 
   /* Create connectivity object on demand */
-  if (!isset($_SESSION['connectivity']) || (isset($_GET['reset']) &&
+  if (!session::is_set('connectivity') || (isset($_GET['reset']) &&
       $_GET['reset'] == 1)){
     $_SESSION['connectivity']= new connectivity ($config, $ui->dn);
     $_SESSION['connectivity']->enable_CSN_check();
@@ -53,7 +53,7 @@ if (!$remove_lock){
   if (isset($_POST['edit'])){
 
     /* Check locking */
-    if ((($username= get_lock($ui->dn)) != "") && (!isset($_SESSION['edit']))){
+    if ((($username= get_lock($ui->dn)) != "") && (!session::is_set('edit'))){
       $_SESSION['back_plugin']= $plug;
       gen_locked_message ($username, $ui->dn);
       exit ();
@@ -97,7 +97,7 @@ if (!$remove_lock){
   $info= "";
 
   $display.="<div align='right'>";
-  if (isset($_SESSION['edit'])){
+  if (session::is_set('edit')){
     $display.= "<input type=submit name=\"edit_finish\" style=\"width:80px\" value=\""._("Ok")."\">\n";
     $display.= "&nbsp;";
     $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";

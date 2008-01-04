@@ -32,7 +32,7 @@ if (!$remove_lock){
   }
 
   /* Create user object on demand */
-  if (!isset($_SESSION['user']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+  if (!session::is_set('user') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
     $_SESSION['user']= new user ($config, $ui->dn);
     $_SESSION['user']->enable_CSN_check();
     $_SESSION['user']->set_acl_base($ui->dn);
@@ -154,7 +154,7 @@ if (!$remove_lock){
     $display.= "<p class=\"plugbottom\">";
 
     /* Are we in edit mode? */
-    if (isset($_SESSION['edit'])){
+    if (session::is_set('edit')){
       $display.= "<input type=submit name=\"edit_finish\" style=\"width:80px\" value=\""._("Ok")."\">\n";
       $display.= "&nbsp;";
       $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";

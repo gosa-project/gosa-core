@@ -133,7 +133,7 @@ class gofaxAccount extends plugin
     }
 
     /* Edit mode specifies if we are editing from my accout */
-    $edit_mode = (!is_object($this->parent) && !isset($_SESSION['edit']));
+    $edit_mode = (!is_object($this->parent) && !session::is_set('edit'));
 
     /* Load smarty stuff */
     $smarty= get_smarty();
@@ -697,7 +697,7 @@ class gofaxAccount extends plugin
   /* Save data to object */
   function save_object()
   {
-    $edit_mode = (!is_object($this->parent) && !isset($_SESSION['edit']));
+    $edit_mode = (!is_object($this->parent) && !session::is_set('edit'));
     if (isset($_POST['faxTab'])){
       plugin::save_object();
 

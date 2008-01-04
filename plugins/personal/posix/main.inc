@@ -45,7 +45,7 @@ if (!$remove_lock){
   }
 
   /* Enter edit mode? */
-  if ((isset($_POST['edit'])) && (!isset($_SESSION['edit']))){
+  if ((isset($_POST['edit'])) && (!session::is_set('edit'))){
     
     /* Check locking */
     if (($username= get_lock($ui->dn)) != ""){
@@ -101,7 +101,7 @@ if (!$remove_lock){
     $display.= "<p class=\"plugbottom\">";
 
     /* Are we in edit mode? */
-    if (isset($_SESSION['edit'])){
+    if (session::is_set('edit')){
       $display.= "<input type=submit name=\"edit_finish\" style=\"width:80px\" value=\""._("Ok")."\">\n";
       $display.= "&nbsp;";
       $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";

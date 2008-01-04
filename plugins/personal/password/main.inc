@@ -33,7 +33,7 @@ if (!$remove_lock){
   }
 
   /* Create password object on demand */
-  if (!isset($_SESSION['password']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+  if (!session::is_set('password') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
     $_SESSION['password']= new password ($config, $ui->dn);
   }
   $password= $_SESSION['password'];

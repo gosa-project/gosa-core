@@ -320,7 +320,7 @@ class environment extends plugin
     }
 
     /* Are we editing from MyAccount and not editing a user */
-    $WriteOnly = (!isset($this->parent)|| !$this->parent) && !isset($_SESSION['edit']);
+    $WriteOnly = (!isset($this->parent)|| !$this->parent) && !session::is_set('edit');
 
     /* Check profile server */
     if($this->acl_is_writeable("gotoProfileServer",$WriteOnly)){
@@ -1043,7 +1043,7 @@ class environment extends plugin
     /* Get all Posted vars 
      * Setup checkboxes 
      */
-    $WriteOnly = (!isset($this->parent)|| !$this->parent) && !isset($_SESSION['edit']);
+    $WriteOnly = (!isset($this->parent)|| !$this->parent) && !session::is_set('edit');
     if(isset($_POST['iamposted'])){
 
       $PACL =  $this->getacl("gotoProfileServer",$WriteOnly).$this->getacl("gotoProfileQuota",$WriteOnly);

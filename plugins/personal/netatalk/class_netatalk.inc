@@ -200,7 +200,7 @@ class netatalk extends plugin {
     }
 
     /* Assign attributes and ACL to smarty */
-    $SkipWrite = (!isset($this->parent) || !$this->parent) && !isset($_SESSION['edit']);
+    $SkipWrite = (!isset($this->parent) || !$this->parent) && !session::is_set('edit');
     $smarty->assign("netatalkShareACL", $this->getacl("netatalkShare",$SkipWrite));
     $smarty->assign("netatalkUserHomepathACL", $this->getacl("netatalkUserHomepath",$SkipWrite));
 

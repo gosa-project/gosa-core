@@ -85,7 +85,7 @@ class connectivity extends plugin
     /* Execude  objects */
     $is_first= true;
 
-    $ReadOnly = (!isset($this->parent) || !$this->parent) && !isset($_SESSION['edit']);
+    $ReadOnly = (!isset($this->parent) || !$this->parent) && !session::is_set('edit');
 
     foreach ($this->plugin_name as $name){
       $this->plugin[$name]->ReadOnly = $ReadOnly;

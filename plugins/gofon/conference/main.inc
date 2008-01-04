@@ -19,7 +19,7 @@
 */
 
 if ($remove_lock){
-        if(isset($_SESSION['conference'])){
+        if(session::is_set('conference')){
                 $conference= $_SESSION['conference'];
                 $conference->remove_lock();
                 del_lock ($ui->dn);
@@ -27,7 +27,7 @@ if ($remove_lock){
         }
 } else {
 	/* Create usermanagement object on demand */
-	if (!isset($_SESSION['conference']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+	if (!session::is_set('conference') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 		$_SESSION['conference']= new phoneConferenceManagment($config, $ui);
 	}
 	$conference= $_SESSION['conference'];
@@ -35,7 +35,7 @@ if ($remove_lock){
 	$output= $conference->execute();
 
 	/* Page header*/
-	if (isset($_SESSION['objectinfo'])){
+	if (session::is_set('objectinfo')){
 		$display= print_header(get_template_path('images/conference.png'), _("Conference management"), "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png')."\"> ".@LDAP::fix($_SESSION['objectinfo']));
 	} else {
 		$display= print_header(get_template_path('images/conference.png'), _("Conference management"));

@@ -96,7 +96,7 @@ if (!$remove_lock){
     $display.= "<p class=\"plugbottom\">";
 
     /* Are we in edit mode? */
-    if (isset($_SESSION['edit'])){
+    if (session::is_set('edit')){
       $display.= "<input type=submit name=\"edit_finish\" value=\""._("Save")."\">\n";
       $display.= "&nbsp;";
       $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
