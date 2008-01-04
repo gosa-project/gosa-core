@@ -58,7 +58,6 @@ class faiSummaryTab extends plugin{
   {
     $this->InitCalled = true;
     $this->Result = array();
-    $_SESSION['faiSummaryTab']['UniqueID'] = 0; 
   
     /* Get classes & release name 
        There are 2 different tabs which use the summary tab

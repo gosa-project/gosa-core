@@ -284,8 +284,9 @@ class faiVariable extends plugin
       $ldap = $this->config->get_ldap_link();
       $ldap->cd ($this->dn);
 
-      $use_dn = preg_replace("/".normalizePreg(get_release_dn($this->dn))."/i", $_SESSION['faifilter']['branch'], $this->dn);
-      if($_SESSION['faifilter']['branch'] == "main"){
+      $faifilter = session::get('faifilter');
+      $use_dn = preg_replace("/".normalizePreg(get_release_dn($this->dn))."/i", $faifilter['branch'], $this->dn);
+      if($faifilter['branch'] == "main"){
         $use_dn = $this->dn;
       }
   
@@ -293,8 +294,8 @@ class faiVariable extends plugin
       new log("remove","fai/".get_class($this),$use_dn,$this->attributes);
 
       foreach($this->SubObjects as $name => $obj){
-        $use_dn = preg_replace("/".normalizePreg(get_release_dn($this->dn))."/i", $_SESSION['faifilter']['branch'], $obj['dn']);
-        if($_SESSION['faifilter']['branch'] == "main"){
+        $use_dn = preg_replace("/".normalizePreg(get_release_dn($this->dn))."/i", $faifilter['branch'], $obj['dn']);
+        if($faifilter['branch'] == "main"){
           $use_dn = $obj['dn'];
         }
         prepare_to_save_FAI_object($use_dn,array(),true);

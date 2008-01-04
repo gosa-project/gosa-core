@@ -369,9 +369,9 @@ class faiProfile extends plugin
     $ldap = $this->config->get_ldap_link();
     $ldap->cd ($this->dn);
 
-#    $use_dn = str_ireplace( get_release_dn($this->dn), $_SESSION['faifilter']['branch'], $this->dn);
-    $use_dn = preg_replace("/".normalizePreg(get_release_dn($this->dn))."/i", $_SESSION['faifilter']['branch'], $this->dn);
-    if($_SESSION['faifilter']['branch'] == "main"){
+    $faifilter = session::get('faifilter');
+    $use_dn = preg_replace("/".normalizePreg(get_release_dn($this->dn))."/i", $faifilter['branch'], $this->dn);
+    if($faifilter['branch'] == "main"){
       $use_dn = $this->dn;
     }
 
@@ -404,8 +404,8 @@ class faiProfile extends plugin
     }
 
     $ldap = $this->config->get_ldap_link();
-
-    $base = $_SESSION['faifilter']['branch'];
+    $faifilter = session::get('faifilter');
+    $base = $faifilter['branch'];
     if($base == "main"){
       $base  = session::get('CurrentMainBase');
     }

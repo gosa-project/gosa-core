@@ -507,8 +507,15 @@ class faiManagement extends plugin
       }
 
       if($is_ok){
-        $_SESSION['LASTPOST']['base'] = $base;
-        $_SESSION['LASTPOST']['type'] = $type;
+
+        if(session::is_set('LASTPOST')){
+          $LASTPOST = session::get('LASTPOST');
+        }else{
+          $LASTPOST = array();
+        }
+        $LASTPOST['base'] = $base;
+        $LASTPOST['type'] = $type;
+        session::set('LASTPOST',$LASTPOST);
         $smarty->assign("iframe", true);
         $smarty->assign("plugID", $_GET['plug']);
         $display 	= $smarty->fetch(get_template_path('faiNewBranch.tpl', TRUE, dirname(__FILE__)));
@@ -530,11 +537,13 @@ class faiManagement extends plugin
         /* Create it know */
         $this->dispNewBranch = false;
         $this->dispNewFreeze = false;
-        $base = $_SESSION['LASTPOST']['base'];
+
+        $LASTPOST = session::get('LASTPOST');
+        $base = $LASTPOST['base'];
         $_POST  = session::get('LASTPOST');      
         $name = $_POST['BranchName'];
 
-        $type = $_SESSION['LASTPOST']['type'];
+        $type = $LASTPOST['type'];
         $ldap = $this->config->get_ldap_link();
 
         $baseToUse = $base;
