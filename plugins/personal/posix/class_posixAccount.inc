@@ -426,7 +426,7 @@ class posixAccount extends plugin
       $smarty->assign("tree_image", get_template_path('images/tree.png'));
       $smarty->assign("deplist", $this->config->idepartments);
       $smarty->assign("alphabet", generate_alphabet());
-      $smarty->assign("depselect",$_SESSION['CurrentMainBase']);
+      $smarty->assign("depselect", session::get('CurrentMainBase'));
       $smarty->assign("hint", print_sizelimit_warning());
 
       $smarty->assign("apply", apply_filter());

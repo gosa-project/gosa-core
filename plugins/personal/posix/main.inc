@@ -32,10 +32,11 @@ if (!$remove_lock){
 
   /* Create posixAccount object on demand */
   if (!session::is_set('posixAccount') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-    $_SESSION['posixAccount']= new posixAccount ($config, $ui->dn);
-    $_SESSION['posixAccount']->enable_CSN_check();
-    $_SESSION['posixAccount']->set_acl_base($ui->dn);
-    $_SESSION['posixAccount']->set_acl_category("users");
+    $posixAccount= new posixAccount ($config, $ui->dn);
+    $posixAccount->enable_CSN_check();
+    $posixAccount->set_acl_base($ui->dn);
+    $posixAccount->set_acl_category("users");
+    session::set('posixAccount',$posixAccount);
   }
   $posixAccount = session::get('posixAccount');
 

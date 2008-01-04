@@ -31,16 +31,17 @@ if (!$remove_lock){
   /* Create connectivity object on demand */
   if (!session::is_set('connectivity') || (isset($_GET['reset']) &&
       $_GET['reset'] == 1)){
-    $_SESSION['connectivity']= new connectivity ($config, $ui->dn);
-    $_SESSION['connectivity']->enable_CSN_check();
-    $_SESSION['connectivity']->set_acl_base($ui->dn);
-    $_SESSION['connectivity']->set_acl_category("users");
+    $connectivity= new connectivity ($config, $ui->dn);
+    $connectivity->enable_CSN_check();
+    $connectivity->set_acl_base($ui->dn);
+    $connectivity->set_acl_category("users");
 
     /* Adjust acl's to mode */
-    foreach ($_SESSION['connectivity']->plugin_name as $name){
-      $_SESSION['connectivity']->plugin[$name]->set_acl_category( "users");
-      $_SESSION['connectivity']->plugin[$name]->set_acl_base($ui->dn);
+    foreach ($connectivity->plugin_name as $name){
+      $connectivity->plugin[$name]->set_acl_category( "users");
+      $connectivity->plugin[$name]->set_acl_base($ui->dn);
     }
+    session::set('connectivity',$connectivity);
   }
   $connectivity = session::get('connectivity');
 

@@ -29,10 +29,11 @@ if (!$remove_lock) {
 
   /* Create netatalk object on demand */
   if (!session::is_set('netatalk') || (isset ($_GET['reset']) && $_GET['reset'] == 1)) {
-    $_SESSION['netatalk'] = new netatalk($config, $ui->dn);
-    $_SESSION['netatalk']->enable_CSN_check();
-    $_SESSION['netatalk']->set_acl_base($ui->dn);
-    $_SESSION['netatalk']->set_acl_category("users");
+    $netatalk = new netatalk($config, $ui->dn);
+    $netatalk->enable_CSN_check();
+    $netatalk->set_acl_base($ui->dn);
+    $netatalk->set_acl_category("users");
+    session::set('netatalk',$netatalk);
   }
   $netatalk  = session::get('netatalk');
 

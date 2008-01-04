@@ -29,10 +29,11 @@ if (!$remove_lock){
 
   /* Create mail object on demand */
   if (!session::is_set('environment') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-    $_SESSION['environment']= new environment ($config, $ui->dn);
-    $_SESSION['environment']->enable_CSN_check();
-    $_SESSION['environment']->set_acl_category('users');
-    $_SESSION['environment']->set_acl_base($ui->dn);
+    $environment= new environment ($config, $ui->dn);
+    $environment->enable_CSN_check();
+    $environment->set_acl_category('users');
+    $environment->set_acl_base($ui->dn);
+    session::set('environment',$environment);
   }
   $environment = session::get('environment');
 

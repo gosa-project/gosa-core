@@ -30,10 +30,11 @@ if (!$remove_lock){
 
   /* Create mail object on demand */
   if (!session::is_set('scalixAccount') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-    $_SESSION['scalixAccount']= new scalixAccount ($config, $ui->dn);
-    $_SESSION['scalixAccount']->enable_CSN_check();
-    $_SESSION['scalixAccount']->set_acl_base($ui->dn);
-    $_SESSION['scalixAccount']->set_acl_category("users");
+    $scalixAccount= new scalixAccount ($config, $ui->dn);
+    $scalixAccount->enable_CSN_check();
+    $scalixAccount->set_acl_base($ui->dn);
+    $scalixAccount->set_acl_category("users");
+    session::set('scalixAccount',$scalixAccount);
   }
   $scalixAccount = session::get('scalixAccount');
 

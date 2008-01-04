@@ -674,7 +674,7 @@ class user extends plugin
     }
 
     /* If needed, let the password method do some cleanup */
-    $tmp = new passwordMethod($_SESSION['config']);
+    $tmp = new passwordMethod($this->config);
     $available = $tmp->get_available_methods();
     if (in_array_ics($this->pw_storage, $available['name'])){
       $test= new $available[$this->pw_storage]($this->config);
@@ -979,7 +979,9 @@ class user extends plugin
     $this->cleanup();
 
     if(isset($this->attrs['preferredLanguage'])){
-      $_SESSION['ui']->language = $this->preferredLanguage;
+      $ui = session::get('ui');
+      $ui->language = $this->preferredLanguage;
+      session::set('ui',$ui);
       session::set('Last_init_lang',"update");
     }
 
@@ -1034,7 +1036,7 @@ class user extends plugin
 
     /* If needed, let the password method do some cleanup */
     if ($this->pw_storage != $this->last_pw_storage){
-      $tmp = new passwordMethod($_SESSION['config']);
+      $tmp = new passwordMethod($this->config);
       $available = $tmp->get_available_methods();
       if (in_array_ics($this->last_pw_storage, $available['name'])){
         $test= new $available[$this->last_pw_storage]($this->config,$this->dn);

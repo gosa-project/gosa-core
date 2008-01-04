@@ -33,10 +33,11 @@ if (!$remove_lock){
 
   /* Create user object on demand */
   if (!session::is_set('user') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-    $_SESSION['user']= new user ($config, $ui->dn);
-    $_SESSION['user']->enable_CSN_check();
-    $_SESSION['user']->set_acl_base($ui->dn);
-    $_SESSION['user']->set_acl_category("users");
+    $user= new user ($config, $ui->dn);
+    $user->enable_CSN_check();
+    $user->set_acl_base($ui->dn);
+    $user->set_acl_category("users");
+    session::set('user',$user);
   }
   $user = session::get('user');
 

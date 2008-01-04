@@ -31,10 +31,11 @@ if (!$remove_lock){
 
   /* Create mail object on demand */
   if (!session::is_set('mailAccount') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-    $_SESSION['mailAccount']= new mailAccount ($config, $ui->dn);
-    $_SESSION['mailAccount']->enable_CSN_check();
-    $_SESSION['mailAccount']->set_acl_base($ui->dn);
-    $_SESSION['mailAccount']->set_acl_category("users");
+    $mailAccount= new mailAccount ($config, $ui->dn);
+    $mailAccount->enable_CSN_check();
+    $mailAccount->set_acl_base($ui->dn);
+    $mailAccount->set_acl_category("users");
+    session::set('mailAccount',$mailAccount);
   }
   $mailAccount = session::get('mailAccount');
 
