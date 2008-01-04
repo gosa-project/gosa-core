@@ -198,7 +198,7 @@ class faxreport extends plugin
       $queuing_time= $line['queuing_time'];
 
       /* The user is allowed to download all fax images from those users 
-          that are listed in $_SESSION['fuserfilter'] 
+          that are listed in session::get('fuserfilter') 
          Don't forget to check getfax.php if you change somthing here */
       session::set('fuserfilter',$this->userfilter);
       $smarty->assign("plug", "?plug=".validate($_GET['plug']));
@@ -425,7 +425,7 @@ class faxreport extends plugin
   }
 
 
-  /* Save ui input, and store it in $_SESSION 
+  /* Save ui input, and store it in session::get() 
      to remember last search next time*/
   function save_object()
   {

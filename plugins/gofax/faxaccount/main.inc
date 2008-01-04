@@ -16,10 +16,10 @@ if (!$remove_lock){
 
 	/* Create gofaxAccount object on demand */
 	if (!session::is_set('gofaxAccount') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-		$_SESSION['gofaxAccount']= new gofaxAccount ($config, $ui->dn);
-		$_SESSION['gofaxAccount']->set_acl_base($ui->dn);
-		$_SESSION['gofaxAccount']->set_acl_category("users");
-
+		$gofaxAccount= new gofaxAccount ($config, $ui->dn);
+		$gofaxAccount->set_acl_base($ui->dn);
+		$gofaxAccount->set_acl_category("users");
+		session::set('gofaxAccount',$gofaxAccount);
 	}
 	$gofaxAccount = session::get('gofaxAccount');
 

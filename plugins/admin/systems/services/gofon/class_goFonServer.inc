@@ -148,7 +148,9 @@ class goFonServer extends goService{
 
       /* Updated config list of gofon servers */
       if($this->orig_dn == "new" || $this->orig_dn != $this->dn){
-        $_SESSION['config']->load_servers();
+        $config = session::get('config');
+        $config->load_servers();
+        session::set('config',$config);
       }
     }
   }

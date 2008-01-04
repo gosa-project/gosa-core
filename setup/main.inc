@@ -20,7 +20,7 @@
 
 /* Create a new setup class if necessary  */
 if (!session::is_set('setup') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-  $_SESSION['setup']= new setup ();
+  session::set('setup',new setup());
 }
 $setup = session::get('setup');
 

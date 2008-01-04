@@ -32,9 +32,10 @@ if (!$remove_lock){
 
 	/* Create phoneAccount object on demand */
 	if (!session::is_set('phoneAccount') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-		$_SESSION['phoneAccount']= new phoneAccount ($config, $ui->dn);
-		$_SESSION['phoneAccount']->set_acl_base($ui->dn);
-		$_SESSION['phoneAccount']->set_acl_category("users");
+		$phoneAccount= new phoneAccount ($config, $ui->dn);
+		$phoneAccount->set_acl_base($ui->dn);
+		$phoneAccount->set_acl_category("users");
+		session::set('phoneAccount',$phoneAccount);
 	}
 	$phoneAccount = session::get('phoneAccount');
 

@@ -29,8 +29,9 @@ if ($remove_lock){
   /* Create usermanagement object on demand */
   if (!session::is_set('userManagement') ||
      (isset($_GET['reset']) && $_GET['reset'] == 1)){
-    $_SESSION['userManagement']= new userManagement ($config, $_SESSION['ui']);
-    $_SESSION['userManagement']->set_acl_category("users");
+    $userManagement= new userManagement ($config, session::get('ui'));
+    $userManagement->set_acl_category("users");
+    session::set('userManagement',$userManagement);
   }
   $userManagement = session::get('userManagement');
   $userManagement->save_object();

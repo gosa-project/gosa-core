@@ -29,7 +29,7 @@ if ($remove_lock){
 
 		/* Create MimeTypeManagement object on demand */
 		if (!session::is_set('MimeTypeManagement') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-				$_SESSION['MimeTypeManagement']= new mimetypeManagement ($config, $_SESSION['ui']);
+			session::set('MimeTypeManagement',new mimetypeManagement ($config, session::get('ui')));
 		}
 
 		/* Get object */

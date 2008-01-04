@@ -28,7 +28,7 @@ if ($remove_lock){
 } else {
 	/* Create usermanagement object on demand */
 	if (!session::is_set('systems') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-		$_SESSION['systems']= new systems($config, $ui);
+		session::set('systems',new systems($config, $ui));
 	}
 	$systems = session::get('systems');
 	$systems->save_object();

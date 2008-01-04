@@ -19,18 +19,19 @@
 */
 
 if (!$remove_lock){
-        /* Create msgplug object on demand */
-        if (!session::is_set('msgplug') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-                $ui = get_userinfo();
-                $_SESSION['msgplug']= new msgplug ($config);
-                $_SESSION['msgplug']->set_acl_category("msgplug");
+	/* Create msgplug object on demand */
+	if (!session::is_set('msgplug') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+		$ui = get_userinfo();
+		$msgplug= new msgplug ($config);
+		$msgplug->set_acl_category("msgplug");
 
-                /* Check root dn and user dn for acl informations */
-                $_SESSION['msgplug']->set_acl_base($config->current['BASE']);
-                if($_SESSION['msgplug']->getacl("") == ""){
-                        $_SESSION['msgplug']->set_acl_base($ui->dn);
-                }
-        }
+		/* Check root dn and user dn for acl informations */
+		$msgplug->set_acl_base($config->current['BASE']);
+		if($msgplug->getacl("") == ""){
+			$msgplug->set_acl_base($ui->dn);
+		}
+		session::set('msgplug',$msgplug);
+	}
 	$msgplug = session::get('msgplug');
 
 	/* save changes back to object */

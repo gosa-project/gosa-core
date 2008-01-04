@@ -21,7 +21,7 @@
 if (!$remove_lock){
   /* Create object object on demand */
   if (!session::is_set('ogroup') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-    $_SESSION['ogroup']= new ogroupManagement ($config);
+    session::set('ogroup',new ogroupManagement ($config));
   }
   $ogroup = session::get('ogroup');
 

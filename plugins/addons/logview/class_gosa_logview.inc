@@ -368,11 +368,12 @@ class gosa_logview extends plugin
       }
 
       /* Save attributes in Sessiob, so we are able to recontruct filter on plugin reload */
-      $_SESSION['logview']['gosa_log'] = array();
+      $logview = session::get('logview');
+      $logview['gosa_log'] = array();
       foreach(array("action","server","time","regex") as $attr){
-        $_SESSION['logview']['gosa_log'][$attr] = $this->$attr;
+        $logview['gosa_log'][$attr] = $this->$attr;
       }
-
+      session::set('logview',$logview);
     }
   }
 

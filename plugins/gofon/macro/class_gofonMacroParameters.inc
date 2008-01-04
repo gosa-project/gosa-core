@@ -188,8 +188,9 @@ class macroParameter extends plugin
          so we use the acls from gofon/marco */
     $ACLs = $this->ui->get_permissions($this->dn,"gofonmacro/macro","goFonMarcoContent");
 
-    /* get current content */ 
-    $content = $_SESSION['macroManagment']->macrotabs->by_object['macro']->goFonMacroContent;
+    /* get current content */
+    $macroManagment = session::get('macroManagment') ;
+    $content = $macroManagment->macrotabs->by_object['macro']->goFonMacroContent;
 
     if(strstr($content,"ARG")){
       $vorpos = strpos($content,"ARG");

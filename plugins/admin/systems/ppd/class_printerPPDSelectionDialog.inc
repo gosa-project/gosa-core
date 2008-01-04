@@ -25,7 +25,7 @@ class printerPPDSelectionDialog extends plugin
     $this->depselect  = $this->config->current['BASE'];
     
     if(!session::is_set('printerPPDSelectionDialog')){
-      $_SESSION['printerPPDSelectionDialog']['regex'] = "*";
+      session::set("printerPPDSelectionDialog",array('regex'=> "*"));
     }  
 
     /* Order the manufacturers index */
@@ -41,8 +41,9 @@ class printerPPDSelectionDialog extends plugin
     $smarty= get_smarty();
     $display= "";
     $s_action = "none";
-  
-    $regex = $_SESSION['printerPPDSelectionDialog']['regex'];
+ 
+    $printerPPDSelectionDialog = session::get('printerPPDSelectionDialog');
+    $regex = $printerPPDSelectionDialog['regex'];
 
     if(isset($_GET['search'])){
       $regex = $_GET['search']."*";
@@ -53,7 +54,8 @@ class printerPPDSelectionDialog extends plugin
     }
     
     $regex = str_replace("**","*",$regex);
-    $_SESSION['printerPPDSelectionDialog']['regex'] = $regex;
+    $printerPPDSelectionDialog['regex'] = $regex;
+    session::set('printerPPDSelectionDialog',$printerPPDSelectionDialog);
  
 
     /* Delete requested, check if everything is ok and display confirmation dialog */

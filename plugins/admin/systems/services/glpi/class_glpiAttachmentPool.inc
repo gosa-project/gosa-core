@@ -261,6 +261,8 @@ class glpiAttachmentPool extends plugin
       name='new_attach' alt='"._("New Attachment"). "'>&nbsp;".
       "</div>";
 
+    $GlpiAttachmentFilter = session::get('GlpiAttachmentFilter');
+  
     $smarty->assign("attachments",      $divlist->DrawList());
     $smarty->assign("attachmenthead",   $listhead);
     $smarty->assign("search_image",     get_template_path('images/search.png'));
@@ -270,7 +272,7 @@ class glpiAttachmentPool extends plugin
     $smarty->assign("launchimage",      get_template_path('images/small_filter.png'));
     $smarty->assign("apply",            apply_filter());
     $smarty->assign("alphabet",         generate_alphabet());
-    $smarty->assign("attachment_regex", $_SESSION['GlpiAttachmentFilter']['filter']);
+    $smarty->assign("attachment_regex", $GlpiAttachmentFilter['filter']);
 
     $display.= $smarty->fetch(get_template_path('glpiAttachmentPool.tpl', TRUE));
     return($display);

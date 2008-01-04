@@ -430,7 +430,8 @@ class departmentManagement extends plugin
     $Regex        = $this->DivListDepartment->Regex;
   
     // Create Array to Test if we have a valid back button
-    $tmp = $_SESSION['config']->idepartments;
+    $config = session::get('config');
+    $tmp = $config->idepartments;
 
     // In case of a valid back button create entry
     if(isset($tmp[$base_back])){

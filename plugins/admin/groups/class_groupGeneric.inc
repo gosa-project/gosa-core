@@ -151,12 +151,9 @@ class group extends plugin
           "regex"           => "*");
       register_global("gufilter", $gufilter);
     }
-    $gufilter= get_global('gufilter');
-
+    $gufilter= session::get('gufilter');
     $gufilter['SubSearchGroup'] = false;
-    $gufilter['dselect'] = $_SESSION['gufilter']['dselect'];  
-
-    register_global('gufilter',$gufilter);
+    session::set('gufilter',$gufilter);
   
     if ($this->dn == "new"){
       if(session::is_set('CurrentMainBase')){

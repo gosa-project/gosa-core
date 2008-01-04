@@ -81,15 +81,11 @@ class conference extends plugin
      *  and use first server as default if necessary.
      */
     $a_SETUP= array();
-    if(array_key_exists('config',$_SESSION) &&
-       array_key_exists('SERVERS',$_SESSION['config']->data) &&
-       array_key_exists('FON',$_SESSION['config']->data['SERVERS']) &&
-       count($_SESSION['config']->data['SERVERS']['FON']) &&
-       is_callable("mysql_connect")
-       ) {
+    $config = session::get('config');
+    if(isset($config->data['SERVERS']['FON']) && is_callable("mysql_connect")) {
 
       /* Set available server */
-      $this->goFonHomeServers = $_SESSION['config']->data['SERVERS']['FON'];
+      $this->goFonHomeServers = $config->data['SERVERS']['FON'];
 
       /* Set default server */
       if($this->dn == "new"){

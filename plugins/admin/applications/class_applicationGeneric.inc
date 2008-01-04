@@ -33,9 +33,11 @@ class application extends plugin
   {
     plugin::plugin ($config, $dn, $parent);
 
+    $appfilter = session::get('appfilter')    ;
+
     $tmp = $this->config->search("faiManagement", "CLASS",array('menu','tabs'));
     if(!empty($tmp)) {
-      if(!preg_match("/^".get_ou('applicationou')."/",$_SESSION['appfilter']['release'])){
+      if(!preg_match("/^".get_ou('applicationou')."/",$appfilter['release'])){
         $this->isReleaseApplikation = true;  
       }
     }

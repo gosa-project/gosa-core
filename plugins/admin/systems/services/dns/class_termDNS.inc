@@ -859,7 +859,8 @@ class termDNS extends plugin
 
     /* Hide all dns specific code, if dns is not available
      */
-    foreach($_SESSION['config']->data['TABS']['SERVERSERVICE'] as $tab){
+    $config = session::get('config');
+    foreach($config->data['TABS']['SERVERSERVICE'] as $tab){
       if(preg_match("/^servdns$/",$tab['CLASS'])){
         $tmp['plProvidedAcls']["Records"]        = _("DNS records");
         $tmp['plProvidedAcls']["zoneName"]       = _("Zone name");

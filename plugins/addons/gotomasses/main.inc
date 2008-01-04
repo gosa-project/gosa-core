@@ -22,21 +22,20 @@ if (!$remove_lock){
 
 	/* Create gotomasses object on demand */
 	if (!session::is_set('gotomasses') || (isset($_GET['reset']) && $_GET['reset'] == 1) || isset($_POST['reload_gotomass_data'])){
-		$_SESSION['gotomasses']= new gotomasses ($config);
-		$_SESSION['gotomasses']->set_acl_category("gotomasses");
+		$gotomasses= new gotomasses ($config);
+		$gotomasses->set_acl_category("gotomasses");
 
         /* Check root dn and user dn for acl informations */
-        $_SESSION['gotomasses']->set_acl_base($config->current['BASE']);
-        if($_SESSION['gotomasses']->getacl("") == ""){
-            $_SESSION['gotomasses']->set_acl_base($ui->dn);
+        $gotomasses->set_acl_base($config->current['BASE']);
+        if($gotomasses->getacl("") == ""){
+            $gotomasses->set_acl_base($ui->dn);
         }
 		
 		/* Check if we have acl on our own base */
-        if($_SESSION['gotomasses']->getacl("") == ""){
-            $_SESSION['gotomasses']->set_acl_base(dn2base($ui->dn));
+        if($gotomasses->getacl("") == ""){
+            $gotomasses->set_acl_base(dn2base($ui->dn));
         }
-	
-	
+		session::set("gotomasses",$gotomasses);
 	}
 	$gotomasses = session::get('gotomasses');
 

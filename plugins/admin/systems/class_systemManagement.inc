@@ -108,10 +108,12 @@ class systems extends plugin
      * Display the new requested entry type ... servtab  in case of server and so on.
      */
     if(isset($_POST['SystemTypeChoosen'])){
+      $SelectedSystemType = session::get('SelectedSystemType');
       $s_action = "SelectedSystemType";
       $s_entry  = $_POST['SystemType'];
-      $_SESSION['SelectedSystemType']['ogroup'] = $_POST['ObjectGroup'];
+      $SelectedSystemType['ogroup'] = $_POST['ObjectGroup'];
       $this->systab = NULL;
+      session::set('SelectedSystemType',$SelectedSystemType);
     }
 
     /* remove image tags from posted entry  (posts looks like this 'name_x')*/
@@ -746,7 +748,7 @@ class systems extends plugin
       if (count($message) == 0){
 
         /* Incoming behavior; you can select a system type and an ogroup membership.
-         * If this object is an Incoming object, $_SESSION['SelectedSystemType'] isset.
+         * If this object is an Incoming object, session::get('SelectedSystemType') isset.
          * Check if we must add the new object to an object group.
          *
          * If this is done, delete the old incoming entry... it is still there, because this is a new

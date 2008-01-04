@@ -75,13 +75,10 @@ class macro extends plugin
      * Load all server configuration in $this->goFonHomeServers if available
      */
     $a_SETUP= array();
-    if(array_key_exists('config',$_SESSION) &&
-       array_key_exists('SERVERS',$_SESSION['config']->data) &&
-       count($_SESSION['config']->data['SERVERS']['FON']) && 
-       array_key_exists('FON',$_SESSION['config']->data['SERVERS'])) {
+    if(isset($config->data['SERVERS']['FON'])){
 
       /* Set available server */
-      $this->goFonHomeServers = $_SESSION['config']->data['SERVERS']['FON'];
+      $this->goFonHomeServers = $config->data['SERVERS']['FON'];
   
       /* Remove default entry, not necessary here */
       if(isset($this->goFonHomeServers[0])){

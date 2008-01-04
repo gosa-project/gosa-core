@@ -28,7 +28,7 @@ if ($remove_lock){
 } else {
 	/* Create usermanagement object on demand */
 	if (!session::is_set('department') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-		$_SESSION['department']= new departmentManagement($config, $ui);
+		session::set('department',new departmentManagement($config, $ui));
 	}
 	$department = session::get('department');
 	

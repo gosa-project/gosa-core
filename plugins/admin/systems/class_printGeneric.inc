@@ -106,7 +106,7 @@ class printgeneric extends plugin
       }
 
       if(!isset($this->config->idepartments[$this->base])){
-        print_red(_("Can't extract a valid base out of object dn, setting base to '%s'."),$_SESSION['CurrentMainBase']);
+        print_red(_("Can't extract a valid base out of object dn, setting base to '%s'."),session::get('CurrentMainBase'));
         $this->base  = session::get('CurrentMainBase');
       }
     }
@@ -505,7 +505,7 @@ class printgeneric extends plugin
     $config = session::get('config');
     if((isset($config->data['MAIN']['PPD_PATH']))&&(is_dir($config->data['MAIN']['PPD_PATH']))){
 
-      $path = $_SESSION['config']->data['MAIN']['PPD_PATH'];
+      $path = $config->data['MAIN']['PPD_PATH'];
       if(!preg_match("/\/$/",$path)){
         $path = $path."/";
       }

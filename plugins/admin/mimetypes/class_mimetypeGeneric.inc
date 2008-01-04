@@ -151,8 +151,8 @@ class mimetype extends plugin
     if ($this->iconData == ""){
       $this->set_new_picture("");
     }
-    $_SESSION['binary']			= $this->iconData;
-    $_SESSION['binarytype']		= "image/jpeg";
+    session::set('binary',$this->iconData);
+    session::set('binarytype',"image/jpeg");
   }
 
 
@@ -541,8 +541,8 @@ class mimetype extends plugin
     $mimefilter = session::get('mimefilter');
   
     if($this->isReleaseMimeType && (isset($mimefilter['release']))){
-      $baseDn = str_replace($this->config->current['BASE'],$this->base,$_SESSION['mimefilter']['release']);
-      $baseDn = preg_replace("/".get_ou('mimetypeou').".*/",get_ou('mimetypeou').$this->base,$_SESSION['mimefilter']['release']);
+      $baseDn = str_replace($this->config->current['BASE'],$this->base,$mimefilter['release']);
+      $baseDn = preg_replace("/".get_ou('mimetypeou').".*/",get_ou('mimetypeou').$this->base,$mimefilter['release']);
       $ldap->ls("(&(objectClass=gotoMimeType)(cn=".$this->cn."))",$baseDn,array("cn"));
       if($ldap->count()){
         $attrs = $ldap->fetch();

@@ -8,8 +8,9 @@ if ($remove_lock){
 } else {
 	/* Create blocklist object on demand */
 	if (!session::is_set('blocklist') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-		$_SESSION['blocklist']= new blocklist($config, $ui);
-	 	$_SESSION['blocklist']->set_acl_category("gofaxlist");
+		$blocklist= new blocklist($config, $ui);
+	 	$blocklist->set_acl_category("gofaxlist");
+		session::set('blocklist',$blocklist);
 	}
 	$blocklist = session::get('blocklist');
 	$blocklist->save_object();

@@ -22,7 +22,7 @@ class divListApplication extends MultiSelectWindow
   {
     MultiSelectWindow::MultiSelectWindow($config,"Application", "application");
    
-    $this->selectedRelease = get_ou('applicationou').$_SESSION['CurrentMainBase'];
+    $this->selectedRelease = get_ou('applicationou').session::get('CurrentMainBase');
  
     $this->parent       = &$parent;
     $this->ui           = get_userinfo();
@@ -313,7 +313,9 @@ class divListApplication extends MultiSelectWindow
   {
     /* Save automatic created POSTs like regex, checkboxes */
     MultiSelectWindow::save_object(); 
-    $_SESSION['appfilter']['release']  = $this->selectedRelease;
+    $appfilter = session::get('appfilter');
+    $appfilter['release']  = $this->selectedRelease;
+    session::set('appfilter',$appfilter);
   }
 
 }

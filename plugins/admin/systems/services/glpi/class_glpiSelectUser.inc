@@ -40,7 +40,7 @@ class glpiSelectUser extends plugin
     plugin::execute();
 
     if(isset($_POST['depselect'])){
-      $_SESSION['glpi_user_filter']['base'] = $_POST['depselect'];
+      session::set('glpi_user_filter', array('base' => $_POST['depselect']));
     }
 
     $filter  = session::get('glpi_user_filter');
@@ -150,7 +150,8 @@ class glpiSelectUser extends plugin
 
     
     /* Get all departments within this subtree */
-    $this->base = $_SESSION['glpi_user_filter']['base'];
+    $glpi_user_filter = session::get('glpi_user_filter');
+    $this->base = $glpi_user_filter['base'];
     $options  ="";
     $base = $this->config->current['BASE'];
     $deps= get_list("(&(|(ou=*)(description=*))(objectClass=gosaDepartment))", "users", $base,

@@ -10,7 +10,7 @@
      # create dfsManagment object
      if (!session::is_set('dfsManagment') || 
         (isset($_GET['reset']) && $_GET['reset'] == 1)) {
-       $_SESSION['dfsManagment'] = new dfsManagment($config, $_SESSION['ui']);
+       session::set('dfsManagment',new dfsManagment($config, session::get('ui')));
      }
      $dfsManagment  = session::get('dfsManagment');
      $output = $dfsManagment->execute();
@@ -27,7 +27,7 @@
                                 _("Distributed File System Administration"),
                                 "<img alt=\"\" class=\"center\" src=\"".
                                 get_template_path('images/closedlock.png').
-                                "\"> ".$_SESSION['objectinfo']);
+                                "\"> ".session::get('objectinfo'));
      } else {
        $display = print_header(get_template_path('images/dfs.png'),
                                 _("Distributed File System Administration"));

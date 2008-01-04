@@ -67,7 +67,9 @@ class gofaxAccount extends plugin
      * Added to be able to handle department selection in divSelelect
      */
     if(!session::is_set("Fax_Filter")){
-      $_SESSION['Fax_Filter']['depselect'] = $this->config->current['BASE'];
+      $Fax_Filter = array();
+      $Fax_Filter['depselect'] = $this->config->current['BASE'];
+      session::set('Fax_Filter',$Fax_Filter);
     }
 
     if ($dn != "new"){
@@ -125,11 +127,13 @@ class gofaxAccount extends plugin
      */
     if((isset($_GET['act']))&&($_GET['act']=="dep_open")){
 
+      $Fax_Filter = session::get('Fax_Filter');
       if(strlen(base64_decode($_GET['dep_id']))>= strlen($this->config->current['BASE'])){
-        $_SESSION['Fax_Filter']['depselect']= base64_decode($_GET['dep_id']);
+        $Fax_Filter['depselect']= base64_decode($_GET['dep_id']);
       }else{
-        $_SESSION['Fax_Filter']['depselect']= $this->config->current['BASE'];
+        $Fax_Filter['depselect']= $this->config->current['BASE'];
       }
+      session::set('Fax_Filter',$Fax_Filter);
     }
 
     /* Edit mode specifies if we are editing from my accout */
@@ -413,7 +417,8 @@ class gofaxAccount extends plugin
       /* The base specifies the current position in the ldap tree 
        * The current base was specified by $_GET['dep_id'] before. Or contains the default value.
        */
-      $base = $_SESSION['Fax_Filter']['depselect'];
+      $Fax_Filter = session::get('Fax_Filter');
+      $base = $Fax_Filter['depselect'];
       $ldap->cd($base);
 
       /* Ge all Blocklists */
@@ -441,7 +446,8 @@ class gofaxAccount extends plugin
       $this->departments= array();
    
       /* Get all departments within the current department */ 
-      $base = $_SESSION['Fax_Filter']['depselect'];
+      $Fax_Filter = session::get('Fax_Filter');
+      $base = $Fax_Filter['depselect'];
       $ldap->ls("(objectClass=gosaDepartment)",$base);
 
       /* Base back is used to go one department up in our ldap tree */
@@ -501,7 +507,8 @@ class gofaxAccount extends plugin
       /* The base specifies the current position in the ldap tree
        * The current base was specified by $_GET['dep_id'] before. Or contains the default value.
        */
-      $base = $_SESSION['Fax_Filter']['depselect'];
+      $Fax_Filter = session::get('Fax_Filter');
+      $base = $Fax_Filter['depselect'];
       $ldap->cd($base);
 
       /* Ge all Blocklists */ 

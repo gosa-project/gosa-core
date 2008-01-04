@@ -22,14 +22,15 @@ if (!$remove_lock){
 	/* Create mailqueue object on demand */
 	if (!session::is_set('mailqueue') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 		$ui = get_userinfo();
-		$_SESSION['mailqueue']= new mailqueue ($config);
-		$_SESSION['mailqueue']->set_acl_category("mailqueue");
+		$mailqueue= new mailqueue ($config);
+		$mailqueue->set_acl_category("mailqueue");
 		
 		/* Check root dn and user dn for acl informations */
-		$_SESSION['mailqueue']->set_acl_base($config->current['BASE']);
-		if($_SESSION['mailqueue']->getacl("") == ""){
-			$_SESSION['mailqueue']->set_acl_base($ui->dn);
+		$mailqueue->set_acl_base($config->current['BASE']);
+		if($mailqueue->getacl("") == ""){
+			$mailqueue->set_acl_base($ui->dn);
 		}
+		session::set('mailqueue',$mailqueue);
 	}
 	$mailqueue = session::get('mailqueue');
 

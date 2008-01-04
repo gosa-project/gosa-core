@@ -127,7 +127,9 @@ class workstartup extends plugin
           $attr['description'][0] ="";
         }
 
-        $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'][] = $attr;
+        $getAvailableClassesForThisRelease_CACHED_CLASSES = session::get('getAvailableClassesForThisRelease_CACHED_CLASSES');
+        $getAvailableClassesForThisRelease_CACHED_CLASSES[] = $attr;
+        session::set('getAvailableClassesForThisRelease_CACHED_CLASSES',$getAvailableClassesForThisRelease_CACHED_CLASSES);
    
         if(in_array('FAIpackageList',$attr['objectClass'])){
           $tmp2[$cn]['FAIpackageList']['obj']   = 'FAIpackageList'; 
@@ -449,7 +451,9 @@ class workstartup extends plugin
       $attr = $ldap->fetch();
       $test2[$attr['cn'][0]] = $attr['cn'][0];
     }
-    $_SESSION['getAvailableClassesForThisRelease_CACHE'][$release] = $test2;
+    $getAvailableClassesForThisRelease_CACHE = session::get('getAvailableClassesForThisRelease_CACHE');
+    $getAvailableClassesForThisRelease_CACHE[$release] = $test2;
+    session::set('getAvailableClassesForThisRelease_CACHE',$getAvailableClassesForThisRelease_CACHE);
     return($test2);
   }
 

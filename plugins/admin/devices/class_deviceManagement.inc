@@ -43,8 +43,8 @@ class deviceManagement extends plugin
 
     /* These vars will be stored if you try to open a locked device,
         to be able to perform your last requests after showing a warning message */
-    $_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^device_edit_/",
-                                          "/^device_del_/","/^item_selected/","/^remove_multiple_devices/");
+    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^device_edit_/",
+                                          "/^device_del_/","/^item_selected/","/^remove_multiple_devices/"));
 
     $smarty       = get_smarty();             // Smarty instance
     $s_action     = "";                       // Contains the action to proceed

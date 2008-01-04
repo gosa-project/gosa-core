@@ -71,15 +71,12 @@ class phonequeue extends plugin
      * Load all server configuration in $this->goFonHomeServers if available
      *  and use first server as default if necessary.
      */
-    if(array_key_exists('config',$_SESSION) &&
-        array_key_exists('SERVERS',$_SESSION['config']->data) &&
-        array_key_exists('FON',$_SESSION['config']->data['SERVERS']) &&
-        count($_SESSION['config']->data['SERVERS']['FON']) &&
-        is_callable("mysql_connect")
-      ) {
+    if(isset($config->data['SERVERS']['FON']) && 
+       count($config->data['SERVERS']['FON']) &&
+       is_callable("mysql_connect")){
 
       /* Set available server */
-      $this->goFonHomeServers = $_SESSION['config']->data['SERVERS']['FON'];
+      $this->goFonHomeServers = $config->data['SERVERS']['FON'];
 
       /* Set default server */
       if($this->dn == "new"){

@@ -28,7 +28,7 @@ if ($remove_lock){
 } else {
 	/* Create usermanagement object on demand */
 	if (!session::is_set('conference') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-		$_SESSION['conference']= new phoneConferenceManagment($config, $ui);
+		session::set("conference",new phoneConferenceManagment($config, $ui));
 	}
 	$conference = session::get('conference');
 	$conference->save_object();

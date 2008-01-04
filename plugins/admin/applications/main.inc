@@ -28,7 +28,7 @@ if ($remove_lock){
 } else {
 	/* Create applicationManagement object on demand */
 	if (!session::is_set('applicationManagement') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-		$_SESSION['applicationManagement']= new applicationManagement ($config, $_SESSION['ui']);
+		session::set('applicationManagement',new applicationManagement ($config, session::get('ui')));
 	}
 	$applicationManagement = session::get('applicationManagement');
 	$applicationManagement->save_object();

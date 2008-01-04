@@ -21,8 +21,9 @@
 if (!$remove_lock){
 	/* Create phonelist object on demand */
 	if (!session::is_set('ldif') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-		$_SESSION['ldif']= new ldif ($config);
-		$_SESSION['ldif']->set_acl_category("logview");
+		$ldif= new ldif ($config);
+		$ldif->set_acl_category("logview");
+		session::set('ldif',$ldif);
 	}
 	$ldif = session::get('ldif');
 

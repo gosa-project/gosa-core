@@ -30,7 +30,7 @@ if ($remove_lock){
 
 	/* Create usermanagement object on demand */
 if (!session::is_set('macl') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-	$_SESSION['macl']= new aclManagement($config, $ui);
+		session::set('macl',new aclManagement($config, $ui));
 	}
 	$macl = session::get('macl');
 	
