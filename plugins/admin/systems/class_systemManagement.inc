@@ -1018,7 +1018,7 @@ class systems extends plugin
           /* User filter? */
           if($oc['CLASS'] != ""){
             $filter = "(&".$userregex."(objectClass=".$oc['CLASS'].")(cn=".$this->DivListSystem->Regex."))";
-            $res = array_merge($res,get_sub_list($filter,$sys_categories,preg_replace("/,.*$/","",$oc['TREE']),$oc['TREE'].$base, $sys_attrs, GL_NONE | GL_SIZELIMIT));
+            $res = array_merge($res,get_list($filter,$sys_categories,$oc['TREE'].$base, $sys_attrs, GL_NONE | GL_SIZELIMIT));
           }
         }
       } 
