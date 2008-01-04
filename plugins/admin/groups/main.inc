@@ -28,7 +28,7 @@ if ($remove_lock){
 } else {
   /* Create groupManagement object on demand */
   if (!session::is_set('groupManagement') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-    session::set('groupManagement',new groupManagement ($config, get_userinfo()));
+    session::set('groupManagement',new groupManagement ($config, $ui));
   }
   $groupManagement = session::get('groupManagement');
   $groupManagement->save_object();
