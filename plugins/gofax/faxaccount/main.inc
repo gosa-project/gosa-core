@@ -21,7 +21,7 @@ if (!$remove_lock){
 		$_SESSION['gofaxAccount']->set_acl_category("users");
 
 	}
-	$gofaxAccount= $_SESSION['gofaxAccount'];
+	$gofaxAccount = session::get('gofaxAccount');
 
 	/* save changes back to object */
 	if (session::is_set('edit')){

@@ -810,7 +810,7 @@ class workstartup extends plugin
     $smarty->assign("gotoLdapServers",    $SelectBoxLdapServer->DrawList());
     $smarty->assign("gotoLdapServerList", $list);
     $smarty->assign("gotoLdap_inherit",   $this->gotoLdap_inherit);
-    $smarty->assign("JS",  $_SESSION['js']);
+    $smarty->assign("JS",  session::get('js'));
 
     foreach (array("gotoModules", "gotoAutoFs", "gotoFilesystem") as $val){
       $smarty->assign("$val", $this->$val);

@@ -37,7 +37,7 @@ if (!$remove_lock){
     $_SESSION['sambaAccount']->set_acl_base($ui->dn);
     $_SESSION['sambaAccount']->set_acl_category("users");
   }
-  $sambaAccount= $_SESSION['sambaAccount'];
+  $sambaAccount = session::get('sambaAccount');
 
   /* save changes back to object */
   if (session::is_set('edit')){

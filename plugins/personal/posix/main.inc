@@ -37,7 +37,7 @@ if (!$remove_lock){
     $_SESSION['posixAccount']->set_acl_base($ui->dn);
     $_SESSION['posixAccount']->set_acl_category("users");
   }
-  $posixAccount= $_SESSION['posixAccount'];
+  $posixAccount = session::get('posixAccount');
 
   /* save changes back to object */
   if (session::is_set('edit')){

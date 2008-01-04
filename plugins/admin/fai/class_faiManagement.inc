@@ -531,7 +531,7 @@ class faiManagement extends plugin
         $this->dispNewBranch = false;
         $this->dispNewFreeze = false;
         $base = $_SESSION['LASTPOST']['base'];
-        $_POST = $_SESSION['LASTPOST'];      
+        $_POST  = session::get('LASTPOST');      
         $name = $_POST['BranchName'];
 
         $type = $_SESSION['LASTPOST']['type'];
@@ -879,7 +879,7 @@ class faiManagement extends plugin
     $ret = array("/"=>"main");
     $ldap = $this->config->get_ldap_link();
     if(!$base){
-      $base= $_SESSION['CurrentMainBase'];
+      $base = session::get('CurrentMainBase');
     }
     $tmp = get_all_releases_from_base($base,true);
     foreach($tmp as $dn => $name){

@@ -34,7 +34,7 @@ if (!$remove_lock) {
     $_SESSION['netatalk']->set_acl_base($ui->dn);
     $_SESSION['netatalk']->set_acl_category("users");
   }
-  $netatalk = $_SESSION['netatalk'];
+  $netatalk  = session::get('netatalk');
 
   /* save changes back to object */
   if (session::is_set('edit')) {

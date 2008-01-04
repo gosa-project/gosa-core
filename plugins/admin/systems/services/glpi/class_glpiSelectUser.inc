@@ -43,7 +43,7 @@ class glpiSelectUser extends plugin
       $_SESSION['glpi_user_filter']['base'] = $_POST['depselect'];
     }
 
-    $filter = $_SESSION['glpi_user_filter'];
+    $filter  = session::get('glpi_user_filter');
 
     /* Filter settings, remove double* */
     if(isset($_GET['search'])){
@@ -186,7 +186,7 @@ class glpiSelectUser extends plugin
       "</div>";
 
 
-    $filter= $_SESSION['glpi_user_filter'];
+    $filter = session::get('glpi_user_filter');
     $smarty->assign("usershead", $listhead);
     $smarty->assign("users", $divlist->DrawList());
     $smarty->assign("search_image", get_template_path('images/search.png'));
@@ -215,7 +215,7 @@ class glpiSelectUser extends plugin
   function reload()
   {
 
-    $filter= $_SESSION['glpi_user_filter'];
+    $filter = session::get('glpi_user_filter');
 
     $base = $filter['base'];
     $regex= $filter['users_regex'];

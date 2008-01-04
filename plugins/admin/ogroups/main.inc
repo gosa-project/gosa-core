@@ -23,7 +23,7 @@ if (!$remove_lock){
   if (!session::is_set('ogroup') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
     $_SESSION['ogroup']= new ogroupManagement ($config);
   }
-  $ogroup= $_SESSION['ogroup'];
+  $ogroup = session::get('ogroup');
 
   /* Execute formular */
   $ogroup->save_object();

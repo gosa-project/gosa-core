@@ -85,12 +85,12 @@ class ogroup extends plugin
     register_global("ogfilter", $ogfilter);
   
     if(session::is_set('CurrentMainBase')){
-     $this->base = $_SESSION['CurrentMainBase'];
+     $this->base  = session::get('CurrentMainBase');
     }
 
     /* Set base */
     if ($this->dn == "new"){
-      $this->base= $_SESSION['CurrentMainBase'];
+      $this->base = session::get('CurrentMainBase');
     } else {
       $this->base= preg_replace("/^[^,]+,".get_groups_ou()."/","",$this->dn);
     }

@@ -35,7 +35,7 @@ if (!$remove_lock){
     $_SESSION['scalixAccount']->set_acl_base($ui->dn);
     $_SESSION['scalixAccount']->set_acl_category("users");
   }
-  $scalixAccount= $_SESSION['scalixAccount'];
+  $scalixAccount = session::get('scalixAccount');
 
   /* save changes back to object */
   if (session::is_set('edit')){

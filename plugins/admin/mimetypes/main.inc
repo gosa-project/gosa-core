@@ -20,7 +20,7 @@
 
 if ($remove_lock){
 		if(session::is_set('MimeTypeManagement')){
-				$MimeTypeManagement= $_SESSION['MimeTypeManagement'];
+				$MimeTypeManagement = session::get('MimeTypeManagement');
 				$MimeTypeManagement->remove_lock();
 				del_lock ($ui->dn);
 				sess_del ('MimeTypeManagement');
@@ -33,7 +33,7 @@ if ($remove_lock){
 		}
 
 		/* Get object */
-		$MimeTypeManagement= $_SESSION['MimeTypeManagement'];
+		$MimeTypeManagement = session::get('MimeTypeManagement');
 		$MimeTypeManagement->save_object();
 		$output= $MimeTypeManagement->execute();
 

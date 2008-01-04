@@ -1,7 +1,7 @@
 <?php
 if ($remove_lock){
         if(session::is_set('blocklist')){
-                $blocklist= $_SESSION['blocklist'];
+                $blocklist = session::get('blocklist');
                 del_lock ($ui->dn);
                 sess_del ('blocklist');
         }
@@ -11,7 +11,7 @@ if ($remove_lock){
 		$_SESSION['blocklist']= new blocklist($config, $ui);
 	 	$_SESSION['blocklist']->set_acl_category("gofaxlist");
 	}
-	$blocklist= $_SESSION['blocklist'];
+	$blocklist = session::get('blocklist');
 	$blocklist->save_object();
 	$output= $blocklist->execute();
 

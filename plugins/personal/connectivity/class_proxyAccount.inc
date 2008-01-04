@@ -61,7 +61,7 @@ class proxyAccount extends plugin
         $smarty->assign($val."state", "");
       } else {
         $smarty->assign("filter$val", "");
-        if($_SESSION['js']==1){
+        if(session::get('js')==1){
           $smarty->assign($val."state", "disabled");
         }else{
           $smarty->assign($val."state", "");

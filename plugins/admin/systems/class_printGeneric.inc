@@ -107,7 +107,7 @@ class printgeneric extends plugin
 
       if(!isset($this->config->idepartments[$this->base])){
         print_red(_("Can't extract a valid base out of object dn, setting base to '%s'."),$_SESSION['CurrentMainBase']);
-        $this->base = $_SESSION['CurrentMainBase'];
+        $this->base  = session::get('CurrentMainBase');
       }
     }
 

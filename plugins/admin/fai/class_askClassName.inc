@@ -39,7 +39,7 @@ class askClassName extends plugin
     /* The faifilter contais 
      * The base for all fai objects 
      */
-    $faifilter = $_SESSION['faifilter'];
+    $faifilter  = session::get('faifilter');
 
     /* First search for every ou, in given fai base
      * With a second search detect all object that belong to the different ous. 

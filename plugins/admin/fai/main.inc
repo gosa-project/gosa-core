@@ -20,7 +20,7 @@
 
 if ($remove_lock){
         if(session::is_set('FAI')){
-                $FAI= $_SESSION['FAI'];
+                $FAI = session::get('FAI');
                 $FAI->remove_lock();
                 del_lock ($ui->dn);
                 sess_del ('FAI');
@@ -32,7 +32,7 @@ if ($remove_lock){
 		$_SESSION['FAI']->set_acl_category("fai");
 		$_SESSION['FAI']->set_acl_base($_SESSION['CurrentMainBase']);
 	}
-	$FAI= $_SESSION['FAI'];
+	$FAI = session::get('FAI');
 	$FAI->save_object();
 	$output= $FAI->execute();
 

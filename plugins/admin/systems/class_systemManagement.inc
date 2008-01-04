@@ -755,7 +755,7 @@ class systems extends plugin
          */
 
         if(session::is_set('SelectedSystemType')){
-          $SelectedSystemType= $_SESSION['SelectedSystemType'];
+          $SelectedSystemType = session::get('SelectedSystemType');
           if($SelectedSystemType['ogroup'] != "none"){
             $og = new ogroup($this->config,$SelectedSystemType['ogroup']);
             if($og){

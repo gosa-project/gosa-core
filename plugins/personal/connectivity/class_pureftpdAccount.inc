@@ -92,7 +92,7 @@ class pureftpdAccount extends plugin
         $smarty->assign("fstate", "");
       } else {
         $smarty->assign("pureftpdState", "");
-        if($_SESSION['js']==1){
+        if(session::get('js')==1){
           if($this->acl!="#none#")
             $smarty->assign("fstate", "disabled");
         }else{

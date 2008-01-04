@@ -20,7 +20,7 @@
 
 if ($remove_lock){
   if(session::is_set('groupManagement')){
-    $groupManagement= $_SESSION['groupManagement'];
+    $groupManagement = session::get('groupManagement');
     $groupManagement->remove_lock();
     del_lock ($ui->dn);
     sess_del ('groupManagement');
@@ -30,7 +30,7 @@ if ($remove_lock){
   if (!session::is_set('groupManagement') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
     $_SESSION['groupManagement']= new groupManagement ($config, $_SESSION['ui']);
   }
-  $groupManagement= $_SESSION['groupManagement'];
+  $groupManagement = session::get('groupManagement');
   $groupManagement->save_object();
   $output= $groupManagement->execute();
 

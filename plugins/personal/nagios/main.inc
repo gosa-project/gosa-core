@@ -37,7 +37,7 @@ if (!$remove_lock){
     $_SESSION['nagiosAccount']->set_acl_base($ui->dn);
     $_SESSION['nagiosAccount']->set_acl_category("users");
   }
-  $nagiosAccount= $_SESSION['nagiosAccount'];
+  $nagiosAccount = session::get('nagiosAccount');
 
   /* save changes back to object */
   if (session::is_set('edit')){

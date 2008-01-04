@@ -16,7 +16,7 @@ class blocklist extends plugin
     $this->ui     = $ui;
     $this->dn     = "";
     $this->config = &$config;
-    $this->base = $_SESSION['CurrentMainBase']; 
+    $this->base  = session::get('CurrentMainBase'); 
     $this->DivListBlocklist = new divListBlocklist($this->config,$this);
 
     /* Initialize copy&paste queue */

@@ -20,7 +20,7 @@
 
 if ($remove_lock){
 		if(session::is_set('DeviceManagement')){
-				$DeviceManagement= $_SESSION['DeviceManagement'];
+				$DeviceManagement = session::get('DeviceManagement');
 				$DeviceManagement->remove_lock();
 				del_lock ($ui->dn);
 				sess_del ('DeviceManagement');
@@ -33,7 +33,7 @@ if ($remove_lock){
 		}
 
 		/* Get object */
-		$DeviceManagement= $_SESSION['DeviceManagement'];
+		$DeviceManagement = session::get('DeviceManagement');
 		$DeviceManagement->save_object();
 		$output= $DeviceManagement->execute();
 

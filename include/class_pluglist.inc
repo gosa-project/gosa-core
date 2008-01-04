@@ -169,7 +169,7 @@ class pluglist {
 
 						$entries= $entries."<p class=\"menuitem\" ".
 							"onClick='return question(\""._("You are currently editing a database entry. Do you want to dismiss the changes?")."\", \"$href\");'>";
-						if($_SESSION['js']){
+						if(session::get('js')){
 							$entries.= _($plHeadline)."</p>\n";
 						} else {
 							$entries.= "<a class=\"menuitem\" ".
@@ -179,7 +179,7 @@ class pluglist {
 
 						/* Generate icon entry with description */
 						$current= '<table summary=\"\" class="menuitem" onClick=\'location.href="'.$href.'"\'><tr><td style="background-color:#F0F0F0;"><a href="'.$href.'"><img alt=\"\" border=0 src="'.$image.'"></a></td><td style="width:100%; vertical-align:top; text-align:justify; padding-left:10px;">';
-						if($_SESSION['js']){
+						if(session::get('js')){
 							$current.= '<b>'._($plHeadline).'</b><br>'._($plDescription);
 						} else {
 							$current.= '<a href="'.$href.'"><b>'._($plHeadline).'</b></a><br><a href="'.$href.'">'._($plDescription).'</a>';
@@ -287,7 +287,7 @@ class pluglist {
 						}
 						$entries= $entries."<td class=\"iconmenu\" style=\"width:20%;\" onClick='location.href=\"".$href."\"'".
 							">";
-							if($_SESSION['js']){
+							if(session::get('js')){
 								$entries.= "<img $isize border=0 align=middle src=\"$image".
 									"\" alt=\"*\">&nbsp;".
 									_($plHeadline);

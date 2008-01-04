@@ -19,7 +19,7 @@ class hotplugDialog extends plugin
   {
     $this->skipThese  = $skipThese;
     $this->config     = $config;
-    $this->depselect  = $_SESSION['CurrentMainBase'];
+    $this->depselect   = session::get('CurrentMainBase');
   }
 
   function execute()

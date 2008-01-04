@@ -60,7 +60,7 @@ class faiTemplateEntry extends plugin
     if(!empty($this->dn) && $this->dn != "new"){
       $ldap = $this->config->get_ldap_link();
       session::set('binary',$ldap->get_attribute($this->dn,"FAItemplateFile"));
-      $this->FAItemplateFile = $_SESSION['binary'];
+      $this->FAItemplateFile  = session::get('binary');
     }
     
     $this->FAImode= sprintf("%0.4s", $this->FAImode)." ";

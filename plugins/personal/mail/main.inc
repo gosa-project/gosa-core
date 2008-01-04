@@ -36,7 +36,7 @@ if (!$remove_lock){
     $_SESSION['mailAccount']->set_acl_base($ui->dn);
     $_SESSION['mailAccount']->set_acl_category("users");
   }
-  $mailAccount= $_SESSION['mailAccount'];
+  $mailAccount = session::get('mailAccount');
 
   /* save changes back to object */
   if (session::is_set('edit')){

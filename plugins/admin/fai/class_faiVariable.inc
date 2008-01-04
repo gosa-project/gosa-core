@@ -95,7 +95,7 @@ class faiVariable extends plugin
   {
     if($dn == "new"){
       if($this->dn == "new"){
-        $dn= $_SESSION['CurrentMainBase'];
+        $dn = session::get('CurrentMainBase');
       }else{
         $dn = $this->dn;
       }

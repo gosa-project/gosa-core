@@ -527,11 +527,11 @@ class posixAccount extends plugin
     /* Checkboxes */
     if ($this->force_ids == 1){
       $smarty->assign("force_ids", "checked");
-      if ($_SESSION['js']){
+      if (session::get('js')){
         $smarty->assign("forceMode", "");
       }
     } else {
-      if ($_SESSION['js']){
+      if (session::get('js')){
         $smarty->assign("forceMode", "disabled");
       }
       $smarty->assign("force_ids", "");
@@ -557,7 +557,7 @@ class posixAccount extends plugin
         $smarty->assign("use_".$val,FALSE);
       }
 
-      if(($_SESSION["js"])&&(($val=="uidNumber")||($val=="gidNumber")))
+      if((session::get("js"))&&(($val=="uidNumber")||($val=="gidNumber")))
       {
         $smarty->assign("$val"."ACL",$this->getacl($val,$SkipWrite));
         $smarty->assign("$val", $this->$val);
@@ -1284,7 +1284,7 @@ class posixAccount extends plugin
   function reload()
   {
     /* Set base for all searches */
-    $base     = $_SESSION['CurrentMainBase'];
+    $base      = session::get('CurrentMainBase');
     $base     = $base;
     $ldap     = $this->config->get_ldap_link();    
     $attrs    =  array("cn", "description", "gidNumber");
@@ -1364,11 +1364,11 @@ class posixAccount extends plugin
     if(!$this->is_account) return("");
     if ($this->force_ids == 1){
       $force_ids = "checked";
-      if ($_SESSION['js']){
+      if (session::get('js')){
         $forceMode = "";
       }
     } else {
-      if ($_SESSION['js']){
+      if (session::get('js')){
         if($this->acl != "#none#")
           $forceMode ="disabled";
       }

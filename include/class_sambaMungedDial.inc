@@ -302,7 +302,7 @@ class sambaMungedDial
   function getOnDemandFlags ()
   {
   	$result= array();
-  	if ($_SESSION["js"]){
+  	if (session::get("js")){
   		foreach ($this->timeParams as $value) {
   			if (!isset($this->ctx[$value]) || (isset($this->ctx[$value]) && $this->ctx[$value] == 0)) {
   				$result[$value."Mode"]= "disabled";

@@ -75,7 +75,7 @@ class department extends plugin
 		if ($this->dn == "new"){
 			$ui= get_userinfo();
 			if(session::is_set('CurrentMainBase')){
-				$this->base= $_SESSION['CurrentMainBase'];
+				$this->base = session::get('CurrentMainBase');
 			}else{
 				$this->base= dn2base($ui->dn);
 			}

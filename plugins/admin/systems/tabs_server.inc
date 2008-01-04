@@ -56,7 +56,7 @@ class servtabs extends tabs
     tabs::save(FALSE);
 
     /* Reload server settings after saving */
-    $config= $_SESSION['config'];
+    $config = session::get('config');
     $config->load_servers();
     session::set('config',$config);
 

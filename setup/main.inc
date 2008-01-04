@@ -22,7 +22,7 @@
 if (!session::is_set('setup') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
   $_SESSION['setup']= new setup ();
 }
-$setup= $_SESSION['setup'];
+$setup = session::get('setup');
 
 /* Execute formular */
 $setup->save_object();

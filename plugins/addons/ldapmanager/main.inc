@@ -24,7 +24,7 @@ if (!$remove_lock){
 		$_SESSION['ldif']= new ldif ($config);
 		$_SESSION['ldif']->set_acl_category("logview");
 	}
-	$ldif= $_SESSION['ldif'];
+	$ldif = session::get('ldif');
 
 	/* Execute formular */
 	$display= $ldif->execute ();

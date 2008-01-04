@@ -31,7 +31,7 @@ if (!$remove_lock){
 			$_SESSION['mailqueue']->set_acl_base($ui->dn);
 		}
 	}
-	$mailqueue= $_SESSION['mailqueue'];
+	$mailqueue = session::get('mailqueue');
 
 	/* Execute formular */
 	$mailqueue->save_object();

@@ -34,7 +34,7 @@ if (!$remove_lock){
     $_SESSION['environment']->set_acl_category('users');
     $_SESSION['environment']->set_acl_base($ui->dn);
   }
-  $environment= $_SESSION['environment'];
+  $environment = session::get('environment');
 
   /* save changes back to object */
   if (session::is_set('edit')){

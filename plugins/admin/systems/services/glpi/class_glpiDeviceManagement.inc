@@ -250,7 +250,7 @@ class glpiDeviceManagement extends plugin
       src='images/fai_template.png' title='"._("New misc device")."' alt='"._("OC")."' name='new_pci'>&nbsp;".
       "</div>";
     
-    $filter= $_SESSION['glpiDeviceRegex'];
+    $filter = session::get('glpiDeviceRegex');
     $smarty->assign("devicehead", $listhead);
     $smarty->assign("devices", $divlist->DrawList());
     $smarty->assign("search_image", get_template_path('images/search.png'));

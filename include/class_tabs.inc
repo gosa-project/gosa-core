@@ -179,7 +179,7 @@ class tabs
         $notify= "";
       }
 
-      if ($_SESSION['js']==FALSE){	
+      if (session::get('js')==FALSE){	
         $display.= "<div ".$notify." class=\"$style[$index]\"><input type=\"submit\" name=\"$class\"".
           " class=\"$style[$index]\" value=\"$title\"";
       } else {			 

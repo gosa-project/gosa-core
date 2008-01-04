@@ -5,7 +5,7 @@ if (!$remove_lock){
 	if (!session::is_set('faxreport') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 		$_SESSION['faxreport']= new faxreport ($config, $ui);
 	}
-	$faxreport= $_SESSION['faxreport'];
+	$faxreport = session::get('faxreport');
 
 	/* Execute formular */
 	$faxreport->save_object();

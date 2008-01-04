@@ -20,7 +20,7 @@
 
 if ($remove_lock){
         if(session::is_set('macl')){
-                $macl= $_SESSION['macl'];
+                $macl = session::get('macl');
                 $macl->remove_lock();
                 del_lock ($ui->dn);
                 sess_del ('macl');
@@ -32,7 +32,7 @@ if ($remove_lock){
 if (!session::is_set('macl') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 	$_SESSION['macl']= new aclManagement($config, $ui);
 	}
-	$macl= $_SESSION['macl'];
+	$macl = session::get('macl');
 	
 	/* Show and save dialog */
 	$macl->save_object();

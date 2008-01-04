@@ -20,7 +20,7 @@
 
 if ($remove_lock){
         if(session::is_set('systems')){
-                $systems= $_SESSION['systems'];
+                $systems = session::get('systems');
                 $systems->remove_lock();
                 del_lock ($ui->dn);
                 sess_del ('systems');
@@ -30,7 +30,7 @@ if ($remove_lock){
 	if (!session::is_set('systems') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 		$_SESSION['systems']= new systems($config, $ui);
 	}
-	$systems= $_SESSION['systems'];
+	$systems = session::get('systems');
 	$systems->save_object();
 	$output= $systems->execute();
 

@@ -65,7 +65,7 @@ class faiProfile extends plugin
     }
     
     /* Get ldap connection */ 
-    $base = $_SESSION['CurrentMainBase'];
+    $base  = session::get('CurrentMainBase');
     $ldap->cd($base);
     $sort = array();
 
@@ -129,7 +129,7 @@ class faiProfile extends plugin
   {
     if($dn == "new"){
       if($this->dn == "new"){
-        $dn= $_SESSION['CurrentMainBase'];
+        $dn = session::get('CurrentMainBase');
       }else{
         $dn = $this->dn;
       }
@@ -407,7 +407,7 @@ class faiProfile extends plugin
 
     $base = $_SESSION['faifilter']['branch'];
     if($base == "main"){
-      $base =$_SESSION['CurrentMainBase'];
+      $base  = session::get('CurrentMainBase');
     }
     $base = get_ou('faiprofileou').$base;
   

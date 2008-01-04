@@ -631,7 +631,7 @@ class acl extends plugin
       $currentAcl= $this->aclContents[$key];
 
       /* Object header */
-      if($_SESSION['js']) {
+      if(session::get('js')) {
         if(isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) {
           $display.= "\n<table style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>".
                      "\n  <tr>".
@@ -689,7 +689,7 @@ class acl extends plugin
       $cnt= 1;
       $splist= $plist[preg_replace('%^.*/%', '', $key)]['plProvidedAcls'];
       asort($splist);
-      if($_SESSION['js']) {
+      if(session::get('js')) {
         if(isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) {
           $display.= "\n  <tr id='tr_".preg_replace("/[^a-z0-9]/i","_",$name)."' style='vertical-align:top;height:0px;'>".
                      "\n    <td colspan=".$cols.">".
@@ -739,7 +739,7 @@ class acl extends plugin
        $display.= str_repeat("\n    <td style='border-top:1px solid #A0A0A0; width:".(int)(100/$cols)."%'>&nbsp;</td>", $cols-$cnt); 
       }
 
-      if($_SESSION['js']) {
+      if(session::get('js')) {
         if(isset($_SERVER['HTTP_USER_AGENT']) && (preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) || (preg_match("/ie/i",$_SERVER['HTTP_USER_AGENT']))) {
           $display.= "\n        </table>".
                      "\n      </div>".

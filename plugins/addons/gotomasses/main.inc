@@ -38,7 +38,7 @@ if (!$remove_lock){
 	
 	
 	}
-	$gotomasses= $_SESSION['gotomasses'];
+	$gotomasses = session::get('gotomasses');
 
 	/* Execute formular */
 	$display= $gotomasses->save_object();

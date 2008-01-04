@@ -105,7 +105,7 @@ class faiProfileEntry extends plugin
     $smarty     = get_smarty();
     $display = "";
 
-    $SUBfaifilter = $_SESSION['SUBfaifilter'];
+    $SUBfaifilter  = session::get('SUBfaifilter');
 
     /* If someone used the apply button, update searchfilter */
     if(isset($_POST['Sregex'])){

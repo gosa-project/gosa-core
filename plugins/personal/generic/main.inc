@@ -38,7 +38,7 @@ if (!$remove_lock){
     $_SESSION['user']->set_acl_base($ui->dn);
     $_SESSION['user']->set_acl_category("users");
   }
-  $user= $_SESSION['user'];
+  $user = session::get('user');
 
   /* save changes back to object */
   if (session::is_set('edit')){

@@ -1,7 +1,7 @@
 <?php
    if ($remove_lock) {
      if (session::is_set('dfsManagment')) {
-       $dfsManagment = $_SESSION['dfsManagment'];
+       $dfsManagment  = session::get('dfsManagment');
        $dfsManagment->remove_lock();
        del_lock($ui->dn);
        sess_del('dfsManagment');
@@ -12,7 +12,7 @@
         (isset($_GET['reset']) && $_GET['reset'] == 1)) {
        $_SESSION['dfsManagment'] = new dfsManagment($config, $_SESSION['ui']);
      }
-     $dfsManagment = $_SESSION['dfsManagment'];
+     $dfsManagment  = session::get('dfsManagment');
      $output = $dfsManagment->execute();
 
      # do we have to reset

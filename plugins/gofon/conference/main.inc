@@ -20,7 +20,7 @@
 
 if ($remove_lock){
         if(session::is_set('conference')){
-                $conference= $_SESSION['conference'];
+                $conference = session::get('conference');
                 $conference->remove_lock();
                 del_lock ($ui->dn);
                 sess_del ('conference');
@@ -30,7 +30,7 @@ if ($remove_lock){
 	if (!session::is_set('conference') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 		$_SESSION['conference']= new phoneConferenceManagment($config, $ui);
 	}
-	$conference= $_SESSION['conference'];
+	$conference = session::get('conference');
 	$conference->save_object();
 	$output= $conference->execute();
 

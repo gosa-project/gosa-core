@@ -20,7 +20,7 @@
 
 if ($remove_lock){
         if(session::is_set('department')){
-                $department= $_SESSION['department'];
+                $department = session::get('department');
                 $department->remove_lock();
                 del_lock ($ui->dn);
                 sess_del ('department');
@@ -30,7 +30,7 @@ if ($remove_lock){
 	if (!session::is_set('department') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 		$_SESSION['department']= new departmentManagement($config, $ui);
 	}
-	$department= $_SESSION['department'];
+	$department = session::get('department');
 	
 	/* Show and save dialog */
 	$department->save_object();

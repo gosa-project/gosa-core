@@ -552,7 +552,7 @@ class sambaAccount extends plugin
       $smarty->assign("brokenconnmode", $this->mungedObject->getBrokenConn());
       $smarty->assign("reconnmode", $this->mungedObject->getReConn());
 
-      if($_SESSION['js']){
+      if(session::get('js')){
         /* Set form elements to disabled/enable state */
         $smarty->assign("tsloginstate", $this->mungedObject->getTsLogin()?"":"disabled");
 

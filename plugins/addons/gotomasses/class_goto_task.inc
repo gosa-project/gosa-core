@@ -253,7 +253,7 @@ class goto_task extends plugin
     $smarty->assign("configure_dns", $this->configure_dns);
 
     $tmp = $this->get_array_values();
-    $smarty->assign("JS"      , $_SESSION['js']);
+    $smarty->assign("JS"      , session::get('js'));
     $smarty->assign("Minutes" , $tmp['Minute']);
     $smarty->assign("Hours"   , $tmp['Hour']);
     $smarty->assign("Days"    , $tmp['Day']);

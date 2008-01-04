@@ -326,7 +326,7 @@ class mailgroup extends plugin
       $smarty->assign($name."ACL",$this->getacl($name));
     }
 
-    if ($_SESSION['js']==FALSE){
+    if (session::get('js')==FALSE){
       $smarty->assign("javascript", "false");
     } else {
       $smarty->assign("javascript", "true");
@@ -656,7 +656,7 @@ class mailgroup extends plugin
     if(isset($this->config->current['MAILMETHOD'])&&preg_match("/olab/i",$this->config->current['MAILMETHOD'])){
 
       $smarty->assign("kolab", TRUE);
-      $smarty->assign("JS",$_SESSION['js']);
+      $smarty->assign("JS",session::get('js'));
       $smarty->assign("kolabFolderType_Types",    array (   ''      => _('Unspecified'),  'mail' => _('Mails'),
                                                             'task'  => _('Tasks') ,       'journal' => _('Journals'),
                                                             'calendar' => _('Calendar'),       'contact' => _('Contacts'), 

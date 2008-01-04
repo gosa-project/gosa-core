@@ -42,7 +42,7 @@ if (!$remove_lock){
       $_SESSION['connectivity']->plugin[$name]->set_acl_base($ui->dn);
     }
   }
-  $connectivity= $_SESSION['connectivity'];
+  $connectivity = session::get('connectivity');
 
   /* save changes back to object */
   if (session::is_set('edit')){

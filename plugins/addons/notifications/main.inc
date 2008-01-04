@@ -31,7 +31,7 @@ if (!$remove_lock){
                         $_SESSION['msgplug']->set_acl_base($ui->dn);
                 }
         }
-	$msgplug= $_SESSION['msgplug'];
+	$msgplug = session::get('msgplug');
 
 	/* save changes back to object */
 	if (isset ($_POST['target'])){

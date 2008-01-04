@@ -55,7 +55,7 @@ class blocklistGeneric extends plugin
     /* Set base */
     if ($this->dn == "new"){
       if(session::is_set('CurrentMainBase')){
-        $this->base= $_SESSION['CurrentMainBase'];
+        $this->base = session::get('CurrentMainBase');
       }else{
         $ui= get_userinfo();
         $this->base= dn2base($ui->dn);
@@ -333,7 +333,7 @@ class blocklistGeneric extends plugin
     /* Set base */
     if ($this->dn == "new"){
       if(session::is_set('CurrentMainBase')){
-        $this->base= $_SESSION['CurrentMainBase'];
+        $this->base = session::get('CurrentMainBase');
       }else{
         $ui= get_userinfo();
         $this->base= dn2base($ui->dn);

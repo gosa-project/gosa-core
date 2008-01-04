@@ -39,7 +39,7 @@ class aclrole extends acl
     plugin::plugin($config, $dn);
 
     if($this->dn == "new"){
-      $this->base = $_SESSION['CurrentMainBase'];
+      $this->base  = session::get('CurrentMainBase');
     }else{
       $this->base = preg_replace("/^[^,]+,[^,]+,/","",$this->dn);
       new log("view","aclroles/".get_class($this),$this->dn);

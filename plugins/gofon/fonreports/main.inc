@@ -5,7 +5,7 @@ if (!$remove_lock){
 	if (!session::is_set('fonreport') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 		$_SESSION['fonreport']= new fonreport ($config, $ui);
 	}
-	$fonreport= $_SESSION['fonreport'];
+	$fonreport = session::get('fonreport');
 
 	/* Execute formular */
 	$fonreport->save_object();

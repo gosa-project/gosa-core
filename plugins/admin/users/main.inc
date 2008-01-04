@@ -20,7 +20,7 @@
 
 if ($remove_lock){
   if(session::is_set('userManagement')){
-    $userManagement= $_SESSION['userManagement'];
+    $userManagement = session::get('userManagement');
     $userManagement->remove_lock();
     del_lock ($ui->dn);
     sess_del ('userManagement');
@@ -32,7 +32,7 @@ if ($remove_lock){
     $_SESSION['userManagement']= new userManagement ($config, $_SESSION['ui']);
     $_SESSION['userManagement']->set_acl_category("users");
   }
-  $userManagement= $_SESSION['userManagement'];
+  $userManagement = session::get('userManagement');
   $userManagement->save_object();
   $output= $userManagement->execute();
 

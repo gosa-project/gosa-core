@@ -114,7 +114,7 @@ class MultiSelectWindow{
 		$this->CloseButtonString	= _("Close");
 		$this->filterName			= $filterName;
     $this->ui = get_userinfo();
-		$this->selectedBase = $_SESSION['CurrentMainBase'];
+		$this->selectedBase  = session::get('CurrentMainBase');
 
     /* Check default values for SaveAdditionalVars */
     $MultiDialogFilters = session::get('MultiDialogFilters');
@@ -660,7 +660,7 @@ class MultiSelectWindow{
 			if(!session::is_set('CurrentMainBase')){
 				session::set('CurrentMainBase',$this->config->current['BASE']);
 			}
-			$base = $_SESSION['CurrentMainBase'];
+			$base  = session::get('CurrentMainBase');
 		}
 
 		/* Create ldap obj and switch into base*/

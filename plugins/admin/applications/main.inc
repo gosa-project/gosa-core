@@ -20,7 +20,7 @@
 
 if ($remove_lock){
         if(session::is_set('applicationManagement')){
-                $applicationManagement= $_SESSION['applicationManagement'];
+                $applicationManagement = session::get('applicationManagement');
                 $applicationManagement->remove_lock();
                 del_lock ($ui->dn);
                 sess_del ('applicationManagement');
@@ -30,7 +30,7 @@ if ($remove_lock){
 	if (!session::is_set('applicationManagement') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 		$_SESSION['applicationManagement']= new applicationManagement ($config, $_SESSION['ui']);
 	}
-	$applicationManagement= $_SESSION['applicationManagement'];
+	$applicationManagement = session::get('applicationManagement');
 	$applicationManagement->save_object();
 	$output= $applicationManagement->execute();
 

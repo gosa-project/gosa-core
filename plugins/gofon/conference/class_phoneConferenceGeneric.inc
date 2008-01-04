@@ -113,7 +113,7 @@ class conference extends plugin
     if ($this->dn == "new"){
       $ui= get_userinfo();
       if(session::is_set('CurrentMainBase')){
-        $this->base = $_SESSION['CurrentMainBase'];
+        $this->base  = session::get('CurrentMainBase');
       }else{
         $this->base= dn2base($ui->dn);
       }
@@ -234,7 +234,7 @@ class conference extends plugin
     $smarty->assign("base_select"  ,$this->base);
 
 
-    if($_SESSION['js']==1){
+    if(session::get('js')==1){
       if($this->goFonConferenceOption_P != "P"){
         $smarty->assign("goFonPINACL", $this->getacl("goFonPIN",TRUE));
         $smarty->assign("goFonPIN","");

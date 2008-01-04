@@ -43,7 +43,7 @@ class glpiPrinterCartridges extends plugin
     plugin::execute();
     $display ="";
     $smarty = get_smarty();
-    $filter = $_SESSION['glpiCartridgeRegex'];
+    $filter  = session::get('glpiCartridgeRegex');
 
     /* Filter settings, remove double* */
     if(isset($_GET['search'])){
@@ -212,7 +212,7 @@ class glpiPrinterCartridges extends plugin
       "</div>";
 
     /* Tell smarty some vars */
-    $filter= $_SESSION['glpiCartridgeRegex'];
+    $filter = session::get('glpiCartridgeRegex');
     $smarty->assign("devicehead", $listhead);
     $smarty->assign("devices", $divlist->DrawList());
     $smarty->assign("search_image", get_template_path('images/search.png'));

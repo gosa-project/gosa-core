@@ -20,7 +20,7 @@
 
 if ($remove_lock){
   if(session::is_set('macroManagement')){
-    $macroManagment= $_SESSION['macroManagment'];
+    $macroManagment = session::get('macroManagment');
     $macroManagment->remove_lock();
     del_lock ($ui->dn);
     sess_del ('macroManagment');
@@ -33,7 +33,7 @@ if ($remove_lock){
   }
 
   /* Get object */
-  $macroManagment= $_SESSION['macroManagment'];
+  $macroManagment = session::get('macroManagment');
   $macroManagment->save_object();
   $output= $macroManagment->execute();
 

@@ -36,7 +36,7 @@ if (!$remove_lock){
 		$_SESSION['phoneAccount']->set_acl_base($ui->dn);
 		$_SESSION['phoneAccount']->set_acl_category("users");
 	}
-	$phoneAccount= $_SESSION['phoneAccount'];
+	$phoneAccount = session::get('phoneAccount');
 
 	/* save changes back to object */
 	if (session::is_set('edit')){
