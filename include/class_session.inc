@@ -41,7 +41,7 @@ class session {
 		$_SESSION[$name] = $value;
 	}
 
-	public static function get($name)
+	public static function &get($name)
 	{
 		$ret = &$_SESSION[$name];
 		return($ret);
@@ -86,7 +86,8 @@ class session {
 
 	public static function &get_all()
 	{
-		return($_SESSION);
+		$ret = &$_SESSION;
+		return($ret);
 	}
 }
 
