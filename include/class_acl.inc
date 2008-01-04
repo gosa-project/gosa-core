@@ -798,7 +798,7 @@ class acl extends plugin
         break;
       
       default:
-        print_red(sprintf(_("Unkown ACL type '%s'. Don't know how to handle it."), $type));
+        msg_dialog::display(_("Internal error"), sprintf(_("Unkown ACL type '%s'. Don't know how to handle it."), $type), ERROR_DIALOG);
         $a= array();
     }
     return ($a);

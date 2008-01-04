@@ -190,7 +190,7 @@ class userinfo
   function get_permissions($dn, $object, $attribute= "", $skip_write= FALSE)
   {
     /* Push cache answer? */
-    $ACL_CACHE = session::get('ACL_CACHE');
+    $ACL_CACHE = &session::get('ACL_CACHE');
     if (isset($ACL_CACHE["$dn+$object+$attribute"])){
 
       /* Remove write if needed */
@@ -274,9 +274,7 @@ class userinfo
       }
     }
 
-    $ACL_CACHE = session::get('ACL_CACHE');
     $ACL_CACHE["$dn+$object+$attribute"]= $ret;
-    session::set('ACL_CACHE',$ACL_CACHE);
 
     /* Remove write if needed */
     if ($skip_write){
@@ -388,9 +386,8 @@ class userinfo
       }
     }
 
-    $ACL_CACHE = session::get('ACL_CACHE');
+    $ACL_CACHE = &session::get('ACL_CACHE');
     $ACL_CACHE['MODULE_DEPARTMENTS'][serialize($module)] = $deps;
-    session::set('ACL_CACHE',$ACL_CACHE);
     return ($deps);
   }
 
