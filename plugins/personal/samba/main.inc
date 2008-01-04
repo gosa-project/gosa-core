@@ -31,7 +31,7 @@ if (!$remove_lock){
   }
 
   /* Create sambaAccount object on demand */
-  if (!isset($_SESSION['sambaAccount']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+  if (!session::is_set('sambaAccount') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
     $_SESSION['sambaAccount']= new sambaAccount ($config, $ui->dn);
     $_SESSION['sambaAccount']->enable_CSN_check();
     $_SESSION['sambaAccount']->set_acl_base($ui->dn);

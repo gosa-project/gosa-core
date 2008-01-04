@@ -22,7 +22,7 @@ class askClassName extends plugin
     $this->ui = $ui;
     $this->objectClass = $objectClass;
     plugin::plugin ($config, $dn);
-    if(!isset($_SESSION['CurrentMainBase'])){
+    if(!session::is_set('CurrentMainBase')){
       session::set('CurrentMainBase',$this->config->current['BASE']);
     }
   }

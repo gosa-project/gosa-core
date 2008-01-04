@@ -60,7 +60,7 @@ class macro extends plugin
 
     /* Edit or new one ?*/
     if ($this->dn == "new"){
-      if(isset($_SESSION['CurrentMainBase'])){
+      if(session::is_set('CurrentMainBase')){
         $this->base = $_SESSION['CurrentMainBase'];
       }else{
         $ui= get_userinfo();

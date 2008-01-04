@@ -19,7 +19,7 @@
  */
 
 if ($remove_lock){
-		if(isset($_SESSION['DeviceManagement'])){
+		if(session::is_set('DeviceManagement')){
 				$DeviceManagement= $_SESSION['DeviceManagement'];
 				$DeviceManagement->remove_lock();
 				del_lock ($ui->dn);
@@ -28,7 +28,7 @@ if ($remove_lock){
 } else {
 
 		/* Create DeviceManagement object on demand */
-		if (!isset($_SESSION['DeviceManagement']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+		if (!session::is_set('DeviceManagement') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 				$_SESSION['DeviceManagement']= new deviceManagement ($config);
 		}
 

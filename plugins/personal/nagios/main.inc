@@ -31,7 +31,7 @@ if (!$remove_lock){
   }
 
   /* Create mail object on demand */
-  if (!isset($_SESSION['nagiosAccount']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+  if (!session::is_set('nagiosAccount') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
     $_SESSION['nagiosAccount']= new nagiosAccount ($config, $ui->dn);
     $_SESSION['nagiosAccount']->enable_CSN_check();
     $_SESSION['nagiosAccount']->set_acl_base($ui->dn);

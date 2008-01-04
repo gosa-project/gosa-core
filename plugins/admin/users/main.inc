@@ -19,7 +19,7 @@
  */
 
 if ($remove_lock){
-  if(isset($_SESSION['userManagement'])){
+  if(session::is_set('userManagement')){
     $userManagement= $_SESSION['userManagement'];
     $userManagement->remove_lock();
     del_lock ($ui->dn);
@@ -27,7 +27,7 @@ if ($remove_lock){
   }
 } else {
   /* Create usermanagement object on demand */
-  if (!isset($_SESSION['userManagement']) ||
+  if (!session::is_set('userManagement') ||
      (isset($_GET['reset']) && $_GET['reset'] == 1)){
     $_SESSION['userManagement']= new userManagement ($config, $_SESSION['ui']);
     $_SESSION['userManagement']->set_acl_category("users");

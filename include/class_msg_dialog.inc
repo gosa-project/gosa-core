@@ -23,7 +23,7 @@ class msg_dialog
 			$i_type = INFO_DIALOG;
 		}
 
-		if((!isset($_SESSION['errorsAlreadyPosted'])) || !is_array($_SESSION['errorsAlreadyPosted'])){
+		if((!session::is_set('errorsAlreadyPosted')) || !is_array($_SESSION['errorsAlreadyPosted'])){
 			session::set('errorsAlreadyPosted',array());
 		}
 

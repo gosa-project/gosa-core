@@ -24,7 +24,7 @@ class printerPPDSelectionDialog extends plugin
     $this->header     = $headers;
     $this->depselect  = $this->config->current['BASE'];
     
-    if(!isset($_SESSION['printerPPDSelectionDialog'])){
+    if(!session::is_set('printerPPDSelectionDialog')){
       $_SESSION['printerPPDSelectionDialog']['regex'] = "*";
     }  
 

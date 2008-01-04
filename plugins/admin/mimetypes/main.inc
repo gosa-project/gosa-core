@@ -19,7 +19,7 @@
  */
 
 if ($remove_lock){
-		if(isset($_SESSION['MimeTypeManagement'])){
+		if(session::is_set('MimeTypeManagement')){
 				$MimeTypeManagement= $_SESSION['MimeTypeManagement'];
 				$MimeTypeManagement->remove_lock();
 				del_lock ($ui->dn);
@@ -28,7 +28,7 @@ if ($remove_lock){
 } else {
 
 		/* Create MimeTypeManagement object on demand */
-		if (!isset($_SESSION['MimeTypeManagement']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+		if (!session::is_set('MimeTypeManagement') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 				$_SESSION['MimeTypeManagement']= new mimetypeManagement ($config, $_SESSION['ui']);
 		}
 

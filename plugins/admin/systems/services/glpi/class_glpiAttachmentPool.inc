@@ -28,7 +28,7 @@ class glpiAttachmentPool extends plugin
   function glpiAttachmentPool (&$config, $dn= NULL,$used=NULL)
   {
     plugin::plugin ($config, $dn);
-    if(!isset($_SESSION['GlpiAttachmentFilter'])){
+    if(!session::is_set('GlpiAttachmentFilter')){
       session::set('GlpiAttachmentFilter',array("filter"=>"*"));
     }
 

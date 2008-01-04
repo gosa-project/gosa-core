@@ -29,7 +29,7 @@ class glpiPrinterCartridges extends plugin
 
     /* Assign some basic settings */
     $this->ui = get_userinfo();  
-    if(!isset($_SESSION['glpiCartridgeRegex'])){
+    if(!session::is_set('glpiCartridgeRegex')){
       session::set('glpiCartridgeRegex',"*");
     }
   

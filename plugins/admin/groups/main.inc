@@ -19,7 +19,7 @@
  */
 
 if ($remove_lock){
-  if(isset($_SESSION['groupManagement'])){
+  if(session::is_set('groupManagement')){
     $groupManagement= $_SESSION['groupManagement'];
     $groupManagement->remove_lock();
     del_lock ($ui->dn);
@@ -27,7 +27,7 @@ if ($remove_lock){
   }
 } else {
   /* Create groupManagement object on demand */
-  if (!isset($_SESSION['groupManagement']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+  if (!session::is_set('groupManagement') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
     $_SESSION['groupManagement']= new groupManagement ($config, $_SESSION['ui']);
   }
   $groupManagement= $_SESSION['groupManagement'];

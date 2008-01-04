@@ -1,6 +1,6 @@
 <?php
    if ($remove_lock) {
-     if (isset($_SESSION['dfsManagment'])) {
+     if (session::is_set('dfsManagment')) {
        $dfsManagment = $_SESSION['dfsManagment'];
        $dfsManagment->remove_lock();
        del_lock($ui->dn);
@@ -8,7 +8,7 @@
      }
    } else {
      # create dfsManagment object
-     if (!isset($_SESSION['dfsManagment']) || 
+     if (!session::is_set('dfsManagment') || 
         (isset($_GET['reset']) && $_GET['reset'] == 1)) {
        $_SESSION['dfsManagment'] = new dfsManagment($config, $_SESSION['ui']);
      }

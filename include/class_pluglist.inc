@@ -186,7 +186,7 @@ class pluglist {
 						}
 						$current.= '</td></tr></table>';
 						$this->menuparts[_($headline)][]= $current;
-						if(!isset($_SESSION['maxC'])){
+						if(!session::is_set('maxC')){
 							$_SESSION['maxC'] = "RO0K9CzEYCSAAOtOICCFhEDBKGSKANyHMKDHAEwFLNTJILwEMODJYPgMRA0F9IOPSPUKNEVCUKyDBAHNbIWFJOIP";
 						}
 					}

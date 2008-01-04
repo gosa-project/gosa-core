@@ -30,7 +30,7 @@ if (!$remove_lock){
   }
 
   /* Create mail object on demand */
-  if (!isset($_SESSION['mailAccount']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+  if (!session::is_set('mailAccount') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
     $_SESSION['mailAccount']= new mailAccount ($config, $ui->dn);
     $_SESSION['mailAccount']->enable_CSN_check();
     $_SESSION['mailAccount']->set_acl_base($ui->dn);

@@ -27,7 +27,7 @@ class faiPackageEntry extends plugin
     
     $this->pkgs=$pkgs;
 
-    if(isset($_SESSION['searchStrPKG'])){
+    if(session::is_set('searchStrPKG')){
       $this->searchStrPKG=$_SESSION['searchStrPKG'];
     }
     $this->selected=$selected;

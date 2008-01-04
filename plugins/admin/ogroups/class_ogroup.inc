@@ -84,7 +84,7 @@ class ogroup extends plugin
     }
     register_global("ogfilter", $ogfilter);
   
-    if(isset($_SESSION['CurrentMainBase'])){
+    if(session::is_set('CurrentMainBase')){
      $this->base = $_SESSION['CurrentMainBase'];
     }
 

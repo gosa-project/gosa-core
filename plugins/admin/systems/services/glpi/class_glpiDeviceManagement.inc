@@ -30,7 +30,7 @@ class glpiDeviceManagement extends plugin
   {
     plugin::plugin ($config, $dn);
 
-    if(!isset($_SESSION['glpiDeviceRegex'])){
+    if(!session::is_set('glpiDeviceRegex')){
       $tmp['device_regex'] = "*";
       session::set('glpiDeviceRegex',$tmp);
     }

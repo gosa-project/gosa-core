@@ -19,7 +19,7 @@
  */
 
 if ($remove_lock){
-  if(isset($_SESSION['macroManagement'])){
+  if(session::is_set('macroManagement')){
     $macroManagment= $_SESSION['macroManagment'];
     $macroManagment->remove_lock();
     del_lock ($ui->dn);
@@ -28,7 +28,7 @@ if ($remove_lock){
 } else {
 
   /* Create macroManagment object on demand */
-  if (!isset($_SESSION['macroManagment']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+  if (!session::is_set('macroManagment') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
     $_SESSION['macroManagment']= new goFonMacro ($config, $_SESSION['ui']);
   }
 

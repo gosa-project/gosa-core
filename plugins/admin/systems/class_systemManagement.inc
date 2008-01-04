@@ -754,7 +754,7 @@ class systems extends plugin
          *
          */
 
-        if(isset($_SESSION['SelectedSystemType'])){
+        if(session::is_set('SelectedSystemType')){
           $SelectedSystemType= $_SESSION['SelectedSystemType'];
           if($SelectedSystemType['ogroup'] != "none"){
             $og = new ogroup($this->config,$SelectedSystemType['ogroup']);
@@ -779,7 +779,7 @@ class systems extends plugin
 
         $this->systab->save();
 
-        if(isset($_SESSION['SelectedSystemType'])){
+        if(session::is_set('SelectedSystemType')){
           unset($_SESSION['SelectedSystemType']);
           if(!isset($ldap)){
             $ldap = $this->config->get_ldap_link();
@@ -823,7 +823,7 @@ class systems extends plugin
       session::un_set('objectinfo');
 
       /* Remove ogroup selection, which was set while editing a new incoming entry */
-      if(isset($_SESSION['SelectedSystemType'])){
+      if(session::is_set('SelectedSystemType')){
         unset($_SESSION['SelectedSystemType']);
       }
     }
