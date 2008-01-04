@@ -112,8 +112,8 @@ class workstartup extends plugin
      */
     if($this->fai_activated) {
 
-      $_SESSION['getAvailableClassesForThisRelease_CACHE'] = array();
-      $_SESSION['getAvailableClassesForThisRelease_CACHED_CLASSES'] = array();
+      session::set('getAvailableClassesForThisRelease_CACHE',array());
+      session::set('getAvailableClassesForThisRelease_CACHED_CLASSES',array());
 
       /* Search all FAI objects */
       $ldap->search("(|(objectClass=FAIpackageList)(objectClass=FAItemplate)(objectClass=FAIvariable)(objectClass=FAIscript)(objectClass=FAIhook)(objectClass=FAIprofile)(objectClass=FAIpartitionTable))",array("cn","objectClass","FAIdebianSection",'description'));

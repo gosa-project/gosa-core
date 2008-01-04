@@ -28,7 +28,7 @@ class glpiSelectUser extends plugin
     if(!isset($_SESSION['glpi_user_filter'])){
       $tmp['users_regex'] = "*";
       $tmp['base']       = $this->config->current['BASE'];
-      $_SESSION['glpi_user_filter'] = $tmp;
+      session::set('glpi_user_filter',$tmp);
     }
 
     $this->ui = get_userinfo();  
@@ -97,7 +97,7 @@ class glpiSelectUser extends plugin
       $filter['base']= ($this->config->departments[$entry]); 
     }    
 
-    $_SESSION['glpi_user_filter'] = $filter;
+    session::set('glpi_user_filter',$filter);
 
     $this->reload();
 

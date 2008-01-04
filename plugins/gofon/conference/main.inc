@@ -50,7 +50,7 @@ if ($remove_lock){
 	/* Show and save dialog */
 	$conference->save_object();
 	$display.= $output;
-	$_SESSION['conference']= $conference;
+	session::set('conference',$conference);
 }
 
 ?>

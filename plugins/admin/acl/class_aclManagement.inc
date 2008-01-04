@@ -54,7 +54,7 @@ class aclManagement extends plugin
     /* Call parent execute */
     plugin::execute();
 
-    $_SESSION['LOCK_VARS_TO_USE'] = array("/^list/","/^id_/","/^list_acl_role_del/","/^list_acl_del/");
+    session::set('LOCK_VARS_TO_USE',array("/^list/","/^id_/","/^list_acl_role_del/","/^list_acl_del/"));
 
     $smarty       = get_smarty();                 // Smarty instance
     $s_action     = "";                           // Contains the action to be taken
@@ -192,7 +192,7 @@ class aclManagement extends plugin
         }
 
         /* Set ACL and move DN to the headline */
-        $_SESSION['objectinfo']= $this->dn;
+        session::set('objectinfo',$this->dn);
       }else{
         print_red(_("You are not allowed to edit this acl."));
       }
@@ -297,7 +297,7 @@ class aclManagement extends plugin
         /* Check locking, save current plugin in 'back_plugin', so
            the dialog knows where to return. */
         if (($acl= get_lock($this->dn)) != ""){
-          $_SESSION['LOCK_VARS_TO_USE'] = array("/^list_acl_edit/","/^list_acl_del/","/^id_/");
+          session::set('LOCK_VARS_TO_USE',array("/^list_acl_edit/","/^list_acl_del/","/^id_/"));
           return(gen_locked_message ($acl, $this->dn));
         }
 

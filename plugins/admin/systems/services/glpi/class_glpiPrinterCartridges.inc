@@ -30,7 +30,7 @@ class glpiPrinterCartridges extends plugin
     /* Assign some basic settings */
     $this->ui = get_userinfo();  
     if(!isset($_SESSION['glpiCartridgeRegex'])){
-      $_SESSION['glpiCartridgeRegex'] = "*";
+      session::set('glpiCartridgeRegex',"*");
     }
   
     /* Only display cartridges for this type of printer */
@@ -54,7 +54,7 @@ class glpiPrinterCartridges extends plugin
     if(empty($filter)) {
       $filter = "*";
     }
-    $_SESSION['glpiCartridgeRegex']= $filter;
+    session::set('glpiCartridgeRegex',$filter);
 
     /* Open dialog which allows to edit the manufacturers
      */

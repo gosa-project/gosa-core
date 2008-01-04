@@ -53,13 +53,13 @@ class faiTemplateEntry extends plugin
     $this->group = $this->user[1];
     $this->user = $this->user[0];
 
-    $_SESSION['binary'] = $this->FAItemplateFile;
-    $_SESSION['binarytype'] = 'octet-stream';
+    session::set('binary',$this->FAItemplateFile);
+    session::set('binarytype','octet-stream');
     $_SESSION['binaryfile'] = basename( $this->FAItemplatePath );
 
     if(!empty($this->dn) && $this->dn != "new"){
       $ldap = $this->config->get_ldap_link();
-      $_SESSION['binary'] =$ldap->get_attribute($this->dn,"FAItemplateFile");
+      session::set('binary',$ldap->get_attribute($this->dn,"FAItemplateFile"));
       $this->FAItemplateFile = $_SESSION['binary'];
     }
     
@@ -86,8 +86,8 @@ class faiTemplateEntry extends plugin
           $this->FAItemplatePath = $_FILES['FAItemplateFile']['name'];
         }
 
-        $_SESSION['binary']     = $this->FAItemplateFile;
-        $_SESSION['binarytype'] = 'octet-stream';
+        session::set('binary',$this->FAItemplateFile);
+        session::set('binarytype','octet-stream');
         $_SESSION['binaryfile'] = basename( $this->FAItemplatePath );
       }
     }

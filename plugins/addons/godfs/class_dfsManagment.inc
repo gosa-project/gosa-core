@@ -96,7 +96,7 @@ class dfsManagment extends plugin {
         $this->dfstab = new dfstabs($this->config, $this->config->data['TABS']['DFSTABS'], $this->dn);
         $this->dfstab->set_acl($this->acl);
         $this->dfstab->save_object();
-        $_SESSION['objectinfo']= $this->dn;
+        session::set('objectinfo',$this->dn);
       }
     } 
       

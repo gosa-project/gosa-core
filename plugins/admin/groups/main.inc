@@ -53,7 +53,7 @@ if ($remove_lock){
   }
 
   /* Show and save dialog */
-  $_SESSION['groupManagement']= $groupManagement;
+  session::set('groupManagement',$groupManagement);
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

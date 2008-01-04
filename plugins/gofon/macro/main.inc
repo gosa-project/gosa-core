@@ -55,7 +55,7 @@ if ($remove_lock){
 
   /* Show and save dialog */
   $display.= $output;
-  $_SESSION['macroManagment']= $macroManagment;
+  session::set('macroManagment',$macroManagment);
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

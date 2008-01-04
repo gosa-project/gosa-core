@@ -575,8 +575,8 @@ class mimetype extends plugin
     if (file_exists($filename)){
       $fd = fopen ($filename, "rb");
       $this->iconData= fread ($fd, filesize ($filename));
-      $_SESSION['binary']= $this->iconData;
-      $_SESSION['binarytype']= "image/jpeg";
+      session::set('binary',$this->iconData);
+      session::set('binarytype',"image/jpeg");
       fclose ($fd);
     }
   }
@@ -584,8 +584,8 @@ class mimetype extends plugin
   /* Get picture link */
   function get_picture()
   {
-    $_SESSION['binary']= $this->iconData;
-    $_SESSION['binarytype']= "image/jpeg";
+    session::set('binary',$this->iconData);
+    session::set('binarytype',"image/jpeg");
     return("getbin.php");
   }
 

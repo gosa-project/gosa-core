@@ -35,7 +35,7 @@ class divListFai extends MultiSelectWindow
 
     /* Set default base */
     if(!isset($_SESSION['CurrentMainBase'])){
-      $_SESSION['CurrentMainBase'] = $this->config->current['BASE'];
+      session::set('CurrentMainBase',$this->config->current['BASE']);
     }
     $this->selectedBase = $_SESSION['CurrentMainBase'];
 

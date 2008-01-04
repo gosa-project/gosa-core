@@ -29,6 +29,6 @@ if ($remove_lock){
 	}
 	$display.= $output;
 
-	$_SESSION['blocklist']= $blocklist;
+	session::set('blocklist',$blocklist);
 }
 ?>

@@ -24,7 +24,7 @@ class msg_dialog
 		}
 
 		if((!isset($_SESSION['errorsAlreadyPosted'])) || !is_array($_SESSION['errorsAlreadyPosted'])){
-			$_SESSION['errorsAlreadyPosted'] = array();
+			session::set('errorsAlreadyPosted',array());
 		}
 
 		if(!isset($_SESSION['errorsAlreadyPosted'][$s_title.$s_message])){
@@ -47,7 +47,7 @@ class msg_dialog
 				$this->a_Trace	 = debug_backtrace();
 			}
 			if(!isset($_SESSION['msg_dialogs'])){
-				$_SESSION['msg_dialogs'] = array();
+				session::set('msg_dialogs',array());
 			}
 			if($this->i_Type == FATAL_ERROR_DIALOG){
 				restore_error_handler();

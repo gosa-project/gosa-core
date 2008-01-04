@@ -49,7 +49,7 @@ if ($remove_lock){
 
 	/* Show and save dialog */
 	$display.= $output;
-	$_SESSION['applicationManagement']= $applicationManagement;
+	session::set('applicationManagement',$applicationManagement);
 }
 
 ?>

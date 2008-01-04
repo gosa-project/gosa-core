@@ -174,7 +174,7 @@ class faiHook extends plugin
         $this->dialog->set_acl_base($this->acl_base_for_current_object($obj['dn']));
         $this->dialog->set_acl_category("fai");
 
-        $_SESSION['objectinfo'] = $obj['dn'];
+        session::set('objectinfo',$obj['dn']);
         $this->dialog->parent = &$this;
         $this->is_dialog=true;
       }
@@ -207,7 +207,7 @@ class faiHook extends plugin
         }
         $this->dialog= new $this->subClassName($this->config,$this->dn,$obj);
         $this->dialog->acl = $this->acl;
-        $_SESSION['objectinfo'] = $obj['dn'];
+        session::set('objectinfo',$obj['dn']);
         $this->dialog->parent = &$this;
         $this->is_dialog=true;
       }

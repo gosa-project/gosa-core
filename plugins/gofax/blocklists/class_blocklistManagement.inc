@@ -31,7 +31,7 @@ class blocklist extends plugin
     /* Call parent execute */
     plugin::execute();
 
-    $_SESSION['LOCK_VARS_TO_USE'] = array("/^goFaxBlocklist_/","/^act$/","/^id$/","/^remove_multiple_blocklists/","/^item_selected/");
+    session::set('LOCK_VARS_TO_USE',array("/^goFaxBlocklist_/","/^act$/","/^id$/","/^remove_multiple_blocklists/","/^item_selected/"));
 
     /***************
       Init vars 
@@ -180,7 +180,7 @@ class blocklist extends plugin
       }else{
         add_lock ($this->dn, $this->ui->dn);
       }
-      $_SESSION['objectinfo']= trim($this->dn);
+      session::set('objectinfo',trim($this->dn));
       $this->dialog = new faxblocktabs($this->config,$this->config->data['TABS']['FAXBLOCKTABS'],$this->dn);
       $this->dialog->set_acl_base($this->dn);
     }    
@@ -277,7 +277,7 @@ class blocklist extends plugin
 
       /* Check locking */
       if (($user= get_lock($this->dn)) != ""){
-        $_SESSION['dn']= $this->dn;
+        session::set('dn',$this->dn);
         return(gen_locked_message($user, $this->dn));
       } else {
 

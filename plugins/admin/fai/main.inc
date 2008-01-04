@@ -49,7 +49,7 @@ if ($remove_lock){
 	}
 	$display.= $output;
 
-	$_SESSION['FAI']= $FAI;
+	session::set('FAI',$FAI);
 }
 
 ?>

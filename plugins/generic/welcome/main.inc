@@ -19,7 +19,7 @@
 */
 
 if (!$remove_lock){
-	$_SESSION['plugin_dir']= dirname(__FILE__);
+	session::set('plugin_dir',dirname(__FILE__));
 	$smarty->assign("iconmenu", $plist->show_iconmenu());
 	$smarty->assign("header", print_header(get_template_path('images/hdd_linux_unmount.png'), sprintf(_("Welcome %s!"), $ui->cn)));
 	$smarty->assign("year", date("Y"));

@@ -1058,7 +1058,7 @@ class acl extends plugin
     /* Refresh users ACLs */
     $ui= get_userinfo();
     $ui->loadACL();
-    $_SESSION['ui']= $ui;
+    session::set('ui',$ui);
   }
 
 

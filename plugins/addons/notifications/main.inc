@@ -46,6 +46,6 @@ if (!$remove_lock){
 	$display= print_header(get_template_path('images/notifications.png'), _("Notifications")).$display;
 
 	/* Store changes  in session */
-	$_SESSION['msgplug']= $msgplug;
+	session::set('msgplug',$msgplug);
 }
 ?>

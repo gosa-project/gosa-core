@@ -272,7 +272,7 @@ function search($arr,$word)
   $result['global']['maxhit'] = 0;
   session::un_set('lastresults');
   unset($_SESSION['parsed_search_keyword']);
-  $_SESSION['parsed_search_keyword']="";
+  session::set('parsed_search_keyword',"");
 
   error_reporting(E_ALL | E_STRICT);
 
@@ -341,7 +341,7 @@ function search($arr,$word)
   }
 
   /* Save result in Session, so we can mark words later, or go back to search, without searching again*/
-  $_SESSION['lastresults'] = $result;
+  session::set('lastresults',$result);
   return($result);
 }
 

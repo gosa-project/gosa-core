@@ -52,6 +52,6 @@ if (!session::is_set('macl') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 	}
 
 	$display.= $output;
-	$_SESSION['macl']= $macl;
+	session::set('macl',$macl);
 }
 ?>

@@ -29,7 +29,7 @@ $setup->save_object();
 $display= $setup->execute();
 
 /* Store changes  in session */
-$_SESSION['setup']= $setup;
+session::set('setup',$setup);
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

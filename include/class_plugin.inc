@@ -239,10 +239,11 @@ class plugin
   function execute()
   {
     /* This one is empty currently. Fabian - please fill in the docu code */
-    $_SESSION['current_class_for_help'] = get_class($this);
+    session::set('current_class_for_help',get_class($this));
 
     /* Reset Lock message POST/GET check array, to prevent perg_match errors*/
-    $_SESSION['LOCK_VARS_TO_USE'] = $_SESSION['LOCK_VARS_USED'] =array();
+    session::set('LOCK_VARS_TO_USE',array());
+    session::set('LOCK_VARS_USED',array());
   }
 
   /*! \brief execute plugin
@@ -1755,10 +1756,11 @@ class plugin
   function multiple_execute()
   {
     /* This one is empty currently. Fabian - please fill in the docu code */
-    $_SESSION['current_class_for_help'] = get_class($this);
+    session::set('current_class_for_help',get_class($this));
 
     /* Reset Lock message POST/GET check array, to prevent perg_match errors*/
-    $_SESSION['LOCK_VARS_TO_USE'] = $_SESSION['LOCK_VARS_USED'] =array();
+    session::set('LOCK_VARS_TO_USE',array());
+    session::set('LOCK_VARS_USED',array());
     
     return("Multiple edit is currently not implemented for this plugin.");
   }

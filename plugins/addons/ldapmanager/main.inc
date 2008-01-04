@@ -34,6 +34,6 @@ if (!$remove_lock){
 	$display= print_header(get_template_path('images/ldif.png'), _("LDAP manager")).$display;
 
 	/* Store changes  in session */
-	$_SESSION['ldif']= $ldif;
+	session::set('ldif',$ldif);
 }
 ?>

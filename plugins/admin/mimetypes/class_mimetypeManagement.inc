@@ -100,7 +100,7 @@ class mimetypeManagement extends plugin
 
     /* These vars will be stored if you try to open a locked mime, 
         to be able to perform your last requests after showing a warning message */
-    $_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^mime_edit_/","/^mime_del_/","/^item_selected/","/^remove_multiple_mimetypes/");
+    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^mime_edit_/","/^mime_del_/","/^item_selected/","/^remove_multiple_mimetypes/"));
 
     $smarty       = get_smarty();             // Smarty instance
     $s_action     = "";                       // Contains the action to proceed
@@ -271,7 +271,7 @@ class mimetypeManagement extends plugin
       /* Register mimetabs to trigger edit dialog */
       $this->mimetabs= new mimetabs($this->config,$this->config->data['TABS']['MIMETABS'], $this->dn,"mimetypes");
       $this->mimetabs->set_acl_base($this->dn);
-      $_SESSION['objectinfo']= $this->dn;
+      session::set('objectinfo',$this->dn);
     }
 
 

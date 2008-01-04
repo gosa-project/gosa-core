@@ -147,7 +147,7 @@ $CHKS = "<input type='hidden' value='chkchange' name='chkchange'><table summary=
       }
     }
 
-    $_SESSION['searchStrPKG']       = $this->searchStrPKG;
+    session::set('searchStrPKG',$this->searchStrPKG);
     $smarty->assign("CHKS"          , $CHKS);
     $smarty->assign("searchStrPKG"  , $this->searchStrPKG);
     $smarty->assign("faihead"       , "");

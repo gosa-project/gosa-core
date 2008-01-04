@@ -62,7 +62,7 @@ class phoneConferenceManagment extends plugin
     /* Call parent execute */
     plugin::execute();
 
-    $_SESSION['LOCK_VARS_TO_USE'] = array("/^id$/","/^act$/","/^conference_/","/^item_selected/","/^remove_multiple_conferences/");
+    session::set('LOCK_VARS_TO_USE',array("/^id$/","/^act$/","/^conference_/","/^item_selected/","/^remove_multiple_conferences/"));
 
     /***************
       Variable initialisation
@@ -250,7 +250,7 @@ class phoneConferenceManagment extends plugin
 
         /* Check locking */
         if (($conf= get_lock($this->dn)) != ""){
-          $_SESSION['dn']= $this->dn;
+          session::set('dn',$this->dn);
           return(gen_locked_message($conf, $this->dn));
         } else {
           add_lock ($this->dn, $this->ui->dn);
@@ -301,7 +301,7 @@ class phoneConferenceManagment extends plugin
       /* Register conftab to trigger edit dialog */
       $this->conftab= new conferencetabs($this->config,$this->config->data['TABS']['CONFERENCETABS'], $this->dn,"gofonconference");
       $this->conftab->set_acl_base($this->dn);
-      $_SESSION['objectinfo']= $this->dn;
+      session::set('objectinfo',$this->dn);
     }
 
 

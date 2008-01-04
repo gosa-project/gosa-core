@@ -54,7 +54,7 @@ if (!$remove_lock){
 
     /* Check locking */
     if ((($username= get_lock($ui->dn)) != "") && (!session::is_set('edit'))){
-      $_SESSION['back_plugin']= $plug;
+      session::set('back_plugin',$plug);
       gen_locked_message ($username, $ui->dn);
       exit ();
     }
@@ -62,8 +62,8 @@ if (!$remove_lock){
 
     /* Lock the current entry */
     add_lock ($ui->dn, $ui->dn);
-    $_SESSION['dn']= $ui->dn;
-    $_SESSION['edit']= TRUE;
+    session::set('dn',$ui->dn);
+    session::set('edit',TRUE);
   }
 
   /* save changes to LDAP and disable edit mode */
@@ -91,7 +91,7 @@ if (!$remove_lock){
 
   /* Store changes  in session */
   if (isset ($_SESSION['edit'])){
-    $_SESSION['connectivity']= $connectivity;
+    session::set('connectivity',$connectivity);
   }
 
   $info= "";

@@ -52,6 +52,6 @@ if ($remove_lock){
 
 		/* Show and save dialog */
 		$display.= $output;
-		$_SESSION['DeviceManagement']= $DeviceManagement;
+		session::set('DeviceManagement',$DeviceManagement);
 }
 ?>

@@ -32,7 +32,7 @@ class glpiDeviceManagement extends plugin
 
     if(!isset($_SESSION['glpiDeviceRegex'])){
       $tmp['device_regex'] = "*";
-      $_SESSION['glpiDeviceRegex'] = $tmp;
+      session::set('glpiDeviceRegex',$tmp);
     }
     $this->ui = get_userinfo();  
 

@@ -46,15 +46,15 @@ if (!$remove_lock) {
 
     /* Check locking */
     if (($username = get_lock($ui->dn)) != "") {
-      $_SESSION['back_plugin'] = $plug;
+      session::set('back_plugin',$plug);
       gen_locked_message($username, $ui->dn);
       exit ();
     }
 
     /* Lock the current entry */
     add_lock($ui->dn, $ui->dn);
-    $_SESSION['dn'] = $ui->dn;
-    $_SESSION['edit'] = TRUE;
+    session::set('dn',$ui->dn);
+    session::set('edit',TRUE);
   }
 
   /* save changes to LDAP and disable edit mode */
@@ -82,7 +82,7 @@ if (!$remove_lock) {
 
   /* Store changes  in session */
   if (isset ($_SESSION['edit'])) {
-    $_SESSION['netatalk'] = $netatalk;
+    session::set('netatalk',$netatalk);
   }
 
   $info = "";

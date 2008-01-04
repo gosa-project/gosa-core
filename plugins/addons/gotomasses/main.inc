@@ -51,5 +51,5 @@ if (!$remove_lock){
 	$display= print_header(get_template_path('images/system.png'), _("System deployment")).$display;
 
 	/* Store changes  in session */
-	$_SESSION['gotomasses']= $gotomasses;
+	session::set('gotomasses',$gotomasses);
 }

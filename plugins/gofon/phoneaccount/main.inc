@@ -48,16 +48,16 @@ if (!$remove_lock){
 
 		/* Check locking */
 		if (($username= get_lock($ui->dn)) != ""){
-			$_SESSION['back_plugin']= $plug;
-			$_SESSION['LOCK_VARS_TO_USE'] = array("/^edit$/","/^plug$/");
+			session::set('back_plugin',$plug);
+			session::set('LOCK_VARS_TO_USE',array("/^edit$/","/^plug$/"));
 			$lock_msg =  gen_locked_message ($username, $ui->dn);
 
 		}else{
 
 			/* Lock the current entry */
 			add_lock ($ui->dn, $ui->dn);
-			$_SESSION['dn']= $ui->dn;
-			$_SESSION['edit']= TRUE;
+			session::set('dn',$ui->dn);
+			session::set('edit',TRUE);
 		}
 
 	}
@@ -76,7 +76,7 @@ if (!$remove_lock){
 			sess_del ('edit');
 
 			/* Write back to session */
-			$_SESSION['phoneAccount']= $phoneAccount;
+			session::set('phoneAccount',$phoneAccount);
 		} else {
 			/* Errors found, show message */
 			show_errors ($message);
@@ -92,7 +92,7 @@ if (!$remove_lock){
 
 	/* Store changes  in session */
 	if (isset ($_SESSION['edit'])){
-		$_SESSION['phoneAccount']= $phoneAccount;
+		session::set('phoneAccount',$phoneAccount);
 	}
 
 	$info= "";

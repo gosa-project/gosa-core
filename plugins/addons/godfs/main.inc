@@ -36,7 +36,7 @@
      $display.= $output;
     
      # show page
-     $_SESSION['dfsManagment'] = $dfsManagment;
+     session::set('dfsManagment',$dfsManagment);
   }
 
 ?>

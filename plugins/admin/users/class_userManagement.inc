@@ -62,7 +62,7 @@ class userManagement extends plugin
     plugin::execute();
 
     /* LOCK MESSAGE Vars */
-    $_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^user_edit_/","/^user_del_/","/^item_selected/","/^remove_multiple_users/","/^multiple_edit/","/menu_action/");
+    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^user_edit_/","/^user_del_/","/^item_selected/","/^remove_multiple_users/","/^multiple_edit/","/menu_action/"));
 
     $smarty       = get_smarty();                 // Smarty instance
     $s_action     = "";                           // Contains the action to be taken
@@ -287,7 +287,7 @@ class userManagement extends plugin
 
         /* User is allowed to change passwords, save 'dn' and 'acl' for next
            dialog. */
-        $_SESSION['objectinfo']= $this->dn;
+        session::set('objectinfo',$this->dn);
         return ($smarty->fetch(get_template_path('password.tpl', TRUE)));
         
 
@@ -328,7 +328,7 @@ class userManagement extends plugin
 
       /* Set ACL and move DN to the headline */
       $this->usertab->set_acl_base($this->dn);
-      $_SESSION['objectinfo']= $this->dn;
+      session::set('objectinfo',$this->dn);
     }
 
 
@@ -352,7 +352,7 @@ class userManagement extends plugin
       if($tmp->multiple_available()){
         $this->usertab = $tmp;
         $this->usertab->set_active_tab($s_tab);
-        $_SESSION['objectinfo']= $this->usertab->get_object_info();
+        session::set('objectinfo',$this->usertab->get_object_info());
       }
     }
 

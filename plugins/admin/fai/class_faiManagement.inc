@@ -83,7 +83,7 @@ class faiManagement extends plugin
 		$s_entry 	= "";
     
     /* If an entry was locked, these vars will be stored in a session to allow direct edit */
-    $_SESSION['LOCK_VARS_TO_USE'] = array("/^edit_entry$/","/^id$/","/^entry_edit_/","/^entry_delete_/","/^item_selected/","/^remove_multiple_fai_objects/");
+    session::set('LOCK_VARS_TO_USE',array("/^edit_entry$/","/^id$/","/^entry_edit_/","/^entry_delete_/","/^item_selected/","/^remove_multiple_fai_objects/"));
 
 
     /****************
@@ -400,7 +400,7 @@ class faiManagement extends plugin
         #$this->dialog->set_acl(array("*none*"))  ;    
         echo "Dawn it is freezed.";
       }
-			$_SESSION['objectinfo'] = $this->dn;
+			session::set('objectinfo',$this->dn);
 		}
 
 
@@ -476,7 +476,7 @@ class faiManagement extends plugin
      ****************/
 
     if((isset($_POST['UseBranchName']))&&(($this->dispNewBranch)||($this->dispNewFreeze))){
-      $_SESSION['LASTPOST'] = $_POST;
+      session::set('LASTPOST',$_POST);
 
       if($this->dispNewBranch){
         $type = "branch";

@@ -14,6 +14,6 @@ if (!$remove_lock){
 	$display= print_header(get_template_path('images/reports.png'), _("FAX reports")).$display;
 
 	/* Store changes  in session */
-	$_SESSION['faxreport']= $faxreport;
+	session::set('faxreport',$faxreport);
 }
 ?>

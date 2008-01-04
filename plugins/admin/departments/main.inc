@@ -50,7 +50,7 @@ if ($remove_lock){
 	}
 
 	$display.= $output;
-	$_SESSION['department']= $department;
+	session::set('department',$department);
 	$config = $department->config;
 }
 

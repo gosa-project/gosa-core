@@ -50,16 +50,16 @@ if (!$remove_lock){
 
     /* Check locking */
     if (($username= get_lock($ui->dn)) != ""){
-      $_SESSION['back_plugin']= $plug;
-      $_SESSION['LOCK_VARS_TO_USE'] = array("/^edit$/","/^plug$/");
+      session::set('back_plugin',$plug);
+      session::set('LOCK_VARS_TO_USE',array("/^edit$/","/^plug$/"));
       $lock_msg =  gen_locked_message ($username, $ui->dn);
   
     }else{
 
       /* Lock the current entry */
       add_lock ($ui->dn, $ui->dn);
-      $_SESSION['dn']= $ui->dn;
-      $_SESSION['edit']= TRUE;
+      session::set('dn',$ui->dn);
+      session::set('edit',TRUE);
     }
   }
 
@@ -121,7 +121,7 @@ if (!$remove_lock){
       /* Need to reset the password? */
       if($user->password_change_needed()){
         /* Save object */
-        $_SESSION['user']= $user;
+        session::set('user',$user);
 
         $display.= $smarty->fetch(get_template_path('password.tpl', TRUE));
         return ($display);
@@ -144,7 +144,7 @@ if (!$remove_lock){
 
   /* Store changes  in session */
   if (isset ($_SESSION['edit'])){
-    $_SESSION['user']= $user;
+    session::set('user',$user);
   }
 
   $info = "";

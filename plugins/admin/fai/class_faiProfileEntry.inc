@@ -123,7 +123,7 @@ class faiProfileEntry extends plugin
     }
   
     /* Save current searchfilter in session*/
-    $_SESSION['SUBfaifilter']= $SUBfaifilter;
+    session::set('SUBfaifilter',$SUBfaifilter);
 
     /* Check if we used a checkboxe from the list, to select dselect an entry */
     foreach($_POST as $name => $value){

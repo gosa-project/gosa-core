@@ -378,7 +378,7 @@ function save_release_changes_now()
       }
     }
   } 
-  $_SESSION['FAI_objects_to_save'] = array();
+  session::set('FAI_objects_to_save',array());
 }
 
 

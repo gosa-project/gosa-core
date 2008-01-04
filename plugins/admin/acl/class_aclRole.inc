@@ -566,7 +566,7 @@ class aclrole extends acl
     /* Refresh users ACLs */
     $ui= get_userinfo();
     $ui->loadACL();
-    $_SESSION['ui']= $ui;
+    session::set('ui',$ui);
   }
 
 

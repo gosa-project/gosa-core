@@ -396,8 +396,8 @@ class user extends plugin
       $this->photoData= $this->old_photoData;
 
       /* Update picture */
-      $_SESSION['binary']= $this->photoData;
-      $_SESSION['binarytype']= "image/jpeg";
+      session::set('binary',$this->photoData);
+      session::set('binarytype',"image/jpeg");
       $this->picture_dialog= FALSE;
       $this->dialog= FALSE;
     }
@@ -980,7 +980,7 @@ class user extends plugin
 
     if(isset($this->attrs['preferredLanguage'])){
       $_SESSION['ui']->language = $this->preferredLanguage;
-      $_SESSION['Last_init_lang'] = "update";
+      session::set('Last_init_lang',"update");
     }
 
     $ldap->cd ($this->dn);
@@ -1194,8 +1194,8 @@ class user extends plugin
 
       /* Set picture */
       $this->photoData= $data;
-      $_SESSION['binary']= $this->photoData;
-      $_SESSION['binarytype']= "image/jpeg";
+      session::set('binary',$this->photoData);
+      session::set('binarytype',"image/jpeg");
       $this->jpegPhoto= "";
     }
   }
@@ -1247,8 +1247,8 @@ class user extends plugin
 
     $fd = fopen ($filename, "rb");
     $this->photoData= fread ($fd, filesize ($filename));
-    $_SESSION['binary']= $this->photoData;
-    $_SESSION['binarytype']= "image/jpeg";
+    session::set('binary',$this->photoData);
+    session::set('binarytype',"image/jpeg");
     $this->jpegPhoto= "";
 
     fclose ($fd);
@@ -1322,8 +1322,8 @@ class user extends plugin
   {
     $str = "";
 
-    $_SESSION['binary'] = $this->photoData; 
-    $_SESSION['binarytype']= "image/jpeg";
+    session::set('binary',$this->photoData); 
+    session::set('binarytype',"image/jpeg");
 
     /* Get random number for pictures */
     srand((double)microtime()*1000000); 

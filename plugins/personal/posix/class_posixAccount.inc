@@ -236,7 +236,7 @@ class posixAccount extends plugin
 
     /* Department has changed? */
     if(isset($_POST['depselect'])){
-      $_SESSION['CurrentMainBase']= validate($_POST['depselect']);
+      session::set('CurrentMainBase',validate($_POST['depselect']));
     }
 
     if($this->multiple_support_active){
@@ -1306,7 +1306,7 @@ class posixAccount extends plugin
   
     /* check sizelimit */
     if (preg_match("/size limit/i", $ldap->error)){
-      $_SESSION['limit_exceeded']= TRUE;
+      session::set('limit_exceeded',TRUE);
     }
 
     /* Create a list of users */

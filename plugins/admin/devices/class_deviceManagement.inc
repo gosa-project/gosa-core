@@ -210,7 +210,7 @@ class deviceManagement extends plugin
       /* Register devicetabs to trigger edit dialog */
       $this->devicetabs= new devicetabs($this->config,$this->config->data['TABS']['DEVICETABS'], $this->dn,"devices");
       $this->devicetabs->set_acl_base($this->dn);
-      $_SESSION['objectinfo']= $this->dn;
+      session::set('objectinfo',$this->dn);
     }
 
 

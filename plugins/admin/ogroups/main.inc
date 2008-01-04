@@ -43,7 +43,7 @@ if (!$remove_lock){
   $display.= $output;
 
   /* Store changes  in session */
-  $_SESSION['ogroup']= $ogroup;
+  session::set('ogroup',$ogroup);
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

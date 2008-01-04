@@ -63,7 +63,7 @@ class departmentManagement extends plugin
       Var init 
      ***************/
 
-    $_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^dep_edit_.*/","/^dep_del_.*/","/^item_selected/","/^remove_multiple_departments/");
+    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^dep_edit_.*/","/^dep_del_.*/","/^item_selected/","/^remove_multiple_departments/"));
 
     /* Reload departments */
     $smarty						= get_smarty();
@@ -143,7 +143,7 @@ class departmentManagement extends plugin
       $this->deptabs= new deptabs($this->config,$this->config->data['TABS']['DEPTABS'], $this->dn,"department");
       $this->deptabs->set_acl_base($this->dn);
 
-      $_SESSION['objectinfo']= $this->dn;
+      session::set('objectinfo',$this->dn);
     }
 
 
@@ -241,7 +241,7 @@ class departmentManagement extends plugin
 
         /* Check locking */
         if (($user= get_lock($this->dn)) != ""){
-          $_SESSION['dn']= $this->dn;
+          session::set('dn',$this->dn);
           return(gen_locked_message($user, $this->dn));
         } else {
           add_lock ($this->dn, $this->ui->dn);

@@ -59,7 +59,7 @@ class ogroupManagement extends plugin
       Variable intialisation && Check posts for commands  
      ****************/
 
-    $_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/","/^item_selected/","/^remove_multiple_ogroups/");
+    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/","/^item_selected/","/^remove_multiple_ogroups/"));
 
     $smarty     = get_smarty();
     $s_action   = "";
@@ -334,7 +334,7 @@ class ogroupManagement extends plugin
       /* Register grouptab to trigger edit dialog */
       $this->ogroup= new ogrouptabs($this->config, $this->config->data['TABS']['OGROUPTABS'], $this->dn, "ogroups");
       $this->ogroup->set_acl_base($this->dn);
-      $_SESSION['objectinfo']= $this->dn;
+      session::set('objectinfo',$this->dn);
     }
 
 

@@ -67,7 +67,7 @@ class groupManagement extends plugin
   	plugin::execute();
 
     /* Store these posts if the current object is locked (used by somebody else)*/
-    $_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/","/^item_selected/","/^remove_multiple_groups/");
+    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/","/^item_selected/","/^remove_multiple_groups/"));
 
     /* Save data */
     $s_action   = "";
@@ -239,7 +239,7 @@ class groupManagement extends plugin
       /* Register grouptab to trigger edit dialog */
       $this->grouptab= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $this->dn);
       $this->grouptab->set_acl_base($this->dn);
-      $_SESSION['objectinfo']= $this->dn;
+      session::set('objectinfo',$this->dn);
     }
 
 

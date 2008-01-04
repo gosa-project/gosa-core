@@ -34,6 +34,6 @@ if (!$remove_lock){
 	$display= print_header(get_template_path('images/logview.png'), _("System log view")).$display;
 
 	/* Store changes  in session */
-	$_SESSION['log_tabs']= $log_tabs;
+	session::set('log_tabs',$log_tabs);
 }
 ?>

@@ -66,7 +66,7 @@ class userinfo
     $this->ip= $_SERVER['REMOTE_ADDR'];
 
     /* Initialize ACL_CACHE */
-    $_SESSION['ACL_CACHE']= array();
+    session::set('ACL_CACHE',array());
     $this->reset_acl_cache();
   }
 
@@ -74,7 +74,7 @@ class userinfo
   public function reset_acl_cache()
   {
     /* Initialize ACL_CACHE */
-    $_SESSION['ACL_CACHE']= array();
+    session::set('ACL_CACHE',array());
   }
 
   function loadACL()

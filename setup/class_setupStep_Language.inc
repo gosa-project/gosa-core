@@ -60,9 +60,9 @@ class Step_Language extends setup_step
       $this->is_completed = TRUE;
 
       if($this->lang_selected != ""){
-        $_SESSION['lang'] = $this->lang_selected;
+        session::set('lang',$this->lang_selected);
       }else{
-        $_SESSION['lang'] = $this->lang;
+        session::set('lang',$this->lang);
       }
     }
   }

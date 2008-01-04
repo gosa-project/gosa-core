@@ -105,7 +105,7 @@ class applicationManagement extends plugin
 
     /* These vars will be stored if you try to open a locked app, 
         to be able to perform your last requests after showing a warning message */
-    $_SESSION['LOCK_VARS_TO_USE'] = array("/^act$/","/^id$/","/^appl_edit_/","/^appl_del_/","/^item_selected/","/^remove_multiple_applications/");
+    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^appl_edit_/","/^appl_del_/","/^item_selected/","/^remove_multiple_applications/"));
 
     $smarty       = get_smarty();             // Smarty instance
     $s_action     = "";                       // Contains the action to proceed
@@ -274,7 +274,7 @@ class applicationManagement extends plugin
       /* Register apptabs to trigger edit dialog */
       $this->apptabs= new apptabs($this->config,$this->config->data['TABS']['APPSTABS'], $this->dn,"application");
       $this->apptabs->set_acl_base($this->dn);
-      $_SESSION['objectinfo']= $this->dn;
+      session::set('objectinfo',$this->dn);
     }
 
 

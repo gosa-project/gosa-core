@@ -161,7 +161,7 @@ class faiScript extends plugin
     }
 
     if($this->dn != "new"){
-      $_SESSION['objectinfo']= $this->dn;
+      session::set('objectinfo',$this->dn);
     }
 
     /* Handle posts */
@@ -206,7 +206,7 @@ class faiScript extends plugin
       $this->dialog->set_acl_category("fai");
 
       /* Assign some additional dialog informations like headline and parent  */
-      $_SESSION['objectinfo'] = $obj['dn'];
+      session::set('objectinfo',$obj['dn']);
       $this->dialog->parent = &$this;
       $this->is_dialog=true;
     }

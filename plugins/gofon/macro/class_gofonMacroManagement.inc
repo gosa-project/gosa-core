@@ -52,7 +52,7 @@ class goFonMacro extends plugin
     /* Call parent execute */
     plugin::execute();
 
-    $_SESSION['LOCK_VARS_TO_USE'] = array("/^goFonMacro_/","/^act$/","/^id$/","/^item_selected/","/^remove_multiple_macros/");
+    session::set('LOCK_VARS_TO_USE',array("/^goFonMacro_/","/^act$/","/^id$/","/^item_selected/","/^remove_multiple_macros/"));
 
     /*****************
       Variable initialisation
@@ -229,7 +229,7 @@ class goFonMacro extends plugin
         /* Register macrotabs to trigger edit dialog */
         $this->macrotabs= new macrotabs($this->config,
             $this->config->data['TABS']['MACROTABS'], $this->dn,"gofonmacro");
-        $_SESSION['objectinfo']= $this->dn;
+        session::set('objectinfo',$this->dn);
       }
     }
 

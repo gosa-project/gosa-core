@@ -42,6 +42,6 @@ if (!$remove_lock){
 	$display= print_header(get_template_path('images/mailqueue.png'), _("Mail queue")).$display;
 
 	/* Store changes  in session */
-	$_SESSION['mailqueue']= $mailqueue;
+	session::set('mailqueue',$mailqueue);
 }
 ?>

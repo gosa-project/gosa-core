@@ -533,7 +533,7 @@ class MultiSelectWindow{
         }
       }
     }
-    $_SESSION['CurrentMainBase'] = $this->selectedBase;
+    session::set('CurrentMainBase',$this->selectedBase);
 
 		if(isset($_POST['MultiSelectWindow'.$this->filterName])){
 
@@ -655,7 +655,7 @@ class MultiSelectWindow{
 		/* check for a valid base */
 		if(!$base){
 			if(!isset($_SESSION['CurrentMainBase'])){
-				$_SESSION['CurrentMainBase'] = $this->config->current['BASE'];
+				session::set('CurrentMainBase',$this->config->current['BASE']);
 			}
 			$base = $_SESSION['CurrentMainBase'];
 		}

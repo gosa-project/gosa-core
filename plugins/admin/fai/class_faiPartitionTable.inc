@@ -153,7 +153,7 @@ class faiPartitionTable extends plugin
      */    
 
     if($this->dn != "new"){
-      $_SESSION['objectinfo']= $this->dn;
+      session::set('objectinfo',$this->dn);
     }
 
     if((isset($_POST['EditDisk']))&&(isset($_POST['disks']))){
@@ -169,10 +169,10 @@ class faiPartitionTable extends plugin
 
         /* Set object info string, which will be displayed in plugin info line */ 
         if(isset($this->disks[$Udisk]['dn'])){
-          $_SESSION['objectinfo'] = $this->disks[$Udisk]['dn'];
+          session::set('objectinfo',$this->disks[$Udisk]['dn']);
           $dn = $this->disks[$Udisk]['dn'];
         }else{
-          $_SESSION['objectinfo'] = "";
+          session::set('objectinfo',"");
           $dn = "new";
         }
 

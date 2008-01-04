@@ -226,8 +226,8 @@ class config  {
     }
 
     if (!isset($_SESSION['size_limit'])){
-      $_SESSION['size_limit']= $this->current['SIZELIMIT'];
-      $_SESSION['size_ignore']= $this->current['SIZEIGNORE'];
+      session::set('size_limit',$this->current['SIZELIMIT']);
+      session::set('size_ignore',$this->current['SIZEIGNORE']);
     }
 
     if ($sizelimit){
@@ -257,7 +257,7 @@ class config  {
     }
 
     if (isset($this->current['INITIAL_BASE'])){
-      $_SESSION['CurrentMainBase']= $this->current['INITIAL_BASE'];
+      session::set('CurrentMainBase',$this->current['INITIAL_BASE']);
     }
   
     /* Remove possibly added ',' from end of group and people ou */

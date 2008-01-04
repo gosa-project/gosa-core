@@ -49,8 +49,8 @@ class application extends plugin
     if ($this->iconData == ""){
       $this->set_picture("");
     }
-    $_SESSION['binary']= $this->iconData;
-    $_SESSION['binarytype']= "image/jpeg";
+    session::set('binary',$this->iconData);
+    session::set('binarytype',"image/jpeg");
     $this->gosaApplicationIcon= $this->iconData;
 
     /* This is always an account */
@@ -138,17 +138,17 @@ class application extends plugin
     /* Download requested */
     foreach($_POST as $name => $value){
       if(preg_match("/^downloadScript/",$name)){
-        $_SESSION['binary']       = $this->gotoLogonScript;
-        $_SESSION['binarytype']   = "octet-stream";
-        $_SESSION['binaryfile']   = $this->cn.".gosaApplication";
+        session::set('binary',$this->gotoLogonScript);
+        session::set('binarytype',"octet-stream");
+        session::set('binaryfile',$this->cn.".gosaApplication");
         header("location: getbin.php ");
         exit();
       }
     }
 
     /* Reassign picture data, sometimes its corrupt cause we started a download of application scripts */
-    $_SESSION['binary']     = $this->iconData;
-    $_SESSION['binarytype'] = "image/jpeg";
+    session::set('binary',$this->iconData);
+    session::set('binarytype',"image/jpeg");
     
     $smarty->assign("rand", rand(0, 10000));
     $head = $this->generateTemplate();
@@ -487,8 +487,8 @@ class application extends plugin
     if (file_exists($filename)){
       $fd = fopen ($filename, "rb");
       $this->iconData= fread ($fd, filesize ($filename));
-      $_SESSION['binary']= $this->iconData;
-      $_SESSION['binarytype']= "image/jpeg";
+      session::set('binary',$this->iconData);
+      session::set('binarytype',"image/jpeg");
       $this->gosaApplicationIcon= $this->iconData;
 
       fclose ($fd);

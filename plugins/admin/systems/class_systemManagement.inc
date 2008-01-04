@@ -63,7 +63,7 @@ class systems extends plugin
     /* Call parent execute */
     plugin::execute();
 
-    $_SESSION['LOCK_VARS_TO_USE'] = array("/^system_edit_/i","/^system_del_/","/^act/","/^id/","/^item_selected/","/^remove_multiple_systems/");
+    session::set('LOCK_VARS_TO_USE',array("/^system_edit_/i","/^system_del_/","/^act/","/^id/","/^item_selected/","/^remove_multiple_systems/"));
 
     /********************
       Check for functional posts, edit|delete|add|... system devices 
@@ -172,7 +172,7 @@ class systems extends plugin
      ********************/
     if ($s_action=="gen_cd"){
       $this->dn= $this->terminals[$s_entry]['dn'];
-      $_SESSION['objectinfo']= $this->dn;
+      session::set('objectinfo',$this->dn);
       return ($smarty->fetch(get_template_path('gencd.tpl', TRUE)));
     }
 
@@ -357,7 +357,7 @@ class systems extends plugin
 
         $this->systab= new $tabclass($this->config, $this->config->data['TABS'][$class], $this->dn,$acl_cat);
         $this->systab->set_acl_base($this->dn);
-        $_SESSION['objectinfo']= $this->dn;
+        session::set('objectinfo',$this->dn);
         add_lock ($this->dn, $this->ui->dn);
       }else{ 
         print_red (_("You can't edit this object type yet!"));
@@ -385,7 +385,7 @@ class systems extends plugin
       $tabacl   = $ui->get_permissions($this->DivListSystem->selectedBase,$acl_cat."/".$tabname,"gotoRootPasswd");
       if(preg_match("/w/",$tabacl)){
         $this->dn= $this->terminals[$s_entry]['dn'];
-        $_SESSION['objectinfo']= $this->dn;
+        session::set('objectinfo',$this->dn);
         return ($smarty->fetch(get_template_path('password.tpl', TRUE)));
       }else{
         print_red(_("You are not allowed to change the password for this object."));

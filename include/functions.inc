@@ -360,7 +360,7 @@ function ldap_login_user_htaccess ($username)
   $ui->loadACL();
 
   /* TODO: check java script for htaccess authentication */
-  $_SESSION['js']= true;
+  session::set('js',true);
 
   return ($ui);
 }

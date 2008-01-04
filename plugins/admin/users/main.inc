@@ -58,7 +58,7 @@ if ($remove_lock){
   }
 
   /* Show and save dialog */
-  $_SESSION['userManagement']= $userManagement;
+  session::set('userManagement',$userManagement);
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
