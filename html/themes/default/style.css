@@ -1533,3 +1533,28 @@ td.container_:hover,div.container_:hover {
     line-height: 0;
 }
 
+div.errorMsgTitle {
+	width:100%; 
+	font-size: 1.4em;
+	padding-bottom:0.3em;
+	padding-top:0.3em;
+	font-weight:bold;
+	background-color: #E0E0E0; 
+}
+
+div.errorMsgSepeator {
+	height:1px;
+	width:100%;
+	background-color: #BBBBBB;
+}
+
+div.errorMsgDialog {
+	width:60%;
+	left:200px;
+	top:200px;
+	background-color:white;
+	border:4px solid red;
+	z-index:150;
+	display:none;
+	position:absolute;'
+}

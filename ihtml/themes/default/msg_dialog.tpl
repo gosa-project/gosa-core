@@ -48,29 +48,14 @@
 
 	{if !$JS}
 
-		<div id='e_layer{$i_ID}'
-				style='
-					width:60%;
-					left:200px;
-					top:200px;
-					background-color:white;
-					border:5px solid red;
-					z-index:150;
-					position:absolute;'>
-			<div id="e_layerTitle{$i_ID}" style="vertical-align: middle;
-												 width:100%; 
-												 font-size: 1.2em;
-												 padding-top:3px;
-												 padding-bottom:2px;
-												 font-weight:bold;
-												 background-color: #999999; 
-												 ">
+		<div id='e_layer{$i_ID}' style="errorMsgDialog">
+			<div id="e_layerTitle{$i_ID}" style="errorMsgTitle">
 				&nbsp;&nbsp;{$s_Title}
 			</div>
-			<div style="height:2px; width:100% ; background-color: #BBBBBB;"></div>
+			<div style="errorMsgSeperator"></div>
 			<table style='width:100%' summary='' border=0>
 				<tr>
-					<td style='vertical-align:top;padding:10px'>
+					<td style='vertical-align:top;padding:2px 10px 0px 10px'>
 	{if $i_Type == ERROR_DIALOG}
 						<img src='images/error.png' alt='{t}Error{/t}'>
 	{elseif $i_Type == WARNING_DIALOG}
@@ -82,11 +67,11 @@
 					<td style='width:100%'>
 						<b>{$s_Message}</b>
 						<br>
-						<br>
 					</td>
 				</tr>
 				<tr>
 					<td colspan='2' align='center'>
+						<div style="errorMsgSeperator"></div>
 	{if $i_Type == ERROR_DIALOG || $i_Type == WARNING_DIALOG || $i_Type == INFO_DIALOG}
 						<button type='submit' name='MSG_OK{$i_ID}'>{t}Ok{/t}</button>
 	{elseif $i_Type == CONFIRM_DIALOG}
@@ -107,32 +92,16 @@
 		
 		{/if}
 
-		<div id='e_layer{$i_ID}'
-				style='
-					width:60%;
-					left:200px;
-					top:200px;
-					background-color:white;
-					border:5px solid red;
-					z-index:150;
-					display:none;
-					position:absolute;'>
+		<div id='e_layer{$i_ID}' class="errorMsgDialog">
 
-		<div id="e_layerTitle{$i_ID}" style="vertical-align: middle;
-											 width:100%; 
-											 font-size: 1.2em;
-											 padding-top:3px;
-											 padding-bottom:2px;
-											 font-weight:bold;
-										     background-color: #999999; 
-                						     ">
+		<div id="e_layerTitle{$i_ID}" class="errorMsgTitle">
 			&nbsp;&nbsp;{$s_Title}
 		</div>
-		<div style="height:2px; width:100% ; background-color: #BBBBBB;"></div>
+		<div class="errorMsgSepeator"></div>
 
 			<table style='width:100%' summary='' border=0>
 				<tr>
-					<td style='vertical-align:top;padding:10px'>
+					<td style='vertical-align:top;padding:2px 10px 0px 10px'>
 	{if $i_Type == ERROR_DIALOG}
 						<img src='images/error.png' alt='{t}Error{/t}'>
 	{elseif $i_Type == WARNING_DIALOG}
@@ -144,7 +113,6 @@
 					<td style='width:100%'>
 						<b>{$s_Message}</b>
 						<br>
-						<br>
 					</td>
 					{if $s_Trace != "" && $i_TraceCnt != 0}
 					<td style='width:20px; vertical-align:top; cursor:pointer;'>
@@ -153,7 +121,12 @@
 					{/if}
 				</tr>
 				<tr>
+					{if $s_Trace != "" && $i_TraceCnt != 0}
+					<td colspan='3' align='center'>
+					{else}
 					<td colspan='2' align='center'>
+					{/if}
+					<div class="errorMsgSepeator" style='margin-top:2px; margin-bottom:2px;'></div>
 	{if $i_Type == ERROR_DIALOG || $i_Type == WARNING_DIALOG || $i_Type == INFO_DIALOG}
 						<button type='button' name='MSG_OK{$i_ID}' onClick='next_msg_dialog();'>{t}Ok{/t}</button>
 	{elseif $i_Type == CONFIRM_DIALOG}
