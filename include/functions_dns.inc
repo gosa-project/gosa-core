@@ -163,12 +163,12 @@ function getDNSZoneEntries($config,$HostDn,$silent = false)
 
     if($ldap->count() == 0){
       if(!$silent){
-        print_red(sprintf(_("Can't find reverse zone for dns zone '%s'. Aborting parsing this zone."),$zoneName));
+        msg_dialog::display(_("Error"), sprintf(_("Cannot find reverse zone for DNS zone '%s'. Parsing zone aborted."),$zoneName), ERROR_DIALOG);
       }
       unset($Zones[$zoneName]);
     }elseif($ldap->count()>1){
       if(!$silent){
-        print_red(sprintf(_("Found more than one reverse zone for dns zone '%s'. Aborting parsing this zone."),$zoneName));
+        msg_dialog::display(_("Error"), sprintf(_("Found more than one reverse zone for '%s'. Parsing zone aborted."),$zoneName), ERROR_DIALOG);
       }
       unset($Zones[$zoneName]);
     }else{
@@ -612,7 +612,7 @@ function getDNSZoneDN($config,$zoneNameMix)
 {
   $ret = "";
   if(!strstr($zoneNameMix, '/')) {
-    print_red(sprintf(_("Undefined zone name '%s'. Zone name must look like this 'server/zone.com'."),$zoneNameMix));
+    msg_dialog::display(_("Error"), sprintf(_("Undefined zone name '%s'!"),$zoneNameMix), ERROR_DIALOG);
     return($ret);
   }
 

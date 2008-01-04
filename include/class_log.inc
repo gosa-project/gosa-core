@@ -84,7 +84,7 @@ class log {
     if(count($msgs)){
       foreach($msgs as $msg){
         trigger_error("Logging failed, reason was: ".$msg);
-        print_red("Logging failed, reason was: ".$msg); 
+        msg_dialog::display(_("Internal error"), sprintf(_("Logging failed: %s"), $msg), ERROR_DIALOG);
       }
       
     }else{
@@ -116,11 +116,11 @@ class log {
     $msgs = array();
 
     if(!isset($entry['action']) || !in_array($entry['action'],array("modify","create","remove","copy","snapshot","view","security","debug"))){
-      $msgs[] = "Invalid option specified '".$entry['action']."'";
+      $msgs[] = sprintf(_("Invalid option '%s' specified."), $entry['action']);
     }
 
     if(!isset($entry['objecttype']) || empty($entry['objecttype'])){
-      $msgs[] = "Specified objectType is empty or invalid.";
+      $msgs[] = _("Specified objectType is empty or invalid");
     }
   
     return($msgs);
@@ -141,7 +141,7 @@ class log {
     if(isset($this->config->data['SERVERS']['LOGGING'])){
       $servers = $this->config->data['SERVERS']['LOGGING'];
     }else{
-      print_red(_("You have enabled the logging into mysql databse, but there are no logging servers available."));
+      msg_dialog::display(_("Error"), _("You have enabled the logging into mysql databse, but there are no logging servers available."), ERROR_DIALOG);
       return(FALSE);
     }
 
@@ -149,12 +149,12 @@ class log {
  
       $con = @mysql_pconnect($server_name,$server['USER'],$server['PWD']);
       if(!$con){
-        print_red(sprintf(_("Could not connect to logging server %s."),$server_name));
+        msg_dialog::display(_("Error"), sprintf(_("Cannot connect to logging server '%s'."),$server_name), ERROR_DIALOG);
         return(FALSE);
       }else{
         $db = mysql_select_db($server['DB'],$con);
         if(!$db){
-          print_red(sprintf(_("Could not select database %s on server %s. Server says :%s"),$server['DB'],$server['SERVER'],mysql_error($con)));
+          msg_dialog::display(_("Error"), sprintf(_("Cannot select database '%s' on server '%s': %s"),$server['DB'],$server['SERVER'], mysql_error($con)), ERROR_DIALOG);
           return(FALSE);
         }else{
 
@@ -174,7 +174,7 @@ class log {
               ";
           $res = mysql_query($query,$con);
           if(!$res){
-            print_red(sprintf(_("Could not query database %s on server %s. Server says :%s"),$server['DB'],$server['SERVER'],mysql_error($con)));
+            msg_dialog::display(_("Error"), sprintf(_("Cannot query database '%s' on server '%s': %s"),$server['DB'],$server['SERVER'], mysql_error($con)), ERROR_DIALOG);
             return(FALSE);
           } 
         }

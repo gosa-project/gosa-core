@@ -147,7 +147,7 @@ class pluglist {
 
 					/* Read information from class variable */
 					if (!isset($info['CLASS'])){
-						print_red(_("Your gosa.conf format has changed. Please re-run setup!"));
+						msg_dialog::display(_("Configuration error"), _("The configuration format has changed. Please re-run setup!"), ERROR_DIALOG);
 						display_error_page();
 					}
 					$vars= get_class_vars($info['CLASS']);

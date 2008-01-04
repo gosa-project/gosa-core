@@ -376,7 +376,7 @@ function save_release_changes_now()
         save_FAI_object($parent_obj,$objectAttrs);
 
         if(($parent_obj != $Current_DN)){
-          print_red(sprintf(_("Error, following objects should be equal '%s' and '%s'"),$parent_obj,$Current_DN));
+          msg_dialog::display(_("Error"), sprintf(_("Error, following objects should be equal '%s' and '%s'"),$parent_obj,$Current_DN), ERROR_DIALOG);
         }
       }
     }

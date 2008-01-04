@@ -623,7 +623,7 @@ class plugin
         exec($command);
       } else {
         $message= sprintf(_("Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."), $command, get_class($this));
-        print_red ($message);
+        msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
       }
     }
   }
@@ -655,7 +655,7 @@ class plugin
         exec($command);
       } else {
         $message= sprintf(_("Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."), $command, get_class($this));
-        print_red ($message);
+        msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
       }
     }
   }
@@ -691,7 +691,7 @@ class plugin
         exec($command);
       } else {
         $message= sprintf(_("Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."), $command, get_class($this));
-        print_red ($message);
+        msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
       }
     }
   }
@@ -1212,7 +1212,7 @@ class plugin
 
         /* Check if the snapshot_base is defined */
         if(!isset($tmp['SNAPSHOT_BASE'])){
-          print_red(sprintf(_("The snapshot functionality is enabled, but the required variable '%s' is not configured in your gosa.conf."),"SNAPSHOT_BASE"));
+          msg_dialog::display(_("Configuration error"), sprintf(_("The snapshot functionality is enabled, but the required variable '%s' is not set."),"SNAPSHOT_BASE"), ERROR_DIALOG);
           return(FALSE);
         }
 
@@ -1224,7 +1224,7 @@ class plugin
           foreach(array("SNAPSHOT_SERVER","SNAPSHOT_USER","SNAPSHOT_PASSWORD","SNAPSHOT_BASE") as $var){
             if(!isset($tmp[$var])){
               $missing .= $var." ";
-              print_red(sprintf(_("The snapshot functionality is enabled, but the required variable(s) '%s' is not configured in your gosa.conf."),$missing));
+              msg_dialog::display(_("Configuration error"), sprintf(_("The snapshot functionality is enabled, but the required variable '%s' is not set."), $missing), ERROR_DIALOG);
               return(FALSE);
             }
           }
@@ -1449,7 +1449,7 @@ class plugin
       $msgs = $this->snapDialog->check();
       if(count($msgs)){
         foreach($msgs as $msg){
-          print_red($msg);
+          msg_dialog::display(_("Error"), $msg, ERROR_DIALOG);
         }
       }else{
         $this->dn =  $this->snapDialog->dn;

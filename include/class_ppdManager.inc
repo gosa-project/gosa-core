@@ -9,9 +9,9 @@ class ppdManager
 	function ppdManager($path)
 	{
 		if(is_dir($path)){
-		$this->path= $path;
+			$this->path= $path;
 		}else{
-			print_red(sprintf(_("PPD manager : The specified path '%s' doesn't exists."),$path));
+			msg_dialog::display(_("PPD manager error"), sprintf(_("The specified path '%s' does not exist."),$path), ERROR_DIALOG);
 			return (false);
 		}
 	}
@@ -142,9 +142,9 @@ class ppdManager
 	function saveProperties($ppdFile, $properties)
 	{
 		if(!is_readable($ppdFile)){
-			print_red(sprintf(_("Specified ppd file '%s' can't be opened for reading."),$ppdFile));
+			msg_dialog::display(_("PPD manager error"), sprintf(_("Specified PPD file '%s' cannot be opened for reading."),$ppdFile), ERROR_DIALOG);
 		}elseif(!is_writeable(preg_replace("#(^.*/).*$#","\\1",$ppdFile.".tmp"))){
-			print_red(sprintf(_("The required tmp file file '%s' can't be opened for writing."),$ppdFile.".tmp"));
+			msg_dialog::display(_("PPD manager error"), sprintf(_("The temporary file '%s' cannot be opened for writing."),$ppdFile.".tmp"), ERROR_DIALOG);
 		}else{
 			foreach ($properties as $name => $section){
 				foreach ($section as $attribute => $value){
