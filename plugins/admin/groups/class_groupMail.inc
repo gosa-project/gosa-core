@@ -102,7 +102,7 @@ class mailgroup extends plugin
       }
     }
 
-    /* If this ins't new mailgroup, read all required data from ldap
+    /* If this isn't a new mailgroup, read all required data from ldap
      */
     if (($dn != "new")&&($dn != NULL)){
 
@@ -124,13 +124,13 @@ class mailgroup extends plugin
         /* Create new instance of our defined mailclass
          */
         $method= new $this->method($this->config);
-
         if ($method->connect($this->attrs["gosaMailServer"][0])){
-        
 
-          /* Maybe the entry is not saved in new style, get
-             permissions from IMAP and convert them to acl attributes */
-          if (!isset($this->attrs['acl'])){
+          /* If we do NOT use kolab or equal methods, 
+             read imap the acls from the mail method class.
+             They will be merged later with the ldap specified acls.
+           */
+          if(!preg_match("/olab/i",$this->mmethod)){
             $this->imapacl=  $method->getSharedFolderPermissions($this->uid);
 
             /* Need to filter what a member acl could be... */
@@ -150,9 +150,7 @@ class mailgroup extends plugin
                   $peek= $vote[$acl];
                 }
               }
-
             }
-
             /* Highest count wins as %members%, remove all members
                with the same acl */
             if(!empty($leader)){
@@ -163,12 +161,11 @@ class mailgroup extends plugin
                 unset($this->imapacl[$user]);
               }
             }
+          }
 
-          } // ENDE ! isset ($this->attrs['acl'])
-          
           /* Adapt attributes if needed */
           $method->fixAttributesOnLoad($this);
-          
+
           /*  get Quota */
           $quota= $method->getQuota($this->uid);
 
@@ -184,13 +181,10 @@ class mailgroup extends plugin
           }else{
             $this->quotaUsage     = "";
             $this->gosaMailQuota  = "";
-//            print_red(sprintf(_("Can't get quota information for '%s'."),$this->uid));
           }
           $method->disconnect();
         }   // ENDE $method->connect($this->attrs["gosaMailServer"][0])){
-
       }   // ENDE gosaMailServer
-
     }   // ENDE dn != "new"
 
 
@@ -206,66 +200,47 @@ class mailgroup extends plugin
 
     /* Load permissions */
     $tmp = array();
-    if(preg_match("/olab/i",$this->mmethod)){
-      $ldap = $this->config->get_ldap_link();
+    $ldap = $this->config->get_ldap_link();
 
-      if (isset($this->attrs['acl'])){
+    /* Read acls  from ldap and merge them with 
+     *  acls read from mail method. 
+     */
+    if (isset($this->attrs['acl'])){
 
-        for ($i= 0; $i<$this->attrs['acl']['count']; $i++){
-          list($user, $permission)= split(' ', $this->attrs['acl'][$i]);
+      for ($i= 0; $i<$this->attrs['acl']['count']; $i++){
+        list($user, $permission)= split(' ', $this->attrs['acl'][$i]);
 
-          /* Add to list */
-          $this->imapacl[$user]= $permission;
+        /* Add to list */
+        $this->imapacl[$user]= $permission;
 
-          /* Get all user permissions sorted by acl, to detect the most used acl
-             This acl is then used for %members%
-           */
-          if ($user != "anyone" && $user != "%members%"){
-            $tmp[$permission][] = $user;
-          }
-
-          /* There is an entry in $this->imapacl like this this ... 
-             $this->attrs['imapacl']['anyone'] = "p";
-             $this->attrs['imapacl']['%members%'] = "lprs";
-             $this->attrs['imapacl'][''] = ""; <------ This is used to diplay an empty 
-             Field for special acls in our template.
-             If there is at least one special acl in out imapacl,
-             we don't need this entry anymore, because it is already displayed. 
-           */
-          if ($user != "anyone" && $user != "%members%"){
-            unset($this->imapacl['']);
-          }
-        }
-      }
-    }else{
-      /* Load permissions */
-      if (isset($this->attrs['acl'])){
-        for ($i= 0; $i<$this->attrs['acl']['count']; $i++){
-          list($user, $permission)= split(' ', $this->attrs['acl'][$i]);
-          $this->imapacl[$user]= $permission;
-          if ($user != "anyone" && $user != "%members%"){
-            unset($this->imapacl['']);
-          }
-        }
-      }
-
-      foreach($this->imapacl as $user => $permission){
+        /* Get all user permissions sorted by acl, to detect the most used acl
+           This acl is then used for %members%
+         */
         if ($user != "anyone" && $user != "%members%"){
           $tmp[$permission][] = $user;
         }
+
+        /* There is an entry in $this->imapacl like this this ... 
+           $this->attrs['imapacl']['anyone'] = "p";
+           $this->attrs['imapacl']['%members%'] = "lprs";
+           $this->attrs['imapacl'][''] = ""; <------ This is used to diplay an empty 
+           Field for special acls in our template.
+           If there is at least one special acl in out imapacl,
+           we don't need this entry anymore, because it is already displayed. 
+         */
         if ($user != "anyone" && $user != "%members%"){
           unset($this->imapacl['']);
         }
       }
     }
 
-
     /**
-     * Detect group member with same acl and replace them with %members%
+     * Detect group members which use the same acl 
+     *  as used for %members% and remove them.
      **/
 
-    /* In this section we dectect which acl is tho most used 
-       This will be used as %members% acl  
+    /* In this section we detect which acl is the most used.
+       This will be used as %members% acl.
      */
     $tmp2 = array(); 
     foreach($tmp as $acl => $user){
@@ -281,6 +256,10 @@ class mailgroup extends plugin
     if(!empty($str)) {
       $this->imapacl['%members%']=$str;
     }
+    if(!isset($this->imapacl['%members%'])){
+      $this->imapacl['%members%'] = "lrspw";
+    }
+
 
     /* Open ldap connection 
      */
@@ -323,6 +302,7 @@ class mailgroup extends plugin
     $this->perms["lrswipcda"]= _("admin");
     $this->perms[""]= _("none");
   }
+
 
   function execute()
   {
@@ -797,8 +777,9 @@ I: Only insider delivery */
     $this->attrs['gosaMailAlternateAddress']  = $this->gosaMailAlternateAddress;
     $this->attrs['gosaMailForwardingAddress'] = $this->gosaMailForwardingAddress;
     $this->attrs['gosaSharedFolderTarget']    = "share+".$this->uid;
+    $this->attrs['acl']= array();
 
-    /* Only do IMAP actions if we are not a template */
+    /* Prepare Mail server attribute */
     if(preg_match("/olab/i",$this->mmethod)){
       if (empty($this->gosaMailServer)||is_array($this->gosaMailServer)){
         if(isset($this->attrs['gosaMailServer'][0])){
@@ -817,15 +798,11 @@ I: Only insider delivery */
 
     /* Prepare kolab attributes to be written  */
     if(preg_match("/olab/i",$this->mmethod)){
-      $this->attrs['acl']= array();
       if(!empty($this->kolabFolderType_Type)){ 
         $this->attrs['kolabFolderType'] = $this->kolabFolderType_Type.".".$this->kolabFolderType_SubType;
       }else{
         $this->attrs['kolabFolderType'] = array();
       }
-    }else{
-      $this->attrs['acl']= array();;
-      unset($this->attrs['acl']);
     }
 
     /* Get naming attribute for mail accounts */  
@@ -833,10 +810,21 @@ I: Only insider delivery */
     $uattrib = $tmp->uattrib;
 
     /* Create ACL array 
-     *  In case of kolab also create attrs['acl'] to save acls in ldap.
+      What is done here.
+        
+        1.  Do not write acl entries for empty entries. 
+        2.  Check if given user is a valid GOsa user. 
+            - If he is one, check if he has a valid mail extension
+              -If this is true, add the user to the ACL entry.
+              -If this is NOT true, skip ACL entries for this user.
+            - He is not a GOsa Account, so write the ACL. (Manually entered ACL)
+        3. In case of "olab" mail method, remove the entry from the $this->imapacl array
+            because the kolab deamon will set the acls for us.
+
      */
     foreach ($this->imapacl as $user => $acl){
 
+      /* Skip empty entries */
       if (empty($user) || $user == ""){
         unset($this->imapacl[$user]);
       }
@@ -848,46 +836,57 @@ I: Only insider delivery */
 
       /* Check if your is a real GOsa user  
        * If user is a real GOsa user but do not have an email address - SKIP adding acls
-       * If user is a real GOsa user with an emal address - add acls  
+       * If user is a real GOsa user with an email address - add acls  
        */
       $ldap->search("(&(objectClass=person)(|(uid=".$user.")(mail=".$user.")))",array("mail","uid"));
       if($ldap->count()){
-        $attrs = $ldap->fetch();
 
         /* Has the user a valid mail account? */
+        $attrs = $ldap->fetch();
         if(isset($attrs['mail'][0])){
 
           $name = $attrs[$uattrib][0];
+          $this->attrs['acl'][]= $name." ".$acl;
 
-          /* In case of kolab methods add acl attribute too */
-          if(preg_match("/olab/i",$this->mmethod)){
-            $this->attrs['acl'][]= $name." ".$acl;
-            unset($this->imapacl[$user]);
+          /* Do not write imap acl directly i nkolab mode, let the kolab deamon do this. */
+          unset($this->imapacl[$user]);
+          if(!preg_match("/olab/i",$this->mmethod)){
+            $this->imapacl[$name] = $acl;
           }
-          $this->imapacl[$name] = $acl;
+
         }else{
 
-          /* User has no mail extension */
+          /* User is a valid GOsa account, but he has no mail extension. Skip ACLs */
           unset($this->imapacl[$user]);
         }
       }else{
-        /* Seems to be a manually added acl */
 
-        /* In case of kolab methods add acl attribute too */
+        /* Seems to be a manually a added acl 
+         * Write this acl.
+         */
+        $this->attrs['acl'][]= $user." ".$acl;
+
+        /* In case of kolab methods, let the deamon add the imap acls */
         if(preg_match("/olab/i",$this->mmethod)){
-          $this->attrs['acl'][]= $user." ".$acl;
+          unset($this->imapacl[$user]);
         }
-        $this->imapacl[$user] = $acl;
       }
     }
- 
+
+    /* Handle mail method actions, set acls, quota ...*/ 
     if ((!$this->is_template)&&(!empty($this->gosaMailServer))){
       $method= new $this->method($this->config);
       $method->fixAttributesOnStore($this);
       if (($method->connect($this->gosaMailServer))){
         $method->updateMailbox($this->uid);
         $method->setQuota($this->uid, $this->gosaMailQuota);
-        $method->setSharedFolderPermissions($this->uid, $this->imapacl);
+
+        /* Only write imap acls directly if we are not 
+         *  using a kolab like mail method.
+         */
+        if(!preg_match("/olab/i",$this->mmethod)){
+          $method->setSharedFolderPermissions($this->uid, $this->imapacl);
+        }
         $method->disconnect();
       }
     }
@@ -907,6 +906,7 @@ I: Only insider delivery */
       $this->handle_post_events("add");
     }
   }
+
 
   /* Check formular input */
   function check()
