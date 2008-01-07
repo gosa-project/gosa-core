@@ -87,9 +87,9 @@ class CopyPasteHandler {
     
     /* check if we are able to create a new file the given directory */
     if(!is_writeable(LDAP_DUMP_PATH)){
-      print_red(sprintf(_("Could not cleanup copy & paste queue. We are not allowed to save ldap dump to '%s', please check permissions."),LDAP_DUMP_PATH));
-      new log("copy","all/all","copy & paste, event queue.",array(),
-          sprintf("Could not cleanup copy & paste queue. We are not allowed to save ldap dump to '%s', please check permissions.",LDAP_DUMP_PATH));
+      $msg= sprintf(_("Cannot cleanup copy & paste queue: no write permission inside '%s'!"),LDAP_DUMP_PATH);
+      msg_dialog::display(_("Configuration error"), $msg, ERROR_DIALOG);
+      new log("copy","all/all","copy & paste, event queue.",array(), $msg);
       return(FALSE);
     }
 
@@ -119,8 +119,9 @@ class CopyPasteHandler {
 
     /* Check if given dn is valid and ldap search was succesfull */ 
     if(!$res){
-      print_red(sprintf(_("Specified object '%s' is not a valid ldap object, please check copy & paste  methods.")));
-      new log("copy","all/all",$dn,array(),"Could not create dump of ldap object, given object is not present in the ldap database.");
+      $msg= sprintf(_("Copy and paste failed: object '%s' is not a valid ldap object!"), LDAP::fix($dn));
+      msg_dialog::display(_("Internal error"), $msg, ERROR_DIALOG);
+      new log("copy","all/all",$dn,array(), $msg);
       return(FALSE);
     }
 
@@ -135,18 +136,18 @@ class CopyPasteHandler {
 
     /* check if we are able to create a new file the given directory */
     if(!is_writeable($path)){
-      print_red(sprintf(_("We are not allowed to save ldap dump to '%s', please check permissions."),$path));
-      new log("copy","all/all",$dn,array(), 
-          sprintf("We are not allowed to save ldap dump to '%s', please check permissions.",$path));
+      $msg= sprintf(_("Cannot save LDAP dump: no write permission inside '%s'!"),LDAP_DUMP_PATH);
+      msg_dialog::display(_("Configuration error"), $msg, ERROR_DIALOG);
+      new log("copy","all/all",$dn,array(), $msg);
       return(FALSE);
     }  
 
     /* Create file handle */
     $fp = @fopen($path."/".$filename,"w+");
     if(!$fp){
-      print_red(sprintf(_("We are not allowed to save ldap dump to '%s/%s', please check permissions."),$path,$filename));
-      new log("copy","all/all",$dn,array(), 
-          sprintf("We are not allowed to save ldap dump to '%s/%s', please check permissions.",$path,$filename));
+      $msg= sprintf(_("Cannot save LDAP dump: no write permission to '%s/%s'!"),$path,$filename);
+      msg_dialog::display(_("Configuration error"), $msg, ERROR_DIALOG);
+      new log("copy","all/all",$dn,array(), $msg);
       return(FALSE);
     }    
 
