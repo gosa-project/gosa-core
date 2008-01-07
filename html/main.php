@@ -84,7 +84,7 @@ if(session::get('_LAST_PAGE_REQUEST') == ""){
    * kill session
    */
   if($request_time > $max_life){
-    session_unset();
+    session::destroy();
     new log("security","login","",array(),"main.php called without session - logging out") ;
     header ("Location: logout.php");
     exit;
@@ -160,7 +160,7 @@ $plist= session::get('plist');
 if (isset($global_check) && $config->data['MAIN']['FORCEGLOBALS'] == 'true'){
   echo _("FATAL: Register globals is on. GOsa will refuse to login unless this is fixed by an administrator.");
   new log("security","login","",array(),"Register globals is on. For security reasons, this should be turned off.") ;
-  session_destroy ();
+  session::destroy ();
   exit ();
 }
 

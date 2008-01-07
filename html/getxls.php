@@ -466,7 +466,7 @@ function dump_ldap ($mode= 0)
 /* Basic setup, remove eventually registered sessions */
 @require_once ("../include/php_setup.inc");
 @require_once ("functions.inc");
-session_start ();
+session::start();
 
 /* Logged in? Simple security check */
 if (!session::is_set('ui')){

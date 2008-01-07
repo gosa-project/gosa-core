@@ -25,7 +25,7 @@ header("Content-type: text/html; charset=UTF-8");
 
 /* try to start session, so we can remove userlocks, 
   if the old session is still available */
-@session_start();
+@session::start();
 if(session::is_set('ui')){
   
   /* Get config & ui informations */
@@ -73,8 +73,7 @@ if (isset ($config->data['MAIN']['COMPILE'])){
 if (isset($_GET['request'])){
   
   /* destroy old session */
-  @session_unset ();
-  @session_destroy ();
+  session::destroy ();
   
   /* If we're not using htaccess authentication, just redirect... */
   if (isset($config->data['MAIN']['HTACCESS_AUTH']) && preg_match('/^(true|yes)$/i', $config->data['MAIN']['HTACCESS_AUTH'])){

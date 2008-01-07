@@ -36,7 +36,7 @@ if(!class_exists("log")){
 
 header("Content-type: text/html; charset=UTF-8");
 
-session_start();
+session::start();
 
 /* Destroy old session if exists.
     Else you will get your old session back, if you not logged out correctly. */

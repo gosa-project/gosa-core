@@ -27,7 +27,7 @@ error_reporting(E_ALL | E_STRICT);
 restore_error_handler();
 header("Content-type: text/html; charset=UTF-8");
 
-session_start();
+session::start();
 
 /* If no config object is found in the session, abort help */
 if (!session::is_set('config')){

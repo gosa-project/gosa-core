@@ -49,7 +49,7 @@ class setup
 
     /* Ensure that setup is not reachable if gosa.conf (CONFIG_FILE) */
     if(file_exists(CONFIG_DIR."/".CONFIG_FILE)){
-      session_destroy();
+      session::destroy();
       header("Location: index.php")    ;
       exit();
     }

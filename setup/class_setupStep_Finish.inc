@@ -65,7 +65,7 @@ class Step_Finish extends setup_step
      *   - Permisssion are set correctly 
      */ 
     if(isset($_POST['next']) && $exists && !$this->is_world_readable(CONFIG_DIR."/".CONFIG_FILE)){
-      session_destroy();
+      session::destroy();
       header("Location: index.php");
       exit();
     }

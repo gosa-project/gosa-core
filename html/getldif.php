@@ -61,7 +61,7 @@ function dump_ldap ($mode= 0)
 @require_once ("../include/php_setup.inc");
 @require_once ("functions.inc");
 error_reporting (E_ALL | E_STRICT);
-session_start ();
+session::start();
 
 /* Logged in? Simple security check */
 if (!session::is_set('ui')){
