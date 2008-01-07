@@ -230,9 +230,9 @@ class CopyPasteHandler {
       }
       return(unserialize($data));
     }else{
-      print_red(sprintf(_("Could not load dumped file '%s', from hard disk drive."),$filename));
-      new log("copy","all/all",$dn,array(), 
-          sprintf(sprintf("Could not load dumped file '%s', from hard disk drive.",$filename)));
+      $msg= sprintf(_("Cannot load dumped file '%s'!"),$filename);
+      msg_dialog::display(_("Internal error"), $msg, ERROR_DIALOG);
+      new log("copy","all/all",$dn,array(), $msg);
       return(FALSE);
     }
   }
@@ -255,10 +255,10 @@ class CopyPasteHandler {
  
           /* Check permissions */ 
           if(!preg_match("/((c|w)|(w|c))/",$acl)){
-            print_red(sprintf(_("You are not allowed to cut and paste the following object '%s'."),$this->current['dn']));
+            msg_dialog::display(_("Error"), sprintf(_("You have no permission to save object '%s'."), $this->current['dn']), ERROR_DIALOG);
           }elseif(count ($msgs) ){
             foreach( $msgs as $msg){
-              print_red($msg);
+              msg_dialog::display(_("Error"), $msg, ERROR_DIALOG);
             }
           }else{
 
@@ -296,10 +296,10 @@ class CopyPasteHandler {
  
         /* Check permissions */ 
         if(!preg_match("/((c|w)|(w|c))/",$acl)){
-          print_red(sprintf(_("You are not allowed to copy and paste the following object '%s'."),$this->current['dn']));
+          msg_dialog::display(_("Error"), sprintf(_("You have no permission to copy and paste object '%s'!"),$this->current['dn']), ERROR_DIALOG);
         }elseif(count ($msgs) ){
           foreach( $msgs as $msg){
-            print_red($msg);
+            msg_dialog::display(_("Error"), $msg, ERROR_DIALOG);
           }
         }else{
           $this->current['object']->save();
