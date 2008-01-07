@@ -238,6 +238,17 @@ class mailgroup extends plugin
         }
       }
     }else{
+      /* Load permissions */
+      if (isset($this->attrs['acl'])){
+        for ($i= 0; $i<$this->attrs['acl']['count']; $i++){
+          list($user, $permission)= split(' ', $this->attrs['acl'][$i]);
+          $this->imapacl[$user]= $permission;
+          if ($user != "anyone" && $user != "%members%"){
+            unset($this->imapacl['']);
+          }
+        }
+      }
+
       foreach($this->imapacl as $user => $permission){
         if ($user != "anyone" && $user != "%members%"){
           $tmp[$permission][] = $user;
@@ -588,7 +599,7 @@ class mailgroup extends plugin
         if ($nr == $count - 1){
         }
         if ($count > 2){
-          $tmp.= "<input type=submit value=\""._("Remove")."\" ".
+          $tmp.= "</td><td><input type=submit value=\""._("Remove")."\" ".
             "name=\"del_$nr\" $perm></td></tr>";
         }
       }
