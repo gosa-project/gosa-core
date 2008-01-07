@@ -26,8 +26,8 @@ if (!$remove_lock){
 		(isset($_GET['reset']) && $_GET['reset'] == 1)){
 
 		del_lock ($ui->dn);
-		sess_del ('edit');
-		sess_del ('phoneAccount');
+		session::un_set ('edit');
+		session::un_set ('phoneAccount');
 	}
 
 	/* Create phoneAccount object on demand */
@@ -74,7 +74,7 @@ if (!$remove_lock){
 			$phoneAccount->save ();
 
 			del_lock ($ui->dn);
-			sess_del ('edit');
+			session::un_set ('edit');
 
 			/* Write back to session */
 			session::set('phoneAccount',$phoneAccount);

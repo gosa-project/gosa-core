@@ -186,11 +186,11 @@ class sambaAccount extends plugin
     }
 
     /* Get global filter config */
-    if (!is_global("sambafilter")){
+    if (!session::is_set("sambafilter")){
       $ui= get_userinfo();
       $base= get_base_from_people($ui->dn);
       $sambafilter= array( "depselect" => $base, "regex" => "*");
-      register_global("sambafilter", $sambafilter);
+      session::set("sambafilter", $sambafilter);
     }
 
     /* Save initial account state */
@@ -366,7 +366,7 @@ class sambaAccount extends plugin
     if ($this->show_ws_dialog){
 
       /* Save data */
-      $sambafilter= get_global("sambafilter");
+      $sambafilter= session::get("sambafilter");
       foreach( array("depselect", "regex") as $type){
         if (isset($_POST[$type])){
           $sambafilter[$type]= $_POST[$type];
@@ -379,7 +379,7 @@ class sambaAccount extends plugin
         }
         $sambafilter['regex']= $s;
       }
-      register_global("sambafilter", $sambafilter);
+      session::set("sambafilter", $sambafilter);
 
       /* Get workstation list */
       $exclude= "";
@@ -1156,11 +1156,11 @@ class sambaAccount extends plugin
     }
 
     /* Get global filter config */
-    if (!is_global("sambafilter")){
+    if (!session::is_set("sambafilter")){
       $ui= get_userinfo();
       $base= get_base_from_people($ui->dn);
       $sambafilter= array( "depselect" => $base, "regex" => "*");
-      register_global("sambafilter", $sambafilter);
+      session::set("sambafilter", $sambafilter);
     }
   }
 

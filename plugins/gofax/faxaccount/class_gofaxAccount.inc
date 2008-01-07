@@ -101,13 +101,13 @@ class gofaxAccount extends plugin
     }
 
     /* Get global filter config */
-    if (!is_global("faxfilter")){
+    if (!session::is_set("faxfilter")){
       $ui= get_userinfo();
       $base= get_base_from_people($ui->dn);
       $faxfilter= array( "depselect"       => $base,
           "fuser"            => "*",
           "regex"           => "");
-      register_global("faxfilter", $faxfilter);
+      session::set("faxfilter", $faxfilter);
     }
   }
 
@@ -348,7 +348,7 @@ class gofaxAccount extends plugin
     if ($this->locals_dialog){
 
       /* Save data */
-      $faxfilter= get_global("faxfilter");
+      $faxfilter= session::get("faxfilter");
       foreach( array("depselect", "fuser", "regex") as $type){
         if (isset($_POST[$type])){
           $faxfilter[$type]= $_POST[$type];

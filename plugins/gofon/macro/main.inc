@@ -23,7 +23,7 @@ if ($remove_lock){
     $macroManagment = session::get('macroManagment');
     $macroManagment->remove_lock();
     del_lock ($ui->dn);
-    sess_del ('macroManagment');
+    session::un_set ('macroManagment');
   }
 } else {
 
@@ -50,7 +50,7 @@ if ($remove_lock){
   /* Reset requested? */
   if (isset($_GET['reset']) && $_GET['reset'] == 1){
     del_lock ($ui->dn);
-    sess_del ('macroManagment');
+    session::un_set ('macroManagment');
   }
 
   /* Show and save dialog */

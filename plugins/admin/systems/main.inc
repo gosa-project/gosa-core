@@ -23,7 +23,7 @@ if ($remove_lock){
                 $systems = session::get('systems');
                 $systems->remove_lock();
                 del_lock ($ui->dn);
-                sess_del ('systems');
+                session::un_set ('systems');
         }
 } else {
 	/* Create usermanagement object on demand */
@@ -37,7 +37,7 @@ if ($remove_lock){
 	/* Reset requested? */
 	if (isset($_GET['reset']) && $_GET['reset'] == 1){
 		del_lock ($ui->dn);
-		sess_del ('systems');
+		session::un_set ('systems');
 	}
 
 	/* Page header*/

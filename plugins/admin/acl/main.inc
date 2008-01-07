@@ -23,7 +23,7 @@ if ($remove_lock){
                 $macl = session::get('macl');
                 $macl->remove_lock();
                 del_lock ($ui->dn);
-                sess_del ('macl');
+                session::un_set ('macl');
         }
 } else {
 	$display= "No headpage yet for this module";
@@ -48,7 +48,7 @@ if (!session::is_set('macl') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 	/* Reset requested? */
 	if (isset($_GET['reset']) && $_GET['reset'] == 1){
 		del_lock ($ui->dn);
-		sess_del ('macl');
+		session::un_set ('macl');
 	}
 
 	$display.= $output;

@@ -23,8 +23,8 @@ if (!$remove_lock){
   if (isset($_POST['edit_cancel']) || 
       (isset($_GET['reset']) && $_GET['reset'] == 1)){
 #    del_lock ($ui->dn);
-    sess_del ('edit');
-    sess_del ('environment');
+    session::un_set ('edit');
+    session::un_set ('environment');
   }
 
   /* Create mail object on demand */
@@ -70,10 +70,10 @@ if (!$remove_lock){
     if (count ($message) == 0){
       $environment->save ();
       del_lock ($ui->dn);
-      sess_del ('edit');
+      session::un_set ('edit');
 
       /* Remove object */
-      sess_del ('environment');
+      session::un_set ('environment');
     } else {
       /* Errors found, show message */
       show_errors ($message);

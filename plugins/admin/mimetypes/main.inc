@@ -23,7 +23,7 @@ if ($remove_lock){
 				$MimeTypeManagement = session::get('MimeTypeManagement');
 				$MimeTypeManagement->remove_lock();
 				del_lock ($ui->dn);
-				sess_del ('MimeTypeManagement');
+				session::un_set ('MimeTypeManagement');
 		}
 } else {
 
@@ -47,7 +47,7 @@ if ($remove_lock){
 		/* Reset requested? */
 		if (isset($_GET['reset']) && $_GET['reset'] == 1){
 				del_lock ($ui->dn);
-				sess_del ('MimeTypeManagement');
+				session::un_set ('MimeTypeManagement');
 		}
 
 		/* Show and save dialog */

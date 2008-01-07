@@ -27,8 +27,8 @@ if (!$remove_lock){
   if (isset($_POST['edit_cancel']) || isset($_POST['password_cancel']) || 
       (isset($_GET['reset']) && $_GET['reset'] == 1)){
     del_lock ($ui->dn);
-    sess_del ('edit');
-    sess_del ('user');
+    session::un_set ('edit');
+    session::un_set ('user');
   }
 
   /* Create user object on demand */
@@ -104,7 +104,7 @@ if (!$remove_lock){
     }
 
     del_lock ($ui->dn);
-    sess_del ('user');
+    session::un_set ('user');
   }
 
   /* save changes to LDAP and disable edit mode */
@@ -117,7 +117,7 @@ if (!$remove_lock){
     if (count ($message) == 0){
       $user->save ();
       del_lock ($ui->dn);
-      sess_del ('edit');
+      session::un_set ('edit');
 
       /* Need to reset the password? */
       if($user->password_change_needed()){
@@ -127,7 +127,7 @@ if (!$remove_lock){
         $display.= $smarty->fetch(get_template_path('password.tpl', TRUE));
         return ($display);
       } else {
-	sess_del ('user');
+	session::un_set ('user');
       }
 
     } else {

@@ -56,7 +56,7 @@ class aclrole extends acl
     ksort($this->gosaAclTemplate);
 
     /* Extract available categories from plugin info list */
-    $tmp= get_global('plist');
+    $tmp= session::get('plist');
     $plist= $tmp->info;
     $oc = array();
     foreach ($plist as $class => $acls){
@@ -154,7 +154,7 @@ class aclrole extends acl
       }
     }
 
-    $tmp= get_global('plist');
+    $tmp= session::get('plist');
     $plist= $tmp->info;
 
     /* Handle posts */
@@ -426,7 +426,7 @@ class aclrole extends acl
 
   function sort_by_priority($list)
   {
-    $tmp= get_global('plist');
+    $tmp= session::get('plist');
     $plist= $tmp->info;
     asort($plist);
     $newSort = array();

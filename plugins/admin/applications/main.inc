@@ -23,7 +23,7 @@ if ($remove_lock){
                 $applicationManagement = session::get('applicationManagement');
                 $applicationManagement->remove_lock();
                 del_lock ($ui->dn);
-                sess_del ('applicationManagement');
+                session::un_set ('applicationManagement');
         }
 } else {
 	/* Create applicationManagement object on demand */
@@ -44,7 +44,7 @@ if ($remove_lock){
 	/* Reset requested? */
 	if (isset($_GET['reset']) && $_GET['reset'] == 1){
 		del_lock ($ui->dn);
-		sess_del ('applicationManagement');
+		session::un_set ('applicationManagement');
 	}
 
 	/* Show and save dialog */

@@ -144,12 +144,12 @@ class group extends plugin
     }
 
     /* Get global filter config */
-    if (!is_global("gufilter")){
+    if (!session::is_set("gufilter")){
       $ui= get_userinfo();
       $base= get_base_from_people($ui->dn);
       $gufilter= array( "dselect"       => $base,
           "regex"           => "*");
-      register_global("gufilter", $gufilter);
+      session::set("gufilter", $gufilter);
     }
     $gufilter= session::get('gufilter');
     $gufilter['SubSearchGroup'] = false;
@@ -277,7 +277,7 @@ class group extends plugin
     if ($this->group_dialog){
 
       /* Save data */
-      $gufilter= get_global("gufilter");
+      $gufilter= session::get("gufilter");
       foreach( array("dselect", "regex") as $type){
         if (isset($_POST[$type])){
           $gufilter[$type]= $_POST[$type];
@@ -298,7 +298,7 @@ class group extends plugin
         }
         $gufilter['regex']= $s;
       }
-      register_global("gufilter", $gufilter);
+      session::set("gufilter", $gufilter);
       $this->reload();
 
       /* Show dialog */
@@ -416,7 +416,7 @@ class group extends plugin
   function reload()
   {
     /* Fix regex string */
-    $gufilter = get_global("gufilter");
+    $gufilter = session::get("gufilter");
     $regex    = normalizeLdap($gufilter['regex']);
     $MaxUser  = $this->OnlyShowFirstEntries;
 

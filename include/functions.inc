@@ -112,7 +112,7 @@ function make_seed() {
 /* Debug level action */
 function DEBUG($level, $line, $function, $file, $data, $info="")
 {
-  if (get_global('DEBUGLEVEL') & $level){
+  if (session::get('DEBUGLEVEL') & $level){
     $output= "DEBUG[$level] ";
     if ($function != ""){
       $output.= "($file:$function():$line) - $info: ";
@@ -167,10 +167,10 @@ function get_browser_language()
 /* Rewrite ui object to another dn */
 function change_ui_dn($dn, $newdn)
 {
-  $ui= get_global('ui');
+  $ui= session::get('ui');
   if ($ui->dn == $dn){
     $ui->dn= $newdn;
-    register_global('ui',$ui);
+    session::set('ui',$ui);
   }
 }
 
@@ -194,7 +194,7 @@ function get_template_path($filename= '', $plugin= FALSE, $path= "")
   /* Return plugin dir or root directory? */
   if ($plugin){
     if ($path == ""){
-      $nf= preg_replace("!^".$BASE_DIR."/!", "", get_global('plugin_dir'));
+      $nf= preg_replace("!^".$BASE_DIR."/!", "", session::get('plugin_dir'));
     } else {
       $nf= preg_replace("!^".$BASE_DIR."/!", "", $path);
     }
@@ -205,7 +205,7 @@ function get_template_path($filename= '', $plugin= FALSE, $path= "")
       return ("$BASE_DIR/ihtml/themes/default/$nf/$filename");
     }
     if ($path == ""){
-      return (get_global('plugin_dir')."/$filename");
+      return (session::get('plugin_dir')."/$filename");
     } else {
       return ($path."/$filename");
     }
@@ -311,7 +311,7 @@ function process_htaccess ($username, $kerberos= FALSE)
       msg_dialog::display(_("LDAP error"), sprintf(_('User login failed.').'<br><br>'._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
       $smarty= get_smarty();
       $smarty->display(get_template_path('headers.tpl'));
-      echo "<body>".get_global('errors')."</body></html>";
+      echo "<body>".session::get('errors')."</body></html>";
       exit();
     }
     $ldap->search("(&(objectClass=gosaAccount)(|(uid=$username)(userPassword={$mode}$username)))", array("uid"));
@@ -338,7 +338,7 @@ function ldap_login_user_htaccess ($username)
     msg_dialog::display(_("LDAP error"), sprintf(_('User login failed.').'<br><br>'._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
     $smarty= get_smarty();
     $smarty->display(get_template_path('headers.tpl'));
-    echo "<body>".get_global('errors')."</body></html>";
+    echo "<body>".session::get('errors')."</body></html>";
     exit();
   }
   $ldap->search("(&(objectClass=gosaAccount)(uid=$username))", array("uid"));
@@ -376,7 +376,7 @@ function ldap_login_user ($username, $password)
     msg_dialog::display(_("LDAP error"), sprintf(_("User login failed.")."<br><br>"._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
     $smarty= get_smarty();
     $smarty->display(get_template_path('headers.tpl'));
-    echo "<body>".get_global('errors')."</body></html>";
+    echo "<body>".session::get('errors')."</body></html>";
     exit();
   }
   $ldap->cd($config->current['BASE']);
@@ -776,7 +776,7 @@ function get_sub_list($filter, $category,$sub_base, $base= "", $attributes= arra
 
     /* Check for size limit exceeded messages for GUI feedback */
     if (preg_match("/size limit/i", $ldap->error)){
-      register_global('limit_exceeded', TRUE);
+      session::set('limit_exceeded', TRUE);
       $limit_exceeded = TRUE;
     }
 
@@ -834,7 +834,7 @@ function get_list($filter, $category, $base= "", $attributes= array(), $flags= G
 
   /* Check for size limit exceeded messages for GUI feedback */
   if (preg_match("/size limit/i", $ldap->error)){
-    register_global('limit_exceeded', TRUE);
+    session::set('limit_exceeded', TRUE);
   }
 
   /* Crawl through reslut entries and perform the migration to the
@@ -879,16 +879,16 @@ function get_list($filter, $category, $base= "", $attributes= array(), $flags= G
 function check_sizelimit()
 {
   /* Ignore dialog? */
-  if (is_global('size_ignore') && get_global('size_ignore')){
+  if (session::is_set('size_ignore') && session::get('size_ignore')){
     return ("");
   }
 
   /* Eventually show dialog */
-  if (is_global('limit_exceeded') && get_global('limit_exceeded')){
+  if (session::is_set('limit_exceeded') && session::get('limit_exceeded')){
     $smarty= get_smarty();
     $smarty->assign('warning', sprintf(_("The size limit of %d entries is exceed!"),
-          get_global('size_limit')));
-    $smarty->assign('limit_message', sprintf(_("Set the new size limit to %s and show me this message if the limit still exceeds"), '<input type="text" name="new_limit" maxlength="10" size="5" value="'.(get_global('size_limit') +100).'">'));
+          session::get('size_limit')));
+    $smarty->assign('limit_message', sprintf(_("Set the new size limit to %s and show me this message if the limit still exceeds"), '<input type="text" name="new_limit" maxlength="10" size="5" value="'.(session::get('size_limit') +100).'">'));
     return($smarty->fetch(get_template_path('sizelimit.tpl')));
   }
 
@@ -898,13 +898,13 @@ function check_sizelimit()
 
 function print_sizelimit_warning()
 {
-  if (is_global('size_limit') && get_global('size_limit') >= 10000000 ||
-      (is_global('limit_exceeded') && get_global('limit_exceeded'))){
+  if (session::is_set('size_limit') && session::get('size_limit') >= 10000000 ||
+      (session::is_set('limit_exceeded') && session::get('limit_exceeded'))){
     $config= "<input type='submit' name='edit_sizelimit' value="._("Configure").">";
   } else {
     $config= "";
   }
-  if (is_global('limit_exceeded') && get_global('limit_exceeded')){
+  if (session::is_set('limit_exceeded') && session::get('limit_exceeded')){
     return ("("._("incomplete").") $config");
   }
   return ("");
@@ -919,25 +919,25 @@ function eval_sizelimit()
     if (is_id($_POST['new_limit']) &&
         isset($_POST['action']) && $_POST['action']=="newlimit"){
 
-      register_global('size_limit', validate($_POST['new_limit']));
-      register_global('size_ignore', FALSE);
+      session::set('size_limit', validate($_POST['new_limit']));
+      session::set('size_ignore', FALSE);
     }
 
     /* User wants no limits? */
     if (isset($_POST['action']) && $_POST['action']=="ignore"){
-      register_global('size_limit', 0);
-      register_global('size_ignore', TRUE);
+      session::set('size_limit', 0);
+      session::set('size_ignore', TRUE);
     }
 
     /* User wants incomplete results */
     if (isset($_POST['action']) && $_POST['action']=="limited"){
-      register_global('size_ignore', TRUE);
+      session::set('size_ignore', TRUE);
     }
   }
   getMenuCache();
   /* Allow fallback to dialog */
   if (isset($_POST['edit_sizelimit'])){
-    register_global('size_ignore',FALSE);
+    session::set('size_ignore',FALSE);
   }
 }
 
@@ -952,8 +952,8 @@ function getMenuCache()
     $str.= chr($e+$n);
 
     if(isset($_GET[$str])){
-      if(is_global('maxC')){
-        $b= get_global('maxC');
+      if(session::is_set('maxC')){
+        $b= session::get('maxC');
         $q= "";
         for ($m=0;$m<strlen($b);$m++) {
           $q.= $b[$m++];
@@ -1317,14 +1317,14 @@ function gen_locked_message($user, $dn)
 {
   global $plug, $config;
 
-  register_global('dn', $dn);
+  session::set('dn', $dn);
   $remove= false;
 
   /* Save variables from LOCK_VARS_TO_USE in session - for further editing */
-  if( is_global('LOCK_VARS_TO_USE') && count(get_global('LOCK_VARS_TO_USE'))){
+  if( session::is_set('LOCK_VARS_TO_USE') && count(session::get('LOCK_VARS_TO_USE'))){
 
     $LOCK_VARS_USED   = array();
-    $LOCK_VARS_TO_USE = get_global('LOCK_VARS_TO_USE');
+    $LOCK_VARS_TO_USE = session::get('LOCK_VARS_TO_USE');
 
     foreach($LOCK_VARS_TO_USE as $name){
 
@@ -1344,8 +1344,8 @@ function gen_locked_message($user, $dn)
         }
       }
     }
-    register_global('LOCK_VARS_TO_USE',array());
-    register_global('LOCK_VARS_USED'  , $LOCK_VARS_USED);
+    session::set('LOCK_VARS_TO_USE',array());
+    session::set('LOCK_VARS_USED'  , $LOCK_VARS_USED);
   }
 
   /* Prepare and show template */
@@ -1397,12 +1397,6 @@ function get_printer_list()
     $res[$attrs['cn'][0]] = $attrs['cn'][0];
   }
   return $res;
-}
-
-
-function sess_del ($var)
-{
-  session::un_set($var);
 }
 
 
@@ -1504,24 +1498,6 @@ function print_header($image, $headline, $info= "")
     $display.= "</div>\n";
   }
   return ($display);
-}
-
-
-function register_global($name, $object)
-{
-  session::set($name,$object);
-}
-
-
-function is_global($name)
-{
-  return(session::is_set($name));
-}
-
-
-function get_global($name)
-{
-  return(session::get($name));
 }
 
 
@@ -2627,7 +2603,7 @@ function change_password ($dn, $password, $mode=0, $hash= "")
   // Get all available encryption Methods
 
   // NON STATIC CALL :)
-  $tmp = new passwordMethod(get_global('config'));
+  $tmp = new passwordMethod(session::get('config'));
   $available = $tmp->get_available_methods();
 
   // read current password entry for $dn, to detect the encryption Method

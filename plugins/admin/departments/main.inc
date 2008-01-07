@@ -23,7 +23,7 @@ if ($remove_lock){
                 $department = session::get('department');
                 $department->remove_lock();
                 del_lock ($ui->dn);
-                sess_del ('department');
+                session::un_set ('department');
         }
 } else {
 	/* Create usermanagement object on demand */
@@ -46,7 +46,7 @@ if ($remove_lock){
 	/* Reset requested? */
 	if (isset($_GET['reset']) && $_GET['reset'] == 1){
 		del_lock ($ui->dn);
-		sess_del ('department');
+		session::un_set ('department');
 	}
 
 	$display.= $output;

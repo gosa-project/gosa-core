@@ -26,14 +26,14 @@ class logview extends plugin
     $this->config= &$config;
 
     /* Get global filter config */
-    if (!is_global("logfilter")){
+    if (!session::is_set("logfilter")){
       $logfilter= array(
           "time" => "1",
           "log_level" => "!All",
           "host" => "!All",
           "regex" => "*");
 
-      register_global("logfilter", $logfilter);
+      session::set("logfilter", $logfilter);
     }
 
     $this->ui = get_userinfo();
@@ -50,7 +50,7 @@ class logview extends plugin
       new log("view","logview/".get_class($this),$this->dn);
     }
 
-    $logfilter= get_global("logfilter");
+    $logfilter= session::get("logfilter");
     $smarty= get_smarty();
     $smarty->assign("search_result", "");
     $smarty->assign("plug", "?plug=".validate($_GET['plug']));
@@ -339,7 +339,7 @@ class logview extends plugin
     }
 
     /* Save data */
-    $logfilter= get_global("logfilter");
+    $logfilter= session::get("logfilter");
 
     /* Get actual select boxe values */
     $logfilter_changed = 0;
@@ -365,7 +365,7 @@ class logview extends plugin
     }
 
     /* Store filter values */
-    register_global("logfilter", $logfilter);
+    session::set("logfilter", $logfilter);
 
     /* Set start value */
     if (isset($_GET['start'])){

@@ -24,8 +24,8 @@ if (!$remove_lock){
       (isset($_GET['reset']) && $_GET['reset'] == 1)){
 
     del_lock ($ui->dn);
-    sess_del ('edit');
-    sess_del ('connectivity');
+    session::un_set ('edit');
+    session::un_set ('connectivity');
   }
 
   /* Create connectivity object on demand */
@@ -77,10 +77,10 @@ if (!$remove_lock){
     if (count ($message) == 0){
       $connectivity->save ();
       del_lock ($ui->dn);
-      sess_del ('edit');
+      session::un_set ('edit');
 
       /* Remove from session */
-      sess_del ('connectivity');
+      session::un_set ('connectivity');
     } else {
       /* Errors found, show message */
       show_errors ($message);

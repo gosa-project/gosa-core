@@ -44,14 +44,14 @@ class faxreport extends plugin
 
     /* Get global filter config and set class vars , 
        or create a filter */
-    if (!is_global("faxreportfilter")){
+    if (!session::is_set("faxreportfilter")){
       $faxreportfilter = array();
       foreach($this->attributes_SO as $name){
         $faxreportfilter[$name] = $this->$name;
       } 
-      register_global("faxreportfilter",$faxreportfilter);
+      session::set("faxreportfilter",$faxreportfilter);
     }else{
-      $faxreportfilter = get_global("faxreportfilter");
+      $faxreportfilter = session::get("faxreportfilter");
       foreach($this->attributes_SO as $name){
         $this->$name = $faxreportfilter[$name];
       }
@@ -429,7 +429,7 @@ class faxreport extends plugin
      to remember last search next time*/
   function save_object()
   {
-    $faxreportfilter = get_global("faxreportfilter");
+    $faxreportfilter = session::get("faxreportfilter");
     if(isset($_POST['EntriesPerPage'])){
       $this->range = $_POST['EntriesPerPage'];
     }
@@ -467,7 +467,7 @@ class faxreport extends plugin
     foreach($this->attributes_SO as $name){
       $faxreportfilter[$name] = $this->$name;
     }  
-    register_global("faxreportfilter",$faxreportfilter);
+    session::set("faxreportfilter",$faxreportfilter);
   }
 
 

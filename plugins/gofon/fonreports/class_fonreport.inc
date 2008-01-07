@@ -38,14 +38,14 @@ class fonreport extends plugin
     $this->year       = date("Y");
 
     /* Use filter settings if we have already searched */
-    if (!is_global("fonfilter")){
+    if (!session::is_set("fonfilter")){
       $fonfilter = array();
       foreach($this->attributes_SO as $name){
         $fonfilter[$name]=$this->$name;
       }
-      register_global("fonfilter", $fonfilter);
+      session::set("fonfilter", $fonfilter);
     }else{
-      $fonfilter = get_global("fonfilter");
+      $fonfilter = session::get("fonfilter");
       foreach($this->attributes_SO as $name){
         $this->$name = $fonfilter[$name];
       }
@@ -57,7 +57,7 @@ class fonreport extends plugin
       to remember settings */
   function save_object()
   {
-    $fonfilter= get_global("fonfilter");
+    $fonfilter= session::get("fonfilter");
     if(isset($_POST['EntryPerPage'])){
       $this->range = $_POST['EntryPerPage'];
     }
@@ -91,7 +91,7 @@ class fonreport extends plugin
     foreach($this->attributes_SO as $name){
       $fonfilter[$name] = $this->$name;
     }
-    register_global("fonfilter", $fonfilter);
+    session::set("fonfilter", $fonfilter);
   }
 
 

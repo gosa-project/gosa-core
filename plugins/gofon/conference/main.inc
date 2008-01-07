@@ -23,7 +23,7 @@ if ($remove_lock){
                 $conference = session::get('conference');
                 $conference->remove_lock();
                 del_lock ($ui->dn);
-                sess_del ('conference');
+                session::un_set ('conference');
         }
 } else {
 	/* Create usermanagement object on demand */
@@ -44,7 +44,7 @@ if ($remove_lock){
 	/* Reset requested? */
 	if (isset($_GET['reset']) && $_GET['reset'] == 1){
 		del_lock ($ui->dn);
-		sess_del ('conference');
+		session::un_set ('conference');
 	}
 
 	/* Show and save dialog */

@@ -4,7 +4,7 @@
        $dfsManagment  = session::get('dfsManagment');
        $dfsManagment->remove_lock();
        del_lock($ui->dn);
-       sess_del('dfsManagment');
+       session::un_set('dfsManagment');
      }
    } else {
      # create dfsManagment object
@@ -18,7 +18,7 @@
      # do we have to reset
      if (isset($_GET['reset']) && $_GET['reset'] == 1) {
        del_lock ($ui->dn);
-       sess_del('dfsManagment');
+       session::un_set('dfsManagment');
      }
  
      # create page header

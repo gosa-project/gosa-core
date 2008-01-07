@@ -28,8 +28,8 @@ if (!$remove_lock){
       (isset($_GET['reset']) && $_GET['reset'] == 1)){
 
     del_lock ($ui->dn);
-    sess_del ('edit');
-    sess_del ('password');
+    session::un_set ('edit');
+    session::un_set ('password');
   }
 
   /* Create password object on demand */

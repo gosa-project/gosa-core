@@ -23,7 +23,7 @@ if ($remove_lock){
     $groupManagement = session::get('groupManagement');
     $groupManagement->remove_lock();
     del_lock ($ui->dn);
-    sess_del ('groupManagement');
+    session::un_set ('groupManagement');
   }
 } else {
   /* Create groupManagement object on demand */
@@ -49,7 +49,7 @@ if ($remove_lock){
   /* Reset requested? */
   if (isset($_GET['reset']) && $_GET['reset'] == 1){
     del_lock ($ui->dn);
-    sess_del ('groupManagement');
+    session::un_set ('groupManagement');
   }
 
   /* Show and save dialog */

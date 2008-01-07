@@ -68,7 +68,7 @@ class addressbook extends plugin
     }
 
     /* Get global filter config */
-    if (!is_global("phonefilter")){
+    if (!session::is_set("phonefilter")){
       $ui         = get_userinfo();
       $base       = get_base_from_people($ui->dn);
       $phonefilter= array(
@@ -77,7 +77,7 @@ class addressbook extends plugin
           "global"            => "checked",
           "search_for"        => "*",
           "object_type"       => "*");
-      register_global("phonefilter", $phonefilter);
+      session::set("phonefilter", $phonefilter);
     }
      
     $this->ui = get_userinfo();
@@ -96,7 +96,7 @@ class addressbook extends plugin
     }
 
     /* Save formular information */
-    $phonefilter= get_global("phonefilter");
+    $phonefilter= session::get("phonefilter");
     foreach( array("search_for", "search_base", "object_type") as $type){
       if (isset($_POST[$type])){
         $phonefilter[$type]= $_POST[$type];
@@ -126,7 +126,7 @@ class addressbook extends plugin
       $this->search_for= $s;
       $phonefilter['search_for']= $s;
     }
-    register_global("phonefilter", $phonefilter);
+    session::set("phonefilter", $phonefilter);
 
     /* Assign create acl */
     $acl = $this->get_entry_acls($this->abobjectclass.",".$phonefilter['search_base']);

@@ -55,14 +55,14 @@ class ogroup extends plugin
     $this->is_account= TRUE;
 
     /* Get global filter config */
-    if (!is_global("ogfilter")){
+    if (!session::is_set("ogfilter")){
       $ui= get_userinfo();
       $base= get_base_from_people($ui->dn);
       $ogfilter= array( "dselect"       => $base,
           "regex"           => "*");
-      register_global("ogfilter", $ogfilter);
+      session::set("ogfilter", $ogfilter);
     }
-    $ogfilter= get_global('ogfilter');
+    $ogfilter= session::get('ogfilter');
 
     /* Adjust flags */
     foreach( array(   "U" => "accounts",
@@ -82,7 +82,7 @@ class ogroup extends plugin
         $ogfilter[$val]= "";
       }
     }
-    register_global("ogfilter", $ogfilter);
+    session::set("ogfilter", $ogfilter);
   
     if(session::is_set('CurrentMainBase')){
      $this->base  = session::get('CurrentMainBase');
@@ -238,7 +238,7 @@ class ogroup extends plugin
     if ($this->group_dialog){
 
       /* Save data */
-      $ogfilter= get_global("ogfilter");
+      $ogfilter= session::get("ogfilter");
       foreach( array("dselect", "regex") as $type){
         if (isset($_POST[$type])){
           $ogfilter[$type]= $_POST[$type];
@@ -263,7 +263,7 @@ class ogroup extends plugin
         }
         $ogfilter['regex']= $s;
       }
-      register_global("ogfilter", $ogfilter);
+      session::set("ogfilter", $ogfilter);
       $this->reload();
 
       /* Calculate actual groups */
@@ -374,7 +374,7 @@ class ogroup extends plugin
     $filter                       = "";
     $objectClasses                = array();
     
-    $ogfilter               = get_global("ogfilter");
+    $ogfilter               = session::get("ogfilter");
     $regex                  = $ogfilter['regex'];
 
     $ldap= $this->config->get_ldap_link();

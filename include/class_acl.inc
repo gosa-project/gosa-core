@@ -110,7 +110,7 @@ class acl extends plugin
     }
 
     /* Objects */
-    $tmp= get_global('plist');
+    $tmp= session::get('plist');
     $plist= $tmp->info;
     $cats = array();
     if (isset($this->parent) && $this->parent !== NULL){
@@ -206,7 +206,7 @@ class acl extends plugin
     /* Call parent execute */
     plugin::execute();
   
-    $tmp= get_global('plist');
+    $tmp= session::get('plist');
     $plist= $tmp->info;
 
     /* Handle posts */
@@ -527,7 +527,7 @@ class acl extends plugin
 
   function sort_by_priority($list)
   {
-    $tmp= get_global('plist');
+    $tmp= session::get('plist');
     $plist= $tmp->info;
     asort($plist);
     $newSort = array();
@@ -584,7 +584,7 @@ class acl extends plugin
   {
     $display= "<input type='hidden' name='acl_dummy_0_0_0' value='1'>";
     $cols= 3;
-    $tmp= get_global('plist');
+    $tmp= session::get('plist');
     $plist= $tmp->info;
     asort($plist);
 

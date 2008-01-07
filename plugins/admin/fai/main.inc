@@ -23,7 +23,7 @@ if ($remove_lock){
                 $FAI = session::get('FAI');
                 $FAI->remove_lock();
                 del_lock ($ui->dn);
-                sess_del ('FAI');
+                session::un_set ('FAI');
         }
 } else {
 	/* Create usermanagement object on demand */
@@ -40,7 +40,7 @@ if ($remove_lock){
 	/* Reset requested? */
 	if (isset($_GET['reset']) && $_GET['reset'] == 1){
 		del_lock ($ui->dn);
-		sess_del ('FAI');
+		session::un_set ('FAI');
 	}
 	/* Page header*/
 	if (session::is_set('objectinfo')){

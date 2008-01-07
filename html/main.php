@@ -310,7 +310,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $_POST[$name] = $value;
       } 
     }
-    sess_del ('dn');
+    session::un_set ('dn');
   }
 
 

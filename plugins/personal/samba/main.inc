@@ -26,8 +26,8 @@ if (!$remove_lock){
       (isset($_GET['reset']) && $_GET['reset'] == 1)){
 
     del_lock ($ui->dn);
-    sess_del ('edit');
-    sess_del ('sambaAccount');
+    session::un_set ('edit');
+    session::un_set ('sambaAccount');
   }
 
   /* Create sambaAccount object on demand */
@@ -73,10 +73,10 @@ if (!$remove_lock){
     if (count ($message) == 0){
       $sambaAccount->save ();
       del_lock ($ui->dn);
-      sess_del ('edit');
+      session::un_set ('edit');
 
       /* Remove from session */
-      sess_del ('sambaAccount');
+      session::un_set ('sambaAccount');
     } else {
       /* Errors found, show message */
       show_errors ($message);

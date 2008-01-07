@@ -192,13 +192,13 @@ class mailAccount extends plugin
     $this->sieve_management = new sieveManagement($this->config,$this->dn,$this,$id);
 
     /* Get global filter config */
-    if (!is_global("mailfilter")){
+    if (!session::is_set("mailfilter")){
       $ui= get_userinfo();
       $base= get_base_from_people($ui->dn);
       $mailfilter= array( "depselect"       => $base,
           "muser"            => "",
           "regex"           => "*");
-      register_global("mailfilter", $mailfilter);
+      session::set("mailfilter", $mailfilter);
     }
   }
 
@@ -442,7 +442,7 @@ class mailAccount extends plugin
       $ldap= $this->config->get_ldap_link();
 
       /* Save data */
-      $mailfilter= get_global("mailfilter");
+      $mailfilter= session::get("mailfilter");
       foreach( array("depselect", "muser", "regex") as $type){
         if (isset($_POST[$type])){
           $mailfilter[$type]= $_POST[$type];
@@ -455,7 +455,7 @@ class mailAccount extends plugin
         }
         $mailfilter['regex']= $s;
       }
-      register_global("mailfilter", $mailfilter);
+      session::set("mailfilter", $mailfilter);
 
       /* Get actual list */
       $mailusers= array ();

@@ -23,7 +23,7 @@ if ($remove_lock){
 				$DeviceManagement = session::get('DeviceManagement');
 				$DeviceManagement->remove_lock();
 				del_lock ($ui->dn);
-				sess_del ('DeviceManagement');
+				session::un_set ('DeviceManagement');
 		}
 } else {
 
@@ -47,7 +47,7 @@ if ($remove_lock){
 		/* Reset requested? */
 		if (isset($_GET['reset']) && $_GET['reset'] == 1){
 				del_lock ($ui->dn);
-				sess_del ('DeviceManagement');
+				session::un_set ('DeviceManagement');
 		}
 
 		/* Show and save dialog */

@@ -10,8 +10,8 @@ if (!$remove_lock){
 		(isset($_GET['reset']) && $_GET['reset'] == 1)){
 
 		del_lock ($ui->dn);
-		sess_del ('edit');
-		sess_del ('gofaxAccount');
+		session::un_set ('edit');
+		session::un_set ('gofaxAccount');
 	}
 
 	/* Create gofaxAccount object on demand */
@@ -56,7 +56,7 @@ if (!$remove_lock){
                 if (count ($message) == 0){
                         $gofaxAccount->save ();
                         del_lock ($ui->dn);
-                        sess_del ('edit');
+                        session::un_set ('edit');
 
                 } else {
                         /* Errors found, show message */

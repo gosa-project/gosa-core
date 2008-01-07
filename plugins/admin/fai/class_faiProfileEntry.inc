@@ -85,7 +85,7 @@ class faiProfileEntry extends plugin
     $this->FAIAllclasses = $tmp;
 
     /* If no search filter is set, create one */
-    if (!is_global("SUBfaifilter")){
+    if (!session::is_set("SUBfaifilter")){
       $SUBfaifilter= array("base" => get_ou('faiou').session::get('CurrentMainBase'), "Sregex" => "*");
       $SUBfaifilter['SShowTemplates'] = true;
       $SUBfaifilter['SShowScripts']   = true;
@@ -93,7 +93,7 @@ class faiProfileEntry extends plugin
       $SUBfaifilter['SShowVariables'] = true;
       $SUBfaifilter['SShowPackages']  = true;
       $SUBfaifilter['SShowPartitions']= true;
-      register_global("SUBfaifilter", $SUBfaifilter);
+      session::set("SUBfaifilter", $SUBfaifilter);
     }
   }
 

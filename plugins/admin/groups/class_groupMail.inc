@@ -191,13 +191,13 @@ class mailgroup extends plugin
 
 
     /* Get global filter config */
-    if (!is_global("gmailfilter")){
+    if (!session::is_set("gmailfilter")){
       $ui= get_userinfo();
       $base= get_base_from_people($ui->dn);
       $gmailfilter= array( "depselect"       => $base,
           "muser"            => "",
           "regex"           => "*");
-      register_global("gmailfilter", $gmailfilter);
+      session::set("gmailfilter", $gmailfilter);
     }
 
     /* Load permissions */
@@ -487,7 +487,7 @@ class mailgroup extends plugin
       $ldap= $this->config->get_ldap_link();
 
       /* Save data */
-      $gmailfilter= get_global("gmailfilter");
+      $gmailfilter= session::get("gmailfilter");
       foreach( array("depselect", "muser", "regex") as $type){
         if (isset($_POST[$type])){
           $gmailfilter[$type]= $_POST[$type];
@@ -500,7 +500,7 @@ class mailgroup extends plugin
         }
         $gmailfilter['regex']= $s;
       }
-      register_global("gmailfilter", $gmailfilter);
+      session::set("gmailfilter", $gmailfilter);
 
       /* Get actual list */
       $mailusers= array ();

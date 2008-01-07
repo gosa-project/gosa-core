@@ -210,12 +210,12 @@ class posixAccount extends plugin
     asort ($this->secondaryGroups);
 
     /* Get global filter config */
-    if (!is_global("sysfilter")){
+    if (!session::is_set("sysfilter")){
       $ui= get_userinfo();
       $base= get_base_from_people($ui->dn);
       $sysfilter= array( "depselect"       => $base,
           "regex"           => "*");
-      register_global("sysfilter", $sysfilter);
+      session::set("sysfilter", $sysfilter);
     }
     $this->ui = get_userinfo();
   }
@@ -352,7 +352,7 @@ class posixAccount extends plugin
     /* Show ws dialog */
     if ($this->show_ws_dialog){
       /* Save data */
-      $sysfilter= get_global("sysfilter");
+      $sysfilter= session::get("sysfilter");
       foreach( array("depselect", "regex") as $type){
         if (isset($_POST[$type])){
           $sysfilter[$type]= $_POST[$type];
@@ -365,7 +365,7 @@ class posixAccount extends plugin
         }
         $sysfilter['regex']= $s;
       }
-      register_global("sysfilter", $sysfilter);
+      session::set("sysfilter", $sysfilter);
 
       /* Get workstation list */
       $exclude= "";
