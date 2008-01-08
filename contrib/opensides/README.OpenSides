@@ -4,16 +4,14 @@ goSamba.pl - This script will help you populate your ldap tree with
 
 goNagios.pl - This script will help you to manage the authentification
               users inside of the cgi.cfg, contacts.cfg, contactgroups.cfg
- 
-slapd.conf - The slapd.conf confg for openldap 2.2
 
+glpi.README - how to make the glpi plugin work
+ 
 nagios.README - how to make the nagios plugin work
 
 pptp.README - how to make the pptp connectivity extension work
 
 phpscheduleit.README - how to make the phpscheduleit extension work
-
-xls-export.README - how to make the xls export xork
 
 
 The php_writeexcel library is coming from

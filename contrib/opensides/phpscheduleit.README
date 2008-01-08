@@ -4,7 +4,7 @@ To use the phpscheduleit connectivity extension
 
 2) Remove the comment in front of phpscheduleitAccount in gosa.conf
 
-<!--    <tab class="pptpAccount" /> -->
+<!--    <tab class="phpscheduleitAccount" /> -->
 
 Guillaume Delecourt
 OpenSides November 2005
