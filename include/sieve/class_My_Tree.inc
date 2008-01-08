@@ -722,7 +722,7 @@ function sieve_create_strings($data,$force_string = FALSE)
       $ret = preg_replace("/,$/","",trim($ret));
       $ret = "[".$ret."]";
     }
-      $ret = preg_replace("/\"\"/","\"",$ret);
+#      $ret = preg_replace("/\"\"/","\"",$ret);
   }else{
 
     $Multiline = preg_match("/\n/",$data);
