@@ -12,6 +12,7 @@ class group extends plugin
   var $description= "";
   var $gidNumber= "";
   var $memberUid= array();
+  var $memberUid_used_by_some= array();
 
   /* Helpers */
   var $base= "";
@@ -71,10 +72,10 @@ class group extends plugin
     if (isset($this->attrs['memberUid'][0])){
       $tmp= array();
       for ($i= 0; $i<$this->attrs['memberUid']['count']; $i++){
-        $tmp[]= $this->attrs['memberUid'][$i];
+        $tmp[$this->attrs['memberUid'][$i]]= $this->attrs['memberUid'][$i];
       }
       $this->memberUid= $tmp;
-      sort ($this->memberUid);
+      ksort ($this->memberUid);
     }
 
     /* Save gidNumber for later use */
@@ -397,6 +398,8 @@ class group extends plugin
     /* Multiple edit handling */
     $smarty->assign("multiple_support",$this->multiple_support_active);
 
+    $smarty->assign("memberUid_All",$this->memberUid);
+    $smarty->assign("memberUid_Some",$this->memberUid_used_by_some);
 
     foreach($this->attributes as $val){
       if(in_array($val,$this->multi_boxes)){
@@ -418,21 +421,39 @@ class group extends plugin
 
   function addUser($uid)
   {
-    $this->memberUid[]= $uid;
-    $this->memberUid= array_unique($this->memberUid);
+    /* In mutliple edit we have to handle two arrays.
+     *  memberUid               : Containing users used in all groups
+     *  memberUid_used_by_some  : Those which are not used in all groups
+     * So we have to remove the given $uid from the ..used_by_some array first.
+     */
+    if($this->multiple_support_active){
+      if(isset($this->memberUid_used_by_some[$uid])){
+        unset($this->memberUid_used_by_some[$uid]);
+      }
+    }  
+
+    $this->memberUid[$uid]= $uid;
   }
+
 
   function removeUser($uid)
   {
     $temp= array();
-    foreach ($this->memberUid as $value){
-      if ($value != $uid){
-        $temp[]= $value;
+    if(isset($this->memberUid[$uid])){
+      unset($this->memberUid[$uid]);
+    }
+
+    /* We have two array contianing group members in multiple edit.
+     *  this->memberUid             : Groups used by all currently edited groups 
+     *  this->memberUid_used_by_some: Used by some 
+     * So we have to remove the specified uid from both arrays.
+     */
+    if($this->multiple_support_active){
+      if(isset($this->memberUid_used_by_some[$uid])){
+        unset($this->memberUid_used_by_some[$uid]);
       }
     }
-    $this->memberUid= $temp;
   }
-
 
   /* Reload data */
   function reload()
@@ -742,7 +763,7 @@ class group extends plugin
 
     /* Take members array */
     if (count ($this->memberUid)){
-      $this->attrs['memberUid']= array_unique($this->memberUid);
+      $this->attrs['memberUid']= array_values(array_unique($this->memberUid));
     }
 
     /* New accounts need proper 'dn', propagate it to remaining objects */
@@ -1056,6 +1077,8 @@ class group extends plugin
         $ret[$attr] = $this->$attr;
       }
     }
+    $ret['memberUid'] = $this->memberUid;
+    $ret['memberUid_used_by_some'] = $this->memberUid_used_by_some;
     return($ret);
   }
 
@@ -1063,6 +1086,53 @@ class group extends plugin
   {
     return($this->execute());
   }
+
+
+  /* Initialize plugin with given atribute arrays
+   */
+  function init_multiple_support($attrs,$all)
+  {
+    plugin::init_multiple_support($attrs,$all);
+
+    $this->memberUid = array();
+    $this->memberUid_used_by_some = array();
+    if (isset($attrs['memberUid'])){
+      for ($i= 0; $i<$attrs['memberUid']['count']; $i++){
+        $this->memberUid[$attrs['memberUid'][$i]]= $attrs['memberUid'][$i];
+      }
+      ksort($this->memberUid);
+    }
+
+    if (isset($all['memberUid'])){
+      for ($i= 0; $i<$all['memberUid']['count']; $i++){
+        if(!in_array($all['memberUid'][$i],$this->memberUid)){
+          $this->memberUid_used_by_some[$all['memberUid'][$i]]= $all['memberUid'][$i];
+        }
+      }
+      ksort($this->memberUid_used_by_some);
+    }
+  }
+
+  function set_multi_edit_values($attrs)
+  {
+    $users = array();
+
+    /* Update groupMembership, keep optinal group */
+    foreach($attrs['memberUid_used_by_some'] as $uid){
+      if(in_array($uid,$this->memberUid)){
+        $users[$uid] = $uid;
+      }
+    }
+
+    /* Update groupMembership, add forced groups */
+    foreach($attrs['memberUid'] as $uid){
+      $users[$uid] = $uid;
+    }
+    plugin::set_multi_edit_values($attrs);
+    $this->memberUid = $users;
+  }
+
+
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

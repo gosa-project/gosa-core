@@ -1685,6 +1685,8 @@ class posixAccount extends plugin
     foreach($attrs['groupMembership'] as $dn => $cn){
       $groups[$dn] = $cn;
     }
+    $this->is_modified = TRUE;
+    $this->is_account = TRUE;
     plugin::set_multi_edit_values($attrs);
     $this->groupMembership = $groups;
   }
