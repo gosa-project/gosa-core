@@ -1,3 +1,8 @@
+{if $multiple_support}
+<input type="hidden" value="1" name="group_mulitple_edit">
+{/if }
+
+
 <table summary="" style="width:100%;">
  <tr>
   <td style="width:50%; vertical-align:top;">
@@ -5,9 +10,13 @@
     <tr>
      <td><LABEL for="cn">{t}Group name{/t}</LABEL>{$must}</td>
      <td>
+{if $multiple_support}
+	<input id="dummy1" name="dummy1" size=25 maxlength=60 value="{t}Multiple edit{/t}" disabled>
+{else}
 {render acl=$cnACL}
        <input id="cn" name="cn" size=25 maxlength=60 value="{$cn}" title="{t}Posix name of the group{/t}">
 {/render}
+{/if}
      </td>
     </tr>
     <tr>
@@ -15,7 +24,7 @@
       <LABEL for="description">{t}Description{/t}</LABEL>
      </td>
      <td>
-{render acl=$descriptionACL}
+{render acl=$descriptionACL checkbox=$multiple_support checked=$use_description}
       <input id="description" name="description" size=40 maxlength=80 value="{$description}" title="{t}Descriptive text for this group{/t}">
 {/render}
      </td>
@@ -30,7 +39,7 @@
       <LABEL for="base">{t}Base{/t}</LABEL>{$must}
      </td>
      <td>
-{render acl=$baseACL}
+{render acl=$baseACL checkbox=$multiple_support checked=$use_base}
       <select id="base" size="1" name="base" title="{t}Choose subtree to place group in{/t}">
        {html_options options=$bases selected=$base_select}
       </select>
@@ -47,6 +56,9 @@
     <tr>
       <td colspan=2> <div style="height:15px; width:100%;"></div> </td>
     </tr>
+{if $multiple_support}
+
+{else}
     <tr>
      <td colspan=2>
 {render acl=$gidNumberACL}
@@ -60,8 +72,38 @@
 {/render}
      </td>
     </tr>
+{/if}
 
-    {if $samba3 ne ""}
+{if $samba3 ne ""}
+
+{if $multiple_support}
+    <tr>
+    <td colspan=2>
+		{render acl=$sambaGroupTypeACL checkbox=$multiple_support checked=$use_smbgroup}
+			<input class="center" type=checkbox name="smbgroup" value="1" {$smbgroup}>{t}Select to create a samba conform group{/t}
+		{/render}
+	</td>
+	</tr>
+	<tr>
+	<td colspan=2>
+		{render acl=$sambaGroupTypeACL checkbox=$multiple_support checked=$use_groupType}
+			<select size="1" name="groupType">
+				{html_options options=$groupTypes selected=$groupType}
+			</select>
+		{/render}
+      &nbsp;
+      <LABEL for="">{t}in domain{/t}</LABEL>
+      &nbsp;
+
+		{render acl=$sambaDomainNameACL checkbox=$multiple_support checked=$use_sambaDomainName}
+			<select id="sambaDomainName" size="1" name="sambaDomainName">
+		   		{html_options values=$sambaDomains output=$sambaDomains selected=$sambaDomainName}
+		  	</select>
+		{/render}
+	</td>
+	</tr>
+
+{else}
     <tr>
      <td colspan=2>
 {render acl=$sambaGroupTypeACL}
@@ -83,6 +125,8 @@
      </td>
     </tr>
     {/if}
+{/if}
+
 	{if $pickupGroup == "true"}
     <tr>
       <td colspan=2> <div style="height:15px; width:100%; border-bottom:1px solid #909090;"></div> </td>
@@ -92,8 +136,8 @@
     </tr>
     <tr>
      <td colspan=2>
-{render acl=$fonGroupACL}
-      <input type=checkbox name="fon_group" value="1" {$fon_group}>{t}Members are in a phone pickup group{/t}
+{render acl=$fonGroupACL checkbox=$multiple_support checked=$use_fon_group}
+      <input class="center" type=checkbox name="fon_group" value="1" {$fon_group}>{t}Members are in a phone pickup group{/t}
 {/render}
      </td>
     </tr>

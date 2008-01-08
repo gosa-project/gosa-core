@@ -49,6 +49,8 @@ class group extends plugin
 
   var $CopyPasteVars  = array("force_gid","fon_group","smbgroup","groupType","sambaSID","sambaDomainName","SID","nagios_group","sambaGroupType");
 
+  var $multiple_support = TRUE;
+
   function group (&$config, $dn= NULL)
   {
      /* Set rfc2307bis flag */
@@ -391,6 +393,26 @@ class group extends plugin
     $smarty->assign("launchimage", get_template_path('images/small_filter.png'));
     $smarty->assign("tree_image", get_template_path('images/tree.png'));
     $smarty->assign("deplist", $this->config->idepartments);
+
+    /* Multiple edit handling */
+    $smarty->assign("multiple_support",$this->multiple_support_active);
+
+
+    foreach($this->attributes as $val){
+      if(in_array($val,$this->multi_boxes)){
+        $smarty->assign("use_".$val,TRUE);
+      }else{
+        $smarty->assign("use_".$val,FALSE);
+      }
+    }
+    foreach(array("base","smbgroup","groupType","sambaDomainName","fon_group") as $val){
+      if(in_array($val,$this->multi_boxes)){
+        $smarty->assign("use_".$val,TRUE);
+      }else{
+        $smarty->assign("use_".$val,FALSE);
+      }
+    }
+
     return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
   }
 
@@ -968,6 +990,78 @@ class group extends plugin
             "sambaDomainName"   => _("Samba domain name"),
             "sambaSID"          => _("Samba SID"))
         ));
+  }
+
+
+  function multiple_save_object()
+  {
+    if(isset($_POST['group_mulitple_edit'])){
+
+      /* Create a base backup and reset the
+         base directly after calling plugin::save_object();
+         Base will be set seperatly a few lines below */
+      $base_tmp = $this->base;
+      plugin::multiple_save_object();
+      plugin::save_object();
+      $this->base = $base_tmp;
+
+      foreach(array("base","smbgroup","groupType","sambaDomainName","fon_group") as $attr){
+        if(isset($_POST['use_'.$attr])){
+          $this->multi_boxes[] = $attr;
+        }
+      }
+
+      /* Get base selection */
+      if(isset($_POST['base'])){
+        $tmp = $this->get_allowed_bases();
+        if(isset($tmp[$_POST['base']])){
+          $this->base = $_POST['base'];
+        }
+      }
+
+      foreach (array( "smbgroup"   => "sambaGroupType") as $val => $aclname) {
+        if ($this->acl_is_writeable($aclname)){
+          if(isset($_POST["$val"])){
+            $this->$val=  TRUE;
+          }else{
+            $this->$val=  FALSE;
+          }
+        }
+      }
+
+      /* Save sambaDomain attribute */
+      if ($this->acl_is_writeable("sambaDomainName") && $this->samba3 && isset ($_POST['sambaDomainName'])){
+        $this->sambaDomainName= $_POST['sambaDomainName'];
+        $this->groupType= $_POST['groupType'];
+      }
+
+      /* Save fon attribute */
+      if ($this->acl_is_writeable("fon_group")){
+        if (isset ($_POST['fon_group'])){
+          $this->fon_group= TRUE;
+        } else {
+          $this->fon_group= FALSE;
+        }
+      }
+    }
+  }
+
+
+  function get_multi_edit_values()
+  {
+    $ret = plugin::get_multi_edit_values();
+
+    foreach(array("base","smbgroup","groupType","sambaDomainName","fon_group") as $attr){    
+      if(in_array($attr,$this->multi_boxes)){
+        $ret[$attr] = $this->$attr;
+      }
+    }
+    return($ret);
+  }
+
+  function multiple_execute()
+  {
+    return($this->execute());
   }
 }
 

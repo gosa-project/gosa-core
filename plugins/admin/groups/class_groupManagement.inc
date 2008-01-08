@@ -239,7 +239,7 @@ class groupManagement extends plugin
       }
       $tmp->lock_entries($this->ui->dn);
       if($tmp->multiple_available()){
-        $this->usertab = $tmp;
+        $this->grouptab = $tmp;
         session::set('objectinfo',$this->usertab->get_object_info());
       }
     }
