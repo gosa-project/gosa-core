@@ -83,6 +83,7 @@ class CopyPasteHandler {
     /* Create patch if it doesn't exists */
     if(!is_dir(LDAP_DUMP_PATH)){
       @mkdir(LDAP_DUMP_PATH);
+      @chmod(LDAP_DUMP_PATH,0700);
     }    
     
     /* check if we are able to create a new file the given directory */
@@ -132,6 +133,7 @@ class CopyPasteHandler {
     /* Create patch if it doesn't exists */
     if(!is_dir($path)){
       @mkdir($path);
+      @chmod($path,0700);
     }    
 
     /* check if we are able to create a new file the given directory */
