@@ -83,8 +83,15 @@ class CopyPasteHandler {
     /* Create patch if it doesn't exists */
     if(!is_dir(LDAP_DUMP_PATH)){
       @mkdir(LDAP_DUMP_PATH);
-      @chmod(LDAP_DUMP_PATH,0700);
     }    
+  
+    /* Update folder permissions */
+    if(!@chmod(LDAP_DUMP_PATH,0700)){
+      $msg= sprintf(_("Cannot cleanup copy & paste queue: couldn't set permission for '%s'!"),LDAP_DUMP_PATH);
+      msg_dialog::display(_("Configuration error"), $msg, ERROR_DIALOG);
+      new log("copy","all/all","copy & paste, event queue.",array(), $msg);
+      return(FALSE);
+    }
     
     /* check if we are able to create a new file the given directory */
     if(!is_writeable(LDAP_DUMP_PATH)){
@@ -133,7 +140,6 @@ class CopyPasteHandler {
     /* Create patch if it doesn't exists */
     if(!is_dir($path)){
       @mkdir($path);
-      @chmod($path,0700);
     }    
 
     /* check if we are able to create a new file the given directory */
@@ -143,6 +149,14 @@ class CopyPasteHandler {
       new log("copy","all/all",$dn,array(), $msg);
       return(FALSE);
     }  
+
+    /* Update folder permissions */
+    if(!@chmod(LDAP_DUMP_PATH,0700)){
+      $msg= sprintf(_("Cannot save LDAP dump: couldn't set permission for '%s'!"),LDAP_DUMP_PATH);
+      msg_dialog::display(_("Configuration error"), $msg, ERROR_DIALOG);
+      new log("copy","all/all","copy & paste, event queue.",array(), $msg);
+      return(FALSE);
+    }
 
     /* Create file handle */
     $fp = @fopen($path."/".$filename,"w+");
