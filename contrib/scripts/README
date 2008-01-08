@@ -9,9 +9,14 @@ goSquid.pl - connect this script to squid
 
 goAgent.pl - one script to create home directories and mailboxes on
              filesystem. run it via cron
-  
+
 mkHash.pl  - create hash file for black list
 
 At this time all scripts have no config file. Please, edit source to configure.
 
 Igor Muratov <migor@altlinux.org>
+
+
+goNagiosUser.pl - create cgi.cfg, contacts.cfg, contactgroups.cfg for nagios 2.x
+
+Benoit Mortier <benoit.mortier@opensides.be>
