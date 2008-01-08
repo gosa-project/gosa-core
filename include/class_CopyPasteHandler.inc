@@ -87,7 +87,7 @@ class CopyPasteHandler {
   
     /* Update folder permissions */
     if(!@chmod(LDAP_DUMP_PATH,0700)){
-      $msg= sprintf(_("Cannot cleanup copy & paste queue: couldn't set permission for '%s'!"),LDAP_DUMP_PATH);
+      $msg= sprintf(_("Cannot cleanup copy & paste queue: setting permissions for '%s' failed!"),LDAP_DUMP_PATH);
       msg_dialog::display(_("Configuration error"), $msg, ERROR_DIALOG);
       new log("copy","all/all","copy & paste, event queue.",array(), $msg);
       return(FALSE);
@@ -152,7 +152,7 @@ class CopyPasteHandler {
 
     /* Update folder permissions */
     if(!@chmod(LDAP_DUMP_PATH,0700)){
-      $msg= sprintf(_("Cannot save LDAP dump: couldn't set permission for '%s'!"),LDAP_DUMP_PATH);
+      $msg= sprintf(_("Cannot save LDAP dump: setting permissions for '%s' failed!"),LDAP_DUMP_PATH);
       msg_dialog::display(_("Configuration error"), $msg, ERROR_DIALOG);
       new log("copy","all/all","copy & paste, event queue.",array(), $msg);
       return(FALSE);
