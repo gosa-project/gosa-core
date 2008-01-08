@@ -67,7 +67,7 @@ class groupManagement extends plugin
   	plugin::execute();
 
     /* Store these posts if the current object is locked (used by somebody else)*/
-    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/","/^item_selected/","/^remove_multiple_groups/"));
+    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/","/^item_selected/","/^remove_multiple_groups/","/^multiple_edit/","/menu_action/"));
 
     /* Save data */
     $s_action   = "";
@@ -142,7 +142,9 @@ class groupManagement extends plugin
     if(isset($_POST['menu_action']) && preg_match("/^remove_multiple/",$_POST['menu_action'])){
       $s_action = "del_multiple";
     }
-
+    if(isset($_POST['menu_action']) && $_POST['menu_action'] == "multiple_edit"){
+      $s_action = "multiple_edit";
+    }
 
 
     $smarty= get_smarty();
@@ -215,6 +217,30 @@ class groupManagement extends plugin
         /* Ok. There seem to be errors regarding to the tab data,
            show message and continue as usual. */
         show_errors($message);
+      }
+    }
+
+
+    /********************
+      Edit multiple entries
+     ********************/
+
+    /* User wants to edit data? */
+    if ($s_action == "multiple_edit" && !isset($this->grouptab->config)){
+
+      $this->dn = array();
+      foreach($this->list_get_selected_items() as $id){
+        $this->dn[] = $this->grouplist[$id]['dn'];;
+      }
+      $tmp = new multi_plug($this->config,"grouptabs",$this->config->data['TABS']['GROUPTABS'],
+            $this->dn,$this->DivListGroup->selectedBase,"groups");
+      if ($tmp->entries_locked()){
+        return($tmp->display_lock_message());
+      }
+      $tmp->lock_entries($this->ui->dn);
+      if($tmp->multiple_available()){
+        $this->usertab = $tmp;
+        session::set('objectinfo',$this->usertab->get_object_info());
       }
     }
 
