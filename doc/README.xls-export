@@ -1,7 +1,0 @@
-To use the xls export ldapamanager addon uncomment the following line in your gosa.conf :
-
-<!--            <tab class="xlsexport" name="Excel Export" />   -->
-
-Guillaume Delecourt
-Vincent Seynhaeve
-OpenSides October 2005
