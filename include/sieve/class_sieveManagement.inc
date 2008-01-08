@@ -650,11 +650,11 @@ class sieveManagement extends plugin
         $del = "<input type='image' name='delscript_".$key."' src='images/edittrash.png'
                   title='"._("Remove script")."'>";
       }else{
-        $del = "<img src='images/empty' alt=' '>";
+        $del = "<img src='images/empty.png' alt=' '>";
       }
 
       if($active || $script['IS_NEW'] || !$this->parent->acl_is_writeable("sieveManagement")){
-        $activate = "<img src='images/empty' alt=' '>";
+        $activate = "<img src='images/empty.png' alt=' '>";
       }else{
         $activate = "<input type='image' name='active_script_".$key."' src='images/true.png'
                        title='"._("Activate script")."'>";
