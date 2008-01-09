@@ -146,7 +146,7 @@ class termservice extends plugin
     }
 
     /* Load scanner models */
-    $fcontents = file ($this->config->basedir."/include/scanner.inc");
+    $fcontents = file (CONFIG_DIR."/scanner-list");
     while (list ($line_num, $line) = each ($fcontents)) {
       preg_match('/^(\w+) "([^"]+)" "([^"]+)" "([^"]+)"/', "$line", $matches);
       $this->gotoScannerModels[$matches[2]." - ".$matches[3]]= $matches[1]."|".$matches[4];
