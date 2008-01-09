@@ -21,8 +21,8 @@
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once "../include/php_writeexcel/class.writeexcel_workbook.inc.php";
-require_once "../include/php_writeexcel/class.writeexcel_worksheet.inc.php";
+require_once "../include/utils/excel/class.writeexcel_workbook.inc.php";
+require_once "../include/utils/excel/class.writeexcel_worksheet.inc.php";
 
 function dump_ldap ($mode= 0)
 {
