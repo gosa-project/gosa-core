@@ -193,7 +193,7 @@ class LDAP{
       if($this->max_ldap_query_time){
         $diff = get_MicroTimeDiff($start,microtime());
         if($diff > $this->max_ldap_query_time){
-          print_red(sprintf(_("The LDAP server is slow (%.2fs for the last query). This may be responsible for performance breakdowns."),$diff)) ;
+          msg_dialog::display(_("Performance warning"), sprintf(_("LDAP performance is poor: last query took about %.2fs!"), $diff), WARNING_DIALOG);
         }
       }
 
@@ -225,7 +225,7 @@ class LDAP{
       if($this->max_ldap_query_time){
         $diff = get_MicroTimeDiff($start,microtime());
         if($diff > $this->max_ldap_query_time){
-          print_red(sprintf(_("The ldapserver is answering very slow (%.2f), this may be responsible for performance breakdowns."),$diff)) ;
+          msg_dialog::display(_("Performance warning"), sprintf(_("LDAP performance is poor: last query took about %.2fs!"), $diff), WARNING_DIALOG);
         }
       }
 
@@ -558,7 +558,7 @@ class LDAP{
             }elseif($type=="freeze"){
               $attr['FAIstate'] ="freeze";
             }else{
-              print_red(_("Unknown FAIstate %s"),$type);
+              msg_dialog::display(_("Internal error"), sprintf(_("FAIstate '%s' is unknown!"),$type), ERROR_DIALOG);
             }
           }
 
@@ -719,7 +719,7 @@ class LDAP{
 
           /* Bail out, if we've nothing to do... */
           if ($ocname == ""){
-            print_red(sprintf(_("Autocreation of subtree failed. No objectClass found for attribute '%s'."), $type));
+            msg_dialog::display(_("Internal error"), sprintf(_("Cannot automatically create subtrees with RDN '%s': no object class found"),$type), ERROR_DIALOG);
             display_error_page();
           }
 
@@ -767,7 +767,7 @@ class LDAP{
               $na["dc"]= $param;
               break;
             default:
-              print_red(sprintf(_("Autocreation of type '%s' is currently not supported. Please report to the GOsa team."), $type));
+              msg_dialog::display(_("Internal error"), sprintf(_("Cannot automatically create subtrees with RDN '%s': not supported"),$type), ERROR_DIALOG);
               display_error_page();
           }
 
