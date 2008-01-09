@@ -128,7 +128,7 @@ class Step_Feedback  extends setup_step
       $msgs = $this->check_feedback();
       if(count($msgs)){
         foreach($msgs as $msg){
-          print_red($msg);
+          msg_dialog::display(_("Setup error"), $msg, ERROR_DIALOG);
         }
       }else{
         $str = $this->create_serialise_data_string(); 
@@ -137,14 +137,14 @@ class Step_Feedback  extends setup_step
         $ret = @fopen($feedback_url,"r");
 
         if(!$ret){
-          print_red(sprintf(_("Could not connect to feedback server (%s). There is possibly no connection to the internet."),$this->feedback_url));
+          msg_dialog::display(_("Feedback error"), sprintf(_("Cannot send feedback to '%s': %s"), $this->feedback_url, $ret), ERROR_DIALOG);
         }else{
           $ret_value="";
           while($ret && !feof($ret)){
             $ret_value.= fgets($ret,256);
           }
           if(!preg_match("/successful/i",$ret_value)){
-            print_red(_("Error while sending your feedback. The service is possible temporary unavailable"));
+            msg_dialog::display(_("Feedback error"), _("Cannot send feedback: service temporarily unavailable"), ERROR_DIALOG);
           }else{
             $additional_info = "<font color='green'>"._("Feedback sucessfully send")."</font>";
           }

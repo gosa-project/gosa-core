@@ -644,7 +644,7 @@ class Step_Migrate extends setup_step
         }else{
           $ldap->cd($attrs['dn']);
           if(!$ldap->modify($new_attrs)){
-            print_red(sprintf(_("Failed to migrate the department '%s' into GOsa, error message is as follows '%s'."),$attrs['dn'],$ldap->get_error()));
+            msg_dialog::display(_("Migration error"), sprintf(_("Cannot migrate department '%s':")."<br><br><i>%s</i>",LDAP::fix($attrs['dn']),$ldap->get_error()), ERROR_DIALOG);
             return(false);
           }
         }
@@ -776,7 +776,7 @@ class Step_Migrate extends setup_step
         }else{
           $ldap->cd($attrs['dn']);
           if(!$ldap->modify($new_attrs)){
-            print_red(sprintf(_("Failed to migrate the department '%s' into GOsa, error message is as follows '%s'."),$attrs['dn'],$ldap->get_error()));
+            msg_dialog::display(_("Migration error"), sprintf(_("Cannot migrate department '%s':")."<br><br><i>%s</i>",LDAP::fix($attrs['dn']), $ldap->get_error()), ERROR_DIALOG);
             return(false);
           }
         }
@@ -942,7 +942,7 @@ class Step_Migrate extends setup_step
    
       $ldap->cd($cv['base']);
       if(!$ldap->modify($attrs_new)){
-        print_red(sprintf(_("Adding acls for user '%s' failed, ldap says '%s'."),$dn,$ldap->get_error()));
+        msg_dialog::display(_("Migration error"), sprintf(_("Cannot add ACL for user '%s':")."<br><br><i>%s</i>", LDAP::fix($dn), $ldap->get_error()), ERROR_DIALOG);
         return(FALSE);
       }else{
         return(TRUE);
@@ -967,12 +967,12 @@ class Step_Migrate extends setup_step
     }
   
     if(empty($pw1) || empty($pw2) | ($pw1 != $pw2)){
-      print_red(_("Specified passwords are empty or not equal."));
+      msg_dialog::display(_("Password error"), _("Provided passwords do not match!"), ERROR_DIALOG);
       return false;
     }
  
     if(!is_uid($uid) || empty($uid)){
-      print_red(_("Please specify a valid uid."));
+      msg_dialog::display(_("Input error"), _("Specify a valid user ID!"), ERROR_DIALOG);
       return false;
     }
     
@@ -1016,7 +1016,7 @@ class Step_Migrate extends setup_step
   
     $ldap->cat($dn,array("dn"));
     if($ldap->count()){
-      print_red(sprintf(_("Could not add administrative user, there is already an object with the same dn '%s' in your ldap database."),$dn));
+      msg_dialog::display(_("Error"), sprintf(_("Adding an administrative user failed: object '%s' already exists!"), LDAP::fix($dn)), ERROR_DIALOG);
       return(FALSE);  
     }
 
@@ -1027,7 +1027,7 @@ class Step_Migrate extends setup_step
     $this->create_admin();
     
     if(!$res){
-      print_red($ldap->get_error());
+      msg_dialog::display(_("LDAP error"), $ldap->get_error(), ERROR_DIALOG);
       return(FALSE);
     }
   
@@ -1053,7 +1053,7 @@ class Step_Migrate extends setup_step
     if(isset($_POST['move_winstation_to'])){
       $destination_dep = $_POST['move_winstation_to'];
     }else{
-      print_red(_("Couldn't move users to specified department."));
+      msg_dialog::display(_("LDAP error"), _("Cannot move users to the requested department!"), ERROR_DIALOG);
       return(false);
     }
  
@@ -1101,7 +1101,7 @@ class Step_Migrate extends setup_step
     if(isset($_POST['move_group_to'])){
       $destination_dep = $_POST['move_group_to'];
     }else{
-      print_red(_("Couldn't move users to specified department."));
+      msg_dialog::display(_("LDAP error"), _("Cannot move users to the requested department!"), ERROR_DIALOG);
       return(false);
     }
  
@@ -1149,7 +1149,7 @@ class Step_Migrate extends setup_step
     if(isset($_POST['move_user_to'])){
       $destination_dep = $_POST['move_user_to'];
     }else{
-      print_red(_("Couldn't move users to specified department."));
+      msg_dialog::display(_("LDAP error"), _("Cannot move users to the requested department!"), ERROR_DIALOG);
       return(false);
     }
       
@@ -1913,10 +1913,10 @@ class Step_Migrate extends setup_step
 
     /* Display warning if copy failed */
     if(!$res){
-      print_red(_("Failed to copy '%s' to '%s'. LDAP says '%s'."),$source,$destination,$ldap->get_error());
+      msg_dialog::display(_("LDAP error"), sprintf(_("Copy '%s' to '%s' failed:")."<br><br><i>%s</i>", LDAP::fix($source), LDAP::fix($destination), $ldap->get_error()), ERROR_DIALOG);
     }else{
       $res = $ldap->rmDir($source);
-      show_ldap_error($ldap->get_error(),_("Something went wrong while copying dns."));
+      show_ldap_error($ldap->get_error(),_("Problem copying DNs"));
 
       /* Object is copied, so update its references */
       foreach($ogs_to_fix as $dn => $data){

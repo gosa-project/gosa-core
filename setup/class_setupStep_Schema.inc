@@ -92,7 +92,7 @@ class Step_Schema extends setup_step
     $ldap = new LDAP($cfg['admin'],$cfg['password'],$cfg['connection'] ,FALSE,$cfg['tls']);
     $objectclasses = $ldap->get_objectclasses();
     if(count($objectclasses) == 0){
-      print_red(_("Can't get schema information from server. No schema check possible!"));
+      msg_dialog::display(_("LDAP error"), _("Cannot detect information about the installed LDAP schema!"), ERROR_DIALOG);
     }
 
     /* Which samba version do we use? */

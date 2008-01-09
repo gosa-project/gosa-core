@@ -73,7 +73,7 @@ class setup
     /* display step error msgs */
     $msgs = $this->o_steps[$this->i_current]->check();
     foreach($msgs as $msg){
-      print_red($msg);
+      msg_dialog::display(_("Setup error"), $msg, ERROR_DIALOG);
     }
 
     $this->o_steps[$this->i_last]->set_active(FALSE);
