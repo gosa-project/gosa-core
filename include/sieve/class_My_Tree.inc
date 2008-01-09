@@ -242,7 +242,7 @@ class My_Tree extends Tree
   function remove_object($key_id)
   {
     if(count($this->pap) == 1){
-      print_red(_("Can't remove last element."));
+      msg_dialog::display(_("Warning"), _("Cannot remove last element!"), ERROR_DIALOG);
       return;
     }
 
@@ -657,7 +657,7 @@ class My_Tree extends Tree
     if(count($objs) && $last_found_at != -1){
       $str = _("Require must be the first command in the script.");  
       $msgs[] = $str;
-      print_red($str);;
+      msg_dialog::display(_("Error"), $str, ERROR_DIALOG);
     }
 
     foreach($this->pap as $obj){

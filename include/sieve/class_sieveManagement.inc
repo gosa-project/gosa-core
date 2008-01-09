@@ -197,24 +197,24 @@ class sieveManagement extends plugin
       if(isset($_POST['create_script_save'])){
         if(!strlen($name)){
           $err =true;
-          print_red(_("You should specify a name for your new script."));
+          msg_dialog::display(_("Error"), _("No script name specified!"), ERROR_DIALOG);
         }
         /* Is given name in lower case characters ? */
         if($name != strtolower($name)){
           $err =true;
-          print_red(_("Only lower case names are allowed."));
+          msg_dialog::display(_("Error"), _("Please use only lowercase script names!"), ERROR_DIALOG);
         }
 
         /* Only chars are allowed here */
         if(preg_match("/[^a-z]/i",$name)){
           $err =true;
-          print_red(_("Only alphabetical characters are allowed in script names."));
+          msg_dialog::display(_("Error"), _("Please use only alphabetical characters in script names!"), ERROR_DIALOG);
         }
 
         $tmp = $this->get_used_script_names();
         if(in_array_ics($name,$tmp)){
           $err =true;
-          print_red(_("The specified name is already in use."));
+          msg_dialog::display(_("Error"), _("Script name already in use!"), ERROR_DIALOG);
         }
       }
 
@@ -298,17 +298,14 @@ class sieveManagement extends plugin
 
           /* Get sieve */
           if(!$this->sieve_handle = $this->get_sieve()){
-            print_red(
-                sprintf(
-                  _("Can't log into SIEVE server. Server says '%s'."),
-                  to_string($this->Sieve_Error)));
+            msg_dialog::display(_("SIEVE error"), sprintf(_("Cannot log into SIEVE server: %s"), '<br><br><i>'.to_string($this->Sieve_Error).'</i>'), ERROR_DIALOG);
           }
 
           /* Try to activate the given script and update 
            *  class script array. 
            */
           if(!$this->sieve_handle->sieve_setactivescript($this->scripts[$script]['NAME'])){
-            print_red(sprintf(_("Can't activate sieve script on server. Server says '%s'."),to_string($this->sieve_handle->error_raw)));
+            msg_dialog::display(_("SIEVE error"), sprintf(_("Cannot retrieve SIEVE script: %s"), '<br><br><i>'.to_string($this->sieve_handler->error_raw).'</i>'), ERROR_DIALOG);
           }else{
             foreach($this->scripts as $key => $data){
               if($key == $script){
@@ -344,14 +341,11 @@ class sieveManagement extends plugin
 
         /* Get sieve */
         if(!$this->sieve_handle = $this->get_sieve()){
-          print_red(
-              sprintf(
-                _("Can't log into SIEVE server. Server says '%s'."),
-                to_string($this->Sieve_Error)));
+          msg_dialog::display(_("SIEVE error"), sprintf(_("Cannot log into SIEVE server: %s"), '<br><br><i>'.to_string($this->Sieve_Error).'</i>'), ERROR_DIALOG);
         }
 
         if(!$this->sieve_handle->sieve_deletescript($this->scripts[$this->script_to_delete]['NAME'])){
-          print_red(sprintf(_("Can't remove sieve script from server. Server says '%s'."),to_string($this->sieve_handle->error_raw)));
+          msg_dialog::display(_("SIEVE error"), sprintf(_("Cannot remove SIEVE script: %s"), '<br><br><i>'.to_string($this->sieve_handler->error_raw).'</i>'), ERROR_DIALOG);
         }else{
           unset($this->scripts[$this->script_to_delete]);
         }
@@ -402,11 +396,11 @@ class sieveManagement extends plugin
           $this->scripts[$this->current_script]['MSG'] = _("Edited");
           $this->current_handler = NULL;
         }else{
-          print_red($p->status_text);;
+          msg_dialog::display(_("SIEVE error"), $p->status_text, ERROR_DIALOG);
         }
       }else{
         foreach($chk as $msgs){
-          print_red(sprintf(_("Please fix all errors before saving. Last error was: %s"),$msgs));
+          msg_dialog::display(_("SIEVE error"), $msgs, ERROR_DIALOG);
         }
       }
     }
@@ -433,11 +427,11 @@ class sieveManagement extends plugin
           $file     = $_FILES['Script_To_Import'];
 
           if($file['size'] == 0){
-            print_red(_("Specified file seems to be empty."));
+            msg_dialog::display(_("Error"), _("Uploaded script is empty!"), ERROR_DIALOG);
           }elseif(!file_exists($file['tmp_name'])){
-            print_red(_("Upload failed. The temporary file can't be accessed."));
+            msg_dialog::display(_("Internal error"), sprintf(_("Cannot access temporary file '%s'!"), $file['tmp_name']), ERROR_DIALOG);
           }elseif(!is_readable ($file['tmp_name'])){
-            print_red(sprintf(_("Can't open file '%s'."),$file['tmp_name']));
+            msg_dialog::display(_("SIEVE error"), sprintf(_("Cannot open temporary file '%s'!"), $file['tmp_name']), ERROR_DIALOG);
           }else{
             
             
@@ -523,7 +517,7 @@ class sieveManagement extends plugin
           if($this->add_new_element_to_current_script($this->add_element_type,$this->add_new_id,$this->add_above_below)){
             $this->add_new_element = FALSE;
           }else{
-            print_red(_("Failed to add new element."));
+            msg_dialog::display(_("SIEVE error"), _("Cannot add new element!") , ERROR_DIALOG);
           }
         }
       }
@@ -775,7 +769,7 @@ class sieveManagement extends plugin
     }
 
     if(!isset($element_types[$type])){
-      print_red(sprintf(_("Can't add the specified element at the given position.")));
+      msg_dialog::display(_("SIEVE error"), _("Cannot insert element at the requested position!") , ERROR_DIALOG);
       return;
     }
 
@@ -1035,10 +1029,7 @@ class sieveManagement extends plugin
   {
     /* Get sieve */
     if(!$this->sieve_handle = $this->get_sieve()){
-      print_red(
-          sprintf(
-            _("Can't log into SIEVE server. Server says '%s'."),
-            to_string($this->Sieve_Error)));
+      msg_dialog::display(_("SIEVE error"), sprintf(_("Cannot log into SIEVE server: %s"), '<br><br><i>'.to_string($this->Sieve_Error).'</i>'), ERROR_DIALOG);
       return;
     }
 
@@ -1051,7 +1042,7 @@ class sieveManagement extends plugin
           new log("modify","users/mailAccount".get_class($this),$script['NAME'],"Failed to save sieve script named '".$script['NAME']."': ".to_string($this->sieve_handle->error_raw));
 
           $everything_went_fine = FALSE;
-          print_red(to_string($this->sieve_handle->error_raw));
+          msg_dialog::display(_("SIEVE error"), sprintf(_("Cannot store SIEVE script: %s"), '<br><br><i>'.to_string($this->sieve_handle->error_raw).'</i>'), ERROR_DIALOG);
           $this->scripts[$key]['MSG'] = "<font color='red'>".
                                            _("Failed to save sieve script").": ".
                                            to_string($this->sieve_handle->error_raw).
