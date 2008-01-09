@@ -135,9 +135,8 @@
    <h2><img class="center" alt="" align="middle" src="images/members.png"> {t}IMAP shared folders{/t}</h2>
 {if $multiple_support}
 
-	<input type='checkbox' name="use_acl" value="1" {if $use_acl} checked {/if} 
-		onClick="toggle('acl_div');"
-	>
+	<input class="center" type='checkbox' name="use_acl" value="1" {if $use_acl} checked {/if} 
+		onClick="toggle('acl_div');">{t}Set shared folder permissions{/t}
 	{if $use_acl}
 		<div style="visibility:visible;" id="acl_div">
 	{else}

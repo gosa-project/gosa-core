@@ -1324,6 +1324,9 @@ I: Only insider delivery */
       $ret['kolabFolderType_Type'] = $this->kolabFolderType_Type;
       $ret['kolabFolderType_SubType'] = $this->kolabFolderType_SubType;
     }
+    if(in_array("acl",$this->multi_boxes)){
+      $ret['imapacl'] = $this->imapacl;
+    }
     return($ret);
   }
 
