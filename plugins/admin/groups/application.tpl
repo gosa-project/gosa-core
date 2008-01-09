@@ -1,7 +1,28 @@
+
+{if $multiple_support}
+
+	<h2>Multiple edit</h2>
+
+	{if $use_apps}
+		<input type="checkbox" name="use_apps" value="1" checked class="center"
+			onClick="toggle('div_use_apps');">
+		{t}Modify application settings.{/t}
+		<br>
+		<div id="div_use_apps">
+	{else}
+		<input type="checkbox" name="use_apps" value="1" class="center"
+			onClick="toggle('div_use_apps');">
+		{t}Modify application settings for groups.{/t}
+		<br>
+		<div style="visibility: hidden;" id="div_use_apps">
+	{/if}	
+{/if}
+
 {if $enableReleaseManagement == true}
 	<br>
 	<b>{t}Release focus{/t}</b>&nbsp;
 	{if $ReleaseSelectAble}
+
 {render acl=$FAIreleaseACL}
 		<select name="FAIrelease" title="{t}Select release name{/t}" onChange="javascript: document.mainform.submit();">
 			{html_options output=$Releases values=$Releases selected=$FAIrelease}
@@ -41,4 +62,8 @@
   </td>
  </tr>
 </table>
+{if $multiple_support}
+	</div>
+	<input type="hidden" value="1" name="group_apps_multi">
+{/if}
 

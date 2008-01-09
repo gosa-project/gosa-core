@@ -41,6 +41,8 @@ class appgroup extends plugin
   var $ui                       = NULL;
   var $no_release_acls          = false;
 
+  var $multiple_support         = TRUE;
+
   function appgroup (&$config, $dn= NULL, $parent= NULL)
   {
    
@@ -384,6 +386,7 @@ class appgroup extends plugin
   {
     /* Call parent execute */
     plugin::execute();
+    $display = "";
 
     /* Log view */
     if($this->is_account && !$this->view_logged){
@@ -391,6 +394,48 @@ class appgroup extends plugin
       new log("view","groups/".get_class($this),$this->dn);
     }
 
+    /* Account state settings - Skip if we are editing multiple entries */
+    if(!$this->multiple_support_active){ 
+
+      /* Do we need to flip is_account state? */
+      if(isset($_POST['modify_state'])){
+        if($this->is_account && $this->acl_is_removeable()){
+          $this->is_account= FALSE;
+        }elseif(!$this->is_account && $this->acl_is_createable()){
+          $this->is_account= TRUE;
+        }
+      }
+
+      /* Do we represent a valid group? */
+      if (!$this->is_account && $this->parent === NULL){
+        $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
+          _("This 'dn' is no appgroup.")."</b>";
+        return ($display);
+      }
+
+      /* Show tab dialog headers */
+      $display= "";
+      if ($this->parent !== NULL){
+        if ($this->is_account){
+          $display= $this->show_disable_header(_("Remove applications"),
+              _("This group has application features enabled. You can disable them by clicking below."));
+        } else {
+          $display.= $this->show_enable_header(_("Create applications"),
+              _("This group has application features disabled. You can enable them by clicking below."));
+          return ($display);
+        }
+      }
+    }
+  
+    /* Check acl, applications must be readable */
+    if(!$this->check_acls()){
+      $display .= "<img src='images/button_cancel.png' alt='"._("ACL")."' class='center'>
+                  <b>"._("Insufficient permissions")."</b>
+                  <p>".
+                  _("You do not have permission to query application entries. All your changes will not be saved.").
+                  "</p><p class='seperator'>&nbsp;</p>";
+      $this->no_release_acls = true;
+    }
     /* Check if department was selected */ 
     if((isset($_GET['act']))&&($_GET['act']=="depopen")){
       $dep = base64_decode($_GET['depid']); 
@@ -402,44 +447,7 @@ class appgroup extends plugin
       $this->curCatDir = base64_decode($_GET['id']);
     }
 
-    /* Do we need to flip is_account state? */
-    if(isset($_POST['modify_state'])){
-      if($this->is_account && $this->acl_is_removeable()){
-        $this->is_account= FALSE;
-      }elseif(!$this->is_account && $this->acl_is_createable()){
-        $this->is_account= TRUE;
-      }
-    }
 
-    /* Do we represent a valid group? */
-    if (!$this->is_account && $this->parent === NULL){
-      $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
-        _("This 'dn' is no appgroup.")."</b>";
-      return ($display);
-    }
-
-    /* Show tab dialog headers */
-    $display= "";
-    if ($this->parent !== NULL){
-      if ($this->is_account){
-        $display= $this->show_disable_header(_("Remove applications"),
-            _("This group has application features enabled. You can disable them by clicking below."));
-      } else {
-        $display.= $this->show_enable_header(_("Create applications"),
-            _("This group has application features disabled. You can enable them by clicking below."));
-        return ($display);
-      }
-    }
-
-    /* Check acl, applications must be readable */
-    if(!$this->check_acls()){
-      $display .= "<img src='images/button_cancel.png' alt='"._("ACL")."' class='center'>
-                  <b>"._("Insufficient permissions")."</b>
-                  <p>".
-                  _("You do not have permission to query application entries. All your changes will not be saved.").
-                  "</p><p class='seperator'>&nbsp;</p>";
-      $this->no_release_acls = true;
-    }
     
 
     /* Add Categorie */ 
@@ -854,14 +862,23 @@ class appgroup extends plugin
       $smarty->assign($acl."ACL",$this->getacl($acl,$this->no_release_acls));
     }
 
+    /* Assign multiple edit values */
+    foreach(array("apps") as $attr){
+      if(in_array($attr,$this->multi_boxes)){
+        $smarty->assign("use_".$attr,TRUE);
+      }else{
+        $smarty->assign("use_".$attr,FALSE);
+      }
+    }
+    $smarty->assign("multiple_support",$this->multiple_support_active);
+
     /* Show main page */
-    if (is_object($this->dialog)){
+    if (($this->dialog)){
       $smarty->assign("table", $this->table);
       $display.= $smarty->fetch (get_template_path('application_options.tpl', TRUE,dirname(__FILE__)));
     } else {
       $display.= $smarty->fetch (get_template_path('application.tpl', TRUE,dirname(__FILE__)));
     }
-    
     return ($display);
   }
 
@@ -954,7 +971,7 @@ class appgroup extends plugin
   function save()
   {
     /* Skip saving application settings, if we do not have release acls */
-    if($this->no_release_acls){
+    if($this->no_release_acls && $this->enableReleaseManagement){
       new log("security","groups/".get_class($this),$this->dn,array(),"Skip saving group application extension. Caused by insufficient acls");
       
       return;
@@ -1225,6 +1242,46 @@ class appgroup extends plugin
             "FAIrelease"                => _("Release"),
             "gosaApplicationParameter"  => _("Application parameter"))
           ));
+  }
+
+
+  function multiple_save_object()
+  {
+    if(isset($_POST['group_apps_multi'])){
+      $this->save_object(); 
+      plugin::multiple_save_object();    
+  
+      /* Get posts */
+      foreach(array("apps") as $attr){
+        if(isset($_POST['use_'.$attr])) {
+          $this->multi_boxes[] = $attr;
+        }
+      }
+    }
+  }
+  
+  function multiple_execute()
+  {
+    return($this->execute());
+  }
+
+  function init_multiple_support($attrs,$all)
+  {
+    // Do nothing here
+  }
+
+  function get_multi_edit_values()
+  {
+    $ret = plugin::get_multi_edit_values();
+
+    if(in_array("apps",$this->multi_boxes)){
+      $ret['gosaApplicationParameter'] = $this->gosaApplicationParameter;
+      $ret['Categories']               = $this->Categories;
+      $ret['gosaMemberApplication']    = $this->gosaMemberApplication;
+      $ret['FAIrelease']               = $this->FAIrelease;
+      $ret['appoption']                = $this->appoption;
+    }
+    return($ret);
   }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
