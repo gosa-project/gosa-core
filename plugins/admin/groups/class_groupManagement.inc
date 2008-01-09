@@ -240,7 +240,7 @@ class groupManagement extends plugin
       $tmp->lock_entries($this->ui->dn);
       if($tmp->multiple_available()){
         $this->grouptab = $tmp;
-        session::set('objectinfo',$this->usertab->get_object_info());
+        session::set('objectinfo',$this->grouptab->get_object_info());
       }
     }
 

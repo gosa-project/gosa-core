@@ -202,6 +202,11 @@ class multi_plug
         if(!isset($base[$key])){
           $base[$key] = $add[$key]; 
         }else{
+
+          if(!isset($base[$key]['count'])){
+            $base[$key]['count'] = count($base[$key]);
+          }
+
           if(!isset($add[$key]['count'])){
             $add[$key]['count'] = count($add[$key]);
           }
