@@ -24,7 +24,7 @@ $start = microtime();
 /* Basic setup, remove eventually registered sessions */
 require_once ("../include/php_setup.inc");
 require_once ("functions.inc");
-#require_once ("functions_FAI.inc");
+require_once ("functions_FAI.inc");
 
 /* Set header */
 header("Content-type: text/html; charset=UTF-8");
