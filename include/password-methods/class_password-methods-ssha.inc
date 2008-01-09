@@ -48,7 +48,7 @@ class passwordMethodssha extends passwordMethod
       $salt=mhash_keygen_s2k(MHASH_SHA1,$pwd, substr(pack("h*",md5(mt_rand())),0,8),4);
       $pwd= "{SSHA}".base64_encode(mhash(MHASH_SHA1, $pwd.$salt).$salt);
     } else {
-      print_red(_("Can't use ssha for encryption. (Missing function mhash / sha1)"));
+      msg_dialog::display(_("Configuration error"), sprintf(_("Cannot use %s encryption: no PHP functions for sha1/mhash available"), 'SSHA'), ERROR_DIALOG);
       return(false);
     }
     return $pwd;

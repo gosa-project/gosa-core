@@ -33,7 +33,6 @@ $class_mapping= array(
                 "passwordMethodMd5" => "include/password-methods/class_password-methods-md5.inc",
                 "passwordMethodssha" => "include/password-methods/class_password-methods-ssha.inc",
                 "passwordMethodheimdal" => "include/password-methods/class_password-methods-heimdal.inc",
-                "passwordMethodkerberos" => "include/password-methods/class_password-methods-kerberos.inc",
                 "passwordMethodsmd5" => "include/password-methods/class_password-methods-smd5.inc",
                 "passwordMethodCrypt" => "include/password-methods/class_password-methods-crypt.inc",
                 "passwordMethodsha" => "include/password-methods/class_password-methods-sha.inc",

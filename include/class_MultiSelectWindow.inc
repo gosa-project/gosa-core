@@ -500,7 +500,7 @@ class MultiSelectWindow{
     if(isset($_GET['act'])&& ($_GET['act'] == "dep_open")){
       $s_entry = base64_decode($_GET['dep_id']);
       if (!isset($this->config->departments[$s_entry])){
-        print_red(_("Error: The requested subtree has an inconsistent DN encoding, check your LDAP!"));
+        msg_dialog::display(_("LDAP error"), sprintf(_("Inconsistent DN encoding detected: '%s'"), LDAP::fix($s_entry)), ERROR_DIALOG);
       } else {
         $this->selectedBase = $this->config->departments[$s_entry];
       }
