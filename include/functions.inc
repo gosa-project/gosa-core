@@ -2416,17 +2416,17 @@ function check_schema($cfg,$rfc2307bis = FALSE)
       if(!isset($objectclasses[$name])){
         $checks[$name]['STATUS'] = FALSE;
         if($value['IS_MUST_HAVE']){
-          $checks[$name]['MSG']    = sprintf(_("The required objectClass '%s' is not present in your schema setup"),$class);
+          $checks[$name]['MSG']    = sprintf(_("Missing required object class '%s'!"),$class);
         }else{
-          $checks[$name]['MSG']    = sprintf(_("The optional objectClass '%s' is not present in your schema setup"),$class);
+          $checks[$name]['MSG']    = sprintf(_("Missing optional object class '%s'!"),$class);
         }
       }elseif(!check_schema_version($objectclasses[$name],$value['REQUIRED_VERSION'])){
         $checks[$name]['STATUS'] = FALSE;
 
         if($value['IS_MUST_HAVE']){
-          $checks[$name]['MSG'] = sprintf(_("The required objectclass '%s' does not have version %s"), $class,                           $value['REQUIRED_VERSION']);
+          $checks[$name]['MSG'] = sprintf(_("Version mismatch for required object class '%s' (!=%s)!"), $class,                           $value['REQUIRED_VERSION']);
         }else{
-          $checks[$name]['MSG'] = sprintf(_("The optional objectclass '%s' does not have version %s"), $class,                           $value['REQUIRED_VERSION']);
+          $checks[$name]['MSG'] = sprintf(_("Version mismatch for optional object class '%s' (!=%s)!"), $class,                           $value['REQUIRED_VERSION']);
         }
       }else{
         $checks[$name]['STATUS'] = TRUE;

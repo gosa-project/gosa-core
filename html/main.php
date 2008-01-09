@@ -201,7 +201,7 @@ eval_sizelimit();
 /* Check for memory */
 if (function_exists("memory_get_usage")){
   if (memory_get_usage() > (to_byte(ini_get('memory_limit')) - 2048000 )){
-    print_red(_("Warning: memory is getting low - please increase the memory_limit!"));
+    msg_dialog::display(_("Configuration warning"), _("Running out of memory!"), WARNING_DIALOG);
   }
 }
 
@@ -340,7 +340,7 @@ if((isset($config->data['MAIN']['ACCOUNT_EXPIRATION'])) &&
 
   if ($expired == 2){
     new log("security","gosa","",array(),"password for user \"$ui->username\" is about to expire") ;
-    print_red(_("Your password is about to expire, please change your password"));
+    msg_dialog::display(_("Password reminder"), _("Your password is about to expire, please change your password!"), INFO_DIALOG);
   }
 }
 

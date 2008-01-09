@@ -202,7 +202,7 @@ if ($config->data['MAIN']['FORCESSL'] == 'true' && $ssl != ''){
 $htaccess_authenticated= FALSE;
 if (isset($config->data['MAIN']['HTACCESS_AUTH']) && preg_match('/^(yes|true)$/i', $config->data['MAIN']['HTACCESS_AUTH'])){
   if (!isset($_SERVER['REMOTE_USER'])){
-    print_red(_("There is a problem with the authentication setup. Please inform your system administrator."));
+    msg_dialog::display(_("Configuration error"), _("There is a problem with the authentication setup!"), ERROR_DIALOG);
     display_error_page();
   }
 
@@ -210,11 +210,11 @@ if (isset($config->data['MAIN']['HTACCESS_AUTH']) && preg_match('/^(yes|true)$/i
   $username= $tmp['username'];
   $server= $tmp['server'];
   if ($username == ""){
-    print_red(_("Cannot find a valid user for the current authentication setup."));
+    msg_dialog::display(_("Error"), _("Cannot find a valid user for the current authentication setup!"), ERROR_DIALOG);
     display_error_page();
   }
   if ($server == ""){
-    print_red(_("User information is not uniq accross the configured directories. Cannot authenticated."));
+    msg_dialog::display(_("Error"), _("User information is not uniq accross the configured LDAP trees!"), ERROR_DIALOG);
     display_error_page();
   }
 
@@ -240,7 +240,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
   /* Admin-logon and verify */
   $ldap = $config->get_ldap_link();
   if (is_null($ldap) || (is_int($ldap) && $ldap == 0)){
-    print_red (_("Can't bind to LDAP. Please contact the system administrator."));
+    msg_dialog::display(_("LDAP error"), _("Can't bind to LDAP. Please contact the system administrator."), ERROR_DIALOG);
     displayLogin();
     exit();
   }
@@ -254,7 +254,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
     $tls =       (isset($config->current['TLS'])       && $config->current['TLS'] == "true");
 
     if(!count($ldap->get_objectclasses())){
-      print_red(_("GOsa cannot retrieve information about the installed schema files. Please make sure, that this is possible."));
+      msg_dialog::display(_("LDAP error"), _("Cannot detect information about the installed LDAP schema!"), ERROR_DIALOG);
       displayLogin();
       exit()  ;
     }else{
@@ -267,7 +267,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
       $checkarr = array();
       foreach($str as $tr){
         if(isset($tr['IS_MUST_HAVE']) && !$tr['STATUS']){
-          print_red($tr['MSG']."<br>"._("Your ldap setup contains old schema definitions. Please re-run the setup."));
+          msg_dialog::display(_("LDAP error"), _("Your ldap setup contains old schema definitions:")."<br><br><i>".$tr['MSG']."</i>", ERROR_DIALOG);
           displayLogin();
           exit();
         }
@@ -303,7 +303,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
     if ($htaccess_authenticated){
       $ui= ldap_login_user_htaccess($username);
       if ($ui === NULL || !$ui){
-        print_red(_("Authentication via htaccess not possible. Unable to retrieve user information."));
+        msg_dialog::display(_("Authentication error"), _("Cannot retrieve user information for htaccess authentication!"), ERROR_DIALOG);
         display_error_page();
       }
     } else {

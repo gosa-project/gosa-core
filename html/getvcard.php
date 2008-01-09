@@ -33,8 +33,8 @@ if (!session::is_set('ui')){
 
 /* Uid parameter set? */
 if (!isset($_GET['dn']) || $_GET['dn'] == ""){
-  print_red (_("Error: getcvard.php needs a parameter to export a vcard!"));
-  exit;
+  msg_dialog::display(_("Internal error"), _("Missing parameters!"), ERROR_DIALOG);
+  display_error_page();
 }
 
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
