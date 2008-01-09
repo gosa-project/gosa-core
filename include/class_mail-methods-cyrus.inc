@@ -37,7 +37,7 @@ class mailMethodCyrus extends mailMethod
     /* Connect to IMAP server. I don't want to see these warning here... */
     $this->gosaMailServer= $gosaMailServer;
     if (!isset($this->config[$gosaMailServer])){
-      print_red(_("Warning: Account has an invalid mailserver string!"));
+      msg_dialog::display(_("Warning"), _("Mail server for this account is invalid!"), WARNING_DIALOG);
     } else {
       $cfg= $this->config[$gosaMailServer];
     }
@@ -55,7 +55,7 @@ class mailMethodCyrus extends mailMethod
 
     /* Mailbox reachable? */
     if ($this->mbox === FALSE){
-      print_red (_("Warning: IMAP Server cannot be reached! If you save this account, some mail settings will not be stored on your server!"));
+      msg_dialog::display(_("IMAP error"), _("Cannot store mail settings on IMAP server!"), ERROR_DIALOG);
       return (FALSE);
     }
     return (TRUE);
@@ -153,7 +153,7 @@ class mailMethodCyrus extends mailMethod
     $list = imap_listmailbox($this->mbox, $cfg["connect"], $folder);
     if ($list === FALSE){
       if (!imap_createmailbox($this->mbox, $cfg["connect"]. $folder)){
-        print_red(sprintf(_("Can't create IMAP mailbox. Server says '%s'."), imap_last_error()));
+        msg_dialog::display(_("IMAP error"), sprintf(_("Cannot create IMAP mailbox: %s"), '<br><br><i>'.imap_last_error().'</i>'), ERROR_DIALOG);
         return;
       }
     }
@@ -172,7 +172,7 @@ class mailMethodCyrus extends mailMethod
     
     /* Write mail quota */
     if (!imap_set_quota($this->mbox, $folder, $gosaMailQuota)){
-      print_red(sprintf(_("Can't write IMAP quota. Server says '%s'."), imap_last_error()));
+      msg_dialog::display(_("IMAP error"), sprintf(_("Cannot modify IMAP mailbox quota: %s"), '<br><br><i>'.imap_last_error().'</i>'), ERROR_DIALOG);
       return (FALSE);
     }
     return (TRUE);
@@ -198,7 +198,7 @@ class mailMethodCyrus extends mailMethod
           }
         }
       } else {
-        print_red (_("Warning: imap_getacl is not implemented, can't remove acl informations."));
+        msg_dialog::display(_("Internal error"), _("Cannot remove IMAP ACL: imap_getacl not implemented!"), ERROR_DIALOG);
       }
 
       /* Set permissions for this folder */
@@ -216,7 +216,7 @@ class mailMethodCyrus extends mailMethod
 
     /* imap_getacl available? */
     if (!function_exists('imap_getacl')){
-      print_red (_("Warning: imap_getacl is not available, can't get imap permissions!"));
+      msg_dialog::display(_("Internal error"), _("Cannot retrieve IMAP ACL: imap_getacl not implemented!"), ERROR_DIALOG);
     }
 
     /* Get permissions in case of shared folders */
@@ -238,7 +238,7 @@ class mailMethodCyrus extends mailMethod
     $cfg= $this->config[$this->gosaMailServer];
     imap_setacl ($this->mbox, $folder, $cfg["admin"], "lrswipcda");
     if (!imap_deletemailbox($this->mbox, $cfg["connect"].$folder)){
-      print_red(sprintf(_("Can't remove IMAP mailbox. Server says '%s'."), imap_last_error()));
+      msg_dialog::display(_("IMAP error"), sprintf(_('Cannot remove IMAP mailbox: %s'), '<br><br><i>'.imap_last_error().'</i>'), ERROR_DIALOG);
       return (FALSE);
     }
     return (TRUE);
@@ -266,8 +266,7 @@ class mailMethodCyrus extends mailMethod
         $cfg["password"], $cfg["admin"]);
 
     if (!$sieve->sieve_login()){
-      print_red(sprintf(_("Can't log into SIEVE server. Server says '%s'."),
-            to_string($sieve->error_raw)));
+      msg_dialog::display(_("SIEVE error"), sprintf(_("Cannot log into SIEVE server: %s"), '<br><br><i>'.to_string($sieve->error_raw).'</i>'), ERROR_DIALOG);
       return;
     }
 
@@ -279,7 +278,7 @@ class mailMethodCyrus extends mailMethod
 
         /* get old GOsa script */
         if(!$sieve->sieve_getscript("gosa")){
-          print_red(sprintf(_("Can't get sieve script. Server says '%s'."), to_string($sieve->error_raw)));
+          msg_dialog::display(_("SIEVE error"), sprintf(_("Cannot retrieve SIEVE script: %s"), '<br><br><i>'.to_string($sieve->error_raw).'</i>'), ERROR_DIALOG);
           return;
         }
 
@@ -350,11 +349,11 @@ class mailMethodCyrus extends mailMethod
 
     /* Upload script and make it the default one */
     if (!$sieve->sieve_sendscript("gosa", $script)){
-      print_red(sprintf(_("Can't send sieve script. Server says '%s'."), to_string($sieve->error_raw)));
+      msg_dialog::display(_("SIEVE error"), sprintf(_("Cannot store SIEVE script: %s"), '<br><br><i>'.to_string($sieve->error_raw).'</i>'), ERROR_DIALOG);
       return;
     }
     if(!$sieve->sieve_setactivescript("gosa")){
-      print_red(sprintf(_("Can't activate GOsa sieve script. Server says '%s'."), to_string($sieve->error_raw)));
+      msg_dialog::display(_("SIEVE error"), sprintf(_("Cannot activate SIEVE script: %s"), '<br><br><i>'.to_string($sieve->error_raw).'</i>'), ERROR_DIALOG);
       return;
     }
 
