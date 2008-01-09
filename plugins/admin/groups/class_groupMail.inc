@@ -18,6 +18,8 @@ class mailgroup extends plugin
   var $gosaMailAlternateAddress   = array();  // Set default Alternate Mail Adresses to empty array
   var $gosaMailForwardingAddress  = array();  // Forwarding also empty
 
+  var $gosaMailForwardingAddress_Some  = array();  // Used in multiple edit 
+
   var $gosaMailServer             = "";       // Selected mailserver 
   var $gosaMailQuota              = "";       // Defined Quota 
   var $quotaUsage                 = 0;        // Currently used quota
@@ -60,6 +62,8 @@ class mailgroup extends plugin
 
   var $objectclasses= array("gosaMailAccount");
   var $CopyPasteVars          = array("quotaUsage","imapacl");
+
+  var $multiple_support = TRUE;
 
   function mailgroup (&$config, $dn= NULL, $ui= NULL)
   {
@@ -311,6 +315,7 @@ class mailgroup extends plugin
   {
     /* Call parent execute */
     //plugin::execute();
+    $display = "";
 
     /* Log view */
     if($this->is_account && !$this->view_logged){
@@ -333,47 +338,53 @@ class mailgroup extends plugin
       $smarty->assign("javascript", "true");
     }
 
-    /* Do we need to flip is_account state? */
-    if(isset($_POST['modify_state'])){
-      if($this->is_account && $this->acl_is_removeable()){
-        $this->is_account= FALSE;
-      }elseif(!$this->is_account && $this->acl_is_createable()){
-        $this->is_account= TRUE;
-      }
-    }
+    /* Handle actions should not be done, when 
+     *  editing multiple entries at once. e.g. account state
+     */ 
+    if(!$this->multiple_support_active){
 
-    $display = "";
-
-    /* Do we represent a valid account? */
-    if (!$this->is_account && $this->parent === NULL){
-
-      $display.= "<img alt=\"\" src=\"images/stop.png\" align=middle>&nbsp;<b>".
-        _("This 'dn' has no valid mail extensions.")."</b>";
-      return ($display);
-    }
-
-    /* Show tab dialog headers */
-    $display= "";
-    if ($this->parent !== NULL){
-      if ($this->is_account){
-        $display.= $this->show_disable_header(_("Remove mail account"),
-            _("This account has mail features enabled. You can disable them by clicking below."));
-      } else {
-        $display.= $this->show_enable_header(_("Create mail account"),
-            _("This account has mail features disabled. You can enable them by clicking below."));
-  
-        /* Show checkbox that allows us to remove imap entry too*/
-        if($this->initially_was_account){
-          $c = "";
-          if($this->remove_folder_from_imap){
-            $c= " checked ";
-          }
-          $display .= "<h2>Shared folder delete options</h2>
-                       <input class='center' type='checkbox' name='remove_folder_from_imap' value='1' ".$c."
-                        title='"._("Remove shared folder from mail server database when entry gets removed in LDAP")."'>";
-          $display .= _("Remove the shared folder and all its contents after saving this account");
+      /* Do we need to flip is_account state? */
+      if(isset($_POST['modify_state'])){
+        if($this->is_account && $this->acl_is_removeable()){
+          $this->is_account= FALSE;
+        }elseif(!$this->is_account && $this->acl_is_createable()){
+          $this->is_account= TRUE;
         }
+      }
+
+      $display = "";
+
+      /* Do we represent a valid account? */
+      if (!$this->is_account && $this->parent === NULL){
+
+        $display.= "<img alt=\"\" src=\"images/stop.png\" align=middle>&nbsp;<b>".
+          _("This 'dn' has no valid mail extensions.")."</b>";
         return ($display);
+      }
+
+      /* Show tab dialog headers */
+      $display= "";
+      if ($this->parent !== NULL){
+        if ($this->is_account){
+          $display.= $this->show_disable_header(_("Remove mail account"),
+              _("This account has mail features enabled. You can disable them by clicking below."));
+        } else {
+          $display.= $this->show_enable_header(_("Create mail account"),
+              _("This account has mail features disabled. You can enable them by clicking below."));
+
+          /* Show checkbox that allows us to remove imap entry too*/
+          if($this->initially_was_account){
+            $c = "";
+            if($this->remove_folder_from_imap){
+              $c= " checked ";
+            }
+            $display .= "<h2>Shared folder delete options</h2>
+              <input class='center' type='checkbox' name='remove_folder_from_imap' value='1' ".$c."
+              title='"._("Remove shared folder from mail server database when entry gets removed in LDAP")."'>";
+            $display .= _("Remove the shared folder and all its contents after saving this account");
+          }
+          return ($display);
+        }
       }
     }
 
@@ -676,7 +687,28 @@ class mailgroup extends plugin
       $smarty->assign("kolab", FALSE);
     }
 
+    /* Multiple support handling */
+    foreach($this->attributes as $attr){
+      if(in_array($attr,$this->multi_boxes)){
+        $smarty->assign("use_".$attr,TRUE);
+      }else{
+        $smarty->assign("use_".$attr,FALSE);
+      }
+    }
 
+    /* Multiple support handling */
+    foreach(array("kolabFolderType") as $attr){
+      if(in_array($attr,$this->multi_boxes)){
+        $smarty->assign("use_".$attr,TRUE);
+      }else{
+        $smarty->assign("use_".$attr,FALSE);
+      }
+    }
+
+    $smarty->assign("Forward_all",$this->gosaMailForwardingAddress);
+    $smarty->assign("Forward_some",$this->gosaMailForwardingAddress_Some);
+
+    $smarty->assign("multiple_support",$this->multiple_support_active);
     $display.= $smarty->fetch (get_template_path('mail.tpl', TRUE));
     return ($display);
   }
@@ -1062,7 +1094,13 @@ I: Only insider delivery */
   function addForwarder($address)
   {
     $this->gosaMailForwardingAddress[]= $address;
-    $this->gosaMailForwardingAddress= array_unique ($this->gosaMailForwardingAddress);
+    $this->gosaMailForwardingAddress= array_unique($this->gosaMailForwardingAddress);
+
+    /* Update multiple edit values too */
+    if($this->multiple_support_active){
+      $this->gosaMailForwardingAddress_Some= 
+        array_remove_entries (array($address),$this->gosaMailForwardingAddress_Some);
+    }
 
     sort ($this->gosaMailForwardingAddress);
     reset ($this->gosaMailForwardingAddress);
@@ -1074,6 +1112,12 @@ I: Only insider delivery */
   {
     $this->gosaMailForwardingAddress= array_remove_entries ($addresses,
         $this->gosaMailForwardingAddress);
+
+    /* Update multiple edit values too */
+    if($this->multiple_support_active){
+      $this->gosaMailForwardingAddress_Some = array_remove_entries ($addresses,
+          $this->gosaMailForwardingAddress_Some);
+    }
     $this->is_modified= TRUE;
   }
 
@@ -1204,7 +1248,100 @@ I: Only insider delivery */
     }
   }
 
+  function multiple_execute()
+  {
+    return($this->execute());
+  }
+
+
+  function init_multiple_support($attrs,$all)
+  {
+    plugin::init_multiple_support($attrs,$all);
+
+    $this->gosaMailForwardingAddress = array();
+    if(isset($attrs['gosaMailForwardingAddress'])){
+      for($i = 0 ; $i < $attrs['gosaMailForwardingAddress']['count'] ; $i++){
+        $this->gosaMailForwardingAddress[] = $attrs['gosaMailForwardingAddress'][$i];
+      }
+    }
+
+    $this->gosaMailForwardingAddress_Some = array();
+    if(isset($all['gosaMailForwardingAddress'])){
+      for($i = 0 ; $i < $all['gosaMailForwardingAddress']['count'] ; $i++){
+        if(!in_array($all['gosaMailForwardingAddress'][$i],$this->gosaMailForwardingAddress)){
+          $this->gosaMailForwardingAddress_Some[] = $all['gosaMailForwardingAddress'][$i];
+        }
+      }
+    }
+  }
+
+  function multiple_save_object()
+  {
+    if(isset($_POST['multiple_mail_group_posted'])){
+      plugin::multiple_save_object();
+      
+      foreach(array("kolabFolderType") as $attr){
+        if(isset($_POST['use_'.$attr])){
+          $this->multi_boxes[] = $attr;
+        }
+      }
+
+      /* Add special kolab attributes */
+      if(isset($this->config->current['MAILMETHOD'])&&preg_match("/olab/i",$this->config->current['MAILMETHOD'])){
+        if(isset($_POST['kolabFolderType_Type'])){
+          $this->kolabFolderType_Type = get_post("kolabFolderType_Type");
+          $this->kolabFolderType_SubType = get_post("kolabFolderType_SubType");
+        }
+      }
+
+      /* Collect data and re-assign it to the imapacl array */
+      if ($this->acl_is_writeable("acl")){
+        $this->imapacl= array();
+        $this->imapacl['%members%']= $_POST['member_permissions'];
+        $this->imapacl['anyone']= $_POST['default_permissions'];
+        foreach ($this->indexed_user as $nr => $user){
+          if (!isset($_POST["user_$nr"])){
+            continue;
+          }
+          if ($_POST["user_$nr"] != $user ||
+              $_POST["perm_$nr"] != $this->indexed_acl[$nr]){
+            $this->is_modified= TRUE;
+          }
+          $this->imapacl[$_POST["user_$nr"]]= $_POST["perm_$nr"];
+        }
+      }
+    }
+  }
+  
+  
+  /* Return selected values for multiple edit */
+  function get_multi_edit_values()
+  {
+    $ret = plugin::get_multi_edit_values();
+    $ret['Forward_some'] = $this->gosaMailForwardingAddress_Some;    
+    $ret['Forward_all'] = $this->gosaMailForwardingAddress;    
+    if(in_array('kolabFolderType',$this->multi_boxes)){
+      $ret['kolabFolderType_Type'] = $this->kolabFolderType_Type;
+      $ret['kolabFolderType_SubType'] = $this->kolabFolderType_SubType;
+    }
+    return($ret);
+  }
+
+  function set_multi_edit_values($attrs)
+  {
+    $forward = array();
+    foreach($attrs['Forward_some'] as $addr){
+      if(in_array($addr,$this->gosaMailForwardingAddress)){
+        $forward[] = $addr;
+      }
+    }
+    foreach($attrs['Forward_all'] as $addr){
+      $forward[] = $addr;
+    }
+    plugin::set_multi_edit_values($attrs);
+    $this->gosaMailForwardingAddress = $forward;
+  }
 }
 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+  // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

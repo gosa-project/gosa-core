@@ -8,7 +8,7 @@
 			onClick="toggle('div_use_apps');">
 		{t}Modify application settings.{/t}
 		<br>
-		<div id="div_use_apps">
+		<div id="div_use_apps" style="visibility: visible;" >
 	{else}
 		<input type="checkbox" name="use_apps" value="1" class="center"
 			onClick="toggle('div_use_apps');">
