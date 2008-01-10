@@ -169,7 +169,7 @@ class opengwAccount extends plugin
 
 			/* Check if config exists */
 			if($this->config->search("opengwAccount", 'DATABASE',array('tabs'))){
-        msg_dialog::display(_("Configuration error"), _("Missing database configuration!"), ERROR_DIALOG);
+        msg_dialog::display(_("Configuration error"), sprintf(_("%s database configuration is missing!"), "Open Groupware"), ERROR_DIALOG);
 			}else{
 
 				/* Create handle */
@@ -177,7 +177,7 @@ class opengwAccount extends plugin
 
 				/* Check if we are successfully connected to db */
 				if(!$this->handle->connected){
-          msg_dialog::display(_("Configuration error"), _("Cannot connect to database!"), ERROR_DIALOG);
+          msg_dialog::display(_("Configuration error"), sprintf( _("Cannot connect to %s database!"), "Open Groupware"), ERROR_DIALOG);
 				}else{
 
 					/* Assign LocationTeams */
