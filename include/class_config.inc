@@ -625,7 +625,7 @@ class config  {
       if (isset($config->current['STRICT_UNITS']) && preg_match('/true/i', $config->current['STRICT_UNITS'])){
         if ($ui->gosaUnitTag != "" && isset($this->tdepartments[$val]) &&
             $this->tdepartments[$val] != $ui->gosaUnitTag){
-          continue;
+#          continue;
         }
       }
 
