@@ -77,7 +77,7 @@ class Step_Config2 extends setup_step
       $pwdhash= 'perl -MCrypt::SmbHash -e "print join(q[:], ntlmgen \$ARGV[0]), $/;"';
     }
 
-    $this->timezones = _get_tz_zones();
+    $this->timezones = timezone::_get_tz_zones();
     $this->samba_settings['smbhash'] = $pwdhash;
   }
 

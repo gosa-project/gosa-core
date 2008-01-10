@@ -21,6 +21,7 @@ $class_mapping= array(
                 "writeexcel_formula" => "include/utils/excel/class.writeexcel_formula.inc.php",
                 "writeexcel_workbook" => "include/utils/excel/class.writeexcel_workbook.inc.php",
                 "writeexcel_format" => "include/utils/excel/class.writeexcel_format.inc.php",
+                "timezone" => "include/utils/class_timezone.inc",
                 "Template_PHPLIB" => "include/utils/layer-menu/lib/PHPLIB.php",
                 "PHPTreeMenu" => "include/utils/layer-menu/lib/phptreemenu.inc.php",
                 "ProcessLayersMenu" => "include/utils/layer-menu/lib/layersmenu-process.inc.php",

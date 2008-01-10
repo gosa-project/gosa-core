@@ -42,7 +42,7 @@ class gosa_logview extends plugin
       }
     }
 
-    $tz = get_default_timezone();
+    $tz = timezone::get_default_timezone();
     $this->timezone_offset = $tz['value'] * 60 * 60 ;
 
     $ldap = $this->config->get_ldap_link();

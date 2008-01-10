@@ -14,7 +14,7 @@ class sambaLogonHours extends plugin
     $this->sambaLogonHours = $slh;
 
     /* Get default timezone */
-    $zone = get_default_timezone();
+    $zone = timezone::get_default_timezone();
     $this->timezone = $zone['value'];
 
     /* Convert to bin */
