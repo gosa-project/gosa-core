@@ -17,6 +17,7 @@ class divListOGroup extends MultiSelectWindow
   var $DepartmentGroups   ; 
   var $ServerGroups       ;
   var $WorkstationGroups  ;
+  var $WindowsGroups  ;
   var $TerminalGroups     ;
   var $PrinterGroups      ;
   var $PhoneGroups        ;
@@ -71,6 +72,7 @@ class divListOGroup extends MultiSelectWindow
     $this->AddCheckBox("DepartmentGroups" , _("Select to see groups containing departments") , _("Show groups containing departments"), true);
     $this->AddCheckBox("ServerGroups" ,     _("Select to see groups containing servers")     , _("Show groups containing servers"), true);
     $this->AddCheckBox("WorkstationGroups", _("Select to see groups containing workstations"), _("Show groups containing workstations"), true);
+    $this->AddCheckBox("WindowsGroups", _("Select to see groups containing windows workstations"), _("Show groups containing windows workstations"), true);
     $this->AddCheckBox("TerminalGroups" ,   _("Select to see groups containing terminals")   , _("Show groups containing terminals"), true);
     $this->AddCheckBox("PrinterGroups" ,    _("Select to see groups containing printer")     , _("Show groups containing printer"), true);
     $this->AddCheckBox("PhoneGroups" ,      _("Select to see groups containing phones")      , _("Show groups containing phones"), true);

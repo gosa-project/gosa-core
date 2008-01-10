@@ -454,6 +454,7 @@ class ogroupManagement extends plugin
         "S" => array("select_server.png"      ,_("Server")      , "ogroup"),
         "F" => array("select_phone.png"       ,_("Phone")       , "phonequeue"),
         "W" => array("select_workstation.png" ,_("Workstation") , "workstartup"),
+        "O" => array("select_winstation.png" ,_("Windows Install") , "ogroup"),
         "T" => array("select_terminal.png"    ,_("Terminal")    , "termgroup"),
         "P" => array("select_printer.png"     ,_("Printer")     , "ogroup"));
 
@@ -511,6 +512,7 @@ class ogroupManagement extends plugin
         "DepartmentGroups"    => "(gosaGroupObjects=*D*)" ,
         "ServerGroups"        => "(gosaGroupObjects=*S*)" ,
         "WorkstationGroups"   => "(gosaGroupObjects=*W*)" ,
+        "WindowsGroups"       => "(gosaGroupObjects=*O*)" ,
         "TerminalGroups"      => "(gosaGroupObjects=*T*)" ,
         "PrinterGroups"       => "(gosaGroupObjects=*P*)" ,
         "PhoneGroups"         => "(gosaGroupObjects=*F*)" );

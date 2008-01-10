@@ -71,6 +71,7 @@ class ogroup extends plugin
           "D" => "departments",
           "S" => "servers",
           "W" => "workstations",
+          "O" => "winstations",
           "T" => "terminals",
           "F" => "phones",
           "_" => "subtrees",
@@ -246,7 +247,7 @@ class ogroup extends plugin
       }
       if (isset($_POST['dselect'])){
         foreach( array("accounts", "groups", "applications", "departments",
-              "servers", "workstations", "terminals", "printers","subtrees",
+              "servers", "workstations", "winstations", "terminals", "printers","subtrees",
               "phones") as $type){
 
           if (isset($_POST[$type])) {
@@ -276,7 +277,7 @@ class ogroup extends plugin
       $smarty->assign("deplist", $this->config->idepartments);
       $smarty->assign("alphabet", generate_alphabet());
       foreach( array("dselect", "regex", "accounts", "groups", "applications",
-            "departments", "servers", "workstations", "terminals","subtrees",
+            "departments", "servers", "workstations", "winstations", "terminals","subtrees",
             "printers", "phones") as $type){
         $smarty->assign("$type", $ogfilter[$type]);
       }
@@ -304,6 +305,7 @@ class ogroup extends plugin
           "D" => _("departments"),
           "S" => _("servers"),
           "W" => _("workstations"),
+          "O" => _("winstations"),
           "T" => _("terminals"),
           "F" => _("phones"),
           "P" => _("printers"));
@@ -311,7 +313,7 @@ class ogroup extends plugin
       $type= preg_replace('/[\[\]]/', '', $this->gosaGroupObjects);
       $p1= $conv[$type[0]];
       error_reporting(0);
-      if (isset($type[1]) && preg_match('/[UGADSFWTP]/', $type[1])){
+      if (isset($type[1]) && preg_match('/[UGADSFOWTP]/', $type[1])){
         $p2= $conv[$type[1]];
         $smarty->assign("combinedObjects", "$p1 "._("and")." $p2");
       } else {
@@ -391,6 +393,7 @@ class ogroup extends plugin
                 "departments"     => array("CLASS"=>"gosaDepartment" ,"DN"=> ""                        ,"ACL" => "department"), 
                 "servers"         => array("CLASS"=>"goServer"       ,"DN"=> get_ou('serverou')        ,"ACL" => "server"),
                 "workstations"    => array("CLASS"=>"gotoWorkstation","DN"=> get_ou('workstationou')   ,"ACL" => "workstation"),
+                "winstations"    => array("CLASS"=>"opsiClient",        "DN"=> get_ou('WINSTATIONS')     ,"ACL" => "winstation"),
                 "terminals"       => array("CLASS"=>"gotoTerminal"   ,"DN"=> get_ou('terminalou')      ,"ACL" => "terminal"),
                 "printers"        => array("CLASS"=>"gotoPrinter"    ,"DN"=> get_ou('printerou')       ,"ACL" => "printer"),
                 "phones"          => array("CLASS"=>"goFonHardware"  ,"DN"=> get_ou('phoneou')         ,"ACL" => "phone"));
@@ -521,6 +524,7 @@ class ogroup extends plugin
         "D" => "select_department.png",
         "S" => "select_server.png",
         "W" => "select_workstation.png",
+        "O" => "select_winstation.png",
         "T" => "select_terminal.png",
         "F" => "select_phone.png",
         "I" => "flag.png",
@@ -545,6 +549,7 @@ class ogroup extends plugin
           "D" => "gosaDepartment",
           "S" => "goServer",
           "W" => "gotoWorkstation",
+          "O" => "opsiClient",
           "T" => "gotoTerminal",
           "F" => "goFonHardware",
           "P" => "gotoPrinter") as $index => $class){
