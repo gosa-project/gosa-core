@@ -162,7 +162,7 @@ class kolabAccount extends plugin
         $valid= FALSE;
         if (!tests::is_email($address)){
           if (!tests::is_email($address, TRUE)){
-              print_red (_("You're trying to add an invalid email address to the list of delegations."));
+              msg_dialog::display(_("Error"), _("Cannot add invalid mail address!"), ERROR_DIALOG);
           }
         } else {
 
@@ -170,7 +170,7 @@ class kolabAccount extends plugin
           $ldap->cd ($this->config->current['BASE']);
           $ldap->search('(mail='.$address.')',array("mail"));
           if ($ldap->count() == 0){
-            print_red (_("The mail address you're trying to add is no primary mail address of an existing user."));
+            msg_dialog::display(_("Error"), _("Primary mail address already in use by another user!"), ERROR_DIALOG);
           } else {
             $valid= TRUE;
           }

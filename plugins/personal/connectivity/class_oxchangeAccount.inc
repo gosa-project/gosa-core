@@ -720,15 +720,15 @@ class oxchangeAccount extends plugin
          isset($this->oxconf["PGPASSWD"])){
         $pgcon = @pg_connect("host=".$this->oxconf["PGHOST"]." user=".$this->oxconf["PGUSER"]." password=".$this->oxconf["PGPASSWD"]." dbname=".$this->oxconf["PGDBNAME"]);
         if (! $pgcon){
-          print_red(_("Connectivity")."&nbsp;"._("Openexchange")."&nbsp;:"._("Couldn't connect to postgresql database!"));
+          msg_dialog::display(_("Error"), _("Cannot connect to database!"), ERROR_DIALOG);
           return;
         }
       }else{
-        print_red(_("Connectivity")."&nbsp;"._("Openexchange")."&nbsp;:"._("Needed parameters for openexchange connectivity plugin are missing!"));
+        msg_dialog::display(_("Configuration error"), _("Database configuration missing!"), ERROR_DIALOG);
         return;
       }
     }else{
-      print_red(_("Connectivity")."&nbsp;"._("Openexchange")."&nbsp;:"._("PHP4 module for postgresql database is missing!"));
+      msg_dialog::display(_("Configuration error"), _("Missing postgresql extension!"), ERROR_DIALOG);
       return;
     }
 
@@ -785,7 +785,6 @@ class oxchangeAccount extends plugin
       } 
     }
   
-//    plugin::save_object();
     if (isset($_POST["oxchangeStatus"])){
       $this->oxchangeStatus = "disabled";
     } else {
@@ -801,10 +800,6 @@ class oxchangeAccount extends plugin
     $needupdate=TRUE;
     $istemplate=FALSE;
 
-
-/*	 print "<pre>".print_r($this->attrs, true)."</pre>";*/
-
-
     /*First at all, we must check if this is new or is updated */
     /*Also check is we have a template, if is a template, is a new user */
     if (isset($this->attrs['objectClass'])){
@@ -818,7 +813,7 @@ class oxchangeAccount extends plugin
     preg_match("/^(\w+(?=\=))=((\w|\s|\.)+(?=\,)),.*/",$this->dn,$uidarray);
     $uid=$uidarray[2];
     if (trim($uid) == "") {
-      print_red(_("The Open-Xchange accountname is empty and thus invalid! Check to make sure that you are not using any strange characters in the loginname."));
+      msg_dialog::display(_("Error"), _("Open-Xchange account name is invalid!"), ERROR_DIALOG);
       return;
     }
 	
@@ -830,15 +825,15 @@ class oxchangeAccount extends plugin
         if(isset($this->oxconf["PGUSER"]) and isset($this->oxconf["PGHOST"]) and isset($this->oxconf["PGDBNAME"]) and isset($this->oxconf["PGPASSWD"])){
           $pgcon =  @pg_connect("host=".$this->oxconf["PGHOST"]." user=".$this->oxconf["PGUSER"]." password=".$this->oxconf["PGPASSWD"]." dbname=".$this->oxconf["PGDBNAME"]);
           if (! $pgcon){
-            print_red(_("Couldn't connect to postgresql database!"));
+            msg::display(_("Error"), _("Cannot connect to database!"), ERROR_DIALOG);
             return;
           }
         }else{
-          print_red(_("Needed parameters for openexchange connectivity plugin are missing!"));
+          msg_dialog::display(_("Configuration error"), _("Database configuration missing!"), ERROR_DIALOG);
           return;
         }
       }else{
-        print_red(_("PHP4 module for postgresql database is missing!"));
+        msg_dialog::display(_("Configuration error"), _("Missing postgresql extension!"), ERROR_DIALOG);
         return;
       }
     }
@@ -951,7 +946,7 @@ class oxchangeAccount extends plugin
       @pg_close($pgcon);
 
       if($error){
-        print_red(_("Something went wrong while saving oxchange account. Please check the error log file."));
+        msg_dialog::display(_("Error"), _("Cannot save Open-Xchange account!"), ERROR_DIALOG);
       }
     }
   }
@@ -961,8 +956,8 @@ class oxchangeAccount extends plugin
   static function plInfo()
   {
     return (array(
-          "plShortName"     => _("Open xchange"),
-          "plDescription"   => _("Open xchange account settings")."&nbsp;:&nbsp;<u>"._("Connectivity addon")."</u>",
+          "plShortName"     => _("Open-Xchange"),
+          "plDescription"   => _("Open-Xchange account settings")."&nbsp;:&nbsp;<u>"._("Connectivity addon")."</u>",
           "plSelfModify"    => TRUE,
           "plDepends"       => array("user"),
           "plPriority"      => 27,                                 // Position in tabs
