@@ -19,7 +19,7 @@
  */
 
 class tests {
-  function is_phone_nr($nr)
+  public static function is_phone_nr($nr)
   {
     if ($nr == ""){
       return (TRUE);
@@ -29,13 +29,13 @@ class tests {
   }
 
 
-  function is_dns_name($str)
+  public static function is_dns_name($str)
   {
     return(preg_match("/^[a-z0-9\.\-]*$/i",$str));
   }
 
 
-  function is_url($url)
+  public static function is_url($url)
   {
     if ($url == ""){
       return (TRUE);
@@ -45,7 +45,7 @@ class tests {
   }
 
 
-  function is_dn($dn)
+  public static function is_dn($dn)
   {
     if ($dn == ""){
       return (TRUE);
@@ -55,7 +55,7 @@ class tests {
   }
 
 
-  function is_uid($uid)
+  public static function is_uid($uid)
   {
     global $config;
 
@@ -73,13 +73,13 @@ class tests {
   }
 
 
-  function is_ip($ip)
+  public static function is_ip($ip)
   {
     return preg_match("/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/", $ip);
   }
 
 
-  function is_mac($mac)
+  public static function is_mac($mac)
   {
     return preg_match("/^[a-f0-9][a-f0-9]:[a-f0-9][a-f0-9]:[a-f0-9][a-f0-9]:[a-f0-9][a-f0-9]:[a-f0-9][a-f0-9]:[a-f0-9][a-f0-9]$/i", $mac);
   }
@@ -87,7 +87,7 @@ class tests {
 
   /* Checks if the given ip address dosen't match 
       "is_ip" because there is also a sub net mask given */
-  function is_ip_with_subnetmask($ip)
+  public static function is_ip_with_subnetmask($ip)
   {
           /* Generate list of valid submasks */
           $res = array();
@@ -127,13 +127,13 @@ class tests {
 
 
   /* Simple is domain check, it checks if the given string looks like "string(...).string" */
-  function is_domain($str)
+  public static function is_domain($str)
   {
     return(preg_match("/^([a-z0-9i\-]*)\.[a-z0-9]*$/i",$str));
   }
 
 
-  function is_id($id)
+  public static function is_id($id)
   {
     if ($id == ""){
       return (FALSE);
@@ -143,7 +143,7 @@ class tests {
   }
 
 
-  function is_path($path)
+  public static function is_path($path)
   {
     if ($path == ""){
       return (TRUE);
@@ -156,7 +156,7 @@ class tests {
   }
 
 
-  function is_email($address, $template= FALSE)
+  public static function is_email($address, $template= FALSE)
   {
     if ($address == ""){
       return (TRUE);
@@ -172,7 +172,7 @@ class tests {
 
 
   /* Check if the given department name is valid */
-  function is_department_name_reserved($name,$base)
+  public static function is_department_name_reserved($name,$base)
   {
     $reservedName = array("systems","apps","incomming","internal","accounts","fax","addressbook",
                             preg_replace("/ou=(.*),/","\\1",get_people_ou()),
@@ -197,7 +197,7 @@ class tests {
   /* Check if $ip1 and $ip2 represents a valid IP range 
    *  returns TRUE in case of a valid range, FALSE in case of an error. 
    */
-  function is_ip_range($ip1,$ip2)
+  public static function is_ip_range($ip1,$ip2)
   {
     if(!is_ip($ip1) || !is_ip($ip2)){
       return(FALSE);
@@ -213,7 +213,7 @@ class tests {
 
 
   /* Check if the specified IP address $address is inside the given network */
-  function is_in_network($network, $netmask, $address)
+  public static function is_in_network($network, $netmask, $address)
   {
     $nw= split('\.', $network);
     $nm= split('\.', $netmask);
