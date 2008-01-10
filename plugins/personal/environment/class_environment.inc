@@ -139,7 +139,7 @@ class environment extends plugin
             $this->gotoHotplugDevices[] = $tmp2; 
           }
         }else{
-          print_red(sprintf(_("The selected hotplug device %s is no longer available, it will be removed when you save this account."),$this->attrs['gotoHotplugDeviceDN'][$i]));
+          msg_dialog::display(_("Warning"), sprintf(_("Device '%s' is not available anymore. It will be removed!"), $this->attrs['gotoHotplugDeviceDN'][$i]), WARNING_DIALOG);
         }
       }
     }
@@ -234,7 +234,7 @@ class environment extends plugin
         }
         //natcasesort($this->gotoXResolutions);
       }else{
-        print_red(sprintf(_("You have specified an external resolution hook which can't be read, please check the permission of the file '%s'."),$file));
+        msg_dialog::display(_("Configuration error"), sprintf(_("Cannot open file '%s'!"), $file), WARNING_DIALOG);
       }
     }
 
@@ -285,8 +285,7 @@ class environment extends plugin
       $error = true;
     }
     if($error && !empty($this->gotoKioskProfile)){
-      print_red(sprintf(_("The selected kiosk profile wasn't available anymore. The current profile is now 'none'."),
-            $this->gotoKioskProfile_Server,$this->gotoKioskProfile_Profile));
+      msg_dialog::display(_("Warning"), sprintf(_("Kiosk profile '%s' located on server '%s' is not available anymore. Kiosk profile will be disabled!"), $this->gotoKioskProfile_Profile, $this->gotoKioskProfile_Server), WARNING_DIALOG);
     }
   }
 
@@ -331,13 +330,11 @@ class environment extends plugin
           $new = key($this->gotoProfileServers);
 
           /* Another profile server found */
-          print_red(sprintf(_("Your selected profile server '%s' is no longer available. Setting profile server to '%s'."),
-                $this->gotoProfileServer,$new));
+          msg_dialog::display(_("Warning"), sprintf(_("Profile server '%s' is not available anymore. Switched to server '%s'."), $this->gotoProfileServer, $new), WARNING_DIALOG);
         }else{
 
           /* No other profile servers found */
-          print_red(sprintf(_("Your selected profile server '%s' is no longer available. Profile server configuration is resetted."),
-                $this->gotoProfileServer));
+          msg_dialog::display(_("Warning"), sprintf(_("Profile server '%s' is not available anymore. Kiosk profile will be disabled."), $this->gotoProfileServer), WARNING_DIALOG);
           $this->gotoProfileServer = "";
         }
       }
@@ -557,7 +554,7 @@ class environment extends plugin
     if(isset($_POST['LogonSave'])){
 
       if(!$this->acl_is_writeable("gotoLogonScript")){
-        print_red(_("You are not allowed to write Logon scripts."));
+        msg_dialog::display(_("Permission error"), _("You have no permission to modify logon scripts!"), ERROR_DIALOG);
         unset($this->dialog);
         $this->dialog=FALSE;
         $this->is_dialog=false;
@@ -565,7 +562,7 @@ class environment extends plugin
         $this->dialog->save_object();
         if(count($this->dialog->check())!=0){
           foreach($this->dialog->check() as $msg){
-            print_red($msg);
+            msg_dialog::display(_("Error"), $msg, ERROR_DIALOG);
           }
         }else{
           $tmp = $this->dialog->save();
@@ -647,11 +644,11 @@ class environment extends plugin
 
       /* We assign a share to this user, if we don't know where to mount the share */
       if(!isset($_POST['gotoShareSelection']) || get_post('gotoShareSelection') == ""){
-        print_red(_("You must select a valid share."));
+        msg_dialog::display(_("Error"), _("Please select a valid share!"), ERROR_DIALOG);
       }elseif((!isset($_POST['gotoShareMountPoint']))||(empty($_POST['gotoShareMountPoint']))||(preg_match("/[\|]/i",$_POST['gotoShareMountPoint']))){
-        print_red(_("You must specify a valid mount point."));
+        msg_dialog::display(_("Error"), _("Please specify a valid mount point!"), ERROR_DIALOG);
       }elseif(preg_match('/ /', $_POST['gotoShareMountPoint'])){
-        print_red(_("Spaces are not allowed in the mount path!"));
+        msg_dialog::display(_("Error"), _("You cannot use spaces in the mount path!"), ERROR_DIALOG);
       }elseif(!(
             preg_match("/^\//",$_POST['gotoShareMountPoint'])  ||
             preg_match("/^~/",$_POST['gotoShareMountPoint']) ||
@@ -662,7 +659,7 @@ class environment extends plugin
             preg_match("/^%/",$_POST['gotoShareMountPoint'])
             )
           ){
-        print_red(_("You must specify a valid mount point.")); 
+        msg_dialog::display(_("Error"), _("Please specify a valid mount point!"), ERROR_DIALOG);
       }else{
         $a_share = $this->gotoAvailableShares[$_POST['gotoShareSelection']];
         $s_mount = $_POST['gotoShareMountPoint'];
@@ -813,7 +810,7 @@ class environment extends plugin
       $this->dialog->save_object();
       if(count($this->dialog->check())!=0){
         foreach($this->dialog->check() as $msg){
-          print_red($msg);
+          msg_dialog::display(_("Error"), $msg, ERROR_DIALOG);
         }
       }else{
         $this->dialog->save_object();
@@ -864,7 +861,7 @@ class environment extends plugin
       if(count($this->dialog->check())!=0){
         $tmp = $this->dialog->check();
         foreach($tmp as $msg){
-          print_red($msg);
+          msg_dialog::display(_("Error"), $msg, ERROR_DIALOG);
         } 
       }else{
         $this->dialog->save_object();
@@ -960,7 +957,7 @@ class environment extends plugin
 
     if((isset($_POST['gotoPrinterDefault']))&&(isset($_POST['gotoPrinterSel']))&&(!empty($_POST['gotoPrinterSel']))){
       if($this->is_group){
-        print_red(_("GOsa default printer flag is not allowed within groups."));
+        msg_dialog::display(_("Error"), _("Cannot set default printer flag for groups!"), ERROR_DIALOG);
       }else{
         if ($this->gosaDefaultPrinter == $_POST['gotoPrinterSel'][0]){
           $this->gosaDefaultPrinter= "";
