@@ -16,11 +16,6 @@ class user extends plugin
   var $plHeadline= "Generic";
   var $plDescription= "This does something";
 
-  /* CLI vars */
-  var $cli_summary= "Handling of GOsa's user base object";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
-
   /* Plugin specific values */
   var $base= "";
   var $orig_base= "";
@@ -376,7 +371,7 @@ class user extends plugin
       /* Check for clean upload */
       if ($_FILES['picture_file']['name'] != ""){
         if (!is_uploaded_file($_FILES['picture_file']['tmp_name'])) {
-          print_red(_("The specified file has not been uploaded via HTTP POST! Aborted."));
+          msg_dialog::display(_("Error"), _("Cannot upload file!"), ERROR_DIALOG);
         }else{
           /* Activate new picture */
           $this->set_picture($_FILES['picture_file']['tmp_name']);
@@ -473,7 +468,7 @@ class user extends plugin
             $_POST["certificateSerialNumber"] != ""){
 
           if (!tests::is_id($_POST["certificateSerialNumber"])){
-            print_red (_("Please enter a valid serial number"));
+            msg_dialog::display(_("Error"), _("Please enter a valid serial number!"), ERROR_DIALOG);
 
             foreach(array("userCertificate", "userSMIMECertificate", "userPKCS12") as $cert){
               if ($this->$cert != ""){
@@ -734,7 +729,7 @@ class user extends plugin
           $this->base= $base;
         }else{
           $this->base = $base_tmp;
-          print_red(sprintf(_("You are not allowed to move this object to '%s'."),LDAP::fix($_POST['base'])));
+          msg_dialog::display(_("Error"), sprintf(_("You have no permission to move this object to '%s'!"), LDAP::fix($_POST['base'])), ERROR_DIALOG);
           $this->set_acl_base('dummy,'.$this->base);
         }
       }
@@ -1267,7 +1262,7 @@ class user extends plugin
       fclose ($fd);
       $this->is_modified= TRUE;
     } else {
-      print_red(_("Could not open specified certificate!"));
+      msg_dialog::display(_("Error"), _("Cannot open certificate!"), ERROR_DIALOG);
     }
   }
 

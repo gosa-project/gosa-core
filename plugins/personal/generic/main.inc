@@ -100,7 +100,7 @@ if (!$remove_lock){
     } else {
 
       /* Missing permissions, show message */
-      print_red (_("You are not allowed to set your password!"));
+      msg_dialog::display(_("Error"), _("You have no permission to set your password!"), ERROR_DIALOG);
     }
 
     del_lock ($ui->dn);
