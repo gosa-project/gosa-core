@@ -1068,7 +1068,12 @@ class workstartup extends plugin
     /* Get classes for release from cache. 
      * Or build cache
      */
-    if($force || !isset($this->cache['CLASSES'][$this->FAIrelease])){
+    if($this->FAIdebianMirror == "inherited"){
+      $release = $this->InheritedFAIrelease;
+    }else{
+      $release = $this->FAIrelease;
+    }
+    if($force || !isset($this->cache['CLASSES'][$release])){
 
       /*  Create a list of available releases.
        *  $this->cache['RELEASE_DNS'][ou=siga...,c=de]         = "siga";
@@ -1089,24 +1094,22 @@ class workstartup extends plugin
 
       /* Create list of available classes for the currenlty selected release.
        */
-      foreach(array($this->FAIrelease,$this->InheritedFAIrelease) as $release){
-        $base = array_search($release,$this->cache['RELEASE_DNS']);
-        $this->cache['CLASSES'][$release] = array();
-        if(!empty($base)){
-          $ldap = $this->config->get_ldap_link();
-          $ldap->cd($base);
-          $ldap->search("(|(objectClass=FAIpackageList)(objectClass=FAItemplate)(objectClass=FAIvariable)".
-              "(objectClass=FAIscript)(objectClass=FAIhook)(objectClass=FAIprofile)".
-              "(objectClass=FAIpartitionTable))",array("cn","objectClass","FAIdebianSection",'description'));
+      $base = array_search($release,$this->cache['RELEASE_DNS']);
+      $this->cache['CLASSES'][$release] = array();
 
-          while($attrs = $ldap->fetch()){
-            $info = $this->analyse_fai_object($attrs);
-            if(count($info)){
-              $this->cache['CLASSES'][$release][$attrs['cn'][0]][] = $info;
-            }
+      if(!empty($base)){
+        $filter = "(|(objectClass=FAIpackageList)(objectClass=FAItemplate)(objectClass=FAIvariable)".
+          "(objectClass=FAIscript)(objectClass=FAIhook)(objectClass=FAIprofile)".
+          "(objectClass=FAIpartitionTable))";
+        $list = get_all_objects_for_given_base($base,$filter,TRUE);
+        foreach($list as $attrs){
+          $info = $this->analyse_fai_object($attrs);
+          if(count($info)){
+            $this->cache['CLASSES'][$release][$attrs['cn'][0]][] = $info;
           }
         }
       }
+
 
       /* Add object caught from external hook
        */

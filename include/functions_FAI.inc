@@ -37,7 +37,8 @@ function get_all_objects_for_given_base($Current_DN,$filter,$detailed = false)
     foreach($deps_to_search as $fai_base){
 
       /* Ldap search for fai classes specified in this release */
-      $res_tmp = get_list($filter,"fai",$fai_base,array("dn","objectClass","FAIstate"),GL_SUBSEARCH | GL_SIZELIMIT);
+      $attributes  = array("dn","objectClass","FAIstate","cn","FAIdebianSection");
+      $res_tmp = get_list($filter,"fai",$fai_base,$attributes,GL_SUBSEARCH | GL_SIZELIMIT);
   
       /* check the returned objects, and add/replace them in our return variable */
       foreach($res_tmp as $attr){
@@ -54,7 +55,6 @@ function get_all_objects_for_given_base($Current_DN,$filter,$detailed = false)
           }
         }
 
-
         /* In detailed mode are some additonal informations visible */
         if($detailed){
 
@@ -67,8 +67,12 @@ function get_all_objects_for_given_base($Current_DN,$filter,$detailed = false)
           }
 
           /* Append objectClass to resulsts */
-          $buffer['objectClass']  = $attr['objectClass'];
-          unset($buffer['objectClass'][0]);
+          foreach($attributes as $val){
+            if(isset($attr[$val])){
+              $buffer[$val] = $attr[$val];
+            }
+          }
+          unset($buffer['objectClass']['count']);
         }
 
         /* Add this object to our list */
