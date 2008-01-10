@@ -472,7 +472,7 @@ class user extends plugin
         if (isset($_POST["certificateSerialNumber"]) &&
             $_POST["certificateSerialNumber"] != ""){
 
-          if (!is_id($_POST["certificateSerialNumber"])){
+          if (!tests::is_id($_POST["certificateSerialNumber"])){
             print_red (_("Please enter a valid serial number"));
 
             foreach(array("userCertificate", "userSMIMECertificate", "userPKCS12") as $cert){
@@ -1131,10 +1131,10 @@ class user extends plugin
     }
 
     /* Check for valid input */
-    if ($this->is_modified && !is_uid($this->uid)){
+    if ($this->is_modified && !tests::is_uid($this->uid)){
       $message[]= _("The field 'Login' contains invalid characters. Lowercase, numbers and dashes are allowed.");
     }
-    if (!is_url($this->labeledURI)){
+    if (!tests::is_url($this->labeledURI)){
       $message[]= _("The field 'Homepage' contains an invalid URL definition.");
     }
     if (preg_match ("/[\\\\]/", $this->sn)){
@@ -1145,16 +1145,16 @@ class user extends plugin
     }
 
     /* Check phone numbers */
-    if (!is_phone_nr($this->telephoneNumber)){
+    if (!tests::is_phone_nr($this->telephoneNumber)){
       $message[]= _("The field 'Phone' contains an invalid phone number.");
     }
-    if (!is_phone_nr($this->facsimileTelephoneNumber)){
+    if (!tests::is_phone_nr($this->facsimileTelephoneNumber)){
       $message[]= _("The field 'Fax' contains an invalid phone number.");
     }
-    if (!is_phone_nr($this->mobile)){
+    if (!tests::is_phone_nr($this->mobile)){
       $message[]= _("The field 'Mobile' contains an invalid phone number.");
     }
-    if (!is_phone_nr($this->pager)){
+    if (!tests::is_phone_nr($this->pager)){
       $message[]= _("The field 'Pager' contains an invalid phone number.");
     }
 
@@ -1530,7 +1530,7 @@ class user extends plugin
     if($this->dn == "new") {
       $this->set_acl_base($this->base);
     }
-    if (!is_url($this->labeledURI) && in_array("labeledURI",$this->multi_boxes)){
+    if (!tests::is_url($this->labeledURI) && in_array("labeledURI",$this->multi_boxes)){
       $message[]= _("The field 'Homepage' contains an invalid URL definition.");
     }
     if (preg_match ("/[\\\\]/", $this->sn) && in_array("sn",$this->multi_boxes)){
@@ -1539,16 +1539,16 @@ class user extends plugin
     if (preg_match ("/[\\\\]/", $this->givenName) && in_array("givenName",$this->multi_boxes)){
       $message[]= _("The field 'Given name' contains invalid characters.");
     }
-    if (!is_phone_nr($this->telephoneNumber) && in_array("telephoneNumber",$this->multi_boxes)){
+    if (!tests::is_phone_nr($this->telephoneNumber) && in_array("telephoneNumber",$this->multi_boxes)){
       $message[]= _("The field 'Phone' contains an invalid phone number.");
     }
-    if (!is_phone_nr($this->facsimileTelephoneNumber) &&  in_array("facsimileTelephoneNumber",$this->multi_boxes)){
+    if (!tests::is_phone_nr($this->facsimileTelephoneNumber) &&  in_array("facsimileTelephoneNumber",$this->multi_boxes)){
       $message[]= _("The field 'Fax' contains an invalid phone number.");
     }
-    if (!is_phone_nr($this->mobile) && in_array("mobile",$this->multi_boxes)){
+    if (!tests::is_phone_nr($this->mobile) && in_array("mobile",$this->multi_boxes)){
       $message[]= _("The field 'Mobile' contains an invalid phone number.");
     }
-    if (!is_phone_nr($this->pager) && in_array("pager",$this->multi_boxes)){
+    if (!tests::is_phone_nr($this->pager) && in_array("pager",$this->multi_boxes)){
       $message[]= _("The field 'Pager' contains an invalid phone number.");
     }
     if (preg_match ('/[,+"?\'()=<>;]/', $this->givenName) && in_array("givenName",$this->multi_boxes)){

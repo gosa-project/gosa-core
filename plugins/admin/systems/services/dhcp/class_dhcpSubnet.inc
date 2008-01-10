@@ -152,20 +152,20 @@ class dhcpSubnet extends dhcpPlugin
 
     /* IP's? */
     foreach(array('dhcpNetMask' => _("Netmask"), 'cn' => _("Network address"), 'range_start' => _("Range"), 'range_stop' => _("Range")) as $attr => $str){
-      if ($this->$attr != "" && !is_ip($this->$attr)){
+      if ($this->$attr != "" && !tests::is_ip($this->$attr)){
         $message[]= sprintf(_("The field '%s' contains an invalid IP address"), $str);
       }
     }
 
     /* Check ip range */
     if ($this->use_range){
-      if(!is_ip_range($this->range_start,$this->range_stop)){
+      if(!tests::is_ip_range($this->range_start,$this->range_stop)){
         $message[] = _("Field 'Range' contains invalid IP range.");
       }
 
       /* Check if range is in the network */
-      if (!is_in_network($this->cn, $this->dhcpNetMask, $this->range_start) ||
-          !is_in_network($this->cn, $this->dhcpNetMask, $this->range_stop)){
+      if (!tests::is_in_network($this->cn, $this->dhcpNetMask, $this->range_start) ||
+          !tests::is_in_network($this->cn, $this->dhcpNetMask, $this->range_stop)){
         $message[] = _("'Range' is not inside the configured network.");
       }
     }

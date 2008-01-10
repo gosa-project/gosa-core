@@ -973,7 +973,7 @@ class posixAccount extends plugin
     if ($this->homeDirectory == ""){
       $message[]= _("The required field 'Home directory' is not set.");
     }
-    if (!is_path($this->homeDirectory)){
+    if (!tests::is_path($this->homeDirectory)){
       $message[]= _("Please enter a valid path in 'Home directory' field.");
     }
 
@@ -981,14 +981,14 @@ class posixAccount extends plugin
     if ($this->force_ids == "1"){
 
       /* Valid uid/gid? */
-      if (!is_id($this->uidNumber)){
+      if (!tests::is_id($this->uidNumber)){
         $message[]= _("Value specified as 'UID' is not valid.");
       } else {
         if ($this->uidNumber < $this->config->current['MINID']){
           $message[]= _("Value specified as 'UID' is too small.");
         }
       }
-      if (!is_id($this->gidNumber)){
+      if (!tests::is_id($this->gidNumber)){
         $message[]= _("Value specified as 'GID' is not valid.");
       } else {
         if ($this->gidNumber < $this->config->current['MINID']){
@@ -999,17 +999,17 @@ class posixAccount extends plugin
 
     /* Check shadow settings, well I like spaghetties... */
     if ($this->activate_shadowMin){
-      if (!is_id($this->shadowMin)){
+      if (!tests::is_id($this->shadowMin)){
         $message[]= _("Value specified as 'shadowMin' is not valid.");
       }
     }
     if ($this->activate_shadowMax){
-      if (!is_id($this->shadowMax)){
+      if (!tests::is_id($this->shadowMax)){
         $message[]= _("Value specified as 'shadowMax' is not valid.");
       }
     }
     if ($this->activate_shadowWarning){
-      if (!is_id($this->shadowWarning)){
+      if (!tests::is_id($this->shadowWarning)){
         $message[]= _("Value specified as 'shadowWarning' is not valid.");
       }
       if (!$this->activate_shadowMax){
@@ -1023,7 +1023,7 @@ class posixAccount extends plugin
       }
     }
     if ($this->activate_shadowInactive){
-      if (!is_id($this->shadowInactive)){
+      if (!tests::is_id($this->shadowInactive)){
         $message[]= _("Value specified as 'shadowInactive' is not valid.");
       }
       if (!$this->activate_shadowMax){
@@ -1050,23 +1050,23 @@ class posixAccount extends plugin
     if ($this->homeDirectory == "" && in_array("homeDirectory",$this->multi_boxes)){
       $message[]= _("The required field 'Home directory' is not set.");
     }
-    if (!is_path($this->homeDirectory) && in_array("homeDirectory",$this->multi_boxes)){
+    if (!tests::is_path($this->homeDirectory) && in_array("homeDirectory",$this->multi_boxes)){
       $message[]= _("Please enter a valid path in 'Home directory' field.");
     }
 
     /* Check shadow settings, well I like spaghetties... */
     if ($this->activate_shadowMin && in_array("activate_shadowMin",$this->multi_boxes)){
-      if (!is_id($this->shadowMin)){
+      if (!tests::is_id($this->shadowMin)){
         $message[]= _("Value specified as 'shadowMin' is not valid.");
       }
     }
     if ($this->activate_shadowMax && in_array("activate_shadowMax",$this->multi_boxes)){
-      if (!is_id($this->shadowMax)){
+      if (!tests::is_id($this->shadowMax)){
         $message[]= _("Value specified as 'shadowMax' is not valid.");
       }
     }
     if ($this->activate_shadowWarning && in_array("activate_shadowWarning",$this->multi_boxes)){
-      if (!is_id($this->shadowWarning)){
+      if (!tests::is_id($this->shadowWarning)){
         $message[]= _("Value specified as 'shadowWarning' is not valid.");
       }
       if (!$this->activate_shadowMax && in_array("activate_shadowMax",$this->multi_boxes)){
@@ -1080,7 +1080,7 @@ class posixAccount extends plugin
       }
     }
     if ($this->activate_shadowInactive && in_array("activate_shadowInactive",$this->multi_boxes)){
-      if (!is_id($this->shadowInactive)){
+      if (!tests::is_id($this->shadowInactive)){
         $message[]= _("Value specified as 'shadowInactive' is not valid.");
       }
       if (!$this->activate_shadowMax && in_array("activate_shadowMax",$this->multi_boxes)){

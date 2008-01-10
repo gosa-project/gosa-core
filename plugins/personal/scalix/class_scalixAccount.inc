@@ -437,8 +437,8 @@ class scalixAccount extends plugin
             $valid= FALSE;
 
             /* Valid mail address */
-            if( ($this->is_template && !is_email($_POST['email_address'], TRUE)) || 
-                (!$this->is_template && !is_email($_POST['email_address'])) ){
+            if( ($this->is_template && !tests::is_email($_POST['email_address'], TRUE)) || 
+                (!$this->is_template && !tests::is_email($_POST['email_address'])) ){
               print_red (_("You're trying to add an invalid email address to the list of alternate addresses."));
             }else{
               $valid = TRUE;

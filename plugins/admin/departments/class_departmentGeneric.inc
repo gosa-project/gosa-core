@@ -268,17 +268,17 @@ class department extends plugin
 			$message[]= _("Required field 'Description' is not set.");
 		}
 
-    if(is_department_name_reserved($this->ou,$this->base)){
+    if(tests::is_department_name_reserved($this->ou,$this->base)){
       $message[]= sprintf(_("The field 'Name' contains the reserved word '%s'. Please choose another name."),$this->ou);
     }
 
 		if (preg_match ('/[#+:=>\\\\\/]/', $this->ou)){
 			$message[]= _("The field 'Name' contains invalid characters.");
 		}
-		if (!is_phone_nr($this->telephoneNumber)){
+		if (!tests::is_phone_nr($this->telephoneNumber)){
 			$message[]= _("The field 'Phone' contains an invalid phone number.");
 		}
-		if (!is_phone_nr($this->facsimileTelephoneNumber)){
+		if (!tests::is_phone_nr($this->facsimileTelephoneNumber)){
 			$message[]= _("The field 'Fax' contains an invalid phone number.");
 		}
 

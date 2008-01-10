@@ -854,7 +854,7 @@ class group extends plugin
     }
 
     /* Check for valid input */
-    if (!is_uid($this->cn)){
+    if (!tests::is_uid($this->cn)){
       $message[]= _("The field 'Name' contains invalid characters. Lowercase, numbers and dashes are allowed.");
     }
 
@@ -895,7 +895,7 @@ class group extends plugin
      
     /* Check ID */
     if ($this->force_gid == "1"){
-      if (!is_id($this->gidNumber)){
+      if (!tests::is_id($this->gidNumber)){
         $message[]= _("Value specified as 'GID' is not valid.");
       } else {
         if ($this->gidNumber < $this->config->current['MINID']){

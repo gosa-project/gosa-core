@@ -29,6 +29,7 @@ $class_mapping= array(
                 "LayersMenu" => "include/utils/layer-menu/lib/layersmenu.inc.php",
                 "LayersMenuCommon" => "include/utils/layer-menu/lib/layersmenu-common.inc.php",
                 "PlainMenu" => "include/utils/layer-menu/lib/plainmenu.inc.php",
+                "tests" => "include/utils/class_tests.inc",
                 "divlist" => "include/class_divlist.inc",
                 "passwordMethodClear" => "include/password-methods/class_password-methods-clear.inc",
                 "passwordMethodMd5" => "include/password-methods/class_password-methods-md5.inc",

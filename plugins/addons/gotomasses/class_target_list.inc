@@ -225,11 +225,11 @@ class target_list extends MultiSelectWindow
     $IP_end   = $this->IP_end;
 
     if($this->IPMatch){
-      if(!is_ip($IP_start)){
+      if(!tests::is_ip($IP_start)){
         print_red(_("Please specify a valid IP range."));
         return;
       }
-      if(!is_ip($IP_end)){
+      if(!tests::is_ip($IP_end)){
         print_red(_("Please specify a valid IP range."));
         return;
       }
@@ -269,7 +269,7 @@ class target_list extends MultiSelectWindow
 
       if($this->IPMatch){
         if(isset($val['ipHostNumber'][0])){
-          if(is_ip_range($IP_start,$val['ipHostNumber'][0]) && is_ip_range($val['ipHostNumber'][0],$IP_end)){
+          if(tests::is_ip_range($IP_start,$val['ipHostNumber'][0]) && tests::is_ip_range($val['ipHostNumber'][0],$IP_end)){
             $tmp[strtolower($val['cn'][0]).$val['cn'][0]]=$val;
           }
         }

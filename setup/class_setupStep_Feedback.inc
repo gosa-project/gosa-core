@@ -175,7 +175,7 @@ class Step_Feedback  extends setup_step
   function check_feedback()
   {
     $msgs = array();
-    if(!is_email($this->eMail) || empty($this->eMail)){
+    if(!tests::is_email($this->eMail) || empty($this->eMail)){
       $msgs[] = _("Please specify a valid email address.");
     }
 

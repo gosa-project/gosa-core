@@ -205,7 +205,7 @@ class gofaxAccount extends plugin
     }
 
     /* Add alternatives */
-    if (isset($_POST['add_alternate']) && !empty($_POST['forward_address']) && is_phone_nr($_POST['forward_address'])){ 
+    if (isset($_POST['add_alternate']) && !empty($_POST['forward_address']) && tests::is_phone_nr($_POST['forward_address'])){ 
       if($this->acl_is_writeable("facsimileAlternateTelephoneNumber",$edit_mode)){
         $this->addAlternate($_POST['forward_address']);
       }
@@ -243,7 +243,7 @@ class gofaxAccount extends plugin
 
     /* Add number to blocklist (dialog) */
     if (isset($_POST['add_blocklist_number']) && $_POST['block_number'] != ""){
-      if (!is_phone_nr($_POST['block_number'])){
+      if (!tests::is_phone_nr($_POST['block_number'])){
         print_red (_("You're trying to add an invalid phone number."));
       } else {
         array_push($this->current_blocklist, $_POST['block_number']);
@@ -299,7 +299,7 @@ class gofaxAccount extends plugin
         $this->goFaxRBlockgroups = array();
 
         foreach ($this->current_blocklist as $val){
-          if (is_phone_nr($val)){
+          if (tests::is_phone_nr($val)){
             $this->goFaxRBlocklist[]=$val;
           } else {
             $this->goFaxRBlockgroups[]= $val;
@@ -311,7 +311,7 @@ class gofaxAccount extends plugin
 
         /* Transfer values to ourself */
         foreach ($this->current_blocklist as $val){
-          if (is_phone_nr($val)){
+          if (tests::is_phone_nr($val)){
             $this->goFaxSBlocklist[]=$val;
           } else {
             $this->goFaxSBlockgroups[]= $val;
@@ -678,7 +678,7 @@ class gofaxAccount extends plugin
       $message[]= _("The required field 'Fax' is not set.");
     }
 
-    if (!is_phone_nr($this->facsimileTelephoneNumber)){
+    if (!tests::is_phone_nr($this->facsimileTelephoneNumber)){
       $message[]= _("Please enter a valid telephone number in the 'Fax' field.");
     }
 
@@ -688,7 +688,7 @@ class gofaxAccount extends plugin
         $this->goFaxDeliveryMode & 32){
       if ($this->mail == ""){
         $message[]= _("Mail delivery is checked, but no address has been specified.");
-      } elseif (!is_email($this->mail)){
+      } elseif (!tests::is_email($this->mail)){
         $message[]= _("The mail address you've entered is invalid.");
       }
     }

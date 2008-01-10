@@ -20,7 +20,7 @@ class sieve_redirect
   {
     $msgs = array();
     
-    if(!is_email($this->data)){
+    if(!tests::is_email($this->data)){
       $msgs[] =_("Please specify a valid email address.");
     }
     

@@ -116,7 +116,7 @@ class blocklistGeneric extends plugin
 
     /* Handle interactions: add */
     if (isset($_POST['add_number']) && $_POST['number'] != ""){
-      if (is_phone_nr($_POST['number']) || preg_match ("/^[\/0-9 ()\^\.\$+*-]+$/",$_POST['number'])){
+      if (tests::is_phone_nr($_POST['number']) || preg_match ("/^[\/0-9 ()\^\.\$+*-]+$/",$_POST['number'])){
         $this->addNumber ($_POST['number']);
       } else {
         print_red (_("Please specify a valid phone number."));
@@ -204,7 +204,7 @@ class blocklistGeneric extends plugin
     if ($this->cn == ""){
       $message[]= _("Required field 'Name' is not set.");
     } else {
-      if (!is_uid($this->cn)){
+      if (!tests::is_uid($this->cn)){
         $message[]= _("Required field 'Name' contains invalid characters");
       }
       if ($this->dn == 'new'){

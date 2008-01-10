@@ -201,11 +201,11 @@ class nagiosAccount extends plugin
       $message[]= _("The required field 'NagiosMail' is not set.");
     }
     if ($this->is_template){
-      if (!is_email($this->NagiosMail, TRUE)){
+      if (!tests::is_email($this->NagiosMail, TRUE)){
         $message[]= _("Please enter a valid email address in 'NagiosMail' field.");
       }
     } else {
-      if (!is_email($this->NagiosMail)){
+      if (!tests::is_email($this->NagiosMail)){
         $message[]= _("Please enter a valid email address in 'NagiosMail' field.");
       }
     }

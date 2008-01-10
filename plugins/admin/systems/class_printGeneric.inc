@@ -672,7 +672,7 @@ class printgeneric extends plugin
     }
 
     /* must: cn */
-    if(($this->BelongsTo == "Printer") && !is_dns_name($this->cn)){
+    if(($this->BelongsTo == "Printer") && !tests::is_dns_name($this->cn)){
       $message[]= _("Invalid character in printer name.");
     }
 

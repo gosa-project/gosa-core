@@ -1000,7 +1000,7 @@ class phoneAccount extends plugin
 
     /* Add phone number */
     if (isset($_POST["add_phonenumber"]) && $_POST['phonenumber']){
-      if (is_phone_nr($_POST['phonenumber'])){
+      if (tests::is_phone_nr($_POST['phonenumber'])){
         $number= $_POST["phonenumber"];
         $this->phoneNumbers[$number]= $number;
         $this->is_modified= TRUE;

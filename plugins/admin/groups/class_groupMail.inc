@@ -439,7 +439,7 @@ class mailgroup extends plugin
 
         /* Valid email address specified? */
         $address= $_POST['forward_address'];
-        if (!is_email($address)){
+        if (!tests::is_email($address)){
 
           print_red (_("You're trying to add an invalid email address ".
                 "to the list of forwarders."));
@@ -472,7 +472,7 @@ class mailgroup extends plugin
     if (isset($_POST['add_alternate'])){
       if ($_POST['alternate_address'] != "" && $this->acl_is_writeable("gosaMailAlternateAddress")){
 
-        if (!is_email($_POST['alternate_address'])){
+        if (!tests::is_email($_POST['alternate_address'])){
           print_red (_("You're trying to add an invalid email address to the list of alternate addresses."));
 
         } elseif (($user= $this->addAlternate ($_POST['alternate_address'])) != ""){
@@ -1025,7 +1025,7 @@ I: Only insider delivery */
     if ($this->mail == ""){
       $message[]= _("The required field 'Primary address' is not set.");
     }
-    if (!is_email($this->mail)){
+    if (!tests::is_email($this->mail)){
       $message[]= _("Please enter a valid email addres in 'Primary address' field.");
     }
     $ldap->cd($this->config->current['BASE']);

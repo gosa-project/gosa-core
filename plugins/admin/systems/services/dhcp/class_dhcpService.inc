@@ -136,10 +136,10 @@ class dhcpService extends dhcpPlugin
   {
     $message= array();
 
-    if (!is_id($this->statements['default-lease-time'])){
+    if (!tests::is_id($this->statements['default-lease-time'])){
       $message[]= _('Default lease time needs to be numeric.');
     }
-    if (!is_id($this->statements['max-lease-time'])){
+    if (!tests::is_id($this->statements['max-lease-time'])){
       $message[]= _('Maximum lease time needs to be numeric.');
     }
     if ($this->statements['default-lease-time'] > $this->statements['max-lease-time']){

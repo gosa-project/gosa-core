@@ -140,7 +140,7 @@ class sieve_vacation
     $msgs = array();
     $err = FALSE;
     foreach($this->addresses as $addr){
-      if(!is_email($addr)){
+      if(!tests::is_email($addr)){
         $err = true;
       }
     }

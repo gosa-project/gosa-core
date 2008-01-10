@@ -446,13 +446,13 @@ class faiPartitionTableEntry extends plugin
                 $message[]= sprintf(_("Please enter a valid partition size for partition %s."),($key));
                 break;
         case 1:
-                if (!is_id(is_id($tmp[0])) &&(!empty($tmp[1]))){
+                if (!tests::is_id(is_id($tmp[0])) &&(!empty($tmp[1]))){
                   $message[]= sprintf(_("Please enter a valid partition size for partition %s."),($key));
                 }
                 break;
                 
         case 2:
-                if((!is_id($tmp[0]))&&(!is_id($tmp[1])) &&(!empty($tmp[1]))){
+                if((!tests::is_id($tmp[0]))&&(!tests::is_id($tmp[1])) &&(!empty($tmp[1]))){
                   $message[]=sprintf(_("Please enter a valid range for partition %s."),($key)); 
                 }elseif($tmp[0]>=$tmp[1]){
                   $message[]=sprintf(_("Please enter a valid range for partition %s."),($key));

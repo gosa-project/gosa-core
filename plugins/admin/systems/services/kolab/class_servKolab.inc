@@ -262,7 +262,7 @@ class servkolab extends goService {
 
     if(($this->kolabFreeBusyFuture==""))    {
       $message[] = _("Future days in Free/Busy settings must be set.");
-    }elseif(!is_uid($this->kolabFreeBusyFuture) || $this->kolabFreeBusyFuture < 0){
+    }elseif(!tests::is_uid($this->kolabFreeBusyFuture) || $this->kolabFreeBusyFuture < 0){
       $message[] = _("Future days in Free/Busy settings must be a positive value.");
     }
 

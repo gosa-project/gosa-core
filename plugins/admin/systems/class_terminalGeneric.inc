@@ -455,7 +455,7 @@ class termgeneric extends plugin
     }
 
     /* Check if given name is a valid host/dns name */
-    if(!is_dns_name($this->cn) ){
+    if(!tests::is_dns_name($this->cn) ){
       $message[] = _("Please specify a valid name for this object.");
     }
 

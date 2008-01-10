@@ -341,11 +341,11 @@ class goMailServer extends goService{
             $port = trim($tmp[1]);
             $ip   = trim($tmp[0]);
 
-            if((is_ip($ip)) && (is_numeric($port))){
+            if((tests::is_ip($ip)) && (is_numeric($port))){
               $dst = "[".$ip."]:".$port;
             }
           }
-          if(is_ip($dst)){
+          if(tests::is_ip($dst)){
             $dst = "[".$dst."]";
           }
           $tmp2 ['src'] = $src;

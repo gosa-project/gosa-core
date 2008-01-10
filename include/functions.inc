@@ -916,7 +916,7 @@ function eval_sizelimit()
   if (isset($_POST['set_size_action'])){
 
     /* User wants new size limit? */
-    if (is_id($_POST['new_limit']) &&
+    if (tests::is_id($_POST['new_limit']) &&
         isset($_POST['action']) && $_POST['action']=="newlimit"){
 
       session::set('size_limit', validate($_POST['new_limit']));
@@ -1101,42 +1101,6 @@ function get_base_from_people($dn)
 }
 
 
-function is_phone_nr($nr)
-{
-  if ($nr == ""){
-    return (TRUE);
-  }
-
-  return preg_match ("/^[\/0-9 ()+*-]+$/", $nr);
-}
-
-
-function is_dns_name($str)
-{
-  return(preg_match("/^[a-z0-9\.\-]*$/i",$str));
-}
-
-
-function is_url($url)
-{
-  if ($url == ""){
-    return (TRUE);
-  }
-
-  return preg_match ("/^(http|https):\/\/((?:[a-zA-Z0-9_-]+\.?)+):?(\d*)/", $url);
-}
-
-
-function is_dn($dn)
-{
-  if ($dn == ""){
-    return (TRUE);
-  }
-
-  return preg_match ("/^[a-z0-9 _-]+$/i", $dn);
-}
-
-
 function strict_uid_mode()
 {
   return !(isset($config->current['STRICT']) && preg_match('/^(no|false)$/i', $config->current['STRICT']));
@@ -1151,122 +1115,6 @@ function get_uid_regexp()
     return "^[a-z0-9_-]+$";
   } else {
     return "^[a-zA-Z0-9 _.-]+$";
-  }
-}
-
-
-function is_uid($uid)
-{
-  global $config;
-
-  if ($uid == ""){
-    return (TRUE);
-  }
-
-  /* STRICT adds spaces and case insenstivity to the uid check.
-     This is dangerous and should not be used. */
-  if (strict_uid_mode()){
-    return preg_match ("/^[a-z0-9_-]+$/", $uid);
-  } else {
-    return preg_match ("/^[a-z0-9 _.-]+$/i", $uid);
-  }
-}
-
-
-function is_ip($ip)
-{
-  return preg_match("/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/", $ip);
-}
-
-
-function is_mac($mac)
-{
-  return preg_match("/^[a-f0-9][a-f0-9]:[a-f0-9][a-f0-9]:[a-f0-9][a-f0-9]:[a-f0-9][a-f0-9]:[a-f0-9][a-f0-9]:[a-f0-9][a-f0-9]$/i", $mac);
-}
-
-
-/* Checks if the given ip address dosen't match 
-    "is_ip" because there is also a sub net mask given */
-function is_ip_with_subnetmask($ip)
-{
-        /* Generate list of valid submasks */
-        $res = array();
-        for($e = 0 ; $e <= 32; $e++){
-                $res[$e] = $e;
-        }
-        $i[0] =255;
-        $i[1] =255;
-        $i[2] =255;
-        $i[3] =255;
-        for($a= 3 ; $a >= 0 ; $a --){
-                $c = 1;
-                while($i[$a] > 0 ){
-                        $str  = $i[0].".".$i[1].".".$i[2].".".$i[3];
-                        $res[$str] = $str;
-                        $i[$a] -=$c;
-                        $c = 2*$c;
-                }
-        }
-        $res["0.0.0.0"] = "0.0.0.0";
-        if(preg_match("/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.".
-                        "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.".
-                        "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.".
-                        "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/", $ip)){
-                $mask = preg_replace("/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.".
-                        "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.".
-                        "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.".
-                        "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/","",$ip);
-
-                $mask = preg_replace("/^\//","",$mask);
-                if((in_array("$mask",$res)) && preg_match("/^[0-9\.]/",$mask)){
-                        return(TRUE);
-                }
-        }
-        return(FALSE);
-}
-
-
-/* Simple is domain check, it checks if the given string looks like "string(...).string" */
-function is_domain($str)
-{
-  return(preg_match("/^([a-z0-9i\-]*)\.[a-z0-9]*$/i",$str));
-}
-
-
-function is_id($id)
-{
-  if ($id == ""){
-    return (FALSE);
-  }
-
-  return preg_match ("/^[0-9]+$/", $id);
-}
-
-
-function is_path($path)
-{
-  if ($path == ""){
-    return (TRUE);
-  }
-  if (!preg_match('/^[a-z0-9%\/_.+-]+$/i', $path)){
-    return (FALSE);
-  }
-
-  return preg_match ("/\/.+$/", $path);
-}
-
-
-function is_email($address, $template= FALSE)
-{
-  if ($address == ""){
-    return (TRUE);
-  }
-  if ($template){
-    return preg_match ("/^[._a-z0-9%-]+@[_a-z0-9-]+(\.[a-z0-9-]+)(\.[a-z0-9-]+)*$/i",
-        $address);
-  } else {
-    return preg_match ("/^[._a-z0-9-]+@[_a-z0-9-]+(\.[a-z0-9i-]+)(\.[a-z0-9-]+)*$/i",
-        $address);
   }
 }
 
@@ -2184,29 +2032,6 @@ function get_MicroTimeDiff($start , $stop)
 }
 
 
-/* Check if the given department name is valid */
-function is_department_name_reserved($name,$base)
-{
-  $reservedName = array("systems","apps","incomming","internal","accounts","fax","addressbook",
-                          preg_replace("/ou=(.*),/","\\1",get_people_ou()),
-                          preg_replace("/ou=(.*),/","\\1",get_groups_ou()));
-  $follwedNames['/ou=fai,ou=configs,ou=systems,/'] = array("fai","hooks","templates","scripts","disk","packages","variables","profiles");
-
-  /* Check if name is one of the reserved names */
-  if(in_array_ics($name,$reservedName)) {
-    return(true);
-  }
-
-  /* Check all follow combinations if name is in array && parent base == array_key, return false*/
-  foreach($follwedNames as $key => $names){
-    if((in_array_ics($name,$names)) && (preg_match($key,$base))){
-      return(true);
-    }
-  }
-  return(false);
-}
-
-
 function get_base_dir()
 {
   global $BASE_DIR;
@@ -2531,46 +2356,6 @@ function get_post($name)
   }else{
     return($_POST[$name]);
   }
-}
-
-
-/* Check if $ip1 and $ip2 represents a valid IP range 
- *  returns TRUE in case of a valid range, FALSE in case of an error. 
- */
-function is_ip_range($ip1,$ip2)
-{
-  if(!is_ip($ip1) || !is_ip($ip2)){
-    return(FALSE);
-  }else{
-    $ar1 = split("\.",$ip1);
-    $var1 = $ar1[0] * (16777216) + $ar1[1] * (65536) + $ar1[2] * (256) + $ar1[3];
-
-    $ar2 = split("\.",$ip2);
-    $var2 = $ar2[0] * (16777216) + $ar2[1] * (65536) + $ar2[2] * (256) + $ar2[3];
-    return($var1 < $var2);
-  }
-}
-
-
-/* Check if the specified IP address $address is inside the given network */
-function is_in_network($network, $netmask, $address)
-{
-  $nw= split('\.', $network);
-  $nm= split('\.', $netmask);
-  $ad= split('\.', $address);
-
-  /* Generate inverted netmask */
-  for ($i= 0; $i<4; $i++){
-    $ni[$i]= 255-$nm[$i];
-    $la[$i]= $nw[$i] | $ni[$i];
-  }
-
-  /* Transform to integer */
-  $first= $nw[0] * (16777216) + $nw[1] * (65536) + $nw[2] * (256) + $nw[3];
-  $curr=  $ad[0] * (16777216) + $ad[1] * (65536) + $ad[2] * (256) + $ad[3];
-  $last=  $la[0] * (16777216) + $la[1] * (65536) + $la[2] * (256) + $la[3];
-
-  return ($first < $curr&& $last > $curr);
 }
 
 

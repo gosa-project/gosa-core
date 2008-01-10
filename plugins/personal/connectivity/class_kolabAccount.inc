@@ -160,8 +160,8 @@ class kolabAccount extends plugin
         /* Valid email address specified? */
         $address= $_POST['delegate_address'];
         $valid= FALSE;
-        if (!is_email($address)){
-          if (!is_email($address, TRUE)){
+        if (!tests::is_email($address)){
+          if (!tests::is_email($address, TRUE)){
               print_red (_("You're trying to add an invalid email address to the list of delegations."));
           }
         } else {
@@ -357,8 +357,8 @@ class kolabAccount extends plugin
       }
       
       $address= preg_replace('/^([^:]+).*$/', '\1', $policy);
-      if (!is_email($address)){
-        if (!is_email($address, TRUE)){
+      if (!tests::is_email($address)){
+        if (!tests::is_email($address, TRUE)){
           $message[]= sprintf(_("The invitation policy entry for address '%s' is not valid."), $address);
         }
       } else {

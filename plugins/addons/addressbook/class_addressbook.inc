@@ -680,19 +680,19 @@ class addressbook extends plugin
     }
 
     /* Check phone numbers */
-    if (!is_phone_nr($this->homePhone)){
+    if (!tests::is_phone_nr($this->homePhone)){
       $message[]= _("The field 'Phone' contains an invalid phone number.");
     }
-    if (!is_phone_nr($this->telephoneNumber)){
+    if (!tests::is_phone_nr($this->telephoneNumber)){
       $message[]= _("The field 'Phone' contains an invalid phone number.");
     }
-    if (!is_phone_nr($this->facsimileTelephoneNumber)){
+    if (!tests::is_phone_nr($this->facsimileTelephoneNumber)){
       $message[]= _("The field 'Fax' contains an invalid phone number.");
     }
-    if (!is_phone_nr($this->mobile)){
+    if (!tests::is_phone_nr($this->mobile)){
       $message[]= _("The field 'Mobile' contains an invalid phone number.");
     }
-    if (!is_phone_nr($this->pager)){
+    if (!tests::is_phone_nr($this->pager)){
       $message[]= _("The field 'Pager' contains an invalid phone number.");
     }
 
@@ -705,7 +705,7 @@ class addressbook extends plugin
   }
 
   /* Check mail */
-  if (!is_email($this->mail)){
+  if (!tests::is_email($this->mail)){
     $message[]= _("Please enter a valid email address in 'Primary address' field.");
   }
 

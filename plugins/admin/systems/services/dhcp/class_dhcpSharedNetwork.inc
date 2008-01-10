@@ -150,7 +150,7 @@ class dhcpSharedNetwork extends dhcpPlugin
           "max-lease-time" => _("Max. lease time"),
           "min-lease-time" => _("Min. lease time")) as $key => $val){
       if (isset($this->statements[$key]) && $this->statements[$key] != "" && 
-          !is_id($this->statements[$key])){
+          !tests::is_id($this->statements[$key])){
         $message[]= sprintf(_("The value specified as '%s' is not numeric!"), $val);
       }
     }

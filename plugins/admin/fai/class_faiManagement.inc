@@ -1056,7 +1056,7 @@ class faiManagement extends plugin
       return(false);
     }elseif(in_array($name,$this->getBranches($f))) {
       return(false);
-    }elseif(is_department_name_reserved($name,$base)){
+    }elseif(tests::is_department_name_reserved($name,$base)){
       return(false);
     }
     return(true);

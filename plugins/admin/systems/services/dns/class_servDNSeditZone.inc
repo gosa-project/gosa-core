@@ -448,7 +448,7 @@ class servdnseditZone extends plugin
     $addr = preg_replace("/^[^\/]*+\//","",$this->ReverseZone);
   
     /* Check for valid&complete IP address */
-    if(!is_ip($addr)){
+    if(!tests::is_ip($addr)){
       $message[] = _("The given network address is not a valid, please specify a valid IP address.");
     }
  
@@ -530,7 +530,7 @@ class servdnseditZone extends plugin
 
     foreach(array("sOAprimary","zoneName","sOAmail") as $attr){
       if(!preg_match("/\.$/",$ret[$attr])){
-        if(!is_ip($ret[$attr])){
+        if(!tests::is_ip($ret[$attr])){
           $ret[$attr] = $ret[$attr].".";
         }
       }

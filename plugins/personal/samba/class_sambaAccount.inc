@@ -759,7 +759,7 @@ class sambaAccount extends plugin
             "CtxMaxDisconnectionTime" => _("Disconnection"),
             "CtxMaxIdleTime" => _("IDLE")) as $key => $val){
 
-        if (isset($this->mungedObject->ctx[$key]) && !is_id($this->mungedObject->ctx[$key]) && $val != 0){
+        if (isset($this->mungedObject->ctx[$key]) && !tests::is_id($this->mungedObject->ctx[$key]) && $val != 0){
           $message[]= sprintf(_("The timeout property '%s' is checked and contains invalid or no characters!"), $val);
         }
       }
@@ -1250,7 +1250,7 @@ class sambaAccount extends plugin
                     "CtxMaxIdleTime"          => _("IDLE")) as $key => $val){
       if (in_array($key,$this->multi_boxes) && 
           isset($this->mungedObject->ctx[$key]) && 
-          !is_id($this->mungedObject->ctx[$key]) && $val != 0){
+          !tests::is_id($this->mungedObject->ctx[$key]) && $val != 0){
         $message[]= sprintf(_("The timeout property '%s' is checked and contains invalid or no characters!"), $val);
       }
     }

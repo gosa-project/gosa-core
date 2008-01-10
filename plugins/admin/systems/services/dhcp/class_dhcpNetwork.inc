@@ -207,7 +207,7 @@ class dhcpNetwork extends plugin
       }
       $tmp= preg_replace('/^[^\s]+\s/', '', $this->options["$key"]);
 
-      if (!is_ip($tmp)){
+      if (!tests::is_ip($tmp)){
         $message[]= sprintf(_("Error in definition of '%s'!"), $typ);
       }
     }

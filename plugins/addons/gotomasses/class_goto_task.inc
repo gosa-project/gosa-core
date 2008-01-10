@@ -121,7 +121,7 @@ class goto_task extends plugin
         if(isset($_POST['task_Name'])){
           $NAME = $_POST['task_Name'];
         }
-        if(isset($_POST['task_IP']) && is_ip($_POST['task_IP'])){
+        if(isset($_POST['task_IP']) && tests::is_ip($_POST['task_IP'])){
           $IP = $_POST['task_IP'];
         }
         if(isset($_POST['configure_dns']) && isset($_POST['Zone']) && isset($this->Zones[$_POST['Zone']])){
@@ -130,7 +130,7 @@ class goto_task extends plugin
         if(isset($_POST['configure_dhcp']) && isset($_POST['Section']) && isset($this->Sections[$_POST['Section']])){
           $DHCP = $_POST['Section'];
         }
-        if(is_mac($MAC)){
+        if(tests::is_mac($MAC)){
           $this->Initial_Target[] = array("MAC"=>$MAC,"IP"=>$IP,"NAME"=>$NAME);
         }
       }
@@ -156,7 +156,7 @@ class goto_task extends plugin
           if(isset($tmp[2])){
             $NAME = trim($tmp[2]);
           }
-          if(is_mac($MAC)){
+          if(tests::is_mac($MAC)){
             $this->Initial_Target[] = array("MAC"=>$MAC,"IP"=>$IP,"NAME"=>$NAME);
           }
         }
@@ -390,7 +390,7 @@ class goto_task extends plugin
    */
   function is_valid_target($str)
   {
-    if(is_mac($str)){
+    if(tests::is_mac($str)){
       return(TRUE);
     }else{
       $ldap = $this->config->get_ldap_link();

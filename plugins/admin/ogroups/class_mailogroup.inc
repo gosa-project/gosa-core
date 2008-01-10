@@ -81,7 +81,7 @@ class mailogroup extends plugin
       $ldap= $this->config->get_ldap_link();
 
       /* Check if mail address is valid */
-      if (!is_email($this->mail) || $this->mail == ""){
+      if (!tests::is_email($this->mail) || $this->mail == ""){
         $message[]= _("Please enter a valid email address in 'Primary address' field.");
       }
 

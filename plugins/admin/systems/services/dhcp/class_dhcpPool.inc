@@ -121,11 +121,11 @@ class dhcpPool extends dhcpPlugin
       $message[]= _("Required field 'Range' is not filled.");
     }
 
-    if (!is_ip($this->range_start) || !is_ip($this->range_stop)){
+    if (!tests::is_ip($this->range_start) || !tests::is_ip($this->range_stop)){
       $message[]= _("Field 'Range' contains invalid IP addresses.");
     }
 
-    if(!is_ip_range($this->range_start,$this->range_stop)){
+    if(!tests::is_ip_range($this->range_start,$this->range_stop)){
       $message[] = _("Field 'Range' contains invalid IP range.");
     }
 
@@ -138,8 +138,8 @@ class dhcpPool extends dhcpPlugin
       if ($type == 'dhcpSubnet'){
         $network= $cache[$dn]['cn'][0];
         $netmask= normalize_netmask($cache[$dn]['dhcpNetMask'][0]);
-        if (!is_in_network($network, $netmask, $this->range_start) ||
-            !is_in_network($network, $netmask, $this->range_stop)){
+        if (!tests::is_in_network($network, $netmask, $this->range_start) ||
+            !tests::is_in_network($network, $netmask, $this->range_stop)){
           $message[] = _("'Range' is not inside the configured network.");
         }
       }

@@ -352,8 +352,8 @@ class mailAccount extends plugin
         /* Valid email address specified? */
         $address= $_POST['forward_address'];
         $valid= FALSE;
-        if (!is_email($address)){
-          if (!is_email($address, TRUE)){
+        if (!tests::is_email($address)){
+          if (!tests::is_email($address, TRUE)){
             if ($this->is_template){
               $valid= TRUE;
             } else {
@@ -390,9 +390,9 @@ class mailAccount extends plugin
     if (isset($_POST['add_alternate'])){
 
       $valid= FALSE;
-      if (!is_email($_POST['alternate_address'])){
+      if (!tests::is_email($_POST['alternate_address'])){
         if ($this->is_template){
-          if (!(is_email($_POST['alternate_address'], TRUE))){
+          if (!(tests::is_email($_POST['alternate_address'], TRUE))){
             print_red (_("You're trying to add an invalid email address to the list of alternate addresses."));
           } else {
             $valid= TRUE;
@@ -920,11 +920,11 @@ class mailAccount extends plugin
       $message[]= _("The required field 'Primary address' is not set.");
     }
     if ($this->is_template){
-      if (!is_email($this->mail, TRUE)){
+      if (!tests::is_email($this->mail, TRUE)){
         $message[]= _("Please enter a valid email address in 'Primary address' field.");
       }
     } else {
-      if (!is_email($this->mail)){
+      if (!tests::is_email($this->mail)){
         $message[]= _("Please enter a valid email address in 'Primary address' field.");
       }
     }

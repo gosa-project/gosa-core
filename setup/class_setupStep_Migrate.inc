@@ -971,7 +971,7 @@ class Step_Migrate extends setup_step
       return false;
     }
  
-    if(!is_uid($uid) || empty($uid)){
+    if(!tests::is_uid($uid) || empty($uid)){
       msg_dialog::display(_("Input error"), _("Specify a valid user ID!"), ERROR_DIALOG);
       return false;
     }

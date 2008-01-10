@@ -502,7 +502,7 @@ class termDNS extends plugin
         $message[]= _("The required field 'IP-address' is not set.");
       }
 
-      if (!is_ip($this->ipHostNumber)){
+      if (!tests::is_ip($this->ipHostNumber)){
         $message[]= _("Wrong IP format in field IP-address.");
       }
     }
@@ -512,7 +512,7 @@ class termDNS extends plugin
     if ($this->macAddress == "" ){
       $message[]= _("The required field 'MAC-address' is not set.");
     }
-    if(!is_mac($this->macAddress)){
+    if(!tests::is_mac($this->macAddress)){
       $message[]=(_("The given macaddress is invalid. There must be 6 2byte segments seperated by ':'."));
     }
 

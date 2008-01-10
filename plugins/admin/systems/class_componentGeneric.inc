@@ -187,7 +187,7 @@ class componentGeneric extends plugin
     }
 
     /* Check if given name is a valid host/dns name */
-    if(!is_dns_name($this->cn)){
+    if(!tests::is_dns_name($this->cn)){
       $message[] = _("Please specify a valid name for this object.");
     }
 
@@ -195,7 +195,7 @@ class componentGeneric extends plugin
     if($this->netConfigDNS->ipHostNumber == ""){
        $message[]= _("The required field IP address is empty.");
     } else {
-      if (!is_ip($this->netConfigDNS->ipHostNumber)){
+      if (!tests::is_ip($this->netConfigDNS->ipHostNumber)){
         $message[]= _("The field IP address contains an invalid address.");
       }
     }

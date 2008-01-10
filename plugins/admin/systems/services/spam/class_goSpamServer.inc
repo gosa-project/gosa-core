@@ -216,7 +216,7 @@ class gospamserver extends goService{
   function AddTrust($post)
   {
     if(!empty($post)){
-      if(is_ip($post) || is_domain($post) || (is_ip_with_subnetmask($post))){
+      if(tests::is_ip($post) || tests::is_domain($post) || (tests::is_ip_with_subnetmask($post))){
         $this->TrustedNetworks[$post] = $post;
       }else{
         print_red(_("Specified value is not a valid 'trusted network' value."));
