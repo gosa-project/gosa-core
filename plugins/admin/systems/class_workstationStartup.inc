@@ -1210,7 +1210,6 @@ class workstartup extends plugin
     if(in_array('FAIpackageList',$attr['objectClass'])){
       $tmp2["Type"]   = 'FAIpackageList'; 
       $tmp2["Abbr"]   = 'Pl';
-      $tmp2["Section"]= $attr['FAIdebianSection'];
       $tmp2["Desc"]  = $attr['description'][0];
     }
     if(in_array('FAItemplate',$attr['objectClass'])){

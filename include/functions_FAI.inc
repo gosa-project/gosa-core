@@ -37,7 +37,7 @@ function get_all_objects_for_given_base($Current_DN,$filter,$detailed = false)
     foreach($deps_to_search as $fai_base){
 
       /* Ldap search for fai classes specified in this release */
-      $attributes  = array("dn","objectClass","FAIstate","cn","FAIdebianSection");
+      $attributes  = array("dn","objectClass","FAIstate","cn");
       $res_tmp = get_list($filter,"fai",$fai_base,$attributes,GL_SUBSEARCH | GL_SIZELIMIT);
   
       /* check the returned objects, and add/replace them in our return variable */
