@@ -497,9 +497,13 @@ class config  {
       $ldap->cd ($this->current['BASE']);
       $ldap->search ("(objectClass=sambaDomain)");
       while ($attrs= $ldap->fetch()){
-        $this->data['SERVERS']['SAMBA'][$attrs['sambaDomainName'][0]]= array(
-            "SID" => $attrs["sambaSID"][0],
-            "RIDBASE" => $attrs["sambaAlgorithmicRidBase"][0]);
+        $this->data['SERVERS']['SAMBA'][$attrs['sambaDomainName'][0]]= array( "SID" =>"","RIDBASE" =>"");
+        if(isset($attrs["sambaSID"][0])){
+          $this->data['SERVERS']['SAMBA'][$attrs['sambaDomainName'][0]]["SID"]  = $attrs["sambaSID"][0];
+        }
+        if(isset($attrs["sambaAlgorithmicRidBase"][0])){
+          $this->data['SERVERS']['SAMBA'][$attrs['sambaDomainName'][0]]["RIDBASE"] = $attrs["sambaAlgorithmicRidBase"][0];
+        }
       }
 
       /* If no samba servers are found, look for configured sid/ridbase */
