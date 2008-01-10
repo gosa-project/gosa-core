@@ -955,7 +955,7 @@ class sambaAccount extends plugin
     /* Generate rid / primaryGroupId */
     if ($this->samba3){
       if (!isset($this->config->data['SERVERS']['SAMBA'][$this->sambaDomainName]['SID'])){
-        print_red (_("Warning: This account has an undefined samba SID assigned. The problem can not be fixed by GOsa!"));
+        msg_dialog::display(_("Warning"), _("Undefined Samba SID detected. Please fix this problem manually!"), WARNING_DIALOG);
       } else {
         $this->SID= $this->config->data['SERVERS']['SAMBA'][$this->sambaDomainName]['SID'];
         $this->ridBase= $this->config->data['SERVERS']['SAMBA'][$this->sambaDomainName]['RIDBASE'];
@@ -979,7 +979,7 @@ class sambaAccount extends plugin
         $ldap->cd($this->config->current['BASE']);
         $ldap->search("(&(objectClass=posixGroup)(gidNumber=".$this->gidNumber."))", array("cn"));
         if ($ldap->count() != 1){
-          print_red(_("Warning: Can't identify users primary group - no conversion to a samba group possible!"));
+          msg_dialog::display(_("Warning"), _("Cannot convert primary group to samba group: group cannot be identified!"), WARNING_DIALOG);
         } else {
           $attrs= $ldap->fetch();
           $g= new group($this->config, $ldap->getDN());

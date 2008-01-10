@@ -439,7 +439,7 @@ class scalixAccount extends plugin
             /* Valid mail address */
             if( ($this->is_template && !tests::is_email($_POST['email_address'], TRUE)) || 
                 (!$this->is_template && !tests::is_email($_POST['email_address'])) ){
-              print_red (_("You're trying to add an invalid email address to the list of alternate addresses."));
+              msg_dialog::display(_("Error"), _("Cannot add invalid mail address!"), ERROR_DIALOG);
             }else{
               $valid = TRUE;
             }
@@ -448,7 +448,7 @@ class scalixAccount extends plugin
             if ($valid && ($user= $this->addEmail ($_POST['email_address'])) != ""){
               $ui= get_userinfo();
               if ($user != $ui->username){
-                print_red (_("The address you're trying to add is already used by user")." '$user'.");
+                msg_dialog::display(_("Error"), sprintf(_("Cannot add mail address: it is already used by user '%s'."), $user), ERROR_DIALOG);
               }
             }
 #          }
@@ -505,5 +505,5 @@ class scalixAccount extends plugin
   }
 }
 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:rulere
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler
 ?>

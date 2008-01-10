@@ -800,7 +800,7 @@ class posixAccount extends plugin
 
           /* Oups - timed out */
           if ($wait-- == 0){
-            print_red (_("Failed: overriding lock"));
+            msg_dialog::display(_("Warning"), _("Timeout while waiting for lock! Ignoring lock."), WARNING_DIALOG);
             break;
           }
         }
@@ -1275,7 +1275,7 @@ class posixAccount extends plugin
 
     /* Should not happen */
     if ($id == $hwm){
-      print_red(_("Too many users, can't allocate a free ID!"));
+      msg_dialog::display(_("Error"), _("Cannot allocate a free ID: too many users!"), ERROR_DIALOG);
       exit;
     }
 

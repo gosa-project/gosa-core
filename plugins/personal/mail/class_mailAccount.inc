@@ -16,7 +16,6 @@ class mailAccount extends plugin
   var $plDescription      = "This does something";
   var $method             = "mailMethod";
 
-  /* CLI vars */
   var $gosaVacationStart                  = 0;
   var $gosaVacationStop                   = 0;
   var $view_logged = FALSE;
@@ -90,7 +89,7 @@ class mailAccount extends plugin
       if ($cls && class_exists($cls)){
         $this->method= $cls;
       } else {
-        print_red(sprintf(_("There is no mail method '%s' specified in your gosa.conf available."), $method));
+        msg_dialog::display(_("Configuration error"), sprintf(_("Unkown mail method '%s' specified!"), $method), ERROR_DIALOG);
       }
     }
 
@@ -151,7 +150,6 @@ class mailAccount extends plugin
           }else{
             $this->quotaUsage     = "";
             $this->gosaMailQuota  = "";
-//            print_red(sprintf(_("Can't get quota information for '%s'."),$this->folder_prefix.$this->$id));
           }
 
           /* Get mailboxes / folder like INBOX ..*/
@@ -212,7 +210,7 @@ class mailAccount extends plugin
       $line= fgets($fh, 256);
 
       if (!preg_match('/^DESC:/', $line)){
-        print_red (_("No DESC tag in vacation file:")." $file");
+        msg_dialog::display(_("Configuration error"), sprintf(_("No DESC tag in vacation template '%s'!"), $file), ERROR_DIALOG);
         return $desc;
       }
       fclose ($fh);
@@ -357,13 +355,13 @@ class mailAccount extends plugin
             if ($this->is_template){
               $valid= TRUE;
             } else {
-              print_red (_("You're trying to add an invalid email address to the list of forwarders."));
+              msg_dialog::display(_("Error"), _("Cannot add invalid mail address!"), ERROR_DIALOG);
             }
           }
         } elseif ($address == $this->mail
             || in_array($address, $this->gosaMailAlternateAddress)) {
 
-          print_red (_("Adding your one of your own addresses to the forwarders makes no sense."));
+          msg_dialog::display(_("Error"),_("Cannot add your primary address to the list of forwarders.") , ERROR_DIALOG);
 
         } else {
           $valid= TRUE;
@@ -393,12 +391,12 @@ class mailAccount extends plugin
       if (!tests::is_email($_POST['alternate_address'])){
         if ($this->is_template){
           if (!(tests::is_email($_POST['alternate_address'], TRUE))){
-            print_red (_("You're trying to add an invalid email address to the list of alternate addresses."));
+            msg_dialog::display(_("Error"), _("Cannot add invalid mail address!"), ERROR_DIALOG);
           } else {
             $valid= TRUE;
           }
         } else {
-          print_red (_("You're trying to add an invalid email address to the list of alternate addresses."));
+          msg_dialog::display(_("Error"), _("Cannot add invalid mail address!"), ERROR_DIALOG);
         }
 
       } else {
@@ -408,7 +406,7 @@ class mailAccount extends plugin
       if ($valid && ($user= $this->addAlternate ($_POST['alternate_address'])) != ""){
         $ui= get_userinfo();
         if ($user != $ui->username){
-          print_red (_("The address you're trying to add is already used by user")." '$user'.");
+          msg_dialog::display(_("Error"), sprintf(_("Cannot add mail address: it is already used by user '%s'."), $user), ERROR_DIALOG);
         }
       }
     }
@@ -1004,7 +1002,7 @@ class mailAccount extends plugin
       reset ($this->gosaMailForwardingAddress);
       $this->is_modified= TRUE;
     }else{
-      print_red(_("You are not allowed to write mail forwarding."));
+      msg_dialog::display(_("Permission error"), _("You have no permission to modify these addresses."), ERROR_DIALOG);
     }
   }
 
@@ -1016,7 +1014,7 @@ class mailAccount extends plugin
       $this->gosaMailForwardingAddress= array_remove_entries ($addresses, $this->gosaMailForwardingAddress);
       $this->is_modified= TRUE;
     }else{
-      print_red(_("You are not allowed to write mail forwarding."));
+      msg_dialog::display(_("Permission error"), _("You have no permission to modify these addresses."), ERROR_DIALOG);
     }
   }
 
@@ -1049,7 +1047,7 @@ class mailAccount extends plugin
       reset ($this->gosaMailAlternateAddress);
       return ("");
     }else{
-      print_red(_("You are not allowed to write mail alternate address."));
+      msg_dialog::display(_("Permission error"), _("You have no permission to modify these addresses."), ERROR_DIALOG);
     }
   }
 
@@ -1060,7 +1058,7 @@ class mailAccount extends plugin
       $this->gosaMailAlternateAddress= array_remove_entries ($addresses,$this->gosaMailAlternateAddress);
       $this->is_modified= TRUE;
     }else{
-      print_red(_("You are not allowed to write mail alternate address."));
+      msg_dialog::display(_("Permission error"), _("You have no permission to modify these addresses."), ERROR_DIALOG);
     }
   }
 
