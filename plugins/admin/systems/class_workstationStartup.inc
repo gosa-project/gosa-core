@@ -1022,7 +1022,7 @@ class workstartup extends plugin
        */
       $this->cache['SERVERS']['auto'] = array();
       $sort_by = array("auto");
-      $server_tmp = array();
+      $server_tmp = array("auto"=>array());
       while($attr = $ldap->fetch()){
         if(isset($attr['FAIrepository'])){
           for($i = 0 ; $i < $attr['FAIrepository']['count'] ; $i ++ ){
