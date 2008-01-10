@@ -76,13 +76,9 @@
 				<tr>
 					<td>
 	{render acl=$FAIdebianMirrorACL}
-						<select name="FAIdebianMirror"   onchange='document.mainform.submit()'>
-							{foreach from=$FAIdebianMirrors item=val key=key}
-									{if $val.USE}
-											<option value="{$key}" {if $FAIdebianMirror == $key} selected {/if}>{$val.NAME}</option>
-									{else}
-											<option value="auto" disabled>{$val.NAME}</option>
-									{/if}
+						<select name="FAIdebianMirror" {$FAIdebianMirrorACL} onchange='document.mainform.submit()'>
+							{foreach from=$FAIservers item=val key=key}
+								<option value="{$key}" {if $FAIdebianMirror == $key} selected {/if}>{$key}</option>
 							{/foreach}
 						</select>
 	{/render}
@@ -117,14 +113,9 @@
 					<td>
 	{render acl=$FAIdebianMirrorACL}
 						<select name="FAIdebianMirror" {$FAIdebianMirrorACL} onchange='document.mainform.submit()'>
-							{foreach from=$FAIdebianMirrors item=val key=key}
-								{if $val.USE}
-									<option value="{$key}" {if $FAIdebianMirror == $key} selected {/if}>{$val.NAME}</option>
-								{else}
-									<option value="auto" disabled>{$val.NAME}</option>
-								{/if}
+							{foreach from=$FAIservers item=val key=key}
+								<option value="{$key}" {if $FAIdebianMirror == $key} selected {/if}>{$key}</option>
 							{/foreach}
-							<option disabled>&nbsp;</option>
 						</select>
 	{/render}
 	{if $javascript eq 'false'}
@@ -136,12 +127,8 @@
 					<td>
 	{render acl=$FAIreleaseACL}
 						<select name="FAIrelease"  onchange='document.mainform.submit()' {$FAIclassACL}>
-							{foreach from=$FAIreleases item=val key=key}
-								{if $val.USE}
-									<option value="{$val.NAME}" {if $FAIrelease == $key} selected {/if}>{$val.NAME}</option>
-								{else}
-									<option value="auto" disabled>{$val.NAME}</option>
-								{/if}
+							{foreach from=$FAIservers.$FAIdebianMirror item=val key=key}
+								<option value="{$val}" {if $FAIrelease == $key} selected {/if}>{$val}</option>
 							{/foreach}
 						</select>
 	{/render}
@@ -157,8 +144,9 @@
 
 	{render acl=$FAIclassACL}
 			<select name="FAIclassesSel">
-				{html_options values=$FAIclassesKeys output=$FAIclasses}
-				<option disabled>&nbsp;</option>
+				{foreach from=$FAIclasses item=val key=key}
+					<option value="{$key}">{$key}&nbsp;[{$val}]</option>
+				{/foreach}
 			</select>	
 	{/render}
 	{render acl=$FAIclassACL}
