@@ -658,7 +658,7 @@ class workstartup extends plugin
         if(isset($this->cache['CLASSES'][$this->FAIrelease][$class])){
           foreach($this->cache['CLASSES'][$this->FAIrelease][$class] as $types ){
             if(isset($types['Desc'])){
-              $desc.= $types['Desc'];
+              $desc= $types['Desc'];
               if($types['Type'] == "FAIprofile"){
                 break;
               }
@@ -1011,6 +1011,18 @@ class workstartup extends plugin
       $ldap->cd($this->config->current['BASE']);
       $ldap->search("(&(FAIrepository=*)(objectClass=FAIrepositoryServer))",array("FAIrepository"));
       $this->cache['SERVERS'] = array();
+
+      /* Only add inherit option, if we are part in an object group
+       */
+      if($this->member_of_ogroup){
+        $this->cache['SERVERS']['inherited']=array();
+      }
+
+      /* Add auto value  
+       */
+      $this->cache['SERVERS']['auto'] = array();
+      $sort_by = array("auto");
+      $server_tmp = array();
       while($attr = $ldap->fetch()){
         if(isset($attr['FAIrepository'])){
           for($i = 0 ; $i < $attr['FAIrepository']['count'] ; $i ++ ){
@@ -1021,17 +1033,18 @@ class workstartup extends plugin
               $release  = $tmp[2];
               $server   = $tmp[1];
               $url      = $tmp[0];
-              $this->cache['SERVERS'][$url][$release]=$release;
-              $this->cache['SERVERS']['auto'][$release]=$release;
+              $server_tmp[$url][$release]=$release;
+              $server_tmp['auto'][$release]=$release;
+              $sort_by[$url] = $url;
             }
           }
         }
       }
-
-      /* Only add inherit option, if we are part in an object group
-       */
-      if($this->member_of_ogroup)    {
-        $this->cache['SERVERS']['inherited']=array();
+      natcasesort($sort_by);
+      foreach($sort_by as $name){
+        $releases = $server_tmp[$name];
+        natcasesort($releases);
+        $this->cache['SERVERS'][$name] = $releases; 
       }
     }
 
@@ -1168,13 +1181,16 @@ class workstartup extends plugin
     $Abbr ="";
     $ret= array();
     foreach($classes as $class_name => $class_types){
-      foreach($class_types as $type){
-        if(!preg_match("/".$type['Abbr']."/",$Abbr)){
-          $Abbr .= $type['Abbr']." ";
+      if(!in_array($class_name,$this->FAIclass)){
+        foreach($class_types as $type){
+          if(!preg_match("/".$type['Abbr']."/",$Abbr)){
+            $Abbr .= $type['Abbr']." ";
+          }
         }
+        $ret[$class_name] = trim($Abbr);
       }
-      $ret[$class_name] = trim($Abbr);
     }
+    uksort($ret, 'strnatcasecmp');
     return($ret);
   }
 
