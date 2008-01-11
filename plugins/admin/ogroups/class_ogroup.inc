@@ -93,7 +93,7 @@ class ogroup extends plugin
     if ($this->dn == "new"){
       $this->base = session::get('CurrentMainBase');
     } else {
-      $this->base= preg_replace("/^[^,]+,".get_groups_ou()."/","",$this->dn);
+      $this->base= preg_replace("/^[^,]+,".normalizePreg(get_ou("ogroupou"))."/","",$this->dn);
     }
 
     /* Load member data */
@@ -388,7 +388,7 @@ class ogroup extends plugin
       ###########*/
 
     $p_f= array("accounts"        => array("CLASS"=>"gosaAccount"    ,"DN"=> get_people_ou()           ,"ACL" => "users"), 
-                "groups"          => array("CLASS"=>"posixGroup"     ,"DN"=> get_groups_ou()           ,"ACL" => "groups"), 
+                "groups"          => array("CLASS"=>"posixGroup"     ,"DN"=> get_groups_ou('ogroupou') ,"ACL" => "groups"), 
                 "applications"    => array("CLASS"=>"gosaApplication","DN"=> get_ou('applicationou')   ,"ACL" => "application"), 
                 "departments"     => array("CLASS"=>"gosaDepartment" ,"DN"=> ""                        ,"ACL" => "department"), 
                 "servers"         => array("CLASS"=>"goServer"       ,"DN"=> get_ou('serverou')        ,"ACL" => "server"),
@@ -592,7 +592,7 @@ class ogroup extends plugin
 
     /* Permissions for that base? */
     if ($this->base != ""){
-      $new_dn= 'cn='.$this->cn.','.get_groups_ou().$this->base;
+      $new_dn= 'cn='.$this->cn.','.get_ou('ogroupou').$this->base;
     } else {
       $new_dn= $this->dn;
     }
@@ -641,7 +641,7 @@ class ogroup extends plugin
 
     /* New accounts need proper 'dn', propagate it to remaining objects */
     if ($this->dn == 'new'){
-      $this->dn= 'cn='.$this->cn.','.get_groups_ou().$this->base;
+      $this->dn= 'cn='.$this->cn.','.get_ou('ogroupou').$this->base;
     }
 
     /* Save data. Using 'modify' implies that the entry is already present, use 'add' for

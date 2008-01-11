@@ -1017,7 +1017,9 @@ function get_ou($name)
 {
   global $config;
 
-  $map = array( "applicationou" => "ou=apps,",
+  $map = array( 
+                "ogroupou"      => "ou=groups,",
+                "applicationou" => "ou=apps,",
                 "systemsou"     => "ou=systems,",
                 "serverou"      => "ou=servers,ou=systems,",
                 "terminalou"    => "ou=terminals,ou=systems,",
