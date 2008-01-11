@@ -114,15 +114,17 @@ class Socket_Client
 		if($this->handle){
 
 			/* Check if there is something to read for us */
-			$read = array("0"=>$this->handle);	
-			$num = @stream_select($read,$write=NULL,$accept=NULL,$this->timeout);
+			$read = array("0"=>$this->handle);
+			$write = array();
+			$accept = array();	
+			$num = @stream_select($read,$write,$accept,$this->timeout);
 			$str = "";		
 		
 			/* Read data if necessary */
 			while($num && $this->b_data_send){
 				$str.= fread($this->handle, 1024000);
 				$read = array("0"=>$this->handle);	
-				$num = @stream_select($read,$write=NULL,$accept=NULL,$this->timeout);
+				$num = @stream_select($read,$write,$accept,$this->timeout);
 			}
 			$this->bytes_read = strlen($str);
 			$this->b_data_send = FALSE;
