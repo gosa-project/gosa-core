@@ -10,8 +10,10 @@ class deviceGeneric extends plugin
   public $dev_id        = "";
   public $serial        = "";
   public $base          = "";	
+  public $types;
+  public $type;
 
-  public $posts           = array("description","dev_id","serial","vendor");
+  public $posts           = array("description","dev_id","serial","vendor", "type");
   public $attributes      = array("cn");
   public $objectclasses   = array("top","gotoDevice");
 
@@ -23,6 +25,12 @@ class deviceGeneric extends plugin
 
     $this->is_account = TRUE;
 
+    $this->types= array("camera" => _("Digital camera"),
+                        "harddisk" => _("Harddisk"),
+                        "stick" => _("USB stick"),
+                        "cd" => _("CD/DVD drive"),);
+    asort($this->types);
+
     /* Set class values */
     if(isset($this->attrs['gotoHotplugDevice'][0])){
       $tmp = preg_split("/\|/",$this->attrs['gotoHotplugDevice'][0]);
@@ -31,6 +39,9 @@ class deviceGeneric extends plugin
       $this->dev_id     = $tmp[1];
       $this->serial     = $tmp[2];
       $this->vendor     = $tmp[3];
+      if (isset($tmp[4])){
+        $this->type= $tmp[4];
+      }
     }     
 
     $this->orig_cn = $this->cn;
@@ -60,6 +71,10 @@ class deviceGeneric extends plugin
     foreach($this->posts as $attr){
       $smarty->assign($attr,$this->$attr);
     }
+
+    $smarty->assign("type",$this->type);
+    $smarty->assign ("types", $this->types);
+
     return($smarty->fetch(get_template_path("deviceGeneric.tpl",TRUE,dirname(__FILE__))));
   }
 

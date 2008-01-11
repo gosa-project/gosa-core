@@ -28,6 +28,15 @@
                 <input type="text" size=40 value="{$description}" name="description" id="description">
             </td>
         </tr>
+        <tr>
+            <td><LABEL for="description">{t}Device type{/t}</LABEL>
+            </td>
+            <td>
+		<select id="type" size="1" name="type" title="{t}Choose the device type{/t}">
+			{html_options options=$types selected=$type}
+		</select>
+            </td>
+        </tr>
     </table>
    </td>
    <td style="vertical-align:top">
