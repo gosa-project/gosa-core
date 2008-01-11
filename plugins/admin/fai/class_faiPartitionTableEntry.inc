@@ -361,8 +361,6 @@ class faiPartitionTableEntry extends plugin
   /* Save data to object */
   function save_object()
   {
-
-
     if((isset($_POST['TableEntryFrameSubmitted'])) && ($this->FAIstate != "freeze") ){
       plugin::save_object();
 
@@ -387,7 +385,14 @@ class faiPartitionTableEntry extends plugin
             $this->partitions[$key]["FAIencrypted"] = false;
           }
         }
+
+        /* Adapt ext3 to have -j option */
+        if ($this->partitions[$key]["FAIfsType"] == "ext3") {
+          $this->partitions[$key]["FAIfsOptions"]= preg_replace('/\s*-j\s*/', '', $this->partitions[$key]["FAIfsOptions"]);
+          $this->partitions[$key]["FAIfsOptions"]= "-j ".$this->partitions[$key]["FAIfsOptions"];
+        }
       }
+
     }
   }
 
