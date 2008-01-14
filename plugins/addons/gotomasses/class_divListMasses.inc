@@ -16,13 +16,13 @@ class divListMasses extends MultiSelectWindow
   {
     MultiSelectWindow::MultiSelectWindow($config, "gotoMasses", array("gotomasses"));
 
-    $this->parent       = $parent;
-    $this->ui           = get_userinfo();
-    $this->SetSummary(_("List of system deployment tasks"));
+    $this->parent             = $parent;
+    $this->ui                 = get_userinfo();
+    $this->SetSummary(_("List of queued deamon jobs."));
     $this->SetHeadpageMode();
     $this->EnableCloseButton(FALSE);
     $this->EnableSaveButton(FALSE);
-    $this->SetInformation(_("This menu allows you to add, remove and change the properties of system deployment tasks."));
+    $this->SetInformation(_("This menu allows you to remove and change the properties of GOsa deamon tasks."));
 
     foreach($this->parent->get_actions() as $name => $desc){
       $this->$name = TRUE;
@@ -43,7 +43,7 @@ class divListMasses extends MultiSelectWindow
                                      "<a href='?plug=".$plug."&amp;sort=TaskID'>"._("Task")."</a>"));
     $this->AddHeader(array("string"=>"<a href='?plug=".$plug."&amp;sort=Schedule'>"._("Schedule")."</a>",
                                       "attach"=>"style='width:100px;'"));
-    $this->AddHeader(array("string"=>"<a href='?plug=".$plug."&amp;sort=Action'>"._("Type")."</a>",
+    $this->AddHeader(array("string"=>"<a href='?plug=".$plug."&amp;sort=Action'>"._("Status")."</a>",
                                       "attach"=>"style='width:80px;'"));
     $this->AddHeader(array("string"=>_("Action"),
                                       "attach"=>"style='border-right:0px;width:120px;'"));
@@ -54,14 +54,14 @@ class divListMasses extends MultiSelectWindow
     
     /* Display add button if allowed */
     $header = "<div style='padding:5px'>";
-    if($this->parent->acl_is_createable()){
-      $header .= "<input type='image' src='images/gotomasses_new_task.png' name='new_task' class='center'>&nbsp;";
-    }
+#    if($this->parent->acl_is_createable()){
+#      $header .= "<input type='image' src='images/gotomasses_new_task.png' name='new_task' class='center'>&nbsp;";
+#    }
 
-    /* Display add button if allowed */
-    if($this->parent->acl_is_removeable()){
-      $header .= "<input type='image' src='images/edittrash.png' name='remove_multiple_task' class='center'>&nbsp;";
-    }
+#    /* Display remove button if allowed */
+#    if($this->parent->acl_is_removeable()){
+#      $header .= "<input type='image' src='images/edittrash.png' name='remove_multiple_task' class='center'>&nbsp;";
+#    }
 
     /* Add priority options */
     if(preg_match("/w/",$this->parent->getacl(""))){
@@ -74,8 +74,8 @@ class divListMasses extends MultiSelectWindow
     
     /* Create divlist */
     $this->SetListHeader($header);
-
   }
+
 
   function execute()
   {
@@ -88,7 +88,8 @@ class divListMasses extends MultiSelectWindow
   {
     /* Create edit link */
     $plug = $_GET['plug'];
-    $edit_link = "<div style='width:100%;overflow:hidden;'><nobr><a href='?plug=".$_GET['plug']."&act=edit&id=%id%'>%str%</nobr></div>";
+#    $edit_link = "<div style='width:100%;overflow:hidden;'><nobr><a href='?plug=".$_GET['plug']."&act=edit&id=%id%'>%str%</nobr></div>";
+    $edit_link = "%str%";
 
     /* Create action filter array, to sort out those actions we do not want to see */
     $allowed_action = array();
@@ -108,10 +109,11 @@ class divListMasses extends MultiSelectWindow
   
     foreach($tasks as $key => $task){
 
+
       /* Skip unchecked actions */ 
-      if(!in_array($task['Action'],$allowed_action)){
-        continue;
-      }
+#      if(!in_array($task['Action'],$allowed_action)){
+#        continue;
+#      }
 
       /* Handle coloring */
       $color="";
@@ -124,7 +126,7 @@ class divListMasses extends MultiSelectWindow
       }
 
       /* Create actions */
-      $id         = $task['ID'];
+      $id         = $task['ROWID'];
       $queue_pos  = $task['Queue_Position'];
       $prio_actions = "<input class='center' type='image' src='images/prio_top.png'      name='prio_top_".$id."'>&nbsp;";
       $prio_actions.= "<input class='center' type='image' src='images/prio_increase.png' name='prio_increase_".$id."'>&nbsp;";
@@ -135,8 +137,8 @@ class divListMasses extends MultiSelectWindow
         $action.= "<input type='image' src='images/edittrash.png' name='remove_task_".$id."' class='center' alt='"._("Reomve")."'>";
       }
 
-      $display = preg_replace(array("/%id%/","/%str%/"),array($id,$this->parent->target_to_string($task)),$edit_link);
-      $display2= $this->parent->get_additional_entry_informations($task);
+      $display = preg_replace(array("/%id%/","/%str%/"),array($id,$task['MACADDRESS']),$edit_link);
+      $display2= $task['HEADERTAG'];
 
       /* Create each field */
       $field0 = array("string" => "<input type='checkbox' id='item_selected_".$id."' name='item_selected_".$id."'>" ,
@@ -146,11 +148,17 @@ class divListMasses extends MultiSelectWindow
                       "attach" => "style='".$color."'");
       $field1a= array("string" => $display2,
                       "attach" => "style='".$color.";width:80px;'");
-      $field2 = array("string" => $this->parent->time_to_string($task),"attach" => "style='".$color.";width:100px;'");
-      $field3 = array("string" => $this->parent->action_to_string($task),"attach" => "style='".$color.";width:80px;'");
+      $field2 = array("string" => $this->stamp_to_date($task['TIMESTAMP']),"attach" => "style='".$color.";width:100px;'");
+      $field3 = array("string" => $task['STATUS'],"attach" => "style='".$color.";width:80px;'");
       $field4 = array("string" => $prio_actions.$action,"attach" => "style='".$color.";text-align:right;width:120px;border-right:0px;'");
       $this->AddElement(array($field0,$field0a,$field1,$field1a,$field2,$field3,$field4));
     }
+  }
+
+
+  function stamp_to_date($stamp)
+  {
+    return(date("d.m.Y H:i:s",strtotime($stamp)));
   }
 
 

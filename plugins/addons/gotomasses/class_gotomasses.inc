@@ -11,26 +11,27 @@ class gotomasses extends plugin
   var $objectclasses= array();
 
   /* Queue tasks */
-  var $current =false;
-  var $dialog = FALSE;
-  var $ids_to_remove = array();
-  var $divlist = NULL;
+  var $current        = FALSE;
+  var $dialog         = FALSE;
+  var $ids_to_remove  = array();
+  var $divlist        = NULL;
 
-  var $sort_by = "QueuePosition";
-  var $sort_dir= "up";
+  var $sort_by  = "QueuePosition";
+  var $sort_dir = "up";
 
   function gotomasses(&$config, $dn= NULL)
   {
     /* Include config object */
     $this->config= &$config;
     $this->divlist = new divListMasses($this->config,$this);
-    $this->o_queue = new hostActionQueue(&$config);
+    $this->o_queue = new gosaSupportDaemon("10.3.67.111","20082","secret-gosa-password",FALSE,2);
   }
 
 
   function execute()
   {
     $smarty = get_smarty();
+
     /************
      * Handle posts 
      ************/
@@ -47,8 +48,11 @@ class gotomasses extends plugin
                   "/^multiple_prio_decrease_/" => "mprio_decrease",
                   "/^multiple_prio_bottom_/"   => "mprio_bottom",
 
-                  "/^edit_task_/"=>"edit","/^remove_task_/"=>"remove",
-                  "/^new_task_/"=>"new_task","/^remove_multiple_task_/" => "remove_multiple");
+                  "/^edit_task_/"             =>  "edit",
+                  "/^remove_task_/"           =>  "remove",
+                  "/^new_task_/"              =>  "new_task",
+                  "/^remove_multiple_task_/"  => "remove_multiple");
+
     foreach($arr as $regex => $action){
       foreach($_POST as $name => $value){
         if(preg_match($regex,$name)){
@@ -122,7 +126,7 @@ class gotomasses extends plugin
         foreach($this->ids_to_remove as $key => $id){
           if($this->o_queue->id_exists($id)){
             $task = $this->o_queue->get_entry($id);
-            $tmp.= "\n".$this->target_to_string($task);
+            $tmp.= "\n".$task['ROWID'];
           }else{
             unset($this->ids_to_remove[$key]);
           }
@@ -150,68 +154,68 @@ class gotomasses extends plugin
     }
 
 
-    /************
-     * EDIT 
-     ************/
-
-    /* Edit selected entry */
-    if($s_action == "edit"){
-      $entry = $this->o_queue->get_entry($s_entry);
-      if($entry){
-        $this->dialog = new goto_task($this->config,$this,$entry);
-        $this->current = $s_entry;
-      }
-    }
-
-    /* New entry */
-    if($s_action== "new_task" && $this->acl_is_createable()){
-      $this->dialog = new goto_task($this->config,$this);
-      $this->current = -1;
-    }
-  
-    /* Close dialog */
-    if(isset($_POST['close_goto_task'])){
-      $this->dialog = FALSE;
-      $this->current = -1;
-    }
-
-    /* Close dialog */
-    if((isset($_POST['save_goto_task']) || isset($_POST['apply_goto_task'])) && is_object($this->dialog) ){
-      $this->dialog->save_object();
-      $msgs = $this->dialog->check();
-      if(count($msgs)){
-        foreach($msgs as $msg){
-          print_red($msg);  
-        }
-      }else{  
-        
-        if($this->o_queue->id_exists($this->current)){
-          $this->o_queue->update_entry($this->current,$this->dialog->save());
-        }else{
-          $tmp = $this->dialog->save();
-          $tmp2= array();
-          $targets =$tmp['Target'];
-          foreach($targets as $target){
-            $tmp['Target'] = array($target);
-            $tmp2[] = $tmp;
-          }
-          if(!$this->o_queue->add_multiple($tmp2)){
-            print_red($this->o_queue->get_error());
-          }
-        }
-        if(!isset($_POST['apply_goto_task'])){
-          $this->dialog = FALSE;
-          $this->current = -1;
-        }
-        $this->save();
-      }
-    }
-
-    /* Display dialogs if currently opened */
-    if(is_object($this->dialog)){
-      $this->dialog->save_object();
-      return($this->dialog->execute());
-    }
+#   /************
+#    * EDIT 
+#    ************/
+#
+#   /* Edit selected entry */
+#   if($s_action == "edit"){
+#     $entry = $this->o_queue->get_entry($s_entry);
+#     if($entry){
+#       $this->dialog = new goto_task($this->config,$this,$entry);
+#       $this->current = $s_entry;
+#     }
+#   }
+#
+#   /* New entry */
+#   if($s_action== "new_task" && $this->acl_is_createable()){
+#     $this->dialog = new goto_task($this->config,$this);
+#     $this->current = -1;
+#   }
+# 
+#   /* Close dialog */
+#   if(isset($_POST['close_goto_task'])){
+#     $this->dialog = FALSE;
+#     $this->current = -1;
+#   }
+#
+#   /* Close dialog */
+#   if((isset($_POST['save_goto_task']) || isset($_POST['apply_goto_task'])) && is_object($this->dialog) ){
+#     $this->dialog->save_object();
+#     $msgs = $this->dialog->check();
+#     if(count($msgs)){
+#       foreach($msgs as $msg){
+#         print_red($msg);  
+#       }
+#     }else{  
+#       
+#       if($this->o_queue->id_exists($this->current)){
+#         $this->o_queue->update_entry($this->current,$this->dialog->save());
+#       }else{
+#         $tmp = $this->dialog->save();
+#         $tmp2= array();
+#         $targets =$tmp['Target'];
+#         foreach($targets as $target){
+#           $tmp['Target'] = array($target);
+#           $tmp2[] = $tmp;
+#         }
+#         if(!$this->o_queue->add_multiple($tmp2)){
+#           print_red($this->o_queue->get_error());
+#         }
+#       }
+#       if(!isset($_POST['apply_goto_task'])){
+#         $this->dialog = FALSE;
+#         $this->current = -1;
+#       }
+#       $this->save();
+#     }
+#   }
+#
+#   /* Display dialogs if currently opened */
+#   if(is_object($this->dialog)){
+#     $this->dialog->save_object();
+#     return($this->dialog->execute());
+#   }
 
     /************
      * Handle Divlist 
@@ -219,127 +223,32 @@ class gotomasses extends plugin
 
     $this->divlist->execute();
     $this->divlist->SetEntries($this->get_queue_entries()); 
-    $str = 
-      "<script type=\"text/javascript\">
-      <!--
-        var time = null
-        function move() {
-          window.location = '?plug=".$_GET['plug']."'
-        }
-        setInterval(\"move()\",20000);
-        //-->
-        </script>";
-    return($str.$this->divlist->Draw());
+    return($this->divlist->Draw());
   }
 
-    
+   
+  /*! \brief  Request list of queued jobs.
+   *  @return Returns an array of all queued jobs.
+   */
   function get_queue_entries()
   {
     if(!$this->o_queue->load()){
-      print_red("ERROR:".$this->o_queue->get_error());
+      print_red(sprintf(_("An error occurred while requesting queue entries. Error was '%s'."),$this->o_queue->get_error()));
       return(array());
     }
-
-    $queue_pos = 1;
     $tasks = array();
     $ret = array();
     while($entry = $this->o_queue->fetch()){
-      $task = $entry['TASK_ID']; 
-      if(!isset($tasks[$task])){
-        $tasks[$task] = dechex(rand(100,240)).dechex(rand(100,240)).dechex(rand(100,240));
-      }
-      $entry['Queue_Position'] = $queue_pos;
-      $entry['color'] = $tasks[$task]; 
+      $task = $entry['ROWID']; 
+      $entry['Queue_Position'] = $task;
       $ret[]= $entry;
-      $queue_pos ++;
     }
-  
-    /* Sort entries */
-    $simple_map = array("QueuePosition" => "Queue_Position",
-                        "Action"        => "Action",
-                        "TaskID"        => "TASK_ID");
-    $sort_arr = array();
-    if(isset($simple_map[$this->sort_by])){
-      foreach($ret as $id => $entry){
-        $sort_arr[$entry[$simple_map[$this->sort_by]]][] = $id;
-      }
-    }
-    if($this->sort_by == "TargetName"){
-      foreach($ret as $id => $entry){
-        $name = $this->target_to_string($entry);
-        $sort_arr[$name][] = $id;
-      }
-    }
-    if($this->sort_by == "Schedule"){
-      foreach($ret as $id => $entry){
-        $name = $entry['Minute'].$entry['Hour'].$entry['Day'].$entry['Month'].$entry['Weekday'];
-        $sort_arr[$name][] = $id;
-      }
-    }
-    if($this->sort_dir == "up"){
-      ksort($sort_arr);
-    }else{
-      krsort($sort_arr);
-    }
-    $ret2 = array();
-    foreach($sort_arr as $key => $entries){
-      foreach($entries as $entry_id){
-        $ret2[] = $ret[$entry_id];
-      }
-    }
-    return($ret2);
+    return($ret);
   }
 
 
-  function get_additional_entry_informations($data)
-  {
-    $i = rand(0,3);
-    if($i == 0){
-      return("<div style='width:80px;background-color:#999999;'><div style='background-color:#00FF00;width:40%'>&nbsp;</div></div>");
-    }
-    if($i == 1){
-      return("<font style='color: #FF0000;'>Failed</font>");
-    }
-    if($i == 1){
-      return("<font style='color: #00FF00;'>OK</font>");
-    }
-    return("-");
-  }
-
-
-  function target_to_string($data)
-  {
-    $ret = "";
-    if($data['Action'] == "initial_install"){
-      foreach($data['Initial_Target'] as $target){
-        $ret .= $target['MAC'].", ";
-      } 
-    }else{
-      foreach($data['Target'] as $target){
-        $ret .= $target.", ";
-      } 
-    }
-    return(preg_replace("/, $/","",$ret));
-  }
-
-  
-  function time_to_string($data)
-  {
-    return($data['Minute']." ".$data['Hour']." ".$data['Day']." ".$data['Month']." ".$data['Weekday']);
-  }
-
-  
-  function action_to_string($data)
-  {
-    $tmp = $this->get_actions();
-    if(isset($tmp[$data['Action']])){
-      return($tmp[$data['Action']]);
-    }else{
-      return(_("Unknown"));
-    }
-  }
-
-  
+  /*! \brief  Handle post jobs, like sorting.
+   */
   function save_object()
   {
     $this->divlist->save_object();
@@ -374,9 +283,13 @@ class gotomasses extends plugin
   
   function save()
   {
+    // We do not save anything here.
   }
 
 
+  /*! \brief  Return a list of all selected items.
+      @return Array   Returns an array containing all selected item ids.
+   */
   function list_get_selected_items()
   {
     $ids = array();
@@ -390,20 +303,22 @@ class gotomasses extends plugin
   }
 
 
-  function get_actions()
-  {
-    /* Prepare list of available actions */
-    $actions = array(       "reboot"          => _("Reboot"),
-                            "localboot"       => _("Localboot"),
-                            "halt"            => _("Halt system"),
-                            "initial_install" => _("Initial installation"),
-                            "update"          => _("Update"),
-                            "reinstall"       => _("(Re)Install"),
-                            "rescan"          => _("Rescan"),
-                            "wake"            => _("Wake"),
-                            "memcheck"        => _("Memory check"));
-    return($actions);
-  }
+ function get_actions()
+ {
+   /* Prepare list of available actions */
+   $actions = array(       
+       "Dummy."          => "!!!!!!!! Update",                     
+       "reboot"          => _("Reboot"),
+       "localboot"       => _("Localboot"),
+       "halt"            => _("Halt system"),
+       "initial_install" => _("Initial installation"),
+       "update"          => _("Update"),
+       "reinstall"       => _("(Re)Install"),
+       "rescan"          => _("Rescan"),
+       "wake"            => _("Wake"),
+       "memcheck"        => _("Memory check"));
+   return($actions);
+ }
 
 
   static function plInfo()
