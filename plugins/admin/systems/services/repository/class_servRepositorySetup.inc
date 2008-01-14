@@ -123,7 +123,7 @@ class servRepositorySetup  extends plugin
     $smarty->assign("ParentServers"   ,$tmp);
     $smarty->assign("ParentServerKeys",array_flip($tmp));
 
-    return($smarty->fetch(get_template_path('servRepositorySetup.tpl', TRUE)));
+    return($smarty->fetch(get_template_path('servRepositorySetup.tpl', TRUE,dirname(__FILE__))));
   }
 
   /* Save data to object */

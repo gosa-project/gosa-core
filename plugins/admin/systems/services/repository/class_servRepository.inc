@@ -254,7 +254,7 @@ class servrepository extends goService
     $this->divlist->execute(); 
     $this->divlist->setEntries($this->repositories);
     $smarty->assign("Repositories",$this->divlist->Draw());
-    $display.= $smarty->fetch(get_template_path('servRepository.tpl', TRUE));
+    $display.= $smarty->fetch(get_template_path('servRepository.tpl', TRUE,dirname(__FILE__)));
     return($display);
   }
 
