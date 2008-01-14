@@ -126,7 +126,7 @@ class gotomasses extends plugin
         foreach($this->ids_to_remove as $key => $id){
           if($this->o_queue->id_exists($id)){
             $task = $this->o_queue->get_entry($id);
-            $tmp.= "\n".$task['ROWID'];
+            $tmp.= "\n".$task['ID'];
           }else{
             unset($this->ids_to_remove[$key]);
           }
@@ -154,68 +154,68 @@ class gotomasses extends plugin
     }
 
 
-#   /************
-#    * EDIT 
-#    ************/
-#
-#   /* Edit selected entry */
-#   if($s_action == "edit"){
-#     $entry = $this->o_queue->get_entry($s_entry);
-#     if($entry){
-#       $this->dialog = new goto_task($this->config,$this,$entry);
-#       $this->current = $s_entry;
-#     }
-#   }
-#
-#   /* New entry */
-#   if($s_action== "new_task" && $this->acl_is_createable()){
-#     $this->dialog = new goto_task($this->config,$this);
-#     $this->current = -1;
-#   }
-# 
-#   /* Close dialog */
-#   if(isset($_POST['close_goto_task'])){
-#     $this->dialog = FALSE;
-#     $this->current = -1;
-#   }
-#
-#   /* Close dialog */
-#   if((isset($_POST['save_goto_task']) || isset($_POST['apply_goto_task'])) && is_object($this->dialog) ){
-#     $this->dialog->save_object();
-#     $msgs = $this->dialog->check();
-#     if(count($msgs)){
-#       foreach($msgs as $msg){
-#         print_red($msg);  
-#       }
-#     }else{  
-#       
-#       if($this->o_queue->id_exists($this->current)){
-#         $this->o_queue->update_entry($this->current,$this->dialog->save());
-#       }else{
-#         $tmp = $this->dialog->save();
-#         $tmp2= array();
-#         $targets =$tmp['Target'];
-#         foreach($targets as $target){
-#           $tmp['Target'] = array($target);
-#           $tmp2[] = $tmp;
-#         }
-#         if(!$this->o_queue->add_multiple($tmp2)){
-#           print_red($this->o_queue->get_error());
-#         }
-#       }
-#       if(!isset($_POST['apply_goto_task'])){
-#         $this->dialog = FALSE;
-#         $this->current = -1;
-#       }
-#       $this->save();
-#     }
-#   }
-#
-#   /* Display dialogs if currently opened */
-#   if(is_object($this->dialog)){
-#     $this->dialog->save_object();
-#     return($this->dialog->execute());
-#   }
+   /************
+    * EDIT 
+    ************/
+
+   /* Edit selected entry */
+   if($s_action == "edit"){
+     $entry = $this->o_queue->get_entry($s_entry);
+     if($entry){
+       $this->dialog = new goto_task($this->config,$this,$entry);
+       $this->current = $s_entry;
+     }
+   }
+
+   /* New entry */
+   if($s_action== "new_task" && $this->acl_is_createable()){
+     $this->dialog = new goto_task($this->config,$this);
+     $this->current = -1;
+   }
+ 
+   /* Close dialog */
+   if(isset($_POST['close_goto_task'])){
+     $this->dialog = FALSE;
+     $this->current = -1;
+   }
+
+   /* Close dialog */
+   if((isset($_POST['save_goto_task']) || isset($_POST['apply_goto_task'])) && is_object($this->dialog) ){
+     $this->dialog->save_object();
+     $msgs = $this->dialog->check();
+     if(count($msgs)){
+       foreach($msgs as $msg){
+         print_red($msg);  
+       }
+     }else{  
+       
+       if($this->o_queue->id_exists($this->current)){
+         $this->o_queue->update_entry($this->current,$this->dialog->save());
+       }else{
+         $tmp = $this->dialog->save();
+         $tmp2= array();
+         $targets =$tmp['Target'];
+         foreach($targets as $target){
+           $tmp['Target'] = array($target);
+           $tmp2[] = $tmp;
+         }
+         if(!$this->o_queue->add_multiple($tmp2)){
+           print_red($this->o_queue->get_error());
+         }
+       }
+       if(!isset($_POST['apply_goto_task'])){
+         $this->dialog = FALSE;
+         $this->current = -1;
+       }
+       $this->save();
+     }
+   }
+
+   /* Display dialogs if currently opened */
+   if(is_object($this->dialog)){
+     $this->dialog->save_object();
+     return($this->dialog->execute());
+   }
 
     /************
      * Handle Divlist 
@@ -240,10 +240,10 @@ class gotomasses extends plugin
     $tasks = array();
     $ret = array();
     while($entry = $this->o_queue->fetch()){
-      $task = $entry['ROWID']; 
+      $task = $entry['ID']; 
       $ret[]= $entry;
     }
-    $map = array("QueuePosition" => "ROWID",
+    $map = array("QueuePosition" => "ID",
                  "Action"        => "STATUS",
                  "TaskID"        => "HEADERTAG",
                  "TargetName"    => "MACADDRESS",
@@ -323,17 +323,10 @@ class gotomasses extends plugin
  function get_actions()
  {
    /* Prepare list of available actions */
-   $actions = array(       
-       "Dummy."          => "!!!!!!!! Update",                     
-       "reboot"          => _("Reboot"),
-       "localboot"       => _("Localboot"),
-       "halt"            => _("Halt system"),
-       "initial_install" => _("Initial installation"),
-       "update"          => _("Update"),
-       "reinstall"       => _("(Re)Install"),
-       "rescan"          => _("Rescan"),
-       "wake"            => _("Wake"),
-       "memcheck"        => _("Memory check"));
+   $actions = array(      
+       "gosa_ping"       => _("GOsa ping"),
+       "ping"            => _("Ping"),
+       "sayHello"        => _("Say hello"));
    return($actions);
  }
 

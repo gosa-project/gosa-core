@@ -116,7 +116,7 @@ class divListMasses extends MultiSelectWindow
 #      }
 
       /* Create actions */
-      $id         = $task['ROWID'];
+      $id         = $task['ID'];
       $queue_pos  = $id;
       $prio_actions = "<input class='center' type='image' src='images/prio_top.png'      name='prio_top_".$id."'>&nbsp;";
       $prio_actions.= "<input class='center' type='image' src='images/prio_increase.png' name='prio_increase_".$id."'>&nbsp;";

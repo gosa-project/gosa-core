@@ -17,13 +17,13 @@ class gosaSupportDaemon
   private $b_error  = FALSE;
 
   public function __construct($host,$port,$key="secret-gosa-password",$connect=TRUE,$timeout=0.2)
-	{
+  {
     $this->s_host    = $host;
     $this->i_port    = $port;
     $this->f_timeout = $timeout;
     $this->s_encryption_key = $key;
   }
-  
+
   public function connect()
   {
     $this->o_sock = new Socket_Client($this->s_host,$this->i_port,TRUE,$this->f_timeout);
@@ -136,6 +136,63 @@ class gosaSupportDaemon
   public function get_error()
   {
     return($this->s_error);
+  }
+
+  public function decrease_entry_priority($id)
+  {
+    echo $id;
+  }
+
+  public function increase_entry_priority($id)
+  {
+    echo $id;
+  }
+
+  public function max_entry_priority($id)
+  {
+    echo $id;
+  }
+
+  public function min_entry_priority($id)
+  {
+    echo $id;
+  }
+
+  public function id_exists($id)
+  {
+    return(TRUE);
+  }
+
+  public function get_entry($id)
+  {
+    foreach($this->entries as $entry){
+      if($entry['ID'] == $id){
+        return($entry);
+      }
+    }
+  }
+
+  public function update_entry($id,$entry)
+  {
+    $xml_msg = "";
+
+    if($this->is_connected){
+      $this->o_sock->write($xml_msg);
+      $str = trim($this->o_sock->read());
+      $entries = $this->xml_to_array($str);
+      $this->disconnect();
+      return(TRUE);
+    }
+    $this->set_error("Could not establish socket connection.");
+    return(FALSE);
+  }
+
+  public function add_multiple($multiple)
+  {
+  }
+
+  public function remove_entry($id)
+  {
   }
 }
 
