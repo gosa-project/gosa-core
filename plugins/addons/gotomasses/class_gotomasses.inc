@@ -24,7 +24,7 @@ class gotomasses extends plugin
     /* Include config object */
     $this->config= &$config;
     $this->divlist = new divListMasses($this->config,$this);
-    $this->o_queue = new gosaSupportDaemon("10.3.67.111","20082","secret-gosa-password",FALSE,1);
+    $this->o_queue = new gosaSupportDaemon("10.3.67.111","20082","secret-gosa-password",FALSE,0.2);
   }
 
 
