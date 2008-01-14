@@ -113,6 +113,8 @@ class Socket_Client
 		$str = FALSE;
 		if($this->handle){
 
+			syslog(0,"----------------------------------------HIER----------------------------------");
+	
 			/* Check if there is something to read for us */
 			$read = array("0"=>$this->handle);
 			$write = array();
@@ -149,8 +151,5 @@ class Socket_Client
 		/* Terminate decryption handle and close module */
 		mcrypt_generic_deinit($this->td);
 	}
-
 }
-
-
 ?>

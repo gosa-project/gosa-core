@@ -109,25 +109,15 @@ class divListMasses extends MultiSelectWindow
   
     foreach($tasks as $key => $task){
 
-
+      $color = "";
       /* Skip unchecked actions */ 
 #      if(!in_array($task['Action'],$allowed_action)){
 #        continue;
 #      }
 
-      /* Handle coloring */
-      $color="";
-      if($this->parent->sort_by == "TaskID"){
-        if(!in_array($task['TASK_ID'],$c_keys)){
-          $c_keys[] = $task['TASK_ID'];
-          $last_c = !$last_c;
-        }
-        $color = "background-color: ".$colors[$last_c];
-      }
-
       /* Create actions */
       $id         = $task['ROWID'];
-      $queue_pos  = $task['Queue_Position'];
+      $queue_pos  = $id;
       $prio_actions = "<input class='center' type='image' src='images/prio_top.png'      name='prio_top_".$id."'>&nbsp;";
       $prio_actions.= "<input class='center' type='image' src='images/prio_increase.png' name='prio_increase_".$id."'>&nbsp;";
       $prio_actions.= "<input class='center' type='image' src='images/prio_decrease.png' name='prio_decrease_".$id."'>&nbsp;";

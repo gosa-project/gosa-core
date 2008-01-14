@@ -5,7 +5,7 @@ class gosaSupportDaemon
   private $o_sock       = NULL;
   private $s_host       = "";
   private $i_port       = 0;
-  private $i_timeout    = 1;
+  private $f_timeout    = 0.2;
 
   private $is_connected     = FALSE;
   private $s_encryption_key = "";
@@ -16,17 +16,17 @@ class gosaSupportDaemon
   private $s_error  = "";
   private $b_error  = FALSE;
 
-  public function __construct($host,$port,$key="secret-gosa-password",$connect=TRUE,$timeout=1)
+  public function __construct($host,$port,$key="secret-gosa-password",$connect=TRUE,$timeout=0.2)
 	{
     $this->s_host    = $host;
     $this->i_port    = $port;
-    $this->i_timeout = $timeout;
+    $this->f_timeout = $timeout;
     $this->s_encryption_key = $key;
   }
   
   public function connect()
   {
-    $this->o_sock = new Socket_Client($this->s_host,$this->i_port,TRUE,$this->i_timeout);
+    $this->o_sock = new Socket_Client($this->s_host,$this->i_port,TRUE,$this->f_timeout);
     $this->o_sock->setEncryptionKey($this->s_encryption_key); 
     if($this->o_sock->connected()){ 
       $this->is_connected = TRUE;
@@ -46,6 +46,7 @@ class gosaSupportDaemon
   {
     echo "<b>Reload</b>";
     $this->entries = array();
+    $this->pointer = 0;
     $xml_msg = "<xml><header>gosa_query_jobdb</header><where><status>*</status></where></xml>";
     $this->connect();
     if($this->is_connected){

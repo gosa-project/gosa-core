@@ -24,7 +24,7 @@ class gotomasses extends plugin
     /* Include config object */
     $this->config= &$config;
     $this->divlist = new divListMasses($this->config,$this);
-    $this->o_queue = new gosaSupportDaemon("10.3.67.111","20082","secret-gosa-password",FALSE,2);
+    $this->o_queue = new gosaSupportDaemon("10.3.67.111","20082","secret-gosa-password",FALSE,1);
   }
 
 
@@ -222,7 +222,8 @@ class gotomasses extends plugin
      ************/
 
     $this->divlist->execute();
-    $this->divlist->SetEntries($this->get_queue_entries()); 
+    $entries = $this->get_queue_entries();
+    $this->divlist->SetEntries($entries);
     return($this->divlist->Draw());
   }
 
@@ -240,10 +241,26 @@ class gotomasses extends plugin
     $ret = array();
     while($entry = $this->o_queue->fetch()){
       $task = $entry['ROWID']; 
-      $entry['Queue_Position'] = $task;
       $ret[]= $entry;
     }
-    return($ret);
+    $map = array("QueuePosition" => "ROWID",
+                 "Action"        => "STATUS",
+                 "TaskID"        => "HEADERTAG",
+                 "TargetName"    => "MACADDRESS",
+                 "Schedule"      => "TIMESTAMP");
+    $sort_tmp = array();
+    foreach($ret as $entry_id => $entry){
+      $sort_tmp[$entry_id] = $entry[$map[$this->sort_by]];
+    } 
+    natcasesort($sort_tmp);
+    $return = array();
+    foreach($sort_tmp as $entry_id => $value){
+      $return[] = $ret[$entry_id];
+    } 
+    if($this->sort_dir != "up"){
+      $return = array_reverse($return);
+    } 
+    return($return);
   }
 
 
