@@ -117,14 +117,14 @@ class Socket_Client
 			$read = array("0"=>$this->handle);
 			$write = array();
 			$accept = array();	
-			$num = @stream_select($read,$write,$accept,$this->timeout);
+			$num = @stream_select($read,$write,$accept,floor($this->timeout), ceil($this->timeout*1000000));
 			$str = "";		
 		
 			/* Read data if necessary */
 			while($num && $this->b_data_send){
 				$str.= fread($this->handle, 1024000);
 				$read = array("0"=>$this->handle);	
-				$num = @stream_select($read,$write,$accept,$this->timeout);
+				$num = @stream_select($read,$write,$accept,floor($this->timeout), ceil($this->timeout*1000000));
 			}
 			$this->bytes_read = strlen($str);
 			$this->b_data_send = FALSE;
