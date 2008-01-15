@@ -130,7 +130,7 @@ class mailgroup extends plugin
              read imap the acls from the mail method class.
              They will be merged later with the ldap specified acls.
            */
-          if(!preg_match("/olab/i",$this->mmethod)){
+          if(!preg_match("/olab/i",$this->mmethod) && !empty($this->mmethod)){
             $this->imapacl=  $method->getSharedFolderPermissions($this->uid);
 
             /* Need to filter what a member acl could be... */
