@@ -285,6 +285,8 @@ class environment extends plugin
       $error = true;
     }
     if($error && !empty($this->gotoKioskProfile)){
+      $this->gotoKioskProfile_Server ="none";
+      $this->gotoKioskProfile_Profile="";
       msg_dialog::display(_("Warning"), sprintf(_("Kiosk profile '%s' located on server '%s' is not available anymore. Kiosk profile will be disabled!"), $this->gotoKioskProfile_Profile, $this->gotoKioskProfile_Server), WARNING_DIALOG);
     }
   }
@@ -335,7 +337,7 @@ class environment extends plugin
 
           /* No other profile servers found */
           msg_dialog::display(_("Warning"), sprintf(_("Profile server '%s' is not available anymore. Kiosk profile will be disabled."), $this->gotoProfileServer), WARNING_DIALOG);
-          $this->gotoProfileServer = "";
+          $this->gotoProfileServer = "none";
         }
       }
     }    
