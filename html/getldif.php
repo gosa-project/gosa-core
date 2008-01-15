@@ -76,8 +76,8 @@ $config= session::get('config');
 $dn =  base64_decode($_GET['dn']);
 $acl = $ui->get_permissions($dn,"ldapmanager/ldifexport");
 if(!preg_match("/r/",$acl)){
-  echo "insufficient permissions";
-  exit();
+	echo _("Permission denied!");
+	exit();
 }
 
 
@@ -101,7 +101,7 @@ switch ($_GET['ivbb']){
           break;
 
   default:
-          echo "Error in ivbb parameter. Request aborted.";
+          echo _("Error in ivbb parameter!");
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
