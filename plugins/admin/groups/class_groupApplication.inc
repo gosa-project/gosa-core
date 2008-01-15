@@ -979,14 +979,14 @@ class appgroup extends plugin
 
     plugin::save();
 
-
-
     /* Copy members */
-    $this->Categories[""]=""; 
+    $tmp = array("" => "");
+    $tmp = array_merge($tmp,$this->Categories);
+
     $this->attrs["gosaMemberApplication"]= array();
     $this->attrs["gosaApplicationParameter"]= array();
     $cat_id= 0 ;
-    foreach($this->Categories as $name => $cats){
+    foreach($tmp as $name => $cats){
       $i =0;
       if(isset($this->gosaMemberApplication[$name])){
         foreach($this->gosaMemberApplication[$name] as $entry){
