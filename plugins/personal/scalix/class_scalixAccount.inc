@@ -237,6 +237,45 @@ class scalixAccount extends plugin
       /* Save ldap attributes */
       plugin::save_object();
 
+      /* Check if given value is not empty */
+      if ($_POST['email_address'] != ""){
+        $valid= FALSE;
+
+        /* Valid mail address */
+        if( ($this->is_template && !tests::is_email($_POST['email_address'], TRUE)) ||
+            (!$this->is_template && !tests::is_email($_POST['email_address'])) ){
+          msg_dialog::display(_("Error"), _("Cannot add invalid mail address!"), ERROR_DIALOG);
+        }else{
+          $valid = TRUE;
+        }
+
+        /* Check write access */
+        if(!$this->acl_is_writeable("scalixEmailAddress")){
+          print_red(_("You are not allowed to modify alternate addresses"));
+        }else{
+
+          /* Mail address already in use ? */
+          if ($valid && ($user= $this->addEmail ($_POST['email_address'])) != ""){
+            $ui= get_userinfo();
+            if ($user != $ui->username){
+              msg_dialog::display(_("Error"), sprintf(_("Cannot add mail address: it is already used by user '%s'."), $user),
+                  ERROR_DIALOG);
+            }
+          }
+        }
+      }
+
+      /* Delete email addresses */
+      if (isset($_POST['delete_email']) && isset ($_POST['emails_list'])){
+        if(!$this->acl_is_writeable("scalixEmailAddress")){
+          print_red(_("You are not allowed to modify alternate addresses"));
+        }else{
+          if (count($_POST['emails_list'])){
+            $this->delEmail ($_POST['emails_list']);
+          }
+        }
+      }
+
       /* Save fakeBooleanAttributes*/
       foreach ($this->fakeBooleanAttributes as $val){
         if ($this->acl_is_writeable($val)) {
@@ -427,42 +466,32 @@ class scalixAccount extends plugin
       /* Add email addresses */
       if (isset($_POST['add_email'])){
 
-        /* Check write access */
-#        if(!$this->acl_is_writeable("scalixEmailAddress")){
-#          print_red(_("You are not allowed to modify alternate addresses"));
-#        }else{
+        /* Check if given value is not empty */
+        if ($_POST['email_address'] != ""){
+          $valid= FALSE;
 
-          /* Check if given value is not empty */
-          if ($_POST['email_address'] != ""){
-            $valid= FALSE;
+          /* Valid mail address */
+          if( ($this->is_template && !tests::is_email($_POST['email_address'], TRUE)) || 
+              (!$this->is_template && !tests::is_email($_POST['email_address'])) ){
+            msg_dialog::display(_("Error"), _("Cannot add invalid mail address!"), ERROR_DIALOG);
+          }else{
+            $valid = TRUE;
+          }
 
-            /* Valid mail address */
-            if( ($this->is_template && !tests::is_email($_POST['email_address'], TRUE)) || 
-                (!$this->is_template && !tests::is_email($_POST['email_address'])) ){
-              msg_dialog::display(_("Error"), _("Cannot add invalid mail address!"), ERROR_DIALOG);
-            }else{
-              $valid = TRUE;
+          /* Mail address already in use ? */
+          if ($valid && ($user= $this->addEmail ($_POST['email_address'])) != ""){
+            $ui= get_userinfo();
+            if ($user != $ui->username){
+              msg_dialog::display(_("Error"), sprintf(_("Cannot add mail address: it is already used by user '%s'."), $user), ERROR_DIALOG);
             }
-
-            /* Mail address already in use ? */
-            if ($valid && ($user= $this->addEmail ($_POST['email_address'])) != ""){
-              $ui= get_userinfo();
-              if ($user != $ui->username){
-                msg_dialog::display(_("Error"), sprintf(_("Cannot add mail address: it is already used by user '%s'."), $user), ERROR_DIALOG);
-              }
-            }
-#          }
+          }
         }
       }
-  
+
       /* Delete email addresses */
       if (isset($_POST['delete_email']) && isset ($_POST['emails_list'])){
-#        if(!$this->acl_is_writeable("scalixEmailAddress")){
-#          print_red(_("You are not allowed to modify alternate addresses"));
-#        }else{
-          if (count($_POST['emails_list'])){
-            $this->delEmail ($_POST['emails_list']);
-#          }
+        if (count($_POST['emails_list'])){
+          $this->delEmail ($_POST['emails_list']);
         }
       }
     }
