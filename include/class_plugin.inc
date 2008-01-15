@@ -944,8 +944,6 @@ class plugin
       add_objectClass("gosaAdministrativeUnitTag", &$at);
       $at['gosaUnitTag']= $tag;
     }
-
-    return ($at);
   }
 
 
