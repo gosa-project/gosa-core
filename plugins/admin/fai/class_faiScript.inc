@@ -464,9 +464,6 @@ class faiScript extends plugin
     }
     show_ldap_error($ldap->get_error(), _("Creating FAI script base failed"));
 
-    /* Do object tagging */
-    $this->handle_object_tagging();
-
     /* Prepare FAIscriptEntry to write it to ldap
      * First sort array.
      *  Because we must delete old entries first.
@@ -531,16 +528,8 @@ class faiScript extends plugin
         $tmp['FAIpriority']  ="0";
       }
 
-      /* Check if gosaAdministrativeUnitTag is required as object class */
-      if($obj['status'] == "edited"){
-        $ldap->cat($sub_dn,array("objectClass"));
-        $attrs = $ldap->fetch();
-        if(isset($attrs['objectClass'])){
-          if(in_array_ics("gosaAdministrativeUnitTag",$attrs['objectClass'])){
-            $tmp['objectClass'][] = "gosaAdministrativeUnitTag";
-          }
-        }
-      }
+      /* Tag object */
+      $this->tag_attrs(&$tmp, $sub_dn, $this->gosaUnitTag);
 
       if($obj['status'] == "delete"){
         $ldap->cd($sub_dn);
@@ -567,8 +556,6 @@ class faiScript extends plugin
         $this->handle_post_events("add");
         show_ldap_error($ldap->get_error(), _("Saving FAI script failed")); 
       }
-
-      $this->handle_object_tagging($sub_dn, $this->gosaUnitTag);
     }
   }
 

@@ -457,10 +457,6 @@ class faiProfile extends plugin
       $ldap->add($this->attrs);
     }
     show_ldap_error($ldap->get_error(), _("Saving FAI profile failed"));
-
-    /* Do object tagging */
-    $this->handle_object_tagging();
-    show_ldap_error($ldap->get_error());
   }
 
   

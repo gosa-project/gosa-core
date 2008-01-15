@@ -273,14 +273,10 @@ class ogrouptabs extends tabs
     }
 
     if ($this->dn == "new"){
-      $this->dn= 'cn='.$baseobject->cn.','.get_groups_ou().$baseobject->base;
+      $this->dn= $new_dn;
     }
 
     tabs::save();
-
-    /* Fix tagging if needed */
-		$baseobject->dn= $new_dn;
-    $baseobject->handle_object_tagging();
   }
 
   function saveCopyDialog()

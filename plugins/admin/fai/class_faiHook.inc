@@ -432,9 +432,6 @@ class faiHook extends plugin
     }
     show_ldap_error($ldap->get_error(), _("Saving FAI hook base failed")); 
 
-    /* Do object tagging */
-    $this->handle_object_tagging();
-
     $ldap->cd($this->dn);
 
     /* Prepare FAIscriptEntry to write it to ldap
@@ -516,6 +513,9 @@ class faiHook extends plugin
         }
       }
 
+      /* Tag object */
+      $this->tag_attrs(&$tmp, $sub_dn, $this->gosaUnitTag);
+
       if($obj['status'] == "delete"){
         $ldap->cd($sub_dn);
         $ldap->rmdir_recursive($sub_dn);
@@ -538,7 +538,6 @@ class faiHook extends plugin
         $this->handle_post_events("add");
         show_ldap_error($ldap->get_error(), _("Saving FAI hook failed")); 
       }
-      $this->handle_object_tagging($sub_dn, $this->gosaUnitTag);
     }
   }
   

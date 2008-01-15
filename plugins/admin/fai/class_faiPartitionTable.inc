@@ -367,9 +367,6 @@ class faiPartitionTable extends plugin
     }
     show_ldap_error($ldap->get_error(), _("Saving FAI partition table base failed"));
   
-    /* Do object tagging */
-    $this->handle_object_tagging();
-  
     /* Sort entries, because we must delete entries with status="delete" first */
     $order = array();
     foreach($this->disks as $key => $disk){
@@ -402,13 +399,9 @@ class faiPartitionTable extends plugin
         }
       }
 
-      /* Fix problem with missing objectClass "gosaAdministrativeUnitTag" for disks */
-      $ldap->cat($disk_dn,array("objectClass"));
-      $attrs = $ldap->fetch();
-      if(isset($attrs['objectClass']) && in_array_ics("gosaAdministrativeUnitTag",$attrs['objectClass'])){
-        $disk_attrs['objectClass'][] = "gosaAdministrativeUnitTag";
-      }
-
+      /* Do object tagging */
+      $this->tag_attrs(&$disk_attrs, $disk_dn, $this->gosaUnitTag);
+  
       if($disk['status'] == "delete"){
         $ldap->cd($disk_dn);
         $ldap->rmdir_recursive($disk_dn);
@@ -433,8 +426,6 @@ class faiPartitionTable extends plugin
       }else{
         print_red("unknown status while saving disks");
       }
-
-      $this->handle_object_tagging($disk_dn, $this->gosaUnitTag);
 
       /* Collect all opperations. Delete first than add new entries .*/
       $Todo['delete'] = array();
@@ -512,11 +503,9 @@ class faiPartitionTable extends plugin
         $ldap->cat($partition_dn);
         if($ldap->count()){
 
-          /* Fix problem with missing objectClass "gosaAdministrativeUnitTag" for partitions */
-          $attrs = $ldap->fetch();
-          if(isset($attrs['objectClass']) && in_array_ics("gosaAdministrativeUnitTag",$attrs['objectClass'])){
-            $partition_attrs['objectClass'][] = "gosaAdministrativeUnitTag";
-          }
+	  /* Tag object */
+	  $this->tag_attrs(&$partition_attrs, $partition_dn, $this->gosaUnitTag);
+
           if(empty($partition_attrs['description'])){
             $partition_attrs['description']=array();
           }
@@ -548,7 +537,6 @@ class faiPartitionTable extends plugin
           $ldap->add($partition_attrs);
           show_ldap_error($ldap->get_error(), _("Saving FAI partition table entry failed"));
         }
-        $this->handle_object_tagging($partition_dn, $this->gosaUnitTag);
       }
     }
     $this->handle_post_events("add");

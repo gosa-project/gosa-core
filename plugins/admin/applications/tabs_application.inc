@@ -44,10 +44,6 @@ class apptabs extends tabs
     }
 
     tabs::save();
-
-    /* Fix tagging if needed */
-    $baseobject->dn= $this->dn;
-    $baseobject->handle_object_tagging();
   }
 
 }

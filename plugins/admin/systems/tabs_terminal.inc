@@ -64,8 +64,6 @@ class termtabs extends tabs
       }
     }
 
-    /* Fix tagging if needed */
-    $baseobject->handle_object_tagging();
   }
 
 }

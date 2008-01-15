@@ -296,7 +296,7 @@ class department extends plugin
 			$tmp= array();
 
 			/* Remove gosaAdministrativeUnit from this plugin */
-      $has_unit_tag= false;
+			$has_unit_tag= false;
 			foreach($this->attrs['objectClass'] as $oc){
 				if (!preg_match("/^gosaAdministrativeUnit$/i", $oc)){
 					$tmp[]= $oc;
@@ -333,11 +333,6 @@ class department extends plugin
         This will be done later */
     $this->tag_objects(true);
 
-    /* Fix tagging if needed */
-    if (!$this->is_administrational_unit){
-      $this->handle_object_tagging();
-    }
-    
     /* Optionally execute a command after we're done */
 		$this->postcreate();
     return(true);
@@ -421,7 +416,7 @@ class department extends plugin
           $this->must_be_tagged =true;
           return;
         }
-				$this->handle_object_tagging($attrs['dn'], $this->gosaUnitTag, TRUE );
+	$this->handle_object_tagging($attrs['dn'], $this->gosaUnitTag, TRUE );
         echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
 			}
 		}

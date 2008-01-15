@@ -507,8 +507,6 @@ class faiPackage extends plugin
     }
     show_ldap_error($ldap->get_error(), _("Saving FAI package base failed"));
 
-    /* Do object tagging */
-    $this->handle_object_tagging();
     $ldap->cd($this->dn);
 
     /* Save Package configurations */
@@ -533,11 +531,8 @@ class faiPackage extends plugin
         /* cehck if object already exists */
         $ldap->cat($pkgdn,array("objectClass"));
 
-        /* Workaround for missing "gosaAdministrativeUnitTag" */
-        $attrs = $ldap->fetch();
-        if((isset($attrs['objectClass'])) && (in_array_ics("gosaAdministrativeUnitTag",$attrs['objectClass']))){
-          $pkgattrs['objectClass'][] = "gosaAdministrativeUnitTag";
-        }
+	/* Tag object */
+	$this->tag_attrs(&$pkgattrs, $sub_dn, $this->gosaUnitTag);
   
         if(in_array($pkgattrs['FAIvariableType'],array("boolean","multiselect","password","select","string","text"))){
           if($ldap->count()!=0){
@@ -554,8 +549,6 @@ class faiPackage extends plugin
           show_ldap_error($ldap->get_error(), _("Saving FAI package entry failed"));
         }
 
-        /* Handle tagging */
-        $this->handle_object_tagging($pkgdn, $this->gosaUnitTag);
       }
     }
   }

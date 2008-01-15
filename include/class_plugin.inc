@@ -335,6 +335,8 @@ class plugin
       }
     }
 
+    /* Handle tagging */
+    $this->tag_attrs(&$this->attrs);
   }
 
 
@@ -889,6 +891,61 @@ class plugin
         $this->$var= $source->$var;
       }
     }
+  }
+
+
+  function tag_attrs($at, $dn= "", $tag= "", $show= false)
+  {
+    /* No dn? Self-operation... */
+    if ($dn == ""){
+      $dn= $this->dn;
+    
+      /* No tag? Find it yourself... */
+      if ($tag == ""){
+        $len= strlen($dn);
+
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "No tag for $dn - looking for one...", "Tagging");
+        $relevant= array();
+        foreach ($this->config->adepartments as $key => $ntag){
+
+          /* This one is bigger than our dn, its not relevant... */
+          if ($len <= strlen($key)){
+            continue;
+          }
+
+          /* This one matches with the latter part. Break and don't fix this entry */
+          if (preg_match('/(^|,)'.normalizePreg($key).'$/', $dn)){
+            @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "DEBUG: Possibly relevant: $key", "Tagging");
+            $relevant[strlen($key)]= $ntag;
+            continue;
+          }
+
+        }
+
+        /* If we've some relevant tags to set, just get the longest one */
+        if (count($relevant)){
+          ksort($relevant);
+          $tmp= array_keys($relevant);
+          $idx= end($tmp);
+          $tag= $relevant[$idx];
+          $this->gosaUnitTag= $tag;
+        }
+      }
+    }
+
+    /* Remove tags that may already be here... */
+    remove_objectClass("gosaAdministrativeUnitTag", &$at);
+    if (isset($at['gosaUnitTag'])){
+    	unset($at['gosaUnitTag']);
+    }
+
+    /* Set tag? */
+    if ($tag != ""){
+      add_objectClass("gosaAdministrativeUnitTag", &$at);
+      $at['gosaUnitTag']= $tag;
+    }
+
+    return ($at);
   }
 
 
