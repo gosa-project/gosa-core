@@ -187,6 +187,7 @@ $class_mapping= array(
                 "userManagement" => "plugins/admin/users/class_userManagement.inc",
                 "usertabs" => "plugins/admin/users/tabs_user.inc",
                 "faiTemplateEntry" => "plugins/admin/fai/class_faiTemplateEntry.inc",
+				"fai_func" => "plugins/admin/fai/functions_FAI.inc",
                 "faiTemplate" => "plugins/admin/fai/class_faiTemplate.inc",
                 "tabsTemplate" => "plugins/admin/fai/tabsTemplate.inc",
                 "faiProfileEntry" => "plugins/admin/fai/class_faiProfileEntry.inc",
