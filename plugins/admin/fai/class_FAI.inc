@@ -3,7 +3,7 @@
 define("DEBUG_FAI_FUNC",FALSE);
 
 
-class fai_func
+class FAI
 {
 
   /* TEST PHASE .... */
@@ -20,13 +20,13 @@ class fai_func
     $res = array();
     $tmp = array();
 
-    if(!fai_func::is_release_department($Current_DN)) {
+    if(!FAI::is_release_department($Current_DN)) {
       return($res);
     }
 
     /* Collect some basic informations and initialize some variables */ 
-    $base_release       = fai_func::get_release_dn($Current_DN);
-    $previous_releases  = array_reverse(fai_func::             get_previous_releases_of_this_release($base_release,true));
+    $base_release       = FAI::get_release_dn($Current_DN);
+    $previous_releases  = array_reverse(FAI::             get_previous_releases_of_this_release($base_release,true));
 
     /* We must also include the given release dn */
     $previous_releases[] = $base_release;
@@ -35,7 +35,7 @@ class fai_func
     foreach($previous_releases as $release){
 
       /* Get fai departments */
-      $deps_to_search = fai_func::get_FAI_departments($release); 
+      $deps_to_search = FAI::get_FAI_departments($release); 
 
       /* For every single department  (ou=hoos,ou ..) */
       foreach($deps_to_search as $fai_base){
@@ -149,12 +149,12 @@ class fai_func
       $ldap->cd($config->current['BASE']);
 
       /* Get some basic informations */
-      $parent_obj   = fai_func::get_parent_release_object($Current_DN);
+      $parent_obj   = FAI::get_parent_release_object($Current_DN);
       if(!empty($parent_obj)){
         $ldap->cat($parent_obj,array("*"));
-        $attrs = fai_func::                           prepare_ldap_fetch_to_be_saved($ldap->fetch());
+        $attrs = FAI::                           prepare_ldap_fetch_to_be_saved($ldap->fetch());
 
-        if(!fai_func::array_diff_FAI( $attrs,$objectAttrs)){
+        if(!FAI::array_diff_FAI( $attrs,$objectAttrs)){
           $addObj['diff'] = FALSE;
         }
       } 
@@ -193,7 +193,7 @@ class fai_func
     }
     ksort($ar1);
     ksort($ar2);
-    if(count( array_diff($ar1,$ar2)) || fai_func::arr_diff($ar1,$ar2)){
+    if(count( array_diff($ar1,$ar2)) || FAI::arr_diff($ar1,$ar2)){
       return(true);
     }else{
       return(false);
@@ -207,7 +207,7 @@ class fai_func
       if(!isset($ar2[$ak1]) || (!($av1 === $ar2[$ak1]))){
         return(true);
       }elseif(is_array($av1)){
-        return(fai_func::arr_diff($av1,$ar2[$ak1]));
+        return(FAI::arr_diff($av1,$ar2[$ak1]));
       }
     }
     return(FALSE);
@@ -260,10 +260,10 @@ class fai_func
       $ldap->cd($config->current['BASE']);
 
       /* Get some basic informations */
-      $base_release       = fai_func::get_release_dn($Current_DN);
-      $sub_releases       = fai_func::                       get_sub_releases_of_this_release($base_release,true);
-      $parent_obj         = fai_func::get_parent_release_object($Current_DN);
-      $following_releases = fai_func::                       get_sub_releases_of_this_release($base_release,true);
+      $base_release       = FAI::get_release_dn($Current_DN);
+      $sub_releases       = FAI::                       get_sub_releases_of_this_release($base_release,true);
+      $parent_obj         = FAI::get_parent_release_object($Current_DN);
+      $following_releases = FAI::                       get_sub_releases_of_this_release($base_release,true);
 
       /* Check if given dn exists or if is a new entry */
       $ldap->cat($Current_DN);
@@ -290,7 +290,7 @@ class fai_func
         }else{
 
           /* Set FAIstate to current objectAttrs */
-          $objectAttrs = fai_func::                           prepare_ldap_fetch_to_be_saved($ldap->fetch());
+          $objectAttrs = FAI::                           prepare_ldap_fetch_to_be_saved($ldap->fetch());
           if(isset($objectAttrs['FAIstate'][0])){
             if(!preg_match("/removed$/",$objectAttrs['FAIstate'][0])){
               $objectAttrs['FAIstate'][0] .= "|removed";
@@ -309,7 +309,7 @@ class fai_func
           echo "<b>Saving directly, is a leaf object</b><br> ".$Current_DN;
           print_a($objectAttrs);
         }
-        fai_func::save_FAI_object($Current_DN,$objectAttrs);
+        FAI::save_FAI_object($Current_DN,$objectAttrs);
       }else{
 
         /* This object is inherited by some sub releases */  
@@ -319,7 +319,7 @@ class fai_func
 
         /* Get parent object */
         $ldap->cat($parent_obj);
-        $parent_attrs = fai_func::                           prepare_ldap_fetch_to_be_saved($ldap->fetch());
+        $parent_attrs = FAI::                           prepare_ldap_fetch_to_be_saved($ldap->fetch());
 
         /* New objects require special handling */
         if($is_new){
@@ -333,14 +333,14 @@ class fai_func
               echo "<b>Saving main object</b>".$Current_DN;
               print_a($objectAttrs);
             }    
-            fai_func::save_FAI_object($Current_DN,$objectAttrs);
+            FAI::save_FAI_object($Current_DN,$objectAttrs);
 
             foreach($r as $key){
               if(DEBUG_FAI_FUNC) { 
                 echo "<b>Saving parent to following release</b> ".$key;
                 print_a($parent_attrs);
               }
-              fai_func::save_FAI_object($key,$parent_attrs);
+              FAI::save_FAI_object($key,$parent_attrs);
             }
           }else{
 
@@ -348,7 +348,7 @@ class fai_func
               echo "<b>Saving main object</b>".$Current_DN;
               print_a($objectAttrs);
             }
-            fai_func::save_FAI_object($Current_DN,$objectAttrs);
+            FAI::save_FAI_object($Current_DN,$objectAttrs);
 
             if(isset($objectAttrs['FAIstate'])){
               $objectAttrs['FAIstate'] .= "|removed"; 
@@ -361,7 +361,7 @@ class fai_func
                 echo "<b>Create an empty placeholder in follwing release</b> ".$key; 
                 print_a($objectAttrs);
               }
-              fai_func::save_FAI_object($key,$objectAttrs);
+              FAI::save_FAI_object($key,$objectAttrs);
             }
           }
         }else{
@@ -373,7 +373,7 @@ class fai_func
                 echo "<b>Copy current objects original attributes to next release</b> ".$key;
                 print_a($parent_attrs);
               }
-              fai_func::save_FAI_object($key,$parent_attrs);
+              FAI::save_FAI_object($key,$parent_attrs);
             }
           }
 
@@ -381,7 +381,7 @@ class fai_func
             echo "<b>Saving current object</b>".$parent_obj;
             print_a($objectAttrs);
           }
-          fai_func::save_FAI_object($parent_obj,$objectAttrs);
+          FAI::save_FAI_object($parent_obj,$objectAttrs);
 
           if(($parent_obj != $Current_DN)){
             msg_dialog::display(_("Error"), sprintf(_("Error, following objects should be equal '%s' and '%s'"),$parent_obj,$Current_DN), ERROR_DIALOG);
@@ -402,8 +402,8 @@ class fai_func
     $ldap->cd($config->current['BASE']);
 
     /* Collect some basic informations and initialize some variables */ 
-    $base_release       = fai_func::get_release_dn($Current_DN);
-    $previous_releases  = array_reverse(fai_func::             get_previous_releases_of_this_release($base_release,true));
+    $base_release       = FAI::get_release_dn($Current_DN);
+    $previous_releases  = array_reverse(FAI::             get_previous_releases_of_this_release($base_release,true));
     $Kill = array();
     $Skip = array();
 
@@ -414,7 +414,7 @@ class fai_func
     foreach($previous_releases as $release){
 
       /* Get fai departments */
-      $deps_to_search = fai_func::get_FAI_departments($release); 
+      $deps_to_search = FAI::get_FAI_departments($release); 
 
       /* For every single department  (ou=hoos,ou ..) */
       foreach($deps_to_search as $fai_base){
@@ -527,10 +527,10 @@ class fai_func
     $ret = array();
 
     /* Get base release */
-    $base_release = fai_func::get_release_dn($dn);
+    $base_release = FAI::get_release_dn($dn);
 
     /* Get previous release dns */
-    $sub_releases = fai_func::                       get_sub_releases_of_this_release($base_release);
+    $sub_releases = FAI::                       get_sub_releases_of_this_release($base_release);
 
     /* Get dn suffix. Example  "FAIvairableEntry=keksdose,FAIvariable=Keksregal," */
 #  $dn_suffix = str_ireplace($base_release,"",$dn);
@@ -562,13 +562,13 @@ class fai_func
     $previous_releases= array();
 
     /* Get base release */
-    $base_release = fai_func::get_release_dn($dn);
+    $base_release = FAI::get_release_dn($dn);
     if($include_myself){
       $previous_releases[] = $base_release;  
     }
 
     /* Get previous release dns */
-    $tmp = fai_func::             get_previous_releases_of_this_release($base_release,true);
+    $tmp = FAI::             get_previous_releases_of_this_release($base_release,true);
     foreach($tmp as $release){
       $previous_releases[] = $release;
     }
@@ -621,7 +621,7 @@ class fai_func
       $new_dn .= $config->current['BASE'];
 
       /* check if this dn is a release */
-      if(fai_func::is_release_department($new_dn)){
+      if(FAI::is_release_department($new_dn)){
         if($flat){
           $ret[$id] = $new_dn; 
         }else{
@@ -658,12 +658,12 @@ class fai_func
       /* Get sub release departments of this department */
       if(in_array("FAIbranch",$attr['objectClass'])) {
         if($flat){
-          $tmp = fai_func::                       get_sub_releases_of_this_release($attr['dn'],$flat);
+          $tmp = FAI::                       get_sub_releases_of_this_release($attr['dn'],$flat);
           foreach($tmp as $dn => $value){
             $res[$dn]=$value;
           }
         }else{
-          $res[$attr['dn']] = fai_func::                       get_sub_releases_of_this_release($attr['dn']);
+          $res[$attr['dn']] = FAI::                       get_sub_releases_of_this_release($attr['dn']);
         }
       }
     }
@@ -727,7 +727,7 @@ class fai_func
       $new_dn .= $config->current['BASE'];
 
       /* Check if this dn is a release dn */
-      if(fai_func::is_release_department($new_dn)){
+      if(FAI::is_release_department($new_dn)){
         return($new_dn);
       }
 

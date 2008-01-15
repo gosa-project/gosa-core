@@ -1101,7 +1101,7 @@ class workstartup extends plugin
         $filter = "(|(objectClass=FAIpackageList)(objectClass=FAItemplate)(objectClass=FAIvariable)".
           "(objectClass=FAIscript)(objectClass=FAIhook)(objectClass=FAIprofile)".
           "(objectClass=FAIpartitionTable))";
-        $list = fai_func::get_all_objects_for_given_base($base,$filter,TRUE);
+        $list = FAI::get_all_objects_for_given_base($base,$filter,TRUE);
         foreach($list as $attrs){
           $info = $this->analyse_fai_object($attrs);
           if(count($info)){

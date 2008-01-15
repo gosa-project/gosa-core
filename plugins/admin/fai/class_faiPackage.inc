@@ -336,23 +336,23 @@ class faiPackage extends plugin
     $ldap = $this->config->get_ldap_link();
     $ldap->cd ($this->dn);
 
-    $use_dn = preg_replace("/".normalizePreg(fai_func::get_release_dn($this->dn))."/i", $faifilter['branch'], $this->dn);
+    $use_dn = preg_replace("/".normalizePreg(FAI::get_release_dn($this->dn))."/i", $faifilter['branch'], $this->dn);
     if($faifilter['branch'] == "main"){
       $use_dn = $this->dn;
     }
 
-    fai_func::prepare_to_save_FAI_object($use_dn,array(),true);
+    FAI::prepare_to_save_FAI_object($use_dn,array(),true);
 
     new log("remove","fai/".get_class($this),$use_dn,$this->attributes);
 
     foreach($this->ConfiguredPackages as $pkgname => $attrs){
       foreach($attrs as $name => $attr){
         $pkgdn =  "FAIvariable=".$name.",".$this->dn;
-        $use_dn = preg_replace("/".normalizePreg(fai_func::get_release_dn($this->dn))."/i", $faifilter['branch'], $pkgdn);
+        $use_dn = preg_replace("/".normalizePreg(FAI::get_release_dn($this->dn))."/i", $faifilter['branch'], $pkgdn);
         if($faifilter['branch'] == "main"){
           $use_dn = $obj['dn'];
         }
-        fai_func::prepare_to_save_FAI_object($use_dn,array(),true);
+        FAI::prepare_to_save_FAI_object($use_dn,array(),true);
       }
     }
     $this->handle_post_events("remove");
@@ -492,7 +492,7 @@ class faiPackage extends plugin
       $this->attrs['FAIdebianSection'][] = $sec;
     }
 
-    fai_func::prepare_to_save_FAI_object($this->dn,$this->attrs);
+    FAI::prepare_to_save_FAI_object($this->dn,$this->attrs);
     show_ldap_error($ldap->get_error(), sprintf(_("Saving of FAI/package list with dn '%s' failed."),$this->dn));
     
     if($this->initially_was_account){
@@ -534,7 +534,7 @@ class faiPackage extends plugin
         }
 
         if(in_array($pkgattrs['FAIvariableType'],array("boolean","multiselect","password","select","string","text"))){
-          fai_func::prepare_to_save_FAI_object($pkgdn,$pkgattrs);
+          FAI::prepare_to_save_FAI_object($pkgdn,$pkgattrs);
         }
   
         /* Handle tagging */

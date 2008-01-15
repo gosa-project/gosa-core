@@ -388,20 +388,20 @@ class faiTemplate extends plugin
     $ldap->cd ($this->dn);
 
     $faifilter = session::get('faifilter');
-    $use_dn = preg_replace("/".normalizePreg(fai_func::get_release_dn($this->dn))."/i", $faifilter['branch'], $this->dn);
+    $use_dn = preg_replace("/".normalizePreg(FAI::get_release_dn($this->dn))."/i", $faifilter['branch'], $this->dn);
     if($faifilter['branch'] == "main"){
       $use_dn = $this->dn;
     }
 
-    fai_func::prepare_to_save_FAI_object($use_dn,array(),true);
+    FAI::prepare_to_save_FAI_object($use_dn,array(),true);
     new log("remove","fai/".get_class($this),$use_dn,$this->attributes);
 
     foreach($this->SubObjects as $name => $obj){
-      $use_dn = preg_replace("/".normalizePreg(fai_func::get_release_dn($this->dn))."/i", $faifilter['branch'], $obj['dn']);
+      $use_dn = preg_replace("/".normalizePreg(FAI::get_release_dn($this->dn))."/i", $faifilter['branch'], $obj['dn']);
       if($faifilter['branch'] == "main"){
         $use_dn = $obj['dn'];
       }
-      fai_func::prepare_to_save_FAI_object($use_dn,array(),true);
+      FAI::prepare_to_save_FAI_object($use_dn,array(),true);
     }
     $this->handle_post_events("remove");    
   }
@@ -434,7 +434,7 @@ class faiTemplate extends plugin
 
     $ldap = $this->config->get_ldap_link();
 
-    fai_func::prepare_to_save_FAI_object($this->dn,$this->attrs);
+    FAI::prepare_to_save_FAI_object($this->dn,$this->attrs);
     show_ldap_error($ldap->get_error(), sprintf(_("Saving of FAI/template with dn '%s' failed."),$this->dn));
 
     if($this->initially_was_account){
@@ -506,13 +506,13 @@ class faiTemplate extends plugin
       }
 
       if($obj['status'] == "delete"){
-        fai_func::prepare_to_save_FAI_object($sub_dn,array(),true);
+        FAI::prepare_to_save_FAI_object($sub_dn,array(),true);
         $this->handle_post_events("remove");
       }elseif($obj['status'] == "edited"){
-        fai_func::prepare_to_save_FAI_object($sub_dn,$tmp);
+        FAI::prepare_to_save_FAI_object($sub_dn,$tmp);
         $this->handle_post_events("modify");
       }elseif($obj['status']=="new"){
-        fai_func::prepare_to_save_FAI_object($sub_dn,$tmp);
+        FAI::prepare_to_save_FAI_object($sub_dn,$tmp);
         $this->handle_post_events("add");
       }
 

@@ -284,8 +284,8 @@ class faiManagement extends plugin
           $this->dialog->by_object[$type[1]]->remove_from_parent ();
           unset ($this->dialog);
           $this->dialog= FALSE;
-          $to_del = fai_func::clean_up_releases($dn);
-          fai_func::save_release_changes_now();
+          $to_del = FAI::clean_up_releases($dn);
+          FAI::save_release_changes_now();
 
           foreach($to_del as $dn){
             $ldap->rmdir_recursive($dn);
@@ -355,8 +355,8 @@ class faiManagement extends plugin
           $this->dialog->by_object[$type[1]]->remove_from_parent ();
           unset ($this->dialog);
           $this->dialog= FALSE;
-          $to_del = fai_func::clean_up_releases($this->dn);
-          fai_func::save_release_changes_now();
+          $to_del = FAI::clean_up_releases($this->dn);
+          FAI::save_release_changes_now();
 
           foreach($to_del as $dn){
             $ldap->rmdir_recursive($dn);
@@ -786,7 +786,7 @@ class faiManagement extends plugin
 				}
 			}else{
 				$this->dialog->save();
-        fai_func::save_release_changes_now();
+        FAI::save_release_changes_now();
         if (!isset($_POST['edit_apply'])){
           del_lock ($this->dn);
           unset($this->dialog);
@@ -888,7 +888,7 @@ class faiManagement extends plugin
     if(!$base){
       $base = session::get('CurrentMainBase');
     }
-    $tmp = fai_func::get_all_releases_from_base($base,true);
+    $tmp = FAI::get_all_releases_from_base($base,true);
     foreach($tmp as $dn => $name){
       $ret[$name]=$dn;
     }
@@ -933,7 +933,7 @@ class faiManagement extends plugin
     $this->base = $base;
     $this->set_acl_base($this->base);
 
-    $this->lock_type = fai_func::get_release_tag(fai_func::get_release_dn($base));
+    $this->lock_type = FAI::get_release_tag(FAI::get_release_dn($base));
 
     /* Create a new list of FAI object 
      * Generate List of Partitions,Hooks,Scripts,Templates,Profiles ... 
@@ -956,7 +956,7 @@ class faiManagement extends plugin
     $filter = "(&(|".$filter.")(cn=$Regex))";
     
     /* Get resolved release dependencies */
-    $tmp = fai_func::get_all_objects_for_given_base($base,$filter);
+    $tmp = FAI::get_all_objects_for_given_base($base,$filter);
 
     /* Ge listed ldap objects */
     $ldap = $this->config->get_ldap_link();
@@ -1128,7 +1128,7 @@ class faiManagement extends plugin
       /* Get dialog */
       $data = $this->CopyPasteHandler->execute();
 
-      fai_func::save_release_changes_now();
+      FAI::save_release_changes_now();
 
       /* Return dialog data */
       if(!empty($data)){

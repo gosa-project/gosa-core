@@ -32,7 +32,7 @@ class faiProfileEntry extends plugin
     $filter = "(|(objectClass=FAIscript)(objectClass=FAItemplate)(objectClass=FAIhook)".
                 "(objectClass=FAIvariable)(objectClass=FAIpartitionTable)(objectClass=FAIpackageList))";
 
-    $FAI_objects = fai_func::get_all_objects_for_given_base($base,$filter,true);
+    $FAI_objects = FAI::get_all_objects_for_given_base($base,$filter,true);
 
     /* Create array with categories to be able to sort different types of objects */
     $categories = array("FAIscript"         => "faiScript",

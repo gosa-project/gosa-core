@@ -346,32 +346,32 @@ class faiPartitionTable extends plugin
     $ldap->cd ($this->dn);
 
     $faifilter = session::get('faifilter');
-    $use_dn = preg_replace("/".normalizePreg(fai_func::get_release_dn($this->dn))."/i", $faifilter['branch'], $this->dn);
+    $use_dn = preg_replace("/".normalizePreg(FAI::get_release_dn($this->dn))."/i", $faifilter['branch'], $this->dn);
     if($faifilter['branch'] == "main"){
       $use_dn = $this->dn;
     }
 
-    fai_func::prepare_to_save_FAI_object($use_dn,array(),true);
+    FAI::prepare_to_save_FAI_object($use_dn,array(),true);
 
     new log("remove","fai/".get_class($this),$use_dn,$this->attributes);   
  
     foreach($this->disks as $disk){
 
       $disk_dn = "cn=".$disk['cn'].",".$this->dn;
-      $use_dn = preg_replace("/".normalizePreg(fai_func::get_release_dn($this->dn))."/i", $faifilter['branch'], $disk_dn);
+      $use_dn = preg_replace("/".normalizePreg(FAI::get_release_dn($this->dn))."/i", $faifilter['branch'], $disk_dn);
       if($faifilter['branch'] == "main"){
         $use_dn = $disk_dn;
       }
-      fai_func::prepare_to_save_FAI_object($use_dn,array(),true);
+      FAI::prepare_to_save_FAI_object($use_dn,array(),true);
 
       foreach($disk['partitions'] as $key => $partition){    
      
         $partition_dn= "FAIpartitionNr=".$partition['FAIpartitionNr'].",".$disk_dn;      
-        $use_dn = preg_replace("/".normalizePreg(fai_func::get_release_dn($this->dn))."/i", $faifilter['branch'], $partition_dn);
+        $use_dn = preg_replace("/".normalizePreg(FAI::get_release_dn($this->dn))."/i", $faifilter['branch'], $partition_dn);
         if($faifilter['branch'] == "main"){
           $use_dn = $disk_dn;
         }
-        fai_func::prepare_to_save_FAI_object($use_dn,array(),true);
+        FAI::prepare_to_save_FAI_object($use_dn,array(),true);
       }
     }
   }
@@ -414,7 +414,7 @@ class faiPartitionTable extends plugin
 
     $ldap = $this->config->get_ldap_link();
 
-    fai_func::prepare_to_save_FAI_object($this->dn,$this->attrs);
+    FAI::prepare_to_save_FAI_object($this->dn,$this->attrs);
     show_ldap_error($ldap->get_error(), sprintf(_("Saving of FAI/partition table with dn '%s' failed."),$this->dn));
 
     if($this->initially_was_account){
@@ -461,13 +461,13 @@ class faiPartitionTable extends plugin
       }
 
       if($disk['status'] == "delete"){
-        fai_func::prepare_to_save_FAI_object($disk_dn,array(),true);
+        FAI::prepare_to_save_FAI_object($disk_dn,array(),true);
         $this->handle_post_events("remove");
       }elseif($disk['status'] == "edited"){
-        fai_func::prepare_to_save_FAI_object($disk_dn,$disk_attrs);
+        FAI::prepare_to_save_FAI_object($disk_dn,$disk_attrs);
         $this->handle_post_events("modify");
       }elseif($disk['status']=="new"){
-        fai_func::prepare_to_save_FAI_object($disk_dn,$disk_attrs);
+        FAI::prepare_to_save_FAI_object($disk_dn,$disk_attrs);
         $this->handle_post_events("add");
       }
 
@@ -512,13 +512,13 @@ class faiPartitionTable extends plugin
         }
 
         if($partition['status'] == "delete"){
-          fai_func::prepare_to_save_FAI_object($partition_dn,array(),true);
+          FAI::prepare_to_save_FAI_object($partition_dn,array(),true);
           $this->handle_post_events("remove");
         }elseif($partition['status'] == "edited"){
-          fai_func::prepare_to_save_FAI_object($partition_dn,$partition_attrs);
+          FAI::prepare_to_save_FAI_object($partition_dn,$partition_attrs);
           $this->handle_post_events("modify");
         }elseif($partition['status']=="new"){
-          fai_func::prepare_to_save_FAI_object($partition_dn,$partition_attrs);
+          FAI::prepare_to_save_FAI_object($partition_dn,$partition_attrs);
           $this->handle_post_events("add");
         }
 

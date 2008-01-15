@@ -370,13 +370,13 @@ class faiProfile extends plugin
     $ldap->cd ($this->dn);
 
     $faifilter = session::get('faifilter');
-    $use_dn = preg_replace("/".normalizePreg(fai_func::get_release_dn($this->dn))."/i", $faifilter['branch'], $this->dn);
+    $use_dn = preg_replace("/".normalizePreg(FAI::get_release_dn($this->dn))."/i", $faifilter['branch'], $this->dn);
     if($faifilter['branch'] == "main"){
       $use_dn = $this->dn;
     }
 
     new log("remove","fai/".get_class($this),$use_dn,$this->attributes);
-    fai_func::prepare_to_save_FAI_object($use_dn,array(),true);
+    FAI::prepare_to_save_FAI_object($use_dn,array(),true);
     $this->handle_post_events("remove");    
   }
 
@@ -440,7 +440,7 @@ class faiProfile extends plugin
 
     $this->attrs['FAIclass']=trim($this->FAIclass);
 
-    fai_func::prepare_to_save_FAI_object($this->dn,$this->attrs);
+    FAI::prepare_to_save_FAI_object($this->dn,$this->attrs);
    
     if($this->initially_was_account){
       new log("modify","fai/".get_class($this),$this->dn,$this->attributes);
