@@ -341,7 +341,7 @@ class faiPackage extends plugin
       $use_dn = $this->dn;
     }
 
-    prepare_to_save_FAI_object($use_dn,array(),true);
+    fai_func::prepare_to_save_FAI_object($use_dn,array(),true);
 
     new log("remove","fai/".get_class($this),$use_dn,$this->attributes);
 
@@ -352,7 +352,7 @@ class faiPackage extends plugin
         if($faifilter['branch'] == "main"){
           $use_dn = $obj['dn'];
         }
-        prepare_to_save_FAI_object($use_dn,array(),true);
+        fai_func::prepare_to_save_FAI_object($use_dn,array(),true);
       }
     }
     $this->handle_post_events("remove");
@@ -492,7 +492,7 @@ class faiPackage extends plugin
       $this->attrs['FAIdebianSection'][] = $sec;
     }
 
-    prepare_to_save_FAI_object($this->dn,$this->attrs);
+    fai_func::prepare_to_save_FAI_object($this->dn,$this->attrs);
     show_ldap_error($ldap->get_error(), sprintf(_("Saving of FAI/package list with dn '%s' failed."),$this->dn));
     
     if($this->initially_was_account){
@@ -534,7 +534,7 @@ class faiPackage extends plugin
         }
 
         if(in_array($pkgattrs['FAIvariableType'],array("boolean","multiselect","password","select","string","text"))){
-          prepare_to_save_FAI_object($pkgdn,$pkgattrs);
+          fai_func::prepare_to_save_FAI_object($pkgdn,$pkgattrs);
         }
   
         /* Handle tagging */

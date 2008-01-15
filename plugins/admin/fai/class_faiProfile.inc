@@ -376,7 +376,7 @@ class faiProfile extends plugin
     }
 
     new log("remove","fai/".get_class($this),$use_dn,$this->attributes);
-    prepare_to_save_FAI_object($use_dn,array(),true);
+    fai_func::prepare_to_save_FAI_object($use_dn,array(),true);
     $this->handle_post_events("remove");    
   }
 
@@ -440,7 +440,7 @@ class faiProfile extends plugin
 
     $this->attrs['FAIclass']=trim($this->FAIclass);
 
-    prepare_to_save_FAI_object($this->dn,$this->attrs);
+    fai_func::prepare_to_save_FAI_object($this->dn,$this->attrs);
    
     if($this->initially_was_account){
       new log("modify","fai/".get_class($this),$this->dn,$this->attributes);

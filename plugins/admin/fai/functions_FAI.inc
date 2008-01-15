@@ -3,8 +3,6 @@
 define("DEBUG_FAI_FUNC",FALSE);
 
 
-
-
 class fai_func
 {
 
@@ -14,7 +12,7 @@ class fai_func
      This function resolves the releases  
      from base up to the given dn.
    */
-static function get_all_objects_for_given_base($Current_DN,$filter,$detailed = false)
+  static function get_all_objects_for_given_base($Current_DN,$filter,$detailed = false)
   {
     global $config;
     $ldap = $config->get_ldap_link();
@@ -92,7 +90,7 @@ static function get_all_objects_for_given_base($Current_DN,$filter,$detailed = f
 
 
   /* Return all relevant FAI departments */
-static function get_FAI_departments($suffix = "")
+  static function get_FAI_departments($suffix = "")
   {
     $arr = array("hooks","scripts","disk","packages","profiles","templates","variables");
     $tmp = array();
@@ -111,7 +109,7 @@ static function get_FAI_departments($suffix = "")
 
 
   /* Return all releases within the given base */
-static function get_all_releases_from_base($dn,$appendedName=false)
+  static function get_all_releases_from_base($dn,$appendedName=false)
   {
     global $config;
 
@@ -137,7 +135,7 @@ static function get_all_releases_from_base($dn,$appendedName=false)
 
 
   /* Add this object to list of objects, that must be checked for release saving */
-static function prepare_to_save_FAI_object($Current_DN,$objectAttrs,$removed = false)
+  static function prepare_to_save_FAI_object($Current_DN,$objectAttrs,$removed = false)
   {
     /* Get ldap object */  
     global $config;
@@ -168,7 +166,7 @@ static function prepare_to_save_FAI_object($Current_DN,$objectAttrs,$removed = f
 
 
   /* Detect differences in attribute arrays  */
-static function array_diff_FAI($ar1,$ar2)
+  static function array_diff_FAI($ar1,$ar2)
   {
 
     if((!isset($ar1['description'])) || (isset($ar1['description']) && (count($ar1['description']) == 0))){
@@ -203,7 +201,7 @@ static function array_diff_FAI($ar1,$ar2)
   }
 
 
-static function arr_diff($ar1,$ar2)
+  static function arr_diff($ar1,$ar2)
   {
     foreach($ar1 as $ak1 => $av1){
       if(!isset($ar2[$ak1]) || (!($av1 === $ar2[$ak1]))){
@@ -219,7 +217,7 @@ static function arr_diff($ar1,$ar2)
 
 
   /* check which objects must be saved, and save them */
-static function save_release_changes_now()
+  static function save_release_changes_now()
   {
     /* Variable init*/
     $to_save = array();
@@ -397,7 +395,7 @@ static function save_release_changes_now()
 
   /* this function will remove all unused (deleted) objects,
      that have no parent object */
-static function clean_up_releases($Current_DN)
+  static function clean_up_releases($Current_DN)
   {
     global $config;
     $ldap = $config->get_ldap_link();
@@ -452,7 +450,7 @@ static function clean_up_releases($Current_DN)
 
 
   /* Remove numeric index and 'count' from ldap->fetch result */
-static function prepare_ldap_fetch_to_be_saved($attrs)
+  static function prepare_ldap_fetch_to_be_saved($attrs)
   {
     foreach($attrs as $key => $value){
       if(is_numeric($key) || ($key == "count") || ($key == "dn")){
@@ -467,7 +465,7 @@ static function prepare_ldap_fetch_to_be_saved($attrs)
 
 
   /* Save given attrs to specified dn*/
-static function save_FAI_object($dn,$attrs)
+  static function save_FAI_object($dn,$attrs)
   {
     global $config;
     $ldap = $config->get_ldap_link();
@@ -498,7 +496,7 @@ static function save_FAI_object($dn,$attrs)
 
 
   /* Return FAIstate freeze branch or "" for specified release department */
-static function get_release_tag($dn)
+  static function get_release_tag($dn)
   {
     global $config;
     $ldap = $config->get_ldap_link();
@@ -520,7 +518,7 @@ static function get_release_tag($dn)
   }
 
 
-static function get_following_releases_that_inherit_this_object($dn)
+  static function get_following_releases_that_inherit_this_object($dn)
   {
     global $config;
     $ldap = $config->get_ldap_link();
@@ -556,7 +554,7 @@ static function get_following_releases_that_inherit_this_object($dn)
 
 
   /* Get previous version of the object dn */
-static function get_parent_release_object($dn,$include_myself=true)
+  static function get_parent_release_object($dn,$include_myself=true)
   {
     global $config;
     $ldap = $config->get_ldap_link();
@@ -593,7 +591,7 @@ static function get_parent_release_object($dn,$include_myself=true)
 
 
   /* return release names of all parent releases */
-static function get_previous_releases_of_this_release($dn,$flat)
+  static function get_previous_releases_of_this_release($dn,$flat)
   {
     global $config;
     $ldap = $config->get_ldap_link();
@@ -641,7 +639,7 @@ static function get_previous_releases_of_this_release($dn,$flat)
 
 
   /* This function returns all sub release names, recursivly  */
-static function get_sub_releases_of_this_release($dn,$flat = false)
+  static function get_sub_releases_of_this_release($dn,$flat = false)
   {
     global $config;
     $res  = array();
@@ -674,7 +672,7 @@ static function get_sub_releases_of_this_release($dn,$flat = false)
 
 
   /* Check if the given department is a release department */
-static function is_release_department($dn)
+  static function is_release_department($dn)
   {
     global $config;
     $ldap = $config->get_ldap_link();
@@ -699,7 +697,7 @@ static function is_release_department($dn)
 
 
   /* This function returns the dn of the object release */
-static function get_release_dn($Current_DN)
+  static function get_release_dn($Current_DN)
   {
     global $config;
     $ldap = $config->get_ldap_link();

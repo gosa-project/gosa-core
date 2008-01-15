@@ -445,14 +445,14 @@ class faiScript extends plugin
    
       new log("remove","fai/".get_class($this),$use_dn,$this->attributes);
  
-      prepare_to_save_FAI_object($use_dn,array(),true);
+      fai_func::prepare_to_save_FAI_object($use_dn,array(),true);
       
       foreach($this->SubObjects as $name => $obj){
         $use_dn = preg_replace("/".normalizePreg(fai_func::get_release_dn($this->dn))."/i", $faifilter['branch'], $obj['dn']);
         if($faifilter['branch'] == "main"){
           $use_dn = $obj['dn'];
         }
-        prepare_to_save_FAI_object($use_dn,array(),true);
+        fai_func::prepare_to_save_FAI_object($use_dn,array(),true);
       }
       $this->handle_post_events("remove");
     }
@@ -503,7 +503,7 @@ class faiScript extends plugin
 
     $ldap = $this->config->get_ldap_link();
 
-    prepare_to_save_FAI_object($this->dn,$this->attrs);
+    fai_func::prepare_to_save_FAI_object($this->dn,$this->attrs);
     show_ldap_error($ldap->get_error(), sprintf(_("Creating of FAI/script with dn '%s' failed."),$this->dn));
 
     if($this->initially_was_account){
@@ -587,13 +587,13 @@ class faiScript extends plugin
       }
 
       if($obj['status'] == "delete"){
-        prepare_to_save_FAI_object($sub_dn,array(),true);
+        fai_func::prepare_to_save_FAI_object($sub_dn,array(),true);
         $this->handle_post_events("remove");
       }elseif($obj['status'] == "edited"){
-        prepare_to_save_FAI_object($sub_dn,$tmp);
+        fai_func::prepare_to_save_FAI_object($sub_dn,$tmp);
         $this->handle_post_events("modify");
       }elseif($obj['status']=="new"){
-        prepare_to_save_FAI_object($sub_dn,$tmp);
+        fai_func::prepare_to_save_FAI_object($sub_dn,$tmp);
         $this->handle_post_events("add");
       }
 

@@ -290,7 +290,7 @@ class faiVariable extends plugin
         $use_dn = $this->dn;
       }
   
-      prepare_to_save_FAI_object($use_dn,array(),true);
+      fai_func::prepare_to_save_FAI_object($use_dn,array(),true);
       new log("remove","fai/".get_class($this),$use_dn,$this->attributes);
 
       foreach($this->SubObjects as $name => $obj){
@@ -298,7 +298,7 @@ class faiVariable extends plugin
         if($faifilter['branch'] == "main"){
           $use_dn = $obj['dn'];
         }
-        prepare_to_save_FAI_object($use_dn,array(),true);
+        fai_func::prepare_to_save_FAI_object($use_dn,array(),true);
       }
       $this->handle_post_events("remove");
     }
@@ -336,7 +336,7 @@ class faiVariable extends plugin
     plugin::save();
  
     $ldap = $this->config->get_ldap_link();
-    prepare_to_save_FAI_object($this->dn,$this->attrs);
+    fai_func::prepare_to_save_FAI_object($this->dn,$this->attrs);
     show_ldap_error($ldap->get_error(), sprintf(_("Saving of FAI/variable with dn '%s' failed."),$this->dn));
 
     if($this->initially_was_account){
@@ -402,13 +402,13 @@ class faiVariable extends plugin
       }
       
       if($obj['status'] == "delete"){
-        prepare_to_save_FAI_object($sub_dn,array(),true);
+        fai_func::prepare_to_save_FAI_object($sub_dn,array(),true);
         $this->handle_post_events("remove");
       }elseif($obj['status'] == "edited"){
-        prepare_to_save_FAI_object($sub_dn,$tmp);
+        fai_func::prepare_to_save_FAI_object($sub_dn,$tmp);
         $this->handle_post_events("modify");
       }elseif($obj['status']=="new"){
-        prepare_to_save_FAI_object($sub_dn,$tmp);
+        fai_func::prepare_to_save_FAI_object($sub_dn,$tmp);
         $this->handle_post_events("add");
       }
 

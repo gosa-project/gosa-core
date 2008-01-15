@@ -351,7 +351,7 @@ class faiPartitionTable extends plugin
       $use_dn = $this->dn;
     }
 
-    prepare_to_save_FAI_object($use_dn,array(),true);
+    fai_func::prepare_to_save_FAI_object($use_dn,array(),true);
 
     new log("remove","fai/".get_class($this),$use_dn,$this->attributes);   
  
@@ -362,7 +362,7 @@ class faiPartitionTable extends plugin
       if($faifilter['branch'] == "main"){
         $use_dn = $disk_dn;
       }
-      prepare_to_save_FAI_object($use_dn,array(),true);
+      fai_func::prepare_to_save_FAI_object($use_dn,array(),true);
 
       foreach($disk['partitions'] as $key => $partition){    
      
@@ -371,7 +371,7 @@ class faiPartitionTable extends plugin
         if($faifilter['branch'] == "main"){
           $use_dn = $disk_dn;
         }
-        prepare_to_save_FAI_object($use_dn,array(),true);
+        fai_func::prepare_to_save_FAI_object($use_dn,array(),true);
       }
     }
   }
@@ -414,7 +414,7 @@ class faiPartitionTable extends plugin
 
     $ldap = $this->config->get_ldap_link();
 
-    prepare_to_save_FAI_object($this->dn,$this->attrs);
+    fai_func::prepare_to_save_FAI_object($this->dn,$this->attrs);
     show_ldap_error($ldap->get_error(), sprintf(_("Saving of FAI/partition table with dn '%s' failed."),$this->dn));
 
     if($this->initially_was_account){
@@ -461,13 +461,13 @@ class faiPartitionTable extends plugin
       }
 
       if($disk['status'] == "delete"){
-        prepare_to_save_FAI_object($disk_dn,array(),true);
+        fai_func::prepare_to_save_FAI_object($disk_dn,array(),true);
         $this->handle_post_events("remove");
       }elseif($disk['status'] == "edited"){
-        prepare_to_save_FAI_object($disk_dn,$disk_attrs);
+        fai_func::prepare_to_save_FAI_object($disk_dn,$disk_attrs);
         $this->handle_post_events("modify");
       }elseif($disk['status']=="new"){
-        prepare_to_save_FAI_object($disk_dn,$disk_attrs);
+        fai_func::prepare_to_save_FAI_object($disk_dn,$disk_attrs);
         $this->handle_post_events("add");
       }
 
@@ -512,13 +512,13 @@ class faiPartitionTable extends plugin
         }
 
         if($partition['status'] == "delete"){
-          prepare_to_save_FAI_object($partition_dn,array(),true);
+          fai_func::prepare_to_save_FAI_object($partition_dn,array(),true);
           $this->handle_post_events("remove");
         }elseif($partition['status'] == "edited"){
-          prepare_to_save_FAI_object($partition_dn,$partition_attrs);
+          fai_func::prepare_to_save_FAI_object($partition_dn,$partition_attrs);
           $this->handle_post_events("modify");
         }elseif($partition['status']=="new"){
-          prepare_to_save_FAI_object($partition_dn,$partition_attrs);
+          fai_func::prepare_to_save_FAI_object($partition_dn,$partition_attrs);
           $this->handle_post_events("add");
         }
 
