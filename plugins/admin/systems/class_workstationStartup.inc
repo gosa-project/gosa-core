@@ -71,7 +71,7 @@ class workstartup extends plugin
     if(!isset($this->parent->by_object['ogroup'])){
       $ldap = $this->config->get_ldap_link();
       $ldap->cd ($this->config->current['BASE']);
-      $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".$this->dn."))",array("cn","dn"));
+      $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".LDAP::prepare4filter($this->dn)."))",array("cn","dn"));
       if($ldap->count()){
         $this->member_of_ogroup = TRUE;
         $attrs = $ldap->fetch();

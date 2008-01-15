@@ -691,7 +691,7 @@ class plugin
   {
     /* Rename dn in possible object groups */
     $ldap= $this->config->get_ldap_link();
-    $ldap->search('(&(objectClass=gosaGroupOfNames)(member='.@LDAP::fix($src_dn).'))',
+    $ldap->search('(&(objectClass=gosaGroupOfNames)(member='.@LDAP::prepare4filter($src_dn).'))',
         array('cn'));
     while ($attrs= $ldap->fetch()){
       $og= new ogroup($this->config, $ldap->getDN());

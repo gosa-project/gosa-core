@@ -75,7 +75,7 @@ class workgeneric extends plugin
     if(!isset($this->parent->by_object['ogroup'])){
       $ldap = $this->config->get_ldap_link();
       $ldap->cd ($this->config->current['BASE']);
-      $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".normalizeLdap(preg_replace('/\\\\/', '\\\\\\', LDAP::fix($this->dn)))."))",array("cn"));
+      $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".LDAP::prepare4filter($this->dn)."))",array("cn"));
       $this->member_of_ogroup = $ldap->count() >= 1;
     }
 
@@ -329,7 +329,7 @@ class workgeneric extends plugin
 
     /* Delete references to object groups */
     $ldap->cd ($this->config->current['BASE']);
-    $ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".$this->dn."))", array("cn"));
+    $ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".LDAP::prepare4filter($this->dn)."))", array("cn"));
     while ($ldap->fetch()){
       $og= new ogroup($this->config, $ldap->getDN());
       unset($og->member[$this->dn]);

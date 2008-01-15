@@ -82,7 +82,7 @@ class reference extends plugin
   {
 	$ldap= $this->config->get_ldap_link();
 	$ldap->cd($this->config->current['BASE']);
-	$ldap->search("(|(member=".normalizeLdap(preg_replace('/\\\\/', '\\\\\\', LDAP::fix($this->dn))).")(memberUid=".$this->uid."))",array("memberUid","member","cn","description","objectClass"));
+	$ldap->search("(|(member=".LDAP::prepare4filter($this->dn).")(memberUid=".$this->uid."))",array("memberUid","member","cn","description","objectClass"));
 	
   	$cycle= array("F5F5F5", "ECECEC");
 	$id= 0;
