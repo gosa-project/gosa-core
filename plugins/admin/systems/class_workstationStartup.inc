@@ -1097,19 +1097,22 @@ class workstartup extends plugin
       $base = array_search($release,$this->cache['RELEASE_DNS']);
       $this->cache['CLASSES'][$release] = array();
 
-      if(!empty($base)){
-        $filter = "(|(objectClass=FAIpackageList)(objectClass=FAItemplate)(objectClass=FAIvariable)".
-          "(objectClass=FAIscript)(objectClass=FAIhook)(objectClass=FAIprofile)".
-          "(objectClass=FAIpartitionTable))";
-        $list = FAI::get_all_objects_for_given_base($base,$filter,TRUE);
-        foreach($list as $attrs){
-          $info = $this->analyse_fai_object($attrs);
-          if(count($info)){
-            $this->cache['CLASSES'][$release][$attrs['cn'][0]][] = $info;
+      if(class_exists("FAI")){
+        if(!empty($base)){
+          $filter = "(|(objectClass=FAIpackageList)(objectClass=FAItemplate)(objectClass=FAIvariable)".
+            "(objectClass=FAIscript)(objectClass=FAIhook)(objectClass=FAIprofile)".
+            "(objectClass=FAIpartitionTable))";
+          $list = FAI::get_all_objects_for_given_base($base,$filter,TRUE);
+          foreach($list as $attrs){
+            $info = $this->analyse_fai_object($attrs);
+            if(count($info)){
+              $this->cache['CLASSES'][$release][$attrs['cn'][0]][] = $info;
+            }
           }
         }
+      }else{
+        print_red(_("Could not load available classes, the fai extension plugin seems not to be installed."));
       }
-
 
       /* Add object caught from external hook
        */
