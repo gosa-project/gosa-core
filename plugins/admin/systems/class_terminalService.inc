@@ -200,7 +200,7 @@ class termservice extends plugin
     /* Load hardware list */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".$this->dn."))");
+    $ldap->search("(&(objectClass=gotoWorkstationTemplate)(member=".LDAP::prepare4filter($this->dn)."))");
     if ($ldap->count() == 1){
       $map= array("gotoXResolution", "gotoXColordepth", "gotoXKbModel", "gotoXKbLayout",
                   "gotoXKbVariant", "gotoXMouseType", "gotoXMouseport");

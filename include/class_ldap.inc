@@ -91,6 +91,14 @@ class LDAP{
   }
 
 
+  /* Function to fix problematic characters in DN's that are used for search
+     requests. I.e. member=....                                               */
+  static function prepare4filter($dn)
+  {
+	return normalizeLdap(preg_replace('/\\\\/', '\\\\\\', LDAP::fix($dn)));
+  }
+
+
   function connect()
   {
     $this->hascon=false;

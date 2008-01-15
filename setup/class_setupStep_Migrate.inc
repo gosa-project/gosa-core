@@ -1067,7 +1067,7 @@ class Step_Migrate extends setup_step
 
 
           /* Check if there are references to this object */
-          $ldap->search("(&(member=".$dn.")(|(objectClass=gosaGroupOfNames)(objectClass=groupOfNames)))",array('dn'));
+          $ldap->search("(&(member=".LDAP::prepare4filter($dn).")(|(objectClass=gosaGroupOfNames)(objectClass=groupOfNames)))",array('dn'));
           $refs = "";
           while($attrs = $ldap->fetch()){
             $ref_dn = $attrs['dn'];
@@ -1115,7 +1115,7 @@ class Step_Migrate extends setup_step
           $this->outside_groups[$b_dn]['ldif'] = _("Group will be moved from").":<br>\t".($ldap->fix($dn))."<br>"._("to").":<br>\t".($ldap->fix($d_dn));
 
           /* Check if there are references to this object */
-          $ldap->search("(&(member=".$dn.")(|(objectClass=gosaGroupOfNames)(objectClass=groupOfNames)))",array('dn'));
+          $ldap->search("(&(member=".LDAP::prepare4filter($dn).")(|(objectClass=gosaGroupOfNames)(objectClass=groupOfNames)))",array('dn'));
           $refs = "";
           while($attrs = $ldap->fetch()){
             $ref_dn = $attrs['dn'];
@@ -1162,7 +1162,7 @@ class Step_Migrate extends setup_step
           $this->outside_users[$b_dn]['ldif'] = _("User will be moved from").":<br>\t".($ldap->fix($dn))."<br>"._("to").":<br>\t".($ldap->fix($d_dn));
 
           /* Check if there are references to this object */
-          $ldap->search("(&(member=".$dn.")(|(objectClass=gosaGroupOfNames)(objectClass=groupOfNames)))",array('dn'));
+          $ldap->search("(&(member=".LDAP::prepare4filter($dn).")(|(objectClass=gosaGroupOfNames)(objectClass=groupOfNames)))",array('dn'));
           $refs = "";
           while($attrs = $ldap->fetch()){
             $ref_dn = $attrs['dn'];
@@ -1891,7 +1891,7 @@ class Step_Migrate extends setup_step
      /* Update object references in gosaGroupOfNames */
     $ogs_to_fix = array();
     $ldap->cd($cv['base']);
-    $ldap->search('(&(objectClass=gosaGroupOfNames)(member='.@LDAP::fix($source).'))', array('cn','member'));
+    $ldap->search('(&(objectClass=gosaGroupOfNames)(member='.@LDAP::prepare4filter($source).'))', array('cn','member'));
     while ($attrs= $ldap->fetch()){
       $dn = $attrs['dn'];
       $attrs = $this->cleanup_array($attrs);
