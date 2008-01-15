@@ -630,6 +630,13 @@ class acl extends plugin
       }
       $currentAcl= $this->aclContents[$key];
 
+      /* Get the overall plugin acls 
+       */
+      $overall_acl ="";
+      if(isset($currentAcl[0])){
+        $overall_acl = $currentAcl[0];
+      }
+
       /* Object header */
       if(session::get('js')) {
         if(isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) {
@@ -662,23 +669,23 @@ class acl extends plugin
       /* Generate options */
       $spc= "&nbsp;&nbsp;";
       if ($this->isContainer && $this->aclType != 'base'){
-        $options= $this->mkchkbx($key."_0_c",  _("Create objects"), preg_match('/c/', $currentAcl[0])).$spc;
-        $options.= $this->mkchkbx($key."_0_m", _("Move objects"), preg_match('/m/', $currentAcl[0])).$spc;
-        $options.= $this->mkchkbx($key."_0_d", _("Remove objects"), preg_match('/d/', $currentAcl[0])).$spc;
+        $options= $this->mkchkbx($key."_0_c",  _("Create objects"), preg_match('/c/', $overall_acl)).$spc;
+        $options.= $this->mkchkbx($key."_0_m", _("Move objects"), preg_match('/m/', $overall_acl)).$spc;
+        $options.= $this->mkchkbx($key."_0_d", _("Remove objects"), preg_match('/d/', $overall_acl)).$spc;
         if ($plist[preg_replace('%^.*/%', '', $key)]['plSelfModify']){
-          $options.= $this->mkchkbx($key."_0_s", _("Modifyable by owner"), preg_match('/s/', $currentAcl[0])).$spc;
+          $options.= $this->mkchkbx($key."_0_s", _("Modifyable by owner"), preg_match('/s/', $overall_acl)).$spc;
         }
       } else {
-        $options= $this->mkchkbx($key."_0_m", _("Move object"), preg_match('/m/', $currentAcl[0])).$spc;
-        $options.= $this->mkchkbx($key."_0_d", _("Remove object"), preg_match('/d/', $currentAcl[0])).$spc;
+        $options= $this->mkchkbx($key."_0_m", _("Move object"), preg_match('/m/', $overall_acl)).$spc;
+        $options.= $this->mkchkbx($key."_0_d", _("Remove object"), preg_match('/d/', $overall_acl)).$spc;
         if ($plist[preg_replace('%^.*/%', '', $key)]['plSelfModify']){
-          $options.= $this->mkchkbx($key."_0_s", _("Modifyable by owner"), preg_match('/s/', $currentAcl[0])).$spc;
+          $options.= $this->mkchkbx($key."_0_s", _("Modifyable by owner"), preg_match('/s/', $overall_acl)).$spc;
         }
       }
 
       /* Global options */
-      $more_options= $this->mkchkbx($key."_0_r",  _("read"), preg_match('/r/', $currentAcl[0])).$spc;
-      $more_options.= $this->mkchkbx($key."_0_w", _("write"), preg_match('/w/', $currentAcl[0]));
+      $more_options= $this->mkchkbx($key."_0_r",  _("read"), preg_match('/r/', $overall_acl)).$spc;
+      $more_options.= $this->mkchkbx($key."_0_w", _("write"), preg_match('/w/', $overall_acl));
 
       $display.= "\n  <tr>".
                  "\n    <td style='background-color:#E0E0E0' colspan=".($cols-1).">$options</td>".
