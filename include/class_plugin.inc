@@ -364,6 +364,8 @@ class plugin
       }
     }
 
+    /* Handle tagging */
+    $this->tag_attrs(&$this->attrs);
   }
 
 
@@ -987,13 +989,8 @@ class plugin
     }
   }
 
-
-  function handle_object_tagging($dn= "", $tag= "", $show= false)
+  function tag_attrs($at, $dn= "", $tag= "", $show= false)
   {
-    //FIXME: How to optimize this? We have at least two
-    //       LDAP accesses per object. It would be a good
-    //       idea to have it integrated.
-
     /* No dn? Self-operation... */
     if ($dn == ""){
       $dn= $this->dn;
@@ -1031,71 +1028,17 @@ class plugin
       }
     }
 
+    /* Remove tags that may already be here... */
+    remove_objectClass("gosaAdministrativeUnitTag", &$at);
+    if (isset($at['gosaUnitTag'])){
+        unset($at['gosaUnitTag']);
+    }
 
     /* Set tag? */
     if ($tag != ""){
-      /* Set objectclass and attribute */
-      $ldap= $this->config->get_ldap_link();
-      $ldap->cat($dn, array('gosaUnitTag', 'objectClass'));
-      $attrs= $ldap->fetch();
-      if(isset($attrs['gosaUnitTag'][0]) && $attrs['gosaUnitTag'][0] == $tag){
-        if ($show) {
-          echo sprintf(_("Object '%s' is already tagged"), @LDAP::fix($dn))."<br>";
-          flush();
-        }
-        return;
-      }
-      if (count($attrs)){
-        if ($show){
-          echo sprintf(_("Adding tag (%s) to object '%s'"), $tag, @LDAP::fix($dn))."<br>";
-          flush();
-        }
-        $nattrs= array("gosaUnitTag" => $tag);
-        $nattrs['objectClass']= array();
-        for ($i= 0; $i<$attrs['objectClass']['count']; $i++){
-          $oc= $attrs['objectClass'][$i];
-          if ($oc != "gosaAdministrativeUnitTag"){
-            $nattrs['objectClass'][]= $oc;
-          }
-        }
-        $nattrs['objectClass'][]= "gosaAdministrativeUnitTag";
-        $ldap->cd($dn);
-        $ldap->modify($nattrs);
-        show_ldap_error($ldap->get_error(), sprintf(_("Handle object tagging with dn '%s' failed."),$dn));
-      } else {
-        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "Not tagging ($tag) $dn - seems to have moved away", "Tagging");
-      }
-
-    } else {
-      /* Remove objectclass and attribute */
-      $ldap= $this->config->get_ldap_link();
-      $ldap->cat($dn, array('gosaUnitTag', 'objectClass'));
-      $attrs= $ldap->fetch();
-      if (isset($attrs['objectClass']) && !in_array_ics("gosaAdministrativeUnitTag", $attrs['objectClass'])){
-        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "$dn is not tagged", "Tagging");
-        return;
-      }
-      if (count($attrs)){
-        if ($show){
-          echo sprintf(_("Removing tag from object '%s'"), @LDAP::fix($dn))."<br>";
-          flush();
-        }
-        $nattrs= array("gosaUnitTag" => array());
-        $nattrs['objectClass']= array();
-        for ($i= 0; $i<$attrs['objectClass']['count']; $i++){
-          $oc= $attrs['objectClass'][$i];
-          if ($oc != "gosaAdministrativeUnitTag"){
-            $nattrs['objectClass'][]= $oc;
-          }
-        }
-        $ldap->cd($dn);
-        $ldap->modify($nattrs);
-        show_ldap_error($ldap->get_error(), sprintf(_("Handle object tagging with dn '%s' failed."),$dn));
-      } else {
-        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "Not removing tag ($tag) $dn - seems to have moved away", "Tagging");
-      }
+      add_objectClass("gosaAdministrativeUnitTag", &$at);
+      $at['gosaUnitTag']= $tag;
     }
-
   }
 
 

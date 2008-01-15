@@ -380,11 +380,6 @@ class department extends plugin
       /* The parameter forces only to set must_be_tagged, and don't touch any objects 
          This will be done later */
       $this->tag_objects(true);
-
-      /* Fix tagging if needed */
-      if (!$this->is_administrational_unit){
-        $this->handle_object_tagging();
-      }
     }
     
     /* Optionally execute a command after we're done */
@@ -429,53 +424,53 @@ class department extends plugin
       echo "<h3>".sprintf(_("Tagging '%s'."),"<i>".@LDAP::fix($this->dn)."</i>")."</h3>";
     }
 
-		$add= $this->is_administrational_unit;
-		$len= strlen($this->dn);
-		$ldap= $this->config->get_ldap_link();
-		$ldap->cd($this->dn);
-		if ($add){
-			$ldap->search('(!(&(objectClass=gosaAdministrativeUnitTag)(gosaUnitTag='.
-								$this->gosaUnitTag.')))', array('dn'));
-		} else {
-			$ldap->search('objectClass=gosaAdministrativeUnitTag', array('dn'));
-		}
+    $add= $this->is_administrational_unit;
+    $len= strlen($this->dn);
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd($this->dn);
+    if ($add){
+	    $ldap->search('(!(&(objectClass=gosaAdministrativeUnitTag)(gosaUnitTag='.
+						    $this->gosaUnitTag.')))', array('dn'));
+    } else {
+	    $ldap->search('objectClass=gosaAdministrativeUnitTag', array('dn'));
+    }
 
-		while ($attrs= $ldap->fetch()){
+    while ($attrs= $ldap->fetch()){
 
-			/* Skip self */
-			if ($attrs['dn'] == $this->dn){
-				continue;
-			}
+	    /* Skip self */
+	    if ($attrs['dn'] == $this->dn){
+		    continue;
+	    }
 
-			/* Check for confilicting administrative units */
-			$fix= true;
-			foreach ($this->config->adepartments as $key => $tag){
-				/* This one is shorter than our dn, its not relevant... */
-				if ($len >= strlen($key)){
-					continue;
-				}
+	    /* Check for confilicting administrative units */
+	    $fix= true;
+	    foreach ($this->config->adepartments as $key => $tag){
+		    /* This one is shorter than our dn, its not relevant... */
+		    if ($len >= strlen($key)){
+			    continue;
+		    }
 
-				/* This one matches with the latter part. Break and don't fix this entry */
-				if (preg_match('/(^|,)'.normalizePreg($key).'$/', $attrs['dn'])){
-					$fix= false;
-					break;
-				}
-			}
+		    /* This one matches with the latter part. Break and don't fix this entry */
+		    if (preg_match('/(^|,)'.normalizePreg($key).'$/', $attrs['dn'])){
+			    $fix= false;
+			    break;
+		    }
+	    }
 
-      /* Fix entry if needed */
-      if ($fix){
-        if($OnlySetTagFlag){
-          $this->must_be_tagged =true;
-          return;
-        }
-				$this->handle_object_tagging($attrs['dn'], $this->gosaUnitTag, TRUE );
-			}
-		}
+	    /* Fix entry if needed */
+	    if ($fix){
+		    if($OnlySetTagFlag){
+			    $this->must_be_tagged =true;
+			    return;
+		    }
+		    $this->handle_object_tagging($attrs['dn'], $this->gosaUnitTag, TRUE );
+	    }
+    }
     if(!$OnlySetTagFlag){
-      echo '<p class="seperator">&nbsp;</p>';
-      echo "<div style='width:100%;text-align:right;'><form name='form' method='post' action='?plug=".$_GET['plug']."' target='_parent'>
-        <br><input type='submit' name='back' value='"._("Continue")."'>
-        </form></div>";
+	    echo '<p class="seperator">&nbsp;</p>';
+	    echo "<div style='width:100%;text-align:right;'><form name='form' method='post' action='?plug=".$_GET['plug']."' target='_parent'>
+		    <br><input type='submit' name='back' value='"._("Continue")."'>
+		    </form></div>";
     }
 	}
 
@@ -605,6 +600,113 @@ class department extends plugin
                     "facsimileTelephoneNumber" => _("Fax"))
                   ));
   }
+
+  function handle_object_tagging($dn= "", $tag= "", $show= false)
+  {
+    /* No dn? Self-operation... */
+    if ($dn == ""){
+      $dn= $this->dn;
+
+      /* No tag? Find it yourself... */
+      if ($tag == ""){
+        $len= strlen($dn);
+
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "No tag for $dn - looking for one...", "Tagging");
+        $relevant= array();
+        foreach ($this->config->adepartments as $key => $ntag){
+
+          /* This one is bigger than our dn, its not relevant... */
+          if ($len <= strlen($key)){
+            continue;
+          }
+
+          /* This one matches with the latter part. Break and don't fix this entry */
+          if (preg_match('/(^|,)'.normalizePreg($key).'$/', $dn)){
+            @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "DEBUG: Possibly relevant: $key", "Tagging");
+            $relevant[strlen($key)]= $ntag;
+            continue;
+          }
+
+        }
+
+        /* If we've some relevant tags to set, just get the longest one */
+        if (count($relevant)){
+          ksort($relevant);
+          $tmp= array_keys($relevant);
+          $idx= end($tmp);
+          $tag= $relevant[$idx];
+          $this->gosaUnitTag= $tag;
+        }
+      }
+    }
+
+    /* Set tag? */
+    if ($tag != ""){
+      /* Set objectclass and attribute */
+      $ldap= $this->config->get_ldap_link();
+      $ldap->cat($dn, array('gosaUnitTag', 'objectClass'));
+      $attrs= $ldap->fetch();
+      if(isset($attrs['gosaUnitTag'][0]) && $attrs['gosaUnitTag'][0] == $tag){
+        if ($show) {
+          echo sprintf(_("Object '%s' is already tagged"), @LDAP::fix($dn))."<br>";
+          flush();
+        }
+        return;
+      }
+      if (count($attrs)){
+        if ($show){
+          echo sprintf(_("Adding tag (%s) to object '%s'"), $tag, @LDAP::fix($dn))."<br>";
+          flush();
+        }
+        $nattrs= array("gosaUnitTag" => $tag);
+        $nattrs['objectClass']= array();
+        for ($i= 0; $i<$attrs['objectClass']['count']; $i++){
+          $oc= $attrs['objectClass'][$i];
+          if ($oc != "gosaAdministrativeUnitTag"){
+            $nattrs['objectClass'][]= $oc;
+          }
+        }
+        $nattrs['objectClass'][]= "gosaAdministrativeUnitTag";
+        $ldap->cd($dn);
+        $ldap->modify($nattrs);
+        show_ldap_error($ldap->get_error(), sprintf(_("Handle object tagging with dn '%s' failed."),$dn));
+      } else {
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "Not tagging ($tag) $dn - seems to have moved away", "Tagging");
+      }
+
+    } else {
+      /* Remove objectclass and attribute */
+      $ldap= $this->config->get_ldap_link();
+      $ldap->cat($dn, array('gosaUnitTag', 'objectClass'));
+      $attrs= $ldap->fetch();
+      if (isset($attrs['objectClass']) && !in_array_ics("gosaAdministrativeUnitTag", $attrs['objectClass'])){
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "$dn is not tagged", "Tagging");
+        return;
+      }
+      if (count($attrs)){
+        if ($show){
+          echo sprintf(_("Removing tag from object '%s'"), @LDAP::fix($dn))."<br>";
+          flush();
+        }
+        $nattrs= array("gosaUnitTag" => array());
+        $nattrs['objectClass']= array();
+        for ($i= 0; $i<$attrs['objectClass']['count']; $i++){
+          $oc= $attrs['objectClass'][$i];
+          if ($oc != "gosaAdministrativeUnitTag"){
+            $nattrs['objectClass'][]= $oc;
+          }
+        }
+        $ldap->cd($dn);
+        $ldap->modify($nattrs);
+        show_ldap_error($ldap->get_error(), sprintf(_("Handle object tagging with dn '%s' failed."),$dn));
+      } else {
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "Not removing tag ($tag) $dn - seems to have moved away", "Tagging");
+      }
+    }
+
+  }
+
 }
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

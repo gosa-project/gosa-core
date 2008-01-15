@@ -54,9 +54,6 @@ class printtabs extends tabs
     }
 
     tabs::save(FALSE);
-
-    /* Fix tagging if needed */
-    $baseobject->handle_object_tagging();
   }
 
 }

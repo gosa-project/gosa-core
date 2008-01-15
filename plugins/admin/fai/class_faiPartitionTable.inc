@@ -423,9 +423,6 @@ class faiPartitionTable extends plugin
       new log("create","fai/".get_class($this),$this->dn,$this->attributes);
     }
  
-    /* Do object tagging */
-    $this->handle_object_tagging();
-  
     /* Sort entries, because we must delete entries with status="delete" first */
     $order = array();
     foreach($this->disks as $key => $disk){
@@ -453,12 +450,8 @@ class faiPartitionTable extends plugin
         }
       }
 
-      /* Fix problem with missing objectClass "gosaAdministrativeUnitTag" for disks */
-      $ldap->cat($disk_dn,array("objectClass"));
-      $attrs = $ldap->fetch();
-      if(isset($attrs['objectClass']) && in_array_ics("gosaAdministrativeUnitTag",$attrs['objectClass'])){
-        $disk_attrs['objectClass'][] = "gosaAdministrativeUnitTag";
-      }
+      /* Tag object */
+      $this->tag_attrs(&$disk_attrs, $disk_dn, $this->gosaUnitTag);
 
       if($disk['status'] == "delete"){
         FAI::prepare_to_save_FAI_object($disk_dn,array(),true);
@@ -470,8 +463,6 @@ class faiPartitionTable extends plugin
         FAI::prepare_to_save_FAI_object($disk_dn,$disk_attrs);
         $this->handle_post_events("add");
       }
-
-      $this->handle_object_tagging($disk_dn, $this->gosaUnitTag);
 
       if($disk['status']!="delete")
       /* Add all partitions */
@@ -504,12 +495,8 @@ class faiPartitionTable extends plugin
           $partition_attrs['FAImountPoint']="swap";
         }
 
-        /* Fix problem with missing objectClass "gosaAdministrativeUnitTag" for partitions */
-        $ldap->cat($partition_dn,array("objectClass"));
-        $attrs = $ldap->fetch();
-        if(isset($attrs['objectClass']) && in_array_ics("gosaAdministrativeUnitTag",$attrs['objectClass'])){
-          $partition_attrs['objectClass'][] = "gosaAdministrativeUnitTag";
-        }
+	/* Tag object */
+	$this->tag_attrs(&$partition_attrs, $partition_dn, $this->gosaUnitTag);
 
         if($partition['status'] == "delete"){
           FAI::prepare_to_save_FAI_object($partition_dn,array(),true);
@@ -521,8 +508,6 @@ class faiPartitionTable extends plugin
           FAI::prepare_to_save_FAI_object($partition_dn,$partition_attrs);
           $this->handle_post_events("add");
         }
-
-        $this->handle_object_tagging($partition_dn, $this->gosaUnitTag);
       }
     }
     $this->handle_post_events("add");

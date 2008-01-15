@@ -501,8 +501,6 @@ class faiPackage extends plugin
       new log("create","fai/".get_class($this),$this->dn,$this->attributes);
     }
 
-    /* Do object tagging */
-    $this->handle_object_tagging();
     $ldap->cd($this->dn);
 
     /* Save Package configurations */
@@ -524,21 +522,12 @@ class faiPackage extends plugin
         $pkgattrs['FAIvariableContent']   = $attr['Value'];
         $pkgdn =  "FAIvariable=".$name.",".$this->dn;
 
-        /* cehck if object already exists */
-        $ldap->cat($pkgdn,array("objectClass"));
-
-        /* Workaround for missing "gosaAdministrativeUnitTag" */
-        $attrs = $ldap->fetch();
-        if((isset($attrs['objectClass'])) && (in_array_ics("gosaAdministrativeUnitTag",$attrs['objectClass']))){
-          $pkgattrs['objectClass'][] = "gosaAdministrativeUnitTag";
-        }
+	/* Tag object */
+	$this->tag_attrs(&$pkgattrs, $pkgdn, $this->gosaUnitTag);
 
         if(in_array($pkgattrs['FAIvariableType'],array("boolean","multiselect","password","select","string","text"))){
           FAI::prepare_to_save_FAI_object($pkgdn,$pkgattrs);
         }
-  
-        /* Handle tagging */
-        $this->handle_object_tagging($pkgdn, $this->gosaUnitTag);
       }
     }
   }

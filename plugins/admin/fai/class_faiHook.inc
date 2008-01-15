@@ -465,9 +465,6 @@ class faiHook extends plugin
       new log("create","fai/".get_class($this),$this->dn,$this->attributes);
     }
 
-    /* Do object tagging */
-    $this->handle_object_tagging();
-
     $ldap->cd($this->dn);
 
     /* Prepare FAIscriptEntry to write it to ldap
@@ -525,16 +522,8 @@ class faiHook extends plugin
         }
       }
 
-      /* Check if gosaAdministrativeUnitTag is required as object class */
-      if($obj['status'] == "edited"){
-        $ldap->cat($sub_dn,array("objectClass"));
-        $attrs = $ldap->fetch();
-        if(isset($attrs['objectClass'])){
-          if(in_array_ics("gosaAdministrativeUnitTag",$attrs['objectClass'])){
-            $tmp['objectClass'][] = "gosaAdministrativeUnitTag";
-          }
-        }
-      }
+      /* Tag object */
+      $this->tag_attrs(&$tmp, $sub_dn, $this->gosaUnitTag);
 
       if($obj['status'] == "delete"){
         FAI::prepare_to_save_FAI_object($sub_dn,array(),true);
@@ -546,7 +535,6 @@ class faiHook extends plugin
         FAI::prepare_to_save_FAI_object($sub_dn,$tmp);
         $this->handle_post_events("add");
       }
-      $this->handle_object_tagging($sub_dn, $this->gosaUnitTag);
     }
   }
 

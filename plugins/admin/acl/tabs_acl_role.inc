@@ -31,10 +31,6 @@ class aclroletab extends tabs
 
     $ret= tabs::save();
 
-    /* Fix tagging if needed */
-    $baseobject->dn= $new_dn;
-    $baseobject->handle_object_tagging();
-
     return $ret;
   }
 

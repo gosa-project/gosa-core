@@ -59,9 +59,6 @@ class servtabs extends tabs
     $config = session::get('config');
     $config->load_servers();
     session::set('config',$config);
-
-    /* Fix tagging if needed */
-    $baseobject->handle_object_tagging();
   }
 
 }

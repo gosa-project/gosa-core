@@ -69,9 +69,6 @@ class termtabs extends tabs
         $this->by_object['printgeneric']->remove_from_parent();
       }
     }
-
-    /* Fix tagging if needed */
-    $baseobject->handle_object_tagging();
   }
 
 }

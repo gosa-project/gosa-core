@@ -54,11 +54,6 @@ class mimetabs extends tabs
     }
 
     tabs::save();
-
-    /* Fix tagging if needed */
-    $baseobject->dn= $this->dn;
-    $baseobject->handle_object_tagging();
-    $this->by_object['mimetype'] = $baseobject;
   }
 
 }

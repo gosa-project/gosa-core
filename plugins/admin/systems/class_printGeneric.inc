@@ -867,9 +867,6 @@ class printgeneric extends plugin
       $this->netConfigDNS->dn = $this->dn;
       $this->netConfigDNS->save();
     }
-
-    /* This is a multi object. Handle tagging here... */
-    $this->handle_object_tagging();
   }
 
   function generateList(){
