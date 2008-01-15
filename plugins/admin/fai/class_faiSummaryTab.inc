@@ -162,7 +162,7 @@ class faiSummaryTab extends plugin{
     if(!$base){
       $base = $this->base;
     }
-    return(get_all_releases_from_base($base,true));
+    return(fai_func::get_all_releases_from_base($base,true));
   }
 
 
@@ -383,7 +383,7 @@ class faiSummaryTab extends plugin{
   {
     $ldap 	          = $this->config->get_ldap_link();
     $dn 	            = $this->Releases [$this->Release];
-    $resolvedClasses  = get_all_objects_for_given_base($dn,"(&(objectClass=FAIclass)(cn=".$class."))");
+    $resolvedClasses  = fai_func::get_all_objects_for_given_base($dn,"(&(objectClass=FAIclass)(cn=".$class."))");
 
     /* Try to fetch all types of fai objects with the given cn  */
     foreach($resolvedClasses as $obj){

@@ -336,7 +336,7 @@ class faiPackage extends plugin
     $ldap = $this->config->get_ldap_link();
     $ldap->cd ($this->dn);
 
-    $use_dn = preg_replace("/".normalizePreg(get_release_dn($this->dn))."/i", $faifilter['branch'], $this->dn);
+    $use_dn = preg_replace("/".normalizePreg(fai_func::get_release_dn($this->dn))."/i", $faifilter['branch'], $this->dn);
     if($faifilter['branch'] == "main"){
       $use_dn = $this->dn;
     }
@@ -348,7 +348,7 @@ class faiPackage extends plugin
     foreach($this->ConfiguredPackages as $pkgname => $attrs){
       foreach($attrs as $name => $attr){
         $pkgdn =  "FAIvariable=".$name.",".$this->dn;
-        $use_dn = preg_replace("/".normalizePreg(get_release_dn($this->dn))."/i", $faifilter['branch'], $pkgdn);
+        $use_dn = preg_replace("/".normalizePreg(fai_func::get_release_dn($this->dn))."/i", $faifilter['branch'], $pkgdn);
         if($faifilter['branch'] == "main"){
           $use_dn = $obj['dn'];
         }

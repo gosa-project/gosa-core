@@ -370,7 +370,7 @@ class faiProfile extends plugin
     $ldap->cd ($this->dn);
 
     $faifilter = session::get('faifilter');
-    $use_dn = preg_replace("/".normalizePreg(get_release_dn($this->dn))."/i", $faifilter['branch'], $this->dn);
+    $use_dn = preg_replace("/".normalizePreg(fai_func::get_release_dn($this->dn))."/i", $faifilter['branch'], $this->dn);
     if($faifilter['branch'] == "main"){
       $use_dn = $this->dn;
     }
