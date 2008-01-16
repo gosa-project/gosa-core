@@ -58,7 +58,7 @@ $class_mapping= get_classes();
 $filename= "include/class_location.inc";
 
 /* Sanity checks */
-if (is_writable($filename)) {
+if (!file_exists($filename) || is_writable($filename)) {
 
     if (!$handle= fopen($filename, 'w')) {
          echo "Cannot open file \"$filename\" - aborted\n";
