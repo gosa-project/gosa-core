@@ -96,11 +96,11 @@ class msgplug extends plugin
 
         /*Permissions ok? */
         if (!$this->acl_is_writeable('notify')){
-          print_red(_("You have no permissions to send a message!"));
+	  msg_dialog::display(_("Permission error"), _("You have no permissions to send a message!"), ERROR_DIALOG);
         } else {
           $cmd= $this->config->search("msgplug", "NOTIFY_COMMAND",array('menu'));
           if ($cmd == ""){
-            print_red(_("No NOTIFY_COMMAND definition found in your gosa.conf"));
+	    msg_dialog::display(_("Configuration error"), sprintf(_("Missing '%s' directive in configuration!"), "notify_command"), ERROR_DIALOG);
           } else {
             $parameters= base64_encode($this->nmessage) ." ";
             foreach ($this->recipients as $key => $value){
@@ -108,13 +108,13 @@ class msgplug extends plugin
             }
             exec ("$cmd $parameters", $dummy, $retval);
             if ($retval != 0){
-              print_red(sprintf(_("Execution of '%s' failed!"), $cmd));
+              msg_dialog::display(_("Configuration error"), sprintf(_("'%s' defined for the '%s' directive cannot be executed!"), $cmd, "notify_command"), ERROR_DIALOG);
             }
             $this->finalized= true;
           }
         }
       } else {
-        print_red(_("Please specify at least one recipient to send a message!"));
+	msg_dialog::display(_("Error"), _("Please specify at least one recipient to send a message!") , ERROR_DIALOG);
       }
     }
 
@@ -210,7 +210,7 @@ class msgplug extends plugin
       $line= fgets($fh, 256);
 
       if (!preg_match('/^DESC:/', $line)){
-        print_red (_("No DESC tag in message file:")." $file");
+	msg_dialog::display(_("Error"), sprintf(_("Cannot find a DESC tag in file '%s'!"), $file), ERROR_DIALOG);
         return $desc;
       }
       fclose ($fh);
