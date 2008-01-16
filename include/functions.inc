@@ -2555,6 +2555,45 @@ function getEntryCSN($dn)
 }
 
 
+/* Add a given objectClass to an attrs entry */
+function add_objectClass($classes, &$attrs)
+{
+  if (is_array($classes)){
+    $list= $classes;
+  } else {
+    $list= array($classes);
+  }
+
+  foreach ($list as $class){
+    $attrs['objectClass'][]= $class;
+  }
+}
+
+
+/* Removes a given objectClass from the attrs entry */
+function remove_objectClass($classes, &$attrs)
+{
+  if (isset($attrs['objectClass'])){
+    /* Array? */
+    if (is_array($classes)){
+      $list= $classes;
+    } else {
+      $list= array($classes);
+    }
+
+    $tmp= array();
+    foreach ($attrs['objectClass'] as $oc) {
+      foreach ($list as $class){
+        if ($oc != $class){
+          $tmp[]= $oc;
+        }
+      }
+    }
+    $attrs['objectClass']= $tmp;
+  }
+}
+
+
 function display_error_page()
 {
   $smarty= get_smarty();
