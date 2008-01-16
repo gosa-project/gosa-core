@@ -93,6 +93,12 @@ $REWRITE= array( "ä" => "ae",
 /* Class autoloader */
 function __autoload($class_name) {
     global $class_mapping, $BASE_DIR;
+
+    if ($class_mapping === NULL){
+	    echo sprintf(_("Fatal error: no class locations defined - please run '%s' to fix this"), "<b>update-gosa</b>");
+	    exit;
+    }
+
     if (isset($class_mapping[$class_name])){
       require_once($BASE_DIR."/".$class_mapping[$class_name]);
     } else {
