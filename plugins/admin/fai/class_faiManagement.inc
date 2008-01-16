@@ -399,7 +399,6 @@ class faiManagement extends plugin
 
       if($entry['FAIstate'] == "freeze"){
         #$this->dialog->set_acl(array("*none*"))  ;    
-        echo "Dawn it is freezed.";
       }
 			session::set('objectinfo',$this->dn);
 		}
