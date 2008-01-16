@@ -102,7 +102,7 @@ class csvimport extends plugin
     $acl = $this->ui->get_permissions($this->config->current['BASE'],"all/all");
     if(!preg_match("/w/",$acl)){
       if(isset($_POST['userfile']) || isset($_POST['sorted']) || isset($_POST['fileup'])){
-        print_red(_("You've no permission to do CSV imports."));
+	msg_dialog::display(_("Permission error"), _("You've no permission to import CSV files."), ERROR_DIALOG);
       }
       return ($smarty->fetch (get_template_path('contentcsv.tpl', TRUE)));
     }
@@ -162,8 +162,7 @@ class csvimport extends plugin
               (!isset($dat['sn']))||(!isset($dat['givenName']))||(!isset($dat['uid']))){
 
             /* Output Error */
-
-            print_red (_("Need 'sn','givenName' and 'uid' to create user."));
+	    msg_dialog::display(_("Error"), _("Need at least 'sn', 'givenName' and 'uid' to create users."), ERROR_DIALOG);
           } else {
 
             /* Register usertab to trigger edit dialog */
@@ -283,7 +282,7 @@ class csvimport extends plugin
 
         /* Error? */
         if ($failing){
-          print_red(sprintf(_("An Error Occured while inserting entry %s - process aborted"), $failing));
+	  msg_dialog::display(_("Error"), sprintf(_("Cannot insert entry '%s'!"), $failing), ERROR_DIALOG);
         }
         $smarty->assign("error",$failing);
 
@@ -321,7 +320,7 @@ class csvimport extends plugin
 
 
         $smarty->assign("tpl",$arrtemplates[$tplid]);
-        print_red (_("Nothing to import!"));
+	msg_dialog::display(_("Information"), _("Nothing to import!"), INFO_DIALOG);
       }
 
       /* If theres a File uploaded */
@@ -333,23 +332,23 @@ class csvimport extends plugin
 
         if((!isset($_FILES['userfile']['name']))||(!isset($_POST['fileup'])))
         {
-          print_red(_("There is no file uploaded."));
+	  msg_dialog::display(_("Error"), sprintf(_("Cannot read uploaded file: %s"), _("file not found")), ERROR_DIALOG);
           $smarty->assign("LDIFError",TRUE);
         }
         elseif(!$_FILES['userfile']['size'] > 0 )
         {
-          print_red(_("The specified file is empty."));
+	  msg_dialog::display(_("Error"), sprintf(_("Cannot read uploaded file: %s"), _("file is empty")), ERROR_DIALOG);
           $smarty->assign("LDIFError",TRUE);
         }
         /* Is there a tmp file, which we can use ? */
         elseif(!file_exists($_FILES['userfile']['tmp_name']))
         {
-          print_red(_("There is no file uploaded."));
+	  msg_dialog::display(_("Error"), sprintf(_("Cannot read uploaded file: %s"), _("file not found")), ERROR_DIALOG);
           $smarty->assign("LDIFError",TRUE);
         }
         elseif(!$handle = @fopen($_FILES['userfile']['tmp_name'],"r"))
         {
-          print_red(_("There is no file uploaded."));
+	  msg_dialog::display(_("Error"), sprintf(_("Cannot read uploaded file: %s"), _("file not readable")), ERROR_DIALOG);
           $smarty->assign("LDIFError",TRUE);
         }
         else
@@ -492,7 +491,7 @@ class csvimport extends plugin
             $smarty->assign("tpl",$this->csvinfo['attr'][$_POST['template']]);
             $smarty->assign("LDIFError",TRUE);
             $smarty->assign("fileup",FALSE);
-            print_red(_("The selected file does not contain any CSV Data..."));  
+	    msg_dialog::display(_("Error"), _("Cannot find CSV data in the selected file!"), ERROR_DIALOG);
           }
         }
       }

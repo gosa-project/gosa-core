@@ -99,7 +99,7 @@ class gotomasses extends plugin
         default : trigger_error("Undefined priority setting used.");
       }
       if($this->o_queue->is_error()){
-        print_red($this->o_queue->get_error());
+	msg_dialog::display(_("Error"), $this->o_queue->get_error(), ERROR_DIALOG);
       }
     }
 
@@ -111,7 +111,7 @@ class gotomasses extends plugin
     if($s_action == "remove_multiple" || $s_action == "remove"){
 
       if(!$this->acl_is_removeable()){
-        print_red(_("You are not allowed to remove a task."));
+	msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), ERROR_DIALOG);
       }else{
 
         if($s_action == "remove"){
@@ -185,7 +185,7 @@ class gotomasses extends plugin
      $msgs = $this->dialog->check();
      if(count($msgs)){
        foreach($msgs as $msg){
-         print_red($msg);  
+	msg_dialog::display(_("Error"), $msg, ERROR_DIALOG);
        }
      }else{  
        
@@ -200,7 +200,7 @@ class gotomasses extends plugin
            $tmp2[] = $tmp;
          }
          if(!$this->o_queue->add_multiple($tmp2)){
-           print_red($this->o_queue->get_error());
+	   msg_dialog::display(_("Error"), $this->o_queue->get_error(), ERROR_DIALOG);
          }
        }
        if(!isset($_POST['apply_goto_task'])){
@@ -234,7 +234,7 @@ class gotomasses extends plugin
   function get_queue_entries()
   {
     if(!$this->o_queue->load()){
-      print_red(sprintf(_("An error occurred while requesting queue entries. Error was '%s'."),$this->o_queue->get_error()));
+      msg_dialog::display(_("Error"), sprintf(_("Cannot load queue entries: %s"), "<br><br>".$this->o_queue->get_error()), ERROR_DIALOG);
       return(array());
     }
     $tasks = array();

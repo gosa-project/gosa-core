@@ -113,12 +113,12 @@ class gosa_logview extends plugin
      *  and mysql extension 
      ****/
     if (!isset($this->config->data['SERVERS']['LOGGING']) || !count($this->config->data['SERVERS']['LOGGING'])){
-      print_red (_("No GOsa LOG servers defined!"));
+      msg_dialog::display(_("Warning"), sprintf(_("No %s servers defined!"), "GOsa log"), WARNING_DIALOG);
       return ($smarty->fetch (get_template_path('gosa_log_contents.tpl', TRUE)));
     }
     
     if(!is_callable("mysql_connect")){
-      print_red(_("There is no mysql extension available, please check your php setup."));
+      msg_dialog::display(_("Configuration error"), sprintf(_("Missing %s PHP extension!"), "mysql"), WARNING_DIALOG);
       return ($smarty->fetch (get_template_path('gosa_log_contents.tpl', TRUE)));
     }
 
@@ -143,14 +143,14 @@ class gosa_logview extends plugin
     $cfg = $list_of_servers[$this->server];
     $link = @mysql_pconnect($this->server, $cfg['USER'], $cfg['PWD']);
     if ($link === FALSE){
-      print_red(_("Can't connect to log database, no logs can be shown!"));
+      msg_dialog::display(_("Error"), sprintf(_("Cannot connect to %s database!"), "GOsa LOG"), ERROR_DIALOG);
       new log("debug","logview","",array(),@mysql_error());
       return ($smarty->fetch (get_template_path('gosa_log_contents.tpl', TRUE)));
     }
 
     /* check of log database is available */
     if (! @mysql_select_db($cfg['DB'])){
-      print_red(_("Can't select log database for log generation!"));
+      msg_dialog::display(_("Error"), sprintf(_("Cannot select %s database!"), "GOsa LOG"), ERROR_DIALOG);
       new log("debug","logview","",array(),@mysql_error());
       return ($smarty->fetch (get_template_path('gosa_log_contents.tpl', TRUE)));
     }
@@ -199,12 +199,12 @@ class gosa_logview extends plugin
 
     /* Test connection object && create up query string */
     if ($link === FALSE){
-      print_red(_("Can't connect to log database, no logs can be shown!"));
+      msg_dialog::display(_("Error"), sprintf(_("Cannot connect to %s database!"), "GOsa LOG"), ERROR_DIALOG);
       new log("debug","logview","",array(),@mysql_error());
     } else {
 
       if (! @mysql_select_db($cfg['DB'])){
-        print_red(_("Can't select log database for log generation!"));
+	msg_dialog::display(_("Error"), sprintf(_("Cannot select %s database!"), "GOsa LOG"), ERROR_DIALOG);
         new log("debug","logview","",array(),@mysql_error());
       } else {
 

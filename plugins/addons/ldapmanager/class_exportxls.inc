@@ -1,6 +1,5 @@
 <?php
 
-
 class xlsexport extends plugin
 {
   /* Definitions */
@@ -96,7 +95,7 @@ class xlsexport extends plugin
     {
       if(!($ldap->dn_exists($dn) && $dn != "")){
         $smarty->assign("LDIFError",TRUE);
-      	print_red (_("Error while exporting the requested entries!"));
+	msg_dialog::display(_("Error"), _("Cannot export selected entries!"), ERROR_DIALOG);
       }
     }
    
@@ -109,7 +108,7 @@ class xlsexport extends plugin
     if(!preg_match("/r/",$acls) && (isset($_POST['sfrmgetsingle']) || isset($_POST['sfrmgetfull']) || isset($_POST['sfrmgetivbb']))){
 
       /* Show error msg */      
-      print_red(sprintf(_("You are not allowed to export the given ldap entry (%s)"),@LDAP::fix($dn)));
+      msg_dialog::display(_("Error"), sprintf(_("You have no permission to export '%s'!"),@LDAP::fix($dn)), ERROR_DIALOG);
 
       /* Show main page */
       $smarty->assign("LDIFError",TRUE);

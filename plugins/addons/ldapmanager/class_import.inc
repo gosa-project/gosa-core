@@ -49,7 +49,7 @@ class ldifimport extends plugin
 
       /* Check acls */
       if(!preg_match("/w/",$acl)){
-        print_red(_("You need full access to all objects, to execute the import command."));
+	msg_dialog::display(_("Permission error"), _("You need full write access to the LDAP tree to import data!"), ERROR_DIALOG);
       }else{
 
         $smarty->assign("type","importfile");
@@ -58,14 +58,14 @@ class ldifimport extends plugin
         // Check if there is a file submitted
         if(!$_FILES['userfile']['size'] > 0 )
         {
-          print_red(_("The specified file is empty."));
+	  msg_dialog::display(_("Error"), sprintf(_("Cannot read uploaded file: %s"), _("file is empty")), ERROR_DIALOG);
           $smarty->assign("LDIFError",TRUE);  
         }
 
         // Is there a tmp file, which we can use ?
         elseif(!file_exists($_FILES['userfile']['tmp_name']))  
         {
-          print_red(_("There is no file uploaded."));
+	  msg_dialog::display(_("Error"), sprintf(_("Cannot read uploaded file: %s"), _("file not found")), ERROR_DIALOG);
           $smarty->assign("LDIFError",TRUE);
 
         }
@@ -73,7 +73,7 @@ class ldifimport extends plugin
         // Can we open the tmp file, for reading
         elseif(!$handle = @fopen($_FILES['userfile']['tmp_name'],"r"))
         {
-          print_red(_("There is no file uploaded."));
+	  msg_dialog::display(_("Error"), sprintf(_("Cannot read uploaded file: %s"), _("file not readable")), ERROR_DIALOG);
           $smarty->assign("LDIFError",TRUE);  
         }
         else
@@ -95,18 +95,28 @@ class ldifimport extends plugin
           $ErrorStr="";
           $check = $ldap->import_complete_ldif($str,$ErrorStr,$overwrite,$cleanup);
 
-          if($check == INSERT_OK  )
+          if($check == INSERT_OK  ){
             $smarty->assign("LDIFError",FALSE);
-          else
+	  } else {
             $smarty->assign("LDIFError",TRUE);
+	  }
 
           switch($check)
           {
-            case INSERT_OK : break;
-            case ALREADY_EXISTING_ENTRY      : print_red($ErrorStr); break;
-            case UNKNOWN_TOKEN_IN_LDIF_FILE  : print_red($ErrorStr);break;
+            case INSERT_OK:
+	    	break;
 
-            default : print_red(_("Unknown Error"));break;
+            case ALREADY_EXISTING_ENTRY:
+	    	msg_dialog::display(_("LDAP error"), $ErrorStr, ERROR_DIALOG);
+	    	break;
+
+            case UNKNOWN_TOKEN_IN_LDIF_FILE:
+	    	msg_dialog::display(_("LDAP error"), $ErrorStr, ERROR_DIALOG);
+		break;
+
+            default:
+		msg_dialog::display(_("Internal error"), sprintf(_("Undefined flag '%s'!"), $check), ERROR_DIALOG);
+		break;
           }
         }
       }

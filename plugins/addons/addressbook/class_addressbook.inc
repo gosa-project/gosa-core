@@ -175,7 +175,7 @@ class addressbook extends plugin
           return($smarty->fetch(get_template_path('dial.tpl', TRUE)));
           return;
         } else {
-          print_red (_("You have no personal phone number set. Please change that in order to perform direct dials."));
+	  msg_dialog::display(_("Error"), _("You need to set your personal phone number in order to perform direct dials."), ERROR_DIALOG);
         }
       }
 
@@ -209,7 +209,7 @@ class addressbook extends plugin
 
         /* Normally this shouldn't be reached, send some extra
            logs to notify the administrator */
-        print_red (_("You are not allowed to delete this entry!"));
+	msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), ERROR_DIALOG);
         new log("remove","addressbook/".get_class($this),$this->dn,array(),"Warning: '".$this->ui->uid."' tried to trick address book deletion.");
       }
 
@@ -317,7 +317,7 @@ class addressbook extends plugin
 
           /* Obviously the user isn't allowed to delete. Show message and
              clean session. */
-          print_red (_("You are not allowed to delete this entry!"));
+	  msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), ERROR_DIALOG);
         }
       }
       session::set('show_info',"ADD");

@@ -38,7 +38,6 @@ class mailqueue extends plugin
 
   function pass_cmd($str)
   {
-//    print_red($str);
     return(shell_exec($str));
   }
 
@@ -62,7 +61,7 @@ class mailqueue extends plugin
     $error =false;
 
     if(empty($this->mailQueueScript)){
-      print_red(_("Please check your 'gosa.conf', there is no 'MAILQUEUESCRIPTPATH' specified."));
+      msg_dialog::display(_("Configuration error"), sprintf(_("Missing '%s' directive in configuration!"), "mailqueuescriptpath"), ERROR_DIALOG);
       $error = true;
     }else{
 
@@ -89,7 +88,7 @@ class mailqueue extends plugin
           if((preg_match("/".$attr."/",$name))&&($only_once)){
             if(!$this->acl_is_readable($attr)){
               $only_once = false;
-              print_red(sprintf(_("You do not have permission to execute the command '%s' on the mailqueue."),$attr));
+	      msg_dialog::display(_("Permission error"), sprintf(_("You have no permission to submit a '%s' command!"), $attr), ERROR_DIALOG);
             }else{
               $only_once = false;
               $act = preg_replace("/_.*$/i","",$attr);
@@ -97,7 +96,7 @@ class mailqueue extends plugin
               $r_cmd = preg_replace("/%server/" , $se_str         ,$r_cmd);
               $r_cmd = preg_replace("/%id/"     , "ALL"           ,$r_cmd);
               if($this->pass_cmd($r_cmd)==false){
-                print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
+		msg_dialog::display(_("Configuration error"), sprintf(_("'%s' defined for the '%s' directive cannot be executed!"), $r_cmd, "mailqueuescriptpath"), ERROR_DIALOG);
               }
             }
           }
@@ -116,7 +115,7 @@ class mailqueue extends plugin
           $only_once = false;
 
           if(!$this->acl_is_readable($opt)){
-              print_red(sprintf(_("You do not have permission to execute the command '%s' on the mailqueue."),$opt));
+	      msg_dialog::display(_("Permission error"), sprintf(_("You have no permission to submit a '%s' command!"), $opt), ERROR_DIALOG);
           }else{
             /* Create cmd */
             $r_cmd = preg_replace("/%action/" , $opt            ,$this->mailQueueScript);
@@ -125,7 +124,7 @@ class mailqueue extends plugin
 
             /* Execute cmd */
             if(!$str = $this->pass_cmd($r_cmd)){
-              print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$r_cmd));
+	      msg_dialog::display(_("Configuration error"), sprintf(_("'%s' defined for the '%s' directive cannot be executed!"), $r_cmd, "mailqueuescriptpath"), ERROR_DIALOG);
             }else{
             
               /* Special handling for option='header' */
@@ -175,7 +174,7 @@ class mailqueue extends plugin
         $q_cmd = preg_replace("/%id/"     ,"all"        ,$q_cmd);
 
         if(!$this->acl_is_readable("query")){
-          print_red(sprintf(_("You do not have permission to execute the command '%s' on the mailqueue."),"query"));
+	  msg_dialog::display(_("Permission error"), sprintf(_("You have no permission to submit a '%s' command!"), "query"), ERROR_DIALOG);
           $mailQueueParser = new parseMailQueue("",$this->Server);
         }else{
 
@@ -185,7 +184,7 @@ class mailqueue extends plugin
             $mailQueueParser = new parseMailQueue($str,$this->Server);
           }else{
             /* On error/ no return value / false return value */
-            print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$q_cmd));
+	    msg_dialog::display(_("Configuration error"), sprintf(_("'%s' defined for the '%s' directive cannot be executed!"), $q_cmd, "mailqueuescriptpath"), ERROR_DIALOG);
             $error = true;
           }
         }
@@ -203,7 +202,7 @@ class mailqueue extends plugin
 
           
           if(!$this->acl_is_readable("query")){
-            print_red(sprintf(_("You do not have permission to execute the command '%s' on the mailqueue."),"query"));
+	    msg_dialog::display(_("Permission error"), sprintf(_("You have no permission to submit a '%s' command!"), "query"), ERROR_DIALOG);
             $mailQueueParser = new parseMailQueue("",$this->Server);
           }else{
 
@@ -218,7 +217,7 @@ class mailqueue extends plugin
               }
               /* On error/ no return value / false return value */
             }else{
-              print_red(sprintf(_("Please check your 'gosa.conf' the given '%s' can't be executed."),$q_cmd));
+	      msg_dialog::display(_("Configuration error"), sprintf(_("'%s' defined for the '%s' directive cannot be executed!"), $q_cmd, "mailqueuescriptpath"), ERROR_DIALOG);
               $error = true;
             }
           }
@@ -230,7 +229,7 @@ class mailqueue extends plugin
          Else display error   */
       $server = $this->getServer();
       if((count($server) == 1 ) && (isset($server['all']))){
-        print_red(_("There are no mail server specified."));
+	msg_dialog::display(_("Configuration error"), _("No mail servers sepcified!"), ERROR_DIALOG);
         $error = true;
       }
 

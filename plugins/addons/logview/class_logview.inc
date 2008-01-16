@@ -75,11 +75,11 @@ class logview extends plugin
 
     /* Test connection to log database */
     if (!isset($this->config->data['SERVERS']['LOG'])){
-      print_red (_("No LOG servers defined!"));
+      msg_dialog::display(_("Warning"), sprintf(_("No %s servers defined!"), "syslog"), WARNING_DIALOG);
       return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
 
     }elseif(!is_callable("mysql_connect")){
-      print_red(_("There is no mysql extension available, please check your php setup."));
+      msg_dialog::display(_("Configuration error"), sprintf(_("Missing %s PHP extension!"), "mysql"), WARNING_DIALOG);
       return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
 
     }else{
@@ -90,14 +90,14 @@ class logview extends plugin
       /* Open link to database  and check if it is valid */	
       $link = @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
       if ($link === FALSE){
-        print_red(_("Can't connect to log database, no logs can be shown!"));
+	msg_dialog::display(_("Error"), sprintf(_("Cannot connect to %s database!"), "syslog"), ERROR_DIALOG);
         new log("debug","logview","",array(),@mysql_error());
         return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
       }
 
       /* check of log database is available */
       if (! @mysql_select_db("gomon")){
-        print_red(_("Can't select log database for log generation!"));
+        msg_dialog::display(_("Error"), sprintf(_("Cannot select %s database!"), "syslog"), ERROR_DIALOG);
         new log("debug","logview","",array(),@mysql_error());
         return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
       }
@@ -110,7 +110,7 @@ class logview extends plugin
         @DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__, $query, "Database query");
         $result = @mysql_query($query);
         if ($result === false){
-          print_red(_("Query for log database failed!. Requesting host names failed."));
+	  msg_dialog::display(_("Error"), _("Cannot obtain host list from syslog database!"), ERROR_DIALOG);
           new log("debug","logview","",array(),@mysql_error());
           return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
         }
@@ -133,7 +133,7 @@ class logview extends plugin
         $result = @mysql_query($query);
         if ($result === false){
           new log("debug","logview","",array(),@mysql_error());
-          print_red(_("Query for log database failed!"));
+	  msg_dialog::display(_("Error"), _("Database query failed!"), ERROR_DIALOG);
           return ($smarty->fetch (get_template_path('contents.tpl', TRUE)));
         }
 
@@ -190,11 +190,11 @@ class logview extends plugin
 
     /* Test connection object && create up query string */
     if ($link === FALSE){
-      print_red(_("Can't connect to log database, no logs can be shown!"));
+      msg_dialog::display(_("Error"), sprintf(_("Cannot connect to %s database!"), "syslog"), ERROR_DIALOG);
       new log("debug","logview","",array(),@mysql_error());
     } else {
       if (! @mysql_select_db("gomon")){
-        print_red(_("Can't select log database for log generation!"));
+        msg_dialog::display(_("Error"), sprintf(_("Cannot select %s database!"), "syslog"), ERROR_DIALOG);
         new log("debug","logview","",array(),@mysql_error());
       } else {
 
