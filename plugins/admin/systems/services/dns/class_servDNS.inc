@@ -39,11 +39,11 @@ class servdns extends goService
 
     /* Get record types for zones
      */
-    $this->RecordTypes = getDnsRecordTypes(true);
+    $this->RecordTypes = DNS::getDnsRecordTypes(true);
 
     /* Get all zone Informations
      */
-    $this->Zones = getDNSZoneEntries($config,$dn);
+    $this->Zones = DNS::getDNSZoneEntries($config,$dn);
     
     /* If there is at least one entry in this -> types, we have DNS enabled 
      */
@@ -300,9 +300,9 @@ class servdns extends goService
     $zones =  $this->getUsedZoneNames();
 
     if(isset($this->Zones[$id]['InitialReverseZone'])){
-      $rev = FlipIp($this->Zones[$id]['InitialReverseZone']);
+      $rev = DNS::FlipIp($this->Zones[$id]['InitialReverseZone']);
     }else{
-      $rev = FlipIp($this->Zones[$id]['ReverseZone']);
+      $rev = DNS::FlipIp($this->Zones[$id]['ReverseZone']);
     }
 
     $zonename = "";
@@ -435,10 +435,10 @@ class servdns extends goService
       $old_dn = $this->dn;
     }
 
-    $tmp = getDNSZoneEntriesDiff($this->config,$this->Zones,$old_dn);
+    $tmp = DNS::getDNSZoneEntriesDiff($this->config,$this->Zones,$old_dn);
 
     /* Update dns to current object dn */ 
-    $tmp = getDNSZoneEntriesDiff($this->config,$this->Zones,$old_dn);
+    $tmp = DNS::getDNSZoneEntriesDiff($this->config,$this->Zones,$old_dn);
     $tmp2 = array();
     foreach($tmp as $key1 => $data1){
       $tmp2[$key1] = array();
@@ -465,7 +465,7 @@ class servdns extends goService
     foreach($tmp['del'] as $dn => $del){
 
       $for = $del['InitialzoneName'];
-      $rev = FlipIp($del['InitialReverseZone']).".in-addr.arpa";
+      $rev = DNS::FlipIp($del['InitialReverseZone']).".in-addr.arpa";
 
       $ldap->cd($dn);
       $ldap->rmdir_recursive($dn);

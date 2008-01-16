@@ -27,7 +27,7 @@ class servDNSeditZoneEntries extends plugin
 
     /* Initialise class
      */
-    $this->RecordTypes  = getDnsRecordTypes();
+    $this->RecordTypes  = DNS::getDnsRecordTypes();
     $this->dn           = "zoneName=".$zoneObject['InitialzoneName'].",".$dn; 
     $this->zoneName     = $zoneObject['InitialzoneName'];
     $this->reverseName  = $zoneObject['InitialReverseZone'];
@@ -51,7 +51,7 @@ class servDNSeditZoneEntries extends plugin
     $ldap->ls("(&(objectClass=dNSZone)(!(relativeDomainName=@)))",$this->dn,array("relativeDomainName"));
     
     while($attrs = $ldap->fetch()){
-      $this->Devices[$attrs['relativeDomainName'][0]] = getDNSHostEntries($config,$attrs['relativeDomainName'][0],true);
+      $this->Devices[$attrs['relativeDomainName'][0]] = DNS::getDNSHostEntries($config,$attrs['relativeDomainName'][0],true);
       $this->Devices[$attrs['relativeDomainName'][0]]['OrigCn'] = $attrs['relativeDomainName'][0];
     }
 
@@ -101,7 +101,7 @@ class servDNSeditZoneEntries extends plugin
        */
       if((preg_match("/^UserRecord_?/",$name)) && ($once)){
         $once = false;
-        $entry = getDNSHostEntries($this->config,"",true);     
+        $entry = DNS::getDNSHostEntries($this->config,"",true);     
         $entry['exists']    = true;
         $entry['zoneName']  = strtoupper($this->attrs['cn'][0])."/".$this->zoneName; 
         $entry['RECORDS'][] = array("type" => "aRecord" , "value"=>"");
@@ -331,17 +331,17 @@ class servDNSeditZoneEntries extends plugin
     foreach($this->Devices as $name => $dev){
       if(isset($dev['OrigCn'])){
         if(count($dev['RECORDS'])){
-          $todo[] = getDNSHostEntriesDiff($this->config,$dev['OrigCn'],$dev,$name);
+          $todo[] = DNS::getDNSHostEntriesDiff($this->config,$dev['OrigCn'],$dev,$name);
         }else{
           $dev['exists'] = false;
-          $todo[] = getDNSHostEntriesDiff($this->config,$dev['OrigCn'],$dev,$name);
+          $todo[] = DNS::getDNSHostEntriesDiff($this->config,$dev['OrigCn'],$dev,$name);
         }
       }else{
         if(count($dev['RECORDS'])){
-          $todo[] = getDNSHostEntriesDiff($this->config,"",$dev,$name);
+          $todo[] = DNS::getDNSHostEntriesDiff($this->config,"",$dev,$name);
         }else{
           $dev['exists'] = false;
-          $todo[] = getDNSHostEntriesDiff($this->config,"",$dev,$name);
+          $todo[] = DNS::getDNSHostEntriesDiff($this->config,"",$dev,$name);
         }
       }
     }

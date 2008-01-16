@@ -50,7 +50,7 @@ class servdnseditZone extends plugin
     plugin::plugin ($config, $dn);
 
     /* All types with required attrs */
-    $this->RecordTypes = getDnsRecordTypes(true); 
+    $this->RecordTypes = DNS::getDnsRecordTypes(true); 
 
     if(!count($attrs)){
       $this->OldZoneName        = "";
@@ -240,8 +240,8 @@ class servdnseditZone extends plugin
       }else{
         $this->zoneEditor = clone $this->dialog;
         $this->dialog = FALSE;
-#       $rev = FlipIp(getNameFromMix($this->InitialReverseZone)).".in-addr.arpa";
-#       $for = getNameFromMix($this->InitialzoneName);
+#       $rev = DNS::FlipIp(DNS::getNameFromMix($this->InitialReverseZone)).".in-addr.arpa";
+#       $for = DNS::getNameFromMix($this->InitialzoneName);
 #      
 #       $this->parent->handle_post_events("modify",array("dn" => $this->dn,"zoneName" => $rev));
 #       $this->parent->handle_post_events("modify",array("dn" => $this->dn,"zoneName" => $for));
@@ -489,7 +489,7 @@ class servdnseditZone extends plugin
       if(preg_match("/in-addr\.arpa/",$attr['zoneName'][0])){
         if(isset($attr['tXTRecord'][0])){
           $zn = preg_replace("/zoneName\=/","",$attr['tXTRecord'][0]);
-          $ret[$zn] =FlipIp(preg_replace("/\.in-addr\.arpa/","",$attr['zoneName'][0]));
+          $ret[$zn] =DNS::FlipIp(preg_replace("/\.in-addr\.arpa/","",$attr['zoneName'][0]));
         }
       }else{
         $ret[$attr['zoneName'][0]]="";

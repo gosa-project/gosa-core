@@ -118,11 +118,11 @@ class termDNS extends plugin
 
       /* Get Zones  
        */
-      $this->Zones        = getAvailableZones($config);
+      $this->Zones        = DNS::getAvailableZones($config);
 
       /* Get Entry 
        */
-      $this->dnsEntry     = getDNSHostEntries($config,$this->OrigCn);
+      $this->dnsEntry     = DNS::getDNSHostEntries($config,$this->OrigCn);
 
       /* Remove A record which equals $this->ipHostNumber
        */
@@ -138,7 +138,7 @@ class termDNS extends plugin
 
       /* Get Record types 
        */
-      $this->RecordTypes  = getDnsRecordTypes();
+      $this->RecordTypes  = DNS::getDnsRecordTypes();
 
       /* If there is at least one entry in this -> types, we have DNS enabled 
        */
@@ -179,7 +179,7 @@ class termDNS extends plugin
 
   function netmaskIsCoherent($idZone) 
   {
-    $netmask = FlipIp(str_replace(".in-addr.arpa","",getNameFromMix($idZone)));
+    $netmask = DNS::FlipIp(str_replace(".in-addr.arpa","",DNS::getNameFromMix($idZone)));
     if(!strstr($this->ipHostNumber, $netmask)){
       return false;
     }else{
@@ -312,7 +312,7 @@ class termDNS extends plugin
       if(isset($_POST['propose_ip'])){
         foreach($this->Zones as $key => $name){
           if($name == $this->dnsEntry['zoneName']){
-            $net = FlipIp(str_replace(".in-addr.arpa","",getNameFromMix($key)));
+            $net = DNS::FlipIp(str_replace(".in-addr.arpa","",DNS::getNameFromMix($key)));
             $this->ipHostNumber = $this->generateRandomIp($net);
           }
         }
@@ -391,7 +391,7 @@ class termDNS extends plugin
 
       $tmp = array();
       $this->dnsEntry['exists'] = false;
-      $tmp = getDNSHostEntriesDiff($this->config,$this->OrigCn,$this->dnsEntry,$this->cn);
+      $tmp = DNS::getDNSHostEntriesDiff($this->config,$this->OrigCn,$this->dnsEntry,$this->cn);
 
       /* Delete dns */
       foreach($tmp['del'] as $dn => $del){
@@ -739,10 +739,10 @@ class termDNS extends plugin
        */
       if((!$this->DNS_is_account)&&($this->initially_was_account)){  
         $this->dnsEntry['exists'] = false;
-        $tmp = getDNSHostEntriesDiff($this->config,$this->OrigCn,$this->dnsEntry,$this->cn);
+        $tmp = DNS::getDNSHostEntriesDiff($this->config,$this->OrigCn,$this->dnsEntry,$this->cn);
       }else{
         $this->dnsEntry['exists'] = $this->DNS_is_account;
-        $tmp = getDNSHostEntriesDiff($this->config,$this->OrigCn,$this->dnsEntry,$this->cn);
+        $tmp = DNS::getDNSHostEntriesDiff($this->config,$this->OrigCn,$this->dnsEntry,$this->cn);
       }   
 
       /* move follwoing entries 
@@ -957,12 +957,12 @@ class termDNS extends plugin
   {
     if(!empty($this->ipHostNumber) && isset($this->dnsEntry['zoneName']) && !empty($this->dnsEntry['zoneName'])){
       $ldap = $this->config->get_ldap_link();
-      $ldap->cat(getDNSZoneDN($this->config,$this->dnsEntry['zoneName']));
+      $ldap->cat(DNS::getDNSZoneDN($this->config,$this->dnsEntry['zoneName']));
       $attrs = $ldap->fetch();
       $tmp = array_flip($this->Zones);
       $tmp = preg_replace("/^[^\/]*+\//","",$tmp[$this->dnsEntry['zoneName']]);
       $tmp = trim(preg_replace("/\.in-addr.arpa$/","",$tmp));
-      $ptr = preg_replace("/^".normalizePreg(FlipIp($tmp))."\./","",$this->ipHostNumber);
+      $ptr = preg_replace("/^".normalizePreg(DNS::FlipIp($tmp))."\./","",$this->ipHostNumber);
       return($ptr);
     }else{
       return(FALSE);
