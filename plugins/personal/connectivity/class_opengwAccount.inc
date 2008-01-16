@@ -164,7 +164,7 @@ class opengwAccount extends plugin
 
 		/* Check database extension */    
 		if(!is_callable("pg_connect") && count($this->serverCon)){
-      msg_dialog::display(_("Configuration error"), _("Missing postgresql extension!"), ERROR_DIALOG);
+      msg_dialog::display(_("Configuration error"), sprintf(_("Missing %s PHP extension!"), "postgresql"), ERROR_DIALOG);
 		}elseif(count($this->serverCon)){
 
 			/* Check if config exists */

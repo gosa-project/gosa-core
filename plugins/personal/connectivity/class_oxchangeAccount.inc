@@ -728,7 +728,7 @@ class oxchangeAccount extends plugin
         return;
       }
     }else{
-      msg_dialog::display(_("Configuration error"), _("Missing postgresql extension!"), ERROR_DIALOG);
+      msg_dialog::display(_("Configuration error"), sprintf(_("Missing %s PHP extension!"), "postgresql"), ERROR_DIALOG);
       return;
     }
 
@@ -833,7 +833,7 @@ class oxchangeAccount extends plugin
           return;
         }
       }else{
-        msg_dialog::display(_("Configuration error"), _("Missing postgresql extension!"), ERROR_DIALOG);
+        msg_dialog::display(_("Configuration error"), sprintf(_("Missing %s PHP extension!"), "postgresql"), ERROR_DIALOG);
         return;
       }
     }

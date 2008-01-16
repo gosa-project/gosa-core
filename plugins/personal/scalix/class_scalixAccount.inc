@@ -251,7 +251,7 @@ class scalixAccount extends plugin
 
         /* Check write access */
         if(!$this->acl_is_writeable("scalixEmailAddress")){
-          print_red(_("You are not allowed to modify alternate addresses"));
+	  msg_dialog::display(_("Error"), _("You have no permission to modify these addresses."), ERROR_DIALOG);
         }else{
 
           /* Mail address already in use ? */
@@ -268,7 +268,7 @@ class scalixAccount extends plugin
       /* Delete email addresses */
       if (isset($_POST['delete_email']) && isset ($_POST['emails_list'])){
         if(!$this->acl_is_writeable("scalixEmailAddress")){
-          print_red(_("You are not allowed to modify alternate addresses"));
+	  msg_dialog::display(_("Error"), _("You have no permission to modify these addresses."), ERROR_DIALOG);
         }else{
           if (count($_POST['emails_list'])){
             $this->delEmail ($_POST['emails_list']);

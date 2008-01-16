@@ -110,7 +110,7 @@ class password extends plugin
           /* Check GOsa permissions */
           if (!preg_match("/w/i",$password_ACLS)){
             msg_dialog::display(_("User password"),
-                                _("You have no permissions to change your password."),WARNING_DIALOG);
+                                _("You have no permission to change your password."),WARNING_DIALOG);
           }else{
             change_password ($ui->dn, $_POST['new_password']);
             gosa_log ("User/password has been changed");
