@@ -1029,7 +1029,7 @@ class plugin
     }
 
     /* Remove tags that may already be here... */
-    remove_objectClass("gosaAdministrativeUnitTag", &$at);
+    $this->remove_objectClass("gosaAdministrativeUnitTag", &$at);
     if (isset($at['gosaUnitTag'])){
         unset($at['gosaUnitTag']);
     }
