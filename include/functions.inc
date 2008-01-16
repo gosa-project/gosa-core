@@ -96,8 +96,23 @@ function __autoload($class_name) {
     if (isset($class_mapping[$class_name])){
       require_once($BASE_DIR."/".$class_mapping[$class_name]);
     } else {
-      echo _("Fatal: cannot load class \"$class_name\" - execution aborted");
+      echo sprintf(_("Fatal error: cannot load class '%s' - execution aborted"), $class_name);
+      print_a(debug_backtrace());
+      exit;
     }
+}
+
+
+/* Check if plugin is avaliable */
+function plugin_available($plugin)
+{
+	global $class_mapping, $BASE_DIR;
+
+	if (!isset($class_mapping[$plugin])){
+		return false;
+	} else {
+		return file_exists($BASE_DIR."/".$class_mapping[$plugin]);
+	}
 }
 
 

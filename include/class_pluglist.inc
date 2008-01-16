@@ -114,9 +114,11 @@ class pluglist {
 		if(count($this->headlines) == 0){
 			foreach($this->config->data['MENU'] as $headline => $plugins){
 				foreach( $plugins as $id => $plug){
-					$attrs = (get_class_vars($plug['CLASS']));
-					$ret[$id]['HEADLINE'] = $headline;
-					$ret[$id]['NAME']	  = $attrs['plHeadline'];	
+					if (plugin_available($plug['CLASS'])){
+						$attrs = (get_class_vars($plug['CLASS']));
+						$ret[$id]['HEADLINE'] = $headline;
+						$ret[$id]['NAME']	  = $attrs['plHeadline'];
+					}
 				}
 			}
 			$this->headlines = $ret;
@@ -149,6 +151,9 @@ class pluglist {
 					if (!isset($info['CLASS'])){
 						msg_dialog::display(_("Configuration error"), _("The configuration format has changed. Please re-run setup!"), ERROR_DIALOG);
 						display_error_page();
+					}
+					if (!plugin_available($info['CLASS'])){
+						continue;
 					}
 					$vars= get_class_vars($info['CLASS']);
 					$plHeadline= $vars['plHeadline'];
@@ -258,6 +263,10 @@ class pluglist {
 				$entries= "";
 
 				foreach ($plug as $info){
+
+					if (!plugin_available($info['CLASS'])){
+						continue;
+					}
 
 					/* Read information from class variable */
 					$vars= get_class_vars($info['CLASS']);
