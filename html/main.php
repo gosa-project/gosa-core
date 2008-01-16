@@ -112,7 +112,7 @@ if(!session::is_set('Last_init_lang')){
 
 /* If last language != current force navi reload */
 $lang= get_browser_language();
-if(session::get('Last_init_lang',$lang)){
+if(session::get('Last_init_lang') != $lang){
   $reload_navigation = true;
 }
 
@@ -285,7 +285,7 @@ $smarty->assign ("go_help", get_template_path('images/help.png'));
 
 /* reload navigation if language changed*/  
 if($reload_navigation){
-  $plist->menu="";;
+  $plist->menu="";
 }
 $plist->gen_headlines();
 $plist->gen_menu();
