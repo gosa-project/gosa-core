@@ -55,7 +55,6 @@ $svn_revision = '$Revision$';
 /* Include required files */
 require_once("class_location.inc");
 require_once ("functions_debug.inc");
-require_once ("functions_dns.inc");
 require_once ("accept-to-gettext.inc");
 
 /* Define constants for debugging */
