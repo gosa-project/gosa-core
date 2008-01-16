@@ -96,7 +96,7 @@ function __autoload($class_name) {
     if (isset($class_mapping[$class_name])){
       require_once($BASE_DIR."/".$class_mapping[$class_name]);
     } else {
-      echo sprintf(_("Fatal error: cannot load class '%s' - execution aborted"), $class_name);
+      echo sprintf(_("Fatal error: cannot instantiate class '%s' - execution aborted"), $class_name);
       print_a(debug_backtrace());
       exit;
     }
@@ -111,7 +111,7 @@ function plugin_available($plugin)
 	if (!isset($class_mapping[$plugin])){
 		return false;
 	} else {
-		return file_exists($BASE_DIR."/".$class_mapping[$plugin]);
+		return is_readable($BASE_DIR."/".$class_mapping[$plugin]);
 	}
 }
 

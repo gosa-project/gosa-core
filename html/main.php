@@ -142,7 +142,12 @@ if (!session::is_set('plist')){
   $class_list= get_declared_classes();
   foreach ($class_mapping as $class => $path){
     if (!in_array($class, $class_list)){
-        require_once("$BASE_DIR/$path");
+    	if (is_readable("$BASE_DIR/$path")){
+        	require_once("$BASE_DIR/$path");
+	} else {
+		echo sprintf(_("Fatal error: cannot locate file '%s' - please run '%s' to fix this"), "$BASE_DIR/$path", "<b>update-gosa</b>");
+		exit;
+	}
     }
   }
   
