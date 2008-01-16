@@ -131,6 +131,7 @@ $class_mapping= array(
                 "servdnseditZone" => "plugins/admin/systems/services/dns/class_servDNSeditZone.inc",
                 "termDNS" => "plugins/admin/systems/services/dns/class_termDNS.inc",
                 "servDNSeditZoneEntries" => "plugins/admin/systems/services/dns/class_servDNSeditZoneEntries.inc",
+                "DNS" => "plugins/admin/systems/services/dns/class_DNS.inc",
                 "goShareServer" => "plugins/admin/systems/services/shares/class_goShareServer.inc",
                 "goImapServer" => "plugins/admin/systems/services/imap/class_goImapServer.inc",
                 "servnfs" => "plugins/admin/systems/services/nfs/class_servNfs.inc",
