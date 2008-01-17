@@ -1,3 +1,0 @@
-# Do not deliver to own mailbox
-discard;
-
