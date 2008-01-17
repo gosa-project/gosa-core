@@ -567,7 +567,7 @@ class mailgroup extends plugin
         $smarty->assign("$type", $gmailfilter[$type]);
       }
       $smarty->assign("hint", print_sizelimit_warning());
-      $display.= $smarty->fetch (get_template_path('mail_locals.tpl', TRUE));
+      $display.= $smarty->fetch (get_template_path('mail_locals.tpl', TRUE, dirname(__FILE__)));
       return ($display);
     }
 
@@ -709,7 +709,7 @@ class mailgroup extends plugin
     $smarty->assign("Forward_some",$this->gosaMailForwardingAddress_Some);
 
     $smarty->assign("multiple_support",$this->multiple_support_active);
-    $display.= $smarty->fetch (get_template_path('mail.tpl', TRUE));
+    $display.= $smarty->fetch (get_template_path('mail.tpl', TRUE, dirname(__FILE__)));
     return ($display);
   }
 
@@ -1188,7 +1188,7 @@ I: Only insider delivery */
     $smarty->assign("gosaMailAlternateAddress",$this->gosaMailAlternateAddress);
     $smarty->assign("gosaMailForwardingAddress",$this->gosaMailForwardingAddress);
     $smarty->assign("mail",$this->mail);
-    $display= $smarty->fetch (get_template_path('paste_mail.tpl', TRUE));
+    $display= $smarty->fetch (get_template_path('paste_mail.tpl', TRUE, dirname(__FILE__)));
     $ret = array();
     $ret['string'] = $display;
     $ret['status'] = "";
