@@ -130,8 +130,6 @@ class wingeneric extends plugin
 
     /* Fill templating stuff */
     $smarty= get_smarty();
-
-    // Undefined index in wingeneric.tpl ... 
     $smarty->assign("bases", $this->config->idepartments);
 
     /* Assign attributes */
@@ -147,7 +145,7 @@ class wingeneric extends plugin
       return($str);
     }
     $smarty->assign("netconfig", $str);
-    return($smarty->fetch (get_template_path('wingeneric.tpl', TRUE)));
+    return($smarty->fetch (get_template_path('wingeneric.tpl', TRUE,dirname(__FILE__))));
   }
 
   function remove_from_parent()
