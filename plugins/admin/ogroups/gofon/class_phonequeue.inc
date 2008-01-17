@@ -291,7 +291,7 @@ class phonequeue extends plugin
     }
     $smarty->assign("goFonHomeServers",$tmp);
 
-    return ($display.$smarty->fetch (get_template_path('phonequeue.tpl', TRUE)));
+    return ($display.$smarty->fetch (get_template_path('phonequeue.tpl', TRUE,dirname(__FILE__))));
   }
 
 

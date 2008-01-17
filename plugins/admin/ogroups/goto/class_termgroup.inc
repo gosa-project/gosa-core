@@ -314,7 +314,7 @@ class termgroup extends plugin
     $smarty->assign("gotoSyslogServer_select", $this->gotoSyslogServer); 
 
     /* Show main page */
-    return ($smarty->fetch (get_template_path('termgroup.tpl', TRUE)));
+    return ($smarty->fetch (get_template_path('termgroup.tpl', TRUE, dirname(__FILE__))));
   }
 
   function save_object()

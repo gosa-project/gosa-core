@@ -67,7 +67,7 @@ class mailogroup extends plugin
     $smarty->assign("mail", $this->mail);
 
     /* Show main page */
-    return ($display.$smarty->fetch (get_template_path('mail.tpl', TRUE)));
+    return ($display.$smarty->fetch (get_template_path('mail.tpl', TRUE,dirname(__FILE__))));
   }
 
 
