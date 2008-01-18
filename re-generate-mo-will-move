@@ -1,0 +1,93 @@
+#!/usr/bin/php5
+<?php
+
+define ("LOCALE_DIR", "/home/cajus/Projekte/gosa/trunk/gosa-all/gosa/locale");
+
+function print_usage()
+{
+	?>
+update-gosa - class cache updated and plugin manager for GOsa
+Usage: update-gosa                        Update the class cache
+
+       update-gosa install-plugin plugin  Install the plugin named "plugin" in
+                                          the GOsa tree.
+
+       update-gosa remove-plugin plugin   Remove the plugin named "plugin" from
+                                          the current configuration.
+
+       update-gosa list-plugins           Lists installed plugins
+
+       update-gosa rescan-i18n            Rebuilds the translations
+       
+<?php
+	exit (1);
+}
+
+
+function rescan_i18n()
+{
+	$languages= array();
+	$size= strlen(LOCALE_DIR);
+
+	/* Get all available messages.po files, sort them for languages */
+	$dir= new RecursiveDirectoryIterator(LOCALE_DIR);
+	$all= new RecursiveIteratorIterator($dir);
+	foreach ( $all as $element ){
+		if ($element->isFile() && preg_match('/\/LC_MESSAGES\/messages.po$/', $element->getPathname())){
+			$lang= preg_replace('/^.*\/([^\/]+)\/LC_MESSAGES\/.*$/', '\1', $element);
+			if (!isset($languages[$lang])){
+				$languages[$lang]= array();
+			}
+			$languages[$lang][]= substr($element->getPathName(), $size+1);
+		}
+	}
+
+	/* For each language, merge the target .mo to the compiled directory. */
+	foreach ($languages as $language => $po_files){
+		if (!is_dir(LOCALE_DIR."/compiled/${language}/LC_MESSAGES")){
+			if (!mkdir (LOCALE_DIR."/compiled/${language}/LC_MESSAGES", 0755, TRUE)){
+				echo "Failed to create '".LOCALE_DIR."/compiled/${language}/LC_MESSAGES'- aborted";
+				exit (3);
+			}
+		}
+
+		/* Cat all these po files into one single file */
+		system ("(cd ".LOCALE_DIR." && msgcat ".implode(" ", $po_files)." > compiled/${language}/LC_MESSAGES/messages.po)", $val);
+		if ($val != 0){
+			echo "Merging of message files failed - aborted";
+			exit (4);
+		}
+		system ("(cd ".LOCALE_DIR."/compiled/${language}/LC_MESSAGES && msgfmt -o messages.mo messages.po && rm messages.po)", $val);
+		if ($val != 0){
+			echo "Compiling of message files failed - aborted";
+			exit (5);
+		}
+	}
+}
+
+
+/* Action specified? */
+if ($argc < 2){
+        exit (0);
+}
+switch ($argv[1]){
+        case 'install-plugin':
+                echo "install\n";
+                break;
+        case 'list-plugins':
+                echo "list\n";
+                break;
+        case 'remove-plugin':
+                echo "remove\n";
+                break;
+        case 'rescan-i18n':
+                rescan_i18n();
+                break;
+        default:
+                echo "Error: Supplied command not known\n\n";
+                print_usage();
+                break;
+}
+
+
+?>
