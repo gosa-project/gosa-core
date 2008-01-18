@@ -111,10 +111,6 @@ class plugin
   var $acl_base= "";
   var $acl_category= "";
 
-  /* Plugin identifier */
-  var $plHeadline= "";
-  var $plDescription= "";
-
   /* This can be set to render the tabulators in another stylesheet */
   var $pl_notify= FALSE;
 
