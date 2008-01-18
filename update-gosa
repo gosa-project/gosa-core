@@ -85,6 +85,13 @@ fwrite ($handle, " );\n?>");
 
 fclose($handle);
 
+/* Action specified? */
+
+
+# List plugins (plugstate dir)
+# Merge locales locale dir/core + locale dir /plugins/*/
+# Install plugins > File list in plugstate dir
+# Remove plugins < File list from plugstate dir
 
 
 ?>
