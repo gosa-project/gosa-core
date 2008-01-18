@@ -30,7 +30,7 @@ header("Content-type: text/html; charset=UTF-8");
 
 /* Set the text domain as 'messages' */
 $domain = 'messages';
-bindtextdomain($domain, "$BASE_DIR/locale");
+bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
 
 /* Remember everything we did after the last click */
@@ -132,7 +132,7 @@ $GLOBALS['t_gettext_message_dir'] = $BASE_DIR.'/locale/';
 
 /* Set the text domain as 'messages' */
 $domain = 'messages';
-bindtextdomain($domain, "$BASE_DIR/locale");
+bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
 @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
 

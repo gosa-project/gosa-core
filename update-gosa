@@ -1,6 +1,7 @@
 #!/usr/bin/php5
 <?php
 
+
 /* Function to include all class_ files starting at a given directory base */
 function get_classes($folder= ".")
 {
@@ -54,6 +55,12 @@ function get_classes($folder= ".")
   return ($result);
 }
 
+
+##############################################################################
+##                     M A I N - G O S A - U P D A T E                      ##
+##############################################################################
+
+/* Reload class list */
 $class_mapping= get_classes();
 $filename= "include/class_location.inc";
 
@@ -77,5 +84,7 @@ foreach ($class_mapping as $key => $value){
 fwrite ($handle, " );\n?>");
 
 fclose($handle);
+
+
 
 ?>

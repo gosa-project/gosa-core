@@ -55,7 +55,7 @@ $GLOBALS['t_language']= $lang;
 $GLOBALS['t_gettext_message_dir'] = $BASE_DIR.'/locale/';
 
 $domain = 'messages';
-bindtextdomain($domain, "$BASE_DIR/locale");
+bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
 @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
 

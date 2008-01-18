@@ -104,7 +104,7 @@ $GLOBALS['t_gettext_message_dir'] = $BASE_DIR.'/locale/';
 
 /* Set the text domain as 'messages' */
 $domain = 'messages';
-bindtextdomain($domain, "$BASE_DIR/locale");
+bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
 
 
