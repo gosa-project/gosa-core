@@ -34,8 +34,10 @@ class passwordMethod
   {
   }
 
+
   // Loads Methods in annother way as  get_available_methods do, (For setup ..)
   // and loads them,.
+  #FIXME: This stopped working after moving around pw-methods
   function get_available_methods_if_not_loaded($path_to_load="../include")
   {
     $oh = opendir($path_to_load);
@@ -49,7 +51,6 @@ class passwordMethod
     }
     return(passwordMethod::get_available_methods());
   }
-
 
 
   // Crypts a single string, with given Method
