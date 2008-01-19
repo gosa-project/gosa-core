@@ -54,17 +54,15 @@ install-stamp:
 	-mkdir -p debian/gosa-help-nl/usr/share/doc/gosa-help-nl
 	-gzip -c9 debian/changelog > debian/gosa-help-nl/usr/share/doc/gosa-help-nl/changelog.Debian.gz
 	-gzip -c9 Changelog > debian/gosa/usr/share/doc/gosa/changelog.gz
-	-cp AUTHORS README FAQ doc/README.pptp doc/README.xls-export doc/README.glpi doc/README.nagios doc/README.phpscheduleit doc/README.safemode doc/README.devel doc/README.openxchange debian/gosa/usr/share/doc/gosa/
-	-rm debian/gosa/usr/share/gosa/doc/README.ssh
+	-cp AUTHORS README FAQ doc/README.pptp doc/README.glpi doc/README.nagios doc/README.phpscheduleit doc/README.safemode doc/README.devel doc/README.openxchange debian/gosa/usr/share/doc/gosa/
 	-rm debian/gosa/usr/share/gosa/README debian/gosa/usr/share/gosa/INSTALL
 	-rm debian/gosa/usr/share/gosa/AUTHORS debian/gosa/usr/share/gosa/Changelog
-	-rm debian/gosa/usr/share/gosa/COPYING debian/gosa/usr/share/gosa/TODO
 	-rm debian/gosa/usr/share/gosa/FAQ
 	-mkdir -p debian/gosa/var/spool/gosa/compile
 	-mkdir -p debian/gosa/var/spool/gosa/config
 	-mkdir -p debian/gosa/var/spool/gosa/cache
 	-rm -rf debian/gosa/usr/share/gosa/compile
-	-mv debian/gosa/usr/share/gosa/fix_config.sh debian/gosa/usr/share/doc/gosa/contrib
+	-mv debian/gosa/usr/share/gosa/update-config debian/gosa/usr/share/doc/gosa/contrib
 	-mkdir -p debian/gosa/etc/gosa/vacation
 	-cp -R debian/apache.conf debian/gosa/etc/gosa/apache.conf
 	-cp -R contrib/encodings debian/gosa/etc/gosa/encodings
@@ -89,12 +87,12 @@ install-stamp:
 	-cp -R debian/gosa-desktop.desktop debian/gosa-desktop/usr/share/applications/gosa.desktop
 	-rm -rf debian/gosa/usr/share/gosa/contrib
 	-rm -rf debian/gosa/usr/share/gosa/locale/en
-	-rm -rf debian/gosa/usr/share/gosa/gen_locale.sh
-	-rm -rf debian/gosa/usr/share/gosa/gen_pdf_help.sh
+	-rm -rf debian/gosa/usr/share/gosa/update-locale
+	-rm -rf debian/gosa/usr/share/gosa/update-pdf-help
 	-rm -rf debian/gosa/usr/share/gosa/patch-stamp
-	-rm -rf debian/gosa/usr/share/gosa/gen_online_help.sh
-	-rm -rf debian/gosa/usr/share/gosa/gen_function_list.php
-	-rm -rf debian/gosa/usr/share/gosa/update.sh
+	-rm -rf debian/gosa/usr/share/gosa/update-online-help
+	-rm -rf debian/gosa/usr/share/gosa/update-gosa
+	-rm -rf debian/gosa/usr/share/gosa/update-config
 	-rm -rf debian/gosa/usr/share/doc/gosa/guide*
 	sed 's%"CONFIG_TEMPLATE_DIR", "../contrib/"%"CONFIG_TEMPLATE_DIR", "/usr/share/doc/gosa/contrib/"%g' debian/gosa/usr/share/gosa/include/functions.inc > debian/gosa/usr/share/gosa/include/functions.inc.new; \
 	mv debian/gosa/usr/share/gosa/include/functions.inc.new debian/gosa/usr/share/gosa/include/functions.inc;
