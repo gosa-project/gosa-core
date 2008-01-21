@@ -85,7 +85,7 @@ function rescan_classes()
 {
 	echo "Updating class cache...\n";
 	$class_mapping= get_classes();
-	$filename= "include/class_location.inc";
+	$filename= GOSA_HOME."/include/class_location.inc";
 
 	/* Sanity checks */
 	if (!file_exists($filename) || is_writable($filename)) {
@@ -282,8 +282,8 @@ function install_plugin($file)
 					echo "Failed to create '".PLUGSTATE_DIR."/$name - aborted";
 					exit (3);
 				}
-				if (!$handle= fopen(PLUGSTATE_DIR."/$name/plugin.lst, 'w')) {
-					echo "Cannot open file \"$filename\" - aborted\n";
+				if (!$handle= fopen(PLUGSTATE_DIR."/$name/plugin.lst", 'w')) {
+					echo "Cannot open file '$filename' - aborted\n";
 					exit (1);
 				}
 
