@@ -1,15 +1,16 @@
 #!/usr/bin/php5
 <?php
 
-define ("LOCALE_DIR", dirname(__FILE__)."/locale");
-define ("PLUGSTATE_DIR", dirname(__FILE__)."/state");
+define ("GOSA_HOME", dirname(__FILE__));
+define ("LOCALE_DIR", GOSA_HOME."/locale");
+define ("PLUGSTATE_DIR", GOSA_HOME."/state");
 
 function print_usage()
 {
 	?>
 update-gosa - class cache updated and plugin manager for GOsa
-Usage: update-gosa install-plugin dir     Install the plugin placed in "dir" to
-                                          the GOsa tree.
+Usage: update-gosa install-plugin dsc     Install the plugin using the dsc information
+                                          placed in the plugin source directory.
 
        update-gosa remove-plugin plugin   Remove the plugin named "plugin" from
                                           the current configuration.
@@ -103,7 +104,7 @@ function rescan_classes()
 	foreach ($class_mapping as $key => $value){
 	  fwrite ($handle, "                \"$key\" => \"$value\",\n");
 	}
-	fwrite ($handle, " );\n?>");
+	fwrite ($handle, " );\n");
 
 	fclose($handle);
 }
@@ -164,7 +165,7 @@ function parse_ini($file)
 			$plugin= &$tmp['gosa-plugin'];
 			if (isset($plugin['name'])&& isset($plugin['description']) && isset($plugin['provides'])){
 				$res= $plugin['name'];
-				$provides[$res]= $plugin['provides'];
+				$provides[$res]= $plugin[$res];
 				$description[$res]= $plugin['description'];
 				if (isset($plugin['depends'])){
 					$depends[$res]= explode(',', preg_replace('/\s+/', '', $plugin['depends']));
@@ -194,7 +195,7 @@ function dependency_check()
 
 function load_plugins()
 {
-	if (!file_exists(PLUGSTATE_DIR)){
+	if (!is_dir(PLUGSTATE_DIR)){
 		if (!mkdir (PLUGSTATE_DIR, 0755, TRUE)){
 			echo "Cannot create plugstate dir '".PLUGSTATE_DIR."' - aborted\n";
 			exit (2);
@@ -241,22 +242,99 @@ function list_plugins()
 }
 
 
-function install_plugin($name)
+function install_plugin($file)
 {
 	global $description, $provides, $depends;
 
 	/* Load plugin list */
 	load_plugins();
 
-	# go to the directory, load dsc file
-	# check if it already there
-	# check if all dependencies are fullfilled
-	# copy plugin
-	# update classlist
-	# update i18n
+	/* Load .dsc file */
+	if (file_exists($file)){
+		$tmp= parse_ini_file($file, TRUE);
 
-	#if (isset($)){
-	#}
+		if (isset($tmp['gosa-plugin'])){
+			$plugin= &$tmp['gosa-plugin'];
+			if (isset($plugin['name'])&& isset($plugin['description'])){
+				$name= $plugin['name'];
+				$description= $plugin['description'];
+				$depends= array();
+				if (isset($plugin['depends'])){
+					$depends= explode(',', preg_replace('/\s+/', '', $plugin['depends']));
+				}
+
+				/* Already installed? */
+				if (isset($provides[$name])){
+					echo "! Error: plugin already installed\n\n";
+					exit (3);
+				}
+
+				/* Check if dependencies are fullfilled */
+				foreach ($depends as $dep){
+					if (!in_array($dep, $provides)){
+						echo "! Error: plugin depends on '$dep', but this is not installed\n\n";
+						exit (3);
+					}
+				}
+
+				/* Create plugstate directory and touch plugin.lst */
+				if (!mkdir (PLUGSTATE_DIR."/$name", 0755, TRUE)){
+					echo "Failed to create '".PLUGSTATE_DIR."/$name - aborted";
+					exit (3);
+				}
+				if (!$handle= fopen(PLUGSTATE_DIR."/$name/plugin.lst, 'w')) {
+					echo "Cannot open file \"$filename\" - aborted\n";
+					exit (1);
+				}
+
+				/* Copy and fill plugin.lst */
+				$path= dirname($file);
+				$dir= new RecursiveDirectoryIterator($path);
+				$all= new RecursiveIteratorIterator($dir);
+				foreach ( $all as $entry ){
+					$source= $path."/".substr($entry->getPathName(), strlen($path) + 1);
+
+					/* Skip well known directories */
+					if (preg_match('/^\./', $source) || preg_match('/\/\.svn\//', $source)) {
+						continue;
+					}
+
+					/* Calculate destination */
+					if (preg_match("%^.*locale/%", $source)){
+						$dest= GOSA_HOME."/locale/plugin/$name/".preg_replace("%^.*locale/%", "", $source);
+					} else {
+						$dest= GOSA_HOME."/plugins/".$source;
+					}
+
+					/* Destination exists in case of directories? */
+					if ($entry->isDir()){
+						if (!is_dir($dest)){
+							mkdir($dest, 0755, TRUE);
+							fwrite ($handle, "$dest");
+						}
+					} else {
+						if (!is_dir(dirname($dest))){
+							mkdir(dirname($dest), 0755, TRUE);
+							fwrite ($handle, "$dest");
+						}
+					}
+
+					/* Copy files */
+					if ($entry->isFile()){
+						copy ($source, $dest);
+						fwrite ($handle, "$dest");
+					}
+
+				}
+
+				fclose($handle);
+			}
+		}
+	}
+	
+	/* Update caches */
+	rescan_classes();
+	rescan_i18n();
 }
 
 
@@ -275,7 +353,7 @@ switch ($argv[1]){
                 if (isset($argv[2])){
 			install_plugin($argv[2]);
 		} else {
-			echo "Usage: update-gosa install-plugin directory\n\n";
+			echo "Usage: update-gosa install-plugin dsc-file\n\n";
 			exit (1);
 		}
                 break;
