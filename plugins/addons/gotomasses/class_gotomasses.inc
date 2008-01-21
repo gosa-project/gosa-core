@@ -126,7 +126,7 @@ class gotomasses extends plugin
         foreach($this->ids_to_remove as $key => $id){
           if($this->o_queue->id_exists($id)){
             $task = $this->o_queue->get_entry($id);
-            $tmp.= "\n".$task['5']."&nbsp;".$task['3'];
+            $tmp.= "\n".$task['HEADERTAG']."&nbsp;".$task['MACADDRESS'];
           }else{
             unset($this->ids_to_remove[$key]);
           }
@@ -231,13 +231,17 @@ class gotomasses extends plugin
    */
   function get_queue_entries()
   {
-    if(!$this->o_queue->load()){
+    
+    $entries = $this->o_queue->get_queued_entries();
+
+    if(!is_array($entries)){
       msg_dialog::display(_("Error"), sprintf(_("Cannot load queue entries: %s"), "<br><br>".$this->o_queue->get_error()), ERROR_DIALOG);
       return(array());
     }
+
     $tasks = array();
     $ret = array();
-    while($entry = $this->o_queue->fetch()){
+    foreach($entries as $entry){
       $task = $entry['ID']; 
       $ret[]= $entry;
     }

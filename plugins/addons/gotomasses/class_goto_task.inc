@@ -50,7 +50,13 @@ class goto_task extends plugin
 
   function save()
   {
-    return($this->data);
+    $tmp = array();   
+    foreach($this->attributes as $attr){
+      if(isset($this->data[$attr])){
+        $tmp[$attr] = $this->data[$attr];
+      }
+    }
+    return($tmp);
   }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
