@@ -258,6 +258,7 @@ $description= $provides= $depends= array();
 
 /* Action specified? */
 if ($argc < 2){
+	print_usage();
         exit (0);
 }
 switch ($argv[1]){

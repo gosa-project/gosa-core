@@ -95,7 +95,7 @@ function __autoload($class_name) {
     global $class_mapping, $BASE_DIR;
 
     if ($class_mapping === NULL){
-	    echo sprintf(_("Fatal error: no class locations defined - please run '%s' to fix this"), "<b>update-gosa</b>");
+	    echo sprintf(_("Fatal error: no class locations defined - please run '%s' to fix this"), "<b>update-gosa rescan-classes</b>");
 	    exit;
     }
 
