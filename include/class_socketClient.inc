@@ -117,14 +117,16 @@ class Socket_Client
 			$read = array("0"=>$this->handle);
 			$write = array();
 			$accept = array();	
-			$num = @stream_select($read,$write,$accept,floor($this->timeout), ceil($this->timeout*1000000));
+			$start = microtime();		
+			$num = @stream_select($read,$write,$accept,floor($this->timeout), ceil($this->timeout*100000));
 			$str = "";		
-		
+			socket_set_timeout($this->handle,$this->timeout);			
+
 			/* Read data if necessary */
-			while($num && $this->b_data_send){
-				$str.= fread($this->handle, 1024000);
+			while($num && get_MicroTimeDiff($start,microtime()) < $this->timeout){
+				$str.= fread($this->handle, 100);
 				$read = array("0"=>$this->handle);	
-				$num = @stream_select($read,$write,$accept,floor($this->timeout), ceil($this->timeout*1000000));
+				$num = @stream_select($read,$write,$accept,floor($this->timeout), ceil($this->timeout*100000));
 			}
 			$this->bytes_read = strlen($str);
 			$this->b_data_send = FALSE;
