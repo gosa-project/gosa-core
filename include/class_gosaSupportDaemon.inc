@@ -259,6 +259,8 @@ class gosaSupportDaemon
    */
   public function update_entry($id,$entry)
   {
+    $this->b_error = FALSE;
+    $this->s_error = "";
     if(!is_numeric($id)){
       trigger_error("Requires an integer value as ID parameter.");
       return;
@@ -274,9 +276,6 @@ class gosaSupportDaemon
       $attr.="<".strtolower($name).">".$entry."</".strtolower($name).">\n";
     }
 
-    $this->b_error = FALSE;
-    $this->s_error = "";
-
     $xml_msg = "<xml> 
                   <header>gosa_update_status_jobdb_entry</header>
                   <where>
@@ -288,7 +287,6 @@ class gosaSupportDaemon
                 </xml>";
     $this->connect();
     if($this->is_connected){
-      echo $xml_msg;
       $this->o_sock->write($xml_msg);
       $str      = trim($this->o_sock->read());
       $entries = $this->xml_to_array($str);

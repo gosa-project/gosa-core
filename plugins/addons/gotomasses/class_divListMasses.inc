@@ -65,10 +65,8 @@ class divListMasses extends MultiSelectWindow
 
     /* Add priority options */
     if(preg_match("/w/",$this->parent->getacl(""))){
-      $header .= "<input type='image' src='images/prio_top.png'       name='multiple_prio_top'      class='center'>&nbsp;";
-      $header .= "<input type='image' src='images/prio_increase.png'  name='multiple_prio_increase' class='center'>&nbsp;";
-      $header .= "<input type='image' src='images/prio_decrease.png'  name='multiple_prio_decrease' class='center'>&nbsp;";
-      $header .= "<input type='image' src='images/prio_bottom.png'    name='multiple_prio_bottom'   class='center'>&nbsp;";
+      $header .= "<input type='image' src='images/status_stop_all.png' name='stop_all' class='center'>&nbsp;";
+      $header .= "<input type='image' src='images/status_start_all.png' name='start_all' class='center'>&nbsp;";
     }
     $header .= "</div>";
     
@@ -118,10 +116,8 @@ class divListMasses extends MultiSelectWindow
       /* Create actions */
       $id         = $task['ID'];
       $queue_pos  = $id;
-      $prio_actions = "<input class='center' type='image' src='images/prio_top.png'      name='prio_top_".$id."'>&nbsp;";
-      $prio_actions.= "<input class='center' type='image' src='images/prio_increase.png' name='prio_increase_".$id."'>&nbsp;";
-      $prio_actions.= "<input class='center' type='image' src='images/prio_decrease.png' name='prio_decrease_".$id."'>&nbsp;";
-      $prio_actions.= "<input class='center' type='image' src='images/prio_bottom.png'   name='prio_bottom_".$id."'>&nbsp;";
+      $prio_actions = "<input class='center' type='image' src='images/status_stop_all.png' name='stop_".$id."'>&nbsp;";
+      $prio_actions.= "<input class='center' type='image' src='images/status_start_all.png' name='start_".$id."'>&nbsp;";
       $action = "<input type='image' src='images/edit.png' name='edit_task_".$id."' class='center' alt='"._("Edit")."'>";
       if($this->parent->acl_is_removeable()){
         $action.= "<input type='image' src='images/edittrash.png' name='remove_task_".$id."' class='center' alt='"._("Reomve")."'>";

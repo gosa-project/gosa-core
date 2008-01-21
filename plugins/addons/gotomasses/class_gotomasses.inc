@@ -38,15 +38,10 @@ class gotomasses extends plugin
 
     $s_entry = $s_action = "";
     $arr = array( 
-        "/^prio_top_/"      => "prio_top",
-        "/^prio_increase_/" => "prio_increase",
-        "/^prio_decrease_/" => "prio_decrease",
-        "/^prio_bottom_/"   => "prio_bottom",
-
-        "/^multiple_prio_top_/"      => "mprio_top",
-        "/^multiple_prio_increase_/" => "mprio_increase",
-        "/^multiple_prio_decrease_/" => "mprio_decrease",
-        "/^multiple_prio_bottom_/"   => "mprio_bottom",
+        "/^stop_/"      => "stop",
+        "/^stop_all/"  => "stop_all",
+        "/^start/"      => "start",
+        "/^start_all/"  => "start_all",
 
         "/^edit_task_/"             =>  "edit",
         "/^remove_task_/"           =>  "remove",
@@ -74,29 +69,19 @@ class gotomasses extends plugin
      * Handle Priority modifications  
      ************/
 
-    if(preg_match("/^mprio_/",$s_action) || preg_match("/^prio_/",$s_action)){
+    if(preg_match("/^start_/",$s_action) || preg_match("/^stop_/",$s_action)){
 
       switch($s_action){
-        case 'mprio_top'       : foreach($this->list_get_selected_items() as $id ){
-                                   $this->o_queue->max_entry_priority($id);
-                                 }
-                                 break;
-        case 'mprio_increase'  : foreach($this->list_get_selected_items() as $id ){
-                                   $this->o_queue->increase_entry_priority($id);
-                                 }
-                                 break;
-        case 'mprio_decrease'  : foreach($this->list_get_selected_items() as $id ){
-                                   $this->o_queue->decrease_entry_priority($id);
-                                 }
-                                 break;
-        case 'mprio_bottom'    : foreach($this->list_get_selected_items() as $id ){
-                                   $this->o_queue->min_entry_priority($id);
-                                 }
-                                 break;
-        case 'prio_top'       : $this->o_queue->max_entry_priority($s_entry);break;
-        case 'prio_increase'  : $this->o_queue->increase_entry_priority($s_entry);break;
-        case 'prio_decrease'  : $this->o_queue->decrease_entry_priority($s_entry);break;
-        case 'prio_bottom'    : $this->o_queue->min_entry_priority($s_entry);break;
+        case 'start_all'   :foreach($this->list_get_selected_items() as $id){
+                                $this->start_queue_entry($id);
+                            }
+                            break;
+        case 'start'       :$this->start_queue_entry($s_entry);break;
+        case 'stop_all'    :foreach($this->list_get_selected_items() as $id){
+                                $this->stop_queue_entry($id);
+                            }
+                            break;
+        case 'stop'        : $this->stop_queue_entry($s_entry);break;
         default : trigger_error("Undefined priority setting used.");
       }
       if($this->o_queue->is_error()){
@@ -223,6 +208,46 @@ class gotomasses extends plugin
     $entries = $this->get_queue_entries();
     $this->divlist->SetEntries($entries);
     return($this->divlist->Draw());
+  }
+
+
+  /*! \brief  Force queue job to be done as far as possible.
+   *  @return Boolean TRUE in case of success, else FALSE. 
+   */
+  private function start_queue_entry($id)
+  {
+    $attr = $this->o_queue->get_entry($id); 
+    if(is_array($attr)){
+      $data = array("timestamp" => date("YmdHis"),
+                    "status"  => "-");
+      if(!$this->o_queue->update_entry($id,$data)){
+        msg_dialog::display(_("Error"), sprintf(_("Could not update queue entry: %s"),$id) , ERROR_DIALOG);
+        return(FALSE);
+      }else{
+        return(FALSE);
+      }
+    }
+    return(FALSE);
+  }
+
+
+  /*! \brief Stops the specified queue entry from execution.
+   *  @return Boolean TRUE in case of success, else FALSE. 
+   */
+  private function stop_queue_entry($id)
+  {
+    $attr = $this->o_queue->get_entry($id); 
+    if(is_array($attr)){
+      $data = array("timestamp" => "20370101010000",
+                    "status"  => "stopped");
+      if(!$this->o_queue->update_entry($id,$data)){
+        msg_dialog::display(_("Error"), sprintf(_("Could not update queue entry: %s"),$id) , ERROR_DIALOG);
+        return(FALSE);
+      }else{
+        return(FALSE);
+      }
+    }
+    return(FALSE);
   }
 
 
