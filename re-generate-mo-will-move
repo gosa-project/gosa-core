@@ -2,6 +2,7 @@
 <?php
 
 define ("LOCALE_DIR", "/home/cajus/Projekte/gosa/trunk/gosa-all/gosa/locale");
+define ("PLUGSTATE_DIR", "/tmp/gosa");
 
 function print_usage()
 {
@@ -9,7 +10,7 @@ function print_usage()
 update-gosa - class cache updated and plugin manager for GOsa
 Usage: update-gosa                        Update the class cache
 
-       update-gosa install-plugin plugin  Install the plugin named "plugin" in
+       update-gosa install-plugin dir     Install the plugin placed in "dir" to
                                           the GOsa tree.
 
        update-gosa remove-plugin plugin   Remove the plugin named "plugin" from
@@ -18,9 +19,93 @@ Usage: update-gosa                        Update the class cache
        update-gosa list-plugins           Lists installed plugins
 
        update-gosa rescan-i18n            Rebuilds the translations
+
+       update-gosa rescan-classes         Rebuilds the class list
        
 <?php
 	exit (1);
+}
+
+
+/* Function to include all class_ files starting at a given directory base */
+function get_classes($folder= ".")
+{
+  static $base_dir= "";
+  static $result= array();
+
+  if ($base_dir == ""){
+    $base_dir= getcwd();
+  }
+
+  $currdir=getcwd();
+  if ($folder){
+    chdir("$folder");
+  }
+
+  $dh = opendir(".");
+  while(false !== ($file = readdir($dh))){
+
+    if (preg_match("/.*\.svn.*/", $file) ||
+        preg_match("/.*smarty.*/i",$file) ||
+        preg_match("/.*\.tpl.*/",$file) ||
+        ($file==".") ||($file =="..")){
+      continue;
+    }
+
+    /* Recurse through all "common" directories */
+    if (is_dir($file)){
+      get_classes($file);
+      continue;
+    }
+
+    /* Only take care about .inc and .php files... */
+    if (!(preg_match('/\.php$/', $file) || preg_match('/\.inc$/', $file))){
+      continue;
+    }
+
+    /* Include existing class_ files */
+    $contents= file($file);
+    foreach($contents as $line){
+      $line= chop($line);
+      if (preg_match('/^\s*class\s*\w.*$/', $line)){
+        $class= preg_replace('/^\s*class\s*(\w+).*$/', '\1', $line);
+        $result[$class]= preg_replace("%$base_dir/%", "", "$currdir/$folder/$file");
+      }
+    }
+  }
+
+  closedir($dh);
+  chdir($currdir);
+
+  return ($result);
+}
+
+
+function rescan_classes()
+{
+	$class_mapping= get_classes();
+	$filename= "include/class_location.inc";
+
+	/* Sanity checks */
+	if (!file_exists($filename) || is_writable($filename)) {
+
+	    if (!$handle= fopen($filename, 'w')) {
+		 echo "Cannot open file \"$filename\" - aborted\n";
+		 exit (1);
+	    }
+
+	} else {
+	    echo "File \"$filename\" is not writable - aborted\n";
+	    exit (2);
+	}
+
+	fwrite ($handle, "<?php\n\$class_mapping= array(\n");
+	foreach ($class_mapping as $key => $value){
+	  fwrite ($handle, "                \"$key\" => \"$value\",\n");
+	}
+	fwrite ($handle, " );\n?>");
+
+	fclose($handle);
 }
 
 
@@ -66,22 +151,135 @@ function rescan_i18n()
 }
 
 
+function parse_ini($file)
+{
+	global $description, $provides, $depends;
+
+	$res= "";
+	if (file_exists($file)){
+		$tmp= parse_ini_file($file, TRUE);
+
+		if (isset($tmp['gosa-plugin'])){
+			$plugin= &$tmp['gosa-plugin'];
+			if (isset($plugin['name'])&& isset($plugin['description']) && isset($plugin['provides'])){
+				$res= $plugin['name'];
+				$provides[$res]= $plugin['provides'];
+				$description[$res]= $plugin['description'];
+				if (isset($plugin['depends'])){
+					$depends[$res]= explode(',', preg_replace('/\s+/', '', $plugin['depends']));
+				}
+			}
+		}
+	}
+
+	return $res;
+}
+
+
+function dependency_check()
+{
+	global $description, $provides, $depends;
+
+	foreach ($depends as $name => $pl_depends){
+		foreach ($pl_depends as $pl){
+			if (!in_array($pl, $provides)){
+				echo "! Error: plugin '$name' depends on '$pl' which is not provided by any plugin\n\n";
+				exit (1);
+			}
+		}
+	}
+}
+
+
+function load_plugins()
+{
+	$dir= new DirectoryIterator(PLUGSTATE_DIR);
+	foreach ($dir as $entry){
+		if ($dir->isDir() && !preg_match('/^\./', $dir->__toString())){
+			$file= $dir->getPathName()."/plugin.dsc";
+			if (!parse_ini($file)){
+				echo "! Warning: plugin ".$dir->getPathName()." is missing declarations\n";
+			}
+		}
+	}
+}
+
+
+function list_plugins()
+{
+	global $description;
+	$count= 0;
+
+	/* Load plugin list */
+	load_plugins();
+
+	/* Show plugins */
+	foreach ($description as $name => $dsc){
+		if ($count == 0){
+			echo "Plugin\t\t| Description\n";
+			echo "------------------------------------------------------------------------\n";
+		}
+		echo "* $name\t\t| ".$dsc."\n";
+		$count++;
+	}
+
+	/* Yell about non existing plugins... */
+	if ($count == 0){
+		echo "No plugins found...\n\n";
+	} else {
+		# Check for dependencies
+		dependency_check();
+		echo "\n";
+	}
+}
+
+
+function install_plugin($name)
+{
+	global $description, $provides, $depends;
+
+	/* Load plugin list */
+	load_plugins();
+
+	# go to the directory, load dsc file
+	# check if it already there
+	# check if all dependencies are fullfilled
+	# copy plugin
+	# update classlist
+	# update i18n
+
+	#if (isset($)){
+	#}
+}
+
+
+/* Fill global values */
+$description= $provides= $depends= array();
+
 /* Action specified? */
 if ($argc < 2){
         exit (0);
 }
 switch ($argv[1]){
         case 'install-plugin':
-                echo "install\n";
+                if (isset($argv[2])){
+			install_plugin($argv[2]);
+		} else {
+			echo "Usage: update-gosa install-plugin directory\n\n";
+			exit (1);
+		}
                 break;
         case 'list-plugins':
-                echo "list\n";
+                list_plugins();
                 break;
         case 'remove-plugin':
                 echo "remove\n";
                 break;
         case 'rescan-i18n':
                 rescan_i18n();
+                break;
+        case 'rescan-classes':
+                rescan_classes();
                 break;
         default:
                 echo "Error: Supplied command not known\n\n";
