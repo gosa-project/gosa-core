@@ -58,10 +58,10 @@ class divListMasses extends MultiSelectWindow
 #      $header .= "<input type='image' src='images/gotomasses_new_task.png' name='new_task' class='center'>&nbsp;";
 #    }
 
-#    /* Display remove button if allowed */
-#    if($this->parent->acl_is_removeable()){
-#      $header .= "<input type='image' src='images/edittrash.png' name='remove_multiple_task' class='center'>&nbsp;";
-#    }
+    /* Display remove button if allowed */
+    if($this->parent->acl_is_removeable()){
+      $header .= "<input type='image' src='images/edittrash.png' name='remove_multiple_task' class='center'>&nbsp;";
+    }
 
     /* Add priority options */
     if(preg_match("/w/",$this->parent->getacl(""))){

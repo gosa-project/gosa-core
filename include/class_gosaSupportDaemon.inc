@@ -22,6 +22,9 @@ class gosaSupportDaemon
     $this->i_port    = $port;
     $this->f_timeout = $timeout;
     $this->s_encryption_key = $key;
+    if($connect){
+      $this->connect();
+    }
   }
 
   public function connect()
@@ -44,9 +47,11 @@ class gosaSupportDaemon
 
   public function __reload()
   {
-    echo "<b>Reload</b>";
     $this->entries = array();
     $this->pointer = 0;
+    $this->b_error = FALSE;
+    $this->s_error = "";
+
     $xml_msg = "<xml><header>gosa_query_jobdb</header><where><status>*</status></where></xml>";
     $this->connect();
     if($this->is_connected){
@@ -54,8 +59,6 @@ class gosaSupportDaemon
       $str = trim($this->o_sock->read());
       $entries = $this->xml_to_array($str);
       if(!isset($entries['XML'])){
-        print_a($entries);
-        echo htmlentities($str);
         $this->set_error("Couldn't parse xml.");
         $this->disconnect();
         return(FALSE);
@@ -63,7 +66,6 @@ class gosaSupportDaemon
         $ret = array_values($entries['XML']); 
       }
       $this->entries = $ret;
-      $this->disconnect();
       return(TRUE);
     }
     $this->set_error("Could not establish socket connection.");
@@ -140,22 +142,18 @@ class gosaSupportDaemon
 
   public function decrease_entry_priority($id)
   {
-    echo $id;
   }
 
   public function increase_entry_priority($id)
   {
-    echo $id;
   }
 
   public function max_entry_priority($id)
   {
-    echo $id;
   }
 
   public function min_entry_priority($id)
   {
-    echo $id;
   }
 
   public function id_exists($id)
@@ -165,11 +163,36 @@ class gosaSupportDaemon
 
   public function get_entry($id)
   {
-    foreach($this->entries as $entry){
-      if($entry['ID'] == $id){
-        return($entry);
+    if(!is_numeric($id)){
+      trigger_error("gosaSupportDaemon::get_entry() requires an integer value as ID parameter.");
+      return;
+    }
+
+    $this->b_error = FALSE;
+    $this->s_error = "";
+
+    $xml_msg = "<xml>
+                  <header>gosa_query_jobdb</header>
+                  <where>id</where>
+                  <id>".$id."</id>
+                </xml>";
+
+    $this->connect();
+    if($this->is_connected){
+      $this->o_sock->write($xml_msg);
+      $str = trim($this->o_sock->read());
+      $entries = $this->xml_to_array($str);
+      if(!isset($entries['XML']['ANSWER1'])){
+        $this->set_error("Entry with id (".$id.") not found.");
+        $this->disconnect();
+        return(FALSE);
+      }else{
+        $ret = array_values($entries['XML']['ANSWER1']);
+        return($ret);
       }
     }
+    $this->set_error("Could not establish socket connection.");
+    return(FALSE);
   }
 
   public function update_entry($id,$entry)
@@ -177,10 +200,10 @@ class gosaSupportDaemon
     $xml_msg = "";
 
     if($this->is_connected){
-      $this->o_sock->write($xml_msg);
-      $str = trim($this->o_sock->read());
-      $entries = $this->xml_to_array($str);
-      $this->disconnect();
+      #$this->o_sock->write($xml_msg);
+      #$str = trim($this->o_sock->read());
+      #$entries = $this->xml_to_array($str);
+      #$this->disconnect();
       return(TRUE);
     }
     $this->set_error("Could not establish socket connection.");
@@ -193,6 +216,21 @@ class gosaSupportDaemon
 
   public function remove_entry($id)
   {
+    $this->b_error = FALSE;
+    $this->s_error = "";
+
+    $xml_msg = "<xml>
+                  <header>gosa_delete_jobdb_entry</header>
+                  <where>id</where>
+                  <id>".$id."</id>
+                </xml>";
+    $this->connect();
+    if($this->is_connected){
+      $this->o_sock->write($xml_msg);
+      return(TRUE);
+    }
+    $this->set_error("Could not establish socket connection.");
+    return(FALSE);
   }
 }
 
