@@ -82,6 +82,7 @@ function get_classes($folder= ".")
 
 function rescan_classes()
 {
+	echo "Updating class cache...\n";
 	$class_mapping= get_classes();
 	$filename= "include/class_location.inc";
 
@@ -110,6 +111,7 @@ function rescan_classes()
 
 function rescan_i18n()
 {
+	echo "Updating internationalization...\n";
 	$languages= array();
 	$size= strlen(LOCALE_DIR);
 
@@ -193,7 +195,7 @@ function dependency_check()
 function load_plugins()
 {
 	if (!file_exists(PLUGSTATE_DIR)){
-		if (!mkdir (PLUGSTATE_DIR", 0755, TRUE)){
+		if (!mkdir (PLUGSTATE_DIR, 0755, TRUE)){
 			echo "Cannot create plugstate dir '".PLUGSTATE_DIR."' - aborted\n";
 			exit (2);
 		}
@@ -267,6 +269,7 @@ if ($argc < 2){
 	rescan_i18n();
         exit (0);
 }
+
 switch ($argv[1]){
         case 'install-plugin':
                 if (isset($argv[2])){
