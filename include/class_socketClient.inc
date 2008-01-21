@@ -126,7 +126,7 @@ class Socket_Client
 			while($num && get_MicroTimeDiff($start,microtime()) < $this->timeout){
 				$str.= fread($this->handle, 1024000);
 				$read = array("0"=>$this->handle);	
-				$num = @stream_select($read,$write,$accept,floor($this->timeout), ceil($this->timeout*100000));
+				$num = stream_select($read,$write,$accept,0,200);
 			}
 			$this->bytes_read = strlen($str);
 			$this->b_data_send = FALSE;
