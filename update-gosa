@@ -2,15 +2,13 @@
 <?php
 
 define ("LOCALE_DIR", dirname(__FILE__)."/locale");
-define ("PLUGSTATE_DIR", "/tmp/gosa");
+define ("PLUGSTATE_DIR", dirname(__FILE__)."/state");
 
 function print_usage()
 {
 	?>
 update-gosa - class cache updated and plugin manager for GOsa
-Usage: update-gosa                        Update the class cache
-
-       update-gosa install-plugin dir     Install the plugin placed in "dir" to
+Usage: update-gosa install-plugin dir     Install the plugin placed in "dir" to
                                           the GOsa tree.
 
        update-gosa remove-plugin plugin   Remove the plugin named "plugin" from
@@ -22,6 +20,7 @@ Usage: update-gosa                        Update the class cache
 
        update-gosa rescan-classes         Rebuilds the class list
        
+       update-gosa                        Shortcut for rescan-classes and rescan-i18n
 <?php
 	exit (1);
 }
@@ -193,6 +192,12 @@ function dependency_check()
 
 function load_plugins()
 {
+	if (!file_exists(PLUGSTATE_DIR)){
+		if (!mkdir (PLUGSTATE_DIR", 0755, TRUE)){
+			echo "Cannot create plugstate dir '".PLUGSTATE_DIR."' - aborted\n";
+			exit (2);
+		}
+	}
 	$dir= new DirectoryIterator(PLUGSTATE_DIR);
 	foreach ($dir as $entry){
 		if ($dir->isDir() && !preg_match('/^\./', $dir->__toString())){
@@ -258,7 +263,8 @@ $description= $provides= $depends= array();
 
 /* Action specified? */
 if ($argc < 2){
-	print_usage();
+	rescan_classes();
+	rescan_i18n();
         exit (0);
 }
 switch ($argv[1]){

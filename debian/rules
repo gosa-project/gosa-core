@@ -92,6 +92,7 @@ install-stamp:
 
 	# Clean up
 	-rm -rf debian/gosa/usr/share/gosa/contrib
+	-rm -rf debian/gosa/usr/share/gosa/state
 	-rm -rf debian/gosa/usr/share/gosa/locale/en
 	-rm -rf debian/gosa/usr/share/gosa/update-locale
 	-rm -rf debian/gosa/usr/share/gosa/update-pdf-help
