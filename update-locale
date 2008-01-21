@@ -30,19 +30,19 @@ generate_po() {
   done
 
   echo "Extracting languages..."
-  [ -f locale/messages.po ] && rm locale/messages.po
-  find . -name '*.[ctpi][ophn][nlpc]' | xgettext -f - --keyword=must -d Domain -L PHP -n -o locale/messages.po
+  [ -f locale/${l_path}messages.po ] && rm locale/${l_path}messages.po
+  find . -name '*.[ctpi][ophn][nlpc]' | xgettext -f - --keyword=must -d Domain -L PHP -n -o locale/${l_path}messages.po
 
   echo "Merging po files with existing ones"
   error=0
-  for f in locale/??/LC_MESSAGES; do
-    [[ "$f" == "locale/??/LC_MESSAGES" ]] && break
+  for f in locale/${l_path}??/LC_MESSAGES; do
+    [[ "$f" == "locale/${l_path}??/LC_MESSAGES" ]] && break
     echo -n "* merging $f/messages.po: "
-    [ -f $f/messages.po ] && msgmerge $f/messages.po locale/messages.po --output-file=$f/messages.po.new &> /dev/null
+    [ -f $f/messages.po ] && msgmerge $f/messages.po locale/${l_path}messages.po --output-file=$f/messages.po.new &> /dev/null
 
     # Do an extra check for dummy dir 'locale/en/LC_MESSAGES'
     if [ $? -ne 0 ]; then
-      [ "$f" == "locale/en/LC_MESSAGES" ] && $TRUE
+      [ "$f" == "locale/${l_path}en/LC_MESSAGES" ] && $TRUE
     fi
 
     if [ $? -eq 0 ]; then
@@ -55,13 +55,13 @@ generate_po() {
   done
 
   echo "Copying new po files, making backups..."
-  find . -name messages.po | while read f; do
+  find locale/${l_path} -name messages.po | while read f; do
 
     if [ -f $ORIG/$f ]; then
       mv $ORIG/$f $ORIG/$f.orig
     fi
 
-    echo $f | grep -q "locale/messages.po"
+    echo $f | grep -q "locale/${l_path}messages.po"
     if [ $? -ne 0 ]; then
       echo "* replaced $ORIG/$f"
       cp $f.new $ORIG/$f
@@ -114,7 +114,6 @@ EOF
 # MAIN
 #
 GENERATE=0
-COMPILE=0
 ASSUME_Y=0
 while getopts ":gyh" opt
 do
@@ -124,7 +123,8 @@ do
     y) ASSUME_Y=1;
        ;;
     h|--help)
-       echo "Usage: $(basename $0) [-g] [-y]"
+       echo "Usage: $(basename $0) [-g] [-y] method"
+       echo "       method can be 'core' or 'plugin'"
        echo "       -g extract strings from GOsa and generate po files"
        echo "       -y assume yes"
        exit 1
@@ -133,8 +133,19 @@ do
 done
 shift $(($OPTIND - 1))
 
+# Check method
+if [ "$1" != "plugin" -a "$1" != "core" ]; then
+	echo "Need explicit method 'core' or 'plugin' to create locale."
+	exit 1
+fi
+if [ "$1" == "plugin" ]; then
+	l_path=""
+else
+	l_path="core/"
+fi
+
 # Default to generate
-if [ $GENERATE -eq 0 -a $COMPILE -eq 0 ]; then
+if [ $GENERATE -eq 0 ]; then
   GENERATE=1
 fi
 
