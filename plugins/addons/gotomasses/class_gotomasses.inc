@@ -24,7 +24,7 @@ class gotomasses extends plugin
     /* Include config object */
     $this->config= &$config;
     $this->divlist = new divListMasses($this->config,$this);
-    $this->o_queue = new gosaSupportDaemon("10.3.67.111","20081","secret-gosa-password",TRUE,0.2);
+    $this->o_queue = new gosaSupportDaemon("10.3.67.111","20081","secret-gosa-password",TRUE,2);
   }
 
 
@@ -38,7 +38,7 @@ class gotomasses extends plugin
 
     $s_entry = $s_action = "";
     $arr = array( 
-        "/^stop_/"      => "stop",
+        "/^stop/"      => "stop",
         "/^stop_all/"  => "stop_all",
         "/^start/"      => "start",
         "/^start_all/"  => "start_all",
@@ -57,6 +57,8 @@ class gotomasses extends plugin
         }
       }
     }
+
+    #print_a(array($s_entry,$s_action));;
 
     /* Edit posted from list link */
     if(isset($_GET['act']) && $_GET['act'] == "edit" && isset($_GET['id']) && isset($this->tasks[$_GET['id']])){
@@ -205,7 +207,7 @@ class gotomasses extends plugin
      ************/
 
     $this->divlist->execute();
-    $entries = $this->get_queue_entries();
+    $entries = $this->get_queued_entries();
     $this->divlist->SetEntries($entries);
     return($this->divlist->Draw());
   }
@@ -254,7 +256,7 @@ class gotomasses extends plugin
   /*! \brief  Request list of queued jobs.
    *  @return Returns an array of all queued jobs.
    */
-  function get_queue_entries()
+  function get_queued_entries()
   {
     
     $entries = $this->o_queue->get_queued_entries();

@@ -39,10 +39,11 @@ class gosaSupportDaemon
   public function connect()
   {
     $this->o_sock = new Socket_Client($this->s_host,$this->i_port,TRUE,$this->f_timeout);
-    $this->o_sock->setEncryptionKey($this->s_encryption_key); 
     if($this->o_sock->connected()){ 
+      $this->o_sock->setEncryptionKey($this->s_encryption_key); 
       $this->is_connected = TRUE;
     }else{
+      $this->error = $this->o_sock->get_error();
       $this->is_connected = FALSE;
     }
   }
@@ -99,12 +100,17 @@ class gosaSupportDaemon
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
       $entries = $this->xml_to_array($str);
-      if(!isset($entries['XML'])){
-        $this->set_error("Couldn't parse xml.");
+
+      if(!array_key_exists("XML",$entries)){
+        $this->set_error("!!!Couldn't parse xml.");
         $this->disconnect();
         return;
       }else{
-        $ret = array_values($entries['XML']); 
+        if(!is_array($entries['XML'])) {
+          $ret = array();
+        }else{
+          $ret = $entries['XML']; 
+        }
       }
       return($ret);
     }
@@ -244,7 +250,7 @@ class gosaSupportDaemon
             $start_level++;
           }
           $php_stmt .= '[$xml_elem[\'tag\']] = $xml_elem[\'value\'];';
-          eval($php_stmt);
+          @eval($php_stmt);
         }
       }
     }

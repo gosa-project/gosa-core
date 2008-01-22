@@ -172,7 +172,7 @@ class Socket_Client
 		}
 
 		/* Terminate decryption handle and close module */
-		mcrypt_generic_deinit($this->td);
+		@mcrypt_generic_deinit($this->td);
 	}
 }
 ?>
