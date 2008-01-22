@@ -295,7 +295,7 @@ function install_plugin($file)
 					$source= $path."/".substr($entry->getPathName(), strlen($path) + 1);
 
 					/* Skip well known directories */
-					if (preg_match('/^\./', $source) || preg_match('/\/\.svn\//', $source)) {
+					if (preg_match('/^\.+$/', $source) || preg_match('/\/\.svn\//', $source)) {
 						continue;
 					}
 
@@ -303,7 +303,7 @@ function install_plugin($file)
 					if (preg_match("%^.*locale/%", $source)){
 						$dest= GOSA_HOME."/locale/plugin/$name/".preg_replace("%^.*locale/%", "", $source);
 					} else {
-						$dest= GOSA_HOME."/plugins/".$source;
+						$dest= GOSA_HOME."/plugins/".substr($entry->getPathName(), strlen($path) + 1);
 					}
 
 					/* Destination exists in case of directories? */
