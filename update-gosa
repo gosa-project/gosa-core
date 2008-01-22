@@ -9,19 +9,19 @@ function print_usage()
 {
 	?>
 update-gosa - class cache updated and plugin manager for GOsa
-Usage: update-gosa install-plugin dsc     Install the plugin using the dsc information
-                                          placed in the plugin source directory.
+Usage: update-gosa install dsc     Install the plugin using the dsc information
+                                   placed in the plugin source directory.
 
-       update-gosa remove-plugin plugin   Remove the plugin named "plugin" from
-                                          the current configuration.
+       update-gosa remove plugin   Remove the plugin named "plugin" from
+                                   the current configuration.
 
-       update-gosa list-plugins           Lists installed plugins
+       update-gosa lists           Lists installed plugins
 
-       update-gosa rescan-i18n            Rebuilds the translations
+       update-gosa rescan-i18n     Rebuilds the translations
 
-       update-gosa rescan-classes         Rebuilds the class list
+       update-gosa rescan-classes  Rebuilds the class list
        
-       update-gosa                        Shortcut for rescan-classes and rescan-i18n
+       update-gosa                 Shortcut for rescan-classes and rescan-i18n
 <?php
 	exit (1);
 }
@@ -163,7 +163,7 @@ function parse_ini($file)
 
 		if (isset($tmp['gosa-plugin'])){
 			$plugin= &$tmp['gosa-plugin'];
-			if (isset($plugin['name'])&& isset($plugin['description']) && isset($plugin['provides'])){
+			if (isset($plugin['name'])&& isset($plugin['description'])){
 				$res= $plugin['name'];
 				$provides[$res]= $plugin[$res];
 				$description[$res]= $plugin['description'];
@@ -349,7 +349,7 @@ if ($argc < 2){
 }
 
 switch ($argv[1]){
-        case 'install-plugin':
+        case 'install':
                 if (isset($argv[2])){
 			install_plugin($argv[2]);
 		} else {
@@ -357,10 +357,10 @@ switch ($argv[1]){
 			exit (1);
 		}
                 break;
-        case 'list-plugins':
+        case 'list':
                 list_plugins();
                 break;
-        case 'remove-plugin':
+        case 'remove':
                 echo "remove\n";
                 break;
         case 'rescan-i18n':
