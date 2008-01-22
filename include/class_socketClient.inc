@@ -111,18 +111,20 @@ class Socket_Client
 	public function read()
 	{
 		// Output the request results
-		$str = FALSE;
+		$str = "";
 		$data = "test";
 		socket_set_timeout($this->handle,$this->timeout);			
-		stream_set_blocking($this->handle,1);
-
-		/* Read while last character is Newline, or we exceeded the timelimit 
-         */
+		stream_set_blocking($this->handle,0);
 		$start = microtime();
-		while(!preg_match("/\\\n$/",$str) && get_MicroTimeDiff($start,microtime()) < $this->timeout) {
+
+		while(strlen($str) == 0 || get_MicroTimeDiff($start,microtime()) < $this->timeout) {
 			usleep(10000);
 			$data = fread($this->handle, 1024000);
-			$str .= $data;
+			if($data && strlen($data)>0) {
+				$str .= $data;
+			} else {
+				break;
+			}
 		}
 		if(get_MicroTimeDiff($start,microtime()) >= $this->timeout){
 			trigger_error(sprintf("Exceeded timeout %f while reading from socket. Time spend for reading was %f.",$this->timeout,get_MicroTimeDiff($start,microtime())));
@@ -131,31 +133,6 @@ class Socket_Client
 		$this->b_data_send = FALSE;
 		$str = $this->decrypt($str);
 		return($str);	
-
-
-#	$str = FALSE;
-#	if($this->handle){
-#
-#		/* Check if there is something to read for us */
-#		$read = array("0"=>$this->handle);
-#		$write = array();
-#		$accept = array();	
-#		$start = microtime();		
-#		$num = @stream_select($read,$write,$accept,floor($this->timeout), ceil($this->timeout*100000));
-#		$str = "";		
-#		socket_set_timeout($this->handle,$this->timeout);			
-#
-#		/* Read data if necessary */
-#		while($num && get_MicroTimeDiff($start,microtime()) < $this->timeout){
-#			$str.= fread($this->handle, 1024000);
-#			$read = array("0"=>$this->handle);	
-#			$num = stream_select($read,$write,$accept,0,200000);
-#		}
-#		$this->bytes_read = strlen($str);
-#		$this->b_data_send = FALSE;
-#		$str = $this->decrypt($str);
-#	}
-#	return $str;
 	}
 
 
