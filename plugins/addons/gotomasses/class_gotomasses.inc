@@ -38,9 +38,9 @@ class gotomasses extends plugin
 
     $s_entry = $s_action = "";
     $arr = array( 
-        "/^stop/"      => "stop",
+        "/^stop_/"      => "stop",
         "/^stop_all/"  => "stop_all",
-        "/^start/"      => "start",
+        "/^start_/"      => "start",
         "/^start_all/"  => "start_all",
 
         "/^edit_task_/"             =>  "edit",
@@ -58,8 +58,6 @@ class gotomasses extends plugin
       }
     }
 
-    #print_a(array($s_entry,$s_action));;
-
     /* Edit posted from list link */
     if(isset($_GET['act']) && $_GET['act'] == "edit" && isset($_GET['id']) && isset($this->tasks[$_GET['id']])){
       $s_action = "edit";
@@ -71,7 +69,7 @@ class gotomasses extends plugin
      * Handle Priority modifications  
      ************/
 
-    if(preg_match("/^start_/",$s_action) || preg_match("/^stop_/",$s_action)){
+    if(preg_match("/^start/",$s_action) || preg_match("/^stop/",$s_action)){
 
       switch($s_action){
         case 'start_all'   :foreach($this->list_get_selected_items() as $id){
