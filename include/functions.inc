@@ -2638,7 +2638,14 @@ function send_binary_content($data,$name,$type = "application/octet-stream")
   header("Pragma: no-cache");
   header("Cache-Control: post-check=0, pre-check=0");
   header("Content-type: ".$type."");
-  header("Content-Disposition: attachment; filename=".$name);
+
+  /* force download dialog */
+  if (preg_match('/MSIE 5.5/', $HTTP_USER_AGENT) || preg_match('/MSIE 6.0/', $HTTP_USER_AGENT)) {
+    header('Content-Disposition: filename="'.$name.'"');
+  } else {
+    header('Content-Disposition: attachment; filename="'.$name.'"');
+  }
+
   echo $data;
   exit();
 }
