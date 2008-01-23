@@ -108,7 +108,7 @@ class Socket_Client
 	}
 
 	
-	private _is_timeout($start,$stop = microtime())
+	private function _is_timeout($start,$stop = microtime())
 	{
 		$a = split("\ ",$start);
 		$b = split("\ ",$stop);
