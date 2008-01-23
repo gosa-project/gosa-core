@@ -107,6 +107,17 @@ class Socket_Client
 		return $this->b_data_send;
 	}
 
+	
+	private _is_timeout($start,$stop = microtime())
+	{
+		$a = split("\ ",$start);
+		$b = split("\ ",$stop);
+		$secs = $b[1] - $a[1];
+		$msecs= $b[0] - $a[0];
+		$ret = (float) ($secs+ $msecs);
+		return($ret => $this->timeout);
+	}
+
 
 	public function read()
 	{
@@ -117,7 +128,7 @@ class Socket_Client
 		stream_set_blocking($this->handle,0);
 		$start = microtime();
 
-		while(strlen($str) == 0 || get_MicroTimeDiff($start,microtime()) < $this->timeout) {
+		while(strlen($str) == 0 || !$this->_is_timeout($start)) {
 			usleep(10000);
 			$data = fread($this->handle, 1024000);
 			if($data && strlen($data)>0) {
@@ -126,8 +137,8 @@ class Socket_Client
 				break;
 			}
 		}
-		if(get_MicroTimeDiff($start,microtime()) >= $this->timeout){
-			trigger_error(sprintf("Exceeded timeout %f while reading from socket. Time spend for reading was %f.",$this->timeout,get_MicroTimeDiff($start,microtime())));
+		if($this->_is_timeout($start)){
+			trigger_error(sprintf("Exceeded timeout %f while reading from socket",$this->timeout));
 		}
 		$this->bytes_read = strlen($str);
 		$this->b_data_send = FALSE;
