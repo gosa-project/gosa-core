@@ -95,14 +95,14 @@ function __autoload($class_name) {
     global $class_mapping, $BASE_DIR;
 
     if ($class_mapping === NULL){
-	    echo sprintf(_("Fatal error: no class locations defined - please run '%s' to fix this"), "<b>update-gosa rescan-classes</b>");
+	    echo sprintf(_("Fatal error: no class locations defined - please run '%s' to fix this"), "<b>update-gosa</b>");
 	    exit;
     }
 
     if (isset($class_mapping[$class_name])){
       require_once($BASE_DIR."/".$class_mapping[$class_name]);
     } else {
-      echo sprintf(_("Fatal error: cannot instantiate class '%s' - execution aborted"), $class_name);
+      echo sprintf(_("Fatal error: cannot instantiate class '%s' - try running '%s' to fix this"), $class_name, "<b>update-gosa</b>");
       print_a(debug_backtrace());
       exit;
     }
