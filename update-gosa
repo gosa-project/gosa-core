@@ -155,7 +155,7 @@ function rescan_i18n()
 
 function parse_ini($file)
 {
-	global $description, $provides, $depends;
+	global $description, $provides, $depends, $versions, $conflicts;
 
 	$res= "";
 	if (file_exists($file)){
@@ -167,8 +167,12 @@ function parse_ini($file)
 				$res= $plugin['name'];
 				$provides[$res]= $plugin[$res];
 				$description[$res]= $plugin['description'];
+				$versions[$res]= $plugin['version'];
 				if (isset($plugin['depends'])){
 					$depends[$res]= explode(',', preg_replace('/\s+/', '', $plugin['depends']));
+				}
+				if (isset($plugin['conflicts'])){
+					$conflicts[$res]= explode(',', preg_replace('/\s+/', '', $plugin['conflicts']));
 				}
 			}
 		}
@@ -205,7 +209,7 @@ function load_plugins()
 	foreach ($dir as $entry){
 		if ($dir->isDir() && !preg_match('/^\./', $dir->__toString())){
 			$file= $dir->getPathName()."/plugin.dsc";
-			if (!parse_ini($file)){
+			if (parse_ini($file) == ""){
 				echo "! Warning: plugin ".$dir->getPathName()." is missing declarations\n";
 			}
 		}
@@ -215,7 +219,7 @@ function load_plugins()
 
 function list_plugins()
 {
-	global $description;
+	global $description, $versions;
 	$count= 0;
 
 	/* Load plugin list */
@@ -224,10 +228,11 @@ function list_plugins()
 	/* Show plugins */
 	foreach ($description as $name => $dsc){
 		if ($count == 0){
-			echo "Plugin\t\t| Description\n";
-			echo "------------------------------------------------------------------------\n";
+			echo "Plugin\t\t|Version |Description\n";
+			echo "----------------------------------------------------------------------------\n";
 		}
-		echo "* $name\t\t| ".$dsc."\n";
+		$ver= $versions[$name];
+		echo "$name\t\t|$ver\t |$dsc\n";
 		$count++;
 	}
 
@@ -244,7 +249,7 @@ function list_plugins()
 
 function install_plugin($file)
 {
-	global $description, $provides, $depends;
+	global $description, $provides, $depends, $conflicts;
 
 	/* Load plugin list */
 	load_plugins();
@@ -277,6 +282,13 @@ function install_plugin($file)
 					}
 				}
 
+				/* Check for conflicts */
+				foreach ($conflicts as $conf){
+					if (!in_array($conf, $provides)){
+						echo "! Warning: plugin conflicts with '$conf'\n\n";
+					}
+				}
+
 				/* Create plugstate directory and touch plugin.lst */
 				if (!mkdir (PLUGSTATE_DIR."/$name", 0755, TRUE)){
 					echo "Failed to create '".PLUGSTATE_DIR."/$name - aborted";
@@ -293,6 +305,12 @@ function install_plugin($file)
 				$all= new RecursiveIteratorIterator($dir);
 				foreach ( $all as $entry ){
 					$source= $path."/".substr($entry->getPathName(), strlen($path) + 1);
+
+					/* Skip description - it belongs to the state dir */
+					if (preg_match('/\/plugin.dsc$/', $source)){
+						copy ($source, PLUGSTATE_DIR."/$name/plugin.dsc");
+						continue;
+					}
 
 					/* Skip well known directories */
 					if (preg_match('/^\.+$/', $source) || preg_match('/\/\.svn\//', $source)) {
@@ -339,7 +357,7 @@ function install_plugin($file)
 
 
 /* Fill global values */
-$description= $provides= $depends= array();
+$description= $provides= $depends= $versions= $conflicts= array();
 
 /* Action specified? */
 if ($argc < 2){
