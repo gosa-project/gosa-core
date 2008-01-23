@@ -131,12 +131,22 @@ class Socket_Client
 		stream_set_blocking($this->handle,0);
 		$start = microtime();
 
-		while(strlen($str) == 0 || !$this->_is_timeout($start)) {
+		/* Read while 
+            * nothing was read yet
+			* the timelimit reached
+            * there is not data left on the socket.
+         */
+		while(TRUE){
 			usleep(10000);
 			$data = fread($this->handle, 1024000);
 			if($data && strlen($data)>0) {
 				$str .= $data;
 			} else {
+				if(strlen($str) != 0){
+					break;
+				}
+			}
+			if($this->_is_timeout($start)){
 				break;
 			}
 		}
