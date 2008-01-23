@@ -109,6 +109,17 @@ function __autoload($class_name) {
 }
 
 
+/*! \brief Checks if a class is available. 
+ *  @param  name String  The class name.
+ *  @return boolean      True if class is available, else false.
+ */
+function class_available($name)
+{
+  global $class_mapping;
+  return(isset($class_mapping[$name]));
+}
+
+
 /* Check if plugin is avaliable */
 function plugin_available($plugin)
 {
