@@ -118,7 +118,7 @@ class Socket_Client
 		$secs = $b[1] - $a[1];
 		$msecs= $b[0] - $a[0];
 		$ret = (float) ($secs+ $msecs);
-		return($ret => $this->timeout);
+		return($ret >= $this->timeout);
 	}
 
 
