@@ -2614,6 +2614,24 @@ function remove_objectClass($classes, &$attrs)
   }
 }
 
+/*! \brief  Initialize a file download with given content, name and data type. 
+ *  @param  data  String The content to send.
+ *  @param  name  String The name of the file.
+ *  @param  type  String The content identifier, default value is "application/octet-stream";
+ */
+function send_binary_content($data,$name,$type = "application/octet-stream")
+{
+  header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+  header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
+  header("Cache-Control: no-cache");
+  header("Pragma: no-cache");
+  header("Cache-Control: post-check=0, pre-check=0");
+  header("Content-type: ".$type."");
+  header("Content-Disposition: attachment; filename=".$name);
+  echo $data;
+  exit();
+}
+
 
 function display_error_page()
 {
