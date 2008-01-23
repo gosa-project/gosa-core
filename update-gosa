@@ -27,6 +27,20 @@ Usage: update-gosa install dsc     Install the plugin using the dsc information
 }
 
 
+function rmdirRecursive($path, $followLinks=false) {
+  $dir= opendir($path);
+  while($entry= readdir($dir)) {
+    if(is_file($path."/".$entry) || ((!$followLinks) && is_link($path."/".$entry))) {
+      unlink($path."/".$entry);
+    } elseif (is_dir($path."/".$entry) && $entry!='.' && $entry!='..') {
+      rmdirRecursive($path."/".$entry);
+    }
+  }
+  closedir($dir);
+  return rmdir($path);
+}
+
+
 /* Function to include all class_ files starting at a given directory base */
 function get_classes($folder= ".")
 {
@@ -299,6 +313,8 @@ function install_plugin($file)
 					exit (1);
 				}
 
+				echo "Installing plugin '$name'...\n";
+
 				/* Copy and fill plugin.lst */
 				$path= dirname($file);
 				$dir= new RecursiveDirectoryIterator($path);
@@ -328,21 +344,22 @@ function install_plugin($file)
 					if ($entry->isDir()){
 						if (!is_dir($dest)){
 							mkdir($dest, 0755, TRUE);
-							fwrite ($handle, "$dest");
+							fwrite ($handle, "$dest\n");
 						}
 					} else {
 						if (!is_dir(dirname($dest))){
 							mkdir(dirname($dest), 0755, TRUE);
-							fwrite ($handle, "$dest");
+							fwrite ($handle, dirname($dest)."\n");
 						}
 					}
 
 					/* Copy files */
 					if ($entry->isFile()){
 						copy ($source, $dest);
-						fwrite ($handle, "$dest");
 					}
 
+					/* Note what we did... */
+					fwrite ($handle, "$dest\n");
 				}
 
 				fclose($handle);
@@ -354,6 +371,56 @@ function install_plugin($file)
 	rescan_classes();
 	rescan_i18n();
 }
+
+
+function remove_plugin($name)
+{
+	global $description;
+
+	/* Load plugin list */
+	load_plugins();
+
+	/* Present? */
+	if (!isset($description[$name])){
+		echo "! Error: cannot find a plugin named '$name'\n\n";
+		exit (1);
+	}
+
+	/* Load information */
+	if (!file_exists(PLUGSTATE_DIR."/$name/plugin.lst")){
+		echo "! Error: cannot remove plugin '$name' - no install history found\n\n";
+		exit (1);
+	}
+
+	echo "Removing plugin '$name'...\n";
+	$contents= file(PLUGSTATE_DIR."/$name/plugin.lst");
+	$cnv= array();
+	foreach($contents as $line){
+		$entry= chop($line);
+		$cnv[strlen($entry).":$entry"]= $entry;
+	}
+	krsort($cnv);
+
+	/* Remove files first */
+	clearstatcache();
+	foreach ($cnv as $entry){
+		if (is_dir($entry)){
+			rmdir($entry);
+			continue;
+		}
+		if (file_exists($entry)){
+			unlink($entry);
+		}
+	}
+
+	/* Remove state directory for plugin */
+	rmdirRecursive(PLUGSTATE_DIR."/$name");
+
+	/* Update caches */
+	rescan_classes();
+	rescan_i18n();
+}
+
 
 
 /* Fill global values */
@@ -371,7 +438,7 @@ switch ($argv[1]){
                 if (isset($argv[2])){
 			install_plugin($argv[2]);
 		} else {
-			echo "Usage: update-gosa install-plugin dsc-file\n\n";
+			echo "Usage: update-gosa install dsc-file\n\n";
 			exit (1);
 		}
                 break;
@@ -379,7 +446,12 @@ switch ($argv[1]){
                 list_plugins();
                 break;
         case 'remove':
-                echo "remove\n";
+                if (isset($argv[2])){
+			remove_plugin($argv[2]);
+		} else {
+			echo "Usage: update-gosa remove plugin-name\n\n";
+			exit (1);
+		}
                 break;
         case 'rescan-i18n':
                 rescan_i18n();
