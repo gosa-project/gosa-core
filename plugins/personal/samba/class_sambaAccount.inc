@@ -1122,11 +1122,15 @@ class sambaAccount extends plugin
       $sambafilter= array( "depselect" => $base, "regex" => "*");
       register_global("sambafilter", $sambafilter);
     }
-
-
   }
 
-}
+  function PrepareForCopyPaste($source)
+  {
+    plugin::PrepareForCopyPaste($source);
 
+    /* Set a new SID and force a new group with new sambaPrimaryGroupSID */
+    $this->sambaSID = "";
+  }
+}
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
