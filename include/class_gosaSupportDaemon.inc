@@ -147,8 +147,14 @@ class gosaSupportDaemon
     $this->s_error = "";
     $xml_msg = "<xml>
                   <header>gosa_query_jobdb</header>
-                  <where>id</where>
-                  <id>".$id."</id>
+                  <where>
+                    <clause>
+                      <phrase>
+                        <operator>eq</operator>
+                        <id>".$id."</id>
+                      </phrase>
+                    </clause>
+                  </where>
                 </xml>";
     $this->connect();
     if(!$this->is_connected){
@@ -182,8 +188,14 @@ class gosaSupportDaemon
     $this->s_error = "";
     $xml_msg = "<xml>
                   <header>gosa_query_jobdb</header>
-                  <where>id</where>
-                  <id>".$id."</id>
+                  <where>
+                    <clause>
+                      <phrase>
+                        <operator>eq</operator>
+                        <id>".$id."</id>
+                      </phrase>
+                    </clause>
+                  </where>
                 </xml>";
     $this->connect();
     if(!$this->is_connected){
@@ -215,8 +227,14 @@ class gosaSupportDaemon
 
     $xml_msg = "<xml>
                   <header>gosa_delete_jobdb_entry</header>
-                  <where>id</where>
-                  <id>".$id."</id>
+                  <where>
+                    <clause>
+                      <phrase>
+                        <operator>eq</operator>
+                        <id>".$id."</id>
+                      </phrase>
+                    </clause>
+                  </where>
                 </xml>";
     $this->connect();
     if($this->is_connected){
