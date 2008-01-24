@@ -75,16 +75,10 @@ class gotomasses extends plugin
     if(preg_match("/^start/",$s_action) || preg_match("/^stop/",$s_action)){
 
       switch($s_action){
-        case 'start_all'   :foreach($this->list_get_selected_items() as $id){
-                                $this->start_queue_entry($id);
-                            }
-                            break;
-        case 'start'       :$this->start_queue_entry($s_entry);break;
-        case 'stop_all'    :foreach($this->list_get_selected_items() as $id){
-                                $this->stop_queue_entry($id);
-                            }
-                            break;
-        case 'stop'        : $this->stop_queue_entry($s_entry);break;
+        case 'start_all'   : $this->start_queue_entries($this->list_get_selected_items());break;
+        case 'start'       : $this->start_queue_entries(array($s_entry));break; 
+        case 'stop_all'    : $this->stop_queue_entries ($this->list_get_selected_items());break;
+        case 'stop'        : $this->stop_queue_entries (array($s_entry));break; 
         default : trigger_error("Undefined priority setting used.");
       }
       if($this->o_queue->is_error()){
@@ -228,40 +222,30 @@ class gotomasses extends plugin
   /*! \brief  Force queue job to be done as far as possible.
    *  @return Boolean TRUE in case of success, else FALSE. 
    */
-  private function start_queue_entry($id)
+  private function start_queue_entries($ids)
   {
-    $attr = $this->o_queue->get_entry_by_id($id); 
-    if(is_array($attr)){
-      $data = array("timestamp" => date("YmdHis"),
-                    "status"  => "-");
-      if(!$this->o_queue->update_entry($id,$data)){
-        msg_dialog::display(_("Error"), sprintf(_("Could not update queue entry: %s"),$id) , ERROR_DIALOG);
-        return(FALSE);
-      }else{
-        return(FALSE);
-      }
+    $data = array("timestamp" => date("YmdHis"),
+                  "status"    => "-");
+    if(!$this->o_queue->update_entries($ids,$data)){
+      msg_dialog::display(_("Error"), sprintf(_("Could not update queue entry: %s"),$id) , ERROR_DIALOG);
+      return(FALSE);
     }
-    return(FALSE);
+    return(TRUE);
   }
 
 
   /*! \brief Stops the specified queue entry from execution.
    *  @return Boolean TRUE in case of success, else FALSE. 
    */
-  private function stop_queue_entry($id)
+  private function stop_queue_entries($ids)
   {
-    $attr = $this->o_queue->get_entry_by_id($id); 
-    if(is_array($attr)){
-      $data = array("timestamp" => "20370101010000",
-                    "status"  => "stopped");
-      if(!$this->o_queue->update_entry($id,$data)){
-        msg_dialog::display(_("Error"), sprintf(_("Could not update queue entry: %s"),$id) , ERROR_DIALOG);
-        return(FALSE);
-      }else{
-        return(FALSE);
-      }
+    $data = array("timestamp" => "20490101010101",
+                  "status"    => "Stoppped");
+    if(!$this->o_queue->update_entries($ids,$data)){
+      msg_dialog::display(_("Error"), sprintf(_("Could not update queue entry: %s"),$id) , ERROR_DIALOG);
+      return(FALSE);
     }
-    return(FALSE);
+    return(TRUE);
   }
 
 
@@ -270,13 +254,9 @@ class gotomasses extends plugin
    */
   function get_queued_entries()
   {
-    
-
     $start  = $this->range * $this->start; 
     $stop   = $start + $this->range; 
-    
     $entries = $this->o_queue->get_queued_entries($start,$stop);
-
     if(!is_array($entries)){
       msg_dialog::display(_("Error"), sprintf(_("Cannot load queue entries: %s"), "<br><br>".$this->o_queue->get_error()), ERROR_DIALOG);
       return(array());
