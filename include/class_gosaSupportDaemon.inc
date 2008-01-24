@@ -89,7 +89,7 @@ class gosaSupportDaemon
   /*! \brief  Returns an array containing all queued entries.
       @return Array All queued entries as an array.
    */
-  public function get_queued_entries()
+  public function get_queued_entries($from=0,$to=10)
   {
     $this->b_error = FALSE;
     $this->s_error = "";
@@ -99,9 +99,14 @@ class gosaSupportDaemon
                   <header>gosa_query_jobdb</header>
                   <where>
                     <clause>
+                      <connector>and</connector>
                       <phrase>
                         <operator>gt</operator>
-                        <id>-1</id>
+                        <ROWID>".$from."</ROWID>
+                      </phrase>
+                      <phrase>
+                        <operator>lt</operator>
+                        <ROWID>".$to."</ROWID>
                       </phrase>
                     </clause>
                   </where>
