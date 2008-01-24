@@ -65,8 +65,9 @@ class gosaSupportDaemon
       $this->is_connected = TRUE;
     }else{
       $this->error = $this->o_sock->get_error();
-      $this->is_connected = FALSE;
+      $this->disconnect();
     }
+    return($this->is_connected);
   }
 
 
@@ -114,6 +115,7 @@ class gosaSupportDaemon
   {
     $this->b_error = FALSE;
     $this->s_error = "";
+    $ret = array();
 
     $xml_msg = "<xml>
       <header>gosa_query_jobdb</header>
@@ -138,28 +140,15 @@ class gosaSupportDaemon
       </limit>
       </xml>";
 
-    $this->connect();
-    if($this->is_connected){
+    if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
       $entries = $this->xml_to_array($str);
-
-      if(!array_key_exists("XML",$entries)){
-        $this->set_error("!!!Couldn't parse xml.");
-        $this->disconnect();
-        return;
-      }else{
-        if(!is_array($entries['XML'])) {
-          $ret = array();
-        }else{
-          $ret = $entries['XML']; 
-        }
+      if(isset($entries['XML']) && is_array($entries['XML'])){
+        $ret = $entries; 
       }
-      return($ret);
     }
-    $this->set_error("Could not establish socket connection.");
-    $this->disconnect();
-    return;
+    return($ret);
   }
 
   /*! \brief  Checks if the given ids are used queue ids.
@@ -192,23 +181,17 @@ class gosaSupportDaemon
       </where>
       </xml>";
 
-    $this->connect();
-    if(!$this->is_connected){
-      $this->set_error("Could not establish socket connection.");
-    }else{
+    if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
-      $entries = $this->xml_to_array($str); 
-      if(isset($entries['XML'])){
+      $entries = $this->xml_to_array($str);
+      if(isset($entries['XML']) && is_array($entries['XML'])){
         foreach($entries['XML'] as $entry){
           $ret[] = $entry['ID'];
         }
-        $this->disconnect();
-        return($ret);
       }
     }
-    $this->disconnect();
-    return(FALSE);
+    return($ret);
   }
 
 
@@ -243,22 +226,15 @@ class gosaSupportDaemon
       </where>
       </xml>";
 
-    $this->connect();
-    if(!$this->is_connected){
-      $this->set_error("Could not establish socket connection.");
-    }else{
+    if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
       $entries = $this->xml_to_array($str); 
-      if(!isset($entries['XML'])){
-        $this->set_error("Entry with id (".$id.") not found.");
-        $this->disconnect();
-      }else{
+      if(isset($entries['XML'])){
         $ret = $entries['XML'];
-        return($ret);
       }
     }
-    return;
+    return($ret);
   }
 
 
@@ -286,19 +262,15 @@ class gosaSupportDaemon
       </clause>
       </where>
       </xml>";
-    $this->connect();
-    if(!$this->is_connected){
-      $this->set_error("Could not establish socket connection.");
-    }else{
+
+    if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
       $entries = $this->xml_to_array($str); 
       if(isset($entries['XML']['ANSWER1'])){
-        $this->disconnect();
         return(TRUE);
       }
     }
-    $this->disconnect();
     return(FALSE);
   }
 
@@ -316,6 +288,7 @@ class gosaSupportDaemon
 
     $this->b_error = FALSE;
     $this->s_error = "";
+    $ret = array();
     $xml_msg = "<xml>
       <header>gosa_query_jobdb</header>
       <where>
@@ -327,22 +300,15 @@ class gosaSupportDaemon
       </clause>
       </where>
       </xml>";
-    $this->connect();
-    if(!$this->is_connected){
-      $this->set_error("Could not establish socket connection.");
-    }else{
+    if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
       $entries = $this->xml_to_array($str); 
       if(!isset($entries['XML']['ANSWER1'])){
-        $this->set_error("Entry with id (".$id.") not found.");
-        $this->disconnect();
-      }else{
         $ret = $entries['XML']['ANSWER1'];
-        return($ret);
       }
     }
-    return;
+    return($ret);
   }
 
 
@@ -378,12 +344,14 @@ class gosaSupportDaemon
     $this->b_error = FALSE;
     $this->s_error = "";
 
-    $this->connect();
-    if($this->is_connected){
+    if($this->connect()){
       $this->o_sock->write($xml_msg);
-      return(TRUE);
+      $str = $this->o_sock->read();
+      $entries = $this->xml_to_array($str);
+      if(isset($entries['XML'])){
+        return(TRUE);
+      }
     }
-    $this->set_error("Could not establish socket connection.");
     return(FALSE);
   }
 
@@ -409,12 +377,14 @@ class gosaSupportDaemon
       </clause>
       </where>
       </xml>";
-    $this->connect();
-    if($this->is_connected){
+    if($this->connect()){
       $this->o_sock->write($xml_msg);
-      return(TRUE);
+      $str = $this->o_sock->read();
+      $entries = $this->xml_to_array($str);
+      if(isset($entries['XML'])){
+        return(TRUE);
+      }
     }
-    $this->set_error("Could not establish socket connection.");
     return(FALSE);
   }
 
@@ -432,7 +402,6 @@ class gosaSupportDaemon
 
     $err_id = xml_get_error_code($parser);
     if($err_id){
-      $this->set_error(xml_error_string(xml_get_error_code($parser)));
       xml_parser_free($parser);
     }else{
       xml_parser_free($parser);
@@ -456,6 +425,10 @@ class gosaSupportDaemon
           @eval($php_stmt);
         }
       }
+    }
+    if(!isset($params['XML'])){
+      $this->set_error(_("Could not parse XML."));
+      $params = array();
     }
     return($params); 
   }
@@ -501,17 +474,14 @@ class gosaSupportDaemon
       ".$attr." 
       </update>
       </xml>";
-    $this->connect();
-    if($this->is_connected){
+    if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str      = trim($this->o_sock->read());
       $entries = $this->xml_to_array($str);
-      if(!empty($str)){
+      if(isset($entries['XML'])){
         return(TRUE);
       }
-      return(FALSE);
     }
-    $this->set_error("Could not establish socket connection.");
     return(FALSE);
   }
 
@@ -525,17 +495,15 @@ class gosaSupportDaemon
   {
     $xml_msg ="<xml> <header>gosa_count_jobdb</header></xml>";
     $this->connect();
-    if($this->is_connected){
+    if($this->connect()){
       $this->o_sock->write($xml_msg);
-      $str      = trim($this->o_sock->read());
+      $str     = trim($this->o_sock->read());
       $entries = $this->xml_to_array($str);
-      if(isset($entries['XML']['COUNT'])){
+      if(isset($entries['XML'])){
         return($entries['XML']['COUNT']);
       }
-      return;
     }
-    $this->set_error("Could not establish socket connection.");
-    return;
+    return(-1);
   } 
 }
 
