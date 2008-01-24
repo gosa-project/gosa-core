@@ -89,8 +89,7 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.1.15 NAME 'gotoXdmcpServer'
 	DESC 'GOto - Gonicus Terminal Concept, value xdmcpServer.'
 	EQUALITY caseIgnoreIA5Match
 	SUBSTR caseIgnoreIA5SubstringsMatch
-	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
-	SINGLE-VALUE)
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
 	
 attributetype ( 1.3.6.1.4.1.10098.1.1.1.16 NAME 'gotoXMethod'
 	DESC 'GOto - Gonicus Terminal Concept, value xMethod.'
