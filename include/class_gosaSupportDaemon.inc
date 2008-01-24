@@ -1,5 +1,26 @@
 <?php
 
+
+/*
+   __construct        - Create a new deamon handle. 
+   connect            - Connect to deamon socket.
+   disconnect         - Disconnect from socket.
+   set_error          - Sets a new error.
+   is_error           - Returns TRUE if there was an error.
+   get_error          - Returns the last error or "".
+   get_queued_entries - Returns all queued entries, with limitations.
+   ids_exist          - Checks if the given id exists.
+   get_entries_by_id  - Returns a set of entries.
+   id_exists          - Checks if a set entries exists.
+   get_entry_by_id    - Returns a single entry.
+   remove_entries     - Remove a set of entries.
+   remove_entry       - Removes a single entry.
+   update_entry       - Updates a single entry.
+   xml_to_array       - XML to Array. 
+*/
+
+
+
 class gosaSupportDaemon
 {
   private $o_sock       = NULL;
@@ -93,7 +114,6 @@ class gosaSupportDaemon
   {
     $this->b_error = FALSE;
     $this->s_error = "";
-
 
     $xml_msg = "<xml>
       <header>gosa_query_jobdb</header>
@@ -440,12 +460,12 @@ class gosaSupportDaemon
     @param  Array   The variables to update.   
     @return Boolean Returns TRUE on success. 
    */
-  public function update_entry($id,$entry)
+  public function update_entries($ids,$entry)
   {
     $this->b_error = FALSE;
     $this->s_error = "";
-    if(!is_numeric($id)){
-      trigger_error("Requires an integer value as ID parameter.");
+    if(!is_array($ids)){
+      trigger_error("Requires an array as first parameter.");
       return;
     }
 
@@ -458,11 +478,18 @@ class gosaSupportDaemon
     foreach($entry as $name => $entry){
       $attr.="<".strtolower($name).">".$entry."</".strtolower($name).">\n";
     }
-
-    $xml_msg = "<xml> 
+    $xml_msg = "<xml>
       <header>gosa_update_status_jobdb_entry</header>
       <where>
-      <id>".$id."</id> 
+      <clause>
+      <connector>or</connector>";
+    foreach($ids as $id){
+      $xml_msg .= "<phrase>
+        <operator>eq</operator>
+        <id>".$id."</id>
+        </phrase>";
+    }
+    $xml_msg .= "</clause>
       </where>
       <update>
       ".$attr." 
