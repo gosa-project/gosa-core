@@ -9,7 +9,7 @@ class divListMasses extends MultiSelectWindow
 
   var $parent             ;
   var $ui                 ;
-
+  var $Regex  = "*";
   var $wake = TRUE;  
   
   function divListMasses (&$config,$parent)
@@ -24,11 +24,6 @@ class divListMasses extends MultiSelectWindow
     $this->EnableSaveButton(FALSE);
     $this->SetInformation(_("This menu allows you to remove and change the properties of GOsa deamon tasks."));
 
-    foreach($this->parent->get_actions() as $name => $desc){
-      $this->$name = TRUE;
-      $this->AddCheckBox($name,sprintf(_("Display entries with action %s."),$desc),
-                               sprintf(_("Display entries with action %s."),$desc),TRUE);
-    }
     $plug  = $_GET['plug'];
 
     /* Toggle all selected / deselected */
@@ -88,14 +83,6 @@ class divListMasses extends MultiSelectWindow
     $plug = $_GET['plug'];
 #    $edit_link = "<div style='width:100%;overflow:hidden;'><nobr><a href='?plug=".$_GET['plug']."&act=edit&id=%id%'>%str%</nobr></div>";
     $edit_link = "%str%";
-
-    /* Create action filter array, to sort out those actions we do not want to see */
-    $allowed_action = array();
-    foreach($this->parent->get_actions() as $name => $desc){
-      if($this->$name){
-        $allowed_action[] = $name;
-      }
-    }
 
     $colors[0] = "#DDDDDD";
     $colors[1] = "#EEEEEE";

@@ -38,7 +38,7 @@ class gotomasses extends plugin
     /************
      * Handle posts 
      ************/
-
+    
     $s_entry = $s_action = "";
     $arr = array( 
         "/^stop_/"      => "stop",
@@ -104,18 +104,17 @@ class gotomasses extends plugin
         }
 
         $this->ids_to_remove = $ids;
-        $tmp = "";
-
         $ret = $this->o_queue->ids_exist($this->ids_to_remove);
         $ret = $this->o_queue->get_entries_by_id($ret);
 
+        $tmp = "";
         foreach($ret as $task){
-           $tmp.= "\n".$task['HEADERTAG']."&nbsp;".$task['MACADDRESS'];
-       }
-       $smarty->assign("multiple", TRUE); 
-       $smarty->assign("info",sprintf(_("Your are about to delete the following tasks: %s"),"<pre>".$tmp."</pre>"));
-       $this->current = $s_entry;
-       return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
+          $tmp.= "\n".$task['ID']." - ".$task['HEADERTAG']."&nbsp;".$task['MACADDRESS'];
+        }
+        $smarty->assign("multiple", TRUE); 
+        $smarty->assign("info",sprintf(_("Your are about to delete the following tasks: %s"),"<pre>".$tmp."</pre>"));
+        $this->current = $s_entry;
+        return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
       }
     }
 
@@ -213,6 +212,9 @@ class gotomasses extends plugin
                                     "100"=> "100",
                                     "200"=> "200",
                                     "9999" => "*"));
+
+    $count = $this->o_queue->number_of_queued_entries();
+    $smarty->assign("range_selector", range_selector($count, $this->start, $this->range,"range"));
     $smarty->assign("range",$this->range);
     $smarty->assign("div",$this->divlist->Draw());
     return($smarty->fetch (get_template_path('gotomasses.tpl', TRUE, dirname(__FILE__))));
@@ -309,13 +311,10 @@ class gotomasses extends plugin
     if(isset($_POST['range']) && is_numeric($_POST['range'])){
       $this->range = $_POST['range'];
     }
-    if(isset($_POST['next_page'])){
-      $this->start ++;
-    }
-    if(isset($_POST['last_page'])){
-      $this->start --;
-      if($this->start < 0 ){
-        $this->start = 0;
+    if(isset($_GET['start'])){
+      $start = $_GET['start'];
+      if(is_numeric($start) && $start > 0){
+        $this->start = $start;
       }
     }
   }
