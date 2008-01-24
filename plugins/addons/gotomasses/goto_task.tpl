@@ -20,7 +20,7 @@
 						{t}Status{/t}
 					</td>
 					<td>	
-						{$STATUS}
+						<input type="text" name="status" value="{$STATUS}">
 					</td>	
 				</tr>
  	            <tr>
@@ -28,7 +28,7 @@
                         {t}Mac{/t}
                     </td>
                     <td>
-                        {$MACADDRESS}
+                        <input type="text" name="macaddress" value="{$MACADDRESS}">
                     </td>
                 </tr>
 				<tr>

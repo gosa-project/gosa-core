@@ -166,7 +166,7 @@ class gotomasses extends plugin
       }else{  
 
         if($this->o_queue->id_exists($this->current)){
-          $this->o_queue->update_entry($this->current,$this->dialog->save());
+          $this->o_queue->update_entries(array($this->current),$this->dialog->save());
         }else{
           $tmp = $this->dialog->save();
           $tmp2= array();

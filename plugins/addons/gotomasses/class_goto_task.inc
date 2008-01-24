@@ -46,12 +46,17 @@ class goto_task extends plugin
         $this->data['HEADERTAG'] = $tag;
       }
     }
+    foreach(array("status","macaddress") as $attr){
+      if(isset($_POST[$attr])){
+        $this->data[strtoupper($attr)] = $_POST[$attr];
+      }
+    }
   }
 
   function save()
   {
     $tmp = array();   
-    foreach($this->attributes as $attr){
+    foreach(array("STATUS","MACADDRESS","HEADERTAG") as $attr){
       if(isset($this->data[$attr])){
         $tmp[$attr] = $this->data[$attr];
       }
