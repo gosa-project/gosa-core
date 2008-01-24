@@ -19,6 +19,9 @@ class gotomasses extends plugin
   var $sort_by  = "QueuePosition";
   var $sort_dir = "up";
 
+  var $range    = 25;
+  var $start    = 0;
+
   function gotomasses(&$config, $dn= NULL)
   {
     /* Include config object */
@@ -207,7 +210,21 @@ class gotomasses extends plugin
     $this->divlist->execute();
     $entries = $this->get_queued_entries();
     $this->divlist->SetEntries($entries);
-    return($this->divlist->Draw());
+
+
+    $smarty = get_smarty();
+    $smarty->assign("start",$this->start);
+    $smarty->assign("start_real", ($this->start + 1));
+    $smarty->assign("ranges", array("10" => "10",
+                                    "20" => "20",
+                                    "25" => "25",
+                                    "50" => "50",
+                                    "100"=> "100",
+                                    "200"=> "200",
+                                    "9999" => "*"));
+    $smarty->assign("range",$this->range);
+    $smarty->assign("div",$this->divlist->Draw());
+    return($smarty->fetch (get_template_path('gotomasses.tpl', TRUE, dirname(__FILE__))));
   }
 
 
@@ -257,7 +274,11 @@ class gotomasses extends plugin
   function get_queued_entries()
   {
     
-    $entries = $this->o_queue->get_queued_entries();
+
+    $start  = $this->range * $this->start; 
+    $stop   = $start + $this->range; 
+    
+    $entries = $this->o_queue->get_queued_entries($start,$stop);
 
     if(!is_array($entries)){
       msg_dialog::display(_("Error"), sprintf(_("Cannot load queue entries: %s"), "<br><br>".$this->o_queue->get_error()), ERROR_DIALOG);
@@ -307,6 +328,18 @@ class gotomasses extends plugin
         }
       }
       $this->sort_by = $sort;
+    }
+    if(isset($_POST['range']) && is_numeric($_POST['range'])){
+      $this->range = $_POST['range'];
+    }
+    if(isset($_POST['next_page'])){
+      $this->start ++;
+    }
+    if(isset($_POST['last_page'])){
+      $this->start --;
+      if($this->start < 0 ){
+        $this->start = 0;
+      }
     }
   }
 
