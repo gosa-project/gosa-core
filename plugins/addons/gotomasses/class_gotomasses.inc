@@ -111,26 +111,23 @@ class gotomasses extends plugin
 
         $this->ids_to_remove = $ids;
         $tmp = "";
-        foreach($this->ids_to_remove as $key => $id){
-          if($this->o_queue->id_exists($id)){
-            $task = $this->o_queue->get_entry($id);
-            $tmp.= "\n".$task['HEADERTAG']."&nbsp;".$task['MACADDRESS'];
-          }else{
-            unset($this->ids_to_remove[$key]);
-          }
-        }
-        $smarty->assign("multiple", TRUE); 
-        $smarty->assign("info",sprintf(_("Your are about to delete the following tasks: %s"),"<pre>".$tmp."</pre>"));
-        $this->current = $s_entry;
-        return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
+
+        $ret = $this->o_queue->ids_exist($this->ids_to_remove);
+        $ret = $this->o_queue->get_entries_by_id($ret);
+
+        foreach($ret as $task){
+           $tmp.= "\n".$task['HEADERTAG']."&nbsp;".$task['MACADDRESS'];
+       }
+       $smarty->assign("multiple", TRUE); 
+       $smarty->assign("info",sprintf(_("Your are about to delete the following tasks: %s"),"<pre>".$tmp."</pre>"));
+       $this->current = $s_entry;
+       return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
       }
     }
 
     /* Remove specified tasks */
     if(count($this->ids_to_remove) && isset($_POST['delete_multiple_confirm'])){
-      foreach($this->ids_to_remove as $id){
-        $this->o_queue->remove_entry($id);
-      }
+      $this->o_queue->remove_entries($this->ids_to_remove);
       $this->save();
     }
 
@@ -146,7 +143,7 @@ class gotomasses extends plugin
 
     /* Edit selected entry */
     if($s_action == "edit"){
-      $entry = $this->o_queue->get_entry($s_entry);
+      $entry = $this->o_queue->get_entry_by_id($s_entry);
       if($entry){
         $this->dialog = new goto_task($this->config,$this,$entry);
         $this->current = $s_entry;
@@ -233,7 +230,7 @@ class gotomasses extends plugin
    */
   private function start_queue_entry($id)
   {
-    $attr = $this->o_queue->get_entry($id); 
+    $attr = $this->o_queue->get_entry_by_id($id); 
     if(is_array($attr)){
       $data = array("timestamp" => date("YmdHis"),
                     "status"  => "-");
@@ -253,7 +250,7 @@ class gotomasses extends plugin
    */
   private function stop_queue_entry($id)
   {
-    $attr = $this->o_queue->get_entry($id); 
+    $attr = $this->o_queue->get_entry_by_id($id); 
     if(is_array($attr)){
       $data = array("timestamp" => "20370101010000",
                     "status"  => "stopped");
