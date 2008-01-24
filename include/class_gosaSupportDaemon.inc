@@ -94,7 +94,19 @@ class gosaSupportDaemon
     $this->b_error = FALSE;
     $this->s_error = "";
 
-    $xml_msg = "<xml><header>gosa_query_jobdb</header><where><status>*</status></where></xml>";
+
+    $xml_msg = "<xml>
+                  <header>gosa_query_jobdb</header>
+                  <where>
+                    <clause>
+                      <phrase>
+                        <operator>gt</operator>
+                        <id>-1</id>
+                      </phrase>
+                    </clause>
+                  </where>
+                </xml>";
+
     $this->connect();
     if($this->is_connected){
       $this->o_sock->write($xml_msg);
