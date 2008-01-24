@@ -15,7 +15,7 @@
    get_entry_by_id    - Returns a single entry.
    remove_entries     - Remove a set of entries.
    remove_entry       - Removes a single entry.
-   update_entry       - Updates a single entry.
+   update_entries     - Updates a set of entries.
    xml_to_array       - XML to Array. 
 */
 
@@ -119,11 +119,17 @@ class gosaSupportDaemon
       <header>gosa_query_jobdb</header>
       <where>
       <clause>
-      <connector>and</connector>
-      <phrase>
-      <operator>gt</operator>
-      <ROWID>-1</ROWID>
-      </phrase>
+      <connector>or</connector>
+
+        <phrase>
+        <operator>eq</operator>
+        <HEADERTAG>ping</HEADERTAG>
+        </phrase>
+
+        <phrase>
+        <operator>eq</operator>
+        <HEADERTAG>sayHello</HEADERTAG>
+        </phrase>
       </clause>
       </where>
       <limit>
@@ -508,6 +514,29 @@ class gosaSupportDaemon
     $this->set_error("Could not establish socket connection.");
     return(FALSE);
   }
+
+
+  /*! \brief  Updates an entry with a set of new values, 
+    @param  Integer The ID of the entry, we want to update.
+    @param  Array   The variables to update.   
+    @return Boolean Returns TRUE on success. 
+   */
+  public function number_of_queued_entries()
+  {
+    $xml_msg ="<xml> <header>gosa_count_jobdb</header></xml>";
+    $this->connect();
+    if($this->is_connected){
+      $this->o_sock->write($xml_msg);
+      $str      = trim($this->o_sock->read());
+      $entries = $this->xml_to_array($str);
+      if(isset($entries['XML']['COUNT'])){
+        return($entries['XML']['COUNT']);
+      }
+      return;
+    }
+    $this->set_error("Could not establish socket connection.");
+    return;
+  } 
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
