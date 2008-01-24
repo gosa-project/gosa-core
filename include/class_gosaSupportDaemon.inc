@@ -15,11 +15,11 @@ class gosaSupportDaemon
 
 
   /*! \brief  Creates a new gosaSupportDaemon object.
-      @param string   Host    The Host where the deamon is running on.  
-      @param integer  Port    The port which the deamon use.
-      @param string   Key     The encryption string.
-      @param boolean  Connect Directly connect to deamon socket.
-      @param float    Timeout The timelimit for all socket actions.
+    @param string   Host    The Host where the deamon is running on.  
+    @param integer  Port    The port which the deamon use.
+    @param string   Key     The encryption string.
+    @param boolean  Connect Directly connect to deamon socket.
+    @param float    Timeout The timelimit for all socket actions.
    */
   public function __construct($host,$port,$key="secret-gosa-password",$connect=TRUE,$timeout=0.2)
   {
@@ -34,7 +34,7 @@ class gosaSupportDaemon
 
 
   /*! \brief  Establish deamon connection. 
-      @return boolean Returns true if the connection was succesfully established. 
+    @return boolean Returns true if the connection was succesfully established. 
    */
   public function connect()
   {
@@ -59,7 +59,7 @@ class gosaSupportDaemon
 
 
   /*! \brief  Sets an error message, which can be returned with get_error().
-      @param  string  The Error message,
+    @param  string  The Error message,
    */
   private function set_error($str)
   {
@@ -69,7 +69,7 @@ class gosaSupportDaemon
 
 
   /*! \brief  Checks if an error occured.
-      @return boolean returns TRUE or FALSE, whether there is an error or not.
+    @return boolean returns TRUE or FALSE, whether there is an error or not.
    */
   public function is_error()
   {
@@ -78,7 +78,7 @@ class gosaSupportDaemon
 
 
   /*! \brief  Returns the last error. 
-      @return Returns the last error.
+    @return Returns the last error.
    */
   public function get_error()
   {
@@ -87,7 +87,7 @@ class gosaSupportDaemon
 
 
   /*! \brief  Returns an array containing all queued entries.
-      @return Array All queued entries as an array.
+    @return Array All queued entries as an array.
    */
   public function get_queued_entries($from=0,$to=10)
   {
@@ -96,21 +96,21 @@ class gosaSupportDaemon
 
 
     $xml_msg = "<xml>
-                  <header>gosa_query_jobdb</header>
-                  <where>
-                    <clause>
-                      <connector>and</connector>
-                      <phrase>
-                        <operator>gt</operator>
-                        <ROWID>".$from."</ROWID>
-                      </phrase>
-                      <phrase>
-                        <operator>lt</operator>
-                        <ROWID>".$to."</ROWID>
-                      </phrase>
-                    </clause>
-                  </where>
-                </xml>";
+      <header>gosa_query_jobdb</header>
+      <where>
+      <clause>
+      <connector>and</connector>
+      <phrase>
+      <operator>gt</operator>
+      <ROWID>-1</ROWID>
+      </phrase>
+      </clause>
+      </where>
+      <limit>
+      <from>".$from."</from>
+      <to>".$to."</to>
+      </limit>
+      </xml>";
 
     $this->connect();
     if($this->is_connected){
@@ -136,31 +136,130 @@ class gosaSupportDaemon
     return;
   }
 
+  /*! \brief  Checks if the given ids are used queue ids.
+    @param  Array   The ids we want to check..
+    @return Array   An array containing all ids as index and TRUE/FALSE as value. 
+   */
+  public function ids_exist($ids)
+  {
+    if(!is_array($ids)){
+      trigger_error("Requires an array as parameter.");
+      return;
+    }
+    $this->b_error = FALSE;
+    $this->s_error = "";
+
+    $ret = array();
+
+    $xml_msg = "<xml>
+      <header>gosa_query_jobdb</header>
+      <where>
+      <clause>
+      <connector>or</connector>";
+    foreach($ids as $id){
+      $xml_msg .= "<phrase>
+        <operator>eq</operator>
+        <id>".$id."</id>
+        </phrase>";
+    }
+    $xml_msg .= "</clause>
+      </where>
+      </xml>";
+
+    $this->connect();
+    if(!$this->is_connected){
+      $this->set_error("Could not establish socket connection.");
+    }else{
+      $this->o_sock->write($xml_msg);
+      $str = trim($this->o_sock->read());
+      $entries = $this->xml_to_array($str); 
+      if(isset($entries['XML'])){
+        foreach($entries['XML'] as $entry){
+          $ret[] = $entry['ID'];
+        }
+        $this->disconnect();
+        return($ret);
+      }
+    }
+    $this->disconnect();
+    return(FALSE);
+  }
+
+
+  /*! \brief  Returns an entry containing all requested ids.
+    @param  Array   The IDs of the entries we want to return.
+    @return Array   Of the requested entries. 
+   */
+  public function get_entries_by_id($ids)
+  {
+    if(!is_array($ids)){
+      trigger_error("Requires an array as parameter.");
+      return;
+    }
+    $this->b_error = FALSE;
+    $this->s_error = "";
+
+    $ret = array();
+
+    $xml_msg = "<xml>
+      <header>gosa_query_jobdb</header>
+      <where>
+      <clause>
+      <connector>or</connector>";
+    foreach($ids as $id){
+      $xml_msg .= "<phrase>
+        <operator>eq</operator>
+        <id>".$id."</id>
+        </phrase>";
+      $ret[$id] = FALSE;
+    }
+    $xml_msg .= "</clause>
+      </where>
+      </xml>";
+
+    $this->connect();
+    if(!$this->is_connected){
+      $this->set_error("Could not establish socket connection.");
+    }else{
+      $this->o_sock->write($xml_msg);
+      $str = trim($this->o_sock->read());
+      $entries = $this->xml_to_array($str); 
+      if(!isset($entries['XML'])){
+        $this->set_error("Entry with id (".$id.") not found.");
+        $this->disconnect();
+      }else{
+        $ret = $entries['XML'];
+        return($ret);
+      }
+    }
+    return;
+  }
+
 
   /*! \brief  Checks if the given id is in use.
-      @param  Integer The ID of the entry.
-      @return Boolean TRUE if entry exists. 
+    @param  Integer The ID of the entry.
+    @return Boolean TRUE if entry exists. 
    */
   public function id_exists($id)
   {
     if(!is_numeric($id)){
-      trigger_error("gosaSupportDaemon::get_entry() requires an integer value as ID parameter.");
+      trigger_error("Requires an integer as parameter.");
       return;
     }
 
     $this->b_error = FALSE;
     $this->s_error = "";
     $xml_msg = "<xml>
-                  <header>gosa_query_jobdb</header>
-                  <where>
-                    <clause>
-                      <phrase>
-                        <operator>eq</operator>
-                        <id>".$id."</id>
-                      </phrase>
-                    </clause>
-                  </where>
-                </xml>";
+      <header>gosa_query_jobdb</header>
+      <where>
+      <clause>
+      <phrase>
+      <operator>eq</operator>
+      <id>".$id."</id>
+      </phrase>
+      </clause>
+      </where>
+      </xml>";
     $this->connect();
     if(!$this->is_connected){
       $this->set_error("Could not establish socket connection.");
@@ -177,31 +276,31 @@ class gosaSupportDaemon
     return(FALSE);
   }
 
-  
+
   /*! \brief  Returns an entry from the gosaSupportQueue
-      @param  Integer The ID of the entry we want to return.
-      @return Array   Of the requested entry. 
+    @param  Integer The ID of the entry we want to return.
+    @return Array   Of the requested entry. 
    */
-  public function get_entry($id)
+  public function get_entry_by_id($id)
   {
     if(!is_numeric($id)){
-      trigger_error("gosaSupportDaemon::get_entry() requires an integer value as ID parameter.");
+      trigger_error("Requires an integer as parameter.");
       return;
     }
 
     $this->b_error = FALSE;
     $this->s_error = "";
     $xml_msg = "<xml>
-                  <header>gosa_query_jobdb</header>
-                  <where>
-                    <clause>
-                      <phrase>
-                        <operator>eq</operator>
-                        <id>".$id."</id>
-                      </phrase>
-                    </clause>
-                  </where>
-                </xml>";
+      <header>gosa_query_jobdb</header>
+      <where>
+      <clause>
+      <phrase>
+      <operator>eq</operator>
+      <id>".$id."</id>
+      </phrase>
+      </clause>
+      </where>
+      </xml>";
     $this->connect();
     if(!$this->is_connected){
       $this->set_error("Could not establish socket connection.");
@@ -221,26 +320,38 @@ class gosaSupportDaemon
   }
 
 
-  /*! \brief  Removes an entry from the GOsa support queue. 
-      @param  Integer The ID of the entry we want to remove.
-      @return Boolean True on success.
+  /*! \brief  Removes a set of entries from the GOsa support queue. 
+    @param  Array The IDs to remove.
+    @return Boolean True on success.
    */
-  public function remove_entry($id)
+  public function remove_entries($ids)
   {
+    if(!is_array($ids)){
+      trigger_error("Requires an array as parameter.");
+      return;
+    }
     $this->b_error = FALSE;
     $this->s_error = "";
 
+    $ret = array();
+
     $xml_msg = "<xml>
-                  <header>gosa_delete_jobdb_entry</header>
-                  <where>
-                    <clause>
-                      <phrase>
-                        <operator>eq</operator>
-                        <id>".$id."</id>
-                      </phrase>
-                    </clause>
-                  </where>
-                </xml>";
+      <header>gosa_delete_jobdb_entry</header>
+      <where>
+      <clause>
+      <connector>or</connector>";
+    foreach($ids as $id){
+      $xml_msg .= "<phrase>
+        <operator>eq</operator>
+        <id>".$id."</id>
+        </phrase>";
+    }
+    $xml_msg .= "</clause>
+      </where>
+      </xml>";
+    $this->b_error = FALSE;
+    $this->s_error = "";
+
     $this->connect();
     if($this->is_connected){
       $this->o_sock->write($xml_msg);
@@ -249,11 +360,42 @@ class gosaSupportDaemon
     $this->set_error("Could not establish socket connection.");
     return(FALSE);
   }
-  
+
+
+
+  /*! \brief  Removes an entry from the GOsa support queue. 
+    @param  Integer The ID of the entry we want to remove.
+    @return Boolean True on success.
+   */
+  public function remove_entry($id)
+  {
+    $this->b_error = FALSE;
+    $this->s_error = "";
+
+    $xml_msg = "<xml>
+      <header>gosa_delete_jobdb_entry</header>
+      <where>
+      <clause>
+      <phrase>
+      <operator>eq</operator>
+      <id>".$id."</id>
+      </phrase>
+      </clause>
+      </where>
+      </xml>";
+    $this->connect();
+    if($this->is_connected){
+      $this->o_sock->write($xml_msg);
+      return(TRUE);
+    }
+    $this->set_error("Could not establish socket connection.");
+    return(FALSE);
+  }
+
 
   /*! \brief  Parses the given xml string into an array 
-      @param  String XML string  
-      @return Array Returns an array containing the xml structure. 
+    @param  String XML string  
+    @return Array Returns an array containing the xml structure. 
    */
   function xml_to_array($xml)
   {
@@ -294,9 +436,9 @@ class gosaSupportDaemon
 
 
   /*! \brief  Updates an entry with a set of new values, 
-      @param  Integer The ID of the entry, we want to update.
-      @param  Array   The variables to update.   
-      @return Boolean Returns TRUE on success. 
+    @param  Integer The ID of the entry, we want to update.
+    @param  Array   The variables to update.   
+    @return Boolean Returns TRUE on success. 
    */
   public function update_entry($id,$entry)
   {
@@ -318,14 +460,14 @@ class gosaSupportDaemon
     }
 
     $xml_msg = "<xml> 
-                  <header>gosa_update_status_jobdb_entry</header>
-                  <where>
-                    <id>".$id."</id> 
-                  </where>
-                  <update>
-                    ".$attr." 
-                  </update>
-                </xml>";
+      <header>gosa_update_status_jobdb_entry</header>
+      <where>
+      <id>".$id."</id> 
+      </where>
+      <update>
+      ".$attr." 
+      </update>
+      </xml>";
     $this->connect();
     if($this->is_connected){
       $this->o_sock->write($xml_msg);
