@@ -290,7 +290,14 @@ function install_plugin($file)
 
 				/* Check if dependencies are fullfilled */
 				foreach ($depends as $dep){
-					if (!in_array($dep, $provides)){
+					$found= false;
+					foreach ($provides as $provide => $dummy){
+						if ($dep == $provide){
+							$found= true;
+							break;
+						}
+					}
+					if (!$found){
 						echo "! Error: plugin depends on '$dep', but this is not installed\n\n";
 						exit (3);
 					}
@@ -388,7 +395,7 @@ function remove_plugin($name)
 
 	/* Depends? */
 	foreach ($depends as $sname => $pl_depends){
-		if (!in_array($name, $pl_depends)){
+		if (in_array($name, $pl_depends)){
 			echo "! Error: plugin '$sname' depends on '$name' - cannot remove it\n\n";
 			exit (1);
 		}
