@@ -375,7 +375,7 @@ function install_plugin($file)
 
 function remove_plugin($name)
 {
-	global $description;
+	global $description, $depends;
 
 	/* Load plugin list */
 	load_plugins();
@@ -384,6 +384,14 @@ function remove_plugin($name)
 	if (!isset($description[$name])){
 		echo "! Error: cannot find a plugin named '$name'\n\n";
 		exit (1);
+	}
+
+	/* Depends? */
+	foreach ($depends as $sname => $pl_depends){
+		if (!in_array($name, $pl_depends)){
+			echo "! Error: plugin '$sname' depends on '$name' - cannot remove it\n\n";
+			exit (1);
+		}
 	}
 
 	/* Load information */
