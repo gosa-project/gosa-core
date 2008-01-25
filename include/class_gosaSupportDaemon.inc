@@ -111,7 +111,7 @@ class gosaSupportDaemon
   /*! \brief  Returns an array containing all queued entries.
     @return Array All queued entries as an array.
    */
-  public function get_queued_entries($from=0,$to=10)
+  public function get_queued_entries($from=0,$to=10,$sort="timestamp DESC")
   {
     $this->b_error = FALSE;
     $this->s_error = "";
@@ -121,19 +121,13 @@ class gosaSupportDaemon
       <header>gosa_query_jobdb</header>
       <where>
       <clause>
-      <connector>or</connector>
-
         <phrase>
-        <operator>eq</operator>
-        <HEADERTAG>ping</HEADERTAG>
-        </phrase>
-
-        <phrase>
-        <operator>eq</operator>
-        <HEADERTAG>sayHello</HEADERTAG>
+        <operator>ne</operator>
+        <HEADERTAG>*</HEADERTAG>
         </phrase>
       </clause>
       </where>
+      <orderby>".$sort."</orderby>
       <limit>
       <from>".$from."</from>
       <to>".$to."</to>
