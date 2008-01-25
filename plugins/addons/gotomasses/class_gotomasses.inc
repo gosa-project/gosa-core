@@ -102,19 +102,20 @@ class gotomasses extends plugin
         }else{
           $ids = $this->list_get_selected_items();
         }
+        if(count($ids)){
+          $this->ids_to_remove = $ids;
+          $ret = $this->o_queue->ids_exist($this->ids_to_remove);
+          $ret = $this->o_queue->get_entries_by_id($ret);
 
-        $this->ids_to_remove = $ids;
-        $ret = $this->o_queue->ids_exist($this->ids_to_remove);
-        $ret = $this->o_queue->get_entries_by_id($ret);
-
-        $tmp = "";
-        foreach($ret as $task){
-          $tmp.= "\n".$task['ID']." - ".$task['HEADERTAG']."&nbsp;".$task['MACADDRESS'];
+          $tmp = "";
+          foreach($ret as $task){
+            $tmp.= "\n".$task['ID']." - ".$task['HEADERTAG']."&nbsp;".$task['MACADDRESS'];
+          }
+          $smarty->assign("multiple", TRUE); 
+          $smarty->assign("info",sprintf(_("Your are about to delete the following tasks: %s"),"<pre>".$tmp."</pre>"));
+          $this->current = $s_entry;
+          return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
         }
-        $smarty->assign("multiple", TRUE); 
-        $smarty->assign("info",sprintf(_("Your are about to delete the following tasks: %s"),"<pre>".$tmp."</pre>"));
-        $this->current = $s_entry;
-        return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
       }
     }
 
@@ -226,6 +227,10 @@ class gotomasses extends plugin
    */
   private function start_queue_entries($ids)
   {
+    if(!count($ids)){
+      return;
+    }
+  
     $data = array("timestamp" => date("YmdHis"),
                   "status"    => "-");
     if(!$this->o_queue->update_entries($ids,$data)){
@@ -241,6 +246,9 @@ class gotomasses extends plugin
    */
   private function stop_queue_entries($ids)
   {
+    if(!count($ids)){
+      return;
+    }
     $data = array("timestamp" => "20490101010101",
                   "status"    => "Stoppped");
     if(!$this->o_queue->update_entries($ids,$data)){
