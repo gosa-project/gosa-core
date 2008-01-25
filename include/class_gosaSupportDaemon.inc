@@ -279,7 +279,7 @@ class gosaSupportDaemon
       trigger_error("Requires an integer as parameter.");
       return;
     }
-
+  
     $this->b_error = FALSE;
     $this->s_error = "";
     $ret = array();
@@ -298,7 +298,7 @@ class gosaSupportDaemon
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
       $entries = $this->xml_to_array($str); 
-      if(!isset($entries['XML']['ANSWER1'])){
+      if(isset($entries['XML']['ANSWER1'])){
         $ret = $entries['XML']['ANSWER1'];
       }
     }
