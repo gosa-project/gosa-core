@@ -1,22 +1,42 @@
 <?php
-
-
 /*
-   __construct        - Create a new deamon handle. 
-   connect            - Connect to deamon socket.
-   disconnect         - Disconnect from socket.
-   set_error          - Sets a new error.
-   is_error           - Returns TRUE if there was an error.
-   get_error          - Returns the last error or "".
-   get_queued_entries - Returns all queued entries, with limitations.
-   ids_exist          - Checks if the given id exists.
-   get_entries_by_id  - Returns a set of entries.
-   id_exists          - Checks if a set entries exists.
-   get_entry_by_id    - Returns a single entry.
-   remove_entries     - Remove a set of entries.
-   remove_entry       - Removes a single entry.
-   update_entries     - Updates a set of entries.
-   xml_to_array       - XML to Array. 
+
+   This code is part of GOsa (https://gosa.gonicus.de)
+   Copyright (C) 2008  Fabian Hickert
+
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+
+Function overview:
+
+   __construct              - Create a new deamon handle. 
+   connect                  - Connect to deamon socket.
+   disconnect               - Disconnect from socket.
+   set_error                - Sets a new error.
+   is_error                 - Returns TRUE if there was an error.
+   get_error                - Returns the last error or "".
+   get_queued_entries       - Returns all queued entries, with limitations.
+   ids_exist                - Checks if the given id exists.
+   get_entries_by_id        - Returns a set of entries.
+   id_exists                - Checks if a set entries exists.
+   get_entry_by_id          - Returns a single entry.
+   remove_entries           - Remove a set of entries.
+   remove_entry             - Removes a single entry.
+   update_entries           - Updates a set of entries.
+   xml_to_array             - XML to Array. 
+   number_of_queued_entries - Returns the number of currently queued entries.   
 */
 
 
@@ -26,13 +46,12 @@ class gosaSupportDaemon
   private $o_sock       = NULL;
   private $s_host       = "";
   private $i_port       = 0;
-  private $f_timeout    = 0.2;
+  private $f_timeout    = 2;
+  private $s_error      = "";
+  private $b_error      = FALSE;
 
   private $is_connected     = FALSE;
   private $s_encryption_key = "";
-
-  private $s_error  = "";
-  private $b_error  = FALSE;
 
 
   /*! \brief  Creates a new gosaSupportDaemon object.
@@ -387,7 +406,7 @@ class gosaSupportDaemon
     @param  String XML string  
     @return Array Returns an array containing the xml structure. 
    */
-  function xml_to_array($xml)
+  private function xml_to_array($xml)
   {
     $params = array();
     $level = array();
@@ -480,14 +499,12 @@ class gosaSupportDaemon
   }
 
 
-  /*! \brief  Updates an entry with a set of new values, 
-    @param  Integer The ID of the entry, we want to update.
-    @param  Array   The variables to update.   
-    @return Boolean Returns TRUE on success. 
+  /*! \brief  Returns the number of currently queued objects.
+      @return Integer  
    */
   public function number_of_queued_entries()
   {
-    $xml_msg ="<xml> <header>gosa_count_jobdb</header></xml>";
+    $xml_msg ="<xml><header>gosa_count_jobdb</header></xml>";
     $this->connect();
     if($this->connect()){
       $this->o_sock->write($xml_msg);
