@@ -317,6 +317,15 @@ class gotomasses extends plugin
         $this->start = $start;
       }
     }
+
+    /* Check start stop and reset if necessary */
+    $count = $this->o_queue->number_of_queued_entries();
+    if($this->start >= $count){
+      $this->start = $count -1;
+    }
+    if($this->start < 0){
+      $this->start = 0;
+    }
   }
 
 
