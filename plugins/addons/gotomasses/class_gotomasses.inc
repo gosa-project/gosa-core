@@ -256,38 +256,38 @@ class gotomasses extends plugin
    */
   function get_queued_entries()
   {
-    $start  = $this->range * $this->start; 
-    $stop   = $start + $this->range; 
-    $entries = $this->o_queue->get_queued_entries($start,$stop);
+    $map = array(
+        "QueuePosition" => "id",
+        "Action"        => "status",
+        "TaskID"        => "headertag",
+        "TargetName"    => "macaddress",
+        "Schedule"      => "timestamp");
+
+    if(!isset($map[$this->sort_by])){
+      $sort = "id DESC";
+    }else{
+      $sort   = $map[$this->sort_by]; 
+      if($this->sort_dir == "up"){
+        $sort.= " ASC";
+      }else{
+        $sort.= " DESC";
+      }
+    }
+      
+    $start  = $this->start; 
+    $stop   = $this->range;
+    $entries = $this->o_queue->get_queued_entries($start,$stop,$sort);
     if(!is_array($entries) || !isset($entries['XML']) || !is_array($entries['XML'])){
       msg_dialog::display(_("Error"), sprintf(_("Cannot load queue entries: %s"), "<br><br>".$this->o_queue->get_error()), ERROR_DIALOG);
       return(array());
     }
 
-    $tasks = array();
     $ret = array();
     foreach($entries['XML'] as $entry){
       $task = $entry['ID']; 
       $ret[]= $entry;
     }
-    $map = array("QueuePosition" => "ID",
-        "Action"        => "STATUS",
-        "TaskID"        => "HEADERTAG",
-        "TargetName"    => "MACADDRESS",
-        "Schedule"      => "TIMESTAMP");
-    $sort_tmp = array();
-    foreach($ret as $entry_id => $entry){
-      $sort_tmp[$entry_id] = $entry[$map[$this->sort_by]];
-    } 
-    natcasesort($sort_tmp);
-    $return = array();
-    foreach($sort_tmp as $entry_id => $value){
-      $return[] = $ret[$entry_id];
-    } 
-    if($this->sort_dir != "up"){
-      $return = array_reverse($return);
-    } 
-    return($return);
+    return($ret);
   }
 
 
@@ -313,7 +313,7 @@ class gotomasses extends plugin
     }
     if(isset($_GET['start'])){
       $start = $_GET['start'];
-      if(is_numeric($start) && $start > 0){
+      if(is_numeric($start) || $start == 0){
         $this->start = $start;
       }
     }
