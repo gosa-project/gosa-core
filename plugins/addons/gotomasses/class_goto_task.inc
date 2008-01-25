@@ -33,6 +33,59 @@ class goto_task extends plugin
         $smarty->assign($attr,"");
       }
     }
+
+    $year   = substr($this->data['TIMESTAMP'],0,4);
+    $month  = substr($this->data['TIMESTAMP'],4,2);
+    $day    = substr($this->data['TIMESTAMP'],6,2);
+    
+    $hour   = substr($this->data['TIMESTAMP'],8,2);
+    $minute = substr($this->data['TIMESTAMP'],10,2);
+    $second = substr($this->data['TIMESTAMP'],12,2);
+
+    $years = array();
+    for($i = date("Y",time()); $i <= 2037 ;$i ++){
+      $years[$i] = $i;
+    }
+    $months = array();
+    for($i = 1; $i <= 12; $i ++){
+      $e = str_pad($i,2,"0",STR_PAD_LEFT);
+      $months[$e] = $e;
+    }
+    $days = array();
+    for($i = 1; $i <= cal_days_in_month(CAL_GREGORIAN,$month,$year); $i ++){
+      $e = str_pad($i,2,"0",STR_PAD_LEFT);
+      $days[$e] = $e;
+    }
+    $hours = array();
+    for($i = 0; $i < 24; $i ++){
+      $e = str_pad($i,2,"0",STR_PAD_LEFT);
+      $hours[$e] = $e;
+    }
+    $minutes = array();
+    for($i = 0; $i < 60; $i ++){
+      $e = str_pad($i,2,"0",STR_PAD_LEFT);
+      $minutes[$e] = $e;
+    }
+    $seconds = array();
+    for($i = 0; $i < 60; $i ++){
+      $e = str_pad($i,2,"0",STR_PAD_LEFT);
+      $seconds[$e] = $e;
+    }
+
+    $smarty->assign("years", $years);
+    $smarty->assign("months", $months);
+    $smarty->assign("days", $days);
+    $smarty->assign("hours", $hours);
+    $smarty->assign("minutes", $minutes);
+    $smarty->assign("seconds", $seconds);
+ 
+    $smarty->assign("time_year",$year); 
+    $smarty->assign("time_month",$month); 
+    $smarty->assign("time_day",$day); 
+    $smarty->assign("time_hour",$hour); 
+    $smarty->assign("time_minute",$minute); 
+    $smarty->assign("time_second",$second); 
+
     return ($smarty->fetch (get_template_path('goto_task.tpl', TRUE)));
   }
 
@@ -51,12 +104,23 @@ class goto_task extends plugin
         $this->data[strtoupper($attr)] = $_POST[$attr];
       }
     }
+    $date = "";
+    foreach(array("time_year","time_month","time_day","time_hour","time_minute","time_second") as $attr){
+      if(isset($_POST[$attr])){
+        $date .= $_POST[$attr];
+      }else{
+        echo $attr;
+      }
+    }
+    if(strlen($date) == 14){
+      $this->data['TIMESTAMP'] = $date;
+    }
   }
 
   function save()
   {
     $tmp = array();   
-    foreach(array("STATUS","MACADDRESS","HEADERTAG") as $attr){
+    foreach(array("STATUS","MACADDRESS","HEADERTAG","TIMESTAMP") as $attr){
       if(isset($this->data[$attr])){
         $tmp[$attr] = $this->data[$attr];
       }
