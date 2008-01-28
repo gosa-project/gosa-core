@@ -314,9 +314,6 @@ class plugin
           $data = "";  
         }
         $this->$val= $data;
-        //echo "<font color='blue'>".$val."</font><br>";
-      }else{
-        //echo "<font color='red'>".$val."</font><br>";
       }
     }
   }
@@ -972,14 +969,11 @@ class plugin
               $tmp = $source[$var][$i];
             }
             $this->$var = $tmp;
-#            echo $var."=".$tmp."<br>";
           }else{
             $this->$var = $source[$var][0];
-#            echo $var."=".$source[$var][0]."<br>";
           }
         }else{
           $this->$var= $source[$var];
-#          echo $var."=".$source[$var]."<br>";
         }
       }
     }
@@ -1514,11 +1508,11 @@ class plugin
     if(isset($this->base) && isset($this->config->idepartments[$this->base])){
       $deps[$this->base] = $this->config->idepartments[$this->base];
     }else{
-      echo "No default base found. ".$this->base."<br> ";
+      trigger_error("No default base found in class ".get_class($this).". ".$this->base);
     }
-
     return($deps);
   }
+
 
   /* This function modifies object acls too, if an object is moved.
    *  $old_dn   specifies the actually used dn
@@ -1597,14 +1591,10 @@ class plugin
        /* Acls for this object must be adjusted */
        if($found){
 
-          if($output_changes){
-            echo "<font color='green'>".
-                  _("Changing ACL dn")."&nbsp;:&nbsp;<br>&nbsp;-"._("from")."&nbsp;<b>&nbsp;".
-                  $old_dn.
-                  "</b><br>&nbsp;-"._("to")."&nbsp;<b>".
-                  $new_dn.
-                  "</b></font><br>";
-          }
+          $debug_info=  _("Changing ACL dn")."&nbsp;:&nbsp;<br>&nbsp;-"._("from")."&nbsp;<b>&nbsp;".
+                  $old_dn."</b><br>&nbsp;-"._("to")."&nbsp;<b>".$new_dn."</b><br>";
+          @DEBUG (DEBUG_ACL, __LINE__, __FUNCTION__, __FILE__,$debug_info,"ACL");
+
           $update[$attrs['dn']] =array();
           foreach($acls as $acl){
             $update[$attrs['dn']]['gosaAclEntry'][] = $acl;

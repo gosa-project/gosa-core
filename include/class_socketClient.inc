@@ -11,6 +11,7 @@ class Socket_Client
   private $handle	= NULL;
   private $bytes_read = 0;
   private $error = "";
+  private $b_encrypt = FALSE;
 
   /* Crypto information */
   private $td= NULL;
@@ -36,31 +37,37 @@ class Socket_Client
     if(!function_exists("mcrypt_get_iv_size")){
       $this->error = _("The mcrypt module was not found. Please install php5-mcrypt.");
       $this->ckey = "";
-      return FALSE ;
+      $this->b_encrypt = FALSE;
     }
 
     if ($this->connected()){
       $this->ckey = substr(md5($key), 0, $this->ks);
-      return TRUE;
+      $this->b_encrypt = TRUE;
     }
 
-    return FALSE;
+    return($this->b_encrypt);
   }
 
 
   private function encrypt($data)
   {
-    mcrypt_generic_init($this->td, $this->ckey, $this->iv);
-    return base64_encode(mcrypt_generic($this->td, $data));
+    if($this->b_encrypt){
+      mcrypt_generic_init($this->td, $this->ckey, $this->iv);
+      $data = base64_encode(mcrypt_generic($this->td, $data));
+    }
+    return($data);
   }
 
 
   private function decrypt($data)
   {
     /* decrypt data */
-    $data = base64_decode($data);
-    mcrypt_generic_init($this->td, $this->ckey, $this->iv);
-    return mdecrypt_generic($this->td, $data);
+    if($this->b_encrypt){
+      $data = base64_decode($data);
+      mcrypt_generic_init($this->td, $this->ckey, $this->iv);
+      $data = mdecrypt_generic($this->td, $data);
+    }
+    return($data);
   }
 
 
