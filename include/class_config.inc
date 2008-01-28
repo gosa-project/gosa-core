@@ -494,16 +494,18 @@ class config  {
 
     /* Load Terminalservers */
     $ldap->cd ($this->current['BASE']);
-    $ldap->search ("(objectClass=goTerminalServer)");
+    $ldap->search ("(objectClass=goTerminalServer)",array("cn","gotoSessionType"));
     $this->data['SERVERS']['TERMINAL']= array();
     $this->data['SERVERS']['TERMINAL'][]= "default";
+    $this->data['SERVERS']['TERMINAL_SESSION_TYPES'] = array();
 
-    $this->data['SERVERS']['FONT']= array();
-    $this->data['SERVERS']['FONT'][]= "default";
+
     while ($attrs= $ldap->fetch()){
       $this->data['SERVERS']['TERMINAL'][]= $attrs["cn"][0];
-      for ($i= 0; $i<$attrs["goFontPath"]["count"]; $i++){
-        $this->data['SERVERS']['FONT'][]= $attrs["goFontPath"][$i];
+      if(isset( $attrs["gotoSessionType"]['count'])){
+        for($i =0 ; $i < $attrs["gotoSessionType"]['count'] ; $i++){
+          $this->data['SERVERS']['TERMINAL_SESSION_TYPES'][$attrs["cn"][0]][] = $attrs["gotoSessionType"][$i]; 
+        }
       }
     }
 
