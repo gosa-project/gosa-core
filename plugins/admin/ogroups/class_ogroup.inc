@@ -127,12 +127,27 @@ class ogroup extends plugin
 
       /* Add objects to group */
       if (isset($_POST['add_object_finish']) && isset($_POST['objects'])){
+
+        $tmp = "";
+        foreach($this->memberList as $obj){
+          $tmp .= $obj['type'];
+        }
+        $skipped = FALSE;
         foreach ($_POST['objects'] as $value){
-          $this->memberList["$value"]= $this->objects[$value];
-          $this->member["$value"]= $value;
-          unset ($this->objects[$value]);
-          uasort ($this->memberList, 'sort_list');
-          reset ($this->memberList);
+          if(preg_match("/T/",$tmp) && $this->objects[$value]['type'] == "W"){
+            $skipped =TRUE;
+          }elseif(preg_match("/W/",$tmp) && $this->objects[$value]['type'] == "T"){
+            $skipped =TRUE;
+          }else{
+            $this->memberList["$value"]= $this->objects[$value];
+            $this->member["$value"]= $value;
+            unset ($this->objects[$value]);
+            uasort ($this->memberList, 'sort_list');
+            reset ($this->memberList);
+          }
+        }
+        if($skipped){
+          print_red(_("You can only have terminals or workstations in one group, but not both."));
         }
         $this->reload();
       }

@@ -41,6 +41,11 @@ class ogrouptabs extends tabs
       unset($this->by_object['termgroup']);
       unset($this->by_name['termgroup']);
     }
+    if(((!preg_match("/T/",$objects)) && (!preg_match("/W/",$objects)))&&(isset($this->by_object['termservice']))){
+      $this->by_object['termservice']->remove_from_parent();
+      unset($this->by_object['termservice']);
+      unset($this->by_name['termservice']);
+    }
     
     /* Remove ws tabs, if theres no ws left in the object list */
     if((!preg_match("/W/",$objects))&&(isset($this->by_object['workservice']))){
@@ -96,6 +101,11 @@ class ogrouptabs extends tabs
         $this->by_object['termgroup']= new termgroup($this->config, $this->dn);
         $this->by_object['termgroup']->inheritTimeServer = false;
         $this->by_object['termgroup']->parent= &$this;
+      }
+      if(!isset($this->by_object['termservice'])){
+        $this->by_name['termservice']= _("Service");
+        $this->by_object['termservice']= new termservice($this->config, $this->dn);
+        $this->by_object['termservice']->parent= &$this;
       }
     }
     
@@ -194,6 +204,9 @@ class ogrouptabs extends tabs
           $this->by_object['termgroup']= new termgroup($this->config, $this->dn);
           $this->by_object['termgroup']->parent= &$this;
 
+          $this->by_name['termservice']= _("Service");
+          $this->by_object['termservice']= new termservice($this->config, $this->dn);
+          $this->by_object['termservice']->parent= &$this;
           break;
 
           case "U":
