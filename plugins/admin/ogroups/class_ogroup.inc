@@ -172,33 +172,6 @@ class ogroup extends plugin
       return ($display);
     }
 
-    /* Delete objects from group */
-    if (isset($_POST['delete_membership']) && isset($_POST['members'])){
-      foreach ($_POST['members'] as $value){
-        if(isset($this->memberList[$value])){
-          $this->objects["$value"]= $this->memberList[$value];
-          unset ($this->memberList["$value"]);
-          unset ($this->member["$value"]);
-          uasort ($this->objects, 'sort_list');
-          reset ($this->objects);
-        }
-      }
-      $this->reload();
-    }
-
-    /* Add objects to group */
-    if (isset($_POST['add_object_finish']) && isset($_POST['objects'])){
-      foreach ($_POST['objects'] as $value){
-        if(isset($this->objects[$value])){
-          $this->memberList["$value"]= $this->objects[$value];
-          $this->member["$value"]= $value;
-          unset ($this->objects[$value]);
-          uasort ($this->memberList, 'sort_list');
-          reset ($this->memberList);
-        }
-      }
-      $this->reload();
-    }
 
     /* Load templating engine */
     $smarty= get_smarty();
