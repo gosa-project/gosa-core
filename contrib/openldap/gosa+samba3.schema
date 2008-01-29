@@ -249,6 +249,10 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.12.42 NAME 'gosaVacationStop'
         DESC 'Timestamp for switching off current vacation message'
         SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE)
 
+attributetype ( 1.3.6.1.4.1.10098.1.1.12.43 NAME 'gosaApplicationPriority'
+        DESC 'Keeps the application icon in png format'
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE)
+
 attributetype ( 1.3.6.1.4.1.10098.1.1.6.2 NAME 'academicTitle'
         DESC 'Field to represent the academic title'
         EQUALITY caseIgnoreIA5Match
