@@ -25,7 +25,7 @@
 		onFocus="nextfield= 'password_finish';"></td>
   </tr>
   <tr>
-    <td><b>{t}Strength{/t}</b></td>
+    <td><b>{t}Password strength{/t}</b></td>
     <td>
 	<span id="meterEmpty" style="padding:0;margin:0;width:100%;background-color:#DC143C;display:block;height:5px;">
 	<span id="meterFull" style="padding:0;margin:0;z-index:100;width:0;background-color:#006400;display:block;height:5px;"></span></span>
