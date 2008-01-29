@@ -26,7 +26,6 @@ class gotomasses extends plugin
   {
     /* Include config object */
     $this->config= &$config;
-    $this->divlist = new divListMasses($this->config,$this);
     $this->o_queue = new gosaSupportDaemon("10.3.67.111","20081","secret-gosa-password",TRUE,10);
   }
 
@@ -198,9 +197,76 @@ class gotomasses extends plugin
      * Handle Divlist 
      ************/
 
-    $this->divlist->execute();
+    $divlist = new MultiSelectWindow($this->config,"gotoMasses",array("gotomasses"));
+    $divlist->SetInformation(_("This menu allows you to remove and change the properties of GOsa deamon tasks."));
+    $divlist->SetSummary(_("List of queued deamon jobs."));
+    $divlist->EnableCloseButton(FALSE);
+    $divlist->EnableSaveButton(FALSE);
+    $divlist->SetHeadpageMode();
+
+
+
+    /* Display add button if allowed */
+    $header = "<div style='padding:5px'>";
+    if($this->acl_is_removeable()){
+      $header .= "<input type='image' src='images/edittrash.png' name='remove_multiple_task' class='center'>&nbsp;";
+    }
+    if(preg_match("/w/",$this->getacl(""))){
+      $header .= "<input type='image' src='images/status_stop_all.png' name='stop_all' class='center'>&nbsp;";
+      $header .= "<input type='image' src='images/status_start_all.png' name='start_all' class='center'>&nbsp;";
+    }
+    $header .= "</div>";
+
+    /* Create divlist */
+    $divlist->SetListHeader($header);
+
+    $plug  = $_GET['plug'];
+    $chk = "<input type='checkbox' id='select_all' name='select_all'
+               onClick='toggle_all_(\"^item_selected_[0-9]*$\",\"select_all\");' >";
+
+    /* set Page header */
+    $divlist->AddHeader(array("string"=> $chk,          "attach"=>"style='width:20px;'"));
+    $divlist->AddHeader(array("string"=>"<a href='?plug=".$plug."&amp;sort=TargetName'>"._("Target")."</a>&nbsp;/&nbsp;".
+                                     "<a href='?plug=".$plug."&amp;sort=TaskID'>"._("Task")."</a>"));
+    $divlist->AddHeader(array("string"=>"<a href='?plug=".$plug."&amp;sort=Schedule'>"._("Schedule")."</a>",
+                                      "attach"=>"style='width:100px;'"));
+    $divlist->AddHeader(array("string"=>"<a href='?plug=".$plug."&amp;sort=Action'>"._("Status")."</a>",
+                                      "attach"=>"style='width:80px;'"));
+    $divlist->AddHeader(array("string"=>_("Action"),
+                                      "attach"=>"style='border-right:0px;width:120px;'"));
+
+
     $entries = $this->get_queued_entries();
-    $this->divlist->SetEntries($entries);
+
+    foreach($entries as $key => $task){
+
+      $prio_actions = "<input class='center' type='image' src='images/status_stop_all.png' name='stop_".$task['ID']."'>&nbsp;";
+      $prio_actions.= "<input class='center' type='image' src='images/status_start_all.png' name='start_".$task['ID']."'>&nbsp;";
+
+      $action = "<input type='image' src='images/edit.png' name='edit_task_".$task['ID']."' 
+        class='center' alt='"._("Edit")."'>";
+
+      if($this->acl_is_removeable()){
+        $action.= "<input type='image' src='images/edittrash.png' name='remove_task_".$task['ID']."' 
+          class='center' alt='"._("Reomve")."'>";
+      }
+
+      $color = "";
+      $display = $task['MACADDRESS'];
+      $display2= $task['HEADERTAG'];
+
+      /* Create each field */
+      $field0 = array("string" => "<input type='checkbox' id='item_selected_".$task['ID']."' name='item_selected_".$task['ID']."'>" ,
+                      "attach" => "style='width:20px;".$color."'");
+      $field1 = array("string" => $display,
+                      "attach" => "style='".$color."'");
+      $field1a= array("string" => $display2,
+                      "attach" => "style='".$color.";width:80px;'");
+      $field2 = array("string" => date("d.m.Y H:i:s",strtotime($task['TIMESTAMP'])),"attach" => "style='".$color.";width:100px;'");
+      $field3 = array("string" => $task['STATUS'],"attach" => "style='".$color.";width:80px;'");
+      $field4 = array("string" => $prio_actions.$action,"attach" => "style='".$color.";text-align:right;width:120px;border-right:0px;'");
+      $divlist->AddElement(array($field0,$field1,$field1a,$field2,$field3,$field4));
+    }
 
 
     $smarty = get_smarty();
@@ -217,7 +283,7 @@ class gotomasses extends plugin
     $count = $this->o_queue->number_of_queued_entries();
     $smarty->assign("range_selector", range_selector($count, $this->start, $this->range,"range"));
     $smarty->assign("range",$this->range);
-    $smarty->assign("div",$this->divlist->Draw());
+    $smarty->assign("div",$divlist->Draw());
     return($smarty->fetch (get_template_path('gotomasses.tpl', TRUE, dirname(__FILE__))));
   }
 
@@ -303,7 +369,6 @@ class gotomasses extends plugin
    */
   function save_object()
   {
-    $this->divlist->save_object();
     $sort_vals = array("Action","QueuePosition","TargetName","Schedule","TaskID");
     if(isset($_GET['sort']) && in_array($_GET['sort'],$sort_vals)){
       $sort = $_GET['sort'];
