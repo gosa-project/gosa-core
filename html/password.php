@@ -285,6 +285,7 @@ if ($ssl != "" && $config->data['MAIN']['WARNSSL'] == 'true'){
 }
 
 /* show login screen */
+$smarty->assign("JS",session::get('js'));
 $smarty->assign ("PHPSESSID", session_id());
 if (session::is_set('errors')){
   $smarty->assign("errors", session::get('errors'));;

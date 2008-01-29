@@ -22,6 +22,7 @@
   {if isset($ieworkaround)}<script language="javascript"src="include/png.js" type="text/javascript"></script>{/if}
   <script language="javascript"src="include/focus.js" type="text/javascript"></script>
   <script language="javascript"src="include/warning.js" type="text/javascript"></script>
+  <script language="javascript"src="include/pwdStrength.js" type="text/javascript"></script>
 </head>
 
 <body style='height:100%; width:100%;'>
@@ -78,19 +79,27 @@
       </tr>
       <tr>
        <td>{t}New password{/t}</td>
-       <td><input type='password' name='new_password' maxlength='25' value='' title='{t}New password{/t}' onFocus="nextfield= 'new_password_repeated';"></td>
+       <td><input type='password' name='new_password' id="new_password" maxlength='25' value='' title='{t}New password{/t}' onFocus="nextfield= 'new_password_repeated';" onkeyup="testPasswordCss(document.getElementById('new_password').value);"></td>
       </tr>
       <tr>
        <td>{t}New password{/t} ({t}again{/t})</td>
        <td><input type='password' name='new_password_repeated' maxlength='25' value='' title='{t}New password repeated{/t}' onFocus="nextfield= 'apply';"></td>
+      </tr>
+      <tr>
+       <td>{t}Password strength{/t}</td>
+       <td>
+        <span id="meterEmpty" style="padding:0;margin:0;width:100%;background-color:#DC143C;display:block;height:5px;">
+        <span id="meterFull" style="padding:0;margin:0;z-index:100;width:0;background-color:#006400;display:block;height:5px;"></span></span>
+       </td>
       </tr>
     </table>
 
     <div class="ruler"></div>
 
     <div class="change">
-    <input type='submit' name='apply' value='{t}Change{/t}'
+    <input type='submit' name='apply'  value='{t}Change{/t}'
                  title='{t}Click here to change your password{/t}'>
+    <input type='hidden' id='formSubmit'>
     </div>
     <!-- check, if cookies are enabled -->
     <p class='warning'>
