@@ -16,8 +16,8 @@ class gotomasses extends plugin
   var $ids_to_remove  = array();
   var $divlist        = NULL;
 
-  var $sort_by  = "QueuePosition";
-  var $sort_dir = "up";
+  var $sort_by  = "Schedule";
+  var $sort_dir = "down";
 
   var $range    = 25;
   var $start    = 0;
@@ -204,7 +204,16 @@ class gotomasses extends plugin
     $divlist->EnableSaveButton(FALSE);
     $divlist->SetHeadpageMode();
 
+    if($this->sort_dir == "up"){
+      $sort_img = "<img src='images/sort_up.png' alt='/\' border=0>";
+    }else{
+      $sort_img = "<img src='images/sort_down.png' alt='\/' border=0>";
+    }
 
+    if($this->sort_by == "TargetName"){ $sort_img_1 = $sort_img; } else { $sort_img_1 = "" ;}
+    if($this->sort_by == "TaskID"){ $sort_img_2 = $sort_img; } else { $sort_img_2 = "" ;}
+    if($this->sort_by == "Schedule"){ $sort_img_3 = $sort_img; } else { $sort_img_3 = "" ;}
+    if($this->sort_by == "Action"){ $sort_img_4 = $sort_img; } else { $sort_img_4 = "" ;}
 
     /* Display add button if allowed */
     $header = "<div style='padding:5px'>";
@@ -226,11 +235,11 @@ class gotomasses extends plugin
 
     /* set Page header */
     $divlist->AddHeader(array("string"=> $chk,          "attach"=>"style='width:20px;'"));
-    $divlist->AddHeader(array("string"=>"<a href='?plug=".$plug."&amp;sort=TargetName'>"._("Target")."</a>&nbsp;/&nbsp;".
-                                     "<a href='?plug=".$plug."&amp;sort=TaskID'>"._("Task")."</a>"));
-    $divlist->AddHeader(array("string"=>"<a href='?plug=".$plug."&amp;sort=Schedule'>"._("Schedule")."</a>",
+    $divlist->AddHeader(array("string"=>"<a href='?plug=".$plug."&amp;sort=TargetName'>"._("Target").$sort_img_1."</a>&nbsp;/&nbsp;".
+                                     "<a href='?plug=".$plug."&amp;sort=TaskID'>"._("Task").$sort_img_2."</a>"));
+    $divlist->AddHeader(array("string"=>"<a href='?plug=".$plug."&amp;sort=Schedule'>"._("Schedule").$sort_img_3."</a>",
                                       "attach"=>"style='width:100px;'"));
-    $divlist->AddHeader(array("string"=>"<a href='?plug=".$plug."&amp;sort=Action'>"._("Status")."</a>",
+    $divlist->AddHeader(array("string"=>"<a href='?plug=".$plug."&amp;sort=Action'>"._("Status").$sort_img_4."</a>",
                                       "attach"=>"style='width:80px;'"));
     $divlist->AddHeader(array("string"=>_("Action"),
                                       "attach"=>"style='border-right:0px;width:120px;'"));
