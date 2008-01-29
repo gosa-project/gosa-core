@@ -39,19 +39,18 @@ Function overview:
    number_of_queued_entries - Returns the number of currently queued entries.   
 */
 
-
-
 class gosaSupportDaemon
 {
+  static private $s_host       = "";
+  static private $i_port       = 0;
+  static private $s_encryption_key = "";
+
   private $o_sock       = NULL;
-  private $s_host       = "";
-  private $i_port       = 0;
   private $f_timeout    = 2;
   private $s_error      = "";
   private $b_error      = FALSE;
 
   private $is_connected     = FALSE;
-  private $s_encryption_key = "";
 
 
   /*! \brief  Creates a new gosaSupportDaemon object.
@@ -61,14 +60,28 @@ class gosaSupportDaemon
     @param boolean  Connect Directly connect to deamon socket.
     @param float    Timeout The timelimit for all socket actions.
    */
-  public function __construct($host,$port,$key="secret-gosa-password",$connect=TRUE,$timeout=0.2)
+  public function __construct($connect=TRUE,$timeout=0.2)
   {
-    $this->s_host    = $host;
-    $this->i_port    = $port;
-    $this->f_timeout = $timeout;
-    $this->s_encryption_key = $key;
-    if($connect){
-      $this->connect();
+    #FIXME: bad idea about referencing global variables from within classes
+    global $config;
+
+    # load from config, store statically
+    if (isset($config->current['GOSA_SI'])){
+
+      if (gosaSupportDaemon::$s_host == ""){
+        $host= preg_replace("/^.*@([^:]+):.*$/", "$1", $config->current['GOSA_SI']);
+        $port= preg_replace("/^.*@[^:]+:(.*)$/", "$1", $config->current['GOSA_SI']);
+        $key = preg_replace("/^(.*)@[^:]+:.*$/", "$1", $config->current['GOSA_SI']);
+        
+        gosaSupportDaemon::$s_host           = $host;
+        gosaSupportDaemon::$i_port           = $port;
+        gosaSupportDaemon::$s_encryption_key = $key;
+      }
+
+      $this->f_timeout = $timeout;
+      if($connect){
+        $this->connect();
+      }
     }
   }
 
@@ -78,9 +91,9 @@ class gosaSupportDaemon
    */
   public function connect()
   {
-    $this->o_sock = new Socket_Client($this->s_host,$this->i_port,TRUE,$this->f_timeout);
+    $this->o_sock = new Socket_Client(gosaSupportDaemon::$s_host,gosaSupportDaemon::$i_port,TRUE,$this->f_timeout);
     if($this->o_sock->connected()){ 
-      $this->o_sock->setEncryptionKey($this->s_encryption_key); 
+      $this->o_sock->setEncryptionKey(gosaSupportDaemon::$s_encryption_key); 
       $this->is_connected = TRUE;
     }else{
       $this->error = $this->o_sock->get_error();
@@ -516,6 +529,30 @@ class gosaSupportDaemon
     }
     return(-1);
   } 
+
+
+  /*! \brief  Returns an array containing all queued entries.
+    @return Array All queued entries as an array.
+   */
+  public function send($data, $answer_expected= FALSE)
+  {
+    $this->b_error = FALSE;
+    $this->s_error = "";
+    $ret = array();
+
+    if($this->connect()){
+      $this->o_sock->write($data);
+      if ($answer_exepcted){
+	$str = trim($this->o_sock->read());
+	$entries = $this->xml_to_array($str);
+	if(isset($entries['XML']) && is_array($entries['XML'])){
+	  $ret = $entries; 
+	}
+      }
+    }
+    return($ret);
+  }
+
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

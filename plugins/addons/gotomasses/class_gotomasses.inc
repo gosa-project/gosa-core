@@ -26,7 +26,7 @@ class gotomasses extends plugin
   {
     /* Include config object */
     $this->config= &$config;
-    $this->o_queue = new gosaSupportDaemon("10.3.67.111","20081","secret-gosa-password",TRUE,10);
+    $this->o_queue = new gosaSupportDaemon(TRUE,10);
   }
 
 
