@@ -534,7 +534,7 @@ class gosaSupportDaemon
   /*! \brief  Returns an array containing all queued entries.
     @return Array All queued entries as an array.
    */
-  public function send($data, $answer_expected= FALSE)
+  public function _send($data, $answer_expected= FALSE)
   {
     $this->b_error = FALSE;
     $this->s_error = "";
@@ -552,6 +552,23 @@ class gosaSupportDaemon
     }
     return($ret);
   }
+
+
+  static function send($header, $to, $data= array())
+  {
+    $xml_message= "";
+
+    /* Get communication object */
+    $d= new gosaSupportDaemon(TRUE,10);
+
+    /* Prepare data */
+    foreach ($data as $key => $value){
+      $xml_message.= "<$key>$value</$key>";
+    }
+
+    return $d->_send("<xml><header>$header</header><target>$to</target>".$xml_message."</xml>");
+  }
+
 
 }
 
