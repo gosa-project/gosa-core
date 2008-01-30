@@ -108,8 +108,6 @@ class goto_task extends plugin
     foreach(array("time_year","time_month","time_day","time_hour","time_minute","time_second") as $attr){
       if(isset($_POST[$attr])){
         $date .= $_POST[$attr];
-      }else{
-        echo $attr;
       }
     }
     if(strlen($date) == 14){
