@@ -757,7 +757,6 @@ function get_multiple_locks($objects)
  */
 function get_sub_list($filter, $category,$sub_base, $base= "", $attributes= array(), $flags= GL_SUBSEARCH)
 {
-
   global $config, $ui;
 
   /* Get LDAP link */
@@ -773,8 +772,12 @@ function get_sub_list($filter, $category,$sub_base, $base= "", $attributes= arra
   /* Remove , ("ou=1,ou=2.." => "ou=1") */
   $sub_base = preg_replace("/,.*$/","",$sub_base);
 
-  /* Check if there is a sub department specified */
-  if($sub_base == ""){
+  /* Check if we have enabled the sub_dir search support AND 
+   *  if there is a sub department specified.
+   * If not, fall back to old method, get_list().
+   */
+  $sub_enabled = isset($config->current['SUB_LIST_SUPPORT']) && preg_match("/true/i",$config->current['SUB_LIST_SUPPORT']);
+  if($sub_base == "" || !$sub_enabled){
     return(get_list($filter, $category,$base,$attributes,$flags));
   }
 
