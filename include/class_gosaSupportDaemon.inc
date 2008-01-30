@@ -544,12 +544,12 @@ class gosaSupportDaemon
 
     if($this->connect()){
       $this->o_sock->write($data);
-      if ($answer_exepcted){
-	$str = trim($this->o_sock->read());
-	$entries = $this->xml_to_array($str);
-	if(isset($entries['XML']) && is_array($entries['XML'])){
-	  $ret = $entries; 
-	}
+      if ($answer_expected){
+        $str = trim($this->o_sock->read());
+        $entries = $this->xml_to_array($str);
+        if(isset($entries['XML']) && is_array($entries['XML'])){
+          $ret = $entries; 
+        }
       }
     }
     return($ret);
