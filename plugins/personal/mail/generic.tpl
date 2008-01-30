@@ -111,8 +111,22 @@
    <input {if $own_script != ""} disabled {/if} type=checkbox name="drop_own_mails" value="1" {$drop_own_mails} id="drop_own_mails"
 	{$drop_own_mailsACL} title="{t}Select if you want to forward mails without getting own copies of them{/t}"> {t}No delivery to own mailbox{/t}
    <br>
-   <input type=checkbox {if $own_script != ""} disabled {/if} name="use_vacation" value="1" {$use_vacation} id="use_vacation"
-	{$gosaVacationMessageACL} title="{t}Select to automatically response with the vacation message defined below{/t}"  onclick="changeState('day'); changeState('month'); changeState('year'); changeState('sday'); changeState('smonth'); changeState('syear');"> {t}Activate vacation message{/t}
+   <input type=checkbox 
+		{if $own_script != ""} disabled {/if} 
+			{$use_vacationACL} 
+			name="use_vacation" value="1" {$use_vacation} id="use_vacation"
+			title="{t}Select to automatically response with the vacation message defined below{/t}"  
+
+ 	  	{if $gosaVacationTimerACL == ""}
+			onclick="	changeState('day'); 
+						changeState('month'); 
+						changeState('year'); 
+						changeState('sday'); 
+						changeState('smonth'); 
+						changeState('syear');"
+		{/if}
+	  >
+	 {t}Activate vacation message{/t}
    <br>
    <div style="padding-left:22px;">
 	<table>
@@ -121,13 +135,13 @@
 	{t}from{/t}
           </td>
           <td>
-	<select {if $own_script != ""} disabled {/if} name=day id="day" onChange="createResult(this.form,this.form.gosaVacationStart);" {$gosaVacationMessageACL} {$rangeEnabled}>
+	<select {if $own_script != ""} disabled {/if} name=day id="day" onChange="createResult(this.form,this.form.gosaVacationStart);" {$gosaVacationTimerACL} {$rangeEnabled}>
 		{html_options values=$days output=$days selected=$start_day}
 	</select>
-	<select {if $own_script != ""} disabled {/if} name=month id="month" onChange="populate(this.form,this.form.gosaVacationStart);" {$gosaVacationMessageACL} {$rangeEnabled}>
+	<select {if $own_script != ""} disabled {/if} name=month id="month" onChange="populate(this.form,this.form.gosaVacationStart);" {$gosaVacationTimerACL} {$rangeEnabled}>
 		{html_options options=$months selected=$start_month}
 	</select>
-	<select {if $own_script != ""} disabled {/if} name=year id="year" onChange="populate(this.form,this.form.gosaVacationStart);" {$gosaVacationMessageACL} {$rangeEnabled}>
+	<select {if $own_script != ""} disabled {/if} name=year id="year" onChange="populate(this.form,this.form.gosaVacationStart);" {$gosaVacationTimerACL} {$rangeEnabled}>
 		{html_options values=$years output=$years selected=$start_year}
 	</select>
 	<input type="hidden" name="gosaVacationStart" value="{$gosaVacationStart}">
@@ -138,13 +152,13 @@
 	{t}till{/t}
           </td>
           <td>
-	<select {if $own_script != ""} disabled {/if} name=sday id="sday" onChange="createResult2(this.form,this.form.gosaVacationStop);" {$gosaVacationMessageACL} {$rangeEnabled}>
+	<select {if $own_script != ""} disabled {/if} name=sday id="sday" onChange="createResult2(this.form,this.form.gosaVacationStop);" {$gosaVacationTimerACL} {$rangeEnabled}>
 		{html_options values=$days output=$days selected=$end_day}
 	</select>
-	<select {if $own_script != ""} disabled {/if} name=smonth id="smonth" onChange="populate2(this.form,this.form.gosaVacationStop);" {$gosaVacationMessageACL} {$rangeEnabled}>
+	<select {if $own_script != ""} disabled {/if} name=smonth id="smonth" onChange="populate2(this.form,this.form.gosaVacationStop);" {$gosaVacationTimerACL} {$rangeEnabled}>
 		{html_options options=$months selected=$end_month}
 	</select>
-	<select {if $own_script != ""} disabled {/if} name=syear id="syear" onChange="populate2(this.form,this.form.gosaVacationStop);" {$gosaVacationMessageACL} {$rangeEnabled}>
+	<select {if $own_script != ""} disabled {/if} name=syear id="syear" onChange="populate2(this.form,this.form.gosaVacationStop);" {$gosaVacationTimerACL} {$rangeEnabled}>
 		{html_options values=$years output=$years selected=$end_year}
 	</select>
 	<input type="hidden" name="gosaVacationStop" value="{$gosaVacationStop}">

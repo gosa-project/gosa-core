@@ -620,7 +620,9 @@ class mailAccount extends plugin
       $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
     }
 
-    $smarty->assign("sieveManagementACL", chkacl($this->acl,"sieveManagement"));
+    $smarty->assign("use_vacationACL",      chkacl($this->acl,"use_vacation"));
+    $smarty->assign("gosaVacationTimerACL", chkacl($this->acl,"gosaVacationTimer"));
+    $smarty->assign("sieveManagementACL",   chkacl($this->acl,"sieveManagement"));
 
     if (preg_match('/V/', $this->gosaMailDeliveryMode)){
       $smarty->assign('rangeEnabled', "");
@@ -810,7 +812,7 @@ class mailAccount extends plugin
       $tmp= "";
       $Flags = array(
                      "R"  => array("ACL" => "gosaMailMaxSize",    "POST" => "use_mailsize_limit"),
-                     "V"  => array("ACL" => "gosaVacationMessage","POST" => "use_vacation"),
+                     "V"  => array("ACL" => "use_vacation",       "POST" => "use_vacation"),
                      "C"  => array("ACL" => "custom_sieve",       "POST" => "own_script"),
                      "I"  => array("ACL" => "only_local",         "POST" => "only_local"));
 
@@ -860,7 +862,7 @@ class mailAccount extends plugin
       }
       $this->gosaMailDeliveryMode= $tmp;
 
-      if(chkacl($this->acl,"gosaVacationMessage") == "" && preg_match("/V/",$this->gosaMailDeliveryMode)){
+      if(chkacl($this->acl,"gosaVacationTimer") == "" && preg_match("/V/",$this->gosaMailDeliveryMode)){
         if(isset($_POST['gosaVacationStart'])){
           $this->gosaVacationStart = $_POST['gosaVacationStart'];
         }
