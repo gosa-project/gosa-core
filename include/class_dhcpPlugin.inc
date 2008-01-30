@@ -104,7 +104,7 @@ class dhcpPlugin extends plugin
     foreach (array("routers", "domain-name", "subnet-mask", "broadcast-address") as $toberemoved){
       unset($this->options[$toberemoved]);
     }
-    foreach (array("filename", "next-server") as $toberemoved){
+    foreach (array("filename", "next-server","get-lease-hostnames","use-host-decl-names") as $toberemoved){
       unset($this->statements[$toberemoved]);
     }
 
