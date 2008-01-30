@@ -36,6 +36,7 @@ class Step_Config3 extends setup_step
               "forceglobals" => true,
               "forcessl" => false,
               "ldapstats" => false,
+              "sub_list_support" => false,
               "warnssl" => true,
               "user_filter_cookie" => true,
               "ppd_path" => "/var/spool/ppd/",
@@ -109,7 +110,7 @@ class Step_Config3 extends setup_step
         }
       }
       
-      foreach(array("login_attribute","list_summary","strict_units","snmpcommunity","noprimarygroup","forceglobals","forcessl","ldapstats","user_filter_cookie","warnssl","compile","debuglevel","session_lifetime") as $name){
+      foreach(array("login_attribute","list_summary","strict_units","snmpcommunity","noprimarygroup","forceglobals","forcessl","ldapstats","user_filter_cookie","warnssl","compile","debuglevel","session_lifetime","sub_list_support") as $name){
         if(isset($_POST[$name])){
           $this->optional[$name] = get_post($name);
         }
