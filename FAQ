@@ -406,3 +406,13 @@ Q: GOsa only shows 300 entries at a time. Is this normal?
 
 A: There's a default sizelimit. You can set the "sizelimit" option in your
    gosa.conf's  location section to a higher value to get rid of it.
+
+Q: The object listing is very slow when 'Search in subtrees' is active. 
+   Can I speed things up?
+
+A: There is a special handling for huge ldap servers, you can activate it by setting 
+   the sub_list_support to "true" in the location section of your gosa.conf.
+
+   <location name=...
+	sub_list_support="true"
+   ...>
