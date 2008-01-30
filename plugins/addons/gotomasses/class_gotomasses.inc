@@ -361,7 +361,9 @@ class gotomasses extends plugin
     $stop   = $this->range;
     $entries = $this->o_queue->get_queued_entries($start,$stop,$sort);
     if(!is_array($entries) || !isset($entries['XML']) || !is_array($entries['XML'])){
-      msg_dialog::display(_("Error"), sprintf(_("Cannot load queue entries: %s"), "<br><br>".$this->o_queue->get_error()), ERROR_DIALOG);
+      if ($this->o_queue->get_error()){
+        msg_dialog::display(_("Error"), sprintf(_("Cannot load queue entries: %s"), "<br><br>".$this->o_queue->get_error()), ERROR_DIALOG);
+      }
       return(array());
     }
 

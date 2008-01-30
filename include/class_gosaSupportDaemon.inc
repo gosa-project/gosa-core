@@ -41,9 +41,9 @@ Function overview:
 
 class gosaSupportDaemon
 {
-  static private $s_host       = "";
-  static private $i_port       = 0;
-  static private $s_encryption_key = "";
+  private $s_host       = "";
+  private $i_port       = 0;
+  private $s_encryption_key = "";
 
   private $o_sock       = NULL;
   private $f_timeout    = 2;
@@ -68,14 +68,10 @@ class gosaSupportDaemon
     # load from config, store statically
     if (isset($config->current['GOSA_SI'])){
 
-      if (gosaSupportDaemon::$s_host == ""){
-        $host= preg_replace("/^.*@([^:]+):.*$/", "$1", $config->current['GOSA_SI']);
-        $port= preg_replace("/^.*@[^:]+:(.*)$/", "$1", $config->current['GOSA_SI']);
-        $key = preg_replace("/^(.*)@[^:]+:.*$/", "$1", $config->current['GOSA_SI']);
-        
-        gosaSupportDaemon::$s_host           = $host;
-        gosaSupportDaemon::$i_port           = $port;
-        gosaSupportDaemon::$s_encryption_key = $key;
+      if ($this->s_host == ""){
+        $this->s_host= preg_replace("/^.*@([^:]+):.*$/", "$1", $config->current['GOSA_SI']);
+        $this->i_port= preg_replace("/^.*@[^:]+:(.*)$/", "$1", $config->current['GOSA_SI']);
+        $this->s_encryption_key = preg_replace("/^(.*)@[^:]+:.*$/", "$1", $config->current['GOSA_SI']);
       }
 
       $this->f_timeout = $timeout;
@@ -91,9 +87,9 @@ class gosaSupportDaemon
    */
   public function connect()
   {
-    $this->o_sock = new Socket_Client(gosaSupportDaemon::$s_host,gosaSupportDaemon::$i_port,TRUE,$this->f_timeout);
+    $this->o_sock = new Socket_Client($this->s_host,$this->i_port,TRUE,$this->f_timeout);
     if($this->o_sock->connected()){ 
-      $this->o_sock->setEncryptionKey(gosaSupportDaemon::$s_encryption_key); 
+      $this->o_sock->setEncryptionKey($this->s_encryption_key); 
       $this->is_connected = TRUE;
     }else{
       $this->error = $this->o_sock->get_error();
@@ -174,8 +170,10 @@ class gosaSupportDaemon
         $ret = $entries; 
       }
     }
+    
     return($ret);
   }
+
 
   /*! \brief  Checks if the given ids are used queue ids.
     @param  Array   The ids we want to check..
@@ -452,10 +450,14 @@ class gosaSupportDaemon
         }
       }
     }
+
     if(!isset($params['XML'])){
-      $this->set_error(_("Could not parse XML."));
-      $params = array();
+      if (!array_key_exists('XML', $params)){
+        $this->set_error(_("Could not parse XML."));
+      }
+      $params = array("COUNT" => 0);
     }
+
     return($params); 
   }
 
