@@ -76,7 +76,7 @@ $config= session::get('config');
 $dn =  base64_decode($_GET['dn']);
 $acl = $ui->get_permissions($dn,"ldapmanager/ldifexport");
 if(!preg_match("/r/",$acl)){
-	echo _("Permission denied!");
+	msg_dialog::display(_("Permission denied!"),_("You are not allowed to create ldap dumps."),FATAL_ERROR_DIALOG);
 	exit();
 }
 
