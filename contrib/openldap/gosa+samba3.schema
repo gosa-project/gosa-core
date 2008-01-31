@@ -381,3 +381,15 @@ objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.20 NAME 'gosaConfig'
        DESC 'Settings for gosa. Replaces parts of the gosa.conf. (v2.6)' SUP top STRUCTURAL
        MAY  ( gosaSetting ) )
 
+# GOto submenu entries
+objectclass (1.3.6.1.4.1.10098.1.2.1.43 NAME 'gotoSubmenuEntry'
+        DESC 'GOto - contains environment settings (v2.6)' SUP top STRUCTURAL
+        MUST ( cn )
+        MAY ( gosaApplicationIcon $ gosaApplicationPriority ) )
+
+# GOto menu entries
+objectclass (1.3.6.1.4.1.10098.1.2.1.44 NAME 'gotoMenuEntry'
+        DESC 'GOto - defines a menu entry (v2.6)' SUP top STRUCTURAL
+        MUST ( cn )
+        MAY ( gosaApplicationParameter $ gosaApplicationPriority ) )
+
