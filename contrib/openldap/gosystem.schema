@@ -330,7 +330,7 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.2.11 NAME 'gotoSysStatus'
 
 attributetype ( 1.3.6.1.4.1.10098.1.1.2.12 NAME 'gotoHardwareChecksum'
         DESC 'GOto - quick way to see if something has changed'
-        EQUALITY caseIgnoreIA5SubstringsMatch
+        EQUALITY caseIgnoreIA5Match
         SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE)
 
 # objectclass for Hardware definitions
