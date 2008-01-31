@@ -328,6 +328,11 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.2.11 NAME 'gotoSysStatus'
         SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
         SINGLE-VALUE)
 
+attributetype ( 1.3.6.1.4.1.10098.1.1.2.12 NAME 'gotoHardwareChecksum'
+        DESC 'GOto - quick way to see if something has changed'
+        EQUALITY caseIgnoreIA5SubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE)
+
 # objectclass for Hardware definitions
 objectclass (1.3.6.1.4.1.10098.1.2.1.3 NAME 'GOhard'
         DESC 'Gonicus Hardware definitions, objectclass (v2.5)' SUP top STRUCTURAL
@@ -343,5 +348,5 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.3 NAME 'GOhard'
               gotoXKbLayout $ gotoXKbVariant $ gotoXDriver $ gotoXMouseType $ macAddress $
               gotoAutoFs $ gotoModules $ gotoAdaptPath $ gotoKernelParameters $ gotoBootKernel $
               gotoTerminalPath $ gotoLdapServer $ gotoScannerModel $ ipHostNumber $ l $
-	      gotoSysStatus $ description ) )
+	      gotoSysStatus $ description $ gotoHardwareChecksum ) )
 
