@@ -10,9 +10,25 @@ specified for this class below.
 	-->
 	<!-- Generic -->
 <ENTRIES>
-	<ENTRY name="generic"  			value="Generic" 		path="" file="" />
+        <ENTRY name="generic"                   value="Generic"                 path="" file="" />
+
+	<!-- User interface -->
+	<ENTRY name="user"  		value="Users"		path="../doc/guide/user/__LANG__/html/users" file="node2.html" />
+        <ENTRY name="posixAccount"	value="Unix"		path="../doc/guide/user/__LANG__/html/users" file="node5.html" />
+	<ENTRY name="environment"	value="Environment"	path="../doc/guide/user/__LANG__/html/users" file="node10.html" />
+        <ENTRY name="mailAccount"	value="Mail"		path="../doc/guide/user/__LANG__/html/users" file="node17.html" />
+        <ENTRY name="sambaAccount"	value="Samba"		path="../doc/guide/user/__LANG__/html/users" file="node22.html" />
+        <ENTRY name="netatalk"		value="Netatalk"	path="" file="" />
+	<ENTRY name="connectivity"	value="Connectivity"	path="../doc/guide/user/__LANG__/html/users" file="node26.html" />
+	<ENTRY name="gofaxAccount"	value="Fax"		path="../doc/guide/user/__LANG__/html/users" file="node32.html" />
+	<ENTRY name="phoneAccount"	value="Phone"		path="../doc/guide/user/__LANG__/html/users" file="node37.html" />
+        <ENTRY name="nagiosAccount"	value="Nagios"		path="" file="" />
+        <ENTRY name="scalixAccount"	value="Scalix"		path="" file="" />
+        <ENTRY name="password"		value="Password"	path="../doc/guide/user/__LANG__/html/users" file="node2.html" />
+
+
 	<!-- Administration -->
-	<ENTRY name="userManagement"	value="Users" 			path="../doc/guide/user/__LANG__/html/users" file="index.html" />
+	<ENTRY name="userManagement"	value="Users" 		path="../doc/guide/user/__LANG__/html/users" file="index.html" />
 	<ENTRY name="user"          	value="User"            path="../doc/guide/user/__LANG__/html/users" file="node2.html" />
 	<ENTRY name="posixAccount"     	value="Unix"            path="../doc/guide/user/__LANG__/html/users" file="node5.html" />
 	<ENTRY name="environment"   	value="Environment"     path="../doc/guide/user/__LANG__/html/users" file="node10.html" />
