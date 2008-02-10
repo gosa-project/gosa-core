@@ -5,24 +5,35 @@ This xml file specifies which class is documented in which help file.
 If isset ( $_SESSION['current_class_for_help'] ) then open the helpfile which is  
 specified for this class below.
 -->
-	<!-- name="class name" value="displayed text" path="path to helpfiles" 
+	<!-- name="class name" value="displayed text in the gosa interface" path="path to helpfiles" 
 		 Leave blank to display message "There is no helpfile specified for this class."	
 	-->
 <ENTRIES>
 
 	<!-- User interface -->
-	<ENTRY name="generic"  		value="Generic"		path="../doc/guide/user/__LANG__/html/users" file="node2.html" />
-        <ENTRY name="posixAccount"	value="Unix"		path="../doc/guide/user/__LANG__/html/posix" file="node5.html" />
-	<ENTRY name="environment"	value="Environment"	path="../doc/guide/user/__LANG__/html/environment" file="node10.html" />
-        <ENTRY name="mailAccount"	value="Mail"		path="../doc/guide/user/__LANG__/html/mail" file="node17.html" />
-        <ENTRY name="sambaAccount"	value="Samba"		path="../doc/guide/user/__LANG__/html/samba" file="node22.html" />
-        <ENTRY name="netatalk"		value="Netatalk"	path="" file="" />
-	<ENTRY name="connectivity"	value="Connectivity"	path="../doc/guide/user/__LANG__/html/connectivity" file="node26.html" />
-	<ENTRY name="gofaxAccount"	value="Fax"		path="../doc/guide/user/__LANG__/html/faxaccount" file="node32.html" />
-	<ENTRY name="phoneAccount"	value="Phone"		path="../doc/guide/user/__LANG__/html/phoneaccount" file="node37.html" />
-        <ENTRY name="nagiosAccount"	value="Nagios"		path="" file="" />
-        <ENTRY name="scalixAccount"	value="Scalix"		path="" file="" />
-        <ENTRY name="password"		value="Password"	path="../doc/guide/user/__LANG__/html/password" file="node2.html" />
+	<ENTRY name="generic"  		value="Generic"			path="../doc/guide/user/__LANG__/html/users" file="node2.html" />
+        <ENTRY name="posixaccount"	value="Unix settings"		path="../doc/guide/user/__LANG__/html/posix" file="node5.html" />
+	<ENTRY name="environment"	value="Environment"		path="../doc/guide/user/__LANG__/html/environment" file="node10.html" />
+        <ENTRY name="mailaccount"	value="User mail settings"	path="../doc/guide/user/__LANG__/html/mail" file="node17.html" />
+        <ENTRY name="sambaaccount"	value="Samba"			path="../doc/guide/user/__LANG__/html/samba" file="node22.html" />
+        <ENTRY name="netatalk"		value="Netatalk settings"	path="" file="" />
+
+	<ENTRY name="connectivity"	value="Connectivity"		path="../doc/guide/user/__LANG__/html/connectivity" file="node26.html" />
+	<ENTRY name="proxyaccount"	value="Proxy account"		path="../doc/guide/user/__LANG__/html/connectivity" file="node26.html" />
+        <ENTRY name="pureftpdaccount"	value="FTP account"		path="../doc/guide/user/__LANG__/html/connectivity" file="node26.html" />
+        <ENTRY name="webdavaccount"	value="WebDAV account"		path="../doc/guide/user/__LANG__/html/connectivity" file="node26.html" />
+	<ENTRY name="phpgwaccount"	value="PHPGroupware account"	path="../doc/guide/user/__LANG__/html/connectivity" file="node26.html" />
+	<ENTRY name="intranetaccount"	value="Intranet account"	path="../doc/guide/user/__LANG__/html/connectivity" file="node26.html" />
+	<ENTRY name="opengwaccount"	value="Opengroupware"		path="../doc/guide/user/__LANG__/html/connectivity" file="node26.html" />
+	<ENTRY name="pptpaccount"	value="PPTP account"		path="../doc/guide/user/__LANG__/html/connectivity" file="node26.html" />
+	<ENTRY name="phpscheduleitaccount"	value="PHPscheduleit account"		path="../doc/guide/user/__LANG__/html/connectivity" file="node26.html" />
+	<ENTRY	name="glpiaccount"	value="GLPI account"		path="../doc/guide/user/__LANG__/html/connectivity" file="node26.html" />
+
+	<ENTRY name="gofaxaccount"	value="FAX settings"		path="../doc/guide/user/__LANG__/html/faxaccount" file="node32.html" />
+	<ENTRY name="phoneaccount"	value="Phone settings"		path="../doc/guide/user/__LANG__/html/phoneaccount" file="node37.html" />
+        <ENTRY name="nagiosaccount"	value="Nagios settings"		path="" file="" />
+        <ENTRY name="scalixaccount"	value="Scalix settings"		path="" file="" />
+        <ENTRY name="password"		value="Password settings"	path="../doc/guide/user/__LANG__/html/password" file="node2.html" />
 
 
 	<!-- Administration -->
