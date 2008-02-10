@@ -6,25 +6,23 @@ If isset ( $_SESSION['current_class_for_help'] ) then open the helpfile which is
 specified for this class below.
 -->
 	<!-- name="class name" value="displayed text" path="path to helpfiles" 
-		 Leave blank to display massage "There is no helpfile specified for this class."	
+		 Leave blank to display message "There is no helpfile specified for this class."	
 	-->
-	<!-- Generic -->
 <ENTRIES>
-        <ENTRY name="generic"                   value="Generic"                 path="" file="" />
 
 	<!-- User interface -->
-	<ENTRY name="user"  		value="Users"		path="../doc/guide/user/__LANG__/html/users" file="node2.html" />
-        <ENTRY name="posixAccount"	value="Unix"		path="../doc/guide/user/__LANG__/html/users" file="node5.html" />
-	<ENTRY name="environment"	value="Environment"	path="../doc/guide/user/__LANG__/html/users" file="node10.html" />
-        <ENTRY name="mailAccount"	value="Mail"		path="../doc/guide/user/__LANG__/html/users" file="node17.html" />
-        <ENTRY name="sambaAccount"	value="Samba"		path="../doc/guide/user/__LANG__/html/users" file="node22.html" />
+	<ENTRY name="generic"  		value="Generic"		path="../doc/guide/user/__LANG__/html/users" file="node2.html" />
+        <ENTRY name="posixAccount"	value="Unix"		path="../doc/guide/user/__LANG__/html/posix" file="node5.html" />
+	<ENTRY name="environment"	value="Environment"	path="../doc/guide/user/__LANG__/html/environment" file="node10.html" />
+        <ENTRY name="mailAccount"	value="Mail"		path="../doc/guide/user/__LANG__/html/mail" file="node17.html" />
+        <ENTRY name="sambaAccount"	value="Samba"		path="../doc/guide/user/__LANG__/html/samba" file="node22.html" />
         <ENTRY name="netatalk"		value="Netatalk"	path="" file="" />
-	<ENTRY name="connectivity"	value="Connectivity"	path="../doc/guide/user/__LANG__/html/users" file="node26.html" />
-	<ENTRY name="gofaxAccount"	value="Fax"		path="../doc/guide/user/__LANG__/html/users" file="node32.html" />
-	<ENTRY name="phoneAccount"	value="Phone"		path="../doc/guide/user/__LANG__/html/users" file="node37.html" />
+	<ENTRY name="connectivity"	value="Connectivity"	path="../doc/guide/user/__LANG__/html/connectivity" file="node26.html" />
+	<ENTRY name="gofaxAccount"	value="Fax"		path="../doc/guide/user/__LANG__/html/faxaccount" file="node32.html" />
+	<ENTRY name="phoneAccount"	value="Phone"		path="../doc/guide/user/__LANG__/html/phoneaccount" file="node37.html" />
         <ENTRY name="nagiosAccount"	value="Nagios"		path="" file="" />
         <ENTRY name="scalixAccount"	value="Scalix"		path="" file="" />
-        <ENTRY name="password"		value="Password"	path="../doc/guide/user/__LANG__/html/users" file="node2.html" />
+        <ENTRY name="password"		value="Password"	path="../doc/guide/user/__LANG__/html/password" file="node2.html" />
 
 
 	<!-- Administration -->
@@ -38,24 +36,24 @@ specified for this class below.
 	<ENTRY name="gofaxAccount"  	value="Fax"             path="../doc/guide/user/__LANG__/html/users" file="node32.html" />
 	<ENTRY name="phoneAccount"  	value="Phone account"   path="../doc/guide/user/__LANG__/html/users" file="node37.html" />
 
-	<ENTRY NAME="faiPackageNew" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/users" FILE="node67.html" />
-	<ENTRY NAME="faiScript" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/users" FILE="node20.html" />
-	<ENTRY NAME="faiPackageEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/users" FILE="node67.html" />
-	<ENTRY NAME="faiTemplate" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/users" FILE="node54.html" />
+	<ENTRY NAME="faiPackageNew" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node67.html" />
+	<ENTRY NAME="faiScript" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node20.html" />
+	<ENTRY NAME="faiPackageEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node67.html" />
+	<ENTRY NAME="faiTemplate" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node54.html" />
 	<ENTRY NAME="faiManagement" 		VALUE="Fai" PATH="" FILE="" />
-	<ENTRY NAME="faiScriptEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/users" FILE="node22.html" />
-	<ENTRY NAME="faiHookEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/users" FILE="node34.html" />
-	<ENTRY NAME="faiPackage" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/users" FILE="node65.html" />
-	<ENTRY NAME="faiProfile" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/users" FILE="node2.html" />
-	<ENTRY NAME="faiHook" 			VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/users" FILE="node32.html" />
-	<ENTRY NAME="faiPartitionTableEntry" 	VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/users" FILE="node12.html" />
-	<ENTRY NAME="faiVariableEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/users" FILE="node45.html" />
-	<ENTRY NAME="faiPartitionTable" 	VALUE="Partitions" PATH="../doc/guide/user/__LANG__/html/users" FILE="node12.html" />
-	<ENTRY NAME="faiProfileEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/users" FILE="node4.html" />
+	<ENTRY NAME="faiScriptEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node22.html" />
+	<ENTRY NAME="faiHookEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node34.html" />
+	<ENTRY NAME="faiPackage" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node65.html" />
+	<ENTRY NAME="faiProfile" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node2.html" />
+	<ENTRY NAME="faiHook" 			VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node32.html" />
+	<ENTRY NAME="faiPartitionTableEntry" 	VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node12.html" />
+	<ENTRY NAME="faiVariableEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node45.html" />
+	<ENTRY NAME="faiPartitionTable" 	VALUE="Partitions" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node12.html" />
+	<ENTRY NAME="faiProfileEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node4.html" />
 	<ENTRY NAME="askClassName" 		VALUE="Fai" PATH="" FILE="" />
 	<ENTRY NAME="faiPackageConfiguration" 	VALUE="Fai" PATH="" FILE="" />
-	<ENTRY NAME="faiVariable" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/users" FILE="node43.html" />
-	<ENTRY NAME="faiTemplateEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/users" FILE="node56.html" />
+	<ENTRY NAME="faiVariable" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node43.html" />
+	<ENTRY NAME="faiTemplateEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node56.html" />
 
 	<ENTRY NAME="ppdManager" 		VALUE="" PATH="" FILE="" />
 

@@ -1,0 +1,241 @@
+#LyX 1.5.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 276
+\begin_document
+\begin_header
+\textclass article
+\language ngerman
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\paperfontsize default
+\spacing single
+\papersize a4paper
+\use_geometry false
+\use_amsmath 2
+\use_esint 0
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\leftmargin 10mm
+\topmargin 10mm
+\rightmargin 10mm
+\bottommargin 20mm
+\headheight 10mm
+\headsep 10mm
+\footskip 10mm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+
+\series bold
+Addons
+\end_layout
+
+\begin_layout Section
+Mail-Queue
+\end_layout
+
+\begin_layout Standard
+This module is used to show the mail queue.
+ There the display can be influenced using filters.
+\end_layout
+
+\begin_layout Subsection
+Filter
+\color none
+ 
+\color black
+
+\begin_inset Graphics
+	filename ../../de/lyx-source/images/rocket.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+\noun on
+Search for string in queue status: status within the last time limitation:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features>
+<column alignment="block" valignment="top" leftline="true" width="5cm">
+<column alignment="block" valignment="top" leftline="true" rightline="true" width="10cm">
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none" width="5in">
+\begin_inset Text
+
+\begin_layout Standard
+
+\emph on
+\noun on
+string
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Please enter a search string here
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none" width="5in">
+\begin_inset Text
+
+\begin_layout Standard
+
+\emph on
+\noun on
+Queue
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Select the mail server from the list that you want to limit the search,
+ or all, if you want all queues.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none" width="5in">
+\begin_inset Text
+
+\begin_layout Standard
+
+\emph on
+\noun on
+Status
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Select the status of the list that you want to limit the search.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true" bottomline="true">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none" width="5in">
+\begin_inset Text
+
+\begin_layout Standard
+
+\emph on
+\noun on
+Time Limitation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Select the time limit from the list that you want to limit the search.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To perform the search with the settings, press the Search button on the
+ far right.
+\end_layout
+
+\begin_layout Subsection
+Actions
+\end_layout
+
+\begin_layout Standard
+To put an action on one or more messages, select the desired messages in
+ the list and click on one of the following symbols:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename ../../de/lyx-source/images/edittrash.png
+
+\end_inset
+
+: Remove all messages from selected queues
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename ../../de/lyx-source/images/mailq_hold.png
+
+\end_inset
+
+: Hold all messages from selected queues
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename ../../de/lyx-source/images/mailq_unhold.png
+
+\end_inset
+
+: Release all messages from selected queues
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Graphics
+	filename ../../de/lyx-source/images/mailq_requeue.png
+
+\end_inset
+
+: Requeue all messages from selected queues
+\end_layout
+
+\end_body
+\end_document
