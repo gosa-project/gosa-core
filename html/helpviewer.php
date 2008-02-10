@@ -38,14 +38,7 @@ if (!isset($_SESSION['config'])){
   exit;
 }
 
-/* Language setup */
-if ($config->data['MAIN']['LANG'] == ""){
-  $lang= get_browser_language();
-} else {
-  $lang= $config->data['MAIN']['LANG'];
-}
-
-$lang.=".UTF-8";
+$lang= get_browser_language();
 
 putenv("LANGUAGE=");
 putenv("LANG=$lang");
@@ -120,9 +113,9 @@ if(isset($_SESSION['current_class_for_help'])){
     $display= (  $header.$smarty->fetch(get_template_path('help.tpl')));
     echo $display;
     unset($_SESSION['current_class_for_help']);
-    exit();  
+    exit();
   }
- 
+    
   /* Save filename */
   $helpobject['file']= $str[($_SESSION['current_class_for_help'])]['FILE'];
   
@@ -181,9 +174,11 @@ $_SESSION['helpobject'] = $helpobject;
  * Display management 
  */
 
+/* this raise a warning if the directory is not found */
+
 $files = array();
-$f = opendir($helpdir);
-while($file = readdir($f)){
+$f = @opendir($helpdir);
+while($file = @readdir($f)){
   $files[$file]=$file;
 }
 
@@ -226,7 +221,7 @@ if(isset($_POST['search'])){
   $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
 
   /* I don't know why, but we must use utf8_encode to avoid dispplay errors */
-  $display= (  $header.$smarty->fetch(get_template_path('help.tpl')));
+  $display= utf8_encode(  $header.$smarty->fetch(get_template_path('help.tpl')));
   echo $display;
 }elseif(((empty($helpdir)))||($helpdir=="/")){
   /* Generate Index and display it */
