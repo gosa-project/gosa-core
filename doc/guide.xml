@@ -37,7 +37,7 @@ specified for this class below.
 
 
 	<!-- Administration -->
-	<ENTRY name="userManagement"	value="Users" 		path="../doc/guide/user/__LANG__/html/users" file="index.html" />
+	<ENTRY name="usermanagement"	value="Users" 		path="../doc/guide/user/__LANG__/html/users" file="index.html" />
 	<ENTRY name="user"          	value="User"            path="../doc/guide/user/__LANG__/html/users" file="node2.html" />
 	<ENTRY name="posixAccount"     	value="Unix"            path="../doc/guide/user/__LANG__/html/users" file="node5.html" />
 	<ENTRY name="environment"   	value="Environment"     path="../doc/guide/user/__LANG__/html/users" file="node10.html" />
@@ -47,11 +47,11 @@ specified for this class below.
 	<ENTRY name="gofaxAccount"  	value="Fax"             path="../doc/guide/user/__LANG__/html/users" file="node32.html" />
 	<ENTRY name="phoneAccount"  	value="Phone account"   path="../doc/guide/user/__LANG__/html/users" file="node37.html" />
 
+        <ENTRY NAME="faimanagement"             VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="index.html" />
 	<ENTRY NAME="faiPackageNew" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node67.html" />
 	<ENTRY NAME="faiScript" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node20.html" />
 	<ENTRY NAME="faiPackageEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node67.html" />
 	<ENTRY NAME="faiTemplate" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node54.html" />
-	<ENTRY NAME="faiManagement" 		VALUE="Fai" PATH="" FILE="" />
 	<ENTRY NAME="faiScriptEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node22.html" />
 	<ENTRY NAME="faiHookEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node34.html" />
 	<ENTRY NAME="faiPackage" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node65.html" />
@@ -89,12 +89,12 @@ specified for this class below.
 	<ENTRY NAME="mailgroup"			VALUE="Mail group"	PATH="../doc/guide/user/__LANG__/html/groups" FILE="node11.html" />
 	
 	<ENTRY NAME="appgroup" 			VALUE="Application group"   PATH="../doc/guide/user/__LANG__/html/groups" FILE="node11.html" />
-	<ENTRY NAME="groupManagement"		VALUE="Groups" 		PATH="../doc/guide/user/__LANG__/html/groups" FILE="index.html" />
+	<ENTRY NAME="groupmanagement"		VALUE="Groups" 		PATH="../doc/guide/user/__LANG__/html/groups" FILE="index.html" />
 	<ENTRY NAME="applicationParameters"	VALUE="Application" 	PATH="../doc/guide/user/__LANG__/html/applications" FILE="index.html" />
-	<ENTRY NAME="applicationManagement"	VALUE="Application"	PATH="../doc/guide/user/__LANG__/html/applications" FILE="index.html" />
+	<ENTRY NAME="applicationmanagement"	VALUE="Application"	PATH="../doc/guide/user/__LANG__/html/applications" FILE="index.html" />
 	<ENTRY NAME="application" 		VALUE="Application" 	PATH="../doc/guide/user/__LANG__/html/applications" FILE="index.html" />
 
-	<ENTRY NAME="departmentManagement"	VALUE="Department" 	PATH="../doc/guide/user/__LANG__/html/departments" FILE="index.html" />
+	<ENTRY NAME="departmentmanagement"	VALUE="Department" 	PATH="../doc/guide/user/__LANG__/html/departments" FILE="index.html" />
 	<ENTRY NAME="department" 		VALUE="Department" 	PATH="../doc/guide/user/__LANG__/html/departments" FILE="index.html" />
 
 	<ENTRY NAME="terminfo" 			VALUE="Terminal info" 		PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
@@ -103,7 +103,10 @@ specified for this class below.
 	<ENTRY NAME="termgroup" 		VALUE="Terminal group" 		PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
 	<ENTRY NAME="termstartup" 		VALUE="Terminal startup" 	PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
 
-	<ENTRY NAME="systemManagment" 		VALUE="System" 			PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
+	<ENTRY NAME="mimetypemanagement"	VALUE=""			PATH="" />
+
+	<ENTRY NAME="systems"	 		VALUE="System" 			PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
+	<ENTRY NAME="systemmanagment" 		VALUE="System" 			PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
 	<ENTRY NAME="servservice" 		VALUE="Service" 		PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
 	<ENTRY NAME="servdb" 			VALUE="Datebases"	 	PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
 	<ENTRY NAME="servgeneric" 		VALUE="Generic" 		PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
@@ -120,15 +123,15 @@ specified for this class below.
 	<ENTRY NAME="phoneGeneric"		VALUE="Generic" 		PATH="../doc/guide/user/__LANG__/html/users"   FILE="node37.html" />
 	<ENTRY NAME="phonequeue" 		VALUE="Phone queue" 		PATH="../doc/guide/user/__LANG__/html/ogroups" FILE="index.html" />
 	<ENTRY NAME="conference" 		VALUE="Phone conference" 	PATH="../doc/guide/user/__LANG__/html/conference" FILE="index.html" />
-	<ENTRY NAME="phoneConferenceManagment"	VALUE="Phone conference" 	PATH="../doc/guide/user/__LANG__/html/conference" FILE="index.html" />
+	<ENTRY NAME="phoneconferencemanagment"	VALUE="Phone conference" 	PATH="../doc/guide/user/__LANG__/html/conference" FILE="index.html" />
 	<ENTRY NAME="mailqueue" 		VALUE="Mail queue" 		PATH="../doc/guide/user/__LANG__/html/mailqueue" FILE="node1.html" />
 
-	<ENTRY NAME="gofonMacro" 		VALUE="Phone macro" 		PATH="../doc/guide/user/__LANG__/html/macro" FILE="index.html" />
+	<ENTRY NAME="gofonmacro" 		VALUE="Phone macro" 		PATH="../doc/guide/user/__LANG__/html/macro" FILE="index.html" />
 	<ENTRY NAME="macro" 			VALUE="Phone macro" 		PATH="../doc/guide/user/__LANG__/html/macro" FILE="index.html" />
 	<ENTRY NAME="macroParameter" 		VALUE="Phone macro" 		PATH="../doc/guide/user/__LANG__/html/macro" FILE="index.html" />
 
 	<ENTRY NAME="ogroup" 			VALUE="Object group" 		PATH="../doc/guide/user/__LANG__/html/ogroups" FILE="index.html" />
-	<ENTRY NAME="ogroupManagement" 		VALUE="Object group" 		PATH="../doc/guide/user/__LANG__/html/ogroups" FILE="index.html" />
+	<ENTRY NAME="ogroupmanagement" 		VALUE="Object group" 		PATH="../doc/guide/user/__LANG__/html/ogroups" FILE="index.html" />
 	<ENTRY NAME="mailogroup" 		VALUE="Object group" 		PATH="../doc/guide/user/__LANG__/html/ogroups" FILE="index.html" />
 	
 	<ENTRY NAME="selectUserToPrinterDialog" VALUE="" PATH="" FILE="" />
