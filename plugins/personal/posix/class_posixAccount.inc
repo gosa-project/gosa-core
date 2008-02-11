@@ -155,8 +155,7 @@ class posixAccount extends plugin
         if (!isset($attrs["description"][0])){
           $entry= $attrs["cn"][0];
         } else {
-          $dsc= preg_replace ('/^Group of user/', _("Group of user"), $attrs["description"][0]);
-          $entry= $attrs["cn"][0]." [$dsc]";
+          $entry= $attrs["cn"][0]." [".$attrs["description"][0]."]";
         }
         $this->groupMembership[$ldap->getDN()]= $entry;
       }
