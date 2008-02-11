@@ -915,7 +915,7 @@ class posixAccount extends plugin
         $g->cn= $this->uid;
         $g->force_gid= 1;
         $g->gidNumber= $this->gidNumber;
-        $g->description= "Group of user ".$this->givenName." ".$this->sn;
+        $g->description= _("Group of user")." ".$this->givenName." ".$this->sn;
         $g->save ();
       }
     }
