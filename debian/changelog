@@ -1,7 +1,6 @@
-gosa (2.5.14-2) unstable; urgency=low
+gosa (2.5.15-1) unstable; urgency=low
 
   * Removed bashisms from desktop package (Closes #464988)
-  * Merged in a couple of fixes from SVN
 
  -- Cajus Pollmeier <cajus@debian.org>  Mon, 11 Feb 2008 08:54:19 +0100
 
