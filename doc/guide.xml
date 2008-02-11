@@ -75,31 +75,33 @@ specified for this class below.
 	<ENTRY NAME="selectPrinterDialog" 	VALUE="" 		PATH="" FILE="" />
 	<ENTRY NAME="logonManagementDialog" 	VALUE="Logon scripts"	PATH="../doc/guide/user/__LANG__/html/users" FILE="node13.html" />
 	<ENTRY NAME="nagiosAccount" 		VALUE="" 		PATH="" FILE="" />
-	<ENTRY NAME="blocklist" 		VALUE="Fax Blocklists" 	PATH="../doc/guide/user/__LANG__/html/faxreports" FILE="index.html" />
+	<ENTRY NAME="blocklist" 		VALUE="Fax Blocklists" 	PATH="../doc/guide/user/__LANG__/html/blocklists" FILE="index.html" />
 	<ENTRY NAME="faxreport" 		VALUE="Fax Reports" 	PATH="../doc/guide/user/__LANG__/html/faxreports" FILE="node1.html" />
 	<ENTRY NAME="addressbook" 		VALUE="Addressbook" 	PATH="../doc/guide/user/__LANG__/html/addressbook" FILE="index.html" />
 
-	<ENTRY NAME="csvimport" 		VALUE="CSV import" 	PATH="../doc/guide/user/__LANG__/html/ldapmanager" FILE="index.html" />
-	<ENTRY NAME="ldifimport" 		VALUE="Ldif import" 	PATH="../doc/guide/user/__LANG__/html/ldapmanager" FILE="index.html" />
+	<ENTRY NAME="csvimport" 		VALUE="CSV import" 	PATH="../doc/guide/user/__LANG__/html/ldapmanager" FILE="node5.html" />
+	<ENTRY NAME="ldifimport" 		VALUE="Ldif import" 	PATH="../doc/guide/user/__LANG__/html/ldapmanager" FILE="node4.html" />
 	<ENTRY NAME="ldifexport" 		VALUE="Ldif export" 	PATH="../doc/guide/user/__LANG__/html/ldapmanager" FILE="index.html" />
-	<ENTRY NAME="xlsexport" 		VALUE="Xls export" 	PATH="../doc/guide/user/__LANG__/html/ldapmanager" FILE="index.html" />
+	<ENTRY NAME="xlsexport" 		VALUE="Xls export" 	PATH="../doc/guide/user/__LANG__/html/ldapmanager" FILE="node3.html" />
 
 	<ENTRY NAME="logview"			VALUE="Log view" 	PATH="../doc/guide/user/__LANG__/html/logview" FILE="logview.html" />
 
 	<ENTRY NAME="mailgroup"			VALUE="Mail group"	PATH="../doc/guide/user/__LANG__/html/groups" FILE="node11.html" />
-	
-	<ENTRY NAME="appgroup" 			VALUE="Application group"   PATH="../doc/guide/user/__LANG__/html/groups" FILE="node11.html" />
-	<ENTRY NAME="groupmanagement"		VALUE="Groups" 		PATH="../doc/guide/user/__LANG__/html/groups" FILE="index.html" />
-	<ENTRY NAME="applicationParameters"	VALUE="Application" 	PATH="../doc/guide/user/__LANG__/html/applications" FILE="index.html" />
+
+	<ENTRY NAME="groupmanagement"		VALUE="Groups" 		PATH="../doc/guide/user/__LANG__/html/groups" FILE="index.html" />	
+	<ENTRY NAME="group"			VALUE="Generic"		PATH="../doc/guide/user/__LANG__/html/groups" FILE="index.html" />
+	<ENTRY NAME="appgroup" 			VALUE="Applications"   PATH="../doc/guide/user/__LANG__/html/groups" FILE="node10.html" />
+	<ENTRY NAME="applicationparameters"	VALUE="Application" 	PATH="../doc/guide/user/__LANG__/html/applications" FILE="index.html" />
 	<ENTRY NAME="applicationmanagement"	VALUE="Application"	PATH="../doc/guide/user/__LANG__/html/applications" FILE="index.html" />
 	<ENTRY NAME="application" 		VALUE="Application" 	PATH="../doc/guide/user/__LANG__/html/applications" FILE="index.html" />
+	<ENTRY NAME="mailgroup"			VALUE="Mail"		PATH="../doc/guide/user/__LANG__/html/groups" FILE="node11.html" />
 
 	<ENTRY NAME="departmentmanagement"	VALUE="Department" 	PATH="../doc/guide/user/__LANG__/html/departments" FILE="index.html" />
 	<ENTRY NAME="department" 		VALUE="Department" 	PATH="../doc/guide/user/__LANG__/html/departments" FILE="index.html" />
 
 	<ENTRY NAME="terminfo" 			VALUE="Terminal info" 		PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
 	<ENTRY NAME="termservice" 		VALUE="Terminal service" 	PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
-	<ENTRY NAME="termgeneric" 		VALUE="Terminal generic" 	PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
+	<ENTRY NAME="termgeneric" 		VALUE="Terminal generic" 	PATH="../doc/guide/user/__LANG__/html/systems" FILE="node2.html" />
 	<ENTRY NAME="termgroup" 		VALUE="Terminal group" 		PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
 	<ENTRY NAME="termstartup" 		VALUE="Terminal startup" 	PATH="../doc/guide/user/__LANG__/html/systems" FILE="index.html" />
 
@@ -122,13 +124,13 @@ specified for this class below.
 
 	<ENTRY NAME="phoneGeneric"		VALUE="Generic" 		PATH="../doc/guide/user/__LANG__/html/users"   FILE="node37.html" />
 	<ENTRY NAME="phonequeue" 		VALUE="Phone queue" 		PATH="../doc/guide/user/__LANG__/html/ogroups" FILE="index.html" />
-	<ENTRY NAME="conference" 		VALUE="Phone conference" 	PATH="../doc/guide/user/__LANG__/html/conference" FILE="index.html" />
+	<ENTRY NAME="conference" 		VALUE="Phone conference" 	PATH="../doc/guide/user/__LANG__/html/conference" FILE="node2.html" />
 	<ENTRY NAME="phoneconferencemanagment"	VALUE="Phone conference" 	PATH="../doc/guide/user/__LANG__/html/conference" FILE="index.html" />
 	<ENTRY NAME="mailqueue" 		VALUE="Mail queue" 		PATH="../doc/guide/user/__LANG__/html/mailqueue" FILE="node1.html" />
 
 	<ENTRY NAME="gofonmacro" 		VALUE="Phone macro" 		PATH="../doc/guide/user/__LANG__/html/macro" FILE="index.html" />
-	<ENTRY NAME="macro" 			VALUE="Phone macro" 		PATH="../doc/guide/user/__LANG__/html/macro" FILE="index.html" />
-	<ENTRY NAME="macroParameter" 		VALUE="Phone macro" 		PATH="../doc/guide/user/__LANG__/html/macro" FILE="index.html" />
+	<ENTRY NAME="macro" 			VALUE="Phone macro Management"	PATH="../doc/guide/user/__LANG__/html/macro" FILE="node2.html" />
+	<ENTRY NAME="macroparameter" 		VALUE="Phone macro Management"	PATH="../doc/guide/user/__LANG__/html/macro" FILE="node3.html" />
 
 	<ENTRY NAME="ogroup" 			VALUE="Object group" 		PATH="../doc/guide/user/__LANG__/html/ogroups" FILE="index.html" />
 	<ENTRY NAME="ogroupmanagement" 		VALUE="Object group" 		PATH="../doc/guide/user/__LANG__/html/ogroups" FILE="index.html" />
