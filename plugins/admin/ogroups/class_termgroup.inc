@@ -211,7 +211,7 @@ class termgroup extends plugin
         if ($cmd == ""){
           print_red(_("No ACTIONCMD definition found in your gosa.conf"));
         } else {
-          exec ($cmd." ".$macaddresses." ".escapeshellarg($_POST['saction']), $dummy, $retval);
+          exec ($cmd." ".escapeshellarg($_POST['saction'])." ".$macaddresses, $dummy, $retval);
           if ($retval != 0){
             print_red(sprintf(_("Execution of '%s' failed!"), $cmd));
           } else {

@@ -162,7 +162,7 @@ class workgeneric extends plugin
       if ($cmd == ""){
         print_red(_("No ACTIONCMD definition found in your gosa.conf"));
       } else {
-        exec ($cmd." ".$this->netConfigDNS->macAddress." ".escapeshellarg($_POST['saction']), $dummy, $retval);
+        exec ($cmd." ".escapeshellarg($_POST['saction'])." ".$this->netConfigDNS->macAddress, $dummy, $retval);
         if ($retval != 0){
           print_red(sprintf(_("Execution of '%s' failed!"), $cmd));
         } elseif ($_POST['saction'] != "wake") {
