@@ -212,7 +212,7 @@ class plugin
           unset($this->saved_attributes[$index]);
           continue;
         }
-        if ($this->saved_attributes[$index]["count"] == 1){
+        if (isset($this->saved_attributes[$index][0]) || $this->saved_attributes[$index]["count"] == 1){
           $tmp= $this->saved_attributes[$index][0];
           unset($this->saved_attributes[$index]);
           $this->saved_attributes[$index]= $tmp;
