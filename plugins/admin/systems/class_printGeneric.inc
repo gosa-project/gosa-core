@@ -833,7 +833,7 @@ class printgeneric extends plugin
       $ldap->add($this->attrs);
       $this->handle_post_events("add",array("macAddress" => $this->netConfigDNS->macAddress,"ipHostNumber" => $this->netConfigDNS->ipHostNumber));
     } else {
-      if ($this->orig_dn != $this->dn){
+      if (strtolower($this->dn) != strtolower($this->orig_dn)){
         $this->move($this->orig_dn, $this->dn);
       }
 
