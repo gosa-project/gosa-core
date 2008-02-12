@@ -568,7 +568,7 @@ class gosaSupportDaemon
       $xml_message.= "<$key>$value</$key>";
     }
 
-    return $d->_send("<xml><header>$header</header><target>$to</target>".$xml_message."</xml>");
+    return $d->_send("<xml><header>$header</header><source>GOSA</source><target>$to</target>".$xml_message."</xml>");
   }
 
 
