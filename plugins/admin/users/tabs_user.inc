@@ -101,7 +101,7 @@ class usertabs extends tabs
 
       $new_dn= $baseobject->new_dn;
 
-      if (strtolower($this->dn) != strtolower($new_dn)){
+      if ($this->dn != $new_dn){
 
         /* Udpate acls */
         $baseobject->update_acls($this->dn,$new_dn);
