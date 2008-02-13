@@ -6,24 +6,31 @@
 				<tr>
 					<td>{t}Zone name{/t}{$must}
 					</td>
-					<td><input type="text" name="zoneName" value="{$zoneName}" {if $NotNew} disabled {/if}>
+					<td><input type="text" name="zoneName" value="{$zoneName}" {if $NotNew | $Zone_is_used} disabled {/if}>
 					</td>
 				</tr>
 				<tr>
 					<td>{t}Network address{/t}{$must}
 					</td>
-					<td><input type="text" name="ReverseZone" value="{$ReverseZone}" {if $NotNew} disabled {/if}>
+					<td><input type="text" name="ReverseZone" value="{$ReverseZone}" {if $NotNew | $Zone_is_used} disabled {/if}>
 					</td>
 				</tr>
 				<tr>
 					<td>{t}Netmask{/t}
 					</td>
 					<td>
-						<select name="NetworkClass" {if $NotNew} disabled {/if}>
+						<select name="NetworkClass" {if $NotNew | $Zone_is_used} disabled {/if}>
 							{html_options options=$NetworkClasses selected=$NetworkClass }
 						</select>
 					</td>
 				</tr>
+				{if $Zone_is_used}
+				<tr>
+				   <td colspan="2">
+					   <i>{t}Zone is in use, network settings can't be modified.{/t}</i>
+				   </td>
+				</tr>
+				{/if}
 			</table>
 		</td>
 		<td style="vertical-align:top;">
