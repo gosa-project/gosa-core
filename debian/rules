@@ -57,7 +57,7 @@ install-stamp:
 	-cp AUTHORS README FAQ doc/README.pptp doc/README.glpi doc/README.nagios doc/README.phpscheduleit doc/README.safemode doc/README.devel doc/README.openxchange debian/gosa/usr/share/doc/gosa/
 	-rm debian/gosa/usr/share/gosa/README debian/gosa/usr/share/gosa/INSTALL
 	-rm debian/gosa/usr/share/gosa/AUTHORS debian/gosa/usr/share/gosa/Changelog
-	-rm debian/gosa/usr/share/gosa/FAQ
+	-rm debian/gosa/usr/share/gosa/FAQ debian/gosa/usr/share/gosa/COPYING
 	-mkdir -p debian/gosa/var/spool/gosa/compile
 	-mkdir -p debian/gosa/var/spool/gosa/config
 	-mkdir -p debian/gosa/var/spool/gosa/cache
