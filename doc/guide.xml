@@ -49,22 +49,22 @@ specified for this class below.
 
         <ENTRY NAME="faimanagement"             VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="index.html" />
 	<ENTRY NAME="faiPackageNew" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node67.html" />
-	<ENTRY NAME="faiScript" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node20.html" />
-	<ENTRY NAME="faiPackageEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node67.html" />
-	<ENTRY NAME="faiTemplate" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node54.html" />
-	<ENTRY NAME="faiScriptEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node22.html" />
-	<ENTRY NAME="faiHookEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node34.html" />
-	<ENTRY NAME="faiPackage" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node65.html" />
-	<ENTRY NAME="faiProfile" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node2.html" />
-	<ENTRY NAME="faiHook" 			VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node32.html" />
-	<ENTRY NAME="faiPartitionTableEntry" 	VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node12.html" />
-	<ENTRY NAME="faiVariableEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node45.html" />
-	<ENTRY NAME="faiPartitionTable" 	VALUE="Partitions" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node12.html" />
-	<ENTRY NAME="faiProfileEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node4.html" />
+	<ENTRY NAME="faiscript" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node20.html" />
+	<ENTRY NAME="faipackageentry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node71.html" />
+	<ENTRY NAME="faitemplate" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node54.html" />
+	<ENTRY NAME="faiscriptentry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node28.html" />
+	<ENTRY NAME="faihookentry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node39.html" />
+	<ENTRY NAME="faipackage" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node65.html" />
+	<ENTRY NAME="faiprofile" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node2.html" />
+	<ENTRY NAME="faihook" 			VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node32.html" />
+	<ENTRY NAME="faipartitiontableentry" 	VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node17.html" />
+	<ENTRY NAME="faivariableentry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node50.html" />
+	<ENTRY NAME="faipartitiontable" 	VALUE="Partitions" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node12.html" />
+	<ENTRY NAME="faiprofileentry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node4.html" />
 	<ENTRY NAME="askClassName" 		VALUE="Fai" PATH="" FILE="" />
-	<ENTRY NAME="faiPackageConfiguration" 	VALUE="Fai" PATH="" FILE="" />
-	<ENTRY NAME="faiVariable" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node43.html" />
-	<ENTRY NAME="faiTemplateEntry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node56.html" />
+	<ENTRY NAME="faipackageconfiguration" 	VALUE="Fai" PATH="" FILE="" />
+	<ENTRY NAME="faivariable" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node43.html" />
+	<ENTRY NAME="faitemplateentry" 		VALUE="Fai" PATH="../doc/guide/user/__LANG__/html/fai" FILE="node61.html" />
 
 	<ENTRY NAME="ppdManager" 		VALUE="" PATH="" FILE="" />
 
