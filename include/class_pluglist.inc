@@ -79,26 +79,21 @@ class pluglist {
 
 	function check_access($aclname)
 	{
-		$deps= $this->ui->get_module_departments($aclname);
-
 		$acls_to_check = array();
 		if(preg_match("/,/",$aclname)){
 			$acls_to_check = split(",",$aclname);
 		}else{
 			$acls_to_check = array($aclname);
 		}
-	
-		if(preg_match("/\//",$aclname)){
+
+		foreach($acls_to_check as $acl_to_check){
+			$deps = $this->ui->get_module_departments($acl_to_check);
 			foreach($deps as $dep){
-				foreach($acls_to_check as $acl_to_check){
+				if(preg_match("/\//",$acl_to_check)){
 					if($this->ui->get_permissions($dep,$acl_to_check) != ""){
 						return(TRUE);
 					}
-				}
-			}
-		}else{
-			foreach($deps as $dep){
-				foreach($acls_to_check as $acl_to_check){
+				}else{
 					if($this->ui->get_category_permissions($dep,$acl_to_check) != ""){
 						return(TRUE);
 					}
