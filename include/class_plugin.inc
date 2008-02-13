@@ -792,6 +792,12 @@ class plugin
 
   function move($src_dn, $dst_dn)
   {
+
+    /* Do not copy if only upper- lowercase has changed */
+    if(strtolower($src_dn) == strtolower($dst_dn)){
+      return(TRUE);
+    }
+
     /* Copy source to destination */
     if (!$this->copy($src_dn, $dst_dn)){
       return (FALSE);

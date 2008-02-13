@@ -93,7 +93,7 @@ class usertabs extends tabs
 
     if ($this->dn != 'new'){
       $new_dn= $baseobject->new_dn;
-      if (strtolower($this->dn) != strtolower($new_dn)){
+      if ($this->dn != $new_dn){
 
         $baseobject->move($this->dn, $new_dn);
         $this->by_object['user']= $baseobject;
