@@ -892,31 +892,11 @@ class plugin
       return (FALSE);
     }
 
-    /* Perform a search for all objects to be moved */
-    $objects= array();
-    $ldap->cd($src_dn);
-    $ldap->search("(objectClass=*)", array("dn"));
-    while($attrs= $ldap->fetch()){
-      $dn= $attrs['dn'];
-      $objects[$dn]= strlen($dn);
-    }
-
-    /* Sort objects by indent level */
-    asort($objects);
-    reset($objects);
-
-    /* Copy objects from small to big indent levels by replacing src_dn by dst_dn */
-    foreach ($objects as $object => $len){
-      $src= $object;
-      $dst= preg_replace("/$src_dn$/", "$dst_dn", $object);
-      if (!$this->copy($src, $dst)){
-        return (FALSE);
-      }
-    }
+    $this->copy($src_dn, $dst_dn);
 
     /* Remove src_dn */
     $ldap->cd($src_dn);
-    $ldap->recursive_remove();
+    $ldap->recursive_remove($src_dn);
     return (TRUE);
   }
 
