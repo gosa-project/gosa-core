@@ -24,6 +24,13 @@ class mailMethodSendmailCyrus extends mailMethodCyrus
 
   function mailMethodSendmailCyrus($config)
   {
+    /* Check if the mail account identification attribute
+       is overridden in the configuration file
+     */
+    if(isset($config->current['MAIL_ATTRIB'])){
+      $this->uattrib = $config->current['MAIL_ATTRIB'];
+    }
+
     $this->config= $config->data['SERVERS']['IMAP'];
   }
 
