@@ -31,7 +31,7 @@ class Step_Config2 extends setup_step
   var $mail_methods   = array();
   var $mail_settings  = array("vacationdir"        => "/etc/gosa/vacation",
                              "vacationdir_active" => FALSE);
-  var $mail_attrib    = "mail";
+  var $mail_attrib    = "";
 
   var $generic_settings  = array( 
                                   "enableCopyPaste" => false,

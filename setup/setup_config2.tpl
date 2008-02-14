@@ -208,8 +208,6 @@
         </div>
     </div>
 
-
-
     <div class='step4_container'>
         <div class='step4_name'>
             {t}Vacation templates{/t}
