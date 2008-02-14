@@ -30,8 +30,13 @@ var $uattrib= "uid";
     /* Check if the mail account identification attribute
        is overridden in the configuration file
      */
-    if(isset($config->current['MAIL_ATTRIB'])){
-      $this->uattrib = $config->current['MAIL_ATTRIB'];
+    if(isset($config->current['MAIL_ATTRIB']) && !empty($config->current['MAIL_ATTRIB'])){
+      $new_uattrib= strtolower($config->current['MAIL_ATTRIB']);
+      if(in_array($new_uattrib,array("mail","uid"))){
+        $this->uattrib = $new_uattrib;
+      }else{
+        trigger_error(sprintf("Unsupported MAIL_ATTRIB in gosa configuration specified, use 'mail' or 'uid', instead of '%s'.",            $new_uattrib));
+      }
     }
 
     $this->config= $config->data['SERVERS']['IMAP'];
