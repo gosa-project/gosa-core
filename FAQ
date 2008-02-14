@@ -419,4 +419,10 @@ A: Yes, just add the following line to your gosa.conf:
 	auth_mail="true"
    ...>
 
+Q: I want to use cyrus for multiple mail domains, but GOsa uses the 'uid' attribute 
+   for account namens, how do I change this to 'mail'?
 
+A: Just add/modify the following line to/in your gosa.conf:
+   <location ...
+    mail_uattrib="mail" 
+   ...>
