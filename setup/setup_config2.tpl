@@ -183,14 +183,32 @@
             {t}Mail method{/t}
         </div>
         <div class='step4_value'>
-            <select name="mail" size="1" title="">
-                <option  value="disabled">{t}disabled{/t}</option>
-                {html_options options=$mail_methods selected=$mail}
+            <select name="mail" size="1" title="" onChange="document.mainform.submit();">
+				<option  value="disabled">{t}disabled{/t}</option>
+				{foreach from=$mail_methods item=item}
+					<option value="{$item.name}" {if $mail == $item.name} selected {/if}>{$item.name}&nbsp;({$item.uattrib})</option>
+				{/foreach}
             </select>
         </div>
         <div class='step4_status'>
         </div>
     </div>
+
+	<div class='step4_container'>
+	    <div class='step4_name'>
+            {t}Account identification attribute{/t}
+        </div>
+        <div class='step4_value'>
+            <select name="mail_attrib" size="1" {if $mail == "disabled"} disabled {/if}>
+                <option value="mail" {if $mail_attrib == "mail"} selected {/if} >mail</option>
+                <option value="uid" {if $mail_attrib == "uid"} selected {/if} >uid</option>
+            </select>
+        </div>
+        <div class='step4_status'>
+        </div>
+    </div>
+
+
 
     <div class='step4_container'>
         <div class='step4_name'>

@@ -27,10 +27,11 @@ class Step_Config2 extends setup_step
   var $header_image = "images/ldapserver.png";
 
   var $cyrusunixstyle = FALSE;
-  var $mail       = "none";
+  var $mail           = "none";
   var $mail_methods   = array();
-  var $mail_settings = array("vacationdir"        => "/etc/gosa/vacation",
+  var $mail_settings  = array("vacationdir"        => "/etc/gosa/vacation",
                              "vacationdir_active" => FALSE);
+  var $mail_attrib    = "mail";
 
   var $generic_settings  = array( 
                                   "enableCopyPaste" => false,
@@ -53,16 +54,13 @@ class Step_Config2 extends setup_step
   var $timezone       = "Europe/Berlin";
   var $timezones      = array();
 
-  var $attributes = array("governmentmode","sambaidmapping","cyrusunixstyle","mail","use_netatalk","enableFAI_management","timezone","enableMimeType");
+  var $attributes = array("mail_attrib","governmentmode","sambaidmapping","cyrusunixstyle","mail","use_netatalk","enableFAI_management","timezone","enableMimeType");
   var $called = FALSE;
 
   function Step_Config2()
   {
     $this->update_strings();
-    $tmp = $this->get_available_mail_classes();
-    foreach($tmp['name'] as $name){
-      $this->mail_methods[$name] = $name;
-    }
+    $this->mail_methods = $this->get_available_mail_classes();
 
     /* Look for samba password generation method */
     if(file_exists("/usr/bin/mkntpasswd")){
@@ -144,7 +142,7 @@ class Step_Config2 extends setup_step
     $smarty->assign("mail_methods",$this->mail_methods);
     $smarty->assign("samba_settings",$this->samba_settings);
     $smarty->assign("bool",array(FALSE => _("No"), TRUE => _("Yes")));
-        foreach($this->attributes as $attr){
+    foreach($this->attributes as $attr){
       $smarty->assign($attr,$this->$attr);
     }
     $smarty->assign("timezone"     ,$this->timezone);
@@ -159,6 +157,8 @@ class Step_Config2 extends setup_step
       if(isset($_POST['timezone']) && isset($this->timezones['TIMEZONES'][$_POST['timezone']])){
         $this->timezone = $_POST['timezone'];
       }
+
+      $old_mail = $this->mail;
 
       /* Get attributes */
       foreach($this->attributes as $attr){
@@ -229,6 +229,11 @@ class Step_Config2 extends setup_step
     }else{
       $this->is_completed = FALSE;
     }
+
+    /* Reload mail naming attribute */
+    if($old_mail != $this->mail && isset($this->mail_methods[$this->mail]['uattrib'])){
+      $this->mail_attrib = $this->mail_methods[$this->mail]['uattrib'];
+    }
   }
 
 
@@ -258,16 +263,28 @@ class Step_Config2 extends setup_step
     $lensuf = strlen($suffix);
     $prefix = ".inc";
     $lenpre = strlen($prefix);
-    $i = 0;
-    while (($file = readdir($dir)) !== false){
 
+    $default_uattrib = "";
+    $m_class_vars = get_class_vars("mailMethod");
+    if(isset($m_class_vars['uattrib'])){
+      $default_uattrib = $m_class_vars['uattrib'];
+    }
+
+    while (($file = readdir($dir)) !== false){
       if(stristr($file,$suffix)) {
+  
+        require_once($file);
         $lenfile = strlen($file);
-        $methods['name'][$i] = substr($file,$lensuf,($lenfile-$lensuf)-$lenpre);
-        $methods['file'][$i] = $file;
-        $methods[$i]['file'] = $file;
-        $methods[$i]['name'] = substr($file,$lensuf,($lenfile-$lensuf)-$lenpre);
-        $i++;
+        $name = substr($file,$lensuf,($lenfile-$lensuf)-$lenpre);
+        $methods[$name]['file'] = $file;
+        $methods[$name]['name'] = $name;
+
+        $m_class_vars = get_class_vars("mailMethod".$methods[$name]['name']);
+        if(isset($m_class_vars['uattrib'])){
+          $methods[$name]['uattrib'] = $m_class_vars['uattrib'];
+        }else{
+          $methods[$name]['uattrib'] = $default_uattrib;
+        }
       }
     }
     return($methods);
