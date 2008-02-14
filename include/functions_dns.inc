@@ -217,7 +217,7 @@ function getDNSZoneEntriesDiff($config,$newZones,$HostDn)
   /* Walk through all zones and detect renamed/added/deleted zones ... 
    */
   foreach($newZones as $name => $zone){
-    
+   
     /* This zone was renamed 
      */
     if((!empty($zone['InitialzoneName'])) && ($zone['InitialzoneName'] != $zone['zoneName'])){
@@ -226,7 +226,7 @@ function getDNSZoneEntriesDiff($config,$newZones,$HostDn)
        */ 
       $oldDn = "zoneName=".getNameFromMix($zone['InitialzoneName']).",".$HostDn;
       $newDn = "zoneName=".getNameFromMix($zone['zoneName']).",".$HostDn;
-      $PrePareZoneEntries[$zone['InitialzoneName']] = getNameFromMix($zone['zoneName']);
+      $PrePareZoneEntries[getNameFromMix($zone['InitialzoneName'])] = getNameFromMix($zone['zoneName']);
       $move [$oldDn] = $newDn;      
     }
 
@@ -259,7 +259,7 @@ function getDNSZoneEntriesDiff($config,$newZones,$HostDn)
         $base = "zoneName=".getNameFromMix($zone['zoneName']).",".$HostDn;
         $oldRDn = "zoneName=". FlipIp(getNameFromMix($zone['InitialReverseZone'])).".in-addr.arpa,".$base; 
         $newRDn = "zoneName=". FlipIp(getNameFromMix($zone['ReverseZone'])).".in-addr.arpa,".$base;
-        $PrePareZoneEntries[FlipIp($zone['InitialReverseZone']).".in-addr.arpa"] = FlipIp($zone['ReverseZone']).".in-addr.arpa";
+        $PrePareZoneEntries[FlipIp(getNameFromMix($zone['InitialReverseZone'])).".in-addr.arpa"] = FlipIp(getNameFromMix($zone['ReverseZone'])).".in-addr.arpa";
         $move [$oldRDn] = $newRDn;
       }
     }
@@ -319,15 +319,17 @@ function getDNSZoneEntriesDiff($config,$newZones,$HostDn)
   $udpate = array();
   if(count($PrePareZoneEntries)){
     $ldap = $config->get_ldap_link();
+
     foreach($PrePareZoneEntries as $FromZoneName => $ToZoneName){
       $ldap->cd($HostDn);
-      $ldap->search("(&(objectClass=dNSZone)(zoneName=".getNameFromMix($FromZoneName).")(!(relativeDomainName=@)))",array("zoneName"));
+      $ldap->search("(&(objectClass=dNSZone)(zoneName=".$FromZoneName.")(!(relativeDomainName=@)))",array("zoneName"));
       while($attrs = $ldap->fetch()){
-        $zoneUpdates[$attrs['dn']] = array("zoneName"=>$ToZoneName);
+        $attr_to_change = array();
+        $attr_to_change['zoneName'] = $ToZoneName;
+        $zoneUpdates[$attrs['dn']] = $attr_to_change;
       }
     }
   }
-
   $ret = array("del" => $del , "move" => $move , "add" => $add,"zoneUpdates"=>$zoneUpdates);
   return($ret);
 }
