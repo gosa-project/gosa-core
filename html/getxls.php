@@ -467,6 +467,7 @@ function dump_ldap ($mode= 0)
 @require_once ("../include/php_setup.inc");
 @require_once ("functions.inc");
 session::start();
+session::set('errorsAlreadyPosted',array());
 
 /* Logged in? Simple security check */
 if (!session::is_set('ui')){
@@ -487,7 +488,7 @@ if(isset($_GET['n'])){
 }
 $acl = $ui->get_permissions($dn,"ldapmanager/xlsexport");
 if(!preg_match("/r/",$acl)){
-  echo "insufficient permissions";
+	msg_dialog::display(_("Permission denied!"),_("You are not allowed to perform this action."),FATAL_ERROR_DIALOG);
   exit();
 }
 

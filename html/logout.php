@@ -26,6 +26,7 @@ header("Content-type: text/html; charset=UTF-8");
 /* try to start session, so we can remove userlocks, 
   if the old session is still available */
 @session::start();
+session::set('errorsAlreadyPosted',array());
 if(session::is_set('ui')){
   
   /* Get config & ui informations */

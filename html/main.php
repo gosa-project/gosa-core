@@ -35,6 +35,7 @@ textdomain($domain);
 
 /* Remember everything we did after the last click */
 session::start();
+session::set('errorsAlreadyPosted',array());
 session::set('limit_exceeded',FALSE);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -136,21 +137,25 @@ bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
 @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
 
+session::un_set('plist');
+
 /* Prepare plugin list */
 if (!session::is_set('plist')){
   /* Initially load all classes */
   $class_list= get_declared_classes();
   foreach ($class_mapping as $class => $path){
     if (!in_array($class, $class_list)){
-    	if (is_readable("$BASE_DIR/$path")){
-        	require_once("$BASE_DIR/$path");
-	} else {
-		echo sprintf(_("Fatal error: cannot locate file '%s' - please run '%s' to fix this"), "$BASE_DIR/$path", "<b>update-gosa</b>");
-		exit;
-	}
+      if (is_readable("$BASE_DIR/$path")){
+        require_once("$BASE_DIR/$path");
+      } else {
+        msg_dialog::display(_("Could not location file."),
+            sprintf(_("Fatal error: cannot locate file '%s' - please run '%s' to fix this"),
+              "$BASE_DIR/$path", "<b>update-gosa</b>"), FATAL_ERROR_DIALOG);
+        exit;
+      }
     }
   }
-  
+
   session::set('plist', new pluglist($config, $ui));
 
   /* Load ocMapping into userinfo */
@@ -159,13 +164,16 @@ if (!session::is_set('plist')){
   session::set('ui',$ui);
 }
 $plist= session::get('plist');
-
 /* Check for register globals */
 if (isset($global_check) && $config->data['MAIN']['FORCEGLOBALS'] == 'true'){
-  echo _("FATAL: Register globals is on. GOsa will refuse to login unless this is fixed by an administrator.");
+  msg_dialog::display(
+            _("PHP configuration"),
+            _("FATAL: Register globals is on. GOsa will refuse to login unless this is fixed by an administrator."),
+            FATAL_ERROR_DIALOG);
+
   new log("security","login","",array(),"Register globals is on. For security reasons, this should be turned off.") ;
   session::destroy ();
-  exit ();
+  exit;
 }
 
 /* Check Plugin variable */
@@ -352,7 +360,10 @@ if((isset($config->data['MAIN']['ACCOUNT_EXPIRATION'])) &&
 if (is_file("$plugin_dir/main.inc")){
   require_once ("$plugin_dir/main.inc");
 } else {
-  echo sprintf(_("FATAL: Can't find any plugin definitions for plugin '%s'!"), $plug);
+  msg_dialog::display(
+            _("Plugin"),
+            sprintf(_("FATAL: Can't find any plugin definitions for plugin '%s'!"), $plug),
+            FATAL_ERROR_DIALOG);
   exit();
 }
 

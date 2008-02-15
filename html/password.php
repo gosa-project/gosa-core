@@ -53,8 +53,8 @@ session::set('LastError',"");
 
 /* Check if CONFIG_FILE is accessible */
 if (!is_readable(CONFIG_DIR."/".CONFIG_FILE)){
-  echo sprintf(_("GOsa configuration %s/%s is not readable. Aborted."), CONFIG_DIR,CONFIG_FILE);
-  exit();
+  msg_dialog::display("", sprintf(_("GOsa configuration %s/%s is not readable. Aborted."),CONFIG_DIR,CONFIG_FILE), FATAL_ERROR_DIALOG);
+  exit;
 }
 
 /* Parse configuration file */
@@ -73,9 +73,9 @@ if (isset ($config->data['MAIN']['COMPILE'])){
 
 /* Check for compile directory */
 if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))){
-  echo sprintf(_("Directory '%s' specified as compile directory is not accessible!"),
-        $smarty->compile_dir);
-  exit();
+  msg_dialog::display(_("Accessibility"), sprintf(_("Directory '%s' specified as compile directory is not accessible!"),
+        $smarty->compile_dir), FATAL_ERROR_DIALOG);
+  exit;
 }
 
 /* Check for old files in compile directory */
@@ -158,7 +158,7 @@ if (isset($_GET['method'])){
 	$tmp = new passwordMethod($config);
 	$available = $tmp->get_available_methods();
 	if (!isset($available[$method])){
-		echo _("Error: Password method not available!");
+    msg_dialog::display(_("Password method"),_("Error: Password method not available!"),FATAL_ERROR_DIALOG);
 		exit;
 	}
 }

@@ -23,6 +23,7 @@
 @require_once ("functions.inc");
 error_reporting (0);
 session::start();
+session::set('errorsAlreadyPosted',array());
 
 /* Logged in? Simple security check */
 if (!session::is_set('ui')){

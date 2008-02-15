@@ -23,6 +23,7 @@
 @require_once ("functions.inc");
 error_reporting (0);
 session::start();
+session::set('errorsAlreadyPosted',array());
 
 /* Logged in? Simple security check */
 if (!session::is_set('ui')){
@@ -33,8 +34,8 @@ if (!session::is_set('ui')){
 
 /* Uid parameter set? */
 if (!isset($_GET['dn']) || $_GET['dn'] == ""){
-  msg_dialog::display(_("Internal error"), _("Missing parameters!"), ERROR_DIALOG);
-  display_error_page();
+  msg_dialog::display(_("Internal error"), _("Missing parameters!"), FATAL_ERROR_DIALOG);
+  exit;
 }
 
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");

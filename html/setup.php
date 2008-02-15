@@ -52,6 +52,7 @@ ini_set("session.gc_maxlifetime",24*60*60);
 /* Start session */
 session::start();
 session::set('DEBUGLEVEL',1);
+session::set('errorsAlreadyPosted',array());
 
 /* Check for js */
 if (!isset($_GET['js']) && !session::is_set('js')){
