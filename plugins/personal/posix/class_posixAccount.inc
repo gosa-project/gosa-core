@@ -885,6 +885,18 @@ class posixAccount extends plugin
     /* Save data to LDAP */
     $ldap->cd($this->dn);
     $this->cleanup();
+ 
+    /* This is just a test, we have had duplicated ids 
+        in the past when copy & paste was used. 
+       Normaly this should not happen.
+     */ 
+    if(isset($this->attrs['uidNumber']) && !$this->force_ids){
+      $used = $this->get_used_uid_numbers();
+      if(isset($used[$this->attrs['uidNumber']]) && $used[$this->attrs['uidNumber']] != $this->dn){
+        msg_dialog::display(_("Uid number"),_("A duplicated uid number was written for this user, if this was not intended please verify all used uidNumbers."), WARNING_DIALOG);
+      }
+    }
+
     unset($this->attrs['uid']);
     $ldap->modify ($this->attrs); 
 
@@ -1222,6 +1234,22 @@ class posixAccount extends plugin
   }
 
 
+  function get_used_uid_numbers()
+  {
+    $ids= array();
+    $ldap= $this->config->get_ldap_link();
+
+    $ldap->cd ($this->config->current['BASE']);
+    $ldap->search ("(&(objectClass=posixAccount)(uidNumber=*))", array("uidNumber"));
+
+    /* Get list of ids */
+    while ($attrs= $ldap->fetch()){
+      $ids[$attrs['uidNumber'][0]] = $attrs['dn'];
+    }
+    return($ids);
+  }
+
+  
   function get_next_id($attrib, $dn)
   {
     $ids= array();
