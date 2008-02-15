@@ -144,8 +144,11 @@ class pluglist {
 
 					/* Read information from class variable */
 					if (!isset($info['CLASS'])){
-						msg_dialog::display(_("Configuration error"), _("The configuration format has changed. Please re-run setup!"), ERROR_DIALOG);
-						display_error_page();
+						msg_dialog::display(
+								_("Configuration error"), 
+								_("The configuration format has changed. Please re-run setup!"), 
+								FATAL_ERROR_DIALOG);
+						exit();
 					}
 					if (!plugin_available($info['CLASS'])){
 						continue;

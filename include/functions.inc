@@ -2653,14 +2653,5 @@ function send_binary_content($data,$name,$type = "application/octet-stream")
   exit();
 }
 
-
-function display_error_page()
-{
-  $smarty= get_smarty();
-  $smarty->display(get_template_path('headers.tpl'));
-  echo "<body>".msg_dialog::get_dialogs()."</body></html>";
-  exit();
-}
-
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
