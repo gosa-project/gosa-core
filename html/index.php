@@ -203,20 +203,20 @@ if ($config->data['MAIN']['FORCESSL'] == 'true' && $ssl != ''){
 $htaccess_authenticated= FALSE;
 if (isset($config->data['MAIN']['HTACCESS_AUTH']) && preg_match('/^(yes|true)$/i', $config->data['MAIN']['HTACCESS_AUTH'])){
   if (!isset($_SERVER['REMOTE_USER'])){
-    msg_dialog::display(_("Configuration error"), _("There is a problem with the authentication setup!"), ERROR_DIALOG);
-    display_error_page();
+    msg_dialog::display(_("Configuration error"), _("There is a problem with the authentication setup!"), FATAL_ERROR_DIALOG);
+    exit;
   }
 
   $tmp= process_htaccess($_SERVER['REMOTE_USER'], isset($_SERVER['KRB5CCNAME']));
   $username= $tmp['username'];
   $server= $tmp['server'];
   if ($username == ""){
-    msg_dialog::display(_("Error"), _("Cannot find a valid user for the current authentication setup!"), ERROR_DIALOG);
-    display_error_page();
+    msg_dialog::display(_("Error"), _("Cannot find a valid user for the current authentication setup!"), FATAL_ERROR_DIALOG);
+    exit;
   }
   if ($server == ""){
-    msg_dialog::display(_("Error"), _("User information is not uniq accross the configured LDAP trees!"), ERROR_DIALOG);
-    display_error_page();
+    msg_dialog::display(_("Error"), _("User information is not uniq accross the configured LDAP trees!"), FATAL_ERROR_DIALOG);
+    exit;
   }
 
   $htaccess_authenticated= TRUE;
@@ -304,8 +304,8 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
     if ($htaccess_authenticated){
       $ui= ldap_login_user_htaccess($username);
       if ($ui === NULL || !$ui){
-        msg_dialog::display(_("Authentication error"), _("Cannot retrieve user information for htaccess authentication!"), ERROR_DIALOG);
-        display_error_page();
+        msg_dialog::display(_("Authentication error"), _("Cannot retrieve user information for htaccess authentication!"), FATAL_ERROR_DIALOG);
+        exit;
       }
     } else {
       $ui= ldap_login_user($username, $_POST["password"]);
