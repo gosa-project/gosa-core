@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-13 21:10+0100\n"
+"POT-Creation-Date: 2008-02-18 10:02+0100\n"
 "PO-Revision-Date: 2007-09-24 00:54+0200\n"
 "Last-Translator: ALEJANDRO ESCANERO BLANCO\n"
 "Language-Team:  <es@li.org>\n"
@@ -271,7 +271,7 @@ msgid "Excel Export"
 msgstr "Exportar en XLS"
 
 #: contrib/gosa.conf:308 plugins/personal/environment/logonManagement.tpl:65
-#: plugins/personal/mail/generic.tpl:192
+#: plugins/personal/mail/generic.tpl:206
 #: plugins/admin/applications/generic.tpl:101
 #: plugins/addons/gotomasses/goto_task.tpl:129
 #: plugins/addons/ldapmanager/contentcsv.tpl:109
@@ -929,7 +929,7 @@ msgstr ""
 "y LDAP."
 
 #: setup/class_setupStep_Ldap.inc:74 setup/setup_feedback.tpl:57
-#: setup/setup_feedback.tpl:75 setup/class_setupStep_Config2.inc:146
+#: setup/setup_feedback.tpl:75 setup/class_setupStep_Config2.inc:144
 #: setup/class_setupStep_Config3.inc:82 setup/class_setupStep_Schema.inc:63
 #: setup/class_setupStep_Config1.inc:87
 #: plugins/admin/systems/glpi_devices.tpl:48
@@ -946,7 +946,7 @@ msgid "No"
 msgstr "No"
 
 #: setup/class_setupStep_Ldap.inc:74 setup/setup_feedback.tpl:55
-#: setup/setup_feedback.tpl:73 setup/class_setupStep_Config2.inc:146
+#: setup/setup_feedback.tpl:73 setup/class_setupStep_Config2.inc:144
 #: setup/class_setupStep_Config3.inc:82 setup/class_setupStep_Schema.inc:63
 #: setup/class_setupStep_Config1.inc:87
 #: plugins/admin/systems/glpi_devices.tpl:47
@@ -1072,7 +1072,7 @@ msgid "Name"
 msgstr "Nombre"
 
 #: setup/setup_feedback.tpl:32 plugins/personal/nagios/nagios.tpl:12
-#: plugins/admin/systems/servdnseditzone.tpl:60 html/getxls.php:174
+#: plugins/admin/systems/servdnseditzone.tpl:67 html/getxls.php:174
 msgid "Mail address"
 msgstr "Dirección de correo"
 
@@ -1240,7 +1240,7 @@ msgstr "Aplicar"
 #: plugins/admin/systems/class_dhcpSubnet.inc:90
 #: plugins/admin/systems/glpiAttachmentPool.tpl:52
 #: plugins/admin/systems/glpi_edit_printer_type.tpl:30
-#: plugins/admin/systems/servdnseditzone.tpl:129
+#: plugins/admin/systems/servdnseditzone.tpl:136
 #: plugins/admin/systems/chooser.tpl:18
 #: plugins/admin/systems/class_dhcpGroup.inc:56
 #: plugins/admin/systems/SelectDeviceType.tpl:45
@@ -1722,11 +1722,11 @@ msgstr "Mensaje de Bienvenida"
 msgid "Welcome to GOsa setup wizard"
 msgstr "Bienvenidos al asistente de configuración de GOsa"
 
-#: setup/class_setupStep_Config2.inc:83 setup/class_setupStep_Config2.inc:84
+#: setup/class_setupStep_Config2.inc:81 setup/class_setupStep_Config2.inc:82
 msgid "GOsa settings 2/3"
 msgstr "Configuración GOsa 2/3"
 
-#: setup/class_setupStep_Config2.inc:85
+#: setup/class_setupStep_Config2.inc:83
 msgid "Customize special parameters"
 msgstr "Personalizar parametros especiales"
 
@@ -2008,8 +2008,8 @@ msgstr "Atrás"
 #: setup/class_setup.inc:266 plugins/admin/fai/class_faiManagement.inc:452
 #: plugins/admin/fai/class_faiManagement.inc:625
 #: plugins/admin/systems/SelectDeviceType.tpl:44
-#: plugins/admin/departments/class_departmentGeneric.inc:431
-#: plugins/admin/departments/class_departmentGeneric.inc:523
+#: plugins/admin/departments/class_departmentGeneric.inc:426
+#: plugins/admin/departments/class_departmentGeneric.inc:518
 #: plugins/admin/users/template.tpl:48
 #: include/sieve/templates/select_test_type.tpl:11
 #: include/sieve/templates/add_element.tpl:11
@@ -2367,11 +2367,16 @@ msgstr "Método de correo"
 msgid "disabled"
 msgstr "desactivado"
 
-#: setup/setup_config2.tpl:197
+#: setup/setup_config2.tpl:199
+#, fuzzy
+msgid "Account identification attribute"
+msgstr "Modificar atributos existentes"
+
+#: setup/setup_config2.tpl:213
 msgid "Vacation templates"
 msgstr "Plantillas de ausencia"
 
-#: setup/setup_config2.tpl:213
+#: setup/setup_config2.tpl:229
 msgid "Use Cyrus UNIX style"
 msgstr "Usa estilo Cyrus UNIX"
 
@@ -2810,7 +2815,7 @@ msgstr "Números bloqueados"
 #: plugins/personal/samba/samba3.tpl:334
 #: plugins/personal/mail/copypaste.tpl:43
 #: plugins/personal/mail/copypaste.tpl:61 plugins/personal/mail/generic.tpl:57
-#: plugins/personal/mail/generic.tpl:208
+#: plugins/personal/mail/generic.tpl:222
 #: plugins/personal/mail/mail_locals.tpl:75
 #: plugins/personal/connectivity/kolab.tpl:33
 #: plugins/personal/connectivity/class_kolabAccount.inc:237
@@ -2832,7 +2837,7 @@ msgstr "Números bloqueados"
 #: plugins/admin/systems/goSpamServer.tpl:88
 #: plugins/admin/systems/glpi_edit_printer_type.tpl:7
 #: plugins/admin/systems/servdns.tpl:26
-#: plugins/admin/systems/servdnseditzone.tpl:115
+#: plugins/admin/systems/servdnseditzone.tpl:122
 #: plugins/admin/systems/glpiManufacturer.tpl:6
 #: plugins/admin/systems/terminal.tpl:109
 #: plugins/admin/systems/class_termDNS.inc:723
@@ -2856,7 +2861,7 @@ msgstr "Números bloqueados"
 #: plugins/admin/systems/servservice.tpl:20
 #: plugins/admin/systems/servservice.tpl:47
 #: plugins/admin/systems/class_servDNSeditZoneEntries.inc:446
-#: plugins/admin/systems/class_servDNSeditZone.inc:579
+#: plugins/admin/systems/class_servDNSeditZone.inc:587
 #: plugins/admin/systems/selectUserToPrinterDialog.tpl:67
 #: plugins/admin/systems/glpi_edit_os.tpl:8
 #: plugins/admin/mimetypes/generic.tpl:86
@@ -2884,7 +2889,7 @@ msgstr "Añadir"
 #: plugins/personal/samba/samba3.tpl:336
 #: plugins/personal/mail/copypaste.tpl:45
 #: plugins/personal/mail/copypaste.tpl:62 plugins/personal/mail/generic.tpl:59
-#: plugins/personal/mail/generic.tpl:212
+#: plugins/personal/mail/generic.tpl:226
 #: plugins/personal/connectivity/kolab.tpl:35
 #: plugins/gofon/conference/remove.tpl:14 plugins/gofon/macro/remove.tpl:13
 #: plugins/gofon/phoneaccount/generic.tpl:15
@@ -2917,8 +2922,8 @@ msgstr "Añadir"
 #: plugins/admin/systems/servservice.tpl:22
 #: plugins/admin/systems/servservice.tpl:48
 #: plugins/admin/systems/remove.tpl:14
-#: plugins/admin/systems/class_servDNSeditZone.inc:338
-#: plugins/admin/systems/class_servDNSeditZone.inc:573
+#: plugins/admin/systems/class_servDNSeditZone.inc:347
+#: plugins/admin/systems/class_servDNSeditZone.inc:581
 #: plugins/admin/systems/remove_dhcp.tpl:14
 #: plugins/admin/systems/glpi_edit_os.tpl:10
 #: plugins/admin/departments/remove.tpl:14
@@ -2957,7 +2962,7 @@ msgstr "Los números también pueden contener comodines."
 #: plugins/admin/systems/class_systemManagement.inc:604
 #: plugins/admin/systems/goSpamServer.tpl:101
 #: plugins/admin/systems/class_dhcpSubnet.inc:89
-#: plugins/admin/systems/servdnseditzone.tpl:128
+#: plugins/admin/systems/servdnseditzone.tpl:135
 #: plugins/admin/systems/class_dhcpGroup.inc:55
 #: plugins/admin/systems/class_dhcpHost.inc:82
 #: plugins/admin/systems/glpiPrinterCartridgesEdit.tpl:74
@@ -3077,7 +3082,7 @@ msgstr "FAX ID"
 #: plugins/gofax/faxreports/detail.tpl:21
 #: plugins/gofax/faxreports/contents.tpl:30
 #: plugins/admin/fai/faiTemplateEntry.tpl:94
-#: plugins/admin/systems/class_printGeneric.inc:871
+#: plugins/admin/systems/class_printGeneric.inc:868
 #: plugins/admin/ogroups/class_ogroupManagement.inc:363
 msgid "User"
 msgstr "Usuario"
@@ -3376,7 +3381,7 @@ msgstr "Intercambiar los números de fax"
 
 #: plugins/gofax/faxaccount/generic.tpl:77
 #: plugins/personal/mail/copypaste.tpl:44
-#: plugins/personal/mail/generic.tpl:210 plugins/admin/groups/mail.tpl:114
+#: plugins/personal/mail/generic.tpl:224 plugins/admin/groups/mail.tpl:114
 #: plugins/admin/groups/paste_mail.tpl:42
 msgid "Add local"
 msgstr "Añadir Cuenta Local"
@@ -3402,7 +3407,7 @@ msgstr "Listas de bloqueo para fax entrante"
 #: plugins/admin/fai/faiVariable.tpl:45
 #: plugins/admin/fai/faiPartitionTable.tpl:44
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:187
-#: plugins/admin/systems/servdnseditzone.tpl:40
+#: plugins/admin/systems/servdnseditzone.tpl:47
 #: plugins/admin/systems/glpiManufacturer.tpl:7
 #: plugins/admin/systems/printer.tpl:52
 #: plugins/admin/systems/glpiPrinter.tpl:73
@@ -3477,6 +3482,7 @@ msgid "active"
 msgstr "activo"
 
 #: plugins/personal/posix/class_posixAccount.inc:145
+#: plugins/personal/posix/class_posixAccount.inc:865
 #: plugins/personal/posix/class_posixAccount.inc:1005
 msgid "Group of user"
 msgstr "Grupo de usuarios"
@@ -4119,7 +4125,7 @@ msgid "group share"
 msgstr "grupo compartido"
 
 #: plugins/personal/environment/class_environment.inc:1176
-#: plugins/admin/groups/acl_definition.inc:445
+#: plugins/admin/groups/acl_definition.inc:447
 msgid "Administrator"
 msgstr "Administrador"
 
@@ -4235,7 +4241,7 @@ msgstr "Cuota del Perfil"
 
 #: plugins/personal/environment/environment.tpl:45
 #: plugins/personal/scalix/generic.tpl:51
-#: plugins/personal/mail/generic.tpl:176
+#: plugins/personal/mail/generic.tpl:190
 #: plugins/personal/connectivity/class_proxyAccount.inc:90
 #: plugins/personal/connectivity/pureftpd.tpl:44
 #: plugins/admin/systems/class_glpiDeviceManagement.inc:223
@@ -4512,7 +4518,7 @@ msgid "Notify User"
 msgstr "Avisar al usuario"
 
 #: plugins/personal/scalix/generic.tpl:74
-#: plugins/admin/groups/acl_definition.inc:452
+#: plugins/admin/groups/acl_definition.inc:454
 msgid "Scalix email addresses"
 msgstr "Direcciones de correo electrónico de Scalix"
 
@@ -5060,6 +5066,7 @@ msgstr ""
 "pulsando aquí."
 
 #: plugins/personal/mail/class_mailAccount.inc:353
+#: plugins/admin/groups/class_groupMail.inc:417
 msgid ""
 "You're trying to add an invalid email address to the list of forwarders."
 msgstr ""
@@ -5073,28 +5080,28 @@ msgstr ""
 "Añadir una de sus propias cuentas de correo a la lista de reenvío no tiene "
 "sentido."
 
-#: plugins/personal/mail/class_mailAccount.inc:768
+#: plugins/personal/mail/class_mailAccount.inc:770
 msgid "Removing mail account failed"
 msgstr "Ha fallado la eliminación de la cuenta de correo"
 
-#: plugins/personal/mail/class_mailAccount.inc:915
+#: plugins/personal/mail/class_mailAccount.inc:917
 msgid "Saving mail account failed"
 msgstr "Ha fallado la grabación de la cuenta de correo"
 
-#: plugins/personal/mail/class_mailAccount.inc:971
+#: plugins/personal/mail/class_mailAccount.inc:973
 msgid ""
 "There is no valid mailserver specified, please add one in the system setup."
 msgstr ""
 "No se ha configurado ningún servidor de correo válido, por favor añada uno "
 "en la configuración de sistemas."
 
-#: plugins/personal/mail/class_mailAccount.inc:976
+#: plugins/personal/mail/class_mailAccount.inc:978
 #: plugins/admin/groups/class_groupMail.inc:925
 msgid "The required field 'Primary address' is not set."
 msgstr "No ha introducido el campo obligatorio'Cuenta Principal'."
 
-#: plugins/personal/mail/class_mailAccount.inc:980
-#: plugins/personal/mail/class_mailAccount.inc:984
+#: plugins/personal/mail/class_mailAccount.inc:982
+#: plugins/personal/mail/class_mailAccount.inc:986
 #: plugins/admin/ogroups/class_mailogroup.inc:78
 #: plugins/addons/addressbook/class_addressbook.inc:609
 msgid "Please enter a valid email address in 'Primary address' field."
@@ -5102,47 +5109,47 @@ msgstr ""
 "Por favor introduzca una dirección valida de correo electrónico en el campo "
 "'Cuenta Principal'."
 
-#: plugins/personal/mail/class_mailAccount.inc:990
+#: plugins/personal/mail/class_mailAccount.inc:992
 #: plugins/admin/groups/class_groupMail.inc:934
 #: plugins/admin/ogroups/class_mailogroup.inc:85
 msgid "The primary address you've entered is already in use."
 msgstr "La cuenta principal que ha introducido ya esta en uso."
 
-#: plugins/personal/mail/class_mailAccount.inc:996
+#: plugins/personal/mail/class_mailAccount.inc:998
 #: plugins/admin/groups/class_groupMail.inc:940
 msgid "Value in 'Quota size' is not valid."
 msgstr "El valor de 'Tamaño de Cuota' no es valido."
 
-#: plugins/personal/mail/class_mailAccount.inc:1005
+#: plugins/personal/mail/class_mailAccount.inc:1007
 #: plugins/admin/groups/class_groupMail.inc:949
 msgid "Please specify a vaild mail size for mails to be rejected."
 msgstr ""
 "Por favor introduzca un valor válido de tamaño máximo de mensajes que serán "
 "rechazados."
 
-#: plugins/personal/mail/class_mailAccount.inc:1015
+#: plugins/personal/mail/class_mailAccount.inc:1017
 #: plugins/admin/groups/class_groupMail.inc:957
 msgid "You need to set the maximum mail size in order to reject anything."
 msgstr ""
 "Necesita introducir un valor máximo de tamaño de mensajes para poder "
 "rechazar mensajes."
 
-#: plugins/personal/mail/class_mailAccount.inc:1019
+#: plugins/personal/mail/class_mailAccount.inc:1021
 msgid "You specified Spam settings, but there is no Folder specified."
 msgstr ""
 "Has seleccionado características antispam sin haber seleccionado ninguna "
 "carpeta."
 
-#: plugins/personal/mail/class_mailAccount.inc:1023
+#: plugins/personal/mail/class_mailAccount.inc:1025
 msgid "Time interval to show vacation message is not valid."
 msgstr ""
 "No es válido el intervalo de fechas para mostrar el mensaje de ausencia."
 
-#: plugins/personal/mail/class_mailAccount.inc:1177
+#: plugins/personal/mail/class_mailAccount.inc:1179
 msgid "Waiting for kolab to remove mail properties."
 msgstr "Esperando que Kolab elimine las características de correo."
 
-#: plugins/personal/mail/class_mailAccount.inc:1179
+#: plugins/personal/mail/class_mailAccount.inc:1181
 msgid ""
 "Please remove the mail account first, to allow kolab to call its remove "
 "methods."
@@ -5157,7 +5164,7 @@ msgid "Primary address"
 msgstr "Cuenta Principal"
 
 #: plugins/personal/mail/copypaste.tpl:13
-#: plugins/personal/mail/generic.tpl:199
+#: plugins/personal/mail/generic.tpl:213
 msgid "Forward messages to"
 msgstr "reenviar mensajes a"
 
@@ -5224,47 +5231,48 @@ msgstr "Seleccione si quiere reenviar correos sin quedarse copias de ellos"
 msgid "No delivery to own mailbox"
 msgstr "No se enviara a su propia carpeta de correo"
 
-#: plugins/personal/mail/generic.tpl:115
+#: plugins/personal/mail/generic.tpl:118
 msgid ""
 "Select to automatically response with the vacation message defined below"
 msgstr ""
 "Seleccione para responder automáticamente con el mensaje de ausencia "
 "definido aquí"
 
-#: plugins/personal/mail/generic.tpl:115
+#: plugins/personal/mail/generic.tpl:129
 msgid "Activate vacation message"
 msgstr "Activar mensaje de ausencia"
 
-#: plugins/personal/mail/generic.tpl:121
+#: plugins/personal/mail/generic.tpl:135
 msgid "from"
 msgstr "desde"
 
-#: plugins/personal/mail/generic.tpl:138
+#: plugins/personal/mail/generic.tpl:152
 msgid "till"
 msgstr "hasta"
 
-#: plugins/personal/mail/generic.tpl:162
+#: plugins/personal/mail/generic.tpl:176
 msgid "Select if you want to filter this mails through spamassassin"
 msgstr ""
 "Seleccione aquí si quiere que su correo se filtre a través de spamassassin"
 
-#: plugins/personal/mail/generic.tpl:162
+#: plugins/personal/mail/generic.tpl:176
 msgid "Move mails tagged with spam level greater than"
 msgstr "Mover los correos etiquetados con nivel de spam mayor que"
 
-#: plugins/personal/mail/generic.tpl:164
+#: plugins/personal/mail/generic.tpl:178
 msgid "Choose spam level - smaller values are more sensitive"
 msgstr "Elija el nivel de spam - valores mas bajos son mas sensibles"
 
-#: plugins/personal/mail/generic.tpl:167
+#: plugins/personal/mail/generic.tpl:181
 msgid "to folder"
 msgstr "a la carpeta"
 
-#: plugins/personal/mail/generic.tpl:174
+#: plugins/personal/mail/generic.tpl:188
 msgid "Reject mails bigger than"
 msgstr "rechazar correos mayores que"
 
-#: plugins/personal/mail/generic.tpl:182
+#: plugins/personal/mail/generic.tpl:196
+#: plugins/admin/groups/acl_definition.inc:258
 #: include/sieve/class_sieveManagement.inc:515
 #: include/sieve/class_sieveManagement.inc:735
 #: include/sieve/templates/element_vacation.tpl:44
@@ -5272,17 +5280,17 @@ msgstr "rechazar correos mayores que"
 msgid "Vacation message"
 msgstr "Mensaje de ausencia"
 
-#: plugins/personal/mail/generic.tpl:220
+#: plugins/personal/mail/generic.tpl:234
 msgid "Advanced mail options"
 msgstr "Opciones de correo avanzadas"
 
-#: plugins/personal/mail/generic.tpl:225
+#: plugins/personal/mail/generic.tpl:239
 msgid "Select if user can only send and receive inside his own domain"
 msgstr ""
 "Seleccione si el usuario solo puede enviar y recibir dentro de su propio "
 "dominio"
 
-#: plugins/personal/mail/generic.tpl:226
+#: plugins/personal/mail/generic.tpl:240
 msgid "User is only allowed to send and receive local mails"
 msgstr ""
 "El usuario solo esta permitido a enviar y recibir correo de forma local"
@@ -5483,35 +5491,35 @@ msgstr "Ha fallado la grabación de la cuenta de usuario genérica"
 msgid "Can't add user to kerberos database."
 msgstr "No se puede añadir la cuenta a la base de datos Kerberos"
 
-#: plugins/personal/generic/class_user.inc:1028
+#: plugins/personal/generic/class_user.inc:1025
 msgid "You have no permissions to create a user on this 'Base'."
 msgstr "No tiene permisos para crear un usuario en esta 'Base'."
 
-#: plugins/personal/generic/class_user.inc:1033
+#: plugins/personal/generic/class_user.inc:1030
 msgid "You have no permissions to move a user from the original 'Base'."
 msgstr "No tiene permisos para mover un usuario desde la 'Base' original."
 
-#: plugins/personal/generic/class_user.inc:1039
+#: plugins/personal/generic/class_user.inc:1036
 #: plugins/admin/users/class_userManagement.inc:582
 #: plugins/addons/addressbook/class_addressbook.inc:566
 msgid "The required field 'Name' is not set."
 msgstr "No ha introducido el campo obligatorio 'Nombre'."
 
-#: plugins/personal/generic/class_user.inc:1048
+#: plugins/personal/generic/class_user.inc:1045
 msgid "There's already a person with this 'Login' in the database."
 msgstr "Ya existe un usuario con este 'Login' en la base de datos."
 
-#: plugins/personal/generic/class_user.inc:1054
+#: plugins/personal/generic/class_user.inc:1051
 #: plugins/admin/users/class_userManagement.inc:585
 #: plugins/addons/addressbook/class_addressbook.inc:570
 msgid "The required field 'Given name' is not set."
 msgstr "No ha introducido el campo obligatorio 'Nombre de pila'."
 
-#: plugins/personal/generic/class_user.inc:1057
+#: plugins/personal/generic/class_user.inc:1054
 msgid "The required field 'Login' is not set."
 msgstr "No ha introducido el campo obligatorio 'Login'."
 
-#: plugins/personal/generic/class_user.inc:1062
+#: plugins/personal/generic/class_user.inc:1059
 msgid ""
 "There's already a person with this 'Name'/'Given name' combination in the "
 "database."
@@ -5519,7 +5527,7 @@ msgstr ""
 "Ya existe un usuario con la misma combinación 'Nombre' / 'Nombre de pila' en "
 "la base de datos."
 
-#: plugins/personal/generic/class_user.inc:1069
+#: plugins/personal/generic/class_user.inc:1066
 msgid ""
 "The field 'Login' contains invalid characters. Lowercase, numbers and dashes "
 "are allowed."
@@ -5527,50 +5535,50 @@ msgstr ""
 "El campo 'Login' tiene caracteres no validos. Solo se permiten minúsculas, "
 "números y guiones."
 
-#: plugins/personal/generic/class_user.inc:1072
+#: plugins/personal/generic/class_user.inc:1069
 msgid "The field 'Homepage' contains an invalid URL definition."
 msgstr "El campo 'Pagina web' tiene una URL no valida"
 
-#: plugins/personal/generic/class_user.inc:1075
-#: plugins/personal/generic/class_user.inc:1100
+#: plugins/personal/generic/class_user.inc:1072
+#: plugins/personal/generic/class_user.inc:1097
 #: plugins/admin/departments/class_departmentGeneric.inc:243
 #: plugins/addons/addressbook/class_addressbook.inc:576
 #: plugins/addons/addressbook/class_addressbook.inc:604
 msgid "The field 'Name' contains invalid characters."
 msgstr "El campo 'Nombre' no tiene caracteres validos."
 
-#: plugins/personal/generic/class_user.inc:1078
-#: plugins/personal/generic/class_user.inc:1097
+#: plugins/personal/generic/class_user.inc:1075
+#: plugins/personal/generic/class_user.inc:1094
 #: plugins/addons/addressbook/class_addressbook.inc:579
 #: plugins/addons/addressbook/class_addressbook.inc:601
 msgid "The field 'Given name' contains invalid characters."
 msgstr "El campo 'Nombre de pila' tiene caracteres no validos"
 
-#: plugins/personal/generic/class_user.inc:1083
+#: plugins/personal/generic/class_user.inc:1080
 #: plugins/admin/departments/class_departmentGeneric.inc:246
 #: plugins/addons/addressbook/class_addressbook.inc:584
 #: plugins/addons/addressbook/class_addressbook.inc:587
 msgid "The field 'Phone' contains an invalid phone number."
 msgstr "El campo 'Teléfono' tiene un número de teléfono no valido."
 
-#: plugins/personal/generic/class_user.inc:1086
+#: plugins/personal/generic/class_user.inc:1083
 #: plugins/admin/departments/class_departmentGeneric.inc:249
 #: plugins/addons/addressbook/class_addressbook.inc:590
 msgid "The field 'Fax' contains an invalid phone number."
 msgstr "El campo 'Fax' tiene un número de teléfono no valido."
 
-#: plugins/personal/generic/class_user.inc:1089
+#: plugins/personal/generic/class_user.inc:1086
 #: plugins/addons/addressbook/class_addressbook.inc:593
 msgid "The field 'Mobile' contains an invalid phone number."
 msgstr "El campo 'Teléfono móvil' tiene un número de teléfono invalido."
 
-#: plugins/personal/generic/class_user.inc:1092
+#: plugins/personal/generic/class_user.inc:1089
 #: plugins/addons/addressbook/class_addressbook.inc:596
 msgid "The field 'Pager' contains an invalid phone number."
 msgstr ""
 "El campo 'Dispositivo de Búsqueda' tiene un número de teléfono invalido."
 
-#: plugins/personal/generic/class_user.inc:1219
+#: plugins/personal/generic/class_user.inc:1216
 msgid "Could not open specified certificate!"
 msgstr "¡No puedo abrir el certificado especificado!"
 
@@ -7314,7 +7322,7 @@ msgid "Phone macro"
 msgstr "Macro telefónica"
 
 #: plugins/gofon/phoneaccount/generic.tpl:86
-#: plugins/admin/systems/servdnseditzone.tpl:76
+#: plugins/admin/systems/servdnseditzone.tpl:83
 msgid "Refresh"
 msgstr "Refresco"
 
@@ -7412,8 +7420,8 @@ msgstr "Ruta de destino"
 #: plugins/admin/fai/faiTemplateEntry.tpl:71
 #: plugins/admin/fai/faiTemplateEntry.tpl:103
 #: plugins/admin/systems/class_dhcpNewSectionDialog.inc:30
-#: plugins/admin/systems/class_printGeneric.inc:866
-#: plugins/admin/systems/class_printGeneric.inc:868
+#: plugins/admin/systems/class_printGeneric.inc:863
+#: plugins/admin/systems/class_printGeneric.inc:865
 #: plugins/admin/systems/class_servDHCP.inc:38
 #: plugins/admin/ogroups/class_ogroupManagement.inc:364
 #: plugins/generic/references/class_reference.inc:36
@@ -7510,7 +7518,7 @@ msgstr "Eliminar clase del perfil"
 #: plugins/admin/fai/class_faiProfile.inc:305
 #: plugins/admin/systems/class_baseSelectDialog.inc:28
 #: plugins/admin/systems/class_glpiSelectUser.inc:158
-#: plugins/admin/systems/class_servDNSeditZone.inc:335
+#: plugins/admin/systems/class_servDNSeditZone.inc:344
 #: plugins/admin/ogroups/phonequeue.tpl:21
 #: include/class_MultiSelectWindow.inc:197
 #: include/class_MultiSelectWindow.inc:199
@@ -7520,7 +7528,7 @@ msgid "Up"
 msgstr "Arriba"
 
 #: plugins/admin/fai/class_faiProfile.inc:306
-#: plugins/admin/systems/class_servDNSeditZone.inc:336
+#: plugins/admin/systems/class_servDNSeditZone.inc:345
 #: plugins/admin/ogroups/phonequeue.tpl:22
 #: include/sieve/templates/object_container_clear.tpl:12
 #: include/sieve/templates/object_container.tpl:12
@@ -7758,7 +7766,7 @@ msgstr "El archivo '%s' del paquete no existe."
 msgid "Saving FAI package base failed"
 msgstr "Ha fallado la grabación del paquete base de FAI"
 
-#: plugins/admin/fai/class_faiPackage.inc:554
+#: plugins/admin/fai/class_faiPackage.inc:549
 msgid "Saving FAI package entry failed"
 msgstr "Ha fallado la grabación de la entrada de paquete de FAI"
 
@@ -7910,15 +7918,15 @@ msgstr ""
 msgid "Saving FAI template base failed"
 msgstr "Ha fallado la grabación de la plantilla base de FAI"
 
-#: plugins/admin/fai/class_faiTemplate.inc:481
+#: plugins/admin/fai/class_faiTemplate.inc:470
 msgid "Removing FAI template entry failed"
 msgstr "Ha fallado la eliminación de la plantilla FAI"
 
-#: plugins/admin/fai/class_faiTemplate.inc:486
+#: plugins/admin/fai/class_faiTemplate.inc:475
 msgid "Modifying FAI template entry failed"
 msgstr "Ha fallado la modificación de la entrada de plantilla FAI"
 
-#: plugins/admin/fai/class_faiTemplate.inc:499
+#: plugins/admin/fai/class_faiTemplate.inc:488
 msgid "Creating FAI template entry failed"
 msgstr "Ha fallado la creación de entrada de plantilla FAI"
 
@@ -8494,21 +8502,21 @@ msgstr ""
 msgid "Saving FAI partition table base failed"
 msgstr "Ha fallado la grabación de la tabla de particiones base de FAI"
 
-#: plugins/admin/fai/class_faiPartitionTable.inc:415
+#: plugins/admin/fai/class_faiPartitionTable.inc:408
 msgid "Removing FAI partition table failed"
 msgstr "Ha fallado la eliminación de la tabla de particiones FAI"
 
-#: plugins/admin/fai/class_faiPartitionTable.inc:423
-#: plugins/admin/fai/class_faiPartitionTable.inc:432
+#: plugins/admin/fai/class_faiPartitionTable.inc:416
+#: plugins/admin/fai/class_faiPartitionTable.inc:425
 msgid "Saving FAI partition table failed"
 msgstr "Ha fallado la grabación de la tabla de particiones de FAI"
 
-#: plugins/admin/fai/class_faiPartitionTable.inc:505
+#: plugins/admin/fai/class_faiPartitionTable.inc:496
 msgid "Removing FAI partition table entry failed"
 msgstr "Ha fallado la eliminación de la entrada en la tabla de particiones"
 
-#: plugins/admin/fai/class_faiPartitionTable.inc:535
-#: plugins/admin/fai/class_faiPartitionTable.inc:549
+#: plugins/admin/fai/class_faiPartitionTable.inc:524
+#: plugins/admin/fai/class_faiPartitionTable.inc:538
 msgid "Saving FAI partition table entry failed"
 msgstr "Ha fallado la grabación de la entrada en la tabla de particiones FAI"
 
@@ -8567,12 +8575,12 @@ msgstr ""
 msgid "Saving FAI variable base failed"
 msgstr "Ha fallado la grabación de la variable base de FAI"
 
-#: plugins/admin/fai/class_faiVariable.inc:381
+#: plugins/admin/fai/class_faiVariable.inc:370
 msgid "Removing FAI variable failed"
 msgstr "Ha fallado el eliminar la variable FAI"
 
-#: plugins/admin/fai/class_faiVariable.inc:388
-#: plugins/admin/fai/class_faiVariable.inc:400
+#: plugins/admin/fai/class_faiVariable.inc:377
+#: plugins/admin/fai/class_faiVariable.inc:389
 msgid "Saving FAI variable failed"
 msgstr "Ha fallado la grabación de la variable de FAI"
 
@@ -8614,11 +8622,11 @@ msgstr "Ha fallado la eliminación del script base de FAI"
 msgid "Creating FAI script base failed"
 msgstr "Ha fallado la creación de un script base de FAI"
 
-#: plugins/admin/fai/class_faiScript.inc:549
+#: plugins/admin/fai/class_faiScript.inc:538
 msgid "Removing FAI script failed"
 msgstr "Ha fallado la eliminación del script de FAI"
 
-#: plugins/admin/fai/class_faiScript.inc:568
+#: plugins/admin/fai/class_faiScript.inc:557
 msgid "Saving FAI script failed"
 msgstr "Ha fallado la grabación del script FAI"
 
@@ -8699,10 +8707,6 @@ msgid "Remove the shared folder and all its contents after saving this account"
 msgstr ""
 "Despues de grabar esta cuenta se eliminara la carpeta compartida y todo su "
 "contenido"
-
-#: plugins/admin/groups/class_groupMail.inc:417
-msgid "You're trying to add an invalid email address "
-msgstr "Esta intentando añadir una dirección de correo no valida"
 
 #: plugins/admin/groups/class_groupMail.inc:614
 #: plugins/admin/groups/class_groupMail.inc:620
@@ -9186,47 +9190,57 @@ msgstr ""
 "No puedo resolver la versión '%s', se pondrá el nombre de la versión a '%s'. "
 "Posiblemente los objetos base han cambiado."
 
-#: plugins/admin/groups/acl_definition.inc:442
+#: plugins/admin/groups/acl_definition.inc:257
+#, fuzzy
+msgid "Enable vacation message"
+msgstr "Activar mensaje de ausencia"
+
+#: plugins/admin/groups/acl_definition.inc:259
+#, fuzzy
+msgid "Vacation start/stop"
+msgstr "Plantillas de ausencia"
+
+#: plugins/admin/groups/acl_definition.inc:444
 msgid "Scalix Mail node"
 msgstr "Nodo de correo Scalix"
 
-#: plugins/admin/groups/acl_definition.inc:443
+#: plugins/admin/groups/acl_definition.inc:445
 msgid "Mailbox class"
 msgstr "Tipo de buzón de correo"
 
-#: plugins/admin/groups/acl_definition.inc:444
+#: plugins/admin/groups/acl_definition.inc:446
 msgid "Server language"
 msgstr "Idioma del Servidor"
 
-#: plugins/admin/groups/acl_definition.inc:446
+#: plugins/admin/groups/acl_definition.inc:448
 msgid "Mailbox administrator"
 msgstr "Administrador del buzón de correo"
 
-#: plugins/admin/groups/acl_definition.inc:447
+#: plugins/admin/groups/acl_definition.inc:449
 msgid "Hide user entry in Scalix"
 msgstr "Ocultar las entradas de usuarios en Scalix"
 
-#: plugins/admin/groups/acl_definition.inc:448
+#: plugins/admin/groups/acl_definition.inc:450
 msgid "Mailbox size limitations"
 msgstr "Limitaciones de tamaño de los buzones de correo"
 
-#: plugins/admin/groups/acl_definition.inc:449
+#: plugins/admin/groups/acl_definition.inc:451
 msgid "Limit outbound"
 msgstr "Limitaciones de salida"
 
-#: plugins/admin/groups/acl_definition.inc:450
+#: plugins/admin/groups/acl_definition.inc:452
 msgid "Limit inbound"
 msgstr "Limitaciones de entrada"
 
-#: plugins/admin/groups/acl_definition.inc:451
+#: plugins/admin/groups/acl_definition.inc:453
 msgid "Notify user"
 msgstr "Notificar al usuario"
 
-#: plugins/admin/groups/acl_definition.inc:453
+#: plugins/admin/groups/acl_definition.inc:455
 msgid "Create/edit new task"
 msgstr "Crear/Editar nueva tarea"
 
-#: plugins/admin/groups/acl_definition.inc:453
+#: plugins/admin/groups/acl_definition.inc:455
 msgid "Remove tasks"
 msgstr "Eliminar tareas"
 
@@ -9243,8 +9257,8 @@ msgstr ""
 "pulse dos veces, dado que GOsa no tiene manera de recuperar esta información."
 
 #: plugins/admin/groups/acl.tpl:4
-#: plugins/admin/departments/class_departmentGeneric.inc:503
-#: include/class_ldap.inc:466
+#: plugins/admin/departments/class_departmentGeneric.inc:498
+#: include/class_ldap.inc:474
 msgid "Object"
 msgstr "Objeto"
 
@@ -10208,18 +10222,18 @@ msgstr "No tiene permisos para crear una impresora en esta 'Base'."
 msgid "Saving printer failed"
 msgstr "Ha fallado la grabación de la impresora"
 
-#: plugins/admin/systems/class_printGeneric.inc:891
+#: plugins/admin/systems/class_printGeneric.inc:888
 #, php-format
 msgid "Illegal printer type while adding '%s' to the list of '%s' printers,"
 msgstr ""
 "tipo de impresora ilegal mientras añadia '%s' a la lista de '%s' impresoras,"
 
-#: plugins/admin/systems/class_printGeneric.inc:913
+#: plugins/admin/systems/class_printGeneric.inc:910
 #, php-format
 msgid "Can't add '%s' to the list of members, it is already used."
 msgstr "No puede añadir '%s' a la lista de miembros, ya está en uso."
 
-#: plugins/admin/systems/class_printGeneric.inc:921
+#: plugins/admin/systems/class_printGeneric.inc:918
 #, php-format
 msgid "Can't add '%s' to list of members, it is not reachable."
 msgstr "No puede añadir '%s' a la lista de miembros, no es accesible."
@@ -10269,7 +10283,7 @@ msgid "Reverse zone"
 msgstr "Zona Inversa"
 
 #: plugins/admin/systems/class_servDNS.inc:250
-#: plugins/admin/systems/servdnseditzone.tpl:94
+#: plugins/admin/systems/servdnseditzone.tpl:101
 #: plugins/admin/systems/network.tpl:106
 msgid "TTL"
 msgstr "TTL"
@@ -10495,40 +10509,44 @@ msgstr "desde"
 msgid "Zone name"
 msgstr "Nombre de la zona"
 
-#: plugins/admin/systems/servdnseditzone.tpl:33
+#: plugins/admin/systems/servdnseditzone.tpl:30
+msgid "Zone is in use, network settings can't be modified."
+msgstr ""
+
+#: plugins/admin/systems/servdnseditzone.tpl:40
 msgid "Zone records"
 msgstr "Registros de zona"
 
-#: plugins/admin/systems/servdnseditzone.tpl:36
+#: plugins/admin/systems/servdnseditzone.tpl:43
 msgid "Can't be edited because the zone wasn't saved right now."
 msgstr "No se puede editar porque la zona está en proceso de grabación."
 
-#: plugins/admin/systems/servdnseditzone.tpl:48
+#: plugins/admin/systems/servdnseditzone.tpl:55
 msgid "SOA record"
 msgstr "Registro SOA"
 
-#: plugins/admin/systems/servdnseditzone.tpl:54
+#: plugins/admin/systems/servdnseditzone.tpl:61
 msgid "Primary dns server for this zone"
 msgstr "Servidor DNS primario para esta zona"
 
-#: plugins/admin/systems/servdnseditzone.tpl:66
+#: plugins/admin/systems/servdnseditzone.tpl:73
 msgid "Serial number (automatically incremented)"
 msgstr "Número de serie (incrementado automáticamente)"
 
-#: plugins/admin/systems/servdnseditzone.tpl:82
+#: plugins/admin/systems/servdnseditzone.tpl:89
 #: plugins/admin/ogroups/phonequeue.tpl:67
 msgid "Retry"
 msgstr "Reintento"
 
-#: plugins/admin/systems/servdnseditzone.tpl:88
+#: plugins/admin/systems/servdnseditzone.tpl:95
 msgid "Expire"
 msgstr "Expiración"
 
-#: plugins/admin/systems/servdnseditzone.tpl:109
+#: plugins/admin/systems/servdnseditzone.tpl:116
 msgid "MxRecords"
 msgstr "Registros MX"
 
-#: plugins/admin/systems/servdnseditzone.tpl:121
+#: plugins/admin/systems/servdnseditzone.tpl:128
 msgid "Global zone records"
 msgstr "Registros de zona global"
 
@@ -10991,7 +11009,7 @@ msgstr ""
 "automáticamente, por favor elimine el registro."
 
 #: plugins/admin/systems/class_termDNS.inc:509
-#: plugins/admin/systems/class_servDNSeditZone.inc:449
+#: plugins/admin/systems/class_servDNSeditZone.inc:462
 #, php-format
 msgid "Only lowercase is allowed, please check your '%ss'."
 msgstr "Solo están permitidas minúsculas, por favor compruebe su '%ss'."
@@ -13447,48 +13465,48 @@ msgstr ""
 "de lo que quiere hacer pulse dos veces, ya que no hay forma de que GOsa "
 "recupere la información."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:415
+#: plugins/admin/systems/class_servDNSeditZone.inc:428
 #, php-format
 msgid "Please choose a valid zone name."
 msgstr "Por favor seleccione un nombre de zona válido."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:419
+#: plugins/admin/systems/class_servDNSeditZone.inc:432
 #, php-format
 msgid "Please choose a valid reverse zone name."
 msgstr "Por favor seleccione un nombre de zona inversa válido."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:423
+#: plugins/admin/systems/class_servDNSeditZone.inc:436
 msgid "Only lowercase strings are allowed as zone name."
 msgstr "Solo están permitidas minúsculas en el nombre de zona."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:427
+#: plugins/admin/systems/class_servDNSeditZone.inc:440
 msgid "Please specify a numeric value for serial number."
 msgstr "Por favor introduzca un valor numérico para el número de serie."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:431
+#: plugins/admin/systems/class_servDNSeditZone.inc:444
 msgid "Please specify a numeric value for refresh."
 msgstr "Por favor introduzca un valor numérico para el refresco."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:435
+#: plugins/admin/systems/class_servDNSeditZone.inc:448
 msgid "Please specify a numeric value for ttl."
 msgstr "Por favor introduzca un valor numérico para TTL."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:439
+#: plugins/admin/systems/class_servDNSeditZone.inc:452
 msgid "Please specify a numeric value for expire."
 msgstr "Por favor introduzca un valor numérico para expiración."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:443
+#: plugins/admin/systems/class_servDNSeditZone.inc:456
 msgid "Please specify a numeric value for retry."
 msgstr "Por favor introduzca un valor numérico para reintento."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:458
+#: plugins/admin/systems/class_servDNSeditZone.inc:471
 msgid ""
 "The given network address is not a valid, please specify a valid IP address."
 msgstr ""
 "La dirección de red introducida no es válida, porfavor introduzca una "
 "dirección IP valida."
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:465
+#: plugins/admin/systems/class_servDNSeditZone.inc:478
 #, php-format
 msgid ""
 "The specified network address is not matching with the specified zone class, "
@@ -13497,7 +13515,7 @@ msgstr ""
 "La dirección de red introducida no coincide con la clase de zona indicada, "
 "debe ser de la forma x.0.0.0"
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:471
+#: plugins/admin/systems/class_servDNSeditZone.inc:484
 #, php-format
 msgid ""
 "The specified network address is not matching with the specified zone class, "
@@ -13506,7 +13524,7 @@ msgstr ""
 "La dirección de red introducida no coincide con la clase de zona indicada, "
 "debe ser de la forma x.x.0.0"
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:477
+#: plugins/admin/systems/class_servDNSeditZone.inc:490
 #, php-format
 msgid ""
 "The specified network address is not matching with the specified zone class, "
@@ -13515,7 +13533,7 @@ msgstr ""
 "La dirección de red introducida no coincide con la clase de zona indicada, "
 "debe ser de la forma x.x.x.0"
 
-#: plugins/admin/systems/class_servDNSeditZone.inc:481
+#: plugins/admin/systems/class_servDNSeditZone.inc:494
 #, php-format
 msgid "The given network class '%s' is not valid."
 msgstr "La clase de red introducida '%s' no es válida."
@@ -13867,17 +13885,17 @@ msgstr ""
 msgid "Saving department failed"
 msgstr "Ha fallado la grabación del departamento"
 
-#: plugins/admin/departments/class_departmentGeneric.inc:382
+#: plugins/admin/departments/class_departmentGeneric.inc:377
 #, php-format
 msgid "Tagging '%s'."
 msgstr "Etiquetando '%s'."
 
-#: plugins/admin/departments/class_departmentGeneric.inc:470
+#: plugins/admin/departments/class_departmentGeneric.inc:465
 #, php-format
 msgid "Moving '%s' to '%s'"
 msgstr "Moviendo '%s' a '%s'"
 
-#: plugins/admin/departments/class_departmentGeneric.inc:506
+#: plugins/admin/departments/class_departmentGeneric.inc:501
 #, php-format
 msgid "FAILED to copy %s, aborting operation"
 msgstr "Ha fallado a copiar %s, operación abortada"
@@ -16089,11 +16107,11 @@ msgstr "Error XML en 'guide.xml': %s en la linea %d"
 msgid "No help available for this plugin."
 msgstr "No hay ayuda disponible para esta extensión."
 
-#: include/functions_helpviewer.inc:93 html/helpviewer.php:192
+#: include/functions_helpviewer.inc:93 html/helpviewer.php:187
 msgid "previous"
 msgstr "anterior"
 
-#: include/functions_helpviewer.inc:97 html/helpviewer.php:196
+#: include/functions_helpviewer.inc:97 html/helpviewer.php:191
 msgid "next"
 msgstr "siguiente"
 
@@ -16107,7 +16125,7 @@ msgstr "%s resultados en su busqueda con la cadena %s"
 msgid "%s%% hit rate in file %s"
 msgstr "%s%%tasa de éxitos en el archivo %s"
 
-#: include/class_ldap.inc:199
+#: include/class_ldap.inc:207
 #, php-format
 msgid ""
 "The LDAP server is slow (%.2fs for the last query). This may be responsible "
@@ -16116,7 +16134,7 @@ msgstr ""
 "El servidor LDAP está lento (%.2fs para la última consulta). Esto puede ser "
 "causa de problemas de rendimiento."
 
-#: include/class_ldap.inc:233
+#: include/class_ldap.inc:241
 #, php-format
 msgid ""
 "The ldapserver is answering very slow (%.2f), this may be responsible for "
@@ -16125,25 +16143,25 @@ msgstr ""
 "El servidor LDAP está respondiendo muy lentamente (%.2fs). Esto puede ser "
 "causa de problemas de rendimiento."
 
-#: include/class_ldap.inc:459
+#: include/class_ldap.inc:467
 #, php-format
 msgid "Creating copy of %s"
 msgstr "Creando una copia de %s"
 
-#: include/class_ldap.inc:462
+#: include/class_ldap.inc:470
 msgid "Processing"
 msgstr "Procesando"
 
-#: include/class_ldap.inc:502
+#: include/class_ldap.inc:510
 msgid "Error while fetching source dn - aborted!"
 msgstr "¡Se ha cancelado, ha habido un error mientras accedía al dn origen!"
 
-#: include/class_ldap.inc:565 include/class_ldap.inc:582
+#: include/class_ldap.inc:573 include/class_ldap.inc:590
 #, php-format
 msgid "Unknown FAIstate %s"
 msgstr "Estado FAI %s desconocido"
 
-#: include/class_ldap.inc:742
+#: include/class_ldap.inc:750
 #, php-format
 msgid ""
 "Autocreation of subtree failed. No objectClass found for attribute '%s'."
@@ -16151,7 +16169,7 @@ msgstr ""
 "La autocreación del subárbol ha fallado. No se ha encontrado una clase de "
 "objeto para el atributo '%s'."
 
-#: include/class_ldap.inc:791 include/class_ldap.inc:881
+#: include/class_ldap.inc:799 include/class_ldap.inc:889
 #, php-format
 msgid ""
 "Autocreation of type '%s' is currently not supported. Please report to the "
@@ -16160,12 +16178,12 @@ msgstr ""
 "Actualmente no esta soportada la creación automática del tipo '%s'. Por "
 "favor, informe de esto al equipo de desarrollo de GOsa."
 
-#: include/class_ldap.inc:799
+#: include/class_ldap.inc:807
 #, php-format
 msgid "Creating subtree '%s' failed."
 msgstr "Ha fallado la creación del subárbol '%s'."
 
-#: include/class_ldap.inc:820
+#: include/class_ldap.inc:828
 #, php-format
 msgid ""
 "The referral url '%s' is missing the ldap base. It should look like this "
@@ -16174,19 +16192,19 @@ msgstr ""
 "La url referencial '%s' no está disponible en la base ldap. Debería "
 "parecerse a esto: 'ldap://servidor:puerto/base'."
 
-#: include/class_ldap.inc:950
+#: include/class_ldap.inc:958
 #, php-format
 msgid "while operating on '%s' using LDAP server '%s'"
 msgstr "mientras opera en '%s' usando el servidor LDAP '%s'"
 
-#: include/class_ldap.inc:952
+#: include/class_ldap.inc:960
 #, php-format
 msgid "while operating on LDAP server %s"
 msgstr ""
 "Hay un error tratando de conectarse al servidor LDAP. El error del servidor "
 "es: '%s'"
 
-#: include/class_ldap.inc:1148
+#: include/class_ldap.inc:1156
 #, php-format
 msgid ""
 "This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
@@ -16195,12 +16213,12 @@ msgstr ""
 "El DN: '%s' no es válido, Un bloque importado debería comenzar por 'dn:...' "
 "en la linea %s"
 
-#: include/class_ldap.inc:1161
+#: include/class_ldap.inc:1169
 #, php-format
 msgid "The dn: '%s' (from line %s) already exists in the LDAP database."
 msgstr "El dn: '%s' (de la linea %s) ya existe en la base de datos LDAP."
 
-#: include/class_ldap.inc:1177
+#: include/class_ldap.inc:1185
 #, php-format
 msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
 msgstr ""
@@ -16302,7 +16320,7 @@ msgstr ""
 "Se ha encontrado mas de una zona inversa para la zona dns '%s'. Se cancela "
 "el análisis de la zona."
 
-#: include/functions_dns.inc:618
+#: include/functions_dns.inc:620
 #, php-format
 msgid ""
 "Undefined zone name '%s'. Zone name must look like this 'server/zone.com'."
@@ -16316,7 +16334,7 @@ msgid "Setting the password failed. LDAP server says '%s'."
 msgstr ""
 "Fallo al tratar de configurar la contraseña. El servidor LDAP contesto '%s'."
 
-#: include/class_password-methods.inc:205 include/class_plugin.inc:599
+#: include/class_password-methods.inc:205 include/class_plugin.inc:601
 #, php-format
 msgid ""
 "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
@@ -16398,7 +16416,7 @@ msgid "Can't use ssha for encryption. (Missing function mhash / sha1)"
 msgstr ""
 "No se puede usar ssha para codificación. (Falta la función mhash / sha1)"
 
-#: include/class_plugin.inc:412
+#: include/class_plugin.inc:414
 #, php-format
 msgid ""
 "Command '%s', specified as CHECK hook for plugin '%s' doesn't seem to exist."
@@ -16406,7 +16424,7 @@ msgstr ""
 "El comando '%s', especificado como método 'CHECK' para la extensión '%s' no "
 "está disponible."
 
-#: include/class_plugin.inc:564
+#: include/class_plugin.inc:566
 #, php-format
 msgid ""
 "Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."
@@ -16414,7 +16432,7 @@ msgstr ""
 "El comando '%s', especificado como 'POSTCREATE' para la extensión '%s' no "
 "parece existir."
 
-#: include/class_plugin.inc:639
+#: include/class_plugin.inc:641
 #, php-format
 msgid ""
 "Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."
@@ -16422,21 +16440,21 @@ msgstr ""
 "El comando '%s', especificado como POSTREMOVE para la extensión '%s' no "
 "parece existir."
 
-#: include/class_plugin.inc:947
+#: include/class_plugin.inc:1008
 #, php-format
 msgid "Object '%s' is already tagged"
 msgstr "El objeto '%s' ya está marcado"
 
-#: include/class_plugin.inc:954
+#: include/class_plugin.inc:1015
 #, php-format
 msgid "Adding tag (%s) to object '%s'"
 msgstr "Añadiendo marca (%s) al objeto '%s'"
 
-#: include/class_plugin.inc:968 include/class_plugin.inc:997
+#: include/class_plugin.inc:1029 include/class_plugin.inc:1058
 msgid "Handle object tagging failed"
 msgstr "Ha fallado al marcar el objeto manipulado"
 
-#: include/class_plugin.inc:984
+#: include/class_plugin.inc:1045
 #, php-format
 msgid "Removing tag from object '%s'"
 msgstr "Ha fallado la eliminación de la etiqueta desde el objeto '%s'"
@@ -16511,7 +16529,7 @@ msgstr "El nombre introducido ya esta siendo usado"
 #: include/sieve/class_sieveManagement.inc:355
 #: include/sieve/class_sieveManagement.inc:685
 #: include/sieve/class_sieveManagement.inc:1054
-#: include/class_mail-methods-cyrus.inc:264
+#: include/class_mail-methods-cyrus.inc:276
 #, php-format
 msgid "Can't log into SIEVE server. Server says '%s'."
 msgstr "No se puede conectar al servidor SIEVE. El error del servidor es: '%s'"
@@ -17490,11 +17508,11 @@ msgstr "Chino"
 msgid "Russian"
 msgstr "Ruso"
 
-#: include/class_mail-methods-cyrus.inc:40
+#: include/class_mail-methods-cyrus.inc:52
 msgid "Warning: Account has an invalid mailserver string!"
 msgstr "Aviso: ¡La cuenta tiene una cadena de servidor de correo no valida!"
 
-#: include/class_mail-methods-cyrus.inc:53
+#: include/class_mail-methods-cyrus.inc:65
 msgid ""
 "Warning: IMAP Server cannot be reached! If you save this account, some mail "
 "settings will not be stored on your server!"
@@ -17503,46 +17521,46 @@ msgstr ""
 "de los valores de la configuración del correo no serán guardados en el "
 "servidor"
 
-#: include/class_mail-methods-cyrus.inc:151
+#: include/class_mail-methods-cyrus.inc:163
 #, php-format
 msgid "Can't create IMAP mailbox. Server says '%s'."
 msgstr ""
 "No se puede crear el buzón de correo IMAP. El error del servidor es: '%s'"
 
-#: include/class_mail-methods-cyrus.inc:170
+#: include/class_mail-methods-cyrus.inc:182
 #, php-format
 msgid "Can't write IMAP quota. Server says '%s'."
 msgstr "No se puede activar una cuota IMAP. El error del servidor es: '%s'"
 
-#: include/class_mail-methods-cyrus.inc:196
+#: include/class_mail-methods-cyrus.inc:208
 msgid "Warning: imap_getacl is not implemented, can't remove acl informations."
 msgstr ""
 "Aviso: imap_getacl no ha sido implementado, no se eliminara información "
 "sobre las listas de acceso."
 
-#: include/class_mail-methods-cyrus.inc:214
+#: include/class_mail-methods-cyrus.inc:226
 msgid "Warning: imap_getacl is not available, can't get imap permissions!"
 msgstr ""
 "Aviso: no esta disponible imap_getacl, ¡no se puede acceder a los permisos "
 "IMAP!"
 
-#: include/class_mail-methods-cyrus.inc:236
+#: include/class_mail-methods-cyrus.inc:248
 #, php-format
 msgid "Can't remove IMAP mailbox. Server says '%s'."
 msgstr ""
 "No se puede eliminar el buzón de correo IMAP. El error del servidor es: '%s'"
 
-#: include/class_mail-methods-cyrus.inc:277
+#: include/class_mail-methods-cyrus.inc:289
 #, php-format
 msgid "Can't get sieve script. Server says '%s'."
 msgstr "No puedo acceder al sript sieve. El error del servidor es: '%s'"
 
-#: include/class_mail-methods-cyrus.inc:348
+#: include/class_mail-methods-cyrus.inc:360
 #, php-format
 msgid "Can't send sieve script. Server says '%s'."
 msgstr "No puedo enviar el script sieve. El error del servidor es: '%s'"
 
-#: include/class_mail-methods-cyrus.inc:352
+#: include/class_mail-methods-cyrus.inc:364
 #, php-format
 msgid "Can't activate GOsa sieve script. Server says '%s'."
 msgstr ""
@@ -17558,15 +17576,15 @@ msgid "Can't use sha for encryption, missing function sha1 / mhash / crypt"
 msgstr ""
 "No puedo usar sha para codificación, falta la función sha1 / mhash / crypt"
 
-#: html/helpviewer.php:67
+#: html/helpviewer.php:60
 msgid "Help browser"
 msgstr "Navegador de ayuda"
 
-#: html/helpviewer.php:118
+#: html/helpviewer.php:111
 msgid "There is no helpfile specified for this class"
 msgstr "No hay archivo de ayuda disponible para esta clase"
 
-#: html/helpviewer.php:265
+#: html/helpviewer.php:260
 #, php-format
 msgid "Helpdir '%s' is not accessible, can't read any helpfiles."
 msgstr ""
@@ -18051,6 +18069,9 @@ msgstr ""
 #: ihtml/themes/default/logout.tpl:10
 msgid "Sign in again"
 msgstr "Entrando de nuevo"
+
+#~ msgid "You're trying to add an invalid email address "
+#~ msgstr "Esta intentando añadir una dirección de correo no valida"
 
 #~ msgid "Please enter a valid phone number!"
 #~ msgstr "¡Por favor introduzca un número de teléfono valido!"
