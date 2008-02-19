@@ -51,9 +51,6 @@ class Step_Config3 extends setup_step
               "mailQueueScriptPath" => "/usr/bin/sudo /usr/local/sbin/mailqueue %action %id %server",
               "mailQueueScriptPath_active" => FALSE,
 
-              "auto_network_hook" => "/usr/bin/net-resolver.sh",
-              "auto_network_hook_active" => FALSE,
-
               "notifydir" => "",
               "notifydir_active" => FALSE,
 
@@ -159,15 +156,6 @@ class Step_Config3 extends setup_step
         }
       }else{
         $this->optional['gotomasses_active'] = FALSE;
-      }
-
-      if(isset($_POST['auto_network_hook_active'])){
-        $this->optional['auto_network_hook_active'] = TRUE;
-        if(isset($_POST['auto_network_hook'])){
-          $this->optional['auto_network_hook'] = get_post('auto_network_hook');
-        }
-      }else{
-        $this->optional['auto_network_hook_active'] = FALSE;
       }
 
       if(isset($_POST['notifydir_active'])){

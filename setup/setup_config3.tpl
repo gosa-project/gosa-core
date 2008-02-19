@@ -110,26 +110,6 @@
         </div>
     </div>
 
-
-    <div class='step4_container'>
-        <div class='step4_name'>
-            {t}Network resolv hook{/t}
-        </div>
-        <div class='step4_value'>
-            {if $optional.auto_network_hook_active == FALSE}
-                <input type='checkbox' value='1' name='auto_network_hook_active'
-                    onClick='changeState("auto_network_hook");'>
-                <input size=40 id='auto_network_hook' name='auto_network_hook' 
-					type='text' value='{$optional.auto_network_hook}' disabled>
-            {else}
-                <input type='checkbox' value='1' name='auto_network_hook_active' checked
-					onClick='changeState("auto_network_hook");'>
-                <input size=40 id='auto_network_hook' name='auto_network_hook' type='text' 
-					value='{$optional.auto_network_hook}'  >
-            {/if}
-        </div>
-    </div>
-
     <div class='step4_container'>
         <div class='step4_name'>
             {t}Mail queue script{/t}
