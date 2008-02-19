@@ -167,7 +167,16 @@ class gosaSupportDaemon
       $str = trim($this->o_sock->read());
       $entries = $this->xml_to_array($str);
       if(isset($entries['XML']) && is_array($entries['XML'])){
-        $ret = $entries; 
+
+        /* Check if returned values represent a valid answer */
+        if($entries['XML']['HEADER'] == "answer"){
+          
+          /* Unset header tags */
+          foreach(array("HEADER","SOURCE","TARGET") as $type){
+            unset($entries['XML'][$type]);
+          }
+          $ret = $entries; 
+        }
       }
     }
     
@@ -211,7 +220,9 @@ class gosaSupportDaemon
       $entries = $this->xml_to_array($str);
       if(isset($entries['XML']) && is_array($entries['XML'])){
         foreach($entries['XML'] as $entry){
-          $ret[] = $entry['ID'];
+          if(isset($entry['ID'])){
+            $ret[] = $entry['ID'];
+          }
         }
       }
     }
@@ -244,7 +255,6 @@ class gosaSupportDaemon
         <operator>eq</operator>
         <id>".$id."</id>
         </phrase>";
-      $ret[$id] = FALSE;
     }
     $xml_msg .= "</clause>
       </where>
@@ -255,7 +265,11 @@ class gosaSupportDaemon
       $str = trim($this->o_sock->read());
       $entries = $this->xml_to_array($str); 
       if(isset($entries['XML'])){
-        $ret = $entries['XML'];
+        foreach($entries['XML'] as $name => $entry){
+          if(preg_match("/^ANSWER[0-9]*$/",$name)){
+            $ret[$name] = $entry;
+          }
+        }
       }
     }
     return($ret);
@@ -291,7 +305,9 @@ class gosaSupportDaemon
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
       $entries = $this->xml_to_array($str); 
-      if(isset($entries['XML']['ANSWER1'])){
+      if( isset($entries['XML']['HEADER']) && 
+          $entries['XML']['HEADER']=="answer" && 
+          isset($entries['XML']['ANSWER1'])){
         return(TRUE);
       }
     }
@@ -328,7 +344,9 @@ class gosaSupportDaemon
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
       $entries = $this->xml_to_array($str); 
-      if(isset($entries['XML']['ANSWER1'])){
+      if( isset($entries['XML']['HEADER']) &&
+          $entries['XML']['HEADER']=="answer" &&
+          isset($entries['XML']['ANSWER1'])){
         $ret = $entries['XML']['ANSWER1'];
       }
     }
