@@ -62,7 +62,7 @@ class Socket_Client
   private function decrypt($data)
   {
     /* decrypt data */
-    if($this->b_encrypt){
+    if($this->b_encrypt && strlen($data)){
       $data = base64_decode($data);
       mcrypt_generic_init($this->td, $this->ckey, $this->iv);
       $data = mdecrypt_generic($this->td, $data);
@@ -140,7 +140,6 @@ class Socket_Client
         }
       }
       if((microtime(TRUE) - $start) > $this->timeout ){      
-        trigger_error(sprintf("Exceeded timeout %f while reading from socket",$this->timeout));
         break;
       }
     }
