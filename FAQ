@@ -89,6 +89,7 @@ A: Yes. Just go to the locale directory and copy the messages.po file somewhere
    You may need to restart apache, depending on your setup. On Debian, be sure
    to have your locale generated (dpkg-reconfigure locales) before.
 
+
 Q: The online help doesn't exist in my language, can i translate it to my language?
 
 A: Yes. Just go to the doc/guide/user/en directory and copy the lyx-source directory
@@ -96,6 +97,7 @@ A: Yes. Just go to the doc/guide/user/en directory and copy the lyx-source direc
    program create the online help in your language. When you have finish just run
    ./gen_online_help from the gosa root directory to generate the online docs.
    
+
 Q: Can I specify some kind of password policies?
 
 A: You can place the keywords "pwminlen" and "pwdiffer" in the main section of your
@@ -240,12 +242,6 @@ A: This is an additional security feature, so that no one can fall back to uid 0
 	... \>
 
    in your configuration. In this example 40 will be the smallest ID you can enter.
-
-
-Q: Aahhrg. I've updated to a new version and my gosa.conf seems to be broken.
-
-A: Some parameters have changed. Please call the fix_config.sh script which is in
-   the contrib directory.
 
 
 Q: I've saved my windows workstations in other locations like GOsa is doing it
@@ -412,12 +408,14 @@ Q: Is it possible to see some kind of information about how many objects
 
 A: Just add "list_summary = 'true'" inside the main section of your gosa.conf.
 
+
 Q: Is it possible to login with the users mail address too?
 
 A: Yes, just add the following line to your gosa.conf:
    <location ...
 	auth_mail="true"
    ...>
+
 
 Q: I want to use cyrus for multiple mail domains, but GOsa uses the 'uid' attribute 
    for account namens, how do I change this to 'mail'?
