@@ -435,7 +435,7 @@ class gosaSupportDaemon
     @param  String XML string  
     @return Array Returns an array containing the xml structure. 
    */
-  private function xml_to_array($xml)
+  public function xml_to_array($xml)
   {
     $params = array();
     $level = array();
