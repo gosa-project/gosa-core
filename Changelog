@@ -3,6 +3,21 @@ GOsa2 changelog
 
 * gosa 2.5.15
   - Changed order of sys-action commandline parameters
+  - Changed sorting of management plugins to natural sorting
+  - Fixed problem with saving vacation message start/stop
+  - Fixed sorting of releases
+  - Updated translations (de/fr/pl)
+  - Fixed storage of (IMAP) ACLs in group/mail settings
+  - Fixed issues with sieve script management
+  - General code cleanup
+  - Fixed issue with undefined index and copy 'n paste in samba plugin
+  - Fixed problem with the references/ogroup handling with
+    special character DNs
+  - Optimized way of writing unit tags
+  - Online manual updates / helpviewer update
+  - Fixed renaming of printers which was broken in special cases
+  - DNS plugin updates
+  - DHCP plugin updates
 
 * gosa 2.5.14
   - Phone conference language is now selectable.
