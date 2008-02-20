@@ -92,7 +92,8 @@ class gosaSupportDaemon
       $this->o_sock->setEncryptionKey($this->s_encryption_key); 
       $this->is_connected = TRUE;
     }else{
-      $this->error = $this->o_sock->get_error();
+      $this->s_error = $this->o_sock->get_error();
+      $this->b_error = TRUE;
       $this->disconnect();
     }
     return($this->is_connected);
@@ -139,7 +140,7 @@ class gosaSupportDaemon
   /*! \brief  Returns an array containing all queued entries.
     @return Array All queued entries as an array.
    */
-  public function get_queued_entries($from=0,$to=10,$sort="timestamp DESC")
+  public function get_queued_entries($from=-1,$to=-1,$sort="timestamp DESC")
   {
     $this->b_error = FALSE;
     $this->s_error = "";
@@ -155,11 +156,15 @@ class gosaSupportDaemon
         </phrase>
       </clause>
       </where>
-      <orderby>".$sort."</orderby>
+      <orderby>".$sort."</orderby>";
+if($from != -1 && $to != -1){
+$xml_msg.= "
       <limit>
-      <from>".$from."</from>
-      <to>".$to."</to>
-      </limit>
+       <from>".$from."</from>
+       <to>".$to."</to>
+      </limit>";
+}
+$xml_msg.= "
       </xml>";
 
     if($this->connect()){
@@ -175,7 +180,7 @@ class gosaSupportDaemon
           foreach(array("HEADER","SOURCE","TARGET") as $type){
             unset($entries['XML'][$type]);
           }
-          $ret = $entries; 
+          $ret = $entries['XML']; 
         }
       }
     }
@@ -595,7 +600,6 @@ class gosaSupportDaemon
     if (tests::is_mac($target)){
     /* Get communication object */
 	$d= new gosaSupportDaemon(TRUE,0.5);
-
 	$answer= $d->_send("<xml><header>gosa_ping</header><source>GOSA</source><target>$target</target></xml>", TRUE);
 	return (count($answer) ? TRUE:FALSE);
     }
