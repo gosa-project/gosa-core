@@ -579,7 +579,7 @@ $xml_msg.= "
   }
 
 
-  static function send($header, $to, $data= array())
+  static function send($header, $to, $data= array(), $answer_expected = FALSE)
   {
     $xml_message= "";
 
@@ -591,7 +591,7 @@ $xml_msg.= "
       $xml_message.= "<$key>$value</$key>";
     }
 
-    return $d->_send("<xml><header>$header</header><source>GOSA</source><target>$to</target>".$xml_message."</xml>");
+    return $d->_send("<xml><header>$header</header><source>GOSA</source><target>$to</target>".$xml_message."</xml>",$answer_expected);
   }
 
 
