@@ -232,6 +232,22 @@ class tests {
 
     return ($first < $curr&& $last > $curr);
   }
+
+
+  /* Check if the specified IP address $address is inside the given network */
+  public static function is_in_ip_range($from, $to, $address)
+  {
+    $from = split('\.', $from);
+    $to   = split('\.', $to);
+    $ad   = split('\.', $address);
+
+    /* Transform to integer */
+    $from= $from[0] * (16777216) + $from[1] * (65536) + $from[2] * (256) + $from[3];
+    $to=  $to[0] * (16777216) + $to[1] * (65536) + $to[2] * (256) + $to[3];
+    $ad=  $ad[0] * (16777216) + $ad[1] * (65536) + $ad[2] * (256) + $ad[3];
+
+    return ($ad >= $from && $ad <= $to);
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
