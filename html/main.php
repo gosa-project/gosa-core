@@ -146,7 +146,7 @@ if (!session::is_set('plist')){
       if (is_readable("$BASE_DIR/$path")){
         require_once("$BASE_DIR/$path");
       } else {
-        msg_dialog::display(_("Could not location file."),
+        msg_dialog::display(_("Could not locate file."),
             sprintf(_("Fatal error: cannot locate file '%s' - please run '%s' to fix this"),
               "$BASE_DIR/$path", "<b>update-gosa</b>"), FATAL_ERROR_DIALOG);
         exit;
