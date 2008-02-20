@@ -508,7 +508,7 @@ class aclManagement extends plugin
         if($Type == "search"){
           $tmp = get_list($Filter, "acl", $fetch_base, $Attrs, $Flags);
           foreach($tmp as $entry){
-            $res[] = $entry;
+            $res[$entry['dn']] = $entry;
           }
         }else{
           $ldap->cat($fetch_base,$Attrs);
@@ -519,17 +519,17 @@ class aclManagement extends plugin
             if(!isset($attrs['ou']) && !isset($attrs['cn'])){
               $namingAttr= preg_replace("/^[^=]*+=([^,]*),.*$/","\\1",$fetch_base);
               if(preg_match("/".$re2."/i",$namingAttr)){
-                $res[] = $attrs;
+                $res[$attrs['dn']] = $attrs;
               }
             }elseif( (isset($attrs['cn'][0]) && preg_match("/".$re2."/i",$attrs['cn'][0]))
                ||(isset($attrs['ou'][0]) && preg_match("/".$re2."/i",$attrs['ou'][0]))){
-              $res[] = $attrs;
+              $res[$attrs['dn']] = $attrs;
             }
           }
         }
       }
     }
-    $this->list = $res;
+    $this->list = array_values($res);
   }
 
 
