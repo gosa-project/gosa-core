@@ -2530,31 +2530,39 @@ function change_password ($dn, $password, $mode=0, $hash= "")
 function generate_smb_nt_hash($password)
 {
   global $config;
-  $tmp= $config->data['MAIN']['SMBHASH']." ".escapeshellarg($password);
-  @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__, $tmp, "Execute");
 
-  exec($tmp, $ar);
-  flush();
-  reset($ar);
-  $hash= current($ar);
-  if ($hash == "") {
-    msg_dialog::display(_("Configuration error"), _("Setting for SMBHASH in gosa.conf is incorrect! Cannot change Samba password."), ERROR_DIALOG);
+  # Try to use gosa-si?
+  if (isset($config->data['MAIN']['GOSA_SI'])){
+	  $hash= gosaSupportDaemon::send("gosa_gen_smb_hash", "GOSA", array("password" => $password));
   } else {
-    list($lm,$nt)= split (":", trim($hash));
+	  $tmp= $config->data['MAIN']['SMBHASH']." ".escapeshellarg($password);
+	  @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__, $tmp, "Execute");
 
-    if ($config->current['SAMBAVERSION'] == 3) {
-      $attrs['sambaLMPassword']= $lm;
-      $attrs['sambaNTPassword']= $nt;
-      $attrs['sambaPwdLastSet']= date('U');
-      $attrs['sambaBadPasswordCount']= "0";
-      $attrs['sambaBadPasswordTime']= "0";
-    } else {
-      $attrs['lmPassword']= $lm;
-      $attrs['ntPassword']= $nt;
-      $attrs['pwdLastSet']= date('U');
-    }
-    return($attrs);
+	  exec($tmp, $ar);
+	  flush();
+	  reset($ar);
+	  $hash= current($ar);
   }
+
+  if ($hash == "") {
+	  msg_dialog::display(_("Configuration error"), _("Cannot generate samba hash!"), ERROR_DIALOG);
+	  return ("");
+  }
+
+  list($lm,$nt)= split (":", trim($hash));
+
+  if ($config->current['SAMBAVERSION'] == 3) {
+	  $attrs['sambaLMPassword']= $lm;
+	  $attrs['sambaNTPassword']= $nt;
+	  $attrs['sambaPwdLastSet']= date('U');
+	  $attrs['sambaBadPasswordCount']= "0";
+	  $attrs['sambaBadPasswordTime']= "0";
+  } else {
+	  $attrs['lmPassword']= $lm;
+	  $attrs['ntPassword']= $nt;
+	  $attrs['pwdLastSet']= date('U');
+  }
+  return($attrs);
 }
 
 
