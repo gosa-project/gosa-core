@@ -589,7 +589,7 @@ class printgeneric extends plugin
 
       /* Delete references to object groups */
       $ldap->cd ($this->config->current['BASE']);
-      $ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".LDAP::prepare4filter($this->dn)."))", array("cn"));
+      $ldap->search ("(&(objectClass=gosaGroupOfNames)(member=".@LDAP::prepare4filter($this->dn)."))", array("cn"));
       while ($ldap->fetch()){
         $og= new ogroup($this->config, $ldap->getDN());
         unset($og->member[$this->dn]);

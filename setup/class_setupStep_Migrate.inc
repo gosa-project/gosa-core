@@ -1090,7 +1090,7 @@ class Step_Migrate extends setup_step
 
 
           /* Check if there are references to this object */
-          $ldap->search("(&(member=".LDAP::prepare4filter($dn).")(|(objectClass=gosaGroupOfNames)(objectClass=groupOfNames)))",array('dn'));
+          $ldap->search("(&(member=".@LDAP::prepare4filter($dn).")(|(objectClass=gosaGroupOfNames)(objectClass=groupOfNames)))",array('dn'));
           $refs = "";
           while($attrs = $ldap->fetch()){
             $ref_dn = $attrs['dn'];
@@ -1138,7 +1138,7 @@ class Step_Migrate extends setup_step
 
 
           /* Check if there are references to this object */
-          $ldap->search("(&(member=".LDAP::prepare4filter($dn).")(|(objectClass=gosaGroupOfNames)(objectClass=groupOfNames)))",array('dn'));
+          $ldap->search("(&(member=".@LDAP::prepare4filter($dn).")(|(objectClass=gosaGroupOfNames)(objectClass=groupOfNames)))",array('dn'));
           $refs = "";
           while($attrs = $ldap->fetch()){
             $ref_dn = $attrs['dn'];
@@ -1185,7 +1185,7 @@ class Step_Migrate extends setup_step
           $this->outside_users[$b_dn]['ldif'] = _("User will be moved from").":<br>\t".$dn."<br>"._("to").":<br>\t".$d_dn;
 
           /* Check if there are references to this object */
-          $ldap->search("(&(member=".LDAP::prepare4filter($dn).")(|(objectClass=gosaGroupOfNames)(objectClass=groupOfNames)))",array('dn'));
+          $ldap->search("(&(member=".@LDAP::prepare4filter($dn).")(|(objectClass=gosaGroupOfNames)(objectClass=groupOfNames)))",array('dn'));
           $refs = "";
           while($attrs = $ldap->fetch()){
             $ref_dn = $attrs['dn'];
