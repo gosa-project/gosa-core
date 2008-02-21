@@ -48,7 +48,7 @@ class timezone {
       }
 
       if(!@date_default_timezone_set($tz)){
-        msg_dialog::display(_("Configuration error"), sprintf(_("The timezone setting '%s' in your gosa.conf is not valid. Cannot calculate correct timezone offest."), $tz), ERROR_DIALOG);
+        msg_dialog::display(_("Configuration error"), sprintf(_("The timezone setting '%s' in your gosa.conf is not valid. Cannot calculate correct timezone offset."), $tz), ERROR_DIALOG);
       }
       $tz_delta = date("Z", $stamp);
       $tz_delta = $tz_delta / 3600 ;

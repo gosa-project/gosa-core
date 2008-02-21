@@ -88,7 +88,7 @@
                         {t}This dialog allows moving a couple of groups to the configured group tree. Doing this may straighten your LDAP service.{/t}
                         </p>
                         <p style='color:red'>
-                        {t}Be careful with this option! There may be references pointing to these groups. The GOsa setup can't migrate references, so you may want to cancel the migration in this case in this case.{/t}
+                        {t}Be careful with this option! There may be references pointing to these groups. The GOsa setup can't migrate references, so you may want to cancel the migration in this case.{/t}
                         </p>
 			<p>
 			{t}Move selected groups into this group tree{/t}: 
@@ -255,7 +255,7 @@
 	
 			<h2>Department migration</h2>
 
-			<p>{t}The listed departments are currenlty invisble in the GOsa user interface. If you want to change this for a couple of entries, select them and use the migrate button below.{/t}</p>
+			<p>{t}The listed departments are currently invisible in the GOsa user interface. If you want to change this for a couple of entries, select them and use the migrate button below.{/t}</p>
 			<p>{t}If you want to know what will be done when migrating the selected entries, use the 'Show changes' button to see the LDIF.{/t}</p>
 					
 			{foreach from=$deps_to_migrate item=val key=key}

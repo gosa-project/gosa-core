@@ -122,7 +122,7 @@ class Step_Migrate extends setup_step
     $this->checks['permissions']['ERROR_MSG'] = "";
     $this->check_ldap_permissions();
 
-    $this->checks['deps_visible']['TITLE']     = _("Checking for invisible deparmtments");
+    $this->checks['deps_visible']['TITLE']     = _("Checking for invisible departments");
     $this->checks['deps_visible']['STATUS']    = FALSE;
     $this->checks['deps_visible']['STATUS_MSG']= "";
     $this->checks['deps_visible']['ERROR_MSG'] = "";

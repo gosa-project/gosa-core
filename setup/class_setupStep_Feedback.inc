@@ -180,7 +180,7 @@ class Step_Feedback  extends setup_step
     }
 
     if(!$this->subscribe && !$this->use_gosa_announce){
-      $msgs[] = _("You should have enabled at least one option, to subscribe or send your feedback.");
+      $msgs[] = _("You have to select at least one of both options, subscribe or send feedback.");
     }
 
     return($msgs);

@@ -141,7 +141,7 @@ class log {
     if(isset($this->config->data['SERVERS']['LOGGING'])){
       $servers = $this->config->data['SERVERS']['LOGGING'];
     }else{
-      msg_dialog::display(_("Error"), _("You have enabled the logging into mysql databse, but there are no logging servers available."), ERROR_DIALOG);
+      msg_dialog::display(_("Error"), _("You have enabled the logging into mysql database, but there are no logging servers available."), ERROR_DIALOG);
       return(FALSE);
     }
 

@@ -6,7 +6,7 @@
 		</p>
 	</div>
 	<div class='default' style='padding-right:10px; margin-bottom:20px;'>
-		<select name='lang_selected' title='{t}Please your preferred language here{/t}' size=20 style="width:100%">
+		<select name='lang_selected' title='{t}Please select your preferred language here{/t}' size=20 style="width:100%">
 		{html_options options=$languages selected=$lang_selected}
 		</select>
 	</div>

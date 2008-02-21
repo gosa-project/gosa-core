@@ -550,7 +550,7 @@ class userManagement extends plugin
         $this->usertab->delete ();
         unset ($this->usertab);
         $this->usertab= NULL;
-        msg_dialog::display(_("User delted"),_("User successfully removed."),INFO_DIALOG);
+        msg_dialog::display(_("User deleted"),_("User successfully removed."),INFO_DIALOG);
       } else {
 
         /* Normally this shouldn't be reached, send some extra

@@ -215,7 +215,7 @@ if (isset($config->data['MAIN']['HTACCESS_AUTH']) && preg_match('/^(yes|true)$/i
     exit;
   }
   if ($server == ""){
-    msg_dialog::display(_("Error"), _("User information is not uniq accross the configured LDAP trees!"), FATAL_ERROR_DIALOG);
+    msg_dialog::display(_("Error"), _("User information is not unique accross the configured LDAP trees!"), FATAL_ERROR_DIALOG);
     exit;
   }
 

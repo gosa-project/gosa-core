@@ -97,7 +97,7 @@ class Step_Finish extends setup_step
     $err_msg= "";
     
     if($exists && $this->is_world_readable(CONFIG_DIR."/".CONFIG_FILE)){
-      $err_msg = _("Your configuration file is currently world readable. Please updated the file permissions!");
+      $err_msg = _("Your configuration file is currently world readable. Please update the file permissions!");
     }elseif(!$exists){
       $err_msg = _("The configuration is currently not readable or it does not exists.");
     }
