@@ -332,14 +332,6 @@ A: For Kolab to work correctly you have to include the rfc2739.schema
    in your slapd.conf. Insert it before the kolab2.schema
 
 
-Q: Is there a way to let GOsa automatically fill missing fields in the network
-   configuration?
-
-A: Sure. You can specify the "auto_network_hook" option and provide the contributed
-   script "net-resolver.sh" in your gosa.conf. If this is configured, you're
-   getting an additional button in each network dialog.
-
-
 Q: New implementations of OpenLDAP seem to require {sasl} instead of {kerberos}
    in password hashes. GOsa writes the wrong string. What can I do?
 
