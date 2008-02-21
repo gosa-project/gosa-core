@@ -721,17 +721,18 @@ class printgeneric extends plugin
     if($this->PPDdialogToSave){
       $this->PPDdialogToSave->save_ppd();
     }
-    if($this->orig_dn != $this->dn){
+
+    if($this->orig_dn != $this->dn && $this->initially_was_account){
       if(!empty($this->gotoPrinterPPD)) {
         $this->PPDdialogToSave = new printerPPDDialog($this->config, $this->dn,$this->gotoPrinterPPD);
         $this->PPDdialogToSave->cn = $this->cn;
         $this->PPDdialogToSave->generateProperties();
-        $this->PPDdialogToSave->update_ppd_url();
+        $this->gotoPrinterPPD = $this->PPDdialogToSave->update_ppd_url();
       }
     }
 
     /* Remove previously selected ppd file.*/
-    if($this->initial_PPD != $this->gotoPrinterPPD){
+    if($this->initial_PPD != $this->gotoPrinterPPD && $this->initially_was_account){
       if(!empty($this->initial_PPD)){
         $tmp = new printerPPDDialog($this->config, $this->dn,$this->initial_PPD);
         $tmp->removeModifiedPPD();
