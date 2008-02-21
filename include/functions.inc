@@ -2317,7 +2317,7 @@ function check_schema($cfg,$rfc2307bis = FALSE)
     }
     if(!$rfc2307bis && !isset($tmp['posixGroup']['STRUCTURAL'])){
       $checks['posixGroup']['STATUS']           = FALSE;
-      $checks['posixGroup']['MSG']              = _("You have disabled the rfc2307bis option on the 'ldap setup' step, but your schema   configuration do not support this option.");
+      $checks['posixGroup']['MSG']              = _("Your schema is configured to support the rfc2307bis group, but you have disabled this option on the 'ldap setup' step.");
       $checks['posixGroup']['INFO']             = _("The objectClass 'posixGroup' must be STRUCTURAL");
     }
   }
