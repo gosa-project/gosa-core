@@ -1110,6 +1110,12 @@ class LDAP{
         return($objectclasses);
       } 
     }
+
+    /* Return the cached results. */
+    if(class_available('session') && session::is_set("LDAP_CACHE::get_objectclasses")){
+      $objectclasses = session::get("LDAP_CACHE::get_objectclasses");
+      return($objectclasses);
+    }
 	
 	  # Get base to look for schema 
 	  $sr = @ldap_read ($this->cid, NULL, "objectClass=*", array("subschemaSubentry"));
@@ -1173,6 +1179,9 @@ class LDAP{
       }
 
 	  }
+    if(class_available("session")){
+      session::set("LDAP_CACHE::get_objectclasses",$objectclasses);
+    }
 	  return $objectclasses;
   }
 
