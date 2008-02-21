@@ -531,9 +531,9 @@ class faiPackage extends plugin
         /* cehck if object already exists */
         $ldap->cat($pkgdn,array("objectClass"));
 
-	/* Tag object */
-	$this->tag_attrs(&$pkgattrs, $sub_dn, $this->gosaUnitTag);
-  
+        /* Tag object */
+        $this->tag_attrs(&$pkgattrs, $pkgdn, $this->gosaUnitTag);
+
         if(in_array($pkgattrs['FAIvariableType'],array("boolean","multiselect","password","select","string","text"))){
           if($ldap->count()!=0){
             $ldap->cd($pkgdn);
@@ -548,7 +548,6 @@ class faiPackage extends plugin
           }
           show_ldap_error($ldap->get_error(), _("Saving FAI package entry failed"));
         }
-
       }
     }
   }
