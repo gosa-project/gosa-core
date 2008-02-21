@@ -147,7 +147,7 @@ class ogroup extends plugin
           }
         }
         if($skipped){
-          print_red(_("You can only have terminals or workstations in one group, but not both."));
+          msg_dialog::display(_("Information"), _("You cannot combine terminals and workstations in one object group!"), INFO_DIALOG);
         }
         $this->reload();
       }

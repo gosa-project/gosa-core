@@ -157,7 +157,7 @@ class aclManagement extends plugin
         $this->acltabs= new aclroletab($this->config, NULL,$this->dn);
         $this->acltabs->set_acl_base($this->DivListACL->selectedBase);
       }else{
-        msg_dialog::display(_("Permission error"), _("You have no permissions to create a new role!"), ERROR_DIALOG);
+        msg_dialog::display(_("Permission error"), _("You have no permission to create a new role!"), ERROR_DIALOG);
       }
     }
 
@@ -194,7 +194,7 @@ class aclManagement extends plugin
         /* Set ACL and move DN to the headline */
         session::set('objectinfo',$this->dn);
       }else{
-        msg_dialog::display(_("Permission error"), _("You have no permissions to edit this ACL!"), ERROR_DIALOG);
+        msg_dialog::display(_("Permission error"), _("You have no permission to edit this ACL!"), ERROR_DIALOG);
       }
     }
 
@@ -247,7 +247,7 @@ class aclManagement extends plugin
 
         /* Obviously the acl isn't allowed to delete. Show message and
            clean session. */
-        msg_dialog::display(_("Permission error"), _("You have no permissions to delete this ACL!"), ERROR_DIALOG);
+        msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), ERROR_DIALOG);
       }
     }
 
@@ -271,7 +271,7 @@ class aclManagement extends plugin
 
         /* Normally this shouldn't be reached, send some extra
            logs to notify the administrator */
-        msg_dialog::display(_("Permission error"), _("You have no permissions to delete this role!"), ERROR_DIALOG);
+        msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), ERROR_DIALOG);
 
         if(isset($this->ui->uid)){
           new log("security","aclroles/".get_class($this),$this->dn,array(),"Warning: '".$this->ui->uid."' tried to trick acl role deletion.");
@@ -310,7 +310,7 @@ class aclManagement extends plugin
 
         /* Obviously the acl isn't allowed to delete. Show message and
            clean session. */
-        msg_dialog::display(_("Permission error"), _("You have no permissions to delete this ACL!"), ERROR_DIALOG);
+        msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), ERROR_DIALOG);
       }
     }
 
@@ -334,7 +334,7 @@ class aclManagement extends plugin
 
         /* Normally this shouldn't be reached, send some extra
            logs to notify the administrator */
-        msg_dialog::display(_("Permission error"), _("You have no permissions to delete this ACL!"), ERROR_DIALOG);
+        msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), ERROR_DIALOG);
 
         if(isset($this->ui->uid)){
           new log("security","aclroles/".get_class($this),$this->dn,array(),"Warning: '".$this->ui->uid."' tried to trick acl role      deletion.");

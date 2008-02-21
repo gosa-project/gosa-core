@@ -331,7 +331,7 @@ class groupManagement extends plugin
 
             /* Normally this shouldn't be reached, send some extra
                logs to notify the administrator */
-            print_red (_("You are not allowed to delete this group!"));
+            msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), ERROR_DIALOG);
             new log("security","groups/".get_class($this),$dn,array(),"Tried to trick deletion.");
           }
           /* Remove lock file after successfull deletion */
@@ -384,7 +384,7 @@ class groupManagement extends plugin
       } else {
         
         /* Obviously the user isn't allowed to delete. Show message and clean session. */
-        print_red (_("You are not allowed to delete this group!"));
+        msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), ERROR_DIALOG);
       }
     }
 
@@ -415,7 +415,7 @@ class groupManagement extends plugin
 
         /* Normally this shouldn't be reached, send some extra
            logs to notify the administrator */
-        print_red (_("You are not allowed to delete this group!"));
+        msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), ERROR_DIALOG);
         new log("security","groups/".get_class($this),$dn,array(),"Tried to trick deletion.");
       }
 

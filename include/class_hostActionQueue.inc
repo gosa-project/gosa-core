@@ -139,7 +139,6 @@ class hostActionQueue {
       $parts  = split(" ",$row);
 
       if(count($parts) != 10){
-        print_red(_("Entry broken, skipped."));
         msg_dialog::display(_("GOsa infrastructure"), _("Cannot read broken entry - skipped!"), WARNING_DIALOG);
       }else{
 

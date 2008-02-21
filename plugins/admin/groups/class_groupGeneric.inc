@@ -134,7 +134,7 @@ class group extends plugin
           $this->ridBase= $this->config->current['RIDBASE'];
           $this->SID= $this->config->current['SID'];
         } else {
-          print_red(_("Can't find this groups SID in LDAP or in your configuration file!"));
+          msg_dialog::display(_("Configuration error"), _("Cannot find group SID in your configuration!"), ERROR_DIALOG);
         }
       }
 
@@ -528,8 +528,8 @@ class group extends plugin
     }
   
     /* If more than max users are found, display a message to warn the user */
-    if(($i == $MaxUser)){
-      print_red(sprintf(_("Your search method returned more than '%s' users, only '%s' users are shown.") , $MaxUser,$MaxUser));
+    if($i == $MaxUser){
+      msg_dialog::display(_("Configuration error"), sprintf(_("Search returned too many results. Not displaying more than %s entries."), $MaxUser), ERROR_DIALOG);
     }
     
     /* Sort lists */
@@ -708,12 +708,12 @@ class group extends plugin
       if(isset($this->config->data['SERVERS']['SAMBA'][$this->sambaDomainName]['SID'])){
         $this->SID    = $this->config->data['SERVERS']['SAMBA'][$this->sambaDomainName]['SID'];
       }else{
-        print_red(sprintf(_("No configured SID found for '%s'."),$this->sambaDomainName));
+        msg_dialog::display(_("Error"), sprintf(_("Cannot find any SID for '%s'!"), $this->sambaDomainName), ERROR_DIALOG);
       }
       if(isset($this->config->data['SERVERS']['SAMBA'][$this->sambaDomainName]['RIDBASE'])){
         $this->ridBase= $this->config->data['SERVERS']['SAMBA'][$this->sambaDomainName]['RIDBASE']; 
       }else{
-        print_red(sprintf(_("No configured RIDBASE found for '%s'."),$this->sambaDomainName));
+        msg_dialog::display(_("Error"), sprintf(_("Cannot find any RIDBASE for '%s'!"), $this->sambaDomainName), ERROR_DIALOG);
       }
 
       $this->attrs['objectClass'][]= 'sambaGroupMapping';
@@ -941,7 +941,7 @@ class group extends plugin
 
     /* Check if id reached maximum */
     if ($id >= pow(2,32)){
-      print_red(_("Too many users, can't allocate a free ID!"));
+      msg_dialog::display(_("Error"), _("Cannot allocate a free ID!"), ERROR_DIALOG);
       exit;
     }
   }

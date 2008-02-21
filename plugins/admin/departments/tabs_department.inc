@@ -31,7 +31,7 @@ class deptabs extends tabs
         $cnt1 = count(split(",",$this->dn));
         $cnt2 = count(split(",",$new_dn));
         if((strstr($new_dn,$this->dn))&&($cnt1<$cnt2)){
-          print_red(_("Try to move tree failed. Destination tree is subtree of source tree."));
+          msg_dialog::display(_("LDAP error"), _("Moving LDAP tree failed: destination tree is a subtree of the source!"), ERROR_DIALOG);
         }else{
           /* Prepare to be moved */
           $baseobject->recursive_move($this->dn, $new_dn);			

@@ -212,7 +212,7 @@ class ogroupManagement extends plugin
 
           /* Normally this shouldn't be reached, send some extra
              logs to notify the administrator */
-          print_red (_("You are not allowed to delete this object group!"));
+          msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), INFO_DIALOG);
           new log("security","ogroups/".get_class($this),$dn,array(),"Tried to trick deletion.");
         }
         /* Remove lock file after successfull deletion */
@@ -264,7 +264,7 @@ class ogroupManagement extends plugin
 
         /* Obviously the user isn't allowed to delete. Show message and
            clean session. */
-        print_red (_("You are not allowed to delete this object group!"));
+        msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), INFO_DIALOG);
       }
     }
 
@@ -291,7 +291,7 @@ class ogroupManagement extends plugin
 
         /* Normally this shouldn't be reached, send some extra
            logs to notify the administrator */
-        print_red (_("You are not allowed to delete this object group!"));
+        msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), INFO_DIALOG);
         new log("security","ogroups/".get_class($this),$dn,array(),"Tried to trick deletion.");
       }
 
