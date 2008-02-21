@@ -221,7 +221,7 @@ class config  {
     /* Check for connection */
     if (is_null($this->ldap) || (is_int($this->ldap) && $this->ldap == 0)){
       $smarty= get_smarty();
-      msg_dialog::display(_("LDAP error"), _("Can't bind to LDAP. Please contact the system administrator."), FATAL_ERROR_DIALOG);
+      msg_dialog::display(_("LDAP error"), _("Cannot bind to LDAP. Please contact the system administrator."), FATAL_ERROR_DIALOG);
       exit();
     }
 

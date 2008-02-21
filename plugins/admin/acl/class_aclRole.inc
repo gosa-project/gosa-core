@@ -593,7 +593,7 @@ class aclrole extends acl
         $all_names .= ", ...";
       }
       $all_names = "<span style='text-align:left;'>".$all_names."</span>";
-      print_red(sprintf(_("This role can't be removed while it is in use. Follwing objects are using this role %s"),$all_names));
+      msg_dialog::display(_("Object in use"), sprintf(_("This role cannot be removed while it is in use by these objects:")."<br><br>%s", $all_names), WARNING_DIALOG);
       return;
     }
         

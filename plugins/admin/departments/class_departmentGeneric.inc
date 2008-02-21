@@ -50,13 +50,6 @@ class department extends plugin
 	var $objectclasses= array("top", "gosaDepartment", "organizationalUnit");
   var $initially_was_tagged = false;
 
-  
-  /* Temporary disable the Unit Tag functionalityi.
-     This is not used anymore, cause of the new acl implementation. 
-     Setting this to TRUE will disable 
-      all POST / GET activity, "Department tagging" and the checkbox within the generic template.
-   */
-  var $UnitTagDiabled     = TRUE;
   var $orig_base = "";
   var $orig_ou = "";
 
@@ -166,13 +159,10 @@ class department extends plugin
 		$smarty->assign("base_select", $this->base);
 
     /* Set admin unit flag */
-    $smarty->assign("UnitTagDiabled",$this->UnitTagDiabled);
-    if(!$this->UnitTagDiabled){
-      if ($this->is_administrational_unit) {
-        $smarty->assign("unitTag", "checked");
-      } else {
-        $smarty->assign("unitTag", "");
-      }
+    if ($this->is_administrational_unit) {
+      $smarty->assign("unitTag", "checked");
+    } else {
+      $smarty->assign("unitTag", "");
     }
 
 		return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
@@ -232,13 +222,11 @@ class department extends plugin
       }
 
       /* Save tagging flag */
-      if(!$this->UnitTagDiabled){
-        if ($this->acl_is_writeable("unitTag")){
-          if (isset($_POST['unitTag'])){
-            $this->is_administrational_unit= true;
-          } else {
-            $this->is_administrational_unit= false;
-          }
+      if ($this->acl_is_writeable("unitTag")){
+        if (isset($_POST['unitTag'])){
+          $this->is_administrational_unit= true;
+        } else {
+          $this->is_administrational_unit= false;
         }
       }
     }
@@ -291,70 +279,64 @@ class department extends plugin
 	{
 		$ldap= $this->config->get_ldap_link();
 
-    if(!$this->UnitTagDiabled){
+    /* Add tag objects if needed */
+    if ($this->is_administrational_unit){
 
-      /* Add tag objects if needed */
-      if ($this->is_administrational_unit){
+      /* If this wasn't tagged before add oc an reset unit tag */
+      if(!$this->initially_was_tagged){
+        $this->objectclasses[]= "gosaAdministrativeUnit";
+        $this->gosaUnitTag= "";
 
-        /* If this wasn't tagged before add oc an reset unit tag */
-        if(!$this->initially_was_tagged){
-          $this->objectclasses[]= "gosaAdministrativeUnit";
-          $this->gosaUnitTag= "";
+        /* It seams that this method is called twice, 
+           set this to true. to avoid adding this oc twice */
+        $this->initially_was_tagged = true;
+      }
 
-          /* It seams that this method is called twice, 
-             set this to true. to avoid adding this oc twice */
-          $this->initially_was_tagged = true;
-        }
+      if ($this->gosaUnitTag == ""){
 
-        if ($this->gosaUnitTag == ""){
+        /* It's unlikely, but check if already used... */
+        $try= 5;
+        $ldap->cd($this->config->current['BASE']);
+        while ($try--){
 
-          /* It's unlikely, but check if already used... */
-          $try= 5;
-          $ldap->cd($this->config->current['BASE']);
-          while ($try--){
+          /* Generate microtime stamp as tag */
+          list($usec, $sec)= explode(" ", microtime());
+          $time_stamp= preg_replace("/\./", "", $sec.$usec);
 
-            /* Generate microtime stamp as tag */
-            list($usec, $sec)= explode(" ", microtime());
-            $time_stamp= preg_replace("/\./", "", $sec.$usec);
-
-            $ldap->search("(&(objectClass=gosaAdministrativeUnit)(gosaUnitTag=$time_stamp))",array("gosaUnitTag"));
-            if ($ldap->count() == 0){
-              break;
-            }
+          $ldap->search("(&(objectClass=gosaAdministrativeUnit)(gosaUnitTag=$time_stamp))",array("gosaUnitTag"));
+          if ($ldap->count() == 0){
+            break;
           }
-          if($try == 0) {
-            print_red(_("Fatal error: Can't find an unused tag to mark the administrative unit!"));
-            return;
-          }
-          $this->gosaUnitTag= preg_replace("/\./", "", $sec.$usec);
         }
+        if($try == 0) {
+          msg_dialog::display(_("Fatal error"), _("Cannot find an unused tag for this administrative unit!"), WARNING_DIALOG);
+          return;
+        }
+        $this->gosaUnitTag= preg_replace("/\./", "", $sec.$usec);
       }
     }
-		plugin::save();
+    plugin::save();
 
-    if(!$this->UnitTagDiabled){
+    /* Remove tag information if needed */
+    if (!$this->is_administrational_unit){
+      $tmp= array();
 
-      /* Remove tag information if needed */
-      if (!$this->is_administrational_unit){
-        $tmp= array();
-
-        /* Remove gosaAdministrativeUnit from this plugin */
-        $has_unit_tag= false;
-        foreach($this->attrs['objectClass'] as $oc){
-          if (!preg_match("/^gosaAdministrativeUnit$/i", $oc)){
-            $tmp[]= $oc;
-          }
-          if (preg_match("/^gosaAdministrativeUnitTag$/i", $oc)){
-            $has_unit_tag= true;
-          }
+      /* Remove gosaAdministrativeUnit from this plugin */
+      $has_unit_tag= false;
+      foreach($this->attrs['objectClass'] as $oc){
+        if (!preg_match("/^gosaAdministrativeUnit$/i", $oc)){
+          $tmp[]= $oc;
         }
-        $this->attrs['objectClass']= $tmp;
-
-        if(!$has_unit_tag && isset($this->attrs['gosaUnitTag'])){
-          $this->attrs['gosaUnitTag']= array();
+        if (preg_match("/^gosaAdministrativeUnitTag$/i", $oc)){
+          $has_unit_tag= true;
         }
-        $this->gosaUnitTag = "";
       }
+      $this->attrs['objectClass']= $tmp;
+
+      if(!$has_unit_tag && isset($this->attrs['gosaUnitTag'])){
+        $this->attrs['gosaUnitTag']= array();
+      }
+      $this->gosaUnitTag = "";
     }
 
 		/* Write back to ldap */
@@ -375,12 +357,9 @@ class department extends plugin
 		}
     show_ldap_error($ldap->get_error(), sprintf(_("Saving of department with dn '%s' failed."),$this->dn));
 
-
-    if(!$this->UnitTagDiabled){
-      /* The parameter forces only to set must_be_tagged, and don't touch any objects 
-         This will be done later */
-      $this->tag_objects(true);
-    }
+    /* The parameter forces only to set must_be_tagged, and don't touch any objects 
+       This will be done later */
+    $this->tag_objects(true);
     
     /* Optionally execute a command after we're done */
 		$this->postcreate();

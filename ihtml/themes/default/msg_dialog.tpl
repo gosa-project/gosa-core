@@ -50,12 +50,7 @@
 
 		<div id='e_layer{$i_ID}' style="errorMsgDialog">
 			<div id="e_layerTitle{$i_ID}" style="errorMsgTitle">
-				&nbsp;&nbsp;{$s_Title}
-			</div>
-			<div style="errorMsgSeperator"></div>
-			<table style='width:100%' summary='' border=0>
-				<tr>
-					<td style='vertical-align:top;padding:2px 10px 0px 10px'>
+			<table><tr><td>
 	{if $i_Type == ERROR_DIALOG}
 						<img src='images/error.png' alt='{t}Error{/t}'>
 	{elseif $i_Type == WARNING_DIALOG}
@@ -63,7 +58,12 @@
 	{elseif $i_Type == INFO_DIALOG || $i_Type == CONFIRM_DIALOG}
 						<img src='images/info.png' alt='{t}Information{/t}'>
 	{/if}
-					</td>
+			</td><td style='font-size: 1.1em; font-weight:bold;'>{$s_Title}</td></tr>
+			</table>
+			</div>
+			<div style="errorMsgSeperator"></div>
+			<table style='width:100%' summary='' border=0>
+				<tr>
 					<td style='width:100%'>
 						<b>{$s_Message}</b>
 						<br>
@@ -95,13 +95,7 @@
 		<div id='e_layer{$i_ID}' class="errorMsgDialog">
 
 		<div id="e_layerTitle{$i_ID}" class="errorMsgTitle">
-			&nbsp;&nbsp;{$s_Title}
-		</div>
-		<div class="errorMsgSepeator"></div>
-
-			<table style='width:100%' summary='' border=0>
-				<tr>
-					<td style='vertical-align:top;padding:2px 10px 0px 10px'>
+			<table><tr><td>
 	{if $i_Type == ERROR_DIALOG}
 						<img src='images/error.png' alt='{t}Error{/t}'>
 	{elseif $i_Type == WARNING_DIALOG}
@@ -109,7 +103,13 @@
 	{elseif $i_Type == INFO_DIALOG || $i_Type == CONFIRM_DIALOG}
 						<img src='images/info.png' alt='{t}Information{/t}'>
 	{/if}
-					</td>
+			</td><td style='font-size: 1.1em; font-weight:bold;'>{$s_Title}</td></tr>
+		</table>
+		</div>
+		<div class="errorMsgSepeator"></div>
+
+			<table style='width:100%' summary='' border=0>
+				<tr>
 					<td style='width:100%'>
 						<b>{$s_Message}</b>
 						<br>
