@@ -86,7 +86,7 @@ class msg_dialog
 				<tr><td style='vertical-align:top;padding:10px'>
 				<img src='images/error.png' alt='{t}Error{/t}'>
 				</td><td style='width:100%'>
-				<b>Fatal Error - GOsa execution abortet - ".$this->s_Title."</b><br>
+				<b>".$this->s_Title."</b><br>
 				".$this->s_Message."<br><br>
 				"._("Please fix the above error and reload the page.")."
 				</td></tr>
