@@ -805,8 +805,7 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
    *  if there is a sub department specified.
    * If not, fall back to old method, get_list().
    */
-  $sub_enabled = isset($config->current['SUB_LIST_SUPPORT']) && preg_match("/true/i",$config->current['SUB_LIST_SUPPORT']);
-  if((!count($sub_bases) && !count($departments)) || !$sub_enabled){
+  if(!count($sub_bases) && !count($departments)){
     
     /* Log this fall back, it may be an unpredicted behaviour.
      */

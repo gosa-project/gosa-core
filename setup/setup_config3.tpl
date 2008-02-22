@@ -169,19 +169,6 @@
         </div>
     </div>
 
-	<div class='step4_container'>
-        <div class='step4_name'>
-            {t}Special search method for huge ldap servers.{/t}
-        </div>
-        <div class='step4_value'>
-
-            <select name="sub_list_support" size="1" title="">
-                {html_options options=$bool selected=$optional.sub_list_support}
-            </select>
-        </div>
-    </div>
-
-
     <p><b>{t}Login and session{/t}</b></p>
     <div class='step4_container'>
         <div class='step4_name'>
