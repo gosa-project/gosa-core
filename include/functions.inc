@@ -755,7 +755,7 @@ function get_multiple_locks($objects)
     @param $attributes Array The attributes we search for.
     @param $flags     Long   A set of Flags
  */
-function get_sub_list($filter, $category,$sub_bases, $base= "", $attributes= array(), $flags= GL_SUBSEARCH)
+function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= array(), $flags= GL_SUBSEARCH)
 {
   global $config, $ui;
 
@@ -770,12 +770,13 @@ function get_sub_list($filter, $category,$sub_bases, $base= "", $attributes= arr
   }
 
   /* Ensure we have an array as department list */
-  if(is_string($sub_bases)){
-    $sub_bases = array($sub_bases);
+  if(is_string($sub_deps)){
+    $sub_deps = array($sub_deps);
   }
 
   /* Remove , ("ou=1,ou=2.." => "ou=1") */
-  foreach($sub_bases as $key => $sub_base){
+  $sub_bases = array();
+  foreach($sub_deps as $key => $sub_base){
     $sub_bases[$key] = preg_replace("/,.*$/","",$sub_base);
   }
 
@@ -797,16 +798,28 @@ function get_sub_list($filter, $category,$sub_bases, $base= "", $attributes= arr
 
   /* Get all deparments matching the given sub_bases */
   $departments = array();
-  
   $base_filter= "";
   foreach($sub_bases as $sub_base){
     $base_filter .= "(".$sub_base.")";
   }
   $base_filter = "(&(objectClass=organizationalUnit)(|".$base_filter."))";
-
   $ldap->search($base_filter,array("dn"));
   while($attrs = $ldap->fetch()){
-    $departments[$attrs['dn']] = $attrs['dn'];
+    foreach($sub_deps as $sub_dep){
+
+      /* Only add those departments that match the reuested list of departments.
+       *
+       * e.g.   sub_deps = array("ou=servers,ou=systems,");
+       *  
+       * In this case we have search for "ou=servers" and we may have also fetched 
+       *  departments like this "ou=servers,ou=blafasel,..."
+       * Here we filter out those blafasel departments.
+       */
+      if(preg_match("/".normalizePreg($sub_dep)."/",$attrs['dn'])){
+        $departments[$attrs['dn']] = $attrs['dn'];
+        break;
+      }
+    }
   }
 
   $result= array();
