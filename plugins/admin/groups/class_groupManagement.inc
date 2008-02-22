@@ -591,17 +591,16 @@ class groupManagement extends plugin
        Only perfrom this search if  ShowFunctionalGroups  is unchecked, else leave arre empty  */ 
     $ff = "(&(cn=$Regex)(objectClass=posixGroup)(!(|(objectClass=gosaMailAccount)(objectClass=gosaApplicationGroup)$sfilter)))";
     if ($SubSearch){
-      $res = get_list($ff, "groups", $base,array("gidNumber", "cn", "description"), GL_SUBSEARCH);
+      $res = get_sub_list($ff, "groups",get_groups_ou(), $base,array("gidNumber", "cn", "description"), GL_SUBSEARCH);
     } else {
-      $res = get_list($ff, "groups", $base,array("gidNumber", "cn", "description"), GL_NONE);
+      $res = get_sub_list($ff, "groups",get_groups_ou(), $base,array("gidNumber", "cn", "description"), GL_NONE);
     }
     foreach($res as $attrs){
       if (!isset($primaries[$attrs['gidNumber'][0]])){
         $functional[$attrs['gidNumber'][0]]= $attrs['gidNumber'][0];
       }
     }
-   
-
+ 
     /********************
       Search for the prepared filter 
      ********************/
