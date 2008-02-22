@@ -792,11 +792,7 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
         /* Do NOT search within subtrees is requeste and the sub base is empty. 
          * Append all known departments that matches the base.
          */
-        foreach($config->departments as $d_base){
-          if(!in_array($d_base,$departments) && preg_match("/".normalizePreg($base)."$/",$d_base)){
-            $departments[$d_base] = $d_base;
-          }
-        }
+        $departments[$base] = $base;
       }
     }else{
       $sub_bases[$key] = preg_replace("/,.*$/","",$sub_base);
@@ -808,11 +804,11 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
    * If not, fall back to old method, get_list().
    */
   $sub_enabled = isset($config->current['SUB_LIST_SUPPORT']) && preg_match("/true/i",$config->current['SUB_LIST_SUPPORT']);
-  if(!count($sub_bases) || !$sub_enabled){
+  if((!count($sub_bases) && !count($departments)) || !$sub_enabled){
     
     /* Log this fall back, it may be an unpredicted behaviour.
      */
-    if(!count($sub_bases)){
+    if(!count($sub_bases) && !count($departments)){
       // log($action,$objecttype,$object,$changes_array = array(),$result = "") 
       new log("debug","all",__FILE__,$attributes,
           sprintf("get_sub_list(): Falling back to get_list(), due to empty sub_bases parameter. This may slow down GOsa. Search was: '%s'",$filter));
