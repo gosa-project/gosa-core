@@ -760,6 +760,8 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
   global $config, $ui;
   $departments = array();
 
+#  $start = microtime(TRUE);
+
   /* Get LDAP link */
   $ldap= $config->get_ldap_link($flags & GL_SIZELIMIT);
 
@@ -901,6 +903,9 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
       }
     }
   }
+#  if(microtime(TRUE) - $start > 0.1){
+#    echo sprintf("<pre>GET_SUB_LIST  %s .| %f  --- $base -----$filter ---- $flags</pre>",__LINE__,microtime(TRUE) - $start);
+#  }
   return($result);
 }
 
@@ -908,6 +913,8 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
 function get_list($filter, $category, $base= "", $attributes= array(), $flags= GL_SUBSEARCH)
 {
   global $config, $ui;
+
+#  $start = microtime(TRUE);
 
   /* Get LDAP link */
   $ldap= $config->get_ldap_link($flags & GL_SIZELIMIT);
@@ -968,7 +975,10 @@ function get_list($filter, $category, $base= "", $attributes= array(), $flags= G
       }
     }
   }
-
+ 
+#  if(microtime(TRUE) - $start > 0.1){
+#    echo sprintf("<pre>GET_LIST %s .| %f  --- $base -----$filter ---- $flags</pre>",__LINE__,microtime(TRUE) - $start);
+#  }
   return ($result);
 }
 
