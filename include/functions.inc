@@ -784,8 +784,15 @@ function get_sub_list($filter, $category,$sub_bases, $base= "", $attributes= arr
    * If not, fall back to old method, get_list().
    */
   $sub_enabled = isset($config->current['SUB_LIST_SUPPORT']) && preg_match("/true/i",$config->current['SUB_LIST_SUPPORT']);
-  if($sub_bases == "" || !$sub_enabled){
-    return(get_list($filter, $category,$base,$attributes,$flags));
+  if(!count($sub_bases) || !$sub_enabled){
+    
+    /* Log this fall back, it may be an unpredicted behaviour.
+     */
+    if(!count($sub_bases)){
+      gosa_log("debug","get_sub_list","",$attributes,sprintf("get_sub_list(): Falling back to get_list(), due to empty sub_bases parameter. This may slow down GOsa.",$src,$attrs['dn']));
+    }
+    $tmp = get_list($filter, $category,$base,$attributes,$flags | GL_SUBSEARCH);
+    return($tmp);
   }
 
   /* Get all deparments matching the given sub_bases */
@@ -896,6 +903,7 @@ function get_list($filter, $category, $base= "", $attributes= array(), $flags= G
   $result= array();
 
   while($attrs = $ldap->fetch()) {
+
     $dn= $ldap->getDN();
 
     /* Convert dn into a printable format */
