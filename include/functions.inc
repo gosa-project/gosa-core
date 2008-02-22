@@ -764,20 +764,38 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
 
   /* Set search base to configured base if $base is empty */
   if ($base == ""){
-    $ldap->cd ($config->current['BASE']);
-  } else {
-    $ldap->cd ($base);
+    $base = $config->current['BASE'];
   }
+  $ldap->cd ($base);
 
   /* Ensure we have an array as department list */
   if(is_string($sub_deps)){
     $sub_deps = array($sub_deps);
   }
 
-  /* Remove , ("ou=1,ou=2.." => "ou=1") */
+  /* Remove ,.*$ ("ou=1,ou=2.." => "ou=1") */
   $sub_bases = array();
   foreach($sub_deps as $key => $sub_base){
-    if(!empty($sub_base)){
+    if(empty($sub_base)){
+
+      /* Subsearch is activated and we got an empty sub_base.
+       *  (This may be the case if you have empty people/group ous).
+       * Fall back to old get_list(). 
+       * A log entry will be written.
+       */
+      if($flags & GL_SUBSEARCH){
+        $sub_bases = array();
+        break;
+      }else{
+        
+        /* Do NOT search within subtrees is requeste and the sub base is empty. 
+         * Append the current base;
+         */
+        if(!in_array($base,$sub_bases)){
+          $sub_bases[$key] = $base;
+        }
+      }
+    }else{
       $sub_bases[$key] = preg_replace("/,.*$/","",$sub_base);
     }
   }
@@ -792,7 +810,9 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
     /* Log this fall back, it may be an unpredicted behaviour.
      */
     if(!count($sub_bases)){
-      gosa_log("debug","get_sub_list","",$attributes,"get_sub_list(): Falling back to get_list(), due to empty sub_bases parameter. This may slow down GOsa.");
+      // log($action,$objecttype,$object,$changes_array = array(),$result = "") 
+      new log("debug","all",__FILE__,$attributes,
+          sprintf("get_sub_list(): Falling back to get_list(), due to empty sub_bases parameter. This may slow down GOsa. Search was: '%s'",$filter));
     }
     $tmp = get_list($filter, $category,$base,$attributes,$flags);
     return($tmp);
