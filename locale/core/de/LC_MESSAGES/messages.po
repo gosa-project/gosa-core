@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-02-22 10:37+0100\n"
-"PO-Revision-Date: 2008-02-22 10:42+0100\n"
+"PO-Revision-Date: 2008-02-22 11:01+0100\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1054,7 +1054,7 @@ msgstr "Amts-/Dienstbezeichnung"
 #: plugins/admin/acl/class_divListACL.inc:206
 #: plugins/admin/acl/class_aclRole.inc:668
 msgid "Role"
-msgstr "Funktion"
+msgstr "Rolle"
 
 #: plugins/personal/generic/multiple_generic.tpl:360
 #: plugins/personal/generic/generic.tpl:454
