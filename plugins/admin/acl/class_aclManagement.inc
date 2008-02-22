@@ -54,7 +54,7 @@ class aclManagement extends plugin
     /* Call parent execute */
     plugin::execute();
 
-    session::set('LOCK_VARS_TO_USE',array("/^list/","/^id_/","/^list_acl_role_del/","/^list_acl_del/"));
+    session::set('LOCK_VARS_TO_USE',array("/^list/","/^id_/","/^list_acl_role_del/","/^list_acl_del/","/^menu_action/"));
 
     $smarty       = get_smarty();                 // Smarty instance
     $s_action     = "";                           // Contains the action to be taken
@@ -129,6 +129,7 @@ class aclManagement extends plugin
     if(isset($_POST['menu_action']) && preg_match("/^remove_multiple/",$_POST['menu_action'])){
       $s_action = "del_multiple";
     }
+
  
     /********************
       Copy & Paste Handling  ...
@@ -145,7 +146,7 @@ class aclManagement extends plugin
      * Add new Role entry 
      ********************/
 
-    if(($s_action == "addrole") && (!isset($this->acltabs->config))){
+    if(($s_action == "new") && (!isset($this->acltabs->config))){
 
       /* Get 'dn' from posted acl, must be unique */
       $this->dn= "new";
