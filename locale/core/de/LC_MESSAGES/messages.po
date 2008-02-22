@@ -13,12 +13,12 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-02-22 10:37+0100\n"
-"PO-Revision-Date: 2008-02-22 10:36+0100\n"
+"PO-Revision-Date: 2008-02-22 10:42+0100\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: plugins/personal/password/class_password.inc:24
 #: plugins/personal/generic/paste_generic.tpl:20 setup/setup_config2.tpl:282
@@ -2703,7 +2703,7 @@ msgid ""
 "snapshot entries for all entire objects."
 msgstr ""
 "Verändern des für die Namensbildung zuständigen Attributes 'ou' einer "
-"Abteilung oder der Basis kann vorhandene ACLs und/oder Abbilder für alle "
+"Abteilung oder der Basis kann vorhandene ACLs und/oder Snapshots für alle "
 "Objekte unbrauchbar machen."
 
 #: plugins/admin/departments/dep_move_confirm.tpl:8
@@ -3427,11 +3427,11 @@ msgstr "Abzug wiederherstellen"
 
 #: include/class_MultiSelectWindow.inc:654
 msgid "Create snapshot"
-msgstr "Abbild erstellen"
+msgstr "Snapshot erstellen"
 
 #: include/class_MultiSelectWindow.inc:654
 msgid "Create a new snapshot from this object"
-msgstr "Erstelle ein neues Abbild dieses Objekts"
+msgstr "Erstelle einen neuen Snapshot dieses Objekts"
 
 #: include/php_setup.inc:93
 msgid "Generating this page caused the PHP interpreter to raise some errors!"
@@ -3858,7 +3858,7 @@ msgstr ""
 #: include/class_plugin.inc:1107
 #, php-format
 msgid "Saving object snapshot with dn '%s' failed."
-msgstr "Speichern des Abbilds von Objekt mit dn '%s' fehlgeschlagen."
+msgstr "Speichern des Snapshots von Objekt mit dn '%s' fehlgeschlagen."
 
 #: include/class_plugin.inc:1133 include/class_plugin.inc:1145
 #, php-format
@@ -3866,23 +3866,23 @@ msgid ""
 "The snapshot functionality is enabled, but the required variable '%s' is not "
 "set."
 msgstr ""
-"Die Abbild-Funktionalität ist aktiviert, aber die erforderliche Variable '%"
+"Die Snapshot-Funktionalität ist aktiviert, aber die erforderliche Variable '%"
 "s' ist nicht gesetzt."
 
 #: include/class_plugin.inc:1181
 #, php-format
 msgid "Method get available snapshots with dn '%s' failed."
-msgstr "Konnte die verfügbaren Abbilder für dn '%s' nicht ermitteln."
+msgstr "Konnte die verfügbaren Snapshots für dn '%s' nicht ermitteln."
 
 #: include/class_plugin.inc:1237
 #, php-format
 msgid "Method get deleted snapshots with dn '%s' failed."
-msgstr "Konnte die entfernten Abbilder für dn '%s' nicht ermitteln."
+msgstr "Konnte die entfernten Snapshots für dn '%s' nicht ermitteln."
 
 #: include/class_plugin.inc:1301 include/class_plugin.inc:1315
 #, php-format
 msgid "Restore snapshot with dn '%s' failed."
-msgstr "Wiederherstellen des Abbilds mit dn '%s' fehlgeschlagen."
+msgstr "Wiederherstellen des Snaphots mit dn '%s' fehlgeschlagen."
 
 #: include/class_plugin.inc:1579
 msgid "Changing ACL dn"
@@ -4142,11 +4142,11 @@ msgstr "%s%% Trefferquote in Datei %s"
 #: include/class_SnapShotDialog.inc:63
 #, php-format
 msgid "You're about to delete the snapshot '%s'."
-msgstr "Sie sind dabei das Abbild '%s' zu entfernen."
+msgstr "Sie sind dabei den Snapshot '%s' zu entfernen."
 
 #: include/class_SnapShotDialog.inc:115
 msgid "Remove snapshot"
-msgstr "Abbild entfernen."
+msgstr "Snapshot entfernen."
 
 #: include/class_SnapShotDialog.inc:117 include/class_SnapShotDialog.inc:137
 msgid "Y-m-d, H:i:s"
@@ -6388,7 +6388,7 @@ msgstr ""
 #: ihtml/themes/default/copyPasteDialog.tpl:9
 msgid "Remember that some properties like taken snapshots will not be copied!"
 msgstr ""
-"Beachten Sie, dass manche Einstellungen wie z.B. erstellte Abbilder nicht "
+"Beachten Sie, dass manche Einstellungen wie z.B. erstellte Snapshots nicht "
 "kopiert werden!"
 
 #: ihtml/themes/default/copyPasteDialog.tpl:10
@@ -6715,14 +6715,14 @@ msgstr "Ende der Gültigkeit des Passworts"
 
 #: ihtml/themes/default/snapshotdialog.tpl:3
 msgid "Restoring object snapshots"
-msgstr "Stelle Objekt-Abbilder wieder her"
+msgstr "Stelle Objekt-Snapshots wieder her"
 
 #: ihtml/themes/default/snapshotdialog.tpl:6
 msgid ""
 "This procedure will restore a snapshot of the selected object. It will "
 "replace the existing object after pressing the restore button."
 msgstr ""
-"Dieser Vorgang stellt ein Abbild des gewählten Objekts wieder her. Er wird "
+"Dieser Vorgang stellt einen Snaphot des gewählten Objekts wieder her. Er wird "
 "dabei das vorhandene überschreiben, nachdem Sie den Wiederherstellen-Knopf "
 "gedrückt haben."
 
@@ -6747,17 +6747,17 @@ msgstr ""
 
 #: ihtml/themes/default/snapshotdialog.tpl:29
 msgid "There is no snapshot available that could be restored"
-msgstr "Es ist kein Abbild verfügbar, das wiederhergestellt werden kann"
+msgstr "Es ist kein Snapshot verfügbar, der wiederhergestellt werden kann"
 
 #: ihtml/themes/default/snapshotdialog.tpl:31
 msgid "Choose a snapshot and click the folder image, to restore the snapshot"
 msgstr ""
-"Wählen Sie ein Abbild und klicken Sie auf das Ordner-Bild, um es "
+"Wählen Sie einen Snapshot und klicken Sie auf das Ordner-Bild, um diesen "
 "wiederherzustellen."
 
 #: ihtml/themes/default/snapshotdialog.tpl:49
 msgid "Creating object snapshots"
-msgstr "Erstelle Objekte-Abbilder"
+msgstr "Erstelle Objekte-Snapshots"
 
 #: ihtml/themes/default/snapshotdialog.tpl:52
 msgid ""
@@ -6765,7 +6765,7 @@ msgid ""
 "stored inside a special branch of your directory system and can be restored "
 "later on."
 msgstr ""
-"Dieser Vorgang wird ein Abbild des gewählten Objekts erzeugen. Es wird "
+"Dieser Vorgang wird einen Snapshot des gewählten Objekts erzeugen. Er wird "
 "innerhalb eines speziellen Zweiges Ihres Verzeichnisses gespeichert und kann "
 "später wieder hergestellt werden."
 
@@ -6775,7 +6775,7 @@ msgid ""
 "zones in server extensions will not be stored in the snapshot."
 msgstr ""
 "Beachten Sie, dass Datenbankeinträge, DNS-Konfigurationen und evtl. "
-"erstellte Zonen in den Server-Erweiterungen nicht im Abbild gespeichert "
+"erstellte Zonen in den Server-Erweiterungen nicht im Snapshot gespeichert "
 "werden."
 
 #: ihtml/themes/default/snapshotdialog.tpl:70
@@ -6784,7 +6784,7 @@ msgstr "Zeitstempel"
 
 #: ihtml/themes/default/snapshotdialog.tpl:79
 msgid "Reason for generating this snapshot"
-msgstr "Grund für das Erzeugen dieses Abbilds"
+msgstr "Grund für das Erzeugen dieses Snapshots"
 
 #~ msgid ""
 #~ "You have disabled the rfc2307bis option on the 'ldap setup' step, but "
