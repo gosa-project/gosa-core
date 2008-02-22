@@ -25,10 +25,11 @@ define ("CONFIG_TEMPLATE_DIR", "../contrib/");
 define ("HELP_BASEDIR", "/var/www/doc/");
 
 /* Define get_list flags */
-define("GL_NONE",      0);
-define("GL_SUBSEARCH", 1);
-define("GL_SIZELIMIT", 2);
-define("GL_CONVERT"  , 4);
+define("GL_NONE",         0);
+define("GL_SUBSEARCH",    1);
+define("GL_SIZELIMIT",    2);
+define("GL_CONVERT",      4);
+define("GL_NO_ACL_CHECK", 8);
 
 /* Heimdal stuff */
 define('UNIVERSAL',0x00);
@@ -745,16 +746,16 @@ function get_multiple_locks($objects)
 
 
 /* \!brief  This function searches the ldap database.
-            It search in  $sub_base,*,$base  for all objects matching the $filter.
+            It search in  $sub_bases,*,$base  for all objects matching the $filter.
 
     @param $filter    String The ldap search filter
     @param $category  String The ACL category the result objects belongs 
-    @param $sub_base  String The sub base we want to search for e.g. "ou=apps"
+    @param $sub_bases  String The sub base we want to search for e.g. "ou=apps"
     @param $base      String The ldap base from which we start the search
     @param $attributes Array The attributes we search for.
     @param $flags     Long   A set of Flags
  */
-function get_sub_list($filter, $category,$sub_base, $base= "", $attributes= array(), $flags= GL_SUBSEARCH)
+function get_sub_list($filter, $category,$sub_bases, $base= "", $attributes= array(), $flags= GL_SUBSEARCH)
 {
   global $config, $ui;
 
@@ -768,21 +769,35 @@ function get_sub_list($filter, $category,$sub_base, $base= "", $attributes= arra
     $ldap->cd ($base);
   }
 
+  /* Ensure we have an array as department list */
+  if(is_string($sub_bases)){
+    $sub_bases = array($sub_bases);
+  }
+
   /* Remove , ("ou=1,ou=2.." => "ou=1") */
-  $sub_base = preg_replace("/,.*$/","",$sub_base);
+  foreach($sub_bases as $key => $sub_base){
+    $sub_bases[$key] = preg_replace("/,.*$/","",$sub_base);
+  }
 
   /* Check if we have enabled the sub_dir search support AND 
    *  if there is a sub department specified.
    * If not, fall back to old method, get_list().
    */
   $sub_enabled = isset($config->current['SUB_LIST_SUPPORT']) && preg_match("/true/i",$config->current['SUB_LIST_SUPPORT']);
-  if($sub_base == "" || !$sub_enabled){
+  if($sub_bases == "" || !$sub_enabled){
     return(get_list($filter, $category,$base,$attributes,$flags));
   }
 
-  /* Get all deparments matching the given sub_base */
+  /* Get all deparments matching the given sub_bases */
   $departments = array();
-  $ldap->search($sub_base,array("dn"));
+  
+  $base_filter= "";
+  foreach($sub_bases as $sub_base){
+    $base_filter .= "(".$sub_base.")";
+  }
+  $base_filter = "(&(objectClass=organizationalUnit)(|".$base_filter."))";
+
+  $ldap->search($base_filter,array("dn"));
   while($attrs = $ldap->fetch()){
     $departments[$attrs['dn']] = $attrs['dn'];
   }
@@ -804,7 +819,7 @@ function get_sub_list($filter, $category,$sub_base, $base= "", $attributes= arra
     if ($flags & GL_SUBSEARCH) {
       $ldap->search ($filter, $attributes);
     } else {
-      $ldap->ls ($filter,$base,$attributes);
+      $ldap->ls ($filter,$dep,$attributes);
     }
 
     /* Check for size limit exceeded messages for GUI feedback */
@@ -825,17 +840,23 @@ function get_sub_list($filter, $category,$sub_base, $base= "", $attributes= arra
         $attrs["dn"]= $dn;
       }
 
-      /* Sort in every value that fits the permissions */
-      if (is_array($category)){
-        foreach ($category as $o){
-          if ($ui->get_category_permissions($dn, $o) != ""){
-            $result[]= $attrs;
-            break;
+      /* Skip ACL checks if we are forced to skip those checks */
+      if($flags & GL_NO_ACL_CHECK){
+        $result[]= $attrs;
+      }else{
+
+        /* Sort in every value that fits the permissions */
+        if (is_array($category)){
+          foreach ($category as $o){
+            if ($ui->get_category_permissions($dn, $o) != ""){
+              $result[]= $attrs;
+              break;
+            }
           }
-        }
-      } else {
-        if ($ui->get_category_permissions($dn, $category) != ""){
-          $result[]= $attrs;
+        } else {
+          if ( $ui->get_category_permissions($dn, $category) != ""){
+            $result[]= $attrs;
+          }
         }
       }
     }
