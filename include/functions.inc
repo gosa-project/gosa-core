@@ -777,7 +777,9 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
   /* Remove , ("ou=1,ou=2.." => "ou=1") */
   $sub_bases = array();
   foreach($sub_deps as $key => $sub_base){
-    $sub_bases[$key] = preg_replace("/,.*$/","",$sub_base);
+    if(!empty($sub_base)){
+      $sub_bases[$key] = preg_replace("/,.*$/","",$sub_base);
+    }
   }
 
   /* Check if we have enabled the sub_dir search support AND 
@@ -790,7 +792,7 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
     /* Log this fall back, it may be an unpredicted behaviour.
      */
     if(!count($sub_bases)){
-      gosa_log("debug","get_sub_list","",$attributes,sprintf("get_sub_list(): Falling back to get_list(), due to empty sub_bases parameter. This may slow down GOsa.",$src,$attrs['dn']));
+      gosa_log("debug","get_sub_list","",$attributes,"get_sub_list(): Falling back to get_list(), due to empty sub_bases parameter. This may slow down GOsa.");
     }
     $tmp = get_list($filter, $category,$base,$attributes,$flags | GL_SUBSEARCH);
     return($tmp);
