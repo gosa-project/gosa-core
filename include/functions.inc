@@ -758,6 +758,7 @@ function get_multiple_locks($objects)
 function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= array(), $flags= GL_SUBSEARCH)
 {
   global $config, $ui;
+  $departments = array();
 
   /* Get LDAP link */
   $ldap= $config->get_ldap_link($flags & GL_SIZELIMIT);
@@ -789,17 +790,19 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
       }else{
         
         /* Do NOT search within subtrees is requeste and the sub base is empty. 
-         * Append the current base;
+         * Append all known departments that matches the base.
          */
-        if(!in_array($base,$sub_bases)){
-          $sub_bases[$key] = $base;
+        foreach($config->departments as $d_base){
+          if(!in_array($d_base,$departments) && preg_match("/".normalizePreg($base)."$/",$d_base)){
+            $departments[$d_base] = $d_base;
+          }
         }
       }
     }else{
       $sub_bases[$key] = preg_replace("/,.*$/","",$sub_base);
     }
   }
-
+  
   /* Check if we have enabled the sub_dir search support AND 
    *  if there is a sub department specified.
    * If not, fall back to old method, get_list().
@@ -819,7 +822,6 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
   }
 
   /* Get all deparments matching the given sub_bases */
-  $departments = array();
   $base_filter= "";
   foreach($sub_bases as $sub_base){
     $base_filter .= "(".$sub_base.")";
