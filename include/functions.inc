@@ -794,7 +794,7 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
     if(!count($sub_bases)){
       gosa_log("debug","get_sub_list","",$attributes,"get_sub_list(): Falling back to get_list(), due to empty sub_bases parameter. This may slow down GOsa.");
     }
-    $tmp = get_list($filter, $category,$base,$attributes,$flags | GL_SUBSEARCH);
+    $tmp = get_list($filter, $category,$base,$attributes,$flags);
     return($tmp);
   }
 
