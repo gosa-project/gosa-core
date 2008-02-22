@@ -36,6 +36,7 @@ textdomain($domain);
 /* Remember everything we did after the last click */
 session::start();
 session::set('errorsAlreadyPosted',array());
+session::set('runtime_cache',array());
 session::set('limit_exceeded',FALSE);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
