@@ -898,30 +898,32 @@ function get_list($filter, $category, $base= "", $attributes= array(), $flags= G
   while($attrs = $ldap->fetch()) {
     $dn= $ldap->getDN();
 
-    /* Sort in every value that fits the permissions */
-    if (is_array($category)){
-      foreach ($category as $o){
-        if ($ui->get_category_permissions($dn, $o) != ""){
-          if ($flags & GL_CONVERT){
-            $attrs["dn"]= convert_department_dn($dn);
-          } else {
-            $attrs["dn"]= $dn;
+    /* Convert dn into a printable format */
+    if ($flags & GL_CONVERT){
+      $attrs["dn"]= convert_department_dn($dn);
+    } else {
+      $attrs["dn"]= $dn;
+    }
+
+    if($flags & GL_NO_ACL_CHECK){
+      $result[]= $attrs;
+    }else{
+
+      /* Sort in every value that fits the permissions */
+      if (is_array($category)){
+        foreach ($category as $o){
+          if ($ui->get_category_permissions($dn, $o) != ""){
+
+            /* We found what we were looking for, break speeds things up */
+            $result[]= $attrs;
           }
+        }
+      } else {
+        if ($ui->get_category_permissions($dn, $category) != ""){
 
           /* We found what we were looking for, break speeds things up */
           $result[]= $attrs;
         }
-      }
-    } else {
-      if ($ui->get_category_permissions($dn, $category) != ""){
-        if ($flags & GL_CONVERT){
-          $attrs["dn"]= convert_department_dn($dn);
-        } else {
-          $attrs["dn"]= $dn;
-        }
-
-        /* We found what we were looking for, break speeds things up */
-        $result[]= $attrs;
       }
     }
   }
