@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-21 18:29+0100\n"
+"POT-Creation-Date: 2008-02-22 10:37+0100\n"
 "PO-Revision-Date: 2007-06-03 12:27+0800\n"
 "Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
 "Language-Team: Chinese Simplified <zh@li.org>\n"
@@ -167,7 +167,7 @@ msgstr "您已经成功更改口令。还要记住更改相关程序设定。"
 #: plugins/personal/generic/main.inc:169
 #: plugins/admin/departments/dep_iframe.tpl:18
 #: plugins/admin/departments/class_departmentManagement.inc:444
-#: include/functions.inc:1509 setup/class_setup.inc:261
+#: include/functions.inc:1555 setup/class_setup.inc:261
 #: setup/class_setup.inc:263
 msgid "Back"
 msgstr "返回"
@@ -567,8 +567,8 @@ msgstr "删除 dn 为 '%s' 的 user/kolab 账号失败。"
 #: plugins/admin/users/remove.tpl:2
 #: plugins/admin/departments/dep_move_confirm.tpl:2
 #: plugins/admin/departments/remove.tpl:2 plugins/admin/ogroups/remove.tpl:2
-#: include/functions.inc:696 include/functions.inc:2171
-#: include/functions.inc:2175 include/functions.inc:2181
+#: include/functions.inc:697 include/functions.inc:2217
+#: include/functions.inc:2221 include/functions.inc:2227
 #: include/class_tabs.inc:214 setup/setup_checks.tpl:32
 #: setup/setup_checks.tpl:93 setup/class_setupStep_Migrate.inc:211
 #: setup/class_setupStep_Migrate.inc:260 setup/class_setupStep_Migrate.inc:385
@@ -689,8 +689,8 @@ msgstr "提供的 'shadowMin' 应该小于'shadowMax'。"
 #: plugins/addons/notifications/class_msgplug.inc:213
 #: plugins/admin/groups/class_groupGeneric.inc:711
 #: plugins/admin/groups/class_groupGeneric.inc:716
-#: plugins/admin/groups/class_groupGeneric.inc:944 include/functions.inc:1188
-#: include/functions.inc:1300 include/class_plugin.inc:621
+#: plugins/admin/groups/class_groupGeneric.inc:944 include/functions.inc:1234
+#: include/functions.inc:1346 include/class_plugin.inc:621
 #: include/class_plugin.inc:653 include/class_plugin.inc:689
 #: include/class_plugin.inc:1370 include/class_CopyPasteHandler.inc:274
 #: include/class_CopyPasteHandler.inc:277
@@ -1150,7 +1150,7 @@ msgstr "设置"
 msgid "Sex"
 msgstr "性别"
 
-#: plugins/personal/generic/generic.tpl:230 include/functions.inc:936
+#: plugins/personal/generic/generic.tpl:230 include/functions.inc:982
 msgid "Configure"
 msgstr "配置"
 
@@ -1478,8 +1478,8 @@ msgstr "您无权查看和编辑 ACL。"
 #: include/utils/class_timezone.inc:51
 #: include/password-methods/class_password-methods-sha.inc:46
 #: include/password-methods/class_password-methods-ssha.inc:51
-#: include/functions.inc:602 include/functions.inc:2522
-#: include/functions.inc:2541 include/class_plugin.inc:1133
+#: include/functions.inc:603 include/functions.inc:2568
+#: include/functions.inc:2595 include/class_plugin.inc:1133
 #: include/class_plugin.inc:1145 include/class_pluglist.inc:148
 #: include/class_config.inc:556 include/class_CopyPasteHandler.inc:91
 #: include/class_CopyPasteHandler.inc:99
@@ -2694,11 +2694,11 @@ msgid "department"
 msgstr "部门"
 
 #: plugins/admin/departments/tabs_department.inc:34
-#: include/class_MultiSelectWindow.inc:503 include/functions.inc:341
-#: include/functions.inc:368 include/functions.inc:377
-#: include/functions.inc:406 include/functions.inc:649
-#: include/functions.inc:688 include/functions.inc:733
-#: include/functions.inc:1311 include/functions.inc:2503
+#: include/class_MultiSelectWindow.inc:503 include/functions.inc:342
+#: include/functions.inc:369 include/functions.inc:378
+#: include/functions.inc:407 include/functions.inc:650
+#: include/functions.inc:689 include/functions.inc:734
+#: include/functions.inc:1357 include/functions.inc:2549
 #: include/class_config.inc:224 setup/class_setupStep_Schema.inc:95
 #: setup/class_setupStep_Migrate.inc:1030
 #: setup/class_setupStep_Migrate.inc:1056
@@ -2837,7 +2837,7 @@ msgid ""
 "The field 'Name' contains the reserved word '%s'. Please choose another name."
 msgstr "字段“名称”包含保留字 '%s'。请选择其他名字。"
 
-#: plugins/admin/departments/class_departmentGeneric.inc:312 html/main.php:149
+#: plugins/admin/departments/class_departmentGeneric.inc:312 html/main.php:150
 #, fuzzy
 msgid "Fatal error"
 msgstr "终端服务器"
@@ -3507,48 +3507,48 @@ msgstr "类型"
 msgid "Arguments"
 msgstr "参数"
 
-#: include/functions.inc:98
+#: include/functions.inc:99
 #, php-format
 msgid "Fatal error: no class locations defined - please run '%s' to fix this"
 msgstr ""
 
-#: include/functions.inc:105
+#: include/functions.inc:106
 #, php-format
 msgid ""
 "Fatal error: cannot instantiate class '%s' - try running '%s' to fix this"
 msgstr ""
 
-#: include/functions.inc:315
+#: include/functions.inc:316
 #, php-format
 msgid "FATAL: Error when connecting the LDAP. Server said '%s'."
 msgstr "致命错误：连接 LDAP 错误。服务器返回 '%s'。"
 
-#: include/functions.inc:341 include/functions.inc:368
-#: include/functions.inc:406
+#: include/functions.inc:342 include/functions.inc:369
+#: include/functions.inc:407
 #, fuzzy, php-format
 msgid "User login failed."
 msgstr "用户登录失败。LDAP 服务器返回 '%s'。"
 
-#: include/functions.inc:341 include/functions.inc:368
-#: include/functions.inc:406 include/functions.inc:602
-#: include/functions.inc:617 include/functions.inc:649
-#: include/functions.inc:688 include/functions.inc:733
-#: include/functions.inc:2503
+#: include/functions.inc:342 include/functions.inc:369
+#: include/functions.inc:407 include/functions.inc:603
+#: include/functions.inc:618 include/functions.inc:650
+#: include/functions.inc:689 include/functions.inc:734
+#: include/functions.inc:2549
 #, fuzzy, php-format
 msgid "LDAP server returned: %s"
 msgstr "LDAP 服务器"
 
-#: include/functions.inc:377 include/functions.inc:447
+#: include/functions.inc:378 include/functions.inc:448
 #, fuzzy
 msgid ""
 "Username / UID is not unique inside the LDAP tree. Please contact your "
 "Administrator."
 msgstr "用户名 / UID 不唯一。请检查您的 LDAP 数据库。"
 
-#: include/functions.inc:447 include/functions.inc:592
-#: include/functions.inc:617 include/functions.inc:678
-#: include/functions.inc:994 include/functions.inc:1875
-#: include/functions.inc:1909 include/functions.inc:1929
+#: include/functions.inc:448 include/functions.inc:593
+#: include/functions.inc:618 include/functions.inc:679
+#: include/functions.inc:1040 include/functions.inc:1921
+#: include/functions.inc:1955 include/functions.inc:1975
 #: include/class_acl.inc:806 include/class_CopyPasteHandler.inc:131
 #: include/class_CopyPasteHandler.inc:250 include/class_ldap.inc:561
 #: include/class_ldap.inc:609 include/class_log.inc:87 html/getvcard.php:37
@@ -3556,60 +3556,60 @@ msgstr "用户名 / UID 不唯一。请检查您的 LDAP 数据库。"
 msgid "Internal error"
 msgstr "终端服务器"
 
-#: include/functions.inc:592 include/functions.inc:678
+#: include/functions.inc:593 include/functions.inc:679
 msgid "Error while adding a lock. Contact the developers!"
 msgstr ""
 
-#: include/functions.inc:602
+#: include/functions.inc:603
 #, fuzzy, php-format
 msgid ""
 "Cannot create locking information in LDAP tree. Please contact your "
 "administrator!"
 msgstr "无法获得 LDAP 数据库的锁信息。检查 gosa.conf 中的 'config' 条目！"
 
-#: include/functions.inc:617
+#: include/functions.inc:618
 #, fuzzy, php-format
 msgid "Adding a lock failed."
 msgstr "保存 FAI 钩子失败"
 
-#: include/functions.inc:649
+#: include/functions.inc:650
 #, fuzzy, php-format
 msgid "Removing a lock failed."
 msgstr "删除 FAI 钩子失败"
 
-#: include/functions.inc:688 include/functions.inc:733
+#: include/functions.inc:689 include/functions.inc:734
 #, php-format
 msgid "Cannot get locking information from LDAP tree!"
 msgstr ""
 
-#: include/functions.inc:696
+#: include/functions.inc:697
 #, fuzzy
 msgid ""
 "Found multiple locks for object to be locked. This should not happen - "
 "cleaning up multiple references."
 msgstr "发现要锁定的对象由多个锁。这虽然不可能──清除多个引用。"
 
-#: include/functions.inc:922
+#: include/functions.inc:968
 #, php-format
 msgid "The size limit of %d entries is exceed!"
 msgstr "超过了 %d 个条目的大小限制！"
 
-#: include/functions.inc:924
+#: include/functions.inc:970
 #, php-format
 msgid ""
 "Set the new size limit to %s and show me this message if the limit still "
 "exceeds"
 msgstr "设置新的大小限制为 %s 并且如果限制依然超出还显示这条信息。"
 
-#: include/functions.inc:941
+#: include/functions.inc:987
 msgid "incomplete"
 msgstr "不完整"
 
-#: include/functions.inc:1177 include/functions.inc:1308
+#: include/functions.inc:1223 include/functions.inc:1354
 msgid "LDAP error:"
 msgstr "LDAP 错误:"
 
-#: include/functions.inc:1178
+#: include/functions.inc:1224
 msgid ""
 "Problems with the LDAP server mean that you probably lost the last changes. "
 "Please check your LDAP setup for possible errors and try again."
@@ -3617,187 +3617,185 @@ msgstr ""
 "LDAP 服务器发生错误，意味着您最后的修改可能丢失。请检查您 LDAP 安装可能的错误"
 "再重试。"
 
-#: include/functions.inc:1184
+#: include/functions.inc:1230
 msgid ""
 "Please check your input and fix the error. Press 'OK' to close this message "
 "box."
 msgstr "请检查您的输入并修正错误。按“OK”关闭此对话框。"
 
-#: include/functions.inc:1249
+#: include/functions.inc:1295
 msgid "Continue anyway"
 msgstr "仍然继续"
 
-#: include/functions.inc:1251
+#: include/functions.inc:1297
 msgid "Edit anyway"
 msgstr "仍然编辑"
 
-#: include/functions.inc:1253
+#: include/functions.inc:1299
 #, fuzzy, php-format
 msgid "You're going to edit the LDAP entry/entries '%s'"
 msgstr "您将要拷贝条目 '%s'。"
 
-#: include/functions.inc:1311
+#: include/functions.inc:1357
 #, php-format
 msgid "Plugin '%s':%s"
 msgstr ""
 
-#: include/functions.inc:1472
+#: include/functions.inc:1518
 msgid "Entries per page"
 msgstr "每页条目数"
 
-#: include/functions.inc:1500
+#: include/functions.inc:1546
 msgid "Apply filter"
 msgstr "应用过滤器"
 
-#: include/functions.inc:1752
+#: include/functions.inc:1798
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-#: include/functions.inc:1796
+#: include/functions.inc:1842
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "GOsa 开发版（版本 %s）"
 
-#: include/functions.inc:1875
+#: include/functions.inc:1921
 #, php-format
 msgid "File '%s' could not be deleted."
 msgstr ""
 
-#: include/functions.inc:1909 include/functions.inc:1929
+#: include/functions.inc:1955 include/functions.inc:1975
 #, fuzzy
 msgid "Cannot write to revision file!"
 msgstr "无法创建文件 '%s'。"
 
-#: include/functions.inc:2171 include/functions.inc:2175
-#: include/functions.inc:2181
+#: include/functions.inc:2217 include/functions.inc:2221
+#: include/functions.inc:2227
 #, fuzzy
 msgid "'base_hook' is not available. Using default base."
 msgstr "警告： base_hook不可用。使用缺省 base。"
 
-#: include/functions.inc:2203
+#: include/functions.inc:2249
 #, fuzzy
 msgid "LDAP warning"
 msgstr "LDAP 管理"
 
-#: include/functions.inc:2203
+#: include/functions.inc:2249
 #, fuzzy
 msgid "Cannot get schema information from server. No schema check possible!"
 msgstr "不能从服务器得到 schema 信息。无法对 schema 检查！"
 
-#: include/functions.inc:2229
+#: include/functions.inc:2275
 msgid "Used to store account specific informations."
 msgstr ""
 
-#: include/functions.inc:2236
+#: include/functions.inc:2282
 msgid ""
 "Used to lock currently edited entries to avoid multiple changes at the same "
 "time."
 msgstr ""
 
-#: include/functions.inc:2279
+#: include/functions.inc:2325
 #, php-format
 msgid "Missing required object class '%s'!"
 msgstr ""
 
-#: include/functions.inc:2281
+#: include/functions.inc:2327
 #, php-format
 msgid "Missing optional object class '%s'!"
 msgstr ""
 
-#: include/functions.inc:2287
+#: include/functions.inc:2333
 #, php-format
 msgid "Version mismatch for required object class '%s' (!=%s)!"
 msgstr ""
 
-#: include/functions.inc:2289
+#: include/functions.inc:2335
 #, php-format
 msgid "Version mismatch for optional object class '%s' (!=%s)!"
 msgstr ""
 
-#: include/functions.inc:2293
+#: include/functions.inc:2339
 #, fuzzy, php-format
 msgid "Class(es) available"
 msgstr "文件可用。"
 
-#: include/functions.inc:2315
+#: include/functions.inc:2361
 msgid ""
 "You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema    configuration do not support this option."
 msgstr ""
 
-#: include/functions.inc:2316
+#: include/functions.inc:2362
 msgid ""
 "In order to use rfc2307bis conform groups the objectClass 'posixGroup' must "
 "be      AUXILIARY"
 msgstr ""
 
-#: include/functions.inc:2320
+#: include/functions.inc:2366
 msgid ""
-"You have disabled the rfc2307bis option on the 'ldap setup' step, but your "
-"schema   configuration do not support this option."
+"Your schema is configured to support the rfc2307bis group, but you have "
+"disabled this option on the 'ldap setup' step."
 msgstr ""
 
-#: include/functions.inc:2321
+#: include/functions.inc:2367
 msgid "The objectClass 'posixGroup' must be STRUCTURAL"
 msgstr ""
 
-#: include/functions.inc:2344
+#: include/functions.inc:2390
 msgid "German"
 msgstr "德语"
 
-#: include/functions.inc:2345
+#: include/functions.inc:2391
 msgid "French"
 msgstr "法语"
 
-#: include/functions.inc:2346
+#: include/functions.inc:2392
 msgid "Italian"
 msgstr "意大利语"
 
-#: include/functions.inc:2347
+#: include/functions.inc:2393
 msgid "Spanish"
 msgstr "西班牙语"
 
-#: include/functions.inc:2348
+#: include/functions.inc:2394
 msgid "English"
 msgstr "英语"
 
-#: include/functions.inc:2349
+#: include/functions.inc:2395
 msgid "Dutch"
 msgstr "荷兰语"
 
-#: include/functions.inc:2350
+#: include/functions.inc:2396
 msgid "Polish"
 msgstr "波兰语"
 
-#: include/functions.inc:2351
+#: include/functions.inc:2397
 msgid "Swedish"
 msgstr ""
 
-#: include/functions.inc:2352
+#: include/functions.inc:2398
 #, fuzzy
 msgid "Chinese"
 msgstr "芯片组"
 
-#: include/functions.inc:2353
+#: include/functions.inc:2399
 msgid "Russian"
 msgstr "俄语"
 
-#: include/functions.inc:2503
+#: include/functions.inc:2549
 #, fuzzy, php-format
 msgid "Setting the password failed!"
 msgstr "设置口令失败。LDAP 服务器返回 '%s'。"
 
-#: include/functions.inc:2521 include/class_plugin.inc:652
+#: include/functions.inc:2567 include/class_plugin.inc:652
 #, php-format
 msgid ""
 "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
 msgstr "命令 '%s'，作为插件 '%s' 的 POSTMODIFY 好像并不存在。"
 
-#: include/functions.inc:2541
-#, fuzzy
-msgid ""
-"Setting for SMBHASH in gosa.conf is incorrect! Cannot change Samba password."
-msgstr "在 gosa.conf 中 SMBHASH 的设置不正确！无法修改 Samba 口令。"
+#: include/functions.inc:2595
+msgid "Cannot generate samba hash!"
+msgstr ""
 
 #: include/class_socketClient.inc:38
 msgid "The mcrypt module was not found. Please install php5-mcrypt."
@@ -6255,47 +6253,47 @@ msgstr "无法选择数据库！"
 msgid "Database query failed!"
 msgstr "数据库查询失败！"
 
-#: html/main.php:150
+#: html/main.php:151
 #, php-format
 msgid "Cannot locate file '%s' - please run '%s' to fix this"
 msgstr ""
 
-#: html/main.php:168
+#: html/main.php:169
 #, fuzzy
 msgid "PHP configuration"
 msgstr "PHP 安装检查"
 
-#: html/main.php:169
+#: html/main.php:170
 msgid ""
 "FATAL: Register globals is on. GOsa will refuse to login unless this is "
 "fixed by an administrator."
 msgstr "致命错误：全局注册已打开。GOsa 将拒绝登录直到被管理修正。"
 
-#: html/main.php:214
+#: html/main.php:215
 #, fuzzy
 msgid "Configuration warning"
 msgstr "配置文件"
 
-#: html/main.php:214
+#: html/main.php:215
 msgid "Running out of memory!"
 msgstr ""
 
-#: html/main.php:353
+#: html/main.php:354
 #, fuzzy
 msgid "Password reminder"
 msgstr "口令过期截止日"
 
-#: html/main.php:353
+#: html/main.php:354
 #, fuzzy
 msgid "Your password is about to expire, please change your password!"
 msgstr "您的口令就要过期，请修改您的口令"
 
-#: html/main.php:362
+#: html/main.php:363
 #, fuzzy
 msgid "Plugin"
 msgstr "于"
 
-#: html/main.php:363
+#: html/main.php:364
 #, php-format
 msgid "FATAL: Can't find any plugin definitions for plugin '%s'!"
 msgstr "警告： 没有发现针对插件 '%s' 的任何插件定义！"
@@ -6747,6 +6745,12 @@ msgstr "过期"
 #: ihtml/themes/default/snapshotdialog.tpl:79
 msgid "Reason for generating this snapshot"
 msgstr ""
+
+#, fuzzy
+#~ msgid ""
+#~ "Setting for SMBHASH in gosa.conf is incorrect! Cannot change Samba "
+#~ "password."
+#~ msgstr "在 gosa.conf 中 SMBHASH 的设置不正确！无法修改 Samba 口令。"
 
 #, fuzzy
 #~ msgid "User delted"

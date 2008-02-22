@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-21 18:29+0100\n"
+"POT-Creation-Date: 2008-02-22 10:37+0100\n"
 "PO-Revision-Date: 2005-11-18 15:26+0100\n"
 "Last-Translator: Alessandro Amici <a.amici@bopen.it>\n"
 "Language-Team: Italian\n"
@@ -173,7 +173,7 @@ msgstr ""
 #: plugins/personal/generic/main.inc:169
 #: plugins/admin/departments/dep_iframe.tpl:18
 #: plugins/admin/departments/class_departmentManagement.inc:444
-#: include/functions.inc:1509 setup/class_setup.inc:261
+#: include/functions.inc:1555 setup/class_setup.inc:261
 #: setup/class_setup.inc:263
 msgid "Back"
 msgstr "Indietro"
@@ -582,8 +582,8 @@ msgstr "Elimina estensioni Unix"
 #: plugins/admin/users/remove.tpl:2
 #: plugins/admin/departments/dep_move_confirm.tpl:2
 #: plugins/admin/departments/remove.tpl:2 plugins/admin/ogroups/remove.tpl:2
-#: include/functions.inc:696 include/functions.inc:2171
-#: include/functions.inc:2175 include/functions.inc:2181
+#: include/functions.inc:697 include/functions.inc:2217
+#: include/functions.inc:2221 include/functions.inc:2227
 #: include/class_tabs.inc:214 setup/setup_checks.tpl:32
 #: setup/setup_checks.tpl:93 setup/class_setupStep_Migrate.inc:211
 #: setup/class_setupStep_Migrate.inc:260 setup/class_setupStep_Migrate.inc:385
@@ -704,8 +704,8 @@ msgstr ""
 #: plugins/addons/notifications/class_msgplug.inc:213
 #: plugins/admin/groups/class_groupGeneric.inc:711
 #: plugins/admin/groups/class_groupGeneric.inc:716
-#: plugins/admin/groups/class_groupGeneric.inc:944 include/functions.inc:1188
-#: include/functions.inc:1300 include/class_plugin.inc:621
+#: plugins/admin/groups/class_groupGeneric.inc:944 include/functions.inc:1234
+#: include/functions.inc:1346 include/class_plugin.inc:621
 #: include/class_plugin.inc:653 include/class_plugin.inc:689
 #: include/class_plugin.inc:1370 include/class_CopyPasteHandler.inc:274
 #: include/class_CopyPasteHandler.inc:277
@@ -1175,7 +1175,7 @@ msgstr "Imposta"
 msgid "Sex"
 msgstr "Sesso"
 
-#: plugins/personal/generic/generic.tpl:230 include/functions.inc:936
+#: plugins/personal/generic/generic.tpl:230 include/functions.inc:982
 msgid "Configure"
 msgstr "Configura"
 
@@ -1502,8 +1502,8 @@ msgstr "Non hai il permesso di cambiare la tua password."
 #: include/utils/class_timezone.inc:51
 #: include/password-methods/class_password-methods-sha.inc:46
 #: include/password-methods/class_password-methods-ssha.inc:51
-#: include/functions.inc:602 include/functions.inc:2522
-#: include/functions.inc:2541 include/class_plugin.inc:1133
+#: include/functions.inc:603 include/functions.inc:2568
+#: include/functions.inc:2595 include/class_plugin.inc:1133
 #: include/class_plugin.inc:1145 include/class_pluglist.inc:148
 #: include/class_config.inc:556 include/class_CopyPasteHandler.inc:91
 #: include/class_CopyPasteHandler.inc:99
@@ -2740,11 +2740,11 @@ msgid "department"
 msgstr "dipartimenti"
 
 #: plugins/admin/departments/tabs_department.inc:34
-#: include/class_MultiSelectWindow.inc:503 include/functions.inc:341
-#: include/functions.inc:368 include/functions.inc:377
-#: include/functions.inc:406 include/functions.inc:649
-#: include/functions.inc:688 include/functions.inc:733
-#: include/functions.inc:1311 include/functions.inc:2503
+#: include/class_MultiSelectWindow.inc:503 include/functions.inc:342
+#: include/functions.inc:369 include/functions.inc:378
+#: include/functions.inc:407 include/functions.inc:650
+#: include/functions.inc:689 include/functions.inc:734
+#: include/functions.inc:1357 include/functions.inc:2549
 #: include/class_config.inc:224 setup/class_setupStep_Schema.inc:95
 #: setup/class_setupStep_Migrate.inc:1030
 #: setup/class_setupStep_Migrate.inc:1056
@@ -2880,7 +2880,7 @@ msgid ""
 "The field 'Name' contains the reserved word '%s'. Please choose another name."
 msgstr ""
 
-#: plugins/admin/departments/class_departmentGeneric.inc:312 html/main.php:149
+#: plugins/admin/departments/class_departmentGeneric.inc:312 html/main.php:150
 #, fuzzy
 msgid "Fatal error"
 msgstr "Terminal Server"
@@ -3571,38 +3571,38 @@ msgstr "Tipo"
 msgid "Arguments"
 msgstr "Argomenti"
 
-#: include/functions.inc:98
+#: include/functions.inc:99
 #, php-format
 msgid "Fatal error: no class locations defined - please run '%s' to fix this"
 msgstr ""
 
-#: include/functions.inc:105
+#: include/functions.inc:106
 #, php-format
 msgid ""
 "Fatal error: cannot instantiate class '%s' - try running '%s' to fix this"
 msgstr ""
 
-#: include/functions.inc:315
+#: include/functions.inc:316
 #, fuzzy, php-format
 msgid "FATAL: Error when connecting the LDAP. Server said '%s'."
 msgstr "Errore durante la connessione al server LDAP. Il server dice: '%s'"
 
-#: include/functions.inc:341 include/functions.inc:368
-#: include/functions.inc:406
+#: include/functions.inc:342 include/functions.inc:369
+#: include/functions.inc:407
 #, fuzzy, php-format
 msgid "User login failed."
 msgstr "Nome applicazione"
 
-#: include/functions.inc:341 include/functions.inc:368
-#: include/functions.inc:406 include/functions.inc:602
-#: include/functions.inc:617 include/functions.inc:649
-#: include/functions.inc:688 include/functions.inc:733
-#: include/functions.inc:2503
+#: include/functions.inc:342 include/functions.inc:369
+#: include/functions.inc:407 include/functions.inc:603
+#: include/functions.inc:618 include/functions.inc:650
+#: include/functions.inc:689 include/functions.inc:734
+#: include/functions.inc:2549
 #, php-format
 msgid "LDAP server returned: %s"
 msgstr ""
 
-#: include/functions.inc:377 include/functions.inc:447
+#: include/functions.inc:378 include/functions.inc:448
 #, fuzzy
 msgid ""
 "Username / UID is not unique inside the LDAP tree. Please contact your "
@@ -3610,10 +3610,10 @@ msgid ""
 msgstr ""
 "Errore di connessione al server LDAP. Contatta l'amministratore del sistema."
 
-#: include/functions.inc:447 include/functions.inc:592
-#: include/functions.inc:617 include/functions.inc:678
-#: include/functions.inc:994 include/functions.inc:1875
-#: include/functions.inc:1909 include/functions.inc:1929
+#: include/functions.inc:448 include/functions.inc:593
+#: include/functions.inc:618 include/functions.inc:679
+#: include/functions.inc:1040 include/functions.inc:1921
+#: include/functions.inc:1955 include/functions.inc:1975
 #: include/class_acl.inc:806 include/class_CopyPasteHandler.inc:131
 #: include/class_CopyPasteHandler.inc:250 include/class_ldap.inc:561
 #: include/class_ldap.inc:609 include/class_log.inc:87 html/getvcard.php:37
@@ -3621,11 +3621,11 @@ msgstr ""
 msgid "Internal error"
 msgstr "Terminal Server"
 
-#: include/functions.inc:592 include/functions.inc:678
+#: include/functions.inc:593 include/functions.inc:679
 msgid "Error while adding a lock. Contact the developers!"
 msgstr ""
 
-#: include/functions.inc:602
+#: include/functions.inc:603
 #, fuzzy, php-format
 msgid ""
 "Cannot create locking information in LDAP tree. Please contact your "
@@ -3633,233 +3633,232 @@ msgid ""
 msgstr ""
 "Errore di connessione al server LDAP. Contatta l'amministratore del sistema."
 
-#: include/functions.inc:617
+#: include/functions.inc:618
 #, fuzzy, php-format
 msgid "Adding a lock failed."
 msgstr "Imposta dipartimento"
 
-#: include/functions.inc:649
+#: include/functions.inc:650
 #, fuzzy, php-format
 msgid "Removing a lock failed."
 msgstr "Elimina estensioni per le applicazioni"
 
-#: include/functions.inc:688 include/functions.inc:733
+#: include/functions.inc:689 include/functions.inc:734
 #, fuzzy, php-format
 msgid "Cannot get locking information from LDAP tree!"
 msgstr "Rimuovi"
 
-#: include/functions.inc:696
+#: include/functions.inc:697
 msgid ""
 "Found multiple locks for object to be locked. This should not happen - "
 "cleaning up multiple references."
 msgstr ""
 
-#: include/functions.inc:922
+#: include/functions.inc:968
 #, php-format
 msgid "The size limit of %d entries is exceed!"
 msgstr ""
 
-#: include/functions.inc:924
+#: include/functions.inc:970
 #, php-format
 msgid ""
 "Set the new size limit to %s and show me this message if the limit still "
 "exceeds"
 msgstr ""
 
-#: include/functions.inc:941
+#: include/functions.inc:987
 msgid "incomplete"
 msgstr "incompleto"
 
-#: include/functions.inc:1177 include/functions.inc:1308
+#: include/functions.inc:1223 include/functions.inc:1354
 msgid "LDAP error:"
 msgstr "Errore LDAP"
 
-#: include/functions.inc:1178
+#: include/functions.inc:1224
 msgid ""
 "Problems with the LDAP server mean that you probably lost the last changes. "
 "Please check your LDAP setup for possible errors and try again."
 msgstr ""
 
-#: include/functions.inc:1184
+#: include/functions.inc:1230
 msgid ""
 "Please check your input and fix the error. Press 'OK' to close this message "
 "box."
 msgstr ""
 
-#: include/functions.inc:1249
+#: include/functions.inc:1295
 #, fuzzy
 msgid "Continue anyway"
 msgstr "Continua"
 
-#: include/functions.inc:1251
+#: include/functions.inc:1297
 #, fuzzy
 msgid "Edit anyway"
 msgstr "Modifica contatto"
 
-#: include/functions.inc:1253
+#: include/functions.inc:1299
 #, fuzzy, php-format
 msgid "You're going to edit the LDAP entry/entries '%s'"
 msgstr "Non hai il permesso di cambiare la tua password."
 
-#: include/functions.inc:1311
+#: include/functions.inc:1357
 #, php-format
 msgid "Plugin '%s':%s"
 msgstr ""
 
-#: include/functions.inc:1472
+#: include/functions.inc:1518
 msgid "Entries per page"
 msgstr ""
 
-#: include/functions.inc:1500
+#: include/functions.inc:1546
 msgid "Apply filter"
 msgstr ""
 
-#: include/functions.inc:1752
+#: include/functions.inc:1798
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr ""
 
-#: include/functions.inc:1796
+#: include/functions.inc:1842
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "versione di sviluppo di GOsa (Rev %s)"
 
-#: include/functions.inc:1875
+#: include/functions.inc:1921
 #, php-format
 msgid "File '%s' could not be deleted."
 msgstr ""
 
-#: include/functions.inc:1909 include/functions.inc:1929
+#: include/functions.inc:1955 include/functions.inc:1975
 #, fuzzy
 msgid "Cannot write to revision file!"
 msgstr "Rimuovi"
 
-#: include/functions.inc:2171 include/functions.inc:2175
-#: include/functions.inc:2181
+#: include/functions.inc:2217 include/functions.inc:2221
+#: include/functions.inc:2227
 msgid "'base_hook' is not available. Using default base."
 msgstr ""
 
-#: include/functions.inc:2203
+#: include/functions.inc:2249
 #, fuzzy
 msgid "LDAP warning"
 msgstr "Amministrazione LDAP"
 
-#: include/functions.inc:2203
+#: include/functions.inc:2249
 msgid "Cannot get schema information from server. No schema check possible!"
 msgstr ""
 
-#: include/functions.inc:2229
+#: include/functions.inc:2275
 msgid "Used to store account specific informations."
 msgstr ""
 
-#: include/functions.inc:2236
+#: include/functions.inc:2282
 msgid ""
 "Used to lock currently edited entries to avoid multiple changes at the same "
 "time."
 msgstr ""
 
-#: include/functions.inc:2279
+#: include/functions.inc:2325
 #, fuzzy, php-format
 msgid "Missing required object class '%s'!"
 msgstr "Lista dei dipartimenti"
 
-#: include/functions.inc:2281
+#: include/functions.inc:2327
 #, php-format
 msgid "Missing optional object class '%s'!"
 msgstr ""
 
-#: include/functions.inc:2287
+#: include/functions.inc:2333
 #, php-format
 msgid "Version mismatch for required object class '%s' (!=%s)!"
 msgstr ""
 
-#: include/functions.inc:2289
+#: include/functions.inc:2335
 #, php-format
 msgid "Version mismatch for optional object class '%s' (!=%s)!"
 msgstr ""
 
-#: include/functions.inc:2293
+#: include/functions.inc:2339
 #, php-format
 msgid "Class(es) available"
 msgstr ""
 
-#: include/functions.inc:2315
+#: include/functions.inc:2361
 msgid ""
 "You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema    configuration do not support this option."
 msgstr ""
 
-#: include/functions.inc:2316
+#: include/functions.inc:2362
 msgid ""
 "In order to use rfc2307bis conform groups the objectClass 'posixGroup' must "
 "be      AUXILIARY"
 msgstr ""
 
-#: include/functions.inc:2320
+#: include/functions.inc:2366
 msgid ""
-"You have disabled the rfc2307bis option on the 'ldap setup' step, but your "
-"schema   configuration do not support this option."
+"Your schema is configured to support the rfc2307bis group, but you have "
+"disabled this option on the 'ldap setup' step."
 msgstr ""
 
-#: include/functions.inc:2321
+#: include/functions.inc:2367
 msgid "The objectClass 'posixGroup' must be STRUCTURAL"
 msgstr ""
 
-#: include/functions.inc:2344
+#: include/functions.inc:2390
 msgid "German"
 msgstr "Tedesco"
 
-#: include/functions.inc:2345
+#: include/functions.inc:2391
 msgid "French"
 msgstr "Francese"
 
-#: include/functions.inc:2346
+#: include/functions.inc:2392
 msgid "Italian"
 msgstr "Italiano"
 
-#: include/functions.inc:2347
+#: include/functions.inc:2393
 msgid "Spanish"
 msgstr "Spagnolo"
 
-#: include/functions.inc:2348
+#: include/functions.inc:2394
 msgid "English"
 msgstr "Inglese"
 
-#: include/functions.inc:2349
+#: include/functions.inc:2395
 msgid "Dutch"
 msgstr "Tedesco"
 
-#: include/functions.inc:2350
+#: include/functions.inc:2396
 #, fuzzy
 msgid "Polish"
 msgstr "Inglese"
 
-#: include/functions.inc:2351
+#: include/functions.inc:2397
 msgid "Swedish"
 msgstr ""
 
-#: include/functions.inc:2352
+#: include/functions.inc:2398
 #, fuzzy
 msgid "Chinese"
 msgstr "reset"
 
-#: include/functions.inc:2353
+#: include/functions.inc:2399
 msgid "Russian"
 msgstr "Russo"
 
-#: include/functions.inc:2503
+#: include/functions.inc:2549
 #, fuzzy, php-format
 msgid "Setting the password failed!"
 msgstr "Estenzioni Proxy Internet"
 
-#: include/functions.inc:2521 include/class_plugin.inc:652
+#: include/functions.inc:2567 include/class_plugin.inc:652
 #, php-format
 msgid ""
 "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
 msgstr ""
 
-#: include/functions.inc:2541
-msgid ""
-"Setting for SMBHASH in gosa.conf is incorrect! Cannot change Samba password."
+#: include/functions.inc:2595
+msgid "Cannot generate samba hash!"
 msgstr ""
 
 #: include/class_socketClient.inc:38
@@ -6356,47 +6355,47 @@ msgstr "Impossibile selezionare il database!"
 msgid "Database query failed!"
 msgstr "La query al database è fallita!"
 
-#: html/main.php:150
+#: html/main.php:151
 #, php-format
 msgid "Cannot locate file '%s' - please run '%s' to fix this"
 msgstr ""
 
-#: html/main.php:168
+#: html/main.php:169
 #, fuzzy
 msgid "PHP configuration"
 msgstr "Scarica il file di  configurazione"
 
-#: html/main.php:169
+#: html/main.php:170
 msgid ""
 "FATAL: Register globals is on. GOsa will refuse to login unless this is "
 "fixed by an administrator."
 msgstr ""
 
-#: html/main.php:214
+#: html/main.php:215
 #, fuzzy
 msgid "Configuration warning"
 msgstr "File di configurazione"
 
-#: html/main.php:214
+#: html/main.php:215
 msgid "Running out of memory!"
 msgstr ""
 
-#: html/main.php:353
+#: html/main.php:354
 #, fuzzy
 msgid "Password reminder"
 msgstr "La password spira il"
 
-#: html/main.php:353
+#: html/main.php:354
 #, fuzzy
 msgid "Your password is about to expire, please change your password!"
 msgstr "Non hai il permesso di cambiare la tua password."
 
-#: html/main.php:362
+#: html/main.php:363
 #, fuzzy
 msgid "Plugin"
 msgstr "Ricerca"
 
-#: html/main.php:363
+#: html/main.php:364
 #, php-format
 msgid "FATAL: Can't find any plugin definitions for plugin '%s'!"
 msgstr ""

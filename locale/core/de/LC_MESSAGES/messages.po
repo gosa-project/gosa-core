@@ -12,13 +12,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-21 18:29+0100\n"
-"PO-Revision-Date: 2008-02-21 18:44+0100\n"
+"POT-Creation-Date: 2008-02-22 10:37+0100\n"
+"PO-Revision-Date: 2008-02-22 10:36+0100\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: plugins/personal/password/class_password.inc:24
 #: plugins/personal/generic/paste_generic.tpl:20 setup/setup_config2.tpl:282
@@ -178,7 +178,7 @@ msgstr ""
 #: plugins/personal/generic/main.inc:169
 #: plugins/admin/departments/dep_iframe.tpl:18
 #: plugins/admin/departments/class_departmentManagement.inc:444
-#: include/functions.inc:1509 setup/class_setup.inc:261
+#: include/functions.inc:1555 setup/class_setup.inc:261
 #: setup/class_setup.inc:263
 msgid "Back"
 msgstr "Zurück"
@@ -580,8 +580,8 @@ msgstr "Entfernen von Benutzer/POSIX-Konto mit dn '%s' fehlgeschlagen."
 #: plugins/admin/users/remove.tpl:2
 #: plugins/admin/departments/dep_move_confirm.tpl:2
 #: plugins/admin/departments/remove.tpl:2 plugins/admin/ogroups/remove.tpl:2
-#: include/functions.inc:696 include/functions.inc:2171
-#: include/functions.inc:2175 include/functions.inc:2181
+#: include/functions.inc:697 include/functions.inc:2217
+#: include/functions.inc:2221 include/functions.inc:2227
 #: include/class_tabs.inc:214 setup/setup_checks.tpl:32
 #: setup/setup_checks.tpl:93 setup/class_setupStep_Migrate.inc:211
 #: setup/class_setupStep_Migrate.inc:260 setup/class_setupStep_Migrate.inc:385
@@ -708,8 +708,8 @@ msgstr "Der angegebene Wert 'shadowMin' sollte kleiner als 'shadowMax' sein."
 #: plugins/addons/notifications/class_msgplug.inc:213
 #: plugins/admin/groups/class_groupGeneric.inc:711
 #: plugins/admin/groups/class_groupGeneric.inc:716
-#: plugins/admin/groups/class_groupGeneric.inc:944 include/functions.inc:1188
-#: include/functions.inc:1300 include/class_plugin.inc:621
+#: plugins/admin/groups/class_groupGeneric.inc:944 include/functions.inc:1234
+#: include/functions.inc:1346 include/class_plugin.inc:621
 #: include/class_plugin.inc:653 include/class_plugin.inc:689
 #: include/class_plugin.inc:1370 include/class_CopyPasteHandler.inc:274
 #: include/class_CopyPasteHandler.inc:277
@@ -1165,7 +1165,7 @@ msgstr "Setzen"
 msgid "Sex"
 msgstr "Geschlecht"
 
-#: plugins/personal/generic/generic.tpl:230 include/functions.inc:936
+#: plugins/personal/generic/generic.tpl:230 include/functions.inc:982
 msgid "Configure"
 msgstr "Konfigurieren"
 
@@ -1479,8 +1479,8 @@ msgstr "Sie haben keine Berechtigung, um eine Nachricht zu senden!"
 #: include/utils/class_timezone.inc:51
 #: include/password-methods/class_password-methods-sha.inc:46
 #: include/password-methods/class_password-methods-ssha.inc:51
-#: include/functions.inc:602 include/functions.inc:2522
-#: include/functions.inc:2541 include/class_plugin.inc:1133
+#: include/functions.inc:603 include/functions.inc:2568
+#: include/functions.inc:2595 include/class_plugin.inc:1133
 #: include/class_plugin.inc:1145 include/class_pluglist.inc:148
 #: include/class_config.inc:556 include/class_CopyPasteHandler.inc:91
 #: include/class_CopyPasteHandler.inc:99
@@ -1506,9 +1506,9 @@ msgstr ""
 "Bitte geben Sie mindestens einen Empfänger an, um eine Nachricht zu senden!"
 
 #: plugins/addons/notifications/class_msgplug.inc:213
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot find a DESC tag in file '%s'!"
-msgstr "Kann Datei '%s' nicht anlegen."
+msgstr "Kann keinen DESC-Tag in Datei '%s' finden!"
 
 #: plugins/addons/notifications/class_msgplug.inc:240
 msgid "Notification"
@@ -1980,9 +1980,9 @@ msgid "Removing of aclRole with dn '%s' failed."
 msgstr "Entfernen von aclRole mit dn '%s' fehlgeschlagen."
 
 #: plugins/admin/acl/class_aclRole.inc:614
-#, fuzzy, php-format
+#, php-format
 msgid "Removing aclRole from objectgroup '%s' failed"
-msgstr "Entfernen der Anwendung von Objektgruppe '%s' fehlgeschlagen"
+msgstr "Entfernen der aclRole von Objektgruppe '%s' ist fehlgeschlagen"
 
 #: plugins/admin/acl/class_aclRole.inc:669 include/class_acl.inc:1098
 msgid "ACL roles"
@@ -2019,11 +2019,8 @@ msgid "Regular expression for matching user names"
 msgstr "Regulärer Ausdruck zum Erkennen von Benutzernamen"
 
 #: plugins/admin/groups/class_groupGeneric.inc:137
-#, fuzzy
 msgid "Cannot find group SID in your configuration!"
-msgstr ""
-"Die SID dieser Gruppe kann weder im LDAP noch in der Konfigurationsdatei "
-"gefunden werden!"
+msgstr "Kann keine Gruppen-SID in Ihrer Konfiguration finden!"
 
 #: plugins/admin/groups/class_groupGeneric.inc:193
 msgid "This 'dn' is no group."
@@ -2067,14 +2064,14 @@ msgid "Removing of groups/generic with dn '%s' failed."
 msgstr "Entfernen von Gruppe/Allgemein mit dn '%s' fehlgeschlagen."
 
 #: plugins/admin/groups/class_groupGeneric.inc:711
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot find any SID for '%s'!"
-msgstr "Kann Datei '%s' nicht anlegen."
+msgstr "Kann keine SID für '%s' finden!"
 
 #: plugins/admin/groups/class_groupGeneric.inc:716
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot find any RIDBASE for '%s'!"
-msgstr "Kann Datei '%s' nicht anlegen."
+msgstr "Kann keine RIDBASE für '%s' finden!"
 
 #: plugins/admin/groups/class_groupGeneric.inc:858
 msgid ""
@@ -2524,9 +2521,8 @@ msgid "Create user with this template"
 msgstr "Neuen Benutzer aus dieser Vorlage erstellen"
 
 #: plugins/admin/users/class_divListUsers.inc:288
-#, fuzzy
 msgid "Deactivated"
-msgstr "Aktiv"
+msgstr "Abgeschaltet"
 
 #: plugins/admin/users/class_divListUsers.inc:291
 msgid "Active"
@@ -2663,11 +2659,11 @@ msgid "department"
 msgstr "Abteilung"
 
 #: plugins/admin/departments/tabs_department.inc:34
-#: include/class_MultiSelectWindow.inc:503 include/functions.inc:341
-#: include/functions.inc:368 include/functions.inc:377
-#: include/functions.inc:406 include/functions.inc:649
-#: include/functions.inc:688 include/functions.inc:733
-#: include/functions.inc:1311 include/functions.inc:2503
+#: include/class_MultiSelectWindow.inc:503 include/functions.inc:342
+#: include/functions.inc:369 include/functions.inc:378
+#: include/functions.inc:407 include/functions.inc:650
+#: include/functions.inc:689 include/functions.inc:734
+#: include/functions.inc:1357 include/functions.inc:2549
 #: include/class_config.inc:224 setup/class_setupStep_Schema.inc:95
 #: setup/class_setupStep_Migrate.inc:1030
 #: setup/class_setupStep_Migrate.inc:1056
@@ -2817,7 +2813,7 @@ msgstr ""
 "Das Feld 'Name' enthält das reservierte Wort '%s'. Bitte wählen Sie einen "
 "anderen Namen."
 
-#: plugins/admin/departments/class_departmentGeneric.inc:312 html/main.php:149
+#: plugins/admin/departments/class_departmentGeneric.inc:312 html/main.php:150
 msgid "Fatal error"
 msgstr "Schwerer Fehler"
 
@@ -3495,14 +3491,14 @@ msgstr "Typ"
 msgid "Arguments"
 msgstr "Argumente"
 
-#: include/functions.inc:98
+#: include/functions.inc:99
 #, php-format
 msgid "Fatal error: no class locations defined - please run '%s' to fix this"
 msgstr ""
 "Schwerer Fehler: keine Klassenfundorte definiert - bitte führen Sie '%s' "
 "aus, um das Problem zu beheben"
 
-#: include/functions.inc:105
+#: include/functions.inc:106
 #, php-format
 msgid ""
 "Fatal error: cannot instantiate class '%s' - try running '%s' to fix this"
@@ -3510,28 +3506,28 @@ msgstr ""
 "Schwerer Fehler: Kann Klasse '%s' nicht instanziieren - bitte führen Sie '%"
 "s' aus um das Problem zu beheben"
 
-#: include/functions.inc:315
+#: include/functions.inc:316
 #, php-format
 msgid "FATAL: Error when connecting the LDAP. Server said '%s'."
 msgstr ""
 "FATAL: Fehler beim Verbinden mit dem LDAP-Server. Die Meldung lautet '%s'."
 
-#: include/functions.inc:341 include/functions.inc:368
-#: include/functions.inc:406
+#: include/functions.inc:342 include/functions.inc:369
+#: include/functions.inc:407
 #, php-format
 msgid "User login failed."
 msgstr "Benutzeranmeldung fehlgeschlagen."
 
-#: include/functions.inc:341 include/functions.inc:368
-#: include/functions.inc:406 include/functions.inc:602
-#: include/functions.inc:617 include/functions.inc:649
-#: include/functions.inc:688 include/functions.inc:733
-#: include/functions.inc:2503
+#: include/functions.inc:342 include/functions.inc:369
+#: include/functions.inc:407 include/functions.inc:603
+#: include/functions.inc:618 include/functions.inc:650
+#: include/functions.inc:689 include/functions.inc:734
+#: include/functions.inc:2549
 #, php-format
 msgid "LDAP server returned: %s"
 msgstr "Der LDAP-Server meldete: %s"
 
-#: include/functions.inc:377 include/functions.inc:447
+#: include/functions.inc:378 include/functions.inc:448
 msgid ""
 "Username / UID is not unique inside the LDAP tree. Please contact your "
 "Administrator."
@@ -3539,22 +3535,22 @@ msgstr ""
 "Der Benutzername / die UID ist nicht eindeutig für den LDAP-Baum. Bitte "
 "kontaktieren Sie Ihren Administrator."
 
-#: include/functions.inc:447 include/functions.inc:592
-#: include/functions.inc:617 include/functions.inc:678
-#: include/functions.inc:994 include/functions.inc:1875
-#: include/functions.inc:1909 include/functions.inc:1929
+#: include/functions.inc:448 include/functions.inc:593
+#: include/functions.inc:618 include/functions.inc:679
+#: include/functions.inc:1040 include/functions.inc:1921
+#: include/functions.inc:1955 include/functions.inc:1975
 #: include/class_acl.inc:806 include/class_CopyPasteHandler.inc:131
 #: include/class_CopyPasteHandler.inc:250 include/class_ldap.inc:561
 #: include/class_ldap.inc:609 include/class_log.inc:87 html/getvcard.php:37
 msgid "Internal error"
 msgstr "Interner Fehler"
 
-#: include/functions.inc:592 include/functions.inc:678
+#: include/functions.inc:593 include/functions.inc:679
 msgid "Error while adding a lock. Contact the developers!"
 msgstr ""
 "Fehler beim Setzen einer Sperre. Bitte kontaktieren Sie die Entwickler!"
 
-#: include/functions.inc:602
+#: include/functions.inc:603
 #, php-format
 msgid ""
 "Cannot create locking information in LDAP tree. Please contact your "
@@ -3563,22 +3559,22 @@ msgstr ""
 "Kann Sperrinformation für LDAP-Baum nicht erzeugen. Bitte kontaktieren Sie "
 "Ihren Administrator!"
 
-#: include/functions.inc:617
+#: include/functions.inc:618
 #, php-format
 msgid "Adding a lock failed."
 msgstr "Hinzufügen der Sperre ist fehlgeschlagen"
 
-#: include/functions.inc:649
+#: include/functions.inc:650
 #, php-format
 msgid "Removing a lock failed."
 msgstr "Entfernen der Sperre ist fehlgeschlagen"
 
-#: include/functions.inc:688 include/functions.inc:733
+#: include/functions.inc:689 include/functions.inc:734
 #, php-format
 msgid "Cannot get locking information from LDAP tree!"
 msgstr "Kann die Sperr-Information des LDAP-Baums nicht ermitteln!"
 
-#: include/functions.inc:696
+#: include/functions.inc:697
 msgid ""
 "Found multiple locks for object to be locked. This should not happen - "
 "cleaning up multiple references."
@@ -3586,12 +3582,12 @@ msgstr ""
 "Mehrere Sperren für das zu sperrende Objekt gefunden. Dies sollte nicht "
 "passieren - räume mehrere Referenzen auf."
 
-#: include/functions.inc:922
+#: include/functions.inc:968
 #, php-format
 msgid "The size limit of %d entries is exceed!"
 msgstr "Die Größenbeschränkung von %d Einträgen ist überschritten!"
 
-#: include/functions.inc:924
+#: include/functions.inc:970
 #, php-format
 msgid ""
 "Set the new size limit to %s and show me this message if the limit still "
@@ -3600,15 +3596,15 @@ msgstr ""
 "Verwende eine neue Größenbeschränkung von %s Einträgen und zeige diese "
 "Meldung bei Überschreitung wieder an"
 
-#: include/functions.inc:941
+#: include/functions.inc:987
 msgid "incomplete"
 msgstr "unvollständig"
 
-#: include/functions.inc:1177 include/functions.inc:1308
+#: include/functions.inc:1223 include/functions.inc:1354
 msgid "LDAP error:"
 msgstr "LDAP-Fehler:"
 
-#: include/functions.inc:1178
+#: include/functions.inc:1224
 msgid ""
 "Problems with the LDAP server mean that you probably lost the last changes. "
 "Please check your LDAP setup for possible errors and try again."
@@ -3617,7 +3613,7 @@ msgstr ""
 "verloren gegangen sind. Bitte prüfen Sie die LDAP-Konfiguration um "
 "eventuelle Fehler aufzudecken und wiederholen Sie die Aktion."
 
-#: include/functions.inc:1184
+#: include/functions.inc:1230
 msgid ""
 "Please check your input and fix the error. Press 'OK' to close this message "
 "box."
@@ -3625,70 +3621,70 @@ msgstr ""
 "Bitte prüfen Sie ihre Eingaben und beheben Sie den Fehler. Drücken Sie den "
 "'OK'-Knopf um dieses Meldungsfenster zu schließen."
 
-#: include/functions.inc:1249
+#: include/functions.inc:1295
 msgid "Continue anyway"
 msgstr "Trotzdem Fortsetzen"
 
-#: include/functions.inc:1251
+#: include/functions.inc:1297
 msgid "Edit anyway"
 msgstr "Trotzdem bearbeiten"
 
-#: include/functions.inc:1253
+#: include/functions.inc:1299
 #, php-format
 msgid "You're going to edit the LDAP entry/entries '%s'"
 msgstr "Sie bearbeiten gerade den/die LDAP Eintrag/Einträge '%s'"
 
-#: include/functions.inc:1311
+#: include/functions.inc:1357
 #, php-format
 msgid "Plugin '%s':%s"
 msgstr "Erweiterung '%s':%s"
 
-#: include/functions.inc:1472
+#: include/functions.inc:1518
 msgid "Entries per page"
 msgstr "Einträge pro Seite"
 
-#: include/functions.inc:1500
+#: include/functions.inc:1546
 msgid "Apply filter"
 msgstr "Filter anwenden"
 
-#: include/functions.inc:1752
+#: include/functions.inc:1798
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-#: include/functions.inc:1796
+#: include/functions.inc:1842
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "GOsa Entwicklerversion (Rev %s)"
 
-#: include/functions.inc:1875
+#: include/functions.inc:1921
 #, php-format
 msgid "File '%s' could not be deleted."
 msgstr "Die Datei '%s' konnte nicht entfernt werden."
 
-#: include/functions.inc:1909 include/functions.inc:1929
+#: include/functions.inc:1955 include/functions.inc:1975
 msgid "Cannot write to revision file!"
 msgstr "Kann nicht in Revisions-Datei schreiben!"
 
-#: include/functions.inc:2171 include/functions.inc:2175
-#: include/functions.inc:2181
+#: include/functions.inc:2217 include/functions.inc:2221
+#: include/functions.inc:2227
 msgid "'base_hook' is not available. Using default base."
 msgstr "'base_hook' ist nicht verfügbar. Verwende die Standard-Basis."
 
-#: include/functions.inc:2203
+#: include/functions.inc:2249
 msgid "LDAP warning"
 msgstr "LDAP-Warnung"
 
-#: include/functions.inc:2203
+#: include/functions.inc:2249
 msgid "Cannot get schema information from server. No schema check possible!"
 msgstr ""
 "Kann die Schema-Informationen nicht vom Server beziehen. Keine Schemaprüfung "
 "möglich!"
 
-#: include/functions.inc:2229
+#: include/functions.inc:2275
 msgid "Used to store account specific informations."
 msgstr "Verwendet, um kontenbezogene Informationen zu speichern."
 
-#: include/functions.inc:2236
+#: include/functions.inc:2282
 msgid ""
 "Used to lock currently edited entries to avoid multiple changes at the same "
 "time."
@@ -3696,39 +3692,40 @@ msgstr ""
 "Verwenden, um die momentan bearbeiteten Einträge für andere zu sperren (um "
 "gleichzeitige Änderungen zu verhindern)."
 
-#: include/functions.inc:2279
+#: include/functions.inc:2325
 #, php-format
 msgid "Missing required object class '%s'!"
 msgstr "Die benötigte Objektklasse '%s' fehlt!"
 
-#: include/functions.inc:2281
+#: include/functions.inc:2327
 #, php-format
 msgid "Missing optional object class '%s'!"
 msgstr "Die optionale Objektklasse '%s' fehlt!"
 
-#: include/functions.inc:2287
+#: include/functions.inc:2333
 #, php-format
 msgid "Version mismatch for required object class '%s' (!=%s)!"
 msgstr "Falsche·Version·der·benötigten·Objektklasse·'%s'·(!=%s)!"
 
-#: include/functions.inc:2289
+#: include/functions.inc:2335
 #, php-format
 msgid "Version mismatch for optional object class '%s' (!=%s)!"
 msgstr "Falsche Version der optionalen Objektklasse '%s' (!=%s)!"
 
-#: include/functions.inc:2293
+#: include/functions.inc:2339
 #, php-format
 msgid "Class(es) available"
 msgstr "Verfügbare Klasse(n)"
 
-#: include/functions.inc:2315
+#: include/functions.inc:2361
 msgid ""
 "You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema    configuration do not support this option."
-msgstr "Sie haben die rfc2307bis-Option in der LDAP-Einrichtung aktiviert, aber Ihre"
-" Schema-Konfiguration unterstützt dies nicht."
+msgstr ""
+"Sie haben die rfc2307bis-Option in der LDAP-Einrichtung aktiviert, aber Ihre "
+"Schema-Konfiguration unterstützt dies nicht."
 
-#: include/functions.inc:2316
+#: include/functions.inc:2362
 msgid ""
 "In order to use rfc2307bis conform groups the objectClass 'posixGroup' must "
 "be      AUXILIARY"
@@ -3736,64 +3733,64 @@ msgstr ""
 "Um rfc2307bis-konforme Gruppen verwenden zu können, muss die Objektklasse "
 "'posixGroup' AUXILIARY sein"
 
-#: include/functions.inc:2320
+#: include/functions.inc:2366
 msgid ""
-"You have disabled the rfc2307bis option on the 'ldap setup' step, but your "
-"schema   configuration do not support this option."
+"Your schema is configured to support the rfc2307bis group, but you have "
+"disabled this option on the 'ldap setup' step."
 msgstr ""
-"Sie haben die Option rfc2307bis in der LDAP-Einrichtung deaktiviert, aber "
-"dies wird von Ihrer Schema-Konfiguration nicht unterstützt."
+"Ihre Schemakonfiguration ist für rfc2307bis-Gruppen eingerichtet, aber Sie "
+"haben die Unterstützung im LDAP-Einrichtungsschritt ausgeschaltet."
 
-#: include/functions.inc:2321
+#: include/functions.inc:2367
 msgid "The objectClass 'posixGroup' must be STRUCTURAL"
 msgstr "Die Objektklasse 'posixGroup' muss STRUCTURAL sein"
 
-#: include/functions.inc:2344
+#: include/functions.inc:2390
 msgid "German"
 msgstr "Deutsch"
 
-#: include/functions.inc:2345
+#: include/functions.inc:2391
 msgid "French"
 msgstr "Französisch"
 
-#: include/functions.inc:2346
+#: include/functions.inc:2392
 msgid "Italian"
 msgstr "Italienisch"
 
-#: include/functions.inc:2347
+#: include/functions.inc:2393
 msgid "Spanish"
 msgstr "Spanisch"
 
-#: include/functions.inc:2348
+#: include/functions.inc:2394
 msgid "English"
 msgstr "Englisch"
 
-#: include/functions.inc:2349
+#: include/functions.inc:2395
 msgid "Dutch"
 msgstr "Niederländisch"
 
-#: include/functions.inc:2350
+#: include/functions.inc:2396
 msgid "Polish"
 msgstr "Polnisch"
 
-#: include/functions.inc:2351
+#: include/functions.inc:2397
 msgid "Swedish"
 msgstr "Schwedisch"
 
-#: include/functions.inc:2352
+#: include/functions.inc:2398
 msgid "Chinese"
 msgstr "Chinesisch"
 
-#: include/functions.inc:2353
+#: include/functions.inc:2399
 msgid "Russian"
 msgstr "Russisch"
 
-#: include/functions.inc:2503
+#: include/functions.inc:2549
 #, php-format
 msgid "Setting the password failed!"
 msgstr "Das Setzen des Passworts ist fehlgeschlagen!"
 
-#: include/functions.inc:2521 include/class_plugin.inc:652
+#: include/functions.inc:2567 include/class_plugin.inc:652
 #, php-format
 msgid ""
 "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
@@ -3801,12 +3798,9 @@ msgstr ""
 "Das in POSTMODIFY angegebene Kommando '%s' (Modul '%s') scheint nicht zu "
 "existieren."
 
-#: include/functions.inc:2541
-msgid ""
-"Setting for SMBHASH in gosa.conf is incorrect! Cannot change Samba password."
-msgstr ""
-"Die Einstellung 'SMBHASH' in der Datei gosa.conf ist nicht korrekt! Das "
-"Samba-Passwort kann nicht geändert werden."
+#: include/functions.inc:2595
+msgid "Cannot generate samba hash!"
+msgstr "Kann Samba-Hash nicht erzeugen!"
 
 #: include/class_socketClient.inc:38
 msgid "The mcrypt module was not found. Please install php5-mcrypt."
@@ -4041,7 +4035,6 @@ msgstr ""
 "Administrator."
 
 #: include/class_config.inc:556
-#, fuzzy
 msgid "SID and/or RIDBASE missing in the configuration!"
 msgstr "SID und/oder RIDBASE fehlen in der Konfiguration!"
 
@@ -4049,11 +4042,15 @@ msgstr "SID und/oder RIDBASE fehlen in der Konfiguration!"
 #, php-format
 msgid "Cannot cleanup copy & paste queue: setting permissions for '%s' failed!"
 msgstr ""
+"Kann die Kopieren & Einfügen Queue nicht aufräumen: das Setzen der "
+"Berechtigungen für '%s' schlug fehl!"
 
 #: include/class_CopyPasteHandler.inc:98
 #, php-format
 msgid "Cannot cleanup copy & paste queue: no write permission inside '%s'!"
 msgstr ""
+"Kann·die·Kopieren·&·Einfügen·Queue·nicht·aufräumen:·keine "
+"Schreibberechtigung innerhalb von '%s'!"
 
 #: include/class_CopyPasteHandler.inc:130
 #, php-format
@@ -4082,9 +4079,9 @@ msgid "Cannot save LDAP dump: no write permission to '%s/%s'!"
 msgstr "Kann LDAP-Abzug nicht speichern: keine Schreibberechtigung in '%s/%s'!"
 
 #: include/class_CopyPasteHandler.inc:249
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot load dumped file '%s'!"
-msgstr "Kann Datei '%s' nicht öffnen."
+msgstr "Kann Abzug-Datei '%s' nicht laden!"
 
 #: include/class_CopyPasteHandler.inc:274
 #, php-format
@@ -4221,9 +4218,9 @@ msgid "Ldap import with dn '%s' failed."
 msgstr "LDAP-Import von dn '%s' fehlgeschlagen."
 
 #: include/class_hostActionQueue.inc:68 include/class_hostActionQueue.inc:193
-#, fuzzy, php-format
+#, php-format
 msgid "Can't locate gotomasses queue file '%s'."
-msgstr "Kann Datei '%s' nicht anlegen."
+msgstr "Kann GOtomasses Queue-Datei '%s' nicht finden."
 
 #: include/class_hostActionQueue.inc:72
 #, php-format
@@ -4231,9 +4228,9 @@ msgid "Can't read gotomasses queue file '%s'."
 msgstr "Kann GOtomasses Queue-Datei '%s' nicht lesen."
 
 #: include/class_hostActionQueue.inc:79
-#, fuzzy, php-format
+#, php-format
 msgid "Can't read gotomasses storage file '%s'."
-msgstr "Kann Datei '%s' nicht anlegen."
+msgstr "Kann GOtomasses Archiv-Datei '%s' nicht lesen."
 
 #: include/class_hostActionQueue.inc:142
 msgid "GOsa infrastructure"
@@ -4244,9 +4241,9 @@ msgid "Cannot read broken entry - skipped!"
 msgstr "Kann kaputten Eintrag nicht lesen - übersprungen!"
 
 #: include/class_hostActionQueue.inc:197 include/class_hostActionQueue.inc:206
-#, fuzzy, php-format
+#, php-format
 msgid "Can't write gotomasses queue file '%s'."
-msgstr "Kann Datei '%s' nicht anlegen."
+msgstr "Kann GOtomasses Queue-Datei '%s' nicht schreiben."
 
 #: include/class_hostActionQueue.inc:201
 msgid "The queue file was modified since last reload. Can't save changes."
@@ -4304,8 +4301,10 @@ msgstr "Protokollieren nach MySQL inaktiv"
 msgid ""
 "The logging to a MySQL database is now disabled for this session of GOsa, "
 "due to communication errors with the specified logging database."
-msgstr "Das Protokollieren in die MySQL-Datenbank ist für diese Sitzung abgeschaltet, "
-"da es Kommunikationsfehler mit der angegebenen Protokoll-Datenbank gab."
+msgstr ""
+"Das Protokollieren in die MySQL-Datenbank ist für diese Sitzung "
+"abgeschaltet, da es Kommunikationsfehler mit der angegebenen Protokoll-"
+"Datenbank gab."
 
 #: include/class_log.inc:119
 #, php-format
@@ -4317,7 +4316,6 @@ msgid "Specified objectType is empty or invalid"
 msgstr "Der angegebene Objekttyp ist leer oder ungültig"
 
 #: include/class_log.inc:144
-#, fuzzy
 msgid ""
 "You have enabled the logging into mysql database, but there are no logging "
 "servers available."
@@ -4349,13 +4347,12 @@ msgid "LDAP connection setup"
 msgstr "Einrichten der LDAP-Verbindung"
 
 #: setup/class_setupStep_Ldap.inc:55
-#, fuzzy
 msgid ""
 "This dialog performs the basic configuration of the LDAP connectivity for "
 "GOsa."
 msgstr ""
-"Die folgenden Eingabefelder ermöglichen die Grundkonfiguration von GOsa und "
-"beeinflussen verschiedene Eigenschaften der Hauptkonfiguration."
+"Dieser Dialog richtet die grundlegende Konfiguration der LDAP-Verbindung für "
+"GOsa ein."
 
 #: setup/class_setupStep_Ldap.inc:74 setup/class_setupStep_Config1.inc:88
 #: setup/class_setupStep_Config2.inc:160 setup/class_setupStep_Config3.inc:87
@@ -4408,11 +4405,8 @@ msgid "Language setup"
 msgstr "Sprachauswahl"
 
 #: setup/class_setupStep_Language.inc:42
-#, fuzzy
 msgid "This step allows you to select your preferred language."
-msgstr ""
-"Dieser Dialog erlaubt es Ihnen, ein Gerät zum momentan ausgewählten Computer "
-"hinzuzufügen."
+msgstr "Dieser Schritt erlaubt es Ihnen, Ihre bevorzugte Sprache auszuwählen."
 
 #: setup/class_setupStep_Language.inc:47
 msgid "Automatic"
@@ -4533,14 +4527,12 @@ msgid "Uid base must be numeric"
 msgstr "Der Wert für 'UID Base' muss numerisch sein"
 
 #: setup/class_setupStep_Config1.inc:134
-#, fuzzy
 msgid "The given password minimum length is not numeric."
-msgstr "Der Sieve-Port muss numerisch sein."
+msgstr "Die angegebene minimale Passwortlänge ist nicht numerisch."
 
 #: setup/class_setupStep_Config1.inc:137
-#, fuzzy
 msgid "The given password differ value is not numeric."
-msgstr "Der Sieve-Port muss numerisch sein."
+msgstr "Die angegebene Passwort-Differenz ist nicht numerisch."
 
 #: setup/class_setupStep_Config2.inc:85 setup/class_setupStep_Config2.inc:86
 msgid "GOsa settings 2/3"
@@ -4563,9 +4555,8 @@ msgid "Tweak some GOsa core behaviour"
 msgstr "Einstellen von grundlegendem GOsa Verhalten"
 
 #: setup/class_setupStep_Config3.inc:194
-#, fuzzy
 msgid "Session lifetime must be a numeric value."
-msgstr "Benötiger Wert muß numerisch sein."
+msgstr "Lebenszeit der Sitzung muss ein numerischer Wert sein."
 
 #: setup/class_setupStep_Config3.inc:198
 msgid "Maximal ldap query time must be a numeric value. "
@@ -4699,14 +4690,12 @@ msgid "People DN attribute"
 msgstr "DN-Attribut für Personen"
 
 #: setup/setup_config1.tpl:41
-#, fuzzy
 msgid "People storage subtree"
-msgstr "Ablage-OU für Benutzer:"
+msgstr "Teilbaum für Benutzerablage"
 
 #: setup/setup_config1.tpl:50
-#, fuzzy
 msgid "Group storage subtree"
-msgstr "Ablage-OU für Gruppen:"
+msgstr "Teilbaum für Gruppenablage"
 
 #: setup/setup_config1.tpl:59
 msgid "Include personal title in user DN"
@@ -4721,9 +4710,8 @@ msgid "Automatic uids"
 msgstr "Automatische UIDs"
 
 #: setup/setup_config1.tpl:113
-#, fuzzy
 msgid "Number base for people/groups"
-msgstr "ID-Basis für Benutzer/Gruppen:"
+msgstr "Zählbasis für Benutzer/Gruppen"
 
 #: setup/setup_config1.tpl:121
 msgid "Hook for number base"
@@ -4746,18 +4734,16 @@ msgid "Different characters from old password"
 msgstr "Verschiedene Zeichen vom vorherigen Kennwort"
 
 #: setup/setup_config1.tpl:182
-#, fuzzy
 msgid "Password change hook"
-msgstr "Passwort-Änderung ist nicht erlaubt"
+msgstr "Hook für Passwort-Änderung"
 
 #: setup/setup_config1.tpl:198
 msgid "Use SASL for kerberos"
 msgstr "Verwende SASL für Kerberos."
 
 #: setup/setup_config1.tpl:209
-#, fuzzy
 msgid "Use account expiration"
-msgstr "Konto läuft ab am"
+msgstr "Verwende verfallende Konten"
 
 #: setup/setup_config1.tpl:221
 msgid ""
@@ -4807,9 +4793,8 @@ msgid "GOsa core settings"
 msgstr "GOsa-Grundeinstellungen"
 
 #: setup/setup_config3.tpl:6
-#, fuzzy
 msgid "Disable primary group filter"
-msgstr "Zeige Gruppen des Benutzers"
+msgstr "Abschalten des Filters für primäre Gruppen"
 
 #: setup/setup_config3.tpl:18
 msgid "Display summary in listings"
@@ -4840,14 +4825,12 @@ msgid "Enable system deployment"
 msgstr "Aktiviere Systemverteilung"
 
 #: setup/setup_config3.tpl:115
-#, fuzzy
 msgid "Mail queue script"
-msgstr "Allgemeiner Skript-Pfad"
+msgstr "Mail-Queue Skript"
 
 #: setup/setup_config3.tpl:134
-#, fuzzy
 msgid "Notification script"
-msgstr "Empfänger der Meldung"
+msgstr "Benachrichtigungsskript"
 
 #: setup/setup_config3.tpl:153
 msgid "Enable edit locking"
@@ -4886,9 +4869,8 @@ msgid "Session lifetime"
 msgstr "Lebenszeit der Sitzung"
 
 #: setup/setup_config3.tpl:256
-#, fuzzy
 msgid "Debugging"
-msgstr "Aktiviere Debugging"
+msgstr "Debugging"
 
 #: setup/setup_config3.tpl:260
 msgid "Show PHP errors"
@@ -4903,9 +4885,8 @@ msgid "Log LDAP statistics"
 msgstr "Protokolliere LDAP-Statistiken"
 
 #: setup/setup_config3.tpl:302
-#, fuzzy
 msgid "Debug level"
-msgstr "Diese Ebene"
+msgstr "Debug Level"
 
 #: setup/setup_config3.tpl:307 setup/setup_config3.tpl:310
 msgid "Disabled"
@@ -4944,10 +4925,9 @@ msgid "Installation check"
 msgstr "Installationsprüfung"
 
 #: setup/class_setupStep_Checks.inc:40
-#, fuzzy
 msgid "Basic checks for PHP version and required extensions."
 msgstr ""
-"Einige grundsätzliche Überprüfungen der PHP-Version, LDAP-Erweiterung..."
+"Grundlegende Überprüfungen der PHP-Version und benötigten Erweiterungen."
 
 #: setup/class_setupStep_Checks.inc:64
 msgid "Checking PHP version"
@@ -4959,13 +4939,13 @@ msgid "PHP must be of version %s or above."
 msgstr "PHP muß in Version %s oder höher vorliegen."
 
 #: setup/class_setupStep_Checks.inc:66
-#, fuzzy
 msgid ""
 "GOsa requires functionality that is not available (or buggy) in older PHP "
 "versions. Please update to a supported version."
 msgstr ""
 "GOsa benötigt Funktionen, die in älteren PHP-Versionen nicht unbedingt "
-"verfügbar sind,aktualisieren Sie einfach auf eine unterstützte PHP-Version."
+"(stabil) verfügbar sind, aktualisieren Sie daher auf eine unterstützte PHP-"
+"Version."
 
 #: setup/class_setupStep_Checks.inc:72
 msgid "Checking for LDAP support"
@@ -4973,15 +4953,17 @@ msgstr "Prüfe auf LDAP-Unterstützung"
 
 #: setup/class_setupStep_Checks.inc:73
 msgid "This is the main extension used by GOsa and therefore really required."
-msgstr "Dies ist die grundlegende Erweiterung für GOsa und wird daher wirklich benötigt."
+msgstr ""
+"Dies ist die grundlegende Erweiterung für GOsa und wird daher wirklich "
+"benötigt."
 
 #: setup/class_setupStep_Checks.inc:74
 msgid ""
 "The ldap extension (php5-ldap) is required to communicate with your LDAP "
 "server."
 msgstr ""
-"Das LDAP-Modul (php5-ldap) wird zur Kommunikation mit dem LDAP-"
-"Server benötigt."
+"Das LDAP-Modul (php5-ldap) wird zur Kommunikation mit dem LDAP-Server "
+"benötigt."
 
 #: setup/class_setupStep_Checks.inc:80
 msgid "Checking for gettext support"
@@ -4989,8 +4971,7 @@ msgstr "Prüfe auf gettext-Erweiterung"
 
 #: setup/class_setupStep_Checks.inc:81
 msgid "Gettext support is required for internationalization."
-msgstr ""
-"Gettext-Unterstützung wird für Mehrsprachigkeit benötigt."
+msgstr "Gettext-Unterstützung wird für Mehrsprachigkeit benötigt."
 
 #: setup/class_setupStep_Checks.inc:82 setup/class_setupStep_Checks.inc:90
 msgid "Please make sure that the extension is activated."
@@ -5019,20 +5000,21 @@ msgstr "Sie benötigen dieses Modul um die SSHA-Verschlüsselung zu verwenden"
 #: setup/class_setupStep_Checks.inc:98
 msgid "The mhash module for PHP 5 is not available.Please install php5-mhash."
 msgstr ""
-"Das mHash-Modul für PHP 5 ist nicht verfügbar, bitte installieren Sie php5-mhash."
+"Das mHash-Modul für PHP 5 ist nicht verfügbar, bitte installieren Sie php5-"
+"mhash."
 
 #: setup/class_setupStep_Checks.inc:104
 msgid "Checking for IMAP support"
 msgstr "Prüfe auf IMAP-Unterstützung"
 
 #: setup/class_setupStep_Checks.inc:105
-#, fuzzy
 msgid ""
 "The IMAP module is needed to communicate with the IMAP server. GOsa "
 "retrieves status information, creates and deletes mail users, etc."
 msgstr ""
 "Das IMAP-Modul wird für die Kommunikation mit ihrem IMAP-Server benötigt. "
-"Dort können Benutzer verwaltet und Statusinformationen bezogen werden."
+"GOsa bezieht damit Statusinformationen, erstellt und entfernt Mail-Konten, "
+"etc."
 
 #: setup/class_setupStep_Checks.inc:106
 msgid ""
@@ -5047,16 +5029,15 @@ msgid "Checking for getacl in IMAP implementation"
 msgstr "Prüfe auf getacl im IMAP-Modul"
 
 #: setup/class_setupStep_Checks.inc:113
-#, fuzzy
 msgid ""
 "The getacl support is needed to handle shared folder permissions. Old IMAP "
 "extensions are not capable of reading acl's. You need a recent PHP version "
 "to use this feature."
 msgstr ""
-"Diese Funktion wird benötigt um Zugriffsrechte von Geteilten Ordnern zu "
-"verwalten. Das normale IMAP-Modul unterstützt das Auslesen dieser "
-"Zugriffsregeln nicht. Sie benötigen entweder ein angepasstes oder ein recht "
-"aktuelles PHP um diese Funktion nutzen zu können."
+"Diese Funktion wird benötigt um Zugriffsrechte von verteilten Ordnern zu "
+"verwalten. Ältere IMAP-Module unterstützen das Auslesen dieser "
+"Zugriffsregeln nicht. Sie benötigen eine aktuelle PHP-Version, um diese "
+"Funktion nutzen zu können."
 
 #: setup/class_setupStep_Checks.inc:120
 msgid "Checking for MySQL support"
@@ -5066,22 +5047,20 @@ msgstr "Prüfe auf MySQL-Unterstützung"
 msgid ""
 "MySQL support is needed to communicate with several supported databases."
 msgstr ""
-"Das MySQL-Modul wird benötigt, um mit verschiedenen unterstützten Datenbanken zu kommunizieren."
+"Das MySQL-Modul wird benötigt, um mit verschiedenen unterstützten "
+"Datenbanken zu kommunizieren."
 
 #: setup/class_setupStep_Checks.inc:122
-#, fuzzy
 msgid ""
 "This module is required to communicate with database servers (GOfax, "
 "asterisk, GLPI, etc.). Please install php5-mysql"
 msgstr ""
-"Dieses Modul wird verwendet, um mit Datenbank-Servern zu kommunizieren (wird "
-"z.B. in der Telefon- oder Fax-Erweiterung verwendet). Bitte installieren Sie "
-"das Modul (php4-mysql/php5-mysql)."
+"Dieses Modul wird verwendet, um mit Datenbank-Servern zu kommunizieren "
+"(GOfax, asterisk, GLPI, etc.). Bitte installieren Sie php5-mysql"
 
 #: setup/class_setupStep_Checks.inc:128
-#, fuzzy
 msgid "Checking for kadm5 support"
-msgstr "Prüfe auf iconv-Erweiterung"
+msgstr "Prüfe auf kadm5-Unterstützung"
 
 #: setup/class_setupStep_Checks.inc:129
 msgid ""
@@ -5092,61 +5071,55 @@ msgstr ""
 "installiert sein. Sie können es über das PEAR-Netzwerk beziehen."
 
 #: setup/class_setupStep_Checks.inc:130
-#, fuzzy
 msgid ""
 "This module is required to manage user in kerberos, it is downloadable via "
 "PEAR network"
 msgstr ""
-"Um Benutzer auch im Kerberos verwalten zu können, muß das kadm5-Modul "
-"installiert sein. Sie können es über das PEAR-Netzwerk beziehen."
+"Dieses Modul wird zur Verwaltung von Benutzer in Kerberos benötigt, es ist "
+"über das PEAR-Netzwerk verfügbar."
 
 #: setup/class_setupStep_Checks.inc:136
-#, fuzzy
 msgid "Checking for SNMP support"
-msgstr "Prüfe auf iconv-Erweiterung"
+msgstr "Prüfe auf SNMP-Unterstützung"
 
 #: setup/class_setupStep_Checks.inc:137
-#, fuzzy
 msgid ""
 "The simple network management protocol is needed to get status information "
 "from clients."
 msgstr ""
-"Simple Network Management Protocol (SNMP) wird zur Client-Überwachung "
-"benötigt."
+"Das Simple Network Management Protocol (SNMP) benötigt, um Status-"
+"Informationen von Clients zu beziehen."
 
 #: setup/class_setupStep_Checks.inc:138
-#, fuzzy
 msgid ""
 "This module is required for client monitoring. Please install php5-snmp."
 msgstr ""
-"Dieses Modul wird für die Client-Überwachung benötigt (PHP4-snmp/PHP5-snmp)"
+"Dieses Modul wird für die Client-Überwachung benötigt. Bitte installation "
+"Sie php5-snmp."
 
 #: setup/class_setupStep_Checks.inc:144
-#, fuzzy
 msgid "Checking for CUPS support"
-msgstr "Prüfe auf iconv-Erweiterung"
+msgstr "Prüfe auf CUPS-Unterstützung"
 
 #: setup/class_setupStep_Checks.inc:145
-#, fuzzy
 msgid ""
 "In order to read available printers via the IPP protocol instead of printcap "
 "files, you've to install the CUPS module."
 msgstr ""
-"Falls Sie eine Liste der verfügbaren Drucker über IPP auslesen möchten, "
-"benötigen Sie dieses Modul. Anderenfalls wird die printcap-Datei ausgewertet."
+"Falls Sie eine Liste der verfügbaren Drucker über IPP an Stelle von printcap "
+"Dateien auslesen möchten, benötigen Sie das CUPS-Modul."
 
 #: setup/class_setupStep_Checks.inc:154
 msgid "Checking for fping utility"
 msgstr "Suche fping-Programm"
 
 #: setup/class_setupStep_Checks.inc:155
-#, fuzzy
 msgid ""
 "The fping utility is used if you've got a thin client based terminal "
 "environment."
 msgstr ""
-"Fping wird benötigt, um den Status von Thin-Client basierenden Terminal zu "
-"überwachen."
+"Das fping-Werkzeug wird in einer Thin-Client basierten Terminal-Umgebung "
+"benötigt."
 
 #: setup/class_setupStep_Checks.inc:156
 msgid ""
@@ -5158,13 +5131,12 @@ msgid "SAMBA password hash generation"
 msgstr "Samba Passwort-Hash Erzeugung"
 
 #: setup/class_setupStep_Checks.inc:172
-#, fuzzy
 msgid ""
 "In order to use SAMBA 2/3 passwords, you've to install additional packages "
 "to generate password hashes."
 msgstr ""
-"Um Samba 2.x/3.x in Verbindung mit LDAP nutzen zu können, wird ein externes "
-"Programm benötigt, welches die Passwort-Hashes generieren kann."
+"Um Samba 2/3-Passwörter verwenden zu können, müssen zusätzliche Pakete zum "
+"Erzeugen von Passwort-Hashes installiert werden."
 
 #: setup/class_setupStep_Checks.inc:173
 msgid ""
@@ -5181,15 +5153,13 @@ msgid "Off"
 msgstr "Aus"
 
 #: setup/class_setupStep_Checks.inc:184
-#, fuzzy
 msgid ""
 "register_globals is a PHP mechanism to register all global variables to be "
 "accessible from scripts without changing the scope. This may be a security "
 "risk."
 msgstr ""
 "register_globals ist ein PHP-Mechanismus, welcher alle globalen Variablen "
-"für Skripte direkt zugänglich macht. Dies kann ein Sicherheitsrisiko sein. "
-"GOsa funktioniert mit beiden möglichen Einstellungen."
+"für Skripte direkt zugänglich macht. Dies kann ein Sicherheitsrisiko sein."
 
 #: setup/class_setupStep_Checks.inc:185
 msgid "Search for 'register_globals' in your php.ini and switch it to 'Off'."
@@ -5204,15 +5174,13 @@ msgstr ""
 "Sessions zu entfernen."
 
 #: setup/class_setupStep_Checks.inc:194
-#, fuzzy
 msgid ""
 "Setting this value to one day will prevent loosing session and cookies "
 "before they really timeout."
 msgstr ""
-"PHP verwendet diesen Wert für den Garbage Collector um alte Sitzungen zu "
-"entfernen. Wenn Sie diesen Wert auf einen Tag setzen, wird dies vermeiden, "
-"dass Sie die Sitzung und den zugehörigen Cookie verlieren, bevor diese "
-"tatsächlich ihre Gültigkeit verlieren."
+"Wenn Sie diesen Wert auf einen Tag setzen, wird dies vermeiden, dass Sie die "
+"Sitzung und den zugehörigen Cookie verlieren, bevor diese tatsächlich ihre "
+"Gültigkeit verlieren."
 
 #: setup/class_setupStep_Checks.inc:195
 msgid ""
@@ -5223,13 +5191,12 @@ msgstr ""
 "auf 84600 oder höher."
 
 #: setup/class_setupStep_Checks.inc:203
-#, fuzzy
 msgid ""
 "In Order to use GOsa without any trouble, the session.auto_register option "
 "in your php.ini should be set to 'Off'."
 msgstr ""
 "Um GOsa fehlerfrei benutzen zu können, muß die Option session.auto_register "
-"in Ihrer php.ini auf 'off' stehen."
+"in Ihrer php.ini auf 'Off' stehen."
 
 #: setup/class_setupStep_Checks.inc:204
 msgid "Search for 'session.auto_start' in your php.ini and set it to 'Off'."
@@ -5238,14 +5205,13 @@ msgstr ""
 "'Off'."
 
 #: setup/class_setupStep_Checks.inc:211
-#, fuzzy
 msgid ""
 "GOsa needs at least 32MB of memory. Setting it below this limit may cause "
 "errors that are not reproducable! Increase it for larger setups."
 msgstr ""
 "GOsa benötigt mindestens 32MB Speicher, weniger Speicher würde "
 "unvorhersehbare Probleme verursachen! Bei größeren Installationen sollte "
-"dieser Wert noch erweitert werden."
+"dieser Wert noch vergrössert werden."
 
 #: setup/class_setupStep_Checks.inc:212
 msgid ""
@@ -5255,7 +5221,6 @@ msgstr ""
 "oder höher."
 
 #: setup/class_setupStep_Checks.inc:219
-#, fuzzy
 msgid ""
 "This option influences the PHP output handling. Turn this Option off, to "
 "increase performance."
@@ -5270,11 +5235,8 @@ msgstr ""
 "'Off'."
 
 #: setup/class_setupStep_Checks.inc:227
-#, fuzzy
 msgid "The Execution time should be at least 30 seconds."
-msgstr ""
-"Die Ausführungszeit sollte mindestens 30 Sekunden betragen, da einige "
-"Aktionen viel Zeit in Anspruch nehmen."
+msgstr "Die Ausführungszeit sollte mindestens 30 Sekunden betragen."
 
 #: setup/class_setupStep_Checks.inc:228
 msgid ""
@@ -5284,7 +5246,6 @@ msgstr ""
 "'30' oder höher."
 
 #: setup/class_setupStep_Checks.inc:235
-#, fuzzy
 msgid ""
 "Increase the server security by setting expose_php to 'off'. PHP won't send "
 "any information about the server you are running in this case."
@@ -5317,26 +5278,23 @@ msgstr ""
 "'On'."
 
 #: setup/class_setupStep_Checks.inc:251
-#, fuzzy
 msgid "Increase your server performance by setting magic_quotes_gpc to 'off'."
 msgstr ""
-"Erhöhen Sie die Sicherheit des Server, indem sie magic_quotes_gpc auf 'on' "
-"stellen. PHP wird in dieser Einstellung alle 'quotes' in 'strings' umwandeln."
+"Erhöhen Sie die Leistung des Servers, indem sie magic_quotes_gpc auf 'off' "
+"stellen."
 
 #: setup/class_setupStep_Checks.inc:252
-#, fuzzy
 msgid ""
 "Search for 'zend.ze1_compatibility_mode' in your php.ini and set it to 'Off'."
 msgstr ""
-"Suchen Sie in Ihrer php.ini nach 'implicit_flush' und setzen Sie es auf "
-"'Off'."
+"Suchen Sie in Ihrer php.ini nach 'zend.ze1_compatibility_mode' und setzen "
+"Sie es auf 'Off'."
 
 #: setup/class_setupStep_Checks.inc:262
 msgid "Configuration writeable"
 msgstr "Konfigurationsdatei schreibbar"
 
 #: setup/class_setupStep_Checks.inc:263
-#, fuzzy
 msgid "The configuration file can't be written"
 msgstr "Die Konfigurationsdatei kann nicht geschrieben werden"
 
@@ -5364,9 +5322,8 @@ msgid "What will the wizard do for you?"
 msgstr "Was wird der Assistent für Sie erledigen?"
 
 #: setup/setup_welcome.tpl:11
-#, fuzzy
 msgid "Create a basic, single site configuration"
-msgstr "Erstelle eine Sicherung von der bestehenden Konfigurationsdatei"
+msgstr "Erstellen einer einfachen Konfiguration für einen Standort"
 
 #: setup/setup_welcome.tpl:12
 msgid "Tries to find problems within your PHP and LDAP setup"
@@ -5387,18 +5344,16 @@ msgid "What will the wizard NOT do for you?"
 msgstr "Was wird der Assistent NICHT für Sie erledigen?"
 
 #: setup/setup_welcome.tpl:20
-#, fuzzy
 msgid "Find every possible configuration error"
-msgstr "Schreibe Konfigurationsdatei"
+msgstr "Finde jeden möglichen Konfigurationsfehler"
 
 #: setup/setup_welcome.tpl:21
 msgid "Migrate every possible LDAP setup - create backup dumps!"
 msgstr "Migriere jede mögliche LDAP-Umgebung - erstellen Sie Sicherungsabzüge!"
 
 #: setup/setup_welcome.tpl:25
-#, fuzzy
 msgid "To continue..."
-msgstr "Einrichtung wird fortgesetzt..."
+msgstr "Wird fortgesetzt..."
 
 #: setup/setup_welcome.tpl:28
 msgid ""
@@ -5442,9 +5397,8 @@ msgid "Schema specific settings"
 msgstr "Schemaspezifische Einstellungen"
 
 #: setup/setup_schema.tpl:7
-#, fuzzy
 msgid "Enable schema validation when logging in"
-msgstr "Ermögliche Schema-Validierung"
+msgstr "Ermögliche Schema-Validierung bei der Anmeldung"
 
 #: setup/setup_schema.tpl:16
 msgid "Check status"
@@ -5483,9 +5437,8 @@ msgid "System inventory"
 msgstr "System-Inventar"
 
 #: setup/class_setupStep_Feedback.inc:103
-#, fuzzy
 msgid "System-/Configmanagement"
-msgstr "Systemverwaltung"
+msgstr "System-/Konfigurationsverwaltung"
 
 #: setup/class_setupStep_Feedback.inc:105
 msgid "Addressbook"
@@ -5497,9 +5450,8 @@ msgid "Notification and feedback"
 msgstr "Benachrichtigung und Rückmeldung"
 
 #: setup/class_setupStep_Feedback.inc:112
-#, fuzzy
 msgid "Get notifications or send feedback"
-msgstr "Einschränkungen für den Sender"
+msgstr "Erhalte Benachrichtungen oder sende Rückmeldung"
 
 #: setup/class_setupStep_Feedback.inc:140
 #: setup/class_setupStep_Feedback.inc:147
@@ -5525,12 +5477,11 @@ msgid "Please specify a valid email address."
 msgstr "Bitte geben Sie eine gültige E-Mail-Adresse ein."
 
 #: setup/class_setupStep_Feedback.inc:183
-#, fuzzy
 msgid ""
 "You have to select at least one of both options, subscribe or send feedback."
 msgstr ""
-"Sie müssen mindestens eine Option auswählen, Abonnement der Mailingliste "
-"oder Senden einer Rückmeldung."
+"Sie müssen mindestens eine der beiden Optionen auswählen, Abonnement der "
+"Mailingliste oder Senden einer Rückmeldung."
 
 #: setup/class_setupStep_Finish.inc:37
 #: ihtml/themes/default/copyPasteDialog.tpl:32
@@ -5546,7 +5497,6 @@ msgid "Finish - write the configuration file"
 msgstr "Abschluß - Schreiben der Konfigurationsdatei"
 
 #: setup/class_setupStep_Finish.inc:100
-#, fuzzy
 msgid ""
 "Your configuration file is currently world readable. Please update the file "
 "permissions!"
@@ -5588,7 +5538,6 @@ msgid "Checking permissions on LDAP database"
 msgstr "Prüfe Berechtigungen auf die LDAP-Datenbank"
 
 #: setup/class_setupStep_Migrate.inc:125
-#, fuzzy
 msgid "Checking for invisible departments"
 msgstr "Prüfe auf unsichtbare Abteilungen"
 
@@ -5726,11 +5675,8 @@ msgid "Password error"
 msgstr "Passwortfehler"
 
 #: setup/class_setupStep_Migrate.inc:970
-#, fuzzy
 msgid "Provided passwords do not match!"
-msgstr ""
-"Die Passworte, die Sie als 'Neues Passwort' und 'Wiederholung des neuen "
-"Passwort' eingegeben haben sind nicht identisch!"
+msgstr "Die angegebenen Passwörter stimmen nicht überein!"
 
 #: setup/class_setupStep_Migrate.inc:975
 msgid "Input error"
@@ -5741,11 +5687,11 @@ msgid "Specify a valid user ID!"
 msgstr "Geben Sie eine gültige Benutzer ID an!"
 
 #: setup/class_setupStep_Migrate.inc:1019
-#, fuzzy, php-format
+#, php-format
 msgid "Adding an administrative user failed: object '%s' already exists!"
 msgstr ""
-"Setzen von Ablaufstatus (FAIstate) fehlgeschlagen für Objekt '%s'; der Wert "
-"war '%s'."
+"Hinzufügen eines administrativen Benutzers fehlgeschlagen: Objekt '%s' "
+"existiert bereits!"
 
 #: setup/class_setupStep_Migrate.inc:1056
 #: setup/class_setupStep_Migrate.inc:1104
@@ -5817,7 +5763,6 @@ msgstr ""
 "überschrieben werden."
 
 #: setup/setup_language.tpl:9
-#, fuzzy
 msgid "Please select your preferred language here"
 msgstr "Bitte wählen Sie hier Ihre bevorzugte Sprache"
 
@@ -5834,21 +5779,18 @@ msgid "RID base"
 msgstr "RID Basis"
 
 #: setup/setup_config2.tpl:46
-#, fuzzy
 msgid "Workstation container"
-msgstr "Name der Arbeitsstation"
+msgstr "Container für Arbeitsstationen"
 
 #: setup/setup_config2.tpl:61
-#, fuzzy
 msgid "Samba SID mapping"
-msgstr "Samba SID"
+msgstr "Samba SID Abbildung"
 
 #: setup/setup_config2.tpl:71
 msgid "Timezone"
 msgstr "Zeitzone"
 
 #: setup/setup_config2.tpl:74
-#, fuzzy
 msgid "Please choose your preferred timezone here"
 msgstr "Bitte wählen Sie hier Ihre bevorzugte Zeitzone"
 
@@ -5869,9 +5811,8 @@ msgid "Enable DHCP extension"
 msgstr "Aktiviere DHCP-Erweiterung"
 
 #: setup/setup_config2.tpl:136
-#, fuzzy
 msgid "Enable mime type management"
-msgstr "MIME-Typen Verwaltung"
+msgstr "Aktiviere MIME-Typen Verwaltung"
 
 #: setup/setup_config2.tpl:148
 msgid "Enable FAI release management"
@@ -5906,19 +5847,16 @@ msgid "Use Cyrus UNIX style"
 msgstr "Verwenden Cyrus UNIX-Stil"
 
 #: setup/setup_config2.tpl:240
-#, fuzzy
 msgid "Snapshots / Undo"
-msgstr "Abbild fehlgeschlagen."
+msgstr "Snapshots / Rückgängig"
 
 #: setup/setup_config2.tpl:249 setup/setup_config2.tpl:294
-#, fuzzy
 msgid "Enable snapshots"
-msgstr "Abbild erstellen"
+msgstr "Snapshots ermöglichen"
 
 #: setup/setup_config2.tpl:255 setup/setup_config2.tpl:300
-#, fuzzy
 msgid "Snapshot base"
-msgstr "Abbild fehlgeschlagen."
+msgstr "Basis für Snapshots"
 
 #: setup/setup_migrate.tpl:5
 msgid ""
@@ -6015,13 +5953,14 @@ msgstr "Zeige Änderungen"
 
 #: setup/setup_migrate.tpl:140
 msgid "Move users into configured user tree"
-msgstr ""
+msgstr "Verschiebe Benutzer in den konfigurierten Benutzerbaum"
 
 #: setup/setup_migrate.tpl:142
 msgid ""
 "This dialog allows moving a couple of users to the configured user tree. "
 "Doing this may straighten your LDAP service."
-msgstr "Dieser Dialol ermöglicht Ihnen das Verschieben einer Zahl von Nutzern in den "
+msgstr ""
+"Dieser Dialol ermöglicht Ihnen das Verschieben einer Zahl von Nutzern in den "
 "konfigurierten Benutzerbaum. Dies kann Ihren LDAP-Dienst aufräumen."
 
 #: setup/setup_migrate.tpl:145
@@ -6035,9 +5974,8 @@ msgstr ""
 "migrieren, Sie sollten die Migration an dieser Stelle abbrechen."
 
 #: setup/setup_migrate.tpl:148
-#, fuzzy
 msgid "Move selected users into this people tree"
-msgstr "Neuen Benutzer aus dieser Vorlage erstellen"
+msgstr "Verschiebe die ausgewählten Benutzer in diesen Benutzerbaum"
 
 #: setup/setup_migrate.tpl:198
 msgid "Next"
@@ -6064,7 +6002,6 @@ msgid "Password (again)"
 msgstr "Passwort (erneut)"
 
 #: setup/setup_migrate.tpl:258
-#, fuzzy
 msgid ""
 "The listed departments are currently invisible in the GOsa user interface. "
 "If you want to change this for a couple of entries, select them and use the "
@@ -6288,9 +6225,8 @@ msgid "Permission denied!"
 msgstr "Zugriff verweigert!"
 
 #: html/getxls.php:491
-#, fuzzy
 msgid "You are not allowed to perform this action."
-msgstr "Sie sind nicht berechtigt, diese ACL zu bearbeiten."
+msgstr "Sie sind nicht berechtigt, diese Aktion durchzuführen."
 
 #: html/helpviewer.php:68
 msgid "Help browser"
@@ -6308,9 +6244,8 @@ msgstr ""
 "keine Hilfedateien lesen."
 
 #: html/getldif.php:80
-#, fuzzy
 msgid "You are not allowed to create ldap dumps."
-msgstr "Es ist Ihnen nicht erlaubt, eine neue Rolle zu erstellen."
+msgstr "Es ist Ihnen nicht erlaubt, LDAP-Abzüge zu erstellen."
 
 #: html/getldif.php:105
 msgid "Error in ivbb parameter!"
@@ -6328,18 +6263,18 @@ msgstr "Die angegebene Datenbank kann nicht ausgewählt werden."
 msgid "Database query failed!"
 msgstr "Die Datenbankabfrage ist fehlgeschlagen!"
 
-#: html/main.php:150
+#: html/main.php:151
 #, php-format
 msgid "Cannot locate file '%s' - please run '%s' to fix this"
 msgstr ""
 "Konnte Datei '%s' nicht finden - bitte führen Sie '%s' aus um das Problem zu "
 "beseitigen"
 
-#: html/main.php:168
+#: html/main.php:169
 msgid "PHP configuration"
 msgstr "PHP-Konfiguration"
 
-#: html/main.php:169
+#: html/main.php:170
 msgid ""
 "FATAL: Register globals is on. GOsa will refuse to login unless this is "
 "fixed by an administrator."
@@ -6347,28 +6282,27 @@ msgstr ""
 "FATAL: 'Register globals' ist im PHP aktiviert. GOsa läßt keine Anmeldung "
 "zu, bis dies von einem Administrator behoben wurde."
 
-#: html/main.php:214
+#: html/main.php:215
 msgid "Configuration warning"
 msgstr "Konfigurationswarnung"
 
-#: html/main.php:214
+#: html/main.php:215
 msgid "Running out of memory!"
 msgstr "Der verfügbare Arbeitsspeicher wird knapp!"
 
-#: html/main.php:353
+#: html/main.php:354
 msgid "Password reminder"
 msgstr "Passwort Erinnerung"
 
-#: html/main.php:353
-#, fuzzy
+#: html/main.php:354
 msgid "Your password is about to expire, please change your password!"
-msgstr "Ihr Passwort ist abgelaufen, geben Sie bitte ein neues Passwort eie"
+msgstr "Ihr Passwort ist fast abgelaufen, bitte setzen Sie ein neues!"
 
-#: html/main.php:362
+#: html/main.php:363
 msgid "Plugin"
 msgstr "Erweiterung"
 
-#: html/main.php:363
+#: html/main.php:364
 #, php-format
 msgid "FATAL: Can't find any plugin definitions for plugin '%s'!"
 msgstr "FATAL: Es kann kein Plugin für die Definition '%s' gefunden werden!"
@@ -6386,9 +6320,8 @@ msgstr ""
 "von der Einstellung in der php.ini überschrieben."
 
 #: html/index.php:130
-#, fuzzy
 msgid "Configuration accessibility"
-msgstr "Konfigurationsdatei"
+msgstr "Zugänglichkeit der Konfigurationsdatei"
 
 #: html/index.php:206
 msgid "There is a problem with the authentication setup!"
@@ -6625,11 +6558,12 @@ msgid "Login screen"
 msgstr "Anmeldefenster"
 
 #: ihtml/themes/default/login.tpl:32
-#, fuzzy
 msgid ""
 "Please use your username and your password to log into the site "
 "administration system."
-msgstr "Melden Sie sich bitte mit Ihrem Benutzernamen und Ihrem Passwort an"
+msgstr ""
+"Verwenden Sie bitte Ihren Benutzernamen und Ihr Passwort, um sich an der "
+"Verwaltung des Standorts anzumelden."
 
 #: ihtml/themes/default/login.tpl:76 ihtml/themes/default/login.tpl:79
 msgid "Sign in"
@@ -6737,11 +6671,11 @@ msgstr "Verwende leere Werte für unendlich"
 
 #: ihtml/themes/default/pwd_heimdal.tpl:10
 msgid "Ticket max life"
-msgstr ""
+msgstr "Maximale Lebenszeit des Tickets"
 
 #: ihtml/themes/default/pwd_heimdal.tpl:18
 msgid "Ticket max renew"
-msgstr ""
+msgstr "Maximale Anzahl von Verlängerungen des Tickets"
 
 #: ihtml/themes/default/pwd_heimdal.tpl:32
 msgid "infinite"
@@ -6851,6 +6785,20 @@ msgstr "Zeitstempel"
 #: ihtml/themes/default/snapshotdialog.tpl:79
 msgid "Reason for generating this snapshot"
 msgstr "Grund für das Erzeugen dieses Abbilds"
+
+#~ msgid ""
+#~ "You have disabled the rfc2307bis option on the 'ldap setup' step, but "
+#~ "your schema   configuration do not support this option."
+#~ msgstr ""
+#~ "Sie haben die Option rfc2307bis in der LDAP-Einrichtung deaktiviert, aber "
+#~ "dies wird von Ihrer Schema-Konfiguration nicht unterstützt."
+
+#~ msgid ""
+#~ "Setting for SMBHASH in gosa.conf is incorrect! Cannot change Samba "
+#~ "password."
+#~ msgstr ""
+#~ "Die Einstellung 'SMBHASH' in der Datei gosa.conf ist nicht korrekt! Das "
+#~ "Samba-Passwort kann nicht geändert werden."
 
 #~ msgid "User delted"
 #~ msgstr "Benutzer wurde entfernt"
