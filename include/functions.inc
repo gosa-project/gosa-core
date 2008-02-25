@@ -2632,10 +2632,8 @@ function remove_objectClass($classes, &$attrs)
 
 		$tmp= array();
 		foreach ($attrs['objectClass'] as $oc) {
-			foreach ($list as $class){
-				if ($oc != $class){
-					$tmp[]= $oc;
-				}
+      if(!in_array($oc, $list)){	
+			  $tmp[]= $oc;
 			}
 		}
 		$attrs['objectClass']= $tmp;
