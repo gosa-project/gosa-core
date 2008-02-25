@@ -315,6 +315,7 @@ class department extends plugin
         $this->gosaUnitTag= preg_replace("/\./", "", $sec.$usec);
       }
     }
+    $this->skipTagging = TRUE;
     plugin::save();
 
     $this->attrs['gosaUnitTag'] = $this->gosaUnitTag;
@@ -334,10 +335,7 @@ class department extends plugin
         }
       }
       $this->attrs['objectClass']= $tmp;
-
-      if(!$has_unit_tag && isset($this->attrs['gosaUnitTag'])){
-        $this->attrs['gosaUnitTag']= array();
-      }
+      $this->attrs['gosaUnitTag']= array();
       $this->gosaUnitTag = "";
     }
 

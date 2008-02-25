@@ -88,6 +88,7 @@ class plugin
 
   /* Save unit tags */
   var $gosaUnitTag= "";
+  var $skipTagging= FALSE;
 
   /*!
     \brief Used standard values
@@ -966,6 +967,14 @@ class plugin
 
   function tag_attrs(&$at, $dn= "", $tag= "", $show= false)
   {
+    /* Skip tagging? 
+       If this is called from departmentGeneric, we have to skip this
+        tagging procedure. 
+     */
+    if($this->skipTagging){
+      return;
+    }
+
     /* No dn? Self-operation... */
     if ($dn == ""){
       $dn= $this->dn;
