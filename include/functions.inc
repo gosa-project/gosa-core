@@ -801,9 +801,7 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
     }
   }
   
-  /* Check if we have enabled the sub_dir search support AND 
-   *  if there is a sub department specified.
-   * If not, fall back to old method, get_list().
+   /* If there is no sub_department specified, fall back to old method, get_list().
    */
   if(!count($sub_bases) && !count($departments)){
     
@@ -812,7 +810,8 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
     if(!count($sub_bases) && !count($departments)){
       // log($action,$objecttype,$object,$changes_array = array(),$result = "") 
       new log("debug","all",__FILE__,$attributes,
-          sprintf("get_sub_list(): Falling back to get_list(), due to empty sub_bases parameter. This may slow down GOsa. Search was: '%s'",$filter));
+          sprintf("get_sub_list(): Falling back to get_list(), due to empty sub_bases parameter.".
+            " This may slow down GOsa. Search was: '%s'",$filter));
     }
     $tmp = get_list($filter, $category,$base,$attributes,$flags);
     return($tmp);
