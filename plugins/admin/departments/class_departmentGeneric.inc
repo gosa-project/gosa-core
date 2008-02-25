@@ -317,6 +317,8 @@ class department extends plugin
     }
     plugin::save();
 
+    $this->attrs['gosaUnitTag'] = $this->gosaUnitTag;
+
     /* Remove tag information if needed */
     if (!$this->is_administrational_unit){
       $tmp= array();
