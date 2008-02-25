@@ -148,6 +148,8 @@ class gosaSupportDaemon
 
     $xml_msg = "<xml>
       <header>gosa_query_jobdb</header>
+      <target>GOSA</target>
+      <source>GOSA</source>
       <where>
       <clause>
         <phrase>
@@ -206,6 +208,8 @@ $xml_msg.= "
 
     $xml_msg = "<xml>
       <header>gosa_query_jobdb</header>
+      <target>GOSA</target>
+      <source>GOSA</source>
       <where>
       <clause>
       <connector>or</connector>";
@@ -252,6 +256,8 @@ $xml_msg.= "
 
     $xml_msg = "<xml>
       <header>gosa_query_jobdb</header>
+      <target>GOSA</target>
+      <source>GOSA</source>
       <where>
       <clause>
       <connector>or</connector>";
@@ -296,6 +302,8 @@ $xml_msg.= "
     $this->s_error = "";
     $xml_msg = "<xml>
       <header>gosa_query_jobdb</header>
+      <target>GOSA</target>
+      <source>GOSA</source>
       <where>
       <clause>
       <phrase>
@@ -336,6 +344,8 @@ $xml_msg.= "
     $ret = array();
     $xml_msg = "<xml>
       <header>gosa_query_jobdb</header>
+      <target>GOSA</target>
+      <source>GOSA</source>
       <where>
       <clause>
       <phrase>
@@ -376,6 +386,8 @@ $xml_msg.= "
 
     $xml_msg = "<xml>
       <header>gosa_delete_jobdb_entry</header>
+      <target>GOSA</target>
+      <source>GOSA</source>
       <where>
       <clause>
       <connector>or</connector>";
@@ -415,6 +427,8 @@ $xml_msg.= "
 
     $xml_msg = "<xml>
       <header>gosa_delete_jobdb_entry</header>
+      <target>GOSA</target>
+      <source>GOSA</source>
       <where>
       <clause>
       <phrase>
@@ -510,6 +524,8 @@ $xml_msg.= "
     }
     $xml_msg = "<xml>
       <header>gosa_update_status_jobdb_entry</header>
+      <target>GOSA</target>
+      <source>GOSA</source>
       <where>
       <clause>
       <connector>or</connector>";
@@ -542,7 +558,7 @@ $xml_msg.= "
    */
   public function number_of_queued_entries()
   {
-    $xml_msg ="<xml><header>gosa_count_jobdb</header></xml>";
+    $xml_msg ="<xml><header>gosa_count_jobdb</header><target>GOSA</target><source>GOSA</source></xml>";
     $this->connect();
     if($this->connect()){
       $this->o_sock->write($xml_msg);
