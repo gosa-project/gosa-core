@@ -87,11 +87,11 @@ class acl extends plugin
 
     /* Roles */
     $ldap->cd($config->current['BASE']);
-    if ($tag == ""){
+#    if ($tag == ""){
       $ldap->search('(objectClass=gosaRole)', array('cn', 'description','gosaAclTemplate','dn'));
-    } else {
-      $ldap->search('(&(objectClass=gosaRole)(gosaUnitTag='.$tag.'))', array('cn', 'description','gosaAclTemplate','dn'));
-    }
+#    } else {
+#     $ldap->search('(&(objectClass=gosaRole)(gosaUnitTag='.$tag.'))', array('cn', 'description','gosaAclTemplate','dn'));
+#    }
     while ($attrs= $ldap->fetch()){
       $dsc= "";
       if (isset($attrs['description'][0])){
