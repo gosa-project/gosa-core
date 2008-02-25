@@ -33,6 +33,7 @@ class department extends plugin
 	var $orig_dn= "";
 	var $is_administrational_unit= false;
 	var $gosaUnitTag= "";
+  var $initially_was_tagged = FALSE;
 
 	var $rec_dst=false;	// Destination for recursive move
 	var $rec_src=false;	// Source for recursive move 
@@ -79,6 +80,7 @@ class department extends plugin
 		/* Is administrational Unit? */
 		if ($dn != "new" && in_array_ics('gosaAdministrativeUnit', $this->attrs['objectClass'])){
 			$this->is_administrational_unit= true;
+      $this->initially_was_tagged = TRUE;
 		}
 	}
 
@@ -260,9 +262,10 @@ class department extends plugin
 
 		/* Add tag objects if needed */
 		if ($this->is_administrational_unit){
-      if(!in_array_ics("gosaAdministrativeUnit",$this->objectclasses)){
+      if(!$this->initially_was_tagged){
   			$this->objectclasses[]= "gosaAdministrativeUnit";
 			  $this->gosaUnitTag= "";
+        $this->initially_was_tagged = TRUE;
       }
 
 			if ($this->gosaUnitTag == ""){
@@ -289,7 +292,8 @@ class department extends plugin
 			}
 		}
 
-		plugin::save();
+    $this->skipTagging = TRUE;    
+    plugin::save();
 
 		/* Remove tag information if needed */
 		if (!$this->is_administrational_unit){
@@ -306,10 +310,8 @@ class department extends plugin
 				}
 			}
 			$this->attrs['objectClass']= $tmp;
-
-			if(!$has_unit_tag && isset($this->attrs['gosaUnitTag'])){
-				$this->attrs['gosaUnitTag']= array();
-			}
+		  $this->attrs['gosaUnitTag']= array();
+      $this->gosaUnitTag = "";
 		}
 
 		/* Write back to ldap */
