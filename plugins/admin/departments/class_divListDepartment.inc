@@ -91,6 +91,12 @@ class divListDepartment extends MultiSelectWindow
     $ui = get_userinfo();
     foreach($list as $key => $val) {
 
+      /* Reload list of available departments, if there is unknown department listed 
+       */
+      if(!isset($this->config->departments[trim($key)])){
+        $this->config->get_departments();
+      }
+
       $acl= get_permissions ($this->config->departments[$key], $ui->subtreeACL);
       $acl= get_module_permission($acl, "department", $this->config->departments[$key]);
 
@@ -100,10 +106,6 @@ class divListDepartment extends MultiSelectWindow
       if(chkacl($acl,"delete") == ""){
         $actions.= "<input class='center' type='image' src='images/edittrash.png'
           alt='"._("delete")."'   name='dep_del_%KEY%' title='"._("Delete this entry")."'>";
-      }
-
-      if(!isset($this->config->departments[trim($key)])){
-        $this->config->departments[trim($key)]="";
       }
 
       $non_empty="";
