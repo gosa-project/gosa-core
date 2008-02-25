@@ -358,7 +358,7 @@ class plugin
     }
 
     /* Handle tagging */
-    $this->tag_attrs(&$this->attrs);
+    $this->tag_attrs($this->attrs);
   }
 
 
@@ -964,7 +964,7 @@ class plugin
     }
   }
 
-  function tag_attrs($at, $dn= "", $tag= "", $show= false)
+  function tag_attrs(&$at, $dn= "", $tag= "", $show= false)
   {
     /* No dn? Self-operation... */
     if ($dn == ""){
@@ -1004,14 +1004,14 @@ class plugin
     }
 
     /* Remove tags that may already be here... */
-    remove_objectClass("gosaAdministrativeUnitTag", &$at);
+    remove_objectClass("gosaAdministrativeUnitTag", $at);
     if (isset($at['gosaUnitTag'])){
         unset($at['gosaUnitTag']);
     }
 
     /* Set tag? */
     if ($tag != ""){
-      add_objectClass("gosaAdministrativeUnitTag", &$at);
+      add_objectClass("gosaAdministrativeUnitTag", $at);
       $at['gosaUnitTag']= $tag;
     }
   }
