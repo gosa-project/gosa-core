@@ -567,6 +567,32 @@ $xml_msg.= "
   } 
 
 
+  public function send_data($header, $to, $data= array(), $answer_expected = FALSE)
+  {
+    $xml_message= "";
+
+    /* Prepare data */
+    foreach ($data as $key => $value){
+      $xml_message.= "<$key>$value</$key>";
+    }
+
+    /* Multiple targets? */
+    if (!is_array($to)){
+      $to_targets= array($to);
+    } else {
+      $to_targets= $to;
+    }
+
+    /* Build target strings */
+    $target ="";
+    foreach($to_targets as $to){
+      $target.= "<target>$to</target>";
+    }
+
+    return $this->_send("<xml><header>$header</header><source>GOSA</source>$target".$xml_message."</xml>",$answer_expected);
+  }
+
+
   /*! \brief  Returns an array containing all queued entries.
     @return Array All queued entries as an array.
    */
@@ -577,7 +603,6 @@ $xml_msg.= "
 
     if($this->connect()){
       $this->o_sock->write($data);
-
       if ($answer_expected){
         $str = trim($this->o_sock->read());
         $entries = $this->xml_to_array($str);
