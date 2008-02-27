@@ -607,7 +607,19 @@ $xml_msg.= "
       $xml_message.= "<$key>$value</$key>";
     }
 
-    return $d->_send("<xml><header>$header</header><source>GOSA</source><target>$to</target>".$xml_message."</xml>",$answer_expected);
+    /* Multiple targets? */
+    if (!is_array($to)){
+	$to_targets= array($to);
+    } else {
+	$to_targets= $to;
+    }
+
+    /* Build target strings */
+    foreach($to_target as $to){
+	$target.= "<target>$to</target>";
+    }
+
+    return $d->_send("<xml><header>$header</header><source>GOSA</source>$target".$xml_message."</xml>",$answer_expected);
   }
 
 
