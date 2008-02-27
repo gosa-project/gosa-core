@@ -536,11 +536,16 @@ $xml_msg.= "
       ".$attr." 
       </update>
       </xml>";
+
     if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str      = trim($this->o_sock->read());
       $entries = $this->xml_to_array($str);
       if(isset($entries['XML'])){
+        if(isset($entries['XML']['ERROR_STRING'])) {
+          $this->set_error($entries['XML']['ERROR_STRING']);
+          return(FALSE);
+        }
         return(TRUE);
       }
     }
