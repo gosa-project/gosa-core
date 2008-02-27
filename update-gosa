@@ -48,7 +48,11 @@ function get_classes($folder= ".")
   static $result= array();
 
   if ($base_dir == ""){
-    $base_dir= getcwd();
+    if ($folder == "."){
+      $base_dir= getcwd();
+    } else {
+      $base_dir= $folder;
+    }
   }
 
   $currdir=getcwd();

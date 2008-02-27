@@ -112,8 +112,9 @@ install-stamp:
 	sed -i "s%require(\"smarty/Smarty.class.php\");%require(\"${SMARTY_LOCATION}/Smarty.class.php\");%g" debian/gosa/usr/share/gosa/include/php_setup.inc
 
 	# Configure update location
-	sed -i 's%include/class_location.inc%/etc/gosa/classes%g' debian/gosa/usr/sbin/update-gosa
-	sed -i 's%$class_mapping= get_classes();%$class_mapping= get_classes("/usr/share/gosa");%g' debian/gosa/usr/sbin/update-gosa
+	sed -i 's%^define.*__FILE__.*%define ("GOSA_HOME", "/usr/share/gosa");%g' debian/gosa/usr/sbin/update-gosa
+	sed -i 's%GOSA_HOME.*include/class_location.inc%"/etc/gosa/classes%g' debian/gosa/usr/sbin/update-gosa
+	sed -i 's%class_mapping= get_classes();%class_mapping= get_classes("/usr/share/gosa");%g' debian/gosa/usr/sbin/update-gosa
 	sed -i 's%class_location.inc%/etc/gosa/classes%g' debian/gosa/usr/share/gosa/include/functions.inc
 
 	# Fix permissions
