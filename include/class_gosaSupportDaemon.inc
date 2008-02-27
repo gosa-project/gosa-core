@@ -92,8 +92,7 @@ class gosaSupportDaemon
       $this->o_sock->setEncryptionKey($this->s_encryption_key); 
       $this->is_connected = TRUE;
     }else{
-      $this->s_error = $this->o_sock->get_error();
-      $this->b_error = TRUE;
+      $this->set_error($this->o_sock->get_error());
       $this->disconnect();
     }
     return($this->is_connected);
@@ -119,6 +118,16 @@ class gosaSupportDaemon
   }
 
 
+  /*! \brief  Sets an error message, which can be returned with get_error().
+    @param  string  The Error message,
+   */
+  private function reset_error()
+  {
+    $this->b_error = FALSE;
+    $this->s_error = "";
+  }
+
+
   /*! \brief  Checks if an error occured.
     @return boolean returns TRUE or FALSE, whether there is an error or not.
    */
@@ -133,7 +142,9 @@ class gosaSupportDaemon
    */
   public function get_error()
   {
-    return($this->s_error);
+    $str = $this->s_error;
+    $str = preg_replace("/ /","&nbsp;",$str);
+    return($str);
   }
 
 
@@ -142,8 +153,7 @@ class gosaSupportDaemon
    */
   public function get_queued_entries($from=-1,$to=-1,$sort="timestamp DESC")
   {
-    $this->b_error = FALSE;
-    $this->s_error = "";
+    $this->reset_error();
     $ret = array();
 
     $xml_msg = "<xml>
@@ -193,8 +203,7 @@ $xml_msg.= "
       trigger_error("Requires an array as parameter.");
       return;
     }
-    $this->b_error = FALSE;
-    $this->s_error = "";
+    $this->reset_error();
 
     $ret = array();
 
@@ -241,8 +250,7 @@ $xml_msg.= "
       trigger_error("Requires an array as parameter.");
       return;
     }
-    $this->b_error = FALSE;
-    $this->s_error = "";
+    $this->reset_error();
 
     $ret = array();
 
@@ -290,8 +298,8 @@ $xml_msg.= "
       return;
     }
 
-    $this->b_error = FALSE;
-    $this->s_error = "";
+    $this->reset_error();
+
     $xml_msg = "<xml>
       <header>gosa_query_jobdb</header>
       <target>GOSA</target>
@@ -330,9 +338,8 @@ $xml_msg.= "
       trigger_error("Requires an integer as parameter.");
       return;
     }
+    $this->reset_error();
   
-    $this->b_error = FALSE;
-    $this->s_error = "";
     $ret = array();
     $xml_msg = "<xml>
       <header>gosa_query_jobdb</header>
@@ -371,8 +378,8 @@ $xml_msg.= "
       trigger_error("Requires an array as parameter.");
       return;
     }
-    $this->b_error = FALSE;
-    $this->s_error = "";
+
+    $this->reset_error();
 
     $ret = array();
 
@@ -392,8 +399,6 @@ $xml_msg.= "
     $xml_msg .= "</clause>
       </where>
       </xml>";
-    $this->b_error = FALSE;
-    $this->s_error = "";
 
     if($this->connect()){
       $this->o_sock->write($xml_msg);
@@ -414,8 +419,7 @@ $xml_msg.= "
    */
   public function remove_entry($id)
   {
-    $this->b_error = FALSE;
-    $this->s_error = "";
+    $this->reset_error();
 
     $xml_msg = "<xml>
       <header>gosa_delete_jobdb_entry</header>
@@ -498,8 +502,7 @@ $xml_msg.= "
    */
   public function update_entries($ids,$entry)
   {
-    $this->b_error = FALSE;
-    $this->s_error = "";
+    $this->reset_error();
     if(!is_array($ids)){
       trigger_error("Requires an array as first parameter.");
       return;
@@ -569,12 +572,12 @@ $xml_msg.= "
    */
   public function _send($data, $answer_expected= FALSE)
   {
-    $this->b_error = FALSE;
-    $this->s_error = "";
+    $this->reset_error();
     $ret = array();
 
     if($this->connect()){
       $this->o_sock->write($data);
+
       if ($answer_expected){
         $str = trim($this->o_sock->read());
         $entries = $this->xml_to_array($str);
