@@ -21,8 +21,8 @@
 
 Function overview:
 
-   __construct              - Create a new deamon handle. 
-   connect                  - Connect to deamon socket.
+   __construct              - Create a new daemon handle. 
+   connect                  - Connect to daemon socket.
    disconnect               - Disconnect from socket.
    set_error                - Sets a new error.
    is_error                 - Returns TRUE if there was an error.
@@ -54,10 +54,10 @@ class gosaSupportDaemon
 
 
   /*! \brief  Creates a new gosaSupportDaemon object.
-    @param string   Host    The Host where the deamon is running on.  
-    @param integer  Port    The port which the deamon use.
+    @param string   Host    The Host where the daemon is running on.  
+    @param integer  Port    The port which the daemon use.
     @param string   Key     The encryption string.
-    @param boolean  Connect Directly connect to deamon socket.
+    @param boolean  Connect Directly connect to daemon socket.
     @param float    Timeout The timelimit for all socket actions.
    */
   public function __construct($connect=TRUE,$timeout=0.2)
@@ -82,7 +82,7 @@ class gosaSupportDaemon
   }
 
 
-  /*! \brief  Establish deamon connection. 
+  /*! \brief  Establish daemon connection. 
     @return boolean Returns true if the connection was succesfully established. 
    */
   public function connect()
@@ -100,7 +100,7 @@ class gosaSupportDaemon
   }
 
 
-  /*! \brief  Disconnect from gosa deamon.
+  /*! \brief  Disconnect from gosa daemon.
    */
   public function disconnect()
   {
