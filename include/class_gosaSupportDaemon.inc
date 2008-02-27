@@ -168,7 +168,7 @@ $xml_msg.= "
       if(isset($entries['XML']) && is_array($entries['XML'])){
 
         /* Check if returned values represent a valid answer */
-        if($entries['XML']['HEADER'] == "answer"){
+        if(isset($entries['XML'])){
           
           /* Unset header tags */
           foreach(array("HEADER","SOURCE","TARGET") as $type){
@@ -579,7 +579,10 @@ $xml_msg.= "
         $str = trim($this->o_sock->read());
         $entries = $this->xml_to_array($str);
         if(isset($entries['XML']) && is_array($entries['XML'])){
-          $ret = $entries; 
+          $ret = $entries;
+          if(isset($entries['XML']['ERROR_STRING'])) {
+            $this->set_error($entries['XML']['ERROR_STRING']);
+          }
         }
       }
     }
@@ -601,14 +604,15 @@ $xml_msg.= "
 
     /* Multiple targets? */
     if (!is_array($to)){
-	$to_targets= array($to);
+      $to_targets= array($to);
     } else {
-	$to_targets= $to;
+      $to_targets= $to;
     }
 
     /* Build target strings */
-    foreach($to_target as $to){
-	$target.= "<target>$to</target>";
+    $target ="";
+    foreach($to_targets as $to){
+      $target.= "<target>$to</target>";
     }
 
     return $d->_send("<xml><header>$header</header><source>GOSA</source>$target".$xml_message."</xml>",$answer_expected);
