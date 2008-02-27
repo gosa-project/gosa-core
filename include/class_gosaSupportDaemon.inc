@@ -150,14 +150,6 @@ class gosaSupportDaemon
       <header>gosa_query_jobdb</header>
       <target>GOSA</target>
       <source>GOSA</source>
-      <where>
-      <clause>
-        <phrase>
-        <operator>ne</operator>
-        <HEADERTAG>*</HEADERTAG>
-        </phrase>
-      </clause>
-      </where>
       <orderby>".$sort."</orderby>";
 if($from != -1 && $to != -1){
 $xml_msg.= "
