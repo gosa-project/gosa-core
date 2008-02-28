@@ -14,12 +14,7 @@ class posixAccount extends plugin
 {
   /* Definitions */
   var $plHeadline= "UNIX";
-  var $plDescription= "This does something";
-
-  /* CLI vars */
-  var $cli_summary= "Manage users posix account";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
+  var $plDescription= "Edit users POSIX extensions";
 
   /* Plugin specific values */
   var $homeDirectory= "";

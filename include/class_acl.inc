@@ -4,7 +4,7 @@ class acl extends plugin
 {
   /* Definitions */
   var $plHeadline= "Access control";
-  var $plDescription= "This does something";
+  var $plDescription= "Manage access control lists";
 
   /* attribute list for save action */
   var $attributes= array('gosaAclEntry');

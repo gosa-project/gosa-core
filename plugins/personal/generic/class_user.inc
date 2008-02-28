@@ -14,7 +14,7 @@ class user extends plugin
 {
   /* Definitions */
   var $plHeadline= "Generic";
-  var $plDescription= "This does something";
+  var $plDescription= "Edit organizational user settings";
 
   /* Plugin specific values */
   var $base= "";

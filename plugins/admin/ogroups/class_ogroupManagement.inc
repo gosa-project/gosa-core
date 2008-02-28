@@ -22,7 +22,7 @@ class ogroupManagement extends plugin
 {
   /* Definitions */
   var $plHeadline= "Object groups";
-  var $plDescription= "This does something";
+  var $plDescription= "Manage object groups";
 
   /* attribute list for save action */
   var $attributes= array();

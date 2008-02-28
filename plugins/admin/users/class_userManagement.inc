@@ -22,7 +22,7 @@ class userManagement extends plugin
 {
   /* Plugin definitions */
   var $plHeadline= "Users";
-  var $plDescription= "This does something";
+  var $plDescription= "Manage users";
 
   /* Dialog attributes */
   var $usertab              = NULL;

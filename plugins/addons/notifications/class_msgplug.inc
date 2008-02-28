@@ -4,7 +4,7 @@ class msgplug extends plugin
 {
   /* Definitions */
   var $plHeadline= "Notifications";
-  var $plDescription= "This does something";
+  var $plDescription= "Send user notifications";
 
   /* attribute list for save action */
   var $attributes= array("target", "nmessage");

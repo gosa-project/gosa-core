@@ -4,7 +4,7 @@ class aclrole extends acl
 {
   /* Definitions */
   var $plHeadline= "Access control list templates";
-  var $plDescription= "This does something";
+  var $plDescription= "Edit ACL roles";
 
   /* attribute list for save action */
   var $attributes= array('gosaAclTemplate',"cn","description");

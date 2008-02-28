@@ -22,12 +22,7 @@ class departmentManagement extends plugin
 {
   /* Definitions */
   var $plHeadline= "Departments";
-  var $plDescription= "This does something";
-
-  /* CLI vars */
-  var $cli_summary= "Handling of LDAP subtrees";
-  var $cli_description= "Some longer text\nfor help";
-  var $cli_parameters= array("eins" => "Eins ist toll", "zwei" => "Zwei ist noch besser");
+  var $plDescription= "Manage Departments";
 
   /* Headpage attributes */
   var $last_dep_sorting= "invalid";

@@ -22,7 +22,7 @@ class groupManagement extends plugin
 {
   /* Definitions */
   var $plHeadline= "Groups";
-  var $plDescription= "This does something";
+  var $plDescription= "Manage POSIX groups";
 
   /* Dialog attributes */
   var $grouptab           = NULL;
