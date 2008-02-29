@@ -65,7 +65,6 @@
 		-->
 	     </script>
 	    </p>
-{$errors}
 	</div>
 	<div style='padding:10px;'>
 		<div style='float:left; color:red; font-weight:bold'>
@@ -85,6 +84,8 @@
 </div>
 
 <div style="clear:both"></div>
+
+{$errors}
 
 <!-- Place cursor in username field -->
 <script language="JavaScript" type="text/javascript">

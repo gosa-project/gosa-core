@@ -366,7 +366,7 @@ function ldap_login_user_htaccess ($username)
   /* Look for entry or realm */
   $ldap= $config->get_ldap_link();
   if (!preg_match("/Success/i", $ldap->error)){
-    msg_dialog::display(_("LDAP error"), sprintf(_('User login failed.').'<br><br>'._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
+    msg_dialog::display(_("LDAP error"), sprintf(_('User login failed.').'<br><br>'._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), FATAL_ERROR_DIALOG);
     $smarty= get_smarty();
     $smarty->display(get_template_path('headers.tpl'));
     echo "<body>".session::get('errors')."</body></html>";
@@ -375,7 +375,7 @@ function ldap_login_user_htaccess ($username)
   $ldap->search("(&(objectClass=gosaAccount)(uid=$username))", array("uid"));
   /* Found no uniq match? Strange, because we did above... */
   if ($ldap->count() != 1) {
-    msg_dialog::display(_("LDAP error"), _("Username / UID is not unique inside the LDAP tree. Please contact your Administrator."), ERROR_DIALOG);
+    msg_dialog::display(_("LDAP error"), _("Username / UID is not unique inside the LDAP tree. Please contact your Administrator."), FATAL_ERROR_DIALOG);
     return (NULL);
   }
   $attrs= $ldap->fetch();
@@ -404,7 +404,7 @@ function ldap_login_user ($username, $password)
   /* look through the entire ldap */
   $ldap = $config->get_ldap_link();
   if (!preg_match("/Success/i", $ldap->error)){
-    msg_dialog::display(_("LDAP error"), sprintf(_("User login failed.")."<br><br>"._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
+    msg_dialog::display(_("LDAP error"), sprintf(_("User login failed.")."<br><br>"._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), FATAL_ERROR_DIALOG);
     $smarty= get_smarty();
     $smarty->display(get_template_path('headers.tpl'));
     echo "<body>".session::get('errors')."</body></html>";
@@ -445,7 +445,7 @@ function ldap_login_user ($username, $password)
 
             /* found more than one matching id */
     default:
-            msg_dialog::display(_("Internal error"), _("Username / UID is not unique inside the LDAP tree. Please contact your Administrator."), ERROR_DIALOG);
+            msg_dialog::display(_("Internal error"), _("Username / UID is not unique inside the LDAP tree. Please contact your Administrator."), FATAL_ERROR_DIALOG);
             return (NULL);
   }
 
