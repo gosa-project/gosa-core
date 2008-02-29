@@ -64,7 +64,7 @@
 			<div style="errorMsgSeperator"></div>
 			<table style='width:100%' summary='' border=0>
 				<tr>
-					<td style='width:100%'>
+					<td style='width:100%;padding:7px; padding-bottom:14px'>
 						<b>{$s_Message}</b>
 						<br>
 					</td>
@@ -110,7 +110,7 @@
 
 			<table style='width:100%' summary='' border=0>
 				<tr>
-					<td style='width:100%'>
+					<td style='width:100%; padding:7px; padding-bottom:14px;'>
 						<b>{$s_Message}</b>
 						<br>
 					</td>
