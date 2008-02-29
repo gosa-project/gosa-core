@@ -126,7 +126,11 @@ class sambaAccount extends plugin
       $ldap->search ("(&(objectClass=sambaDomain)(sambaSID=$this->SID))",array("sambaAlgorithmicRidBase","sambaDomainName"));
       if ($ldap->count() != 0){
         $attrs= $ldap->fetch();
-        $this->ridBase= $attrs['sambaAlgorithmicRidBase'][0];
+        if(isset($attrs['sambaAlgorithmicRidBase'])){
+          $this->ridBase= $attrs['sambaAlgorithmicRidBase'][0];
+        } else {
+          $this->ridBase= $this->config->current['RIDBASE'];
+        }
         if ($this->sambaDomainName == ""){
           $this->sambaDomainName= $attrs['sambaDomainName'][0];
         }
