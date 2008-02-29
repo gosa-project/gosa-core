@@ -4,7 +4,7 @@
 #export DH_VERBOSE=1
 
 # Configure smarty location
-export SMARTY_LOCATION=/usr/share/php/smarty/libs
+export SMARTY_LOCATION=$(dpkg -L smarty | grep Smarty.class.php)
 
 build: patch 
 	#*************************************************
@@ -109,7 +109,7 @@ install-stamp:
 	sed -i 's%"CONFIG_TEMPLATE_DIR", "../contrib/"%"CONFIG_TEMPLATE_DIR", "/usr/share/doc/gosa/contrib/"%g' debian/gosa/usr/share/gosa/include/functions.inc 
 	cp include/smarty/plugins/block.render.php debian/smarty-render/usr/share/php/smarty/libs/plugins
 	rm -rf debian/gosa/usr/share/gosa/include/smarty; \
-	sed -i "s%require(\"smarty/Smarty.class.php\");%require(\"${SMARTY_LOCATION}/Smarty.class.php\");%g" debian/gosa/usr/share/gosa/include/php_setup.inc
+	sed -i "s%require(\"smarty/Smarty.class.php\");%require(\"${SMARTY_LOCATION}\");%g" debian/gosa/usr/share/gosa/include/php_setup.inc
 
 	# Configure update location
 	sed -i 's%^define.*__FILE__.*%define ("GOSA_HOME", "/usr/share/gosa");%g' debian/gosa/usr/sbin/update-gosa
