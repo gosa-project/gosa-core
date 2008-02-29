@@ -598,7 +598,59 @@ $xml_msg.= "
   }
 
 
-  /*! \brief  Returns an array containing all queued entries.
+  /* Allows simply appending a new DaemonEvent 
+   */
+  public function append($event)
+  {
+    if(!($event instanceof DaemonEvent)){
+      return(FALSE);
+    }
+  
+    $this->reset_error();
+
+    /* Add to queue if new 
+     */
+    if($event->is_new()){
+
+      if($event->get_type() == SCHEDULED_EVENT){
+        $action = $event->get_schedule_action();
+      }elseif($event->get_type() == TRIGGERED_EVENT){
+        $action = $event->get_schedule_action();
+      }else{
+        trigger_error("Unknown type of queue event given.");
+        return(FALSE);
+      }
+
+      /* Get event informations, like targets..
+       */
+      $targets    = $event->get_targets();
+      $data       = $event->save();
+
+      /* Append an entry for each target 
+       */
+      foreach($targets as $target){
+        $data['macaddress'] = $target;
+        $this->send_data($action,$target,$data,TRUE);
+
+        if($this->is_error()){
+          return(FALSE);
+        }
+      }
+      return(TRUE);
+    }else{
+
+      /* Updated edited entry.
+       */
+      $id                 = $event->get_id();
+      $data               = $event->save();
+      return($this->update_entries(array($id),$data));
+    }
+
+    return(FALSE);
+  }
+
+
+/*! \brief  Returns an array containing all queued entries.
     @return Array All queued entries as an array.
    */
   public function _send($data, $answer_expected= FALSE)
@@ -652,17 +704,17 @@ $xml_msg.= "
   }
 
 
-  static function ping($target)
-  {
-    if (tests::is_mac($target)){
+static function ping($target)
+{
+  if (tests::is_mac($target)){
     /* Get communication object */
-	$d= new gosaSupportDaemon(TRUE,0.5);
-	$answer= $d->_send("<xml><header>gosa_ping</header><source>GOSA</source><target>$target</target></xml>", TRUE);
-	return (count($answer) ? TRUE:FALSE);
-    }
-
-    return (FALSE);
+    $d= new gosaSupportDaemon(TRUE,0.5);
+    $answer= $d->_send("<xml><header>gosa_ping</header><source>GOSA</source><target>$target</target></xml>", TRUE);
+    return (count($answer) ? TRUE:FALSE);
   }
+
+  return (FALSE);
+}
 
 }
 
