@@ -547,16 +547,16 @@ class plugin
 
       /* Additional attributes */
       foreach ($add_attrs as $name => $value){
-        $command= preg_replace("/%$name/", $value, $command);
+        $command= preg_replace("/%$name( |$)/", "$value ", $command);
       }
 
       /* Walk through attribute list */
       foreach ($this->attributes as $attr){
         if (!is_array($this->$attr)){
-          $command= preg_replace("/%$attr/", $this->$attr, $command);
+          $command= preg_replace("/%$attr( |$)/", $this->$attr." ", $command);
         }
       }
-      $command= preg_replace("/%dn/", $this->dn, $command);
+      $command= preg_replace("/%dn( |$)/", $this->dn." ", $command);
 
       if (check_command($command)){
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
@@ -582,16 +582,16 @@ class plugin
 
       /* Additional attributes */
       foreach ($add_attrs as $name => $value){
-        $command= preg_replace("/%$name/", $value, $command);
+        $command= preg_replace("/%$name( |$)/", "$value ", $command);
       }
 
       /* Walk through attribute list */
       foreach ($this->attributes as $attr){
         if (!is_array($this->$attr)){
-          $command= preg_replace("/%$attr/", $this->$attr, $command);
+          $command= preg_replace("/%$attr( |$)/", $this->$attr." ", $command);
         }
       }
-      $command= preg_replace("/%dn/", $this->dn, $command);
+      $command= preg_replace("/%dn( |$)/", $this->dn." ", $command);
 
       if (check_command($command)){
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
@@ -617,21 +617,16 @@ class plugin
 
       /* Additional attributes */
       foreach ($add_attrs as $name => $value){
-        $command= preg_replace("/%$name/", $value, $command);
+        $command= preg_replace("/%$name( |$)/", "$value ", $command);
       }
 
       /* Walk through attribute list */
       foreach ($this->attributes as $attr){
         if (!is_array($this->$attr)){
-          $command= preg_replace("/%$attr/", $this->$attr, $command);
+          $command= preg_replace("/%$attr( |$)/", $this->$attr." ", $command);
         }
       }
-      $command= preg_replace("/%dn/", $this->dn, $command);
-
-      /* Additional attributes */
-      foreach ($add_attrs as $name => $value){
-        $command= preg_replace("/%$name/", $value, $command);
-      }
+      $command= preg_replace("/%dn( |$)/", $this->dn." ", $command);
 
       if (check_command($command)){
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
