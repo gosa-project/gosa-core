@@ -340,12 +340,12 @@ class CopyPasteHandler {
         $dns .= $entry['dn']."\n";
       }
       $smarty = get_smarty();
-      $smarty->assign("type","cut");
+      $smarty->assign("type","directly");
       $smarty->assign("Complete",false);
       $smarty->assign("AttributesToFix","&nbsp;");
       $smarty->assign("SubDialog","");
       $smarty->assign("objectDN" ,$dns);
-      $smarty->assign("message"  , sprintf(_("You are going to paste the cutted entry '%s'."), "<pre>".$dns."</pre>"));
+      $smarty->assign("message"  , sprintf(_("You are going to paste the following entries '%s'."), "<pre>".$dns."</pre>"));
       return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
     }
 
@@ -363,12 +363,12 @@ class CopyPasteHandler {
       }
       if($this->current){
         $smarty = get_smarty();
-        $smarty->assign("type","copy");
+        $smarty->assign("type","modified");
         $smarty->assign("Complete",false);
         $smarty->assign("AttributesToFix",$this->generateAttributesToFix());
         $smarty->assign("SubDialog",$this->current['object']->SubDialog);
         $smarty->assign("objectDN",$this->current['source_data']['dn']);
-        $smarty->assign("message", sprintf(_("You are going to paste the copied entry '%s'."), $this->current['source_data']['dn']));
+        $smarty->assign("message", sprintf(_("You are going to paste the following entry '%s'."), $this->current['source_data']['dn']));
         return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
       }
     }
