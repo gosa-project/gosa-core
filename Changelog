@@ -4,6 +4,7 @@ GOsa2 changelog
 * gosa 2.5.16
   - ridbase may be undefined in domain objects
   - Fixed postremove/-create/-modify parameter expansion
+  - Updated built in smarty to 2.6.19
 
 * gosa 2.5.15
   - Changed order of sys-action commandline parameters
