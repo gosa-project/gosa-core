@@ -1,21 +1,23 @@
 <?php
 /*
-   This code is part of GOsa (https://gosa.gonicus.de)
-   Copyright (C) 2003-2005  Cajus Pollmeier
-
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
-
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * This code is part of GOsa (http://www.gosa-project.org)
+ * Copyright (C) 2003-2008 GONICUS GmbH
+ * 
+ * ID: $$Id$$
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 /* Load required includes */
@@ -24,6 +26,11 @@ require_once ("functions.inc");
 require_once ("class_log.inc");
 header("Content-type: text/html; charset=UTF-8");
 
+
+/**
+ * Display the login page and exit().
+ *
+ */
 function displayLogin()
 {
   global $smarty,$message,$config,$ssl,$error_collector;
@@ -89,6 +96,10 @@ function displayLogin()
 }
 
 
+
+/*****************************************************************************
+ *                               M   A   I   N                               *
+ *****************************************************************************/
 
 /* Set error handler to own one, initialize time calculation
    and start session. */
@@ -412,7 +423,6 @@ if ($ssl != "" && $config->data['MAIN']['WARNSSL'] == 'true'){
 
 /* Translation of cookie-warning. Whether to display it, is determined by JavaScript */
 $smarty->assign ("cookies", "<b>"._("Warning").":<\/b> "._("Your browser has cookies disabled. Please enable cookies and reload this page before logging in!"));
-
 
 /* Generate server list */
 $servers= array();
