@@ -164,5 +164,6 @@ class msg_dialog
 		}
 		return($return);
 	}
+
 }
 ?>

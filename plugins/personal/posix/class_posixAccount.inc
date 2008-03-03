@@ -982,10 +982,10 @@ class posixAccount extends plugin
 
     /* must: homeDirectory */
     if ($this->homeDirectory == ""){
-      $message[]= _("The required field 'Home directory' is not set.");
+      $message[]= msgPool::required(_("Home directory"));
     }
     if (!tests::is_path($this->homeDirectory)){
-      $message[]= _("Please enter a valid path in 'Home directory' field.");
+      $message[]= msgPool::invalid(_("Home directory"), "", "", "/home/yourname" );
     }
 
     /* Check ID's if they are forced by user */
@@ -993,17 +993,17 @@ class posixAccount extends plugin
 
       /* Valid uid/gid? */
       if (!tests::is_id($this->uidNumber)){
-        $message[]= _("Value specified as 'UID' is not valid.");
+        $message[]= msgPool::invalid(_("UID"), $this->uidNumber, "/[0-9]/");
       } else {
         if ($this->uidNumber < $this->config->current['MINID']){
-          $message[]= _("Value specified as 'UID' is too small.");
+          $message[]= msgPool::toosmall(_("UID"), $this->config->current['MINID']);
         }
       }
       if (!tests::is_id($this->gidNumber)){
-        $message[]= _("Value specified as 'GID' is not valid.");
+        $message[]= msgPool::invalid(_("GID"), $this->gidNumber, "/[0-9]/");
       } else {
         if ($this->gidNumber < $this->config->current['MINID']){
-          $message[]= _("Value specified as 'GID' is too small.");
+          $message[]= msgPool::toosmall(_("GID"), $this->config->current['MINID']);
         }
       }
     }
@@ -1011,45 +1011,41 @@ class posixAccount extends plugin
     /* Check shadow settings, well I like spaghetties... */
     if ($this->activate_shadowMin){
       if (!tests::is_id($this->shadowMin)){
-        $message[]= _("Value specified as 'shadowMin' is not valid.");
+        $message[]= msgPool::invalid(_("shadowMin"), $this->shadowMin, "/[0-9]/");
       }
     }
     if ($this->activate_shadowMax){
       if (!tests::is_id($this->shadowMax)){
-        $message[]= _("Value specified as 'shadowMax' is not valid.");
+        $message[]= msgPool::invalid(_("shadowMax"), $this->shadowMax, "/[0-9]/");
       }
     }
     if ($this->activate_shadowWarning){
       if (!tests::is_id($this->shadowWarning)){
-        $message[]= _("Value specified as 'shadowWarning' is not valid.");
+        $message[]= msgPool::invalid(_("shadowWarning"), $this->shadowWarning, "/[0-9]/");
       }
       if (!$this->activate_shadowMax){
-        $message[]= _("'shadowWarning' without 'shadowMax' makes no sense.");
+        $message[]= msgPool::depends("shadowWarning", "shadowMax");
       }
       if ($this->shadowWarning > $this->shadowMax){
-        $message[]= _("Value specified as 'shadowWarning' should be smaller than 'shadowMax'.");
+        $message[]= msgPool::smaller("shadowWarning", "shadowMax");
       }
       if ($this->activate_shadowMin && $this->shadowWarning < $this->shadowMin){
-        $message[]= _("Value specified as 'shadowWarning' should be greater than 'shadowMin'.");
+        $message[]= msgPool::bigger("shadowWarning", "shadowMin");
       }
     }
     if ($this->activate_shadowInactive){
       if (!tests::is_id($this->shadowInactive)){
-        $message[]= _("Value specified as 'shadowInactive' is not valid.");
+        $message[]= msgPool::invalid(_("shadowInactive"), $this->shadowInactive, "/[0-9]/");
       }
       if (!$this->activate_shadowMax){
-        $message[]= _("'shadowInactive' without 'shadowMax' makes no sense.");
+        $message[]= msgPool::depends("shadowInactive", "shadowMax");
       }
     }
     if ($this->activate_shadowMin && $this->activate_shadowMax){
       if ($this->shadowMin > $this->shadowMax){
-        $message[]= _("Value specified as 'shadowMin' should be smaller than 'shadowMax'.");
+        $message[]= msgPool::smaller("shadowMin", "shadowMax");
       }
     }
-
-    //  if(empty($this->gosaDefaultPrinter)){
-    //    $message[]= _("You need to specify a valid default printer.");
-    //  }
 
     return ($message);
   }
@@ -1059,48 +1055,48 @@ class posixAccount extends plugin
   {
     $message = plugin::multiple_check();
     if ($this->homeDirectory == "" && in_array("homeDirectory",$this->multi_boxes)){
-      $message[]= _("The required field 'Home directory' is not set.");
+      $message[]= msgPool::required(_("Home directory"));
     }
     if (!tests::is_path($this->homeDirectory) && in_array("homeDirectory",$this->multi_boxes)){
-      $message[]= _("Please enter a valid path in 'Home directory' field.");
+      $message[]= msgPool::invalid(_("Home directory"), "", "", "/home/yourname" );
     }
 
     /* Check shadow settings, well I like spaghetties... */
     if ($this->activate_shadowMin && in_array("activate_shadowMin",$this->multi_boxes)){
       if (!tests::is_id($this->shadowMin)){
-        $message[]= _("Value specified as 'shadowMin' is not valid.");
+        $message[]= msgPool::invalid(_("shadowMin"), $this->shadowMin, "/[0-9]/");
       }
     }
     if ($this->activate_shadowMax && in_array("activate_shadowMax",$this->multi_boxes)){
       if (!tests::is_id($this->shadowMax)){
-        $message[]= _("Value specified as 'shadowMax' is not valid.");
+        $message[]= msgPool::invalid(_("shadowMax"), $this->shadowMax, "/[0-9]/");
       }
     }
     if ($this->activate_shadowWarning && in_array("activate_shadowWarning",$this->multi_boxes)){
       if (!tests::is_id($this->shadowWarning)){
-        $message[]= _("Value specified as 'shadowWarning' is not valid.");
+        $message[]= msgPool::invalid(_("shadowWarning"), $this->shadowWarning, "/[0-9]/");
       }
       if (!$this->activate_shadowMax && in_array("activate_shadowMax",$this->multi_boxes)){
-        $message[]= _("'shadowWarning' without 'shadowMax' makes no sense.");
+        $message[]= msgPool::depends("shadowWarning", "shadowMax");
       }
       if ($this->shadowWarning > $this->shadowMax && in_array("activate_shadowWarning",$this->multi_boxes)){
-        $message[]= _("Value specified as 'shadowWarning' should be smaller than 'shadowMax'.");
+        $message[]= msgPool::smaller("shadowWarning", "shadowMax");
       }
       if ($this->activate_shadowMin && $this->shadowWarning < $this->shadowMin && in_array("activate_shadowMin",$this->multi_boxes)){
-        $message[]= _("Value specified as 'shadowWarning' should be greater than 'shadowMin'.");
+        $message[]= msgPool::bigger("shadowWarning", "shadowMin");
       }
     }
     if ($this->activate_shadowInactive && in_array("activate_shadowInactive",$this->multi_boxes)){
       if (!tests::is_id($this->shadowInactive)){
-        $message[]= _("Value specified as 'shadowInactive' is not valid.");
+        $message[]= msgPool::invalid(_("shadowInactive"), $this->shadowInactive, "/[0-9]/");
       }
       if (!$this->activate_shadowMax && in_array("activate_shadowMax",$this->multi_boxes)){
-        $message[]= _("'shadowInactive' without 'shadowMax' makes no sense.");
+        $message[]= msgPool::depends("shadowInactive", "shadowMax");
       }
     }
     if ($this->activate_shadowMin && $this->activate_shadowMax && in_array("activate_shadowMin",$this->multi_boxes)){
       if ($this->shadowMin > $this->shadowMax){
-        $message[]= _("Value specified as 'shadowMin' should be smaller than 'shadowMax'.");
+        $message[]= msgPool::smaller("shadowMin", "shadowMax");
       }
     }
 

@@ -1361,15 +1361,8 @@ function show_errors($message)
 
   /* Assemble the message array to a plain string */
   foreach ($message as $error){
-    if ($complete == ""){
-      $complete= $error;
-    } else {
-      $complete= "$error<br>$complete";
-    }
+    msg_dialog::display(_("Error"), $error, ERROR_DIALOG);
   }
-
-  /* Fill ERROR variable with nice error dialog */
-  msg_dialog::display(_("Error"), $complete, ERROR_DIALOG);
 }
 
 
