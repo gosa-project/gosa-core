@@ -592,7 +592,7 @@ class ogroup extends plugin
     }
     
     if($ldap->count() !=0){
-      $message[]= _("There is already an object with this cn.");
+      $message[]= msgPool::duplicated(_("Name"));
     } 
 
     /* Set new acl base */
@@ -602,12 +602,12 @@ class ogroup extends plugin
 
     /* must: cn */
     if ($this->cn == ""){
-      $message[]= "The required field 'Name' is not set.";
+      $message[]= msgPool::required(_("Name"));
     }
 
     /* To many different object types? */
     if (strlen($this->gosaGroupObjects) > 4){
-      $message[]= _("You can combine two different object types at maximum only!");
+      $message[]= _("You can combine two different object types at maximum, only!");
     }
 
     return ($message);

@@ -524,7 +524,7 @@ class group extends plugin
   
     /* If more than max users are found, display a message to warn the user */
     if($i == $MaxUser){
-      msg_dialog::display(_("Configuration error"), sprintf(_("Search returned too many results. Not displaying more than %s entries."), $MaxUser), ERROR_DIALOG);
+      msg_dialog::display(_("Configuration error"), sprintf(_("Search returned too many results. Not displaying more than %s entries!"), $MaxUser), ERROR_DIALOG);
     }
     
     /* Sort lists */
@@ -845,12 +845,16 @@ class group extends plugin
 
     /* must: cn */
     if ($this->cn == "" && $this->acl_is_writeable("cn")){
-      $message[]= "The required field 'Name' is not set.";
+      $message[]= msgPool::required(_("Name"));
     }
 
     /* Check for valid input */
     if (!tests::is_uid($this->cn)){
-      $message[]= _("The field 'Name' contains invalid characters. Lowercase, numbers and dashes are allowed.");
+      if (strict_uid_mode()){
+        $message[]= msgPool::invalid(_("Name"), $this->cn, "/[a-z0-9_-]/");
+      } else {
+        $message[]= msgPool::invalid(_("Name"), $this->cn, "/[a-z0-9_-]/i");
+      }
     }
 
     if($this->allowGroupsWithSameNameInOtherSubtrees == true){
@@ -861,7 +865,7 @@ class group extends plugin
         $ldap->cd(get_groups_ou().$this->base);
         $ldap->ls("(&(|(objectClass=gosaGroupOfNames)(objectClass=posixGroup))(cn=$this->cn))",get_groups_ou().$this->base,array("cn"));
         if ($ldap->count() != 0){
-          $message[]= _("Value specified as 'Name' is already used.");
+          $message[]= msgPool::duplicated(_("Name"));
         }
       }
 
@@ -875,14 +879,14 @@ class group extends plugin
 
         /* New entry? */
         if ($this->dn == 'new'){
-          $message[]= _("Value specified as 'Name' is already used.");
+          $message[]= msgPool::duplicated(_("Name"));
         }
 
         /* Moved? */
         elseif ($new_dn != $this->orig_dn){
           $ldap->fetch();
           if ($ldap->getDN() != $this->orig_dn){
-            $message[]= _("Value specified as 'Name' is already used.");
+            $message[]= msgPool::duplicated(_("Name"));
           }
         }
       }
@@ -891,10 +895,10 @@ class group extends plugin
     /* Check ID */
     if ($this->force_gid == "1"){
       if (!tests::is_id($this->gidNumber)){
-        $message[]= _("Value specified as 'GID' is not valid.");
+        $message[]= msgPool::invalid(_("GID"), $this->gidNumber, "/[0-9]/");
       } else {
         if ($this->gidNumber < $this->config->current['MINID']){
-          $message[]= _("Value specified as 'GID' is too small.");
+          $message[]= msgPool::toosmall(_("GID"), $this->config->current['MINID']);
         }
 
       }

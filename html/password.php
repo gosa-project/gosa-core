@@ -195,7 +195,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])){
 	  $message[]= _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
   } else {
 	  if ($_POST['new_password'] == ""){
-		  $message[]= _("The password you've entered as 'New password' is empty.");
+      $message[]= msgPool::required(_("New password"));
 	  }
   }
 
@@ -213,10 +213,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])){
   }
 
   /* Validate */
-  if (!ereg("^[A-Za-z0-9_.-]+$", $uid)){
-	  $message[]= _("Please specify a valid username!");
+  if (!tests::is_uid($uid)){
+	  $message[]= msgPool::invalid(_("Login"));
   } elseif (mb_strlen($_POST["current_password"], 'UTF-8') == 0){
-    $message[]= _("Please specify your password!");
+    $message[]= msgPool::required(_("Current password"));
   } else {
 
     /* Do we have the selected user somewhere? */

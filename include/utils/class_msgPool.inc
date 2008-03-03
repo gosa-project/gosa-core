@@ -3,6 +3,18 @@
 class msgPool
 {
 
+  public static function reserved($name)
+  {
+    return (sprintf(_("The field '%s' contains a reserved keyword!"), $name));
+  }
+
+
+  public static function cmdnotfound($type, $plugin)
+  {
+    return (sprintf(_("Command specified as %s hook for plugin '%s' does not exist!"), $type, $plugin));
+  }
+
+
   public static function toobig($name, $min= "")
   {
     if ($min == ""){
@@ -69,7 +81,7 @@ class msgPool
         if (preg_match("$regex", $currentChar)){
           $result.= $currentChar;
         } else {
-          $result.= "<font style='color:red;'>".htmlentities($currentChar)."</font>";
+          $result.= "<font style='color:red;text-decoration:underline;'>".htmlentities($currentChar)."</font>";
           $mismatch.= $currentChar;
         }
       }

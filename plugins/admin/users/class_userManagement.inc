@@ -236,7 +236,7 @@ class userManagement extends plugin
 
           /* Empty password is not permitted by default. */
           if ($_POST['new_password'] == ""){
-            $message[]= _("The password you've entered as 'New password' is empty.");
+            msgPool::required(_("New password"));
           }
         }
 
@@ -725,13 +725,13 @@ class userManagement extends plugin
     if (isset($_POST['template_continue'])){
       $message = array();
       if(!isset($_POST['template']) || (empty($_POST['template']))){
-        $message[] = _("Please select a valid template.");
+        $message[]= msgPool::invalid(_("Template"));
       }
       if(!isset($_POST['sn']) || (empty($_POST['sn']))){
-        $message[]= _("The required field 'Name' is not set.");
+        $message[]= msgPool::required(_("Name"));
       }
       if(!isset($_POST['givenName']) || (empty($_POST['givenName']))){
-        $message[]= _("The required field 'Given name' is not set.");
+        $message[]= msgPool::required(_("Given name"));
       }
     
       /* Show error message / continue editing */
@@ -806,10 +806,10 @@ class userManagement extends plugin
       /* Check for requred values */
       $message= array();
       if ($this->sn == "") {
-        $message[]= _("The required field 'Name' is not set.");
+        $message[]= msgPool::required(_("Name"));
       }
       if ($this->givenName == "") {
-        $message[]= _("The required field 'Given name' is not set.");
+        $message[]= msgPool::required(_("Given name"));
       }
 
       /* Check if dn is used */
@@ -818,7 +818,7 @@ class userManagement extends plugin
       $ldap->cd ($dn);
       $ldap->search ("(&(sn=".normalizeLdap($this->sn).")(givenName=".normalizeLdap($this->givenName)."))", array("givenName"));
       if ($ldap->count () != 0){
-        $message[]= _("A person with the choosen name is already used in this tree.");
+        msgPool::duplicated(_("Name"));
       }
 
       /* Show error message / continue editing */

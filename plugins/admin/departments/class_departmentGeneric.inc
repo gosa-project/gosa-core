@@ -243,31 +243,33 @@ class department extends plugin
 		$ldap= $this->config->get_ldap_link();
     $ldap->ls ("(&(ou=".$this->ou.")(objectClass=organizationalUnit))", $this->base, array('dn'));
     if ($this->orig_dn == "new" && $ldap->count()){
-			$message[]= _("Department with that 'Name' already exists.");
+			$message[]= msgPool::duplicated(_("Name"));
 		} elseif ($this->orig_dn != $this->dn && !($attrs === FALSE)){
-			$message[]= _("Department with that 'Name' already exists.");
+			$message[]= msgPool::duplicated(_("Name"));
 		}
 
 		/* All required fields are set? */
 		if ($this->ou == ""){
 			$message[]= _("Required field 'Name' is not set.");
+			$message[]= msgPool::required(_("Name"));
 		}
 		if ($this->description == ""){
 			$message[]= _("Required field 'Description' is not set.");
+			$message[]= msgPool::required(_("Description"));
 		}
 
     if(tests::is_department_name_reserved($this->ou,$this->base)){
-      $message[]= sprintf(_("The field 'Name' contains the reserved word '%s'. Please choose another name."),$this->ou);
+      $message[]= msgPool::reserved(_("Name"));
     }
 
 		if (preg_match ('/[#+:=>\\\\\/]/', $this->ou)){
-			$message[]= _("The field 'Name' contains invalid characters.");
+			$message[]= msgPool::invalid(_("Name"), $this->ou, "/[^#+:=>\\\\\/]/");
 		}
 		if (!tests::is_phone_nr($this->telephoneNumber)){
-			$message[]= _("The field 'Phone' contains an invalid phone number.");
+			$message[]= msgPool::invalid(_("Phone"), $this->telephoneNumber, "/[\/0-9 ()+*-]/");
 		}
 		if (!tests::is_phone_nr($this->facsimileTelephoneNumber)){
-			$message[]= _("The field 'Fax' contains an invalid phone number.");
+			$message[]= msgPool::invalid(_("Fax"), $this->facsimileTelephoneNumber, "/[\/0-9 ()+*-]/");
 		}
 
 		return $message;

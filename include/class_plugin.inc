@@ -431,8 +431,7 @@ class plugin
     if ($command != ""){
 
       if (!check_command($command)){
-        $message[]= sprintf(_("Command '%s', specified as CHECK hook for plugin '%s' doesn't seem to exist."), $command,
-                            get_class($this));
+        $message[]= msgPool::cmdnotfound("CHECK", get_class($this));
       } else {
 
         /* Generate "ldif" for check hook */
@@ -485,7 +484,7 @@ class plugin
       $current_csn = getEntryCSN($this->dn);
       if($current_csn != $this->entryCSN && !empty($this->entryCSN) && !empty($current_csn)){
         $this->entryCSN = $current_csn;
-        $message[] = _("The object has changed since opened in GOsa. Please ensure that nobody has done serious changes that may get lost   if you save this entry.");
+        $message[] = _("The object has changed since opened in GOsa. All changes that may be done by others get lost if you save this entry!");
       }
     }
     return ($message);
@@ -618,7 +617,7 @@ class plugin
 
         exec($command);
       } else {
-        $message= sprintf(_("Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."), $command, get_class($this));
+        $message[]= msgPool::cmdnotfound("POSTCREATE", get_class($this));
         msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
       }
     }
@@ -650,7 +649,7 @@ class plugin
 
         exec($command);
       } else {
-        $message= sprintf(_("Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."), $command, get_class($this));
+        $message[]= msgPool::cmdnotfound("POSTMODIFY", get_class($this));
         msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
       }
     }
@@ -681,7 +680,7 @@ class plugin
 
         exec($command);
       } else {
-        $message= sprintf(_("Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."), $command, get_class($this));
+        $message[]= msgPool::cmdnotfound("POSTREMOVE", get_class($this));
         msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
       }
     }

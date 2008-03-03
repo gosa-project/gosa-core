@@ -82,7 +82,7 @@ if (!$remove_lock){
 
         /* Empty password is not permitted by default. */
         if ($_POST['new_password'] == ""){
-          $message[]= _("The password you've entered as 'New password' is empty.");
+          $message[]= msgPool::required(_("New password"));
         }
       }
 

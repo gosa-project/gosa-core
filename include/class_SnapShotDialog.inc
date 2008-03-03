@@ -146,7 +146,7 @@ class SnapShotDialog extends plugin
 		$message = plugin::check();
 		if(!$this->display_restore_dialog){
 			if(empty($this->CurrentDescription)){
-				$message[]  = _("Please specify a valid description for this snapshot.");
+        $message[]= msgPool::invalid(_("Description"));
 			}
 		}
 		return($message);
