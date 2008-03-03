@@ -43,7 +43,7 @@ class msgPool
 
   public static function duplicated($name)
   {
-    return (sprintf(_("There is already an entry named '%s' in the system!"), $name));
+    return (sprintf(_("There is already an entry with this '%s' attribute in the system!"), $name));
   }
 
 
