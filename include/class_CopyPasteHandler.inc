@@ -15,6 +15,12 @@ class CopyPasteHandler {
 
   /* The dn of the last edited object */
   var $lastdn      = "";
+  
+  var $disallowed_objects = array();
+  var $objects_to_fix     = array();
+  var $clean_objects      = array();
+  var $require_update     = FALSE;
+
 
 
   /* Create CP handler  */
@@ -61,6 +67,7 @@ class CopyPasteHandler {
       $tmp['tab_object']= $tab_object;
       $tmp['tab_acl_category']= $tab_acl_category;
       $this->queue[]    = $tmp; 
+      $this->require_update = TRUE;
     }
   }
 
@@ -72,6 +79,7 @@ class CopyPasteHandler {
   function cleanup_queue()
   {
     $this->current = FALSE;
+    $this->require_update = TRUE;
     $this->setvar_array = array();
 
     /* Remove all entries from queue */  
@@ -185,51 +193,42 @@ class CopyPasteHandler {
 
 
   /* Paste one entry from queue */
-  function load_entry_from_queue()
+  function load_entry_from_queue($entry)
   {
+    if(!isset($entry['tab_class'])){
+      return(array());
+    }
 
-    /* Save posted variables, handle dialog posts like 'cancel' */
-    $this->save_object();
 
-    /* If there is currently no object pasted 
-     *  create new object and prepare object to be pasted
-     */
-    if(!$this->current && $this->entries_queued()){
-      $key    = key($this->queue);
-      $entry  = $this->queue[$key];
-      $tab_c = $entry['tab_class'];
-      $tab_o = $entry['tab_object'];
-      $tab_a = $entry['tab_acl_category'];
+    $tab_c = $entry['tab_class'];
+    $tab_o = $entry['tab_object'];
+    $tab_a = $entry['tab_acl_category'];
 
-      if($entry['method'] == "copy"){
-        $entry['object']      = new $tab_c($this->config,$this->config->data['TABS'][$tab_o],"new",$tab_a);
-      }else{
-        $entry['object']      = new $tab_c($this->config,$this->config->data['TABS'][$tab_o],$entry['dn'],$tab_a);
-      }
+    if($entry['method'] == "copy"){
+      $entry['object']      = new $tab_c($this->config,$this->config->data['TABS'][$tab_o],"new",$tab_a);
+    }else{
+      $entry['object']      = new $tab_c($this->config,$this->config->data['TABS'][$tab_o],$entry['dn'],$tab_a);
+    }
 
-      $entry['source_data'] = $this->load_attributes_from_hdd($entry['file_name']);
+    $entry['source_data'] = $this->load_attributes_from_hdd($entry['file_name']);
 
-      if($entry['method'] == "copy"){
+    if($entry['method'] == "copy"){
 
-        /* Prepare each plugin of this tab object to be posted */
-        foreach($entry['object']->by_object as $name => $obj){
+      /* Prepare each plugin of this tab object to be posted */
+      foreach($entry['object']->by_object as $name => $obj){
 
-          /* Prepare every single class, to be copied  */
-          $entry['object']->by_object[$name]->PrepareForCopyPaste($entry['source_data']);
+        /* Prepare every single class, to be copied  */
+        $entry['object']->by_object[$name]->PrepareForCopyPaste($entry['source_data']);
 
-          /* handle some special vars */
-          foreach(array("is_account") as $attr){
-            if(isset($entry['source_data'][$attr])){
-              $entry['object']->by_object[$name]->$attr = $entry['source_data'][$attr];
-            }
+        /* handle some special vars */
+        foreach(array("is_account") as $attr){
+          if(isset($entry['source_data'][$attr])){
+            $entry['object']->by_object[$name]->$attr = $entry['source_data'][$attr];
           }
         }
       }
-
-      /* Assign created object as current */
-      $this->current = $entry;
-      unset($this->queue[$key]);
     }
+    return($entry);
   }
 
 
@@ -260,70 +259,105 @@ class CopyPasteHandler {
   {
     $ui = get_userinfo();
     $type = $this->current['method'];
-    if($type == "cut"){
-      if(isset($_POST['PerformCopyPaste'])){
-        while($this->entries_queued()){
-          $this->load_entry_from_queue();      
-          $this->_update_vars();
 
-          $msgs = $this->check();
-          $acl = $ui->get_category_permissions($this->current['dn'], $this->current['tab_acl_category']);
- 
-          /* Check permissions */ 
-          if(!preg_match("/((c|w)|(w|c))/",$acl)){
-            msg_dialog::display(_("Error"), sprintf(_("You have no permission to save object '%s'."), $this->current['dn']), ERROR_DIALOG);
-          }elseif(count ($msgs) ){
-            foreach( $msgs as $msg){
-              msg_dialog::display(_("Error"), $msg, ERROR_DIALOG);
-            }
-          }else{
+    /* Check which entries can be pasted directly.
+     * Create a list of all entries that can be pasted directly.
+     */
+    if($this->require_update){
+      $this->clean_objects      = array();
+      $this->objects_to_fix     = array();
+      $this->disallowed_objects = array();
 
-            /* Load next queue entry */
-            $this->lastdn = $this->current['object']->dn;
-            $this->current['object']->save();
-          }
+      /* Put each queued object in one of the above arrays 
+       */
+      foreach($this->queue as $key => $entry){
+  
+        /* Update entries on demand 
+         */
+        if(!isset($entry['object'])){
+          $entry = $this->load_entry_from_queue($entry);
+          $entry = $this->_update_vars($entry);
+          $this->queue[$key] = $entry;
+        }
+        $msgs = $entry['object']->check();
+        $acl = $ui->get_category_permissions($entry['dn'], $entry['tab_acl_category']);
 
-          $this->current =FALSE;
+        /* Check permissions */
+        if(!preg_match("/((c|w)|(w|c))/",$acl)){
+          $this->disallowed_objects[$key] = $entry;
+        }elseif(!count($msgs)){
+          $this->clean_objects[$key]  = $entry;
+        }else{
+          $this->objects_to_fix[$key] = $entry;
         }
       }
-      if($this->current){
+      $this->require_update = FALSE;
+    }
 
-        $dns = $this->current['dn']."\n";
-        foreach($this->queue as $entry){
-          $dns .= $entry['dn']."\n";
+    /* Save objects that can be pasted directly 
+     */
+    if(isset($_POST['PerformCopyPaste']) && count($this->clean_objects)){
+      $this->save_object();
+      $this->current = FALSE;
+      foreach($this->clean_objects as $key => $entry){
+
+        /* Remove from queue -> avoid saving twice */
+        unset($this->queue[$key]);
+        unset($this->clean_objects[$key]);
+
+        /* Load next queue entry */
+        $this->current = $entry;
+        $this->lastdn = $this->current['object']->dn;
+        $this->current['object']->save();
+        $this->current = FALSE;
+      } 
+    }
+
+    /* Save edited entry and force loading new one 
+     */
+    if(isset($_POST['PerformCopyPaste']) && $this->current){
+      $this->current['object']->saveCopyDialog();
+      $msgs = $this->check();
+
+      /* Load next queue entry */
+      if(!count($msgs)){
+        $this->lastdn = $this->current['object']->dn;
+        $this->current['object']->save();
+        $this->current = FALSE;
+      }else{
+        foreach( $msgs as $msg){
+          msg_dialog::display(_("Error"), $msg, ERROR_DIALOG);
         }
-
-        $smarty = get_smarty();
-        $smarty->assign("type","cut");
-        $smarty->assign("Complete",false);
-        $smarty->assign("AttributesToFix","&nbsp;");
-        $smarty->assign("SubDialog",$this->current['object']->SubDialog);
-        $smarty->assign("objectDN"     ,$dns);
-        $smarty->assign("message", sprintf(_("You are going to paste the cutted entry '%s'."), "<pre>".$dns."</pre>"));
-        return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
       }
     }
-    if($type == "copy"){
-      if(isset($_POST['PerformCopyPaste'])){
-        $this->_update_vars();
-        $msgs = $this->check();
+      
+    /* Display a list of all pastable entries 
+     */
+    if(count($this->clean_objects)){
+      $dns = "";
+      foreach($this->clean_objects as $entry){
+        $dns .= $entry['dn']."\n";
+      }
+      $smarty = get_smarty();
+      $smarty->assign("type","cut");
+      $smarty->assign("Complete",false);
+      $smarty->assign("AttributesToFix","&nbsp;");
+      $smarty->assign("SubDialog","");
+      $smarty->assign("objectDN" ,$dns);
+      $smarty->assign("message"  , sprintf(_("You are going to paste the cutted entry '%s'."), "<pre>".$dns."</pre>"));
+      return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
+    }
 
-        $acl = $ui->get_category_permissions($this->current['dn'], $this->current['tab_acl_category']);
- 
-        /* Check permissions */ 
-        if(!preg_match("/((c|w)|(w|c))/",$acl)){
-          msg_dialog::display(_("Error"), sprintf(_("You have no permission to copy and paste object '%s'!"),$this->current['dn']), ERROR_DIALOG);
-        }elseif(count ($msgs) ){
-          foreach( $msgs as $msg){
-            msg_dialog::display(_("Error"), $msg, ERROR_DIALOG);
-          }
-        }else{
-          $this->current['object']->save();
-          $this->lastdn = $this->current['object']->dn;
-          $this->current =FALSE;
-
-          /* Load next queue entry */
-          $this->load_entry_from_queue();
+    /* Display a list of all pastable entries 
+     */
+    if($this->current || count($this->objects_to_fix)){
+      $this->save_object(); 
+      if(!$this->current){
+        $key = key($this->objects_to_fix);
+        if(isset($this->objects_to_fix[$key])){
+          $this->current = $this->objects_to_fix[$key];
+          unset($this->objects_to_fix[$key]);
+          unset($this->queue[$key]); 
         }
       }
       if($this->current){
@@ -332,11 +366,12 @@ class CopyPasteHandler {
         $smarty->assign("Complete",false);
         $smarty->assign("AttributesToFix",$this->generateAttributesToFix());
         $smarty->assign("SubDialog",$this->current['object']->SubDialog);
-        $smarty->assign("objectDN"     ,$this->current['source_data']['dn']);
+        $smarty->assign("objectDN",$this->current['source_data']['dn']);
         $smarty->assign("message", sprintf(_("You are going to paste the copied entry '%s'."), $this->current['source_data']['dn']));
         return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
       }
     }
+    return("");
   }
 
 
@@ -357,12 +392,6 @@ class CopyPasteHandler {
     if(isset($_POST['abort_all_cut-copy_operations'])){
       $this->cleanup_queue();
       $this->current = FALSE;
-    }
-
-    /* Assign posted var to all tabs
-     */
-    if($this->current){
-      $this->current['object']->saveCopyDialog();
     }
   }
 
@@ -387,28 +416,26 @@ class CopyPasteHandler {
 
 
   /* Update current object attributes, collected via SetVar */
-  function _update_vars()
+  function _update_vars($entry)
   {
-    if($this->current){
+    /* Update all attributes specified with SetVar */
+    foreach($this->setvar_array as $name => $value){
+      if(isset($entry['object']->$name)){
+        $entry['object']->$name = $value;
+      }
+    }
+
+    /* Walk through tabs */
+    foreach($entry['object']->by_object as $key => $obj){
 
       /* Update all attributes specified with SetVar */
       foreach($this->setvar_array as $name => $value){
-        if(isset($this->current['object']->$name)){
-          $this->current['object']->$name = $value;
-        }
-      }
-
-      /* Walk through tabs */
-      foreach($this->current['object']->by_object as $key => $obj){
-
-        /* Update all attributes specified with SetVar */
-        foreach($this->setvar_array as $name => $value){
-          if(isset($this->current['object']->by_object[$key]->$name)){
-            $this->current['object']->by_object[$key]->$name = $value;
-          }
+        if(isset($entry['object']->by_object[$key]->$name)){
+          $entry['object']->by_object[$key]->$name = $value;
         }
       }
     }
+    return($entry);
   }
 
 
