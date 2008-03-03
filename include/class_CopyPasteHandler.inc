@@ -276,7 +276,6 @@ class CopyPasteHandler {
          */
         if(!isset($entry['object'])){
           $entry = $this->load_entry_from_queue($entry);
-          $entry = $this->_update_vars($entry);
           $this->queue[$key] = $entry;
         }
         $msgs = $entry['object']->check();
@@ -308,6 +307,7 @@ class CopyPasteHandler {
         /* Load next queue entry */
         $this->current = $entry;
         $this->lastdn = $this->current['object']->dn;
+        $this->current= $this->_update_vars($this->current);
         $this->current['object']->save();
         $this->current = FALSE;
       } 
@@ -322,6 +322,7 @@ class CopyPasteHandler {
       /* Load next queue entry */
       if(!count($msgs)){
         $this->lastdn = $this->current['object']->dn;
+        $this->current= $this->_update_vars($this->current);
         $this->current['object']->save();
         $this->current = FALSE;
       }else{
