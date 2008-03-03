@@ -1,43 +1,24 @@
 <?php
 /*
-
-   This code is part of GOsa (https://gosa.gonicus.de)
-   Copyright (C) 2008  Fabian Hickert
-
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
-
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-
-Function overview:
-
-   __construct              - Create a new daemon handle. 
-   connect                  - Connect to daemon socket.
-   disconnect               - Disconnect from socket.
-   set_error                - Sets a new error.
-   is_error                 - Returns TRUE if there was an error.
-   get_error                - Returns the last error or "".
-   get_queued_entries       - Returns all queued entries, with limitations.
-   ids_exist                - Checks if the given id exists.
-   get_entries_by_id        - Returns a set of entries.
-   id_exists                - Checks if a set entries exists.
-   get_entry_by_id          - Returns a single entry.
-   remove_entries           - Remove a set of entries.
-   remove_entry             - Removes a single entry.
-   update_entries           - Updates a set of entries.
-   xml_to_array             - XML to Array. 
-   number_of_queued_entries - Returns the number of currently queued entries.   
-*/
+ * This code is part of GOsa (http://www.gosa-project.org)
+ * Copyright (C) 2003-2008 GONICUS GmbH
+ *
+ * ID: $$Id$$
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 class gosaSupportDaemon
 {

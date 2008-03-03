@@ -1,7 +1,9 @@
 <?php
 /*
- * This code is part of GOsa (https://gosa.gonicus.de)
- * Copyright (C) 2003-2006 - Cajus Pollmeier <pollmeier@gonicus.de>
+ * This code is part of GOsa (http://www.gosa-project.org)
+ * Copyright (C) 2003-2008 GONICUS GmbH
+ *
+ * ID: $$Id$$
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
