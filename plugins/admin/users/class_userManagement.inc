@@ -151,6 +151,51 @@ class userManagement extends plugin
       $s_action = "del_multiple";
     }
 
+    if(isset($_POST['menu_action']) && preg_match("/^trigger_event_DaemonEvent_notify/",$_POST['menu_action'])){
+      $s_action = "notify";
+    }
+
+    /********************
+      Create notification event 
+     ********************/
+
+    if($s_action == "notify"){
+       
+      $ids = $this->list_get_selected_items();
+      $uids = array();
+      foreach($ids as $id){
+        $uids[] = $this->list[$id]['uid'][0];
+      }
+      if(count($uids)){
+        $this->usertab = new DaemonEvent_notify($this->config);
+        $this->usertab->add_targets($uids);
+      }
+      
+    }
+
+    /* Abort event dialog */
+    if(isset($_POST['abort_event_dialog'])){
+      $this->usertab = FALSE;
+    }
+
+    /* Save event */
+    if(isset($_POST['save_event_dialog'])){
+      $o_queue = new gosaSupportDaemon();
+      $o_queue->append($this->usertab);
+      if($o_queue->is_error()){
+        msg_dialog::display(_("Daemon"),sprintf(_("Something went wrong while talking to the daemon: %s."),
+              $o_queue->get_error()),ERROR_DIALOG);
+      }else{
+        $this->usertab = FALSE;
+      }
+    }
+
+    /* Display event */
+    if($this->usertab instanceof DaemonEvent){
+      $this->usertab->save_object();
+      return($this->usertab->execute());
+    }
+
 
     /********************
       Copy & Paste 
@@ -857,6 +902,7 @@ class userManagement extends plugin
 
     /* Show tab dialog if object is present */
     if(isset($this->usertab->config)){
+
       $display= $this->usertab->execute();
 
       /* Don't show buttons if tab dialog requests this */
