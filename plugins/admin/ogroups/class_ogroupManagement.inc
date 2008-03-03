@@ -130,6 +130,52 @@ class ogroupManagement extends plugin
       $s_action = "del_multiple";
     }
 
+    /* Hanlde notification event requests */
+    if(isset($_POST['menu_action']) && preg_match("/^trigger_event_DaemonEvent_notify/",$_POST['menu_action'])){
+      $s_action = "notify";
+    }
+
+    /********************
+      Create notification event
+     ********************/
+
+    if($s_action == "notify"){
+
+      $ids = $this->list_get_selected_items();
+      $uids = array();
+      foreach($ids as $id){
+        $uids[] = $this->ogrouplist[$id]['cn'][0];
+      }
+      if(count($uids)){
+        $this->ogroup= new DaemonEvent_notify($this->config);
+        $this->ogroup->add_targets($uids);
+      }
+
+    }
+
+    /* Abort event dialog */
+    if(isset($_POST['abort_event_dialog'])){
+      $this->ogroup = FALSE;
+    }
+
+    /* Save event */
+    if(isset($_POST['save_event_dialog'])){
+      $o_queue = new gosaSupportDaemon();
+      $o_queue->append($this->ogroup);
+      if($o_queue->is_error()){
+        msg_dialog::display(_("Daemon"),sprintf(_("Something went wrong while talking to the daemon: %s."),
+              $o_queue->get_error()),ERROR_DIALOG);
+      }else{
+        $this->ogroup = FALSE;
+      }
+    }
+
+    /* Display event */
+    if($this->ogroup instanceof DaemonEvent){
+      $this->ogroup->save_object();
+      return($this->ogroup->execute());
+    }
+
 
     /****************
       Copy & Paste handling 
@@ -153,7 +199,7 @@ class ogroupManagement extends plugin
          react on this. */
       $this->dn= "new";
 
-      /* Create new usertab object */
+      /* Create new ogroup- object */
       $this->ogroup= new ogrouptabs($this->config,$this->config->data['TABS']['OGROUPTABS'], $this->dn,"ogroups");
       $this->ogroup->set_acl_base($this->DivListOGroup->selectedBase);
     }

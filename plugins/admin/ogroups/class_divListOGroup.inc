@@ -184,6 +184,14 @@ class divListOGroup extends MultiSelectWindow
     $s.= "..|<img src='images/edittrash.png' alt='' border='0' class='center'>".
       "&nbsp;"._("Remove")."|"."remove_multiple_ogroups/|\n";
 
+    /* Add notification event */
+    if(class_available("DaemonEvent_notify")){
+      $events  = DaemonEvent::get_event_types();
+      $event = $events['BY_CLASS']['DaemonEvent_notify'];
+      $s.= "..|---|\n";
+      $s.= "..|".$event['MenuImage']."&nbsp;".$event['s_Menu_Name']."|trigger_event_DaemonEvent_notify\n";
+    }
+
     /* Add multiple copy & cut icons */
     if(is_object($this->parent->CopyPasteHandler) && preg_match("/(c.*w|w.*c)/",$acl_all)){
       $s.= "..|---|\n";
