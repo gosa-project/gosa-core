@@ -146,8 +146,55 @@ class groupManagement extends plugin
       $s_action = "multiple_edit";
     }
 
+    if(isset($_POST['menu_action']) && preg_match("/^trigger_event_DaemonEvent_notify/",$_POST['menu_action'])){
+      $s_action = "notify";
+    }
 
     $smarty= get_smarty();
+
+
+
+    /********************
+      Create notification event
+     ********************/
+
+    if($s_action == "notify"){
+
+      $ids = $this->list_get_selected_items();
+      $uids = array();
+      foreach($ids as $id){
+        $uids[] = $this->grouplist[$id]['cn'][0];
+      }
+      if(count($uids)){
+        $this->grouptab = new DaemonEvent_notify($this->config);
+        $this->grouptab->add_targets($uids);
+      }
+    }
+
+    /* Abort event dialog */
+    if(isset($_POST['abort_event_dialog'])){
+      $this->grouptab = FALSE;
+    }
+
+    /* Save event */
+    if(isset($_POST['save_event_dialog'])){
+      $o_queue = new gosaSupportDaemon();
+      $o_queue->append($this->grouptab);
+      if($o_queue->is_error()){
+        msg_dialog::display(_("Daemon"),sprintf(_("Something went wrong while talking to the daemon: %s."),
+              $o_queue->get_error()),ERROR_DIALOG);
+      }else{
+        $this->grouptab = FALSE;
+      }
+    }
+
+    /* Display event */
+    if($this->grouptab instanceof DaemonEvent){
+      $this->grouptab->save_object();
+      return($this->grouptab->execute());
+    }
+
+
 
     /********************
       Copy & Paste Handling  ...
@@ -175,7 +222,7 @@ class groupManagement extends plugin
            react on this. */
         $this->dn= "new";
 
-        /* Create new usertab object */
+        /* Create new grouptab object */
         $this->grouptab= new grouptabs($this->config, $this->config->data['TABS']['GROUPTABS'], $this->dn);
 
         /* Set up the group ACL's for this 'dn' */
