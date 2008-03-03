@@ -94,4 +94,9 @@ class msgPool
     }
   }
 
+
+  public static function missingext($name)
+  {
+    return sprintf(_("Missing %s PHP extension!"), $name);
+  }
 }
