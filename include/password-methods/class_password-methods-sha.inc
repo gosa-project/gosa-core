@@ -45,7 +45,7 @@ class passwordMethodsha extends passwordMethod
     }elseif (function_exists('mhash')) {
       $hash = "{SHA}" . base64_encode(mHash(MHASH_SHA1, $password));
     }else{
-      msg_dialog::display(_("Configuration error"), sprintf(_("Cannot use %s encryption: no PHP functions for sha1/mhash available"), 'SHA'), ERROR_DIALOG);
+      msg_dialog::display(_("Configuration error"), msgPool::missingext("mhash"), ERROR_DIALOG);
       return false;
     }
 
