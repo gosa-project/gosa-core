@@ -148,8 +148,8 @@ class groupManagement extends plugin
       $s_action = "multiple_edit";
     }
 
-    if(isset($_POST['menu_action']) && preg_match("/^trigger_event_DaemonEvent_notify/",$_POST['menu_action'])){
-      $s_action = "notify";
+    if(isset($_POST['menu_action']) && preg_match("/^event/",$_POST['menu_action'])){
+      $s_action = $_POST['menu_action'];
     }
 
     $smarty= get_smarty();
@@ -160,16 +160,21 @@ class groupManagement extends plugin
       Create notification event
      ********************/
 
-    if($s_action == "notify"){
-
+    if(preg_match("/^event_/",$s_action) && class_available("DaemonEvent")){
       $ids = $this->list_get_selected_items();
       $uids = array();
       foreach($ids as $id){
         $uids[] = $this->grouplist[$id]['cn'][0];
       }
       if(count($uids)){
-        $this->grouptab = new DaemonEvent_notify($this->config);
-        $this->grouptab->add_targets($uids);
+        $events = DaemonEvent::get_event_types(USER_EVENT);
+        $event = preg_replace("/^event_/","",$s_action);
+        if(isset($events['BY_CLASS'][$event])){
+          $type = $events['BY_CLASS'][$event];
+          $this->grouptab = new $type['CLASS_NAME']($this->config);
+          $this->grouptab->add_targets($uids);
+          $this->grouptab->set_type(TRIGGERED_EVENT);
+        }
       }
     }
 

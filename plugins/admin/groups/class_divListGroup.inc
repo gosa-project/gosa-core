@@ -193,13 +193,15 @@ class divListGroup extends MultiSelectWindow
       "&nbsp;"._("Remove")."|"."remove_multiple|\n";
 
     /* Add event tag */
-    if(class_available("DaemonEvent_notify")){
-      $events  = DaemonEvent::get_event_types( USER_EVENT);
-      $event = $events['BY_CLASS']['DaemonEvent_notify'];
-      $s.= "..|---|\n";
-      $s.= "..|".$event['MenuImage']."&nbsp;".$event['s_Menu_Name']."|trigger_event_DaemonEvent_notify\n";
+    if(class_available("DaemonEvent")){
+      $events  = DaemonEvent::get_event_types(USER_EVENT);
+      if(count($events['BY_CLASS'])){
+        $s.= "..|---|\n";
+        foreach($events['BY_CLASS'] as $name => $event){
+          $s.= "..|".$event['MenuImage']."&nbsp;".$event['s_Menu_Name']."|event_".$name."\n";
+        }
+      }
     }
-
 
     /* Add multiple copy & cut icons */
     if(is_object($this->parent->CopyPasteHandler) && preg_match("/(c.*w|w.*c)/",$acl_all)){
