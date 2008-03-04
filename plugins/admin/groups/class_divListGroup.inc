@@ -194,7 +194,7 @@ class divListGroup extends MultiSelectWindow
 
     /* Add event tag */
     if(class_available("DaemonEvent_notify")){
-      $events  = DaemonEvent::get_event_types();
+      $events  = DaemonEvent::get_event_types( USER_EVENT);
       $event = $events['BY_CLASS']['DaemonEvent_notify'];
       $s.= "..|---|\n";
       $s.= "..|".$event['MenuImage']."&nbsp;".$event['s_Menu_Name']."|trigger_event_DaemonEvent_notify\n";
