@@ -13,13 +13,12 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-03-03 17:33+0100\n"
-"PO-Revision-Date: 2008-02-22 16:53+0100\n"
+"PO-Revision-Date: 2008-03-04 08:41+0100\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: ihtml/themes/default/conflict.tpl:2
 msgid "Session conflict detected"
@@ -4664,7 +4663,7 @@ msgstr "Bitte geben Sie Ihren Benutzer und das zugehörige Passwort ein."
 #: setup/class_setupStep_Ldap.inc:115
 #, php-format
 msgid "Bind as user '%s' on server '%s' succeeded."
-msgstr "Verbindung als Benutzer '%s' zu Server '%s' schlug war erfolgreich."
+msgstr "Verbindung als Benutzer '%s' zu Server '%s' war erfolgreich."
 
 #: setup/setup_config1.tpl:2
 msgid "Look and feel"
