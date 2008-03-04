@@ -481,7 +481,7 @@ $xml_msg.= "
     @param  Array   The variables to update.   
     @return Boolean Returns TRUE on success. 
    */
-  public function update_entries($ids,$entry)
+  public function update_entries($ids,$data)
   {
     $this->reset_error();
     if(!is_array($ids)){
@@ -489,15 +489,22 @@ $xml_msg.= "
       return;
     }
 
-    if(!is_array($entry)){
+    if(!is_array($data)){
       trigger_error("Requires an array as second parameter.");
       return;
     }
 
     $attr = "";
-    foreach($entry as $name => $entry){
-      $attr.="<".strtolower($name).">".$entry."</".strtolower($name).">\n";
+    foreach($data as $key => $value){
+      if(is_array($value)){
+        foreach($value as $sub_value){
+          $attr.= "<$key>".strtolower($sub_value)."</$key>\n";
+        }
+      }else{
+        $attr.= "<$key>".strtolower($value)."</$key>\n";
+      }
     }
+
     $xml_msg = "<xml>
       <header>gosa_update_status_jobdb_entry</header>
       <target>GOSA</target>
@@ -519,6 +526,7 @@ $xml_msg.= "
       </xml>";
 
     if($this->connect()){
+
       $this->o_sock->write($xml_msg);
       $str      = trim($this->o_sock->read());
       $entries = $this->xml_to_array($str);
@@ -559,7 +567,13 @@ $xml_msg.= "
 
     /* Prepare data */
     foreach ($data as $key => $value){
-      $xml_message.= "<$key>$value</$key>";
+      if(is_array($value)){
+        foreach($value as $sub_val){
+          $xml_message.= "<$key>$sub_value</$key>";
+        }
+      }else{
+        $xml_message.= "<$key>$value</$key>";
+      }
     }
 
     /* Multiple targets? */
@@ -665,7 +679,13 @@ $xml_msg.= "
 
     /* Prepare data */
     foreach ($data as $key => $value){
-      $xml_message.= "<$key>$value</$key>";
+      if(is_array($value)){
+        foreach($value as $sub_val){
+          $xml_message.= "<$key>$sub_value</$key>";
+        }
+      }else{
+        $xml_message.= "<$key>$value</$key>";
+      }
     }
 
     /* Multiple targets? */
