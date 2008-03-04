@@ -153,26 +153,31 @@ class userManagement extends plugin
       $s_action = "del_multiple";
     }
 
-    if(isset($_POST['menu_action']) && preg_match("/^trigger_event_DaemonEvent_notify/",$_POST['menu_action'])){
-      $s_action = "notify";
+    if(isset($_POST['menu_action']) && preg_match("/^event/",$_POST['menu_action'])){
+      $s_action = $_POST['menu_action'];
     }
+
 
     /********************
       Create notification event 
      ********************/
 
-    if($s_action == "notify"){
-       
+    if(preg_match("/^event_/",$s_action) && class_available("DaemonEvent")){
       $ids = $this->list_get_selected_items();
       $uids = array();
       foreach($ids as $id){
         $uids[] = $this->list[$id]['uid'][0];
       }
       if(count($uids)){
-        $this->usertab = new DaemonEvent_notify($this->config);
-        $this->usertab->add_targets($uids);
+        $events = DaemonEvent::get_event_types(USER_EVENT);
+        $event = preg_replace("/^event_/","",$s_action);
+        if(isset($events['BY_CLASS'][$event])){
+          $type = $events['BY_CLASS'][$event];
+          $this->usertab = new $type['CLASS_NAME']($this->config);
+          $this->usertab->add_targets($uids);
+          $this->usertab->set_type(TRIGGERED_EVENT);
+        }
       }
-      
     }
 
     /* Abort event dialog */
