@@ -132,15 +132,28 @@ class gosaSupportDaemon
   /*! \brief  Returns an array containing all queued entries.
     @return Array All queued entries as an array.
    */
-  public function get_queued_entries($from=-1,$to=-1,$sort="timestamp DESC")
+  public function get_queued_entries($event_types = array("*"),$from=-1,$to=-1,$sort="timestamp DESC")
   {
     $this->reset_error();
     $ret = array();
+
+    $tags = "";
+    foreach($event_types as $type){
+      $tags .= "<phrase><headertag>".$type."</headertag></phrase>";
+    }
+    if(count($event_types) > 1){
+      $tags = "<connector>or</connector>".$tags;
+    }
+    if(count($event_types)){
+      $tags = "<where><clause>".$tags."</clause></where>";
+    }
 
     $xml_msg = "<xml>
       <header>gosa_query_jobdb</header>
       <target>GOSA</target>
       <source>GOSA</source>
+      ".$tags."
+
       <orderby>".$sort."</orderby>";
 if($from != -1 && $to != -1){
 $xml_msg.= "
