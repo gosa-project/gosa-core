@@ -620,8 +620,10 @@ $xml_msg.= "
      */
     if($event->is_new()){
 
+      $request_answer = FALSE;
       if($event->get_type() == SCHEDULED_EVENT){
         $action = $event->get_schedule_action();
+        $request_answer = TRUE;
       }elseif($event->get_type() == TRIGGERED_EVENT){
         $action = $event->get_trigger_action();
       }else{
@@ -638,7 +640,7 @@ $xml_msg.= "
        */
       foreach($targets as $target){
         $data['macaddress'] = $target;
-        $this->send_data($action,$target,$data,TRUE);
+        $this->send_data($action,$target,$data,$request_answer);
 
         if($this->is_error()){
           return(FALSE);
