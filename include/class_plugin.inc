@@ -153,13 +153,13 @@ class plugin
     $this->acl_base= $dn;
 
     /* Get LDAP descriptor */
-    $ldap= $this->config->get_ldap_link();
     if ($dn !== NULL){
 
       /* Load data to 'attrs' and save 'dn' */
       if ($parent !== NULL){
         $this->attrs= $parent->attrs;
       } else {
+        $ldap= $this->config->get_ldap_link();
         $ldap->cat ($dn);
         $this->attrs= $ldap->fetch();
       }
