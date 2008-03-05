@@ -89,7 +89,7 @@ function displayLogin()
   } else {
     $smarty->assign("php_errors", "");
   }
-
+  $smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
   $smarty->display (get_template_path('headers.tpl'));
   $smarty->display(get_template_path('login.tpl'));
   exit();

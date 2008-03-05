@@ -1,4 +1,5 @@
 <body style="background-color:white;background-image:none;">
+
 {$php_errors}
 <div>
         <div class='setup_header'>
@@ -19,6 +20,7 @@
 <div style='float:left; width:50%; border:1px solid #AAAAAA;background-color:white'>
 <form action='index.php' method='post' name='mainform' onSubmit='js_check(this);return true;'>
 
+{$msg_dialogs}
 	<div style='border-bottom:1px solid #AAAAAA'>
 		<div style='padding:3px; background-color:#F8F8F8'>
 		<p class="center" style="margin:0px 0px 0px 5px;padding:5px;font-size:24px;font-weight:bold;">
@@ -93,5 +95,7 @@
   nextfield= "{$nextfield}";
   focus_field("{$nextfield}");
   -->
+
+next_msg_dialog();
 </script>
 
