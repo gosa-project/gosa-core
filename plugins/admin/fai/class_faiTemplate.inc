@@ -72,7 +72,11 @@ class faiTemplate extends plugin
       $ldap->cd ($this->dn);
       $ldap->search("(&(objectClass=FAIclass)(objectClass=".$this->subClass."))",array("dn"));
 
+      $data = array();
       while($object = $ldap->fetch()){
+        $data[] = $object;
+      }
+      foreach($data as $object){
 
         /* Set status for save management */
         $objects = array();
