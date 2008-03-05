@@ -29,6 +29,8 @@ class Step_Schema extends setup_step
   var $enable_schema_check = TRUE;
   var $samba_version       = 3;
 
+  var $found_ocs = 0; 
+ 
   function Step_Schema()
   {
     $this->update_strings();
@@ -58,9 +60,28 @@ class Step_Schema extends setup_step
     }else{
       $this->is_completed = TRUE;
     }
+    
+    /* Check if the database is already initialised.
+     * If the root object is missing we can't read any schema informations.
+     * In this case we should display a message.
+     */
+    $cv = $this->parent->captured_values;
+
+    /* Establish ldap connection */
+    $ldap = new LDAP($cv['admin'],
+        $cv['password'],
+        $cv['connection'],
+        FALSE,
+        $cv['tls']);
+
+    /* Check if root object exists */
+    $ldap->cd($cv['base']);
+    $res = $ldap->search("(objectClass=*)");
 
     $smarty = get_smarty();
     $smarty->assign("bool",array(FALSE => _("No"), TRUE => _("Yes")));
+    $smarty->assign("database_initialised", ($res == TRUE));
+    $smarty->assign("found_ocs", $this->found_ocs);
     $smarty->assign("schema_readable",$this->schema_readable);
     $smarty->assign("enable_schema_check",$this->enable_schema_check);
     $smarty->assign("checks",$this->checked);
@@ -91,9 +112,7 @@ class Step_Schema extends setup_step
     /* Get objectclasses */
     $ldap = new LDAP($cfg['admin'],$cfg['password'],$cfg['connection'] ,FALSE,$cfg['tls']);
     $objectclasses = $ldap->get_objectclasses();
-    if(count($objectclasses) == 0){
-      print_red(_("Can't get schema information from server. No schema check possible!"));
-    }
+    $this->found_ocs = count($objectclasses);
 
     /* Which samba version do we use? */
     if(isset($objectclasses['sambaSamAccount'])){
