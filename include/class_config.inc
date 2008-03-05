@@ -216,7 +216,7 @@ class config  {
 
   function get_ldap_link($sizelimit= FALSE)
   {
-    if(!is_resource($this->ldap->cid)){
+    if($this->ldap === NULL || !is_resource($this->ldap->cid)){
 
       /* Build new connection */
       $this->ldap= ldap_init ($this->current['SERVER'], $this->current['BASE'],
