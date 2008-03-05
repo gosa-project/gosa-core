@@ -210,7 +210,7 @@ class LDAP{
       
       /* Check if there are still unfetched elements */
       if(is_resource(@ldap_next_entry($this->cid, $this->re))){
-        trigger_error("A new search was initiated while the an older search wasn't fetched completely.");
+        trigger_error("A new search was initiated while an older search wasn't fetched completely.");
       }
     }
   }
