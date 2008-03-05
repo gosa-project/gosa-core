@@ -659,7 +659,12 @@ class faiManagement extends plugin
       $base= "ou=fai,ou=configs,ou=systems,".$_SESSION['CurrentMainBase'];
     }
     $ldap->ls("(objectClass=FAIbranch)",$base);
+    $objects = array();
     while($attrs = $ldap->fetch()){
+      $objects[] = $attrs;
+    }
+    foreach($objects as $attrs){
+
       if((isset($attrs['ou']))&&($attrs['dn']!=$base)){
         $ret[$attrs['dn']]= $prefix.$attrs['ou'][0];
         $ret = array_merge($ret,$this->getBranches($attrs['dn'],"".$prefix.$attrs['ou'][0]."/"));
