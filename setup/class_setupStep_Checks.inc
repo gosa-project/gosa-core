@@ -108,6 +108,14 @@ class Step_Checks extends setup_step
     $M = TRUE;
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
+    /* Is imap module available */
+    $N = _("Checking for multi byte support");
+    $D = _("The multi byte string support is required by some plugins.");
+    $S = _("Please compile php with enabled multi byte support '--enable-mbstring'.");
+    $R = is_callable("mb_strlen");
+    $M = TRUE;
+    $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
+
     /* Check getacl in imap module */
     $N = _("Checking for getacl in IMAP implementation");
     $D = _("The getacl support is needed to handle shared folder permissions. Old IMAP extensions are not capable of reading acl's. You need a recent PHP version to use this feature.");
