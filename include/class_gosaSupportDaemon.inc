@@ -623,7 +623,7 @@ $xml_msg.= "
       if($event->get_type() == SCHEDULED_EVENT){
         $action = $event->get_schedule_action();
       }elseif($event->get_type() == TRIGGERED_EVENT){
-        $action = $event->get_schedule_action();
+        $action = $event->get_trigger_action();
       }else{
         trigger_error("Unknown type of queue event given.");
         return(FALSE);
