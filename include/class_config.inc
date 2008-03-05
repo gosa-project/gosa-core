@@ -181,37 +181,40 @@ class config  {
 
   function get_ldap_link($sizelimit= FALSE)
   {
-    /* Build new connection */
-    $this->ldap= ldap_init ($this->current['SERVER'], $this->current['BASE'],
-        $this->current['ADMIN'], $this->current['PASSWORD']);
 
-    /* Check for connection */
-    if (is_null($this->ldap) || (is_int($this->ldap) && $this->ldap == 0)){
-      $smarty= get_smarty();
-      print_red (_("Can't bind to LDAP. Please contact the system administrator."));
-      $smarty->display (get_template_path('headers.tpl'));
-      echo '<body style="background-image:none">'.$_SESSION['errors'].'</body></html>';
-      exit();
+    if(!is_resource($this->ldap->cid)){
+
+      /* Build new connection */
+      $this->ldap= ldap_init ($this->current['SERVER'], $this->current['BASE'],
+          $this->current['ADMIN'], $this->current['PASSWORD']);
+
+      /* Check for connection */
+      if (is_null($this->ldap) || (is_int($this->ldap) && $this->ldap == 0)){
+        $smarty= get_smarty();
+        print_red (_("Can't bind to LDAP. Please contact the system administrator."));
+        $smarty->display (get_template_path('headers.tpl'));
+        echo '<body style="background-image:none">'.$_SESSION['errors'].'</body></html>';
+        exit();
+      }
+
+      if (!isset($_SESSION['size_limit'])){
+        $_SESSION['size_limit']= $this->current['SIZELIMIT'];
+        $_SESSION['size_ignore']= $this->current['SIZEIGNORE'];
+      }
+
+      if ($sizelimit){
+        $this->ldap->set_size_limit($_SESSION['size_limit']);
+      } else {
+        $this->ldap->set_size_limit(0);
+      }
+
+      /* Move referrals */
+      if (!isset($this->current['REFERRAL'])){
+        $this->ldap->referrals= array();
+      } else {
+        $this->ldap->referrals= $this->current['REFERRAL'];
+      }
     }
-
-    if (!isset($_SESSION['size_limit'])){
-      $_SESSION['size_limit']= $this->current['SIZELIMIT'];
-      $_SESSION['size_ignore']= $this->current['SIZEIGNORE'];
-    }
-
-    if ($sizelimit){
-      $this->ldap->set_size_limit($_SESSION['size_limit']);
-    } else {
-      $this->ldap->set_size_limit(0);
-    }
-
-    /* Move referrals */
-    if (!isset($this->current['REFERRAL'])){
-      $this->ldap->referrals= array();
-    } else {
-      $this->ldap->referrals= $this->current['REFERRAL'];
-    }
-
     return ($this->ldap);
   }
 
