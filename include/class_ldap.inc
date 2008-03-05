@@ -32,6 +32,8 @@ class LDAP{
   var $referrals= array();
   var $max_ldap_query_time = 0;   // 0, empty or negative values will disable this check 
 
+  var $re = NULL;  
+
   function LDAP($binddn,$bindpw, $hostname, $follow_referral= FALSE, $tls= FALSE)
   {
     global $config;
@@ -187,13 +189,31 @@ class LDAP{
     return(ereg_replace("[^,]*[,]*[ ]*(.*)", "\\1", $basedn));
   }
 
+  
+  /* Checks if there is still unfetched data 
+   */
+  function checkResult()
+  {
+    /* Check if we have started a search before  */
+    if(is_resource(@ldap_first_entry($this->cid, $this->sr))){
+      
+      /* Check if there are still unfetched elements */
+      if(is_resource(@ldap_next_entry($this->cid, $this->re))){
+        trigger_error("A new search was initiated while the an older search wasn't fetched completely.");
+      }
+    }
+  }
+
   function search($filter, $attrs= array())
   {
     if($this->hascon){
       if ($this->reconnect) $this->connect();
 
+      /* Check if there are still unfetched objects from last search 
+       */
+      $this->checkResult();
+
       $start = microtime();
-   
       $this->clearResult();
       $this->sr = @ldap_search($this->cid, $this->fix($this->basedn), $filter, $attrs);
       $this->error = @ldap_error($this->cid);
@@ -221,6 +241,11 @@ class LDAP{
   {
     if($this->hascon){
       if ($this->reconnect) $this->connect();
+
+      /* Check if there are still unfetched objects from last search 
+       */
+      $this->checkResult();
+
       $this->clearResult();
       if ($basedn == "")
         $basedn = $this->basedn;
@@ -255,6 +280,11 @@ class LDAP{
   {
     if($this->hascon){
       if ($this->reconnect) $this->connect();
+
+      /* Check if there are still unfetched objects from last search
+       */
+      $this->checkResult();
+
       $start = microtime();
       $this->clearResult();
       $filter = "(objectclass=*)";
