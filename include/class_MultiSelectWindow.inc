@@ -59,6 +59,7 @@ class MultiSelectWindow{
   var $module= "";
 
   var $IgnoreAccount = TRUE;
+  var $footer = "";
 
 	function ClearElementsList()
 	{
@@ -311,6 +312,12 @@ class MultiSelectWindow{
 		return($this->is_closed);
 	}
 
+  
+  function SetListFooter($str){
+    $this->footer = $str;
+  }
+
+
 	/* Enable the close button */
 	function EnableCloseButton($bool)
 	{
@@ -442,8 +449,7 @@ class MultiSelectWindow{
 
 		/* Check for exeeded sizelimit */
 		$smarty->assign("hint"				, print_sizelimit_warning());
-		$smarty->assign("DivList"			, $divlist->DrawList());
-
+		$smarty->assign("DivList"			, $divlist->DrawList().$this->footer);
 
 		if($this->is_headpage){
 			$smarty->assign("tree_image", 		get_template_path('images/tree.png'));
