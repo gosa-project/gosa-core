@@ -201,30 +201,30 @@ class LDAP{
   }
 
   
-  /* Checks if there is still unfetched data 
-   */
-  function checkResult()
-  {
-    /* Check if we have started a search before  */
-    if($this->start != 0 && $this->re){
-      
-      /* Check if there are still unfetched elements */
-      if(is_resource(@ldap_next_entry($this->cid, $this->re))){
-        new log("debug","LDAP:: CAT/SEARCH/FETCH","A new search was initiated while an older search wasn't fetched completely.");
-        msg_dialog::display(_("Debug"),"A new search was initiated while an older search wasn't fetched completely.",ERROR_DIALOG);
-        trigger_error("A new search was initiated while an older search wasn't fetched completely.");
-      }
-    }
-  }
-
+# /* Checks if there is still unfetched data 
+#  */
+# function checkResult()
+# {
+#   /* Check if we have started a search before  */
+#   if($this->start != 0 && $this->re){
+#     
+#     /* Check if there are still unfetched elements */
+#     if(is_resource(@ldap_next_entry($this->cid, $this->re))){
+#       new log("debug","LDAP:: CAT/SEARCH/FETCH","A new search was initiated while an older search wasn't fetched completely.");
+#       msg_dialog::display(_("Debug"),"A new search was initiated while an older search wasn't fetched completely.",ERROR_DIALOG);
+#       trigger_error("A new search was initiated while an older search wasn't fetched completely.");
+#     }
+#   }
+# }
+#
   function search($filter, $attrs= array())
   {
     if($this->hascon){
       if ($this->reconnect) $this->connect();
 
-      /* Check if there are still unfetched objects from last search 
-       */
-      $this->checkResult();
+#      /* Check if there are still unfetched objects from last search 
+#       */
+#      $this->checkResult();
 
       $start = microtime();
       $this->clearResult();
@@ -254,9 +254,9 @@ class LDAP{
     if($this->hascon){
       if ($this->reconnect) $this->connect();
 
-      /* Check if there are still unfetched objects from last search 
-       */
-      $this->checkResult();
+#      /* Check if there are still unfetched objects from last search 
+#       */
+#      $this->checkResult();
 
       $this->clearResult();
       if ($basedn == "")
@@ -292,9 +292,9 @@ class LDAP{
     if($this->hascon){
       if ($this->reconnect) $this->connect();
 
-      /* Check if there are still unfetched objects from last search 
-       */
-      $this->checkResult();
+#      /* Check if there are still unfetched objects from last search 
+#       */
+#      $this->checkResult();
 
       $this->clearResult();
       $filter = "(objectclass=*)";
