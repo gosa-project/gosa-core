@@ -224,6 +224,9 @@ class plugin
 
         unset($this->saved_attributes["$index"]["count"]);
       }
+      if(isset($this->attrs['gosaUnitTag'])){
+        $this->saved_attributes['gosaUnitTag'] = $this->attrs['gosaUnitTag'][0];
+      }
     }
 
     /* Save initial account state */
@@ -368,7 +371,7 @@ class plugin
   function cleanup()
   {
     foreach ($this->attrs as $index => $value){
-
+      
       /* Convert arrays with one element to non arrays, if the saved
          attributes are no array, too */
       if (is_array($this->attrs[$index]) && 
@@ -1007,7 +1010,7 @@ class plugin
         }
       }
     }
-
+  
     /* Remove tags that may already be here... */
     remove_objectClass("gosaAdministrativeUnitTag", $at);
     if (isset($at['gosaUnitTag'])){
@@ -1018,6 +1021,15 @@ class plugin
     if ($tag != ""){
       add_objectClass("gosaAdministrativeUnitTag", $at);
       $at['gosaUnitTag']= $tag;
+    }
+
+    /* Initially this object was tagged. 
+       - But now, it is no longer inside a tagged department. 
+       So force the remove of the tag.
+       (objectClass was already removed obove)
+     */
+    if($tag == "" && $this->gosaUnitTag){
+      $at['gosaUnitTag'] = array();
     }
   }
 
