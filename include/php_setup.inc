@@ -26,10 +26,6 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
 {
   global $error_collector,$config, $error_collector_mailto;
 
-  if(function_exists("gosa_log")){
-    gosa_log($errno." ".$errstr." ".$errfile." ".$errline);
-  }
-
   /* Return if error reporting is set to zero */
   if (error_reporting() == 0){
     return;
