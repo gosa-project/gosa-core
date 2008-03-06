@@ -206,7 +206,7 @@ class LDAP{
   function checkResult()
   {
     /* Check if we have started a search before  */
-    if(is_resource(@ldap_first_entry($this->cid, $this->sr))){
+    if($this->start != 0 && $this->re){
       
       /* Check if there are still unfetched elements */
       if(is_resource(@ldap_next_entry($this->cid, $this->re))){
