@@ -41,7 +41,7 @@ class gosaSupportDaemon
     @param boolean  Connect Directly connect to daemon socket.
     @param float    Timeout The timelimit for all socket actions.
    */
-  public function __construct($connect=TRUE,$timeout=0.2)
+  public function __construct($connect=TRUE,$timeout=2)
   {
     #FIXME: bad idea about referencing global variables from within classes
     global $config;
@@ -744,7 +744,9 @@ $xml_msg.= "
        </where>
       </xml>
     ";  
-  
+    
+    new log("debug","gosaSupportDaemon::clean_queue_from_mac", "Removing all entries for mac ".$mac."", array(),"follows next.");
+ 
     $data = $this->_send($xml_msg,TRUE);
     if(is_array($data) && isset($data['XML'])){
       $already_aborted = FALSE;
@@ -766,6 +768,11 @@ $xml_msg.= "
                 $tmp->set_type(TRIGGERED_EVENT);
                 if(!$this->append($tmp)){
                   msg_dialog::display(_("Error"), sprintf(_("Cannot send abort event for entry: %s"),$entry['ID']) , ERROR_DIALOG);
+                  new log("debug","gosaSupportDaemon::clean_queue_from_mac", 
+                      "Sending 'DaemonEvent_faireboot' for ID '".$entry['ID']."' FAILED!",array(), "FAILED");
+                }else{
+                  new log("debug","gosaSupportDaemon::clean_queue_from_mac", 
+                      "Sending 'DaemonEvent_faireboot' for ID '".$entry['ID']."' successfull",array(), "SUCCESS");
                 }
                 ;break;
               }else{
@@ -781,6 +788,11 @@ $xml_msg.= "
                */ 
               if(!$this->remove_entries(array($entry['ID']))){
                 msg_dialog::display(_("Error"), sprintf(_("Cannot remove entry: %s"),$entry['ID']) , ERROR_DIALOG);
+                new log("debug","gosaSupportDaemon::clean_queue_from_mac", 
+                    "Removing entry ID '".$entry['ID']."' FAILED!",array(), "FAILED");
+              }else{
+                new log("debug","gosaSupportDaemon::clean_queue_from_mac",
+                    "Removing entry ID '".$entry['ID']."' successfull!",array(),"SUCCESS");
               }
               ;break;
           }
