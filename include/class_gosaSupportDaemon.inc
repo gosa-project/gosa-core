@@ -398,7 +398,7 @@ $xml_msg.= "
       $this->o_sock->write($xml_msg);
       $str = $this->o_sock->read();
       $entries = $this->xml_to_array($str);
-      if(isset($entries['XML'])){
+      if(isset($entries['XML']) || isset($entries['COUNT'])){
         return(TRUE);
       }
     }
@@ -717,6 +717,77 @@ $xml_msg.= "
     }
 
     return $d->_send("<xml><header>$header</header><source>GOSA</source>$target".$xml_message."</xml>",$answer_expected);
+  }
+
+
+  /*! \brief  Removes all jobs from the queue that are tiggered with a specific macAddress.
+      @param  String  $mac  The mac address for which we want to remove all jobs.      
+   */
+  function clean_queue_from_mac($mac)
+  {
+    global $config;
+
+    /* First of all we have to check which jobs are startet 
+     *  for $mac 
+     */
+    $xml_msg ="
+      <xml>
+       <header>gosa_query_jobdb</header>
+       <target>GOSA</target>
+       <source>GOSA</source>
+       <where>
+        <clause>
+         <phrase>
+          <macaddress>".$mac."</macaddress>
+         </phrase>
+        </clause>
+       </where>
+      </xml>
+    ";  
+  
+    $data = $this->_send($xml_msg,TRUE);
+    if(is_array($data) && isset($data['XML'])){
+      $already_aborted = FALSE;
+      foreach($data['XML']  as $name => $entry){
+        if(preg_match("/answer[0-9]*/i",$name)){
+          $entry['STATUS'] = strtoupper($entry['STATUS']);
+          switch($entry['STATUS']){
+
+            case 'PROCESSING' :
+
+              /* Send abort event, but only once 
+               */
+              if($already_aborted){
+                break;
+              }elseif(class_available("DaemonEvent_faireboot")){
+                $already_aborted = TRUE;
+                $tmp = new DaemonEvent_faireboot($config);
+                $tmp->add_targets(array($mac));
+                $tmp->set_type(TRIGGERED_EVENT);
+                if(!$this->append($tmp)){
+                  msg_dialog::display(_("Error"), sprintf(_("Cannot send abort event for entry: %s"),$entry['ID']) , ERROR_DIALOG);
+                }
+                ;break;
+              }else{
+                /* Couldn't find abort event, just remove entry */
+              }
+
+            case 'WAITING':
+            case 'ERROR':
+            default :
+            
+              /* Simply remove entries from queue. 
+               *  Failed or waiting events, can be removed without any trouble.
+               */ 
+              if(!$this->remove_entries(array($entry['ID']))){
+                msg_dialog::display(_("Error"), sprintf(_("Cannot remove entry: %s"),$entry['ID']) , ERROR_DIALOG);
+              }
+              ;break;
+          }
+    
+        }
+      }
+    }
   }
 
 
