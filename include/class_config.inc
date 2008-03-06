@@ -181,7 +181,7 @@ class config  {
 
   function get_ldap_link($sizelimit= FALSE)
   {
-# Use some hanlde for each search.
+# Reuse same handle ldap handle.
 # Disabled due to unpredictable results
 #
 #    if($this->ldap === NULL || !is_resource($this->ldap->cid)){
