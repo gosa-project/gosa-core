@@ -189,29 +189,10 @@ class LDAP{
     return(ereg_replace("[^,]*[,]*[ ]*(.*)", "\\1", $basedn));
   }
 
-  
-  /* Checks if there is still unfetched data 
-   */
-  function checkResult()
-  {
-    /* Check if we have started a search before  */
-    if($this->start != 0 && $this->re){
-      
-      /* Check if there are still unfetched elements */
-      if(is_resource(@ldap_next_entry($this->cid, $this->re))){
-        trigger_error("A new search was initiated while an older search wasn't fetched completely.");
-      }
-    }
-  }
-
   function search($filter, $attrs= array())
   {
     if($this->hascon){
       if ($this->reconnect) $this->connect();
-
-      /* Check if there are still unfetched objects from last search 
-       */
-      $this->checkResult();
 
       $start = microtime();
       $this->clearResult();
@@ -241,10 +222,6 @@ class LDAP{
   {
     if($this->hascon){
       if ($this->reconnect) $this->connect();
-
-      /* Check if there are still unfetched objects from last search 
-       */
-      $this->checkResult();
 
       $this->clearResult();
       if ($basedn == "")
@@ -280,10 +257,6 @@ class LDAP{
   {
     if($this->hascon){
       if ($this->reconnect) $this->connect();
-
-      /* Check if there are still unfetched objects from last search
-       */
-      $this->checkResult();
 
       $start = microtime();
       $this->clearResult();

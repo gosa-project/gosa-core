@@ -181,8 +181,11 @@ class config  {
 
   function get_ldap_link($sizelimit= FALSE)
   {
-    if($this->ldap === NULL || !is_resource($this->ldap->cid)){
-
+# Use some hanlde for each search.
+# Disabled due to unpredictable results
+#
+#    if($this->ldap === NULL || !is_resource($this->ldap->cid)){
+#
       /* Build new connection */
       $this->ldap= ldap_init ($this->current['SERVER'], $this->current['BASE'],
           $this->current['ADMIN'], $this->current['PASSWORD']);
@@ -213,7 +216,7 @@ class config  {
       } else {
         $this->ldap->referrals= $this->current['REFERRAL'];
       }
-    }
+#    } 
     return ($this->ldap);
   }
 
