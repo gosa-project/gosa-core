@@ -264,7 +264,7 @@ class msgPool
       if (is_numeric($key)){
         $objects.= "<br>\n<i>$value</i>";
       } else {
-        $objects.= "<br>\n$key (<i>$value</i>)";
+        $objects.= "<br>\n$value (<i>$key</i>)";
       }
     }
   }
