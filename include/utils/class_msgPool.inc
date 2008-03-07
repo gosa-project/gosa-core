@@ -117,6 +117,12 @@ class msgPool
   }
 
 
+  public static function noserver($name)
+  {
+    return (sprintf(_("No %s server defined!"), $name));
+  }
+
+
   public static function dbquery($name, $error= "", $dbinfo= "")
   {
     if ($error != ""){
