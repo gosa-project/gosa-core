@@ -2,6 +2,79 @@
 
 class msgPool
 {
+  public static function permDelete($name= "")
+  {
+    if ($name == "") { 
+      return (_("You have no permission to delete this object!"));
+    }
+
+    if (!is_array($name)){
+      return (_("You have no permission to delete the object:")."<br><br><i>$name</i>");
+    }
+
+    msgPool::buildList($name);
+    if (count($name) == 1){
+      return (_("You have no permission to delete the object:")."<br>".msgPool::buildList($name));
+    }
+
+    return (_("You have no permission to delete these objects:")."<br>".msgPool::buildList($name));
+  }
+
+
+  public static function permCreate($name= "")
+  {
+    if ($name == "") { 
+      return (_("You have no permission to create this object!"));
+    }
+
+    if (!is_array($name)){
+      return (_("You have no permission to create the object:")."<br><br><i>$name</i>");
+    }
+
+    if (count($name) == 1){
+      return (_("You have no permission to create the object:")."<br>".msgPool::buildList($name));
+    }
+
+    return (_("You have no permission to create these objects:")."<br>".msgPool::buildList($name));
+  }
+
+
+  public static function permModify($name= "")
+  {
+    if ($name == "") { 
+      return (_("You have no permission to modify this object!"));
+    }
+
+    if (!is_array($name)){
+      return (_("You have no permission to modify the object:")."<br><br><i>$name</i>");
+    }
+
+    if (count($name) == 1){
+      return (_("You have no permission to modify the object:")."<br>".msgPool::buildList($name));
+    }
+
+    return (_("You have no permission to modify these objects:")."<br>".msgPool::buildList($name));
+  }
+
+
+  public static function permMove($name= "")
+  {
+    if ($name == "") { 
+      return (_("You have no permission to move this object!"));
+    }
+
+    if (!is_array($name)){
+      return (_("You have no permission to move the object:")."<br><br><i>$name</i>");
+    }
+
+    if (count($name) == 1){
+      return (_("You have no permission to move the object:")."<br>".msgPool::buildList($name));
+    }
+
+    return (_("You have no permission to move these objects:")."<br>".msgPool::buildList($name));
+  }
+
+
   public static function dbconnect($name, $error= "", $dbinfo= "")
   {
     if ($error != ""){
@@ -182,5 +255,19 @@ class msgPool
   {
     return $what == "" ? sprintf(_("Edit..."): sprintf(_("Edit %s..."), $what));
   }
+
+
+  public static function buildList($data)
+  {
+    $objects= "";
+    foreach ($name as $key => $value){
+      if (is_numeric($key)){
+        $objects.= "<br>\n<i>$value</i>";
+      } else {
+        $objects.= "<br>\n$key (<i>$value</i>)";
+      }
+    }
+  }
+
 
 }
