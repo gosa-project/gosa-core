@@ -83,10 +83,21 @@ class msg_dialog
 		session::set('errorsAlreadyPosted',$errorsAlreadyPosted);
 	}
 
+
 	public static function display($s_title,$s_message,$i_type = INFO_DIALOG)
 	{
 		new msg_dialog($s_title,$s_message,$i_type);	
 	}
+
+
+	public static function displayChecks($messages)
+	{
+		/* Assemble the message array to a plain string */
+		foreach ($message as $error){
+			msg_dialog::display(_("Error"), $error, ERROR_DIALOG);
+		}
+	}
+
 
 	public function get_ID()
 	{

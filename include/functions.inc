@@ -1357,17 +1357,6 @@ function get_printer_list()
 }
 
 
-function show_errors($message)
-{
-  $complete= "";
-
-  /* Assemble the message array to a plain string */
-  foreach ($message as $error){
-    msg_dialog::display(_("Error"), $error, ERROR_DIALOG);
-  }
-}
-
-
 function show_ldap_error($message, $addon= "")
 {
   if (!preg_match("/Success/i", $message)){
