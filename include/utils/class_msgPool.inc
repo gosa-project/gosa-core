@@ -235,25 +235,25 @@ class msgPool
 
   public static function addButton($what= "")
   {
-    return $what == "" ? sprintf(_("Add"): sprintf(_("Add %s"), $what));
+    return $what == "" ? sprintf(_("Add")): sprintf(_("Add %s"), $what);
   }
 
 
   public static function delButton($what= "")
   {
-    return $what == "" ? sprintf(_("Delete"): sprintf(_("Delete %s"), $what));
+    return $what == "" ? sprintf(_("Delete")): sprintf(_("Delete %s"), $what);
   }
 
 
   public static function setButton($what= "")
   {
-    return $what == "" ? sprintf(_("Set"): sprintf(_("Set %s"), $what));
+    return $what == "" ? sprintf(_("Set")): sprintf(_("Set %s"), $what);
   }
 
 
   public static function editButton($what= "")
   {
-    return $what == "" ? sprintf(_("Edit..."): sprintf(_("Edit %s..."), $what));
+    return $what == "" ? sprintf(_("Edit...")): sprintf(_("Edit %s..."), $what);
   }
 
 
