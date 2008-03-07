@@ -75,6 +75,7 @@ class gosaSupportDaemon
     }else{
       $this->set_error($this->o_sock->get_error());
       $this->disconnect();
+      new log("debug","gosaSupportDaemon::connect()", "Could not connect to server.", array(),$this->get_error());
     }
     return($this->is_connected);
   }
@@ -399,7 +400,10 @@ $xml_msg.= "
       $str = $this->o_sock->read();
       $entries = $this->xml_to_array($str);
       if(isset($entries['XML']) || isset($entries['COUNT'])){
+        new log("debug","DaemonEvent (IDS) ", "gosaSupportDaemon::remove_entries()", $ids,"SUCCESS");
         return(TRUE);
+      }else{
+        new log("debug","DaemonEvent (IDS) ", "gosaSupportDaemon::remove_entries()", $ids,"FAILED ".$this->get_error());
       }
     }
     return(FALSE);
@@ -413,30 +417,7 @@ $xml_msg.= "
    */
   public function remove_entry($id)
   {
-    $this->reset_error();
-
-    $xml_msg = "<xml>
-      <header>gosa_delete_jobdb_entry</header>
-      <target>GOSA</target>
-      <source>GOSA</source>
-      <where>
-      <clause>
-      <phrase>
-      <operator>eq</operator>
-      <id>".$id."</id>
-      </phrase>
-      </clause>
-      </where>
-      </xml>";
-    if($this->connect()){
-      $this->o_sock->write($xml_msg);
-      $str = $this->o_sock->read();
-      $entries = $this->xml_to_array($str);
-      if(isset($entries['XML'])){
-        return(TRUE);
-      }
-    }
-    return(FALSE);
+    return($this->remove_entries(array($id)));
   }
 
 
@@ -546,8 +527,10 @@ $xml_msg.= "
       if(isset($entries['XML'])){
         if(isset($entries['XML']['ERROR_STRING'])) {
           $this->set_error($entries['XML']['ERROR_STRING']);
+          new log("debug","DaemonEvent (IDS) ", "gosaSupportDaemon::update_entries()", $ids,"FAILED setting (".$attr.") error was ".$this->get_error());
           return(FALSE);
         }
+        new log("debug","DaemonEvent (IDS) ", "gosaSupportDaemon::update_entries()", $ids,"SUCCESS");
         return(TRUE);
       }
     }
@@ -677,8 +660,13 @@ $xml_msg.= "
           $ret = $entries;
           if(isset($entries['XML']['ERROR_STRING'])) {
             $this->set_error($entries['XML']['ERROR_STRING']);
+            new log("debug","DaemonEvent (IDS) ", "gosaSupportDaemon::_send()", array($data=>$data),"FAILED ".$this->get_error());
+          }else{
+            new log("debug","DaemonEvent (IDS) ", "gosaSupportDaemon::_send()", array($data=>$data),"SUCCESS");
           }
         }
+      }else{
+        new log("debug","DaemonEvent (IDS) ", "gosaSupportDaemon::_send()", array($data=>$data),"Fire & forget, not result.! ".$this->get_error());
       }
     }
     return($ret);
@@ -745,7 +733,7 @@ $xml_msg.= "
       </xml>
     ";  
     
-    new log("debug","gosaSupportDaemon::clean_queue_from_mac", "Removing all entries for mac ".$mac."", array(),"follows next.");
+    new log("debug","DaemonEvent ", "gosaSupportDaemon::clean_queue_from_mac()", array($mac => $mac)," start cleaning.");
  
     $data = $this->_send($xml_msg,TRUE);
     if(is_array($data) && isset($data['XML'])){
@@ -768,11 +756,11 @@ $xml_msg.= "
                 $tmp->set_type(TRIGGERED_EVENT);
                 if(!$this->append($tmp)){
                   msg_dialog::display(_("Error"), sprintf(_("Cannot send abort event for entry: %s"),$entry['ID']) , ERROR_DIALOG);
-                  new log("debug","gosaSupportDaemon::clean_queue_from_mac", 
-                      "Sending 'DaemonEvent_faireboot' for ID '".$entry['ID']."' FAILED!",array(), "FAILED");
+                  new log("debug","DaemonEvent ", "gosaSupportDaemon::clean_queue_from_mac()", array($mac => $mac),
+                      "FAILED, could not send 'DaemonEvent_faireboot' for entry ID (".$entry['ID'].") - ".$this->get_error());
                 }else{
-                  new log("debug","gosaSupportDaemon::clean_queue_from_mac", 
-                      "Sending 'DaemonEvent_faireboot' for ID '".$entry['ID']."' successfull",array(), "SUCCESS");
+                  new log("debug","DaemonEvent ", "gosaSupportDaemon::clean_queue_from_mac()", array($mac => $mac),
+                      "SUCCESS, send 'DaemonEvent_faireboot' for entry ID (".$entry['ID'].")");
                 }
                 ;break;
               }else{
@@ -788,11 +776,6 @@ $xml_msg.= "
                */ 
               if(!$this->remove_entries(array($entry['ID']))){
                 msg_dialog::display(_("Error"), sprintf(_("Cannot remove entry: %s"),$entry['ID']) , ERROR_DIALOG);
-                new log("debug","gosaSupportDaemon::clean_queue_from_mac", 
-                    "Removing entry ID '".$entry['ID']."' FAILED!",array(), "FAILED");
-              }else{
-                new log("debug","gosaSupportDaemon::clean_queue_from_mac",
-                    "Removing entry ID '".$entry['ID']."' successfull!",array(),"SUCCESS");
               }
               ;break;
           }
