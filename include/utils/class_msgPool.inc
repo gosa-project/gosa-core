@@ -57,6 +57,24 @@ class msgPool
   }
 
 
+  public static function permView($name= "")
+  {
+    if ($name == "") { 
+      return (_("You have no permission to view this object!"));
+    }
+
+    if (!is_array($name)){
+      return (_("You have no permission to view the object:")."<br><br><i>$name</i>");
+    }
+
+    if (count($name) == 1){
+      return (_("You have no permission to view the object:")."<br>".msgPool::buildList($name));
+    }
+
+    return (_("You have no permission to view these objects:")."<br>".msgPool::buildList($name));
+  }
+
+
   public static function permMove($name= "")
   {
     if ($name == "") { 
@@ -81,7 +99,7 @@ class msgPool
       $error= "<br><br><i>"._("Error").":</i> ".$error;
     }
     if ($dbinfo != ""){
-      $error= "<br><br><i>"._("Connection information").":</i> ".$dbinfo;
+      $error.= "<br><br><i>"._("Connection information").":</i> ".$dbinfo;
     }
     return (sprintf(_("Cannot connect to server %s!"), $name).$error);
   }
@@ -93,7 +111,7 @@ class msgPool
       $error= "<br><br><i>"._("Error").":</i> ".$error;
     }
     if ($dbinfo != ""){
-      $error= "<br><br><i>"._("Connection information").":</i> ".$dbinfo;
+      $error.= "<br><br><i>"._("Connection information").":</i> ".$dbinfo;
     }
     return (sprintf(_("Cannot select %s database!"), $name).$error);
   }
@@ -105,7 +123,7 @@ class msgPool
       $error= "<br><br><i>"._("Error").":</i> ".$error;
     }
     if ($dbinfo != ""){
-      $error= "<br><br><i>"._("Connection information").":</i> ".$dbinfo;
+      $error.= "<br><br><i>"._("Connection information").":</i> ".$dbinfo;
     }
     return (sprintf(_("Cannot query %s database!"), $name).$error);
   }
