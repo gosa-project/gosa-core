@@ -1,6 +1,6 @@
 
-create database golog;
-use golog;
+create database gomon;
+use gomon;
 
 create table golog (
 	time_stamp DATETIME,
@@ -11,4 +11,4 @@ create table golog (
 	matched_ts DATETIME
 	);
 
-GRANT INSERT,SELECT,DELETE ON golog.golog TO gomon@localhost IDENTIFIED BY 'somemysqlpass';
+GRANT INSERT,SELECT,DELETE ON gomon.golog TO gomon@localhost IDENTIFIED BY 'somemysqlpass';
