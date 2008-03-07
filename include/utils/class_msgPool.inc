@@ -135,4 +135,52 @@ class msgPool
     return sprintf(_("Missing %s PHP extension!"), $name);
   }
 
+
+  public static function cancelButton()
+  {
+    return sprintf(_("Cancel"));
+  }
+
+
+  public static function okButton()
+  {
+    return sprintf(_("Ok"));
+  }
+
+
+  public static function applyButton()
+  {
+    return sprintf(_("Apply"));
+  }
+
+
+  public static function saveButton()
+  {
+    return sprintf(_("Save"));
+  }
+
+
+  public static function addButton($what= "")
+  {
+    return $what == "" ? sprintf(_("Add"): sprintf(_("Add %s"), $what));
+  }
+
+
+  public static function delButton($what= "")
+  {
+    return $what == "" ? sprintf(_("Delete"): sprintf(_("Delete %s"), $what));
+  }
+
+
+  public static function setButton($what= "")
+  {
+    return $what == "" ? sprintf(_("Set"): sprintf(_("Set %s"), $what));
+  }
+
+
+  public static function editButton($what= "")
+  {
+    return $what == "" ? sprintf(_("Edit..."): sprintf(_("Edit %s..."), $what));
+  }
+
 }
