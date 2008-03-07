@@ -1357,23 +1357,6 @@ function get_printer_list()
 }
 
 
-function show_ldap_error($message, $addon= "")
-{
-  if (!preg_match("/Success/i", $message)){
-    if ($addon == ""){
-      msg_dialog::display(_("LDAP error:"), $message, ERROR_DIALOG);
-    } else {
-      if(!preg_match("/No such object/i",$message)){
-        msg_dialog::display(_("LDAP error"), sprintf(_("Plugin '%s':%s"),"<i>".$addon."</i>", "<br><br>$message"),ERROR_DIALOG);
-      }
-    }
-    return TRUE;
-  } else {
-    return FALSE;
-  }
-}
-
-
 function rewrite($s)
 {
   global $REWRITE;

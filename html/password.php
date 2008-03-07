@@ -237,7 +237,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])){
   /* Do we need to show error messages? */
   if (count ($message) != 0){
 	  /* Show error message and continue editing */
-	  show_errors($message);
+	  msgDialog::displayChecks($message);
   } else {
 
 	  /* Passed quality check, just try to change the password now */
@@ -251,7 +251,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])){
 	  }
 	  if ($output != ""){
 		  $message[]= _("External password changer reported a problem: ".$output);
-		  show_errors($message);
+		  msgDialog::displayChecks($message);
 	  } else {
 		  if ($method != ""){
 			  change_password ($ui->dn, $_POST['new_password'], 0, $method);

@@ -251,7 +251,7 @@ class userManagement extends plugin
         if (count($message) != 0){
 
           /* Show error message and continue editing */
-          show_errors ($message);
+          msgDialog::displayChecks($message);
           return($smarty->fetch(get_template_path('password.tpl', TRUE)));
         }
 
@@ -679,7 +679,7 @@ class userManagement extends plugin
       } else {
         /* Ok. There seem to be errors regarding to the tab data,
            show message and continue as usual. */
-        show_errors($message);
+        msgDialog::displayChecks($message);
       }
     }
 
@@ -743,7 +743,7 @@ class userManagement extends plugin
     
       /* Show error message / continue editing */
       if (count($message) > 0){
-        show_errors ($message);
+        msgDialog::displayChecks($message);
 
         foreach(array("sn", "givenName", "uid", "template") as $attr){
           if(isset($_POST[$attr])){
@@ -830,7 +830,7 @@ class userManagement extends plugin
 
       /* Show error message / continue editing */
       if (count($message) > 0){
-        show_errors ($message);
+        msgDialog::displayChecks($message);
       } else {
         $attributes= array('sn' => $this->sn, 'givenName' => $this->givenName);
         if (isset($this->config->current['IDGEN']) &&
