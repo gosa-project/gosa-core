@@ -83,7 +83,7 @@ class msgPool
     if ($dbinfo != ""){
       $error= "<br><br><i>"._("Connection information").":</i> ".$dbinfo;
     }
-    return (sprintf(_("Cannot connect to %s database!"), $name).$error);
+    return (sprintf(_("Cannot connect to server %s!"), $name).$error);
   }
 
 
