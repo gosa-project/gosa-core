@@ -2,6 +2,41 @@
 
 class msgPool
 {
+  public static function dbconnect($name, $error= "", $dbinfo= "")
+  {
+    if ($error != ""){
+      $error= "<br><br><i>"._("Error").":</i> ".$error;
+    }
+    if ($dbinfo != ""){
+      $error= "<br><br><i>"._("Connection information").":</i> ".$dbinfo;
+    }
+    return (sprintf(_("Cannot connect to %s database!"), $name).$error);
+  }
+
+
+  public static function dbselect($name, $error= "", $dbinfo= "")
+  {
+    if ($error != ""){
+      $error= "<br><br><i>"._("Error").":</i> ".$error;
+    }
+    if ($dbinfo != ""){
+      $error= "<br><br><i>"._("Connection information").":</i> ".$dbinfo;
+    }
+    return (sprintf(_("Cannot select %s database!"), $name).$error);
+  }
+
+
+  public static function dbquery($name, $error= "", $dbinfo= "")
+  {
+    if ($error != ""){
+      $error= "<br><br><i>"._("Error").":</i> ".$error;
+    }
+    if ($dbinfo != ""){
+      $error= "<br><br><i>"._("Connection information").":</i> ".$dbinfo;
+    }
+    return (sprintf(_("Cannot query %s database!"), $name).$error);
+  }
+
 
   public static function reserved($name)
   {
@@ -69,7 +104,7 @@ class msgPool
   {
     /* Stylize example */
     if ($example != ""){
-      $example= "<br><br>"._("Example:")." ".$example;
+      $example= "<br><br><i>"._("Example").":</i> ".$example;
     }
 
     /* If validChars are posted, take data and paint all invalid
@@ -99,4 +134,5 @@ class msgPool
   {
     return sprintf(_("Missing %s PHP extension!"), $name);
   }
+
 }
