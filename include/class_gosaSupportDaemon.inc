@@ -718,20 +718,7 @@ $xml_msg.= "
     /* First of all we have to check which jobs are startet 
      *  for $mac 
      */
-    $xml_msg ="
-      <xml>
-       <header>gosa_query_jobdb</header>
-       <target>GOSA</target>
-       <source>GOSA</source>
-       <where>
-        <clause>
-         <phrase>
-          <macaddress>".$mac."</macaddress>
-         </phrase>
-        </clause>
-       </where>
-      </xml>
-    ";  
+    $xml_msg ="<xml><header>gosa_query_jobdb</header><target>GOSA</target><source>GOSA</source><where><clause><phrase><macaddress>".$mac."</macaddress></phrase></clause></where></xml>";  
     
     new log("debug","DaemonEvent ", "gosaSupportDaemon::clean_queue_from_mac()", array($mac => $mac)," start cleaning.");
  
