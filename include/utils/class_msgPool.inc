@@ -361,4 +361,10 @@ class msgPool
 		        _("October"), _("November"), _("December"));
   }
 
+
+  public static function weekdays()
+  {
+	return array( _("Sunday"), _("Monday"), _("Tuesday"), _("Wednesday"), _("Thursday"), _("Friday"), _("Saturday"));
+  }
+
 }
