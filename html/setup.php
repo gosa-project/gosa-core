@@ -54,17 +54,6 @@ ini_set("session.gc_maxlifetime",24*60*60);
 session_start ();
 $_SESSION['DEBUGLEVEL']= 1;
 
-/* Check for js */
-if (!isset($_GET['js']) && !isset($_SESSION['js'])){
-  echo '<script language="JavaScript" type="text/javascript">';
-  echo '  location = "setup.php?js=true";';
-  echo '</script>';
-
-  $_SESSION['js']= FALSE;
-} elseif(isset($_GET['js'])) {
-  $_SESSION['js']= TRUE;
-}
-
 /* Attribute initialization, reset errors */
 $_SESSION['errors']             = "";
 $_SESSION['errorsAlreadyPosted']= array();
@@ -89,6 +78,17 @@ if(isset($_POST['lang_selected'])){
   }else{
     $_SESSION['lang'] = get_browser_language();
   }
+}
+
+/* Check for js */
+if (!isset($_GET['js']) && !isset($_SESSION['js'])){
+  echo '<script language="JavaScript" type="text/javascript">';
+  echo '  location = "setup.php?js=true";';
+  echo '</script>';
+
+  $_SESSION['js']= FALSE;
+} elseif(isset($_GET['js'])) {
+  $_SESSION['js']= TRUE;
 }
 
 $lang = $_SESSION['lang'];
