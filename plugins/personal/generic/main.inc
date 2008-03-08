@@ -91,7 +91,7 @@ if (!$remove_lock){
       if (count($message) != 0){
 
         /* Show error message and continue editing */
-        msgDialog::displayChecks($message);
+        msg_dialog::displayChecks($message);
         $display.= $smarty->fetch(get_template_path('password.tpl', TRUE));
         return ($display);
       }
@@ -133,7 +133,7 @@ if (!$remove_lock){
 
     } else {
       /* Errors found, show message */
-      msgDialog::displayChecks($message);
+      msg_dialog::displayChecks($message);
     }
   }
 

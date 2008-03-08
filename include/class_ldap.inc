@@ -632,8 +632,8 @@ class LDAP{
         $this->cd($cdn);
         $this->add($na);
     
-        show_ldap_error($this->get_error(), sprintf(_("Creating subtree '%s' failed."),$cdn));
-        if (!preg_match('/success/i', $this->error)){
+        if (!$this->success()){
+          msg_dialog::display(_("LDAP error"), msgPool::ldaperror($this->get_error(), $cdn, LDAP_ADD, get_class()));
           return FALSE;
         }
       }
@@ -1097,7 +1097,11 @@ class LDAP{
         $ret = $this->modify($data);
       }
     }
-    show_ldap_error($this->get_error(), sprintf(_("Ldap import with dn '%s' failed."),$dn));
+
+    if (!$this->success()){
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($this->get_error(), $dn, "", get_class()));
+    }
+
     return($ret);
   }
 

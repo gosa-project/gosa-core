@@ -573,7 +573,9 @@ class group extends plugin
 
     $ldap= $this->config->get_ldap_link();
     $ldap->rmdir($this->dn);
-    show_ldap_error($ldap->get_error(), sprintf(_("Removing of groups/generic with dn '%s' failed."),$this->dn));
+    if (!$ldap->success()){
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, get_class()));
+    }
 
     new log("remove","groups/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
 
@@ -838,7 +840,8 @@ class group extends plugin
     }
 
     $ret= 0;
-    if ( show_ldap_error($ldap->get_error(), sprintf(_("Removing of groups/generic with dn '%s' failed."),$this->dn))){
+    if (!$ldap->success()){
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, get_class()));
       $ret= 1;
     }
 

@@ -57,8 +57,6 @@ class tests {
 
   public static function is_uid($uid)
   {
-    global $config;
-
     if ($uid == ""){
       return (TRUE);
     }

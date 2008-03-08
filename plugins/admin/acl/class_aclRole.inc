@@ -581,7 +581,9 @@ class aclrole extends acl
       new log("create","aclroles/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
     }
 
-    show_ldap_error($ldap->get_error(), sprintf(_("Saving ACLs with dn '%s' failed."),$this->dn));
+    if (!$ldap->success()){
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, "", get_class()));
+    }
 
     /* Refresh users ACLs */
     $ui= get_userinfo();
@@ -619,7 +621,9 @@ class aclrole extends acl
         
     $ldap->rmDir($this->dn);
     new log("remove","aclroles/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
-    show_ldap_error($ldap->get_error(), sprintf(_("Removing of aclRole with dn '%s' failed."),$this->dn));
+    if (!$ldap->success()){
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, "", get_class()));
+    }
 
     /* Optionally execute a command after we're done */
     $this->handle_post_events("remove");
@@ -631,7 +635,9 @@ class aclrole extends acl
       $og= new ogroup($this->config, $ldap->getDN());
       unset($og->member[$this->dn]);
       $og->save ();
-      show_ldap_error($ldap->get_error(), sprintf(_("Removing aclRole from objectgroup '%s' failed"), $og->dn));
+      if (!$ldap->success()){
+        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $og->dn, "", get_class()));
+      }
     }
   }
 

@@ -1212,6 +1212,8 @@ function get_base_from_people($dn)
 
 function strict_uid_mode()
 {
+  global $config;
+
   return !(isset($config->current['STRICT']) && preg_match('/^(no|false)$/i', $config->current['STRICT']));
 }
 

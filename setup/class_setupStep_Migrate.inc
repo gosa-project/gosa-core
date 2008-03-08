@@ -1916,7 +1916,9 @@ class Step_Migrate extends setup_step
       msg_dialog::display(_("LDAP error"), sprintf(_("Copy '%s' to '%s' failed:")."<br><br><i>%s</i>", LDAP::fix($source), LDAP::fix($destination), $ldap->get_error()), ERROR_DIALOG);
     }else{
       $res = $ldap->rmDir($source);
-      show_ldap_error($ldap->get_error(),_("Problem copying DNs"));
+      if (!$ldap->success()){
+        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $source, LDAP_DEL, get_class()));
+      }
 
       /* Object is copied, so update its references */
       foreach($ogs_to_fix as $dn => $data){

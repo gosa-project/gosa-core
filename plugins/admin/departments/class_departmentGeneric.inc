@@ -186,7 +186,9 @@ class department extends plugin
 		$ldap->cd ($this->dn);
 		$ldap->recursive_remove();
     new log("remove","department/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
-    show_ldap_error($ldap->get_error(), sprintf(_("Removing of department with dn '%s' failed."),$this->dn));
+    if (!$ldap->success()){
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, get_class()));
+    }
 
 		/* Optionally execute a command after we're done */
 		$this->handle_post_events('remove');
@@ -359,7 +361,9 @@ class department extends plugin
 			$this->handle_post_events('add');
       new log("create","department/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
 		}
-    show_ldap_error($ldap->get_error(), sprintf(_("Saving of department with dn '%s' failed."),$this->dn));
+    if (!$ldap->success()){
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, get_class()));
+    }
 
     /* The parameter forces only to set must_be_tagged, and don't touch any objects 
        This will be done later */
@@ -652,7 +656,9 @@ class department extends plugin
         $nattrs['objectClass'][]= "gosaAdministrativeUnitTag";
         $ldap->cd($dn);
         $ldap->modify($nattrs);
-        show_ldap_error($ldap->get_error(), sprintf(_("Handle object tagging with dn '%s' failed."),$dn));
+        if (!$ldap->success()){
+          msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, get_class()));
+        }
       } else {
         @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "Not tagging ($tag) $dn - seems to have moved away", "Tagging");
       }
@@ -681,7 +687,9 @@ class department extends plugin
         }
         $ldap->cd($dn);
         $ldap->modify($nattrs);
-        show_ldap_error($ldap->get_error(), sprintf(_("Handle object tagging with dn '%s' failed."),$dn));
+        if (!$ldap->success()){
+          msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, get_class()));
+        }
       } else {
         @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "Not removing tag ($tag) $dn - seems to have moved away", "Tagging");
       }

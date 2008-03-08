@@ -682,7 +682,8 @@ class ogroup extends plugin
     $this->handle_post_events($mode);
 
     $ret= 0;
-    if (show_ldap_error($ldap->get_error(), sprintf(_("Saving of object group/generic with dn '%s' failed."),$this->dn))){
+    if (!$ldap->success()){
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, get_class()));
       $ret= 1;
     }
 
@@ -695,7 +696,9 @@ class ogroup extends plugin
 
     $ldap= $this->config->get_ldap_link();
     $ldap->rmdir($this->dn);
-    show_ldap_error($ldap->get_error(), sprintf(_("Removing of object group/generic with dn '%s' failed."),$this->dn));
+    if (!$ldap->success()){
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, get_class()));
+    }
 
     new log("remove","ogroups/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
 

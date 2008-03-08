@@ -659,7 +659,9 @@ class posixAccount extends plugin
 
     new log("remove","users/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
 
-    show_ldap_error($ldap->get_error(), sprintf(_("Removing of user/posix account with dn '%s' failed."),$this->dn));
+    if (!$ldap->success()){
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, get_class()));
+    }
 
     /* Delete group only if cn is uid and there are no other
        members inside */
@@ -923,7 +925,9 @@ class posixAccount extends plugin
       new log("create","users/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
     }
 
-    show_ldap_error($ldap->get_error(), sprintf(_("Saving of user/posix account with dn '%s' failed."),$this->dn));
+    if (!$ldap->success()){
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_MOD, get_class()));
+    }
 
     /* Remove lock needed for unique id generation */
     del_lock ("uidnumber");

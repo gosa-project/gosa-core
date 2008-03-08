@@ -395,7 +395,7 @@ class aclManagement extends plugin
       } else {
         /* Ok. There seem to be errors regarding to the tab data,
            show message and continue as usual. */
-        msgDialog::displayChecks($message);
+        msg_dialog::displayChecks($message);
       }
     }
 

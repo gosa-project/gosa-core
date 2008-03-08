@@ -251,7 +251,7 @@ class userManagement extends plugin
         if (count($message) != 0){
 
           /* Show error message and continue editing */
-          msgDialog::displayChecks($message);
+          msg_dialog::displayChecks($message);
           return($smarty->fetch(get_template_path('password.tpl', TRUE)));
         }
 
@@ -541,10 +541,8 @@ class userManagement extends plugin
         $ldap = $this->config->get_ldap_link();
         $ldap->cd($val['dn']);
         $ldap->modify($attrs);
-        if($locked){
-          show_ldap_error($ldap->get_error(),_("Could not set user status from locked to unlocked."));
-        }else{
-          show_ldap_error($ldap->get_error(),_("Could not set user status from unlocked to locked."));
+        if (!$ldap->success()){
+          msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $val['dn'], 0, get_class()));
         }
       }
     }
@@ -679,7 +677,7 @@ class userManagement extends plugin
       } else {
         /* Ok. There seem to be errors regarding to the tab data,
            show message and continue as usual. */
-        msgDialog::displayChecks($message);
+        msg_dialog::displayChecks($message);
       }
     }
 
@@ -743,7 +741,7 @@ class userManagement extends plugin
     
       /* Show error message / continue editing */
       if (count($message) > 0){
-        msgDialog::displayChecks($message);
+        msg_dialog::displayChecks($message);
 
         foreach(array("sn", "givenName", "uid", "template") as $attr){
           if(isset($_POST[$attr])){
@@ -830,7 +828,7 @@ class userManagement extends plugin
 
       /* Show error message / continue editing */
       if (count($message) > 0){
-        msgDialog::displayChecks($message);
+        msg_dialog::displayChecks($message);
       } else {
         $attributes= array('sn' => $this->sn, 'givenName' => $this->givenName);
         if (isset($this->config->current['IDGEN']) &&

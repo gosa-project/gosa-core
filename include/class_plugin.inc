@@ -1073,7 +1073,11 @@ class plugin
 
       $ldap_to        = new LDAP($user,$password, $server);
       $ldap_to -> cd($snapldapbase);
-      show_ldap_error($ldap->get_error(), sprintf(_("Saving object snapshot with dn '%s' failed."),$snapldapbase));
+
+      if (!$ldap_to->success()){
+        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $snapldapbase, "", get_class()));
+      }
+
     }
 
     /* check if the dn exists */ 
@@ -1119,9 +1123,14 @@ class plugin
       $ldap_to->create_missing_trees($new_base);
       $ldap_to->cd($new_dn);
       $ldap_to->add($target);
-    
-      show_ldap_error($ldap->get_error(), sprintf(_("Saving object snapshot with dn '%s' failed."),$new_base));
-      show_ldap_error($ldap_to->get_error(), sprintf(_("Saving object snapshot with dn '%s' failed."),$new_base));
+      if (!$ldap_to->success()){
+        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $new_dn, LDAP_ADD, get_class()));
+      }
+
+      if (!$ldap->success()){
+        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $new_base, "", get_class()));
+      }
+
     }
   }
 
@@ -1195,7 +1204,9 @@ class plugin
 
       $ldap_to      = new LDAP($user,$password, $server);
       $ldap_to -> cd ($snapldapbase);
-      show_ldap_error($ldap->get_error(), sprintf(_("Method get available snapshots with dn '%s' failed."),$this->dn));
+      if (!$ldap_to->success()){
+        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $snapldapbase, "", get_class()));
+      }
     }else{
       $ldap_to    = $ldap;
     }
@@ -1251,7 +1262,9 @@ class plugin
       $snapldapbase = $cfg['SNAPSHOT_BASE'];
       $ldap_to      = new LDAP($user,$password, $server);
       $ldap_to->cd ($snapldapbase);
-      show_ldap_error($ldap_to->get_error(), sprintf(_("Method get deleted snapshots with dn '%s' failed."),$this->dn));
+      if (!$ldap_to->success()){
+        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $snapldapbase, "", get_class()));
+      }
     }else{
       $ldap_to    = $ldap;
     }
@@ -1315,7 +1328,9 @@ class plugin
       $snapldapbase = $cfg['SNAPSHOT_BASE'];
       $ldap_to      = new LDAP($user,$password, $server);
       $ldap_to->cd ($snapldapbase);
-      show_ldap_error($ldap->get_error(), sprintf(_("Restore snapshot with dn '%s' failed."),$snapldapbase));
+      if (!$ldap_to->success()){
+        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $snapldapbase, "", get_class()));
+      }
     }else{
       $ldap_to    = $ldap;
     }
@@ -1329,7 +1344,9 @@ class plugin
 
     /* Import the given data */
     $ldap->import_complete_ldif($data,$err,false,false);
-    show_ldap_error($ldap->get_error(), sprintf(_("Restore snapshot with dn '%s' failed."),$dn));
+    if (!$ldap->success()){
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, "", get_class()));
+    }
   }
 
 
