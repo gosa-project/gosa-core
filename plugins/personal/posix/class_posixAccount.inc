@@ -1043,10 +1043,10 @@ class posixAccount extends plugin
         $message[]= msgPool::depends("shadowWarning", "shadowMax");
       }
       if ($this->shadowWarning > $this->shadowMax){
-        $message[]= msgPool::smaller("shadowWarning", "shadowMax");
+        $message[]= msgPool::toobig("shadowWarning", "shadowMax");
       }
       if ($this->activate_shadowMin && $this->shadowWarning < $this->shadowMin){
-        $message[]= msgPool::bigger("shadowWarning", "shadowMin");
+        $message[]= msgPool::toosmall("shadowWarning", "shadowMin");
       }
     }
     if ($this->activate_shadowInactive){
@@ -1059,7 +1059,7 @@ class posixAccount extends plugin
     }
     if ($this->activate_shadowMin && $this->activate_shadowMax){
       if ($this->shadowMin > $this->shadowMax){
-        $message[]= msgPool::smaller("shadowMin", "shadowMax");
+        $message[]= msgPool::toobig("shadowMin", "shadowMax");
       }
     }
 
@@ -1096,10 +1096,10 @@ class posixAccount extends plugin
         $message[]= msgPool::depends("shadowWarning", "shadowMax");
       }
       if ($this->shadowWarning > $this->shadowMax && in_array("activate_shadowWarning",$this->multi_boxes)){
-        $message[]= msgPool::smaller("shadowWarning", "shadowMax");
+        $message[]= msgPool::toobig("shadowWarning", "shadowMax");
       }
       if ($this->activate_shadowMin && $this->shadowWarning < $this->shadowMin && in_array("activate_shadowMin",$this->multi_boxes)){
-        $message[]= msgPool::bigger("shadowWarning", "shadowMin");
+        $message[]= msgPool::tosmall("shadowWarning", "shadowMin");
       }
     }
     if ($this->activate_shadowInactive && in_array("activate_shadowInactive",$this->multi_boxes)){
@@ -1112,7 +1112,7 @@ class posixAccount extends plugin
     }
     if ($this->activate_shadowMin && $this->activate_shadowMax && in_array("activate_shadowMin",$this->multi_boxes)){
       if ($this->shadowMin > $this->shadowMax){
-        $message[]= msgPool::smaller("shadowMin", "shadowMax");
+        $message[]= msgPool::toobig("shadowMin", "shadowMax");
       }
     }
 
