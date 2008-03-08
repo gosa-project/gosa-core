@@ -694,6 +694,13 @@ class LDAP{
     return ($error);
   }
 
+
+  function success()
+  {
+    return (preg_match('/Success/i', $this->error));
+  }
+
+
   function get_error()
   {
     if ($this->error == 'Success'){

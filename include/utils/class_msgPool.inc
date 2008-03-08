@@ -1,4 +1,10 @@
 <?php
+define ("LDAP_READ",   1);
+define ("LDAP_ADD",    2);
+define ("LDAP_MOD",    3);
+define ("LDAP_DEL",    4);
+define ("LDAP_SEARCH", 5);
+define ("LDAP_AUTH",   6);
 
 class msgPool
 {
@@ -150,7 +156,7 @@ class msgPool
   public static function toobig($name, $min= "")
   {
     if ($min == ""){
-      return (sprintf(_("Value for '%s' is too big!"), $name));
+      return (sprintf(_("Value for '%s' is too large!"), $name));
     } else {
       return (sprintf(_("'%s' must be smaller than %d!"), $name, $min));
     }
@@ -164,18 +170,6 @@ class msgPool
     } else {
       return (sprintf(_("'%s' must be %d or above!"), $name, $min));
     }
-  }
-
-
-  public static function bigger($name1, $name2)
-  {
-    return (sprintf(_("'%s' should be bigger than '%s'!"), $name1, $name2));
-  }
-
-
-  public static function smaller($name1, $name2)
-  {
-    return (sprintf(_("'%s' should be smaller than '%s'!"), $name1, $name2));
   }
 
 
@@ -367,4 +361,28 @@ class msgPool
 	return array( _("Sunday"), _("Monday"), _("Tuesday"), _("Wednesday"), _("Thursday"), _("Friday"), _("Saturday"));
   }
 
+
+  public static function ldaperror($error, $dn= "", $type= 0, $plugin= "")
+  {
+	/* Assign headline depending on type */
+	$typemap= array(1 => _("read operation"), _("add operation"), _("modify operation"),
+			     _("delete operation"), _("search operation"), _("authentication"));
+	
+	if (isset($typemap[$type])){
+		$headline= sprintf(_("LDAP %s failed!"), $typemap[$type]);
+	} else {
+		$headline= _("LDAP operation failed!");
+	}
+
+	/* Fill DN information */
+	if ($dn != ""){
+		$dn_info= "<br><br><i>"._("Object").":</i> ".LDAP::fix($dn);
+	}
+
+	return $headline.$dn_info."<br><br><i>"._("Error").":</i> ".$error;
+  }
+
+
 }
+
+?>
