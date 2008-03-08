@@ -272,7 +272,7 @@ class posixAccount extends plugin
       /* Do we represent a valid posixAccount? */
       if (!$this->is_account && $this->parent === NULL ){
         $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
-          _("This account has no unix extensions.")."</b>";
+          msgPool::noValidExtension(_("POSIX"))."</b>";
         $display.= back_to_main();
         return ($display);
       }
@@ -292,15 +292,12 @@ class posixAccount extends plugin
                in the moment, because I need to rely on unique
                uidNumbers. There'll be a better solution later
                on. */
-            $display= $this->show_disable_header(_("Remove posix account"),
-                _("This account has unix features enabled. To disable them, you'll need to remove the samba / environment account first."), TRUE);
+            $display= $this->show_disable_header(msgPool::removeFeaturesButton(_("POSIX")), msgPool::featuresEnabled(_("POSIX"), array(_("Samba"), _("Environment"))), TRUE);
           } else {
-            $display= $this->show_disable_header(_("Remove posix account"),
-                _("This account has posix features enabled. You can disable them by clicking below."));
+            $display= $this->show_disable_header(msgPool::removeFeaturesButton(_("POSIX")), msgPool::featuresEnabled(_("POSIX")));
           }
         } else {
-          $display= $this->show_enable_header(_("Create posix account"),
-              _("This account has posix features disabled. You can enable them by clicking below."));
+          $display= $this->show_enable_header(msgPool::addFeaturesButton(_("POSIX")), msgPool::featuresDisabled(_("POSIX")));
           return($display);
         }
       }

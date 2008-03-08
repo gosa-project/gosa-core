@@ -307,7 +307,7 @@ class user extends plugin
     /* Do we represent a valid gosaAccount? */
     if (!$this->is_account){
       $str = "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
-        _("This account has no valid GOsa extensions.")."</b>";
+        msgPool::noValidExtension("GOsa")."</b>";
       return($str);
     }
 

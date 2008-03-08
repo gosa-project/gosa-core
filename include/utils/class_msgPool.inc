@@ -293,5 +293,59 @@ class msgPool
     }
   }
 
+  public static function noValidExtension($name)
+  {
+	return sprintf(_("This account has no valid %s extensions!", $name));
+  }
+
+  public static function featuresEnabled($name, $depends= "")
+  {
+	if ($depends == ""){
+		return sprintf(_("This account has %s settings enabled. You can disable them by clicking below."), $name);
+	} else {
+		if (is_array($depends)){
+			return sprintf(_("This account has %s settings enabled. To disable them, you'll need to remove the %s settings first!"), $depends);
+		} else {
+			$deps= "";
+			foreach ($depends as $dep){
+				$deps.= "$dep / ";
+			}
+			$deps= preg_replace("/ \/ $/", "", $deps);
+			return sprintf(_("This account has %s settings enabled. To disable them, you'll need to remove the %s settings first!"), $deps);
+		}
+	}
+  }
+
+
+  public static function featuresDisabled($name, $depends= "")
+  {
+	if ($depends == ""){
+		return sprintf(_("This account has %s settings disabled. You can enable them by clicking below."), $name);
+	} else {
+		if (is_array($depends)){
+			return sprintf(_("This account has %s settings disabled. To enable them, you'll need to add the %s settings first!"), $depends);
+		} else {
+			$deps= "";
+			foreach ($depends as $dep){
+				$deps.= "$dep / ";
+			}
+			$deps= preg_replace("/ \/ $/", "", $deps);
+			return sprintf(_("This account has %s features settings. To disable them, you'll need to add the %s settings first!"), $deps);
+		}
+	}
+  }
+
+
+  public static function addFeaturesButton($name)
+  {
+	return sprintf(_("Add %s settings"), $name);
+  }
+
+
+  public static function removeFeaturesButton($name)
+  {
+	return sprintf(_("Remove %s settings"), $name);
+  }
+
 
 }

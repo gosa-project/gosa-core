@@ -128,7 +128,7 @@ if (!$remove_lock){
 
   /* Page header*/
   $display= print_header(get_template_path('images/posix.png'),
-                         _("Unix settings"), $info).$display;
+                         _("POSIX settings"), $info).$display;
 
 }
 
