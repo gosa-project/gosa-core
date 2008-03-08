@@ -53,17 +53,6 @@ session::start();
 session::set('DEBUGLEVEL',1);
 session::set('errorsAlreadyPosted',array());
 
-/* Check for js */
-if (!isset($_GET['js']) && !session::is_set('js')){
-  echo '<script language="JavaScript" type="text/javascript">';
-  echo '  location = "setup.php?js=true";';
-  echo '</script>';
-
-  session::set('js',FALSE);
-} elseif(isset($_GET['js'])) {
-  session::set('js',TRUE);
-}
-
 /* Attribute initialization, reset errors */
 session::set('errors',"");
 session::set('errorsAlreadyPosted',array());
@@ -90,6 +79,18 @@ if(isset($_POST['lang_selected'])){
     session::set('lang',get_browser_language());
   }
 }
+
+/* Check for js */
+if (!isset($_GET['js']) && !session::is_set('js')){
+  echo '<script language="JavaScript" type="text/javascript">';
+  echo '  location = "setup.php?js=true";';
+  echo '</script>';
+
+  session::set('js',FALSE);
+} elseif(isset($_GET['js'])) {
+  session::set('js',TRUE);
+}
+
 
 $lang = session::get('lang');
 /* Append .UTF-8 to language string if necessary */
