@@ -1,0 +1,143 @@
+# VERSION 0.1 Antoine .gallavardin@cemagref.fr
+# Schema file wiche contains xen parameters
+
+
+
+# DESCRIPTION FOR DOMU
+
+# memory allowed to a DomU in Mo
+# ex : 128
+# obligatory
+# specified in <domU>.conf 
+attributetype ( 1.3.6.1.4.1.22262.1.1.10.1 NAME 'gosaXenDomuMem'
+        DESC 'Memory allowed to a DomU'
+        EQUALITY caseExactIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+        SINGLE-VALUE)
+
+# Max memory allowed to a DomU
+# Used by Xen Xen but Don't used by xen-tools
+# optional
+# specified in <domU>.conf
+attributetype ( 1.3.6.1.4.1.22262.1.1.10.2 NAME 'gosaXenDomuMemMax'
+        DESC 'Max Memory allowed to a DomU'
+        EQUALITY caseExactIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+        SINGLE-VALUE)
+
+# Kernel version use (DomO use by default)
+# like vmlinuz
+# don't use in commande line by xen-tools 
+# parameters is stored in global conf file : /etc/xen-tools/xen-tools.cfg
+# obligatory
+# specified in <domU>.conf
+attributetype ( 1.3.6.1.4.1.22262.1.1.10.3 NAME 'gosaXenDomuKernel'
+        DESC 'Kernel version use (DomO use by default)'
+        EQUALITY caseExactIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+        SINGLE-VALUE)
+
+# RamDisk version use (DomO use by default)
+# like initrd.img
+# don't use in commande line by xen-tools ( xen-create-image )
+# parameters is stored in global conf file : /etc/xen-tools/xen-tools.cfg
+# optional ( depend of tuype of kernel used)
+# specified in <domU>.conf
+attributetype ( 1.3.6.1.4.1.22262.1.1.10.4 NAME 'gosaXenDomuRamDisk'
+        DESC 'RamDisk version use (DomO use by default)'
+        EQUALITY caseExactIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+        SINGLE-VALUE)
+
+
+# Networking interface status dhcp or not
+# used by command line : xen-create-image
+# specified in <domU>.conf
+attributetype ( 1.3.6.1.4.1.22262.1.1.10.8 NAME 'gosaXenDomuNetworkStatus'
+        DESC 'Networkinf interface status (DHCP or not)'
+        EQUALITY caseExactIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+        SINGLE-VALUE)
+
+# Block device
+# XEN-TOOL create by default 2 block device <name-of-domU>-disk and <name-of-domU>-swap
+# for the moment there is no special parameter in order to create specific block device for /var ou /home
+# specified in <domU>.conf
+
+
+# Dom0 server used for this domU
+# must be filled
+# server must contains xen-tools correctly installed
+attributetype ( 1.3.6.1.4.1.22262.1.1.10.9 NAME 'gosaXenDomuServerDom0'
+        DESC 'Dom0 server used for this domU'
+        EQUALITY caseExactIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+        SINGLE-VALUE)
+
+
+# DomU : Installation Method
+# it depends of type of linux
+# it could be deb, rpm
+# specified inb xen-tools.conf
+attributetype ( 1.3.6.1.4.1.22262.1.1.10.11 NAME 'gosaXenDomuInstallMethod'
+        DESC 'Installation Method for DomU'
+        EQUALITY caseExactIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+        SINGLE-VALUE)
+
+# DomU : Installation Version
+# Feisty or gutsy or etch ( see xen-tools.conf for more information )
+# specified inb xen-tools.conf
+attributetype ( 1.3.6.1.4.1.22262.1.1.10.12 NAME 'gosaXenDomuInstallVersion'
+        DESC 'Installation Version for DomU'
+        EQUALITY caseExactIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+        SINGLE-VALUE)
+
+
+
+# ACTION FOR MANAGING DOMU
+
+# action when DomO is halting
+# don't use by xen-tools
+# post install parameters
+# what do Xen on this domU when domU is halting ?
+# specified in <domU>.conf
+attributetype ( 1.3.6.1.4.1.22262.1.1.10.5 NAME 'gosaXenDomuActionDom0Halt'
+        DESC 'action when DomO is halting'
+        EQUALITY caseExactIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+        SINGLE-VALUE)
+
+# action when DomO is shutdowning
+# don't use by xen-tools
+# post install parameters
+# what do Xen on this domU when domU is shutdowning ?
+# specified in <domU>.conf
+attributetype ( 1.3.6.1.4.1.22262.1.1.10.6 NAME 'gosaXenDomuActionDom0Shutdown'
+        DESC 'action when DomO is Shutdowning'
+        EQUALITY caseExactIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+        SINGLE-VALUE)
+
+# action when DomO is rebootingus
+# don't use by xen-tools
+# post install parameters
+# what do Xen on this domU when domU is rebooting ?
+# specified in <domU>.conf
+attributetype ( 1.3.6.1.4.1.22262.1.1.10.7 NAME 'gosaXenDomuActionDom0Reboot'
+        DESC 'action when DomO is Rebooting'
+        EQUALITY caseExactIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+        SINGLE-VALUE)
+
+
+# DomU action : Pause Halt Reboot
+# don't use by xen-tools
+# post install Action
+attributetype ( 1.3.6.1.4.1.22262.1.1.10.10 NAME 'gosaXenDomuAction'
+        DESC 'DomU action : Pause Halt Reboot'
+        EQUALITY caseExactIA5Match
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+        SINGLE-VALUE)
+
