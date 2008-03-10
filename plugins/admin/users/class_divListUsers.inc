@@ -57,7 +57,6 @@ class divListUsers extends MultiSelectWindow
 
     /* Result page will look like a headpage */
     $this->SetHeadpageMode();
-    $this->SetInformation(_("This menu allows you to create, edit and delete selected users. Having a great number of users, you may want to use the range selectors on top of the user list."));
 
     $this->EnableAplhabet   (true);
   

@@ -53,7 +53,6 @@ class divListACL extends MultiSelectWindow
 
     /* Result page will look like a headpage */
     $this->SetHeadpageMode();
-    $this->SetInformation(_("This menu allows you to edit and delete selected acls."));
 
     $this->EnableAplhabet   (true);
   

@@ -62,7 +62,6 @@ class divListOGroup extends MultiSelectWindow
 
     /* Result page will look like a headpage */
     $this->SetHeadpageMode();
-    $this->SetInformation(_("This menu allows you to add, edit or remove selected groups. You may want to use the range selector on top of the group listbox, when working with  a large number of groups."));
   
     /* Disable buttonsm */
     $this->EnableCloseButton(false);

@@ -50,7 +50,6 @@ class divListDepartment extends MultiSelectWindow
 
     /* Result page will look like a headpage */
     $this->SetHeadpageMode();
-    $this->SetInformation(_("This menu allows you to create, delete and edit selected departments. Having a large number of departments, you might prefer the range selectors on top of the department list."));
   
     /* Disable buttonsm */
     $this->EnableCloseButton(false);
