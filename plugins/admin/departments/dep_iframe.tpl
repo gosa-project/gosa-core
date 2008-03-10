@@ -15,7 +15,7 @@
 <p class="seperator">&nbsp;</p>
 <div style="text-align:right;">
 	<p>
-		<input type="submit" name="back" value="{t}Back{/t}">
+		<input type="submit" name="back" value="{msgPool type=backButton}">
 	</p>
 </div>
 -->
