@@ -763,7 +763,7 @@ class user extends plugin
           $this->base= $base;
         }else{
           $this->base = $base_tmp;
-          msg_dialog::display(_("Error"), sprintf(_("You have no permission to move this object to '%s'!"), LDAP::fix($_POST['base'])), ERROR_DIALOG);
+          msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
           $this->set_acl_base('dummy,'.$this->base);
         }
       }
