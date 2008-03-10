@@ -466,7 +466,7 @@ class ogroup extends plugin
       $ldap->cat($dn, array("cn", "sn", "givenName", "ou", "description", "objectClass"));
 
       /* It has failed, add entry with type flag I (Invalid)*/
-      if ($ldap->error != "Success"){
+      if (!$ldap->success()){
         $this->memberList[$dn]= array('text' => _("Non existing dn:")." ".@LDAP::fix($dn),"type" => "I");
 
       } else {

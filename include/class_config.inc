@@ -247,7 +247,8 @@ class config  {
         $this->ldap->referrals= $this->current['REFERRAL'];
       }
     }
-    return ($this->ldap);
+
+    return new ldapMultiplexer($this->ldap);
   }
 
   function set_current($name)

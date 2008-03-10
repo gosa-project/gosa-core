@@ -1348,7 +1348,7 @@ class posixAccount extends plugin
     $res= get_list($filter, "groups", $base,$attrs, $Flags);
   
     /* check sizelimit */
-    if (preg_match("/size limit/i", $ldap->error)){
+    if (preg_match("/size limit/i", $ldap->get_error())){
       session::set('limit_exceeded',TRUE);
     }
 

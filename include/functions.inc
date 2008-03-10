@@ -314,7 +314,7 @@ function ldap_init ($server, $base, $binddn='', $pass='')
       isset($config->current['TLS']) && $config->current['TLS'] == "true");
 
   /* Sadly we've no proper return values here. Use the error message instead. */
-  if (!preg_match("/Success/i", $ldap->error)){
+  if (!$ldap->success()){
     echo sprintf(_("FATAL: Error when connecting the LDAP. Server said '%s'."), $ldap->get_error());
     exit();
   }
@@ -340,7 +340,7 @@ function process_htaccess ($username, $kerberos= FALSE)
 
     /* Look for entry or realm */
     $ldap= $config->get_ldap_link();
-    if (!preg_match("/Success/i", $ldap->error)){
+    if (!$ldap->success()){
       msg_dialog::display(_("LDAP error"), sprintf(_('User login failed.').'<br><br>'._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
       $smarty= get_smarty();
       $smarty->display(get_template_path('headers.tpl'));
@@ -367,7 +367,7 @@ function ldap_login_user_htaccess ($username)
 
   /* Look for entry or realm */
   $ldap= $config->get_ldap_link();
-  if (!preg_match("/Success/i", $ldap->error)){
+  if (!$ldap->success()){
     msg_dialog::display(_("LDAP error"), sprintf(_('User login failed.').'<br><br>'._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), FATAL_ERROR_DIALOG);
     $smarty= get_smarty();
     $smarty->display(get_template_path('headers.tpl'));
@@ -405,8 +405,8 @@ function ldap_login_user ($username, $password)
 
   /* look through the entire ldap */
   $ldap = $config->get_ldap_link();
-  if (!preg_match("/Success/i", $ldap->error)){
-    msg_dialog::display(_("LDAP error"), sprintf(_("User login failed.")."<br><br>"._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), FATAL_ERROR_DIALOG);
+  if (!$ldap->success()){
+    msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error()), FATAL_ERROR_DIALOG);
     $smarty= get_smarty();
     $smarty->display(get_template_path('headers.tpl'));
     echo "<body>".session::get('errors')."</body></html>";
@@ -474,7 +474,7 @@ function ldap_login_user ($username, $password)
       $config->current['RECURSIVE'] == "true",
       isset($config->current['TLS'])
       && $config->current['TLS'] == "true");
-  if (!preg_match("/Success/i", $ldap->error)){
+  if (!$ldap->success()){
     return (NULL);
   }
 
@@ -601,7 +601,7 @@ function add_lock ($object, $user)
   $ldap->cd ($config->current['CONFIG']);
   $ldap->search("(&(objectClass=gosaLockEntry)(gosaUser=$user)(gosaObject=".base64_encode($object)."))",
       array("gosaUser"));
-  if (!preg_match("/Success/i", $ldap->error)){
+  if (!$ldap->success()){
     msg_dialog::display(_("Configuration error"), sprintf(_("Cannot create locking information in LDAP tree. Please contact your administrator!")."<br><br>"._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
     return;
   }
@@ -616,7 +616,7 @@ function add_lock ($object, $user)
     $attrs["gosaObject"] = base64_encode($object);
     $attrs["cn"] = "$name";
     $ldap->add($attrs);
-    if (!preg_match("/Success/i", $ldap->error)){
+    if (!$ldap->success()){
       msg_dialog::display(_("Internal error"), sprintf(_("Adding a lock failed.")."<br><br>"._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
       return;
     }
@@ -645,10 +645,10 @@ function del_lock ($object)
   $ldap->cd ($config->current['CONFIG']);
   $ldap->search ("(&(objectClass=gosaLockEntry)(gosaObject=".base64_encode($object)."))", array("gosaObject"));
   $attrs= $ldap->fetch();
-  if ($ldap->getDN() != "" && preg_match("/Success/i", $ldap->error)){
+  if ($ldap->getDN() != "" && $ldap->success()){
     $ldap->rmdir ($ldap->getDN());
 
-    if (!preg_match("/Success/i", $ldap->error)){
+    if (!$ldap->success()){
       msg_dialog::display(_("LDAP error"), sprintf(_("Removing a lock failed.")."<br><br>"._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
       return;
     }
@@ -687,7 +687,7 @@ function get_lock ($object)
   $ldap= $config->get_ldap_link();
   $ldap->cd ($config->current['CONFIG']);
   $ldap->search("(&(objectClass=gosaLockEntry)(gosaObject=".base64_encode($object)."))", array("gosaUser"));
-  if (!preg_match("/Success/i", $ldap->error)){
+  if (!$ldap->success()){
     msg_dialog::display(_("LDAP error"), sprintf(_("Cannot get locking information from LDAP tree!")."<br><br>"._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
     return("");
   }
@@ -732,7 +732,7 @@ function get_multiple_locks($objects)
   $ldap= $config->get_ldap_link();
   $ldap->cd ($config->current['CONFIG']);
   $ldap->search($filter, array("gosaUser","gosaObject"));
-  if (!preg_match("/Success/i", $ldap->error)){
+  if (!$ldap->success()){
     msg_dialog::display(_("LDAP error"), sprintf(_("Cannot get locking information from LDAP tree!")."<br><br>"._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
     return("");
   }
@@ -865,7 +865,7 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
     }
 
     /* Check for size limit exceeded messages for GUI feedback */
-    if (preg_match("/size limit/i", $ldap->error)){
+    if (preg_match("/size limit/i", $ldap->get_error())){
       session::set('limit_exceeded', TRUE);
       $limit_exceeded = TRUE;
     }
@@ -934,7 +934,7 @@ function get_list($filter, $category, $base= "", $attributes= array(), $flags= G
   }
 
   /* Check for size limit exceeded messages for GUI feedback */
-  if (preg_match("/size limit/i", $ldap->error)){
+  if (preg_match("/size limit/i", $ldap->get_error())){
     session::set('limit_exceeded', TRUE);
   }
 
@@ -2238,7 +2238,7 @@ function check_schema($cfg,$rfc2307bis = FALSE)
   $messages= array();
 
   /* Get objectclasses */
-  $ldap = new LDAP($cfg['admin'],$cfg['password'],$cfg['connection'] ,FALSE,$cfg['tls']);
+  $ldap = new ldapMultiplexer(new LDAP($cfg['admin'],$cfg['password'],$cfg['connection'] ,FALSE,$cfg['tls']));
   $objectclasses = $ldap->get_objectclasses();
   if(count($objectclasses) == 0){
     msg_dialog::display(_("LDAP warning"), _("Cannot get schema information from server. No schema check possible!"), WARNING_DIALOG);
@@ -2540,7 +2540,7 @@ function change_password ($dn, $password, $mode=0, $hash= "")
 
   new log("modify","users/passwordMethod",$dn,array_keys($attrs),$ldap->get_error());
 
-  if ($ldap->error != 'Success') {
+  if (!$ldap->success()) {
     msg_dialog::display(_("LDAP error"), sprintf(_('Setting the password failed!').'<br><br>'._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
   } else {
 

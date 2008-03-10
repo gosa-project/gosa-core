@@ -803,7 +803,7 @@ class plugin
     $ldap->cd($dst_dn);
     $ldap->add($new);
 
-    if ($ldap->error != "Success"){
+    if (!$ldap->success()){
       trigger_error("Trying to save $dst_dn failed.",
           E_USER_WARNING);
       return(FALSE);
@@ -868,7 +868,7 @@ class plugin
     /* Delete source */
     $ldap= $this->config->get_ldap_link();
     $ldap->rmdir_recursive($src_dn);
-    if ($ldap->error != "Success"){
+    if (!$ldap->success()){
       trigger_error("Trying to delete $src_dn failed.",
           E_USER_WARNING);
       return (FALSE);
@@ -1071,7 +1071,7 @@ class plugin
       $password       = $tmp['SNAPSHOT_PASSWORD'];
       $snapldapbase   = $tmp['SNAPSHOT_BASE'];
 
-      $ldap_to        = new LDAP($user,$password, $server);
+      $ldap_to        = new ldapMultipelxer(new LDAP($user,$password, $server));
       $ldap_to -> cd($snapldapbase);
 
       if (!$ldap_to->success()){
@@ -1202,7 +1202,7 @@ class plugin
       $password     = $cfg['SNAPSHOT_PASSWORD'];
       $snapldapbase = $cfg['SNAPSHOT_BASE'];
 
-      $ldap_to      = new LDAP($user,$password, $server);
+      $ldap_to      = new ldapMultiplexer(new LDAP($user,$password, $server));
       $ldap_to -> cd ($snapldapbase);
       if (!$ldap_to->success()){
         msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $snapldapbase, "", get_class()));
@@ -1260,7 +1260,7 @@ class plugin
       $user         = $cfg['SNAPSHOT_USER'];
       $password     = $cfg['SNAPSHOT_PASSWORD'];
       $snapldapbase = $cfg['SNAPSHOT_BASE'];
-      $ldap_to      = new LDAP($user,$password, $server);
+      $ldap_to      = new ldapMultiplexer(new LDAP($user,$password, $server));
       $ldap_to->cd ($snapldapbase);
       if (!$ldap_to->success()){
         msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $snapldapbase, "", get_class()));
@@ -1326,7 +1326,7 @@ class plugin
       $user         = $cfg['SNAPSHOT_USER'];
       $password     = $cfg['SNAPSHOT_PASSWORD'];
       $snapldapbase = $cfg['SNAPSHOT_BASE'];
-      $ldap_to      = new LDAP($user,$password, $server);
+      $ldap_to      = new ldapMultiplexer(new LDAP($user,$password, $server));
       $ldap_to->cd ($snapldapbase);
       if (!$ldap_to->success()){
         msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap_to->get_error(), $snapldapbase, "", get_class()));

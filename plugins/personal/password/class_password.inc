@@ -104,7 +104,7 @@ class password extends plugin
             isset($this->config->current['TLS'])        && preg_match("/true/i",$this->config->current['TLS']));
 
         /* connection Successfull ? */
-        if ($tldap->error != "Success"){
+        if (!$tldap->success()){
           msg_dialog::display(_("User password"),
                               _("The password you've entered as your current password doesn't match the real one."),WARNING_DIALOG);
         }else{

@@ -31,13 +31,15 @@ define("SPECIALS_OVERRIDE", TRUE);
 class LDAP{
 
   var $hascon   =false;
-  var $hasres   =false;
   var $reconnect=false;
   var $tls      = false;
-  var $basedn   ="";
   var $cid;
+  var $hasres   = array();
+  var $sr       = array();
+  var $basedn   ="";
+  var $start    = array(); // 0 if we are fetching the first entry, otherwise 1
   var $error    = ""; // Any error messages to be returned can be put here
-  var $start    = 0; // 0 if we are fetching the first entry, otherwise 1
+  var $srp      = 0;
   var $objectClasses = array(); // Information read from slapd.oc.conf
   var $binddn   = "";
   var $bindpw   = "";
@@ -65,6 +67,15 @@ class LDAP{
     }
 
     $this->connect();
+  }
+
+
+  function getSearchResource()
+  {
+    $this->sr[$this->srp]= NULL;
+    $this->start[$this->srp]= 0;
+    $this->hasres[$this->srp]= false;
+    return $this->srp++;
   }
 
 
@@ -185,33 +196,35 @@ class LDAP{
 
   function cd($dir)
   {
-    if ($dir == "..")
+    if ($dir == ".."){
       $this->basedn = $this->getParentDir();
-    else
+    } else {
       $this->basedn = LDAP::convert($dir);
+    }
   }
 
   function getParentDir($basedn = "")
   {
-    if ($basedn=="")
+    if ($basedn==""){
       $basedn = $this->basedn;
-    else
+    } else {
       $basedn = LDAP::convert($this->basedn);
+    }
     return(ereg_replace("[^,]*[,]*[ ]*(.*)", "\\1", $basedn));
   }
 
   
-  function search($filter, $attrs= array())
+  function search($srp, $filter, $attrs= array())
   {
     if($this->hascon){
       if ($this->reconnect) $this->connect();
 
       $start = microtime();
-      $this->clearResult();
-      $this->sr = @ldap_search($this->cid, LDAP::fix($this->basedn), $filter, $attrs);
+      $this->clearResult($srp);
+      $this->sr[$srp] = @ldap_search($this->cid, LDAP::fix($this->basedn), $filter, $attrs);
       $this->error = @ldap_error($this->cid);
-      $this->resetResult();
-      $this->hasres=true;
+      $this->resetResult($srp);
+      $this->hasres[$srp]=true;
    
       /* Check if query took longer as specified in max_ldap_query_time */
       if($this->max_ldap_query_time){
@@ -222,29 +235,29 @@ class LDAP{
       }
 
       $this->log("LDAP operation: time=".get_MicroTimeDiff($start,microtime())." operation=search('".LDAP::fix($this->basedn)."', '$filter')");
-      return($this->sr);
+      return($this->sr[$srp]);
     }else{
       $this->error = "Could not connect to LDAP server";
       return("");
     }
   }
 
-  function ls($filter = "(objectclass=*)", $basedn = "",$attrs = array("*"))
+  function ls($srp, $filter = "(objectclass=*)", $basedn = "",$attrs = array("*"))
   {
     if($this->hascon){
       if ($this->reconnect) $this->connect();
 
-      $this->clearResult();
+      $this->clearResult($srp);
       if ($basedn == "")
         $basedn = $this->basedn;
       else
         $basedn= LDAP::convert($basedn);
   
       $start = microtime();
-      $this->sr = @ldap_list($this->cid, LDAP::fix($basedn), $filter,$attrs);
+      $this->sr[$srp] = @ldap_list($this->cid, LDAP::fix($basedn), $filter,$attrs);
       $this->error = @ldap_error($this->cid);
-      $this->resetResult();
-      $this->hasres=true;
+      $this->resetResult($srp);
+      $this->hasres[$srp]=true;
 
        /* Check if query took longer as specified in max_ldap_query_time */
       if($this->max_ldap_query_time){
@@ -256,25 +269,25 @@ class LDAP{
 
       $this->log("LDAP operation: time=".get_MicroTimeDiff($start,microtime())." operation=ls('".LDAP::fix($basedn)."', '$filter')");
 
-      return($this->sr);
+      return($this->sr[$srp]);
     }else{
       $this->error = "Could not connect to LDAP server";
       return("");
     }
   }
 
-  function cat($dn,$attrs= array("*"))
+  function cat($srp, $dn,$attrs= array("*"))
   {
     if($this->hascon){
       if ($this->reconnect) $this->connect();
 
-      $this->clearResult();
+      $this->clearResult($srp);
       $filter = "(objectclass=*)";
-      $this->sr = @ldap_read($this->cid, LDAP::fix($dn), $filter,$attrs);
+      $this->sr[$srp] = @ldap_read($this->cid, LDAP::fix($dn), $filter,$attrs);
       $this->error = @ldap_error($this->cid);
-      $this->resetResult();
-      $this->hasres=true;
-      return($this->sr);
+      $this->resetResult($srp);
+      $this->hasres[$srp]=true;
+      return($this->sr[$srp]);
     }else{
       $this->error = "Could not connect to LDAP server";
       return("");
@@ -294,16 +307,16 @@ class LDAP{
     }
   }
 
-  function fetch()
+  function fetch($srp)
   {
     $att= array();
     if($this->hascon){
-      if($this->hasres){
-        if ($this->start == 0)
+      if($this->hasres[$srp]){
+        if ($this->start[$srp] == 0)
         {
-          if ($this->sr){
-            $this->start = 1;
-            $this->re= @ldap_first_entry($this->cid, $this->sr);
+          if ($this->sr[$srp]){
+            $this->start[$srp] = 1;
+            $this->re= @ldap_first_entry($this->cid, $this->sr[$srp]);
           } else {
             return array();
           }
@@ -321,7 +334,7 @@ class LDAP{
         }
         return($att);
       }else{
-        $this->error = "Perform a Fetch with no Search";
+        $this->error = "Perform a fetch with no search";
         return("");
       }
     }else{
@@ -330,23 +343,23 @@ class LDAP{
     }
   }
 
-  function resetResult()
+  function resetResult($srp)
   {
-    $this->start = 0;
+    $this->start[$srp] = 0;
   }
 
-  function clearResult()
+  function clearResult($srp)
   {
-    if($this->hasres){
-      $this->hasres = false;
-      @ldap_free_result($this->sr);
+    if($this->hasres[$srp]){
+      $this->hasres[$srp] = false;
+      @ldap_free_result($this->sr[$srp]);
     }
   }
 
-  function getDN()
+  function getDN($srp)
   {
     if($this->hascon){
-      if($this->hasres){
+      if($this->hasres[$srp]){
 
         if(!$this->re)
           {
@@ -369,11 +382,11 @@ class LDAP{
     }
   }
 
-  function count()
+  function count($srp)
   {
     if($this->hascon){
-      if($this->hasres){
-        $rv = @ldap_count_entries($this->cid, $this->sr);
+      if($this->hasres[$srp]){
+        $rv = @ldap_count_entries($this->cid, $this->sr[$srp]);
         $this->error = @ldap_error($this->cid);
         return($rv);
       }else{
@@ -440,16 +453,16 @@ class LDAP{
   *
   */
 
-  function rmdir_recursive($deletedn)
+  function rmdir_recursive($srp, $deletedn)
   {
     if($this->hascon){
       if ($this->reconnect) $this->connect();
       $delarray= array();
         
       /* Get sorted list of dn's to delete */
-      $this->ls ("(objectClass=*)",$deletedn);
-      while ($this->fetch()){
-        $deldn= $this->getDN();
+      $this->ls ($srp, "(objectClass=*)",$deletedn);
+      while ($this->fetch($srp)){
+        $deldn= $this->getDN($srp);
         $delarray[$deldn]= strlen($deldn);
       }
       arsort ($delarray);
@@ -457,7 +470,7 @@ class LDAP{
 
       /* Really Delete ALL dn's in subtree */
       foreach ($delarray as $key => $value){
-        $this->rmdir_recursive($key);
+        $this->rmdir_recursive($srp, $key);
       }
       
       /* Finally Delete own Node */
@@ -500,7 +513,7 @@ class LDAP{
     }
   }
 
-  function create_missing_trees($target)
+  function create_missing_trees($srp, $target)
   {
     global $config;
 
@@ -536,8 +549,8 @@ class LDAP{
         continue;
       }
 
-      $this->cat ($cdn);
-      $attrs= $this->fetch();
+      $this->cat ($srp, $cdn);
+      $attrs= $this->fetch($srp);
 
       /* Create missing entry? */
       if (count ($attrs)){
@@ -643,14 +656,14 @@ class LDAP{
   }
 
 
-  function recursive_remove()
+  function recursive_remove($srp)
   {
     $delarray= array();
 
     /* Get sorted list of dn's to delete */
-    $this->search ("(objectClass=*)");
-    while ($this->fetch()){
-      $deldn= $this->getDN();
+    $this->search ($srp, "(objectClass=*)");
+    while ($this->fetch($srp)){
+      $deldn= $this->getDN($srp);
       $delarray[$deldn]= strlen($deldn);
     }
     arsort ($delarray);
@@ -737,22 +750,22 @@ class LDAP{
   }
 
 
-  function gen_ldif ($dn, $filter= "(objectClass=*)", $attributes= array('*'), $recursive= TRUE)
+  function gen_ldif ($srp, $dn, $filter= "(objectClass=*)", $attributes= array('*'), $recursive= TRUE)
   {
     $display= "";
 
     if ($recursive){
       $this->cd($dn);
-      $this->ls($filter,$dn, array('dn','objectClass'));
+      $this->ls($srp, $filter,$dn, array('dn','objectClass'));
       $deps = array();
 
       $display .= $this->gen_one_entry($dn)."\n";
 
-      while ($attrs= $this->fetch()){
+      while ($attrs= $this->fetch($srp)){
         $deps[] = $attrs['dn'];
       }
       foreach($deps as $dn){
-        $display .= $this->gen_ldif($dn, $filter,$attributes,$recursive);
+        $display .= $this->gen_ldif($srp, $dn, $filter,$attributes,$recursive);
       }
     } else {
       $display.= $this->gen_one_entry($dn);
@@ -761,15 +774,15 @@ class LDAP{
   }
 
 
-  function gen_xls ($dn, $filter= "(objectClass=*)", $attributes= array('*'), $recursive= TRUE,$r_array=0)
+  function gen_xls ($srp, $dn, $filter= "(objectClass=*)", $attributes= array('*'), $recursive= TRUE,$r_array=0)
   {
     $display= array();
 
       $this->cd($dn);
-      $this->search("$filter");
+      $this->search($srp, "$filter");
 
       $i=0;
-      while ($attrs= $this->fetch()){
+      while ($attrs= $this->fetch($srp)){
         $j=0;
 
         foreach ($attributes as $at){
@@ -849,7 +862,7 @@ class LDAP{
       if JustMofify id false the destination dn will be overwritten by the new ldif. 
     */
 
-  function import_complete_ldif($str_attr,&$error,$JustModify,$DeleteOldEntries)
+  function import_complete_ldif($srp, $str_attr,&$error,$JustModify,$DeleteOldEntries)
   {
     if($this->reconnect) $this->connect();
 
@@ -960,7 +973,7 @@ class LDAP{
       }
      
       /* If we can't Import, return with a file error */
-      if(!$this->import_single_entry($single,$usemodify,$usermdir) ) {
+      if(!$this->import_single_entry($srp, $single,$usemodify,$usermdir) ) {
         $error= sprintf(_("Error while importing dn: '%s', please check your LDIF from line %s on!"), $line,
                         $current_line);
         return UNKNOWN_TOKEN_IN_LDIF_FILE;      }
@@ -975,7 +988,7 @@ class LDAP{
       if $modify is true;  All variables that are not touched by the new ldif will be kept.
       if $modify is false; The new ldif overwrites the old entry, and all untouched attributes get lost.
   */
-  function import_single_entry($str_attr,$modify,$delete)
+  function import_single_entry($srp, $str_attr,$modify,$delete)
   {
     global $config;
 
@@ -1056,13 +1069,13 @@ class LDAP{
 
       /* Delete existing entry */
       if($delete){
-        $this->rmdir_recursive($data['dn']);
+        $this->rmdir_recursive($srp, $data['dn']);
       }
      
       /* Create missing trees */
       $this->cd ($this->basedn);
       $this->cd($config->current['BASE']);
-      $this->create_missing_trees(preg_replace("/^[^,]+,/","",$data['dn']));
+      $this->create_missing_trees($srp, preg_replace("/^[^,]+,/","",$data['dn']));
       $this->cd($data['dn']);
 
       $dn = $data['dn'];
@@ -1070,11 +1083,11 @@ class LDAP{
       
       if(!$modify){
 
-        $this->cat($dn);
-        if($this->count()){
+        $this->cat($srp, $dn);
+        if($this->count($srp)){
         
           /* The destination entry exists, overwrite it with the new entry */
-          $attrs = $this->fetch();
+          $attrs = $this->fetch($srp);
           foreach($attrs as $name => $value ){
             if(!is_numeric($name)){
               if(in_array($name,array("dn","count"))) continue;
