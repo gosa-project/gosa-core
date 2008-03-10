@@ -25,7 +25,7 @@ class acltab extends tabs
 
   function acltab($config, $data, $dn)
   {
-    $data = array(array("CLASS" => "acl" , "NAME" => _("Acl")));
+    $data = array(array("CLASS" => "acl" , "NAME" => _("ACL")));
 
     /* Save dn */
     $this->dn= $dn;

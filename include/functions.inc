@@ -341,7 +341,7 @@ function process_htaccess ($username, $kerberos= FALSE)
     /* Look for entry or realm */
     $ldap= $config->get_ldap_link();
     if (!$ldap->success()){
-      msg_dialog::display(_("LDAP error"), sprintf(_('User login failed.').'<br><br>'._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), "", LDAP_AUTH, ERROR_DIALOG));
       $smarty= get_smarty();
       $smarty->display(get_template_path('headers.tpl'));
       echo "<body>".session::get('errors')."</body></html>";
@@ -368,7 +368,7 @@ function ldap_login_user_htaccess ($username)
   /* Look for entry or realm */
   $ldap= $config->get_ldap_link();
   if (!$ldap->success()){
-    msg_dialog::display(_("LDAP error"), sprintf(_('User login failed.').'<br><br>'._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), FATAL_ERROR_DIALOG);
+    msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), "", LDAP_AUTH, FATAL_ERROR_DIALOG));
     $smarty= get_smarty();
     $smarty->display(get_template_path('headers.tpl'));
     echo "<body>".session::get('errors')."</body></html>";
@@ -377,7 +377,7 @@ function ldap_login_user_htaccess ($username)
   $ldap->search("(&(objectClass=gosaAccount)(uid=$username))", array("uid"));
   /* Found no uniq match? Strange, because we did above... */
   if ($ldap->count() != 1) {
-    msg_dialog::display(_("LDAP error"), _("Username / UID is not unique inside the LDAP tree. Please contact your Administrator."), FATAL_ERROR_DIALOG);
+    msg_dialog::display(_("LDAP error"), _("Username / UID is not unique inside the LDAP tree!"), FATAL_ERROR_DIALOG);
     return (NULL);
   }
   $attrs= $ldap->fetch();
@@ -649,7 +649,7 @@ function del_lock ($object)
     $ldap->rmdir ($ldap->getDN());
 
     if (!$ldap->success()){
-      msg_dialog::display(_("LDAP error"), sprintf(_("Removing a lock failed.")."<br><br>"._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $ldap->getDN(), LDAP_DEL, ERROR_DIALOG));
       return;
     }
   }
@@ -688,7 +688,7 @@ function get_lock ($object)
   $ldap->cd ($config->current['CONFIG']);
   $ldap->search("(&(objectClass=gosaLockEntry)(gosaObject=".base64_encode($object)."))", array("gosaUser"));
   if (!$ldap->success()){
-    msg_dialog::display(_("LDAP error"), sprintf(_("Cannot get locking information from LDAP tree!")."<br><br>"._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
+    msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), "", LDAP_SEARCH, ERROR_DIALOG));
     return("");
   }
 
@@ -733,7 +733,7 @@ function get_multiple_locks($objects)
   $ldap->cd ($config->current['CONFIG']);
   $ldap->search($filter, array("gosaUser","gosaObject"));
   if (!$ldap->success()){
-    msg_dialog::display(_("LDAP error"), sprintf(_("Cannot get locking information from LDAP tree!")."<br><br>"._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
+    msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), "", LDAP_SEARCH, ERROR_DIALOG));
     return("");
   }
 
@@ -2541,7 +2541,7 @@ function change_password ($dn, $password, $mode=0, $hash= "")
   new log("modify","users/passwordMethod",$dn,array_keys($attrs),$ldap->get_error());
 
   if (!$ldap->success()) {
-    msg_dialog::display(_("LDAP error"), sprintf(_('Setting the password failed!').'<br><br>'._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
+    msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, ERROR_DIALOG));
   } else {
 
     /* Run backend method for change/create */

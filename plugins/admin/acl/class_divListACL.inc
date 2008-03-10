@@ -256,7 +256,7 @@ class divListACL extends MultiSelectWindow
 
         /* Acl handling */
         $editlink       = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=list_edit_entry'>%s</a>";
-        $list_left_icon = "<img src='images/select_acl.png' alt='"._("Acl")."'>";
+        $list_left_icon = "<img src='images/select_acl.png' alt='"._("ACL")."'>";
         $cn = htmlentities(utf8_decode($acl_entry['dn'])); 
 
         /* Add actions depending on acls */
