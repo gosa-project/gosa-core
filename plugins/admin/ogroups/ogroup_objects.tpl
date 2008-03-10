@@ -53,6 +53,6 @@
 <p class="plugbottom">
   <input type=submit name="add_object_finish" value="{t}Add{/t}">
   &nbsp;
-  <input type=submit name="add_object_cancel" value="{t}Cancel{/t}">
+  <input type=submit name="add_object_cancel" value="{msgPool type=cancelButton}">
 </p>
 

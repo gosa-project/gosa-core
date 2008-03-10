@@ -16,7 +16,7 @@
 <p class="plugbottom">
   <input type=submit name="password_finish" value="{t}Set password{/t}">
   &nbsp;
-  <input type=submit name="password_cancel" value="{t}Cancel{/t}">
+  <input type=submit name="password_cancel" value="{msgPool type=cancelButton}">
 </p>
 
 <!-- Place cursor -->

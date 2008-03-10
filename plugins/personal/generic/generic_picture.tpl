@@ -30,8 +30,8 @@
 </table>
 <br>
 <p class="plugbottom">
-  <input type=submit name="picture_edit_finish" value="{t}Save{/t}">
+  <input type=submit name="picture_edit_finish" value="{msgPool type=saveButton}">
   &nbsp;
-  <input type=submit name="picture_edit_cancel" value="{t}Cancel{/t}">
+  <input type=submit name="picture_edit_cancel" value="{msgPool type=cancelButton}">
 </p>
 

@@ -78,6 +78,6 @@
 <p class="plugbottom">
   <input type=submit name="add_groups_finish" value="{t}Add{/t}">
   &nbsp;
-  <input type=submit name="add_groups_cancel" value="{t}Cancel{/t}">
+  <input type=submit name="add_groups_cancel" value="{msgPool type=cancelButton}">
 </p>
 

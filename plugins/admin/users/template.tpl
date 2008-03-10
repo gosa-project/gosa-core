@@ -47,7 +47,7 @@
 <p class="plugbottom">
   <input type=submit name="template_continue" value="{t}Continue{/t}">
   &nbsp;
-  <input type=submit name="edit_cancel" value="{t}Cancel{/t}">
+  <input type=submit name="edit_cancel" value="{msgPool type=cancelButton}">
 </p>
 
 

@@ -29,7 +29,7 @@
 <p class="plugbottom">
   <input type=submit name="password_finish" value="{t}Set password{/t}">
   &nbsp;
-  <input type=submit name="password_cancel" value="{t}Cancel{/t}">
+  <input type=submit name="password_cancel" value="{msgPool type=cancelButton}">
   <input type='hidden' id='formSubmit'>
 </p>
 
