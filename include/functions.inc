@@ -2702,5 +2702,27 @@ function send_binary_content($data,$name,$type = "application/octet-stream")
   exit();
 }
 
+
+function xmlentities($str)
+{
+  static $asc2uni= array();
+
+  if (!count($asc2uni)){
+    for($i=128;$i<256;$i++){
+      $asc2uni[chr($i)] = "&#x".dechex($i).";";
+    }
+  }
+
+  $str = str_replace("&", "&amp;", $str);
+  $str = str_replace("<", "&lt;", $str);
+  $str = str_replace(">", "&gt;", $str);
+  $str = str_replace("'", "&apos;", $str);
+  $str = str_replace("\"", "&quot;", $str);
+  $str = str_replace("\r", "", $str);
+  $str = strtr($str,$asc2uni);
+
+  return $str;
+}
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
