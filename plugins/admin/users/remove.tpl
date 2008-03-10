@@ -12,10 +12,10 @@
 
 <p class="plugbottom">
   {if $multiple}
-  <input type=submit name="delete_multiple_user_confirm" value="{t}Delete{/t}">
+  <input type=submit name="delete_multiple_user_confirm" value="{msgPool type=delButton}">
   <input type=submit name="delete_multiple_user_cancel" value="{msgPool type=cancelButton}">
   {else}
-  <input type=submit name="delete_user_confirm" value="{t}Delete{/t}">
+  <input type=submit name="delete_user_confirm" value="{msgPool type=delButton}">
   <input type=submit name="delete_cancel" value="{msgPool type=cancelButton}">
   {/if}
   &nbsp;
