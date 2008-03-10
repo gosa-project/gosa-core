@@ -324,34 +324,37 @@ class department extends plugin
     $this->skipTagging = TRUE;
     plugin::save();
 
-    $this->attrs['gosaUnitTag'] = $this->gosaUnitTag;
-
     /* Remove tag information if needed */
     if (!$this->is_administrational_unit){
       $tmp= array();
 
       /* Remove gosaAdministrativeUnit from this plugin */
-      $has_unit_tag= false;
       foreach($this->attrs['objectClass'] as $oc){
         if (!preg_match("/^gosaAdministrativeUnit$/i", $oc)){
           $tmp[]= $oc;
         }
-        if (preg_match("/^gosaAdministrativeUnitTag$/i", $oc)){
-          $has_unit_tag= true;
-        }
       }
       $this->attrs['objectClass']= $tmp;
-      $this->attrs['gosaUnitTag']= array();
-      $this->gosaUnitTag = "";
+    }
+
+    /* Do we need to remove the tag itself? */
+    $has_unit_tag= false;
+    foreach($this->attrs['objectClass'] as $oc){
+      if (preg_match("/^gosaAdministrativeUnitTag$/i", $oc)){
+        $has_unit_tag= true;
+      }
+    }
+    if ($has_unit_tag == false && $this->is_administrational_unit == false){
+      unset ($this->attrs['gosaUnitTag']);
+    } else {
+      $this->attrs['gosaUnitTag']= $this->gosaUnitTag;
     }
 
 		/* Write back to ldap */
-		$ldap= $this->config->get_ldap_link();
 		$ldap->cat($this->dn, array('dn'));
-		$a= $ldap->fetch();
 		$ldap->cd($this->dn);
 
-		if (count($a)){
+		if ($ldap->count()){
 			$this->cleanup();
 			$ldap->modify ($this->attrs); 
       new log("modify","department/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
@@ -362,7 +365,7 @@ class department extends plugin
       new log("create","department/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
 		}
     if (!$ldap->success()){
-      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, get_class()));
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, 0, get_class()));
     }
 
     /* The parameter forces only to set must_be_tagged, and don't touch any objects 

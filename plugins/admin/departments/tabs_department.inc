@@ -31,6 +31,7 @@ class deptabs extends tabs
 
     /* Add references/acls/snapshots */
     $this->addSpecialTabs();
+    $this->by_object['acl']->skipTagging= TRUE;;
   }
 
   function check($ignore_account= FALSE)
@@ -63,7 +64,9 @@ class deptabs extends tabs
     $this->dn= $new_dn;
     $baseobject->dn= $this->dn;
     $this->by_object['department']= $baseobject;
-    return(tabs::save(TRUE));
+    if (!$ignore_account){
+      tabs::save(TRUE);
+    }
   }
 
 
