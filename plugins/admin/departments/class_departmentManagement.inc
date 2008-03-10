@@ -294,9 +294,9 @@ class departmentManagement extends plugin
 
       /* Save, or display error message? */
       if (count($message) == 0){
+        global $config;
 
         $this->deptabs->save(true);
-        global $config;
         $config->get_departments();
         $config->make_idepartments();
         $this->config = $config;
@@ -401,9 +401,9 @@ class departmentManagement extends plugin
       $display= $this->deptabs->execute();
       if (!$this->deptabs->by_object[$this->deptabs->current]->dialog){
         $display.= "<p style=\"text-align:right\">\n";
-        $display.= "<input type=submit name=\"edit_finish\" value=\""._("Save")."\">\n";
+        $display.= "<input type=submit name=\"edit_finish\" value=\"".msgPool::okButton()."\">\n";
         $display.= "&nbsp;\n";
-        $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
+        $display.= "<input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">\n";
         $display.= "</p>";
       }
       return ($display);

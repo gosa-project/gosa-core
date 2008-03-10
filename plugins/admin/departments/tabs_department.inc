@@ -42,7 +42,7 @@ class deptabs extends tabs
 
   function save($ignore_account= FALSE)
   {
-    $baseobject= $this->by_object['department'];
+    $baseobject= &$this->by_object['department'];
     $ou= preg_replace('/,/', '\,', $baseobject->ou);
     $new_dn= @LDAP::convert('ou='.$ou.','.$baseobject->base);
     
@@ -56,14 +56,12 @@ class deptabs extends tabs
         }else{
           /* Prepare to be moved */
           $baseobject->recursive_move($this->dn, $new_dn);			
-          $this->by_object['department'] = $baseobject;
           return;
         }
       }
     }
     $this->dn= $new_dn;
     $baseobject->dn= $this->dn;
-    $this->by_object['department']= $baseobject;
     if (!$ignore_account){
       tabs::save(TRUE);
     }
