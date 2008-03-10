@@ -51,7 +51,7 @@
 </table>
 
 <p class="plugbottom">
-  <input type=submit name="add_object_finish" value="{t}Add{/t}">
+  <input type=submit name="add_object_finish" value="{msgPool type=addButton}">
   &nbsp;
   <input type=submit name="add_object_cancel" value="{msgPool type=cancelButton}">
 </p>

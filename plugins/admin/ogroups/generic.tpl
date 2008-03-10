@@ -48,7 +48,7 @@
 {/render}
    <br>
 {render acl=$memberACL}
-   <input type=submit value="{t}Add{/t}" name="edit_membership">&nbsp;
+   <input type=submit value="{msgPool type=addButton}" name="edit_membership">&nbsp;
 {/render}
 {render acl=$memberACL}
    <input type=submit value="{t}Delete{/t}" name="delete_membership">
