@@ -283,9 +283,9 @@ class user extends plugin
       $years[]= $y;
     }
     $years['-']= "-&nbsp;";
-    $months= array(_("January"), _("February"), _("March"), _("April"),
-        _("May"), _("June"), _("July"), _("August"), _("September"),
-        _("October"), _("November"), _("December"), '-' => '-&nbsp;');
+    $months= msgPool::months();
+    $months['-'] = '-&nbsp;';
+
     $smarty->assign("day", $date["mday"]);
     $smarty->assign("days", $days);
     $smarty->assign("months", $months);
@@ -469,6 +469,9 @@ class user extends plugin
 
     /* Upload new cert and close dialog? */	
     if($this->acl_is_writeable("Certificate",(!is_object($this->parent) && !session::is_set('edit')))){ 
+
+      $fail =false;
+
       if (isset($_POST['cert_edit_finish'])){
 
         /* for all certificates do */
@@ -489,7 +492,8 @@ class user extends plugin
             $_POST["certificateSerialNumber"] != ""){
 
           if (!tests::is_id($_POST["certificateSerialNumber"])){
-            msg_dialog::display(_("Error"), _("Please enter a valid serial number!"), ERROR_DIALOG);
+            $fail = true;
+            msg_dialog::display(_("Error"), msgPool::invalid(_("Serial number"),$_POST["certificateSerialNumber"],"/[0-9]/"),ERROR_DIALOG);
 
             foreach(array("userCertificate", "userSMIMECertificate", "userPKCS12") as $cert){
               if ($this->$cert != ""){
@@ -498,15 +502,15 @@ class user extends plugin
                 $smarty->assign("$cert"."_state", "");
               }
             }
-            return ($smarty->fetch (get_template_path('generic_certs.tpl', TRUE, dirname(__FILE__))));
           }
 
           $this->certificateSerialNumber= $_POST["certificateSerialNumber"];
           $this->is_modified= TRUE;
         }
-
-        $this->cert_dialog= FALSE;
-        $this->dialog= FALSE;
+        if(!$fail){
+          $this->cert_dialog= FALSE;
+          $this->dialog= FALSE;
+        }
       }
     }
     /* Display picture dialog */
@@ -518,6 +522,7 @@ class user extends plugin
     if ($this->cert_dialog){
       $smarty->assign("CertificateACL",$this->getacl("Certificate",(!is_object($this->parent) && !session::is_set('edit'))));
       $smarty->assign("Certificate_readable",$this->acl_is_readable("Certificate"));
+      $smarty->assign("certificateSerialNumber",$this->certificateSerialNumber);
 
       foreach(array("userCertificate", "userSMIMECertificate", "userPKCS12") as $cert){
         if ($this->$cert != ""){
@@ -556,7 +561,13 @@ class user extends plugin
           $smarty->assign($cert."_state","");
         }
       }
-      $smarty->assign("governmentmode", "false");
+      $this->config->current['GOVERNMENTMODE'] = "true";
+      if (isset($this->config->current['GOVERNMENTMODE']) &&
+          preg_match('/true/i', $this->config->current['GOVERNMENTMODE'])){
+        $smarty->assign("governmentmode", "true");
+      }else{
+        $smarty->assign("governmentmode", "false");
+      }
       return($smarty->fetch (get_template_path('generic_certs.tpl', TRUE, dirname(__FILE__))));
     }
 
@@ -1275,7 +1286,7 @@ class user extends plugin
   /* Load certificate from file to object */
   function set_cert($cert, $filename)
   {
-    if(!$thsi->acl_is_writeable("Certificate",(!is_object($this->parent) && !session::is_set('edit')))) return;
+    if(!$this->acl_is_writeable("Certificate",(!is_object($this->parent) && !session::is_set('edit')))) return;
     $fd = fopen ($filename, "rb");
     if (filesize($filename)>0) {
       $this->$cert= fread ($fd, filesize ($filename));
