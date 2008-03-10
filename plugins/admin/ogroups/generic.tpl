@@ -51,7 +51,7 @@
    <input type=submit value="{msgPool type=addButton}" name="edit_membership">&nbsp;
 {/render}
 {render acl=$memberACL}
-   <input type=submit value="{t}Delete{/t}" name="delete_membership">
+   <input type=submit value="{msgPool type=delButton}" name="delete_membership">
 {/render}
   </td>
  </tr>
