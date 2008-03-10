@@ -26,9 +26,6 @@ class ldapMultiplexer {
   /* Internal stuff */
   protected $object;
 
-  /* Caching switch - not implemented right now */
-  protected $use_cache= false;
-
   /* Result resource */
   protected $sr;
  
@@ -41,22 +38,15 @@ class ldapMultiplexer {
   }
  
   public function __call($methodName, $parameters) {
-    $id = md5($methodName.serialize($parameters));
- 
     /* Add resource pointer if the mentioned methods are used */
     if (preg_match('/^(search|ls|cat|fetch|clearResult|resetResult|count|getDN|recursive_remove|rmdir_recursive|gen_xls|gen_ldif|create_missing_trees|import_single_entry|import_complete_ldif)$/', $methodName)){
       array_unshift($parameters, $this->sr);
     }
 
-    try {
-      $class= new ReflectionClass($this->object);
-      $method= $class->getMethod($methodName);
+    $class= new ReflectionClass($this->object);
+    $method= $class->getMethod($methodName);
 
-      return $method->invokeArgs($this->object, $parameters);
-    }
-
-    catch (ReflectionException $e) {
-    }
+    return $method->invokeArgs($this->object, $parameters);
   }
 
 
