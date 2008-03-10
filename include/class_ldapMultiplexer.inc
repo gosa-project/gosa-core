@@ -61,7 +61,6 @@ class ldapMultiplexer {
 
 
   public function __get($memberName) {
-    echo "Obsolete access to member variable '$memberName'!<br>";
     return $this->object->$memberName;
   }
 
