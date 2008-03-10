@@ -104,7 +104,7 @@
    <input type=submit value="{msgPool type=addButton}" name="edit_groupmembership" >&nbsp;
 {/render}
 {render acl=$groupMembershipACL}
-   <input type=submit value="{t}Delete{/t}" name="delete_groupmembership" >
+   <input type=submit value="{msgPool type=delButton}" name="delete_groupmembership" >
 {/render}
   </td>
  </tr>
@@ -146,7 +146,7 @@
 	   <input type="submit" id="add_ws" value="{msgPool type=addButton}" name="add_ws" {$trusthide}>&nbsp;
 	{/render}
 	{render acl=$trustmodeACL}
-	   <input type="submit" id="del_ws" value="{t}Delete{/t}" name="delete_ws" {$trusthide}>
+	   <input type="submit" id="del_ws" value="{msgPool type=delButton}" name="delete_ws" {$trusthide}>
 	{/render}
 
 {else}
@@ -175,7 +175,7 @@
 	   <input type="submit" id="add_ws" value="{msgPool type=addButton}" name="add_ws" {$trusthide}>&nbsp;
 	{/render}
 	{render acl=$trustmodeACL}
-	   <input type="submit" id="del_ws" value="{t}Delete{/t}" name="delete_ws" {$trusthide}>
+	   <input type="submit" id="del_ws" value="{msgPool type=delButton}" name="delete_ws" {$trusthide}>
 	{/render}
 	</div>
 {/if}
