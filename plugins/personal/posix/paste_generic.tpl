@@ -58,7 +58,7 @@
 							{html_options options=$groupMembership}
 						</select>
 						<br>
-						<input type=submit value="{t}Add{/t}" name="edit_groupmembership">&nbsp;
+						<input type=submit value="{msgPool type=addButton}" name="edit_groupmembership">&nbsp;
 						<input type=submit value="{t}Delete{/t}" name="delete_groupmembership">
 					</td>
 				</tr>
