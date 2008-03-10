@@ -192,7 +192,7 @@
       <br>
       <input type=submit name="edit_membership" value="{msgPool type=addButton}">
       &nbsp;
-      <input type=submit name="del_users" value="{t}Delete{/t}">
+      <input type=submit name="del_users" value="{msgPool type=delButton}">
      </td>
     </tr> 
    </table>
