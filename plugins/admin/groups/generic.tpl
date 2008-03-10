@@ -190,7 +190,7 @@
 	{/if}
 {/render}
       <br>
-      <input type=submit name="edit_membership" value="{t}Add{/t}">
+      <input type=submit name="edit_membership" value="{msgPool type=addButton}">
       &nbsp;
       <input type=submit name="del_users" value="{t}Delete{/t}">
      </td>
