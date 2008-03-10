@@ -157,9 +157,9 @@ if (!$remove_lock){
 
     /* Are we in edit mode? */
     if (session::is_set('edit')){
-      $display.= "<input type=submit name=\"edit_finish\" style=\"width:80px\" value=\""._("Ok")."\">\n";
+      $display.= "<input type=submit name=\"edit_finish\" style=\"width:80px\" value=\"".msgPool::okButton()."\">\n";
       $display.= "&nbsp;";
-      $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
+      $display.= "<input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">\n";
 
       $info= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png').
              "\"> ".$ui->dn."&nbsp;";
@@ -167,10 +167,10 @@ if (!$remove_lock){
       /* 'viewid' may be set by i.e. the phonelist plugin. This
          means that we want to go back... */
       if (isset ($viewid)){
-        $str= _("Back");
+        $str= msgPool::backButton();
         $fn = "back";
       } else {
-        $str= _("Edit");
+        $str= msgPool::editButton();
         $fn = "edit";
         $info= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/openlock.png').
                "\"> ".$ui->dn."&nbsp;";
@@ -180,7 +180,7 @@ if (!$remove_lock){
       if(preg_match("/w/",$ui->get_permissions($ui->dn,"users/user"))){
         if ($fn == "edit"){
           $info.= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/lamp.png')."\"> ".
-            _("Click the 'Edit' button below to change informations in this dialog");
+            msgPool::clickEditToChange();
           $display.= "<input type=submit name=\"$fn\" value=\"$str\">\n";
         }
       }
