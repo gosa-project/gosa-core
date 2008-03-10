@@ -275,6 +275,12 @@ class msgPool
   }
 
 
+  public static function backButton($what= "")
+  {
+    return $what == "" ? sprintf(_("Back...")): sprintf(_("Back %s..."), $what);
+  }
+
+
   public static function buildList($data)
   {
     $objects= "";
@@ -289,7 +295,7 @@ class msgPool
 
   public static function noValidExtension($name)
   {
-	return sprintf(_("This account has no valid %s extensions!", $name));
+	return sprintf(_("This account has no valid %s extensions!"), $name);
   }
 
   public static function featuresEnabled($name, $depends= "")
