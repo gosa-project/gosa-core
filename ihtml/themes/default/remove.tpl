@@ -10,7 +10,7 @@
 </p>
 
 <p class="plugbottom">
- <input type=submit name="delete_confirm" value="{t}Delete{/t}">
+ <input type=submit name="delete_confirm" value="{msgPool type=delButton}">
  &nbsp;
  <input type=submit name="delete_cancel" value="{t}Cancel{/t}">
 </p>
