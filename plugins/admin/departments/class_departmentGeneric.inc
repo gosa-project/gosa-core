@@ -345,7 +345,7 @@ class department extends plugin
       }
     }
     if ($has_unit_tag == false && $this->is_administrational_unit == false){
-      unset ($this->attrs['gosaUnitTag']);
+      $this->attrs['gosaUnitTag']= array();
     } else {
       $this->attrs['gosaUnitTag']= $this->gosaUnitTag;
     }
