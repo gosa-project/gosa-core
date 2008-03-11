@@ -276,33 +276,35 @@ class departmentManagement extends plugin
       Edit department finished 
      ***************/
 
-    if ((isset($_POST['edit_finish'])) && (isset($this->deptabs->config)) && !isset($_POST['dep_move_confirm'])){
-      $this->deptabs->save_object();
+    if ((isset($_POST['edit_finish']) || isset($_POST['dep_move_confirm'])) && (isset($this->deptabs->config))){
+
+      /* Check tabs, will feed message array.
+         This call will also initiate a sav_object() call.
+          So don't move it below the moved check !.
+       */
+      $message= $this->deptabs->check();
       $obj = $this->deptabs->by_object['department'];
-      if($obj->orig_dn != "new"){
+
+      /*************
+        MOVED ? 
+         Check if this department is moved 
+       *************/  
+      if(!isset($_POST['dep_move_confirm']) && $obj->orig_dn != "new"){
         if($obj->orig_ou != $obj->ou || $obj->base != $obj->orig_base){
           return($smarty->fetch(get_template_path("dep_move_confirm.tpl",TRUE)));
         }
       }
-    }
-
-    /* Save changes */
-    if ((isset($_POST['edit_finish'])|| isset($_POST['dep_move_confirm'])) && (isset($this->deptabs->config))){
-
-      /* Check tabs, will feed message array */
-      $message= $this->deptabs->check();
 
       /* Save, or display error message? */
       if (count($message) == 0){
         global $config;
 
-        $this->deptabs->save(true);
+        $this->deptabs->save();
         $config->get_departments();
         $config->make_idepartments();
         $this->config = $config;
 
         /* This object must be tagged, so set ObjectTaggingRequested to true */
-        $this->deptabs->by_object['department']->tag_objects(TRUE);
         if($this->deptabs->by_object['department']->must_be_tagged()){
           $this->ObjectTaggingRequested   = true; 
         }		
@@ -362,26 +364,25 @@ class departmentManagement extends plugin
     }
 
 
-    /***************
-      In case of tagging/moving the object wasn't deleted, do it know
-     ***************/
+   /***************
+     In case of tagging/moving the object wasn't deleted, do it know
+    ***************/
 
-    /* If there is an unsaved object and all operations are done
-       remove locks & save object tab & unset current object */
-    if($this->ObjectInSaveMode && (!$this->RecursiveRemoveRequested) && (!$this->ObjectTaggingRequested)){
-      $this->deptabs->save();
-      $this->config->get_departments();
-      $this->ObjectInSaveMode = false;
-      if ($this->dn != "new"){
-        del_lock ($this->dn);
-      }
-      unset ($this->deptabs);
-      $this->deptabs= NULL;
-      session::un_set('objectinfo');
-    }
+   /* If there is an unsaved object and all operations are done
+      remove locks & save object tab & unset current object */
+   if($this->ObjectInSaveMode && (!$this->RecursiveRemoveRequested) && (!$this->ObjectTaggingRequested)){
+     $this->config->get_departments();
+     $this->ObjectInSaveMode = false;
+     if ($this->dn != "new"){
+       del_lock ($this->dn);
+     }
+     unset ($this->deptabs);
+     $this->deptabs= NULL;
+     session::un_set('objectinfo');
+   }
 
 
-    /***************
+   /***************
       Dialog canceled  
      ***************/
 

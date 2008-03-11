@@ -57,7 +57,7 @@ class department extends plugin
 
 	function department (&$config, $dn)
 	{
-
+  echo __FUNCTION__;
 		plugin::plugin($config, $dn);
 		$this->is_account= TRUE;
 		$this->ui= get_userinfo();
@@ -89,6 +89,7 @@ class department extends plugin
 
 	function execute()
 	{
+  echo __FUNCTION__."<br>";
 		/* Call parent execute */
 		plugin::execute();
 
@@ -172,6 +173,7 @@ class department extends plugin
 
 	function clear_fields()
 	{
+  echo __FUNCTION__."<br>";
 		$this->dn   = "";
 		$this->base = "";
 
@@ -182,6 +184,7 @@ class department extends plugin
 
 	function remove_from_parent()
 	{
+  echo __FUNCTION__."<br>";
 		$ldap= $this->config->get_ldap_link();
 		$ldap->cd ($this->dn);
 		$ldap->recursive_remove();
@@ -196,11 +199,13 @@ class department extends plugin
 
 	function must_be_tagged()
 	{
+  echo __FUNCTION__."<br>";
 		return $this->must_be_tagged;
 	}
 
 	function am_i_moved()
 	{
+  echo __FUNCTION__."<br>";
 		return $this->rec_cpy;
 	}
 
@@ -208,6 +213,7 @@ class department extends plugin
 	/* Save data to object */
 	function save_object()
 	{
+  echo __FUNCTION__."<br>";
 		if (isset($_POST['dep_generic_posted'])){
 
       /* Create a base backup and reset the
@@ -240,6 +246,7 @@ class department extends plugin
 	/* Check values */
 	function check()
 	{
+  echo __FUNCTION__."<br>";
 		/* Call common method to give check the hook */
 		$message= plugin::check();
 
@@ -283,6 +290,7 @@ class department extends plugin
 	/* Save to LDAP */
 	function save()
 	{
+  echo __FUNCTION__."<br>";
 		$ldap= $this->config->get_ldap_link();
 
     /* Add tag objects if needed */
@@ -380,6 +388,7 @@ class department extends plugin
 
   function ShowMoveFrame()
   {
+  echo __FUNCTION__."<br>";
     $smarty = get_smarty();
     $smarty->assign("src","?plug=".$_GET['plug']."&amp;PerformRecMove&no_output_compression");
     $smarty->assign("message","As soon as the move operation has finished, you can scroll down to end of the page and press the 'Continue' button to continue with the department management dialog.");
@@ -389,6 +398,7 @@ class department extends plugin
 
   function ShowTagFrame()
   {
+  echo __FUNCTION__."<br>";
     $smarty = get_smarty();
     $smarty->assign("src","?plug=".$_GET['plug']."&TagDepartment&no_output_compression");
     $smarty->assign("message","As soon as the tag operation has finished, you can scroll down to end of the page and press the 'Continue' button to continue with the department management dialog.");
@@ -399,6 +409,7 @@ class department extends plugin
 	/* Tag objects to have the gosaAdministrativeUnitTag */
 	function tag_objects($OnlySetTagFlag = false)
 	{
+  echo __FUNCTION__."<br>";
     if(!$OnlySetTagFlag){
       $smarty= get_smarty();
       /* Print out html introduction */
@@ -472,6 +483,7 @@ class department extends plugin
 	/* Move/Rename complete trees */
 	function recursive_move($src_dn, $dst_dn,$force = false)
 	{
+  echo __FUNCTION__."<br>";
     /* If force == false prepare to recursive move this object from src to dst 
         on the next call. */
 		if(!$force){
@@ -572,6 +584,7 @@ class department extends plugin
   /* Return plugin informations for acl handling */ 
   static function plInfo()
   {
+  echo __FUNCTION__."<br>";
     return (array("plShortName"   => _("Generic"),
                   "plDescription" => _("Departments"),
                   "plSelfModify"  => FALSE,
@@ -597,6 +610,7 @@ class department extends plugin
 
   function handle_object_tagging($dn= "", $tag= "", $show= false)
   {
+  echo __FUNCTION__."<br>";
     /* No dn? Self-operation... */
     if ($dn == ""){
       $dn= $this->dn;
