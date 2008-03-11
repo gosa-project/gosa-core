@@ -385,7 +385,7 @@ class groupManagement extends plugin
 
             /* Normally this shouldn't be reached, send some extra
                logs to notify the administrator */
-            msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), ERROR_DIALOG);
+            msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
             new log("security","groups/".get_class($this),$dn,array(),"Tried to trick deletion.");
           }
           /* Remove lock file after successfull deletion */

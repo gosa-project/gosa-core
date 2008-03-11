@@ -76,7 +76,7 @@ class divListGroup extends MultiSelectWindow
     /* set Page header */
     $this->AddHeader(array("string"=> $chk,          "attach"=>"style='width:20px;'"));
     $this->AddHeader(array("string"=>"&nbsp;","attach"=>"style='width:20px;'"));
-    $this->AddHeader(array("string"=>_("Groupname / Department")));
+    $this->AddHeader(array("string"=>_("Name")."&nbsp;/&nbsp;"._("Department")));
     $this->AddHeader(array("string"=>_("Properties"),"attach"=>"style='width:136px;'"));
     $this->AddHeader(array("string"=>_("Actions"),"attach"=>"style='width:".$action_col_size."px;border-right:0px;'"));
 
