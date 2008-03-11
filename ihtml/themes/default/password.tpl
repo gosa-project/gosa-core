@@ -82,7 +82,7 @@
        <td><input type='password' name='new_password' id="new_password" maxlength='25' value='' title='{t}New password{/t}' onFocus="nextfield= 'new_password_repeated';" onkeyup="testPasswordCss(document.getElementById('new_password').value);"></td>
       </tr>
       <tr>
-       <td>{t}New password{/t} ({t}again{/t})</td>
+       <td>{t}New password repeated{/t}</td>
        <td><input type='password' name='new_password_repeated' maxlength='25' value='' title='{t}New password repeated{/t}' onFocus="nextfield= 'apply';"></td>
       </tr>
       <tr>

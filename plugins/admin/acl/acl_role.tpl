@@ -1,6 +1,6 @@
 {if $dialogState eq 'head'}
 
-<h1>{t}Assigned ACLs for current entry{/t}</h1>
+<h1>{t}Assigned ACL for current entry{/t}</h1>
 <table>
 <tr>
 	<td>
