@@ -196,7 +196,6 @@ class department extends plugin
 
 	function must_be_tagged()
 	{
-echo 3;
 		return $this->must_be_tagged;
 	}
 
@@ -450,9 +449,7 @@ echo 3;
 
 	    /* Fix entry if needed */
 	    if ($fix){
-echo "1";
 		    if($OnlySetTagFlag){
-echo "2";
 			    $this->must_be_tagged =true;
 			    return;
 		    }

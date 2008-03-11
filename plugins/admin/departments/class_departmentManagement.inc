@@ -302,6 +302,7 @@ class departmentManagement extends plugin
         $this->config = $config;
 
         /* This object must be tagged, so set ObjectTaggingRequested to true */
+        $this->deptabs->by_object['department']->tag_objects(TRUE);
         if($this->deptabs->by_object['department']->must_be_tagged()){
           $this->ObjectTaggingRequested   = true; 
         }		
