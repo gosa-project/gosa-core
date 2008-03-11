@@ -919,13 +919,13 @@ class userManagement extends plugin
 
         if(!is_object($dia) && $dia != TRUE){
           $display.= "<p style=\"text-align:right\">\n";
-          $display.= "<input type=submit name=\"edit_finish\" style=\"width:80px\" value=\""._("Ok")."\">\n";
+          $display.= "<input type=submit name=\"edit_finish\" style=\"width:80px\" value=\"".msgPool::okButton()."\">\n";
           $display.= "&nbsp;\n";
           if ($this->dn != "new"){
-            $display.= "<input type=submit name=\"edit_apply\" value=\""._("Apply")."\">\n";
+            $display.= "<input type=submit name=\"edit_apply\" value=\"".msgPool::applyButton()."\">\n";
             $display.= "&nbsp;\n";
           }
-          $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
+          $display.= "<input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">\n";
           $display.= "</p>";
         }
       return ($display);
