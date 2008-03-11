@@ -1,5 +1,5 @@
 {if $dialogState eq 'head'}
-<h1>{t}Assigned ACLs for current entry{/t}</h1>
+<h1>{t}Assigned ACL for current entry{/t}</h1>
 {$aclList}
 <input type="submit" name="new_acl" value="{t}New ACL{/t}">
 {/if}
@@ -60,7 +60,7 @@
 
 {if $aclType eq 'base'}
 <p class="seperator">&nbsp;</p>
-<h1>{t}ACLs for this object{/t}</h1>
+<h1>{t}ACL for this object{/t}</h1>
 {$aclSelector}
 {/if}
 

@@ -322,7 +322,7 @@ class ogroup extends plugin
       error_reporting(0);
       if (isset($type[1]) && preg_match('/[UGADSFOWTP]/', $type[1])){
         $p2= $conv[$type[1]];
-        $smarty->assign("combinedObjects", "$p1 "._("and")." $p2");
+        $smarty->assign("combinedObjects", sprintf("'%s' and '%s'", $p1, $p2);
       } else {
         $smarty->assign("combinedObjects", "$p1");
       }

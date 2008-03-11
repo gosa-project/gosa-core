@@ -23,7 +23,7 @@
 class aclManagement extends plugin
 {
   /* Plugin definitions */
-  var $plHeadline     = "ACLs";
+  var $plHeadline     = "ACL";
   var $plDescription  = "Manage access control lists";
 
   /* Dialog attributes */

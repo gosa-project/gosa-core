@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-10 16:37+0100\n"
+"POT-Creation-Date: 2008-03-10 19:32+0100\n"
 "PO-Revision-Date: 2008-03-04 08:41+0100\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team:  <de@li.org>\n"
@@ -196,7 +196,8 @@ msgstr "Verfügbare Mitglieder"
 msgid "List message possible targets"
 msgstr "Zeige mögliche Empfänger dieser Nachricht"
 
-#: ihtml/themes/default/acl.tpl:41 html/getxls.php:123 html/getxls.php:286
+#: ihtml/themes/default/acl.tpl:41 include/class_acl.inc:948
+#: html/getxls.php:123 html/getxls.php:286
 msgid "Members"
 msgstr "Mitglieder"
 
@@ -920,13 +921,6 @@ msgstr ""
 "Sie haben erfolgreich Ihr Passwort geändert. Bitte denken Sie daran alle "
 "Programme anzupassen, die dieses Passwort auch benutzen."
 
-#: plugins/personal/password/changed.tpl:9
-#: plugins/admin/departments/class_departmentManagement.inc:441
-#: plugins/admin/departments/dep_iframe.tpl:18 setup/class_setup.inc:261
-#: setup/class_setup.inc:263 include/functions.inc:1550
-msgid "Back"
-msgstr "Zurück"
-
 #: plugins/personal/password/password.tpl:4
 msgid ""
 "To change your personal password use the fields below. The changes take "
@@ -1083,11 +1077,11 @@ msgstr "Die gewählte Passwort-Methode ist nicht mehr verfügbar."
 #: include/class_MultiSelectWindow.inc:529 include/class_config.inc:228
 #: include/class_acl.inc:1082 include/functions.inc:344
 #: include/functions.inc:371 include/functions.inc:380
-#: include/functions.inc:409 include/functions.inc:652
-#: include/functions.inc:691 include/functions.inc:736
-#: include/functions.inc:2544 include/class_ldap.inc:649
-#: include/class_ldap.inc:1115 html/index.php:255 html/index.php:269
-#: html/index.php:282
+#: include/functions.inc:409 include/functions.inc:620
+#: include/functions.inc:652 include/functions.inc:691
+#: include/functions.inc:736 include/functions.inc:2544
+#: include/class_ldap.inc:649 include/class_ldap.inc:1115 html/index.php:255
+#: html/index.php:269 html/index.php:282
 msgid "LDAP error"
 msgstr "LDAP-Fehler"
 
@@ -1606,16 +1600,21 @@ msgid "grace time active"
 msgstr "Nachfrist aktiv"
 
 #: plugins/personal/posix/class_posixAccount.inc:159
-msgid "active, password not changable"
+#: plugins/personal/posix/class_posixAccount.inc:161
+#: plugins/personal/posix/class_posixAccount.inc:163
+#: plugins/admin/users/class_divListUsers.inc:321
+msgid "active"
+msgstr "aktiv"
+
+#: plugins/personal/posix/class_posixAccount.inc:159
+#, fuzzy
+msgid "password not changable"
 msgstr "aktiv, Passwort kann nicht geändert werden"
 
 #: plugins/personal/posix/class_posixAccount.inc:161
-msgid "active, password expired"
+#, fuzzy
+msgid "password expired"
 msgstr "aktiv, Passwort abgelaufen"
-
-#: plugins/personal/posix/class_posixAccount.inc:163
-msgid "active"
-msgstr "aktiv"
 
 #: plugins/personal/posix/class_posixAccount.inc:208
 msgid "unconfigured"
@@ -2015,7 +2014,8 @@ msgid "Template"
 msgstr "Vorlage"
 
 #: plugins/admin/users/class_divListUsers.inc:183
-#: plugins/admin/groups/class_divListGroup.inc:190
+#: plugins/admin/groups/class_divListGroup.inc:190 include/class_acl.inc:429
+#: include/class_acl.inc:472
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -2132,12 +2132,9 @@ msgid "Copy this entry"
 msgstr "Diesen Eintrag kopieren"
 
 #: plugins/admin/users/class_divListUsers.inc:318
-msgid "Deactivated"
-msgstr "Abgeschaltet"
-
-#: plugins/admin/users/class_divListUsers.inc:321
-msgid "Active"
-msgstr "Aktiv"
+#, fuzzy
+msgid "inactive"
+msgstr "aktiv"
 
 #: plugins/admin/users/class_divListUsers.inc:328
 #: plugins/admin/ogroups/class_divListOGroup.inc:283
@@ -2146,14 +2143,14 @@ msgstr "Aktiv"
 #: plugins/admin/acl/class_aclRole.inc:405
 #: plugins/admin/acl/class_divListACL.inc:242
 #: plugins/admin/acl/class_divListACL.inc:264
-#: plugins/admin/groups/class_divListGroup.inc:293 include/class_acl.inc:429
-#: include/class_acl.inc:472
+#: plugins/admin/groups/class_divListGroup.inc:293
 msgid "edit"
 msgstr "Bearbeiten"
 
 #: plugins/admin/users/class_divListUsers.inc:329
-msgid "Edit user"
-msgstr "Benutzer bearbeiten"
+#, fuzzy
+msgid "user"
+msgstr "Benutzer"
 
 #: plugins/admin/users/class_divListUsers.inc:338
 msgid "password"
@@ -2170,8 +2167,7 @@ msgstr "Sie haben keine Berechtigung, das Passwort dieses Benutzers zu ändern."
 #: plugins/admin/acl/class_aclRole.inc:406
 #: plugins/admin/acl/class_divListACL.inc:252
 #: plugins/admin/acl/class_divListACL.inc:268
-#: plugins/admin/groups/class_divListGroup.inc:302 include/class_acl.inc:430
-#: include/class_acl.inc:473
+#: plugins/admin/groups/class_divListGroup.inc:302
 msgid "delete"
 msgstr "Entfernen"
 
@@ -2432,10 +2428,6 @@ msgstr "Telefone"
 #: plugins/admin/ogroups/class_ogroup.inc:318
 msgid "printers"
 msgstr "Drucker"
-
-#: plugins/admin/ogroups/class_ogroup.inc:325
-msgid "and"
-msgstr "und"
 
 #: plugins/admin/ogroups/class_ogroup.inc:470
 msgid "Non existing dn:"
@@ -2747,6 +2739,12 @@ msgid "You're about to delete the whole LDAP subtree placed under '%s'."
 msgstr ""
 "Sie sind dabei, einen gesamten LDAP-Teilbaum unterhalb von '%s' zu löschen."
 
+#: plugins/admin/departments/class_departmentManagement.inc:441
+#: setup/class_setup.inc:261 setup/class_setup.inc:263
+#: include/functions.inc:1550
+msgid "Back"
+msgstr "Zurück"
+
 #: plugins/admin/departments/tabs_department.inc:55
 msgid "Moving LDAP tree failed: destination tree is a subtree of the source!"
 msgstr ""
@@ -2943,17 +2941,23 @@ msgstr ""
 "gewünschte Operation durchzuführen."
 
 #: plugins/admin/acl/tabs_acl.inc:28
-#: plugins/admin/acl/class_divListACL.inc:259
-msgid "Acl"
-msgstr "ACL"
+#: plugins/admin/acl/class_divListACL.inc:259 include/class_tabs.inc:343
+#: include/class_acl.inc:429 include/class_acl.inc:430
+#: include/class_acl.inc:1114 include/class_acl.inc:1115
+#: include/class_acl.inc:1120
+msgid "ACL"
+msgstr "Zugriffsregeln"
 
 #: plugins/admin/acl/class_aclRole.inc:26
-msgid "Access control list templates"
-msgstr "Vorlagen für Zugriffskontrollisten"
+#: plugins/admin/acl/class_aclRole.inc:695
+#: plugins/admin/acl/class_aclRole.inc:700
+#, fuzzy
+msgid "Access control roles"
+msgstr "Zugriffskontrollliste"
 
 #: plugins/admin/acl/class_aclRole.inc:27
 #, fuzzy
-msgid "Edit ACL roles"
+msgid "Edit AC roles"
 msgstr "ACL-Rollen"
 
 #: plugins/admin/acl/class_aclRole.inc:123 include/class_acl.inc:197
@@ -2991,15 +2995,15 @@ msgstr "Auf"
 msgid "Down"
 msgstr "Ab"
 
-#: plugins/admin/acl/class_aclRole.inc:360 include/class_acl.inc:429
+#: plugins/admin/acl/class_aclRole.inc:360
 msgid "Edit ACL"
 msgstr "ACL Bearbeiten"
 
-#: plugins/admin/acl/class_aclRole.inc:361 include/class_acl.inc:430
+#: plugins/admin/acl/class_aclRole.inc:361
 msgid "Delete ACL"
 msgstr "ACL Entfernen"
 
-#: plugins/admin/acl/class_aclRole.inc:398 include/class_acl.inc:465
+#: plugins/admin/acl/class_aclRole.inc:398
 msgid "No ACL settings for this category"
 msgstr "Keine ACL-Einstellungen für diese Kategorie"
 
@@ -3008,15 +3012,15 @@ msgstr "Keine ACL-Einstellungen für diese Kategorie"
 msgid "Contains ACLs for these objects: %s"
 msgstr "Enthält ACLs für diese Objekte: %s"
 
-#: plugins/admin/acl/class_aclRole.inc:405 include/class_acl.inc:472
+#: plugins/admin/acl/class_aclRole.inc:405
 msgid "Edit categories ACLs"
 msgstr "ACLs dieser Kategorie bearbeiten"
 
-#: plugins/admin/acl/class_aclRole.inc:406 include/class_acl.inc:473
+#: plugins/admin/acl/class_aclRole.inc:406
 msgid "Clear categories ACLs"
 msgstr "ACLs dieser Kategorie leeren"
 
-#: plugins/admin/acl/class_aclRole.inc:422 include/class_acl.inc:518
+#: plugins/admin/acl/class_aclRole.inc:422
 #, php-format
 msgid "Edit ACL for '%s', scope is '%s'"
 msgstr "ACL für '%s' bearbeiten, Bereich ist '%s'"
@@ -3035,14 +3039,6 @@ msgid "This role cannot be removed while it is in use by these objects:"
 msgstr ""
 "Die Rolle kann nicht entfernt werden, solange sie noch von folgenden "
 "Objekten verwendet wird:"
-
-#: plugins/admin/acl/class_aclRole.inc:695 include/class_acl.inc:1120
-msgid "ACL roles"
-msgstr "ACL-Rollen"
-
-#: plugins/admin/acl/class_aclRole.inc:700
-msgid "Acl roles"
-msgstr "ACL-Rollen"
 
 #: plugins/admin/acl/remove.tpl:6
 msgid ""
@@ -5103,11 +5099,6 @@ msgstr "%s%% Trefferquote in Datei %s"
 msgid "Delete process has been canceled by plugin '%s': %s"
 msgstr "Der Lösch-Vorgang wurde durch das plugin '%s' beendet: %s"
 
-#: include/class_tabs.inc:343 include/class_acl.inc:1114
-#: include/class_acl.inc:1115 include/class_acl.inc:1120
-msgid "ACL"
-msgstr "Zugriffsregeln"
-
 #: include/class_tabs.inc:346
 msgid "References"
 msgstr "Referenzen"
@@ -5277,11 +5268,10 @@ msgstr "SID und/oder RIDBASE fehlen in der Konfiguration!"
 
 #: include/class_log.inc:88 include/class_acl.inc:826
 #: include/functions.inc:450 include/functions.inc:595
-#: include/functions.inc:620 include/functions.inc:681
-#: include/functions.inc:1068 include/functions.inc:1916
-#: include/functions.inc:1950 include/functions.inc:1970
-#: include/class_ldap.inc:592 include/class_ldap.inc:640
-#: include/class_CopyPasteHandler.inc:159
+#: include/functions.inc:681 include/functions.inc:1068
+#: include/functions.inc:1916 include/functions.inc:1950
+#: include/functions.inc:1970 include/class_ldap.inc:592
+#: include/class_ldap.inc:640 include/class_CopyPasteHandler.inc:159
 #: include/class_CopyPasteHandler.inc:269 html/getvcard.php:39
 msgid "Internal error"
 msgstr "Interner Fehler"
@@ -5412,8 +5402,30 @@ msgstr "Zugriffskontrolle"
 msgid "Use ACL defined in role"
 msgstr "Verwende ACL aus Rollendefinition"
 
+#: include/class_acl.inc:430 include/class_acl.inc:473
+#: include/utils/class_msgPool.inc:262
+#, php-format
+msgid "Delete"
+msgstr "Entfernen"
+
+#: include/class_acl.inc:465
+#, fuzzy
+msgid "No ACL settings for this category!"
+msgstr "Keine ACL-Einstellungen für diese Kategorie"
+
+#: include/class_acl.inc:472 include/class_acl.inc:473
+#, fuzzy
+msgid "category ACL"
+msgstr "Kategorie"
+
+#: include/class_acl.inc:518
+#, fuzzy, php-format
+msgid "Edit ACL for '%s' - scope is '%s'"
+msgstr "ACL für '%s' bearbeiten, Bereich ist '%s'"
+
 #: include/class_acl.inc:665 include/class_acl.inc:672
-msgid "Show/Hide Advanced Settings"
+#, fuzzy
+msgid "Show/hide advanced settings"
 msgstr "Zeige/Verstecke Erweiterte Einstellungen"
 
 #: include/class_acl.inc:690
@@ -5453,9 +5465,9 @@ msgid "Complete object"
 msgstr "Vollständiges Objekt"
 
 #: include/class_acl.inc:826
-#, php-format
-msgid "Unkown ACL type '%s'. Don't know how to handle it."
-msgstr "Unbekannter ACL-Typ '%s'. Verarbeitung nicht möglich."
+#, fuzzy, php-format
+msgid "Unkown ACL type '%s'!"
+msgstr "Unbekannter Eintrag '%s'!"
 
 #: include/class_acl.inc:869
 #, php-format
@@ -5468,25 +5480,27 @@ msgid "Role: %s"
 msgstr "Rolle: %s"
 
 #: include/class_acl.inc:931
-msgid "Unknown role, possibly removed"
-msgstr "Unbekannte Rolle, möglicherweise wurde sie entfernt"
+#, fuzzy
+msgid "unknown role"
+msgstr "! unbekannte id"
 
 #: include/class_acl.inc:939
 #, php-format
 msgid "Contains settings for these objects: %s"
 msgstr "Enthält Einstellungen für diese Objekte: %s"
 
-#: include/class_acl.inc:948
-msgid "Members:"
-msgstr "Mitglieder:"
-
 #: include/class_acl.inc:954
-msgid "ACL is valid for all users"
+#, fuzzy
+msgid "ACL takes effect for all users"
 msgstr "ACL ist gültig für alle Benutzer"
 
 #: include/class_acl.inc:1115
 msgid "Access control list"
 msgstr "Zugriffskontrollliste"
+
+#: include/class_acl.inc:1120
+msgid "ACL roles"
+msgstr "ACL-Rollen"
 
 #: include/class_acl.inc:1123
 msgid "Role name"
@@ -5623,15 +5637,10 @@ msgstr ""
 "Kann Sperrinformation für LDAP-Baum nicht erzeugen. Bitte kontaktieren Sie "
 "Ihren Administrator!"
 
-#: include/functions.inc:605 include/functions.inc:620
+#: include/functions.inc:605
 #, php-format
 msgid "LDAP server returned: %s"
 msgstr "Der LDAP-Server meldete: %s"
-
-#: include/functions.inc:620
-#, php-format
-msgid "Adding a lock failed."
-msgstr "Hinzufügen der Sperre ist fehlgeschlagen"
 
 #: include/functions.inc:699
 msgid ""
@@ -6150,11 +6159,6 @@ msgstr "Hinzufügen"
 #, fuzzy, php-format
 msgid "Add %s"
 msgstr "Hinzufügen"
-
-#: include/utils/class_msgPool.inc:262
-#, php-format
-msgid "Delete"
-msgstr "Entfernen"
 
 #: include/utils/class_msgPool.inc:262
 #, fuzzy, php-format
@@ -6713,6 +6717,39 @@ msgid "Helpdir '%s' is not accessible, can't read any helpfiles."
 msgstr ""
 "Auf das Hilfeverzeichnis '%s' kann nicht zugegriffen werden - kann daher "
 "keine Hilfedateien lesen."
+
+#~ msgid "Deactivated"
+#~ msgstr "Abgeschaltet"
+
+#~ msgid "Active"
+#~ msgstr "Aktiv"
+
+#~ msgid "Edit user"
+#~ msgstr "Benutzer bearbeiten"
+
+#~ msgid "and"
+#~ msgstr "und"
+
+#~ msgid "Unkown ACL type '%s'. Don't know how to handle it."
+#~ msgstr "Unbekannter ACL-Typ '%s'. Verarbeitung nicht möglich."
+
+#~ msgid "Unknown role, possibly removed"
+#~ msgstr "Unbekannte Rolle, möglicherweise wurde sie entfernt"
+
+#~ msgid "Members:"
+#~ msgstr "Mitglieder:"
+
+#~ msgid "Adding a lock failed."
+#~ msgstr "Hinzufügen der Sperre ist fehlgeschlagen"
+
+#~ msgid "Acl"
+#~ msgstr "ACL"
+
+#~ msgid "Access control list templates"
+#~ msgstr "Vorlagen für Zugriffskontrollisten"
+
+#~ msgid "Acl roles"
+#~ msgstr "ACL-Rollen"
 
 #~ msgid "User login failed."
 #~ msgstr "Benutzeranmeldung fehlgeschlagen."

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-10 16:37+0100\n"
+"POT-Creation-Date: 2008-03-10 19:32+0100\n"
 "PO-Revision-Date: 2005-04-18 14:35+0300\n"
 "Last-Translator: Igor Muratov <migor@altlinux.org>\n"
 "Language-Team: ALT Linux Team\n"
@@ -199,7 +199,8 @@ msgstr "Доступные приложения"
 msgid "List message possible targets"
 msgstr ""
 
-#: ihtml/themes/default/acl.tpl:41 html/getxls.php:123 html/getxls.php:286
+#: ihtml/themes/default/acl.tpl:41 include/class_acl.inc:948
+#: html/getxls.php:123 html/getxls.php:286
 #, fuzzy
 msgid "Members"
 msgstr "Включаемые объекты"
@@ -915,13 +916,6 @@ msgstr ""
 "Вы успешно сменили свой пароль. Не забудьте изменить нужные настройки "
 "использующих его программ."
 
-#: plugins/personal/password/changed.tpl:9
-#: plugins/admin/departments/class_departmentManagement.inc:441
-#: plugins/admin/departments/dep_iframe.tpl:18 setup/class_setup.inc:261
-#: setup/class_setup.inc:263 include/functions.inc:1550
-msgid "Back"
-msgstr "Назад"
-
 #: plugins/personal/password/password.tpl:4
 #, fuzzy
 msgid ""
@@ -1082,11 +1076,11 @@ msgstr "У выбранного приложения нет параметров
 #: include/class_MultiSelectWindow.inc:529 include/class_config.inc:228
 #: include/class_acl.inc:1082 include/functions.inc:344
 #: include/functions.inc:371 include/functions.inc:380
-#: include/functions.inc:409 include/functions.inc:652
-#: include/functions.inc:691 include/functions.inc:736
-#: include/functions.inc:2544 include/class_ldap.inc:649
-#: include/class_ldap.inc:1115 html/index.php:255 html/index.php:269
-#: html/index.php:282
+#: include/functions.inc:409 include/functions.inc:620
+#: include/functions.inc:652 include/functions.inc:691
+#: include/functions.inc:736 include/functions.inc:2544
+#: include/class_ldap.inc:649 include/class_ldap.inc:1115 html/index.php:255
+#: html/index.php:269 html/index.php:282
 #, fuzzy
 msgid "LDAP error"
 msgstr "Ошибка LDAP:"
@@ -1633,19 +1627,22 @@ msgid "grace time active"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:159
+#: plugins/personal/posix/class_posixAccount.inc:161
+#: plugins/personal/posix/class_posixAccount.inc:163
+#: plugins/admin/users/class_divListUsers.inc:321
 #, fuzzy
-msgid "active, password not changable"
+msgid "active"
+msgstr "Личный"
+
+#: plugins/personal/posix/class_posixAccount.inc:159
+#, fuzzy
+msgid "password not changable"
 msgstr "Новый пароль"
 
 #: plugins/personal/posix/class_posixAccount.inc:161
 #, fuzzy
-msgid "active, password expired"
+msgid "password expired"
 msgstr "Срок действия пароля истекает"
-
-#: plugins/personal/posix/class_posixAccount.inc:163
-#, fuzzy
-msgid "active"
-msgstr "Личный"
 
 #: plugins/personal/posix/class_posixAccount.inc:208
 msgid "unconfigured"
@@ -2060,7 +2057,8 @@ msgid "Template"
 msgstr "Шаблон"
 
 #: plugins/admin/users/class_divListUsers.inc:183
-#: plugins/admin/groups/class_divListGroup.inc:190
+#: plugins/admin/groups/class_divListGroup.inc:190 include/class_acl.inc:429
+#: include/class_acl.inc:472
 msgid "Edit"
 msgstr "Изменить"
 
@@ -2195,12 +2193,7 @@ msgstr "Редактиовать объект"
 
 #: plugins/admin/users/class_divListUsers.inc:318
 #, fuzzy
-msgid "Deactivated"
-msgstr "Личный"
-
-#: plugins/admin/users/class_divListUsers.inc:321
-#, fuzzy
-msgid "Active"
+msgid "inactive"
 msgstr "Личный"
 
 #: plugins/admin/users/class_divListUsers.inc:328
@@ -2210,16 +2203,15 @@ msgstr "Личный"
 #: plugins/admin/acl/class_aclRole.inc:405
 #: plugins/admin/acl/class_divListACL.inc:242
 #: plugins/admin/acl/class_divListACL.inc:264
-#: plugins/admin/groups/class_divListGroup.inc:293 include/class_acl.inc:429
-#: include/class_acl.inc:472
+#: plugins/admin/groups/class_divListGroup.inc:293
 #, fuzzy
 msgid "edit"
 msgstr "Изменить"
 
 #: plugins/admin/users/class_divListUsers.inc:329
 #, fuzzy
-msgid "Edit user"
-msgstr "Пользователи домена"
+msgid "user"
+msgstr "пользователи"
 
 #: plugins/admin/users/class_divListUsers.inc:338
 #, fuzzy
@@ -2238,8 +2230,7 @@ msgstr "Вам не разрешено менять пароль."
 #: plugins/admin/acl/class_aclRole.inc:406
 #: plugins/admin/acl/class_divListACL.inc:252
 #: plugins/admin/acl/class_divListACL.inc:268
-#: plugins/admin/groups/class_divListGroup.inc:302 include/class_acl.inc:430
-#: include/class_acl.inc:473
+#: plugins/admin/groups/class_divListGroup.inc:302
 #, fuzzy
 msgid "delete"
 msgstr "Удалить"
@@ -2517,10 +2508,6 @@ msgstr "телефоны"
 #: plugins/admin/ogroups/class_ogroup.inc:318
 msgid "printers"
 msgstr "принтеры"
-
-#: plugins/admin/ogroups/class_ogroup.inc:325
-msgid "and"
-msgstr "и"
 
 #: plugins/admin/ogroups/class_ogroup.inc:470
 #, fuzzy
@@ -2856,6 +2843,12 @@ msgstr "Вы собираетесь удалить объект %s."
 msgid "You're about to delete the whole LDAP subtree placed under '%s'."
 msgstr "Вы собираетесь удалить целую ветку LDAP с корнем в \"%s\"."
 
+#: plugins/admin/departments/class_departmentManagement.inc:441
+#: setup/class_setup.inc:261 setup/class_setup.inc:263
+#: include/functions.inc:1550
+msgid "Back"
+msgstr "Назад"
+
 #: plugins/admin/departments/tabs_department.inc:55
 msgid "Moving LDAP tree failed: destination tree is a subtree of the source!"
 msgstr ""
@@ -3048,19 +3041,23 @@ msgid ""
 msgstr ""
 
 #: plugins/admin/acl/tabs_acl.inc:28
-#: plugins/admin/acl/class_divListACL.inc:259
-#, fuzzy
-msgid "Acl"
-msgstr "Все"
+#: plugins/admin/acl/class_divListACL.inc:259 include/class_tabs.inc:343
+#: include/class_acl.inc:429 include/class_acl.inc:430
+#: include/class_acl.inc:1114 include/class_acl.inc:1115
+#: include/class_acl.inc:1120
+msgid "ACL"
+msgstr "Доступ"
 
 #: plugins/admin/acl/class_aclRole.inc:26
+#: plugins/admin/acl/class_aclRole.inc:695
+#: plugins/admin/acl/class_aclRole.inc:700
 #, fuzzy
-msgid "Access control list templates"
+msgid "Access control roles"
 msgstr "Параметры доступа"
 
 #: plugins/admin/acl/class_aclRole.inc:27
 #, fuzzy
-msgid "Edit ACL roles"
+msgid "Edit AC roles"
 msgstr "Доступ"
 
 #: plugins/admin/acl/class_aclRole.inc:123 include/class_acl.inc:197
@@ -3103,17 +3100,17 @@ msgstr ""
 msgid "Down"
 msgstr "Домен"
 
-#: plugins/admin/acl/class_aclRole.inc:360 include/class_acl.inc:429
+#: plugins/admin/acl/class_aclRole.inc:360
 #, fuzzy
 msgid "Edit ACL"
 msgstr "Изменить"
 
-#: plugins/admin/acl/class_aclRole.inc:361 include/class_acl.inc:430
+#: plugins/admin/acl/class_aclRole.inc:361
 #, fuzzy
 msgid "Delete ACL"
 msgstr "Удалить"
 
-#: plugins/admin/acl/class_aclRole.inc:398 include/class_acl.inc:465
+#: plugins/admin/acl/class_aclRole.inc:398
 #, fuzzy
 msgid "No ACL settings for this category"
 msgstr "Описание группы"
@@ -3123,16 +3120,16 @@ msgstr "Описание группы"
 msgid "Contains ACLs for these objects: %s"
 msgstr ""
 
-#: plugins/admin/acl/class_aclRole.inc:405 include/class_acl.inc:472
+#: plugins/admin/acl/class_aclRole.inc:405
 #, fuzzy
 msgid "Edit categories ACLs"
 msgstr "Список систем"
 
-#: plugins/admin/acl/class_aclRole.inc:406 include/class_acl.inc:473
+#: plugins/admin/acl/class_aclRole.inc:406
 msgid "Clear categories ACLs"
 msgstr ""
 
-#: plugins/admin/acl/class_aclRole.inc:422 include/class_acl.inc:518
+#: plugins/admin/acl/class_aclRole.inc:422
 #, php-format
 msgid "Edit ACL for '%s', scope is '%s'"
 msgstr ""
@@ -3150,16 +3147,6 @@ msgstr "Имя объекта"
 #, php-format
 msgid "This role cannot be removed while it is in use by these objects:"
 msgstr ""
-
-#: plugins/admin/acl/class_aclRole.inc:695 include/class_acl.inc:1120
-#, fuzzy
-msgid "ACL roles"
-msgstr "Доступ"
-
-#: plugins/admin/acl/class_aclRole.inc:700
-#, fuzzy
-msgid "Acl roles"
-msgstr "Управление системами"
 
 #: plugins/admin/acl/remove.tpl:6
 #, fuzzy
@@ -5290,11 +5277,6 @@ msgstr ""
 msgid "Delete process has been canceled by plugin '%s': %s"
 msgstr ""
 
-#: include/class_tabs.inc:343 include/class_acl.inc:1114
-#: include/class_acl.inc:1115 include/class_acl.inc:1120
-msgid "ACL"
-msgstr "Доступ"
-
 #: include/class_tabs.inc:346
 msgid "References"
 msgstr "Ссылки"
@@ -5464,11 +5446,10 @@ msgstr "В вашем файле настройки отсутствуют зн�
 
 #: include/class_log.inc:88 include/class_acl.inc:826
 #: include/functions.inc:450 include/functions.inc:595
-#: include/functions.inc:620 include/functions.inc:681
-#: include/functions.inc:1068 include/functions.inc:1916
-#: include/functions.inc:1950 include/functions.inc:1970
-#: include/class_ldap.inc:592 include/class_ldap.inc:640
-#: include/class_CopyPasteHandler.inc:159
+#: include/functions.inc:681 include/functions.inc:1068
+#: include/functions.inc:1916 include/functions.inc:1950
+#: include/functions.inc:1970 include/class_ldap.inc:592
+#: include/class_ldap.inc:640 include/class_CopyPasteHandler.inc:159
 #: include/class_CopyPasteHandler.inc:269 html/getvcard.php:39
 #, fuzzy
 msgid "Internal error"
@@ -5604,9 +5585,30 @@ msgstr "Параметры доступа"
 msgid "Use ACL defined in role"
 msgstr ""
 
+#: include/class_acl.inc:430 include/class_acl.inc:473
+#: include/utils/class_msgPool.inc:262
+#, php-format
+msgid "Delete"
+msgstr "Удалить"
+
+#: include/class_acl.inc:465
+#, fuzzy
+msgid "No ACL settings for this category!"
+msgstr "Описание группы"
+
+#: include/class_acl.inc:472 include/class_acl.inc:473
+#, fuzzy
+msgid "category ACL"
+msgstr "Категория"
+
+#: include/class_acl.inc:518
+#, php-format
+msgid "Edit ACL for '%s' - scope is '%s'"
+msgstr ""
+
 #: include/class_acl.inc:665 include/class_acl.inc:672
 #, fuzzy
-msgid "Show/Hide Advanced Settings"
+msgid "Show/hide advanced settings"
 msgstr "Настройки телефона"
 
 #: include/class_acl.inc:690
@@ -5652,9 +5654,9 @@ msgid "Complete object"
 msgstr "Включаемые объекты"
 
 #: include/class_acl.inc:826
-#, php-format
-msgid "Unkown ACL type '%s'. Don't know how to handle it."
-msgstr ""
+#, fuzzy, php-format
+msgid "Unkown ACL type '%s'!"
+msgstr "состояние неизвестно"
 
 #: include/class_acl.inc:869
 #, fuzzy, php-format
@@ -5667,27 +5669,28 @@ msgid "Role: %s"
 msgstr "Роль"
 
 #: include/class_acl.inc:931
-msgid "Unknown role, possibly removed"
-msgstr ""
+#, fuzzy
+msgid "unknown role"
+msgstr "состояние неизвестно"
 
 #: include/class_acl.inc:939
 #, fuzzy, php-format
 msgid "Contains settings for these objects: %s"
 msgstr "Описание группы"
 
-#: include/class_acl.inc:948
-#, fuzzy
-msgid "Members:"
-msgstr "Включаемые объекты"
-
 #: include/class_acl.inc:954
-msgid "ACL is valid for all users"
+msgid "ACL takes effect for all users"
 msgstr ""
 
 #: include/class_acl.inc:1115
 #, fuzzy
 msgid "Access control list"
 msgstr "Параметры доступа"
+
+#: include/class_acl.inc:1120
+#, fuzzy
+msgid "ACL roles"
+msgstr "Доступ"
 
 #: include/class_acl.inc:1123
 #, fuzzy
@@ -5813,15 +5816,10 @@ msgstr ""
 "Не удается считать блокировку в базе данных LDAP. Проверьте, раздел \"config"
 "\" в файле gosa.conf!"
 
-#: include/functions.inc:605 include/functions.inc:620
+#: include/functions.inc:605
 #, fuzzy, php-format
 msgid "LDAP server returned: %s"
 msgstr "LDAP-сервер"
-
-#: include/functions.inc:620
-#, fuzzy, php-format
-msgid "Adding a lock failed."
-msgstr "Ошибка при создании блокировки. Ответ сервера: \"%s\"."
 
 #: include/functions.inc:699
 #, fuzzy
@@ -6308,11 +6306,6 @@ msgstr "Добавить"
 #, fuzzy, php-format
 msgid "Add %s"
 msgstr "Добавить"
-
-#: include/utils/class_msgPool.inc:262
-#, php-format
-msgid "Delete"
-msgstr "Удалить"
 
 #: include/utils/class_msgPool.inc:262
 #, fuzzy, php-format
@@ -6889,6 +6882,41 @@ msgstr "Метод '%s' не описан в вашем файле конфиг�
 #, php-format
 msgid "Helpdir '%s' is not accessible, can't read any helpfiles."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Deactivated"
+#~ msgstr "Личный"
+
+#, fuzzy
+#~ msgid "Active"
+#~ msgstr "Личный"
+
+#, fuzzy
+#~ msgid "Edit user"
+#~ msgstr "Пользователи домена"
+
+#~ msgid "and"
+#~ msgstr "и"
+
+#, fuzzy
+#~ msgid "Members:"
+#~ msgstr "Включаемые объекты"
+
+#, fuzzy
+#~ msgid "Adding a lock failed."
+#~ msgstr "Ошибка при создании блокировки. Ответ сервера: \"%s\"."
+
+#, fuzzy
+#~ msgid "Acl"
+#~ msgstr "Все"
+
+#, fuzzy
+#~ msgid "Access control list templates"
+#~ msgstr "Параметры доступа"
+
+#, fuzzy
+#~ msgid "Acl roles"
+#~ msgstr "Управление системами"
 
 #, fuzzy
 #~ msgid "User login failed."

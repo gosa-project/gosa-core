@@ -617,7 +617,7 @@ function add_lock ($object, $user)
     $attrs["cn"] = "$name";
     $ldap->add($attrs);
     if (!$ldap->success()){
-      msg_dialog::display(_("Internal error"), sprintf(_("Adding a lock failed.")."<br><br>"._('LDAP server returned: %s'), "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), "cn=$name,".$config->current['CONFIG'], 0, ERROR_DIALOG));
       return;
     }
   }

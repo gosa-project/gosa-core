@@ -12,7 +12,7 @@
    <div class='gosaAccountExpiredBack'>
        
     <p class='gosaAccountExpiredHeader'>
-    {t}Your Password has expired !! Choose a new Password{/t}
+    {t}Your Password has expired. Please choose a new one!{/t}
     </p>
     
     <!-- Formular data, containing a table to center fields -->

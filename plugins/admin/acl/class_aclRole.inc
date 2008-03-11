@@ -23,8 +23,8 @@
 class aclrole extends acl
 {
   /* Definitions */
-  var $plHeadline= "Access control list templates";
-  var $plDescription= "Edit ACL roles";
+  var $plHeadline= "Access control roles";
+  var $plDescription= "Edit AC roles";
 
   /* attribute list for save action */
   var $attributes= array('gosaAclTemplate',"cn","description");
@@ -127,7 +127,7 @@ class aclrole extends acl
     asort($this->aclObjects);
 
     /* Fill acl types */
-    $this->aclTypes= array( "reset" => _("Reset ACLs"),
+    $this->aclTypes= array( "reset" => _("Reset ACL"),
                              "one" => _("One level"),
                              "base" => _("Current object"),
                              "sub" => _("Complete subtree"),
@@ -252,7 +252,7 @@ class aclrole extends acl
           continue;
         }
 
-        /* Ordinary ACLs */
+        /* Ordinary ACL */
         if (!isset($new_acl[$object])){
           $new_acl[$object]= array();
         }
@@ -357,8 +357,8 @@ class aclrole extends acl
         $field2= array("string" => $this->assembleAclSummary($entry));
         $action= "<input type='image' name='sortup_$key' alt='up' title='"._("Up")."' src='images/sort_up.png' align='top'>";
         $action.= "<input type='image' name='sortdown_$key' alt='down' title='"._("Down")."' src='images/sort_down.png'>";
-        $action.= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."' name='acl_edit_$key' title='"._("Edit ACL")."'>";
-        $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."' name='acl_del_$key' title='"._("Delete ACL")."'>";
+        $action.= "<input class='center' type='image' src='images/edit.png' alt='"._("Edit")."' name='acl_edit_$key' title='".msgPool::editButton(_("ACL"))."'>";
+        $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("Delete")."' name='acl_del_$key' title='".msgPool:delButton(_("ACL"))."'>";
 
         $field3= array("string" => $action, "attach" => "style='border-right:0px;width:50px;text-align:right;'");
         $aclList->AddEntry(array($field1, $field2, $field3));
@@ -397,13 +397,13 @@ class aclrole extends acl
         if ($summary == ""){
           $summary= '<i>'._("No ACL settings for this category").'</i>';
         } else {
-          $summary= sprintf(_("Contains ACLs for these objects: %s"), preg_replace('/, $/', '', $summary));
+          $summary= sprintf(_("ACL for these objects: %s"), preg_replace('/, $/', '', $summary));
         }
 
         $field1= array("string" => $dsc, "attach" => "style='width:140px'");
         $field2= array("string" => $summary);
-        $action= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."' name='cat_edit_$section' title='"._("Edit categories ACLs")."'>";
-        $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."' name='cat_del_$section' title='"._("Clear categories ACLs")."'>";
+        $action= "<input class='center' type='image' src='images/edit.png' alt='"._("Edit")."' name='cat_edit_$section' title='"._("Edit categoriy ACL")."'>";
+        $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("Delete")."' name='cat_del_$section' title='"._("Reset category ACL")."'>";
         $field3= array("string" => $action, "attach" => "style='border-right:0px;width:50px'");
         $aclList->AddEntry(array($field1, $field2, $field3));
       }
@@ -585,7 +585,7 @@ class aclrole extends acl
       msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, "", get_class()));
     }
 
-    /* Refresh users ACLs */
+    /* Refresh users ACL */
     $ui= get_userinfo();
     $ui->loadACL();
     session::set('ui',$ui);
@@ -692,12 +692,12 @@ class aclrole extends acl
   {
     return (array(
           "plShortName" => _("Role"),
-          "plDescription" => _("ACL roles"),
+          "plDescription" => _("Access control roles"),
           "plSelfModify"  => FALSE,
           "plDepends"     => array(),
           "plPriority"    => 0,
           "plSection"     => array("admin"),
-          "plCategory"    => array("aclroles" => array("objectClass" => "gosaRole", "description" => _("Acl roles"))),
+          "plCategory"    => array("aclroles" => array("objectClass" => "gosaRole", "description" => _("Access control roles"))),
 
           "plProvidedAcls"    => array(
             "cn"                => _("Name"),

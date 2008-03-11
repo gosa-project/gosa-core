@@ -315,10 +315,10 @@ class divListUsers extends MultiSelectWindow
       if(isset($val['userPassword'][0]) && preg_match("/^\{[^\}]/",$val['userPassword'][0])){
         if(preg_match("/^[^\}]*+\}!/",$val['userPassword'][0])){
           $lock_status = "<input class='center' type='image' src='images/closedlock.png'
-            alt='"._("Deactivated")."' name='toggle_lock_status_%KEY%'>";
+            alt='"._("inactive")."' name='toggle_lock_status_%KEY%'>";
         }else{
           $lock_status = "<input class='center' type='image' src='images/openlock.png'
-            alt='"._("Active")."' name='toggle_lock_status_%KEY%'>";
+            alt='"._("active")."' name='toggle_lock_status_%KEY%'>";
         }
       }else{
         $lock_status = "<img src='images/empty.png' alt=' ' class='center'>";
@@ -326,7 +326,7 @@ class divListUsers extends MultiSelectWindow
 
       /* Generate edit icon */
       $action.= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'
-        name='user_edit_%KEY%' title='"._("Edit user")."'>";
+        name='user_edit_%KEY%' title='".msgPool::editButton(_("user"))."'>";
 
       /* Add deactivate status if we are allowed to */
       if (preg_match("/w/",$acl_all)){

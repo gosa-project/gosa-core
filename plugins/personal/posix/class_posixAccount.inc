@@ -156,9 +156,9 @@ class posixAccount extends plugin
           $this->status.= ", "._("grace time active");
         }
       } elseif (($this->shadowLastChange + $this->shadowMin) >= $current){
-        $this->status= _("active, password not changable");
+        $this->status= _("active").", "._("password not changable");
       } elseif (($this->shadowLastChange + $this->shadowMax) >= $current){
-        $this->status= _("active, password expired");
+        $this->status= _("active").", "._("password expired");
       } else {
         $this->status= _("active");
       }
@@ -1318,7 +1318,7 @@ class posixAccount extends plugin
 
     /* Should not happen */
     if ($id == $hwm){
-      msg_dialog::display(_("Error"), _("Cannot allocate a free ID: too many users!"), ERROR_DIALOG);
+      msg_dialog::display(_("Error"), _("Cannot allocate a free ID!"), ERROR_DIALOG);
       exit;
     }
 

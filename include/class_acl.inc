@@ -426,8 +426,8 @@ class acl extends plugin
         $field2= array("string" => $this->assembleAclSummary($entry));
         $action= "<input type='image' name='sortup_$key' alt='up' title='"._("Up")."' src='images/sort_up.png' align='top'>";
         $action.= "<input type='image' name='sortdown_$key' alt='down' title='"._("Down")."' src='images/sort_down.png'>";
-        $action.= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."' name='acl_edit_$key' title='"._("Edit ACL")."'>";
-        $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."' name='acl_del_$key' title='"._("Delete ACL")."'>";
+        $action.= "<input class='center' type='image' src='images/edit.png' alt='"._("Edit")."' name='acl_edit_$key' title='".msgPool::editButton(_("ACL"))."'>";
+        $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("Delete")."' name='acl_del_$key' title='".msgPool::delButton(_("ACL"))."'>";
 
         $field3= array("string" => $action, "attach" => "style='border-right:0px;width:50px;text-align:right;'");
         $aclList->AddEntry(array($field1, $field2, $field3));
@@ -462,15 +462,15 @@ class acl extends plugin
 
         /* Set summary... */
         if ($summary == ""){
-          $summary= '<i>'._("No ACL settings for this category").'</i>';
+          $summary= '<i>'._("No ACL settings for this category!").'</i>';
         } else {
           $summary= sprintf(_("Contains ACLs for these objects: %s"), preg_replace('/, $/', '', $summary));
         }
 
         $field1= array("string" => $dsc, "attach" => "style='width:100px'");
         $field2= array("string" => $summary);
-        $action= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."' name='cat_edit_$section' title='"._("Edit categories ACLs")."'>";
-        $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."' name='cat_del_$section' title='"._("Clear categories ACLs")."'>";
+        $action= "<input class='center' type='image' src='images/edit.png' alt='"._("Edit")."' name='cat_edit_$section' title='".msgPool::editButton(_("category ACL"))."'>";
+        $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("Delete")."' name='cat_del_$section' title='".msgPool::delButton(_("category ACL"))."'>";
         $field3= array("string" => $action, "attach" => "style='border-right:0px;width:50px'");
         $aclList->AddEntry(array($field1, $field2, $field3));
       }
@@ -515,7 +515,7 @@ class acl extends plugin
     }
 
     if ($this->dialogState == 'edit'){
-      $smarty->assign('headline', sprintf(_("Edit ACL for '%s', scope is '%s'"), $this->aclObjects[$this->aclObject], $this->aclTypes[$this->aclType]));
+      $smarty->assign('headline', sprintf(_("Edit ACL for '%s' - scope is '%s'"), $this->aclObjects[$this->aclObject], $this->aclTypes[$this->aclType]));
 
       /* Collect objects for selected category */
       foreach ($this->ocMapping[$this->aclObject] as $idx => $class){
@@ -662,14 +662,14 @@ class acl extends plugin
                      "\n  <tr>".
                      "\n    <td style='background-color:#C8C8C8;height:1.8em;' colspan=".($cols-1)."><b>"._("Object").": $name</b></td>".
                      "\n    <td align='right' style='background-color:#C8C8C8;height:1.8em;'>".
-                     "\n    <input type='button' onclick='divtoggle(\"".preg_replace("/[^a-z0-9]/i","_",$name)."\");' value='"._("Show/Hide Advanced Settings")."' /></td>".
+                     "\n    <input type='button' onclick='divtoggle(\"".preg_replace("/[^a-z0-9]/i","_",$name)."\");' value='"._("Show/hide advanced settings")."' /></td>".
                      "\n  </tr>";
         } else if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/ie/i",$_SERVER['HTTP_USER_AGENT'])) {
           $display.= "\n<table style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>".
                      "\n  <tr>".
                      "\n    <td style='background-color:#C8C8C8;height:1.8em;' colspan=".($cols-1)."><b>"._("Object").": $name</b></td>".
                      "\n    <td align='right' style='background-color:#C8C8C8;height:1.8em;'>".
-                     "\n    <input type='button' onclick='divtoggle(\"".preg_replace("/[^a-z0-9]/i","_",$name)."\");' value='"._("Show/Hide Advanced Settings")."' /></td>".
+                     "\n    <input type='button' onclick='divtoggle(\"".preg_replace("/[^a-z0-9]/i","_",$name)."\");' value='"._("Show/hide advanced settings")."' /></td>".
                      "\n  </tr>";
         } else {
           $display.= "\n<table style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>".
@@ -823,7 +823,7 @@ class acl extends plugin
         break;
       
       default:
-        msg_dialog::display(_("Internal error"), sprintf(_("Unkown ACL type '%s'. Don't know how to handle it."), $type), ERROR_DIALOG);
+        msg_dialog::display(_("Internal error"), sprintf(_("Unkown ACL type '%s'!"), $type), ERROR_DIALOG);
         $a= array();
     }
     return ($a);
@@ -928,7 +928,7 @@ class acl extends plugin
         if(isset($this->roles[$entry['acl']])){  
           $summary.= sprintf(_("Role: %s"), $this->roles[$entry['acl']]['cn']);
         }else{
-          $summary.= sprintf(_("Role: %s"), "<i>"._("Unknown role, possibly removed")."</i>");
+          $summary.= sprintf(_("Role: %s"), "<i>"._("unknown role")."</i>");
         }
       }else{
         foreach ($entry['acl'] as $name => $object){
@@ -945,13 +945,13 @@ class acl extends plugin
       $summary.= ", ";
     }
     if (count($entry['members'])){
-      $summary.= _("Members:")." ";
+      $summary.= _("Members").": ";
       foreach ($entry['members'] as $cn){
         $cn= preg_replace('/ \[.*$/', '', $cn);
         $summary.= $cn.", ";
       }
     } else {
-      $summary.= _("ACL is valid for all users");
+      $summary.= _("ACL takes effect for all users");
     }
 
     return (preg_replace('/, $/', '', $summary));
