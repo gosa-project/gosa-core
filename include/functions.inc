@@ -2703,25 +2703,14 @@ function send_binary_content($data,$name,$type = "application/octet-stream")
 }
 
 
+/*! \brief Encode special string characters so we can use the string in \
+           HTML output, without breaking quotes.
+    @param  The String we want to encode.
+    @return The encoded String
+*/
 function xmlentities($str)
 {
-  static $asc2uni= array();
-
-  if (!count($asc2uni)){
-    for($i=128;$i<256;$i++){
-      $asc2uni[chr($i)] = "&#x".dechex($i).";";
-    }
-  }
-
-  $str = str_replace("&", "&amp;", $str);
-  $str = str_replace("<", "&lt;", $str);
-  $str = str_replace(">", "&gt;", $str);
-  $str = str_replace("'", "&apos;", $str);
-  $str = str_replace("\"", "&quot;", $str);
-  $str = str_replace("\r", "", $str);
-  $str = strtr($str,$asc2uni);
-
-  return $str;
+  return (htmlentities($str,ENT_QUOTES));
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
