@@ -425,7 +425,11 @@ class department extends plugin
 	    $ldap->search('objectClass=gosaAdministrativeUnitTag', array('dn'));
     }
 
+    $objects = array();
     while ($attrs= $ldap->fetch()){
+      $objects[] = $attrs;
+    }
+    foreach($objects as $attrs){
 
 	    /* Skip self */
 	    if ($attrs['dn'] == $this->dn){
