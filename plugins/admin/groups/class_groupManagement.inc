@@ -438,7 +438,7 @@ class groupManagement extends plugin
       } else {
         
         /* Obviously the user isn't allowed to delete. Show message and clean session. */
-        msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), ERROR_DIALOG);
+        msg_dialog::display(_("Permission error"), msgPool::permDelete());
       }
     }
 
@@ -469,7 +469,7 @@ class groupManagement extends plugin
 
         /* Normally this shouldn't be reached, send some extra
            logs to notify the administrator */
-        msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), ERROR_DIALOG);
+        msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
         new log("security","groups/".get_class($this),$dn,array(),"Tried to trick deletion.");
       }
 
@@ -517,13 +517,13 @@ class groupManagement extends plugin
       if(isset($this->grouptab->by_object)){
         if (!$this->grouptab->by_object[$this->grouptab->current]->dialog){
           $display.= "<p style=\"text-align:right\">\n";
-          $display.= "<input type=submit name=\"edit_finish\" style=\"width:80px\" value=\""._("Ok")."\">\n";
+          $display.= "<input type=submit name=\"edit_finish\" style=\"width:80px\" value=\"".msgPool::okButton()."\">\n";
           $display.= "&nbsp;\n";
           if ($this->dn != "new"){
-            $display.= "<input type=submit name=\"edit_apply\" value=\""._("Apply")."\">\n";
+            $display.= "<input type=submit name=\"edit_apply\" value=\"".msgPool::applyButton()."\">\n";
             $display.= "&nbsp;\n";
           }
-          $display.= "<input type=submit name=\"edit_cancel\" value=\""._("Cancel")."\">\n";
+          $display.= "<input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">\n";
           $display.= "</p>";
         }
       }
