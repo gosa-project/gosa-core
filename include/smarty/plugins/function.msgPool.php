@@ -10,7 +10,7 @@ function smarty_function_msgPool($params, &$smarty)
 			}
 		}
 		if(is_callable("msgPool::".$params['type'])){
-			echo call_user_func_array("msgPool::".$params['type'], $parameter);
+			echo call_user_func_array(array("msgPool",$params['type']), $parameter);
 		}else{
 			trigger_error("Unknown msgPool function ".$params['type']);
 		}
