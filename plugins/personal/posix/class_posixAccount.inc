@@ -638,8 +638,6 @@ class posixAccount extends plugin
       return;
     }
 
-    /* include global link_info */
-    $ldap= $this->config->get_ldap_link();
 
     /* Remove and write to LDAP */
     plugin::remove_from_parent();
@@ -652,7 +650,9 @@ class posixAccount extends plugin
     unset($this->attrs['trustModel']);
 
     @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
-        $this->attributes, "Save");
+    /* include global link_info */
+     $this->attributes, "Save");
+    $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->dn);
     $this->cleanup();
     $ldap->modify ($this->attrs); 
@@ -778,9 +778,6 @@ class posixAccount extends plugin
   function save()
   {
 
-    /* include global link_info */
-    $ldap= $this->config->get_ldap_link();
-
     /* Adapt shadow values */
     if (!$this->activate_shadowExpire){
       $this->shadowExpire= "0";
@@ -900,8 +897,7 @@ class posixAccount extends plugin
     }
 
 
-    /* Save data to LDAP */
-    $ldap->cd($this->dn);
+    /* include global link_info */
     $this->cleanup();
  
     /* This is just a test, we have had duplicated ids 
@@ -915,6 +911,8 @@ class posixAccount extends plugin
       }
     }
 
+    $ldap= $this->config->get_ldap_link();
+    $ldap->cd($this->dn);
     unset($this->attrs['uid']);
     $ldap->modify ($this->attrs); 
 
