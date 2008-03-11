@@ -64,7 +64,7 @@ $config= session::get('config');
 $config->check_and_reload();
 
 /* Enable compressed output */
-if (isset($config->data['MAIN']['COMPRESSED']) && preg_match('/^(true|on)$/i', $config->data['MAIN']['COMPRESSED'])){
+if (isset($config->data['MAIN']['COMPRESSED']) && preg_match('/^(true|on)$/i', $config->data['MAIN']['COMPRESSED']) && !isset($_GET['no_output_compression'])){
   ob_start("ob_gzhandler");
 }
 
