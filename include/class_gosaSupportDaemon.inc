@@ -239,6 +239,53 @@ $xml_msg.= "
     @param  Array   The IDs of the entries we want to return.
     @return Array   Of the requested entries. 
    */
+  public function get_entries_by_mac($macs)
+  {
+    if(!is_array($macs)){
+      trigger_error("Requires an array as parameter.");
+      return;
+    }
+    $this->reset_error();
+
+    $ret = array();
+
+    $xml_msg = "<xml>
+      <header>gosa_query_jobdb</header>
+      <target>GOSA</target>
+      <source>GOSA</source>
+      <where>
+      <clause>
+      <connector>or</connector>";
+    foreach($macs as $mac){
+      $xml_msg .= "<phrase>
+        <operator>eq</operator>
+        <macaddress>".$mac."</macaddress>
+        </phrase>";
+    }
+    $xml_msg .= "</clause>
+      </where>
+      </xml>";
+
+    if($this->connect()){
+      $this->o_sock->write($xml_msg);
+      $str = trim($this->o_sock->read());
+      $entries = $this->xml_to_array($str); 
+      if(isset($entries['XML'])){
+        foreach($entries['XML'] as $name => $entry){
+          if(preg_match("/^ANSWER[0-9]*$/",$name)){
+            $ret[$name] = $entry;
+          }
+        }
+      }
+    }
+    return($ret);
+  }
+
+
+  /*! \brief  Returns an entry containing all requested ids.
+    @param  Array   The IDs of the entries we want to return.
+    @return Array   Of the requested entries. 
+   */
   public function get_entries_by_id($ids)
   {
     if(!is_array($ids)){
