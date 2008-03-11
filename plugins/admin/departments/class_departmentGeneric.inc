@@ -381,7 +381,7 @@ class department extends plugin
   function ShowMoveFrame()
   {
     $smarty = get_smarty();
-    $smarty->assign("src","?plug=".$_GET['plug']."&amp;PerformRecMove");
+    $smarty->assign("src","?plug=".$_GET['plug']."&amp;PerformRecMove&no_output_compression");
     $smarty->assign("message","As soon as the move operation has finished, you can scroll down to end of the page and press the 'Continue' button to continue with the department management dialog.");
     $display=  $smarty->fetch(get_template_path("dep_iframe.tpl",TRUE));
     return($display);
@@ -390,7 +390,7 @@ class department extends plugin
   function ShowTagFrame()
   {
     $smarty = get_smarty();
-    $smarty->assign("src","?plug=".$_GET['plug']."&TagDepartment");
+    $smarty->assign("src","?plug=".$_GET['plug']."&TagDepartment&no_output_compression");
     $smarty->assign("message","As soon as the tag operation has finished, you can scroll down to end of the page and press the 'Continue' button to continue with the department management dialog.");
     $display=  $smarty->fetch(get_template_path("dep_iframe.tpl",TRUE));
     return($display);
