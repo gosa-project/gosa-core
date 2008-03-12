@@ -369,24 +369,6 @@ class department extends plugin
 	}
 
 
-  function ShowMoveFrame()
-  {
-    $smarty = get_smarty();
-    $smarty->assign("src","?plug=".$_GET['plug']."&amp;PerformRecMove&no_output_compression");
-    $smarty->assign("message","As soon as the move operation has finished, you can scroll down to end of the page and press the 'Continue' button to continue with the department management dialog.");
-    $display=  $smarty->fetch(get_template_path("dep_iframe.tpl",TRUE));
-    return($display);
-  }
-
-  function ShowTagFrame()
-  {
-    $smarty = get_smarty();
-    $smarty->assign("src","?plug=".$_GET['plug']."&TagDepartment&no_output_compression");
-    $smarty->assign("message","As soon as the tag operation has finished, you can scroll down to end of the page and press the 'Continue' button to continue with the department management dialog.");
-    $display=  $smarty->fetch(get_template_path("dep_iframe.tpl",TRUE));
-    return($display);
-  }
-
 	/* Tag objects to have the gosaAdministrativeUnitTag */
 	function tag_objects($OnlySetTagFlag = false)
 	{
@@ -451,7 +433,9 @@ class department extends plugin
 		    $this->handle_object_tagging($attrs['dn'], $this->gosaUnitTag, TRUE );
 	    }
     }
+    
     if(!$OnlySetTagFlag){
+      $this->must_be_tagged = FALSE;
 	    echo '<p class="seperator">&nbsp;</p>';
 	    echo "<div style='width:100%;text-align:right;'><form name='form' method='post' action='?plug=".$_GET['plug']."' target='_parent'>
 		    <br><input type='submit' name='back' value='"._("Continue")."'>

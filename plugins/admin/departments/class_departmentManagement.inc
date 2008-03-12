@@ -38,8 +38,6 @@ class departmentManagement extends plugin
   /* Vars to handle operations after saving the department 
      Recursive move && tagging   */
   var $ObjectInSaveMode         = false;    // Is true, if current object wasn't saved right now
-  var $ObjectTaggingRequested   = false;    // Object must be tagged, an iframe will be shown. 
-  var $RecursiveRemoveRequested = false;    // Is true, if this object must be moved, an iframe will be displayed in this case
 
   function departmentManagement (&$config, &$ui)
   {
@@ -284,13 +282,21 @@ class departmentManagement extends plugin
       exit();
     }
 
+    /* This department must be tagged (Is called from iframe, generates output)*/
+    if(isset($_GET['TagDepartment'])){
+      $this->deptabs->by_object['department']->tag_objects();
+      exit();  
+    }
+
 
     /***************
       Edit department finished 
      ***************/
 
-    if (is_object($this->deptabs) && 
-          (isset($_POST['edit_finish']) || isset($_POST['dep_move_confirm']) || $this->deptabs->move_done())){
+    if (is_object($this->deptabs) &&          // Ensure we have a valid deptab here 
+        (isset($_POST['edit_finish']) ||      // If 'Save' button is pressed in the edit dialog.
+         isset($_POST['dep_move_confirm']) || // The move(rename) confirmation was given
+         $this->deptabs->move_done())){       // The move(rename) is done, we have to save the rest now.
 
       /* Check tabs, will feed message array.
          This call will also initiate a sav_object() call.
@@ -306,12 +312,10 @@ class departmentManagement extends plugin
       if(!isset($_POST['dep_move_confirm']) && $this->deptabs->am_i_moved()){
         return($smarty->fetch(get_template_path("dep_move_confirm.tpl",TRUE)));
       }elseif(isset($_POST['dep_move_confirm']) && $this->deptabs->am_i_moved()){
-        return($this->deptabs->by_object['department']->ShowMoveFrame());
-      }
-
-      if($this->deptabs->am_i_moved()){
-        echo "stop";
-        exit();
+        $smarty = get_smarty();
+        $smarty->assign("src","?plug=".$_GET['plug']."&amp;PerformRecMove&no_output_compression");
+        $smarty->assign("message",_("As soon as the move operation has finished, you can scroll down to end of the page and press the 'Continue' button to continue with the department management dialog."));
+        return($smarty->fetch(get_template_path("dep_iframe.tpl",TRUE)));
       }
 
       /* Save, or display error message? */
@@ -323,13 +327,16 @@ class departmentManagement extends plugin
         $config->make_idepartments();
         $this->config = $config;
 
-        /* This object must be tagged, so set ObjectTaggingRequested to true */
-        if($this->deptabs->by_object['department']->must_be_tagged()){
-          $this->ObjectTaggingRequested   = true; 
-        }		
-
         /* This var indicated that there is an object which isn't saved right now. */
         $this->ObjectInSaveMode = true;
+
+        /* This object must be tagged, so set ObjectTaggingRequested to true */
+        if($this->deptabs->by_object['department']->must_be_tagged()){
+          $smarty = get_smarty();
+          $smarty->assign("src","?plug=".$_GET['plug']."&TagDepartment&no_output_compression");
+          $smarty->assign("message",_("As soon as the tag operation has finished, you can scroll down to end of the page and press the 'Continue' button to continue with the department management dialog."));
+          return($smarty->fetch(get_template_path("dep_iframe.tpl",TRUE)));
+        }		
 
       } else {
         /* Ok. There seem to be errors regarding to the tab data,
@@ -339,40 +346,13 @@ class departmentManagement extends plugin
     }
 
 
-    /***************
-      Handle Tagging (Return output for an iframe)
-     ***************/
-
-    /* This department must be tagged (Is called from iframe, generates output)*/
-    if(isset($_GET['TagDepartment'])){
-      $this->deptabs->by_object['department']->tag_objects();
-      exit();  
-    }
-
-
-    /***************
-      Return iframes, which call tagging / recusrsive move 
-     ***************/
-
-    /* While one of these vars below isset, we must return an iframe, 
-       to perform requested operation */
-    if($this->ObjectTaggingRequested){
-      $this->ObjectTaggingRequested = false;
-      return($this->deptabs->by_object['department']->ShowTagFrame());
-    }
-    if($this->RecursiveRemoveRequested){
-      $this->RecursiveRemoveRequested = false;
-      return($this->deptabs->by_object['department']->ShowMoveFrame());
-    }
-
-
    /***************
      In case of tagging/moving the object wasn't deleted, do it know
     ***************/
 
    /* If there is an unsaved object and all operations are done
       remove locks & save object tab & unset current object */
-   if($this->ObjectInSaveMode && (!$this->RecursiveRemoveRequested) && (!$this->ObjectTaggingRequested)){
+   if($this->ObjectInSaveMode){
      $this->config->get_departments();
      $this->ObjectInSaveMode = false;
      if ($this->dn != "new"){
