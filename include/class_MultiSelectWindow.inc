@@ -449,7 +449,7 @@ class MultiSelectWindow{
 
 		/* Check for exeeded sizelimit */
 		$smarty->assign("hint"				, print_sizelimit_warning());
-		$smarty->assign("DivList"			, $divlist->DrawList().$this->footer);
+		$smarty->assign("DivList"			, $divlist->DrawList()."\n\n\n\n\n".$this->footer."\n\n\n\n\n");
 
 		if($this->is_headpage){
 			$smarty->assign("tree_image", 		get_template_path('images/tree.png'));
