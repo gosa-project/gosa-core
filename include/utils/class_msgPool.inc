@@ -10,32 +10,32 @@ class msgPool
 {
   public static function deleteInfo($name= "",$type = "")
   {
-    if ($name == "") { 
-		if($type == ""){
-			return (_("You are going to delete this object!"));
-		}else{
-			return (sprintf(_("You are going to delete this '%s' object!"),$type));
-		}
-    }
-	if (!is_array($name)){
-		if($type == ""){
-			return (_("You are going to delete this object:")."<br><br><i>$name</i>");
-		}else{
-			return (sprintf(_("You are going to delete the '%s' object:"),$type)."<br><br><i>$name</i>");
-		}
-    }
-    if (count($name) == 1){
-		if($type == ""){
-			return (_("You are going to delete this object:")."<br>".msgPool::buildList($name));
-		}else{
-			return (sprintf(_("You are going to delete the '%s' object:"),$type)."<br>".msgPool::buildList($name));
-		}
-    }
-	if($type == ""){
-		return (_("You are going to delete these objects:")."<br>".msgPool::buildList($name));
-	}else{
-		return (sprintf(_("You are going to delete these '%s' objects:"),$type)."<br>".msgPool::buildList($name));
-	}
+	  if ($name == "") { 
+		  if($type == ""){
+			  return (_("This object will be deleted!"));
+		  }else{
+			  return (sprintf(_("This '%s' object will be deleted!"), $type));
+		  }
+	  }
+	  if (!is_array($name)){
+		  if($type == ""){
+			  return (sprintf(_("This object will be deleted: $s"), "<br><br><i>$name</i>"));
+		  }else{
+			  return (sprintf(_("This '%s' object will be deleted: %s"),$type, "<br><br><i>$name</i>"));
+		  }
+	  }
+	  if (count($name) == 1){
+		  if($type == ""){
+			  return (_("This object will be deleted:")."<br>".msgPool::buildList($name));
+		  }else{
+			  return (sprintf(_("This '%s' object will be deleted:"),$type, "<br>".msgPool::buildList($name)));
+		  }
+	  }
+	  if($type == ""){
+		  return (sprintf(_("These objects will be deleted: %s"), "<br>".msgPool::buildList($name)));
+	  }else{
+		  return (sprintf(_("These '%s' objects will be deleted: %s"),$type, "<br>".msgPool::buildList($name)));
+	  }
   }
 
 
