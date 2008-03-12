@@ -271,9 +271,8 @@ class departmentManagement extends plugin
 
 
     /***************
-      Handle recursive move (Return output for an iframe)
+      Handle tagging/recursive move (Return output for an iframe)
      ***************/
-
 
     /* initiate recursive remove  (Is called from iframe, generates output)*/
     if(isset($_GET['PerformRecMove'])){
@@ -307,7 +306,7 @@ class departmentManagement extends plugin
 
       /*************
         MOVED ? 
-         Check if this department is moved 
+         Check if this department has to be moved 
        *************/  
       if(!isset($_POST['dep_move_confirm']) && $this->deptabs->am_i_moved()){
         return($smarty->fetch(get_template_path("dep_move_confirm.tpl",TRUE)));

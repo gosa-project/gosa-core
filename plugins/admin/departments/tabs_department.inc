@@ -41,6 +41,9 @@ class deptabs extends tabs
   }
 
 
+  /*! \brief Check if the department must must be moved 
+      return Boolean TRUE if we have to move the dep, else FALSE
+   */
   function am_i_moved()
   {
     if($this->moved) return(FALSE);
@@ -55,13 +58,18 @@ class deptabs extends tabs
     return(FALSE);
   }
 
-  
+ 
+  /*! \brief  Checks if the department was moved successfully 
+      @return Boolean TRUE if the dep was already moved.
+   */ 
   function move_done()
   {
     return($this->moved);
   }
 
   
+  /*! \brief  Initiate recursive move 
+   */
   function move_me()
   {
     if(!$this->am_i_moved()) return;
