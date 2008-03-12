@@ -431,15 +431,17 @@ class department extends plugin
 			    return;
 		    }
 		    $this->handle_object_tagging($attrs['dn'], $this->gosaUnitTag, TRUE );
+        echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
 	    }
     }
     
     if(!$OnlySetTagFlag){
       $this->must_be_tagged = FALSE;
 	    echo '<p class="seperator">&nbsp;</p>';
-	    echo "<div style='width:100%;text-align:right;'><form name='form' method='post' action='?plug=".$_GET['plug']."' target='_parent'>
-		    <br><input type='submit' name='back' value='"._("Continue")."'>
-		    </form></div>";
+      echo "<div style='width:100%;text-align:right;'><form name='form' method='post' action='?plug=".$_GET['plug']."' target='_parent'>
+        <br><input type='submit' name='back' value='"._("Continue")."'>
+        </form></div>";
+      echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
     }
 	}
 
