@@ -49,7 +49,6 @@ class msgPool
       return (_("You have no permission to delete the object:")."<br><br><i>$name</i>");
     }
 
-    msgPool::buildList($name);
     if (count($name) == 1){
       return (_("You have no permission to delete the object:")."<br>".msgPool::buildList($name));
     }
@@ -419,6 +418,15 @@ class msgPool
 	return $headline.$dn_info."<br><br><i>"._("Error").":</i> ".$error;
   }
 
+
+  function incorrectUpload($reason= "")
+  {
+	if ($reason == ""){
+		return _("Upload failed!");
+	}
+
+	return sprintf(_("Upload failed: %s"), "<br><br><i>$reason</i>");
+  }
 
 }
 
