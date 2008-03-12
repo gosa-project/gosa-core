@@ -198,7 +198,7 @@ class departmentManagement extends plugin
           $this->deptabs->delete ();
           $this->deptabs = NULL;
         } else {
-          msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), WARNING_DIALOG);
+          msg_dialog::display(_("Permission error"), msgPool::permDelete(), WARNING_DIALOG);
         }
         /* Remove lock file after successfull deletion */
         del_lock ($dn);
@@ -246,7 +246,7 @@ class departmentManagement extends plugin
           return ($display);
         }
       }else{
-        msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), WARNING_DIALOG);
+        msg_dialog::display(_("Permission error"), msgPool::permDelete(), WARNING_DIALOG);
       }
     }
 
@@ -265,7 +265,7 @@ class departmentManagement extends plugin
       if(preg_match("/d/",$acl)){
         $this->remove_from_parent();
       } else {
-        msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), WARNING_DIALOG);
+        msg_dialog::display(_("Permission error"), msgPool::permDelete(), WARNING_DIALOG);
       }
     }
 

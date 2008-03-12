@@ -244,11 +244,9 @@ class department extends plugin
 
 		/* All required fields are set? */
 		if ($this->ou == ""){
-			$message[]= _("Required field 'Name' is not set.");
 			$message[]= msgPool::required(_("Name"));
 		}
 		if ($this->description == ""){
-			$message[]= _("Required field 'Description' is not set.");
 			$message[]= msgPool::required(_("Description"));
 		}
 
