@@ -160,7 +160,7 @@ class aclManagement extends plugin
         $this->acltabs= new aclroletab($this->config, NULL,$this->dn);
         $this->acltabs->set_acl_base($this->DivListACL->selectedBase);
       }else{
-        msg_dialog::display(_("Permission error"), .msgPool::permCreate(), ERROR_DIALOG);
+        msg_dialog::display(_("Permission error"), msgPool::permCreate(), ERROR_DIALOG);
       }
     }
 
