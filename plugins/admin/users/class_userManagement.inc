@@ -485,7 +485,7 @@ class userManagement extends plugin
             unset ($this->usertab);
             $this->usertab= NULL;
           } else {
-            msg_dialog::display(_("User delete"),sprintf(_("You are not allowed to delete the user '%s'!"),$dn),WARNING_DIALOG);
+            msg_dialog::display(_("User delete"),msgPool::permDelete($dn),WARNING_DIALOG);
             if(isset($this->ui->uid)){
               new log("security","users/".get_class($this),$dn,array(),"Tried to trick deletion.");
             }
@@ -605,7 +605,7 @@ class userManagement extends plugin
 
         /* Normally this shouldn't be reached, send some extra
            logs to notify the administrator */
-        msg_dialog::display(_("User delete"),_("You are not allowed to delete this user!"),WARNING_DIALOG);
+        msg_dialog::display(_("User delete"),msgPool::permDelete(),WARNING_DIALOG);
 
         if(isset($this->ui->uid)){
           new log("security","users/".get_class($this),$this->dn,array(),"Tried to trick deletion.");

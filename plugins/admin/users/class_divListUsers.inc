@@ -339,7 +339,7 @@ class divListUsers extends MultiSelectWindow
           name='user_chgpw_%KEY%' title='"._("Change password")."'>";
       }else{
         $action.= "<img class='center' src='images/empty.png' alt='&nbsp;' 
-          title='"._("You are not allowed to change the password for this user.")."'>";
+          title='"._("Not allowed")."'>";
       }
 
       /* Add snapshot icon */
@@ -353,7 +353,7 @@ class divListUsers extends MultiSelectWindow
           name='user_del_%KEY%' title='"._("Delete user")."'>";
       }else{
         $action.= "<img class='center' src='images/empty.png' alt='&nbsp;'  
-          title='"._("You are not allowed to remove this user.")."'>";
+          title='"._("Not allowed")."'>";
       }
 
       /* Create phonaccopunt informationm, if conencted && is phoneAccount */ 
