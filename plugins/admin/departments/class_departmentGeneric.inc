@@ -36,14 +36,10 @@ class department extends plugin
 	var $is_administrational_unit= false;
 	var $gosaUnitTag= "";
   var $view_logged = FALSE;
-	var $rec_dst=false;	// Destination for recursive move
-	var $rec_src=false;	// Source for recursive move 
-	var $rec_cpy=false;	// Is recursive move requested ? 
 
 	/* Headpage attributes */
 	var $last_dep_sorting= "invalid";
 	var $departments= array();
-
   var $must_be_tagged = false;
 
 	/* attribute list for save action */
@@ -199,12 +195,6 @@ class department extends plugin
 		return $this->must_be_tagged;
 	}
 
-	function am_i_moved()
-	{
-		return $this->rec_cpy;
-	}
-
-
 	/* Save data to object */
 	function save_object()
 	{
@@ -248,7 +238,7 @@ class department extends plugin
     $ldap->ls ("(&(ou=".$this->ou.")(objectClass=organizationalUnit))", $this->base, array('dn'));
     if ($this->orig_dn == "new" && $ldap->count()){
 			$message[]= msgPool::duplicated(_("Name"));
-		} elseif ($this->orig_dn != $this->dn && !($attrs === FALSE)){
+		} elseif ($this->orig_dn != $this->dn && $ldap->count()){
 			$message[]= msgPool::duplicated(_("Name"));
 		}
 
@@ -473,101 +463,83 @@ class department extends plugin
 	/* Move/Rename complete trees */
 	function recursive_move($src_dn, $dst_dn,$force = false)
 	{
-    /* If force == false prepare to recursive move this object from src to dst 
-        on the next call. */
-		if(!$force){
-			$this->rec_cpy 	= true;
-			$this->rec_src	= $src_dn;
-			$this->rec_dst	= $dst_dn;
-		}else{
+    /* Print header to have styles included */
+    $smarty= get_smarty();
 
-      /* If this is called, but not wanted, abort */
-			if(!$this->rec_cpy){ 
-				return;
-			}
-
-			$src_dn = $this->rec_src;
-			$dst_dn = $this->rec_dst;
-
-			/* Print header to have styles included */
-			$smarty= get_smarty();
-
-      echo '  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
-        <html>
-        <head>
-        <title></title>
-        <style type="text/css">@import url("themes/default/style.css");</style>
-        <script language="javascript" src="include/focus.js" type="text/javascript"></script>
-        </head>
-        <body style="background: none; margin:4px;" id="body" >
-        ';
-			echo "<h3>".sprintf(_("Moving '%s' to '%s'"),"<i>".@LDAP::fix($src_dn)."</i>","<i>".@LDAP::fix($dst_dn)."</i>")."</h3>";
+    echo '  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+      <html>
+      <head>
+      <title></title>
+      <style type="text/css">@import url("themes/default/style.css");</style>
+      <script language="javascript" src="include/focus.js" type="text/javascript"></script>
+      </head>
+      <body style="background: none; margin:4px;" id="body" >
+      ';
+    echo "<h3>".sprintf(_("Moving '%s' to '%s'"),"<i>".@LDAP::fix($src_dn)."</i>","<i>".@LDAP::fix($dst_dn)."</i>")."</h3>";
 
 
-			/* Check if the destination entry exists */
-			$ldap= $this->config->get_ldap_link();
+    /* Check if the destination entry exists */
+    $ldap= $this->config->get_ldap_link();
 
-			/* Check if destination exists - abort */
-			$ldap->cat($dst_dn, array('dn'));
-			if ($ldap->fetch()){
-				trigger_error("Recursive_move ".@LDAP::fix($dst_dn)." already exists.",
-						E_USER_WARNING);
-				echo sprintf("Recursive_move: '%s' already exists", @LDAP::fix($dst_dn))."<br>"; 
-				return (FALSE);
-			}
+    /* Check if destination exists - abort */
+    $ldap->cat($dst_dn, array('dn'));
+    if ($ldap->fetch()){
+      trigger_error("Recursive_move ".@LDAP::fix($dst_dn)." already exists.",
+          E_USER_WARNING);
+      echo sprintf("Recursive_move: '%s' already exists", @LDAP::fix($dst_dn))."<br>"; 
+      return (FALSE);
+    }
 
-			/* Perform a search for all objects to be moved */
-			$objects= array();
-			$ldap->cd($src_dn);
-			$ldap->search("(objectClass=*)", array("dn"));
-			while($attrs= $ldap->fetch()){
-				$dn= $attrs['dn'];
-				$objects[$dn]= strlen($dn);
-			}
+    /* Perform a search for all objects to be moved */
+    $objects= array();
+    $ldap->cd($src_dn);
+    $ldap->search("(objectClass=*)", array("dn"));
+    while($attrs= $ldap->fetch()){
+      $dn= $attrs['dn'];
+      $objects[$dn]= strlen($dn);
+    }
 
-			/* Sort objects by indent level */
-			asort($objects);
-			reset($objects);
+    /* Sort objects by indent level */
+    asort($objects);
+    reset($objects);
 
-			/* Copy objects from small to big indent levels by replacing src_dn by dst_dn */
-			foreach ($objects as $object => $len){
+    /* Copy objects from small to big indent levels by replacing src_dn by dst_dn */
+    foreach ($objects as $object => $len){
 
 
-				$src= str_replace("\\","\\\\",$object);
-				$dst= preg_replace("/".str_replace("\\","\\\\",$src_dn)."$/", "$dst_dn", $object);
-				$dst= str_replace($src_dn,$dst_dn,$object);
+      $src= str_replace("\\","\\\\",$object);
+      $dst= preg_replace("/".str_replace("\\","\\\\",$src_dn)."$/", "$dst_dn", $object);
+      $dst= str_replace($src_dn,$dst_dn,$object);
 
-				echo "<b>"._("Object").":</b> ".@LDAP::fix($src)."<br>";
+      echo "<b>"._("Object").":</b> ".@LDAP::fix($src)."<br>";
 
-        $this->update_acls($object, $dst,TRUE);
+      $this->update_acls($object, $dst,TRUE);
 
-				if (!$this->copy($src, $dst)){
-					echo "<font color='#FF0000'><br>".sprintf(_("FAILED to copy %s, aborting operation"),@LDAP::fix($src))."</font>";
-					return (FALSE);
-				}
-        echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
-				flush();
-			}
-
-			/* Remove src_dn */
-			$ldap->cd($src_dn);
-			$ldap->recursive_remove();
-      $this->dn = $this->rec_dst;
-			$this->rec_src = $this->rec_dst = "";
-			$this->rec_cpy =false;
-
-			echo '<p class="seperator">&nbsp;</p>';
-
-			echo "<div style='width:100%;text-align:right;'><form name='form' method='post' action='?plug=".$_GET['plug']."' target='_parent'>
-				<br><input type='submit' name='back' value='"._("Continue")."'>
-				</form></div>";
-
+      if (!$this->copy($src, $dst)){
+        echo "<font color='#FF0000'><br>".sprintf(_("FAILED to copy %s, aborting operation"),@LDAP::fix($src))."</font>";
+        return (FALSE);
+      }
       echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
-			echo "</body></html>";
+      flush();
+    }
 
-			return (TRUE);
-		}
-	}
+    /* Remove src_dn */
+    $ldap->cd($src_dn);
+    $ldap->recursive_remove();
+    $this->orig_dn  = $this->dn = $dst_dn;
+    $this->orig_base= $this->base;     
+
+    echo '<p class="seperator">&nbsp;</p>';
+
+    echo "<div style='width:100%;text-align:right;'><form name='form' method='post' action='?plug=".$_GET['plug']."' target='_parent'>
+      <br><input type='submit' name='back' value='"._("Continue")."'>
+      </form></div>";
+
+    echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
+    echo "</body></html>";
+
+    return (TRUE);
+  }
 
 
   /* Return plugin informations for acl handling */ 

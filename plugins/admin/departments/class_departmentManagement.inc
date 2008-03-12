@@ -273,10 +273,24 @@ class departmentManagement extends plugin
 
 
     /***************
+      Handle recursive move (Return output for an iframe)
+     ***************/
+
+
+    /* initiate recursive remove  (Is called from iframe, generates output)*/
+    if(isset($_GET['PerformRecMove'])){
+      $this->deptabs->move_me();
+      $this->DivListDepartment->selectedBase = $this->deptabs->by_object['department']->dn;  
+      exit();
+    }
+
+
+    /***************
       Edit department finished 
      ***************/
 
-    if ((isset($_POST['edit_finish']) || isset($_POST['dep_move_confirm'])) && (isset($this->deptabs->config))){
+    if (is_object($this->deptabs) && 
+          (isset($_POST['edit_finish']) || isset($_POST['dep_move_confirm']) || $this->deptabs->move_done())){
 
       /* Check tabs, will feed message array.
          This call will also initiate a sav_object() call.
@@ -289,10 +303,15 @@ class departmentManagement extends plugin
         MOVED ? 
          Check if this department is moved 
        *************/  
-      if(!isset($_POST['dep_move_confirm']) && $obj->orig_dn != "new"){
-        if($obj->orig_ou != $obj->ou || $obj->base != $obj->orig_base){
-          return($smarty->fetch(get_template_path("dep_move_confirm.tpl",TRUE)));
-        }
+      if(!isset($_POST['dep_move_confirm']) && $this->deptabs->am_i_moved()){
+        return($smarty->fetch(get_template_path("dep_move_confirm.tpl",TRUE)));
+      }elseif(isset($_POST['dep_move_confirm']) && $this->deptabs->am_i_moved()){
+        return($this->deptabs->by_object['department']->ShowMoveFrame());
+      }
+
+      if($this->deptabs->am_i_moved()){
+        echo "stop";
+        exit();
       }
 
       /* Save, or display error message? */
@@ -309,11 +328,6 @@ class departmentManagement extends plugin
           $this->ObjectTaggingRequested   = true; 
         }		
 
-        /* Get recursive move is required, set RecursiveRemoveRequested to true */
-        if($this->deptabs->by_object['department']->am_i_moved()){	
-          $this->RecursiveRemoveRequested = true;
-        }		
-      
         /* This var indicated that there is an object which isn't saved right now. */
         $this->ObjectInSaveMode = true;
 
@@ -333,18 +347,6 @@ class departmentManagement extends plugin
     if(isset($_GET['TagDepartment'])){
       $this->deptabs->by_object['department']->tag_objects();
       exit();  
-    }
-
-
-    /***************
-      Handle recursive move (Return output for an iframe)
-     ***************/
-
-    /* initiate recursive remove  (Is called from iframe, generates output)*/
-    if(isset($_GET['PerformRecMove'])){
-      $this->deptabs->by_object['department']->recursive_move("","",true);
-      $this->DivListDepartment->selectedBase = $this->deptabs->by_object['department']->dn;  
-      exit();
     }
 
 

@@ -23,6 +23,7 @@
 class deptabs extends tabs
 {
   var $base= "";
+  var $moved = FALSE;
 
   function deptabs($config, $data, $dn,$category)
   {
@@ -40,26 +41,47 @@ class deptabs extends tabs
   }
 
 
+  function am_i_moved()
+  {
+    if($this->moved) return(FALSE);
+    $baseobject= &$this->by_object['department'];
+    $ou       = preg_replace('/,/', '\,', $baseobject->ou);  
+    $new_dn   = @LDAP::convert('ou='.$ou.','.$baseobject->base);
+    $old_ou   = preg_replace('/,/', '\,', $baseobject->orig_ou);
+    $old_dn   = @LDAP::convert('ou='.$ou.','.$baseobject->orig_base);
+    if ($this->dn != $new_dn && $this->dn != "new"){
+      return(TRUE); 
+    }
+    return(FALSE);
+  }
+
+  
+  function move_done()
+  {
+    return($this->moved);
+  }
+
+  
+  function move_me()
+  {
+    if(!$this->am_i_moved()) return;
+    $baseobject= &$this->by_object['department'];
+    $ou       = preg_replace('/,/', '\,', $baseobject->ou);  
+    $new_dn   = @LDAP::convert('ou='.$ou.','.$baseobject->base);
+    $old_ou   = preg_replace('/,/', '\,', $baseobject->orig_ou);
+    $old_dn   = @LDAP::convert('ou='.$ou.','.$baseobject->orig_base);
+    if ($this->dn != $new_dn && $this->dn != "new"){
+      $baseobject->recursive_move($this->dn, $new_dn);
+      $this->moved= TRUE;
+    }
+  }
+
+
   function save($ignore_account= FALSE)
   {
     $baseobject= &$this->by_object['department'];
-    $ou= preg_replace('/,/', '\,', $baseobject->ou);
-    $new_dn= @LDAP::convert('ou='.$ou.','.$baseobject->base);
-    
-    if($ignore_account){
-      if ($this->dn != $new_dn && $this->dn != "new"){
-        /* if( new_dn is subtree of this->dn ) */
-        $cnt1 = count(split(",",$this->dn));
-        $cnt2 = count(split(",",$new_dn));
-        if((strstr($new_dn,$this->dn))&&($cnt1<$cnt2)){
-          msg_dialog::display(_("LDAP error"), _("Moving LDAP tree failed: destination tree is a subtree of the source!"), ERROR_DIALOG);
-        }else{
-          /* Prepare to be moved */
-          $baseobject->recursive_move($this->dn, $new_dn);			
-          return;
-        }
-      }
-    }
+    $ou       = preg_replace('/,/', '\,', $baseobject->ou);  
+    $new_dn   = @LDAP::convert('ou='.$ou.','.$baseobject->base);
     $this->dn= $new_dn;
     $baseobject->dn= $this->dn;
     if (!$ignore_account){
