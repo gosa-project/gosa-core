@@ -445,18 +445,13 @@ class userManagement extends plugin
           $this->dns[$id] = $dn; 
         }
 
-        $dns_names = "<br><pre>";
+        $dns_names = array();
         foreach($this->dns as $dn){
-          $dns_names .= $dn."\n";
+          $dns_names[] = @LDAP::fix($dn);
         }
-        $dns_names .="</pre>";
 
         /* Lock the current entry, so nobody will edit it during deletion */
-        if (count($this->dns) == 1){
-          $info = sprintf(_("You're about to delete the following entry: %s"), @LDAP::fix($dns_names));
-        } else {
-          $info = sprintf(_("You're about to delete the following entries: %s"), @LDAP::fix($dns_names));
-        }
+        $info = sprintf(msgPool::deleteInfo($dns_names,_("user")));
         $this->msg_dialog = new msg_dialog(_("Delete users"),$info,CONFIRM_DIALOG);
         $this->current_action = $s_action;
       }
@@ -567,13 +562,7 @@ class userManagement extends plugin
         return(gen_locked_message ($user, $this->dn));
       }
 
-  
-      /* Lock the current entry, so nobody will edit it during deletion */
-#      add_lock ($this->dn, $this->ui->dn);
-#      $smarty->assign("info", sprintf(_("You're about to delete the user %s."), @LDAP::fix($this->dn)));
-#      $smarty->assign("multiple", false);
-#      return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
-      $this->msg_dialog = new msg_dialog( _("Delete user"),sprintf(_("You're about to delete the user %s."), @LDAP::fix($this->dn)),CONFIRM_DIALOG);
+      $this->msg_dialog = new msg_dialog( _("Delete user"),msgPool::deleteInfo(@LDAP::fix($this->dn),_("user")),CONFIRM_DIALOG);
       $this->current_action = $s_action;
     }
 

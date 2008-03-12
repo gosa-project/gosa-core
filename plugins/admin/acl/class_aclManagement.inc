@@ -242,7 +242,7 @@ class aclManagement extends plugin
 
         /* Lock the current entry, so nobody will edit it during deletion */
         add_lock ($this->dn, $this->ui->dn);
-        $smarty->assign("info", sprintf(_("You're about to delete the acl %s."), @LDAP::fix($this->dn)));
+        $smarty->assign("info", msgPool::deleteInfo(@LDAP::fix($this->dn)));
         $smarty->assign("is_role",true);
   
         return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
@@ -306,7 +306,7 @@ class aclManagement extends plugin
 
         /* Lock the current entry, so nobody will edit it during deletion */
         add_lock ($this->dn, $this->ui->dn);
-        $smarty->assign("info", sprintf(_("You're about to delete the acl %s."), @LDAP::fix($this->dn)));
+        $smarty->assign("info", msgPool::deleteInfo(@LDAP::fix($this->dn),_("acl")));
         $smarty->assign("is_role",false);
         return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
       } else {
