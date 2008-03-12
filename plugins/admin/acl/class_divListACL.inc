@@ -48,7 +48,7 @@ class divListACL extends MultiSelectWindow
     $this->ui           = get_userinfo();
 
     /* Set list strings */
-    $this->SetTitle(_("List of acl"));
+    $this->SetTitle(_("List of acls"));
     $this->SetSummary(_("List of acls"));
 
     /* Result page will look like a headpage */
