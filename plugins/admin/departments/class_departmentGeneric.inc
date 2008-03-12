@@ -528,6 +528,7 @@ class department extends plugin
     $ldap->recursive_remove();
     $this->orig_dn  = $this->dn = $dst_dn;
     $this->orig_base= $this->base;     
+    $this->entryCSN = getEntryCSN($this->dn);
 
     echo '<p class="seperator">&nbsp;</p>';
 
