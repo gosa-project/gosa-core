@@ -261,7 +261,7 @@ class ogroupManagement extends plugin
 
           /* Normally this shouldn't be reached, send some extra
              logs to notify the administrator */
-          msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), INFO_DIALOG);
+          msg_dialog::display(_("Permission error"), msgPool::permDelete(), INFO_DIALOG);
           new log("security","ogroups/".get_class($this),$dn,array(),"Tried to trick deletion.");
         }
         /* Remove lock file after successfull deletion */
@@ -313,7 +313,7 @@ class ogroupManagement extends plugin
 
         /* Obviously the user isn't allowed to delete. Show message and
            clean session. */
-        msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), INFO_DIALOG);
+        msg_dialog::display(_("Permission error"), msgPool::permDelete(), INFO_DIALOG);
       }
     }
 
@@ -340,7 +340,7 @@ class ogroupManagement extends plugin
 
         /* Normally this shouldn't be reached, send some extra
            logs to notify the administrator */
-        msg_dialog::display(_("Permission error"), _("You have no permission to delete this entry!"), INFO_DIALOG);
+        msg_dialog::display(_("Permission error"), msgPool::permDelete(), INFO_DIALOG);
         new log("security","ogroups/".get_class($this),$dn,array(),"Tried to trick deletion.");
       }
 
@@ -503,7 +503,7 @@ class ogroupManagement extends plugin
         "S" => array("select_server.png"      ,_("Server")      , "ogroup"),
         "F" => array("select_phone.png"       ,_("Phone")       , "phonequeue"),
         "W" => array("select_workstation.png" ,_("Workstation") , "workstartup"),
-        "O" => array("select_winstation.png" ,_("Windows Install") , "ogroup"),
+        "O" => array("select_winstation.png"  ,_("Windows Install") , "ogroup"),
         "T" => array("select_terminal.png"    ,_("Terminal")    , "termgroup"),
         "P" => array("select_printer.png"     ,_("Printer")     , "ogroup"));
 

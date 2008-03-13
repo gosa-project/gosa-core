@@ -187,7 +187,7 @@ class ogroup extends plugin
     /* Do we represent a valid group? */
     if (!$this->is_account){
       $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
-        _("This 'dn' is no object group.")."</b>";
+        msgPool::noValidExtension("object group")."</b>";
       return ($display);
     }
 

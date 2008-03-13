@@ -80,21 +80,33 @@ class divListOGroup extends MultiSelectWindow
     /* set Page header */
     $this->AddHeader(array("string"=> $chk,          "attach"=>"style='width:20px;'"));
     $this->AddHeader(array("string" => "&nbsp;", "attach" => "style='text-align:center;width:20px;'"));
-    $this->AddHeader(array("string" => _("Name of object groups")." / "._("Departments"), "attach" => "style=''"));
+    $this->AddHeader(array("string" => _("Object group")." / "._("Department"), "attach" => "style=''"));
     $this->AddHeader(array("string" => _("Properties"), "attach" => "style='width:136px;'"));
     $this->AddHeader(array("string" => _("Actions"), "attach" => "style='width:".$action_col_size."px;border-right:0px;text-align:right;'"));
 
     /*                  Text        ,Value    ,Name         ,Is selected */
-    $this->AddCheckBox("UserGroups" ,       _("Select to see groups containing users")       , _("Show groups containing users"), true);
-    $this->AddCheckBox("GroupGroups" ,      _("Select to see groups containing groups")      , _("Show groups containing groups"), true);
-    $this->AddCheckBox("ApplicationGroups", _("Select to see groups containing applications"), _("Show groups containing applications"), true);
-    $this->AddCheckBox("DepartmentGroups" , _("Select to see groups containing departments") , _("Show groups containing departments"), true);
-    $this->AddCheckBox("ServerGroups" ,     _("Select to see groups containing servers")     , _("Show groups containing servers"), true);
-    $this->AddCheckBox("WorkstationGroups", _("Select to see groups containing workstations"), _("Show groups containing workstations"), true);
-    $this->AddCheckBox("WindowsGroups", _("Select to see groups containing windows workstations"), _("Show groups containing windows workstations"), true);
-    $this->AddCheckBox("TerminalGroups" ,   _("Select to see groups containing terminals")   , _("Show groups containing terminals"), true);
-    $this->AddCheckBox("PrinterGroups" ,    _("Select to see groups containing printer")     , _("Show groups containing printer"), true);
-    $this->AddCheckBox("PhoneGroups" ,      _("Select to see groups containing phones")      , _("Show groups containing phones"), true);
+    $str1 = _("Select to see groups containing '%s'.");
+    $str2 = _("Show groups containing '%s'");
+    $this->AddCheckBox("UserGroups" ,       sprintf($str1,  _("Users")), 
+                                            sprintf($str2,  _("Users")), true);
+    $this->AddCheckBox("GroupGroups" ,      sprintf($str1,  _("Groups")),
+                                            sprintf($str2,  _("Groups")), true);
+    $this->AddCheckBox("ApplicationGroups", sprintf($str1,  _("Applications")),
+                                            sprintf($str2,  _("Applications")), true);
+    $this->AddCheckBox("DepartmentGroups" , sprintf($str1,  _("Departments")),
+                                            sprintf($str2,  _("Departments")), true);
+    $this->AddCheckBox("ServerGroups" ,     sprintf($str1,  _("Server")),
+                                            sprintf($str2,  _("Server")), true);
+    $this->AddCheckBox("WorkstationGroups", sprintf($str1,  _("Workstations")),
+                                            sprintf($str2,  _("Workstations")), true);
+    $this->AddCheckBox("WindowsGroups",     sprintf($str1,  _("Windows workstations")),
+                                            sprintf($str2,  _("Windows workstations")), true);
+    $this->AddCheckBox("TerminalGroups" ,   sprintf($str1,  _("Terminals")),
+                                            sprintf($str2,  _("Terminals")), true);
+    $this->AddCheckBox("PrinterGroups" ,    sprintf($str1,  _("Printer")),
+                                            sprintf($str2,  _("Printer")), true);
+    $this->AddCheckBox("PhoneGroups" ,      sprintf($str1,  _("Phones")),
+                                            sprintf($str2,  _("Phones")), true);
 
     /* Add SubSearch checkbox */    
     $this->AddCheckBox(SEPERATOR);
@@ -291,7 +303,7 @@ class divListOGroup extends MultiSelectWindow
           src='images/edittrash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
       }else{
         $actions.= "<img class='center' src='images/empty.png' alt='&nbsp;'
-          title='"._("You are not allowed to remove this entry.")."'>";
+          title='".msgPool::permDelete()."'>";
       }
 
 
