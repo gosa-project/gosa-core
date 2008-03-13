@@ -258,9 +258,9 @@ class setup
       $str ="<p class='seperator' style='margin-bottom:10px;'>&nbsp;</p>";
       $str.="   <div style='text-align:right;float:top;'>";
       if(isset($this->o_steps[$this->i_current -1]) && $this->o_steps[$this->i_current -1]->is_enabled()){
-        $str .= "<input type='submit' name='last' value='"._("Back")."'>";
+        $str .= "<input type='submit' name='last' value='".msgPool::backButton()."'>";
       }else{
-        $str .= "<input type='button' name='last' value='"._("Back")."' disabled>";
+        $str .= "<input type='button' name='last' value='".msgPool::backButton()."' disabled>";
       }
       $str.= "&nbsp;";
         $str .= "<input type='submit' name='next' value='"._("Continue")."'>";

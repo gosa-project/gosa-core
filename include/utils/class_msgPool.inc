@@ -319,7 +319,7 @@ class msgPool
 
   public static function backButton($what= "")
   {
-    return $what == "" ? sprintf(_("Back...")): sprintf(_("Back %s..."), $what);
+    return _("Back");
   }
 
 

@@ -1547,7 +1547,7 @@ function apply_filter()
 function back_to_main()
 {
   $string= '<br><p class="plugbottom"><input type=submit name="password_back" value="'.
-    _("Back").'"></p><input type="hidden" name="ignore">';
+    msgPool::backButton().'"></p><input type="hidden" name="ignore">';
 
   return ($string);
 }
