@@ -296,7 +296,7 @@ class department extends plugin
     plugin::save();
 
 		/* Remove tag information if needed */
-		if (!$this->is_administrational_unit){
+		if (!$this->is_administrational_unit && $this->initially_was_tagged){
 			$tmp= array();
 
 			/* Remove gosaAdministrativeUnit from this plugin */
