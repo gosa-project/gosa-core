@@ -12,9 +12,9 @@ class msgPool
   public static function selectToView($type,$o_type = "")
   {
     if($o_type == ""){
-      return(_("Select to see objects of type '%s'."));
+      return(_("Select to list objects of type '%s'."));
     }elseif($o_type == "contains"){
-      return(_("Select to see objects containig '%s'."));
+      return(_("Select to list objects containig '%s'."));
     }
 
   }
