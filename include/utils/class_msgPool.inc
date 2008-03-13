@@ -19,7 +19,7 @@ class msgPool
 	  }
 	  if (!is_array($name)){
 		  if($type == ""){
-			  return (sprintf(_("This object will be deleted: $s"), "<br><br><i>$name</i>"));
+			  return (sprintf(_("This object will be deleted: %s"), "<br><br><i>$name</i>"));
 		  }else{
 			  return (sprintf(_("This '%s' object will be deleted: %s"),$type, "<br><br><i>$name</i>"));
 		  }
