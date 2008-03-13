@@ -8,34 +8,46 @@ define ("LDAP_AUTH",   6);
 
 class msgPool
 {
+
+  public static function selectToView($type,$o_type = "")
+  {
+    if($o_type == ""){
+      return(_("Select to see objects of type '%s'."));
+    }elseif($o_type == "contains"){
+      return(_("Select to see objects containig '%s'."));
+    }
+
+  }
+
+
   public static function deleteInfo($name= "",$type = "")
   {
-	  if ($name == "") { 
-		  if($type == ""){
-			  return (_("This object will be deleted!"));
-		  }else{
-			  return (sprintf(_("This '%s' object will be deleted!"), $type));
-		  }
-	  }
-	  if (!is_array($name)){
-		  if($type == ""){
-			  return (sprintf(_("This object will be deleted: %s"), "<br><br><i>$name</i>"));
-		  }else{
-			  return (sprintf(_("This '%s' object will be deleted: %s"),$type, "<br><br><i>$name</i>"));
-		  }
-	  }
-	  if (count($name) == 1){
-		  if($type == ""){
-			  return (_("This object will be deleted:")."<br>".msgPool::buildList($name));
-		  }else{
-			  return (sprintf(_("This '%s' object will be deleted:"),$type, "<br>".msgPool::buildList($name)));
-		  }
-	  }
-	  if($type == ""){
-		  return (sprintf(_("These objects will be deleted: %s"), "<br>".msgPool::buildList($name)));
-	  }else{
-		  return (sprintf(_("These '%s' objects will be deleted: %s"),$type, "<br>".msgPool::buildList($name)));
-	  }
+    if ($name == "") { 
+      if($type == ""){
+        return (_("This object will be deleted!"));
+      }else{
+        return (sprintf(_("This '%s' object will be deleted!"), $type));
+      }
+    }
+    if (!is_array($name)){
+      if($type == ""){
+        return (sprintf(_("This object will be deleted: %s"), "<br><br><i>$name</i>"));
+      }else{
+        return (sprintf(_("This '%s' object will be deleted: %s"),$type, "<br><br><i>$name</i>"));
+      }
+    }
+    if (count($name) == 1){
+      if($type == ""){
+        return (_("This object will be deleted:")."<br>".msgPool::buildList($name));
+      }else{
+        return (sprintf(_("This '%s' object will be deleted:"),$type, "<br>".msgPool::buildList($name)));
+      }
+    }
+    if($type == ""){
+      return (sprintf(_("These objects will be deleted: %s"), "<br>".msgPool::buildList($name)));
+    }else{
+      return (sprintf(_("These '%s' objects will be deleted: %s"),$type, "<br>".msgPool::buildList($name)));
+    }
   }
 
 
@@ -243,8 +255,8 @@ class msgPool
       }
 
       return sprintf(_("The Field '%s' contains invalid characters"), $name).". ".
-             (strlen($mismatch)==1?sprintf(_("'%s' is not allowed:"), htmlentities($mismatch)):sprintf(_("'%s' are not allowed."), htmlentities($mismatch))).
-             "<br><br> \"$result\"$example";
+        (strlen($mismatch)==1?sprintf(_("'%s' is not allowed:"), htmlentities($mismatch)):sprintf(_("'%s' are not allowed."), htmlentities($mismatch))).
+        "<br><br> \"$result\"$example";
     } else {
       return sprintf(_("The Field '%s' contains invalid characters"), $name)."!$example";
     }
@@ -325,109 +337,109 @@ class msgPool
 
   public static function noValidExtension($name)
   {
-	return sprintf(_("This account has no valid %s extensions!"), $name);
+    return sprintf(_("This account has no valid %s extensions!"), $name);
   }
 
   public static function featuresEnabled($name, $depends= "")
   {
-	if ($depends == ""){
-		return sprintf(_("This account has %s settings enabled. You can disable them by clicking below."), $name);
-	} else {
-		if (count($depends) == 1){
-			return sprintf(_("This account has %s settings enabled. To disable them, you'll need to remove the %s settings first!"), $name, $depends);
-		} else {
-			$deps= "";
-			foreach ($depends as $dep){
-				$deps.= "$dep / ";
-			}
-			$deps= preg_replace("/ \/ $/", "", $deps);
-			return sprintf(_("This account has %s settings enabled. To disable them, you'll need to remove the %s settings first!"), $name, $deps);
-		}
-	}
+    if ($depends == ""){
+      return sprintf(_("This account has %s settings enabled. You can disable them by clicking below."), $name);
+    } else {
+      if (count($depends) == 1){
+        return sprintf(_("This account has %s settings enabled. To disable them, you'll need to remove the %s settings first!"), $name, $depends);
+      } else {
+        $deps= "";
+        foreach ($depends as $dep){
+          $deps.= "$dep / ";
+        }
+        $deps= preg_replace("/ \/ $/", "", $deps);
+        return sprintf(_("This account has %s settings enabled. To disable them, you'll need to remove the %s settings first!"), $name, $deps);
+      }
+    }
   }
 
 
   public static function featuresDisabled($name, $depends= "")
   {
-	if ($depends == ""){
-		return sprintf(_("This account has %s settings disabled. You can enable them by clicking below."), $name);
-	} else {
-		if (count($depends) == 1){
-			return sprintf(_("This account has %s settings disabled. To enable them, you'll need to add the %s settings first!"), $name, $depends);
-		} else {
-			$deps= "";
-			foreach ($depends as $dep){
-				$deps.= "$dep / ";
-			}
-			$deps= preg_replace("/ \/ $/", "", $deps);
-			return sprintf(_("This account has %s features settings. To disable them, you'll need to add the %s settings first!"), $name, $deps);
-		}
-	}
+    if ($depends == ""){
+      return sprintf(_("This account has %s settings disabled. You can enable them by clicking below."), $name);
+    } else {
+      if (count($depends) == 1){
+        return sprintf(_("This account has %s settings disabled. To enable them, you'll need to add the %s settings first!"), $name, $depends);
+      } else {
+        $deps= "";
+        foreach ($depends as $dep){
+          $deps.= "$dep / ";
+        }
+        $deps= preg_replace("/ \/ $/", "", $deps);
+        return sprintf(_("This account has %s features settings. To disable them, you'll need to add the %s settings first!"), $name, $deps);
+      }
+    }
   }
 
 
   public static function addFeaturesButton($name)
   {
-	return sprintf(_("Add %s settings"), $name);
+    return sprintf(_("Add %s settings"), $name);
   }
 
 
   public static function removeFeaturesButton($name)
   {
-	return sprintf(_("Remove %s settings"), $name);
+    return sprintf(_("Remove %s settings"), $name);
   }
 
 
   public static function clickEditToChange()
   {
-	return _("Click the 'Edit' button below to change informations in this dialog");
+    return _("Click the 'Edit' button below to change informations in this dialog");
   }
 
 
   public static function months()
   {
-	return array(_("January"), _("February"), _("March"), _("April"),
-		        _("May"), _("June"), _("July"), _("August"), _("September"),
-		        _("October"), _("November"), _("December"));
+    return array(_("January"), _("February"), _("March"), _("April"),
+        _("May"), _("June"), _("July"), _("August"), _("September"),
+        _("October"), _("November"), _("December"));
   }
 
 
   public static function weekdays()
   {
-	return array( _("Sunday"), _("Monday"), _("Tuesday"), _("Wednesday"), _("Thursday"), _("Friday"), _("Saturday"));
+    return array( _("Sunday"), _("Monday"), _("Tuesday"), _("Wednesday"), _("Thursday"), _("Friday"), _("Saturday"));
   }
 
 
   public static function ldaperror($error, $dn= "", $type= 0, $plugin= "")
   {
-	/* Assign headline depending on type */
-	$typemap= array(1 => _("read operation"), _("add operation"), _("modify operation"),
-			     _("delete operation"), _("search operation"), _("authentication"));
-	
-	if (isset($typemap[$type])){
-		$headline= sprintf(_("LDAP %s failed!"), $typemap[$type]);
-	} else {
-		$headline= _("LDAP operation failed!");
-	}
+    /* Assign headline depending on type */
+    $typemap= array(1 => _("read operation"), _("add operation"), _("modify operation"),
+        _("delete operation"), _("search operation"), _("authentication"));
 
-	/* Fill DN information */
-	if ($dn != ""){
-		$dn_info= "<br><br><i>"._("Object").":</i> ".LDAP::fix($dn);
-	}
+    if (isset($typemap[$type])){
+      $headline= sprintf(_("LDAP %s failed!"), $typemap[$type]);
+    } else {
+      $headline= _("LDAP operation failed!");
+    }
 
-	return $headline.$dn_info."<br><br><i>"._("Error").":</i> ".$error;
+    /* Fill DN information */
+    if ($dn != ""){
+      $dn_info= "<br><br><i>"._("Object").":</i> ".LDAP::fix($dn);
+    }
+
+    return $headline.$dn_info."<br><br><i>"._("Error").":</i> ".$error;
   }
 
 
   function incorrectUpload($reason= "")
   {
-	if ($reason == ""){
-		return _("Upload failed!");
-	}
+    if ($reason == ""){
+      return _("Upload failed!");
+    }
 
-	return sprintf(_("Upload failed: %s"), "<br><br><i>$reason</i>");
+    return sprintf(_("Upload failed: %s"), "<br><br><i>$reason</i>");
   }
 
 }
-
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
