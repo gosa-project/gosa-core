@@ -312,32 +312,26 @@ class department extends plugin
     $this->skipTagging = TRUE;
     plugin::save();
 
+
     /* Remove tag information if needed */
-    if (!$this->is_administrational_unit){
+    if (!$this->is_administrational_unit && $this->initially_was_tagged){
       $tmp= array();
 
       /* Remove gosaAdministrativeUnit from this plugin */
+      $has_unit_tag= false;
       foreach($this->attrs['objectClass'] as $oc){
         if (!preg_match("/^gosaAdministrativeUnit$/i", $oc)){
           $tmp[]= $oc;
         }
+        if (preg_match("/^gosaAdministrativeUnitTag$/i", $oc)){
+          $has_unit_tag= true;
+        }
       }
       $this->attrs['objectClass']= $tmp;
-    }
-
-    /* Do we need to remove the tag itself? */
-    $has_unit_tag= false;
-    foreach($this->attrs['objectClass'] as $oc){
-      if (preg_match("/^gosaAdministrativeUnitTag$/i", $oc)){
-        $has_unit_tag= true;
-      }
-    }
-    if ($has_unit_tag == false && $this->is_administrational_unit == false){
       $this->attrs['gosaUnitTag']= array();
       $this->gosaUnitTag = "";
-    } else {
-      $this->attrs['gosaUnitTag']= $this->gosaUnitTag;
     }
+
 
 		/* Write back to ldap */
 		$ldap->cat($this->dn, array('dn'));
