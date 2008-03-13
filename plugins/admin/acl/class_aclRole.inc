@@ -402,7 +402,7 @@ class aclrole extends acl
 
         $field1= array("string" => $dsc, "attach" => "style='width:140px'");
         $field2= array("string" => $summary);
-        $action= "<input class='center' type='image' src='images/edit.png' alt='"._("Edit")."' name='cat_edit_$section' title='"._("Edit categoriy ACL")."'>";
+        $action= "<input class='center' type='image' src='images/edit.png' alt='"._("Edit")."' name='cat_edit_$section' title='"._("Edit category ACL")."'>";
         $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("Delete")."' name='cat_del_$section' title='"._("Reset category ACL")."'>";
         $field3= array("string" => $action, "attach" => "style='border-right:0px;width:50px'");
         $aclList->AddEntry(array($field1, $field2, $field3));
