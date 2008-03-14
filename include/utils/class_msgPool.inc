@@ -207,6 +207,18 @@ class msgPool
     }
   }
 
+  public static function cmdexecfailed($type, $command = "",$plugin="")
+  {
+    if(empty($command)){
+      return (sprintf(_("The configured '%s' command wasn't successfully executed."), $type));
+    }elseif($command != "" && $plugin != ""){
+      return (sprintf(_("The configured '%s' command (%s) in plugin %s wasn't successfully executed."), $type,$command,$plugin));
+    }elseif($plugin != "" && $command =""){
+      return (sprintf(_("The configured '%s' command in plugin %s wasn't successfully executed."), $type,$plugin));
+    }else{
+      return (sprintf(_("The configured '%s' command (%s) wasn't successfully executed."), $type,$command));
+    }
+  }
   public static function toobig($name, $min= "")
   {
     if ($min == ""){
