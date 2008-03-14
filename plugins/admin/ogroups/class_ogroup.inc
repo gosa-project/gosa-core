@@ -283,14 +283,52 @@ class ogroup extends plugin
       $smarty->assign("tree_image", get_template_path('images/tree.png'));
       $smarty->assign("deplist", $this->config->idepartments);
       $smarty->assign("alphabet", generate_alphabet());
-      foreach( array("dselect", "regex", "accounts", "groups", "applications",
-            "departments", "servers", "workstations", "winstations", "terminals","subtrees",
-            "printers", "phones") as $type){
+      foreach( array("dselect", "regex", "subtrees") as $type){
         $smarty->assign("$type", $ogfilter[$type]);
       }
       $smarty->assign("hint", print_sizelimit_warning());
       $smarty->assign("apply", apply_filter());
 
+      /* Build up checkboxes 
+       */
+      $ar = array(
+          "departments" => array(
+            "T" => msgPool::selectToView(_("departments")),
+            "C" => (isset($ogfilter['departments']) && ($ogfilter['departments'])),
+            "L" => sprintf(_("Show %s"),_("departments"))),
+          "accounts" => array(
+            "T" => msgPool::selectToView(_("people")),
+            "C" => (isset($ogfilter['accounts']) && ($ogfilter['accounts'])),
+            "L" => sprintf(_("Show %s"),_("people"))),
+          "groups"=> array(
+            "T" => msgPool::selectToView(_("groups")),
+            "C" => (isset($ogfilter['groups']) && ($ogfilter['groups'])),
+            "L" => sprintf(_("Show %s"),_("groups"))),
+          "applications"=> array(
+            "T" => msgPool::selectToView(_("applications")),
+            "C" => (isset($ogfilter['applications']) && ($ogfilter['applications'])),
+            "L" => sprintf(_("Show %s"),_("applications"))),
+          "servers"=> array(
+            "T" => msgPool::selectToView(_("servers")),
+            "C" => (isset($ogfilter['servers']) && ($ogfilter['servers'])),
+            "L" => sprintf(_("Show %s"),_("servers"))),
+          "workstations"=> array(
+            "T" => msgPool::selectToView(_("workstations")),
+            "C" => (isset($ogfilter['workstations']) && ($ogfilter['workstations'])),
+            "L" => sprintf(_("Show %s"),_("workstations"))),
+          "terminals"=> array(
+            "T" => msgPool::selectToView(_("terminals")),
+            "C" => (isset($ogfilter['terminals']) && ($ogfilter['terminals'])),
+            "L" => sprintf(_("Show %s"),_("terminals"))),
+          "printers"=> array(
+            "T" => msgPool::selectToView(_("printer")),
+            "C" => (isset($ogfilter['printers']) && ($ogfilter['printers'])),
+            "L" => sprintf(_("Show %s"),_("printers"))),
+          "phones"=> array(
+            "T" => msgPool::selectToView(_("phones")),
+            "C" => (isset($ogfilter['phones']) && ($ogfilter['phones'])),
+            "L" => sprintf(_("Show %s"),_("phones"))));
+      $smarty->assign("checkboxes",$ar);
       $display= $smarty->fetch (get_template_path('ogroup_objects.tpl', TRUE, dirname(__FILE__)));
       return ($display);
     }

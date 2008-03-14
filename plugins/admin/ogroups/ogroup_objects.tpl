@@ -23,17 +23,12 @@
      <table summary="" style="width:100%;border-top:1px solid #B0B0B0; background-color:#F8F8F8">
       {$alphabet}
      </table>
-    <p class="contentboxb" style="border-top:1px solid #B0B0B0; background-color:#F8F8F8">
-    <input type=checkbox name="departments" value="1" {$departments} onClick="mainform.submit()" title="{t}Select to see departments{/t}">{t}Show departments{/t}<br>
-    <input type=checkbox name="accounts" value="1" {$accounts} onClick="mainform.submit()" title="{t}Select to see GOsa accounts{/t}">{t}Show people{/t}<br>
-    <input type=checkbox name="groups" value="1" {$groups} onClick="mainform.submit()" title="{t}Select to see GOsa groups{/t}">{t}Show groups{/t}<br>
-    <input type=checkbox name="applications" value="1" {$applications} onClick="mainform.submit()" title="{t}Select to see applications{/t}">{t}Show applications{/t}<br>
-    <input type=checkbox name="servers" value="1" {$servers} onClick="mainform.submit()" title="{t}Select to see servers{/t}">{t}Show servers{/t}<br>
-    <input type=checkbox name="workstations" value="1" {$workstations} onClick="mainform.submit()" title="{t}Select to see workstations{/t}">{t}Show workstations{/t}<br>
-    <input type=checkbox name="terminals" value="1" {$terminals} onClick="mainform.submit()" title="{t}Select to see terminals{/t}">{t}Show terminals{/t}<br>
-    <input type=checkbox name="printers" value="1" {$printers} onClick="mainform.submit()" title="{t}Select to see printers{/t}">{t}Show printers{/t}<br>
-    <input type=checkbox name="phones" value="1" {$phones} onClick="mainform.submit()" title="{t}Select to see phones{/t}">{t}Show phones{/t}<br>
- </p>
+	 <p class="contentboxb" style="border-top:1px solid #B0B0B0; background-color:#F8F8F8">
+		{foreach from=$checkboxes item=item key=key}
+			<input type='checkbox' {if $item.C} checked {/if} class="center" 
+					name="{$key}" value="1" title="{$item.T}">{$item.L}<br>
+		{/foreach}
+ 	 </p>
  <p class="contentboxb" style="border-top:1px solid #B0B0B0; background-color:#F8F8F8">
     <input type=checkbox name="subtrees" value="1" {$subtrees} onClick="mainform.submit()" title="{t}Select to search within subtrees{/t}">{t}Search in subtrees{/t}<br>
  </p>
