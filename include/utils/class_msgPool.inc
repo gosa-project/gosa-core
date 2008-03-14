@@ -194,6 +194,18 @@ class msgPool
     return (sprintf(_("Command specified as %s hook for plugin '%s' does not exist!"), $type, $plugin));
   }
 
+  public static function cmdinvalid($type, $command = "",$plugin="")
+  {
+    if(empty($command)){
+      return (sprintf(_("The configured '%s' command is not a valid command."), $type));
+    }elseif($command != "" && $plugin != ""){
+      return (sprintf(_("The configured '%s' command (%s) in plugin %s is not a valid command."), $type,$command,$plugin));
+    }elseif($plugin != "" && $command =""){
+      return (sprintf(_("The configured '%s' command in plugin %s is not a valid command."), $type,$plugin));
+    }else{
+      return (sprintf(_("The configured '%s' command (%s) is not a valid command."), $type,$command));
+    }
+  }
 
   public static function toobig($name, $min= "")
   {
