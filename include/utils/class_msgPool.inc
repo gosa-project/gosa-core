@@ -15,6 +15,12 @@ class msgPool
       return(sprintf(_("Select to list objects of type '%s'."),$type));
     }elseif($o_type == "contains"){
       return(sprintf(_("Select to list objects containig '%s'."),$type));
+    }elseif($o_type == "enabled"){
+      return(sprintf(_("Select to list objects that have '%s' enabled"),$type));
+    }elseif($o_type == "subsearch"){
+      return(_("Select to search within subtrees"));
+    }elseif($o_type == "subsearch_small"){
+      return(_("Search in subtrees"));
     }
 
   }
