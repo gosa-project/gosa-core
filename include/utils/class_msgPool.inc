@@ -464,6 +464,15 @@ class msgPool
     return sprintf(_("Upload failed: %s"), "<br><br><i>$reason</i>");
   }
 
+
+  function siError($error= "")
+  {
+    if ($error == ""){
+      return _("Communication failure with the infrastructure service!");
+    }
+    return sprintf(_("Communication failure with the infrastructure service: %s"), "<br><br>"._("Error").": ".$error);
+  }
+
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
