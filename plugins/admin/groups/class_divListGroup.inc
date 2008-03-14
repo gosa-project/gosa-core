@@ -81,15 +81,20 @@ class divListGroup extends MultiSelectWindow
     $this->AddHeader(array("string"=>_("Actions"),"attach"=>"style='width:".$action_col_size."px;border-right:0px;'"));
 
     /*                  Text        ,Value    ,Name         ,Is selected */
-    $this->AddCheckBox("ShowPrimaryGroups",     _("Select to see groups that are primary groups of users"),          _("Show primary groups"),      true);
-    $this->AddCheckBox("ShowSambaGroups",       _("Select to see groups that have samba groups mappings"),          _("Show samba groups"),      true);
-    $this->AddCheckBox("ShowApplicationGroups", _("Select to see groups that have applications configured"),        _("Show application groups"),true);
-    $this->AddCheckBox("ShowMailGroups",        _("Select to see groups that have mail settings"),                  _("Show mail groups"),       true);
-    $this->AddCheckBox("ShowFunctionalGroups",  _("Select to see normal groups that have only functional aspects"), _("Show functional groups"), true);
+    $this->AddCheckBox("ShowPrimaryGroups",     _("Select to see groups that are primary groups of users"), 
+                                                  sprintf(_("Show %s groups"),_("primary")),     true);
+    $this->AddCheckBox("ShowSambaGroups",       msgPool::selectToView(_("samba groups mappings"),"enabled"), 
+                                                  sprintf(_("Show %s groups"),_("samba")),              true);
+    $this->AddCheckBox("ShowApplicationGroups", msgPool::selectToView(_("application settings"),"enabled"),     
+                                                  sprintf(_("Show %s groups"),_("application")),        true);
+    $this->AddCheckBox("ShowMailGroups",        msgPool::selectToView(_("mail settings"),"enabled"), 
+                                                  sprintf(_("Show %s groups"),_("mail")),               true);
+    $this->AddCheckBox("ShowFunctionalGroups",  _("Select to see normal groups that have only functional aspects"),
+                                                  sprintf(_("Show %s groups"),_("functional")),     true);
     $this->AddCheckBox(SEPERATOR);
 
     /* Add SubSearch checkbox */    
-    $this->AddCheckBox("SubSearch",  _("Select to search within subtrees"), _("Search in subtrees"), false);
+    $this->AddCheckBox("SubSearch",  msgPool::selectToView("","subsearch"),msgPool::selectToView("","subsearch_small"), false);
 
     /*                  Name                 ,Text                              ,Default  , Connect with alphabet  */
     $this->AddRegex   ("Regex",     _("Regular expression for matching group names"), "*" , true);
