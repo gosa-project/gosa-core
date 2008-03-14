@@ -508,7 +508,7 @@ $xml_msg.= "
 
     if(!isset($params['XML'])){
       if (!array_key_exists('XML', $params)){
-        $this->set_error(_("Could not parse XML."));
+        $this->set_error(_("Cannot not parse XML!"));
       }
       $params = array("COUNT" => 0);
     }
@@ -788,7 +788,7 @@ $xml_msg.= "
                 $tmp->add_targets(array($mac));
                 $tmp->set_type(TRIGGERED_EVENT);
                 if(!$this->append($tmp)){
-                  msg_dialog::display(_("Error"), sprintf(_("Cannot send abort event for entry: %s"),$entry['ID']) , ERROR_DIALOG);
+                  msg_dialog::display(_("Error"), sprintf(_("Cannot send abort event for entry %s!"),$entry['ID']) , ERROR_DIALOG);
                   new log("debug","DaemonEvent ", "gosaSupportDaemon::clean_queue_from_mac()", array($mac => $mac),
                       "FAILED, could not send 'DaemonEvent_faireboot' for entry ID (".$entry['ID'].") - ".$this->get_error());
                 }else{
@@ -808,7 +808,7 @@ $xml_msg.= "
                *  Failed or waiting events, can be removed without any trouble.
                */ 
               if(!$this->remove_entries(array($entry['ID']))){
-                msg_dialog::display(_("Error"), sprintf(_("Cannot remove entry: %s"),$entry['ID']) , ERROR_DIALOG);
+                msg_dialog::display(_("Error"), sprintf(_("Cannot remove entry %s!"),$entry['ID']) , ERROR_DIALOG);
               }
               ;break;
           }

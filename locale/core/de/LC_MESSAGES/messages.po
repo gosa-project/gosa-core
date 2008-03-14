@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-13 21:49+0100\n"
-"PO-Revision-Date: 2008-03-13 22:25+0100\n"
+"POT-Creation-Date: 2008-03-14 09:41+0100\n"
+"PO-Revision-Date: 2008-03-14 09:47+0100\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -502,9 +502,9 @@ msgstr "Organisation"
 #: plugins/personal/generic/class_user.inc:1155
 #: plugins/personal/generic/class_user.inc:1192
 #: plugins/personal/generic/class_user.inc:1578
-#: plugins/admin/users/class_userManagement.inc:725
-#: plugins/admin/users/class_userManagement.inc:803
-#: plugins/admin/users/class_userManagement.inc:815
+#: plugins/admin/users/class_userManagement.inc:724
+#: plugins/admin/users/class_userManagement.inc:802
+#: plugins/admin/users/class_userManagement.inc:814
 #: plugins/admin/groups/class_groupGeneric.inc:870
 #: plugins/admin/groups/class_groupGeneric.inc:876
 #: plugins/admin/groups/class_groupGeneric.inc:878
@@ -804,7 +804,7 @@ msgid "Snapshot base"
 msgstr "Basis für Snapshots"
 
 #: setup/setup_config2.tpl:264 setup/setup_config2.tpl:309
-#: plugins/admin/ogroups/class_ogroupManagement.inc:503
+#: plugins/admin/ogroups/class_ogroupManagement.inc:502
 #: plugins/admin/ogroups/class_divListOGroup.inc:98
 #: plugins/admin/ogroups/class_divListOGroup.inc:99
 #: plugins/generic/references/class_reference.inc:64
@@ -813,7 +813,7 @@ msgstr "Server"
 
 #: setup/setup_config2.tpl:273 setup/setup_config2.tpl:318
 #: plugins/admin/users/class_divListUsers.inc:175
-#: plugins/admin/ogroups/class_ogroupManagement.inc:499
+#: plugins/admin/ogroups/class_ogroupManagement.inc:498
 msgid "User"
 msgstr "Benutzer"
 
@@ -922,7 +922,7 @@ msgstr "Es wurden %s doppelte Werte für das Attribute 'uidNumber' gefunden."
 #: setup/setup_checks.tpl:87 ihtml/themes/default/msg_dialog.tpl:76
 #: ihtml/themes/default/msg_dialog.tpl:78
 #: ihtml/themes/default/msg_dialog.tpl:131
-#: ihtml/themes/default/msg_dialog.tpl:133 include/utils/class_msgPool.inc:280
+#: ihtml/themes/default/msg_dialog.tpl:133 include/utils/class_msgPool.inc:308
 #, php-format
 msgid "Ok"
 msgstr "Ok"
@@ -1030,15 +1030,24 @@ msgstr "Geben Sie eine gültige Benutzer ID an!"
 #: setup/setup_checks.tpl:91 ihtml/themes/default/msg_dialog.tpl:55
 #: ihtml/themes/default/msg_dialog.tpl:100 include/utils/class_msgPool.inc:147
 #: include/utils/class_msgPool.inc:159 include/utils/class_msgPool.inc:177
-#: include/utils/class_msgPool.inc:430 include/class_gosaSupportDaemon.inc:791
+#: include/utils/class_msgPool.inc:458 include/utils/class_msgPool.inc:477
+#: include/class_gosaSupportDaemon.inc:791
 #: include/class_gosaSupportDaemon.inc:811
+#: include/class_CopyPasteHandler.inc:118
+#: include/class_CopyPasteHandler.inc:126
+#: include/class_CopyPasteHandler.inc:158
+#: include/class_CopyPasteHandler.inc:175
+#: include/class_CopyPasteHandler.inc:183
+#: include/class_CopyPasteHandler.inc:192
+#: include/class_CopyPasteHandler.inc:268
 #: include/class_CopyPasteHandler.inc:350 include/class_plugin.inc:626
 #: include/class_plugin.inc:658 include/class_plugin.inc:689
 #: include/class_plugin.inc:1404 include/class_log.inc:145
 #: include/class_log.inc:157 include/class_log.inc:165
-#: include/class_log.inc:180 include/class_log.inc:218
-#: include/class_log.inc:241 include/class_msg_dialog.inc:97
-#: include/functions.inc:1264 plugins/personal/generic/class_user.inc:395
+#: include/class_log.inc:177 include/class_log.inc:192
+#: include/class_log.inc:205 include/class_log.inc:228
+#: include/class_msg_dialog.inc:97 include/functions.inc:1264
+#: plugins/personal/generic/class_user.inc:395
 #: plugins/personal/generic/class_user.inc:496
 #: plugins/personal/generic/class_user.inc:766
 #: plugins/personal/generic/class_user.inc:1296
@@ -1048,6 +1057,7 @@ msgstr "Geben Sie eine gültige Benutzer ID an!"
 #: plugins/admin/groups/class_groupGeneric.inc:732
 #: plugins/admin/groups/class_groupGeneric.inc:965 html/index.php:225
 #: html/index.php:229
+#, php-format
 msgid "Error"
 msgstr "Fehler"
 
@@ -1078,7 +1088,7 @@ msgstr ""
 #: plugins/personal/generic/class_user.inc:1020
 #: plugins/personal/posix/class_posixAccount.inc:663
 #: plugins/personal/posix/class_posixAccount.inc:927
-#: plugins/admin/users/class_userManagement.inc:540
+#: plugins/admin/users/class_userManagement.inc:539
 #: plugins/admin/groups/class_groupGeneric.inc:576
 #: plugins/admin/groups/class_groupGeneric.inc:843
 #: plugins/admin/acl/class_aclRole.inc:585
@@ -1290,7 +1300,7 @@ msgstr "Suchen"
 #: setup/setup_migrate.tpl:305 setup/setup_migrate.tpl:358
 #: ihtml/themes/default/acl.tpl:8 ihtml/themes/default/acl.tpl:20
 #: ihtml/themes/default/acl.tpl:75 ihtml/themes/default/acl.tpl:89
-#: include/utils/class_msgPool.inc:286
+#: include/utils/class_msgPool.inc:314
 #, php-format
 msgid "Apply"
 msgstr "Anwenden"
@@ -1304,7 +1314,7 @@ msgstr "Anwenden"
 #: ihtml/themes/default/snapshotdialog.tpl:89 ihtml/themes/default/acl.tpl:77
 #: ihtml/themes/default/acl.tpl:91 ihtml/themes/default/copyPasteDialog.tpl:21
 #: ihtml/themes/default/remove.tpl:15 ihtml/themes/default/msg_dialog.tpl:79
-#: ihtml/themes/default/msg_dialog.tpl:134 include/utils/class_msgPool.inc:274
+#: ihtml/themes/default/msg_dialog.tpl:134 include/utils/class_msgPool.inc:302
 #, php-format
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -2077,7 +2087,7 @@ msgstr "Ende der Gültigkeit des Passworts"
 
 #: ihtml/themes/default/pwd_heimdal.tpl:198
 #: ihtml/themes/default/copyPasteDialog.tpl:19
-#: include/utils/class_msgPool.inc:292 include/class_MultiSelectWindow.inc:134
+#: include/utils/class_msgPool.inc:320 include/class_MultiSelectWindow.inc:134
 #, php-format
 msgid "Save"
 msgstr "Speichern"
@@ -2201,7 +2211,7 @@ msgstr ""
 
 #: ihtml/themes/default/snapshotdialog.tpl:20
 #: ihtml/themes/default/snapshotdialog.tpl:62
-#: include/utils/class_msgPool.inc:427 include/class_acl.inc:663
+#: include/utils/class_msgPool.inc:455 include/class_acl.inc:663
 #: include/class_acl.inc:670 include/class_acl.inc:677
 #: include/class_acl.inc:683
 #: plugins/admin/departments/class_departmentGeneric.inc:492
@@ -2311,7 +2321,7 @@ msgid "Your password has been changed successfully."
 msgstr "Ihr Passwort wurde erfolgreich geändert."
 
 #: ihtml/themes/default/password.tpl:40
-#: plugins/admin/users/class_userManagement.inc:348
+#: plugins/admin/users/class_userManagement.inc:347
 msgid "Password change"
 msgstr "Passwort-Änderung"
 
@@ -2335,7 +2345,7 @@ msgstr "Momentanes Passwort"
 #: plugins/personal/generic/main.inc:86
 #: plugins/personal/password/password.tpl:18
 #: plugins/admin/users/password.tpl:13
-#: plugins/admin/users/class_userManagement.inc:246 html/password.php:200
+#: plugins/admin/users/class_userManagement.inc:245 html/password.php:200
 msgid "New password"
 msgstr "Neues Passwort"
 
@@ -2471,7 +2481,7 @@ msgstr ""
 "Ignoriere diesen Fehler und zeige alle Einträge, die innerhalb der "
 "Größenbeschränkung liegen"
 
-#: ihtml/themes/default/sizelimit.tpl:14 include/utils/class_msgPool.inc:310
+#: ihtml/themes/default/sizelimit.tpl:14 include/utils/class_msgPool.inc:338
 #: plugins/personal/generic/generic.tpl:137
 #, php-format
 msgid "Set"
@@ -2668,117 +2678,157 @@ msgstr "Das als '%s'-Erweiterung angegebene Kommando für Modul '%s' existiert n
 
 #: include/utils/class_msgPool.inc:201
 #, php-format
+msgid "'%s' command is invalid!"
+msgstr "'%s'-Kommando ist ungültig!"
+
+#: include/utils/class_msgPool.inc:203
+#, php-format
+msgid "'%s' command (%s) for plugin %s is invalid!"
+msgstr "'%s' Kommando (%s) für Modul %s ist ungültig!"
+
+#: include/utils/class_msgPool.inc:205
+#, php-format
+msgid "'%s' command for plugin %s is invalid!"
+msgstr "'%s' Kommando für Modul %s ist ungültig!"
+
+#: include/utils/class_msgPool.inc:207
+#, php-format
+msgid "'%s' command (%s) is invalid!"
+msgstr "'%s' Kommando (%s) ist ungültig!"
+
+#: include/utils/class_msgPool.inc:215
+#, php-format
+msgid "Cannot execute '%s' command!"
+msgstr "Kann '%s' Kommando nicht ausführen!"
+
+#: include/utils/class_msgPool.inc:217
+#, php-format
+msgid "Cannot execute '%s' command (%s) for plugin %s!"
+msgstr "Kann '%s' Kommando (%s) für Modul %s nicht ausführen!"
+
+#: include/utils/class_msgPool.inc:219
+#, php-format
+msgid "Cannot execute '%s' command for plugin %s!"
+msgstr "Kann '%s' Kommando für Modul %s nicht ausführen!"
+
+#: include/utils/class_msgPool.inc:221
+#, php-format
+msgid "Cannot execute '%s' command (%s)!"
+msgstr "Kann '%s' Kommando (%s) nicht ausführen!"
+
+#: include/utils/class_msgPool.inc:229
+#, php-format
 msgid "Value for '%s' is too large!"
 msgstr "Der Wert für '%s' ist zu groß!"
 
-#: include/utils/class_msgPool.inc:203
+#: include/utils/class_msgPool.inc:231
 #, php-format
 msgid "'%s' must be smaller than %d!"
 msgstr "'%s' muß kleiner sein als %d!"
 
-#: include/utils/class_msgPool.inc:211
+#: include/utils/class_msgPool.inc:239
 #, php-format
 msgid "Value for '%s' is too small!"
 msgstr "Der Wert für '%s' ist zu kein!"
 
-#: include/utils/class_msgPool.inc:213
+#: include/utils/class_msgPool.inc:241
 #, php-format
 msgid "'%s' must be %d or above!"
 msgstr "'%s' muß größer oder gleich %d sein!"
 
-#: include/utils/class_msgPool.inc:220
+#: include/utils/class_msgPool.inc:248
 #, php-format
 msgid "'%s' depends on '%s' - please provide both values!"
 msgstr "'%s' hängt von '%s' ab - bitte geben Sie beide Werte an!"
 
-#: include/utils/class_msgPool.inc:226
+#: include/utils/class_msgPool.inc:254
 #, php-format
 msgid "There is already an entry with this '%s' attribute in the system!"
 msgstr "Es existiert bereits ein Eintrag mit diesem '%s' Attribut im System!"
 
-#: include/utils/class_msgPool.inc:232
+#: include/utils/class_msgPool.inc:260
 #, php-format
 msgid "The required field '%s' is empty!"
 msgstr "Das Pflicht-Feld '%s' ist leer!"
 
-#: include/utils/class_msgPool.inc:240
+#: include/utils/class_msgPool.inc:268
 msgid "Example"
 msgstr "Beispiel"
 
-#: include/utils/class_msgPool.inc:257 include/utils/class_msgPool.inc:261
+#: include/utils/class_msgPool.inc:285 include/utils/class_msgPool.inc:289
 #, php-format
 msgid "The Field '%s' contains invalid characters"
 msgstr "Das Feld '%s' enthält ungültige Zeichen"
 
-#: include/utils/class_msgPool.inc:258
+#: include/utils/class_msgPool.inc:286
 #, php-format
 msgid "'%s' is not allowed:"
 msgstr "'%s' ist nicht erlaubt:"
 
-#: include/utils/class_msgPool.inc:258
+#: include/utils/class_msgPool.inc:286
 #, php-format
-msgid "'%s' are not allowed."
-msgstr "'%s' sind nicht erlaubt."
+msgid "'%s' are not allowed!"
+msgstr "'%s' sind nicht erlaubt!"
 
-#: include/utils/class_msgPool.inc:268
+#: include/utils/class_msgPool.inc:296
 #, php-format
 msgid "Missing %s PHP extension!"
 msgstr "Fehlenden %s PHP-Erweiterung!"
 
-#: include/utils/class_msgPool.inc:298
+#: include/utils/class_msgPool.inc:326
 #, php-format
 msgid "Add"
 msgstr "Hinzufügen"
 
-#: include/utils/class_msgPool.inc:298
+#: include/utils/class_msgPool.inc:326
 #, php-format
 msgid "Add %s"
 msgstr "%s hinzufügen"
 
-#: include/utils/class_msgPool.inc:304 include/class_acl.inc:430
+#: include/utils/class_msgPool.inc:332 include/class_acl.inc:430
 #: include/class_acl.inc:473 plugins/admin/acl/class_aclRole.inc:361
 #: plugins/admin/acl/class_aclRole.inc:406
 #, php-format
 msgid "Delete"
 msgstr "Entfernen"
 
-#: include/utils/class_msgPool.inc:304
+#: include/utils/class_msgPool.inc:332
 #, php-format
 msgid "Delete %s"
 msgstr "%s löschen"
 
-#: include/utils/class_msgPool.inc:310
+#: include/utils/class_msgPool.inc:338
 #, php-format
 msgid "Set %s"
 msgstr "%s einstellen"
 
-#: include/utils/class_msgPool.inc:316
+#: include/utils/class_msgPool.inc:344
 #, php-format
 msgid "Edit..."
 msgstr "Bearbeiten..."
 
-#: include/utils/class_msgPool.inc:316
+#: include/utils/class_msgPool.inc:344
 #, php-format
 msgid "Edit %s..."
 msgstr "%s bearbeiten..."
 
-#: include/utils/class_msgPool.inc:322
+#: include/utils/class_msgPool.inc:350
 msgid "Back"
 msgstr "Zurück"
 
-#: include/utils/class_msgPool.inc:340
+#: include/utils/class_msgPool.inc:368
 #, php-format
 msgid "This account has no valid %s extensions!"
 msgstr "Dieses Konto besitzt keine gültigen %s-Einstellungen."
 
-#: include/utils/class_msgPool.inc:346
+#: include/utils/class_msgPool.inc:374
 #, php-format
 msgid "This account has %s settings enabled. You can disable them by clicking below."
 msgstr ""
 "Dieses Konto besitzt aktivierte %s-Einstellungen. Sie können diese durch "
 "einen Klick auf die untere Schaltfläche deaktivieren."
 
-#: include/utils/class_msgPool.inc:349 include/utils/class_msgPool.inc:356
+#: include/utils/class_msgPool.inc:377 include/utils/class_msgPool.inc:384
 #, php-format
 msgid ""
 "This account has %s settings enabled. To disable them, you'll need to remove "
@@ -2787,21 +2837,23 @@ msgstr ""
 "Dieses Konto besitzt aktivierte %s-Erweiterungen. Um sie zu deaktivieren, "
 "müssen Sie zunächst die %s Einstellungen entfernen!"
 
-#: include/utils/class_msgPool.inc:365
+#: include/utils/class_msgPool.inc:393
 #, php-format
 msgid "This account has %s settings disabled. You can enable them by clicking below."
-msgstr "Dieses Konto hat keine %s-Einstellungen aktiviert. Sie können Sie durch einen Klick auf die Schlatflöche aktivieren."
+msgstr ""
+"Dieses Konto hat keine %s-Einstellungen aktiviert. Sie können Sie durch "
+"einen Klick auf die Schlatflöche aktivieren."
 
-#: include/utils/class_msgPool.inc:368
+#: include/utils/class_msgPool.inc:396
 #, php-format
 msgid ""
 "This account has %s settings disabled. To enable them, you'll need to add "
 "the %s settings first!"
 msgstr ""
-"Dieses Konto besitzt aktuell keine aktivierten %s-Einstellungen. Um sie zu aktivieren, "
-"müssen Sie zunächst die %s Erweiterungen hinzufügen!"
+"Dieses Konto besitzt aktuell keine aktivierten %s-Einstellungen. Um sie zu "
+"aktivieren, müssen Sie zunächst die %s Erweiterungen hinzufügen!"
 
-#: include/utils/class_msgPool.inc:375
+#: include/utils/class_msgPool.inc:403
 #, php-format
 msgid ""
 "This account has %s features settings. To disable them, you'll need to add "
@@ -2810,139 +2862,148 @@ msgstr ""
 "Dieses Konto besitzt aktivierte %s-Einstellungen. Um sie zu deaktivieren, "
 "müssen Sie zunächst die %s Einstellungen deaktivieren!"
 
-#: include/utils/class_msgPool.inc:383
+#: include/utils/class_msgPool.inc:411
 #, php-format
 msgid "Add %s settings"
 msgstr "%s Einstellungen hinzufügen"
 
-#: include/utils/class_msgPool.inc:389
+#: include/utils/class_msgPool.inc:417
 #, php-format
 msgid "Remove %s settings"
 msgstr "%s Einstellungen entfernen"
 
-#: include/utils/class_msgPool.inc:395
+#: include/utils/class_msgPool.inc:423
 msgid "Click the 'Edit' button below to change informations in this dialog"
 msgstr ""
 "Betätigen sie den 'Bearbeiten'-Schalter unten um Informationen in diesem "
 "Dialog zu ändern"
 
-#: include/utils/class_msgPool.inc:401
+#: include/utils/class_msgPool.inc:429
 msgid "January"
 msgstr "Januar"
 
-#: include/utils/class_msgPool.inc:401
+#: include/utils/class_msgPool.inc:429
 msgid "February"
 msgstr "Februar"
 
-#: include/utils/class_msgPool.inc:401
+#: include/utils/class_msgPool.inc:429
 msgid "March"
 msgstr "März"
 
-#: include/utils/class_msgPool.inc:401
+#: include/utils/class_msgPool.inc:429
 msgid "April"
 msgstr "April"
 
-#: include/utils/class_msgPool.inc:402
+#: include/utils/class_msgPool.inc:430
 msgid "May"
 msgstr "Mai"
 
-#: include/utils/class_msgPool.inc:402
+#: include/utils/class_msgPool.inc:430
 msgid "June"
 msgstr "Juni"
 
-#: include/utils/class_msgPool.inc:402
+#: include/utils/class_msgPool.inc:430
 msgid "July"
 msgstr "Juli"
 
-#: include/utils/class_msgPool.inc:402
+#: include/utils/class_msgPool.inc:430
 msgid "August"
 msgstr "August"
 
-#: include/utils/class_msgPool.inc:402
+#: include/utils/class_msgPool.inc:430
 msgid "September"
 msgstr "September"
 
-#: include/utils/class_msgPool.inc:403
+#: include/utils/class_msgPool.inc:431
 msgid "October"
 msgstr "Oktober"
 
-#: include/utils/class_msgPool.inc:403
+#: include/utils/class_msgPool.inc:431
 msgid "November"
 msgstr "November"
 
-#: include/utils/class_msgPool.inc:403
+#: include/utils/class_msgPool.inc:431
 msgid "December"
 msgstr "Dezember"
 
-#: include/utils/class_msgPool.inc:409
+#: include/utils/class_msgPool.inc:437
 msgid "Sunday"
 msgstr "Sonntag"
 
-#: include/utils/class_msgPool.inc:409
+#: include/utils/class_msgPool.inc:437
 msgid "Monday"
 msgstr "Montag"
 
-#: include/utils/class_msgPool.inc:409
+#: include/utils/class_msgPool.inc:437
 msgid "Tuesday"
 msgstr "Dienstag"
 
-#: include/utils/class_msgPool.inc:409
+#: include/utils/class_msgPool.inc:437
 msgid "Wednesday"
 msgstr "Mittwoch"
 
-#: include/utils/class_msgPool.inc:409
+#: include/utils/class_msgPool.inc:437
 msgid "Thursday"
 msgstr "Donnerstag"
 
-#: include/utils/class_msgPool.inc:409
+#: include/utils/class_msgPool.inc:437
 msgid "Friday"
 msgstr "Freitag"
 
-#: include/utils/class_msgPool.inc:409
+#: include/utils/class_msgPool.inc:437
 msgid "Saturday"
 msgstr "Samstag"
 
-#: include/utils/class_msgPool.inc:416
+#: include/utils/class_msgPool.inc:444
 msgid "read operation"
 msgstr "Lese-Operation"
 
-#: include/utils/class_msgPool.inc:416
+#: include/utils/class_msgPool.inc:444
 msgid "add operation"
 msgstr "Hinzufügeoperation"
 
-#: include/utils/class_msgPool.inc:416
+#: include/utils/class_msgPool.inc:444
 msgid "modify operation"
 msgstr "Änderungs-Operation"
 
-#: include/utils/class_msgPool.inc:417
+#: include/utils/class_msgPool.inc:445
 msgid "delete operation"
 msgstr "Lösch-Operation"
 
-#: include/utils/class_msgPool.inc:417
+#: include/utils/class_msgPool.inc:445
 msgid "search operation"
 msgstr "Such-Operation"
 
-#: include/utils/class_msgPool.inc:417
+#: include/utils/class_msgPool.inc:445
 msgid "authentication"
 msgstr "Authentifizierung"
 
-#: include/utils/class_msgPool.inc:420
+#: include/utils/class_msgPool.inc:448
 #, php-format
 msgid "LDAP %s failed!"
 msgstr "LDAP %s fehlgeschlagen!"
 
-#: include/utils/class_msgPool.inc:422
+#: include/utils/class_msgPool.inc:450
 msgid "LDAP operation failed!"
 msgstr "LDAP-Operation fehlgeschlagen"
 
-#: include/utils/class_msgPool.inc:437
+#: include/utils/class_msgPool.inc:465
 msgid "Upload failed!"
 msgstr "Übertragung fehlgeschlagen!"
 
-#: include/utils/class_msgPool.inc:440
+#: include/utils/class_msgPool.inc:468
 #, php-format
 msgid "Upload failed: %s"
 msgstr "Übertragung fehlgeschlagen: %s"
+
+#: include/utils/class_msgPool.inc:475
+msgid "Communication failure with the infrastructure service!"
+msgstr "Kommunikationsfehler mit dem Infrastruktur Dienst!"
+
+#: include/utils/class_msgPool.inc:477
+#, php-format
+msgid "Communication failure with the infrastructure service: %s"
+msgstr "Kommunikationsfehler mit dem Infrastruktur Dienst: %s"
 
 #: include/utils/class_timezone.inc:51
 #: include/password-methods/class_password-methods-ssha.inc:51
@@ -2970,18 +3031,18 @@ msgstr ""
 "Zeitzonen-Versatz nicht berechnen."
 
 #: include/class_gosaSupportDaemon.inc:511
-msgid "Could not parse XML."
-msgstr "Konnte XML nicht erfassen."
+msgid "Cannot not parse XML!"
+msgstr "XML-Nachricht kann nicht ausgewertet werden!"
 
 #: include/class_gosaSupportDaemon.inc:791
 #, php-format
-msgid "Cannot send abort event for entry: %s"
-msgstr ""
+msgid "Cannot send abort event for entry %s!"
+msgstr "Kann keine Abbruch-Nachricht für den Eintrag %s versenden!"
 
 #: include/class_gosaSupportDaemon.inc:811
 #, php-format
-msgid "Cannot remove entry: %s"
-msgstr "Kann Eintrag nicht entfernen: %s"
+msgid "Cannot remove entry %s!"
+msgstr "Kann Eintrag %s nicht entfernen!"
 
 #: include/class_tabs.inc:216
 #, php-format
@@ -3063,25 +3124,32 @@ msgid "Can't set priority for ID '%s'. ID does not exist."
 msgstr "Kann die Priorität der ID '%s' nicht festlegen. Die ID ist unbekannt."
 
 #: include/class_CopyPasteHandler.inc:118
+#: include/class_CopyPasteHandler.inc:126
+#: include/class_CopyPasteHandler.inc:158
+#: include/class_CopyPasteHandler.inc:175
+#: include/class_CopyPasteHandler.inc:183
+#: include/class_CopyPasteHandler.inc:192
+#: include/class_CopyPasteHandler.inc:268
 #, php-format
-msgid "Cannot cleanup copy & paste queue: setting permissions for '%s' failed!"
-msgstr ""
-"Kann die Kopieren & Einfügen Queue nicht aufräumen: das Setzen der "
-"Berechtigungen für '%s' schlug fehl!"
+msgid "Copy and paste failed!"
+msgstr "Kopieren & Einfügen ist fehlgeschlagen!"
+
+#: include/class_CopyPasteHandler.inc:118
+#: include/class_CopyPasteHandler.inc:183
+#, php-format
+msgid "cannot set permission for '%s'"
+msgstr "kann Berechtigungen für '%s' nicht setzen"
 
 #: include/class_CopyPasteHandler.inc:126
+#: include/class_CopyPasteHandler.inc:175
 #, php-format
-msgid "Cannot cleanup copy & paste queue: no write permission inside '%s'!"
-msgstr ""
-"Kann·die·Kopieren·&·Einfügen·Queue·nicht·aufräumen:·keine "
-"Schreibberechtigung innerhalb von '%s'!"
+msgid "no write permission in '%s'"
+msgstr "keine Schreibberechtigung in '%s'"
 
 #: include/class_CopyPasteHandler.inc:158
 #, php-format
-msgid "Copy and paste failed: object '%s' is not a valid ldap object!"
-msgstr ""
-"Kopieren und Einfügen fehlgeschlagen: das Objekt '%s' ist kein gültiges LDAP-"
-"Objekt!"
+msgid "'%s' is no vaild LDAP object"
+msgstr "'%s' ist kein gültiges LDAP-Objekt"
 
 #: include/class_CopyPasteHandler.inc:159
 #: include/class_CopyPasteHandler.inc:269 include/class_acl.inc:826
@@ -3093,41 +3161,27 @@ msgstr ""
 msgid "Internal error"
 msgstr "Interner Fehler"
 
-#: include/class_CopyPasteHandler.inc:175
-#, php-format
-msgid "Cannot save LDAP dump: no write permission inside '%s'!"
-msgstr ""
-"Kann LDAP-Abzug nicht speichern: keine Schreibberechtigung innerhalb von '%"
-"s'!"
-
-#: include/class_CopyPasteHandler.inc:183
-#, php-format
-msgid "Cannot save LDAP dump: setting permissions for '%s' failed!"
-msgstr ""
-"Kann·LDAP-Abzug·nicht·speichern:·Setzen der Berechtigungen·für·'%s' "
-"fehlgeschlagen!"
-
 #: include/class_CopyPasteHandler.inc:192
 #, php-format
-msgid "Cannot save LDAP dump: no write permission to '%s/%s'!"
-msgstr "Kann LDAP-Abzug nicht speichern: keine Schreibberechtigung in '%s/%s'!"
+msgid "cannot open file '%s' for writing"
+msgstr "kann Datei '%s' nicht zum Schreiben öffnen"
 
 #: include/class_CopyPasteHandler.inc:268
 #, php-format
-msgid "Cannot load dumped file '%s'!"
-msgstr "Kann Abzug-Datei '%s' nicht laden!"
+msgid "cannot open '%s' for reading"
+msgstr "kann Datei '%s' nicht zum Lesen öffnen"
 
-#: include/class_CopyPasteHandler.inc:368
-#, fuzzy, php-format
-msgid "You are going to paste the following entries '%s'."
-msgstr "Sie sind dabei, den kopierten Eintrag '%s' einzufügen."
+#: include/class_CopyPasteHandler.inc:364
+#, php-format
+msgid "These objects will be pasted: %s"
+msgstr "Diese Objekte werden eingefügt: %s"
 
-#: include/class_CopyPasteHandler.inc:391
-#, fuzzy, php-format
-msgid "You are going to paste the following entry '%s'."
-msgstr "Sie sind dabei, den kopierten Eintrag '%s' einzufügen."
+#: include/class_CopyPasteHandler.inc:387
+#, php-format
+msgid "This object will be pasted: %s"
+msgstr "Dieses Objekt wird eingefügt: %s"
 
-#: include/class_CopyPasteHandler.inc:483
+#: include/class_CopyPasteHandler.inc:479
 #: plugins/admin/users/class_divListUsers.inc:210
 #: plugins/admin/users/class_divListUsers.inc:213
 #: plugins/admin/groups/class_divListGroup.inc:215
@@ -3139,8 +3193,8 @@ msgstr "Sie sind dabei, den kopierten Eintrag '%s' einzufügen."
 msgid "Paste"
 msgstr "Einfügen"
 
-#: include/class_CopyPasteHandler.inc:485
-msgid "Can't paste"
+#: include/class_CopyPasteHandler.inc:481
+msgid "Cannot paste"
 msgstr "Kann nicht einfügen"
 
 #: include/class_plugin.inc:492
@@ -3433,55 +3487,28 @@ msgid "Logging to MySQL disabled"
 msgstr "Protokollieren nach MySQL inaktiv"
 
 #: include/class_log.inc:107
-msgid ""
-"The logging to a MySQL database is now disabled for this session of GOsa, "
-"due to communication errors with the specified logging database."
-msgstr ""
-"Das Protokollieren in die MySQL-Datenbank ist für diese Sitzung "
-"abgeschaltet, da es Kommunikationsfehler mit der angegebenen Protokoll-"
-"Datenbank gab."
+msgid "Logging to a MySQL database will be disabled for this session!"
+msgstr "Protokollierung in die MySQL-Datenkbank wird für diese Sitzung abgeschaltet!"
 
 #: include/class_log.inc:120
 #, php-format
-msgid "Invalid option '%s' specified."
-msgstr "Ungültige Option '%s' angegeben."
+msgid "Invalid option '%s' specified!"
+msgstr "Ungültige Option '%s' angegeben!"
 
 #: include/class_log.inc:124
-msgid "Specified objectType is empty or invalid"
-msgstr "Der angegebene Objekttyp ist leer oder ungültig"
+msgid "Specified objectType is empty or invalid!"
+msgstr "Der angegebene Objekt-Typ ist leer oder ungültig!"
 
-#: include/class_log.inc:145
-msgid ""
-"You have enabled the logging into mysql database, but there are no logging "
-"servers available."
-msgstr ""
-"Sie haben das Protokollieren in eine MySQL-Datenbank aktiviert, aber es gibt "
-"keine verfügbaren Protokoll-Server."
+#: include/class_log.inc:145 include/class_log.inc:157
+#: include/class_log.inc:165 include/class_log.inc:177
+#: include/class_log.inc:192 include/class_log.inc:228
+msgid "MySQL logging"
+msgstr "MySQL Protokollierung"
 
-#: include/class_log.inc:157
+#: include/class_log.inc:205
 #, php-format
-msgid "Cannot connect to logging server '%s'."
-msgstr "Kann nicht zum Protokoll-Server '%s' verbinden."
-
-#: include/class_log.inc:165
-#, php-format
-msgid "Cannot select database '%s' on server '%s': %s"
-msgstr "Kann die Datenbank '%s' auf dem Server '%s' nicht auswählen: %s"
-
-#: include/class_log.inc:181
-#, php-format
-msgid "Missing logging table (%s.%s) update your GOsa logging database schema."
-msgstr ""
-
-#: include/class_log.inc:218
-#, php-format
-msgid "Couldn't add your location to the logging database, the error was: %s."
-msgstr ""
-
-#: include/class_log.inc:241
-#, php-format
-msgid "Cannot query database '%s' on server '%s': %s"
-msgstr "Kann die Datenbank '%s' auf dem Server '%s' nicht abfragen: %s"
+msgid "Cannot add location to the database!"
+msgstr "Kann Standort nicht in die Datenbank einfügen!"
 
 #: include/class_multi_plug.inc:362
 msgid "You are currently editing mutliple entries."
@@ -4097,8 +4124,8 @@ msgstr "Die gewählte Passwort-Methode ist nicht mehr verfügbar."
 #: plugins/personal/generic/class_user.inc:1189
 #: plugins/personal/generic/class_user.inc:1455
 #: plugins/personal/generic/class_user.inc:1575
-#: plugins/admin/users/class_userManagement.inc:728
-#: plugins/admin/users/class_userManagement.inc:806 html/getxls.php:88
+#: plugins/admin/users/class_userManagement.inc:727
+#: plugins/admin/users/class_userManagement.inc:805 html/getxls.php:88
 #: html/getxls.php:225 html/getxls.php:283 html/getxls.php:299
 msgid "Given name"
 msgstr "Vorname"
@@ -4121,7 +4148,7 @@ msgstr "Homepage"
 #: plugins/admin/groups/class_divListGroup.inc:264
 #: plugins/admin/departments/class_departmentGeneric.inc:261
 #: plugins/admin/departments/generic.tpl:83
-#: plugins/admin/ogroups/class_ogroupManagement.inc:504
+#: plugins/admin/ogroups/class_ogroupManagement.inc:503
 #: plugins/generic/references/class_reference.inc:60
 msgid "Phone"
 msgstr "Telefon"
@@ -4290,7 +4317,7 @@ msgstr "Telefonnummer (privat)"
 #: plugins/admin/users/class_divListUsers.inc:80
 #: plugins/admin/groups/class_divListGroup.inc:79
 #: plugins/admin/departments/class_divListDepartment.inc:156
-#: plugins/admin/ogroups/class_ogroupManagement.inc:502
+#: plugins/admin/ogroups/class_ogroupManagement.inc:501
 #: plugins/admin/ogroups/class_divListOGroup.inc:83
 #: plugins/generic/references/class_reference.inc:58
 msgid "Department"
@@ -4464,7 +4491,7 @@ msgstr "Zimmer-Nr."
 
 #: plugins/personal/generic/main.inc:81
 #: plugins/personal/password/class_password.inc:83
-#: plugins/admin/users/class_userManagement.inc:241 html/password.php:197
+#: plugins/admin/users/class_userManagement.inc:240 html/password.php:197
 msgid ""
 "The passwords you've entered as 'New password' and 'Repeated new password' "
 "do not match."
@@ -4682,8 +4709,8 @@ msgid "UNIX"
 msgstr "UNIX"
 
 #: plugins/personal/posix/class_posixAccount.inc:38
-msgid "Edit users POSIX extensions"
-msgstr ""
+msgid "Edit users POSIX settings"
+msgstr "Benutzer POSIX-Einstellungen bearbeiten"
 
 #: plugins/personal/posix/class_posixAccount.inc:154
 msgid "expired"
@@ -4721,7 +4748,7 @@ msgstr "automatisch"
 #: plugins/personal/posix/class_posixAccount.inc:297
 #: plugins/personal/posix/class_posixAccount.inc:300
 msgid "POSIX"
-msgstr ""
+msgstr "POSIX"
 
 #: plugins/personal/posix/class_posixAccount.inc:295
 #: plugins/admin/users/class_divListUsers.inc:278
@@ -4919,7 +4946,7 @@ msgstr ""
 
 #: plugins/admin/users/template.tpl:15
 #: plugins/admin/users/class_divListUsers.inc:177
-#: plugins/admin/users/class_userManagement.inc:722
+#: plugins/admin/users/class_userManagement.inc:721
 msgid "Template"
 msgstr "Vorlage"
 
@@ -5155,8 +5182,8 @@ msgid "edit"
 msgstr "Bearbeiten"
 
 #: plugins/admin/users/class_divListUsers.inc:329
-#: plugins/admin/users/class_userManagement.inc:454
-#: plugins/admin/users/class_userManagement.inc:565
+#: plugins/admin/users/class_userManagement.inc:453
+#: plugins/admin/users/class_userManagement.inc:564
 msgid "user"
 msgstr "Benutzer"
 
@@ -5179,7 +5206,7 @@ msgid "delete"
 msgstr "Entfernen"
 
 #: plugins/admin/users/class_divListUsers.inc:353
-#: plugins/admin/users/class_userManagement.inc:565
+#: plugins/admin/users/class_userManagement.inc:564
 msgid "Delete user"
 msgstr "Benutzer entfernen"
 
@@ -5201,44 +5228,36 @@ msgstr "Benutzer verwalten"
 #: plugins/admin/users/class_userManagement.inc:193
 #: plugins/admin/groups/class_groupManagement.inc:191
 #: plugins/admin/ogroups/class_ogroupManagement.inc:173
-#, fuzzy
-msgid "Daemon"
-msgstr "Ab"
+msgid "Service infrastructure"
+msgstr "Dienst Infrastruktur"
 
-#: plugins/admin/users/class_userManagement.inc:193
-#: plugins/admin/groups/class_groupManagement.inc:191
-#: plugins/admin/ogroups/class_ogroupManagement.inc:173
-#, php-format
-msgid "Something went wrong while talking to the daemon: %s."
-msgstr ""
-
-#: plugins/admin/users/class_userManagement.inc:293
+#: plugins/admin/users/class_userManagement.inc:292
 msgid "Password change failed."
 msgstr "Passwort-Änderung fehlgeschlagen."
 
-#: plugins/admin/users/class_userManagement.inc:293
-#: plugins/admin/users/class_userManagement.inc:348
+#: plugins/admin/users/class_userManagement.inc:292
+#: plugins/admin/users/class_userManagement.inc:347
 msgid "You are not allowed to set this users password!"
 msgstr "Sie haben keine Berechtigung, das Passwort dieses Benutzers zu setzen!"
 
-#: plugins/admin/users/class_userManagement.inc:455
+#: plugins/admin/users/class_userManagement.inc:454
 msgid "Delete users"
 msgstr "Benutzer entfernen"
 
-#: plugins/admin/users/class_userManagement.inc:483
-#: plugins/admin/users/class_userManagement.inc:597
+#: plugins/admin/users/class_userManagement.inc:482
+#: plugins/admin/users/class_userManagement.inc:596
 msgid "User delete"
 msgstr "Benutzer Entfernen"
 
-#: plugins/admin/users/class_userManagement.inc:592
+#: plugins/admin/users/class_userManagement.inc:591
 msgid "User deleted"
 msgstr "Benutzer entfernt"
 
-#: plugins/admin/users/class_userManagement.inc:592
+#: plugins/admin/users/class_userManagement.inc:591
 msgid "User successfully removed."
 msgstr "Benutzer erfolgreich entfernt."
 
-#: plugins/admin/users/class_userManagement.inc:703
+#: plugins/admin/users/class_userManagement.inc:702
 #: plugins/admin/ogroups/class_ogroup.inc:305
 msgid "none"
 msgstr "keine"
@@ -5341,7 +5360,9 @@ msgstr "! unbekannte id"
 #: plugins/admin/groups/class_groupGeneric.inc:546
 #, php-format
 msgid "Search returned too many results. Not displaying more than %s entries!"
-msgstr "Die Suche ergab zu viele Treffer. Es werden nicht mehr als %s Einträge angezeigt!"
+msgstr ""
+"Die Suche ergab zu viele Treffer. Es werden nicht mehr als %s Einträge "
+"angezeigt!"
 
 #: plugins/admin/groups/class_groupGeneric.inc:727
 #, php-format
@@ -5425,14 +5446,14 @@ msgid "Show functional groups"
 msgstr "Zeige Funktions-Gruppen"
 
 #: plugins/admin/groups/class_divListGroup.inc:184
-#: plugins/admin/ogroups/class_ogroupManagement.inc:500
+#: plugins/admin/ogroups/class_ogroupManagement.inc:499
 #: plugins/generic/references/class_reference.inc:56
 msgid "Group"
 msgstr "Gruppe"
 
 #: plugins/admin/groups/class_divListGroup.inc:262
 #: plugins/admin/ogroups/tabs_ogroups.inc:153
-#: plugins/admin/ogroups/class_ogroupManagement.inc:501
+#: plugins/admin/ogroups/class_ogroupManagement.inc:500
 #: plugins/generic/references/class_reference.inc:62
 msgid "Application"
 msgstr "Anwendung"
@@ -5455,16 +5476,16 @@ msgstr "Anzahl der angezeigten Gruppen"
 
 #: plugins/admin/groups/class_groupManagement.inc:27
 msgid "Manage POSIX groups"
-msgstr ""
+msgstr "POSIX-Gruppen verwalten"
 
-#: plugins/admin/groups/class_groupManagement.inc:350
-#: plugins/admin/groups/class_groupManagement.inc:429
+#: plugins/admin/groups/class_groupManagement.inc:349
+#: plugins/admin/groups/class_groupManagement.inc:428
 msgid "group"
 msgstr "Gruppe"
 
-#: plugins/admin/groups/class_groupManagement.inc:383
-#: plugins/admin/groups/class_groupManagement.inc:436
-#: plugins/admin/groups/class_groupManagement.inc:467
+#: plugins/admin/groups/class_groupManagement.inc:382
+#: plugins/admin/groups/class_groupManagement.inc:435
+#: plugins/admin/groups/class_groupManagement.inc:466
 #: plugins/admin/acl/class_aclManagement.inc:163
 #: plugins/admin/acl/class_aclManagement.inc:200
 #: plugins/admin/acl/class_aclManagement.inc:253
@@ -5474,9 +5495,9 @@ msgstr "Gruppe"
 #: plugins/admin/departments/class_departmentManagement.inc:196
 #: plugins/admin/departments/class_departmentManagement.inc:244
 #: plugins/admin/departments/class_departmentManagement.inc:263
-#: plugins/admin/ogroups/class_ogroupManagement.inc:264
-#: plugins/admin/ogroups/class_ogroupManagement.inc:316
-#: plugins/admin/ogroups/class_ogroupManagement.inc:343
+#: plugins/admin/ogroups/class_ogroupManagement.inc:263
+#: plugins/admin/ogroups/class_ogroupManagement.inc:315
+#: plugins/admin/ogroups/class_ogroupManagement.inc:342
 msgid "Permission error"
 msgstr "Berechtigungsfehler"
 
@@ -5587,7 +5608,7 @@ msgid "ACL for these objects: %s"
 msgstr "Enthält ACL für diese Objekte: %s"
 
 #: plugins/admin/acl/class_aclRole.inc:405
-msgid "Edit categoriy ACL"
+msgid "Edit category ACL"
 msgstr "ACL Kategorie bearbeiten"
 
 #: plugins/admin/acl/class_aclRole.inc:406
@@ -5938,25 +5959,25 @@ msgstr "Mitglied"
 msgid "Manage object groups"
 msgstr "Objektgruppen verwalten"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:235
-#: plugins/admin/ogroups/class_ogroupManagement.inc:309
+#: plugins/admin/ogroups/class_ogroupManagement.inc:234
+#: plugins/admin/ogroups/class_ogroupManagement.inc:308
 msgid "object group"
 msgstr "Objektgruppe"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:505
+#: plugins/admin/ogroups/class_ogroupManagement.inc:504
 #: plugins/generic/references/class_reference.inc:68
 msgid "Workstation"
 msgstr "Arbeitsstation"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:506
+#: plugins/admin/ogroups/class_ogroupManagement.inc:505
 msgid "Windows Install"
 msgstr "Windows Installation"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:507
+#: plugins/admin/ogroups/class_ogroupManagement.inc:506
 msgid "Terminal"
 msgstr "Terminal"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:508
+#: plugins/admin/ogroups/class_ogroupManagement.inc:507
 #: plugins/admin/ogroups/class_divListOGroup.inc:106
 #: plugins/admin/ogroups/class_divListOGroup.inc:107
 #: plugins/generic/references/class_reference.inc:72
@@ -6060,14 +6081,14 @@ msgid "Object group"
 msgstr "Objektgruppe"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:88
-#, fuzzy, php-format
+#, php-format
 msgid "Select to see groups containing '%s'."
-msgstr "Zeige Gruppen die Benutzer enthalten"
+msgstr "Auswählen um Gruppen aufzulisten die '%s' enthalten."
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:89
-#, fuzzy, php-format
+#, php-format
 msgid "Show groups containing '%s'"
-msgstr "Zeige Gruppen mit Benutzern"
+msgstr "Zeige Gruppen mit '%s'"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:94
 #: plugins/admin/ogroups/class_divListOGroup.inc:95

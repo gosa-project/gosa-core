@@ -104,7 +104,7 @@ class log {
           if(!$res){
             global $config;
             $config->current['LOGGING'] = preg_replace("/(^|,)mysql(,|$)/",",",$config->current['LOGGING']);
-            msg_dialog::display(_("Logging to MySQL disabled"),_("The logging to a MySQL database is now disabled for this session of GOsa, due to communication errors with the specified logging database."), INFO_DIALOG);
+            msg_dialog::display(_("Logging to MySQL disabled"),_("Logging to a MySQL database will be disabled for this session!"), INFO_DIALOG);
           }
         }
       }
@@ -117,11 +117,11 @@ class log {
     $msgs = array();
 
     if(!isset($entry['action']) || !in_array($entry['action'],array("modify","create","remove","copy","snapshot","view","security","debug"))){
-      $msgs[] = sprintf(_("Invalid option '%s' specified."), $entry['action']);
+      $msgs[] = sprintf(_("Invalid option '%s' specified!"), $entry['action']);
     }
 
     if(!isset($entry['objecttype']) || empty($entry['objecttype'])){
-      $msgs[] = _("Specified objectType is empty or invalid");
+      $msgs[] = _("Specified objectType is empty or invalid!");
     }
   
     return($msgs);
@@ -142,7 +142,7 @@ class log {
     if(isset($this->config->data['SERVERS']['LOGGING'])){
       $servers = $this->config->data['SERVERS']['LOGGING'];
     }else{
-      msg_dialog::display(_("Error"), _("You have enabled the logging into mysql database, but there are no logging servers available."), ERROR_DIALOG);
+      msg_dialog::display(_("Error"), msgPool::noserver(_("MySQL logging")), ERROR_DIALOG);
       return(FALSE);
     }
 
@@ -154,7 +154,7 @@ class log {
        */
       $con = @mysql_pconnect($server_name,$server['USER'],$server['PWD']);
       if(!$con){
-        msg_dialog::display(_("Error"), sprintf(_("Cannot connect to logging server '%s'."),$server_name), ERROR_DIALOG);
+        msg_dialog::display(_("Error"), msgPool::dbconnect(_("MySQL logging")), ERROR_DIALOG);
         return(FALSE);
       }else{
 
@@ -162,29 +162,10 @@ class log {
          */
         $db = mysql_select_db($server['DB'],$con);
         if(!$db){
-          msg_dialog::display(_("Error"), sprintf(_("Cannot select database '%s' on server '%s': %s"),$server['DB'],$server['SERVER'], mysql_error($con)), ERROR_DIALOG);
+          msg_dialog::display(_("Error"), msgPool::dbselect(_("MySQL logging"), mysql_error($con)), ERROR_DIALOG);
           return(FALSE);
         }else{
 
-          /* Check for required tables 
-          */
-          $query = "SHOW TABLES;";
-          $res    = @mysql_query($query,$con);
-          $tables = array();
-          while($attrs  = mysql_fetch_row($res)){
-            $tables[] = $attrs[0];
-          }
-          $error = FALSE;
-          foreach(array("gosa_log","gosa_locations") as $required){
-            if(!in_array($required,$tables)){
-              msg_dialog::display(_("Error"), 
-              sprintf(_("Missing logging table (%s.%s) update your GOsa logging database schema."),
-                $server['DB'],$required), ERROR_DIALOG);
-              $error = TRUE;
-            }
-            if($error) return(FALSE);
-          }
- 
           /* Check if our current location is already registerd 
               in this case get its id.
              If it wasn't registered yet, create it. 
@@ -192,6 +173,10 @@ class log {
           $base = mysql_escape_string($this->config->current['BASE']);
           $query= "SELECT id FROM gosa_locations WHERE location=\"".$base."\";";
           $res  = mysql_query($query);  
+          if(!$res){
+            msg_dialog::display(_("Error"), msgPool::dbquery(_("MySQL logging"), mysql_error($con)), ERROR_DIALOG);
+          }
+
           $location_id = -1;
           while($attrs = mysql_fetch_assoc($res)){
             $location_id = $attrs['id'];
@@ -203,7 +188,9 @@ class log {
            */
           if($location_id == -1){
             $query = "INSERT INTO gosa_locations (location) VALUES ('".$base."');";
-            mysql_query($query,$con);
+            if(!mysql_query($query,$con)){
+              msg_dialog::display(_("Error"), msgPool::dbquery(_("MySQL logging"), mysql_error($con)), ERROR_DIALOG);
+            }
  
             /* Try to detect the location again 
              */ 
@@ -215,7 +202,7 @@ class log {
               break;
             }
             if($location_id == -1){
-              msg_dialog::display(_("Error"), sprintf(_("Couldn't add your location to the logging database, the error was: %s."),
+              msg_dialog::display(_("Error"), sprintf(_("Cannot add location to the database!")."<br><br>"._("Error").": %s",
                 mysql_error($con)), ERROR_DIALOG);
               return(FALSE);
             }
@@ -238,8 +225,7 @@ class log {
           ";
           $res = mysql_query($query,$con);
           if(!$res){
-            msg_dialog::display(_("Error"), sprintf(_("Cannot query database '%s' on server '%s': %s"),
-                  $server['DB'],$server['SERVER'], mysql_error($con)), ERROR_DIALOG);
+            msg_dialog::display(_("Error"), msgPool::dbquery(_("MySQL logging"), mysql_error($con)), ERROR_DIALOG);
             return(FALSE);
           } 
         }
