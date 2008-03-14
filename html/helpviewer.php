@@ -146,7 +146,7 @@ if(session::is_set('current_class_for_help')){
   $path                         = $tmp->get_path($_GET['plug']);
   $helpobject['currentplug']    = $path;
   $helpobject['file']           = "index.html";
-  $helpdir = "../doc/guide/user/".$helpobject['lang']."/html/".preg_replace("/^.*\//i","",$helpobject['currentplug']);
+  $helpdir = "../doc/core/".$helpobject['lang']."/html/".preg_replace("/^.*\//i","",$helpobject['currentplug']);
   if(empty($helpobject['currentplug'])){
     $helpdir= "";
   }
