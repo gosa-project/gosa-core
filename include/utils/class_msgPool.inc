@@ -286,7 +286,7 @@ class msgPool
         (strlen($mismatch)==1?sprintf(_("'%s' is not allowed:"), htmlentities($mismatch)):sprintf(_("'%s' are not allowed!"), htmlentities($mismatch))).
         "<br><br> \"$result\"$example";
     } else {
-      return sprintf(_("The Field '%s' contains invalid characters"!), $name)."!$example";
+      return sprintf(_("The Field '%s' contains invalid characters!"), $name)."!$example";
     }
   }
 
