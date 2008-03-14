@@ -77,7 +77,7 @@ class divListACL extends MultiSelectWindow
     $this->set_filter_objectclasses();   
  
     /* Add SubSearch checkbox */
-    $this->AddCheckBox("SubSearch",  _("Select to search within subtrees"), _("Ignore subtrees"), false);
+    $this->AddCheckBox("SubSearch",  msgPool::selectToView("","subsearch"), msgPool::selectToView("","subsearch_small"), false);
 
 
     /*                  Name                 ,Text                              ,Default  , Connect with alphabet  */
