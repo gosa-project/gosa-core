@@ -194,31 +194,35 @@ class msgPool
     return (sprintf(_("Command specified as %s hook for plugin '%s' does not exist!"), $type, $plugin));
   }
 
+
   public static function cmdinvalid($type, $command = "",$plugin="")
   {
     if(empty($command)){
-      return (sprintf(_("The configured '%s' command is not a valid command."), $type));
+      return (sprintf(_("'%s' command is invalid!"), $type));
     }elseif($command != "" && $plugin != ""){
-      return (sprintf(_("The configured '%s' command (%s) in plugin %s is not a valid command."), $type,$command,$plugin));
+      return (sprintf(_("'%s' command (%s) for plugin %s is invalid!"), $type,$command,$plugin));
     }elseif($plugin != "" && $command =""){
-      return (sprintf(_("The configured '%s' command in plugin %s is not a valid command."), $type,$plugin));
+      return (sprintf(_("'%s' command for plugin %s is invalid!"), $type,$plugin));
     }else{
-      return (sprintf(_("The configured '%s' command (%s) is not a valid command."), $type,$command));
+      return (sprintf(_("'%s' command (%s) is invalid!"), $type,$command));
     }
   }
+
 
   public static function cmdexecfailed($type, $command = "",$plugin="")
   {
     if(empty($command)){
-      return (sprintf(_("The configured '%s' command wasn't successfully executed."), $type));
+      return (sprintf(_("Cannot execute '%s' command!"), $type));
     }elseif($command != "" && $plugin != ""){
-      return (sprintf(_("The configured '%s' command (%s) in plugin %s wasn't successfully executed."), $type,$command,$plugin));
+      return (sprintf(_("Cannot execute '%s' command (%s) for plugin %s!"), $type,$command,$plugin));
     }elseif($plugin != "" && $command =""){
-      return (sprintf(_("The configured '%s' command in plugin %s wasn't successfully executed."), $type,$plugin));
+      return (sprintf(_("Cannot execute '%s' command for plugin %s!"), $type,$plugin));
     }else{
-      return (sprintf(_("The configured '%s' command (%s) wasn't successfully executed."), $type,$command));
+      return (sprintf(_("Cannot execute '%s' command (%s)!"), $type,$command));
     }
   }
+
+
   public static function toobig($name, $min= "")
   {
     if ($min == ""){
@@ -279,10 +283,10 @@ class msgPool
       }
 
       return sprintf(_("The Field '%s' contains invalid characters"), $name).". ".
-        (strlen($mismatch)==1?sprintf(_("'%s' is not allowed:"), htmlentities($mismatch)):sprintf(_("'%s' are not allowed."), htmlentities($mismatch))).
+        (strlen($mismatch)==1?sprintf(_("'%s' is not allowed:"), htmlentities($mismatch)):sprintf(_("'%s' are not allowed!"), htmlentities($mismatch))).
         "<br><br> \"$result\"$example";
     } else {
-      return sprintf(_("The Field '%s' contains invalid characters"), $name)."!$example";
+      return sprintf(_("The Field '%s' contains invalid characters"!), $name)."!$example";
     }
   }
 
