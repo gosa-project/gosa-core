@@ -81,12 +81,12 @@ class divListUsers extends MultiSelectWindow
     $this->AddHeader(array("string"=>_("Properties"),   "attach" => "style='width:166px;'"));
     $this->AddHeader(array("string"=>_("Actions"),      "attach" => "style='width:".$action_col_size."px;border-right:0px;text-align:right;'"));
     
-    $this->AddCheckBox("ShowTemplates"      ,_("Select to see template pseudo users")               ,_("Show templates")        , false);
-    $this->AddCheckBox("ShowFunctionalUsers",_("Select to see users that have only a GOsa object"),_("Show functional users") , true);
-    $this->AddCheckBox("ShowUnixUsers"      ,_("Select to see users that have posix settings")      ,_("Show unix users")       , true);
-    $this->AddCheckBox("ShowMailUsers"      ,_("Select to see users that have mail settings")       ,_("Show mail users")       , true);
-    $this->AddCheckBox("ShowSambaUsers"     ,_("Select to see users that have samba settings")      ,_("Show samba users")      , true);
-    $this->AddCheckBox("ShowProxyUsers"     ,_("Select to see users that have proxy settings")      ,_("Show proxy users")      , true);
+    $this->AddCheckBox("ShowTemplates"      ,msgPool::selectToView(_("Template"))             ,sprintf(_("Show %s"),_("templates")), false);
+    $this->AddCheckBox("ShowFunctionalUsers",msgPool::selectToView(_("GOsa object"),"enabled"),sprintf(_("Show %s user"),_("functional")), true);
+    $this->AddCheckBox("ShowUnixUsers"      ,msgPool::selectToView(_("Posix"),"enabled")      ,sprintf(_("Show %s user"),_("posix")), true);
+    $this->AddCheckBox("ShowMailUsers"      ,msgPool::selectToView(_("Mail"),"enabled")       ,sprintf(_("Show %s user"),_("mail")), true);
+    $this->AddCheckBox("ShowSambaUsers"     ,msgPool::selectToView(_("Samba"),"enabled")      ,sprintf(_("Show %s user"),_("samba")), true);
+    $this->AddCheckBox("ShowProxyUsers"     ,msgPool::selectToView(_("Proxy"),"enabled")      ,sprintf(_("Show %s user"),_("proxy")), true);
 
     /* Add SubSearch checkbox */
     $this->AddCheckBox(SEPERATOR);
