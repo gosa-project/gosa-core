@@ -184,6 +184,9 @@ $xml_msg.= "
       }
     }
     
+    /* Remove session ID. No one is interested in this... */
+    unset($ret['SESSION_ID']);
+
     return($ret);
   }
 
