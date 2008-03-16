@@ -496,11 +496,40 @@ class msgPool
   }
 
 
+  function fileDoesNotExist($file)
+  {
+    return sprintf(_("File '%s' does not exist!"), $file);
+  }
+
+
   function cannotReadFile($file)
   {
     return sprintf(_("Cannot open file '%s' for reading!"), $file);
   }
 
+
+  function cannotWriteFile($file)
+  {
+    return sprintf(_("Cannot open file '%s' for writing!"), $file);
+  }
+
+
+  function cannotDeleteFile($file)
+  {
+    return sprintf(_("Cannot delete file '%s'!"), $file);
+  }
+
+
+  function cannotCreateFolder($path)
+  {
+    return sprintf(_("Cannot create folder '%s'!"), $path);
+  }
+
+
+  function cannotDeleteFolder($path)
+  {
+    return sprintf(_("Cannot delete folder '%s'!"), $path);
+  }
 
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
