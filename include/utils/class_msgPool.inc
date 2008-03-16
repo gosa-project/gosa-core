@@ -483,6 +483,25 @@ class msgPool
     return sprintf(_("Communication failure with the infrastructure service: %s"), "<br><br>"._("Error").": ".$error);
   }
 
+
+  function stillInUse($type, $objects= array())
+  {
+    if (!is_array($objects)){
+      return sprintf(_("This '%s' is still in use by this object: %s"), $type, "<br><br>".$objects);
+    }
+    if (count($objects) == 1){
+      return sprintf(_("This '%s' is still in use by this object: %s"), $type, "<br><br>".msgPool::buildList($objects));
+    }
+    return sprintf(_("This '%s' is still in use by these objects: %s"), $type, "<br><br>".msgPool::buildList($objects));
+  }
+
+
+  function cannotReadFile($file)
+  {
+    return sprintf(_("Cannot open file '%s' for reading!"), $file);
+  }
+
+
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
