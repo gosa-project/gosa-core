@@ -36,6 +36,7 @@ class LDAP{
   var $cid;
   var $hasres   = array();
   var $sr       = array();
+  var $re       = array();
   var $basedn   ="";
   var $start    = array(); // 0 if we are fetching the first entry, otherwise 1
   var $error    = ""; // Any error messages to be returned can be put here
@@ -47,8 +48,6 @@ class LDAP{
   var $follow_referral = FALSE;
   var $referrals= array();
   var $max_ldap_query_time = 0;   // 0, empty or negative values will disable this check 
-
-  var $re = NULL;  
 
   function LDAP($binddn,$bindpw, $hostname, $follow_referral= FALSE, $tls= FALSE)
   {
@@ -316,17 +315,17 @@ class LDAP{
         {
           if ($this->sr[$srp]){
             $this->start[$srp] = 1;
-            $this->re= @ldap_first_entry($this->cid, $this->sr[$srp]);
+            $this->re[$srp]= @ldap_first_entry($this->cid, $this->sr[$srp]);
           } else {
             return array();
           }
         } else {
-          $this->re= @ldap_next_entry($this->cid, $this->re);
+          $this->re[$srp]= @ldap_next_entry($this->cid, $this->re[$srp]);
         }
-        if ($this->re)
+        if ($this->re[$srp])
         {
-          $att= @ldap_get_attributes($this->cid, $this->re);
-          $att['dn']= trim(LDAP::convert(@ldap_get_dn($this->cid, $this->re)));
+          $att= @ldap_get_attributes($this->cid, $this->re[$srp]);
+          $att['dn']= trim(LDAP::convert(@ldap_get_dn($this->cid, $this->re[$srp])));
         }
         $this->error = @ldap_error($this->cid);
         if (!isset($att)){
@@ -361,13 +360,13 @@ class LDAP{
     if($this->hascon){
       if($this->hasres[$srp]){
 
-        if(!$this->re)
+        if(!$this->re[$srp])
           {
           $this->error = "Perform a Fetch with no valid Result";
           }
           else
           {
-          $rv = @ldap_get_dn($this->cid, $this->re);
+          $rv = @ldap_get_dn($this->cid, $this->re[$srp]);
         
           $this->error = @ldap_error($this->cid);
           return(trim(LDAP::convert($rv)));
