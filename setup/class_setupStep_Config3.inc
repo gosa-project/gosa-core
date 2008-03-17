@@ -190,11 +190,11 @@ class Step_Config3 extends setup_step
     $message = array();
 
     if(!is_numeric( $this->optional['session_lifetime'])){
-      $message[] = _("Session lifetime must be a numeric value.");
+      $message[] = _("Session lifetime must be a numeric value!");
     }
 
     if(!is_numeric( $this->optional['max_ldap_query_time'])){
-      $message[] = _("Maximal ldap query time must be a numeric value. ");
+      $message[] = _("Maximum LDAP query time must be a numeric value!");
     }
   
     return($message);

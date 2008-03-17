@@ -214,7 +214,7 @@ eval_sizelimit();
 /* Check for memory */
 if (function_exists("memory_get_usage")){
   if (memory_get_usage() > (to_byte(ini_get('memory_limit')) - 2048000 )){
-    msg_dialog::display(_("Configuration warning"), _("Running out of memory!"), WARNING_DIALOG);
+    msg_dialog::display(_("Configuration error"), _("Running out of memory!"), WARNING_DIALOG);
   }
 }
 
@@ -353,7 +353,7 @@ if((isset($config->data['MAIN']['ACCOUNT_EXPIRATION'])) &&
 
   if ($expired == 2){
     new log("security","gosa","",array(),"password for user \"$ui->username\" is about to expire") ;
-    msg_dialog::display(_("Password reminder"), _("Your password is about to expire, please change your password!"), INFO_DIALOG);
+    msg_dialog::display(_("Password change"), _("Your password is about to expire, please change your password!"), INFO_DIALOG);
   }
 }
 
@@ -363,20 +363,13 @@ if (is_file("$plugin_dir/main.inc")){
 } else {
   msg_dialog::display(
             _("Plugin"),
-            sprintf(_("FATAL: Can't find any plugin definitions for plugin '%s'!"), $plug),
+            sprintf(_("FATAL: Cannot find any plugin definitions for plugin '%s'!"), $plug),
             FATAL_ERROR_DIALOG);
   exit();
 }
 
 
 /* Print_out last ErrorMessage repeated string. */
-if(isset($_GET['add'])){
-msg_dialog::display("Error"   ,"Kann datei nicht schreiben, bla",ERROR_DIALOG);
-msg_dialog::display("Warning" ,"Kann datei nicht schreiben, bla",WARNING_DIALOG);
-msg_dialog::display("Info"    ,"Kann datei nicht schreiben, bla",INFO_DIALOG);
-msg_dialog::display("Confirm" ,"Kann datei nicht schreiben, bla",CONFIRM_DIALOG);
-}
-
 $smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
 $smarty->assign("contents", $display);
 

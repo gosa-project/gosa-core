@@ -55,7 +55,7 @@ session::set('LastError',"");
 
 /* Check if CONFIG_FILE is accessible */
 if (!is_readable(CONFIG_DIR."/".CONFIG_FILE)){
-  msg_dialog::display("", sprintf(_("GOsa configuration %s/%s is not readable. Aborted."),CONFIG_DIR,CONFIG_FILE), FATAL_ERROR_DIALOG);
+  msg_dialog::display(_("Fatal error"), sprintf(_("GOsa configuration %s/%s is not readable. Aborted."),CONFIG_DIR,CONFIG_FILE), FATAL_ERROR_DIALOG);
   exit;
 }
 
@@ -75,7 +75,7 @@ if (isset ($config->data['MAIN']['COMPILE'])){
 
 /* Check for compile directory */
 if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))){
-  msg_dialog::display(_("Accessibility"), sprintf(_("Directory '%s' specified as compile directory is not accessible!"),
+  msg_dialog::display(_("Configuration error"), sprintf(_("Directory '%s' specified as compile directory is not accessible!"),
         $smarty->compile_dir), FATAL_ERROR_DIALOG);
   exit;
 }

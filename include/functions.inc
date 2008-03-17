@@ -1230,48 +1230,6 @@ function get_uid_regexp()
 }
 
 
-function print_red()
-{
-  trigger_error("Use of obsolete print_red");
-  /* Check number of arguments */
-  if (func_num_args() < 1){
-    return;
-  }
-
-  /* Get arguments, save string */
-  $array = func_get_args();
-  $string= $array[0];
-
-  /* Step through arguments */
-  for ($i= 1; $i<count($array); $i++){
-    $string= preg_replace ("/%s/", $array[$i], $string, 1);
-  }
-
-  /* If DEBUGLEVEL is set, we're in web mode, use textual output in
-     the other case... */
-  if($string !== NULL){
-    if (preg_match("/"._("LDAP error:")."/", $string)){
-      $addmsg= _("Problems with the LDAP server mean that you probably lost the last changes. Please check your LDAP setup for possible errors and try again.");
-    } else {
-      if (!preg_match('/[.!?]$/', $string)){
-        $string.= ".";
-      }
-      $string= preg_replace('/<br>/', ' ', $string);
-      $addmsg= _("Please check your input and fix the error. Press 'OK' to close this message box.");
-      $addmsg = "";
-    }
-    if(empty($addmsg)){
-      $addmsg = _("Error");
-    }
-    msg_dialog::display($addmsg, $string,ERROR_DIALOG);
-    return;
-  }else{
-    return;
-  }
-
-}
-
-
 function gen_locked_message($user, $dn)
 {
   global $plug, $config;
@@ -2209,17 +2167,17 @@ function get_base_from_hook($dn, $attrib)
         if (preg_match("/^[0-9]+$/", $output[0])){
           return ($output[0]);
         } else {
-          msg_dialog::display(_("Warning"), _("'base_hook' is not available. Using default base."), WARNING_DIALOG);
+          msg_dialog::display(_("Warning"), _("'base_hook' is not available. Using default base!"), WARNING_DIALOG);
           return ($config->current['UIDBASE']);
         }
       } else {
-        msg_dialog::display(_("Warning"), _("'base_hook' is not available. Using default base."), WARNING_DIALOG);
+        msg_dialog::display(_("Warning"), _("'base_hook' is not available. Using default base!"), WARNING_DIALOG);
         return ($config->current['UIDBASE']);
       }
 
     } else {
 
-      msg_dialog::display(_("Warning"), _("'base_hook' is not available. Using default base."), WARNING_DIALOG);
+      msg_dialog::display(_("Warning"), _("'base_hook' is not available. Using default base!"), WARNING_DIALOG);
       return ($config->current['UIDBASE']);
 
     }

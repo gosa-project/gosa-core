@@ -78,7 +78,7 @@
 
   	<div class='step4_container'>
         <div class='step4_name'>
-            {t}Automatic uids{/t}
+            {t}Automatic UIDs{/t}
         </div>
         <div class='step4_value'>
             {if $id_settings.idgen_active == FALSE}

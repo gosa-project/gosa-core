@@ -83,7 +83,7 @@ class divListUsers extends MultiSelectWindow
     
     $this->AddCheckBox("ShowTemplates"      ,msgPool::selectToView(_("Template"))             ,sprintf(_("Show %s"),_("templates")), false);
     $this->AddCheckBox("ShowFunctionalUsers",msgPool::selectToView(_("GOsa object"),"enabled"),sprintf(_("Show %s user"),_("functional")), true);
-    $this->AddCheckBox("ShowUnixUsers"      ,msgPool::selectToView(_("Posix"),"enabled")      ,sprintf(_("Show %s user"),_("posix")), true);
+    $this->AddCheckBox("ShowUnixUsers"      ,msgPool::selectToView(_("Posix"),"enabled")      ,sprintf(_("Show %s user"),_("POSIX")), true);
     $this->AddCheckBox("ShowMailUsers"      ,msgPool::selectToView(_("Mail"),"enabled")       ,sprintf(_("Show %s user"),_("mail")), true);
     $this->AddCheckBox("ShowSambaUsers"     ,msgPool::selectToView(_("Samba"),"enabled")      ,sprintf(_("Show %s user"),_("samba")), true);
     $this->AddCheckBox("ShowProxyUsers"     ,msgPool::selectToView(_("Proxy"),"enabled")      ,sprintf(_("Show %s user"),_("proxy")), true);

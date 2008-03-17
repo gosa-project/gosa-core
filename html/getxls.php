@@ -340,7 +340,7 @@ function dump_ldap ($mode= 0)
 
     //count number of users
     $user_nbr=count($user);
-    $worksheet->write('A1',sprintf(_("User List of %s on %s"), $dn, $date),$title_title);
+    $worksheet->write('A1',sprintf(_("User list of %s on %s"), $dn, $date),$title_title);
     $r=3;
     for($i=1;$i<$user_nbr;$i++)
     {
@@ -490,7 +490,7 @@ if(isset($_GET['n'])){
 }
 $acl = $ui->get_permissions($dn,"ldapmanager/xlsexport");
 if(!preg_match("/r/",$acl)){
-	msg_dialog::display(_("Permission denied!"),_("You are not allowed to perform this action."),FATAL_ERROR_DIALOG);
+	msg_dialog::display(_("Permission error"),_("You have no permission to do LDAP exports!"),FATAL_ERROR_DIALOG);
   exit();
 }
 

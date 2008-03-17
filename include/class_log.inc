@@ -104,7 +104,7 @@ class log {
           if(!$res){
             global $config;
             $config->current['LOGGING'] = preg_replace("/(^|,)mysql(,|$)/",",",$config->current['LOGGING']);
-            msg_dialog::display(_("Logging to MySQL disabled"),_("Logging to a MySQL database will be disabled for this session!"), INFO_DIALOG);
+            msg_dialog::display(_("MySQL error"),_("Logging to MySQL database will be disabled for this session!"), INFO_DIALOG);
           }
         }
       }

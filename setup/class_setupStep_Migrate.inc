@@ -158,13 +158,13 @@ class Step_Migrate extends setup_step
     $this->checks['outside_winstations']['ERROR_MSG'] = "";
     $this->search_outside_winstations();
 
-    $this->checks['uidNumber_usage']['TITLE']     = _("Checking for duplicate uid numbers");
+    $this->checks['uidNumber_usage']['TITLE']     = _("Checking for duplicated UID numbers");
     $this->checks['uidNumber_usage']['STATUS']    = FALSE;
     $this->checks['uidNumber_usage']['STATUS_MSG']= "";
     $this->checks['uidNumber_usage']['ERROR_MSG'] = "";
     $this->check_uidNumber();
     
-    $this->checks['gidNumber_usage']['TITLE']     = _("Checking for duplicate gid numbers");
+    $this->checks['gidNumber_usage']['TITLE']     = _("Checking for duplicate GID numbers");
     $this->checks['gidNumber_usage']['STATUS']    = FALSE;
     $this->checks['gidNumber_usage']['STATUS_MSG']= "";
     $this->checks['gidNumber_usage']['ERROR_MSG'] = "";

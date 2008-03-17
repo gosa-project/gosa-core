@@ -106,7 +106,7 @@ class config  {
       $msg = sprintf(_("XML error in gosa.conf: %s at line %d"),
             xml_error_string(xml_get_error_code($this->parser)),
             xml_get_current_line_number($this->parser));
-      msg_dialog::display(_("Config file parsing"), $msg, FATAL_ERROR_DIALOG);
+      msg_dialog::display(_("Configuration error"), $msg, FATAL_ERROR_DIALOG);
       exit;
     }
   }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-14 09:41+0100\n"
+"POT-Creation-Date: 2008-03-17 23:32+0100\n"
 "PO-Revision-Date: 2007-07-24 00:26+0200\n"
 "Last-Translator: ALEJANDRO ESCANERO BLANCO\n"
 "Language-Team:  <es@li.org>\n"
@@ -506,9 +506,9 @@ msgstr "Organización"
 #: plugins/admin/departments/class_departmentGeneric.inc:247
 #: plugins/admin/departments/class_departmentGeneric.inc:254
 #: plugins/admin/departments/class_departmentGeneric.inc:258
-#: plugins/admin/ogroups/class_ogroup.inc:614
-#: plugins/admin/ogroups/class_ogroup.inc:624
-#: plugins/admin/ogroups/class_ogroup.inc:771 html/getxls.php:225
+#: plugins/admin/ogroups/class_ogroup.inc:659
+#: plugins/admin/ogroups/class_ogroup.inc:669
+#: plugins/admin/ogroups/class_ogroup.inc:816 html/getxls.php:225
 #: html/getxls.php:292
 msgid "Name"
 msgstr "Nombre"
@@ -532,7 +532,7 @@ msgstr ""
 #: plugins/personal/posix/generic.tpl:4
 #: plugins/admin/groups/class_groupGeneric.inc:1013
 #: plugins/admin/departments/class_departmentGeneric.inc:527
-#: plugins/admin/ogroups/class_ogroup.inc:762
+#: plugins/admin/ogroups/class_ogroup.inc:807
 #: plugins/generic/references/class_reference.inc:40
 msgid "Generic"
 msgstr "Genérico"
@@ -606,11 +606,13 @@ msgid "Tweak some GOsa core behaviour"
 msgstr "Ajustar el comportamiento del núcleo común de GOsa"
 
 #: setup/class_setupStep_Config3.inc:193
-msgid "Session lifetime must be a numeric value."
+#, fuzzy
+msgid "Session lifetime must be a numeric value!"
 msgstr "Tiempo de vida de sesión debe ser un valor numérico"
 
 #: setup/class_setupStep_Config3.inc:197
-msgid "Maximal ldap query time must be a numeric value. "
+#, fuzzy
+msgid "Maximum LDAP query time must be a numeric value!"
 msgstr "Máximo tiempo de consulta LDAP debe ser un valor numérico."
 
 #: setup/class_setupStep_Feedback.inc:91
@@ -863,12 +865,14 @@ msgstr ""
 "trabajo windows"
 
 #: setup/class_setupStep_Migrate.inc:161
-msgid "Checking for duplicate uid numbers"
+#, fuzzy
+msgid "Checking for duplicated UID numbers"
 msgstr "Comprobando números uid duplicados"
 
 #: setup/class_setupStep_Migrate.inc:167
-msgid "Checking for duplicate gid numbers"
-msgstr "Comprobando números gid duplicados"
+#, fuzzy
+msgid "Checking for duplicate GID numbers"
+msgstr "Comprobando números uid duplicados"
 
 #: setup/class_setupStep_Migrate.inc:190 setup/class_setupStep_Migrate.inc:239
 #: setup/class_setupStep_Migrate.inc:301 setup/class_setupStep_Migrate.inc:362
@@ -893,9 +897,12 @@ msgstr "Posiblemente el objeto raíz está desaparecido"
 #: ihtml/themes/default/islocked.tpl:6 ihtml/themes/default/conflict.tpl:6
 #: ihtml/themes/default/remove.tpl:2 ihtml/themes/default/msg_dialog.tpl:57
 #: ihtml/themes/default/msg_dialog.tpl:102 include/class_tabs.inc:216
-#: include/functions.inc:699 include/functions.inc:2212
-#: include/functions.inc:2216 include/functions.inc:2222
+#: include/functions.inc:699 include/functions.inc:2170
+#: include/functions.inc:2174 include/functions.inc:2180
 #: plugins/personal/posix/class_posixAccount.inc:817
+#: plugins/personal/posix/class_posixAccount.inc:910
+#: plugins/admin/users/class_userManagement.inc:482
+#: plugins/admin/users/class_userManagement.inc:596
 #: plugins/admin/users/remove.tpl:2 plugins/admin/groups/remove.tpl:2
 #: plugins/admin/acl/remove.tpl:2
 #: plugins/admin/departments/dep_move_confirm.tpl:2
@@ -919,7 +926,7 @@ msgstr "Encontrado '%s' valores duplicados del atributo 'uidNumber'."
 #: setup/setup_checks.tpl:87 ihtml/themes/default/msg_dialog.tpl:76
 #: ihtml/themes/default/msg_dialog.tpl:78
 #: ihtml/themes/default/msg_dialog.tpl:131
-#: ihtml/themes/default/msg_dialog.tpl:133 include/utils/class_msgPool.inc:308
+#: ihtml/themes/default/msg_dialog.tpl:133 include/utils/class_msgPool.inc:314
 #, php-format
 msgid "Ok"
 msgstr "Ok"
@@ -997,7 +1004,7 @@ msgstr "No hay cuenta de administrador GOsa en la base de datos LDAP."
 
 #: setup/class_setupStep_Migrate.inc:883
 #: plugins/admin/users/class_divListUsers.inc:170
-#: plugins/admin/groups/class_divListGroup.inc:178
+#: plugins/admin/groups/class_divListGroup.inc:183
 #: plugins/admin/acl/class_divListACL.inc:161
 #: plugins/admin/departments/class_divListDepartment.inc:151
 #: plugins/admin/ogroups/class_divListOGroup.inc:202
@@ -1032,11 +1039,11 @@ msgstr "Por favor especifique un uid valido."
 
 #: setup/class_setupStep_Migrate.inc:1019 setup/setup_checks.tpl:30
 #: setup/setup_checks.tpl:91 ihtml/themes/default/msg_dialog.tpl:55
-#: ihtml/themes/default/msg_dialog.tpl:100 include/utils/class_msgPool.inc:147
-#: include/utils/class_msgPool.inc:159 include/utils/class_msgPool.inc:177
-#: include/utils/class_msgPool.inc:458 include/utils/class_msgPool.inc:477
-#: include/class_gosaSupportDaemon.inc:791
-#: include/class_gosaSupportDaemon.inc:811
+#: ihtml/themes/default/msg_dialog.tpl:100 include/utils/class_msgPool.inc:153
+#: include/utils/class_msgPool.inc:165 include/utils/class_msgPool.inc:183
+#: include/utils/class_msgPool.inc:464 include/utils/class_msgPool.inc:483
+#: include/class_gosaSupportDaemon.inc:794
+#: include/class_gosaSupportDaemon.inc:814
 #: include/class_CopyPasteHandler.inc:118
 #: include/class_CopyPasteHandler.inc:126
 #: include/class_CopyPasteHandler.inc:158
@@ -1050,8 +1057,7 @@ msgstr "Por favor especifique un uid valido."
 #: include/class_log.inc:157 include/class_log.inc:165
 #: include/class_log.inc:177 include/class_log.inc:192
 #: include/class_log.inc:205 include/class_log.inc:228
-#: include/class_msg_dialog.inc:97 include/functions.inc:1264
-#: plugins/personal/generic/class_user.inc:395
+#: include/class_msg_dialog.inc:97 plugins/personal/generic/class_user.inc:395
 #: plugins/personal/generic/class_user.inc:496
 #: plugins/personal/generic/class_user.inc:766
 #: plugins/personal/generic/class_user.inc:1296
@@ -1084,8 +1090,8 @@ msgstr ""
 #: include/functions.inc:371 include/functions.inc:380
 #: include/functions.inc:409 include/functions.inc:620
 #: include/functions.inc:652 include/functions.inc:691
-#: include/functions.inc:736 include/functions.inc:2544
-#: include/class_ldap.inc:649 include/class_ldap.inc:1115
+#: include/functions.inc:736 include/functions.inc:2502
+#: include/class_ldap.inc:648 include/class_ldap.inc:1114
 #: plugins/personal/generic/class_user.inc:682
 #: plugins/personal/generic/class_user.inc:1020
 #: plugins/personal/posix/class_posixAccount.inc:663
@@ -1100,8 +1106,8 @@ msgstr ""
 #: plugins/admin/departments/class_departmentGeneric.inc:351
 #: plugins/admin/departments/class_departmentGeneric.inc:619
 #: plugins/admin/departments/class_departmentGeneric.inc:650
-#: plugins/admin/ogroups/class_ogroup.inc:686
-#: plugins/admin/ogroups/class_ogroup.inc:700 html/index.php:255
+#: plugins/admin/ogroups/class_ogroup.inc:731
+#: plugins/admin/ogroups/class_ogroup.inc:745 html/index.php:255
 #: html/index.php:269 html/index.php:282
 #, fuzzy
 msgid "LDAP error"
@@ -1309,7 +1315,7 @@ msgstr ""
 #: setup/setup_migrate.tpl:305 setup/setup_migrate.tpl:358
 #: ihtml/themes/default/acl.tpl:8 ihtml/themes/default/acl.tpl:20
 #: ihtml/themes/default/acl.tpl:75 ihtml/themes/default/acl.tpl:89
-#: include/utils/class_msgPool.inc:314
+#: include/utils/class_msgPool.inc:320
 #, php-format
 msgid "Apply"
 msgstr "Aplicar"
@@ -1323,7 +1329,7 @@ msgstr "Aplicar"
 #: ihtml/themes/default/snapshotdialog.tpl:89 ihtml/themes/default/acl.tpl:77
 #: ihtml/themes/default/acl.tpl:91 ihtml/themes/default/copyPasteDialog.tpl:21
 #: ihtml/themes/default/remove.tpl:15 ihtml/themes/default/msg_dialog.tpl:79
-#: ihtml/themes/default/msg_dialog.tpl:134 include/utils/class_msgPool.inc:302
+#: ihtml/themes/default/msg_dialog.tpl:134 include/utils/class_msgPool.inc:308
 #, php-format
 msgid "Cancel"
 msgstr "Cancelar"
@@ -1349,14 +1355,14 @@ msgstr ""
 #: plugins/personal/generic/generic.tpl:170
 #: plugins/admin/users/class_divListUsers.inc:162
 #: plugins/admin/groups/class_groupGeneric.inc:1023
-#: plugins/admin/groups/class_divListGroup.inc:170
+#: plugins/admin/groups/class_divListGroup.inc:175
 #: plugins/admin/groups/generic.tpl:39 plugins/admin/acl/acl_role.tpl:27
 #: plugins/admin/acl/class_divListACL.inc:153
 #: plugins/admin/acl/class_aclRole.inc:704
 #: plugins/admin/departments/class_departmentGeneric.inc:538
 #: plugins/admin/departments/class_divListDepartment.inc:144
 #: plugins/admin/departments/generic.tpl:35
-#: plugins/admin/ogroups/class_ogroup.inc:772
+#: plugins/admin/ogroups/class_ogroup.inc:817
 #: plugins/admin/ogroups/class_divListOGroup.inc:194
 #: plugins/admin/ogroups/generic.tpl:26
 msgid "Base"
@@ -1402,6 +1408,7 @@ msgstr ""
 #: ihtml/themes/default/MultiSelectWindow.tpl:86
 #: ihtml/themes/default/msg_dialog.tpl:59
 #: ihtml/themes/default/msg_dialog.tpl:104
+#: plugins/admin/users/class_userManagement.inc:591
 #: plugins/admin/ogroups/class_ogroup.inc:169
 msgid "Information"
 msgstr ""
@@ -1641,27 +1648,28 @@ msgstr ""
 "y LDAP."
 
 #: setup/class_setupStep_Ldap.inc:105
-#, php-format
-msgid "Anonymous bind failed on server '%s'."
-msgstr "Ha fallado la Autenticación Anónima en el servidor '%s'."
+#, fuzzy, php-format
+msgid "Anonymous bind to server '%s' failed!"
+msgstr "La Autenticación Anónima en el servidor '%s'. ha tenido éxito."
 
 #: setup/class_setupStep_Ldap.inc:107
-#, php-format
-msgid "Bind as user '%s' failed on server '%s'."
+#, fuzzy, php-format
+msgid "Bind as user '%s' failed!"
 msgstr "Ha fallado la Autenticación como usuario '%s' en el servidor '%s'."
 
 #: setup/class_setupStep_Ldap.inc:112
-#, php-format
-msgid "Anonymous bind on server '%s' succeeded."
+#, fuzzy, php-format
+msgid "Anonymous bind to server '%s' succeeded."
 msgstr "La Autenticación Anónima en el servidor '%s'. ha tenido éxito."
 
 #: setup/class_setupStep_Ldap.inc:113
-msgid "Please specify user and password."
+#, fuzzy
+msgid "Please specify user and password!"
 msgstr "Por Favor especifique un usuario y contraseña"
 
 #: setup/class_setupStep_Ldap.inc:115
-#, php-format
-msgid "Bind as user '%s' on server '%s' succeeded."
+#, fuzzy, php-format
+msgid "Bind as user '%s' to server '%s' succeeded!"
 msgstr ""
 "La Autenticación como usuario '%s' en el servidor '%s'. ha tenido éxito."
 
@@ -1729,8 +1737,9 @@ msgid "Relaxed naming policies"
 msgstr ""
 
 #: setup/setup_config1.tpl:81
-msgid "Automatic uids"
-msgstr ""
+#, fuzzy
+msgid "Automatic UIDs"
+msgstr "Automatico"
 
 #: setup/setup_config1.tpl:97 setup/class_setupStep_Config1.inc:118
 msgid "GID / UID min id"
@@ -2049,7 +2058,7 @@ msgstr "Contraseña"
 
 #: ihtml/themes/default/pwd_heimdal.tpl:198
 #: ihtml/themes/default/copyPasteDialog.tpl:19
-#: include/utils/class_msgPool.inc:320 include/class_MultiSelectWindow.inc:134
+#: include/utils/class_msgPool.inc:326 include/class_MultiSelectWindow.inc:134
 #, php-format
 msgid "Save"
 msgstr "Guardar"
@@ -2067,31 +2076,43 @@ msgstr ""
 
 #: ihtml/themes/default/accountexpired.tpl:15
 #, fuzzy
-msgid "Your Password has expired. Please choose a new one!"
+msgid "Your password has expired. Please choose a new one!"
 msgstr "No tiene permisos para cambiar su contraseña."
 
 #: ihtml/themes/default/accountexpired.tpl:23
 #: ihtml/themes/default/accountexpired.tpl:27
-msgid "Old Password"
-msgstr ""
+#, fuzzy
+msgid "Old password"
+msgstr "contraseña"
 
 #: ihtml/themes/default/accountexpired.tpl:32
 #: ihtml/themes/default/accountexpired.tpl:36
-msgid "New Password"
+#: ihtml/themes/default/password.tpl:81 ihtml/themes/default/password.tpl:82
+#: plugins/personal/generic/password.tpl:7
+#: plugins/personal/generic/main.inc:86
+#: plugins/personal/password/password.tpl:18
+#: plugins/admin/users/password.tpl:13
+#: plugins/admin/users/class_userManagement.inc:245 html/password.php:200
+msgid "New password"
 msgstr ""
 
 #: ihtml/themes/default/accountexpired.tpl:41
 #: ihtml/themes/default/accountexpired.tpl:45
-msgid "Verify Password"
-msgstr ""
+#, fuzzy
+msgid "Verify password"
+msgstr "Contraseña del usuario"
 
 #: ihtml/themes/default/accountexpired.tpl:51
-msgid "Change Password"
-msgstr ""
+#: plugins/admin/users/class_divListUsers.inc:185
+#: plugins/admin/users/class_divListUsers.inc:339
+msgid "Change password"
+msgstr "Cambiar contraseña"
 
 #: ihtml/themes/default/accountexpired.tpl:52
-msgid "Click here to Change your password"
-msgstr ""
+#: ihtml/themes/default/password.tpl:101
+#, fuzzy
+msgid "Click here to change your password"
+msgstr "Permitir al usuario cambiar su contraseña"
 
 #: ihtml/themes/default/conflict.tpl:2
 msgid "Session conflict detected"
@@ -2150,7 +2171,7 @@ msgstr ""
 
 #: ihtml/themes/default/snapshotdialog.tpl:20
 #: ihtml/themes/default/snapshotdialog.tpl:62
-#: include/utils/class_msgPool.inc:455 include/class_acl.inc:663
+#: include/utils/class_msgPool.inc:461 include/class_acl.inc:663
 #: include/class_acl.inc:670 include/class_acl.inc:677
 #: include/class_acl.inc:683
 #: plugins/admin/departments/class_departmentGeneric.inc:492
@@ -2255,7 +2276,16 @@ msgid "Your password has been changed successfully."
 msgstr ""
 
 #: ihtml/themes/default/password.tpl:40
-#: plugins/admin/users/class_userManagement.inc:347
+#: plugins/personal/password/class_password.inc:79
+#: plugins/personal/password/class_password.inc:82
+#: plugins/personal/password/class_password.inc:85
+#: plugins/personal/password/class_password.inc:88
+#: plugins/personal/password/class_password.inc:91
+#: plugins/personal/password/class_password.inc:94
+#: plugins/personal/password/class_password.inc:108
+#: plugins/personal/password/class_password.inc:114
+#: plugins/admin/users/class_userManagement.inc:292
+#: plugins/admin/users/class_userManagement.inc:347 html/main.php:356
 #, fuzzy
 msgid "Password change"
 msgstr "Contraseña"
@@ -2270,15 +2300,6 @@ msgstr ""
 #: ihtml/themes/default/password.tpl:77 ihtml/themes/default/password.tpl:78
 #: plugins/personal/password/password.tpl:13 html/password.php:221
 msgid "Current password"
-msgstr ""
-
-#: ihtml/themes/default/password.tpl:81 ihtml/themes/default/password.tpl:82
-#: plugins/personal/generic/password.tpl:7
-#: plugins/personal/generic/main.inc:86
-#: plugins/personal/password/password.tpl:18
-#: plugins/admin/users/password.tpl:13
-#: plugins/admin/users/class_userManagement.inc:245 html/password.php:200
-msgid "New password"
 msgstr ""
 
 #: ihtml/themes/default/password.tpl:85 ihtml/themes/default/password.tpl:86
@@ -2296,11 +2317,6 @@ msgstr "La contraseña expira en"
 #, fuzzy
 msgid "Change"
 msgstr "Cancelar"
-
-#: ihtml/themes/default/password.tpl:101
-#, fuzzy
-msgid "Click here to change your password"
-msgstr "Permitir al usuario cambiar su contraseña"
 
 #: ihtml/themes/default/copyPasteDialog.tpl:1
 msgid "Copy & paste wizard"
@@ -2396,7 +2412,7 @@ msgid ""
 "and let me use filters instead"
 msgstr ""
 
-#: ihtml/themes/default/sizelimit.tpl:14 include/utils/class_msgPool.inc:338
+#: ihtml/themes/default/sizelimit.tpl:14 include/utils/class_msgPool.inc:344
 #: plugins/personal/generic/generic.tpl:137
 #, php-format
 msgid "Set"
@@ -2413,29 +2429,23 @@ msgstr ""
 msgid "So - if you're sure - press 'Delete' to continue or 'Cancel' to abort."
 msgstr ""
 
-#: include/class_certificate.inc:55
-msgid "Can't open specified file, check accessibility and or existence"
-msgstr ""
-
 #: include/class_certificate.inc:73
-msgid "Can't read specified certificate / or empty string given"
-msgstr ""
+#, fuzzy
+msgid "Certificate is empty!"
+msgstr "Número de serie del certificado"
 
 #: include/class_certificate.inc:100
-msgid "Can't load certificate, possibly unsupported format (use PEM/DER) "
+msgid "Cannot load certificate - only PEM/DER is supported!"
 msgstr ""
 
 #: include/class_certificate.inc:115
-msgid "The Format must be PEM, to output certificate informations"
-msgstr ""
-
-#: include/class_certificate.inc:212
-msgid "Can't create/open File"
+msgid "Cannot extract information for non PEM certificates!"
 msgstr ""
 
 #: include/class_certificate.inc:219
-msgid "No valid certificate loaded"
-msgstr ""
+#, fuzzy
+msgid "No valid certificate loaded!"
+msgstr "No hay certificados instalados"
 
 #: include/utils/class_msgPool.inc:15
 #, fuzzy, php-format
@@ -2447,305 +2457,326 @@ msgstr "Seleccione para ver los servidores"
 msgid "Select to list objects containig '%s'."
 msgstr "Seleccione para ver los servidores"
 
-#: include/utils/class_msgPool.inc:27
+#: include/utils/class_msgPool.inc:19
+#, fuzzy, php-format
+msgid "Select to list objects that have '%s' enabled"
+msgstr "Seleccione para ver los servidores"
+
+#: include/utils/class_msgPool.inc:21
+#: plugins/admin/ogroups/ogroup_objects.tpl:33
+msgid "Select to search within subtrees"
+msgstr "Seleccione para buscar dentro de los subárboles"
+
+#: include/utils/class_msgPool.inc:23
+#: plugins/personal/posix/posix_groups.tpl:68
+#: plugins/admin/ogroups/ogroup_objects.tpl:33
+msgid "Search in subtrees"
+msgstr "Buscar en subárboles"
+
+#: include/utils/class_msgPool.inc:33
 msgid "This object will be deleted!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:29
+#: include/utils/class_msgPool.inc:35
 #, php-format
 msgid "This '%s' object will be deleted!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:34
+#: include/utils/class_msgPool.inc:40
 #, php-format
 msgid "This object will be deleted: %s"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:36
+#: include/utils/class_msgPool.inc:42
 #, php-format
 msgid "This '%s' object will be deleted: %s"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:41
-msgid "This object will be deleted:"
-msgstr ""
-
-#: include/utils/class_msgPool.inc:43
-#, php-format
-msgid "This '%s' object will be deleted:"
-msgstr ""
-
 #: include/utils/class_msgPool.inc:47
-#, php-format
-msgid "These objects will be deleted: %s"
+msgid "This object will be deleted:"
 msgstr ""
 
 #: include/utils/class_msgPool.inc:49
 #, php-format
+msgid "This '%s' object will be deleted:"
+msgstr ""
+
+#: include/utils/class_msgPool.inc:53
+#, php-format
+msgid "These objects will be deleted: %s"
+msgstr ""
+
+#: include/utils/class_msgPool.inc:55
+#, php-format
 msgid "These '%s' objects will be deleted: %s"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:57
+#: include/utils/class_msgPool.inc:63
 #, fuzzy
 msgid "You have no permission to delete this object!"
 msgstr "No tiene permisos para eliminar este departamento."
 
-#: include/utils/class_msgPool.inc:61 include/utils/class_msgPool.inc:65
+#: include/utils/class_msgPool.inc:67 include/utils/class_msgPool.inc:71
 #, fuzzy
 msgid "You have no permission to delete the object:"
 msgstr "No tiene permisos para eliminar este departamento."
 
-#: include/utils/class_msgPool.inc:68
+#: include/utils/class_msgPool.inc:74
 #, fuzzy
 msgid "You have no permission to delete these objects:"
 msgstr "No tiene permisos para eliminar este departamento."
 
-#: include/utils/class_msgPool.inc:75
+#: include/utils/class_msgPool.inc:81
 #, fuzzy
 msgid "You have no permission to create this object!"
 msgstr "No tiene permisos para eliminar este departamento."
 
-#: include/utils/class_msgPool.inc:79 include/utils/class_msgPool.inc:83
+#: include/utils/class_msgPool.inc:85 include/utils/class_msgPool.inc:89
 #, fuzzy
 msgid "You have no permission to create the object:"
 msgstr "No tiene permisos para eliminar este departamento."
 
-#: include/utils/class_msgPool.inc:86
+#: include/utils/class_msgPool.inc:92
 #, fuzzy
 msgid "You have no permission to create these objects:"
 msgstr "No tiene permisos para eliminar este departamento."
 
-#: include/utils/class_msgPool.inc:93
+#: include/utils/class_msgPool.inc:99
 #, fuzzy
 msgid "You have no permission to modify this object!"
 msgstr "No tiene permisos para mover este objeto a '%s'."
 
-#: include/utils/class_msgPool.inc:97 include/utils/class_msgPool.inc:101
+#: include/utils/class_msgPool.inc:103 include/utils/class_msgPool.inc:107
 #, fuzzy
 msgid "You have no permission to modify the object:"
 msgstr "No tiene permisos para mover este objeto a '%s'."
 
-#: include/utils/class_msgPool.inc:104
+#: include/utils/class_msgPool.inc:110
 #, fuzzy
 msgid "You have no permission to modify these objects:"
 msgstr "No tiene permisos para mover este objeto a '%s'."
 
-#: include/utils/class_msgPool.inc:111
+#: include/utils/class_msgPool.inc:117
 #, fuzzy
 msgid "You have no permission to view this object!"
 msgstr "No tiene permisos para mover este objeto a '%s'."
 
-#: include/utils/class_msgPool.inc:115 include/utils/class_msgPool.inc:119
+#: include/utils/class_msgPool.inc:121 include/utils/class_msgPool.inc:125
 #, fuzzy
 msgid "You have no permission to view the object:"
 msgstr "No tiene permisos para cambiar su contraseña."
 
-#: include/utils/class_msgPool.inc:122
+#: include/utils/class_msgPool.inc:128
 #, fuzzy
 msgid "You have no permission to view these objects:"
 msgstr "No tiene permisos para mover este objeto a '%s'."
 
-#: include/utils/class_msgPool.inc:129
+#: include/utils/class_msgPool.inc:135
 #, fuzzy
 msgid "You have no permission to move this object!"
 msgstr "No tiene permisos para mover este objeto a '%s'."
 
-#: include/utils/class_msgPool.inc:133 include/utils/class_msgPool.inc:137
+#: include/utils/class_msgPool.inc:139 include/utils/class_msgPool.inc:143
 #, fuzzy
 msgid "You have no permission to move the object:"
 msgstr "No tiene permisos para mover este objeto a '%s'."
 
-#: include/utils/class_msgPool.inc:140
+#: include/utils/class_msgPool.inc:146
 #, fuzzy
 msgid "You have no permission to move these objects:"
 msgstr "No tiene permisos para mover este objeto a '%s'."
 
-#: include/utils/class_msgPool.inc:150 include/utils/class_msgPool.inc:162
-#: include/utils/class_msgPool.inc:180
+#: include/utils/class_msgPool.inc:156 include/utils/class_msgPool.inc:168
+#: include/utils/class_msgPool.inc:186
 #, fuzzy
 msgid "Connection information"
 msgstr "Información genérica del usuario"
 
-#: include/utils/class_msgPool.inc:152
+#: include/utils/class_msgPool.inc:158
 #, php-format
 msgid "Cannot connect to %s database!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:164
+#: include/utils/class_msgPool.inc:170
 #, fuzzy, php-format
 msgid "Cannot select %s database!"
 msgstr ""
 "La Autenticación como usuario '%s' en el servidor '%s'. ha tenido éxito."
 
-#: include/utils/class_msgPool.inc:170
+#: include/utils/class_msgPool.inc:176
 #, php-format
 msgid "No %s server defined!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:182
+#: include/utils/class_msgPool.inc:188
 #, fuzzy, php-format
 msgid "Cannot query %s database!"
 msgstr ""
 "La Autenticación como usuario '%s' en el servidor '%s'. ha tenido éxito."
 
-#: include/utils/class_msgPool.inc:188
+#: include/utils/class_msgPool.inc:194
 #, fuzzy, php-format
 msgid "The field '%s' contains a reserved keyword!"
 msgstr "El campo 'Fax' tiene un número de teléfono no valido."
 
-#: include/utils/class_msgPool.inc:194
+#: include/utils/class_msgPool.inc:200
 #, php-format
 msgid "Command specified as %s hook for plugin '%s' does not exist!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:201
+#: include/utils/class_msgPool.inc:207
 #, php-format
 msgid "'%s' command is invalid!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:203
+#: include/utils/class_msgPool.inc:209
 #, php-format
 msgid "'%s' command (%s) for plugin %s is invalid!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:205
+#: include/utils/class_msgPool.inc:211
 #, php-format
 msgid "'%s' command for plugin %s is invalid!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:207
+#: include/utils/class_msgPool.inc:213
 #, php-format
 msgid "'%s' command (%s) is invalid!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:215
+#: include/utils/class_msgPool.inc:221
 #, fuzzy, php-format
 msgid "Cannot execute '%s' command!"
 msgstr ""
 "La Autenticación como usuario '%s' en el servidor '%s'. ha tenido éxito."
 
-#: include/utils/class_msgPool.inc:217
+#: include/utils/class_msgPool.inc:223
 #, php-format
 msgid "Cannot execute '%s' command (%s) for plugin %s!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:219
+#: include/utils/class_msgPool.inc:225
 #, php-format
 msgid "Cannot execute '%s' command for plugin %s!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:221
+#: include/utils/class_msgPool.inc:227
 #, fuzzy, php-format
 msgid "Cannot execute '%s' command (%s)!"
 msgstr ""
 "La Autenticación como usuario '%s' en el servidor '%s'. ha tenido éxito."
 
-#: include/utils/class_msgPool.inc:229
+#: include/utils/class_msgPool.inc:235
 #, fuzzy, php-format
 msgid "Value for '%s' is too large!"
 msgstr "El valor especificado como 'UID' es demasiado pequeño."
 
-#: include/utils/class_msgPool.inc:231
+#: include/utils/class_msgPool.inc:237
 #, php-format
 msgid "'%s' must be smaller than %d!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:239
+#: include/utils/class_msgPool.inc:245
 #, fuzzy, php-format
 msgid "Value for '%s' is too small!"
 msgstr "El valor especificado como 'UID' es demasiado pequeño."
 
-#: include/utils/class_msgPool.inc:241
+#: include/utils/class_msgPool.inc:247
 #, fuzzy, php-format
 msgid "'%s' must be %d or above!"
 msgstr "PHP debe ser versión '%s'/'%s' o superior."
 
-#: include/utils/class_msgPool.inc:248
+#: include/utils/class_msgPool.inc:254
 #, php-format
 msgid "'%s' depends on '%s' - please provide both values!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:254
+#: include/utils/class_msgPool.inc:260
 #, fuzzy, php-format
 msgid "There is already an entry with this '%s' attribute in the system!"
 msgstr "Ya existe un usuario con este 'Login' en la base de datos."
 
-#: include/utils/class_msgPool.inc:260
+#: include/utils/class_msgPool.inc:266
 #, fuzzy, php-format
 msgid "The required field '%s' is empty!"
 msgstr "No se ha asignado ningún valor al campo obligatorio 'Nombre'."
 
-#: include/utils/class_msgPool.inc:268
+#: include/utils/class_msgPool.inc:274
 msgid "Example"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:285 include/utils/class_msgPool.inc:289
+#: include/utils/class_msgPool.inc:291
 #, fuzzy, php-format
 msgid "The Field '%s' contains invalid characters"
 msgstr "El campo 'Nombre' no tiene caracteres validos."
 
-#: include/utils/class_msgPool.inc:286
+#: include/utils/class_msgPool.inc:292
 #, php-format
 msgid "'%s' is not allowed:"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:286
+#: include/utils/class_msgPool.inc:292
 #, php-format
 msgid "'%s' are not allowed!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:296
+#: include/utils/class_msgPool.inc:295
+#, fuzzy, php-format
+msgid "The Field '%s' contains invalid characters!"
+msgstr "El campo 'Nombre' no tiene caracteres validos."
+
+#: include/utils/class_msgPool.inc:302
 #, fuzzy, php-format
 msgid "Missing %s PHP extension!"
 msgstr "Eliminar extensión de impresión"
 
-#: include/utils/class_msgPool.inc:326
+#: include/utils/class_msgPool.inc:332
 #, php-format
 msgid "Add"
 msgstr "Añadir"
 
-#: include/utils/class_msgPool.inc:326
+#: include/utils/class_msgPool.inc:332
 #, fuzzy, php-format
 msgid "Add %s"
 msgstr "Añadir"
 
-#: include/utils/class_msgPool.inc:332 include/class_acl.inc:430
+#: include/utils/class_msgPool.inc:338 include/class_acl.inc:430
 #: include/class_acl.inc:473 plugins/admin/acl/class_aclRole.inc:361
 #: plugins/admin/acl/class_aclRole.inc:406
 #, php-format
 msgid "Delete"
 msgstr "Eliminar"
 
-#: include/utils/class_msgPool.inc:332
+#: include/utils/class_msgPool.inc:338
 #, fuzzy, php-format
 msgid "Delete %s"
 msgstr "Eliminar"
 
-#: include/utils/class_msgPool.inc:338
+#: include/utils/class_msgPool.inc:344
 #, php-format
 msgid "Set %s"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:344
+#: include/utils/class_msgPool.inc:350
 #, fuzzy, php-format
 msgid "Edit..."
 msgstr "Editar"
 
-#: include/utils/class_msgPool.inc:344
+#: include/utils/class_msgPool.inc:350
 #, fuzzy, php-format
 msgid "Edit %s..."
 msgstr "Editar usuario"
 
-#: include/utils/class_msgPool.inc:350
+#: include/utils/class_msgPool.inc:356
 msgid "Back"
 msgstr "Atrás"
 
-#: include/utils/class_msgPool.inc:368
+#: include/utils/class_msgPool.inc:374
 #, fuzzy, php-format
 msgid "This account has no valid %s extensions!"
 msgstr "Esta cuenta no tiene extensiones GOsa validas"
 
-#: include/utils/class_msgPool.inc:374
+#: include/utils/class_msgPool.inc:380
 #, fuzzy, php-format
 msgid ""
 "This account has %s settings enabled. You can disable them by clicking below."
@@ -2753,7 +2784,7 @@ msgstr ""
 "Esta cuenta tiene características posix activadas. Puede desactivarla "
 "pulsando aquí"
 
-#: include/utils/class_msgPool.inc:377 include/utils/class_msgPool.inc:384
+#: include/utils/class_msgPool.inc:383 include/utils/class_msgPool.inc:390
 #, fuzzy, php-format
 msgid ""
 "This account has %s settings enabled. To disable them, you'll need to remove "
@@ -2762,7 +2793,7 @@ msgstr ""
 "Esta cuenta tiene las características unix activadas. Para desactivarlas, "
 "necesita eliminar la cuenta samba / entorno primero."
 
-#: include/utils/class_msgPool.inc:393
+#: include/utils/class_msgPool.inc:399
 #, fuzzy, php-format
 msgid ""
 "This account has %s settings disabled. You can enable them by clicking below."
@@ -2770,7 +2801,7 @@ msgstr ""
 "Esta cuenta tiene la extensión posix desactivada. Puede activarla pulsando "
 "aquí."
 
-#: include/utils/class_msgPool.inc:396
+#: include/utils/class_msgPool.inc:402
 #, fuzzy, php-format
 msgid ""
 "This account has %s settings disabled. To enable them, you'll need to add "
@@ -2779,7 +2810,7 @@ msgstr ""
 "Esta cuenta tiene las características unix activadas. Para desactivarlas, "
 "necesita eliminar la cuenta samba / entorno primero."
 
-#: include/utils/class_msgPool.inc:403
+#: include/utils/class_msgPool.inc:409
 #, fuzzy, php-format
 msgid ""
 "This account has %s features settings. To disable them, you'll need to add "
@@ -2788,153 +2819,206 @@ msgstr ""
 "Esta cuenta tiene las características unix activadas. Para desactivarlas, "
 "necesita eliminar la cuenta samba / entorno primero."
 
-#: include/utils/class_msgPool.inc:411
+#: include/utils/class_msgPool.inc:417
 #, fuzzy, php-format
 msgid "Add %s settings"
 msgstr "Parametros Unix"
 
-#: include/utils/class_msgPool.inc:417
+#: include/utils/class_msgPool.inc:423
 #, fuzzy, php-format
 msgid "Remove %s settings"
 msgstr "Parámetros genéricos del usuario"
 
-#: include/utils/class_msgPool.inc:423
+#: include/utils/class_msgPool.inc:429
 msgid "Click the 'Edit' button below to change informations in this dialog"
 msgstr ""
 "Pulse en el botón - Editar - para cambiar la información en esta ventana"
 
-#: include/utils/class_msgPool.inc:429
+#: include/utils/class_msgPool.inc:435
 msgid "January"
 msgstr "Enero"
 
-#: include/utils/class_msgPool.inc:429
+#: include/utils/class_msgPool.inc:435
 msgid "February"
 msgstr "Febrero"
 
-#: include/utils/class_msgPool.inc:429
+#: include/utils/class_msgPool.inc:435
 msgid "March"
 msgstr "Marzo"
 
-#: include/utils/class_msgPool.inc:429
+#: include/utils/class_msgPool.inc:435
 msgid "April"
 msgstr "Abril"
 
-#: include/utils/class_msgPool.inc:430
+#: include/utils/class_msgPool.inc:436
 msgid "May"
 msgstr "Mayo"
 
-#: include/utils/class_msgPool.inc:430
+#: include/utils/class_msgPool.inc:436
 msgid "June"
 msgstr "Junio"
 
-#: include/utils/class_msgPool.inc:430
+#: include/utils/class_msgPool.inc:436
 msgid "July"
 msgstr "Julio"
 
-#: include/utils/class_msgPool.inc:430
+#: include/utils/class_msgPool.inc:436
 msgid "August"
 msgstr "Agosto"
 
-#: include/utils/class_msgPool.inc:430
+#: include/utils/class_msgPool.inc:436
 msgid "September"
 msgstr "Septiembre"
 
-#: include/utils/class_msgPool.inc:431
+#: include/utils/class_msgPool.inc:437
 msgid "October"
 msgstr "Octubre"
 
-#: include/utils/class_msgPool.inc:431
+#: include/utils/class_msgPool.inc:437
 msgid "November"
 msgstr "Noviembre"
 
-#: include/utils/class_msgPool.inc:431
+#: include/utils/class_msgPool.inc:437
 msgid "December"
 msgstr "Diciembre"
 
-#: include/utils/class_msgPool.inc:437
+#: include/utils/class_msgPool.inc:443
 #, fuzzy
 msgid "Sunday"
 msgstr "Junio"
 
-#: include/utils/class_msgPool.inc:437
+#: include/utils/class_msgPool.inc:443
 #, fuzzy
 msgid "Monday"
 msgstr "mes"
 
-#: include/utils/class_msgPool.inc:437
+#: include/utils/class_msgPool.inc:443
 msgid "Tuesday"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:437
+#: include/utils/class_msgPool.inc:443
 #, fuzzy
 msgid "Wednesday"
 msgstr "Miércoles"
 
-#: include/utils/class_msgPool.inc:437
+#: include/utils/class_msgPool.inc:443
 msgid "Thursday"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:437
+#: include/utils/class_msgPool.inc:443
 msgid "Friday"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:437
+#: include/utils/class_msgPool.inc:443
 msgid "Saturday"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:444
+#: include/utils/class_msgPool.inc:450
 #, fuzzy
 msgid "read operation"
 msgstr "Eliminar opciones"
 
-#: include/utils/class_msgPool.inc:444
+#: include/utils/class_msgPool.inc:450
 msgid "add operation"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:444
+#: include/utils/class_msgPool.inc:450
 msgid "modify operation"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:445
+#: include/utils/class_msgPool.inc:451
 msgid "delete operation"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:445
+#: include/utils/class_msgPool.inc:451
 msgid "search operation"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:445
+#: include/utils/class_msgPool.inc:451
 #, fuzzy
 msgid "authentication"
 msgstr "Tipo de autentificación IAX"
 
-#: include/utils/class_msgPool.inc:448
+#: include/utils/class_msgPool.inc:454
 #, fuzzy, php-format
 msgid "LDAP %s failed!"
 msgstr "La consulta LDAP ha fallado"
 
-#: include/utils/class_msgPool.inc:450
+#: include/utils/class_msgPool.inc:456
 #, fuzzy
 msgid "LDAP operation failed!"
 msgstr "La consulta LDAP ha fallado"
 
-#: include/utils/class_msgPool.inc:465
+#: include/utils/class_msgPool.inc:471
 msgid "Upload failed!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:468
+#: include/utils/class_msgPool.inc:474
 #, fuzzy, php-format
 msgid "Upload failed: %s"
 msgstr "Servicio de Registro de sistema"
 
-#: include/utils/class_msgPool.inc:475
+#: include/utils/class_msgPool.inc:481
 msgid "Communication failure with the infrastructure service!"
 msgstr ""
 
-#: include/utils/class_msgPool.inc:477
+#: include/utils/class_msgPool.inc:483
 #, php-format
 msgid "Communication failure with the infrastructure service: %s"
 msgstr ""
+
+#: include/utils/class_msgPool.inc:490 include/utils/class_msgPool.inc:493
+#, php-format
+msgid "This '%s' is still in use by this object: %s"
+msgstr ""
+
+#: include/utils/class_msgPool.inc:495
+#, fuzzy, php-format
+msgid "This '%s' is still in use by these objects: %s"
+msgstr ""
+"Este Rol no puede ser eliminado por estar siendo usado. Los siguientes "
+"objetos están usando este rol %s"
+
+#: include/utils/class_msgPool.inc:501
+#, php-format
+msgid "File '%s' does not exist!"
+msgstr ""
+
+#: include/utils/class_msgPool.inc:507
+#, fuzzy, php-format
+msgid "Cannot open file '%s' for reading!"
+msgstr "No se puede grabar el archivo '%s'."
+
+#: include/utils/class_msgPool.inc:513
+#, fuzzy, php-format
+msgid "Cannot open file '%s' for writing!"
+msgstr "No se puede grabar el archivo '%s'."
+
+#: include/utils/class_msgPool.inc:519
+#, fuzzy, php-format
+msgid "Cannot delete file '%s'!"
+msgstr ""
+"La Autenticación como usuario '%s' en el servidor '%s'. ha tenido éxito."
+
+#: include/utils/class_msgPool.inc:525
+#, fuzzy, php-format
+msgid "Cannot create folder '%s'!"
+msgstr "Crear nuevo departamento"
+
+#: include/utils/class_msgPool.inc:531
+#, fuzzy, php-format
+msgid "Cannot delete folder '%s'!"
+msgstr "Crear nuevo departamento"
+
+#: include/utils/class_msgPool.inc:537
+#, php-format
+msgid "Choose subtree to place %s in"
+msgstr ""
+
+#: include/utils/class_msgPool.inc:543
+#, fuzzy, php-format
+msgid "Checking for %s support"
+msgstr "Comprobando soporte mhash"
 
 #: include/utils/class_timezone.inc:51
 #: include/password-methods/class_password-methods-ssha.inc:51
@@ -2945,10 +3029,11 @@ msgstr ""
 #: include/class_CopyPasteHandler.inc:184
 #: include/class_CopyPasteHandler.inc:193 include/class_plugin.inc:1159
 #: include/class_plugin.inc:1171 include/class_pluglist.inc:149
-#: include/class_config.inc:561 include/functions.inc:605
-#: include/functions.inc:2563 include/functions.inc:2590
-#: plugins/admin/groups/class_groupGeneric.inc:152
-#: plugins/admin/groups/class_groupGeneric.inc:546 html/index.php:217
+#: include/class_config.inc:109 include/class_config.inc:561
+#: include/functions.inc:605 include/functions.inc:2521
+#: include/functions.inc:2552 plugins/admin/groups/class_groupGeneric.inc:152
+#: plugins/admin/groups/class_groupGeneric.inc:546 html/password.php:78
+#: html/main.php:217 html/index.php:141 html/index.php:217
 #, fuzzy
 msgid "Configuration error"
 msgstr "Se puede escribir en la configuración"
@@ -2960,17 +3045,17 @@ msgid ""
 "correct timezone offset."
 msgstr ""
 
-#: include/class_gosaSupportDaemon.inc:511
+#: include/class_gosaSupportDaemon.inc:514
 #, fuzzy
 msgid "Cannot not parse XML!"
 msgstr "¡Demasiados usuarios!, no hay identificadores (ID) libres"
 
-#: include/class_gosaSupportDaemon.inc:791
+#: include/class_gosaSupportDaemon.inc:794
 #, php-format
 msgid "Cannot send abort event for entry %s!"
 msgstr ""
 
-#: include/class_gosaSupportDaemon.inc:811
+#: include/class_gosaSupportDaemon.inc:814
 #, php-format
 msgid "Cannot remove entry %s!"
 msgstr ""
@@ -2985,6 +3070,7 @@ msgstr ""
 #: include/class_acl.inc:1115 include/class_acl.inc:1120
 #: plugins/admin/acl/tabs_acl.inc:28
 #: plugins/admin/acl/class_aclManagement.inc:26
+#: plugins/admin/acl/class_aclManagement.inc:309
 #: plugins/admin/acl/class_divListACL.inc:259
 #: plugins/admin/acl/class_aclRole.inc:360
 #: plugins/admin/acl/class_aclRole.inc:361
@@ -2993,59 +3079,6 @@ msgstr "ACL"
 
 #: include/class_tabs.inc:346
 msgid "References"
-msgstr ""
-
-#: include/class_hostActionQueue.inc:69 include/class_hostActionQueue.inc:194
-#, fuzzy, php-format
-msgid "Can't locate gotomasses queue file '%s'."
-msgstr "No puedo crear el fichero '%s'."
-
-#: include/class_hostActionQueue.inc:73
-#, fuzzy, php-format
-msgid "Can't read gotomasses queue file '%s'."
-msgstr "No puedo crear el fichero '%s'."
-
-#: include/class_hostActionQueue.inc:80
-#, fuzzy, php-format
-msgid "Can't read gotomasses storage file '%s'."
-msgstr "No puedo crear el fichero '%s'."
-
-#: include/class_hostActionQueue.inc:143
-msgid "GOsa infrastructure"
-msgstr ""
-
-#: include/class_hostActionQueue.inc:143
-msgid "Cannot read broken entry - skipped!"
-msgstr ""
-
-#: include/class_hostActionQueue.inc:198 include/class_hostActionQueue.inc:207
-#, fuzzy, php-format
-msgid "Can't write gotomasses queue file '%s'."
-msgstr "No puedo crear el fichero '%s'."
-
-#: include/class_hostActionQueue.inc:202
-msgid "The queue file was modified since last reload. Can't save changes."
-msgstr ""
-
-#: include/class_hostActionQueue.inc:277
-#, php-format
-msgid "Entry with id '%s' not found."
-msgstr ""
-
-#: include/class_hostActionQueue.inc:287
-#, php-format
-msgid "Could not update entry, entry with id '%s' not found."
-msgstr ""
-
-#: include/class_hostActionQueue.inc:298
-#, php-format
-msgid "Could not remove entry, entry with id '%s' not found."
-msgstr ""
-
-#: include/class_hostActionQueue.inc:372 include/class_hostActionQueue.inc:390
-#: include/class_hostActionQueue.inc:421 include/class_hostActionQueue.inc:456
-#, php-format
-msgid "Can't set priority for ID '%s'. ID does not exist."
 msgstr ""
 
 #: include/class_CopyPasteHandler.inc:118
@@ -3062,13 +3095,7 @@ msgstr ""
 #: include/class_CopyPasteHandler.inc:118
 #: include/class_CopyPasteHandler.inc:183
 #, php-format
-msgid "cannot set permission for '%s'"
-msgstr ""
-
-#: include/class_CopyPasteHandler.inc:126
-#: include/class_CopyPasteHandler.inc:175
-#, php-format
-msgid "no write permission in '%s'"
+msgid "Cannot set permission for '%s'"
 msgstr ""
 
 #: include/class_CopyPasteHandler.inc:158
@@ -3080,21 +3107,16 @@ msgstr ""
 #: include/class_CopyPasteHandler.inc:269 include/class_acl.inc:826
 #: include/class_log.inc:88 include/functions.inc:450
 #: include/functions.inc:595 include/functions.inc:681
-#: include/functions.inc:1068 include/functions.inc:1916
-#: include/functions.inc:1950 include/functions.inc:1970
-#: include/class_ldap.inc:592 include/class_ldap.inc:640 html/getvcard.php:39
+#: include/functions.inc:1068 include/functions.inc:1874
+#: include/functions.inc:1908 include/functions.inc:1928
+#: include/class_ldap.inc:591 include/class_ldap.inc:639 html/getvcard.php:39
 #, fuzzy
 msgid "Internal error"
 msgstr "Insertar separador"
 
-#: include/class_CopyPasteHandler.inc:192
-#, fuzzy, php-format
-msgid "cannot open file '%s' for writing"
-msgstr "No se puede grabar el archivo '%s'."
-
-#: include/class_CopyPasteHandler.inc:268
+#: include/class_CopyPasteHandler.inc:175
 #, php-format
-msgid "cannot open '%s' for reading"
+msgid "No write permission in '%s'"
 msgstr ""
 
 #: include/class_CopyPasteHandler.inc:364
@@ -3110,8 +3132,8 @@ msgstr ""
 #: include/class_CopyPasteHandler.inc:479
 #: plugins/admin/users/class_divListUsers.inc:210
 #: plugins/admin/users/class_divListUsers.inc:213
-#: plugins/admin/groups/class_divListGroup.inc:215
-#: plugins/admin/groups/class_divListGroup.inc:218
+#: plugins/admin/groups/class_divListGroup.inc:220
+#: plugins/admin/groups/class_divListGroup.inc:223
 #: plugins/admin/acl/class_divListACL.inc:184
 #: plugins/admin/acl/class_divListACL.inc:187
 #: plugins/admin/ogroups/class_divListOGroup.inc:239
@@ -3267,7 +3289,7 @@ msgstr "Abajo"
 
 #: include/class_acl.inc:429 include/class_acl.inc:472
 #: plugins/admin/users/class_divListUsers.inc:183
-#: plugins/admin/groups/class_divListGroup.inc:190
+#: plugins/admin/groups/class_divListGroup.inc:195
 #: plugins/admin/acl/class_aclRole.inc:360
 #: plugins/admin/acl/class_aclRole.inc:405
 msgid "Edit"
@@ -3405,11 +3427,12 @@ msgid "Logging failed: %s"
 msgstr "Servicio de Registro de sistema"
 
 #: include/class_log.inc:107
-msgid "Logging to MySQL disabled"
-msgstr ""
+#, fuzzy
+msgid "MySQL error"
+msgstr "Servicio LDAP"
 
 #: include/class_log.inc:107
-msgid "Logging to a MySQL database will be disabled for this session!"
+msgid "Logging to MySQL database will be disabled for this session!"
 msgstr ""
 
 #: include/class_log.inc:120
@@ -3506,7 +3529,7 @@ msgstr "Recargar lista"
 
 #: include/class_MultiSelectWindow.inc:263
 #: plugins/admin/users/class_divListUsers.inc:164
-#: plugins/admin/groups/class_divListGroup.inc:171
+#: plugins/admin/groups/class_divListGroup.inc:176
 #: plugins/admin/acl/class_divListACL.inc:155
 #: plugins/admin/departments/class_divListDepartment.inc:146
 #: plugins/admin/ogroups/class_divListOGroup.inc:196
@@ -3546,10 +3569,6 @@ msgstr ""
 msgid "XML error in gosa.conf: %s at line %d"
 msgstr ""
 
-#: include/class_config.inc:109
-msgid "Config file parsing"
-msgstr ""
-
 #: include/class_config.inc:228
 msgid "Cannot bind to LDAP. Please contact the system administrator."
 msgstr ""
@@ -3578,7 +3597,7 @@ msgstr ""
 #: plugins/admin/departments/class_departmentGeneric.inc:250
 #: plugins/admin/departments/class_departmentGeneric.inc:536
 #: plugins/admin/departments/generic.tpl:16
-#: plugins/admin/ogroups/class_ogroup.inc:773
+#: plugins/admin/ogroups/class_ogroup.inc:818
 #: plugins/admin/ogroups/generic.tpl:15
 #: plugins/generic/references/contents.tpl:11 html/getxls.php:160
 #: html/getxls.php:289
@@ -3653,223 +3672,207 @@ msgstr ""
 msgid "incomplete"
 msgstr ""
 
-#: include/functions.inc:1253
-msgid "LDAP error:"
-msgstr ""
-
-#: include/functions.inc:1254
-msgid ""
-"Problems with the LDAP server mean that you probably lost the last changes. "
-"Please check your LDAP setup for possible errors and try again."
-msgstr ""
-
-#: include/functions.inc:1260
-msgid ""
-"Please check your input and fix the error. Press 'OK' to close this message "
-"box."
-msgstr ""
-
-#: include/functions.inc:1325
+#: include/functions.inc:1283
 msgid "Continue anyway"
 msgstr ""
 
-#: include/functions.inc:1327
+#: include/functions.inc:1285
 msgid "Edit anyway"
 msgstr ""
 
-#: include/functions.inc:1329
+#: include/functions.inc:1287
 #, fuzzy, php-format
 msgid "You're going to edit the LDAP entry/entries '%s'"
 msgstr "Has decidido eliminar las siguientes entradas %s"
 
-#: include/functions.inc:1513
+#: include/functions.inc:1471
 msgid "Entries per page"
 msgstr ""
 
-#: include/functions.inc:1541
+#: include/functions.inc:1499
 msgid "Apply filter"
 msgstr ""
 
-#: include/functions.inc:1793
+#: include/functions.inc:1751
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr ""
 
-#: include/functions.inc:1837
+#: include/functions.inc:1795
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr ""
 
-#: include/functions.inc:1916
+#: include/functions.inc:1874
 #, php-format
 msgid "File '%s' could not be deleted."
 msgstr ""
 
-#: include/functions.inc:1950 include/functions.inc:1970
+#: include/functions.inc:1908 include/functions.inc:1928
 msgid "Cannot write to revision file!"
 msgstr ""
 
-#: include/functions.inc:2212 include/functions.inc:2216
-#: include/functions.inc:2222
-msgid "'base_hook' is not available. Using default base."
+#: include/functions.inc:2170 include/functions.inc:2174
+#: include/functions.inc:2180
+msgid "'base_hook' is not available. Using default base!"
 msgstr ""
 
-#: include/functions.inc:2244
+#: include/functions.inc:2202
 #, fuzzy
 msgid "LDAP warning"
 msgstr "Aviso"
 
-#: include/functions.inc:2244
+#: include/functions.inc:2202
 #, fuzzy
 msgid "Cannot get schema information from server. No schema check possible!"
 msgstr ""
 "No puedo obtener información de esquemas del servidor. ¡No es posible "
 "comprobar los esquemas!"
 
-#: include/functions.inc:2270
+#: include/functions.inc:2228
 msgid "Used to store account specific informations."
 msgstr ""
 
-#: include/functions.inc:2277
+#: include/functions.inc:2235
 msgid ""
 "Used to lock currently edited entries to avoid multiple changes at the same "
 "time."
 msgstr ""
 
-#: include/functions.inc:2320
+#: include/functions.inc:2278
 #, php-format
 msgid "Missing required object class '%s'!"
 msgstr ""
 
-#: include/functions.inc:2322
+#: include/functions.inc:2280
 #, php-format
 msgid "Missing optional object class '%s'!"
 msgstr ""
 
-#: include/functions.inc:2328
+#: include/functions.inc:2286
 #, php-format
 msgid "Version mismatch for required object class '%s' (!=%s)!"
 msgstr ""
 
-#: include/functions.inc:2330
+#: include/functions.inc:2288
 #, php-format
 msgid "Version mismatch for optional object class '%s' (!=%s)!"
 msgstr ""
 
-#: include/functions.inc:2334
+#: include/functions.inc:2292
 #, php-format
 msgid "Class(es) available"
 msgstr ""
 
-#: include/functions.inc:2356
+#: include/functions.inc:2314
 msgid ""
 "You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema    configuration do not support this option."
 msgstr ""
 
-#: include/functions.inc:2357
+#: include/functions.inc:2315
 msgid ""
 "In order to use rfc2307bis conform groups the objectClass 'posixGroup' must "
 "be      AUXILIARY"
 msgstr ""
 
-#: include/functions.inc:2361
+#: include/functions.inc:2319
 msgid ""
 "Your schema is configured to support the rfc2307bis group, but you have "
 "disabled this option on the 'ldap setup' step."
 msgstr ""
 
-#: include/functions.inc:2362
+#: include/functions.inc:2320
 msgid "The objectClass 'posixGroup' must be STRUCTURAL"
 msgstr ""
 
-#: include/functions.inc:2385
+#: include/functions.inc:2343
 msgid "German"
 msgstr ""
 
-#: include/functions.inc:2386
+#: include/functions.inc:2344
 msgid "French"
 msgstr "Francés"
 
-#: include/functions.inc:2387
+#: include/functions.inc:2345
 msgid "Italian"
 msgstr ""
 
-#: include/functions.inc:2388
+#: include/functions.inc:2346
 msgid "Spanish"
 msgstr ""
 
-#: include/functions.inc:2389
+#: include/functions.inc:2347
 msgid "English"
 msgstr "Inglés"
 
-#: include/functions.inc:2390
+#: include/functions.inc:2348
 msgid "Dutch"
 msgstr ""
 
-#: include/functions.inc:2391
+#: include/functions.inc:2349
 msgid "Polish"
 msgstr ""
 
-#: include/functions.inc:2392
+#: include/functions.inc:2350
 msgid "Swedish"
 msgstr ""
 
-#: include/functions.inc:2393
+#: include/functions.inc:2351
 msgid "Chinese"
 msgstr "Chino"
 
-#: include/functions.inc:2394
+#: include/functions.inc:2352
 msgid "Russian"
 msgstr "Ruso"
 
-#: include/functions.inc:2562
+#: include/functions.inc:2520
 #, php-format
 msgid ""
 "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
 msgstr ""
 
-#: include/functions.inc:2590
+#: include/functions.inc:2552
 msgid "Cannot generate samba hash!"
 msgstr ""
 
-#: include/class_ldap.inc:233 include/class_ldap.inc:266
+#: include/class_ldap.inc:232 include/class_ldap.inc:265
 msgid "Performance warning"
 msgstr ""
 
-#: include/class_ldap.inc:233 include/class_ldap.inc:266
+#: include/class_ldap.inc:232 include/class_ldap.inc:265
 #, php-format
 msgid "LDAP performance is poor: last query took about %.2fs!"
 msgstr ""
 
-#: include/class_ldap.inc:592
+#: include/class_ldap.inc:591
 #, php-format
 msgid ""
-"Cannot automatically create subtrees with RDN '%s': no object class found"
+"Cannot automatically create subtrees with RDN '%s': no object class found!"
 msgstr ""
 
-#: include/class_ldap.inc:640
+#: include/class_ldap.inc:639
 #, php-format
 msgid "Cannot automatically create subtrees with RDN '%s': not supported"
 msgstr ""
 
-#: include/class_ldap.inc:724
+#: include/class_ldap.inc:723
 #, php-format
 msgid "while operating on '%s' using LDAP server '%s'"
 msgstr ""
 
-#: include/class_ldap.inc:726
+#: include/class_ldap.inc:725
 #, php-format
 msgid "while operating on LDAP server %s"
 msgstr ""
 
-#: include/class_ldap.inc:948
+#: include/class_ldap.inc:947
 #, php-format
 msgid ""
 "This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
 "in line %s"
 msgstr ""
 
-#: include/class_ldap.inc:977
+#: include/class_ldap.inc:976
 #, php-format
 msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
 msgstr ""
@@ -3940,7 +3943,7 @@ msgstr ""
 #: plugins/personal/generic/generic_certs.tpl:45
 #: plugins/personal/generic/generic_certs.tpl:69
 #: plugins/admin/users/class_divListUsers.inc:187
-#: plugins/admin/groups/class_divListGroup.inc:192
+#: plugins/admin/groups/class_divListGroup.inc:197
 #: plugins/admin/acl/class_divListACL.inc:172
 #: plugins/admin/departments/class_divListDepartment.inc:160
 #: plugins/admin/ogroups/class_divListOGroup.inc:216
@@ -4042,7 +4045,7 @@ msgstr "Página Web"
 #: plugins/personal/generic/generic.tpl:330
 #: plugins/personal/generic/generic.tpl:511
 #: plugins/admin/users/class_divListUsers.inc:274
-#: plugins/admin/groups/class_divListGroup.inc:264
+#: plugins/admin/groups/class_divListGroup.inc:269
 #: plugins/admin/departments/class_departmentGeneric.inc:261
 #: plugins/admin/departments/generic.tpl:83
 #: plugins/admin/ogroups/class_ogroupManagement.inc:503
@@ -4170,14 +4173,6 @@ msgid "My account"
 msgstr "Mi cuenta"
 
 #: plugins/personal/generic/class_user.inc:1453
-#: plugins/personal/password/class_password.inc:79
-#: plugins/personal/password/class_password.inc:82
-#: plugins/personal/password/class_password.inc:85
-#: plugins/personal/password/class_password.inc:88
-#: plugins/personal/password/class_password.inc:91
-#: plugins/personal/password/class_password.inc:94
-#: plugins/personal/password/class_password.inc:108
-#: plugins/personal/password/class_password.inc:114
 #: plugins/personal/password/class_password.inc:142
 msgid "User password"
 msgstr "Contraseña del usuario"
@@ -4431,8 +4426,9 @@ msgid "Password change not allowed"
 msgstr ""
 
 #: plugins/personal/password/nochange.tpl:6
-msgid "You are not allowed to change your password at this time"
-msgstr ""
+#, fuzzy
+msgid "You have no permission to change your password at this time"
+msgstr "No tiene permisos para cambiar su contraseña."
 
 #: plugins/personal/password/changed.tpl:3
 msgid ""
@@ -4442,7 +4438,7 @@ msgstr ""
 
 #: plugins/personal/password/class_password.inc:27
 #, fuzzy
-msgid "Change user passwords"
+msgid "Change user password"
 msgstr "Cambiar contraseña"
 
 #: plugins/personal/password/class_password.inc:80
@@ -4552,7 +4548,7 @@ msgstr ""
 #: plugins/personal/posix/posix_groups.tpl:35
 #: plugins/personal/posix/trust_machines.tpl:27
 #: plugins/admin/groups/group_objects.tpl:40
-#: plugins/admin/ogroups/ogroup_objects.tpl:42
+#: plugins/admin/ogroups/ogroup_objects.tpl:37
 msgid "Choose the department the search will be based on"
 msgstr ""
 
@@ -4561,7 +4557,7 @@ msgid "Display groups matching"
 msgstr ""
 
 #: plugins/personal/posix/posix_groups.tpl:48
-#: plugins/admin/groups/class_divListGroup.inc:95
+#: plugins/admin/groups/class_divListGroup.inc:100
 #: plugins/admin/ogroups/class_divListOGroup.inc:116
 msgid "Regular expression for matching group names"
 msgstr "Expresión regular para buscar nombres de grupos"
@@ -4571,18 +4567,9 @@ msgid "Display groups of user"
 msgstr ""
 
 #: plugins/personal/posix/posix_groups.tpl:59
-#: plugins/admin/groups/class_divListGroup.inc:96
+#: plugins/admin/groups/class_divListGroup.inc:101
 msgid "User name of which groups are shown"
 msgstr "Nombre de usuario de los grupos que se muestran"
-
-#: plugins/personal/posix/posix_groups.tpl:68
-#: plugins/admin/users/class_divListUsers.inc:93
-#: plugins/admin/groups/class_divListGroup.inc:92
-#: plugins/admin/departments/class_divListDepartment.inc:72
-#: plugins/admin/ogroups/ogroup_objects.tpl:38
-#: plugins/admin/ogroups/class_divListOGroup.inc:113
-msgid "Search in subtrees"
-msgstr "Buscar en subárboles"
 
 #: plugins/personal/posix/posix_shadow.tpl:9
 msgid "User must change password on first login"
@@ -4643,8 +4630,9 @@ msgid "POSIX"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:295
+#: plugins/admin/users/class_divListUsers.inc:88
 #: plugins/admin/users/class_divListUsers.inc:278
-#: plugins/admin/groups/class_divListGroup.inc:260
+#: plugins/admin/groups/class_divListGroup.inc:265
 #: plugins/generic/references/class_reference.inc:46
 #: plugins/generic/references/class_reference.inc:48
 msgid "Samba"
@@ -4652,7 +4640,7 @@ msgstr "Samba"
 
 #: plugins/personal/posix/class_posixAccount.inc:295
 #: plugins/admin/users/class_divListUsers.inc:270
-#: plugins/admin/groups/class_divListGroup.inc:266
+#: plugins/admin/groups/class_divListGroup.inc:271
 #: plugins/admin/ogroups/tabs_ogroups.inc:168
 msgid "Environment"
 msgstr "Entorno"
@@ -4693,14 +4681,9 @@ msgid "Timeout while waiting for lock. Ignoring lock!"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:910
-#, fuzzy
-msgid "Uid number"
-msgstr "Número de Fax"
-
-#: plugins/personal/posix/class_posixAccount.inc:910
 msgid ""
-"A duplicated uid number was written for this user, if this was not intended "
-"please verify all used uidNumbers."
+"A duplicated UID number was written for this user. If this was not intended "
+"please verify all used uidNumbers!"
 msgstr ""
 
 #: plugins/personal/posix/class_posixAccount.inc:947
@@ -4843,6 +4826,7 @@ msgid ""
 msgstr ""
 
 #: plugins/admin/users/template.tpl:15
+#: plugins/admin/users/class_divListUsers.inc:84
 #: plugins/admin/users/class_divListUsers.inc:177
 #: plugins/admin/users/class_userManagement.inc:721
 msgid "Template"
@@ -4875,7 +4859,7 @@ msgstr "Propiedades"
 #: plugins/admin/users/class_divListUsers.inc:82
 #: plugins/admin/users/class_divListUsers.inc:168
 #: plugins/admin/groups/class_divListGroup.inc:81
-#: plugins/admin/groups/class_divListGroup.inc:176
+#: plugins/admin/groups/class_divListGroup.inc:181
 #: plugins/admin/acl/class_divListACL.inc:74
 #: plugins/admin/acl/class_divListACL.inc:159
 #: plugins/admin/departments/class_divListDepartment.inc:68
@@ -4886,61 +4870,86 @@ msgid "Actions"
 msgstr "Acciones"
 
 #: plugins/admin/users/class_divListUsers.inc:84
-msgid "Select to see template pseudo users"
-msgstr "Seleccione para mostrar las plantillas de usuarios"
+#: plugins/admin/ogroups/class_ogroup.inc:298
+#: plugins/admin/ogroups/class_ogroup.inc:302
+#: plugins/admin/ogroups/class_ogroup.inc:306
+#: plugins/admin/ogroups/class_ogroup.inc:310
+#: plugins/admin/ogroups/class_ogroup.inc:314
+#: plugins/admin/ogroups/class_ogroup.inc:318
+#: plugins/admin/ogroups/class_ogroup.inc:322
+#: plugins/admin/ogroups/class_ogroup.inc:326
+#: plugins/admin/ogroups/class_ogroup.inc:330
+#, fuzzy, php-format
+msgid "Show %s"
+msgstr "Mostrar teléfonos"
 
 #: plugins/admin/users/class_divListUsers.inc:84
-msgid "Show templates"
-msgstr "Mostrar plantillas"
+#, fuzzy
+msgid "templates"
+msgstr "Plantilla"
 
 #: plugins/admin/users/class_divListUsers.inc:85
-msgid "Select to see users that have only a GOsa object"
-msgstr "Seleccione para ver los usuarios que solo tienen la extensión GOsa"
+#, fuzzy
+msgid "GOsa object"
+msgstr "Objeto"
 
 #: plugins/admin/users/class_divListUsers.inc:85
-msgid "Show functional users"
-msgstr "Mostrar usuarios funcionales"
-
 #: plugins/admin/users/class_divListUsers.inc:86
-msgid "Select to see users that have posix settings"
-msgstr "Seleccione para ver los usuarios que tienen extensiones Posix"
-
-#: plugins/admin/users/class_divListUsers.inc:86
-msgid "Show unix users"
-msgstr "Mostrar los usuarios unix"
-
 #: plugins/admin/users/class_divListUsers.inc:87
-msgid "Select to see users that have mail settings"
-msgstr "Seleccione para ver los usuarios que tienen extensiones de correo"
-
-#: plugins/admin/users/class_divListUsers.inc:87
-msgid "Show mail users"
-msgstr "Mostrar los usuarios de correo"
-
 #: plugins/admin/users/class_divListUsers.inc:88
-msgid "Select to see users that have samba settings"
-msgstr "Seleccione para ver los usuarios que tienen extensiones samba"
-
-#: plugins/admin/users/class_divListUsers.inc:88
-msgid "Show samba users"
+#: plugins/admin/users/class_divListUsers.inc:89
+#, fuzzy, php-format
+msgid "Show %s user"
 msgstr "Mostrar usuarios samba"
 
-#: plugins/admin/users/class_divListUsers.inc:89
-msgid "Select to see users that have proxy settings"
-msgstr "Seleccione para ver los usuarios que tienen extensiones proxy"
+#: plugins/admin/users/class_divListUsers.inc:85
+#: plugins/admin/groups/class_divListGroup.inc:93
+#, fuzzy
+msgid "functional"
+msgstr "Función"
+
+#: plugins/admin/users/class_divListUsers.inc:86
+#: plugins/admin/users/class_divListUsers.inc:268
+#: plugins/admin/groups/class_divListGroup.inc:261
+msgid "Posix"
+msgstr "Posix"
+
+#: plugins/admin/users/class_divListUsers.inc:86
+#, fuzzy
+msgid "posix"
+msgstr "Posix"
+
+#: plugins/admin/users/class_divListUsers.inc:87
+#: plugins/admin/users/class_divListUsers.inc:272
+#: plugins/admin/groups/class_divListGroup.inc:263
+#: plugins/admin/ogroups/tabs_ogroups.inc:110
+#: plugins/admin/ogroups/tabs_ogroups.inc:256
+#: plugins/admin/ogroups/class_divListOGroup.inc:270
+#: plugins/generic/references/class_reference.inc:44
+msgid "Mail"
+msgstr "Correo Electrónico"
+
+#: plugins/admin/users/class_divListUsers.inc:87
+#: plugins/admin/groups/class_divListGroup.inc:91
+#, fuzzy
+msgid "mail"
+msgstr "hombre"
+
+#: plugins/admin/users/class_divListUsers.inc:88
+#: plugins/admin/groups/class_divListGroup.inc:87
+#, fuzzy
+msgid "samba"
+msgstr "Samba"
 
 #: plugins/admin/users/class_divListUsers.inc:89
-msgid "Show proxy users"
-msgstr "Mostrar los usuarios de proxy"
+#: plugins/generic/references/class_reference.inc:52
+msgid "Proxy"
+msgstr "Proxy"
 
-#: plugins/admin/users/class_divListUsers.inc:93
-#: plugins/admin/groups/class_divListGroup.inc:92
-#: plugins/admin/acl/class_divListACL.inc:80
-#: plugins/admin/departments/class_divListDepartment.inc:72
-#: plugins/admin/ogroups/ogroup_objects.tpl:38
-#: plugins/admin/ogroups/class_divListOGroup.inc:113
-msgid "Select to search within subtrees"
-msgstr "Seleccione para buscar dentro de los subárboles"
+#: plugins/admin/users/class_divListUsers.inc:89
+#, fuzzy
+msgid "proxy"
+msgstr "Proxy"
 
 #: plugins/admin/users/class_divListUsers.inc:96
 #: plugins/admin/groups/group_objects.tpl:46
@@ -4948,20 +4957,15 @@ msgid "Display users matching"
 msgstr "Mostrar usuarios que coincidan con"
 
 #: plugins/admin/users/class_divListUsers.inc:164
-#: plugins/admin/groups/class_divListGroup.inc:171
+#: plugins/admin/groups/class_divListGroup.inc:176
 #: plugins/admin/acl/class_divListACL.inc:155
 #: plugins/admin/departments/class_divListDepartment.inc:146
 #: plugins/admin/ogroups/class_divListOGroup.inc:196
 msgid "Submit department"
 msgstr "Enviar departamento"
 
-#: plugins/admin/users/class_divListUsers.inc:185
-#: plugins/admin/users/class_divListUsers.inc:339
-msgid "Change password"
-msgstr "Cambiar contraseña"
-
 #: plugins/admin/users/class_divListUsers.inc:204
-#: plugins/admin/groups/class_divListGroup.inc:209
+#: plugins/admin/groups/class_divListGroup.inc:214
 #: plugins/admin/acl/class_divListACL.inc:178
 #: plugins/admin/ogroups/class_divListOGroup.inc:233
 #, fuzzy
@@ -4969,7 +4973,7 @@ msgid "Copy"
 msgstr "copiar"
 
 #: plugins/admin/users/class_divListUsers.inc:206
-#: plugins/admin/groups/class_divListGroup.inc:211
+#: plugins/admin/groups/class_divListGroup.inc:216
 #: plugins/admin/acl/class_divListACL.inc:180
 #: plugins/admin/ogroups/class_divListOGroup.inc:235
 #, fuzzy
@@ -4984,11 +4988,6 @@ msgstr "GOsa"
 msgid "Edit generic properties"
 msgstr "Editar características generales"
 
-#: plugins/admin/users/class_divListUsers.inc:268
-#: plugins/admin/groups/class_divListGroup.inc:256
-msgid "Posix"
-msgstr "Posix"
-
 #: plugins/admin/users/class_divListUsers.inc:269
 msgid "Edit UNIX properties"
 msgstr "Editar características UNIX"
@@ -4996,15 +4995,6 @@ msgstr "Editar características UNIX"
 #: plugins/admin/users/class_divListUsers.inc:271
 msgid "Edit environment properties"
 msgstr "Editar características de entorno"
-
-#: plugins/admin/users/class_divListUsers.inc:272
-#: plugins/admin/groups/class_divListGroup.inc:258
-#: plugins/admin/ogroups/tabs_ogroups.inc:110
-#: plugins/admin/ogroups/tabs_ogroups.inc:256
-#: plugins/admin/ogroups/class_divListOGroup.inc:270
-#: plugins/generic/references/class_reference.inc:44
-msgid "Mail"
-msgstr "Correo Electrónico"
 
 #: plugins/admin/users/class_divListUsers.inc:273
 msgid "Edit mail properties"
@@ -5039,28 +5029,28 @@ msgid "Create user with this template"
 msgstr "Crear usuario con esta plantilla"
 
 #: plugins/admin/users/class_divListUsers.inc:307
-#: plugins/admin/groups/class_divListGroup.inc:286
+#: plugins/admin/groups/class_divListGroup.inc:291
 #: plugins/admin/acl/class_divListACL.inc:235
 #: plugins/admin/ogroups/class_divListOGroup.inc:289
 msgid "cut"
 msgstr "mover"
 
 #: plugins/admin/users/class_divListUsers.inc:307
-#: plugins/admin/groups/class_divListGroup.inc:286
+#: plugins/admin/groups/class_divListGroup.inc:291
 #: plugins/admin/acl/class_divListACL.inc:235
 #: plugins/admin/ogroups/class_divListOGroup.inc:289
 msgid "Cut this entry"
 msgstr "Mover esta entrada"
 
 #: plugins/admin/users/class_divListUsers.inc:309
-#: plugins/admin/groups/class_divListGroup.inc:288
+#: plugins/admin/groups/class_divListGroup.inc:293
 #: plugins/admin/acl/class_divListACL.inc:237
 #: plugins/admin/ogroups/class_divListOGroup.inc:291
 msgid "copy"
 msgstr "copiar"
 
 #: plugins/admin/users/class_divListUsers.inc:309
-#: plugins/admin/groups/class_divListGroup.inc:288
+#: plugins/admin/groups/class_divListGroup.inc:293
 #: plugins/admin/acl/class_divListACL.inc:237
 #: plugins/admin/ogroups/class_divListOGroup.inc:291
 msgid "Copy this entry"
@@ -5072,7 +5062,7 @@ msgid "inactive"
 msgstr "activo"
 
 #: plugins/admin/users/class_divListUsers.inc:328
-#: plugins/admin/groups/class_divListGroup.inc:293
+#: plugins/admin/groups/class_divListGroup.inc:298
 #: plugins/admin/acl/class_divListACL.inc:242
 #: plugins/admin/acl/class_divListACL.inc:264
 #: plugins/admin/departments/class_divListDepartment.inc:185
@@ -5097,7 +5087,7 @@ msgid "Not allowed"
 msgstr ""
 
 #: plugins/admin/users/class_divListUsers.inc:352
-#: plugins/admin/groups/class_divListGroup.inc:302
+#: plugins/admin/groups/class_divListGroup.inc:307
 #: plugins/admin/acl/class_divListACL.inc:252
 #: plugins/admin/acl/class_divListACL.inc:268
 #: plugins/admin/departments/class_divListDepartment.inc:190
@@ -5115,7 +5105,7 @@ msgid "Number of listed users"
 msgstr ""
 
 #: plugins/admin/users/class_divListUsers.inc:443
-#: plugins/admin/groups/class_divListGroup.inc:360
+#: plugins/admin/groups/class_divListGroup.inc:365
 #: plugins/admin/departments/class_divListDepartment.inc:229
 #: plugins/admin/ogroups/class_divListOGroup.inc:353
 #, fuzzy
@@ -5131,34 +5121,19 @@ msgstr "Usuarios del dominio"
 #: plugins/admin/groups/class_groupManagement.inc:191
 #: plugins/admin/ogroups/class_ogroupManagement.inc:173
 #, fuzzy
-msgid "Service infrastructure"
+msgid "Infrastructure error"
 msgstr "Buscar en subárboles"
 
 #: plugins/admin/users/class_userManagement.inc:292
-#, fuzzy
-msgid "Password change failed."
-msgstr "La contraseñas deben ser cambiadas despues de %s días"
-
-#: plugins/admin/users/class_userManagement.inc:292
 #: plugins/admin/users/class_userManagement.inc:347
-msgid "You are not allowed to set this users password!"
-msgstr "¡No le estátá permitido cambiarle la contraseña de estos usuarios!"
+#, fuzzy
+msgid "You have no permission to change this users password!"
+msgstr "No tiene permisos para cambiar su contraseña."
 
 #: plugins/admin/users/class_userManagement.inc:454
 #, fuzzy
 msgid "Delete users"
 msgstr "Eliminar usuario"
-
-#: plugins/admin/users/class_userManagement.inc:482
-#: plugins/admin/users/class_userManagement.inc:596
-#, fuzzy
-msgid "User delete"
-msgstr "eliminar"
-
-#: plugins/admin/users/class_userManagement.inc:591
-#, fuzzy
-msgid "User deleted"
-msgstr "eliminar"
 
 #: plugins/admin/users/class_userManagement.inc:591
 #, fuzzy
@@ -5166,7 +5141,7 @@ msgid "User successfully removed."
 msgstr "Sugerencia enviada correctamente"
 
 #: plugins/admin/users/class_userManagement.inc:702
-#: plugins/admin/ogroups/class_ogroup.inc:305
+#: plugins/admin/ogroups/class_ogroup.inc:343
 msgid "none"
 msgstr "ninguno"
 
@@ -5217,7 +5192,6 @@ msgid "Select users to add"
 msgstr ""
 
 #: plugins/admin/groups/group_objects.tpl:30
-#: plugins/admin/ogroups/ogroup_objects.tpl:31
 msgid "Select to see servers"
 msgstr "Seleccione para ver los servidores"
 
@@ -5311,68 +5285,70 @@ msgstr "Lista de grupos"
 msgid "Select to see groups that are primary groups of users"
 msgstr "Seleccione para ver que grupos son grupos primarios de usuarios"
 
-#: plugins/admin/groups/class_divListGroup.inc:84
-msgid "Show primary groups"
-msgstr "Mostrar grupos primarios"
-
 #: plugins/admin/groups/class_divListGroup.inc:85
-msgid "Select to see groups that have samba groups mappings"
-msgstr "Seleccione para ver que grupos tienen asignado un grupo samba"
-
-#: plugins/admin/groups/class_divListGroup.inc:85
-msgid "Show samba groups"
+#: plugins/admin/groups/class_divListGroup.inc:87
+#: plugins/admin/groups/class_divListGroup.inc:89
+#: plugins/admin/groups/class_divListGroup.inc:91
+#: plugins/admin/groups/class_divListGroup.inc:93
+#, fuzzy, php-format
+msgid "Show %s groups"
 msgstr "Mostrar los grupos samba"
 
-#: plugins/admin/groups/class_divListGroup.inc:86
-msgid "Select to see groups that have applications configured"
-msgstr "Seleccione para ver que grupos tienen aplicaciones configuradas"
+#: plugins/admin/groups/class_divListGroup.inc:85
+#, fuzzy
+msgid "primary"
+msgstr "Sumario"
 
 #: plugins/admin/groups/class_divListGroup.inc:86
-msgid "Show application groups"
-msgstr "Mostrar los grupos de aplicaciones"
-
-#: plugins/admin/groups/class_divListGroup.inc:87
-msgid "Select to see groups that have mail settings"
-msgstr "Seleccione para ver que grupos tienen configuración de correo"
-
-#: plugins/admin/groups/class_divListGroup.inc:87
-msgid "Show mail groups"
-msgstr "Mostrar grupos de correo"
+#, fuzzy
+msgid "samba groups mappings"
+msgstr "Tipo de grupo de samba"
 
 #: plugins/admin/groups/class_divListGroup.inc:88
+#, fuzzy
+msgid "application settings"
+msgstr "Aplicaciones"
+
+#: plugins/admin/groups/class_divListGroup.inc:89
+#, fuzzy
+msgid "application"
+msgstr "Aplicación"
+
+#: plugins/admin/groups/class_divListGroup.inc:90
+#, fuzzy
+msgid "mail settings"
+msgstr "Parámetros de correo"
+
+#: plugins/admin/groups/class_divListGroup.inc:92
 msgid "Select to see normal groups that have only functional aspects"
 msgstr "Seleccione para ver que grupos tienen solo aspectos funcionales"
 
-#: plugins/admin/groups/class_divListGroup.inc:88
-msgid "Show functional groups"
-msgstr "Mostrar grupos funcionales"
-
-#: plugins/admin/groups/class_divListGroup.inc:184
+#: plugins/admin/groups/class_divListGroup.inc:189
 #: plugins/admin/ogroups/class_ogroupManagement.inc:499
 #: plugins/generic/references/class_reference.inc:56
 msgid "Group"
 msgstr "Grupo"
 
-#: plugins/admin/groups/class_divListGroup.inc:262
+#: plugins/admin/groups/class_divListGroup.inc:267
 #: plugins/admin/ogroups/tabs_ogroups.inc:153
 #: plugins/admin/ogroups/class_ogroupManagement.inc:500
 #: plugins/generic/references/class_reference.inc:62
 msgid "Application"
 msgstr "Aplicación"
 
-#: plugins/admin/groups/class_divListGroup.inc:293
+#: plugins/admin/groups/class_divListGroup.inc:298
 #: plugins/admin/departments/class_divListDepartment.inc:185
 #: plugins/admin/ogroups/class_divListOGroup.inc:295
 msgid "Edit this entry"
 msgstr "Editar esta entrada"
 
-#: plugins/admin/groups/class_divListGroup.inc:302
+#: plugins/admin/groups/class_divListGroup.inc:307
 #: plugins/admin/departments/class_divListDepartment.inc:190
 #: plugins/admin/ogroups/class_divListOGroup.inc:303
 msgid "Delete this entry"
 msgstr "Eliminar esta entrada"
 
-#: plugins/admin/groups/class_divListGroup.inc:359
+#: plugins/admin/groups/class_divListGroup.inc:364
 #, fuzzy
 msgid "Number of listed groups"
 msgstr "Eliminar grupo seleccionado"
@@ -5401,7 +5377,8 @@ msgstr "Grupo"
 #: plugins/admin/departments/class_departmentManagement.inc:263
 #: plugins/admin/ogroups/class_ogroupManagement.inc:263
 #: plugins/admin/ogroups/class_ogroupManagement.inc:315
-#: plugins/admin/ogroups/class_ogroupManagement.inc:342
+#: plugins/admin/ogroups/class_ogroupManagement.inc:342 html/getxls.php:493
+#: html/getldif.php:82
 #, fuzzy
 msgid "Permission error"
 msgstr "Permisos"
@@ -5449,11 +5426,6 @@ msgstr ""
 msgid "ACL Templates"
 msgstr "Plantillas ACL"
 
-#: plugins/admin/acl/class_aclManagement.inc:309
-#, fuzzy
-msgid "acl"
-msgstr "Cancelar"
-
 #: plugins/admin/acl/class_divListACL.inc:51
 #: plugins/admin/acl/class_divListACL.inc:52
 msgid "List of acls"
@@ -5463,10 +5435,6 @@ msgstr "Lista de acls"
 #: plugins/admin/ogroups/tabs_ogroups.inc:146
 msgid "Summary"
 msgstr "Sumario"
-
-#: plugins/admin/acl/class_divListACL.inc:80
-msgid "Ignore subtrees"
-msgstr "Ignorar subárboles"
 
 #: plugins/admin/acl/class_divListACL.inc:84
 msgid "Display acls matching"
@@ -5558,7 +5526,8 @@ msgstr ""
 msgid "ACL management"
 msgstr "Administración de ACL"
 
-#: plugins/admin/departments/class_departmentGeneric.inc:306 html/main.php:152
+#: plugins/admin/departments/class_departmentGeneric.inc:306
+#: html/password.php:58 html/main.php:152
 #, fuzzy
 msgid "Fatal error"
 msgstr "Insertar separador"
@@ -5786,70 +5755,96 @@ msgstr ""
 msgid "You cannot combine terminals and workstations in one object group!"
 msgstr ""
 
-#: plugins/admin/ogroups/class_ogroup.inc:307
-msgid "too many different objects!"
+#: plugins/admin/ogroups/class_ogroup.inc:296
+#: plugins/admin/ogroups/class_ogroup.inc:298
+#: plugins/admin/ogroups/class_ogroup.inc:350
+msgid "departments"
 msgstr ""
 
-#: plugins/admin/ogroups/class_ogroup.inc:309
-msgid "users"
-msgstr ""
+#: plugins/admin/ogroups/class_ogroup.inc:300
+#: plugins/admin/ogroups/class_ogroup.inc:302
+#, fuzzy
+msgid "people"
+msgstr "Rol"
 
-#: plugins/admin/ogroups/class_ogroup.inc:310
+#: plugins/admin/ogroups/class_ogroup.inc:304
+#: plugins/admin/ogroups/class_ogroup.inc:306
+#: plugins/admin/ogroups/class_ogroup.inc:348
 msgid "groups"
 msgstr ""
 
-#: plugins/admin/ogroups/class_ogroup.inc:311
+#: plugins/admin/ogroups/class_ogroup.inc:308
+#: plugins/admin/ogroups/class_ogroup.inc:310
+#: plugins/admin/ogroups/class_ogroup.inc:349
 msgid "applications"
 msgstr ""
 
 #: plugins/admin/ogroups/class_ogroup.inc:312
-msgid "departments"
-msgstr ""
-
-#: plugins/admin/ogroups/class_ogroup.inc:313
+#: plugins/admin/ogroups/class_ogroup.inc:314
+#: plugins/admin/ogroups/class_ogroup.inc:351
 msgid "servers"
 msgstr ""
 
-#: plugins/admin/ogroups/class_ogroup.inc:314
+#: plugins/admin/ogroups/class_ogroup.inc:316
+#: plugins/admin/ogroups/class_ogroup.inc:318
+#: plugins/admin/ogroups/class_ogroup.inc:352
 msgid "workstations"
 msgstr ""
 
-#: plugins/admin/ogroups/class_ogroup.inc:315
+#: plugins/admin/ogroups/class_ogroup.inc:320
+#: plugins/admin/ogroups/class_ogroup.inc:322
+#: plugins/admin/ogroups/class_ogroup.inc:354
+msgid "terminals"
+msgstr ""
+
+#: plugins/admin/ogroups/class_ogroup.inc:324
+#, fuzzy
+msgid "printer"
+msgstr "Impresora"
+
+#: plugins/admin/ogroups/class_ogroup.inc:326
+#: plugins/admin/ogroups/class_ogroup.inc:356
+msgid "printers"
+msgstr ""
+
+#: plugins/admin/ogroups/class_ogroup.inc:328
+#: plugins/admin/ogroups/class_ogroup.inc:330
+#: plugins/admin/ogroups/class_ogroup.inc:355
+msgid "phones"
+msgstr ""
+
+#: plugins/admin/ogroups/class_ogroup.inc:345
+msgid "too many different objects!"
+msgstr ""
+
+#: plugins/admin/ogroups/class_ogroup.inc:347
+msgid "users"
+msgstr ""
+
+#: plugins/admin/ogroups/class_ogroup.inc:353
 #, fuzzy
 msgid "winstations"
 msgstr "Estación de trabajo Windows"
 
-#: plugins/admin/ogroups/class_ogroup.inc:316
-msgid "terminals"
-msgstr ""
-
-#: plugins/admin/ogroups/class_ogroup.inc:317
-msgid "phones"
-msgstr ""
-
-#: plugins/admin/ogroups/class_ogroup.inc:318
-msgid "printers"
-msgstr ""
-
-#: plugins/admin/ogroups/class_ogroup.inc:470
+#: plugins/admin/ogroups/class_ogroup.inc:508
 msgid "Non existing dn:"
 msgstr ""
 
-#: plugins/admin/ogroups/class_ogroup.inc:629
+#: plugins/admin/ogroups/class_ogroup.inc:674
 msgid "You can combine two different object types at maximum, only!"
 msgstr ""
 
-#: plugins/admin/ogroups/class_ogroup.inc:763
+#: plugins/admin/ogroups/class_ogroup.inc:808
 msgid "Object group generic"
 msgstr ""
 
-#: plugins/admin/ogroups/class_ogroup.inc:768
+#: plugins/admin/ogroups/class_ogroup.inc:813
 #: plugins/admin/ogroups/class_ogroupManagement.inc:26
 #: plugins/admin/ogroups/main.inc:37 plugins/admin/ogroups/main.inc:42
 msgid "Object groups"
 msgstr ""
 
-#: plugins/admin/ogroups/class_ogroup.inc:774
+#: plugins/admin/ogroups/class_ogroup.inc:819
 msgid "Member"
 msgstr ""
 
@@ -5889,83 +5884,15 @@ msgstr "Impresora"
 msgid "Select objects to add"
 msgstr ""
 
-#: plugins/admin/ogroups/ogroup_objects.tpl:27
-msgid "Select to see departments"
-msgstr ""
-
-#: plugins/admin/ogroups/ogroup_objects.tpl:27
-msgid "Show departments"
-msgstr ""
-
-#: plugins/admin/ogroups/ogroup_objects.tpl:28
-msgid "Select to see GOsa accounts"
-msgstr ""
-
-#: plugins/admin/ogroups/ogroup_objects.tpl:28
-msgid "Show people"
-msgstr ""
-
-#: plugins/admin/ogroups/ogroup_objects.tpl:29
-msgid "Select to see GOsa groups"
-msgstr ""
-
-#: plugins/admin/ogroups/ogroup_objects.tpl:29
-msgid "Show groups"
-msgstr ""
-
-#: plugins/admin/ogroups/ogroup_objects.tpl:30
-msgid "Select to see applications"
-msgstr ""
-
-#: plugins/admin/ogroups/ogroup_objects.tpl:30
-msgid "Show applications"
-msgstr ""
-
-#: plugins/admin/ogroups/ogroup_objects.tpl:31
-msgid "Show servers"
-msgstr "Mostrar servidores"
-
-#: plugins/admin/ogroups/ogroup_objects.tpl:32
-msgid "Select to see workstations"
-msgstr ""
-
-#: plugins/admin/ogroups/ogroup_objects.tpl:32
-msgid "Show workstations"
-msgstr "Mostrar estaciones de trabajo"
-
-#: plugins/admin/ogroups/ogroup_objects.tpl:33
-msgid "Select to see terminals"
-msgstr ""
-
-#: plugins/admin/ogroups/ogroup_objects.tpl:33
-msgid "Show terminals"
-msgstr "Mostrar terminales"
-
-#: plugins/admin/ogroups/ogroup_objects.tpl:34
-msgid "Select to see printers"
-msgstr ""
-
-#: plugins/admin/ogroups/ogroup_objects.tpl:34
-msgid "Show printers"
-msgstr ""
-
-#: plugins/admin/ogroups/ogroup_objects.tpl:35
-msgid "Select to see phones"
-msgstr ""
-
-#: plugins/admin/ogroups/ogroup_objects.tpl:35
-msgid "Show phones"
-msgstr "Mostrar teléfonos"
-
-#: plugins/admin/ogroups/ogroup_objects.tpl:41
+#: plugins/admin/ogroups/ogroup_objects.tpl:36
 msgid "Display objects of department"
 msgstr ""
 
-#: plugins/admin/ogroups/ogroup_objects.tpl:45
+#: plugins/admin/ogroups/ogroup_objects.tpl:40
 msgid "Display objects matching"
 msgstr ""
 
-#: plugins/admin/ogroups/ogroup_objects.tpl:46
+#: plugins/admin/ogroups/ogroup_objects.tpl:41
 msgid "Regular expression for matching object names"
 msgstr ""
 
@@ -6048,10 +5975,6 @@ msgstr ""
 msgid "FAX"
 msgstr ""
 
-#: plugins/generic/references/class_reference.inc:52
-msgid "Proxy"
-msgstr "Proxy"
-
 #: plugins/generic/references/class_reference.inc:54
 msgid "FTP"
 msgstr ""
@@ -6105,7 +6028,7 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: html/getxls.php:96
+#: html/getxls.php:96 html/getxls.php:343
 #, php-format
 msgid "User list of %s on %s"
 msgstr ""
@@ -6204,25 +6127,15 @@ msgstr ""
 msgid "Full"
 msgstr ""
 
-#: html/getxls.php:343
-#, php-format
-msgid "User List of %s on %s"
-msgstr ""
-
 #: html/getxls.php:397
 #, php-format
 msgid "Computers of %s on %s"
 msgstr ""
 
-#: html/getxls.php:493 html/getldif.php:82
-#, fuzzy
-msgid "Permission denied!"
-msgstr "Permisos"
-
 #: html/getxls.php:493
 #, fuzzy
-msgid "You are not allowed to perform this action."
-msgstr "No tiene permisos para editar esta acl."
+msgid "You have no permission to do LDAP exports!"
+msgstr "No tiene permisos para eliminar este departamento."
 
 #: html/getfax.php:56
 msgid "Could not connect to database server!"
@@ -6238,8 +6151,8 @@ msgstr ""
 
 #: html/getldif.php:82
 #, fuzzy
-msgid "You are not allowed to create ldap dumps."
-msgstr "No tiene permisos para crear un nuevo rol."
+msgid "You have no permission to create LDAP dumps!"
+msgstr "No tiene permisos para eliminar este departamento."
 
 #: html/getldif.php:107
 #, fuzzy
@@ -6268,11 +6181,6 @@ msgstr ""
 #, php-format
 msgid "GOsa configuration %s/%s is not readable. Aborted."
 msgstr ""
-
-#: html/password.php:78
-#, fuzzy
-msgid "Accessibility"
-msgstr "Se puede escribir en la configuración"
 
 #: html/password.php:78 html/setup.php:66 html/index.php:166
 #, php-format
@@ -6303,7 +6211,7 @@ msgstr ""
 msgid "Enter SSL session"
 msgstr ""
 
-#: html/setup.php:66 html/index.php:166
+#: html/setup.php:66
 #, fuzzy
 msgid "Smarty"
 msgstr "Sumario"
@@ -6325,18 +6233,8 @@ msgid ""
 msgstr ""
 
 #: html/main.php:217
-#, fuzzy
-msgid "Configuration warning"
-msgstr "Se puede escribir en la configuración"
-
-#: html/main.php:217
 msgid "Running out of memory!"
 msgstr ""
-
-#: html/main.php:356
-#, fuzzy
-msgid "Password reminder"
-msgstr "La contraseña expira en"
 
 #: html/main.php:356
 #, fuzzy
@@ -6349,7 +6247,7 @@ msgstr ""
 
 #: html/main.php:366
 #, php-format
-msgid "FATAL: Can't find any plugin definitions for plugin '%s'!"
+msgid "FATAL: Cannot find any plugin definitions for plugin '%s'!"
 msgstr ""
 
 #: html/index.php:57
@@ -6362,10 +6260,10 @@ msgid ""
 "ini settings."
 msgstr ""
 
-#: html/index.php:141
+#: html/index.php:166
 #, fuzzy
-msgid "Configuration accessibility"
-msgstr "Se puede escribir en la configuración"
+msgid "Smarty error"
+msgstr "Insertar separador"
 
 #: html/index.php:217
 msgid "There is a problem with the authentication setup!"
@@ -6384,7 +6282,7 @@ msgid "Cannot detect information about the installed LDAP schema!"
 msgstr ""
 
 #: html/index.php:282
-msgid "Your ldap setup contains old schema definitions:"
+msgid "Your LDAP setup contains old schema definitions:"
 msgstr ""
 
 #: html/index.php:303
@@ -6405,7 +6303,7 @@ msgid "Cannot retrieve user information for htaccess authentication!"
 msgstr ""
 
 #: html/index.php:374
-msgid "Account locked. Please contact your system administrator."
+msgid "Account locked. Please contact your system administrator!"
 msgstr ""
 
 #: html/index.php:425
@@ -6413,6 +6311,145 @@ msgid ""
 "Your browser has cookies disabled. Please enable cookies and reload this "
 "page before logging in!"
 msgstr ""
+
+#~ msgid "Checking for duplicate gid numbers"
+#~ msgstr "Comprobando números gid duplicados"
+
+#, fuzzy
+#~ msgid "Uid number"
+#~ msgstr "Número de Fax"
+
+#, fuzzy
+#~ msgid "Password change failed."
+#~ msgstr "La contraseñas deben ser cambiadas despues de %s días"
+
+#~ msgid "You are not allowed to set this users password!"
+#~ msgstr "¡No le estátá permitido cambiarle la contraseña de estos usuarios!"
+
+#, fuzzy
+#~ msgid "User delete"
+#~ msgstr "eliminar"
+
+#, fuzzy
+#~ msgid "User deleted"
+#~ msgstr "eliminar"
+
+#, fuzzy
+#~ msgid "Permission denied!"
+#~ msgstr "Permisos"
+
+#, fuzzy
+#~ msgid "You are not allowed to perform this action."
+#~ msgstr "No tiene permisos para editar esta acl."
+
+#, fuzzy
+#~ msgid "You are not allowed to create ldap dumps."
+#~ msgstr "No tiene permisos para crear un nuevo rol."
+
+#, fuzzy
+#~ msgid "Accessibility"
+#~ msgstr "Se puede escribir en la configuración"
+
+#, fuzzy
+#~ msgid "Configuration warning"
+#~ msgstr "Se puede escribir en la configuración"
+
+#, fuzzy
+#~ msgid "Password reminder"
+#~ msgstr "La contraseña expira en"
+
+#, fuzzy
+#~ msgid "Configuration accessibility"
+#~ msgstr "Se puede escribir en la configuración"
+
+#~ msgid "Anonymous bind failed on server '%s'."
+#~ msgstr "Ha fallado la Autenticación Anónima en el servidor '%s'."
+
+#, fuzzy
+#~ msgid "Can't locate gotomasses queue file '%s'."
+#~ msgstr "No puedo crear el fichero '%s'."
+
+#, fuzzy
+#~ msgid "Can't read gotomasses queue file '%s'."
+#~ msgstr "No puedo crear el fichero '%s'."
+
+#, fuzzy
+#~ msgid "Can't read gotomasses storage file '%s'."
+#~ msgstr "No puedo crear el fichero '%s'."
+
+#, fuzzy
+#~ msgid "Can't write gotomasses queue file '%s'."
+#~ msgstr "No puedo crear el fichero '%s'."
+
+#~ msgid "Select to see template pseudo users"
+#~ msgstr "Seleccione para mostrar las plantillas de usuarios"
+
+#~ msgid "Show templates"
+#~ msgstr "Mostrar plantillas"
+
+#~ msgid "Select to see users that have only a GOsa object"
+#~ msgstr "Seleccione para ver los usuarios que solo tienen la extensión GOsa"
+
+#~ msgid "Show functional users"
+#~ msgstr "Mostrar usuarios funcionales"
+
+#~ msgid "Select to see users that have posix settings"
+#~ msgstr "Seleccione para ver los usuarios que tienen extensiones Posix"
+
+#~ msgid "Show unix users"
+#~ msgstr "Mostrar los usuarios unix"
+
+#~ msgid "Select to see users that have mail settings"
+#~ msgstr "Seleccione para ver los usuarios que tienen extensiones de correo"
+
+#~ msgid "Show mail users"
+#~ msgstr "Mostrar los usuarios de correo"
+
+#~ msgid "Select to see users that have samba settings"
+#~ msgstr "Seleccione para ver los usuarios que tienen extensiones samba"
+
+#~ msgid "Select to see users that have proxy settings"
+#~ msgstr "Seleccione para ver los usuarios que tienen extensiones proxy"
+
+#~ msgid "Show proxy users"
+#~ msgstr "Mostrar los usuarios de proxy"
+
+#~ msgid "Show primary groups"
+#~ msgstr "Mostrar grupos primarios"
+
+#~ msgid "Select to see groups that have samba groups mappings"
+#~ msgstr "Seleccione para ver que grupos tienen asignado un grupo samba"
+
+#~ msgid "Select to see groups that have applications configured"
+#~ msgstr "Seleccione para ver que grupos tienen aplicaciones configuradas"
+
+#~ msgid "Show application groups"
+#~ msgstr "Mostrar los grupos de aplicaciones"
+
+#~ msgid "Select to see groups that have mail settings"
+#~ msgstr "Seleccione para ver que grupos tienen configuración de correo"
+
+#~ msgid "Show mail groups"
+#~ msgstr "Mostrar grupos de correo"
+
+#~ msgid "Show functional groups"
+#~ msgstr "Mostrar grupos funcionales"
+
+#, fuzzy
+#~ msgid "acl"
+#~ msgstr "Cancelar"
+
+#~ msgid "Ignore subtrees"
+#~ msgstr "Ignorar subárboles"
+
+#~ msgid "Show servers"
+#~ msgstr "Mostrar servidores"
+
+#~ msgid "Show workstations"
+#~ msgstr "Mostrar estaciones de trabajo"
+
+#~ msgid "Show terminals"
+#~ msgstr "Mostrar terminales"
 
 #, fuzzy
 #~ msgid "Daemon"
@@ -6477,14 +6514,6 @@ msgstr ""
 
 #~ msgid "You're about to delete the group '%s'."
 #~ msgstr "Está a punto de borrar el grupo '%s'."
-
-#, fuzzy
-#~ msgid "You have no permission to create a new role!"
-#~ msgstr "No tiene permisos para eliminar este departamento."
-
-#, fuzzy
-#~ msgid "You have no permission to edit this ACL!"
-#~ msgstr "No tiene permisos para eliminar este departamento."
 
 #~ msgid "You're about to delete the acl %s."
 #~ msgstr "Va a eliminar la acl %s."

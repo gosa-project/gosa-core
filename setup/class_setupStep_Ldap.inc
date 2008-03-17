@@ -102,17 +102,17 @@ class Step_Ldap extends setup_step
     $this->bind_id = @ldap_bind($this->connect_id, $this->admin, $this->password);
     
     if(!$this->bind_id){
-      $str = sprintf(_("Anonymous bind failed on server '%s'."),$this->connection); 
+      $str = sprintf(_("Anonymous bind to server '%s' failed!"),$this->connection); 
       if(!empty($this->admin)){
-        $str = sprintf(_("Bind as user '%s' failed on server '%s'."),$this->admin,$this->connection);
+        $str = sprintf(_("Bind as user '%s' failed!"),$this->admin,$this->connection);
       }      
       return("<font color='red'>".$str."</font>");
     }else{
       if(empty($this->admin)){
-        $str = sprintf(_("Anonymous bind on server '%s' succeeded."), $this->connection);
-        return("<font color='blue'>".$str."</font> <font color='red'>"._("Please specify user and password.")."</font>");
+        $str = sprintf(_("Anonymous bind to server '%s' succeeded."), $this->connection);
+        return("<font color='blue'>".$str."</font> <font color='red'>"._("Please specify user and password!")."</font>");
       }else{
-        $str = sprintf(_("Bind as user '%s' on server '%s' succeeded."),$this->admin,$this->connection);
+        $str = sprintf(_("Bind as user '%s' to server '%s' succeeded!"),$this->admin,$this->connection);
         return("<font color='green'>".$str."</font>");
       }      
     }

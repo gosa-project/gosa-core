@@ -52,7 +52,7 @@ class certificate
 
       if(!$fp){
         $this->certificate();
-        $this->error=_("Can't open specified file, check accessibility and or existence");
+        $this->error= msgPool::cannotReadFile($data);
         return(false);
       }else{
         /* Reading data*/
@@ -70,7 +70,7 @@ class certificate
     /* Data can't be empty */
     if($data = ""){
       $this->certificate();
-      $this->error = _("Can't read specified certificate / or empty string given"); 
+      $this->error = _("Certificate is empty!"); 
       return(false);
     }
 
@@ -97,7 +97,7 @@ class certificate
     /* If cert is loaded correctly and is PEM now, we could read some data out of it */
     if(count($this->info()) <=1)  {
       $this->certificate();
-      $this->error = _("Can't load certificate, possibly unsupported format (use PEM/DER) ");
+      $this->error = _("Cannot load certificate - only PEM/DER is supported!");
       /* Reset*/
       return(false);
     }
@@ -112,7 +112,7 @@ class certificate
   function info($ret = true)
   {
     if($this->type != PEM){
-      $this->error = _("The Format must be PEM, to output certificate informations");
+      $this->error = _("Cannot extract information for non PEM certificates!");
       return(false);
     } else {
       /* return an array with all given information */
@@ -209,14 +209,14 @@ class certificate
       $fp = fopen($filename,"w+");
 
       if(!$fp){
-        $this->error= _("Can't create/open File");
+        $this->error= msgPool::cannotWriteFile($filename);
         return(false);
       }else{
         fwrite($fp,$this->data,strlen($this->data));        
       }
       return(true);
     }else{
-      $this->error= _("No valid certificate loaded");
+      $this->error= _("No valid certificate loaded!");
       return(false);    
     }
     return(false);

@@ -138,7 +138,7 @@ if(isset($_POST['javascript']) && $_POST['javascript'] == "true") {
 
 /* Check if gosa.conf (.CONFIG_FILE) is accessible */
 if (!is_readable(CONFIG_DIR."/".CONFIG_FILE)){
-  msg_dialog::display(_("Configuration accessibility"),sprintf(_("GOsa configuration %s/%s is not readable. Aborted."), CONFIG_DIR,CONFIG_FILE),FATAL_ERROR_DIALOG);
+  msg_dialog::display(_("Configuration error"),sprintf(_("GOsa configuration %s/%s is not readable. Aborted."), CONFIG_DIR,CONFIG_FILE),FATAL_ERROR_DIALOG);
   exit();
 }
 
@@ -163,7 +163,7 @@ if (isset ($config->data['MAIN']['COMPILE'])){
 
 /* Check for compile directory */
 if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))){
-  msg_dialog::display(_("Smarty"),sprintf(_("Directory '%s' specified as compile directory is not accessible!"),
+  msg_dialog::display(_("Smarty error"),sprintf(_("Directory '%s' specified as compile directory is not accessible!"),
     $smarty->compile_dir),FATAL_ERROR_DIALOG);
   exit();
 }
@@ -279,7 +279,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
       $checkarr = array();
       foreach($str as $tr){
         if(isset($tr['IS_MUST_HAVE']) && !$tr['STATUS']){
-          msg_dialog::display(_("LDAP error"), _("Your ldap setup contains old schema definitions:")."<br><br><i>".$tr['MSG']."</i>", ERROR_DIALOG);
+          msg_dialog::display(_("LDAP error"), _("Your LDAP setup contains old schema definitions:")."<br><br><i>".$tr['MSG']."</i>", ERROR_DIALOG);
           displayLogin();
           exit();
         }
@@ -371,7 +371,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
         $expired= ldap_expired_account($config, $ui->dn, $ui->username);
 
         if ($expired == 1){
-          $message= _("Account locked. Please contact your system administrator.");
+          $message= _("Account locked. Please contact your system administrator!");
           $smarty->assign ('nextfield', 'password');
           new log("security","login","",array(),"Account for user \"$username\" has expired") ;
         } elseif ($expired == 3){

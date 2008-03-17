@@ -104,17 +104,17 @@ if (!isset($_GET['download'])){
 
     /* Loading image */
     if(!$handle  =  imagick_blob2image($data))	{
-      new log("view","faxreport/faxreport","",array(),"Can't load fax image") ;
+      new log("view","faxreport/faxreport","",array(), "Cannot load fax image") ;
     }
 
     /* Converting image to PNG */
     if(!imagick_convert($handle,"PNG")) {
-      new log("view","faxreport/faxreport","",array(),"Can't convert fax image to png") ;
+      new log("view","faxreport/faxreport","",array(),"Cannot convert fax image to png") ;
     }
 
     /* Resizing image to 420x594 and blur */
     if(!imagick_resize($handle,420,594,IMAGICK_FILTER_GAUSSIAN,1)){
-      new log("view","faxreport/faxreport","",array(),"Can't resize fax image") ;
+      new log("view","faxreport/faxreport","",array(),"Cannot resize fax image") ;
     }
 
     /* Creating binary Code for the Image */

@@ -907,7 +907,7 @@ class posixAccount extends plugin
     if(isset($this->attrs['uidNumber']) && !$this->force_ids){
       $used = $this->get_used_uid_numbers();
       if(isset($used[$this->attrs['uidNumber']]) && $used[$this->attrs['uidNumber']] != $this->dn){
-        msg_dialog::display(_("Uid number"),_("A duplicated uid number was written for this user, if this was not intended please verify all used uidNumbers."), WARNING_DIALOG);
+        msg_dialog::display(_("Warning"),_("A duplicated UID number was written for this user. If this was not intended please verify all used uidNumbers!"), WARNING_DIALOG);
       }
     }
 

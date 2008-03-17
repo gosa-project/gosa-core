@@ -83,8 +83,8 @@ class writeexcel_olewriter {
             // The workbook class also checks this but something may have
             // happened since then.
             if (!$fh) {
-                trigger_error("Can't open $OLEfile. It may be in use or ".
-                              "protected", E_USER_ERROR);
+                trigger_error("Cannot open $OLEfile! It may be in use or ".
+                              "protected.", E_USER_ERROR);
             }
 
             $this->_internal_fh = 1;
@@ -169,7 +169,7 @@ class writeexcel_olewriter {
         if ($this->_OLEtmpfilename != '') {
             $fh = fopen($this->_OLEtmpfilename, "rb");
             if ($fh == false) {
-                trigger_error("Can't read temporary file.", E_USER_ERROR);
+                trigger_error("Cannot read temporary file!", E_USER_ERROR);
             }
             fpassthru($fh);
             fclose($fh);

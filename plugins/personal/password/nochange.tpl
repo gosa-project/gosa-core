@@ -3,7 +3,7 @@
 </div>
 
 <p>
- <b>{t}You are not allowed to change your password at this time{/t}</b>
+ <b>{t}You have no permission to change your password at this time{/t}</b>
 </p>
 
 <br>

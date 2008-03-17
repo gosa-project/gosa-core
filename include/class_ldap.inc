@@ -588,7 +588,7 @@ class LDAP{
 
           /* Bail out, if we've nothing to do... */
           if ($ocname == ""){
-            msg_dialog::display(_("Internal error"), sprintf(_("Cannot automatically create subtrees with RDN '%s': no object class found"),$type), FATAL_ERROR_DIALOG);
+            msg_dialog::display(_("Internal error"), sprintf(_("Cannot automatically create subtrees with RDN '%s': no object class found!"),$type), FATAL_ERROR_DIALOG);
             exit();
           }
 

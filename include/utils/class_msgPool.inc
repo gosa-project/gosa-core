@@ -531,6 +531,19 @@ class msgPool
     return sprintf(_("Cannot delete folder '%s'!"), $path);
   }
 
+
+  function chooseToPlaceObjectIn($what)
+  {
+    return sprintf(_("Choose subtree to place %s in"), $what);
+  }
+
+
+  function checkingFor($what)
+  {
+    return sprintf(_("Checking for %s support"), $what);
+  }
+
+
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

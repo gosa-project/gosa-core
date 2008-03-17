@@ -24,7 +24,7 @@ class password extends plugin
 {
   /* Definitions */
   var $plHeadline     = "Password";
-  var $plDescription  = "Change user passwords";
+  var $plDescription  = "Change user password";
 
   function password(&$config, $dn= NULL, $parent= NULL)
   {
@@ -76,22 +76,22 @@ class password extends plugin
 
       /* Check given values */    
       if(!isset($_POST['current_password']) || empty($_POST['current_password'])){
-        msg_dialog::display(_("User password"),
+        msg_dialog::display(_("Password change"),
                             _("You need to specify your current password in order to proceed."),WARNING_DIALOG);
       }elseif ($_POST['new_password'] != $_POST['repeated_password']){
-        msg_dialog::display(_("User password"),
+        msg_dialog::display(_("Password change"),
                             _("The passwords you've entered as 'New password' and 'Repeated new password' do not match."),WARNING_DIALOG);
       } elseif ($_POST['new_password'] == ""){
-        msg_dialog::display(_("User password"),
+        msg_dialog::display(_("Password change"),
                             _("The password you've entered as 'New password' is empty."),WARNING_DIALOG);
       }elseif($check_differ && (substr($_POST['current_password'], 0, $differ) == substr($_POST['new_password'], 0, $differ))){
-        msg_dialog::display(_("User password"),
+        msg_dialog::display(_("Password change"),
                             _("The password used as new and current are too similar."),WARNING_DIALOG);
       }elseif($check_length && (strlen($_POST['new_password']) < $length)){
-        msg_dialog::display(_("User password"),
+        msg_dialog::display(_("Password change"),
                             _("The password used as new is to short."),WARNING_DIALOG);
       }elseif($check_hook && $check_hook_output != ""){
-        msg_dialog::display(_("User password"),
+        msg_dialog::display(_("Password change"),
                     sprintf(_("External password changer reported a problem: %s."),$check_hook_output),WARNING_DIALOG);
       }else{
 
@@ -105,13 +105,13 @@ class password extends plugin
 
         /* connection Successfull ? */
         if (!$tldap->success()){
-          msg_dialog::display(_("User password"),
+          msg_dialog::display(_("Password change"),
                               _("The password you've entered as your current password doesn't match the real one."),WARNING_DIALOG);
         }else{
 
           /* Check GOsa permissions */
           if (!preg_match("/w/i",$password_ACLS)){
-            msg_dialog::display(_("User password"),
+            msg_dialog::display(_("Password change"),
                                 _("You have no permission to change your password."),WARNING_DIALOG);
           }else{
             change_password ($ui->dn, $_POST['new_password']);

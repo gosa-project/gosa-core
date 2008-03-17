@@ -115,7 +115,7 @@ class CopyPasteHandler {
   
     /* Update folder permissions */
     if(!@chmod(LDAP_DUMP_PATH,0700)){
-      $msg= sprintf(_("Copy and paste failed!")."<br><br>"._("Error").": <i>"._("cannot set permission for '%s'"),LDAP_DUMP_PATH);
+      $msg= sprintf(_("Copy and paste failed!")."<br><br>"._("Error").": <i>"._("Cannot set permission for '%s'")."</i>" ,LDAP_DUMP_PATH);
       msg_dialog::display(_("Configuration error"), $msg, ERROR_DIALOG);
       new log("copy","all/all","copy & paste, event queue.",array(), $msg);
       return(FALSE);
@@ -123,7 +123,7 @@ class CopyPasteHandler {
     
     /* check if we are able to create a new file the given directory */
     if(!is_writeable(LDAP_DUMP_PATH)){
-      $msg= sprintf(_("Copy and paste failed!")."<br><br>"._("Error").": <i>"._("no write permission in '%s'"),LDAP_DUMP_PATH);
+      $msg= _("Copy and paste failed!")."<br><br>"._("Error").": <i>".msgPool::cannotWrite(LDAP_DUMP_PATH)."</i>";
       msg_dialog::display(_("Configuration error"), $msg, ERROR_DIALOG);
       new log("copy","all/all","copy & paste, event queue.",array(), $msg);
       return(FALSE);
@@ -172,7 +172,7 @@ class CopyPasteHandler {
 
     /* check if we are able to create a new file the given directory */
     if(!is_writeable($path)){
-      $msg= sprintf(_("Copy and paste failed!")."<br><br>"._("Error").": <i>"._("no write permission in '%s'"),LDAP_DUMP_PATH);
+      $msg= sprintf(_("Copy and paste failed!")."<br><br>"._("Error").": <i>"._("No write permission in '%s'"),LDAP_DUMP_PATH);
       msg_dialog::display(_("Configuration error"), $msg, ERROR_DIALOG);
       new log("copy","all/all",$dn,array(), $msg);
       return(FALSE);
@@ -180,7 +180,7 @@ class CopyPasteHandler {
 
     /* Update folder permissions */
     if(!@chmod(LDAP_DUMP_PATH,0700)){
-      $msg= sprintf(_("Copy and paste failed!")."<br><br>"._("Error").": <i>"._("cannot set permission for '%s'"),LDAP_DUMP_PATH);
+      $msg= sprintf(_("Copy and paste failed!")."<br><br>"._("Error").": <i>"._("Cannot set permission for '%s'"),LDAP_DUMP_PATH);
       msg_dialog::display(_("Configuration error"), $msg, ERROR_DIALOG);
       new log("copy","all/all","copy & paste, event queue.",array(), $msg);
       return(FALSE);
@@ -189,7 +189,7 @@ class CopyPasteHandler {
     /* Create file handle */
     $fp = @fopen($path."/".$filename,"w+");
     if(!$fp){
-      $msg= sprintf(_("Copy and paste failed!")."<br><br>"._("Error").": <i>"._("cannot open file '%s' for writing"), "$path/$filename");
+      $msg= _("Copy and paste failed!")."<br><br>"._("Error").": <i>".msgPool::cannotWriteFile("$path/$filename")."</i>";
       msg_dialog::display(_("Configuration error"), $msg, ERROR_DIALOG);
       new log("copy","all/all",$dn,array(), $msg);
       return(FALSE);
@@ -265,7 +265,7 @@ class CopyPasteHandler {
       }
       return(unserialize($data));
     }else{
-      $msg= sprintf(_("Copy and paste failed!")."<br><br>"._("Error").": <i>"._("cannot open '%s' for reading"),$filename);
+      $msg= sprintf(_("Copy and paste failed!")."<br><br>"._("Error").": <i>".msgPool::cannotReadFile($filename)."</i>");
       msg_dialog::display(_("Internal error"), $msg, ERROR_DIALOG);
       new log("copy","all/all",$dn,array(), $msg);
       return(FALSE);

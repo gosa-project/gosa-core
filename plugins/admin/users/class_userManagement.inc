@@ -190,7 +190,7 @@ class userManagement extends plugin
       $o_queue = new gosaSupportDaemon();
       $o_queue->append($this->usertab);
       if($o_queue->is_error()){
-        msg_dialog::display(_("Service infrastructure"), msgPool::siError($o_queue->get_error()),ERROR_DIALOG);
+        msg_dialog::display(_("Infrastructure error"), msgPool::siError($o_queue->get_error()),ERROR_DIALOG);
       }else{
         $this->usertab = FALSE;
       }
@@ -289,7 +289,7 @@ class userManagement extends plugin
       } else {
 
         /* Missing permissions, show message */
-        msg_dialog::display(_("Password change failed."),_("You are not allowed to set this users password!"),WARNING_DIALOG);
+        msg_dialog::display(_("Password change"),_("You have no permission to change this users password!"),WARNING_DIALOG);
       }
       /* Clean session, delete lock */
       del_lock ($this->dn);
@@ -344,7 +344,7 @@ class userManagement extends plugin
 
       } else {
         /* User is not allowed. Show message and cancel. */
-        msg_dialog::display(_("Password change"),_("You are not allowed to set this users password!"),WARNING_DIALOG);
+        msg_dialog::display(_("Password change"),_("You have no permission to change this users password!"),WARNING_DIALOG);
       }
     }
 
@@ -479,7 +479,7 @@ class userManagement extends plugin
             unset ($this->usertab);
             $this->usertab= NULL;
           } else {
-            msg_dialog::display(_("User delete"),msgPool::permDelete($dn),WARNING_DIALOG);
+            msg_dialog::display(_("Warning"),msgPool::permDelete($dn),WARNING_DIALOG);
             if(isset($this->ui->uid)){
               new log("security","users/".get_class($this),$dn,array(),"Tried to trick deletion.");
             }
@@ -588,12 +588,12 @@ class userManagement extends plugin
         $this->usertab->delete ();
         unset ($this->usertab);
         $this->usertab= NULL;
-        msg_dialog::display(_("User deleted"),_("User successfully removed."),INFO_DIALOG);
+        msg_dialog::display(_("Information"),_("User successfully removed."),INFO_DIALOG);
       } else {
 
         /* Normally this shouldn't be reached, send some extra
            logs to notify the administrator */
-        msg_dialog::display(_("User delete"),msgPool::permDelete(),WARNING_DIALOG);
+        msg_dialog::display(_("Warning"),msgPool::permDelete(),WARNING_DIALOG);
 
         if(isset($this->ui->uid)){
           new log("security","users/".get_class($this),$this->dn,array(),"Tried to trick deletion.");
