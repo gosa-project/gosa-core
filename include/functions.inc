@@ -2574,8 +2574,12 @@ function generate_smb_nt_hash($password)
 
   # Try to use gosa-si?
   if (isset($config->current['GOSA_SI'])){
-	$res= gosaSupportDaemon::send("gosa_gen_smb_hash", "GOSA", array("password" => $password), TRUE);
-	$hash= $res['XML']['HASH'];
+  	$res= gosaSupportDaemon::send("gosa_gen_smb_hash", "GOSA", array("password" => $password), TRUE);
+    if (isset($res['XML']['HASH'])){
+    	$hash= $res['XML']['HASH'];
+    } else {
+      $hash= "";
+    }
   } else {
 	  $tmp= $config->data['MAIN']['SMBHASH']." ".escapeshellarg($password);
 	  @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__, $tmp, "Execute");
