@@ -501,7 +501,7 @@ class ogroup extends plugin
          it seams that this entry was removed 
        */ 
       /* Try to resolv the entry again, if it still fails, display error msg */
-      $ldap->cat($dn, array("cn", "sn", "givenName", "ou", "description", "objectClass"));
+      $ldap->cat($dn, array("cn", "sn", "givenName", "ou", "description", "objectClass", "macAddress"));
 
       /* It has failed, add entry with type flag I (Invalid)*/
       if (!$ldap->success()){
@@ -525,6 +525,13 @@ class ogroup extends plugin
           $this->objcache[$attrs["dn"]]= array("text" => "$name", "type" => "$type");
         }
         $this->objcache[$attrs["dn"]]['objectClass']  = $attrs['objectClass'];
+
+        if(isset($attrs['macAddress'][0])){
+          $this->objcache[$attrs["dn"]]['macAddress']  = $attrs['macAddress'][0];
+        }else{
+          $this->objcache[$attrs["dn"]]['macAddress']  = "";
+        }
+
         if(isset($attrs['uid'])){
           $this->objcache[$attrs["dn"]]['uid']          = $attrs['uid'];
         }
