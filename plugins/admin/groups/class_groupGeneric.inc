@@ -687,8 +687,8 @@ class group extends plugin
 
     /* Add member dn's for RFC2307bis Support */
     if ($this->rfc2307bis){
+      $this->attrs['member'] = array();
       if (count($this->memberUid)){
-        $this->attrs['member'] = array();
         foreach($this->attrs['memberUid'] as $uid) {
           $this->attrs['member'][]= $this->dnMapping[$uid];
         }
