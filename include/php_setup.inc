@@ -247,6 +247,11 @@ function dummy_error_handler()
 {
 }
 
+/* Bail out for incompatible/old PHP versions */
+if (!version_compare(phpversion(),"5.2.0",">=")){
+  echo "PHP version needs to be 5.2.0 or above to run GOsa. Aborted.";
+  exit();
+}
 
 /* Set timezone */
 date_default_timezone_set("GMT");
