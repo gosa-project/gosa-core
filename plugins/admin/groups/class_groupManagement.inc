@@ -172,7 +172,7 @@ class groupManagement extends plugin
         if(isset($events['BY_CLASS'][$event])){
           $type = $events['BY_CLASS'][$event];
           $this->grouptab = new $type['CLASS_NAME']($this->config);
-          $this->grouptab->add_targets($uids);
+          $this->grouptab->add_groups($uids);
           $this->grouptab->set_type(TRIGGERED_EVENT);
         }
       }
@@ -185,12 +185,18 @@ class groupManagement extends plugin
 
     /* Save event */
     if(isset($_POST['save_event_dialog'])){
-      $o_queue = new gosaSupportDaemon();
-      $o_queue->append($this->grouptab);
-      if($o_queue->is_error()){
-        msg_dialog::display(_("Infrastructure error"), msgPool::siError($o_queue->get_error()),ERROR_DIALOG);
+      $this->grouptab->save_object();
+      $msgs = $this->grouptab->check();
+      if(count($msgs)){
+        msg_dialog::displayChecks($msgs);
       }else{
-        $this->grouptab = FALSE;
+        $o_queue = new gosaSupportDaemon();
+        $o_queue->append($this->grouptab);
+        if($o_queue->is_error()){
+          msg_dialog::display(_("Infrastructure error"), msgPool::siError($o_queue->get_error()),ERROR_DIALOG);
+        }else{
+          $this->grouptab = FALSE;
+        }
       }
     }
 
@@ -199,7 +205,6 @@ class groupManagement extends plugin
       $this->grouptab->save_object();
       return($this->grouptab->execute());
     }
-
 
 
     /********************
