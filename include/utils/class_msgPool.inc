@@ -465,7 +465,7 @@ class msgPool
   }
 
 
-  function incorrectUpload($reason= "")
+  public static function incorrectUpload($reason= "")
   {
     if ($reason == ""){
       return _("Upload failed!");
@@ -475,7 +475,7 @@ class msgPool
   }
 
 
-  function siError($error= "")
+  public static function siError($error= "")
   {
     if ($error == ""){
       return _("Communication failure with the infrastructure service!");
@@ -484,7 +484,7 @@ class msgPool
   }
 
 
-  function stillInUse($type, $objects= array())
+  public static function stillInUse($type, $objects= array())
   {
     if (!is_array($objects)){
       return sprintf(_("This '%s' is still in use by this object: %s"), $type, "<br><br>".$objects);
@@ -496,49 +496,49 @@ class msgPool
   }
 
 
-  function fileDoesNotExist($file)
+  public static function fileDoesNotExist($file)
   {
     return sprintf(_("File '%s' does not exist!"), $file);
   }
 
 
-  function cannotReadFile($file)
+  public static function cannotReadFile($file)
   {
     return sprintf(_("Cannot open file '%s' for reading!"), $file);
   }
 
 
-  function cannotWriteFile($file)
+  public static function cannotWriteFile($file)
   {
     return sprintf(_("Cannot open file '%s' for writing!"), $file);
   }
 
 
-  function cannotDeleteFile($file)
+  public static function cannotDeleteFile($file)
   {
     return sprintf(_("Cannot delete file '%s'!"), $file);
   }
 
 
-  function cannotCreateFolder($path)
+  public static function cannotCreateFolder($path)
   {
     return sprintf(_("Cannot create folder '%s'!"), $path);
   }
 
 
-  function cannotDeleteFolder($path)
+  public static function cannotDeleteFolder($path)
   {
     return sprintf(_("Cannot delete folder '%s'!"), $path);
   }
 
 
-  function chooseToPlaceObjectIn($what)
+  public static function chooseToPlaceObjectIn($what)
   {
     return sprintf(_("Choose subtree to place %s in"), $what);
   }
 
 
-  function checkingFor($what)
+  public static function checkingFor($what)
   {
     return sprintf(_("Checking for %s support"), $what);
   }
