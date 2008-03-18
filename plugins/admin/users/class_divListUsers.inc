@@ -82,11 +82,11 @@ class divListUsers extends MultiSelectWindow
     $this->AddHeader(array("string"=>_("Actions"),      "attach" => "style='width:".$action_col_size."px;border-right:0px;text-align:right;'"));
     
     $this->AddCheckBox("ShowTemplates"      ,msgPool::selectToView(_("Template"))             ,sprintf(_("Show %s"),_("templates")), false);
-    $this->AddCheckBox("ShowFunctionalUsers",msgPool::selectToView(_("GOsa object"),"enabled"),sprintf(_("Show %s user"),_("functional")), true);
-    $this->AddCheckBox("ShowUnixUsers"      ,msgPool::selectToView(_("Posix"),"enabled")      ,sprintf(_("Show %s user"),_("POSIX")), true);
-    $this->AddCheckBox("ShowMailUsers"      ,msgPool::selectToView(_("Mail"),"enabled")       ,sprintf(_("Show %s user"),_("mail")), true);
-    $this->AddCheckBox("ShowSambaUsers"     ,msgPool::selectToView(_("Samba"),"enabled")      ,sprintf(_("Show %s user"),_("samba")), true);
-    $this->AddCheckBox("ShowProxyUsers"     ,msgPool::selectToView(_("Proxy"),"enabled")      ,sprintf(_("Show %s user"),_("proxy")), true);
+    $this->AddCheckBox("ShowFunctionalUsers",msgPool::selectToView(_("GOsa object"),"enabled"),sprintf(_("Show %s"),_("functional users")), true);
+    $this->AddCheckBox("ShowUnixUsers"      ,msgPool::selectToView(_("Posix"),"enabled")      ,sprintf(_("Show %s"),_("POSIX users")), true);
+    $this->AddCheckBox("ShowMailUsers"      ,msgPool::selectToView(_("Mail"),"enabled")       ,sprintf(_("Show %s"),_("mail users")), true);
+    $this->AddCheckBox("ShowSambaUsers"     ,msgPool::selectToView(_("Samba"),"enabled")      ,sprintf(_("Show %s"),_("samba users")), true);
+    $this->AddCheckBox("ShowProxyUsers"     ,msgPool::selectToView(_("Proxy"),"enabled")      ,sprintf(_("Show %s"),_("proxy users")), true);
 
     /* Add SubSearch checkbox */
     $this->AddCheckBox(SEPERATOR);

@@ -85,35 +85,34 @@ class divListOGroup extends MultiSelectWindow
     $this->AddHeader(array("string" => _("Actions"), "attach" => "style='width:".$action_col_size."px;border-right:0px;text-align:right;'"));
 
     /*                  Text        ,Value    ,Name         ,Is selected */
-    $str1 = _("Select to see groups containing '%s'.");
-    $str2 = _("Show groups containing '%s'");
-    $this->AddCheckBox("UserGroups" ,       sprintf($str1,  _("Users")), 
-                                            sprintf($str2,  _("Users")), true);
-    $this->AddCheckBox("GroupGroups" ,      sprintf($str1,  _("Groups")),
-                                            sprintf($str2,  _("Groups")), true);
-    $this->AddCheckBox("ApplicationGroups", sprintf($str1,  _("Applications")),
-                                            sprintf($str2,  _("Applications")), true);
-    $this->AddCheckBox("DepartmentGroups" , sprintf($str1,  _("Departments")),
-                                            sprintf($str2,  _("Departments")), true);
-    $this->AddCheckBox("ServerGroups" ,     sprintf($str1,  _("Server")),
-                                            sprintf($str2,  _("Server")), true);
-    $this->AddCheckBox("WorkstationGroups", sprintf($str1,  _("Workstations")),
-                                            sprintf($str2,  _("Workstations")), true);
-    $this->AddCheckBox("WindowsGroups",     sprintf($str1,  _("Windows workstations")),
-                                            sprintf($str2,  _("Windows workstations")), true);
-    $this->AddCheckBox("TerminalGroups" ,   sprintf($str1,  _("Terminals")),
-                                            sprintf($str2,  _("Terminals")), true);
-    $this->AddCheckBox("PrinterGroups" ,    sprintf($str1,  _("Printer")),
-                                            sprintf($str2,  _("Printer")), true);
-    $this->AddCheckBox("PhoneGroups" ,      sprintf($str1,  _("Phones")),
-                                            sprintf($str2,  _("Phones")), true);
+    $str2 = _("Show groups with '%s'");
+    $this->AddCheckBox("UserGroups" ,       sprintf($str2,  _("users")), 
+                                            sprintf($str2,  _("users")), true);
+    $this->AddCheckBox("GroupGroups" ,      sprintf($str2,  _("groups")),
+                                            sprintf($str2,  _("groups")), true);
+    $this->AddCheckBox("ApplicationGroups", sprintf($str2,  _("applications")),
+                                            sprintf($str2,  _("applications")), true);
+    $this->AddCheckBox("DepartmentGroups" , sprintf($str2,  _("departments")),
+                                            sprintf($str2,  _("departments")), true);
+    $this->AddCheckBox("ServerGroups" ,     sprintf($str2,  _("server")),
+                                            sprintf($str2,  _("server")), true);
+    $this->AddCheckBox("WorkstationGroups", sprintf($str2,  _("workstations")),
+                                            sprintf($str2,  _("workstations")), true);
+    $this->AddCheckBox("WindowsGroups",     sprintf($str2,  _("windows workstations")),
+                                            sprintf($str2,  _("windows workstations")), true);
+    $this->AddCheckBox("TerminalGroups" ,   sprintf($str2,  _("terminals")),
+                                            sprintf($str2,  _("terminals")), true);
+    $this->AddCheckBox("PrinterGroups" ,    sprintf($str2,  _("printers")),
+                                            sprintf($str2,  _("printers")), true);
+    $this->AddCheckBox("PhoneGroups" ,      sprintf($str2,  _("phones")),
+                                            sprintf($str2,  _("phones")), true);
 
     /* Add SubSearch checkbox */    
     $this->AddCheckBox(SEPERATOR);
     $this->AddCheckBox("SubSearch",  msgPool::selectToView("","subsearch"), msgPool::selectToView("","subsearch_small"), false);
 
     /*                  Name                 ,Text                              ,Default  , Connect with alphabet  */
-    $this->AddRegex   ("Regex",     _("Regular expression for matching group names"), "*" , true);
+    $this->AddRegex   ("Regex", _("Regular expression for matching group names"), "*" , true);
   }
 
 

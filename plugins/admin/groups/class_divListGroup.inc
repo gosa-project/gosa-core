@@ -82,15 +82,15 @@ class divListGroup extends MultiSelectWindow
 
     /*                  Text        ,Value    ,Name         ,Is selected */
     $this->AddCheckBox("ShowPrimaryGroups",     _("Select to see groups that are primary groups of users"), 
-                                                  sprintf(_("Show %s groups"),_("primary")),     true);
+                                                  sprintf(_("Show %s"),_("primary groups")),     true);
     $this->AddCheckBox("ShowSambaGroups",       msgPool::selectToView(_("samba groups mappings"),"enabled"), 
-                                                  sprintf(_("Show %s groups"),_("samba")),              true);
+                                                  sprintf(_("Show %s"),_("samba groups")),              true);
     $this->AddCheckBox("ShowApplicationGroups", msgPool::selectToView(_("application settings"),"enabled"),     
-                                                  sprintf(_("Show %s groups"),_("application")),        true);
+                                                  sprintf(_("Show %s"),_("application groups")),        true);
     $this->AddCheckBox("ShowMailGroups",        msgPool::selectToView(_("mail settings"),"enabled"), 
-                                                  sprintf(_("Show %s groups"),_("mail")),               true);
+                                                  sprintf(_("Show %s"),_("mail groups")),               true);
     $this->AddCheckBox("ShowFunctionalGroups",  _("Select to see normal groups that have only functional aspects"),
-                                                  sprintf(_("Show %s groups"),_("functional")),     true);
+                                                  sprintf(_("Show %s"),_("functional groups")),     true);
     $this->AddCheckBox(SEPERATOR);
 
     /* Add SubSearch checkbox */    
