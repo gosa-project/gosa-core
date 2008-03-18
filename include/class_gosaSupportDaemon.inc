@@ -41,7 +41,7 @@ class gosaSupportDaemon
     @param boolean  Connect Directly connect to daemon socket.
     @param float    Timeout The timelimit for all socket actions.
    */
-  public function __construct($connect=TRUE,$timeout=2)
+  public function __construct($connect=TRUE,$timeout=10)
   {
     #FIXME: bad idea about referencing global variables from within classes
     global $config;
@@ -146,13 +146,17 @@ class gosaSupportDaemon
         if(isset($entries['XML'])){
           if(isset($entries['XML']['ERROR_STRING'])) {
             $this->set_error($entries['XML']['ERROR_STRING']);
-            new log("debug","DaemonEvent (IDS) ", "gosaSupportDaemon::update_entries()", $ids,"FAILED setting (".$attr.") error was ".$this->get_error());
+            new log("debug","GOsa-si", 
+              get_class($this)."::".__FUNCTION__, array(),
+              "FAILED error was ".$this->get_error());
             return($ret);
           }
 
           /* Unset header tags */
-          foreach(array("HEADER","SOURCE","TARGET") as $type){
-            unset($entries['XML'][$type]);
+          foreach(array("HEADER","SOURCE","TARGET","SESSION_ID") as $type){
+            if(isset($entries['XML'][$type])){
+              unset($entries['XML'][$type]);
+            }
           }
           $ret = $entries['XML']; 
         }
@@ -162,32 +166,32 @@ class gosaSupportDaemon
   }
 
 
-  public function FAI_get_classes($name = "")
+  public function FAI_get_classes($name)
   {
     $this->reset_error();
-
-    $xml_msg = "<xml><header>gosa_query_fai_release</header><target>GOSA</target><where><clause><RELEASE>siga</RELEASE></clause></where><source>GOSA</source></xml>";
-    $xml_msg = "<xml><header>gosa_query_fai_release</header><target>GOSA</target><source>GOSA</source><where><clause><RELEASE>siga</RELEASE></clause></where></xml>";
-    $xml_msg = "<xml><header>gosa_query_fai_release</header><target>GOSA</target><source>GOSA</source></xml>";
+    $xml_msg = "<xml><header>gosa_query_fai_release</header><target>GOSA</target><source>GOSA</source><where><release>".$name."</release></where></xml>";;
     $ret = array();
     if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
       $entries = $this->xml_to_array($str);
-  print_a($entries);
       if(isset($entries['XML']) && is_array($entries['XML'])){
 
         /* Check if returned values represent a valid answer */
         if(isset($entries['XML'])){
           if(isset($entries['XML']['ERROR_STRING'])) {
             $this->set_error($entries['XML']['ERROR_STRING']);
-            new log("debug","DaemonEvent (IDS) ", "gosaSupportDaemon::update_entries()", $ids,"FAILED setting (".$attr.") error was ".$this->get_error());
+            new log("debug","GOsa-si", 
+              get_class($this)."::".__FUNCTION__, array($name),
+              "FAILED error was ".$this->get_error());
             return($ret);
           }
 
           /* Unset header tags */
-          foreach(array("HEADER","SOURCE","TARGET") as $type){
-            unset($entries['XML'][$type]);
+          foreach(array("HEADER","SOURCE","TARGET","SESSION_ID") as $type){
+            if(isset($entries['XML'][$type])){
+              unset($entries['XML'][$type]);
+            }
           }
           $ret = $entries['XML']; 
         }
