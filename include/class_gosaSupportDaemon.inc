@@ -130,6 +130,73 @@ class gosaSupportDaemon
   }
 
 
+  public function FAI_get_server($name = "")
+  {
+    $this->reset_error();
+
+    $xml_msg = "<xml><header>gosa_query_fai_server</header><target>GOSA</target><source>GOSA</source></xml>";
+    $ret = array();
+    if($this->connect()){
+      $this->o_sock->write($xml_msg);
+      $str = trim($this->o_sock->read());
+      $entries = $this->xml_to_array($str);
+      if(isset($entries['XML']) && is_array($entries['XML'])){
+
+        /* Check if returned values represent a valid answer */
+        if(isset($entries['XML'])){
+          if(isset($entries['XML']['ERROR_STRING'])) {
+            $this->set_error($entries['XML']['ERROR_STRING']);
+            new log("debug","DaemonEvent (IDS) ", "gosaSupportDaemon::update_entries()", $ids,"FAILED setting (".$attr.") error was ".$this->get_error());
+            return($ret);
+          }
+
+          /* Unset header tags */
+          foreach(array("HEADER","SOURCE","TARGET") as $type){
+            unset($entries['XML'][$type]);
+          }
+          $ret = $entries['XML']; 
+        }
+      }
+    }
+    return($ret);
+  }
+
+
+  public function FAI_get_classes($name = "")
+  {
+    $this->reset_error();
+
+    $xml_msg = "<xml><header>gosa_query_fai_release</header><target>GOSA</target><where><clause><RELEASE>siga</RELEASE></clause></where><source>GOSA</source></xml>";
+    $xml_msg = "<xml><header>gosa_query_fai_release</header><target>GOSA</target><source>GOSA</source><where><clause><RELEASE>siga</RELEASE></clause></where></xml>";
+    $xml_msg = "<xml><header>gosa_query_fai_release</header><target>GOSA</target><source>GOSA</source></xml>";
+    $ret = array();
+    if($this->connect()){
+      $this->o_sock->write($xml_msg);
+      $str = trim($this->o_sock->read());
+      $entries = $this->xml_to_array($str);
+  print_a($entries);
+      if(isset($entries['XML']) && is_array($entries['XML'])){
+
+        /* Check if returned values represent a valid answer */
+        if(isset($entries['XML'])){
+          if(isset($entries['XML']['ERROR_STRING'])) {
+            $this->set_error($entries['XML']['ERROR_STRING']);
+            new log("debug","DaemonEvent (IDS) ", "gosaSupportDaemon::update_entries()", $ids,"FAILED setting (".$attr.") error was ".$this->get_error());
+            return($ret);
+          }
+
+          /* Unset header tags */
+          foreach(array("HEADER","SOURCE","TARGET") as $type){
+            unset($entries['XML'][$type]);
+          }
+          $ret = $entries['XML']; 
+        }
+      }
+    }
+    return($ret);
+  }
+
+
   /*! \brief  Returns an array containing all queued entries.
     @return Array All queued entries as an array.
    */
@@ -149,7 +216,8 @@ class gosaSupportDaemon
       $tags = "<where><clause>".$tags."</clause></where>";
     }
 
-    $xml_msg = "<xml>
+    $xml_msg = 
+"<xml>
       <header>gosa_query_jobdb</header>
       <target>GOSA</target>
       <source>GOSA</source>
@@ -614,7 +682,7 @@ $xml_msg.= "
     /* Prepare data */
     foreach ($data as $key => $value){
       if(is_array($value)){
-        foreach($value as $sub_val){
+        foreach($value as $sub_value){
           $xml_message.= "<$key>$sub_value</$key>";
         }
       }else{
