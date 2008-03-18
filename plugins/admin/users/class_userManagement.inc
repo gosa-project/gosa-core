@@ -174,7 +174,7 @@ class userManagement extends plugin
         if(isset($events['BY_CLASS'][$event])){
           $type = $events['BY_CLASS'][$event];
           $this->usertab = new $type['CLASS_NAME']($this->config);
-          $this->usertab->add_targets($uids);
+          $this->usertab->add_users($uids);
           $this->usertab->set_type(TRIGGERED_EVENT);
         }
       }
@@ -187,12 +187,19 @@ class userManagement extends plugin
 
     /* Save event */
     if(isset($_POST['save_event_dialog'])){
-      $o_queue = new gosaSupportDaemon();
-      $o_queue->append($this->usertab);
-      if($o_queue->is_error()){
-        msg_dialog::display(_("Infrastructure error"), msgPool::siError($o_queue->get_error()),ERROR_DIALOG);
+      $this->usertab->save_object();
+      $msgs = $this->usertab->check();
+      if(count($msgs)){
+        msg_dialog::displayChecks($msgs);
       }else{
-        $this->usertab = FALSE;
+
+        $o_queue = new gosaSupportDaemon();
+        $o_queue->append($this->usertab);
+        if($o_queue->is_error()){
+          msg_dialog::display(_("Infrastructure error"), msgPool::siError($o_queue->get_error()),ERROR_DIALOG);
+        }else{
+          $this->usertab = FALSE;
+        }
       }
     }
 
