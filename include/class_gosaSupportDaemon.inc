@@ -169,7 +169,8 @@ class gosaSupportDaemon
   public function FAI_get_classes($name)
   {
     $this->reset_error();
-    $xml_msg = "<xml><header>gosa_query_fai_release</header><target>GOSA</target><source>GOSA</source><where><release>".$name."</release></where></xml>";;
+    $xml_msg = "<xml><header>gosa_query_fai_release</header><target>GOSA</target><source>GOSA</source>".
+                  "<where><clause><phrase><release>".$name."</release></phrase></clause></where></xml>";;
     $ret = array();
     if($this->connect()){
       $this->o_sock->write($xml_msg);
