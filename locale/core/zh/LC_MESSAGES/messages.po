@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-17 23:32+0100\n"
+"POT-Creation-Date: 2008-03-18 21:43+0100\n"
 "PO-Revision-Date: 2007-06-03 12:27+0800\n"
 "Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
 "Language-Team: Chinese Simplified <zh@li.org>\n"
@@ -477,9 +477,9 @@ msgstr "组织/公司"
 #: plugins/personal/generic/class_user.inc:1155
 #: plugins/personal/generic/class_user.inc:1192
 #: plugins/personal/generic/class_user.inc:1578
-#: plugins/admin/users/class_userManagement.inc:724
-#: plugins/admin/users/class_userManagement.inc:802
-#: plugins/admin/users/class_userManagement.inc:814
+#: plugins/admin/users/class_userManagement.inc:731
+#: plugins/admin/users/class_userManagement.inc:809
+#: plugins/admin/users/class_userManagement.inc:821
 #: plugins/admin/groups/class_groupGeneric.inc:870
 #: plugins/admin/groups/class_groupGeneric.inc:876
 #: plugins/admin/groups/class_groupGeneric.inc:878
@@ -803,8 +803,6 @@ msgstr ""
 
 #: setup/setup_config2.tpl:264 setup/setup_config2.tpl:309
 #: plugins/admin/ogroups/class_ogroupManagement.inc:502
-#: plugins/admin/ogroups/class_divListOGroup.inc:98
-#: plugins/admin/ogroups/class_divListOGroup.inc:99
 #: plugins/generic/references/class_reference.inc:64
 msgid "Server"
 msgstr "服务器"
@@ -908,8 +906,8 @@ msgstr ""
 #: include/functions.inc:2174 include/functions.inc:2180
 #: plugins/personal/posix/class_posixAccount.inc:817
 #: plugins/personal/posix/class_posixAccount.inc:910
-#: plugins/admin/users/class_userManagement.inc:482
-#: plugins/admin/users/class_userManagement.inc:596
+#: plugins/admin/users/class_userManagement.inc:489
+#: plugins/admin/users/class_userManagement.inc:603
 #: plugins/admin/users/remove.tpl:2 plugins/admin/groups/remove.tpl:2
 #: plugins/admin/acl/remove.tpl:2
 #: plugins/admin/departments/dep_move_confirm.tpl:2
@@ -1013,7 +1011,7 @@ msgstr ""
 #: plugins/admin/groups/class_divListGroup.inc:183
 #: plugins/admin/acl/class_divListACL.inc:161
 #: plugins/admin/departments/class_divListDepartment.inc:151
-#: plugins/admin/ogroups/class_divListOGroup.inc:202
+#: plugins/admin/ogroups/class_divListOGroup.inc:201
 msgid "Create"
 msgstr "创建"
 
@@ -1047,8 +1045,8 @@ msgstr "请输入一个有效的用户名！"
 #: ihtml/themes/default/msg_dialog.tpl:100 include/utils/class_msgPool.inc:153
 #: include/utils/class_msgPool.inc:165 include/utils/class_msgPool.inc:183
 #: include/utils/class_msgPool.inc:464 include/utils/class_msgPool.inc:483
-#: include/class_gosaSupportDaemon.inc:794
-#: include/class_gosaSupportDaemon.inc:814
+#: include/class_gosaSupportDaemon.inc:867
+#: include/class_gosaSupportDaemon.inc:887
 #: include/class_CopyPasteHandler.inc:118
 #: include/class_CopyPasteHandler.inc:126
 #: include/class_CopyPasteHandler.inc:158
@@ -1101,7 +1099,7 @@ msgstr "为对象 '%s' 设置动作状态(FAIstate) 失败，值为 '%s'。"
 #: plugins/personal/generic/class_user.inc:1020
 #: plugins/personal/posix/class_posixAccount.inc:663
 #: plugins/personal/posix/class_posixAccount.inc:927
-#: plugins/admin/users/class_userManagement.inc:539
+#: plugins/admin/users/class_userManagement.inc:546
 #: plugins/admin/groups/class_groupGeneric.inc:576
 #: plugins/admin/groups/class_groupGeneric.inc:843
 #: plugins/admin/acl/class_aclRole.inc:585
@@ -1390,7 +1388,7 @@ msgstr "连接"
 #: plugins/admin/departments/class_divListDepartment.inc:144
 #: plugins/admin/departments/generic.tpl:35
 #: plugins/admin/ogroups/class_ogroup.inc:817
-#: plugins/admin/ogroups/class_divListOGroup.inc:194
+#: plugins/admin/ogroups/class_divListOGroup.inc:193
 #: plugins/admin/ogroups/generic.tpl:26
 msgid "Base"
 msgstr "位置"
@@ -1440,7 +1438,7 @@ msgstr "当前版本"
 #: ihtml/themes/default/MultiSelectWindow.tpl:86
 #: ihtml/themes/default/msg_dialog.tpl:59
 #: ihtml/themes/default/msg_dialog.tpl:104
-#: plugins/admin/users/class_userManagement.inc:591
+#: plugins/admin/users/class_userManagement.inc:598
 #: plugins/admin/ogroups/class_ogroup.inc:169
 msgid "Information"
 msgstr "提示信息"
@@ -2170,7 +2168,7 @@ msgstr "旧口令"
 #: plugins/personal/generic/main.inc:86
 #: plugins/personal/password/password.tpl:18
 #: plugins/admin/users/password.tpl:13
-#: plugins/admin/users/class_userManagement.inc:245 html/password.php:200
+#: plugins/admin/users/class_userManagement.inc:252 html/password.php:200
 msgid "New password"
 msgstr "新口令"
 
@@ -2376,8 +2374,8 @@ msgstr ""
 #: plugins/personal/password/class_password.inc:94
 #: plugins/personal/password/class_password.inc:108
 #: plugins/personal/password/class_password.inc:114
-#: plugins/admin/users/class_userManagement.inc:292
-#: plugins/admin/users/class_userManagement.inc:347 html/main.php:356
+#: plugins/admin/users/class_userManagement.inc:299
+#: plugins/admin/users/class_userManagement.inc:354 html/main.php:356
 #, fuzzy
 msgid "Password change"
 msgstr "不允许修改口令"
@@ -3137,17 +3135,17 @@ msgid ""
 "correct timezone offset."
 msgstr ""
 
-#: include/class_gosaSupportDaemon.inc:514
+#: include/class_gosaSupportDaemon.inc:587
 #, fuzzy
 msgid "Cannot not parse XML!"
 msgstr "太多用户，无法分配一个可用的 ID！"
 
-#: include/class_gosaSupportDaemon.inc:794
+#: include/class_gosaSupportDaemon.inc:867
 #, fuzzy, php-format
 msgid "Cannot send abort event for entry %s!"
 msgstr "无法创建文件 '%s'。"
 
-#: include/class_gosaSupportDaemon.inc:814
+#: include/class_gosaSupportDaemon.inc:887
 #, fuzzy, php-format
 msgid "Cannot remove entry %s!"
 msgstr "未知 FAIstate %s"
@@ -3228,8 +3226,8 @@ msgstr ""
 #: plugins/admin/groups/class_divListGroup.inc:223
 #: plugins/admin/acl/class_divListACL.inc:184
 #: plugins/admin/acl/class_divListACL.inc:187
-#: plugins/admin/ogroups/class_divListOGroup.inc:239
-#: plugins/admin/ogroups/class_divListOGroup.inc:242
+#: plugins/admin/ogroups/class_divListOGroup.inc:238
+#: plugins/admin/ogroups/class_divListOGroup.inc:241
 msgid "Paste"
 msgstr "粘贴"
 
@@ -3360,17 +3358,13 @@ msgid "Use ACL defined in role"
 msgstr ""
 
 #: include/class_acl.inc:216 plugins/personal/generic/class_user.inc:1448
-#: plugins/admin/users/class_userManagement.inc:26
-#: plugins/admin/ogroups/class_divListOGroup.inc:90
-#: plugins/admin/ogroups/class_divListOGroup.inc:91 html/getxls.php:91
+#: plugins/admin/users/class_userManagement.inc:26 html/getxls.php:91
 #: html/getxls.php:92 html/getxls.php:310
 msgid "Users"
 msgstr "用户"
 
 #: include/class_acl.inc:216 plugins/admin/groups/class_groupGeneric.inc:1019
-#: plugins/admin/groups/class_groupManagement.inc:26
-#: plugins/admin/ogroups/class_divListOGroup.inc:92
-#: plugins/admin/ogroups/class_divListOGroup.inc:93 html/getxls.php:126
+#: plugins/admin/groups/class_groupManagement.inc:26 html/getxls.php:126
 #: html/getxls.php:128 html/getxls.php:311
 msgid "Groups"
 msgstr "用户组"
@@ -3642,7 +3636,7 @@ msgstr "重新加载列表"
 #: plugins/admin/groups/class_divListGroup.inc:176
 #: plugins/admin/acl/class_divListACL.inc:155
 #: plugins/admin/departments/class_divListDepartment.inc:146
-#: plugins/admin/ogroups/class_divListOGroup.inc:196
+#: plugins/admin/ogroups/class_divListOGroup.inc:195
 msgid "Submit"
 msgstr "提交"
 
@@ -4066,7 +4060,7 @@ msgstr "标准证书"
 #: plugins/admin/groups/class_divListGroup.inc:197
 #: plugins/admin/acl/class_divListACL.inc:172
 #: plugins/admin/departments/class_divListDepartment.inc:160
-#: plugins/admin/ogroups/class_divListOGroup.inc:216
+#: plugins/admin/ogroups/class_divListOGroup.inc:215
 msgid "Remove"
 msgstr "删除"
 
@@ -4142,8 +4136,8 @@ msgstr "此应用程序不再可用。"
 #: plugins/personal/generic/class_user.inc:1189
 #: plugins/personal/generic/class_user.inc:1455
 #: plugins/personal/generic/class_user.inc:1575
-#: plugins/admin/users/class_userManagement.inc:727
-#: plugins/admin/users/class_userManagement.inc:805 html/getxls.php:88
+#: plugins/admin/users/class_userManagement.inc:734
+#: plugins/admin/users/class_userManagement.inc:812 html/getxls.php:88
 #: html/getxls.php:225 html/getxls.php:283 html/getxls.php:299
 msgid "Given name"
 msgstr "名"
@@ -4514,7 +4508,7 @@ msgstr "房间号"
 
 #: plugins/personal/generic/main.inc:81
 #: plugins/personal/password/class_password.inc:83
-#: plugins/admin/users/class_userManagement.inc:240 html/password.php:197
+#: plugins/admin/users/class_userManagement.inc:247 html/password.php:197
 msgid ""
 "The passwords you've entered as 'New password' and 'Repeated new password' "
 "do not match."
@@ -4691,7 +4685,7 @@ msgstr "显示匹配的组"
 
 #: plugins/personal/posix/posix_groups.tpl:48
 #: plugins/admin/groups/class_divListGroup.inc:100
-#: plugins/admin/ogroups/class_divListOGroup.inc:116
+#: plugins/admin/ogroups/class_divListOGroup.inc:115
 msgid "Regular expression for matching group names"
 msgstr "用于匹配组名的正则表达式"
 
@@ -4967,7 +4961,7 @@ msgstr ""
 #: plugins/admin/users/template.tpl:15
 #: plugins/admin/users/class_divListUsers.inc:84
 #: plugins/admin/users/class_divListUsers.inc:177
-#: plugins/admin/users/class_userManagement.inc:721
+#: plugins/admin/users/class_userManagement.inc:728
 msgid "Template"
 msgstr "模板"
 
@@ -5004,11 +4998,21 @@ msgstr "属性"
 #: plugins/admin/departments/class_divListDepartment.inc:68
 #: plugins/admin/departments/class_divListDepartment.inc:149
 #: plugins/admin/ogroups/class_divListOGroup.inc:85
-#: plugins/admin/ogroups/class_divListOGroup.inc:200
+#: plugins/admin/ogroups/class_divListOGroup.inc:199
 msgid "Actions"
 msgstr "动作"
 
 #: plugins/admin/users/class_divListUsers.inc:84
+#: plugins/admin/users/class_divListUsers.inc:85
+#: plugins/admin/users/class_divListUsers.inc:86
+#: plugins/admin/users/class_divListUsers.inc:87
+#: plugins/admin/users/class_divListUsers.inc:88
+#: plugins/admin/users/class_divListUsers.inc:89
+#: plugins/admin/groups/class_divListGroup.inc:85
+#: plugins/admin/groups/class_divListGroup.inc:87
+#: plugins/admin/groups/class_divListGroup.inc:89
+#: plugins/admin/groups/class_divListGroup.inc:91
+#: plugins/admin/groups/class_divListGroup.inc:93
 #: plugins/admin/ogroups/class_ogroup.inc:298
 #: plugins/admin/ogroups/class_ogroup.inc:302
 #: plugins/admin/ogroups/class_ogroup.inc:306
@@ -5018,6 +5022,7 @@ msgstr "动作"
 #: plugins/admin/ogroups/class_ogroup.inc:322
 #: plugins/admin/ogroups/class_ogroup.inc:326
 #: plugins/admin/ogroups/class_ogroup.inc:330
+#: plugins/admin/ogroups/class_divListOGroup.inc:88
 #, fuzzy, php-format
 msgid "Show %s"
 msgstr "显示组"
@@ -5033,19 +5038,9 @@ msgid "GOsa object"
 msgstr "对象"
 
 #: plugins/admin/users/class_divListUsers.inc:85
-#: plugins/admin/users/class_divListUsers.inc:86
-#: plugins/admin/users/class_divListUsers.inc:87
-#: plugins/admin/users/class_divListUsers.inc:88
-#: plugins/admin/users/class_divListUsers.inc:89
-#, fuzzy, php-format
-msgid "Show %s user"
-msgstr "显示 samba 用户"
-
-#: plugins/admin/users/class_divListUsers.inc:85
-#: plugins/admin/groups/class_divListGroup.inc:93
 #, fuzzy
-msgid "functional"
-msgstr "功能"
+msgid "functional users"
+msgstr "显示用户"
 
 #: plugins/admin/users/class_divListUsers.inc:86
 #: plugins/admin/users/class_divListUsers.inc:268
@@ -5055,30 +5050,28 @@ msgstr "Posix"
 
 #: plugins/admin/users/class_divListUsers.inc:86
 #, fuzzy
-msgid "posix"
-msgstr "Posix"
+msgid "POSIX users"
+msgstr "Posix 设置"
 
 #: plugins/admin/users/class_divListUsers.inc:87
 #: plugins/admin/users/class_divListUsers.inc:272
 #: plugins/admin/groups/class_divListGroup.inc:263
 #: plugins/admin/ogroups/tabs_ogroups.inc:110
 #: plugins/admin/ogroups/tabs_ogroups.inc:256
-#: plugins/admin/ogroups/class_divListOGroup.inc:270
+#: plugins/admin/ogroups/class_divListOGroup.inc:269
 #: plugins/generic/references/class_reference.inc:44
 msgid "Mail"
 msgstr "邮件"
 
 #: plugins/admin/users/class_divListUsers.inc:87
-#: plugins/admin/groups/class_divListGroup.inc:91
 #, fuzzy
-msgid "mail"
-msgstr "男"
+msgid "mail users"
+msgstr "域用户"
 
 #: plugins/admin/users/class_divListUsers.inc:88
-#: plugins/admin/groups/class_divListGroup.inc:87
 #, fuzzy
-msgid "samba"
-msgstr "Samba"
+msgid "samba users"
+msgstr "域用户"
 
 #: plugins/admin/users/class_divListUsers.inc:89
 #: plugins/generic/references/class_reference.inc:52
@@ -5087,8 +5080,8 @@ msgstr "代理"
 
 #: plugins/admin/users/class_divListUsers.inc:89
 #, fuzzy
-msgid "proxy"
-msgstr "代理"
+msgid "proxy users"
+msgstr "显示代理用户"
 
 #: plugins/admin/users/class_divListUsers.inc:96
 #: plugins/admin/groups/group_objects.tpl:46
@@ -5099,14 +5092,14 @@ msgstr "显示匹配的用户"
 #: plugins/admin/groups/class_divListGroup.inc:176
 #: plugins/admin/acl/class_divListACL.inc:155
 #: plugins/admin/departments/class_divListDepartment.inc:146
-#: plugins/admin/ogroups/class_divListOGroup.inc:196
+#: plugins/admin/ogroups/class_divListOGroup.inc:195
 msgid "Submit department"
 msgstr "提交部门"
 
 #: plugins/admin/users/class_divListUsers.inc:204
 #: plugins/admin/groups/class_divListGroup.inc:214
 #: plugins/admin/acl/class_divListACL.inc:178
-#: plugins/admin/ogroups/class_divListOGroup.inc:233
+#: plugins/admin/ogroups/class_divListOGroup.inc:232
 #, fuzzy
 msgid "Copy"
 msgstr "复制"
@@ -5114,7 +5107,7 @@ msgstr "复制"
 #: plugins/admin/users/class_divListUsers.inc:206
 #: plugins/admin/groups/class_divListGroup.inc:216
 #: plugins/admin/acl/class_divListACL.inc:180
-#: plugins/admin/ogroups/class_divListOGroup.inc:235
+#: plugins/admin/ogroups/class_divListOGroup.inc:234
 #, fuzzy
 msgid "Cut"
 msgstr "剪切"
@@ -5170,28 +5163,28 @@ msgstr "创建使用该模板的用户"
 #: plugins/admin/users/class_divListUsers.inc:307
 #: plugins/admin/groups/class_divListGroup.inc:291
 #: plugins/admin/acl/class_divListACL.inc:235
-#: plugins/admin/ogroups/class_divListOGroup.inc:289
+#: plugins/admin/ogroups/class_divListOGroup.inc:288
 msgid "cut"
 msgstr "剪切"
 
 #: plugins/admin/users/class_divListUsers.inc:307
 #: plugins/admin/groups/class_divListGroup.inc:291
 #: plugins/admin/acl/class_divListACL.inc:235
-#: plugins/admin/ogroups/class_divListOGroup.inc:289
+#: plugins/admin/ogroups/class_divListOGroup.inc:288
 msgid "Cut this entry"
 msgstr "剪切条目"
 
 #: plugins/admin/users/class_divListUsers.inc:309
 #: plugins/admin/groups/class_divListGroup.inc:293
 #: plugins/admin/acl/class_divListACL.inc:237
-#: plugins/admin/ogroups/class_divListOGroup.inc:291
+#: plugins/admin/ogroups/class_divListOGroup.inc:290
 msgid "copy"
 msgstr "复制"
 
 #: plugins/admin/users/class_divListUsers.inc:309
 #: plugins/admin/groups/class_divListGroup.inc:293
 #: plugins/admin/acl/class_divListACL.inc:237
-#: plugins/admin/ogroups/class_divListOGroup.inc:291
+#: plugins/admin/ogroups/class_divListOGroup.inc:290
 msgid "Copy this entry"
 msgstr "拷贝条目"
 
@@ -5205,13 +5198,13 @@ msgstr "活动"
 #: plugins/admin/acl/class_divListACL.inc:242
 #: plugins/admin/acl/class_divListACL.inc:264
 #: plugins/admin/departments/class_divListDepartment.inc:185
-#: plugins/admin/ogroups/class_divListOGroup.inc:295
+#: plugins/admin/ogroups/class_divListOGroup.inc:294
 msgid "edit"
 msgstr "编辑"
 
 #: plugins/admin/users/class_divListUsers.inc:329
-#: plugins/admin/users/class_userManagement.inc:453
-#: plugins/admin/users/class_userManagement.inc:564
+#: plugins/admin/users/class_userManagement.inc:460
+#: plugins/admin/users/class_userManagement.inc:571
 #, fuzzy
 msgid "user"
 msgstr "用户"
@@ -5231,12 +5224,12 @@ msgstr "不允许修改口令"
 #: plugins/admin/acl/class_divListACL.inc:252
 #: plugins/admin/acl/class_divListACL.inc:268
 #: plugins/admin/departments/class_divListDepartment.inc:190
-#: plugins/admin/ogroups/class_divListOGroup.inc:303
+#: plugins/admin/ogroups/class_divListOGroup.inc:302
 msgid "delete"
 msgstr "删除"
 
 #: plugins/admin/users/class_divListUsers.inc:353
-#: plugins/admin/users/class_userManagement.inc:564
+#: plugins/admin/users/class_userManagement.inc:571
 msgid "Delete user"
 msgstr "删除用户"
 
@@ -5248,7 +5241,7 @@ msgstr "部门名称"
 #: plugins/admin/users/class_divListUsers.inc:443
 #: plugins/admin/groups/class_divListGroup.inc:365
 #: plugins/admin/departments/class_divListDepartment.inc:229
-#: plugins/admin/ogroups/class_divListOGroup.inc:353
+#: plugins/admin/ogroups/class_divListOGroup.inc:352
 #, fuzzy
 msgid "Number of listed departments"
 msgstr "部门名称"
@@ -5258,30 +5251,30 @@ msgstr "部门名称"
 msgid "Manage users"
 msgstr "域用户"
 
-#: plugins/admin/users/class_userManagement.inc:193
-#: plugins/admin/groups/class_groupManagement.inc:191
+#: plugins/admin/users/class_userManagement.inc:199
+#: plugins/admin/groups/class_groupManagement.inc:196
 #: plugins/admin/ogroups/class_ogroupManagement.inc:173
 #, fuzzy
 msgid "Infrastructure error"
 msgstr "PHP 错误"
 
-#: plugins/admin/users/class_userManagement.inc:292
-#: plugins/admin/users/class_userManagement.inc:347
+#: plugins/admin/users/class_userManagement.inc:299
+#: plugins/admin/users/class_userManagement.inc:354
 #, fuzzy
 msgid "You have no permission to change this users password!"
 msgstr "您无权修改您的口令。"
 
-#: plugins/admin/users/class_userManagement.inc:454
+#: plugins/admin/users/class_userManagement.inc:461
 #, fuzzy
 msgid "Delete users"
 msgstr "删除用户"
 
-#: plugins/admin/users/class_userManagement.inc:591
+#: plugins/admin/users/class_userManagement.inc:598
 #, fuzzy
 msgid "User successfully removed."
 msgstr "导入成功"
 
-#: plugins/admin/users/class_userManagement.inc:702
+#: plugins/admin/users/class_userManagement.inc:709
 #: plugins/admin/ogroups/class_ogroup.inc:343
 msgid "none"
 msgstr "无"
@@ -5435,23 +5428,19 @@ msgid "Select to see groups that are primary groups of users"
 msgstr "选择查看用户的主要组"
 
 #: plugins/admin/groups/class_divListGroup.inc:85
-#: plugins/admin/groups/class_divListGroup.inc:87
-#: plugins/admin/groups/class_divListGroup.inc:89
-#: plugins/admin/groups/class_divListGroup.inc:91
-#: plugins/admin/groups/class_divListGroup.inc:93
-#, fuzzy, php-format
-msgid "Show %s groups"
-msgstr "显示组"
-
-#: plugins/admin/groups/class_divListGroup.inc:85
 #, fuzzy
-msgid "primary"
-msgstr "总结"
+msgid "primary groups"
+msgstr "主要用户组"
 
 #: plugins/admin/groups/class_divListGroup.inc:86
 #, fuzzy
 msgid "samba groups mappings"
 msgstr "显示匹配的组"
+
+#: plugins/admin/groups/class_divListGroup.inc:87
+#, fuzzy
+msgid "samba groups"
+msgstr "Samba 组"
 
 #: plugins/admin/groups/class_divListGroup.inc:88
 #, fuzzy
@@ -5459,18 +5448,30 @@ msgid "application settings"
 msgstr "应用程序"
 
 #: plugins/admin/groups/class_divListGroup.inc:89
+#: plugins/admin/ogroups/class_divListOGroup.inc:93
+#: plugins/admin/ogroups/class_divListOGroup.inc:94
 #, fuzzy
-msgid "application"
-msgstr "应用程序"
+msgid "application groups"
+msgstr "显示应用程序组"
 
 #: plugins/admin/groups/class_divListGroup.inc:90
 #, fuzzy
 msgid "mail settings"
 msgstr "邮件选项"
 
+#: plugins/admin/groups/class_divListGroup.inc:91
+#, fuzzy
+msgid "mail groups"
+msgstr "显示邮件组"
+
 #: plugins/admin/groups/class_divListGroup.inc:92
 msgid "Select to see normal groups that have only functional aspects"
 msgstr "选择查看实用的普通组"
+
+#: plugins/admin/groups/class_divListGroup.inc:93
+#, fuzzy
+msgid "functional groups"
+msgstr "显示实用组"
 
 #: plugins/admin/groups/class_divListGroup.inc:189
 #: plugins/admin/ogroups/class_ogroupManagement.inc:499
@@ -5487,13 +5488,13 @@ msgstr "应用程序"
 
 #: plugins/admin/groups/class_divListGroup.inc:298
 #: plugins/admin/departments/class_divListDepartment.inc:185
-#: plugins/admin/ogroups/class_divListOGroup.inc:295
+#: plugins/admin/ogroups/class_divListOGroup.inc:294
 msgid "Edit this entry"
 msgstr "编辑这条记录"
 
 #: plugins/admin/groups/class_divListGroup.inc:307
 #: plugins/admin/departments/class_divListDepartment.inc:190
-#: plugins/admin/ogroups/class_divListOGroup.inc:303
+#: plugins/admin/ogroups/class_divListOGroup.inc:302
 msgid "Delete this entry"
 msgstr "删除这个条目"
 
@@ -5506,15 +5507,15 @@ msgstr "组名称"
 msgid "Manage POSIX groups"
 msgstr ""
 
-#: plugins/admin/groups/class_groupManagement.inc:349
-#: plugins/admin/groups/class_groupManagement.inc:428
+#: plugins/admin/groups/class_groupManagement.inc:354
+#: plugins/admin/groups/class_groupManagement.inc:433
 #, fuzzy
 msgid "group"
 msgstr "组"
 
-#: plugins/admin/groups/class_groupManagement.inc:382
-#: plugins/admin/groups/class_groupManagement.inc:435
-#: plugins/admin/groups/class_groupManagement.inc:466
+#: plugins/admin/groups/class_groupManagement.inc:387
+#: plugins/admin/groups/class_groupManagement.inc:440
+#: plugins/admin/groups/class_groupManagement.inc:471
 #: plugins/admin/acl/class_aclManagement.inc:163
 #: plugins/admin/acl/class_aclManagement.inc:200
 #: plugins/admin/acl/class_aclManagement.inc:253
@@ -5717,8 +5718,6 @@ msgstr "拷贝 %s 失败，退出操作"
 #: plugins/admin/departments/class_departmentGeneric.inc:528
 #: plugins/admin/departments/class_departmentGeneric.inc:533
 #: plugins/admin/departments/class_departmentManagement.inc:26
-#: plugins/admin/ogroups/class_divListOGroup.inc:96
-#: plugins/admin/ogroups/class_divListOGroup.inc:97
 msgid "Departments"
 msgstr "部门"
 
@@ -5910,8 +5909,6 @@ msgid "Startup"
 msgstr "启动"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:224
-#: plugins/admin/ogroups/class_divListOGroup.inc:104
-#: plugins/admin/ogroups/class_divListOGroup.inc:105
 msgid "Terminals"
 msgstr "终端"
 
@@ -6041,8 +6038,6 @@ msgid "Terminal"
 msgstr "终端"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:507
-#: plugins/admin/ogroups/class_divListOGroup.inc:106
-#: plugins/admin/ogroups/class_divListOGroup.inc:107
 #: plugins/generic/references/class_reference.inc:72
 msgid "Printer"
 msgstr "打印机"
@@ -6069,46 +6064,67 @@ msgid "List of object groups"
 msgstr "对象组列表"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:83
-#: plugins/admin/ogroups/class_divListOGroup.inc:207
-#: plugins/admin/ogroups/class_divListOGroup.inc:336
+#: plugins/admin/ogroups/class_divListOGroup.inc:206
+#: plugins/admin/ogroups/class_divListOGroup.inc:335
 #: plugins/generic/references/class_reference.inc:70
 msgid "Object group"
 msgstr "对象组"
 
-#: plugins/admin/ogroups/class_divListOGroup.inc:88
-#, fuzzy, php-format
-msgid "Select to see groups containing '%s'."
-msgstr "选择查看包含用户的组"
-
 #: plugins/admin/ogroups/class_divListOGroup.inc:89
-#, fuzzy, php-format
-msgid "Show groups containing '%s'"
-msgstr "显示包含用户的组"
-
-#: plugins/admin/ogroups/class_divListOGroup.inc:94
-#: plugins/admin/ogroups/class_divListOGroup.inc:95
-msgid "Applications"
-msgstr "应用程序"
-
-#: plugins/admin/ogroups/class_divListOGroup.inc:100
-#: plugins/admin/ogroups/class_divListOGroup.inc:101
+#: plugins/admin/ogroups/class_divListOGroup.inc:90
 #, fuzzy
-msgid "Workstations"
+msgid "user groups"
+msgstr "组"
+
+#: plugins/admin/ogroups/class_divListOGroup.inc:91
+#: plugins/admin/ogroups/class_divListOGroup.inc:92
+#, fuzzy
+msgid "nested groups"
+msgstr "对象组"
+
+#: plugins/admin/ogroups/class_divListOGroup.inc:95
+#: plugins/admin/ogroups/class_divListOGroup.inc:96
+#, fuzzy
+msgid "department groups"
+msgstr "部门"
+
+#: plugins/admin/ogroups/class_divListOGroup.inc:97
+#: plugins/admin/ogroups/class_divListOGroup.inc:98
+#, fuzzy
+msgid "server groups"
+msgstr "服务器"
+
+#: plugins/admin/ogroups/class_divListOGroup.inc:99
+#: plugins/admin/ogroups/class_divListOGroup.inc:100
+#, fuzzy
+msgid "workstation groups"
 msgstr "工作站"
 
+#: plugins/admin/ogroups/class_divListOGroup.inc:101
 #: plugins/admin/ogroups/class_divListOGroup.inc:102
-#: plugins/admin/ogroups/class_divListOGroup.inc:103
 #, fuzzy
-msgid "Windows workstations"
+msgid "windows workstation groups"
 msgstr "显示工作站"
 
-#: plugins/admin/ogroups/class_divListOGroup.inc:108
-#: plugins/admin/ogroups/class_divListOGroup.inc:109
+#: plugins/admin/ogroups/class_divListOGroup.inc:103
+#: plugins/admin/ogroups/class_divListOGroup.inc:104
 #, fuzzy
-msgid "Phones"
-msgstr "电话"
+msgid "terminal groups"
+msgstr "显示邮件组"
 
-#: plugins/admin/ogroups/class_divListOGroup.inc:352
+#: plugins/admin/ogroups/class_divListOGroup.inc:105
+#: plugins/admin/ogroups/class_divListOGroup.inc:106
+#, fuzzy
+msgid "printer groups"
+msgstr "主要用户组"
+
+#: plugins/admin/ogroups/class_divListOGroup.inc:107
+#: plugins/admin/ogroups/class_divListOGroup.inc:108
+#, fuzzy
+msgid "phone groups"
+msgstr "显示组"
+
+#: plugins/admin/ogroups/class_divListOGroup.inc:351
 #, fuzzy
 msgid "Number of listed object groups"
 msgstr "对象组名称"
@@ -6487,6 +6503,61 @@ msgid ""
 msgstr "您的浏览器已经禁用 cookies。请启用 cookies 并在登录前重新加载本页面！"
 
 #, fuzzy
+#~ msgid "Show groups with '%s'"
+#~ msgstr "显示包含用户的组"
+
+#, fuzzy
+#~ msgid "server"
+#~ msgstr "服务器"
+
+#, fuzzy
+#~ msgid "Show %s user"
+#~ msgstr "显示 samba 用户"
+
+#, fuzzy
+#~ msgid "functional"
+#~ msgstr "功能"
+
+#, fuzzy
+#~ msgid "posix"
+#~ msgstr "Posix"
+
+#, fuzzy
+#~ msgid "mail"
+#~ msgstr "男"
+
+#, fuzzy
+#~ msgid "samba"
+#~ msgstr "Samba"
+
+#, fuzzy
+#~ msgid "proxy"
+#~ msgstr "代理"
+
+#, fuzzy
+#~ msgid "primary"
+#~ msgstr "总结"
+
+#, fuzzy
+#~ msgid "application"
+#~ msgstr "应用程序"
+
+#, fuzzy
+#~ msgid "Select to see groups containing '%s'."
+#~ msgstr "选择查看包含用户的组"
+
+#~ msgid "Applications"
+#~ msgstr "应用程序"
+
+#, fuzzy
+#~ msgid "Workstations"
+#~ msgstr "工作站"
+
+#, fuzzy
+#~ msgid "Phones"
+#~ msgstr "电话"
+
+#, fuzzy
 #~ msgid "Checking for duplicate gid numbers"
 #~ msgstr "检查函数 %s"
 
@@ -6615,9 +6686,6 @@ msgstr "您的浏览器已经禁用 cookies。请启用 cookies 并在登录前�
 #~ msgid "Select to see users that have only a GOsa object"
 #~ msgstr "选择查看只拥有一个 GOsa 对象的用户"
 
-#~ msgid "Show functional users"
-#~ msgstr "显示用户"
-
 #~ msgid "Select to see users that have posix settings"
 #~ msgstr "显示具有 posix 设置的用户"
 
@@ -6636,9 +6704,6 @@ msgstr "您的浏览器已经禁用 cookies。请启用 cookies 并在登录前�
 #~ msgid "Select to see users that have proxy settings"
 #~ msgstr "显示具有代理设置的用户"
 
-#~ msgid "Show proxy users"
-#~ msgstr "显示代理用户"
-
 #~ msgid "Show primary groups"
 #~ msgstr "显示主要组"
 
@@ -6651,17 +6716,8 @@ msgstr "您的浏览器已经禁用 cookies。请启用 cookies 并在登录前�
 #~ msgid "Select to see groups that have applications configured"
 #~ msgstr "选择查看配置了应用程序的组"
 
-#~ msgid "Show application groups"
-#~ msgstr "显示应用程序组"
-
 #~ msgid "Select to see groups that have mail settings"
 #~ msgstr "选择查看配置了邮件设置的组"
-
-#~ msgid "Show mail groups"
-#~ msgstr "显示邮件组"
-
-#~ msgid "Show functional groups"
-#~ msgstr "显示实用组"
 
 #, fuzzy
 #~ msgid "acl"

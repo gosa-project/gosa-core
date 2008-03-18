@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-17 23:32+0100\n"
-"PO-Revision-Date: 2008-03-17 23:47+0100\n"
+"POT-Creation-Date: 2008-03-18 21:43+0100\n"
+"PO-Revision-Date: 2008-03-18 21:49+0100\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -502,9 +502,9 @@ msgstr "Organisation"
 #: plugins/personal/generic/class_user.inc:1155
 #: plugins/personal/generic/class_user.inc:1192
 #: plugins/personal/generic/class_user.inc:1578
-#: plugins/admin/users/class_userManagement.inc:724
-#: plugins/admin/users/class_userManagement.inc:802
-#: plugins/admin/users/class_userManagement.inc:814
+#: plugins/admin/users/class_userManagement.inc:731
+#: plugins/admin/users/class_userManagement.inc:809
+#: plugins/admin/users/class_userManagement.inc:821
 #: plugins/admin/groups/class_groupGeneric.inc:870
 #: plugins/admin/groups/class_groupGeneric.inc:876
 #: plugins/admin/groups/class_groupGeneric.inc:878
@@ -805,8 +805,6 @@ msgstr "Basis für Snapshots"
 
 #: setup/setup_config2.tpl:264 setup/setup_config2.tpl:309
 #: plugins/admin/ogroups/class_ogroupManagement.inc:502
-#: plugins/admin/ogroups/class_divListOGroup.inc:98
-#: plugins/admin/ogroups/class_divListOGroup.inc:99
 #: plugins/generic/references/class_reference.inc:64
 msgid "Server"
 msgstr "Server"
@@ -900,8 +898,8 @@ msgstr "Wahrscheinlich fehlt das Wurzelobjekt."
 #: include/functions.inc:2174 include/functions.inc:2180
 #: plugins/personal/posix/class_posixAccount.inc:817
 #: plugins/personal/posix/class_posixAccount.inc:910
-#: plugins/admin/users/class_userManagement.inc:482
-#: plugins/admin/users/class_userManagement.inc:596
+#: plugins/admin/users/class_userManagement.inc:489
+#: plugins/admin/users/class_userManagement.inc:603
 #: plugins/admin/users/remove.tpl:2 plugins/admin/groups/remove.tpl:2
 #: plugins/admin/acl/remove.tpl:2
 #: plugins/admin/departments/dep_move_confirm.tpl:2
@@ -1004,7 +1002,7 @@ msgstr "Es gibt keinen GOsa Administrator in Ihrem LDAP."
 #: plugins/admin/groups/class_divListGroup.inc:183
 #: plugins/admin/acl/class_divListACL.inc:161
 #: plugins/admin/departments/class_divListDepartment.inc:151
-#: plugins/admin/ogroups/class_divListOGroup.inc:202
+#: plugins/admin/ogroups/class_divListOGroup.inc:201
 msgid "Create"
 msgstr "Anlegen"
 
@@ -1034,8 +1032,8 @@ msgstr "Geben Sie eine gültige Benutzer ID an!"
 #: ihtml/themes/default/msg_dialog.tpl:100 include/utils/class_msgPool.inc:153
 #: include/utils/class_msgPool.inc:165 include/utils/class_msgPool.inc:183
 #: include/utils/class_msgPool.inc:464 include/utils/class_msgPool.inc:483
-#: include/class_gosaSupportDaemon.inc:794
-#: include/class_gosaSupportDaemon.inc:814
+#: include/class_gosaSupportDaemon.inc:867
+#: include/class_gosaSupportDaemon.inc:887
 #: include/class_CopyPasteHandler.inc:118
 #: include/class_CopyPasteHandler.inc:126
 #: include/class_CopyPasteHandler.inc:158
@@ -1090,7 +1088,7 @@ msgstr ""
 #: plugins/personal/generic/class_user.inc:1020
 #: plugins/personal/posix/class_posixAccount.inc:663
 #: plugins/personal/posix/class_posixAccount.inc:927
-#: plugins/admin/users/class_userManagement.inc:539
+#: plugins/admin/users/class_userManagement.inc:546
 #: plugins/admin/groups/class_groupGeneric.inc:576
 #: plugins/admin/groups/class_groupGeneric.inc:843
 #: plugins/admin/acl/class_aclRole.inc:585
@@ -1350,7 +1348,7 @@ msgstr "TLS-Verbindung"
 #: plugins/admin/departments/class_divListDepartment.inc:144
 #: plugins/admin/departments/generic.tpl:35
 #: plugins/admin/ogroups/class_ogroup.inc:817
-#: plugins/admin/ogroups/class_divListOGroup.inc:194
+#: plugins/admin/ogroups/class_divListOGroup.inc:193
 #: plugins/admin/ogroups/generic.tpl:26
 msgid "Base"
 msgstr "Basis"
@@ -1395,7 +1393,7 @@ msgstr "Momentaner Status"
 #: ihtml/themes/default/MultiSelectWindow.tpl:86
 #: ihtml/themes/default/msg_dialog.tpl:59
 #: ihtml/themes/default/msg_dialog.tpl:104
-#: plugins/admin/users/class_userManagement.inc:591
+#: plugins/admin/users/class_userManagement.inc:598
 #: plugins/admin/ogroups/class_ogroup.inc:169
 msgid "Information"
 msgstr "Information"
@@ -2126,7 +2124,7 @@ msgstr "Altes Passwort"
 #: plugins/personal/generic/main.inc:86
 #: plugins/personal/password/password.tpl:18
 #: plugins/admin/users/password.tpl:13
-#: plugins/admin/users/class_userManagement.inc:245 html/password.php:200
+#: plugins/admin/users/class_userManagement.inc:252 html/password.php:200
 msgid "New password"
 msgstr "Neues Passwort"
 
@@ -2341,8 +2339,8 @@ msgstr "Ihr Passwort wurde erfolgreich geändert."
 #: plugins/personal/password/class_password.inc:94
 #: plugins/personal/password/class_password.inc:108
 #: plugins/personal/password/class_password.inc:114
-#: plugins/admin/users/class_userManagement.inc:292
-#: plugins/admin/users/class_userManagement.inc:347 html/main.php:356
+#: plugins/admin/users/class_userManagement.inc:299
+#: plugins/admin/users/class_userManagement.inc:354 html/main.php:356
 msgid "Password change"
 msgstr "Passwort-Änderung"
 
@@ -3098,16 +3096,16 @@ msgstr ""
 "Die Einstellung '%s' der Zeitzone in Ihrer gosa.conf ist ungültig. Kann "
 "Zeitzonen-Versatz nicht berechnen."
 
-#: include/class_gosaSupportDaemon.inc:514
+#: include/class_gosaSupportDaemon.inc:587
 msgid "Cannot not parse XML!"
 msgstr "XML-Nachricht kann nicht ausgewertet werden!"
 
-#: include/class_gosaSupportDaemon.inc:794
+#: include/class_gosaSupportDaemon.inc:867
 #, php-format
 msgid "Cannot send abort event for entry %s!"
 msgstr "Kann keine Abbruch-Nachricht für den Eintrag %s versenden!"
 
-#: include/class_gosaSupportDaemon.inc:814
+#: include/class_gosaSupportDaemon.inc:887
 #, php-format
 msgid "Cannot remove entry %s!"
 msgstr "Kann Eintrag %s nicht entfernen!"
@@ -3187,8 +3185,8 @@ msgstr "Dieses Objekt wird eingefügt: %s"
 #: plugins/admin/groups/class_divListGroup.inc:223
 #: plugins/admin/acl/class_divListACL.inc:184
 #: plugins/admin/acl/class_divListACL.inc:187
-#: plugins/admin/ogroups/class_divListOGroup.inc:239
-#: plugins/admin/ogroups/class_divListOGroup.inc:242
+#: plugins/admin/ogroups/class_divListOGroup.inc:238
+#: plugins/admin/ogroups/class_divListOGroup.inc:241
 msgid "Paste"
 msgstr "Einfügen"
 
@@ -3318,17 +3316,13 @@ msgid "Use ACL defined in role"
 msgstr "Verwende ACL aus Rollendefinition"
 
 #: include/class_acl.inc:216 plugins/personal/generic/class_user.inc:1448
-#: plugins/admin/users/class_userManagement.inc:26
-#: plugins/admin/ogroups/class_divListOGroup.inc:90
-#: plugins/admin/ogroups/class_divListOGroup.inc:91 html/getxls.php:91
+#: plugins/admin/users/class_userManagement.inc:26 html/getxls.php:91
 #: html/getxls.php:92 html/getxls.php:310
 msgid "Users"
 msgstr "Benutzer"
 
 #: include/class_acl.inc:216 plugins/admin/groups/class_groupGeneric.inc:1019
-#: plugins/admin/groups/class_groupManagement.inc:26
-#: plugins/admin/ogroups/class_divListOGroup.inc:92
-#: plugins/admin/ogroups/class_divListOGroup.inc:93 html/getxls.php:126
+#: plugins/admin/groups/class_groupManagement.inc:26 html/getxls.php:126
 #: html/getxls.php:128 html/getxls.php:311
 msgid "Groups"
 msgstr "Gruppen"
@@ -3583,7 +3577,7 @@ msgstr "Liste neu laden"
 #: plugins/admin/groups/class_divListGroup.inc:176
 #: plugins/admin/acl/class_divListACL.inc:155
 #: plugins/admin/departments/class_divListDepartment.inc:146
-#: plugins/admin/ogroups/class_divListOGroup.inc:196
+#: plugins/admin/ogroups/class_divListOGroup.inc:195
 msgid "Submit"
 msgstr "Übertragen"
 
@@ -4024,7 +4018,7 @@ msgstr "Standard-Zertifikat"
 #: plugins/admin/groups/class_divListGroup.inc:197
 #: plugins/admin/acl/class_divListACL.inc:172
 #: plugins/admin/departments/class_divListDepartment.inc:160
-#: plugins/admin/ogroups/class_divListOGroup.inc:216
+#: plugins/admin/ogroups/class_divListOGroup.inc:215
 msgid "Remove"
 msgstr "Entfernen"
 
@@ -4098,8 +4092,8 @@ msgstr "Die gewählte Passwort-Methode ist nicht mehr verfügbar."
 #: plugins/personal/generic/class_user.inc:1189
 #: plugins/personal/generic/class_user.inc:1455
 #: plugins/personal/generic/class_user.inc:1575
-#: plugins/admin/users/class_userManagement.inc:727
-#: plugins/admin/users/class_userManagement.inc:805 html/getxls.php:88
+#: plugins/admin/users/class_userManagement.inc:734
+#: plugins/admin/users/class_userManagement.inc:812 html/getxls.php:88
 #: html/getxls.php:225 html/getxls.php:283 html/getxls.php:299
 msgid "Given name"
 msgstr "Vorname"
@@ -4457,7 +4451,7 @@ msgstr "Zimmer-Nr."
 
 #: plugins/personal/generic/main.inc:81
 #: plugins/personal/password/class_password.inc:83
-#: plugins/admin/users/class_userManagement.inc:240 html/password.php:197
+#: plugins/admin/users/class_userManagement.inc:247 html/password.php:197
 msgid ""
 "The passwords you've entered as 'New password' and 'Repeated new password' "
 "do not match."
@@ -4639,7 +4633,7 @@ msgstr "Zeige Gruppen, auf die zutrifft"
 
 #: plugins/personal/posix/posix_groups.tpl:48
 #: plugins/admin/groups/class_divListGroup.inc:100
-#: plugins/admin/ogroups/class_divListOGroup.inc:116
+#: plugins/admin/ogroups/class_divListOGroup.inc:115
 msgid "Regular expression for matching group names"
 msgstr "Regulärer Ausdruck zum Erkennen von Gruppennamen"
 
@@ -4901,7 +4895,7 @@ msgstr ""
 #: plugins/admin/users/template.tpl:15
 #: plugins/admin/users/class_divListUsers.inc:84
 #: plugins/admin/users/class_divListUsers.inc:177
-#: plugins/admin/users/class_userManagement.inc:721
+#: plugins/admin/users/class_userManagement.inc:728
 msgid "Template"
 msgstr "Vorlage"
 
@@ -4940,11 +4934,21 @@ msgstr "Eigenschaften"
 #: plugins/admin/departments/class_divListDepartment.inc:68
 #: plugins/admin/departments/class_divListDepartment.inc:149
 #: plugins/admin/ogroups/class_divListOGroup.inc:85
-#: plugins/admin/ogroups/class_divListOGroup.inc:200
+#: plugins/admin/ogroups/class_divListOGroup.inc:199
 msgid "Actions"
 msgstr "Aktionen"
 
 #: plugins/admin/users/class_divListUsers.inc:84
+#: plugins/admin/users/class_divListUsers.inc:85
+#: plugins/admin/users/class_divListUsers.inc:86
+#: plugins/admin/users/class_divListUsers.inc:87
+#: plugins/admin/users/class_divListUsers.inc:88
+#: plugins/admin/users/class_divListUsers.inc:89
+#: plugins/admin/groups/class_divListGroup.inc:85
+#: plugins/admin/groups/class_divListGroup.inc:87
+#: plugins/admin/groups/class_divListGroup.inc:89
+#: plugins/admin/groups/class_divListGroup.inc:91
+#: plugins/admin/groups/class_divListGroup.inc:93
 #: plugins/admin/ogroups/class_ogroup.inc:298
 #: plugins/admin/ogroups/class_ogroup.inc:302
 #: plugins/admin/ogroups/class_ogroup.inc:306
@@ -4954,6 +4958,7 @@ msgstr "Aktionen"
 #: plugins/admin/ogroups/class_ogroup.inc:322
 #: plugins/admin/ogroups/class_ogroup.inc:326
 #: plugins/admin/ogroups/class_ogroup.inc:330
+#: plugins/admin/ogroups/class_divListOGroup.inc:88
 #, php-format
 msgid "Show %s"
 msgstr "Zeige %s"
@@ -4967,18 +4972,8 @@ msgid "GOsa object"
 msgstr "GOsa Objekt"
 
 #: plugins/admin/users/class_divListUsers.inc:85
-#: plugins/admin/users/class_divListUsers.inc:86
-#: plugins/admin/users/class_divListUsers.inc:87
-#: plugins/admin/users/class_divListUsers.inc:88
-#: plugins/admin/users/class_divListUsers.inc:89
-#, php-format
-msgid "Show %s user"
-msgstr "Zeige %s-Benutzer"
-
-#: plugins/admin/users/class_divListUsers.inc:85
-#: plugins/admin/groups/class_divListGroup.inc:93
-msgid "functional"
-msgstr "funktionale"
+msgid "functional users"
+msgstr "funktionale Benutzer"
 
 #: plugins/admin/users/class_divListUsers.inc:86
 #: plugins/admin/users/class_divListUsers.inc:268
@@ -4987,28 +4982,26 @@ msgid "Posix"
 msgstr "Posix"
 
 #: plugins/admin/users/class_divListUsers.inc:86
-msgid "posix"
-msgstr "POSIX"
+msgid "POSIX users"
+msgstr "POSIX Benutzer"
 
 #: plugins/admin/users/class_divListUsers.inc:87
 #: plugins/admin/users/class_divListUsers.inc:272
 #: plugins/admin/groups/class_divListGroup.inc:263
 #: plugins/admin/ogroups/tabs_ogroups.inc:110
 #: plugins/admin/ogroups/tabs_ogroups.inc:256
-#: plugins/admin/ogroups/class_divListOGroup.inc:270
+#: plugins/admin/ogroups/class_divListOGroup.inc:269
 #: plugins/generic/references/class_reference.inc:44
 msgid "Mail"
 msgstr "Mail"
 
 #: plugins/admin/users/class_divListUsers.inc:87
-#: plugins/admin/groups/class_divListGroup.inc:91
-msgid "mail"
-msgstr ""
+msgid "mail users"
+msgstr "Mail Benutzer"
 
 #: plugins/admin/users/class_divListUsers.inc:88
-#: plugins/admin/groups/class_divListGroup.inc:87
-msgid "samba"
-msgstr "Samba"
+msgid "samba users"
+msgstr "Samba Benutzer"
 
 #: plugins/admin/users/class_divListUsers.inc:89
 #: plugins/generic/references/class_reference.inc:52
@@ -5016,8 +5009,8 @@ msgid "Proxy"
 msgstr "Proxy"
 
 #: plugins/admin/users/class_divListUsers.inc:89
-msgid "proxy"
-msgstr "Proxy"
+msgid "proxy users"
+msgstr "Proxy Benutzer"
 
 #: plugins/admin/users/class_divListUsers.inc:96
 #: plugins/admin/groups/group_objects.tpl:46
@@ -5028,21 +5021,21 @@ msgstr "Zeige die Benutzer, auf die Folgendes passt"
 #: plugins/admin/groups/class_divListGroup.inc:176
 #: plugins/admin/acl/class_divListACL.inc:155
 #: plugins/admin/departments/class_divListDepartment.inc:146
-#: plugins/admin/ogroups/class_divListOGroup.inc:196
+#: plugins/admin/ogroups/class_divListOGroup.inc:195
 msgid "Submit department"
 msgstr "Aktualisieren"
 
 #: plugins/admin/users/class_divListUsers.inc:204
 #: plugins/admin/groups/class_divListGroup.inc:214
 #: plugins/admin/acl/class_divListACL.inc:178
-#: plugins/admin/ogroups/class_divListOGroup.inc:233
+#: plugins/admin/ogroups/class_divListOGroup.inc:232
 msgid "Copy"
 msgstr "Kopieren"
 
 #: plugins/admin/users/class_divListUsers.inc:206
 #: plugins/admin/groups/class_divListGroup.inc:216
 #: plugins/admin/acl/class_divListACL.inc:180
-#: plugins/admin/ogroups/class_divListOGroup.inc:235
+#: plugins/admin/ogroups/class_divListOGroup.inc:234
 msgid "Cut"
 msgstr "Ausschneiden"
 
@@ -5097,28 +5090,28 @@ msgstr "Neuen Benutzer aus dieser Vorlage erstellen"
 #: plugins/admin/users/class_divListUsers.inc:307
 #: plugins/admin/groups/class_divListGroup.inc:291
 #: plugins/admin/acl/class_divListACL.inc:235
-#: plugins/admin/ogroups/class_divListOGroup.inc:289
+#: plugins/admin/ogroups/class_divListOGroup.inc:288
 msgid "cut"
 msgstr "Ausschneiden"
 
 #: plugins/admin/users/class_divListUsers.inc:307
 #: plugins/admin/groups/class_divListGroup.inc:291
 #: plugins/admin/acl/class_divListACL.inc:235
-#: plugins/admin/ogroups/class_divListOGroup.inc:289
+#: plugins/admin/ogroups/class_divListOGroup.inc:288
 msgid "Cut this entry"
 msgstr "Diesen Eintrag ausschneiden"
 
 #: plugins/admin/users/class_divListUsers.inc:309
 #: plugins/admin/groups/class_divListGroup.inc:293
 #: plugins/admin/acl/class_divListACL.inc:237
-#: plugins/admin/ogroups/class_divListOGroup.inc:291
+#: plugins/admin/ogroups/class_divListOGroup.inc:290
 msgid "copy"
 msgstr "Kopieren"
 
 #: plugins/admin/users/class_divListUsers.inc:309
 #: plugins/admin/groups/class_divListGroup.inc:293
 #: plugins/admin/acl/class_divListACL.inc:237
-#: plugins/admin/ogroups/class_divListOGroup.inc:291
+#: plugins/admin/ogroups/class_divListOGroup.inc:290
 msgid "Copy this entry"
 msgstr "Diesen Eintrag kopieren"
 
@@ -5131,13 +5124,13 @@ msgstr "inaktiv"
 #: plugins/admin/acl/class_divListACL.inc:242
 #: plugins/admin/acl/class_divListACL.inc:264
 #: plugins/admin/departments/class_divListDepartment.inc:185
-#: plugins/admin/ogroups/class_divListOGroup.inc:295
+#: plugins/admin/ogroups/class_divListOGroup.inc:294
 msgid "edit"
 msgstr "Bearbeiten"
 
 #: plugins/admin/users/class_divListUsers.inc:329
-#: plugins/admin/users/class_userManagement.inc:453
-#: plugins/admin/users/class_userManagement.inc:564
+#: plugins/admin/users/class_userManagement.inc:460
+#: plugins/admin/users/class_userManagement.inc:571
 msgid "user"
 msgstr "Benutzer"
 
@@ -5155,12 +5148,12 @@ msgstr "Nicht erlaubt"
 #: plugins/admin/acl/class_divListACL.inc:252
 #: plugins/admin/acl/class_divListACL.inc:268
 #: plugins/admin/departments/class_divListDepartment.inc:190
-#: plugins/admin/ogroups/class_divListOGroup.inc:303
+#: plugins/admin/ogroups/class_divListOGroup.inc:302
 msgid "delete"
 msgstr "Entfernen"
 
 #: plugins/admin/users/class_divListUsers.inc:353
-#: plugins/admin/users/class_userManagement.inc:564
+#: plugins/admin/users/class_userManagement.inc:571
 msgid "Delete user"
 msgstr "Benutzer entfernen"
 
@@ -5171,7 +5164,7 @@ msgstr "Anzahl der angezeigten Benutzer"
 #: plugins/admin/users/class_divListUsers.inc:443
 #: plugins/admin/groups/class_divListGroup.inc:365
 #: plugins/admin/departments/class_divListDepartment.inc:229
-#: plugins/admin/ogroups/class_divListOGroup.inc:353
+#: plugins/admin/ogroups/class_divListOGroup.inc:352
 msgid "Number of listed departments"
 msgstr "Anzahl der angezeigten Abteilungen"
 
@@ -5179,26 +5172,26 @@ msgstr "Anzahl der angezeigten Abteilungen"
 msgid "Manage users"
 msgstr "Benutzer verwalten"
 
-#: plugins/admin/users/class_userManagement.inc:193
-#: plugins/admin/groups/class_groupManagement.inc:191
+#: plugins/admin/users/class_userManagement.inc:199
+#: plugins/admin/groups/class_groupManagement.inc:196
 #: plugins/admin/ogroups/class_ogroupManagement.inc:173
 msgid "Infrastructure error"
 msgstr "Infrastruktur Fehler"
 
-#: plugins/admin/users/class_userManagement.inc:292
-#: plugins/admin/users/class_userManagement.inc:347
+#: plugins/admin/users/class_userManagement.inc:299
+#: plugins/admin/users/class_userManagement.inc:354
 msgid "You have no permission to change this users password!"
 msgstr "Sie haben keine Berechtigung dieses Passwort zu ändern!"
 
-#: plugins/admin/users/class_userManagement.inc:454
+#: plugins/admin/users/class_userManagement.inc:461
 msgid "Delete users"
 msgstr "Benutzer entfernen"
 
-#: plugins/admin/users/class_userManagement.inc:591
+#: plugins/admin/users/class_userManagement.inc:598
 msgid "User successfully removed."
 msgstr "Benutzer erfolgreich entfernt."
 
-#: plugins/admin/users/class_userManagement.inc:702
+#: plugins/admin/users/class_userManagement.inc:709
 #: plugins/admin/ogroups/class_ogroup.inc:343
 msgid "none"
 msgstr "keine"
@@ -5348,37 +5341,42 @@ msgid "Select to see groups that are primary groups of users"
 msgstr "Auswählen, um die Gruppen zu sehen, die primären Gruppen der Benutzer sind"
 
 #: plugins/admin/groups/class_divListGroup.inc:85
-#: plugins/admin/groups/class_divListGroup.inc:87
-#: plugins/admin/groups/class_divListGroup.inc:89
-#: plugins/admin/groups/class_divListGroup.inc:91
-#: plugins/admin/groups/class_divListGroup.inc:93
-#, php-format
-msgid "Show %s groups"
-msgstr "Zeige %s-Gruppen"
-
-#: plugins/admin/groups/class_divListGroup.inc:85
-msgid "primary"
-msgstr ""
+msgid "primary groups"
+msgstr "primäre Gruppen"
 
 #: plugins/admin/groups/class_divListGroup.inc:86
 msgid "samba groups mappings"
-msgstr ""
+msgstr "Samba Group-Mapping"
+
+#: plugins/admin/groups/class_divListGroup.inc:87
+msgid "samba groups"
+msgstr "Samba Gruppen"
 
 #: plugins/admin/groups/class_divListGroup.inc:88
 msgid "application settings"
-msgstr ""
+msgstr "Anwendungseinstellungen"
 
 #: plugins/admin/groups/class_divListGroup.inc:89
-msgid "application"
-msgstr "Anwendung"
+#: plugins/admin/ogroups/class_divListOGroup.inc:93
+#: plugins/admin/ogroups/class_divListOGroup.inc:94
+msgid "application groups"
+msgstr "Anwendungsgruppen"
 
 #: plugins/admin/groups/class_divListGroup.inc:90
 msgid "mail settings"
 msgstr "Mail-Einstellungen"
 
+#: plugins/admin/groups/class_divListGroup.inc:91
+msgid "mail groups"
+msgstr "Mail Gruppen"
+
 #: plugins/admin/groups/class_divListGroup.inc:92
 msgid "Select to see normal groups that have only functional aspects"
 msgstr "Auswählen, um die \"normalen\" Gruppen zu sehen"
+
+#: plugins/admin/groups/class_divListGroup.inc:93
+msgid "functional groups"
+msgstr "funktionelle Gruppen"
 
 #: plugins/admin/groups/class_divListGroup.inc:189
 #: plugins/admin/ogroups/class_ogroupManagement.inc:499
@@ -5395,13 +5393,13 @@ msgstr "Anwendung"
 
 #: plugins/admin/groups/class_divListGroup.inc:298
 #: plugins/admin/departments/class_divListDepartment.inc:185
-#: plugins/admin/ogroups/class_divListOGroup.inc:295
+#: plugins/admin/ogroups/class_divListOGroup.inc:294
 msgid "Edit this entry"
 msgstr "Diesen Eintrag bearbeiten"
 
 #: plugins/admin/groups/class_divListGroup.inc:307
 #: plugins/admin/departments/class_divListDepartment.inc:190
-#: plugins/admin/ogroups/class_divListOGroup.inc:303
+#: plugins/admin/ogroups/class_divListOGroup.inc:302
 msgid "Delete this entry"
 msgstr "Diesen Eintrag entfernen"
 
@@ -5413,14 +5411,14 @@ msgstr "Anzahl der angezeigten Gruppen"
 msgid "Manage POSIX groups"
 msgstr "POSIX-Gruppen verwalten"
 
-#: plugins/admin/groups/class_groupManagement.inc:349
-#: plugins/admin/groups/class_groupManagement.inc:428
+#: plugins/admin/groups/class_groupManagement.inc:354
+#: plugins/admin/groups/class_groupManagement.inc:433
 msgid "group"
 msgstr "Gruppe"
 
-#: plugins/admin/groups/class_groupManagement.inc:382
-#: plugins/admin/groups/class_groupManagement.inc:435
-#: plugins/admin/groups/class_groupManagement.inc:466
+#: plugins/admin/groups/class_groupManagement.inc:387
+#: plugins/admin/groups/class_groupManagement.inc:440
+#: plugins/admin/groups/class_groupManagement.inc:471
 #: plugins/admin/acl/class_aclManagement.inc:163
 #: plugins/admin/acl/class_aclManagement.inc:200
 #: plugins/admin/acl/class_aclManagement.inc:253
@@ -5608,8 +5606,6 @@ msgstr "Fehler beim kopieren von %s, breche ab"
 #: plugins/admin/departments/class_departmentGeneric.inc:528
 #: plugins/admin/departments/class_departmentGeneric.inc:533
 #: plugins/admin/departments/class_departmentManagement.inc:26
-#: plugins/admin/ogroups/class_divListOGroup.inc:96
-#: plugins/admin/ogroups/class_divListOGroup.inc:97
 msgid "Departments"
 msgstr "Abteilungen"
 
@@ -5807,8 +5803,6 @@ msgid "Startup"
 msgstr "Start"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:224
-#: plugins/admin/ogroups/class_divListOGroup.inc:104
-#: plugins/admin/ogroups/class_divListOGroup.inc:105
 msgid "Terminals"
 msgstr "Arbeitsplätze"
 
@@ -5931,8 +5925,6 @@ msgid "Terminal"
 msgstr "Terminal"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:507
-#: plugins/admin/ogroups/class_divListOGroup.inc:106
-#: plugins/admin/ogroups/class_divListOGroup.inc:107
 #: plugins/generic/references/class_reference.inc:72
 msgid "Printer"
 msgstr "Drucker"
@@ -5959,43 +5951,58 @@ msgid "List of object groups"
 msgstr "Liste von Objektgruppen"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:83
-#: plugins/admin/ogroups/class_divListOGroup.inc:207
-#: plugins/admin/ogroups/class_divListOGroup.inc:336
+#: plugins/admin/ogroups/class_divListOGroup.inc:206
+#: plugins/admin/ogroups/class_divListOGroup.inc:335
 #: plugins/generic/references/class_reference.inc:70
 msgid "Object group"
 msgstr "Objektgruppe"
 
-#: plugins/admin/ogroups/class_divListOGroup.inc:88
-#, php-format
-msgid "Select to see groups containing '%s'."
-msgstr "Auswählen um Gruppen aufzulisten die '%s' enthalten."
-
 #: plugins/admin/ogroups/class_divListOGroup.inc:89
-#, php-format
-msgid "Show groups containing '%s'"
-msgstr "Zeige Gruppen mit '%s'"
+#: plugins/admin/ogroups/class_divListOGroup.inc:90
+msgid "user groups"
+msgstr "Benutzergruppen"
 
-#: plugins/admin/ogroups/class_divListOGroup.inc:94
+#: plugins/admin/ogroups/class_divListOGroup.inc:91
+#: plugins/admin/ogroups/class_divListOGroup.inc:92
+msgid "nested groups"
+msgstr "verschachtelte Gruppen"
+
 #: plugins/admin/ogroups/class_divListOGroup.inc:95
-msgid "Applications"
-msgstr "Anwendungen"
+#: plugins/admin/ogroups/class_divListOGroup.inc:96
+msgid "department groups"
+msgstr "Abteilungsgruppen"
 
+#: plugins/admin/ogroups/class_divListOGroup.inc:97
+#: plugins/admin/ogroups/class_divListOGroup.inc:98
+msgid "server groups"
+msgstr "Servergruppen"
+
+#: plugins/admin/ogroups/class_divListOGroup.inc:99
 #: plugins/admin/ogroups/class_divListOGroup.inc:100
+msgid "workstation groups"
+msgstr "Gruppen von Arbeitsstationen"
+
 #: plugins/admin/ogroups/class_divListOGroup.inc:101
-msgid "Workstations"
-msgstr "Arbeitsstationen"
-
 #: plugins/admin/ogroups/class_divListOGroup.inc:102
+msgid "windows workstation groups"
+msgstr "Gruppen von Windows Arbeitsstationen"
+
 #: plugins/admin/ogroups/class_divListOGroup.inc:103
-msgid "Windows workstations"
-msgstr "Windows Arbeitsstationen"
+#: plugins/admin/ogroups/class_divListOGroup.inc:104
+msgid "terminal groups"
+msgstr "Gruppen von Terminals"
 
+#: plugins/admin/ogroups/class_divListOGroup.inc:105
+#: plugins/admin/ogroups/class_divListOGroup.inc:106
+msgid "printer groups"
+msgstr "Druckergruppen"
+
+#: plugins/admin/ogroups/class_divListOGroup.inc:107
 #: plugins/admin/ogroups/class_divListOGroup.inc:108
-#: plugins/admin/ogroups/class_divListOGroup.inc:109
-msgid "Phones"
-msgstr "Telefone"
+msgid "phone groups"
+msgstr "Telefongruppen"
 
-#: plugins/admin/ogroups/class_divListOGroup.inc:352
+#: plugins/admin/ogroups/class_divListOGroup.inc:351
 msgid "Number of listed object groups"
 msgstr "Anzahl der angezeigten Objektgruppen"
 

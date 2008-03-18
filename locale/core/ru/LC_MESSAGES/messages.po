@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-17 23:32+0100\n"
+"POT-Creation-Date: 2008-03-18 21:43+0100\n"
 "PO-Revision-Date: 2005-04-18 14:35+0300\n"
 "Last-Translator: Igor Muratov <migor@altlinux.org>\n"
 "Language-Team: ALT Linux Team\n"
@@ -485,9 +485,9 @@ msgstr "Организация"
 #: plugins/personal/generic/class_user.inc:1155
 #: plugins/personal/generic/class_user.inc:1192
 #: plugins/personal/generic/class_user.inc:1578
-#: plugins/admin/users/class_userManagement.inc:724
-#: plugins/admin/users/class_userManagement.inc:802
-#: plugins/admin/users/class_userManagement.inc:814
+#: plugins/admin/users/class_userManagement.inc:731
+#: plugins/admin/users/class_userManagement.inc:809
+#: plugins/admin/users/class_userManagement.inc:821
 #: plugins/admin/groups/class_groupGeneric.inc:870
 #: plugins/admin/groups/class_groupGeneric.inc:876
 #: plugins/admin/groups/class_groupGeneric.inc:878
@@ -819,8 +819,6 @@ msgstr "Приложение"
 
 #: setup/setup_config2.tpl:264 setup/setup_config2.tpl:309
 #: plugins/admin/ogroups/class_ogroupManagement.inc:502
-#: plugins/admin/ogroups/class_divListOGroup.inc:98
-#: plugins/admin/ogroups/class_divListOGroup.inc:99
 #: plugins/generic/references/class_reference.inc:64
 msgid "Server"
 msgstr "Сервер"
@@ -924,8 +922,8 @@ msgstr ""
 #: include/functions.inc:2174 include/functions.inc:2180
 #: plugins/personal/posix/class_posixAccount.inc:817
 #: plugins/personal/posix/class_posixAccount.inc:910
-#: plugins/admin/users/class_userManagement.inc:482
-#: plugins/admin/users/class_userManagement.inc:596
+#: plugins/admin/users/class_userManagement.inc:489
+#: plugins/admin/users/class_userManagement.inc:603
 #: plugins/admin/users/remove.tpl:2 plugins/admin/groups/remove.tpl:2
 #: plugins/admin/acl/remove.tpl:2
 #: plugins/admin/departments/dep_move_confirm.tpl:2
@@ -1029,7 +1027,7 @@ msgstr ""
 #: plugins/admin/groups/class_divListGroup.inc:183
 #: plugins/admin/acl/class_divListACL.inc:161
 #: plugins/admin/departments/class_divListDepartment.inc:151
-#: plugins/admin/ogroups/class_divListOGroup.inc:202
+#: plugins/admin/ogroups/class_divListOGroup.inc:201
 msgid "Create"
 msgstr "Создать"
 
@@ -1063,8 +1061,8 @@ msgstr "Введите корректное имя пользователя!"
 #: ihtml/themes/default/msg_dialog.tpl:100 include/utils/class_msgPool.inc:153
 #: include/utils/class_msgPool.inc:165 include/utils/class_msgPool.inc:183
 #: include/utils/class_msgPool.inc:464 include/utils/class_msgPool.inc:483
-#: include/class_gosaSupportDaemon.inc:794
-#: include/class_gosaSupportDaemon.inc:814
+#: include/class_gosaSupportDaemon.inc:867
+#: include/class_gosaSupportDaemon.inc:887
 #: include/class_CopyPasteHandler.inc:118
 #: include/class_CopyPasteHandler.inc:126
 #: include/class_CopyPasteHandler.inc:158
@@ -1117,7 +1115,7 @@ msgstr ""
 #: plugins/personal/generic/class_user.inc:1020
 #: plugins/personal/posix/class_posixAccount.inc:663
 #: plugins/personal/posix/class_posixAccount.inc:927
-#: plugins/admin/users/class_userManagement.inc:539
+#: plugins/admin/users/class_userManagement.inc:546
 #: plugins/admin/groups/class_groupGeneric.inc:576
 #: plugins/admin/groups/class_groupGeneric.inc:843
 #: plugins/admin/acl/class_aclRole.inc:585
@@ -1404,7 +1402,7 @@ msgstr "Соединение..."
 #: plugins/admin/departments/class_divListDepartment.inc:144
 #: plugins/admin/departments/generic.tpl:35
 #: plugins/admin/ogroups/class_ogroup.inc:817
-#: plugins/admin/ogroups/class_divListOGroup.inc:194
+#: plugins/admin/ogroups/class_divListOGroup.inc:193
 #: plugins/admin/ogroups/generic.tpl:26
 msgid "Base"
 msgstr "Ветка"
@@ -1454,7 +1452,7 @@ msgstr "Состояние системы"
 #: ihtml/themes/default/MultiSelectWindow.tpl:86
 #: ihtml/themes/default/msg_dialog.tpl:59
 #: ihtml/themes/default/msg_dialog.tpl:104
-#: plugins/admin/users/class_userManagement.inc:591
+#: plugins/admin/users/class_userManagement.inc:598
 #: plugins/admin/ogroups/class_ogroup.inc:169
 msgid "Information"
 msgstr "Информация"
@@ -2195,7 +2193,7 @@ msgstr "Пароль"
 #: plugins/personal/generic/main.inc:86
 #: plugins/personal/password/password.tpl:18
 #: plugins/admin/users/password.tpl:13
-#: plugins/admin/users/class_userManagement.inc:245 html/password.php:200
+#: plugins/admin/users/class_userManagement.inc:252 html/password.php:200
 msgid "New password"
 msgstr "Новый пароль"
 
@@ -2405,8 +2403,8 @@ msgstr ""
 #: plugins/personal/password/class_password.inc:94
 #: plugins/personal/password/class_password.inc:108
 #: plugins/personal/password/class_password.inc:114
-#: plugins/admin/users/class_userManagement.inc:292
-#: plugins/admin/users/class_userManagement.inc:347 html/main.php:356
+#: plugins/admin/users/class_userManagement.inc:299
+#: plugins/admin/users/class_userManagement.inc:354 html/main.php:356
 #, fuzzy
 msgid "Password change"
 msgstr "Сменить пароль"
@@ -3186,17 +3184,17 @@ msgid ""
 "correct timezone offset."
 msgstr ""
 
-#: include/class_gosaSupportDaemon.inc:514
+#: include/class_gosaSupportDaemon.inc:587
 #, fuzzy
 msgid "Cannot not parse XML!"
 msgstr "Слишком много пользователей, невозможно создать идентификатор!"
 
-#: include/class_gosaSupportDaemon.inc:794
+#: include/class_gosaSupportDaemon.inc:867
 #, fuzzy, php-format
 msgid "Cannot send abort event for entry %s!"
 msgstr "Удалить"
 
-#: include/class_gosaSupportDaemon.inc:814
+#: include/class_gosaSupportDaemon.inc:887
 #, fuzzy, php-format
 msgid "Cannot remove entry %s!"
 msgstr "состояние неизвестно"
@@ -3277,8 +3275,8 @@ msgstr ""
 #: plugins/admin/groups/class_divListGroup.inc:223
 #: plugins/admin/acl/class_divListACL.inc:184
 #: plugins/admin/acl/class_divListACL.inc:187
-#: plugins/admin/ogroups/class_divListOGroup.inc:239
-#: plugins/admin/ogroups/class_divListOGroup.inc:242
+#: plugins/admin/ogroups/class_divListOGroup.inc:238
+#: plugins/admin/ogroups/class_divListOGroup.inc:241
 #, fuzzy
 msgid "Paste"
 msgstr "Дата"
@@ -3419,17 +3417,13 @@ msgid "Use ACL defined in role"
 msgstr ""
 
 #: include/class_acl.inc:216 plugins/personal/generic/class_user.inc:1448
-#: plugins/admin/users/class_userManagement.inc:26
-#: plugins/admin/ogroups/class_divListOGroup.inc:90
-#: plugins/admin/ogroups/class_divListOGroup.inc:91 html/getxls.php:91
+#: plugins/admin/users/class_userManagement.inc:26 html/getxls.php:91
 #: html/getxls.php:92 html/getxls.php:310
 msgid "Users"
 msgstr "Пользователи"
 
 #: include/class_acl.inc:216 plugins/admin/groups/class_groupGeneric.inc:1019
-#: plugins/admin/groups/class_groupManagement.inc:26
-#: plugins/admin/ogroups/class_divListOGroup.inc:92
-#: plugins/admin/ogroups/class_divListOGroup.inc:93 html/getxls.php:126
+#: plugins/admin/groups/class_groupManagement.inc:26 html/getxls.php:126
 #: html/getxls.php:128 html/getxls.php:311
 msgid "Groups"
 msgstr "Группы"
@@ -3710,7 +3704,7 @@ msgstr ""
 #: plugins/admin/groups/class_divListGroup.inc:176
 #: plugins/admin/acl/class_divListACL.inc:155
 #: plugins/admin/departments/class_divListDepartment.inc:146
-#: plugins/admin/ogroups/class_divListOGroup.inc:196
+#: plugins/admin/ogroups/class_divListOGroup.inc:195
 msgid "Submit"
 msgstr ""
 
@@ -4153,7 +4147,7 @@ msgstr "Стандартный сертификат"
 #: plugins/admin/groups/class_divListGroup.inc:197
 #: plugins/admin/acl/class_divListACL.inc:172
 #: plugins/admin/departments/class_divListDepartment.inc:160
-#: plugins/admin/ogroups/class_divListOGroup.inc:216
+#: plugins/admin/ogroups/class_divListOGroup.inc:215
 msgid "Remove"
 msgstr "Удалить"
 
@@ -4230,8 +4224,8 @@ msgstr "У выбранного приложения нет параметров
 #: plugins/personal/generic/class_user.inc:1189
 #: plugins/personal/generic/class_user.inc:1455
 #: plugins/personal/generic/class_user.inc:1575
-#: plugins/admin/users/class_userManagement.inc:727
-#: plugins/admin/users/class_userManagement.inc:805 html/getxls.php:88
+#: plugins/admin/users/class_userManagement.inc:734
+#: plugins/admin/users/class_userManagement.inc:812 html/getxls.php:88
 #: html/getxls.php:225 html/getxls.php:283 html/getxls.php:299
 msgid "Given name"
 msgstr "Имя"
@@ -4607,7 +4601,7 @@ msgstr "Номер комнаты"
 
 #: plugins/personal/generic/main.inc:81
 #: plugins/personal/password/class_password.inc:83
-#: plugins/admin/users/class_userManagement.inc:240 html/password.php:197
+#: plugins/admin/users/class_userManagement.inc:247 html/password.php:197
 msgid ""
 "The passwords you've entered as 'New password' and 'Repeated new password' "
 "do not match."
@@ -4795,7 +4789,7 @@ msgstr "Шаблон для групп"
 
 #: plugins/personal/posix/posix_groups.tpl:48
 #: plugins/admin/groups/class_divListGroup.inc:100
-#: plugins/admin/ogroups/class_divListOGroup.inc:116
+#: plugins/admin/ogroups/class_divListOGroup.inc:115
 msgid "Regular expression for matching group names"
 msgstr "Регулярное выражение, соответствующее именам групп"
 
@@ -5082,7 +5076,7 @@ msgstr ""
 #: plugins/admin/users/template.tpl:15
 #: plugins/admin/users/class_divListUsers.inc:84
 #: plugins/admin/users/class_divListUsers.inc:177
-#: plugins/admin/users/class_userManagement.inc:721
+#: plugins/admin/users/class_userManagement.inc:728
 msgid "Template"
 msgstr "Шаблон"
 
@@ -5123,11 +5117,21 @@ msgstr "Свойства"
 #: plugins/admin/departments/class_divListDepartment.inc:68
 #: plugins/admin/departments/class_divListDepartment.inc:149
 #: plugins/admin/ogroups/class_divListOGroup.inc:85
-#: plugins/admin/ogroups/class_divListOGroup.inc:200
+#: plugins/admin/ogroups/class_divListOGroup.inc:199
 msgid "Actions"
 msgstr "Действия"
 
 #: plugins/admin/users/class_divListUsers.inc:84
+#: plugins/admin/users/class_divListUsers.inc:85
+#: plugins/admin/users/class_divListUsers.inc:86
+#: plugins/admin/users/class_divListUsers.inc:87
+#: plugins/admin/users/class_divListUsers.inc:88
+#: plugins/admin/users/class_divListUsers.inc:89
+#: plugins/admin/groups/class_divListGroup.inc:85
+#: plugins/admin/groups/class_divListGroup.inc:87
+#: plugins/admin/groups/class_divListGroup.inc:89
+#: plugins/admin/groups/class_divListGroup.inc:91
+#: plugins/admin/groups/class_divListGroup.inc:93
 #: plugins/admin/ogroups/class_ogroup.inc:298
 #: plugins/admin/ogroups/class_ogroup.inc:302
 #: plugins/admin/ogroups/class_ogroup.inc:306
@@ -5137,6 +5141,7 @@ msgstr "Действия"
 #: plugins/admin/ogroups/class_ogroup.inc:322
 #: plugins/admin/ogroups/class_ogroup.inc:326
 #: plugins/admin/ogroups/class_ogroup.inc:330
+#: plugins/admin/ogroups/class_divListOGroup.inc:88
 #, fuzzy, php-format
 msgid "Show %s"
 msgstr "Показать группы"
@@ -5152,19 +5157,9 @@ msgid "GOsa object"
 msgstr "Объект"
 
 #: plugins/admin/users/class_divListUsers.inc:85
-#: plugins/admin/users/class_divListUsers.inc:86
-#: plugins/admin/users/class_divListUsers.inc:87
-#: plugins/admin/users/class_divListUsers.inc:88
-#: plugins/admin/users/class_divListUsers.inc:89
-#, fuzzy, php-format
-msgid "Show %s user"
-msgstr "Показать пользователей Samba"
-
-#: plugins/admin/users/class_divListUsers.inc:85
-#: plugins/admin/groups/class_divListGroup.inc:93
 #, fuzzy
-msgid "functional"
-msgstr "Действие"
+msgid "functional users"
+msgstr "Показать обычных пользователей"
 
 #: plugins/admin/users/class_divListUsers.inc:86
 #: plugins/admin/users/class_divListUsers.inc:268
@@ -5175,30 +5170,28 @@ msgstr "Прокси-сервер"
 
 #: plugins/admin/users/class_divListUsers.inc:86
 #, fuzzy
-msgid "posix"
-msgstr "Прокси-сервер"
+msgid "POSIX users"
+msgstr "Атрибуты UNIX"
 
 #: plugins/admin/users/class_divListUsers.inc:87
 #: plugins/admin/users/class_divListUsers.inc:272
 #: plugins/admin/groups/class_divListGroup.inc:263
 #: plugins/admin/ogroups/tabs_ogroups.inc:110
 #: plugins/admin/ogroups/tabs_ogroups.inc:256
-#: plugins/admin/ogroups/class_divListOGroup.inc:270
+#: plugins/admin/ogroups/class_divListOGroup.inc:269
 #: plugins/generic/references/class_reference.inc:44
 msgid "Mail"
 msgstr "Почта"
 
 #: plugins/admin/users/class_divListUsers.inc:87
-#: plugins/admin/groups/class_divListGroup.inc:91
 #, fuzzy
-msgid "mail"
-msgstr "мужской"
+msgid "mail users"
+msgstr "Пользователи домена"
 
 #: plugins/admin/users/class_divListUsers.inc:88
-#: plugins/admin/groups/class_divListGroup.inc:87
 #, fuzzy
-msgid "samba"
-msgstr "Samba"
+msgid "samba users"
+msgstr "Пользователи домена"
 
 #: plugins/admin/users/class_divListUsers.inc:89
 #: plugins/generic/references/class_reference.inc:52
@@ -5207,8 +5200,8 @@ msgstr "Прокси-сервер"
 
 #: plugins/admin/users/class_divListUsers.inc:89
 #, fuzzy
-msgid "proxy"
-msgstr "Прокси-сервер"
+msgid "proxy users"
+msgstr "Показать пользователей с прокси-серверами"
 
 #: plugins/admin/users/class_divListUsers.inc:96
 #: plugins/admin/groups/group_objects.tpl:46
@@ -5219,7 +5212,7 @@ msgstr "Фильтр"
 #: plugins/admin/groups/class_divListGroup.inc:176
 #: plugins/admin/acl/class_divListACL.inc:155
 #: plugins/admin/departments/class_divListDepartment.inc:146
-#: plugins/admin/ogroups/class_divListOGroup.inc:196
+#: plugins/admin/ogroups/class_divListOGroup.inc:195
 #, fuzzy
 msgid "Submit department"
 msgstr "Показать подразделения"
@@ -5227,7 +5220,7 @@ msgstr "Показать подразделения"
 #: plugins/admin/users/class_divListUsers.inc:204
 #: plugins/admin/groups/class_divListGroup.inc:214
 #: plugins/admin/acl/class_divListACL.inc:178
-#: plugins/admin/ogroups/class_divListOGroup.inc:233
+#: plugins/admin/ogroups/class_divListOGroup.inc:232
 #, fuzzy
 msgid "Copy"
 msgstr "Компания"
@@ -5235,7 +5228,7 @@ msgstr "Компания"
 #: plugins/admin/users/class_divListUsers.inc:206
 #: plugins/admin/groups/class_divListGroup.inc:216
 #: plugins/admin/acl/class_divListACL.inc:180
-#: plugins/admin/ogroups/class_divListOGroup.inc:235
+#: plugins/admin/ogroups/class_divListOGroup.inc:234
 #, fuzzy
 msgid "Cut"
 msgstr "Выполнить"
@@ -5301,7 +5294,7 @@ msgstr "Создать шаблон"
 #: plugins/admin/users/class_divListUsers.inc:307
 #: plugins/admin/groups/class_divListGroup.inc:291
 #: plugins/admin/acl/class_divListACL.inc:235
-#: plugins/admin/ogroups/class_divListOGroup.inc:289
+#: plugins/admin/ogroups/class_divListOGroup.inc:288
 #, fuzzy
 msgid "cut"
 msgstr "Выполнить"
@@ -5309,7 +5302,7 @@ msgstr "Выполнить"
 #: plugins/admin/users/class_divListUsers.inc:307
 #: plugins/admin/groups/class_divListGroup.inc:291
 #: plugins/admin/acl/class_divListACL.inc:235
-#: plugins/admin/ogroups/class_divListOGroup.inc:289
+#: plugins/admin/ogroups/class_divListOGroup.inc:288
 #, fuzzy
 msgid "Cut this entry"
 msgstr "Редактиовать объект"
@@ -5317,14 +5310,14 @@ msgstr "Редактиовать объект"
 #: plugins/admin/users/class_divListUsers.inc:309
 #: plugins/admin/groups/class_divListGroup.inc:293
 #: plugins/admin/acl/class_divListACL.inc:237
-#: plugins/admin/ogroups/class_divListOGroup.inc:291
+#: plugins/admin/ogroups/class_divListOGroup.inc:290
 msgid "copy"
 msgstr ""
 
 #: plugins/admin/users/class_divListUsers.inc:309
 #: plugins/admin/groups/class_divListGroup.inc:293
 #: plugins/admin/acl/class_divListACL.inc:237
-#: plugins/admin/ogroups/class_divListOGroup.inc:291
+#: plugins/admin/ogroups/class_divListOGroup.inc:290
 #, fuzzy
 msgid "Copy this entry"
 msgstr "Редактиовать объект"
@@ -5339,14 +5332,14 @@ msgstr "Личный"
 #: plugins/admin/acl/class_divListACL.inc:242
 #: plugins/admin/acl/class_divListACL.inc:264
 #: plugins/admin/departments/class_divListDepartment.inc:185
-#: plugins/admin/ogroups/class_divListOGroup.inc:295
+#: plugins/admin/ogroups/class_divListOGroup.inc:294
 #, fuzzy
 msgid "edit"
 msgstr "Изменить"
 
 #: plugins/admin/users/class_divListUsers.inc:329
-#: plugins/admin/users/class_userManagement.inc:453
-#: plugins/admin/users/class_userManagement.inc:564
+#: plugins/admin/users/class_userManagement.inc:460
+#: plugins/admin/users/class_userManagement.inc:571
 #, fuzzy
 msgid "user"
 msgstr "пользователи"
@@ -5367,13 +5360,13 @@ msgstr "Сменить пароль"
 #: plugins/admin/acl/class_divListACL.inc:252
 #: plugins/admin/acl/class_divListACL.inc:268
 #: plugins/admin/departments/class_divListDepartment.inc:190
-#: plugins/admin/ogroups/class_divListOGroup.inc:303
+#: plugins/admin/ogroups/class_divListOGroup.inc:302
 #, fuzzy
 msgid "delete"
 msgstr "Удалить"
 
 #: plugins/admin/users/class_divListUsers.inc:353
-#: plugins/admin/users/class_userManagement.inc:564
+#: plugins/admin/users/class_userManagement.inc:571
 #, fuzzy
 msgid "Delete user"
 msgstr "Удалить"
@@ -5386,7 +5379,7 @@ msgstr "Подразделение"
 #: plugins/admin/users/class_divListUsers.inc:443
 #: plugins/admin/groups/class_divListGroup.inc:365
 #: plugins/admin/departments/class_divListDepartment.inc:229
-#: plugins/admin/ogroups/class_divListOGroup.inc:353
+#: plugins/admin/ogroups/class_divListOGroup.inc:352
 #, fuzzy
 msgid "Number of listed departments"
 msgstr "Подразделение"
@@ -5396,30 +5389,30 @@ msgstr "Подразделение"
 msgid "Manage users"
 msgstr "Пользователи домена"
 
-#: plugins/admin/users/class_userManagement.inc:193
-#: plugins/admin/groups/class_groupManagement.inc:191
+#: plugins/admin/users/class_userManagement.inc:199
+#: plugins/admin/groups/class_groupManagement.inc:196
 #: plugins/admin/ogroups/class_ogroupManagement.inc:173
 #, fuzzy
 msgid "Infrastructure error"
 msgstr "Ошибка LDAP:"
 
-#: plugins/admin/users/class_userManagement.inc:292
-#: plugins/admin/users/class_userManagement.inc:347
+#: plugins/admin/users/class_userManagement.inc:299
+#: plugins/admin/users/class_userManagement.inc:354
 #, fuzzy
 msgid "You have no permission to change this users password!"
 msgstr "У вас недостаточно прав для смены своего пароля."
 
-#: plugins/admin/users/class_userManagement.inc:454
+#: plugins/admin/users/class_userManagement.inc:461
 #, fuzzy
 msgid "Delete users"
 msgstr "Удалить"
 
-#: plugins/admin/users/class_userManagement.inc:591
+#: plugins/admin/users/class_userManagement.inc:598
 #, fuzzy
 msgid "User successfully removed."
 msgstr "Настройка завершена"
 
-#: plugins/admin/users/class_userManagement.inc:702
+#: plugins/admin/users/class_userManagement.inc:709
 #: plugins/admin/ogroups/class_ogroup.inc:343
 msgid "none"
 msgstr "нет"
@@ -5580,23 +5573,19 @@ msgid "Select to see groups that are primary groups of users"
 msgstr "Выберите, чтобы просмотреть список основных групп пользователей"
 
 #: plugins/admin/groups/class_divListGroup.inc:85
-#: plugins/admin/groups/class_divListGroup.inc:87
-#: plugins/admin/groups/class_divListGroup.inc:89
-#: plugins/admin/groups/class_divListGroup.inc:91
-#: plugins/admin/groups/class_divListGroup.inc:93
-#, fuzzy, php-format
-msgid "Show %s groups"
-msgstr "Показать группы"
-
-#: plugins/admin/groups/class_divListGroup.inc:85
 #, fuzzy
-msgid "primary"
-msgstr "Запуск"
+msgid "primary groups"
+msgstr "Основная группа"
 
 #: plugins/admin/groups/class_divListGroup.inc:86
 #, fuzzy
 msgid "samba groups mappings"
 msgstr "Samba"
+
+#: plugins/admin/groups/class_divListGroup.inc:87
+#, fuzzy
+msgid "samba groups"
+msgstr "Группа Samba"
 
 #: plugins/admin/groups/class_divListGroup.inc:88
 #, fuzzy
@@ -5604,18 +5593,30 @@ msgid "application settings"
 msgstr "приложения"
 
 #: plugins/admin/groups/class_divListGroup.inc:89
+#: plugins/admin/ogroups/class_divListOGroup.inc:93
+#: plugins/admin/ogroups/class_divListOGroup.inc:94
 #, fuzzy
-msgid "application"
-msgstr "приложения"
+msgid "application groups"
+msgstr "Показать группы приложений"
 
 #: plugins/admin/groups/class_divListGroup.inc:90
 #, fuzzy
 msgid "mail settings"
 msgstr "Почтовые настройки пользователя"
 
+#: plugins/admin/groups/class_divListGroup.inc:91
+#, fuzzy
+msgid "mail groups"
+msgstr "Показать группы с эл. почтой"
+
 #: plugins/admin/groups/class_divListGroup.inc:92
 msgid "Select to see normal groups that have only functional aspects"
 msgstr "Выберите, чтобы просмотреть список обычных групп"
+
+#: plugins/admin/groups/class_divListGroup.inc:93
+#, fuzzy
+msgid "functional groups"
+msgstr "Показать обычные группы"
 
 #: plugins/admin/groups/class_divListGroup.inc:189
 #: plugins/admin/ogroups/class_ogroupManagement.inc:499
@@ -5632,14 +5633,14 @@ msgstr "Приложение"
 
 #: plugins/admin/groups/class_divListGroup.inc:298
 #: plugins/admin/departments/class_divListDepartment.inc:185
-#: plugins/admin/ogroups/class_divListOGroup.inc:295
+#: plugins/admin/ogroups/class_divListOGroup.inc:294
 #, fuzzy
 msgid "Edit this entry"
 msgstr "Редактиовать объект"
 
 #: plugins/admin/groups/class_divListGroup.inc:307
 #: plugins/admin/departments/class_divListDepartment.inc:190
-#: plugins/admin/ogroups/class_divListOGroup.inc:303
+#: plugins/admin/ogroups/class_divListOGroup.inc:302
 #, fuzzy
 msgid "Delete this entry"
 msgstr "Удалить"
@@ -5653,15 +5654,15 @@ msgstr "Название группы"
 msgid "Manage POSIX groups"
 msgstr ""
 
-#: plugins/admin/groups/class_groupManagement.inc:349
-#: plugins/admin/groups/class_groupManagement.inc:428
+#: plugins/admin/groups/class_groupManagement.inc:354
+#: plugins/admin/groups/class_groupManagement.inc:433
 #, fuzzy
 msgid "group"
 msgstr "группы"
 
-#: plugins/admin/groups/class_groupManagement.inc:382
-#: plugins/admin/groups/class_groupManagement.inc:435
-#: plugins/admin/groups/class_groupManagement.inc:466
+#: plugins/admin/groups/class_groupManagement.inc:387
+#: plugins/admin/groups/class_groupManagement.inc:440
+#: plugins/admin/groups/class_groupManagement.inc:471
 #: plugins/admin/acl/class_aclManagement.inc:163
 #: plugins/admin/acl/class_aclManagement.inc:200
 #: plugins/admin/acl/class_aclManagement.inc:253
@@ -5869,8 +5870,6 @@ msgstr ""
 #: plugins/admin/departments/class_departmentGeneric.inc:528
 #: plugins/admin/departments/class_departmentGeneric.inc:533
 #: plugins/admin/departments/class_departmentManagement.inc:26
-#: plugins/admin/ogroups/class_divListOGroup.inc:96
-#: plugins/admin/ogroups/class_divListOGroup.inc:97
 msgid "Departments"
 msgstr "Подразделения"
 
@@ -6069,8 +6068,6 @@ msgid "Startup"
 msgstr "Запуск"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:224
-#: plugins/admin/ogroups/class_divListOGroup.inc:104
-#: plugins/admin/ogroups/class_divListOGroup.inc:105
 msgid "Terminals"
 msgstr "Терминалы"
 
@@ -6203,8 +6200,6 @@ msgid "Terminal"
 msgstr "Терминалы"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:507
-#: plugins/admin/ogroups/class_divListOGroup.inc:106
-#: plugins/admin/ogroups/class_divListOGroup.inc:107
 #: plugins/generic/references/class_reference.inc:72
 msgid "Printer"
 msgstr "Принтер"
@@ -6232,46 +6227,67 @@ msgid "List of object groups"
 msgstr "Название группы"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:83
-#: plugins/admin/ogroups/class_divListOGroup.inc:207
-#: plugins/admin/ogroups/class_divListOGroup.inc:336
+#: plugins/admin/ogroups/class_divListOGroup.inc:206
+#: plugins/admin/ogroups/class_divListOGroup.inc:335
 #: plugins/generic/references/class_reference.inc:70
 msgid "Object group"
 msgstr "Объект группы"
 
-#: plugins/admin/ogroups/class_divListOGroup.inc:88
-#, fuzzy, php-format
-msgid "Select to see groups containing '%s'."
-msgstr "Показать группы с пользователями"
-
 #: plugins/admin/ogroups/class_divListOGroup.inc:89
-#, fuzzy, php-format
-msgid "Show groups containing '%s'"
-msgstr "Показать группы с пользователями"
+#: plugins/admin/ogroups/class_divListOGroup.inc:90
+#, fuzzy
+msgid "user groups"
+msgstr "группы"
 
-#: plugins/admin/ogroups/class_divListOGroup.inc:94
+#: plugins/admin/ogroups/class_divListOGroup.inc:91
+#: plugins/admin/ogroups/class_divListOGroup.inc:92
+#, fuzzy
+msgid "nested groups"
+msgstr "Объединения"
+
 #: plugins/admin/ogroups/class_divListOGroup.inc:95
-msgid "Applications"
-msgstr "Приложения"
+#: plugins/admin/ogroups/class_divListOGroup.inc:96
+#, fuzzy
+msgid "department groups"
+msgstr "подразделения"
 
+#: plugins/admin/ogroups/class_divListOGroup.inc:97
+#: plugins/admin/ogroups/class_divListOGroup.inc:98
+#, fuzzy
+msgid "server groups"
+msgstr "серверы"
+
+#: plugins/admin/ogroups/class_divListOGroup.inc:99
 #: plugins/admin/ogroups/class_divListOGroup.inc:100
-#: plugins/admin/ogroups/class_divListOGroup.inc:101
 #, fuzzy
-msgid "Workstations"
-msgstr "Рабочая станция"
+msgid "workstation groups"
+msgstr "рабочие станции"
 
+#: plugins/admin/ogroups/class_divListOGroup.inc:101
 #: plugins/admin/ogroups/class_divListOGroup.inc:102
-#: plugins/admin/ogroups/class_divListOGroup.inc:103
 #, fuzzy
-msgid "Windows workstations"
+msgid "windows workstation groups"
 msgstr "Показать рабочие станции"
 
-#: plugins/admin/ogroups/class_divListOGroup.inc:108
-#: plugins/admin/ogroups/class_divListOGroup.inc:109
+#: plugins/admin/ogroups/class_divListOGroup.inc:103
+#: plugins/admin/ogroups/class_divListOGroup.inc:104
 #, fuzzy
-msgid "Phones"
-msgstr "Телефон"
+msgid "terminal groups"
+msgstr "Показать группы с эл. почтой"
 
-#: plugins/admin/ogroups/class_divListOGroup.inc:352
+#: plugins/admin/ogroups/class_divListOGroup.inc:105
+#: plugins/admin/ogroups/class_divListOGroup.inc:106
+#, fuzzy
+msgid "printer groups"
+msgstr "Основная группа"
+
+#: plugins/admin/ogroups/class_divListOGroup.inc:107
+#: plugins/admin/ogroups/class_divListOGroup.inc:108
+#, fuzzy
+msgid "phone groups"
+msgstr "Показать группы"
+
+#: plugins/admin/ogroups/class_divListOGroup.inc:351
 #, fuzzy
 msgid "Number of listed object groups"
 msgstr "Название группы"
@@ -6677,6 +6693,61 @@ msgid ""
 msgstr ""
 
 #, fuzzy
+#~ msgid "Show groups with '%s'"
+#~ msgstr "Показать группы с пользователями"
+
+#, fuzzy
+#~ msgid "server"
+#~ msgstr "серверы"
+
+#, fuzzy
+#~ msgid "Show %s user"
+#~ msgstr "Показать пользователей Samba"
+
+#, fuzzy
+#~ msgid "functional"
+#~ msgstr "Действие"
+
+#, fuzzy
+#~ msgid "posix"
+#~ msgstr "Прокси-сервер"
+
+#, fuzzy
+#~ msgid "mail"
+#~ msgstr "мужской"
+
+#, fuzzy
+#~ msgid "samba"
+#~ msgstr "Samba"
+
+#, fuzzy
+#~ msgid "proxy"
+#~ msgstr "Прокси-сервер"
+
+#, fuzzy
+#~ msgid "primary"
+#~ msgstr "Запуск"
+
+#, fuzzy
+#~ msgid "application"
+#~ msgstr "приложения"
+
+#, fuzzy
+#~ msgid "Select to see groups containing '%s'."
+#~ msgstr "Показать группы с пользователями"
+
+#~ msgid "Applications"
+#~ msgstr "Приложения"
+
+#, fuzzy
+#~ msgid "Workstations"
+#~ msgstr "Рабочая станция"
+
+#, fuzzy
+#~ msgid "Phones"
+#~ msgstr "Телефон"
+
+#, fuzzy
 #~ msgid "Checking for duplicate gid numbers"
 #~ msgstr "Проверка поддержки gettext"
 
@@ -6794,9 +6865,6 @@ msgstr ""
 #~ "Выберите, чтобы просмотреть пользователей, у которых есть только объект "
 #~ "GOsa"
 
-#~ msgid "Show functional users"
-#~ msgstr "Показать обычных пользователей"
-
 #~ msgid "Select to see users that have posix settings"
 #~ msgstr ""
 #~ "Выберите, чтобы просмотреть пользователей с атрибутами в стандарте POSIX"
@@ -6817,9 +6885,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Выберите, чтобы просмотреть пользователей с настройками прокси-сервера"
 
-#~ msgid "Show proxy users"
-#~ msgstr "Показать пользователей с прокси-серверами"
-
 #~ msgid "Show primary groups"
 #~ msgstr "Показать основные группы"
 
@@ -6833,19 +6898,10 @@ msgstr ""
 #~ msgstr ""
 #~ "Выберите, чтобы просмотреть список групп, которым доступны приложения"
 
-#~ msgid "Show application groups"
-#~ msgstr "Показать группы приложений"
-
 #~ msgid "Select to see groups that have mail settings"
 #~ msgstr ""
 #~ "Выберите, чтобы просмотреть список групп, которым доступны функции эл. "
 #~ "почты"
-
-#~ msgid "Show mail groups"
-#~ msgstr "Показать группы с эл. почтой"
-
-#~ msgid "Show functional groups"
-#~ msgstr "Показать обычные группы"
 
 #, fuzzy
 #~ msgid "acl"

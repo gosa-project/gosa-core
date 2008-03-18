@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-17 23:32+0100\n"
+"POT-Creation-Date: 2008-03-18 21:43+0100\n"
 "PO-Revision-Date: 2006-06-02 16:58+0100\n"
 "Last-Translator: Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>\n"
 "Language-Team: CareWorks ICT Services <info@careworks.nl>\n"
@@ -527,9 +527,9 @@ msgstr "Organisatie"
 #: plugins/personal/generic/class_user.inc:1155
 #: plugins/personal/generic/class_user.inc:1192
 #: plugins/personal/generic/class_user.inc:1578
-#: plugins/admin/users/class_userManagement.inc:724
-#: plugins/admin/users/class_userManagement.inc:802
-#: plugins/admin/users/class_userManagement.inc:814
+#: plugins/admin/users/class_userManagement.inc:731
+#: plugins/admin/users/class_userManagement.inc:809
+#: plugins/admin/users/class_userManagement.inc:821
 #: plugins/admin/groups/class_groupGeneric.inc:870
 #: plugins/admin/groups/class_groupGeneric.inc:876
 #: plugins/admin/groups/class_groupGeneric.inc:878
@@ -859,8 +859,6 @@ msgstr "Het opslaan van de telefoon is mislukt"
 
 #: setup/setup_config2.tpl:264 setup/setup_config2.tpl:309
 #: plugins/admin/ogroups/class_ogroupManagement.inc:502
-#: plugins/admin/ogroups/class_divListOGroup.inc:98
-#: plugins/admin/ogroups/class_divListOGroup.inc:99
 #: plugins/generic/references/class_reference.inc:64
 msgid "Server"
 msgstr "Server"
@@ -964,8 +962,8 @@ msgstr ""
 #: include/functions.inc:2174 include/functions.inc:2180
 #: plugins/personal/posix/class_posixAccount.inc:817
 #: plugins/personal/posix/class_posixAccount.inc:910
-#: plugins/admin/users/class_userManagement.inc:482
-#: plugins/admin/users/class_userManagement.inc:596
+#: plugins/admin/users/class_userManagement.inc:489
+#: plugins/admin/users/class_userManagement.inc:603
 #: plugins/admin/users/remove.tpl:2 plugins/admin/groups/remove.tpl:2
 #: plugins/admin/acl/remove.tpl:2
 #: plugins/admin/departments/dep_move_confirm.tpl:2
@@ -1069,7 +1067,7 @@ msgstr ""
 #: plugins/admin/groups/class_divListGroup.inc:183
 #: plugins/admin/acl/class_divListACL.inc:161
 #: plugins/admin/departments/class_divListDepartment.inc:151
-#: plugins/admin/ogroups/class_divListOGroup.inc:202
+#: plugins/admin/ogroups/class_divListOGroup.inc:201
 msgid "Create"
 msgstr "Aanmaken"
 
@@ -1105,8 +1103,8 @@ msgstr "Geef a.u.b. een geldige gebruikersnaam op!"
 #: ihtml/themes/default/msg_dialog.tpl:100 include/utils/class_msgPool.inc:153
 #: include/utils/class_msgPool.inc:165 include/utils/class_msgPool.inc:183
 #: include/utils/class_msgPool.inc:464 include/utils/class_msgPool.inc:483
-#: include/class_gosaSupportDaemon.inc:794
-#: include/class_gosaSupportDaemon.inc:814
+#: include/class_gosaSupportDaemon.inc:867
+#: include/class_gosaSupportDaemon.inc:887
 #: include/class_CopyPasteHandler.inc:118
 #: include/class_CopyPasteHandler.inc:126
 #: include/class_CopyPasteHandler.inc:158
@@ -1159,7 +1157,7 @@ msgstr ""
 #: plugins/personal/generic/class_user.inc:1020
 #: plugins/personal/posix/class_posixAccount.inc:663
 #: plugins/personal/posix/class_posixAccount.inc:927
-#: plugins/admin/users/class_userManagement.inc:539
+#: plugins/admin/users/class_userManagement.inc:546
 #: plugins/admin/groups/class_groupGeneric.inc:576
 #: plugins/admin/groups/class_groupGeneric.inc:843
 #: plugins/admin/acl/class_aclRole.inc:585
@@ -1446,7 +1444,7 @@ msgstr "Bel..."
 #: plugins/admin/departments/class_divListDepartment.inc:144
 #: plugins/admin/departments/generic.tpl:35
 #: plugins/admin/ogroups/class_ogroup.inc:817
-#: plugins/admin/ogroups/class_divListOGroup.inc:194
+#: plugins/admin/ogroups/class_divListOGroup.inc:193
 #: plugins/admin/ogroups/generic.tpl:26
 msgid "Base"
 msgstr "Basis"
@@ -1496,7 +1494,7 @@ msgstr "Systeem status"
 #: ihtml/themes/default/MultiSelectWindow.tpl:86
 #: ihtml/themes/default/msg_dialog.tpl:59
 #: ihtml/themes/default/msg_dialog.tpl:104
-#: plugins/admin/users/class_userManagement.inc:591
+#: plugins/admin/users/class_userManagement.inc:598
 #: plugins/admin/ogroups/class_ogroup.inc:169
 msgid "Information"
 msgstr "Informatie"
@@ -2248,7 +2246,7 @@ msgstr "Oud wachtwoord"
 #: plugins/personal/generic/main.inc:86
 #: plugins/personal/password/password.tpl:18
 #: plugins/admin/users/password.tpl:13
-#: plugins/admin/users/class_userManagement.inc:245 html/password.php:200
+#: plugins/admin/users/class_userManagement.inc:252 html/password.php:200
 msgid "New password"
 msgstr "Nieuw wachtwoord"
 
@@ -2460,8 +2458,8 @@ msgstr ""
 #: plugins/personal/password/class_password.inc:94
 #: plugins/personal/password/class_password.inc:108
 #: plugins/personal/password/class_password.inc:114
-#: plugins/admin/users/class_userManagement.inc:292
-#: plugins/admin/users/class_userManagement.inc:347 html/main.php:356
+#: plugins/admin/users/class_userManagement.inc:299
+#: plugins/admin/users/class_userManagement.inc:354 html/main.php:356
 #, fuzzy
 msgid "Password change"
 msgstr "Het veranderen van het wachtwoord is niet toegestaan"
@@ -3247,18 +3245,18 @@ msgid ""
 "correct timezone offset."
 msgstr ""
 
-#: include/class_gosaSupportDaemon.inc:514
+#: include/class_gosaSupportDaemon.inc:587
 #, fuzzy
 msgid "Cannot not parse XML!"
 msgstr ""
 "Er zitten te veel gebruikers in de database. Kan geen vrij ID toewijzen!"
 
-#: include/class_gosaSupportDaemon.inc:794
+#: include/class_gosaSupportDaemon.inc:867
 #, fuzzy, php-format
 msgid "Cannot send abort event for entry %s!"
 msgstr "Kan bestand '%s' niet aanmaken."
 
-#: include/class_gosaSupportDaemon.inc:814
+#: include/class_gosaSupportDaemon.inc:887
 #, fuzzy, php-format
 msgid "Cannot remove entry %s!"
 msgstr "Onbekende FAI status %s"
@@ -3339,8 +3337,8 @@ msgstr ""
 #: plugins/admin/groups/class_divListGroup.inc:223
 #: plugins/admin/acl/class_divListACL.inc:184
 #: plugins/admin/acl/class_divListACL.inc:187
-#: plugins/admin/ogroups/class_divListOGroup.inc:239
-#: plugins/admin/ogroups/class_divListOGroup.inc:242
+#: plugins/admin/ogroups/class_divListOGroup.inc:238
+#: plugins/admin/ogroups/class_divListOGroup.inc:241
 msgid "Paste"
 msgstr "Plakken"
 
@@ -3473,17 +3471,13 @@ msgid "Use ACL defined in role"
 msgstr ""
 
 #: include/class_acl.inc:216 plugins/personal/generic/class_user.inc:1448
-#: plugins/admin/users/class_userManagement.inc:26
-#: plugins/admin/ogroups/class_divListOGroup.inc:90
-#: plugins/admin/ogroups/class_divListOGroup.inc:91 html/getxls.php:91
+#: plugins/admin/users/class_userManagement.inc:26 html/getxls.php:91
 #: html/getxls.php:92 html/getxls.php:310
 msgid "Users"
 msgstr "Gebruikers"
 
 #: include/class_acl.inc:216 plugins/admin/groups/class_groupGeneric.inc:1019
-#: plugins/admin/groups/class_groupManagement.inc:26
-#: plugins/admin/ogroups/class_divListOGroup.inc:92
-#: plugins/admin/ogroups/class_divListOGroup.inc:93 html/getxls.php:126
+#: plugins/admin/groups/class_groupManagement.inc:26 html/getxls.php:126
 #: html/getxls.php:128 html/getxls.php:311
 msgid "Groups"
 msgstr "Groepen"
@@ -3754,7 +3748,7 @@ msgstr "Lijst herladen"
 #: plugins/admin/groups/class_divListGroup.inc:176
 #: plugins/admin/acl/class_divListACL.inc:155
 #: plugins/admin/departments/class_divListDepartment.inc:146
-#: plugins/admin/ogroups/class_divListOGroup.inc:196
+#: plugins/admin/ogroups/class_divListOGroup.inc:195
 msgid "Submit"
 msgstr "Verwerk"
 
@@ -4194,7 +4188,7 @@ msgstr "Standaard certificaat"
 #: plugins/admin/groups/class_divListGroup.inc:197
 #: plugins/admin/acl/class_divListACL.inc:172
 #: plugins/admin/departments/class_divListDepartment.inc:160
-#: plugins/admin/ogroups/class_divListOGroup.inc:216
+#: plugins/admin/ogroups/class_divListOGroup.inc:215
 msgid "Remove"
 msgstr "Verwijderen"
 
@@ -4270,8 +4264,8 @@ msgstr "Dit programma is niet meer beschikbaar."
 #: plugins/personal/generic/class_user.inc:1189
 #: plugins/personal/generic/class_user.inc:1455
 #: plugins/personal/generic/class_user.inc:1575
-#: plugins/admin/users/class_userManagement.inc:727
-#: plugins/admin/users/class_userManagement.inc:805 html/getxls.php:88
+#: plugins/admin/users/class_userManagement.inc:734
+#: plugins/admin/users/class_userManagement.inc:812 html/getxls.php:88
 #: html/getxls.php:225 html/getxls.php:283 html/getxls.php:299
 msgid "Given name"
 msgstr "Naam"
@@ -4643,7 +4637,7 @@ msgstr "Kamer nr."
 
 #: plugins/personal/generic/main.inc:81
 #: plugins/personal/password/class_password.inc:83
-#: plugins/admin/users/class_userManagement.inc:240 html/password.php:197
+#: plugins/admin/users/class_userManagement.inc:247 html/password.php:197
 msgid ""
 "The passwords you've entered as 'New password' and 'Repeated new password' "
 "do not match."
@@ -4830,7 +4824,7 @@ msgstr "Toon overeenkomende groepen"
 
 #: plugins/personal/posix/posix_groups.tpl:48
 #: plugins/admin/groups/class_divListGroup.inc:100
-#: plugins/admin/ogroups/class_divListOGroup.inc:116
+#: plugins/admin/ogroups/class_divListOGroup.inc:115
 msgid "Regular expression for matching group names"
 msgstr "Reguliere expressie voor overeenkomende groepnamen"
 
@@ -5113,7 +5107,7 @@ msgstr ""
 #: plugins/admin/users/template.tpl:15
 #: plugins/admin/users/class_divListUsers.inc:84
 #: plugins/admin/users/class_divListUsers.inc:177
-#: plugins/admin/users/class_userManagement.inc:721
+#: plugins/admin/users/class_userManagement.inc:728
 msgid "Template"
 msgstr "Sjabloon"
 
@@ -5153,11 +5147,21 @@ msgstr "Eigenschappen"
 #: plugins/admin/departments/class_divListDepartment.inc:68
 #: plugins/admin/departments/class_divListDepartment.inc:149
 #: plugins/admin/ogroups/class_divListOGroup.inc:85
-#: plugins/admin/ogroups/class_divListOGroup.inc:200
+#: plugins/admin/ogroups/class_divListOGroup.inc:199
 msgid "Actions"
 msgstr "Acties"
 
 #: plugins/admin/users/class_divListUsers.inc:84
+#: plugins/admin/users/class_divListUsers.inc:85
+#: plugins/admin/users/class_divListUsers.inc:86
+#: plugins/admin/users/class_divListUsers.inc:87
+#: plugins/admin/users/class_divListUsers.inc:88
+#: plugins/admin/users/class_divListUsers.inc:89
+#: plugins/admin/groups/class_divListGroup.inc:85
+#: plugins/admin/groups/class_divListGroup.inc:87
+#: plugins/admin/groups/class_divListGroup.inc:89
+#: plugins/admin/groups/class_divListGroup.inc:91
+#: plugins/admin/groups/class_divListGroup.inc:93
 #: plugins/admin/ogroups/class_ogroup.inc:298
 #: plugins/admin/ogroups/class_ogroup.inc:302
 #: plugins/admin/ogroups/class_ogroup.inc:306
@@ -5167,6 +5171,7 @@ msgstr "Acties"
 #: plugins/admin/ogroups/class_ogroup.inc:322
 #: plugins/admin/ogroups/class_ogroup.inc:326
 #: plugins/admin/ogroups/class_ogroup.inc:330
+#: plugins/admin/ogroups/class_divListOGroup.inc:88
 #, fuzzy, php-format
 msgid "Show %s"
 msgstr "Toon groepen"
@@ -5182,19 +5187,9 @@ msgid "GOsa object"
 msgstr "Object"
 
 #: plugins/admin/users/class_divListUsers.inc:85
-#: plugins/admin/users/class_divListUsers.inc:86
-#: plugins/admin/users/class_divListUsers.inc:87
-#: plugins/admin/users/class_divListUsers.inc:88
-#: plugins/admin/users/class_divListUsers.inc:89
-#, fuzzy, php-format
-msgid "Show %s user"
-msgstr "Toon Samba gebruikers"
-
-#: plugins/admin/users/class_divListUsers.inc:85
-#: plugins/admin/groups/class_divListGroup.inc:93
 #, fuzzy
-msgid "functional"
-msgstr "functie"
+msgid "functional users"
+msgstr "Toon functionele gebruikers"
 
 #: plugins/admin/users/class_divListUsers.inc:86
 #: plugins/admin/users/class_divListUsers.inc:268
@@ -5204,30 +5199,28 @@ msgstr "Posix"
 
 #: plugins/admin/users/class_divListUsers.inc:86
 #, fuzzy
-msgid "posix"
-msgstr "Posix"
+msgid "POSIX users"
+msgstr "Posix instellingen"
 
 #: plugins/admin/users/class_divListUsers.inc:87
 #: plugins/admin/users/class_divListUsers.inc:272
 #: plugins/admin/groups/class_divListGroup.inc:263
 #: plugins/admin/ogroups/tabs_ogroups.inc:110
 #: plugins/admin/ogroups/tabs_ogroups.inc:256
-#: plugins/admin/ogroups/class_divListOGroup.inc:270
+#: plugins/admin/ogroups/class_divListOGroup.inc:269
 #: plugins/generic/references/class_reference.inc:44
 msgid "Mail"
 msgstr "E-mail"
 
 #: plugins/admin/users/class_divListUsers.inc:87
-#: plugins/admin/groups/class_divListGroup.inc:91
 #, fuzzy
-msgid "mail"
-msgstr "man"
+msgid "mail users"
+msgstr "Windows gebruikers"
 
 #: plugins/admin/users/class_divListUsers.inc:88
-#: plugins/admin/groups/class_divListGroup.inc:87
 #, fuzzy
-msgid "samba"
-msgstr "Samba"
+msgid "samba users"
+msgstr "Windows gebruikers"
 
 #: plugins/admin/users/class_divListUsers.inc:89
 #: plugins/generic/references/class_reference.inc:52
@@ -5236,8 +5229,8 @@ msgstr "Proxy"
 
 #: plugins/admin/users/class_divListUsers.inc:89
 #, fuzzy
-msgid "proxy"
-msgstr "Proxy"
+msgid "proxy users"
+msgstr "Toon Proxy gebruikers"
 
 #: plugins/admin/users/class_divListUsers.inc:96
 #: plugins/admin/groups/group_objects.tpl:46
@@ -5248,14 +5241,14 @@ msgstr "Toon overeenkomende gebruikers"
 #: plugins/admin/groups/class_divListGroup.inc:176
 #: plugins/admin/acl/class_divListACL.inc:155
 #: plugins/admin/departments/class_divListDepartment.inc:146
-#: plugins/admin/ogroups/class_divListOGroup.inc:196
+#: plugins/admin/ogroups/class_divListOGroup.inc:195
 msgid "Submit department"
 msgstr "Verwerk afdeling"
 
 #: plugins/admin/users/class_divListUsers.inc:204
 #: plugins/admin/groups/class_divListGroup.inc:214
 #: plugins/admin/acl/class_divListACL.inc:178
-#: plugins/admin/ogroups/class_divListOGroup.inc:233
+#: plugins/admin/ogroups/class_divListOGroup.inc:232
 #, fuzzy
 msgid "Copy"
 msgstr "kopieer"
@@ -5263,7 +5256,7 @@ msgstr "kopieer"
 #: plugins/admin/users/class_divListUsers.inc:206
 #: plugins/admin/groups/class_divListGroup.inc:216
 #: plugins/admin/acl/class_divListACL.inc:180
-#: plugins/admin/ogroups/class_divListOGroup.inc:235
+#: plugins/admin/ogroups/class_divListOGroup.inc:234
 #, fuzzy
 msgid "Cut"
 msgstr "knippen"
@@ -5319,28 +5312,28 @@ msgstr "Maak gebruiker aan met dit sjabloon"
 #: plugins/admin/users/class_divListUsers.inc:307
 #: plugins/admin/groups/class_divListGroup.inc:291
 #: plugins/admin/acl/class_divListACL.inc:235
-#: plugins/admin/ogroups/class_divListOGroup.inc:289
+#: plugins/admin/ogroups/class_divListOGroup.inc:288
 msgid "cut"
 msgstr "knippen"
 
 #: plugins/admin/users/class_divListUsers.inc:307
 #: plugins/admin/groups/class_divListGroup.inc:291
 #: plugins/admin/acl/class_divListACL.inc:235
-#: plugins/admin/ogroups/class_divListOGroup.inc:289
+#: plugins/admin/ogroups/class_divListOGroup.inc:288
 msgid "Cut this entry"
 msgstr "Deze invoer knippen"
 
 #: plugins/admin/users/class_divListUsers.inc:309
 #: plugins/admin/groups/class_divListGroup.inc:293
 #: plugins/admin/acl/class_divListACL.inc:237
-#: plugins/admin/ogroups/class_divListOGroup.inc:291
+#: plugins/admin/ogroups/class_divListOGroup.inc:290
 msgid "copy"
 msgstr "kopieer"
 
 #: plugins/admin/users/class_divListUsers.inc:309
 #: plugins/admin/groups/class_divListGroup.inc:293
 #: plugins/admin/acl/class_divListACL.inc:237
-#: plugins/admin/ogroups/class_divListOGroup.inc:291
+#: plugins/admin/ogroups/class_divListOGroup.inc:290
 msgid "Copy this entry"
 msgstr "Deze invoer kopieren"
 
@@ -5354,13 +5347,13 @@ msgstr "actief"
 #: plugins/admin/acl/class_divListACL.inc:242
 #: plugins/admin/acl/class_divListACL.inc:264
 #: plugins/admin/departments/class_divListDepartment.inc:185
-#: plugins/admin/ogroups/class_divListOGroup.inc:295
+#: plugins/admin/ogroups/class_divListOGroup.inc:294
 msgid "edit"
 msgstr "Bewerk"
 
 #: plugins/admin/users/class_divListUsers.inc:329
-#: plugins/admin/users/class_userManagement.inc:453
-#: plugins/admin/users/class_userManagement.inc:564
+#: plugins/admin/users/class_userManagement.inc:460
+#: plugins/admin/users/class_userManagement.inc:571
 #, fuzzy
 msgid "user"
 msgstr "gebruikers"
@@ -5380,12 +5373,12 @@ msgstr "Het veranderen van het wachtwoord is niet toegestaan"
 #: plugins/admin/acl/class_divListACL.inc:252
 #: plugins/admin/acl/class_divListACL.inc:268
 #: plugins/admin/departments/class_divListDepartment.inc:190
-#: plugins/admin/ogroups/class_divListOGroup.inc:303
+#: plugins/admin/ogroups/class_divListOGroup.inc:302
 msgid "delete"
 msgstr "Verwijder"
 
 #: plugins/admin/users/class_divListUsers.inc:353
-#: plugins/admin/users/class_userManagement.inc:564
+#: plugins/admin/users/class_userManagement.inc:571
 msgid "Delete user"
 msgstr "Verwijder gebruiker"
 
@@ -5397,7 +5390,7 @@ msgstr "Naam van de afdeling"
 #: plugins/admin/users/class_divListUsers.inc:443
 #: plugins/admin/groups/class_divListGroup.inc:365
 #: plugins/admin/departments/class_divListDepartment.inc:229
-#: plugins/admin/ogroups/class_divListOGroup.inc:353
+#: plugins/admin/ogroups/class_divListOGroup.inc:352
 #, fuzzy
 msgid "Number of listed departments"
 msgstr "Naam van de afdeling"
@@ -5407,30 +5400,30 @@ msgstr "Naam van de afdeling"
 msgid "Manage users"
 msgstr "Windows gebruikers"
 
-#: plugins/admin/users/class_userManagement.inc:193
-#: plugins/admin/groups/class_groupManagement.inc:191
+#: plugins/admin/users/class_userManagement.inc:199
+#: plugins/admin/groups/class_groupManagement.inc:196
 #: plugins/admin/ogroups/class_ogroupManagement.inc:173
 #, fuzzy
 msgid "Infrastructure error"
 msgstr "PHP fout"
 
-#: plugins/admin/users/class_userManagement.inc:292
-#: plugins/admin/users/class_userManagement.inc:347
+#: plugins/admin/users/class_userManagement.inc:299
+#: plugins/admin/users/class_userManagement.inc:354
 #, fuzzy
 msgid "You have no permission to change this users password!"
 msgstr "U heeft geen toestemming om uw wachtwoord te veranderen."
 
-#: plugins/admin/users/class_userManagement.inc:454
+#: plugins/admin/users/class_userManagement.inc:461
 #, fuzzy
 msgid "Delete users"
 msgstr "Verwijder gebruiker"
 
-#: plugins/admin/users/class_userManagement.inc:591
+#: plugins/admin/users/class_userManagement.inc:598
 #, fuzzy
 msgid "User successfully removed."
 msgstr "Import was succesvol"
 
-#: plugins/admin/users/class_userManagement.inc:702
+#: plugins/admin/users/class_userManagement.inc:709
 #: plugins/admin/ogroups/class_ogroup.inc:343
 msgid "none"
 msgstr "geen"
@@ -5590,23 +5583,19 @@ msgstr ""
 "Selecteer om de groepen te zien die primaire groepen van gebruikers zijn"
 
 #: plugins/admin/groups/class_divListGroup.inc:85
-#: plugins/admin/groups/class_divListGroup.inc:87
-#: plugins/admin/groups/class_divListGroup.inc:89
-#: plugins/admin/groups/class_divListGroup.inc:91
-#: plugins/admin/groups/class_divListGroup.inc:93
-#, fuzzy, php-format
-msgid "Show %s groups"
-msgstr "Toon groepen"
-
-#: plugins/admin/groups/class_divListGroup.inc:85
 #, fuzzy
-msgid "primary"
-msgstr "Samenvatting"
+msgid "primary groups"
+msgstr "Primaire groep"
 
 #: plugins/admin/groups/class_divListGroup.inc:86
 #, fuzzy
 msgid "samba groups mappings"
 msgstr "Samba"
+
+#: plugins/admin/groups/class_divListGroup.inc:87
+#, fuzzy
+msgid "samba groups"
+msgstr "Samba groep"
 
 #: plugins/admin/groups/class_divListGroup.inc:88
 #, fuzzy
@@ -5614,19 +5603,31 @@ msgid "application settings"
 msgstr "programma's"
 
 #: plugins/admin/groups/class_divListGroup.inc:89
+#: plugins/admin/ogroups/class_divListOGroup.inc:93
+#: plugins/admin/ogroups/class_divListOGroup.inc:94
 #, fuzzy
-msgid "application"
-msgstr "programma's"
+msgid "application groups"
+msgstr "Toon programma groepen"
 
 #: plugins/admin/groups/class_divListGroup.inc:90
 #, fuzzy
 msgid "mail settings"
 msgstr "E-mail instellingen"
 
+#: plugins/admin/groups/class_divListGroup.inc:91
+#, fuzzy
+msgid "mail groups"
+msgstr "Toon E-mail groepen"
+
 #: plugins/admin/groups/class_divListGroup.inc:92
 msgid "Select to see normal groups that have only functional aspects"
 msgstr ""
 "Selecteer om normale groepen die alleen functionele aspecten hebben te zien"
+
+#: plugins/admin/groups/class_divListGroup.inc:93
+#, fuzzy
+msgid "functional groups"
+msgstr "Toon functionele groepen"
 
 #: plugins/admin/groups/class_divListGroup.inc:189
 #: plugins/admin/ogroups/class_ogroupManagement.inc:499
@@ -5643,13 +5644,13 @@ msgstr "Programma"
 
 #: plugins/admin/groups/class_divListGroup.inc:298
 #: plugins/admin/departments/class_divListDepartment.inc:185
-#: plugins/admin/ogroups/class_divListOGroup.inc:295
+#: plugins/admin/ogroups/class_divListOGroup.inc:294
 msgid "Edit this entry"
 msgstr "Bewerk deze invoer"
 
 #: plugins/admin/groups/class_divListGroup.inc:307
 #: plugins/admin/departments/class_divListDepartment.inc:190
-#: plugins/admin/ogroups/class_divListOGroup.inc:303
+#: plugins/admin/ogroups/class_divListOGroup.inc:302
 msgid "Delete this entry"
 msgstr "Verwijder deze invoer"
 
@@ -5662,15 +5663,15 @@ msgstr "Naam van de groep"
 msgid "Manage POSIX groups"
 msgstr ""
 
-#: plugins/admin/groups/class_groupManagement.inc:349
-#: plugins/admin/groups/class_groupManagement.inc:428
+#: plugins/admin/groups/class_groupManagement.inc:354
+#: plugins/admin/groups/class_groupManagement.inc:433
 #, fuzzy
 msgid "group"
 msgstr "groepen"
 
-#: plugins/admin/groups/class_groupManagement.inc:382
-#: plugins/admin/groups/class_groupManagement.inc:435
-#: plugins/admin/groups/class_groupManagement.inc:466
+#: plugins/admin/groups/class_groupManagement.inc:387
+#: plugins/admin/groups/class_groupManagement.inc:440
+#: plugins/admin/groups/class_groupManagement.inc:471
 #: plugins/admin/acl/class_aclManagement.inc:163
 #: plugins/admin/acl/class_aclManagement.inc:200
 #: plugins/admin/acl/class_aclManagement.inc:253
@@ -5877,8 +5878,6 @@ msgstr "Kopieren van %s is mislukt. Bewerking afgebroken."
 #: plugins/admin/departments/class_departmentGeneric.inc:528
 #: plugins/admin/departments/class_departmentGeneric.inc:533
 #: plugins/admin/departments/class_departmentManagement.inc:26
-#: plugins/admin/ogroups/class_divListOGroup.inc:96
-#: plugins/admin/ogroups/class_divListOGroup.inc:97
 msgid "Departments"
 msgstr "Afdelingen"
 
@@ -6073,8 +6072,6 @@ msgid "Startup"
 msgstr "Opstarten"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:224
-#: plugins/admin/ogroups/class_divListOGroup.inc:104
-#: plugins/admin/ogroups/class_divListOGroup.inc:105
 msgid "Terminals"
 msgstr "Terminals"
 
@@ -6204,8 +6201,6 @@ msgid "Terminal"
 msgstr "Terminal"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:507
-#: plugins/admin/ogroups/class_divListOGroup.inc:106
-#: plugins/admin/ogroups/class_divListOGroup.inc:107
 #: plugins/generic/references/class_reference.inc:72
 msgid "Printer"
 msgstr "Printer"
@@ -6232,46 +6227,67 @@ msgid "List of object groups"
 msgstr "Lijst met objectgroepen"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:83
-#: plugins/admin/ogroups/class_divListOGroup.inc:207
-#: plugins/admin/ogroups/class_divListOGroup.inc:336
+#: plugins/admin/ogroups/class_divListOGroup.inc:206
+#: plugins/admin/ogroups/class_divListOGroup.inc:335
 #: plugins/generic/references/class_reference.inc:70
 msgid "Object group"
 msgstr "Objectgroep"
 
-#: plugins/admin/ogroups/class_divListOGroup.inc:88
-#, fuzzy, php-format
-msgid "Select to see groups containing '%s'."
-msgstr "Selecteer om groepen die gebruikers bevatten te tonen"
-
 #: plugins/admin/ogroups/class_divListOGroup.inc:89
-#, fuzzy, php-format
-msgid "Show groups containing '%s'"
-msgstr "Toon groepen die gebruikers bevatten"
+#: plugins/admin/ogroups/class_divListOGroup.inc:90
+#, fuzzy
+msgid "user groups"
+msgstr "groepen"
 
-#: plugins/admin/ogroups/class_divListOGroup.inc:94
+#: plugins/admin/ogroups/class_divListOGroup.inc:91
+#: plugins/admin/ogroups/class_divListOGroup.inc:92
+#, fuzzy
+msgid "nested groups"
+msgstr "Objectgroepen"
+
 #: plugins/admin/ogroups/class_divListOGroup.inc:95
-msgid "Applications"
-msgstr "Programma's"
+#: plugins/admin/ogroups/class_divListOGroup.inc:96
+#, fuzzy
+msgid "department groups"
+msgstr "afdelingen"
 
+#: plugins/admin/ogroups/class_divListOGroup.inc:97
+#: plugins/admin/ogroups/class_divListOGroup.inc:98
+#, fuzzy
+msgid "server groups"
+msgstr "servers"
+
+#: plugins/admin/ogroups/class_divListOGroup.inc:99
 #: plugins/admin/ogroups/class_divListOGroup.inc:100
-#: plugins/admin/ogroups/class_divListOGroup.inc:101
 #, fuzzy
-msgid "Workstations"
-msgstr "Werkstation"
+msgid "workstation groups"
+msgstr "werkstations"
 
+#: plugins/admin/ogroups/class_divListOGroup.inc:101
 #: plugins/admin/ogroups/class_divListOGroup.inc:102
-#: plugins/admin/ogroups/class_divListOGroup.inc:103
 #, fuzzy
-msgid "Windows workstations"
+msgid "windows workstation groups"
 msgstr "Toon werkstations"
 
-#: plugins/admin/ogroups/class_divListOGroup.inc:108
-#: plugins/admin/ogroups/class_divListOGroup.inc:109
+#: plugins/admin/ogroups/class_divListOGroup.inc:103
+#: plugins/admin/ogroups/class_divListOGroup.inc:104
 #, fuzzy
-msgid "Phones"
-msgstr "Telefoon"
+msgid "terminal groups"
+msgstr "Toon E-mail groepen"
 
-#: plugins/admin/ogroups/class_divListOGroup.inc:352
+#: plugins/admin/ogroups/class_divListOGroup.inc:105
+#: plugins/admin/ogroups/class_divListOGroup.inc:106
+#, fuzzy
+msgid "printer groups"
+msgstr "Primaire groep"
+
+#: plugins/admin/ogroups/class_divListOGroup.inc:107
+#: plugins/admin/ogroups/class_divListOGroup.inc:108
+#, fuzzy
+msgid "phone groups"
+msgstr "Toon groepen"
+
+#: plugins/admin/ogroups/class_divListOGroup.inc:351
 #, fuzzy
 msgid "Number of listed object groups"
 msgstr "Naam van objectgroepen"
@@ -6667,6 +6683,61 @@ msgstr ""
 "herlaad deze pagina voordat u inlogt!"
 
 #, fuzzy
+#~ msgid "Show groups with '%s'"
+#~ msgstr "Toon groepen die gebruikers bevatten"
+
+#, fuzzy
+#~ msgid "server"
+#~ msgstr "servers"
+
+#, fuzzy
+#~ msgid "Show %s user"
+#~ msgstr "Toon Samba gebruikers"
+
+#, fuzzy
+#~ msgid "functional"
+#~ msgstr "functie"
+
+#, fuzzy
+#~ msgid "posix"
+#~ msgstr "Posix"
+
+#, fuzzy
+#~ msgid "mail"
+#~ msgstr "man"
+
+#, fuzzy
+#~ msgid "samba"
+#~ msgstr "Samba"
+
+#, fuzzy
+#~ msgid "proxy"
+#~ msgstr "Proxy"
+
+#, fuzzy
+#~ msgid "primary"
+#~ msgstr "Samenvatting"
+
+#, fuzzy
+#~ msgid "application"
+#~ msgstr "programma's"
+
+#, fuzzy
+#~ msgid "Select to see groups containing '%s'."
+#~ msgstr "Selecteer om groepen die gebruikers bevatten te tonen"
+
+#~ msgid "Applications"
+#~ msgstr "Programma's"
+
+#, fuzzy
+#~ msgid "Workstations"
+#~ msgstr "Werkstation"
+
+#, fuzzy
+#~ msgid "Phones"
+#~ msgstr "Telefoon"
+
+#, fuzzy
 #~ msgid "Checking for duplicate gid numbers"
 #~ msgstr "Zoeken naar functie %s"
 
@@ -6813,9 +6884,6 @@ msgstr ""
 #~ msgid "Select to see users that have only a GOsa object"
 #~ msgstr "Selecteer om gebruikers te zien die alleen een GOsa object hebben"
 
-#~ msgid "Show functional users"
-#~ msgstr "Toon functionele gebruikers"
-
 #~ msgid "Select to see users that have posix settings"
 #~ msgstr "Selecteer om gebruikers te zien die POSIX instellingen hebben"
 
@@ -6834,9 +6902,6 @@ msgstr ""
 #~ msgid "Select to see users that have proxy settings"
 #~ msgstr "Selecteer om gebruikers te zien die Proxy instellingen hebben"
 
-#~ msgid "Show proxy users"
-#~ msgstr "Toon Proxy gebruikers"
-
 #~ msgid "Show primary groups"
 #~ msgstr "Toon primaire groepen"
 
@@ -6849,17 +6914,8 @@ msgstr ""
 #~ msgid "Select to see groups that have applications configured"
 #~ msgstr "Selecteer om groepen te zien die programma's geconfigureerd hebben"
 
-#~ msgid "Show application groups"
-#~ msgstr "Toon programma groepen"
-
 #~ msgid "Select to see groups that have mail settings"
 #~ msgstr "Selecteer om groepen te zien die E-mail instellingen hebben"
-
-#~ msgid "Show mail groups"
-#~ msgstr "Toon E-mail groepen"
-
-#~ msgid "Show functional groups"
-#~ msgstr "Toon functionele groepen"
 
 #, fuzzy
 #~ msgid "acl"

@@ -532,12 +532,6 @@ class msgPool
   }
 
 
-  public static function chooseToPlaceObjectIn($what)
-  {
-    return sprintf(_("Choose subtree to place %s in"), $what);
-  }
-
-
   public static function checkingFor($what)
   {
     return sprintf(_("Checking for %s support"), $what);

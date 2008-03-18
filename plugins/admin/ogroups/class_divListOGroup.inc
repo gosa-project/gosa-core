@@ -85,27 +85,27 @@ class divListOGroup extends MultiSelectWindow
     $this->AddHeader(array("string" => _("Actions"), "attach" => "style='width:".$action_col_size."px;border-right:0px;text-align:right;'"));
 
     /*                  Text        ,Value    ,Name         ,Is selected */
-    $str2 = _("Show groups with '%s'");
-    $this->AddCheckBox("UserGroups" ,       sprintf($str2,  _("users")), 
-                                            sprintf($str2,  _("users")), true);
-    $this->AddCheckBox("GroupGroups" ,      sprintf($str2,  _("groups")),
-                                            sprintf($str2,  _("groups")), true);
-    $this->AddCheckBox("ApplicationGroups", sprintf($str2,  _("applications")),
-                                            sprintf($str2,  _("applications")), true);
-    $this->AddCheckBox("DepartmentGroups" , sprintf($str2,  _("departments")),
-                                            sprintf($str2,  _("departments")), true);
-    $this->AddCheckBox("ServerGroups" ,     sprintf($str2,  _("server")),
-                                            sprintf($str2,  _("server")), true);
-    $this->AddCheckBox("WorkstationGroups", sprintf($str2,  _("workstations")),
-                                            sprintf($str2,  _("workstations")), true);
-    $this->AddCheckBox("WindowsGroups",     sprintf($str2,  _("windows workstations")),
-                                            sprintf($str2,  _("windows workstations")), true);
-    $this->AddCheckBox("TerminalGroups" ,   sprintf($str2,  _("terminals")),
-                                            sprintf($str2,  _("terminals")), true);
-    $this->AddCheckBox("PrinterGroups" ,    sprintf($str2,  _("printers")),
-                                            sprintf($str2,  _("printers")), true);
-    $this->AddCheckBox("PhoneGroups" ,      sprintf($str2,  _("phones")),
-                                            sprintf($str2,  _("phones")), true);
+    $str2 = _("Show %s");
+    $this->AddCheckBox("UserGroups" ,       sprintf($str2,  _("user groups")), 
+                                            sprintf($str2,  _("user groups")), true);
+    $this->AddCheckBox("GroupGroups" ,      sprintf($str2,  _("nested groups")),
+                                            sprintf($str2,  _("nested groups")), true);
+    $this->AddCheckBox("ApplicationGroups", sprintf($str2,  _("application groups")),
+                                            sprintf($str2,  _("application groups")), true);
+    $this->AddCheckBox("DepartmentGroups" , sprintf($str2,  _("department groups")),
+                                            sprintf($str2,  _("department groups")), true);
+    $this->AddCheckBox("ServerGroups" ,     sprintf($str2,  _("server groups")),
+                                            sprintf($str2,  _("server groups")), true);
+    $this->AddCheckBox("WorkstationGroups", sprintf($str2,  _("workstation groups")),
+                                            sprintf($str2,  _("workstation groups")), true);
+    $this->AddCheckBox("WindowsGroups",     sprintf($str2,  _("windows workstation groups")),
+                                            sprintf($str2,  _("windows workstation groups")), true);
+    $this->AddCheckBox("TerminalGroups" ,   sprintf($str2,  _("terminal groups")),
+                                            sprintf($str2,  _("terminal groups")), true);
+    $this->AddCheckBox("PrinterGroups" ,    sprintf($str2,  _("printer groups")),
+                                            sprintf($str2,  _("printer groups")), true);
+    $this->AddCheckBox("PhoneGroups" ,      sprintf($str2,  _("phone groups")),
+                                            sprintf($str2,  _("phone groups")), true);
 
     /* Add SubSearch checkbox */    
     $this->AddCheckBox(SEPERATOR);
