@@ -156,7 +156,11 @@ class Socket_Client
         $str .= $data;
       } else {
         if(strlen($str) != 0){
-          break;
+          
+          /* We got <xml> but </xml> is still missing, keep on reading */
+          if(preg_match("/<\/xml>/",$this->decrypt($str))){
+            break;
+          }
         }
       }
       if((microtime(TRUE) - $start) > $this->timeout ){      
