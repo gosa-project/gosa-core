@@ -1,24 +1,24 @@
 <?php
-
 /*
-   This code is part of GOsa (https://gosa.gonicus.de)
-   Copyright (C) 2007 Fabian Hickert
-
-   This program is free software; you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2 of the License, or
-   (at your option) any later version.
-
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-*/
-
+ * This code is part of GOsa (http://www.gosa-project.org)
+ * Copyright (C) 2003-2008 GONICUS GmbH
+ *
+ * ID: $$Id$$
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 class Step_Checks extends setup_step
 {
@@ -37,7 +37,7 @@ class Step_Checks extends setup_step
   {
     $this->s_title      = _("Installation check");
     $this->s_title_long = _("Installation check");
-    $this->s_info       = _("Basic checks for PHP version and required extensions.");
+    $this->s_info       = _("Basic checks for PHP compatibility and extensions");
   }
   
   
@@ -59,114 +59,81 @@ class Step_Checks extends setup_step
     $this->basic_checks = array();
     $this->config_checks = array();
     $this->is_writeable = array();
- 
+
     /* PHP version check */
     $N = _("Checking PHP version"); 
     $D = sprintf(_("PHP must be of version %s or above."), "5.2.0");
-    $S = _("GOsa requires functionality that is not available (or buggy) in older PHP versions. Please update to a supported version.");
+    $S = _("Please upgrade to a supported version.");
     $R = $this->check_php_version();
     $M = TRUE;
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
     /* Checking imap extension */
-    $N = _("Checking for LDAP support");
-    $D = _("This is the main extension used by GOsa and therefore really required.");
-    $S = _("The ldap extension (php5-ldap) is required to communicate with your LDAP server.");
+    $N = msgPool::checkingFor("LDAP");
+    $D = _("GOsa requires this module to talk with your LDAP server.");
+    $S = msgPool::installPhpModule("LDAP");
     $R = is_callable("ldap_bind");
     $M = TRUE;
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
     /* Check for gettext support */
-    $N = _("Checking for gettext support");
-    $D = _("Gettext support is required for internationalization.");
-    $S = _("Please make sure that the extension is activated.");
+    $N = msgPool::checkingFor("gettext");
+    $D = _("GOsa requires this module for an internationalized interface.");
+    $S = msgPool::installPhpModule("gettext");
     $R = is_callable("bindtextdomain");
     $M = TRUE;
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
     /* Checing for iconv */
-    $N = _("Checking for iconv support");
-    $D = _("This module is used by GOsa to convert samba munged dial informations and is therefore required. ");
-    $S = _("Please make sure that the extension is activated.");
+    $N = msgPool::checkingFor("inconv");
+    $D = _("GOsa requires this module for the samba integration.");
+    $S = msgPool::installPhpModule("iconv");
     $R = is_callable("iconv");
     $M = TRUE;
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
     /* Check for installed mhash module */
-    $N = _("Checking for mhash support");
-    $D = _("You'll need this module to make use of SSHA encryption");
-    $S = _("The mhash module for PHP 5 is not available.Please install php5-mhash.");
+    $N = msgPool::checkingFor("mhash");
+    $D = _("GOsa requires this module to make use of SSHA encryption.");
+    $S = msgPool::installPhpModule("mhash");
     $R = is_callable("mhash");
     $M = FALSE;
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
     /* Is imap module available */
-    $N = _("Checking for IMAP support");
-    $D = _("The IMAP module is needed to communicate with the IMAP server. GOsa retrieves status information, creates and deletes mail users, etc.");
-    $S = _("This module is used to communicate with your mail server. Please install php5-imap.");
+    $N = msgPool::checkingFor("IMAP");
+    $D = _("GOsa requires this module to talk to an IMAP server.");
+    $S = msgPool::installPhpModule("IMAP");
     $R = is_callable("imap_open");
     $M = TRUE;
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
     /* Is imap module available */
-    $N = _("Checking for multi byte support");
-    $D = _("The multi byte string support is required by some plugins.");
-    $S = _("Please compile php with enabled multi byte support '--enable-mbstring'.");
+    $N = msgPool::checkingFor(_("mbstring"));
+    $D = _("GOsa requires this module to handle unicode strings.");
+    $S = msgPool::installPhpModule("mbstring");
     $R = is_callable("mb_strlen");
     $M = TRUE;
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
-    /* Check getacl in imap module */
-    $N = _("Checking for getacl in IMAP implementation");
-    $D = _("The getacl support is needed to handle shared folder permissions. Old IMAP extensions are not capable of reading acl's. You need a recent PHP version to use this feature.");
-    $S = $D;
-    $R = is_callable("imap_getacl");
-    $M = TRUE;
-    $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
-
     /* Mysql module loaded ? */
-    $N = _("Checking for MySQL support");
-    $D = _("MySQL support is needed to communicate with several supported databases.");
-    $S = _("This module is required to communicate with database servers (GOfax, asterisk, GLPI, etc.). Please install php5-mysql");
+    $N = msgPool::checkingFor(_("MySQL"));
+    $D = _("GOsa requires this module to communicate with several supported databases.");
+    $S = msgPool::installPhpModule("MySQL");
     $R = is_callable("mysql_query");
     $M = TRUE;
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
-    /* Checking for kadm5 module */
-    $N = _("Checking for kadm5 support");
-    $D = _("Managing users in kerberos requires the kadm5 module which is downloadable via PEAR network.");
-    $S = _("This module is required to manage user in kerberos, it is downloadable via PEAR network");
-    $R = is_callable("kadm5_init_with_password");
-    $M = FALSE;
-    $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
-
-    /* Snmp module available ? */
-    $N = _("Checking for SNMP support");
-    $D = _("The simple network management protocol is needed to get status information from clients.");
-    $S = _("This module is required for client monitoring. Please install php5-snmp.");
-    $R = is_callable("snmpget");
-    $M = FALSE;
-    $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
-
     /* Checking for Cups module */
-    $N = _("Checking for CUPS support");
-    $D = _("In order to read available printers via the IPP protocol instead of printcap files, you've to install the CUPS module.");
-    $S = $D; 
+    $N = msgPool::checkingFor(_("CUPS"));
+    $D = _("GOsa requires this modukle to show printers that are not defined within the LDAP.");
+    $S = msgPool::installPhpModule("CUPS");
     $R = is_callable("cups_get_dest_list");
     $M = FALSE;
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
-    /* Checking for F ping utility */
-    $query= "LC_ALL=C LANG=C fping -v 2>&1";
-    $output= shell_exec ($query);
-    $N = _("Checking for fping utility");
-    $D = _("The fping utility is used if you've got a thin client based terminal environment.");
-    $S = _("The fping utility is only used in thin client based terminal environment.");
-    $R = preg_match("/^fping:/", $output);
-    $M = FALSE;
-    $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
-
     /* Checking generate LM/NT password hashes */
+    #TODO: either this, or gosa-si will do the hash generation
     $query= "mkntpwd 2>&1";
     $output= shell_exec ($query);
     $have_mkntpwd= preg_match("/^Usage: mkntpwd /", $output);
@@ -176,19 +143,18 @@ class Step_Checks extends setup_step
       $have_mkntpwd |= ($ret == 0);
     }
 
-    $N = _("SAMBA password hash generation");
-    $D = _("In order to use SAMBA 2/3 passwords, you've to install additional packages to generate password hashes.");
-    $S = _("In order to use SAMBA 2/3 you've to install additional perl libraries. Take a look at mkntpasswd.");
+    $N = msgPool::checkingFor(_("samba hash generator"));
+    $D = _("GOsa requires this command to synchronize POSIX and samba passwords.");
+    $S = _("Deploy a gosa-si installation or install the perl Crypt::SmbHash modules.");
     $R = $have_mkntpwd;
     $M = TRUE;
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
 
-    /* PHP Configuration checks 
-     */
+    /* PHP Configuration checks */
 
     /* Register_globals off */
-    $N = "register_globals = <b>"._("Off")."</b>";
+    $N = "register_globals = <b>off</b>";
     $D = _("register_globals is a PHP mechanism to register all global variables to be accessible from scripts without changing the scope. This may be a security risk.");
     $S = _("Search for 'register_globals' in your php.ini and switch it to 'Off'.");
     $R = ini_get("register_globals") == 0;
