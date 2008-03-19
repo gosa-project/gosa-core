@@ -1167,7 +1167,7 @@ class user extends plugin
       }
     }
     if (!tests::is_url($this->labeledURI)){
-      $message[]= msgPool::invalid(_("Homepage"), "", "", "http://www.example.com/yourname");
+      $message[]= msgPool::invalid(_("Homepage"), "", "", "http://www.your-domain.com/yourname");
     }
 
     /* Check phone numbers */
