@@ -18,10 +18,10 @@ class sudoLdap extends plugin
   /* Plugin specific values */
  
   var $attributes     = array(	"sudoUser", 
-  								"sudoHost", 
-  								"sudoCommand", 
-  								"sudoRunAs", 
-  								"sudoOption");
+				"sudoHost", 
+				"sudoCommand", 
+				"sudoRunAs", 
+				"sudoOption");
   
   var $objectclasses  = array("sudoRole");
   
