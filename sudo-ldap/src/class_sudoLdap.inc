@@ -17,11 +17,14 @@ class sudoLdap extends plugin
 
   /* Plugin specific values */
  
-  var $attributes     = array("sudoUser", "sudoHost", "sudoCommand", "sudoRunAs", "sudoOption");
+  var $attributes     = array(	"sudoUser", 
+  								"sudoHost", 
+  								"sudoCommand", 
+  								"sudoRunAs", 
+  								"sudoOption");
+  
   var $objectclasses  = array("sudoRole");
-
-  var $uid ="";
-
+  
   /* constructor, if 'dn' is set, the node loads the given
      'dn' from LDAP */
   function sudoLdap ($config, $dn= NULL, $parent= NULL)
@@ -31,11 +34,6 @@ class sudoLdap extends plugin
 
     /* Load bases attributes */
     plugin::plugin($config, $dn, $parent);
-
-    /* set user id */    
-    if(isset($this->attrs['uid'])){
-      $this->uid = $this->attrs['uid'][0];
-    }
 
     $ldap= $this->config->get_ldap_link();
     
