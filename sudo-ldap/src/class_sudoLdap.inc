@@ -46,9 +46,29 @@ class sudoLdap extends plugin
 	/* Call parent execute */
 	plugin::execute();
 	$display= "";
+	$smarty= get_smarty();
 
-	$display = "execute()";
-	
+	$RoleList = new divSelectBox("sudoRoles");
+	$RoleList -> SetHeight(300);
+	$editImg = "<input type='image' src='images/edit.png' name='editZone_%s'>
+	<input type='image' src='images/edittrash.png' name='delZone_%s'>";
+	/*
+	foreach($this->Zones as $zone => $values ){
+		$link = "<a href='?plug=".$_GET['plug']."&act=edit&id=%s'>%s</a>";
+		$ZoneList->AddEntry(array(
+			array("string" => sprintf($link,base64_encode($zone),getNameFromMix($zone))),
+			array("string" => sprintf($link,base64_encode($zone),_("Reverse zone")." : ".getNameFromMix($values['ReverseZone']))),
+			array("string" => _("TTL")." : ".$values['sOAttl']),
+			array("string" => _("Class")." : ".$values['dNSClass']),
+			array("string" => str_replace("%s",base64_encode($zone),$editImg))
+            ));
+	}    
+	*/
+
+	$smarty->assign("sudoldapACL",chkacl($this->acl,"sudoldap"));
+
+	$smarty->assign("RoleList",$RoleList->DrawList());
+	$display.= $smarty->fetch(get_template_path('sudoldap.tpl', TRUE));
 	return($display);
   }
 
