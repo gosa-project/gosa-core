@@ -29,18 +29,18 @@ if (!$remove_lock){
 
     del_lock ($ui->dn);
     sess_del ('edit');
-    sess_del ('sudoLdap');
+    sess_del ('sudoldap');
   }
 
-  /* Create sudoLdap object on demand */
-  if (!isset($_SESSION['sudoLdap']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-    $_SESSION['sudoLdap']= new sudoLdap ($config, $ui->dn);
+  /* Create sudoldap object on demand */
+  if (!isset($_SESSION['sudoldap']) || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+    $_SESSION['sudoldap']= new sudoldap ($config, $ui->dn);
   }
-  $sudoLdap= $_SESSION['sudoLdap'];
+  $sudoldap= $_SESSION['sudoldap'];
 
   /* save changes back to object */
   if (isset ($_SESSION['edit'])){
-    $sudoLdap->save_object ();
+    $sudoldap->save_object ();
   }
 
   /* Enter edit mode? */
@@ -62,11 +62,11 @@ if (!$remove_lock){
   /* Adjust acl's to mode */
   if (isset($_SESSION['edit'])){
     $acl= get_permissions ($ui->dn, $ui->subtreeACL);
-    $sudoLdap->acl= get_module_permission($acl, "sudoLdap", $ui->dn);
+    $sudoldap->acl= get_module_permission($acl, "sudoldap", $ui->dn);
   } else {
     $acl= get_permissions ($ui->dn, $ui->subtreeACL);
-    $editacl= get_module_permission($acl, "sudoLdap", $ui->dn);
-    $sudoLdap->acl= "#none#";
+    $editacl= get_module_permission($acl, "sudoldap", $ui->dn);
+    $sudoldap->acl= "#none#";
   }
 
   /* save changes to LDAP and disable edit mode */
@@ -74,19 +74,19 @@ if (!$remove_lock){
   if (isset($_POST['edit_finish'])){
 
     /* Perform checks */
-    $message= $sudoLdap->check ();
+    $message= $sudoldap->check ();
 
     /* No errors, save object */
     if (count ($message) == 0){
-      $sudoLdap->save ();
+      $sudoldap->save ();
       gosa_log ("SUDO/ldap object'".$ui->dn."' has been saved");
-      $sudoLdap->acl= "#none#";
-      $editacl= get_module_permission($acl, "sudoLdap", $ui->dn);
+      $sudoldap->acl= "#none#";
+      $editacl= get_module_permission($acl, "sudoldap", $ui->dn);
       del_lock ($ui->dn);
       sess_del ('edit');
 
       /* Remove from session */
-      sess_del ('sudoLdap');
+      sess_del ('sudoldap');
     } else {
       /* Errors found, show message */
       show_errors ($message);
@@ -94,11 +94,11 @@ if (!$remove_lock){
   }
 
   /* Execute formular */
-  $display.= $sudoLdap->execute ();
+  $display.= $sudoldap->execute ();
 
   /* Store changes  in session */
   if (isset ($_SESSION['edit'])){
-    $_SESSION['sudoLdap']= $sudoLdap;
+    $_SESSION['sudoldap']= $sudoldap;
   }
 
   /* Page header*/
