@@ -3,13 +3,13 @@
 class sudoldapEditRole extends plugin
 {
   /* Plugin specific values */
-  var $attributes     = array(	"sudoUser", 
+  var $attributes	= array("sudoUser", 
 				"sudoHost", 
 				"sudoCommand", 
 				"sudoRunAs", 
 				"sudoOption");
   
-  var $objectclasses  = array("sudoRole");
+  var $objectclasses	= array("sudoRole");
 
   function sudoldapEditRole ($config, $dn= NULL,$attrs = array())
   {
@@ -27,6 +27,10 @@ class sudoldapEditRole extends plugin
     $smarty= get_smarty();
     $display= "";
 
+    /* Display template */
+    $display.= $smarty->fetch(
+    	get_template_path('sudoldapeditrole.tpl', TRUE));
+    return($display);
   }
 
   /* Save data to object */

@@ -17,13 +17,15 @@ class sudoldap extends plugin
 
   /* Plugin specific values */
  
-  var $attributes     = array(	"sudoUser", 
+  var $dialog		= NULL;
+
+  var $attributes	= array("sudoUser", 
 				"sudoHost", 
 				"sudoCommand", 
 				"sudoRunAs", 
 				"sudoOption");
   
-  var $objectclasses  = array("sudoRole");
+  var $objectclasses  	= array("sudoRole");
   
   /* constructor, if 'dn' is set, the node loads the given
      'dn' from LDAP */
