@@ -1,6 +1,6 @@
 <?php
 /*!
-  \brief   sudoLdap plugin
+  \brief   sudo-ldap plugin
   \author  Guido Serra <gserra@guidoserra.it>
   \version 1.00
   \date    22.03.2008
@@ -9,7 +9,7 @@
   relevant for sudo-ldap from/to the LDAP.
  */
 
-class sudoLdap extends plugin
+class sudoldap extends plugin
 {
   /* Definitions */
   var $plHeadline= "sudo-ldap";
@@ -27,7 +27,7 @@ class sudoLdap extends plugin
   
   /* constructor, if 'dn' is set, the node loads the given
      'dn' from LDAP */
-  function sudoLdap ($config, $dn= NULL, $parent= NULL)
+  function sudoldap ($config, $dn= NULL, $parent= NULL)
   {
     /* Configuration is fine, allways */
     $this->config= $config;
@@ -47,6 +47,20 @@ class sudoLdap extends plugin
 	plugin::execute();
 	$display= "";
 	$smarty= get_smarty();
+
+	/* Add empty new zone 
+	 */
+	if(isset($_POST['AddRole']) && chkacl($this->acl,"sudoldap") == ""){
+		$this->dialog = new sudoldapEditRole($this->config,$this->dn);
+	}
+
+	/* Show dialog 
+	 */
+	if($this->dialog!= NULL){
+		$this->dialog->save_object();
+		$this->dialog->parent = $this;
+		return($this->dialog->execute());
+	}
 
 	$RoleList = new divSelectBox("sudoRoles");
 	$RoleList -> SetHeight(300);
