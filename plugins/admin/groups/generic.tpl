@@ -157,6 +157,41 @@
      </td>
     </tr>
 	{/if}
+    <tr>
+      <td colspan=2> <div style="height:15px; width:100%; border-bottom:1px solid #909090;"></div> </td>
+    </tr>
+    <tr>
+      <td colspan=2> <div style="height:15px; width:100%;"></div> </td>
+    </tr>
+	<tr>
+	 <td colspan="2">
+		    {t}Trust mode{/t}&nbsp;
+    {render acl=$trustmodeACL}
+        <select name="trustmode" id="trustmode" size=1
+            onChange="changeSelectState('trustmode', 'wslist');
+                      changeSelectState('trustmode', 'add_ws');
+                      changeSelectState('trustmode', 'del_ws');">
+          {html_options options=$trustmodes selected=$trustmode}
+        </select>
+    {/render}
+    {render acl=$trustmodeACL}
+       <select style="width:100%" id="wslist" name="workstation_list[]" size=8 multiple {$trusthide}>
+        {html_options values=$workstations output=$workstations}
+        {if $emptyArrAccess}
+            <option disabled>&nbsp;</option>
+        {/if}
+       </select>
+    {/render}
+       <br>
+    {render acl=$trustmodeACL}
+       <input type="submit" id="add_ws" value="{msgPool type=addButton}" name="add_ws" {$trusthide}>&nbsp;
+    {/render}
+    {render acl=$trustmodeACL}
+       <input type="submit" id="del_ws" value="{msgPool type=delButton}" name="delete_ws" {$trusthide}>
+    {/render}
+
+	 </td>
+	</tr>
    </table>
 
   </td>
