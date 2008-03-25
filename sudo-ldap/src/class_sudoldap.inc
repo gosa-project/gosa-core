@@ -168,6 +168,17 @@ class sudoldap extends plugin
     return($ret);
   }  
 
+  function RemoveRole($cn){
+  	if($cn!=""){
+		$ldap= $this->config->get_ldap_link();
+		$dn = "cn=".$cn.",ou=SUDOers,".$this->config->current['BASE'];
+		$ldap->cd($dn);
+      		$ldap->rmdir_recursive($dn);
+      		show_ldap_error($ldap->get_error(), _("Removing DNS entries failed"));
+		unset($this->Roles[$cn]);
+  	}
+  }
+
 
 }
 
