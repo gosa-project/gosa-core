@@ -50,9 +50,40 @@ class sudoldap extends plugin
 	$display= "";
 	$smarty= get_smarty();
 
+
+	/* Edited or Added zone 
+	 */
+	if((isset($_POST['SaveRoleChanges'])) && is_object($this->dialog)){
+		$this->dialog->save_object();
+
+		/* Check for errors  
+	 	 */
+		if(count($this->dialog->check())){
+			foreach($this->dialog->check() as $msgs){
+				print_red($msgs); 
+			}
+		}else{
+			/* add new/edited zone 
+			 */
+			$ret = $this->dialog->save();
+			if(!$this->dialog->isNew){
+				unset($this->Roles[$this->dialog->OldRoleName]);
+			}
+			$this->Roles[$ret['roleName']] = $ret;
+			$this->dialog = NULL;
+		}
+	}
+
+	/* Cancel zone edit / new 
+	 */
+	if(isset($_POST['CancelRoleChanges'])){
+		$this->dialog = NULL;
+	}
+
 	/* Add empty new zone 
 	 */
-	if(isset($_POST['AddRole']) && chkacl($this->acl,"sudoldap") == ""){
+	//if(isset($_POST['AddRole']) && chkacl($this->acl,"sudoldap") == ""){
+	if(isset($_POST['AddRole'])){
 		$this->dialog = new sudoldapEditRole($this->config,$this->dn);
 	}
 
@@ -66,8 +97,8 @@ class sudoldap extends plugin
 
 	$RoleList = new divSelectBox("sudoRoles");
 	$RoleList -> SetHeight(300);
-	$editImg = "<input type='image' src='images/edit.png' name='editZone_%s'>
-	<input type='image' src='images/edittrash.png' name='delZone_%s'>";
+	$editImg = "<input type='image' src='images/edit.png' name='editRole_%s'>
+	<input type='image' src='images/edittrash.png' name='delRole_%s'>";
 	/*
 	foreach($this->Zones as $zone => $values ){
 		$link = "<a href='?plug=".$_GET['plug']."&act=edit&id=%s'>%s</a>";
