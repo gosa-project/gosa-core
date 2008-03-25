@@ -134,6 +134,46 @@ class gosaSupportDaemon
   }
 
 
+  public function FAI_get_packages($release)
+  {
+    $this->reset_error();
+
+    $xml_msg = "<xml><header>gosa_query_packages_list</header><target>GOSA</target><source>GOSA</source>".
+      "<where><clause><phrase><distribution>".$release."</distribution></phrase></clause></where></xml>";
+
+    $ret = array();
+    if($this->connect()){
+      $this->o_sock->write($xml_msg);
+      $str = trim($this->o_sock->read());
+      $entries = $this->xml_to_array($str);
+      if(isset($entries['XML']) && is_array($entries['XML'])){
+
+        /* Check if returned values represent a valid answer */
+        if(isset($entries['XML'])){
+          if(isset($entries['XML']['ERROR_STRING'])) {
+            $this->set_error($entries['XML']['ERROR_STRING']);
+            new log("debug","GOsa-si",
+                get_class($this)."::".__FUNCTION__, array(),
+                "FAILED error was ".$this->get_error());
+            return($ret);
+          }
+
+          /* Unset header tags */
+          foreach(array("HEADER","SOURCE","TARGET","SESSION_ID") as $type){
+            if(isset($entries['XML'][$type])){
+              unset($entries['XML'][$type]);
+            }
+          }
+          $ret = $entries['XML'];
+        }
+      }
+    }
+    return($ret);
+
+    
+  }
+
+
   public function FAI_get_server($name = "")
   {
     $this->reset_error();
