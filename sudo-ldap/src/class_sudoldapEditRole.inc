@@ -27,10 +27,6 @@ class sudoldapEditRole extends plugin
   {
     plugin::plugin ($config, $dn);
 
-    echo '<pre>';
-    print_r($attrs);
-    echo '</pre>';
-
     if(!count($attrs)){
     	$this->isNew = true;
     }else{
