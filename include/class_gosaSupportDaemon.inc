@@ -68,14 +68,18 @@ class gosaSupportDaemon
    */
   public function connect()
   {
-    $this->o_sock = new Socket_Client($this->s_host,$this->i_port,TRUE,$this->f_timeout);
-    if($this->o_sock->connected()){ 
-      $this->o_sock->setEncryptionKey($this->s_encryption_key); 
-      $this->is_connected = TRUE;
+    if(!empty($this->s_host) && !empty($this->i_port)){
+      $this->o_sock = new Socket_Client($this->s_host,$this->i_port,TRUE,$this->f_timeout);
+      if($this->o_sock->connected()){ 
+        $this->o_sock->setEncryptionKey($this->s_encryption_key); 
+        $this->is_connected = TRUE;
+      }else{
+        $this->set_error($this->o_sock->get_error());
+        $this->disconnect();
+        new log("debug","gosaSupportDaemon::connect()", "Could not connect to server.", array(),$this->get_error());
+      }
     }else{
-      $this->set_error($this->o_sock->get_error());
-      $this->disconnect();
-      new log("debug","gosaSupportDaemon::connect()", "Could not connect to server.", array(),$this->get_error());
+      $this->set_error(msgPool::cmdnotfound("GOSA_SI",_("GOsa support daemon")));
     }
     return($this->is_connected);
   }
