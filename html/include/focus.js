@@ -75,7 +75,15 @@ function acl_toggle_all(regex)
 				}
 }
 
+
+var enable_keyPress = true;
 function keyPress(DnEvents) {
+
+	/* We are forced to skip this Keyboard input filtering 
+   *  (enable_keyPress was set to false in the HTML content)
+   */
+	if(!enable_keyPress) return;
+
   // determines whether Netscape or Internet Explorer
   k = (netscape) ? DnEvents.keyCode : window.event.keyCode;
   if (k == 13) { // enter key pressed
