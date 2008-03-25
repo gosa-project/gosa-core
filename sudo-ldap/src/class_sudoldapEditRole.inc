@@ -3,7 +3,9 @@
 class sudoldapEditRole extends plugin
 {
   /* Plugin specific values */
-  var $attributes	= array("sudoUser", 
+  var $attributes	= array("cn",
+  				"description",
+  				"sudoUser", 
 				"sudoHost", 
 				"sudoCommand", 
 				"sudoRunAs", 
@@ -11,18 +13,19 @@ class sudoldapEditRole extends plugin
   
   var $objectclasses	= array("sudoRole");
 
-  var $roleName		= ""; // cn
-
+  var $cn		= "";
+  var $description	= "";
   var $sudoUser		= "";
   var $sudoHost		= "";
   var $sudoCommand	= "";
   var $sudoRunAs	= "";
   var $sudoOption	= "";
 
-  function sudoldapEditRole ($config, $dn= NULL,$attrs = array())
+  var $isNew		= true; 
+
+  function sudoldapEditRole ($config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
-
   }
 
   function execute()
@@ -35,7 +38,8 @@ class sudoldapEditRole extends plugin
     $smarty= get_smarty();
     $display= "";
 
-    $smarty->assign("roleName", 	$this->roleName);
+    $smarty->assign("cn", 		$this->cn);
+    $smarty->assign("description", 	$this->description);
     $smarty->assign("sudoUser", 	$this->sudoUser);
     $smarty->assign("sudoHost", 	$this->sudoHost);
     $smarty->assign("sudoCommand", 	$this->sudoCommand);
@@ -69,19 +73,18 @@ class sudoldapEditRole extends plugin
   /* Save to LDAP */
   function save()
   {
+    plugin::save();
     $ldap= $this->config->get_ldap_link();
 
-    /* $dn was posted as parameter */
-    //$this->dn = $dn;
+    $this->dn = "cn=".$this->cn.",ou=SUDOers,".$this->config->current['BASE'];
+    $this->attrs['objectClass'] = array("sudoRole");
 
-    /* Save */
-    plugin::save();
-    
-    echo $this->dn;
+    echo '<pre>';
+    print_r($this->attrs);
+    echo '</pre>';
 
-    /* Write back to ldap */
+    $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
     $ldap->cd($this->dn);
-    //$this->cleanup();
     $ldap->add($this->attrs); 
 
     /* Display errors 
@@ -90,12 +93,6 @@ class sudoldapEditRole extends plugin
     	show_ldap_error("Record:".$ldap->get_error(), _("Saving failed!")); 
     }
 
-    //$ret =array();
-    //foreach($this->attributes as $name){
-	//$ret[$name] = $this->$name;
-    //}
-
-    //return($ret);
   }
 
   

@@ -1,8 +1,12 @@
 <h2>{t}sudo-ldap role{/t}</h2>
 <table summary="" width="100%">
 	<tr>
-		<td> {t}Role name (cn){/t}{$must} </td>
-		<td> <input type="text" name="roleName" value="{$roleName}"> </td>
+		<td> {t}cn{/t}{$must} </td>
+		<td> <input type="text" name="cn" value="{$cn}"> </td>
+	</tr>
+	<tr>
+		<td> {t}description{/t}{$must} </td>
+		<td> <input type="text" name="description" value="{$description}"> </td>
 	</tr>
 	<tr>
 		<td> {t}sudoUser{/t}{$must} </td>

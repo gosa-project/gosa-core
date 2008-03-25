@@ -19,7 +19,9 @@ class sudoldap extends plugin
  
   var $dialog		= NULL;
 
-  var $attributes	= array("sudoUser", 
+  var $attributes	= array("cn",
+  				"description",
+  				"sudoUser", 
 				"sudoHost", 
 				"sudoCommand", 
 				"sudoRunAs", 
@@ -66,9 +68,9 @@ class sudoldap extends plugin
 			/* add new/edited zone 
 			 */
 			$ret = $this->dialog->save();
-			if(!$this->dialog->isNew){
-				unset($this->Roles[$this->dialog->OldRoleName]);
-			}
+			//if(!$this->dialog->isNew){
+			//	unset($this->Roles[$this->dialog->OldRoleName]);
+			//}
 			$this->Roles[$ret['roleName']] = $ret;
 			$this->dialog = NULL;
 		}
@@ -84,7 +86,7 @@ class sudoldap extends plugin
 	 */
 	//if(isset($_POST['AddRole']) && chkacl($this->acl,"sudoldap") == ""){
 	if(isset($_POST['AddRole'])){
-		$this->dialog = new sudoldapEditRole($this->config,$this->dn);
+		$this->dialog = new sudoldapEditRole($this->config);
 	}
 
 	/* Show dialog 
