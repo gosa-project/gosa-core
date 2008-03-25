@@ -59,6 +59,8 @@ class group extends plugin
   var $view_logged = FALSE;
   var $allowGroupsWithSameNameInOtherSubtrees = true;
 
+  /* Trustmodel/AccessTo 
+   */
   var $accessTo= array();
   var $trustModel= "";
   var $show_ws_dialog = FALSE;
@@ -378,16 +380,6 @@ class group extends plugin
       return ($display);
     }
 
-
-
-
-
-
-
-
-
-
-
     /* Assign templating stuff */
     if ($this->samba3){
       $smarty->assign("samba3", "true");
@@ -478,15 +470,7 @@ class group extends plugin
     /* Members and users */
     $smarty->assign("members", $this->members);
 
-
-
-
-
-
-
-
-
-   /* Work on trust modes */
+    /* Work on trust modes */
     $smarty->assign("trusthide", " disabled ");
     $smarty->assign("trustmodeACL",  $this->getacl("trustModel"));
     if ($this->trustModel == "fullaccess"){
@@ -758,7 +742,7 @@ class group extends plugin
           }
         }
       }
-      $acl -> save();
+      $acl->save();
     }
 
     /* Remove ACL dependencies too,
@@ -1353,9 +1337,6 @@ class group extends plugin
     plugin::set_multi_edit_values($attrs);
     $this->memberUid = $users;
   }
-
-
 }
-
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
