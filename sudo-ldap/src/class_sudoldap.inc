@@ -28,6 +28,8 @@ class sudoldap extends plugin
 				"sudoOption");
   
   var $objectclasses  	= array("sudoRole");
+
+  var $roles_list 	= array();
   
   /* constructor, if 'dn' is set, the node loads the given
      'dn' from LDAP */
@@ -101,18 +103,17 @@ class sudoldap extends plugin
 	$RoleList -> SetHeight(300);
 	$editImg = "<input type='image' src='images/edit.png' name='editRole_%s'>
 	<input type='image' src='images/edittrash.png' name='delRole_%s'>";
-	/*
-	foreach($this->Zones as $zone => $values ){
+	$this->roles_list = $this->get_list_of_roles();
+	foreach($this->roles_list as $role => $values ){
 		$link = "<a href='?plug=".$_GET['plug']."&act=edit&id=%s'>%s</a>";
-		$ZoneList->AddEntry(array(
-			array("string" => sprintf($link,base64_encode($zone),getNameFromMix($zone))),
-			array("string" => sprintf($link,base64_encode($zone),_("Reverse zone")." : ".getNameFromMix($values['ReverseZone']))),
-			array("string" => _("TTL")." : ".$values['sOAttl']),
-			array("string" => _("Class")." : ".$values['dNSClass']),
-			array("string" => str_replace("%s",base64_encode($zone),$editImg))
+		$RoleList->AddEntry(array(
+			array("string" => sprintf($link,base64_encode($role),$role)),
+			//array("string" => sprintf($link,base64_encode($zone),_("Reverse zone")." : ".getNameFromMix($values['ReverseZone']))),
+			//array("string" => _("TTL")." : ".$values['sOAttl']),
+			//array("string" => _("Class")." : ".$values['dNSClass']),
+			array("string" => str_replace("%s",base64_encode($role),$editImg))
             ));
 	}    
-	*/
 
 	$smarty->assign("sudoldapACL",chkacl($this->acl,"sudoldap"));
 
@@ -120,6 +121,25 @@ class sudoldap extends plugin
 	$display.= $smarty->fetch(get_template_path('sudoldap.tpl', TRUE));
 	return($display);
   }
+
+  function get_list_of_roles()
+  {
+    $ret = array();
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(objectClass=sudoRole)",array("cn","description"));
+    while ($attrs= $ldap->fetch()){
+      $cn= $attrs['cn'][0];
+      if (isset($attrs['description'])){
+        $description= " - ".$attrs['description'][0];
+      } else {
+        $description= "";
+      }
+      $ret[$cn]= "$description";
+    }
+    return($ret);
+  }  
+
 
 }
 
