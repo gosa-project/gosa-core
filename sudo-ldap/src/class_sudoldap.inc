@@ -29,7 +29,7 @@ class sudoldap extends plugin
   
   var $objectclasses  	= array("sudoRole");
 
-  var $roles_list 	= array();
+  var $Roles 		= array();
   
   /* constructor, if 'dn' is set, the node loads the given
      'dn' from LDAP */
@@ -42,7 +42,6 @@ class sudoldap extends plugin
     plugin::plugin($config, $dn, $parent);
 
     $ldap= $this->config->get_ldap_link();
-    
   }
 
 
@@ -54,6 +53,7 @@ class sudoldap extends plugin
 	$display= "";
 	$smarty= get_smarty();
 
+	$this->Roles = $this->getRoles();
 
 	/* Edited or Added zone 
 	 */
@@ -73,7 +73,7 @@ class sudoldap extends plugin
 			//if(!$this->dialog->isNew){
 			//	unset($this->Roles[$this->dialog->OldRoleName]);
 			//}
-			$this->Roles[$ret['roleName']] = $ret;
+			$this->Roles[$ret['cn']] = $ret;
 			$this->dialog = NULL;
 		}
 	}
@@ -91,6 +91,36 @@ class sudoldap extends plugin
 		$this->dialog = new sudoldapEditRole($this->config);
 	}
 
+	/* Check for edit role request 
+     	 */
+    	$once = false;
+    	foreach( $_POST as $name => $value){
+  
+      		/* check all post for edit request 
+       		 */
+      		//if(preg_match("/^editRole_/",$name)&&!$once && chkacl($this->acl,"sudoldap") == ""){
+      		if(preg_match("/^editRole_/",$name)&&!$once){
+        		$once =true;
+        		$tmp = preg_replace("/^editRole_/","",$name);
+        		$tmp = base64_decode(preg_replace("/_.*$/","",$tmp));
+        		$this->dialog= new sudoldapeditRole($this->config,$this->dn,$this->Roles[$tmp]);
+      		}
+
+      		/* check posts for delete zone 
+       		 */
+      		//if(preg_match("/^delRole_/",$name)&&!$once && chkacl($this->acl,"sudoldap") == ""){
+      		if(preg_match("/^delRole_/",$name)&&!$once){
+
+        		$once =true;
+        		$tmp = preg_replace("/^delRole_/","",$name);
+        		$tmp = base64_decode(preg_replace("/_.*$/","",$tmp));
+     
+        	/* Initiate deletion
+        	 */ 
+        	$this->RemoveRole($tmp); 
+      		}
+    	}
+
 	/* Show dialog 
 	 */
 	if($this->dialog!= NULL){
@@ -103,8 +133,7 @@ class sudoldap extends plugin
 	$RoleList -> SetHeight(300);
 	$editImg = "<input type='image' src='images/edit.png' name='editRole_%s'>
 	<input type='image' src='images/edittrash.png' name='delRole_%s'>";
-	$this->roles_list = $this->get_list_of_roles();
-	foreach($this->roles_list as $role => $values ){
+	foreach($this->Roles as $role => $values ){
 		$link = "<a href='?plug=".$_GET['plug']."&act=edit&id=%s'>%s</a>";
 		$RoleList->AddEntry(array(
 			array("string" => sprintf($link,base64_encode($role),$role)),
@@ -122,20 +151,19 @@ class sudoldap extends plugin
 	return($display);
   }
 
-  function get_list_of_roles()
+  function getRoles()
   {
     $ret = array();
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(objectClass=sudoRole)",array("cn","description"));
+    $ldap->search("(objectClass=sudoRole)",$this->attributes);
     while ($attrs= $ldap->fetch()){
-      $cn= $attrs['cn'][0];
-      if (isset($attrs['description'])){
-        $description= " - ".$attrs['description'][0];
-      } else {
-        $description= "";
-      }
-      $ret[$cn]= "$description";
+      	$cn= $attrs['cn'][0];
+	foreach($this->attributes as $value){
+		if(isset($attrs[$value])){
+			$ret[$cn][$value] = $attrs[$value][0];
+		}
+	}
     }
     return($ret);
   }  

@@ -23,9 +23,24 @@ class sudoldapEditRole extends plugin
 
   var $isNew		= true; 
 
-  function sudoldapEditRole ($config, $dn= NULL)
+  function sudoldapEditRole ($config, $dn= NULL, $attrs = array())
   {
     plugin::plugin ($config, $dn);
+
+    echo '<pre>';
+    print_r($attrs);
+    echo '</pre>';
+
+    if(!count($attrs)){
+    	$this->isNew = true;
+    }else{
+	$this->isNew = false;
+      	foreach($this->attributes as $value){
+        	if(isset($attrs[$value])){
+          		$this->$value = $attrs[$value];
+        	}
+      	}
+    }
   }
 
   function execute()
@@ -78,10 +93,6 @@ class sudoldapEditRole extends plugin
 
     $this->dn = "cn=".$this->cn.",ou=SUDOers,".$this->config->current['BASE'];
     $this->attrs['objectClass'] = array("sudoRole");
-
-    echo '<pre>';
-    print_r($this->attrs);
-    echo '</pre>';
 
     $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
     $ldap->cd($this->dn);
