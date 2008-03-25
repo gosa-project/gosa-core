@@ -134,12 +134,23 @@ class gosaSupportDaemon
   }
 
 
-  public function FAI_get_packages($release)
+  public function FAI_get_packages($release,$package = "")
   {
     $this->reset_error();
 
-    $xml_msg = "<xml><header>gosa_query_packages_list</header><target>GOSA</target><source>GOSA</source>".
-      "<where><clause><phrase><distribution>".$release."</distribution></phrase></clause></where></xml>";
+    if(empty($package)){
+      $xml_msg = "<xml><header>gosa_query_packages_list</header><target>GOSA</target><source>GOSA</source>".
+        "<where><clause><phrase><distribution>".$release."</distribution></phrase></clause></where></xml>";
+    }else{
+      $xml_msg = 
+        "<xml><header>gosa_query_packages_list</header><target>GOSA</target><source>GOSA</source>".
+          "<where><clause>".
+            "<connector>AND</connector>".
+            "<phrase><distribution>".$release."</distribution></phrase>".
+            "<phrase><package>".$package."</package></phrase>".
+          "</clause></where>".
+        "</xml>";
+    }
 
     $ret = array();
     if($this->connect()){
