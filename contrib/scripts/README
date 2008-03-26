@@ -20,3 +20,6 @@ Igor Muratov <migor@altlinux.org>
 goNagiosUser.pl - create cgi.cfg, contacts.cfg, contactgroups.cfg for nagios 2.x
 
 Benoit Mortier <benoit.mortier@opensides.be>
+
+
+mailqueue - used to list/start/stop/... queued mail from within GOsa. 
