@@ -2855,7 +2855,7 @@ msgstr ""
 msgid "This account has %s settings disabled. You can enable them by clicking below."
 msgstr ""
 "Dieses Konto hat keine %s-Einstellungen aktiviert. Sie können Sie durch "
-"einen Klick auf die Schlatflöche aktivieren."
+"einen Klick auf die Schaltfläche aktivieren."
 
 #: include/utils/class_msgPool.inc:402
 #, php-format
