@@ -1,0 +1,47 @@
+#!/bin/sh
+
+# Are we root?
+[ $UID -ne 0 ] && exit 1
+
+# Assign parameters
+[ $# -lt 3 ] && exit 2
+action=$1
+shift
+id=$1
+shift
+
+# Servers are ignored by this script
+servers=$*
+
+# Take actions
+case "$action" in
+	query)
+		/usr/bin/mailq
+		;;
+
+	hold)
+		/usr/sbin/postsuper -h $id
+		;;
+
+	unhold)
+		/usr/sbin/postsuper -H $id
+		;;
+
+	requeue)
+		/usr/sbin/postsuper -r $id
+		;;
+
+	del)
+		/usr/sbin/postsuper -d $id
+		;;
+
+	header)
+		queue=$(postconf queue_directory | cut -d\  -f3-)
+		postcat -q $id | sed -n '/^\*\*\* MESSAGE CONTENTS/,/^$/p' | sed "s#^\*\*\* MESSAGE CONTENTS \(.*\)\*\*\*#Filename: $queue/\1#"
+		;;
+
+	*)	exit 3
+		;;
+esac
+
+echo "Ready"
