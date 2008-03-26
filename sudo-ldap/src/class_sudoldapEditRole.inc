@@ -99,7 +99,6 @@ class sudoldapEditRole extends plugin
     if($ldap->get_error() != "Success"){
     	show_ldap_error("Record:".$ldap->get_error(), _("Saving failed!")); 
     }
-
   }
 
   
