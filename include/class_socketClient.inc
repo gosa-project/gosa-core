@@ -31,7 +31,8 @@ class Socket_Client
   private $handle	= NULL;
   private $bytes_read = 0;
   private $error = "";
-  private $b_encrypt = FALSE;
+  private $is_error   = FALSE;
+  private $b_encrypt  = FALSE;
 
   /* Crypto information */
   private $td= NULL;
@@ -44,6 +45,7 @@ class Socket_Client
     $this->host= $host;
     $this->port= $port;
     $this->timeout= $timeout;
+    $this->reset_error();
 
     /* Connect if needed */
     if($connect){
@@ -55,7 +57,7 @@ class Socket_Client
   public function setEncryptionKey($key)
   {
     if(!function_exists("mcrypt_get_iv_size")){
-      $this->error = _("The mcrypt module was not found. Please install php5-mcrypt.");
+      $this->set_error(_("The mcrypt module was not found. Please install php5-mcrypt."));
       $this->ckey = "";
       $this->b_encrypt = FALSE;
     }
@@ -99,10 +101,11 @@ class Socket_Client
 
   public function open()
   {
+    $this->reset_error();
     $this->handle = @fsockopen($this->host, $this->port, $this->errno, $this->errstr, $this->timeout);
     if(!$this->handle){
       $this->handle = NULL;
-      $this->error = $this->errstr;
+      $this->set_error( $this->errstr);
     }else{
       $this->b_data_send = TRUE;
 
@@ -113,6 +116,26 @@ class Socket_Client
       $this->iv = substr(md5('GONICUS GmbH'),0, mcrypt_enc_get_iv_size($this->td));
       $this->ks = mcrypt_enc_get_key_size($this->td);
     }
+  }
+
+
+  public function set_error($str)
+  {
+    $this->is_error =TRUE;
+    $this->error=$str;
+  }
+
+
+  public function reset_error()
+  {
+    $this->is_error =FALSE;
+    $this->error = "";
+  }
+
+
+  public function is_error()
+  {
+    return($this->is_error);
   }
 
 
@@ -138,6 +161,7 @@ class Socket_Client
   public function read()
   {
     // Output the request results
+    $this->reset_error();
     $str = "";
     $data = "test";
     socket_set_timeout($this->handle,$this->timeout);			
@@ -163,7 +187,8 @@ class Socket_Client
           }
         }
       }
-      if((microtime(TRUE) - $start) > $this->timeout ){      
+      if((microtime(TRUE) - $start) > $this->timeout ){     
+        $this->set_error(sprintf(_("Socket timeout of %s seconds reached."),$this->timeout));     
         break;
       }
     }

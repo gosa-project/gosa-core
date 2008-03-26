@@ -134,28 +134,47 @@ class gosaSupportDaemon
   }
 
 
-  public function FAI_get_packages($release,$package = "")
+  public function FAI_get_packages($release,$attrs, $package="")
   {
     $this->reset_error();
+    $ret = array();
 
+    if(!is_array($attrs) || !count($attrs)){
+      trigger_error("Second parameter must be an array. With at least one attribute name.");
+      return($ret);
+    }
+ 
+    $attr = "<select>package</select>";
+    foreach($attrs as $at){
+#      $attr.= "<select>".trim($at)."</select>";
+    }
+ 
     if(empty($package)){
       $xml_msg = "<xml><header>gosa_query_packages_list</header><target>GOSA</target><source>GOSA</source>".
-        "<where><clause><phrase><distribution>".$release."</distribution></phrase></clause></where></xml>";
+        $attr.
+        "<where><clause><phrase><distribution>".$release."</distribution></phrase></clause></where><limit>10</limit></xml>";
     }else{
       $xml_msg = 
         "<xml><header>gosa_query_packages_list</header><target>GOSA</target><source>GOSA</source>".
+        $attr.
           "<where><clause>".
             "<connector>AND</connector>".
             "<phrase><distribution>".$release."</distribution></phrase>".
             "<phrase><package>".$package."</package></phrase>".
           "</clause></where>".
-        "</xml>";
+        "<limit>10</limit></xml>";
     }
 
-    $ret = array();
     if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
+
+      /* Check if something went wrong while reading */
+      if($this->o_sock->is_error()){
+        $this->set_error($this->o_sock->get_error());
+        return($ret);
+      }
+
       $entries = $this->xml_to_array($str);
       if(isset($entries['XML']) && is_array($entries['XML'])){
 
@@ -194,6 +213,13 @@ class gosaSupportDaemon
     if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
+
+      /* Check if something went wrong while reading */
+      if($this->o_sock->is_error()){
+        $this->set_error($this->o_sock->get_error());
+        return($ret);
+      }
+
       $entries = $this->xml_to_array($str);
       if(isset($entries['XML']) && is_array($entries['XML'])){
 
@@ -230,6 +256,13 @@ class gosaSupportDaemon
     if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
+
+      /* Check if something went wrong while reading */
+      if($this->o_sock->is_error()){
+        $this->set_error($this->o_sock->get_error());
+        return($ret);
+      }
+
       $entries = $this->xml_to_array($str);
       if(isset($entries['XML']) && is_array($entries['XML'])){
 
@@ -297,6 +330,13 @@ $xml_msg.= "
     if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
+
+      /* Check if something went wrong while reading */
+      if($this->o_sock->is_error()){
+        $this->set_error($this->o_sock->get_error());
+        return($ret);
+      }
+
       $entries = $this->xml_to_array($str);
       if(isset($entries['XML']) && is_array($entries['XML'])){
 
@@ -353,6 +393,13 @@ $xml_msg.= "
     if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
+
+      /* Check if something went wrong while reading */
+      if($this->o_sock->is_error()){
+        $this->set_error($this->o_sock->get_error());
+        return($ret);
+      }
+
       $entries = $this->xml_to_array($str);
       if(isset($entries['XML']) && is_array($entries['XML'])){
         foreach($entries['XML'] as $entry){
@@ -400,6 +447,13 @@ $xml_msg.= "
     if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
+
+      /* Check if something went wrong while reading */
+      if($this->o_sock->is_error()){
+        $this->set_error($this->o_sock->get_error());
+        return($ret);
+      }
+
       $entries = $this->xml_to_array($str); 
       if(isset($entries['XML'])){
         foreach($entries['XML'] as $name => $entry){
@@ -447,6 +501,13 @@ $xml_msg.= "
     if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
+
+      /* Check if something went wrong while reading */
+      if($this->o_sock->is_error()){
+        $this->set_error($this->o_sock->get_error());
+        return($ret);
+      }
+
       $entries = $this->xml_to_array($str); 
       if(isset($entries['XML'])){
         foreach($entries['XML'] as $name => $entry){
@@ -490,6 +551,13 @@ $xml_msg.= "
     if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
+
+      /* Check if something went wrong while reading */
+      if($this->o_sock->is_error()){
+        $this->set_error($this->o_sock->get_error());
+        return(FALSE);
+      }
+
       $entries = $this->xml_to_array($str); 
       if( isset($entries['XML']['HEADER']) && 
           $entries['XML']['HEADER']=="answer" && 
@@ -530,6 +598,13 @@ $xml_msg.= "
     if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
+
+      /* Check if something went wrong while reading */
+      if($this->o_sock->is_error()){
+        $this->set_error($this->o_sock->get_error());
+        return($ret);
+      }
+
       $entries = $this->xml_to_array($str); 
       if( isset($entries['XML']['HEADER']) &&
           $entries['XML']['HEADER']=="answer" &&
@@ -576,6 +651,13 @@ $xml_msg.= "
     if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str = $this->o_sock->read();
+
+      /* Check if something went wrong while reading */
+      if($this->o_sock->is_error()){
+        $this->set_error($this->o_sock->get_error());
+        return($ret);
+      }
+
       $entries = $this->xml_to_array($str);
       if(isset($entries['XML']) || isset($entries['COUNT'])){
         new log("debug","DaemonEvent (IDS) ", "gosaSupportDaemon::remove_entries()", $ids,"SUCCESS");
@@ -701,6 +783,13 @@ $xml_msg.= "
 
       $this->o_sock->write($xml_msg);
       $str      = trim($this->o_sock->read());
+
+      /* Check if something went wrong while reading */
+      if($this->o_sock->is_error()){
+        $this->set_error($this->o_sock->get_error());
+        return(FALSE);
+      }
+
       $entries = $this->xml_to_array($str);
       if(isset($entries['XML'])){
         if(isset($entries['XML']['ERROR_STRING'])) {
@@ -726,6 +815,13 @@ $xml_msg.= "
     if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str     = trim($this->o_sock->read());
+
+      /* Check if something went wrong while reading */
+      if($this->o_sock->is_error()){
+        $this->set_error($this->o_sock->get_error());
+        return(0);
+      }
+
       $entries = $this->xml_to_array($str);
       if(isset($entries['XML'])){
         return($entries['XML']['COUNT']);
@@ -832,6 +928,13 @@ $xml_msg.= "
       $this->o_sock->write($data);
       if ($answer_expected){
         $str = trim($this->o_sock->read());
+
+        /* Check if something went wrong while reading */
+        if($this->o_sock->is_error()){
+          $this->set_error($this->o_sock->get_error());
+          return($ret);
+        }
+
         $entries = $this->xml_to_array($str);
         if(isset($entries['XML']) && is_array($entries['XML'])){
           $ret = $entries;
