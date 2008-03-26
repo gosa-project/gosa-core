@@ -538,6 +538,11 @@ class msgPool
   }
 
 
+  public static function installPhpModule($what)
+  {
+    return sprintf(_("Install and activate the %s PHP module."), $what);
+  }
+
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
