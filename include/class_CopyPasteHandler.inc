@@ -360,7 +360,6 @@ class CopyPasteHandler {
       $smarty->assign("Complete",false);
       $smarty->assign("AttributesToFix","&nbsp;");
       $smarty->assign("SubDialog","");
-      $smarty->assign("objectDN" ,$dns);
       $smarty->assign("message"  , sprintf(_("These objects will be pasted: %s"), "<br>".msgPool::buildList($this->clean_objects)));
       return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
     }
