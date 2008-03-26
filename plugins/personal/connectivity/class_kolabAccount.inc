@@ -41,6 +41,12 @@ class kolabAccount extends plugin
       }
     }
 
+    /* Get Boolean value */
+    $this->unrestrictedMailSize = FALSE;
+    if(isset($this->attrs['unrestrictedMailSize'][0]) && preg_match("/true/i",$this->attrs['unrestrictedMailSize'][0])){
+      $this->unrestrictedMailSize = TRUE;
+    }
+
     /* If this one is empty, preset with ACT_MANUAL for anonymous users */
     if (count ($this->kolabInvitationPolicy) == 0){
        $this->kolabInvitationPolicy= array("ACT_MANUAL");
@@ -51,7 +57,7 @@ class kolabAccount extends plugin
     if(count($this->kolabDelegate)){
       $this->is_account = true;
     }
-    foreach(array("calFBURL","unrestrictedMailSize") as $attr){
+    foreach(array("calFBURL") as $attr){
       if(!empty($this->$attr)){
         $this->is_account = true;
       }
@@ -420,6 +426,49 @@ class kolabAccount extends plugin
     $this->is_modified= TRUE;
   }
 
+ /* Adapt from template, using 'dn' */
+  function adapt_from_template($dn)
+  {
+    plugin::adapt_from_template($dn);
+
+    /* Setting uid to default */
+    if(isset($this->attrs['uid'][0])){
+      $this->uid = $this->attrs['uid'][0];
+    }
+
+    /* Pull arrays */
+    foreach(array("kolabDelegate", "kolabInvitationPolicy") as $attr){
+      if (isset($this->attrs["$attr"]["count"])){
+        $tmp = array();
+        for ($i= 0; $i<$this->attrs["$attr"]["count"]; $i++){
+          $tmp[]=$this->attrs["$attr"][$i];
+        }
+        $this->$attr = $tmp;
+      }
+    }
+
+    /* If this one is empty, preset with ACT_MANUAL for anonymous users */
+    if (count ($this->kolabInvitationPolicy) == 0){
+      $this->kolabInvitationPolicy= array("ACT_MANUAL");
+    }
+
+    /* Get Boolean value */
+    $this->unrestrictedMailSize = FALSE;
+    if(isset($this->attrs['unrestrictedMailSize'][0]) && preg_match("/true/i",$this->attrs['unrestrictedMailSize'][0])){
+      $this->unrestrictedMailSize = TRUE;
+    }
+
+    /* Check is account state */
+    $this->is_account = false;
+    if(count($this->kolabDelegate)){
+      $this->is_account = true;
+    }
+    foreach(array("calFBURL") as $attr){
+      if(!empty($this->$attr)){
+        $this->is_account = true;
+      }
+    }
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
