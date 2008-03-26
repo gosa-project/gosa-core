@@ -176,12 +176,15 @@ class Step_Migrate extends setup_step
    */
   function check_uidNumber()
   {
+    /* Establish ldap connection */
     $cv = $this->parent->captured_values;
-    $ldap = new LDAP($cv['admin'],
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
 
     $ldap->cd($cv['base']);
     $res = $ldap->search("uidNumber=*",array("dn","uidNumber"));
@@ -225,12 +228,15 @@ class Step_Migrate extends setup_step
    */
   function check_gidNumber()
   {
+    /* Establish ldap connection */
     $cv = $this->parent->captured_values;
-    $ldap = new LDAP($cv['admin'],
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
 
     $ldap->cd($cv['base']);
     $res = $ldap->search("(&(objectClass=posixGroup)(gidNumber=*))",array("dn","gidNumber"));
@@ -274,12 +280,15 @@ class Step_Migrate extends setup_step
    */
   function search_outside_winstations()
   {
+    /* Establish ldap connection */
     $cv = $this->parent->captured_values;
-    $ldap = new LDAP($cv['admin'],
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
 
     /* Get winstation ou */
     if($cv['generic_settings']['wws_ou_active']) {
@@ -332,12 +341,15 @@ class Step_Migrate extends setup_step
    */
   function search_outside_groups()
   {
+    /* Establish ldap connection */
     $cv = $this->parent->captured_values;
-    $ldap = new LDAP($cv['admin'],
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
 
     $group_ou = $cv['groupou'];
     $ldap->cd($cv['base']);
@@ -399,13 +411,15 @@ class Step_Migrate extends setup_step
    */
   function search_outside_users()
   {
+    /* Establish ldap connection */
     $cv = $this->parent->captured_values;
-    $ldap = new LDAP($cv['admin'],
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
 
+    $ldap = new ldapMultiplexer($ldap_l);
     $ldap->cd($cv['base']);
 
 
@@ -477,12 +491,15 @@ class Step_Migrate extends setup_step
    */
   function check_ldap_permissions()
   {
+    /* Establish ldap connection */
     $cv = $this->parent->captured_values;
-    $ldap = new LDAP($cv['admin'],
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
 
     /* Create dummy entry 
      */
@@ -554,15 +571,15 @@ class Step_Migrate extends setup_step
     $old    = $this->users_to_migrate;
     $this->users_to_migrate = array();
 
-    /* Get collected configuration settings */
-    $cv = $this->parent->captured_values;
-
     /* Establish ldap connection */
-    $ldap = new LDAP($cv['admin'],
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
 
     /* Get all invisible users 
      */
@@ -607,15 +624,15 @@ class Step_Migrate extends setup_step
   {
     $this->show_details= $only_ldif;
 
-    /* Get collected configuration settings */
-    $cv = $this->parent->captured_values;
-
     /* Establish ldap connection */
-    $ldap = new LDAP($cv['admin'],
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
 
     /* Add gosaAccount objectClass to the selected users  
      */
@@ -662,15 +679,15 @@ class Step_Migrate extends setup_step
     $old = $this->deps_to_migrate;
     $this->deps_to_migrate = array();
 
-    /* Get collected configuration settings */
-    $cv = $this->parent->captured_values;
-
     /* Establish ldap connection */
-    $ldap = new LDAP($cv['admin'],
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
 
     /* Skip GOsa internal departments */
     $skip_dns = array("/".$cv['peopleou']."/","/".$cv['groupou']."/","/^ou=people,/","/^ou=groups,/",
@@ -736,15 +753,15 @@ class Step_Migrate extends setup_step
   {
     $this->show_details= $only_ldif;
 
-    /* Get collected configuration settings */
-    $cv = $this->parent->captured_values;
-
     /* Establish ldap connection */
-    $ldap = new LDAP($cv['admin'],
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
 
     /* Add gosaDepartment objectClass to each selected entry 
      */
@@ -792,13 +809,13 @@ class Step_Migrate extends setup_step
   {
     /* Establish ldap connection */
     $cv = $this->parent->captured_values;
-    $ldap = new LDAP($cv['admin'],
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
 
-    /* Search for gosaAcls */ 
+    $ldap = new ldapMultiplexer($ldap_l);
     $ldap->cd($cv['base']);
     $res = $ldap->cat($cv['base']);
     
@@ -899,12 +916,14 @@ class Step_Migrate extends setup_step
     /* Get collected configuration settings */
     $cv = $this->parent->captured_values;
 
-    /* Establish ldap connection */
-    $ldap = new LDAP($cv['admin'],
+    /* On first call check for rid/sid base */
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
 
     /* Get current base attributes */
     $ldap->cd($cv['base']);
@@ -912,6 +931,7 @@ class Step_Migrate extends setup_step
     $attrs = $ldap->fetch();
 
     /* Add acls for the selcted user to the base */
+    $attrs_new = array();
     $attrs_new['objectClass'] = array("gosaACL");
 
     for($i = 0; $i < $attrs['objectClass']['count']; $i ++){
@@ -976,14 +996,15 @@ class Step_Migrate extends setup_step
       return false;
     }
     
-
-    /* Establish ldap connection */
+    /* On first call check for rid/sid base */
     $cv = $this->parent->captured_values;
-    $ldap = new LDAP($cv['admin'],
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
 
     /* Get current base attributes */
     $ldap->cd($cv['base']);
@@ -994,7 +1015,7 @@ class Step_Migrate extends setup_step
     }
 
     if($cv['peopledn'] == "cn"){
-      $dn = "cn=System Administrator,".$people_ou.$cv['base'];
+      $dn = "cn=System Administrator-".$uid.",".$people_ou.$cv['base'];
     }else{
       $dn = "uid=".$uid.",".$people_ou.$cv['base'];
     }
@@ -1008,7 +1029,7 @@ class Step_Migrate extends setup_step
     $new_user['objectClass']= array("top","person","gosaAccount","organizationalPerson","inetOrgPerson");
     $new_user['givenName']  = "System";
     $new_user['sn']  = "Administrator";
-    $new_user['cn']  = "System Administrator";
+    $new_user['cn']  = "System Administrator-".$uid;
     $new_user['uid'] = $uid;
     $new_user['userPassword'] = $hash;
    
@@ -1041,11 +1062,13 @@ class Step_Migrate extends setup_step
   {
     /* Establish ldap connection */
     $cv = $this->parent->captured_values;
-    $ldap = new LDAP($cv['admin'],
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
 
     $ldap->cd($cv['base']);
 
@@ -1089,12 +1112,13 @@ class Step_Migrate extends setup_step
   {
     /* Establish ldap connection */
     $cv = $this->parent->captured_values;
-    $ldap = new LDAP($cv['admin'],
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
 
+    $ldap = new ldapMultiplexer($ldap_l);
     $ldap->cd($cv['base']);
 
     /* Check if there was a destination department posted */
@@ -1137,12 +1161,13 @@ class Step_Migrate extends setup_step
   {
     /* Establish ldap connection */
     $cv = $this->parent->captured_values;
-    $ldap = new LDAP($cv['admin'],
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
 
+    $ldap = new ldapMultiplexer($ldap_l);
     $ldap->cd($cv['base']);
 
     /* Check if there was a destination department posted */
@@ -1586,15 +1611,15 @@ class Step_Migrate extends setup_step
    */
   function checkBase($just_check = TRUE)
   {
-    /* Get collected setup informations */
-    $cv = $this->parent->captured_values;
-
     /* Establish ldap connection */
-    $ldap = new LDAP($cv['admin'],
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
 
     /* Check if root object exists */
     $ldap->cd($cv['base']);
@@ -1663,16 +1688,15 @@ class Step_Migrate extends setup_step
 
   function get_user_list()
   {
-    /* Get collected configuration settings */
-    $cv = $this->parent->captured_values;
-
     /* Establish ldap connection */
-    $ldap = new LDAP($cv['admin'],
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
-    
+
+    $ldap = new ldapMultiplexer($ldap_l);
     $ldap->cd($cv['base']);
     $ldap->search("(objectClass=gosaAccount)",array("dn"));
   
@@ -1691,12 +1715,14 @@ class Step_Migrate extends setup_step
     $people_ou = trim($cv['peopleou']);
 
     /* Establish ldap connection */
-    $ldap = new LDAP($cv['admin'],
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
 
+    $ldap = new ldapMultiplexer($ldap_l);
 
     /*****************
      * If people ou is NOT empty
@@ -1747,15 +1773,15 @@ class Step_Migrate extends setup_step
 
   function get_all_winstation_ous()
   {
-    /* Get collected configuration settings */
-    $cv = $this->parent->captured_values;
-
     /* Establish ldap connection */
-    $ldap = new LDAP($cv['admin'],
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
 
     /* Get winstation ou */
     if($cv['generic_settings']['wws_ou_active']) {
@@ -1794,15 +1820,15 @@ class Step_Migrate extends setup_step
 
  function get_all_group_ous()
   {
-    /* Get collected configuration settings */
-    $cv = $this->parent->captured_values;
-
     /* Establish ldap connection */
-    $ldap = new LDAP($cv['admin'],
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
 
     $group_ou = trim($cv['groupou']);
     if(!empty($group_ou)){
@@ -1855,15 +1881,15 @@ class Step_Migrate extends setup_step
 
   function get_group_list()
   {
-    /* Get collected configuration settings */
-    $cv = $this->parent->captured_values;
-
     /* Establish ldap connection */
-    $ldap = new LDAP($cv['admin'],
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
     
     $ldap->cd($cv['base']);
     $ldap->search("(objectClass=posixGroup)",array("dn"));
@@ -1878,15 +1904,15 @@ class Step_Migrate extends setup_step
 
   function move($source,$destination)
   {
-    /* Get collected configuration settings */
-    $cv = $this->parent->captured_values;
-
     /* Establish ldap connection */
-    $ldap = new LDAP($cv['admin'],
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
 
      /* Update object references in gosaGroupOfNames */
     $ogs_to_fix = array();

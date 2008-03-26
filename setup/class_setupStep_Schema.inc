@@ -68,11 +68,13 @@ class Step_Schema extends setup_step
     $cv = $this->parent->captured_values;
 
     /* Establish ldap connection */
-    $ldap = new LDAP($cv['admin'],
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
 
     /* Check if root object exists */
     $ldap->cd($cv['base']);

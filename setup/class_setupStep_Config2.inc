@@ -93,11 +93,13 @@ class Step_Config2 extends setup_step
     $this->mail_methods = $this->get_available_mail_classes();
     /* On first call check for rid/sid base */
     $cv = $this->parent->captured_values;
-    $ldap = new LDAP($cv['admin'],
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
 
     $ldap->cd($cv['base']);
     $ldap->search("(objectClass=sambaDomain)",array("dn"));
