@@ -59,7 +59,7 @@ fi
 popd &> /dev/null
 
 echo -en "</ENTRIES>\n" >> doc/guide.xml
-#sed -i "s~\t~ ~;s~\t~~g;" doc/guide.xml
+sed -i s/"[ \t][ \t]*"/" "/g doc/guide.xml
 echo -en " done.\n"
 
 # Core help
