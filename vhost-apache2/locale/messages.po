@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-04 23:14+0100\n"
+"POT-Creation-Date: 2008-03-27 23:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,82 +16,145 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/functions_apache.inc:192
-#, php-format
-msgid ""
-"Undefined vhost name '%s'. Vhost name must look like this 'server/zone.com'."
-msgstr ""
-
-#: src/class_servApacheEditVhost.inc:289 src/class_servApacheEditVhost.inc:311
-msgid "Up"
-msgstr ""
-
-#: src/class_servApacheEditVhost.inc:290 src/class_servApacheEditVhost.inc:312
-msgid "Down"
-msgstr ""
-
-#: src/class_servApacheEditVhost.inc:292 src/class_servApacheEditVhost.inc:314
-msgid "Delete"
-msgstr ""
-
-#: src/class_servApacheEditVhost.inc:368
-#, php-format
-msgid "Please choose a valid Virtual Host Name."
-msgstr ""
-
-#: src/class_servApacheEditVhost.inc:372
-msgid "Please choose a valid Path as Virtual Host Document Root."
-msgstr ""
-
-#: src/class_servApacheEditVhost.inc:376
-msgid "Please choose a valid Email Account as Admin Mail address."
-msgstr ""
-
-#: src/class_servApacheEditVhost.inc:380
-msgid "Only lowercase strings are allowed as Virtual Host Name."
-msgstr ""
-
-#: src/class_servApacheEditVhost.inc:384
-msgid "Only lowercase strings are allowed as Virtual Host Document Root."
-msgstr ""
-
-#: src/class_servApacheEditVhost.inc:388
-msgid "Only lowercase strings are allowed as Admin Mail address."
-msgstr ""
-
-#: src/class_servApacheEditVhost.inc:395 src/class_servApacheEditVhost.inc:403
-#, php-format
-msgid "Please choose a valid Path as URL Alias Path in line: %s"
-msgstr ""
-
-#: src/class_servApacheVhost.inc:66
+#: systems/apache2/class_servApacheVhost.inc:66
 msgid "Remove Apache service"
 msgstr ""
 
-#: src/class_servApacheVhost.inc:67
+#: systems/apache2/class_servApacheVhost.inc:67
 msgid ""
 "This server has Apache features enabled. You can disable them by clicking "
 "below."
 msgstr ""
 
-#: src/class_servApacheVhost.inc:69
+#: systems/apache2/class_servApacheVhost.inc:69
 msgid "Add Apache service"
 msgstr ""
 
-#: src/class_servApacheVhost.inc:70
+#: systems/apache2/class_servApacheVhost.inc:70
 msgid ""
 "This server has Apache features disabled. You can enable them by clicking "
 "below."
 msgstr ""
 
-#: src/class_servApacheVhost.inc:236
+#: systems/apache2/class_servApacheVhost.inc:236
 msgid "Updating Apache service failed"
 msgstr ""
 
-#: src/class_servApacheVhost.inc:245
+#: systems/apache2/class_servApacheVhost.inc:245
 msgid "Removing Apache entries failed"
 msgstr ""
 
-#: src/class_servApacheVhost.inc:267
+#: systems/apache2/class_servApacheVhost.inc:267
 msgid "Saving apache entries failed"
+msgstr ""
+
+#: systems/apache2/functions_apache.inc:192
+#, php-format
+msgid ""
+"Undefined vhost name '%s'. Vhost name must look like this 'www.example.com "
+"or example.com'."
+msgstr ""
+
+#: systems/apache2/servApacheVhost.tpl:1
+msgid "Apache VHosts"
+msgstr ""
+
+#: systems/apache2/servApacheVhost.tpl:6
+#: systems/apache2/servApacheVhostEdit.tpl:54
+#: systems/apache2/servApacheVhostEdit.tpl:98
+msgid "Add"
+msgstr ""
+
+#: systems/apache2/servApacheVhostEdit.tpl:1
+msgid "Generic"
+msgstr ""
+
+#: systems/apache2/servApacheVhostEdit.tpl:7
+msgid "Virtual Host Name"
+msgstr ""
+
+#: systems/apache2/servApacheVhostEdit.tpl:13
+msgid "Virtual Host Document Root"
+msgstr ""
+
+#: systems/apache2/servApacheVhostEdit.tpl:19
+msgid "Admin Mail address"
+msgstr ""
+
+#: systems/apache2/servApacheVhostEdit.tpl:30
+msgid "Server Alias"
+msgstr ""
+
+#: systems/apache2/servApacheVhostEdit.tpl:42
+msgid "URL Alias"
+msgstr ""
+
+#: systems/apache2/servApacheVhostEdit.tpl:45
+msgid "Directory Path"
+msgstr ""
+
+#: systems/apache2/servApacheVhostEdit.tpl:74
+msgid "Script Alias"
+msgstr ""
+
+#: systems/apache2/servApacheVhostEdit.tpl:86
+msgid "Alias Directory"
+msgstr ""
+
+#: systems/apache2/servApacheVhostEdit.tpl:89
+msgid "Script Directory"
+msgstr ""
+
+#: systems/apache2/servApacheVhostEdit.tpl:112
+msgid "Save"
+msgstr ""
+
+#: systems/apache2/servApacheVhostEdit.tpl:113
+msgid "Cancel"
+msgstr ""
+
+#: systems/apache2/class_servApacheEditVhost.inc:289
+#: systems/apache2/class_servApacheEditVhost.inc:311
+msgid "Up"
+msgstr ""
+
+#: systems/apache2/class_servApacheEditVhost.inc:290
+#: systems/apache2/class_servApacheEditVhost.inc:312
+msgid "Down"
+msgstr ""
+
+#: systems/apache2/class_servApacheEditVhost.inc:292
+#: systems/apache2/class_servApacheEditVhost.inc:314
+msgid "Delete"
+msgstr ""
+
+#: systems/apache2/class_servApacheEditVhost.inc:368
+#, php-format
+msgid "Please choose a valid Virtual Host Name."
+msgstr ""
+
+#: systems/apache2/class_servApacheEditVhost.inc:372
+msgid "Please choose a valid Path as Virtual Host Document Root."
+msgstr ""
+
+#: systems/apache2/class_servApacheEditVhost.inc:376
+msgid "Please choose a valid Email Account as Admin Mail address."
+msgstr ""
+
+#: systems/apache2/class_servApacheEditVhost.inc:380
+msgid "Only lowercase strings are allowed as Virtual Host Name."
+msgstr ""
+
+#: systems/apache2/class_servApacheEditVhost.inc:384
+msgid "Only lowercase strings are allowed as Virtual Host Document Root."
+msgstr ""
+
+#: systems/apache2/class_servApacheEditVhost.inc:388
+msgid "Only lowercase strings are allowed as Admin Mail address."
+msgstr ""
+
+#: systems/apache2/class_servApacheEditVhost.inc:395
+#: systems/apache2/class_servApacheEditVhost.inc:403
+#, php-format
+msgid "Please choose a valid Path as URL Alias Path in line: %s"
 msgstr ""

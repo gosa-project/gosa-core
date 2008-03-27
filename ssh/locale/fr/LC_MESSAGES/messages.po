@@ -1,14 +1,11 @@
 # translation of messages.po to Français
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-#
-# Benoit Mortier <benoit.mortier@opensides.be>, 2007.
+# Benoit Mortier <benoit.mortier@opensides.be>, 2007, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-04 23:36+0100\n"
-"PO-Revision-Date: 2007-11-04 23:38+0100\n"
+"POT-Creation-Date: 2008-03-27 23:48+0100\n"
+"PO-Revision-Date: 2008-03-27 23:43+0100\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team: Français <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,35 +14,56 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n > 1);\n"
 
-#: src/srv/class_servSsh.inc:88
+#: personal/ssh/class_ssh.inc:25 admin/systems/class_servSsh.inc:25
+msgid "SSH systems keys"
+msgstr "Clefs SSH pour le système"
+
+#: personal/ssh/class_ssh.inc:26 admin/systems/class_servSsh.inc:26
+msgid "This plugin store ssh public keys for systems"
+msgstr "Ce plugin stocke les clefs ssh pour le système"
+
+#: personal/ssh/class_ssh.inc:88 admin/systems/class_servSsh.inc:88
 msgid "Remove SSH keys"
 msgstr "Supprimer les clefs SSH"
 
-#: src/srv/class_servSsh.inc:89
-msgid "This server has SSH features enabled. You can disable them by clicking below."
+#: personal/ssh/class_ssh.inc:89 admin/systems/class_servSsh.inc:89
+msgid ""
+"This server has SSH features enabled. You can disable them by clicking below."
 msgstr ""
 "Ce serveur à l'option SSH activée. Vous pouvez le désactiver en cliquant sur "
 "le bouton ci-dessous."
 
-#: src/srv/class_servSsh.inc:91
+#: personal/ssh/class_ssh.inc:91 admin/systems/class_servSsh.inc:91
 msgid "Add SSH keys"
 msgstr "Ajouter une clef SSH"
 
-#: src/srv/class_servSsh.inc:92
-msgid "This server has SSH features disabled. You can enable them by clicking below."
+#: personal/ssh/class_ssh.inc:92 admin/systems/class_servSsh.inc:92
+msgid ""
+"This server has SSH features disabled. You can enable them by clicking below."
 msgstr ""
 "Ce serveur à l'option SSH désactivé. Vous pouvez l'activer en cliquant sur "
 "le bouton ci-dessous."
 
-#: src/srv/class_servSsh.inc:129
+#: personal/ssh/class_ssh.inc:129 admin/systems/class_servSsh.inc:129
 msgid "Removing SSH key failed"
 msgstr "La suppression de la clef SSH à échoué"
 
-#: src/srv/class_servSsh.inc:150
+#: personal/ssh/class_ssh.inc:150 admin/systems/class_servSsh.inc:150
 msgid "Value specified as 'SSH Key' is not valid."
 msgstr "La valeur spécifiée comme 'Clef SSH' est invalide."
 
-#: src/srv/class_servSsh.inc:176
+#: personal/ssh/class_ssh.inc:176 admin/systems/class_servSsh.inc:176
 msgid "Saving SSH key failed"
 msgstr "La sauvegarde de la clef SSH à échoué"
 
+#: personal/ssh/ssh.tpl:4
+msgid "SSH Keys"
+msgstr "Clef SSH"
+
+#: personal/ssh/ssh.tpl:16
+msgid "SSH Key"
+msgstr "Clef SSH"
+
+#: personal/ssh/ssh.tpl:22
+msgid "Add"
+msgstr "Ajouter"

@@ -1,14 +1,11 @@
 # translation of messages.po to Français
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-#
-# Benoit Mortier <benoit.mortier@opensides.be>, 2007.
+# Benoit Mortier <benoit.mortier@opensides.be>, 2007, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-04 23:14+0100\n"
-"PO-Revision-Date: 2007-11-04 23:34+0100\n"
+"POT-Creation-Date: 2008-03-27 23:48+0100\n"
+"PO-Revision-Date: 2008-03-27 23:47+0100\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team: Français <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,58 +14,11 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n > 1);\n"
 
-#: src/functions_apache.inc:192
-#, php-format
-msgid "Undefined vhost name '%s'. Vhost name must look like this 'server/zone.com'."
-msgstr "Nom d'hôte non défini '%s'. Les nom d'hôtes doivent être comme ceci 'www.example.com ou example.com'."
-
-#: src/class_servApacheEditVhost.inc:289 src/class_servApacheEditVhost.inc:311
-msgid "Up"
-msgstr "Au dessus"
-
-#: src/class_servApacheEditVhost.inc:290 src/class_servApacheEditVhost.inc:312
-msgid "Down"
-msgstr "En bas"
-
-#: src/class_servApacheEditVhost.inc:292 src/class_servApacheEditVhost.inc:314
-msgid "Delete"
-msgstr "Effacer"
-
-#: src/class_servApacheEditVhost.inc:368
-#, php-format
-msgid "Please choose a valid Virtual Host Name."
-msgstr "Veuillez choisir un nom d'hôte virtuel valide."
-
-#: src/class_servApacheEditVhost.inc:372
-msgid "Please choose a valid Path as Virtual Host Document Root."
-msgstr "Veuillez choisir une chemin valide comme racine de votre hôte virtuel."
-
-#: src/class_servApacheEditVhost.inc:376
-msgid "Please choose a valid Email Account as Admin Mail address."
-msgstr "Veuillez choisir une adresse de messagerie valide pour l'administrateur."
-
-#: src/class_servApacheEditVhost.inc:380
-msgid "Only lowercase strings are allowed as Virtual Host Name."
-msgstr "Seules les minuscules sont autorisées dans le nom."
-
-#: src/class_servApacheEditVhost.inc:384
-msgid "Only lowercase strings are allowed as Virtual Host Document Root."
-msgstr "Seules les minuscules sont autorisée dans le chemin Hôte Racine."
-
-#: src/class_servApacheEditVhost.inc:388
-msgid "Only lowercase strings are allowed as Admin Mail address."
-msgstr "Seules les minuscules sont autorisées dans l'adresse de messagerie pour l'administrateur."
-
-#: src/class_servApacheEditVhost.inc:395 src/class_servApacheEditVhost.inc:403
-#, php-format
-msgid "Please choose a valid Path as URL Alias Path in line: %s"
-msgstr "Veuillez choisir un chemin valide comme alias dans la ligne: %s"
-
-#: src/class_servApacheVhost.inc:66
+#: systems/apache2/class_servApacheVhost.inc:66
 msgid "Remove Apache service"
 msgstr "Suppression du service Apache"
 
-#: src/class_servApacheVhost.inc:67
+#: systems/apache2/class_servApacheVhost.inc:67
 msgid ""
 "This server has Apache features enabled. You can disable them by clicking "
 "below."
@@ -76,11 +26,11 @@ msgstr ""
 "Ce serveur à l'extension Apache activée. Vous pouvez la désactiver en "
 "cliquant sur le bouton ci-dessous."
 
-#: src/class_servApacheVhost.inc:69
+#: systems/apache2/class_servApacheVhost.inc:69
 msgid "Add Apache service"
 msgstr "Ajouter un service Apache"
 
-#: src/class_servApacheVhost.inc:70
+#: systems/apache2/class_servApacheVhost.inc:70
 msgid ""
 "This server has Apache features disabled. You can enable them by clicking "
 "below."
@@ -88,15 +38,130 @@ msgstr ""
 "Ce serveur à l'extension Apache désactivé. Vous pouvez l'activer en cliquant "
 "sur le bouton ci-dessous."
 
-#: src/class_servApacheVhost.inc:236
+#: systems/apache2/class_servApacheVhost.inc:236
 msgid "Updating Apache service failed"
 msgstr "La mise à jour du service Apache à échoué"
 
-#: src/class_servApacheVhost.inc:245
+#: systems/apache2/class_servApacheVhost.inc:245
 msgid "Removing Apache entries failed"
-msgstr "La suppression d'une entrée Apache à échoué"
+msgstr "La suppression d'une hôte virtuel Apache à échoué"
 
-#: src/class_servApacheVhost.inc:267
+#: systems/apache2/class_servApacheVhost.inc:267
 msgid "Saving apache entries failed"
 msgstr "La sauvegarde des entrées du service apache à échoué"
 
+#: systems/apache2/functions_apache.inc:192
+#, php-format
+msgid ""
+"Undefined vhost name '%s'. Vhost name must look like this 'www.example.com "
+"or example.com'."
+msgstr ""
+"Nom d'hôte non défini '%s'. Les nom d'hôtes doivent être comme ceci 'www."
+"example.com ou example.com'."
+
+#: systems/apache2/servApacheVhost.tpl:1
+msgid "Apache VHosts"
+msgstr "Hôte virtuel Apache"
+
+#: systems/apache2/servApacheVhost.tpl:6
+#: systems/apache2/servApacheVhostEdit.tpl:54
+#: systems/apache2/servApacheVhostEdit.tpl:98
+msgid "Add"
+msgstr "Ajouter"
+
+#: systems/apache2/servApacheVhostEdit.tpl:1
+msgid "Generic"
+msgstr "Générique"
+
+#: systems/apache2/servApacheVhostEdit.tpl:7
+msgid "Virtual Host Name"
+msgstr "Nom de l'hôte virtuel"
+
+#: systems/apache2/servApacheVhostEdit.tpl:13
+msgid "Virtual Host Document Root"
+msgstr "Document racine de votre hôte virtuel"
+
+#: systems/apache2/servApacheVhostEdit.tpl:19
+msgid "Admin Mail address"
+msgstr "Adresse de messagerie de l'administrateur"
+
+#: systems/apache2/servApacheVhostEdit.tpl:30
+msgid "Server Alias"
+msgstr "Alias du serveur"
+
+#: systems/apache2/servApacheVhostEdit.tpl:42
+msgid "URL Alias"
+msgstr "Alias de l'url"
+
+#: systems/apache2/servApacheVhostEdit.tpl:45
+msgid "Directory Path"
+msgstr "Chemin du répertoire"
+
+#: systems/apache2/servApacheVhostEdit.tpl:74
+msgid "Script Alias"
+msgstr "Alias du script"
+
+#: systems/apache2/servApacheVhostEdit.tpl:86
+msgid "Alias Directory"
+msgstr "Alias du répertoire"
+
+#: systems/apache2/servApacheVhostEdit.tpl:89
+msgid "Script Directory"
+msgstr "Répertoire du script"
+
+#: systems/apache2/servApacheVhostEdit.tpl:112
+msgid "Save"
+msgstr "Sauver"
+
+#: systems/apache2/servApacheVhostEdit.tpl:113
+msgid "Cancel"
+msgstr "Annuler"
+
+#: systems/apache2/class_servApacheEditVhost.inc:289
+#: systems/apache2/class_servApacheEditVhost.inc:311
+msgid "Up"
+msgstr "Au dessus"
+
+#: systems/apache2/class_servApacheEditVhost.inc:290
+#: systems/apache2/class_servApacheEditVhost.inc:312
+msgid "Down"
+msgstr "En dessous"
+
+#: systems/apache2/class_servApacheEditVhost.inc:292
+#: systems/apache2/class_servApacheEditVhost.inc:314
+msgid "Delete"
+msgstr "Effacer"
+
+#: systems/apache2/class_servApacheEditVhost.inc:368
+#, php-format
+msgid "Please choose a valid Virtual Host Name."
+msgstr "Veuillez choisir un nom d'hôte virtuel valide."
+
+#: systems/apache2/class_servApacheEditVhost.inc:372
+msgid "Please choose a valid Path as Virtual Host Document Root."
+msgstr "Veuillez choisir une chemin valide comme racine de votre hôte virtuel."
+
+#: systems/apache2/class_servApacheEditVhost.inc:376
+msgid "Please choose a valid Email Account as Admin Mail address."
+msgstr ""
+"Veuillez choisir une adresse de messagerie valide pour l'administrateur."
+
+#: systems/apache2/class_servApacheEditVhost.inc:380
+msgid "Only lowercase strings are allowed as Virtual Host Name."
+msgstr "Seules les minuscules sont autorisées dans le nom."
+
+#: systems/apache2/class_servApacheEditVhost.inc:384
+msgid "Only lowercase strings are allowed as Virtual Host Document Root."
+msgstr "Seules les minuscules sont autorisée dans le chemin Hôte Racine."
+
+#: systems/apache2/class_servApacheEditVhost.inc:388
+msgid "Only lowercase strings are allowed as Admin Mail address."
+msgstr ""
+"Seules les minuscules sont autorisées dans l'adresse de messagerie pour "
+"l'administrateur."
+
+#: systems/apache2/class_servApacheEditVhost.inc:395
+#: systems/apache2/class_servApacheEditVhost.inc:403
+#, php-format
+msgid "Please choose a valid Path as URL Alias Path in line: %s"
+msgstr "Veuillez choisir un chemin valide comme alias dans la ligne: %s"
