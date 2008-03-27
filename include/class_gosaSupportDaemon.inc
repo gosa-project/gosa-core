@@ -158,9 +158,15 @@ class gosaSupportDaemon
         "<where><clause><phrase><distribution>".$release."</distribution></phrase></clause></where>
         </xml>";
     }else{
+         $xml_msg = "<xml><header>gosa_query_packages_list</header><target>GOSA</target><source>GOSA</source>".
+        "<select> ".trim($attr,", ")." </select>".
+        "<where><clause>
+            <connector>AND</connector>
+            <phrase><distribution>".$release."</distribution></phrase>
+            <phrase><package>".$package."</package></phrase>
+            </clause></where>
+        </xml>";
     }
-
-    echo htmlentities($xml_msg);
 
     if($this->connect()){
       $this->o_sock->write($xml_msg);
