@@ -139,31 +139,28 @@ class gosaSupportDaemon
     $this->reset_error();
     $ret = array();
 
+    /* Check Parameter */
     if(!is_array($attrs) || !count($attrs)){
       trigger_error("Second parameter must be an array. With at least one attribute name.");
       return($ret);
     }
- 
-    $attr = "<select>package</select>";
+
+    /* Create list of attributes to fetch */
+    $attr = ""; 
     foreach($attrs as $at){
-#      $attr.= "<select>".trim($at)."</select>";
+      $attr.= $at.", ";
     }
- 
+
+    /* Create Daemon query */
     if(empty($package)){
       $xml_msg = "<xml><header>gosa_query_packages_list</header><target>GOSA</target><source>GOSA</source>".
-        $attr.
-        "<where><clause><phrase><distribution>".$release."</distribution></phrase></clause></where><limit>10</limit></xml>";
+        "<select> ".trim($attr,", ")." </select>".
+        "<where><clause><phrase><distribution>".$release."</distribution></phrase></clause></where>
+        </xml>";
     }else{
-      $xml_msg = 
-        "<xml><header>gosa_query_packages_list</header><target>GOSA</target><source>GOSA</source>".
-        $attr.
-          "<where><clause>".
-            "<connector>AND</connector>".
-            "<phrase><distribution>".$release."</distribution></phrase>".
-            "<phrase><package>".$package."</package></phrase>".
-          "</clause></where>".
-        "<limit>10</limit></xml>";
     }
+
+    echo htmlentities($xml_msg);
 
     if($this->connect()){
       $this->o_sock->write($xml_msg);
