@@ -2420,8 +2420,8 @@ function change_password ($dn, $password, $mode=0, $hash= "")
   // Get all available encryption Methods
 
   // NON STATIC CALL :)
-  $tmp = new passwordMethod(session::get('config'));
-  $available = $tmp->get_available_methods();
+  $methods = new passwordMethod(session::get('config'));
+  $available = $methods->get_available_methods();
 
   // read current password entry for $dn, to detect the encryption Method
   $ldap       = $config->get_ldap_link();
@@ -2448,10 +2448,11 @@ function change_password ($dn, $password, $mode=0, $hash= "")
 
     /* Extract used hash */
     if ($hash == ""){
-      $hash= strtolower($matches[1]);
+      $test = passwordMethod::get_method($attrs['userPassword'][0]);
+    } else {
+      $test = new $available[$hash]($config);
+      $test->set_hash($hash);
     }
-
-    $test = new  $available[$hash]($config);
 
   } else {
     // User MD5 by default
@@ -2486,7 +2487,7 @@ function change_password ($dn, $password, $mode=0, $hash= "")
     $attrs= generate_smb_nt_hash($password);
   }
 
- /* Readd ! if user was deactivated */
+ /* Read ! if user was deactivated */
   if($deactivated){
     $newpass = preg_replace("/(^[^\}]+\})(.*$)/","\\1!\\2",$newpass);
   }
@@ -2567,12 +2568,6 @@ function generate_smb_nt_hash($password)
 	  $attrs['pwdLastSet']= date('U');
   }
   return($attrs);
-}
-
-
-function crypt_single($string,$enc_type )
-{
-  return( passwordMethod::crypt_single_str($string,$enc_type));
 }
 
 
@@ -2674,6 +2669,18 @@ function xmlentities($str)
 {
   return (htmlentities($str,ENT_QUOTES));
 }
+
+
+function get_random_char () {
+     $randno = rand (0, 63);
+     if ($randno < 12) {
+         return (chr ($randno + 46)); // Digits, '/' and '.'
+     } else if ($randno < 38) {
+         return (chr ($randno + 53)); // Uppercase
+     } else {
+         return (chr ($randno + 59)); // Lowercase
+     }
+  }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

@@ -24,6 +24,7 @@ class passwordMethod
 {
   var $config = false;
   var $attrs= array();
+  var $hash= "";
 
   // Konstructor
   function passwordMethod($config)
@@ -54,21 +55,6 @@ class passwordMethod
   }
 
 
-  // Crypts a single string, with given Method
-  function crypt_single_str($string,$method)
-  {
-    $available = passwordMethod::get_available_methods();
-    if(!is_array($available))
-    {
-      $available = passwordMethod::get_available_methods_if_not_loaded();
-    }
-
-    $test = new  $available[$method](false);
-    $newpass =  $test->generate_hash($string);
-    return( $newpass); 
-  }
-
-
   // this function returns all loaded classes for password encryption
   static function get_available_methods()
   {
@@ -78,18 +64,25 @@ class passwordMethod
     foreach($class_mapping as $class => $path) {
       if(preg_match('/passwordMethod/i', $class) && !preg_match("/^passwordMethod$/i", $class)){
         $name = preg_replace ("/passwordMethod/i", "", $class);
-        $test = new $class($config);
+        $test = new $class($config, "");
         if($test->is_available()) {
-          $plugname= $test->get_hash_name();
-          $ret['name'][$i]= $plugname;
-          $ret['class'][$i]=$class;
-          $ret[$i]['name']= $plugname;
-          $ret[$i]['class']= $class;
-          $ret[$plugname]=$class;                    
-          $i++;
+          $plugs= $test->get_hash_name();
+          if (!is_array($plugs)){
+            $plugs= array($plugs);
+          }
+
+          foreach ($plugs as $plugname){
+            $ret['name'][$i]= $plugname;
+            $ret['class'][$i]=$class;
+            $ret[$i]['name']= $plugname;
+            $ret[$i]['class']= $class;
+            $ret[$plugname]=$class;                    
+            $i++;
+          }
         }
       }
     }
+
     return($ret);
   }
   
@@ -127,6 +120,62 @@ class passwordMethod
   {
   }
 
+
+  // Try to find out if it's our hash...
+  static function get_method($password_hash)
+  {
+    global $config;
+
+    $methods= passwordMethod::get_available_methods();
+
+    foreach ($methods['class'] as $class){
+
+        $test = new $class($config);
+        $method= $test->_extract_method($password_hash);
+        if ($method != ""){
+          $test->set_hash($method);
+          return $test;
+        }
+    }
+
+    msg_dialog::display(_("Error"), _("Cannot find a suitable password method for the current hash!"), ERROR_DIALOG);
+
+    return NULL;
+  }
+
+
+  function _extract_method($password_hash)
+  {
+    $hash= $this->get_hash_name();
+    if (preg_match("/^\{$hash\}/i", $password_hash)){
+      return $hash;
+    }
+
+    return "";
+  }
+
+
+  static function make_hash($password, $hash)
+  {
+    global $config;
+
+    $methods= passwordMethod::get_available_methods();
+    $tmp= new $methods[$hash]($config);
+    $tmp->set_hash($hash);
+    return $tmp->generate_hash($password);
+  }
+
+
+  function set_hash($hash)
+  {
+    $this->hash= $hash;
+  }
+
+
+  function get_hash()
+  {
+    return $this->hash;
+  }
 
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

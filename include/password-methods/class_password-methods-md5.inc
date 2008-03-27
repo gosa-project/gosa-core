@@ -47,6 +47,7 @@ class passwordMethodMd5 extends passwordMethod
   {
     return "md5";
   }
+
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

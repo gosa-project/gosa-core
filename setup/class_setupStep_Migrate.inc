@@ -1020,10 +1020,7 @@ class Step_Migrate extends setup_step
       $dn = "uid=".$uid.",".$people_ou.$cv['base'];
     }
 
-    $methods = @passwordMethod::get_available_methods();
-    $p_m = $methods[$cv['encryption']];
-    $p_c = new $p_m(array());
-    $hash = $p_c->generate_hash($pw2);
+    $hash = passwordMethod::make_hash($pw2, $cv['encryption']);
 
     $new_user=array();
     $new_user['objectClass']= array("top","person","gosaAccount","organizationalPerson","inetOrgPerson");

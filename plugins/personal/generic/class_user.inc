@@ -99,7 +99,7 @@ class user extends plugin
   var $dialog;
 
   /* variables to trigger password changes */
-  var $pw_storage= "crypt";
+  var $pw_storage= "md5";
   var $last_pw_storage= "unset";
   var $had_userCertificate= FALSE;
 
@@ -184,8 +184,10 @@ class user extends plugin
       if (isset ($this->attrs['userPassword'][0])){
       	/* Initialize local array */
       	$matches= array();
-        if (preg_match ("/^{([^}]+)}(.+)/", $this->attrs['userPassword'][0], $matches)){
-          $this->pw_storage= strtolower($matches[1]);
+        if (preg_match ("/^{[^}]+}/", $this->attrs['userPassword'][0])){
+          $tmp= passwordMethod::get_method($this->attrs['userPassword'][0]);
+          $this->pw_storage= $tmp->get_hash(); 
+
         } else {
           if ($this->attrs['userPassword'][0] != ""){
             $this->pw_storage= "clear";

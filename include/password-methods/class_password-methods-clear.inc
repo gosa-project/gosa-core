@@ -23,7 +23,7 @@
 class passwordMethodClear extends passwordMethod
 {
 
-	function passwordMethodClear($config)  
+	function passwordMethodClear($config)
 	{
 	}
 
