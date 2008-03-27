@@ -156,7 +156,7 @@ if(isset($_GET['pg'])){
  
   if(preg_match("/\//",$_GET['pg'])){
     $arr = split("\/",$_GET['pg']);
-    $helpobject['currentplug'] = "../doc/guide/user/".$helpobject['lang']."/html/".$arr[0];
+    $helpobject['currentplug'] = "../doc/core/".$helpobject['lang']."/html/".$arr[0];
     $helpdir = $helpobject['currentplug'];
     $helpobject['file']= $arr[1];
   }else{
@@ -170,7 +170,7 @@ if(isset($_GET['pg'])){
       $helpobject['file'] = "index.html";
     }
     /* Create new helpdir (The path where the requested page is located)*/
-    $helpdir = "../doc/guide/user/".$helpobject['lang']."/html/".preg_replace("/^.*\//i","",$helpobject['currentplug']);
+    $helpdir = "../doc/core/".$helpobject['lang']."/html/".preg_replace("/^.*\//i","",$helpobject['currentplug']);
 
     /* If helpdir is empty, force index */
     if(empty($helpobject['currentplug'])){
@@ -225,7 +225,7 @@ if($helpobject['file'] == "index.html"){
 
 /* If there is no helpdir or file defined, display the index */
 if(isset($_POST['search'])){
-  $helpdir = "../doc/guide/user/".$helpobject['lang']."/html/";
+  $helpdir = "../doc/core/".$helpobject['lang']."/html/";
   /* read all available directories */
   $index = readfiles($helpdir,$prefix,$suffix,false,false);
   $smarty->assign("help_contents",((searchlist($index,search($index,$_POST['search_string']),10))));

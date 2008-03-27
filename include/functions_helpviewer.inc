@@ -70,7 +70,7 @@ function genIndex()
   foreach($helpobject['helpconf'] as $id => $attrs){
     $path = $test -> get_path($id);
     $exists = true;
-    $helpdir = "../doc/guide/user/".$helpobject['lang']."/html/".preg_replace("/^.*\//i","",$path)."/";
+    $helpdir = "../doc/core/".$helpobject['lang']."/html/".preg_replace("/^.*\//i","",$path)."/";
     if(!is_dir($helpdir)){
       $exists = false;
     }
