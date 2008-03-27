@@ -1,0 +1,81 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-03-27 23:10+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: addons/sudo/class_sudoldapEditRole.inc:100
+msgid "Saving failed!"
+msgstr ""
+
+#: addons/sudo/class_sudoldap.inc:15 addons/sudo/main.inc:106
+msgid "sudo-ldap"
+msgstr ""
+
+#: addons/sudo/class_sudoldap.inc:16
+msgid "This does something"
+msgstr ""
+
+#: addons/sudo/class_sudoldap.inc:175
+msgid "Removing DNS entries failed"
+msgstr ""
+
+#: addons/sudo/sudoldap.tpl:4
+msgid "Sudo Roles"
+msgstr ""
+
+#: addons/sudo/sudoldap.tpl:6 addons/sudo/sudoldap.tpl:8
+msgid "Add"
+msgstr ""
+
+#: addons/sudo/sudoldapeditrole.tpl:1
+msgid "sudo-ldap role"
+msgstr ""
+
+#: addons/sudo/sudoldapeditrole.tpl:4
+msgid "cn"
+msgstr ""
+
+#: addons/sudo/sudoldapeditrole.tpl:8
+msgid "description"
+msgstr ""
+
+#: addons/sudo/sudoldapeditrole.tpl:12
+msgid "sudoUser"
+msgstr ""
+
+#: addons/sudo/sudoldapeditrole.tpl:16
+msgid "sudoHost"
+msgstr ""
+
+#: addons/sudo/sudoldapeditrole.tpl:20
+msgid "sudoCommand"
+msgstr ""
+
+#: addons/sudo/sudoldapeditrole.tpl:24
+msgid "sudoRunAs"
+msgstr ""
+
+#: addons/sudo/sudoldapeditrole.tpl:28
+msgid "sudoOption"
+msgstr ""
+
+#: addons/sudo/sudoldapeditrole.tpl:34
+msgid "Save"
+msgstr ""
+
+#: addons/sudo/sudoldapeditrole.tpl:35
+msgid "Cancel"
+msgstr ""

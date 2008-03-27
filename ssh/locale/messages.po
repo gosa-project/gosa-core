@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-03-27 23:48+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: personal/ssh/class_ssh.inc:25 admin/systems/class_servSsh.inc:25
+msgid "SSH systems keys"
+msgstr ""
+
+#: personal/ssh/class_ssh.inc:26 admin/systems/class_servSsh.inc:26
+msgid "This plugin store ssh public keys for systems"
+msgstr ""
+
+#: personal/ssh/class_ssh.inc:88 admin/systems/class_servSsh.inc:88
+msgid "Remove SSH keys"
+msgstr ""
+
+#: personal/ssh/class_ssh.inc:89 admin/systems/class_servSsh.inc:89
+msgid ""
+"This server has SSH features enabled. You can disable them by clicking below."
+msgstr ""
+
+#: personal/ssh/class_ssh.inc:91 admin/systems/class_servSsh.inc:91
+msgid "Add SSH keys"
+msgstr ""
+
+#: personal/ssh/class_ssh.inc:92 admin/systems/class_servSsh.inc:92
+msgid ""
+"This server has SSH features disabled. You can enable them by clicking below."
+msgstr ""
+
+#: personal/ssh/class_ssh.inc:129 admin/systems/class_servSsh.inc:129
+msgid "Removing SSH key failed"
+msgstr ""
+
+#: personal/ssh/class_ssh.inc:150 admin/systems/class_servSsh.inc:150
+msgid "Value specified as 'SSH Key' is not valid."
+msgstr ""
+
+#: personal/ssh/class_ssh.inc:176 admin/systems/class_servSsh.inc:176
+msgid "Saving SSH key failed"
+msgstr ""
+
+#: personal/ssh/ssh.tpl:4
+msgid "SSH Keys"
+msgstr ""
+
+#: personal/ssh/ssh.tpl:16
+msgid "SSH Key"
+msgstr ""
+
+#: personal/ssh/ssh.tpl:22
+msgid "Add"
+msgstr ""
