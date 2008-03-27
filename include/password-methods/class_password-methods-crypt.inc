@@ -104,11 +104,11 @@ class passwordMethodCrypt extends passwordMethod
 
     $password_hash= preg_replace('/^{[^}]+}!?/', '', $password_hash);
 
-    if (preg_match("/^[a-z-A-Z0-9.\/][a-z-A-Z0-9.\/]/", $password_hash)){
+    if (preg_match("/^[a-zA-Z0-9.\/][a-zA-Z0-9.\/]/", $password_hash)){
       return "crypt/standard-des";
     }
 
-    if (preg_match("/^_[a–zA-Z0–9.\/]/i", $password_hash)){
+    if (preg_match("/^_[a-zA-Z0-9.\/]/", $password_hash)){
       return "crypt/enhanced-des";
     }
     
