@@ -15,7 +15,7 @@
     			</p>
    			</div>
   		</td>
-  		<td style="vertical-align:top; width:400px;">
+  		<td style="vertical-align:top; width:350px;">
    			<div class="contentboxh" style="height:20px;">
     			<p class="contentboxh" style="font-size:12px">
 					<img src="{$launchimage}" align="right" alt="[F]"><b>{t}Filters{/t}</b>
