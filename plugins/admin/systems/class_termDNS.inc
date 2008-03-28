@@ -565,6 +565,15 @@ class termDNS extends plugin
         }
       }
   
+      /* Updated IP host number */
+      if($this->dhcp_is_Account){
+        foreach($this->dhcpHostEntry['dhcpStatements'] as $id => $value){
+          if(preg_match("/^fixed-address/",$value)){
+            $this->dhcpHostEntry['dhcpStatements'][$id] = "fixed-address ".$this->ipHostNumber;
+            $this->dhcpHostEntry['MODIFIED'] = TRUE;
+          }
+        }
+      }
 
       /* Unset dhcpStatements if this attribute is empty  */
       if(isset($this->dhcpHostEntry['dhcpStatements']) && 
