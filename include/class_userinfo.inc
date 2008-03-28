@@ -184,6 +184,8 @@ class userinfo
       foreach($this->ocMapping[$category] as $oc){
         $acl.= $this->get_permissions($dn, $category."/".$oc);
       }
+    }else{
+      trigger_error("ACL request for an invalid category (".$category.").");
     }
 
     return ($acl);
