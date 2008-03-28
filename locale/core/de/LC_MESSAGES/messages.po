@@ -3369,7 +3369,7 @@ msgstr "Alle Objekte im aktuellen Teilbaum"
 
 #: include/class_acl.inc:665 include/class_acl.inc:672
 msgid "Show/hide advanced settings"
-msgstr "Zeige/verstecke Erweiterte Einstellungen"
+msgstr "Zeige/verstecke erweiterte Einstellungen"
 
 #: include/class_acl.inc:690
 msgid "Create objects"
