@@ -76,7 +76,7 @@ class gosaSupportDaemon
       }else{
         $this->set_error($this->o_sock->get_error());
         $this->disconnect();
-        new log("debug","gosaSupportDaemon::connect()", "Could not connect to server.", array(),$this->get_error());
+        new log("debug","gosaSupportDaemon::connect()", "Cannot connect to si-server", array(),$this->get_error());
       }
     }else{
       $this->set_error(msgPool::cmdnotfound("GOSA_SI",_("GOsa support daemon")));
