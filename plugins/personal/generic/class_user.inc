@@ -1300,9 +1300,9 @@ class user extends plugin
   }
 
   /* Adapt from given 'dn' */
-  function adapt_from_template($dn)
+  function adapt_from_template($dn, $skip= array())
   {
-    plugin::adapt_from_template($dn);
+    plugin::adapt_from_template($dn, $skip);
 
     /* Get base */
     $this->base= preg_replace('/^[^,]+,'.get_people_ou().'/i', '', $dn);
@@ -1329,8 +1329,8 @@ class user extends plugin
       }
     }
 
-    /* Get back uid/sn/givenName */
-    if ($this->parent !== NULL){
+    /* Get back uid/sn/givenName - only write if nothing's skipped */
+    if ($this->parent !== NULL && count($skip) != 0){
       $this->uid= $this->parent->uid;
       $this->sn= $this->parent->sn;
       $this->givenName= $this->parent->givenName;

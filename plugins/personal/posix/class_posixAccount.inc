@@ -1175,12 +1175,12 @@ class posixAccount extends plugin
 
 
   /* Adapt from template, using 'dn' */
-  function adapt_from_template($dn)
+  function adapt_from_template($dn, $skip= array())
   {
     /* Include global link_info */
     $ldap= $this->config->get_ldap_link();
 
-    plugin::adapt_from_template($dn);
+    plugin::adapt_from_template($dn, $skip);
     $template= $this->attrs['uid'][0];
 
     /* Adapt group membership */
