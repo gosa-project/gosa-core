@@ -152,6 +152,9 @@ class userManagement extends plugin
     if(isset($_POST['menu_action']) && preg_match("/^remove_multiple/",$_POST['menu_action'])){
       $s_action = "del_multiple";
     }
+    if(isset($_POST['menu_action']) && preg_match("/^templatize_multiple/",$_POST['menu_action'])){
+      $s_action = "templatize_multiple";
+    }
 
     if(isset($_POST['menu_action']) && preg_match("/^event/",$_POST['menu_action'])){
       $s_action = $_POST['menu_action'];
@@ -433,6 +436,34 @@ class userManagement extends plugin
       session::un_set('objectinfo');
     }
 
+    /* Apply templates */
+    if ($s_action=="templatize_multiple"){
+      $ids = $this->list_get_selected_items();
+      $this->dns = array();
+      if(count($ids)){
+
+        foreach($ids as $id){
+          $dn = $this->list[$id]['dn'];
+          if (($user= get_lock($dn)) != ""){
+            return(gen_locked_message ($user, $dn));
+          }
+          $this->dns[$id] = $dn; 
+        }
+      }
+
+      # Test stuff
+      foreach ($this->dns as $dn){
+
+        echo "Template test with '$dn'<br>";
+        $template_dn= "cn=super44 super44,ou=people,dc=gonicus,dc=de";
+        $usertab= new usertabs($this->config, $this->config->data['TABS']['USERTABS'], $dn);
+        $usertab->adapt_from_template($template_dn, array("sn", "givenName", "uid"));
+        #$usertab->save();
+        unset ($usertab);
+        $usertab= NULL;
+      }
+
+    }
 
     /********************
       Delete MULTIPLE entries requested, display confirm dialog
@@ -1152,7 +1183,7 @@ class userManagement extends plugin
   function remove_from_parent() { } 
   function check() { } 
   function save() { } 
-  function adapt_from_template($dn) { } 
+  function adapt_from_template($dn, $skip= array()) { } 
   function password_change_needed() { } 
 
 } /* ... class userManagement */
