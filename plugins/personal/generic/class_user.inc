@@ -1312,6 +1312,10 @@ class user extends plugin
       /* Walk through govattrs */
       foreach ($this->govattrs as $val){
 
+        if (in_array($val, $skip)){
+          continue;
+        }
+
         if (isset($this->attrs["$val"][0])){
 
           /* If attribute is set, replace dynamic parts: 
@@ -1330,7 +1334,7 @@ class user extends plugin
     }
 
     /* Get back uid/sn/givenName - only write if nothing's skipped */
-    if ($this->parent !== NULL && count($skip) != 0){
+    if ($this->parent !== NULL && count($skip) == 0){
       $this->uid= $this->parent->uid;
       $this->sn= $this->parent->sn;
       $this->givenName= $this->parent->givenName;
