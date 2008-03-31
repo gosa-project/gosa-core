@@ -436,8 +436,16 @@ class userManagement extends plugin
       session::un_set('objectinfo');
     }
 
-    /* Apply templates */
-    if ($s_action=="templatize_multiple"){
+
+    /********************
+      Apply template to multiple entries requested, display confirm dialog
+     ********************/
+    # TODO: show dialog to choose
+    #       * template
+    #       * when the template is choosen refresh the list of
+    #         available attributes with a checkbox - everything checked
+    #       * when pressing apply do the stuff below
+    if ($s_action=="ttemplatize_multiple"){
       $ids = $this->list_get_selected_items();
       $this->dns = array();
       if(count($ids)){
@@ -458,12 +466,13 @@ class userManagement extends plugin
         $template_dn= "cn=super44 super44,ou=people,dc=gonicus,dc=de";
         $usertab= new usertabs($this->config, $this->config->data['TABS']['USERTABS'], $dn);
         $usertab->adapt_from_template($template_dn, array("sn", "givenName", "uid"));
-        #$usertab->save();
+        $usertab->save();
         unset ($usertab);
         $usertab= NULL;
       }
 
     }
+
 
     /********************
       Delete MULTIPLE entries requested, display confirm dialog
