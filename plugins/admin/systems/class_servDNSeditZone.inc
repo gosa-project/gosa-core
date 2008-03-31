@@ -93,7 +93,7 @@ class servdnseditZone extends plugin
             $tmp2[$tmp[0]] = $rec;
             unset($this->Records[$key]);
           }
-          if($rec['type'] == "nSRecord"){
+          if($rec['type'] == "nSRecord" && preg_match("/".normalizePreg($this->sOAprimary)."/",$rec['value'])){
             unset($this->Records[$key]);
           }
         }
