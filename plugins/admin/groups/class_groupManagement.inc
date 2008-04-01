@@ -788,7 +788,7 @@ class groupManagement extends plugin
 
   /* Unused functions  */
   function check()  { }
-  function adapt_from_template($dn, $skip) { }
+  function adapt_from_template($dn, $skip= array()) { }
   function password_change_needed()  { }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

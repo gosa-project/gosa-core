@@ -641,7 +641,7 @@ class aclManagement extends plugin
     echo "SAVE ACL";
   } 
 
-  function adapt_from_template($dn, $skip) { } 
+  function adapt_from_template($dn, $skip= array()) { } 
   function password_change_needed() { } 
 
 
