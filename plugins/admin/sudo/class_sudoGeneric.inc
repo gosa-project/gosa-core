@@ -35,6 +35,8 @@ class sudo extends plugin
   var $objectclasses = array("top","sudoRole");
   var $attributes    = array("cn","description","sudoUser","sudoCommand","sudoOption","sudoHost","sudoRunas");
 
+  var $is_account = TRUE;
+
   function sudo(&$config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
@@ -57,19 +59,70 @@ class sudo extends plugin
     plugin::execute();
   
     
+    /*********************
+       NEGATE values 
+     *********************/ 
+    foreach($_POST as $name => $value){
+      if(preg_match("/^neg_/",$name)){
+        $attr = preg_replace("/^neg_([^_]*)_.*$/","\\1",$name);
+        $value= preg_replace("/^neg_[^_]*_([0-9]*)_.*$/","\\1",$name);
   
+        $attrs = $this->$attr;
+        if(isset( $attrs[$value])){
+          $v =  $attrs[$value];
+          if(preg_match("/^!/",$v)){
+            $attrs[$value] = preg_replace("/^!/","",$v);
+          }else{
+            $attrs[$value] = "!".$v;
+          }
+          $this->$attr = $attrs;  
+        }
+        break; // Do it once, image inputs will be posted twice
+      }
+    }
   
-  
+    /*********************
+       Delete values 
+     *********************/ 
+    foreach($_POST as $name => $value){
+      if(preg_match("/^del_/",$name)){
+        $attr = preg_replace("/^del_([^_]*)_.*$/","\\1",$name);
+        $value= preg_replace("/^del_[^_]*_([0-9]*)_.*$/","\\1",$name);
+        $attrs = $this->$attr;
+        if(isset( $attrs[$value])){
+          unset($attrs[$value]);
+          $this->$attr = $attrs;  
+        }
+        break; // Do it once, image inputs will be posted twice
+      }
+    }
 
 
+    /*********************
+       ADD values 
+     *********************/ 
+    foreach(array("sudoUser","sudoHost","sudoRunas") as $attr){
+      if(isset($_POST["add_".$attr]) && isset($_POST['new_'.$attr]) && !empty($_POST['new_'.$attr])){
+        if(preg_match("/^[a-z\.0-9]*$/i",$_POST['new_'.$attr])){
+          $attrs = $this->$attr;
+          $attrs[] =  trim($_POST['new_'.$attr]); 
+          $this->$attr = $attrs;
+        }else{
+          msg_dialog::display(_("Invalid"),msgPool::invalid($attr,$_POST['new_'.$attr],"/[a-z0-9]/"));
+        }
+      }
+    }
 
-
-
-
+    foreach(array("sudoCommand") as $attr){
+      if(isset($_POST["add_".$attr]) && isset($_POST['new_'.$attr])){
+        $attrs = $this->$attr;
+        $attrs[] =  trim($_POST['new_'.$attr]); 
+        $this->$attr = $attrs;
+      }
+    }
 
 
     $smarty = get_smarty();
-
     foreach($this->attributes as $attr){
       $smarty->assign($attr,$this->$attr);
     }
@@ -86,12 +139,11 @@ class sudo extends plugin
     $divlist_sudoCommand->Setheight("90");
 
     $neg_img= "<img src='images/negate.png' alt='!' class='center'>"; 
-    $option = "<input type='image' src='images/negate.png'     name='del_%ATTR%_%KEY%' class='center'>"; 
-    $option.= "<input type='image' src='images/edittrash.png'  name='neg_%ATTR%_%KEY%' class='center'>"; 
+    $option = "<input type='image' src='images/negate.png'     name='neg_%ATTR%_%KEY%' class='center'>"; 
+    $option.= "<input type='image' src='images/edittrash.png'  name='del_%ATTR%_%KEY%' class='center'>"; 
     foreach(array("sudoUser","sudoCommand","sudoOption","sudoHost","sudoRunas") as $attr){
       foreach($this->$attr as $key => $entry){
         $entry = preg_replace("/^!/",$neg_img,$entry);
-        
         $list_name = "divlist_".$attr;
         $$list_name->AddEntry(
           array(
@@ -128,6 +180,17 @@ class sudo extends plugin
   function save()
   {
     plugin::save(); 
+    $this->cleanup();
+
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->create_missing_trees(get_ou("sudoou"));
+    $ldap->cd($this->dn);
+    if($this->is_new){
+      $ldap->add($this->attrs);;
+    }else{
+      $ldap->modify($this->attrs);;
+    }
   }
 
   function check()
@@ -136,16 +199,6 @@ class sudo extends plugin
     return ($message);
   }
 
-  function getCopyDialog()
-  {
-    echo "NIY";
-  }
-
-  function saveCopyDialog()
-  {
-    echo "NIY";
-  }
-  
   /* Return plugin informations for acl handling  */ 
   static function plInfo()
   {
