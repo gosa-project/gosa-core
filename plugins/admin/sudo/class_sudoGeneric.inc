@@ -51,6 +51,45 @@ class sudo extends plugin
         $this->$attr = $tmp;
       }
     }
+
+    /*******
+      Prepare Flags
+     *******/
+
+    $options = array();
+    // BOOLEAN
+    $options[]=array("NAME"=>"long_otp_prompt"      , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"ignore_dot"           , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"mail_always"          , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"mail_badpass"         , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"mail_no_user"         , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"mail_no_host"         , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"mail_no_perms"        , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"tty_tickets"          , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"authenticate"         , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"root_sudo"            , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"log_host"             , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"log_year"             , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"shell_noargs"         , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"set_home"             , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"always_set_home"      , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"path_info"            , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"preserve_groups"      , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"fqdn"                 , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"insults"              , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"requiretty"           , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"env_editor"           , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"rootpw"               , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"runaspw"              , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"targetpw"             , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"set_logname"          , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"stay_setuid"          , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"env_reset"            , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"use_loginclass"       , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"noexec"               , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+    $options[]=array("NAME"=>"ignore_local_sudoers" , "TYPE"=>"BOOLEAN", "VALUE" => "1");
+
+    //STRINGS 
   }
 
   function execute()

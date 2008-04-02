@@ -405,15 +405,19 @@ class sudoManagement extends plugin
     $this->list             = array();
     $base                   = $this->base;
 
-    $Regex                  = $this->DivListSudo->Regex;
-    $UserRegex              = $this->DivListSudo->UserRegex;
+    $Regex                  = trim($this->DivListSudo->Regex);
+    $UserRegex              = trim($this->DivListSudo->UserRegex);
     $SubSearch              = $this->DivListSudo->SubSearch;
 
     /********************
       Create filter depending on selected checkboxes 
      ********************/
     $values = array("cn","description","sudoUser","sudoCommand","sudoOption");
-    $ff     = "(&(|(cn=".$Regex.")(description=".$Regex."))(sudoUser=".$UserRegex.")(objectClass=sudoRole))";
+    if($UserRegex == "*"){
+      $ff     = "(&(|(cn=".$Regex.")(description=".$Regex."))(objectClass=sudoRole))";
+    }else{
+      $ff     = "(&(|(cn=".$Regex.")(description=".$Regex."))(sudoUser=".$UserRegex.")(objectClass=sudoRole))";
+    }
     $res = get_list($ff, "sudo",$base,$values, GL_SIZELIMIT);
     $tmp = array();
     foreach($res as $attrs){
