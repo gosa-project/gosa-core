@@ -35,7 +35,8 @@ cat << EOF > doc/guide.xml
 		specified for this class below.
 	-->
 	
-	<!-- name="class name" value="displayed text" path="path to helpfiles" 
+	<!--
+		<ENTRY NAME="class name" VALUE="displayed text" PATH="path to helpfiles" FILE="path to htmlfile" />
 		 Leave blank to display message "There is no helpfile specified for this class."	
 	-->
 <ENTRIES>
