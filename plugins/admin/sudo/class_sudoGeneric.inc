@@ -96,8 +96,7 @@ class sudo extends plugin
   {
     /* Call parent execute */
     plugin::execute();
-  
-    
+ 
     /*********************
        NEGATE values 
      *********************/ 

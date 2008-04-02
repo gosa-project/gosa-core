@@ -211,6 +211,14 @@ class sudo_options extends plugin
   function save_object()
   {
     plugin::save_object();
+
+    foreach($this->sudoOption as $name => $opt){
+      if(in_array($this->options[$name]['TYPE'],array("STRING","INTEGER"))){
+        if(isset($_POST['option_value__'.$name])){
+          $this->sudoOption[$name]['VALUE'] = get_post('option_value__'.$name);
+        }
+      }
+    }
   }
 
   /* Save to LDAP */

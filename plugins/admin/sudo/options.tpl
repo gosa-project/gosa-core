@@ -24,18 +24,18 @@
   {elseif $options[$item.NAME].TYPE == "BOOLEAN"}
    <input type='checkbox' value="1" name='option_value__{$key}'>
   {elseif $options[$item.NAME].TYPE == "BOOL_INTEGER"}
-   <select name="">
+   <select name="option_selection__{$key}">
     <option {if $item.VALUE == "FALSE"} selected {/if}value="FALSE">FALSE</option>
     <option {if $item.VALUE == "TRUE"} selected {/if}value="TRUE">TRUE</option>
     <option {if $item.VALUE != "TRUE" && $item.VALUE != "FALSE"} selected {/if}value="STRING">STRING</option>
-    <input type='text' value="{$item.VALUE.0}" style='width:280px;'>
+    <input type='text' value="{$item.VALUE.0}" style='width:280px;' name='option_value__{$key}'>
    </select> 
   {elseif $options[$item.NAME].TYPE == "STRING_BOOL"}
-   <select name="">
+   <select name="option_selection__{$key}">
     <option {if $item.VALUE == "FALSE"} selected {/if}value="FALSE">FALSE</option>
     <option {if $item.VALUE == "TRUE"} selected {/if}value="TRUE">TRUE</option>
     <option {if $item.VALUE != "TRUE" && $item.VALUE != "FALSE"} selected {/if}value="STRING">STRING</option>
-    <input type='text' value="{$item.VALUE.0}" style='width:280px;'>
+    <input type='text' value="{$item.VALUE.0}" style='width:280px;' name='option_value__{$key}'>
    </select> 
   {else}
    {$options[$item.NAME].TYPE} 
