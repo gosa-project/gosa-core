@@ -1166,10 +1166,17 @@ function get_ou($name)
  
   if ($ou != ""){
     if (!preg_match('/^[^=]+=[^=]+/', $ou)){
-      return @LDAP::convert("ou=$ou,");
+      $ou = @LDAP::convert("ou=$ou");
     } else {
-      return @LDAP::convert("$ou,");
+      $ou = @LDAP::convert("$ou");
     }
+
+    if(preg_match("/".normalizePreg($config->current['BASE'])."$/",$ou)){
+      return($ou);
+    }else{
+      return("$ou,");
+    }
+  
   } else {
     return "";
   }
