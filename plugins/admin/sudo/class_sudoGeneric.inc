@@ -55,12 +55,58 @@ class sudo extends plugin
   {
     /* Call parent execute */
     plugin::execute();
+  
+    
+  
+  
+  
+
+
+
+
+
+
+
+
     $smarty = get_smarty();
 
     foreach($this->attributes as $attr){
-      $smart->assign($attr,$this->$attr);
+      $smarty->assign($attr,$this->$attr);
     }
 
+    $divlist_sudoUser = new divSelectBox("divlist_sudoUser");
+    $divlist_sudoUser->SetHeight("90");
+    $divlist_sudoHost = new divSelectBox("divlist_sudoHost");
+    $divlist_sudoHost->Setheight("90");
+    $divlist_sudoRunas = new divSelectBox("divlist_sudoRunas");
+    $divlist_sudoRunas->Setheight("90");
+    $divlist_sudoOption = new divSelectBox("divlist_sudoOption");
+    $divlist_sudoOption->Setheight("90");
+    $divlist_sudoCommand = new divSelectBox("divlist_sudoCommand");
+    $divlist_sudoCommand->Setheight("90");
+
+    $neg_img= "<img src='images/negate.png' alt='!' class='center'>"; 
+    $option = "<input type='image' src='images/negate.png'     name='del_%ATTR%_%KEY%' class='center'>"; 
+    $option.= "<input type='image' src='images/edittrash.png'  name='neg_%ATTR%_%KEY%' class='center'>"; 
+    foreach(array("sudoUser","sudoCommand","sudoOption","sudoHost","sudoRunas") as $attr){
+      foreach($this->$attr as $key => $entry){
+        $entry = preg_replace("/^!/",$neg_img,$entry);
+        
+        $list_name = "divlist_".$attr;
+        $$list_name->AddEntry(
+          array(
+            array("string" => $entry),
+            array("string" => preg_replace(array("/%KEY%/","/%ATTR%/"),array($key,$attr),$option),
+              "attach" => "style='width:40px; border-right: 0px;'")));
+      }
+    }
+
+    $smarty->assign("divlist_sudoUser",$divlist_sudoUser->DrawList());
+    $smarty->assign("divlist_sudoHost",$divlist_sudoHost->DrawList());
+    $smarty->assign("divlist_sudoRunas",$divlist_sudoRunas->DrawList());
+    $smarty->assign("divlist_sudoOption",$divlist_sudoOption->DrawList());
+    $smarty->assign("divlist_sudoCommand",$divlist_sudoCommand->DrawList());
+    
     return($smarty->fetch(get_template_path('generic.tpl', TRUE)));
   }
 
