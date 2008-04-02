@@ -58,9 +58,6 @@ class divListSudo extends MultiSelectWindow
 
     /* Dynamic action col, depending on snapshot icons */
     $action_col_size = 80;
-    if($this->parent->snapshotEnabled()){
-      $action_col_size += 38;
-    }
 
     /* Toggle all selected / deselected */
     $chk = "<input type='checkbox' id='select_all' name='select_all'
@@ -70,7 +67,6 @@ class divListSudo extends MultiSelectWindow
     $this->AddHeader(array("string"=> $chk,          "attach"=>"style='width:20px;'"));
     $this->AddHeader(array("string"=>"&nbsp;","attach"=>"style='width:20px;'"));
     $this->AddHeader(array("string"=>_("Name")."&nbsp;/&nbsp;"._("Department")));
-    $this->AddHeader(array("string"=>_("Properties"),"attach"=>"style='width:136px;'"));
     $this->AddHeader(array("string"=>_("Actions"),"attach"=>"style='width:".$action_col_size."px;border-right:0px;'"));
 
     /* Add SubSearch checkbox */    
@@ -88,7 +84,6 @@ class divListSudo extends MultiSelectWindow
        which are shown in the listbox on top of the listbox
      */
     $base  = $this->parent->base;
-   
     $acl   = $this->ui->get_category_permissions($base,"sudo"); 
  
     /* Add default header */
@@ -99,45 +94,29 @@ class divListSudo extends MultiSelectWindow
     $s .= "..|<img src='images/list_new.png' alt='' border='0' class='center'>".
       "&nbsp;"._("Create")."|\n";
 
-
     /* Append create options */
     if(preg_match("/c/",$acl)) {
       $s.= "...|<input class='center' type='image' src='images/list_new_sudo.png' alt=''>&nbsp;"._("Role")."|new_role|\n";
     }
 
-#   /* Add multiple copy & cut icons */
-#   if(is_object($this->parent->CopyPasteHandler) && preg_match("/(c.*w|w.*c)/",$acl_all)){
-#     $s.= "..|---|\n";
-#     $s.= "..|<img src='images/editcopy.png' alt='' border='0' class='center'>".
-#       "&nbsp;"._("Copy")."|"."multiple_copy_systems|\n";
-#     $s.= "..|<img src='images/editcut.png' alt='' border='0' class='center'>".
-#       "&nbsp;"._("Cut")."|"."multiple_cut_systems|\n";
-#
-#     if($this->parent->CopyPasteHandler->entries_queued()){
-#       $img = "<img border='0' class='center' src='images/editpaste.png' alt=''>";
-#       $s.="..|".$img."&nbsp;"._("Paste")."|editPaste|\n";
-#     }else{
-#       $img = "<img border='0' class='center' src='images/cant_editpaste.png' alt=''>";
-#       $s.="..|".$img."&nbsp;"._("Paste")."\n";
-#     }
-#   }
-#
-#   /* Add snapshot icons */
-#   if(preg_match("/(c.*w|w.*c)/",$acl_all)){
-#     $s .= "..|---|\n";
-#     $s .= $this->get_snapshot_header(TRUE);
-#   }
+    /* Append multiple remove */
+    if(preg_match("/d/",$acl)){
+      $s.= "..|---|\n";
+      $s.= "..|<img src='images/edittrash.png' alt='' border='0' class='center'>".
+        "&nbsp;"._("Remove")."|"."remove_multiple|\n";
+    }
 
     $this->SetDropDownHeaderMenu($s);
-
     $this->SetListHeader($listhead);
   }
+
 
   function execute()
   {
     $this->ClearElementsList();
     $this->GenHeader();
   }
+
 
   function setEntries($list)
   {
@@ -173,34 +152,24 @@ class divListSudo extends MultiSelectWindow
       }
 
       $display = $val['cn'][0].$desc;
-
-      $field0 = array("string" => "<input type='checkbox' id='item_selected_".$key."' name='item_selected_".$key."'>" ,
+      $field1 = array("string" => "<input type='checkbox' id='item_selected_".$key."' name='item_selected_".$key."'>" ,
           "attach" => "style='width:20px;'");
-      $field1 = array("string" => sprintf($userimg,$val['dn']), "attach" => "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' ".$title);
-      $field3 = array("string" => preg_replace("/%KEY%/", $key, $posix."&nbsp;".$enviro."&nbsp;".$mail."&nbsp;".$samba."&nbsp;".$appl."&nbsp;".$phone),     "attach" => "style='width:136px;'");
-      $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:".$action_col_size."px;border-right:0px;text-align:right;'");
+      $field2 = array("string" => sprintf($userimg,$val['dn']), 
+          "attach" => "style='text-align:center;width:20px;'");
+      $field3 = array("string" => sprintf($editlink,$key,$display), 
+          "attach" => "style='' ".$title);
+      $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions), 
+          "attach" => "style='width:".$action_col_size."px;border-right:0px;text-align:right;'");
 
-      $this->AddElement(array($field0,$field1,$field2,$field3,$field4));
+      $this->AddElement(array($field1,$field2,$field3,$field4));
     }
 
     /* Create summary string for list footer */
-    $num_deps=0;
-    if(!$this->SubSearch){
-      $num_deps = count($this->Added_Departments);
-    }
-    $num_grps = count($groups);
-
-    $num_grp_str = _("Number of listed groups");
-    $num_dep_str = _("Number of listed departments");
-
-    $str = "<img class='center' src='images/select_groups.png'
-              title='".$num_grp_str."' alt='".$num_grp_str."'>&nbsp;".$num_grps."&nbsp;&nbsp;&nbsp;&nbsp;";
-    $str.= "<img class='center' src='images/folder.png'
-              title='".$num_dep_str."' alt='".$num_dep_str."'>&nbsp;".$num_deps."&nbsp;&nbsp;&nbsp;&nbsp;";
-
+    $num_grps     = count($groups);
+    $num_grp_str  = _("Number of listed roles");
+    $str = "<img class='center' src='images/select_sudo.png'
+              title='".$num_grp_str."' alt='".$num_grp_str."'>&nbsp;".$num_grps."&nbsp;";
     $this->set_List_Bottom_Info($str);
-
   }
 
   function Save()
