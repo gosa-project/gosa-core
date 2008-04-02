@@ -26,9 +26,29 @@ class sudo extends plugin
   var $cn= "";
   var $description= "";
 
+  var $sudoUser   = array();
+  var $sudoCommand= array();
+  var $sudoOption = array();
+  var $sudoHost   = array();
+  var $sudoRunas  = array();
+
+  var $objectclasses = array("top","sudoRole");
+  var $attributes    = array("cn","description","sudoUser","sudoCommand","sudoOption","sudoHost","sudoRunas");
+
   function sudo(&$config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
+
+    foreach(array("sudoUser","sudoCommand","sudoOption","sudoHost","sudoRunas") as $attr){
+      $this->$attr = array();
+      if(isset($this->attrs[$attr])){
+        $tmp = array();
+        for($i = 0 ; $i < $this->attrs[$attr]['count']; $i++){
+          $tmp[] = $this->attrs[$attr][$i];
+        }
+        $this->$attr = $tmp;
+      }
+    }
   }
 
   function execute()
@@ -36,6 +56,11 @@ class sudo extends plugin
     /* Call parent execute */
     plugin::execute();
     $smarty = get_smarty();
+
+    foreach($this->attributes as $attr){
+      $smart->assign($attr,$this->$attr);
+    }
+
     return($smarty->fetch(get_template_path('generic.tpl', TRUE)));
   }
 
