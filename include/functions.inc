@@ -1153,8 +1153,8 @@ function get_ou($name)
                 "mimetypeou"    => "ou=mime,");
 
   /* Preset ou... */
-  if (isset($config->current[$name])){
-    $ou= $config->current[$name];
+  if (isset($config->current[strtoupper($name)])){
+    $ou= $config->current[strtoupper($name)];
   } elseif (isset($map[$name])) {
     $ou = $map[$name];
     return($ou);
