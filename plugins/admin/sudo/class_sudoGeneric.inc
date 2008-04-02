@@ -166,6 +166,10 @@ class sudo extends plugin
   {
     plugin::remove_from_parent();
 
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd(get_ou("sudoou")) ;
+    $ldap->rmdir($this->dn);
+
     /* Send signal to the world that we've done */
     $this->handle_post_events("remove");
   }
@@ -188,8 +192,14 @@ class sudo extends plugin
     $ldap->cd($this->dn);
     if($this->is_new){
       $ldap->add($this->attrs);;
+
+      /* Send signal to the world that we've done */
+      $this->handle_post_events("create");
     }else{
       $ldap->modify($this->attrs);;
+
+      /* Send signal to the world that we've done */
+      $this->handle_post_events("modify");
     }
   }
 

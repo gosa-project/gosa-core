@@ -12,11 +12,11 @@
 <p class="plugbottom">
 
   {if $multiple}
-  <input type=submit name="delete_multiple_sodus_confirm" value="{msgPool type=delButton}">
+  <input type=submit name="delete_multiple_sudos_confirmed" value="{msgPool type=delButton}">
   &nbsp;
-  <input type=submit name="delete_multiple_sodu_cancel" value="{msgPool type=cancelButton}">
+  <input type=submit name="delete_multiple_sudo_cancel" value="{msgPool type=cancelButton}">
   {else}
-  <input type=submit name="delete_sodu_confirm" value="{msgPool type=delButton}">
+  <input type=submit name="delete_sudo_confirmed" value="{msgPool type=delButton}">
   &nbsp;
   <input type=submit name="delete_cancel" value="{msgPool type=cancelButton}">
   {/if}
