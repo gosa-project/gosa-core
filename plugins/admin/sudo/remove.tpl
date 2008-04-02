@@ -3,7 +3,6 @@
 </div>
 <p>
   {$info}
-  {t}This may be a primary user group. Please double check if you really want to do this since there is no way for GOsa to get your data back.{/t}
 </p>
 
 <p>
@@ -13,11 +12,11 @@
 <p class="plugbottom">
 
   {if $multiple}
-  <input type=submit name="delete_multiple_groups_confirm" value="{msgPool type=delButton}">
+  <input type=submit name="delete_multiple_sodus_confirm" value="{msgPool type=delButton}">
   &nbsp;
-  <input type=submit name="delete_multiple_group_cancel" value="{msgPool type=cancelButton}">
+  <input type=submit name="delete_multiple_sodu_cancel" value="{msgPool type=cancelButton}">
   {else}
-  <input type=submit name="delete_group_confirm" value="{msgPool type=delButton}">
+  <input type=submit name="delete_sodu_confirm" value="{msgPool type=delButton}">
   &nbsp;
   <input type=submit name="delete_cancel" value="{msgPool type=cancelButton}">
   {/if}

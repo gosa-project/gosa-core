@@ -29,6 +29,8 @@ class sudoManagement extends plugin
   var $DivListSudo    = NULL;
   var $base           = "";
 
+  var $sudotabs       = NULL;
+
   function sudoManagement (&$config, &$ui)
   {
     /* Save configuration for internal use */
@@ -36,7 +38,10 @@ class sudoManagement extends plugin
     $this->ui     = &$ui;
     $this->base = get_ou("sudoou");
 
-    echo "base checks, maybe it is not set, or it do not exists";;
+    if(empty($this->base)){
+        //FIXME  Optimize this message, maybe with msgPool
+        msg_dialog::display(_("Configuration"),sprintf(_("The sudo object path is not configured.")));
+    }
 
     /* Create dialog object */
     $this->DivListSudo = new divListSudo($this->config,$this);
@@ -153,7 +158,7 @@ class sudoManagement extends plugin
      ********************/
 
     /* User wants to edit data? */
-    if (($s_action=="edit") &&  !is_object($this->sudotabs)){
+    if (($s_action=="edit_role") &&  !is_object($this->sudotabs)){
 
       /* Get 'dn' from posted 'uid', must be unique */
       $this->dn= $this->list[trim($s_entry)]['dn'];
@@ -256,7 +261,7 @@ class sudoManagement extends plugin
      ********************/
 
     /* Remove sudo was requested */
-    if ($s_action=="del"){
+    if ($s_action=="del_role"){
 
       /* Get 'dn' from posted 'uid' */
       $this->dn= $this->list[trim($s_entry)]['dn'];
@@ -409,7 +414,7 @@ class sudoManagement extends plugin
      ********************/
     $values = array("cn","description","sudoUser","sudoCommand","sudoOption");
     $ff     = "(&(|(cn=".$Regex.")(description=".$Regex."))(sudoUser=".$UserRegex.")(objectClass=sudoRole))";
-    $res = get_list($ff, "sudo",$base,$values, GL_SUBSEARCH);
+    $res = get_list($ff, "sudo",$base,$values, GL_SIZELIMIT);
     $tmp = array();
     foreach($res as $attrs){
       $tmp[$attrs['cn'][0]] = $attrs;
