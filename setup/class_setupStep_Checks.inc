@@ -126,7 +126,7 @@ class Step_Checks extends setup_step
 
     /* Checking for Cups module */
     $N = msgPool::checkingFor(_("CUPS"));
-    $D = _("GOsa requires this modukle to show printers that are not defined within the LDAP.");
+    $D = _("GOsa requires this module to show printers that are not defined within the LDAP.");
     $S = msgPool::installPhpModule("CUPS");
     $R = is_callable("cups_get_dest_list");
     $M = FALSE;
