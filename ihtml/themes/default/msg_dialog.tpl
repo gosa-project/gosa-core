@@ -65,7 +65,7 @@
 			<table style='width:100%' summary='' border=0>
 				<tr>
 					<td style='width:100%;padding:7px; padding-bottom:14px'>
-						<b>{$s_Message}</b>
+						{$s_Message}
 						<br>
 					</td>
 				</tr>
@@ -111,7 +111,7 @@
 			<table style='width:100%' summary='' border=0>
 				<tr>
 					<td style='width:100%; padding:7px; padding-bottom:14px;'>
-						<b>{$s_Message}</b>
+						{$s_Message}
 						<br>
 					</td>
 					{if $s_Trace != "" && $i_TraceCnt != 0}
