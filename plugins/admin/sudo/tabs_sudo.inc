@@ -35,13 +35,11 @@ class sudotabs extends tabs
 
   function save($ignore_account= FALSE)
   {
-    echo "nope";
-    $baseobject= $this->by_object['group'];
+    $baseobject= $this->by_object['sudo'];
 
     /* Check for new 'dn', in order to propagate the
        'dn' to all plugins */
-    $new_dn= 'cn='.$baseobject->cn.','.get_groups_ou().$baseobject->base;
-
+    $new_dn= 'cn='.$baseobject->cn.','.get_ou("sudoou");
 
     /* Move group? */
     if ($this->dn != $new_dn){
@@ -50,15 +48,13 @@ class sudotabs extends tabs
       if ($this->dn != "new"){
         $baseobject->update_acls($this->dn,$new_dn);
         $baseobject->move($this->dn, $new_dn);
-        $this->by_object['group']= $baseobject;
+        $this->by_object['sudo']= $baseobject;
       }
 
       /* Happen to use the new one */
       $this->dn= $new_dn;
     }
-
     $ret= tabs::save();
-
     return $ret;
   }
 }

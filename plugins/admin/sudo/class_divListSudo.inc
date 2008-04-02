@@ -165,10 +165,10 @@ class divListSudo extends MultiSelectWindow
     }
 
     /* Create summary string for list footer */
-    $num_grps     = count($groups);
-    $num_grp_str  = _("Number of listed roles");
+    $num     = count($list);
+    $num_str  = _("Number of listed roles");
     $str = "<img class='center' src='images/select_sudo.png'
-              title='".$num_grp_str."' alt='".$num_grp_str."'>&nbsp;".$num_grps."&nbsp;";
+              title='".$num_str."' alt='".$num_str."'>&nbsp;".$num."&nbsp;";
     $this->set_List_Bottom_Info($str);
   }
 

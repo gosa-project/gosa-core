@@ -26,11 +26,6 @@ class sudo extends plugin
   var $cn= "";
   var $description= "";
 
-  var $CopyPasteVars  = array("force_gid","fon_group","smbgroup","groupType","sambaSID","sambaDomainName","SID","nagios_group","sambaGroupType");
-
-  var $multiple_support = TRUE;
-
-
   function sudo(&$config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);

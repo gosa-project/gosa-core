@@ -38,12 +38,6 @@ class sudoManagement extends plugin
 
     echo "base checks, maybe it is not set, or it do not exists";;
 
-    /* Copy & Paste enabled ?*/
-    if((isset($this->config->data['MAIN']['ENABLECOPYPASTE']))&&
-      (preg_match("/true/i",$this->config->data['MAIN']['ENABLECOPYPASTE']))){
-      $this->CopyPasteHandler = new CopyPasteHandler($this->config);
-    }
-    
     /* Create dialog object */
     $this->DivListSudo = new divListSudo($this->config,$this);
   }
@@ -54,77 +48,96 @@ class sudoManagement extends plugin
   	/* Call parent execute */
   	plugin::execute();
 
+    /********************
+      Handle Posts
+     ********************/
+
     /* Store these posts if the current object is locked (used by somebody else)*/
-    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/","/^item_selected/","/^remove_multiple_sudos/","/^multiple_edit/","/menu_action/"));
+    session::set('LOCK_VARS_TO_USE',array(
+          "/^act$/","/^id$/","/^sudo_edit_/",
+          "/^sudo_del_/","/^item_selected/","/menu_action/"));
 
     /* Save data */
     $s_action   = "";
     $s_entry    = "";
 
-    $s_entry  = preg_replace("/_.$/","",$s_entry); 
-
+    foreach($_POST as $name => $value){
+      if(preg_match("/^sudo_edit_/",$name)){
+        $s_action = "edit_role";
+        $s_entry  = preg_replace("/^sudo_edit_([0-9]*).*$/","\\1",$name);
+      }
+      if(preg_match("/^sudo_del_/",$name)){
+        $s_action = "del_role";
+        $s_entry  = preg_replace("/^sudo_del_([0-9]*).*$/","\\1",$name);
+      }
+    }
+  
+    if(isset($_GET['act']) && isset($_GET['id']) && $_GET['act'] == "edit_entry"){
+      $id = trim($_GET['id']);
+      if(isset($this->list[$id])){
+        $s_action = "edit_role";
+        $s_entry  = $id;
+      } 
+    }
+ 
     /* handle C&P from layers menu */
-    if(isset($_POST['menu_action']) && preg_match("/^multiple_copy_systems/",$_POST['menu_action'])){
-      $s_action = "copy_multiple";
+    if(isset($_POST['menu_action']) && in_array($_POST['menu_action'],array("new_role","remove_multiple"))){
+      $s_action = $_POST['menu_action'];
     }
 
     $smarty= get_smarty();
 
     /********************
-      Create notification event
+      Create a new sudo  ...
      ********************/
 
-    /********************
-      Create a new group  ...
-     ********************/
-
-    /* New group? */
-    if ($s_action=="new"){
+    /* New sudo? */
+    if ($s_action=="new_role"){
 
       /* Check create permissions */
-      $acl = $this->ui->get_permissions($this->DivListSudo->selectedBase,"sudos/group");
+      $acl = $this->ui->get_permissions($this->DivListSudo->selectedBase,"sudo/sudo");
       if(preg_match("/c/",$acl)){
 
         /* By default we set 'dn' to 'new', all relevant plugins will
            react on this. */
         $this->dn= "new";
 
-        /* Create new grouptab object */
-        $this->grouptab= new grouptabs($this->config, $this->config->data['TABS']['GROUPTABS'], $this->dn);
+        /* Create new sudotabs object */
+        $this->sudotabs= new sudotabs($this->config, $this->config->data['TABS']['SUDOTABS'], $this->dn);
 
-        /* Set up the group ACL's for this 'dn' */
-        $this->grouptab->set_acl_base($this->DivListSudo->selectedBase);
+        /* Set up the sudo ACL's for this 'dn' */
+        $this->sudotabs->set_acl_base($this->base);
       }
     }
 
 
     /********************
-      Save Group Tab/Object Changes
+      Save Sudo Tab/Object Changes
      ********************/
 
-    /* Finish group edit is triggered by the tabulator dialog, so
+    /* Finish sudo edit is triggered by the tabulator dialog, so
        the user wants to save edited data. Check and save at this
        point. */
-    if ((isset($_POST['edit_finish']) || isset($_POST['edit_apply'])) && (isset($this->grouptab->config)) ){
+    if ((isset($_POST['edit_finish']) || isset($_POST['edit_apply'])) && is_object($this->sudotabs)){
 
       /* Check tabs, will feed message array 
          Save, or display error message? */
-      $message= $this->grouptab->check();
+      $message= $this->sudotabs->check();
       if (count($message) == 0){
 
         /* Save user data to ldap */
-        $this->grouptab->save();
+        $this->sudotabs->save();
 
         if (!isset($_POST['edit_apply'])){
-          /* Group has been saved successfully, remove lock from LDAP. */
+          /* Sudo has been saved successfully, remove lock from LDAP. */
           if ($this->dn != "new"){
             del_lock ($this->dn);
           }
 
           /* There's no page reload so we have to read new sudos at this point. */
           //$this->reload ();
-          unset ($this->grouptab);
-          $this->grouptab= NULL;
+          unset ($this->sudotabs);
+          $this->sudotabs= NULL;
           session::un_set('objectinfo');
         }
       } else {
@@ -136,35 +149,11 @@ class sudoManagement extends plugin
 
 
     /********************
-      Edit multiple entries
+      Edit existing role 
      ********************/
 
     /* User wants to edit data? */
-    if ($s_action == "multiple_edit" && !isset($this->grouptab->config)){
-
-      $this->dn = array();
-      foreach($this->list_get_selected_items() as $id){
-        $this->dn[] = $this->list[$id]['dn'];;
-      }
-      $tmp = new multi_plug($this->config,"grouptabs",$this->config->data['TABS']['GROUPTABS'],
-            $this->dn,$this->DivListSudo->selectedBase,"groups");
-      if ($tmp->entries_locked()){
-        return($tmp->display_lock_message());
-      }
-      $tmp->lock_entries($this->ui->dn);
-      if($tmp->multiple_available()){
-        $this->grouptab = $tmp;
-        session::set('objectinfo',$this->grouptab->get_object_info());
-      }
-    }
-
-
-    /********************
-      Edit existing group 
-     ********************/
-
-    /* User wants to edit data? */
-    if (($s_action=="edit") && (!isset($this->grouptab-> config))){
+    if (($s_action=="edit") &&  !is_object($this->sudotabs)){
 
       /* Get 'dn' from posted 'uid', must be unique */
       $this->dn= $this->list[trim($s_entry)]['dn'];
@@ -176,9 +165,9 @@ class sudoManagement extends plugin
       }
       add_lock ($this->dn, $this->ui->dn);
 
-      /* Register grouptab to trigger edit dialog */
-      $this->grouptab= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $this->dn);
-      $this->grouptab->set_acl_base($this->dn);
+      /* Register sudotabs to trigger edit dialog */
+      $this->sudotabs= new sudotabs($this->config,$this->config->data['TABS']['SUDOTABS'], $this->dn);
+      $this->sudotabs->set_acl_base($this->base);
       session::set('objectinfo',$this->dn);
     }
 
@@ -191,7 +180,6 @@ class sudoManagement extends plugin
       $ids = $this->list_get_selected_items();
 
       if(count($ids)){
-
         foreach($ids as $id){
           $dn = $this->list[$id]['dn'];
           if (($user= get_lock($dn)) != ""){
@@ -207,7 +195,7 @@ class sudoManagement extends plugin
         }
 
         /* Lock the current entry, so nobody will edit it during deletion */
-        $smarty->assign("info", msgPool::deleteInfo($dns_names,_("group")));
+        $smarty->assign("info", msgPool::deleteInfo($dns_names,_("sudo role")));
         $smarty->assign("multiple", true);
         return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
       }
@@ -218,30 +206,30 @@ class sudoManagement extends plugin
       Delete MULTIPLE entries confirmed
      ********************/
 
-      /* Confirmation for deletion has been passed. Groups should be deleted. */
-      if (isset($_POST['delete_multiple_groups_confirm'])){
+      /* Confirmation for deletion has been passed. Sudo should be deleted. */
+      if (isset($_POST['delete_multiple_sudos_confirmed'])){
 
         /* Remove user by user and check acls before removeing them */
         foreach($this->dns as $key => $dn){
 
           /* Load permissions for selected 'dn' and check if
              we're allowed to remove this 'dn' */
-          $acl = $this->ui->get_permissions($dn,"groups/group");
+          $acl = $this->ui->get_permissions($dn,"sudo/sudo");
           if(preg_match("/d/",$acl)){
 
             /* Delete request is permitted, perform LDAP action */
-            $this->grouptab= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $dn);
-            $this->grouptab->set_acl_base($dn);
-            $this->grouptab->delete ();
-            unset ($this->grouptab);
-            $this->grouptab= NULL;
+            $this->sudotabs= new sudotabs($this->config,$this->config->data['TABS']['SUDOTABS'], $dn);
+            $this->sudotabs->set_acl_base($dn);
+            $this->sudotabs->delete ();
+            unset ($this->sudotabs);
+            $this->sudotabs= NULL;
 
           } else {
 
             /* Normally this shouldn't be reached, send some extra
                logs to notify the administrator */
             msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
-            new log("security","groups/".get_class($this),$dn,array(),"Tried to trick deletion.");
+            new log("security","sudo/".get_class($this),$dn,array(),"Tried to trick deletion.");
           }
           /* Remove lock file after successfull deletion */
           del_lock ($dn);
@@ -264,10 +252,10 @@ class sudoManagement extends plugin
 
 
     /********************
-      Delete group 
+      Delete sudo role 
      ********************/
 
-    /* Remove group was requested */
+    /* Remove sudo was requested */
     if ($s_action=="del"){
 
       /* Get 'dn' from posted 'uid' */
@@ -275,7 +263,7 @@ class sudoManagement extends plugin
 
       /* Load permissions for selected 'dn' and check if
          we're allowed to remove this 'dn' */
-      $acl = $this->ui->get_permissions($this->dn,"groups/group");
+      $acl = $this->ui->get_permissions($this->dn,"sudo/sudo");
       if(preg_match("/d/",$acl)){
 
         /* Check locking, save current plugin in 'back_plugin', so
@@ -286,7 +274,7 @@ class sudoManagement extends plugin
 
         /* Lock the current entry, so nobody will edit it during deletion */
         add_lock ($this->dn, $this->ui->dn);
-        $smarty->assign("info", msgPool::deleteInfo(@LDAP::fix($this->dn),_("group")));
+        $smarty->assign("info", msgPool::deleteInfo(@LDAP::fix($this->dn),_("sudo role")));
         $smarty->assign("multiple", false);
         return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
 
@@ -299,25 +287,25 @@ class sudoManagement extends plugin
 
 
     /********************
-      Delete group confirmed  
+      Delete sudo confirmed  
      ********************/
 
-    /* Confirmation for deletion has been passed. Group should be deleted. */
-    if (isset($_POST['delete_group_confirm'])){
+    /* Confirmation for deletion has been passed. Sudo should be deleted. */
+    if (isset($_POST['delete_sudo_confirmed'])){
 
       /* Some nice guy may send this as POST, so we've to check
          for the permissions again. */
-      $acl = $this->ui->get_permissions($this->dn,"groups/group");
+      $acl = $this->ui->get_permissions($this->dn,"sudo/sudo");
       if(preg_match("/d/",$acl)){
 
         /* Delete request is permitted, perform LDAP action */
-        $this->grouptab= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $this->dn);
-        $this->grouptab->set_acl_base($this->dn);
-        $this->grouptab->delete ();
-        unset ($this->grouptab);
-        $this->grouptab= NULL;
+        $this->sudotabs= new sudotabs($this->config,$this->config->data['TABS']['SUDOTABS'], $this->dn);
+        $this->sudotabs->set_acl_base($this->dn);
+        $this->sudotabs->delete ();
+        unset ($this->sudotabs);
+        $this->sudotabs= NULL;
 
-        /* Group list has changed, reload it. */
+        /* Sudo list has changed, reload it. */
         //$this->reload ();
 
       } else {
@@ -325,7 +313,7 @@ class sudoManagement extends plugin
         /* Normally this shouldn't be reached, send some extra
            logs to notify the administrator */
         msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
-        new log("security","groups/".get_class($this),$dn,array(),"Tried to trick deletion.");
+        new log("security","sudo/".get_class($this),$dn,array(),"Tried to trick deletion.");
       }
 
       /* Remove lock file after successfull deletion */
@@ -335,10 +323,10 @@ class sudoManagement extends plugin
 
 
     /********************
-      Delete group canceled  
+      Delete sudo canceled  
      ********************/
 
-    /* Delete group canceled? */
+    /* Delete sudo canceled? */
     if (isset($_POST['delete_cancel'])){
       del_lock ($this->dn);
       session::un_set('objectinfo');
@@ -350,12 +338,12 @@ class sudoManagement extends plugin
      ********************/
 
     /* Cancel dialogs */
-    if (isset($_POST['edit_cancel']) || isset($_POST['password_cancel'])){
-      if(isset($this->grouptab->dn)){
-        del_lock ($this->grouptab->dn);
+    if (isset($_POST['edit_cancel'])){
+      if(isset($this->sudotabs->dn)){
+        del_lock ($this->sudotabs->dn);
       }
-      unset ($this->grouptab);
-      $this->grouptab= NULL;
+      unset ($this->sudotabs);
+      $this->sudotabs= NULL;
       session::un_set('objectinfo');
     }
 
@@ -365,12 +353,12 @@ class sudoManagement extends plugin
      ********************/
 
     /* Show tab dialog if object is present */
-    if (isset($this->grouptab->config)){
-      $display= $this->grouptab->execute();
+    if (isset($this->sudotabs->config)){
+      $display= $this->sudotabs->execute();
 
       /* Don't show buttons if tab dialog requests this */
-      if(isset($this->grouptab->by_object)){
-        if (!$this->grouptab->by_object[$this->grouptab->current]->dialog){
+      if(isset($this->sudotabs->by_object)){
+        if (!$this->sudotabs->by_object[$this->sudotabs->current]->dialog){
           $display.= "<p style=\"text-align:right\">\n";
           $display.= "<input type=submit name=\"edit_finish\" style=\"width:80px\" value=\"".msgPool::okButton()."\">\n";
           $display.= "&nbsp;\n";
@@ -385,7 +373,7 @@ class sudoManagement extends plugin
       return ($display);
     }
 
-    /* Display dialog with group list */
+    /* Display dialog with sudo list */
     $this->DivListSudo->parent = &$this;
     $this->DivListSudo->execute();
     $this->reload ();
@@ -420,14 +408,14 @@ class sudoManagement extends plugin
       Create filter depending on selected checkboxes 
      ********************/
     $values = array("cn","description","sudoUser","sudoCommand","sudoOption");
-    $ff     = "(&(|(cn=".$Regex.")(description=".$Regex.")(sudoUser=".$UserRegex.")(objectClass=sudoRole)))";
+    $ff     = "(&(|(cn=".$Regex.")(description=".$Regex."))(sudoUser=".$UserRegex.")(objectClass=sudoRole))";
     $res = get_list($ff, "sudo",$base,$values, GL_SUBSEARCH);
     $tmp = array();
     foreach($res as $attrs){
       $tmp[$attrs['cn'][0]] = $attrs;
     }
     uksort($tmp, 'strnatcasecmp');  
-    $this->list = $tmp;
+    $this->list = array_values($tmp);
   }
 
 
@@ -440,8 +428,8 @@ class sudoManagement extends plugin
 
   function remove_lock()
   {
-    if (isset($this->grouptab->dn)){
-      del_lock ($this->grouptab->dn);
+    if (isset($this->sudotabs->dn)){
+      del_lock ($this->sudotabs->dn);
     }
   }
 
