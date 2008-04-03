@@ -142,7 +142,8 @@ if(session::is_set('current_class_for_help')){
 
 }elseif(isset($_GET['plug'])){
   /* This displays helpfiles depending on the current $_GET[plug] */
-  $tmp                          = new pluglist(session::get('config'),get_userinfo());
+  $ui= get_userinfo();
+  $tmp                          = new pluglist(session::get('config'), $ui);
   $path                         = $tmp->get_path($_GET['plug']);
   $helpobject['currentplug']    = $path;
   $helpobject['file']           = "index.html";
