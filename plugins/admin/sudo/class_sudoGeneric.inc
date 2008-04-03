@@ -28,12 +28,11 @@ class sudo extends plugin
 
   var $sudoUser   = array();
   var $sudoCommand= array();
-  var $sudoOption = array();
   var $sudoHost   = array();
   var $sudoRunas  = array();
 
   var $objectclasses = array("top","sudoRole");
-  var $attributes    = array("cn","description","sudoUser","sudoCommand","sudoOption","sudoHost","sudoRunas");
+  var $attributes    = array("cn","description","sudoUser","sudoCommand","sudoHost","sudoRunas");
 
   var $is_account = TRUE;
 
@@ -41,7 +40,7 @@ class sudo extends plugin
   {
     plugin::plugin ($config, $dn);
 
-    foreach(array("sudoUser","sudoCommand","sudoOption","sudoHost","sudoRunas") as $attr){
+    foreach(array("sudoUser","sudoCommand","sudoHost","sudoRunas") as $attr){
       $this->$attr = array();
       if(isset($this->attrs[$attr])){
         $tmp = array();
@@ -171,15 +170,13 @@ class sudo extends plugin
     $divlist_sudoHost->Setheight("90");
     $divlist_sudoRunas = new divSelectBox("divlist_sudoRunas");
     $divlist_sudoRunas->Setheight("90");
-    $divlist_sudoOption = new divSelectBox("divlist_sudoOption");
-    $divlist_sudoOption->Setheight("90");
     $divlist_sudoCommand = new divSelectBox("divlist_sudoCommand");
     $divlist_sudoCommand->Setheight("90");
 
     $neg_img= "<img src='images/negate.png' alt='!' class='center'>"; 
     $option = "<input type='image' src='images/negate.png'     name='neg_%ATTR%_%KEY%' class='center'>"; 
     $option.= "<input type='image' src='images/edittrash.png'  name='del_%ATTR%_%KEY%' class='center'>"; 
-    foreach(array("sudoUser","sudoCommand","sudoOption","sudoHost","sudoRunas") as $attr){
+    foreach(array("sudoUser","sudoCommand","sudoHost","sudoRunas") as $attr){
       foreach($this->$attr as $key => $entry){
         $entry = preg_replace("/^!/",$neg_img,$entry);
         $list_name = "divlist_".$attr;
@@ -194,7 +191,6 @@ class sudo extends plugin
     $smarty->assign("divlist_sudoUser",$divlist_sudoUser->DrawList());
     $smarty->assign("divlist_sudoHost",$divlist_sudoHost->DrawList());
     $smarty->assign("divlist_sudoRunas",$divlist_sudoRunas->DrawList());
-    $smarty->assign("divlist_sudoOption",$divlist_sudoOption->DrawList());
     $smarty->assign("divlist_sudoCommand",$divlist_sudoCommand->DrawList());
     
     return($smarty->fetch(get_template_path('generic.tpl', TRUE)));
@@ -265,8 +261,7 @@ class sudo extends plugin
             "sudoUser"          => _("Users"),
             "sudoHost"          => _("Host"),
             "sudoCommand"       => _("Command"),
-            "sudoRunas"         => _("Run as user"),
-            "sudoOption"        => _("Flags"))
+            "sudoRunas"         => _("Run as user"))
         ));
   }
 }

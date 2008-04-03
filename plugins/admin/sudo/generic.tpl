@@ -35,13 +35,6 @@
  </tr> 
  <tr><td style="width:100%;"colspan="2"><p class="seperator">&nbsp;</p></td></tr>
  <tr>
-  <td colspan="2"><b>Flags</b>
-   {$divlist_sudoOption}
-   <input type='submit' name='list_sudoOption' value='{t}Add from list{/t}'>
-  </td>
- </tr>
- <tr><td style="width:100%;"colspan="2"><p class="seperator">&nbsp;</p></td></tr>
- <tr>
   <td><b>Hosts</b>
    {$divlist_sudoHost}
    <input type='text' value='' name='new_sudoHost'><input type='submit' name='add_sudoHost' value='{msgPool type=addButton}'>
