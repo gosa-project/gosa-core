@@ -93,19 +93,19 @@
 
     <div class='step4_container'>
         <div class='step4_name'>
-            {t}Enable system deployment{/t}
+            {t}Override sudo role ou{/t}
         </div>
         <div class='step4_value'>
-            {if $optional.gotomasses_active == FALSE}
-                <input type='checkbox' value='1' name='gotomasses_active'
-                    onClick='changeState("gotomasses_file");'>
-                <input size=40 id='gotomasses_file' name='gotomasses_file' 
-					type='text' value='{$optional.gotomasses_file}' disabled>
+            {if $optional.sudoou_active == FALSE}
+                <input type='checkbox' value='1' name='sudoou_active'
+                    onClick='changeState("sudoou");'>
+                <input size=40 id='sudoou' name='sudoou' 
+					type='text' value='{$optional.sudoou}' disabled>
             {else}
-                <input type='checkbox' value='1' name='gotomasses_active' checked
-					onClick='changeState("gotomasses_file");'>
-                <input size=40 id='gotomasses_file' name='gotomasses_file' 
-					type='text' value='{$optional.gotomasses_file}'  >
+                <input type='checkbox' value='1' name='sudoou_active' checked
+					onClick='changeState("sudoou");'>
+                <input size=40 id='sudoou' name='sudoou' 
+					type='text' value='{$optional.sudoou}'  >
             {/if}
         </div>
     </div>

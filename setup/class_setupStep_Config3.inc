@@ -59,8 +59,8 @@ class Step_Config3 extends setup_step
               "kioskpath" => "/var/spool/kiosk",
               "kioskpath_active" => FALSE,
 
-              "gotomasses_file"   => "/etc/gosa/gotomasses",
-              "gotomasses_active" => FALSE,
+              "sudoou"   => "ou=sudoers,%BASE%",
+              "sudoou_active" => FALSE,
 
               "noprimarygroup"  => FALSE);
 
@@ -82,10 +82,15 @@ class Step_Config3 extends setup_step
 
   function execute()
   {
+
+    $cv = $this->parent->captured_values;
+    $this->optional['sudoou'] = preg_replace("/%BASE%/",$cv['base'],$this->optional['sudoou']);
     $smarty = get_smarty();
     $smarty->assign("bool",array(FALSE => _("No"), TRUE => _("Yes")));
     $smarty->assign("uniq_identifiers",array( "entryCNS" => "entryCSN",
                                               "contextCSN"=>"contextCSN" ));
+
+    
     $smarty->assign("optional", $this->optional);
     foreach($this->attributes as $attr){
       $smarty->assign($attr,$this->$attr);
@@ -148,13 +153,13 @@ class Step_Config3 extends setup_step
         $this->optional['kioskpath_active'] = FALSE;
       }
 
-      if(isset($_POST['gotomasses_active'])){
-        $this->optional['gotomasses_active'] = TRUE;
-        if(isset($_POST['gotomasses_file'])){
-          $this->optional['gotomasses_file'] = get_post('gotomasses_file');
+      if(isset($_POST['sudoou_active'])){
+        $this->optional['sudoou_active'] = TRUE;
+        if(isset($_POST['sudoou'])){
+          $this->optional['sudoou'] = get_post('sudoou');
         }
       }else{
-        $this->optional['gotomasses_active'] = FALSE;
+        $this->optional['sudoou_active'] = FALSE;
       }
 
       if(isset($_POST['notifydir_active'])){
