@@ -73,13 +73,15 @@ class Step_Feedback  extends setup_step
     $this->web_server     = $_SERVER['SERVER_SOFTWARE'];
     $this->php_version    = PHP_VERSION;
 
-    /* On first call check for rid/sid base */
+    /* Establish ldap connection */
     $cv = $this->parent->captured_values;
-    $ldap = new LDAP($cv['admin'],
+    $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
     $ldap->cd($cv['base']);
     $ldap->search("(objectClass=*)",array("dn"));
     $this->object_count=$ldap->count();
