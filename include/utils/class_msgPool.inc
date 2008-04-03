@@ -367,6 +367,7 @@ class msgPool
         $objects.= "<br>\n$value (<i>$key</i>)";
       }
     }
+    return($objects);
   }
 
   public static function noValidExtension($name)
