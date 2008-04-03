@@ -1,10 +1,12 @@
 
 <select name='option'>
 {foreach from=$options item=item key=key}
+ {if !isset($sudoOption.$key)}
  <option value='{$key}'>{$item.NAME} ({$map[$item.TYPE]})</option>
+ {/if}
 {/foreach}
 </select>
-
+<input type="submit" name="add_option" value="{msgPool type=addButton}">
 
 <table>
 {foreach from=$sudoOption item=item key=key}
