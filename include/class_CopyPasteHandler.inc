@@ -355,12 +355,18 @@ class CopyPasteHandler {
     /* Display a list of all pastable entries 
      */
     if(count($this->clean_objects)){
+      
+      $dns = array();
+      foreach($this->clean_objects as $object){
+        $dns[] = $object['dn'];
+      }
+
       $smarty = get_smarty();
       $smarty->assign("type","directly");
       $smarty->assign("Complete",false);
       $smarty->assign("AttributesToFix","&nbsp;");
       $smarty->assign("SubDialog","");
-      $smarty->assign("message"  , sprintf(_("These objects will be pasted: %s"), "<br>".msgPool::buildList($this->clean_objects)));
+      $smarty->assign("message"  , sprintf(_("These objects will be pasted: %s"), "<br>".msgPool::buildList($dns)));
       return($smarty->fetch(get_template_path("copyPasteDialog.tpl",FALSE)));
     }
 
