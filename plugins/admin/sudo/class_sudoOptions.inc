@@ -156,6 +156,10 @@ class sudo_options extends plugin
           }
         }
 
+        if($this->options[$opt]['TYPE'] == "LISTS"){
+           $this->sudoOption[$opt][] = $option;
+        }
+
         /* Special handling for BOOLEAN values */
         if(in_array($this->options[$opt]['TYPE'],array("BOOLEAN"))){
           $option['NEGATE'] = FALSE;
@@ -169,8 +173,6 @@ class sudo_options extends plugin
         /* Append values */
         if(!isset($this->sudoOption[$opt])){
           $this->sudoOption[$opt] = $option;
-        }else{
-          $this->sudoOption[$opt]['VALUE'][] = $value;
         }
       }
     }
@@ -185,6 +187,19 @@ class sudo_options extends plugin
       Handle Posts 
      *****/
     foreach($_POST as $name => $value){
+
+      if(preg_match("/^negListOption_/",$name)){
+        $opt = preg_replace("/^negListOption_/","",$name);
+        $opt = preg_replace("/_[^_]*$/","",$opt);
+        $id  = preg_replace("/^.*_([0-9])*$/","\\1",$opt);
+        $opt = preg_replace("/_[0-9]*$/","",$opt);
+
+        if(isset($this->sudoOption[$opt][$id])){
+          $this->sudoOption[$opt][$id]['NEGATE'] = !$this->sudoOption[$opt][$id]['NEGATE']; 
+        }
+        break;
+      }
+
       if(preg_match("/^negOption_/",$name)){
         $opt = preg_replace("/^negOption_/","",$name);
         $opt = preg_replace("/_[^_]*$/","",$opt);
@@ -227,14 +242,31 @@ class sudo_options extends plugin
         break;
       }
 
+      /*****
+        Remove options
+       *****/
       if(preg_match("/^delOption_/",$name)){
-
-        /*****
-          Remove options
-         *****/
         $opt = preg_replace("/^delOption_/","",$name);
         $opt = preg_replace("/_[^_]*$/","",$opt);
         if(isset($this->sudoOption[$opt])){
+          unset($this->sudoOption[$opt]);
+        }
+        break;
+      }
+
+      /*****
+        Remove LISTS options
+       *****/
+      if(preg_match("/^delListOption/",$name)){
+        $opt = preg_replace("/^delListOption_/","",$name);
+        $opt = preg_replace("/_[^_]*$/","",$opt);
+        $id  = preg_replace("/^.*_([0-9])*$/","\\1",$opt);
+        $opt = preg_replace("/_[0-9]*$/","",$opt);
+
+        if(isset($this->sudoOption[$opt][$id])){
+          unset($this->sudoOption[$opt][$id]);
+        }
+        if(!count($this->sudoOption[$opt])){
           unset($this->sudoOption[$opt]);
         }
         break;
@@ -262,11 +294,25 @@ class sudo_options extends plugin
 
     if(isset($_POST['add_option']) && isset($_POST['option'])){
       $opt = get_post("option");
+
+      /* Append attribute only once, lists are handled below */
       if(isset($this->options[$opt]) && !isset($this->sudoOption[$opt])){
         $type = $this->options[$opt]['TYPE'];
         $val  = array($this->options[$opt]['DEFAULT']);
         $option = array("NAME" => $opt, "VALUE" => $val , "NEGATE" => FALSE);
-        $this->sudoOption[$opt] = $option;
+
+        if($type == "LISTS"){
+          $this->sudoOption[$opt][] = $option;
+        }else{
+          $this->sudoOption[$opt] = $option;
+        }
+      }
+
+      if(isset($this->options[$opt]) && isset($this->sudoOption[$opt]) && $this->options[$opt]['TYPE'] == "LISTS"){
+        $type = $this->options[$opt]['TYPE'];
+        $val  = array($this->options[$opt]['DEFAULT']);
+        $option = array("NAME" => $opt, "VALUE" => $val , "NEGATE" => FALSE);
+        $this->sudoOption[$opt][] = $option;
       }
     }
 
@@ -309,6 +355,18 @@ class sudo_options extends plugin
           }
         }
       }
+
+      /****
+        Get posted value for LISTS
+       ****/
+      if(in_array($this->options[$name]['TYPE'],array("LISTS"))){
+        foreach($this->sudoOption[$name] as $entry_key => $entry){
+          if(isset($_POST['list_value__'.$name.'_'.$entry_key])){
+            $val = get_post('list_value__'.$name.'_'.$entry_key);
+            $this->sudoOption[$name][$entry_key]['VALUE'][0] = $val;
+          }
+        } 
+      }
     }
   }
 
@@ -321,6 +379,23 @@ class sudo_options extends plugin
     foreach($this->sudoOption as $name => $opt){
 
       $type   = $this->options[$name]['TYPE'];
+
+      if($type=="LISTS"){
+        foreach($this->sudoOption[$name] as $entry_key => $entry){
+          $val =  $entry['VALUE'][0];
+          if(empty($val)){
+            $option = $name;
+          }else{
+            $option = $name."=".$val;
+          }
+          if($entry['NEGATE']){
+            $option = "!".$option;
+          }
+          $this->attrs['sudoOption'][] = $option;
+        }
+        continue;
+      }
+
       $neg    = $opt['NEGATE'];
       $value  = $opt['VALUE'][0];
       $option = "";

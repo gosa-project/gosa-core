@@ -1,7 +1,7 @@
 
 <select name='option'>
 {foreach from=$options item=item key=key}
- {if !isset($sudoOption.$key)}
+ {if !isset($sudoOption.$key) || ($sudoOption.$key && $item.TYPE == "LISTS")}
  <option value='{$key}'>{$item.NAME} ({$map[$item.TYPE]})</option>
  {/if}
 {/foreach}
@@ -10,6 +10,29 @@
 
 <table>
 {foreach from=$sudoOption item=item key=key}
+
+ <!--  Special handling for lists
+  -->
+ {if $options[$key].TYPE == "LISTS"}
+  {foreach from=$item item=entry key=entry_key} 
+   <tr> 
+    <td>{$key} - <b>{t}List{/t}</b></td>
+    <td style="width:20px;">
+     {if $entry.NEGATE}
+      <img src='images/negate.png' alt="!">
+     {/if}
+    </td>
+    <td><input type='text' value="{$entry.VALUE.0}" name="list_value__{$key}_{$entry_key}"></td>
+    <td>
+     <input type='image' src='images/negate.png'     name='negListOption_{$key}_{$entry_key}' class='center'>
+     <input type='image' src='images/edittrash.png'  name='delListOption_{$key}_{$entry_key}' class='center'>
+    </td>	
+   </tr>
+  {/foreach}
+ {else}
+
+ <!-- Default values flat values/single value 
+  -->
  <tr>
   <td>{$key}</td>
   <td style="width:20px;">
@@ -60,8 +83,6 @@
 	id="option_value__{$key}" 
         {if $item.VALUE.0 == "FALSE" ||  $item.VALUE.0 == "TRUE"} disabled {/if}>
    </select> 
-  {else}
-   {$options[$item.NAME].TYPE} 
   {/if}
   </td>
   <td style='width: 40px;'>
@@ -69,6 +90,7 @@
    <input type='image' src='images/edittrash.png'  name='delOption_{$key}' class='center'>
   </td>
  </tr>
+ {/if}
 {/foreach}
 </table>
 
