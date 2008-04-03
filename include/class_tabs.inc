@@ -291,13 +291,13 @@ class tabs
     return (0);
   }
 
-  function adapt_from_template($dn)
+  function adapt_from_template($dn, $skip= array())
   {
     foreach ($this->by_object as $key => &$obj){
       @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,
           $key, "Adapting");
       $obj->parent= &$this;
-      $obj->adapt_from_template($dn);
+      $obj->adapt_from_template($dn, $skip);
     }
   }
 

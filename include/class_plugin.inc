@@ -496,7 +496,7 @@ class plugin
   }
 
   /* Adapt from template, using 'dn' */
-  function adapt_from_template($dn)
+  function adapt_from_template($dn, $skip= array())
   {
     /* Include global link_info */
     $ldap= $this->config->get_ldap_link();
@@ -507,6 +507,11 @@ class plugin
 
     /* Walk through attributes */
     foreach ($this->attributes as $val){
+
+      /* Skip the ones in skip list */
+      if (in_array($val, $skip)){
+        continue;
+      }
 
       if (isset($this->attrs["$val"][0])){
 
