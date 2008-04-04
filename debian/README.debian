@@ -63,5 +63,13 @@ php.ini to "E_ALL ^ E_NOTICE". This is a workaround only, wait for the
 debian smarty package to support PHP5 in a propper way.
 
 
+* Local configuration - secruity issues
+
+You should be aware, that GOsa reads its configuration files which store
+an important LDAP password as the www-data user. If you allow other
+people to have i.e. public html directories, they will be able to read
+this configuration as well - if you don't take steps against it.
+
+
 ----
 Cajus Pollmeier <cajus@debian.org>  Fri 02 Jun 2006 16:23:50 +0200
