@@ -46,7 +46,7 @@ class msgPool
       if($type == ""){
         return (_("This object will be deleted:")."<br>".msgPool::buildList($name));
       }else{
-        return (sprintf(_("This '%s' object will be deleted:"),$type, "<br>".msgPool::buildList($name)));
+        return (sprintf(_("This '%s' object will be deleted:"),$type). "<br>".msgPool::buildList($name));
       }
     }
     if($type == ""){
