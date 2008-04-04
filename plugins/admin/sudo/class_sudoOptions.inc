@@ -20,7 +20,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-class sudo_options extends plugin
+class sudoOption extends plugin
 {
   /* Group attributes */
   var $sudoOption = array();
@@ -30,7 +30,7 @@ class sudo_options extends plugin
   
   var $options = array();
 
-  function sudo_options(&$config, $dn= NULL)
+  function sudoOption(&$config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
 

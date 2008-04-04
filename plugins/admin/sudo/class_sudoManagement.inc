@@ -36,11 +36,24 @@ class sudoManagement extends plugin
     /* Save configuration for internal use */
     $this->config = &$config;
     $this->ui     = &$ui;
-    $this->base = get_ou("sudoou");
+    $this->base   = @get_ou("sudoou");
 
+    /***
+      GET sudo base
+     ***/
     if(empty($this->base)){
-        //FIXME  Optimize this message, maybe with msgPool
-        msg_dialog::display(_("Configuration"),sprintf(_("The sudo object path is not configured.")));
+      /* Default is ou=sudoers,BASE */
+      $this->base = "ou=sudoers,".$this->config->current['BASE'];
+    }else{
+  
+      /* Append base to given sudoers ou if missing */
+      if(!preg_match("/".normalizePreg($this->config->current['BASE'])."$/i",$this->base)){
+        if(!preg_match("/,$/",$this->base)){
+          $this->base = $this->base.",".$this->config->current['BASE'];
+        }else{
+          $this->base = $this->base.$this->config->current['BASE'];
+        }
+      }
     }
 
     /* Create dialog object */
