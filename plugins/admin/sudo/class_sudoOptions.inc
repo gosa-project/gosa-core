@@ -212,7 +212,7 @@ class sudoOption extends plugin
           /*****
             Negate STRING / INTEGER
            *****/
-          if(in_array($this->options[$opt]['TYPE'],array('STRING','INTEGER'))){
+          if(in_array($this->options[$opt]['TYPE'],array('STRING','INTEGER','LISTS'))){
             $this->sudoOption[$opt][$id]['NEGATE'] = !$this->sudoOption[$opt][$id]['NEGATE']; 
           }
 
@@ -354,10 +354,10 @@ class sudoOption extends plugin
           Save LISTS 
          ****/
         if($type=="LISTS"){
-          if(empty($val)){
+          if(empty($value)){
             $option = $name;
           }else{
-            $option = $name."=".$val;
+            $option = $name."=".$value;
           }
           if($neg){
             $option = "!".$option;
