@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-04 09:36+0200\n"
+"POT-Creation-Date: 2008-04-04 09:53+0200\n"
 "PO-Revision-Date: 2005-11-18 15:26+0100\n"
 "Last-Translator: Alessandro Amici <a.amici@bopen.it>\n"
 "Language-Team: Italian\n"
@@ -29,15 +29,14 @@ msgstr "Rilevato un conflitto di sessione"
 #: plugins/admin/users/remove.tpl:2 plugins/admin/ogroups/remove.tpl:2
 #: plugins/admin/departments/dep_move_confirm.tpl:2
 #: plugins/admin/departments/remove.tpl:2 plugins/admin/acl/remove.tpl:2
-#: plugins/admin/groups/remove.tpl:2 plugins/admin/sudo/remove.tpl:2
-#: setup/class_setupStep_Migrate.inc:214 setup/class_setupStep_Migrate.inc:266
-#: setup/class_setupStep_Migrate.inc:397 setup/class_setupStep_Migrate.inc:474
-#: setup/class_setupStep_Migrate.inc:613 setup/class_setupStep_Migrate.inc:743
-#: setup/setup_checks.tpl:32 setup/setup_checks.tpl:93
-#: include/class_tabs.inc:216 include/functions.inc:699
-#: include/functions.inc:2177 include/functions.inc:2181
-#: include/functions.inc:2187 html/password.php:284 html/index.php:57
-#: html/index.php:63 html/index.php:419 html/index.php:425
+#: plugins/admin/groups/remove.tpl:2 setup/class_setupStep_Migrate.inc:214
+#: setup/class_setupStep_Migrate.inc:266 setup/class_setupStep_Migrate.inc:397
+#: setup/class_setupStep_Migrate.inc:474 setup/class_setupStep_Migrate.inc:613
+#: setup/class_setupStep_Migrate.inc:743 setup/setup_checks.tpl:32
+#: setup/setup_checks.tpl:93 include/class_tabs.inc:216
+#: include/functions.inc:699 include/functions.inc:2177
+#: include/functions.inc:2181 include/functions.inc:2187 html/password.php:284
+#: html/index.php:57 html/index.php:63 html/index.php:419 html/index.php:425
 msgid "Warning"
 msgstr "Attenzione"
 
@@ -486,7 +485,6 @@ msgstr ""
 
 #: ihtml/themes/default/remove.tpl:9 plugins/admin/users/remove.tpl:10
 #: plugins/admin/ogroups/remove.tpl:10 plugins/admin/groups/remove.tpl:10
-#: plugins/admin/sudo/remove.tpl:9
 #, fuzzy
 msgid "So - if you're sure - press 'Delete' to continue or 'Cancel' to abort."
 msgstr ""
@@ -737,7 +735,6 @@ msgstr "Gruppo"
 #: plugins/admin/ogroups/class_divListOGroup.inc:83
 #: plugins/admin/departments/class_divListDepartment.inc:156
 #: plugins/admin/groups/class_divListGroup.inc:79
-#: plugins/admin/sudo/class_divListSudo.inc:69
 msgid "Department"
 msgstr "Dipartimento"
 
@@ -802,9 +799,8 @@ msgstr "Nome dell'oggetto"
 #: plugins/admin/departments/generic.tpl:16 plugins/admin/acl/acl_role.tpl:17
 #: plugins/admin/acl/class_aclRole.inc:705 plugins/admin/groups/generic.tpl:24
 #: plugins/admin/groups/class_groupGeneric.inc:1209
-#: plugins/admin/sudo/class_sudoGeneric.inc:284
-#: plugins/admin/sudo/generic.tpl:16 include/class_SnapShotDialog.inc:169
-#: html/getxls.php:160 html/getxls.php:289
+#: include/class_SnapShotDialog.inc:169 html/getxls.php:160
+#: html/getxls.php:289
 msgid "Description"
 msgstr "Descrizione"
 
@@ -949,7 +945,6 @@ msgstr "Certificato standard"
 #: plugins/admin/departments/class_divListDepartment.inc:160
 #: plugins/admin/acl/class_divListACL.inc:172
 #: plugins/admin/groups/class_divListGroup.inc:197
-#: plugins/admin/sudo/class_divListSudo.inc:106
 msgid "Remove"
 msgstr "Rimuovi"
 
@@ -1092,10 +1087,8 @@ msgstr "Nome utente"
 #: plugins/admin/groups/class_groupGeneric.inc:1089
 #: plugins/admin/groups/class_groupGeneric.inc:1096
 #: plugins/admin/groups/class_groupGeneric.inc:1207
-#: plugins/admin/sudo/class_divListSudo.inc:69
-#: plugins/admin/sudo/class_sudoGeneric.inc:283
-#: plugins/admin/sudo/generic.tpl:8 setup/setup_migrate.tpl:209
-#: setup/setup_feedback.tpl:22 html/getxls.php:225 html/getxls.php:292
+#: setup/setup_migrate.tpl:209 setup/setup_feedback.tpl:22 html/getxls.php:225
+#: html/getxls.php:292
 msgid "Name"
 msgstr "Cognome"
 
@@ -1217,7 +1210,6 @@ msgstr "Strada"
 #: plugins/admin/acl/class_aclRole.inc:694
 #: plugins/admin/acl/class_divListACL.inc:166
 #: plugins/admin/acl/class_divListACL.inc:225
-#: plugins/admin/sudo/class_divListSudo.inc:99
 msgid "Role"
 msgstr "Ruolo"
 
@@ -1233,8 +1225,7 @@ msgid "Generic user settings"
 msgstr "Impostazioni generali delle code"
 
 #: plugins/personal/generic/class_user.inc:1454
-#: plugins/admin/users/class_userManagement.inc:26
-#: plugins/admin/sudo/class_sudoGeneric.inc:285 include/class_acl.inc:216
+#: plugins/admin/users/class_userManagement.inc:26 include/class_acl.inc:216
 #: html/getxls.php:91 html/getxls.php:92 html/getxls.php:310
 msgid "Users"
 msgstr "Utenti"
@@ -1918,8 +1909,6 @@ msgstr ""
 #: plugins/admin/acl/class_divListACL.inc:159
 #: plugins/admin/groups/class_divListGroup.inc:81
 #: plugins/admin/groups/class_divListGroup.inc:181
-#: plugins/admin/sudo/class_divListSudo.inc:70
-#: plugins/admin/sudo/class_divListSudo.inc:93
 msgid "Actions"
 msgstr "Azioni"
 
@@ -2024,7 +2013,6 @@ msgstr ""
 #: plugins/admin/departments/class_divListDepartment.inc:151
 #: plugins/admin/acl/class_divListACL.inc:161
 #: plugins/admin/groups/class_divListGroup.inc:183
-#: plugins/admin/sudo/class_divListSudo.inc:95
 #: setup/class_setupStep_Migrate.inc:900
 msgid "Create"
 msgstr "Creare"
@@ -2177,7 +2165,6 @@ msgstr "Privato"
 #: plugins/admin/acl/class_divListACL.inc:242
 #: plugins/admin/acl/class_divListACL.inc:264
 #: plugins/admin/groups/class_divListGroup.inc:298
-#: plugins/admin/sudo/class_divListSudo.inc:139
 msgid "edit"
 msgstr "modifica"
 
@@ -2205,7 +2192,6 @@ msgstr "Cambia la password"
 #: plugins/admin/acl/class_divListACL.inc:252
 #: plugins/admin/acl/class_divListACL.inc:268
 #: plugins/admin/groups/class_divListGroup.inc:307
-#: plugins/admin/sudo/class_divListSudo.inc:143
 msgid "delete"
 msgstr "elimina"
 
@@ -2325,8 +2311,7 @@ msgstr "Gruppo di oggetti"
 #: plugins/admin/acl/class_aclManagement.inc:340
 #: plugins/admin/groups/class_groupManagement.inc:387
 #: plugins/admin/groups/class_groupManagement.inc:440
-#: plugins/admin/groups/class_groupManagement.inc:471
-#: plugins/admin/sudo/class_sudoManagement.inc:233 html/getldif.php:82
+#: plugins/admin/groups/class_groupManagement.inc:471 html/getldif.php:82
 #: html/getxls.php:493
 #, fuzzy
 msgid "Permission error"
@@ -2561,14 +2546,12 @@ msgstr "Mostra gruppi"
 #: plugins/admin/ogroups/class_divListOGroup.inc:294
 #: plugins/admin/departments/class_divListDepartment.inc:185
 #: plugins/admin/groups/class_divListGroup.inc:298
-#: plugins/admin/sudo/class_divListSudo.inc:139
 msgid "Edit this entry"
 msgstr "Modifica questo record"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:302
 #: plugins/admin/departments/class_divListDepartment.inc:190
 #: plugins/admin/groups/class_divListGroup.inc:307
-#: plugins/admin/sudo/class_divListSudo.inc:143
 msgid "Delete this entry"
 msgstr "Elimina questo record"
 
@@ -3213,113 +3196,6 @@ msgstr "Home di Samba"
 #, fuzzy
 msgid "Samba SID"
 msgstr "Samba"
-
-#: plugins/admin/sudo/class_divListSudo.inc:48
-#: plugins/admin/sudo/class_divListSudo.inc:49
-#, fuzzy
-msgid "List of sudo roles"
-msgstr "Lista degli utenti"
-
-#: plugins/admin/sudo/class_divListSudo.inc:74
-#, fuzzy
-msgid "Regular expression for matching role names"
-msgstr "Espressioni regolare per selezionare il nome del gruppo"
-
-#: plugins/admin/sudo/class_divListSudo.inc:76
-#, fuzzy
-msgid "Regular expression for matching role member names"
-msgstr "Espressioni regolare per selezionare il nome del gruppo"
-
-#: plugins/admin/sudo/class_divListSudo.inc:169
-#, fuzzy
-msgid "Number of listed roles"
-msgstr "Nome del gruppo"
-
-#: plugins/admin/sudo/class_sudoManagement.inc:26
-#: plugins/admin/sudo/class_sudoGeneric.inc:274
-#, fuzzy
-msgid "Sudo"
-msgstr "Cognome"
-
-#: plugins/admin/sudo/class_sudoManagement.inc:27
-#, fuzzy
-msgid "Manage sudo roles"
-msgstr "Utenti di Dominio"
-
-#: plugins/admin/sudo/class_sudoManagement.inc:201
-msgid "sudo role"
-msgstr ""
-
-#: plugins/admin/sudo/class_sudoOptions.inc:133
-msgid "Unknown option"
-msgstr ""
-
-#: plugins/admin/sudo/class_sudoOptions.inc:134
-#, php-format
-msgid ""
-"The sudo option '%s' is unkown to GOsa, it is now temporarily added as type "
-"string."
-msgstr ""
-
-#: plugins/admin/sudo/class_sudoOptions.inc:254
-#: plugins/admin/sudo/class_sudoOptions.inc:256
-#, fuzzy
-msgid "string"
-msgstr "Attenzione"
-
-#: plugins/admin/sudo/class_sudoOptions.inc:254
-#: plugins/admin/sudo/class_sudoOptions.inc:255
-#: plugins/admin/sudo/class_sudoOptions.inc:256
-msgid "bool"
-msgstr ""
-
-#: plugins/admin/sudo/class_sudoOptions.inc:255
-#, fuzzy
-msgid "integer"
-msgstr "stampanti"
-
-#: plugins/admin/sudo/class_sudoOptions.inc:256
-#, fuzzy
-msgid "lists"
-msgstr "classe"
-
-#: plugins/admin/sudo/class_sudoGeneric.inc:171
-#, fuzzy
-msgid "Invalid"
-msgstr "invalido"
-
-#: plugins/admin/sudo/class_sudoGeneric.inc:275
-#: plugins/admin/sudo/class_sudoGeneric.inc:280
-msgid "Sudo role"
-msgstr ""
-
-#: plugins/admin/sudo/class_sudoGeneric.inc:286
-msgid "Host"
-msgstr ""
-
-#: plugins/admin/sudo/class_sudoGeneric.inc:287
-#, fuzzy
-msgid "Command"
-msgstr "e"
-
-#: plugins/admin/sudo/class_sudoGeneric.inc:288
-#, fuzzy
-msgid "Run as user"
-msgstr "Utenti di Dominio"
-
-#: plugins/admin/sudo/options.tpl:75
-#, fuzzy
-msgid "Available options"
-msgstr "Applicazioni disponibili"
-
-#: plugins/admin/sudo/generic.tpl:29 plugins/admin/sudo/generic.tpl:41
-msgid "Add from list"
-msgstr ""
-
-#: plugins/admin/sudo/main.inc:42 plugins/admin/sudo/main.inc:46
-#, fuzzy
-msgid "Sudo role administration"
-msgstr "Amministrazione dei gruppi di utenti"
 
 #: setup/class_setupStep_Language.inc:40 setup/class_setupStep_Language.inc:41
 #, fuzzy
@@ -6571,6 +6447,62 @@ msgstr ""
 #, php-format
 msgid "Helpdir '%s' is not accessible, can't read any helpfiles."
 msgstr ""
+
+#, fuzzy
+#~ msgid "List of sudo roles"
+#~ msgstr "Lista degli utenti"
+
+#, fuzzy
+#~ msgid "Regular expression for matching role names"
+#~ msgstr "Espressioni regolare per selezionare il nome del gruppo"
+
+#, fuzzy
+#~ msgid "Regular expression for matching role member names"
+#~ msgstr "Espressioni regolare per selezionare il nome del gruppo"
+
+#, fuzzy
+#~ msgid "Number of listed roles"
+#~ msgstr "Nome del gruppo"
+
+#, fuzzy
+#~ msgid "Sudo"
+#~ msgstr "Cognome"
+
+#, fuzzy
+#~ msgid "Manage sudo roles"
+#~ msgstr "Utenti di Dominio"
+
+#, fuzzy
+#~ msgid "string"
+#~ msgstr "Attenzione"
+
+#, fuzzy
+#~ msgid "integer"
+#~ msgstr "stampanti"
+
+#, fuzzy
+#~ msgid "lists"
+#~ msgstr "classe"
+
+#, fuzzy
+#~ msgid "Invalid"
+#~ msgstr "invalido"
+
+#, fuzzy
+#~ msgid "Command"
+#~ msgstr "e"
+
+#, fuzzy
+#~ msgid "Run as user"
+#~ msgstr "Utenti di Dominio"
+
+#, fuzzy
+#~ msgid "Available options"
+#~ msgstr "Applicazioni disponibili"
+
+#, fuzzy
+#~ msgid "Sudo role administration"
+#~ msgstr "Amministrazione dei gruppi di utenti"
 
 #, fuzzy
 #~ msgid "Flags"

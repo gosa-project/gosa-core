@@ -1,4 +1,3 @@
-# translation of messages.po to Deutsch
 # translation of messages.po to
 # GOsa2 Translations
 # Copyright (C) 2003 GONICUS GmbH, Germany
@@ -13,10 +12,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-04 09:36+0200\n"
-"PO-Revision-Date: 2008-04-02 19:08+0200\n"
-"Last-Translator: Jan Wenzel <jan.wenzel@gonicus.de>\n"
-"Language-Team: Deutsch <de@li.org>\n"
+"POT-Creation-Date: 2008-04-04 09:53+0200\n"
+"PO-Revision-Date: 2008-04-04 09:56+0200\n"
+"Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
+"Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,15 +35,14 @@ msgstr "Ein Sitzungskonflikt wurde festgestellt"
 #: plugins/admin/users/remove.tpl:2 plugins/admin/ogroups/remove.tpl:2
 #: plugins/admin/departments/dep_move_confirm.tpl:2
 #: plugins/admin/departments/remove.tpl:2 plugins/admin/acl/remove.tpl:2
-#: plugins/admin/groups/remove.tpl:2 plugins/admin/sudo/remove.tpl:2
-#: setup/class_setupStep_Migrate.inc:214 setup/class_setupStep_Migrate.inc:266
-#: setup/class_setupStep_Migrate.inc:397 setup/class_setupStep_Migrate.inc:474
-#: setup/class_setupStep_Migrate.inc:613 setup/class_setupStep_Migrate.inc:743
-#: setup/setup_checks.tpl:32 setup/setup_checks.tpl:93
-#: include/class_tabs.inc:216 include/functions.inc:699
-#: include/functions.inc:2177 include/functions.inc:2181
-#: include/functions.inc:2187 html/password.php:284 html/index.php:57
-#: html/index.php:63 html/index.php:419 html/index.php:425
+#: plugins/admin/groups/remove.tpl:2 setup/class_setupStep_Migrate.inc:214
+#: setup/class_setupStep_Migrate.inc:266 setup/class_setupStep_Migrate.inc:397
+#: setup/class_setupStep_Migrate.inc:474 setup/class_setupStep_Migrate.inc:613
+#: setup/class_setupStep_Migrate.inc:743 setup/setup_checks.tpl:32
+#: setup/setup_checks.tpl:93 include/class_tabs.inc:216
+#: include/functions.inc:699 include/functions.inc:2177
+#: include/functions.inc:2181 include/functions.inc:2187 html/password.php:284
+#: html/index.php:57 html/index.php:63 html/index.php:419 html/index.php:425
 msgid "Warning"
 msgstr "Warnung"
 
@@ -507,7 +505,6 @@ msgstr ""
 
 #: ihtml/themes/default/remove.tpl:9 plugins/admin/users/remove.tpl:10
 #: plugins/admin/ogroups/remove.tpl:10 plugins/admin/groups/remove.tpl:10
-#: plugins/admin/sudo/remove.tpl:9
 msgid "So - if you're sure - press 'Delete' to continue or 'Cancel' to abort."
 msgstr ""
 "Wenn Sie sicher sind, drücken Sie 'Entfernen' um fortzufahren oder "
@@ -652,8 +649,7 @@ msgstr "Bitte entscheiden Sie, wie für diese Sitzung verfahren werden soll"
 
 #: ihtml/themes/default/sizelimit.tpl:9
 msgid "ignore this error and show all entries the LDAP server returns"
-msgstr ""
-"Ignoriere diesen Fehler und zeige alle vom LDAP-Server gelieferten Einträge"
+msgstr "Ignoriere diesen Fehler und zeige alle vom LDAP-Server gelieferten Einträge"
 
 #: ihtml/themes/default/sizelimit.tpl:10
 msgid ""
@@ -772,7 +768,6 @@ msgstr "Gruppe"
 #: plugins/admin/ogroups/class_divListOGroup.inc:83
 #: plugins/admin/departments/class_divListDepartment.inc:156
 #: plugins/admin/groups/class_divListGroup.inc:79
-#: plugins/admin/sudo/class_divListSudo.inc:69
 msgid "Department"
 msgstr "Abteilung"
 
@@ -837,9 +832,8 @@ msgstr "Objektname"
 #: plugins/admin/departments/generic.tpl:16 plugins/admin/acl/acl_role.tpl:17
 #: plugins/admin/acl/class_aclRole.inc:705 plugins/admin/groups/generic.tpl:24
 #: plugins/admin/groups/class_groupGeneric.inc:1209
-#: plugins/admin/sudo/class_sudoGeneric.inc:284
-#: plugins/admin/sudo/generic.tpl:16 include/class_SnapShotDialog.inc:169
-#: html/getxls.php:160 html/getxls.php:289
+#: include/class_SnapShotDialog.inc:169 html/getxls.php:160
+#: html/getxls.php:289
 msgid "Description"
 msgstr "Beschreibung"
 
@@ -871,8 +865,7 @@ msgstr ""
 
 #: plugins/personal/password/class_password.inc:86
 msgid "The password you've entered as 'New password' is empty."
-msgstr ""
-"Das Passwort, welches Sie als 'Neues Passwort' eingegeben haben ist leer."
+msgstr "Das Passwort, welches Sie als 'Neues Passwort' eingegeben haben ist leer."
 
 #: plugins/personal/password/class_password.inc:89 html/password.php:208
 msgid "The password used as new and current are too similar."
@@ -880,8 +873,7 @@ msgstr "Das alte und neue Passwort sind sich zu ähnlich."
 
 #: plugins/personal/password/class_password.inc:92 html/password.php:213
 msgid "The password used as new is to short."
-msgstr ""
-"Das Passwort, welches Sie als 'Neues Passwort' eingegeben haben, ist zu kurz."
+msgstr "Das Passwort, welches Sie als 'Neues Passwort' eingegeben haben, ist zu kurz."
 
 #: plugins/personal/password/class_password.inc:95
 #, php-format
@@ -983,7 +975,6 @@ msgstr "Standard-Zertifikat"
 #: plugins/admin/departments/class_divListDepartment.inc:160
 #: plugins/admin/acl/class_divListACL.inc:172
 #: plugins/admin/groups/class_divListGroup.inc:197
-#: plugins/admin/sudo/class_divListSudo.inc:106
 msgid "Remove"
 msgstr "Entfernen"
 
@@ -1124,10 +1115,8 @@ msgstr "Kennung"
 #: plugins/admin/groups/class_groupGeneric.inc:1089
 #: plugins/admin/groups/class_groupGeneric.inc:1096
 #: plugins/admin/groups/class_groupGeneric.inc:1207
-#: plugins/admin/sudo/class_divListSudo.inc:69
-#: plugins/admin/sudo/class_sudoGeneric.inc:283
-#: plugins/admin/sudo/generic.tpl:8 setup/setup_migrate.tpl:209
-#: setup/setup_feedback.tpl:22 html/getxls.php:225 html/getxls.php:292
+#: setup/setup_migrate.tpl:209 setup/setup_feedback.tpl:22 html/getxls.php:225
+#: html/getxls.php:292
 msgid "Name"
 msgstr "Name"
 
@@ -1248,7 +1237,6 @@ msgstr "Straße"
 #: plugins/admin/acl/class_aclRole.inc:694
 #: plugins/admin/acl/class_divListACL.inc:166
 #: plugins/admin/acl/class_divListACL.inc:225
-#: plugins/admin/sudo/class_divListSudo.inc:99
 msgid "Role"
 msgstr "Rolle"
 
@@ -1263,8 +1251,7 @@ msgid "Generic user settings"
 msgstr "Allgemeine Benutzereinstellungen"
 
 #: plugins/personal/generic/class_user.inc:1454
-#: plugins/admin/users/class_userManagement.inc:26
-#: plugins/admin/sudo/class_sudoGeneric.inc:285 include/class_acl.inc:216
+#: plugins/admin/users/class_userManagement.inc:26 include/class_acl.inc:216
 #: html/getxls.php:91 html/getxls.php:92 html/getxls.php:310
 msgid "Users"
 msgstr "Benutzer"
@@ -1646,8 +1633,7 @@ msgstr "Umgebung"
 #: plugins/personal/posix/class_posixAccount.inc:465
 #, php-format
 msgid "Password can't be changed up to %s days after last change"
-msgstr ""
-"Passwort kann bis zu %s Tage nach der letzten Änderung nicht geändert werden"
+msgstr "Passwort kann bis zu %s Tage nach der letzten Änderung nicht geändert werden"
 
 #: plugins/personal/posix/class_posixAccount.inc:469
 #, php-format
@@ -1910,8 +1896,6 @@ msgstr "Eigenschaften"
 #: plugins/admin/acl/class_divListACL.inc:159
 #: plugins/admin/groups/class_divListGroup.inc:81
 #: plugins/admin/groups/class_divListGroup.inc:181
-#: plugins/admin/sudo/class_divListSudo.inc:70
-#: plugins/admin/sudo/class_divListSudo.inc:93
 msgid "Actions"
 msgstr "Aktionen"
 
@@ -2008,7 +1992,6 @@ msgstr "Übertragen"
 #: plugins/admin/departments/class_divListDepartment.inc:151
 #: plugins/admin/acl/class_divListACL.inc:161
 #: plugins/admin/groups/class_divListGroup.inc:183
-#: plugins/admin/sudo/class_divListSudo.inc:95
 #: setup/class_setupStep_Migrate.inc:900
 msgid "Create"
 msgstr "Anlegen"
@@ -2143,7 +2126,6 @@ msgstr "inaktiv"
 #: plugins/admin/acl/class_divListACL.inc:242
 #: plugins/admin/acl/class_divListACL.inc:264
 #: plugins/admin/groups/class_divListGroup.inc:298
-#: plugins/admin/sudo/class_divListSudo.inc:139
 msgid "edit"
 msgstr "Bearbeiten"
 
@@ -2168,7 +2150,6 @@ msgstr "Nicht erlaubt"
 #: plugins/admin/acl/class_divListACL.inc:252
 #: plugins/admin/acl/class_divListACL.inc:268
 #: plugins/admin/groups/class_divListGroup.inc:307
-#: plugins/admin/sudo/class_divListSudo.inc:143
 msgid "delete"
 msgstr "Entfernen"
 
@@ -2287,8 +2268,7 @@ msgstr "Objektgruppe"
 #: plugins/admin/acl/class_aclManagement.inc:340
 #: plugins/admin/groups/class_groupManagement.inc:387
 #: plugins/admin/groups/class_groupManagement.inc:440
-#: plugins/admin/groups/class_groupManagement.inc:471
-#: plugins/admin/sudo/class_sudoManagement.inc:233 html/getldif.php:82
+#: plugins/admin/groups/class_groupManagement.inc:471 html/getldif.php:82
 #: html/getxls.php:493
 msgid "Permission error"
 msgstr "Berechtigungsfehler"
@@ -2381,8 +2361,7 @@ msgstr "Unbekannte dn:"
 
 #: plugins/admin/ogroups/class_ogroup.inc:674
 msgid "You can combine two different object types at maximum, only!"
-msgstr ""
-"Sie können maximal zwei verschiedene Objekttypen miteinander kombinieren!"
+msgstr "Sie können maximal zwei verschiedene Objekttypen miteinander kombinieren!"
 
 #: plugins/admin/ogroups/class_ogroup.inc:808
 msgid "Object group generic"
@@ -2508,14 +2487,12 @@ msgstr "Telefongruppen"
 #: plugins/admin/ogroups/class_divListOGroup.inc:294
 #: plugins/admin/departments/class_divListDepartment.inc:185
 #: plugins/admin/groups/class_divListGroup.inc:298
-#: plugins/admin/sudo/class_divListSudo.inc:139
 msgid "Edit this entry"
 msgstr "Diesen Eintrag bearbeiten"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:302
 #: plugins/admin/departments/class_divListDepartment.inc:190
 #: plugins/admin/groups/class_divListGroup.inc:307
-#: plugins/admin/sudo/class_divListSudo.inc:143
 msgid "Delete this entry"
 msgstr "Diesen Eintrag entfernen"
 
@@ -2564,8 +2541,7 @@ msgstr "Abteilungen verwalten"
 #: plugins/admin/departments/class_departmentManagement.inc:238
 #, php-format
 msgid "You're about to delete the whole LDAP subtree placed under '%s'."
-msgstr ""
-"Sie sind dabei, einen gesamten LDAP-Teilbaum unterhalb von '%s' zu löschen."
+msgstr "Sie sind dabei, einen gesamten LDAP-Teilbaum unterhalb von '%s' zu löschen."
 
 #: plugins/admin/departments/class_departmentManagement.inc:311
 msgid ""
@@ -2589,8 +2565,7 @@ msgstr ""
 
 #: plugins/admin/departments/dep_move_confirm.tpl:2
 msgid "You are currently moving/renaming this department."
-msgstr ""
-"Momentan sind Sie dabei, diese Abteilung zu verschieben bzw. neu zu benennen."
+msgstr "Momentan sind Sie dabei, diese Abteilung zu verschieben bzw. neu zu benennen."
 
 #: plugins/admin/departments/dep_move_confirm.tpl:5
 msgid ""
@@ -2921,8 +2896,7 @@ msgstr "Liste der Gruppen"
 
 #: plugins/admin/groups/class_divListGroup.inc:84
 msgid "Select to see groups that are primary groups of users"
-msgstr ""
-"Auswählen, um die Gruppen zu sehen, die primären Gruppen der Benutzer sind"
+msgstr "Auswählen, um die Gruppen zu sehen, die primären Gruppen der Benutzer sind"
 
 #: plugins/admin/groups/class_divListGroup.inc:85
 msgid "primary groups"
@@ -3015,8 +2989,7 @@ msgstr "UNIX-Name der Gruppe"
 #: plugins/admin/groups/paste_generic.tpl:13
 #: plugins/admin/groups/generic.tpl:65
 msgid "Normally IDs are autogenerated, select to specify manually"
-msgstr ""
-"Normalerweise werden IDs automatisch generiert. Auswählen um dies zu umgehen"
+msgstr "Normalerweise werden IDs automatisch generiert. Auswählen um dies zu umgehen"
 
 #: plugins/admin/groups/paste_generic.tpl:15
 #: plugins/admin/groups/generic.tpl:68
@@ -3143,102 +3116,6 @@ msgstr "Samba Domänen-Name"
 #: plugins/admin/groups/class_groupGeneric.inc:1218 setup/setup_config2.tpl:15
 msgid "Samba SID"
 msgstr "Samba SID"
-
-#: plugins/admin/sudo/class_divListSudo.inc:48
-#: plugins/admin/sudo/class_divListSudo.inc:49
-msgid "List of sudo roles"
-msgstr "Liste der Sudo-Rollen"
-
-#: plugins/admin/sudo/class_divListSudo.inc:74
-msgid "Regular expression for matching role names"
-msgstr "Regulärer Ausdruck zum Erkennen von Rollennamen"
-
-#: plugins/admin/sudo/class_divListSudo.inc:76
-msgid "Regular expression for matching role member names"
-msgstr "Regulärer Ausdruck zum Erkennen von Rollenmitglieds-Namen"
-
-#: plugins/admin/sudo/class_divListSudo.inc:169
-msgid "Number of listed roles"
-msgstr "Anzahl der angezeigten Rollen"
-
-#: plugins/admin/sudo/class_sudoManagement.inc:26
-#: plugins/admin/sudo/class_sudoGeneric.inc:274
-msgid "Sudo"
-msgstr "Sudo"
-
-#: plugins/admin/sudo/class_sudoManagement.inc:27
-msgid "Manage sudo roles"
-msgstr "Sudo-Rollen verwalten"
-
-#: plugins/admin/sudo/class_sudoManagement.inc:201
-msgid "sudo role"
-msgstr "Sudo-Rolle"
-
-#: plugins/admin/sudo/class_sudoOptions.inc:133
-#, fuzzy
-msgid "Unknown option"
-msgstr "Unbekannt"
-
-#: plugins/admin/sudo/class_sudoOptions.inc:134
-#, php-format
-msgid ""
-"The sudo option '%s' is unkown to GOsa, it is now temporarily added as type "
-"string."
-msgstr ""
-
-#: plugins/admin/sudo/class_sudoOptions.inc:254
-#: plugins/admin/sudo/class_sudoOptions.inc:256
-msgid "string"
-msgstr "Zeichenkette"
-
-#: plugins/admin/sudo/class_sudoOptions.inc:254
-#: plugins/admin/sudo/class_sudoOptions.inc:255
-#: plugins/admin/sudo/class_sudoOptions.inc:256
-msgid "bool"
-msgstr "Boolscher Wert"
-
-#: plugins/admin/sudo/class_sudoOptions.inc:255
-msgid "integer"
-msgstr "Ganzzahl"
-
-#: plugins/admin/sudo/class_sudoOptions.inc:256
-msgid "lists"
-msgstr "Listen"
-
-#: plugins/admin/sudo/class_sudoGeneric.inc:171
-msgid "Invalid"
-msgstr "Ungültig"
-
-#: plugins/admin/sudo/class_sudoGeneric.inc:275
-#: plugins/admin/sudo/class_sudoGeneric.inc:280
-msgid "Sudo role"
-msgstr "Sudo-Rolle"
-
-#: plugins/admin/sudo/class_sudoGeneric.inc:286
-msgid "Host"
-msgstr "Host"
-
-#: plugins/admin/sudo/class_sudoGeneric.inc:287
-msgid "Command"
-msgstr "Kommando"
-
-#: plugins/admin/sudo/class_sudoGeneric.inc:288
-msgid "Run as user"
-msgstr "Ausführung als Benutzer"
-
-#: plugins/admin/sudo/options.tpl:75
-#, fuzzy
-msgid "Available options"
-msgstr "Verfügbare Rollen"
-
-#: plugins/admin/sudo/generic.tpl:29 plugins/admin/sudo/generic.tpl:41
-msgid "Add from list"
-msgstr "Aus Liste hinzufügen"
-
-#: plugins/admin/sudo/main.inc:42 plugins/admin/sudo/main.inc:46
-#, fuzzy
-msgid "Sudo role administration"
-msgstr "Gruppenverwaltung"
 
 #: setup/class_setupStep_Language.inc:40 setup/class_setupStep_Language.inc:41
 msgid "Language setup"
@@ -3711,8 +3588,7 @@ msgstr "Fehlgeschlagen"
 
 #: setup/class_setupStep_Migrate.inc:328
 #, php-format
-msgid ""
-"Found %s winstations outside the predefined winstation department ou '%s'."
+msgid "Found %s winstations outside the predefined winstation department ou '%s'."
 msgstr ""
 "Es wurden %s Windows-Arbeitsstationen ausserhalb der für diese Abteilung "
 "vordefinierten Winstation Organisationseinheit '%s' gefunden."
@@ -3725,8 +3601,7 @@ msgstr "Migrieren"
 #: setup/class_setupStep_Migrate.inc:399
 #, php-format
 msgid "Found %s groups outside the configured tree '%s'."
-msgstr ""
-"Es wurden %s Gruppen ausserhalb des konfigurierten Baums '%s' gefunden."
+msgstr "Es wurden %s Gruppen ausserhalb des konfigurierten Baums '%s' gefunden."
 
 #: setup/class_setupStep_Migrate.inc:400 setup/class_setupStep_Migrate.inc:477
 msgid "Move"
@@ -3735,21 +3610,17 @@ msgstr "Verschieben"
 #: setup/class_setupStep_Migrate.inc:476
 #, php-format
 msgid "Found %s user(s) outside the configured tree '%s'."
-msgstr ""
-"Es wurde(n) %s Benutzer ausserhalb des konfigurierten Baums '%s' gefunden."
+msgstr "Es wurde(n) %s Benutzer ausserhalb des konfigurierten Baums '%s' gefunden."
 
 #: setup/class_setupStep_Migrate.inc:537 setup/class_setupStep_Migrate.inc:550
 #, php-format
-msgid ""
-"The specified user '%s' does not have full access to your ldap database."
-msgstr ""
-"Der angegebene Benutzer '%s' hat keinen Vollzugriff auf Ihre LDAP-Datenbank."
+msgid "The specified user '%s' does not have full access to your ldap database."
+msgstr "Der angegebene Benutzer '%s' hat keinen Vollzugriff auf Ihre LDAP-Datenbank."
 
 #: setup/class_setupStep_Migrate.inc:614
 #, php-format
 msgid "Found %s user(s) that will not be visible in GOsa."
-msgstr ""
-"Es wurde(n) %s Benutzer gefunden, die in GOsa nicht sichtbar sein werden."
+msgstr "Es wurde(n) %s Benutzer gefunden, die in GOsa nicht sichtbar sein werden."
 
 #: setup/class_setupStep_Migrate.inc:664 setup/class_setupStep_Migrate.inc:796
 #: setup/class_setupStep_Migrate.inc:965
@@ -3834,8 +3705,7 @@ msgid "The following references will be updated"
 msgstr "Die folgenden Referenzen werden aktualisiert"
 
 #: setup/class_setupStep_Migrate.inc:1635
-msgid ""
-"The LDAP root object is missing. It is required to use your LDAP service."
+msgid "The LDAP root object is missing. It is required to use your LDAP service."
 msgstr ""
 "Das LDAP Wurzelobjekt fehlt. Es wird für den Betrieb des LDAP-Dienstes "
 "benötigt."
@@ -3925,8 +3795,7 @@ msgstr "Kann Rückmeldung nicht an '%s' senden: %s"
 
 #: setup/class_setupStep_Feedback.inc:149
 msgid "Cannot send feedback: service temporarily unavailable"
-msgstr ""
-"Kann Rückmeldung nicht senden: Der Dienst ist vorübergehend nicht verfügbar"
+msgstr "Kann Rückmeldung nicht senden: Der Dienst ist vorübergehend nicht verfügbar"
 
 #: setup/class_setupStep_Feedback.inc:151
 msgid "Feedback sucessfully send"
@@ -3937,8 +3806,7 @@ msgid "Please specify a valid email address."
 msgstr "Bitte geben Sie eine gültige E-Mail-Adresse ein."
 
 #: setup/class_setupStep_Feedback.inc:185
-msgid ""
-"You have to select at least one of both options, subscribe or send feedback."
+msgid "You have to select at least one of both options, subscribe or send feedback."
 msgstr ""
 "Sie müssen mindestens eine der beiden Optionen auswählen, Abonnement der "
 "Mailingliste oder Senden einer Rückmeldung."
@@ -4127,8 +3995,7 @@ msgstr "Welche Funktionen von GOsa verwenden Sie?"
 
 #: setup/setup_feedback.tpl:136
 msgid "What features do you want to see in future versions of GOsa?"
-msgstr ""
-"Welche Funktionen würden Sie gerne in zukünftigen Versionen von GOsa sehen?"
+msgstr "Welche Funktionen würden Sie gerne in zukünftigen Versionen von GOsa sehen?"
 
 #: setup/setup_feedback.tpl:143
 msgid "Send feedback"
@@ -4400,8 +4267,7 @@ msgstr "GOsa benötigt dieses Modul um die SSHA-Verschlüsselung zu verwenden."
 
 #: setup/class_setupStep_Checks.inc:105
 msgid "GOsa requires this module to talk to an IMAP server."
-msgstr ""
-"GOsa benötigt dieses Modul für die Kommunikation mit einem IMAP-Server."
+msgstr "GOsa benötigt dieses Modul für die Kommunikation mit einem IMAP-Server."
 
 #: setup/class_setupStep_Checks.inc:112
 msgid "mbstring"
@@ -4416,8 +4282,7 @@ msgid "MySQL"
 msgstr "MySQL"
 
 #: setup/class_setupStep_Checks.inc:121
-msgid ""
-"GOsa requires this module to communicate with several supported databases."
+msgid "GOsa requires this module to communicate with several supported databases."
 msgstr ""
 "GOsa benötigt dieses Modul, um mit verschiedenen unterstützten Datenbanken "
 "zu kommunizieren."
@@ -4445,8 +4310,7 @@ msgstr ""
 "Passwörter."
 
 #: setup/class_setupStep_Checks.inc:148
-msgid ""
-"Deploy a gosa-si installation or install the perl Crypt::SmbHash modules."
+msgid "Deploy a gosa-si installation or install the perl Crypt::SmbHash modules."
 msgstr ""
 "Nutzen Sie eine GOsa-SI-Installation oder installieren Sie das Perl-Modul "
 "Crypt::SmbHash."
@@ -4518,8 +4382,7 @@ msgstr ""
 "dieser Wert noch vergrössert werden."
 
 #: setup/class_setupStep_Checks.inc:186
-msgid ""
-"Search for 'memory_limit' in your php.ini and set it to '32M' or higher."
+msgid "Search for 'memory_limit' in your php.ini and set it to '32M' or higher."
 msgstr ""
 "Suchen Sie in Ihrer php.ini nach 'memory_limit' und setzen Sie es auf '32M' "
 "oder höher."
@@ -4543,8 +4406,7 @@ msgid "The Execution time should be at least 30 seconds."
 msgstr "Die Ausführungszeit sollte mindestens 30 Sekunden betragen."
 
 #: setup/class_setupStep_Checks.inc:202
-msgid ""
-"Search for 'max_execution_time' in your php.ini and set it to '30' or higher."
+msgid "Search for 'max_execution_time' in your php.ini and set it to '30' or higher."
 msgstr ""
 "Suchen Sie in Ihrer php.ini nach 'max_execution_time' und setzen Sie es auf "
 "'30' oder höher."
@@ -4560,8 +4422,7 @@ msgstr ""
 
 #: setup/class_setupStep_Checks.inc:210
 msgid "Search for 'expose_php' in your php.ini and set if to 'Off'."
-msgstr ""
-"Suchen Sie in Ihrer php.ini nach 'expose_php' und setzen Sie es auf 'Off'."
+msgstr "Suchen Sie in Ihrer php.ini nach 'expose_php' und setzen Sie es auf 'Off'."
 
 #: setup/class_setupStep_Checks.inc:216
 msgid "On"
@@ -4588,8 +4449,7 @@ msgstr ""
 "stellen."
 
 #: setup/class_setupStep_Checks.inc:226
-msgid ""
-"Search for 'zend.ze1_compatibility_mode' in your php.ini and set it to 'Off'."
+msgid "Search for 'zend.ze1_compatibility_mode' in your php.ini and set it to 'Off'."
 msgstr ""
 "Suchen Sie in Ihrer php.ini nach 'zend.ze1_compatibility_mode' und setzen "
 "Sie es auf 'Off'."
@@ -4644,9 +4504,8 @@ msgid "Path for kiosk profile storage"
 msgstr "Pfad für Kioskprofil-Ablage"
 
 #: setup/setup_config3.tpl:96
-#, fuzzy
 msgid "Override sudo role ou"
-msgstr "Sudo-Rolle"
+msgstr "Sudo-Rolle ignorieren"
 
 #: setup/setup_config3.tpl:115
 msgid "Mail queue script"
@@ -4742,8 +4601,7 @@ msgstr "PHP Modul- und Erweiterungsprüfung"
 
 #: setup/setup_checks.tpl:41 setup/setup_checks.tpl:103
 msgid "GOsa will NOT run without fixing this."
-msgstr ""
-"GOsa kann nicht ausgeführt werden, wenn das Problem nicht behoben wird."
+msgstr "GOsa kann nicht ausgeführt werden, wenn das Problem nicht behoben wird."
 
 #: setup/setup_checks.tpl:45 setup/setup_checks.tpl:107
 msgid "GOsa will run without fixing this."
@@ -4951,8 +4809,7 @@ msgstr "Zertifikat kann nicht geladen werden - nur PEM/DER sind unterstützt!"
 
 #: include/class_certificate.inc:115
 msgid "Cannot extract information for non PEM certificates!"
-msgstr ""
-"Zertifikatinformationen können nur für PEM Zertifikate ermittelt werden!"
+msgstr "Zertifikatinformationen können nur für PEM Zertifikate ermittelt werden!"
 
 #: include/class_certificate.inc:219
 msgid "No valid certificate loaded!"
@@ -4960,8 +4817,7 @@ msgstr "Kein gültiges Zertifikat geladen!"
 
 #: include/class_socketClient.inc:60
 msgid "The mcrypt module was not found. Please install php5-mcrypt."
-msgstr ""
-"Das mcrypt-Modul wurde nicht gefunden. Bitte installieren Sie php5-mcrypt."
+msgstr "Das mcrypt-Modul wurde nicht gefunden. Bitte installieren Sie php5-mcrypt."
 
 #: include/class_socketClient.inc:191
 #, php-format
@@ -5017,8 +4873,7 @@ msgstr "MySQL-Fehler"
 
 #: include/class_log.inc:107
 msgid "Logging to MySQL database will be disabled for this session!"
-msgstr ""
-"Protokollierung in die MySQL-Datenkbank wird für diese Sitzung abgeschaltet!"
+msgstr "Protokollierung in die MySQL-Datenkbank wird für diese Sitzung abgeschaltet!"
 
 #: include/class_log.inc:120
 #, php-format
@@ -5243,8 +5098,7 @@ msgstr ""
 
 #: include/functions.inc:108
 #, php-format
-msgid ""
-"Fatal error: cannot instantiate class '%s' - try running '%s' to fix this"
+msgid "Fatal error: cannot instantiate class '%s' - try running '%s' to fix this"
 msgstr ""
 "Schwerer Fehler: Kann Klasse '%s' nicht instanziieren - bitte führen Sie '%"
 "s' aus um das Problem zu beheben"
@@ -5252,8 +5106,7 @@ msgstr ""
 #: include/functions.inc:318
 #, php-format
 msgid "FATAL: Error when connecting the LDAP. Server said '%s'."
-msgstr ""
-"FATAL: Fehler beim Verbinden mit dem LDAP-Server. Die Meldung lautet '%s'."
+msgstr "FATAL: Fehler beim Verbinden mit dem LDAP-Server. Die Meldung lautet '%s'."
 
 #: include/functions.inc:380
 msgid "Username / UID is not unique inside the LDAP tree!"
@@ -5269,8 +5122,7 @@ msgstr ""
 
 #: include/functions.inc:595 include/functions.inc:681
 msgid "Error while adding a lock. Contact the developers!"
-msgstr ""
-"Fehler beim Setzen einer Sperre. Bitte kontaktieren Sie die Entwickler!"
+msgstr "Fehler beim Setzen einer Sperre. Bitte kontaktieren Sie die Entwickler!"
 
 #: include/functions.inc:605
 #, php-format
@@ -5473,8 +5325,7 @@ msgstr "Russisch"
 
 #: include/functions.inc:2528
 #, php-format
-msgid ""
-"Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
 msgstr ""
 "Das in POSTMODIFY angegebene Kommando '%s' (Modul '%s') scheint nicht zu "
 "existieren."
@@ -5496,8 +5347,7 @@ msgstr ""
 
 #: include/class_ldap.inc:591
 #, php-format
-msgid ""
-"Cannot automatically create subtrees with RDN '%s': no object class found!"
+msgid "Cannot automatically create subtrees with RDN '%s': no object class found!"
 msgstr ""
 "Kann Teilbäume mit RDN '%s' nicht automatisch erzeugen: keine Objektklasse "
 "gefunden!"
@@ -5505,8 +5355,7 @@ msgstr ""
 #: include/class_ldap.inc:639
 #, php-format
 msgid "Cannot automatically create subtrees with RDN '%s': not supported"
-msgstr ""
-"Kann Teilbäume mit RDN '%s' nicht automatisch erzeugen: nicht unterstützt"
+msgstr "Kann Teilbäume mit RDN '%s' nicht automatisch erzeugen: nicht unterstützt"
 
 #: include/class_ldap.inc:723
 #, php-format
@@ -5727,8 +5576,7 @@ msgstr "Das Feld '%s' enthält ein reserviertes Schlüsselwort!"
 #: include/utils/class_msgPool.inc:200
 #, php-format
 msgid "Command specified as %s hook for plugin '%s' does not exist!"
-msgstr ""
-"Das als '%s'-Erweiterung angegebene Kommando für Modul '%s' existiert nicht!"
+msgstr "Das als '%s'-Erweiterung angegebene Kommando für Modul '%s' existiert nicht!"
 
 #: include/utils/class_msgPool.inc:207
 #, php-format
@@ -5875,8 +5723,7 @@ msgstr "Dieses Konto besitzt keine gültigen %s-Einstellungen."
 
 #: include/utils/class_msgPool.inc:381
 #, php-format
-msgid ""
-"This account has %s settings enabled. You can disable them by clicking below."
+msgid "This account has %s settings enabled. You can disable them by clicking below."
 msgstr ""
 "Dieses Konto besitzt aktivierte %s-Einstellungen. Sie können diese durch "
 "einen Klick auf die untere Schaltfläche deaktivieren."
@@ -5892,8 +5739,7 @@ msgstr ""
 
 #: include/utils/class_msgPool.inc:400
 #, php-format
-msgid ""
-"This account has %s settings disabled. You can enable them by clicking below."
+msgid "This account has %s settings disabled. You can enable them by clicking below."
 msgstr ""
 "Dieses Konto hat keine %s-Einstellungen aktiviert. Sie können Sie durch "
 "einen Klick auf die Schaltfläche aktivieren."
@@ -6236,8 +6082,7 @@ msgstr "Authentifizierungsfehler"
 
 #: html/index.php:318
 msgid "Cannot retrieve user information for htaccess authentication!"
-msgstr ""
-"Konnte Benutzerinformation für htaccess-Authentisierung nicht beziehen!"
+msgstr "Konnte Benutzerinformation für htaccess-Authentisierung nicht beziehen!"
 
 #: html/index.php:374
 msgid "Account locked. Please contact your system administrator!"
@@ -6435,14 +6280,3 @@ msgstr ""
 "Auf das Hilfeverzeichnis '%s' kann nicht zugegriffen werden - kann daher "
 "keine Hilfedateien lesen."
 
-#~ msgid "Flags"
-#~ msgstr "Flags"
-
-#~ msgid "Configuration"
-#~ msgstr "Konfiguration"
-
-#~ msgid "The sudo object path is not configured."
-#~ msgstr "Der Sudo Objekt-Pfad ist nicht konfiguriert."
-
-#~ msgid "Enable system deployment"
-#~ msgstr "Aktiviere Systemverteilung"

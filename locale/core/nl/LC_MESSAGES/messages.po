@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-04 09:36+0200\n"
+"POT-Creation-Date: 2008-04-04 09:53+0200\n"
 "PO-Revision-Date: 2006-06-02 16:58+0100\n"
 "Last-Translator: Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>\n"
 "Language-Team: CareWorks ICT Services <info@careworks.nl>\n"
@@ -33,15 +33,14 @@ msgstr "Er is een sessie conflict gedetecteerd"
 #: plugins/admin/users/remove.tpl:2 plugins/admin/ogroups/remove.tpl:2
 #: plugins/admin/departments/dep_move_confirm.tpl:2
 #: plugins/admin/departments/remove.tpl:2 plugins/admin/acl/remove.tpl:2
-#: plugins/admin/groups/remove.tpl:2 plugins/admin/sudo/remove.tpl:2
-#: setup/class_setupStep_Migrate.inc:214 setup/class_setupStep_Migrate.inc:266
-#: setup/class_setupStep_Migrate.inc:397 setup/class_setupStep_Migrate.inc:474
-#: setup/class_setupStep_Migrate.inc:613 setup/class_setupStep_Migrate.inc:743
-#: setup/setup_checks.tpl:32 setup/setup_checks.tpl:93
-#: include/class_tabs.inc:216 include/functions.inc:699
-#: include/functions.inc:2177 include/functions.inc:2181
-#: include/functions.inc:2187 html/password.php:284 html/index.php:57
-#: html/index.php:63 html/index.php:419 html/index.php:425
+#: plugins/admin/groups/remove.tpl:2 setup/class_setupStep_Migrate.inc:214
+#: setup/class_setupStep_Migrate.inc:266 setup/class_setupStep_Migrate.inc:397
+#: setup/class_setupStep_Migrate.inc:474 setup/class_setupStep_Migrate.inc:613
+#: setup/class_setupStep_Migrate.inc:743 setup/setup_checks.tpl:32
+#: setup/setup_checks.tpl:93 include/class_tabs.inc:216
+#: include/functions.inc:699 include/functions.inc:2177
+#: include/functions.inc:2181 include/functions.inc:2187 html/password.php:284
+#: html/index.php:57 html/index.php:63 html/index.php:419 html/index.php:425
 msgid "Warning"
 msgstr "Waarschuwing"
 
@@ -508,7 +507,6 @@ msgstr ""
 
 #: ihtml/themes/default/remove.tpl:9 plugins/admin/users/remove.tpl:10
 #: plugins/admin/ogroups/remove.tpl:10 plugins/admin/groups/remove.tpl:10
-#: plugins/admin/sudo/remove.tpl:9
 msgid "So - if you're sure - press 'Delete' to continue or 'Cancel' to abort."
 msgstr ""
 "Indien u zeker bent drukt u dan 'Verwijderen' om door te gaan of 'Annuleren' "
@@ -771,7 +769,6 @@ msgstr "Groep"
 #: plugins/admin/ogroups/class_divListOGroup.inc:83
 #: plugins/admin/departments/class_divListDepartment.inc:156
 #: plugins/admin/groups/class_divListGroup.inc:79
-#: plugins/admin/sudo/class_divListSudo.inc:69
 msgid "Department"
 msgstr "Afdeling"
 
@@ -836,9 +833,8 @@ msgstr "Objectnaam"
 #: plugins/admin/departments/generic.tpl:16 plugins/admin/acl/acl_role.tpl:17
 #: plugins/admin/acl/class_aclRole.inc:705 plugins/admin/groups/generic.tpl:24
 #: plugins/admin/groups/class_groupGeneric.inc:1209
-#: plugins/admin/sudo/class_sudoGeneric.inc:284
-#: plugins/admin/sudo/generic.tpl:16 include/class_SnapShotDialog.inc:169
-#: html/getxls.php:160 html/getxls.php:289
+#: include/class_SnapShotDialog.inc:169 html/getxls.php:160
+#: html/getxls.php:289
 msgid "Description"
 msgstr "Omschrijving"
 
@@ -986,7 +982,6 @@ msgstr "Standaard certificaat"
 #: plugins/admin/departments/class_divListDepartment.inc:160
 #: plugins/admin/acl/class_divListACL.inc:172
 #: plugins/admin/groups/class_divListGroup.inc:197
-#: plugins/admin/sudo/class_divListSudo.inc:106
 msgid "Remove"
 msgstr "Verwijderen"
 
@@ -1130,10 +1125,8 @@ msgstr "Inlognaam"
 #: plugins/admin/groups/class_groupGeneric.inc:1089
 #: plugins/admin/groups/class_groupGeneric.inc:1096
 #: plugins/admin/groups/class_groupGeneric.inc:1207
-#: plugins/admin/sudo/class_divListSudo.inc:69
-#: plugins/admin/sudo/class_sudoGeneric.inc:283
-#: plugins/admin/sudo/generic.tpl:8 setup/setup_migrate.tpl:209
-#: setup/setup_feedback.tpl:22 html/getxls.php:225 html/getxls.php:292
+#: setup/setup_migrate.tpl:209 setup/setup_feedback.tpl:22 html/getxls.php:225
+#: html/getxls.php:292
 msgid "Name"
 msgstr "Naam"
 
@@ -1255,7 +1248,6 @@ msgstr "Straat"
 #: plugins/admin/acl/class_aclRole.inc:694
 #: plugins/admin/acl/class_divListACL.inc:166
 #: plugins/admin/acl/class_divListACL.inc:225
-#: plugins/admin/sudo/class_divListSudo.inc:99
 msgid "Role"
 msgstr "Funktie"
 
@@ -1271,8 +1263,7 @@ msgid "Generic user settings"
 msgstr "Algemene wachtrij instellingen"
 
 #: plugins/personal/generic/class_user.inc:1454
-#: plugins/admin/users/class_userManagement.inc:26
-#: plugins/admin/sudo/class_sudoGeneric.inc:285 include/class_acl.inc:216
+#: plugins/admin/users/class_userManagement.inc:26 include/class_acl.inc:216
 #: html/getxls.php:91 html/getxls.php:92 html/getxls.php:310
 msgid "Users"
 msgstr "Gebruikers"
@@ -1949,8 +1940,6 @@ msgstr "Eigenschappen"
 #: plugins/admin/acl/class_divListACL.inc:159
 #: plugins/admin/groups/class_divListGroup.inc:81
 #: plugins/admin/groups/class_divListGroup.inc:181
-#: plugins/admin/sudo/class_divListSudo.inc:70
-#: plugins/admin/sudo/class_divListSudo.inc:93
 msgid "Actions"
 msgstr "Acties"
 
@@ -2054,7 +2043,6 @@ msgstr "Verwerk"
 #: plugins/admin/departments/class_divListDepartment.inc:151
 #: plugins/admin/acl/class_divListACL.inc:161
 #: plugins/admin/groups/class_divListGroup.inc:183
-#: plugins/admin/sudo/class_divListSudo.inc:95
 #: setup/class_setupStep_Migrate.inc:900
 msgid "Create"
 msgstr "Aanmaken"
@@ -2193,7 +2181,6 @@ msgstr "actief"
 #: plugins/admin/acl/class_divListACL.inc:242
 #: plugins/admin/acl/class_divListACL.inc:264
 #: plugins/admin/groups/class_divListGroup.inc:298
-#: plugins/admin/sudo/class_divListSudo.inc:139
 msgid "edit"
 msgstr "Bewerk"
 
@@ -2220,7 +2207,6 @@ msgstr "Het veranderen van het wachtwoord is niet toegestaan"
 #: plugins/admin/acl/class_divListACL.inc:252
 #: plugins/admin/acl/class_divListACL.inc:268
 #: plugins/admin/groups/class_divListGroup.inc:307
-#: plugins/admin/sudo/class_divListSudo.inc:143
 msgid "delete"
 msgstr "Verwijder"
 
@@ -2349,8 +2335,7 @@ msgstr "Objectgroep"
 #: plugins/admin/acl/class_aclManagement.inc:340
 #: plugins/admin/groups/class_groupManagement.inc:387
 #: plugins/admin/groups/class_groupManagement.inc:440
-#: plugins/admin/groups/class_groupManagement.inc:471
-#: plugins/admin/sudo/class_sudoManagement.inc:233 html/getldif.php:82
+#: plugins/admin/groups/class_groupManagement.inc:471 html/getldif.php:82
 #: html/getxls.php:493
 #, fuzzy
 msgid "Permission error"
@@ -2586,14 +2571,12 @@ msgstr "Toon groepen"
 #: plugins/admin/ogroups/class_divListOGroup.inc:294
 #: plugins/admin/departments/class_divListDepartment.inc:185
 #: plugins/admin/groups/class_divListGroup.inc:298
-#: plugins/admin/sudo/class_divListSudo.inc:139
 msgid "Edit this entry"
 msgstr "Bewerk deze invoer"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:302
 #: plugins/admin/departments/class_divListDepartment.inc:190
 #: plugins/admin/groups/class_divListGroup.inc:307
-#: plugins/admin/sudo/class_divListSudo.inc:143
 msgid "Delete this entry"
 msgstr "Verwijder deze invoer"
 
@@ -3253,117 +3236,6 @@ msgstr "Samba home"
 #, fuzzy
 msgid "Samba SID"
 msgstr "Samba"
-
-#: plugins/admin/sudo/class_divListSudo.inc:48
-#: plugins/admin/sudo/class_divListSudo.inc:49
-#, fuzzy
-msgid "List of sudo roles"
-msgstr "Lijst met gebruikers"
-
-#: plugins/admin/sudo/class_divListSudo.inc:74
-#, fuzzy
-msgid "Regular expression for matching role names"
-msgstr "Reguliere expressie voor overeenkomende groepnamen"
-
-#: plugins/admin/sudo/class_divListSudo.inc:76
-#, fuzzy
-msgid "Regular expression for matching role member names"
-msgstr "Reguliere expressie voor overeenkomende objectnamen"
-
-#: plugins/admin/sudo/class_divListSudo.inc:169
-#, fuzzy
-msgid "Number of listed roles"
-msgstr "Naam van de groep"
-
-#: plugins/admin/sudo/class_sudoManagement.inc:26
-#: plugins/admin/sudo/class_sudoGeneric.inc:274
-#, fuzzy
-msgid "Sudo"
-msgstr "Achternaam"
-
-#: plugins/admin/sudo/class_sudoManagement.inc:27
-#, fuzzy
-msgid "Manage sudo roles"
-msgstr "Windows gebruikers"
-
-#: plugins/admin/sudo/class_sudoManagement.inc:201
-#, fuzzy
-msgid "sudo role"
-msgstr "! onbekend id"
-
-#: plugins/admin/sudo/class_sudoOptions.inc:133
-#, fuzzy
-msgid "Unknown option"
-msgstr "Onbekend"
-
-#: plugins/admin/sudo/class_sudoOptions.inc:134
-#, php-format
-msgid ""
-"The sudo option '%s' is unkown to GOsa, it is now temporarily added as type "
-"string."
-msgstr ""
-
-#: plugins/admin/sudo/class_sudoOptions.inc:254
-#: plugins/admin/sudo/class_sudoOptions.inc:256
-#, fuzzy
-msgid "string"
-msgstr "Waarschuwing"
-
-#: plugins/admin/sudo/class_sudoOptions.inc:254
-#: plugins/admin/sudo/class_sudoOptions.inc:255
-#: plugins/admin/sudo/class_sudoOptions.inc:256
-msgid "bool"
-msgstr ""
-
-#: plugins/admin/sudo/class_sudoOptions.inc:255
-#, fuzzy
-msgid "integer"
-msgstr "printers"
-
-#: plugins/admin/sudo/class_sudoOptions.inc:256
-#, fuzzy
-msgid "lists"
-msgstr "klasse"
-
-#: plugins/admin/sudo/class_sudoGeneric.inc:171
-#, fuzzy
-msgid "Invalid"
-msgstr "ongeldig"
-
-#: plugins/admin/sudo/class_sudoGeneric.inc:275
-#: plugins/admin/sudo/class_sudoGeneric.inc:280
-#, fuzzy
-msgid "Sudo role"
-msgstr "! onbekend id"
-
-#: plugins/admin/sudo/class_sudoGeneric.inc:286
-#, fuzzy
-msgid "Host"
-msgstr "Inhakers"
-
-#: plugins/admin/sudo/class_sudoGeneric.inc:287
-#, fuzzy
-msgid "Command"
-msgstr "en"
-
-#: plugins/admin/sudo/class_sudoGeneric.inc:288
-#, fuzzy
-msgid "Run as user"
-msgstr "Windows gebruikers"
-
-#: plugins/admin/sudo/options.tpl:75
-#, fuzzy
-msgid "Available options"
-msgstr "Beschikbare programma's"
-
-#: plugins/admin/sudo/generic.tpl:29 plugins/admin/sudo/generic.tpl:41
-msgid "Add from list"
-msgstr ""
-
-#: plugins/admin/sudo/main.inc:42 plugins/admin/sudo/main.inc:46
-#, fuzzy
-msgid "Sudo role administration"
-msgstr "Groepen beheer"
 
 #: setup/class_setupStep_Language.inc:40 setup/class_setupStep_Language.inc:41
 #, fuzzy
@@ -6679,6 +6551,78 @@ msgid "Helpdir '%s' is not accessible, can't read any helpfiles."
 msgstr ""
 "Help directory '%s' is niet toegankelijk. Er kunnen geen helpbestanden "
 "gelezen worden."
+
+#, fuzzy
+#~ msgid "List of sudo roles"
+#~ msgstr "Lijst met gebruikers"
+
+#, fuzzy
+#~ msgid "Regular expression for matching role names"
+#~ msgstr "Reguliere expressie voor overeenkomende groepnamen"
+
+#, fuzzy
+#~ msgid "Regular expression for matching role member names"
+#~ msgstr "Reguliere expressie voor overeenkomende objectnamen"
+
+#, fuzzy
+#~ msgid "Number of listed roles"
+#~ msgstr "Naam van de groep"
+
+#, fuzzy
+#~ msgid "Sudo"
+#~ msgstr "Achternaam"
+
+#, fuzzy
+#~ msgid "Manage sudo roles"
+#~ msgstr "Windows gebruikers"
+
+#, fuzzy
+#~ msgid "sudo role"
+#~ msgstr "! onbekend id"
+
+#, fuzzy
+#~ msgid "Unknown option"
+#~ msgstr "Onbekend"
+
+#, fuzzy
+#~ msgid "string"
+#~ msgstr "Waarschuwing"
+
+#, fuzzy
+#~ msgid "integer"
+#~ msgstr "printers"
+
+#, fuzzy
+#~ msgid "lists"
+#~ msgstr "klasse"
+
+#, fuzzy
+#~ msgid "Invalid"
+#~ msgstr "ongeldig"
+
+#, fuzzy
+#~ msgid "Sudo role"
+#~ msgstr "! onbekend id"
+
+#, fuzzy
+#~ msgid "Host"
+#~ msgstr "Inhakers"
+
+#, fuzzy
+#~ msgid "Command"
+#~ msgstr "en"
+
+#, fuzzy
+#~ msgid "Run as user"
+#~ msgstr "Windows gebruikers"
+
+#, fuzzy
+#~ msgid "Available options"
+#~ msgstr "Beschikbare programma's"
+
+#, fuzzy
+#~ msgid "Sudo role administration"
+#~ msgstr "Groepen beheer"
 
 #, fuzzy
 #~ msgid "Flags"
