@@ -2,6 +2,7 @@ gosa (2.5.16-1) unstable; urgency=low
 
   * Included spanish debconf translation (Closes #472271)
   * Fixed problem with broken characters in the password fields (Closes #470303)
+  * Added apache configuration advisory to the README.debian
 
  -- Cajus Pollmeier <cajus@debian.org>  Fri, 04 Apr 2008 09:03:52 +0200
 
