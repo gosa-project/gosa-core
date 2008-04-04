@@ -822,6 +822,7 @@ I: Only insider delivery */
             because the kolab deamon will set the acls for us.
 
      */
+    $acls_set_for = array();
     foreach ($this->imapacl as $user => $acl){
 
       /* Skip empty entries */
@@ -846,7 +847,14 @@ I: Only insider delivery */
         if(isset($attrs['mail'][0])){
 
           $name = $attrs[$uattrib][0];
-          $this->attrs['acl'][]= $name." ".$acl;
+
+          /* Do not overwrite manually set ACLs with group member acls 
+          */
+          if(!in_array($name,$acls_set_for)){
+            $this->attrs['acl'][]= $name." ".$acl;
+          }
+          $acls_set_for[] = $name;
+      
 
           /* Do not write imap acl directly i nkolab mode, let the kolab deamon do this. */
           unset($this->imapacl[$user]);
@@ -864,7 +872,13 @@ I: Only insider delivery */
         /* Seems to be a manually a added acl 
          * Write this acl.
          */
-        $this->attrs['acl'][]= $user." ".$acl;
+
+        /* Do not overwrite manually set ACLs with group member acls 
+         */
+        if(!in_array($user,$acls_set_for)){
+          $this->attrs['acl'][]= $user." ".$acl;
+          $acls_set_for[] = $user;
+        }
 
         /* In case of kolab methods, let the deamon add the imap acls */
         if(preg_match("/olab/i",$this->mmethod)){
