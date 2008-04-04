@@ -138,7 +138,7 @@ class sudoOption extends plugin
         /* Create internal sudoOption object */
         $option = array();
         $option['NAME']   = $opt;
-        $option['VALUE']  = array($value);
+        $option['VALUE']  = $value;
         $option['NEGATE'] = $negation;
 
         /*  Special handling for mixed flag types. 
@@ -149,9 +149,9 @@ class sudoOption extends plugin
           if(empty($value)){
             $option['NEGATE'] = FALSE;
             if($negation){
-              $option['VALUE'] = array(0 => "FALSE");
+              $option['VALUE'] = "FALSE";
             }else{
-              $option['VALUE'] = array(0 => "TRUE");
+              $option['VALUE'] = "TRUE";
             }
           }
         }
@@ -164,9 +164,9 @@ class sudoOption extends plugin
         if(in_array($this->options[$opt]['TYPE'],array("BOOLEAN"))){
           $option['NEGATE'] = FALSE;
           if($negation){
-            $option['VALUE'] = array(0 => "FALSE");
+            $option['VALUE'] = "FALSE";
           }else{
-            $option['VALUE'] = array(0 => "TRUE");
+            $option['VALUE'] = "TRUE";
           }
         }
 
@@ -204,7 +204,7 @@ class sudoOption extends plugin
         $opt = preg_replace("/^negOption_/","",$name);
         $opt = preg_replace("/_[^_]*$/","",$opt);
         if(isset($this->sudoOption[$opt])){
-          $val = $this->sudoOption[$opt]['VALUE'][0];
+          $val = $this->sudoOption[$opt]["VALUE"];
 
           /*****
             Negate STRING_BOOL && BOOL_INTEGER
@@ -212,9 +212,9 @@ class sudoOption extends plugin
           if(in_array($this->options[$opt]['TYPE'],array('STRING_BOOL','BOOL_INTEGER'))){
             if(in_array($val, array("TRUE","FALSE"))){
               if($val == "TRUE"){
-                $this->sudoOption[$opt]['VALUE'][0] = "FALSE";
+                $this->sudoOption[$opt]["VALUE"] = "FALSE";
               }else{
-                $this->sudoOption[$opt]['VALUE'][0] = "TRUE";
+                $this->sudoOption[$opt]["VALUE"] = "TRUE";
               }
             }else{
                $this->sudoOption[$opt]['NEGATE'] = !$this->sudoOption[$opt]['NEGATE']; 
@@ -233,9 +233,9 @@ class sudoOption extends plugin
            *****/
           if(in_array($this->options[$opt]['TYPE'],array('BOOLEAN'))){
             if($val == "TRUE"){
-              $this->sudoOption[$opt]['VALUE'][0] = "FALSE";
+              $this->sudoOption[$opt]["VALUE"] = "FALSE";
             }else{
-              $this->sudoOption[$opt]['VALUE'][0] = "TRUE";
+              $this->sudoOption[$opt]["VALUE"] = "TRUE";
             }
           }
         }
@@ -298,7 +298,7 @@ class sudoOption extends plugin
       /* Append attribute only once, lists are handled below */
       if(isset($this->options[$opt]) && !isset($this->sudoOption[$opt])){
         $type = $this->options[$opt]['TYPE'];
-        $val  = array($this->options[$opt]['DEFAULT']);
+        $val  = $this->options[$opt]['DEFAULT'];
         $option = array("NAME" => $opt, "VALUE" => $val , "NEGATE" => FALSE);
 
         if($type == "LISTS"){
@@ -308,7 +308,7 @@ class sudoOption extends plugin
         }
       }elseif(isset($this->options[$opt]) && isset($this->sudoOption[$opt]) && $this->options[$opt]['TYPE'] == "LISTS"){
         $type = $this->options[$opt]['TYPE'];
-        $val  = array($this->options[$opt]['DEFAULT']);
+        $val  = $this->options[$opt]['DEFAULT'];
         $option = array("NAME" => $opt, "VALUE" => $val , "NEGATE" => FALSE);
         $this->sudoOption[$opt][] = $option;
       }
@@ -321,7 +321,7 @@ class sudoOption extends plugin
        ****/
       if(in_array($this->options[$name]['TYPE'],array("BOOLEAN"))){
         if(isset($_POST['option_value__'.$name])){
-          $this->sudoOption[$name]['VALUE'][0] = get_post('option_value__'.$name);
+          $this->sudoOption[$name]["VALUE"] = get_post('option_value__'.$name);
         }
       }
 
@@ -330,7 +330,7 @@ class sudoOption extends plugin
        ****/
       if(in_array($this->options[$name]['TYPE'],array("STRING","INTEGER"))){
         if(isset($_POST['option_value__'.$name])){
-          $this->sudoOption[$name]['VALUE'][0] = get_post('option_value__'.$name);
+          $this->sudoOption[$name]["VALUE"] = get_post('option_value__'.$name);
         }
       }
 
@@ -346,10 +346,10 @@ class sudoOption extends plugin
           }
 
           if($sel == "FALSE" || $sel == "TRUE"){
-            $this->sudoOption[$name]['VALUE'] = array($sel);
+            $this->sudoOption[$name]['VALUE'] = $sel;
             $this->sudoOption[$name]['NEGATE'] = FALSE;
           }else{
-            $this->sudoOption[$name]['VALUE'] = array($val);
+            $this->sudoOption[$name]['VALUE'] = $val;
           }
         }
       }
@@ -361,7 +361,7 @@ class sudoOption extends plugin
         foreach($this->sudoOption[$name] as $entry_key => $entry){
           if(isset($_POST['list_value__'.$name.'_'.$entry_key])){
             $val = get_post('list_value__'.$name.'_'.$entry_key);
-            $this->sudoOption[$name][$entry_key]['VALUE'][0] = $val;
+            $this->sudoOption[$name][$entry_key]["VALUE"] = $val;
           }
         } 
       }
@@ -380,7 +380,7 @@ class sudoOption extends plugin
 
       if($type=="LISTS"){
         foreach($this->sudoOption[$name] as $entry_key => $entry){
-          $val =  $entry['VALUE'][0];
+          $val =  $entry["VALUE"];
           if(empty($val)){
             $option = $name;
           }else{
@@ -395,7 +395,7 @@ class sudoOption extends plugin
       }
 
       $neg    = $opt['NEGATE'];
-      $value  = $opt['VALUE'][0];
+      $value  = $opt["VALUE"];
       $option = "";
 
       /****

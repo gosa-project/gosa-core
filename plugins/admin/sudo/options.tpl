@@ -22,7 +22,7 @@
       <img src='images/negate.png' alt="!">
      {/if}
     </td>
-    <td><input type='text' value="{$entry.VALUE.0}" name="list_value__{$key}_{$entry_key}"></td>
+    <td><input type='text' value="{$entry.VALUE}" name="list_value__{$key}_{$entry_key}"></td>
     <td>
      <input type='image' src='images/negate.png'     name='negListOption_{$key}_{$entry_key}' class='center'>
      <input type='image' src='images/edittrash.png'  name='delListOption_{$key}_{$entry_key}' class='center'>
@@ -45,43 +45,43 @@
   {if $options[$item.NAME].TYPE == "STRING"}
    <!-- STRING  
     -->
-   <input type='text' name='option_value__{$key}' value="{$item.VALUE.0}" style='width:280px;'> 
+   <input type='text' name='option_value__{$key}' value="{$item.VALUE}" style='width:280px;'> 
   {elseif $options[$item.NAME].TYPE == "INTEGER"}
    <!-- INTEGER  
     -->
-   <input type='text' name='option_value__{$key}' value="{$item.VALUE.0}" style='width:280px;'>
+   <input type='text' name='option_value__{$key}' value="{$item.VALUE}" style='width:280px;'>
   {elseif $options[$item.NAME].TYPE == "BOOLEAN"}
    <!-- BOOLEAN  
     -->
    <select name="option_value__{$key}">
-    <option {if $item.VALUE.0 == "FALSE"} selected {/if}value="FALSE">FALSE</option>
-    <option {if $item.VALUE.0 == "TRUE"} selected {/if}value="TRUE">TRUE</option>
+    <option {if $item.VALUE == "FALSE"} selected {/if}value="FALSE">FALSE</option>
+    <option {if $item.VALUE == "TRUE"} selected {/if}value="TRUE">TRUE</option>
    </select>
   {elseif $options[$item.NAME].TYPE == "BOOL_INTEGER"}
    <!-- BOOLEAN_INTEGER 
     -->
    <select name="option_selection__{$key}" id="option_selection__{$key}"
 	onChange="toggle_bool_fields('option_selection__{$key}','option_value__{$key}');">
-    <option {if $item.VALUE.0 == "FALSE"} selected {/if}value="FALSE">FALSE</option>
-    <option {if $item.VALUE.0 == "TRUE"} selected {/if}value="TRUE">TRUE</option>
-    <option {if $item.VALUE.0 != "TRUE" && $item.VALUE.0 != "FALSE"} selected {/if}
+    <option {if $item.VALUE == "FALSE"} selected {/if}value="FALSE">FALSE</option>
+    <option {if $item.VALUE == "TRUE"} selected {/if}value="TRUE">TRUE</option>
+    <option {if $item.VALUE != "TRUE" && $item.VALUE != "FALSE"} selected {/if}
 	value="STRING">STRING</option>
-    <input type='text' value="{$item.VALUE.0}" style='width:280px;' name='option_value__{$key}'
+    <input type='text' value="{$item.VALUE}" style='width:280px;' name='option_value__{$key}'
 	id="option_value__{$key}"
-        {if $item.VALUE.0 == "FALSE" ||  $item.VALUE.0 == "TRUE"} disabled {/if}>
+        {if $item.VALUE == "FALSE" ||  $item.VALUE == "TRUE"} disabled {/if}>
    </select> 
   {elseif $options[$item.NAME].TYPE == "STRING_BOOL"}
    <!-- STRING_BOOLEAN 
     -->
    <select name="option_selection__{$key}" id="option_selection__{$key}"
 	onChange="toggle_bool_fields('option_selection__{$key}','option_value__{$key}');">
-    <option {if $item.VALUE.0 == "FALSE"} selected {/if}value="FALSE">FALSE</option>
-    <option {if $item.VALUE.0 == "TRUE"} selected {/if}value="TRUE">TRUE</option>
-    <option {if $item.VALUE.0 != "TRUE" && $item.VALUE.0 != "FALSE"} selected {/if}
+    <option {if $item.VALUE == "FALSE"} selected {/if}value="FALSE">FALSE</option>
+    <option {if $item.VALUE == "TRUE"} selected {/if}value="TRUE">TRUE</option>
+    <option {if $item.VALUE != "TRUE" && $item.VALUE != "FALSE"} selected {/if}
 	value="STRING">STRING</option>
-    <input type='text' value="{$item.VALUE.0}" style='width:280px;' name='option_value__{$key}'
+    <input type='text' value="{$item.VALUE}" style='width:280px;' name='option_value__{$key}'
 	id="option_value__{$key}" 
-        {if $item.VALUE.0 == "FALSE" ||  $item.VALUE.0 == "TRUE"} disabled {/if}>
+        {if $item.VALUE == "FALSE" ||  $item.VALUE == "TRUE"} disabled {/if}>
    </select> 
   {/if}
   </td>
