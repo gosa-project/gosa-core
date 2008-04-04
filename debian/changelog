@@ -1,3 +1,9 @@
+gosa (2.5.16-1) unstable; urgency=low
+
+  * Included spanish debconf translation (Closes #472271)
+
+ -- Cajus Pollmeier <cajus@debian.org>  Fri, 04 Apr 2008 09:03:52 +0200
+
 gosa (2.5.15-1) unstable; urgency=low
 
   * Removed bashisms from desktop package (Closes #464988)
