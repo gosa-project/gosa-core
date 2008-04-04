@@ -36,25 +36,7 @@ class sudoManagement extends plugin
     /* Save configuration for internal use */
     $this->config = &$config;
     $this->ui     = &$ui;
-    $this->base   = @get_ou("sudoou");
-
-    /***
-      GET sudo base
-     ***/
-    if(empty($this->base)){
-      /* Default is ou=sudoers,BASE */
-      $this->base = "ou=sudoers,".$this->config->current['BASE'];
-    }else{
-  
-      /* Append base to given sudoers ou if missing */
-      if(!preg_match("/".normalizePreg($this->config->current['BASE'])."$/i",$this->base)){
-        if(!preg_match("/,$/",$this->base)){
-          $this->base = $this->base.",".$this->config->current['BASE'];
-        }else{
-          $this->base = $this->base.$this->config->current['BASE'];
-        }
-      }
-    }
+    $this->base   = sudo::get_sudoers_ou($this->config);
 
     /* Create dialog object */
     $this->DivListSudo = new divListSudo($this->config,$this);
@@ -75,10 +57,10 @@ class sudoManagement extends plugin
           "/^act$/","/^id$/","/^sudo_edit_/",
           "/^sudo_del_/","/^item_selected/","/menu_action/"));
 
-    /* Save data */
+
+    /* Get html posts */
     $s_action   = "";
     $s_entry    = "";
-
     foreach($_POST as $name => $value){
       if(preg_match("/^sudo_edit_/",$name)){
         $s_action = "edit_role";
@@ -98,12 +80,12 @@ class sudoManagement extends plugin
       } 
     }
  
-    /* handle C&P from layers menu */
     if(isset($_POST['menu_action']) && in_array($_POST['menu_action'],array("new_role","remove_multiple"))){
       $s_action = $_POST['menu_action'];
     }
 
     $smarty= get_smarty();
+
 
     /********************
       Create a new sudo  ...
@@ -113,7 +95,7 @@ class sudoManagement extends plugin
     if ($s_action=="new_role"){
 
       /* Check create permissions */
-      $acl = $this->ui->get_permissions($this->DivListSudo->selectedBase,"sudo/sudo");
+      $acl = $this->ui->get_permissions($this->base,"sudo/sudo");
       if(preg_match("/c/",$acl)){
 
         /* By default we set 'dn' to 'new', all relevant plugins will
@@ -133,9 +115,7 @@ class sudoManagement extends plugin
       Save Sudo Tab/Object Changes
      ********************/
 
-    /* Finish sudo edit is triggered by the tabulator dialog, so
-       the user wants to save edited data. Check and save at this
-       point. */
+    /* Save changes */
     if ((isset($_POST['edit_finish']) || isset($_POST['edit_apply'])) && is_object($this->sudotabs)){
 
       /* Check tabs, will feed message array 
@@ -147,13 +127,12 @@ class sudoManagement extends plugin
         $this->sudotabs->save();
 
         if (!isset($_POST['edit_apply'])){
+
           /* Sudo has been saved successfully, remove lock from LDAP. */
           if ($this->dn != "new"){
             del_lock ($this->dn);
           }
 
-          /* There's no page reload so we have to read new sudos at this point. */
-          //$this->reload ();
           unset ($this->sudotabs);
           $this->sudotabs= NULL;
           session::un_set('objectinfo');
@@ -191,11 +170,16 @@ class sudoManagement extends plugin
 
 
     /********************
-      Delete MULTIPLE entries requested, display confirm dialog
+      Delete entries requested, display confirm dialog
      ********************/
 
-    if ($s_action=="del_multiple"){
+    if ($s_action=="del_role"){
+
       $ids = $this->list_get_selected_items();
+
+      if(!count($ids) && !empty($s_entry)){
+        $ids = array($s_entry);
+      }
 
       if(count($ids)){
         foreach($ids as $id){
@@ -221,7 +205,7 @@ class sudoManagement extends plugin
 
 
     /********************
-      Delete MULTIPLE entries confirmed
+      Delete entries confirmed
      ********************/
 
       /* Confirmation for deletion has been passed. Sudo should be deleted. */
@@ -268,89 +252,89 @@ class sudoManagement extends plugin
       }
     }
 
-
-    /********************
-      Delete sudo role 
-     ********************/
-
-    /* Remove sudo was requested */
-    if ($s_action=="del_role"){
-
-      /* Get 'dn' from posted 'uid' */
-      $this->dn= $this->list[trim($s_entry)]['dn'];
-
-      /* Load permissions for selected 'dn' and check if
-         we're allowed to remove this 'dn' */
-      $acl = $this->ui->get_permissions($this->dn,"sudo/sudo");
-      if(preg_match("/d/",$acl)){
-
-        /* Check locking, save current plugin in 'back_plugin', so
-           the dialog knows where to return. */
-        if (($user= get_lock($this->dn)) != ""){
-          return(gen_locked_message ($user, $this->dn));
-        }
-
-        /* Lock the current entry, so nobody will edit it during deletion */
-        add_lock ($this->dn, $this->ui->dn);
-        $smarty->assign("info", msgPool::deleteInfo(@LDAP::fix($this->dn),_("sudo role")));
-        $smarty->assign("multiple", false);
-        return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
-
-      } else {
-        
-        /* Obviously the user isn't allowed to delete. Show message and clean session. */
-        msg_dialog::display(_("Permission error"), msgPool::permDelete());
-      }
-    }
-
-
-    /********************
-      Delete sudo confirmed  
-     ********************/
-
-    /* Confirmation for deletion has been passed. Sudo should be deleted. */
-    if (isset($_POST['delete_sudo_confirmed'])){
-
-      /* Some nice guy may send this as POST, so we've to check
-         for the permissions again. */
-      $acl = $this->ui->get_permissions($this->dn,"sudo/sudo");
-      if(preg_match("/d/",$acl)){
-
-        /* Delete request is permitted, perform LDAP action */
-        $this->sudotabs= new sudotabs($this->config,$this->config->data['TABS']['SUDOTABS'], $this->dn);
-        $this->sudotabs->set_acl_base($this->dn);
-        $this->sudotabs->delete ();
-        unset ($this->sudotabs);
-        $this->sudotabs= NULL;
-
-        /* Sudo list has changed, reload it. */
-        //$this->reload ();
-
-      } else {
-
-        /* Normally this shouldn't be reached, send some extra
-           logs to notify the administrator */
-        msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
-        new log("security","sudo/".get_class($this),$dn,array(),"Tried to trick deletion.");
-      }
-
-      /* Remove lock file after successfull deletion */
-      del_lock ($this->dn);
-      session::un_set('objectinfo');
-    }
-
-
-    /********************
-      Delete sudo canceled  
-     ********************/
-
-    /* Delete sudo canceled? */
-    if (isset($_POST['delete_cancel'])){
-      del_lock ($this->dn);
-      session::un_set('objectinfo');
-    }
-    
-
+#
+#   /********************
+#     Delete sudo role 
+#    ********************/
+#
+#   /* Remove sudo was requested */
+#   if ($s_action=="del_role"){
+#
+#     /* Get 'dn' from posted 'uid' */
+#     $this->dn= $this->list[trim($s_entry)]['dn'];
+#
+#     /* Load permissions for selected 'dn' and check if
+#        we're allowed to remove this 'dn' */
+#     $acl = $this->ui->get_permissions($this->dn,"sudo/sudo");
+#     if(preg_match("/d/",$acl)){
+#
+#       /* Check locking, save current plugin in 'back_plugin', so
+#          the dialog knows where to return. */
+#       if (($user= get_lock($this->dn)) != ""){
+#         return(gen_locked_message ($user, $this->dn));
+#       }
+#
+#       /* Lock the current entry, so nobody will edit it during deletion */
+#       add_lock ($this->dn, $this->ui->dn);
+#       $smarty->assign("info", msgPool::deleteInfo(@LDAP::fix($this->dn),_("sudo role")));
+#       $smarty->assign("multiple", false);
+#       return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
+#
+#     } else {
+#       
+#       /* Obviously the user isn't allowed to delete. Show message and clean session. */
+#       msg_dialog::display(_("Permission error"), msgPool::permDelete());
+#     }
+#   }
+#
+#
+#   /********************
+#     Delete sudo confirmed  
+#    ********************/
+#
+#   /* Confirmation for deletion has been passed. Sudo should be deleted. */
+#   if (isset($_POST['delete_sudo_confirmed'])){
+#
+#     /* Some nice guy may send this as POST, so we've to check
+#        for the permissions again. */
+#     $acl = $this->ui->get_permissions($this->dn,"sudo/sudo");
+#     if(preg_match("/d/",$acl)){
+#
+#       /* Delete request is permitted, perform LDAP action */
+#       $this->sudotabs= new sudotabs($this->config,$this->config->data['TABS']['SUDOTABS'], $this->dn);
+#       $this->sudotabs->set_acl_base($this->dn);
+#       $this->sudotabs->delete ();
+#       unset ($this->sudotabs);
+#       $this->sudotabs= NULL;
+#
+#       /* Sudo list has changed, reload it. */
+#       //$this->reload ();
+#
+#     } else {
+#
+#       /* Normally this shouldn't be reached, send some extra
+#          logs to notify the administrator */
+#       msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
+#       new log("security","sudo/".get_class($this),$dn,array(),"Tried to trick deletion.");
+#     }
+#
+#     /* Remove lock file after successfull deletion */
+#     del_lock ($this->dn);
+#     session::un_set('objectinfo');
+#   }
+#
+#
+#   /********************
+#     Delete sudo canceled  
+#    ********************/
+#
+#   /* Delete sudo canceled? */
+#   if (isset($_POST['delete_cancel'])){
+#     del_lock ($this->dn);
+#     session::un_set('objectinfo');
+#   }
+#   
+#
     /********************
       A dialog was canceled  
      ********************/

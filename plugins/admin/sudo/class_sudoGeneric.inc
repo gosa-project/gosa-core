@@ -36,6 +36,29 @@ class sudo extends plugin
 
   var $is_account = TRUE;
 
+  public static function get_sudoers_ou($config)
+  {
+    /***
+      GET sudo base
+     ***/
+    $base ="";
+    if(empty($base)){
+      /* Default is ou=sudoers,BASE */
+      $base = "ou=sudoers,".$config->current['BASE'];
+    }else{
+
+      /* Append base to given sudoers ou if missing */
+      if(!preg_match("/".normalizePreg($config->current['BASE'])."$/i",$base)){
+        if(!preg_match("/,$/",$base)){
+          $base = $base.",".$config->current['BASE'];
+        }else{
+          $base = $base.$config->current['BASE'];
+        }
+      }
+    }
+    return($base);
+  }
+
   function sudo(&$config, $dn= NULL)
   {
     plugin::plugin ($config, $dn);
@@ -201,7 +224,7 @@ class sudo extends plugin
     plugin::remove_from_parent();
 
     $ldap = $this->config->get_ldap_link();
-    $ldap->cd(get_ou("sudoou")) ;
+    $ldap->cd($this->dn);
     $ldap->rmdir($this->dn);
 
     /* Send signal to the world that we've done */
@@ -222,14 +245,15 @@ class sudo extends plugin
 
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
-    $ldap->create_missing_trees(get_ou("sudoou"));
-    $ldap->cd($this->dn);
     if($this->is_new){
-      $ldap->add($this->attrs);;
+      $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
+      $ldap->cd($this->dn);
+      $ldap->add($this->attrs);
 
       /* Send signal to the world that we've done */
       $this->handle_post_events("create");
     }else{
+      $ldap->cd($this->dn);
       $ldap->modify($this->attrs);;
 
       /* Send signal to the world that we've done */

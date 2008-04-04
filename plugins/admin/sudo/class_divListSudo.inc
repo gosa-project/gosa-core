@@ -103,7 +103,7 @@ class divListSudo extends MultiSelectWindow
     if(preg_match("/d/",$acl)){
       $s.= "..|---|\n";
       $s.= "..|<img src='images/edittrash.png' alt='' border='0' class='center'>".
-        "&nbsp;"._("Remove")."|"."remove_multiple|\n";
+        "&nbsp;"._("Remove")."|"."del_role|\n";
     }
 
     $this->SetDropDownHeaderMenu($s);

@@ -39,7 +39,7 @@ class sudotabs extends tabs
 
     /* Check for new 'dn', in order to propagate the
        'dn' to all plugins */
-    $new_dn= 'cn='.$baseobject->cn.','.get_ou("sudoou");
+    $new_dn= 'cn='.$baseobject->cn.','.sudo::get_sudoers_ou($baseobject->config);
 
     /* Move group? */
     if ($this->dn != $new_dn){
