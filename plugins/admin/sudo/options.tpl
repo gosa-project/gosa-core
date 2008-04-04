@@ -10,87 +10,67 @@
 
 <table>
 {foreach from=$sudoOption item=item key=key}
-
- <!--  Special handling for lists
-  -->
- {if $options[$key].TYPE == "LISTS"}
   {foreach from=$item item=entry key=entry_key} 
-   <tr> 
-    <td>{$key} - <b>{t}List{/t}</b></td>
-    <td style="width:20px;">
-     {if $entry.NEGATE}
-      <img src='images/negate.png' alt="!">
-     {/if}
-    </td>
-    <td><input type='text' value="{$entry.VALUE}" name="list_value__{$key}_{$entry_key}"></td>
-    <td>
-     <input type='image' src='images/negate.png'     name='negListOption_{$key}_{$entry_key}' class='center'>
-     <input type='image' src='images/edittrash.png'  name='delListOption_{$key}_{$entry_key}' class='center'>
-    </td>	
-   </tr>
-  {/foreach}
- {else}
-
- <!-- Default values flat values/single value 
-  -->
  <tr>
   <td>{$key}</td>
   <td style="width:20px;">
-   {if $item.NEGATE}
+   {if $entry.NEGATE}
     <img src='images/negate.png' alt="!">
    {/if}
   </td>
   <td>
 
-  {if $options[$item.NAME].TYPE == "STRING"}
+  {if $options[$entry.NAME].TYPE == "STRING"}
    <!-- STRING  
     -->
-   <input type='text' name='option_value__{$key}' value="{$item.VALUE}" style='width:280px;'> 
-  {elseif $options[$item.NAME].TYPE == "INTEGER"}
+   <input type='text' name='option_value__{$key}_{$entry_key}' value="{$entry.VALUE}" style='width:280px;'> 
+  {elseif $options[$entry.NAME].TYPE == "LISTS"}
+    <input type='text' value="{$entry.VALUE}" name="list_value__{$key}_{$entry_key}"></td>
+  {elseif $options[$entry.NAME].TYPE == "INTEGER"}
    <!-- INTEGER  
     -->
-   <input type='text' name='option_value__{$key}' value="{$item.VALUE}" style='width:280px;'>
-  {elseif $options[$item.NAME].TYPE == "BOOLEAN"}
+   <input type='text' name='option_value__{$key}_{$entry_key}' value="{$entry.VALUE}" style='width:280px;'>
+  {elseif $options[$entry.NAME].TYPE == "BOOLEAN"}
    <!-- BOOLEAN  
     -->
-   <select name="option_value__{$key}">
-    <option {if $item.VALUE == "FALSE"} selected {/if}value="FALSE">FALSE</option>
-    <option {if $item.VALUE == "TRUE"} selected {/if}value="TRUE">TRUE</option>
+   <select name="option_value__{$key}_{$entry_key}">
+    <option {if $entry.VALUE == "FALSE"} selected {/if}value="FALSE">FALSE</option>
+    <option {if $entry.VALUE == "TRUE"} selected {/if}value="TRUE">TRUE</option>
    </select>
-  {elseif $options[$item.NAME].TYPE == "BOOL_INTEGER"}
+  {elseif $options[$entry.NAME].TYPE == "BOOL_INTEGER"}
    <!-- BOOLEAN_INTEGER 
     -->
-   <select name="option_selection__{$key}" id="option_selection__{$key}"
-	onChange="toggle_bool_fields('option_selection__{$key}','option_value__{$key}');">
-    <option {if $item.VALUE == "FALSE"} selected {/if}value="FALSE">FALSE</option>
-    <option {if $item.VALUE == "TRUE"} selected {/if}value="TRUE">TRUE</option>
-    <option {if $item.VALUE != "TRUE" && $item.VALUE != "FALSE"} selected {/if}
+   <select name="option_selection__{$key}_{$entry_key}" id="option_selection__{$key}_{$entry_key}"
+	onChange="toggle_bool_fields('option_selection__{$key}_{$entry_key}','option_value__{$key}_{$entry_key}');">
+    <option {if $entry.VALUE == "FALSE"} selected {/if}value="FALSE">FALSE</option>
+    <option {if $entry.VALUE == "TRUE"} selected {/if}value="TRUE">TRUE</option>
+    <option {if $entry.VALUE != "TRUE" && $entry.VALUE != "FALSE"} selected {/if}
 	value="STRING">STRING</option>
-    <input type='text' value="{$item.VALUE}" style='width:280px;' name='option_value__{$key}'
-	id="option_value__{$key}"
-        {if $item.VALUE == "FALSE" ||  $item.VALUE == "TRUE"} disabled {/if}>
+    <input type='text' value="{$entry.VALUE}" style='width:280px;' name='option_value__{$key}_{$entry_key}'
+	id="option_value__{$key}_{$entry_key}"
+        {if $entry.VALUE == "FALSE" ||  $entry.VALUE == "TRUE"} disabled {/if}>
    </select> 
-  {elseif $options[$item.NAME].TYPE == "STRING_BOOL"}
+  {elseif $options[$entry.NAME].TYPE == "STRING_BOOL"}
    <!-- STRING_BOOLEAN 
     -->
-   <select name="option_selection__{$key}" id="option_selection__{$key}"
-	onChange="toggle_bool_fields('option_selection__{$key}','option_value__{$key}');">
-    <option {if $item.VALUE == "FALSE"} selected {/if}value="FALSE">FALSE</option>
-    <option {if $item.VALUE == "TRUE"} selected {/if}value="TRUE">TRUE</option>
-    <option {if $item.VALUE != "TRUE" && $item.VALUE != "FALSE"} selected {/if}
+   <select name="option_selection__{$key}_{$entry_key}" id="option_selection__{$key}_{$entry_key}"
+	onChange="toggle_bool_fields('option_selection__{$key}_{$entry_key}','option_value__{$key}_{$entry_key}');">
+    <option {if $entry.VALUE == "FALSE"} selected {/if}value="FALSE">FALSE</option>
+    <option {if $entry.VALUE == "TRUE"} selected {/if}value="TRUE">TRUE</option>
+    <option {if $entry.VALUE != "TRUE" && $entry.VALUE != "FALSE"} selected {/if}
 	value="STRING">STRING</option>
-    <input type='text' value="{$item.VALUE}" style='width:280px;' name='option_value__{$key}'
-	id="option_value__{$key}" 
-        {if $item.VALUE == "FALSE" ||  $item.VALUE == "TRUE"} disabled {/if}>
+    <input type='text' value="{$entry.VALUE}" style='width:280px;' name='option_value__{$key}_{$entry_key}'
+	id="option_value__{$key}_{$entry_key}" 
+        {if $entry.VALUE == "FALSE" ||  $entry.VALUE == "TRUE"} disabled {/if}>
    </select> 
   {/if}
   </td>
   <td style='width: 40px;'>
-   <input type='image' src='images/negate.png'     name='negOption_{$key}' class='center'>
-   <input type='image' src='images/edittrash.png'  name='delOption_{$key}' class='center'>
+   <input type='image' src='images/negate.png'     name='negOption_{$key}_{$entry_key}' class='center'>
+   <input type='image' src='images/edittrash.png'  name='delOption_{$key}_{$entry_key}' class='center'>
   </td>
  </tr>
- {/if}
+  {/foreach}
 {/foreach}
 </table>
 
