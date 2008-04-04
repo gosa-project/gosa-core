@@ -37,15 +37,6 @@ Description: LDAP schema for GOsa
  GOsa is a combination of system-administrator and end-user web
  interface, designed to handle LDAP based setups.
 
-Package: gosa-help-en
-Architecture: all
-Depends: gosa
-Description: English online help for GOsa
- This package includes the English online documentation for GOsa
- .
- GOsa is a combination of system-administrator and end-user web
- interface, designed to handle LDAP based setups.
-
 Package: gosa-help-de
 Architecture: all
 Depends: gosa
