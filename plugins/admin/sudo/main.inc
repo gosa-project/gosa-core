@@ -39,11 +39,11 @@ if ($remove_lock){
   /* Page header*/
   if (session::is_set('objectinfo')){
     $display= print_header(get_template_path('images/sudo.png'),
-                           _("Group administration"), "<img alt=\"\" align=\"middle\" src=\"".
+                            _("Sudo role administration"), "<img alt=\"\" align=\"middle\" src=\"".
                             get_template_path('images/closedlock.png')."\"> ".
                             @LDAP::fix(session::get('objectinfo')));
   } else {
-    $display= print_header(get_template_path('images/group.png'), _("Group administration"));
+    $display= print_header(get_template_path('images/sudo.png'), _("Sudo role administration"));
   }
 
   $display.= $output;

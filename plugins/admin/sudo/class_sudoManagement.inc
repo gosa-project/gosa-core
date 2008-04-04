@@ -45,8 +45,8 @@ class sudoManagement extends plugin
 
   function execute()
   {
-  	/* Call parent execute */
-  	plugin::execute();
+    /* Call parent execute */
+    plugin::execute();
 
     /********************
       Handle Posts
@@ -71,7 +71,7 @@ class sudoManagement extends plugin
         $s_entry  = preg_replace("/^sudo_del_([0-9]*).*$/","\\1",$name);
       }
     }
-  
+
     if(isset($_GET['act']) && isset($_GET['id']) && $_GET['act'] == "edit_entry"){
       $id = trim($_GET['id']);
       if(isset($this->list[$id])){
@@ -79,7 +79,7 @@ class sudoManagement extends plugin
         $s_entry  = $id;
       } 
     }
- 
+
     if(isset($_POST['menu_action']) && in_array($_POST['menu_action'],array("new_role","del_role"))){
       $s_action = $_POST['menu_action'];
     }
@@ -177,7 +177,7 @@ class sudoManagement extends plugin
 
       $ids = $this->list_get_selected_items();
 
-      if(!count($ids) && !empty($s_entry)){
+      if(!count($ids) && $s_entry!=""){
         $ids = array($s_entry);
       }
 
@@ -199,7 +199,6 @@ class sudoManagement extends plugin
 
         /* Lock the current entry, so nobody will edit it during deletion */
         $smarty->assign("info", msgPool::deleteInfo($dns_names,_("sudo role")));
-        $smarty->assign("multiple", true);
         return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
       }
     }
@@ -209,44 +208,44 @@ class sudoManagement extends plugin
       Delete entries confirmed
      ********************/
 
-      /* Confirmation for deletion has been passed. Sudo should be deleted. */
-      if (isset($_POST['delete_multiple_sudos_confirmed'])){
+    /* Confirmation for deletion has been passed. Sudo should be deleted. */
+    if (isset($_POST['delete_sudos_confirmed'])){
 
-        /* Remove user by user and check acls before removeing them */
-        foreach($this->dns as $key => $dn){
+      /* Remove user by user and check acls before removeing them */
+      foreach($this->dns as $key => $dn){
 
-          /* Load permissions for selected 'dn' and check if
-             we're allowed to remove this 'dn' */
-          $acl = $this->ui->get_permissions($dn,"sudo/sudo");
-          if(preg_match("/d/",$acl)){
+        /* Load permissions for selected 'dn' and check if
+           we're allowed to remove this 'dn' */
+        $acl = $this->ui->get_permissions($dn,"sudo/sudo");
+        if(preg_match("/d/",$acl)){
 
-            /* Delete request is permitted, perform LDAP action */
-            $this->sudotabs= new sudotabs($this->config,$this->config->data['TABS']['SUDOTABS'], $dn);
-            $this->sudotabs->set_acl_base($dn);
-            $this->sudotabs->delete ();
-            unset ($this->sudotabs);
-            $this->sudotabs= NULL;
+          /* Delete request is permitted, perform LDAP action */
+          $this->sudotabs= new sudotabs($this->config,$this->config->data['TABS']['SUDOTABS'], $dn);
+          $this->sudotabs->set_acl_base($dn);
+          $this->sudotabs->delete ();
+          unset ($this->sudotabs);
+          $this->sudotabs= NULL;
 
-          } else {
+        } else {
 
-            /* Normally this shouldn't be reached, send some extra
-               logs to notify the administrator */
-            msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
-            new log("security","sudo/".get_class($this),$dn,array(),"Tried to trick deletion.");
-          }
-          /* Remove lock file after successfull deletion */
-          del_lock ($dn);
-          unset($this->dns[$key]);
+          /* Normally this shouldn't be reached, send some extra
+             logs to notify the administrator */
+          msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
+          new log("security","sudo/".get_class($this),$dn,array(),"Tried to trick deletion.");
         }
+        /* Remove lock file after successfull deletion */
+        del_lock ($dn);
+        unset($this->dns[$key]);
       }
+    }
 
 
-      /********************
-        Delete MULTIPLE entries Canceled
-       ********************/
+    /********************
+      Delete entries Canceled
+     ********************/
 
-      /* Remove lock */
-    if(isset($_POST['delete_multiple_user_cancel'])){
+    /* Remove lock */
+    if(isset($_POST['delete_sudo_cancel'])){
       foreach($this->dns as $key => $dn){
         del_lock ($dn);
         unset($this->dns[$key]);

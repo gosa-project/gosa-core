@@ -45,7 +45,7 @@ class divListSudo extends MultiSelectWindow
     $this->ui           = get_userinfo();
 
     /* Set list strings */
-    $this->SetTitle(_("List of sudo roles"));
+    $this->SetTitle(  _("List of sudo roles"));
     $this->SetSummary(_("List of sudo roles"));
     $this->EnableAplhabet(true);
 
@@ -74,7 +74,7 @@ class divListSudo extends MultiSelectWindow
     $this->AddRegex   ("Regex"    , _("Regular expression for matching role names")       , 
       "*" , true);
     $this->AddRegex   ("UserRegex", _("Regular expression for matching role member names"),
-       "*" , FALSE,"images/search_user.png");
+      "*" , FALSE,"images/search_user.png");
   }
 
 
