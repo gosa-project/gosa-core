@@ -28,11 +28,6 @@ class sudotabs extends tabs
     $this->addSpecialTabs();
   }
 
-  function save_object($save_current= FALSE)
-  {
-    tabs::save_object($save_current);
-  }
-
   function save($ignore_account= FALSE)
   {
     $baseobject= $this->by_object['sudo'];

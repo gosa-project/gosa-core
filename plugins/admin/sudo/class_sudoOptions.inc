@@ -306,9 +306,7 @@ class sudoOption extends plugin
         }else{
           $this->sudoOption[$opt] = $option;
         }
-      }
-
-      if(isset($this->options[$opt]) && isset($this->sudoOption[$opt]) && $this->options[$opt]['TYPE'] == "LISTS"){
+      }elseif(isset($this->options[$opt]) && isset($this->sudoOption[$opt]) && $this->options[$opt]['TYPE'] == "LISTS"){
         $type = $this->options[$opt]['TYPE'];
         $val  = array($this->options[$opt]['DEFAULT']);
         $option = array("NAME" => $opt, "VALUE" => $val , "NEGATE" => FALSE);
