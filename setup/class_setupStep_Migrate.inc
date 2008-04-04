@@ -1407,9 +1407,9 @@ class Step_Migrate extends setup_step
         $uid = $_POST['new_user_uid'];
       }
 
-      $smarty->assign("new_user_uid",$uid);
-      $smarty->assign("new_user_password",@$_POST['new_user_password']);
-      $smarty->assign("new_user_password2",@$_POST['new_user_password2']);
+      $smarty->assign("new_user_uid", xmlentities($uid));
+      $smarty->assign("new_user_password",xmlentities(@$_POST['new_user_password']));
+      $smarty->assign("new_user_password2",xmlentities(@$_POST['new_user_password2']));
       $smarty->assign("method","create_acls");
       $smarty->assign("acl_create_selected",$this->acl_create_selected);
       $smarty->assign("what_will_be_done_now",$this->acl_create_changes);

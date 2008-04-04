@@ -60,7 +60,7 @@ class Step_Ldap extends setup_step
   {
     $smarty = get_smarty();
     foreach($this->attributes as $attr){
-      $smarty->assign($attr,$this->$attr);
+      $smarty->assign($attr,xmlentities($this->$attr));
     }
 
     /* Assign connection status */
@@ -84,7 +84,7 @@ class Step_Ldap extends setup_step
 
     $base_to_append = $this->base;
     if(strlen($base_to_append) > 20){
-      $base_to_append = substr($base_to_append,0,17)."...";
+      $base_to_append = xmlentities(substr($base_to_append,0,17)."...");
     }
     $smarty->assign("base_to_append",$base_to_append);
     return($smarty -> fetch (get_template_path("../setup/setup_ldap.tpl")));

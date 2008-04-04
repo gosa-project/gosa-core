@@ -161,7 +161,7 @@ class Step_Config2 extends setup_step
     $smarty->assign("samba_settings",$this->samba_settings);
     $smarty->assign("bool",array(FALSE => _("No"), TRUE => _("Yes")));
     foreach($this->attributes as $attr){
-      $smarty->assign($attr,$this->$attr);
+      $smarty->assign($attr,xmlentities($this->$attr));
     }
     $smarty->assign("timezone"     ,$this->timezone);
     $smarty->assign("timezones"    ,$this->timezones);

@@ -93,7 +93,7 @@ class Step_Config3 extends setup_step
     
     $smarty->assign("optional", $this->optional);
     foreach($this->attributes as $attr){
-      $smarty->assign($attr,$this->$attr);
+      $smarty->assign($attr,xmlentities($this->$attr));
     }
     $smarty->assign("login_attributes",$this->login_attributes);
     return($smarty -> fetch (get_template_path("../setup/setup_config3.tpl")));

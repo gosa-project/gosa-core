@@ -2673,8 +2673,12 @@ function send_binary_content($data,$name,$type = "application/octet-stream")
     @return The encoded String
 */
 function xmlentities($str)
-{
-  return (htmlentities($str,ENT_QUOTES));
+{ 
+  if(is_string($str)){
+    return(htmlentities($str,ENT_QUOTES));
+  }else{
+    return($str);
+  }
 }
 
 
