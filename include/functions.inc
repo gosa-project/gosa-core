@@ -2671,14 +2671,17 @@ function send_binary_content($data,$name,$type = "application/octet-stream")
            HTML output, without breaking quotes.
     @param  The String we want to encode.
     @return The encoded String
-*/
+ */
 function xmlentities($str)
 { 
   if(is_string($str)){
     return(htmlentities($str,ENT_QUOTES));
-  }else{
-    return($str);
+  }elseif(is_array($str)){
+    foreach($str as $name => $value){
+      $str[$name] = xmlentities($value);
+    }
   }
+  return($str);
 }
 
 

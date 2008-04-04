@@ -87,7 +87,7 @@ class Step_Config1 extends setup_step
     $smarty->assign("pwd_rules",$this->pwd_rules);
     $smarty->assign("bool",array(FALSE => _("No"), TRUE => _("Yes")));
     foreach($this->attributes as $attr){
-      $smarty->assign($attr,xmlentities($this->$attr));
+      $smarty->assign($attr,$this->$attr);
     }
 
     /* !!! Attention strict is inverse. If you change this, 

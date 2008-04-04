@@ -164,7 +164,7 @@ class Step_Feedback  extends setup_step
     $smarty = get_smarty();
 
     foreach($this->attributes as $attr){
-      $smarty->assign($attr, xmlentities($this->$attr));
+      $smarty->assign($attr, $this->$attr);
     }
     $smarty->assign("years",$years);
     $smarty->assign("features_used",$this->features_used);

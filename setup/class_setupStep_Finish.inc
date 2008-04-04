@@ -43,7 +43,7 @@ class Step_Finish extends setup_step
   function get_conf_data()
   {
     $smarty = get_smarty();
-    $smarty->assign("cv",$this->parent->captured_values);
+    $smarty->assign("cv",xmlentities($this->parent->captured_values));
     $str =  $smarty->fetch(CONFIG_TEMPLATE_DIR.$this->gosa_conf_contrib);
     return($str);
   }  
