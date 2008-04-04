@@ -412,7 +412,11 @@ class sudoOption extends plugin
         Save STRING / INTEGER
        ****/
       if(in_array($type,array("STRING","INTEGER"))){ 
-        $option = $name."=".$value;
+        if(!empty($value)){
+          $option = $name."=".$value;
+        }else{
+          $option = $name; 
+        }
         if($neg){
           $option = "!".$option;
         }
@@ -427,7 +431,11 @@ class sudoOption extends plugin
         }elseif($value == "TRUE"){
           $option = $name;
         }else{
-          $option = $name."=".$value;
+          if(!empty($value)){
+            $option = $name."=".$value;
+          }else{
+            $option = $name; 
+          }
           if($neg){
             $option = "!".$option;
           }
