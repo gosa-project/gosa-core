@@ -61,7 +61,7 @@ binary-common:
 	dh_installexamples
 	dh_installmenu
 	dh_installdebconf	
-	dh_installman -pgosa-desktop contrib/scripts/gosa.1
+	dh_installman -pgosa-desktop contrib/gosa.1
 	dh_link
 	dh_strip
 	dh_compress 
