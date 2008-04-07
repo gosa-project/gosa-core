@@ -1,20 +1,14 @@
 #!/bin/sh
 
+usage() {
 #       file plugin.tgz
 #       dir plugin
 #       --download
 #       --branch | -b
 #       --email | -e EMAIL
 #       --depends DEPENDS
-#
-#       DEBFULLNAME - get the real name of the maintainer
-#
-#       LOGNAME or USER - get the username
-#
-#       DEBEMAIL or EMAIL - get the email address of the user
 
-usage() {
-  echo "Usage: " >&2
+  echo "Usage: ${0##*/}" >&2
   exit 1
 }
 
@@ -49,7 +43,7 @@ eval set -- "$TEMP"
 RELEASE=trunk
 DOWNLOAD=
 DEPENDS=
-DEST=/tmp/
+DEST=
 while true; do
   case "$1" in
     -e|--email) DEBMAIL=$2
@@ -87,6 +81,7 @@ if [[ -d "$file" ]]; then
   # It's a local directory
   load_dsc $file/plugin.dsc
 
+  # Setup build environment
   BUILD_PATH=${DEST}gosa-plugin-${PL_NAME}-${PL_VERSION}
   if [[ -d "$BUILD_PATH" ]]; then
     echo "Error: build path $BUILD_PATH already exists" >&2
@@ -97,16 +92,34 @@ if [[ -d "$file" ]]; then
 elif [[ -f "$file" ]]; then
 
   # It's a compressed user contributed file
-  echo not implemented 
-  exit 5
+  TMPDIR="/tmp/dh-make-gosa-$PPID"
+  if [[ -d "/tmp/dh-make-gosa-$PPID"  ]]; then
+    echo "Error: directory $TMPDIR exists" >&2
+    exit 4
+  fi
+
+  # Untar
+  mkdir -p "$TMPDIR"
+  tar --extract --directory "$TMPDIR" -fz "$file" &> /dev/null
+  if [[ $? -ne 0 ]]; then
+    echo "Error: cannot extract plugin file - invalid file format" >&2
+    exit 5
+  fi
+
+  # It's a local directory
+  load_dsc TMPDIR/*/plugin.dsc
+
+  # Setup build environment
+  BUILD_PATH=${DEST}gosa-plugin-${PL_NAME}-${PL_VERSION}
+  mv "$TMPDIR/*" "$BUILD_PATH"
 
 else
 
-  # It's a plugin name to be downloaded
-  echo not implemented 
+  echo "Error: cannot find plugin $file" >&2
   exit 5
 
 fi
+
 
 PL_DEPENDS=$(echo $PL_DEPENDS$DEPENDS | sed 's/,\s*$//')
 echo "Debian package summary ========================================"
@@ -126,7 +139,7 @@ cd "$BUILD_PATH"
 
 # Use gosa-plugin skelleton
 echo "Calling dh_make..."
-echo | dh_make -e "$PL_MAIL" -c gpl -s -n -f gosa-plugin-${PL_NAME}-${PL_VERSION}.tar.gz # &> /dev/null
+echo | dh_make -e "$PL_MAIL" -c gpl -s -n -f gosa-plugin-${PL_NAME}-${PL_VERSION}.tar.gz &> /dev/null
 if [[ $? -ne 0 ]]; then
 	echo "Failed to call dh_make - aborting!"
 	exit 1
