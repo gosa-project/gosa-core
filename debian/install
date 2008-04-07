@@ -1,7 +1,9 @@
-update-gosa   /usr/sbin
-html          /usr/share/gosa
-ihtml         /usr/share/gosa
-include       /usr/share/gosa
-locale        /usr/share/gosa
-plugins       /usr/share/gosa
-setup         /usr/share/gosa
+update-gosa			/usr/sbin
+html				/usr/share/gosa
+ihtml				/usr/share/gosa
+include				/usr/share/gosa
+locale				/usr/share/gosa
+plugins				/usr/share/gosa
+setup				/usr/share/gosa
+debian/overrides-linda		/usr/share/linda/overrides/gosa
+debian/overrides-lintian	/usr/share/lintian/overrides/gosa
