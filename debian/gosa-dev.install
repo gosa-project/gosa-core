@@ -1,3 +1,4 @@
 update-locale       /usr/bin
 update-online-help  /usr/bin
 update-pdf-help     /usr/bin
+dh-make-gosa        /usr/bin

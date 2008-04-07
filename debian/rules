@@ -1,14 +1,11 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
-# Sample debian/rules that uses debhelper.
+# debian/rules file to build GOsa packages.
 #
 # This file was originally written by Joey Hess and Craig Small.
 # As a special exception, when this file is copied by dh-make into a
 # dh-make output file, you may use that output file without restriction.
 # This special exception was added by Craig Small in version 0.37 of dh-make.
-#
-# Modified to make a template file for a multi-binary package with separated
-# build-arch and build-indep targets  by Bill Allombert 2001
 
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
@@ -19,33 +16,23 @@ export DH_OPTIONS
 configure: configure-stamp
 configure-stamp:
 	dh_testdir
-	# Add here commands to configure the package.
-
 	touch configure-stamp
 
-
-#Architecture 
-build: patch build-arch build-indep
+build: patch build-indep
         #*************************************************
         #* Building GOsa into a Debian/GNU Linux Package *
-        #*                 please stand by               *
+        #*                please stand by                *
         #*************************************************
-
-build-arch: build-arch-stamp
-build-arch-stamp: configure-stamp 
-
-	touch $@
 
 build-indep: build-indep-stamp
 build-indep-stamp: configure-stamp 
-
 	touch $@
 
 clean: clean-patched unpatch
 clean-patched:
 	dh_testdir
 	dh_testroot
-	rm -f build-arch-stamp build-indep-stamp configure-stamp
+	rm -f build-indep-stamp configure-stamp
 
 	dh_clean
 
@@ -53,7 +40,7 @@ unpatch:
 	dpatch deapply-all
 	rm -rf patch-stamp debian/patched
 
-install: install-indep install-arch
+install: install-indep
 install-indep:
 	dh_testdir
 	dh_testroot
@@ -66,17 +53,6 @@ install-indep:
 
 	dh_install -i
 
-install-arch:
-	dh_testdir
-	dh_testroot
-	dh_clean -k -s 
-	dh_installdirs -s
-
-	dh_install -s
-
-# Must not depend on anything. This is to be called by
-# binary-arch/binary-indep
-# in another 'make' thread.
 binary-common:
 	dh_testdir
 	dh_testroot
@@ -85,7 +61,7 @@ binary-common:
 	dh_installexamples
 	dh_installmenu
 	dh_installdebconf	
-	dh_installman -pgosa-desktop debian/gosa.1
+	dh_installman -pgosa-desktop contrib/scripts/gosa.1
 	dh_link
 	dh_strip
 	dh_compress 
@@ -102,13 +78,8 @@ patch-stamp:
 	dpatch apply-all
 	dpatch cat-all >patch-stamp
 
-# Build architecture independant packages using the common target.
 binary-indep: build-indep install-indep
 	$(MAKE) -f debian/rules DH_OPTIONS=-i binary-common
 
-# Build architecture dependant packages using the common target.
-binary-arch: build-arch install-arch
-	$(MAKE) -f debian/rules DH_OPTIONS=-s binary-common
-
-binary: binary-arch binary-indep
-.PHONY: build clean binary-indep binary-arch binary install install-indep install-arch configure
+binary: binary-indep
+.PHONY: build clean binary-indep binary install install-indep configure
