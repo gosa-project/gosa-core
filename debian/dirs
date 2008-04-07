@@ -1,0 +1,5 @@
+etc/gosa
+usr/sbin
+usr/share/gosa
+usr/share/gosa/bin
+var/spool/gosa

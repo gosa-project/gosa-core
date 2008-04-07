@@ -1,0 +1,6 @@
+contrib/openldap/gosa-with-samba3.schema   /etc/ldap/schema/gosa
+contrib/openldap/gosa-with-samba2.schema   /etc/ldap/schema/gosa
+contrib/openldap/rfc2307bis.schema         /etc/ldap/schema/gosa
+contrib/openldap/samba3.schema             /etc/ldap/schema/gosa
+contrib/openldap/samba.schema              /etc/ldap/schema/gosa
+contrib/openldap/trust.schema              /etc/ldap/schema/gosa
