@@ -27,7 +27,6 @@ WEBGROUP="www-data"
 # Create empty inclusion file for apache
 if [ ! -f /etc/gosa/gosa.secrets ]; then
     touch /etc/gosa/gosa.secrets
-    chown root.root /etc/gosa/gosa.secrets
     chmod 600 /etc/gosa/gosa.secrets
 fi
 
