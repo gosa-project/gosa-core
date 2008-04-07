@@ -674,8 +674,12 @@ class user extends plugin
   {
     /* Remove password extension */
     $temp= passwordMethod::get_available_methods();
-    $this->pwObject= new $temp[$this->pw_storage]($this->config,$this->dn);
-    $this->pwObject->remove_from_parent();
+
+    /* Remove password method from user account */
+    if(isset($temp[$this->pw_storage]) && class_available($temp[$this->pw_storage])){
+      $this->pwObject= new $temp[$this->pw_storage]($this->config,$this->dn);
+      $this->pwObject->remove_from_parent();
+    }
 
     /* Remove user */
     $ldap= $this->config->get_ldap_link();
