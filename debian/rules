@@ -34,8 +34,6 @@ build: patch build-arch build-indep
 build-arch: build-arch-stamp
 build-arch-stamp: configure-stamp 
 
-	# Add here commands to compile the arch part of the package.
-	#$(MAKE) 
 	touch $@
 
 build-indep: build-indep-stamp
@@ -87,7 +85,7 @@ binary-common:
 	dh_installexamples
 	dh_installmenu
 	dh_installdebconf	
-	dh_installman -pgosa-desktop gosa.1
+	dh_installman -pgosa-desktop debian/gosa.1
 	dh_link
 	dh_strip
 	dh_compress 
