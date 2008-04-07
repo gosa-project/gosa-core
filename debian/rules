@@ -46,11 +46,6 @@ install-indep:
 	dh_testroot
 	dh_clean -k -i 
 	dh_installdirs -i
-
-	# Add here commands to install the indep part of the package into
-	# debian/<package>-doc.
-	#INSTALLDOC#
-
 	dh_install -i --exclude COPYING
 
 binary-common:
