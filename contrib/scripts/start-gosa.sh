@@ -1,16 +1,65 @@
 #!/bin/sh
-# Start script for GOsa to be started via mozilla
+# Start script for GOsa to be started via gecko based browsers
+
+[ -r /etc/gosa/desktoprc ] && . /etc/gosa/desktoprc
+[ -r $HOME/.gosa-desktop ] && . $HOME/.gosa-desktop
 
 url=""
-if [ $# -ne 1 ]; then
+if [ $# -ne 1 -a -z "$URL" ]; then
 	echo "Usage: $(basename $0) <URL>"
 	exit 1
 fi
 
+if [ $# -ne 1 ]; then
+	url="$URL"
+else
+	url="$1"
+fi
+
+# What browser are we using?
+result=""
+echo -n "Looking for browser: "
+for browser in iceweasel firefox mozilla; do
+	if which $browser 2> /dev/null; then
+		result=$browser
+		break
+	fi
+done
+if [ -z "$result" ]; then
+	echo "none found. You'll need iceweasel, firefox or mozilla in your PATH!"
+	exit 1
+fi
+browser=$result
+dbrowser=$browser
+
+# Workaround for debian
+if [ "$browser" = "iceweasel" ]; then
+	dbrowser=firefox
+fi
+
 # Check for presence of gosa profile
-if [ ! -d $HOME/.mozilla/firefox/*.gosa ]; then
-	firefox -CreateProfile gosa
-	config=`echo $HOME/.mozilla/firefox/*.gosa/`
+if [ ! -d $HOME/.mozilla/$dbrowser/*.gosa ]; then
+	echo "No browser profile found for GOsa - creating one..."
+	$browser -CreateProfile gosa
+	if [ "$browser" = "iceweasel" ]; then
+		config=`echo $HOME/.mozilla/firefox/*.gosa/`
+	else
+		config=`echo $HOME/.mozilla/$dbrowser/*.gosa/`
+	fi
+
+	# Catch resolution
+	width=1024
+	height=768
+	if which xrandr > /dev/null; then
+		if xrandr 1> /dev/null 2> /dev/null; then
+			resolution=$(xrandr | sed -n '/current/s/^.*current \([0-9]*\)[^0-9]*\([0-9]*\).*$/\1 \2/p')
+			width=${resolution%% *}
+			height=${resolution##* }
+
+			[ $width -gt 1050 ] && width=1050
+			[ $height -gt 850 ] && height=850
+		fi
+	fi
 
 	cat << EOF > $config/prefs.js
 # Mozilla User Preferences
@@ -107,8 +156,8 @@ cat << EOF > $config/localstore.rdf
                    screenX="50"
                    screenY="25"
                    sizemode="normal"
-                   width="994"
-                   height="962" />
+                   width="$width"
+                   height="$height" />
   <RDF:Description RDF:about="chrome://help/content/help.xul">
     <NC:persist RDF:resource="chrome://help/content/help.xul#help"/>
   </RDF:Description>
@@ -124,5 +173,5 @@ fi
 
 
 # Start mozilla with GOsa profile
-firefox -P gosa
+$browser -P gosa $url
 
