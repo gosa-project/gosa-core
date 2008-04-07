@@ -1,19 +1,132 @@
 #!/bin/sh
 
-# Preset for now
-plugin=fai
-version=1.0
+#       file plugin.tgz
+#       dir plugin
+#       --download
+#       --branch | -b
+#       --email | -e EMAIL
+#       --depends DEPENDS
+#
+#       DEBFULLNAME - get the real name of the maintainer
+#
+#       LOGNAME or USER - get the username
+#
+#       DEBEMAIL or EMAIL - get the email address of the user
 
-[ -d gosa-plugin-${plugin}-${version} ] && rm -rf gosa-plugin-${plugin}-${version}
-cp -a fai gosa-plugin-${plugin}-${version}
+usage() {
+  echo "Usage: " >&2
+  exit 1
+}
+
+
+load_dsc() {
+  if [[ -r "$1" ]]; then
+    PL_NAME=$(sed -n 's/"//g;s/^name\s*=\s*\(.*\)$/\1/p' "$1")
+    PL_VERSION=$(sed -n 's/"//g;s/^version\s*=\s*\(.*\)$/\1/p' "$1")
+    TDEPENDS=$(sed -n 's/"//g;s/^depends\s*=\s*\(.*\)$/\1/p' "$1")
+    for dep in $TDEPENDS; do
+      PL_DEPENDS="gosa-plugin-$dep, $PL_DEPENDS"
+    done
+    PL_DESCRIPTION=$(sed -n 's/"//g;s/^description\s*=\s*\(.*\)$/\1/p' "$1")
+    PL_AUTHOR=$(sed -n 's/"//g;s/^author\s*=\s*\([^<]*\).*$/\1/p' "$1")
+    PL_MAIL=$(sed -n 's/"//g;s/^author\s*=[^<].*<\([^>]*\).*$/\1/p' "$1")
+  else
+    echo "Error: cannot find description file" >&2
+    exit 1
+  fi
+}
+
+
+TEMP=`getopt -o e:r: --long download,release:,email:,depends: -n 'dh-make-gosa' -- "$@"`
+if [[ $? != 0 ]] ; then
+  echo "Error: cannot get command line information" >&2
+  exit 1
+fi
+
+eval set -- "$TEMP"
+
+# Load command  line vars
+RELEASE=trunk
+DOWNLOAD=
+DEPENDS=
+DEST=/tmp/
+while true; do
+  case "$1" in
+    -e|--email) DEBMAIL=$2
+                shift 2
+                ;;
+    -r|--release)
+                if [[ "$2" != "trunk" ]]; then
+                  RELEASE=tags/$2
+                fi
+                shift 2
+                ;;
+    --depends)  DEPENDS="$2"
+                shift 2
+                ;;
+    --dest)     DEST=$2/
+                shift 2
+                ;;
+    --download) DOWNLOAD=yes
+                shift 1
+                ;;
+    --)         shift
+                break
+                ;;
+    *)          usage
+                ;;
+  esac
+done
+
+[[ $# -ne 1 ]] && usage
+file=$*
+
+# Three possiblities
+if [[ -d "$file" ]]; then
+
+  # It's a local directory
+  load_dsc $file/plugin.dsc
+
+  BUILD_PATH=${DEST}gosa-plugin-${PL_NAME}-${PL_VERSION}
+  if [[ -d "$BUILD_PATH" ]]; then
+    echo "Error: build path $BUILD_PATH already exists" >&2
+    exit 2
+  fi
+  cp -a "$PL_NAME" "$BUILD_PATH"
+
+elif [[ -f "$file" ]]; then
+
+  # It's a compressed user contributed file
+  echo not implemented 
+  exit 5
+
+else
+
+  # It's a plugin name to be downloaded
+  echo not implemented 
+  exit 5
+
+fi
+
+PL_DEPENDS=$(echo $PL_DEPENDS$DEPENDS | sed 's/,\s*$//')
+echo "Debian package summary ========================================"
+echo "Plugin:       $PL_NAME"
+echo "Version:      $PL_VERSION"
+echo "Description:  $PL_DESCRIPTION"
+echo "Depends:      $PL_DEPENDS"
+echo "Author name:  $PL_AUTHOR"
+echo "Author email: $PL_MAIL"
+echo
+read -s -n 1 -p "Do you want to continue? (y/n)" ans; echo
+[[ "$ans" != "y" ]] && exit 0
 
 pushd . &> /dev/null
 
-cd gosa-plugin-${plugin}-${version}
+cd "$BUILD_PATH"
 
 # Use gosa-plugin skelleton
 echo "Calling dh_make..."
-echo | dh_make -e cajus@debian.org -c gpl -s -n -f gosa-plugin-${plugin}-${version}.tar.gz &> /dev/null
+echo | dh_make -e "$PL_MAIL" -c gpl -s -n -f gosa-plugin-${PL_NAME}-${PL_VERSION}.tar.gz # &> /dev/null
 if [[ $? -ne 0 ]]; then
 	echo "Failed to call dh_make - aborting!"
 	exit 1
@@ -22,13 +135,13 @@ fi
 echo "Apdapting debian descriptive files..."
 # Generate install file
 for dir in admin personal addons; do
-	[ -d $dir ] && echo -e "$dir\t\t\t/usr/share/gosa/plugins" > debian/install
+	[[ -d $dir ]] && echo -e "$dir\t\t\t/usr/share/gosa/plugins" > debian/install
 done
 for dir in help/*; do
-	echo -e "$dir\t\t\t/usr/share/gosa/plugins/$plugin" >> debian/install
+	echo -e "$dir\t\t\t/usr/share/gosa/plugins/$PL_NAME" >> debian/install
 done
 for dir in $(ls -1 locale | grep -v "^en$" | grep -v "^messages.po$"); do
-	echo -e "locale/$dir\t\t\t/usr/share/gosa/locale/plugins/$plugin" >> debian/install
+	echo -e "locale/$dir\t\t\t/usr/share/gosa/locale/plugins/$PL_NAME" >> debian/install
 done
 
 # Generate dirs
@@ -37,8 +150,8 @@ echo "usr/share/gosa" > debian/dirs
 # Adapt control
 sed -i 's/^Section: unknown/Section: web/g' debian/control
 sed -i 's/^Depends: .*$/Depends: gosa/g' debian/control
-sed -i "s/^Description: .*$/Description: $plugin plugin for GOsa/g" debian/control
-sed -i "s/^ <.*$/ This package includes the GOsa $plugin plugin.\
+sed -i "s/^Description: .*$/Description: $PL_NAME plugin for GOsa/g" debian/control
+sed -i "s/^ <.*$/ $PL_DESCRIPTION\
  .\
  GOsa is a combination of system-administrator and end-user web\
  interface, designed to handle LDAP based setups.\
@@ -46,13 +159,13 @@ sed -i "s/^ <.*$/ This package includes the GOsa $plugin plugin.\
 
 # Adapt README.debian
 cat <<EOF > debian/README.Debian
-README.Debian for GOsa $package plugin $version
+README.Debian for GOsa $PL_NAME plugin $PL_VERSION
 -------------------------------------------
 
 Please read the main GOsa README.Debian file for more information.
 
 ----
-Cajus Pollmeier <cajus@debian.org>  Fri 02 Jun 2006 16:23:50 +0200
+$PL_AUTHOR <$PL_MAIL>  Fri 02 Jun 2006 16:23:50 +0200
 EOF
 
 # Fix rules
@@ -66,7 +179,7 @@ sed 's!#DEBHELPER#!#DEBHELPER#\
 # Get apache versions running\
 servers=""\
 for srv in apache apache-ssl apache2; do\
-        if [ -x /usr/sbin/$srv ]; then\
+        if [[ -x /usr/sbin/$srv ]]; then\
                 servers="$srv $servers"\
         fi\
 done\
@@ -76,7 +189,7 @@ done\
 \
 # Finally restart servers\
 for server in $servers; do\
-        if [ -x /usr/sbin/invoke-rc.d ]; then\
+        if [[ -x /usr/sbin/invoke-rc.d ]]; then\
                 invoke-rc.d $server restart\
         else\
                 /etc/init.d/$server restart\
