@@ -51,7 +51,7 @@ install-indep:
 	# debian/<package>-doc.
 	#INSTALLDOC#
 
-	dh_install -i
+	dh_install -i --exclude COPYING
 
 binary-common:
 	dh_testdir
