@@ -1076,7 +1076,7 @@ class plugin
       $password       = $tmp['SNAPSHOT_PASSWORD'];
       $snapldapbase   = $tmp['SNAPSHOT_BASE'];
 
-      $ldap_to        = new ldapMultipelxer(new LDAP($user,$password, $server));
+      $ldap_to        = new ldapMultiplexer(new LDAP($user,$password, $server));
       $ldap_to -> cd($snapldapbase);
 
       if (!$ldap_to->success()){
