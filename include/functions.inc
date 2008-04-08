@@ -1291,7 +1291,7 @@ function gen_locked_message($user, $dn)
   } else {
     $smarty->assign ("action", _("Edit anyway"));
   }
-  $smarty->assign ("message", sprintf(_("You're going to edit the LDAP entry/entries '%s'"), "<b>".$msg."</b>", ""));
+  $smarty->assign ("message", sprintf(_("You're going to edit the LDAP entry/entries %s"), "<b>".$msg."</b>", ""));
 
   return ($smarty->fetch (get_template_path('islocked.tpl')));
 }
