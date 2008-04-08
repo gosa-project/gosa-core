@@ -861,7 +861,7 @@ class LDAP{
       if JustMofify id false the destination dn will be overwritten by the new ldif. 
     */
 
-  function import_complete_ldif($srp, $str_attr,&$error,$JustModify,$DeleteOldEntries)
+  function import_complete_ldif($srp, $str_attr,$error,$JustModify,$DeleteOldEntries)
   {
     if($this->reconnect) $this->connect();
 

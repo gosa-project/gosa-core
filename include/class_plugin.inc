@@ -1348,6 +1348,7 @@ class plugin
     $data  = gzuncompress($ldap_to->get_attribute($dn,'gosaSnapshotData'));
 
     /* Import the given data */
+    $err = "";
     $ldap->import_complete_ldif($data,$err,false,false);
     if (!$ldap->success()){
       msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, "", get_class()));
