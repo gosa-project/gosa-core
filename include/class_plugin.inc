@@ -608,18 +608,25 @@ class plugin
 
     if ($command != ""){
 
-      /* Additional attributes */
-      foreach ($add_attrs as $name => $value){
-        $command= preg_replace("/%$name( |$)/", "$value ", $command);
-      }
-
       /* Walk through attribute list */
       foreach ($this->attributes as $attr){
         if (!is_array($this->$attr)){
-          $command= preg_replace("/%$attr( |$)/", $this->$attr." ", $command);
+          $add_attrs[$attr] = $this->$attr;
         }
       }
-      $command= preg_replace("/%dn( |$)/", $this->dn." ", $command);
+      $add_attrs['dn']=$this->dn;
+
+      $tmp = array();
+      foreach($add_attrs as $name => $value){
+        $tmp[$name] =  strlen($name);
+      }
+      arsort($tmp);
+      
+      /* Additional attributes */
+      foreach ($tmp as $name => $len){
+        $value = $add_attrs[$name];
+        $command= preg_replace("/%$name/", "$value ", $command);
+      }
 
       if (check_command($command)){
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
@@ -640,23 +647,28 @@ class plugin
 
     if ($command != ""){
 
-      /* Additional attributes */
-      foreach ($add_attrs as $name => $value){
-        $command= preg_replace("/%$name( |$)/", "$value ", $command);
-      }
-
       /* Walk through attribute list */
       foreach ($this->attributes as $attr){
         if (!is_array($this->$attr)){
-          $command= preg_replace("/%$attr( |$)/", $this->$attr." ", $command);
+          $add_attrs[$attr] = $this->$attr;
         }
       }
-      $command= preg_replace("/%dn( |$)/", $this->dn." ", $command);
+      $add_attrs['dn']=$this->dn;
+
+      $tmp = array();
+      foreach($add_attrs as $name => $value){
+        $tmp[$name] =  strlen($name);
+      }
+      arsort($tmp);
+      
+      /* Additional attributes */
+      foreach ($tmp as $name => $len){
+        $value = $add_attrs[$name];
+        $command= preg_replace("/%$name/", "$value ", $command);
+      }
 
       if (check_command($command)){
-        @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
-            $command, "Execute");
-
+        @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,$command, "Execute");
         exec($command);
       } else {
         $message[]= msgPool::cmdnotfound("POSTMODIFY", get_class($this));
@@ -671,18 +683,25 @@ class plugin
     $command= $this->config->search(get_class($this), "POSTREMOVE",array('menu','tabs'));
     if ($command != ""){
 
-      /* Additional attributes */
-      foreach ($add_attrs as $name => $value){
-        $command= preg_replace("/%$name( |$)/", "$value ", $command);
-      }
-
       /* Walk through attribute list */
       foreach ($this->attributes as $attr){
         if (!is_array($this->$attr)){
-          $command= preg_replace("/%$attr( |$)/", $this->$attr." ", $command);
+          $add_attrs[$attr] = $this->$attr;
         }
       }
-      $command= preg_replace("/%dn( |$)/", $this->dn." ", $command);
+      $add_attrs['dn']=$this->dn;
+
+      $tmp = array();
+      foreach($add_attrs as $name => $value){
+        $tmp[$name] =  strlen($name);
+      }
+      arsort($tmp);
+      
+      /* Additional attributes */
+      foreach ($tmp as $name => $len){
+        $value = $add_attrs[$name];
+        $command= preg_replace("/%$name/", "$value ", $command);
+      }
 
       if (check_command($command)){
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
