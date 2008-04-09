@@ -22,9 +22,8 @@
 
 /* Configuration file location */
 define ("CONFIG_DIR", "/etc/gosa");
-define ("CONFIG_FILE", "gosa.conf-trunk");
+define ("CONFIG_FILE", "gosa.conf");
 define ("CONFIG_TEMPLATE_DIR", "../contrib/");
-define ("HELP_BASEDIR", "/var/www/doc/");
 
 /* Define get_list flags */
 define("GL_NONE",         0);

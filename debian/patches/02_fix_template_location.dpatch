@@ -1,0 +1,19 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 02_fix_template_location.dpatch by  <cajus@localhost>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad gosa-core~/include/functions.inc gosa-core/include/functions.inc
+--- gosa-core~/include/functions.inc	2008-04-07 23:17:29.000000000 +0200
++++ gosa-core/include/functions.inc	2008-04-07 23:17:56.000000000 +0200
+@@ -23,7 +23,7 @@
+ /* Configuration file location */
+ define ("CONFIG_DIR", "/etc/gosa");
+ define ("CONFIG_FILE", "gosa.conf");
+-define ("CONFIG_TEMPLATE_DIR", "../contrib/");
++define ("CONFIG_TEMPLATE_DIR", "/usr/share/doc/gosa/contrib/");
+ 
+ /* Define get_list flags */
+ define("GL_NONE",         0);

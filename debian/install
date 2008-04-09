@@ -12,3 +12,4 @@ contrib/resolutions		/etc/gosa
 contrib/encodings		/etc/gosa
 contrib/openldap/slapd.conf	/usr/share/doc/gosa/slapd.conf-example
 contrib/vacation_example.txt	/usr/share/doc/gosa
+contrib/gosa.conf		/usr/share/doc/gosa

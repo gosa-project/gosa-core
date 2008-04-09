@@ -1,14 +1,7 @@
 #!/bin/sh
 
 usage() {
-#       file plugin.tgz
-#       dir plugin
-#       --download
-#       --branch | -b
-#       --email | -e EMAIL
-#       --depends DEPENDS
-
-  echo "Usage: ${0##*/}" >&2
+  echo "Usage: ${0##*/} [--download] [-b|--branch branch] [-e|--email mail] [--depends] plugin-dir|plugin.tar.gz" >&2
   exit 1
 }
 
