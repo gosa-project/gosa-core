@@ -47,9 +47,11 @@ for source in /usr/bin/convert /usr/bin/lpstat; do
   fi
 done
 
-# Fix permission in /var/spool/gosa
+# Fix permission in /var/(spool|cache)/gosa
 chown root.$WEBGROUP -R /var/spool/gosa
 chmod 770 -R /var/spool/gosa
+chown root.$WEBGROUP -R /var/cache/gosa
+chmod 770 -R /var/cache/gosa
 
 # Add support for RequestHeader
 a2enmod headers
