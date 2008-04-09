@@ -1,0 +1,5 @@
+00list
+01_fix_smarty_location.dpatch
+02_fix_template_location.dpatch
+03_fix_class_mapping.dpatch
+04_fix_locale_location.dpatch
