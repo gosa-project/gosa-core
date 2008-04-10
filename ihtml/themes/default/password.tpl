@@ -20,9 +20,9 @@
   <link rel="shortcut icon" href="favicon.ico">
 
   {if isset($ieworkaround)}<script language="javascript"src="include/png.js" type="text/javascript"></script>{/if}
-  <script language="javascript"src="include/focus.js" type="text/javascript"></script>
-  <script language="javascript"src="include/warning.js" type="text/javascript"></script>
-  <script language="javascript"src="include/pwdStrength.js" type="text/javascript"></script>
+  <script language="javascript" src="include/focus.js" type="text/javascript"></script>
+  <script language="javascript" src="include/warning.js" type="text/javascript"></script>
+  <script language="javascript" src="include/pwdStrength.js" type="text/javascript"></script>
 </head>
 
 <body style='height:100%; width:100%;'>
