@@ -2696,7 +2696,7 @@ function update_accessTo($from,$to)
   $ldap->cd($config->current['BASE']);
   $ldap->search("(&(objectClass=trustAccount)(accessTo=".$from."))",array("objectClass","accessTo"));
   while($attrs = $ldap->fetch()){
-    $new_attrs = array();
+    $new_attrs = array("accessTo" => array());
     $dn = $attrs['dn'];
     for($i = 0 ; $i < $attrs['objectClass']['count']; $i++){
       $new_attrs['objectClass'][] =  $attrs['objectClass'][$i];
