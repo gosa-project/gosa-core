@@ -1171,6 +1171,9 @@ class userManagement extends plugin
     if(!is_object($this->usertab)){
       $this->DivListUsers->save_object();
     }
+    if(is_object($this->CopyPasteHandler)){
+      $this->CopyPasteHandler->save_object();
+    }
   }
 
     

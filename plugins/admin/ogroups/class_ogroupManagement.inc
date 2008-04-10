@@ -673,6 +673,9 @@ class ogroupManagement extends plugin
   function save_object()
   {
     $this->DivListOGroup->save_object();
+    if(is_object($this->CopyPasteHandler)){
+      $this->CopyPasteHandler->save_object();
+    }
   }
 
 }

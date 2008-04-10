@@ -630,6 +630,9 @@ class aclManagement extends plugin
     if(!is_object($this->acltabs)){
       $this->DivListACL->save_object();
     }
+    if(is_object($this->CopyPasteHandler)){
+      $this->CopyPasteHandler->save_object();
+    }
   }
 
   /* A set of disabled and therefore overloaded functions. They are

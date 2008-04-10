@@ -761,6 +761,9 @@ class groupManagement extends plugin
   function save_object()
   {
     $this->DivListGroup->save_object();
+    if(is_object($this->CopyPasteHandler)){
+      $this->CopyPasteHandler->save_object();
+    }
   }
 
 
