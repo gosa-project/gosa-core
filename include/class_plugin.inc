@@ -215,13 +215,18 @@ class plugin
           unset($this->saved_attributes[$index]);
           continue;
         }
-        if (isset($this->saved_attributes[$index][0]) && $this->saved_attributes[$index]["count"] == 1){
-          $tmp= $this->saved_attributes[$index][0];
-          unset($this->saved_attributes[$index]);
-          $this->saved_attributes[$index]= $tmp;
-          continue;
-        }
 
+        if (isset($this->saved_attributes[$index][0])){
+          if(!isset($this->saved_attributes[$index]["count"])){
+            $this->saved_attributes[$index]["count"] = count($this->saved_attributes[$index]);
+          }
+          if($this->saved_attributes[$index]["count"] == 1){
+            $tmp= $this->saved_attributes[$index][0];
+            unset($this->saved_attributes[$index]);
+            $this->saved_attributes[$index]= $tmp;
+            continue;
+          }
+        }
         unset($this->saved_attributes["$index"]["count"]);
       }
       if(isset($this->attrs['gosaUnitTag'])){
