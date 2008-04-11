@@ -148,18 +148,18 @@ class gosaSupportDaemon
     /* Create list of attributes to fetch */
     $attr = ""; 
     foreach($attrs as $at){
-      $attr.= $at.", ";
+      $attr.= "<select>".$at."</select>";
     }
 
     /* Create Daemon query */
     if(empty($package)){
       $xml_msg = "<xml><header>gosa_query_packages_list</header><target>GOSA</target><source>GOSA</source>".
-        "<select> ".trim($attr,", ")." </select>".
+        $attr.
         "<where><clause><phrase><distribution>".$release."</distribution></phrase></clause></where>
         </xml>";
     }else{
          $xml_msg = "<xml><header>gosa_query_packages_list</header><target>GOSA</target><source>GOSA</source>".
-        "<select> ".trim($attr,", ")." </select>".
+        $attr.
         "<where><clause>
             <connector>AND</connector>
             <phrase><distribution>".$release."</distribution></phrase>
