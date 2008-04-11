@@ -154,15 +154,17 @@ class gosaSupportDaemon
     /* Create list of attributes to fetch */
     $pkgs = ""; 
     foreach($package as $pkg){
-      $pkgs .="<phrase>
+      $pkgs .="
+               <phrase>
                 <operator>like</operator>
                 <package>".$pkg."</package>
-               </phrase>";
+               </phrase>
+             ";
 
     }
 
     /* Create Daemon query */
-    if(empty($package)){
+    if(!count($package)){
       $xml_msg = "<xml><header>gosa_query_packages_list</header><target>GOSA</target><source>GOSA</source>".
         $attr.
         "<where><clause><phrase><distribution>".$release."</distribution></phrase></clause></where>
@@ -171,13 +173,13 @@ class gosaSupportDaemon
          $xml_msg = "<xml><header>gosa_query_packages_list</header><target>GOSA</target><source>GOSA</source>".
         $attr.
         "<where>
-            <connector>AND</connector>
             <clause>
-              <phrase><distribution>".$release."</distribution></phrase>
-            </clause>
-            <clause>
-             <connector>OR</connector>
-             $pkgs
+             <connector>AND</connector>
+             <phrase><distribution>".$release."</distribution></phrase>
+              <clause>
+              <connector>OR</connector>
+               ".$pkgs."
+             </clause>
             </clause>
          </where>
          <limit><from>0</from><to>100</to></limit>
