@@ -145,6 +145,12 @@ class gosaSupportDaemon
       return($ret);
     }
 
+    /* Check Parameter */
+    if(!is_array($package) || !count($package)){
+      trigger_error("Third parameter must be an array. With at least one attribute name.");
+      return($ret);
+    }
+
     /* Create list of attributes to fetch */
     $attr = ""; 
     foreach($attrs as $at){
