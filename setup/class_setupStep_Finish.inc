@@ -44,6 +44,7 @@ class Step_Finish extends setup_step
   {
     $smarty = get_smarty();
     $smarty->assign("cv",xmlentities($this->parent->captured_values));
+    $smarty->assign("get_gosa_version",get_gosa_version());
     $str =  $smarty->fetch(CONFIG_TEMPLATE_DIR.$this->gosa_conf_contrib);
     return($str);
   }  
