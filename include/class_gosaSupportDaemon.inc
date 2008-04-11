@@ -134,7 +134,7 @@ class gosaSupportDaemon
   }
 
 
-  public function FAI_get_packages($release,$attrs, $package="")
+  public function FAI_get_packages($release,$attrs, $package = array())
   {
     $this->reset_error();
     $ret = array();
@@ -151,6 +151,16 @@ class gosaSupportDaemon
       $attr.= "<select>".$at."</select>";
     }
 
+    /* Create list of attributes to fetch */
+    $pkgs = ""; 
+    foreach($package as $pkg){
+      $pkgs .="<phrase>
+                <operator>like</operator>
+                <package>".$pkg."</package>
+               </phrase>";
+
+    }
+
     /* Create Daemon query */
     if(empty($package)){
       $xml_msg = "<xml><header>gosa_query_packages_list</header><target>GOSA</target><source>GOSA</source>".
@@ -160,11 +170,17 @@ class gosaSupportDaemon
     }else{
          $xml_msg = "<xml><header>gosa_query_packages_list</header><target>GOSA</target><source>GOSA</source>".
         $attr.
-        "<where><clause>
+        "<where>
             <connector>AND</connector>
-            <phrase><distribution>".$release."</distribution></phrase>
-            <phrase><package>".$package."</package></phrase>
-            </clause></where>
+            <clause>
+              <phrase><distribution>".$release."</distribution></phrase>
+            </clause>
+            <clause>
+             <connector>OR</connector>
+             $pkgs
+            </clause>
+         </where>
+         <limit><from>0</from><to>100</to></limit>
         </xml>";
     }
 
