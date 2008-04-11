@@ -37,6 +37,8 @@ class msg_dialog
 	public function __construct($s_title,$s_message,$i_type)
 	{
 		global $config;
+
+		if(empty($s_message)) return;
 	
 		if(!in_array($i_type,array(INFO_DIALOG,WARNING_DIALOG,ERROR_DIALOG,CONFIRM_DIALOG,FATAL_ERROR_DIALOG))){
 			trigger_error("Invalid msg_dialog type.");
