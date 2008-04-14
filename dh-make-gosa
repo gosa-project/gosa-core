@@ -130,6 +130,8 @@ pushd . &> /dev/null
 
 cd "$BUILD_PATH"
 
+find -name '.svn' -type d -exec rm -rf {} \;
+
 # Use gosa-plugin skelleton
 echo "Calling dh_make..."
 echo | dh_make -e "$PL_MAIL" -c gpl -s -n -f gosa-plugin-${PL_NAME}-${PL_VERSION}.tar.gz &> /dev/null
