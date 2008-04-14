@@ -139,7 +139,11 @@ class group extends plugin
       $ldap->search ("(&(objectClass=sambaDomain)(sambaSID=$this->SID))",array("sambaAlgorithmicRidBase"));
       if ($ldap->count() != 0){
         $attrs= $ldap->fetch();
-        $this->ridBase= $attrs['sambaAlgorithmicRidBase'][0];
+        if(isset($attrs['sambaAlgorithmicRidBase'])){  
+          $this->ridBase= $attrs['sambaAlgorithmicRidBase'][0];  
+        } else {  
+          $this->ridBase= $this->config->current['RIDBASE'];  
+        } 
 
         /* Get domain name for SID */
         $this->sambaDomainName= "DEFAULT";
