@@ -744,7 +744,7 @@ class MultiSelectWindow{
 			$nkey= normalizePreg($key);
 			foreach($this->config->departments as $keyd=>$vald ){
 				if(preg_match('/$nkey\/.*/',$keyd)){
-					$non_empty="full";
+					$non_empty="-full";
 				}
 			}
 
@@ -757,7 +757,7 @@ class MultiSelectWindow{
         }
       }
 
-			$row[]=$field1=array("string"=>"<img src='images/".$non_empty."folder.png' alt='department'>","attach"=>"style='text-align:center;width:20px;'");
+			$row[]=$field1=array("string"=>"<img src='images/lists/folder".$non_empty.".png' alt='department'>","attach"=>"style='text-align:center;width:20px;'");
 			$row[]=$field2=array("string"=>sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
 
 			if($numtabs > 2){	
