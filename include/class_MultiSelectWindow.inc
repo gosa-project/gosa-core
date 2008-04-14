@@ -239,7 +239,7 @@ class MultiSelectWindow{
       $listhead .= " <input class='center' type='image' src='images/lists/root.png' align='middle'
         title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;";
     }else{
-      $listhead .= " <img src='images/list_root_gray.png' class='center' alt='"._("Root")."'>&nbsp;";
+      $listhead .= " <img src='images/lists/root_grey.png' class='center' alt='"._("Root")."'>&nbsp;";
     }
 
     /* Draw back button */
@@ -247,7 +247,7 @@ class MultiSelectWindow{
       $listhead .= " <input class='center' type='image' align='middle' src='images/lists/back.png'
         title='"._("Go up one department")."' alt='"._("Up")."'                name='dep_back'>&nbsp;";
     }else{
-      $listhead .= " <img src='images/list_back_gray.png' class='center' alt='"._("Up")."'>&nbsp;";
+      $listhead .= " <img src='images/lists/back_grey.png' class='center' alt='"._("Up")."'>&nbsp;";
     }
 
     /* Draw home button */
@@ -255,7 +255,7 @@ class MultiSelectWindow{
       $listhead .= " <input class='center' type='image' align='middle' src='images/lists/home.png'
         title='"._("Go to users department")."' alt='"._("Home")."'            name='dep_home'>&nbsp;";
     }else{
-      $listhead .= " <img src='images/list_home_gray.png' class='center' alt='"._("Home")."'>&nbsp;";
+      $listhead .= " <img src='images/lists/home_grey.png' class='center' alt='"._("Home")."'>&nbsp;";
     }
    
     /* And at least draw reload button, this button is enabled everytime */ 
@@ -645,17 +645,17 @@ class MultiSelectWindow{
       }
       if($ok){
         if($layer_menu){
-          $str = "..|<img class='center' src='images/restore.png' alt='"._("Restore")."'>&nbsp;"._("Restore")."|RestoreDeletedSnapShot|\n";
+          $str = "..|<img class='center' src='images/lists/restore.png' alt='"._("Restore")."'>&nbsp;"._("Restore")."|RestoreDeletedSnapShot|\n";
         }else{
-          $str = "<input class='center' type='image' align='middle' src='images/restore.png'
+          $str = "<input class='center' type='image' align='middle' src='images/lists/restore.png'
             title='"._("Restore snapshopts of already deleted objects")."' 
             alt='"._("Restore")."' name='RestoreDeletedSnapShot'>&nbsp;"; 
         }
       }else{
         if($layer_menu){
-          $str = "..|<img class='center' src='images/restore_grey.png' alt=''>&nbsp;"._("Restore")."||\n";
+          $str = "..|<img class='center' src='images/lists/restore_grey.png' alt=''>&nbsp;"._("Restore")."||\n";
         }else{
-          $str = "<img class='center' src='images/restore_grey.png' alt=''>&nbsp;";
+          $str = "<img class='center' src='images/lists/restore_grey.png' alt=''>&nbsp;";
         }
       }
 #      $str .= "<img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;";
@@ -670,10 +670,10 @@ class MultiSelectWindow{
     if($this->parent->snapshotEnabled()){
 
       if(count($this->parent->Available_SnapsShots($dn))){
-        $str.= "<input class='center' type='image' src='images/restore.png'
+        $str.= "<input class='center' type='image' src='images/lists/restore.png'
           alt='"._("Restore snapshot")."' name='RestoreSnapShotDialog_".base64_encode($dn)."' title='"._("Restore snapshot")."'>&nbsp;";
       } else {
-        $str = "<img class='center' src='images/restore_grey.png' alt=''>&nbsp;";
+        $str = "<img class='center' src='images/lists/restore_grey.png' alt=''>&nbsp;";
       }
 
       $str.= "<input class='center' type='image' src='images/snapshot.png'

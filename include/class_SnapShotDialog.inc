@@ -129,7 +129,7 @@ class SnapShotDialog extends plugin
       $this->last_list = $list_of_elements;
 			foreach($list_of_elements as $entry){
 
-				$actions= "<input type='image' src='images/restore.png' name='RestoreSnapShot_%KEY' 
+				$actions= "<input type='image' src='images/lists/restore.png' name='RestoreSnapShot_%KEY' 
 								class='center' title='"._("Restore snapshot")."'>&nbsp;";
 				$actions.= "<input type='image' src='images/lists/trash.png' name='RemoveSnapShot_%KEY' 
 								class='center' title='"._("Remove snapshot")."'>&nbsp;";
