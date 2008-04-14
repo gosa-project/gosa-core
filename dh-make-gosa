@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 usage() {
   echo "Usage: ${0##*/} [--download] [-b|--branch branch] [-e|--email mail] [--depends] plugin-dir|plugin.tar.gz" >&2
@@ -7,7 +7,7 @@ usage() {
 
 
 load_dsc() {
-  if [[ -r "$1" ]]; then
+  if [ -r "$1" ]; then
     PL_NAME=$(sed -n 's/"//g;s/^name\s*=\s*\(.*\)$/\1/p' "$1")
     PL_VERSION=$(sed -n 's/"//g;s/^version\s*=\s*\(.*\)$/\1/p' "$1")
     TDEPENDS=$(sed -n 's/"//g;s/^depends\s*=\s*\(.*\)$/\1/p' "$1")
@@ -25,7 +25,7 @@ load_dsc() {
 
 
 TEMP=`getopt -o e:r: --long download,release:,email:,depends: -n 'dh-make-gosa' -- "$@"`
-if [[ $? != 0 ]] ; then
+if [ $? != 0 ] ; then
   echo "Error: cannot get command line information" >&2
   exit 1
 fi
@@ -43,7 +43,7 @@ while true; do
                 shift 2
                 ;;
     -r|--release)
-                if [[ "$2" != "trunk" ]]; then
+                if [ "$2" != "trunk" ]; then
                   RELEASE=tags/$2
                 fi
                 shift 2
@@ -65,28 +65,28 @@ while true; do
   esac
 done
 
-[[ $# -ne 1 ]] && usage
+[ $# -ne 1 ] && usage
 file=$*
 
 # Three possiblities
-if [[ -d "$file" ]]; then
+if [ -d "$file" ]; then
 
   # It's a local directory
   load_dsc $file/plugin.dsc
 
   # Setup build environment
   BUILD_PATH=${DEST}gosa-plugin-${PL_NAME}-${PL_VERSION}
-  if [[ -d "$BUILD_PATH" ]]; then
+  if [ -d "$BUILD_PATH" ]; then
     echo "Error: build path $BUILD_PATH already exists" >&2
     exit 2
   fi
   cp -a "$PL_NAME" "$BUILD_PATH"
 
-elif [[ -f "$file" ]]; then
+elif [ -f "$file" ]; then
 
   # It's a compressed user contributed file
   TMPDIR="/tmp/dh-make-gosa-$PPID"
-  if [[ -d "/tmp/dh-make-gosa-$PPID"  ]]; then
+  if [ -d "/tmp/dh-make-gosa-$PPID"  ]; then
     echo "Error: directory $TMPDIR exists" >&2
     exit 4
   fi
@@ -94,7 +94,7 @@ elif [[ -f "$file" ]]; then
   # Untar
   mkdir -p "$TMPDIR"
   tar --extract --directory "$TMPDIR" -fz "$file" &> /dev/null
-  if [[ $? -ne 0 ]]; then
+  if [ $? -ne 0 ]; then
     echo "Error: cannot extract plugin file - invalid file format" >&2
     exit 5
   fi
@@ -124,7 +124,7 @@ echo "Author name:  $PL_AUTHOR"
 echo "Author email: $PL_MAIL"
 echo
 read -s -n 1 -p "Do you want to continue? (y/n)" ans; echo
-[[ "$ans" != "y" ]] && exit 0
+[ "$ans" != "y" ] && exit 0
 
 pushd . &> /dev/null
 
@@ -133,15 +133,16 @@ cd "$BUILD_PATH"
 # Use gosa-plugin skelleton
 echo "Calling dh_make..."
 echo | dh_make -e "$PL_MAIL" -c gpl -s -n -f gosa-plugin-${PL_NAME}-${PL_VERSION}.tar.gz &> /dev/null
-if [[ $? -ne 0 ]]; then
+if [ $? -ne 0 ]; then
 	echo "Failed to call dh_make - aborting!"
 	exit 1
 fi
 
 echo "Apdapting debian descriptive files..."
+
 # Generate install file
 for dir in admin personal addons; do
-	[[ -d $dir ]] && echo -e "$dir\t\t\t/usr/share/gosa/plugins" > debian/install
+	[ -d $dir ] && echo -e "$dir\t\t\t/usr/share/gosa/plugins" > debian/install
 done
 for dir in help/*; do
 	echo -e "$dir\t\t\t/usr/share/gosa/plugins/$PL_NAME" >> debian/install
@@ -152,6 +153,11 @@ done
 
 # Generate dirs
 echo "usr/share/gosa" > debian/dirs
+
+# If we've a contrib directory include it to the docs
+if [ -d contrib ]; then
+	echo "contrib /usr/share/doc/gosa-plugin-$PL_NAME" >> debian/install
+fi
 
 # Adapt control
 sed -i 's/^Section: unknown/Section: web/g' debian/control
@@ -185,7 +191,7 @@ sed 's!#DEBHELPER#!#DEBHELPER#\
 # Get apache versions running\
 servers=""\
 for srv in apache apache-ssl apache2; do\
-        if [[ -x /usr/sbin/$srv ]]; then\
+        if [ -x /usr/sbin/$srv ]; then\
                 servers="$srv $servers"\
         fi\
 done\
@@ -195,7 +201,7 @@ done\
 \
 # Finally restart servers\
 for server in $servers; do\
-        if [[ -x /usr/sbin/invoke-rc.d ]]; then\
+        if [ -x /usr/sbin/invoke-rc.d ]; then\
                 invoke-rc.d $server restart\
         else\
                 /etc/init.d/$server restart\
