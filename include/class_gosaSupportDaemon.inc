@@ -146,7 +146,7 @@ class gosaSupportDaemon
     }
 
     /* Check Parameter */
-    if(!is_array($package) || !count($package)){
+    if(!is_array($package)){
       trigger_error("Third parameter must be an array. With at least one attribute name.");
       return($ret);
     }
