@@ -416,11 +416,11 @@ function install_plugin($file)
 
 					/* Calculate destination */
 					if (preg_match("%^.*locale/%", $source)){
-						$dest= GOSA_HOME."/locale/plugin/$name/".preg_replace("%^.*locale/%", "", $source);
+						$dest= GOSA_HOME."/locale/plugins/$name/".preg_replace("%^.*locale/%", "", $source);
 					} elseif (preg_match("%^.*help/%", $source)) {
-						$dest= GOSA_HOME."/doc/plugin/$name/".preg_replace("%^.*help/%", "", $source);
+						$dest= GOSA_HOME."/doc/plugins/$name/".preg_replace("%^.*help/%", "", $source);
 					} elseif (preg_match("%^.*html/%", $source)) {
-						$dest= GOSA_HOME."/html/$name/".preg_replace("%^.*html/%", "", $source);
+						$dest= GOSA_HOME."/html/plugins/$name/".preg_replace("%^.*html/%", "", $source);
 					} else {
 						$dest= GOSA_HOME."/plugins/".substr($entry->getPathName(), strlen($path) + 1);
 					}

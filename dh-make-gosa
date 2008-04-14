@@ -160,7 +160,7 @@ if [ -d contrib ]; then
 fi
 if [ -d html ]; then
 	for i in html/*; do
-		echo "$i /usr/share/gosa/html/$PL_NAME" >> debian/install
+		echo "$i /usr/share/gosa/html/plugins/$PL_NAME" >> debian/install
 	done
 fi
 
