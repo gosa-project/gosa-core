@@ -261,7 +261,7 @@ class MultiSelectWindow{
     /* And at least draw reload button, this button is enabled everytime */ 
     $listhead .=  " <input class='center' type='image' src='images/lists/reload.png' align='middle'
       title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
-      " <img   class='center' src='images/list_seperator.png' align='middle' alt='-' height='16' width='1'>&nbsp;";
+      " <img   class='center' src='images/lists/seperator.png' align='middle' alt='-' height='16' width='1'>&nbsp;";
 
     return ($listhead);
   }
@@ -658,7 +658,7 @@ class MultiSelectWindow{
           $str = "<img class='center' src='images/lists/restore_grey.png' alt=''>&nbsp;";
         }
       }
-#      $str .= "<img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;";
+#      $str .= "<img class='center' src='images/lists/seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;";
     }
     return($str);
   }

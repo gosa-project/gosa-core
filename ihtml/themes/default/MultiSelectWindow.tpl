@@ -18,7 +18,7 @@
 						</td>
 						{if $HeaderDropDown != ""}
 							<td>
-								<img src='images/list_seperator.png' alt='-' align='middle' height='16' width='1' class='center'>
+								<img src='images/lists/seperator.png' alt='-' align='middle' height='16' width='1' class='center'>
 								<img src='images/rocket.png' alt='' class='center'>
 							</td>
 							<td>

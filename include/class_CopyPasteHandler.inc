@@ -477,7 +477,7 @@ class CopyPasteHandler {
   /* returns the paste icon for headpages */ 
   function generatePasteIcon()
   {
-    $Copy_Paste= "&nbsp;<img class='center' src='images/list_seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;";
+    $Copy_Paste= "&nbsp;<img class='center' src='images/lists/seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;";
     if($this->entries_queued()){
       $img= "images/copypaste.png";
       $Copy_Paste.= "<input type='image' name='editPaste' class='center'
