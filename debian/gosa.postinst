@@ -31,11 +31,11 @@ if [ ! -f /etc/gosa/gosa.secrets ]; then
 fi
 
 # Copy GOsa configuration to conf.d directories
-if [ ! -f /etc/apache2/conf.d/gosa.conf ]; then
+if [ ! -L /etc/apache2/conf.d/gosa.conf ]; then
   echo "Making /gosa available in /etc/apache2/conf.d"
 
   # Add GOsa include file
-  ln -s /etc/gosa/apache-gosa.conf /etc/apache2/conf.d/gosa.conf
+  ln -s /etc/gosa/gosa-apache.conf /etc/apache2/conf.d/gosa.conf
 fi
 
 # Add links for safe mode

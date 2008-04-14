@@ -7,6 +7,7 @@ plugins				/usr/share/gosa
 setup				/usr/share/gosa
 debian/overrides-linda		/usr/share/linda/overrides/gosa
 debian/overrides-lintian	/usr/share/lintian/overrides/gosa
+debian/gosa-apache.conf /etc/gosa
 contrib/shells			/etc/gosa
 contrib/encodings		/etc/gosa
 contrib/openldap/slapd.conf	/usr/share/doc/gosa/slapd.conf-example
