@@ -257,9 +257,7 @@ function parse_ini($file)
 				$res= $plugin['name'];
 				$description[$res]= $plugin['description'];
 				$versions[$res]= $plugin['version'];
-				if (isset($plugin['provides'])){
-					$provides[$res]= explode(',', preg_replace('/\s+/', '', $plugin['provides']));
-				}
+				$provides[$res]= $res;
 				if (isset($plugin['depends'])){
 					$depends[$res]= explode(',', preg_replace('/\s+/', '', $plugin['depends']));
 				}
@@ -280,28 +278,12 @@ function dependency_check()
 
 	foreach ($depends as $name => $pl_depends){
 		foreach ($pl_depends as $pl){
-			if (!is_provided($pl, $provides)){
+			if (!in_array($pl, $provides)){
 				echo "! Error: plugin '$name' depends on '$pl' which is not provided by any plugin\n\n";
 				exit (1);
 			}
 		}
 	}
-}
-
-
-function is_provided($dependency)
-{
-	global $provides;
-
-	$result= FALSE;
-	foreach ($provides as $name => $pl_provides){
-		if(in_array($dependency, $pl_provides)) {
-			$result= TRUE;
-			continue;
-		}
-	}
-
-	return $result;
 }
 
 
