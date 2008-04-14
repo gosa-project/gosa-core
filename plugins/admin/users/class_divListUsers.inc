@@ -183,7 +183,7 @@ class divListUsers extends MultiSelectWindow
       "&nbsp;"._("Edit")."|"."multiple_edit|\n";
     $s.= "..|<img src='images/list_password.png' alt='' border='0' class='center'>".
       "&nbsp;"._("Change password")."|"."multiple_password_change|\n";
-    $s.= "..|<img src='images/edittrash.png' alt='' border='0' class='center'>".
+    $s.= "..|<img src='images/lists/trash.png' alt='' border='0' class='center'>".
       "&nbsp;"._("Remove")."|"."remove_multiple|\n";
     $s.= "..|<img src='images/wizard.png' alt='' border='0' class='center'>".
       "&nbsp;"._("Apply template")."|"."templatize_multiple|\n";
@@ -202,16 +202,16 @@ class divListUsers extends MultiSelectWindow
     /* Add multiple copy & cut icons */
     if(is_object($this->parent->CopyPasteHandler) && preg_match("/(c.*w|w.*c)/",$acl_all)){
       $s.= "..|---|\n";
-      $s.= "..|<img src='images/editcopy.png' alt='' border='0' class='center'>".
+      $s.= "..|<img src='images/lists/copy.png' alt='' border='0' class='center'>".
         "&nbsp;"._("Copy")."|"."multiple_copy_systems|\n";
-      $s.= "..|<img src='images/editcut.png' alt='' border='0' class='center'>".
+      $s.= "..|<img src='images/lists/cut.png' alt='' border='0' class='center'>".
         "&nbsp;"._("Cut")."|"."multiple_cut_systems|\n";
       
       if($this->parent->CopyPasteHandler->entries_queued()){
-        $img = "<img border='0' class='center' src='images/editpaste.png' alt=''>";
+        $img = "<img border='0' class='center' src='images/lists/paste.png' alt=''>";
         $s.="..|".$img."&nbsp;"._("Paste")."|editPaste|\n";
       }else{
-        $img = "<img border='0' class='center' src='images/cant_editpaste.png' alt=''>";
+        $img = "<img border='0' class='center' src='images/cant_lists/paste.png' alt=''>";
         $s.="..|".$img."&nbsp;"._("Paste")."\n";
       }
     }
@@ -306,9 +306,9 @@ class divListUsers extends MultiSelectWindow
       $acl      = $ui->get_permissions($val['dn'],"users/user");
       if(preg_match("/(c.*w|w.*c)/",$acl_all) && $this->parent->CopyPasteHandler){
         $action .= "<input class='center' type='image'
-          src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+          src='images/lists/cut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
         $action.= "<input class='center' type='image'
-          src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
+          src='images/lists/copy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
       }
 
       /* Add deactivate status */
@@ -316,10 +316,10 @@ class divListUsers extends MultiSelectWindow
 
       if(isset($val['userPassword'][0]) && preg_match("/^\{[^\}]/",$val['userPassword'][0])){
         if(preg_match("/^[^\}]*+\}!/",$val['userPassword'][0])){
-          $lock_status = "<input class='center' type='image' src='images/closedlock.png'
+          $lock_status = "<input class='center' type='image' src='images/lists/locked.png'
             alt='"._("inactive")."' name='toggle_lock_status_%KEY%'>";
         }else{
-          $lock_status = "<input class='center' type='image' src='images/openlock.png'
+          $lock_status = "<input class='center' type='image' src='images/lists/unlocked.png'
             alt='"._("active")."' name='toggle_lock_status_%KEY%'>";
         }
       }else{
@@ -351,7 +351,7 @@ class divListUsers extends MultiSelectWindow
 
       /* Add remove icon, if we are allowed to remove the current user */
       if(preg_match("/d/",$ui->get_permissions($val['dn'],"users/user"))) {
-        $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."'
+        $action.= "<input class='center' type='image' src='images/lists/trash.png' alt='"._("delete")."'
           name='user_del_%KEY%' title='"._("Delete user")."'>";
       }else{
         $action.= "<img class='center' src='images/empty.png' alt='&nbsp;'  

@@ -156,7 +156,7 @@ class divListDepartment extends MultiSelectWindow
         "&nbsp;"._("Department")."|dep_new|\n";
     }
     $s.= "..|---|\n";
-    $s.= "..|<img src='images/edittrash.png' alt='' border='0' class='center'>".
+    $s.= "..|<img src='images/lists/trash.png' alt='' border='0' class='center'>".
       "&nbsp;"._("Remove")."|"."remove_multiple|\n";
 
 
@@ -186,7 +186,7 @@ class divListDepartment extends MultiSelectWindow
       }
 
       if(preg_match("/c/",$acl)){
-        $actions.= "<input class='center' type='image' src='images/edittrash.png'
+        $actions.= "<input class='center' type='image' src='images/lists/trash.png'
           alt='"._("delete")."'   name='dep_del_%KEY%' title='"._("Delete this entry")."'>";
       }
 

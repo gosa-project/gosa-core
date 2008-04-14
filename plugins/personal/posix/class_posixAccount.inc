@@ -401,7 +401,7 @@ class posixAccount extends plugin
       }
       asort($wslist);
       $smarty->assign("search_image", get_template_path('images/search.png'));
-      $smarty->assign("launchimage", get_template_path('images/small_filter.png'));
+      $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
       $smarty->assign("tree_image", get_template_path('images/tree.png'));
       $smarty->assign("deplist", $this->config->idepartments);
       $smarty->assign("alphabet", generate_alphabet());
@@ -439,7 +439,7 @@ class posixAccount extends plugin
       $smarty->assign("guser",$this->GroupUserRegex);
       $smarty->assign("groups", $glist);
       $smarty->assign("search_image", get_template_path('images/search.png'));
-      $smarty->assign("launchimage", get_template_path('images/small_filter.png'));
+      $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
       $smarty->assign("tree_image", get_template_path('images/tree.png'));
       $smarty->assign("deplist", $this->config->idepartments);
       $smarty->assign("alphabet", generate_alphabet());

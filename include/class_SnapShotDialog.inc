@@ -131,7 +131,7 @@ class SnapShotDialog extends plugin
 
 				$actions= "<input type='image' src='images/restore.png' name='RestoreSnapShot_%KEY' 
 								class='center' title='"._("Restore snapshot")."'>&nbsp;";
-				$actions.= "<input type='image' src='images/edittrash.png' name='RemoveSnapShot_%KEY' 
+				$actions.= "<input type='image' src='images/lists/trash.png' name='RemoveSnapShot_%KEY' 
 								class='center' title='"._("Remove snapshot")."'>&nbsp;";
 
 				$time_stamp 	= date(_("Y-m-d, H:i:s"),preg_replace("/\-.*$/","",$entry['gosaSnapshotTimestamp'][0]));

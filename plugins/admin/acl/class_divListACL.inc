@@ -168,22 +168,22 @@ class divListACL extends MultiSelectWindow
 
     /* Multiple options */
     $s.= "..|---|\n";
-    $s.= "..|<img src='images/edittrash.png' alt='' border='0' class='center'>".
+    $s.= "..|<img src='images/lists/trash.png' alt='' border='0' class='center'>".
       "&nbsp;"._("Remove")."|"."remove_multiple|\n";
 
     /* Add multiple copy & cut icons */
     if(is_object($this->parent->CopyPasteHandler)){
       $s.= "..|---|\n";
-      $s.= "..|<img src='images/editcopy.png' alt='' border='0' class='center'>".
+      $s.= "..|<img src='images/lists/copy.png' alt='' border='0' class='center'>".
         "&nbsp;"._("Copy")."|"."multiple_copy_systems|\n";
-      $s.= "..|<img src='images/editcut.png' alt='' border='0' class='center'>".
+      $s.= "..|<img src='images/lists/cut.png' alt='' border='0' class='center'>".
         "&nbsp;"._("Cut")."|"."multiple_cut_systems|\n";
 
       if($this->parent->CopyPasteHandler->entries_queued()){
-        $img = "<img border='0' class='center' src='images/editpaste.png' alt=''>";
+        $img = "<img border='0' class='center' src='images/lists/paste.png' alt=''>";
         $s.="..|".$img."&nbsp;"._("Paste")."|editPaste|\n";
       }else{
-        $img = "<img border='0' class='center' src='images/cant_editpaste.png' alt=''>";
+        $img = "<img border='0' class='center' src='images/cant_lists/paste.png' alt=''>";
         $s.="..|".$img."&nbsp;"._("Paste")."\n";
       }
     }
@@ -232,9 +232,9 @@ class divListACL extends MultiSelectWindow
         /* Add copy & paste handler */
         if(($this->parent->CopyPasteHandler) && preg_match("/(c.*w|w.*c)/",$acl_all)){
           $action.= "<input class='center' type='image'
-            src='images/editcut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+            src='images/lists/cut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
           $action.= "<input class='center' type='image'
-            src='images/editcopy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
+            src='images/lists/copy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
         }
 
         /* Add actions depending on acls */
@@ -249,7 +249,7 @@ class divListACL extends MultiSelectWindow
         }
 
         if(preg_match("/d/", $acl)){
-          $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."' 
+          $action.= "<input class='center' type='image' src='images/lists/trash.png' alt='"._("delete")."' 
             name='list_acl_role_del_%KEY%' title='"._("Delete acl role")."'>";
         }
       }else{
@@ -265,7 +265,7 @@ class divListACL extends MultiSelectWindow
             name='list_acl_edit_%KEY%' title='"._("Edit acl")."'>";
         }
         if(preg_match("/d/", $acl)){
-          $action.= "<input class='center' type='image' src='images/edittrash.png' alt='"._("delete")."' 
+          $action.= "<input class='center' type='image' src='images/lists/trash.png' alt='"._("delete")."' 
             name='list_acl_del_%KEY%' title='"._("Delete acl")."'>";
         }
       }

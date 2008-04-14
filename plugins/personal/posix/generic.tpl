@@ -122,7 +122,7 @@
     &nbsp;
   </td>
   <td style="vertical-align:top;">
-   <h2><img alt="" class="center" align="middle" src="images/closedlock.png" /> {t}System trust{/t}</h2>
+   <h2><img alt="" class="center" align="middle" src="images/lists/locked.png" /> {t}System trust{/t}</h2>
 {if !$multiple_support}
 	{t}Trust mode{/t}&nbsp;
 	{render acl=$trustmodeACL}

@@ -44,7 +44,7 @@ if ($remove_lock){
     $display= print_header(get_template_path('images/user.png'),
                            _("User administration"),
                            "<img alt=\"\" class=\"center\" src=\"".
-                           get_template_path('images/closedlock.png').
+                           get_template_path('images/lists/locked.png').
                            "\"> ".@LDAP::fix(session::get('objectinfo')));
   } else {
     $display= print_header(get_template_path('images/user.png'),

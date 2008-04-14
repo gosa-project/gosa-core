@@ -236,7 +236,7 @@ class MultiSelectWindow{
 
     /* Draw root button */
     if($enable_root){
-      $listhead .= " <input class='center' type='image' src='images/list_root.png' align='middle'
+      $listhead .= " <input class='center' type='image' src='images/lists/root.png' align='middle'
         title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;";
     }else{
       $listhead .= " <img src='images/list_root_gray.png' class='center' alt='"._("Root")."'>&nbsp;";
@@ -244,7 +244,7 @@ class MultiSelectWindow{
 
     /* Draw back button */
     if($enable_back){
-      $listhead .= " <input class='center' type='image' align='middle' src='images/list_back.png'
+      $listhead .= " <input class='center' type='image' align='middle' src='images/lists/back.png'
         title='"._("Go up one department")."' alt='"._("Up")."'                name='dep_back'>&nbsp;";
     }else{
       $listhead .= " <img src='images/list_back_gray.png' class='center' alt='"._("Up")."'>&nbsp;";
@@ -252,14 +252,14 @@ class MultiSelectWindow{
 
     /* Draw home button */
     if($enable_home){
-      $listhead .= " <input class='center' type='image' align='middle' src='images/list_home.png'
+      $listhead .= " <input class='center' type='image' align='middle' src='images/lists/home.png'
         title='"._("Go to users department")."' alt='"._("Home")."'            name='dep_home'>&nbsp;";
     }else{
       $listhead .= " <img src='images/list_home_gray.png' class='center' alt='"._("Home")."'>&nbsp;";
     }
    
     /* And at least draw reload button, this button is enabled everytime */ 
-    $listhead .=  " <input class='center' type='image' src='images/list_reload.png' align='middle'
+    $listhead .=  " <input class='center' type='image' src='images/lists/reload.png' align='middle'
       title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
       " <img   class='center' src='images/list_seperator.png' align='middle' alt='-' height='16' width='1'>&nbsp;";
 

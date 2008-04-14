@@ -40,7 +40,7 @@ if ($remove_lock){
   if (session::is_set('objectinfo')){
     $display= print_header(get_template_path('images/group.png'),
                            _("Group administration"), "<img alt=\"\" align=\"middle\" src=\"".
-                            get_template_path('images/closedlock.png')."\"> ".
+                            get_template_path('images/lists/locked.png')."\"> ".
                             @LDAP::fix(session::get('objectinfo')));
   } else {
     $display= print_header(get_template_path('images/group.png'), _("Group administration"));

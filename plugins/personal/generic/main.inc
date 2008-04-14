@@ -161,7 +161,7 @@ if (!$remove_lock){
       $display.= "&nbsp;";
       $display.= "<input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">\n";
 
-      $info= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png').
+      $info= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/lists/locked.png').
              "\"> ".$ui->dn."&nbsp;";
     } else {
       /* 'viewid' may be set by i.e. the phonelist plugin. This
@@ -172,7 +172,7 @@ if (!$remove_lock){
       } else {
         $str= msgPool::editButton();
         $fn = "edit";
-        $info= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/openlock.png').
+        $info= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/lists/unlocked.png').
                "\"> ".$ui->dn."&nbsp;";
       }
 

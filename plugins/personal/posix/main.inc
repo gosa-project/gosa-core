@@ -108,10 +108,10 @@ if (!$remove_lock){
       $display.= "<input type=submit name=\"edit_finish\" style=\"width:80px\" value=\"".msgPool::okButton()."\">\n";
       $display.= "&nbsp;";
       $display.= "<input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">\n";
-      $info= "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/closedlock.png').
+      $info= "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/lists/locked.png').
              "\"> ".$ui->dn."&nbsp;";
     } else {
-      $info= "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/openlock.png').
+      $info= "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/lists/unlocked.png').
              "\"> ".$ui->dn."&nbsp;";
 
       /* Only display edit button if there is at least one attribute editable */

@@ -62,7 +62,7 @@
 			{else}
 				<input type='text' name='base' maxlength='80' size='40' value='{$base}'>
 			{/if}
-			<input type='image' class='center' src='images/list_reload.png' title='{t}Reload{/t}' name='reload' alt='{t}Reload{/t}'>
+			<input type='image' class='center' src='images/lists/reload.png' title='{t}Reload{/t}' name='reload' alt='{t}Reload{/t}'>
 		</div>
 	</div>
 	<p style="margin-top:20px">
