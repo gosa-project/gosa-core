@@ -479,11 +479,11 @@ class CopyPasteHandler {
   {
     $Copy_Paste= "&nbsp;<img class='center' src='images/lists/seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;";
     if($this->entries_queued()){
-      $img= "images/copypaste.png";
+      $img= "images/lists/paste.png";
       $Copy_Paste.= "<input type='image' name='editPaste' class='center'
         src='".$img."' alt='"._("Paste")."'>&nbsp;";
     }else{
-      $Copy_Paste.= "<img class='center' src='images/cant_editpaste.png' alt=\""._("Cannot paste")."\">&nbsp;";
+      $Copy_Paste.= "<img class='center' src='images/lists/paste-grey.png' alt=\""._("Cannot paste")."\">&nbsp;";
     }
     return ($Copy_Paste);
   }
