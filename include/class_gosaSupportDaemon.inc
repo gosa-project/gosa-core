@@ -179,16 +179,19 @@ class gosaSupportDaemon
          $xml_msg = "<xml><header>gosa_query_packages_list</header><target>GOSA</target><source>GOSA</source>".
         $attr.
         "<where>
-            <clause>
-             <connector>AND</connector>
-             <phrase><distribution>".$release."</distribution></phrase>
-              <clause>
-              <connector>OR</connector>
-               ".$pkgs."
-             </clause>
-            </clause>
-         </where>
-         <limit><from>0</from><to>100</to></limit>
+
+          <clause>
+            <phrase>
+              <distribution>".$release."</distribution>
+            </phrase>
+          </clause>
+
+          <clause>
+            <connector>OR</connector>
+                ".$pkgs."
+          </clause>
+        </where>
+        <limit><from>0</from><to>100</to></limit>
         </xml>";
     }
 
