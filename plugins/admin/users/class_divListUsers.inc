@@ -446,7 +446,7 @@ class divListUsers extends MultiSelectWindow
 
     $str = "<img class='center' src='images/select_user.png'
               title='".$num_user_str."' alt='".$num_user_str."'>&nbsp;".$num_users."&nbsp;&nbsp;&nbsp;&nbsp;";
-    $str.= "<img class='center' src='images/lists/lists/folder.png'
+    $str.= "<img class='center' src='images/lists/folder.png'
               title='".$num_dep_str."' alt='".$num_dep_str."'>&nbsp;".$num_deps."&nbsp;&nbsp;&nbsp;&nbsp;";
 
     $this->set_List_Bottom_Info($str);

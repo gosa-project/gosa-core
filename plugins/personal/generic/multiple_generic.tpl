@@ -53,7 +53,7 @@
       <select id="base" size="1" name="base" title="{t}Choose subtree to place user in{/t}">
        {html_options options=$bases selected=$base_select}
       </select>
-      <input type="image" name="chooseBase" src="images/lists/lists/folder.png" class="center" title="{t}Select a base{/t}">
+      <input type="image" name="chooseBase" src="images/lists/folder.png" class="center" title="{t}Select a base{/t}">
      </td>
     </tr>
    </table>
