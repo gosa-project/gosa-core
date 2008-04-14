@@ -158,6 +158,11 @@ echo "usr/share/gosa" > debian/dirs
 if [ -d contrib ]; then
 	echo "contrib /usr/share/doc/gosa-plugin-$PL_NAME" >> debian/install
 fi
+if [ -d html ]; then
+	for i in html/*; do
+		echo "$i /usr/share/gosa/html/$PL_NAME" >> debian/install
+	done
+fi
 
 # Adapt control
 sed -i 's/^Section: unknown/Section: web/g' debian/control
