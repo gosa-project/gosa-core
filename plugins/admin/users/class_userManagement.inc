@@ -120,44 +120,51 @@ class userManagement extends plugin
       $s_tab = "user";
     }
 
+    if (isset($_POST['menu_action'])){
 
-    /* handle C&P from layers menu */
-    if(isset($_POST['menu_action']) && preg_match("/^multiple_copy_systems/",$_POST['menu_action'])){
-      $s_action = "copy_multiple";
-    }
-    if(isset($_POST['menu_action']) && preg_match("/^multiple_cut_systems/",$_POST['menu_action'])){
-      $s_action = "cut_multiple";
-    }
-    if(isset($_POST['menu_action']) && preg_match("/^editPaste/",$_POST['menu_action'])){
-      $s_action = "editPaste";
+	    /* handle C&P from layers menu */
+	    if(preg_match("/^multiple_copy_systems/",$_POST['menu_action'])){
+	      $s_action = "copy_multiple";
+	    }
+	    if(preg_match("/^multiple_cut_systems/",$_POST['menu_action'])){
+	      $s_action = "cut_multiple";
+	    }
+	    if(preg_match("/^editPaste/",$_POST['menu_action'])){
+	      $s_action = "editPaste";
+	    }
+
+	    /* Create options */
+	    if($_POST['menu_action'] == "user_new"){
+	      $s_action = "new";
+	    }
+	    if($_POST['menu_action'] == "user_tplnew"){
+	      $s_action = "new_tpl";
+	    }
+	    if($_POST['menu_action'] == "multiple_edit"){
+	      $s_action = "multiple_edit";
+	    }
+
+	    /* handle remove from layers menu */
+	    if(preg_match("/^multiple_password_change/",$_POST['menu_action'])){
+	      $s_action = "multiple_password_change";
+	    }
+
+	    /* handle remove from layers menu */
+	    if(preg_match("/^remove_multiple/",$_POST['menu_action'])){
+	      $s_action = "del_multiple";
+	    }
+	    if(preg_match("/^templatize_multiple/",$_POST['menu_action'])){
+	      $s_action = "templatize_multiple";
+	    }
+
+	    if(preg_match("/^event/",$_POST['menu_action'])){
+	      $s_action = $_POST['menu_action'];
+	    }
     }
 
-    /* Create options */
-    if(isset($_POST['menu_action']) && $_POST['menu_action'] == "user_new"){
-      $s_action = "new";
-    }
-    if(isset($_POST['menu_action']) && $_POST['menu_action'] == "user_tplnew"){
-      $s_action = "new_tpl";
-    }
-    if(isset($_POST['menu_action']) && $_POST['menu_action'] == "multiple_edit"){
-      $s_action = "multiple_edit";
-    }
-
-    /* handle remove from layers menu */
-    if(isset($_POST['menu_action']) && preg_match("/^multiple_password_change/",$_POST['menu_action'])){
-      $s_action = "multiple_password_change";
-    }
-
-    /* handle remove from layers menu */
-    if(isset($_POST['menu_action']) && preg_match("/^remove_multiple/",$_POST['menu_action'])){
-      $s_action = "del_multiple";
-    }
-    if(isset($_POST['menu_action']) && preg_match("/^templatize_multiple/",$_POST['menu_action'])){
-      $s_action = "templatize_multiple";
-    }
-
-    if(isset($_POST['menu_action']) && preg_match("/^event/",$_POST['menu_action'])){
-      $s_action = $_POST['menu_action'];
+    /* Use template */
+    if(isset($_POST['templatize_continue'])){
+      $s_action = "templatize_continue";
     }
 
 
@@ -438,15 +445,51 @@ class userManagement extends plugin
 
 
     /********************
+      We want to create a new user, so fetch all available user templates 
+     ********************/
+
+    /* Generate template list */
+    if ($s_action == "new" || $s_action == "create_user_from_tpl" || $s_action == "templatize_multiple"){
+
+      $this->templates= array();
+      $ldap= $this->config->get_ldap_link();
+
+      /* Create list of templates */
+      foreach ($this->config->departments as $key => $value){
+    
+        /* Get acls from different ou's */
+        $acl = $this->ui->get_permissions("cn=dummy,".get_people_ou().$value,"users/user")       ; 
+ 
+        /* If creation of a new user is allowed, append this template */
+        if (preg_match("/c/",$acl)){
+          
+          /* Search all templates from the current dn */
+          $ldap->cd (get_people_ou().$value);
+          $ldap->search ("(objectClass=gosaUserTemplate)", array("uid"));
+
+          /* Append */
+          if ($ldap->count() != 0){
+            while ($attrs= $ldap->fetch()){
+              $this->templates[$ldap->getDN()]=
+                $attrs['uid'][0]." - ".@LDAP::fix($key);
+            }
+	    if ($s_action != "templatize_multiple"){
+		    $this->templates['none']= _("none");
+	    }
+          }
+        }
+      }
+
+      /* Sort templates */
+      natcasesort ($this->templates);
+      reset ($this->templates);
+    }
+
+
+    /********************
       Apply template to multiple entries requested, display confirm dialog
      ********************/
 
-
-    # TODO: show dialog to choose
-    #       * template
-    #       * when the template is choosen refresh the list of
-    #         available attributes with a checkbox - everything checked
-    #       * when pressing apply do the stuff below
     if ($s_action=="templatize_multiple"){
       $ids = $this->list_get_selected_items();
       $this->dns = array();
@@ -461,20 +504,37 @@ class userManagement extends plugin
         }
       }
 
+      $smarty->assign("templates", $this->templates);
+
       return($smarty->fetch(get_template_path('templatize.tpl', TRUE)));
     }
 
-# TODO: apply after we pressed some button
-#      foreach ($this->dns as $dn){
-#
-#        echo "Template test with '$dn'<br>";
-#        $template_dn= "cn=super44 super44,ou=people,dc=gonicus,dc=de";
-#        $usertab= new usertabs($this->config, $this->config->data['TABS']['USERTABS'], $dn);
-#        $usertab->adapt_from_template($template_dn, array("sn", "givenName", "uid"));
-#        $usertab->save();
-#        unset ($usertab);
-#        $usertab= NULL;
-#      }
+    /* Perform templatizing after the button has been pressed */
+    if ($s_action == "templatize_continue"){
+
+      $acl = $this->ui->get_permissions($_POST['template'], "users/user");
+
+      /* Template readable? */
+      if (preg_match('/r/', $acl)){
+	$template_dn= $_POST['template'];
+
+        foreach ($this->dns as $dn){
+      	  $acl = $this->ui->get_permissions($_POST['template'], "users/user");
+      	  if (preg_match('/w/', $acl)){
+	          $usertab= new usertabs($this->config, $this->config->data['TABS']['USERTABS'], $dn);
+	          $usertab->adapt_from_template($template_dn, array("sn", "givenName", "uid"));
+	          $usertab->save();
+	          unset ($usertab);
+	          $usertab= NULL;
+	  } else {
+		  msg_dialog::display(_("Permission error"), sprintf(_("You have no permission to modify object '%s'!"), $dn), ERROR_DIALOG);
+          }
+        }
+      } else {
+	msg_dialog::display(_("Permission error"), _("You have no permission to use this template!"), ERROR_DIALOG);
+      }
+
+    }
 
 
     /********************
@@ -719,45 +779,6 @@ class userManagement extends plugin
       }
     }
 
-
-    /********************
-      We want to create a new user, so fetch all available user templates 
-     ********************/
-
-    /* Generate template list */
-    if (($s_action=="new")||($s_action=="create_user_from_tpl")){
-
-      $this->templates= array();
-      $ldap= $this->config->get_ldap_link();
-
-      /* Create list of templates */
-      foreach ($this->config->departments as $key => $value){
-    
-        /* Get acls from different ou's */
-        $acl = $this->ui->get_permissions("cn=dummy,".get_people_ou().$value,"users/user")       ; 
- 
-        /* If creation of a new user is allowed, append this template */
-        if (preg_match("/c/",$acl)){
-          
-          /* Search all templates from the current dn */
-          $ldap->cd (get_people_ou().$value);
-          $ldap->search ("(objectClass=gosaUserTemplate)", array("uid"));
-
-          /* Append */
-          if ($ldap->count() != 0){
-            while ($attrs= $ldap->fetch()){
-              $this->templates[$ldap->getDN()]=
-                $attrs['uid'][0]." - ".@LDAP::fix($key);
-            }
-            $this->templates['none']= _("none");
-          }
-        }
-      }
-
-      /* Sort templates */
-      natcasesort ($this->templates);
-      reset ($this->templates);
-    }
 
 
     /********************
