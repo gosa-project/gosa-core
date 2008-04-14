@@ -130,8 +130,6 @@ pushd . &> /dev/null
 
 cd "$BUILD_PATH"
 
-find -name '.svn' -type d -exec rm -rf {} \; &> /dev/null
-
 # Use gosa-plugin skelleton
 echo "Calling dh_make..."
 echo | dh_make -e "$PL_MAIL" -c gpl -s -n -f gosa-plugin-${PL_NAME}-${PL_VERSION}.tar.gz &> /dev/null
@@ -168,6 +166,7 @@ fi
 
 # Adapt control
 sed -i 's/^Section: unknown/Section: web/g' debian/control
+sed -i 's/^Architecture: any/Architecture: all/g' debian/control
 sed -i 's/^Depends: .*$/Depends: gosa/g' debian/control
 sed -i "s/^Description: .*$/Description: $PL_NAME plugin for GOsa/g" debian/control
 sed -i "s/^ <.*$/ $PL_DESCRIPTION\
@@ -188,8 +187,65 @@ $PL_AUTHOR <$PL_MAIL>  Fri 02 Jun 2006 16:23:50 +0200
 EOF
 
 # Fix rules
-sed -i "/MAKE/d" debian/rules
-sed -i "s/#.*dh_install$/\tdh_install/" debian/rules
+cat <<EOF > debian/rules
+#!/usr/bin/make -f
+# -*- makefile -*-
+# GOsa default plugin debhelper file.
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+	touch configure-stamp
+
+
+build: build-stamp
+
+build-stamp: configure-stamp 
+	dh_testdir
+
+	touch $@
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp configure-stamp
+	dh_clean 
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k 
+	dh_installdirs
+
+# Build architecture-independent files here.
+binary-indep: build install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs 
+	dh_installdocs
+	dh_installexamples
+	dh_install
+	dh_installman
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep
+.PHONY: build clean binary-indep binary install configure
+EOF
 
 # Adapt postinst/postrm
 for file in postinst postrm; do
@@ -224,3 +280,4 @@ rm debian/*ex debian/*EX &> /dev/null
 popd &> /dev/null
 
 echo "Done."
+
