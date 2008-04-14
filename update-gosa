@@ -236,7 +236,7 @@ function rescan_guide()
 	
 	$master_guide_content= preg_replace("/[ \t][ \t]*/", " ", $master_guide_content);
 
-	if(is_writable($master_guide)) {
+	if((file_exists($master_guide) && is_writable($master_guide)) || is_writable('doc')) {
 		file_put_contents($master_guide, $master_guide_content);
 	}
 
