@@ -8,8 +8,6 @@ setup				/usr/share/gosa
 debian/overrides-linda		/usr/share/linda/overrides/gosa
 debian/overrides-lintian	/usr/share/lintian/overrides/gosa
 contrib/shells			/etc/gosa
-contrib/resolutions		/etc/gosa
 contrib/encodings		/etc/gosa
 contrib/openldap/slapd.conf	/usr/share/doc/gosa/slapd.conf-example
-contrib/vacation_example.txt	/usr/share/doc/gosa
 contrib/gosa.conf		/usr/share/doc/gosa
