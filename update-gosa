@@ -35,7 +35,7 @@ Usage: update-gosa install dsc     Install the plugin using the dsc information
        update-gosa remove plugin   Remove the plugin named "plugin" from
                                    the current configuration.
 
-       update-gosa lists           Lists installed plugins
+       update-gosa list           Lists installed plugins
 
        update-gosa rescan-i18n     Rebuilds the translations
 
@@ -218,13 +218,15 @@ function rescan_guide()
 		$master_guide_content.= file_get_contents($guide);
 	}
 	
-	$plugins= scandir('doc/plugins');
-	foreach($plugins as $key => $plugin) {
-		if($plugin != '.' && $plugin != '..') {
-			if(is_dir('doc/plugins/'.$plugin)) {
-				$guide= 'doc/plugins/'.$plugin.'/guide.xml';
-				if(file_exists($guide) && is_readable($guide)) {
-					$master_guide_content.= file_get_contents($guide);
+	if(file_exists('doc/plugins')) {
+		$plugins= scandir('doc/plugins');
+		foreach($plugins as $key => $plugin) {
+			if($plugin != '.' && $plugin != '..') {
+				if(is_dir('doc/plugins/'.$plugin)) {
+					$guide= 'doc/plugins/'.$plugin.'/guide.xml';
+					if(file_exists($guide) && is_readable($guide)) {
+						$master_guide_content.= file_get_contents($guide);
+					}
 				}
 			}
 		}
