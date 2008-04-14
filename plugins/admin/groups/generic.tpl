@@ -46,7 +46,7 @@
 {/render}
 
 {render acl=$baseACL disable_picture='images/folder_gray.png'}
-	<input type="image" name="chooseBase" src="images/folder.png" class="center" title="{t}Select a base{/t}">
+	<input type="image" name="chooseBase" src="images/lists/folder.png" class="center" title="{t}Select a base{/t}">
 {/render}
      </td>
     </tr>

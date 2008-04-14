@@ -216,7 +216,7 @@ class divListDepartment extends MultiSelectWindow
             "attach" => "style='width:20px;'");
       }
 
-      $field0 = array("string" => "<img src='images/".$non_empty."folder.png' title='"._("department")."' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
+      $field0 = array("string" => "<img src='images/".$non_empty."lists/folder.png' title='"._("department")."' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
       $field1 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style='' title='".$title."'");
       $field2 = array("string" => preg_replace("/%KEY%/", base64_encode($key), $actions), "attach" => "style='width:60px;border-right:0px;text-align:
           right;'");
@@ -227,7 +227,7 @@ class divListDepartment extends MultiSelectWindow
     /* Create summary string for list footer */
     $num_deps=count($list);
     $num_dep_str = _("Number of listed departments");
-    $str = "<img class='center' src='images/folder.png'
+    $str = "<img class='center' src='images/lists/folder.png'
               title='".$num_dep_str."' alt='".$num_dep_str."'>&nbsp;".$num_deps."&nbsp;&nbsp;&nbsp;&nbsp;";
     $this->set_List_Bottom_Info($str);
 
