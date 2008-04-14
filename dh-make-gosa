@@ -130,7 +130,7 @@ pushd . &> /dev/null
 
 cd "$BUILD_PATH"
 
-find -name '.svn' -type d -exec rm -rf {} \;
+find -name '.svn' -type d -exec rm -rf {} \; &> /dev/null
 
 # Use gosa-plugin skelleton
 echo "Calling dh_make..."
