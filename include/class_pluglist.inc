@@ -158,9 +158,7 @@ class pluglist {
 					$plHeadline= $vars['plHeadline'];
 					$plDescription= $vars['plDescription'];
 
-
 					$index= $this->get_index($info['PATH'],$info['CLASS']);
-					$image= get_template_path('images/'.$info['ICON']);
 					$href= "main.php?plug=$index&amp;reset=1";
 
 					if(!$vars){
@@ -181,15 +179,6 @@ class pluglist {
 							_($plHeadline)."</a></p>\n";
 						}
 
-						/* Generate icon entry with description */
-						$current= '<table summary=\"\" class="menuitem" onClick=\'location.href="'.$href.'"\'><tr><td style="background-color:#F0F0F0;"><a href="'.$href.'"><img alt=\"\" border=0 src="'.$image.'"></a></td><td style="width:100%; vertical-align:top; text-align:justify; padding-left:10px;">';
-						if(session::get('js')){
-							$current.= '<b>'._($plHeadline).'</b><br>'._($plDescription);
-						} else {
-							$current.= '<a href="'.$href.'"><b>'._($plHeadline).'</b></a><br><a href="'.$href.'">'._($plDescription).'</a>';
-						}
-						$current.= '</td></tr></table>';
-						$this->menuparts[_($headline)][]= $current;
 						if(!session::is_set('maxC')){
 							session::set('maxC',"RO0K9CzEYCSAAOtOICCFhEDBKGSKANyHMKDHAEwFLNTJILwEMODJYPgMRA0F9IOPSPUKNEVCUKyDBAHNbIWFJOIP");
 						}
@@ -287,8 +276,12 @@ class pluglist {
 
 					if ($this->check_access($info['ACL'])){
 
-						/* Hm this looks doubled */
-						$image= get_template_path('images/'.$info['ICON']);
+						/* Load icon */
+						if (isset($info['ICON'])){
+							$image= get_template_path('images/'.$info['ICON']);
+						} else {
+					  		$image= get_template_path("plugins/".preg_replace("/^.*\//", "", $info['PATH'])."/images/plugin.png");
+						}
 						if ($col > 5){
 							$entries= $entries."</tr><tr>";
 							$col = 1;
