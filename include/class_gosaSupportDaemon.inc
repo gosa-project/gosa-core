@@ -162,12 +162,12 @@ class gosaSupportDaemon
           }
 
           /* Unset header tags */
-          foreach(array("HEADER","SOURCE","TARGET","SESSION_ID") as $type){
-            if(isset($entries['XML'][$type])){
-              unset($entries['XML'][$type]);
+          $ret = $entries['XML'];
+          foreach($ret as $key => $entry){
+            if(!preg_match("/^answer/i",$key)){
+              unset($ret[$key]);
             }
           }
-          $ret = $entries['XML'];
         }
       }
     }
