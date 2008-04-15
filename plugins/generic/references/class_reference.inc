@@ -142,7 +142,7 @@ class reference extends plugin
 		}
 		$content= $this->createContentString($attrs['objectClass']);
 		if ($addon == ""){
-			$img= "images/expand.png";
+			$img= "images/lists/expand.png";
 		} else {
 			$img= "images/lists/sort-down.png";
 		}
