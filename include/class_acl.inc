@@ -424,8 +424,8 @@ class acl extends plugin
       foreach ($this->gosaAclEntry as $key => $entry){
         $field1= array("string" => $this->aclTypes[$entry['type']], "attach" => "style='width:150px'");
         $field2= array("string" => $this->assembleAclSummary($entry));
-        $action= "<input type='image' name='sortup_$key' alt='up' title='"._("Up")."' src='images/sort_up.png' align='top'>";
-        $action.= "<input type='image' name='sortdown_$key' alt='down' title='"._("Down")."' src='images/sort_down.png'>";
+        $action= "<input type='image' name='sortup_$key' alt='up' title='"._("Up")."' src='images/lists/sort-up.png' align='top'>";
+        $action.= "<input type='image' name='sortdown_$key' alt='down' title='"._("Down")."' src='images/lists/sort-down.png'>";
         $action.= "<input class='center' type='image' src='images/lists/edit.png' alt='"._("Edit")."' name='acl_edit_$key' title='".msgPool::editButton(_("ACL"))."'>";
         $action.= "<input class='center' type='image' src='images/lists/trash.png' alt='"._("Delete")."' name='acl_del_$key' title='".msgPool::delButton(_("ACL"))."'>";
 

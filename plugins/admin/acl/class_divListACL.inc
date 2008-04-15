@@ -222,7 +222,7 @@ class divListACL extends MultiSelectWindow
 
         /* Role handling */
         $editlink       = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=list_edit_role'>%s</a>";
-        $list_left_icon = "<img src='images/select_acl_role.png' alt='"._("Role")."'>";
+        $list_left_icon = "<img src='plugins/acl/images/role.png' alt='"._("Role")."'>";
         $cn = htmlentities(utf8_decode($acl_entry['cn'][0])) ;
 
         if(isset($acl_entry['description'][0])){
@@ -256,7 +256,7 @@ class divListACL extends MultiSelectWindow
 
         /* Acl handling */
         $editlink       = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=list_edit_entry'>%s</a>";
-        $list_left_icon = "<img src='images/select_acl.png' alt='"._("ACL")."'>";
+        $list_left_icon = "<img src='plugins/acl/images/acl.png' alt='"._("ACL")."'>";
         $cn = htmlentities(utf8_decode($acl_entry['dn'])); 
 
         /* Add actions depending on acls */
