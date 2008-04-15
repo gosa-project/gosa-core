@@ -179,7 +179,7 @@ class divListUsers extends MultiSelectWindow
 
     /* Multiple options */ 
     $s.= "..|---|\n";
-    $s.= "..|<img src='images/edit.png' alt='' border='0' class='center'>".
+    $s.= "..|<img src='images/lists/edit.png' alt='' border='0' class='center'>".
       "&nbsp;"._("Edit")."|"."multiple_edit|\n";
     $s.= "..|<img src='images/list_password.png' alt='' border='0' class='center'>".
       "&nbsp;"._("Change password")."|"."multiple_password_change|\n";
@@ -327,7 +327,7 @@ class divListUsers extends MultiSelectWindow
       }
 
       /* Generate edit icon */
-      $action.= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'
+      $action.= "<input class='center' type='image' src='images/lists/edit.png' alt='"._("edit")."'
         name='user_edit_%KEY%' title='".msgPool::editButton(_("user"))."'>";
 
       /* Add deactivate status if we are allowed to */

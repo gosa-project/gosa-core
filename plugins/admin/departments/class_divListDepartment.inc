@@ -181,7 +181,7 @@ class divListDepartment extends MultiSelectWindow
 
       $acl = $ui->get_permissions($this->config->departments[$key] ,"department/department");
       if(preg_match("/r/",$acl)){
-        $actions.= "<input class='center' type='image' src='images/edit.png'
+        $actions.= "<input class='center' type='image' src='images/lists/edit.png'
           alt='"._("edit")."'   name='dep_edit_%KEY%' title='"._("Edit this entry")."'>";
       }
 

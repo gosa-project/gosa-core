@@ -208,7 +208,7 @@ class divListOGroup extends MultiSelectWindow
 
     /* Multiple options */
     $s.= "..|---|\n";
-#    $s.= "..|<img src='images/edit.png' alt='' border='0' class='center'>".
+#    $s.= "..|<img src='images/lists/edit.png' alt='' border='0' class='center'>".
 #      "&nbsp;"._("Edit")."|"."multiple_edit|\n";
 
     $s.= "..|<img src='images/lists/trash.png' alt='' border='0' class='center'>".
@@ -291,7 +291,7 @@ class divListOGroup extends MultiSelectWindow
       }
 
       $actions.= "<input class='center' type='image'
-        src='images/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
+        src='images/lists/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
     
       if(preg_match("/(c.*w|w.*c)/", $acl_all)){
         $actions.= $this->GetSnapShotActions($val['dn']);

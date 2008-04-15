@@ -239,7 +239,7 @@ class divListACL extends MultiSelectWindow
 
         /* Add actions depending on acls */
         if(preg_match("/r/", $acl)){
-          $action.= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'     
+          $action.= "<input class='center' type='image' src='images/lists/edit.png' alt='"._("edit")."'     
             name='list_acl_role_edit_%KEY%' title='"._("Edit acl role")."'>";
         }
 
@@ -261,7 +261,7 @@ class divListACL extends MultiSelectWindow
 
         /* Add actions depending on acls */
         if(preg_match("/r/", $acl)){
-          $action.= "<input class='center' type='image' src='images/edit.png' alt='"._("edit")."'     
+          $action.= "<input class='center' type='image' src='images/lists/edit.png' alt='"._("edit")."'     
             name='list_acl_edit_%KEY%' title='"._("Edit acl")."'>";
         }
         if(preg_match("/d/", $acl)){
