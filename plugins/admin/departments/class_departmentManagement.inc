@@ -453,6 +453,7 @@ class departmentManagement extends plugin
     }
     natcasesort ($this->departments);
     reset ($this->departments);
+    print_a($this->departments) ;
   }
 
   function remove_from_parent()

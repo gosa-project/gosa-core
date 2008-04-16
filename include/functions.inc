@@ -1093,6 +1093,10 @@ function convert_department_dn($dn)
 
   /* Build a sub-directory style list of the tree level
      specified in $dn */
+  global $config;
+  $dn = preg_replace("/".normalizePreg($config->current['BASE'])."$/i","",$dn);
+  if(empty($dn)) return("/");
+
   foreach (split(',', $dn) as $rdn){
 
     /* We're only interested in organizational units... */
