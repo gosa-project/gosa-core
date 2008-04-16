@@ -164,16 +164,33 @@ if [ -d html ]; then
 	done
 fi
 
+# Fix copyright
+sed -i '/^#/d;/^.*likewise for another author.*$/d' debian/copyright
+year=$(date +%Y)
+sed -i "s/.Copyright (C) YYYY Name OfAuthor./Copyright (C) $year $PL_AUTHOR/g" debian/copyright
+sed -i "s/.url:\/\/example.com./http:\/\/www.gosa-project.org/g" debian/copyright
+sed -i "/.put author's name and email here.\
+/d" debian/copyright
+sed -i '/^Upstream/,/^$/d' debian/copyright
+
 # Adapt control
 sed -i 's/^Section: unknown/Section: web/g' debian/control
 sed -i 's/^Architecture: any/Architecture: all/g' debian/control
 sed -i 's/^Depends: .*$/Depends: gosa/g' debian/control
 sed -i "s/^Description: .*$/Description: $PL_NAME plugin for GOsa/g" debian/control
-sed -i "s/^ <.*$/ $PL_DESCRIPTION\
- .\
- GOsa is a combination of system-administrator and end-user web\
- interface, designed to handle LDAP based setups.\
-/g" debian/control
+sed -i "s/^ <.*$/ %DESCRIPTION%/g" debian/control
+dsc=$(tempfile)
+{
+echo $PL_DESCRIPTION 
+cat <<EOF
+.
+GOsa is a combination of system-administrator and end-user web
+interface, designed to handle LDAP based setups.
+EOF
+}| fmt -suw79 | sed 's/^/ /g' > $dsc
+sed -i "/%DESCRIPTION%/r $dsc" debian/control
+sed -i "/%DESCRIPTION%/d" debian/control
+rm $dsc
 
 # Adapt README.debian
 cat <<EOF > debian/README.Debian
@@ -185,6 +202,9 @@ Please read the main GOsa README.Debian file for more information.
 ----
 $PL_AUTHOR <$PL_MAIL>  Fri 02 Jun 2006 16:23:50 +0200
 EOF
+
+# Fix README
+sed -i "s/Comments regarding the Package/After installing this plugin you may need to reload apache../g" debian/README
 
 # Fix rules
 cat <<EOF > debian/rules
