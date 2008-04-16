@@ -188,6 +188,8 @@ function rescan_i18n()
 			exit (5);
 		}
 	}
+
+	echo "! Warning: you may need to reload your webservice!\n";
 }
 
 
