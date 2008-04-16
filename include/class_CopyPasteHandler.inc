@@ -298,6 +298,7 @@ class CopyPasteHandler {
           $entry = $this->load_entry_from_queue($entry);
           $this->queue[$key] = $entry;
         }
+        $entry= $this->_update_vars($entry);
         $msgs = $entry['object']->check();
         $acl = $ui->get_category_permissions($entry['dn'], $entry['tab_acl_category']);
 
@@ -342,7 +343,6 @@ class CopyPasteHandler {
       /* Load next queue entry */
       if(!count($msgs)){
         $this->lastdn = $this->current['object']->dn;
-        $this->current= $this->_update_vars($this->current);
         $this->current['object']->save();
         $this->current = FALSE;
       }else{
@@ -378,6 +378,7 @@ class CopyPasteHandler {
         $key = key($this->objects_to_fix);
         if(isset($this->objects_to_fix[$key])){
           $this->current = $this->objects_to_fix[$key];
+          $this->current= $this->_update_vars($this->current);
           unset($this->objects_to_fix[$key]);
           unset($this->queue[$key]); 
         }
@@ -452,6 +453,10 @@ class CopyPasteHandler {
 
       /* Update all attributes specified with SetVar */
       foreach($this->setvar_array as $name => $value){
+
+        /* Do not update parent for plugins, this may break things */
+        if($name == "parent") continue;
+
         if(isset($entry['object']->by_object[$key]->$name)){
           $entry['object']->by_object[$key]->$name = $value;
         }
