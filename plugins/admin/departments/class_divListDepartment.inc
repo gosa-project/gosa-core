@@ -142,12 +142,12 @@ class divListDepartment extends MultiSelectWindow
 
     $listhead .=  
       " "._("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
-      " <input class='center' type='image' src='images/list_submit.png' align='middle' ".
+      " <input class='center' type='image' src='images/lists/submit.png' align='middle' ".
       "   title='"._("Submit department")."' name='submit_department' alt='"._("Submit")."'>&nbsp;";
 
     /* Create Layers menu */
     $s  = ".|"._("Actions")."|\n";
-    $s .= "..|<img src='images/list_new.png' alt='' border='0' class='center'>".
+    $s .= "..|<img src='images/lists/new.png' alt='' border='0' class='center'>".
       "&nbsp;"._("Create")."|\n";
 
     /* Append create options */

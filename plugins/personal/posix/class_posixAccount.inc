@@ -271,7 +271,7 @@ class posixAccount extends plugin
 
       /* Do we represent a valid posixAccount? */
       if (!$this->is_account && $this->parent === NULL ){
-        $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
+        $display= "<img alt=\"\" src=\"images/small-error.png\" align=\"middle\">&nbsp;<b>".
           msgPool::noValidExtension(_("POSIX"))."</b>";
         $display.= back_to_main();
         return ($display);

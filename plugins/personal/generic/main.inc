@@ -179,7 +179,7 @@ if (!$remove_lock){
       /* Only display edit button if there is at least one attribute editable */
       if(preg_match("/w/",$ui->get_permissions($ui->dn,"users/user"))){
         if ($fn == "edit"){
-          $info.= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/lamp.png')."\"> ".
+          $info.= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/lists/on.png')."\"> ".
             msgPool::clickEditToChange();
           $display.= "<input type=submit name=\"$fn\" value=\"$str\">\n";
         }
@@ -191,7 +191,7 @@ if (!$remove_lock){
   }
 
   /* Page header*/
-  $display= print_header(get_template_path('images/personal.png'),
+  $display= print_header(get_template_path('plugins/generic/images/plugin.png'),
                          _("Generic user information"), $info).$display;
 
 }

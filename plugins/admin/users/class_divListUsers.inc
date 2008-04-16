@@ -160,20 +160,20 @@ class divListUsers extends MultiSelectWindow
     $listhead = MultiSelectWindow::get_default_header();
     $listhead .=
       _("Base")."&nbsp;<select name='CurrentMainBase' onChange='mainform.submit()' class='center'>$options</select>".
-      " <input class='center' type='image' src='images/list_submit.png' align='middle' 
+      " <input class='center' type='image' src='images/lists/submit.png' align='middle' 
       title='"._("Submit department")."' name='submit_department' alt='".  _("Submit")."'>&nbsp;";
 
 
     /* Create Layers menu */
     $s  = ".|"._("Actions")."|\n";
-    $s .= "..|<img src='images/list_new.png' alt='' border='0' class='center'>".
+    $s .= "..|<img src='images/lists/new.png' alt='' border='0' class='center'>".
       "&nbsp;"._("Create")."|\n";
 
     /* Append create options */
     if(preg_match("/c/",$acl)) {
       $s.= "...|<input class='center' type='image' src='images/list_new_user.png' alt=''>".
         "&nbsp;"._("User")."|user_new|\n";
-      $s.= "...|<input class='center' type='image' src='images/list_new.png' alt=''>".
+      $s.= "...|<input class='center' type='image' src='images/lists/new.png' alt=''>".
         "&nbsp;"._("Template")."|user_tplnew|\n";
     }
 
@@ -281,7 +281,7 @@ class divListUsers extends MultiSelectWindow
                     name='user_edit_%KEY%-sambaAccount' title='"._("Edit samba properties")."'>";
     $netatalkimg = "<input class='center' type='image' src='images/select_netatalk.png' alt='"._("Netatalk")."'
                     name='user_edit_%KEY%-netatalk' title='"._("Edit netatalk properties")."'>";
-    $tplcreateuserimg  = "<input type='image' class='center' src='images/list_new.png' alt='"._("Create user from template")."'
+    $tplcreateuserimg  = "<input type='image' class='center' src='images/lists/new.png' alt='"._("Create user from template")."'
                     name='userfrom_tpl_%KEY%' title='"._("Create user with this template")."'>";
 
     /********************

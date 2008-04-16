@@ -186,7 +186,7 @@ class ogroup extends plugin
 
     /* Do we represent a valid group? */
     if (!$this->is_account){
-      $display= "<img alt=\"\" src=\"images/stop.png\" align=\"middle\">&nbsp;<b>".
+      $display= "<img alt=\"\" src=\"images/small-error.png\" align=\"middle\">&nbsp;<b>".
         msgPool::noValidExtension("object group")."</b>";
       return ($display);
     }

@@ -53,7 +53,7 @@
     &nbsp;
    </td>
    <td>
-     <h2><img class="center" alt="" align="middle" src="images/house.png"> {t}Location{/t}</h2>
+     <h2><img class="center" alt="" align="middle" src="plugins/departments/images/department.png"> {t}Location{/t}</h2>
 
      <table summary="" style="width:100%">
       <tr>

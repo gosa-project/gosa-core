@@ -471,7 +471,7 @@ div.tab_active {
 }
 
 div#notify {
-       background-image: url("../../images/lamp.png");
+       background-image: url("../../images/lists/on.png");
        background-repeat:no-repeat;
        background-position:1px 1px;
        padding-left:18px;

@@ -291,7 +291,7 @@ $smarty->assign ("username", $ui->username);
 $smarty->assign ("go_logo", get_template_path('images/go_logo.png'));
 $smarty->assign ("go_base", get_template_path('images/dtree.png'));
 $smarty->assign ("go_home", get_template_path('images/gohome.png'));
-$smarty->assign ("go_out", get_template_path('images/stop.png'));
+$smarty->assign ("go_out", get_template_path('images/logout.png'));
 $smarty->assign ("go_top", get_template_path('images/go_top.png'));
 $smarty->assign ("go_corner", get_template_path('images/go_corner.png'));
 $smarty->assign ("go_left", get_template_path('images/go_left.png'));
