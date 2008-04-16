@@ -1016,7 +1016,7 @@ class plugin
         foreach ($this->config->adepartments as $key => $ntag){
 
           /* This one is bigger than our dn, its not relevant... */
-          if ($len <= strlen($key)){
+          if ($len < strlen($key)){
             continue;
           }
 
