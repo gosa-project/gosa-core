@@ -144,6 +144,7 @@ class gosaSupportDaemon
       "<release>".$release."</release>".
       "</xml>";
 
+    $ret = array();
     if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
