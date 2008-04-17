@@ -136,7 +136,7 @@ class gosaSupportDaemon
 
   public function FAI_get_kernels($release)
   {
-    $xml_msg = "<xml><header>gosa_get_available_kernel</header><source>GOSA</source><target>GOSA</target><release>halut</release></xml>";
+    $xml_msg = "<xml><header>gosa_get_available_kernel</header><source>GOSA</source><target>GOSA</target><release>".$release."</release></xml>";
 
     if($this->connect()){
       $this->o_sock->write($xml_msg);
@@ -429,6 +429,8 @@ $xml_msg.= "
 }
 $xml_msg.= "
       </xml>";
+
+    echo htmlentities($xml_msg);
 
     if($this->connect()){
       $this->o_sock->write($xml_msg);
@@ -911,9 +913,29 @@ $xml_msg.= "
   /*! \brief  Returns the number of currently queued objects.
       @return Integer  
    */
-  public function number_of_queued_entries()
+  public function number_of_queued_entries($event_types)
   {
-    $xml_msg ="<xml><header>gosa_count_jobdb</header><target>GOSA</target><source>GOSA</source></xml>";
+    $tags = "";
+    foreach($event_types as $type){
+      $tags .= "<phrase><headertag>".$type."</headertag></phrase>";
+    }
+    if(count($event_types) > 1){
+      $tags = "<connector>or</connector>".$tags;
+    }
+    if(count($event_types)){
+      $tags = "<where><clause>".$tags."</clause></where>";
+    }
+
+
+    $xml_msg =
+      "<xml>".
+      "<header>gosa_query_jobdb</header>".
+      "<target>GOSA</target>".
+      "<source>GOSA</source>".
+      "<select> count ID</select>".
+      $tags.
+      "</xml>";
+
     $this->connect();
     if($this->connect()){
       $this->o_sock->write($xml_msg);
@@ -926,6 +948,7 @@ $xml_msg.= "
       }
 
       $entries = $this->xml_to_array($str);
+      print_a($entries);
       if(isset($entries['XML'])){
         return($entries['XML']['COUNT']);
       }
