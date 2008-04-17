@@ -38,7 +38,6 @@ class userManagement extends plugin
   var $pwd_change_queue     = array();
 
   var $start_pasting_copied_objects = FALSE;
-  var $current_action ="";
   var $msg_dialog= NULL;
   
   function userManagement(&$config, $ui)
@@ -541,11 +540,19 @@ class userManagement extends plugin
       Delete MULTIPLE entries requested, display confirm dialog
      ********************/
 
-    if ($s_action=="del_multiple"){
-      $ids = $this->list_get_selected_items();
-      $this->dns = array();
-      if(count($ids)){
+    if ($s_action=="del_multiple" || $s_action == "del"){
 
+      if($s_action == "del"){
+
+        /* Get 'dn' from posted 'uid' */
+        $ids = array($s_entry);
+      }else{
+        $ids = $this->list_get_selected_items();
+      }
+
+      $this->dns = array();
+
+      if(count($ids)){
         foreach($ids as $id){
           $dn = $this->list[$id]['dn'];
           if (($user= get_lock($dn)) != ""){
@@ -561,8 +568,12 @@ class userManagement extends plugin
 
         /* Lock the current entry, so nobody will edit it during deletion */
         $info = sprintf(msgPool::deleteInfo($dns_names,_("user")));
-        $this->msg_dialog = new msg_dialog(_("Delete users"),$info,CONFIRM_DIALOG);
-        $this->current_action = $s_action;
+
+        /* Lock the current entry, so nobody will edit it during deletion */
+        $smarty->assign("info", msgPool::deleteInfo($dns_names));
+        return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
+
+
       }
     }
 
@@ -571,10 +582,7 @@ class userManagement extends plugin
       Delete MULTIPLE entries confirmed 
      ********************/
 
-      /* Confirmation for deletion has been passed. Users should be deleted. */
-      if ($this->current_action == "del_multiple" && is_object($this->msg_dialog) && $this->msg_dialog->is_confirmed()){
-        
-        $this->current_action = "";  
+      if(isset($_POST['delete_user_confirm'])){
         
         /* Remove user by user and check acls before removeing them */
         foreach($this->dns as $key => $dn){
@@ -600,19 +608,6 @@ class userManagement extends plugin
       }
     }
 
-
-    /********************
-      Delete MULTIPLE entries Canceled 
-     ********************/
-
-    /* Remove lock */
-    if(isset($_POST['delete_multiple_user_cancel'])){
-      foreach($this->dns as $key => $dn){
-        del_lock ($dn);
-        unset($this->dns[$key]);
-      }
-    }
-  
   
     /********************
       Toggle lock status for user
@@ -653,75 +648,15 @@ class userManagement extends plugin
 
 
     /********************
-      Delete entry requested, display confirm dialog
-     ********************/
-
-    /* Remove user was requested */
-    if ($s_action=="del"){
-
-      /* Get 'dn' from posted 'uid' */
-      $this->dn= $this->list[trim($s_entry)]['dn'];
-
-      /* Load permissions for selected 'dn' and check if
-         we're allowed to remove this 'dn' */
-
-      /* Check locking, save current plugin in 'back_plugin', so
-         the dialog knows where to return. */
-      if (($user= get_lock($this->dn)) != ""){
-        return(gen_locked_message ($user, $this->dn));
-      }
-
-      $this->msg_dialog = new msg_dialog( _("Delete user"),msgPool::deleteInfo(@LDAP::fix($this->dn),_("user")),CONFIRM_DIALOG);
-      $this->current_action = $s_action;
-    }
-
-
-    /********************
-      Delete entry confirmed 
-     ********************/
-
-    /* Confirmation for deletion has been passed. User should be deleted. */
-    if ($this->current_action == "del" && is_object($this->msg_dialog) && $this->msg_dialog->is_confirmed()){
-
-      $this->current_action = ""; 
- 
-      /* Some nice guy may send this as POST, so we've to check
-         for the permissions again. */
-
-      $acl = $this->ui->get_permissions($this->dn, "users/user"); 
- 
-      if (preg_match('/d/', $acl)){
-
-        /* Delete request is permitted, perform LDAP action */
-        $this->usertab= new usertabs($this->config, $this->config->data['TABS']['USERTABS'],$this->dn);
-        $this->usertab->set_acl_base();
-        $this->usertab->delete ();
-        unset ($this->usertab);
-        $this->usertab= NULL;
-        msg_dialog::display(_("Information"),_("User successfully removed."),INFO_DIALOG);
-      } else {
-
-        /* Normally this shouldn't be reached, send some extra
-           logs to notify the administrator */
-        msg_dialog::display(_("Warning"),msgPool::permDelete(),WARNING_DIALOG);
-
-        if(isset($this->ui->uid)){
-          new log("security","users/".get_class($this),$this->dn,array(),"Tried to trick deletion.");
-        }
-      }
-
-      /* Remove lock file after successfull deletion */
-      del_lock ($this->dn);
-    }
-
-    
-    /********************
       Delete entry Canceled 
      ********************/
 
     /* Delete user canceled? */
     if (isset($_POST['delete_cancel'])){
-      del_lock ($this->dn);
+      foreach($this->dns as $key => $dn){
+        del_lock ($dn);
+        unset($this->dns[$key]);
+      }
     }
 
 
