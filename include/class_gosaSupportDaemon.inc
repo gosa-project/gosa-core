@@ -940,6 +940,7 @@ class gosaSupportDaemon
       $tags.
       "</xml>";
 
+    $xml_msg ="<xml><header>gosa_count_jobdb</header><target>GOSA</target><source>GOSA</source></xml>";
     $this->connect();
     if($this->connect()){
       $this->o_sock->write($xml_msg);
