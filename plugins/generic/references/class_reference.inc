@@ -37,40 +37,41 @@ class reference extends plugin
 	$this->dn= $dn;
 
         /* Fill translation array */
-        $this->obtypes= array(  "gosaAccount" => array(	   "text" => _("Generic"),
-							   "image" => "penguin.png"),
+        $this->obtypes= array(  
+				"gosaAccount" => array(	   "text" => _("Generic"),
+					"image" => "penguin.png"),
 				"posixAccount" => array(   "text" =>_("UNIX"),
-							   "image" => "select_user.png"),
-                                "gosaMailAccount" => array("text" => _("Mail"),
-							   "image" => "mailto.png"),
-                                "sambaSamAccount" => array("text" => _("Samba"),
-							   "image" => "select_winstation.png"),
-                                "sambaAccount" => array(   "text" => _("Samba"),
-							   "image" => "select_winstation.png"),
-                                "goFaxAccount" => array(   "text" => _("FAX"),
-							   "image" => "fax_small.png"),
-                                "gosaProxyAccount" => array("text" => _("Proxy"),
-							   "image" => "select_proxy.png"),
-                                "PureFTPdUser" => array(   "text" => _("FTP"),
-							   "image" => "select_proxy.png"),
-                                "posixGroup" => array(     "text" => _("Group"),
-							   "image" => "select_groups.png"),
-                                "gosaDepartment" => array( "text" => _("Department"),
-							   "image" => "select_department.png"),
-                                "goFonHardware" => array(   "text" => _("Phone"),
-							   "image" => "select_phone.png"),
-                                "gosaApplication" => array("text" => _("Application"),
-							   "image" => "select_application.png"),
-                                "goServer" => array(	   "text" => _("Server"),
-							   "image" => "select_server.png"),
-                                "gotoTerminal" => array(   "text" => _("Thin Client"),
-							   "image" => "select_terminal.png"),
-                                "gotoWorkstation" => array("text" => _("Workstation"),
-							   "image" => "select_workstation.png"),
-                                "gosaGroupOfNames" => array("text" => _("Object group"),
-							   "image" => "select_ogroup.png"),
-                                "gotoPrinter" => array(	   "text" => _("Printer"),
-							   "image" => "select_printer.png"));
+					"image" => "select_user.png"),
+				"gosaMailAccount" => array("text" => _("Mail"),
+					"image" => "mailto.png"),
+				"sambaSamAccount" => array("text" => _("Samba"),
+					"image" => "select_winstation.png"),
+				"sambaAccount" => array(   "text" => _("Samba"),
+					"image" => "select_winstation.png"),
+				"goFaxAccount" => array(   "text" => _("FAX"),
+					"image" => "fax_small.png"),
+				"gosaProxyAccount" => array("text" => _("Proxy"),
+					"image" => "select_proxy.png"),
+				"PureFTPdUser" => array(   "text" => _("FTP"),
+					"image" => "select_proxy.png"),
+				"posixGroup" => array(     "text" => _("Group"),
+					"image" => "select_groups.png"),
+				"gosaDepartment" => array( "text" => _("Department"),
+					"image" => "select_department.png"),
+				"goFonHardware" => array(   "text" => _("Phone"),
+					"image" => "select_phone.png"),
+				"gosaApplication" => array("text" => _("Application"),
+						"image" => "select_application.png"),
+				"goServer" => array(	   "text" => _("Server"),
+						"image" => "select_server.png"),
+				"gotoTerminal" => array(   "text" => _("Thin Client"),
+						"image" => "select_terminal.png"),
+				"gotoWorkstation" => array("text" => _("Workstation"),
+						"image" => "select_workstation.png"),
+				"gosaGroupOfNames" => array("text" => _("Object group"),
+						"image" => "select_ogroup.png"),
+				"gotoPrinter" => array(	   "text" => _("Printer"),
+						"image" => "select_printer.png"));
   }
 
   function execute()
@@ -103,7 +104,7 @@ class reference extends plugin
 	$ldap= $this->config->get_ldap_link();
 	$ldap->cd($this->config->current['BASE']);
 
-	$ldap->search("(|(member=".LDAP::prepare4filter($this->dn).")(memberUid=".$this->uid."))",array("memberUid","member","cn","description","objectClass"));
+	$ldap->search("(|(gotoHotplugDeviceDN=".LDAP::prepare4filter($this->dn).")(member=".LDAP::prepare4filter($this->dn).")(memberUid=".$this->uid."))",array("memberUid","member","cn","description","objectClass"));
 	
   	$cycle= array("F5F5F5", "ECECEC");
 	$id= 0;
