@@ -419,24 +419,22 @@ class gosaSupportDaemon
     }
 
     $xml_msg = 
-"<xml>
+      "<xml>
       <header>gosa_query_jobdb</header>
       <target>GOSA</target>
       <source>GOSA</source>
       ".$tags."
 
       <orderby>".$sort."</orderby>";
-if($from != -1 && $to != -1){
-$xml_msg.= "
-      <limit>
-       <from>".$from."</from>
-       <to>".$to."</to>
-      </limit>";
-}
-$xml_msg.= "
+    if($from != -1 && $to != -1){
+      $xml_msg.= "
+        <limit>
+        <from>".$from."</from>
+        <to>".$to."</to>
+        </limit>";
+    }
+    $xml_msg.= "
       </xml>";
-
-    echo htmlentities($xml_msg);
 
     if($this->connect()){
       $this->o_sock->write($xml_msg);
@@ -954,7 +952,6 @@ $xml_msg.= "
       }
 
       $entries = $this->xml_to_array($str);
-      print_a($entries);
       if(isset($entries['XML'])){
         return($entries['XML']['COUNT']);
       }
