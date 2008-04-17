@@ -136,7 +136,13 @@ class gosaSupportDaemon
 
   public function FAI_get_kernels($release)
   {
-    $xml_msg = "<xml><header>gosa_get_available_kernel</header><source>GOSA</source><target>GOSA</target><release>".$release."</release></xml>";
+    $xml_msg = 
+      "<xml>".
+      "<header>gosa_get_available_kernel</header>".
+      "<source>GOSA</source>".
+      "<target>GOSA</target>".
+      "<release>".$release."</release>".
+      "</xml>";
 
     if($this->connect()){
       $this->o_sock->write($xml_msg);
