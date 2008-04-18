@@ -131,13 +131,6 @@ class ogrouptabs extends tabs
     }
 
     /* Add Workstation tabs */
-    if((preg_match("/W/",$objects))&&(!isset($this->by_object['workservice']))){
-        $this->by_name['workservice']= _("Devices");
-        $this->by_object['workservice']= new workservice($this->config, $this->dn);
-        $this->by_object['workservice']->inheritTimeServer = false;
-        $this->by_object['workservice']->parent= &$this;
-        $this->by_object['workservice']->acl = "#all#";
-    }
     if((preg_match("/S/",$objects) || preg_match("/W/",$objects))&&(!isset($this->by_object['workstartup']))){
         $this->by_name['workstartup']= _("Startup");
         $this->by_object['workstartup']= new workstartup($this->config, $this->dn);
@@ -146,6 +139,13 @@ class ogrouptabs extends tabs
         $this->by_name['faiSummary']= _("Summary");
         $this->by_object['faiSummary']= new faiSummaryTab($this->config, $this->dn);
         $this->by_object['faiSummary']->parent= &$this;
+    }
+    if((preg_match("/W/",$objects))&&(!isset($this->by_object['workservice']))){
+        $this->by_name['workservice']= _("Devices");
+        $this->by_object['workservice']= new workservice($this->config, $this->dn);
+        $this->by_object['workservice']->inheritTimeServer = false;
+        $this->by_object['workservice']->parent= &$this;
+        $this->by_object['workservice']->acl = "#all#";
     }
 
     /* Add application tab if user or group is member in this object group*/
