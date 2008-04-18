@@ -125,12 +125,12 @@ class baseSelectDialog extends MultiSelectWindow
       $keys= str_replace("/","\/",$key);
       foreach($this->config->departments as $keyd ){
         if(preg_match("/,".$keys."/",$keyd)){
-          $non_empty="full";
+          $non_empty="-full";
         }
       }
 
       /* Add to divlist */
-      $field1 = array("string" => "<img src='images/".$non_empty."folder.png' alt='department'>", 
+      $field1 = array("string" => "<img src='images/lists/folder$non_empty.png' alt='department'>", 
                       "attach" => "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($link,base64_encode($key),$val), "attach" => "style=''");
       $field3 = array("string" => sprintf("&nbsp;<input title='"._("Select this base")."' type='image' img src='images/save.png' name='usebase_%s'>",base64_encode($key)), 
