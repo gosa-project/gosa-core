@@ -98,7 +98,7 @@ class divListGroup extends MultiSelectWindow
 
     /*                  Name                 ,Text                              ,Default  , Connect with alphabet  */
     $this->AddRegex   ("Regex",     _("Regular expression for matching group names"), "*" , true);
-    $this->AddRegex   ("UserRegex", _("User name of which groups are shown"),         "*" , false, "images/search_user.png");
+    $this->AddRegex   ("UserRegex", _("User name of which groups are shown"),         "*" , false, "images/lists/search-user.png");
   }
 
 
@@ -261,13 +261,13 @@ class divListGroup extends MultiSelectWindow
                  name='group_group_edit_%KEY%' alt='P'  title='"._("Posix")  ."'>";
     $mailimg  = "<input type='image' class='center' src='images/mailto.png'
                  name='mailgroup_group_edit_%KEY%' alt='M'  title='"._("Mail")   ."'>";
-    $sambaimg = "<input type='image'  class='center' src='images/select_winstation.png'
+    $sambaimg = "<input type='image'  class='center' src='plugins/groups/images/samba.png'
                  name='group_group_edit_%KEY%' alt='S'  title='"._("Samba")  ."'>";
-    $applimg  = "<input type='image'  class='center' src='images/select_application.png'
+    $applimg  = "<input type='image'  class='center' src='plugins/groups/images/menu.png'
                  name='appgroup_group_edit_%KEY%' alt='A'  title='"._("Application")."'>";
-    $phoneimg = "<input type='image'  class='center' src='images/select_phone.png'
+    $phoneimg = "<input type='image'  class='center' src='plugins/groups/images/asterisk.png'
                  name='group_group_edit_%KEY%' alt='Ph' title='"._("Phone")  ."'>";
-    $envimg   = "<input type='image'  class='center' src='images/smallenv.png'
+    $envimg   = "<input type='image'  class='center' src='plugins/groups/images/environment.png'
                  name='environment_group_edit_%KEY%' alt='E' title='"._("Environment")  ."'>";
 
     // Space

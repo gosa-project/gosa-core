@@ -400,7 +400,7 @@ class posixAccount extends plugin
         $wslist[]= preg_replace('/\$/', '', $attrs['cn'][0]);
       }
       asort($wslist);
-      $smarty->assign("search_image", get_template_path('images/search.png'));
+      $smarty->assign("search_image", get_template_path('images/lists/search.png'));
       $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
       $smarty->assign("tree_image", get_template_path('images/tree.png'));
       $smarty->assign("deplist", $this->config->idepartments);
@@ -438,7 +438,7 @@ class posixAccount extends plugin
       $smarty->assign("regex",$this->GroupRegex);
       $smarty->assign("guser",$this->GroupUserRegex);
       $smarty->assign("groups", $glist);
-      $smarty->assign("search_image", get_template_path('images/search.png'));
+      $smarty->assign("search_image", get_template_path('images/lists/search.png'));
       $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
       $smarty->assign("tree_image", get_template_path('images/tree.png'));
       $smarty->assign("deplist", $this->config->idepartments);

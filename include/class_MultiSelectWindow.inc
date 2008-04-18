@@ -77,7 +77,7 @@ class MultiSelectWindow{
   }
 
 	/* Adds a regex input field to the current dialog */
-	function AddRegex($name,$string,$value,$conn,$image="images/search.png")
+	function AddRegex($name,$string,$value,$conn,$image="images/lists/search.png")
 	{
 		$arr = array();
 

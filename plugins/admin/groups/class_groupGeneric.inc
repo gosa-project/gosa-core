@@ -369,7 +369,7 @@ class group extends plugin
         $wslist[]= preg_replace('/\$/', '', $attrs['cn'][0]);
       }
       asort($wslist);
-      $smarty->assign("search_image", get_template_path('images/search.png'));
+      $smarty->assign("search_image", get_template_path('images/lists/search.png'));
       $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
       $smarty->assign("tree_image", get_template_path('images/tree.png'));
       $smarty->assign("deplist", $this->config->idepartments);
@@ -432,7 +432,7 @@ class group extends plugin
       $this->reload();
 
       /* Show dialog */
-      $smarty->assign("search_image", get_template_path('images/search.png'));
+      $smarty->assign("search_image", get_template_path('images/lists/search.png'));
       $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
       $smarty->assign("tree_image", get_template_path('images/tree.png'));
 
@@ -548,7 +548,7 @@ class group extends plugin
 
     /* Show main page */
     $smarty->assign("alphabet", generate_alphabet(10));
-    $smarty->assign("search_image", get_template_path('images/search.png'));
+    $smarty->assign("search_image", get_template_path('images/lists/search.png'));
     $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
     $smarty->assign("tree_image", get_template_path('images/tree.png'));
     $smarty->assign("deplist", $this->config->idepartments);
