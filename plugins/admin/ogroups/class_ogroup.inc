@@ -571,20 +571,20 @@ class ogroup extends plugin
   {
     $temp= "";
     $conv= array(  "U" => "select_user.png",
-        "G" => "select_groups.png",
-        "A" => "select_application.png",
-        "D" => "select_department.png",
-        "S" => "select_server.png",
-        "W" => "select_workstation.png",
-        "O" => "select_winstation.png",
-        "T" => "select_terminal.png",
-        "F" => "select_phone.png",
-        "I" => "flag.png",
-        "P" => "select_printer.png");
+        "G" => "plugins/groups/images/groups.png",
+        "A" => "plugins/ogroups/images/application.png",
+        "D" => "plugins/departments/images/department.png",
+        "S" => "plugins/ogroups/images/server.png",
+        "W" => "plugins/ogroups/images/workstation.png",
+        "O" => "plugins/ogroups/images/winstation.png",
+        "T" => "plugins/ogroups/images/terminal.png",
+        "F" => "plugins/ogroups/images/phone.png",
+        "I" => "images/lists/flag.png",
+        "P" => "plugins/ogroups/images/printer.png");
 
     foreach ($input as $key => $value){
       /* Generate output */
-      $temp.= "<option title='".addslashes( $key)."' value=\"$key\" class=\"select\" style=\"background-image:url('".get_template_path("images/".$conv[$value['type']])."');\">".$value['text']."</option>\n";
+      $temp.= "<option title='".addslashes( $key)."' value=\"$key\" class=\"select\" style=\"background-image:url('".get_template_path($conv[$value['type']])."');\">".$value['text']."</option>\n";
     }
 
     return ($temp);

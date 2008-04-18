@@ -33,7 +33,7 @@ if (!$remove_lock){
 
   /* Page header*/
   if (session::is_set('objectinfo')){
-    $display= print_header(get_template_path('images/ogroup.png'),
+    $display= print_header(get_template_path('plugins/ogroups/images/plugin.png'),
                           _("Object groups"),
                           "<img alt=\"\" align=\"middle\" src=\"".
                           get_template_path('images/lists/locked.png').

@@ -495,16 +495,16 @@ class ogroupManagement extends plugin
     $temp= "";
 
     $conv= array(   
-        "U" => array("select_user.png"        ,_("User")        , "ogroup"),
-        "G" => array("select_groups.png"      ,_("Group")       , "ogroup"),
-        "A" => array("select_application.png" ,_("Application") , "ogroup"),
-        "D" => array("select_department.png"  ,_("Department")  , "ogroup"),
-        "S" => array("select_server.png"      ,_("Server")      , "ogroup"),
-        "F" => array("select_phone.png"       ,_("Phone")       , "phonequeue"),
-        "W" => array("select_workstation.png" ,_("Workstation") , "workstartup"),
-        "O" => array("select_winstation.png"  ,_("Windows Install") , "ogroup"),
-        "T" => array("select_terminal.png"    ,_("Terminal")    , "termgroup"),
-        "P" => array("select_printer.png"     ,_("Printer")     , "ogroup"));
+        "U" => array("plugins/generic/images/head.png"        ,_("User")        , "ogroup"),
+        "G" => array("plugins/groups/images/groups.png"       ,_("Group")       , "ogroup"),
+        "A" => array("plugins/ogroups/images/application.png" ,_("Application") , "ogroup"),
+        "D" => array("plugins/departments/department.png"     ,_("Department")  , "ogroup"),
+        "S" => array("plugins/ogroups/images/server.png"      ,_("Server")      , "ogroup"),
+        "F" => array("plugins/ogroups/images/asterisk.png"    ,_("Phone")       , "phonequeue"),
+        "W" => array("plugins/ogroups/images/workstation.png" ,_("Workstation") , "workstartup"),
+        "O" => array("plugins/ogroups/images/winstation.png"  ,_("Windows Install") , "ogroup"),
+        "T" => array("plugins/ogroups/images/terminal.png"    ,_("Terminal")    , "termgroup"),
+        "P" => array("plugins/ogroups/images/printer.png"     ,_("Printer")     , "ogroup"));
 
     /* Assemble picture */
     $type= $input['gosaGroupObjects'][0];
@@ -516,7 +516,7 @@ class ogroupManagement extends plugin
       $p1['lnk']= $conv[$type[0]][2];
       $html_object_1 = "<input type='image' name='".$p1['lnk']."_group_edit_%KEY' ";
     } else {
-      $p1['pic']= "empty.png";
+      $p1['pic']= "images/empty.png";
       $p1['tit']= "";
       $p1['alt']= "";
       $p1['lnk']= "";//$conv[$type[0]][2];
@@ -530,7 +530,7 @@ class ogroupManagement extends plugin
       $p2['lnk']= $conv[$type[1]][2];
       $html_object_2 = "<input type='image' name='".$p2['lnk']."_group_edit_%KEY' ";
     } else {
-      $p2['pic']= "empty.png";
+      $p2['pic']= "images/empty.png";
       $p2['alt']= "";
       $p2['tit']= "";
       $p2['lnk']= ""; //$conv[$type[0]][2];
@@ -538,9 +538,9 @@ class ogroupManagement extends plugin
     }
     
     $temp = $html_object_1." class='center' id='iconA".preg_replace("/_/","",$p1['lnk']."_group_edit_%KEY")."' 
-      src='images/".$p1['pic']."' alt='".$p1['alt']."' title='".$p1['tit']."'>";
+      src='".$p1['pic']."' alt='".$p1['alt']."' title='".$p1['tit']."'>";
     $temp.= $html_object_2." class='center' id='iconB".preg_replace("/_/","",$p2['lnk']."_group_edit_%KEY")."' 
-      src='images/".$p2['pic']."' alt='".$p2['alt']."' title='".$p2['tit']."'>";
+      src='".$p2['pic']."' alt='".$p2['alt']."' title='".$p2['tit']."'>";
     return ($temp);
   }
 

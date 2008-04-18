@@ -202,7 +202,7 @@ class divListOGroup extends MultiSelectWindow
 
     /* Append create options */
     if(preg_match("/c/",$acls)) {
-      $s.= "...|<input class='center' type='image' src='images/list_new_ogroup.png' alt=''>".
+      $s.= "...|<input class='center' type='image' src='plugins/ogroups/images/new.png' alt=''>".
         "&nbsp;"._("Object group")."|group_new|\n";
     }
 
@@ -266,7 +266,7 @@ class divListOGroup extends MultiSelectWindow
     $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
     $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
     $userimg  = "<img class='center' src='plugins/groups/images/groups.png' alt='User'    title='%s'>";
-    $mailimg  = "<img class='center' src='images/mailto.png'             alt='M'  title='"._("Mail")   ."'>";
+    $mailimg  = "<img class='center' src='plugins/ogroups/images/mail.png'             alt='M'  title='"._("Mail")   ."'>";
     $empty    = "<img class='center' src='images/empty.png' style='width:16px;height:16px;' alt=''>";
 
     /* Dynamic action col, depending on snapshot icons */
@@ -332,7 +332,7 @@ class divListOGroup extends MultiSelectWindow
       /* Create each field */
       $field0 = array("string" => "<input type='checkbox' id='item_selected_".$key."' name='item_selected_".$key."'>" ,
                       "attach" => "style='width:20px;'");
-      $field1 = array("string" => "<img src='images/list_ogroup.png' alt='"._("Object group")."' ".$title.">", "attach" => "style='text-align:center;width: 20px;'");
+      $field1 = array("string" => "<img src='plugins/ogroups/images/ogroup.png' alt='"._("Object group")."' ".$title.">", "attach" => "style='text-align:center;width: 20px;'");
       $field2 = array("string" => sprintf($editlink,$key,$display), "attach" => "style='' ".$title);
       $field3 = array("string" => preg_replace("/%KEY/", $key, $this->parent->convert_list($val))."&nbsp;".$mail, "attach" => "style='width:136px;'");
       $field4 = array("string" => preg_replace("/%KEY%/", $key, $actions), "attach" => "style='width:".$action_col_size."px;border-right:0px;text-align:right;'");
@@ -351,7 +351,7 @@ class divListOGroup extends MultiSelectWindow
     $num_obj_str = _("Number of listed object groups");
     $num_dep_str = _("Number of listed departments");
 
-    $str = "<img class='center' src='images/select_ogroup.png'
+    $str = "<img class='center' src='plugins/ogroups/images/ogroup.png'
               title='".$num_obj_str."' alt='".$num_obj_str."'>&nbsp;".$num_objs."&nbsp;&nbsp;&nbsp;&nbsp;";
     $str.= "<img class='center' src='images/lists/folder.png'
               title='".$num_dep_str."' alt='".$num_dep_str."'>&nbsp;".$num_deps."&nbsp;&nbsp;&nbsp;&nbsp;";
