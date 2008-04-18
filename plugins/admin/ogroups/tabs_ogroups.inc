@@ -144,7 +144,7 @@ class ogrouptabs extends tabs
         $this->by_object['workservice']->parent= &$this;
         $this->by_object['workservice']->acl = "#all#";
     }
-    if((preg_match("/S/",$objects) || preg_match("/W/",$objects))&&(!isset($this->by_object['workstartup']))){
+    if((preg_match("/S/",$objects) || preg_match("/W/",$objects))&&(!isset($this->by_object['faiSummary']))){
         $this->by_name['faiSummary']= _("FAI summary");
         $this->by_object['faiSummary']= new faiSummaryTab($this->config, $this->dn);
         $this->by_object['faiSummary']->parent= &$this;
