@@ -38,7 +38,7 @@ class pluglist {
 		$this->config= &$config;
 
 		/* Create dirlist for all plugins */
-		$this->dirlist= $this->get_plugins ($this->dirlist, $this->config->data);
+		$this->dirlist= $this->get_plugins ($this->dirlist, $this->config->data['MENU']);
 
                 /* Fill info part of pluglist */
                 $classes= get_declared_classes();
@@ -59,24 +59,26 @@ class pluglist {
 
 	function get_plugins($list, &$config)
 	{
+                global $class_mapping;
+
 		/* Error reporting, because I'm getting strange messages in PHP 4.2.x */
-		if (!isset($config['PATH']) && !isset($config['CLASS'])){
+		if (!isset($config['CLASS'])){
 			if (is_array($config)){
 				foreach ($config as $val){
 					$list= $this->get_plugins($list, $val);
 				}
 			}
 		} else {
-			if (isset ($config['PATH']) && is_array($config)){
-				$list[$this->index++]= $config['PATH'];
-				if (isset($config['CLASS'])){
-					$class= $config['CLASS'];
-				}
+                        if (is_array($config) && isset($class_mapping[$config['CLASS']])){
+				$list[$this->index++]= dirname($class_mapping[$config['CLASS']]);
+			} else {
+				$list[$this->index++]= "";
 			}
 		}
 
 		return ($list);
 	}
+
 
 	function check_access($aclname)
 	{
@@ -158,7 +160,7 @@ class pluglist {
 					$plHeadline= $vars['plHeadline'];
 					$plDescription= $vars['plDescription'];
 
-					$index= $this->get_index($info['PATH'],$info['CLASS']);
+					$index= $this->get_index($info['CLASS']);
 					$href= "main.php?plug=$index&amp;reset=1";
 
 					if(!$vars){
@@ -232,6 +234,8 @@ class pluglist {
 
 	function show_iconmenu()
 	{
+		global $class_mapping;
+
 		if ($this->iconmenu == ""){
 			$cfg= $this->config->data['MENU'];
 
@@ -261,7 +265,7 @@ class pluglist {
 					$plHeadline= $vars['plHeadline'];
 					$plDescription= $vars['plDescription'];
 
-					$index= $this->get_index($info['PATH'],$info['CLASS']);
+					$index= $this->get_index($info['CLASS']);
 
 					$href = "main.php?plug=".$index."&amp;reset=1";
 
@@ -280,7 +284,7 @@ class pluglist {
 						if (isset($info['ICON'])){
 							$image= get_template_path('images/'.$info['ICON']);
 						} else {
-					  		$image= get_template_path("plugins/".preg_replace("/^.*\//", "", $info['PATH'])."/images/plugin.png");
+					  		$image= get_template_path("plugins/".preg_replace('%^.*/([^/]+)/[^/]+$%', '\1', $class_mapping[$info['CLASS']])."/images/plugin.png");
 						}
 						if ($col > 5){
 							$entries= $entries."</tr><tr>";
@@ -337,20 +341,20 @@ class pluglist {
 		return ("../".$this->dirlist[$index]);
 	}
 
-	function get_index($path,$class)
+	function get_index($class)
 	{
 		/* Search for plugin index (id), identify entry by path && class */
                 $data = $this->config->data['MENU'];
                 foreach($data as $section => $plugins){
                         foreach($plugins as $key => $plugin)    {
-                                if($plugin['CLASS'] == $class && $plugin['PATH'] == $path){
+                                if($plugin['CLASS'] == $class){
                                         return($key);
                                 }
                         }
                 }
 
-		/* Indentify by path*/
-                return (array_search($path, $this->dirlist));
+		/* Nothing */
+                return (0);
 
 	}
 }
