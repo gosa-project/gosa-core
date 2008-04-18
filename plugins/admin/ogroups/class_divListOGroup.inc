@@ -265,7 +265,7 @@ class divListOGroup extends MultiSelectWindow
     // Defining Links
     $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
     $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
-    $userimg  = "<img class='center' src='images/select_groups.png' alt='User'    title='%s'>";
+    $userimg  = "<img class='center' src='plugins/groups/images/groups.png' alt='User'    title='%s'>";
     $mailimg  = "<img class='center' src='images/mailto.png'             alt='M'  title='"._("Mail")   ."'>";
     $empty    = "<img class='center' src='images/empty.png' style='width:16px;height:16px;' alt=''>";
 

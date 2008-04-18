@@ -185,7 +185,7 @@ class divListGroup extends MultiSelectWindow
 
     /* Append create options */
     if(preg_match("/c/",$acl_all)) {
-      $s.= "...|<input class='center' type='image' src='images/list_new_group.png' alt=''>".
+      $s.= "...|<input class='center' type='image' src='plugins/groups/images/new.png' alt=''>".
         "&nbsp;"._("Group")."|group_new|\n";
     }
 
@@ -248,7 +248,7 @@ class divListGroup extends MultiSelectWindow
 
     // image Buttons
     $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
-    $userimg  = "<img class='center' src='images/select_groups.png' alt='User'    title='%s'>";
+    $userimg  = "<img class='center' src='plugins/groups/images/groups.png' alt='User'    title='%s'>";
 
     /* Dynamic action col, depending on snapshot icons */
     $action_col_size = 80;
@@ -257,7 +257,7 @@ class divListGroup extends MultiSelectWindow
     }
 
     /* Assign extension images */
-    $posiximg = "<input type='image' class='center' src='images/select_groups.png'
+    $posiximg = "<input type='image' class='center' src='plugins/groups/images/groups.png'
                  name='group_group_edit_%KEY%' alt='P'  title='"._("Posix")  ."'>";
     $mailimg  = "<input type='image' class='center' src='images/mailto.png'
                  name='mailgroup_group_edit_%KEY%' alt='M'  title='"._("Mail")   ."'>";
@@ -364,7 +364,7 @@ class divListGroup extends MultiSelectWindow
     $num_grp_str = _("Number of listed groups");
     $num_dep_str = _("Number of listed departments");
 
-    $str = "<img class='center' src='images/select_groups.png'
+    $str = "<img class='center' src='plugins/groups/images/groups.png'
               title='".$num_grp_str."' alt='".$num_grp_str."'>&nbsp;".$num_grps."&nbsp;&nbsp;&nbsp;&nbsp;";
     $str.= "<img class='center' src='images/lists/folder.png'
               title='".$num_dep_str."' alt='".$num_dep_str."'>&nbsp;".$num_deps."&nbsp;&nbsp;&nbsp;&nbsp;";
