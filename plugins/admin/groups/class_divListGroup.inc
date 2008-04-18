@@ -259,7 +259,7 @@ class divListGroup extends MultiSelectWindow
     /* Assign extension images */
     $posiximg = "<input type='image' class='center' src='plugins/groups/images/groups.png'
                  name='group_group_edit_%KEY%' alt='P'  title='"._("Posix")  ."'>";
-    $mailimg  = "<input type='image' class='center' src='images/mailto.png'
+    $mailimg  = "<input type='image' class='center' src='plugins/groups/images/mail.png'
                  name='mailgroup_group_edit_%KEY%' alt='M'  title='"._("Mail")   ."'>";
     $sambaimg = "<input type='image'  class='center' src='plugins/groups/images/samba.png'
                  name='group_group_edit_%KEY%' alt='S'  title='"._("Samba")  ."'>";

@@ -402,7 +402,7 @@ class posixAccount extends plugin
       asort($wslist);
       $smarty->assign("search_image", get_template_path('images/lists/search.png'));
       $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
-      $smarty->assign("tree_image", get_template_path('images/tree.png'));
+      $smarty->assign("tree_image", get_template_path('images/lists/search-subtree.png'));
       $smarty->assign("deplist", $this->config->idepartments);
       $smarty->assign("alphabet", generate_alphabet());
       foreach( array("depselect", "regex") as $type){
@@ -440,7 +440,7 @@ class posixAccount extends plugin
       $smarty->assign("groups", $glist);
       $smarty->assign("search_image", get_template_path('images/lists/search.png'));
       $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
-      $smarty->assign("tree_image", get_template_path('images/tree.png'));
+      $smarty->assign("tree_image", get_template_path('images/lists/search-subtree.png'));
       $smarty->assign("deplist", $this->config->idepartments);
       $smarty->assign("alphabet", generate_alphabet());
       $smarty->assign("depselect", session::get('CurrentMainBase'));

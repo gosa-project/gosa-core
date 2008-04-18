@@ -452,12 +452,12 @@ class MultiSelectWindow{
 		$smarty->assign("DivList"			, $divlist->DrawList()."\n\n\n\n\n".$this->footer."\n\n\n\n\n");
 
 		if($this->is_headpage){
-			$smarty->assign("tree_image", 		get_template_path('images/tree.png'));
+			$smarty->assign("tree_image", 		get_template_path('images/lists/search-subtree.png'));
 			$smarty->assign("infoimage", 		get_template_path('images/info.png'));
 			$smarty->assign("launchimage", 		get_template_path('images/launch.png'));
 			$smarty->assign("apply", 			apply_filter());
 		}else{
-			$smarty->assign("tree_image", 		get_template_path('images/tree.png'));
+			$smarty->assign("tree_image", 		get_template_path('images/lists/search-subtree.png'));
 			$smarty->assign("infoimage", 		get_template_path('images/info_small.png'));
 			$smarty->assign("launchimage", 		get_template_path('images/rocket.png'));
 			$smarty->assign("apply", 			apply_filter());

@@ -371,7 +371,7 @@ class group extends plugin
       asort($wslist);
       $smarty->assign("search_image", get_template_path('images/lists/search.png'));
       $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
-      $smarty->assign("tree_image", get_template_path('images/tree.png'));
+      $smarty->assign("tree_image", get_template_path('images/lists/search-subtree.png'));
       $smarty->assign("deplist", $this->config->idepartments);
       $smarty->assign("alphabet", generate_alphabet());
       foreach( array("depselect", "regex") as $type){
@@ -434,7 +434,7 @@ class group extends plugin
       /* Show dialog */
       $smarty->assign("search_image", get_template_path('images/lists/search.png'));
       $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
-      $smarty->assign("tree_image", get_template_path('images/tree.png'));
+      $smarty->assign("tree_image", get_template_path('images/lists/search-subtree.png'));
 
       $smarty->assign("deplist", $this->get_allowed_bases("users/user"));
       $smarty->assign("alphabet", generate_alphabet());
@@ -550,7 +550,7 @@ class group extends plugin
     $smarty->assign("alphabet", generate_alphabet(10));
     $smarty->assign("search_image", get_template_path('images/lists/search.png'));
     $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
-    $smarty->assign("tree_image", get_template_path('images/tree.png'));
+    $smarty->assign("tree_image", get_template_path('images/lists/search-subtree.png'));
     $smarty->assign("deplist", $this->config->idepartments);
 
     /* Multiple edit handling */

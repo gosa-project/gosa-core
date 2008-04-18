@@ -280,7 +280,7 @@ class ogroup extends plugin
       /* Show dialog */
       $smarty->assign("search_image", get_template_path('images/lists/search.png'));
       $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
-      $smarty->assign("tree_image", get_template_path('images/tree.png'));
+      $smarty->assign("tree_image", get_template_path('images/lists/search-subtree.png'));
       $smarty->assign("deplist", $this->config->idepartments);
       $smarty->assign("alphabet", generate_alphabet());
       foreach( array("dselect", "regex", "subtrees") as $type){
