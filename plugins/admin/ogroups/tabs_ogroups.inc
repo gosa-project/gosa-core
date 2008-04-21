@@ -277,19 +277,20 @@ class ogrouptabs extends tabs
           case "U":
             /* Append a PhoneQueue, if objectClass = goFonAccount */
             $use = false;
-          foreach($this->by_object['ogroup']->memberList as $dn => $val){
-
-            $obj = $this->by_object['ogroup']->objcache[$dn];
-            
-            if(isset($obj['objectClass'])){
-              if(in_array("goFonAccount",$obj['objectClass'])){
-                $use = true; 
-              }
-            }
-          }
 
           /* We found goFonAccount in users objectClasses*/
           if(class_available("phonequeue")){
+            foreach($this->by_object['ogroup']->memberList as $dn => $val){
+
+              $obj = $this->by_object['ogroup']->objcache[$dn];
+
+              if(isset($obj['objectClass'])){
+                if(in_array("goFonAccount",$obj['objectClass'])){
+                  $use = true; 
+                }
+              }
+            }
+
             if($use){
               $this->by_name['phonequeue']= _("Phone queue");
               $this->by_object['phonequeue']= new phonequeue($this->config, $this->dn);

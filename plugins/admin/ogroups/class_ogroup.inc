@@ -432,16 +432,26 @@ class ogroup extends plugin
       Generate Filter 
       ###########*/
 
-    $p_f= array("accounts"        => array("CLASS"=>"gosaAccount"    ,"DN"=> get_people_ou()           ,"ACL" => "users"), 
-                "groups"          => array("CLASS"=>"posixGroup"     ,"DN"=> get_groups_ou('ogroupou') ,"ACL" => "groups"), 
-                "applications"    => array("CLASS"=>"gosaApplication","DN"=> get_ou('applicationou')   ,"ACL" => "application"), 
-                "departments"     => array("CLASS"=>"gosaDepartment" ,"DN"=> ""                        ,"ACL" => "department"), 
-                "servers"         => array("CLASS"=>"goServer"       ,"DN"=> get_ou('serverou')        ,"ACL" => "server"),
-                "workstations"    => array("CLASS"=>"gotoWorkstation","DN"=> get_ou('workstationou')   ,"ACL" => "workstation"),
-                "winstations"    => array("CLASS"=>"opsiClient",        "DN"=> get_ou('WINSTATIONS')     ,"ACL" => "winstation"),
-                "terminals"       => array("CLASS"=>"gotoTerminal"   ,"DN"=> get_ou('terminalou')      ,"ACL" => "terminal"),
-                "printers"        => array("CLASS"=>"gotoPrinter"    ,"DN"=> get_ou('printerou')       ,"ACL" => "printer"),
-                "phones"          => array("CLASS"=>"goFonHardware"  ,"DN"=> get_ou('phoneou')         ,"ACL" => "phone"));
+    $p_f= array("accounts"=> array("OBJ"=>"user", "CLASS"=>"gosaAccount"    ,
+          "DN"=> get_people_ou()           ,"ACL" => "users"), 
+        "groups"          => array("OBJ"=>"group", "CLASS"=>"posixGroup"     ,
+          "DN"=> get_groups_ou('ogroupou') ,"ACL" => "groups"), 
+        "applications"    => array("OBJ"=>"application", "CLASS"=>"gosaApplication",
+          "DN"=> get_ou('applicationou')   ,"ACL" => "application"), 
+        "departments"     => array("OBJ"=>"department", "CLASS"=>"gosaDepartment" ,
+          "DN"=> ""                        ,"ACL" => "department"), 
+        "servers"         => array("OBJ"=>"servgeneric", "CLASS"=>"goServer"       ,
+          "DN"=> get_ou('serverou')        ,"ACL" => "server"),
+        "workstations"    => array("OBJ"=>"workgeneric", "CLASS"=>"gotoWorkstation",
+          "DN"=> get_ou('workstationou')   ,"ACL" => "workstation"),
+        "winstations"     => array("OBJ"=>"wingeneric", "CLASS"=>"opsiClient",        
+          "DN"=> get_ou('WINSTATIONS')     ,"ACL" => "winstation"),
+        "terminals"       => array("OBJ"=>"termgeneric", "CLASS"=>"gotoTerminal"   ,
+          "DN"=> get_ou('terminalou')      ,"ACL" => "terminal"),
+        "printers"        => array("OBJ"=>"printgeneric", "CLASS"=>"gotoPrinter"    ,
+          "DN"=> get_ou('printerou')       ,"ACL" => "printer"),
+        "phones"          => array("OBJ"=>"phoneGeneric", "CLASS"=>"goFonHardware"  ,
+          "DN"=> get_ou('phoneou')         ,"ACL" => "phone"));
 
 
     /*###########
@@ -455,14 +465,15 @@ class ogroup extends plugin
 
     foreach($p_f as $post_name => $data){
 
-      if($ogfilter[$post_name] == "checked"){
+      if($ogfilter[$post_name] == "checked" && class_available($data['OBJ'])){
 
         if($ogfilter['subtrees']){
           $base =  $ogfilter['dselect'];
         }else{
           $base =  $data['DN'].$ogfilter['dselect'];
         }
-    
+   
+         
         $filter = "(&(objectClass=".$data['CLASS'].")(|(uid=$regex)(cn=$regex)(ou=$regex)))";
         $res    = get_list($filter, $data['ACL']  , $base, 
                     array("description", "objectClass", "sn", "givenName", "uid","ou","cn"),$Get_list_flags);
