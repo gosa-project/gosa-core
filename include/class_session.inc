@@ -73,6 +73,12 @@ class session {
 		   the php.ini, so if you use debian, you must hardcode session.gc_maxlifetime in your php.ini */
 		ini_set("session.gc_maxlifetime",24*60*60);
 		session_start();
+
+    /* Regenerate ID to increase security */
+    if (!isset($_SESSION['started'])){
+      session_regenerate_id();
+      $_SESSION['started'] = true;
+    }
 	}
 
 	public static function destroy()
