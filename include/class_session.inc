@@ -74,6 +74,17 @@ class session {
 		ini_set("session.gc_maxlifetime",24*60*60);
 		session_start();
 
+    /* Check for changed browsers and bail out */
+    if (isset($_SESSION['HTTP_USER_AGENT']))
+    {
+      if ($_SESSION['HTTP_USER_AGENT'] !=  md5($_SERVER['HTTP_USER_AGENT'])) {
+        session_destroy();
+        session_start();
+      }
+    } else {
+      $_SESSION['HTTP_USER_AGENT'] = md5($_SERVER['HTTP_USER_AGENT']);
+    }
+
     /* Regenerate ID to increase security */
     if (!isset($_SESSION['started'])){
       session_regenerate_id();
