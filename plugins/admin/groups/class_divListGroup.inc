@@ -278,6 +278,16 @@ class divListGroup extends MultiSelectWindow
 
     $ui = get_userinfo();
 
+    /* Fetch all application menu entries 
+     */
+    $base = get_groups_ou().$this->selectedBase;
+    $res = get_list("(objectClass=gotoMenuEntry)","application",$base,array("dn"));
+    $configured_apps = array();
+    foreach($res as $entry){
+      $dn = preg_replace("/^.*(cn=[^,]+,".normalizePreg(get_groups_ou()).")/","\\1",$entry['dn']);
+      $configured_apps[$dn] = $dn;
+    }
+
     // Test Every Entry and generate divlist Array
     foreach($groups as $key => $val){
     
@@ -314,9 +324,12 @@ class divListGroup extends MultiSelectWindow
         if(in_array("posixGroup",           $val['objectClass']))   $posix = $posiximg;
         if(in_array("gosaMailAccount",      $val['objectClass']))   $mail  = $mailimg;
         if(in_array("sambaGroupMapping",    $val['objectClass']))   $samba = $sambaimg;
-        if(in_array("gosaApplicationGroup", $val['objectClass']))   $appl  = $applimg;
         if(in_array("goFonPickupGroup",     $val['objectClass']))   $phone = $phoneimg;
         if(in_array("gotoEnvironment",      $val['objectClass']))   $enviro= $envimg;
+      }
+
+      if(isset($configured_apps[$val['dn']])){
+          $appl  = $applimg;
       }
 
       $title = "title='".preg_replace('/ /', '&nbsp;', @LDAP::fix($val['dn']))."'";
