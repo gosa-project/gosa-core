@@ -1323,6 +1323,20 @@ class group extends plugin
     }
   }
 
+
+  function PrepareForCopyPaste($source)
+  {
+    plugin::PrepareForCopyPaste($source);
+
+    $this->memberUid = array();
+    if(isset($source['memberUid'])){
+      for($i = 0 ; $i < $source['memberUid']['count']; $i ++){
+        $this->memberUid[] = $source['memberUid'][$i];
+      }
+    }
+  }
+
+
   function set_multi_edit_values($attrs)
   {
     $users = array();
