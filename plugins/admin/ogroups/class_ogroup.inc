@@ -304,10 +304,6 @@ class ogroup extends plugin
             "T" => msgPool::selectToView(_("groups")),
             "C" => (isset($ogfilter['groups']) && ($ogfilter['groups'])),
             "L" => sprintf(_("Show %s"),_("groups"))),
-          "applications"=> array(
-            "T" => msgPool::selectToView(_("applications")),
-            "C" => (isset($ogfilter['applications']) && ($ogfilter['applications'])),
-            "L" => sprintf(_("Show %s"),_("applications"))),
           "servers"=> array(
             "T" => msgPool::selectToView(_("servers")),
             "C" => (isset($ogfilter['servers']) && ($ogfilter['servers'])),
@@ -328,6 +324,16 @@ class ogroup extends plugin
             "T" => msgPool::selectToView(_("phones")),
             "C" => (isset($ogfilter['phones']) && ($ogfilter['phones'])),
             "L" => sprintf(_("Show %s"),_("phones"))));
+ 
+      /* Allow selecting applications if we are having a non 
+          release managed application storage */ 
+      if(!$this->IsReleaseManagementActivated()){
+        $ar["applications"] = array(
+            "T" => msgPool::selectToView(_("applications")),
+            "C" => (isset($ogfilter['applications']) && ($ogfilter['applications'])),
+            "L" => sprintf(_("Show %s"),_("applications")));
+      }
+
       $smarty->assign("checkboxes",$ar);
       $display= $smarty->fetch (get_template_path('ogroup_objects.tpl', TRUE, dirname(__FILE__)));
       return ($display);
@@ -436,8 +442,6 @@ class ogroup extends plugin
           "DN"=> get_people_ou()           ,"ACL" => "users"), 
         "groups"          => array("OBJ"=>"group", "CLASS"=>"posixGroup"     ,
           "DN"=> get_groups_ou('ogroupou') ,"ACL" => "groups"), 
-        "applications"    => array("OBJ"=>"application", "CLASS"=>"gosaApplication",
-          "DN"=> get_ou('applicationou')   ,"ACL" => "application"), 
         "departments"     => array("OBJ"=>"department", "CLASS"=>"gosaDepartment" ,
           "DN"=> ""                        ,"ACL" => "department"), 
         "servers"         => array("OBJ"=>"servgeneric", "CLASS"=>"goServer"       ,
@@ -454,6 +458,13 @@ class ogroup extends plugin
           "DN"=> get_ou('phoneou')         ,"ACL" => "phone"));
 
 
+    /* Allow searching for applications, if we are not using release managed applications 
+      */
+    if(!$this->IsReleaseManagementActivated()){
+      $p_f[      "applications"]    = array("OBJ"=>"application", "CLASS"=>"gosaApplication",
+          "DN"=> get_ou('applicationou')   ,"ACL" => "application"); 
+    }
+           
     /*###########
       Perform search for selected objectClasses & regex to fill list with objects   
       ###########*/
@@ -809,6 +820,17 @@ class ogroup extends plugin
     if(isset($_POST['cn'])){
       $this->cn = $_POST['cn'];
     }
+  }
+
+
+  function IsReleaseManagementActivated()
+  {
+    /* Check if we should enable the release selection */
+    $tmp = $this->config->search("faiManagement", "CLASS",array('menu','tabs'));
+    if(!empty($tmp)){
+      return(true);
+    }
+    return(false);
   }
 
 
