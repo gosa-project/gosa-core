@@ -188,6 +188,7 @@ class gosaSupportDaemon
       "<select>distinct section</select>".
       "<where><clause><phrase><distribution>".$release."</distribution></phrase></clause></where></xml>";
 
+    $ret = array();
     if($this->connect()){
       $this->o_sock->write($xml_msg);
       $str = trim($this->o_sock->read());
