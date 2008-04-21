@@ -271,8 +271,8 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
       exit()  ;
     }else{
       $cfg = array();
-      $cfg['admin']     = $config->current['ADMIN'];
-      $cfg['password']  = $config->current['PASSWORD'];
+      $cfg['admin']     = $config->get_admin_dn();
+      $cfg['password']  = $config->get_admin_password();
       $cfg['connection']= $config->current['SERVER'];
       $cfg['tls']       = $tls;
       $str = check_schema($cfg,isset($config->current['RFC2307BIS']) && preg_match("/(true|yes|on|1)/i",$config->current['RFC2307BIS']));
