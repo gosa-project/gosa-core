@@ -248,8 +248,7 @@ class logview extends plugin
 			}
 			$smarty->assign("mode".$this->sort, $sort_sign);
 
-			$end= date ("YmdHis");
-			$query_base= " FROM golog WHERE message like '".$logfilter['regex']."' $ll $hf AND time_stamp <= $end AND time_stamp >= $start";
+			$query_base= " FROM golog WHERE message like '".$logfilter['regex']."' $ll $hf AND time_stamp >= $start";
 
 			/* Get number of entries */
 			$query= "SELECT COUNT(*)".$query_base.";";
@@ -285,6 +284,10 @@ class logview extends plugin
 			mysql_close($link);
 			$smarty->assign("search_result", $res);
 		}
+	}
+	$logfilter['regex']= preg_replace('/\%/', '*', $logfilter['regex']);
+	foreach( array("host", "log_level", "time", "regex") as $type){
+		$smarty->assign("$type", $logfilter[$type]);
 	}
 
 	/* Show main page */
