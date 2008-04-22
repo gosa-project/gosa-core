@@ -281,9 +281,11 @@ class divListGroup extends MultiSelectWindow
     /* Fetch all application menu entries 
      */
     $base = get_groups_ou().$this->selectedBase;
-    $res = get_list("(objectClass=gotoMenuEntry)","application",$base,array("dn"));
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd ($base);
+    $ldap->search("(objectClass=gotoMenuEntry)",array("dn"));
     $configured_apps = array();
-    foreach($res as $entry){
+    while($entry = $ldap->fetch()){
       $dn = preg_replace("/^.*(cn=[^,]+,".normalizePreg(get_groups_ou()).")/","\\1",$entry['dn']);
       $configured_apps[$dn] = $dn;
     }
