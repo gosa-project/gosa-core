@@ -658,7 +658,6 @@ class MultiSelectWindow{
           $str = "<img class='center' src='images/lists/restore_grey.png' alt=''>&nbsp;";
         }
       }
-#      $str .= "<img class='center' src='images/lists/seperator.png' align='middle' alt='' height='16' width='1'>&nbsp;";
     }
     return($str);
   }
