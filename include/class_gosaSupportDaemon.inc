@@ -819,13 +819,21 @@ class gosaSupportDaemon
         }
         if ($xml_elem['type'] == 'complete') {
           $start_level = 1;
-          $php_stmt = '$params';
+          $test2 = &$params;
           while($start_level < $xml_elem['level']) {
-            $php_stmt .= '[$level['.$start_level.']]';
+            $test2 = &$test2[$level[$start_level]];
             $start_level++;
           }
-          $php_stmt .= '[$xml_elem[\'tag\']] = $xml_elem[\'value\'];';
-          @eval($php_stmt);
+          if(!isset($test2[$xml_elem['tag']])){
+            if(isset($xml_elem['value'])){
+              $test2[$xml_elem['tag']] = $xml_elem['value'];
+            }
+          }else{
+            if(!is_array($test2[$xml_elem['tag']])){
+              $test2[$xml_elem['tag']] = array($test2[$xml_elem['tag']]);
+            }
+            $test2[$xml_elem['tag']][] = $xml_elem['value'];
+          }
         }
       }
     }
@@ -1072,6 +1080,9 @@ class gosaSupportDaemon
           $ret = $entries;
           if(isset($entries['XML']['ERROR_STRING'])) {
             $this->set_error($entries['XML']['ERROR_STRING']);
+            new log("debug","DaemonEvent (IDS) ", "gosaSupportDaemon::_send()", array($data=>$data),"FAILED ".$this->get_error());
+          }elseif(isset($entries['XML']['ERROR'])){
+            $this->set_error($entries['XML']['ERROR']);
             new log("debug","DaemonEvent (IDS) ", "gosaSupportDaemon::_send()", array($data=>$data),"FAILED ".$this->get_error());
           }else{
             new log("debug","DaemonEvent (IDS) ", "gosaSupportDaemon::_send()", array($data=>$data),"SUCCESS");
