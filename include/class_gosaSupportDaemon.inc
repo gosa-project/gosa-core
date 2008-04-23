@@ -1404,12 +1404,17 @@ class gosaSupportDaemon
       "<target>".$server."</target>".
       "</xml>";
 
+    /* Possible attributes */
+    $attrs = array("MASK","POLICY","PW_HISTORY_NUM","PW_MAX_LIFE",
+        "PW_MIN_CLASSES","PW_MIN_LENGTH","PW_MIN_LIFE","REF_COUNT");
+
     $tmp = $this->_send($xml_msg,TRUE);
     if(isset($tmp['XML'])){
-      $attrs = array("MASK","POLICY_REFCNT","PW_HISTORY_NUM","PW_MAX_LIFE","PW_MIN_CLASSES","PW_MIN_LENGTH","PW_MIN_LIFE");
       foreach($attrs as $attr){
         if(isset($tmp['XML'][$attr])){
           $ret[$attr] = $tmp['XML'][$attr];
+        }else{
+          $ret[$attr] = "";
         }
       }
     }
