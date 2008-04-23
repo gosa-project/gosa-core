@@ -1185,17 +1185,259 @@ class gosaSupportDaemon
   }
 
 
-static function ping($target)
-{
-  if (tests::is_mac($target)){
-    /* Get communication object */
-    $d= new gosaSupportDaemon(TRUE,0.5);
-    $answer= $d->_send("<xml><header>gosa_ping</header><source>GOSA</source><target>$target</target></xml>", TRUE);
-    return (count($answer) ? TRUE:FALSE);
+  static function ping($target)
+  {
+    if (tests::is_mac($target)){
+      /* Get communication object */
+      $d= new gosaSupportDaemon(TRUE,0.5);
+      $answer= $d->_send("<xml><header>gosa_ping</header><source>GOSA</source><target>$target</target></xml>", TRUE);
+      return (count($answer) ? TRUE:FALSE);
+    }
+    return (FALSE);
   }
 
-  return (FALSE);
-}
+
+
+  /*! \brief  Returns a list of all configured principals. 
+              (Uses the GOsa support daemon instead of the ldap database.)
+      @return Array  A list containing the names of all configured principals.
+   */
+  public function krb5_list_principals()
+  {
+    $xml_msg = "<xml><header>krb5_list_principals</header><source>GOSA</source><target>GOSA</target></xml>";
+    return($this->_send($xml_msg,TRUE));
+  }
+
+
+  /*! \brief  Returns the configuration settings for a given principal name. 
+              (Uses the GOsa support daemon instead of the ldap database.)
+      @pram   String The name of the requested principal. (e.g. peter@EXAMPLE.DE)
+      @return Array  A list containing the names of all configured principals.
+   */
+  public function krb5_get_principal($name)
+  {
+    $ret = array();
+
+    /* Check if the given name is a valid request value 
+     */
+    if(!is_string($name) || empty($name)){
+      trigger_error("The given principal name is not of type string or it is empty.");
+      return($ret);
+    }
+
+    /* Prepare request event 
+     */ 
+    $xml_msg = 
+      "<xml>".
+      "<header>krb5_get_principal</header>".
+      "<principal>".$name."</principal>".
+      "<source>GOSA</source>".
+      "<target>GOSA</target>".
+      "</xml>";
+
+    return($this->_send($xml_msg,TRUE));
+  }
+
+
+  /*! \brief  Creates/Updates a given principal with a set of configuration settings.
+              For a list of configurable attributes have a look at 'krb5_get_principal()'.
+              (Uses the GOsa support daemon instead of the ldap database.)
+      @pram   String The name of the principal to update. (e.g. peter@EXAMPLE.DE)
+      @return Boolean   TRUE on success else FALSE. 
+   */
+  public function krb5_set_principal($name,$values)
+  {
+    $ret = FALSE;  
+
+    /* Check if the given name is a valid request value 
+     */
+    if(!is_string($name) || empty($name)){
+      trigger_error("The given principal name is not of type string or it is empty.");
+      return($ret);
+    }
+    if(!is_array($values) || !count($values)){
+      trigger_error("No valid update settings given. The parameter must be of type array and must contain at least one entry");
+      return($ret);
+    }
+
+    $attrs = "";
+    foreach($values as $name => $value){
+      if(empty($name) || is_numeric($name)){
+        trigger_error("Invalid configuration attribute given '".$name."=".$value."'.");
+        return($ret);
+      }
+      $attrs = "<$name>$value</$name>\n";
+    }
+
+    /* Prepare request event 
+     */ 
+    $xml_msg = 
+      "<xml>".
+      "<header>krb5_set_principal</header>".
+      "<principal>".$name."</principal>".
+      $attrs.
+      "<source>GOSA</source>".
+      "<target>GOSA</target>".
+      "</xml>";
+
+    return($this->_send($xml_msg,TRUE));
+  }
+
+
+  /*! \brief  Removes the given principal.
+              (Uses the GOsa support daemon instead of the ldap database.)
+      @pram   String The name of the principal. (e.g. peter@EXAMPLE.DE)
+      @return Boollean   TRUE on success else FALSE
+   */
+  public function krb5_del_principal($name)
+  {
+    $ret = FALSE;  
+
+    /* Check if the given name is a valid request value 
+     */
+    if(!is_string($name) || empty($name)){
+      trigger_error("The given principal name is not of type string or it is empty.");
+      return($ret);
+    }
+
+    /* Prepare request event 
+     */ 
+    $xml_msg = 
+      "<xml>".
+      "<header>krb5_del_principal</header>".
+      "<principal>".$name."</principal>".
+      "<source>GOSA</source>".
+      "<target>GOSA</target>".
+      "</xml>";
+
+    
+    return($this->_send($xml_msg,TRUE));
+  }
+
+
+  /*! \brief  Returns a list of configured password policies.
+              (Uses the GOsa support daemon instead of the ldap database.)
+      @return Array A list of all configured password policies.
+   */
+  public function krb5_list_policies()
+  {
+    $res = array();  
+
+    /* Prepare request event 
+     */ 
+    $xml_msg = 
+      "<xml>".
+      "<header>krb5_list_policies</header>".
+      "<source>GOSA</source>".
+      "<target>GOSA</target>".
+      "</xml>";
+    
+    return($this->_send($xml_msg,TRUE));
+  }
+
+
+  /*! \brief  Returns a list of configured password policies.
+              (Uses the GOsa support daemon instead of the ldap database.)
+      @return Array The policy settings for the given policy name.
+   */
+  public function krb5_get_policy($name)
+  {
+    $res = array();  
+
+    /* Check if the given name is a valid request value 
+     */
+    if(!is_string($name) || empty($name)){
+      trigger_error("The given policy name is not of type string or it is empty.");
+      return($ret);
+    }
+
+    /* Prepare request event 
+     */ 
+    $xml_msg = 
+      "<xml>".
+      "<header>krb5_get_policy</header>".
+      "<policy>".$name."</policy>".
+      "<source>GOSA</source>".
+      "<target>GOSA</target>".
+      "</xml>";
+
+    return($this->_send($xml_msg,TRUE));
+  }
+
+  
+  /*! \brief  Creates/Updates a given policy with a set of configuration settings.
+              For a list of configurable attributes have a look at 'krb5_get_policy()'.
+              (Uses the GOsa support daemon instead of the ldap database.)
+      @pram   String The name of the policy to update.
+      @return Boolean   TRUE on success else FALSE. 
+   */
+  public function krb5_set_policy($name,$values)
+  {
+    $ret = FALSE;  
+
+    /* Check if the given name is a valid request value 
+     */
+    if(!is_string($name) || empty($name)){
+      trigger_error("The given policy name is not of type string or it is empty.");
+      return($ret);
+    }
+    if(!is_array($values) || !count($values)){
+      trigger_error("No valid policy settings given. The parameter must be of type array and must contain at least one entry");
+      return($ret);
+    }
+
+    /* Transform array into <xml>
+     */
+    $attrs = "";
+    foreach($values as $name => $value){
+      if(empty($name) || is_numeric($name)){
+        trigger_error("Invalid policy configuration attribute given '".$name."=".$value."'.");
+        return($ret);
+      }
+      $attrs = "<$name>$value</$name>\n";
+    }
+
+    /* Prepare request event 
+     */ 
+    $xml_msg = 
+      "<xml>".
+      "<header>krb5_set_policy</header>".
+      "<policy>".$name."</policy>".
+      $attrs.
+      "<source>GOSA</source>".
+      "<target>GOSA</target>".
+      "</xml>";
+
+    return($this->_send($xml_msg,TRUE));
+  }
+
+  
+  /*! \brief  Removes the given password policy. 
+              (Uses the GOsa support daemon instead of the ldap database.)
+      @return Boolean  TRUE on success else FALSE
+   */
+  public function krb5_del_policy($name)
+  {
+    $ret = FALSE;
+
+    /* Check if the given name is a valid request value 
+     */
+    if(!is_string($name) || empty($name)){
+      trigger_error("The given policy name is not of type string or it is empty.");
+      return($ret);
+    }
+
+    /* Prepare request event 
+     */ 
+    $xml_msg = 
+      "<xml>".
+      "<header>krb5_del_policy</header>".
+      "<policy>".$name."</policy>".
+      "<source>GOSA</source>".
+      "<target>GOSA</target>".
+      "</xml>";
+    return($this->_send($xml_msg,TRUE));
+  }
 
 }
 
