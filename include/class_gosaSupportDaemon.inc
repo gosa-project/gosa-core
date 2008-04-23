@@ -1353,7 +1353,22 @@ class gosaSupportDaemon
       "<target>".$server."</target>".
       "</xml>";
     
-    return($this->_send($xml_msg,TRUE));
+    $res = $this->_send($xml_msg,TRUE);
+    
+    /* Check if there are results for POLICY 
+     */
+    if(isset($res['XML']['POLICY'])){
+      
+      /* Ensure that we return an array 
+       */
+      $tmp = $res['XML']['POLICY'];
+      if(!is_array($tmp)){
+        $tmp = array($tmp);
+      }
+      return($tmp);
+    }else{
+      return(array());
+    }
   }
 
 
