@@ -211,7 +211,7 @@ class MultiSelectWindow{
 
 
   /* Return default header part. With back, home and root icons and department selection */
-  function get_default_header()
+  function get_default_header($seperator= TRUE)
   {
     $enable_back = TRUE;
     $enable_root = TRUE;
@@ -260,9 +260,10 @@ class MultiSelectWindow{
    
     /* And at least draw reload button, this button is enabled everytime */ 
     $listhead .=  " <input class='center' type='image' src='images/lists/reload.png' align='middle'
-      title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
-      " <img   class='center' src='images/lists/seperator.png' align='middle' alt='-' height='16' width='1'>&nbsp;";
-
+      title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;";
+    if ($seperator){
+      $listhead.= " <img   class='center' src='images/lists/seperator.png' align='middle' alt='-' height='16' width='1'>&nbsp;";
+    }
     return ($listhead);
   }
 
