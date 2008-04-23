@@ -1202,9 +1202,19 @@ class gosaSupportDaemon
               (Uses the GOsa support daemon instead of the ldap database.)
       @return Array  A list containing the names of all configured principals.
    */
-  public function krb5_list_principals()
+  public function krb5_list_principals($server)
   {
-    $xml_msg = "<xml><header>krb5_list_principals</header><source>GOSA</source><target>GOSA</target></xml>";
+    $res = array();  
+
+    /* Prepare request event 
+     */ 
+    $xml_msg = 
+      "<xml>".
+      "<header>gosa_krb5_list_principals</header>".
+      "<source>GOSA</source>".
+      "<target>".$server."</target>".
+      "</xml>";
+    
     return($this->_send($xml_msg,TRUE));
   }
 
@@ -1229,7 +1239,7 @@ class gosaSupportDaemon
      */ 
     $xml_msg = 
       "<xml>".
-      "<header>krb5_get_principal</header>".
+      "<header>gosa_krb5_get_principal</header>".
       "<principal>".$name."</principal>".
       "<source>GOSA</source>".
       "<target>GOSA</target>".
@@ -1273,7 +1283,7 @@ class gosaSupportDaemon
      */ 
     $xml_msg = 
       "<xml>".
-      "<header>krb5_set_principal</header>".
+      "<header>gosa_krb5_set_principal</header>".
       "<principal>".$name."</principal>".
       $attrs.
       "<source>GOSA</source>".
@@ -1304,7 +1314,7 @@ class gosaSupportDaemon
      */ 
     $xml_msg = 
       "<xml>".
-      "<header>krb5_del_principal</header>".
+      "<header>gosa_krb5_del_principal</header>".
       "<principal>".$name."</principal>".
       "<source>GOSA</source>".
       "<target>GOSA</target>".
@@ -1319,7 +1329,7 @@ class gosaSupportDaemon
               (Uses the GOsa support daemon instead of the ldap database.)
       @return Array A list of all configured password policies.
    */
-  public function krb5_list_policies()
+  public function krb5_list_policies($server)
   {
     $res = array();  
 
@@ -1327,9 +1337,9 @@ class gosaSupportDaemon
      */ 
     $xml_msg = 
       "<xml>".
-      "<header>krb5_list_policies</header>".
+      "<header>gosa_krb5_list_policies</header>".
       "<source>GOSA</source>".
-      "<target>GOSA</target>".
+      "<target>".$server."</target>".
       "</xml>";
     
     return($this->_send($xml_msg,TRUE));
@@ -1355,7 +1365,7 @@ class gosaSupportDaemon
      */ 
     $xml_msg = 
       "<xml>".
-      "<header>krb5_get_policy</header>".
+      "<header>gosa_krb5_get_policy</header>".
       "<policy>".$name."</policy>".
       "<source>GOSA</source>".
       "<target>GOSA</target>".
@@ -1401,7 +1411,7 @@ class gosaSupportDaemon
      */ 
     $xml_msg = 
       "<xml>".
-      "<header>krb5_set_policy</header>".
+      "<header>gosa_krb5_set_policy</header>".
       "<policy>".$name."</policy>".
       $attrs.
       "<source>GOSA</source>".
@@ -1431,7 +1441,7 @@ class gosaSupportDaemon
      */ 
     $xml_msg = 
       "<xml>".
-      "<header>krb5_del_policy</header>".
+      "<header>gosa_krb5_del_policy</header>".
       "<policy>".$name."</policy>".
       "<source>GOSA</source>".
       "<target>GOSA</target>".
