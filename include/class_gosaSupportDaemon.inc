@@ -1376,7 +1376,7 @@ class gosaSupportDaemon
               (Uses the GOsa support daemon instead of the ldap database.)
       @return Array The policy settings for the given policy name.
    */
-  public function krb5_get_policy($name)
+  public function krb5_get_policy($server,$name)
   {
     $res = array();  
 
@@ -1387,6 +1387,13 @@ class gosaSupportDaemon
       return($ret);
     }
 
+    /* Check if the given server is a valid mac address
+     */
+    if(!tests::is_mac($server)){
+      trigger_error("The given server address '".$server."' is invalid, it must be a valid mac address");
+      return($ret);
+    }
+
     /* Prepare request event 
      */ 
     $xml_msg = 
@@ -1394,10 +1401,19 @@ class gosaSupportDaemon
       "<header>gosa_krb5_get_policy</header>".
       "<policy>".$name."</policy>".
       "<source>GOSA</source>".
-      "<target>GOSA</target>".
+      "<target>".$server."</target>".
       "</xml>";
 
-    return($this->_send($xml_msg,TRUE));
+    $tmp = $this->_send($xml_msg,TRUE);
+    if(isset($tmp['XML'])){
+      $attrs = array("MASK","POLICY_REFCNT","PW_HISTORY_NUM","PW_MAX_LIFE","PW_MIN_CLASSES","PW_MIN_LENGTH","PW_MIN_LIFE");
+      foreach($attrs as $attr){
+        if(isset($tmp['XML'][$attr])){
+          $ret[$attr] = $tmp['XML'][$attr];
+        }
+      }
+    }
+    return($ret);
   }
 
   
