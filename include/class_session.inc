@@ -94,7 +94,7 @@ class session {
 
 	public static function destroy()
 	{
-		session_destroy();
+		@session_destroy();
 	}
 
 	public static function set_lifetime($seconds = -1)
