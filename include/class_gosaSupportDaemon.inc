@@ -1217,6 +1217,13 @@ class gosaSupportDaemon
   {
     $res = array();  
 
+    /* Check if the given server is a valid mac address
+     */
+    if(!tests::is_mac($server)){
+      trigger_error("The given server address '".$server."' is invalid, it must be a valid mac address");
+      return($ret);
+    }
+
     /* Prepare request event 
      */ 
     $xml_msg = 
@@ -1235,7 +1242,7 @@ class gosaSupportDaemon
       @pram   String The name of the requested principal. (e.g. peter@EXAMPLE.DE)
       @return Array  A list containing the names of all configured principals.
    */
-  public function krb5_get_principal($name)
+  public function krb5_get_principal($server,$name)
   {
     $ret = array();
 
@@ -1243,6 +1250,13 @@ class gosaSupportDaemon
      */
     if(!is_string($name) || empty($name)){
       trigger_error("The given principal name is not of type string or it is empty.");
+      return($ret);
+    }
+
+    /* Check if the given server is a valid mac address
+     */
+    if(!tests::is_mac($server)){
+      trigger_error("The given server address '".$server."' is invalid, it must be a valid mac address");
       return($ret);
     }
 
@@ -1266,7 +1280,7 @@ class gosaSupportDaemon
       @pram   String The name of the principal to update. (e.g. peter@EXAMPLE.DE)
       @return Boolean   TRUE on success else FALSE. 
    */
-  public function krb5_set_principal($name,$values)
+  public function krb5_set_principal($server,$name,$values)
   {
     $ret = FALSE;  
 
@@ -1278,6 +1292,13 @@ class gosaSupportDaemon
     }
     if(!is_array($values) || !count($values)){
       trigger_error("No valid update settings given. The parameter must be of type array and must contain at least one entry");
+      return($ret);
+    }
+
+    /* Check if the given server is a valid mac address
+     */
+    if(!tests::is_mac($server)){
+      trigger_error("The given server address '".$server."' is invalid, it must be a valid mac address");
       return($ret);
     }
 
@@ -1301,7 +1322,7 @@ class gosaSupportDaemon
       "<target>GOSA</target>".
       "</xml>";
 
-    return($this->_send($xml_msg,TRUE));
+    return($this->_send($xml_msg,TRUE) == TRUE && !$this->is_error());
   }
 
 
@@ -1310,7 +1331,7 @@ class gosaSupportDaemon
       @pram   String The name of the principal. (e.g. peter@EXAMPLE.DE)
       @return Boollean   TRUE on success else FALSE
    */
-  public function krb5_del_principal($name)
+  public function krb5_del_principal($server,$name)
   {
     $ret = FALSE;  
 
@@ -1318,6 +1339,13 @@ class gosaSupportDaemon
      */
     if(!is_string($name) || empty($name)){
       trigger_error("The given principal name is not of type string or it is empty.");
+      return($ret);
+    }
+
+    /* Check if the given server is a valid mac address
+     */
+    if(!tests::is_mac($server)){
+      trigger_error("The given server address '".$server."' is invalid, it must be a valid mac address");
       return($ret);
     }
 
@@ -1330,9 +1358,8 @@ class gosaSupportDaemon
       "<source>GOSA</source>".
       "<target>GOSA</target>".
       "</xml>";
-
     
-    return($this->_send($xml_msg,TRUE));
+    return($this->_send($xml_msg,TRUE) == TRUE && !$this->is_error());
   }
 
 
@@ -1343,6 +1370,13 @@ class gosaSupportDaemon
   public function krb5_list_policies($server)
   {
     $res = array();  
+
+    /* Check if the given server is a valid mac address
+     */
+    if(!tests::is_mac($server)){
+      trigger_error("The given server address '".$server."' is invalid, it must be a valid mac address");
+      return($ret);
+    }
 
     /* Prepare request event 
      */ 
@@ -1538,9 +1572,16 @@ class gosaSupportDaemon
               (Uses the GOsa support daemon instead of the ldap database.)
       @return Boolean  TRUE on success else FALSE
    */
-  public function krb5_del_policy($name)
+  public function krb5_del_policy($server,$name)
   {
     $ret = FALSE;
+
+    /* Check if the given server is a valid mac address
+     */
+    if(!tests::is_mac($server)){
+      trigger_error("The given server address '".$server."' is invalid, it must be a valid mac address");
+      return($ret);
+    }
 
     /* Check if the given name is a valid request value 
      */
