@@ -1233,7 +1233,12 @@ class gosaSupportDaemon
       "<target>".$server."</target>".
       "</xml>";
     
-    return($this->_send($xml_msg,TRUE));
+    $tmp = $this->_send($xml_msg,TRUE);
+    if(isset($tmp['XML']['PRINCIPAL'])){
+      return($tmp['XML']['PRINCIPAL']);
+    }else{
+      return($res);
+    }
   }
 
 
