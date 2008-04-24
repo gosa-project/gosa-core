@@ -346,14 +346,13 @@ class config  {
 
   function encode_server_url($url, $base, $val)
   {
-    return (preg_replace("/_+/", "_", "HTTP_".strtr(strtoupper($url."_".md5($base)."_$val"), "-:/", "___")));
+    return (preg_replace("/_+/", "_", "HTTP_".strtr(strtoupper($url."_".md5($base)."_$val"), ".-:/", "____")));
   }
 
 
   function get_admin_dn()
   {
     $enc= $this->encode_server_url($this->current['SERVER'], $this->current['BASE'], "ADMIN");
-
     /* Answer from http request */
     if (isset($_SERVER[$enc])){
       return $_SERVER[$enc];
