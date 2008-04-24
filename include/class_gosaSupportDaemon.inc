@@ -1406,8 +1406,9 @@ class gosaSupportDaemon
 
     /* Possible attributes */
     $attrs = array("MASK","POLICY","PW_HISTORY_NUM","PW_MAX_LIFE",
-        "PW_MIN_CLASSES","PW_MIN_LENGTH","PW_MIN_LIFE","REF_COUNT");
+        "PW_MIN_CLASSES","PW_MIN_LENGTH","PW_MIN_LIFE","POLICY_REFCNT");
 
+  
     $tmp = $this->_send($xml_msg,TRUE);
     if(isset($tmp['XML'])){
       foreach($attrs as $attr){
@@ -1422,13 +1423,14 @@ class gosaSupportDaemon
   }
 
   
-  /*! \brief  Creates/Updates a given policy with a set of configuration settings.
+  /*! \brief  Creates a new policy with a given set of configuration settings.
               For a list of configurable attributes have a look at 'krb5_get_policy()'.
               (Uses the GOsa support daemon instead of the ldap database.)
       @pram   String The name of the policy to update.
+      @pram   Array  The attributes to update
       @return Boolean   TRUE on success else FALSE. 
    */
-  public function krb5_set_policy($name,$values)
+  public function krb5_add_policy($server,$name,$values)
   {
     $ret = FALSE;  
 
@@ -1443,29 +1445,92 @@ class gosaSupportDaemon
       return($ret);
     }
 
+    /* Check if the given server is a valid mac address
+     */
+    if(!tests::is_mac($server)){
+      trigger_error("The given server address '".$server."' is invalid, it must be a valid mac address");
+      return($ret);
+    }
+
+
     /* Transform array into <xml>
      */
     $attrs = "";
-    foreach($values as $name => $value){
-      if(empty($name) || is_numeric($name)){
-        trigger_error("Invalid policy configuration attribute given '".$name."=".$value."'.");
+    foreach($values as $id => $value){
+      if(empty($id) || is_numeric($id)){
+        trigger_error("Invalid policy configuration attribute given '".$id."=".$value."'.");
         return($ret);
       }
-      $attrs = "<$name>$value</$name>\n";
+      $attrs.= "<$id>$value</$id>\n";
     }
 
     /* Prepare request event 
      */ 
     $xml_msg = 
       "<xml>".
-      "<header>gosa_krb5_set_policy</header>".
+      "<header>gosa_krb5_create_policy</header>".
       "<policy>".$name."</policy>".
       $attrs.
       "<source>GOSA</source>".
-      "<target>GOSA</target>".
+      "<target>".$server."</target>".
       "</xml>";
 
-    return($this->_send($xml_msg,TRUE));
+    return($this->_send($xml_msg,TRUE) == TRUE && !$this->is_error());
+  }
+
+
+  /*! \brief  Updates a given policy with a set of configuration settings.
+              For a list of configurable attributes have a look at 'krb5_get_policy()'.
+              (Uses the GOsa support daemon instead of the ldap database.)
+      @pram   String The name of the policy to update.
+      @return Boolean   TRUE on success else FALSE. 
+   */
+  public function krb5_set_policy($server,$name,$values)
+  {
+    $ret = FALSE;  
+
+    /* Check if the given name is a valid request value 
+     */
+    if(!is_string($name) || empty($name)){
+      trigger_error("The given policy name is not of type string or it is empty.");
+      return($ret);
+    }
+    if(!is_array($values) || !count($values)){
+      trigger_error("No valid policy settings given. The parameter must be of type array and must contain at least one entry");
+      return($ret);
+    }
+
+    /* Check if the given server is a valid mac address
+     */
+    if(!tests::is_mac($server)){
+      trigger_error("The given server address '".$server."' is invalid, it must be a valid mac address");
+      return($ret);
+    }
+
+    /* Transform array into <xml>
+     */
+    $attrs = "";
+    foreach($values as $id => $value){
+      if(preg_match("/^policy$/i",$id)) continue;
+      if(empty($id) || is_numeric($id)){
+        trigger_error("Invalid policy configuration attribute given '".$id."=".$value."'.");
+        return($ret);
+      }
+      $attrs.= "<$id>$value</$id>\n";
+    }
+
+    /* Prepare request event 
+     */ 
+    $xml_msg = 
+      "<xml>".
+      "<header>gosa_krb5_modify_policy</header>".
+      "<policy>".$name."</policy>".
+      $attrs.
+      "<source>GOSA</source>".
+      "<target>".$server."</target>".
+      "</xml>";
+
+    return($this->_send($xml_msg,TRUE) == TRUE && !$this->is_error());
   }
 
   
@@ -1493,7 +1558,7 @@ class gosaSupportDaemon
       "<source>GOSA</source>".
       "<target>GOSA</target>".
       "</xml>";
-    return($this->_send($xml_msg,TRUE));
+    return($this->_send($xml_msg,TRUE) == TRUE && !$this->is_error());
   }
 
 }
