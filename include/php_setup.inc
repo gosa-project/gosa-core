@@ -66,12 +66,16 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
 
     /* Mailto body header */
     if(function_exists("prepare4mailbody")){
+      $version= "unknown";
+      if(function_exists("get_gosa_version")){
+	      $version= get_gosa-version();
+      }
       $error_collector_mailto .=prepare4mailbody(
                                 "Oups. Seems like you've catched some kind of bug inside GOsa/PHP. You may want to help ".
                                 "us to improve the software stability. If so, please provide some more information below.".
                                 "\n\n".
                                 "*** GOsa bug report ***".
-                                "\nGOsa Version: ".get_gosa_version().
+                                "\nGOsa Version: $version".
                                 "\n\n".
                                 "Please describe what you did to produce this error as detailed as possible. Can you ".
                                 "reproduce this bug using the demo on http://www.gosa-project.org ?".
