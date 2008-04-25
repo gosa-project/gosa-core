@@ -68,7 +68,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
     if(function_exists("prepare4mailbody")){
       $version= "unknown";
       if(function_exists("get_gosa_version")){
-	      $version= get_gosa-version();
+	      $version= get_gosa_version();
       }
       $error_collector_mailto .=prepare4mailbody(
                                 "Oups. Seems like you've catched some kind of bug inside GOsa/PHP. You may want to help ".
