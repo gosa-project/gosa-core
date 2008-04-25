@@ -88,7 +88,7 @@ Architecture: all
 Depends: smarty
 Suggests: gosa
 Description: Provide ACL based rendering for Smarty
- smarty-render provides acl based rendering support for Smarty,
+ smarty-acl-render provides acl based rendering support for Smarty,
  the popular PHP templating engine (http://smarty.php.net/). This
  module is mainly used by GOsa.
  .
