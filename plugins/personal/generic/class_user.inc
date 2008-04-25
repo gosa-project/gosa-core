@@ -186,7 +186,9 @@ class user extends plugin
       	$matches= array();
         if (preg_match ("/^{[^}]+}/", $this->attrs['userPassword'][0])){
           $tmp= passwordMethod::get_method($this->attrs['userPassword'][0]);
-          $this->pw_storage= $tmp->get_hash(); 
+          if(is_object($tmp)){
+            $this->pw_storage= $tmp->get_hash(); 
+          }
 
         } else {
           if ($this->attrs['userPassword'][0] != ""){
