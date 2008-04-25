@@ -89,9 +89,11 @@ class ogrouptabs extends tabs
         $this->by_object['workstartup']->remove_from_parent();
         unset($this->by_object['workstartup']);
         unset($this->by_name['workstartup']);
-        $this->by_object['faiSummary']->remove_from_parent();
-        unset($this->by_object['faiSummary']);
-        unset($this->by_name['faiSummary']);
+	if (isset($this->by_object['faiSummary'])){
+	        $this->by_object['faiSummary']->remove_from_parent();
+	        unset($this->by_object['faiSummary']);
+	        unset($this->by_name['faiSummary']);
+	}
       }
     }
   
