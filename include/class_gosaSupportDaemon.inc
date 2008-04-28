@@ -514,7 +514,7 @@ class gosaSupportDaemon
       $entries = $this->xml_to_array($str);
       if(isset($entries['XML']) && is_array($entries['XML'])){
         foreach($entries['XML'] as $entry){
-          if(isset($entry['ID'])){
+          if(is_array($entry) && array_key_exists("ID",$entry)){
             $ret[] = $entry['ID'];
           }
         }
