@@ -12,9 +12,9 @@
 						<select name="goKrbRealm" onChange="document.mainform.submit();">
 						{foreach from=$server_list item=item key=key}
 							{if $item.goKrbRealm==$goKrbRealm}
-							<option selected value="{$item.goKrbRealm}">{$item.goKrbRealm} - {$key}</option>
+							<option selected value="{$item.goKrbRealm}">{$item.goKrbRealm}</option>
 							{else}
-							<option value="{$item.goKrbRealm}">{$item.goKrbRealm} - {$key}</option>
+							<option value="{$item.goKrbRealm}">{$item.goKrbRealm}</option>
 							{/if}
 						{/foreach}
 						</select>
@@ -53,8 +53,7 @@
 					</td>
 				</tr>
 			</table>
-			<br>
-			<br>
+			<p class='seperator'>&nbsp;</p>
 			<table>
 				<tr>
 					<td>
@@ -154,8 +153,7 @@
 					</td>
 				</tr>
 			</table>
-			<br>
-			<br>
+			<p class='seperator'>&nbsp;</p>
 			<h2>{t}Status{/t}</h2>
 			<table>
 				<tr>
@@ -186,7 +184,7 @@
 	
 	
 		</td>	
-		<td style="vertical-align:top;">
+		<td style="vertical-align:top; border-left: solid 1px #BBBBBB; padding-left: 3px;">
 			<h2>Flags</h2>
 			<table width="100%">
 				<tr>
