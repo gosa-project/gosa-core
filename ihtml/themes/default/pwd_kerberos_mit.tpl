@@ -6,9 +6,41 @@
 			<table style="width:100%;">
 				<tr>
 					<td>
+						<label for="goKrbRealm">{t}Realm{/t}</label>
+					</td>
+					<td>
+						<select name="goKrbRealm" onChange="document.mainform.submit();">
+						{foreach from=$server_list item=item key=key}
+							{if $item.goKrbRealm==$goKrbRealm}
+							<option selected value="{$item.goKrbRealm}">{$item.goKrbRealm} - {$key}</option>
+							{else}
+							<option value="{$item.goKrbRealm}">{$item.goKrbRealm} - {$key}</option>
+							{/if}
+						{/foreach}
+						</select>
+					</td>
+				<tr>
+				</tr>
+					<td>
+						<label for="POLICY">{t}POLICY{/t}</label>
+					</td>
+					<td>
+						<select name="POLICY">
+						{foreach from=$POLICIES item=item key=key}
+							{if $POLICY==$item}
+							<option selected value="{$item}">{$item}</option>
+							{else}
+							<option value="{$item}">{$item}</option>
+							{/if}
+						{/foreach}
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
 						<label for="MAX_LIFE">{t}Ticket max life{/t}</label>
 					</td>
-					<td colspan="6">
+					<td>
 						<input id="MAX_LIFE" type="text" name="MAX_LIFE" value="{$MAX_LIFE}"> 
 					</td>
 				</tr>
@@ -16,7 +48,7 @@
 					<td>
 						<label for="MAX_RENEWABLE_LIFE">{t}Ticket max renew{/t}</label>
 					</td>
-					<td colspan="6">
+					<td>
 						<input id="MAX_RENEWABLE_LIFE" type="text" name="MAX_RENEWABLE_LIFE" value="{$MAX_RENEWABLE_LIFE}">
 					</td>
 				</tr>
