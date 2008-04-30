@@ -1,3 +1,20 @@
+
+{if $si_error}
+
+	<h2>{t}Heimdal options{/t}</h2>
+	<p>
+		{msgPool type=siError p1=$si_error_msg}
+	</p>
+	<input type="submit" value="{t}retry{/t}" name="retry_si">
+	<br>
+	<br>
+
+<p class="seperator"></p>
+<p style="text-align:right;">
+	<input type="submit" name="pw_abort" value="{t}Cancel{/t}">
+</p>
+{else}
+
 <table style="width:100%;">
 	<tr>
 		<td style="width:50%;vertical-align:top;">
@@ -226,3 +243,5 @@
 	&nbsp;
 	<input type="submit" name="pw_abort" value="{t}Cancel{/t}">
 </p>
+
+{/if}
