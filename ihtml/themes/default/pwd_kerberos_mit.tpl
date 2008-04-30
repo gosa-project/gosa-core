@@ -22,15 +22,15 @@
 				<tr>
 				</tr>
 					<td>
-						<label for="POLICY">{t}POLICY{/t}</label>
+						<label for="POLICY">{t}Policy{/t}</label>
 					</td>
 					<td>
 						<select name="POLICY">
 						{foreach from=$POLICIES item=item key=key}
 							{if $POLICY==$item}
-							<option selected value="{$item}">{$item}</option>
+							<option selected value="{$key}">{$item}</option>
 							{else}
-							<option value="{$item}">{$item}</option>
+							<option value="{$key}">{$item}</option>
 							{/if}
 						{/foreach}
 						</select>
