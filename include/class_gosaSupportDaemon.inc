@@ -1272,7 +1272,7 @@ class gosaSupportDaemon
       "<header>gosa_krb5_get_principal</header>".
       "<principal>".$name."</principal>".
       "<source>GOSA</source>".
-      "<target>GOSA</target>".
+      "<target>".$server."</target>".
       "</xml>";
 
     return($this->_send($xml_msg,TRUE));
@@ -1324,7 +1324,7 @@ class gosaSupportDaemon
       "<principal>".$name."</principal>".
       $attrs.
       "<source>GOSA</source>".
-      "<target>GOSA</target>".
+      "<target>".$server."</target>".
       "</xml>";
 
     return($this->_send($xml_msg,TRUE) == TRUE && !$this->is_error());
@@ -1361,7 +1361,7 @@ class gosaSupportDaemon
       "<header>gosa_krb5_del_principal</header>".
       "<principal>".$name."</principal>".
       "<source>GOSA</source>".
-      "<target>GOSA</target>".
+      "<target>".$server."</target>".
       "</xml>";
     
     return($this->_send($xml_msg,TRUE) == TRUE && !$this->is_error());
@@ -1602,7 +1602,7 @@ class gosaSupportDaemon
       "<header>gosa_krb5_del_policy</header>".
       "<policy>".$name."</policy>".
       "<source>GOSA</source>".
-      "<target>GOSA</target>".
+      "<target>".$server."</target>".
       "</xml>";
     return($this->_send($xml_msg,TRUE) == TRUE && !$this->is_error());
   }
