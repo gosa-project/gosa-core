@@ -1279,7 +1279,65 @@ class gosaSupportDaemon
   }
 
 
-  /*! \brief  Creates/Updates a given principal with a set of configuration settings.
+  /*! \brief  Creates a given principal with a set of configuration settings.
+              For a list of configurable attributes have a look at 'krb5_get_principal()'.
+              (Uses the GOsa support daemon instead of the ldap database.)
+      @pram   String The name of the principal to update. (e.g. peter@EXAMPLE.DE)
+      @return Boolean   TRUE on success else FALSE. 
+   */
+  public function krb5_add_principal($server,$name,$values)
+  {
+    $ret = FALSE;  
+
+    /* Check if the given name is a valid request value 
+     */
+    if(!is_string($name) || empty($name)){
+      trigger_error("The given principal name is not of type string or it is empty.");
+      return($ret);
+    }
+    if(!is_array($values) || !count($values)){
+      trigger_error("No valid update settings given. The parameter must be of type array and must contain at least one entry");
+      return($ret);
+    }
+
+    /* Check if the given server is a valid mac address
+     */
+    if(!tests::is_mac($server)){
+      trigger_error("The given server address '".$server."' is invalid, it must be a valid mac address");
+      return($ret);
+    }
+
+    $attrs = "";
+    foreach($values as $key => $value){
+      if(empty($key) || is_numeric($key)){
+        trigger_error("Invalid configuration attribute given '".$key."=".$value."'.");
+        return($ret);
+      }
+      if(is_array($value)){
+        foreach($value as $val){
+          $attrs.= "<$key>$val</$key>\n";
+        }
+      }else{
+        $attrs.= "<$key>$value</$key>\n";
+      }
+    }
+
+    /* Prepare request event 
+     */ 
+    $xml_msg = 
+      "<xml>".
+      "<header>gosa_krb5_create_principal</header>".
+      "<principal>".$name."</principal>".
+      $attrs.
+      "<source>GOSA</source>".
+      "<target>".$server."</target>".
+      "</xml>";
+
+    return($this->_send($xml_msg,TRUE) == TRUE && !$this->is_error());
+  }
+
+
+  /*! \brief  Updates a given principal with a set of configuration settings.
               For a list of configurable attributes have a look at 'krb5_get_principal()'.
               (Uses the GOsa support daemon instead of the ldap database.)
       @pram   String The name of the principal to update. (e.g. peter@EXAMPLE.DE)
@@ -1308,12 +1366,18 @@ class gosaSupportDaemon
     }
 
     $attrs = "";
-    foreach($values as $name => $value){
-      if(empty($name) || is_numeric($name)){
-        trigger_error("Invalid configuration attribute given '".$name."=".$value."'.");
+    foreach($values as $key => $value){
+      if(empty($key) || is_numeric($key)){
+        trigger_error("Invalid configuration attribute given '".$key."=".$value."'.");
         return($ret);
       }
-      $attrs = "<$name>$value</$name>\n";
+      if(is_array($value)){
+        foreach($value as $val){
+          $attrs.= "<$key>$val</$key>\n";
+        }
+      }else{
+        $attrs.= "<$key>$value</$key>\n";
+      }
     }
 
     /* Prepare request event 
