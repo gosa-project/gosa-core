@@ -200,7 +200,7 @@ if (isset($_GET['plug'])){
 }
 
 /* Check if we need to delete a lock */
-if ($old_plugin_dir != $plugin_dir){
+if ($old_plugin_dir != $plugin_dir && $old_plugin_dir != ""){
   if (is_file("$old_plugin_dir/main.inc")){
     $remove_lock= true;
     require_once ("$old_plugin_dir/main.inc");
