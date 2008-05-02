@@ -152,7 +152,7 @@ class divListDepartment extends MultiSelectWindow
 
     /* Append create options */
     if(preg_match("/c/",$acl)) {
-      $s.= "...|<input class='center' type='image' src='images/list_new_department' alt=''>".
+      $s.= "...|<input class='center' type='image' src='plugins/departments/images/department.png' alt=''>".
         "&nbsp;"._("Department")."|dep_new|\n";
     }
     $s.= "..|---|\n";
