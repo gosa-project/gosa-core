@@ -1,4 +1,5 @@
 update-gosa			/usr/sbin
+bin/gosa-encrypt-passwords	/usr/sbin
 html				/usr/share/gosa
 ihtml				/usr/share/gosa
 include				/usr/share/gosa
