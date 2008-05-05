@@ -37,53 +37,46 @@ class passwordMethod
   }
 
 
-  // Loads Methods in annother way as  get_available_methods do, (For setup ..)
-  // and loads them,.
-  #FIXME: This stopped working after moving around pw-methods
-  function get_available_methods_if_not_loaded($path_to_load="../include")
-  {
-    $oh = opendir($path_to_load);
-    $i = 0; 
-    $ret = false;
-    while ($file = readdir($oh)) {
-      $one = strtolower($file); 
-      if((strstr($one,"class_password-methods-" ))&&($one[0]!=".")){
-        require_once($file);
-      }
-    }
-    return(passwordMethod::get_available_methods());
-  }
-
-
   // this function returns all loaded classes for password encryption
   static function get_available_methods()
   {
     global $class_mapping, $config;
     $ret =false;
     $i =0;
-    foreach($class_mapping as $class => $path) {
-      if(preg_match('/passwordMethod/i', $class) && !preg_match("/^passwordMethod$/i", $class)){
-        $name = preg_replace ("/passwordMethod/i", "", $class);
-        $test = new $class($config, "");
-        if($test->is_available()) {
-          $plugs= $test->get_hash_name();
-          if (!is_array($plugs)){
-            $plugs= array($plugs);
-          }
 
-          foreach ($plugs as $plugname){
-            $ret['name'][$i]= $plugname;
-            $ret['class'][$i]=$class;
-            $ret[$i]['name']= $plugname;
-            $ret[$i]['class']= $class;
-            $ret[$plugname]=$class;                    
-            $i++;
+    /* Only */
+    if(!session::is_set("passwordMethod::get_available_methods")){
+      foreach($class_mapping as $class => $path) {
+        if(preg_match('/passwordMethod/i', $class) && !preg_match("/^passwordMethod$/i", $class)){
+          $name = preg_replace ("/passwordMethod/i", "", $class);
+          $test = new $class($config, "");
+          if($test->is_available()) {
+            $plugs= $test->get_hash_name();
+            if (!is_array($plugs)){
+              $plugs= array($plugs);
+            }
+
+            foreach ($plugs as $plugname){
+
+              $cfg = $test->is_configurable();
+
+              $ret['name'][$i]= $plugname;
+              $ret['class'][$i]=$class;
+              $ret['is_configurable'][$i]= $cfg;
+              $ret['object'][$i]= $test;
+              $ret[$i]['name']  = $plugname;
+              $ret[$i]['class'] = $class;
+              $ret[$i]['object']= $test;
+              $ret[$i]['is_configurable']= $cfg;
+              $ret[$plugname]=$class;                    
+              $i++;
+            }
           }
         }
       }
+      session::set("passwordMethod::get_available_methods",$ret);
     }
-
-    return($ret);
+    return(session::get("passwordMethod::get_available_methods"));
   }
   
 
