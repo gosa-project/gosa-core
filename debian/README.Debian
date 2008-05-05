@@ -18,8 +18,14 @@ web applications (well, this is the rule for allmost every web application
 that stores information somewhere around) to read the gosa.conf file, which
 may contain vital information about your LDAP service.
 
-To make it harder to extract these passwords, they get passed by request
-headers by default.
+To make it harder to extract these passwords, they get encrypted by a
+master password only readable by the GOsa location.
+
+You can simply migrate old existing passwords by typing:
+
+# a2enmod headers
+# gosa-encrypt-passwords
+# /etc/init.d/apache2 reload
 
 If this is not enough for you (exploitable PHP code may make it possible to
 read the webservers memory), you can simply create another webserver instance
