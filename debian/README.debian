@@ -75,6 +75,7 @@ This can be achieved by running:
 
 # a2enmod headers
 # gosa-encrypt-passwords
+# /etc/init.d/apache2 reload
 
 ----
 Cajus Pollmeier <cajus@debian.org>  Fri 02 Jun 2006 16:23:50 +0200
