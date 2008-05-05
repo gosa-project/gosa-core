@@ -36,7 +36,7 @@ install-stamp:
 	for i in `ls | grep -v debian`; do \
 	  cp -R $$i debian/gosa/usr/share/gosa ; \
 	done
-	-find debian/gosa -type d -name ".svn" -exec rm -rf {} \; &> /dev/null || /bin/true
+	-find debian/gosa -type d -name ".svn" -exec rm -rf {} \; >/dev/null 2>&1
 	-cp -R debian/gosa/usr/share/gosa/contrib/* debian/gosa/usr/share/doc/gosa/contrib/
 	-cp debian/gosa/usr/share/gosa/contrib/openldap/go*.schema debian/gosa-schema/etc/ldap/schema
 	-cp -R INSTALL debian/gosa/usr/share/doc/gosa/README.INSTALL
