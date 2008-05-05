@@ -214,13 +214,23 @@ class config  {
     $this->level--;
   }
 
+
+  function get_credentials($creds)
+  {
+    if (isset($_SERVER['HTTP_GOSA_KEY'])){
+      return (cred_decrypt($creds, $_SERVER['HTTP_GOSA_KEY']));
+    }
+    return ($creds);
+  }
+
+
   function get_ldap_link($sizelimit= FALSE)
   {
     if($this->ldap === NULL || !is_resource($this->ldap->cid)){
 
       /* Build new connection */
       $this->ldap= ldap_init ($this->current['SERVER'], $this->current['BASE'],
-          $this->get_admin_dn(), $this->get_admin_password());
+          $this->current['ADMIN'], $this->get_credentials($this->current['PASSWORD']));
 
       /* Check for connection */
       if (is_null($this->ldap) || (is_int($this->ldap) && $this->ldap == 0)){
@@ -321,13 +331,6 @@ class config  {
     /* Convert BASE to have escaped special characters */
     $this->current['BASE']= @LDAP::convert($this->current['BASE']);
 
-    /* Load server informations */
-    $this->load_servers();
-  }
-
-
-  function update_credentials_from_config()
-  {
     /* Parse LDAP referral informations */
     if (!isset($this->current['ADMIN']) || !isset($this->current['PASSWORD'])){
       $url= $this->current['SERVER'];
@@ -336,48 +339,9 @@ class config  {
       $this->current['PASSWORD']= $referral['PASSWORD'];
     }
 
-    /* Bail out if problematic */
-    if (!isset($this->current['ADMIN']) || !isset($this->current['PASSWORD'])){
-      msg_dialog::display(_("Configuration error"), _("Cannot find any administrative LDAP credentials!"), FATAL_ERROR_DIALOG);
-      exit;
-    }
+    /* Load server informations */
+    $this->load_servers();
   }
-
-
-  function encode_server_url($url, $base, $val)
-  {
-    return (preg_replace("/_+/", "_", "HTTP_".strtr(strtoupper($url."_".md5($base)."_$val"), ".-:/", "____")));
-  }
-
-
-  function get_admin_dn()
-  {
-    $enc= $this->encode_server_url($this->current['SERVER'], $this->current['BASE'], "ADMIN");
-    /* Answer from http request */
-    if (isset($_SERVER[$enc])){
-      return $_SERVER[$enc];
-    }
-
-    /* Answer in old style for compatibility */
-    $this->update_credentials_from_config();
-    return $this->current['ADMIN'];
-  }
-
-
-  function get_admin_password()
-  {
-    $enc= $this->encode_server_url($this->current['SERVER'], $this->current['BASE'], "PASSWORD");
-
-    /* Answer from http request */
-    if (isset($_SERVER[$enc])){
-      return $_SERVER[$enc];
-    }
-
-    /* Answer in old style for compatibility */
-    $this->update_credentials_from_config();
-    return $this->current['PASSWORD'];
-  }
-
 
   function load_servers ()
   {
@@ -424,7 +388,8 @@ class config  {
     if ($ldap->count()){
       $attrs= $ldap->fetch();
       $this->data['SERVERS']['KERBEROS']= array( 'SERVER' => $attrs['cn'][0],
-          'REALM' => $attrs['goKrbRealm'][0]);
+          'REALM' => $attrs['goKrbRealm'][0],
+          'ADMIN' => $attrs['goKrbAdmin'][0]);
     }
 
     /* Get cups server. FIXME: only one is supported currently */
