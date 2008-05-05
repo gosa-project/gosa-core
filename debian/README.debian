@@ -70,6 +70,11 @@ an important LDAP password as the www-data user. If you allow other
 people to have i.e. public html directories, they will be able to read
 this configuration as well - if you don't take steps against it.
 
+As a simple solution, you can pass a master password via request headers.
+This can be achieved by running:
+
+# a2enmod headers
+# gosa-encrypt-passwords
 
 ----
 Cajus Pollmeier <cajus@debian.org>  Fri 02 Jun 2006 16:23:50 +0200

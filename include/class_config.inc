@@ -179,16 +179,21 @@ class config  {
     $this->level--;
   }
 
+
+  function get_credentials($creds)
+  {
+    if (isset($_SERVER['HTTP_GOSA_KEY'])){
+      return (cred_decrypt($creds, $_SERVER['HTTP_GOSA_KEY']));
+    }
+    return ($creds);
+  }
+
+
   function get_ldap_link($sizelimit= FALSE)
   {
-# Reuse same handle ldap handle.
-# Disabled due to unpredictable results
-#
-#    if($this->ldap === NULL || !is_resource($this->ldap->cid)){
-#
       /* Build new connection */
       $this->ldap= ldap_init ($this->current['SERVER'], $this->current['BASE'],
-          $this->current['ADMIN'], $this->current['PASSWORD']);
+          $this->current['ADMIN'], $this->get_credentials($this->current['PASSWORD']));
 
       /* Check for connection */
       if (is_null($this->ldap) || (is_int($this->ldap) && $this->ldap == 0)){
