@@ -264,6 +264,11 @@ class pluglist {
 					$vars= get_class_vars($info['CLASS']);
 					$plHeadline= $vars['plHeadline'];
 					$plDescription= $vars['plDescription'];
+          if (isset($vars['plIcon'])){
+  					$plIcon= $vars['plIcon'];
+          } else {
+  					$plIcon= "plugin.png";
+          }
 
 					$index= $this->get_index($info['CLASS']);
 
@@ -284,7 +289,7 @@ class pluglist {
 						if (isset($info['ICON'])){
 							$image= get_template_path('images/'.$info['ICON']);
 						} else {
-					  		$image= get_template_path("plugins/".preg_replace('%^.*/([^/]+)/[^/]+$%', '\1', $class_mapping[$info['CLASS']])."/images/plugin.png");
+					  		$image= get_template_path("plugins/".preg_replace('%^.*/([^/]+)/[^/]+$%', '\1', $class_mapping[$info['CLASS']])."/images/$plIcon");
 						}
 						if ($col > 5){
 							$entries= $entries."</tr><tr>";
