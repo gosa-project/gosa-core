@@ -1671,6 +1671,77 @@ class gosaSupportDaemon
     return($this->_send($xml_msg,TRUE) == TRUE && !$this->is_error());
   }
 
+
+  /*! \brief  Returns log file informations for a given mac address 
+      @param  $mac The mac address to fetch logs for.
+      @retrun Array A Multidimensional array containing log infos.
+        MAC_00_01_6C_9D_B9_FA['install_20080311_090900'][0]=debconf.log
+        MAC_00_01_6C_9D_B9_FA['install_20080311_090900'][1]=syslog.log
+                               install_20080313_144450   ...
+   */
+  public function get_log_info_for_mac($mac)
+  {
+    $xml_msg = "
+      <xml>
+      <header>gosa_show_log_by_mac</header>
+      <target>GOSA</target>
+      <source>GOSA</source>
+      <mac>".$mac."</mac>
+      </xml>";
+
+    $res = $this->_send($xml_msg,TRUE);
+    $ret = array();
+    if(isset($res['XML'])){
+
+      /* Filter all entry that look like this 
+          MAC_00_01_6C_9D_B9_FA
+       */
+      foreach($res['XML'] as $name => $entry){
+        if(preg_match("/^MAC/",$name)){
+
+          /* Get list of available log files 
+           */
+          foreach($entry as $log_date){
+            $xml_msg2 = "<xml> 
+              <header>gosa_show_log_files_by_date_and_mac</header> 
+              <target>GOSA</target> 
+              <source>GOSA</source>                        
+              <date>".$log_date."</date> 
+              <mac>".$mac."</mac> 
+              </xml>";
+
+            $ret[$mac][$log_date] = array();
+            $res = $this->_send($xml_msg2,TRUE);
+            $ret[$mac][$log_date]['DATE_STR']  = $log_date; 
+            $ret[$mac][$log_date]['REAL_DATE'] = strtotime(preg_replace("/[^0-9]*/","",$log_date));
+            if(isset($res['XML']['SHOW_LOG_FILES_BY_DATE_AND_MAC'])){
+              $ret[$mac][$log_date]['FILES']     = $res['XML']['SHOW_LOG_FILES_BY_DATE_AND_MAC'];
+            }
+          }
+        }
+      }
+    }
+    return($ret);
+  }
+
+  public function get_log_file($mac,$date,$file)
+  {
+    $xml_msg ="
+      <xml> 
+      <header>gosa_get_log_file_by_date_and_mac</header> 
+      <target>GOSA</target> 
+      <source>GOSA</source>
+      <date>".$date."</date> 
+      <mac>".$mac."</mac> 
+      <log_file>".$file."</log_file>
+      </xml>";
+
+    $res = $this->_send($xml_msg,TRUE);
+    if(isset($res['XML'][strtoupper($file)])){
+      return(base64_decode($res['XML'][strtoupper($file)]));
+    }
+    return("");
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
