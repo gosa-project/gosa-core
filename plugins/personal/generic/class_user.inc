@@ -124,13 +124,16 @@ class user extends plugin
 
   var $multiple_support = TRUE;
 
+  var $governmentmode = FALSE;
+
   /* constructor, if 'dn' is set, the node loads the given
      'dn' from LDAP */
   function user (&$config, $dn= NULL)
   {
     $this->config= $config;
     /* Configuration is fine, allways */
-    if ($this->config->current['GOVERNMENTMODE']){
+    if (isset($this->config->current['GOVERNMENTMODE']) && preg_match("/true/i",$this->config->current['GOVERNMENTMODE'])){
+      $this->governmentmode = TRUE;
       $this->attributes=array_merge($this->attributes,$this->govattrs);
     }
 
@@ -140,7 +143,7 @@ class user extends plugin
     $this->orig_dn  = $this->dn;
     $this->new_dn   = $dn;
 
-    if ($this->config->current['GOVERNMENTMODE']){
+    if ($this->governmentmode){
       /* Fix public visible attribute if unset */
       if (!isset($this->attrs['publicVisible'])){
         $this->publicVisible == "nein";
@@ -148,7 +151,7 @@ class user extends plugin
     }
 
     /* Load government mode attributes */
-    if ($this->config->current['GOVERNMENTMODE']){
+    if ($this->governmentmode){
       /* Copy all attributs */
       foreach ($this->govattrs as $val){
         if (isset($this->attrs["$val"][0])){
@@ -565,9 +568,8 @@ class user extends plugin
           $smarty->assign($cert."_state","");
         }
       }
-      $this->config->current['GOVERNMENTMODE'] = "true";
-      if (isset($this->config->current['GOVERNMENTMODE']) &&
-          preg_match('/true/i', $this->config->current['GOVERNMENTMODE'])){
+  
+      if($this->governmentmode){
         $smarty->assign("governmentmode", "true");
       }else{
         $smarty->assign("governmentmode", "false");
@@ -628,8 +630,7 @@ class user extends plugin
     $smarty->assign("bases", $tmp);
 
     /* Save government mode attributes */
-    if (isset($this->config->current['GOVERNMENTMODE']) &&
-        preg_match('/true/i', $this->config->current['GOVERNMENTMODE'])){
+    if($this->governmentmode){
       $smarty->assign("governmentmode", "true");
       $ivbbmodes= array("nein", "ivbv", "testa", "ivbv,testa", "internet",
           "internet,ivbv", "internet,testa", "internet,ivbv,testa");
@@ -741,7 +742,7 @@ class user extends plugin
       plugin::save_object ();
 
       /* Save government mode attributes */
-      if ($this->config->current['GOVERNMENTMODE']){
+      if ($this->governmentmode){
         foreach ($this->govattrs as $val){
           if ($this->acl_is_writeable($val,(!is_object($this->parent) && !session::is_set('edit'))) && isset($_POST["$val"])){
             $data= stripcslashes($_POST["$val"]);
@@ -852,7 +853,7 @@ class user extends plugin
     }
 
     /* Hard coded government mode? */
-    if ($this->config->current['GOVERNMENTMODE'] != 'false'){
+    if ($this->governmentmode){
       $this->attrs['objectClass'][]= "ivbbentry";
 
       /* Copy standard attributes */
@@ -1313,7 +1314,7 @@ class user extends plugin
     /* Get base */
     $this->base= preg_replace('/^[^,]+,'.get_people_ou().'/i', '', $dn);
 
-    if ($this->config->current['GOVERNMENTMODE']){
+    if($this->governmentmode){
 
       /* Walk through govattrs */
       foreach ($this->govattrs as $val){
