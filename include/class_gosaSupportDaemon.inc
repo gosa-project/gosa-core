@@ -129,8 +129,16 @@ class gosaSupportDaemon
   public function get_error()
   {
     $str = $this->s_error;
-    $str = preg_replace("/ /","&nbsp;",$str);
-    return($str);
+    $ret = "";
+    if(is_string($str)){
+      $ret = $str;
+    }else{
+      foreach($str as $msg){
+        $ret .= $msg." ";
+      }
+    }
+    $ret = preg_replace("/ /","&nbsp;",$ret);
+    return($ret);
   }
 
 
