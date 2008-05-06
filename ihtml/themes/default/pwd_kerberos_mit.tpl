@@ -183,19 +183,19 @@
 				</tr>
 				<tr>
 					<td>{t}Last failed login{/t}</td>
-					<td>{if !$LAST_FAILED} {t}none{/t} {else} {$LAST_FAILED} {/if}</td>
+					<td>{if !$LAST_FAILED} {t}none{/t} {else} {$LAST_FAILED|date_format:"%d.%m.%Y %H:%m:%S"} {/if}</td>
 				</tr>
 				<tr>
 					<td>{t}Last password change{/t}</td>
-					<td>{if !$LAST_PWD_CHANGE} {t}none{/t} {else} {$LAST_PWD_CHANGE} {/if}</td>
+					<td>{if !$LAST_PWD_CHANGE} {t}none{/t} {else} {$LAST_PWD_CHANGE|date_format:"%d.%m.%Y %H:%m:%S"} {/if}</td>
 				</tr>
 				<tr>
 					<td>{t}Last successful login{/t}</td>
-					<td>{if !$LAST_SUCCESS} {t}none{/t} {else} {$LAST_SUCCESS} {/if}</td>
+					<td>{if !$LAST_SUCCESS} {t}none{/t} {else} {$LAST_SUCCESS|date_format:"%d.%m.%Y %H:%m:%S"} {/if}</td>
 				</tr>
 				<tr>
 					<td>{t}Last modification date{/t}</td>
-					<td>{if !$MOD_DATE} {t}none{/t} {else} {$MOD_DATE} {/if}</td>
+					<td>{if !$MOD_DATE} {t}none{/t} {else} {$MOD_DATE|date_format:"%d.%m.%Y %H:%m:%S"} {/if}</td>
 				</tr>
 			</table>
 	

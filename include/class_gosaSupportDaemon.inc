@@ -1376,6 +1376,7 @@ class gosaSupportDaemon
         trigger_error("Invalid configuration attribute given '".$key."=".$value."'.");
         return($ret);
       }
+      $key = strtolower($key);
       if(is_array($value)){
         foreach($value as $val){
           $attrs.= "<$key>$val</$key>\n";
