@@ -1275,7 +1275,12 @@ class gosaSupportDaemon
       "<target>".$server."</target>".
       "</xml>";
 
-    return($this->_send($xml_msg,TRUE));
+    $res = $this->_send($xml_msg,TRUE);
+    if(isset($res['XML'])){
+      return($res['XML']);
+    }else{
+      return($ret);
+    }
   }
 
 
@@ -1384,7 +1389,7 @@ class gosaSupportDaemon
      */ 
     $xml_msg = 
       "<xml>".
-      "<header>gosa_krb5_set_principal</header>".
+      "<header>gosa_krb5_modify_principal</header>".
       "<principal>".$name."</principal>".
       $attrs.
       "<source>GOSA</source>".
