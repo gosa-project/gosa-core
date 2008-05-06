@@ -869,6 +869,7 @@ class gosaSupportDaemon
 
     $attr = "";
     foreach($data as $key => $value){
+      $key = strtolower($key);
       if(is_array($value)){
         foreach($value as $sub_value){
           $attr.= "<$key>".strtolower($sub_value)."</$key>\n";
@@ -1318,6 +1319,7 @@ class gosaSupportDaemon
         trigger_error("Invalid configuration attribute given '".$key."=".$value."'.");
         return($ret);
       }
+      $key = strtolower($key);
       if(is_array($value)){
         foreach($value as $val){
           $attrs.= "<$key>$val</$key>\n";
@@ -1570,6 +1572,7 @@ class gosaSupportDaemon
         trigger_error("Invalid policy configuration attribute given '".$id."=".$value."'.");
         return($ret);
       }
+      $id = strtolower($id);
       $attrs.= "<$id>$value</$id>\n";
     }
 
@@ -1625,6 +1628,7 @@ class gosaSupportDaemon
         trigger_error("Invalid policy configuration attribute given '".$id."=".$value."'.");
         return($ret);
       }
+      $id = strtolower($id);
       $attrs.= "<$id>$value</$id>\n";
     }
 
