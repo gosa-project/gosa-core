@@ -2458,9 +2458,9 @@ function change_password ($dn, $password, $mode=0, $hash= "")
 
     /* Extract used hash */
     if ($hash == ""){
-      $test = passwordMethod::get_method($attrs['userPassword'][0]);
+      $test = passwordMethod::get_method($attrs['userPassword'][0],$dn);
     } else {
-      $test = new $available[$hash]($config);
+      $test = new $available[$hash]($config,$dn);
       $test->set_hash($hash);
     }
 

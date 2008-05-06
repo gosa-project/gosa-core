@@ -115,7 +115,7 @@ class passwordMethod
 
 
   // Try to find out if it's our hash...
-  static function get_method($password_hash)
+  static function get_method($password_hash,$dn)
   {
     global $config;
 
@@ -123,7 +123,7 @@ class passwordMethod
 
     foreach ($methods['class'] as $class){
 
-        $test = new $class($config);
+        $test = new $class($config,$dn);
         if(!$test->is_available())continue;
         $method= $test->_extract_method($password_hash);
         if ($method != ""){

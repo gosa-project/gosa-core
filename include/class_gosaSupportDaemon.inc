@@ -1677,6 +1677,45 @@ class gosaSupportDaemon
   }
 
 
+  /*! \brief  Sets the password of for the given principal.
+              (Uses the GOsa support daemon instead of the ldap database.)
+      @param  String  The servers mac
+      @param  String  The principals name
+      @param  String  $the new password.   
+      @return Boolean  TRUE on success else FALSE
+   */
+  public function krb5_set_password($server,$name,$password)
+  {
+    $ret = FALSE;
+
+    /* Check if the given server is a valid mac address
+     */
+    if(!tests::is_mac($server)){
+      trigger_error("The given server address '".$server."' is invalid, it must be a valid mac address");
+      return($ret);
+    }
+
+    /* Check if the given name is a valid request value
+     */
+    if(!is_string($name) || empty($name)){
+      trigger_error("The given principal name is not of type string or it is empty.");
+      return($ret);
+    }
+
+    /* Prepare request event
+     */
+    $xml_msg =
+      "<xml>".
+      "<header>gosa_krb5_set_password</header>".
+      "<principal>".$name."</principal>".
+      "<password>".$password."</password>".
+      "<source>GOSA</source>".
+      "<target>".$server."</target>".
+      "</xml>";
+    return($this->_send($xml_msg,TRUE) == TRUE && !$this->is_error());
+  }
+
+
   /*! \brief  Returns log file informations for a given mac address 
       @param  $mac The mac address to fetch logs for.
       @retrun Array A Multidimensional array containing log infos.
