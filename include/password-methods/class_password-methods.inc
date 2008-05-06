@@ -115,7 +115,7 @@ class passwordMethod
 
 
   // Try to find out if it's our hash...
-  static function get_method($password_hash,$dn)
+  static function get_method($password_hash,$dn = "")
   {
     global $config;
 
