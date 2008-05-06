@@ -64,10 +64,12 @@ class passwordMethod
               $ret['class'][$i]=$class;
               $ret['is_configurable'][$i]= $cfg;
               $ret['object'][$i]= $test;
+              $ret['desc'][$i] = $test->get_description();
               $ret[$i]['name']  = $plugname;
               $ret[$i]['class'] = $class;
               $ret[$i]['object']= $test;
               $ret[$i]['is_configurable']= $cfg;
+              $ret[$i]['desc'] = $test->get_description();
               $ret[$plugname]=$class;                    
               $i++;
             }
@@ -79,6 +81,12 @@ class passwordMethod
     return(session::get("passwordMethod::get_available_methods"));
   }
   
+
+  function get_description()
+  {
+    return("");
+  }
+
 
   // Method to let password backends remove additional information besides
   // the userPassword attribute
