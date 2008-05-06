@@ -224,7 +224,9 @@
      <td>
 {render acl=$passwordStorageACL checkbox=$multiple_support checked=$use_pw_storage}
 	      <select size="1" id="pw_storage" name="pw_storage" onchange='document.mainform.submit()'>
-	       {html_options values=$pwmode output=$pwmode selected=$pwmode_select}
+			{foreach from=$pwmode key=value item=desc}
+				<option value="{$value}" {if $pwmode_select == $value}selected{/if} >{$desc}</option>
+			{/foreach}
 	      </select>
 	{if $pw_configurable eq "true"}
 	      &nbsp; <input id="edit_pw_method" type="submit" name="edit_pw_method" value="{t}Configure{/t}...">

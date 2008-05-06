@@ -591,7 +591,18 @@ class user extends plugin
     }else{
       new msg_dialog(_("Password method"),_("The selected password method is no longer available."),WARNING_DIALOG);
     }
-    
+
+
+    /* Create password methods array */
+    $pwd_methods = array();
+    foreach($hashes as $id => $name){
+      if(!empty($temp['desc'][$id])){
+        $pwd_methods[$name] = $name." (".$temp['desc'][$id].")";
+      }else{
+        $pwd_methods[$name] = $name;
+      }
+    }
+ 
     /* Load attributes and acl's */
     $ui =get_userinfo();
     foreach($this->attributes as $val){
@@ -616,7 +627,7 @@ class user extends plugin
       $smarty->assign("$val"."ACL", $this->getacl($val,(!is_object($this->parent) && !session::is_set('edit'))));
     }
 
-    $smarty->assign("pwmode", $hashes);
+    $smarty->assign("pwmode", $pwd_methods);
     $smarty->assign("pwmode_select", $this->pw_storage);
     $smarty->assign("pw_configurable", $is_configurable);
     $smarty->assign("passwordStorageACL", $this->getacl("userPassword",(!is_object($this->parent) && !session::is_set('edit'))));
