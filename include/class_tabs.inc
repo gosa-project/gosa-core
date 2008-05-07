@@ -73,7 +73,7 @@ class tabs
 
  
   /*! \brief Reinitializes the tab classes with fresh ldap values.
-             This maybe usefull if for example if the apply button was pressed.
+             This maybe usefull if for example the apply button was pressed.
    */ 
   function re_init()
   {
