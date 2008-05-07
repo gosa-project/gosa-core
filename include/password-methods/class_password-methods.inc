@@ -132,7 +132,8 @@ class passwordMethod
     foreach ($methods['class'] as $class){
 
         $test = new $class($config,$dn);
-        if(!$test->is_available())continue;
+#        All listed methods are available. 
+#        if(!$test->is_available())continue;
         $method= $test->_extract_method($password_hash);
         if ($method != ""){
           $test->set_hash($method);
