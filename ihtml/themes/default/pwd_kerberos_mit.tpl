@@ -1,7 +1,7 @@
 
 {if $si_error}
 
-	<h2>{t}Heimdal options{/t}</h2>
+	<h2>{t}Principal settings{/t}</h2>
 	<p>
 		{msgPool type=siError p1=$si_error_msg}
 	</p>
@@ -18,8 +18,7 @@
 <table style="width:100%;">
 	<tr>
 		<td style="width:50%;vertical-align:top;">
-			<h2>{t}Heimdal options{/t}</h2>
-			<i>{t}Use empty values for infinite{/t}</i>
+			<h2>{t}Principal settings{/t}</h2>
 			<table style="width:100%;">
 				<tr>
 					<td>
