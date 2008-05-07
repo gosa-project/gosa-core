@@ -34,7 +34,7 @@ class tabs
   var $by_name= array();
   var $by_object= array();
   var $SubDialog = false;
-
+  var $acl_category; 
   var $multiple_support_active = FALSE;
 
   function tabs(&$config, $data, $dn, $acl_category= "")
@@ -44,7 +44,7 @@ class tabs
     $this->config= &$config;
 
     $baseobject= NULL;
-
+    $this->acl_category = $acl_category;
     foreach ($data as &$tab){
 
       if (!plugin_available($tab['CLASS'])){
@@ -62,12 +62,34 @@ class tabs
       }
 
       $this->by_object[$tab['CLASS']]->parent= &$this;
-      $this->by_object[$tab['CLASS']]->set_acl_category($acl_category);
+      $this->by_object[$tab['CLASS']]->set_acl_category($this->acl_category);
 
       /* Initialize current */
       if ($this->current == ""){
         $this->current= $tab['CLASS'];
       }
+    }
+  }
+
+ 
+  /*! \brief Reinitializes the tab classes with fresh ldap values.
+             This maybe usefull if for example if the apply button was pressed.
+   */ 
+  function re_init()
+  {
+    $baseobject= NULL;
+    foreach($this->by_object as $name => $object){
+      $class = get_class($object);
+      if(in_array($class,array("reference","acl"))) continue;
+      if ($baseobject === NULL){
+        $baseobject= new $class($this->config, $this->dn);
+        $baseobject->enable_CSN_check();
+        $this->by_object[$name]= $baseobject;
+      } else {
+        $this->by_object[$name]= new $class($this->config, $this->dn, $baseobject);
+      }
+      $this->by_object[$name]->parent= &$this;
+      $this->by_object[$name]->set_acl_category($this->acl_category);
     }
   }
 
