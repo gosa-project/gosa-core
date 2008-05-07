@@ -1142,6 +1142,20 @@ class user extends plugin
     /* Call common method to give check the hook */
     $message= plugin::check();
 
+    /* Configurable password methods should be configured initially. 
+     */ 
+    if($this->last_pw_storage != $this->pw_storage){
+      $temp= passwordMethod::get_available_methods();
+      foreach($temp['name'] as $id => $name){
+        if($name == $this->pw_storage){
+          if($temp['is_configurable'][$id] && !$this->pwObject instanceof $temp[$name] ){
+            $message[] = _("The selected password method a requires initial configuration.");
+          }
+          break;
+        }
+      }
+    }
+
     $this->update_new_dn();
 
     /* Set the new acl base */
