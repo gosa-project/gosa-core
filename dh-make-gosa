@@ -75,7 +75,7 @@ if [ -d "$file" ]; then
   load_dsc $file/plugin.dsc
 
   # Setup build environment
-  BUILD_PATH=${DEST}gosa-plugin-${PL_NAME}-${PL_VERSION}
+  BUILD_PATH=${DEST}gosa-plugin-${PL_NAME}-${PL_VERSION}${ADD_VERSION}
   if [ -d "$BUILD_PATH" ]; then
     echo "Error: build path $BUILD_PATH already exists" >&2
     exit 2
