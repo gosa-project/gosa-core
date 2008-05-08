@@ -706,6 +706,12 @@ class userManagement extends plugin
           unset ($this->usertab);
           $this->usertab= NULL;
           session::un_set('objectinfo');
+        }else{
+        
+          /* Reinitialize tab */
+          if($this->usertab instanceof tabs){
+            $this->usertab->re_init();
+          }
         }
       } else {
         /* Ok. There seem to be errors regarding to the tab data,

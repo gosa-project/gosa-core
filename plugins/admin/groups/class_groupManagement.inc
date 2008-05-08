@@ -270,6 +270,12 @@ class groupManagement extends plugin
           unset ($this->grouptab);
           $this->grouptab= NULL;
           session::un_set('objectinfo');
+        }else{
+
+          /* Reinitialize tab */
+          if($this->grouptab instanceof tabs){
+            $this->grouptab->re_init();
+          }
         }
       } else {
         /* Ok. There seem to be errors regarding to the tab data,

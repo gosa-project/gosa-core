@@ -412,6 +412,12 @@ class ogroupManagement extends plugin
           unset ($this->ogroup);
           $this->ogroup= NULL;
           session::un_set('objectinfo');
+        }else{
+
+          /* Reinitialize tab */
+          if($this->ogroup instanceof tabs){
+            $this->ogroup->re_init();
+          }
         }
       } else {
         /* Ok. There seem to be errors regarding to the tab data,
