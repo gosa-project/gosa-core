@@ -343,19 +343,24 @@ class termDNS extends plugin
     return($display);
   }
 
+
   function remove_from_parent()
   {
-    /*
-    $ldap = $this->config->get_ldap_link();
-    $ldap->cd($this->orig_dn);
-    $ldap->search("(&(objectClass=dNSZone)(zoneName=*)(!(relativeDomainName=@)))",array("relativeDomainName","zoneName"));
-    while($attr = $ldap->fetch()){  
-      $ldap->cd($attr['dn']);
-      $ldap->rmDir($attr['dn']);
-      show_ldap_error("Record:".$ldap->get_error(), _("Removing terminal from DNS object failed")); 
+    if($this->DNSinitially_was_account){
+      $ldap = $this->config->get_ldap_link();
+      $tmp = array();
+      $this->dnsEntry['exists'] = false;
+      $tmp = getDNSHostEntriesDiff($this->config,$this->OrigCn,$this->dnsEntry,$this->cn);
+
+      /* Delete dns */
+      foreach($tmp['del'] as $dn => $del){
+        $ldap->cd($dn);
+        $ldap->rmdir_recursive($dn);
+        show_ldap_error("Record:".$ldap->get_error(), _("Removing terminal from DNS object failed")); 
+      }
     }
-    */
   }
+
 
   /* Save data to object */
   function save_object()
