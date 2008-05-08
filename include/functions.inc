@@ -2366,6 +2366,16 @@ function get_languages($languages_in_own_language = FALSE,$strip_region_tag = FA
   if($languages_in_own_language){
 
     $old_lang = setlocale(LC_ALL, 0);
+
+    /* If the locale wasn't correclty set before, there may be an incorrect
+        locale returned. Something like this: 
+          C_CTYPE=de_DE.UTF-8;LC_NUMERIC=C;LC_TIME=de_DE.UTF-8;LC ...
+        Extract the locale name from this string and use it to restore old locale.
+     */
+    if(preg_match("/LC_CTYPE/",$old_lang)){
+      $old_lang = preg_replace("/^.*LC_CTYPE=([^;]*).*$/","\\1",$old_lang);
+    }
+    
     foreach($tmp as $key => $name){
       $lang = $key.".UTF-8";
       setlocale(LC_ALL, $lang);
