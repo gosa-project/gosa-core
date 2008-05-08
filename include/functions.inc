@@ -24,6 +24,7 @@
 define ("CONFIG_DIR", "/etc/gosa");
 define ("CONFIG_FILE", "gosa.conf");
 define ("CONFIG_TEMPLATE_DIR", "../contrib/");
+define ("CACHE_DIR","/var/cache/gosa/tmp");
 
 /* Define get_list flags */
 define("GL_NONE",         0);

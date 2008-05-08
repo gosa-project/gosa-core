@@ -482,8 +482,8 @@ function _store_workbook() {
 function _store_OLE_file() {
 ## ABR
     if ($this->_tmpfilename != '') {
-        $OLE  = new writeexcel_olewriter('/tmp/'.$this->_tmpfilename);
-        $OLE->_OLEtmpfilename = '/tmp/'.$this->_tmpfilename;
+        $OLE  = new writeexcel_olewriter(CACHE_DIR.'/tmp/'.$this->_tmpfilename);
+        $OLE->_OLEtmpfilename = CACHE_DIR.$this->_tmpfilename;
     } else {
         $OLE  = new writeexcel_olewriter($this->_filename);
         $OLE->_OLEtmpfilename = '';
