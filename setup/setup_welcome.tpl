@@ -28,7 +28,7 @@
 	{t}For security reasons you need to authenticate for the installation by creating the file '/tmp/gosa.auth', containing the current session ID on the servers local filesystem. This can be done by executing the following command:{/t}
 	</p>
 	<tt>
-	echo -n <b>{$auth_id}</b> &gt; /tmp/gosa.auth
+	echo -n <b>{$auth_id}</b> &gt; {$path}
 	</tt>
 	<p>
 	{t}Click the 'Continue' button when you've finished.{/t}
