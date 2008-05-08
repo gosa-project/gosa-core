@@ -493,6 +493,9 @@ class msgPool
     if (count($objects) == 1){
       return sprintf(_("This '%s' is still in use by this object: %s"), $type, "<br><br>".msgPool::buildList($objects));
     }
+    if (count($objects) == 0){
+      return sprintf(_("This '%s' is still in use."), $type);
+    }
     return sprintf(_("This '%s' is still in use by these objects: %s"), $type, "<br><br>".msgPool::buildList($objects));
   }
 
