@@ -37,10 +37,8 @@
     </tr>
    </table>
 
-
-
-<p class="seperator">&nbsp;</p>
-
+	<p class="seperator">&nbsp;</p>
+	<h2><img alt="" class="center" align="middle" src="images/lists/locked.png" /> {t}System trust{/t}</h2>
     {t}Trust mode{/t}&nbsp;
     {render acl=$trustmodeACL}
         <select name="trustmode" id="trustmode" size=1
