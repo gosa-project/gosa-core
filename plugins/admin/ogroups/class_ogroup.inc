@@ -51,8 +51,14 @@ class ogroup extends plugin
   var $group_dialog= FALSE;
   var $view_logged = FALSE;
 
+  var $accessTo= array();
+  var $trustModel= "";
+  var $show_ws_dialog = FALSE;
+
+  var $was_trust_account= FALSE;
+
   /* attribute list for save action */
-  var $attributes= array("cn", "description", "gosaGroupObjects","member");
+  var $attributes= array("cn", "description", "gosaGroupObjects","member","accessTo","trustModel");
   var $objectclasses= array("top", "gosaGroupOfNames");
 
   function ogroup (&$config, $dn= NULL)
@@ -113,6 +119,23 @@ class ogroup extends plugin
       $this->base = session::get('CurrentMainBase');
     } else {
       $this->base= preg_replace("/^[^,]+,".normalizePreg(get_ou("ogroupou"))."/","",$this->dn);
+
+      /* Is this account a trustAccount? */
+      if ($this->is_account && isset($this->attrs['trustModel'])){
+        $this->trustModel= $this->attrs['trustModel'][0];
+        $this->was_trust_account= TRUE;
+      } else {
+        $this->was_trust_account= FALSE;
+        $this->trustModel= "";
+      }
+
+      $this->accessTo = array();
+      if ($this->is_account && isset($this->attrs['accessTo'])){
+        for ($i= 0; $i<$this->attrs['accessTo']['count']; $i++){
+          $tmp= $this->attrs['accessTo'][$i];
+          $this->accessTo[$tmp]= $tmp;
+        }
+      }
     }
 
     /* Load member data */
@@ -209,6 +232,98 @@ class ogroup extends plugin
         $this->dialog->setCurrentBase($this->base);
       }
     }
+
+    /***********
+     * Trusts 
+     ***********/
+
+    /* Add user workstation? */
+    if (isset($_POST["add_ws"])){
+      $this->show_ws_dialog= TRUE;
+      $this->dialog= TRUE;
+    }
+
+    /* Add user workstation? */
+    if (isset($_POST["add_ws_finish"]) && isset($_POST['wslist'])){
+      foreach($_POST['wslist'] as $ws){
+        $this->accessTo[$ws]= $ws;
+      }
+      ksort($this->accessTo);
+      $this->is_modified= TRUE;
+    }
+
+    /* Remove user workstations? */
+    if (isset($_POST["delete_ws"]) && isset($_POST['workstation_list'])){
+      foreach($_POST['workstation_list'] as $name){
+        unset ($this->accessTo[$name]);
+      }
+      $this->is_modified= TRUE;
+    }
+
+    /* Add user workstation finished? */
+    if (isset($_POST["add_ws_finish"]) || isset($_POST["add_ws_cancel"])){
+      $this->show_ws_dialog= FALSE;
+      $this->dialog= FALSE;
+    }
+
+    /* Show ws dialog */
+    if ($this->show_ws_dialog){
+      /* Save data */
+      $sysfilter= session::get("sysfilter");
+      foreach( array("depselect", "regex") as $type){
+        if (isset($_POST[$type])){
+          $sysfilter[$type]= $_POST[$type];
+        }
+      }
+      if (isset($_GET['search'])){
+        $s= mb_substr($_GET['search'], 0, 1, "UTF8")."*";
+        if ($s == "**"){
+          $s= "*";
+        }
+        $sysfilter['regex']= $s;
+      }
+      session::set("sysfilter", $sysfilter);
+
+      /* Get workstation list */
+      $exclude= "";
+      foreach($this->accessTo as $ws){
+        $exclude.= "(cn=$ws)";
+      }
+      if ($exclude != ""){
+        $exclude= "(!(|$exclude))";
+      }
+      $regex= $sysfilter['regex'];
+      $filter= "(&(|(objectClass=goServer)(objectClass=gotoWorkstation)(objectClass=gotoTerminal))$exclude(cn=*)(cn=$regex))";
+
+      $deps_a = array(get_ou("serverou"),
+          get_ou("terminalou"),
+          get_ou("workstationou"));
+      $res= get_sub_list($filter, array("terminal","server","workstation"), $deps_a, get_ou("systemsou").$sysfilter['depselect'],
+          array("cn"), GL_SUBSEARCH | GL_SIZELIMIT);
+      $wslist= array();
+      foreach ($res as $attrs){
+        $wslist[]= preg_replace('/\$/', '', $attrs['cn'][0]);
+      }
+      asort($wslist);
+      $smarty->assign("search_image", get_template_path('images/lists/search.png'));
+      $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
+      $smarty->assign("tree_image", get_template_path('images/lists/search-subtree.png'));
+      $smarty->assign("deplist", $this->config->idepartments);
+      $smarty->assign("alphabet", generate_alphabet());
+      foreach( array("depselect", "regex") as $type){
+        $smarty->assign("$type", $sysfilter[$type]);
+      }
+      $smarty->assign("hint", print_sizelimit_warning());
+      $smarty->assign("wslist", $wslist);
+      $smarty->assign("apply", apply_filter());
+      $display= $smarty->fetch (get_template_path('trust_machines.tpl', TRUE, dirname(__FILE__)));
+      return ($display);
+    }
+
+    /***********
+     * Ende - Trusts 
+     ***********/
+
 
     /* Dialog handling */
     if(is_object($this->dialog) && $this->acl_is_moveable()){
@@ -387,6 +502,39 @@ class ogroup extends plugin
       $smarty->assign("$val", $this->$val);
     }
 
+    /******
+      Trust account
+     ******/
+    $smarty->assign("trusthide", " disabled ");
+    $smarty->assign("trustmodeACL",  $this->getacl("trustModel"));
+    if ($this->trustModel == "fullaccess"){
+      $trustmode= 1;
+      // pervent double disable tag in html code, this will disturb our clean w3c html
+      $smarty->assign("trustmode",  $this->getacl("trustModel"));
+
+    } elseif ($this->trustModel == "byhost"){
+      $trustmode= 2;
+      $smarty->assign("trusthide", "");
+    } else {
+      // pervent double disable tag in html code, this will disturb our clean w3c html
+      $smarty->assign("trustmode",  $this->getacl("trustModel"));
+      $trustmode= 0;
+    }
+    $smarty->assign("trustmode", $trustmode);
+    $smarty->assign("trustmodes", array( 0 => _("disabled"), 1 => _("full access"),
+          2 => _("allow access to these hosts")));
+
+    $smarty->assign("workstations", $this->accessTo);
+
+    if((count($this->accessTo))==0){
+      $smarty->assign("emptyArrAccess",true);
+    }else{
+      $smarty->assign("emptyArrAccess",false);
+    }
+    /******
+      Ende - Trust account
+     ******/
+
     return ($smarty->fetch (get_template_path('generic.tpl', TRUE)));
   }
 
@@ -396,6 +544,29 @@ class ogroup extends plugin
   {
     /* Save additional values for possible next step */
     if (isset($_POST['ogroupedit'])){
+
+      /******
+        Trust account 
+       ******/
+
+      if($this->acl_is_writeable("trustModel")){
+        if (isset($_POST['trustmode'])){
+          $saved= $this->trustModel;
+          if ($_POST['trustmode'] == "1"){
+            $this->trustModel= "fullaccess";
+          } elseif ($_POST['trustmode'] == "2"){
+            $this->trustModel= "byhost";
+          } else {
+            $this->trustModel= "";
+          }
+          if ($this->trustModel != $saved){
+            $this->is_modified= TRUE;
+          }
+        }
+      }
+      /******
+        Ende Trust account
+       ******/
 
       /* Create a base backup and reset the
          base directly after calling plugin::save_object();
@@ -733,6 +904,37 @@ class ogroup extends plugin
       $ldap->cd($this->config->current['BASE']);
       $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
     }
+
+    /******
+      Trust accounts 
+     ******/
+    $objectclasses= array();
+    foreach ($this->attrs['objectClass'] as $key => $class){
+      if (preg_match('/trustAccount/i', $class)){
+        continue;
+      }
+      $objectclasses[]= $this->attrs['objectClass'][$key];
+    }
+    $this->attrs['objectClass']= $objectclasses;
+    if ($this->trustModel != ""){
+      $this->attrs['objectClass'][]= "trustAccount";
+      $this->attrs['trustModel']= $this->trustModel;
+      $this->attrs['accessTo']= array();
+      if ($this->trustModel == "byhost"){
+        foreach ($this->accessTo as $host){
+          $this->attrs['accessTo'][]= $host;
+        }
+      }
+    } else {
+      if ($this->was_trust_account){
+        $this->attrs['accessTo']= array();
+        $this->attrs['trustModel']= array();
+      }
+    }
+
+    /******
+      Ende - Trust accounts 
+     ******/
 
     /* Write back to ldap */
     $ldap->cd($this->dn);

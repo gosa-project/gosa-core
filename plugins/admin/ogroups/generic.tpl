@@ -37,6 +37,36 @@
     </tr>
    </table>
 
+
+
+<p class="seperator">&nbsp;</p>
+
+    {t}Trust mode{/t}&nbsp;
+    {render acl=$trustmodeACL}
+        <select name="trustmode" id="trustmode" size=1
+            onChange="changeSelectState('trustmode', 'wslist');
+                      changeSelectState('trustmode', 'add_ws');
+                      changeSelectState('trustmode', 'del_ws');">
+          {html_options options=$trustmodes selected=$trustmode}
+        </select><br>
+    {/render}
+    {render acl=$trustmodeACL}
+       <select style="width:100%" id="wslist" name="workstation_list[]" size=8 multiple {$trusthide}>
+        {html_options values=$workstations output=$workstations}
+        {if $emptyArrAccess}
+            <option disabled>&nbsp;</option>
+        {/if}
+       </select>
+    {/render}
+       <br>
+    {render acl=$trustmodeACL}
+       <input type="submit" id="add_ws" value="{msgPool type=addButton}" name="add_ws" {$trusthide}>&nbsp;
+    {/render}
+    {render acl=$trustmodeACL}
+       <input type="submit" id="del_ws" value="{msgPool type=delButton}" name="delete_ws" {$trusthide}>
+    {/render}
+
+
   </td>
   <td style="border-left:1px solid #A0A0A0; padding-left:10px;">
    <b><LABEL for="members">{t}Member objects{/t}</LABEL></b>&nbsp;({$combinedObjects})
