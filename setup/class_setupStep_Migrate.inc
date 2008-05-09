@@ -184,7 +184,7 @@ class Step_Migrate extends setup_step
         $cv['tls']);
 
     $ldap->cd($cv['base']);
-    $res = $ldap->search("uidNumber=*",array("dn","uidNumber"));
+    $res = $ldap->search("(&(objectClass=posixAccount)(uidNumber=*))",array("dn","uidNumber"));
     if(!$res){
       $this->checks['uidNumber_usage']['STATUS']    = FALSE;
       $this->checks['uidNumber_usage']['STATUS_MSG']= _("LDAP query failed");
@@ -1586,7 +1586,9 @@ class Step_Migrate extends setup_step
 
     /* Check if root object exists */
     $ldap->cd($cv['base']);
+	$ldap->set_size_limit(1);
     $res = $ldap->search("(objectClass=*)");
+	$ldap->set_size_limit(0);
     $err = ldap_errno($ldap->cid); 
 
     if( !$res || 
