@@ -4,9 +4,10 @@ gosa (2.5.16-1) unstable; urgency=low
   * Fixed problem with broken characters in the password fields (Closes #470303)
   * Added apache configuration advisory to the README.debian
   * Removed additional bashisms from the rules file (Closes #478388)
-  * Add a root-readable master key for passwords in gosa.conf (Closes #402010)
+  * Add support for a root-readable master key for encrypted passwords
+    in gosa.conf (Closes #402010)
 
- -- Cajus Pollmeier <cajus@debian.org>  Fri, 04 Apr 2008 09:03:52 +0200
+ -- Cajus Pollmeier <cajus@debian.org>  Fri, 09 May 2008 14:12:03 +0200
 
 gosa (2.5.15-1) unstable; urgency=low
 

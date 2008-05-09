@@ -11,6 +11,7 @@ GOsa2 changelog
   - Updated shared folder acls, keep manually set acls
   - Remove DNS entries for removed hosts
   - Increased setup performance
+  - Added more secure way to save passwords in gosa.conf
 
 * gosa 2.5.15
   - Changed order of sys-action commandline parameters
