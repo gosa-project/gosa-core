@@ -622,7 +622,7 @@ class phoneAccount extends plugin
           "mailbox"     => $customer_id,
           "password"    => $this->goFonVoicemailPIN,
           "fullname"    => $CNname,
-          "context"     => $this->context,
+          "context"     => "default"; //$this->context,
           "email"       => $s_mail);
 
       /* Set pager number if available */
