@@ -181,6 +181,7 @@ sed -i '/^Upstream/,/^$/d' debian/copyright
 sed -i 's/^Section: unknown/Section: web/g' debian/control
 sed -i 's/^Architecture: any/Architecture: all/g' debian/control
 sed -i 's/^Depends: .*$/Depends: gosa/g' debian/control
+sed -i 's/^\(Build-Depends: .*\)$/\1, dpatch/g' debian/control
 sed -i "s/^Description: .*$/Description: $PL_NAME plugin for GOsa/g" debian/control
 sed -i "s/^ <.*$/ %DESCRIPTION%/g" debian/control
 dsc=$(tempfile)
@@ -195,6 +196,9 @@ EOF
 sed -i "/%DESCRIPTION%/r $dsc" debian/control
 sed -i "/%DESCRIPTION%/d" debian/control
 rm $dsc
+
+# Create patch directory
+[ ! -d debian/patches ] && mkdir debian/patches
 
 # Adapt README.debian
 cat <<EOF > debian/README.Debian
@@ -223,11 +227,15 @@ cat <<EOF > debian/rules
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-configure: configure-stamp
+configure: patch configure-stamp
 configure-stamp:
 	dh_testdir
 	touch configure-stamp
 
+patch: patch-stamp
+patch-stamp:
+	dpatch apply-all
+	dpatch cat-all >patch-stamp
 
 build: build-stamp
 
@@ -236,11 +244,16 @@ build-stamp: configure-stamp
 
 	touch $@
 
-clean:
+clean: clean-patched unpatch
+clean-patched:
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp configure-stamp
 	dh_clean 
+
+unpatch:
+	dpatch deapply-all
+	rm -rf patch-stamp debian/patched
 
 install: build
 	dh_testdir
