@@ -2,15 +2,15 @@ GOsa2 changelog
 ===============
 
 * gosa 2.5.16
-  - ridbase may be undefined in domain objects
+  - Fixed problem with undefined ridbase in domain objects
   - Fixed postremove/-create/-modify parameter expansion
-  - Updated built in smarty to 2.6.19
+  - Updated integrated smarty to 2.6.19
   - Updated saving of ppds in printer setttings
   - Fixed department tagging
-  - Fixed DNS record problem, nSRecords were not kept
+  - Fixed DNS record problem where nSRecords were not kept
   - Updated shared folder acls, keep manually set acls
-  - If host is removed, also remove its dns entry
-  - Updated setup performance
+  - Remove DNS entries for removed hosts
+  - Increased setup performance
 
 * gosa 2.5.15
   - Changed order of sys-action commandline parameters
