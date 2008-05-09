@@ -242,8 +242,10 @@ class divListFai extends MultiSelectWindow
 
        /* Cutted objects should be displayed in light grey */
        $display = $value['cn'].$desc;
-       if($this->parent->CopyPasteHandler->cutCurrent && $value['dn'] == $this->parent->CopyPasteHandler->objectdn){
-         $display = "<font color='#999999'>".$display."</font>";
+       if(is_object($this->parent->CopyPasteHandler)){
+         if($this->parent->CopyPasteHandler->cutCurrent && $value['dn'] == $this->parent->CopyPasteHandler->objectdn){
+           $display = "<font color='#999999'>".$display."</font>";
+         }
        }
 
        $field1 = array("string" => $img , "attach" => "style='text-align:center;width:20px;'");
