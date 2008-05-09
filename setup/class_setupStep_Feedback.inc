@@ -81,10 +81,9 @@ class Step_Feedback  extends setup_step
         FALSE,
         $cv['tls']);
 
+    $this->object_count= "";
     $ldap = new ldapMultiplexer($ldap_l);
     $ldap->cd($cv['base']);
-    $ldap->search("(objectClass=*)",array("dn"));
-    $this->object_count=$ldap->count();
 
     /* Preselect used features */
     $oc = $ldap->get_objectclasses();
