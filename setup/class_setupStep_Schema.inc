@@ -76,7 +76,9 @@ class Step_Schema extends setup_step
 
     /* Check if root object exists */
     $ldap->cd($cv['base']);
+    $ldap->set_size_limit(1);
     $res = $ldap->search("(objectClass=*)");
+    $ldap->set_size_limit(0);
 
     $smarty = get_smarty();
     $smarty->assign("bool",array(FALSE => _("No"), TRUE => _("Yes")));
