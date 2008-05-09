@@ -80,9 +80,9 @@ class Step_Feedback  extends setup_step
         $cv['connection'],
         FALSE,
         $cv['tls']);
+
     $ldap->cd($cv['base']);
-    $ldap->search("(objectClass=*)",array("dn"));
-    $this->object_count=$ldap->count();
+    $this->object_count=  "";
 
     /* Preselect used features */
     $oc = $ldap->get_objectclasses();
