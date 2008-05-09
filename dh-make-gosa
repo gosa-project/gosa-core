@@ -227,7 +227,7 @@ cat <<EOF > debian/rules
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-configure: patch configure-stamp
+configure: configure-stamp
 configure-stamp:
 	dh_testdir
 	touch configure-stamp
@@ -237,7 +237,7 @@ patch-stamp:
 	dpatch apply-all
 	dpatch cat-all >patch-stamp
 
-build: build-stamp
+build: patch build-stamp
 
 build-stamp: configure-stamp 
 	dh_testdir
