@@ -63,7 +63,7 @@ php.ini to "E_ALL ^ E_NOTICE". This is a workaround only, wait for the
 debian smarty package to support PHP5 in a propper way.
 
 
-* Local configuration - secruity issues
+* Local configuration - security issues
 
 You should be aware, that GOsa reads its configuration files which store
 an important LDAP password as the www-data user. If you allow other
@@ -75,6 +75,7 @@ This can be achieved by running:
 
 # a2enmod headers
 # gosa-encrypt-passwords
+# Remove the comment for /etc/gosa/gosa.secrets in /etc/gosa/apache.conf
 # /etc/init.d/apache2 reload
 
 ----
