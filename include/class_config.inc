@@ -43,6 +43,7 @@ class config  {
       'MAIN' => array(),
       'MENU' => array(), 'SERVICE' => array());
   var $basedir= "";
+  var $config_version ="";
 
   /* Keep a copy of the current deparment list */
   var $departments= array();
@@ -112,7 +113,7 @@ class config  {
   }
 
   function tag_open($parser, $tag, $attrs)
-  { 
+  {
     /* Save last and current tag for reference */
     $this->tags[$this->level]= $tag;
     $this->level++;
@@ -120,6 +121,9 @@ class config  {
     /* Trigger on CONF section */
     if ($tag == 'CONF'){
       $this->config_found= TRUE;
+      if(isset($attrs['CONFIG_VERSION'])){
+        $this->config_version = $attrs['CONFIG_VERSION'];
+      }
     }
 
     /* Return if we're not in config section */
@@ -841,6 +845,39 @@ class config  {
     } 
 
     return ("");
+  }
+
+
+  function check_config_version()
+  {
+
+    $current = get_gosa_version();
+
+    /* Skip check, if we've already mentioned the mismatch 
+     */
+    if(session::is_set("LastChecked") && session::get("LastChecked") == $this->config_version) return;
+  
+    /* Remember last checked version 
+     */
+    session::set("LastChecked",$this->config_version);
+
+    if(preg_match("/\(Rev[^\)]*\)/",$current)){
+
+      /* Development Version 
+       */
+      $c_v = preg_replace("/^.*\(Rev ([0-9]*)\).*$/","\\1",$current);
+      $g_v = preg_replace("/^.*\(Rev ([0-9]*)\).*$/","\\1",$this->config_version);
+      if($c_v != $g_v){
+#        msg_dialog::display(_("Configuration"),_("The configuration file you are using seems to be outdated. Please move the GOsa configuration file away to run the GOsa setup again."));
+      }
+    }else{
+
+      /* Tagged version 
+       */
+      if($this->config_version != $current){
+        msg_dialog::display(_("Configuration"),_("The configuration file you are using seems to be outdated. Please move the GOsa configuration file away to run the GOsa setup again."));
+      }
+    }
   }
 
 
