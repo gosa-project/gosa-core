@@ -286,7 +286,7 @@ class servDNSeditZoneEntries extends plugin
 
       /* Check records
        */                 
-      $singleEntries = array("cNAMERecord","pTRRecord");
+      $singleEntries = array("pTRRecord");
 
       $tmp  = array();
       $tmp2 = array();
