@@ -46,6 +46,15 @@
       </select>	
      </td>
     </tr>
+    <tr>
+     <td>{t}Voicemail context{/t}
+     </td>
+     <td>
+      <select name='voice_context' title='{t}Select the accounts context{/t}' {$goFonContextACL}>  
+		{html_options values=$contexts output=$contexts selected=$voice_context}
+      </select>	
+     </td>
+    </tr>
 
 			<tr>
 				<td>
