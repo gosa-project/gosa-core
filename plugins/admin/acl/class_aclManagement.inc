@@ -34,6 +34,7 @@ class aclManagement extends plugin
 
   var $CopyPasteHandler;
   var $start_pasting_copied_objects = FALSE;
+  var $dns = array();
 
   function aclManagement(&$config, &$ui)
   {
@@ -56,7 +57,7 @@ class aclManagement extends plugin
     /* Call parent execute */
     plugin::execute();
 
-    session::set('LOCK_VARS_TO_USE',array("/^list/","/^id_/","/^list_acl_role_del/","/^list_acl_del/","/^menu_action/"));
+    session::set('LOCK_VARS_TO_USE',array("/^item_selected/","/^menu_action/","/^list/","/^id_/","/^list_acl_role_del/","/^list_acl_del/","/^menu_action/"));
 
     $smarty       = get_smarty();                 // Smarty instance
     $s_action     = "";                           // Contains the action to be taken
@@ -206,16 +207,13 @@ class aclManagement extends plugin
       Edit canceled 
      ********************/
     if(isset($_POST['delete_lock'])){
-      del_lock ($this->dn);
+      $this->remove_lock();
       session::un_set('objectinfo');
     }
 
     /* Reset all relevant data, if we get a _cancel request */
     if (isset($_POST['edit_cancel'])){
-      if (isset($this->acltabs)){
-        del_lock ($this->dn);
-        unset ($this->acltabs);
-      }
+      $this->remove_lock();
       $this->acltabs= NULL;
       session::un_set('objectinfo');
     }
@@ -282,7 +280,7 @@ class aclManagement extends plugin
       }
 
       /* Remove lock file after successfull deletion */
-      del_lock ($this->dn);
+      $this->remove_lock();
     }
 
     /********************
@@ -290,30 +288,44 @@ class aclManagement extends plugin
      ********************/
 
     /* Remove acl was requested */
-    if ($s_action=="del"){
+    if ($s_action=="del" || $s_action == "del_multiple"){
 
       /* Get 'dn' from posted acl */
-      $this->dn= $this->list[trim($s_entry)]['dn'];
+      if($s_action == "del"){
+        $this->dns = array( $this->list[trim($s_entry)]['dn']); 
+      }else{
+        $this->dns = array();
+        foreach($this->list_get_selected_items() as $id){
+          $this->dns[] = $this->list[$id]['dn'];
+        }
+      }
 
-      /* Check permissions */
-      if(preg_match("/d/",$this->ui->get_permissions($this->dn,"acl/acl"))){
-        /* Check locking, save current plugin in 'back_plugin', so
-           the dialog knows where to return. */
-        if (($acl= get_lock($this->dn)) != ""){
-          session::set('LOCK_VARS_TO_USE',array("/^list_acl_edit/","/^list_acl_del/","/^id_/"));
-          return(gen_locked_message ($acl, $this->dn));
+      /* Display lock messages */
+      if ($user= get_multiple_locks($this->dns)){
+        return(gen_locked_message($user,$this->dns));
+      }
+
+      $dns_names = array();
+      foreach($this->dns as $key => $dn){
+
+        /* Check permissions */
+        if(!preg_match("/d/",$this->ui->get_permissions($dn,"acl/acl"))){
+
+          /* Obviously the acl isn't allowed to delete. Show message and
+             clean session. */
+          msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
+          unset($this->dns[$key]);
+          continue;
         }
 
-        /* Lock the current entry, so nobody will edit it during deletion */
-        add_lock ($this->dn, $this->ui->dn);
-        $smarty->assign("info", msgPool::deleteInfo(@LDAP::fix($this->dn),_("ACL")));
+        $dns_names[] = LDAP::fix($dn);
+      }
+
+      if(count($this->dns)){
+        add_lock($this->dns,$this->ui->dn);  
+        $smarty->assign("info", msgPool::deleteInfo($dns_names));
         $smarty->assign("is_role",false);
         return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
-      } else {
-
-        /* Obviously the acl isn't allowed to delete. Show message and
-           clean session. */
-        msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
       }
     }
 
@@ -346,7 +358,7 @@ class aclManagement extends plugin
       }
 
       /* Remove lock file after successfull deletion */
-      del_lock ($this->dn);
+      $this->remove_lock();
     }
 
     
@@ -355,8 +367,8 @@ class aclManagement extends plugin
      ********************/
 
     /* Delete acl canceled? */
-    if (isset($_POST['delete_cancel'])){
-      del_lock ($this->dn);
+    if (isset($_POST['delete_acl_cancel'])){
+      $this->remove_lock();
     }
 
 
@@ -385,7 +397,7 @@ class aclManagement extends plugin
 
           /* ACl has been saved successfully, remove lock from LDAP. */
           if ($this->dn != "new"){
-            del_lock ($this->dn);
+            $this->remove_lock();
           }
 
           unset ($this->acltabs);
@@ -621,6 +633,8 @@ class aclManagement extends plugin
     if (isset($this->acltabs->dn)){
       del_lock ($this->acltabs->dn);
     }
+    del_lock ($this->dn);
+    del_lock ($this->dns);
   }
 
 
