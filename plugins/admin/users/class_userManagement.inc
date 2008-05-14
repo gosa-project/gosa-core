@@ -287,7 +287,9 @@ class userManagement extends plugin
         if ($this->usertab){
           if ($this->usertab->password_change_needed()){
             $obj= $this->usertab->by_object['user'];
-            change_password ($this->usertab->dn, $_POST['new_password'],0, $obj->pw_storage);
+            if(!change_password ($this->usertab->dn, $_POST['new_password'],0, $obj->pw_storage)){
+              return($smarty->fetch(get_template_path('password.tpl', TRUE)));
+            }
             if (isset($config->data['MAIN']['EXTERNALPWDHOOK'])){
               exec($config->data['MAIN']['EXTERNALPWDHOOK']." ".$username." ".$_POST['new_password'], $resarr);
             }
@@ -296,7 +298,9 @@ class userManagement extends plugin
             $this->usertab= NULL;
           }
         } else {
-          change_password ($this->dn, $_POST['new_password']);
+          if(!change_password ($this->dn, $_POST['new_password'])){
+            return($smarty->fetch(get_template_path('password.tpl', TRUE)));
+          }
           if (isset($config->data['MAIN']['EXTERNALPWDHOOK'])){
             exec($config->data['MAIN']['EXTERNALPWDHOOK']." ".$username." ".$_POST['new_password'], $resarr);
           }

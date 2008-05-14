@@ -2525,7 +2525,9 @@ function change_password ($dn, $password, $mode=0, $hash= "")
   } else {
 
     /* Run backend method for change/create */
-    $test->set_password($password);
+    if(!$test->set_password($password)){
+      return(FALSE);
+    }
 
     /* Find postmodify entries for this class */
     $command= $config->search("password", "POSTMODIFY",array('menu'));
@@ -2544,6 +2546,7 @@ function change_password ($dn, $password, $mode=0, $hash= "")
       }
     }
   }
+  return(TRUE);
 }
 
 

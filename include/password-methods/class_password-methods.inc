@@ -99,6 +99,7 @@ class passwordMethod
   // besides the userAttribute entry
   function set_password($password)
   {
+    return(TRUE);
   }
 
 
