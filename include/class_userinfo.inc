@@ -178,6 +178,13 @@ class userinfo
 
   function get_category_permissions($dn, $category)
   {
+    /* If we are forced to skip ACLs checks for the current user 
+        then return all permissions.
+     */
+    if($this->ignore_acl_for_current_user()){
+      return("rwcdm");
+    }
+
     /* Get list of objectClasses and get the permissions for it */
     $acl= "";
     if (isset($this->ocMapping[$category])){
@@ -194,6 +201,13 @@ class userinfo
 
   function get_permissions($dn, $object, $attribute= "", $skip_write= FALSE)
   {
+    /* If we are forced to skip ACLs checks for the current user 
+        then return all permissions.
+     */
+    if($this->ignore_acl_for_current_user()){
+      return("rwcdm");
+    }
+
     /* Push cache answer? */
     $ACL_CACHE = &session::get('ACL_CACHE');
     if (isset($ACL_CACHE["$dn+$object+$attribute"])){
@@ -293,6 +307,14 @@ class userinfo
      accessible department) */
   function get_module_departments($module)
   {
+    
+    /* If we are forced to skip ACLs checks for the current user 
+        then return all departments as valid.
+     */
+    if($this->ignore_acl_for_current_user()){
+      return(array_keys($this->config->idepartments));
+    }
+
     /* Use cached results if possilbe */
     $ACL_CACHE = session::get('ACL_CACHE');
     if(isset($ACL_CACHE['MODULE_DEPARTMENTS'][serialize($module)])){
@@ -505,6 +527,16 @@ class userinfo
     }
     return($acl);
   }
+
+ 
+  /*! \brief  Returns TRUE if the current user is configured in IGNORE_ACL=".." in your gosa.conf 
+      @param  Return Boolean TRUE if we have to skip ACL checks else FALSE.
+   */ 
+  function ignore_acl_for_current_user()
+  {
+    return(isset($this->config->current['IGNORE_ACL']) && $this->config->current['IGNORE_ACL'] == $this->dn);
+  }
+
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
