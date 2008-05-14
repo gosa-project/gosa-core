@@ -288,7 +288,11 @@ if (session::get('js')==FALSE){
   $smarty->assign("help_method"," onclick=\"return popup('helpviewer.php$plug','GOsa help');\"");
 }
 
-$smarty->assign ("username", $ui->username);
+if($ui->ignore_acl_for_current_user()){
+  $smarty->assign ("username", "<font color='#FF0000';>"._("User ACL checks disabled")."</font>&nbsp;".$ui->username);
+}else{
+  $smarty->assign ("username", $ui->username);
+}
 $smarty->assign ("go_logo", get_template_path('images/go_logo.png'));
 $smarty->assign ("go_base", get_template_path('images/dtree.png'));
 $smarty->assign ("go_home", get_template_path('images/gohome.png'));
