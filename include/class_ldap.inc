@@ -451,18 +451,34 @@ class LDAP{
    */
   function rename_dn($source,$dest)
   {
+    /* Check if source and destination are the same entry */
+    if(strtolower($source) == strtolower($dest)){
+      trigger_error("Source and destination can't be the same entry.");
+      return(FALSE);
+    }
+
+    /* Check if destination entry exists */    
+    if($this->dn_exists($dest)){
+      trigger_error("Destination '$dest' already exists.");
+      return(FALSE);
+    }
+
     /* Extract the name and the parent part out ouf source dn.
         e.g.  cn=herbert,ou=department,dc=... 
-         parent =>  ou=department,dc=...
-         dest   =>  cn=herbert
+         parent   =>  ou=department,dc=...
+         dest_rdn =>  cn=herbert
      */
-    $parent = preg_replace("/^[^,]+,/","",$dest);
-    $dest   = preg_replace("/,.*$/","",$dest);
+    $parent   = preg_replace("/^[^,]+,/","",$dest);
+    $dest_rdn = preg_replace("/,.*$/","",$dest);
   
     if($this->hascon){
       if ($this->reconnect) $this->connect();
-      $r= @ldap_rename($this->cid,$source,$dest,$parent,TRUE); 
+      $r= @ldap_rename($this->cid,$source,$dest_rdn,$parent,TRUE); 
       $this->error = @ldap_error($this->cid);
+
+      /* Check if destination dn exists, if not the 
+          server may not support this operation */
+      $r &= $this->dn_exists($dest);
       return(!$r ? $r : TRUE);
     }else{
       $this->error = "Could not connect to LDAP server";
