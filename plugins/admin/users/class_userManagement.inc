@@ -40,6 +40,8 @@ class userManagement extends plugin
   var $start_pasting_copied_objects = FALSE;
   var $msg_dialog= NULL;
   
+  var $dns =array();
+
   function userManagement(&$config, $ui)
   {
     /* Save configuration for internal use */
@@ -312,7 +314,7 @@ class userManagement extends plugin
         msg_dialog::display(_("Password change"),_("You have no permission to change this users password!"),WARNING_DIALOG);
       }
       /* Clean session, delete lock */
-      del_lock ($this->dn);
+      $this->remove_lock();
       unset ($this->usertab);
       $this->usertab= NULL;
       $this->lognames= array();;
@@ -435,8 +437,7 @@ class userManagement extends plugin
     /* Reset all relevant data, if we get a _cancel request */
     if (isset($_POST['edit_cancel']) || isset($_POST['password_cancel'])){
       if (isset($this->usertab)){
-        del_lock ($this->usertab->dn);
-        unset ($this->usertab);
+        $this->remove_lock();
       }
       $this->usertab= NULL;
       $this->lognames= array();;
@@ -555,20 +556,22 @@ class userManagement extends plugin
       }
 
       $this->dns = array();
-
       if(count($ids)){
         foreach($ids as $id){
-          $dn = $this->list[$id]['dn'];
-          if (($user= get_lock($dn)) != ""){
-            return(gen_locked_message ($user, $dn));
-          }
-          $this->dns[$id] = $dn; 
+          $this->dns[$id] = $this->list[$id]['dn'];
+        }
+
+        /* Check locks */
+        if ($user= get_multiple_locks($this->dns)){
+          return(gen_locked_message($user,$this->dns));
         }
 
         $dns_names = array();
         foreach($this->dns as $dn){
           $dns_names[] = @LDAP::fix($dn);
         }
+
+        add_lock($this->dns, $this->ui->dn);
 
         /* Lock the current entry, so nobody will edit it during deletion */
         $info = sprintf(msgPool::deleteInfo($dns_names,_("user")));
@@ -586,30 +589,30 @@ class userManagement extends plugin
       Delete MULTIPLE entries confirmed 
      ********************/
 
-      if(isset($_POST['delete_user_confirm'])){
-        
-        /* Remove user by user and check acls before removeing them */
-        foreach($this->dns as $key => $dn){
+    if(isset($_POST['delete_user_confirm'])){
 
-          $acl = $this->ui->get_permissions($dn, "users/user"); 
-          if (preg_match('/d/', $acl)){
+      /* Remove user by user and check acls before removeing them */
+      foreach($this->dns as $key => $dn){
 
-            /* Delete request is permitted, perform LDAP action */
-            $this->usertab= new usertabs($this->config, $this->config->data['TABS']['USERTABS'],$dn);
-            $this->usertab->set_acl_base();
-            $this->usertab->delete ();
-            unset ($this->usertab);
-            $this->usertab= NULL;
-          } else {
-            msg_dialog::display(_("Warning"),msgPool::permDelete($dn),WARNING_DIALOG);
-            if(isset($this->ui->uid)){
-              new log("security","users/".get_class($this),$dn,array(),"Tried to trick deletion.");
-            }
+        $acl = $this->ui->get_permissions($dn, "users/user"); 
+        if (preg_match('/d/', $acl)){
+
+          /* Delete request is permitted, perform LDAP action */
+          $this->usertab= new usertabs($this->config, $this->config->data['TABS']['USERTABS'],$dn);
+          $this->usertab->set_acl_base();
+          $this->usertab->delete ();
+          unset ($this->usertab);
+          $this->usertab= NULL;
+        } else {
+          msg_dialog::display(_("Warning"),msgPool::permDelete($dn),WARNING_DIALOG);
+          if(isset($this->ui->uid)){
+            new log("security","users/".get_class($this),$dn,array(),"Tried to trick deletion.");
           }
-          /* Remove lock file after successfull deletion */
-          del_lock ($dn);
-          unset($this->dns[$key]);
+        }
       }
+      /* Remove lock file after successfull deletion */
+      $this->remove_lock();
+      $this->dns = array();
     }
 
   
@@ -657,10 +660,10 @@ class userManagement extends plugin
 
     /* Delete user canceled? */
     if (isset($_POST['delete_cancel'])){
-      foreach($this->dns as $key => $dn){
-        del_lock ($dn);
-        unset($this->dns[$key]);
-      }
+
+      /* Remove lock file after successfull deletion */
+      $this->remove_lock();
+      $this->dns = array();
     }
 
 
@@ -698,7 +701,7 @@ class userManagement extends plugin
         if (!isset($_POST['edit_apply'])){
           /* User has been saved successfully, remove lock from LDAP. */
           if ($this->dn != "new"){
-            del_lock ($this->dn);
+            $this->remove_lock();
           }
 
           /* In case of new users, ask for a password, skip this for templates */
@@ -1054,11 +1057,18 @@ class userManagement extends plugin
     }
   }
 
+
   function remove_lock()
   {
     /* Remove user lock if a DN is marked as "currently edited" */
     if (isset($this->usertab->dn)){
       del_lock ($this->usertab->dn);
+    }
+    if(isset($this->dn) && !empty($this->dn) && $this->dn != "new"){
+      del_lock($this->dn);
+    }
+    if(isset($this->dns) && is_array($this->dns) && count($this->dns)){
+      del_lock($this->dns);
     }
   }
 

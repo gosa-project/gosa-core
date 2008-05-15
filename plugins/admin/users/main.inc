@@ -24,7 +24,6 @@ if ($remove_lock){
   if(session::is_set('userManagement')){
     $userManagement = session::get('userManagement');
     $userManagement->remove_lock();
-    del_lock ($ui->dn);
     session::un_set ('userManagement');
   }
 } else {
