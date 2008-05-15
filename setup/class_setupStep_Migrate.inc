@@ -94,6 +94,7 @@ class Step_Migrate extends setup_step
   var $check_gidNumbers        = array();
   var $check_gidNumbers_dialog = FALSE;
 
+  var $group_list              = array();
 
   function Step_Migrate()
   {
@@ -126,7 +127,6 @@ class Step_Migrate extends setup_step
     $this->checks['deps_visible']['STATUS']    = FALSE;
     $this->checks['deps_visible']['STATUS_MSG']= "";
     $this->checks['deps_visible']['ERROR_MSG'] = "";
-    $this->check_organizationalUnits();
 
     $this->checks['users_visible']['TITLE']     = _("Checking for invisible users");
     $this->checks['users_visible']['STATUS']    = FALSE;
@@ -151,6 +151,7 @@ class Step_Migrate extends setup_step
     $this->checks['outside_groups']['STATUS_MSG']= "";
     $this->checks['outside_groups']['ERROR_MSG'] = "";
     $this->search_outside_groups();
+    $this->check_organizationalUnits();
 
     $this->checks['outside_winstations']['TITLE']     = _("Checking for windows workstations outside the winstation tree");
     $this->checks['outside_winstations']['STATUS']    = FALSE;
@@ -377,6 +378,7 @@ class Step_Migrate extends setup_step
     }
 
     $this->outside_groups = array();
+    $this->groups_list = array();;
     while($attrs = $ldap->fetch()){
       $group_db_base = preg_replace("/^[^,]+,".normalizePreg($group_ou)."+,/i","",$attrs['dn']);
 
@@ -390,6 +392,7 @@ class Step_Migrate extends setup_step
         $attrs['ldif']     = "";
         $this->outside_groups[base64_encode($attrs['dn'])] = $attrs;
       }
+      $this->group_list[] = $attrs['dn'];
     }
 
     if(count($this->outside_groups)){
@@ -690,7 +693,7 @@ class Step_Migrate extends setup_step
     $ldap = new ldapMultiplexer($ldap_l);
 
     /* Skip GOsa internal departments */
-    $skip_dns = array("/".$cv['peopleou']."/","/".$cv['groupou']."/","/^ou=people,/","/^ou=groups,/",
+    $skip_dns = array("/".$cv['peopleou']."/","/".$cv['groupou']."/","/^ou=people,/","/^ou=groups,/","/^ou=sudoers,/",
         "/(,|)ou=configs,/","/(,|)ou=systems,/",
         "/(,|)ou=apps,/","/(,|)ou=mime,/","/(,|)ou=devices/","/^ou=aclroles,/","/^ou=incoming,/",
         "/ou=snapshots,/","/(,|)dc=addressbook,/","/^(,|)ou=machineaccounts,/",
@@ -717,6 +720,17 @@ class Step_Migrate extends setup_step
     foreach($this->deps_to_migrate as $key => $attrs){
       $dn = $attrs['dn'];
       $skip = false;;
+
+      /* Check if this object is an application release object
+          e.g. groups-> application menus.
+       */
+      if(preg_match("/^.*,[ ]*cn=/",$dn)){
+        $cn_dn = preg_replace("/^.*,[ ]*cn=/","cn=",$dn);
+        if(in_array($cn_dn,$this->group_list)){
+          $skip = true;
+        }
+      }
+    
       foreach($skip_dns as $skip_dn){
         if(preg_match($skip_dn,$dn)){
           $skip = true;
