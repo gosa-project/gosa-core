@@ -1,5 +1,5 @@
-GOsa2.1 README
-==============
+GOsa 2.6 README
+===============
 
 * Information
 
@@ -35,11 +35,6 @@ then just send the .po file to me.
 
 
 * NOTES
-
-You'll need php-cups (http://www.cups.org) and php-krb5 (pear) in order
-to get full functionality. To make shared folders work in a proper way,
-you either need a recent PHP or a patched one for the get_acl functions
-(see contrib/patches). Basically GOsa will run without these.
 
 Be sure that 'gosaUserTemplates' are not able to log into your server,
 since they may have no password set. Example configs can be found in
