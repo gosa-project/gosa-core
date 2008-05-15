@@ -20,7 +20,16 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-if (!$remove_lock){
+
+
+if ($remove_lock){
+  if(session::is_set('ogroup')){
+    $ogroup = session::get('ogroup');
+    $ogroup->remove_lock();
+    session::un_set ('ogroup');
+  }
+} else {
+
   /* Create object object on demand */
   if (!session::is_set('ogroup') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
     session::set('ogroup',new ogroupManagement ($config));

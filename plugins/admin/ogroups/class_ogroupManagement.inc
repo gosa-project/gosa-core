@@ -36,6 +36,8 @@ class ogroupManagement extends plugin
   var $DivListOGroup    = NULL;
   var $start_pasting_copied_objects = FALSE;
 
+  var $dns = array();
+
   function ogroupManagement (&$config, $dn= NULL)
   {
     /* Include config object */
@@ -61,7 +63,7 @@ class ogroupManagement extends plugin
       Variable intialisation && Check posts for commands  
      ****************/
 
-    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/","/^item_selected/","/^remove_multiple_ogroups/"));
+    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/","/^item_selected/","/^remove_multiple_ogroups/","/^menu_action/"));
 
     $smarty     = get_smarty();
     $s_action   = "";
@@ -216,19 +218,23 @@ class ogroupManagement extends plugin
      ********************/
     if ($s_action=="del_multiple"){
       $ids = $this->list_get_selected_items();
+
       if(count($ids)){
         foreach($ids as $id){
-          $dn = $this->ogrouplist[$id]['dn'];
-          if (($user= get_lock($dn)) != ""){
-            return(gen_locked_message ($user, $dn));
-          }
-          $this->dns[$id] = $dn;
+          $this->dns[$id] = $this->ogrouplist[$id]['dn'];
         }
+
+        /* Check locks */
+        if ($user= get_multiple_locks($this->dns)){
+          return(gen_locked_message($user,$this->dns));
+        }
+
         $dns_names = array();
         foreach($this->dns as $dn){
-          add_lock ($dn, $this->ui->dn);
           $dns_names[] = @LDAP::fix($dn);
         }
+
+        add_lock ($this->dns, $this->ui->dn);
 
         /* Lock the current entry, so nobody will edit it during deletion */
         $smarty->assign("info", msgPool::deleteInfo($dns_names,_("object group")));
@@ -263,10 +269,11 @@ class ogroupManagement extends plugin
           msg_dialog::display(_("Permission error"), msgPool::permDelete(), INFO_DIALOG);
           new log("security","ogroups/".get_class($this),$dn,array(),"Tried to trick deletion.");
         }
-        /* Remove lock file after successfull deletion */
-        del_lock ($dn);
-        unset($this->dns[$key]);
       }
+
+      /* Remove lock file after successfull deletion */
+      $this->remove_lock();
+      $this->dns = array();
     }
 
 
@@ -276,10 +283,10 @@ class ogroupManagement extends plugin
 
     /* Remove lock */
     if(isset($_POST['delete_multiple_ogroup_cancel'])){
-      foreach($this->dns as $key => $dn){
-        del_lock ($dn);
-        unset($this->dns[$key]);
-      }
+
+      /* Remove lock file after successfull deletion */
+      $this->remove_lock();
+      $this->dns = array();
     }
 
 
@@ -344,7 +351,7 @@ class ogroupManagement extends plugin
       }
 
       /* Remove lock file after successfull deletion */
-      del_lock ($this->dn);
+      $this->remove_lock();
       session::un_set('objectinfo');
     }
 
@@ -355,7 +362,7 @@ class ogroupManagement extends plugin
 
     /* Delete group canceled? */
     if (isset($_POST['delete_cancel'])){
-      del_lock ($this->dn);
+      $this->remove_lock();
       session::un_set('objectinfo');
     }
 
@@ -406,7 +413,7 @@ class ogroupManagement extends plugin
           /* Group has been saved successfully, remove lock from
              LDAP. */
           if ($this->dn != "new"){
-            del_lock ($this->dn);
+            $this->remove_lock();
           }
 
           unset ($this->ogroup);
@@ -433,8 +440,7 @@ class ogroupManagement extends plugin
 
     /* Cancel dialogs */
     if ((isset($_POST['edit_cancel']))  && (isset($this->ogroup->dn))){
-      del_lock ($this->ogroup->dn);
-      unset ($this->ogroup);
+      $this->remove_lock();
       $this->ogroup= NULL;
       session::un_set('objectinfo');
     }
@@ -676,6 +682,20 @@ class ogroupManagement extends plugin
   }
 
 
+  function remove_lock()
+  {
+    if (isset($this->apptabs->dn)){
+      del_lock ($this->apptabs->dn);
+    }
+    if(isset($this->dn) && !empty($this->dn) && $this->dn != "new"){
+      del_lock($this->dn);
+    }
+    if(isset($this->dns) && is_array($this->dns) && count($this->dns)){
+      del_lock($this->dns);
+    }
+  }
+
+
   function save_object()
   {
     $this->DivListOGroup->save_object();
@@ -683,6 +703,7 @@ class ogroupManagement extends plugin
       $this->CopyPasteHandler->save_object();
     }
   }
+
 
 }
 
