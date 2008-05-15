@@ -44,15 +44,15 @@ class msgPool
     }
     if (count($name) == 1){
       if($type == ""){
-        return (_("This object will be deleted:")."<br>".msgPool::buildList($name));
+        return (_("This object will be deleted:")."<br>".msgPool::buildList($name)."<br><br>");
       }else{
-        return (sprintf(_("This '%s' object will be deleted:"),$type). "<br>".msgPool::buildList($name));
+        return (sprintf(_("This '%s' object will be deleted:"),$type). "<br>".msgPool::buildList($name)."<br><br>");
       }
     }
     if($type == ""){
-      return (sprintf(_("These objects will be deleted: %s"), "<br>".msgPool::buildList($name)));
+      return (sprintf(_("These objects will be deleted: %s"), "<br>".msgPool::buildList($name)."<br><br>"));
     }else{
-      return (sprintf(_("These '%s' objects will be deleted: %s"),$type, "<br>".msgPool::buildList($name)));
+      return (sprintf(_("These '%s' objects will be deleted: %s"),$type, "<br>".msgPool::buildList($name)."<br><br>"));
     }
   }
 
