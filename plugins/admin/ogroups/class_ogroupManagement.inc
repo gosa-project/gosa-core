@@ -220,6 +220,7 @@ class ogroupManagement extends plugin
       $ids = $this->list_get_selected_items();
 
       if(count($ids)){
+        $this->dns = array();
         foreach($ids as $id){
           $this->dns[$id] = $this->ogrouplist[$id]['dn'];
         }

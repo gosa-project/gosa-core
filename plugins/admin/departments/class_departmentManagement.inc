@@ -152,6 +152,7 @@ class departmentManagement extends plugin
 
 
       if(count($ids)){
+        $this->dns = array();
         foreach($ids as $id){
           $id = base64_decode($id);
           $this->dns[$id] = $dn = $this->config->departments[$id];
