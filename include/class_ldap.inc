@@ -443,6 +443,34 @@ class LDAP{
     }
   }
 
+
+  /*! \brief Move the given Ldap entry from $source to $dest
+      @param  String  $source The source dn.
+      @param  String  $dest   The destination dn.
+      @return Boolean TRUE on success else FALSE.
+   */
+  function rename_dn($source,$dest)
+  {
+    /* Extract the name and the parent part out ouf source dn.
+        e.g.  cn=herbert,ou=department,dc=... 
+         parent =>  ou=department,dc=...
+         dest   =>  cn=herbert
+     */
+    $parent = preg_replace("/^[^,]+,/","",$dest);
+    $dest   = preg_replace("/,.*$/","",$dest);
+  
+    if($this->hascon){
+      if ($this->reconnect) $this->connect();
+      $r= @ldap_rename($this->cid,$source,$dest,$parent,TRUE); 
+      $this->error = @ldap_error($this->cid);
+      return(!$r ? $r : TRUE);
+    }else{
+      $this->error = "Could not connect to LDAP server";
+      return(FALSE);
+    }
+  }
+
+
   /**
   *  Function rmdir_recursive
   *
@@ -451,7 +479,6 @@ class LDAP{
   *  GiveBack:    True on sucessfull , 0 in error, and "" when we don't get a ldap conection
   *
   */
-
   function rmdir_recursive($srp, $deletedn)
   {
     if($this->hascon){
