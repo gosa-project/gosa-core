@@ -38,6 +38,7 @@ class departmentManagement extends plugin
   /* Vars to handle operations after saving the department 
      Recursive move && tagging   */
   var $ObjectInSaveMode         = false;    // Is true, if current object wasn't saved right now
+  var $dns = array();
 
   function departmentManagement (&$config, &$ui)
   {
@@ -58,7 +59,7 @@ class departmentManagement extends plugin
       Var init 
      ***************/
 
-    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^dep_edit_.*/","/^dep_del_.*/","/^item_selected/","/^remove_multiple_departments/"));
+    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^dep_edit_.*/","/^dep_del_.*/","/^item_selected/","/^remove_multiple_departments/","/^menu_action/"));
 
     /* Reload departments */
     $smarty						= get_smarty();
@@ -153,19 +154,19 @@ class departmentManagement extends plugin
       if(count($ids)){
         foreach($ids as $id){
           $id = base64_decode($id);
-          $dn = $this->config->departments[$id];
-  
-          if (($user= get_lock($dn)) != ""){
-            return(gen_locked_message ($user, $dn));
-          }
-          $this->dns[$id] = $dn;
+          $this->dns[$id] = $dn = $this->config->departments[$id];
+        }
+
+        /* Check locks */
+        if ($user= get_multiple_locks($this->dns)){
+          return(gen_locked_message($user,$this->dns));
         }
 
         $dns_names = array();
         foreach($this->dns as $dn){
-          add_lock ($dn, $this->ui->dn);
           $dns_names[] = @LDAP::fix($dn);
         }
+        add_lock ($this->dns, $this->ui->dn);
 
         /* Lock the current entry, so nobody will edit it during deletion */
         $smarty->assign("info", msgPool::deleteInfo($dns_names));
@@ -195,10 +196,11 @@ class departmentManagement extends plugin
         } else {
           msg_dialog::display(_("Permission error"), msgPool::permDelete(), WARNING_DIALOG);
         }
-        /* Remove lock file after successfull deletion */
-        del_lock ($dn);
-        unset($this->dns[$key]);
       }
+
+      /* Remove lock file after successfull deletion */
+      $this->remove_lock();
+      $this->dns = array();
     }
 
  
@@ -208,10 +210,10 @@ class departmentManagement extends plugin
 
     /* Remove lock */
     if(isset($_POST['delete_multiple_department_cancel'])){
-      foreach($this->dns as $key => $dn){
-        del_lock ($dn);
-        unset($this->dns[$key]);
-      }
+
+      /* Remove lock file after successfull deletion */
+      $this->remove_lock();
+      $this->dns = array();
     }
 
 
@@ -350,7 +352,7 @@ class departmentManagement extends plugin
      $this->config->get_departments();
      $this->ObjectInSaveMode = false;
      if ($this->dn != "new"){
-       del_lock ($this->dn);
+       $this->remove_lock();
      }
      unset ($this->deptabs);
      $this->deptabs= NULL;
@@ -366,8 +368,7 @@ class departmentManagement extends plugin
      * Cancel dialog 
      */
     if (isset($_POST['edit_cancel']) || isset($_POST['delete_cancel']) || isset($_POST['delete_department_confirm'])){
-      del_lock ($this->dn);
-      unset($this->depdabs);
+      $this->remove_lock();
       $this->deptabs= NULL;
       session::un_set('objectinfo');
     }
@@ -493,6 +494,12 @@ class departmentManagement extends plugin
   {
     if (isset($this->dn)){
       del_lock ($this->dn);
+    }
+    if(isset($this->dn) && !empty($this->dn) && $this->dn != "new"){
+      del_lock($this->dn);
+    }
+    if(isset($this->dns) && is_array($this->dns) && count($this->dns)){
+      del_lock($this->dns);
     }
   }
 

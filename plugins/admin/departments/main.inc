@@ -24,7 +24,6 @@ if ($remove_lock){
         if(session::is_set('department')){
                 $department = session::get('department');
                 $department->remove_lock();
-                del_lock ($ui->dn);
                 session::un_set ('department');
         }
 } else {
