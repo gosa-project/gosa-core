@@ -35,6 +35,8 @@ class groupManagement extends plugin
   var $ShowPrimaryCheckBox= false; 
   var $start_pasting_copied_objects = FALSE;
 
+  var $dns = array();
+
   function groupManagement (&$config, &$ui)
   {
     /* Save configuration for internal use */
@@ -262,7 +264,7 @@ class groupManagement extends plugin
         if (!isset($_POST['edit_apply'])){
           /* Group has been saved successfully, remove lock from LDAP. */
           if ($this->dn != "new"){
-            del_lock ($this->dn);
+            $this->remove_lock();
           }
 
           /* There's no page reload so we have to read new groups at this point. */
@@ -342,19 +344,21 @@ class groupManagement extends plugin
 
       if(count($ids)){
 
+        $this->dns = array();
         foreach($ids as $id){
-          $dn = $this->grouplist[$id]['dn'];
-          if (($user= get_lock($dn)) != ""){
-            return(gen_locked_message ($user, $dn));
-          }
-          $this->dns[$id] = $dn;
+          $this->dns[$id] =  $this->grouplist[$id]['dn'];
+        }
+
+        /* Check locks */
+        if ($user= get_multiple_locks($this->dns)){
+          return(gen_locked_message($user,$this->dns));
         }
 
         $dns_names = array();
         foreach($this->dns as $dn){
-          add_lock ($dn, $this->ui->dn);
           $dns_names[] =@LDAP::fix($dn);
         }
+        add_lock ($this->dns, $this->ui->dn);
 
         /* Lock the current entry, so nobody will edit it during deletion */
         $smarty->assign("info", msgPool::deleteInfo($dns_names,_("group")));
@@ -393,10 +397,11 @@ class groupManagement extends plugin
             msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
             new log("security","groups/".get_class($this),$dn,array(),"Tried to trick deletion.");
           }
-          /* Remove lock file after successfull deletion */
-          del_lock ($dn);
-          unset($this->dns[$key]);
         }
+
+        /* Remove lock file after successfull deletion */
+        $this->remove_lock();
+        $this->dns = array();
       }
 
 
@@ -406,10 +411,10 @@ class groupManagement extends plugin
 
       /* Remove lock */
     if(isset($_POST['delete_multiple_user_cancel'])){
-      foreach($this->dns as $key => $dn){
-        del_lock ($dn);
-        unset($this->dns[$key]);
-      }
+
+      /* Remove lock file after successfull deletion */
+      $this->remove_lock();
+      $this->dns = array();
     }
 
 
@@ -479,7 +484,7 @@ class groupManagement extends plugin
       }
 
       /* Remove lock file after successfull deletion */
-      del_lock ($this->dn);
+      $this->remove_lock();
       session::un_set('objectinfo');
     }
 
@@ -490,7 +495,7 @@ class groupManagement extends plugin
 
     /* Delete group canceled? */
     if (isset($_POST['delete_cancel'])){
-      del_lock ($this->dn);
+      $this->remove_lock();
       session::un_set('objectinfo');
     }
     
@@ -502,9 +507,8 @@ class groupManagement extends plugin
     /* Cancel dialogs */
     if (isset($_POST['edit_cancel']) || isset($_POST['password_cancel'])){
       if(isset($this->grouptab->dn)){
-        del_lock ($this->grouptab->dn);
+        $this->remove_lock();
       }
-      unset ($this->grouptab);
       $this->grouptab= NULL;
       session::un_set('objectinfo');
     }
@@ -777,6 +781,12 @@ class groupManagement extends plugin
   {
     if (isset($this->grouptab->dn)){
       del_lock ($this->grouptab->dn);
+    }
+    if(isset($this->dn) && !empty($this->dn) && $this->dn != "new"){
+      del_lock($this->dn);
+    }
+    if(isset($this->dns) && is_array($this->dns) && count($this->dns)){
+      del_lock($this->dns);
     }
   }
 
