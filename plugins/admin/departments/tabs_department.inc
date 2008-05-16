@@ -46,6 +46,7 @@ class deptabs extends tabs
    */
   function am_i_moved()
   {
+    return(FALSE);
     if($this->moved) return(FALSE);
     $baseobject= &$this->by_object['department'];
     $ou       = preg_replace('/,/', '\,', $baseobject->ou);  
@@ -90,6 +91,12 @@ class deptabs extends tabs
     $baseobject= &$this->by_object['department'];
     $ou       = preg_replace('/,/', '\,', $baseobject->ou);  
     $new_dn   = @LDAP::convert('ou='.$ou.','.$baseobject->base);
+
+    /* Move group? */
+    if ($this->dn != $new_dn && $this->dn != "new"){
+        $baseobject->move($this->dn,$new_dn);
+    } 
+
     $this->dn= $new_dn;
     $baseobject->dn= $this->dn;
     if (!$ignore_account){

@@ -900,6 +900,7 @@ class plugin
     $ldap = $this->config->get_ldap_link();
     if (!$ldap->rename_dn($src_dn,$dst_dn)){
       msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $src_dn, "", get_class()));
+      return(FALSE);
     }
 
     /* Get list of groups within this tree,
@@ -984,8 +985,7 @@ class plugin
       $ui->reset_acl_cache();
     }
 
-    echo sprintf("# %s  --- %.6f<br>",__LINE__,(microtime(1) - $start));
-    return(1); 
+    return(TRUE); 
   }
 
 
@@ -1003,7 +1003,7 @@ class plugin
         Currently still deactivated. !!
     
      */
-    if(FALSE){
+    if(TRUE){
       return($this->rename($src_dn, $dst_dn));
     }
 
