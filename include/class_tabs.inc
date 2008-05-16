@@ -302,12 +302,17 @@ class tabs
 
       $obj->dn= $this->dn;
 
-      if ($obj->is_account || $ignore_account || $obj->ignore_account){
-        if ($obj->save() == 1){
-          return (1);
+      if(!$obj instanceof plugin){
+        trigger_error("Something went wrong while saving ".$obj->dn.". Object class '".get_class($obj)."'.");
+      }else{
+
+        if ($obj->is_account || $ignore_account || $obj->ignore_account){
+          if ($obj->save() == 1){
+            return (1);
+          }
+        } else {
+          $obj->remove_from_parent();
         }
-      } else {
-        $obj->remove_from_parent();
       }
     }
     return (0);
