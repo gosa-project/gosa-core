@@ -91,6 +91,7 @@ function displayLogin()
   }
   $smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
   $smarty->display (get_template_path('headers.tpl'));
+  $smarty->assign("version",get_gosa_version());
   $smarty->display(get_template_path('login.tpl'));
   exit();
 }
