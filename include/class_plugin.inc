@@ -882,11 +882,129 @@ class plugin
   }
 
 
+
+  /*! \brief  Move a given ldap object indentified by $src_dn   \
+               to the given destination $dst_dn   \
+              * Ensure that all references are updated (ogroups) \
+              * Update ACLs   \
+              * Update accessTo   \
+      @param  String  The source dn.
+      @param  String  The destination dn.
+      @return Boolean TRUE on success else FALSE.
+   */
+  function rename($src_dn, $dst_dn)
+  {
+    $start = microtime(1);
+
+    /* Try to move the source entry to the destination position */
+    $ldap = $this->config->get_ldap_link();
+    if (!$ldap->rename_dn($src_dn,$dst_dn)){
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $src_dn, "", get_class()));
+    }
+
+    /* Get list of groups within this tree,
+        maybe we have to update ACL references.
+     */
+    $leaf_groups = get_list("(objectClass=posixGroup)",array("all"),$dst_dn,
+          array("dn","objectClass"),GL_SUBSEARCH | GL_NO_ACL_CHECK);
+    
+    /* Get list of users within this tree,
+        maybe we have to update ACL references.
+     */
+    $leaf_users=  get_list("(objectClass=gosaAccount)",array("all"),$dst_dn,
+          array("dn","objectClass"),GL_SUBSEARCH | GL_NO_ACL_CHECK);
+
+
+    /* Updated acls set for this groups */
+    foreach($leaf_groups as $group){
+      $new_dn = $group['dn'];
+      $old_dn = preg_replace("/".normalizePreg($dst_dn)."$/i",$src_dn,$new_dn);
+      $this->update_acls($old_dn,$new_dn); 
+    }
+
+    /* Updated acls set for this users */
+    foreach($leaf_users as $user){
+      $new_dn = $user['dn'];
+      $old_dn = preg_replace("/".normalizePreg($dst_dn)."$/i",$src_dn,$new_dn);
+      $this->update_acls($old_dn,$new_dn); 
+    }
+
+    /* Get all objectGroups defined in this database. 
+        and check if there is an entry matching the source dn,
+        if this is the case, then update this objectgroup to use the new dn.
+     */
+    $ogroups = get_sub_list("(&(objectClass=gosaGroupOfNames)(member=*))","ogroups",
+        array(get_ou("ogroupou")),$this->config->current['BASE'],array("member"),
+        GL_SUBSEARCH | GL_NO_ACL_CHECK) ;
+
+    /* Walk through all objectGroups and check if there are 
+        members matching the source dn 
+     */
+    foreach($ogroups as $ogroup){
+      if(isset($ogroup['member'])){
+
+        /* Reset class object, this will be initialized with class_ogroup on demand 
+         */
+        $o_ogroup = NULL; 
+        for($i = 0 ; $i < $ogroup['member']['count'] ; $i ++){
+
+          $c_mem = $ogroup['member'][$i];
+  
+          if(preg_match("/".normalizePreg($src_dn)."$/i",$c_mem)){
+ 
+            $d_mem = preg_replace("/".normalizePreg($src_dn)."$/i",$dst_dn,$ogroup['member'][$i]);
+
+            if($o_ogroup == NULL){
+              $o_ogroup = new ogroup($this->config,$ogroup['dn']);
+            }              
+
+            unset($o_ogroup->member[$c_mem]);
+            $o_ogroup->member[$d_mem]= $d_mem;
+          }
+        }
+       
+        /* Save object group if there were changes made on the membership */ 
+        if($o_ogroup != NULL){
+          $o_ogroup->save();
+        }
+      }
+    }
+ 
+    /* Check if there are gosa departments moved. 
+       If there were deps moved, the force reload of config->deps.
+     */
+    $leaf_deps=  get_list("(objectClass=gosaDepartment)",array("all"),$dst_dn,
+          array("dn","objectClass"),GL_SUBSEARCH | GL_NO_ACL_CHECK);
+  
+    if(count($leaf_deps)){
+      $this->config->get_departments();
+      $this->config->make_idepartments();
+      session::set("config",$this->config);
+      $ui =get_userinfo();
+      $ui->reset_acl_cache();
+    }
+
+    echo sprintf("# %s  --- %.6f<br>",__LINE__,(microtime(1) - $start));
+    return(1); 
+  }
+
+
+
   function move($src_dn, $dst_dn)
   {
     /* Do not copy if only upper- lowercase has changed */
     if(strtolower($src_dn) == strtolower($dst_dn)){
       return(TRUE);
+    }
+
+    
+    /* Try to move the entry instead of copy & delete
+    
+        Currently still deactivated. !!
+    
+     */
+    if(FALSE){
+      return($this->rename($src_dn, $dst_dn));
     }
 
     /* Copy source to destination */
@@ -1595,11 +1713,11 @@ class plugin
 
         $acls = array();
 
+        /* Reset vars */
+        $found = false;
+
         /* Walk through acls */
         for($i = 0 ; $i <  $attrs['gosaAclEntry']['count'] ; $i ++ ){
-
-          /* Reset vars */
-          $found = false;
 
           /* Get Acl parts */
           $acl_parts = split(":",$attrs['gosaAclEntry'][$i]);
@@ -1620,7 +1738,7 @@ class plugin
               $members[$key] = base64_encode($new_dn);
             }
           } 
-         
+       
           /* Create new member string */ 
           $new_members = "";
           foreach($members as $member){
@@ -1635,6 +1753,7 @@ class plugin
            $acl_str .= $t.":";
           }
           $acl_str = preg_replace("/:$/","",$acl_str);
+          $acls[] = $acl_str;
        }
 
        /* Acls for this object must be adjusted */

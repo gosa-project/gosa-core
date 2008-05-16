@@ -454,12 +454,14 @@ class LDAP{
     /* Check if source and destination are the same entry */
     if(strtolower($source) == strtolower($dest)){
       trigger_error("Source and destination can't be the same entry.");
+      $this->error = "Source and destination can't be the same entry.";
       return(FALSE);
     }
 
     /* Check if destination entry exists */    
     if($this->dn_exists($dest)){
       trigger_error("Destination '$dest' already exists.");
+      $this->error = "Destination '$dest' already exists.";
       return(FALSE);
     }
 
@@ -473,13 +475,13 @@ class LDAP{
   
     if($this->hascon){
       if ($this->reconnect) $this->connect();
-      $r= @ldap_rename($this->cid,$source,$dest_rdn,$parent,TRUE); 
-      $this->error = @ldap_error($this->cid);
+      $r= ldap_rename($this->cid,$source,$dest_rdn,$parent,TRUE); 
+      $this->error = ldap_error($this->cid);
 
       /* Check if destination dn exists, if not the 
           server may not support this operation */
-      $r &= $this->dn_exists($dest);
-      return(!$r ? $r : TRUE);
+      $r &= is_resource($this->dn_exists($dest));
+      return($r);
     }else{
       $this->error = "Could not connect to LDAP server";
       return(FALSE);
