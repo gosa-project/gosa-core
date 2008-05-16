@@ -753,7 +753,7 @@ class plugin
   function rebind($ldap, $referral)
   {
     $credentials= LDAP::get_credentials($referral, $this->config->current['REFERRAL']);
-    if (ldap_bind($ldap, $credentials['ADMIN'], $credentials['PASSWORD'])) {
+    if (ldap_bind($ldap, $credentials['ADMIN'], $this->config->get_credentials($credentials['PASSWORD']))) {
       $this->error = "Success";
       $this->hascon=true;
       $this->reconnect= true;
