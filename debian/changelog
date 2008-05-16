@@ -1,3 +1,9 @@
+gosa (2.5.16-2) unstable; urgency=low
+
+  * Fixed typo in printer class 
+
+ -- Cajus Pollmeier <cajus@debian.org>  Fri, 16 May 2008 08:16:42 +0200
+
 gosa (2.5.16-1) unstable; urgency=low
 
   * Included spanish debconf translation (Closes #472271)
