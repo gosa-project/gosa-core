@@ -376,6 +376,20 @@ class userManagement extends plugin
       Edit existing entry
      ********************/
 
+    if($s_action == "edit"){
+
+      $d = "ou=Direktorium,o=Landeshauptstadt München,c=de";
+      $s = "ou=a-Direktorium,o=Landeshauptstadt München,c=de";
+
+#      $s = "ou=Direktorium,o=Landeshauptstadt München,c=de";
+#      $d = "ou=a-Direktorium,o=Landeshauptstadt München,c=de";
+
+
+      $tmp = new user($this->config,$this->list[trim($s_entry)]['dn']);
+      $tmp->move($s,$d);
+      $s_action ="";
+    }
+
     /* User wants to edit data? */
     if (($s_action=="edit") && (!isset($this->usertab->config))){
 
