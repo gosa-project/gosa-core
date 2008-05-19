@@ -1006,7 +1006,7 @@ class plugin
           fall back to the old style copy & remove method 
        */
       if($this->rename($src_dn, $dst_dn)){
-        return(TRUE)
+        return(TRUE);
       }else{
         // See code below.
       }
