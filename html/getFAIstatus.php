@@ -41,21 +41,8 @@ if(!isset($_GET['mac'])){
 
 $config = session::get("config");
 $o =  new gosaSupportDaemon();
-$res = $o->get_entries_by_mac(array($_GET['mac']));
+$res = $o->get_entries_by_mac(split(",",$_GET['mac']));
 foreach($res as $entry){
-	if(strtolower($entry['MACADDRESS']) == strtolower($_GET['mac'])){
-		$img = "<img src='progress.php?x=80&y=13&p=".$entry['PROGRESS']."' 
-			alt='".$entry['STATUS']."' title='".$entry['STATUS']."'>";
-	}
+	echo $entry['MACADDRESS']."|".$entry['PROGRESS']."\n";
 }
-
-
 ?>
-<html>
-<head>
-	<meta http-equiv="refresh" content="15">
-</head>
-<body style="margin:0px;padding:0px;">
-<?php echo $img; ?> 
-</body>
-</html>
