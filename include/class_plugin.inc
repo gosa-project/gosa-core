@@ -999,12 +999,17 @@ class plugin
 
     
     /* Try to move the entry instead of copy & delete
-    
-        Currently still deactivated. !!
-    
      */
     if(TRUE){
-      return($this->rename($src_dn, $dst_dn));
+
+      /* Try to move with ldap routines, if this was not successfull
+          fall back to the old style copy & remove method 
+       */
+      if($this->rename($src_dn, $dst_dn)){
+        return(TRUE)
+      }else{
+        // See code below.
+      }
     }
 
     /* Copy source to destination */
