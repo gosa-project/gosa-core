@@ -201,7 +201,7 @@ class ogrouptabs extends tabs
     /* Add application tab if user or group is member in this object group*/
     if(class_available("appgroup")){
       if((preg_match("/G/",$objects) || preg_match("/U/",$objects)) && !isset($this->by_name['appgroup'])){
-        $this->by_name['appgroup']= _("Application");
+        $this->by_name['appgroup']= _("Applications");
         $this->by_object['appgroup']= new appgroup($this->config, $this->dn);
         $this->by_object['appgroup']->acl = "#all#";
         $this->by_object['appgroup']->parent= &$this;
