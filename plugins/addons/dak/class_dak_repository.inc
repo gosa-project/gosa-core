@@ -29,7 +29,8 @@ class dak_repository extends plugin
 
   public function execute()
   {
-    return("-");
+    $smarty= get_smarty();
+    return($smarty->fetch (get_template_path('dak_queue.tpl', TRUE, dirname(__FILE__))));
   }
 
 

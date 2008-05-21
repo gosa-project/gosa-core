@@ -29,7 +29,8 @@ class dak_queue extends plugin
 
   public function execute()
   {
-    return("-");
+    $smarty= get_smarty();
+    return($smarty->fetch (get_template_path('dak_queue.tpl', TRUE, dirname(__FILE__))));
   }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
