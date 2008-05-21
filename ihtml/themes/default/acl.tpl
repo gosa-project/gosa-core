@@ -8,6 +8,9 @@
 <h1>{t}ACL type{/t} <select size="1" name="aclType" title="{t}Select an acl type{/t}" onChange="document.mainform.submit()">{html_options options=$aclTypes selected=$aclType}<option disabled>&nbsp;</option></select>&nbsp;{if $javascript eq 'false'}<input type="submit" value="{t}Apply{/t}" name="refresh">{/if}</h1>
 
 <p class="seperator">&nbsp;</p>
+<div style='padding:3px;'>
+{t}Additional filter options{/t}&nbsp; <input type='text' value='{$aclFilter}' name='aclFilter' style='width:600px;'>
+</div>
 
 <table style="width:100%">
  <tr>
