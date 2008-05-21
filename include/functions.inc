@@ -2672,6 +2672,8 @@ function send_binary_content($data,$name,$type = "application/octet-stream")
   header("Cache-Control: post-check=0, pre-check=0");
   header("Content-type: ".$type."");
 
+  $HTTP_USER_AGENT = $_SERVER['HTTP_USER_AGENT'];
+  
   /* force download dialog */
   if (preg_match('/MSIE 5.5/', $HTTP_USER_AGENT) || preg_match('/MSIE 6.0/', $HTTP_USER_AGENT)) {
     header('Content-Disposition: filename="'.$name.'"');
