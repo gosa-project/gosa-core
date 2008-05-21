@@ -210,7 +210,7 @@ class userinfo
 
     /* Push cache answer? */
     $ACL_CACHE = &session::get('ACL_CACHE');
-    if (isset($ACL_CACHE["$dn+$object+$attribute"])){
+    if (0 && isset($ACL_CACHE["$dn+$object+$attribute"])){
 
       /* Remove write if needed */
       if ($skip_write){
@@ -220,6 +220,10 @@ class userinfo
       } 
       return($ret);
     }
+
+    /* Get ldap object, for later filter checks 
+     */
+    $ldap = $this->config->get_ldap_link();
 
     $acl= array("r" => "", "w" => "", "c" => "", "d" => "", "m" => "", "a" => "");
 
@@ -255,7 +259,31 @@ class userinfo
             continue;
           }
 
-          /* Per attribute ACL? */
+#         /* With user filter */
+#         $sdn = preg_replace("/^[^,]*+,/","",$dn);
+#         if (isset($subacl['filter']) && !empty($subacl['filter'])){
+#
+#           $ldap->cd($sdn);
+#           $ldap->ls($subacl['filter'],$sdn);
+#           if(!$ldap->count()){
+#             continue;
+#           }else{
+#             $found = FALSE; 
+#             while($attrs = $ldap->fetch()){
+#               echo $attrs['dn']."<br>";
+#               if($attrs['dn'] == $dn){
+#                 $found = TRUE;
+#                 echo $acl."<br>";;
+#                 break;
+#               }
+#             }
+#             if(!$found){
+#               continue;
+#             }
+#           }
+#         }
+
+         /* Per attribute ACL? */
           if (isset($subacl['acl'][$object][$attribute])){
             $acl= $this->mergeACL($acl, $subacl['type'], $subacl['acl'][$object][$attribute]);
             continue;

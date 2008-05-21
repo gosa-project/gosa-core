@@ -39,6 +39,7 @@ class acl extends plugin
   var $target= "group";
   var $aclTypes= array();
   var $aclObjects= array();
+  var $aclFilter= "";
   var $aclMyObjects= array();
   var $users= array();
   var $roles= array();
@@ -225,7 +226,7 @@ class acl extends plugin
   {
     /* Call parent execute */
     plugin::execute();
-  
+
     $tmp= session::get('plist');
     $plist= $tmp->info;
 
@@ -355,6 +356,7 @@ class acl extends plugin
       $this->gosaAclEntry[$this->currentIndex]['type']= $this->aclType;
       $this->gosaAclEntry[$this->currentIndex]['members']= $this->recipients;
       $this->gosaAclEntry[$this->currentIndex]['acl']= $this->aclContents;
+      $this->gosaAclEntry[$this->currentIndex]['filter']= $this->aclFilter;
       $this->dialogState= 'head';
       $this->dialog= FALSE;
     }
@@ -406,7 +408,7 @@ class acl extends plugin
     }
 
     /* Save common values */
-    foreach (array("aclType", "aclObject", "target") as $key){
+    foreach (array("aclType","aclFilter", "aclObject", "target") as $key){
       if (isset($_POST[$key])){
         $this->$key= validate($_POST[$key]);
       }
@@ -477,6 +479,7 @@ class acl extends plugin
 
       $smarty->assign("aclList", $aclList->DrawList());
       $smarty->assign("aclType", $this->aclType);
+      $smarty->assign("aclFilter", $this->aclFilter);
       $smarty->assign("aclTypes", $this->aclTypes);
       $smarty->assign("target", $this->target);
       $smarty->assign("targets", $this->targets);
@@ -801,8 +804,18 @@ class acl extends plugin
 
   static function explodeACL($acl)
   {
-    list($index, $type)= split(':', $acl);
+
+    $list= split(':', $acl);
+    if(count($list) == 5){
+      list($index, $type,$member,$permission,$filter)= $list;
+      $filter = base64_decode($filter);
+    }else{
+      $filter = "";
+      list($index, $type,$member,$permission)= $list;
+    }
+
     $a= array( $index => array("type" => $type,
+                               "filter"=> $filter,
                                "members" => acl::extractMembers($acl,$type == "role")));
    
     /* Handle different types */
@@ -877,7 +890,7 @@ class acl extends plugin
   static function extractACL($acl)
   {
     /* Rip acl off the string, seperate by ',' and place it in an array */
-    $as= preg_replace('/^[^:]+:[^:]+:[^:]*:(.*)$/', '\1', $acl);
+    $as= preg_replace('/^[^:]+:[^:]+:[^:]*:([^:]*).*$/', '\1', $acl);
     $aa= split(',', $as);
     $a= array();
 
@@ -963,6 +976,7 @@ class acl extends plugin
     /* New entry gets presets... */
     if ($new){
       $this->aclType= 'base';
+      $this->aclFilter= "";
       $this->recipients= array();
       $this->aclContents= array();
     } else {
@@ -970,6 +984,7 @@ class acl extends plugin
       $this->aclType= $acl['type'];
       $this->recipients= $acl['members'];
       $this->aclContents= $acl['acl'];
+      $this->aclFilter= $acl['filter'];
     }
 
     $this->wasNewEntry= $new;
@@ -1001,6 +1016,7 @@ class acl extends plugin
   {
     /* Assemble ACL's */
     $tmp_acl= array();
+  
     foreach ($this->gosaAclEntry as $prio => $entry){
       $final= "";
       $members= "";
@@ -1042,6 +1058,12 @@ class acl extends plugin
           }
         }
         $final.= preg_replace('/,$/', '', $acl);
+      }
+
+      /* Append additional filter options 
+       */
+      if(!empty($entry['filter'])){
+        $final .= ":".base64_encode($entry['filter']);
       }
 
       $tmp_acl[]= $final;
