@@ -179,6 +179,25 @@ class ogrouptabs extends tabs
       }
     }
 
+    /* Add environment tab if user or group is member in this object group*/
+    if(class_available("environment")){
+      if((preg_match("/G/",$objects) || preg_match("/U/",$objects)) && !isset($this->by_name['environment'])){
+        $this->by_name['environment']= _("Environment");
+        $this->by_object['environment']= new environment($this->config, $this->dn);
+        $this->by_object['environment']->acl = "#all#";
+        $this->by_object['environment']->parent= &$this;
+      }
+    }
+
+    /* Remove environment tab if not required any longer */
+    if(class_available("environment")){
+      if(!preg_match("/G/",$objects) && !preg_match("/U/",$objects) && isset($this->by_name['environment'])){
+        $this->by_object['environment']->remove_from_parent();
+        unset($this->by_name['environment']);
+        unset($this->by_object['environment']);
+      }
+    }
+
     /* Add application tab if user or group is member in this object group*/
     if(class_available("appgroup")){
       if((preg_match("/G/",$objects) || preg_match("/U/",$objects)) && !isset($this->by_name['appgroup'])){
@@ -198,24 +217,6 @@ class ogrouptabs extends tabs
       }
     }
 
-    /* Add environment tab if user or group is member in this object group*/
-    if(class_available("environment")){
-      if((preg_match("/G/",$objects) || preg_match("/U/",$objects)) && !isset($this->by_name['environment'])){
-        $this->by_name['environment']= _("Environment");
-        $this->by_object['environment']= new environment($this->config, $this->dn);
-        $this->by_object['environment']->acl = "#all#";
-        $this->by_object['environment']->parent= &$this;
-      }
-    }
-
-    /* Remove environment tab if not required any longer */
-    if(class_available("environment")){
-      if(!preg_match("/G/",$objects) && !preg_match("/U/",$objects) && isset($this->by_name['environment'])){
-        $this->by_object['environment']->remove_from_parent();
-        unset($this->by_name['environment']);
-        unset($this->by_object['environment']);
-      }
-    }
     /* Move reference tab to second position from right */
     if(class_available("acl")){
       if(isset($this->by_name['acl'])){
