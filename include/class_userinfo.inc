@@ -313,11 +313,7 @@ class userinfo
     /* Assemble string */
     $ret= "";
     foreach ($acl as $key => $value){
-      /*  Why doesn't 
-            if($value !=""){ 
-          work here??? It skips 0 too.
-       */
-      if (!preg_match("/^$/",$value)){ 
+      if ($value !== ""){
         $ret.= $key;
       }
     }
