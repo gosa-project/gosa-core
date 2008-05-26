@@ -304,11 +304,18 @@ class divListUsers extends MultiSelectWindow
       /* Add copy & cut icons */     
       $acl_all  = $ui->has_complete_category_acls($this->selectedBase,"users") ;
       $acl      = $ui->get_permissions($val['dn'],"users/user");
-      if(preg_match("/(r.*w|w.*r)/",$acl) && $this->parent->CopyPasteHandler){
+      if(preg_match("/(r.*d|r.*d)/",$acl) && $this->parent->CopyPasteHandler){
         $action .= "<input class='center' type='image'
           src='images/lists/cut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+      }else{
+        $action.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
+      }
+
+      if(preg_match("/r/",$acl) && $this->parent->CopyPasteHandler){
         $action.= "<input class='center' type='image'
           src='images/lists/copy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
+      }else{
+        $action.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
       }
 
       /* Add deactivate status */
@@ -333,6 +340,8 @@ class divListUsers extends MultiSelectWindow
       /* Add deactivate status if we are allowed to */
       if (preg_match("/w/",$acl)){
         $action.= $lock_status;
+      }else{
+        $action.="<img src='images/empty.png' alt=' ' class='center'>";
       }
 
       /* Add Password change icon, if we are able to write users/password */
@@ -347,6 +356,9 @@ class divListUsers extends MultiSelectWindow
       /* Add snapshot icon */
       if(preg_match("/(r.*w|w.*r)/",$acl)){
         $action.= $this->GetSnapShotActions($val['dn']);
+      }else{
+        $action.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
+        $action.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
       }
 
       /* Add remove icon, if we are allowed to remove the current user */
