@@ -784,7 +784,6 @@ class user extends plugin
         }else{
           $this->base = $base_tmp;
           msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
-          $this->set_acl_base('dummy,'.$this->base);
         }
       }
 
@@ -800,8 +799,6 @@ class user extends plugin
           }
         }
       }
-
-      $this->set_acl_base('dummy,'.$this->base);
     }
   }
 
