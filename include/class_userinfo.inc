@@ -259,31 +259,28 @@ class userinfo
             continue;
           }
 
-#         /* With user filter */
-#         $sdn = preg_replace("/^[^,]*+,/","",$dn);
-#         if (isset($subacl['filter']) && !empty($subacl['filter'])){
-#
-#           $ldap->cd($sdn);
-#           $ldap->ls($subacl['filter'],$sdn);
-#           if(!$ldap->count()){
-#             continue;
-#           }else{
-#             $found = FALSE; 
-#             while($attrs = $ldap->fetch()){
-#               echo $attrs['dn']."<br>";
-#               if($attrs['dn'] == $dn){
-#                 $found = TRUE;
-#                 echo $acl."<br>";;
-#                 break;
-#               }
-#             }
-#             if(!$found){
-#               continue;
-#             }
-#           }
-#         }
+         /* With user filter */
+         if (isset($subacl['filter']) && !empty($subacl['filter'])){
+           $sdn = preg_replace("/^[^,]*+,/","",$dn);
+           $ldap->cd($sdn);
+           $ldap->ls($subacl['filter'],$sdn);
+           if(!$ldap->count()){
+             continue;
+           }else{
+             $found = FALSE; 
+             while($attrs = $ldap->fetch()){
+               if($attrs['dn'] == $dn){
+                 $found = TRUE;
+                 break;
+               }
+             }
+             if(!$found){
+               continue;
+             }
+           }
+         }
 
-         /* Per attribute ACL? */
+          /* Per attribute ACL? */
           if (isset($subacl['acl'][$object][$attribute])){
             $acl= $this->mergeACL($acl, $subacl['type'], $subacl['acl'][$object][$attribute]);
             continue;

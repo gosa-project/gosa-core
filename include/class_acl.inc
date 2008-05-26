@@ -326,12 +326,17 @@ class acl extends plugin
     if ($aclDialog && $this->aclObject != "" && is_array($this->ocMapping[$this->aclObject])){
 
       foreach ($this->ocMapping[$this->aclObject] as $oc){
-        unset($this->aclContents[$oc]);
-        unset($this->aclContents[$this->aclObject.'/'.$oc]);
-        if (isset($new_acl[$oc])){
+
+        if(isset($this->aclContents[$oc]) && is_array($this->aclContents)){
+          unset($this->aclContents[$oc]);
+          unset($this->aclContents[$this->aclObject.'/'.$oc]);
+        }else{
+#          trigger_error("Huhm?");
+        }
+        if (isset($new_acl[$oc]) && is_array($new_acl)){
           $this->aclContents[$oc]= $new_acl[$oc];
         }
-        if (isset($new_acl[$this->aclObject.'/'.$oc])){
+        if (isset($new_acl[$this->aclObject.'/'.$oc]) && is_array($new_acl)){
           $this->aclContents[$this->aclObject.'/'.$oc]= $new_acl[$this->aclObject.'/'.$oc];
         }
       }
