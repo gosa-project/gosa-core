@@ -145,7 +145,7 @@ fi
 echo "Apdapting debian descriptive files..."
 
 # Generate install file
-for dir in admin personal addons; do
+for dir in admin personal addons gofax gofon generic; do
 	[ -d $dir ] && echo -e "$dir\t\t\t/usr/share/gosa/plugins" >> debian/install
 done
 for dir in help/*; do
