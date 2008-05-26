@@ -160,13 +160,14 @@ class acl extends plugin
 
           /* Non numeric index means -> base object containing more informations */
           if (preg_match('/^[0-9]+$/', $idx)){
+
             if (!isset($this->ocMapping[$data])){
               $this->ocMapping[$data]= array();
               $this->ocMapping[$data][]= '0';
             }
 
             if(isset($cats[$data])){
-              $this->myAclObjects[$idx.'/'.$class]= $acls['plDescription'];
+              $this->myAclObjects[$data.'/'.$class]= $acls['plDescription'];
             }
             $this->ocMapping[$data][]= $class;
           } else {
