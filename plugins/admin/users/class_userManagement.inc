@@ -246,6 +246,7 @@ class userManagement extends plugin
       $acl = $this->ui->get_permissions($dn, "users/password");
       $cacl= $this->ui->get_permissions($dn, "users/user");
 
+      /* Are we allowed to create a new user or to set the password attribute? */
       if (preg_match('/w/', $acl) || preg_match('/c/', $cacl)){
 
         /* Check input and feed errors into 'message' */
@@ -362,8 +363,6 @@ class userManagement extends plugin
            dialog. */
         session::set('objectinfo',$this->dn);
         return ($smarty->fetch(get_template_path('password.tpl', TRUE)));
-        
-
       } else {
         /* User is not allowed. Show message and cancel. */
         msg_dialog::display(_("Password change"),_("You have no permission to change this users password!"),WARNING_DIALOG);
@@ -478,9 +477,9 @@ class userManagement extends plugin
               $this->templates[$ldap->getDN()]=
                 $attrs['uid'][0]." - ".@LDAP::fix($key);
             }
-	    if ($s_action != "templatize_multiple"){
-		    $this->templates['none']= _("none");
-	    }
+            if ($s_action != "templatize_multiple"){
+              $this->templates['none']= _("none");
+            }
           }
         }
       }
@@ -521,22 +520,22 @@ class userManagement extends plugin
 
       /* Template readable? */
       if (preg_match('/r/', $acl)){
-	$template_dn= $_POST['template'];
+        $template_dn= $_POST['template'];
 
         foreach ($this->dns as $dn){
-      	  $acl = $this->ui->get_permissions($_POST['template'], "users/user");
-      	  if (preg_match('/w/', $acl)){
-	          $usertab= new usertabs($this->config, $this->config->data['TABS']['USERTABS'], $dn);
-	          $usertab->adapt_from_template($template_dn, array("sn", "givenName", "uid"));
-	          $usertab->save();
-	          unset ($usertab);
-	          $usertab= NULL;
-	  } else {
-		  msg_dialog::display(_("Permission error"), sprintf(_("You have no permission to modify object '%s'!"), $dn), ERROR_DIALOG);
+          $acl = $this->ui->get_permissions($_POST['template'], "users/user");
+          if (preg_match('/w/', $acl)){
+            $usertab= new usertabs($this->config, $this->config->data['TABS']['USERTABS'], $dn);
+            $usertab->adapt_from_template($template_dn, array("sn", "givenName", "uid"));
+            $usertab->save();
+            unset ($usertab);
+            $usertab= NULL;
+          } else {
+            msg_dialog::display(_("Permission error"), sprintf(_("You have no permission to modify object '%s'!"), $dn), ERROR_DIALOG);
           }
         }
       } else {
-	msg_dialog::display(_("Permission error"), _("You have no permission to use this template!"), ERROR_DIALOG);
+        msg_dialog::display(_("Permission error"), _("You have no permission to use this template!"), ERROR_DIALOG);
       }
 
     }
@@ -627,29 +626,38 @@ class userManagement extends plugin
       $val = $this->list[$s_entry];
       $pwd = $val['userPassword'][0];
 
-      if(!preg_match("/^\{[^\}]/",$pwd)){
-        trigger_error("Can not deactivate user which is using clear password encryption.");
+
+      if (!preg_match("/w/",$this->ui->get_permissions($val['dn'],"users/password"))){
+
+        /* Missing permissions, show message */
+        msg_dialog::display(_("Password change"),_("You have no permission to change the lock status for this user!"),WARNING_DIALOG);
+
       }else{
 
-        $locked = false;
-        if(preg_match("/^[^\}]*+\}!/",$pwd)){
-          $locked = true;
-        }
-
-        /* Create ldap array to update status */
-        $attrs = array("userPassword" => $pwd);
-        if($locked){
-          $attrs['userPassword'] = preg_replace("/(^[^\}]+\})!(.*$)/","\\1\\2",$attrs['userPassword']);
+        if(!preg_match("/^\{[^\}]/",$pwd)){
+          trigger_error("Can not deactivate user which is using clear password encryption.");
         }else{
-          $attrs['userPassword'] = preg_replace("/(^[^\}]+\})(.*$)/","\\1!\\2",$attrs['userPassword']);
-        }
 
-        /* Write new status back to ldap */
-        $ldap = $this->config->get_ldap_link();
-        $ldap->cd($val['dn']);
-        $ldap->modify($attrs);
-        if (!$ldap->success()){
-          msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $val['dn'], 0, get_class()));
+          $locked = false;
+          if(preg_match("/^[^\}]*+\}!/",$pwd)){
+            $locked = true;
+          }
+
+          /* Create ldap array to update status */
+          $attrs = array("userPassword" => $pwd);
+          if($locked){
+            $attrs['userPassword'] = preg_replace("/(^[^\}]+\})!(.*$)/","\\1\\2",$attrs['userPassword']);
+          }else{
+            $attrs['userPassword'] = preg_replace("/(^[^\}]+\})(.*$)/","\\1!\\2",$attrs['userPassword']);
+          }
+
+          /* Write new status back to ldap */
+          $ldap = $this->config->get_ldap_link();
+          $ldap->cd($val['dn']);
+          $ldap->modify($attrs);
+          if (!$ldap->success()){
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $val['dn'], 0, get_class()));
+          }
         }
       }
     }
