@@ -322,30 +322,33 @@ class acl extends plugin
         $this->aclContents = base64_decode($_POST['selected_role']);
       }
     }
-    
-    /* Only be interested in new acl's, if we're in the right _POST place */
-    if ($aclDialog && $this->aclObject != "" && is_array($this->ocMapping[$this->aclObject])){
 
-      foreach ($this->ocMapping[$this->aclObject] as $oc){
+    if($this->acl_is_writeable("")){
+      
+      /* Only be interested in new acl's, if we're in the right _POST place */
+      if ($aclDialog && $this->aclObject != "" && is_array($this->ocMapping[$this->aclObject])){
 
-        if(isset($this->aclContents[$oc]) && is_array($this->aclContents)){
-          unset($this->aclContents[$oc]);
-          unset($this->aclContents[$this->aclObject.'/'.$oc]);
-        }else{
+        foreach ($this->ocMapping[$this->aclObject] as $oc){
+
+          if(isset($this->aclContents[$oc]) && is_array($this->aclContents)){
+            unset($this->aclContents[$oc]);
+            unset($this->aclContents[$this->aclObject.'/'.$oc]);
+          }else{
 #          trigger_error("Huhm?");
-        }
-        if (isset($new_acl[$oc]) && is_array($new_acl)){
-          $this->aclContents[$oc]= $new_acl[$oc];
-        }
-        if (isset($new_acl[$this->aclObject.'/'.$oc]) && is_array($new_acl)){
-          $this->aclContents[$this->aclObject.'/'.$oc]= $new_acl[$this->aclObject.'/'.$oc];
+          }
+          if (isset($new_acl[$oc]) && is_array($new_acl)){
+            $this->aclContents[$oc]= $new_acl[$oc];
+          }
+          if (isset($new_acl[$this->aclObject.'/'.$oc]) && is_array($new_acl)){
+            $this->aclContents[$this->aclObject.'/'.$oc]= $new_acl[$this->aclObject.'/'.$oc];
+          }
         }
       }
-    }
 
-    /* Save new acl in case of base edit mode */
-    if ($this->aclType == 'base' && !$firstedit){
-      $this->aclContents= $new_acl;
+      /* Save new acl in case of base edit mode */
+      if ($this->aclType == 'base' && !$firstedit){
+        $this->aclContents= $new_acl;
+      }
     }
 
     /* Cancel new acl? */
@@ -414,9 +417,11 @@ class acl extends plugin
     }
 
     /* Save common values */
-    foreach (array("aclType","aclFilter", "aclObject", "target") as $key){
-      if (isset($_POST[$key])){
-        $this->$key= validate($_POST[$key]);
+    if($this->acl_is_writeable("")){
+      foreach (array("aclType","aclFilter", "aclObject", "target") as $key){
+        if (isset($_POST[$key])){
+          $this->$key= validate($_POST[$key]);
+        }
       }
     }
 
@@ -430,12 +435,23 @@ class acl extends plugin
       
       /* Fill in entries */
       foreach ($this->gosaAclEntry as $key => $entry){
+        if(!$this->acl_is_readable("")) continue;
+
+        $action ="";      
+  
         $field1= array("string" => $this->aclTypes[$entry['type']], "attach" => "style='width:150px'");
         $field2= array("string" => $this->assembleAclSummary($entry));
-        $action= "<input type='image' name='sortup_$key' alt='up' title='"._("Up")."' src='images/lists/sort-up.png' align='top'>";
-        $action.= "<input type='image' name='sortdown_$key' alt='down' title='"._("Down")."' src='images/lists/sort-down.png'>";
+
+        if($this->acl_is_writeable("")){
+          $action.= "<input type='image' name='sortup_$key' alt='up' title='"._("Up")."' src='images/lists/sort-up.png' align='top'>";
+          $action.= "<input type='image' name='sortdown_$key' alt='down' title='"._("Down")."' src='images/lists/sort-down.png'>";
+        }
+
         $action.= "<input class='center' type='image' src='images/lists/edit.png' alt='"._("Edit")."' name='acl_edit_$key' title='".msgPool::editButton(_("ACL"))."'>";
-        $action.= "<input class='center' type='image' src='images/lists/trash.png' alt='"._("Delete")."' name='acl_del_$key' title='".msgPool::delButton(_("ACL"))."'>";
+
+        if($this->acl_is_removeable()){
+          $action.= "<input class='center' type='image' src='images/lists/trash.png' alt='"._("Delete")."' name='acl_del_$key' title='".msgPool::delButton(_("ACL"))."'>";
+        }
 
         $field3= array("string" => $action, "attach" => "style='border-right:0px;width:50px;text-align:right;'");
         $aclList->AddEntry(array($field1, $field2, $field3));
@@ -547,6 +563,12 @@ class acl extends plugin
 
     /* Show main page */
     $smarty->assign("dialogState", $this->dialogState);
+   
+    /* Assign acls */ 
+    $smarty->assign("acl_createable",$this->acl_is_createable());
+    $smarty->assign("acl_writeable" ,$this->acl_is_writeable(""));
+    $smarty->assign("acl_readable"  ,$this->acl_is_readable(""));
+    $smarty->assign("acl_removeable",$this->acl_is_removeable());
 
     return ($smarty->fetch (get_template_path('acl.tpl')));
   }
@@ -618,33 +640,35 @@ class acl extends plugin
     /* Add select all/none buttons */
     $style = "style='width:100px;'";
 
-    $display .= "<input ".$style." type='button' name='toggle_all_create' onClick=\"acl_toggle_all('_0_c$');\" value='Toggle C'>";
-    $display .= "<input ".$style." type='button' name='toggle_all_move'   onClick=\"acl_toggle_all('_0_m$');\" value='Toggle M'>";
-    $display .= "<input ".$style." type='button' name='toggle_all_remove' onClick=\"acl_toggle_all('_0_d$');\" value='Toggle D'> - ";
-    $display .= "<input ".$style." type='button' name='toggle_all_read'   onClick=\"acl_toggle_all('_0_r$');\" value='Toggle R'>";
-    $display .= "<input ".$style." type='button' name='toggle_all_write'  onClick=\"acl_toggle_all('_0_w$');\" value='Toggle W'> - ";
-    
-    $display .= "<input ".$style." type='button' name='toggle_all_sub_read'  onClick=\"acl_toggle_all('[^0]_r$');\" value='R+'>";
-    $display .= "<input ".$style." type='button' name='toggle_all_sub_write'  onClick=\"acl_toggle_all('[^0]_w$');\" value='W+'>";
-  
-    $display .= "<br>";
-  
-    $style = "style='width:50px;'";
-    $display .= "<input ".$style." type='button' name='set_true_all_create' onClick=\"acl_set_all('_0_c$',true);\" value='C+'>";
-    $display .= "<input ".$style." type='button' name='set_false_all_create' onClick=\"acl_set_all('_0_c$',false);\" value='C-'>";
-    $display .= "<input ".$style." type='button' name='set_true_all_move' onClick=\"acl_set_all('_0_m$',true);\" value='M+'>";
-    $display .= "<input ".$style." type='button' name='set_false_all_move' onClick=\"acl_set_all('_0_m$',false);\" value='M-'>";
-    $display .= "<input ".$style." type='button' name='set_true_all_remove' onClick=\"acl_set_all('_0_d$',true);\" value='D+'>";
-    $display .= "<input ".$style." type='button' name='set_false_all_remove' onClick=\"acl_set_all('_0_d$',false);\" value='D-'> - ";
-    $display .= "<input ".$style." type='button' name='set_true_all_read' onClick=\"acl_set_all('_0_r$',true);\" value='R+'>";
-    $display .= "<input ".$style." type='button' name='set_false_all_read' onClick=\"acl_set_all('_0_r$',false);\" value='R-'>";
-    $display .= "<input ".$style." type='button' name='set_true_all_write' onClick=\"acl_set_all('_0_w$',true);\" value='W+'>";
-    $display .= "<input ".$style." type='button' name='set_false_all_write' onClick=\"acl_set_all('_0_w$',false);\" value='W-'> - ";
+    if($this->acl_is_writeable("")){
+      $display .= "<input ".$style." type='button' name='toggle_all_create' onClick=\"acl_toggle_all('_0_c$');\" value='Toggle C'>";
+      $display .= "<input ".$style." type='button' name='toggle_all_move'   onClick=\"acl_toggle_all('_0_m$');\" value='Toggle M'>";
+      $display .= "<input ".$style." type='button' name='toggle_all_remove' onClick=\"acl_toggle_all('_0_d$');\" value='Toggle D'> - ";
+      $display .= "<input ".$style." type='button' name='toggle_all_read'   onClick=\"acl_toggle_all('_0_r$');\" value='Toggle R'>";
+      $display .= "<input ".$style." type='button' name='toggle_all_write'  onClick=\"acl_toggle_all('_0_w$');\" value='Toggle W'> - ";
 
-    $display .= "<input ".$style." type='button' name='set_true_all_read' onClick=\"acl_set_all('[^0]_r$',true);\" value='R+'>";
-    $display .= "<input ".$style." type='button' name='set_false_all_read' onClick=\"acl_set_all('[^0]_r$',false);\" value='R-'>";
-    $display .= "<input ".$style." type='button' name='set_true_all_write' onClick=\"acl_set_all('[^0]_w$',true);\" value='W+'>";
-    $display .= "<input ".$style." type='button' name='set_false_all_write' onClick=\"acl_set_all('[^0]_w$',false);\" value='W-'>";
+      $display .= "<input ".$style." type='button' name='toggle_all_sub_read'  onClick=\"acl_toggle_all('[^0]_r$');\" value='R+'>";
+      $display .= "<input ".$style." type='button' name='toggle_all_sub_write'  onClick=\"acl_toggle_all('[^0]_w$');\" value='W+'>";
+
+      $display .= "<br>";
+
+      $style = "style='width:50px;'";
+      $display .= "<input ".$style." type='button' name='set_true_all_create' onClick=\"acl_set_all('_0_c$',true);\" value='C+'>";
+      $display .= "<input ".$style." type='button' name='set_false_all_create' onClick=\"acl_set_all('_0_c$',false);\" value='C-'>";
+      $display .= "<input ".$style." type='button' name='set_true_all_move' onClick=\"acl_set_all('_0_m$',true);\" value='M+'>";
+      $display .= "<input ".$style." type='button' name='set_false_all_move' onClick=\"acl_set_all('_0_m$',false);\" value='M-'>";
+      $display .= "<input ".$style." type='button' name='set_true_all_remove' onClick=\"acl_set_all('_0_d$',true);\" value='D+'>";
+      $display .= "<input ".$style." type='button' name='set_false_all_remove' onClick=\"acl_set_all('_0_d$',false);\" value='D-'> - ";
+      $display .= "<input ".$style." type='button' name='set_true_all_read' onClick=\"acl_set_all('_0_r$',true);\" value='R+'>";
+      $display .= "<input ".$style." type='button' name='set_false_all_read' onClick=\"acl_set_all('_0_r$',false);\" value='R-'>";
+      $display .= "<input ".$style." type='button' name='set_true_all_write' onClick=\"acl_set_all('_0_w$',true);\" value='W+'>";
+      $display .= "<input ".$style." type='button' name='set_false_all_write' onClick=\"acl_set_all('_0_w$',false);\" value='W-'> - ";
+
+      $display .= "<input ".$style." type='button' name='set_true_all_read' onClick=\"acl_set_all('[^0]_r$',true);\" value='R+'>";
+      $display .= "<input ".$style." type='button' name='set_false_all_read' onClick=\"acl_set_all('[^0]_r$',false);\" value='R-'>";
+      $display .= "<input ".$style." type='button' name='set_true_all_write' onClick=\"acl_set_all('[^0]_w$',true);\" value='W+'>";
+      $display .= "<input ".$style." type='button' name='set_false_all_write' onClick=\"acl_set_all('[^0]_w$',false);\" value='W-'>";
+    }
 
     /* Build general objects */
     $list =$this->sort_by_priority($list);
@@ -792,8 +816,12 @@ class acl extends plugin
   function mkchkbx($name, $text, $state= FALSE)
   {
     $state= $state?"checked":"";
-    return "\n      <input id='acl_".preg_replace("/[^a-z0-9]/i","_",$name)."' type=checkbox name='acl_$name' $state>".
-           "\n      <label for='acl_".preg_replace("/[^a-z0-9]/i","_",$name)."'>$text</label>";
+    if($this->acl_is_writeable("")){
+      return "\n      <input id='acl_".preg_replace("/[^a-z0-9]/i","_",$name)."' type=checkbox name='acl_$name' $state>".
+        "\n      <label for='acl_".preg_replace("/[^a-z0-9]/i","_",$name)."'>$text</label>";
+    }else{
+      return "\n <input type='checkbox' disabled name='dummy_".microtime(1)."' $state>$text";
+    }
   }
 
 
@@ -801,10 +829,16 @@ class acl extends plugin
   {
     $rstate= preg_match('/r/', $state)?'checked':'';
     $wstate= preg_match('/w/', $state)?'checked':'';
-    return ("\n      <input id='acl_".preg_replace("/[^a-z0-9]/i","_",$name)."_r' type=checkbox name='acl_${name}_r' $rstate>".
-            "\n      <label for='acl_".preg_replace("/[^a-z0-9]/i","_",$name)."_r'>"._("read")."</label>".
-            "\n      <input id='acl_".preg_replace("/[^a-z0-9]/i","_",$name)."_w' type=checkbox name='acl_${name}_w' $wstate>".
-            "\n      <label for='acl_".preg_replace("/[^a-z0-9]/i","_",$name)."_w'>"._("write")."</label>");
+      
+    if($this->acl_is_writeable("")){
+      return ("\n      <input id='acl_".preg_replace("/[^a-z0-9]/i","_",$name)."_r' type=checkbox name='acl_${name}_r' $rstate>".
+          "\n      <label for='acl_".preg_replace("/[^a-z0-9]/i","_",$name)."_r'>"._("read")."</label>".
+          "\n      <input id='acl_".preg_replace("/[^a-z0-9]/i","_",$name)."_w' type=checkbox name='acl_${name}_w' $wstate>".
+          "\n      <label for='acl_".preg_replace("/[^a-z0-9]/i","_",$name)."_w'>"._("write")."</label>");
+    }else{
+      return ("\n      <input disabled type=checkbox name='dummy_".microtime(1)."' $rstate>"._("read").
+          "\n      <input disabled type=checkbox name='dummy_".microtime(1)."' $wstate>"._("write"));
+    }
   }
 
 
@@ -1214,6 +1248,38 @@ class acl extends plugin
       }
       $acl -> save();
     }
+  }
+
+
+  function acl_is_writeable($attribute,$skip_write = FALSE)
+  {
+    return(TRUE);
+    $ui= get_userinfo();
+    return preg_match('/w/', $ui->get_permissions($this->acl_base, $this->acl_category.get_class($this), $attribute, $skip_write));
+  }
+
+
+  function acl_is_readable($attribute)
+  {
+    return(TRUE);
+    $ui= get_userinfo();
+    return preg_match('/r/', $ui->get_permissions($this->acl_base, $this->acl_category.get_class($this), $attribute));
+  }
+
+
+  function acl_is_createable()
+  {
+    return(TRUE);
+    $ui= get_userinfo();
+    return preg_match('/c/', $ui->get_permissions($this->acl_base, $this->acl_category.get_class($this), '0'));
+  }
+
+
+  function acl_is_removeable()
+  {
+    return(TRUE);
+    $ui= get_userinfo();
+    return preg_match('/d/', $ui->get_permissions($this->acl_base, $this->acl_category.get_class($this), '0'));
   }
 }
 
