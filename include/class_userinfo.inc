@@ -210,7 +210,7 @@ class userinfo
 
     /* Push cache answer? */
     $ACL_CACHE = &session::get('ACL_CACHE');
-    if (0 && isset($ACL_CACHE["$dn+$object+$attribute"])){
+    if (isset($ACL_CACHE["$dn+$object+$attribute"])){
 
       /* Remove write if needed */
       if ($skip_write){
