@@ -304,7 +304,7 @@ class divListUsers extends MultiSelectWindow
       /* Add copy & cut icons */     
       $acl_all  = $ui->has_complete_category_acls($this->selectedBase,"users") ;
       $acl      = $ui->get_permissions($val['dn'],"users/user");
-      if(preg_match("/(c.*w|w.*c)/",$acl_all) && $this->parent->CopyPasteHandler){
+      if(preg_match("/(r.*w|w.*r)/",$acl) && $this->parent->CopyPasteHandler){
         $action .= "<input class='center' type='image'
           src='images/lists/cut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
         $action.= "<input class='center' type='image'
@@ -331,7 +331,7 @@ class divListUsers extends MultiSelectWindow
         name='user_edit_%KEY%' title='".msgPool::editButton(_("user"))."'>";
 
       /* Add deactivate status if we are allowed to */
-      if (preg_match("/w/",$acl_all)){
+      if (preg_match("/w/",$acl)){
         $action.= $lock_status;
       }
 
@@ -345,7 +345,7 @@ class divListUsers extends MultiSelectWindow
       }
 
       /* Add snapshot icon */
-      if(preg_match("/(c.*w|w.*c)/",$acl_all)){
+      if(preg_match("/(r.*w|w.*r)/",$acl)){
         $action.= $this->GetSnapShotActions($val['dn']);
       }
 
