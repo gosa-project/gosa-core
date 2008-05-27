@@ -1610,9 +1610,10 @@ class plugin
   }
 
 
-  function acl_is_createable()
+  function acl_is_createable($base ="")
   {
     $ui= get_userinfo();
+    if($base == "") $base = $this->acl_base;
     return preg_match('/c/', $ui->get_permissions($this->acl_base, $this->acl_category.get_class($this), '0'));
   }
 
@@ -1624,10 +1625,11 @@ class plugin
   }
 
 
-  function acl_is_moveable()
+  function acl_is_moveable($base = "")
   {
     $ui= get_userinfo();
-    return preg_match('/m/', $ui->get_permissions($this->acl_base, $this->acl_category.get_class($this), '0'));
+    if($base == "") $base = $this->acl_base;
+    return preg_match('/m/', $ui->get_permissions($base, $this->acl_category.get_class($this), '0'));
   }
 
 

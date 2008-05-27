@@ -1250,34 +1250,6 @@ class acl extends plugin
     }
   }
 
-
-  function acl_is_writeable($attribute,$skip_write = FALSE)
-  {
-    $ui= get_userinfo();
-    return preg_match('/w/', $ui->get_permissions($this->acl_base, $this->acl_category.get_class($this), $attribute, $skip_write));
-  }
-
-
-  function acl_is_readable($attribute)
-  {
-    $ui= get_userinfo();
-    return preg_match('/r/', $ui->get_permissions($this->acl_base, $this->acl_category.get_class($this), $attribute));
-  }
-
-
-  function acl_is_createable()
-  {
-
-    $ui= get_userinfo();
-    return preg_match('/c/', $ui->get_permissions($this->acl_base, $this->acl_category.get_class($this), '0'));
-  }
-
-
-  function acl_is_removeable()
-  {
-    $ui= get_userinfo();
-    return preg_match('/d/', $ui->get_permissions($this->acl_base, $this->acl_category.get_class($this), '0'));
-  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
