@@ -165,11 +165,11 @@ class divListUsers extends MultiSelectWindow
 
     /* Create Layers menu */
     $s  = ".|"._("Actions")."|\n";
-    $s .= "..|<img src='images/lists/new.png' alt='' border='0' class='center'>".
-      "&nbsp;"._("Create")."|\n";
 
     /* Append create options */
     if(preg_match("/c/",$acl)) {
+      $s .= "..|<img src='images/lists/new.png' alt='' border='0' class='center'>".
+        "&nbsp;"._("Create")."|\n";
       $s.= "...|<input class='center' type='image' src='images/list_new_user.png' alt=''>".
         "&nbsp;"._("User")."|user_new|\n";
       $s.= "...|<input class='center' type='image' src='images/lists/new.png' alt=''>".
