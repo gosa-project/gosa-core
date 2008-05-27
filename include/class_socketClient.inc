@@ -105,7 +105,7 @@ class Socket_Client
     $this->handle = @fsockopen($this->host, $this->port, $this->errno, $this->errstr, $this->timeout);
     if(!$this->handle){
       $this->handle = NULL;
-      $this->set_error(sprintf(_("Socket connection to host '%s:%s' failed with error: %s."),$this->host,$this->port,$this->errstr));
+      $this->set_error(sprintf(_("Socket connection to host '%s:%s' failed: %s"),$this->host,$this->port,$this->errstr));
     }else{
       $this->b_data_send = TRUE;
 

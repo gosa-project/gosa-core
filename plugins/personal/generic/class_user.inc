@@ -1146,7 +1146,7 @@ class user extends plugin
       foreach($temp['name'] as $id => $name){
         if($name == $this->pw_storage){
           if($temp['is_configurable'][$id] && !$this->pwObject instanceof $temp[$name] ){
-            $message[] = _("The selected password method a requires initial configuration.");
+            $message[] = _("The selected password method requires initial configuration!");
           }
           break;
         }

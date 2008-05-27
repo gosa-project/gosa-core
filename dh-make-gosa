@@ -14,6 +14,10 @@ load_dsc() {
     for dep in $TDEPENDS; do
       PL_DEPENDS="gosa-plugin-$dep, $PL_DEPENDS"
     done
+    TCONFLICTS=$(sed -n 's/"//g;s/^conflicts\s*=\s*\(.*\)$/\1/p' "$1")
+    for dep in $TCONFLICTS; do
+      PL_CONFLICTS="gosa-plugin-$dep, $PL_CONFLICTS"
+    done
     PL_DESCRIPTION=$(sed -n 's/"//g;s/^description\s*=\s*\(.*\)$/\1/p' "$1")
     PL_AUTHOR=$(sed -n 's/"//g;s/^author\s*=\s*\([^<]*\).*$/\1/p' "$1")
     PL_MAIL=$(sed -n 's/"//g;s/^author\s*=[^<].*<\([^>]*\).*$/\1/p' "$1")
@@ -124,6 +128,7 @@ echo "Plugin:       $PL_NAME"
 echo "Version:      $PL_VERSION"
 echo "Description:  $PL_DESCRIPTION"
 echo "Depends:      $PL_DEPENDS"
+echo "Conflicts:    $PL_CONFLICTS"
 echo "Author name:  $PL_AUTHOR"
 echo "Author email: $PL_MAIL"
 echo
@@ -180,7 +185,14 @@ sed -i '/^Upstream/,/^$/d' debian/copyright
 # Adapt control
 sed -i 's/^Section: unknown/Section: web/g' debian/control
 sed -i 's/^Architecture: any/Architecture: all/g' debian/control
-sed -i 's/^Depends: .*$/Depends: gosa/g' debian/control
+if [ "$PL_DEPENDS" ]; then
+	sed -i 's/^Depends: .*$/Depends: gosa, $PL_DEPENDS/g' debian/control
+else
+	sed -i 's/^Depends: .*$/Depends: gosa/g' debian/control
+fi
+if [ "$PL_CONFLICTS" ]; then
+	sed "11Conflicts: $PL_CONFLICTS" debian/control
+fi
 sed -i 's/^\(Build-Depends: .*\)$/\1, dpatch/g' debian/control
 sed -i "s/^Description: .*$/Description: $PL_NAME plugin for GOsa/g" debian/control
 sed -i "s/^ <.*$/ %DESCRIPTION%/g" debian/control
