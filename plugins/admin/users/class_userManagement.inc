@@ -582,24 +582,27 @@ class userManagement extends plugin
           msg_dialog::display(_("Permission"),msgPool::permDelete($disallowed),INFO_DIALOG);
         }
 
-        /* Check locks */
-        if ($user= get_multiple_locks($this->dns)){
-          return(gen_locked_message($user,$this->dns));
+        if(count($this->dns)){
+
+          /* Check locks */
+          if ($user= get_multiple_locks($this->dns)){
+            return(gen_locked_message($user,$this->dns));
+          }
+
+          $dns_names = array();
+          foreach($this->dns as $dn){
+            $dns_names[] = @LDAP::fix($dn);
+          }
+
+          add_lock($this->dns, $this->ui->dn);
+
+          /* Lock the current entry, so nobody will edit it during deletion */
+          $info = sprintf(msgPool::deleteInfo($dns_names,_("user")));
+
+          /* Lock the current entry, so nobody will edit it during deletion */
+          $smarty->assign("info", msgPool::deleteInfo($dns_names));
+          return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
         }
-
-        $dns_names = array();
-        foreach($this->dns as $dn){
-          $dns_names[] = @LDAP::fix($dn);
-        }
-
-        add_lock($this->dns, $this->ui->dn);
-
-        /* Lock the current entry, so nobody will edit it during deletion */
-        $info = sprintf(msgPool::deleteInfo($dns_names,_("user")));
-
-        /* Lock the current entry, so nobody will edit it during deletion */
-        $smarty->assign("info", msgPool::deleteInfo($dns_names));
-        return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
       }
     }
 
