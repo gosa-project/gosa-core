@@ -154,6 +154,7 @@ class divListUsers extends MultiSelectWindow
 
     /* Get copy & paste icon */
     $acl      = $ui->get_permissions($this->selectedBase,"users/user");
+    $acl_all  = $ui->has_complete_category_acls($this->selectedBase,"users");
 
     /* Add default header */
     $listhead = MultiSelectWindow::get_default_header();
@@ -198,8 +199,6 @@ class divListUsers extends MultiSelectWindow
       }
     }
 
-    /* Add multiple copy & cut icons */
-    $acl_all  = $ui->has_complete_category_acls($this->selectedBase,"users");
 
     if(is_object($this->parent->CopyPasteHandler) && preg_match("/r/",$acl_all)){
       $s.= "..|---|\n";
@@ -307,14 +306,16 @@ class divListUsers extends MultiSelectWindow
 
       /* Add copy & cut icons */     
       $acl      = $ui->get_permissions($val['dn'],"users/user");
-      if(preg_match("/(r.*d|r.*d)/",$acl) && $this->parent->CopyPasteHandler){
+      $acl_all  = $ui->has_complete_category_acls($val['dn'],"users");
+     
+      if(preg_match("/(r.*d|r.*d)/",$acl_all) && $this->parent->CopyPasteHandler){
         $action .= "<input class='center' type='image'
           src='images/lists/cut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
       }else{
         $action.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
       }
 
-      if(preg_match("/r/",$acl) && $this->parent->CopyPasteHandler){
+      if(preg_match("/r/",$acl_all) && $this->parent->CopyPasteHandler){
         $action.= "<input class='center' type='image'
           src='images/lists/copy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
       }else{
@@ -341,7 +342,7 @@ class divListUsers extends MultiSelectWindow
         name='user_edit_%KEY%' title='".msgPool::editButton(_("user"))."'>";
 
       /* Add deactivate status if we are allowed to */
-      if (preg_match("/w/",$acl)){
+      if (preg_match("/w/",$ui->get_permissions($val['dn'],"users/password"))){
         $action.= $lock_status;
       }else{
         $action.="<img src='images/empty.png' alt=' ' class='center'>";
@@ -357,7 +358,7 @@ class divListUsers extends MultiSelectWindow
       }
 
       /* Add snapshot icon */
-      if(preg_match("/(r.*w|w.*r)/",$acl)){
+      if(preg_match("/(r.*w|w.*r)/",$acl_all)){
         $action.= $this->GetSnapShotActions($val['dn']);
       }else{
         $action.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
@@ -365,7 +366,7 @@ class divListUsers extends MultiSelectWindow
       }
 
       /* Add remove icon, if we are allowed to remove the current user */
-      if(preg_match("/d/",$ui->get_permissions($val['dn'],"users/user"))) {
+      if(preg_match("/d/",$acl)) {
         $action.= "<input class='center' type='image' src='images/lists/trash.png' alt='"._("delete")."'
           name='user_del_%KEY%' title='"._("Delete user")."'>";
       }else{

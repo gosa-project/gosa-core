@@ -164,8 +164,7 @@ class divListGroup extends MultiSelectWindow
     }
   
     /* Get acls */
-    $acls   = $ui->get_permissions($this->selectedBase,"groups/group");
-    $acl_all= $ui->has_complete_category_acls($this->selectedBase,"groups");
+    $acl   = $ui->get_permissions($this->selectedBase,"groups/group");
 
 
     /* Add default header */
@@ -176,15 +175,13 @@ class divListGroup extends MultiSelectWindow
       " <input type='image' class='center' src='images/lists/submit.png' title='"._("Submit department")."' name='submit_department' alt='"._("Submit").
       "'>&nbsp;";
 
-
-        /* Create Layers menu */
+    /* Create Layers menu */
     $s  = ".|"._("Actions")."|\n";
-    $s .= "..|<img src='images/lists/new.png' alt='' border='0' class='center'>".
-      "&nbsp;"._("Create")."|\n";
-
 
     /* Append create options */
-    if(preg_match("/c/",$acl_all)) {
+    if(preg_match("/c/",$acl)) {
+      $s .= "..|<img src='images/lists/new.png' alt='' border='0' class='center'>".
+        "&nbsp;"._("Create")."|\n";
       $s.= "...|<input class='center' type='image' src='plugins/groups/images/new.png' alt=''>".
         "&nbsp;"._("Group")."|group_new|\n";
     }
@@ -208,20 +205,24 @@ class divListGroup extends MultiSelectWindow
     }
 
     /* Add multiple copy & cut icons */
-    if(is_object($this->parent->CopyPasteHandler) && preg_match("/(c.*w|w.*c)/",$acl_all)){
-      $s.= "..|---|\n";
+    $acl_all= $ui->has_complete_category_acls($this->selectedBase,"groups");
+
+    if(is_object($this->parent->CopyPasteHandler) && preg_match("/r/",$acl_all)){
       $s.= "..|<img src='images/lists/copy.png' alt='' border='0' class='center'>".
         "&nbsp;"._("Copy")."|"."multiple_copy_systems|\n";
+    }
+    if(is_object($this->parent->CopyPasteHandler) && preg_match("/(r.*d|d.*r)/",$acl_all)){ 
       $s.= "..|<img src='images/lists/cut.png' alt='' border='0' class='center'>".
         "&nbsp;"._("Cut")."|"."multiple_cut_systems|\n";
+    }
 
-      if($this->parent->CopyPasteHandler->entries_queued()){
-        $img = "<img border='0' class='center' src='images/lists/paste.png' alt=''>";
-        $s.="..|".$img."&nbsp;"._("Paste")."|editPaste|\n";
-      }else{
-        $img = "<img border='0' class='center' src='images/lists/paste.png' alt=''>";
-        $s.="..|".$img."&nbsp;"._("Paste")."\n";
-      }
+    /* Copy & paste icons */
+    if(is_object($this->parent->CopyPasteHandler) && $this->parent->CopyPasteHandler->entries_queued()){
+      $img = "<img border='0' class='center' src='images/lists/paste.png' alt=''>";
+      $s.="..|".$img."&nbsp;"._("Paste")."|editPaste|\n";
+    }else{
+      $img = "<img border='0' class='center' src='images/lists/paste-grey.png' alt=''>";
+      $s.="..|".$img."&nbsp;"._("Paste")."\n";
     }
 
     /* Add snapshot icons */
@@ -295,14 +296,21 @@ class divListGroup extends MultiSelectWindow
     
       /* Create action icons - copy & paste icons */
       $acl = $ui->get_permissions($val['dn'],"groups/group");
-      $acl_all= $ui->has_complete_category_acls($val['dn'],"groups");
+      $acl_all  = $ui->has_complete_category_acls($val['dn'],"groups");
 
       $actions= "";
-      if(($this->parent->CopyPasteHandler) && preg_match("/(c.*w|w.*c)/",$acl_all)){
+      if(preg_match("/(r.*d|r.*d)/",$acl_all) && $this->parent->CopyPasteHandler){
         $actions.= "<input class='center' type='image'
           src='images/lists/cut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+      }else{
+        $actions.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
+      }
+
+      if(preg_match("/r/",$acl_all) && $this->parent->CopyPasteHandler){
         $actions.= "<input class='center' type='image'
           src='images/lists/copy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
+      }else{
+        $actions.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
       }
 
       /* Add edit icon */
@@ -310,15 +318,20 @@ class divListGroup extends MultiSelectWindow
         src='images/lists/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
 
       /* Add snapshot functionality */
-      if(preg_match("/(c.*w|w.*c)/", $acl_all)){
+      if(preg_match("/(r.*w|w.*r)/",$acl_all)){
         $actions.= $this->GetSnapShotActions($val['dn']);
+      }else{
+        $actions.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
+        $actions.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
       }
 
       if(preg_match("/d/",$acl)){
         $actions.= "<input class='center' type='image'
           src='images/lists/trash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
+      }else{
+        $actions.= "<img class='center' src='images/empty.png' alt='&nbsp;'
+          title='"._("Not allowed")."'>";
       }
-
 
       $posix=$mail=$samba=$appl=$phone=$enviro=$empty;
 
