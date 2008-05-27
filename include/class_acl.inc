@@ -1253,7 +1253,6 @@ class acl extends plugin
 
   function acl_is_writeable($attribute,$skip_write = FALSE)
   {
-    return(TRUE);
     $ui= get_userinfo();
     return preg_match('/w/', $ui->get_permissions($this->acl_base, $this->acl_category.get_class($this), $attribute, $skip_write));
   }
@@ -1261,7 +1260,6 @@ class acl extends plugin
 
   function acl_is_readable($attribute)
   {
-    return(TRUE);
     $ui= get_userinfo();
     return preg_match('/r/', $ui->get_permissions($this->acl_base, $this->acl_category.get_class($this), $attribute));
   }
@@ -1269,7 +1267,7 @@ class acl extends plugin
 
   function acl_is_createable()
   {
-    return(TRUE);
+
     $ui= get_userinfo();
     return preg_match('/c/', $ui->get_permissions($this->acl_base, $this->acl_category.get_class($this), '0'));
   }
@@ -1277,7 +1275,6 @@ class acl extends plugin
 
   function acl_is_removeable()
   {
-    return(TRUE);
     $ui= get_userinfo();
     return preg_match('/d/', $ui->get_permissions($this->acl_base, $this->acl_category.get_class($this), '0'));
   }
