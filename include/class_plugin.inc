@@ -1614,14 +1614,15 @@ class plugin
   {
     $ui= get_userinfo();
     if($base == "") $base = $this->acl_base;
-    return preg_match('/c/', $ui->get_permissions($this->acl_base, $this->acl_category.get_class($this), '0'));
+    return preg_match('/c/', $ui->get_permissions($base, $this->acl_category.get_class($this), '0'));
   }
 
 
-  function acl_is_removeable()
+  function acl_is_removeable($base ="")
   {
     $ui= get_userinfo();
-    return preg_match('/d/', $ui->get_permissions($this->acl_base, $this->acl_category.get_class($this), '0'));
+    if($base == "") $base = $this->acl_base;
+    return preg_match('/d/', $ui->get_permissions($base, $this->acl_category.get_class($this), '0'));
   }
 
 
@@ -1644,17 +1645,17 @@ class plugin
     return  $ui->get_permissions($this->acl_base, $this->acl_category.get_class($this), $attribute,$skip_write);
   }
 
-  /* Get all allowed bases to move an object to or to create a new object.
-     Idepartments also contains all base departments which lead to the allowed bases */
-  function get_allowed_bases($category = "")
+
+  /*! \brief    Returns a list of all available departments for this object.  
+                If this object is new, all departments we are allowed to create a new user in are returned.
+                If this is an existing object, return all deps. we are allowed to move tis object too.
+
+      @return   Array [dn] => "..name"  // All deps. we are allowed to act on.
+  */
+  function get_allowed_bases()
   {
     $ui = get_userinfo();
     $deps = array();
-
-    /* Set category */ 
-    if(empty($category)){
-      $category = $this->acl_category.get_class($this);
-    }
 
     /* Is this a new object ? Or just an edited existing object */
     if(!$this->initially_was_account && $this->is_account){
@@ -1663,17 +1664,10 @@ class plugin
       $new = false;
     }
 
-    $cat_bases = $ui->get_module_departments(preg_replace("/\/.*$/","",$category));
     foreach($this->config->idepartments as $dn => $name){
-      
-      if(!in_array_ics($dn,$cat_bases)){
-        continue;
-      }
-      
-      $acl = $ui->get_permissions($dn,$category);
-      if($new && preg_match("/c/",$acl)){
+      if($new && $this->acl_is_createable($dn)){
         $deps[$dn] = $name;
-      }elseif(!$new && preg_match("/m/",$acl)){
+      }elseif(!$new && $this->acl_is_moveable($dn)){
         $deps[$dn] = $name;
       }
     }
@@ -1682,7 +1676,7 @@ class plugin
     if(isset($this->base) && isset($this->config->idepartments[$this->base])){
       $deps[$this->base] = $this->config->idepartments[$this->base];
     }else{
-      trigger_error("No default base found in class ".get_class($this).". ".$this->base);
+      trigger_error("Cannot return list of departments, no default base found in class ".get_class($this).". ".$this->base);
     }
     return($deps);
   }
