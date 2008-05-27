@@ -199,13 +199,10 @@ class divListUsers extends MultiSelectWindow
       }
     }
 
-
     if(is_object($this->parent->CopyPasteHandler) && preg_match("/r/",$acl_all)){
       $s.= "..|---|\n";
       $s.= "..|<img src='images/lists/copy.png' alt='' border='0' class='center'>".
         "&nbsp;"._("Copy")."|"."multiple_copy_systems|\n";
-    }
-    if(is_object($this->parent->CopyPasteHandler) && preg_match("/(r.*d|d.*r)/",$acl_all)){
       $s.= "..|<img src='images/lists/cut.png' alt='' border='0' class='center'>".
         "&nbsp;"._("Cut")."|"."multiple_cut_systems|\n";
     }
