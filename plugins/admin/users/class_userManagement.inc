@@ -332,6 +332,16 @@ class userManagement extends plugin
   
     if($s_action == "multiple_password_change"){
       $this->pwd_change_queue = $this->list_get_selected_items();
+      $disallowed = array();
+      foreach($this->pwd_change_queue as $key => $id){
+        if(!preg_match("/w/",$this->ui->get_permissions($this->list[trim($id)]['dn'],"users/password"))){
+          unset($this->pwd_change_queue[$key]);
+          $disallowed[] = $this->list[trim($id)]['dn'];
+        }
+      }
+      if(count($disallowed)){
+        msg_dialog::display(_("Permission"),msgPool::permModify($disallowed),INFO_DIALOG);
+      }
     }    
 
 
@@ -557,8 +567,19 @@ class userManagement extends plugin
 
       $this->dns = array();
       if(count($ids)){
+        $disallowed = array();
         foreach($ids as $id){
-          $this->dns[$id] = $this->list[$id]['dn'];
+          $dn = $this->list[$id]['dn'];
+          $acl = $this->ui->get_permissions($dn, "users/user"); 
+          if(preg_match("/d/",$acl)){
+            $this->dns[$id] = $dn;
+          }else{
+            $disallowed[] = $dn;
+          }
+        }
+        
+        if(count($disallowed)){
+          msg_dialog::display(_("Permission"),msgPool::permDelete($disallowed),INFO_DIALOG);
         }
 
         /* Check locks */
@@ -579,8 +600,6 @@ class userManagement extends plugin
         /* Lock the current entry, so nobody will edit it during deletion */
         $smarty->assign("info", msgPool::deleteInfo($dns_names));
         return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
-
-
       }
     }
 
