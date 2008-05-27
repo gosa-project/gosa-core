@@ -1160,6 +1160,14 @@ class user extends plugin
       $this->set_acl_base($this->base);
     }
 
+    /* Check if we are allowed to create/move this user 
+     */
+    if($this->dn == "new" && !$this->acl_is_createable($this->base)){
+      $message[]= msgPool::permCreate();
+    }elseif($this->new_dn != $this->orig_dn && !$this->acl_is_moveable($this->base)){
+      $message[]= msgPool::permMove();
+    }
+
     /* UID already used? */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
