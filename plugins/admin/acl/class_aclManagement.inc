@@ -155,7 +155,7 @@ class aclManagement extends plugin
       $this->dn= "new";
 
       /* Check permissions */
-      if(preg_match("/c/",$this->ui->get_permissions($this->DivListACL->selectedBase,"acl/acl"))){
+      if(preg_match("/c/",$this->ui->get_permissions($this->DivListACL->selectedBase,"aclroles/aclrole"))){
 
         /* Register acltabs to trigger edit dialog */
         $this->acltabs= new aclroletab($this->config, NULL,$this->dn);
@@ -174,8 +174,14 @@ class aclManagement extends plugin
       /* Get 'dn' from posted acl, must be unique */
       $this->dn= $this->list[trim($s_entry)]['dn'];
 
+      if(in_array("gosaRole",$this->list[trim($s_entry)]['objectClass'])){
+        $acl = "aclroles/aclrole";
+      }else{
+        $acl = "acl/acl";
+      }
+
       /* Check permissions */
-      if(preg_match("/r/",$this->ui->get_permissions($this->dn,"acl/acl"))){
+      if(preg_match("/r/",$this->ui->get_permissions($this->dn,$acl))){
       
         /* Check locking, save current plugin in 'back_plugin', so
            the dialog knows where to return. */
@@ -325,7 +331,7 @@ class aclManagement extends plugin
         foreach($this->dns as $key => $dn){
 
           /* Check permissions */
-          if(!preg_match("/d/",$this->ui->get_permissions($dn,"acl/acl"))){
+          if(!preg_match("/d/",$this->ui->get_permissions($dn,"aclroles/aclrole"))){
 
             /* Obviously the acl isn't allowed to delete. Show message and
                clean session. */
@@ -355,7 +361,7 @@ class aclManagement extends plugin
     if (isset($_POST['delete_acl_confirm'])){
 
       /* Check permissions */
-      if(preg_match("/d/",$this->ui->get_permissions($this->dn,"acl/acl"))){
+      if(preg_match("/d/",$this->ui->get_permissions($this->dn,"aclroles/aclrole"))){
 
         /* Delete request is permitted, perform LDAP action */
         $this->acltabs= new acl($this->config, NULL,$this->dn);
