@@ -300,32 +300,49 @@ class aclManagement extends plugin
         }
       }
 
-      /* Display lock messages */
-      if ($user= get_multiple_locks($this->dns)){
-        return(gen_locked_message($user,$this->dns));
+      $disallowed = array();
+      foreach($this->dns as $key => $dn){
+        $acl = $this->ui->get_permissions($dn, "aclroles/aclrole");
+        if(!preg_match("/d/",$acl)){
+          unset($this->dns[$key]);
+          $disallowed[] = $dn;
+        }
       }
 
-      $dns_names = array();
-      foreach($this->dns as $key => $dn){
-
-        /* Check permissions */
-        if(!preg_match("/d/",$this->ui->get_permissions($dn,"acl/acl"))){
-
-          /* Obviously the acl isn't allowed to delete. Show message and
-             clean session. */
-          msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
-          unset($this->dns[$key]);
-          continue;
-        }
-
-        $dns_names[] = LDAP::fix($dn);
+      if(count($disallowed)){
+        msg_dialog::display(_("Permission"),msgPool::permDelete($disallowed),INFO_DIALOG);
       }
 
       if(count($this->dns)){
-        add_lock($this->dns,$this->ui->dn);  
-        $smarty->assign("info", msgPool::deleteInfo($dns_names));
-        $smarty->assign("is_role",false);
-        return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
+
+
+        /* Display lock messages */
+        if ($user= get_multiple_locks($this->dns)){
+          return(gen_locked_message($user,$this->dns));
+        }
+
+        $dns_names = array();
+        foreach($this->dns as $key => $dn){
+
+          /* Check permissions */
+          if(!preg_match("/d/",$this->ui->get_permissions($dn,"acl/acl"))){
+
+            /* Obviously the acl isn't allowed to delete. Show message and
+               clean session. */
+            msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
+            unset($this->dns[$key]);
+            continue;
+          }
+
+          $dns_names[] = LDAP::fix($dn);
+        }
+
+        if(count($this->dns)){
+          add_lock($this->dns,$this->ui->dn);  
+          $smarty->assign("info", msgPool::deleteInfo($dns_names));
+          $smarty->assign("is_role",false);
+          return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
+        }
       }
     }
 
@@ -555,15 +572,23 @@ class aclManagement extends plugin
       return("");
     }
 
+    $ui = get_userinfo();
+
     /* Add a single entry to queue */
     if($s_action == "cut" || $s_action == "copy"){
 
       /* Cleanup object queue */
       $this->CopyPasteHandler->cleanup_queue();
       $dn = $this->list[$s_entry]['dn'];
-  
-      if(isset($this->list[$s_entry]['objectClass']) && in_array("gosaRole",$this->list[$s_entry]['objectClass'])){
-        $this->CopyPasteHandler->add_to_queue($dn,$s_action,"aclroletab","ACLROLETAB","aclroles");
+
+      /* We can only copy & cut roles */ 
+      if(isset($this->list[$id]['objectClass']) && in_array("gosaRole",$this->list[$s_entry]['objectClass'])){
+        if($s_action == "copy" && preg_match("/r/",$ui->has_complete_category_acls($dn,"aclroles"))){
+          $this->CopyPasteHandler->add_to_queue($dn,$s_action,"aclroletab","ACLROLETAB","aclroles");
+        }
+        if($s_action == "cut" && preg_match("/(r.*d|d.*r)/",$ui->has_complete_category_acls($dn,"aclroles"))){
+          $this->CopyPasteHandler->add_to_queue($dn,$s_action,"aclroletab","ACLROLETAB","aclroles");
+        }
       }
     }
 
@@ -579,10 +604,10 @@ class aclManagement extends plugin
 
         if(isset($this->list[$id]['objectClass']) && in_array("gosaRole",$this->list[$id]['objectClass'])){
 
-          if($s_action == "copy_multiple"){
+          if($s_action == "copy_multiple" && preg_match("/r/",$ui->has_complete_category_acls($dn,"aclroles"))){
             $this->CopyPasteHandler->add_to_queue($dn,"copy","aclroletab","ACLROLETAB","aclroles");
           }
-          if($s_action == "cut_multiple"){
+          if($s_action == "cut_multiple" && preg_match("/(r.*d|d.*r)/",$ui->has_complete_category_acls($dn,"aclroles"))){
             $this->CopyPasteHandler->add_to_queue($dn,"cut","aclroletab","ACLROLETAB","aclroles");
           }
         }
