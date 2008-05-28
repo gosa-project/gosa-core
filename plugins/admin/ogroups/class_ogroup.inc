@@ -874,9 +874,9 @@ class ogroup extends plugin
 
     /* Check if we are allowed to create or move this object 
      */
-    if($this->dn == "new" && !$this->acl_is_createable($this->base)){
+    if($this->orig_dn == "new" && !$this->acl_is_createable($this->base)){
       $message[] = msgPool::permCreate();
-    }elseif($this->cn != $this->orig_cn || $this->base != $this->orig_base && !$this->acl_is_moveable($this->base)){
+    }elseif($this->base != $this->orig_base && !$this->acl_is_moveable($this->base)){
       $message[] = msgPool::permMove();
     }
 
