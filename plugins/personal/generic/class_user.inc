@@ -1162,7 +1162,7 @@ class user extends plugin
 
     /* Check if we are allowed to create/move this user 
      */
-    if($this->dn == "new" && !$this->acl_is_createable($this->base)){
+    if($this->orig_dn == "new" && !$this->acl_is_createable($this->base)){
       $message[]= msgPool::permCreate();
     }elseif($this->new_dn != $this->orig_dn && !$this->acl_is_moveable($this->base)){
       $message[]= msgPool::permMove();
