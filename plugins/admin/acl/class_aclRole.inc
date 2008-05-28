@@ -51,6 +51,7 @@ class aclrole extends acl
   var $cn = "";
   var $description = "";
   var $orig_dn;
+  var $orig_base;
   var $base ="";
 
   function aclrole (&$config,  $dn= NULL)
@@ -136,6 +137,8 @@ class aclrole extends acl
 
     /* Finally - we want to get saved... */
     $this->is_account= TRUE;
+    $this->orig_base = $this->base;
+    $this->orig_dn = $this->dn;
   }
 
 
@@ -704,6 +707,29 @@ class aclrole extends acl
             "base"              => _("Base"),
             "description"       => _("Description"))
         ));
+  }
+
+  function check()
+  {
+    $message = plugin::check();
+
+    if(empty($this->cn)){
+      $message[] = msgPool::required(_("Name"));
+    }
+   
+    if(!count($this->gosaAclTemplate)){
+      $message[] = msgPool::required(_("ACL"));
+    }
+ 
+    /* Check if we are allowed to create or move this object
+     */
+    if($this->orig_dn == "new" && !$this->acl_is_createable($this->base)){
+      $message[] = msgPool::permCreate();
+    }elseif($this->base != $this->orig_base && !$this->acl_is_moveable($this->base)){
+      $message[] = msgPool::permMove();
+    }
+
+    return($message);
   }
 
 }
