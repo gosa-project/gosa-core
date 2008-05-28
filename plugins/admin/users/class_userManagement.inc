@@ -1118,7 +1118,6 @@ class userManagement extends plugin
 
       /* Cleanup object queue */
       $this->CopyPasteHandler->cleanup_queue();
-      $this->CopyPasteHandler->SetVar("base",$this->DivListUsers->selectedBase); 
       $dn = $this->list[$s_entry]['dn'];
       if($s_action == "copy" && preg_match("/r/",$ui->has_complete_category_acls($dn,"users"))){
         $this->CopyPasteHandler->add_to_queue($dn,$s_action,"usertabs","USERTABS","users");
@@ -1133,7 +1132,6 @@ class userManagement extends plugin
 
       /* Cleanup object queue */
       $this->CopyPasteHandler->cleanup_queue();
-      $this->CopyPasteHandler->SetVar("base",$this->DivListUsers->selectedBase); 
 
       /* Add new entries to CP queue */
       foreach($this->list_get_selected_items() as $id){
@@ -1157,6 +1155,7 @@ class userManagement extends plugin
     if($this->start_pasting_copied_objects && $this->CopyPasteHandler->entries_queued()){
    
       /* Get dialog */
+      $this->CopyPasteHandler->SetVar("base",$this->DivListUsers->selectedBase); 
       $data = $this->CopyPasteHandler->execute();
 
       /* Set CPPasswordChange to s_entry which indicates that this entry requires a new password. */
