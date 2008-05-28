@@ -48,6 +48,7 @@ class group extends plugin
   var $oldgroupType= "";
   var $orig_dn= "";
   var $orig_cn= "";
+  var $orig_base= "";
   var $has_mailAccount= FALSE;
   var $group_dialog= FALSE;
   var $nagios_group =FALSE;
@@ -195,6 +196,7 @@ class group extends plugin
       /* Get object base */
       $this->base =preg_replace ("/^[^,]+,".normalizePreg(get_groups_ou())."/","",$this->dn);
     }
+    $this->orig_base = $this->base;
 
     /* Is this account a trustAccount? */
     if (isset($this->attrs['trustModel'])){
@@ -1113,6 +1115,14 @@ class group extends plugin
         }
 
       }
+    }
+
+    /* Check if we are allowed to create or move this object 
+     */
+    if($this->dn == "new" && !$this->acl_is_createable($this->base)){
+      $message[] = msgPool::permCreate();
+    }elseif($this->cn != $this->orig_cn || $this->base != $this->orig_base){
+      $message[] = msgPool::permMove();
     }
 
     return ($message);
