@@ -32,7 +32,6 @@ class department extends plugin
 	var $businessCategory= "";
 	var $telephoneNumber= "";
 	var $facsimileTelephoneNumber= "";
-	var $orig_dn= "";
 	var $is_administrational_unit= false;
 	var $gosaUnitTag= "";
   var $view_logged = FALSE;
@@ -264,7 +263,15 @@ class department extends plugin
 			$message[]= msgPool::invalid(_("Fax"), $this->facsimileTelephoneNumber, "/[\/0-9 ()+*-]/");
 		}
 
-		return $message;
+    /* Check if we are allowed to create or move this object
+     */
+    if($this->orig_dn == "new" && !$this->acl_is_createable($this->base)){
+      $message[] = msgPool::permCreate();
+    }elseif($this->base != $this->orig_base && !$this->acl_is_moveable($this->base)){
+      $message[] = msgPool::permMove();
+    }
+
+    return $message;
 	}
 
 
