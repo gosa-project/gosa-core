@@ -725,7 +725,7 @@ class aclrole extends acl
      */
     if($this->orig_dn == "new" && !$this->acl_is_createable($this->base)){
       $message[] = msgPool::permCreate();
-    }elseif($this->base != $this->orig_base && !$this->acl_is_moveable($this->base)){
+    }elseif($this->orig_dn != "new" && $this->base != $this->orig_base && !$this->acl_is_moveable($this->base)){
       $message[] = msgPool::permMove();
     }
 
