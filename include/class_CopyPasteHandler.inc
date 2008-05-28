@@ -291,7 +291,7 @@ class CopyPasteHandler {
       /* Put each queued object in one of the above arrays 
        */
       foreach($this->queue as $key => $entry){
-  
+
         /* Update entries on demand 
          */
         if(!isset($entry['object'])){
@@ -300,16 +300,33 @@ class CopyPasteHandler {
         }
         $entry= $this->_update_vars($entry);
         $msgs = $entry['object']->check();
-        $acl = $ui->get_category_permissions($entry['dn'], $entry['tab_acl_category']);
+
+        /* To copy an object we require full read access to the object category 
+         */
+        $copy_acl = preg_match("/r/",$ui->has_complete_category_acls($entry['dn'], $entry['tab_acl_category']));
+
+        /* In order to copy an object we require read an delete acls 
+         */
+        $cut_acl  = preg_match("/d/",$ui->has_complete_category_acls($entry['dn'], $entry['tab_acl_category']));
+        $cut_acl &= preg_match("/r/",$ui->has_complete_category_acls($entry['dn'], $entry['tab_acl_category']));
 
         /* Check permissions */
-        if(!preg_match("/((c|w)|(w|c))/",$acl)){
+        if($entry['method'] == "copy" && !$copy_acl){
+          $this->disallowed_objects[$key] = $entry;
+        }elseif($entry['method'] == "cut" && !$cut_acl){
           $this->disallowed_objects[$key] = $entry;
         }elseif(!count($msgs)){
           $this->clean_objects[$key]  = $entry;
         }else{
           $this->objects_to_fix[$key] = $entry;
         }
+      }
+      if(count($this->disallowed_objects)){
+        $dns = array();
+        foreach($this->disallowed_objects as $entry){
+          $dns[] = $entry['dn'];
+        }
+#        msg_dialog::display(_("Permission"),msgPool::permCreate($dns),INFO_DIALOG);
       }
       $this->require_update = FALSE;
     }
