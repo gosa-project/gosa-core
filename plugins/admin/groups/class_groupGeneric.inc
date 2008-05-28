@@ -1121,7 +1121,7 @@ class group extends plugin
      */
     if($this->dn == "new" && !$this->acl_is_createable($this->base)){
       $message[] = msgPool::permCreate();
-    }elseif($this->cn != $this->orig_cn || $this->base != $this->orig_base){
+    }elseif($this->cn != $this->orig_cn || $this->base != $this->orig_base && !$this->acl_is_moveable($this->base)){
       $message[] = msgPool::permMove();
     }
 
