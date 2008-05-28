@@ -48,6 +48,8 @@ class ogroup extends plugin
   var $memberList= array();
   var $member= array();
   var $orig_dn= "";
+  var $orig_cn= "";
+  var $orig_base= "";
   var $group_dialog= FALSE;
   var $view_logged = FALSE;
 
@@ -137,6 +139,9 @@ class ogroup extends plugin
         }
       }
     }
+
+    $this->orig_cn = $this->cn;
+    $this->orig_base = $this->base;
 
     /* Load member data */
     $this->reload();
@@ -865,6 +870,14 @@ class ogroup extends plugin
     /* To many different object types? */
     if (strlen($this->gosaGroupObjects) > 4){
       $message[]= _("You can combine two different object types at maximum, only!");
+    }
+
+    /* Check if we are allowed to create or move this object 
+     */
+    if($this->dn == "new" && !$this->acl_is_createable($this->base)){
+      $message[] = msgPool::permCreate();
+    }elseif($this->cn != $this->orig_cn || $this->base != $this->orig_base && !$this->acl_is_moveable($this->base)){
+      $message[] = msgPool::permMove();
     }
 
     return ($message);
