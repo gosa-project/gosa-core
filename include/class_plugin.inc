@@ -1503,9 +1503,16 @@ class plugin
   }
 
 
-  function showSnapshotDialog($base,$baseSuffixe)
+  function showSnapshotDialog($base,$baseSuffixe,&$parent)
   {
     $once = true;
+    $ui = get_userinfo();
+    $this->parent = $parent;
+
+    if(!isset($this->acl_module)){
+      return("VERDAMMT");
+    }
+
     foreach($_POST as $name => $value){
 
       /* Create a new snapshot, display a dialog */
@@ -1513,26 +1520,40 @@ class plugin
         $once = false;
         $entry = preg_replace("/^CreateSnapShotDialog_/","",$name);
         $entry = base64_decode(preg_replace("/_[xy]$/","",$entry));
-        $this->snapDialog = new SnapShotDialog($this->config,$entry,$this);
-      }
 
+        if(!empty($entry) && $ui->allow_snapshot_create($entry,$this->parent->acl_module)){
+          $this->snapDialog = new SnapShotDialog($this->config,$entry,$this);
+        }else{
+          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to create a snapshot for %s."),$entry),ERROR_DIALOG);
+        }
+      }  
+  
       /* Restore a snapshot, display a dialog with all snapshots of the current object */
       if(preg_match("/^RestoreSnapShotDialog_/",$name) && $once){
         $once = false;
         $entry = preg_replace("/^RestoreSnapShotDialog_/","",$name);
         $entry = base64_decode(preg_replace("/_[xy]$/","",$entry));
-        $this->snapDialog = new SnapShotDialog($this->config,$entry,$this);
-        $this->snapDialog->display_restore_dialog = true;
+        if(!empty($entry) && $ui->allow_snapshot_restore($entry,$this->parent->acl_module)){
+          $this->snapDialog = new SnapShotDialog($this->config,$entry,$this);
+          $this->snapDialog->display_restore_dialog = true;
+        }else{
+          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s."),$entry),ERROR_DIALOG);
+        }
       }
 
       /* Restore one of the already deleted objects */
       if(((isset($_POST['menu_action']) && $_POST['menu_action'] == "RestoreDeletedSnapShot") 
           || preg_match("/^RestoreDeletedSnapShot_/",$name)) && $once){
         $once = false;
-        $this->snapDialog = new SnapShotDialog($this->config,"",$this);
-        $this->snapDialog->set_snapshot_bases($baseSuffixe);
-        $this->snapDialog->display_restore_dialog      = true;
-        $this->snapDialog->display_all_removed_objects  = true;
+
+        if($ui->allow_snapshot_restore($base,$this->parent->acl_module)){
+          $this->snapDialog = new SnapShotDialog($this->config,"",$this);
+          $this->snapDialog->set_snapshot_bases($baseSuffixe);
+          $this->snapDialog->display_restore_dialog      = true;
+          $this->snapDialog->display_all_removed_objects  = true;
+        }else{
+          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s."),$base),ERROR_DIALOG);
+        }
       }
 
       /* Restore selected snapshot */
@@ -1540,9 +1561,11 @@ class plugin
         $once = false;
         $entry = preg_replace("/^RestoreSnapShot_/","",$name);
         $entry = base64_decode(trim(preg_replace("/_[xy]$/","",$entry)));
-        if(!empty($entry)){
+        if(!empty($entry) && $ui->allow_snapshot_restore($entry,$this->parent->acl_module)){
           $this->restore_snapshot($entry);
           $this->snapDialog = NULL;
+        }else{
+          msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s."),$entry),ERROR_DIALOG);
         }
       }
     }

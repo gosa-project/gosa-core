@@ -76,33 +76,26 @@ class SnapShotDialog extends plugin
         $entry = preg_replace("/^RemoveSnapShot_/","",$name);
         $entry = base64_decode(preg_replace("/_[xy]$/","",$entry));
 
-        /* Check if we are allowed to handle snapshots 
-         */
-        if($ui->allow_snapshot_restore($entry,$this->parent->acl_module)){
-
-          $found = false;
-          foreach($this->last_list as $t_stamp => $obj){
-            if($obj['dn'] == $entry){
-              $found = true;
-              break;
-            }
+        $found = false;
+        foreach($this->last_list as $t_stamp => $obj){
+          if($obj['dn'] == $entry){
+            $found = true;
+            break;
           }
+        }
 
-          if($found){
-            $this->del_dn 	= $entry;
-            $smarty= get_smarty();
-            $smarty->assign("intro", sprintf(_("You're about to delete the snapshot '%s'."), @LDAP::fix($this->del_dn)));
-            return($smarty->fetch (get_template_path('remove.tpl')));
-          }
+        if($found){
+          $this->del_dn 	= $entry;
+          $smarty= get_smarty();
+          $smarty->assign("intro", sprintf(_("You're about to delete the snapshot '%s'."), @LDAP::fix($this->del_dn)));
+          return($smarty->fetch (get_template_path('remove.tpl')));
         }
       }
     }
 
     /* Remove snapshot */
     if(isset($_POST['delete_confirm']) && !empty($this->del_dn)){
-      if($ui->allow_snapshot_restore($this->del_dn,$this->parent->acl_module)){
-        $this->remove_snapshot($this->del_dn);
-      }
+      $this->remove_snapshot($this->del_dn);
       $this->del_dn = "";
 		}
 
@@ -135,10 +128,8 @@ class SnapShotDialog extends plugin
 			foreach($tmp as $key => $entry){
     
         /* Check permissions */
-        if($ui->allow_snapshot_restore($entry['dn'],$this->parent->acl_module)){
-          $TimeStamp = $entry['gosaSnapshotTimestamp'][0];
-          $list_of_elements[$TimeStamp] = $entry;
-        }
+        $TimeStamp = $entry['gosaSnapshotTimestamp'][0];
+        $list_of_elements[$TimeStamp] = $entry;
 			}
 
 			/* Sort generated list */

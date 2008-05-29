@@ -248,12 +248,12 @@ class userinfo
     }
     $r = $w = $c = TRUE;
     foreach($object as $category){
-      $w |= preg_match("/w/",$this->has_complete_category_acls($dn, $category));
-      $c |= preg_match("/c/",$this->has_complete_category_acls($dn, $category));
-      $r |= preg_match("/r/",$this->has_complete_category_acls($dn, $category));
-#      print_a(array($category => $w.$c.$r));
+      $w &= preg_match("/w/",$this->has_complete_category_acls($dn, $category));
+      $c &= preg_match("/c/",$this->has_complete_category_acls($dn, $category));
+      $r &= preg_match("/r/",$this->has_complete_category_acls($dn, $category));
+#     print_a(array($category => array($r.$w.$c)));
     }
-    return($r); 
+    return($r && $w && $c); 
   }  
 
 
@@ -264,11 +264,17 @@ class userinfo
   */
   function allow_snapshot_create($dn, $object)
   {
-    $w = preg_match("/w/",$this->has_complete_category_acls($dn, $object));
-    $c = preg_match("/c/",$this->has_complete_category_acls($dn, $object));
-    $r = preg_match("/r/",$this->has_complete_category_acls($dn, $object));
-#    print_a(array($object => $w.$c.$r));
-    return($r && $w && $c) ; 
+    if(!is_array($object)){
+      $object = array($object);
+    }
+    $r = $w = $c = TRUE;
+    foreach($object as $category){
+      $w &= preg_match("/w/",$this->has_complete_category_acls($dn, $category));
+      $c &= preg_match("/c/",$this->has_complete_category_acls($dn, $category));
+      $r &= preg_match("/r/",$this->has_complete_category_acls($dn, $category));
+#      print_a(array($category => array($r.$w.$c)));
+    }
+    return($r) ; 
   }  
 
 
