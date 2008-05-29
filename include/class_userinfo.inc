@@ -253,7 +253,7 @@ class userinfo
       $r &= preg_match("/r/",$this->has_complete_category_acls($dn, $category));
 #     print_a(array($category => array($r.$w.$c)));
     }
-    return($r && $w && $c); 
+    return($r && $w ); 
   }  
 
 
