@@ -203,14 +203,14 @@ class divListACL extends MultiSelectWindow
     $ui = get_userinfo();
     foreach($list as $key => $acl_entry){
 
-      /* Get copy & paste icon */
-      $acl        = $this->ui->get_permissions($acl_entry['dn'],"acl/acl");
-      $acl_all    = $this->ui->has_complete_category_acls($acl_entry['dn'],"acl");
       $action     = "";
 
       if(in_array("gosaRole",$acl_entry['objectClass'])){
 
         /* Role handling */
+        $acl        = $this->ui->get_permissions($acl_entry['dn'],"aclroles/aclRole");
+        $acl_all    = $this->ui->has_complete_category_acls($acl_entry['dn'],"aclroles");
+
         $editlink       = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=list_edit_role'>%s</a>";
         $list_left_icon = "<img src='plugins/acl/images/role.png' alt='"._("Role")."'>";
         $cn = htmlentities(utf8_decode($acl_entry['cn'][0])) ;
@@ -248,7 +248,14 @@ class divListACL extends MultiSelectWindow
           $action.= "<input class='center' type='image' src='images/lists/trash.png' alt='"._("delete")."' 
             name='list_acl_role_del_%KEY%' title='"._("Delete acl role")."'>";
         }
+
+        $field0 = array("string" => "<input type='checkbox' id='item_selected_".$key."' name='item_selected_".$key."'>" ,
+            "attach" => "style='width:20px;'");
+
       }else{
+
+        $acl        = $this->ui->get_permissions($acl_entry['dn'],"acl/acl");
+        $acl_all    = $this->ui->has_complete_category_acls($acl_entry['dn'],"acl");
 
         /* Acl handling */
         $editlink       = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=list_edit_entry'>%s</a>";
@@ -264,12 +271,6 @@ class divListACL extends MultiSelectWindow
           $action.= "<input class='center' type='image' src='images/lists/trash.png' alt='"._("delete")."' 
             name='list_acl_del_%KEY%' title='"._("Delete acl")."'>";
         }
-      }
-
-      if(in_array("gosaRole",$acl_entry['objectClass'])){
-        $field0 = array("string" => "<input type='checkbox' id='item_selected_".$key."' name='item_selected_".$key."'>" ,
-            "attach" => "style='width:20px;'");
-      }else{
         $field0 = array("string" => "", "attach" => "style='width:20px;'");
       }
 
@@ -283,7 +284,7 @@ class divListACL extends MultiSelectWindow
           }
         }
       }
-  
+
       $field1 = array("string" => $list_left_icon, "attach"=> "style='text-align:center;width:20px;'");
       $field2 = array("string" => sprintf($editlink,$key,$display)."&nbsp;","attach" => "");
       $field3 = array("string" => preg_replace("/%KEY%/",$key,$action), "attach"=> "style='text-align:right;width:".$this->action_col_size."px;border-right:0px;'");
