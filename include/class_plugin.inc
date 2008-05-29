@@ -1974,6 +1974,33 @@ class plugin
   }
 
 
+  function get_copypaste_action($base,$category,$class,$copy = TRUE, $cut = TRUE)
+  {
+    $ui = get_userinfo();
+    $action = "";
+    if($this->CopyPasteHandler){
+      if($cut){
+        if($ui->is_cutable($base,$category,$class)){
+          $action .= "<input class='center' type='image'
+            src='images/lists/cut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+        }else{
+          $action.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
+        }
+      }
+      if($copy){
+        if($ui->is_copyable($base,$category,$class)){
+          $action.= "<input class='center' type='image'
+            src='images/lists/copy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
+        }else{
+          $action.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
+        }
+      }
+    }
+
+    return($action); 
+  }
+
+
   function get_copypaste_header($base,$category,$copy = TRUE, $cut = TRUE)
   {
     $s = "";
@@ -2016,12 +2043,6 @@ class plugin
       }
     }
     return($s);
-  }
-
-
-  function get_copypaste_action($base,$category,$class)
-  {
-
   }
 
 

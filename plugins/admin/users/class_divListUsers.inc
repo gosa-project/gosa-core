@@ -285,19 +285,8 @@ class divListUsers extends MultiSelectWindow
       $acl      = $ui->get_permissions($val['dn'],"users/user");
       $acl_all  = $ui->has_complete_category_acls($val['dn'],"users");
      
-      if($ui->is_cutable($val['dn'],"users","user") && $this->parent->CopyPasteHandler){
-        $action .= "<input class='center' type='image'
-          src='images/lists/cut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
-      }else{
-        $action.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
-      }
-
-      if($ui->is_copyable($val['dn'],"users","user") && $this->parent->CopyPasteHandler){
-        $action.= "<input class='center' type='image'
-          src='images/lists/copy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
-      }else{
-        $action.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
-      }
+      /* Add copy & cut functionality */
+      $action.= $this->parent->get_copypaste_action($val['dn'],"users","user");
 
       /* Add deactivate status */
       $lock_status = "";

@@ -282,19 +282,8 @@ class divListGroup extends MultiSelectWindow
 
       $actions= "";
 
-      if($ui->is_cutable($val['dn'],"groups","group") && $this->parent->CopyPasteHandler){
-        $actions .= "<input class='center' type='image'
-          src='images/lists/cut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
-      }else{
-        $actions.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
-      }
-
-      if($ui->is_copyable($val['dn'],"groups","group") && $this->parent->CopyPasteHandler){
-        $actions.= "<input class='center' type='image'
-          src='images/lists/copy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
-      }else{
-        $actions.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
-      }
+      /* Add copy & cut functionality */
+      $actions.= $this->parent->get_copypaste_action($val['dn'],"groups","group");
 
       /* Add edit icon */
       $actions.= "<input class='center' type='image'

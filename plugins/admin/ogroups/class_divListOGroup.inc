@@ -264,19 +264,8 @@ class divListOGroup extends MultiSelectWindow
       $acl    = $ui->get_permissions($val['dn'],"ogroups/ogroup");
       $acl_all= $ui->has_complete_category_acls($val['dn'],"ogroups");
 
-      if($ui->is_cutable($val['dn'],"ogroups","ogroup") && $this->parent->CopyPasteHandler){
-        $actions .= "<input class='center' type='image'
-          src='images/lists/cut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
-      }else{
-        $actions.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
-      }
-
-      if($ui->is_copyable($val['dn'],"ogroups","ogroup") && $this->parent->CopyPasteHandler){
-        $actions.= "<input class='center' type='image'
-          src='images/lists/copy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
-      }else{
-        $actions.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
-      }
+      /* Add copy & cut functionality */
+      $actions.= $this->parent->get_copypaste_action($val['dn'],"ogroups","ogroup");
 
       $actions.= "<input class='center' type='image'
         src='images/lists/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
