@@ -198,6 +198,23 @@ class userinfo
   }
 
 
+  function is_copyable($dn, $object, $class)
+  {
+    return(preg_match("/r/",$this->has_complete_category_acls($dn, $object)));
+  }
+
+  function is_cutable($dn, $object, $class)
+  {
+    $remove = preg_match("/d/",$this->get_permissions($dn,$object."/".$class));
+    $read   = preg_match("/r/",$this->has_complete_category_acls($dn, $object));
+    return($remove && $read);
+  }
+
+  function is_pasteable($dn, $object, $class)
+  {
+    return(preg_match("/w/",$this->has_complete_category_acls($dn, $object)));
+  }
+
   function get_permissions($dn, $object, $attribute= "", $skip_write= FALSE)
   {
     /* If we are forced to skip ACLs checks for the current user 

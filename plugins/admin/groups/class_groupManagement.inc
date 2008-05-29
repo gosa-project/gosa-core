@@ -733,10 +733,10 @@ class groupManagement extends plugin
       /* Cleanup object queue */
       $this->CopyPasteHandler->cleanup_queue();
       $dn = $this->grouplist[$s_entry]['dn'];
-      if($s_action == "copy" && preg_match("/r/",$ui->has_complete_category_acls($dn,"groups"))){
+      if($s_action == "copy" && $ui->is_copyable($dn,"groups","group")){
         $this->CopyPasteHandler->add_to_queue($dn,$s_action,"grouptabs","GROUPTABS","groups");
       }
-      if($s_action == "cut" && preg_match("/(r.*d|d.*r)/",$ui->has_complete_category_acls($dn,"groups"))){
+      if($s_action == "cut" && $ui->is_cutable($dn,"groups","group")){
         $this->CopyPasteHandler->add_to_queue($dn,$s_action,"grouptabs","GROUPTABS","groups");
       }
 
@@ -753,10 +753,10 @@ class groupManagement extends plugin
       foreach($this->list_get_selected_items() as $id){
         $dn = $this->grouplist[$id]['dn'];
 
-        if($s_action == "copy_multiple" && preg_match("/r/",$ui->has_complete_category_acls($dn,"groups"))){
+        if($s_action == "copy_multiple" && $ui->is_copyable($dn,"groups","group")){
           $this->CopyPasteHandler->add_to_queue($dn,"copy","grouptabs","GROUPTABS","groups");
         }
-        if($s_action == "cut_multiple" && preg_match("/(r.*d|d.*r)/",$ui->has_complete_category_acls($dn,"groups"))){
+        if($s_action == "cut_multiple" && $ui->is_cutable($dn,"groups","group")){
           $this->CopyPasteHandler->add_to_queue($dn,"cut","grouptabs","GROUPTABS","groups");
         }
       }

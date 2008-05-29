@@ -275,27 +275,25 @@ class divListOGroup extends MultiSelectWindow
     // Assigning ogroups
     foreach($list as $key => $val){
 
+      $actions = "";
+      
       /* Create action icons */
       $acl    = $ui->get_permissions($val['dn'],"ogroups/ogroup");
       $acl_all= $ui->has_complete_category_acls($val['dn'],"ogroups");
 
-      // Cut
-      $actions= "";
-      if(preg_match("/(r.*d|r.*d)/",$acl_all) && $this->parent->CopyPasteHandler){
+      if($ui->is_cutable($val['dn'],"ogroups","ogroup") && $this->parent->CopyPasteHandler){
         $actions .= "<input class='center' type='image'
           src='images/lists/cut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
       }else{
         $actions.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
       }
 
-      // Copy 
-      if(preg_match("/r/",$acl_all) && $this->parent->CopyPasteHandler){
+      if($ui->is_copyable($val['dn'],"ogroups","ogroup") && $this->parent->CopyPasteHandler){
         $actions.= "<input class='center' type='image'
           src='images/lists/copy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
       }else{
         $actions.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
       }
-
 
       $actions.= "<input class='center' type='image'
         src='images/lists/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";

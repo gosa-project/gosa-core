@@ -204,7 +204,7 @@ class divListACL extends MultiSelectWindow
 
   function setEntries($list)
   {
-
+    $ui = get_userinfo();
     foreach($list as $key => $acl_entry){
 
       /* Get copy & paste icon */
@@ -224,12 +224,20 @@ class divListACL extends MultiSelectWindow
         }
 
         /* Add copy & paste handler */
-        if(($this->parent->CopyPasteHandler) && preg_match("/(c.*w|w.*c)/",$acl_all)){
-          $action.= "<input class='center' type='image'
+        if($ui->is_cutable($acl_entry['dn'],"acl","aclRole") && $this->parent->CopyPasteHandler){
+          $action .= "<input class='center' type='image'
             src='images/lists/cut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
+        }else{
+          $action.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
+        }
+
+        if($ui->is_copyable($acl_entry['dn'],"acl","aclRole") && $this->parent->CopyPasteHandler){
           $action.= "<input class='center' type='image'
             src='images/lists/copy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
+        }else{
+          $action.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
         }
+
 
         /* Add actions depending on acls */
         if(preg_match("/r/", $acl)){

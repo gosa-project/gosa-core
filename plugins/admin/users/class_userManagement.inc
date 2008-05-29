@@ -1119,10 +1119,10 @@ class userManagement extends plugin
       /* Cleanup object queue */
       $this->CopyPasteHandler->cleanup_queue();
       $dn = $this->list[$s_entry]['dn'];
-      if($s_action == "copy" && preg_match("/r/",$ui->has_complete_category_acls($dn,"users"))){
+      if($s_action == "copy" && $ui->is_copyable($dn,"users","user")){
         $this->CopyPasteHandler->add_to_queue($dn,$s_action,"usertabs","USERTABS","users");
       }
-      if($s_action == "cut" && preg_match("/(r.*d|d.*r)/",$ui->has_complete_category_acls($dn,"users"))){
+      if($s_action == "cut" && $ui->is_cutable($dn,"users","user")){
         $this->CopyPasteHandler->add_to_queue($dn,$s_action,"usertabs","USERTABS","users");
       }
     }
@@ -1137,10 +1137,10 @@ class userManagement extends plugin
       foreach($this->list_get_selected_items() as $id){
         $dn = $this->list[$id]['dn'];
 
-        if($s_action == "copy_multiple" && preg_match("/r/",$ui->has_complete_category_acls($dn,"users"))){
+        if($s_action == "copy_multiple" && $ui->is_copyable($dn,"users","user")){
           $this->CopyPasteHandler->add_to_queue($dn,"copy","usertabs","USERTABS","users");
         }
-        if($s_action == "cut_multiple" && preg_match("/(r.*d|d.*r)/",$ui->has_complete_category_acls($dn,"users"))){
+        if($s_action == "cut_multiple" && $ui->is_cutable($dn,"users","user")){
           $this->CopyPasteHandler->add_to_queue($dn,"cut","usertabs","USERTABS","users");
         }
       }

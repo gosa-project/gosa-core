@@ -651,10 +651,10 @@ class ogroupManagement extends plugin
       /* Cleanup object queue */
       $this->CopyPasteHandler->cleanup_queue();
       $dn = $this->ogrouplist[$s_entry]['dn'];
-      if($s_action == "copy" && preg_match("/r/",$ui->has_complete_category_acls($dn,"ogroups"))){
-        $this->CopyPasteHandler->add_to_queue($dn,$s_action, "ogrouptabs","OGROUPTABS","ogroups");
+      if($s_action == "copy" && $ui->is_copyable($dn,"ogroups","ogroup")){
+        $this->CopyPasteHandler->add_to_queue($dn,$s_action,"ogrouptabs","OGROUPTABS","ogroups");
       }
-      if($s_action == "cut" && preg_match("/(r.*d|d.*r)/",$ui->has_complete_category_acls($dn,"ogroups"))){
+      if($s_action == "cut" && $ui->is_cutable($dn,"ogroups","ogroup")){
         $this->CopyPasteHandler->add_to_queue($dn,$s_action,"ogrouptabs","OGROUPTABS","ogroups");
       }
     }
@@ -670,10 +670,10 @@ class ogroupManagement extends plugin
       foreach($this->list_get_selected_items() as $id){
         $dn = $this->ogrouplist[$id]['dn'];
 
-        if($s_action == "copy_multiple" && preg_match("/r/",$ui->has_complete_category_acls($dn,"ogroups"))){
+        if($s_action == "copy_multiple" && $ui->is_copyable($dn,"ogroups","ogroup")){ 
           $this->CopyPasteHandler->add_to_queue($dn,"copy","ogrouptabs","OGROUPTABS","ogroups");
         }
-        if($s_action == "cut_multiple" && preg_match("/(r.*d|d.*r)/",$ui->has_complete_category_acls($dn,"ogroups"))){
+        if($s_action == "cut_multiple" && $ui->is_cutable($dn,"ogroups","ogroup")){
           $this->CopyPasteHandler->add_to_queue($dn,"cut","ogrouptabs","OGROUPTABS","ogroups");
         }
       }

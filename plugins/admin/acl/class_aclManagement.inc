@@ -588,11 +588,11 @@ class aclManagement extends plugin
       $dn = $this->list[$s_entry]['dn'];
 
       /* We can only copy & cut roles */ 
-      if(isset($this->list[$id]['objectClass']) && in_array("gosaRole",$this->list[$s_entry]['objectClass'])){
-        if($s_action == "copy" && preg_match("/r/",$ui->has_complete_category_acls($dn,"aclroles"))){
+      if(isset($this->list[$s_entry]['objectClass']) && in_array("gosaRole",$this->list[$s_entry]['objectClass'])){
+        if($s_action == "copy" && $ui->is_copyable($dn,"aclroles","aclrole")){ 
           $this->CopyPasteHandler->add_to_queue($dn,$s_action,"aclroletab","ACLROLETAB","aclroles");
         }
-        if($s_action == "cut" && preg_match("/(r.*d|d.*r)/",$ui->has_complete_category_acls($dn,"aclroles"))){
+        if($s_action == "cut" && $ui->is_cutable($dn,"aclroles","aclrole")){
           $this->CopyPasteHandler->add_to_queue($dn,$s_action,"aclroletab","ACLROLETAB","aclroles");
         }
       }
@@ -610,10 +610,10 @@ class aclManagement extends plugin
 
         if(isset($this->list[$id]['objectClass']) && in_array("gosaRole",$this->list[$id]['objectClass'])){
 
-          if($s_action == "copy_multiple" && preg_match("/r/",$ui->has_complete_category_acls($dn,"aclroles"))){
+          if($s_action == "copy_multiple" && $ui->is_copyable($dn,"aclroles","aclrole")){ 
             $this->CopyPasteHandler->add_to_queue($dn,"copy","aclroletab","ACLROLETAB","aclroles");
           }
-          if($s_action == "cut_multiple" && preg_match("/(r.*d|d.*r)/",$ui->has_complete_category_acls($dn,"aclroles"))){
+          if($s_action == "cut_multiple" && $ui->is_cutable($dn,"aclroles","aclrole")){
             $this->CopyPasteHandler->add_to_queue($dn,"cut","aclroletab","ACLROLETAB","aclroles");
           }
         }
