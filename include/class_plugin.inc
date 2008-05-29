@@ -1966,10 +1966,62 @@ class plugin
       }
 
       $str.= "<input class='center' type='image' src='images/snapshot.png'
-        alt='"._("Create snapshot")."' name='CreateSnapShotDialog_".base64_encode($base)."' title='"._("Create a new snapshot from this object")."'>&nbsp;";
+        alt='"._("Create snapshot")."' name='CreateSnapShotDialog_".base64_encode($base)."' 
+        title='"._("Create a new snapshot from this object")."'>&nbsp;";
     }
 
     return($str);
+  }
+
+
+  function get_copypaste_header($base,$category,$copy = TRUE, $cut = TRUE)
+  {
+    $s = "";
+    $ui =get_userinfo();
+
+    if(!is_array($category)){
+      $category = array($category);
+    }
+
+    /* Check permissions for each category, if there is at least one category which 
+        support read or paste permissions for the given base, then display the specific actions.
+     */
+    $readable = $pasteable = TRUE;
+    foreach($category as $cat){
+      $readable |= $ui->get_category_permissions($base,$cat);
+      $pasteable|= $ui->is_pasteable($base,$cat);
+    }
+  
+    if(($cut || $copy) && isset($this->CopyPasteHandler) && is_object($this->CopyPasteHandler)){
+      if($readable){
+        $s.= "..|---|\n";
+        if($copy){
+          $s.= "..|<img src='images/lists/copy.png' alt='' border='0' class='center'>".
+            "&nbsp;"._("Copy")."|"."multiple_copy_systems|\n";
+        }
+        if($cut){
+          $s.= "..|<img src='images/lists/cut.png' alt='' border='0' class='center'>".
+            "&nbsp;"._("Cut")."|"."multiple_cut_systems|\n";
+        }
+      }
+
+      if($pasteable){
+        if($this->CopyPasteHandler->entries_queued()){
+          $img = "<img border='0' class='center' src='images/lists/paste.png' alt=''>";
+          $s.="..|".$img."&nbsp;"._("Paste")."|editPaste|\n";
+        }else{
+          $img = "<img border='0' class='center' src='images/lists/paste-grey.png' alt=''>";
+          $s.="..|".$img."&nbsp;"._("Paste")."\n";
+        }
+      }
+    }
+    return($s);
+  }
+
+
+  function get_copypaste_action($base,$category,$class)
+  {
+
   }
 
 

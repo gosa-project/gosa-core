@@ -230,7 +230,7 @@ class userinfo
       @param  String The acl  class (e.g. user) 
       @return Boolean   TRUE if we are allowed to paste an object.
   */
-  function is_pasteable($dn, $object, $class)
+  function is_pasteable($dn, $object)
   {
     return(preg_match("/w/",$this->has_complete_category_acls($dn, $object)));
   }

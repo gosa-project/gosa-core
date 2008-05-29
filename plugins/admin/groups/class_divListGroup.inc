@@ -207,22 +207,9 @@ class divListGroup extends MultiSelectWindow
     /* Add multiple copy & cut icons */
     $acl_all= $ui->has_complete_category_acls($this->selectedBase,"groups");
 
-    if(is_object($this->parent->CopyPasteHandler) && preg_match("/r/",$acl_all)){
-      $s.= "..|<img src='images/lists/copy.png' alt='' border='0' class='center'>".
-        "&nbsp;"._("Copy")."|"."multiple_copy_systems|\n";
-      $s.= "..|<img src='images/lists/cut.png' alt='' border='0' class='center'>".
-        "&nbsp;"._("Cut")."|"."multiple_cut_systems|\n";
-    }
-
-    /* Copy & paste icons */
-    if(is_object($this->parent->CopyPasteHandler) && $this->parent->CopyPasteHandler->entries_queued()){
-      $img = "<img border='0' class='center' src='images/lists/paste.png' alt=''>";
-      $s.="..|".$img."&nbsp;"._("Paste")."|editPaste|\n";
-    }else{
-      $img = "<img border='0' class='center' src='images/lists/paste-grey.png' alt=''>";
-      $s.="..|".$img."&nbsp;"._("Paste")."\n";
-    }
-
+    /* Add Copy & Paste header */
+    $s .= $this->parent->get_copypaste_header($this->selectedBase,$this->module);
+    
     /* Add snapshot functionality */
     $s .= $this->parent->get_snapshot_header($this->selectedBase,$this->module);
 
