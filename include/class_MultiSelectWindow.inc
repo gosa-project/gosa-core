@@ -635,55 +635,6 @@ class MultiSelectWindow{
 	}
 
 
-  /* Create header snapshot value */
-  function get_snapshot_header($layer_menu = FALSE)
-  {
-    $str = "";
-    if($this->parent->snapshotEnabled()){
-      $ok = false;
-      foreach($this->parent->get_used_snapshot_bases() as $base){
-        $ok |= count($this->parent->getAllDeletedSnapshots($base)) >= 1 ;
-      }
-      if($ok){
-        if($layer_menu){
-          $str = "..|<img class='center' src='images/lists/restore.png' alt='"._("Restore")."'>&nbsp;"._("Restore")."|RestoreDeletedSnapShot|\n";
-        }else{
-          $str = "<input class='center' type='image' align='middle' src='images/lists/restore.png'
-            title='"._("Restore snapshopts of already deleted objects")."' 
-            alt='"._("Restore")."' name='RestoreDeletedSnapShot'>&nbsp;"; 
-        }
-      }else{
-        if($layer_menu){
-          $str = "..|<img class='center' src='images/lists/restore_grey.png' alt=''>&nbsp;"._("Restore")."||\n";
-        }else{
-          $str = "<img class='center' src='images/lists/restore_grey.png' alt=''>&nbsp;";
-        }
-      }
-    }
-    return($str);
-  }
-
-
-  function GetSnapShotActions($dn)
-  {
-    $str= "";
-    if($this->parent->snapshotEnabled()){
-
-      if(count($this->parent->Available_SnapsShots($dn))){
-        $str.= "<input class='center' type='image' src='images/lists/restore.png'
-          alt='"._("Restore snapshot")."' name='RestoreSnapShotDialog_".base64_encode($dn)."' title='"._("Restore snapshot")."'>&nbsp;";
-      } else {
-        $str = "<img class='center' src='images/lists/restore_grey.png' alt=''>&nbsp;";
-      }
-
-      $str.= "<input class='center' type='image' src='images/snapshot.png'
-        alt='"._("Create snapshot")."' name='CreateSnapShotDialog_".base64_encode($dn)."' title='"._("Create a new snapshot from this object")."'>&nbsp;";
-    }
-
-    return($str);
-  }
-
-
 	/* this function adds the sub-departments of the current tree to the list */
 	function AddDepartments($base = false,$numtabs = 3,$empty_tabs_in_front = 0)
 	{

@@ -1925,6 +1925,58 @@ class plugin
     $message = plugin::check();
     return($message);
   }
+
+
+  /*! \brief  Returns the snapshot header part for "Actions" menu in management dialogs 
+      @param  $layer_menu  
+   */   
+  function get_snapshot_header($base,$category)
+  {
+    $str = "";
+    $ui = get_userinfo();
+    if($this->snapshotEnabled() && $ui->allow_snapshot_restore($base,$category)){
+
+      $ok = false;
+      foreach($this->get_used_snapshot_bases() as $base){
+        $ok |= count($this->getAllDeletedSnapshots($base)) >= 1 ;
+      }
+
+      if($ok){
+        $str = "..|<img class='center' src='images/lists/restore.png' ".
+          "alt='"._("Restore")."'>&nbsp;"._("Restore").                       "|RestoreDeletedSnapShot|\n";
+      }else{
+        $str = "..|<img class='center' src='images/lists/restore_grey.png' alt=''>&nbsp;"._("Restore")."||\n";
+      }
+    }
+    return($str);
+  }
+
+
+  function get_snapshot_action($base,$category)
+  {
+    $str= ""; 
+    $ui = get_userinfo();
+    if($this->snapshotEnabled() && $ui->allow_snapshot_create($base,$category)){
+
+      if(count($this->Available_SnapsShots($base))){
+        $str.= "<input class='center' type='image' src='images/lists/restore.png'
+          alt='"._("Restore snapshot")."' name='RestoreSnapShotDialog_".base64_encode($base)."' title='"._("Restore snapshot")."'>&nbsp;";
+      } else {
+        $str = "<img class='center' src='images/lists/restore_grey.png' alt=''>&nbsp;";
+      }
+
+      $str.= "<input class='center' type='image' src='images/snapshot.png'
+        alt='"._("Create snapshot")."' name='CreateSnapShotDialog_".base64_encode($base)."' title='"._("Create a new snapshot from this object")."'>&nbsp;";
+    }
+
+    return($str);
+  }
+
+
+  function get_used_snapshot_bases()
+  {
+     return(array());
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

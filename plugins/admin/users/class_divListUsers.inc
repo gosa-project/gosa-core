@@ -216,11 +216,7 @@ class divListUsers extends MultiSelectWindow
       $s.="..|".$img."&nbsp;"._("Paste")."\n";
     }
 
-    /* Add snapshot icons */
-    if(preg_match("/(c.*w|w.*c)/",$acl_all)){
-      $s .= "..|---|\n";
-      $s .= $this->get_snapshot_header(TRUE);
-    }
+    $s .= $this->parent->get_snapshot_header($this->selectedBase,$this->module);
 
     $this->SetDropDownHeaderMenu($s);
     $this->SetListHeader($listhead);
@@ -354,13 +350,8 @@ class divListUsers extends MultiSelectWindow
           title='"._("Not allowed")."'>";
       }
 
-      /* Add snapshot icon */
-      if(preg_match("/(r.*w|w.*r)/",$acl_all)){
-        $action.= $this->GetSnapShotActions($val['dn']);
-      }else{
-        $action.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
-        $action.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
-      }
+      /* Add snapshot functionality */
+      $action.= $this->parent->get_snapshot_action($val['dn'],$this->module);
 
       /* Add remove icon, if we are allowed to remove the current user */
       if(preg_match("/d/",$acl)) {

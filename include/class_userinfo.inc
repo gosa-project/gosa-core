@@ -197,12 +197,25 @@ class userinfo
     return ($acl);
   }
 
-
+  
+  /*! \brief Check if the given object (dn) is copyable
+      @param  String The object dn 
+      @param  String The acl  category (e.g. users) 
+      @param  String The acl  class (e.g. user) 
+      @return Boolean   TRUE if the given object is copyable else FALSE 
+  */
   function is_copyable($dn, $object, $class)
   {
     return(preg_match("/r/",$this->has_complete_category_acls($dn, $object)));
   }
 
+
+  /*! \brief Check if the given object (dn) is cutable
+      @param  String The object dn 
+      @param  String The acl  category (e.g. users) 
+      @param  String The acl  class (e.g. user) 
+      @return Boolean   TRUE if the given object is cutable else FALSE 
+  */
   function is_cutable($dn, $object, $class)
   {
     $remove = preg_match("/d/",$this->get_permissions($dn,$object."/".$class));
@@ -210,10 +223,54 @@ class userinfo
     return($remove && $read);
   }
 
+
+  /*! \brief  Checks if we are allowed to paste an object to the given destination ($dn)
+      @param  String The destination dn 
+      @param  String The acl  category (e.g. users) 
+      @param  String The acl  class (e.g. user) 
+      @return Boolean   TRUE if we are allowed to paste an object.
+  */
   function is_pasteable($dn, $object, $class)
   {
     return(preg_match("/w/",$this->has_complete_category_acls($dn, $object)));
   }
+
+
+  /*! \brief  Checks if we are allowed to restore a snapshot for the given dn.
+      @param  String The destination dn 
+      @param  String The acl  category (e.g. users) 
+      @return Boolean   TRUE if we are allowed to restore a snapshot.
+  */
+  function allow_snapshot_restore($dn, $object)
+  {
+    if(!is_array($object)){
+      $object = array($object);
+    }
+    $r = $w = $c = TRUE;
+    foreach($object as $category){
+      $w |= preg_match("/w/",$this->has_complete_category_acls($dn, $category));
+      $c |= preg_match("/c/",$this->has_complete_category_acls($dn, $category));
+      $r |= preg_match("/r/",$this->has_complete_category_acls($dn, $category));
+#      print_a(array($category => $w.$c.$r));
+    }
+    return($r); 
+  }  
+
+
+  /*! \brief  Checks if we are allowed to create a snapshot of the given dn.
+      @param  String The source dn 
+      @param  String The acl category (e.g. users) 
+      @return Boolean   TRUE if we are allowed to restore a snapshot.
+  */
+  function allow_snapshot_create($dn, $object)
+  {
+    $w = preg_match("/w/",$this->has_complete_category_acls($dn, $object));
+    $c = preg_match("/c/",$this->has_complete_category_acls($dn, $object));
+    $r = preg_match("/r/",$this->has_complete_category_acls($dn, $object));
+#    print_a(array($object => $w.$c.$r));
+    return($r && $w && $c) ; 
+  }  
+
 
   function get_permissions($dn, $object, $attribute= "", $skip_write= FALSE)
   {

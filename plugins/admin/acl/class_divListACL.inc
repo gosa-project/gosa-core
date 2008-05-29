@@ -42,7 +42,7 @@ class divListACL extends MultiSelectWindow
 
   function divListACL (&$config, &$parent)
   {
-    MultiSelectWindow::MultiSelectWindow($config, "ACL", "acl");
+    MultiSelectWindow::MultiSelectWindow($config, "ACL", array("acl","aclroles"));
     
     $this->parent       = &$parent;
     $this->ui           = get_userinfo();
@@ -185,11 +185,7 @@ class divListACL extends MultiSelectWindow
       $s.="..|".$img."&nbsp;"._("Paste")."\n";
     }
 
-    /* Add snapshot icons */
-    if(preg_match("/(c.*w|w.*c)/",$acl_all)){
-      $s .= "..|---|\n";
-      $s .= $this->get_snapshot_header(TRUE);
-    }
+    $s .= $this->parent->get_snapshot_header($this->selectedBase,$this->module);
 
     $this->SetDropDownHeaderMenu($s);
     $this->SetListHeader($listhead);
@@ -224,14 +220,14 @@ class divListACL extends MultiSelectWindow
         }
 
         /* Add copy & paste handler */
-        if($ui->is_cutable($acl_entry['dn'],"acl","aclRole") && $this->parent->CopyPasteHandler){
+        if($ui->is_cutable($acl_entry['dn'],"aclroles","aclRole") && $this->parent->CopyPasteHandler){
           $action .= "<input class='center' type='image'
             src='images/lists/cut.png' alt='"._("cut")."' name='cut_%KEY%' title='"._("Cut this entry")."'>&nbsp;";
         }else{
           $action.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
         }
 
-        if($ui->is_copyable($acl_entry['dn'],"acl","aclRole") && $this->parent->CopyPasteHandler){
+        if($ui->is_copyable($acl_entry['dn'],"aclroles","aclRole") && $this->parent->CopyPasteHandler){
           $action.= "<input class='center' type='image'
             src='images/lists/copy.png' alt='"._("copy")."' name='copy_%KEY%' title='"._("Copy this entry")."'>&nbsp;";
         }else{
@@ -246,9 +242,7 @@ class divListACL extends MultiSelectWindow
         }
 
         /* Add snapshot functionality */
-        if(preg_match("/(c.*w|w.*c)/", $acl_all)){
-          $action.= $this->GetSnapShotActions($acl_entry['dn']);
-        }
+        $action.= $this->parent->get_snapshot_action($acl_entry['dn'],"aclroles");
 
         if(preg_match("/d/", $acl)){
           $action.= "<input class='center' type='image' src='images/lists/trash.png' alt='"._("delete")."' 

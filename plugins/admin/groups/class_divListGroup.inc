@@ -223,11 +223,8 @@ class divListGroup extends MultiSelectWindow
       $s.="..|".$img."&nbsp;"._("Paste")."\n";
     }
 
-    /* Add snapshot icons */
-    if(preg_match("/(c.*w|w.*c)/",$acl_all)){
-      $s .= "..|---|\n";
-      $s .= $this->get_snapshot_header(TRUE);
-    }
+    /* Add snapshot functionality */
+    $s .= $this->parent->get_snapshot_header($this->selectedBase,$this->module);
 
     $this->SetDropDownHeaderMenu($s);
 
@@ -317,13 +314,8 @@ class divListGroup extends MultiSelectWindow
         src='images/lists/edit.png' alt='"._("edit")."' name='group_edit_%KEY%' title='"._("Edit this entry")."'>";
 
       /* Add snapshot functionality */
-      if(preg_match("/(r.*w|w.*r)/",$acl_all)){
-        $actions.= $this->GetSnapShotActions($val['dn']);
-      }else{
-        $actions.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
-        $actions.="<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
-      }
-
+      $actions.= $this->parent->get_snapshot_action($val['dn'],$this->module);
+  
       if(preg_match("/d/",$acl)){
         $actions.= "<input class='center' type='image'
           src='images/lists/trash.png' alt='"._("delete")."' name='group_del_%KEY%' title='"._("Delete this entry")."'>";
