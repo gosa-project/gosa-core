@@ -34,7 +34,7 @@ class groupManagement extends plugin
   var $DivListGroup       = NULL;
   var $ShowPrimaryCheckBox= false; 
   var $start_pasting_copied_objects = FALSE;
-
+  var $acl_module         = "groups";
   var $dns = array();
 
   function groupManagement (&$config, &$ui)
@@ -555,7 +555,7 @@ class groupManagement extends plugin
 
     /* Check if there is a snapshot dialog open */
     $base = $this->DivListGroup->selectedBase;
-    if($str = $this->showSnapshotDialog($base,$this->get_used_snapshot_bases())){
+    if($str = $this->showSnapshotDialog($base,$this->get_used_snapshot_bases(),$this)){
       return($str);
     }
    

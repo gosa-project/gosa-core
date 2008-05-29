@@ -61,38 +61,53 @@ class SnapShotDialog extends plugin
 		plugin::execute();
 		$smarty = get_smarty();
 
+    if(!isset($this->parent->acl_module) || !count($this->parent->acl_module)){
+      trigger_error("Could not detect acl_module in parent object (".get_class($this->parent).").");
+      return("");
+    }
+
+    $ui = get_userinfo();
+
 		$once = true;
 		foreach($_POST as $name => $value){
 			if((preg_match("/^RemoveSnapShot_/",$name)) && ($once)){
 				$once = false;
 	
-				$entry = preg_replace("/^RemoveSnapShot_/","",$name);
-				$entry = base64_decode(preg_replace("/_[xy]$/","",$entry));
+        $entry = preg_replace("/^RemoveSnapShot_/","",$name);
+        $entry = base64_decode(preg_replace("/_[xy]$/","",$entry));
 
-        $found = false;
-        foreach($this->last_list as $t_stamp => $obj){
-          if($obj['dn'] == $entry){
-            $found = true;
-            break;
+        /* Check if we are allowed to handle snapshots 
+         */
+        if($ui->allow_snapshot_restore($entry,$this->parent->acl_module)){
+
+          $found = false;
+          foreach($this->last_list as $t_stamp => $obj){
+            if($obj['dn'] == $entry){
+              $found = true;
+              break;
+            }
           }
-        }
 
-        if($found){
-          $this->del_dn 	= $entry;
-          $smarty= get_smarty();
-          $smarty->assign("intro", sprintf(_("You're about to delete the snapshot '%s'."), @LDAP::fix($this->del_dn)));
-          return($smarty->fetch (get_template_path('remove.tpl')));
+          if($found){
+            $this->del_dn 	= $entry;
+            $smarty= get_smarty();
+            $smarty->assign("intro", sprintf(_("You're about to delete the snapshot '%s'."), @LDAP::fix($this->del_dn)));
+            return($smarty->fetch (get_template_path('remove.tpl')));
+          }
         }
       }
     }
 
     /* Remove snapshot */
     if(isset($_POST['delete_confirm']) && !empty($this->del_dn)){
-      $this->remove_snapshot($this->del_dn);
+      if($ui->allow_snapshot_restore($this->del_dn,$this->parent->acl_module)){
+        $this->remove_snapshot($this->del_dn);
+      }
       $this->del_dn = "";
 		}
 
 		/* We must restore a snapshot */
+
 		if($this->display_restore_dialog){
 
 			/* Should we only display all snapshots of already deleted objects 
@@ -118,8 +133,12 @@ class SnapShotDialog extends plugin
 			
 			/* Walk through all entries and setup the display text */
 			foreach($tmp as $key => $entry){
-				$TimeStamp = $entry['gosaSnapshotTimestamp'][0];
-				$list_of_elements[$TimeStamp] = $entry;
+    
+        /* Check permissions */
+        if($ui->allow_snapshot_restore($entry['dn'],$this->parent->acl_module)){
+          $TimeStamp = $entry['gosaSnapshotTimestamp'][0];
+          $list_of_elements[$TimeStamp] = $entry;
+        }
 			}
 
 			/* Sort generated list */
@@ -129,10 +148,10 @@ class SnapShotDialog extends plugin
       $this->last_list = $list_of_elements;
 			foreach($list_of_elements as $entry){
 
-				$actions= "<input type='image' src='images/lists/restore.png' name='RestoreSnapShot_%KEY' 
-								class='center' title='"._("Restore snapshot")."'>&nbsp;";
-				$actions.= "<input type='image' src='images/lists/trash.png' name='RemoveSnapShot_%KEY' 
-								class='center' title='"._("Remove snapshot")."'>&nbsp;";
+        $actions= "<input type='image' src='images/lists/restore.png' name='RestoreSnapShot_%KEY' 
+          class='center' title='"._("Restore snapshot")."'>&nbsp;";
+        $actions.= "<input type='image' src='images/lists/trash.png' name='RemoveSnapShot_%KEY' 
+          class='center' title='"._("Remove snapshot")."'>&nbsp;";
 
 				$time_stamp 	= date(_("Y-m-d, H:i:s"),preg_replace("/\-.*$/","",$entry['gosaSnapshotTimestamp'][0]));
 				$display_data 	= $entry['description'][0];

@@ -40,6 +40,8 @@ class departmentManagement extends plugin
   var $ObjectInSaveMode         = false;    // Is true, if current object wasn't saved right now
   var $dns = array();
 
+  var $acl_module = array("department");
+
   function departmentManagement (&$config, &$ui)
   {
     $this->ui= &$ui;

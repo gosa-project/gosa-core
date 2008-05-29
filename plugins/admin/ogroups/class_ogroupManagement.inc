@@ -37,6 +37,7 @@ class ogroupManagement extends plugin
   var $start_pasting_copied_objects = FALSE;
 
   var $dns = array();
+  var $acl_module   = array("ogroups");  
 
   function ogroupManagement (&$config, $dn= NULL)
   {
@@ -491,7 +492,7 @@ class ogroupManagement extends plugin
 
     /* Check if there is a snapshot dialog open */
     $base = $this->DivListOGroup->selectedBase;
-    if($str = $this->showSnapshotDialog($base,$this->get_used_snapshot_bases())){
+    if($str = $this->showSnapshotDialog($base,$this->get_used_snapshot_bases(),$this)){
       return($str);
     }
 

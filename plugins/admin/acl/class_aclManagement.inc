@@ -36,6 +36,8 @@ class aclManagement extends plugin
   var $start_pasting_copied_objects = FALSE;
   var $dns = array();
 
+  var $acl_module = array("acl","aclroles");
+
   function aclManagement(&$config, &$ui)
   {
     /* Save configuration for internal use */
@@ -471,7 +473,7 @@ class aclManagement extends plugin
     
     /* Check if there is a snapshot dialog open */
     $base = $this->DivListACL->selectedBase;
-    if($str = $this->showSnapshotDialog($base,$this->get_used_snapshot_bases())){
+    if($str = $this->showSnapshotDialog($base,$this->get_used_snapshot_bases(),$this)){
       return($str);
     }
   

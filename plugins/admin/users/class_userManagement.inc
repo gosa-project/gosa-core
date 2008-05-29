@@ -39,8 +39,8 @@ class userManagement extends plugin
 
   var $start_pasting_copied_objects = FALSE;
   var $msg_dialog= NULL;
-  
-  var $dns =array();
+  var $acl_module = array("users");  
+  var $dns    = array();
 
   function userManagement(&$config, $ui)
   {
@@ -971,7 +971,7 @@ class userManagement extends plugin
     
     /* Check if there is a snapshot dialog open */
     $base = $this->DivListUsers->selectedBase;
-    if($str = $this->showSnapshotDialog($base,$this->get_used_snapshot_bases())){
+    if($str = $this->showSnapshotDialog($base,$this->get_used_snapshot_bases(),$this)){
       return($str);
     }
   
