@@ -21,8 +21,25 @@
  */
 
 /* Configuration file location */
-define ("CONFIG_DIR", "/etc/gosa");
-define ("CONFIG_FILE", "gosa.conf");
+
+/* Allow setting the config patj in the apache configuration
+   e.g.  SetEnv CONFIG_FILE /etc/path
+ */
+if(!isset($_SERVER['CONFIG_DIR'])){
+  define ("CONFIG_DIR", "/etc/gosa");
+}else{
+  define ("CONFIG_DIR",$_SERVER['CONFIG_DIR']);
+}
+
+/* Allow setting the config file in the apache configuration
+    e.g.  SetEnv CONFIG_FILE gosa.conf.2.5
+ */
+if(!isset($_SERVER['CONFIG_FILE'])){
+  define ("CONFIG_FILE", "gosa.conf");
+}else{
+  define ("CONFIG_FILE",$_SERVER['CONFIG_FILE']);
+}
+
 define ("CONFIG_TEMPLATE_DIR", "../contrib/");
 define ("TEMP_DIR","/var/cache/gosa/tmp");
 
