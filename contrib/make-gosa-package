@@ -1,0 +1,128 @@
+#!/bin/sh
+RELEASE_REASON="GOsa svn snapshot"
+BRANCH="trunk"
+SECTION="gonicus"
+TARGET_RELEASE="etch"
+MAKE_PLUGINS=""
+
+[ $BRANCH = "trunk" ] || BRANCH="branches/$BRANCH"
+echo "Loading svn information for '${BRANCH}'..."
+svn co -N https://oss.gonicus.de/repositories/gosa/${BRANCH} gosa-info/ > /dev/null
+BRANCH_REV=$(LANG=C svn info gosa-info | sed -n -e 's/^Last Changed Rev: \([0-9]*\).*$/\1/p')
+rm -rf gosa-info
+
+# Load current revision from logs
+VERSION=$(svn cat -r "${BRANCH_REV}" https://oss.gonicus.de/repositories/gosa/${BRANCH}/gosa-core/debian/changelog \
+	| head -n 1 | sed -n -e 's/.*(\([^-]*\).*/\1/p')
+GOSA_VER="${VERSION}+svn${BRANCH_REV}"
+GOSA_DIR="gosa-${GOSA_VER}"
+
+ORIG_FILE="gosa_${GOSA_VER}.orig.tar.gz"
+
+# Export from svn...
+[ -d "gosa-${BRANCH}" ] && rm -rf gosa-$BRANCH
+echo "Exporting current GOsa (rev: ${BRANCH_REV}) from '${BRANCH}'..."
+svn export -r "${BRANCH_REV}" https://oss.gonicus.de/repositories/gosa/${BRANCH}/gosa-core gosa-${BRANCH} > /dev/null
+svn export -r "${BRANCH_REV}" https://oss.gonicus.de/repositories/gosa/${BRANCH}/gosa-si gosa-si-${BRANCH} > /dev/null
+svn export -r "${BRANCH_REV}" https://oss.gonicus.de/repositories/gosa/${BRANCH}/gosa-plugins gosa-plugins-${BRANCH} > /dev/null
+
+VERSION=$(cat "gosa-${BRANCH}/debian/changelog" | head -n 1 | sed -n -e 's/.*(\([^-]*\).*/\1/p')
+GOSA_VER="${VERSION}+svn${BRANCH_REV}"
+GOSA_DIR="gosa-${GOSA_VER}"
+GOSA_SI_DIR="gosa-si-${GOSA_VER}"
+
+if [ -d "gosa-${GOSA_VER}" ]
+then
+	rm -rf "gosa-${GOSA_VER}"
+fi
+mv "gosa-${BRANCH}" "gosa-${GOSA_VER}"
+mv "gosa-si-${BRANCH}" "gosa-si-${GOSA_VER}"
+
+echo "Creating original sources '$gosa-{GOSA_VER}'..."
+tar -c -f "gosa_${GOSA_VER}.orig.tar" "${GOSA_DIR}"
+tar -c -f "gosa-si_${GOSA_VER}.orig.tar" "${GOSA_SI_DIR}"
+
+echo "Compressing sources..."
+gzip -9 "gosa_${GOSA_VER}.orig.tar"
+gzip -9 "gosa-si_${GOSA_VER}.orig.tar"
+
+export OVERRIDE_VERSION="$GOSA_VER"
+if [ -z "$MAKE_PLUGINS" ]; then
+	MAKE_PLUGINS=$(ls -1 gosa-plugins-${BRANCH}/*/plugin.dsc | sed 's/^.*\/\([^\/]*\)\/plugin.dsc$/\1/')
+fi
+for plugin in $MAKE_PLUGINS; do
+
+	GOSA_PLUG_DIR="gosa-plugin-$plugin-${GOSA_VER}"
+	mv "gosa-plugins-${BRANCH}/$plugin" .
+
+	echo "Debianizing plugin $plugin"
+	yes | ./dh-make-gosa $plugin
+	rm -rf "$plugin"
+
+	echo "Packing original sources 'gosa-plugin-$plugin-${GOSA_VER}'..."
+	tar -c -f "gosa-plugin-${plugin}_${GOSA_VER}.orig.tar" "${GOSA_PLUG_DIR}"
+
+	echo "Compressing sources..."
+	gzip -9 "gosa-plugin-${plugin}_${GOSA_VER}.orig.tar"
+done
+
+rm -rf gosa-plugins-${BRANCH}
+
+echo "Deploying patches..."
+for patch in $(find patches -type f | grep -v .svn); do
+
+	if echo $patch | grep -q gosa-plugin; then
+		plugin=$(echo $patch | sed 's/^.*gosa-plugin-\([^-]*\).*$/\1/g')
+		echo "* gosa-plugin-$plugin patch: $patch"
+		[ -d "gosa-plugin-${plugin}-${GOSA_VER}/debian/patches" ] || mkdir -p "gosa-plugin-${plugin}-${GOSA_VER}/debian/patches"
+		cp "$patch" gosa-plugin-${plugin}-${GOSA_VER}/debian/patches
+	else
+		echo "* gosa-core patch: $patch"
+		[ -d "${GOSA_DIR}/debian/patches" ] && mkdir -p "${GOSA_DIR}/debian/patches"
+		cp "$patch" ${GOSA_DIR}/debian/patches
+	fi
+done
+
+# Passe section im GOsa_DIR an
+sed -i "s/^Section: web/Section: $SECTION\/web/g" ${GOSA_DIR}/debian/control
+sed -i "s/^Section: utils/Section: $SECTION\/utils/g" ${GOSA_SI_DIR}/debian/control
+
+for plugin in $MAKE_PLUGINS; do
+	GOSA_PLUGIN_DIRS="$GOSA_PLUGIN_DIRS gosa-plugin-$plugin-${GOSA_VER}"
+done
+for dir in $GOSA_DIR $GOSA_SI_DIR $GOSA_PLUGIN_DIRS; do
+	echo "Adapting version in $dir"
+	(cd "$dir"; echo | debchange -v "${GOSA_VER}-${SECTION}1" -D "$TARGET_RELEASE" "$RELEASE_REASON" &> /dev/null)
+	[ -d $dir/debian/patches ] || continue
+	echo "Creating patch list for $dir"
+	ls -1 $dir/debian/patches | grep -v 00list | sed 's%^.*/%%g' > $dir/debian/patches/00list
+done
+
+# Update revision
+sed -i "s/^\$svn_revision = .*$/\$svn_revision = '\$Revision: $BRANCH_REV \$';/g" $GOSA_DIR/include/functions.inc
+
+if [ "$1" = "-s" ]
+then
+	echo "Creating debian sources..."
+	for dir in $GOSA_DIR $GOSA_SI_DIR $GOSA_PLUGIN_DIRS; do
+		dpkg-source -b "$dir"
+	done
+else
+	echo "Creating debian packages..."
+	for dir in $GOSA_DIR $GOSA_SI_DIR $GOSA_PLUGIN_DIRS; do
+		(cd "$dir"; dpkg-buildpackage -k$DEBSIGN_KEYID -rfakeroot -sa)
+	done
+fi
+
+echo "Removing gosa snapshot..."
+for dir in $GOSA_DIR $GOSA_SI_DIR $GOSA_PLUGIN_DIRS; do
+	rm -rf "$dir"
+done
+
+echo
+echo "Moving result to 'dest'"
+[ -d dest ] && rm -rf dest
+mkdir dest
+
+mv *.deb *.changes *.dsc *.gz dest/
+
