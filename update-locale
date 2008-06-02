@@ -38,7 +38,8 @@ generate_po() {
   for f in locale/${l_path}??/LC_MESSAGES; do
     [[ "$f" == "locale/${l_path}??/LC_MESSAGES" ]] && break
     echo -n "* merging $f/messages.po: "
-    [ -f $f/messages.po ] && msgmerge $f/messages.po locale/${l_path}messages.po --output-file=$f/messages.po.new &> /dev/null
+    [ ! -f $f/messages.po ] && touch $f/messages.po
+    msgmerge $f/messages.po locale/${l_path}messages.po --output-file=$f/messages.po.new &> /dev/null
 
     # Do an extra check for dummy dir 'locale/en/LC_MESSAGES'
     if [ $? -ne 0 ]; then
@@ -123,8 +124,7 @@ do
     y) ASSUME_Y=1;
        ;;
     h|--help)
-       echo "Usage: $(basename $0) [-g] [-y] method"
-       echo "       method can be 'core' or 'plugin'"
+       echo "Usage: $(basename $0) [-g] [-y]"
        echo "       -g extract strings from GOsa and generate po files"
        echo "       -y assume yes"
        exit 1
@@ -133,12 +133,8 @@ do
 done
 shift $(($OPTIND - 1))
 
-# Check method
-if [ "$1" != "plugin" -a "$1" != "core" ]; then
-	echo "Need explicit method 'core' or 'plugin' to create locale."
-	exit 1
-fi
-if [ "$1" == "plugin" ]; then
+# If there's a plugin.dsc in ., then assume "plugin"
+if [ -f plugin.dsc ]; then
 	l_path=""
 else
 	l_path="core/"
