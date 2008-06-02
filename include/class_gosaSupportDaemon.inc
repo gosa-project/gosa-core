@@ -1309,7 +1309,7 @@ class gosaSupportDaemon
       trigger_error("The given principal name is not of type string or it is empty.");
       return($ret);
     }
-    if(!is_array($values) || !count($values)){
+    if(!is_array($values)){
       trigger_error("No valid update settings given. The parameter must be of type array and must contain at least one entry");
       return($ret);
     }
