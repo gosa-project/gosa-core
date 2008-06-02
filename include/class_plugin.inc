@@ -1979,21 +1979,23 @@ class plugin
   {
     $str= ""; 
     $ui = get_userinfo();
-    if($this->snapshotEnabled() && $ui->allow_snapshot_restore($base,$category)){
+    if($this->snapshotEnabled()){
+      if ($ui->allow_snapshot_restore($base,$category)){
 
-      if(count($this->Available_SnapsShots($base))){
-        $str.= "<input class='center' type='image' src='images/lists/restore.png'
-          alt='"._("Restore snapshot")."' name='RestoreSnapShotDialog_".base64_encode($base)."' title='"._("Restore snapshot")."'>&nbsp;";
-      } else {
-        $str = "<img class='center' src='images/lists/restore_grey.png' alt=''>&nbsp;";
+        if(count($this->Available_SnapsShots($base))){
+          $str.= "<input class='center' type='image' src='images/lists/restore.png'
+            alt='"._("Restore snapshot")."' name='RestoreSnapShotDialog_".base64_encode($base)."' title='"._("Restore snapshot")."'>&nbsp;";
+        } else {
+          $str = "<img class='center' src='images/lists/restore_grey.png' alt=''>&nbsp;";
+        }
       }
-    }
-    if($this->snapshotEnabled() && $ui->allow_snapshot_create($base,$category)){
-      $str.= "<input class='center' type='image' src='images/snapshot.png'
-        alt='"._("Create snapshot")."' name='CreateSnapShotDialog_".base64_encode($base)."' 
-        title='"._("Create a new snapshot from this object")."'>&nbsp;";
-    }else{
-      $str = "<img class='center' src='images/empty.png' alt=' '>&nbsp;";
+      if($ui->allow_snapshot_create($base,$category)){
+        $str.= "<input class='center' type='image' src='images/snapshot.png'
+          alt='"._("Create snapshot")."' name='CreateSnapShotDialog_".base64_encode($base)."' 
+          title='"._("Create a new snapshot from this object")."'>&nbsp;";
+      }else{
+        $str = "<img class='center' src='images/empty.png' alt=' '>&nbsp;";
+      }
     }
 
     return($str);
