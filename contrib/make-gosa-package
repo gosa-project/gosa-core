@@ -56,7 +56,7 @@ for plugin in $MAKE_PLUGINS; do
 	mv "gosa-plugins-${BRANCH}/$plugin" .
 
 	echo "Debianizing plugin $plugin"
-	yes | ./dh-make-gosa $plugin
+	yes | dh-make-gosa $plugin
 	rm -rf "$plugin"
 
 	echo "Packing original sources 'gosa-plugin-$plugin-${GOSA_VER}'..."
@@ -115,9 +115,9 @@ else
 fi
 
 echo "Removing gosa snapshot..."
-for dir in $GOSA_DIR $GOSA_SI_DIR $GOSA_PLUGIN_DIRS; do
-	rm -rf "$dir"
-done
+#for dir in $GOSA_DIR $GOSA_SI_DIR $GOSA_PLUGIN_DIRS; do
+#	rm -rf "$dir"
+#done
 
 echo
 echo "Moving result to 'dest'"
