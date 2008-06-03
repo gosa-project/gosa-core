@@ -20,18 +20,20 @@ GOsa infrastructure howto is work in progress and not released yet.
 * Translations
 
 GOsa is not available in your native language? Just take the message.po
-file out of the locales directory and put your translations into the
+file out of the locales/core directory and put your translations into the
 msgstr fields. You may look at the de/LC_MESSAGES for the way how it
 works.
 
 If you're ready with that, create a directory for your language using
 the ISO shortcuts (i.e. es for spain) with a subdirectory LC_MESSAGES.
-Put your messages.po in there and run "msgfmt messages.po" from that
-directory. Make sure your apache has locale support or, in case of debian,
+Make sure your apache has locale support or, in case of debian,
 that the specific locale will be generated (via dpkg-reconfigure locales).
 
 You may want your translations to be included in the main GOsa repository,
 then just send the .po file to me.
+
+Run update-gosa after you've added translations in order to let GOsa
+compile and re-sync the translations.
 
 
 * NOTES
