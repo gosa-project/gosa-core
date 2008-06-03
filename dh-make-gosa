@@ -186,7 +186,7 @@ sed -i '/^Upstream/,/^$/d' debian/copyright
 sed -i 's/^Section: unknown/Section: web/g' debian/control
 sed -i 's/^Architecture: any/Architecture: all/g' debian/control
 if [ "$PL_DEPENDS" ]; then
-	sed -i 's/^Depends: .*$/Depends: gosa, $PL_DEPENDS/g' debian/control
+	sed -i "s/^Depends: .*$/Depends: gosa, $PL_DEPENDS/g" debian/control
 else
 	sed -i 's/^Depends: .*$/Depends: gosa/g' debian/control
 fi
