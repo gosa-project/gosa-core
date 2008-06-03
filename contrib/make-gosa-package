@@ -71,9 +71,6 @@ while true; do
         esac
 done
 
-echo $BRANCH
-exit 0
-
 [ $BRANCH = "trunk" ] || BRANCH="branches/$BRANCH"
 echo "Loading svn information for '${BRANCH}'..."
 svn co -N https://oss.gonicus.de/repositories/gosa/${BRANCH} gosa-info/ > /dev/null
