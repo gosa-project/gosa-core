@@ -1352,6 +1352,23 @@ class gosaSupportDaemon
   }
 
 
+  function krb5_ramdomize_key($server,$name)  
+  {
+    /* Prepare request event 
+     */ 
+    $xml_msg = 
+      "<xml>".
+      "<header>gosa_krb5_randomize_key</header>".
+      "<principal>".$name."</principal>".
+      "<source>GOSA</source>".
+      "<target>".$server."</target>".
+      "</xml>";
+
+    return($this->_send($xml_msg,TRUE) == TRUE && !$this->is_error());
+  }
+  
+
+
   /*! \brief  Updates a given principal with a set of configuration settings.
               For a list of configurable attributes have a look at 'krb5_get_principal()'.
               (Uses the GOsa support daemon instead of the ldap database.)
