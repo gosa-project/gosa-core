@@ -38,7 +38,7 @@ fi
 mv "gosa-${BRANCH}" "gosa-${GOSA_VER}"
 mv "gosa-si-${BRANCH}" "gosa-si-${GOSA_VER}"
 
-echo "Creating original sources '$gosa-{GOSA_VER}'..."
+echo "Creating original sources 'gosa-${GOSA_VER}'..."
 tar -c -f "gosa_${GOSA_VER}.orig.tar" "${GOSA_DIR}"
 tar -c -f "gosa-si_${GOSA_VER}.orig.tar" "${GOSA_SI_DIR}"
 
@@ -56,7 +56,7 @@ for plugin in $MAKE_PLUGINS; do
 	mv "gosa-plugins-${BRANCH}/$plugin" .
 
 	echo "Debianizing plugin $plugin"
-	yes | dh-make-gosa $plugin
+	yes | dh-make-gosa --section web $plugin
 	rm -rf "$plugin"
 
 	echo "Packing original sources 'gosa-plugin-$plugin-${GOSA_VER}'..."

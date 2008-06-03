@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage() {
-  echo "Usage: ${0##*/} [--download] [-b|--branch branch] [-e|--email mail] [--depends] plugin-dir|plugin.tar.gz" >&2
+  echo "Usage: ${0##*/} [--download] [--section section name] [-b|--branch branch] [-e|--email mail] [--depends] plugin-dir|plugin.tar.gz" >&2
   exit 1
 }
 
@@ -28,7 +28,7 @@ load_dsc() {
 }
 
 
-TEMP=`getopt -o e:r: --long download,release:,email:,depends: -n 'dh-make-gosa' -- "$@"`
+TEMP=`getopt -o e:r: --long download,release:,email:,depends:,section: -n 'dh-make-gosa' -- "$@"`
 if [ $? != 0 ] ; then
   echo "Error: cannot get command line information" >&2
   exit 1
@@ -40,6 +40,7 @@ eval set -- "$TEMP"
 RELEASE=trunk
 DOWNLOAD=
 DEPENDS=
+SECTION=web
 DEST=
 while true; do
   case "$1" in
@@ -53,6 +54,9 @@ while true; do
                 shift 2
                 ;;
     --depends)  DEPENDS="$2"
+                shift 2
+                ;;
+    --section)  SECTION="$2"
                 shift 2
                 ;;
     --dest)     DEST=$2/
@@ -183,7 +187,7 @@ sed -i "/.put author's name and email here.\
 sed -i '/^Upstream/,/^$/d' debian/copyright
 
 # Adapt control
-sed -i 's/^Section: unknown/Section: web/g' debian/control
+sed -i "s#^Section: unknown#Section: $SECTION#g" debian/control
 sed -i 's/^Architecture: any/Architecture: all/g' debian/control
 if [ "$PL_DEPENDS" ]; then
 	sed -i "s/^Depends: .*$/Depends: gosa, $PL_DEPENDS/g" debian/control
