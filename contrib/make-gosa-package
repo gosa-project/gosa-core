@@ -1,9 +1,13 @@
 #!/bin/sh
+
+# TODO: getopts ###########################################################
 RELEASE_REASON="GOsa svn snapshot"
 BRANCH="trunk"
-SECTION="gonicus"
+SECTION="web"
+SI_SECTION="utils"
 TARGET_RELEASE="etch"
 MAKE_PLUGINS=""
+###########################################################################
 
 [ $BRANCH = "trunk" ] || BRANCH="branches/$BRANCH"
 echo "Loading svn information for '${BRANCH}'..."
@@ -84,15 +88,15 @@ for patch in $(find patches -type f | grep -v .svn); do
 done
 
 # Passe section im GOsa_DIR an
-sed -i "s/^Section: web/Section: $SECTION\/web/g" ${GOSA_DIR}/debian/control
-sed -i "s/^Section: utils/Section: $SECTION\/utils/g" ${GOSA_SI_DIR}/debian/control
+sed -i "s#^Section: web#Section: $SECTION#g" ${GOSA_DIR}/debian/control
+sed -i "s#^Section: utils#Section: $SI_SECTION#g" ${GOSA_SI_DIR}/debian/control
 
 for plugin in $MAKE_PLUGINS; do
 	GOSA_PLUGIN_DIRS="$GOSA_PLUGIN_DIRS gosa-plugin-$plugin-${GOSA_VER}"
 done
 for dir in $GOSA_DIR $GOSA_SI_DIR $GOSA_PLUGIN_DIRS; do
 	echo "Adapting version in $dir"
-	(cd "$dir"; echo | debchange -v "${GOSA_VER}-${SECTION}1" -D "$TARGET_RELEASE" "$RELEASE_REASON" &> /dev/null)
+	(cd "$dir"; echo | debchange -v "${GOSA_VER}-1${TARGET_RELEASE}1" -D "$TARGET_RELEASE" "$RELEASE_REASON" &> /dev/null)
 	[ -d $dir/debian/patches ] || continue
 	echo "Creating patch list for $dir"
 	ls -1 $dir/debian/patches | grep -v 00list | sed 's%^.*/%%g' > $dir/debian/patches/00list
