@@ -127,7 +127,7 @@ class tests {
   /* Simple is domain check, it checks if the given string looks like "string(...).string" */
   public static function is_domain($str)
   {
-    return(preg_match("/^([a-z0-9i\-]*)\.[a-z0-9]*$/i",$str));
+    return(preg_match("/^([a-z0-9\-]*)\.[a-z0-9\-]*$/i",$str));
   }
 
 
