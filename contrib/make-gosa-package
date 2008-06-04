@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # This code is part of GOsa (http://www.gosa-project.org)
 # Copyright (C) 2008 GONICUS GmbH
 #
@@ -62,7 +62,7 @@ while true; do
                 -c|--changelog)
 			RELEASE_REASON=$2; shift 2 ;;
                 -p|--plugins)
-			MAKE_PLUGINS=${2//,/ }; shift 2 ;;
+			MAKE_PLUGINS=$(echo $2 | tr ',' ' '); shift 2 ;;
                 -s|--section)
 			SECTION=$2; shift 2 ;;
                 -i|--si-section)
