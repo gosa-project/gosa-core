@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # This code is part of GOsa (http://www.gosa-project.org)
 # Copyright (C) 2008 GONICUS GmbH
 #
@@ -174,13 +174,13 @@ echo "Apdapting debian descriptive files..."
 
 # Generate install file
 for dir in admin personal addons gofax gofon generic; do
-	[ -d $dir ] && echo -e "$dir\t\t\t/usr/share/gosa/plugins" >> debian/install
+	[ -d $dir ] && printf "$dir\t\t\t/usr/share/gosa/plugins" >> debian/install
 done
 for dir in help/*; do
-	echo -e "$dir\t\t\t/usr/share/gosa/doc/plugins/$PL_NAME" >> debian/install
+	printf "$dir\t\t\t/usr/share/gosa/doc/plugins/$PL_NAME" >> debian/install
 done
 for dir in $(ls -1 locale | grep -v "^en$" | grep -v "^messages.po$"); do
-	echo -e "locale/$dir\t\t\t/usr/share/gosa/locale/plugins/$PL_NAME" >> debian/install
+	printf "locale/$dir\t\t\t/usr/share/gosa/locale/plugins/$PL_NAME" >> debian/install
 done
 
 # Generate dirs
