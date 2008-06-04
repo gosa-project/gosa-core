@@ -14,12 +14,12 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-06-03 20:56+0200\n"
-"PO-Revision-Date: 2008-05-30 08:41+0200\n"
+"PO-Revision-Date: 2008-06-04 11:00+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: plugins/personal/password/nochange.tpl:2
 msgid "Password change not allowed"
@@ -4548,7 +4548,7 @@ msgstr "Kann die Datenbank %s nicht auswählen!"
 #: include/utils/class_msgPool.inc:176
 #, php-format
 msgid "No %s server defined!"
-msgstr "Kein %s Server definiert!"
+msgstr "Kein Server für %s definiert!"
 
 #: include/utils/class_msgPool.inc:188
 #, php-format
@@ -5296,7 +5296,7 @@ msgstr "MySQL-Fehler"
 #: include/class_log.inc:107
 msgid "Logging to MySQL database will be disabled for this session!"
 msgstr ""
-"Protokollierung in die MySQL-Datenkbank wird für diese Sitzung abgeschaltet!"
+"Protokollierung in die MySQL-Datenbank wird für diese Sitzung abgeschaltet!"
 
 #: include/class_log.inc:120
 #, php-format
