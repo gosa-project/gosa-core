@@ -513,6 +513,8 @@ class aclManagement extends plugin
       "PEOPLE"  => array("TYPE" => "search" , "FLAGS" => GL_SIZELIMIT | GL_SUBSEARCH ,"BASE"=>get_people_ou()),
       "GROUPS"  => array("TYPE" => "search" , "FLAGS" => GL_SIZELIMIT | GL_SUBSEARCH ,"BASE"=>get_groups_ou()));
 
+    $res[$this->config->current["BASE"]] = array("dn"=>$this->config->current["BASE"],"ou"=>".","objectClass"=>array("gosaACL"));
+
     /* Subsearch ? */
     if($SubSearch){
 
