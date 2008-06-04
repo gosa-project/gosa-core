@@ -124,7 +124,7 @@ elif [ -f "$file" ]; then
 
   # Untar
   mkdir -p "$TMPDIR"
-  tar --extract --directory "$TMPDIR" -fz "$file" &> /dev/null
+  tar --extract --directory "$TMPDIR" -fz "$file" >/dev/null 2>&1
   if [ $? -ne 0 ]; then
     echo "Error: cannot extract plugin file - invalid file format" >&2
     exit 5
@@ -158,13 +158,11 @@ echo
 read -s -n 1 -p "Do you want to continue? (y/n)" ans; echo
 [ "$ans" != "y" ] && exit 0
 
-pushd . &> /dev/null
-
 cd "$BUILD_PATH"
 
 # Use gosa-plugin skelleton
 echo "Calling dh_make..."
-echo | dh_make -e "$PL_MAIL" -c gpl -s -n -f gosa-plugin-${PL_NAME}-${PL_VERSION}.tar.gz &> /dev/null
+echo | dh_make -e "$PL_MAIL" -c gpl -s -n -f gosa-plugin-${PL_NAME}-${PL_VERSION}.tar.gz >/dev/null 2>&1
 if [ $? -ne 0 ]; then
 	echo "Failed to call dh_make - aborting!"
 	exit 1
@@ -345,9 +343,7 @@ done\
 done
 
 # Remove examples
-rm debian/*ex debian/*EX &> /dev/null
-
-popd &> /dev/null
+rm debian/*ex debian/*EX >/dev/null 2>&1
 
 echo "Done."
 

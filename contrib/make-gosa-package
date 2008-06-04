@@ -44,7 +44,7 @@ usage() {
 	exit 1
 }
 
-if ! which dh-make-gosa &> /dev/null; then
+if ! which dh-make-gosa >/dev/null; then
 	echo "Error: cannot find dh-make-gosa binary in path!";
 	exit 1
 fi
@@ -163,7 +163,7 @@ for plugin in $MAKE_PLUGINS; do
 done
 for dir in $GOSA_DIR $GOSA_SI_DIR $GOSA_PLUGIN_DIRS; do
 	echo "Adapting version in $dir"
-	(cd "$dir"; echo | debchange -v "${GOSA_VER}-1${TARGET_RELEASE}1" -D "$TARGET_RELEASE" "$RELEASE_REASON" &> /dev/null)
+	(cd "$dir"; echo | debchange -v "${GOSA_VER}-1${TARGET_RELEASE}1" -D "$TARGET_RELEASE" "$RELEASE_REASON" >/dev/null 2>&1)
 	[ -d $dir/debian/patches ] || continue
 	echo "Creating patch list for $dir"
 	ls -1 $dir/debian/patches | grep -v 00list | sed 's%^.*/%%g' > $dir/debian/patches/00list
