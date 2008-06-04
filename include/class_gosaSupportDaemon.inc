@@ -1116,7 +1116,7 @@ class gosaSupportDaemon
     foreach ($data as $key => $value){
       if(is_array($value)){
         foreach($value as $sub_val){
-          $xml_message.= "<$key>$sub_value</$key>";
+          $xml_message.= "<$key>$sub_val</$key>";
         }
       }else{
         $xml_message.= "<$key>$value</$key>";
