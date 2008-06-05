@@ -197,7 +197,7 @@ class tests {
    */
   public static function is_ip_range($ip1,$ip2)
   {
-    if(!is_ip($ip1) || !is_ip($ip2)){
+    if(!tests::is_ip($ip1) || !tests::is_ip($ip2)){
       return(FALSE);
     }else{
       $ar1 = split("\.",$ip1);
