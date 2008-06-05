@@ -55,7 +55,7 @@
 						<img src='images/error.png' alt='{t}Error{/t}'>
 	{elseif $i_Type == WARNING_DIALOG}
 						<img src='images/warning.png'  alt='{t}Warning{/t}'>
-	{elseif $i_Type == INFO_DIALOG || $i_Type == CONFIRM_DIALOG}
+	{elseif $i_Type == INFO_DIALOG || $i_Type == CONFIRM_DIALOG || $i_Type == OK_CANCEL_DIALOG}
 						<img src='images/info.png' alt='{t}Information{/t}'>
 	{/if}
 			</td><td style='font-size: 1.1em; font-weight:bold;'>{$s_Title}</td></tr>
@@ -74,7 +74,7 @@
 						<div style="errorMsgSeperator"></div>
 	{if $i_Type == ERROR_DIALOG || $i_Type == WARNING_DIALOG || $i_Type == INFO_DIALOG}
 						<button type='submit' name='MSG_OK{$i_ID}'>{t}Ok{/t}</button>
-	{elseif $i_Type == CONFIRM_DIALOG}
+	{elseif $i_Type == CONFIRM_DIALOG || $i_Type == OK_CANCEL_DIALOG}
 						<button type='submit' name='MSG_OK{$i_ID}'>{t}Ok{/t}</button>
 						<button type='submit' name='MSG_CANCEL{$i_ID}'>{t}Cancel{/t}</button>
 	{/if}
@@ -100,7 +100,7 @@
 						<img src='images/error.png' alt='{t}Error{/t}'>
 	{elseif $i_Type == WARNING_DIALOG}
 						<img src='images/warning.png'  alt='{t}Warning{/t}'>
-	{elseif $i_Type == INFO_DIALOG || $i_Type == CONFIRM_DIALOG}
+	{elseif $i_Type == INFO_DIALOG || $i_Type == CONFIRM_DIALOG || $i_Type == OK_CANCEL_DIALOG}
 						<img src='images/info.png' alt='{t}Information{/t}'>
 	{/if}
 			</td><td style='font-size: 1.1em; font-weight:bold;'>{$s_Title}</td></tr>
@@ -132,6 +132,9 @@
 	{elseif $i_Type == CONFIRM_DIALOG}
 						<button type='submit' name='MSG_OK{$i_ID}' onClick='next_msg_dialog();'>{t}Ok{/t}</button>
 						<button type='button' name='MSG_CANCEL{$i_ID}' onClick='next_msg_dialog();'>{t}Cancel{/t}</button>
+	{elseif $i_Type == OK_CANCEL_DIALOG}
+						<button type='submit' name='MSG_OK{$i_ID}' onClick='next_msg_dialog();'>{t}Ok{/t}</button>
+						<button type='submit' name='MSG_CANCEL{$i_ID}' onClick='next_msg_dialog();'>{t}Cancel{/t}</button>
 	{/if}
 					</td>
 				</tr>
