@@ -109,7 +109,7 @@ class Step_Feedback  extends setup_step
 
   function update_strings()
   {
-    $this->s_title      = _("Notification and feedback");
+    $this->s_title      = _("Feedback");
     $this->s_info       = _("Get notifications or send feedback");
     $this->s_title_long = _("Notification and feedback");
   }
