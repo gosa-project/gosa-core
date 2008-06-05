@@ -44,10 +44,12 @@ usage() {
 	exit 1
 }
 
-if ! which dh-make-gosa >/dev/null; then
-	echo "Error: cannot find dh-make-gosa binary in path!";
-	exit 1
-fi
+for cmd in dh-make-gosa debchange dpkg-buildpackage dpkg-source svn; do
+  if ! which $cmd >/dev/null; then
+  	echo "Error: cannot find '$cmd' command in path!";
+  	exit 1
+  fi
+done
 
 # Import command line parameters
 PARMS=`getopt -o brscip:,h --long branch,changelog,plugins,section,si-section,release:,help -n "${0##*/}" -- "$@"`
