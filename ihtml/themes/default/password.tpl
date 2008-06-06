@@ -67,7 +67,7 @@
       <tr>
        <td>{t}Username{/t}</td>
        <td>{if $display_username}
-           <input type='text' name='uid' maxlength='25' value='{$uid}' title='{t}Username{/t}' onFocus="nextfield= 'current_password';">
+           <input type='text' name='uid' maxlength='40' value='{$uid}' title='{t}Username{/t}' onFocus="nextfield= 'current_password';">
            {else}
            <i>{$uid}</i>
            {/if}
@@ -75,15 +75,15 @@
       </tr>
       <tr>
        <td>{t}Current password{/t}</td>
-       <td><input type='password' name='current_password' maxlength='25' value='' title='{t}Current password{/t}' onFocus="nextfield= 'new_password';"></td>
+       <td><input type='password' name='current_password' maxlength='40' value='' title='{t}Current password{/t}' onFocus="nextfield= 'new_password';"></td>
       </tr>
       <tr>
        <td>{t}New password{/t}</td>
-       <td><input type='password' name='new_password' id="new_password" maxlength='25' value='' title='{t}New password{/t}' onFocus="nextfield= 'new_password_repeated';" onkeyup="testPasswordCss(document.getElementById('new_password').value);"></td>
+       <td><input type='password' name='new_password' id="new_password" maxlength='40' value='' title='{t}New password{/t}' onFocus="nextfield= 'new_password_repeated';" onkeyup="testPasswordCss(document.getElementById('new_password').value);"></td>
       </tr>
       <tr>
        <td>{t}New password repeated{/t}</td>
-       <td><input type='password' name='new_password_repeated' maxlength='25' value='' title='{t}New password repeated{/t}' onFocus="nextfield= 'apply';"></td>
+       <td><input type='password' name='new_password_repeated' maxlength='40' value='' title='{t}New password repeated{/t}' onFocus="nextfield= 'apply';"></td>
       </tr>
       <tr>
        <td>{t}Password strength{/t}</td>
