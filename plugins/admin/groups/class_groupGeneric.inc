@@ -633,11 +633,15 @@ class group extends plugin
          to be prepared when adding/deleting users)
      */    
     $filter = "";
-    foreach ($this->memberUid as $value){
-      if(!isset($this->members[$value])){
-        $filter .= "(uid=".normalizeLdap($value).")";
+    if(!isset($this->config->current['LDAP_FILTER_NESTING_LIMIT']) || 
+        count($this->memberUid) < $this->config->current['LDAP_FILTER_NESTING_LIMIT']){
+      foreach ($this->memberUid as $value){
+        if(!isset($this->members[$value])){
+          $filter .= "(uid=".normalizeLdap($value).")";
+        }
       }
     }
+
     if(!empty($filter)){    
       $ldap->cd($this->config->current['BASE']);
       $ldap->search("(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(|".$filter."))",array("dn", "uid","sn","givenName"));
@@ -649,11 +653,18 @@ class group extends plugin
     }
   
     /* check if all uids are resolved */
-    foreach ($this->memberUid as $value){
-      if(!isset($this->members[$value])){
-        $this->members[$value] =  _("! unknown id")." [".$value."]"; 
-      }
-    }  
+    if(!isset($this->config->current['LDAP_FILTER_NESTING_LIMIT']) || 
+        count($this->memberUid) < $this->config->current['LDAP_FILTER_NESTING_LIMIT']){
+      foreach ($this->memberUid as $value){
+        if(!isset($this->members[$value])){
+          $this->members[$value] =  _("! unknown id")." [".$value."]"; 
+        }
+      }  
+    }else{
+      foreach ($this->memberUid as $value){
+        $this->members[$value] = $value; 
+      }  
+    }
 
     /* Create display list of users matching regex & filter 
      */
