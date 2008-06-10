@@ -1495,7 +1495,7 @@ class user extends plugin
         "plProvidedAcls" => array(
           "base"              => _("Base"), 
           "userPassword"      => _("User password"), 
-          "sn"                => _("Surename"),
+          "sn"                => _("Surname"),
           "givenName"         => _("Given name"),
           "uid"               => _("User identification"),
           "personalTitle"     => _("Personal title"),
