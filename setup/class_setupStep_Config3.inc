@@ -87,7 +87,7 @@ class Step_Config3 extends setup_step
     $this->optional['sudoou'] = preg_replace("/%BASE%/",$cv['base'],$this->optional['sudoou']);
     $smarty = get_smarty();
     $smarty->assign("bool",array(FALSE => _("No"), TRUE => _("Yes")));
-    $smarty->assign("uniq_identifiers",array( "entryCNS" => "entryCSN",
+    $smarty->assign("uniq_identifiers",array( "entryCSN" => "entryCSN",
                                               "contextCSN"=>"contextCSN" ));
 
     
