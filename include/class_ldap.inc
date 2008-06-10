@@ -1204,11 +1204,7 @@ class LDAP{
     }
 	
 	  # Get base to look for schema 
-	  $sr = @ldap_read ($this->cid, NULL, "objectClass=*", array("subschemaSubentry"));
-    if(!$sr){
-	    $sr = @ldap_read ($this->cid, "", "objectClass=*", array("subschemaSubentry"));
-    }
-
+	  $sr = @ldap_read ($this->cid, "", "objectClass=*", array("subschemaSubentry"));
 	  $attr = @ldap_get_entries($this->cid,$sr);
 	  if (!isset($attr[0]['subschemasubentry'][0])){
 	    return array();
@@ -1268,6 +1264,7 @@ class LDAP{
     if(class_available("session")){
       session::set("LDAP_CACHE::get_objectclasses",$objectclasses);
     }
+
 	  return $objectclasses;
   }
 
