@@ -1105,14 +1105,18 @@ function &get_smarty()
 }
 
 
-function convert_department_dn($dn)
+function convert_department_dn($dn, $base = NULL)
 {
+  global $config;
   $dep= "";
+
+  if($base == NULL){
+    $base = $config->current['BASE'];
+  }
 
   /* Build a sub-directory style list of the tree level
      specified in $dn */
-  global $config;
-  $dn = preg_replace("/".normalizePreg($config->current['BASE'])."$/i","",$dn);
+  $dn = preg_replace("/".normalizePreg($base)."$/i","",$dn);
   if(empty($dn)) return("/");
 
   foreach (split(',', $dn) as $rdn){
