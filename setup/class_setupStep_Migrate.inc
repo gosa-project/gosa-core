@@ -82,6 +82,10 @@ class Step_Migrate extends setup_step
   var $outside_groups        = array();
   var $outside_groups_dialog = FALSE;
 
+  /* Device migration */
+  var $device_dialog         = FALSE;
+  var $device                = array();
+
   /* Win-Workstations outside to reserved ou */
   var $outside_winstations        = array();
   var $outside_winstations_dialog = FALSE;
@@ -170,6 +174,12 @@ class Step_Migrate extends setup_step
     $this->checks['gidNumber_usage']['STATUS_MSG']= "";
     $this->checks['gidNumber_usage']['ERROR_MSG'] = "";
     $this->check_gidNumber();
+
+    $this->checks['old_style_devices']['TITLE']     = _("Checking for old style USB devices");
+    $this->checks['old_style_devices']['STATUS']    = FALSE;
+    $this->checks['old_style_devices']['STATUS_MSG']= "";
+    $this->checks['old_style_devices']['ERROR_MSG'] = "";
+    $this->check_usb_devices();
   }
 
 
@@ -1539,6 +1549,50 @@ class Step_Migrate extends setup_step
       return($smarty->fetch(get_template_path("setup_migrate.tpl",TRUE,dirname(__FILE__))));
     }
 
+
+    /*************
+     * Device migration 
+     *************/
+   
+    if($this->device_dialog) {
+      $this->check_device_posts();
+    }
+ 
+    if(isset($_POST['device_dialog_cancel'])){
+      $this->device_dialog = FALSE;
+      $this->show_details = FALSE;
+      $this->dialog = FALSE;
+    }
+   
+    if(isset($_POST['device_dialog_whats_done'])){
+      $this->show_details= TRUE;
+    }
+ 
+    if(isset($_POST['device_dialog_refresh'])){
+      $this->show_details= FALSE;
+    }
+
+    if(isset($_POST['migrate_devices'])){
+      $this->migrate_usb_devices();
+#      $this->dialog = FALSE;
+ #     $this->show_details = FALSE;
+  #    $this->device_dialog = FALSE;
+   #   $this->initialize_checks();
+    }
+
+    if(isset($_POST['device_dialog'])){
+      $this->device_dialog = TRUE;
+      $this->dialog = TRUE;
+    }
+    
+    if($this->device_dialog){
+      $smarty = get_smarty();
+      $smarty->assign("method","devices");
+      $smarty->assign("devices",$this->device);
+      $smarty->assign("device_details", $this->show_details);
+      return($smarty->fetch(get_template_path("setup_migrate.tpl",TRUE,dirname(__FILE__))));
+    }
+
     $smarty = get_smarty();
     $smarty->assign("checks",$this->checks);
     $smarty->assign("method","default");
@@ -1967,7 +2021,7 @@ class Step_Migrate extends setup_step
     }
   }
 
-  
+
   /* Cleanup ldap result to be able to write it be to ldap */
   function cleanup_array($attrs)
   {
@@ -1980,6 +2034,186 @@ class Step_Migrate extends setup_step
       }
     }
     return($attrs);
+  }
+
+
+  function check_device_posts()
+  {
+    foreach($this->device as $key => $device){
+      if(isset($_POST["migrate_".$key])){
+        $this->device[$key]['DETAILS'] =TRUE;
+      }else{
+        $this->device[$key]['DETAILS'] =FALSE;
+      }
+    }
+  }
+
+
+  function check_usb_devices ()
+  {
+    /* Establish ldap connection */
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
+        $cv['password'],
+        $cv['connection'],
+        FALSE,
+        $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
+    $ldap->cd($cv['base']);
+    $res = $ldap->search("(&(|(objectClass=posixAccount)(objectClass=posixGroup))(gotoHotplugDevice=*))",
+        array("cn","gotoHotplugDevice","gosaUnitTag"));
+
+    if(!$res){
+      $this->checks['old_style_devices']['STATUS']    = FALSE;
+      $this->checks['old_style_devices']['STATUS_MSG']= _("LDAP query failed");
+      $this->checks['old_style_devices']['ERROR_MSG'] = _("Possibly the 'root object' is missing.");
+      return;
+    }
+
+
+    /* If adding failed, tell the user */
+    if($ldap->count()){
+  
+      $this->device = array();
+      while($attrs = $ldap->fetch()){
+
+        for ($j= 0; $j < $attrs['gotoHotplugDevice']['count']; $j++){
+
+          $after  = "";
+          $current= "";
+
+          $entry= $attrs['gotoHotplugDevice'][$j];
+
+          @list($name,$desc,$serial,$vendor,$product) = explode('|', $entry);
+  
+          $add = 1;
+          $new_name  = $name;
+          while(isset($dest[$new_name])){
+            $new_name = $name."_".$add;
+            $add ++;
+          }
+          $name = $new_name;
+          $newdn= "cn=$name,ou=devices,".preg_replace('/^[^,]+,/', '', $attrs['dn']);
+
+          if (!isset($dest[$name])){
+            $dest[$name]= $newdn;
+
+            $current.= "dn: ".$attrs['dn']."\n"; 
+    
+            for ($c= 0; $c < $attrs['gotoHotplugDevice']['count']; $c++){
+              if($c == $j){
+                $current.= "<b>gotoHotplugDevice: ".$attrs['gotoHotplugDevice'][$c]."</b>\n"; 
+              }else{
+                $current.= "gotoHotplugDevice: ".$attrs['gotoHotplugDevice'][$c]."\n"; 
+              }
+            }
+
+            $after.= "dn: $newdn\n";
+            $after.= "changetype: add\n";
+            $after.= "objectClass: top\n";
+            $after.= "objectClass: gotoDevice\n";
+            if (isset($attrs['gosaunittag'][0])){
+              $after.= "objectClass: gosaAdminiafter\n";
+              $after.= "gosaUnitTag: ".$attrs['gosaunittag'][0]."\n";
+            }
+            $after.= "cn: $name\n";
+            $after.= "gotoHotplugDevice: $desc|$serial|$vendor|$product\n\n";
+
+            $this->device[] = array(
+                'CURRENT'     =>  $current,
+                'AFTER'       => $after,
+                'OLD_DEVICE'  => $entry,
+                'DN'          => $attrs['dn'],
+                'NEW_DN'      => $newdn,
+                'DEVICE_NAME' => $name,
+                'DETAILS'     => FALSE);
+          }
+        }
+      }
+
+      $this->checks['old_style_devices']['STATUS']    = FALSE;
+      $this->checks['old_style_devices']['STATUS_MSG']= _("Failed");
+      $this->checks['old_style_devices']['ERROR_MSG'] = 
+        sprintf(_("There are %s devices that need to be migrated."),count($this->device)).
+          "<input type='submit' name='device_dialog' value='"._("Migrate")."'>";
+    }else{
+      $this->checks['old_style_devices']['STATUS']    = TRUE;
+      $this->checks['old_style_devices']['STATUS_MSG']= _("Ok");
+      $this->checks['old_style_devices']['ERROR_MSG'] = "";
+    }
+  }
+
+  function migrate_usb_devices ()
+  {
+    /* Establish ldap connection */
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
+        $cv['password'],
+        $cv['connection'],
+        FALSE,
+        $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
+
+    /* Walk through migrateable devices and initiate migration for all 
+        devices that are checked (DETAILS==TRUE) 
+     */
+    foreach($this->device as $key => $device){
+      if($device['DETAILS']){
+
+        /* Get source object and verify that the specified device is a 
+            member attribute of it. 
+         */
+        $ldap->cd($cv['base']);
+        $ldap->cat($device['DN']);
+        $attrs = $ldap->fetch();
+        if(in_array($device['OLD_DEVICE'],$attrs['gotoHotplugDevice'])){
+
+          /* Create new hotplug device object 'gotoDevice'
+           */ 
+          @list($name,$desc,$serial,$vendor,$product) = explode('|', $device['OLD_DEVICE']);    
+          $newdn = $device['NEW_DN'];
+          $new_attr = array();
+          $new_attr['cn'] = $device['DEVICE_NAME'];
+          $new_attr['objectClass'] = array('top','gotoDevice');
+          $new_attr['gotoHotplugDevice'] = "$desc|$serial|$vendor|$product";
+
+          /* Add new object 
+           */
+          $ldap->cd($cv['base']);
+          $ldap->create_missing_trees(preg_replace("/^[^,]+,/","",$newdn));
+          $ldap->cd($newdn);
+          $ldap->add($new_attr);
+          if(!$ldap->success()){
+            msg_dialog::display(_("LDAP error"), 
+                sprintf(_("Ldap add failed for %s with error %s"),
+                  "<b>".LDAP::fix($newdn)."</b>", 
+                  "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
+          }else{
+            $update['gotoHotplugDevice'] = array();
+            for($i = 0 ; $i < $attrs['gotoHotplugDevice']['count'] ; $i++){
+              if($attrs['gotoHotplugDevice'][$i] == $device['OLD_DEVICE']){
+                 continue;
+              }
+              $update['gotoHotplugDevice'][] = $attrs['gotoHotplugDevice'][$i];
+            }
+
+            $ldap->cd($device['DN']);
+            $ldap->modify($update);
+            $ldap->cat($device['DN'],array("gotoHotplugDevice"));
+            if(!$ldap->success()){
+              msg_dialog::display(_("LDAP error"), 
+                  sprintf(_("Ldap update failed for %s with error %s"),
+                    "<b>".LDAP::fix($device['DN'])."</b>", 
+                    "<br><br><i>".$ldap->get_error()."</b>"), ERROR_DIALOG);
+            }else{
+              unset($this->device[$key]);
+            }
+          }
+        }
+      }
+    }
   }
 }
 

@@ -233,6 +233,7 @@
 						{t}Password (again){/t}:&nbsp;
 					</td>
 					<td>
+
 						<input type='password' value='{$new_user_password2}' name='new_user_password2'><br>
 					</td>
 				</tr>
@@ -359,6 +360,51 @@ dn: {$users_to_migrate.$key.dn}
 				&nbsp;
 				<input type='submit' name='users_visible_migrate_close' value='{t}Cancel{/t}'>
 			</div>
+
+
+	{elseif $method == "devices"}
+
+
+			<h2>User devices</h2>
+
+			<p>{t}The listed devices are currenlty invisble in the GOsa interface. If you want to change this for a couple of devices, just select them and use the 'Migrate' button below.{/t}</p>
+			<p>{t}If you want to know what will be done when migrating the selected entries, use the 'Show changes' button to see the LDIF.{/t}</p>
+		{foreach from=$devices item=item key=key}
+           	<input type='checkbox' name='migrate_{$key}' id='migrate_{$key}' {if $item.DETAILS} checked {/if}>
+				<b>{$item.DEVICE_NAME}</b>
+				 - {$item.DN} 
+
+				{if $item.DETAILS && $device_details}
+					<div class="step2_entry_container_info">
+						<b>{t}Current{/t}</b>
+						<pre>{$item.CURRENT}</pre>
+	
+						
+						<b>{t}After migration{/t}</b>
+						<pre>{$item.AFTER}</pre>
+					</div>
+				{/if}
+			<br>
+		{/foreach}
+		<input type='checkbox' id='toggle_calue' onClick="toggle_all_('^migrate_','toggle_calue')">
+		{t}Select all{/t}
+	
+		<br>
+
+		{if $device_details}
+			<input type='submit' name='device_dialog_refresh' value='{t}Hide changes{/t}'>
+			<input type='submit' name='dummy_11' value='{t}Refresh{/t}'>
+		{else}
+			<input type='submit' name='device_dialog_whats_done' value='{t}Show changes{/t}'>
+		{/if}
+
+		<p class='seperator'>&nbsp;</p>	
+
+		<div style='width:99%; text-align:right; padding-top:5px;'>
+			<input type='submit' name='migrate_devices' value='{t}Apply{/t}'>
+			&nbsp;
+			<input type='submit' name='device_dialog_cancel' value='{t}Cancel{/t}'>
+		</div>
 	{/if}
     </div>
 </div>
