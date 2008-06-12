@@ -96,6 +96,9 @@ class tabs
 
   function execute()
   {
+    /* Ensure that the currently selected tab is valid. */
+    if(!isset($this->by_name[$this->current])) $this->current = key($this->by_name);
+
     /* Rotate current to last */
     $this->last= $this->current;
 
