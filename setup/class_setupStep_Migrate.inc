@@ -1681,7 +1681,7 @@ class Step_Migrate extends setup_step
     }
 
     if(isset($_POST['migrate_menus'])){
-      $this->migrate_usb_menus();
+      $this->migrate_menus();
 #      $this->dialog = FALSE;
  #     $this->show_details = FALSE;
   #    $this->menu_dialog = FALSE;
@@ -2516,6 +2516,7 @@ class Step_Migrate extends setup_step
         which configured parameter belongs to which application entry.
      */
     $amap= array();
+    $toto = array();
     $ldap->cd($cv['base']);
     $ldap->search("(objectClass=gosaApplication)", array("cn", "gosaApplicationParameter"));
     while($info = $ldap->fetch()){
@@ -2761,7 +2762,7 @@ class Step_Migrate extends setup_step
               All selected menus will be converted (DETAILS = TRUE). 
               The ldap actions collected by check_menus() will be executed. 
    */
-  function migrate_usb_menus()
+  function migrate_menus()
   {
 
     /* Establish ldap connection
@@ -2786,7 +2787,6 @@ class Step_Migrate extends setup_step
         $success = TRUE;
         foreach($menu['TODO']['ADD'] as $dn => $data){
           $ldap->cd($cv['base']);
-          $base = preg_replace("/^[^,]+,/","",$dn);
           if(!$ldap->dn_exists($dn)){
             $ldap->cd($dn);
             $ldap->add($data);
@@ -2801,7 +2801,7 @@ class Step_Migrate extends setup_step
          */
         foreach($menu['TODO']['MODIFY'] as $dn => $data){
           $ldap->cd($cv['base']);
-          if(!$ldap->dn_exists($dn)){
+          if($ldap->dn_exists($dn)){
             $ldap->cd($dn);
             $ldap->modify($data);
             if (!$ldap->success()){
