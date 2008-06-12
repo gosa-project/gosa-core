@@ -2339,6 +2339,7 @@ class Step_Migrate extends setup_step
         }
       }
     }
+    $this->check_usb_devices();
   }
 
 
