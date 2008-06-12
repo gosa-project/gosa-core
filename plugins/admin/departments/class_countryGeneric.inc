@@ -25,9 +25,18 @@ class country extends department
 	/* attribute list for save action */
 	var $attributes     = array( "c", "description");
 	var $objectclasses  = array("top", "country");
-  var $type ="c";
+  var $type   ="c";
+  var $c      ="";
+  var $orgi_c ="";
 
-  var $c ="";
+  var $namingAttr = "c";
+
+  function check()
+  {
+    $message = plugin::check();
+    return($message);
+  }
+
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

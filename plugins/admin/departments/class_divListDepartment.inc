@@ -195,48 +195,59 @@ class divListDepartment extends MultiSelectWindow
 
       $actions= "";      
 
-      $acl = $ui->get_permissions($this->config->departments[$key] ,"department/department");
-      $acl_all = $ui->has_complete_category_acls($this->config->departments[$key] ,"department");
+      if(!isset($this->config->departments[$key])){
 
-      $actions.= "<input class='center' type='image' src='images/lists/edit.png'
-        alt='"._("edit")."'   name='dep_edit_%KEY%' title='"._("Edit this entry")."'>";
+        $field01 = array("string" => "&nbsp;", "attach" => "style='width:20px;'");
+        $field0 = array("string" => "<img src='images/".$non_empty."lists/folder.png' 
+            title='"._("department")."' alt='department'>", 
+            "attach" => "style='text-align:center;width:20px;'");
+        $field1 = array("string" => $val, "attach" => "style='' title='".$val."'");
+        $field2 = array("string" => "", "attach" => "style='border-right: 0px;'");
 
-      if(preg_match("/d/",$acl)){
-        $actions.= "<input class='center' type='image' src='images/lists/trash.png'
-          alt='"._("delete")."'   name='dep_del_%KEY%' title='"._("Delete this entry")."'>";
-      }
-
-      if(!isset($this->config->departments[trim($key)])){
-        $this->config->departments[trim($key)]="";
-      }
-
-      /* check if this department contains sub-departments
-         Display different image in this case
-       */
-      $non_empty="";
-      $nkey= normalizePreg($key);
-      foreach($this->config->departments as $keyd=>$vald ){
-        if(preg_match('/$nkey\/.*/',$keyd)){
-          $non_empty="full";
-        }
-      }
-
-      $title = preg_replace('/ /', '&nbsp;', @LDAP::fix($this->config->departments[$key]));
-
-      if($val == "."){
-        $field01 = array("string" => "&nbsp;",
-            "attach" => "style='width:20px;'");
       }else{
-        $field01 = array("string" => "<input type='checkbox' id='item_selected_".base64_encode($key)."' 
-            name='item_selected_".base64_encode($key)."'>" ,
-            "attach" => "style='width:20px;'");
+        $acl = $ui->get_permissions($this->config->departments[$key] ,"department/department");
+        $acl_all = $ui->has_complete_category_acls($this->config->departments[$key] ,"department");
+
+        $actions.= "<input class='center' type='image' src='images/lists/edit.png'
+          alt='"._("edit")."'   name='dep_edit_%KEY%' title='"._("Edit this entry")."'>";
+
+        if(preg_match("/d/",$acl)){
+          $actions.= "<input class='center' type='image' src='images/lists/trash.png'
+            alt='"._("delete")."'   name='dep_del_%KEY%' title='"._("Delete this entry")."'>";
+        }
+
+        if(!isset($this->config->departments[trim($key)])){
+          $this->config->departments[trim($key)]="";
+        }
+
+        /* check if this department contains sub-departments
+           Display different image in this case
+         */
+        $non_empty="";
+        $nkey= normalizePreg($key);
+        foreach($this->config->departments as $keyd=>$vald ){
+          if(preg_match('/$nkey\/.*/',$keyd)){
+            $non_empty="full";
+          }
+        }
+
+        $title = preg_replace('/ /', '&nbsp;', @LDAP::fix($this->config->departments[$key]));
+
+        if($val == "."){
+          $field01 = array("string" => "&nbsp;",
+              "attach" => "style='width:20px;'");
+        }else{
+          $field01 = array("string" => "<input type='checkbox' id='item_selected_".base64_encode($key)."' 
+              name='item_selected_".base64_encode($key)."'>" ,
+              "attach" => "style='width:20px;'");
+        }
+
+        $field0 = array("string" => "<img src='images/".$non_empty."lists/folder.png' title='"._("department")."' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
+        $field1 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style='' title='".$title."'");
+        $field2 = array("string" => preg_replace("/%KEY%/", base64_encode($key), $actions), "attach" => "style='width:60px;border-right:0px;text-align:
+            right;'");
+
       }
-
-      $field0 = array("string" => "<img src='images/".$non_empty."lists/folder.png' title='"._("department")."' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
-      $field1 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style='' title='".$title."'");
-      $field2 = array("string" => preg_replace("/%KEY%/", base64_encode($key), $actions), "attach" => "style='width:60px;border-right:0px;text-align:
-          right;'");
-
       $this->AddElement( array($field01,$field0,$field1,$field2));
     }
 

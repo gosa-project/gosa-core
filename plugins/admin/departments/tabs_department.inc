@@ -24,10 +24,22 @@ class deptabs extends tabs
 {
   var $base= "";
   var $moved = FALSE;
+  var $base_name = "department";
 
   function deptabs($config, $data, $dn,$category)
   {
     tabs::tabs($config, $data, $dn,$category);
+
+    /* Detect the base class  (The classs which extends from department)
+     */
+    $class = "department";
+    foreach($this->by_object as $name => $object){
+      if($object instanceOf department){
+        $this->base_name = get_class($object);
+        break;
+      }
+    }
+
 
     /* Add references/acls/snapshots */
     $this->addSpecialTabs();
@@ -47,11 +59,19 @@ class deptabs extends tabs
   {
     return(FALSE);
     if($this->moved) return(FALSE);
-    $baseobject= &$this->by_object['department'];
-    $ou       = preg_replace('/,/', '\,', $baseobject->ou);  
-    $new_dn   = @LDAP::convert('ou='.$ou.','.$baseobject->base);
-    $old_ou   = preg_replace('/,/', '\,', $baseobject->orig_ou);
-    $old_dn   = @LDAP::convert('ou='.$ou.','.$baseobject->orig_base);
+    $baseobject= &$this->by_object[$this->base_name];
+
+    $namingAttr       = $baseobject->namingAttr;
+    $orig_namingAttr  = $baseobject->orig_namingAttr;
+
+    $value       = preg_replace('/,/', '\,', $baseobject->$namingAttr);  
+    $orig_value  = preg_replace('/,/', '\,', $baseobject->$orig_namingAttr);  
+
+    $new_dn   = @LDAP::convert($namingAttr.'='.$value.','.$baseobject->base);
+    $old_dn   = @LDAP::convert($namingAttr.'='.$orig_value.','.$baseobject->orig_base);
+
+    print_a(array($new_dn,$old_dn));
+
     if ($this->dn != $new_dn && $this->dn != "new"){
       return(TRUE); 
     }
@@ -73,7 +93,7 @@ class deptabs extends tabs
   function move_me()
   {
     if(!$this->am_i_moved()) return;
-    $baseobject= &$this->by_object['department'];
+    $baseobject= &$this->by_object[$this->base_name];
     $ou       = preg_replace('/,/', '\,', $baseobject->ou);  
     $new_dn   = @LDAP::convert('ou='.$ou.','.$baseobject->base);
     $old_ou   = preg_replace('/,/', '\,', $baseobject->orig_ou);
@@ -87,9 +107,12 @@ class deptabs extends tabs
 
   function save($ignore_account= FALSE)
   {
-    $baseobject= &$this->by_object['department'];
-    $ou       = preg_replace('/,/', '\,', $baseobject->ou);  
-    $new_dn   = @LDAP::convert('ou='.$ou.','.$baseobject->base);
+    $baseobject= &$this->by_object[$this->base_name];
+
+    $namingAttr       = $baseobject->namingAttr;
+
+    $nAV      = preg_replace('/,/', '\,', $baseobject->$namingAttr); 
+    $new_dn   = @LDAP::convert($namingAttr.'='.$nAV.','.$baseobject->base);
 
     /* Move group? */
     if ($this->dn != $new_dn && $this->dn != "new"){

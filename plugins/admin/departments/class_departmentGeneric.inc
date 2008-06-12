@@ -37,6 +37,7 @@ class department extends plugin
   var $view_logged = FALSE;
 
   var $type ="ou";
+  var $namingAttr = "ou";
 
 	/* Headpage attributes */
 	var $last_dep_sorting= "invalid";
@@ -60,7 +61,13 @@ class department extends plugin
 		$this->ui= get_userinfo();
 		$this->dn= $dn;
 		$this->orig_dn= $dn;
-		$this->orig_ou= $this->ou;
+
+    /* Save current naming attribuet 
+     */
+    $nA      = $this->namingAttr;
+    $orig_nA = "orig_".$nA;
+    $this->$orig_nA = $this->$nA;
+
 		$this->config= $config;
 
 		/* Set base */

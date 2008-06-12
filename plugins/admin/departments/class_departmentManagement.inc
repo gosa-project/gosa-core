@@ -305,7 +305,6 @@ class departmentManagement extends plugin
           So don't move it below the moved check !.
        */
       $message= $this->deptabs->check();
-      $obj = $this->deptabs->by_object['department'];
 
       /*************
         MOVED ? 
@@ -333,7 +332,7 @@ class departmentManagement extends plugin
         $this->ObjectInSaveMode = true;
 
         /* This object must be tagged, so set ObjectTaggingRequested to true */
-        if($this->deptabs->by_object['department']->must_be_tagged()){
+        if($this->deptabs->by_object[$this->deptabs->base_name]->must_be_tagged()){
           $smarty = get_smarty();
           $smarty->assign("src","?plug=".$_GET['plug']."&TagDepartment&no_output_compression");
           $smarty->assign("message",_("As soon as the tag operation has finished, you can scroll down to end of the page and press the 'Continue' button to continue with the department management dialog."));
@@ -427,6 +426,8 @@ class departmentManagement extends plugin
       $result[$tmp[$base_back]]=$tmp2;
     }
 
+    
+
     if($this->DivListDepartment->SubSearch){
       $res= get_list("(&(|(ou=$Regex)(description=$Regex))(objectClass=gosaDepartment))",
           "department", $base, array("ou", "description"), GL_SIZELIMIT | GL_SUBSEARCH);
@@ -435,7 +436,16 @@ class departmentManagement extends plugin
           "department", $base, array("ou", "description"), GL_SIZELIMIT );
     }
 
+    
+    /**/
+    $non_ou = get_list("(&(|(c=$Regex)(description=$Regex))(objectClass=country))",
+          "department", $base, array("c", "description"), GL_SIZELIMIT );
+  
     $this->departments= array();
+    foreach($non_ou as $obj){
+      $this->departments[] = $obj['dn'];
+    }
+
 
     /* Add current base to the list of available departments, but only if its naming attribute is 'ou' */
     if(preg_match("/^ou=/",$base)){
