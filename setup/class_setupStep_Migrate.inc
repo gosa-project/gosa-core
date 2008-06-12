@@ -2247,7 +2247,7 @@ class Step_Migrate extends setup_step
       }
 
       $this->checks['old_style_devices']['STATUS']    = FALSE;
-      $this->checks['old_style_devices']['STATUS_MSG']= _("Failed");
+      $this->checks['old_style_devices']['STATUS_MSG']= "<font style='color:#F0A500'>"._("Warning")."</font>";
       $this->checks['old_style_devices']['ERROR_MSG'] = 
         sprintf(_("There are %s devices that need to be migrated."),count($this->device)).
           "<input type='submit' name='device_dialog' value='"._("Migrate")."'>";
@@ -2399,7 +2399,7 @@ class Step_Migrate extends setup_step
      */
     if(count($this->service)){
       $this->checks['old_style_services']['STATUS']    = FALSE;
-      $this->checks['old_style_services']['STATUS_MSG']= _("Failed");
+      $this->checks['old_style_services']['STATUS_MSG']= "<font style='color:#F0A500'>"._("Warning")."</font>";
       $this->checks['old_style_services']['ERROR_MSG'] =
         sprintf(_("There are %s services that need to be migrated."),
             count($this->service)).
