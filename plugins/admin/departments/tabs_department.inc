@@ -28,7 +28,6 @@ class deptabs extends tabs
   function deptabs($config, $data, $dn,$category)
   {
     tabs::tabs($config, $data, $dn,$category);
-    $this->base= $this->by_object['department']->base;
 
     /* Add references/acls/snapshots */
     $this->addSpecialTabs();

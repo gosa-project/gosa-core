@@ -36,6 +36,8 @@ class department extends plugin
 	var $gosaUnitTag= "";
   var $view_logged = FALSE;
 
+  var $type ="ou";
+
 	/* Headpage attributes */
 	var $last_dep_sorting= "invalid";
 	var $departments= array();
@@ -162,6 +164,7 @@ class department extends plugin
       $smarty->assign("unitTag", "");
     }
 
+    $smarty->assign("dep_type",$this->type);
 		return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
 	}
 

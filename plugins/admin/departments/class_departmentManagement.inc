@@ -91,14 +91,13 @@ class departmentManagement extends plugin
         // Post for new
       }elseif(preg_match("/^remove_multiple_departments/",$key)){
         $s_action="del_multiple";
-      }elseif(preg_match("/dep_new.*/",$key)){
-        $s_action="new";
       }
     }
 
     /* Create options */
-    if(isset($_POST['menu_action']) && $_POST['menu_action'] == "dep_new"){
+    if(isset($_POST['menu_action']) && preg_match("/^dep_new_/",$_POST['menu_action'])){
       $s_action = "new";
+      $s_entry  = preg_replace("/^dep_new_([a-z]*)/","\\1",$_POST['menu_action']);
     }
 
     /* handle remove from layers menu */
@@ -115,7 +114,11 @@ class departmentManagement extends plugin
      */
     if ($s_action=="new"){
       $this->dn= "new";
-      $this->deptabs= new deptabs($this->config,$this->config->data['TABS']['DEPTABS'], $this->dn,"department");
+      if($s_entry == "c"){
+        $this->deptabs= new deptabs($this->config,$this->config->data['TABS']['COUNTRY_TABS'], $this->dn,"country");
+      }else{
+        $this->deptabs= new deptabs($this->config,$this->config->data['TABS']['DEPTABS'], $this->dn,"department");
+      }
       $this->deptabs->set_acl_base($this->DivListDepartment->selectedBase);
     }
 
