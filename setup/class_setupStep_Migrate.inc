@@ -133,67 +133,67 @@ class Step_Migrate extends setup_step
     $this->checks['permissions']['STATUS']    = FALSE;
     $this->checks['permissions']['STATUS_MSG']= "";
     $this->checks['permissions']['ERROR_MSG'] = "";
-//    $this->check_ldap_permissions();
+    $this->check_ldap_permissions();
 
     $this->checks['deps_visible']['TITLE']     = _("Checking for invisible departments");
     $this->checks['deps_visible']['STATUS']    = FALSE;
     $this->checks['deps_visible']['STATUS_MSG']= "";
-//    $this->checks['deps_visible']['ERROR_MSG'] = "";
+    $this->checks['deps_visible']['ERROR_MSG'] = "";
 
     $this->checks['users_visible']['TITLE']     = _("Checking for invisible users");
     $this->checks['users_visible']['STATUS']    = FALSE;
     $this->checks['users_visible']['STATUS_MSG']= "";
     $this->checks['users_visible']['ERROR_MSG'] = "";
-//    $this->check_gosaAccounts();
+    $this->check_gosaAccounts();
 
     $this->checks['acls']['TITLE']     = _("Checking for super administrator");
     $this->checks['acls']['STATUS']    = FALSE;
     $this->checks['acls']['STATUS_MSG']= "";
     $this->checks['acls']['ERROR_MSG'] = "";
-//    $this->check_administrativeAccount();
+    $this->check_administrativeAccount();
 
     $this->checks['outside_users']['TITLE']     = _("Checking for users outside the people tree");
     $this->checks['outside_users']['STATUS']    = FALSE;
     $this->checks['outside_users']['STATUS_MSG']= "";
     $this->checks['outside_users']['ERROR_MSG'] = "";
-//    $this->search_outside_users();
+    $this->search_outside_users();
 
     $this->checks['outside_groups']['TITLE']     = _("Checking for groups outside the groups tree");
     $this->checks['outside_groups']['STATUS']    = FALSE;
     $this->checks['outside_groups']['STATUS_MSG']= "";
     $this->checks['outside_groups']['ERROR_MSG'] = "";
-//    $this->search_outside_groups();
-//    $this->check_organizationalUnits();
+    $this->search_outside_groups();
+    $this->check_organizationalUnits();
 
     $this->checks['outside_winstations']['TITLE']     = _("Checking for windows workstations outside the winstation tree");
     $this->checks['outside_winstations']['STATUS']    = FALSE;
     $this->checks['outside_winstations']['STATUS_MSG']= "";
     $this->checks['outside_winstations']['ERROR_MSG'] = "";
-//    $this->search_outside_winstations();
+    $this->search_outside_winstations();
 
     $this->checks['uidNumber_usage']['TITLE']     = _("Checking for duplicated UID numbers");
     $this->checks['uidNumber_usage']['STATUS']    = FALSE;
     $this->checks['uidNumber_usage']['STATUS_MSG']= "";
     $this->checks['uidNumber_usage']['ERROR_MSG'] = "";
-//    $this->check_uidNumber();
+    $this->check_uidNumber();
 
     $this->checks['gidNumber_usage']['TITLE']     = _("Checking for duplicate GID numbers");
     $this->checks['gidNumber_usage']['STATUS']    = FALSE;
     $this->checks['gidNumber_usage']['STATUS_MSG']= "";
     $this->checks['gidNumber_usage']['ERROR_MSG'] = "";
-//    $this->check_gidNumber();
+    $this->check_gidNumber();
 
     $this->checks['old_style_devices']['TITLE']     = _("Checking for old style USB devices");
     $this->checks['old_style_devices']['STATUS']    = FALSE;
     $this->checks['old_style_devices']['STATUS_MSG']= "";
     $this->checks['old_style_devices']['ERROR_MSG'] = "";
-//    $this->check_usb_devices();
+    $this->check_usb_devices();
 
     $this->checks['old_style_services']['TITLE']     = _("Checking for old services that have to be migrated");
     $this->checks['old_style_services']['STATUS']    = FALSE;
     $this->checks['old_style_services']['STATUS_MSG']= "";
     $this->checks['old_style_services']['ERROR_MSG'] = "";
-//    $this->check_services();
+    $this->check_services();
 
     $this->checks['old_style_menus']['TITLE']     = _("Checking for old style application menus");
     $this->checks['old_style_menus']['STATUS']    = FALSE;
@@ -1637,7 +1637,7 @@ class Step_Migrate extends setup_step
     }
 
     if(isset($_POST['migrate_services'])){
-      $this->migrate_usb_services();
+      $this->migrate_services();
 #      $this->dialog = FALSE;
  #     $this->show_details = FALSE;
   #    $this->service_dialog = FALSE;
@@ -2145,6 +2145,8 @@ class Step_Migrate extends setup_step
   }
 
 
+  /*! \brief  Act in posts from the device migration dialog 
+   */
   function check_device_posts()
   {
     foreach($this->device as $key => $device){
@@ -2157,6 +2159,10 @@ class Step_Migrate extends setup_step
   }
 
 
+  /*! \brief  Check for old style (gosa-2.5) devices.
+              Save readable informations and a list of migratable devices 
+               in $this->devices.
+   */
   function check_usb_devices ()
   {
     /* Establish ldap connection */
@@ -2252,6 +2258,11 @@ class Step_Migrate extends setup_step
     }
   }
 
+
+  /*! \brief  Migrate all selected devices. 
+              Execute all required ldap actions to migrate the 
+               selected devices.
+   */
   function migrate_usb_devices ()
   {
     /* Establish ldap connection */
@@ -2293,12 +2304,18 @@ class Step_Migrate extends setup_step
           $ldap->create_missing_trees(preg_replace("/^[^,]+,/","",$newdn));
           $ldap->cd($newdn);
           $ldap->add($new_attr);
+
+          /* Throw an error message if the action failed. 
+           */
           if(!$ldap->success()){
             msg_dialog::display(_("LDAP error"), 
                 sprintf(_("Ldap add failed for %s with error %s"),
                   "<b>".LDAP::fix($newdn)."</b>", 
                   "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
           }else{
+
+            /* Remove old style device definition from source object. 
+             */
             $update['gotoHotplugDevice'] = array();
             for($i = 0 ; $i < $attrs['gotoHotplugDevice']['count'] ; $i++){
               if($attrs['gotoHotplugDevice'][$i] == $device['OLD_DEVICE']){
@@ -2325,7 +2342,12 @@ class Step_Migrate extends setup_step
   }
 
 
-
+  /*! \brief  Check for old style (gosa-2.5) services that have to be migrated
+               to be useable in gosa-2.6.
+              All required changes are stored in $this->service, also some
+               readable informations describing the actions required 
+               to migrate the service
+   */
   function check_services()
   {
     /* Establish ldap connection */
@@ -2390,7 +2412,12 @@ class Step_Migrate extends setup_step
   }
 
 
-  function migrate_usb_services()
+  
+  /*! \brief  Migrate selected services.
+              This function executes the commands collected by the 
+               service_check() function.
+   */
+  function migrate_services()
   {
     /* Establish ldap connection 
      */
@@ -2430,9 +2457,16 @@ class Step_Migrate extends setup_step
         }
       }
     }
+
+    /* Update the service migration status 
+     */
+    $this->check_services();
   }
 
 
+  /*! \brief  Ensure that posts made on the service migration dialog 
+               are processed.
+   */
   function check_service_posts()
   {
     foreach($this->service as $key => $service){
