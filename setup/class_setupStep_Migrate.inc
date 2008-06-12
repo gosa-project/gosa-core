@@ -2445,11 +2445,14 @@ class Step_Migrate extends setup_step
   }
 
 
+  /*! \brief  This function checks the given ldap for old style (gosa-2.5) 
+               menu entries and will prepare a list of actions that are required
+               to migrate them to gosa-2.6.
+              All required actions and some readable informations are stored in 
+               $this->menu.
+   */
   function check_menus()
   {
-
-    $start = microtime(1);
-
     /* Establish ldap connection
      */
     $cv = $this->parent->captured_values;
@@ -2475,17 +2478,9 @@ class Step_Migrate extends setup_step
       return;
     }
 
-
-    $releases = array();
-    while($attrs = $ldap->fetch()){
-      if(preg_match("/,ou=fai,/",$attrs['dn']) && in_array("organizationalUnit",$attrs['objectClass'])){
-        $tmp = split("\,",$attrs['dn']);
-        $fai_base = preg_replace("/,ou=fai,.*$/","",$attrs['dn']);
-        $releases[convert_department_dn($fai_base,$cv['base'])] = $attrs['dn'];
-      }
-    }
-
-
+    /* Create application -> parameter mapping, used later to detect 
+        which configured parameter belongs to which application entry.
+     */
     $amap= array();
     $ldap->cd($cv['base']);
     $ldap->search("(objectClass=gosaApplication)", array("cn", "gosaApplicationParameter"));
@@ -2503,11 +2498,12 @@ class Step_Migrate extends setup_step
       }
     }
 
-    /* Search for all groups */  
+    /* Search for all groups that have an old style application menu configured.
+     */  
+    $appgroups = array();
     $ldap->cd($cv['base']);
     $ldap->search("(&(objectClass=gosaApplicationGroup)(objectClass=posixGroup)(FAIrelease=*))",
         array("gosaMemberApplication","gosaApplicationParameter","FAIrelease","objectClass","gosaUnitTag"));
-    $appgroups = array();
 
     /* Create readable prefix for "What will be done" infos 
      */
@@ -2541,17 +2537,17 @@ class Step_Migrate extends setup_step
         }
       }
 
-      /* Create release dn part.
-          eg.   "sisa/1.0.0" => "ou=1.0.0,ou=siga,"
+      /* Create release container for each release/subrelease.
+         eg.   "sisa/1.0.0":
+         .       "ou=siga, ..."
+         .       "ou=1.0.0,ou=siga, .."
        */ 
       $release = "";
       $r = $info['FAIrelease'][0];
       $z = split("/",$r);
       foreach($z as $part){
 
-        if(empty($part)){
-          echo __LINE__; exit();
-        }else{
+        if(!empty($part)){
           $release = "ou=".$part.",".$release;
 
           /* Append release department information to "What will be done" info
@@ -2570,7 +2566,7 @@ class Step_Migrate extends setup_step
           }
           $after   .=  $s_add."ou: $part\n";
 
-          /* Appen release data to ldap actions 
+          /* Append release data to ldap actions 
            */
           $d = array();
           $d['objectClass'] = array("top","FAIbranch","organizationalUnit");
@@ -2601,7 +2597,7 @@ class Step_Migrate extends setup_step
          */      
         $current .= $s_del."gosaMemberApplication: ".$info['gosaMemberApplication'][$i]."\n";
 
-        /* Append ldap update action to remove the old menu entry 
+        /* Append ldap update action to remove the old menu entry attributes 
          */
         unset($info['objectClass']['count']);
         $d = array();
@@ -2610,7 +2606,6 @@ class Step_Migrate extends setup_step
         if(isset($info['FAIrelease'])){
           $d['FAIrelease'] = array();
         }
-        
         $d['objectClass']               = array_remove_entries(array("gosaApplicationGroup","FAIreleaseTag"),$info['objectClass']);
         $data['MODIFY'][$info['dn']]    = $d;
 
@@ -2647,11 +2642,9 @@ class Step_Migrate extends setup_step
           }
 
 
-          /* Append missing menu entry to "What is done info"
+          /* Append missing menu entry for "What is done info".
            */
-          if(empty($name)){
-            echo __LINE__; exit();
-          }else{
+          if(!empty($name)){
             $after .= "\n";
             $after .= $s_add."dn: cn=$name,$location_dn$release_dn\n";
             $after .= $s_add."objectClass: gotoMenuEntry\n";
@@ -2662,7 +2655,7 @@ class Step_Migrate extends setup_step
             $after .= $s_add."cn: $name\n";
             $after .= $s_add."gosaApplicationPriority: $priority\n";
 
-            /* Create ldap entry
+            /* Create ldap entry 
              */
             $d= array();
             $d['objectClass'] = array("gotoMenuEntry");
@@ -2683,7 +2676,9 @@ class Step_Migrate extends setup_step
           }         
         }
       }
- 
+
+      /* Updated todo list 
+       */ 
       $todo[] = array(
           "DETAILS" => FALSE,
           "DN"      => $info['dn'],
@@ -2692,6 +2687,9 @@ class Step_Migrate extends setup_step
           "TODO"    => $data
           );
     }
+
+    /* Remember checks.
+     */
     $this->menu = $todo;
 
     /* Check if we were able to query the ldap server
@@ -2705,10 +2703,13 @@ class Step_Migrate extends setup_step
       $this->checks['old_style_menus']['STATUS']    = TRUE;
       $this->checks['old_style_menus']['STATUS_MSG']= _("Ok");
       $this->checks['old_style_menus']['ERROR_MSG'] = "";
-
     }
   }
 
+  
+  /*! \brief  Handle posts for the menu_dialog 
+              Ensure that checked checkboxes stay checked.
+   */
   function check_menu_posts()
   {
     foreach($this->menu as $key => $menu){
@@ -2720,6 +2721,12 @@ class Step_Migrate extends setup_step
     }
   }
 
+
+  /*! \brief  This function updates old-style application menus to
+               valid 2.6 application menus.
+              All selected menus will be converted (DETAILS = TRUE). 
+              The ldap actions collected by check_menus() will be executed. 
+   */
   function migrate_usb_menus()
   {
 
@@ -2733,21 +2740,20 @@ class Step_Migrate extends setup_step
         $cv['tls']);
 
     $ldap = new ldapMultiplexer($ldap_l);
-
-    /* First detect all release names
-     */
     $ldap->cd($cv['base']);
 
+    /* Walk through menus and detect selected menu 
+     */
     foreach($this->menu as $key => $menu){
       if($menu['DETAILS']) {
 
+        /* Excute all LDAP-ADD actions 
+         */
         $success = TRUE;
         foreach($menu['TODO']['ADD'] as $dn => $data){
           $ldap->cd($cv['base']);
           $base = preg_replace("/^[^,]+,/","",$dn);
-          if(!$ldap->dn_exists($base)){
-            echo "FEHLER !!! ES FEHLT : ".$base."<br>";
-          }elseif(!$ldap->dn_exists($dn)){
+          if(!$ldap->dn_exists($dn)){
             $ldap->cd($dn);
             $ldap->add($data);
             if (!$ldap->success()){
@@ -2757,10 +2763,11 @@ class Step_Migrate extends setup_step
           }
         }
 
+        /* Execute all LDAP-MODIFY actions 
+         */
         foreach($menu['TODO']['MODIFY'] as $dn => $data){
+          $ldap->cd($cv['base']);
           if(!$ldap->dn_exists($dn)){
-            echo "FEHLER !!! ES FEHLT : ".$dn."<br>";
-          }else{
             $ldap->cd($dn);
             $ldap->modify($data);
             if (!$ldap->success()){
@@ -2769,11 +2776,17 @@ class Step_Migrate extends setup_step
             }
           }
         }
+  
+        /* If every action was successful, remove this entry from the list 
+         */
         if($success){
           unset($this->menu[$key]);
         }
       }
     }
+
+    /* Udpate migration status for application menus
+     */
     $this->check_menus();
   }
 }
