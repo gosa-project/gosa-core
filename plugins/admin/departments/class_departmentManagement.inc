@@ -114,10 +114,22 @@ class departmentManagement extends plugin
      */
     if ($s_action=="new"){
       $this->dn= "new";
-      if($s_entry == "c"){
-        $this->deptabs= new deptabs($this->config,$this->config->data['TABS']['COUNTRY_TABS'], $this->dn,"country");
+
+      $objects['c'] ['ACL'] = "country";
+      $objects['c'] ['TAB'] = "COUNTRY_TABS";
+      $objects['ou']['ACL'] = "department";
+      $objects['ou']['TAB'] = "DEPTABS";
+      $objects['l'] ['ACL'] = "locatity";
+      $objects['l'] ['TAB'] = "LOCALITY_TABS";
+      $objects['o'] ['ACL'] = "organization";
+      $objects['o'] ['TAB'] = "ORGANIZATION_TABS";
+    
+      if(isset($objects[$s_entry])){
+        $tab = $objects[$s_entry]['TAB'];
+        $acl = $objects[$s_entry]['ACL'];
+        $this->deptabs= new deptabs($this->config,$this->config->data['TABS'][$tab], $this->dn,$acl);
       }else{
-        $this->deptabs= new deptabs($this->config,$this->config->data['TABS']['DEPTABS'], $this->dn,"department");
+        trigger_error("Invalid / Not implemented countainer type.");
       }
       $this->deptabs->set_acl_base($this->DivListDepartment->selectedBase);
     }
@@ -440,6 +452,10 @@ class departmentManagement extends plugin
     /**/
     $non_ou = get_list("(&(|(c=$Regex)(description=$Regex))(objectClass=country))",
           "department", $base, array("c", "description"), GL_SIZELIMIT );
+    $non_ou = array_merge($non_ou,get_list("(&(|(l=$Regex)(description=$Regex))(objectClass=locality))",
+          "department", $base, array("l", "description"), GL_SIZELIMIT ));
+    $non_ou = array_merge($non_ou,get_list("(&(|(o=$Regex)(description=$Regex))(objectClass=organization))",
+          "department", $base, array("o", "description"), GL_SIZELIMIT ));
   
     $this->departments= array();
     foreach($non_ou as $obj){
