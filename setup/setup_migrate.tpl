@@ -405,6 +405,93 @@ dn: {$users_to_migrate.$key.dn}
 			&nbsp;
 			<input type='submit' name='device_dialog_cancel' value='{t}Cancel{/t}'>
 		</div>
+
+	{elseif $method == "services"}
+
+
+			<h2>Services</h2>
+
+			<p>{t}The listed services are currenlty invisble in the GOsa interface. If you want to change this for a couple of devices, just select them and use the 'Migrate' button below.{/t}</p>
+			<p>{t}If you want to know what will be done when migrating the selected entries, use the 'Show changes' button to see the LDIF.{/t}</p>
+		{foreach from=$services item=item key=key}
+           	<input type='checkbox' name='migrate_{$key}' id='migrate_{$key}' {if $item.DETAILS} checked {/if}>
+				<b>{$item.DN}</b>
+
+				{if $item.DETAILS && $service_details}
+					<div class="step2_entry_container_info">
+						<b>{t}Current{/t}</b>
+						<pre>{$item.CURRENT}</pre>
+	
+						
+						<b>{t}After migration{/t}</b>
+						<pre>{$item.AFTER}</pre>
+					</div>
+				{/if}
+			<br>
+		{/foreach}
+		<input type='checkbox' id='toggle_calue' onClick="toggle_all_('^migrate_','toggle_calue')">
+		{t}Select all{/t}
+	
+		<br>
+
+		{if $service_details}
+			<input type='submit' name='service_dialog_refresh' value='{t}Hide changes{/t}'>
+			<input type='submit' name='dummy_11' value='{t}Refresh{/t}'>
+		{else}
+			<input type='submit' name='service_dialog_whats_done' value='{t}Show changes{/t}'>
+		{/if}
+
+		<p class='seperator'>&nbsp;</p>	
+
+		<div style='width:99%; text-align:right; padding-top:5px;'>
+			<input type='submit' name='migrate_services' value='{t}Apply{/t}'>
+			&nbsp;
+			<input type='submit' name='service_dialog_cancel' value='{t}Cancel{/t}'>
+		</div>
+
+
+	{elseif $method == "menus"}
+
+
+			<h2>Application menus</h2>
+
+			<p>{t}The listed menus are currenlty invisble in the GOsa interface. If you want to change this for a couple of devices, just select them and use the 'Migrate' button below.{/t}</p>
+			<p>{t}If you want to know what will be done when migrating the selected entries, use the 'Show changes' button to see the LDIF.{/t}</p>
+		{foreach from=$menus item=item key=key}
+           	<input type='checkbox' name='migrate_{$key}' id='migrate_{$key}' {if $item.DETAILS} checked {/if}>
+				<b>{$item.DN}</b>
+
+				{if $item.DETAILS && $menu_details}
+					<div class="step2_entry_container_info">
+						<b>{t}Current{/t}</b>
+						<pre>{$item.CURRENT}</pre>
+	
+						
+						<b>{t}After migration{/t}</b>
+						<pre>{$item.AFTER}</pre>
+					</div>
+				{/if}
+			<br>
+		{/foreach}
+		<input type='checkbox' id='toggle_calue' onClick="toggle_all_('^migrate_','toggle_calue')">
+		{t}Select all{/t}
+	
+		<br>
+
+		{if $menu_details}
+			<input type='submit' name='menu_dialog_refresh' value='{t}Hide changes{/t}'>
+			<input type='submit' name='dummy_11' value='{t}Refresh{/t}'>
+		{else}
+			<input type='submit' name='menu_dialog_whats_done' value='{t}Show changes{/t}'>
+		{/if}
+
+		<p class='seperator'>&nbsp;</p>	
+
+		<div style='width:99%; text-align:right; padding-top:5px;'>
+			<input type='submit' name='migrate_menus' value='{t}Apply{/t}'>
+			&nbsp;
+			<input type='submit' name='menu_dialog_cancel' value='{t}Cancel{/t}'>
+		</div>
 	{/if}
     </div>
 </div>

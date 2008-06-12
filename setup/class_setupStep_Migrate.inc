@@ -86,6 +86,14 @@ class Step_Migrate extends setup_step
   var $device_dialog         = FALSE;
   var $device                = array();
 
+  /* Service migration */
+  var $service_dialog         = FALSE;
+  var $service                = array();
+
+  /* Group menus */
+  var $menu_dialog           = FALSE;
+  var $menu                  = array();
+
   /* Win-Workstations outside to reserved ou */
   var $outside_winstations        = array();
   var $outside_winstations_dialog = FALSE;
@@ -125,61 +133,73 @@ class Step_Migrate extends setup_step
     $this->checks['permissions']['STATUS']    = FALSE;
     $this->checks['permissions']['STATUS_MSG']= "";
     $this->checks['permissions']['ERROR_MSG'] = "";
-    $this->check_ldap_permissions();
+//    $this->check_ldap_permissions();
 
     $this->checks['deps_visible']['TITLE']     = _("Checking for invisible departments");
     $this->checks['deps_visible']['STATUS']    = FALSE;
     $this->checks['deps_visible']['STATUS_MSG']= "";
-    $this->checks['deps_visible']['ERROR_MSG'] = "";
+//    $this->checks['deps_visible']['ERROR_MSG'] = "";
 
     $this->checks['users_visible']['TITLE']     = _("Checking for invisible users");
     $this->checks['users_visible']['STATUS']    = FALSE;
     $this->checks['users_visible']['STATUS_MSG']= "";
     $this->checks['users_visible']['ERROR_MSG'] = "";
-    $this->check_gosaAccounts();
+//    $this->check_gosaAccounts();
 
     $this->checks['acls']['TITLE']     = _("Checking for super administrator");
     $this->checks['acls']['STATUS']    = FALSE;
     $this->checks['acls']['STATUS_MSG']= "";
     $this->checks['acls']['ERROR_MSG'] = "";
-    $this->check_administrativeAccount();
+//    $this->check_administrativeAccount();
 
     $this->checks['outside_users']['TITLE']     = _("Checking for users outside the people tree");
     $this->checks['outside_users']['STATUS']    = FALSE;
     $this->checks['outside_users']['STATUS_MSG']= "";
     $this->checks['outside_users']['ERROR_MSG'] = "";
-    $this->search_outside_users();
-    
+//    $this->search_outside_users();
+
     $this->checks['outside_groups']['TITLE']     = _("Checking for groups outside the groups tree");
     $this->checks['outside_groups']['STATUS']    = FALSE;
     $this->checks['outside_groups']['STATUS_MSG']= "";
     $this->checks['outside_groups']['ERROR_MSG'] = "";
-    $this->search_outside_groups();
-    $this->check_organizationalUnits();
+//    $this->search_outside_groups();
+//    $this->check_organizationalUnits();
 
     $this->checks['outside_winstations']['TITLE']     = _("Checking for windows workstations outside the winstation tree");
     $this->checks['outside_winstations']['STATUS']    = FALSE;
     $this->checks['outside_winstations']['STATUS_MSG']= "";
     $this->checks['outside_winstations']['ERROR_MSG'] = "";
-    $this->search_outside_winstations();
+//    $this->search_outside_winstations();
 
     $this->checks['uidNumber_usage']['TITLE']     = _("Checking for duplicated UID numbers");
     $this->checks['uidNumber_usage']['STATUS']    = FALSE;
     $this->checks['uidNumber_usage']['STATUS_MSG']= "";
     $this->checks['uidNumber_usage']['ERROR_MSG'] = "";
-    $this->check_uidNumber();
-    
+//    $this->check_uidNumber();
+
     $this->checks['gidNumber_usage']['TITLE']     = _("Checking for duplicate GID numbers");
     $this->checks['gidNumber_usage']['STATUS']    = FALSE;
     $this->checks['gidNumber_usage']['STATUS_MSG']= "";
     $this->checks['gidNumber_usage']['ERROR_MSG'] = "";
-    $this->check_gidNumber();
+//    $this->check_gidNumber();
 
     $this->checks['old_style_devices']['TITLE']     = _("Checking for old style USB devices");
     $this->checks['old_style_devices']['STATUS']    = FALSE;
     $this->checks['old_style_devices']['STATUS_MSG']= "";
     $this->checks['old_style_devices']['ERROR_MSG'] = "";
-    $this->check_usb_devices();
+//    $this->check_usb_devices();
+
+    $this->checks['old_style_services']['TITLE']     = _("Checking for old services that have to be migrated");
+    $this->checks['old_style_services']['STATUS']    = FALSE;
+    $this->checks['old_style_services']['STATUS_MSG']= "";
+    $this->checks['old_style_services']['ERROR_MSG'] = "";
+//    $this->check_services();
+
+    $this->checks['old_style_menus']['TITLE']     = _("Checking for old style application menus");
+    $this->checks['old_style_menus']['STATUS']    = FALSE;
+    $this->checks['old_style_menus']['STATUS_MSG']= "";
+    $this->checks['old_style_menus']['ERROR_MSG'] = "";
+    $this->check_menus();
   }
 
 
@@ -1593,6 +1613,94 @@ class Step_Migrate extends setup_step
       return($smarty->fetch(get_template_path("setup_migrate.tpl",TRUE,dirname(__FILE__))));
     }
 
+
+    /*************
+     * Service migration 
+     *************/
+   
+    if($this->service_dialog) {
+      $this->check_service_posts();
+    }
+ 
+    if(isset($_POST['service_dialog_cancel'])){
+      $this->service_dialog = FALSE;
+      $this->show_details = FALSE;
+      $this->dialog = FALSE;
+    }
+   
+    if(isset($_POST['service_dialog_whats_done'])){
+      $this->show_details= TRUE;
+    }
+ 
+    if(isset($_POST['service_dialog_refresh'])){
+      $this->show_details= FALSE;
+    }
+
+    if(isset($_POST['migrate_services'])){
+      $this->migrate_usb_services();
+#      $this->dialog = FALSE;
+ #     $this->show_details = FALSE;
+  #    $this->service_dialog = FALSE;
+   #   $this->initialize_checks();
+    }
+
+    if(isset($_POST['service_dialog'])){
+      $this->service_dialog = TRUE;
+      $this->dialog = TRUE;
+    }
+    
+    if($this->service_dialog){
+      $smarty = get_smarty();
+      $smarty->assign("method","services");
+      $smarty->assign("services",$this->service);
+      $smarty->assign("service_details", $this->show_details);
+      return($smarty->fetch(get_template_path("setup_migrate.tpl",TRUE,dirname(__FILE__))));
+    }
+
+
+    /*************
+     * Menu migration 
+     *************/
+   
+    if($this->menu_dialog) {
+      $this->check_menu_posts();
+    }
+ 
+    if(isset($_POST['menu_dialog_cancel'])){
+      $this->menu_dialog = FALSE;
+      $this->show_details = FALSE;
+      $this->dialog = FALSE;
+    }
+   
+    if(isset($_POST['menu_dialog_whats_done'])){
+      $this->show_details= TRUE;
+    }
+ 
+    if(isset($_POST['menu_dialog_refresh'])){
+      $this->show_details= FALSE;
+    }
+
+    if(isset($_POST['migrate_menus'])){
+      $this->migrate_usb_menus();
+#      $this->dialog = FALSE;
+ #     $this->show_details = FALSE;
+  #    $this->menu_dialog = FALSE;
+   #   $this->initialize_checks();
+    }
+
+    if(isset($_POST['menu_dialog'])){
+      $this->menu_dialog = TRUE;
+      $this->dialog = TRUE;
+    }
+    
+    if($this->menu_dialog){
+      $smarty = get_smarty();
+      $smarty->assign("method","menus");
+      $smarty->assign("menus",$this->menu);
+      $smarty->assign("menu_details", $this->show_details);
+      return($smarty->fetch(get_template_path("setup_migrate.tpl",TRUE,dirname(__FILE__))));
+    }
+
     $smarty = get_smarty();
     $smarty->assign("checks",$this->checks);
     $smarty->assign("method","default");
@@ -2211,6 +2319,417 @@ class Step_Migrate extends setup_step
               unset($this->device[$key]);
             }
           }
+        }
+      }
+    }
+  }
+
+
+
+  function check_services()
+  {
+    /* Establish ldap connection */
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
+        $cv['password'],
+        $cv['connection'],
+        FALSE,
+        $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
+    $this->service = array();
+
+    /* Check for Ldap services that must be migrated 
+     */ 
+    $ldap->cd($cv['base']);
+    $res = $ldap->search("(objectClass=goLdapServer)", array("goLdapBase", "cn"));
+
+    /* Check if we were able to query the ldap server 
+     */
+    if(!$res){
+      $this->checks['old_style_services']['STATUS']    = FALSE;
+      $this->checks['old_style_services']['STATUS_MSG']= _("LDAP query failed");
+      $this->checks['old_style_services']['ERROR_MSG'] = _("Possibly the 'root object' is missing.");
+      return;
+    }
+
+    /* Walk through each configured ldap server 
+        and check if it is configured correctly.
+     */
+    while($attrs = $ldap->fetch()){
+      $dn= $attrs['dn'];
+      $uri= $attrs['goLdapBase'][0];
+      if (! preg_match("!^ldaps?://!", $uri)){
+        $this->service[] = array(
+            "TYPE"    => "modify" , 
+            "DN"      => $dn, 
+            "DETAILS" => FALSE, 
+            "ATTRS"   => array("goLdapBase" => "ldap://".$attrs['cn'][0]."/$uri"),
+            "CURRENT" => "goLdapBase: ".$uri,
+            "AFTER"   => "goLdapBase: "."ldap://".$attrs['cn'][0]."/$uri");
+      }
+    }
+
+    /* Other sevices following here later ...maybe
+     */
+
+    /*  Update status message
+     */
+    if(count($this->service)){
+      $this->checks['old_style_services']['STATUS']    = FALSE;
+      $this->checks['old_style_services']['STATUS_MSG']= _("Failed");
+      $this->checks['old_style_services']['ERROR_MSG'] =
+        sprintf(_("There are %s services that need to be migrated."),
+            count($this->service)).
+        "<input type='submit' name='service_dialog' value='"._("Migrate")."'>";
+    }else{
+      $this->checks['old_style_services']['STATUS']    = TRUE;
+      $this->checks['old_style_services']['STATUS_MSG']= _("Ok");
+      $this->checks['old_style_services']['ERROR_MSG'] = "";
+    }
+  }
+
+
+  function migrate_usb_services()
+  {
+    /* Establish ldap connection 
+     */
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
+        $cv['password'],
+        $cv['connection'],
+        FALSE,
+        $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
+
+    /* Handle each service 
+     */
+    foreach($this->service as $key => $service){
+      if($service['DETAILS']){
+
+        /* Handle modify requests 
+         */
+        if($service['TYPE'] == "modify"){
+          $ldap->cd($service['DN']);
+          $ldap->modify($service['ATTRS']);
+
+          /* Check if everything done was successful 
+           */
+          if(!$ldap->success()){
+            msg_dialog::display(_("LDAP error"), 
+                sprintf(_("Ldap update failed for %s with error %s"),
+                  "<b>".LDAP::fix($service['DN'])."</b>", 
+                  "<br><br><i>".$ldap->get_error()."</b>"), ERROR_DIALOG);
+          }else{
+        
+            /* Remove action from list 
+             */
+            unset($this->service[$key]);
+          }
+        }
+      }
+    }
+  }
+
+
+  function check_service_posts()
+  {
+    foreach($this->service as $key => $service){
+      if(isset($_POST["migrate_".$key])){
+        $this->service[$key]['DETAILS'] =TRUE;
+      }else{
+        $this->service[$key]['DETAILS'] =FALSE;
+      }
+    }
+  }
+
+
+  function check_menus()
+  {
+
+    $start = microtime(1);
+
+    /* Establish ldap connection
+     */
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
+        $cv['password'],
+        $cv['connection'],
+        FALSE,
+        $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
+
+    /* First detect all release names 
+     */
+    $ldap->cd($cv['base']);
+    $res = $ldap->search("(&(objectClass=organizational)(objectClass=FAIbranch))",array("ou","objectClass"));
+
+    /* Check if we were able to query the ldap server
+     */
+    if(!$res){
+      $this->checks['old_style_menus']['STATUS']    = FALSE;
+      $this->checks['old_style_menus']['STATUS_MSG']= _("LDAP query failed");
+      $this->checks['old_style_menus']['ERROR_MSG'] = _("Possibly the 'root object' is missing.");
+      return;
+    }
+
+
+    $releases = array();
+    while($attrs = $ldap->fetch()){
+      if(preg_match("/,ou=fai,/",$attrs['dn']) && in_array("organizationalUnit",$attrs['objectClass'])){
+        $tmp = split("\,",$attrs['dn']);
+        $fai_base = preg_replace("/,ou=fai,.*$/","",$attrs['dn']);
+        $releases[convert_department_dn($fai_base,$cv['base'])] = $attrs['dn'];
+      }
+    }
+
+
+    $amap= array();
+    $ldap->cd($cv['base']);
+    $ldap->search("(objectClass=gosaApplication)", array("cn", "gosaApplicationParameter"));
+    while($info = $ldap->fetch()){
+      if (isset($info['gosaApplicationParameter']['count'])){
+        for ($j= 0; $j < $info['gosaApplicationParameter']['count']; $j++){
+          $p= preg_replace("/^([^:]+):.*$/", "$1", $info['gosaApplicationParameter'][$j]);
+
+          if(!isset($amap[$info['cn'][0]]) || !in_array($p, $amap[$info['cn'][0]])){
+            $amap[$info['cn'][0]][]= $p;
+          }
+        }
+      } else {
+        $amap[$info['cn'][0]]= array();
+      }
+    }
+
+    /* Search for all groups */  
+    $ldap->cd($cv['base']);
+    $ldap->search("(&(objectClass=gosaApplicationGroup)(objectClass=posixGroup)(FAIrelease=*))",
+        array("gosaMemberApplication","gosaApplicationParameter","FAIrelease","objectClass"));
+    $appgroups = array();
+
+    /* Create readable prefix for "What will be done" infos 
+     */
+    $s_add = "<i>"._("add")."</i>\t";
+    $s_del = "<i>"._("remove")."</i>\t";
+
+    /* Walk through all found old-style menu configurations.
+        -Prepare ldap update list     $data   
+        -Prepare printable changes    $after/$current
+     */
+    while($info = $ldap->fetch()){
+
+      $data = array();
+      $current = "";
+      $after ="";
+
+      /* Collect application parameter for this group
+       */
+      $params= array();
+      if(isset($info['gosaApplicationParameter'])){
+        for ($i= 0; $i < $info['gosaApplicationParameter']['count']; $i++){
+          $name= preg_replace("/^([^:]+):.*$/", "$1", $info['gosaApplicationParameter'][$i]);
+          $params[$name]= $info['gosaApplicationParameter'][$i];
+        }
+      }
+
+      /* Create release dn part.
+          eg.   "sisa/1.0.0" => "ou=1.0.0,ou=siga,"
+       */ 
+      $release = "";
+      $r = $info['FAIrelease'][0];
+      $z = split("/",$r);
+      foreach($z as $part){
+
+        if(empty($part)){
+          echo __LINE__; exit();
+        }else{
+          $release = "ou=".$part.",".$release;
+
+          /* Append release department information to "What will be done" info
+           */
+          $release_dn = $release.$info['dn'];
+          $after   .=  $s_add."dn: $release_dn\n";
+          $after   .=  $s_add."objectClass: top\n";
+          $after   .=  $s_add."objectClass: FAIbranch\n";
+          $after   .=  $s_add."objectClass: organizationalUnit\n";
+          $after   .=  $s_add."ou: $part\n";
+
+          /* Appen release data to ldap actions 
+           */
+          $d = array();
+          $d['objectClass'] = array("top","FAIbranch","organizationalUnit");
+          $d['ou']          = $part;
+          $data['ADD'][$release_dn]= $d;
+        }
+      }
+
+      /* Add member applications to the array.
+       */ 
+      $current .= "dn: ".$info['dn']."\n";
+      $menu_structure = array();
+      for ($i= 0; $i < $info['gosaMemberApplication']['count']; $i++){
+        list($name, $location, $priority)= explode("|", $info['gosaMemberApplication'][$i]);
+
+        /* Create location dn 
+         */
+        $location_dn ="";
+        if(!empty($location)){
+          $location_dn ="cn=".$location.",";
+        }
+
+        /* Append old style element to current detail informations 
+         */      
+        $current .= $s_del."gosaMemberApplication: ".$info['gosaMemberApplication'][$i]."\n";
+
+        /* Append ldap update action to remove the old menu entry 
+         */
+        unset($info['objectClass']['count']);
+        $d = array();
+        $d['gosaMemberApplication']      = array();
+        $d['gosaApplicationParameter']  = array();
+        if(isset($info['FAIrelease'])){
+          $d['FAIrelease'] = array();
+        }
+        $d['objectClass']               = array_remove_entries(array("gosaApplicationGroup","FAIreleaseTag"),$info['objectClass']);
+        $data['MODIFY'][$info['dn']]    = $d;
+
+        /* Create new application menu structure 
+         */
+        if (isset($amap[$name])){
+
+          /* Append missing menu structure to "What is done info"
+           */
+          if(!isset($menu_structure[$location]) && !empty($location)){
+            $menu_structure[$location] = TRUE;
+            $after .= "\n";
+            $after .= $s_add."dn: $location_dn$release_dn\n";
+            $after .= $s_add."objectClass: gotoSubmenuEntry\n";
+            $after .= $s_add."cn: $location\n";
+
+            $d = array();
+            $d['cn'] = $location;
+            $d['objectClass'] = array("gotoSubmenuEntry");
+            $data['ADD'][$location_dn.$release_dn] = $d;
+          }
+
+
+
+          /* Append missing menu entry to "What is done info"
+           */
+          if(empty($name)){
+            echo __LINE__; exit();
+          }else{
+            $after .= "\n";
+            $after .= $s_add."dn: cn=$name,$location_dn$release_dn\n";
+            $after .= $s_add."objectClass: gotoMenuEntry\n";
+            $after .= $s_add."cn: $name\n";
+            $after .= $s_add."gosaApplicationPriority: $priority\n";
+
+            $d= array();
+            $d['objectClass'] = array("gotoMenuEntry");
+            $d['cn']          = $name;
+            $d['gosaApplicationPriority'] = $priority;
+
+            foreach ($amap[$name] as $n){
+              if (isset($params[$n])){
+                $after .= $s_add."gosaApplicationParameter: ".$params[$n]."\n";
+                $d['gosaApplicationParameter'][] = $params[$n];
+              }
+            }
+            $data['ADD']["cn=$name,$location_dn$release_dn"] = $d;
+          }         
+        }
+      }
+ 
+      $todo[] = array(
+          "DETAILS" => FALSE,
+          "DN"      => $info['dn'],
+          "AFTER"   => $after,
+          "CURRENT" => $current,
+          "TODO"    => $data
+          );
+    }
+    $this->menu = $todo;
+
+    /* Check if we were able to query the ldap server
+     */
+    if(count($this->menu)){
+      $this->checks['old_style_menus']['STATUS']    = FALSE;
+      $this->checks['old_style_menus']['STATUS_MSG']= "<font style='color:#F0A500'>"._("Warning")."</font>";
+      $this->checks['old_style_menus']['ERROR_MSG'] = sprintf(_("There are %s application menus which have to be converted."),
+                                                      count($this->menu))."<input type='submit' name='menu_dialog' value='"._("Migrate")."'>";
+    }else{
+      $this->checks['old_style_menus']['STATUS']    = TRUE;
+      $this->checks['old_style_menus']['STATUS_MSG']= _("Ok");
+      $this->checks['old_style_menus']['ERROR_MSG'] = "";
+
+    }
+  }
+
+  function check_menu_posts()
+  {
+    foreach($this->menu as $key => $menu){
+      if(isset($_POST["migrate_".$key])){
+        $this->menu[$key]['DETAILS'] =TRUE;
+      }else{
+        $this->menu[$key]['DETAILS'] =FALSE;
+      }
+    }
+  }
+
+  function migrate_usb_menus()
+  {
+
+    /* Establish ldap connection
+     */
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
+        $cv['password'],
+        $cv['connection'],
+        FALSE,
+        $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
+
+    /* First detect all release names
+     */
+    $ldap->cd($cv['base']);
+
+    foreach($this->menu as $key => $menu){
+      if($menu['DETAILS']) {
+
+        $success = TRUE;
+        foreach($menu['TODO']['ADD'] as $dn => $data){
+          $ldap->cd($cv['base']);
+          $base = preg_replace("/^[^,]+,/","",$dn);
+          if(!$ldap->dn_exists($base)){
+            echo "FEHLER !!! ES FEHLT : ".$base."<br>";
+          }elseif(!$ldap->dn_exists($dn)){
+            $ldap->cd($dn);
+            $ldap->add($data);
+            if (!$ldap->success()){
+              msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_ADD, get_class()));
+              $success = FALSE;
+            }
+          }
+        }
+
+        foreach($menu['TODO']['MODIFY'] as $dn => $data){
+          if(!$ldap->dn_exists($dn)){
+            echo "FEHLER !!! ES FEHLT : ".$dn."<br>";
+          }else{
+            $ldap->cd($dn);
+            $ldap->modify($data);
+            if (!$ldap->success()){
+              msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, get_class()));
+              $success = FALSE;
+            }
+          }
+        }
+        if($success){
+          unset($this->menu[$key]);
         }
       }
     }
