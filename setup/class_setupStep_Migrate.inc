@@ -2506,7 +2506,7 @@ class Step_Migrate extends setup_step
     /* Search for all groups */  
     $ldap->cd($cv['base']);
     $ldap->search("(&(objectClass=gosaApplicationGroup)(objectClass=posixGroup)(FAIrelease=*))",
-        array("gosaMemberApplication","gosaApplicationParameter","FAIrelease","objectClass"));
+        array("gosaMemberApplication","gosaApplicationParameter","FAIrelease","objectClass","gosaUnitTag"));
     $appgroups = array();
 
     /* Create readable prefix for "What will be done" infos 
@@ -2523,6 +2523,13 @@ class Step_Migrate extends setup_step
       $data = array();
       $current = "";
       $after ="";
+
+      /* Get unit tag 
+       */
+      $tag ="";
+      if(isset($info['gosaUnitTag'])){
+        $tag = $info['gosaUnitTag'][0];
+      }
 
       /* Collect application parameter for this group
        */
@@ -2554,12 +2561,23 @@ class Step_Migrate extends setup_step
           $after   .=  $s_add."objectClass: top\n";
           $after   .=  $s_add."objectClass: FAIbranch\n";
           $after   .=  $s_add."objectClass: organizationalUnit\n";
+         
+          /* Append UnitTag 
+           */ 
+          if($tag != ""){ 
+            $after   .=  $s_add."objectClass: gosaAdministrativeUnitTag\n";
+            $after   .=  $s_add."gosaUnitTag: $tag\n";
+          }
           $after   .=  $s_add."ou: $part\n";
 
           /* Appen release data to ldap actions 
            */
           $d = array();
           $d['objectClass'] = array("top","FAIbranch","organizationalUnit");
+          if(!empty($tag)){
+            $d['objectClass'][] = "gosaAdministrativeUnitTag";
+            $d['gosaUnitTag']   = $tag;
+          }
           $d['ou']          = $part;
           $data['ADD'][$release_dn]= $d;
         }
@@ -2592,6 +2610,7 @@ class Step_Migrate extends setup_step
         if(isset($info['FAIrelease'])){
           $d['FAIrelease'] = array();
         }
+        
         $d['objectClass']               = array_remove_entries(array("gosaApplicationGroup","FAIreleaseTag"),$info['objectClass']);
         $data['MODIFY'][$info['dn']]    = $d;
 
@@ -2606,14 +2625,26 @@ class Step_Migrate extends setup_step
             $after .= "\n";
             $after .= $s_add."dn: $location_dn$release_dn\n";
             $after .= $s_add."objectClass: gotoSubmenuEntry\n";
-            $after .= $s_add."cn: $location\n";
 
+            /* Append UnitTag
+             */
+            if($tag != ""){
+              $after   .=  $s_add."objectClass: gosaAdministrativeUnitTag\n";
+              $after   .=  $s_add."gosaUnitTag: $tag\n";
+            }
+            $after .= $s_add."cn: $location\n";
+  
+            /* Create ldap entry to append 
+             */
             $d = array();
             $d['cn'] = $location;
             $d['objectClass'] = array("gotoSubmenuEntry");
+            if(!empty($tag)){
+              $d['objectClass'][] = "gosaAdministrativeUnitTag";
+              $d['gosaUnitTag']   = $tag;
+            }
             $data['ADD'][$location_dn.$release_dn] = $d;
           }
-
 
 
           /* Append missing menu entry to "What is done info"
@@ -2624,11 +2655,21 @@ class Step_Migrate extends setup_step
             $after .= "\n";
             $after .= $s_add."dn: cn=$name,$location_dn$release_dn\n";
             $after .= $s_add."objectClass: gotoMenuEntry\n";
+            if($tag != ""){
+              $after   .=  $s_add."objectClass: gosaAdministrativeUnitTag\n";
+              $after   .=  $s_add."gosaUnitTag: $tag\n";
+            }
             $after .= $s_add."cn: $name\n";
             $after .= $s_add."gosaApplicationPriority: $priority\n";
 
+            /* Create ldap entry
+             */
             $d= array();
             $d['objectClass'] = array("gotoMenuEntry");
+            if(!empty($tag)){
+              $d['objectClass'][] = "gosaAdministrativeUnitTag";
+              $d['gosaUnitTag']   = $tag;
+            }
             $d['cn']          = $name;
             $d['gosaApplicationPriority'] = $priority;
 
@@ -2733,6 +2774,7 @@ class Step_Migrate extends setup_step
         }
       }
     }
+    $this->check_menus();
   }
 }
 
