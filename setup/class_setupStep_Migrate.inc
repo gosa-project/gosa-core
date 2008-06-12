@@ -2516,7 +2516,7 @@ class Step_Migrate extends setup_step
         which configured parameter belongs to which application entry.
      */
     $amap= array();
-    $toto = array();
+    $todo = array();
     $ldap->cd($cv['base']);
     $ldap->search("(objectClass=gosaApplication)", array("cn", "gosaApplicationParameter"));
     while($info = $ldap->fetch()){
