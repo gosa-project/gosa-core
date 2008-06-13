@@ -324,7 +324,8 @@ class departmentManagement extends plugin
 
     /* This department must be tagged (Is called from iframe, generates output)*/
     if(isset($_GET['TagDepartment'])){
-      $this->deptabs->by_object['department']->tag_objects();
+      $base_name = $this->deptabs->base_name;
+      $this->deptabs->by_object[$base_name]->tag_objects();
       exit();  
     }
 
