@@ -210,6 +210,7 @@ class divListDepartment extends MultiSelectWindow
         "IMG"       => "plugins/departments/images/country.png", "ABBR" => "c");
     $types['locality']           = array("ACL" => "locality",     "ATTR" => "l",
         "TITLE"     => _("Department"),
+        "IMG_FULL"  => "plugins/departments/images/locality.png", 
         "IMG"       => "plugins/departments/images/locality.png", "ABBR" => "l");
     $types['organizationalUnit'] = array("ACL" => "department",   "ATTR" => "ou",
         "TITLE"     => _("Department"),
@@ -217,12 +218,15 @@ class divListDepartment extends MultiSelectWindow
         "IMG"       => "images/lists/folder.png", "ABBR" => "ou");
     $types['organization']       = array("ACL" => "organization", "ATTR" => "o",
         "TITLE"     => _("Department"),
+        "IMG_FULL"  => "plugins/departments/images/organization.png", 
         "IMG"       => "plugins/departments/images/organization.png", "ABBR" => "o");
     $types['Alias??']            = array("ACL" => "alias"     ,    "ATTR" => "alias?",
         "TITLE"     => _("Department"),
+        "IMG_FULL"  => "plugins/departments/images/department_alias.png", 
         "IMG"       => "plugins/departments/images/department_alias.png", "ABBR" => "alias");
     $types['Referal??']          = array("ACL" => "referal",       "ATTR" => "referal?",
         "TITLE"     => _("Department"),
+        "IMG_FULL"  => "plugins/departments/images/department_referal.png", 
         "IMG"       => "plugins/departments/images/department_referal.png", "ABBR" => "referal");
 
     $this->departments = $list;

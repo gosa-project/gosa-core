@@ -81,13 +81,11 @@ class departmentManagement extends plugin
         $s_action = "del";
         $s_entry  = preg_replace("/dep_".$s_action."_/i","",$key);
         $s_entry  = preg_replace("/_.*$/","",$s_entry);
-        $s_entry  = base64_decode($s_entry);
         // Post for edit
       }elseif(preg_match("/dep_edit_.*/",$key)){
         $s_action="edit";
         $s_entry  = preg_replace("/dep_".$s_action."_/i","",$key);
         $s_entry  = preg_replace("/_.*$/","",$s_entry);
-        $s_entry  = base64_decode($s_entry);
         // Post for new
       }elseif(preg_match("/^remove_multiple_departments/",$key)){
         $s_action="del_multiple";
@@ -143,7 +141,7 @@ class departmentManagement extends plugin
      * The entry which will be edited is defined in $s_entry
      */
     if (( $s_action=="edit") && (!isset($this->deptabs->config))){
-      $this->dn= $this->config->departments[trim($s_entry)];
+      $this->dn= $this->departments[trim($s_entry)]['dn'];
 
       if (($user= get_lock($this->dn)) != ""){
         return(gen_locked_message ($user, $this->dn));
@@ -490,13 +488,20 @@ class departmentManagement extends plugin
 
     /* In case of a valid back button create entry 
      */
-    if(isset($tmp[$base_back])){
-      $tmp = array();
-      $tmp['dn']          = $base_back;
-      $tmp['ou'][0]       = "..";
-      $tmp['objectClass'] = array("organizationalUnit","gosaDepartment");
-      $tmp['description'][0] = msgPool::backButton();
-      $deps= array_merge(array($tmp),$deps);
+    if(isset($tmp[$base])){
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cd($this->config->current['BASE']);
+      $ldap->cat($base );
+      $attr = $ldap->fetch();
+      foreach($types as $oc => $type){
+        if(in_array($oc,$attr['objectClass'])){
+          $attr[$type['ATTR']][0] = ".";
+        }
+      }
+      if(isset($attr['description'])){
+         unset($attr['description']);
+      }
+      $deps= array_merge(array($attr),$deps);
     }
 
     $this->departments = array_values($deps);
