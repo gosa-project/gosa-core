@@ -241,7 +241,6 @@ class divListOGroup extends MultiSelectWindow
     /* Add Copy & Paste buttons if copy&paste is enabled
      */
     // Defining Links
-    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
     $editlink = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=edit_entry'>%s</a>";
     $userimg  = "<img class='center' src='plugins/groups/images/groups.png' alt='User'    title='%s'>";
     $mailimg  = "<img class='center' src='plugins/ogroups/images/mail.png'             alt='M'  title='"._("Mail")   ."'>";
