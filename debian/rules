@@ -73,7 +73,7 @@ install-stamp:
 	-mv debian/gosa/usr/share/gosa/bin/* debian/gosa/usr/bin
 	-rm -rf debian/gosa/usr/share/gosa/bin
 	-rm -rf debian/gosa/usr/share/doc/gosa/marketing
-	-find debian/gosa -type f -exec chmod -x {} \; &> /dev/null
+	-find debian/gosa -type f -exec chmod -x {} \; >/dev/null 2>&1
 	-chmod +x debian/gosa/usr/bin/mkntpasswd
 	-rm -rf debian/gosa/usr/share/gosa/doc/guide/user/*/lyx-source
 	-rm -rf debian/gosa/usr/share/gosa/doc/guide/admin

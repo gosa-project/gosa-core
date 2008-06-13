@@ -1,6 +1,16 @@
 README.Debian for GOsa 2.5
 --------------------------
 
+* Migrating from earlier Versions
+
+There was a schema change somewhere before 2.5. If you have goServer objects
+inside of your LDAP, you need to export your LDAP contents and add a
+
+objectClass: GOhard
+
+to every entry containing the goServer objectclass.
+
+
 * Configure GOsa
 
 By default you can point your favorite browser to the GOsa setup by
@@ -77,6 +87,8 @@ This can be achieved by running:
 # gosa-encrypt-passwords
 # Remove the comment for /etc/gosa/gosa.secrets in /etc/gosa/apache.conf
 # /etc/init.d/apache2 reload
+
+
 
 ----
 Cajus Pollmeier <cajus@debian.org>  Fri 02 Jun 2006 16:23:50 +0200
