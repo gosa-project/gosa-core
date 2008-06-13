@@ -410,6 +410,15 @@ A: You can set a nesting limit which ensures that the user names will not be
    </location>
 
 
+Q: I want to disable the "Is the configuration file up to date?" check when logging in.
+   How can I disable this check?
+
+A: Just set the config_version attribute to an empty value:
+   <conf config_version="" >
+
+ 
+
+
 	
 
 
