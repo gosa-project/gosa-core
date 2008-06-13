@@ -525,11 +525,11 @@ class MultiSelectWindow{
     /* Open selected department
        this is posted by the parent class MultiSelectWindow */
     if(isset($_GET['act'])&& ($_GET['act'] == "dep_open")){
-      $s_entry = base64_decode($_GET['dep_id']);
-      if (!isset($this->config->departments[$s_entry])){
+      $s_entry = $_GET['dep_id'];
+      if (!isset($this->departments[$s_entry])){
         msg_dialog::display(_("LDAP error"), sprintf(_("Inconsistent DN encoding detected: '%s'"), LDAP::fix($s_entry)), ERROR_DIALOG);
       } else {
-        $this->selectedBase = $this->config->departments[$s_entry];
+        $this->selectedBase = $this->departments[$s_entry]['dn'];
       }
     }
 
@@ -658,7 +658,7 @@ class MultiSelectWindow{
 
 		/* Get all departments within this subtree */
 		$deps= get_list("(&(|(ou=*)(description=*))(objectClass=gosaDepartment))", $this->module, $base,
-                    array("ou", "description"), GL_SIZELIMIT | GL_CONVERT);
+                    array("ou", "description"), GL_SIZELIMIT );
 
 		/* Edit delete link for system types
 		 */
@@ -667,50 +667,42 @@ class MultiSelectWindow{
 		/* Create an array with all visible (in the list) departments */
 		$departments = array();
 		foreach($deps as $value){
-			if(isset($value['description'][0])){
-				$this->departments[$value['dn']]= get_sub_department($value['dn'])." - [".$value["description"][0]."]";
-			}else{
-				$this->departments[$value['dn']]= get_sub_department($value['dn']);
-			}
+      $name = $value['ou'][0]." -".$value['dn'];
+		  $this->departments[$name]= $value; 
 		}
-		natcasesort($this->departments);
-
-
-    if($empty_tabs_in_front){
-#      $numtabs -= $empty_tabs_in_front;
-    }
+    uksort($this->departments, 'strnatcasecmp');
+    $this->departments = array_values($this->departments);
   
 		/* Add deps to this dialog object list */
 		foreach($this->departments as $key=> $val){
 
-			/* Add missing entries ... */
-			if(!isset($this->config->departments[trim($key)])){
-				$this->config->departments[trim($key)]="";
-			}
+      /* Check if this department contains sub-departments
+         Display different image in this case
+       */
+      $non_empty="";
+      foreach($this->config->departments as $keyd){
+        if(preg_match("/,".normalizePreg($val['dn'])."$/",$keyd)){
+          $non_empty="-full";
+        }
+      }
 
-			/* check if this department contains sub-departments
-			   Display different image in this case
-			 */
-			$non_empty="";
-			$nkey= normalizePreg($key);
-			foreach($this->config->departments as $keyd=>$vald ){
-				if(preg_match('/$nkey\/.*/',$keyd)){
-					$non_empty="-full";
-				}
-			}
-
-			/* Add to divlist */
+			/* Add spacer cols to divlist 
+       */
 			$row = array();
-
       if($empty_tabs_in_front){
         for($i = 0; $i < $empty_tabs_in_front ; $i ++){
           $row[] = array("string"=>"&nbsp;", "attach" => "style='text-align:center;width:20px;'");
         }
       }
 
-			$row[]=$field1=array("string"=>"<img src='images/lists/folder".$non_empty.".png' alt='department'>","attach"=>"style='text-align:center;width:20px;'");
-			$row[]=$field2=array("string"=>sprintf($linkopen,base64_encode($key),$val), "attach" => "style=''");
+      /* Add departments
+       */
+      $img = "<img src='images/lists/folder".$non_empty.".png' alt='department'>";
+			$row[]=$field1=array("string"=> $img,"attach"=>"style='text-align:center;width:20px;'");
+			$row[]=$field2=array("string"=>sprintf($linkopen,$key,$val['ou'][0]), "attach" => "style=''");
 
+      /* Add spacer tabs 
+       */
 			if($numtabs > 2){	
 				for($i = 2 ; $i < $numtabs;$i++){
           if(isset( $this->array_Header[$i + $empty_tabs_in_front]['attach'])){
