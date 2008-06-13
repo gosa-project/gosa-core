@@ -141,20 +141,48 @@ class departmentManagement extends plugin
      * The entry which will be edited is defined in $s_entry
      */
     if (( $s_action=="edit") && (!isset($this->deptabs->config))){
-      $this->dn= $this->departments[trim($s_entry)]['dn'];
 
-      if (($user= get_lock($this->dn)) != ""){
-        return(gen_locked_message ($user, $this->dn));
+      /* Possible department types
+       */
+      $types['country']            = array("ACL" => "country",      "TAB" => "COUNTRY_TABS");
+      $types['locality']           = array("ACL" => "locality",     "TAB" => "LOCALITY_TABS");
+      $types['organizationalUnit'] = array("ACL" => "department",   "TAB" => "DEPTABS");
+      $types['organization']       = array("ACL" => "organization", "TAB" => "ORGANIZATION_TABS");
+      $types['Alias??']            = array("ACL" => "alias"     ,   "TAB" => "");
+      $types['Referal??']          = array("ACL" => "referal",      "TAB" => "");
+
+      $this->dn= $this->departments[trim($s_entry)]['dn'];
+      $entry   = $this->departments[trim($s_entry)];
+
+      /* Detect department type 
+       */ 
+      $data = array();
+      foreach($types as $oc => $type){
+        if(in_array($oc,$entry['objectClass'])){
+          $data = $type;
+          break;
+        }
       }
 
-      /* Lock the current entry, so everyone will get the  above dialog */
-      add_lock ($this->dn, $this->ui->dn);
+      /* Check if the department type was editable 
+       */
+      if(!count($data)){
+        trigger_error("Unknown department type skipped '".$this->dn."'.");
+      }else{
 
-      /* Register deptabs to trigger edit dialog */
-      $this->deptabs= new deptabs($this->config,$this->config->data['TABS']['DEPTABS'], $this->dn,"department");
-      $this->deptabs->set_acl_base($this->dn);
+        if (($user= get_lock($this->dn)) != ""){
+          return(gen_locked_message ($user, $this->dn));
+        }
 
-      session::set('objectinfo',$this->dn);
+        /* Lock the current entry, so everyone will get the  above dialog */
+        add_lock ($this->dn, $this->ui->dn);
+
+        /* Register deptabs to trigger edit dialog */
+        $this->deptabs= new deptabs($this->config,$this->config->data['TABS'][$data['TAB']], $this->dn,"department");
+        $this->deptabs->set_acl_base($this->dn);
+
+        session::set('objectinfo',$this->dn);
+      }
     }
 
 
