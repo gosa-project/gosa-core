@@ -695,11 +695,18 @@ class MultiSelectWindow{
         }
       }
 
+      /* Create entry name 
+       */
+      $name = $val['ou'][0];
+      if(isset($val['description'])){
+        $name .=  " - [".$val["description"][0]."]";
+      }
+
       /* Add departments
        */
       $img = "<img src='images/lists/folder".$non_empty.".png' alt='department'>";
 			$row[]=$field1=array("string"=> $img,"attach"=>"style='text-align:center;width:20px;'");
-			$row[]=$field2=array("string"=>sprintf($linkopen,$key,$val['ou'][0]), "attach" => "style=''");
+			$row[]=$field2=array("string"=>sprintf($linkopen,$key,$name), "attach" => "style=''");
 
       /* Add spacer tabs 
        */
