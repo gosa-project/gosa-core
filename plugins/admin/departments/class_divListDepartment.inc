@@ -135,7 +135,6 @@ class divListDepartment extends MultiSelectWindow
 
     /* Generate list head */
     $ui = get_userinfo();
-    $acl = $ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/department");
       
     /* Add default header */
     $listhead = MultiSelectWindow::get_default_header();
@@ -149,29 +148,41 @@ class divListDepartment extends MultiSelectWindow
     $s  = ".|"._("Actions")."|\n";
 
     /* Append create options */
-    if(preg_match("/c/",$acl)) {
-      $s .= "..|<img src='images/lists/new.png' alt='' border='0' class='center'>".
-        "&nbsp;"._("Create")."|\n";
+    $s .= "..|<img src='images/lists/new.png' alt='' border='0' class='center'>".
+      "&nbsp;"._("Create")."|\n";
+
+    if(preg_match("/c/",$ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/department"))) {
       $s.= "...|<input class='center' type='image' src='plugins/departments/images/department.png' alt=''>".
         "&nbsp;"._("Department")."&nbsp;(ou)|dep_new_ou|\n";
 
-      $s.= "...|<input class='center' type='image' src='plugins/departments/images/department.png' alt=''>".
-        "&nbsp;"._("Organization")."&nbsp;(o)|dep_new_o|\n";
-
-      $s.= "...|<input class='center' type='image' src='plugins/departments/images/department.png' alt=''>".
-        "&nbsp;"._("Country")."&nbsp;(c)"."|dep_new_c|\n";
-
-      $s.= "...|<input class='center' type='image' src='plugins/departments/images/department.png' alt=''>".
-        "&nbsp;"._("Locality")."&nbsp;(l)|dep_new_l|\n";
-
-      $s.= "...|<input class='center' type='image' src='plugins/departments/images/department.png' alt=''>".
-        "&nbsp;"._("Alias")."|dep_new_alias|\n";
-
-      $s.= "...|<input class='center' type='image' src='plugins/departments/images/department.png' alt=''>".
-        "&nbsp;"._("Referal")."|dep_new_referal|\n";
-
-      $s.= "..|---|\n";
     }
+
+    if(preg_match("/c/",$ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/organization"))) {
+      $s.= "...|<input class='center' type='image' src='plugins/departments/images/organization.png' alt=''>".
+        "&nbsp;"._("Organization")."&nbsp;(o)|dep_new_o|\n";
+    }
+
+    if(preg_match("/c/",$ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/country"))) {
+      $s.= "...|<input class='center' type='image' src='plugins/departments/images/country.png' alt=''>".
+        "&nbsp;"._("Country")."&nbsp;(c)"."|dep_new_c|\n";
+    }
+
+    if(preg_match("/c/",$ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/locality"))) {
+      $s.= "...|<input class='center' type='image' src='plugins/departments/images/locality.png' alt=''>".
+        "&nbsp;"._("Locality")."&nbsp;(l)|dep_new_l|\n";
+    }
+
+    if(preg_match("/c/",$ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/alias"))) {
+      $s.= "...|<input class='center' type='image' src='plugins/departments/images/department_alias.png' alt=''>".
+        "&nbsp;"._("Alias")."|dep_new_alias|\n";
+    }
+
+    if(preg_match("/c/",$ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/referal"))) {
+      $s.= "...|<input class='center' type='image' src='plugins/departments/images/department_referal.png' alt=''>".
+        "&nbsp;"._("Referal")."|dep_new_referal|\n";
+    }
+
+    $s.= "..|---|\n";
     $s.= "..|<img src='images/lists/trash.png' alt='' border='0' class='center'>".
       "&nbsp;"._("Remove")."|"."remove_multiple|\n";
 
@@ -190,64 +201,115 @@ class divListDepartment extends MultiSelectWindow
   {
     $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
 
+ 
+    /* Possible department types
+     */
+    $types['country']            = array("ACL" => "country",      "ATTR" => "c",
+        "TITLE"     => _("Department"),
+        "IMG_FULL"  => "plugins/departments/images/country.png", 
+        "IMG"       => "plugins/departments/images/country.png", "ABBR" => "c");
+    $types['locality']           = array("ACL" => "locality",     "ATTR" => "l",
+        "TITLE"     => _("Department"),
+        "IMG"       => "plugins/departments/images/locality.png", "ABBR" => "l");
+    $types['organizationalUnit'] = array("ACL" => "department",   "ATTR" => "ou",
+        "TITLE"     => _("Department"),
+        "IMG_FULL"  => "images/lists/folder-full.png", 
+        "IMG"       => "images/lists/folder.png", "ABBR" => "ou");
+    $types['organization']       = array("ACL" => "organization", "ATTR" => "o",
+        "TITLE"     => _("Department"),
+        "IMG"       => "plugins/departments/images/organization.png", "ABBR" => "o");
+    $types['Alias??']            = array("ACL" => "alias"     ,    "ATTR" => "alias?",
+        "TITLE"     => _("Department"),
+        "IMG"       => "plugins/departments/images/department_alias.png", "ABBR" => "alias");
+    $types['Referal??']          = array("ACL" => "referal",       "ATTR" => "referal?",
+        "TITLE"     => _("Department"),
+        "IMG"       => "plugins/departments/images/department_referal.png", "ABBR" => "referal");
+
+    $this->departments = $list;
+
     $ui = get_userinfo();
     foreach($list as $key => $val) {
 
       $actions= "";      
 
-      if(!isset($this->config->departments[$key])){
-
-        $field01 = array("string" => "&nbsp;", "attach" => "style='width:20px;'");
-        $field0 = array("string" => "<img src='images/".$non_empty."lists/folder.png' 
-            title='"._("department")."' alt='department'>", 
-            "attach" => "style='text-align:center;width:20px;'");
-        $field1 = array("string" => $val, "attach" => "style='' title='".$val."'");
-        $field2 = array("string" => "", "attach" => "style='border-right: 0px;'");
-
-      }else{
-        $acl = $ui->get_permissions($this->config->departments[$key] ,"department/department");
-        $acl_all = $ui->has_complete_category_acls($this->config->departments[$key] ,"department");
-
-        $actions.= "<input class='center' type='image' src='images/lists/edit.png'
-          alt='"._("edit")."'   name='dep_edit_%KEY%' title='"._("Edit this entry")."'>";
-
-        if(preg_match("/d/",$acl)){
-          $actions.= "<input class='center' type='image' src='images/lists/trash.png'
-            alt='"._("delete")."'   name='dep_del_%KEY%' title='"._("Delete this entry")."'>";
+      /* Detect department type
+       */
+      $dep_data = array();
+      foreach($types as $type => $data){
+        if(in_array($type,$val['objectClass'])){
+          $dep_data  = $data;
+          break;
         }
-
-        if(!isset($this->config->departments[trim($key)])){
-          $this->config->departments[trim($key)]="";
-        }
-
-        /* check if this department contains sub-departments
-           Display different image in this case
-         */
-        $non_empty="";
-        $nkey= normalizePreg($key);
-        foreach($this->config->departments as $keyd=>$vald ){
-          if(preg_match('/$nkey\/.*/',$keyd)){
-            $non_empty="full";
-          }
-        }
-
-        $title = preg_replace('/ /', '&nbsp;', @LDAP::fix($this->config->departments[$key]));
-
-        if($val == "."){
-          $field01 = array("string" => "&nbsp;",
-              "attach" => "style='width:20px;'");
-        }else{
-          $field01 = array("string" => "<input type='checkbox' id='item_selected_".base64_encode($key)."' 
-              name='item_selected_".base64_encode($key)."'>" ,
-              "attach" => "style='width:20px;'");
-        }
-
-        $field0 = array("string" => "<img src='images/".$non_empty."lists/folder.png' title='"._("department")."' alt='department'>", "attach" => "style='text-align:center;width:20px;'");
-        $field1 = array("string" => sprintf($linkopen,base64_encode($key),$val), "attach" => "style='' title='".$title."'");
-        $field2 = array("string" => preg_replace("/%KEY%/", base64_encode($key), $actions), "attach" => "style='width:60px;border-right:0px;text-align:
-            right;'");
-
       }
+    
+      /* Warn if there was an unknown department type found 
+       */ 
+      if(!count($dep_data)) {
+        trigger_error("Unknown department type given. Skipped '".$val['dn']."'.");
+        continue;
+      }
+
+      /* Get permissions 
+       */
+      $acl = $ui->get_permissions($val['dn'],"department/".$dep_data['ACL']);
+      $acl_all = $ui->has_complete_category_acls($val['dn'],"department");
+
+      /* Create actions 
+       */
+      $actions.= "<input class='center' type='image' src='images/lists/edit.png'
+        alt='"._("edit")."'   name='dep_edit_%KEY%' title='"._("Edit this entry")."'>";
+      if(preg_match("/d/",$acl)){
+        $actions.= "<input class='center' type='image' src='images/lists/trash.png'
+          alt='"._("delete")."'   name='dep_del_%KEY%' title='"._("Delete this entry")."'>";
+      }
+
+      /* Check if this department contains sub-departments
+         Display different image in this case
+       */
+      $sub_folders= FALSE;
+      foreach($this->config->departments as $keyd){
+        if(preg_match("/,".normalizePreg($val['dn'])."$/",$keyd)){
+          $sub_folders = TRUE;
+        }
+      }
+
+      /* Create entry name 
+       */      
+      $name = $val[$dep_data['ATTR']][0];
+      if(isset($val['description'])){
+        $name .=  " - [".$val["description"][0]."]";
+      }
+
+      /* Create title
+       */
+      $title = preg_replace('/ /', '&nbsp;', @LDAP::fix($val['dn']));
+
+      /* Create checkboxes infront of the entry 
+       */
+      if($name == "."){
+        $field01 = array("string" => "&nbsp;",
+            "attach" => "style='width:20px;'");
+      }else{
+        $field01 = array("string" => "<input type='checkbox' id='item_selected_".$key."' name='item_selected_".$key."'>" ,
+            "attach" => "style='width:20px;'");
+      }
+
+      /* Create image 
+       */
+      if($sub_folders){
+        $img =  "<img src='".$dep_data['IMG_FULL']."' class='center' title='".$dep_data['TITLE']."'>";
+      }else{
+        $img =  "<img src='".$dep_data['IMG']."' class='center' title='".$dep_data['TITLE']."'>";
+      }
+     
+      /* Append data to the listing 
+       */
+      $field0 = array("string" => $img, "attach" => "style='text-align:center;width:20px;'");
+      $field1 = array("string" => sprintf($linkopen,$key,$name), 
+          "attach" => "style='' title='".$title."'");
+      $field2 = array("string" => preg_replace("/%KEY%/", $key, $actions), 
+          "attach" => "style='width:60px;border-right:0px;text-align:right;'");
+
       $this->AddElement( array($field01,$field0,$field1,$field2));
     }
 

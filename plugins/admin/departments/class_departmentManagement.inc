@@ -426,67 +426,80 @@ class departmentManagement extends plugin
     $config = session::get('config');
     $tmp = $config->idepartments;
 
-    // In case of a valid back button create entry
-    if(isset($tmp[$base_back])){
-      $tmp2    ['dn']          = convert_department_dn($base_back);
+    /* Possible department types 
+     */ 
+    $types['country']            = array("ACL" => "country",      "ATTR" => "c",
+        "CLS" => "(objectClass=country)",
+        "IMG" => "plugins/departments/images/country.png", "ABBR" => "c");
+    $types['locality']           = array("ACL" => "locality",     "ATTR" => "l",
+        "CLS" => "(objectClass=locality)",
+        "IMG" => "plugins/departments/images/country.png", "ABBR" => "l");
+    $types['organizationalUnit'] = array("ACL" => "department",   "ATTR" => "ou",
+        "CLS" => "(&(objectClass=gosaDepartment)(objectClass=organizationalUnit))",
+        "IMG" => "plugins/departments/images/country.png", "ABBR" => "ou");
+    $types['organization']       = array("ACL" => "organization", "ATTR" => "o",
+        "CLS" => "(objectClass=organization)",
+        "IMG" => "plugins/departments/images/country.png", "ABBR" => "o");
+    $types['Alias??']            = array("ACL" => "alias"     ,    "ATTR" => "alias?",
+        "CLS" => "(objectClass=alias??)",
+        "IMG" => "plugins/departments/images/country.png", "ABBR" => "alias");
+    $types['Referal??']          = array("ACL" => "referal",       "ATTR" => "referal?",
+        "CLS" => "(objectClass=referal??)",
+        "IMG" => "plugins/departments/images/country.png", "ABBR" => "referal");
 
-      // If empty always go to top
-      if(empty($tmp2['dn'])){
-        $tmp2['dn']="/";
-      }
-      $tmp2    ['description'][0] = ".. ".msgPool::backButton();
-      $result[$tmp[$base_back]]=$tmp2;
-    }
-
-    
-
+    /* Create search filter for each department type
+     */
+    $res = array();
     if($this->DivListDepartment->SubSearch){
-      $res= get_list("(&(|(ou=$Regex)(description=$Regex))(objectClass=gosaDepartment))",
-          "department", $base, array("ou", "description"), GL_SIZELIMIT | GL_SUBSEARCH);
+      foreach($types as $oc => $data){
+        $res= array_merge($res,get_list("(&(|(".$data['ATTR']."=$Regex)(description=$Regex))".$data['CLS'].")",
+            "department", $base, array($data['ATTR'],"objectClass", "description"), GL_SIZELIMIT | GL_SUBSEARCH));
+      }
     }else{
-      $res= get_list("(&(|(ou=$Regex)(description=$Regex))(objectClass=gosaDepartment))",
-          "department", $base, array("ou", "description"), GL_SIZELIMIT );
+      foreach($types as $oc => $data){
+        $res= array_merge($res,get_list("(&(|(".$data['ATTR']."=$Regex)(description=$Regex))".$data['CLS'].")",
+            "department", $base, array($data['ATTR'], "objectClass","description"), GL_SIZELIMIT ));
+      }
     }
 
-    
-    /**/
-    $non_ou = get_list("(&(|(c=$Regex)(description=$Regex))(objectClass=country))",
-          "department", $base, array("c", "description"), GL_SIZELIMIT );
-    $non_ou = array_merge($non_ou,get_list("(&(|(l=$Regex)(description=$Regex))(objectClass=locality))",
-          "department", $base, array("l", "description"), GL_SIZELIMIT ));
-    $non_ou = array_merge($non_ou,get_list("(&(|(o=$Regex)(description=$Regex))(objectClass=organization))",
-          "department", $base, array("o", "description"), GL_SIZELIMIT ));
-  
-    $this->departments= array();
-    foreach($non_ou as $obj){
-      $this->departments[] = $obj['dn'];
-    }
-
-
-    /* Add current base to the list of available departments, but only if its naming attribute is 'ou' */
-    if(preg_match("/^ou=/",$base)){
-      $this->departments [ convert_department_dn($base) ] = ".";
-    }
-
-    foreach ($res as $key => $value){
+    /* Prepare list (sortable index) 
+     */
+    $deps = array();
+    $this->departments = array();
+    foreach($res as $attr){
 
       /* Don't display base as entry on subsearch */
-      if(($value['dn'] == $base) && ($this->DivListDepartment->SubSearch)){
+      if(($attr['dn'] == $base) && ($this->DivListDepartment->SubSearch)){
         continue;
       }
 
-      $cdn= convert_department_dn($value['dn']);
-
-      /* Append to dep list */
-      if(isset($value["description"][0])){
-        $this->departments[$cdn]= get_sub_department($cdn)." - [".$value["description"][0]."]";
-      }else{
-        $this->departments[$cdn]= get_sub_department($cdn);//$value["description"][0];
+      /* Detect type and create sortable index 
+       */
+      $found =FALSE;
+      foreach($types as $oc => $data){
+        if(in_array($oc,$attr['objectClass'])){
+          $name = $attr[$data['ATTR']][0]."-".$attr['dn'];
+          $deps[$name] = $attr;
+          $found =TRUE;
+          break;
+        }
       }
+      if(!$found ) trigger_error("Not found!");
+    }
+    uksort($deps, 'strnatcasecmp');
+
+    /* In case of a valid back button create entry 
+     */
+    if(isset($tmp[$base_back])){
+      $tmp = array();
+      $tmp['dn']          = $base_back;
+      $tmp['ou'][0]       = "..";
+      $tmp['objectClass'] = array("organizationalUnit","gosaDepartment");
+      $tmp['description'][0] = msgPool::backButton();
+      $deps= array_merge(array($tmp),$deps);
     }
 
-    natcasesort ($this->departments);
-    reset ($this->departments);
+    $this->departments = array_values($deps);
   }
 
   function remove_from_parent()

@@ -32,7 +32,6 @@ class deptabs extends tabs
 
     /* Detect the base class  (The classs which extends from department)
      */
-    $class = "department";
     foreach($this->by_object as $name => $object){
       if($object instanceOf department){
         $this->base_name = get_class($object);
