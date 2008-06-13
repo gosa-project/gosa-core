@@ -870,9 +870,6 @@ class config  {
 
   function check_config_version()
   {
-
-    $current = get_gosa_version();
-
     /* Skip check, if we've already mentioned the mismatch 
      */
     if(session::is_set("LastChecked") && session::get("LastChecked") == $this->config_version) return;
@@ -881,22 +878,12 @@ class config  {
      */
     session::set("LastChecked",$this->config_version);
 
-    if(preg_match("/\(Rev[^\)]*\)/",$current)){
+    $current = md5(file_get_contents(CONFIG_TEMPLATE_DIR."/gosa.conf"));
 
-      /* Development Version 
-       */
-      $c_v = preg_replace("/^.*\(Rev ([0-9]*)\).*$/","\\1",$current);
-      $g_v = preg_replace("/^.*\(Rev ([0-9]*)\).*$/","\\1",$this->config_version);
-      if($c_v != $g_v){
-#        msg_dialog::display(_("Configuration"),_("The configuration file you are using seems to be outdated. Please move the GOsa configuration file away to run the GOsa setup again."));
-      }
-    }else{
-
-      /* Tagged version 
-       */
-      if($this->config_version != $current){
-        msg_dialog::display(_("Configuration"),_("The configuration file you are using seems to be outdated. Please move the GOsa configuration file away to run the GOsa setup again."));
-      }
+    /* Check contributed config version and current config version.
+     */
+    if($this->config_version != $current && !empty($this->config_version)){
+      msg_dialog::display(_("Configuration"),_("The configuration file you are using seems to be outdated. Please move the GOsa configuration file away to run the GOsa setup again."));
     }
   }
 

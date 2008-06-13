@@ -44,7 +44,7 @@ class Step_Finish extends setup_step
   {
     $smarty = get_smarty();
     $smarty->assign("cv",xmlentities($this->parent->captured_values));
-    $smarty->assign("get_gosa_version",get_gosa_version());
+    $smarty->assign("config_checksum", md5(file_get_contents(CONFIG_TEMPLATE_DIR.$this->gosa_conf_contrib)));
     $str =  $smarty->fetch(CONFIG_TEMPLATE_DIR.$this->gosa_conf_contrib);
     return($str);
   }  
@@ -55,8 +55,7 @@ class Step_Finish extends setup_step
 
     $info= posix_getgrgid(posix_getgid());
     $webgroup = $info['name'];
-      
-    
+
     /* Check if there is currently an active gosa.conf 
      */
     $exists = file_exists(CONFIG_DIR."/".CONFIG_FILE); 
