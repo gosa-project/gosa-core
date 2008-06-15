@@ -15,7 +15,7 @@ case "$1" in
         # Get apache versions running
         servers=""
         for srv in apache apache-ssl; do
-                dpkg -s $srv | grep -q "^Status:.*not-installed"
+                dpkg -s $srv 2>&1 | grep -q "^Status:.*not-installed"
                 if [ $? -eq 1 ]; then
                         servers="$srv $servers"
                 fi

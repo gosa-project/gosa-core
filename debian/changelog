@@ -1,3 +1,12 @@
+gosa (2.5.16.1-2) unstable; urgency=low
+
+  * Added czech translation (closes:#483300)
+  * Added upgrade information to the README.Debian (closes:#486121)
+  * Fixed bashisms in the rule file (again) (closes:#478388)
+  * Removed uneeded output from postrm (closes:##482016)
+
+ -- Cajus Pollmeier <cajus@debian.org>  Sun, 15 Jun 2008 15:44:59 +0000
+
 gosa (2.5.16.1-1) unstable; urgency=low
 
   * Fixed typo in printer class 
