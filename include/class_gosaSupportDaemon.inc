@@ -1872,6 +1872,46 @@ class gosaSupportDaemon
       return(array());
     }
   }
+
+
+  /*! \brief  Imports the given key into the specified keyring (Servers mac address)
+      @param  String  The servers mac address 
+      @param  String  The gpg key.
+      @return Boolean TRUE on success else FALSE 
+   */
+  public function DAK_import_key($server,$key)  
+  {
+    /* Ensure that we send the event to a valid mac address 
+     */
+    if(!is_string($server) || !tests::is_mac($server)){
+      trigger_error("No valid mac address given '".$server."'.");
+      return;
+    }
+
+    /* Check if there is some cleanup required before importing the key.
+        There may be some Header lines like:
+        -----BEGIN PGP PUBLIC KEY BLOCK-----   Version: GnuPG v1.4.6 (GNU/Linux)
+     */
+    if(preg_match("/".normalizePreg("BEGIN PGP PUBLIC KEY BLOCK")."/",$key)){
+
+      /* Remove header */
+      $key = preg_replace("/^.*\n\n/sim","",$key);
+      /* Remove footer */
+      $key = preg_replace("/-----.*$/sim","",$key);
+    }
+
+    /* Create query
+     */
+    $xml_msg = "<xml> 
+                  <header>gosa_import_dak_key</header> 
+                  <target>".$server."</target> 
+                  <key>".$key."</key> 
+                  <source>GOSA</source>
+                </xml>";
+        
+    $res = $this->_send($xml_msg,TRUE);
+    return($this->is_error());
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
