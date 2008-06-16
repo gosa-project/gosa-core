@@ -826,6 +826,16 @@ class gosaSupportDaemon
           }
         }
         if ($xml_elem['type'] == 'complete') {
+
+          /* Save tag attributes too. 
+              e.g. <tag attr="val">
+           */
+          if(isset($xml_elem['attributes'])){
+            foreach($xml_elem['attributes'] as $name => $value){
+              $test2['ATTRIBUTES'][$name] = $value;
+            }
+          }
+
           $start_level = 1;
           $test2 = &$params;
           while($start_level < $xml_elem['level']) {
@@ -1815,6 +1825,52 @@ class gosaSupportDaemon
       return(base64_decode($res['XML'][strtoupper($file)]));
     }
     return("");
+  }
+
+
+
+
+
+  /*****************
+   * DAK - Functions 
+   *****************/
+
+  /*! \brief  Returns all currenlty queued entries for a given DAK repository 
+      @param  ...
+      @return Array   All queued entries.
+   */
+  public function DAK_get_queue_entries($server)  
+  {
+    /* Ensure that we send the event to a valid mac address 
+     */
+    if(!is_string($server) || !tests::is_mac($server)){
+      trigger_error("No valid mac address given '".$server."'.");
+      return;
+    }
+
+    /* Create query
+     */
+    $xml_msg = "<xml> 
+                  <header>gosa_get_dak_keyring</header> 
+                  <target>".$server."</target> 
+                  <source>GOSA</source>
+                </xml>";
+        
+    $res = $this->_send($xml_msg,TRUE);
+
+    /* Check if there are results for POLICY
+     */
+    if(isset($res['XML'])){
+      $ret = array();
+      foreach($res['XML'] as $key => $entry){
+        if(preg_match("/^ANSWER/",$key)){
+          $ret[] = $entry;
+        }
+      }
+      return($ret);
+    }else{
+      return(array());
+    }
   }
 }
 
