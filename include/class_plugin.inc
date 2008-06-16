@@ -1509,10 +1509,6 @@ class plugin
     $ui = get_userinfo();
     $this->parent = $parent;
 
-    if(!isset($this->acl_module)){
-      return("VERDAMMT");
-    }
-
     foreach($_POST as $name => $value){
 
       /* Create a new snapshot, display a dialog */
