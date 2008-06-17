@@ -470,11 +470,11 @@ class posixAccount extends plugin
                                               "<input name=\"shadowMax\" size=3 maxlength=4 value=\"".$this->shadowMax."\">"));
 
       $shadowInactiveACL=  $this->getacl("shadowInactive",$SkipWrite);
-      $smarty->assign("shadowinactives", sprintf(_("Disable account after %s days of inactivity after password expiery"), 
+      $smarty->assign("shadowinactives", sprintf(_("Disable account after %s days of inactivity after password expiry"), 
                                               "<input name=\"shadowInactive\" size=3 maxlength=4 value=\"".$this->shadowInactive."\">"));
 
       $shadowWarningACL =  $this->getacl("shadowWarning",$SkipWrite);
-      $smarty->assign("shadowwarnings", sprintf(_("Warn user %s days before password expiery"), 
+      $smarty->assign("shadowwarnings", sprintf(_("Warn user %s days before password expiry"), 
                                               "<input name=\"shadowWarning\" size=3 maxlength=4 value=\"".$this->shadowWarning."\">"));
 
       foreach( array("activate_shadowMin", "activate_shadowMax",
