@@ -547,6 +547,11 @@ class msgPool
     return sprintf(_("Install and activate the %s PHP module."), $what);
   }
 
+
+  public static function class_not_found($plugin)
+  {
+    return (sprintf(_("Could not initialize class '%s', maybe there is a plugin missing in your gosa setup."), $plugin));
+  }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
