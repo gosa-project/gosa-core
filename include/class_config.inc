@@ -160,11 +160,13 @@ class config  {
       case 'LOCATION':
                   if ($this->tags[$this->level-2] == 'MAIN'){
                     $name= $attrs['NAME'];
+                    $name = preg_replace("/[<>\"']/","",$name);
+                    $attrs['NAME'] = $name;
                     $this->currentLocation= $name;
 
                     /* Add location elements */
-                      $this->data['LOCATIONS'][$name]= $attrs;
-                    }
+                    $this->data['LOCATIONS'][$name]= $attrs;
+                  }
                   break;
 
                   /* Handle referral tags */
@@ -268,6 +270,7 @@ class config  {
   function set_current($name)
   {
     $this->current= $this->data['LOCATIONS'][$name];
+
     if (!isset($this->current['PEOPLE'])){
       $this->current['PEOPLE']= "ou=people";
     }
