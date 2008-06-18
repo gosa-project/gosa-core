@@ -418,9 +418,15 @@ A: Yes, just add the following line to your gosa.conf:
 
 
 Q: I want to use cyrus for multiple mail domains, but GOsa uses the 'uid' attribute 
-   for account namens, how do I change this to 'mail'?
+   for account names, how do I change this to 'mail'?
 
 A: Just add/modify the following line to/in your gosa.conf:
    <location ...
     mail_uattrib="mail" 
    ...>
+
+Q: When creating mail group with a Kolab server i got this error message 
+   "Object class violation (invalid structural object class chain (posixGroup/kolabSharedFolder)"
+
+A: In your kolab2.schema objectclass kolabSharedFolder change
+   'SUP top STRUCTURAL' to 'SUP top AUXILIARY'
