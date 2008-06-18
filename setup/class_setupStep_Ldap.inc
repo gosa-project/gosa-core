@@ -60,7 +60,7 @@ class Step_Ldap extends setup_step
   {
     $smarty = get_smarty();
     foreach($this->attributes as $attr){
-      $smarty->assign($attr,$this->$attr);
+      $smarty->assign($attr,htmlentities($this->$attr,ENT_QUOTES,"UTF-8"));
     }
 
     /* Assign connection status */

@@ -2715,7 +2715,22 @@ function send_binary_content($data,$name,$type = "application/octet-stream")
 function xmlentities($str)
 { 
   if(is_string($str)){
-    return(htmlentities($str,ENT_QUOTES));
+
+    static $asc2uni= array();
+    if (!count($asc2uni)){
+      for($i=128;$i<256;$i++){
+    #    $asc2uni[chr($i)] = "&#x".dechex($i).";";
+      }
+    }
+
+    $str = str_replace("&", "&amp;", $str);
+    $str = str_replace("<", "&lt;", $str);
+    $str = str_replace(">", "&gt;", $str);
+    $str = str_replace("'", "&apos;", $str);
+    $str = str_replace("\"", "&quot;", $str);
+    $str = str_replace("\r", "", $str);
+    $str = strtr($str,$asc2uni);
+    return $str;
   }elseif(is_array($str)){
     foreach($str as $name => $value){
       $str[$name] = xmlentities($value);
