@@ -1912,6 +1912,34 @@ class gosaSupportDaemon
     $res = $this->_send($xml_msg,TRUE);
     return($this->is_error());
   }
+
+
+  /*! \brief Removes a key from the keyring on the given server. 
+      @param  String  The servers mac address 
+      @param  String  The gpg key uid.
+      @return Boolean TRUE on success else FALSE 
+   */
+  public function DAK_remove_key($server,$key)  
+  {
+    /* Ensure that we send the event to a valid mac address 
+     */
+    if(!is_string($server) || !tests::is_mac($server)){
+      trigger_error("No valid mac address given '".$server."'.");
+      return;
+    }
+
+    /* Create query
+     */
+    $xml_msg = "<xml> 
+                  <header>gosa_remove_dak_key</header> 
+                  <target>".$server."</target> 
+                  <uid>".$key."</uid> 
+                  <source>GOSA</source>
+                </xml>";
+       
+    $res = $this->_send($xml_msg,TRUE);
+    return($this->is_error());
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
