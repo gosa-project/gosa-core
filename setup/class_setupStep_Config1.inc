@@ -81,13 +81,13 @@ class Step_Config1 extends setup_step
   {
     $smarty = get_smarty();
     $smarty->assign("peopledns",array("uid","cn"));
-    $smarty->assign("id_settings",$this->id_settings);
-    $smarty->assign("crypt_methods",$this->crypt_methods);
-    $smarty->assign("themes",$this->get_themes());
-    $smarty->assign("pwd_rules",$this->pwd_rules);
+    $smarty->assign("id_settings",   reverse_html_entities($this->id_settings));
+    $smarty->assign("crypt_methods", reverse_html_entities($this->crypt_methods));
+    $smarty->assign("themes",        reverse_html_entities($this->get_themes()));
+    $smarty->assign("pwd_rules",     reverse_html_entities($this->pwd_rules));
     $smarty->assign("bool",array(FALSE => _("No"), TRUE => _("Yes")));
     foreach($this->attributes as $attr){
-      $smarty->assign($attr,$this->$attr);
+      $smarty->assign($attr,htmlentities($this->$attr,ENT_QUOTES,"UTF-8"));
     }
 
     /* !!! Attention strict is inverse. If you change this, 

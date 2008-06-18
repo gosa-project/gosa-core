@@ -163,11 +163,11 @@ class Step_Feedback  extends setup_step
     $smarty = get_smarty();
 
     foreach($this->attributes as $attr){
-      $smarty->assign($attr, $this->$attr);
+      $smarty->assign($attr,   reverse_html_entities($this->$attr));
     }
     $smarty->assign("years",$years);
     $smarty->assign("features_used",$this->features_used);
-    $smarty->assign("additional_info",$additional_info);
+    $smarty->assign("additional_info", reverse_html_entities($additional_info));
     $smarty->assign ("must", "<font class=\"must\">*</font>");
     return($smarty->fetch(get_template_path("setup_feedback.tpl",TRUE,dirname(__FILE__))));
   }

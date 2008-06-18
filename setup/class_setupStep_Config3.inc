@@ -91,9 +91,9 @@ class Step_Config3 extends setup_step
                                               "contextCSN"=>"contextCSN" ));
 
     
-    $smarty->assign("optional", $this->optional);
+    $smarty->assign("optional", reverse_html_entities($this->optional));
     foreach($this->attributes as $attr){
-      $smarty->assign($attr,$this->$attr);
+      $smarty->assign($attr,reverse_html_entities($this->$attr));
     }
     $smarty->assign("login_attributes",$this->login_attributes);
     return($smarty -> fetch (get_template_path("../setup/setup_config3.tpl")));

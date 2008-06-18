@@ -155,18 +155,18 @@ class Step_Config2 extends setup_step
     }
 
     $smarty = get_smarty();
-    $smarty->assign("sambaDomain_found",$this->sambaDomain_found);
-    $smarty->assign("generic_settings",$this->generic_settings);
-    $smarty->assign("mail_settings",$this->mail_settings);
-    $smarty->assign("mail_methods",$this->mail_methods);
-    $smarty->assign("samba_settings",$this->samba_settings);
+    $smarty->assign("sambaDomain_found",  $this->sambaDomain_found);
+    $smarty->assign("generic_settings",  reverse_html_entities($this->generic_settings));
+    $smarty->assign("mail_settings",     reverse_html_entities($this->mail_settings));
+    $smarty->assign("mail_methods",      reverse_html_entities($this->mail_methods));
+    $smarty->assign("samba_settings",    reverse_html_entities($this->samba_settings));
 
     $smarty->assign("logging_mysql" ,preg_match("/mysql/",$this->generic_settings['logging']));
     $smarty->assign("logging_syslog",preg_match("/syslog/",$this->generic_settings['logging']));
    
     $smarty->assign("bool",array(FALSE => _("No"), TRUE => _("Yes")));
     foreach($this->attributes as $attr){
-      $smarty->assign($attr,$this->$attr);
+      $smarty->assign($attr,reverse_html_entities($this->$attr));
     }
     $smarty->assign("timezone"     ,$this->timezone);
     $smarty->assign("timezones"    ,$this->timezones);
