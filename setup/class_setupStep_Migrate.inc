@@ -323,7 +323,7 @@ class Step_Migrate extends setup_step
 
     /* Get winstation ou */
     if($cv['generic_settings']['wws_ou_active']) {
-      $winstation_ou = $cv['generic_settings']['ws_ou'];
+      $winstation_ou = $cv['generic_settings']['wws_ou'];
     }else{
       $winstation_ou = "ou=winstations";
     }
@@ -1960,7 +1960,7 @@ class Step_Migrate extends setup_step
 
     /* Get winstation ou */
     if($cv['generic_settings']['wws_ou_active']) {
-      $winstation_ou = $cv['generic_settings']['ws_ou'];
+      $winstation_ou = $cv['generic_settings']['wws_ou'];
     }else{
       $winstation_ou = "ou=winstations";
     }
