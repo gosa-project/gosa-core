@@ -2707,6 +2707,19 @@ function send_binary_content($data,$name,$type = "application/octet-stream")
 }
 
 
+function reverse_html_entities($str,$type = ENT_QUOTES , $charset = "UTF-8")
+{
+  if(is_string($str)){
+    return(htmlentities($str,$type,$charset));
+  }elseif(is_array($str)){
+    foreach($str as $name => $value){
+      $str[$name] = reverse_html_entities($value,$type,$charset);
+    }
+  }
+  return($str);
+}
+
+
 /*! \brief Encode special string characters so we can use the string in \
            HTML output, without breaking quotes.
     @param  The String we want to encode.
