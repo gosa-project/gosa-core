@@ -448,6 +448,45 @@ class userinfo
       }
     }
 
+    
+
+    /* Search for per object ACLs. 
+     */
+    $this->config->get_departments();
+    $this->config->make_idepartments();
+
+    print_a(array("DATA " => $module));
+
+    foreach($this->ACL as $dn => $infos){
+      foreach($infos as $info){
+        $found = FALSE;
+        foreach($info['acl'] as $cat => $data){
+          if(is_array($module)){
+            foreach($module as $mod){
+              if(preg_match("/^".normalizePreg($mod)."/",$cat)){
+                $found =TRUE;
+                break;
+              }
+            }
+          }else{
+            if(preg_match("/^".normalizePreg($module)."/",$cat)){
+              $found =TRUE;
+              break;
+            }
+          }
+        } 
+
+        if($found && !isset($this->config->idepartments[$dn])){
+          while(!isset($this->config->idepartments[$dn]) && preg_match("/,/",$dn)){
+            $dn = preg_replace("/^[^,]+,/","",$dn);
+          }
+          if(isset($this->config->idepartments[$dn])){
+            $deps[] = $dn;
+          }
+        }
+      }
+    }
+
     /* For all gosaDepartments */
     foreach ($this->config->departments as $dn){
       $acl= array("r" => "", "w" => "", "c" => "", "d" => "", "m" => "", "a" => "");

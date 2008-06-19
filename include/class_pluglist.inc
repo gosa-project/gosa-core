@@ -91,17 +91,7 @@ class pluglist {
 
 		foreach($acls_to_check as $acl_to_check){
 			$deps = $this->ui->get_module_departments($acl_to_check);
-			foreach($deps as $dep){
-				if(preg_match("/\//",$acl_to_check)){
-					if($this->ui->get_permissions($dep,$acl_to_check) != ""){
-						return(TRUE);
-					}
-				}else{
-					if($this->ui->get_category_permissions($dep,$acl_to_check) != ""){
-						return(TRUE);
-					}
-				}
-			}
+			if(count($deps)) return TRUE;
 		}
 		return (FALSE);
 	}
