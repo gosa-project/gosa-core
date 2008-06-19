@@ -314,15 +314,15 @@ class userinfo
     $cpath= "";
     foreach ($path as $element){
 
-      /* Clean potential ACLs for each level */
-      $acl= $this->cleanACL($acl);
-
       if ($cpath == ""){
         $cpath= $element;
       } else {
         $cpath= $element.','.$cpath;
       }
       if (isset($this->ACL[$cpath])){
+
+        /* Clean potential ACLs for each level */
+        $acl= $this->cleanACL($acl);
 
         /* Inspect this ACL, place the result into ACL */
         foreach ($this->ACL[$cpath] as $subacl){
