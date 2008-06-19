@@ -672,9 +672,14 @@ class MultiSelectWindow{
 		}
     uksort($this->departments, 'strnatcasecmp');
     $this->departments = array_values($this->departments);
+
+    $ui = get_userinfo();
+    $module_deps = $ui->get_module_departments($this->module);
   
 		/* Add deps to this dialog object list */
 		foreach($this->departments as $key=> $val){
+
+      if(!in_array($val['dn'],$module_deps)) continue;
 
       /* Check if this department contains sub-departments
          Display different image in this case
