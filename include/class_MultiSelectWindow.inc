@@ -724,6 +724,58 @@ class MultiSelectWindow{
 		}
 	}
 
+
+  function create_department_list($modules)
+  { 
+     /* Load possible departments */
+    $ui= get_userinfo();
+    $first = "";
+    $found = FALSE;
+
+    if(!is_array($modules)){
+      $modules = array($modules);
+    }
+
+    $department = $departments = array();
+    $ids = $this->config->idepartments;
+    foreach($modules as $module){
+      $d = $ui->get_module_departments($module);
+      foreach($d as $department){
+        $departments[$department] = $department;
+      }
+    }
+
+    $first = "";
+    $found = FALSE;
+    $options ="";
+    foreach($departments as $dep => $name){
+
+      /* Keep first base dn in mind, we could need this
+       *  info if no valid base was found
+       */
+      if(empty($first)) {
+        $first = $dep['dn'];
+      }
+
+      $value = $ids[$dep];
+      if ($this->selectedBase == $dep){
+        $found = TRUE;
+        $options.= "<option selected='selected' value='".$dep."'>$value</option>";
+      } else {
+        $options.= "<option value='".$dep."'>$value</option>";
+      }
+    }
+
+    /* The currently used base is not visible with your acl setup.
+     * Set base to first useable base.
+     */
+    if(!$found){
+      $this->selectedBase = $first;
+    }
+
+    return($options);
+  }
+
   function set_List_Bottom_Info($str)
   {
     $this->List_Bottom_Info = $str;
