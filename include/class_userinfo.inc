@@ -455,8 +455,6 @@ class userinfo
     $this->config->get_departments();
     $this->config->make_idepartments();
 
-    print_a(array("DATA " => $module));
-
     foreach($this->ACL as $dn => $infos){
       foreach($infos as $info){
         $found = FALSE;
