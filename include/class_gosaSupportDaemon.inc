@@ -1839,7 +1839,7 @@ class gosaSupportDaemon
       @param  ...
       @return Array   All queued entries.
    */
-  public function DAK_get_queue_entries($server)  
+  public function DAK_keyring_entries($server)  
   {
     /* Ensure that we send the event to a valid mac address 
      */
