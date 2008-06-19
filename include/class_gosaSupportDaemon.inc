@@ -1933,7 +1933,7 @@ class gosaSupportDaemon
     $xml_msg = "<xml> 
                   <header>gosa_remove_dak_key</header> 
                   <target>".$server."</target> 
-                  <uid>".$key."</uid> 
+                  <keyid>".$key."</keyid> 
                   <source>GOSA</source>
                 </xml>";
        
