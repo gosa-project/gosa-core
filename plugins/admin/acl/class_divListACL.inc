@@ -87,61 +87,10 @@ class divListACL extends MultiSelectWindow
 
   function GenHeader()
   {
-     /* Prepare departments,
-       which are shown in the listbox on top of the listbox
-     */
-    $options= "";
-    $Copy_Paste = "";
-
     /* Get all departments within this subtree */
     $ui= get_userinfo();
-    $first = "";
-    $found = FALSE;
     $base = $this->config->current['BASE'];
-
-    /* Add base */
-    $tmp = array();
-    $tmp[] = array("dn"=>$this->config->current['BASE']);
-    $tmp=  array_merge($tmp,get_list("(&(|(ou=*)(description=*))(objectClass=gosaDepartment))", $this->module, $base,
-                    array("ou", "description"), GL_SIZELIMIT | GL_SUBSEARCH));
-
-    $deps = array();
-    foreach($tmp as $tm){
-      $deps[$tm['dn']] = $tm['dn'];
-    }
-
-    /* Load possible departments */
-    $ui= get_userinfo();
-    $tdeps= $ui->get_module_departments("acl");
-    $ids = $this->config->idepartments;
-    $first = "";
-    $found = FALSE;
-    foreach($ids as $dep => $name){
-      if(isset($deps[$dep]) && in_array_ics($dep, $tdeps)){
-
-        /* Keep first base dn in mind, we could need this
-         *  info if no valid base was found
-         */
-        if(empty($first)) {
-          $first = $dep['dn'];
-        }
-
-        $value = $ids[$dep];
-        if ($this->selectedBase == $dep){
-          $found = TRUE;
-          $options.= "<option selected='selected' value='".$dep."'>$value</option>";
-        } else {
-          $options.= "<option value='".$dep."'>$value</option>";
-        }
-      }
-    }
-
-    /* The currently used base is not visible with your acl setup.
-     * Set base to first useable base.
-     */
-    if(!$found){
-      $this->selectedBase = $first;
-    }
+    $options  = $this->create_department_list($this->module);
 
     /* Allow copy & paste for roles */ 
     $acl_all  = $ui->has_complete_category_acls($this->selectedBase,"acl");
