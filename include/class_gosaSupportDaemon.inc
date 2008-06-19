@@ -1898,6 +1898,11 @@ class gosaSupportDaemon
       $key = preg_replace("/^.*\n\n/sim","",$key);
       /* Remove footer */
       $key = preg_replace("/-----.*$/sim","",$key);
+    }elseif (!preg_match('%^[a-zA-Z0-9/+]*={0,2}$%', $key)) {
+      
+      /* Encode key if it is raw.
+       */
+      $key = base64_encode($key);
     }
 
     /* Create query
