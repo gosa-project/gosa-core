@@ -745,8 +745,11 @@ class MultiSelectWindow{
     $ids = $this->config->idepartments;
     foreach($modules as $module){
       $d = $ui->get_module_departments($module);
-      foreach($d as $department){
-        $departments[$department] = $department;
+
+      foreach($ids as $department => $desc){
+        if(in_array($department,$d)){
+          $departments[$department] = $department;
+        }
       }
     }
 
