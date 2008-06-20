@@ -827,6 +827,13 @@ class gosaSupportDaemon
         }
         if ($xml_elem['type'] == 'complete') {
 
+          $start_level = 1;
+          $test2 = &$params;
+          while($start_level < $xml_elem['level']) {
+            $test2 = &$test2[$level[$start_level]];
+            $start_level++;
+          }
+
           /* Save tag attributes too. 
               e.g. <tag attr="val">
            */
@@ -836,12 +843,6 @@ class gosaSupportDaemon
             }
           }
 
-          $start_level = 1;
-          $test2 = &$params;
-          while($start_level < $xml_elem['level']) {
-            $test2 = &$test2[$level[$start_level]];
-            $start_level++;
-          }
           if(!isset($test2[$xml_elem['tag']])){
             if(isset($xml_elem['value'])){
               $test2[$xml_elem['tag']] = $xml_elem['value'];
