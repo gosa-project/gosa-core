@@ -310,6 +310,7 @@ class userinfo
     $path= split(',', $dn);
     $path= array_reverse($path);
 
+
     /* Walk along the path to evaluate the acl */
     $cpath= "";
     foreach ($path as $element){
@@ -341,26 +342,40 @@ class userinfo
             continue;
           }
 
-         /* With user filter */
-         if (isset($subacl['filter']) && !empty($subacl['filter'])){
-           $sdn = preg_replace("/^[^,]*+,/","",$dn);
-           $ldap->cd($sdn);
-           $ldap->ls($subacl['filter'],$sdn);
-           if(!$ldap->count()){
-             continue;
-           }else{
-             $found = FALSE; 
-             while($attrs = $ldap->fetch()){
-               if($attrs['dn'] == $dn){
-                 $found = TRUE;
-                 break;
-               }
-             }
-             if(!$found){
-               continue;
-             }
-           }
-         }
+          /* With user filter */
+          if (isset($subacl['filter']) && !empty($subacl['filter'])){
+            $sdn = preg_replace("/^[^,]*+,/","",$dn);
+            $ldap->cd($sdn);
+            $ldap->ls($subacl['filter'],$sdn);
+            if(!$ldap->count()){
+              continue;
+            }else{
+              $found = FALSE; 
+              while($attrs = $ldap->fetch()){
+                if($attrs['dn'] == $dn){
+                  $found = TRUE;
+                  break;
+                }
+              }
+              if(!$found){
+                continue;
+              }
+            }
+          }
+
+          /* Self ACLs? 
+           */
+          if(isset($subacl['acl'][$object][0]) && preg_match("/s/",$subacl['acl'][$object][0]) && $dn != $this->dn){
+            continue;
+          }
+
+          /* If attribute is "", we want to know, if we've *any* permissions here... */
+          if ($attribute == "" && isset($subacl['acl'][$object])){
+            foreach($subacl['acl'][$object] as $attr => $dummy){
+              $acl= $this->mergeACL($acl, $subacl['type'], $subacl['acl'][$object][$attr]);
+            }
+            continue;
+          }
 
           /* Per attribute ACL? */
           if (isset($subacl['acl'][$object][$attribute])){
@@ -379,15 +394,6 @@ class userinfo
             $acl= $this->mergeACL($acl, $subacl['type'], $subacl['acl']['all'][0]);
             continue;
           }
-
-          /* If attribute is "", we want to know, if we've *any* permissions here... */
-          if ($attribute == "" && isset($subacl['acl'][$object])){
-            foreach($subacl['acl'][$object] as $attr => $dummy){
-              $acl= $this->mergeACL($acl, $subacl['type'], $subacl['acl'][$object][$attr]);
-            }
-            continue;
-          }
-
         }
       }
     }
@@ -563,7 +569,7 @@ class userinfo
         }
       }
     }
-
+    
     $ACL_CACHE = &session::get('ACL_CACHE');
     $ACL_CACHE['MODULE_DEPARTMENTS'][serialize($module)] = $deps;
     return ($deps);
