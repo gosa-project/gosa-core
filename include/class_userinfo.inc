@@ -289,7 +289,7 @@ class userinfo
 
     /* Push cache answer? */
     $ACL_CACHE = &session::get('ACL_CACHE');
-    if (isset($ACL_CACHE["$dn+$object+$attribute"])){
+    if (0 & isset($ACL_CACHE["$dn+$object+$attribute"])){
 
       /* Remove write if needed */
       if ($skip_write){
@@ -390,6 +390,13 @@ class userinfo
 
         }
       }
+    }
+
+    /* If the requested ACL is for a container object, then alter 
+        ACLs by applying cleanACL a last time.
+     */
+    if(in_array($dn,$this->config->departments)){
+      $acl = $this->cleanACL($acl);
     }
 
     /* Assemble string */
