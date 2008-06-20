@@ -291,6 +291,7 @@ class aclManagement extends plugin
       $this->remove_lock();
     }
 
+
     /********************
       Delete entry requested, display confirm dialog
      ********************/
@@ -362,23 +363,29 @@ class aclManagement extends plugin
     /* Confirmation for deletion has been passed. Acl should be deleted. */
     if (isset($_POST['delete_acl_confirm'])){
 
-      /* Check permissions */
-      if(preg_match("/d/",$this->ui->get_permissions($this->dn,"aclroles/aclrole"))){
 
-        /* Delete request is permitted, perform LDAP action */
-        $this->acltabs= new acl($this->config, NULL,$this->dn);
-        $this->acltabs->remove_from_parent();
-        unset ($this->acltabs);
-        $this->acltabs= NULL;
-      } else {
+      foreach($this->dns as $dn){
+      
+        $this->dn = $dn;
 
-        /* Normally this shouldn't be reached, send some extra
-           logs to notify the administrator */
-        msg_dialog::display(_("Permission error"),msgPool::permDelete(), ERROR_DIALOG);
+        /* Check permissions */
+        if(preg_match("/d/",$this->ui->get_permissions($this->dn,"aclroles/aclrole"))){
 
-        if(isset($this->ui->uid)){
-          new log("security","aclroles/".get_class($this),$this->dn,array(),"Warning: '".$this->ui->uid."' tried to trick acl role      deletion.");
-          
+          /* Delete request is permitted, perform LDAP action */
+          $this->acltabs= new aclrole($this->config, $this->dn);
+          $this->acltabs->remove_from_parent();
+          unset ($this->acltabs);
+          $this->acltabs= NULL;
+        } else {
+
+          /* Normally this shouldn't be reached, send some extra
+             logs to notify the administrator */
+          msg_dialog::display(_("Permission error"),msgPool::permDelete(), ERROR_DIALOG);
+
+          if(isset($this->ui->uid)){
+            new log("security","aclroles/".get_class($this),$this->dn,array(),"Warning: '".$this->ui->uid."' tried to trick acl role      deletion.");
+
+          }
         }
       }
 
