@@ -368,7 +368,9 @@ class userinfo
             continue;
           }
 
-          /* If attribute is "", we want to know, if we've *any* permissions here... */
+          /* If attribute is "", we want to know, if we've *any* permissions here... 
+              Merge global class ACLs [0] with attributes specific ACLs [attribute].
+           */
           if ($attribute == "" && isset($subacl['acl'][$object])){
             foreach($subacl['acl'][$object] as $attr => $dummy){
               $acl= $this->mergeACL($acl, $subacl['type'], $subacl['acl'][$object][$attr]);
@@ -506,7 +508,7 @@ class userinfo
       $acl = "";
       foreach($module as $mod){
         if(preg_match("/\//",$mod)){
-          $acl.=  $this->get_permissions($dn,$mod,"0");
+          $acl.=  $this->get_permissions($dn,$mod);
         }else{
           $acl.=  $this->get_category_permissions($dn,$mod);
         }
