@@ -310,7 +310,6 @@ class userinfo
     $path= split(',', $dn);
     $path= array_reverse($path);
 
-
     /* Walk along the path to evaluate the acl */
     $cpath= "";
     foreach ($path as $element){
@@ -464,8 +463,6 @@ class userinfo
       }
     }
 
-    
-
     /* Search for per object ACLs. 
      */
     $this->config->get_departments();
@@ -503,73 +500,20 @@ class userinfo
 
     /* For all gosaDepartments */
     foreach ($this->config->departments as $dn){
-      $acl= array("r" => "", "w" => "", "c" => "", "d" => "", "m" => "", "a" => "");
-
-      /* Build dn array */
-      $path= split(',', $dn);
-      $path= array_reverse($path);
-
-      /* Walk along the path to evaluate the acl */
-      $cpath= "";
-      foreach ($path as $element){
-
-        /* Clean potential ACLs for each level */
-        $acl= $this->cleanACL($acl);
-
-        if ($cpath == ""){
-          $cpath= $element;
-        } else {
-          $cpath= $element.','.$cpath;
-        }
-        if (isset($this->ACL[$cpath])){
-
-          /* Inspect this ACL, place the result into ACL */
-          foreach ($this->ACL[$cpath] as $subacl){
-
-            /* Reset? Just clean the ACL and turn over to the next one... */
-            if ($subacl['type'] == 'reset'){
-              $acl= $this->cleanACL($acl, TRUE);
-              continue;
-            }
-    
-            if($subacl['type'] == 'role'){
-              echo "role skipped";
-              continue;
-            }
-
-            /* Per object ACL? */
-            foreach ($objects as $object){
-              if (isset($subacl['acl']["$module/$object"])){
-                foreach($subacl['acl']["$module/$object"] as $attribute => $dcl){
-                  $acl= $this->mergeACL($acl, $subacl['type'], $subacl['acl']["$module/$object"][$attribute]);
-                }
-              }
-            }
-
-            /* Global ACL? */
-            if (isset($subacl['acl']["$module/all"][0])){
-              $acl= $this->mergeACL($acl, $subacl['type'], $subacl['acl']["$module/all"][0]);
-              continue;
-            }
-
-            /* Global ACL? */
-            if (isset($subacl['acl']["all"][0])){
-              $acl= $this->mergeACL($acl, $subacl['type'], $subacl['acl']["all"][0]);
-              continue;
-            }
-          }
+      if(!is_array($module)){
+        $module = array($module);
+      }
+      $acl = "";
+      foreach($module as $mod){
+        if(preg_match("/\//",$mod)){
+          $acl.=  $this->get_permissions($dn,$mod,"0");
+        }else{
+          $acl.=  $this->get_category_permissions($dn,$mod);
         }
       }
-
-      /* Add department, if we have (some) permissions for the required module */
-      foreach ($acl as $val){
-        if ($val != ""){
-          $deps[]= $dn;
-          break;
-        }
-      }
+      if($acl !== "") $deps[] = $dn;
     }
-    
+  
     $ACL_CACHE = &session::get('ACL_CACHE');
     $ACL_CACHE['MODULE_DEPARTMENTS'][serialize($module)] = $deps;
     return ($deps);
