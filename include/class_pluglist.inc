@@ -80,8 +80,17 @@ class pluglist {
 	}
 
 
+	/*! \brief  Check whether we are allowed to modify the given acl or nit..
+				This function is used to check which plugins are visible.
+				
+		@param	The acl tag to test, eg. 	"users/user:self", "systems", ...
+		@return	Boolean TRUE on success else FALSE
+     */
 	function check_access($aclname)
 	{
+		/* Split given acl string into an array. 
+			e.g. "user,systems" => array("users","systems");
+         */
 		$acls_to_check = array();
 		if(preg_match("/,/",$aclname)){
 			$acls_to_check = split(",",$aclname);
@@ -90,11 +99,27 @@ class pluglist {
 		}
 
 		foreach($acls_to_check as $acl_to_check){
-			$deps = $this->ui->get_module_departments($acl_to_check);
-			if(count($deps)) return TRUE;
+		
+			/* Check if the given acl tag is only valid for self acl entries  
+                 <plugin acl="users/user:self" class="user"...
+             */	
+			if(preg_match("/:self$/",$acl_to_check)){
+				$acl_to_check = preg_replace("/:self$/","",$acl_to_check);	
+				if($this->ui->get_permissions($this->ui->dn,$acl_to_check,"") != ""){
+					return(TRUE);
+				}
+				return(FALSE);
+			}else{
+		
+				/* No self acls. Check if we have any acls for the given ACL type 
+                 */
+				$deps = $this->ui->get_module_departments($acl_to_check);
+				if(count($deps)) return TRUE;
+			}
 		}
 		return (FALSE);
 	}
+
 
 	function gen_headlines()
 	{
@@ -353,4 +378,5 @@ class pluglist {
 
 	}
 }
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
