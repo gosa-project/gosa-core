@@ -156,7 +156,7 @@ class posixAccount extends plugin
           $this->status.= ", "._("grace time active");
         }
       } elseif (($this->shadowLastChange + $this->shadowMin) >= $current){
-        $this->status= _("active").", "._("password not changable");
+        $this->status= _("active").", "._("password not changeable");
       } elseif (($this->shadowLastChange + $this->shadowMax) >= $current){
         $this->status= _("active").", "._("password expired");
       } else {
