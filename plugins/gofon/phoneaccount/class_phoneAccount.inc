@@ -1160,6 +1160,7 @@ class phoneAccount extends plugin
  
         foreach($this->macroarray[$this->macro] as $key => $paras){
 
+          $old_macro_settings = $this->macroarray[$this->macro][$key];
           $backup = $this->macroarray[$this->macro][$key];  
 
           if(isset($_POST[$paras['var']])){
@@ -1179,8 +1180,11 @@ class phoneAccount extends plugin
               }
             }
           }
+          if(array_differs($old_macro_settings,$this->macroarray[$this->macro][$key])){
+            $this->is_modified = TRUE;
+          }
           if(count(array_diff($this->macroarray[$this->macro][$key],$backup))){
-            $this->modified = TRUE;
+            $this->is_modified = TRUE;
           }
         }
       }
