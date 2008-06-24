@@ -172,7 +172,18 @@ class department extends plugin
     }
 
     $smarty->assign("dep_type",$this->type);
-		return($smarty->fetch (get_template_path('generic.tpl', TRUE)));
+
+    switch($this->type){
+      case 'c'        : $tpl ="country.tpl";break;
+      case 'o'        : $tpl ="organization.tpl";break;
+      case 'l'        : $tpl ="locality.tpl";break;
+      case 'ou'       : $tpl ="generic.tpl";break;
+      case 'alias'    : $tpl ="alias.tpl";break;
+      case 'referal'  : $tpl ="referal.tpl";break;
+      default  : $tpl ="generic.tpl";
+    }
+
+		return($smarty->fetch (get_template_path($tpl, TRUE)));
 	}
 
 	function clear_fields()

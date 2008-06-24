@@ -23,20 +23,51 @@
 class organization extends department
 {
 	/* attribute list for save action */
-	var $attributes     = array( "o", "description");
-	var $objectclasses  = array("top", "organization");
-  var $type   ="o";
-  var $o      ="";
-  var $orgi_o ="";
+  var $attributes     = array( "o", "description","userPassword","searchGuide",
+      "seeAlso","businessCategory","x121Address","registeredAddress",
+      "destinationIndicator","preferredDeliveryMethod","telexNumber",
+      "telephoneNumber","internationaliSDNNumber","facsimileTelephoneNumber","street",
+      "postOfficeBox","postalCode", "postalAddress","physicalDeliveryOfficeName",
+      "st","l","teletexTerminalIdentifier");
 
-  var $namingAttr = "o";
+  var $objectclasses  = array("top", "organization");
+
+  /* Attributes 
+   */ 
+  var $st                       ="c";
+  var $l                        ="c";
+  var $description              ="c";
+  var $userPassword             ="c";
+  var $searchGuide              ="c";
+  var $seeAlso                  ="c";
+  var $businessCategory         ="c";
+  var $x121Address              ="c";
+  var $registeredAddress        ="c";
+  var $destinationIndicator     ="c";
+  var $preferredDeliveryMethod  ="c";
+  var $telexNumber              ="c";
+  var $telephoneNumber          ="c";
+  var $internationaliSDNNumber  ="c";
+  var $facsimileTelephoneNumber ="c";
+  var $street                   ="c";
+  var $postOfficeBox            ="c";
+  var $postalCode               ="c";
+  var $postalAddress            ="c";
+  var $teletexTerminalIdentifier="c";
+  var $physicalDeliveryOfficeName="c";
+
+  /* Naming attributes 
+   */
+  var $o            ="";
+  var $type         = "o";
+  var $orgi_o       = "";
+  var $namingAttr   = "o";
 
   function check()
   {
     $message = plugin::check();
     return($message);
   }
-
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
