@@ -799,6 +799,10 @@ class user extends plugin
           }
         }
       }
+
+      /* Save current cn
+       */
+      $this->cn = $this->givenName." ".$this->sn;
     }
   }
 
