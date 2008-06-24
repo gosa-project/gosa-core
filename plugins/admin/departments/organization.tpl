@@ -1,17 +1,17 @@
 <!--////////////////////
 	//	ORGANIZATION (o)
     //////////////////// -->
-
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
  <tr>
    <td style="vertical-align:top; width:50%">
      <h2><img class="center" alt="" align="middle" src="images/rightarrow.png"> {t}Properties{/t}</h2>
+     
      <table summary="">
       <tr>
-       <td><LABEL for="o">{t}Organization name{/t}</LABEL>{$must}</td>
+       <td><LABEL for="o">{t}Name of organization{/t}</LABEL>{$must}</td>
        <td>
-{render acl=$ouACL}
-    	<input id="o" name="o" size=25 maxlength=60 value="{$o}" title="{t}Name of organization to create{/t}">
+{render acl=$oACL}
+	<input id="o" name="o" size=25 maxlength=60 value="{$o}" title="{t}Name of organization to create{/t}">
 {/render}
        </td>
       </tr>
@@ -24,7 +24,19 @@
        </td>
       </tr>
       <tr>
+       <td><LABEL for="businessCategory">{t}Category{/t}</LABEL></td>
+       <td>
+{render acl=$businessCategoryACL}
+        <input id="businessCategory" name="businessCategory" size=25 maxlength=80 value="{$businessCategory}" title="{t}Category for this subtree{/t}">
+{/render}
+       </td>
+      </tr>
+      <tr>
+        <td colspan="2"><br></td>
+      </tr>
+      <tr>
         <td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
+
         <td>
 {render acl=$baseACL}
          <select id="base" size="1" name="base" title="{t}Choose subtree to place department in{/t}"> 
@@ -35,9 +47,11 @@
 {render acl=$baseACL disable_picture='images/lists/folder_grey.png'}
         <input type="image" name="chooseBase" src="images/lists/folder.png" class="center" title="{t}Select a base{/t}">
 {/render}
-	  </td>
-	</tr>
-	</table>
+	</td>
+       </tr>
+     </table>
+
+   </td>
    <td style="border-left:1px solid #A0A0A0">
     &nbsp;
    </td>
@@ -84,12 +98,14 @@
 {/render}
        </td>
       </tr>
-	 </tr>
-	</table>
-  </td>
+     </table>
+
+   </td>
  </tr>
 </table>
+
 <p class='seperator'>&nbsp;</p>
+
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
  <tr>
    <td style="vertical-align:top; width:100%">
@@ -100,3 +116,11 @@
    </td>
   </tr>
 </table>
+
+<!-- Place cursor -->
+<input type='hidden' name='dep_generic_posted' value='1'>
+<script language="JavaScript" type="text/javascript">
+  <!-- // First input field on page
+	focus_field('o');
+  -->
+</script>

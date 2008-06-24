@@ -34,27 +34,27 @@ class organization extends department
 
   /* Attributes 
    */ 
-  var $st                       ="c";
-  var $l                        ="c";
-  var $description              ="c";
-  var $userPassword             ="c";
-  var $searchGuide              ="c";
-  var $seeAlso                  ="c";
-  var $businessCategory         ="c";
-  var $x121Address              ="c";
-  var $registeredAddress        ="c";
-  var $destinationIndicator     ="c";
-  var $preferredDeliveryMethod  ="c";
-  var $telexNumber              ="c";
-  var $telephoneNumber          ="c";
-  var $internationaliSDNNumber  ="c";
-  var $facsimileTelephoneNumber ="c";
-  var $street                   ="c";
-  var $postOfficeBox            ="c";
-  var $postalCode               ="c";
-  var $postalAddress            ="c";
-  var $teletexTerminalIdentifier="c";
-  var $physicalDeliveryOfficeName="c";
+  var $st                       ="";
+  var $l                        ="";
+  var $description              ="";
+  var $userPassword             ="";
+  var $searchGuide              ="";
+  var $seeAlso                  ="";
+  var $businessCategory         ="";
+  var $x121Address              ="";
+  var $registeredAddress        ="";
+  var $destinationIndicator     ="";
+  var $preferredDeliveryMethod  ="";
+  var $telexNumber              ="";
+  var $telephoneNumber          ="";
+  var $internationaliSDNNumber  ="";
+  var $facsimileTelephoneNumber ="";
+  var $street                   ="";
+  var $postOfficeBox            ="";
+  var $postalCode               ="";
+  var $postalAddress            ="";
+  var $teletexTerminalIdentifier="";
+  var $physicalDeliveryOfficeName="";
 
   /* Naming attributes 
    */
@@ -68,6 +68,49 @@ class organization extends department
     $message = plugin::check();
     return($message);
   }
+
+
+  /* Return plugin informations for acl handling */
+  static function plInfo()
+  {
+    return (array("plShortName"   => _("Organization"),
+          "plDescription" => _("Organization"),
+          "plSelfModify"  => FALSE,
+          "plPriority"    => 0,
+          "plDepends"     => array(),
+          "plSection"     => array("admin"),
+          "plCategory"    => array("department"),
+
+          "plProvidedAcls" => array(
+#            "userPassword"               => _("Password"),
+#            "searchGuide"                => _("Search guide"),
+#            "seeAlso"                    => _("See also"),
+#            "x121Address"                => _("No idea"),
+#            "registeredAddress"          => _("Registered address"),
+#            "teletexTerminalIdentifier"  => _("Teletext terminal identifier"),
+#            "physicalDeliveryOfficeName" => _("Physical delivery office name"),
+#            "internationaliSDNNumber"    => _("International ISDN number"),
+#            "preferredDeliveryMethod"    => _("Prefered delivery mode"),
+#            "telexNumber"                => _("Telex number"),
+
+
+            "o"                       => _("Organization name"),
+            "description"             => _("Description"),
+            "destinationIndicator"    => _("Destination indicatior"),
+            "telephoneNumber"         => _("Phone number"),
+            "street"                  => _("Street"),
+            "postOfficeBox"           => _("Post office box "),
+            "postalCode"              => _("Postal code"),
+            "postalAddress"           => _("Postal address"),
+            "base"                    => _("Base"),
+            "businessCategory"        => _("Category"),
+            "st"                      => _("State"),
+            "l"                       => _("Location"),
+            "gosaUnitTag"             => _("Administrative settings"),
+            "facsimileTelephoneNumber"=> _("Fax"))
+          ));
+  }
+
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
