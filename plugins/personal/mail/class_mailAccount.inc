@@ -987,7 +987,11 @@ class mailAccount extends plugin
       }
     }
     $ldap->cd($this->config->current['BASE']);
-    $ldap->search ("(&(!(objectClass=gosaUserTemplate))(objectClass=gosaMailAccount)(|(mail=".$this->mail.")(gosaMailAlternateAddress=".$this->mail."))(!(uid=".$this->uid."))(!(cn=".$this->uid.")))", array("uid"));
+    $filter = "(&(!(objectClass=gosaUserTemplate))(!(uid=".$this->uid."))".
+      "(objectClass=gosaMailAccount)".
+      "(|(mail=".$this->mail.")(alias=".$this->mail.")(gosaMailAlternateAddress=".$this->mail.")))";
+
+    $ldap->search($filter,array("uid"));
     if ($ldap->count() != 0){
       $message[]= _("The primary address you've entered is already in use.");
     }
@@ -1077,10 +1081,11 @@ class mailAccount extends plugin
   {
     $ldap= $this->config->get_ldap_link();
     $address= strtolower($address);
-      
+     
     /* Is this address already assigned in LDAP? */
     $ldap->cd ($this->config->current['BASE']);
-    $ldap->search ("(&(!(objectClass=gosaUserTemplate))(objectClass=gosaMailAccount)(|(mail=$address)"."(gosaMailAlternateAddress=$address)))", array("uid"));
+    $ldap->search ("(&(!(objectClass=gosaUserTemplate))(objectClass=gosaMailAccount)(|(mail=$address)".
+      "(alias=$address)(gosaMailAlternateAddress=$address)))", array("uid"));
 
     if ($ldap->count() > 0){
       $attrs= $ldap->fetch ();
