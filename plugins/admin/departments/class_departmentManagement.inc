@@ -126,10 +126,10 @@ class departmentManagement extends plugin
         $tab = $objects[$s_entry]['TAB'];
         $acl = $objects[$s_entry]['ACL'];
         $this->deptabs= new deptabs($this->config,$this->config->data['TABS'][$tab], $this->dn,$acl);
+        $this->deptabs->set_acl_base($this->DivListDepartment->selectedBase);
       }else{
         trigger_error("Invalid / Not implemented countainer type.");
       }
-      $this->deptabs->set_acl_base($this->DivListDepartment->selectedBase);
     }
 
 
