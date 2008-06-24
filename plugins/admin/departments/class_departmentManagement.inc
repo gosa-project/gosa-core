@@ -121,7 +121,7 @@ class departmentManagement extends plugin
       $objects['l'] ['TAB'] = "LOCALITY_TABS";
       $objects['o'] ['ACL'] = "organization";
       $objects['o'] ['TAB'] = "ORGANIZATION_TABS";
-    
+
       if(isset($objects[$s_entry])){
         $tab = $objects[$s_entry]['TAB'];
         $acl = $objects[$s_entry]['ACL'];
@@ -144,6 +144,7 @@ class departmentManagement extends plugin
 
       /* Possible department types
        */
+      $types['dcObject']           = array("ACL" => "",             "TAB" => "");
       $types['country']            = array("ACL" => "country",      "TAB" => "COUNTRY_TABS");
       $types['locality']           = array("ACL" => "locality",     "TAB" => "LOCALITY_TABS");
       $types['organizationalUnit'] = array("ACL" => "department",   "TAB" => "DEPTABS");
@@ -168,6 +169,8 @@ class departmentManagement extends plugin
        */
       if(!count($data)){
         trigger_error("Unknown department type skipped '".$this->dn."'.");
+      }elseif(empty($data['TAB'])){
+        // Do nothing, this object is currently not editable
       }else{
 
         if (($user= get_lock($this->dn)) != ""){
@@ -455,6 +458,10 @@ class departmentManagement extends plugin
 
     /* Possible department types 
      */ 
+    $types['dcObject']  = array("ACL" => "department",      "ATTR" => "dc",
+        "CLS" => "(objectClass=dcObject)",
+        "IMG"  => "plugins/departments/images/department.png");
+
     $types['country']            = array("ACL" => "country",      "ATTR" => "c",
         "CLS" => "(objectClass=country)",
         "IMG" => "plugins/departments/images/country.png", "ABBR" => "c");
@@ -474,6 +481,9 @@ class departmentManagement extends plugin
         "CLS" => "(objectClass=referal??)",
         "IMG" => "plugins/departments/images/country.png", "ABBR" => "referal");
 
+
+ 
+ 
     /* Create search filter for each department type
      */
     $res = array();
