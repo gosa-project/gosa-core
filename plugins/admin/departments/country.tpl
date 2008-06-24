@@ -10,7 +10,7 @@
       <tr>
        <td><LABEL for="c">{t}Country name{/t}</LABEL>{$must}</td>
        <td>
-{render acl=$ouACL}
+{render acl=$cACL}
     	<input id="c" name="c" size=25 maxlength=60 value="{$c}" title="{t}Name of country to create{/t}">
 {/render}
        </td>
@@ -52,3 +52,4 @@
    </td>
   </tr>
 </table>
+<input type='hidden' name='dep_generic_posted' value='1'>

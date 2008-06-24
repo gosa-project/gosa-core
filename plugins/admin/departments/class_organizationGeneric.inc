@@ -76,7 +76,7 @@ class organization extends department
     return (array("plShortName"   => _("Organization"),
           "plDescription" => _("Organization"),
           "plSelfModify"  => FALSE,
-          "plPriority"    => 0,
+          "plPriority"    => 1,
           "plDepends"     => array(),
           "plSection"     => array("admin"),
           "plCategory"    => array("department"),

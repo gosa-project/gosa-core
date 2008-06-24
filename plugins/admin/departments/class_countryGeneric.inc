@@ -37,6 +37,28 @@ class country extends department
     return($message);
   }
 
+
+  /* Return plugin informations for acl handling */ 
+  static function plInfo()
+  {
+    return (array("plShortName"   => _("Country"),
+          "plDescription" => _("Country"),
+          "plSelfModify"  => FALSE,
+          "plPriority"    => 2,
+          "plDepends"     => array(),
+          "plSection"     => array("admin"),
+          "plCategory"    => array("department"),
+
+          "plProvidedAcls" => array(
+#            "searchGuide"                => _("Search guide"),
+#            "seeAlso"                    => _("See also"),
+            "street"            => _("Street"),
+            "base"              => _("Base"),
+            "gosaUnitTag"       => _("Administrative settings"),
+            "description"       => _("Description"),
+            "c"                 => _("Country name")),
+          ));
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

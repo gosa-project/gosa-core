@@ -10,7 +10,7 @@
       <tr>
        <td><LABEL for="l">{t}Locality name{/t}</LABEL>{$must}</td>
        <td>
-{render acl=$ouACL}
+{render acl=$lACL}
     	<input id="l" name="l" size=25 maxlength=60 value="{$l}" title="{t}Name of locality to create{/t}">
 {/render}
        </td>
@@ -52,3 +52,4 @@
    </td>
   </tr>
 </table>
+<input type='hidden' name='dep_generic_posted' value='1'>

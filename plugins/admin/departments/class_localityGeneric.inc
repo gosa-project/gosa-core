@@ -23,12 +23,13 @@
 class locality extends department
 {
 	/* attribute list for save action */
-	var $attributes     = array( "l", "description");
+	var $attributes     = array("l", "description");
 	var $objectclasses  = array("top", "locality");
-  var $type   ="l";
-  var $l      ="";
-  var $orgi_l ="";
 
+  var $description= "";
+  var $type       = "l";
+  var $l          = "";
+  var $orig_l     = "";
   var $namingAttr = "l";
 
   function check()
@@ -37,6 +38,30 @@ class locality extends department
     return($message);
   }
 
+
+  /* Return plugin informations for acl handling */ 
+  static function plInfo()
+  {
+    return (array("plShortName"   => _("Locality"),
+          "plDescription" => _("Locality"),
+          "plSelfModify"  => FALSE,
+          "plPriority"    => 3,
+          "plDepends"     => array(),
+          "plSection"     => array("admin"),
+          "plCategory"    => array("department"),
+
+          "plProvidedAcls" => array(
+
+      
+
+            "description"       => _("Description"),
+            "l"                 => _("Location"),
+            "st"                => _("State"),
+
+            "base"              => _("Base"),
+            "gosaUnitTag"       => _("Administrative settings")),
+          ));
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

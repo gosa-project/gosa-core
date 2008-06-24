@@ -124,3 +124,4 @@
 	focus_field('o');
   -->
 </script>
+<input type='hidden' name='dep_generic_posted' value='1'>
