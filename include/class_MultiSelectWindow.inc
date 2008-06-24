@@ -63,6 +63,11 @@ class MultiSelectWindow{
 
 	function ClearElementsList()
 	{
+    $ui =get_userinfo();
+    $deps = $ui->get_module_departments($this->module);
+    if(!in_array($this->selectedBase, $deps)){
+      $this->selectedBase = array_shift($deps);
+    }
 		$this->array_Elements = array();
 	}
 
