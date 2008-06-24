@@ -70,7 +70,7 @@ class pluglist {
 		/* Look through ACL's */
 		foreach($this->ui->subtreeACL as $arr){
 			foreach($arr as $value){
-				if ($value == ':all' || preg_match("/[,:]$modname#/", $value)){
+				if ($value == ':all' || preg_match("/[,:]".normalizePreg($modname)."#/", $value)){
 					if (!preg_match('/^!/', $value)){
 						return (TRUE);
 					}
