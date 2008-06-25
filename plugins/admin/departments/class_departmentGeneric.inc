@@ -172,17 +172,20 @@ class department extends plugin
     }
 
     $smarty->assign("dep_type",$this->type);
+    
 
-    switch($this->type){
-      case 'c'        : $tpl ="country.tpl";break;
-      case 'o'        : $tpl ="organization.tpl";break;
-      case 'l'        : $tpl ="locality.tpl";break;
-      case 'ou'       : $tpl ="generic.tpl";break;
-      case 'alias'    : $tpl ="alias.tpl";break;
-      case 'referal'  : $tpl ="referal.tpl";break;
-      default  : $tpl ="generic.tpl";
+    $dep_types = departmentManagement::get_support_departments();
+    $tpl ="";
+    foreach($dep_types as $key => $data){
+      if($data['ATTR'] == $this->type){
+        $tpl = $data['TPL'];
+        break;
+      }
     }
-
+    if($tpl == "") {
+      trigger_error("No template specified for container type '".$this->type."', please update epartmentManagement::get_support_departments().");
+      $tpl = "generic.tpl";
+    }
 		return($smarty->fetch (get_template_path($tpl, TRUE)));
 	}
 

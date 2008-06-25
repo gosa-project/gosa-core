@@ -207,37 +207,7 @@ class divListDepartment extends MultiSelectWindow
   {
     $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
 
-    /* Possible department types
-     */
-   $types['dcObject']  = array("ACL" => "department",      "ATTR" => "dc",
-       "TITLE"     => _("Domain Component"),
-       "IMG_FULL"  => "plugins/departments/images/department.png", 
-       "IMG"       => "plugins/departments/images/department.png", "ABBR" => "dc");
-
-    $types['country']            = array("ACL" => "country",      "ATTR" => "c",
-        "TITLE"     => _("Country"),
-        "IMG_FULL"  => "plugins/departments/images/country.png", 
-        "IMG"       => "plugins/departments/images/country.png", "ABBR" => "c");
-    $types['locality']           = array("ACL" => "locality",     "ATTR" => "l",
-        "TITLE"     => _("Locality"),
-        "IMG_FULL"  => "plugins/departments/images/locality.png", 
-        "IMG"       => "plugins/departments/images/locality.png", "ABBR" => "l");
-    $types['organizationalUnit'] = array("ACL" => "department",   "ATTR" => "ou",
-        "TITLE"     => _("Department"),
-        "IMG_FULL"  => "images/lists/folder-full.png", 
-        "IMG"       => "images/lists/folder.png", "ABBR" => "ou");
-    $types['organization']       = array("ACL" => "organization", "ATTR" => "o",
-        "TITLE"     => _("Organization"),
-        "IMG_FULL"  => "plugins/departments/images/organization.png", 
-        "IMG"       => "plugins/departments/images/organization.png", "ABBR" => "o");
-    $types['Alias??']            = array("ACL" => "alias"     ,    "ATTR" => "alias?",
-        "TITLE"     => _("Alias"),
-        "IMG_FULL"  => "plugins/departments/images/department_alias.png", 
-        "IMG"       => "plugins/departments/images/department_alias.png", "ABBR" => "alias");
-    $types['Referal??']          = array("ACL" => "referal",       "ATTR" => "referal?",
-        "TITLE"     => _("Referal"),
-        "IMG_FULL"  => "plugins/departments/images/department_referal.png", 
-        "IMG"       => "plugins/departments/images/department_referal.png", "ABBR" => "referal");
+    $types = $this->parent->get_support_departments();
 
     $this->departments = $list;
 

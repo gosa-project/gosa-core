@@ -113,18 +113,18 @@ class departmentManagement extends plugin
     if ($s_action=="new"){
       $this->dn= "new";
 
-      $objects['c'] ['ACL'] = "country";
-      $objects['c'] ['TAB'] = "COUNTRY_TABS";
-      $objects['ou']['ACL'] = "department";
-      $objects['ou']['TAB'] = "DEPTABS";
-      $objects['l'] ['ACL'] = "locatity";
-      $objects['l'] ['TAB'] = "LOCALITY_TABS";
-      $objects['o'] ['ACL'] = "organization";
-      $objects['o'] ['TAB'] = "ORGANIZATION_TABS";
+      $types = $this->get_support_departments();
+      $type = "";
+      foreach($types as $key => $data){
+        if($data['ATTR'] == $s_entry){
+          $type = $key;
+          break;
+        }
+      }
 
-      if(isset($objects[$s_entry])){
-        $tab = $objects[$s_entry]['TAB'];
-        $acl = $objects[$s_entry]['ACL'];
+      if(isset($types[$type])){
+        $tab = $types[$type]['TAB'];
+        $acl = $types[$type]['ACL'];
         $this->deptabs= new deptabs($this->config,$this->config->data['TABS'][$tab], $this->dn,$acl);
         $this->deptabs->set_acl_base($this->DivListDepartment->selectedBase);
       }else{
@@ -142,15 +142,7 @@ class departmentManagement extends plugin
      */
     if (( $s_action=="edit") && (!isset($this->deptabs->config))){
 
-      /* Possible department types
-       */
-      $types['dcObject']           = array("ACL" => "",             "TAB" => "");
-      $types['country']            = array("ACL" => "country",      "TAB" => "COUNTRY_TABS");
-      $types['locality']           = array("ACL" => "locality",     "TAB" => "LOCALITY_TABS");
-      $types['organizationalUnit'] = array("ACL" => "department",   "TAB" => "DEPTABS");
-      $types['organization']       = array("ACL" => "organization", "TAB" => "ORGANIZATION_TABS");
-      $types['Alias??']            = array("ACL" => "alias"     ,   "TAB" => "");
-      $types['Referal??']          = array("ACL" => "referal",      "TAB" => "");
+      $types = $this->get_support_departments();
 
       $this->dn= $this->departments[trim($s_entry)]['dn'];
       $entry   = $this->departments[trim($s_entry)];
@@ -456,45 +448,21 @@ class departmentManagement extends plugin
     $config = session::get('config');
     $tmp = $config->idepartments;
 
-    /* Possible department types 
-     */ 
-    $types['dcObject']  = array("ACL" => "department",      "ATTR" => "dc",
-        "CLS" => "(objectClass=dcObject)",
-        "IMG"  => "plugins/departments/images/department.png");
+    $types = $this->get_support_departments();
 
-    $types['country']            = array("ACL" => "country",      "ATTR" => "c",
-        "CLS" => "(objectClass=country)",
-        "IMG" => "plugins/departments/images/country.png", "ABBR" => "c");
-    $types['locality']           = array("ACL" => "locality",     "ATTR" => "l",
-        "CLS" => "(objectClass=locality)",
-        "IMG" => "plugins/departments/images/country.png", "ABBR" => "l");
-    $types['organizationalUnit'] = array("ACL" => "department",   "ATTR" => "ou",
-        "CLS" => "(&(objectClass=gosaDepartment)(objectClass=organizationalUnit))",
-        "IMG" => "plugins/departments/images/country.png", "ABBR" => "ou");
-    $types['organization']       = array("ACL" => "organization", "ATTR" => "o",
-        "CLS" => "(objectClass=organization)",
-        "IMG" => "plugins/departments/images/country.png", "ABBR" => "o");
-    $types['Alias??']            = array("ACL" => "alias"     ,    "ATTR" => "alias?",
-        "CLS" => "(objectClass=alias??)",
-        "IMG" => "plugins/departments/images/country.png", "ABBR" => "alias");
-    $types['Referal??']          = array("ACL" => "referal",       "ATTR" => "referal?",
-        "CLS" => "(objectClass=referal??)",
-        "IMG" => "plugins/departments/images/country.png", "ABBR" => "referal");
-
-
- 
- 
     /* Create search filter for each department type
      */
     $res = array();
     if($this->DivListDepartment->SubSearch){
       foreach($types as $oc => $data){
-        $res= array_merge($res,get_list("(&(|(".$data['ATTR']."=$Regex)(description=$Regex))".$data['CLS'].")",
+        $oc_f = "(&(objectClass=".$data['OC'].")(objectClass=gosaDepartment))";
+        $res= array_merge($res,get_list("(&(|(".$data['ATTR']."=$Regex)(description=$Regex))".$oc_f.")",
             "department", $base, array($data['ATTR'],"objectClass", "description"), GL_SIZELIMIT | GL_SUBSEARCH));
       }
     }else{
       foreach($types as $oc => $data){
-        $res= array_merge($res,get_list("(&(|(".$data['ATTR']."=$Regex)(description=$Regex))".$data['CLS'].")",
+        $oc_f = "(&(objectClass=".$data['OC'].")(objectClass=gosaDepartment))";
+        $res= array_merge($res,get_list("(&(|(".$data['ATTR']."=$Regex)(description=$Regex))".$oc_f.")",
             "department", $base, array($data['ATTR'], "objectClass","description"), GL_SIZELIMIT ));
       }
     }
@@ -514,14 +482,13 @@ class departmentManagement extends plugin
        */
       $found =FALSE;
       foreach($types as $oc => $data){
-        if(in_array($oc,$attr['objectClass'])){
+        if(in_array($data['OC'],$attr['objectClass']) && isset($attr[$data['ATTR']][0])){
           $name = $attr[$data['ATTR']][0]."-".$attr['dn'];
           $deps[$name] = $attr;
           $found =TRUE;
           break;
         }
       }
-      if(!$found ) trigger_error("Not found!");
     }
     uksort($deps, 'strnatcasecmp');
 
@@ -603,6 +570,99 @@ class departmentManagement extends plugin
     $this->DivListDepartment->save_object();
   }
 
+
+  /*! \brief  Returns information about all container types that GOsa con handle.
+    @return Array   Informations about departments supported by GOsa.
+   */
+  public static function get_support_departments()
+  {
+    /* Domain component 
+     */
+    $types = array();
+    $types['dcObject']['ACL']     = "dcObject";
+    $types['dcObject']['CLASS']   = "dcObject";
+    $types['dcObject']['ATTR']    = "dc";
+    $types['dcObject']['TAB']     = "DCOBJECT_TABS";
+    $types['dcObject']['OC']      = "dcObject";
+    $types['dcObject']['IMG']     = "plugins/departments/images/dcObject.png";
+    $types['dcObject']['IMG_FULL']= "plugins/departments/images/dcObject.png";
+    $types['dcObject']['TITLE']   = _("Domain Component");
+    $types['dcObject']['TPL']     = "dcObject.tpl";
+
+    /* Country object
+     */
+    $types['country']['ACL']     = "country";
+    $types['country']['CLASS']   = "country";
+    $types['country']['TAB']     = "COUNTRY_TABS";
+    $types['country']['ATTR']    = "c";
+    $types['country']['OC']      = "country";
+    $types['country']['IMG']     = "plugins/departments/images/country.png";
+    $types['country']['IMG_FULL']= "plugins/departments/images/country.png";
+    $types['country']['TITLE']   = _("Country");
+    $types['country']['TPL']     = "country.tpl";
+
+    /* Locality object
+     */
+    $types['locality']['ACL']     = "locality";
+    $types['locality']['CLASS']   = "locality";
+    $types['locality']['TAB']     = "LOCALITY_TABS";
+    $types['locality']['ATTR']    = "l";
+    $types['locality']['OC']      = "locality";
+    $types['locality']['IMG']     = "plugins/departments/images/locality.png";
+    $types['locality']['IMG_FULL']= "plugins/departments/images/locality.png";
+    $types['locality']['TITLE']   = _("Locality");
+    $types['locality']['TPL']     = "locality.tpl";
+
+    /* Organization
+     */
+    $types['organization']['ACL']     = "organization";
+    $types['organization']['CLASS']   = "organization";
+    $types['organization']['TAB']     = "ORGANIZATION_TABS";
+    $types['organization']['ATTR']    = "o";
+    $types['organization']['OC']      = "organization";
+    $types['organization']['IMG']     = "plugins/departments/images/organization.png";
+    $types['organization']['IMG_FULL']= "plugins/departments/images/organization.png";
+    $types['organization']['TITLE']   = _("Organization");
+    $types['organization']['TPL']     = "organization.tpl";
+
+    /* Organization
+     */
+    $types['organizationalUnit']['ACL']     = "department";
+    $types['organizationalUnit']['CLASS']   = "department";
+    $types['organizationalUnit']['TAB']     = "DEPTABS";
+    $types['organizationalUnit']['ATTR']    = "ou";
+    $types['organizationalUnit']['OC']      = "organizationalUnit";
+    $types['organizationalUnit']['IMG']     = "plugins/departments/images/department.png";
+    $types['organizationalUnit']['IMG_FULL']= "plugins/departments/images/department.png";
+    $types['organizationalUnit']['TITLE']   = _("Department");
+    $types['organizationalUnit']['TPL']     = "generic.tpl";
+
+    /* Alias
+     */
+    $types['alias']['ACL']     = "alias";
+    $types['alias']['CLASS']   = "alias";
+    $types['alias']['TAB']     = "ALIASTABS";
+    $types['alias']['ATTR']    = "???";
+    $types['alias']['OC']      = "???";
+    $types['alias']['IMG']     = "plugins/departments/images/alias.png";
+    $types['alias']['IMG_FULL']= "plugins/departments/images/alias.png";
+    $types['alias']['TITLE']   = _("Alias");
+    $types['alias']['TPL']     = "alias.tpl";
+
+    /* Referal
+     */
+    $types['referal']['ACL']     = "referal";
+    $types['referal']['CLASS']   = "referal";
+    $types['referal']['TAB']     = "REFERALTABS";
+    $types['referal']['ATTR']    = "???";
+    $types['referal']['OC']      = "???";
+    $types['referal']['IMG']     = "plugins/departments/images/referal.png";
+    $types['referal']['IMG_FULL']= "plugins/departments/images/referal.png";
+    $types['referal']['TITLE']   = _("Referal");
+    $types['referal']['TPL']     = "referal.tpl";
+
+    return($types);
+  }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
