@@ -584,8 +584,8 @@ class departmentManagement extends plugin
     $types['dcObject']['ATTR']    = "dc";
     $types['dcObject']['TAB']     = "DCOBJECT_TABS";
     $types['dcObject']['OC']      = "dcObject";
-    $types['dcObject']['IMG']     = "plugins/departments/images/dcObject.png";
-    $types['dcObject']['IMG_FULL']= "plugins/departments/images/dcObject.png";
+    $types['dcObject']['IMG']     = "plugins/departments/images/dc.png";
+    $types['dcObject']['IMG_FULL']= "plugins/departments/images/dc.png";
     $types['dcObject']['TITLE']   = _("Domain Component");
     $types['dcObject']['TPL']     = "dcObject.tpl";
 
