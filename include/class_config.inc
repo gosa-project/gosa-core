@@ -672,31 +672,22 @@ class config  {
         }
       }
 
-      /* remove base from dn */
-      $val2 = str_replace($base,"",$val);
-
-      /* Get every single ou */
-      $str = preg_replace("/ou=/","|ou=",$val2);	
-      $elements = array_reverse(split("\|",$str)); 		
-
-      /* Save last array position */
-      $last = &$arr;
-
-      /* Get array depth  */
-      $cnt = count($elements);
+      /* Split dn into single department pieces.
+       */
+      $elements = array_reverse(split(",",preg_replace("/".normalizePreg($base)."$/","",$val))); 		
 
       /* Add last ou element of current dn to our array */
+      $last = &$arr;
       foreach($elements as $key => $ele){
 
-        /* skip enpty */
+        /* skip empty */
         if(empty($ele)) continue;
 
         /* Extract department name */		
-        $elestr = preg_replace("/^ou=/","", $ele);
-        $elestr = preg_replace("/,$/","",$elestr);	
+        $elestr = trim(preg_replace("/^[^=]*+=/","", $ele),",");
 
         /* Add to array */	
-        if($key == ($cnt-2)){
+        if($key == (count($elements)-1)){
           $last[$elestr]['ENTRY'] = $val;
         }
 
@@ -708,13 +699,13 @@ class config  {
     /* Add base entry */
     $ret["/"]["ENTRY"] 	= $base;
     $ret["/"]["SUB"]	= $arr;
-
     $this->idepartments= $this->generateDepartmentArray($ret,-1,$max_size);
   }
 
 
   /* Creates display friendly output from make_idepartments */
-  function generateDepartmentArray($arr,$depth = -1,$max_size){
+  function generateDepartmentArray($arr,$depth = -1,$max_size)
+  {
     $ret = array();
     $depth ++;
 

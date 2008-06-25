@@ -1108,7 +1108,6 @@ function &get_smarty()
 function convert_department_dn($dn, $base = NULL)
 {
   global $config;
-  $dep= "";
 
   if($base == NULL){
     $base = $config->current['BASE'];
@@ -1119,21 +1118,14 @@ function convert_department_dn($dn, $base = NULL)
   $dn = preg_replace("/".normalizePreg($base)."$/i","",$dn);
   if(empty($dn)) return("/");
 
+
+  $dep= "";
   foreach (split(',', $dn) as $rdn){
-
-    /* We're only interested in organizational units... */
-    if (substr($rdn,0,3) == 'ou='){
-      $dep= substr($rdn,3)."/$dep";
-    }
-
-    /* ... and location objects */
-    if (substr($rdn,0,2) == 'l='){
-      $dep= substr($rdn,2)."/$dep";
-    }
+    $dep = preg_replace("/^[^=]+=/","",$rdn)."/".$dep;
   }
 
   /* Return and remove accidently trailing slashes */
-  return rtrim($dep, "/");
+  return(trim($dep, "/"));
 }
 
 
