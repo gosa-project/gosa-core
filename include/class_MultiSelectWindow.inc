@@ -663,25 +663,33 @@ class MultiSelectWindow{
 
 		/* Get all departments within this subtree */
 		$deps= get_list("(&(|(ou=*)(description=*))(objectClass=gosaDepartment))", $this->module, $base,
-                    array("ou", "description"), GL_SIZELIMIT );
+                    array("ou", "description","objectClass"), GL_SIZELIMIT );
 
 		/* Edit delete link for system types
 		 */
 		$linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
 
 		/* Create an array with all visible (in the list) departments */
+    $types = departmentManagement::get_support_departments();
+
 		$departments = array();
 		foreach($deps as $value){
       $name = $value['ou'][0]." -".$value['dn'];
-		  $this->departments[$name]= $value; 
+      foreach($types as $type){
+        if(in_array($type['OC'],$value['objectClass'])){
+          $value['type'] = $type;
+          break;
+        }
+      }       
+		  $this->departments[$name]= $value;
 		}
     uksort($this->departments, 'strnatcasecmp');
-    $this->departments = array_values($this->departments);
 
     $ui = get_userinfo();
     $module_deps = $ui->get_module_departments($this->module);
   
 		/* Add deps to this dialog object list */
+    $this->departments = array_values($this->departments);
 		foreach($this->departments as $key=> $val){
 
       if(!in_array($val['dn'],$module_deps)) continue;
@@ -689,12 +697,14 @@ class MultiSelectWindow{
       /* Check if this department contains sub-departments
          Display different image in this case
        */
-      $non_empty="";
+      $img = $val['type']['IMG'];
       foreach($this->config->departments as $keyd){
         if(preg_match("/,".normalizePreg($val['dn'])."$/",$keyd)){
-          $non_empty="-full";
+          $img = $val['type']['IMG_FULL'];
         }
       }
+
+      $img = "<image src='".$img."' class='center'>";
 
 			/* Add spacer cols to divlist 
        */
@@ -714,7 +724,6 @@ class MultiSelectWindow{
 
       /* Add departments
        */
-      $img = "<img src='images/lists/folder".$non_empty.".png' alt='department'>";
 			$row[]=$field1=array("string"=> $img,"attach"=>"style='text-align:center;width:20px;'");
 			$row[]=$field2=array("string"=>sprintf($linkopen,$key,$name), "attach" => "style=''");
 
