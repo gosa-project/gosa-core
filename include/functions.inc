@@ -18,9 +18,24 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/* Configuration file location */
-define ("CONFIG_DIR", "/etc/gosa");
-define ("CONFIG_FILE", "gosa.conf");
+/* Allow setting the config patih in the apache configuration
+   e.g.  SetEnv CONFIG_FILE /etc/path
+ */
+if(!isset($_SERVER['CONFIG_DIR'])){
+  define ("CONFIG_DIR", "/etc/gosa");
+}else{
+  define ("CONFIG_DIR",$_SERVER['CONFIG_DIR']);
+}
+
+/* Allow setting the config file in the apache configuration
+    e.g.  SetEnv CONFIG_FILE gosa.conf.2.5
+ */
+if(!isset($_SERVER['CONFIG_FILE'])){
+  define ("CONFIG_FILE", "gosa.conf");
+}else{
+  define ("CONFIG_FILE",$_SERVER['CONFIG_FILE']);
+}
+
 define ("CONFIG_TEMPLATE_DIR", "../contrib/");
 define ("HELP_BASEDIR", "/var/www/doc/");
 
