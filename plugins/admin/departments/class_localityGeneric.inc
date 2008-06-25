@@ -23,8 +23,8 @@
 class locality extends department
 {
 	/* attribute list for save action */
-	var $attributes     = array("l", "description");
-	var $objectclasses  = array("top", "locality");
+	var $attributes     = array("l", "description", "ou");
+	var $objectclasses  = array("top", "locality", "gosaDepartment");
 
   var $description= "";
   var $type       = "l";

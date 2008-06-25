@@ -23,14 +23,14 @@
 class organization extends department
 {
 	/* attribute list for save action */
-  var $attributes     = array( "o", "description","userPassword","searchGuide",
+  var $attributes     = array( "o", "ou", "description","userPassword","searchGuide",
       "seeAlso","businessCategory","x121Address","registeredAddress",
       "destinationIndicator","preferredDeliveryMethod","telexNumber",
       "telephoneNumber","internationaliSDNNumber","facsimileTelephoneNumber","street",
       "postOfficeBox","postalCode", "postalAddress","physicalDeliveryOfficeName",
       "st","l","teletexTerminalIdentifier");
 
-  var $objectclasses  = array("top", "organization");
+  var $objectclasses  = array("top", "organization", "gosaDepartment");
 
   /* Attributes 
    */ 

@@ -301,6 +301,11 @@ class department extends plugin
 	{
 		$ldap= $this->config->get_ldap_link();
 
+    /* Ensure that ou is saved too, it is required by objectClass gosaDepartment 
+     */
+    $nA = $this->namingAttr;
+    $this->ou = $this->$nA;
+
     /* Add tag objects if needed */
     if ($this->is_administrational_unit){
 

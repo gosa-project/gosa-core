@@ -172,15 +172,21 @@ class divListDepartment extends MultiSelectWindow
         "&nbsp;"._("Locality")."&nbsp;(l)|dep_new_l|\n";
     }
 
-    if(preg_match("/c/",$ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/alias"))) {
-      $s.= "...|<input class='center' type='image' src='plugins/departments/images/department_alias.png' alt=''>".
-        "&nbsp;"._("Alias")."|dep_new_alias|\n";
+    if(preg_match("/c/",$ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/dcObject"))) {
+      $s.= "...|<input class='center' type='image' src='plugins/departments/images/dcObject.png' alt=''>".
+        "&nbsp;"._("Domain component")."&nbsp;(l)|dep_new_dc|\n";
     }
 
-    if(preg_match("/c/",$ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/referal"))) {
-      $s.= "...|<input class='center' type='image' src='plugins/departments/images/department_referal.png' alt=''>".
-        "&nbsp;"._("Referal")."|dep_new_referal|\n";
-    }
+
+#   if(preg_match("/c/",$ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/alias"))) {
+#     $s.= "...|<input class='center' type='image' src='plugins/departments/images/department_alias.png' alt=''>".
+#       "&nbsp;"._("Alias")."|dep_new_alias|\n";
+#   }
+#
+#   if(preg_match("/c/",$ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/referal"))) {
+#     $s.= "...|<input class='center' type='image' src='plugins/departments/images/department_referal.png' alt=''>".
+#       "&nbsp;"._("Referal")."|dep_new_referal|\n";
+#   }
 
     $s.= "..|---|\n";
     $s.= "..|<img src='images/lists/trash.png' alt='' border='0' class='center'>".
