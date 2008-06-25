@@ -426,7 +426,7 @@ class userinfo
 
   /* Extract all departments that are accessible (direct or 'on the way' to an
      accessible department) */
-  function get_module_departments($module)
+  function get_module_departments($module, $skip_self_acls = FALSE )
   {
     
     /* If we are forced to skip ACLs checks for the current user 
@@ -474,6 +474,11 @@ class userinfo
       foreach($infos as $info){
         $found = FALSE;
         foreach($info['acl'] as $cat => $data){
+
+          /* Skip self acls?
+           */
+          if($skip_self_acls && preg_match("//s",$data['0'])) continue;
+
           if(is_array($module)){
             foreach($module as $mod){
               if(preg_match("/^".normalizePreg($mod)."/",$cat)){

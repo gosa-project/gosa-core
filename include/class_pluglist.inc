@@ -113,7 +113,7 @@ class pluglist {
 		
 				/* No self acls. Check if we have any acls for the given ACL type 
                  */
-				$deps = $this->ui->get_module_departments($acl_to_check);
+				$deps = $this->ui->get_module_departments($acl_to_check,TRUE);
 				if(count($deps)) return TRUE;
 			}
 		}
