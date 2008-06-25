@@ -55,8 +55,6 @@ class divListDepartment extends MultiSelectWindow
     $this->EnableCloseButton(false);
     $this->EnableSaveButton (false);
 
-
-
    /* Toggle all selected / deselected */
     $chk = "<input type='checkbox' id='select_all' name='select_all' title='"._("Select all")."'
                onClick='toggle_all_(\"^item_selected_[a-zA-Z0-9\\/\=]*$\",\"select_all\");' >";
@@ -151,43 +149,18 @@ class divListDepartment extends MultiSelectWindow
     $s .= "..|<img src='images/lists/new.png' alt='' border='0' class='center'>".
       "&nbsp;"._("Create")."|\n";
 
-    if(preg_match("/c/",$ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/department"))) {
-      $s.= "...|<input class='center' type='image' src='plugins/departments/images/department.png' alt=''>".
-        "&nbsp;"._("Department")."&nbsp;(ou)|dep_new_ou|\n";
-
+    /* Add all createable department types 
+     */
+    $types = $this->parent->get_support_departments();
+    foreach($types as $type){
+      if(preg_match("/c/",$ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/".$type['ACL']))){
+      $s.= "...|<input class='center' type='image' src='".$type['IMG']."' alt='".$type['ATTR']."'>".
+        "&nbsp;".$type['TITLE']."&nbsp;(".$type['ATTR'].")|dep_new_".$type['ATTR']."|\n";
+      }
     }
 
-    if(preg_match("/c/",$ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/organization"))) {
-      $s.= "...|<input class='center' type='image' src='plugins/departments/images/organization.png' alt=''>".
-        "&nbsp;"._("Organization")."&nbsp;(o)|dep_new_o|\n";
-    }
-
-    if(preg_match("/c/",$ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/country"))) {
-      $s.= "...|<input class='center' type='image' src='plugins/departments/images/country.png' alt=''>".
-        "&nbsp;"._("Country")."&nbsp;(c)"."|dep_new_c|\n";
-    }
-
-    if(preg_match("/c/",$ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/locality"))) {
-      $s.= "...|<input class='center' type='image' src='plugins/departments/images/locality.png' alt=''>".
-        "&nbsp;"._("Locality")."&nbsp;(l)|dep_new_l|\n";
-    }
-
-    if(preg_match("/c/",$ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/dcObject"))) {
-      $s.= "...|<input class='center' type='image' src='plugins/departments/images/dcObject.png' alt=''>".
-        "&nbsp;"._("Domain component")."&nbsp;(l)|dep_new_dc|\n";
-    }
-
-
-#   if(preg_match("/c/",$ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/alias"))) {
-#     $s.= "...|<input class='center' type='image' src='plugins/departments/images/department_alias.png' alt=''>".
-#       "&nbsp;"._("Alias")."|dep_new_alias|\n";
-#   }
-#
-#   if(preg_match("/c/",$ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/referal"))) {
-#     $s.= "...|<input class='center' type='image' src='plugins/departments/images/department_referal.png' alt=''>".
-#       "&nbsp;"._("Referal")."|dep_new_referal|\n";
-#   }
-
+    /* Add remove action 
+     */
     $s.= "..|---|\n";
     $s.= "..|<img src='images/lists/trash.png' alt='' border='0' class='center'>".
       "&nbsp;"._("Remove")."|"."remove_multiple|\n";
@@ -281,9 +254,11 @@ class divListDepartment extends MultiSelectWindow
       /* Create image 
        */
       if($sub_folders){
-        $img =  "<img src='".$dep_data['IMG_FULL']."' class='center' title='".$dep_data['TITLE']."'>";
+        $img =  "<img alt='".$dep_data['ATTR']."' src='".$dep_data['IMG_FULL']."' 
+          class='center' title='".$dep_data['TITLE']."'>";
       }else{
-        $img =  "<img src='".$dep_data['IMG']."' class='center' title='".$dep_data['TITLE']."'>";
+        $img =  "<img alt='".$dep_data['ATTR']."' src='".$dep_data['IMG']."' 
+          class='center' title='".$dep_data['TITLE']."'>";
       }
      
       /* Append data to the listing 
