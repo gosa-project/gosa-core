@@ -141,9 +141,10 @@ class divListACL extends MultiSelectWindow
 
       $action     = "";
 
+      /* Handle ACL role entries
+       */
       if(in_array("gosaRole",$acl_entry['objectClass'])){
 
-        /* Role handling */
         $acl        = $this->ui->get_permissions($acl_entry['dn'],"aclroles/aclRole");
         $acl_all    = $this->ui->has_complete_category_acls($acl_entry['dn'],"aclroles");
 
@@ -167,16 +168,10 @@ class divListACL extends MultiSelectWindow
         /* Add snapshot functionality */
         $action.= $this->parent->get_snapshot_action($acl_entry['dn'],"aclroles");
 
-        if(preg_match("/d/", $acl)){
-          $action.= "<input class='center' type='image' src='images/lists/trash.png' alt='"._("delete")."' 
-            name='list_acl_role_del_%KEY%' title='"._("Delete acl role")."'>";
-        }
-
-        $field0 = array("string" => "<input type='checkbox' id='item_selected_".$key."' name='item_selected_".$key."'>" ,
-            "attach" => "style='width:20px;'");
-
       }else{
 
+        /* Handle non-role ACL entries
+         */
         $acl        = $this->ui->get_permissions($acl_entry['dn'],"acl/acl");
         $acl_all    = $this->ui->has_complete_category_acls($acl_entry['dn'],"acl");
 
@@ -190,12 +185,18 @@ class divListACL extends MultiSelectWindow
           $action.= "<input class='center' type='image' src='images/lists/edit.png' alt='"._("edit")."'     
             name='list_acl_edit_%KEY%' title='"._("Edit acl")."'>";
         }
-        if(preg_match("/d/", $acl)){
-          $action.= "<input class='center' type='image' src='images/lists/trash.png' alt='"._("delete")."' 
-            name='list_acl_del_%KEY%' title='"._("Delete acl")."'>";
-        }
-        $field0 = array("string" => "", "attach" => "style='width:20px;'");
       }
+
+      /* Add delete actions */
+      if(preg_match("/d/", $acl)){
+        $action.= "<input class='center' type='image' src='images/lists/trash.png' alt='"._("delete")."' 
+          name='list_acl_del_%KEY%' title='"._("Delete acl")."'>";
+      }
+      
+      /* Add a checkbox in front of each entry 
+       */
+      $field0 = array("string" => "<input type='checkbox' id='item_selected_".$key."' name='item_selected_".$key."'>" ,
+          "attach" => "style='width:20px;'");
 
       /* Cutted objects should be displayed in light grey */
       $display = $cn;
@@ -208,12 +209,16 @@ class divListACL extends MultiSelectWindow
         }
       }
 
-      $field1 = array("string" => $list_left_icon, "attach"=> "style='text-align:center;width:20px;'");
-      $field2 = array("string" => sprintf($editlink,$key,$display)."&nbsp;","attach" => "");
-      $field3 = array("string" => preg_replace("/%KEY%/",$key,$action), "attach"=> "style='text-align:right;width:".$this->action_col_size."px;border-right:0px;'");
+      $field1 = array("string" => $list_left_icon,
+          "attach"=> "style='text-align:center;width:20px;'");
+      $field2 = array("string" => sprintf($editlink,$key,$display)."&nbsp;",
+          "attach" => "");
+      $field3 = array("string" => preg_replace("/%KEY%/",$key,$action),
+          "attach"=> "style='text-align:right;width:".$this->action_col_size."px;border-right:0px;'");
       $this->AddElement(array($field0,$field1,$field2,$field3));
     }
   }
+
 
   function Save()
   {

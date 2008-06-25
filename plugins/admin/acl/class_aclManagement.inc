@@ -59,7 +59,8 @@ class aclManagement extends plugin
     /* Call parent execute */
     plugin::execute();
 
-    session::set('LOCK_VARS_TO_USE',array("/^item_selected/","/^menu_action/","/^list/","/^id_/","/^list_acl_role_del/","/^list_acl_del/","/^menu_action/"));
+    session::set('LOCK_VARS_TO_USE',array("/^item_selected/","/^menu_action/",
+          "/^list/","/^id_/","/^list_acl_role_del/","/^list_acl_del/","/^menu_action/"));
 
     $smarty       = get_smarty();                 // Smarty instance
     $s_action     = "";                           // Contains the action to be taken
@@ -80,7 +81,6 @@ class aclManagement extends plugin
     $types = array( 
                     "del"       =>"^list_acl_del",
                     "edit"      =>"^list_acl_edit",
-                    "del_role"  =>"^list_acl_role_del",
                     "edit_role" =>"^list_acl_role_edit",
                     "copy"      =>"^copy",
                     "cut"       =>"^cut",
@@ -232,120 +232,80 @@ class aclManagement extends plugin
      ********************/
 
     /* Remove acl was requested */
-    if ($s_action=="del_role"){
-
-      /* Get 'dn' from posted acl */
-      $this->dn= $this->list[trim($s_entry)]['dn'];
-
-      /* Check permissions */
-      if(preg_match("/d/",$this->ui->get_permissions($this->dn,"aclroles/aclrole"))){
-
-        /* Check locking, save current plugin in 'back_plugin', so
-           the dialog knows where to return. */
-        if (($acl= get_lock($this->dn)) != ""){
-          return(gen_locked_message ($acl, $this->dn));
-        }
-
-        /* Lock the current entry, so nobody will edit it during deletion */
-        add_lock ($this->dn, $this->ui->dn);
-        $smarty->assign("info", msgPool::deleteInfo(@LDAP::fix($this->dn)));
-        $smarty->assign("is_role",true);
-  
-        return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
-      } else {
-
-        /* Obviously the acl isn't allowed to delete. Show message and
-           clean session. */
-        msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
-      }
-    }
-
-
-    /********************
-      Delete entry confirmed 
-     ********************/
-
-    /* Confirmation for deletion has been passed. Acl should be deleted. */
-    if (isset($_POST['delete_acl_role_confirmed'])){
-
-      /* Check permissions */
-      if(preg_match("/d/",$this->ui->get_permissions($this->dn,"aclroles/aclrole"))){
-
-        /* Delete request is permitted, perform LDAP action */
-        $this->acltabs= new aclroletab($this->config, NULL,$this->dn);
-        $this->acltabs->delete();
-        unset ($this->acltabs);
-        $this->acltabs= NULL;
-      } else {
-
-        /* Normally this shouldn't be reached, send some extra
-           logs to notify the administrator */
-        msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
-
-        if(isset($this->ui->uid)){
-          new log("security","aclroles/".get_class($this),$this->dn,array(),"Warning: '".$this->ui->uid."' tried to trick acl role deletion.");
-        }
-      }
-
-      /* Remove lock file after successfull deletion */
-      $this->remove_lock();
-    }
-
-
-    /********************
-      Delete entry requested, display confirm dialog
-     ********************/
-
-    /* Remove acl was requested */
     if ($s_action=="del" || $s_action == "del_multiple"){
 
-      /* Get 'dn' from posted acl */
+      /* Collect entries to delete 
+       */ 
       if($s_action == "del"){
-        $this->dns = array( $this->list[trim($s_entry)]['dn']); 
+        $ids = array(trim($s_entry));
       }else{
-        $this->dns = array();
-        foreach($this->list_get_selected_items() as $id){
-          $this->dns[] = $this->list[$id]['dn'];
-        }
+        $ids = $this->list_get_selected_items();
       }
 
+      /* Check ACLs and collect removeable entries.
+       */
+      $this->ids = array();
+      $this->dns = array();
       $disallowed = array();
-      foreach($this->dns as $key => $dn){
-        $acl = $this->ui->get_permissions($dn, "aclroles/aclrole");
+      foreach($ids as $id){
+        $dn = $this->list[$id]['dn'];
+        if(in_array("gosaRole",$this->list[$id]['objectClass'])){
+          $acl = $this->ui->get_permissions($dn, "aclroles/aclrole");
+        }else{
+          $acl = $this->ui->get_permissions($dn, "acl/acl");
+        }
         if(!preg_match("/d/",$acl)){
-          unset($this->dns[$key]);
           $disallowed[] = $dn;
+        }else{
+          $this->ids[$id]  = $id;
+          $this->dns[$id]  = $dn;
         }
       }
 
+      /* Display a message box containing all entries that we are not allowed to remove. 
+       */
       if(count($disallowed)){
         msg_dialog::display(_("Permission"),msgPool::permDelete($disallowed),INFO_DIALOG);
       }
 
-      if(count($this->dns)){
-
+      /* We have at least one entry that can be removed
+       */
+      if(count($this->ids)){
 
         /* Display lock messages */
         if ($user= get_multiple_locks($this->dns)){
           return(gen_locked_message($user,$this->dns));
         }
 
+        /* Create a readable string about what will be done.
+         */
         $dns_names = array();
-        foreach($this->dns as $key => $dn){
+        foreach($this->ids as $id){
 
-          /* Check permissions */
-          if(!preg_match("/d/",$this->ui->get_permissions($dn,"aclroles/aclrole"))){
+          /* Check permissions depending on the acl object type
+           */
+          $dn = $this->list[$id]['dn'];
+          if(in_array("gosaRole",$this->list[$id]['objectClass'])){
+            $acl = $this->ui->get_permissions($dn,"aclroles/aclrole");
+            $name = _("ACL role");
+          }else{
+            $acl = $this->ui->get_permissions($dn,"acl/acl");
+            $name = _("ACL");
+          }
+          $name = str_pad($name,10," ");
+          $name = preg_replace("/ /","&nbsp;",$name);
 
-            /* Obviously the acl isn't allowed to delete. Show message and
-               clean session. */
+          /* Append each entry to the displayed information dialog, 
+              if we are allowed to remove the entry.
+           */
+          if(!preg_match("/d/",$acl)){
             msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
-            unset($this->dns[$key]);
+            unset($this->dns[$id]);
+            unset($this->ids[$id]);
             continue;
           }
-
-          $dns_names[] = LDAP::fix($dn);
+          $dns_names[] = "</i><font style='font-weight:bold; font-family: courier;'>".$name."</font><i> ".LDAP::fix($dn);
         }
-
         if(count($this->dns)){
           add_lock($this->dns,$this->ui->dn);  
           $smarty->assign("info", msgPool::deleteInfo($dns_names));
@@ -363,28 +323,31 @@ class aclManagement extends plugin
     /* Confirmation for deletion has been passed. Acl should be deleted. */
     if (isset($_POST['delete_acl_confirm'])){
 
-
-      foreach($this->dns as $dn){
-      
+      foreach($this->ids as $id){
+     
+        /* Depending on the type of acl we want to remove 
+            create a new acl or a new gosaRole object 
+         */ 
+        $dn = $this->list[$id]['dn'];
         $this->dn = $dn;
+        if(in_array("gosaRole",$this->list[$id]['objectClass'])){
+          $acl = $this->ui->get_permissions($dn,"aclroles/aclrole");
+          $this->acltabs= new aclroletab($this->config,NULL, $this->dn);
+        }else{
+          $acl = $this->ui->get_permissions($dn,"acl/acl");
+          $this->acltabs= new acltab($this->config,NULL, $this->dn);
+        }
 
         /* Check permissions */
-        if(preg_match("/d/",$this->ui->get_permissions($this->dn,"aclroles/aclrole"))){
-
-          /* Delete request is permitted, perform LDAP action */
-          $this->acltabs= new aclrole($this->config, $this->dn);
-          $this->acltabs->remove_from_parent();
+        if(preg_match("/d/",$acl)){
+          $this->acltabs->delete();
           unset ($this->acltabs);
           $this->acltabs= NULL;
         } else {
-
-          /* Normally this shouldn't be reached, send some extra
-             logs to notify the administrator */
           msg_dialog::display(_("Permission error"),msgPool::permDelete(), ERROR_DIALOG);
-
           if(isset($this->ui->uid)){
-            new log("security","aclroles/".get_class($this),$this->dn,array(),"Warning: '".$this->ui->uid."' tried to trick acl role      deletion.");
-
+            new log("security","aclroles/".get_class($this),$this->dn,array(),
+                "Warning: '".$this->ui->uid."' tried to trick acl role      deletion.");
           }
         }
       }
