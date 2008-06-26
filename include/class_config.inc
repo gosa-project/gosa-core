@@ -616,11 +616,41 @@ class config  {
     $result['/']= $this->current['BASE'];
     $this->tdepartments= array();
 
+    /* Get all department types from department Management, to be able detect the department type.
+        -It is possible that differnty department types have the same name, 
+         in this case we have to mark the department name to be able to differentiate.
+          (e.g l=Name  or   o=Name)
+     */    
+    $types = departmentManagement::get_support_departments();
+    
+    /* Create a list of attributes to fetch */
+    $ldap_values = array("objectClass","gosaUnitTag");
+    $filter = "";
+    foreach($types as $type){
+      $ldap_values[] = $type['ATTR'];
+      $filter .= "(objectClass=".$type['OC'].")";
+    }
+    $filter = "(&(objectClass=gosaDepartment)(|".$filter."))";
+
     /* Get list of department objects */
     $ldap= $this->get_ldap_link();
     $ldap->cd ($this->current['BASE']);
-    $ldap->search ("(objectClass=gosaDepartment)", array("ou", "objectClass", "gosaUnitTag"));
+    $ldap->search ($filter, $ldap_values);
     while ($attrs= $ldap->fetch()){
+
+      /* Detect department type */
+      $type_data = array();
+      foreach($types as $t => $data){
+        if(in_array($data['OC'],$attrs['objectClass'])){
+          $type_data = $data;
+          break;    
+        }
+      }
+
+      /* Unknown department type -> skip 
+       */
+      if(!count($type_data)) continue;
+
       $dn= $ldap->getDN();
       $this->tdepartments[$dn]= "";
 
@@ -640,9 +670,11 @@ class config  {
         continue;
       }
 
+      $c_dn = convert_department_dn($dn)." (".$type_data['ATTR'].")";
+
       /* Only assign non-root departments */
       if ($dn != $result['/']){
-        $result[convert_department_dn($dn)]= $dn;
+        $result[$c_dn]= $dn;
       }
     }
 
@@ -685,16 +717,24 @@ class config  {
 
         /* Extract department name */		
         $elestr = trim(preg_replace("/^[^=]*+=/","", $ele),",");
+        $nameA  = trim(preg_replace("/=.*$/","", $ele),",");
+        if($nameA != "ou"){
+          $nameA = " (".$nameA.")";
+        }else{
+          $nameA = "";
+        }
+    
 
         /* Add to array */	
         if($key == (count($elements)-1)){
-          $last[$elestr]['ENTRY'] = $val;
+          $last[$elestr.$nameA]['ENTRY'] = $val;
         }
 
         /* Set next array appending position */
-        $last = &$last[$elestr]['SUB'];
+        $last = &$last[$elestr.$nameA]['SUB'];
       }
     }
+
 
     /* Add base entry */
     $ret["/"]["ENTRY"] 	= $base;
