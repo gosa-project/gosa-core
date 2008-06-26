@@ -518,6 +518,12 @@ class msgPool
   }
 
 
+  public static function invalidConfigurationAttribute($attr)
+  {
+    return sprintf(_("The value for '%s' is currently unconfigured or invalid, please check your configurationi file. "), $attr);
+  }
+
+
   public static function cannotDeleteFile($file)
   {
     return sprintf(_("Cannot delete file '%s'!"), $file);
