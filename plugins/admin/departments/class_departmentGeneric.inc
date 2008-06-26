@@ -691,47 +691,6 @@ class department extends plugin
     }
   }
 
-
-  
-  /*! \brief    Returns a list of all available departments for this object.
-                If this object is new, all departments we are allowed to create a new user in are returned.
-                If this is an existing object, return all deps. we are allowed to move tis object too.
-
-      @return   Array [dn] => "..name"  // All deps. we are allowed to act on.
-  */
-  function get_allowed_bases()
-  {
-    $ui = get_userinfo();
-    $deps = array();
-
-    /* Is this a new object ? Or just an edited existing object */
-    if(!$this->initially_was_account && $this->is_account){
-      $new = true;
-    }else{
-      $new = false;
-    }
-
-    $ideps = $this->config->idepartments;
-    if(!isset($ideps[$this->base])){
-      $ideps[$this->base] = ".";
-    }
-    foreach($deps as $dn => $name){
-      if($new && $this->acl_is_createable($dn)){
-        $deps[$dn] = $name;
-      }elseif(!$new && $this->acl_is_moveable($dn)){
-        $deps[$dn] = $name;
-      }
-    }
-
-    /* Add current base */
-    if(isset($this->base) && isset($ideps[$this->base])){
-      $deps[$this->base] = $ideps[$this->base];
-    }else{
-      trigger_error("Cannot return list of departments, no default base found in class ".get_class($this).". ".$this->base);
-    }
-    return($deps);
-  }
-
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
