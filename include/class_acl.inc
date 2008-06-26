@@ -92,11 +92,11 @@ class acl extends plugin
 
     /* Groups */
     $ldap->cd($config->current['BASE']);
-    if ($tag == ""){
+#    if ($tag == ""){
       $ldap->search('(objectClass=posixGroup)', array('cn', 'description'));
-    } else {
-      $ldap->search('(&(objectClass=posixGroup)(gosaUnitTag='.$tag.'))', array('cn', 'description'));
-    }
+#    } else {
+#      $ldap->search('(&(objectClass=posixGroup)(gosaUnitTag='.$tag.'))', array('cn', 'description'));
+#    }
     while ($attrs= $ldap->fetch()){
       $dsc= "";
       if (isset($attrs['description'][0])){
