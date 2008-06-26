@@ -203,7 +203,7 @@ class department extends plugin
 	{
 		$ldap= $this->config->get_ldap_link();
 		$ldap->cd ($this->dn);
-		$ldap->recursive_remove();
+		$ldap->rmdir_recursive($this->dn);
     new log("remove","department/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
     if (!$ldap->success()){
       msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_DEL, get_class()));

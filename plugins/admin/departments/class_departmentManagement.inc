@@ -185,8 +185,13 @@ class departmentManagement extends plugin
       Delete MULTIPLE entries requested, display confirm dialog
      ********************/
 
-    if ($s_action=="del_multiple"){
-      $ids = $this->list_get_selected_items();
+    if ($s_action=="del_multiple" || $s_action == "del"){
+
+      if($s_action == "del"){
+        $ids = array($s_entry);
+      }else{
+        $ids = $this->list_get_selected_items();
+      }
 
       if(count($ids)){
         $this->dns = array();
@@ -251,56 +256,6 @@ class departmentManagement extends plugin
       /* Remove lock file after successfull deletion */
       $this->remove_lock();
       $this->dns = array();
-    }
-
-
-    /***************
-      Delete entry 
-     ***************/
-
-    /* Delete Entry if Posted action (s_action) == del 
-     * The entry which will be deleted is defined in $s_entry
-     */
-    if ($s_action =="del"){
-      $this->dn= $this->config->departments[trim($s_entry)];
-
-      /* check acls */
-      $acl = $this->ui->get_permissions($this->dn,"department/department");
-      if(preg_match("/d/",$acl)){
-
-        /* Check locking */
-        if (($user= get_lock($this->dn)) != ""){
-          session::set('dn',$this->dn);
-          return(gen_locked_message($user, $this->dn));
-        } else {
-          add_lock ($this->dn, $this->ui->dn);
-          $smarty->assign("info", sprintf(_("You're about to delete the whole LDAP subtree placed under '%s'."), @LDAP::fix($this->dn)));
-          $smarty->assign("multiple", false);
-          $display.= $smarty->fetch (get_template_path('remove.tpl', TRUE));
-          return ($display);
-        }
-      }else{
-        msg_dialog::display(_("Permission error"), msgPool::permDelete(), WARNING_DIALOG);
-      }
-    }
-
-
-    /***************
-      Delete department confirmed  
-     ***************/
-
-    /* If department deletion is accepted ...
-     * Finally delete department 
-     */
-    if (isset($_POST['delete_department_confirm'])){
-
-      /* check acls */
-      $acl = $this->ui->get_permissions($this->dn,"department/department");
-      if(preg_match("/d/",$acl)){
-        $this->remove_from_parent();
-      } else {
-        msg_dialog::display(_("Permission error"), msgPool::permDelete(), WARNING_DIALOG);
-      }
     }
 
 
