@@ -188,12 +188,10 @@ class departmentManagement extends plugin
     if ($s_action=="del_multiple"){
       $ids = $this->list_get_selected_items();
 
-
       if(count($ids)){
         $this->dns = array();
         foreach($ids as $id){
-          $id = base64_decode($id);
-          $this->dns[$id] = $dn = $this->config->departments[$id];
+          $this->dns[$id] = $dn = $this->departments[$id]['dn'];
         }
 
         /* Check locks */
