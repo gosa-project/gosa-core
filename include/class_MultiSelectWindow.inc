@@ -555,16 +555,8 @@ class MultiSelectWindow{
       $base_back= preg_replace("/^[^,]+,/", "", session::get('CurrentMainBase'));
       $dep_id = $this->ui->get_module_departments($this->module);
       if(in_array_ics($base_back,$dep_id)){
-
-        /* The department array keeps non DN entries as index. We need to convert
-           it before checking the existance. */
-        $base_back= trim(convert_department_dn($base_back));
-
-        /* Check if the department exists, otherwise revert to the configure base DN */
-        if(isset($this->config->departments[$base_back])){
-          $this->selectedBase= $this->config->departments[$base_back];
-        }else{
-          $this->selectedBase= $this->config->departments['/'];
+        if(in_array($base_back,$this->config->departments)){
+          $this->selectedBase = $base_back;
         }
       }
     }
