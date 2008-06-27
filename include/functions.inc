@@ -40,7 +40,7 @@ if(!isset($_SERVER['CONFIG_FILE'])){
   define ("CONFIG_FILE",$_SERVER['CONFIG_FILE']);
 }
 
-define ("CONFIG_TEMPLATE_DIR", "../contrib/");
+define ("CONFIG_TEMPLATE_DIR", "../contrib");
 define ("TEMP_DIR","/var/cache/gosa/tmp");
 
 /* Define get_list flags */
