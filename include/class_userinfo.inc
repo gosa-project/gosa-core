@@ -475,9 +475,8 @@ class userinfo
         $found = FALSE;
         foreach($info['acl'] as $cat => $data){
 
-          /* Skip self acls?
-           */
-          if($skip_self_acls && preg_match("//s",$data['0'])) continue;
+          /* Skip self acls? */
+          if($skip_self_acls && isset($data['0']) && preg_match("//s",$data['0'])) continue;
 
           if(is_array($module)){
             foreach($module as $mod){
