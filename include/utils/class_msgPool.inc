@@ -520,7 +520,7 @@ class msgPool
 
   public static function invalidConfigurationAttribute($attr)
   {
-    return sprintf(_("The value for '%s' is currently unconfigured or invalid, please check your configurationi file. "), $attr);
+    return sprintf(_("The value for '%s' is currently unconfigured or invalid, please check your configuration file!"), $attr);
   }
 
 
@@ -556,7 +556,7 @@ class msgPool
 
   public static function class_not_found($plugin)
   {
-    return (sprintf(_("Could not initialize class '%s', maybe there is a plugin missing in your gosa setup."), $plugin));
+    return (sprintf(_("Cannot initialize class '%s'! Maybe there is a plugin missing in your gosa setup?"), $plugin));
   }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

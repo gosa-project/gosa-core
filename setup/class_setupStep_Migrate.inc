@@ -2309,7 +2309,7 @@ class Step_Migrate extends setup_step
            */
           if(!$ldap->success()){
             msg_dialog::display(_("LDAP error"), 
-                sprintf(_("Ldap add failed for %s with error %s"),
+                sprintf(_("Adding '%s' to the LDAP failed: %s"),
                   "<b>".LDAP::fix($newdn)."</b>", 
                   "<br><br><i>".$ldap->get_error()."</i>"), ERROR_DIALOG);
           }else{
@@ -2329,7 +2329,7 @@ class Step_Migrate extends setup_step
             $ldap->cat($device['DN'],array("gotoHotplugDevice"));
             if(!$ldap->success()){
               msg_dialog::display(_("LDAP error"), 
-                  sprintf(_("Ldap update failed for %s with error %s"),
+                  sprintf(_("Updating '%s' failed: %s"),
                     "<b>".LDAP::fix($device['DN'])."</b>", 
                     "<br><br><i>".$ldap->get_error()."</b>"), ERROR_DIALOG);
             }else{
@@ -2446,7 +2446,7 @@ class Step_Migrate extends setup_step
            */
           if(!$ldap->success()){
             msg_dialog::display(_("LDAP error"), 
-                sprintf(_("Ldap update failed for %s with error %s"),
+                sprintf(_("Updating '%s' failed: %s"),
                   "<b>".LDAP::fix($service['DN'])."</b>", 
                   "<br><br><i>".$ldap->get_error()."</b>"), ERROR_DIALOG);
           }else{
@@ -2543,8 +2543,8 @@ class Step_Migrate extends setup_step
 
     /* Create readable prefix for "What will be done" infos 
      */
-    $s_add = "<i>"._("add")."</i>\t";
-    $s_del = "<i>"._("remove")."</i>\t";
+    $s_add = "<i>"._("Add")."</i>\t";
+    $s_del = "<i>"._("Remove")."</i>\t";
 
     /* Walk through all found old-style menu configurations.
         -Prepare ldap update list     $data   
@@ -2733,7 +2733,7 @@ class Step_Migrate extends setup_step
     if(count($this->menu)){
       $this->checks['old_style_menus']['STATUS']    = FALSE;
       $this->checks['old_style_menus']['STATUS_MSG']= "<font style='color:#F0A500'>"._("Warning")."</font>";
-      $this->checks['old_style_menus']['ERROR_MSG'] = sprintf(_("There are %s application menus which have to be converted."),
+      $this->checks['old_style_menus']['ERROR_MSG'] = sprintf(_("There are %s application menus which have to be migrated."),
                                                       count($this->menu))."<input type='submit' name='menu_dialog' value='"._("Migrate")."'>";
     }else{
       $this->checks['old_style_menus']['STATUS']    = TRUE;

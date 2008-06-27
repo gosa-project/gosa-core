@@ -52,7 +52,7 @@ for cmd in dh-make-gosa debchange dpkg-buildpackage dpkg-source svn; do
 done
 
 # Import command line parameters
-PARMS=`getopt -o brscip:,h --long branch,changelog,plugins,section,si-section,release:,help -n "${0##*/}" -- "$@"`
+PARMS=`getopt -o b:r:s:c:i:p:,h --long branch:,changelog:,plugins:,section:,si-section:,release:,help -n "${0##*/}" -- "$@"`
 eval set -- "$PARMS"
 
 while true; do
