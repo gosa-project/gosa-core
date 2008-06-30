@@ -2361,6 +2361,7 @@ function get_languages($languages_in_own_language = FALSE,$strip_region_tag = FA
         "pl_PL" => "Polish",
         "sv_SE" => "Swedish",
         "zh_CN" => "Chinese",
+        "vi_VN" => "Vietnamese",
         "ru_RU" => "Russian");
   
   $tmp2= array(
@@ -2373,6 +2374,7 @@ function get_languages($languages_in_own_language = FALSE,$strip_region_tag = FA
         "pl_PL" => _("Polish"),
         "sv_SE" => _("Swedish"),
         "zh_CN" => _("Chinese"),
+        "vi_VN" => _("Vietnamese"),
         "ru_RU" => _("Russian"));
 
   $ret = array();
