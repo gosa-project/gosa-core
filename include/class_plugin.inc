@@ -898,6 +898,9 @@ class plugin
 
     /* Try to move the source entry to the destination position */
     $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->create_missing_trees(preg_replace("/^[^,]+,/","",$dst_dn));
+
     if (!$ldap->rename_dn($src_dn,$dst_dn)){
       msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $src_dn, "", get_class()));
       return(FALSE);
