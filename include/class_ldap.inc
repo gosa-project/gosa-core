@@ -451,6 +451,9 @@ class LDAP{
    */
   function rename_dn($source,$dest)
   {
+    $source = LDAP::fix($source);
+    $dest = LDAP::fix($dest);
+
     /* Check if source and destination are the same entry */
     if(strtolower($source) == strtolower($dest)){
       trigger_error("Source and destination can't be the same entry.");
