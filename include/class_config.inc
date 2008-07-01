@@ -826,18 +826,27 @@ class config  {
   {
     global $config;
     $return = array();
+    $ui = get_userinfo();
     $base = $config->current['BASE'];
     $res= get_sub_list("(&(objectClass=goShareServer)(goExportEntry=*))", "server",
-          get_ou("serverou"), $base,array("goExportEntry","cn"),GL_NONE);
+          get_ou("serverou"), $base,array("goExportEntry","cn"),GL_NONE | GL_NO_ACL_CHECK);
 
     foreach($res as $entry){
+        
+        $acl = $ui->get_permissions($entry['dn'],"server/goShareServer","");
         if(isset($entry['goExportEntry']['count'])){
           unset($entry['goExportEntry']['count']);
         }
         foreach($entry['goExportEntry'] as $share){
           $a_share = split("\|",$share);
           $sharename = $a_share[0];
-          $return[$entry['cn'][0]."|".$sharename] = $entry['cn'][0]." [".$sharename."]";
+          $data= array();
+          $data['NAME']   = $sharename;
+          $data['ACL']    = $acl;
+          $data['SERVER'] = $entry['cn']['0'];
+          $data['SHARE']  = $sharename;
+          $data['DISPLAY']= $entry['cn'][0]." [".$sharename."]";
+          $return[$entry['cn'][0]."|".$sharename] = $data;
         }
     }
     return($return);
