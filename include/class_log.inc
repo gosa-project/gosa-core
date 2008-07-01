@@ -99,13 +99,7 @@ class log {
           $this->log_into_syslog($entry);
         }
         if(isset($this->config->current['LOGGING']) && preg_match("/(^|,)mysql(,|$)/i",$this->config->current['LOGGING'])){
-          $res = $this->log_into_db($entry);
-
-          if(!$res){
-            global $config;
-            $config->current['LOGGING'] = preg_replace("/(^|,)mysql(,|$)/",",",$config->current['LOGGING']);
-            msg_dialog::display(_("MySQL error"),_("Logging to MySQL database will be disabled for this session!"), INFO_DIALOG);
-          }
+          $this->log_into_db($entry);
         }
       }
     }
@@ -136,103 +130,120 @@ class log {
   }
 
 
+  function disable_mysql_log($server,$error)
+  {
+    global $config;
+    msg_dialog::display(_("Error"), $error, ERROR_DIALOG);
+    msg_dialog::display(_("MySQL error"),sprintf(_("Logging to MySQL database will be disabled for server '%s'!"),$server), INFO_DIALOG);
+    unset($config->data['SERVERS']['LOGGING'][$server]) ;
+    $this->config = $config;
+  }
+
+
   /* Log into configured logging databses.*/
   function log_into_db($entry)
   {
     if(isset($this->config->data['SERVERS']['LOGGING'])){
       $servers = $this->config->data['SERVERS']['LOGGING'];
     }else{
-      msg_dialog::display(_("Error"), msgPool::noserver(_("MySQL logging")), ERROR_DIALOG);
       return(FALSE);
     }
 
     /* Log into each configured server 
      */
     foreach($servers as $server_name => $server){
- 
+
+      $error = "";
+   
       /* Connect to the database 
        */
       $con = @mysql_pconnect($server_name,$server['USER'],$server['PWD']);
       if(!$con){
-        msg_dialog::display(_("Error"), msgPool::dbconnect(_("MySQL logging")), ERROR_DIALOG);
-        return(FALSE);
-      }else{
+        $error = msgPool::dbconnect(_("MySQL logging"),mysql_error());
+        $this->disable_mysql_log($server_name,$error);
+        continue;
+      }
 
-        /* Check if the database is available 
-         */
-        $db = mysql_select_db($server['DB'],$con);
-        if(!$db){
-          msg_dialog::display(_("Error"), msgPool::dbselect(_("MySQL logging"), mysql_error($con)), ERROR_DIALOG);
-          return(FALSE);
-        }else{
+      /* Check if the database is available 
+       */
+      $db = @mysql_select_db($server['DB'],$con);
+      if(!$db){
+        $error = msgPool::dbselect(_("MySQL logging"),mysql_error());
+        $this->disable_mysql_log($server_name,$error);
+        continue;
+      }
 
-          /* Check if our current location is already registerd 
-              in this case get its id.
-             If it wasn't registered yet, create it. 
-           */
-          $base = mysql_escape_string($this->config->current['BASE']);
-          $query= "SELECT id FROM gosa_locations WHERE location=\"".$base."\";";
-          $res  = mysql_query($query);  
-          if(!$res){
-            msg_dialog::display(_("Error"), msgPool::dbquery(_("MySQL logging"), mysql_error($con)), ERROR_DIALOG);
-          }
+      /* Check if our current location is already registerd 
+         in this case get its id.
+         If it wasn't registered yet, create it. 
+       */
+      $base = mysql_escape_string($this->config->current['BASE']);
+      $query= "SELECT id FROM gosa_locations WHERE location=\"".$base."\";";
+      $res  = mysql_query($query);  
+      if(!$res){
+        $error = msgPool::dbquery(_("MySQL logging"),mysql_error());
+        $this->disable_mysql_log($server_name,$error);
+        continue;
+      }
 
-          $location_id = -1;
-          while($attrs = mysql_fetch_assoc($res)){
-            $location_id = $attrs['id'];
-            break;
-          }
-  
-          /* No location found that matches our location.
-             Create it.
-           */
-          if($location_id == -1){
-            $query = "INSERT INTO gosa_locations (location) VALUES ('".$base."');";
-            if(!mysql_query($query,$con)){
-              msg_dialog::display(_("Error"), msgPool::dbquery(_("MySQL logging"), mysql_error($con)), ERROR_DIALOG);
-            }
- 
-            /* Try to detect the location again 
-             */ 
-            $query= "SELECT id FROM gosa_locations WHERE location=\"".$base."\";";
-            $res  = mysql_query($query);
-            $location_id = -1;
-            while($attrs = mysql_fetch_assoc($res)){
-              $location_id = $attrs['id'];
-              break;
-            }
-            if($location_id == -1){
-              msg_dialog::display(_("Error"), sprintf(_("Cannot add location to the database!")."<br><br>"._("Error").": %s",
-                mysql_error($con)), ERROR_DIALOG);
-              return(FALSE);
-            }
-          }  
+      $location_id = -1;
+      while($attrs = mysql_fetch_assoc($res)){
+        $location_id = $attrs['id'];
+        break;
+      }
 
-          /* Create mysql syntax */
-          $query ="INSERT INTO gosa_log 
-            (timestamp,user,action,objecttype,object,changes,result,location_id)
-            VALUES 
-            (
-             \"".mysql_escape_string($entry['timestamp'])."\", 
-             \"".mysql_escape_string($entry['user'])."\", 
-             \"".mysql_escape_string($entry['action'])."\", 
-             \"".mysql_escape_string($entry['objecttype'])."\", 
-             \"".mysql_escape_string($entry['object'])."\", 
-             \"".mysql_escape_string($entry['changes'])."\", 
-             \"".mysql_escape_string($entry['result'])."\", 
-             \"".mysql_escape_string($location_id)."\" 
-            );
-          ";
-          $res = mysql_query($query,$con);
-          if(!$res){
-            msg_dialog::display(_("Error"), msgPool::dbquery(_("MySQL logging"), mysql_error($con)), ERROR_DIALOG);
-            return(FALSE);
-          } 
+      /* No location found that matches our location.
+         Create it.
+       */
+      if($location_id == -1){
+        $query = "INSERT INTO gosa_locations (location) VALUES ('".$base."');";
+        if(!mysql_query($query,$con)){
+          $error = msgPool::dbquery(_("MySQL logging"),mysql_error());
+          $this->disable_mysql_log($server_name,$error);
+          continue;
         }
+
+        /* Try to detect the location again 
+         */ 
+        $query= "SELECT id FROM gosa_locations WHERE location=\"".$base."\";";
+        $res  = mysql_query($query);
+        $location_id = -1;
+        while($attrs = mysql_fetch_assoc($res)){
+          $location_id = $attrs['id'];
+          break;
+        }
+        if($location_id == -1){
+          $error = sprintf(_("Cannot add location to the database!")."<br><br>"._("Error").": %s",mysql_error($con));
+          $this->disable_mysql_log($server_name,$error);
+          continue;
+        }
+      }  
+
+      /* Create mysql syntax */
+      $query ="INSERT INTO gosa_log 
+        (timestamp,user,action,objecttype,object,changes,result,location_id)
+        VALUES 
+        (
+         \"".mysql_escape_string($entry['timestamp'])."\", 
+         \"".mysql_escape_string($entry['user'])."\", 
+         \"".mysql_escape_string($entry['action'])."\", 
+         \"".mysql_escape_string($entry['objecttype'])."\", 
+         \"".mysql_escape_string($entry['object'])."\", 
+         \"".mysql_escape_string($entry['changes'])."\", 
+         \"".mysql_escape_string($entry['result'])."\", 
+         \"".mysql_escape_string($location_id)."\" 
+        );
+      ";
+      $res = mysql_query($query,$con);
+      if(!$res){
+        $error = dbquery(_("MySQL logging"), mysql_error());
+        $this->disable_mysql_log($server_name,$error);
+        continue;
+      } 
+      if(is_resource($con)){
         mysql_close($con);
       }
     }
-    return(TRUE);
   }
 }
 
