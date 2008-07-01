@@ -8,6 +8,7 @@ Standards-Version: 3.7.2.2
 Package: gosa
 Architecture: all
 Depends: php5, php5-cli, apache2, exim4 | mail-transport-agent, php5-gd, php5-imap, php5-ldap, php5-mhash, php5-mysql, php5-imagick | imagemagick (>= 5.4.4.5-1) | graphicsmagick-im-compat, fping, libcrypt-smbhash-perl, smarty, php5-recode, wwwconfig-common, smarty-gettext
+Conflicts: gosa-help-en
 Suggests: cyrus22-imapd, postfix-ldap, etherwake, slapd, gosa-schema
 Description: Web Based LDAP Administration Program
  Provided is access to posix, shadow, samba, proxy, fax, pureftp and
