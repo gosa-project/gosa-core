@@ -31,6 +31,7 @@ class pluglist {
 	var $current= "";
 	var $info= array();
 	var $headlines = array();
+  var $allowed_plugins = array();
 
 	function pluglist(&$config, &$ui)
 	{
@@ -186,6 +187,8 @@ class pluglist {
 
 					if ($this->check_access($info['ACL'])){
 
+            $this->allowed_plugins[$index] = $index;
+ 
 						$entries= $entries."<p class=\"menuitem\" ".
 							"onClick='return question(\""._("You are currently editing a database entry. Do you want to dismiss the changes?")."\", \"$href\");'>";
 						if(session::get('js')){
@@ -377,6 +380,15 @@ class pluglist {
                 return (0);
 
 	}
+
+  /*! \brief  This function checks if we are allowed to view the plugin with the given id 
+      @param  $plug_id  Integer  The ID of the plugin.
+      @return Boolean   TRUE if we are allowed to view the plugin else FASLE
+   */
+  function plugin_access_allowed($plug_id)
+  {
+    return(isset($this->allowed_plugins[$plug_id]));
+  }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

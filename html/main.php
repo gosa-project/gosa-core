@@ -184,7 +184,7 @@ if (session::is_set('plugin_dir')){
 } else {
   $old_plugin_dir= "";
 }
-if (isset($_GET['plug'])){
+if (isset($_GET['plug']) && $plist->plugin_access_allowed($_GET['plug'])){
   $plug= validate($_GET['plug']);
   $plugin_dir= $plist->get_path($plug);
   session::set('plugin_dir',$plugin_dir);
