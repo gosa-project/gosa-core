@@ -1697,6 +1697,8 @@ class plugin
     /* Add current base */      
     if(isset($this->base) && isset($this->config->idepartments[$this->base])){
       $deps[$this->base] = $this->config->idepartments[$this->base];
+    }elseif(strtolower($this->dn) == strtolower($this->config->current['BASE'])){
+
     }else{
       trigger_error("Cannot return list of departments, no default base found in class ".get_class($this).". ".$this->base);
     }
