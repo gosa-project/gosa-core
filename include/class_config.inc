@@ -400,6 +400,7 @@ class config  {
         
         $this->data['SERVERS']['IMAP'][$imap_server]= 
             array( 
+            "server_dn"   => $attrs['dn'],
             "connect"     => $imap_connect,
             "admin"       => $imap_admin,
             "password"    => $pwd,
