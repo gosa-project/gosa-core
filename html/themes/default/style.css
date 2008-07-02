@@ -1542,12 +1542,6 @@ div.errorMsgTitle {
 	background-color: #F0F0F0; 
 }
 
-div.errorMsgSepeator {
-	height:1px;
-	width:100%;
-	background-color: #BBBBBB;
-}
-
 div.errorMsgDialog {
 	width:60%;
 	left:200px;
