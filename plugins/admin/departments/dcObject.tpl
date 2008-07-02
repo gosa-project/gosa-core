@@ -23,7 +23,7 @@
 {/render}
        </td>
       </tr>
-	{if !$hide_base}
+	{if !$is_root_dse}
       <tr>
         <td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
         <td>

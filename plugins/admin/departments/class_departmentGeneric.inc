@@ -107,16 +107,18 @@ class department extends plugin
 		$this->config->make_idepartments();
 		$smarty= get_smarty();
 
-    /* Hide base selector, if this object represents the base itself 
-     */
-    $smarty->assign("hide_base", FALSE);
-    if($this->dn == $this->config->current['BASE']){
-      $smarty->assign("hide_base", TRUE);
-    }
-
     $tmp = $this->plInfo();
     foreach($tmp['plProvidedAcls'] as $name => $translation){
       $smarty->assign($name."ACL",$this->getacl($name));
+    }
+
+    /* Hide base selector, if this object represents the base itself 
+     */
+    $smarty->assign("is_root_dse", FALSE);
+    if($this->dn == $this->config->current['BASE']){
+      $smarty->assign("is_root_dse", TRUE);
+      $nA = $this->namingAttr."ACL";
+      $smarty->assign($nA,$this->getacl($this->namingAttr,TRUE));
     }
 
 		/* Base select dialog */
@@ -228,7 +230,12 @@ class department extends plugin
 	/* Save data to object */
 	function save_object()
 	{
-		if (isset($_POST['dep_generic_posted'])){
+    if (isset($_POST['dep_generic_posted'])){
+
+      $nA = $this->namingAttr;
+      $old_nA = $this->$nA;
+
+
 
       /* Create a base backup and reset the
          base directly after calling plugin::save_object();
@@ -252,6 +259,13 @@ class department extends plugin
         } else {
           $this->is_administrational_unit= false;
         }
+      }
+
+      /* If this is the root directory service entry (rootDSE)
+         then avoid changing the naming attribute of this entry.
+       */
+      if($this->dn == $this->config->current['BASE']){
+        $this->$nA = $old_nA;
       }
     }
 	}
