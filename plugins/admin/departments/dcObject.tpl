@@ -23,6 +23,7 @@
 {/render}
        </td>
       </tr>
+	{if !$hide_base}
       <tr>
         <td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
         <td>
@@ -37,6 +38,7 @@
 {/render}
 	  </td>
 	 </tr>
+	{/if}
 	</table>
   </td>
  </tr>

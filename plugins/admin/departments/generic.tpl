@@ -34,6 +34,7 @@
       <tr>
         <td colspan="2"><br></td>
       </tr>
+	{if !$hide_base}
       <tr>
         <td><LABEL for="base">{t}Base{/t}</LABEL>{$must}</td>
 
@@ -49,6 +50,7 @@
 {/render}
 	</td>
        </tr>
+	{/if}
      </table>
 
    </td>

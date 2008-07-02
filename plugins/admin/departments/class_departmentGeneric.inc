@@ -107,6 +107,13 @@ class department extends plugin
 		$this->config->make_idepartments();
 		$smarty= get_smarty();
 
+    /* Hide base selector, if this object represents the base itself 
+     */
+    $smarty->assign("hide_base", FALSE);
+    if($this->dn == $this->config->current['BASE']){
+      $smarty->assign("hide_base", TRUE);
+    }
+
     $tmp = $this->plInfo();
     foreach($tmp['plProvidedAcls'] as $name => $translation){
       $smarty->assign($name."ACL",$this->getacl($name));
