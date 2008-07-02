@@ -87,7 +87,7 @@
 		
 		{/if}
 
-		<div id='e_layer{$i_ID}' class="errorMsgDialog" style="top:200px;left:200px;">
+		<div id='e_layer{$i_ID}' class="errorMsgDialog" style="top:200px;left:200px; display:none;">
 
 		<div id="e_layerTitle{$i_ID}" class="errorMsgTitle">
 			<table><tr><td>
