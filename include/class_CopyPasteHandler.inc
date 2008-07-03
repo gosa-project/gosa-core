@@ -63,7 +63,7 @@ class CopyPasteHandler {
    */
   function add_to_queue($dn,$action,$tab_class,$tab_object,$tab_acl_category)
   {
-    if(!class_exists($tab_class)){
+    if(!class_available($tab_class)){
       trigger_error(sprintf("Specified class object '%s' does not exists.",$tab_class));
       return(FALSE);
     }
