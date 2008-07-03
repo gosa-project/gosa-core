@@ -84,6 +84,16 @@ class gosaSupportDaemon
     return($this->is_connected);
   }
 
+  
+  /*! \brief  Returns TRUE whether we are connected or not 
+      @return BOOLEAN  Returns TRUE when connected else FALSE
+   */
+  public function is_connected()
+  {
+    return($this->is_connected);
+  }
+  
+
 
   /*! \brief  Disconnect from gosa daemon.
    */
