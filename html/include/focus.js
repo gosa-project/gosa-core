@@ -1,11 +1,32 @@
-var browserType;
+var browserType = "Not dectected, adjust focus.js";
 var firefoxType;
 
-if (document.layers) {browserType = "nn4"}
-if (document.all) {browserType = "ie"}
-if (window.navigator.userAgent.toLowerCase().match("gecko")) {browserType= "gecko"}
-if (browserType=="gecko" && window.navigator.userAgent.toLowerCase().match("firefox\/2")) {firefoxType= "firefox2"}
-else {firefoxType= "firefox"};
+if (document.layers) 
+{
+		browserType = "nn4";
+}
+
+if (document.all) 
+{
+		browserType = "ie";
+}
+
+if (window.navigator.userAgent.toLowerCase().match("gecko")) 
+{
+		browserType= "gecko";
+}
+
+if (window.navigator.userAgent.toLowerCase().match(/opera/i)) 
+{
+		browserType= "gecko";
+}
+
+if (browserType=="gecko" && window.navigator.userAgent.toLowerCase().match("firefox\/2")) 
+{
+		firefoxType= "firefox2";
+}else{
+		firefoxType= "firefox";
+}
 
 netscape = "";
 ver= navigator.appVersion; len = ver.length;
