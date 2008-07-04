@@ -388,13 +388,19 @@ class posixAccount extends plugin
         $exclude= "(!(|$exclude))";
       }
       $regex= $sysfilter['regex'];
+
+      $acls = array();
+      if(class_available("servgeneric")) $acls[] = "server";
+      if(class_available("workgeneric")) $acls[] = "worstation";
+      if(class_available("termgeneric")) $acls[] = "terminal";
+
       $filter= "(&(|(objectClass=goServer)(objectClass=gotoWorkstation)(objectClass=gotoTerminal))$exclude(cn=*)(cn=$regex))";
 
       $deps_a = array(get_ou("serverou"),
                       get_ou("terminalou"),
                       get_ou("workstationou")); 
 
-      $res= get_sub_list($filter, array("terminal","server","workstation"), $deps_a, get_ou("systemsou").$sysfilter['depselect'], array("cn"), GL_SUBSEARCH | GL_SIZELIMIT);
+      $res= get_sub_list($filter, $acls, $deps_a, get_ou("systemsou").$sysfilter['depselect'], array("cn"), GL_SUBSEARCH | GL_SIZELIMIT);
       $wslist= array();
       foreach ($res as $attrs){
         $wslist[]= preg_replace('/\$/', '', $attrs['cn'][0]);
