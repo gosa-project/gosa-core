@@ -1019,6 +1019,16 @@ class Step_Migrate extends setup_step
   {
     $pw1 = $pw2 = "";
     $uid = "";
+
+    /* On first call check for rid/sid base */
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
+        $cv['password'],
+        $cv['connection'],
+        FALSE,
+        $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
   
     if(isset($_POST['new_user_uid'])){
       $uid = $_POST['new_user_uid'];
@@ -1030,6 +1040,14 @@ class Step_Migrate extends setup_step
       $pw2 = $_POST['new_user_password2'];
     }
   
+    
+    $ldap->cd($cv['base']);
+    $ldap->search("(uid=".$uid.")");
+    if($ldap->count()){
+      msg_dialog::display(_("Input error"),msgPool::duplicated(_("Uid")), ERROR_DIALOG);
+      return false;
+    }
+    
     if(empty($pw1) || empty($pw2) | ($pw1 != $pw2)){
       msg_dialog::display(_("Password error"), _("Provided passwords do not match!"), ERROR_DIALOG);
       return false;
@@ -1039,17 +1057,8 @@ class Step_Migrate extends setup_step
       msg_dialog::display(_("Input error"), _("Specify a valid user ID!"), ERROR_DIALOG);
       return false;
     }
-    
-    /* On first call check for rid/sid base */
-    $cv = $this->parent->captured_values;
-    $ldap_l = new LDAP($cv['admin'],
-        $cv['password'],
-        $cv['connection'],
-        FALSE,
-        $cv['tls']);
-
-    $ldap = new ldapMultiplexer($ldap_l);
-
+ 
+ 
     /* Get current base attributes */
     $ldap->cd($cv['base']);
   
