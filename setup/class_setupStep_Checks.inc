@@ -138,7 +138,7 @@ class Step_Checks extends setup_step
     $output= shell_exec ($query);
     $have_mkntpwd= preg_match("/^Usage: mkntpwd /", $output);
     if (!$have_mkntpwd){
-      $query= 'LC_ALL=C LANG=C perl -MCrypt::SmbHash -e "print join(q[:], ntlmgen $ARGV[0]), $/;" &>/dev/null';
+      $query= 'LC_ALL=C LANG=C perl -MCrypt::SmbHash -e "print join(q[:], ntlmgen $ARGV[0]), $/;" >/dev/null';
       system ($query, $ret);
       $have_mkntpwd |= ($ret == 0);
     }
