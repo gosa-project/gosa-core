@@ -768,7 +768,8 @@ class ogroup extends plugin
   function convert_list($input)
   {
     $temp= "";
-    $conv= array(  "U" => "select_user.png",
+    $conv= array(  
+        "U" => "plugins/generic/images/head.png",
         "G" => "plugins/groups/images/groups.png",
         "A" => "plugins/ogroups/images/application.png",
         "D" => "plugins/departments/images/department.png",
