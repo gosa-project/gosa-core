@@ -70,6 +70,32 @@ class config  {
   
   function check_and_reload()
   {
+
+    /* Check if class_location.inc has changed, this is the case 
+        if we have installed or removed plugins. 
+     */
+    if(session::is_set("class_location.inc:timestamp")){
+      $tmp = stat("../include/class_location.inc");
+      if($tmp['mtime'] != session::get("class_location.inc:timestamp")){
+
+        /* Refresh users ACLs */
+        $ui= get_userinfo();
+        $ui->loadACL();
+        session::set('ui',$ui);
+
+        /* Reset menu and iconmenu */
+        if(session::is_set("plist")){
+          $plist = session::get("plist");
+          $plist->reset_menus();
+          session::set("plist",$plist);
+        }
+      }
+    }
+    $tmp = stat("../include/class_location.inc");
+    session::set("class_location.inc:timestamp",$tmp['mtime']);
+
+
+
     if($this->filename != "" && filemtime($this->filename) != $this->last_modified){
 
       $this->config_found= FALSE;
