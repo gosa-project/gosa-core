@@ -145,15 +145,14 @@ class pluglist {
     /* Check if class_location.inc has changed, this is the case 
         if we have installed or removed plugins. 
      */
-    if(!session::is_set("class_location.inc:timestamp")){
-      $tmp = stat("../include/class_location.inc");
-      session::set("class_location.inc:timestamp",$tmp['mtime']);
-    }else{
+    if(session::is_set("class_location.inc:timestamp")){
       $tmp = stat("../include/class_location.inc");
       if($tmp['mtime'] != session::get("class_location.inc:timestamp")){
         $this->menu = "";
       }
     }
+    $tmp = stat("../include/class_location.inc");
+    session::set("class_location.inc:timestamp",$tmp['mtime']);
 
 		if ($this->menu == ""){
 			$first= TRUE;
@@ -270,15 +269,14 @@ class pluglist {
     /* Check if class_location.inc has changed, this is the case 
         if we have installed or removed plugins. 
      */
-    if(!session::is_set("class_location.inc:timestamp")){
-      $tmp = stat("../include/class_location.inc");
-      session::set("class_location.inc:timestamp",$tmp['mtime']);
-    }else{
+    if(session::is_set("class_location.inc:timestamp")){
       $tmp = stat("../include/class_location.inc");
       if($tmp['mtime'] != session::get("class_location.inc:timestamp")){
         $this->iconmenu = "";
       }
     }
+    $tmp = stat("../include/class_location.inc");
+    session::set("class_location.inc:timestamp",$tmp['mtime']);
 
 		if ($this->iconmenu == ""){
 			$cfg= $this->config->data['MENU'];
