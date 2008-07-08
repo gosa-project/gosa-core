@@ -70,6 +70,7 @@ class config  {
   
   function check_and_reload()
   {
+    global $ui;
 
     /* Check if class_location.inc has changed, this is the case 
         if we have installed or removed plugins. 
@@ -77,18 +78,7 @@ class config  {
     if(session::is_set("class_location.inc:timestamp")){
       $tmp = stat("../include/class_location.inc");
       if($tmp['mtime'] != session::get("class_location.inc:timestamp")){
-
-        /* Refresh users ACLs */
-        $ui= get_userinfo();
-        $ui->loadACL();
-        session::set('ui',$ui);
-
-        /* Reset menu and iconmenu */
-        if(session::is_set("plist")){
-          $plist = session::get("plist");
-          $plist->reset_menus();
-          session::set("plist",$plist);
-        }
+        session::un_set("plist");
       }
     }
     $tmp = stat("../include/class_location.inc");
