@@ -142,6 +142,19 @@ class pluglist {
 
 	function gen_menu()
 	{
+    /* Check if class_location.inc has changed, this is the case 
+        if we have installed or removed plugins. 
+     */
+    if(!session::is_set("class_location.inc:timestamp")){
+      $tmp = stat("../include/class_location.inc");
+      session::set("class_location.inc:timestamp",$tmp['mtime']);
+    }else{
+      $tmp = stat("../include/class_location.inc");
+      if($tmp['mtime'] != session::get("class_location.inc:timestamp")){
+        $this->menu = "";
+      }
+    }
+
 		if ($this->menu == ""){
 			$first= TRUE;
 			$cfg= $this->config->data['MENU'];
