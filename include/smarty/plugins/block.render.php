@@ -70,7 +70,7 @@ function smarty_block_render($params, $text, &$smarty)
 	$text = preg_replace ("/\n/","GOSA_LINE_BREAK",$text);
 
 	/* Disable objects, but keep those active that have mode=read_active */
-	if(!(isset($params['mode']) && $params['mode']=='read_active')){
+	if(!(isset($params['mode']) && ($params['mode']=='read_active') && preg_match("/(r|w)/",$acl))){
 
 		/* Disable options && greyout divlists */
 		$from 	= array("/class=['\"]list1nohighlight['\"]/i",
