@@ -44,7 +44,7 @@ if (!$remove_lock){
   $display.= $password->execute ();
 
   /* Page header*/
-  $display= print_header(get_template_path('images/password.png'),
+  $display= print_header(get_template_path('plugins/password/images/plugin.png'),
                          _("Password settings"), "").$display;
 
 }
