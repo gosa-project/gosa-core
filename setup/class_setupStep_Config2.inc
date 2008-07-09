@@ -311,6 +311,11 @@ class Step_Config2 extends setup_step
   {
     global $class_mapping;
 
+    /* Check if we have the mail classes/plugins installed */
+    if(!class_available("mailMethod")){
+      return(array());
+    }
+
     $default_uattrib = "";
     $m_class_vars = get_class_vars("mailMethod");
     if(isset($m_class_vars['uattrib'])){
