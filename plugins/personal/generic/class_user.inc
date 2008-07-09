@@ -1504,35 +1504,42 @@ class user extends plugin
                                                   "objectClass" => "gosaAccount")),
 
         "plProvidedAcls" => array(
-          "base"              => _("Base"), 
-          "userPassword"      => _("User password"), 
+
           "sn"                => _("Surname"),
           "givenName"         => _("Given name"),
           "uid"               => _("User identification"),
           "personalTitle"     => _("Personal title"),
           "academicTitle"     => _("Academic title"),
-          "homePostalAddress" => _("Home postal address"),
-          "homePhone"         => _("Home phone number"),
-          "labeledURI"        => _("Homepage"),
-          "o"                 => _("Organization"),
-          "ou"                => _("Department"),
+
           "dateOfBirth"       => _("Date of birth"),
           "gender"            => _("Gender"),
           "preferredLanguage" => _("Preferred language"),
+          "base"              => _("Base"), 
+
+          "userPicture"       => _("User picture"),
+
+          "o"                 => _("Organization"),
+          "ou"                => _("Department"),
           "departmentNumber"  => _("Department number"),
           "employeeNumber"    => _("Employee number"),
           "employeeType"      => _("Employee type"),
-          "l"                 => _("Location"),
-          "st"                => _("State"),
-          "userPicture"       => _("User picture"),
+
           "roomNumber"        => _("Room number"),
           "telephoneNumber"   => _("Telefon number"),
-          "mobile"            => _("Mobile number"),
           "pager"             => _("Pager number"),
-          "Certificate"        => _("User certificates"),
+          "mobile"            => _("Mobile number"),
+          "facsimileTelephoneNumber"     => _("Fax number"),
 
-          "postalAddress"                => _("Postal address"),
-          "facsimileTelephoneNumber"     => _("Fax number"))
+          "st"                => _("State"),
+          "l"                 => _("Location"),
+          "postalAddress"     => _("Postal address"),
+
+          "homePostalAddress" => _("Home postal address"),
+          "homePhone"         => _("Home phone number"),
+          "labeledURI"        => _("Homepage"),
+          "userPassword"      => _("User password method"), 
+          "Certificate"       => _("User certificates"))
+
         );
 
     /* Append government attributes if required */
