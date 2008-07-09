@@ -45,7 +45,8 @@
     <tr>
      <td>
 {render acl=$force_idsACL}
-      <input id="force_ids" type=checkbox name="force_ids" value="1" {$force_ids} onclick="changeState('uidNumber'); changeState('gidNumber');">
+      <input id="force_ids" type=checkbox name="force_ids" value="1" {$force_ids} 
+			onclick="{$onClickIDS}">
 {/render}
 					</td>
 					<td>

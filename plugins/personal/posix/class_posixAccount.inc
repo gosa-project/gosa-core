@@ -557,8 +557,17 @@ class posixAccount extends plugin
       }
       $smarty->assign("force_ids", "");
     }
-    
 
+    /* Create onClick="" action string for the "Force UID/GID" option 
+     */
+    $onClickIDS ="";
+    if(preg_match("/w/",$this->getacl("uidNumber",$SkipWrite))){
+      $onClickIDS .= "changeState('uidNumber');";
+    }
+    if(preg_match("/w/",$this->getacl("gidNumber",$SkipWrite))){
+      $onClickIDS .= "changeState('gidNumber');";
+    }
+    $smarty->assign("onClickIDS", $onClickIDS);
     $smarty->assign("force_idsACL", $this->getacl("uidNumber",$SkipWrite).$this->getacl("gidNumber",$SkipWrite));
 
     foreach(array("primaryGroup","trustmode","activate_shadowWarning","activate_shadowInactive","activate_shadowMin","activate_shadowMax","activate_shadowExpire","mustchangepassword") as $val){
