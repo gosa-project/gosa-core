@@ -632,7 +632,13 @@ class user extends plugin
     $smarty->assign("pw_configurable", $is_configurable);
     $smarty->assign("passwordStorageACL", $this->getacl("userPassword",(!is_object($this->parent) && !session::is_set('edit'))));
     $smarty->assign("base_select",      $this->base);
-    $smarty->assign("CertificatesACL",  $this->getacl("Certificate",(!is_object($this->parent) && !session::is_set('edit'))));
+
+    if(!session::is_set('edit')){
+      $smarty->assign("CertificatesACL","");
+    }else{
+      $smarty->assign("CertificatesACL",  $this->getacl("Certificate"));
+    }
+    
     $smarty->assign("userPictureACL",   $this->getacl("userPicture",(!is_object($this->parent) && !session::is_set('edit'))));
     $smarty->assign("userPicture_is_readable",   $this->acl_is_readable("userPicture",(!is_object($this->parent) && !session::is_set('edit'))));
 
