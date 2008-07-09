@@ -127,7 +127,7 @@ if (!$remove_lock){
   }
 
   /* Page header*/
-  $display= print_header(get_template_path('images/posix.png'),
+  $display= print_header(get_template_path('plugins/posix/images/plugin.png'),
                          _("POSIX settings"), $info).$display;
 
 }
