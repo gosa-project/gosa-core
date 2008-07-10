@@ -129,7 +129,7 @@ for plugin in $MAKE_PLUGINS; do
 	mv "gosa-plugins-${BRANCH}/$plugin" .
 
 	echo "Debianizing plugin $plugin"
-	yes | dh-make-gosa --section web $plugin
+	yes | dh-make-gosa --section $SECTION $plugin
 	rm -rf "$plugin"
 
 	echo "Packing original sources 'gosa-plugin-$plugin-${GOSA_VER}'..."
