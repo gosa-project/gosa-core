@@ -33,7 +33,7 @@ class MultiSelectWindow{
 
 	var $string_Title			  = "";
 	var $string_ListHeader	= "";
-  var $string_ListDropDown= "";
+	var $string_ListDropDown= "";
 	var $string_Summary			= "";
 	var $string_Information	= "";
 
@@ -48,8 +48,10 @@ class MultiSelectWindow{
 	var $is_headpage			  = false;	// if true the design changes
 	var $filterName				  = "Liste";
 	var $DepartmentsAdded		= false;
-  var $Added_Departments  = array();
+	var $Added_Departments  = array();
 	var $selectedBase       = "";
+
+	private $departments= array();
 
   var $DivHeight          = "";
 

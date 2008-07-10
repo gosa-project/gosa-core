@@ -777,7 +777,7 @@ class config  {
       }
 
       /* Fix name, if it contains a replace tag */
-      $name= @LDAP::fix($name);
+      $name= preg_replace('/\\\\,/', ',', @LDAP::fix($name));
 
       /* Check if current name is too long, then cut it */
       if(mb_strlen($name, 'UTF-8')> $max_size){
