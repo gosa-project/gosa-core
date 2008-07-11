@@ -485,7 +485,9 @@ class aclManagement extends plugin
 
     /* Append the ldap base to be able to set alcs if there were currently no acls set 
      */
-    $res[$this->config->current["BASE"]] = array("dn"=>$this->config->current["BASE"],"ou"=>".","objectClass"=>array("gosaACL"));
+    if($base == $this->config->current['BASE']){
+      $res[$base] = array("dn"=>$this->config->current["BASE"],"ou"=>".","objectClass"=>array("gosaACL"));
+    }
 
     /* Subsearch ? */
     if($SubSearch){
