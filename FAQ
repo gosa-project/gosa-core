@@ -406,7 +406,9 @@ Q: I have problems with my ldap server when I open groups with
 A: You can set a nesting limit which ensures that the user names will not be 
    resolved if the amount of members reaches this limit.
    <location
+        ...
         LDAP_FILTER_NESTING_LIMIT="100"
+        ... />
    </location>
 
 
@@ -416,9 +418,11 @@ Q: I want to disable the "Is the configuration file up to date?" check when logg
 A: Just set the config_version attribute to an empty value:
    <conf config_version="" >
 
- 
 
+Q: I've shredded my access control and am not able to do anything from now on. Is there
+   a way to override the ACL?
 
-	
+A: Yes. Insert the following statement in the location section of your gosa.conf:
 
+   ignore_acl="your user's dn"
 
