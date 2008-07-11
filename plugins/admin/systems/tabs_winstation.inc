@@ -25,7 +25,7 @@ class wintabs extends tabs
       $baseobject->cn .= "$";
     }
 
-    $this->dn= "uid=$baseobject->cn,".get_winstations_ou().$baseobject->base;
+    $this->dn= "uid=$baseobject->uid,".get_winstations_ou().$baseobject->base;
     $baseobject->dn= $this->dn;
 
     foreach ($this->by_object as $key => $obj){

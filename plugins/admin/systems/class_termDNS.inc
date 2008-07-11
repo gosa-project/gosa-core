@@ -448,16 +448,18 @@ class termDNS extends plugin
       $message[]= _("Wrong IP format in field IP-address.");
     }
 
-    /* Check if mac is empty 
-     */
-    if ($this->macAddress == "" && chkacl ($this->acl, "macAddress") == ""){
-      $message[]= _("The required field 'MAC-address' is not set.");
-    }
+    if($this->MACisMust || $this->dhcp_is_Account){
+      /* Check if mac is empty 
+       */
+      if ($this->macAddress == "" && chkacl ($this->acl, "macAddress") == ""){
+        $message[]= _("The required field 'MAC-address' is not set.");
+      }
 
-    /* Check if given mac is valid mac 
-     */
-    if(!is_mac($this->macAddress)){
-      $message[]=(_("The given macaddress is invalid. There must be 6 2byte segments seperated by ':'."));
+      /* Check if given mac is valid mac 
+       */
+      if(!is_mac($this->macAddress)){
+        $message[]=(_("The given macaddress is invalid. There must be 6 2byte segments seperated by ':'."));
+      }
     }
 
     /* only perfrom this checks if this is a valid DNS account */

@@ -30,6 +30,7 @@ class wingeneric extends plugin
   var $sambaPwdLastSet="";
   var $sambaAcctFlags="";
   var $netConfigDNS;
+
   /* attribute list for save action */
   var $ignore_account= TRUE;
   var $attributes   = array("cn", "description","shadowLastChange",
@@ -45,6 +46,7 @@ class wingeneric extends plugin
     plugin::plugin ($config, $dn, $parent);
     $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses);
     $this->netConfigDNS->acl = $this->acl;
+    $this->netConfigDNS->MACisMust = FALSE;
 
     /* Set base */
     if ($this->dn == "new"){
@@ -166,7 +168,7 @@ class wingeneric extends plugin
     /* Call common method to give check the hook */
     $message= plugin::check();
     $message= array_merge($message, $this->netConfigDNS->check());
-    $this->dn= "cn=".$this->cn.",ou=netdevices,ou=systems,".$this->base;
+    $this->dn= "cn=".$this->uid.",".get_winstations_ou().$this->base;
 
     $ui= get_userinfo();
     $acl= get_permissions ($this->dn, $ui->subtreeACL);
