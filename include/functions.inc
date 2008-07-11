@@ -1151,7 +1151,7 @@ function get_ou($name)
                 "printerou"     => "ou=printers,ou=systems,",
                 "phoneou"       => "ou=phones,ou=systems,",
                 "componentou"   => "ou=netdevices,ou=systems,",
-                "winstations"   => "ou=workstations,ou=systems",
+                "winstations"   => "ou=winstation,",
 
                 "blocklistou"   => "ou=gofax,ou=systems,",
                 "incomingou"    => "ou=incoming,",
