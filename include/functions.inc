@@ -1335,8 +1335,10 @@ function get_printer_list()
 {
   global $config;
   $res = array();
+  $ui = get_userinfo();
   $data = get_list('(objectClass=gotoPrinter)',"printer",$config->current['BASE'], array('cn'), GL_SUBSEARCH);
   foreach($data as $attrs ){
+    if(!preg_match("/r/",$ui->get_permissions($data['dn'],"printer/printgeneric",""))) continue;
     $res[$attrs['cn'][0]] = $attrs['cn'][0];
   }
   return $res;
