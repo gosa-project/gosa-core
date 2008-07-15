@@ -215,6 +215,15 @@ class group extends plugin
       }
     }
 
+    /* Get global filter config */
+    if (!session::is_set("sysfilter")){
+      $ui= get_userinfo();
+      $base= get_base_from_people($ui->dn);
+      $sysfilter= array( "depselect"       => $base,
+          "regex"           => "*");
+      session::set("sysfilter", $sysfilter);
+    }
+
     /* This is always an account */
     $this->is_account= TRUE;
     $this->reload();
