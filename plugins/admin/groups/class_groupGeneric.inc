@@ -238,7 +238,7 @@ class group extends plugin
     }
 
     /* Delete user from group */
-    if (isset($_POST['del_users']) && isset($_POST['members'])){
+    if (isset($_POST['del_users']) && isset($_POST['members']) && preg_match("/w/",$this->getacl("memberUid"))){
       foreach ($_POST['members'] as $value){
         unset ($this->members["$value"]);
         $this->removeUser($value);
@@ -247,7 +247,7 @@ class group extends plugin
     }
 
     /* Add objects? */
-    if (isset($_POST["edit_membership"])){
+    if (isset($_POST["edit_membership"]) && preg_match("/w/",$this->getacl("memberUid"))){
       $this->group_dialog= TRUE;
       $this->dialog= TRUE;
     }
@@ -815,14 +815,14 @@ class group extends plugin
       }
 
       /* Save fon attribute */
-      if ($this->acl_is_writeable("fon_group")){
+      if ($this->acl_is_writeable("fonGroup")){
         if (isset ($_POST['fon_group'])){
           $this->fon_group= TRUE;
         } else {
           $this->fon_group= FALSE;
         }
       }
-      if ($this->acl_is_writeable("nagios_group")){
+      if ($this->acl_is_writeable("nagiosGroup")){
         if (isset ($_POST['nagios_group'])){
           $this->nagios_group= TRUE;
         } else {
@@ -1230,17 +1230,18 @@ class group extends plugin
 
           "plProvidedAcls"    => array(
             "cn"                => _("Name"),
-            "base"              => _("Base"),
             "description"       => _("Description"),
+            "base"              => _("Base"),
 
+            "gidNumber"         => _("GID"),
+
+            "sambaGroupType"    => _("Samba group type"),
+            "sambaDomainName"   => _("Samba domain name"),
+            "trustModel"        => _("System trust"),
             "fonGroup"          => _("Phone pickup group"),
             "nagiosGroup"       => _("Nagios group"),
 
-            "gidNumber"         => _("GID"),
-            "memberUid"         => _("Group member"),
-            "sambaGroupType"    => _("Samba group type"),
-            "sambaDomainName"   => _("Samba domain name"),
-            "sambaSID"          => _("Samba SID"))
+            "memberUid"         => _("Group member"))
         ));
   }
 
@@ -1288,7 +1289,7 @@ class group extends plugin
       }
 
       /* Save fon attribute */
-      if ($this->acl_is_writeable("fon_group")){
+      if ($this->acl_is_writeable("fonGroup")){
         if (isset ($_POST['fon_group'])){
           $this->fon_group= TRUE;
         } else {

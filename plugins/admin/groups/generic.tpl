@@ -225,9 +225,13 @@
 	{/if}
 {/render}
       <br>
+{render acl=$memberUidACL}
       <input type=submit name="edit_membership" value="{msgPool type=addButton}">
+{/render}
       &nbsp;
+{render acl=$memberUidACL}
       <input type=submit name="del_users" value="{msgPool type=delButton}">
+{/render}
      </td>
     </tr> 
    </table>
