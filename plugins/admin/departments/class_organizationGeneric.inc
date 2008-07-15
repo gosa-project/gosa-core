@@ -128,7 +128,7 @@ class organization extends department
 
             "o"                       => _("Organization name"),
             "description"             => _("Description"),
-            "destinationIndicator"    => _("Destination indicatior"),
+            "destinationIndicator"    => _("Destination indicator"),
             "telephoneNumber"         => _("Phone number"),
             "street"                  => _("Street"),
             "postOfficeBox"           => _("Post office box "),
