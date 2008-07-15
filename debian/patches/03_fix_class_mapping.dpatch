@@ -5,10 +5,28 @@
 ## DP: No description.
 
 @DPATCH@
+diff -urNad gosa-core~/include/class_config.inc gosa-core/include/class_config.inc
+--- gosa-core~/include/class_config.inc	2008-07-10 17:18:52.000000000 +0200
++++ gosa-core/include/class_config.inc	2008-07-15 10:00:12.000000000 +0200
+@@ -76,12 +76,12 @@
+         if we have installed or removed plugins. 
+      */
+     if(session::is_set("class_location.inc:timestamp")){
+-      $tmp = stat("../include/class_location.inc");
++      $tmp = stat("/var/cache/gosa/class.cache");
+       if($tmp['mtime'] != session::get("class_location.inc:timestamp")){
+         session::un_set("plist");
+       }
+     }
+-    $tmp = stat("../include/class_location.inc");
++    $tmp = stat("/var/cache/gosa/class.cache");
+     session::set("class_location.inc:timestamp",$tmp['mtime']);
+ 
+ 
 diff -urNad gosa-core~/include/functions.inc gosa-core/include/functions.inc
---- gosa-core~/include/functions.inc	2008-04-09 08:45:38.000000000 +0200
-+++ gosa-core/include/functions.inc	2008-04-09 09:13:09.000000000 +0200
-@@ -55,7 +55,7 @@
+--- gosa-core~/include/functions.inc	2008-07-15 09:58:50.000000000 +0200
++++ gosa-core/include/functions.inc	2008-07-15 09:58:51.000000000 +0200
+@@ -73,7 +73,7 @@
  $svn_revision = '$Revision: 9246 $';
  
  /* Include required files */
@@ -18,8 +36,8 @@ diff -urNad gosa-core~/include/functions.inc gosa-core/include/functions.inc
  require_once ("accept-to-gettext.inc");
  
 diff -urNad gosa-core~/update-gosa gosa-core/update-gosa
---- gosa-core~/update-gosa	2008-04-02 15:58:24.000000000 +0200
-+++ gosa-core/update-gosa	2008-04-09 09:12:56.000000000 +0200
+--- gosa-core~/update-gosa	2008-06-10 09:56:22.000000000 +0200
++++ gosa-core/update-gosa	2008-07-15 09:58:51.000000000 +0200
 @@ -21,7 +21,7 @@
   * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   */
