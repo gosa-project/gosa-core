@@ -306,7 +306,11 @@ class pluglist {
 						if (isset($info['ICON'])){
 							$image= get_template_path('images/'.$info['ICON']);
 						} else {
+              if(!preg_match("/\//",$plIcon)){
 					  		$image= get_template_path("plugins/".preg_replace('%^.*/([^/]+)/[^/]+$%', '\1', $class_mapping[$info['CLASS']])."/images/$plIcon");
+              }else{
+                $image = $plIcon; 
+              }
 						}
 						if ($col > 5){
 							$entries= $entries."</tr><tr>";
