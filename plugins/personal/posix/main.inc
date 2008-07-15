@@ -115,7 +115,7 @@ if (!$remove_lock){
              "\"> ".$ui->dn."&nbsp;";
 
       /* Only display edit button if there is at least one attribute editable */
-      if(preg_match("/w/",$ui->get_permissions($ui->dn,"users/posixAccount"))){
+      if(preg_match("/r/",$ui->get_permissions($ui->dn,"users/posixAccount"))){
         $info.= "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/lists/on.png')."\"> ".
           msgPool::clickEditToChange();
 
