@@ -368,17 +368,25 @@ class group extends plugin
         $exclude= "(!(|$exclude))";
       }
       $regex= $sysfilter['regex'];
-      $filter= "(&(|(objectClass=goServer)(objectClass=gotoWorkstation)(objectClass=gotoTerminal))$exclude(cn=*)(cn=$regex))";
 
-      $deps_a = array(get_ou("serverou"),
-                      get_ou("terminalou"),
-                      get_ou("workstationou"));
-
-      $res= get_sub_list($filter, array("terminal","server","workstation"), $deps_a, get_ou("systemsou").$sysfilter['depselect'],         array("cn"), GL_SUBSEARCH | GL_SIZELIMIT);
-      $wslist= array();
+      /* Search for systems 
+       */
+      $types = array();
+      $types['server']      = array("OU" => get_ou("serverou"),     "OC" => "(objectClass=goServer)");
+      $types['workstation'] = array("OU" => get_ou("workstationou"),"OC" => "(objectClass=gotoWorkstation)");
+      $types['terminal']    = array("OU" => get_ou("terminalou"),   "OC" => "(objectClass=gotoTerminal)");
+      
+      $res = array();
+      foreach($types as $acl => $data){
+        $filter= "(&".$data['OC']."$exclude(cn=$regex))";
+        $res= array_merge($res,get_sub_list($filter,array($acl),$data['OU'],get_ou("systemsou").$sysfilter['depselect'],
+          array("cn"), GL_SUBSEARCH | GL_SIZELIMIT));
+      }
+      $wslist = array();
       foreach ($res as $attrs){
         $wslist[]= preg_replace('/\$/', '', $attrs['cn'][0]);
       }
+
       asort($wslist);
       $smarty->assign("search_image", get_template_path('images/lists/search.png'));
       $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
