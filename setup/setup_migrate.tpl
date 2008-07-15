@@ -311,7 +311,7 @@ dn: {$deps_to_migrate.$key.dn}
 	
 			<h2>User migration</h2>
 
-			<p>{t}The listed users are currenlty invisble in the GOsa user interface. If you want to change this for a couple of users, just select them and use the 'Migrate' button below.{/t}</p>
+			<p>{t}The listed users are currently invisble in the GOsa user interface. If you want to change this for a couple of users, just select them and use the 'Migrate' button below.{/t}</p>
 			<p>{t}If you want to know what will be done when migrating the selected entries, use the 'Show changes' button to see the LDIF.{/t}</p>
 			{foreach from=$users_to_migrate item=val key=key}
 
@@ -367,7 +367,7 @@ dn: {$users_to_migrate.$key.dn}
 
 			<h2>Devices</h2>
 
-			<p>{t}The listed devices are currenlty invisble in the GOsa interface. If you want to change this for a couple of devices, just select them and use the 'Migrate' button below.{/t}</p>
+			<p>{t}The listed devices are currently invisble in the GOsa interface. If you want to change this for a couple of devices, just select them and use the 'Migrate' button below.{/t}</p>
 			<p>{t}If you want to know what will be done when migrating the selected entries, use the 'Show changes' button to see the LDIF.{/t}</p>
 		{foreach from=$devices item=item key=key}
            	<input type='checkbox' name='migrate_{$key}' id='migrate_{$key}' {if $item.DETAILS} checked {/if}>
@@ -411,7 +411,7 @@ dn: {$users_to_migrate.$key.dn}
 
 			<h2>Services</h2>
 
-			<p>{t}The listed services are currenlty invalid for the GOsa version you are going to install. If you want to update a couple of service, just select them and use the 'Migrate' button below.{/t}</p>
+			<p>{t}The listed services are currently invalid for the GOsa version you are going to install. If you want to update a couple of service, just select them and use the 'Migrate' button below.{/t}</p>
 			<p>{t}If you want to know what will be done when migrating the selected entries, use the 'Show changes' button to see the LDIF.{/t}</p>
 		{foreach from=$services item=item key=key}
            	<input type='checkbox' name='migrate_{$key}' id='migrate_{$key}' {if $item.DETAILS} checked {/if}>
@@ -455,7 +455,7 @@ dn: {$users_to_migrate.$key.dn}
 
 			<h2>Application menus</h2>
 
-			<p>{t}The listed menus are currenlty invisble in the GOsa interface. If you want to change this for a couple of devices, just select them and use the 'Migrate' button below.{/t}</p>
+			<p>{t}The listed menus are currently invisble in the GOsa interface. If you want to change this for a couple of devices, just select them and use the 'Migrate' button below.{/t}</p>
 			<p>{t}If you want to know what will be done when migrating the selected entries, use the 'Show changes' button to see the LDIF.{/t}</p>
 		{foreach from=$menus item=item key=key}
            	<input type='checkbox' name='migrate_{$key}' id='migrate_{$key}' {if $item.DETAILS} checked {/if}>
