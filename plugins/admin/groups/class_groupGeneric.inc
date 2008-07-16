@@ -280,7 +280,7 @@ class group extends plugin
     /* Base select dialog */
     $once = true;
     foreach($_POST as $name => $value){
-      if((preg_match("/^chooseBase/",$name) && $once) && ($this->acl_is_moveable())){
+      if((preg_match("/^chooseBase/",$name) && $once) && $this->acl_is_writeable("base")){
           
         $once = false;
         $this->dialog = new baseSelectDialog($this->config,$this,$this->get_allowed_bases());
