@@ -51,7 +51,7 @@ class MultiSelectWindow{
 	var $Added_Departments  = array();
 	var $selectedBase       = "";
 
-	private $departments= array();
+	var $departments= array();
 
   var $DivHeight          = "";
 
