@@ -905,16 +905,14 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
       }else{
 
         /* Sort in every value that fits the permissions */
-        if (is_array($category)){
-          foreach ($category as $o){
-            if ($ui->get_category_permissions($dn, $o) != ""){
-              $result[]= $attrs;
-              break;
-            }
-          }
-        } else {
-          if ( $ui->get_category_permissions($dn, $category) != ""){
+        if (!is_array($category)){
+          $category = array($category);
+        }
+        foreach ($category as $o){
+          if((preg_match("/\//",$o) && preg_match("/r/",$ui->get_permissions($dn,$o))) ||
+              (!preg_match("/\//",$o) && preg_match("/r/",$ui->get_category_permissions($dn, $o)))){
             $result[]= $attrs;
+            break;
           }
         }
       }
@@ -975,19 +973,14 @@ function get_list($filter, $category, $base= "", $attributes= array(), $flags= G
     }else{
 
       /* Sort in every value that fits the permissions */
-      if (is_array($category)){
-        foreach ($category as $o){
-          if ($ui->get_category_permissions($dn, $o) != ""){
-
-            /* We found what we were looking for, break speeds things up */
-            $result[]= $attrs;
-          }
-        }
-      } else {
-        if ($ui->get_category_permissions($dn, $category) != ""){
-
-          /* We found what we were looking for, break speeds things up */
+      if (!is_array($category)){
+        $category = array($category);
+      }
+      foreach ($category as $o){
+        if((preg_match("/\//",$o) && preg_match("/r/",$ui->get_permissions($dn,$o))) || 
+            (!preg_match("/\//",$o) && preg_match("/r/",$ui->get_category_permissions($dn, $o)))){
           $result[]= $attrs;
+          break;
         }
       }
     }
