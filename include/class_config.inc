@@ -382,12 +382,18 @@ class config  {
     if ($this->current['MAILMETHOD'] == ""){
       $ldap->search ("(objectClass=goMailServer)", array('cn'));
       $this->data['SERVERS']['IMAP']= array();
-      error_reporting(0);
       while ($attrs= $ldap->fetch()){
         $name= $attrs['cn'][0];
-        $this->data['SERVERS']['IMAP'][$name]= $name;
+        $this->data['SERVERS']['IMAP'][$name]= 
+          array( 
+              "server_dn"   => $attrs['dn'],
+              "connect"     => "",
+              "admin"       => "",
+              "password"    => "",
+              "sieve_server"=> "",
+              "sieve_option"=> "",
+              "sieve_port"  => "");
       }
-      error_reporting(E_ALL);
     } else {
       $ldap->search ("(&(objectClass=goImapServer)(goImapSieveServer=*))", 
                     array('goImapName', 'goImapConnect', 'goImapAdmin', 'goImapPassword',
@@ -850,7 +856,7 @@ class config  {
 
     foreach($res as $entry){
         
-        $acl = $ui->get_permissions($entry['dn'],"server/goShareServer","");
+        $acl = $ui->get_permissions($entry['dn'],"server","");
         if(isset($entry['goExportEntry']['count'])){
           unset($entry['goExportEntry']['count']);
         }
