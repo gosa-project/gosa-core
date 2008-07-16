@@ -321,7 +321,7 @@ class user extends plugin
     /* Base select dialog */
     $once = true;
     foreach($_POST as $name => $value){
-      if(preg_match("/^chooseBase/",$name) && $once){
+      if(preg_match("/^chooseBase/",$name) && $once && $this->acl_is_writeable("base")){
         $once = false;
         $this->dialog = new baseSelectDialog($this->config,$this,$this->allowedBasesToMoveTo());
         $this->dialog->setCurrentBase($this->base);
