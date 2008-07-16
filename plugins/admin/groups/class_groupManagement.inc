@@ -71,7 +71,7 @@ class groupManagement extends plugin
   	plugin::execute();
 
     /* Store these posts if the current object is locked (used by somebody else)*/
-    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/","/^item_selected/","/^remove_multiple_groups/","/^multiple_edit/","/menu_action/"));
+    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/","/^item_selected/","/^remove_multiple_groups/","/^multiple_edit/","/menu_action/","/_group_/"));
 
     /* Save data */
     $s_action   = "";
