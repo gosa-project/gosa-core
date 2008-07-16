@@ -83,15 +83,10 @@ class locality extends department
           "plCategory"    => array("department"),
 
           "plProvidedAcls" => array(
-
-      
-
-            "description"       => _("Description"),
             "l"                 => _("Location"),
-            "st"                => _("State"),
-
+            "description"       => _("Description"),
             "base"              => _("Base"),
-            "gosaUnitTag"       => _("Administrative settings")),
+            "gosaUnitTag"       => _("Administrative settings"))
           ));
   }
 }

@@ -82,10 +82,10 @@ class dcObject extends department
           "plCategory"    => array("department"),
 
           "plProvidedAcls" => array(
-            "base"              => _("Base"),
-            "gosaUnitTag"       => _("Administrative settings"),
+            "dc"                => _("Name"),
             "description"       => _("Description"),
-            "dc"                => _("Name")),
+            "base"              => _("Base"),
+            "gosaUnitTag"       => _("Administrative settings"))
           ));
   }
 }

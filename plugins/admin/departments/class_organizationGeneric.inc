@@ -114,32 +114,18 @@ class organization extends department
           "plCategory"    => array("department"),
 
           "plProvidedAcls" => array(
-#            "userPassword"               => _("Password"),
-#            "searchGuide"                => _("Search guide"),
-#            "seeAlso"                    => _("See also"),
-#            "x121Address"                => _("No idea"),
-#            "registeredAddress"          => _("Registered address"),
-#            "teletexTerminalIdentifier"  => _("Teletext terminal identifier"),
-#            "physicalDeliveryOfficeName" => _("Physical delivery office name"),
-#            "internationaliSDNNumber"    => _("International ISDN number"),
-#            "preferredDeliveryMethod"    => _("Prefered delivery mode"),
-#            "telexNumber"                => _("Telex number"),
-
-
             "o"                       => _("Organization name"),
             "description"             => _("Description"),
-            "destinationIndicator"    => _("Destination indicator"),
-            "telephoneNumber"         => _("Phone number"),
-            "street"                  => _("Street"),
-            "postOfficeBox"           => _("Post office box "),
-            "postalCode"              => _("Postal code"),
-            "postalAddress"           => _("Postal address"),
-            "base"                    => _("Base"),
             "businessCategory"        => _("Category"),
+            "base"                    => _("Base"),
+
             "st"                      => _("State"),
             "l"                       => _("Location"),
-            "gosaUnitTag"             => _("Administrative settings"),
-            "facsimileTelephoneNumber"=> _("Fax"))
+            "postalAddress"           => _("Postal address"),
+            "telephoneNumber"         => _("Phone number"),
+            "facsimileTelephoneNumber"=> _("Fax"),
+
+            "gosaUnitTag"             => _("Administrative settings"))
           ));
   }
 

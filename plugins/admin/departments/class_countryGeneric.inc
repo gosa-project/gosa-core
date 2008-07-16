@@ -83,13 +83,10 @@ class country extends department
           "plCategory"    => array("department"),
 
           "plProvidedAcls" => array(
-#            "searchGuide"                => _("Search guide"),
-#            "seeAlso"                    => _("See also"),
-            "street"            => _("Street"),
-            "base"              => _("Base"),
-            "gosaUnitTag"       => _("Administrative settings"),
+            "c"                 => _("Country name"),
             "description"       => _("Description"),
-            "c"                 => _("Country name")),
+            "base"              => _("Base"),
+            "gosaUnitTag"       => _("Administrative settings"))
           ));
   }
 }
