@@ -175,9 +175,9 @@ class department extends plugin
 
     /* Set admin unit flag */
     if ($this->is_administrational_unit) {
-      $smarty->assign("unitTag", "checked");
+      $smarty->assign("gosaUnitTag", "checked");
     } else {
-      $smarty->assign("unitTag", "");
+      $smarty->assign("gosaUnitTag", "");
     }
 
     $smarty->assign("dep_type",$this->type);
@@ -253,8 +253,8 @@ class department extends plugin
       }
 
       /* Save tagging flag */
-      if ($this->acl_is_writeable("unitTag")){
-        if (isset($_POST['unitTag'])){
+      if ($this->acl_is_writeable("gosaUnitTag")){
+        if (isset($_POST['gosaUnitTag'])){
           $this->is_administrational_unit= true;
         } else {
           $this->is_administrational_unit= false;
@@ -590,17 +590,18 @@ class department extends plugin
                   "plCategory"    => array("department" => array("objectClass" => "gosaDepartment", "description" => _("Departments"))),
             
                   "plProvidedAcls" => array(
-                    "description"       => _("Description"),
-                    "c"                 => _("Country"),
-                    "base"              => _("Base"),
-                    "l"                 => _("Location"),
-                    "telephoneNumber"   => _("Telephone"),
                     "ou"                => _("Department name"),
+                    "description"       => _("Description"),
                     "businessCategory"  => _("Category"),
+                    "base"              => _("Base"),
+
                     "st"                => _("State"),
+                    "l"                 => _("Location"),
                     "postalAddress"     => _("Address"),
-                    "gosaUnitTag"       => _("Administrative settings"),
-                    "facsimileTelephoneNumber" => _("Fax"))
+                    "telephoneNumber"   => _("Telephone"),
+                    "facsimileTelephoneNumber" => _("Fax"),
+
+                    "gosaUnitTag"       => _("Administrative settings"))
                   ));
   }
 

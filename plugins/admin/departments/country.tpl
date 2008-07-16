@@ -49,7 +49,7 @@
    <td style="vertical-align:top; width:100%">
      <h2><img class="center" alt="" align="middle" src="images/lists/locked.png"> {t}Administrative settings{/t}</h2>
 {render acl=$gosaUnitTagACL}
-     <input id="unitTag" type=checkbox name="unitTag" value="1" {$unitTag}><label for="unitTag">{t}Tag department as an independent administrative unit{/t}</label>
+     <input id="gosaUnitTag" type=checkbox name="gosaUnitTag" value="1" {$gosaUnitTag}><label for="gosaUnitTag">{t}Tag department as an independent administrative unit{/t}</label>
 {/render}
    </td>
   </tr>
