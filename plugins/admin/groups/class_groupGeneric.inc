@@ -1152,13 +1152,18 @@ class group extends plugin
 
       }
     }
-
+    
     /* Check if we are allowed to create or move this object 
      */
-    if($this->orig_dn == "new" && !$this->acl_is_createable($this->base)){
-      $message[] = msgPool::permCreate();
-    }elseif($this->orig_dn != "new" && $this->orig_base && !$this->acl_is_moveable($this->base)){
-      $message[] = msgPool::permMove();
+    if(!$this->orig_dn == "new" || 
+        $this->orig_base != $this->base || 
+        $this->cn != $this->orig_cn){
+
+      if($this->orig_dn == "new" && !$this->acl_is_createable($this->base)){
+        $message[] = msgPool::permCreate();
+      }elseif($this->orig_dn != "new" && !$this->acl_is_moveable($this->base)){
+        $message[] = msgPool::permMove();
+      }
     }
 
     return ($message);
