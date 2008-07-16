@@ -454,8 +454,16 @@ class group extends plugin
       $smarty->assign("search_image", get_template_path('images/lists/search.png'));
       $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
       $smarty->assign("tree_image", get_template_path('images/lists/search-subtree.png'));
-
-      $smarty->assign("deplist", $this->get_allowed_bases("users/user"));
+      $ui = get_userinfo();
+      $tmp = $ui->get_module_departments("users");
+      $deps = array();
+      foreach($this->config->idepartments as $dn => $name){
+        if(in_array($dn,$tmp)){
+          $deps[$dn] = $name;
+        }
+      }  
+ 
+      $smarty->assign("deplist", $deps);
       $smarty->assign("alphabet", generate_alphabet());
       foreach( array("dselect", "regex","SubSearchGroup") as $type){
         $smarty->assign("$type", $gufilter[$type]);
