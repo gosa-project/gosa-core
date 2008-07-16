@@ -809,7 +809,7 @@ class config  {
    */
   function getShareList($listboxEntry = false)
   {
-    $tmp = get_sub_list("(&(objectClass=goShareServer)(goExportEntry=*))","server",get_ou("serverou"),
+    $tmp = get_sub_list("(&(objectClass=goShareServer)(goExportEntry=*))","server/goShareServer",get_ou("serverou"),
         $this->current['BASE'],array("goExportEntry","cn"), GL_NONE);
     $return =array();
     foreach($tmp as $entry){
