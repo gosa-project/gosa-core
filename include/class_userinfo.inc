@@ -284,6 +284,9 @@ class userinfo
         then return all permissions.
      */
     if($this->ignore_acl_for_current_user()){
+      if($skip_write){
+        return("rcdm");
+      }
       return("rwcdm");
     }
 
