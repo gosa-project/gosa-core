@@ -178,7 +178,7 @@ class divListDepartment extends MultiSelectWindow
 
   function setEntries($list)
   {
-    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
+    $linkopen = "<a href='?plug=".$_GET['plug']."&amp;post_id=".$this->post_id."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
 
     $types = $this->parent->get_support_departments();
 
