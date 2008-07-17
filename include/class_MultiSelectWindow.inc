@@ -60,8 +60,11 @@ class MultiSelectWindow{
   var $SaveAdditionalVars = array();  // Additional Post vars to store 
   var $module= "";
 
+  var $base_selection_regex = "*";
+
   var $IgnoreAccount = TRUE;
   var $footer = "";
+  var $post_id    = "1 2 3";
 
 	function ClearElementsList()
 	{
@@ -142,7 +145,7 @@ class MultiSelectWindow{
 		$this->CloseButtonString	= _("Close");
 		$this->filterName			= $filterName;
     $this->ui = get_userinfo();
-		$this->selectedBase  = session::get('CurrentMainBase');
+    $this->post_id = preg_replace("/[^0-9]/","",microtime(TRUE));
 
     /* Check default values for SaveAdditionalVars */
     $MultiDialogFilters = session::get('MultiDialogFilters');
@@ -454,6 +457,7 @@ class MultiSelectWindow{
 		$smarty->assign("Title"				, $this->string_Title);
 		$smarty->assign("Information"		, $this->string_Information);
 		$smarty->assign("IgnoreAccount"		, $this->IgnoreAccount);
+    $smarty->assign("POST_ID", $this->post_id);
 
 		/* Check for exeeded sizelimit */
 		$smarty->assign("hint"				, print_sizelimit_warning());
@@ -500,6 +504,14 @@ class MultiSelectWindow{
 	   Store data also into a session var, to keep the checkboxes check after reload  */
 	function save_object()
 	{
+
+    /* Ensure that we do not handle posts for other dialogs 
+     */
+    if((isset($_POST['POST_ID']) && $_POST['POST_ID'] != $this->post_id) || 
+       (isset($_GET['POST_ID']) && $_GET['POST_ID'] != $this->post_id)){
+      return;
+    }
+
     /* Get up to date config */
     if(isset($this->parent->config)){
       $this->config = $this->parent->config;
@@ -549,12 +561,12 @@ class MultiSelectWindow{
       }
     }
 
-
     /* If Back-button is pressed, move back one step in DN */
     if($s_action=="back"){
 
+
       /* Get parent deprtment and check if we are allowed to step in it */
-      $base_back= preg_replace("/^[^,]+,/", "", session::get('CurrentMainBase'));
+      $base_back= preg_replace("/^[^,]+,/", "", $this->selectedBase);
       $dep_id = $this->ui->get_module_departments($this->module);
       if(in_array_ics($base_back,$dep_id)){
         if(in_array($base_back,$this->config->departments)){
@@ -562,7 +574,6 @@ class MultiSelectWindow{
         }
       }
     }
-    session::set('CurrentMainBase',$this->selectedBase);
 
 		if(isset($_POST['MultiSelectWindow'.$this->filterName])){
 
@@ -642,10 +653,7 @@ class MultiSelectWindow{
 
 		/* check for a valid base */
 		if(!$base){
-			if(!session::is_set('CurrentMainBase')){
-				session::set('CurrentMainBase',$this->config->current['BASE']);
-			}
-			$base  = session::get('CurrentMainBase');
+      $base = $this->selectedBase;
 		}
 
 		/* Create ldap obj and switch into base*/
@@ -661,7 +669,7 @@ class MultiSelectWindow{
 
 		/* Edit delete link for system types
 		 */
-		$linkopen = "<a href='?plug=".$_GET['plug']."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
+		$linkopen = "<a href='?plug=".$_GET['plug']."&amp;post_id=".$this->post_id."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
 
 		/* Create an array with all visible (in the list) departments */
     $types = departmentManagement::get_support_departments();
