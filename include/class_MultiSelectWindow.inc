@@ -666,17 +666,22 @@ class MultiSelectWindow{
 		/* Create an array with all visible (in the list) departments */
     $types = departmentManagement::get_support_departments();
 
-		$departments = array();
-		foreach($deps as $value){
-      $name = $value['ou'][0]." -".$value['dn'];
-      foreach($types as $type){
-        if(in_array($type['OC'],$value['objectClass'])){
-          $value['type'] = $type;
-          break;
-        }
-      }       
-		  $this->departments[$name]= $value;
-		}
+
+    /* Create search filter
+     */
+    $this->departments = array();
+    foreach($types as $name => $data){
+      $filter = "(&(objectClass=gosaDepartment)(objectClass=".$data['OC'].")
+                  (".$data['ATTR']."=".$this->base_selection_regex."))";
+      $tmp = get_list($filter,"department/".$data['ACL'],$this->selectedBase,array($data['ATTR'],"description"),GL_NONE);
+      foreach($tmp as $attrs){
+        $attrs['NAME'] = $attrs[$data['ATTR']][0];
+        $attrs['TYPE'] = $data;
+        $name = $attrs['NAME']." -".$attrs['dn'];
+        $this->departments[$name] = $attrs;
+      }
+    }
+
     uksort($this->departments, 'strnatcasecmp');
 
     $ui = get_userinfo();
@@ -691,10 +696,10 @@ class MultiSelectWindow{
       /* Check if this department contains sub-departments
          Display different image in this case
        */
-      $img = $val['type']['IMG'];
+      $img = $val['TYPE']['IMG'];
       foreach($this->config->departments as $keyd){
         if(preg_match("/,".normalizePreg($val['dn'])."$/",$keyd)){
-          $img = $val['type']['IMG_FULL'];
+          $img = $val['TYPE']['IMG_FULL'];
         }
       }
 
@@ -711,7 +716,7 @@ class MultiSelectWindow{
 
       /* Create entry name 
        */
-      $name = $val['ou'][0];
+      $name = $val['NAME'];
       if(isset($val['description'])){
         $name .=  " - [".$val["description"][0]."]";
       }
