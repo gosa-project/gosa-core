@@ -1,6 +1,12 @@
         <!-- Avoid posting the first action specified on this page when pressing 'enter' while editing an input field.
                 Mostly "dep_root" was posted the base selector was resetted. -->
         <input type='image' src='images/empty.png' name='no_action_posted' value='do_nothing' alt='' style='width:2px;height:2px;'>
+
+		
+	<!-- Used to identify the post data, if we don't check this we may execute
+ 		  actions on a wrong list.
+      -->
+	<input type="hidden" value="{$POST_ID}" name="POST_ID">
 	<table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=4>
 		<tr>
 	 		<td style="vertical-align:top; width:50%;">
