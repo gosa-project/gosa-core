@@ -508,7 +508,7 @@ class MultiSelectWindow{
     /* Ensure that we do not handle posts for other dialogs 
      */
     if((isset($_POST['POST_ID']) && $_POST['POST_ID'] != $this->post_id) || 
-       (isset($_GET['POST_ID']) && $_GET['POST_ID'] != $this->post_id)){
+       (isset($_GET['post_id']) && $_GET['post_id'] != $this->post_id)){
       return;
     }
 
@@ -546,6 +546,7 @@ class MultiSelectWindow{
     if(isset($_GET['act'])&& ($_GET['act'] == "dep_open")){
       $s_entry = $_GET['dep_id'];
       if (!isset($this->departments[$s_entry])){
+
         msg_dialog::display(_("LDAP error"), sprintf(_("Inconsistent DN encoding detected: '%s'"), LDAP::fix($s_entry)), ERROR_DIALOG);
       } else {
         $this->selectedBase = $this->departments[$s_entry]['dn'];
