@@ -143,6 +143,15 @@ class ogroup extends plugin
     $this->orig_cn = $this->cn;
     $this->orig_base = $this->base;
 
+    /* Get global filter config */
+    if (!session::is_set("sysfilter")){
+      $ui= get_userinfo();
+      $base= get_base_from_people($ui->dn);
+      $sysfilter= array( "depselect"       => $base,
+          "regex"           => "*");
+      session::set("sysfilter", $sysfilter);
+    }
+
     /* Load member data */
     $this->reload();
   }
@@ -1065,6 +1074,7 @@ class ogroup extends plugin
             "cn"                => _("Name"),
             "base"              => _("Base"),
             "description"       => _("Description"),
+            "trustModel"        => _("Sytem trust"),
             "member"            => _("Member"))
           ));
   }
