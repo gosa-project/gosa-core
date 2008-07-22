@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-15 19:54+0200\n"
-"PO-Revision-Date: 2008-07-15 23:50+0200\n"
+"POT-Creation-Date: 2008-07-21 16:15+0200\n"
+"PO-Revision-Date: 2008-07-21 16:53+0200\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team: french <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -170,7 +170,7 @@ msgstr "Plus de mémoire disponible !"
 
 #: html/main.php:292
 msgid "User ACL checks disabled"
-msgstr ""
+msgstr "Les vérifications des ACL de l'utilisateur ont été désactivés"
 
 #: html/main.php:361 ihtml/themes/default/password.tpl:40
 #: plugins/admin/users/class_userManagement.inc:315
@@ -212,7 +212,7 @@ msgstr "La session n'est pas cryptée !"
 msgid ""
 "The session lifetime configured in your gosa.conf will be overridden by php."
 "ini settings."
-msgstr ""
+msgstr "La durée de validité des sessions configurée dans votre gosa.conf sera remplacée par celle définie dans votre php.ini."
 
 #: html/index.php:167
 msgid "Smarty error"
@@ -220,7 +220,7 @@ msgstr "Erreur Smarty"
 
 #: html/index.php:218
 msgid "There is a problem with the authentication setup!"
-msgstr ""
+msgstr "Il y a une problèmes avec la configuration de l'authentification !"
 
 #: html/index.php:226 html/index.php:230
 #: ihtml/themes/default/msg_dialog.tpl:52
@@ -259,11 +259,11 @@ msgstr "Erreur"
 
 #: html/index.php:226
 msgid "Cannot find a valid user for the current authentication setup!"
-msgstr ""
+msgstr "Impossible de trouver un utilisateur valide pour le système d'authentification !"
 
 #: html/index.php:230
 msgid "User information is not unique accross the configured LDAP trees!"
-msgstr ""
+msgstr "L'information de l'utilisateur n'est pas unique à travers tout les annuaires !"
 
 #: html/index.php:256 html/index.php:270 html/index.php:283
 #: setup/class_setupStep_Migrate.inc:1101
@@ -309,7 +309,7 @@ msgstr "Erreur LDAP"
 
 #: html/index.php:270
 msgid "Cannot detect information about the installed LDAP schema!"
-msgstr ""
+msgstr "Impossible de détecter les information sur les schémas LDAP installés !"
 
 #: html/index.php:283
 msgid "Your LDAP setup contains old schema definitions:"
@@ -329,7 +329,7 @@ msgstr "Erreur d'authentification"
 
 #: html/index.php:319
 msgid "Cannot retrieve user information for htaccess authentication!"
-msgstr ""
+msgstr "Impossible de trouver l'information utilisateur pour l'authentification htaccess !"
 
 #: html/index.php:375
 msgid "Account locked. Please contact your system administrator!"
@@ -995,7 +995,7 @@ msgstr ""
 
 #: setup/class_setupStep_Checks.inc:148
 msgid "Deploy a gosa-si installation or install the perl Crypt::SmbHash modules."
-msgstr ""
+msgstr "Déployez une installation gosa-si ou installer les modules perl Crypt::Smbash."
 
 #: setup/class_setupStep_Checks.inc:158
 msgid ""
@@ -1181,7 +1181,7 @@ msgstr ""
 msgid ""
 "It seems that your ldap database wasn't initialized yet. This maybe the "
 "reason, why GOsa can't read your schema configuration!"
-msgstr ""
+msgstr "Il semble que votre annuaire LDAP 'a pas encore été configuré. C'est peut être cela qui empêche GOsa de lire la configuration de vos schémas. "
 
 #: setup/class_setup.inc:77 setup/class_setupStep_Feedback.inc:132
 msgid "Setup error"
@@ -1242,12 +1242,12 @@ msgstr "Notification et retour d'information"
 #: setup/class_setupStep_Feedback.inc:141
 #: setup/class_setupStep_Feedback.inc:148
 msgid "Feedback error"
-msgstr ""
+msgstr "Erreur du retour d'information"
 
 #: setup/class_setupStep_Feedback.inc:141
 #, php-format
 msgid "Cannot send feedback to '%s': %s"
-msgstr ""
+msgstr "Impossible d'envoyer le retour d'information à '%s': %s"
 
 #: setup/class_setupStep_Feedback.inc:148
 msgid "Cannot send feedback: service temporarily unavailable"
@@ -1586,7 +1586,7 @@ msgstr "désactivé"
 
 #: setup/setup_config2.tpl:213
 msgid "Account identification attribute"
-msgstr ""
+msgstr "Attribut d'identification du compte"
 
 #: setup/setup_config2.tpl:227
 msgid "Vacation templates"
@@ -1674,7 +1674,7 @@ msgstr "connexion et session"
 
 #: setup/setup_config3.tpl:175
 msgid "Login attribute"
-msgstr ""
+msgstr "Attribut de connexion"
 
 #: setup/setup_config3.tpl:186
 msgid "Enforce register_globals to be deactivated"
@@ -2253,7 +2253,10 @@ msgid ""
 "The listed devices are currenlty invisble in the GOsa interface. If you want "
 "to change this for a couple of devices, just select them and use the "
 "'Migrate' button below."
-msgstr "Les périphériques listés sont actuellement invisibles dans l'interface de GOsa. Si vous voulez changer ceci pour un ensemble de périphériques, veuillez les sélectionner et utiliser le bouton 'migration' ci dessous."
+msgstr ""
+"Les périphériques listés sont actuellement invisibles dans l'interface de "
+"GOsa. Si vous voulez changer ceci pour un ensemble de périphériques, "
+"veuillez les sélectionner et utiliser le bouton 'migration' ci dessous."
 
 #: setup/setup_migrate.tpl:396 setup/setup_migrate.tpl:439
 #: setup/setup_migrate.tpl:483
@@ -2266,15 +2269,19 @@ msgid ""
 "to install. If you want to update a couple of service, just select them and "
 "use the 'Migrate' button below."
 msgstr ""
-"Les services listés sont actuellement invisibles dans l'interface de GOsa. Si vous voulez changer ceci pour un ensemble "
-"de services, veuillez les sélectionner et utiliser le bouton 'migration' ci dessous."
+"Les services listés sont actuellement invisibles dans l'interface de GOsa. "
+"Si vous voulez changer ceci pour un ensemble de services, veuillez les "
+"sélectionner et utiliser le bouton 'migration' ci dessous."
 
 #: setup/setup_migrate.tpl:458
 msgid ""
 "The listed menus are currenlty invisble in the GOsa interface. If you want "
 "to change this for a couple of devices, just select them and use the "
 "'Migrate' button below."
-msgstr "Les menus listés sont actuellement invisibles dans l'interface de GOsa. Si vous voulez changer ceci pour un ensemble de menus, veuillez les sélectionner et utiliser le bouton 'migration' ci dessous."
+msgstr ""
+"Les menus listés sont actuellement invisibles dans l'interface de GOsa. Si "
+"vous voulez changer ceci pour un ensemble de menus, veuillez les "
+"sélectionner et utiliser le bouton 'migration' ci dessous."
 
 #: setup/setup_license.tpl:8
 msgid "I have read the license and accept it"
@@ -2711,7 +2718,7 @@ msgstr "La connexion socket vers l'hôte '%s:%s' à echoué : %s"
 #: include/class_socketClient.inc:191
 #, php-format
 msgid "Socket timeout of %s seconds reached."
-msgstr ""
+msgstr "Le temps limite du socket de '%s' secondes à été atteint."
 
 #: include/class_pluglist.inc:57
 msgid "All objects in this category"
@@ -2733,7 +2740,7 @@ msgstr "Inconnu"
 msgid ""
 "The timezone setting '%s' in your gosa.conf is not valid. Cannot calculate "
 "correct timezone offset."
-msgstr ""
+msgstr "Le fuseau horaire '%s' indiqué dans votre gosa.conf est invalide. Impossible de calculer le décalage horaire correct."
 
 #: include/utils/class_msgPool.inc:15
 #, php-format
@@ -2768,7 +2775,7 @@ msgstr "Cet objet sera effacé !"
 #: include/utils/class_msgPool.inc:35
 #, php-format
 msgid "This '%s' object will be deleted!"
-msgstr ""
+msgstr "L'objet '%s' sera effacé !"
 
 #: include/utils/class_msgPool.inc:40
 #, php-format
@@ -2778,26 +2785,26 @@ msgstr "Cet objet sera effacé : %s"
 #: include/utils/class_msgPool.inc:42
 #, php-format
 msgid "This '%s' object will be deleted: %s"
-msgstr ""
+msgstr "L'objet de type '%s' sera effacé: %s"
 
 #: include/utils/class_msgPool.inc:47
 msgid "This object will be deleted:"
-msgstr ""
+msgstr "Cet objet sera effacé: "
 
 #: include/utils/class_msgPool.inc:49
 #, php-format
 msgid "This '%s' object will be deleted:"
-msgstr ""
+msgstr "L'objet de type '%s' sera effacé:"
 
 #: include/utils/class_msgPool.inc:53
 #, php-format
 msgid "These objects will be deleted: %s"
-msgstr ""
+msgstr "Ces objets seront effacés: %s"
 
 #: include/utils/class_msgPool.inc:55
 #, php-format
 msgid "These '%s' objects will be deleted: %s"
-msgstr ""
+msgstr "Ces objets de type '%s' seront effacés: %s"
 
 #: include/utils/class_msgPool.inc:63
 msgid "You have no permission to delete this object!"
@@ -2891,9 +2898,8 @@ msgstr "Le champ '%s' contient un mot réservé !"
 
 #: include/utils/class_msgPool.inc:200
 #, php-format
-#, fuzzy
 msgid "Command specified as %s hook for plugin '%s' does not exist!"
-msgstr "La commande '%s', utilisée dans le CHECK de l'extension '%s' n'existe pas !"
+msgstr "La commande '%s', spécifiée comme connexion de l'extension '%s' n'existe pas !"
 
 #: include/utils/class_msgPool.inc:207
 #, php-format
@@ -3043,7 +3049,9 @@ msgstr "Ce compte n'a pas d'extensions %s valides !"
 #: include/utils/class_msgPool.inc:381
 #, php-format
 msgid "This account has %s settings enabled. You can disable them by clicking below."
-msgstr "Ce compte possède l'extension %s activée. Vous pouvez la supprimer en cliquant sur le bouton ci-dessous."
+msgstr ""
+"Ce compte possède l'extension %s activée. Vous pouvez la supprimer en "
+"cliquant sur le bouton ci-dessous."
 
 #: include/utils/class_msgPool.inc:384 include/utils/class_msgPool.inc:391
 #, php-format
@@ -3057,7 +3065,9 @@ msgstr ""
 #: include/utils/class_msgPool.inc:400
 #, php-format
 msgid "This account has %s settings disabled. You can enable them by clicking below."
-msgstr "Ce compte possède %s paramètres desactivés. Vous pouvez les activer en clicquant ci dessous."
+msgstr ""
+"Ce compte possède %s paramètres desactivés. Vous pouvez les activer en "
+"clicquant ci dessous."
 
 #: include/utils/class_msgPool.inc:403
 #, php-format
@@ -3253,7 +3263,9 @@ msgstr "Impossible d'écrire dans le fichier '%s' !"
 msgid ""
 "The value for '%s' is currently unconfigured or invalid, please check your "
 "configuration file!"
-msgstr "La valeur de '%s' est actuellement vide ou non valide, veuillez vérifier votre fichier de configuration !"
+msgstr ""
+"La valeur de '%s' est actuellement vide ou non valide, veuillez vérifier "
+"votre fichier de configuration !"
 
 #: include/utils/class_msgPool.inc:529
 #, php-format
@@ -3285,7 +3297,9 @@ msgstr "Installer et activer le module PHP %s."
 msgid ""
 "Cannot initialize class '%s'! Maybe there is a plugin missing in your gosa "
 "setup?"
-msgstr "Impossible d'initialiser la classe '%s' ! Peut être manque t'il une extension dans votre installation de GOsa ?"
+msgstr ""
+"Impossible d'initialiser la classe '%s' ! Peut être manque t'il une "
+"extension dans votre installation de GOsa ?"
 
 #: include/class_tabs.inc:241
 #, php-format
@@ -3330,12 +3344,16 @@ msgstr "Impossible d'enlever l'entrée %s !"
 #: include/functions.inc:118
 #, php-format
 msgid "Fatal error: no class locations defined - please run '%s' to fix this"
-msgstr "Erreur fatale : pas d'emplacement défini pour les classes  - veuillez exécuter '%s' pour régler le problème"
+msgstr ""
+"Erreur fatale : pas d'emplacement défini pour les classes  - veuillez "
+"exécuter '%s' pour régler le problème"
 
 #: include/functions.inc:125
 #, php-format
 msgid "Fatal error: cannot instantiate class '%s' - try running '%s' to fix this"
-msgstr "Erreur fatale : impossible d'initialiser la classe '%s' - veuillez exécuter '%s' pour essayer de régler le problème"
+msgstr ""
+"Erreur fatale : impossible d'initialiser la classe '%s' - veuillez exécuter "
+"'%s' pour essayer de régler le problème"
 
 #: include/functions.inc:335
 #, php-format
@@ -3456,7 +3474,9 @@ msgstr "Impossible d'écrire le fichier de revision !"
 #: include/functions.inc:2196 include/functions.inc:2200
 #: include/functions.inc:2206
 msgid "'base_hook' is not available. Using default base!"
-msgstr "Attention - base_hook n'est pas disponible. Utilisation de la base par défaut !"
+msgstr ""
+"Attention - base_hook n'est pas disponible. Utilisation de la base par "
+"défaut !"
 
 #: include/functions.inc:2228
 msgid "LDAP warning"
@@ -3464,7 +3484,9 @@ msgstr "Avertissement LDAP"
 
 #: include/functions.inc:2228
 msgid "Cannot get schema information from server. No schema check possible!"
-msgstr "Impossible de récupérer les informations sur les schémas depuis le serveur. Vérification des schémas impossibles !"
+msgstr ""
+"Impossible de récupérer les informations sur les schémas depuis le serveur. "
+"Vérification des schémas impossibles !"
 
 #: include/functions.inc:2254
 msgid "Used to store account specific informations."
@@ -3491,12 +3513,12 @@ msgstr "Object class facultative '%s' manquante !"
 #: include/functions.inc:2312
 #, php-format
 msgid "Version mismatch for required object class '%s' (!=%s)!"
-msgstr ""
+msgstr "La version requise des object class ne correspond pas '%s' (!=%s) !"
 
 #: include/functions.inc:2314
 #, php-format
 msgid "Version mismatch for optional object class '%s' (!=%s)!"
-msgstr ""
+msgstr "La version des object class optionnels ne correspond pas '%s' (!=%s) !"
 
 #: include/functions.inc:2318
 #, php-format
@@ -3524,7 +3546,10 @@ msgstr ""
 msgid ""
 "Your schema is configured to support the rfc2307bis group, but you have "
 "disabled this option on the 'ldap setup' step."
-msgstr "Votre schéma est configuré pour supporter les groupes rfc2307, mais vous avez désactivé cette option lors de l'étape 'configuration de l'annuaire ldap' du programme d'installation."
+msgstr ""
+"Votre schéma est configuré pour supporter les groupes rfc2307, mais vous "
+"avez désactivé cette option lors de l'étape 'configuration de l'annuaire "
+"ldap' du programme d'installation."
 
 #: include/functions.inc:2346
 msgid "The objectClass 'posixGroup' must be STRUCTURAL"
@@ -3702,7 +3727,7 @@ msgstr "Impossible de coller"
 
 #: include/password-methods/class_password-methods.inc:145
 msgid "Cannot find a suitable password method for the current hash!"
-msgstr ""
+msgstr "Impossible de trouver une méthode de cryptage correspondante pour le mot de passe !"
 
 #: include/class_plugin.inc:497
 msgid ""
@@ -3807,13 +3832,13 @@ msgstr "Erreur MySQL"
 #: include/class_log.inc:137
 #, php-format
 msgid "Logging to MySQL database will be disabled for server '%s'!"
-msgstr ""
+msgstr "Les journaux systèmes envoyés vers la base de donnée MySQL seront désactivé pour le serveur '%s' !"
 
 #: include/class_log.inc:162 include/class_log.inc:171
 #: include/class_log.inc:184 include/class_log.inc:201
 #: include/class_log.inc:239
 msgid "MySQL logging"
-msgstr ""
+msgstr "Journaux systèmes stockés dans un base de données MySQL"
 
 #: include/class_log.inc:216
 #, php-format
@@ -4107,7 +4132,9 @@ msgstr "Réinitialisation du mot de passe"
 
 #: include/class_multi_plug.inc:391
 msgid "The user password was resetted, please set a new password value!"
-msgstr "Le mot de passe de l'utilisateur à été réinitialisé, veuillez entrer un nouveau mot de passe !"
+msgstr ""
+"Le mot de passe de l'utilisateur à été réinitialisé, veuillez entrer un "
+"nouveau mot de passe !"
 
 #: include/class_ldap.inc:232 include/class_ldap.inc:265
 msgid "Performance warning"
@@ -4116,17 +4143,19 @@ msgstr "Avertissement de performance"
 #: include/class_ldap.inc:232 include/class_ldap.inc:265
 #, php-format
 msgid "LDAP performance is poor: last query took about %.2fs!"
-msgstr "La performance de votre annuaire est faible : la dernière requête à duré %.2fs !"
+msgstr ""
+"La performance de votre annuaire est faible : la dernière requête à duré "
+"%.2fs !"
 
 #: include/class_ldap.inc:639
 #, php-format
 msgid "Cannot automatically create subtrees with RDN '%s': no object class found!"
-msgstr ""
+msgstr "Impossible de créer automatiquement des sous arbres avec le RDN '%s': object class non trouvé !"
 
 #: include/class_ldap.inc:687
 #, php-format
 msgid "Cannot automatically create subtrees with RDN '%s': not supported"
-msgstr ""
+msgstr "Impossible de créer automatiquement des sous arbres avec le RDN '%s': non supporté"
 
 #: include/class_ldap.inc:771
 #, php-format
@@ -5178,7 +5207,7 @@ msgstr "Paramètres administratifs"
 #: plugins/admin/departments/class_dcObject.inc:77
 #: plugins/admin/departments/class_departmentManagement.inc:542
 msgid "Domain Component"
-msgstr ""
+msgstr "Objet Domaine"
 
 #: plugins/admin/departments/class_departmentGeneric.inc:363
 msgid "Cannot find an unused tag for this administrative unit!"
@@ -5450,7 +5479,7 @@ msgstr "Numéro de téléphone"
 
 #: plugins/admin/departments/class_organizationGeneric.inc:134
 msgid "Post office box "
-msgstr ""
+msgstr "Boite postale"
 
 #: plugins/admin/departments/class_organizationGeneric.inc:135
 #: plugins/personal/generic/class_user.inc:1494
@@ -5851,7 +5880,9 @@ msgstr "Le mot de passe doit être changé après %s jours"
 #: plugins/personal/posix/class_posixAccount.inc:479
 #, php-format
 msgid "Disable account after %s days of inactivity after password expiry"
-msgstr "Désactiver le compte après %s jours d'inactivité après l'expiration du mot de passe"
+msgstr ""
+"Désactiver le compte après %s jours d'inactivité après l'expiration du mot "
+"de passe"
 
 #: plugins/personal/posix/class_posixAccount.inc:483
 #, php-format
@@ -5866,7 +5897,7 @@ msgstr "Le temps d'attente du verrou à été dépassé. J'ignore le verrou !"
 msgid ""
 "A duplicated UID number was written for this user. If this was not intended "
 "please verify all used uidNumbers!"
-msgstr ""
+msgstr "Un uid en double vient d'être écrit pour cet utilisateur. Si ceci n'était pas voulu, veuillez vérifier tout les uid utilisés !"
 
 #: plugins/personal/posix/class_posixAccount.inc:962
 #: plugins/personal/posix/class_posixAccount.inc:1155
