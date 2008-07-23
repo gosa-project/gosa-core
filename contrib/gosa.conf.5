@@ -1,0 +1,475 @@
+.TH gosa.conf 5
+.SH NAME
+gosa.conf - GOsa configuration file
+.SH DESCRIPTION
+The gosa.conf file contains configuration information for
+.IR GOsa,
+a powerful GPL'ed framework for managing accounts and systems in
+LDAP databases.
+.PP
+The gosa.conf file is a XML style configuration file. It is parsed by
+the GOsa web application during log in.  The file may contain
+extra tabs and newlines for formatting purposes.  Tag keywords in the
+file are case-insensitive. Comments should be placed outside of XML
+tags and should be encapsulated inside of <!-- --> tags.
+.PP
+The gosa.conf file can be used to configure the look and feel, behaviour
+and access control of the GOsa webinterface.
+.SH Configuration layout
+
+The configuration has to be specified inside of the <conf> tags. It
+basically consists of three main parts: menu definition, definition
+of subdialogs (tabbed dialogs) and the main configuration - including
+information about several locations.
+
+.B Layout example:
+
+.nf
+  <?xml version="1.0"?>
+  
+  <conf config_version="...." >
+    <!-- Menu definition -->
+    <menu>
+    ...
+    </menu>
+  
+    <!-- Tabbed dialog definitions -->
+    ...
+  
+    <!-- Global setup -->
+    <main>
+  
+       <!-- Location specific setups -->
+       <location name="">
+         ...
+       </location>
+  
+    </main>
+  
+  </conf>
+.fi
+
+.SH Menu definition
+
+This tag defines the side and icon menu inside the
+interface. Defining an entry here is no guarantie to get it shown,
+though. Only entries with matching ACL's get shown.
+
+There are two types of entries inside of the menu: section and plugin
+
+.B Defining a section
+
+Open a 
+.I <section>
+tag including a 
+.I name
+attribute. This will show up in the menu as a new section later on.
+Own entries are not handled via I18N by default. Close the 
+.I </section>
+tag after your plugin definitions.
+
+.B Defining a plugin
+
+Open a 
+.I <plugin>
+tag including a 
+.I "class"
+attribute. The 
+.I "class" 
+should be present inside your GOsa setup - the entry will be ignored if it is not.
+
+Plugins should have an 
+.I "acl"
+entry, that allows GOsa to decide wether a user is allowed to see a plugin or not.
+The 
+.I "acl"
+string matches with an ACL definition done inside of GOsa.
+
+You can override an icon by specifying the 
+.I "icon"
+attribute.
+
+For every plugin, you can provide at least four additional hooks: 
+.I postcreate,
+.I postdelete,
+.I postmodify
+and
+.I check.
+These can be used to perform special actions when a plugins gets
+a create, delete, modify or check request. As a parameter, these
+keywords get a shell script or program to the task.
+
+.I The
+.B create / delete / modify
+.I keywords
+
+These keywords take a full executable path of a script. You can
+provide certain parameters in form of LDAP attributes. '%uid'
+will pass the current user id, '%dn' the current object dn, etc.
+
+The script gets executed after create, delete or modify tasks.
+
+.I The
+.B check
+.I keyword
+
+This keyword takes a full executable path of a script. Check is
+triggered after you press the
+-I "Apply"
+or
+-I "OK"
+button. The complete LDAP entry as it will be written to the
+LDAP is passed to your script. If parts of the entry do not
+match some logic of your script, just print an error message
+to STDOUT. GOsa will show this message and abort the current
+process of saving the entry to the LDAP.
+
+.B Example menu definition:
+
+.nf
+  <menu>
+    <section name="My account">
+      <plugin acl="users/user:self" class="user" check="/usr/local/bin/test_user.sh" />
+      <plugin acl="users/samba:self" class="sambaAccount" postcreate="/usr/local/bin/create_share '%uid'" />
+    </section>
+  </menu>
+.fi
+
+.SH Tabbed dialog definitions
+
+Tab definitions define the sub plugins which get included for certain
+tabbed dialogs. If you change something here, never (!) remove the
+primary (the first) "tab" tag which is defined. Most tabbed dialogs
+need a primary plugin.
+
+.I "*tab"
+should be looked for by a defined plugin. This one will take
+every 
+.I "tab"
+defined
+.I "class"
+and will show it inside of a tabbed dialog
+with the header defined in
+.I "name".
+
+.B Example tabbed dialog definition:
+
+.nf
+  <grouptabs>
+    <tab class="group" name="Generic" />
+    <tab class="environment" name="Environment" />
+    <tab class="appgroup" name="Applications" />
+    <tab class="mailgroup" name="Mail" />
+  </grouptabs>
+.fi
+
+.SH Main section
+
+The main section defines global settings, which might be overridden by
+each location definition inside of this global definition.
+
+.B Example layout:
+
+.nf
+  <main default="Example Net"
+        list_summary="false"
+        ... >
+
+        <location name="Example Net"
+                  hash="md5"
+                  dnmode="cn"
+                  ...
+
+                  <referral url="ldaps://ldap.example.net:636/dc=example,dc=net"
+                            admin="cn=gosa-admin,dc=example,dc=net"
+                            password="secret" />
+
+        </location>
+
+  </main>
+
+.fi
+
+.B Generic options
+
+.PP
+.B forceglobals
+.I bool
+.PP
+The
+.I forceglobals
+statement enables PHP security checks to force register_global settings to
+be switched off.
+.PP
+
+.B forcessl
+.I bool
+.PP
+The
+.I forceglobals
+statement enables PHP security checks to force encrypted access to the web
+interface. GOsa will try to redirect to the same URL - just with https://.
+.PP
+
+.B warnssl
+.I bool
+.PP
+The
+.I warnssl
+statement enables PHP security checks to detect non encrypted access to
+the web interface. GOsa will display a warning in this case.
+.PP
+
+.B uniq_identifier
+.I string
+.PP
+The
+.I uniq_identifier
+statement enables GOsa to check if a entry currently being edited has
+been modified from someone else outside GOsa in the meantime. It will
+display an informative dialog then. It can be set to
+.I entryCSN
+for OpenLDAP based systems or
+.I contextCSN
+for Sun DS based systems.
+.PP
+
+.B logging
+.I string
+.PP
+The
+.I logging
+statement enables event logging on GOsa side. Setting it to 
+.I syslog,
+GOsa will log every action a user performs via syslog. Setting it to
+.I mysql,
+GOsa will log every action to a mysql server, defined in the
+GOsa systems plugin. Both values can be combined as a comma seperated
+list.
+
+GOsa will not log anything, if the logging value is empty.
+.PP
+
+.B login_attribute
+.I string
+.PP
+The
+.I login_attribute
+statement tells GOsa which LDAP attribute is used as the login name
+during login. It can be set to
+.I uid, mail
+or
+.I both.
+.PP
+
+.B enableCopyPaste
+.I bool
+.PP
+The
+.I enableCopyPaste
+statement enables copy and paste for LDAP entries managed with GOsa.
+.PP
+
+.B enable_snapshot
+.I bool
+.PP
+The
+.I enable_snapshot
+statement enables a snapshot mechaism in GOsa. This enables you to save
+certain states of entries and restore them later on.
+.PP
+
+.B snapshot_base
+.I dn
+.PP
+The
+.I snapshot_base
+statement defines the base where snapshots should be stored inside of
+the LDAP.
+.PP
+
+.B snapshot_server
+.I url
+.PP
+The
+.I snapshot_server
+variable defines the LDAP URL for the server which is used to do object
+snapshots.
+.PP
+
+.B snapshot_user
+.I dn
+.PP
+The
+.I snapshot_user
+variable defines the user which is used to authenticate when connecting
+to
+.I snapshot_server.
+.PP
+
+.B snapshot_password
+.I string
+.PP
+The
+.I snapshot_password
+variable defines the credentials which are used in combination with
+.I snapshot_user
+and
+.I snapshot_server
+in order to authenticate.
+.PP
+
+.B config
+.I dn
+.PP
+The
+.I config
+statement defines the LDAP base, where GOsa stores management information,
+such as site wide locking and user notifications.
+.PP
+
+.B compile
+.I path
+.PP
+The
+.I compile
+statements defines the path, where the PHP templating engins
+.I smarty
+should store its compiled GOsa templates for improved speed. This path
+needs to be writeable by the user your webserver is running with.
+.PP
+
+.B timezone
+.I string
+.PP
+The
+.I timezone
+statements defines the timezone used inside of GOsa to handle date
+related tasks, such as password expiery, vacation messages, etc.
+The
+.I timezone
+value should be a unix conform timezone value like in /etc/timezone.
+.PP
+
+.B governmentmode
+.I bool
+.PP
+The
+.I governmentmode
+statement enables the IVBB mode inside of GOsa. You need the ivbb.schema
+file from used by german authorities.
+.PP
+
+.B strict
+.I bool
+.PP
+The
+.I strict
+statement enables strict checking of uids and group names. If you need
+characters like . or - inside of your accounts, set this to
+.I false.
+.PP
+
+.B strict_units
+.I bool
+.PP
+The
+.I strict_units
+statement enables checking of
+.I unitTag
+attributes when using administrative units. If this is set to
+.I true
+GOsa can only see objects inside the administrative unit a
+user is logged into.
+.PP
+
+.B rfc2307bis
+.I bool
+.PP
+The
+.I rfc2307bis
+statement enables rfc2307bis style groups in GOsa. You can use
+.I member
+attributes instead of memberUid in this case. To make it work
+on unix systems, you've to adjust your NSS configuration to
+use rfc2307bis style groups, too.
+.PP
+
+
+
+
+
+
+
+
+
+
+
+
+
+.B Display options
+.PP
+.I The
+.B list_summary
+.I statement
+.PP
+.B list_summary
+.I true/false
+.PP
+The
+.I list_summary
+statement determines whether a status bar will be shown on the bottom of
+GOsa generated lists, displaying a short summary of type and number of
+elements in the list.
+.PP
+
+.B Password options
+.PP
+.I The
+.B pwminlen
+.I statement
+.PP
+.B pwminlen
+.I integer
+.PP
+The
+.I pwminlen
+statement determines whether a newly entered password has to be of
+a minimum length.
+.PP
+
+.I The
+.B pwdiffer
+.I statement
+.PP
+.B pwdiffer
+.I integer
+.PP
+The
+.I pwdiffer
+statement determines whether a newly entered password has to be checked
+to have at least n different characters.
+.PP
+
+.I The
+.B externalpwdhook
+.I statement
+.PP
+.B externalpwdhook
+.I path
+.PP
+The
+.I externalpwdhook
+can specify an external script to handle password settings at some other
+location besides the LDAP. 
+.PP
+
+
+
+
+.SH AUTHOR
+.B gosa.conf(5)
+was written by Cajus Pollmeier for
+the GOsa project (
+.B http://www.gosa-project.org
+).
