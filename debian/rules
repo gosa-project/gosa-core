@@ -57,6 +57,7 @@ binary-common:
 	dh_installmenu
 	dh_installdebconf	
 	dh_installman -pgosa-desktop contrib/gosa.1
+	dh_installman -pgosa contrib/gosa.conf.5
 	dh_strip
 	dh_compress -Xgosa.conf 
 	dh_fixperms

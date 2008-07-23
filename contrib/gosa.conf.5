@@ -395,24 +395,17 @@ on unix systems, you've to adjust your NSS configuration to
 use rfc2307bis style groups, too.
 .PP
 
-
-
-
-
-
-
-
-
-
-
-
-
-.B Display options
+.B ppd_path
+.I path
 .PP
-.I The
-.B list_summary
-.I statement
+The
+.I ppd_path
+variable defines where to store PPD files for the GOto environment plugins.
 .PP
+
+
+.B Browser and display options
+
 .B list_summary
 .I true/false
 .PP
@@ -423,11 +416,20 @@ GOsa generated lists, displaying a short summary of type and number of
 elements in the list.
 .PP
 
+
+compressed
+save_filter
+lang
+theme
+session_lifetime
+noprimarygroup
+
+
+
+
+
+
 .B Password options
-.PP
-.I The
-.B pwminlen
-.I statement
 .PP
 .B pwminlen
 .I integer
@@ -438,10 +440,6 @@ statement determines whether a newly entered password has to be of
 a minimum length.
 .PP
 
-.I The
-.B pwdiffer
-.I statement
-.PP
 .B pwdiffer
 .I integer
 .PP
@@ -451,10 +449,6 @@ statement determines whether a newly entered password has to be checked
 to have at least n different characters.
 .PP
 
-.I The
-.B externalpwdhook
-.I statement
-.PP
 .B externalpwdhook
 .I path
 .PP
@@ -463,6 +457,31 @@ The
 can specify an external script to handle password settings at some other
 location besides the LDAP. 
 .PP
+
+.B account_expiration
+.I bool
+.PP
+The
+.I account_expiration
+statement enables shadow attribute tests during the login to the GOsa web
+interface and forces password renewal or account lockout.
+.PP
+
+.B krbsasl
+.I bool
+.PP
+The
+.I krbsasl
+statement defines the way the kerberos realm is stored in the
+.I userPassword
+attribute. Set it to
+.I true
+in order to get {sasl}user@REALM.NET, or to
+.I false
+to get {kerberos}user@REALM.NET. The latter is outdated, but may be
+needed from time to time.
+.PP
+
 
 
 
