@@ -23,7 +23,7 @@
 class Step_Feedback  extends setup_step
 {
   var $languages      = array();
-  var $header_image   = "images/welcome.png";
+  var $header_image   = "images/setup/welcome.png";
 
   var $organization       = "";
   var $eMail              = "";

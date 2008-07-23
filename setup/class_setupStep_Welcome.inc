@@ -24,7 +24,7 @@ class Step_Welcome  extends setup_step
 {
   var $languages      = array();
   var $attributes     = array();
-  var $header_image   = "images/welcome.png";
+  var $header_image   = "images/setup/welcome.png";
 
   function Step_Welcome()
   {
