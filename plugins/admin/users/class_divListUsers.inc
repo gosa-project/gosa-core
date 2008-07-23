@@ -201,7 +201,7 @@ class divListUsers extends MultiSelectWindow
                     name='user_edit_%KEY%-user' title='"._("Edit generic properties")."'>";
     $posiximg = "<input class='center' type='image' src='images/penguin.png' alt='"._("Posix")."'
                     name='user_edit_%KEY%-posixAccount' title='"._("Edit UNIX properties")."'>";
-    $eviroimg = "<input class='center' type='image' src='images/smallenv.png' alt='"._("Environment")."'
+    $eviroimg = "<input class='center' type='image' src='plugins/users/images/small_environment.png' alt='"._("Environment")."'
                     name='user_edit_%KEY%-environment' title='"._("Edit environment properties")."'>";
     $mailimg  = "<input class='center' type='image' src='images/mailto.png' alt='"._("Mail")."'
                     name='user_edit_%KEY%-mailAccount' title='"._("Edit mail properties")."'>";
