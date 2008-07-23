@@ -508,8 +508,11 @@ to have at least n different characters.
 The
 .I externalpwdhook
 can specify an external script to handle password settings at some other
-location besides the LDAP. 
-.PP
+location besides the LDAP. It will be called this way:
+
+.nf
+/path/to/your/script "username" "oldpassword" "newpassword"
+.fi
 
 .B account_expiration
 .I bool
