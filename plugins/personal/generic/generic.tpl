@@ -17,7 +17,7 @@
 	   <tr>
 		<td width="147" height="200" bgcolor="gray">
 		{if !$userPicture_is_readable}
-			<img class='center' border="0" width="100%" src="images/default.jpg" alt="{t}Personal picture{/t}">
+			<img class='center' border="0" width="100%" src="plugins/users/images/default.jpg" alt="{t}Personal picture{/t}">
 		{else}
 			<img class='center' border="0" width="100%" src="getbin.php?rand={$rand}" alt="{t}Personal picture{/t}">
 		{/if}

@@ -1267,7 +1267,7 @@ class user extends plugin
     if((!$data) || ($data == "*removed*")){ 
 
       /* In case we don't get an entry, load a default picture */
-      $this->set_picture ();//"./images/default.jpg");
+      $this->set_picture ();
       $this->jpegPhoto= "*removed*";
     }else{
 
@@ -1320,7 +1320,7 @@ class user extends plugin
   function set_picture($filename ="")
   {
     if (!is_file($filename) || $filename =="" ){
-      $filename= "./images/default.jpg";
+      $filename= "./plugins/users/images/default.jpg";
       $this->jpegPhoto= "*removed*";
     }
 
@@ -1445,7 +1445,7 @@ class user extends plugin
     /* Remove picture? */
     if (isset($_POST['picture_remove'])){
       $this->jpegPhoto= "*removed*";
-      $this->set_picture ("./images/default.jpg");
+      $this->set_picture ("./plugins/users/images/default.jpg");
       $this->is_modified= TRUE;
     }
 
