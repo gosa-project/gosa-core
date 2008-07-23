@@ -24,7 +24,7 @@ class Step_License extends setup_step
 {
   var $license_found  = false;
   var $License        = "";
-  var $header_image   = "images/ldif.png";
+  var $header_image   = "images/setup/license.png";
   var $accepted       = FALSE;
   var $attributes     = array("accepted");
   
