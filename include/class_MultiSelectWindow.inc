@@ -118,8 +118,8 @@ class MultiSelectWindow{
   {
     if(!empty($this->string_ListDropDown)){
       $mid = new LayersMenu(6, 7, 2, 1);
-      $mid->setImgwww("./images/");
-      $mid->setIcondir("./images/");
+      $mid->setImgwww("./images/layer_menu/");
+      $mid->setIcondir("./images/layer_menu/");
       $mid->setDirroot("../include/utils/layer-menu/");
       $mid->setHorizontalMenuTpl("../ihtml/".get_template_path("",FALSE).'GOsa_MultiSelectHeader.ihtml');
       $mid->setSubMenuTpl("../ihtml/".get_template_path("",FALSE).'GOsa_MultiSelectHeaderSubEntry.ihtml');
