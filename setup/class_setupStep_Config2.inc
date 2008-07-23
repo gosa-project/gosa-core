@@ -24,7 +24,7 @@ class Step_Config2 extends setup_step
 {
   var $governmentmode = FALSE;
   var $sambaidmapping = FALSE;
-  var $header_image = "images/ldapserver.png";
+  var $header_image = "images/setup/server.png";
 
   var $cyrusunixstyle = FALSE;
   var $mail           = "none";

@@ -31,7 +31,7 @@ class Step_Config1 extends setup_step
   var $strict     = TRUE;
   var $compressed = TRUE;
 
-  var $header_image = "images/ldapserver.png";
+  var $header_image = "images/setup/server.png";
   var $account_expiration  =FALSE;
   var $base_hook         = ""; 
   var $base_hook_active  = FALSE; 
