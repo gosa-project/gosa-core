@@ -207,7 +207,7 @@ class divListUsers extends MultiSelectWindow
                     name='user_edit_%KEY%-mailAccount' title='"._("Edit mail properties")."'>";
     $fonimg   = "<input class='center' type='image' src='images/%image%' alt='"._("Phone")."'
                     name='user_edit_%KEY%-phoneAccount' title='"._("Edit phone properties")."%title%'>";
-    $faximg   = "<input class='center' type='image' src='images/fax_small.png' alt='"._("Fax")."'
+    $faximg   = "<input class='center' type='image' src='plugins/users/images/fax_small.png' alt='"._("Fax")."'
                     name='user_edit_%KEY%-gofaxAccount' title='"._("Edit fax properies")."'>";
     $sambaimg = "<input class='center' type='image' src='images/select_winstation.png' alt='"._("Samba")."'
                     name='user_edit_%KEY%-sambaAccount' title='"._("Edit samba properties")."'>";

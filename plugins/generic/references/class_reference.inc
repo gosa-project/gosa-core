@@ -39,39 +39,39 @@ class reference extends plugin
         /* Fill translation array */
         $this->obtypes= array(  
 				"gosaAccount" => array(	   "text" => _("Generic"),
-					"image" => "penguin.png"),
+					"image" => "images/penguin.png"),
 				"posixAccount" => array(   "text" =>_("UNIX"),
-					"image" => "select_user.png"),
+					"image" => "images/select_user.png"),
 				"gosaMailAccount" => array("text" => _("Mail"),
-					"image" => "mailto.png"),
+					"image" => "images/mailto.png"),
 				"sambaSamAccount" => array("text" => _("Samba"),
-					"image" => "select_winstation.png"),
+					"image" => "images/select_winstation.png"),
 				"sambaAccount" => array(   "text" => _("Samba"),
-					"image" => "select_winstation.png"),
+					"image" => "images/select_winstation.png"),
 				"goFaxAccount" => array(   "text" => _("FAX"),
-					"image" => "fax_small.png"),
+					"image" => "plugins/gofax/images/fax_small.png"),
 				"gosaProxyAccount" => array("text" => _("Proxy"),
-					"image" => "select_proxy.png"),
+					"image" => "images/select_proxy.png"),
 				"PureFTPdUser" => array(   "text" => _("FTP"),
-					"image" => "select_proxy.png"),
+					"image" => "images/select_proxy.png"),
 				"posixGroup" => array(     "text" => _("Group"),
-					"image" => "select_groups.png"),
+					"image" => "images/select_groups.png"),
 				"gosaDepartment" => array( "text" => _("Department"),
-					"image" => "select_department.png"),
+					"image" => "images/select_department.png"),
 				"goFonHardware" => array(   "text" => _("Phone"),
-					"image" => "select_phone.png"),
+					"image" => "images/select_phone.png"),
 				"gosaApplication" => array("text" => _("Application"),
-						"image" => "select_application.png"),
+						"image" => "images/select_application.png"),
 				"goServer" => array(	   "text" => _("Server"),
-						"image" => "select_server.png"),
+						"image" => "images/select_server.png"),
 				"gotoTerminal" => array(   "text" => _("Thin Client"),
-						"image" => "select_terminal.png"),
+						"image" => "images/select_terminal.png"),
 				"gotoWorkstation" => array("text" => _("Workstation"),
-						"image" => "select_workstation.png"),
+						"image" => "images/select_workstation.png"),
 				"gosaGroupOfNames" => array("text" => _("Object group"),
-						"image" => "select_ogroup.png"),
+						"image" => "images/select_ogroup.png"),
 				"gotoPrinter" => array(	   "text" => _("Printer"),
-						"image" => "select_printer.png"));
+						"image" => "images/select_printer.png"));
   }
 
   function execute()
@@ -191,7 +191,7 @@ class reference extends plugin
   	if(!is_null($classes)) {
 		foreach ($classes as $class){
 			if (isset($this->obtypes[$class])){
-				$result.= "<a><img alt=\"\" border=0 src='images/".$this->obtypes[$class]['image']."'>&nbsp;".$this->obtypes[$class]['text']."</a> ";
+				$result.= "<a><img alt=\"\" border=0 src='".$this->obtypes[$class]['image']."'>&nbsp;".$this->obtypes[$class]['text']."</a> ";
 			}
 		}
 	}
