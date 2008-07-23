@@ -190,6 +190,7 @@ each location definition inside of this global definition.
 
 .fi
 
+.PP
 .B Generic options
 
 .PP
@@ -402,6 +403,7 @@ The
 .I ppd_path
 variable defines where to store PPD files for the GOto environment plugins.
 .PP
+.PP
 
 
 .B Browser and display options
@@ -416,18 +418,69 @@ GOsa generated lists, displaying a short summary of type and number of
 elements in the list.
 .PP
 
+.B compressed
+.I true/false
+.PP
+The
+.I compressed
+statement determines whether PHP should send compressed HTML pages to
+browsers or not. This may increase or decrease the performance, depending
+on your network.
+.PP
 
-compressed
-save_filter
-lang
-theme
-session_lifetime
-noprimarygroup
+.B save_filter
+.I true/false
+.PP
+The
+.I save_filter
+statement determines whether GOsa should store filter and plugin settings
+inside of a cookie.
+.PP
 
+.B lang
+.I string
+.PP
+The
+.I lang
+statement defines the default language used by GOsa. Normally GOsa autodetects
+the language from the browser settings. If this is not working or you want to
+force the language, just add the language code (i.e. de for german) here.
+.PP
 
+.B theme
+.I string
+.PP
+The
+.I theme
+statement defines what theme is used to display GOsa pages. You can install some
+corporate identity like theme and/or modify certain templates to fit your needs
+within themes. Take a look at the GOsa
+.I FAQ
+for more information.
+.PP
 
+.B session_lifetime
+.I int
+.PP
+The
+.I session_lifetime
+value defines when a session will expire in seconds. For Debian systems, this will
+not work because the sessions will be removed by a cron job instead. Please modify
+the value inside of your php.ini instead.
+.PP
 
-
+.B noprimarygroup
+.I bool
+.PP
+The
+.I noprimarygroup
+variable enables or disables the group filter to show primary user groups. It is
+time consuming to evaluate which groups are primary and which are not. So you may
+want to set it to
+.I true
+if your group plugin is slow.
+.PP
+.PP
 
 .B Password options
 .PP
