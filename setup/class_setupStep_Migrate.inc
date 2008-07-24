@@ -53,7 +53,7 @@ class Step_Migrate extends setup_step
 {
   var $languages      = array();
   var $attributes     = array();
-  var $header_image   = "images/monitoring.png";
+  var $header_image   = "images/setup/migrate.png";
   var $checks         = array();
 
   /* Department migration attributes */
