@@ -257,7 +257,7 @@ class pluglist {
 			$cfg= $this->config->data['MENU'];
 
 			if (isset($this->config->current['ICONSIZE'])){
-				list($x, $y)= split("x", $this->config->current['ICONSIZE']);
+				list($x, $y)= split("x", $this->config->get_cfg_value("iconsize"));
 				$isize= "width=\"$x\" height=\"$y\"";
 			} else {
 				$isize= "";
