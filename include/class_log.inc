@@ -76,7 +76,7 @@ class log {
     $entry['changes']   = $changes;
     $entry['result']    = $result;
 
-    if(!isset($this->config->current['LOGGING']) && empty($entry['user'])){
+    if($this->config->get_cfg_value("logging") == ""  && empty($entry['user'])){
       $entry['user']  = "unknown";
     }
  
@@ -90,15 +90,15 @@ class log {
       
     }else{
 
-      if(!isset($this->config->current['LOGGING'])){
+      if ($this->conifg->get_cfg_value("logging") == ""){
         $this->log_into_syslog($entry);
       }else{
 
         /* Start logging for configured methods */
-        if(isset($this->config->current['LOGGING']) && preg_match("/(^|,)syslog(,|$)/i",$this->config->current['LOGGING'])){
+        if(preg_match("/(^|,)syslog(,|$)/i",$this->config->get_cfg_value("logging"))){
           $this->log_into_syslog($entry);
         }
-        if(isset($this->config->current['LOGGING']) && preg_match("/(^|,)mysql(,|$)/i",$this->config->current['LOGGING'])){
+        if(preg_match("/(^|,)mysql(,|$)/i",$this->config->get_cfg_value("logging"))){
           $this->log_into_db($entry);
         }
       }
