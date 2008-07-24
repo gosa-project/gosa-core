@@ -1033,13 +1033,30 @@ DEBUG_ACL     = 128
 .pp
 
 
+.SH LDAP resource definition
 
-              <referral url="{$cv.connection}/{$cv.base}"
-                       admin="{$cv.admin}"
-                       password="{$cv.password}" />
+For every location you define inside your gosa.conf, you need at least
+one entry of the type
+.I referral.
+These entries define the way how to connect to some directory service.
 
+.B Example:
 
+.nf
+  <referral url="ldap://ldap.example.net/dc=example,dc=net"
+            admin="cn=gosa-admin,dc=example,dc=net"
+            password="secret" />
+.fi
 
+.I url
+is a valid LDAP url extendet by the base this referral is responsible for.
+.I admin
+is the DN which has the permission to write LDAP entries. And
+.I password
+is the corresponding password for this DN.
+
+You can define a set of referrals if you have several server to
+connect to.
 
 .SH AUTHOR
 .B gosa.conf(5)
