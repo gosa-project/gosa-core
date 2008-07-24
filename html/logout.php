@@ -65,7 +65,11 @@ textdomain($domain);
 
 /* Create smarty & Set template compile directory */
 $smarty= new smarty();
-$smarty->compile_dir= $config->get_cfg_value("compile", '/var/spool/gosa/');
+if (isset($config)){
+	$smarty->compile_dir= $config->get_cfg_value("compile", '/var/spool/gosa/');
+} else {
+	$smarty->compile_dir= '/var/spool/gosa/';
+}
     
 /* If GET request is posted, the logout was forced by pressing the link */
 if (isset($_GET['request'])){
