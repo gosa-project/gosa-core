@@ -69,7 +69,7 @@ class reference extends plugin
 				"gotoWorkstation" => array("text" => _("Workstation"),
 						"image" => "images/select_workstation.png"),
 				"gosaGroupOfNames" => array("text" => _("Object group"),
-						"image" => "images/select_ogroup.png"),
+						"image" => "plugins/ogroups/images/select_ogroup.png"),
 				"gotoPrinter" => array(	   "text" => _("Printer"),
 						"image" => "images/select_printer.png"));
   }
