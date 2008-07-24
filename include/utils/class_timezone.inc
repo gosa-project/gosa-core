@@ -38,7 +38,7 @@ class timezone {
     }
 
     /* Is there a timezone configured in the gosa configuration (gosa.conf) */
-    if ($config->get_cfg_value("timezone") != "")
+    if ($config->get_cfg_value("timezone") != ""){
 
       /* Get zonename */
       $tz = $config->get_cfg_value("timezone");

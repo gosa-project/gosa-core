@@ -50,8 +50,8 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
       if(class_exists("log") && !preg_match("/No such object/",$errstr)){
         new log("view","error","",array(),"PHP error: $errstr ($errfile, line $errline)");
       }
+
       return;
-    }
   }
   
   /* Send all errors to logging class, except "Ldap : No such object" messages*/
