@@ -66,8 +66,7 @@ class msg_dialog
 			/* Append trace information, only if error messages are enabled */
 			if(	isset($config) && 
 				is_object($config) && 
-				isset($config->data['MAIN']['DISPLAYERRORS']) &&
-				preg_match("/^true$/i",$config->data['MAIN']['DISPLAYERRORS'])){
+				$config->get_cfg_value("displayerrors") == "true" ){
 				$this->a_Trace	 = debug_backtrace();
 			}
 			if(!session::is_set('msg_dialogs')){
