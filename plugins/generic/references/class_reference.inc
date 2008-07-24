@@ -59,7 +59,7 @@ class reference extends plugin
 				"gosaDepartment" => array( "text" => _("Department"),
 					"image" => "images/select_department.png"),
 				"goFonHardware" => array(   "text" => _("Phone"),
-					"image" => "images/select_phone.png"),
+					"image" => "plugins/systems/images/select_phone.png"),
 				"gosaApplication" => array("text" => _("Application"),
 						"image" => "plugins/goto/images/select_application.png"),
 				"goServer" => array(	   "text" => _("Server"),
