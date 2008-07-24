@@ -837,36 +837,90 @@ statement describes an automatic way to generate new user ids. There are two bas
 functions supported - which can be combined:
 
  a) using attributes
-    You can specify LDAP attributes (currently only sn and givenName) in braces {}
-    and add a percent sign befor it. Optionally you can strip it down to a number
-    of characters, specified in []. I.e.
+    You can specify LDAP attributes (currently only sn and givenName) in
+    braces {} and add a percent sign befor it. Optionally you can strip it
+    down to a number of characters, specified in []. I.e.
+
 .nf
       idgen="{%sn}-{%givenName[2-4]}"
 .fi
 
-    will generate an ID using the full surename, adding a dash, and adding at least
-    the first two characters of givenName. If this ID is used, it'll use up to four
-    characters. If no automatic generation is possible, a input box is shown.
+    will generate an ID using the full surename, adding a dash, and adding at
+    least the first two characters of givenName. If this ID is used, it'll
+    use up to four characters. If no automatic generation is possible, a
+    input box is shown.
 
  b) using automatic id's
     I.e. specifying
+
 .nf
       idgen="acct{id:3}"
 .fi
-    will generate a three digits id with the next free entry appended to "acct".
+
+    will generate a three digits id with the next free entry appended to
+    "acct".
+
 .nf
       idgen="ext{id#3}"
 .fi
+
     will generate a three digits random number appended to "ext".
 .PP
 .PP
 
 
+.B Samba options
+.PP
+.B sid
+.I string
+.PP
+The
+.I sid
+statement defines a samba SID if not available inside of the LDAP. You can retrieve
+the current sid by
+.I net getlocalsid.
+.PP
 
+.B ridbase
+.I integer
+.PP
+The
+.I ridbase
+statement defines the base id to add to ordinary sid calculations - if not available
+inside of the LDAP.
+.PP
 
+.B sambaversion
+.I 2/3
+.PP
+The
+.I sambaversion
+statement defines the version of samba you want to write LDAP entries for. Be sure
+to include the correct schema in this case. Valid values are 2 and 3.
+.PP
 
+.B smbhash
+.I path
+.PP
+The
+.I smbhash
+statement contains an executable to generate samba hash values. This is required
+for password synchronization, but not required if you apply gosa-si services.
+If you don't have mkntpasswd from the samba distribution installed, you can use
+perl to generate the hash:
 
+.nf
+perl -MCrypt::SmbHash -e "print join(q[:], ntlmgen \$ARGV[0]), $/;"
+.if
+.PP
 
+.B sambaidmapping
+.I bool
+.PP
+The
+.I sambaidmapping
+statement tells GOsa to maintain sambaIdmapEntry objects. Depending on your
+setup this can drastically improve the windows login performance.
 
 
 
