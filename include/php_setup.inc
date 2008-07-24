@@ -44,9 +44,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
   }
 
   /* Error messages are hidden in GOsa, so we only send them to the logging class and abort here */
-  if((isset($config->data))){ 
-    if((isset($config->data['MAIN']['DISPLAYERRORS']))&&(!preg_match("/^true$/i",$config->data['MAIN']['DISPLAYERRORS']))){
-
+  if(isset($config->data) && $config->get_cfg_value("displayerrors") == "true"){
       
       /* Write to syslog */
       if(class_exists("log") && !preg_match("/No such object/",$errstr)){
