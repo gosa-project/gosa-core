@@ -178,7 +178,7 @@ class divListUsers extends MultiSelectWindow
     $enviro     = $posix = $maila = $faxac = $samba = $netatalk = "";
     $empty      = "<img class='center' src='images/empty.png' style='width:16px;height:16px;' alt='-'>";
     $userimg    = "<img class='center' src='images/select_user.png' alt='User' title='%s'>";
-    $tplimg     = "<img class='center' src='images/select_template.png' alt='Template' title='%s'>";
+    $tplimg     = "<img class='center' src='plugins/users/images/select_template.png' alt='Template' title='%s'>";
     $editlink   = "<a href='?plug=".validate($_GET['plug'])."&amp;id=%s&amp;act=edit_entry'>%s</a>";
 
     /* Dynamic action col, depending on snapshot icons */
