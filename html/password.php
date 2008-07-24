@@ -61,17 +61,13 @@ if (!is_readable(CONFIG_DIR."/".CONFIG_FILE)){
 
 /* Parse configuration file */
 $config= new config(CONFIG_DIR."/".CONFIG_FILE, $BASE_DIR);
-session::set('DEBUGLEVEL',$config->data['MAIN']['DEBUGLEVEL']);
+session::set('DEBUGLEVEL', $config->get_cfg_value("debuglevel"));
 if ($_SERVER["REQUEST_METHOD"] != "POST"){
   @DEBUG (DEBUG_CONFIG, __LINE__, __FUNCTION__, __FILE__, $config->data, "config");
 }
 
 /* Set template compile directory */
-if (isset ($config->data['MAIN']['COMPILE'])){
-  $smarty->compile_dir= $config->data['MAIN']['COMPILE'];
-} else {
-  $smarty->compile_dir= '/var/spool/gosa';
-}
+$smarty->compile_dir= $config->get_cfg_value("compile", '/var/spool/gosa');
 
 /* Check for compile directory */
 if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))){
@@ -84,10 +80,10 @@ if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))){
 clean_smarty_compile_dir($smarty->compile_dir);
 
 /* Language setup */
-if ($config->data['MAIN']['LANG'] == ""){
+if ($config->get_cfg_value("lang") == ""){
   $lang= get_browser_language();
 } else {
-  $lang= $config->data['MAIN']['LANG'];
+  $lang= $config->get_cfg_value("lang");
 }
 $lang.=".UTF-8";
 putenv("LANGUAGE=");
@@ -148,13 +144,13 @@ if (!isset($_SERVER['HTTPS']) ||
 }
 
 /* If SSL is forced, just forward to the SSL enabled site */
-if ($config->data['MAIN']['FORCESSL'] == 'true' && $ssl != ''){
+if ($config->get_cfg_value("forcessl") == 'true' && $ssl != ''){
   header ("Location: $ssl");
   exit;
 }
 
 /* Check for selected password method */
-$method= $config->current['HASH'];
+$method= $config->get_cfg_value("hash", "crypt/md5");
 if (isset($_GET['method'])){
 	$method= validate($_GET['method']);
 	$tmp = new passwordMethod($config);
@@ -202,14 +198,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])){
   }
 
   /* Password policy fulfilled? */
-  if (isset($config->data['MAIN']['PWDIFFER'])){
-	  $l= $config->data['MAIN']['PWDIFFER'];
+  if ($config->get_cfg_value("pwdiffer") != ""){
+	  $l= $config->get_cfg_value("pwdiffer");
 	  if (substr($_POST['current_password'], 0, $l) == substr($_POST['new_password'], 0, $l)){
 		  $message[]= _("The password used as new and current are too similar.");
 	  }
   }
-  if (isset($config->data['MAIN']['PWMINLEN'])){
-	  if (strlen($_POST['new_password']) < $config->data['MAIN']['PWMINLEN']){
+  if ($config->get_cfg_value("pwminlen") != ""){
+	  if (strlen($_POST['new_password']) < $config->get_cfg_value("pwminlen")){
 		  $message[]= _("The password used as new is to short.");
 	  }
   }
@@ -242,8 +238,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])){
 
 	  /* Passed quality check, just try to change the password now */
 	  $output= "";
-	  if (isset($config->data['MAIN']['EXTERNALPWDHOOK'])){
-		  exec($config->data['MAIN']['EXTERNALPWDHOOK']." ".$ui->username." ".
+	  if ($config->get_cfg_value("externalpwdhook") != ""){
+		  exec($config->get_cfg_value("externalpwdhook")." ".$ui->username." ".
 				  $_POST['current_password']." ".$_POST['new_password'], $resarr);
 		  if(count($resarr) > 0) {
 			  $output= join('\n', $resarr);
@@ -280,7 +276,7 @@ $smarty->assign ('uid', $uid);
 $smarty->assign ('password_img', get_template_path('images/password.png'));
 
 /* Displasy SSL mode warning? */
-if ($ssl != "" && $config->data['MAIN']['WARNSSL'] == 'true'){
+if ($ssl != "" && $conifg->get_cfg_value("warnssl") == 'true'){
   $smarty->assign ("ssl", "<b>"._("Warning").":</b> "._("Session will not be encrypted.")." <a style=\"color:red;\" href=\"".htmlentities($ssl)."\"><b>"._("Enter SSL session")."</b></a>!");
 } else {
   $smarty->assign ("ssl", "");
