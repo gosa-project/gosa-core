@@ -205,7 +205,7 @@ class divListUsers extends MultiSelectWindow
                     name='user_edit_%KEY%-environment' title='"._("Edit environment properties")."'>";
     $mailimg  = "<input class='center' type='image' src='images/mailto.png' alt='"._("Mail")."'
                     name='user_edit_%KEY%-mailAccount' title='"._("Edit mail properties")."'>";
-    $fonimg   = "<input class='center' type='image' src='images/%image%' alt='"._("Phone")."'
+    $fonimg   = "<input class='center' type='image' src='%image%' alt='"._("Phone")."'
                     name='user_edit_%KEY%-phoneAccount' title='"._("Edit phone properties")."%title%'>";
     $faximg   = "<input class='center' type='image' src='plugins/users/images/fax_small.png' alt='"._("Fax")."'
                     name='user_edit_%KEY%-gofaxAccount' title='"._("Edit fax properies")."'>";
@@ -288,10 +288,10 @@ class divListUsers extends MultiSelectWindow
       }
 
       /* Create phonaccopunt informationm, if conencted && is phoneAccount */ 
-      if((in_array("goFonAccount"    ,$val['objectClass']))){
+      if(class_available("phoneAccount") && (in_array("goFonAccount"    ,$val['objectClass']))){
 
         /* Set defaults */
-        $fonac = preg_replace("/%image%/", "select_phone.png", $fonimg);
+        $fonac = preg_replace("/%image%/", "plugins/gofon/images/select_phone.png", $fonimg);
         $fonac = preg_replace("/%KEY%/", "$key", $fonac);
         $fonac = preg_replace("/%title%/", "", $fonac);
 
