@@ -1207,24 +1207,24 @@ class plugin
     }
 
     /* Get configuration from gosa.conf */
-    $tmp = $this->config->current;
+    $config = $this->config;
 
     /* Create lokal ldap connection */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
 
     /* check if there are special server configurations for snapshots */
-    if(!isset($tmp['SNAPSHOT_SERVER'])){
+    if($config->get_cfg_value("snapshot_server") == ""){
 
       /* Source and destination server are both the same, just copy source to dest obj */
       $ldap_to      = $ldap;
       $snapldapbase = $this->config->current['BASE'];
 
     }else{
-      $server         = $tmp['SNAPSHOT_SERVER'];
-      $user           = $tmp['SNAPSHOT_USER'];
-      $password       = $tmp['SNAPSHOT_PASSWORD'];
-      $snapldapbase   = $tmp['SNAPSHOT_BASE'];
+      $server         = $config->get_cfg_value("snapshot_server");
+      $user           = $config->get_cfg_value("snapshot_user");
+      $password       = $config->get_cfg_value("snapshot_password");
+      $snapldapbase   = $config->get_cfg_value("snapshot_base");
 
       $ldap_to        = new ldapMultiplexer(new LDAP($user,$password, $server));
       $ldap_to -> cd($snapldapbase);
@@ -1243,7 +1243,7 @@ class plugin
 
       /* Collect some infos */
       $base           = $this->config->current['BASE'];
-      $snap_base      = $tmp['SNAPSHOT_BASE'];
+      $snap_base      = $config->get_cfg_value("snapshot_base");
       $base_of_object = preg_replace ('/^[^,]+,/i', '', $this->dn);
       $new_base       = preg_replace("/".normalizePreg($base)."$/","",$base_of_object).$snap_base;
 
@@ -1305,31 +1305,28 @@ class plugin
      There will also be some errors psoted, if the configuration failed */
   function snapshotEnabled()
   {
-    $tmp = $this->config->current;
-    if(isset($tmp['ENABLE_SNAPSHOT'])){
-      if (preg_match("/^true$/i", $tmp['ENABLE_SNAPSHOT']) || preg_match("/yes/i", $tmp['ENABLE_SNAPSHOT'])){
+    $config = $this->config->current;
+    if($config->get_cfg_value("enable_snapshot") == "true"){
+	    /* Check if the snapshot_base is defined */
+	    if ($config->get_cfg_value("snapshot_base") == ""){
+		    msg_dialog::display(_("Configuration error"), sprintf(_("The snapshot functionality is enabled, but the required variable '%s' is not set."),"SNAPSHOT_BASE"), ERROR_DIALOG);
+		    return(FALSE);
+	    }
 
-        /* Check if the snapshot_base is defined */
-        if(!isset($tmp['SNAPSHOT_BASE'])){
-          msg_dialog::display(_("Configuration error"), sprintf(_("The snapshot functionality is enabled, but the required variable '%s' is not set."),"SNAPSHOT_BASE"), ERROR_DIALOG);
-          return(FALSE);
-        }
+	    /* check if there are special server configurations for snapshots */
+	    if ($config->get_cfg_value("snapshot_server") != ""){
 
-        /* check if there are special server configurations for snapshots */
-        if(isset($tmp['SNAPSHOT_SERVER'])){
-
-          /* check if all required vars are available to create a new ldap connection */
-          $missing = "";
-          foreach(array("SNAPSHOT_SERVER","SNAPSHOT_USER","SNAPSHOT_PASSWORD","SNAPSHOT_BASE") as $var){
-            if(!isset($tmp[$var])){
-              $missing .= $var." ";
-              msg_dialog::display(_("Configuration error"), sprintf(_("The snapshot functionality is enabled, but the required variable '%s' is not set."), $missing), ERROR_DIALOG);
-              return(FALSE);
-            }
-          }
-        }
-        return(TRUE);
-      }
+		    /* check if all required vars are available to create a new ldap connection */
+		    $missing = "";
+		    foreach(array("snapshot_server","snapshot_user","snapshot_password","snapshot_base") as $var){
+			    if($config->get_cfg_value($var) == ""){
+				    $missing .= $var." ";
+				    msg_dialog::display(_("Configuration error"), sprintf(_("The snapshot functionality is enabled, but the required variable '%s' is not set."), $missing), ERROR_DIALOG);
+				    return(FALSE);
+			    }
+		    }
+	    }
+	    return(TRUE);
     }
     return(FALSE);
   }
