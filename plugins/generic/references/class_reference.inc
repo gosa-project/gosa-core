@@ -63,7 +63,7 @@ class reference extends plugin
 				"gosaApplication" => array("text" => _("Application"),
 						"image" => "plugins/goto/images/select_application.png"),
 				"goServer" => array(	   "text" => _("Server"),
-						"image" => "images/select_server.png"),
+						"image" => "plugins/systems/images/select_server.png"),
 				"gotoTerminal" => array(   "text" => _("Thin Client"),
 						"image" => "images/select_terminal.png"),
 				"gotoWorkstation" => array("text" => _("Workstation"),
@@ -71,7 +71,7 @@ class reference extends plugin
 				"gosaGroupOfNames" => array("text" => _("Object group"),
 						"image" => "plugins/ogroups/images/select_ogroup.png"),
 				"gotoPrinter" => array(	   "text" => _("Printer"),
-						"image" => "images/select_printer.png"));
+						"image" => "plugins/systems/images/select_printer.png"));
   }
 
   function execute()
