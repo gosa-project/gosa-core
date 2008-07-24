@@ -1305,7 +1305,7 @@ class plugin
      There will also be some errors psoted, if the configuration failed */
   function snapshotEnabled()
   {
-    $config = $this->config->current;
+    $config = $this->config;
     if($config->get_cfg_value("enable_snapshot") == "true"){
 	    /* Check if the snapshot_base is defined */
 	    if ($config->get_cfg_value("snapshot_base") == ""){
