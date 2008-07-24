@@ -45,10 +45,10 @@ if(session::is_set('ui')){
 }
 
 /* Language setup */
-if ((!isset($config))||(empty($config->data['MAIN']['LANG']))){
+if ((!isset($config)) || $config->get_cfg_value("lang") == ""){
   $lang= get_browser_language();
 } else {
-  $lang= $config->data['MAIN']['LANG'];
+  $lang= $config->get_cfg_value("lang");
 }
 
 $lang.=".UTF-8";
@@ -65,12 +65,7 @@ textdomain($domain);
 
 /* Create smarty & Set template compile directory */
 $smarty= new smarty();
-if (isset ($config->data['MAIN']['COMPILE'])){
-  $smarty->compile_dir= $config->data['MAIN']['COMPILE'];
-} else {
-  $smarty->compile_dir= '/var/spool/gosa/';
-}
-
+$smarty->compile_dir= $config->get_cfg_value("compile", '/var/spool/gosa/');
     
 /* If GET request is posted, the logout was forced by pressing the link */
 if (isset($_GET['request'])){
@@ -79,7 +74,7 @@ if (isset($_GET['request'])){
   session::destroy ();
   
   /* If we're not using htaccess authentication, just redirect... */
-  if (isset($config->data['MAIN']['HTACCESS_AUTH']) && preg_match('/^(true|yes)$/i', $config->data['MAIN']['HTACCESS_AUTH'])){
+  if ($config->get_cfg_value("htaccess_auth") == "true"){
 
     /* Else notice that the user has to close the browser... */
     $smarty->display (get_template_path('headers.tpl'));

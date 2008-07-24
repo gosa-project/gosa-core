@@ -286,11 +286,11 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
   }
 
   /* Check for locking area */
-  $ldap->cat($config->current['CONFIG'], array("dn"));
+  $ldap->cat($config->get_cfg_value("config"), array("dn"));
   $attrs= $ldap->fetch();
   if (!count ($attrs)){
     $ldap->cd($config->current['BASE']);
-    $ldap->create_missing_trees($config->current['CONFIG']);
+    $ldap->create_missing_trees($config->get_cfg_value("config"));
   }
 
   /* Check for valid input */
