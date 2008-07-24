@@ -934,6 +934,23 @@ class config  {
   }
 
 
+  function get_cfg_value($name, $default= "") {
+    $name= strtoupper($name);
+
+    /* Check if we have a current value for $name */
+    if (isset($this->current[$name])){
+      return ($this->current[$name]);
+    }
+
+    /* Check if we have a global value for $name */
+    if (isset($this->data["MAIN"][$name])){
+      return ($this->data["MAIN"][$name]);
+    }
+
+    return ($default);
+  }
+
+
   function check_config_version()
   {
     /* Skip check, if we've already mentioned the mismatch 
