@@ -44,7 +44,7 @@
 			<table width="50%">
 				<tr>
 					<td style="vertical-align:top;" colspan="4">
-						<h2><img alt="" class="center" align="middle" src="images/members.png" /> {t}Group membership{/t}</h2>
+						<h2><img alt="" class="center" align="middle" src="plugins/posix/images/members.png" /> {t}Group membership{/t}</h2>
 					</td>
 				</tr>
 				<tr>

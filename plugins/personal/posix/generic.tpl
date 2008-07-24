@@ -80,7 +80,7 @@
     &nbsp;
   </td>
   <td style="vertical-align:top;">
-   <h2><img alt="" class="center" align="middle" src="images/members.png" /> {t}Group membership{/t}</h2>
+   <h2><img alt="" class="center" align="middle" src="plugins/posix/images/members.png" /> {t}Group membership{/t}</h2>
    {if $groups eq "too_many_for_nfs"}
     <b style="color:red">{t}(Warning: more than 16 groups are not supported by NFS!){/t}</b>
     <br>
