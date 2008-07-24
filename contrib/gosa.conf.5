@@ -869,6 +869,7 @@ statement describes an automatic way to generate new user ids. There are two bas
 functions supported - which can be combined:
 
  a) using attributes
+
     You can specify LDAP attributes (currently only sn and givenName) in
     braces {} and add a percent sign befor it. Optionally you can strip it
     down to a number of characters, specified in []. I.e.
@@ -883,6 +884,7 @@ functions supported - which can be combined:
     input box is shown.
 
  b) using automatic id's
+
     I.e. specifying
 
 .nf
@@ -1055,12 +1057,19 @@ value tells GOsa to display certain information on each page load. Value
 is an AND combination of the following byte values:
 
 DEBUG_TRACE   = 1
+
 DEBUG_LDAP    = 2
+
 DEBUG_MYSQL   = 4
+
 DEBUG_SHELL   = 8
+
 DEBUG_POST    = 16
+
 DEBUG_SESSION = 32
+
 DEBUG_CONFIG  = 64
+
 DEBUG_ACL     = 128
 .pp
 
