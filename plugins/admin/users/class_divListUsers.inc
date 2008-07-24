@@ -137,7 +137,7 @@ class divListUsers extends MultiSelectWindow
       "&nbsp;"._("Change password")."|"."multiple_password_change|\n";
     $s.= "..|<img src='images/lists/trash.png' alt='' border='0' class='center'>".
       "&nbsp;"._("Remove")."|"."remove_multiple|\n";
-    $s.= "..|<img src='images/wizard.png' alt='' border='0' class='center'>".
+    $s.= "..|<img src='plugins/users/images/wizard.png' alt='' border='0' class='center'>".
       "&nbsp;"._("Apply template")."|"."templatize_multiple|\n";
 
     /* Add event tag */
