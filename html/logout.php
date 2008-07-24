@@ -78,7 +78,7 @@ if (isset($_GET['request'])){
   session::destroy ();
   
   /* If we're not using htaccess authentication, just redirect... */
-  if ($config->get_cfg_value("htaccess_auth") == "true"){
+  if (isset($config) && $config->get_cfg_value("htaccess_auth") == "true"){
 
     /* Else notice that the user has to close the browser... */
     $smarty->display (get_template_path('headers.tpl'));
