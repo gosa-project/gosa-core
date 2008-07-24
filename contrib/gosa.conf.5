@@ -962,10 +962,18 @@ Valid values are
 .I mail
 and
 .I uid.
-  vacationdir
+
+.B vacationdir
+.I path
+.PP
+The
+.I vacationdir
+statement sets the path where GOsa will look for vacation message
+templates. Default is /etc/gosa/vacation.
+
+Example template /etc/gosa/vacation/business.txt:
 
 .nf
-   /etc/gosa/vacation/business.txt:
    DESC:Away from desk
    Hi, I'm currently away from my desk. You can contact me on
    my cell phone via %mobile.
@@ -973,8 +981,65 @@ and
    Greetings,
    %givenName %sn
 .fi
+.pp
 
-  mailQueueScriptPath
+
+.B Debug options
+.PP
+.B displayerrors
+.I bool
+.PP
+The
+.I displayerrors
+statement tells GOsa to show PHP errors in the upper part of the screen. This
+should be disabled in productive deployments, because there might be some
+important passwords arround.
+.pp
+
+.B ldapstats
+.I bool
+.PP
+The
+.I ldapstats
+statement tells GOsa to track LDAP timing statistics to the syslog. This may
+help to find indexing problems or bad search filters.
+.pp
+
+.B ignore_acl
+.I dn
+.PP
+The
+.I ignore_acl
+value tells GOsa to ignore complete ACL sets for the given DN. Add your
+DN here and you'll be able to restore accidently dropped ACLs.
+.pp
+
+.B debuglevel
+.I integer
+.PP
+The
+.I debuglevel
+value tells GOsa to display certain information on each page load. Value
+is an AND combination of the following byte values:
+
+DEBUG_TRACE   = 1
+DEBUG_LDAP    = 2
+DEBUG_MYSQL   = 4
+DEBUG_SHELL   = 8
+DEBUG_POST    = 16
+DEBUG_SESSION = 32
+DEBUG_CONFIG  = 64
+DEBUG_ACL     = 128
+.pp
+
+
+
+              <referral url="{$cv.connection}/{$cv.base}"
+                       admin="{$cv.admin}"
+                       password="{$cv.password}" />
+
+
+
 
 .SH AUTHOR
 .B gosa.conf(5)
