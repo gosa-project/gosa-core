@@ -38,14 +38,10 @@ class timezone {
     }
 
     /* Is there a timezone configured in the gosa configuration (gosa.conf) */
-    if(isset($config->current['TIMEZONE']) || isset($config->data['MAIN']['TIMEZONE'])){
+    if ($config->get_cfg_value("timezone") != "")
 
       /* Get zonename */
-      if(isset($config->current['TIMEZONE'])){
-        $tz = $config->current['TIMEZONE'];
-      }else{
-        $tz = $config->data['MAIN']['TIMEZONE'];
-      }
+      $tz = $config->get_cfg_value("timezone");
 
       if(!@date_default_timezone_set($tz)){
         msg_dialog::display(_("Configuration error"), sprintf(_("The timezone setting '%s' in your gosa.conf is not valid. Cannot calculate correct timezone offset."), $tz), ERROR_DIALOG);
