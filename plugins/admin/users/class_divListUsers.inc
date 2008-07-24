@@ -133,7 +133,7 @@ class divListUsers extends MultiSelectWindow
     $s.= "..|---|\n";
     $s.= "..|<img src='images/lists/edit.png' alt='' border='0' class='center'>".
       "&nbsp;"._("Edit")."|"."multiple_edit|\n";
-    $s.= "..|<img src='images/list_password.png' alt='' border='0' class='center'>".
+    $s.= "..|<img src='plugins/users/images/list_password.png' alt='' border='0' class='center'>".
       "&nbsp;"._("Change password")."|"."multiple_password_change|\n";
     $s.= "..|<img src='images/lists/trash.png' alt='' border='0' class='center'>".
       "&nbsp;"._("Remove")."|"."remove_multiple|\n";
@@ -268,7 +268,7 @@ class divListUsers extends MultiSelectWindow
 
       /* Add Password change icon, if we are able to write users/password */
       if(!in_array_ics("gosaUserTemplate",$val['objectClass']) && preg_match("/w/",$ui->get_permissions($val['dn'],"users/password"))) {
-        $action.= "<input class='center' type='image' src='images/list_password.png' alt='"._("password")."'
+        $action.= "<input class='center' type='image' src='plugins/users/images/list_password.png' alt='"._("password")."'
           name='user_chgpw_%KEY%' title='"._("Change password")."'>";
       }else{
         $action.= "<img class='center' src='images/empty.png' alt='&nbsp;' 
