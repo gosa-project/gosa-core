@@ -177,7 +177,7 @@ class divListUsers extends MultiSelectWindow
     /* Variable initialation */
     $enviro     = $posix = $maila = $faxac = $samba = $netatalk = "";
     $empty      = "<img class='center' src='images/empty.png' style='width:16px;height:16px;' alt='-'>";
-    $userimg    = "<img class='center' src='images/select_user.png' alt='User' title='%s'>";
+    $userimg    = "<img class='center' src='plugins/users/images/select_user.png' alt='User' title='%s'>";
     $tplimg     = "<img class='center' src='plugins/users/images/select_template.png' alt='Template' title='%s'>";
     $editlink   = "<a href='?plug=".validate($_GET['plug'])."&amp;id=%s&amp;act=edit_entry'>%s</a>";
 
@@ -197,7 +197,7 @@ class divListUsers extends MultiSelectWindow
             "apple-user"      => array("VAR"=>"netatalk"  ,"IMG"=>"netatalkimg"));
 
      /* Pictures for Extensions */
-    $usrimg   ="<input class='center' type='image' src='images/select_user.png' alt='"._("GOsa")."'
+    $usrimg   ="<input class='center' type='image' src='plugins/users/images/select_user.png' alt='"._("GOsa")."'
                     name='user_edit_%KEY%-user' title='"._("Edit generic properties")."'>";
     $posiximg = "<input class='center' type='image' src='images/penguin.png' alt='"._("Posix")."'
                     name='user_edit_%KEY%-posixAccount' title='"._("Edit UNIX properties")."'>";
@@ -373,7 +373,7 @@ class divListUsers extends MultiSelectWindow
     $num_user_str = _("Number of listed users");
     $num_dep_str = _("Number of listed departments");
 
-    $str = "<img class='center' src='images/select_user.png'
+    $str = "<img class='center' src='plugins/users/images/select_user.png'
               title='".$num_user_str."' alt='".$num_user_str."'>&nbsp;".$num_users."&nbsp;&nbsp;&nbsp;&nbsp;";
     $str.= "<img class='center' src='images/lists/folder.png'
               title='".$num_dep_str."' alt='".$num_dep_str."'>&nbsp;".$num_deps."&nbsp;&nbsp;&nbsp;&nbsp;";
