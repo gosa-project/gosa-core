@@ -90,7 +90,7 @@ class log {
       
     }else{
 
-      if ($this->conifg->get_cfg_value("logging") == ""){
+      if ($this->config->get_cfg_value("logging") == ""){
         $this->log_into_syslog($entry);
       }else{
 
