@@ -40,7 +40,7 @@ class Step_Ldap extends setup_step
   var $rfc2307bis             = FALSE;
   var $attributes = array("connection","location","admin","password","base","admin_given","append_base_to_admin_dn","tls","rfc2307bis");
 
-  var $header_image= "images/proxy.png";
+  var $header_image= "images/setup/ldap.png";
 
   function Step_Ldap()
   {
