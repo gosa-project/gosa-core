@@ -67,7 +67,7 @@ class reference extends plugin
 				"gotoTerminal" => array(   "text" => _("Thin Client"),
 						"image" => "images/select_terminal.png"),
 				"gotoWorkstation" => array("text" => _("Workstation"),
-						"image" => "images/select_workstation.png"),
+						"image" => "plugins/systems/images/select_workstation.png"),
 				"gosaGroupOfNames" => array("text" => _("Object group"),
 						"image" => "plugins/ogroups/images/select_ogroup.png"),
 				"gotoPrinter" => array(	   "text" => _("Printer"),
