@@ -61,7 +61,7 @@ class reference extends plugin
 				"goFonHardware" => array(   "text" => _("Phone"),
 					"image" => "images/select_phone.png"),
 				"gosaApplication" => array("text" => _("Application"),
-						"image" => "images/select_application.png"),
+						"image" => "plugins/goto/images/select_application.png"),
 				"goServer" => array(	   "text" => _("Server"),
 						"image" => "images/select_server.png"),
 				"gotoTerminal" => array(   "text" => _("Thin Client"),
