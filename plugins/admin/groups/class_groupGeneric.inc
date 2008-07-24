@@ -77,7 +77,7 @@ class group extends plugin
   function group (&$config, $dn= NULL)
   {
      /* Set rfc2307bis flag */
-     if (isset($config->current['RFC2307BIS']) && ($config->current['RFC2307BIS']== "true")){
+     if ($config->get_cfg_value("rfc2307bis") == "true"){
        $this->rfc2307bis= TRUE;
        $this->attributes[]= "member";
        $this->objectclasses[]= "groupOfNames";
@@ -86,7 +86,7 @@ class group extends plugin
     plugin::plugin ($config, $dn);
 
     /* Load attributes depending on the samba version */
-    $this->samba3= ($config->current['SAMBAVERSION'] == 3);
+    $this->samba3= ($config->get_cfg_value("sambaversion") == 3);
     $this->orig_dn= $dn;
     $this->orig_cn= $this->cn;
 
@@ -143,7 +143,7 @@ class group extends plugin
         if(isset($attrs['sambaAlgorithmicRidBase'])){  
           $this->ridBase= $attrs['sambaAlgorithmicRidBase'][0];  
         } else {  
-          $this->ridBase= $this->config->current['RIDBASE'];  
+          $this->ridBase= $this->config->get_cfg_value("ridbase");
         } 
 
         /* Get domain name for SID */
@@ -155,10 +155,10 @@ class group extends plugin
           }
         }
       } else {
-        if (isset($this->config->current['RIDBASE'])){
+        if ($this->config->get_cfg_value("ridbase") != ""){
           $this->sambaDomainName= "DEFAULT";
-          $this->ridBase= $this->config->current['RIDBASE'];
-          $this->SID= $this->config->current['SID'];
+          $this->ridBase= $this->config->get_cfg_value("ridbase");
+          $this->SID= $this->config->get_cfg_value("sid");
         } else {
           msg_dialog::display(_("Configuration error"), _("Cannot find group SID in your configuration!"), ERROR_DIALOG);
         }
@@ -658,8 +658,8 @@ class group extends plugin
          to be prepared when adding/deleting users)
      */    
     $filter = "";
-    if(!isset($this->config->current['LDAP_FILTER_NESTING_LIMIT']) || 
-        count($this->memberUid) < $this->config->current['LDAP_FILTER_NESTING_LIMIT']){
+    if ($this->config->get_cfg_value("ldap_filter_nesting_limit") == "" ||
+        count($this->memberUid) < $this->config->get_cfg_value("ldap_filter_nesting_limit")){
       foreach ($this->memberUid as $value){
         if(!isset($this->members[$value])){
           $filter .= "(uid=".normalizeLdap($value).")";
@@ -678,8 +678,8 @@ class group extends plugin
     }
   
     /* check if all uids are resolved */
-    if(!isset($this->config->current['LDAP_FILTER_NESTING_LIMIT']) || 
-        count($this->memberUid) < $this->config->current['LDAP_FILTER_NESTING_LIMIT']){
+    if ($this->config->get_cfg_value("ldap_filter_nesting_limit") == "" ||
+        count($this->memberUid) < $this->config->get_cfg_value("ldap_filter_nesting_limit")){
       foreach ($this->memberUid as $value){
         if(!isset($this->members[$value])){
           $this->members[$value] =  _("! unknown id")." [".$value."]"; 
@@ -987,8 +987,7 @@ class group extends plugin
       /* User wants me to fake the idMappings? This is useful for
          making winbind resolve the group names in a reasonable amount
          of time in combination with larger databases. */
-      if (isset($this->config->current['SAMBAIDMAPPING']) &&
-          preg_match('/true/i', $this->config->current['SAMBAIDMAPPING'])){
+      if ($this->config->get_cfg_value("sambaidmapping") == "true"){
         $this->attrs['objectClass'][]= "sambaIdmapEntry";
       }
 
@@ -1146,8 +1145,8 @@ class group extends plugin
       if (!tests::is_id($this->gidNumber)){
         $message[]= msgPool::invalid(_("GID"), $this->gidNumber, "/[0-9]/");
       } else {
-        if ($this->gidNumber < $this->config->current['MINID']){
-          $message[]= msgPool::toosmall(_("GID"), $this->config->current['MINID']);
+        if ($this->gidNumber < $this->config->get_cfg_value("minid")){
+          $message[]= msgPool::toosmall(_("GID"), $this->config->get_cfg_value("minid"));
         }
 
       }
@@ -1188,8 +1187,8 @@ class group extends plugin
     }
 
     /* Find out next free id near to UID_BASE */
-    if (!isset($this->config->current['BASE_HOOK'])){
-      $base= $this->config->current['UIDBASE'];
+    if ($this->config->get_cfg_value("base_hook") == ""){
+      $base= $this->config->get_cfg_value("uidbase");
     } else {
       /* Call base hook */
       $base= get_base_from_hook($dn, $attrib);
