@@ -480,7 +480,18 @@ want to set it to
 .I true
 if your group plugin is slow.
 .PP
+
+.B ie_png_workaround
+.I bool
 .PP
+The
+.I ie_png_workaround
+variable enables or disables a workaround for IE < 7 in order to display transparent
+PNG files correctly. This drastically slows down browsing. Please use Firefox or Opera
+instead.
+.PP
+.PP
+
 
 .B Password options
 .PP
@@ -537,6 +548,323 @@ in order to get {sasl}user@REALM.NET, or to
 to get {kerberos}user@REALM.NET. The latter is outdated, but may be
 needed from time to time.
 .PP
+.PP
+
+
+.B LDAP options
+.PP
+.B max_ldap_query_time
+.I integer
+.PP
+The
+.I max_ldap_query_time
+statement tells GOsa to stop LDAP actions if there is no answer within the
+specified number of seconds.
+.PP
+
+.B schema_check
+.I bool
+.PP
+The
+.I schema_check
+statement enables or disables schema checking during login. It is recommended
+to switch this on in order to let GOsa handle object creation more efficient.
+.PP
+
+.B tls
+.I bool
+.PP
+The
+.I tls
+statement enables or disables TLS operating on LDAP connections.
+.PP
+
+.B dnmode
+.I cn/uid
+.PP
+The
+.I dnmode
+option tells GOsa how to create new accounts. Possible values are
+.I uid
+and
+.I cn.
+In the first case GOsa creates uid style DN entries:
+.nf
+uid=superuser,ou=staff,dc=example,dc=net
+.fi
+In the second case, GOsa creates cn style DN entries:
+.nf
+cn=Foo Bar,ou=staff,dc=example,dc=net
+.fi
+If you choose "cn" to be your
+.I dnmode
+you can decide whether to include the personal title in your dn by
+selecting
+.I include_personal_title.
+.PP
+
+.B include_personal_title
+.I bool
+.PP
+The
+.I include_personal_title
+option tells GOsa to include the personal title in user DNs when
+.I dnmode
+is set to "cn".
+
+.B people
+.I string
+.PP
+The
+.I people
+statement defines the location where new accounts will be created inside of
+defined departments. The default is
+.I ou=people.
+.PP
+
+.B groups
+.I string
+.PP
+The
+.I groups
+statement defines the location where new groups will be created inside of
+defined departments. The default is
+.I ou=groups.
+.PP
+
+.B sudoou
+.I string
+.PP
+The
+.I sudoou
+statement defines the location where new groups will be created inside of
+defined departments. The default is
+.I ou=groups.
+.PP
+
+.B winstations
+.I string
+.PP
+This statement defines the location where GOsa looks for new samba workstations.
+.PP
+
+.B ogroupou
+.I string
+.PP
+This statement defines the location where GOsa creates new object groups inside of defined
+departments. Default is
+.I ou=groups.
+.PP
+
+.B serverou
+.I string
+.PP
+This statement defines the location where GOsa creates new servers inside of defined
+departments. Default is
+.I ou=servers.
+.PP
+
+.B terminalou
+.I string
+.PP
+This statement defines the location where GOsa creates new terminals inside of defined
+departments. Default is
+.I ou=terminals.
+.PP
+
+.B workstationou
+.I string
+.PP
+This statement defines the location where GOsa creates new workstations inside of defined
+departments. Default is
+.I ou=workstations.
+.PP
+
+.B printerou
+.I string
+.PP
+This statement defines the location where GOsa creates new printers inside of defined
+departments. Default is
+.I ou=printers.
+.PP
+
+.B componentou
+.I string
+.PP
+This statement defines the location where GOsa creates new network components inside of defined
+departments. Default is
+.I ou=components.
+.PP
+
+.B phoneou
+.I string
+.PP
+This statement defines the location where GOsa creates new phones inside of defined
+departments. Default is
+.I ou=phones.
+.PP
+
+.B conferenceou
+.I string
+.PP
+This statement defines the location where GOsa creates new phone conferences inside of defined
+departments. Default is
+.I ou=conferences.
+.PP
+
+.B blocklistou
+.I string
+.PP
+This statement defines the location where GOsa creates new fax blocklists inside of defined
+departments. Default is
+.I ou=blocklists.
+.PP
+
+.B incomingou
+.I string
+.PP
+This statement defines the location where GOsa looks for new systems to be joined to the LDAP.
+Default is
+.I ou=incoming.
+.PP
+
+.B systemsou
+.I string
+.PP
+This statement defines the base location for servers, workstations, terminals, phones and
+components. Default is
+.I ou=systems.
+.PP
+
+.B ldap_filter_nesting_limit
+.I integer
+.PP
+The
+.I ldap_filter_nesting_limit
+statement can be used to speed up group handling for groups with several hundreds of members.
+The default behaviour is, that GOsa will resolv the memberUid values in a group to real names.
+To achieve this, it writes a single filter to minimize searches. Some LDAP servers (namely
+Sun DS) simply crash when the filter gets too big. You can set a member limit, where GOsa will
+stop to do these lookups.
+.PP
+
+.B sizelimit
+.I integer
+.PP
+The
+.I sizelimit
+statement tells GOsa to retrieve the specified maximum number of results. The user will get
+a warning, that not all entries were shown.
+.PP
+
+.B recursive
+.I bool
+.PP
+The
+.I recursive
+statement tells GOsa to follow LDAP referrals.
+.PP
+.PP
+
+
+.B Account creation options
+.PP
+.B uidbase
+.I integer
+.PP
+The
+.I uidbase
+statement defines where to start looking for a new free user id. This should be synced
+with your
+.I adduser.conf
+to avoid overlapping uidNumber values between local and LDAP based lookups. The uidbase
+can even be dynamic. Take a look at the
+.I base_hook
+definition below.
+.PP
+
+.B gidbase
+.I integer
+.PP
+The
+.I gidbase
+statement defines where to start looking for a new free group id. This should be synced
+with your
+.I adduser.conf
+to avoid overlapping gidNumber values between local and LDAP based lookups. The gidbase
+can even be dynamic. Take a look at the
+.I base_hook
+definition below.
+.PP
+
+.B minid
+.I integer
+.PP
+The
+.I minid
+statement defines the minimum assignable user or group id to avoid security leaks with
+uid 0 accounts.
+.PP
+
+.B base_hook
+.I path
+.PP
+The
+.I base_hook
+statement defines a script to be called for finding the next free id for users or groups
+externaly. It gets called with the current entry "dn" and the attribute to be ID'd. It
+should return an integer value.
+.PP
+
+.B hash
+.I string
+.PP
+The
+.I hash
+statement defines the default password hash to choose for new accounts. Valid values are
+.I crypt/standard-des, crypt/md5, crypt/enhanced-des, crypt/blowfish, md5, sha, ssha, smd5, clear
+and
+.I sasl.
+These values will be overridden when using templates.
+.PP
+
+.B idgen
+.I string
+.PP
+The
+.I idgen
+statement describes an automatic way to generate new user ids. There are two basic
+functions supported - which can be combined:
+
+ a) using attributes
+    You can specify LDAP attributes (currently only sn and givenName) in braces {}
+    and add a percent sign befor it. Optionally you can strip it down to a number
+    of characters, specified in []. I.e.
+.nf
+      idgen="{%sn}-{%givenName[2-4]}"
+.fi
+
+    will generate an ID using the full surename, adding a dash, and adding at least
+    the first two characters of givenName. If this ID is used, it'll use up to four
+    characters. If no automatic generation is possible, a input box is shown.
+
+ b) using automatic id's
+    I.e. specifying
+.nf
+      idgen="acct{id:3}"
+.fi
+    will generate a three digits id with the next free entry appended to "acct".
+.nf
+      idgen="ext{id#3}"
+.fi
+    will generate a three digits random number appended to "ext".
+.PP
+.PP
+
+
+
+
+
 
 
 
