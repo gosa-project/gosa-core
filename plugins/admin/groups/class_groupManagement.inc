@@ -44,16 +44,13 @@ class groupManagement extends plugin
     $this->ui     = &$ui;
 
     /* Copy & Paste enabled ?*/
-    if((isset($this->config->data['MAIN']['ENABLECOPYPASTE']))&&(preg_match("/true/i",$this->config->data['MAIN']['ENABLECOPYPASTE']))){
+    if($this->config->get_value("enablecopypaste") == "true"){
       $this->CopyPasteHandler = new CopyPasteHandler($this->config);
     }
     
     /* Detect if we have to display the primary group checkbox */
     $tmp = "";
-    if (isset($this->config->data['MAIN']['NOPRIMARYGROUP'])){
-      $tmp = $this->config->data['MAIN']['NOPRIMARYGROUP'];
-    }
-    if(preg_match("/true/i",$tmp)|| (preg_match("/yes/",$tmp))){ 
+    if ($this->config->get_cfg_value("noprimarygroup") == "true"){
       $this->ShowPrimaryCheckBox = false;
     } else {
       $this->ShowPrimaryCheckBox = true;
@@ -632,7 +629,7 @@ class groupManagement extends plugin
     }
 
     $sfilter= "";
-    if ($this->config->current['SAMBAVERSION'] == 3){
+    if ($this->config->get_cfg_value("sambaversion") == 3){
       if (!$ShowPrimaryGroups){
         $sfilter= "(objectClass=sambaGroupMapping)";
       } elseif ($ShowSambaGroups){
