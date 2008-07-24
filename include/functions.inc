@@ -192,8 +192,8 @@ function get_browser_language()
   }
 
   /* Check for global language settings in gosa.conf */
-  if(isset($config->data['MAIN']['LANG']) && !empty($config->data['MAIN']['LANG'])) {
-    $lang = $config->data['MAIN']['LANG'];
+  if ($config->get_cfg_value('lang') != ""){
+    $lang = $config->get_cfg_value('lang');
     if(!preg_match("/utf/i",$lang)){
       $lang .= ".UTF-8";
     }
@@ -230,11 +230,8 @@ function get_template_path($filename= '', $plugin= FALSE, $path= "")
 {
   global $config, $BASE_DIR;
 
-  if (!@isset($config->data['MAIN']['THEME'])){
-    $theme= 'default';
-  } else {
-    $theme= $config->data['MAIN']['THEME'];
-  }
+  /* Set theme */
+  $theme= $config->get_cfg_value("theme", "default");
 
   /* Return path for empty filename */
   if ($filename == ''){
@@ -351,7 +348,7 @@ function process_htaccess ($username, $kerberos= FALSE)
   
     $config->set_current($name);
     $mode= "kerberos";
-    if (isset($config->current['KRBSASL']) && preg_match('/^true$/i', $config->current['KRBSASL'])){
+    if ($config->get_cfg_value("krbsasl") == "true"){
       $mode= "sasl";
     }
 
@@ -432,8 +429,8 @@ function ldap_login_user ($username, $password)
   $ldap->cd($config->current['BASE']);
   $allowed_attributes = array("uid","mail");
   $verify_attr = array();
-  if(isset($config->current['LOGIN_ATTRIBUTE'])){
-    $tmp = split(",",$config->current['LOGIN_ATTRIBUTE']); 
+  if($config->get_cfg_value("login_attribute") != ""){
+    $tmp = split(",", $config->get_cfg_value("login_attribute")); 
     foreach($tmp as $attr){
       if(in_array($attr,$allowed_attributes)){
         $verify_attr[] = $attr;
@@ -615,7 +612,7 @@ function add_lock ($object, $user)
 
   /* Check for existing entries in lock area */
   $ldap= $config->get_ldap_link();
-  $ldap->cd ($config->current['CONFIG']);
+  $ldap->cd ($config->get_cfg_value("config"));
   $ldap->search("(&(objectClass=gosaLockEntry)(gosaUser=$user)(gosaObject=".base64_encode($object)."))",
       array("gosaUser"));
   if (!$ldap->success()){
@@ -627,14 +624,14 @@ function add_lock ($object, $user)
   if ($ldap->count() == 0){
     $attrs= array();
     $name= md5($object);
-    $ldap->cd("cn=$name,".$config->current['CONFIG']);
+    $ldap->cd("cn=$name,".$config->get_cfg_value("config"));
     $attrs["objectClass"] = "gosaLockEntry";
     $attrs["gosaUser"] = $user;
     $attrs["gosaObject"] = base64_encode($object);
     $attrs["cn"] = "$name";
     $ldap->add($attrs);
     if (!$ldap->success()){
-      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), "cn=$name,".$config->current['CONFIG'], 0, ERROR_DIALOG));
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), "cn=$name,".$config->get_cfg_value("config"), 0, ERROR_DIALOG));
       return;
     }
   }
@@ -659,7 +656,7 @@ function del_lock ($object)
 
   /* Check for existance and remove the entry */
   $ldap= $config->get_ldap_link();
-  $ldap->cd ($config->current['CONFIG']);
+  $ldap->cd ($config->get_cfg_value("config"));
   $ldap->search ("(&(objectClass=gosaLockEntry)(gosaObject=".base64_encode($object)."))", array("gosaObject"));
   $attrs= $ldap->fetch();
   if ($ldap->getDN() != "" && $ldap->success()){
@@ -679,7 +676,7 @@ function del_user_locks($userdn)
 
   /* Get LDAP ressources */ 
   $ldap= $config->get_ldap_link();
-  $ldap->cd ($config->current['CONFIG']);
+  $ldap->cd ($config->get_cfg_value("config"));
 
   /* Remove all objects of this user, drop errors silently in this case. */
   $ldap->search("(&(objectClass=gosaLockEntry)(gosaUser=$userdn))", array("gosaUser"));
@@ -702,7 +699,7 @@ function get_lock ($object)
   /* Get LDAP link, check for presence of the lock entry */
   $user= "";
   $ldap= $config->get_ldap_link();
-  $ldap->cd ($config->current['CONFIG']);
+  $ldap->cd ($config->get_cfg_value("config"));
   $ldap->search("(&(objectClass=gosaLockEntry)(gosaObject=".base64_encode($object)."))", array("gosaUser"));
   if (!$ldap->success()){
     msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), "", LDAP_SEARCH, ERROR_DIALOG));
@@ -747,7 +744,7 @@ function get_multiple_locks($objects)
   /* Get LDAP link, check for presence of the lock entry */
   $user= "";
   $ldap= $config->get_ldap_link();
-  $ldap->cd ($config->current['CONFIG']);
+  $ldap->cd ($config->get_cfg_value("config"));
   $ldap->search($filter, array("gosaUser","gosaObject"));
   if (!$ldap->success()){
     msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), "", LDAP_SEARCH, ERROR_DIALOG));
@@ -1165,8 +1162,8 @@ function get_ou($name)
                 "mimetypeou"    => "ou=mime,");
 
   /* Preset ou... */
-  if (isset($config->current[strtoupper($name)])){
-    $ou= $config->current[strtoupper($name)];
+  if ($config->get_cfg_value($name) != ""){
+    $ou= $config->get_cfg_value($name);
   } elseif (isset($map[$name])) {
     $ou = $map[$name];
     return($ou);
@@ -1233,7 +1230,7 @@ function strict_uid_mode()
 {
   global $config;
 
-  return !(isset($config->current['STRICT']) && preg_match('/^(no|false)$/i', $config->current['STRICT']));
+  return ($config->get_cfg_value("strict") == "true");
 }
 
 
@@ -2173,10 +2170,10 @@ function get_base_from_hook($dn, $attrib)
 {
   global $config;
 
-  if (isset($config->current['BASE_HOOK'])){
+  if ($config->get_cfg_value("base_hook") != ""){
     
     /* Call hook script - if present */
-    $command= $config->current['BASE_HOOK'];
+    $command= $config->get_cfg_value("base_hook");
 
     if ($command != ""){
       $command.= " '".LDAP::fix($dn)."' $attrib";
@@ -2187,17 +2184,17 @@ function get_base_from_hook($dn, $attrib)
           return ($output[0]);
         } else {
           msg_dialog::display(_("Warning"), _("'base_hook' is not available. Using default base!"), WARNING_DIALOG);
-          return ($config->current['UIDBASE']);
+          return ($config->get_cfg_value("uidbase"));
         }
       } else {
         msg_dialog::display(_("Warning"), _("'base_hook' is not available. Using default base!"), WARNING_DIALOG);
-        return ($config->current['UIDBASE']);
+        return ($config->get_cfg_value("uidbase"));
       }
 
     } else {
 
       msg_dialog::display(_("Warning"), _("'base_hook' is not available. Using default base!"), WARNING_DIALOG);
-      return ($config->current['UIDBASE']);
+      return ($config->get_cfg_value("uidbase"));
 
     }
   }
@@ -2566,7 +2563,7 @@ function generate_smb_nt_hash($password)
   global $config;
 
   # Try to use gosa-si?
-  if (isset($config->current['GOSA_SI'])){
+  if ($config->get_cfg_value("gosa_si") != ""){
   	$res= gosaSupportDaemon::send("gosa_gen_smb_hash", "GOSA", array("password" => $password), TRUE);
     if (isset($res['XML']['HASH'])){
     	$hash= $res['XML']['HASH'];
@@ -2574,7 +2571,7 @@ function generate_smb_nt_hash($password)
       $hash= "";
     }
   } else {
-	  $tmp= $config->data['MAIN']['SMBHASH']." ".escapeshellarg($password);
+	  $tmp= $config->get_cfg_value('smbhash')." ".escapeshellarg($password);
 	  @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__, $tmp, "Execute");
 
 	  exec($tmp, $ar);
@@ -2590,7 +2587,7 @@ function generate_smb_nt_hash($password)
 
   list($lm,$nt)= split (":", trim($hash));
 
-  if ($config->current['SAMBAVERSION'] == 3) {
+  if ($config->get_cfg_value("sambaversion") == 3) {
 	  $attrs['sambaLMPassword']= $lm;
 	  $attrs['sambaNTPassword']= $nt;
 	  $attrs['sambaPwdLastSet']= date('U');
@@ -2613,12 +2610,8 @@ function getEntryCSN($dn)
   }
 
   /* Get attribute that we should use as serial number */
-  if(isset($config->current['UNIQ_IDENTIFIER'])){
-    $attr = $config->current['UNIQ_IDENTIFIER'];
-  }elseif(isset($config->data['MAIN']['UNIQ_IDENTIFIER'])){
-    $attr = $config->data['MAIN']['UNIQ_IDENTIFIER'];
-  }
-  if(!empty($attr)){
+  $attr= $config->get_cfg_value("uniq_identifier");
+  if($attr != ""){
     $ldap = $config->get_ldap_link();
     $ldap->cat($dn,array($attr));
     $csn = $ldap->fetch();
