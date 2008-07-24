@@ -921,8 +921,60 @@ The
 .I sambaidmapping
 statement tells GOsa to maintain sambaIdmapEntry objects. Depending on your
 setup this can drastically improve the windows login performance.
+.PP
+.PP
 
 
+.B Mail options
+.PP
+.B mailMethod
+.I cyrus/kolab/golab/sendmail
+.PP
+The
+.I mailMethod
+statement tells GOsa which mail method the setup should use to communicate
+with a possible mail server. Leave this undefined if your mail method does
+not match the predefined ones.
+
+.I cyrus
+maintains accounts and sieve scripts in cyrus servers.
+.I kolab
+is like cyrus, but lets the kolab daemon maintain the accounts.
+.I golab is like cyrus - just with kolab attributes.
+.I sendmail just disables everything which is IMAP dependent.
+.PP
+
+.B cyrusunixstyle
+.I bool
+.PP
+The
+.I cyrusunixstyle
+statement determines if GOsa should use "foo/bar" or "foo.bar" namespaces
+in IMAP. Unix style is with slashes.
+
+.B mail_attrib
+.I mail/uid
+.PP
+The
+.I mail_attrib
+statement determines which attribute GOsa will use to create accounts.
+Valid values are
+.I mail
+and
+.I uid.
+  vacationdir
+
+.nf
+   /etc/gosa/vacation/business.txt:
+   DESC:Away from desk
+   Hi, I'm currently away from my desk. You can contact me on
+   my cell phone via %mobile.
+
+   Greetings,
+   %givenName %sn
+.fi
+
+  mailQueueScriptPath
 
 .SH AUTHOR
 .B gosa.conf(5)
