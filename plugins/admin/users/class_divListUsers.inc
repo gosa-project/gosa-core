@@ -211,7 +211,7 @@ class divListUsers extends MultiSelectWindow
                     name='user_edit_%KEY%-gofaxAccount' title='"._("Edit fax properies")."'>";
     $sambaimg = "<input class='center' type='image' src='images/select_winstation.png' alt='"._("Samba")."'
                     name='user_edit_%KEY%-sambaAccount' title='"._("Edit samba properties")."'>";
-    $netatalkimg = "<input class='center' type='image' src='images/select_netatalk.png' alt='"._("Netatalk")."'
+    $netatalkimg = "<input class='center' type='image' src='plugins/netatalk/images/select_netatalk.png' alt='"._("Netatalk")."'
                     name='user_edit_%KEY%-netatalk' title='"._("Edit netatalk properties")."'>";
     $tplcreateuserimg  = "<input type='image' class='center' src='images/lists/new.png' alt='"._("Create user from template")."'
                     name='userfrom_tpl_%KEY%' title='"._("Create user with this template")."'>";
