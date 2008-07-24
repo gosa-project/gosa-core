@@ -47,12 +47,12 @@ class gosaSupportDaemon
     global $config;
 
     # load from config, store statically
-    if (isset($config->current['GOSA_SI'])){
+    if ($config->get_cfg_value("gosa_si") != ""){
 
       if ($this->s_host == ""){
-        $this->s_host= preg_replace("/^.*@([^:]+):.*$/", "$1", $config->current['GOSA_SI']);
-        $this->i_port= preg_replace("/^.*@[^:]+:(.*)$/", "$1", $config->current['GOSA_SI']);
-        $this->s_encryption_key = preg_replace("/^(.*)@[^:]+:.*$/", "$1", $config->current['GOSA_SI']);
+        $this->s_host= preg_replace("/^.*@([^:]+):.*$/", "$1", $config->get_cfg_value("gosa_si"));
+        $this->i_port= preg_replace("/^.*@[^:]+:(.*)$/", "$1", $config->get_cfg_value("gosa_si"));
+        $this->s_encryption_key = preg_replace("/^(.*)@[^:]+:.*$/", "$1", $config->get_cfg_value("gosa_si"));
       }
 
       $this->f_timeout = $timeout;
