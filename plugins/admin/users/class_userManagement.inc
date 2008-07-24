@@ -25,7 +25,7 @@ class userManagement extends plugin
   /* Plugin definitions */
   var $plHeadline     = "Users";
   var $plDescription  = "Manage users";
-  var $plIcon         = "images/user.png";
+  var $plIcon         = "plugins/users/images/user.png";
 
   /* Dialog attributes */
   var $usertab              = NULL;
