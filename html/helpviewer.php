@@ -42,10 +42,9 @@ $ui= session::get('ui');
 $config= session::get('config');
 
 /* Language setup */
-if ($config->data['MAIN']['LANG'] == ""){
+$lang= $config->get_cfg_value("lang");
+if ($lang == ""){
   $lang= get_browser_language();
-} else {
-  $lang= $config->data['MAIN']['LANG'];
 }
 
 $lang.=".UTF-8";
@@ -62,11 +61,7 @@ textdomain($domain);
 @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
 
 $config= session::get('config');
-if (isset ($config->data['MAIN']['COMPILE'])){
-  $smarty->compile_dir= $config->data['MAIN']['COMPILE'];
-} else {
-  $smarty->compile_dir= '/var/spool/gosa/';
-}
+$smarty->compile_dir= $config->get_cfg_value("compile", "/var/spool/gosa/");
 $smarty->assign("title", "GOsa - "._("Help browser"));
 
 /* HELP management starts here ...

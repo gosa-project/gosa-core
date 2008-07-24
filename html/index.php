@@ -53,7 +53,7 @@ function displayLogin()
   $smarty->assign ("message", $message);
 
   /* Displasy SSL mode warning? */
-  if ($ssl != "" && $config->data['MAIN']['WARNSSL'] == 'true'){
+  if ($ssl != "" && $config->get_cfg_value('warnssl') == 'true'){
     $smarty->assign ("ssl", _("Warning").": <a style=\"color:red;\" href=\"$ssl\">"._("Session is not encrypted!")."</a>");
   } else {
     $smarty->assign ("ssl", "");
@@ -145,22 +145,18 @@ if (!is_readable(CONFIG_DIR."/".CONFIG_FILE)){
 
 /* Parse configuration file */
 $config= new config(CONFIG_DIR."/".CONFIG_FILE, $BASE_DIR);
-session::set('DEBUGLEVEL',$config->data['MAIN']['DEBUGLEVEL']);
+session::set('DEBUGLEVEL',$config->get_cfg_value('DEBUGLEVEL'));
 if ($_SERVER["REQUEST_METHOD"] != "POST"){
   @DEBUG (DEBUG_CONFIG, __LINE__, __FUNCTION__, __FILE__, $config->data, "config");
 }
 
 /* Enable compressed output */
-if (isset($config->data['MAIN']['COMPRESSED']) && preg_match('/^(true|on)$/i', $config->data['MAIN']['COMPRESSED'])){
+if ($config->get_cfg_value("compressed") != ""){
   ob_start("ob_gzhandler");
 }
 
 /* Set template compile directory */
-if (isset ($config->data['MAIN']['COMPILE'])){
-  $smarty->compile_dir= $config->data['MAIN']['COMPILE'];
-} else {
-  $smarty->compile_dir= '/var/spool/gosa';
-}
+$smarty->compile_dir= $config->get_cfg_value("compile", '/var/spool/gosa');
 
 /* Check for compile directory */
 if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))){
@@ -206,14 +202,14 @@ if (!isset($_SERVER['HTTPS']) ||
 }
 
 /* If SSL is forced, just forward to the SSL enabled site */
-if ($config->data['MAIN']['FORCESSL'] == 'true' && $ssl != ''){
+if ($config->get_cfg_value("forcessl") == 'true' && $ssl != ''){
   header ("Location: $ssl");
   exit;
 }
 
 /* Do we have htaccess authentification enabled? */
 $htaccess_authenticated= FALSE;
-if (isset($config->data['MAIN']['HTACCESS_AUTH']) && preg_match('/^(yes|true)$/i', $config->data['MAIN']['HTACCESS_AUTH'])){
+if ($config->get_cfg_value("htaccess_auth") == "true" ){
   if (!isset($_SERVER['REMOTE_USER'])){
     msg_dialog::display(_("Configuration error"), _("There is a problem with the authentication setup!"), FATAL_ERROR_DIALOG);
     exit;
@@ -259,12 +255,13 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
   }
 
   /* Check for schema file presence */
+  #TODO: these three lines should go to the class_config.inc, shouldn't they?
   if(!isset($config->data['MAIN']['SCHEMA_CHECK'])){
     $config->data['MAIN']['SCHEMA_CHECK'] = "true";
   }
-  if(isset($config->data['MAIN']['SCHEMA_CHECK'])&&preg_match("/true/i",$config->data['MAIN']['SCHEMA_CHECK'])){
-    $recursive = (isset($config->current['RECURSIVE']) && $config->current['RECURSIVE'] == "true");
-    $tls =       (isset($config->current['TLS'])       && $config->current['TLS'] == "true");
+  if ($config->get_cfg_value("schema_check") == "true"){
+    $recursive = ($config->get_cfg_value("recursive") == "true");
+    $tls =       ($config->get_cfg_value("tls") == "true");
 
     if(!count($ldap->get_objectclasses())){
       msg_dialog::display(_("LDAP error"), _("Cannot detect information about the installed LDAP schema!"), ERROR_DIALOG);
@@ -276,7 +273,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
       $cfg['password']  = $config->current['PASSWORD'];
       $cfg['connection']= $config->current['SERVER'];
       $cfg['tls']       = $tls;
-      $str = check_schema($cfg,isset($config->current['RFC2307BIS']) && preg_match("/(true|yes|on|1)/i",$config->current['RFC2307BIS']));
+      $str = check_schema($cfg, $config->get_cfg_value("rfc2307bis") == "true");
       $checkarr = array();
       foreach($str as $tr){
         if(isset($tr['IS_MUST_HAVE']) && !$tr['STATUS']){
@@ -341,7 +338,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
       session::set('config',$config);
 
       /* Restore filter settings from cookie, if available */
-      if(isset($config->data['MAIN']['SAVE_FILTER']) && preg_match("/true/",$config->data['MAIN']['SAVE_FILTER'])){
+      if($config->get_cfg_value("save_filter") == "true"){
 
         if(isset($_COOKIE['GOsa_Filter_Settings']) || isset($HTTP_COOKIE_VARS['GOsa_Filter_Settings'])){
 
@@ -366,9 +363,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
       }
 
       /* are we using accountexpiration */
-      if((isset($config->data['MAIN']['ACCOUNT_EXPIRATION'])) && 
-          preg_match('/true/i', $config->data['MAIN']['ACCOUNT_EXPIRATION'])){
-
+      if ($config->get_cfg_value("account_expiration") == "true"){
         $expired= ldap_expired_account($config, $ui->dn, $ui->username);
 
         if ($expired == 1){
@@ -416,7 +411,7 @@ if (!isset($message)){
 $smarty->assign ("message", $message);
 
 /* Displasy SSL mode warning? */
-if ($ssl != "" && $config->data['MAIN']['WARNSSL'] == 'true'){
+if ($ssl != "" && $config->get_cfg_value('WARNSSL') == 'true'){
   $smarty->assign ("ssl", "<b>"._("Warning").":<\/b> "._("Session will not be encrypted.")." <a style=\"color:red;\" href=\"$ssl\"><b>"._("Enter SSL session")."<\/b></a>!");
 } else {
   $smarty->assign ("ssl", "");
