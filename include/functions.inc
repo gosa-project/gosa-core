@@ -192,7 +192,7 @@ function get_browser_language()
   }
 
   /* Check for global language settings in gosa.conf */
-  if ($config->get_cfg_value('lang') != ""){
+  if (isset ($config) && $config->get_cfg_value('lang') != ""){
     $lang = $config->get_cfg_value('lang');
     if(!preg_match("/utf/i",$lang)){
       $lang .= ".UTF-8";
