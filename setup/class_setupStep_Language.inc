@@ -26,7 +26,7 @@ class Step_Language extends setup_step
   var $lang           = "en_EN";  /* Detected language */
   var $languages      = array();
   var $attributes     = array("lang","lang_selected");
-  var $header_image   = "images/locale.png";
+  var $header_image   = "images/setup/locale.png";
 
   function Step_Language()
   {
