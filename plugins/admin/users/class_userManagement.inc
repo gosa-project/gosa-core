@@ -294,8 +294,8 @@ class userManagement extends plugin
             if(!change_password ($this->usertab->dn, $_POST['new_password'],0, $obj->pw_storage)){
               return($smarty->fetch(get_template_path('password.tpl', TRUE)));
             }
-            if (isset($config->data['MAIN']['EXTERNALPWDHOOK'])){
-              exec($config->data['MAIN']['EXTERNALPWDHOOK']." ".$username." ".$_POST['new_password'], $resarr);
+            if ($config->get-cfg_value("externalpwdhook") != ""){
+              exec($config->get-cfg_value("externalpwdhook")." ".$username." ".$_POST['new_password'], $resarr);
             }
             new log("modify","users/".get_class($this),$this->usertab->dn,array(),"Password has been changed");
             unset($this->usertab);
@@ -305,8 +305,8 @@ class userManagement extends plugin
           if(!change_password ($this->dn, $_POST['new_password'])){
             return($smarty->fetch(get_template_path('password.tpl', TRUE)));
           }
-          if (isset($config->data['MAIN']['EXTERNALPWDHOOK'])){
-            exec($config->data['MAIN']['EXTERNALPWDHOOK']." ".$username." ".$_POST['new_password'], $resarr);
+          if ($config->get-cfg_value("externalpwdhook") != ""){
+            exec($config->get-cfg_value("externalpwdhook")." ".$username." ".$_POST['new_password'], $resarr);
           }
           new log("modify","users/".get_class($this),$this->dn,array(),"Password has been changed");
         }
@@ -803,11 +803,7 @@ class userManagement extends plugin
          react on this. */
       $this->dn= "new";
       
-      if (isset($this->config->current['IDGEN'])){
-        $this->got_uid= false;
-      } else {
-        $this->got_uid= true;
-      }
+       $this->got_uid= ($this->config->get_cfg_value("idgen") == "");
 
       /* Create new usertab object */
       $this->usertab= new usertabs($this->config,$this->config->data['TABS']['USERTABS'], $this->dn);
@@ -870,9 +866,8 @@ class userManagement extends plugin
         msg_dialog::displayChecks($message);
       } else {
         $attributes= array('sn' => $this->sn, 'givenName' => $this->givenName);
-        if (isset($this->config->current['IDGEN']) &&
-            $this->config->current['IDGEN'] != ""){
-          $uids= gen_uids ($this->config->current['IDGEN'], $attributes);
+        if ($this->config->get_cfg_value("idgen") != ""){
+          $uids= gen_uids ($this->config->get_cfg_value("idgen"), $attributes);
           if (count($uids)){
             $smarty->assign("edit_uid", "false");
             $smarty->assign("uids", $uids);
@@ -1016,7 +1011,7 @@ class userManagement extends plugin
 
     /* Setup filter depending on selection */
     $filter="";
-    if ($this->config->current['SAMBAVERSION'] == 3){
+    if ($this->config->get_cfg_value("sambaversion") == 3){
       $samba= "sambaSamAccount";
     } else {
       $samba= "sambaAccount";

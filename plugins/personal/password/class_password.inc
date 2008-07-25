@@ -44,8 +44,7 @@ class password extends plugin
     $smarty->assign("NotAllowed" , !preg_match("/w/i",$password_ACLS));
 
     /* Display expiration template */
-    if((isset($this->config->data['MAIN']['ACCOUNT_EXPIRATION'])) &&
-        preg_match('/true/i', $this->config->data['MAIN']['ACCOUNT_EXPIRATION'])){
+    if ($this->config->get_cfg_value("account_expiration") == "true"){
       $expired= ldap_expired_account($this->config, $ui->dn, $ui->username);
       if($expired == 4){
         return($smarty->fetch(get_template_path("nochange.tpl", TRUE)));
@@ -56,16 +55,16 @@ class password extends plugin
     if (isset($_POST['password_finish'])){
 
       /* Should we check different characters in new password */
-      $check_differ = isset($this->config->data['MAIN']['PWDIFFER']);
-      $differ       = @$this->config->data['MAIN']['PWDIFFER'];
+      $check_differ = $this->config->get_cfg_value("pwdiffer") != "";
+      $differ       = $this->config->get_cfg_value("pwdiffer", 0);
 
       /* Enable length check ? */
-      $check_length = isset($this->config->data['MAIN']['PWMINLEN']);
-      $length       = @$this->config->data['MAIN']['PWMINLEN'];
+      $check_length = $this->config->get_cfg_value("pwminlen") != "";
+      $length       = $this->config->get_cfg_value("pwminlen", 0);
 
       /* Call external password quality hook ?*/
-      $check_hook   = isset($this->config->data['MAIN']['EXTERNALPWDHOOK']);
-      $hook         = @$this->config->data['MAIN']['EXTERNALPWDHOOK']." ".$ui->username." ".$_POST['current_password']." ".$_POST['new_password'];
+      $check_hook   = $this->config->get_cfg_value("externalpwdhook") != "";
+      $hook         = $this->config->get_cfg_value("externalpwdhook")." ".$ui->username." ".$_POST['current_password']." ".$_POST['new_password'];
       if($check_hook){
         exec($hook,$resarr);
         $check_hook_output = "";
@@ -100,8 +99,8 @@ class password extends plugin
             $ui->dn, 
             $_POST['current_password'],
             $this->config->current['SERVER'],
-            isset($this->config->current['RECURSIVE'])  && preg_match("/true/i",$this->config->current['RECURSIVE']),
-            isset($this->config->current['TLS'])        && preg_match("/true/i",$this->config->current['TLS']));
+            $this->config->get_cfg-value("recursive") == "true",
+            $this->config->get_cfg-value("tls") == "true");
 
         /* connection Successfull ? */
         if (!$tldap->success()){

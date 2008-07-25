@@ -953,7 +953,7 @@ class posixAccount extends plugin
 
       /* Create group if it doesn't exist */
       if ($ldap->count() == 0){
-        $groupdn= preg_replace ('/^'.$this->config->current['DNMODE'].'=[^,]+,'.get_people_ou().'/i', 'cn='.$this->uid.','.get_groups_ou(), $this->dn);
+        $groupdn= preg_replace ('/^'.$this->config->get_cfg_value("dnmode").'=[^,]+,'.get_people_ou().'/i', 'cn='.$this->uid.','.get_groups_ou(), $this->dn);
 
         $g= new group($this->config, $groupdn);
         $g->cn= $this->uid;
@@ -1028,15 +1028,15 @@ class posixAccount extends plugin
       if (!tests::is_id($this->uidNumber)){
         $message[]= msgPool::invalid(_("UID"), $this->uidNumber, "/[0-9]/");
       } else {
-        if ($this->uidNumber < $this->config->current['MINID']){
-          $message[]= msgPool::toosmall(_("UID"), $this->config->current['MINID']);
+        if ($this->uidNumber < $this->config->get_cfg_value("minid")){
+          $message[]= msgPool::toosmall(_("UID"), $this->config->get_cfg_value("minid"));
         }
       }
       if (!tests::is_id($this->gidNumber)){
         $message[]= msgPool::invalid(_("GID"), $this->gidNumber, "/[0-9]/");
       } else {
-        if ($this->gidNumber < $this->config->current['MINID']){
-          $message[]= msgPool::toosmall(_("GID"), $this->config->current['MINID']);
+        if ($this->gidNumber < $this->config->get_cfg_value("minid")){
+          $message[]= msgPool::toosmall(_("GID"), $this->config->get_cfg_value("minid"));
         }
       }
     }
@@ -1302,10 +1302,10 @@ class posixAccount extends plugin
 
     /* get the ranges */
     $tmp = array('0'=> 1000); 
-    if (preg_match('/posixAccount/', $oc) && isset($this->config->current['UIDBASE'])) {
-      $tmp= split('-',$this->config->current['UIDBASE']);
-    } elseif(isset($this->config->current['GIDBASE'])){
-      $tmp= split('-',$this->config->current['GIDBASE']);
+    if (preg_match('/posixAccount/', $oc) && $this->config->get_cfg_value("uidbase") != ""){
+      $tmp= split('-',$this->config->get_cfg_value("uidbase"));
+    } elseif($this->config->get_cfg_value("gidbase") != "")){
+      $tmp= split('-',$this->config->get_cfg_value("gidbase"));
     }
 
     /* Set hwm to max if not set - for backward compatibility */
@@ -1317,7 +1317,7 @@ class posixAccount extends plugin
     }
 
     /* Find out next free id near to UID_BASE */
-    if (!isset($this->config->current['BASE_HOOK'])){
+    if ($this->config->get_cfg_value("base_hook") == ""){
       $base= $lwm;
     } else {
       /* Call base hook */

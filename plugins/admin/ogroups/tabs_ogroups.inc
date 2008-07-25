@@ -123,12 +123,10 @@ class ogrouptabs extends tabs
     /* Add mail group tab , if there is curerntly no mail tab defined */ 
     if(class_available("mailogroup")){
       if((preg_match("/U/",$objects))&&(!isset($this->by_object['mailogroup']))){
-        if(isset($this->config->current['MAILMETHOD'])){
-          if (preg_match('/kolab/i', $this->config->current['MAILMETHOD'])){
-            $this->by_name['mailogroup']= _("Mail");
-            $this->by_object['mailogroup']= new mailogroup($this->config, $this->dn);
-            $this->by_object['mailogroup']->parent= &$this;
-          }
+        if ($this->config->get_cfg_value("mailmethod") == "kolab"){
+          $this->by_name['mailogroup']= _("Mail");
+          $this->by_object['mailogroup']= new mailogroup($this->config, $this->dn);
+          $this->by_object['mailogroup']->parent= &$this;
         }
       }
     }
@@ -303,12 +301,10 @@ class ogrouptabs extends tabs
  
           /* Add a user tab used for mail distribution lists */
           if(class_available("mailogroup")){
-            if(isset($this->config->current['MAILMETHOD'])){
-              if (preg_match('/kolab/i', $this->config->current['MAILMETHOD'])){
-                $this->by_name['mailogroup']= _("Mail");
-                $this->by_object['mailogroup']= new mailogroup($this->config, $this->dn);
-                $this->by_object['mailogroup']->parent= &$this;
-              }
+            if ($this->config->get_cfg_value("mailmethod") == "kolab"){
+              $this->by_name['mailogroup']= _("Mail");
+              $this->by_object['mailogroup']= new mailogroup($this->config, $this->dn);
+              $this->by_object['mailogroup']->parent= &$this;
             }
           }
 

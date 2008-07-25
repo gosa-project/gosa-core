@@ -132,7 +132,7 @@ class user extends plugin
   {
     $this->config= $config;
     /* Configuration is fine, allways */
-    if (isset($this->config->current['GOVERNMENTMODE']) && preg_match("/true/i",$this->config->current['GOVERNMENTMODE'])){
+    if($this->config->get_cfg_value("governmentmode") == "true"){
       $this->governmentmode = TRUE;
       $this->attributes=array_merge($this->attributes,$this->govattrs);
     }
@@ -166,11 +166,7 @@ class user extends plugin
     }
 
     /* Make hash default to md5 if not set in config */
-    if (!isset($this->config->current['HASH'])){
-      $hash= "md5";
-    } else {
-      $hash= $this->config->current['HASH'];
-    }
+    $hash= $this->config->get_cfg_value("hash", "crypt/md5");
 
     /* Load data from LDAP? */
     if ($dn !== NULL){
@@ -579,7 +575,7 @@ class user extends plugin
 
     /* Prepare password hashes */
     if ($this->pw_storage == ""){
-      $this->pw_storage= $this->config->current['HASH'];
+      $this->pw_storage= $this->config->get_cfg_value("hash");
     }
 
     $temp= passwordMethod::get_available_methods();
@@ -1074,11 +1070,11 @@ class user extends plugin
         die ("Could not connect to LDAP server");
       }
       ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
-      if (function_exists("ldap_set_rebind_proc") && isset($this->config->current['RECURSIVE']) && $this->config->current['RECURSIVE'] == "true") {
+      if (function_exists("ldap_set_rebind_proc") && $this->config->get_cfg_value("recursive") == "true") {
         ldap_set_option($this->cid, LDAP_OPT_REFERRALS, 1);
         ldap_set_rebind_proc($ds, array(&$this, "rebind"));
       }
-      if(isset($config->current['TLS']) && $config->current['TLS'] == "true"){
+      if($this->config->get_cfg_value("tls") == "true"){
         ldap_start_tls($ds);
       }
       if (!($res = @ldap_bind($ds, $this->config->current['ADMIN'],
@@ -1121,7 +1117,7 @@ class user extends plugin
   function update_new_dn()
   {
     $pt= "";
-    if(isset($this->config->current['INCLUDE_PERSONAL_TITLE']) && preg_match("/true/i",$this->config->current['INCLUDE_PERSONAL_TITLE'])){
+    if($this->config->get_cfg_value("include_personal_title") == "true"){
       if(!empty($this->personalTitle)){
         $pt = $this->personalTitle." ";
       }
@@ -1129,7 +1125,7 @@ class user extends plugin
     $this->cn= $pt.$this->givenName." ".$this->sn;
 
     /* Permissions for that base? */
-    if (isset($this->config->current['DNMODE']) && $this->config->current['DNMODE'] == "uid"){
+    if ($this->config->get_cfg_value("dnmode") == "uid"){
       $this->new_dn= 'uid='.$this->uid.','.get_people_ou().$this->base;
     } else {
       /* Don't touch dn, if cn hasn't changed */
@@ -1200,7 +1196,7 @@ class user extends plugin
       if ($this->uid == ""){
         $message[]= msgPool::required(_("Login"));
       }
-      if (!(isset($this->config->current['DNMODE']) && $this->config->current['DNMODE'] == "uid")){
+      if ($this->config->get_cfg_value("dnmode") != "uid"){
         $ldap->cat($this->new_dn);
         if ($ldap->count() != 0 && $this->dn != $this->new_dn && $this->dn == 'new'){
           $message[]= msgPool::duplicated(_("Name"));
@@ -1285,13 +1281,11 @@ class user extends plugin
   {
     $ds= ldap_connect($this->config->current['SERVER']);
     ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
-    if (function_exists("ldap_set_rebind_proc") && isset($this->config->current['RECURSIVE']) && $this->config->current['RECURSIVE'] == "true") {
+    if (function_exists("ldap_set_rebind_proc") && $this->config->get_cfg_value("recursive") == "true"){
       ldap_set_option($this->cid, LDAP_OPT_REFERRALS, 1);
       ldap_set_rebind_proc($ds, array(&$this, "rebind"));
     }
-    if(isset($this->config->current['TLS']) &&
-        $this->config->current['TLS'] == "true"){
-
+    if ($this->config->get_cfg_value("tls") == "true"){
       ldap_start_tls($ds);
     }
 
@@ -1544,7 +1538,7 @@ class user extends plugin
 
     /* Append government attributes if required */
       global $config;
-    if (isset($config->current['GOVERNMENTMODE']) &&  preg_match('/true/i', $config->current['GOVERNMENTMODE'])){
+    if($this->config->get_cfg_value("governmentmode") == "true"){
       foreach($govattrs as $attr => $desc){
         $ret["plProvidedAcls"][$attr] = $desc;
       }
