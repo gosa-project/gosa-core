@@ -16,7 +16,7 @@
 
 		<div class='setup_navigation'>
 			<div style='padding:4px'>
-				<img src='images/fai.png' class='center' alt='{t}Installation{/t}'>&nbsp;&nbsp;<font style="font-size:24px;">{t}Setup{/t}</font>
+				<img src='images/setup/fai.png' class='center' alt='{t}Installation{/t}'>&nbsp;&nbsp;<font style="font-size:24px;">{t}Setup{/t}</font>
 			</div>
 			{$navigation}		
 		</div>
