@@ -348,7 +348,9 @@ function ldap_init ($server, $base, $binddn='', $pass='')
 
   /* Sadly we've no proper return values here. Use the error message instead. */
   if (!$ldap->success()){
-    echo sprintf(_("FATAL: Error when connecting the LDAP. Server said '%s'."), $ldap->get_error());
+    msg_dialog::display(_("Fatal error"),
+        sprintf(_("FATAL: Error when connecting the LDAP. Server said '%s'."), $ldap->get_error()),
+        FATAL_ERROR_DIALOG);
     exit();
   }
 
@@ -374,10 +376,9 @@ function process_htaccess ($username, $kerberos= FALSE)
     /* Look for entry or realm */
     $ldap= $config->get_ldap_link();
     if (!$ldap->success()){
-      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), "", LDAP_AUTH, ERROR_DIALOG));
-      $smarty= get_smarty();
-      $smarty->display(get_template_path('headers.tpl'));
-      echo "<body>".session::get('errors')."</body></html>";
+      msg_dialog::display(_("LDAP error"), 
+          msgPool::ldaperror($ldap->get_error(), "", LDAP_AUTH)."<br><br>".session::get('errors'), 
+          FATAL_ERROR_DIALOG));
       exit();
     }
     $ldap->search("(&(objectClass=gosaAccount)(|(uid=$username)(userPassword={$mode}$username)))", array("uid"));
@@ -401,10 +402,9 @@ function ldap_login_user_htaccess ($username)
   /* Look for entry or realm */
   $ldap= $config->get_ldap_link();
   if (!$ldap->success()){
-    msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), "", LDAP_AUTH, FATAL_ERROR_DIALOG));
-    $smarty= get_smarty();
-    $smarty->display(get_template_path('headers.tpl'));
-    echo "<body>".session::get('errors')."</body></html>";
+    msg_dialog::display(_("LDAP error"), 
+        msgPool::ldaperror($ldap->get_error(), "", LDAP_AUTH)."<br><br>".session::get('errors'), 
+        FATAL_ERROR_DIALOG));
     exit();
   }
   $ldap->search("(&(objectClass=gosaAccount)(uid=$username))", array("uid"));
@@ -439,10 +439,9 @@ function ldap_login_user ($username, $password)
   /* look through the entire ldap */
   $ldap = $config->get_ldap_link();
   if (!$ldap->success()){
-    msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error()), FATAL_ERROR_DIALOG);
-    $smarty= get_smarty();
-    $smarty->display(get_template_path('headers.tpl'));
-    echo "<body>".session::get('errors')."</body></html>";
+    msg_dialog::display(_("LDAP error"), 
+        msgPool::ldaperror($ldap->get_error(), "", LDAP_AUTH)."<br><br>".session::get('errors'), 
+        FATAL_ERROR_DIALOG));
     exit();
   }
   $ldap->cd($config->current['BASE']);
