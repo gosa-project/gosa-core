@@ -378,7 +378,7 @@ function process_htaccess ($username, $kerberos= FALSE)
     if (!$ldap->success()){
       msg_dialog::display(_("LDAP error"), 
           msgPool::ldaperror($ldap->get_error(), "", LDAP_AUTH)."<br><br>".session::get('errors'), 
-          FATAL_ERROR_DIALOG));
+          FATAL_ERROR_DIALOG);
       exit();
     }
     $ldap->search("(&(objectClass=gosaAccount)(|(uid=$username)(userPassword={$mode}$username)))", array("uid"));
