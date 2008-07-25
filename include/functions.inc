@@ -2079,34 +2079,33 @@ function progressbar($percentage,$width=100,$height=15,$showvalue=false)
 
   $progress = (int)(($percentage /100)*$width);
 
-  /* Abort printing out percentage, if divs are to small */
-
-
   /* If theres a better solution for this, use it... */
-  $str = "
-    <div style=\" width:".($width)."px; 
-    height:".($height)."px;
-  background-color:#000000;
-padding:1px;\">
+  $str = "\n   <div style=\" width:".($width)."px; ";
+  $str.= "\n       height:".($height)."px; ";
+  $str.= "\n       background-color:#000000; ";
+  $str.= "\n       padding:1px;\" > ";
 
-          <div style=\" width:".($width)."px;
-        background-color:#$bgcolor;
-height:".($height)."px;\">
-
-         <div style=\" width:".$progress."px;
-height:".$height."px;
-       background-color:#".$color2.$color2.$color."; \">";
+  $str.= "\n     <div style=\" width:".($width)."px; ";
+  $str.= "\n         background-color:#$bgcolor; ";
+  $str.= "\n         height:".($height)."px;\" > ";
 
 
-       if(($height >10)&&($showvalue)){
-         $str.=                 "<font style=\"font-size:".($height-2)."px;color:#FF0000;align:middle;padding-left:".((int)(($width*0.4)))."px;\">
-           <b>".$percentage."%</b>
-           </font>";
-       }
+  if(($height >10)&&($showvalue)){
+    $str.= "\n   <font style=\"font-size:".($height-2)."px; ";
+    $str.= "\n     color:#FF0000; align:middle; ";
+    $str.= "\n     padding-left:".((int)(($width*0.4)))."px; \"> ";
+    $str.= "\n     <b>".$percentage."%</b> ";
+    $str.= "\n   </font> ";
+  }
 
-       $str.= "</div></div></div>";
+  $str.= "\n       <div style=\" width:".$progress."px; ";
+  $str.= "\n         height:".$height."px; ";
+  $str.= "\n         background-color:#".$color2.$color2.$color."; \" >";
+  $str.= "\n       </div>";
+  $str.= "\n     </div>";
+  $str.= "\n   </div>";
 
-       return($str);
+  return($str);
 }
 
 
