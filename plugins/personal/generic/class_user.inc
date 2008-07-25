@@ -1537,8 +1537,8 @@ class user extends plugin
         );
 
     /* Append government attributes if required */
-      global $config;
-    if($this->config->get_cfg_value("governmentmode") == "true"){
+    global $config;
+    if($config->get_cfg_value("governmentmode") == "true"){
       foreach($govattrs as $attr => $desc){
         $ret["plProvidedAcls"][$attr] = $desc;
       }
