@@ -47,7 +47,7 @@ class pluglist {
 				foreach ($classes as $cname){
 					$cmethods = get_class_methods($cname);
 					if (in_array_ics('plInfo',$cmethods)){
-						$this->info[$cname]= @call_user_func(array($cname, 'plInfo'));
+						$this->info[$cname]= call_user_func(array($cname, 'plInfo'));
 					}
 				}
 
