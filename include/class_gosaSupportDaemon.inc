@@ -46,6 +46,11 @@ class gosaSupportDaemon
     #FIXME: bad idea about referencing global variables from within classes
     global $config;
 
+    /* This should only be the case if we call this from setup.
+        __autoload() 
+     */
+    if(!is_object($config)) { return; }
+
     # load from config, store statically
     if ($config->get_cfg_value("gosa_si") != ""){
 
