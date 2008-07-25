@@ -180,7 +180,7 @@ class plugin
       /* Set the template flag according to the existence of objectClass
          gosaUserTemplate */
       if (isset($this->attrs['objectClass'])){
-        if (in_array ("gosaUserTemplate", $this->attrs['objectClass'])){
+        if (in_array_ics ("gosaUserTemplate", $this->attrs['objectClass'])){
           $this->is_template= TRUE;
           @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,
               "found", "Template check");
@@ -273,7 +273,7 @@ class plugin
     /* Remove objectClasses from entry */
     $ldap->cd($this->dn);
     $this->attrs= array();
-    $this->attrs['objectClass']= array_remove_entries($this->objectclasses,$oc);
+    $this->attrs['objectClass']= array_remove_entries_ics($this->objectclasses,$oc);
 
     /* Unset attributes from entry */
     foreach ($this->attributes as $val){

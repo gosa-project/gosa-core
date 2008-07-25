@@ -231,7 +231,11 @@ function get_template_path($filename= '', $plugin= FALSE, $path= "")
   global $config, $BASE_DIR;
 
   /* Set theme */
-  $theme= $config->get_cfg_value("theme", "default");
+  if (isset ($config)){
+	$theme= $config->get_cfg_value("theme", "default");
+  } else {
+  	$theme= "default";
+  }
 
   /* Return path for empty filename */
   if ($filename == ''){
@@ -281,6 +285,21 @@ function array_remove_entries($needles, $haystack)
   /* Loop through entries to be removed */
   foreach ($haystack as $entry){
     if (!in_array($entry, $needles)){
+      $tmp[]= $entry;
+    }
+  }
+
+  return ($tmp);
+}
+
+
+function array_remove_entries_ics($needles, $haystack)
+{
+  $tmp= array();
+
+  /* Loop through entries to be removed */
+  foreach ($haystack as $entry){
+    if (!in_array_ics($entry, $needles)){
       $tmp[]= $entry;
     }
   }
@@ -2652,7 +2671,7 @@ function remove_objectClass($classes, &$attrs)
     $tmp= array();
     foreach ($attrs['objectClass'] as $oc) {
       foreach ($list as $class){
-        if ($oc != $class){
+        if (strtolower($oc) != strtolower($class)){
           $tmp[]= $oc;
         }
       }
