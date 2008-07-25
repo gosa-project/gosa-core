@@ -1150,6 +1150,8 @@ function get_ou($name)
 {
   global $config;
 
+  $name= strtolower($name);
+
   $map = array( 
                 "ogroupou"      => "ou=groups,",
                 "applicationou" => "ou=apps,",
@@ -1181,7 +1183,7 @@ function get_ou($name)
                 "mimetypeou"    => "ou=mime,");
 
   /* Preset ou... */
-  if ($config->get_cfg_value($name) != ""){
+  if ($config->get_cfg_value($name, "_not_set_") != "_not_set_"){
     $ou= $config->get_cfg_value($name);
   } elseif (isset($map[$name])) {
     $ou = $map[$name];
