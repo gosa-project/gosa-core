@@ -1304,7 +1304,7 @@ class posixAccount extends plugin
     $tmp = array('0'=> 1000); 
     if (preg_match('/posixAccount/', $oc) && $this->config->get_cfg_value("uidbase") != ""){
       $tmp= split('-',$this->config->get_cfg_value("uidbase"));
-    } elseif($this->config->get_cfg_value("gidbase") != "")){
+    } elseif($this->config->get_cfg_value("gidbase") != ""){
       $tmp= split('-',$this->config->get_cfg_value("gidbase"));
     }
 
