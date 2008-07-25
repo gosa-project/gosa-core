@@ -404,7 +404,7 @@ function ldap_login_user_htaccess ($username)
   if (!$ldap->success()){
     msg_dialog::display(_("LDAP error"), 
         msgPool::ldaperror($ldap->get_error(), "", LDAP_AUTH)."<br><br>".session::get('errors'), 
-        FATAL_ERROR_DIALOG));
+        FATAL_ERROR_DIALOG);
     exit();
   }
   $ldap->search("(&(objectClass=gosaAccount)(uid=$username))", array("uid"));
@@ -441,7 +441,7 @@ function ldap_login_user ($username, $password)
   if (!$ldap->success()){
     msg_dialog::display(_("LDAP error"), 
         msgPool::ldaperror($ldap->get_error(), "", LDAP_AUTH)."<br><br>".session::get('errors'), 
-        FATAL_ERROR_DIALOG));
+        FATAL_ERROR_DIALOG);
     exit();
   }
   $ldap->cd($config->current['BASE']);
