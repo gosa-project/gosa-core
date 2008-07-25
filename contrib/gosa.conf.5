@@ -404,6 +404,15 @@ The
 variable defines where to store PPD files for the GOto environment plugins.
 .PP
 
+.B resolutions
+.I path
+.PP
+The
+.I pppd_pathpd_path
+variable defines a plain text file which contains additional resolutions
+to be shown in the environment and system plugins.
+.PP
+
 .B htaccess_auth
 .I bool
 .PP
@@ -958,6 +967,23 @@ setup this can drastically improve the windows login performance.
 .PP
 .PP
 
+.B Asterisk options
+.PP
+.B ctihook
+.I path
+.PP
+The
+.I ctihook
+statement defines a script to be executed if someone clicks on a phone number
+inside of the addressbook plugin. It gets called with two parameters:
+
+.nf
+ctihook $source_number $destination_number
+.fi
+
+This script can be used to do automatted dialing from the addressbook.
+.PP
+.PP
 
 .B Mail options
 .PP
@@ -985,6 +1011,22 @@ The
 .I cyrusunixstyle
 statement determines if GOsa should use "foo/bar" or "foo.bar" namespaces
 in IMAP. Unix style is with slashes.
+
+.B additionalrestrictionfilters
+.I path
+.PP
+The
+.I additionalrestrictionfilters
+statement defines a file to include for the postfix module in order
+to display user defined restriction filters.
+
+.B additionalprotocols
+.I path
+.PP
+The
+.I additionalprotocols
+statement defines a file to include for the postfix module in order
+to display user defined protocols.
 
 .B mail_attrib
 .I mail/uid
