@@ -277,61 +277,61 @@ attributetype ( 1.3.6.1.4.1.19414.2.1.651
 	SUBSTR caseIgnoreIA5SubstringsMatch
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{256} )
 
-# Objectclasses
+# Classes
 objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.1 NAME 'gosaObject' SUP top AUXILIARY
-        DESC 'Objectclass for GOsa settings (v2.4)'
+        DESC 'Class for GOsa settings (v2.4)'
         MUST ( gosaSubtreeACL ))
 
 objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.2 NAME 'gosaLockEntry' SUP top STRUCTURAL
-        DESC 'Objectclass for GOsa locking (v2.4)'
+        DESC 'Class for GOsa locking (v2.4)'
         MUST ( gosaUser $ gosaObject $ cn ))
 
 objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.3 NAME 'gosaCacheEntry' SUP top STRUCTURAL
-        DESC 'Objectclass for GOsa caching (v2.4)'
+        DESC 'Class for GOsa caching (v2.4)'
 	MAY  ( gosaUser )
 	MUST ( cn ))
 
 objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.4 NAME 'gosaDepartment' SUP top AUXILIARY
-        DESC 'Objectclass to mark Departments for GOsa (v2.4)'
+        DESC 'Class to mark Departments for GOsa (v2.4)'
 	MUST  ( ou $ description ))
 
 objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.5 NAME 'gosaMailAccount' SUP top AUXILIARY
-        DESC 'Objectclass to mark MailAccounts for GOsa (v2.4)'
+        DESC 'Class to mark MailAccounts for GOsa (v2.4)'
 	MUST ( mail $ gosaMailServer $ gosaMailDeliveryMode)
 	MAY  ( gosaMailQuota $ gosaMailAlternateAddress $ gosaMailForwardingAddress $
 	       gosaMailMaxSize $ gosaSpamSortLevel $ gosaSpamMailbox $
 	       gosaVacationMessage $ gosaVacationStart $ gosaVacationStop $ gosaSharedFolderTarget $ acl))
 
 objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.6 NAME 'gosaAccount' SUP top AUXILIARY
-        DESC 'Objectclass for GOsa Accounts (v2.4)'
+        DESC 'Class for GOsa Accounts (v2.4)'
 	MUST ( uid )
         MAY ( lmPassword $ ntPassword $ pwdLastSet $ gosaDefaultPrinter $ gosaDefaultLanguage $
               academicTitle $ personalTitle $ gosaHostACL $ dateOfBirth $ gender ))
 
 objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.7 NAME 'gosaHost' SUP top AUXILIARY
-        DESC 'Objectclass for GOsa Hosts (v2.4)'
+        DESC 'Class for GOsa Hosts (v2.4)'
         MUST ( cn )
         MAY ( description $ gosaService ))
 
 objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.8 NAME 'gosaProxyAccount' SUP top AUXILIARY
-        DESC 'Objectclass for GOsa Proxy settings (v2.4)'
+        DESC 'Class for GOsa Proxy settings (v2.4)'
         MUST ( gosaProxyAcctFlags )
         MAY ( gosaProxyID $ gosaProxyWorkingStart $ gosaProxyWorkingStop $ gosaProxyQuota $
               gosaProxyQuotaPeriod ))
 
 objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.9 NAME 'gosaApplication' SUP top STRUCTURAL
-        DESC 'Objectclass for GOsa applications (v2.4)'
+        DESC 'Class for GOsa applications (v2.4)'
         MUST ( cn $ gosaApplicationExecute )
         MAY ( gosaApplicationName $ gosaApplicationIcon $ gosaApplicationFlags $ gosaApplicationMimeType $
               gosaApplicationParameter $ gotoLogonScript $ description $ gosaApplicationCategory ))
 
 objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.10 NAME 'gosaApplicationGroup' SUP top AUXILIARY
-        DESC 'Objectclass for GOsa application groups (v2.4)'
+        DESC 'Class for GOsa application groups (v2.4)'
         MUST ( cn )
         MAY ( gosaMemberApplication $ gosaApplicationParameter ))
 
 objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.11 NAME 'gosaUserTemplate' SUP top AUXILIARY
-        DESC 'Objectclass for GOsa User Templates (v2.4)'
+        DESC 'Class for GOsa User Templates (v2.4)'
         MUST ( cn ))
 
 objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.12 NAME 'gosaGroupOfNames'
