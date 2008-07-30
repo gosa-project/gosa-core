@@ -305,8 +305,8 @@ class userManagement extends plugin
           if(!change_password ($this->dn, $_POST['new_password'])){
             return($smarty->fetch(get_template_path('password.tpl', TRUE)));
           }
-          if ($config->get-cfg_value("externalpwdhook") != ""){
-            exec($config->get-cfg_value("externalpwdhook")." ".$username." ".$_POST['new_password'], $resarr);
+          if ($config->get_cfg_value("externalpwdhook") != ""){
+            exec($config->get_cfg_value("externalpwdhook")." ".$username." ".$_POST['new_password'], $resarr);
           }
           new log("modify","users/".get_class($this),$this->dn,array(),"Password has been changed");
         }
