@@ -1250,7 +1250,10 @@ function strict_uid_mode()
 {
   global $config;
 
-  return ($config->get_cfg_value("strict") == "true");
+  if (isset($config)){
+    return ($config->get_cfg_value("strict") == "true");
+  }
+  return (TRUE);
 }
 
 
