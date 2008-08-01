@@ -39,6 +39,7 @@ load_dsc() {
     PL_DESCRIPTION=$(sed -n 's/"//g;s/^description\s*=\s*\(.*\)$/\1/p' "$1")
     PL_AUTHOR=$(sed -n 's/"//g;s/^author\s*=\s*\([^<]*\).*$/\1/p' "$1")
     PL_MAIL=$(sed -n 's/"//g;s/^author\s*=[^<].*<\([^>]*\).*$/\1/p' "$1")
+    PL_HOMEPAGE=$(sed -n 's/"//g;s/^homepage\s*=\s*\(.*\)$/\1/p' "$1")
   else
     echo "Error: cannot find description file" >&2
     exit 1
@@ -154,6 +155,7 @@ echo "Depends:      $PL_DEPENDS"
 echo "Conflicts:    $PL_CONFLICTS"
 echo "Author name:  $PL_AUTHOR"
 echo "Author email: $PL_MAIL"
+echo "Homepage:     $PL_HOMEPAGE"
 echo
 read -s -n 1 -p "Do you want to continue? (y/n)" ans; echo
 [ "$ans" != "y" ] && exit 0
@@ -206,6 +208,8 @@ sed -i '/^Upstream/,/^$/d' debian/copyright
 # Adapt control
 sed -i "s#^Section: unknown#Section: $SECTION#g" debian/control
 sed -i 's/^Architecture: any/Architecture: all/g' debian/control
+sed -i "s#^Homepage: <insert the upstream URL, if relevant>#Homepage: $PL_HOMEPAGE#g" debian/control
+
 if [ "$PL_DEPENDS" ]; then
 	sed -i "s/^Depends: .*$/Depends: gosa, $PL_DEPENDS/g" debian/control
 else
