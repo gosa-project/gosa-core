@@ -1,8 +1,0 @@
-Tag: extra-license-file
-Data: /usr/share/gosa/setup/class_setupStep_License.inc
-
-Tag: extra-license-file
-Data: /usr/share/gosa/setup/license.txt
-
-Tag: extra-license-file
-Data: /usr/share/gosa/setup/setup_license.tpl
