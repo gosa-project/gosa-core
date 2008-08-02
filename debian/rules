@@ -80,6 +80,7 @@ install-stamp:
 	-rm -rf debian/gosa/usr/share/gosa/doc/guide/devel
 	-for lang in en de fr nl; do mkdir -p debian/gosa-help-$$lang/usr/share/gosa/doc/guide/user/$$lang; done
 	-for lang in en de fr nl; do mv debian/gosa/usr/share/gosa/doc/guide/user/$$lang/* debian/gosa-help-$$lang/usr/share/gosa/doc/guide/user/$$lang/; done
+	-rm -rf debian/gosa/usr/share/gosa/doc/guide/
 	-cp -R debian/gosa/usr/share/gosa/doc/* debian/gosa/usr/share/doc/gosa
 	-cp -R contrib/scripts/desktoprc debian/gosa-desktop/etc/gosa/desktoprc
 	-cp -R contrib/scripts/start-gosa.sh debian/gosa-desktop/usr/bin/gosa
