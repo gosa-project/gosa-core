@@ -1,0 +1,22 @@
+
+=head1 NAME
+
+update-locale - update localization files
+
+=head1 SYNOPSIS
+
+update-locale [-h] [-g] [-y]
+
+=head1 DESCRIPTION
+
+update-locale is a script that update/generate the .po files for GOsa
+
+=over 3
+
+=item B<-g>        extract strings from GOsa and generate po files
+
+=item B<-y>        assume yes
+
+=item B<-h>        help
+
+=back

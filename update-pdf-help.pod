@@ -1,0 +1,14 @@
+
+=head1 NAME
+
+update-pdf-help - Create pdf documentation from online documentation
+
+=head1 SYNOPSIS
+
+update-pdf-help
+
+=head1 DESCRIPTION
+
+update-pdf-help is a script that create pdf docomentation for offline 
+reading from online documentation.
+
