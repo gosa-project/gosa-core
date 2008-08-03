@@ -30,7 +30,6 @@ Description: GOsa development utiles
 Package: gosa-desktop
 Architecture: all
 Depends: konqueror | iceweasel | mozilla | firefox, debconf, po-debconf
-Suggests: xbase-clients
 Description: Desktop integration for GOsa
  This package includes a menu definition for your desktop
  environment.
