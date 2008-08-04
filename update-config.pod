@@ -1,0 +1,32 @@
+
+=head1 NAME
+
+update-config - Update your gosa.conf 
+
+=head1 SYNOPSIS
+
+update-config
+
+=head1 DESCRIPTION
+
+This script will take your current $CONF and will update the menu and tab tags. It
+will not touch the parts you have touched between the main tabs.  A backup copy is
+created.
+
+=head1 BUGS
+
+Please report any bugs, or post any suggestions, to the GOsa mailing list <gosa-devel@oss.gonicus.de> or to <https://oss.gonicus.de/labs/gosa>
+
+
+=head1 LICENCE AND COPYRIGHT
+
+This code is part of GOsa (L<http://www.gosa-project.org>)
+
+Copyright (C) 2003-2008 GONICUS GmbH
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+=cut

@@ -1,0 +1,5 @@
+debian/mkntpasswd.1
+debian/gosa-encrypt-passwords.1
+update-locale.1
+update-pdf-help.1
+update-online-help.1
