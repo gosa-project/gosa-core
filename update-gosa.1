@@ -131,21 +131,33 @@
 .rm #[ #] #H #V #F C
 .\" ========================================================================
 .\"
-.IX Title "UPDATE-PDF-HELP 1"
-.TH UPDATE-PDF-HELP 1 "2008-08-04" "perl v5.10.0" "GOsa 2.6"
+.IX Title "UPDATE-GOSA 1"
+.TH UPDATE-GOSA 1 "2008-08-04" "perl v5.10.0" "GOsa 2.6"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
 .nh
 .SH "NAME"
-update\-pdf\-help \- Create pdf documentation from online documentation
+update\-gosa \- class cache updater and plugin manager for GOsa
 .SH "SYNOPSIS"
 .IX Header "SYNOPSIS"
-update-pdf-help
+update-gosa [\s-1OPTION\s0]
 .SH "DESCRIPTION"
 .IX Header "DESCRIPTION"
-update-pdf-help is a script that create pdf docomentation for offline 
-reading from online documentation.
+update-gosa is a script that help you to manage your gosa instance
+.IP "\fBinstall dsc\fR       Install the plugin using the dsc information placed in the plugin source directory." 5
+.IX Item "install dsc       Install the plugin using the dsc information placed in the plugin source directory."
+.PD 0
+.ie n .IP "\fBremove plugin\fR     Remove the plugin named ""plugin"" from the current configuration." 5
+.el .IP "\fBremove plugin\fR     Remove the plugin named ``plugin'' from the current configuration." 5
+.IX Item "remove plugin     Remove the plugin named plugin from the current configuration."
+.IP "\fBlist\fR              Lists installed plugins" 5
+.IX Item "list              Lists installed plugins"
+.IP "\fBrescan\-i18n\fR       Rebuilds the translations" 5
+.IX Item "rescan-i18n       Rebuilds the translations"
+.IP "\fBrescan-classes\fR    Rebuilds the class list" 5
+.IX Item "rescan-classes    Rebuilds the class list"
+.PD
 .SH "BUGS"
 .IX Header "BUGS"
 Please report any bugs, or post any suggestions, to the GOsa mailing list <gosa\-devel@oss.gonicus.de> or to <https://oss.gonicus.de/labs/gosa>

@@ -1,16 +1,29 @@
 
 =head1 NAME
 
-update-pdf-help - Create pdf documentation from online documentation
+update-gosa - class cache updater and plugin manager for GOsa
 
 =head1 SYNOPSIS
 
-update-pdf-help
+update-gosa [OPTION] 
 
 =head1 DESCRIPTION
 
-update-pdf-help is a script that create pdf docomentation for offline 
-reading from online documentation.
+update-gosa is a script that help you to manage your gosa instance
+
+=over 5
+
+=item B<install dsc>       Install the plugin using the dsc information placed in the plugin source directory.
+
+=item B<remove plugin>     Remove the plugin named "plugin" from the current configuration.
+
+=item B<list>              Lists installed plugins
+
+=item B<rescan-i18n>       Rebuilds the translations
+
+=item B<rescan-classes>    Rebuilds the class list
+
+=back
 
 =head1 BUGS
 
