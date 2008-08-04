@@ -69,7 +69,6 @@ install-stamp:
 	-cp -R plugins/personal/mail/sieve-*.txt debian/gosa/etc/gosa
 	-cp contrib/shells debian/gosa/etc/gosa
 	-rm debian/gosa/usr/share/gosa/bin/gosa
-	-mkdir -p debian/gosa/usr/lib/gosa
 	-mv debian/gosa/usr/share/gosa/bin/* debian/gosa/usr/bin
 	-rm -rf debian/gosa/usr/share/gosa/bin
 	-rm -rf debian/gosa/usr/share/doc/gosa/marketing
