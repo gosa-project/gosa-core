@@ -59,7 +59,10 @@ binary-common:
 	dh_installdebconf	
 	dh_installman
 	dh_strip
-	dh_compress -Xgosa.conf
+	dh_compress
+	# This is an ugly workaround to preserve gosa.conf from beeing compressed. Excluding it
+	# above does not work, because the manual page will match the expression, too.
+	gzip -d debian/gosa/usr/share/doc/gosa/gosa.conf.gz
 	dh_fixperms
 	dh_installdeb
 	dh_gencontrol
