@@ -1030,8 +1030,9 @@ class user extends plugin
     /* Finally write data with selected 'mode' */
     $this->cleanup();
 
-    if(isset($this->attrs['preferredLanguage'])){
-      $ui = session::get('ui');
+    /* Update current locale settings, if we have edited ourselves */
+    $ui = session::get('ui');
+    if(isset($this->attrs['preferredLanguage']) && $this->dn == $ui->dn){
       $ui->language = $this->preferredLanguage;
       session::set('ui',$ui);
       session::set('Last_init_lang',"update");
