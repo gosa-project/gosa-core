@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-08-09 12:51+0200\n"
-"PO-Revision-Date: 2008-08-09 13:16+0200\n"
+"PO-Revision-Date: 2008-08-12 12:27+0200\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team: french <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -3850,7 +3850,7 @@ msgstr "Journaux systèmes stockés dans un base de données MySQL"
 #: include/class_log.inc:218
 #, php-format
 msgid "Cannot add location to the database!"
-msgstr ""
+msgstr "Impossible d'ajouter un emplacement à la base de données !"
 
 #: include/class_MultiSelectWindow.inc:250
 #: include/class_baseSelectDialog.inc:47
