@@ -276,7 +276,7 @@ $smarty->assign ('uid', $uid);
 $smarty->assign ('password_img', get_template_path('images/password.png'));
 
 /* Displasy SSL mode warning? */
-if ($ssl != "" && $conifg->get_cfg_value("warnssl") == 'true'){
+if ($ssl != "" && $config->get_cfg_value("warnssl") == 'true'){
   $smarty->assign ("ssl", "<b>"._("Warning").":</b> "._("Session will not be encrypted.")." <a style=\"color:red;\" href=\"".htmlentities($ssl)."\"><b>"._("Enter SSL session")."</b></a>!");
 } else {
   $smarty->assign ("ssl", "");
