@@ -16,6 +16,7 @@
   <meta http-equiv="Cache-Control" content="post-check=0, pre-check=0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+  <style type="text/css">@import url('themes/default/style.css');</style>
   <style type="text/css">@import url('themes/default/password-style.css');</style>
   <link rel="shortcut icon" href="favicon.ico">
 
@@ -118,12 +119,15 @@
 
 {/if}
 
+{$msg_dialogs}
+
 <table class='iesucks'><tr><td>{$errors}</td></tr></table>
 
 <!-- Place cursor in username field -->
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
   focus_field('error_accept','uid','directory', 'username', 'current_password');
+  next_msg_dialog();
   -->
 </script>
 

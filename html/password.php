@@ -294,6 +294,7 @@ if ($error_collector != ""){
   $smarty->assign("php_errors", "");
 }
 
+$smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
 displayPWchanger();
 
 ?>
