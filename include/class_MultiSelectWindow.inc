@@ -643,6 +643,9 @@ class MultiSelectWindow{
 				}
 			}
 		}
+
+    /* Save currenlty selected base in session */
+    session::set("CurrentMainBase",$this->selectedBase);
 	}
 
 
