@@ -593,7 +593,7 @@ class group extends plugin
         $smarty->assign("use_".$val,FALSE);
       }
     }
-    foreach(array("base","smbgroup","groupType","sambaDomainName","fon_group") as $val){
+    foreach(array("base","smbgroup","groupType","sambaDomainName","fon_group","nagios_group","trustmode") as $val){
       if(in_array($val,$this->multi_boxes)){
         $smarty->assign("use_".$val,TRUE);
       }else{
@@ -1287,7 +1287,7 @@ class group extends plugin
       plugin::save_object();
       $this->base = $base_tmp;
 
-      foreach(array("base","smbgroup","groupType","sambaDomainName","fon_group") as $attr){
+      foreach(array("base","smbgroup","groupType","sambaDomainName","fon_group","nagios_group","trustmode") as $attr){
         if(isset($_POST['use_'.$attr])){
           $this->multi_boxes[] = $attr;
         }
@@ -1301,7 +1301,7 @@ class group extends plugin
         }
       }
 
-      foreach (array( "smbgroup"   => "sambaGroupType") as $val => $aclname) {
+      foreach (array( "smbgroup"   => "sambaGroupType" ,"nagios_group" => "nagios_group") as $val => $aclname) {
         if ($this->acl_is_writeable($aclname)){
           if(isset($_POST["$val"])){
             $this->$val=  TRUE;
@@ -1315,6 +1315,23 @@ class group extends plugin
       if ($this->acl_is_writeable("sambaDomainName") && $this->samba3 && isset ($_POST['sambaDomainName'])){
         $this->sambaDomainName= $_POST['sambaDomainName'];
         $this->groupType= $_POST['groupType'];
+      }
+
+      /* Trust mode - special handling */
+      if($this->acl_is_writeable("trustModel")){
+        if (isset($_POST['trustmode'])){
+          $saved= $this->trustModel;
+          if ($_POST['trustmode'] == "1"){
+            $this->trustModel= "fullaccess";
+          } elseif ($_POST['trustmode'] == "2"){
+            $this->trustModel= "byhost";
+          } else {
+            $this->trustModel= "";
+          }
+          if ($this->trustModel != $saved){
+            $this->is_modified= TRUE;
+          }
+        }
       }
 
       /* Save fon attribute */
@@ -1333,11 +1350,17 @@ class group extends plugin
   {
     $ret = plugin::get_multi_edit_values();
 
-    foreach(array("base","smbgroup","groupType","sambaDomainName","fon_group") as $attr){    
+    foreach(array("base","smbgroup","groupType","sambaDomainName","fon_group","nagios_group") as $attr){    
       if(in_array($attr,$this->multi_boxes)){
         $ret[$attr] = $this->$attr;
       }
     }
+
+    if(in_array("trustmode",$this->multi_boxes)){
+      $ret['trustModel'] = $this->trustModel;
+      $ret['accessTo'] = $this->accessTo;
+    }
+
     $ret['memberUid'] = $this->memberUid;
     $ret['memberUid_used_by_some'] = $this->memberUid_used_by_some;
     return($ret);

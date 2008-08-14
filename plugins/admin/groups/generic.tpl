@@ -151,8 +151,8 @@
     </tr>
     <tr>
      <td colspan=2>
-{render acl=$nagiosGroupACL}
-      <input type=checkbox name="nagios_group" value="1" {$nagios_group}>{t}Members are in a nagios group{/t}
+{render acl=$nagiosGroupACL checkbox=$multiple_support checked=$use_nagios_group}
+      <input class="center" type=checkbox name="nagios_group" value="1" {$nagios_group}>{t}Members are in a nagios group{/t}
 {/render}
      </td>
     </tr>
@@ -163,6 +163,7 @@
     <tr>
       <td colspan=2> <div style="height:15px; width:100%;"></div> </td>
     </tr>
+{if !$multiple_support}
 	<tr>
 	 <td colspan="2">
 		    {t}Trust mode{/t}&nbsp;
@@ -192,6 +193,43 @@
 
 	 </td>
 	</tr>
+
+{else}
+
+	<tr>
+	 <td colspan="2">
+    <input type="checkbox" name="use_trustmode" {if $use_trustmode} checked {/if}
+        class="center" onClick="toggle('div_trustmode');">
+		    {t}Trust mode{/t}&nbsp;
+	<div {if !$use_trustmode} style="visibility:hidden;" {/if} id="div_trustmode">
+    {render acl=$trustmodeACL}
+        <select name="trustmode" id="trustmode" size=1
+            onChange="changeSelectState('trustmode', 'wslist');
+                      changeSelectState('trustmode', 'add_ws');
+                      changeSelectState('trustmode', 'del_ws');">
+          {html_options options=$trustmodes selected=$trustmode}
+        </select>
+    {/render}
+    {render acl=$trustmodeACL}
+       <select style="width:100%" id="wslist" name="workstation_list[]" size=8 multiple {$trusthide}>
+        {html_options values=$workstations output=$workstations}
+        {if $emptyArrAccess}
+            <option disabled>&nbsp;</option>
+        {/if}
+       </select>
+    {/render}
+       <br>
+    {render acl=$trustmodeACL}
+       <input type="submit" id="add_ws" value="{msgPool type=addButton}" name="add_ws" {$trusthide}>&nbsp;
+    {/render}
+    {render acl=$trustmodeACL}
+       <input type="submit" id="del_ws" value="{msgPool type=delButton}" name="delete_ws" {$trusthide}>
+    {/render}
+		</div>
+	 </td>
+	</tr>
+
+{/if}
    </table>
 
   </td>
