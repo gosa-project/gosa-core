@@ -636,8 +636,11 @@ class plugin
       if (check_command($command)){
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
             $command, "Execute");
-
-        exec($command);
+        exec($command,&$arr);
+        foreach($arr as $str){
+          @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
+            $command, "Result: ".$str);
+        }
       } else {
         $message= msgPool::cmdnotfound("POSTCREATE", get_class($this));
         msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
@@ -674,7 +677,11 @@ class plugin
 
       if (check_command($command)){
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,$command, "Execute");
-        exec($command);
+        exec($command,&$arr);
+        foreach($arr as $str){
+          @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
+            $command, "Result: ".$str);
+        }
       } else {
         $message= msgPool::cmdnotfound("POSTMODIFY", get_class($this));
         msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
@@ -712,7 +719,11 @@ class plugin
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
             $command, "Execute");
 
-        exec($command);
+        exec($command,&$arr);
+        foreach($arr as $str){
+          @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
+            $command, "Result: ".$str);
+        }
       } else {
         $message= msgPool::cmdnotfound("POSTREMOVE", get_class($this));
         msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
