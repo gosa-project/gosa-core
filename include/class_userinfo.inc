@@ -84,8 +84,8 @@ class userinfo
     }
 
     while($attrs = $ldap->fetch()){
-      $base= preg_replace('/^[^,]+,ou=[^,]+,/i', "",$ldap->getDN());
-      $base= preg_replace("/[ ]*,[ ]*/", ",", $base);
+      $base= preg_replace('/^[^,]*+,'.normalizePreg(get_groups_ou()).'/i', "",$ldap->getDN());
+      $base= preg_replace("/\s*,\s*/", ",", $base);
 
       for ($i= 0; $i<$attrs["gosaSubtreeACL"]["count"]; $i++){
         $this->subtreeACL[$base][]= $attrs["gosaSubtreeACL"][$i];
