@@ -636,7 +636,7 @@ class plugin
       if (check_command($command)){
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
             $command, "Execute");
-        exec($command,&$arr);
+        exec($command,$arr);
         foreach($arr as $str){
           @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
             $command, "Result: ".$str);
@@ -677,7 +677,7 @@ class plugin
 
       if (check_command($command)){
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,$command, "Execute");
-        exec($command,&$arr);
+        exec($command,$arr);
         foreach($arr as $str){
           @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
             $command, "Result: ".$str);
@@ -719,7 +719,7 @@ class plugin
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
             $command, "Execute");
 
-        exec($command,&$arr);
+        exec($command,$arr);
         foreach($arr as $str){
           @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
             $command, "Result: ".$str);
