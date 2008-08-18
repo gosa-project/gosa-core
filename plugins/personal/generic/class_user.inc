@@ -16,6 +16,12 @@ class user extends plugin
   var $plHeadline= "Generic";
   var $plDescription= "This does something";
 
+  /* The attribute gosaLastSystemLogin represents the timestamp of the last 
+      successfull login on the users workstation. 
+     Read the FAQ to get a hint about how to configure this.
+   */
+  var $gosaLastSystemLogin = "";
+
   /* Plugin specific values */
   var $base= "";
   var $orig_base= "";
@@ -110,6 +116,13 @@ class user extends plugin
 
     /* Load base attributes */
     plugin::plugin ($config, $dn);
+
+    /*  If gosaLastSystemLogin is available read it from ldap and create a readable 
+         date time string.
+     */
+    if(isset($this->attrs['gosaLastSystemLogin'][0]) && preg_match("/^[0-9]*$/",$this->attrs['gosaLastSystemLogin'][0])){
+      $this->gosaLastSystemLogin = date("d.m.Y H:i:s", $this->attrs['gosaLastSystemLogin'][0]);
+    }
 
     $this->new_dn = $dn;
 
@@ -213,6 +226,7 @@ class user extends plugin
     plugin::execute();
 
     $smarty= get_smarty();
+    $smarty->assign("gosaLastSystemLogin",$this->gosaLastSystemLogin);
 
     /* Fill calendar */
     if ($this->dateOfBirth == "0"){

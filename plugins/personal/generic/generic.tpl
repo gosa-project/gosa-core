@@ -186,6 +186,12 @@
     </tr>
     {/if}
 
+	{if $gosaLastSystemLogin}
+		<tr>
+			<td>{t}Last logon{/t}</td>
+			<td>{$gosaLastSystemLogin}</td>
+		</tr>		
+	{/if}
    </table>
   </td>
  </tr>
