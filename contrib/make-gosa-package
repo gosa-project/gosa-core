@@ -38,6 +38,7 @@ usage() {
 	  -c|--changelog   Debian changelog entry [$RELEASE_REASON]
 	  -s|--section     Debian section to place GOsa in [$SECTION]
 	  -i|--si-section  Debian section to place GOsa-SI in [$SI_SECTION]
+          -d|--debian-pkg  Don't clear up debian packages for plugins (for developers only)
 	  -h|--help        this help
 
 	EOF
@@ -52,7 +53,7 @@ for cmd in dh-make-gosa debchange dpkg-buildpackage dpkg-source svn; do
 done
 
 # Import command line parameters
-PARMS=`getopt -o b:r:s:c:i:p:,h --long branch:,changelog:,plugins:,section:,si-section:,release:,help -n "${0##*/}" -- "$@"`
+PARMS=`getopt -o d::b:r:s:c:i:p:,h --long branch:,changelog:,plugins:,section:,si-section:,release:,help -n "${0##*/}" -- "$@"`
 eval set -- "$PARMS"
 
 while true; do
@@ -69,6 +70,8 @@ while true; do
 			SECTION=$2; shift 2 ;;
                 -i|--si-section)
 			SI_SECTION=$2; shift 2 ;;
+                -d|--debian-pkg)
+                        DEBIAN_PKG=$2; shift 2 ;;
                 -h|--help)
 			usage ;;
                 --)
@@ -116,8 +119,8 @@ tar -c -f "gosa_${GOSA_VER}.orig.tar" "${GOSA_DIR}"
 tar -c -f "gosa-si_${GOSA_VER}.orig.tar" "${GOSA_SI_DIR}"
 
 echo "Compressing sources..."
-gzip -9 "gosa_${GOSA_VER}.orig.tar"
-gzip -9 "gosa-si_${GOSA_VER}.orig.tar"
+gzip -f -9 "gosa_${GOSA_VER}.orig.tar"
+gzip -f -9 "gosa-si_${GOSA_VER}.orig.tar"
 
 export OVERRIDE_VERSION="$GOSA_VER"
 if [ -z "$MAKE_PLUGINS" ]; then
@@ -136,7 +139,7 @@ for plugin in $MAKE_PLUGINS; do
 	tar -c -f "gosa-plugin-${plugin}_${GOSA_VER}.orig.tar" "${GOSA_PLUG_DIR}"
 
 	echo "Compressing sources..."
-	gzip -9 "gosa-plugin-${plugin}_${GOSA_VER}.orig.tar"
+	gzip -f -9 "gosa-plugin-${plugin}_${GOSA_VER}.orig.tar"
 done
 
 rm -rf gosa-plugins-${BRANCH}
@@ -188,7 +191,15 @@ else
 fi
 
 echo "Removing gosa snapshot..."
-for dir in $GOSA_DIR $GOSA_SI_DIR $GOSA_PLUGIN_DIRS; do
+if [ -z "$DEBIAN_PKG" ]
+then
+	for dir in $GOSA_DIR $GOSA_SI_DIR; do
+        rm -rf "$dir"
+	done
+else
+	for dir in $GOSA_DIR $GOSA_SI_DIR $GOSA_PLUGIN_DIRS; do
 	rm -rf "$dir"
-done
+	done
+fi
+
 
