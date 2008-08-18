@@ -193,7 +193,7 @@ fi
 echo "Removing gosa snapshot..."
 if [ -z "$DEBIAN_PKG" ]
 then
-	for dir in $GOSA_DIR $GOSA_SI_DIR; do
+	for dir in $GOSA_DIR; do
         rm -rf "$dir"
 	done
 else
