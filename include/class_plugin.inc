@@ -561,8 +561,11 @@ class plugin
       if (check_command($command)){
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
             $command, "Execute");
-
-        exec($command);
+        exec($command,&$arr);
+        foreach($arr as $str){
+          @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
+            $command, "Result: ".$str);
+        }
       } else {
         $message= sprintf(_("Command '%s', specified as POSTCREATE for plugin '%s' doesn't seem to exist."), $command, get_class($this));
         print_red ($message);
@@ -597,7 +600,11 @@ class plugin
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
             $command, "Execute");
 
-        exec($command);
+        exec($command,&$arr);
+        foreach($arr as $str){
+          @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
+            $command, "Result: ".$str);
+        }
       } else {
         $message= sprintf(_("Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."), $command, get_class($this));
         print_red ($message);
@@ -632,7 +639,11 @@ class plugin
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
             $command, "Execute");
 
-        exec($command);
+        exec($command,&$arr);
+        foreach($arr as $str){
+          @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
+            $command, "Result: ".$str);
+        }
       } else {
         $message= sprintf(_("Command '%s', specified as POSTREMOVE for plugin '%s' doesn't seem to exist."), $command, get_class($this));
         print_red ($message);
