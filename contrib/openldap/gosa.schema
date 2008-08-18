@@ -222,6 +222,10 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.12.42 NAME 'gosaVacationStop'
         DESC 'Timestamp for switching off current vacation message'
         SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE)
 
+attributetype ( 1.3.6.1.4.1.10098.1.1.12.44 NAME 'gosaLastSystemLogin'
+        DESC 'Timestamp for a Users last System Login'
+        SYNTAX  1.3.6.1.4.1.1466.115.121.1.15 SINGLE-VALUE)
+
 attributetype ( 1.3.6.1.4.1.10098.1.1.6.2 NAME 'academicTitle'
         DESC 'Field to represent the academic title'
 	EQUALITY caseIgnoreMatch
@@ -277,7 +281,7 @@ objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.6 NAME 'gosaAccount' SUP top AUXILIARY
         DESC 'Objectclass for GOsa Accounts (v2.4)'
 	MUST ( uid )
         MAY ( lmPassword $ ntPassword $ pwdLastSet $ gosaDefaultPrinter $ gosaDefaultLanguage $
-              academicTitle $ personalTitle $ gosaHostACL $ dateOfBirth $ gender ))
+              academicTitle $ personalTitle $ gosaHostACL $ dateOfBirth $ gender $ gosaLastSystemLogin ))
 
 objectclass ( 1.3.6.1.4.1.10098.1.2.1.19.7 NAME 'gosaHost' SUP top AUXILIARY
         DESC 'Objectclass for GOsa Hosts (v2.4)'
