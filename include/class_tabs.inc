@@ -43,6 +43,13 @@ class tabs
     $this->dn= $dn;
     $this->config= &$config;
 
+    if(!count($data)) {
+      $data[] = array("CLASS" => 'plugin',"NAME" => 'Error');
+      msg_dialog::display(_("Error"),
+        sprintf(_("No plugin definitions found to initialize '%s', please check your configuration file."),get_class($this)),
+        "ERROR_DIALOG");
+    }
+
     $baseobject= NULL;
     $this->acl_category = $acl_category;
     foreach ($data as &$tab){
