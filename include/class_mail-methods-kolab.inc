@@ -221,13 +221,13 @@ class mailMethodKolab extends mailMethodCyrus
         }
       }
  
-      /* Save shared folder target */
-      $mailObject->attrs['gosaSharedFolderTarget']= "kolab+shared.".$mailObject->mail;
-
       /* Kolab shared folder names are like ' shared.uid@server.de ' 
         So overwrite uid to match these folder names. Else we can't read quota settings etc. 
         #FIXME is there a better way to detect if it is 'shared.' or 'shared+' or 'kolab+shared.' or what ever ?*/
       $mailObject->uid = "shared.".$mailObject->uid."@".preg_replace("/^.*@/","",$mailObject->mail);
+
+      /* Save shared folder target */
+      $mailObject->attrs['gosaSharedFolderTarget']= "kolab+shared.".$mailObject->cn."@".preg_replace("/^.*@/","",$mailObject->mail); 
   
       /* Assign new acls */
       $mailObject->attrs['acl']= array();
