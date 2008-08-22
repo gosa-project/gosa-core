@@ -33,6 +33,7 @@ class gosaSupportDaemon
 
   private $is_connected     = FALSE;
 
+  protected $use_alternative_xml_parse_method = FALSE;
 
   /*! \brief  Creates a new gosaSupportDaemon object.
     @param string   Host    The Host where the daemon is running on.  
@@ -819,7 +820,7 @@ class gosaSupportDaemon
     @param  String XML string  
     @return Array Returns an array containing the xml structure. 
    */
-  private function xml_to_array($xml)
+  private function xml_to_array($xml,$alternative_method = FALSE)
   {
     $params = array();
     $level = array();
@@ -832,41 +833,46 @@ class gosaSupportDaemon
     }else{
       xml_parser_free($parser);
 
-      foreach ($vals as $xml_elem) {
-        if ($xml_elem['type'] == 'open') {
-          if (array_key_exists('attributes',$xml_elem)) {
-            list($level[$xml_elem['level']],$extra) = array_values($xml_elem['attributes']);
-          } else {
-            $level[$xml_elem['level']] = $xml_elem['tag'];
-          }
-        }
-        if ($xml_elem['type'] == 'complete') {
+      if($this->use_alternative_xml_parse_method) {
+        $params = $this->build_xml_array($vals);
+      } else {
 
-          $start_level = 1;
-          $test2 = &$params;
-          while($start_level < $xml_elem['level']) {
-            $test2 = &$test2[$level[$start_level]];
-            $start_level++;
-          }
-
-          /* Save tag attributes too. 
-              e.g. <tag attr="val">
-           */
-          if(isset($xml_elem['attributes'])){
-            foreach($xml_elem['attributes'] as $name => $value){
-              $test2['ATTRIBUTES'][$name] = $value;
+        foreach ($vals as $xml_elem) {
+          if ($xml_elem['type'] == 'open') {
+            if (array_key_exists('attributes',$xml_elem)) {
+              list($level[$xml_elem['level']],$extra) = array_values($xml_elem['attributes']);
+            } else {
+              $level[$xml_elem['level']] = $xml_elem['tag'];
             }
           }
+          if ($xml_elem['type'] == 'complete') {
 
-          if(!isset($test2[$xml_elem['tag']])){
-            if(isset($xml_elem['value'])){
-              $test2[$xml_elem['tag']] = $xml_elem['value'];
+            $start_level = 1;
+            $test2 = &$params;
+            while($start_level < $xml_elem['level']) {
+              $test2 = &$test2[$level[$start_level]];
+              $start_level++;
             }
-          }else{
-            if(!is_array($test2[$xml_elem['tag']])){
-              $test2[$xml_elem['tag']] = array($test2[$xml_elem['tag']]);
+
+            /* Save tag attributes too. 
+               e.g. <tag attr="val">
+             */
+            if(isset($xml_elem['attributes'])){
+              foreach($xml_elem['attributes'] as $name => $value){
+                $test2['ATTRIBUTES'][$name] = $value;
+              }
             }
-            $test2[$xml_elem['tag']][] = $xml_elem['value'];
+
+            if(!isset($test2[$xml_elem['tag']])){
+              if(isset($xml_elem['value'])){
+                $test2[$xml_elem['tag']] = $xml_elem['value'];
+              }
+            }else{
+              if(!is_array($test2[$xml_elem['tag']])){
+                $test2[$xml_elem['tag']] = array($test2[$xml_elem['tag']]);
+              }
+              $test2[$xml_elem['tag']][] = $xml_elem['value'];
+            }
           }
         }
       }
@@ -881,6 +887,37 @@ class gosaSupportDaemon
 
     return($params); 
   }
+
+
+  function build_xml_array(&$vals)
+  {
+    $array = array();
+    while(count($vals)){
+      $key = key($vals);
+      $val = $vals[$key];
+      unset($vals[$key]);
+      if($val['type'] == "close"){
+        return($array);
+      }elseif($val['type']=="open"){
+        $array[$val['tag']][] = $this->build_xml_array($vals);
+      }elseif($val['type'] != "cdata"){
+        $data = array("VALUE" => "","ATTRIBUTES" => "");
+        foreach(array("value" => "VALUE", "attributes" => "ATTRIBUTES") as $name => $attr){
+          if(isset($val[$name])){
+            $data[$attr] = $val[$name];
+          }
+        }
+        $array[$val['tag']][] = $data;
+      }else{
+#print_a($val);
+      }
+    }
+    return($array);
+  }
+
+
+
+
 
 
   /*! \brief  Updates an entry with a set of new values, 
