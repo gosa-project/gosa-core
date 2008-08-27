@@ -1,6 +1,9 @@
 GOsa2 changelog
 ===============
 
+* next
+  - Added scalix group support.
+
 * gosa 2.5.16
   - Fixed problem with undefined ridbase in domain objects
   - Fixed postremove/-create/-modify parameter expansion
