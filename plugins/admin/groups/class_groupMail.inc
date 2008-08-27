@@ -90,7 +90,7 @@ class mailgroup extends plugin
     /* Convert cn to uid in case of existing entry
      */
     if (isset($this->attrs['cn'][0])){
-      $this->uid= $this->attrs['cn'][0];
+      $this->uid = $this->cn = $this->attrs['cn'][0];
     }
 
     /* Get folder type */
