@@ -3,6 +3,7 @@ GOsa2 changelog
 
 * next
   - Added scalix group support.
+  - Added debug information for post events, debug level is DEBUG_SHELL.
 
 * gosa 2.5.16
   - Fixed problem with undefined ridbase in domain objects
