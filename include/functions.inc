@@ -2325,7 +2325,7 @@ function get_base_from_hook($dn, $attrib)
     $command= $config->current['BASE_HOOK'];
 
     if ($command != ""){
-      $command.= " '".LDAP::fix($dn)."' $attrib";
+      $command.= " '".@LDAP::fix($dn)."' $attrib";
       if (check_command($command)){
         @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
         exec($command, $output);
