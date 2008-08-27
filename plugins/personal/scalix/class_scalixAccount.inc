@@ -20,8 +20,12 @@ class scalixAccount extends plugin
   /* MUST */
   var $scalixScalixObject= TRUE; //TRUE or FALSE
   var $scalixMailnode= "";
-  /* INDIRECT MUST, scalix will complain if no email was specified */
+
+  /* Indicates whether we have a scalix group or a sclix user account 
+   */
+	var $scalixGroup = FALSE;
   
+  /* INDIRECT MUST, scalix will complain if no email was specified */
   /* MAY */
   var $scalixAdministrator= FALSE;
   var $scalixMailboxAdministrator = FALSE;
@@ -103,6 +107,7 @@ class scalixAccount extends plugin
 
     /* Load templating engine */
     $smarty= get_smarty();
+    $smarty->assign("scalixGroup",$this->scalixGroup);
     $display= "";
 
     /* Do we need to flip is_account state? */
@@ -306,12 +311,15 @@ class scalixAccount extends plugin
     $this->attrs['scalixEmailAddress']= $this->scalixEmailAddress;    
     
     /* Save boolean vars ... the scalix schema expects them as strings */
+    if(!$this->scalixGroup){
+      $this->attrs['scalixAdministrator'] = $this->scalixAdministrator?"TRUE":"FALSE";
+      $this->attrs['scalixMailboxAdministrator'] = $this->scalixMailboxAdministrator?"TRUE":"FALSE";
+      $this->attrs['scalixLimitOutboundMail'] = $this->scalixLimitOutboundMail?"TRUE":"FALSE";
+      $this->attrs['scalixLimitInboundMail'] = $this->scalixLimitInboundMail?"TRUE":"FALSE";
+      $this->attrs['scalixLimitNotifyUser'] = $this->scalixLimitNotifyUser?"TRUE":"FALSE";
+    }
+    
     $this->attrs['scalixScalixObject'] = $this->scalixScalixObject?"TRUE":"FALSE";
-    $this->attrs['scalixAdministrator'] = $this->scalixAdministrator?"TRUE":"FALSE";
-    $this->attrs['scalixMailboxAdministrator'] = $this->scalixMailboxAdministrator?"TRUE":"FALSE";
-    $this->attrs['scalixLimitOutboundMail'] = $this->scalixLimitOutboundMail?"TRUE":"FALSE";
-    $this->attrs['scalixLimitInboundMail'] = $this->scalixLimitInboundMail?"TRUE":"FALSE";
-    $this->attrs['scalixLimitNotifyUser'] = $this->scalixLimitNotifyUser?"TRUE":"FALSE";
     $this->attrs['scalixHideUserEntry'] = $this->scalixHideUserEntry?"TRUE":"FALSE";
 
     /* Remove Mailquota if = "" */

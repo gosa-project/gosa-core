@@ -2,11 +2,13 @@
  <tr>
   <td style="width:50%; vertical-align:top;">
    <h2><img class="center" alt="" align="middle" src="images/rightarrow.png" />&nbsp;{t}Generic{/t}</h2>
+<!-- Hide user specific attributes when in group mode. -->
    <table summary="">
     <tr>
      <td><label for="scalixMailnode">{t}Scalix mailnode{/t}</label>{$must}</td>
      <td><input id="scalixMailnode" name="scalixMailnode" size=35 maxlength=65 {$scalixMailnodeACL} value="{$scalixMailnode}"></td>
     </tr>
+{if !$scalixGroup}
     <tr>
      <td><label for="scalixMailboxClass">{t}Scalix mailbox class{/t}</label></td>
      <td>
@@ -16,6 +18,8 @@
       </select>
      </td>
     </tr>
+
+
     <tr>
      <td><label for="scalixServerLanguage">{t}Scalix server language{/t}</label></td>
      <td>
@@ -25,8 +29,9 @@
       </select>
      </td>
     </tr>
+{/if}
    </table>
-   
+{if !$scalixGroup}   
    <p class="seperator">&nbsp;</p>
    
    <table summary="">
@@ -64,6 +69,7 @@
      </td>
     </tr>
    </table>
+{/if}
   </td>
 
   <td style="border-left:1px solid #A0A0A0">
@@ -86,7 +92,6 @@
   </td>
  </tr>
 </table>
-
 <input type="hidden" name="scalixTab" value="scalixTab">
 
 <!-- Place cursor -->
