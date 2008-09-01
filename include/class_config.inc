@@ -231,6 +231,9 @@ class config  {
     if (!isset($this->current['PEOPLE'])){
       $this->current['PEOPLE']= "ou=people";
     }
+    if (!isset($this->current['SAMBAVERSION'])){
+      $this->current['SAMBAVERSION']= 3;
+    }
     if (!isset($this->current['GROUPS'])){
       $this->current['GROUPS']= "ou=groups";
     }
