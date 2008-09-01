@@ -186,10 +186,10 @@
     </tr>
     {/if}
 
-	{if $gosaLastSystemLogin}
+	{if $gotoLastSystemLogin}
 		<tr>
 			<td>{t}Last logon{/t}</td>
-			<td>{$gosaLastSystemLogin}</td>
+			<td>{$gotoLastSystemLogin}</td>
 		</tr>		
 	{/if}
    </table>
