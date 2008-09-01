@@ -287,6 +287,9 @@ class config  {
   {
     $this->current= $this->data['LOCATIONS'][$name];
 
+    if (!isset($this->current['SAMBAVERSION'])){
+      $this->current['SAMBAVERSION']= 3;
+    }
     if (!isset($this->current['PEOPLE'])){
       $this->current['PEOPLE']= "ou=people";
     }
