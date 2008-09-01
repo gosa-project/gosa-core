@@ -32,6 +32,14 @@ fi
 
 # Copy GOsa configuration to conf.d directories
 if [ ! -L /etc/apache2/conf.d/gosa.conf ]; then
+
+  # Remove old instances of this file
+  if [ -f /etc/apache2/conf.d/gosa.conf ]; then
+    echo "Found old gosa apache configuration in /etc/apache2/conf.d - moving it to gosa.conf.orig..."
+    echo "Please check for changes in /etc/gosa/gosa-apache.conf if you modified this file!"
+    mv /etc/apache2/conf.d/gosa.conf /etc/apache2/conf.d/gosa.conf.orig
+  fi
+
   echo "Making /gosa available in /etc/apache2/conf.d"
 
   # Add GOsa include file
