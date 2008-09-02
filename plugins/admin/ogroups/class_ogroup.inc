@@ -59,6 +59,10 @@ class ogroup extends plugin
 
   var $was_trust_account= FALSE;
 
+  /* Already assigned Workstations. Will be hidden in selection. 
+   */
+  var $used_workstations = array();
+
   /* attribute list for save action */
   var $attributes= array("cn", "description", "gosaGroupObjects","member","accessTo","trustModel");
   var $objectclasses= array("top", "gosaGroupOfNames");
@@ -137,6 +141,28 @@ class ogroup extends plugin
           $tmp= $this->attrs['accessTo'][$i];
           $this->accessTo[$tmp]= $tmp;
         }
+      }
+    }
+
+    /* Detect all workstations, which are already assigned to an object group  
+        - Those objects will be hidden in the add object dialog.
+        - Check() will complain if such a system is assigned to this object group.
+     */ 
+    $base = $this->config->current['BASE'];
+    $res    = get_list("(objectClass=gotoWorkstation)","none" , 
+        $base, array("dn"),GL_NO_ACL_CHECK|GL_SUBSEARCH);
+    $ws_dns = array();
+    foreach($res as $data){
+      $ws_dns[] = $data['dn'];
+    }
+    $res=get_list("(&(member=*)(objectClass=gosaGroupOfNames))","none",
+        $base, array("dn","member"),GL_NO_ACL_CHECK|GL_SUBSEARCH);
+    $this->used_workstations = array();
+    foreach($res as $og){
+      if($og['dn'] == $this->dn) continue;
+      $test = array_intersect($ws_dns,$og['member']);
+      if(count($test)){
+        $this->used_workstations = array_merge($this->used_workstations,$test);
       }
     }
 
@@ -677,6 +703,12 @@ class ogroup extends plugin
         /* fetch results and append them to the list */
         foreach($res as $attrs){
 
+          /* Skip workstations which are already assigned to an object group.
+           */
+          if(in_array($attrs['dn'],$this->used_workstations)){
+            continue;
+          }
+
           $type= $this->getObjectType($attrs);
           $name= $this->getObjectName($attrs);
 
@@ -857,6 +889,23 @@ class ogroup extends plugin
       $new_dn= $this->dn;
     }
 
+    /* Check if we have workstations assigned, that are already assigned to
+        another object group.
+     */
+    $test =array_intersect($this->used_workstations,$this->member); 
+    if(count($test)){
+      $str = "";
+      $cnt = 0;
+      foreach($test as $dn){
+        $str .= $dn.",  ";
+        $cnt ++;
+        if($cnt > 2){
+          $str .= "...";
+          break;
+        }
+      }
+#      $message[] = sprintf(_("The following workstations are already member in another object group and can not be added: '%s'"),$str);
+    }
 
     $ldap = $this->config->get_ldap_link();
     if($this->dn != $new_dn){
