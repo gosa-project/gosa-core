@@ -98,7 +98,21 @@ class gosaSupportDaemon
   {
     return($this->is_connected);
   }
-  
+ 
+
+  /*! \brief  */
+  public function get_hosts_with_module($mod)
+  {
+    $data = array("module_name" => $mod);
+    $res = $this->send_data("gosa_get_hosts_with_module",$this->s_host.":".$this->i_port,$data,TRUE);
+    $hosts = array();
+    if(isset($res['XML'][0]['HOST'])){
+      foreach($res['XML'][0]['HOST'] as $entry){
+        $hosts [] = $entry['VALUE'];
+      }
+    }
+    return($hosts);
+  }
 
 
   /*! \brief  Disconnect from gosa daemon.
