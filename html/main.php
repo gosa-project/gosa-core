@@ -369,6 +369,17 @@ if (is_file("$plugin_dir/main.inc")){
 $smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
 $smarty->assign("contents", $display);
 
+/* If there's some post, take a look if everything is there... */
+if (isset($_POST) && count($_POST)){
+  if (!isset($_POST['php_c_check'])){
+    msg_dialog::display(
+            _("Configuration Error"),
+            sprintf(_("FATAL: not all POST variables have been transfered by PHP - please inform your administrator!")),
+            FATAL_ERROR_DIALOG);
+    exit();
+  }
+}
+
 /* Assign erros to smarty */
 if (session::is_set('errors')){
   $smarty->assign("errors", session::get('errors'));
