@@ -1165,12 +1165,8 @@ class gosaSupportDaemon
         if(isset($entries['XML']) && is_array($entries['XML'])){
           $ret = $entries;
           if($this->use_alternative_xml_parse_method) {
-            if(isset($entries['XML'][0]['ERROR_STRING'][0]) && is_array($entries['XML'][0]['ERROR_STRING'])) {
+            if(isset($entries['XML'][0]['ERROR'][0]['VALUE']) && $entries['XML'][0]['ERROR'][0]['VALUE'] == "1"){
               $this->set_error($entries['XML'][0]['ERROR_STRING'][0]['VALUE']);
-              new log("debug","DaemonEvent (IDS) ", "gosaSupportDaemon::_send()", 
-                  array($data=>$data),"FAILED ".$this->get_error());
-            }elseif(isset($entries['XML'][0]['ERROR'][0]['VALUE']) && is_array($entries['XML'][0]['ERROR'])){
-              $this->set_error($entries['XML'][0]['ERROR'][0]['VALUE']);
               new log("debug","DaemonEvent (IDS) ", "gosaSupportDaemon::_send()", 
                   array($data=>$data),"FAILED ".$this->get_error());
             }
