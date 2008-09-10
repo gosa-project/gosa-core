@@ -416,7 +416,7 @@ Q: I want to disable the "Is the configuration file up to date?" check when logg
    How can I disable this check?
 
 A: Just set the config_version attribute to an empty value:
-   <conf config_version="" >
+   <conf configVersion="" >
 
 
 Q: I've shredded my access control and am not able to do anything from now on. Is there

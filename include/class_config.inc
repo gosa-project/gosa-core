@@ -138,7 +138,7 @@ class config  {
     if ($tag == 'CONF'){
       $this->config_found= TRUE;
       if(isset($attrs['CONFIG_VERSION'])){
-        $this->config_version = $attrs['CONFIG_VERSION'];
+        $this->config_version = $attrs['CONFIGVERSION'];
       }
     }
 
