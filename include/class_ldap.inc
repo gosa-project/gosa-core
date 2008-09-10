@@ -1195,7 +1195,7 @@ class LDAP{
 
     /* Only read schema if it is allowed */
     if(isset($config) && preg_match("/config/i",get_class($config))){
-      if ($config->get_cfg_value("schema_check") != "true"){
+      if ($config->get_cfg_value("schemaCheck") != "true"){
         return($objectclasses);
       } 
     }

@@ -259,7 +259,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
   if(!isset($config->data['MAIN']['SCHEMA_CHECK'])){
     $config->data['MAIN']['SCHEMA_CHECK'] = "true";
   }
-  if ($config->get_cfg_value("schema_check") == "true"){
+  if ($config->get_cfg_value("schemaCheck") == "true"){
     $recursive = ($config->get_cfg_value("recursive") == "true");
     $tls =       ($config->get_cfg_value("tls") == "true");
 
