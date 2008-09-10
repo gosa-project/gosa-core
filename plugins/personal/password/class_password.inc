@@ -59,8 +59,8 @@ class password extends plugin
       $differ       = $this->config->get_cfg_value("pwdiffer", 0);
 
       /* Enable length check ? */
-      $check_length = $this->config->get_cfg_value("pwminlen") != "";
-      $length       = $this->config->get_cfg_value("pwminlen", 0);
+      $check_length = $this->config->get_cfg_value("passwordMinLength") != "";
+      $length       = $this->config->get_cfg_value("passwordMinLength", 0);
 
       /* Call external password quality hook ?*/
       $check_hook   = $this->config->get_cfg_value("externalpwdhook") != "";

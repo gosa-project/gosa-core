@@ -204,8 +204,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])){
 		  $message[]= _("The password used as new and current are too similar.");
 	  }
   }
-  if ($config->get_cfg_value("pwminlen") != ""){
-	  if (strlen($_POST['new_password']) < $config->get_cfg_value("pwminlen")){
+  if ($config->get_cfg_value("passwordMinLength") != ""){
+	  if (strlen($_POST['new_password']) < $config->get_cfg_value("passwordMinLength")){
 		  $message[]= _("The password used as new is to short.");
 	  }
   }

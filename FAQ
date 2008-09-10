@@ -98,8 +98,8 @@ A: Yes. Just go to the doc/guide/user/en directory and copy the lyx-source direc
    
 Q: Can I specify some kind of password policies?
 
-A: You can place the keywords "pwminlen" and "pwdiffer" in the main section of your
-   gosa.conf. "pwminlen" specifies how many characters a password must have to be
+A: You can place the keywords "passwordMinLength" and "pwdiffer" in the main section of your
+   gosa.conf. "passwordMinLength" specifies how many characters a password must have to be
    accepted. "pwdiffer" contains the number of characters that must be different
    from the previous password.
 
