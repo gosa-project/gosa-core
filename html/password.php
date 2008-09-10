@@ -238,8 +238,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])){
 
 	  /* Passed quality check, just try to change the password now */
 	  $output= "";
-	  if ($config->get_cfg_value("externalpwdhook") != ""){
-		  exec($config->get_cfg_value("externalpwdhook")." ".$ui->username." ".
+	  if ($config->get_cfg_value("passwordHook") != ""){
+		  exec($config->get_cfg_value("passwordHook")." ".$ui->username." ".
 				  $_POST['current_password']." ".$_POST['new_password'], $resarr);
 		  if(count($resarr) > 0) {
 			  $output= join('\n', $resarr);

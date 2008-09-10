@@ -110,7 +110,7 @@ Q: I've to update passwords on external windows PDCs. Can I add a command to let
    synchronize these for me?
 
 A: There's the possibility to add a password hook in gosa.conf's main section using
-   the keyword "externalpwdhook". The specified command will be executed with 
+   the keyword "passwordHook". The specified command will be executed with 
    three parameters: /path/to/your/script username oldpassword newpassword
 
    So you can call i.e. smbpasswd to handle your password change on the PDC.

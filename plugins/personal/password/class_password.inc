@@ -63,8 +63,8 @@ class password extends plugin
       $length       = $this->config->get_cfg_value("passwordMinLength", 0);
 
       /* Call external password quality hook ?*/
-      $check_hook   = $this->config->get_cfg_value("externalpwdhook") != "";
-      $hook         = $this->config->get_cfg_value("externalpwdhook")." ".$ui->username." ".$_POST['current_password']." ".$_POST['new_password'];
+      $check_hook   = $this->config->get_cfg_value("passwordHook") != "";
+      $hook         = $this->config->get_cfg_value("passwordHook")." ".$ui->username." ".$_POST['current_password']." ".$_POST['new_password'];
       if($check_hook){
         exec($hook,$resarr);
         $check_hook_output = "";
