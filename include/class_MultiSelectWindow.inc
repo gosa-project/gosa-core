@@ -374,7 +374,7 @@ class MultiSelectWindow{
 		$divlist->SetEntriesPerPage(0); // 0 for scrollable list
 
     /* Display list footer with summary of all listed entries */
-    if ($this->config->get_cfg_value("list_summary") == "true"){
+    if ($this->config->get_cfg_value("listSummary") == "true"){
       $divlist->SetFooter($this->get_List_Bottom_Info());
     }
   
