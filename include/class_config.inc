@@ -137,7 +137,7 @@ class config  {
     /* Trigger on CONF section */
     if ($tag == 'CONF'){
       $this->config_found= TRUE;
-      if(isset($attrs['CONFIG_VERSION'])){
+      if(isset($attrs['CONFIGVERSION'])){
         $this->config_version = $attrs['CONFIGVERSION'];
       }
     }

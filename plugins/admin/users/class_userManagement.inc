@@ -50,7 +50,7 @@ class userManagement extends plugin
     $this->ui= &$ui;
 
     /* Copy & Paste handler */
-    if ($this->config->boolValueIsTrue("main", "enableCopyPaste")){
+    if ($this->config->boolValueIsTrue("main", "copyPaste")){
       $this->CopyPasteHandler= new CopyPasteHandler($this->config);
     }
 

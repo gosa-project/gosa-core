@@ -44,7 +44,7 @@ class groupManagement extends plugin
     $this->ui     = &$ui;
 
     /* Copy & Paste enabled ?*/
-    if($this->config->get_cfg_value("enablecopypaste") == "true"){
+    if($this->config->get_cfg_value("copyPaste") == "true"){
       $this->CopyPasteHandler = new CopyPasteHandler($this->config);
     }
     

@@ -61,7 +61,7 @@ function displayLogin()
 
   if(!$config->check_session_lifetime()){
     $smarty->assign ("lifetime", _("Warning").": ".
-                                 _("The session lifetime configured in your gosa.conf will be overridden by php.ini settings."));
+        _("The session lifetime configured in your gosa.conf will be overridden by php.ini settings."));
   }else{
     $smarty->assign ("lifetime", "");
   }
@@ -161,7 +161,7 @@ $smarty->compile_dir= $config->get_cfg_value("compile", '/var/spool/gosa');
 /* Check for compile directory */
 if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))){
   msg_dialog::display(_("Smarty error"),sprintf(_("Directory '%s' specified as compile directory is not accessible!"),
-    $smarty->compile_dir),FATAL_ERROR_DIALOG);
+        $smarty->compile_dir),FATAL_ERROR_DIALOG);
   exit();
 }
 
@@ -256,8 +256,8 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
 
   /* Check for schema file presence */
   #TODO: these three lines should go to the class_config.inc, shouldn't they?
-  if(!isset($config->data['MAIN']['SCHEMA_CHECK'])){
-    $config->data['MAIN']['SCHEMA_CHECK'] = "true";
+  if(!isset($config->data['MAIN']['SCHEMACHECK'])){
+    $config->data['MAIN']['SCHEMACHECK'] = "true";
   }
   if ($config->get_cfg_value("schemaCheck") == "true"){
     $recursive = ($config->get_cfg_value("recursive") == "true");
@@ -306,7 +306,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
       $ok= false;
     }
   }
-  
+
   if ($ok) {
 
     /* Login as user, initialize user ACL's */
@@ -454,7 +454,7 @@ if (session::is_set('errors') && session::get('errors') != ""){
 $smarty->assign("focus", $focus);
 displayLogin();
 
-// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
+// vim:tabstop=2:expandtab:shiftwidth=2:softtabstop=2:filetype=php:syntax:ruler:
 ?>
 
 </body>
