@@ -198,8 +198,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])){
   }
 
   /* Password policy fulfilled? */
-  if ($config->get_cfg_value("pwdiffer") != ""){
-	  $l= $config->get_cfg_value("pwdiffer");
+  if ($config->get_cfg_value("passwordMinDiffer") != ""){
+	  $l= $config->get_cfg_value("passwordMinDiffer");
 	  if (substr($_POST['current_password'], 0, $l) == substr($_POST['new_password'], 0, $l)){
 		  $message[]= _("The password used as new and current are too similar.");
 	  }

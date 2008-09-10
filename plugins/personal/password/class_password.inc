@@ -55,8 +55,8 @@ class password extends plugin
     if (isset($_POST['password_finish'])){
 
       /* Should we check different characters in new password */
-      $check_differ = $this->config->get_cfg_value("pwdiffer") != "";
-      $differ       = $this->config->get_cfg_value("pwdiffer", 0);
+      $check_differ = $this->config->get_cfg_value("passwordMinDiffer") != "";
+      $differ       = $this->config->get_cfg_value("passwordMinDiffer", 0);
 
       /* Enable length check ? */
       $check_length = $this->config->get_cfg_value("passwordMinLength") != "";
