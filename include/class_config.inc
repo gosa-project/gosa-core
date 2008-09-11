@@ -523,8 +523,12 @@ class config  {
     $ldap->search ("(objectClass=goLogDBServer)");
     if ($ldap->count()){
       $attrs= $ldap->fetch();
+      if(!isset($attrs['goLogDB'][0])){
+        $attrs['goLogDB'][0] = "gomon";
+      }
       $this->data['SERVERS']['LOG']= array( 'SERVER' => $attrs['cn'][0],
           'LOGIN' => $attrs['goLogAdmin'][0],
+          'DB' => $attrs['goLogDB'][0],
           'PASSWORD' => $attrs['goLogPassword'][0]);
     }
 
