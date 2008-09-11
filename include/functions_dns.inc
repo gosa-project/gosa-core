@@ -371,9 +371,20 @@ function getDNSHostEntries($config,$name,$silent = false)
   foreach($zonesArr as $nameServer => $nameServerArr){
   	$foundInTmp = array();
   	foreach($nameServerArr as $zoneArr => $zone){
+
+      /* Strip eventually domain part from hostname
+       */
+      $zN = trim($zone,".");
+      $nN = trim($name,".");
+      if(preg_match("/".normalizePreg($zN)."$/",$nN)){
+        $nN = preg_replace("/[\.]*".normalizePreg($zN)."[\.]*$/","",$nN);
+      }else{
+        $nN = $name;
+      }
+
   		$zoneMix = $nameServer."/".$zone;
     	$zoneDn = getDNSZoneDN($config,$zoneMix);
-    	$ldap->ls("(&(objectClass=dNSZone)(zoneName=*)(relativeDomainName=".$name.")(!(relativeDomainName=@)))", $zoneDn,$attrs = array("*"));
+    	$ldap->ls("(&(objectClass=dNSZone)(zoneName=*)(relativeDomainName=".$nN.")(!(relativeDomainName=@)))", $zoneDn,$attrs = array("*"));
     	while($attrs = $ldap->fetch()){
     	  $foundInTmp [$zoneMix] = $attrs['dn'];
     	  $foundIn [$zoneMix] = $attrs['dn'];
@@ -394,10 +405,15 @@ function getDNSHostEntries($config,$name,$silent = false)
   $ldap->search("(&(objectClass=dNSZone)(zoneName=*)(!(relativeDomainName=@)))",array("*"));
   while($attrs = $ldap->fetch()){
 
-    /* If relative domainname == cn
-     * Try to read dnsclass / TTl / zone
+    /* Strip eventually domain part from hostname
      */
-    if($attrs['relativeDomainName'][0] == $name){
+    $zN = trim($attrs['zoneName'][0],".");
+    $nN = trim($name,".");
+    $testname = $attrs['relativeDomainName'][0].".".$zN;
+
+    /* Check given host name with zone settings
+     */
+    if(preg_match("/".normalizePreg($testname)."[\.]*$/",$nN) || $attrs['relativeDomainName'][0] == $name){
       $ret['exists'] = true;
       $ret['zoneName'] = $id_tmp;
       foreach(array("dNSClass","dNSTTL") as $atr){
@@ -450,6 +466,14 @@ function getDNSHostEntriesDiff($config,$oldName,$newEntry,$newName)
   $zoneDn             = getDNSZoneDN($config,$zoneNameMix);
   $tmp                = array_flip($zones);
   $zoneName 					= getNameFromMix($zoneNameMix);
+
+  /* Strip domain part out of dns host entry
+   */
+  $zN = trim($zoneName,".");
+  $nN = trim($newName,".");
+  $oN = trim($oldName,".");
+  $newName = preg_replace("/[\.]*".normalizePreg($zN)."$/i","",$nN);
+  $oldName = preg_replace("/[\.]*".normalizePreg($zN)."$/i","",$oN);
  
   /* If reverseZone can't be resolved ... this 
    *  can't be a valid entry, so remove this account

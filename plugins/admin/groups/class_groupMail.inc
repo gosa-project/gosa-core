@@ -892,8 +892,8 @@ I: Only insider delivery */
       $method= new $this->method($this->config);
       $method->fixAttributesOnStore($this);
       if (($method->connect($this->gosaMailServer))){
-        $method->updateMailbox($this->uid);
-        $method->setQuota($this->uid, $this->gosaMailQuota);
+        $method->updateMailbox("share+".$this->uid);
+        $method->setQuota("share+".$this->uid, $this->gosaMailQuota);
 
         /* Only write imap acls directly if we are not 
          *  using a kolab like mail method.
