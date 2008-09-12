@@ -131,6 +131,29 @@ class gosaSupportDaemon
    */
   private function set_error($str)
   {
+    /******
+      Debug handling
+     ******/
+    $debug = debug_backtrace();
+    $file = __FILE__;
+    $function = __FUNCTION__;
+    $line = __LINE__;
+    $class = __CLASS__;
+    foreach($debug as $info){
+      if(!in_array($info['function'],array("send_data","_send","set_error"))){
+        $file = $info['file'];
+        $line = $info['line'];
+        $class = get_class($this);
+        $function = $info['function'];
+        break;
+      }
+    }
+    @DEBUG(GOSA_SI, $line, "<b>".$class."::".$function."</b>" , $file, "<font color='red'><i>".htmlentities($str)."</i></font>", $info="");
+
+    /******
+      Set error string.
+     ******/
+  
     $this->b_error = TRUE;
     $this->s_error = $str;
   }
@@ -186,29 +209,11 @@ class gosaSupportDaemon
 
     $ret = array();
     if($this->connect()){
-      $this->o_sock->write($xml_msg);
-      $str = trim($this->o_sock->read());
+      $entries = $this->_send($xml_msg,TRUE);
 
-      /* Check if something went wrong while reading */
-      if($this->o_sock->is_error()){
-        $this->set_error($this->o_sock->get_error());
-        return($ret);
-      }
-
-      $entries = $this->xml_to_array($str);
+      /* Check if returned values represent a valid answer */
       if(isset($entries['XML']) && is_array($entries['XML'])){
-
-        /* Check if returned values represent a valid answer */
         if(isset($entries['XML'])){
-          if(isset($entries['XML']['ERROR_STRING'])) {
-            $this->set_error($entries['XML']['ERROR_STRING']);
-            new log("debug","GOsa-si",
-                get_class($this)."::".__FUNCTION__, array(),
-                "FAILED error was ".$this->get_error());
-            return($ret);
-          }
-
-          /* Unset header tags */
           $ret = $entries['XML'];
           foreach($ret as $key => $entry){
             if(!preg_match("/^answer/i",$key)){
@@ -230,36 +235,16 @@ class gosaSupportDaemon
 
     $ret = array();
     if($this->connect()){
-      $this->o_sock->write($xml_msg);
-      $str = trim($this->o_sock->read());
-
-      /* Check if something went wrong while reading */
-      if($this->o_sock->is_error()){
-        $this->set_error($this->o_sock->get_error());
-        return($ret);
-      }
-
-      $entries = $this->xml_to_array($str);
+      $entries = $this->_send($xml_msg,TRUE);
       if(isset($entries['XML']) && is_array($entries['XML'])){
 
-        /* Check if returned values represent a valid answer */
-        if(isset($entries['XML'])){
-          if(isset($entries['XML']['ERROR_STRING'])) {
-            $this->set_error($entries['XML']['ERROR_STRING']);
-            new log("debug","GOsa-si",
-                get_class($this)."::".__FUNCTION__, array(),
-                "FAILED error was ".$this->get_error());
-            return($ret);
+        /* Unset header tags */
+        foreach(array("HEADER","SOURCE","TARGET","SESSION_ID") as $type){
+          if(isset($entries['XML'][$type])){
+            unset($entries['XML'][$type]);
           }
-
-          /* Unset header tags */
-          foreach(array("HEADER","SOURCE","TARGET","SESSION_ID") as $type){
-            if(isset($entries['XML'][$type])){
-              unset($entries['XML'][$type]);
-            }
-          }
-          $ret = $entries['XML'];
         }
+        $ret = $entries['XML'];
       }
     }
     return($ret);
@@ -268,7 +253,6 @@ class gosaSupportDaemon
 
   public function FAI_get_packages($release,$attrs,$package,$from=-1,$to=-1)
   {
-    $this->reset_error();
     $ret = array();
 
     /* Check Parameter */
@@ -317,27 +301,11 @@ class gosaSupportDaemon
       "</xml>";
 
     if($this->connect()){
-      $this->o_sock->write($xml_msg);
-      $str = trim($this->o_sock->read());
-
-      /* Check if something went wrong while reading */
-      if($this->o_sock->is_error()){
-        $this->set_error($this->o_sock->get_error());
-        return($ret);
-      }
-
-      $entries = $this->xml_to_array($str);
+      $entries = $this->_send($xml_msg,TRUE);
       if(isset($entries['XML']) && is_array($entries['XML'])){
 
         /* Check if returned values represent a valid answer */
         if(isset($entries['XML'])){
-          if(isset($entries['XML']['ERROR_STRING'])) {
-            $this->set_error($entries['XML']['ERROR_STRING']);
-            new log("debug","GOsa-si",
-                get_class($this)."::".__FUNCTION__, array(),
-                "FAILED error was ".$this->get_error());
-            return($ret);
-          }
 
           /* Unset header tags */
           foreach(array("HEADER","SOURCE","TARGET","SESSION_ID") as $type){
@@ -357,41 +325,22 @@ class gosaSupportDaemon
 
   public function FAI_get_server($name = "")
   {
-    $this->reset_error();
 
     $xml_msg = "<xml><header>gosa_query_fai_server</header><target>GOSA</target><source>GOSA</source></xml>";
     $ret = array();
     if($this->connect()){
-      $this->o_sock->write($xml_msg);
-      $str = trim($this->o_sock->read());
 
-      /* Check if something went wrong while reading */
-      if($this->o_sock->is_error()){
-        $this->set_error($this->o_sock->get_error());
-        return($ret);
-      }
-
-      $entries = $this->xml_to_array($str);
+      /* Check if returned values represent a valid answer */
+      $entries = $this->_send($xml_msg,TRUE);
       if(isset($entries['XML']) && is_array($entries['XML'])){
 
-        /* Check if returned values represent a valid answer */
-        if(isset($entries['XML'])){
-          if(isset($entries['XML']['ERROR_STRING'])) {
-            $this->set_error($entries['XML']['ERROR_STRING']);
-            new log("debug","GOsa-si", 
-              get_class($this)."::".__FUNCTION__, array(),
-              "FAILED error was ".$this->get_error());
-            return($ret);
+        /* Unset header tags */
+        foreach(array("HEADER","SOURCE","TARGET","SESSION_ID") as $type){
+          if(isset($entries['XML'][$type])){
+            unset($entries['XML'][$type]);
           }
-
-          /* Unset header tags */
-          foreach(array("HEADER","SOURCE","TARGET","SESSION_ID") as $type){
-            if(isset($entries['XML'][$type])){
-              unset($entries['XML'][$type]);
-            }
-          }
-          $ret = $entries['XML']; 
         }
+        $ret = $entries['XML']; 
       }
     }
     return($ret);
@@ -400,41 +349,21 @@ class gosaSupportDaemon
 
   public function FAI_get_classes($name)
   {
-    $this->reset_error();
     $xml_msg = "<xml><header>gosa_query_fai_release</header><target>GOSA</target><source>GOSA</source>".
                   "<where><clause><phrase><release>".$name."</release></phrase></clause></where></xml>";;
     $ret = array();
     if($this->connect()){
-      $this->o_sock->write($xml_msg);
-      $str = trim($this->o_sock->read());
 
-      /* Check if something went wrong while reading */
-      if($this->o_sock->is_error()){
-        $this->set_error($this->o_sock->get_error());
-        return($ret);
-      }
-
-      $entries = $this->xml_to_array($str);
+      $entries = $this->_send($xml_msg,TRUE);
       if(isset($entries['XML']) && is_array($entries['XML'])){
 
-        /* Check if returned values represent a valid answer */
-        if(isset($entries['XML'])){
-          if(isset($entries['XML']['ERROR_STRING'])) {
-            $this->set_error($entries['XML']['ERROR_STRING']);
-            new log("debug","GOsa-si", 
-              get_class($this)."::".__FUNCTION__, array($name),
-              "FAILED error was ".$this->get_error());
-            return($ret);
+        /* Unset header tags */
+        foreach(array("HEADER","SOURCE","TARGET","SESSION_ID") as $type){
+          if(isset($entries['XML'][$type])){
+            unset($entries['XML'][$type]);
           }
-
-          /* Unset header tags */
-          foreach(array("HEADER","SOURCE","TARGET","SESSION_ID") as $type){
-            if(isset($entries['XML'][$type])){
-              unset($entries['XML'][$type]);
-            }
-          }
-          $ret = $entries['XML']; 
         }
+        $ret = $entries['XML']; 
       }
     }
     return($ret);
@@ -446,7 +375,6 @@ class gosaSupportDaemon
    */
   public function get_queued_entries($event_types = array("*"),$from=-1,$to=-1,$sort="timestamp DESC")
   {
-    $this->reset_error();
     $ret = array();
 
     $tags = "";
@@ -479,33 +407,16 @@ class gosaSupportDaemon
       </xml>";
 
     if($this->connect()){
-      $this->o_sock->write($xml_msg);
-      $str = trim($this->o_sock->read());
-
-      /* Check if something went wrong while reading */
-      if($this->o_sock->is_error()){
-        $this->set_error($this->o_sock->get_error());
-        return($ret);
-      }
-
-      $entries = $this->xml_to_array($str);
+      $entries = $this->_send($xml_msg,TRUE);
       if(isset($entries['XML']) && is_array($entries['XML'])){
 
-        /* Check if returned values represent a valid answer */
-        if(isset($entries['XML'])){
-          
-          /* Unset header tags */
-          foreach(array("HEADER","SOURCE","TARGET") as $type){
-            unset($entries['XML'][$type]);
-          }
-          $ret = $entries['XML']; 
+        /* Unset header tags */
+        foreach(array("HEADER","SOURCE","TARGET","SESSION_ID") as $type){
+          unset($entries['XML'][$type]);
         }
+        $ret = $entries['XML']; 
       }
     }
-    
-    /* Remove session ID. No one is interested in this... */
-    unset($ret['SESSION_ID']);
-
     return($ret);
   }
 
@@ -520,7 +431,6 @@ class gosaSupportDaemon
       trigger_error("Requires an array as parameter.");
       return;
     }
-    $this->reset_error();
 
     $ret = array();
 
@@ -542,16 +452,7 @@ class gosaSupportDaemon
       </xml>";
 
     if($this->connect()){
-      $this->o_sock->write($xml_msg);
-      $str = trim($this->o_sock->read());
-
-      /* Check if something went wrong while reading */
-      if($this->o_sock->is_error()){
-        $this->set_error($this->o_sock->get_error());
-        return($ret);
-      }
-
-      $entries = $this->xml_to_array($str);
+      $entries = $this->_send($xml_msg,TRUE);
       if(isset($entries['XML']) && is_array($entries['XML'])){
         foreach($entries['XML'] as $entry){
           if(is_array($entry) && array_key_exists("ID",$entry)){
@@ -574,7 +475,6 @@ class gosaSupportDaemon
       trigger_error("Requires an array as parameter.");
       return;
     }
-    $this->reset_error();
 
     $ret = array();
 
@@ -596,16 +496,7 @@ class gosaSupportDaemon
       </xml>";
 
     if($this->connect()){
-      $this->o_sock->write($xml_msg);
-      $str = trim($this->o_sock->read());
-
-      /* Check if something went wrong while reading */
-      if($this->o_sock->is_error()){
-        $this->set_error($this->o_sock->get_error());
-        return($ret);
-      }
-
-      $entries = $this->xml_to_array($str); 
+      $entries = $this->_send($xml_msg,TRUE);
       if(isset($entries['XML'])){
         foreach($entries['XML'] as $name => $entry){
           if(preg_match("/^ANSWER[0-9]*$/",$name)){
@@ -628,7 +519,6 @@ class gosaSupportDaemon
       trigger_error("Requires an array as parameter.");
       return;
     }
-    $this->reset_error();
 
     $ret = array();
 
@@ -650,16 +540,7 @@ class gosaSupportDaemon
       </xml>";
 
     if($this->connect()){
-      $this->o_sock->write($xml_msg);
-      $str = trim($this->o_sock->read());
-
-      /* Check if something went wrong while reading */
-      if($this->o_sock->is_error()){
-        $this->set_error($this->o_sock->get_error());
-        return($ret);
-      }
-
-      $entries = $this->xml_to_array($str); 
+      $entries = $this->_send($xml_msg,TRUE);
       if(isset($entries['XML'])){
         foreach($entries['XML'] as $name => $entry){
           if(preg_match("/^ANSWER[0-9]*$/",$name)){
@@ -683,7 +564,6 @@ class gosaSupportDaemon
       return;
     }
 
-    $this->reset_error();
 
     $xml_msg = "<xml>
       <header>gosa_query_jobdb</header>
@@ -700,16 +580,7 @@ class gosaSupportDaemon
       </xml>";
 
     if($this->connect()){
-      $this->o_sock->write($xml_msg);
-      $str = trim($this->o_sock->read());
-
-      /* Check if something went wrong while reading */
-      if($this->o_sock->is_error()){
-        $this->set_error($this->o_sock->get_error());
-        return(FALSE);
-      }
-
-      $entries = $this->xml_to_array($str); 
+      $entries = $this->_send($xml_msg,TRUE);
       if( isset($entries['XML']['HEADER']) && 
           $entries['XML']['HEADER']=="answer" && 
           isset($entries['XML']['ANSWER1'])){
@@ -730,7 +601,6 @@ class gosaSupportDaemon
       trigger_error("Requires an integer as parameter.");
       return;
     }
-    $this->reset_error();
   
     $ret = array();
     $xml_msg = "<xml>
@@ -747,16 +617,7 @@ class gosaSupportDaemon
       </where>
       </xml>";
     if($this->connect()){
-      $this->o_sock->write($xml_msg);
-      $str = trim($this->o_sock->read());
-
-      /* Check if something went wrong while reading */
-      if($this->o_sock->is_error()){
-        $this->set_error($this->o_sock->get_error());
-        return($ret);
-      }
-
-      $entries = $this->xml_to_array($str); 
+      $entries = $this->_send($xml_msg,TRUE);
       if( isset($entries['XML']['HEADER']) &&
           $entries['XML']['HEADER']=="answer" &&
           isset($entries['XML']['ANSWER1'])){
@@ -778,7 +639,6 @@ class gosaSupportDaemon
       return;
     }
 
-    $this->reset_error();
 
     $ret = array();
 
@@ -800,16 +660,7 @@ class gosaSupportDaemon
       </xml>";
 
     if($this->connect()){
-      $this->o_sock->write($xml_msg);
-      $str = $this->o_sock->read();
-
-      /* Check if something went wrong while reading */
-      if($this->o_sock->is_error()){
-        $this->set_error($this->o_sock->get_error());
-        return($ret);
-      }
-
-      $entries = $this->xml_to_array($str);
+      $entries = $this->_send($xml_msg,TRUE);
       if(isset($entries['XML']) || isset($entries['COUNT'])){
         new log("debug","DaemonEvent (IDS) ", "gosaSupportDaemon::remove_entries()", $ids,"SUCCESS");
         return(TRUE);
@@ -943,7 +794,6 @@ class gosaSupportDaemon
    */
   public function update_entries($ids,$data)
   {
-    $this->reset_error();
     if(!is_array($ids)){
       trigger_error("Requires an array as first parameter.");
       return;
@@ -987,17 +837,7 @@ class gosaSupportDaemon
       </xml>";
 
     if($this->connect()){
-
-      $this->o_sock->write($xml_msg);
-      $str      = trim($this->o_sock->read());
-
-      /* Check if something went wrong while reading */
-      if($this->o_sock->is_error()){
-        $this->set_error($this->o_sock->get_error());
-        return(FALSE);
-      }
-
-      $entries = $this->xml_to_array($str);
+      $entries = $this->_send($xml_msg,TRUE);
       if(isset($entries['XML'])){
         if(isset($entries['XML']['ERROR_STRING'])) {
           $this->set_error($entries['XML']['ERROR_STRING']);
@@ -1041,16 +881,11 @@ class gosaSupportDaemon
     $xml_msg ="<xml><header>gosa_count_jobdb</header><target>GOSA</target><source>GOSA</source></xml>";
     $this->connect();
     if($this->connect()){
-      $this->o_sock->write($xml_msg);
-      $str     = trim($this->o_sock->read());
-
-      /* Check if something went wrong while reading */
+      $entries = $this->_send($xml_msg,TRUE);
       if($this->o_sock->is_error()){
         $this->set_error($this->o_sock->get_error());
         return(0);
       }
-
-      $entries = $this->xml_to_array($str);
       if(isset($entries['XML'])){
         return($entries['XML']['COUNT']);
       }
@@ -1099,7 +934,6 @@ class gosaSupportDaemon
       return(FALSE);
     }
   
-    $this->reset_error();
 
     /* Add to queue if new 
      */
@@ -1144,7 +978,7 @@ class gosaSupportDaemon
   }
 
 
-/*! \brief  Returns an array containing all queued entries.
+  /*! \brief  Returns an array containing all queued entries.
     @return Array All queued entries as an array.
    */
   public function _send($data, $answer_expected= FALSE)
@@ -1152,6 +986,29 @@ class gosaSupportDaemon
     $this->reset_error();
     $ret = array();
 
+    /******
+      Debug handling
+     ******/
+    $debug = debug_backtrace();
+    $file = __FILE__;
+    $function = __FUNCTION__;
+    $line = __LINE__;
+    $class = __CLASS__;
+    foreach($debug as $info){
+      if(!in_array($info['function'],array("send_data","_send"))){
+        $file = $info['file'];
+        $line = $info['line'];
+        $class = get_class($this);
+        $function = $info['function'];
+        break;
+      }
+    }
+    @DEBUG(GOSA_SI, $line, "<b>".$class."::".$function."</b>" , $file, "<i>".htmlentities($data)."</i>", $info="");
+
+
+    /*******
+      Start sending data 
+     *******/
     if($this->connect()){
       $this->o_sock->write($data);
       if ($answer_expected){
