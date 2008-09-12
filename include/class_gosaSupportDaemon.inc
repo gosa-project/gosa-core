@@ -144,7 +144,7 @@ class gosaSupportDaemon
     $line = __LINE__;
     $class = __CLASS__;
     foreach($debug as $info){
-      if(!in_array($info['function'],array("send_data","_send","set_error"))){
+      if(!in_array($info['function'],array("send_data","_send","set_error","connect"))){
         $file = $info['file'];
         $line = $info['line'];
         $class = get_class($this);
