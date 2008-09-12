@@ -86,6 +86,7 @@ define ("DEBUG_POST",   16);
 define ("DEBUG_SESSION",32);
 define ("DEBUG_CONFIG", 64);
 define ("DEBUG_ACL",    128);
+define ("DEBUG_SI",     256);
 
 /* Rewrite german 'umlauts' and spanish 'accents'
    to get better results */
