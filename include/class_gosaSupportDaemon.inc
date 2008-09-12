@@ -987,8 +987,13 @@ class gosaSupportDaemon
    */
   public function _send($data, $answer_expected= FALSE)
   {
-    $this->reset_error();
+
     $ret = array();
+    if(!$this->connect()){
+      return($ret);
+    }
+  
+    $this->reset_error();
 
     /******
       Debug handling
