@@ -108,8 +108,12 @@ class gosaSupportDaemon
     $hosts = array();
     if(isset($res['XML'])){
       foreach($res['XML'][0] as $name => $data){
-        if(preg_match("/^HOST[0-9]*$/",$name) && $name != "HOST"){
-          $hosts[] = $data[0]['MAC'][0]['VALUE'];
+        if(preg_match("/^ANSWER[0-9]*$/",$name)){
+          if(isset($data[0]['MAC'][0]['VALUE'])){
+            $hosts[] = $data[0]['MAC'][0]['VALUE'];
+          }elseif(isset($data[0]['VALUE'])){
+            $hosts[] = $data[0]['VALUE'];
+          }
         }
       }
     }
