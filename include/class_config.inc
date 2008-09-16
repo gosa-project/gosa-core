@@ -252,7 +252,7 @@ class config  {
 
       /* Build new connection */
       $this->ldap= ldap_init ($this->current['SERVER'], $this->current['BASE'],
-          $this->current['ADMIN'], $this->get_credentials($this->current['PASSWORD']));
+          $this->current['ADMINDN'], $this->get_credentials($this->current['ADMINPASSWORD']));
 
       /* Check for connection */
       if (is_null($this->ldap) || (is_int($this->ldap) && $this->ldap == 0)){
@@ -358,11 +358,11 @@ class config  {
     $this->current['BASE']= @LDAP::convert($this->current['BASE']);
 
     /* Parse LDAP referral informations */
-    if (!isset($this->current['ADMIN']) || !isset($this->current['PASSWORD'])){
+    if (!isset($this->current['ADMINDN']) || !isset($this->current['ADMINPASSWORD'])){
       $url= $this->current['SERVER'];
       $referral= $this->current['REFERRAL'][$url];
-      $this->current['ADMIN']= $referral['ADMIN'];
-      $this->current['PASSWORD']= $referral['PASSWORD'];
+      $this->current['ADMINDN']= $referral['ADMINDN'];
+      $this->current['ADMINPASSWORD']= $referral['ADMINPASSWORD'];
     }
 
     /* Load server informations */
