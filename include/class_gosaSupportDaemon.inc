@@ -208,7 +208,7 @@ class gosaSupportDaemon
       "<header>gosa_get_available_kernel</header>".
       "<source>GOSA</source>".
       "<target>GOSA</target>".
-      "<release>".$release."</release>".
+      "<fai_release>".$release."</fai_release>".
       "</xml>";
 
     $ret = array();
@@ -354,7 +354,7 @@ class gosaSupportDaemon
   public function FAI_get_classes($name)
   {
     $xml_msg = "<xml><header>gosa_query_fai_release</header><target>GOSA</target><source>GOSA</source>".
-                  "<where><clause><phrase><release>".$name."</release></phrase></clause></where></xml>";;
+                  "<where><clause><phrase><fai_release>".$name."</fai_release></phrase></clause></where></xml>";;
     $ret = array();
     if($this->connect()){
 
