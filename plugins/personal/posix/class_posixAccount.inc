@@ -396,8 +396,8 @@ class posixAccount extends plugin
 
       $filter= "(&(|(objectClass=goServer)(objectClass=gotoWorkstation)(objectClass=gotoTerminal))$exclude(cn=*)(cn=$regex))";
 
-      $deps_a = array(get_ou("serverou"),
-                      get_ou("terminalou"),
+      $deps_a = array(get_ou("serverRDN"),
+                      get_ou("terminalRDN"),
                       get_ou("workstationou")); 
 
       $res= get_sub_list($filter, $acls, $deps_a, get_ou("systemsou").$sysfilter['depselect'], array("cn"), GL_SUBSEARCH | GL_SIZELIMIT);

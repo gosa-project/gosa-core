@@ -822,7 +822,7 @@ class config  {
    */
   function getShareList($listboxEntry = false)
   {
-    $tmp = get_sub_list("(&(objectClass=goShareServer)(goExportEntry=*))","server",get_ou("serverou"),
+    $tmp = get_sub_list("(&(objectClass=goShareServer)(goExportEntry=*))","server",get_ou("serverRDN"),
         $this->current['BASE'],array("goExportEntry","cn"), GL_NONE);
     $return =array();
     foreach($tmp as $entry){
@@ -859,7 +859,7 @@ class config  {
     $ui = get_userinfo();
     $base = $config->current['BASE'];
     $res= get_sub_list("(&(objectClass=goShareServer)(goExportEntry=*))", "server",
-          get_ou("serverou"), $base,array("goExportEntry","cn"),GL_NONE | GL_NO_ACL_CHECK);
+          get_ou("serverRDN"), $base,array("goExportEntry","cn"),GL_NONE | GL_NO_ACL_CHECK);
 
     foreach($res as $entry){
         

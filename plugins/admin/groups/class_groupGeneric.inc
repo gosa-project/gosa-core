@@ -372,9 +372,9 @@ class group extends plugin
       /* Search for systems 
        */
       $types = array();
-      $types['server']      = array("OU" => get_ou("serverou"),     "OC" => "(objectClass=goServer)");
+      $types['server']      = array("OU" => get_ou("serverRDN"),     "OC" => "(objectClass=goServer)");
       $types['workstation'] = array("OU" => get_ou("workstationou"),"OC" => "(objectClass=gotoWorkstation)");
-      $types['terminal']    = array("OU" => get_ou("terminalou"),   "OC" => "(objectClass=gotoTerminal)");
+      $types['terminal']    = array("OU" => get_ou("terminalRDN"),   "OC" => "(objectClass=gotoTerminal)");
       
       $res = array();
       foreach($types as $acl => $data){

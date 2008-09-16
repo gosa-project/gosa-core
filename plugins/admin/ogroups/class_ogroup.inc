@@ -335,8 +335,8 @@ class ogroup extends plugin
       $regex= $sysfilter['regex'];
       $filter= "(&(|(objectClass=goServer)(objectClass=gotoWorkstation)(objectClass=gotoTerminal))$exclude(cn=*)(cn=$regex))";
 
-      $deps_a = array(get_ou("serverou"),
-          get_ou("terminalou"),
+      $deps_a = array(get_ou("serverRDN"),
+          get_ou("terminalRDN"),
           get_ou("workstationou"));
       $res= get_sub_list($filter, array("terminal","server","workstation"), $deps_a, get_ou("systemsou").$sysfilter['depselect'],
           array("cn"), GL_SUBSEARCH | GL_SIZELIMIT);
@@ -656,13 +656,13 @@ class ogroup extends plugin
         "departments"     => array("OBJ"=>"department", "CLASS"=>"gosaDepartment" ,
           "DN"=> ""                        ,"ACL" => "department"), 
         "servers"         => array("OBJ"=>"servgeneric", "CLASS"=>"goServer"       ,
-          "DN"=> get_ou('serverou')        ,"ACL" => "server"),
+          "DN"=> get_ou('serverRDN')        ,"ACL" => "server"),
         "workstations"    => array("OBJ"=>"workgeneric", "CLASS"=>"gotoWorkstation",
           "DN"=> get_ou('workstationou')   ,"ACL" => "workstation"),
         "winstations"     => array("OBJ"=>"wingeneric", "CLASS"=>"opsiClient",        
           "DN"=> get_ou('SAMBAMACHINEACCOUNTRDN')     ,"ACL" => "winstation"),
         "terminals"       => array("OBJ"=>"termgeneric", "CLASS"=>"gotoTerminal"   ,
-          "DN"=> get_ou('terminalou')      ,"ACL" => "terminal"),
+          "DN"=> get_ou('terminalRDN')      ,"ACL" => "terminal"),
         "printers"        => array("OBJ"=>"printgeneric", "CLASS"=>"gotoPrinter"    ,
           "DN"=> get_ou('printerou')       ,"ACL" => "printer"),
         "phones"          => array("OBJ"=>"phoneGeneric", "CLASS"=>"goFonHardware"  ,
