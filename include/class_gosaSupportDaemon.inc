@@ -152,7 +152,7 @@ class gosaSupportDaemon
         break;
       }
     }
-    @DEBUG(GOSA_SI, $line, "<b>".$class."::".$function."</b>" , $file, "<font color='red'><i>".htmlentities($str)."</i></font>", $info="");
+    @DEBUG(DEBUG_SI, $line, "<b>".$class."::".$function."</b>" , $file, "<font color='red'><i>".htmlentities($str)."</i></font>", $info="");
 
     /******
       Set error string.
@@ -1012,7 +1012,7 @@ class gosaSupportDaemon
         break;
       }
     }
-    @DEBUG(GOSA_SI, $line, "<b>".$class."::".$function."</b>" , $file, "<i>".htmlentities($data)."</i>", $info="");
+    @DEBUG(DEBUG_SI, $line, "<b>".$class."::".$function."</b>" , $file, "<i>".htmlentities($data)."</i>", $info="");
 
 
     /*******
