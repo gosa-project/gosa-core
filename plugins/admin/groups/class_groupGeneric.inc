@@ -658,8 +658,8 @@ class group extends plugin
          to be prepared when adding/deleting users)
      */    
     $filter = "";
-    if ($this->config->get_cfg_value("ldap_filter_nesting_limit") == "" ||
-        count($this->memberUid) < $this->config->get_cfg_value("ldap_filter_nesting_limit")){
+    if ($this->config->get_cfg_value("ldapFilterNestingLimit") == "" ||
+        count($this->memberUid) < $this->config->get_cfg_value("ldapFilterNestingLimit")){
       foreach ($this->memberUid as $value){
         if(!isset($this->members[$value])){
           $filter .= "(uid=".normalizeLdap($value).")";
@@ -678,8 +678,8 @@ class group extends plugin
     }
   
     /* check if all uids are resolved */
-    if ($this->config->get_cfg_value("ldap_filter_nesting_limit") == "" ||
-        count($this->memberUid) < $this->config->get_cfg_value("ldap_filter_nesting_limit")){
+    if ($this->config->get_cfg_value("ldapFilterNestingLimit") == "" ||
+        count($this->memberUid) < $this->config->get_cfg_value("ldapFilterNestingLimit")){
       foreach ($this->memberUid as $value){
         if(!isset($this->members[$value])){
           $this->members[$value] =  _("! unknown id")." [".$value."]"; 

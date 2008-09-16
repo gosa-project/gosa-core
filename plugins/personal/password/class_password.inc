@@ -99,7 +99,7 @@ class password extends plugin
             $ui->dn, 
             $_POST['current_password'],
             $this->config->current['SERVER'],
-            $this->config->get_cfg_value("recursive") == "true",
+            $this->config->get_cfg_value("ldapFollowReferrals") == "true",
             $this->config->get_cfg_value("ldapTLS") == "true");
 
         /* connection Successfull ? */

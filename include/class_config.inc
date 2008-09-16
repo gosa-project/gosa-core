@@ -262,8 +262,8 @@ class config  {
       }
 
       if (!session::is_set('size_limit')){
-        session::set('size_limit',$this->current['SIZELIMIT']);
-        session::set('size_ignore',$this->current['SIZEIGNORE']);
+        session::set('size_limit',$this->current['LDAPSIZELIMIT']);
+        session::set('size_ignore',$this->current['LDAPSIZEIGNORE']);
       }
 
       if ($sizelimit){
@@ -305,8 +305,8 @@ class config  {
     $this->current['GROUPS'] = preg_replace("/,*$/","",$this->current['GROUPRDN']);
     $this->current['USERRDN'] = preg_replace("/,*$/","",$this->current['USERRDN']);
 
-    if (!isset($this->current['WINSTATIONS'])){
-      $this->current['WINSTATIONS']= "ou=winstations,ou=systems";
+    if (!isset($this->current['SAMBAMACHINEACCOUNTRDN'])){
+      $this->current['SAMBAMACHINEACCOUNTRDN']= "ou=winstations,ou=systems";
     }
     if (!isset($this->current['HASH'])){
       $this->current['HASH']= "crypt";
@@ -317,16 +317,16 @@ class config  {
     if (!isset($this->current['MINID'])){
       $this->current['MINID']= 100;
     }
-    if (!isset($this->current['SIZELIMIT'])){
-      $this->current['SIZELIMIT']= 200;
+    if (!isset($this->current['LDAPSIZELIMIT'])){
+      $this->current['LDAPSIZELIMIT']= 200;
     }
     if (!isset($this->current['SIZEINGORE'])){
-      $this->current['SIZEIGNORE']= TRUE;
+      $this->current['LDAPSIZEIGNORE']= TRUE;
     } else {
-      if (preg_match("/true/i", $this->current['SIZEIGNORE'])){
-        $this->current['SIZEIGNORE']= TRUE;
+      if (preg_match("/true/i", $this->current['LDAPSIZEIGNORE'])){
+        $this->current['LDAPSIZEIGNORE']= TRUE;
       } else {
-        $this->current['SIZEIGNORE']= FALSE;
+        $this->current['LDAPSIZEIGNORE']= FALSE;
       }
     }
 

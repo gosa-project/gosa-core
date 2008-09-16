@@ -644,7 +644,7 @@ class userinfo
    */ 
   function ignore_acl_for_current_user()
   {
-    return($this->config->get_cfg_value("ignore_acl") == $this->dn);
+    return($this->config->get_cfg_value("ignoreAcl") == $this->dn);
   }
 
 }

@@ -194,29 +194,29 @@ each location definition inside of this global definition.
 .B Generic options
 
 .PP
-.B forceglobals
+.B forceGlobals
 .I bool
 .PP
 The
-.I forceglobals
+.I forceGlobals
 statement enables PHP security checks to force register_global settings to
 be switched off.
 .PP
 
-.B forcessl
+.B forceSSL
 .I bool
 .PP
 The
-.I forceglobals
+.I forceSSL
 statement enables PHP security checks to force encrypted access to the web
 interface. GOsa will try to redirect to the same URL - just with https://.
 .PP
 
-.B warnssl
+.B warnSSL
 .I bool
 .PP
 The
-.I warnssl
+.I warnSSL
 statement enables PHP security checks to detect non encrypted access to
 the web interface. GOsa will display a warning in this case.
 .PP
@@ -413,20 +413,20 @@ variable defines a plain text file which contains additional resolutions
 to be shown in the environment and system plugins.
 .PP
 
-.B htaccess_auth
+.B htaccessAuthentication
 .I bool
 .PP
 The
-.I htaccess_auth
+.I htaccessAuthentication
 variable tells GOsa to use either htaccess authentication or LDAP authentication. This
 can be used if you want to use i.e. kerberos to authenticate the users.
 .PP
 
-.B gosa_si
+.B gosaSupportURI
 .I URI
 .PP
 The
-.I gosa_si
+.I gosaSupportURI
 defines the major gosa-si server host and the password for GOsa to connect to it.
 can be used if you want to use i.e. kerberos to authenticate the users.
 
@@ -522,11 +522,11 @@ want to set it to
 if your group plugin is slow.
 .PP
 
-.B ie_png_workaround
+.B iePngWorkaround
 .I bool
 .PP
 The
-.I ie_png_workaround
+.I iePngWorkaround
 variable enables or disables a workaround for IE < 7 in order to display transparent
 PNG files correctly. This drastically slows down browsing. Please use Firefox or Opera
 instead.
@@ -683,7 +683,7 @@ defined departments. The default is
 .I ou=groups.
 .PP
 
-.B winstations
+.B sambaMachineAccountRDN
 .I string
 .PP
 This statement defines the location where GOsa looks for new samba workstations.
@@ -777,11 +777,11 @@ components. Default is
 .I ou=systems.
 .PP
 
-.B ldap_filter_nesting_limit
+.B ldapFilterNestingLimit
 .I integer
 .PP
 The
-.I ldap_filter_nesting_limit
+.I ldapFilterNestingLimit
 statement can be used to speed up group handling for groups with several hundreds of members.
 The default behaviour is, that GOsa will resolv the memberUid values in a group to real names.
 To achieve this, it writes a single filter to minimize searches. Some LDAP servers (namely
@@ -789,20 +789,20 @@ Sun DS) simply crash when the filter gets too big. You can set a member limit, w
 stop to do these lookups.
 .PP
 
-.B sizelimit
+.B ldapSizelimit
 .I integer
 .PP
 The
-.I sizelimit
+.I ldapSizelimit
 statement tells GOsa to retrieve the specified maximum number of results. The user will get
 a warning, that not all entries were shown.
 .PP
 
-.B recursive
+.B ldapFollowReferrals
 .I bool
 .PP
 The
-.I recursive
+.I ldapFollowReferrals
 statement tells GOsa to follow LDAP referrals.
 .PP
 .PP
@@ -969,16 +969,16 @@ setup this can drastically improve the windows login performance.
 
 .B Asterisk options
 .PP
-.B ctihook
+.B ctiHook
 .I path
 .PP
 The
-.I ctihook
+.I ctiHook
 statement defines a script to be executed if someone clicks on a phone number
 inside of the addressbook plugin. It gets called with two parameters:
 
 .nf
-ctihook $source_number $destination_number
+ctiHook $source_number $destination_number
 .fi
 
 This script can be used to do automatted dialing from the addressbook.
@@ -1012,19 +1012,19 @@ The
 statement determines if GOsa should use "foo/bar" or "foo.bar" namespaces
 in IMAP. Unix style is with slashes.
 
-.B additionalrestrictionfilters
+.B postfixRestrictionFilters
 .I path
 .PP
 The
-.I additionalrestrictionfilters
+.I postfixRestrictionFilters
 statement defines a file to include for the postfix module in order
 to display user defined restriction filters.
 
-.B additionalprotocols
+.B postfixProtocols
 .I path
 .PP
 The
-.I additionalprotocols
+.I postfixProtocols
 statement defines a file to include for the postfix module in order
 to display user defined protocols.
 
@@ -1081,11 +1081,11 @@ statement tells GOsa to track LDAP timing statistics to the syslog. This may
 help to find indexing problems or bad search filters.
 .PP
 
-.B ignore_acl
+.B ignoreAcl
 .I dn
 .PP
 The
-.I ignore_acl
+.I ignoreAcl
 value tells GOsa to ignore complete ACL sets for the given DN. Add your
 DN here and you'll be able to restore accidently dropped ACLs.
 .PP

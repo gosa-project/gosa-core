@@ -209,7 +209,7 @@ if ($config->get_cfg_value("forcessl") == 'true' && $ssl != ''){
 
 /* Do we have htaccess authentification enabled? */
 $htaccess_authenticated= FALSE;
-if ($config->get_cfg_value("htaccess_auth") == "true" ){
+if ($config->get_cfg_value("htaccessAuthentication") == "true" ){
   if (!isset($_SERVER['REMOTE_USER'])){
     msg_dialog::display(_("Configuration error"), _("There is a problem with the authentication setup!"), FATAL_ERROR_DIALOG);
     exit;
@@ -260,7 +260,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
     $config->data['MAIN']['SCHEMACHECK'] = "true";
   }
   if ($config->get_cfg_value("schemaCheck") == "true"){
-    $recursive = ($config->get_cfg_value("recursive") == "true");
+    $recursive = ($config->get_cfg_value("ldapFollowReferrals") == "true");
     $tls =       ($config->get_cfg_value("ldapTLS") == "true");
 
     if(!count($ldap->get_objectclasses())){

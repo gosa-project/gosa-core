@@ -255,13 +255,13 @@ A: Yes. Use the winstation parameter in your location section:
 
    <location name=...>
    	...
-  	winstations="ou=machineaccounts"
+  	sambaMachineAccountRDN="ou=machineaccounts"
 	... \>
 
 
 Q: GOsa doesn't seem to follow my referrals. What can I do?
 
-A: Place the option 'recursive = "true"' inside your locations definition
+A: Place the option 'ldapFollowReferrals = "true"' inside your locations definition
    and you should be fine.
 
 
@@ -378,7 +378,7 @@ Q: Microsoft Internet Explorer <=6 seems paints strange blocks around
 
 A: Use Firefox, Konqueror, Safari, Opera, IE >= 7, etc. IE is broken and
    I don't want to waste my time with working around this old crap. There's
-   a quick hack, if you just put "ie_png_workaround='true'" inside the main
+   a quick hack, if you just put "iePngWorkaround='true'" inside the main
    section of your gosa.conf. This is a JavaScript based workaround and I've
    to place a WARNING here, that it is damn slow if you've large lists to
    display.
@@ -396,7 +396,7 @@ A: Yes. Browse to "password.php". You can preset a couple of things i.e.:
 
 Q: GOsa only shows 300 entries at a time. Is this normal?
 
-A: There's a default sizelimit. You can set the "sizelimit" option in your
+A: There's a default sizelimit. You can set the "ldapSizelimit" option in your
    gosa.conf's  location section to a higher value to get rid of it.
 
 
@@ -407,7 +407,7 @@ A: You can set a nesting limit which ensures that the user names will not be
    resolved if the amount of members reaches this limit.
    <location
         ...
-        LDAP_FILTER_NESTING_LIMIT="100"
+        ldapFilterNestingLimit="100"
         ... />
    </location>
 
@@ -424,5 +424,5 @@ Q: I've shredded my access control and am not able to do anything from now on. I
 
 A: Yes. Insert the following statement in the location section of your gosa.conf:
 
-   ignore_acl="your user's dn"
+   ignoreAcl="your user's dn"
 

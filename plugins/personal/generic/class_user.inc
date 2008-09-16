@@ -1085,7 +1085,7 @@ class user extends plugin
         die ("Could not connect to LDAP server");
       }
       ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
-      if (function_exists("ldap_set_rebind_proc") && $this->config->get_cfg_value("recursive") == "true") {
+      if (function_exists("ldap_set_rebind_proc") && $this->config->get_cfg_value("ldapFollowReferrals") == "true") {
         ldap_set_option($this->cid, LDAP_OPT_REFERRALS, 1);
         ldap_set_rebind_proc($ds, array(&$this, "rebind"));
       }
@@ -1296,7 +1296,7 @@ class user extends plugin
   {
     $ds= ldap_connect($this->config->current['SERVER']);
     ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
-    if (function_exists("ldap_set_rebind_proc") && $this->config->get_cfg_value("recursive") == "true"){
+    if (function_exists("ldap_set_rebind_proc") && $this->config->get_cfg_value("ldapFollowReferrals") == "true"){
       ldap_set_option($this->cid, LDAP_OPT_REFERRALS, 1);
       ldap_set_rebind_proc($ds, array(&$this, "rebind"));
     }

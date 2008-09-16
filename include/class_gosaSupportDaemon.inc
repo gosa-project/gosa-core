@@ -53,12 +53,12 @@ class gosaSupportDaemon
     if(!is_object($config)) { return; }
 
     # load from config, store statically
-    if ($config->get_cfg_value("gosa_si") != ""){
+    if ($config->get_cfg_value("gosaSupportURI") != ""){
 
       if ($this->s_host == ""){
-        $this->s_host= preg_replace("/^.*@([^:]+):.*$/", "$1", $config->get_cfg_value("gosa_si"));
-        $this->i_port= preg_replace("/^.*@[^:]+:(.*)$/", "$1", $config->get_cfg_value("gosa_si"));
-        $this->s_encryption_key = preg_replace("/^(.*)@[^:]+:.*$/", "$1", $config->get_cfg_value("gosa_si"));
+        $this->s_host= preg_replace("/^.*@([^:]+):.*$/", "$1", $config->get_cfg_value("gosaSupportURI"));
+        $this->i_port= preg_replace("/^.*@[^:]+:(.*)$/", "$1", $config->get_cfg_value("gosaSupportURI"));
+        $this->s_encryption_key = preg_replace("/^(.*)@[^:]+:.*$/", "$1", $config->get_cfg_value("gosaSupportURI"));
       }
 
       $this->f_timeout = $timeout;
@@ -85,7 +85,7 @@ class gosaSupportDaemon
         new log("debug","gosaSupportDaemon::connect()", "Cannot connect to si-server", array(),$this->get_error());
       }
     }else{
-      $this->set_error(msgPool::cmdnotfound("GOSA_SI",_("GOsa support daemon")));
+      $this->set_error(msgPool::cmdnotfound("gosaSupportURI",_("GOsa support daemon")));
     }
     return($this->is_connected);
   }

@@ -660,7 +660,7 @@ class ogroup extends plugin
         "workstations"    => array("OBJ"=>"workgeneric", "CLASS"=>"gotoWorkstation",
           "DN"=> get_ou('workstationou')   ,"ACL" => "workstation"),
         "winstations"     => array("OBJ"=>"wingeneric", "CLASS"=>"opsiClient",        
-          "DN"=> get_ou('WINSTATIONS')     ,"ACL" => "winstation"),
+          "DN"=> get_ou('SAMBAMACHINEACCOUNTRDN')     ,"ACL" => "winstation"),
         "terminals"       => array("OBJ"=>"termgeneric", "CLASS"=>"gotoTerminal"   ,
           "DN"=> get_ou('terminalou')      ,"ACL" => "terminal"),
         "printers"        => array("OBJ"=>"printgeneric", "CLASS"=>"gotoPrinter"    ,

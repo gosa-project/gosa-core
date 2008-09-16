@@ -344,7 +344,7 @@ function ldap_init ($server, $base, $binddn='', $pass='')
   global $config;
 
   $ldap = new LDAP ($binddn, $pass, $server,
-      isset($config->current['RECURSIVE']) && $config->current['RECURSIVE'] == "true",
+      isset($config->current['LDAPFOLLOWREFERRALS']) && $config->current['LDAPFOLLOWREFERRALS'] == "true",
       isset($config->current['LDAPTLS']) && $config->current['LDAPTLS'] == "true");
 
   /* Sadly we've no proper return values here. Use the error message instead. */
@@ -503,8 +503,8 @@ function ldap_login_user ($username, $password)
   /* password check, bind as user with supplied password  */
   $ldap->disconnect();
   $ldap= new LDAP($ui->dn, $password, $config->current['SERVER'],
-      isset($config->current['RECURSIVE']) &&
-      $config->current['RECURSIVE'] == "true",
+      isset($config->current['LDAPFOLLOWREFERRALS']) &&
+      $config->current['LDAPFOLLOWREFERRALS'] == "true",
       isset($config->current['LDAPTLS'])
       && $config->current['LDAPTLS'] == "true");
   if (!$ldap->success()){
@@ -1162,7 +1162,7 @@ function get_ou($name)
                 "printerou"     => "ou=printers,ou=systems,",
                 "phoneou"       => "ou=phones,ou=systems,",
                 "componentou"   => "ou=netdevices,ou=systems,",
-                "winstations"   => "ou=winstation,",
+                "sambaMachineAccountRDN"   => "ou=winstation,",
 
                 "blocklistou"   => "ou=gofax,ou=systems,",
                 "incomingou"    => "ou=incoming,",
@@ -1227,7 +1227,7 @@ function get_groups_ou()
 
 function get_winstations_ou()
 {
-  return (get_ou("WINSTATIONS"));
+  return (get_ou("SAMBAMACHINEACCOUNTRDN"));
 }
 
 
@@ -2585,7 +2585,7 @@ function generate_smb_nt_hash($password)
   global $config;
 
   # Try to use gosa-si?
-  if ($config->get_cfg_value("gosa_si") != ""){
+  if ($config->get_cfg_value("gosaSupportURI") != ""){
   	$res= gosaSupportDaemon::send("gosa_gen_smb_hash", "GOSA", array("password" => $password), TRUE);
     if (isset($res['XML']['HASH'])){
     	$hash= $res['XML']['HASH'];
