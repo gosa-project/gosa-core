@@ -180,7 +180,7 @@ each location definition inside of this global definition.
                   accountPrimaryAttribute="cn"
                   ...
 
-                  <referral url="ldaps://ldap.example.net:636/dc=example,dc=net"
+                  <referral uri="ldaps://ldap.example.net:636/dc=example,dc=net"
                             admin="cn=gosa-admin,dc=example,dc=net"
                             password="secret" />
 
@@ -271,52 +271,52 @@ The
 statement enables copy and paste for LDAP entries managed with GOsa.
 .PP
 
-.B enable_snapshot
+.B snapshots
 .I bool
 .PP
 The
-.I enable_snapshot
+.I snapshots
 statement enables a snapshot mechaism in GOsa. This enables you to save
 certain states of entries and restore them later on.
 .PP
 
-.B snapshot_base
+.B snapshotBase
 .I dn
 .PP
 The
-.I snapshot_base
+.I snapshotBase
 statement defines the base where snapshots should be stored inside of
 the LDAP.
 .PP
 
-.B snapshot_server
-.I url
+.B snapshotURI
+.I uri 
 .PP
 The
-.I snapshot_server
-variable defines the LDAP URL for the server which is used to do object
+.I snapshotURI
+variable defines the LDAP URI for the server which is used to do object
 snapshots.
 .PP
 
-.B snapshot_user
+.B snapshotAdminDn
 .I dn
 .PP
 The
-.I snapshot_user
+.I snapshotAdminDn
 variable defines the user which is used to authenticate when connecting
 to
-.I snapshot_server.
+.I snapshotURI.
 .PP
 
-.B snapshot_password
+.B snapshotAdminPassword
 .I string
 .PP
 The
-.I snapshot_password
+.I snapshotAdminPassword
 variable defines the credentials which are used in combination with
-.I snapshot_user
+.I snapshotAdminDn
 and
-.I snapshot_server
+.I snapshotURI
 in order to authenticate.
 .PP
 
@@ -1126,13 +1126,13 @@ These entries define the way how to connect to some directory service.
 .B Example:
 
 .nf
-  <referral url="ldap://ldap.example.net/dc=example,dc=net"
+  <referral uri="ldap://ldap.example.net/dc=example,dc=net"
             admin="cn=gosa-admin,dc=example,dc=net"
             password="secret" />
 .fi
 
-.I url
-is a valid LDAP url extendet by the base this referral is responsible for.
+.I uri
+is a valid LDAP uri extendet by the base this referral is responsible for.
 .I admin
 is the DN which has the permission to write LDAP entries. And
 .I password

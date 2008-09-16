@@ -160,13 +160,13 @@ class LDAP{
   function rebind($ldap, $referral)
   {
     $credentials= $this->get_credentials($referral);
-    if (@ldap_bind($ldap, LDAP::fix($credentials['ADMIN']), $credentials['PASSWORD'])) {
+    if (@ldap_bind($ldap, LDAP::fix($credentials['ADMINDN']), $credentials['ADMINPASSWORD'])) {
       $this->error = "Success";
       $this->hascon=true;
       $this->reconnect= true;
       return (0);
     } else {
-      $this->error = "Could not bind to " . $credentials['ADMIN'];
+      $this->error = "Could not bind to " . $credentials['ADMINDN'];
       return NULL;
     }
   }
@@ -586,7 +586,7 @@ class LDAP{
       /* Ignore referrals */
       $found= false;
       foreach($this->referrals as $ref){
-        $base= preg_replace('!^[^:]+://[^/]+/([^?]+).*$!', '\\1', $ref['URL']);
+        $base= preg_replace('!^[^:]+://[^/]+/([^?]+).*$!', '\\1', $ref['URI']);
         if ($base == $cdn){
           $found= true;
           break;
@@ -789,8 +789,8 @@ class LDAP{
     if (isset($referrals[$server])){
       return ($referrals[$server]);
     } else {
-      $ret['ADMIN']= LDAP::fix($this->binddn);
-      $ret['PASSWORD']= $this->bindpw;
+      $ret['ADMINDN']= LDAP::fix($this->binddn);
+      $ret['ADMINPASSWORD']= $this->bindpw;
     }
 
     return ($ret);

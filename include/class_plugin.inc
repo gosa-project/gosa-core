@@ -1225,17 +1225,17 @@ class plugin
     $ldap->cd($this->config->current['BASE']);
 
     /* check if there are special server configurations for snapshots */
-    if($config->get_cfg_value("snapshot_server") == ""){
+    if($config->get_cfg_value("snapshotURI") == ""){
 
       /* Source and destination server are both the same, just copy source to dest obj */
       $ldap_to      = $ldap;
       $snapldapbase = $this->config->current['BASE'];
 
     }else{
-      $server         = $config->get_cfg_value("snapshot_server");
-      $user           = $config->get_cfg_value("snapshot_user");
-      $password       = $config->get_cfg_value("snapshot_password");
-      $snapldapbase   = $config->get_cfg_value("snapshot_base");
+      $server         = $config->get_cfg_value("snapshotURI");
+      $user           = $config->get_cfg_value("snapshotAdminDn");
+      $password       = $config->get_cfg_value("snapshotAdminPassword");
+      $snapldapbase   = $config->get_cfg_value("snapshotBase");
 
       $ldap_to        = new ldapMultiplexer(new LDAP($user,$password, $server));
       $ldap_to -> cd($snapldapbase);
@@ -1254,7 +1254,7 @@ class plugin
 
       /* Collect some infos */
       $base           = $this->config->current['BASE'];
-      $snap_base      = $config->get_cfg_value("snapshot_base");
+      $snap_base      = $config->get_cfg_value("snapshotBase");
       $base_of_object = preg_replace ('/^[^,]+,/i', '', $this->dn);
       $new_base       = preg_replace("/".normalizePreg($base)."$/","",$base_of_object).$snap_base;
 
@@ -1317,19 +1317,19 @@ class plugin
   function snapshotEnabled()
   {
     $config = $this->config;
-    if($config->get_cfg_value("enable_snapshot") == "true"){
+    if($config->get_cfg_value("snapshots") == "true"){
 	    /* Check if the snapshot_base is defined */
-	    if ($config->get_cfg_value("snapshot_base") == ""){
-		    msg_dialog::display(_("Configuration error"), sprintf(_("The snapshot functionality is enabled, but the required variable '%s' is not set."),"SNAPSHOT_BASE"), ERROR_DIALOG);
+	    if ($config->get_cfg_value("snapshotBase") == ""){
+		    msg_dialog::display(_("Configuration error"), sprintf(_("The snapshot functionality is enabled, but the required variable '%s' is not set."),"snapshotBase"), ERROR_DIALOG);
 		    return(FALSE);
 	    }
 
 	    /* check if there are special server configurations for snapshots */
-	    if ($config->get_cfg_value("snapshot_server") != ""){
+	    if ($config->get_cfg_value("snapshotURI") != ""){
 
 		    /* check if all required vars are available to create a new ldap connection */
 		    $missing = "";
-		    foreach(array("snapshot_server","snapshot_user","snapshot_password","snapshot_base") as $var){
+		    foreach(array("snapshotURI","snapshotAdminDn","snapshotAdminPassword","snapshotBase") as $var){
 			    if($config->get_cfg_value($var) == ""){
 				    $missing .= $var." ";
 				    msg_dialog::display(_("Configuration error"), sprintf(_("The snapshot functionality is enabled, but the required variable '%s' is not set."), $missing), ERROR_DIALOG);
@@ -1357,13 +1357,13 @@ class plugin
 
     /* check if there are special server configurations for snapshots */
 
-    if(isset($cfg['SERVER']) && isset($cfg['SNAPSHOT_SERVER']) && $cfg['SERVER'] == $cfg['SNAPSHOT_SERVER']){
+    if(isset($cfg['SERVER']) && isset($cfg['SNAPSHOTURI']) && $cfg['SERVER'] == $cfg['SNAPSHOTURI']){
       $ldap_to    = $ldap;
-    }elseif(isset($cfg['SNAPSHOT_SERVER'])){
-      $server       = $cfg['SNAPSHOT_SERVER'];
-      $user         = $cfg['SNAPSHOT_USER'];
-      $password     = $cfg['SNAPSHOT_PASSWORD'];
-      $snapldapbase = $cfg['SNAPSHOT_BASE'];
+    }elseif(isset($cfg['SNAPSHOTURI'])){
+      $server       = $cfg['SNAPSHOTURI'];
+      $user         = $cfg['SNAPSHOTADMINDN'];
+      $password     = $cfg['SNAPSHOTADMINPASSWORD'];
+      $snapldapbase = $cfg['SNAPSHOTBASE'];
 
       $ldap_to      = new ldapMultiplexer(new LDAP($user,$password, $server));
       $ldap_to -> cd ($snapldapbase);
@@ -1376,7 +1376,7 @@ class plugin
 
     /* Prepare bases and some other infos */
     $base           = $this->config->current['BASE'];
-    $snap_base      = $cfg['SNAPSHOT_BASE'];
+    $snap_base      = $cfg['SNAPSHOTBASE'];
     $base_of_object = preg_replace ('/^[^,]+,/i', '', $dn);
     $new_base       = preg_replace("/".normalizePreg($base)."$/","",$base_of_object).$snap_base;
     $tmp            = array(); 
@@ -1418,11 +1418,11 @@ class plugin
     $cfg= &$this->config->current;
 
     /* check if there are special server configurations for snapshots */
-    if(isset($cfg['SNAPSHOT_SERVER'])){
-      $server       = $cfg['SNAPSHOT_SERVER'];
-      $user         = $cfg['SNAPSHOT_USER'];
-      $password     = $cfg['SNAPSHOT_PASSWORD'];
-      $snapldapbase = $cfg['SNAPSHOT_BASE'];
+    if(isset($cfg['SNAPSHOTURI'])){
+      $server       = $cfg['SNAPSHOTURI'];
+      $user         = $cfg['SNAPSHOTADMINDN'];
+      $password     = $cfg['SNAPSHOTADMINPASSWORD'];
+      $snapldapbase = $cfg['SNAPSHOTBASE'];
       $ldap_to      = new ldapMultiplexer(new LDAP($user,$password, $server));
       $ldap_to->cd ($snapldapbase);
       if (!$ldap_to->success()){
@@ -1434,7 +1434,7 @@ class plugin
 
     /* Prepare bases */ 
     $base           = $this->config->current['BASE'];
-    $snap_base      = $cfg['SNAPSHOT_BASE'];
+    $snap_base      = $cfg['SNAPSHOTBASE'];
     $new_base       = preg_replace("/".normalizePreg($base)."$/","",$base_of_object).$snap_base;
 
     /* Fetch all objects and check if they do not exist anymore */
@@ -1484,11 +1484,11 @@ class plugin
     $cfg= &$this->config->current;
 
     /* check if there are special server configurations for snapshots */
-    if(isset($cfg['SNAPSHOT_SERVER'])){
-      $server       = $cfg['SNAPSHOT_SERVER'];
-      $user         = $cfg['SNAPSHOT_USER'];
-      $password     = $cfg['SNAPSHOT_PASSWORD'];
-      $snapldapbase = $cfg['SNAPSHOT_BASE'];
+    if(isset($cfg['SNAPSHOTURI'])){
+      $server       = $cfg['SNAPSHOTURI'];
+      $user         = $cfg['SNAPSHOTADMINDN'];
+      $password     = $cfg['SNAPSHOTADMINPASSWORD'];
+      $snapldapbase = $cfg['SNAPSHOTBASE'];
       $ldap_to      = new ldapMultiplexer(new LDAP($user,$password, $server));
       $ldap_to->cd ($snapldapbase);
       if (!$ldap_to->success()){
