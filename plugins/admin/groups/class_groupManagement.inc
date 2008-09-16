@@ -50,7 +50,7 @@ class groupManagement extends plugin
     
     /* Detect if we have to display the primary group checkbox */
     $tmp = "";
-    if ($this->config->get_cfg_value("noprimarygroup") == "true"){
+    if ($this->config->get_cfg_value("primaryGroupFilter") == "false"){
       $this->ShowPrimaryCheckBox = false;
     } else {
       $this->ShowPrimaryCheckBox = true;

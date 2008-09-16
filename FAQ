@@ -196,8 +196,8 @@ Q: I really don't want dn's containing the CN for user accounts because I don't
    want to support anonymous binds for uid resolution. Is it possible to have dn's
    containing the uid instead?
 
-A: Yes. Placing the dnmode="uid" keyword in your gosa.conf's location section will
-   solve your problem.
+A: Yes. Placing the accountPrimaryAttribute="uid" keyword in your gosa.conf's location
+   section will solve your problem.
 
 
 Q: Hey, I've installed GOsa, but it claims something about "SID and / or RIDBASE
@@ -368,7 +368,7 @@ A: Yes. Download http://standards.ieee.org/regauth/oui/oui.txt and place
 
 Q: GOsa sessions expire too quick. Is there a way to change this?
 
-A: Yes. Set "session_lifetime" to the number of seconds of inactivity. 7200
+A: Yes. Set "sessionLifetime" to the number of seconds of inactivity. 7200
    (60x60x2) would be for two hours. Place this option inside the main
    section of your gosa.conf.
    

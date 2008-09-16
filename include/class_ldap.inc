@@ -60,8 +60,8 @@ class LDAP{
     $this->hostname=$hostname;
 
     /* Check if MAX_LDAP_QUERY_TIME is defined */ 
-    if(is_object($config) && $config->get_cfg_value("max_ldap_query_time") != ""){
-      $str = $config->get_cfg_value("max_ldap_query_time");
+    if(is_object($config) && $config->get_cfg_value("ldapMaxQueryTime") != ""){
+      $str = $config->get_cfg_value("ldapMaxQueryTime");
       $this->max_ldap_query_time = (float)($str);
     }
 

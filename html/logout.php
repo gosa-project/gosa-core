@@ -45,10 +45,10 @@ if(session::is_set('ui')){
 }
 
 /* Language setup */
-if ((!isset($config)) || $config->get_cfg_value("lang") == ""){
+if ((!isset($config)) || $config->get_cfg_value("language") == ""){
   $lang= get_browser_language();
 } else {
-  $lang= $config->get_cfg_value("lang");
+  $lang= $config->get_cfg_value("language");
 }
 
 $lang.=".UTF-8";

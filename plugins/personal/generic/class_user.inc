@@ -1140,7 +1140,7 @@ class user extends plugin
     $this->cn= $pt.$this->givenName." ".$this->sn;
 
     /* Permissions for that base? */
-    if ($this->config->get_cfg_value("dnmode") == "uid"){
+    if ($this->config->get_cfg_value("accountPrimaryAttribute") == "uid"){
       $this->new_dn= 'uid='.$this->uid.','.get_people_ou().$this->base;
     } else {
       /* Don't touch dn, if cn hasn't changed */
@@ -1211,7 +1211,7 @@ class user extends plugin
       if ($this->uid == ""){
         $message[]= msgPool::required(_("Login"));
       }
-      if ($this->config->get_cfg_value("dnmode") != "uid"){
+      if ($this->config->get_cfg_value("accountPrimaryAttribute") != "uid"){
         $ldap->cat($this->new_dn);
         if ($ldap->count() != 0 && $this->dn != $this->new_dn && $this->dn == 'new'){
           $message[]= msgPool::duplicated(_("Name"));

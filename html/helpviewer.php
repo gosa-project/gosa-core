@@ -42,7 +42,7 @@ $ui= session::get('ui');
 $config= session::get('config');
 
 /* Language setup */
-$lang= $config->get_cfg_value("lang");
+$lang= $config->get_cfg_value("language");
 if ($lang == ""){
   $lang= get_browser_language();
 }

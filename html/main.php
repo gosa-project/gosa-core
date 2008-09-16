@@ -65,7 +65,7 @@ $config->check_config_version();
 $config->check_and_reload();
 
 /* Enable compressed output */
-if ($config->get_cfg_value("compressed") == "true"){
+if ($config->get_cfg_value("sendCompressedOutput") == "true"){
   ob_start("ob_gzhandler");
 }
 
@@ -75,7 +75,7 @@ if(session::get('_LAST_PAGE_REQUEST') == ""){
 }else{
 
   /* check GOsa.conf for defined session lifetime */
-  $max_life= $config->get_cfg_value("session_lifetime", 60*60*2);
+  $max_life= $config->get_cfg_value("sessionLifetime", 60*60*2);
 
   /* get time difference between last page reload */
   $request_time = (time()- session::get('_LAST_PAGE_REQUEST'));
@@ -96,7 +96,7 @@ if(session::get('_LAST_PAGE_REQUEST') == ""){
 @DEBUG (DEBUG_CONFIG, __LINE__, __FUNCTION__, __FILE__, $config->data, "config");
 
 /* Set template compile directory */
-$smarty->compile_dir= $config->get_cfg_value("compile", '/var/spool/gosa');
+$smarty->compile_dir= $config->get_cfg_value("templateCompileDirectory", '/var/spool/gosa');
 
 /* Set default */
 $reload_navigation = false;
@@ -417,7 +417,7 @@ if(isset($_COOKIE['GOsa_Filter_Settings'])){
 }
 
 /* Save filters? */
-if($config->get_cfg_value("save_filter") == "true"){
+if($config->get_cfg_value("storeFilterSettings") == "true"){
   $cookie_vars = array("MultiDialogFilters","CurrentMainBase");
   foreach($cookie_vars as $var){
     if(session::is_set($var)){

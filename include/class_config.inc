@@ -290,8 +290,8 @@ class config  {
     if (!isset($this->current['SAMBAVERSION'])){
       $this->current['SAMBAVERSION']= 3;
     }
-    if (!isset($this->current['PEOPLE'])){
-      $this->current['PEOPLE']= "ou=people";
+    if (!isset($this->current['USERRDN'])){
+      $this->current['USERRDN']= "ou=people";
     }
     if (!isset($this->current['GROUPS'])){
       $this->current['GROUPS']= "ou=groups";
@@ -303,7 +303,7 @@ class config  {
   
     /* Remove possibly added ',' from end of group and people ou */
     $this->current['GROUPS'] = preg_replace("/,*$/","",$this->current['GROUPS']);
-    $this->current['PEOPLE'] = preg_replace("/,*$/","",$this->current['PEOPLE']);
+    $this->current['USERRDN'] = preg_replace("/,*$/","",$this->current['USERRDN']);
 
     if (!isset($this->current['WINSTATIONS'])){
       $this->current['WINSTATIONS']= "ou=winstations,ou=systems";
@@ -311,8 +311,8 @@ class config  {
     if (!isset($this->current['HASH'])){
       $this->current['HASH']= "crypt";
     }
-    if (!isset($this->current['DNMODE'])){
-      $this->current['DNMODE']= "cn";
+    if (!isset($this->current['ACCOUNTPRIMARYATTRIBUTE'])){
+      $this->current['ACCOUNTPRIMARYATTRIBUTE']= "cn";
     }
     if (!isset($this->current['MINID'])){
       $this->current['MINID']= 100;
@@ -986,7 +986,7 @@ class config  {
    */
   function check_session_lifetime()
   {
-    $cfg_lifetime = $this->data['MAIN']['SESSION_LIFETIME'];
+    $cfg_lifetime = $this->data['MAIN']['SESSIONLIFETIME'];
     $ini_lifetime = ini_get('session.gc_maxlifetime');
     $deb_system   = file_exists('/etc/debian_version');
     return(!($deb_system && ($ini_lifetime < $cfg_lifetime)));  

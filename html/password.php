@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] != "POST"){
 }
 
 /* Set template compile directory */
-$smarty->compile_dir= $config->get_cfg_value("compile", '/var/spool/gosa');
+$smarty->compile_dir= $config->get_cfg_value("templateCompileDirectory", '/var/spool/gosa');
 
 /* Check for compile directory */
 if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))){
@@ -80,10 +80,10 @@ if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))){
 clean_smarty_compile_dir($smarty->compile_dir);
 
 /* Language setup */
-if ($config->get_cfg_value("lang") == ""){
+if ($config->get_cfg_value("language") == ""){
   $lang= get_browser_language();
 } else {
-  $lang= $config->get_cfg_value("lang");
+  $lang= $config->get_cfg_value("language");
 }
 $lang.=".UTF-8";
 putenv("LANGUAGE=");

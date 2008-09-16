@@ -193,8 +193,8 @@ function get_browser_language()
   }
 
   /* Check for global language settings in gosa.conf */
-  if (isset ($config) && $config->get_cfg_value('lang') != ""){
-    $lang = $config->get_cfg_value('lang');
+  if (isset ($config) && $config->get_cfg_value('language') != ""){
+    $lang = $config->get_cfg_value('language');
     if(!preg_match("/utf/i",$lang)){
       $lang .= ".UTF-8";
     }
@@ -1215,7 +1215,7 @@ function get_ou($name)
 
 function get_people_ou()
 {
-  return (get_ou("PEOPLE"));
+  return (get_ou("USERRDN"));
 }
 
 
@@ -2593,7 +2593,7 @@ function generate_smb_nt_hash($password)
       $hash= "";
     }
   } else {
-	  $tmp= $config->get_cfg_value('smbhash')." ".escapeshellarg($password);
+	  $tmp= $config->get_cfg_value('sambaHashHook')." ".escapeshellarg($password);
 	  @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__, $tmp, "Execute");
 
 	  exec($tmp, $ar);
@@ -2632,7 +2632,7 @@ function getEntryCSN($dn)
   }
 
   /* Get attribute that we should use as serial number */
-  $attr= $config->get_cfg_value("uniq_identifier");
+  $attr= $config->get_cfg_value("modificationDetectionAttribute");
   if($attr != ""){
     $ldap = $config->get_ldap_link();
     $ldap->cat($dn,array($attr));

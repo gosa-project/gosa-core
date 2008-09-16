@@ -177,7 +177,7 @@ each location definition inside of this global definition.
 
         <location name="Example Net"
                   hash="md5"
-                  dnmode="cn"
+                  accountPrimaryAttribute="cn"
                   ...
 
                   <referral url="ldaps://ldap.example.net:636/dc=example,dc=net"
@@ -221,11 +221,11 @@ statement enables PHP security checks to detect non encrypted access to
 the web interface. GOsa will display a warning in this case.
 .PP
 
-.B uniq_identifier
+.B modificationDetectionAttribute
 .I string
 .PP
 The
-.I uniq_identifier
+.I modificationDetectionAttribute
 statement enables GOsa to check if a entry currently being edited has
 been modified from someone else outside GOsa in the meantime. It will
 display an informative dialog then. It can be set to
@@ -329,11 +329,11 @@ statement defines the LDAP base, where GOsa stores management information,
 such as site wide locking and user notifications.
 .PP
 
-.B compile
+.B templateCompileDirectory
 .I path
 .PP
 The
-.I compile
+.I templateCompileDirectory
 statements defines the path, where the PHP templating engins
 .I smarty
 should store its compiled GOsa templates for improved speed. This path
@@ -396,11 +396,11 @@ on unix systems, you've to adjust your NSS configuration to
 use rfc2307bis style groups, too.
 .PP
 
-.B ppd_path
+.B ppdPath
 .I path
 .PP
 The
-.I ppd_path
+.I ppdPath
 variable defines where to store PPD files for the GOto environment plugins.
 .PP
 
@@ -459,30 +459,30 @@ statement sets the icon size in the main menu. Its value should be something
 like 48x48.
 .PP
 
-.B compressed
+.B sendCompressedOutput
 .I true/false
 .PP
 The
-.I compressed
+.I sendCompressedOutput
 statement determines whether PHP should send compressed HTML pages to
 browsers or not. This may increase or decrease the performance, depending
 on your network.
 .PP
 
-.B save_filter
+.B storeFilterSettings
 .I true/false
 .PP
 The
-.I save_filter
+.I storeFilterSettings
 statement determines whether GOsa should store filter and plugin settings
 inside of a cookie.
 .PP
 
-.B lang
+.B language
 .I string
 .PP
 The
-.I lang
+.I language
 statement defines the default language used by GOsa. Normally GOsa autodetects
 the language from the browser settings. If this is not working or you want to
 force the language, just add the language code (i.e. de for german) here.
@@ -500,21 +500,21 @@ within themes. Take a look at the GOsa
 for more information.
 .PP
 
-.B session_lifetime
+.B sessionLifetime
 .I int
 .PP
 The
-.I session_lifetime
+.I sessionLifetime
 value defines when a session will expire in seconds. For Debian systems, this will
 not work because the sessions will be removed by a cron job instead. Please modify
 the value inside of your php.ini instead.
 .PP
 
-.B noprimarygroup
+.B primaryGroupFilter
 .I bool
 .PP
 The
-.I noprimarygroup
+.I primaryGroupFilter
 variable enables or disables the group filter to show primary user groups. It is
 time consuming to evaluate which groups are primary and which are not. So you may
 want to set it to
@@ -594,11 +594,11 @@ needed from time to time.
 
 .B LDAP options
 .PP
-.B max_ldap_query_time
+.B ldapMaxQueryTime
 .I integer
 .PP
 The
-.I max_ldap_query_time
+.I ldapMaxQueryTime
 statement tells GOsa to stop LDAP actions if there is no answer within the
 specified number of seconds.
 .PP
@@ -620,11 +620,11 @@ The
 statement enables or disables TLS operating on LDAP connections.
 .PP
 
-.B dnmode
+.B accountPrimaryAttribute
 .I cn/uid
 .PP
 The
-.I dnmode
+.I accountPrimaryAttribute
 option tells GOsa how to create new accounts. Possible values are
 .I uid
 and
@@ -638,7 +638,7 @@ In the second case, GOsa creates cn style DN entries:
 cn=Foo Bar,ou=staff,dc=example,dc=net
 .fi
 If you choose "cn" to be your
-.I dnmode
+.I accountPrimaryAttribute
 you can decide whether to include the personal title in your dn by
 selecting
 .I include_personal_title.
@@ -650,14 +650,14 @@ selecting
 The
 .I include_personal_title
 option tells GOsa to include the personal title in user DNs when
-.I dnmode
+.I accountPrimaryAttribute
 is set to "cn".
 
-.B people
+.B userRDN
 .I string
 .PP
 The
-.I people
+.I userRDN
 statement defines the location where new accounts will be created inside of
 defined departments. The default is
 .I ou=people.
@@ -942,11 +942,11 @@ statement defines the version of samba you want to write LDAP entries for. Be su
 to include the correct schema in this case. Valid values are 2 and 3.
 .PP
 
-.B smbhash
+.B sambaHashHook
 .I path
 .PP
 The
-.I smbhash
+.I sambaHashHook
 statement contains an executable to generate samba hash values. This is required
 for password synchronization, but not required if you apply gosa-si services.
 If you don't have mkntpasswd from the samba distribution installed, you can use

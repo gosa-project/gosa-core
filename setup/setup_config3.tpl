@@ -3,7 +3,7 @@
 
     <div class='step4_container'>
         <div class='step4_name'>
-            {t}Disable primary group filter{/t}
+            {t}Enable primary group filter{/t}
         </div>
         <div class='step4_value'>
 	

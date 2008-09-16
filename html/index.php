@@ -151,12 +151,12 @@ if ($_SERVER["REQUEST_METHOD"] != "POST"){
 }
 
 /* Enable compressed output */
-if ($config->get_cfg_value("compressed") != ""){
+if ($config->get_cfg_value("sendCompressedOutput") != ""){
   ob_start("ob_gzhandler");
 }
 
 /* Set template compile directory */
-$smarty->compile_dir= $config->get_cfg_value("compile", '/var/spool/gosa');
+$smarty->compile_dir= $config->get_cfg_value("templateCompileDirectory", '/var/spool/gosa');
 
 /* Check for compile directory */
 if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))){
@@ -338,7 +338,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
       session::set('config',$config);
 
       /* Restore filter settings from cookie, if available */
-      if($config->get_cfg_value("save_filter") == "true"){
+      if($config->get_cfg_value("storeFilterSettings") == "true"){
 
         if(isset($_COOKIE['GOsa_Filter_Settings']) || isset($HTTP_COOKIE_VARS['GOsa_Filter_Settings'])){
 
