@@ -293,7 +293,7 @@ class config  {
     if (!isset($this->current['USERRDN'])){
       $this->current['USERRDN']= "ou=people";
     }
-    if (!isset($this->current['GROUPS'])){
+    if (!isset($this->current['GROUPRDN'])){
       $this->current['GROUPS']= "ou=groups";
     }
 
@@ -302,7 +302,7 @@ class config  {
     }
   
     /* Remove possibly added ',' from end of group and people ou */
-    $this->current['GROUPS'] = preg_replace("/,*$/","",$this->current['GROUPS']);
+    $this->current['GROUPS'] = preg_replace("/,*$/","",$this->current['GROUPRDN']);
     $this->current['USERRDN'] = preg_replace("/,*$/","",$this->current['USERRDN']);
 
     if (!isset($this->current['WINSTATIONS'])){

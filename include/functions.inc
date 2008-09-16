@@ -1221,7 +1221,7 @@ function get_people_ou()
 
 function get_groups_ou()
 {
-  return (get_ou("GROUPS"));
+  return (get_ou("GROUPRDN"));
 }
 
 
@@ -2206,17 +2206,17 @@ function get_base_from_hook($dn, $attrib)
           return ($output[0]);
         } else {
           msg_dialog::display(_("Warning"), _("'base_hook' is not available. Using default base!"), WARNING_DIALOG);
-          return ($config->get_cfg_value("uidbase"));
+          return ($config->get_cfg_value("uidNumberBase"));
         }
       } else {
         msg_dialog::display(_("Warning"), _("'base_hook' is not available. Using default base!"), WARNING_DIALOG);
-        return ($config->get_cfg_value("uidbase"));
+        return ($config->get_cfg_value("uidNumberBase"));
       }
 
     } else {
 
       msg_dialog::display(_("Warning"), _("'base_hook' is not available. Using default base!"), WARNING_DIALOG);
-      return ($config->get_cfg_value("uidbase"));
+      return ($config->get_cfg_value("uidNumberBase"));
 
     }
   }

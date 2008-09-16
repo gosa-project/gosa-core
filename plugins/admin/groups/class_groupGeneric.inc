@@ -1188,7 +1188,7 @@ class group extends plugin
 
     /* Find out next free id near to UID_BASE */
     if ($this->config->get_cfg_value("base_hook") == ""){
-      $base= $this->config->get_cfg_value("uidbase");
+      $base= $this->config->get_cfg_value("uidNumberBase");
     } else {
       /* Call base hook */
       $base= get_base_from_hook($dn, $attrib);

@@ -663,21 +663,21 @@ defined departments. The default is
 .I ou=people.
 .PP
 
-.B groups
+.B groupsRDN
 .I string
 .PP
 The
-.I groups
+.I groupsRDN
 statement defines the location where new groups will be created inside of
 defined departments. The default is
 .I ou=groups.
 .PP
 
-.B sudoou
+.B sudoRDN
 .I string
 .PP
 The
-.I sudoou
+.I sudoRDN
 statement defines the location where new groups will be created inside of
 defined departments. The default is
 .I ou=groups.
@@ -810,29 +810,29 @@ statement tells GOsa to follow LDAP referrals.
 
 .B Account creation options
 .PP
-.B uidbase
+.B uidNumberBase
 .I integer
 .PP
 The
-.I uidbase
+.I uidNumberBase
 statement defines where to start looking for a new free user id. This should be synced
 with your
 .I adduser.conf
-to avoid overlapping uidNumber values between local and LDAP based lookups. The uidbase
+to avoid overlapping uidNumber values between local and LDAP based lookups. The uidNumberBase
 can even be dynamic. Take a look at the
 .I base_hook
 definition below.
 .PP
 
-.B gidbase
+.B gidNumberBase
 .I integer
 .PP
 The
-.I gidbase
+.I gidNumberBase
 statement defines where to start looking for a new free group id. This should be synced
 with your
 .I adduser.conf
-to avoid overlapping gidNumber values between local and LDAP based lookups. The gidbase
+to avoid overlapping gidNumber values between local and LDAP based lookups. The gidNumberBase
 can even be dynamic. Take a look at the
 .I base_hook
 definition below.

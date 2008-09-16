@@ -1302,10 +1302,10 @@ class posixAccount extends plugin
 
     /* get the ranges */
     $tmp = array('0'=> 1000); 
-    if (preg_match('/posixAccount/', $oc) && $this->config->get_cfg_value("uidbase") != ""){
-      $tmp= split('-',$this->config->get_cfg_value("uidbase"));
-    } elseif($this->config->get_cfg_value("gidbase") != ""){
-      $tmp= split('-',$this->config->get_cfg_value("gidbase"));
+    if (preg_match('/posixAccount/', $oc) && $this->config->get_cfg_value("uidNumberBase") != ""){
+      $tmp= split('-',$this->config->get_cfg_value("uidNumberBase"));
+    } elseif($this->config->get_cfg_value("gidNumberBase") != ""){
+      $tmp= split('-',$this->config->get_cfg_value("gidNumberBase"));
     }
 
     /* Set hwm to max if not set - for backward compatibility */

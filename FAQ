@@ -178,8 +178,8 @@ Q: I'd like to place my users under ou=staff, not under ou=people. Can I change
 A: Yes. You can change the people and group locations by adding the following
    statements to your location sections:
 
-   people="ou=staff"
-   groups="ou=crowds"
+   userRDN="ou=staff"
+   groupRDN="ou=crowds"
 
    After logging in again, people and groups are created in the configured places.
    As a side note, you can leave these strings blank for flat structures, too.
