@@ -3485,7 +3485,7 @@ msgstr "Không thể viết lên revision file!"
 #: include/functions.inc:2207 include/functions.inc:2211
 #: include/functions.inc:2217
 msgid "'base_hook' is not available. Using default base!"
-msgstr "'base_hook' không có. Hãy sử dụng cơ sở mặc định!"
+msgstr "'nextIdHook' không có. Hãy sử dụng cơ sở mặc định!"
 
 #: include/functions.inc:2239
 msgid "LDAP warning"

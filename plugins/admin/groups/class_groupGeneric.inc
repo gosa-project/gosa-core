@@ -143,7 +143,7 @@ class group extends plugin
         if(isset($attrs['sambaAlgorithmicRidBase'])){  
           $this->ridBase= $attrs['sambaAlgorithmicRidBase'][0];  
         } else {  
-          $this->ridBase= $this->config->get_cfg_value("ridbase");
+          $this->ridBase= $this->config->get_cfg_value("sambaRidBase");
         } 
 
         /* Get domain name for SID */
@@ -155,9 +155,9 @@ class group extends plugin
           }
         }
       } else {
-        if ($this->config->get_cfg_value("ridbase") != ""){
+        if ($this->config->get_cfg_value("sambaRidBase") != ""){
           $this->sambaDomainName= "DEFAULT";
-          $this->ridBase= $this->config->get_cfg_value("ridbase");
+          $this->ridBase= $this->config->get_cfg_value("sambaRidBase");
           $this->SID= $this->config->get_cfg_value("sid");
         } else {
           msg_dialog::display(_("Configuration error"), _("Cannot find group SID in your configuration!"), ERROR_DIALOG);
@@ -1145,8 +1145,8 @@ class group extends plugin
       if (!tests::is_id($this->gidNumber)){
         $message[]= msgPool::invalid(_("GID"), $this->gidNumber, "/[0-9]/");
       } else {
-        if ($this->gidNumber < $this->config->get_cfg_value("minid")){
-          $message[]= msgPool::toosmall(_("GID"), $this->config->get_cfg_value("minid"));
+        if ($this->gidNumber < $this->config->get_cfg_value("minId")){
+          $message[]= msgPool::toosmall(_("GID"), $this->config->get_cfg_value("minId"));
         }
 
       }
@@ -1187,7 +1187,7 @@ class group extends plugin
     }
 
     /* Find out next free id near to UID_BASE */
-    if ($this->config->get_cfg_value("base_hook") == ""){
+    if ($this->config->get_cfg_value("nextIdHook") == ""){
       $base= $this->config->get_cfg_value("uidNumberBase");
     } else {
       /* Call base hook */

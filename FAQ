@@ -134,7 +134,7 @@ A: Create a directory to keep a set of vacation messages which are readable by t
    %givenName %sn
    -----------------------------------------------------------------------------------
 
-   Place the config option vacationdir="/etc/gosa/vacation" in the location found in
+   Place the config option vacationTemplateDirectory="/etc/gosa/vacation" in the location found in
    gosa.conf and a template box is show in the vacation mail tab.
 
 
@@ -147,7 +147,7 @@ A: Add an entry describing your id policy in gosa.conf, location section:
       and add a percent sign befor it. Optionally you can strip it down to a number
       of characters, specified in []. I.e.
       
-	idgen="{%sn}-{%givenName[2-4]}"
+	idGenerator="{%sn}-{%givenName[2-4]}"
 	
       will generate an ID using the full surename, adding a dash, and adding at least
       the first two characters of givenName. If this ID is used, it'll use up to four
@@ -156,11 +156,11 @@ A: Add an entry describing your id policy in gosa.conf, location section:
    b) using automatic id's
       I.e. specifying
       
-      	idgen="acct{id:3}"
+      	idGenerator="acct{id:3}"
 
       will generate a three digits id with the next free entry appended to "acct".
       
-  	idgen="ext{id#3}"
+  	idGenerator="ext{id#3}"
 
       will generate a three digits random number appended to "ext".
 
@@ -168,8 +168,8 @@ A: Add an entry describing your id policy in gosa.conf, location section:
 Q: I'm migrating from the current LDAP, now GOsa does not allow uid's and group
    with upper/lower case and spaces. What can I do?
 
-A: Include the strict="no" keyword in your gosa.conf's location section.
-   WARNING: using strict="no" will cause problems with cyrus/postfix!!
+A: Include the strictNamingRules="no" keyword in your gosa.conf's location section.
+   WARNING: using strictNamingRules="no" will cause problems with cyrus/postfix!!
 
 
 Q: I'd like to place my users under ou=staff, not under ou=people. Can I change
@@ -209,8 +209,8 @@ A: You've configured GOsa to use samba3, but your LDAP has no samba domain objec
 
    <location name=...>
              ...
-             ridbase="1000"
-             sid="0-815-4711" \>
+             sambaRidBase="1000"
+             sambaSID="0-815-4711" \>
 
    Remember to fill in your real domain sid which is retrievable by the command
    "net getlocalsid".
@@ -236,7 +236,7 @@ A: This is an additional security feature, so that no one can fall back to uid 0
 
    <location name=...>
    	...
-  	minid="40"
+  	minId="40"
 	... \>
 
    in your configuration. In this example 40 will be the smallest ID you can enter.
@@ -271,7 +271,7 @@ A: Yes, add
 
    <location ...>
    ...
-         tls="true"
+         ldapTLS="true"
    ... \>
 
    to the location section of GOsa. This switch affects LDAP connections for a single location only.
@@ -284,7 +284,7 @@ A: Yes, add
 
    <main ...>
    ...
-         cyrusunixstyle="true"
+         cyrusUseSlashes="true"
    ... \>
 
    to the main section of GOsa and the folders are created in unix style.
@@ -305,12 +305,12 @@ A: No need to modify anything. Just add a hook the the plugin you'd like to
 
 Q: Is there a way to use ACL independet filtering when using administrative units?
 
-A: Yes. Set STRICT_UNITS to "true" in your gosa.conf's location section.
+A: Yes. Set "honourUnitTags" to "true" in your gosa.conf's location section.
 
 
 Q: How can i active the account expiration code for the gosa interface?
 
-A: Yes. Just set "account_expiration" to "true" in your gosa.conf's main section.
+A: Yes. Just set "handleExpiredAccounts" to "true" in your gosa.conf's main section.
 
 
 Q: What is the correct connection string for a Kolab server in GOsa?
@@ -335,21 +335,21 @@ A: For Kolab to work correctly you have to include the rfc2739.schema
 Q: New implementations of OpenLDAP seem to require {sasl} instead of {kerberos}
    in password hashes. GOsa writes the wrong string. What can I do?
 
-A: You can set "krbsasl" to "true" in your gosa.conf's main section.
+A: You can set "useSaslForKerberos" to "true" in your gosa.conf's main section.
 
 
 Q: Is there a way to add the personalTitle attribute the the users dn?
 
 A: Just add this line into the location section of your gosa.conf.
    <location name=...
-	include_personal_title="true"
+    personalTitleInDN="true"
    ...>
 
 
 Q: I'd like to assign different uid bases for certain user/group objects.
    How can this be achieved?
 
-A: Use the base_hook in your gosa.conf's location section to specify a script
+A: Use the 'nextIdHook' in your gosa.conf's location section to specify a script
    which handles the ID generation externaly. It get's called with the "dn"
    and the attribute to be ID'd. It should return an integer value.
 

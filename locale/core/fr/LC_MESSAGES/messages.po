@@ -3478,7 +3478,7 @@ msgstr "Impossible d'écrire le fichier de revision !"
 #: include/functions.inc:2217
 msgid "'base_hook' is not available. Using default base!"
 msgstr ""
-"Attention - base_hook n'est pas disponible. Utilisation de la base par "
+"Attention - 'nextIdHook' n'est pas disponible. Utilisation de la base par "
 "défaut !"
 
 #: include/functions.inc:2239

@@ -251,11 +251,11 @@ list.
 GOsa will not log anything, if the logging value is empty.
 .PP
 
-.B login_attribute
+.B loginAttribute
 .I string
 .PP
 The
-.I login_attribute
+.I loginAttribute
 statement tells GOsa which LDAP attribute is used as the login name
 during login. It can be set to
 .I uid, mail
@@ -352,30 +352,30 @@ The
 value should be a unix conform timezone value like in /etc/timezone.
 .PP
 
-.B governmentmode
+.B honourIvbbAttributes
 .I bool
 .PP
 The
-.I governmentmode
+.I honourIvbbAttributes
 statement enables the IVBB mode inside of GOsa. You need the ivbb.schema
 file from used by german authorities.
 .PP
 
-.B strict
+.B strictNamingRules
 .I bool
 .PP
 The
-.I strict
+.I strictNamingRules
 statement enables strict checking of uids and group names. If you need
 characters like . or - inside of your accounts, set this to
 .I false.
 .PP
 
-.B strict_units
+.B honourUnitTags
 .I bool
 .PP
 The
-.I strict_units
+.I honourUnitTags
 statement enables checking of
 .I unitTag
 attributes when using administrative units. If this is set to
@@ -566,20 +566,20 @@ location besides the LDAP. It will be called this way:
 /path/to/your/script "username" "oldpassword" "newpassword"
 .fi
 
-.B account_expiration
+.B handleExpiredAccounts
 .I bool
 .PP
 The
-.I account_expiration
+.I handleExpiredAccounts
 statement enables shadow attribute tests during the login to the GOsa web
 interface and forces password renewal or account lockout.
 .PP
 
-.B krbsasl
+.B useSaslForKerberos
 .I bool
 .PP
 The
-.I krbsasl
+.I useSaslForKerberos
 statement defines the way the kerberos realm is stored in the
 .I userPassword
 attribute. Set it to
@@ -612,11 +612,11 @@ statement enables or disables schema checking during login. It is recommended
 to switch this on in order to let GOsa handle object creation more efficient.
 .PP
 
-.B tls
+.B ldapTLS
 .I bool
 .PP
 The
-.I tls
+.I ldapTLS
 statement enables or disables TLS operating on LDAP connections.
 .PP
 
@@ -641,14 +641,14 @@ If you choose "cn" to be your
 .I accountPrimaryAttribute
 you can decide whether to include the personal title in your dn by
 selecting
-.I include_personal_title.
+.I personalTitleInDN.
 .PP
 
-.B include_personal_title
+.B personalTitleInDN
 .I bool
 .PP
 The
-.I include_personal_title
+.I personalTitleInDN
 option tells GOsa to include the personal title in user DNs when
 .I accountPrimaryAttribute
 is set to "cn".
@@ -820,7 +820,7 @@ with your
 .I adduser.conf
 to avoid overlapping uidNumber values between local and LDAP based lookups. The uidNumberBase
 can even be dynamic. Take a look at the
-.I base_hook
+.I nextIdHook
 definition below.
 .PP
 
@@ -834,24 +834,24 @@ with your
 .I adduser.conf
 to avoid overlapping gidNumber values between local and LDAP based lookups. The gidNumberBase
 can even be dynamic. Take a look at the
-.I base_hook
+.I nextIdHook
 definition below.
 .PP
 
-.B minid
+.B minId
 .I integer
 .PP
 The
-.I minid
+.I minId
 statement defines the minimum assignable user or group id to avoid security leaks with
 uid 0 accounts.
 .PP
 
-.B base_hook
+.B nextIdHook
 .I path
 .PP
 The
-.I base_hook
+.I nextIdHook
 statement defines a script to be called for finding the next free id for users or groups
 externaly. It gets called with the current entry "dn" and the attribute to be ID'd. It
 should return an integer value.
@@ -869,11 +869,11 @@ and
 These values will be overridden when using templates.
 .PP
 
-.B idgen
+.B idGenerator
 .I string
 .PP
 The
-.I idgen
+.I idGenerator
 statement describes an automatic way to generate new user ids. There are two basic
 functions supported - which can be combined:
 
@@ -884,7 +884,7 @@ functions supported - which can be combined:
     down to a number of characters, specified in []. I.e.
 
 .nf
-      idgen="{%sn}-{%givenName[2-4]}"
+      idGenerator="{%sn}-{%givenName[2-4]}"
 .fi
 
     will generate an ID using the full surename, adding a dash, and adding at
@@ -897,14 +897,14 @@ functions supported - which can be combined:
     I.e. specifying
 
 .nf
-      idgen="acct{id:3}"
+      idGenerator="acct{id:3}"
 .fi
 
     will generate a three digits id with the next free entry appended to
     "acct".
 
 .nf
-      idgen="ext{id#3}"
+      idGenerator="ext{id#3}"
 .fi
 
     will generate a three digits random number appended to "ext".
@@ -914,21 +914,21 @@ functions supported - which can be combined:
 
 .B Samba options
 .PP
-.B sid
+.B sambaSID
 .I string
 .PP
 The
-.I sid
+.I sambaSID
 statement defines a samba SID if not available inside of the LDAP. You can retrieve
 the current sid by
 .I net getlocalsid.
 .PP
 
-.B ridbase
+.B sambaRidBase
 .I integer
 .PP
 The
-.I ridbase
+.I sambaRidBase
 statement defines the base id to add to ordinary sid calculations - if not available
 inside of the LDAP.
 .PP
@@ -1004,11 +1004,11 @@ is like cyrus, but lets the kolab daemon maintain the accounts.
 .I sendmail just disables everything which is IMAP dependent.
 .PP
 
-.B cyrusunixstyle
+.B cyrusUseSlashes
 .I bool
 .PP
 The
-.I cyrusunixstyle
+.I cyrusUseSlashes
 statement determines if GOsa should use "foo/bar" or "foo.bar" namespaces
 in IMAP. Unix style is with slashes.
 
@@ -1028,22 +1028,22 @@ The
 statement defines a file to include for the postfix module in order
 to display user defined protocols.
 
-.B mail_attrib
+.B mailAttribute
 .I mail/uid
 .PP
 The
-.I mail_attrib
+.I mailAttribute
 statement determines which attribute GOsa will use to create accounts.
 Valid values are
 .I mail
 and
 .I uid.
 
-.B vacationdir
+.B vacationTemplateDirectory
 .I path
 .PP
 The
-.I vacationdir
+.I vacationTemplateDirectory
 statement sets the path where GOsa will look for vacation message
 templates. Default is /etc/gosa/vacation.
 

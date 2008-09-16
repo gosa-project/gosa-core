@@ -803,7 +803,7 @@ class userManagement extends plugin
          react on this. */
       $this->dn= "new";
       
-       $this->got_uid= ($this->config->get_cfg_value("idgen") == "");
+       $this->got_uid= ($this->config->get_cfg_value("idGenerator") == "");
 
       /* Create new usertab object */
       $this->usertab= new usertabs($this->config,$this->config->data['TABS']['USERTABS'], $this->dn);
@@ -866,8 +866,8 @@ class userManagement extends plugin
         msg_dialog::displayChecks($message);
       } else {
         $attributes= array('sn' => $this->sn, 'givenName' => $this->givenName);
-        if ($this->config->get_cfg_value("idgen") != ""){
-          $uids= gen_uids ($this->config->get_cfg_value("idgen"), $attributes);
+        if ($this->config->get_cfg_value("idGenerator") != ""){
+          $uids= gen_uids ($this->config->get_cfg_value("idGenerator"), $attributes);
           if (count($uids)){
             $smarty->assign("edit_uid", "false");
             $smarty->assign("uids", $uids);

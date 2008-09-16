@@ -344,7 +344,7 @@ if (session::is_set('post_cnt')){
 }
 
 /* check if we are using account expiration */
-if ($config->get_cfg_value("account_expiration") == "true"){
+if ($config->get_cfg_value("handleExpiredAccounts") == "true"){
   $expired= ldap_expired_account($config, $ui->dn, $ui->username);
 
   if ($expired == 2){

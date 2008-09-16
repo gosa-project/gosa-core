@@ -3517,7 +3517,7 @@ msgstr "无法创建文件 '%s'。"
 #: include/functions.inc:2217
 #, fuzzy
 msgid "'base_hook' is not available. Using default base!"
-msgstr "警告： base_hook不可用。使用缺省 base。"
+msgstr "警告： nextIdHook不可用。使用缺省 base。"
 
 #: include/functions.inc:2239
 #, fuzzy

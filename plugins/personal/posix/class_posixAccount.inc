@@ -1028,15 +1028,15 @@ class posixAccount extends plugin
       if (!tests::is_id($this->uidNumber)){
         $message[]= msgPool::invalid(_("UID"), $this->uidNumber, "/[0-9]/");
       } else {
-        if ($this->uidNumber < $this->config->get_cfg_value("minid")){
-          $message[]= msgPool::toosmall(_("UID"), $this->config->get_cfg_value("minid"));
+        if ($this->uidNumber < $this->config->get_cfg_value("minId")){
+          $message[]= msgPool::toosmall(_("UID"), $this->config->get_cfg_value("minId"));
         }
       }
       if (!tests::is_id($this->gidNumber)){
         $message[]= msgPool::invalid(_("GID"), $this->gidNumber, "/[0-9]/");
       } else {
-        if ($this->gidNumber < $this->config->get_cfg_value("minid")){
-          $message[]= msgPool::toosmall(_("GID"), $this->config->get_cfg_value("minid"));
+        if ($this->gidNumber < $this->config->get_cfg_value("minId")){
+          $message[]= msgPool::toosmall(_("GID"), $this->config->get_cfg_value("minId"));
         }
       }
     }
@@ -1317,7 +1317,7 @@ class posixAccount extends plugin
     }
 
     /* Find out next free id near to UID_BASE */
-    if ($this->config->get_cfg_value("base_hook") == ""){
+    if ($this->config->get_cfg_value("nextIdHook") == ""){
       $base= $lwm;
     } else {
       /* Call base hook */

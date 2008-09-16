@@ -44,7 +44,7 @@ class password extends plugin
     $smarty->assign("NotAllowed" , !preg_match("/w/i",$password_ACLS));
 
     /* Display expiration template */
-    if ($this->config->get_cfg_value("account_expiration") == "true"){
+    if ($this->config->get_cfg_value("handleExpiredAccounts") == "true"){
       $expired= ldap_expired_account($this->config, $ui->dn, $ui->username);
       if($expired == 4){
         return($smarty->fetch(get_template_path("nochange.tpl", TRUE)));
@@ -100,7 +100,7 @@ class password extends plugin
             $_POST['current_password'],
             $this->config->current['SERVER'],
             $this->config->get_cfg_value("recursive") == "true",
-            $this->config->get_cfg_value("tls") == "true");
+            $this->config->get_cfg_value("ldapTLS") == "true");
 
         /* connection Successfull ? */
         if (!$tldap->success()){

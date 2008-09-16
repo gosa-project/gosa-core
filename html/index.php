@@ -261,7 +261,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
   }
   if ($config->get_cfg_value("schemaCheck") == "true"){
     $recursive = ($config->get_cfg_value("recursive") == "true");
-    $tls =       ($config->get_cfg_value("tls") == "true");
+    $tls =       ($config->get_cfg_value("ldapTLS") == "true");
 
     if(!count($ldap->get_objectclasses())){
       msg_dialog::display(_("LDAP error"), _("Cannot detect information about the installed LDAP schema!"), ERROR_DIALOG);
@@ -363,7 +363,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
       }
 
       /* are we using accountexpiration */
-      if ($config->get_cfg_value("account_expiration") == "true"){
+      if ($config->get_cfg_value("handleExpiredAccounts") == "true"){
         $expired= ldap_expired_account($config, $ui->dn, $ui->username);
 
         if ($expired == 1){

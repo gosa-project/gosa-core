@@ -3526,8 +3526,8 @@ msgstr "Kann nicht in Revisions-Datei schreiben!"
 
 #: include/functions.inc:2207 include/functions.inc:2211
 #: include/functions.inc:2217
-msgid "'base_hook' is not available. Using default base!"
-msgstr "'base_hook' ist nicht verfügbar. Verwende die Standard-Basis!"
+msgid "'nextIdHook' is not available. Using default base!"
+msgstr "'nextIdHook' ist nicht verfügbar. Verwende die Standard-Basis!"
 
 #: include/functions.inc:2239
 msgid "LDAP warning"

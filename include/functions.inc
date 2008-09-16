@@ -345,7 +345,7 @@ function ldap_init ($server, $base, $binddn='', $pass='')
 
   $ldap = new LDAP ($binddn, $pass, $server,
       isset($config->current['RECURSIVE']) && $config->current['RECURSIVE'] == "true",
-      isset($config->current['TLS']) && $config->current['TLS'] == "true");
+      isset($config->current['LDAPTLS']) && $config->current['LDAPTLS'] == "true");
 
   /* Sadly we've no proper return values here. Use the error message instead. */
   if (!$ldap->success()){
@@ -370,7 +370,7 @@ function process_htaccess ($username, $kerberos= FALSE)
   
     $config->set_current($name);
     $mode= "kerberos";
-    if ($config->get_cfg_value("krbsasl") == "true"){
+    if ($config->get_cfg_value("useSaslForKerberos") == "true"){
       $mode= "sasl";
     }
 
@@ -448,8 +448,8 @@ function ldap_login_user ($username, $password)
   $ldap->cd($config->current['BASE']);
   $allowed_attributes = array("uid","mail");
   $verify_attr = array();
-  if($config->get_cfg_value("login_attribute") != ""){
-    $tmp = split(",", $config->get_cfg_value("login_attribute")); 
+  if($config->get_cfg_value("loginAttribute") != ""){
+    $tmp = split(",", $config->get_cfg_value("loginAttribute")); 
     foreach($tmp as $attr){
       if(in_array($attr,$allowed_attributes)){
         $verify_attr[] = $attr;
@@ -505,8 +505,8 @@ function ldap_login_user ($username, $password)
   $ldap= new LDAP($ui->dn, $password, $config->current['SERVER'],
       isset($config->current['RECURSIVE']) &&
       $config->current['RECURSIVE'] == "true",
-      isset($config->current['TLS'])
-      && $config->current['TLS'] == "true");
+      isset($config->current['LDAPTLS'])
+      && $config->current['LDAPTLS'] == "true");
   if (!$ldap->success()){
     return (NULL);
   }
@@ -1252,7 +1252,7 @@ function strict_uid_mode()
   global $config;
 
   if (isset($config)){
-    return ($config->get_cfg_value("strict") == "true");
+    return ($config->get_cfg_value("strictNamingRules") == "true");
   }
   return (TRUE);
 }
@@ -1651,7 +1651,7 @@ function expand_id($rule, $attributes)
     return ($result);
   }
 
-  echo "Error in idgen string: don't know how to handle rule $rule.\n";
+  echo "Error in idGenerator string: don't know how to handle rule $rule.\n";
   return (array($rule));
 }
 
@@ -2192,10 +2192,10 @@ function get_base_from_hook($dn, $attrib)
 {
   global $config;
 
-  if ($config->get_cfg_value("base_hook") != ""){
+  if ($config->get_cfg_value("nextIdHook") != ""){
     
     /* Call hook script - if present */
-    $command= $config->get_cfg_value("base_hook");
+    $command= $config->get_cfg_value("nextIdHook");
 
     if ($command != ""){
       $command.= " '".LDAP::fix($dn)."' $attrib";
@@ -2205,17 +2205,17 @@ function get_base_from_hook($dn, $attrib)
         if (preg_match("/^[0-9]+$/", $output[0])){
           return ($output[0]);
         } else {
-          msg_dialog::display(_("Warning"), _("'base_hook' is not available. Using default base!"), WARNING_DIALOG);
+          msg_dialog::display(_("Warning"), _("'nextIdHook' is not available. Using default base!"), WARNING_DIALOG);
           return ($config->get_cfg_value("uidNumberBase"));
         }
       } else {
-        msg_dialog::display(_("Warning"), _("'base_hook' is not available. Using default base!"), WARNING_DIALOG);
+        msg_dialog::display(_("Warning"), _("'nextIdHook' is not available. Using default base!"), WARNING_DIALOG);
         return ($config->get_cfg_value("uidNumberBase"));
       }
 
     } else {
 
-      msg_dialog::display(_("Warning"), _("'base_hook' is not available. Using default base!"), WARNING_DIALOG);
+      msg_dialog::display(_("Warning"), _("'nextIdHook' is not available. Using default base!"), WARNING_DIALOG);
       return ($config->get_cfg_value("uidNumberBase"));
 
     }
@@ -2234,7 +2234,7 @@ function check_schema($cfg,$rfc2307bis = FALSE)
   $messages= array();
 
   /* Get objectclasses */
-  $ldap = new ldapMultiplexer(new LDAP($cfg['admin'],$cfg['password'],$cfg['connection'] ,FALSE,$cfg['tls']));
+  $ldap = new ldapMultiplexer(new LDAP($cfg['admin'],$cfg['password'],$cfg['connection'] ,FALSE,$cfg['LDAPTLS']));
   $objectclasses = $ldap->get_objectclasses();
   if(count($objectclasses) == 0){
     msg_dialog::display(_("LDAP warning"), _("Cannot get schema information from server. No schema check possible!"), WARNING_DIALOG);

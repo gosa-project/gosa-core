@@ -138,7 +138,7 @@ class user extends plugin
   {
     $this->config= $config;
     /* Configuration is fine, allways */
-    if($this->config->get_cfg_value("governmentmode") == "true"){
+    if($this->config->get_cfg_value("honourIvbbAttributes") == "true"){
       $this->governmentmode = TRUE;
       $this->attributes=array_merge($this->attributes,$this->govattrs);
     }
@@ -580,9 +580,9 @@ class user extends plugin
       }
   
       if($this->governmentmode){
-        $smarty->assign("governmentmode", "true");
+        $smarty->assign("honourIvbbAttributes", "true");
       }else{
-        $smarty->assign("governmentmode", "false");
+        $smarty->assign("honourIvbbAttributes", "false");
       }
       return($smarty->fetch (get_template_path('generic_certs.tpl', TRUE, dirname(__FILE__))));
     }
@@ -1089,7 +1089,7 @@ class user extends plugin
         ldap_set_option($this->cid, LDAP_OPT_REFERRALS, 1);
         ldap_set_rebind_proc($ds, array(&$this, "rebind"));
       }
-      if($this->config->get_cfg_value("tls") == "true"){
+      if($this->config->get_cfg_value("ldapTLS") == "true"){
         ldap_start_tls($ds);
       }
       if (!($res = @ldap_bind($ds, $this->config->current['ADMIN'],
@@ -1132,7 +1132,7 @@ class user extends plugin
   function update_new_dn()
   {
     $pt= "";
-    if($this->config->get_cfg_value("include_personal_title") == "true"){
+    if($this->config->get_cfg_value("personalTitleInDN") == "true"){
       if(!empty($this->personalTitle)){
         $pt = $this->personalTitle." ";
       }
@@ -1300,7 +1300,7 @@ class user extends plugin
       ldap_set_option($this->cid, LDAP_OPT_REFERRALS, 1);
       ldap_set_rebind_proc($ds, array(&$this, "rebind"));
     }
-    if ($this->config->get_cfg_value("tls") == "true"){
+    if ($this->config->get_cfg_value("ldapTLS") == "true"){
       ldap_start_tls($ds);
     }
 
@@ -1553,7 +1553,7 @@ class user extends plugin
 
     /* Append government attributes if required */
     global $config;
-    if($config->get_cfg_value("governmentmode") == "true"){
+    if($config->get_cfg_value("honourIvbbAttributes") == "true"){
       foreach($govattrs as $attr => $desc){
         $ret["plProvidedAcls"][$attr] = $desc;
       }
