@@ -440,7 +440,7 @@ $ACLD['phonequeue'] = array( "create","goFonTimeOut","goFonMaxLen","goFonAnnounc
       "telephoneNumber","goFonQueueLanguage","goFonQueueStrategy","goFonQueueAnnounceHoldtime","goFonQueueAnnounce","goFonDialOption","goFonQueueRetry");					
 $ACLD['goFonMacro']	=array("goFonMacro","edit","delete");
 $ACLD['mailogroup']	= array("create");
-$ACLD['scalix']	= array(
+$ACLD['scalixAccount']	= array(
 		"scalixMailnode"			=> _("Scalix Mail node"),
 		"scalixMailboxClass"		=> _("Mailbox class"),
 		"scalixServerLanguage"		=> _("Server language"),
