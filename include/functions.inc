@@ -1150,8 +1150,6 @@ function get_ou($name)
 {
   global $config;
 
-  $name= strtolower($name);
-
   $map = array( 
                 "ogroupou"      => "ou=groups,",
                 "applicationou" => "ou=apps,",
