@@ -985,10 +985,14 @@ class config  {
    */
   function check_session_lifetime()
   {
-    $cfg_lifetime = $this->data['MAIN']['SESSIONLIFETIME'];
-    $ini_lifetime = ini_get('session.gc_maxlifetime');
-    $deb_system   = file_exists('/etc/debian_version');
-    return(!($deb_system && ($ini_lifetime < $cfg_lifetime)));  
+    if(isset($this->data['MAIN']['SESSIONLIFETIME'])){
+      $cfg_lifetime = $this->data['MAIN']['SESSIONLIFETIME'];
+      $ini_lifetime = ini_get('session.gc_maxlifetime');
+      $deb_system   = file_exists('/etc/debian_version');
+      return(!($deb_system && ($ini_lifetime < $cfg_lifetime)));  
+    }else{
+      return(TRUE);
+    }
   }
 }
 
