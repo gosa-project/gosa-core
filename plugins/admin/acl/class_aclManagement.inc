@@ -478,7 +478,7 @@ class aclManagement extends plugin
     /* Fetch following structures, this will be used if !$SubSearch */
     $fetch_this = array(
       "ME"      => array("TYPE" => "cat"    , "FLAGS" => GL_SIZELIMIT                ,"BASE"=>""),
-      "SYSTEMS" => array("TYPE" => "search" , "FLAGS" => GL_SIZELIMIT | GL_SUBSEARCH ,"BASE"=>get_ou('systemsou')),
+      "SYSTEMS" => array("TYPE" => "search" , "FLAGS" => GL_SIZELIMIT | GL_SUBSEARCH ,"BASE"=>get_ou('systemRDN')),
       "APPS"    => array("TYPE" => "search" , "FLAGS" => GL_SIZELIMIT | GL_SUBSEARCH ,"BASE"=>get_ou('applicationou')),
       "PEOPLE"  => array("TYPE" => "search" , "FLAGS" => GL_SIZELIMIT | GL_SUBSEARCH ,"BASE"=>get_people_ou()),
       "GROUPS"  => array("TYPE" => "search" , "FLAGS" => GL_SIZELIMIT | GL_SUBSEARCH ,"BASE"=>get_groups_ou()));

@@ -373,13 +373,13 @@ class group extends plugin
        */
       $types = array();
       $types['server']      = array("OU" => get_ou("serverRDN"),     "OC" => "(objectClass=goServer)");
-      $types['workstation'] = array("OU" => get_ou("workstationou"),"OC" => "(objectClass=gotoWorkstation)");
+      $types['workstation'] = array("OU" => get_ou("workstationRDN"),"OC" => "(objectClass=gotoWorkstation)");
       $types['terminal']    = array("OU" => get_ou("terminalRDN"),   "OC" => "(objectClass=gotoTerminal)");
       
       $res = array();
       foreach($types as $acl => $data){
         $filter= "(&".$data['OC']."$exclude(cn=$regex))";
-        $res= array_merge($res,get_sub_list($filter,array($acl),$data['OU'],get_ou("systemsou").$sysfilter['depselect'],
+        $res= array_merge($res,get_sub_list($filter,array($acl),$data['OU'],get_ou("systemRDN").$sysfilter['depselect'],
           array("cn"), GL_SUBSEARCH | GL_SIZELIMIT));
       }
       $wslist = array();

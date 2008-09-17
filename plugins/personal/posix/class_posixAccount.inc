@@ -398,9 +398,9 @@ class posixAccount extends plugin
 
       $deps_a = array(get_ou("serverRDN"),
                       get_ou("terminalRDN"),
-                      get_ou("workstationou")); 
+                      get_ou("workstationRDN")); 
 
-      $res= get_sub_list($filter, $acls, $deps_a, get_ou("systemsou").$sysfilter['depselect'], array("cn"), GL_SUBSEARCH | GL_SIZELIMIT);
+      $res= get_sub_list($filter, $acls, $deps_a, get_ou("systemRDN").$sysfilter['depselect'], array("cn"), GL_SUBSEARCH | GL_SIZELIMIT);
       $wslist= array();
       foreach ($res as $attrs){
         $wslist[]= preg_replace('/\$/', '', $attrs['cn'][0]);

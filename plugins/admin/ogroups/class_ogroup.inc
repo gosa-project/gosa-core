@@ -337,8 +337,8 @@ class ogroup extends plugin
 
       $deps_a = array(get_ou("serverRDN"),
           get_ou("terminalRDN"),
-          get_ou("workstationou"));
-      $res= get_sub_list($filter, array("terminal","server","workstation"), $deps_a, get_ou("systemsou").$sysfilter['depselect'],
+          get_ou("workstationRDN"));
+      $res= get_sub_list($filter, array("terminal","server","workstation"), $deps_a, get_ou("systemRDN").$sysfilter['depselect'],
           array("cn"), GL_SUBSEARCH | GL_SIZELIMIT);
       $wslist= array();
       foreach ($res as $attrs){
@@ -658,15 +658,15 @@ class ogroup extends plugin
         "servers"         => array("OBJ"=>"servgeneric", "CLASS"=>"goServer"       ,
           "DN"=> get_ou('serverRDN')        ,"ACL" => "server"),
         "workstations"    => array("OBJ"=>"workgeneric", "CLASS"=>"gotoWorkstation",
-          "DN"=> get_ou('workstationou')   ,"ACL" => "workstation"),
+          "DN"=> get_ou('workstationRDN')   ,"ACL" => "workstation"),
         "winstations"     => array("OBJ"=>"wingeneric", "CLASS"=>"opsiClient",        
           "DN"=> get_ou('SAMBAMACHINEACCOUNTRDN')     ,"ACL" => "winstation"),
         "terminals"       => array("OBJ"=>"termgeneric", "CLASS"=>"gotoTerminal"   ,
           "DN"=> get_ou('terminalRDN')      ,"ACL" => "terminal"),
         "printers"        => array("OBJ"=>"printgeneric", "CLASS"=>"gotoPrinter"    ,
-          "DN"=> get_ou('printerou')       ,"ACL" => "printer"),
+          "DN"=> get_ou('printerRDN')       ,"ACL" => "printer"),
         "phones"          => array("OBJ"=>"phoneGeneric", "CLASS"=>"goFonHardware"  ,
-          "DN"=> get_ou('phoneou')         ,"ACL" => "phone"));
+          "DN"=> get_ou('phoneRDN')         ,"ACL" => "phone"));
 
 
     /* Allow searching for applications, if we are not using release managed applications 
