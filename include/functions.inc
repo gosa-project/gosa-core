@@ -1177,6 +1177,8 @@ function get_ou($name)
                 "faipackageou"  => "ou=packages,",
                 "faipartitionou"=> "ou=disk,",
 
+                "sudoRDN"       => "ou=sudoers,",
+
                 "deviceou"      => "ou=devices,",
                 "mimetypeou"    => "ou=mime,");
 
