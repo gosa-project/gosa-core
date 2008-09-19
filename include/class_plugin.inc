@@ -790,7 +790,7 @@ class plugin
       ldap_set_rebind_proc($ds, array(&$this, "rebind"));
     }
 
-    $r=ldap_bind($ds,$this->config->current['ADMIN'], $this->config->current['PASSWORD']);
+    $r=ldap_bind($ds,$this->config->current['ADMINDN'], $this->config->current['ADMINPASSWORD']);
     $sr=ldap_read($ds, @LDAP::fix($src_dn), "objectClass=*");
 
     /* Fill data from LDAP */

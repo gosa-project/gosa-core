@@ -1213,19 +1213,19 @@ function get_ou($name)
 
 function get_people_ou()
 {
-  return (get_ou("USERRDN"));
+  return (get_ou("userRDN"));
 }
 
 
 function get_groups_ou()
 {
-  return (get_ou("GROUPRDN"));
+  return (get_ou("groupRDN"));
 }
 
 
 function get_winstations_ou()
 {
-  return (get_ou("SAMBAMACHINEACCOUNTRDN"));
+  return (get_ou("sambaMachineAccountRDN"));
 }
 
 
