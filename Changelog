@@ -2,6 +2,94 @@ GOsa2 changelog
 ===============
 
 * gosa 2.6
+  - Redesign of ACL handling
+    - Roles
+    - Fine grained read, write, change controls down to
+      the attributes
+    - Self service
+  - Separate password changer module
+  - Major dialog- and interface redesign
+  - Major performance improvements
+  - New backend daemon
+    - MIT kerberos support
+    - Mail queue-support
+    - System depolyment queue support
+    - OPSI support
+    - GOto support
+    - DAK keyring support
+    - Caching of slow data sources
+  - Queue support for system deployment
+  - Improved FAI integration
+    - Queues
+    - Copy on write storage for subreleases
+    - Logviewer
+  - OPSI integration
+  - SUDO support
+  - Split into GOsa core and GOsa plugins
+  - Edit multiple users/groups at a time
+  - Apply user templates afterwards
+  - Objects snapshots
+  - Configurable object RDNs
+  - Added manual page for gosa.conf
+  - More comprehensive keywords in gosa.conf
+  - Merging "main" and "location" attributes to
+    allow site wide defaults
+  - Automatic configuration reloading
+  - Vietnamese translation
+
+* gosa 2.5.16
+  - Fixed problem with undefined ridbase in domain objects
+  - Fixed postremove/-create/-modify parameter expansion
+  - Updated integrated smarty to 2.6.19
+  - Updated saving of ppds in printer setttings
+  - Fixed department tagging
+  - Fixed DNS record problem where nSRecords were not kept
+  - Updated shared folder acls, keep manually set acls
+  - Remove DNS entries for removed hosts
+  - Increased setup performance
+  - Added more secure way to save passwords in gosa.conf
+
+* gosa 2.5.15
+  - Changed order of sys-action commandline parameters
+  - Changed sorting of management plugins to natural sorting
+  - Fixed problem with saving vacation message start/stop
+  - Fixed sorting of releases
+  - Updated translations (de/fr/pl)
+  - Fixed storage of (IMAP) ACLs in group/mail settings
+  - Fixed issues with sieve script management
+  - General code cleanup
+  - Fixed issue with undefined index and copy 'n paste in samba plugin
+  - Fixed problem with the references/ogroup handling with
+    special character DNs
+  - Optimized way of writing unit tags
+  - Online manual updates / helpviewer update
+  - Fixed renaming of printers which was broken in special cases
+  - DNS plugin updates
+  - DHCP plugin updates
+
+* gosa 2.5.14
+  - Phone conference language is now selectable.
+  - Old phone numbers will be removed correctly from asterisk extensions table.
+  - Fixed saving of A/B networks reverse zone entries
+  - Fixed problem with non loaded class_dhcpPlugin in some cases.
+  - Added fglrx driver to driver list
+  - Added hook to specify custom X drivers
+  - Fixed non ISO display of IMAP folder names
+  - Fixed URL encoding in addressbook
+  - Fixed issues with IE and browser language detection
+  - Added check for used hardware adresses
+  - Allow special characters in share names
+  - Fixed removing of application categories
+  - PPD handling revised
+  - Added support for new devices detected by the arp monitor
+  - Grey out non used options for better usability in the server and
+    workstation tabs
+  - Fixed saving of USB devices
+  - Made SNMP community configurable
+  - Added login attributes uid/mail, you can log in via your mail
+    address, too
+  - Removed PHP5 dependency in branch 2.5
+  - Fixed saving of IMAP acl's for groups
 
 * gosa 2.5.13
   - Re-added ISC DHCP support
