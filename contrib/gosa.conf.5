@@ -777,6 +777,72 @@ components. Default is
 .I ou=systems.
 .PP
 
+.B ogroupRDN
+.I string
+.PP
+This statement defines the location where GOsa looks for object groups.
+Default is
+.I ou=groups.
+.PP
+
+.B aclRoleRDN
+.I string
+.PP
+This statement defines the location where GOsa stores ACL role definitions.
+Default is
+.I ou=aclroles.
+.PP
+
+.B phoneMacroRDN
+.I string
+.PP
+This statement defines the location where GOsa stores phone macros for use with the Asterisk
+phone server.
+Default is
+.I ou=macros,ou=asterisk,ou=configs,ou=systems.
+.PP
+
+.B faiBaseRDN
+.I string
+.PP
+This statement defines the location where GOsa looks for FAI settings.
+Default is
+.I ou=fai,ou=configs,ou=systems.
+.PP
+
+.B faiScriptRDN, faiHookRDN, faiTemplateRDN, faiVariableRDN, faiProfileRDN, faiPackageRDN, faiPartitionRDN 
+.I string
+.PP
+These statement define the location where GOsa stores FAI classes. The complete base for the
+corresponding class is an additive of
+.B faiBaseRDN
+an and this value.
+.PP
+
+.B deviceRDN
+.I string
+.PP
+This statement defines the location where GOsa looks for devices.
+Default is
+.I ou=devices.
+.PP
+
+.B mimetypeRDN
+.I string
+.PP
+This statement defines the location where GOsa stores mime type definitions.
+Default is
+.I ou=mimetypes.
+.PP
+
+.B applicationRDN
+.I string
+.PP
+This statement defines the location where GOsa stores application definitions.
+Default is
+.I ou=apps.
+.PP
+
 .B ldapFilterNestingLimit
 .I integer
 .PP
@@ -1140,6 +1206,103 @@ is the corresponding password for this DN.
 
 You can define a set of referrals if you have several server to
 connect to.
+
+.SH Settings for the environment plugin
+
+In order to make full use of the environment plugin, you may want
+to define the location where kiosk profiles will be stored on the
+servers harddisk.
+
+This is done by the
+.I kioskPath
+keyword defined within the
+.I environment
+class definition inside your gosa.conf.
+
+.B Example:
+
+.nf
+  <plugin acl="users/environment"
+          class="environment"
+          kioskPath="/var/spool/kiosk"/>
+.fi
+
+Make sure, that this path is writeable by GOsa.
+
+.SH Settings for the FAI plugin
+
+The FAI plugin can be used in a way that it generates branched or
+freezed releases inside your repository. Specifying the
+.I postcreate
+and
+.I postmodify
+keywords in the
+.I servrepository
+definition, calls the provided script as a hook when adding or
+removing branches. This script should do the rest inside of your
+repository.
+
+.B Example:
+
+.nf
+  <tab class="servrepository" 
+          repositoryBranchHook="/opt/dak/bin/get_extra_repos"
+          postcreate="/opt/dak/bin/handle_repository '%lock_dn' '%lock_name' '%lock_type' />
+.fi
+
+.I %lock_dn
+keeps the base DN of the source branch,
+.I %lock_name
+the name of the new branch and
+.I %lock_type
+is either "freeze" or "branch".
+
+The
+.I repositoryBranchHook
+outputs additional releases, that are not retrieveable with the standard
+GOsa/FAI methods.
+
+If you have only one release, or want to define a default release to be shown
+by GOsa, define the
+.I defaultFaiRelease
+within the 
+.I faiManagement
+class definition
+
+.SH Settings for the addressbook plugin
+
+The addressbook plugin can be configured to store the addressbook data on
+a special location. Use the
+.I addressbookBaseDN
+keyword within the
+.I addressbook
+class definition inside your gosa.conf to configure this location.
+
+Default:
+.I ou=addressbook.
+
+.SH Settings for system plugins
+For the
+.I workstationStartup
+and
+.I terminalStartup
+classes, you can define the
+.I systemKernelsHook
+keyword. It can load additional kernels that are not retrieveable by
+standard GOsa/FAI mechanisms.
+
+In order to make use of SNMP information, you can set the
+.I snmpCommunity
+in the
+.I terminfo
+class definition.
+
+To enable the burn CD image function, you can specify the
+.I systemIsoHook
+in the
+.I workgeneric
+class. You will get a CD symbol in the systems list - which calls
+the hook if pressed.
 
 .SH AUTHOR
 .B gosa.conf(5)
