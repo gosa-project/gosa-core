@@ -124,7 +124,7 @@ class ogroup extends plugin
     if ($this->dn == "new"){
       $this->base = session::get('CurrentMainBase');
     } else {
-      $this->base= preg_replace("/^[^,]+,".normalizePreg(get_ou("ogroupou"))."/","",$this->dn);
+      $this->base= preg_replace("/^[^,]+,".normalizePreg(get_ou("ogroupRDN"))."/","",$this->dn);
 
       /* Is this account a trustAccount? */
       if ($this->is_account && isset($this->attrs['trustModel'])){
@@ -652,7 +652,7 @@ class ogroup extends plugin
     $p_f= array("accounts"=> array("OBJ"=>"user", "CLASS"=>"gosaAccount"    ,
           "DN"=> get_people_ou()           ,"ACL" => "users"), 
         "groups"          => array("OBJ"=>"group", "CLASS"=>"posixGroup"     ,
-          "DN"=> get_groups_ou('ogroupou') ,"ACL" => "groups"), 
+          "DN"=> get_groups_ou('ogroupRDN') ,"ACL" => "groups"), 
         "departments"     => array("OBJ"=>"department", "CLASS"=>"gosaDepartment" ,
           "DN"=> ""                        ,"ACL" => "department"), 
         "servers"         => array("OBJ"=>"servgeneric", "CLASS"=>"goServer"       ,
@@ -673,7 +673,7 @@ class ogroup extends plugin
       */
     if(!$this->IsReleaseManagementActivated()){
       $p_f[      "applications"]    = array("OBJ"=>"application", "CLASS"=>"gosaApplication",
-          "DN"=> get_ou('applicationou')   ,"ACL" => "application"); 
+          "DN"=> get_ou('applicationRDN')   ,"ACL" => "application"); 
     }
            
     /*###########
@@ -884,7 +884,7 @@ class ogroup extends plugin
 
     /* Permissions for that base? */
     if ($this->base != ""){
-      $new_dn= 'cn='.$this->cn.','.get_ou('ogroupou').$this->base;
+      $new_dn= 'cn='.$this->cn.','.get_ou('ogroupRDN').$this->base;
     } else {
       $new_dn= $this->dn;
     }
@@ -958,7 +958,7 @@ class ogroup extends plugin
 
     /* New accounts need proper 'dn', propagate it to remaining objects */
     if ($this->dn == 'new'){
-      $this->dn= 'cn='.$this->cn.','.get_ou('ogroupou').$this->base;
+      $this->dn= 'cn='.$this->cn.','.get_ou('ogroupRDN').$this->base;
     }
 
     /* Save data. Using 'modify' implies that the entry is already present, use 'add' for

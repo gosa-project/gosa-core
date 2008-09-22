@@ -1151,8 +1151,8 @@ function get_ou($name)
   global $config;
 
   $map = array( 
-                "ogroupou"      => "ou=groups,",
-                "applicationou" => "ou=apps,",
+                "ogroupRDN"      => "ou=groups,",
+                "applicationRDN" => "ou=apps,",
                 "systemRDN"     => "ou=systems,",
                 "serverRDN"      => "ou=servers,ou=systems,",
                 "terminalRDN"    => "ou=terminals,ou=systems,",
@@ -1164,23 +1164,23 @@ function get_ou($name)
 
                 "faxBlocklistRDN"   => "ou=gofax,ou=systems,",
                 "systemIncomingRDN"    => "ou=incoming,",
-                "aclroleou"     => "ou=aclroles,",
-                "macroou"       => "ou=macros,ou=asterisk,ou=configs,ou=systems,",
+                "aclRoleRDN"     => "ou=aclroles,",
+                "phoneMacroRDN"       => "ou=macros,ou=asterisk,ou=configs,ou=systems,",
                 "phoneConferenceRDN"  => "ou=conferences,ou=asterisk,ou=configs,ou=systems,",
 
-                "faiou"         => "ou=fai,ou=configs,ou=systems,",
-                "faiscriptou"   => "ou=scripts,",
-                "faihookou"     => "ou=hooks,",
-                "faitemplateou" => "ou=templates,",
-                "faivariableou" => "ou=variables,",
-                "faiprofileou"  => "ou=profiles,",
-                "faipackageou"  => "ou=packages,",
-                "faipartitionou"=> "ou=disk,",
+                "faiBaseRDN"         => "ou=fai,ou=configs,ou=systems,",
+                "faiScriptRDN"   => "ou=scripts,",
+                "faiHookRDN"     => "ou=hooks,",
+                "faiTemplateRDN" => "ou=templates,",
+                "faiVariableRDN" => "ou=variables,",
+                "faiProfileRDN"  => "ou=profiles,",
+                "faiPackageRDN"  => "ou=packages,",
+                "faiPartitionRDN"=> "ou=disk,",
 
                 "sudoRDN"       => "ou=sudoers,",
 
-                "deviceou"      => "ou=devices,",
-                "mimetypeou"    => "ou=mime,");
+                "deviceRDN"      => "ou=devices,",
+                "mimetypeRDN"    => "ou=mime,");
 
   /* Preset ou... */
   if ($config->get_cfg_value($name, "_not_set_") != "_not_set_"){

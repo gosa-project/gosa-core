@@ -513,7 +513,7 @@ class ogroupManagement extends plugin
   /* Return departments, that will be included within snapshot detection */
   function get_used_snapshot_bases()
   {
-    return(array(get_ou('ogroupou').$this->DivListOGroup->selectedBase));
+    return(array(get_ou('ogroupRDN').$this->DivListOGroup->selectedBase));
   }
 
   
@@ -601,9 +601,9 @@ class ogroupManagement extends plugin
     $filter= "(&(cn=$Regex)(objectClass=gosaGroupOfNames)(|$filter))";
 
     if($this->DivListOGroup->SubSearch){
-      $res= get_sub_list($filter, "ogroups",get_ou('ogroupou'), $base, array("cn","objectClass","gosaGroupObjects"), GL_SIZELIMIT | GL_SUBSEARCH);
+      $res= get_sub_list($filter, "ogroups",get_ou('ogroupRDN'), $base, array("cn","objectClass","gosaGroupObjects"), GL_SIZELIMIT | GL_SUBSEARCH);
     }else{
-      $res= get_sub_list($filter, "ogroups",get_ou('ogroupou'), get_ou('ogroupou').$base, array("cn","objectClass","gosaGroupObjects"), GL_SIZELIMIT );
+      $res= get_sub_list($filter, "ogroups",get_ou('ogroupRDN'), get_ou('ogroupRDN').$base, array("cn","objectClass","gosaGroupObjects"), GL_SIZELIMIT );
     }
 
     $this->ogrouplist= $res;

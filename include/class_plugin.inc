@@ -949,7 +949,7 @@ class plugin
         if this is the case, then update this objectgroup to use the new dn.
      */
     $ogroups = get_sub_list("(&(objectClass=gosaGroupOfNames)(member=*))","ogroups",
-        array(get_ou("ogroupou")),$this->config->current['BASE'],array("member"),
+        array(get_ou("ogroupRDN")),$this->config->current['BASE'],array("member"),
         GL_SUBSEARCH | GL_NO_ACL_CHECK) ;
 
     /* Walk through all objectGroups and check if there are 
