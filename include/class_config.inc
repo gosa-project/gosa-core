@@ -188,7 +188,7 @@ class config  {
                   /* Handle referral tags */
       case 'REFERRAL':
                   if ($this->tags[$this->level-2] == 'LOCATION'){
-                    $url= $attrs['URI'];
+                    $url= $attrs['URL'];
                     $server= preg_replace('!^([^:]+://[^/]+)/.*$!', '\\1', $url);
 
                     /* Add location elements */
@@ -335,8 +335,8 @@ class config  {
       $bases= array();
       $servers= array();
       foreach ($this->current['REFERRAL'] as $ref){
-        $server= preg_replace('%^(.*)/[^/]+$%', '\\1', $ref['URI']);
-        $base= preg_replace('%^.*/([^/]+)$%', '\\1', $ref['URI']);
+        $server= preg_replace('%^(.*)/[^/]+$%', '\\1', $ref['URL']);
+        $base= preg_replace('%^.*/([^/]+)$%', '\\1', $ref['URL']);
         $bases[$base]= strlen($base);
         $servers[$base]= $server;
       }
