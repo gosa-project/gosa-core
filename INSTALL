@@ -1,7 +1,14 @@
-GOsa2.1 QUICK INSTALL
-=====================
+GOsa 2.6 QUICK INSTALL
+======================
 
-* Installing GOsa
+Prequisite:
+
+You have a system up and running. It has apache and PHP installed
+and there is a blank (or prefilled) but working LDAP available.
+
+---
+
+Installing GOsa from source:
 
 Unpack the GOsa tarball and move the main gosa directory to
 a place your webserver is configured to find it. The default
@@ -27,45 +34,35 @@ config:
 # Set alias to gosa
 Alias /gosa /usr/share/gosa/html
 
-Assumed you've installed PHP >= 4.1.0, restart your apache webserver
+Assumed you've installed PHP >= 5.2.0, reload your apache webserver
 and do your first GOsa dry run without configuration:
 
-http[s]://your-server/gosa/setup.php
+http[s]://your-server/gosa
 
 GOsa setup will perform some basic system checks about general
 prerequisites. The setup asks some questions and provides a
 basic gosa.conf to save in /etc/gosa. Follow the instructions
 until you're able to log in.
 
-As a final step - which is not done automatically yet, you've to
-create a group which members will be GOsa administrators. Here's
-an example ldif which creates a user named "admin" with the password
-"tester" and a group where this user is in:
+You're done. Lets play with the GUI.
 
-dn: cn=admin,ou=people,dc=example,dc=net
-objectClass: person
-objectClass: organizationalPerson
-objectClass: inetOrgPerson
-objectClass: gosaAccount
-uid: admin
-cn: admin
-givenName: admin
-sn: GOsa main administrator
-lmPassword: 10974C6EFC0AEE1917306D272A9441BB
-ntPassword: 38F3951141D0F71A039CFA9D1EC06378
-userPassword:: dGVzdGVy
+---
 
-dn: cn=administrators,ou=groups,dc=example,dc=net
-objectClass: gosaObject
-objectClass: posixGroup
-gosaSubtreeACL: :all
-cn: administrators
-gidNumber: 999
-memberUid: admin
+* Installing from Packages
 
-After adding these entries, you should be able to use GOsa. Log in as
-admin and try experiment with the GUI.
+If you install GOsa from packages, all the steps from above will
+be done automatically. Go to the setup:
 
+http[s]://your-server/gosa
+
+GOsa setup will perform some basic system checks about general
+prerequisites. The setup asks some questions and provides a
+basic gosa.conf to save in /etc/gosa. Follow the instructions
+until you're able to log in.
+
+You're done. Lets play with the GUI.
+
+---
 
 * Migrating an existing tree
 
@@ -86,24 +83,27 @@ plus some modifications:
   that have the objectClass gosaDepartment. You can hide subtrees from GOsa
   by not putting this objectClass inside.
 
-- You need at least one group with objectClass gosaObject and attribute
-  gosaSubtreeACL set to :all in the base of your tree. All members of this
-  group are able to change everything in GOsa. Look at the cn=administrators
-  from above.
+The GOsa setup may be used to do these migrations, but it is not meant
+to work in every possible circumstance. For the first time:
+
+DO NOT WORK ON PRODUCTIVE DATA IF YOU DON'T KNOW WHAT YOU'RE DOING!
 
 That should be all. Entries should be visible in GOsa now. Be aware that if
 your naming policy of user cn's differs from the way GOsa handles it, the
 entries get rewritten to a GOsa style dn.
 
+---
 
-* More informations
+* Further information
 
-To improve this piece of software, please report all kind of errors.
-Looking for a mailing list? Go to
+To improve this piece of software, please report all kind of errors, either
+using the bug tracker on www.gosa-project.org or the button on the upper
+right.
 
-https://oss.gonicus.de/mailman/listinfo/gosa/
+Documentation: https://www.gosa-project.org
+Mailinglist:   https://oss.gonicus.de/mailman/listinfo/gosa/
 
-Thanks
+Have fun!
 
 ---
 Cajus Pollmeier <pollmeier@gonicus.de>
