@@ -550,18 +550,23 @@ class config  {
 
     /* Get NFS server lists */
     $tmp= array("default");
+    $tmp2= array("default");
     $ldap->cd ($this->current['BASE']);
     $ldap->search ("(&(objectClass=goShareServer)(goExportEntry=*))");
     while ($attrs= $ldap->fetch()){
       for ($i= 0; $i<$attrs["goExportEntry"]["count"]; $i++){
-        if(!preg_match('/^[^|]+\|[^|]+\|NFS\|.*$/', $attrs["goExportEntry"][$i])){
-          continue;
-        }
-        $path= preg_replace ("/^[^|]+\|[^|]+\|[^|]+\|[^|]+\|([^|]+).*$/", '\1', $attrs["goExportEntry"][$i]);
-        $tmp[]= $attrs["cn"][0].":$path";
+        if(preg_match('/^[^|]+\|[^|]+\|NFS\|.*$/', $attrs["goExportEntry"][$i])){
+          $path= preg_replace ("/^[^|]+\|[^|]+\|[^|]+\|[^|]+\|([^|]+).*$/", '\1', $attrs["goExportEntry"][$i]);
+          $tmp[]= $attrs["cn"][0].":$path";
+	}
+        if(preg_match('/^[^|]+\|[^|]+\|NBD\|.*$/', $attrs["goExportEntry"][$i])){
+          $path= preg_replace ("/^[^|]+\|[^|]+\|[^|]+\|[^|]+\|([^|]+).*$/", '\1', $attrs["goExportEntry"][$i]);
+          $tmp2[]= $attrs["cn"][0].":$path";
+	}
       }
     }
     $this->data['SERVERS']['NFS']= $tmp;
+    $this->data['SERVERS']['NBD']= $tmp2;
 
     /* Load Terminalservers */
     $ldap->cd ($this->current['BASE']);
