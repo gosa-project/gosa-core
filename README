@@ -19,20 +19,44 @@ GOsa infrastructure howto is work in progress and not released yet.
 
 * Translations
 
-GOsa is not available in your native language? Just take the message.po
-file out of the locales/core directory and put your translations into the
-msgstr fields. You may look at the de/LC_MESSAGES for the way how it
+GOsa is not available in your native language? Just read on...
+
+Translations (or I18N) in GOsa is done by the gettext library. As a
+result, every set of translations is stored inside of one directory
+per language as a text file called "messages.po".
+
+For GOsa you've to differenciate between gosa-core and single
+gosa-plugins. The core as a translation and every plugin has a seperate
+translation, too.
+
+GOsa core can be translated by taking a look at the locales/core
+directory. Just take the messages.po file and copy it to some other
+location and put your translations into the msgstr fields of this
+file. For more comfort, use programs like i.e. kbabel or poedit to
+achieve this. You may look at the de/LC_MESSAGES for the way how it
 works.
 
 If you're ready with that, create a directory for your language using
 the ISO shortcuts (i.e. es for spain) with a subdirectory LC_MESSAGES.
-Make sure your apache has locale support or, in case of debian,
-that the specific locale will be generated (via dpkg-reconfigure locales).
+In case of spain this will be
+
+ gosa-core/locales/core/es/LC_MESSAGES
+
+and put the freshly translated messages.po in this directory.
+
+To test this, you've depoly the messages.po file in your running copy
+of GOsa and run the "update-gosa" command, to let GOsa merge the
+translations. Then, Make sure your apache has locale support or, in case
+of debian, that the specific locale will be generated (via dpkg-reconfigure
+locales).
 
 You may want your translations to be included in the main GOsa repository,
-then just send the .po file to me.
+then just send the .po file to me or ask for SVN access.
 
-Run update-gosa after you've added translations in order to let GOsa
+For gosa-plugins, every plugin has a locales directory. Translation works
+like described for gosa-core.
+
+Always run update-gosa after you've added translations in order to let GOsa
 compile and re-sync the translations.
 
 
