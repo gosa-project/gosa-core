@@ -35,6 +35,16 @@ class gosaSupportDaemon
 
   protected $use_alternative_xml_parse_method = FALSE;
 
+  public function get_host()
+  {
+    return($this->s_host);
+  }
+
+  public function get_port()
+  {
+    return($this->i_port);
+  }
+
   /*! \brief  Creates a new gosaSupportDaemon object.
     @param string   Host    The Host where the daemon is running on.  
     @param integer  Port    The port which the daemon use.
@@ -932,7 +942,7 @@ class gosaSupportDaemon
 
   /* Allows simply appending a new DaemonEvent 
    */
-  public function append($event)
+  public function append($event, $skip_add_mac = FALSE)
   {
     if(!($event instanceof DaemonEvent)){
       return(FALSE);
@@ -961,7 +971,9 @@ class gosaSupportDaemon
       /* Append an entry for each target 
        */
       foreach($targets as $target){
-        $data['macaddress'] = $target;
+        if(!$skip_add_mac){
+          $data['macaddress'] = $target;
+        }
         $this->send_data($action,$target,$data,$request_answer);
 
         if($this->is_error()){
