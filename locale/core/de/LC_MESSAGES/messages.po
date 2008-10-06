@@ -14,12 +14,12 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-08-09 12:51+0200\n"
-"PO-Revision-Date: 2008-08-04 11:38+0200\n"
+"PO-Revision-Date: 2008-10-06 15:28+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: html/password.php:58 html/main.php:145 include/functions.inc:351
 #: plugins/admin/departments/class_departmentGeneric.inc:363
@@ -1405,7 +1405,7 @@ msgstr "Aussehen und Verhalten"
 
 #: setup/setup_config1.tpl:6
 msgid "Theme"
-msgstr "Thema"
+msgstr "Aussehen"
 
 #: setup/setup_config1.tpl:15
 msgid "Apache"
@@ -1437,7 +1437,7 @@ msgstr "Persönlichen Titel in der Benutzer-DN mitführen"
 
 #: setup/setup_config1.tpl:70
 msgid "Relaxed naming policies"
-msgstr "Gelockerte Namensvorgaben"
+msgstr "Nicht strikte Namensvorgaben"
 
 #: setup/setup_config1.tpl:81
 msgid "Automatic UIDs"
@@ -1718,7 +1718,7 @@ msgstr "Erzwinge verschlüsselte Verbindungen"
 
 #: setup/setup_config3.tpl:210
 msgid "Warn if session is not encrypted"
-msgstr "Warnen wenn die Sitzung nicht verschlüsselt ist"
+msgstr "Bei unverschlüsselten Verbindungen warnen"
 
 #: setup/setup_config3.tpl:222
 msgid "Remember dialog filter settings"
@@ -6491,14 +6491,3 @@ msgstr "Geschlecht"
 msgid "Please use the phone tab"
 msgstr "Verwenden sie den Telefon-Reiter"
 
-#~ msgid "Destination indicatior"
-#~ msgstr "Ziel-Beschreibung"
-
-#~ msgid "Post office box "
-#~ msgstr "Büro Briefkasten"
-
-#~ msgid "Action"
-#~ msgstr "Aktion"
-
-#~ msgid "Select this base"
-#~ msgstr "Diese Basis auswählen"
