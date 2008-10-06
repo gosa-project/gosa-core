@@ -75,6 +75,13 @@ class ogrouptabs extends tabs
         unset($this->by_name['termservice']);
       }
     }
+    if(class_available("termstartup")){
+      if(!preg_match("/T/",$objects)&&(isset($this->by_object['termstartup']))){
+        $this->by_object['termstartup']->remove_from_parent();
+        unset($this->by_object['termstartup']);
+        unset($this->by_name['termstartup']);
+      }
+    }
 
     /* Remove ws tabs, if theres no ws left in the object list */
     if(class_available("workservice")){
@@ -142,11 +149,23 @@ class ogrouptabs extends tabs
         }
       }
     }
+    if(class_available("termstartup")){
+      if(preg_match("/T/",$objects) &&(!isset($this->by_object['termstartup']))){
+        if(!isset($this->by_object['termstartup'])){
+          $this->by_name['termstartup']= _("Startup");
+          $this->by_object['termstartup']= new termstartup($this->config, $this->dn,$this->by_object['ogroup']);
+	  $this->by_object['termstartup']->parent= &$this;
+	  $this->by_object['termstartup']->acl = "#all#";
+        }
+      }
+    }
     if(class_available("termservice")){
       if(preg_match("/T/",$objects) &&(!isset($this->by_object['termservice']))){
         if(!isset($this->by_object['termservice'])){
           $this->by_name['termservice']= _("Devices");
           $this->by_object['termservice']= new termservice($this->config, $this->dn,$this->by_object['ogroup']);
+	  $this->by_object['termservice']->parent= &$this;
+	  $this->by_object['termservice']->acl = "#all#";
         }
       }
     }
@@ -264,11 +283,14 @@ class ogrouptabs extends tabs
         case "T":
           /* Add a terminal tab */
           if(class_available("termgroup")){
-            $this->by_name['termgroup']= _("Terminals");
+            $this->by_name['termgroup']= _("Systems");
             $this->by_object['termgroup']= new termgroup($this->config, $this->dn);
             $this->by_object['termgroup']->parent= &$this;
           }
-
+          if(class_available("termstartup")){
+            $this->by_name['termstartup']= _("Startup");
+            $this->by_object['termstartup']= new termstartup($this->config, $this->dn,$this->by_object['ogroup']);
+          }
           if(class_available("termservice")){
             $this->by_name['termservice']= _("Devices");
             $this->by_object['termservice']= new termservice($this->config, $this->dn,$this->by_object['ogroup']);
