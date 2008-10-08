@@ -64,8 +64,7 @@ chmod 770 -R /var/cache/gosa
 # Add support for RequestHeader
 a2enmod headers
 
-# Update gosa
-/usr/sbin/update-gosa
+update-gosa
 
 # Finally restart servers
 if [ -x /usr/sbin/invoke-rc.d ]; then

@@ -332,7 +332,7 @@ for srv in apache apache-ssl apache2; do\
 done\
 \
 # Update gosa\
-/usr/sbin/update-gosa\
+update-gosa\
 \
 # Finally restart servers\
 for server in $servers; do\

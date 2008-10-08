@@ -58,6 +58,7 @@ binary-common:
 	dh_installmenu
 	dh_installdebconf	
 	dh_installman
+	rm -rf debian/gosa/usr/share/gosa/include/smarty
 	dh_strip
 	dh_compress
 	# This is an ugly workaround to preserve gosa.conf from beeing compressed. Excluding it
