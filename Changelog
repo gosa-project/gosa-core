@@ -23,6 +23,7 @@ GOsa2 changelog
   - Fixed problem with duplicated domain parts in ldap2zone
   - Updated check of user acls for new attributes
   - Fixed opengroupware pgsql login
+  - Updated integrated smarty to 2.6.20
 
 * gosa 2.5.16
   - Fixed problem with undefined ridbase in domain objects
