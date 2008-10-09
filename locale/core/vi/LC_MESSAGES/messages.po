@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VIcore2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-08 15:33+0200\n"
+"POT-Creation-Date: 2008-10-09 09:23+0200\n"
 "PO-Revision-Date: 2008-07-04 09:59+0200\n"
 "Last-Translator: Stefan Koehler <stefan@gonicus.de>\n"
 "Language-Team: Vietnamese\n"
@@ -4724,8 +4724,8 @@ msgid "Path for kiosk profile storage"
 msgstr "Đường dẫn đến kho lưu trữ profile của ki-ốt"
 
 #: setup/setup_config3.tpl:96
-msgid "Override sudo role ou"
-msgstr "Viết đè lên lệnh sudo role ou"
+msgid "SUDO role base"
+msgstr ""
 
 #: setup/setup_config3.tpl:115
 msgid "Mail queue script"
@@ -6467,6 +6467,9 @@ msgstr "Không có file trợ giúp nào được chỉ định cho lớp này"
 msgid "Helpdir '%s' is not accessible, can't read any helpfiles."
 msgstr ""
 "Không thể truy cập Helpdir '%s', không thể đọc được bất cứ file trợ giúp nào."
+
+#~ msgid "Override sudo role ou"
+#~ msgstr "Viết đè lên lệnh sudo role ou"
 
 #~ msgid "department"
 #~ msgstr "Bộ phận"

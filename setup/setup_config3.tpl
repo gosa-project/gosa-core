@@ -93,7 +93,7 @@
 
     <div class='step4_container'>
         <div class='step4_name'>
-            {t}Override sudo role ou{/t}
+            {t}SUDO role base{/t}
         </div>
         <div class='step4_value'>
             {if $optional.sudoou_active == FALSE}

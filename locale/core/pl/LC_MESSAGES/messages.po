@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polski\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-08 15:33+0200\n"
+"POT-Creation-Date: 2008-10-09 09:23+0200\n"
 "PO-Revision-Date: 2007-07-14 21:45+0100\n"
 "Last-Translator: Piotr Rybicki <meritus@innervision.pl>\n"
 "Language-Team: Piotr Rybicki <meritus@innervision.pl>\n"
@@ -4827,9 +4827,8 @@ msgid "Path for kiosk profile storage"
 msgstr "Ustawienia profilu Kiosk"
 
 #: setup/setup_config3.tpl:96
-#, fuzzy
-msgid "Override sudo role ou"
-msgstr "! nieznane id"
+msgid "SUDO role base"
+msgstr ""
 
 #: setup/setup_config3.tpl:115
 #, fuzzy
@@ -6626,6 +6625,10 @@ msgid "Helpdir '%s' is not accessible, can't read any helpfiles."
 msgstr ""
 "Katalog pomocy '%s' nie jest osiągalny, nie można czytać żadnych plików "
 "pomocy."
+
+#, fuzzy
+#~ msgid "Override sudo role ou"
+#~ msgstr "! nieznane id"
 
 #~ msgid "Terminals"
 #~ msgstr "Terminale"

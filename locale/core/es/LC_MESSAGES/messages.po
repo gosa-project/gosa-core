@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-08 15:33+0200\n"
+"POT-Creation-Date: 2008-10-09 09:23+0200\n"
 "PO-Revision-Date: 2007-07-24 00:26+0200\n"
 "Last-Translator: ALEJANDRO ESCANERO BLANCO\n"
 "Language-Team:  <es@li.org>\n"
@@ -4643,9 +4643,8 @@ msgid "Path for kiosk profile storage"
 msgstr ""
 
 #: setup/setup_config3.tpl:96
-#, fuzzy
-msgid "Override sudo role ou"
-msgstr "¡id desconocido!"
+msgid "SUDO role base"
+msgstr ""
 
 #: setup/setup_config3.tpl:115
 msgid "Mail queue script"
@@ -6386,6 +6385,10 @@ msgstr ""
 #, php-format
 msgid "Helpdir '%s' is not accessible, can't read any helpfiles."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Override sudo role ou"
+#~ msgstr "¡id desconocido!"
 
 #~ msgid "Action"
 #~ msgstr "Acción"

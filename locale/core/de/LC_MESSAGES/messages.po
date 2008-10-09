@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-08 15:33+0200\n"
-"PO-Revision-Date: 2008-10-08 15:44+0200\n"
+"POT-Creation-Date: 2008-10-09 09:23+0200\n"
+"PO-Revision-Date: 2008-10-09 09:23+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -4719,8 +4719,8 @@ msgid "Path for kiosk profile storage"
 msgstr "Pfad für Kioskprofil-Ablage"
 
 #: setup/setup_config3.tpl:96
-msgid "Override sudo role ou"
-msgstr "Sudo-Rolle ignorieren"
+msgid "SUDO role base"
+msgstr "Basis für SUDO-Rollen"
 
 #: setup/setup_config3.tpl:115
 msgid "Mail queue script"
@@ -4915,7 +4915,9 @@ msgstr "%s%% Trefferquote in Datei %s"
 msgid ""
 "No plugin definitions found to initialize '%s', please check your "
 "configuration file."
-msgstr "Es wurde keine Plugin-Definition gefunden um '%s' zu Initialisieren. Bitte prüfen Sie Ihre Konfigurationsdatei!"
+msgstr ""
+"Es wurde keine Plugin-Definition gefunden um '%s' zu Initialisieren. Bitte "
+"prüfen Sie Ihre Konfigurationsdatei!"
 
 #: include/class_tabs.inc:248
 #, php-format
@@ -6449,7 +6451,9 @@ msgstr "Konfigurationsfehler"
 msgid ""
 "FATAL: not all POST variables have been transfered by PHP - please inform "
 "your administrator!"
-msgstr "FATAL: es wurden nicht alle POST-Variablen von PHP übertragen - bitte informieren Sie den Administrator!"
+msgstr ""
+"FATAL: es wurden nicht alle POST-Variablen von PHP übertragen - bitte "
+"informieren Sie den Administrator!"
 
 #: html/helpviewer.php:65
 msgid "Help browser"

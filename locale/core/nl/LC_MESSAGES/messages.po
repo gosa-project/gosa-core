@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-08 15:33+0200\n"
+"POT-Creation-Date: 2008-10-09 09:23+0200\n"
 "PO-Revision-Date: 2006-06-02 16:58+0100\n"
 "Last-Translator: Niels Klomp (CareWorks ICT Services) <nk@careworks.nl>\n"
 "Language-Team: CareWorks ICT Services <info@careworks.nl>\n"
@@ -4912,9 +4912,8 @@ msgid "Path for kiosk profile storage"
 msgstr "Kiosk profiel instellingen"
 
 #: setup/setup_config3.tpl:96
-#, fuzzy
-msgid "Override sudo role ou"
-msgstr "! onbekend id"
+msgid "SUDO role base"
+msgstr ""
 
 #: setup/setup_config3.tpl:115
 #, fuzzy
@@ -6732,6 +6731,10 @@ msgid "Helpdir '%s' is not accessible, can't read any helpfiles."
 msgstr ""
 "Help directory '%s' is niet toegankelijk. Er kunnen geen helpbestanden "
 "gelezen worden."
+
+#, fuzzy
+#~ msgid "Override sudo role ou"
+#~ msgstr "! onbekend id"
 
 #~ msgid "Terminals"
 #~ msgstr "Terminals"

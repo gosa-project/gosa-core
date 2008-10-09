@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-08 15:33+0200\n"
+"POT-Creation-Date: 2008-10-09 09:23+0200\n"
 "PO-Revision-Date: 2005-11-18 15:26+0100\n"
 "Last-Translator: Alessandro Amici <a.amici@bopen.it>\n"
 "Language-Team: Italian\n"
@@ -4837,7 +4837,7 @@ msgid "Path for kiosk profile storage"
 msgstr "Opzioni di posta dell'identità"
 
 #: setup/setup_config3.tpl:96
-msgid "Override sudo role ou"
+msgid "SUDO role base"
 msgstr ""
 
 #: setup/setup_config3.tpl:115
