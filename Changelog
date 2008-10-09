@@ -1,9 +1,28 @@
 GOsa2 changelog
 ===============
 
-* next
+* gosa 2.5.17
   - Added scalix group support.
   - Added debug information for post events, debug level is DEBUG_SHELL.
+  - Fixed problem with opengroupware pgsql passwords
+  - Translation updates
+  - Update voicemail table entry correctly
+  - Ensure that nobody uses a mail address already specified in kolabs alias attribute.
+  - Fixed problem with illegal characters in pregmatch, added normalizePreg
+  - Added conflict for SID
+  - Fixed several undefined index occurencies in the setup
+  - Fixed progressbar display
+  - Cleaned packaging
+  - Added debug output for post handling
+  - Fixed kolabSharedFolderTarget
+  - Suppress "Non-static method LDAP::fix() should not be called statically" errors
+  - Fixed sharedFolderTarget which was broken after user was saved
+  - Added new attribute for 2.6 compatibilty
+  - Made samba3 the default value in setup
+  - Fixed DNS configuration problem
+  - Fixed problem with duplicated domain parts in ldap2zone
+  - Updated check of user acls for new attributes
+  - Fixed opengroupware pgsql login
 
 * gosa 2.5.16
   - Fixed problem with undefined ridbase in domain objects
