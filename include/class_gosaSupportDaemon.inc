@@ -116,17 +116,18 @@ class gosaSupportDaemon
     $data = array("module_name" => $mod);
     $res = $this->send_data("gosa_get_hosts_with_module",$this->s_host.":".$this->i_port,$data,TRUE);
     $hosts = array();
-    if(isset($res['XML'])){
+    if(isset($res['XML'][0])){
       foreach($res['XML'][0] as $name => $data){
         if(preg_match("/^ANSWER[0-9]*$/",$name)){
-          if(isset($data[0]['MAC'][0]['VALUE'])){
+          if(isset($data[0]['MAC'][0]['VALUE']) && $data[0]['MAC'][0]['VALUE'] != ""){
             $hosts[] = $data[0]['MAC'][0]['VALUE'];
-          }elseif(isset($data[0]['VALUE'])){
-            $hosts[] = $data[0]['VALUE'];
-          }
+          } elseif(isset($data[0]['IP'][0]['VALUE']) && $data[0]['IP'][0]['VALUE'] != "") {
+            $hosts[] = $data[0]['IP'][0]['VALUE'];
+	  }
         }
       }
     }
+
     return($hosts);
   }
 
