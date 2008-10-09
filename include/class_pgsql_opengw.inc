@@ -28,7 +28,7 @@ class pgre_sql{
 	{
 		error_reporting(E_ALL);
 		if(is_callable("pg_connect")){
-			if(!empty($this->pwd)){
+			if(empty($this->pwd)){
 				$this->handle = @pg_connect("dbname=".$this->db." host=".$this->server." user=".$this->user);
 			}else{
 				$this->handle = @pg_connect("dbname=".$this->db." host=".$this->server." user=".$this->user." password=".$this->pwd);
