@@ -1317,7 +1317,7 @@ class plugin
   function snapshotEnabled()
   {
     $config = $this->config;
-    if($config->get_cfg_value("snapshots") == "true"){
+    if($config->get_cfg_value("enableSnapshots") == "true"){
 	    /* Check if the snapshot_base is defined */
 	    if ($config->get_cfg_value("snapshotBase") == ""){
 		    msg_dialog::display(_("Configuration error"), sprintf(_("The snapshot functionality is enabled, but the required variable '%s' is not set."),"snapshotBase"), ERROR_DIALOG);
