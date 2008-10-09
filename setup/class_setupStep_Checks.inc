@@ -124,14 +124,6 @@ class Step_Checks extends setup_step
     $M = TRUE;
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
-    /* Checking for Cups module */
-    $N = msgPool::checkingFor(_("CUPS"));
-    $D = _("GOsa requires this module to show printers that are not defined within the LDAP.");
-    $S = msgPool::installPhpModule("CUPS");
-    $R = is_callable("cups_get_dest_list");
-    $M = FALSE;
-    $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
-
     /* Checking generate LM/NT password hashes */
     #TODO: either this, or gosa-si will do the hash generation
     $query= "mkntpwd 2>&1";
