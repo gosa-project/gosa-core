@@ -437,5 +437,13 @@ class scalixAccount extends plugin
   }
 }
 
+class scalixGroup extends scalixAccount
+{
+    var $scalixGroup = TRUE;
+
+    var $attributes           = array("scalixMailnode");
+    var $fakeBooleanAttributes= array("scalixHideUserEntry");
+    var $objectclasses        = array("scalixGroupClass");
+}
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
