@@ -100,6 +100,7 @@ class pluglist {
 		}
 
 		foreach($acls_to_check as $acl_to_check){
+      $acl_to_check = trim($acl_to_check);
 		
 			/* Check if the given acl tag is only valid for self acl entries  
                  <plugin acl="users/user:self" class="user"...
