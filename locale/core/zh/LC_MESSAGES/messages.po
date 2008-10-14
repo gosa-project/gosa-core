@@ -5714,7 +5714,6 @@ msgid "Swedish"
 msgstr ""
 
 #: include/functions.inc:2390
-#, fuzzy
 msgid "Chinese"
 msgstr "芯片组"
 

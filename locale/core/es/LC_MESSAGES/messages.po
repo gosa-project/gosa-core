@@ -5502,7 +5502,7 @@ msgstr ""
 
 #: include/functions.inc:2385
 msgid "Spanish"
-msgstr ""
+msgstr "Español"
 
 #: include/functions.inc:2386
 msgid "English"

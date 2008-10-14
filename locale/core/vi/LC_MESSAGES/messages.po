@@ -5614,7 +5614,6 @@ msgid "Chinese"
 msgstr "Tiếng Trung Quốc"
 
 #: include/functions.inc:2391
-#, fuzzy
 msgid "Vietnamese"
 msgstr "Tên thật"
 
