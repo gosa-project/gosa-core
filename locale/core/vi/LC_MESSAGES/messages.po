@@ -5615,7 +5615,7 @@ msgstr "Tiếng Trung Quốc"
 
 #: include/functions.inc:2391
 msgid "Vietnamese"
-msgstr "Tên thật"
+msgstr "Tiếng Việt"
 
 #: include/functions.inc:2392
 msgid "Russian"
