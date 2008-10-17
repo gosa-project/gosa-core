@@ -126,6 +126,9 @@ class userinfo
               $tmp = @acl::explodeAcl($attrs['gosaAclTemplate'][$i]);  
 
               foreach($tmp as $new_acl){
+
+                /* Keep non role attributes here! */
+                $new_acl['filter'] = $aclc_value['filter'];
                 $new_acl['members'] = $aclc_value['members'];
                 $aclc[$dn][] =$new_acl;
               }
