@@ -123,9 +123,17 @@ class gosaSupportDaemon
             $hosts[] = $data[0]['MAC'][0]['VALUE'];
           } elseif(isset($data[0]['IP'][0]['VALUE']) && $data[0]['IP'][0]['VALUE'] != "") {
             $hosts[] = $data[0]['IP'][0]['VALUE'];
-	  }
+          }
         }
       }
+    }
+
+    if(count($hosts) == 0){
+      @DEBUG(DEBUG_SI, __LINE__, "<b>".__CLASS__."::".__FUNCTION__."</b>" , 
+        __FILE__, "<font color='red'><i>Found: 0</i></font>", $info=$mod);
+    }else{
+      @DEBUG(DEBUG_SI, __LINE__, "<b>".__CLASS__."::".__FUNCTION__."</b>" , 
+        __FILE__, "<i>Found: ".count($hosts)."</i>", $info=$mod);
     }
 
     return($hosts);
