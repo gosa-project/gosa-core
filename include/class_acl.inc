@@ -1174,7 +1174,7 @@ class acl extends plugin
   {
     return (array(
           "plShortName"   => _("ACL"),
-          "plDescription" => _("ACL")._("Access control list").")",
+          "plDescription" => _("ACL")."&nbsp;("._("Access control list").")",
           "plSelfModify"  => FALSE,
           "plDepends"     => array(),
           "plPriority"    => 0,
