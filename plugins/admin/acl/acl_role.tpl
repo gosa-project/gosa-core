@@ -41,7 +41,9 @@
 </tr>
 </table>
 {$aclList}
+{render acl=$gosaAclEntryACL}
 <input type="submit" name="new_acl" value="{t}New ACL{/t}">
+{/render}
 
 {/if}
 
@@ -56,8 +58,10 @@
 
 <p class="seperator">&nbsp;</p>
 <div style='text-align:right;margin-top:5px'>
+{render acl=$gosaAclEntryACL}
 	<input type="submit" name="submit_new_acl" value="{msgPool type=applyButton}">
 	&nbsp;
+{/render}
 	<input type="submit" name="cancel_new_acl" value="{msgPool type=cancelButton}">
 </div>
 {/if}
@@ -66,11 +70,15 @@
 
 <h1>{$headline}</h1>
 
+{render acl=$gosaAclEntryACL}
 {$aclSelector}
+{/render}
 
 <p class="seperator">&nbsp;</p>
 <div style='text-align:right;margin-top:5px'>
+{render acl=$gosaAclEntryACL}
 	<input type="submit" name="submit_edit_acl" value="{msgPool type=applyButton}">
+{/render}
 	&nbsp;
 	<input type="submit" name="cancel_edit_acl" value="{msgPool type=cancelButton}">
 </div>

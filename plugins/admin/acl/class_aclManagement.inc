@@ -36,7 +36,7 @@ class aclManagement extends plugin
   var $start_pasting_copied_objects = FALSE;
   var $dns = array();
 
-  var $acl_module = array("acl","aclroles");
+  var $acl_module = array("acl");
 
   function aclManagement(&$config, &$ui)
   {
@@ -157,7 +157,7 @@ class aclManagement extends plugin
       $this->dn= "new";
 
       /* Check permissions */
-      if(preg_match("/c/",$this->ui->get_permissions($this->DivListACL->selectedBase,"aclroles/aclrole"))){
+      if(preg_match("/c/",$this->ui->get_permissions($this->DivListACL->selectedBase,"acl/aclrole"))){
 
         /* Register acltabs to trigger edit dialog */
         $this->acltabs= new aclroletab($this->config, NULL,$this->dn);
@@ -177,7 +177,7 @@ class aclManagement extends plugin
       $this->dn= $this->list[trim($s_entry)]['dn'];
 
       if(in_array("gosaRole",$this->list[trim($s_entry)]['objectClass'])){
-        $acl = "aclroles/aclrole";
+        $acl = "acl/aclrole";
       }else{
         $acl = "acl/acl";
       }
@@ -250,7 +250,7 @@ class aclManagement extends plugin
       foreach($ids as $id){
         $dn = $this->list[$id]['dn'];
         if(in_array("gosaRole",$this->list[$id]['objectClass'])){
-          $acl = $this->ui->get_permissions($dn, "aclroles/aclrole");
+          $acl = $this->ui->get_permissions($dn, "acl/aclrole");
         }else{
           $acl = $this->ui->get_permissions($dn, "acl/acl");
         }
@@ -286,7 +286,7 @@ class aclManagement extends plugin
            */
           $dn = $this->list[$id]['dn'];
           if(in_array("gosaRole",$this->list[$id]['objectClass'])){
-            $acl = $this->ui->get_permissions($dn,"aclroles/aclrole");
+            $acl = $this->ui->get_permissions($dn,"acl/aclrole");
             $name = _("ACL role");
           }else{
             $acl = $this->ui->get_permissions($dn,"acl/acl");
@@ -331,7 +331,7 @@ class aclManagement extends plugin
         $dn = $this->list[$id]['dn'];
         $this->dn = $dn;
         if(in_array("gosaRole",$this->list[$id]['objectClass'])){
-          $acl = $this->ui->get_permissions($dn,"aclroles/aclrole");
+          $acl = $this->ui->get_permissions($dn,"acl/aclrole");
           $this->acltabs= new aclroletab($this->config,NULL, $this->dn);
         }else{
           $acl = $this->ui->get_permissions($dn,"acl/acl");
@@ -346,7 +346,7 @@ class aclManagement extends plugin
         } else {
           msg_dialog::display(_("Permission error"),msgPool::permDelete(), ERROR_DIALOG);
           if(isset($this->ui->uid)){
-            new log("security","aclroles/".get_class($this),$this->dn,array(),
+            new log("security","acl/".get_class($this),$this->dn,array(),
                 "Warning: '".$this->ui->uid."' tried to trick acl role      deletion.");
           }
         }
@@ -567,11 +567,11 @@ class aclManagement extends plugin
 
       /* We can only copy & cut roles */ 
       if(isset($this->list[$s_entry]['objectClass']) && in_array("gosaRole",$this->list[$s_entry]['objectClass'])){
-        if($s_action == "copy" && $ui->is_copyable($dn,"aclroles","aclrole")){ 
-          $this->CopyPasteHandler->add_to_queue($dn,$s_action,"aclroletab","ACLROLETAB","aclroles");
+        if($s_action == "copy" && $ui->is_copyable($dn,"acl","aclrole")){ 
+          $this->CopyPasteHandler->add_to_queue($dn,$s_action,"aclroletab","ACLROLETAB","acl");
         }
-        if($s_action == "cut" && $ui->is_cutable($dn,"aclroles","aclrole")){
-          $this->CopyPasteHandler->add_to_queue($dn,$s_action,"aclroletab","ACLROLETAB","aclroles");
+        if($s_action == "cut" && $ui->is_cutable($dn,"acl","aclrole")){
+          $this->CopyPasteHandler->add_to_queue($dn,$s_action,"aclroletab","ACLROLETAB","acl");
         }
       }
     }
@@ -588,11 +588,11 @@ class aclManagement extends plugin
 
         if(isset($this->list[$id]['objectClass']) && in_array("gosaRole",$this->list[$id]['objectClass'])){
 
-          if($s_action == "copy_multiple" && $ui->is_copyable($dn,"aclroles","aclrole")){ 
-            $this->CopyPasteHandler->add_to_queue($dn,"copy","aclroletab","ACLROLETAB","aclroles");
+          if($s_action == "copy_multiple" && $ui->is_copyable($dn,"acl","aclrole")){ 
+            $this->CopyPasteHandler->add_to_queue($dn,"copy","aclroletab","ACLROLETAB","acl");
           }
-          if($s_action == "cut_multiple" && $ui->is_cutable($dn,"aclroles","aclrole")){
-            $this->CopyPasteHandler->add_to_queue($dn,"cut","aclroletab","ACLROLETAB","aclroles");
+          if($s_action == "cut_multiple" && $ui->is_cutable($dn,"acl","aclrole")){
+            $this->CopyPasteHandler->add_to_queue($dn,"cut","aclroletab","ACLROLETAB","acl");
           }
         }
       }

@@ -63,7 +63,7 @@ class aclrole extends acl
       $this->base  = session::get('CurrentMainBase');
     }else{
       $this->base = preg_replace("/^[^,]+,[^,]+,/","",$this->dn);
-      new log("view","aclroles/".get_class($this),$this->dn);
+      new log("view","acl/".get_class($this),$this->dn);
     }
    
     /* Load ACL's */
@@ -181,7 +181,7 @@ class aclrole extends acl
     $plist= $tmp->info;
 
     /* Handle posts */
-    if (isset($_POST['new_acl'])){
+    if (isset($_POST['new_acl']) && $this->acl_is_writeable("gosaAclEntry")){
       $this->dialogState= 'create';
       $this->dialog= TRUE;
       $this->currentIndex= count($this->gosaAclTemplate);
@@ -202,11 +202,6 @@ class aclrole extends acl
         $this->loadAclEntry();
         continue;
       }
-      if (preg_match('/^acl_del_.*_x/', $name)){
-        unset($this->gosaAclTemplate[preg_replace('/^acl_del_([0-9]+).*$/', '\1', $name)]);
-        continue;
-      }
-
       if (preg_match('/^cat_edit_.*_x/', $name)){
         $this->aclObject= preg_replace('/^cat_edit_([^_]+)_.*$/', '\1', $name);
         $this->dialogState= 'edit';
@@ -217,7 +212,17 @@ class aclrole extends acl
         }
         continue;
       }
-      if (preg_match('/^cat_del_.*_x/', $name)){
+
+      if(!$this->acl_is_writeable("gosaAclEntry")){
+        continue;
+      }
+
+      if (preg_match('/^acl_del_.*_x/', $name) && $this->acl_is_writeable("gosaAclEntry")){
+        unset($this->gosaAclTemplate[preg_replace('/^acl_del_([0-9]+).*$/', '\1', $name)]);
+        continue;
+      }
+
+      if (preg_match('/^cat_del_.*_x/', $name) && $this->acl_is_writeable("gosaAclEntry")){
         $idx= preg_replace('/^cat_del_([^_]+)_.*$/', '\1', $name);
         foreach ($this->ocMapping[$idx] as $key){
           unset($this->aclContents["$idx/$key"]);
@@ -226,7 +231,7 @@ class aclrole extends acl
       }
 
       /* Sorting... */
-      if (preg_match('/^sortup_.*_x/', $name)){
+      if (preg_match('/^sortup_.*_x/', $name) && $this->acl_is_writeable("gosaAclEntry")){
         $index= preg_replace('/^sortup_([0-9]+).*$/', '\1', $name);
         if ($index > 0){
           $tmp= $this->gosaAclTemplate[$index];
@@ -235,7 +240,7 @@ class aclrole extends acl
         }
         continue;
       }
-      if (preg_match('/^sortdown_.*_x/', $name)){
+      if (preg_match('/^sortdown_.*_x/', $name) && $this->acl_is_writeable("gosaAclEntry")){
         $index= preg_replace('/^sortdown_([0-9]+).*$/', '\1', $name);
         if ($index < count($this->gosaAclTemplate)-1){
           $tmp= $this->gosaAclTemplate[$index];
@@ -246,7 +251,7 @@ class aclrole extends acl
       }
 
       /* ACL saving... */
-      if (preg_match('/^acl_.*_[^xy]$/', $name)){
+      if (preg_match('/^acl_.*_[^xy]$/', $name) && $this->acl_is_writeable("gosaAclEntry")){
         $aclDialog= TRUE;
         list($dummy, $object, $attribute, $value)= split('_', $name);
 
@@ -297,7 +302,7 @@ class aclrole extends acl
     }
 
     /* Store ACL in main object? */
-    if (isset($_POST['submit_new_acl'])){
+    if (isset($_POST['submit_new_acl']) && $this->acl_is_writeable("gosaAclEntry")){
       $this->gosaAclTemplate[$this->currentIndex]['type']= $this->aclType;
       $this->gosaAclTemplate[$this->currentIndex]['members']= $this->recipients;
       $this->gosaAclTemplate[$this->currentIndex]['acl']= $this->aclContents;
@@ -316,12 +321,12 @@ class aclrole extends acl
     }
 
     /* Save edit acl? */
-    if (isset($_POST['submit_edit_acl'])){
+    if (isset($_POST['submit_edit_acl']) && $this->acl_is_writeable("gosaAclEntry")){
       $this->dialogState= 'create';
     }
 
     /* Add acl? */
-    if (isset($_POST['add_acl']) && $_POST['aclObject'] != ""){
+    if (isset($_POST['add_acl']) && $_POST['aclObject'] != "" && $this->acl_is_writeable("gosaAclEntry")){
       $this->dialogState= 'edit';
       $this->savedAclContents= array();
       foreach ($this->ocMapping[$this->aclObject] as $oc){
@@ -333,7 +338,7 @@ class aclrole extends acl
 
     /* Save common values */
     foreach (array("aclType", "aclObject", "target") as $key){
-      if (isset($_POST[$key])){
+      if (isset($_POST[$key]) && $this->acl_is_writeable("gosaAclEntry")){
         $this->$key= validate($_POST[$key]);
       }
     }
@@ -353,15 +358,27 @@ class aclrole extends acl
       /* Draw list */
       $aclList= new divSelectBox("aclList");
       $aclList->SetHeight(350);
-      
+
       /* Fill in entries */
       foreach ($this->gosaAclTemplate as $key => $entry){
         $field1= array("string" => $this->aclTypes[$entry['type']], "attach" => "style='width:100px'");
         $field2= array("string" => $this->assembleAclSummary($entry));
-        $action= "<input type='image' name='sortup_$key' alt='up' title='"._("Up")."' src='images/lists/sort-up.png' align='top'>";
-        $action.= "<input type='image' name='sortdown_$key' alt='down' title='"._("Down")."' src='images/lists/sort-down.png'>";
-        $action.= "<input class='center' type='image' src='images/lists/edit.png' alt='"._("Edit")."' name='acl_edit_$key' title='".msgPool::editButton(_("ACL"))."'>";
-        $action.= "<input class='center' type='image' src='images/lists/trash.png' alt='"._("Delete")."' name='acl_del_$key' title='".msgPool::delButton(_("ACL"))."'>";
+
+        $action ="";
+        if($this->acl_is_writeable("gosaAclEntry")){
+          $action.= "<input type='image' name='sortup_$key' alt='up' 
+            title='"._("Up")."' src='images/lists/sort-up.png' align='top'>";
+          $action.= "<input type='image' name='sortdown_$key' alt='down' 
+            title='"._("Down")."' src='images/lists/sort-down.png'>";
+        }
+        if($this->acl_is_readable("gosaAclEntry")){
+          $action.= "<input class='center' type='image' src='images/lists/edit.png' alt='"._("Edit")."' name='acl_edit_$key' 
+            title='".msgPool::editButton(_("ACL"))."'>";
+        }
+        if($this->acl_is_writeable("gosaAclEntry")){
+          $action.= "<input class='center' type='image' src='images/lists/trash.png' alt='"._("Delete")."' name='acl_del_$key' 
+            title='".msgPool::delButton(_("ACL"))."'>";
+        }
 
         $field3= array("string" => $action, "attach" => "style='border-right:0px;width:50px;text-align:right;'");
         $aclList->AddEntry(array($field1, $field2, $field3));
@@ -403,10 +420,18 @@ class aclrole extends acl
           $summary= sprintf(_("ACL for these objects: %s"), preg_replace('/, $/', '', $summary));
         }
 
+        $action = "";
+        if($this->acl_is_readable("gosaAclEntry")){
+          $action.= "<input class='center' type='image' src='images/lists/edit.png' 
+            alt='"._("Edit")."' name='cat_edit_$section'   title='"._("Edit category ACL")."'>";
+        }
+        if($this->acl_is_writeable("gosaAclEntry")){
+          $action.= "<input class='center' type='image' src='images/lists/trash.png' 
+            alt='"._("Delete")."' name='cat_del_$section' title='"._("Reset category ACL")."'>";
+        }
+
         $field1= array("string" => $dsc, "attach" => "style='width:140px'");
         $field2= array("string" => $summary);
-        $action= "<input class='center' type='image' src='images/lists/edit.png' alt='"._("Edit")."' name='cat_edit_$section' title='"._("Edit category ACL")."'>";
-        $action.= "<input class='center' type='image' src='images/lists/trash.png' alt='"._("Delete")."' name='cat_del_$section' title='"._("Reset category ACL")."'>";
         $field3= array("string" => $action, "attach" => "style='border-right:0px;width:50px'");
         $aclList->AddEntry(array($field1, $field2, $field3));
       }
@@ -494,7 +519,7 @@ class aclrole extends acl
 
   function aclPostHandler()
   {
-    if (isset($_POST['save_acl'])){
+    if (isset($_POST['save_acl']) && $this->acl_is_writeable("gosaAclEntry")){
       $this->save();
       return TRUE;
     }
@@ -575,13 +600,13 @@ class aclrole extends acl
       $ldap->cd($this->dn);
       $this->cleanup();
       $ldap->modify ($this->attrs);
-      new log("modify","aclroles/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
+      new log("modify","acl/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
     }else{
       $ldap->cd($this->config->current['BASE']);
       $ldap->create_missing_trees(preg_replace("/^[^,]+,/","",$this->dn));
       $ldap->cd($this->dn);
       $ldap->add($this->attrs);
-      new log("create","aclroles/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
+      new log("create","acl/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
     }
 
     if (!$ldap->success()){
@@ -623,7 +648,7 @@ class aclrole extends acl
     }
         
     $ldap->rmDir($this->dn);
-    new log("remove","aclroles/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
+    new log("remove","acl/".get_class($this),$this->dn,array_keys($this->attrs),$ldap->get_error());
     if (!$ldap->success()){
       msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, "", get_class()));
     }
@@ -700,12 +725,12 @@ class aclrole extends acl
           "plDepends"     => array(),
           "plPriority"    => 0,
           "plSection"     => array("admin"),
-          "plCategory"    => array("aclroles" => array("objectClass" => "gosaRole", "description" => _("Access control roles"))),
-
+          "plCategory"    => array("acl"),
           "plProvidedAcls"    => array(
             "cn"                => _("Name"),
             "base"              => _("Base"),
-            "description"       => _("Description"))
+            "description"       => _("Description"),
+            "gosaAclEntry"      => _("Permissions"))
         ));
   }
 

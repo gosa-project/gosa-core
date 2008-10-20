@@ -42,7 +42,7 @@ class divListACL extends MultiSelectWindow
 
   function divListACL (&$config, &$parent)
   {
-    MultiSelectWindow::MultiSelectWindow($config, "ACL", array("acl","aclroles"));
+    MultiSelectWindow::MultiSelectWindow($config, "ACL", array("acl","acl"));
     
     $this->parent       = &$parent;
     $this->ui           = get_userinfo();
@@ -145,8 +145,8 @@ class divListACL extends MultiSelectWindow
        */
       if(in_array("gosaRole",$acl_entry['objectClass'])){
 
-        $acl        = $this->ui->get_permissions($acl_entry['dn'],"aclroles/aclRole");
-        $acl_all    = $this->ui->has_complete_category_acls($acl_entry['dn'],"aclroles");
+        $acl        = $this->ui->get_permissions($acl_entry['dn'],"acl/aclrole");
+        $acl_all    = $this->ui->has_complete_category_acls($acl_entry['dn'],"acl");
 
         $editlink       = "<a href='?plug=".$_GET['plug']."&amp;id=%s&amp;act=list_edit_role'>%s</a>";
         $list_left_icon = "<img src='plugins/acl/images/role.png' alt='"._("Role")."'>";
@@ -157,7 +157,7 @@ class divListACL extends MultiSelectWindow
         }
 
         /* Add copy & cut functionality */
-        $action.= $this->parent->get_copypaste_action($acl_entry['dn'],"aclroles","aclRole");
+        $action.= $this->parent->get_copypaste_action($acl_entry['dn'],"acl","aclRole");
 
         /* Add actions depending on acls */
         if(preg_match("/r/", $acl)){
@@ -166,7 +166,7 @@ class divListACL extends MultiSelectWindow
         }
 
         /* Add snapshot functionality */
-        $action.= $this->parent->get_snapshot_action($acl_entry['dn'],"aclroles");
+        $action.= $this->parent->get_snapshot_action($acl_entry['dn'],"acl");
 
       }else{
 
