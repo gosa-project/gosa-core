@@ -242,84 +242,89 @@ class acl extends plugin
     $new_acl= array();
     $aclDialog= FALSE;
     $firstedit= FALSE;
-    foreach($_POST as $name => $post){
 
-      /* Actions... */
-      if (preg_match('/^acl_edit_.*_x/', $name)){
-        $this->dialogState= 'create';
-        $firstedit= TRUE;
-        $this->dialog= TRUE;
-        $this->currentIndex= preg_replace('/^acl_edit_([0-9]+).*$/', '\1', $name);
-        $this->loadAclEntry();
-        continue;
-      }
-      if (preg_match('/^acl_del_.*_x/', $name)){
-        unset($this->gosaAclEntry[preg_replace('/^acl_del_([0-9]+).*$/', '\1', $name)]);
-        continue;
-      }
+    /* Only handle posts, if we allowed to modify ACLs 
+     */
+    if($this->acl_is_writeable("")){
+      foreach($_POST as $name => $post){
 
-      if (preg_match('/^cat_edit_.*_x/', $name)){
-        $this->aclObject= preg_replace('/^cat_edit_([^_]+)_.*$/', '\1', $name);
-        $this->dialogState= 'edit';
-        foreach ($this->ocMapping[$this->aclObject] as $oc){
-          if (isset($this->aclContents[$oc])){
-            $this->savedAclContents[$oc]= $this->aclContents[$oc];
-          }
+        /* Actions... */
+        if (preg_match('/^acl_edit_.*_x/', $name)){
+          $this->dialogState= 'create';
+          $firstedit= TRUE;
+          $this->dialog= TRUE;
+          $this->currentIndex= preg_replace('/^acl_edit_([0-9]+).*$/', '\1', $name);
+          $this->loadAclEntry();
+          continue;
         }
-        continue;
-      }
-      if (preg_match('/^cat_del_.*_x/', $name)){
-        $idx= preg_replace('/^cat_del_([^_]+)_.*$/', '\1', $name);
-        foreach ($this->ocMapping[$idx] as $key){
-          unset($this->aclContents["$idx/$key"]);
-        }
-        continue;
-      }
-
-      /* Sorting... */
-      if (preg_match('/^sortup_.*_x/', $name)){
-        $index= preg_replace('/^sortup_([0-9]+).*$/', '\1', $name);
-        if ($index > 0){
-          $tmp= $this->gosaAclEntry[$index];
-          $this->gosaAclEntry[$index]= $this->gosaAclEntry[$index-1];
-          $this->gosaAclEntry[$index-1]= $tmp;
-        }
-        continue;
-      }
-      if (preg_match('/^sortdown_.*_x/', $name)){
-        $index= preg_replace('/^sortdown_([0-9]+).*$/', '\1', $name);
-        if ($index < count($this->gosaAclEntry)-1){
-          $tmp= $this->gosaAclEntry[$index];
-          $this->gosaAclEntry[$index]= $this->gosaAclEntry[$index+1];
-          $this->gosaAclEntry[$index+1]= $tmp;
-        }
-        continue;
-      }
-
-      /* ACL saving... */
-      if (preg_match('/^acl_.*_[^xy]$/', $name)){
-        $aclDialog= TRUE;
-        list($dummy, $object, $attribute, $value)= split('_', $name);
-
-        /* Skip for detection entry */
-        if ($object == 'dummy') {
+        if (preg_match('/^acl_del_.*_x/', $name)){
+          unset($this->gosaAclEntry[preg_replace('/^acl_del_([0-9]+).*$/', '\1', $name)]);
           continue;
         }
 
-        /* Ordinary ACLs */
-        if (!isset($new_acl[$object])){
-          $new_acl[$object]= array();
+        if (preg_match('/^cat_edit_.*_x/', $name)){
+          $this->aclObject= preg_replace('/^cat_edit_([^_]+)_.*$/', '\1', $name);
+          $this->dialogState= 'edit';
+          foreach ($this->ocMapping[$this->aclObject] as $oc){
+            if (isset($this->aclContents[$oc])){
+              $this->savedAclContents[$oc]= $this->aclContents[$oc];
+            }
+          }
+          continue;
         }
-        if (isset($new_acl[$object][$attribute])){
-          $new_acl[$object][$attribute].= $value;
-        } else {
-          $new_acl[$object][$attribute]= $value;
+        if (preg_match('/^cat_del_.*_x/', $name)){
+          $idx= preg_replace('/^cat_del_([^_]+)_.*$/', '\1', $name);
+          foreach ($this->ocMapping[$idx] as $key){
+            unset($this->aclContents["$idx/$key"]);
+          }
+          continue;
         }
-      }
 
-      if(isset($_POST['selected_role'])){
-        $this->aclContents = "";
-        $this->aclContents = base64_decode($_POST['selected_role']);
+        /* Sorting... */
+        if (preg_match('/^sortup_.*_x/', $name)){
+          $index= preg_replace('/^sortup_([0-9]+).*$/', '\1', $name);
+          if ($index > 0){
+            $tmp= $this->gosaAclEntry[$index];
+            $this->gosaAclEntry[$index]= $this->gosaAclEntry[$index-1];
+            $this->gosaAclEntry[$index-1]= $tmp;
+          }
+          continue;
+        }
+        if (preg_match('/^sortdown_.*_x/', $name)){
+          $index= preg_replace('/^sortdown_([0-9]+).*$/', '\1', $name);
+          if ($index < count($this->gosaAclEntry)-1){
+            $tmp= $this->gosaAclEntry[$index];
+            $this->gosaAclEntry[$index]= $this->gosaAclEntry[$index+1];
+            $this->gosaAclEntry[$index+1]= $tmp;
+          }
+          continue;
+        }
+
+        /* ACL saving... */
+        if (preg_match('/^acl_.*_[^xy]$/', $name)){
+          $aclDialog= TRUE;
+          list($dummy, $object, $attribute, $value)= split('_', $name);
+
+          /* Skip for detection entry */
+          if ($object == 'dummy') {
+            continue;
+          }
+
+          /* Ordinary ACLs */
+          if (!isset($new_acl[$object])){
+            $new_acl[$object]= array();
+          }
+          if (isset($new_acl[$object][$attribute])){
+            $new_acl[$object][$attribute].= $value;
+          } else {
+            $new_acl[$object][$attribute]= $value;
+          }
+        }
+
+        if(isset($_POST['selected_role'])){
+          $this->aclContents = "";
+          $this->aclContents = base64_decode($_POST['selected_role']);
+        }
       }
     }
 
