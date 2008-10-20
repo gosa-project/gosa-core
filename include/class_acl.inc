@@ -51,6 +51,7 @@ class acl extends plugin
   var $ocMapping= array();
   var $savedAclContents= array();
   var $myAclObjects = array();
+  var $acl_category = "acl/";
 
   function acl (&$config, $parent, $dn= NULL)
   {
