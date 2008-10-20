@@ -243,88 +243,92 @@ class acl extends plugin
     $aclDialog= FALSE;
     $firstedit= FALSE;
 
-    /* Only handle posts, if we allowed to modify ACLs 
-     */
-    if($this->acl_is_writeable("")){
-      foreach($_POST as $name => $post){
+    foreach($_POST as $name => $post){
 
-        /* Actions... */
-        if (preg_match('/^acl_edit_.*_x/', $name)){
-          $this->dialogState= 'create';
-          $firstedit= TRUE;
-          $this->dialog= TRUE;
-          $this->currentIndex= preg_replace('/^acl_edit_([0-9]+).*$/', '\1', $name);
-          $this->loadAclEntry();
+      /* Actions... */
+      if (preg_match('/^acl_edit_.*_x/', $name)){
+        $this->dialogState= 'create';
+        $firstedit= TRUE;
+        $this->dialog= TRUE;
+        $this->currentIndex= preg_replace('/^acl_edit_([0-9]+).*$/', '\1', $name);
+        $this->loadAclEntry();
+        continue;
+      }
+
+      if (preg_match('/^cat_edit_.*_x/', $name)){
+        $this->aclObject= preg_replace('/^cat_edit_([^_]+)_.*$/', '\1', $name);
+        $this->dialogState= 'edit';
+        foreach ($this->ocMapping[$this->aclObject] as $oc){
+          if (isset($this->aclContents[$oc])){
+            $this->savedAclContents[$oc]= $this->aclContents[$oc];
+          }
+        }
+        continue;
+      }
+
+      /* Only handle posts, if we allowed to modify ACLs 
+       */
+      if(!$this->acl_is_writeable("")){
+        continue;
+      }
+
+      if (preg_match('/^acl_del_.*_x/', $name)){
+        unset($this->gosaAclEntry[preg_replace('/^acl_del_([0-9]+).*$/', '\1', $name)]);
+        continue;
+      }
+
+      if (preg_match('/^cat_del_.*_x/', $name)){
+        $idx= preg_replace('/^cat_del_([^_]+)_.*$/', '\1', $name);
+        foreach ($this->ocMapping[$idx] as $key){
+          unset($this->aclContents["$idx/$key"]);
+        }
+        continue;
+      }
+
+      /* Sorting... */
+      if (preg_match('/^sortup_.*_x/', $name)){
+        $index= preg_replace('/^sortup_([0-9]+).*$/', '\1', $name);
+        if ($index > 0){
+          $tmp= $this->gosaAclEntry[$index];
+          $this->gosaAclEntry[$index]= $this->gosaAclEntry[$index-1];
+          $this->gosaAclEntry[$index-1]= $tmp;
+        }
+        continue;
+      }
+      if (preg_match('/^sortdown_.*_x/', $name)){
+        $index= preg_replace('/^sortdown_([0-9]+).*$/', '\1', $name);
+        if ($index < count($this->gosaAclEntry)-1){
+          $tmp= $this->gosaAclEntry[$index];
+          $this->gosaAclEntry[$index]= $this->gosaAclEntry[$index+1];
+          $this->gosaAclEntry[$index+1]= $tmp;
+        }
+        continue;
+      }
+
+      /* ACL saving... */
+      if (preg_match('/^acl_.*_[^xy]$/', $name)){
+        $aclDialog= TRUE;
+        list($dummy, $object, $attribute, $value)= split('_', $name);
+
+        /* Skip for detection entry */
+        if ($object == 'dummy') {
           continue;
         }
-        if (preg_match('/^acl_del_.*_x/', $name)){
-          unset($this->gosaAclEntry[preg_replace('/^acl_del_([0-9]+).*$/', '\1', $name)]);
-          continue;
-        }
 
-        if (preg_match('/^cat_edit_.*_x/', $name)){
-          $this->aclObject= preg_replace('/^cat_edit_([^_]+)_.*$/', '\1', $name);
-          $this->dialogState= 'edit';
-          foreach ($this->ocMapping[$this->aclObject] as $oc){
-            if (isset($this->aclContents[$oc])){
-              $this->savedAclContents[$oc]= $this->aclContents[$oc];
-            }
-          }
-          continue;
+        /* Ordinary ACLs */
+        if (!isset($new_acl[$object])){
+          $new_acl[$object]= array();
         }
-        if (preg_match('/^cat_del_.*_x/', $name)){
-          $idx= preg_replace('/^cat_del_([^_]+)_.*$/', '\1', $name);
-          foreach ($this->ocMapping[$idx] as $key){
-            unset($this->aclContents["$idx/$key"]);
-          }
-          continue;
+        if (isset($new_acl[$object][$attribute])){
+          $new_acl[$object][$attribute].= $value;
+        } else {
+          $new_acl[$object][$attribute]= $value;
         }
+      }
 
-        /* Sorting... */
-        if (preg_match('/^sortup_.*_x/', $name)){
-          $index= preg_replace('/^sortup_([0-9]+).*$/', '\1', $name);
-          if ($index > 0){
-            $tmp= $this->gosaAclEntry[$index];
-            $this->gosaAclEntry[$index]= $this->gosaAclEntry[$index-1];
-            $this->gosaAclEntry[$index-1]= $tmp;
-          }
-          continue;
-        }
-        if (preg_match('/^sortdown_.*_x/', $name)){
-          $index= preg_replace('/^sortdown_([0-9]+).*$/', '\1', $name);
-          if ($index < count($this->gosaAclEntry)-1){
-            $tmp= $this->gosaAclEntry[$index];
-            $this->gosaAclEntry[$index]= $this->gosaAclEntry[$index+1];
-            $this->gosaAclEntry[$index+1]= $tmp;
-          }
-          continue;
-        }
-
-        /* ACL saving... */
-        if (preg_match('/^acl_.*_[^xy]$/', $name)){
-          $aclDialog= TRUE;
-          list($dummy, $object, $attribute, $value)= split('_', $name);
-
-          /* Skip for detection entry */
-          if ($object == 'dummy') {
-            continue;
-          }
-
-          /* Ordinary ACLs */
-          if (!isset($new_acl[$object])){
-            $new_acl[$object]= array();
-          }
-          if (isset($new_acl[$object][$attribute])){
-            $new_acl[$object][$attribute].= $value;
-          } else {
-            $new_acl[$object][$attribute]= $value;
-          }
-        }
-
-        if(isset($_POST['selected_role'])){
-          $this->aclContents = "";
-          $this->aclContents = base64_decode($_POST['selected_role']);
-        }
+      if(isset($_POST['selected_role'])){
+        $this->aclContents = "";
+        $this->aclContents = base64_decode($_POST['selected_role']);
       }
     }
 
@@ -448,14 +452,19 @@ class acl extends plugin
         $field2= array("string" => $this->assembleAclSummary($entry));
 
         if($this->acl_is_writeable("")){
-          $action.= "<input type='image' name='sortup_$key' alt='up' title='"._("Up")."' src='images/lists/sort-up.png' align='top'>";
-          $action.= "<input type='image' name='sortdown_$key' alt='down' title='"._("Down")."' src='images/lists/sort-down.png'>";
+          $action.= "<input type='image' name='sortup_$key' alt='up' 
+            title='"._("Up")."' src='images/lists/sort-up.png' align='top'>";
+          $action.= "<input type='image' name='sortdown_$key' alt='down' 
+            title='"._("Down")."' src='images/lists/sort-down.png'>";
+        } 
+    
+        if($this->acl_is_readable("")){
+          $action.= "<input class='center' type='image' src='images/lists/edit.png' 
+            alt='"._("Edit")."' name='acl_edit_$key' title='".msgPool::editButton(_("ACL"))."'>";
         }
-
-        $action.= "<input class='center' type='image' src='images/lists/edit.png' alt='"._("Edit")."' name='acl_edit_$key' title='".msgPool::editButton(_("ACL"))."'>";
-
-        if($this->acl_is_removeable()){
-          $action.= "<input class='center' type='image' src='images/lists/trash.png' alt='"._("Delete")."' name='acl_del_$key' title='".msgPool::delButton(_("ACL"))."'>";
+        if($this->acl_is_removeable("")){
+          $action.= "<input class='center' type='image' src='images/lists/trash.png' 
+            alt='"._("Delete")."' name='acl_del_$key' title='".msgPool::delButton(_("ACL"))."'>";
         }
 
         $field3= array("string" => $action, "attach" => "style='border-right:0px;width:50px;text-align:right;'");
@@ -496,11 +505,19 @@ class acl extends plugin
           $summary= sprintf(_("Contains ACLs for these objects: %s"), preg_replace('/, $/', '', $summary));
         }
 
+        $actions ="";
+        if($this->acl_is_readable("")){
+          $actions= "<input class='center' type='image' src='images/lists/edit.png' 
+            alt='"._("Edit")."' name='cat_edit_$section' title='".msgPool::editButton(_("category ACL"))."'>";
+        }
+        if($this->acl_is_removeable()){
+          $actions.= "<input class='center' type='image' src='images/lists/trash.png' 
+            alt='"._("Delete")."' name='cat_del_$section' title='".msgPool::delButton(_("category ACL"))."'>";
+        }   
+
         $field1= array("string" => $dsc, "attach" => "style='width:100px'");
         $field2= array("string" => $summary);
-        $action= "<input class='center' type='image' src='images/lists/edit.png' alt='"._("Edit")."' name='cat_edit_$section' title='".msgPool::editButton(_("category ACL"))."'>";
-        $action.= "<input class='center' type='image' src='images/lists/trash.png' alt='"._("Delete")."' name='cat_del_$section' title='".msgPool::delButton(_("category ACL"))."'>";
-        $field3= array("string" => $action, "attach" => "style='border-right:0px;width:50px'");
+        $field3= array("string" => $actions, "attach" => "style='border-right:0px;width:50px'");
         $aclList->AddEntry(array($field1, $field2, $field3));
       }
 
@@ -1187,8 +1204,9 @@ class acl extends plugin
           "plCategory"    => array("acl" => array("description"  => _("ACL")."&nbsp;&amp;&nbsp;"._("ACL roles"),
                                                           "objectClass"  => array("gosaAcl","gosaRole"))),
           "plProvidedAcls"=> array(
-            "cn"          => _("Role name"),
-            "description" => _("Role description"))
+//            "cn"          => _("Role name"),
+//            "description" => _("Role description")
+            )
 
           ));
   }
