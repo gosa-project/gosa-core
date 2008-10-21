@@ -254,7 +254,7 @@ class department extends plugin
 
       /* Save tagging flag */
       if ($this->acl_is_writeable("gosaUnitTag")){
-        if (isset($_POST['gosaUnitTag'])){
+        if (isset($_POST['is_administrational_unit'])){
           $this->is_administrational_unit= true;
         } else {
           $this->is_administrational_unit= false;
