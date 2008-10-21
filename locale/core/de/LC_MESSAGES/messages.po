@@ -13,13 +13,12 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-09 09:23+0200\n"
-"PO-Revision-Date: 2008-10-09 09:23+0200\n"
+"PO-Revision-Date: 2008-10-21 13:04+0200\n"
 "Last-Translator: Cajus Pollmeier <pollmeier@gonicus.de>\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: ihtml/themes/default/conflict.tpl:2
 msgid "Session conflict detected"
@@ -123,7 +122,7 @@ msgid ""
 "Please use your username and your password to log into the site "
 "administration system."
 msgstr ""
-"Verwenden Sie bitte Ihren Benutzernamen und Ihr Passwort, um sich an der "
+"Verwenden Sie Ihren Benutzernamen und Ihr Passwort, um sich an der "
 "Verwaltung des Standorts anzumelden."
 
 #: ihtml/themes/default/login.tpl:42 ihtml/themes/default/login.tpl:44
@@ -3325,7 +3324,7 @@ msgstr "Der angegebene Wert für '%s' muss numerisch sein."
 
 #: setup/class_setupStep_Config1.inc:118 setup/setup_config1.tpl:97
 msgid "GID / UID min id"
-msgstr "GID / UID min id"
+msgstr "GID / UID min ID"
 
 #: setup/class_setupStep_Config1.inc:122 setup/class_setupStep_Config1.inc:126
 #, php-format
@@ -3362,7 +3361,7 @@ msgstr "LDAP-Verbindung"
 
 #: setup/setup_ldap.tpl:29
 msgid "Location name"
-msgstr "Name des Standortes:"
+msgstr "Name des Standortes"
 
 #: setup/setup_ldap.tpl:37
 msgid "Connection URI"
@@ -3382,7 +3381,7 @@ msgstr "Authentisierung"
 
 #: setup/setup_ldap.tpl:73
 msgid "Admin DN"
-msgstr "Administrator-DN:"
+msgstr "Administrator-DN"
 
 #: setup/setup_ldap.tpl:78
 msgid "Select user"
@@ -3390,7 +3389,7 @@ msgstr "Benutzer wählen"
 
 #: setup/setup_ldap.tpl:86
 msgid "Automatically append LDAP base to admin DN"
-msgstr "Automatisch die LDAP-Basis an die Admin DN anhängen"
+msgstr "Automatisch die LDAP-Basis an die Admin-DN anhängen"
 
 #: setup/setup_ldap.tpl:93
 msgid "Admin password"
@@ -3417,7 +3416,7 @@ msgstr ""
 "Während der LDAP-Inspektion wird auf verschiedene, gängige Stolpersteine "
 "geprüft, die auftreten können, wenn auf eine GOsa-basierte LDAP-"
 "Administration migriert wird. Sie sollten die unten genannten Probleme "
-"beseitigen, um einen problemlosen Betrieb der Dienste zu ermöglichen."
+"beseitigen (wenn vorhanden), um einen problemlosen Betrieb der Dienste zu ermöglichen."
 
 #: setup/setup_migrate.tpl:33
 msgid "Check again"
@@ -4120,7 +4119,7 @@ msgstr "Verwenden Cyrus UNIX-Stil"
 
 #: setup/setup_config2.tpl:253
 msgid "Snapshots / Undo"
-msgstr "Snapshots / Rückgängig"
+msgstr "Snapshots / Wiederherstellung"
 
 #: setup/setup_config2.tpl:262 setup/setup_config2.tpl:307
 msgid "Enable snapshots"
@@ -4383,7 +4382,7 @@ msgstr "Verwende SASL für Kerberos."
 
 #: setup/setup_config1.tpl:209
 msgid "Use account expiration"
-msgstr "Verwende verfallende Konten"
+msgstr "Verwende ablaufende Konten"
 
 #: setup/setup_config1.tpl:221
 msgid ""
@@ -4760,7 +4759,7 @@ msgstr "Merken der Dialogfilter-Einstellungen"
 
 #: setup/setup_config3.tpl:234
 msgid "Session lifetime"
-msgstr "Lebenszeit der Sitzung"
+msgstr "Lebensdauer der Sitzung"
 
 #: setup/setup_config3.tpl:243
 msgid "Debugging"
@@ -4871,8 +4870,8 @@ msgid ""
 "requirement:"
 msgstr ""
 "Nachdem Sie die Konfigurationsdatei unter %s abgelegt haben, muß "
-"sichergestellt werden, daß der Webserver auf %s zugreifen kann, während "
-"normale Nutzer dies nicht dürfen. Führen Sie diese Kommandos aus, um die "
+"sichergestellt werden, daß der Webserver auf %s zugreifen kann, normale Nutzer "
+"aber nicht. Führen Sie diese Kommandos aus, um die "
 "obigen Voraussetzungen zu erfüllen:"
 
 #: setup/class_setupStep_Config2.inc:86 setup/class_setupStep_Config2.inc:87
