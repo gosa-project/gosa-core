@@ -293,14 +293,6 @@ class macro extends plugin
       if(substr_count($s_linestr,")") >1 ){
         return(sprintf(_("More than one ')' is currently not supported. Line : '%s'."),$i_linenum));
       }
-      /* Check if there is an application given */
-      if(empty($tmp[1])){
-        return(sprintf(_("There is no application given in line : '%s'."),$i_linenum));
-      } 
-      /* Check if there is an extension given */
-      if(empty($tmp[0])){
-        return(sprintf(_("There is no extension type given in line : '%s'."),$i_linenum));
-      } 
 
       /* Create extension entry for current line 
        *  and add this line to an array that will be inserted 
@@ -309,8 +301,7 @@ class macro extends plugin
       $exten  = addslashes($tmp[0]);
       $prio   = addslashes($tmp[1]);
       $app    = addslashes(preg_replace("/\(.*\).*$/","",$tmp[2]));
-      $para   = addslashes(preg_replace("/^.*\(/","",$tmp[2]));
-      $para   = preg_replace("/\).*$/","",$para);
+      $para   = addslashes(preg_replace("/^[^(]*\((.*)\)[^)]*$/", "$1", $tmp[2]));
       $sql.= " ('".$context."','".$exten."','".$prio."','".$app."','".$para."'),";
     }
     
