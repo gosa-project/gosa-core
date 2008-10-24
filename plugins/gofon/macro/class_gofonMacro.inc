@@ -286,12 +286,22 @@ class macro extends plugin
 #      if(substr_count($s_linestr,",") !=2){
 #        return(sprintf(_("More than two ',' given in line : '%s'. Remember that parameters are seperated by '|'."),$i_linenum));
 #      }
-      /* Multiple () are not supproted currently ... */  
-      if(substr_count($s_linestr,"(") >1 ){
-        return(sprintf(_("More than one '(' is currently not supported. Line : '%s'."),$i_linenum));
+
+#     /* Multiple () are not supproted currently ... */  
+#     if(substr_count($s_linestr,"(") >1 ){
+#       return(sprintf(_("More than one '(' is currently not supported. Line : '%s'."),$i_linenum));
+#     }
+#     if(substr_count($s_linestr,")") >1 ){
+#       return(sprintf(_("More than one ')' is currently not supported. Line : '%s'."),$i_linenum));
+#     }
+
+      /* Check if there is an application given */
+      if(empty($tmp[1])){
+        return(sprintf(_("There is no application given in line : '%s'."),$i_linenum));
       }
-      if(substr_count($s_linestr,")") >1 ){
-        return(sprintf(_("More than one ')' is currently not supported. Line : '%s'."),$i_linenum));
+      /* Check if there is an extension given */
+      if(empty($tmp[0])){
+        return(sprintf(_("There is no extension type given in line : '%s'."),$i_linenum));
       }
 
       /* Create extension entry for current line 
