@@ -801,13 +801,11 @@ class phoneAccount extends plugin
       }
 
       // Perform queries ...
-      if($this->goFonHardware != "automatic"){
-        foreach($SQL_query_array as $query){
-          @DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__,$query, "Database query");
-          if(!@mysql_query($query,$new_connection)){
-            print_red(_("Error while performing query:")." ".mysql_error());
-            return false;
-          }
+      foreach($SQL_query_array as $query){
+        @DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__,$query, "Database query");
+        if(!@mysql_query($query,$new_connection)){
+          print_red(_("Error while performing query:")." ".mysql_error());
+          return false;
         }
       }
     }
