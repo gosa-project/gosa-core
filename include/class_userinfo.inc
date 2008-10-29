@@ -489,6 +489,8 @@ class userinfo
       }
 
       $ACL_CACHE['MODULE_DEPARTMENTS'][$mod] = $deps;
+      session::set('ACL_CACHE',$ACL_CACHE);
+      
       $res = array_merge($res,$deps);
     } 
     return ($deps);
