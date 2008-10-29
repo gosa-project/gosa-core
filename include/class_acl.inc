@@ -306,30 +306,40 @@ class acl extends plugin
         continue;
       }
 
-      /* ACL saving... */
-      if (preg_match('/^acl_.*_[^xy]$/', $name)){
-        $aclDialog= TRUE;
-        list($dummy, $object, $attribute, $value)= split('_', $name);
-
-        /* Skip for detection entry */
-        if ($object == 'dummy') {
-          continue;
-        }
-
-        /* Ordinary ACLs */
-        if (!isset($new_acl[$object])){
-          $new_acl[$object]= array();
-        }
-        if (isset($new_acl[$object][$attribute])){
-          $new_acl[$object][$attribute].= $value;
-        } else {
-          $new_acl[$object][$attribute]= $value;
-        }
-      }
-
       if(isset($_POST['selected_role'])){
         $this->aclContents = "";
         $this->aclContents = base64_decode($_POST['selected_role']);
+      }
+    }
+
+
+    /* Check Posts 
+     */
+    if(isset($_POST['acl_dummy_0_0_0'])){
+      $aclDialog= TRUE;
+      $tmp= session::get('plist');
+      $plist= $tmp->info;
+      $list = $this->ocMapping[$this->aclObject];
+      foreach($list as $plugin){
+        foreach(array("r","w","c","d","s","m") as $acl){
+          $overall = "acl_{$this->aclObject}/{$plugin}_0_{$acl}";
+          if(isset($_POST[$overall])){
+            if(!isset($new_acl["{$this->aclObject}/{$plugin}"][0])) {
+              $new_acl["{$this->aclObject}/{$plugin}"][0] = "";
+            }
+            $new_acl["{$this->aclObject}/{$plugin}"][0] .= $acl;
+          }
+          if(!isset($plist[$plugin]) || !is_array($plist[$plugin])) continue;
+          foreach($plist[$plugin]['plProvidedAcls'] as $attribute => $description){
+            $aclstr = "acl_{$this->aclObject}/{$plugin}_{$attribute}_{$acl}";
+            if(isset($_POST[$aclstr])){
+              if(!isset($new_acl["{$this->aclObject}/{$plugin}"][$attribute])) {
+                $new_acl["{$this->aclObject}/{$plugin}"][$attribute] = "";
+              }
+              $new_acl["{$this->aclObject}/{$plugin}"][$attribute] .= $acl;
+            }
+          }
+        }
       }
     }
 
@@ -337,22 +347,7 @@ class acl extends plugin
       
       /* Only be interested in new acl's, if we're in the right _POST place */
       if ($aclDialog && $this->aclObject != "" && is_array($this->ocMapping[$this->aclObject])){
-
-        foreach ($this->ocMapping[$this->aclObject] as $oc){
-
-          if(isset($this->aclContents[$oc]) && is_array($this->aclContents)){
-            unset($this->aclContents[$oc]);
-            unset($this->aclContents[$this->aclObject.'/'.$oc]);
-          }else{
-#          trigger_error("Huhm?");
-          }
-          if (isset($new_acl[$oc]) && is_array($new_acl)){
-            $this->aclContents[$oc]= $new_acl[$oc];
-          }
-          if (isset($new_acl[$this->aclObject.'/'.$oc]) && is_array($new_acl)){
-            $this->aclContents[$this->aclObject.'/'.$oc]= $new_acl[$this->aclObject.'/'.$oc];
-          }
-        }
+        $this->aclContents = $new_acl;
       }
 
       /* Save new acl in case of base edit mode */
@@ -658,6 +653,8 @@ class acl extends plugin
 
   function buildAclSelector($list)
   {
+    /* Do not change the dummy, it is used to detect whether the dialog was opnened or not
+     */
     $display= "<input type='hidden' name='acl_dummy_0_0_0' value='1'>";
     $cols= 3;
     $tmp= session::get('plist');
@@ -702,11 +699,10 @@ class acl extends plugin
     foreach ($list as $key => $name){
 
       /* Create sub acl if it does not exist */
-      if (!isset($this->aclContents[$key])){
-        $this->aclContents[$key]= array();
-        $this->aclContents[$key][0]= '';
+      $currentAcl = array("0" => "");
+      if (isset($this->aclContents[$key])){
+        $currentAcl= $this->aclContents[$key];
       }
-      $currentAcl= $this->aclContents[$key];
 
       /* Get the overall plugin acls 
        */
