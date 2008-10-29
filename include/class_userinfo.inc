@@ -178,7 +178,7 @@ class userinfo
   }
 
 
-  function get_category_permissions($dn, $category)
+  function get_category_permissions($dn, $category, $any_acl = FALSE)
   {
     /* If we are forced to skip ACLs checks for the current user 
         then return all permissions.
@@ -192,6 +192,7 @@ class userinfo
     if (isset($this->ocMapping[$category])){
       foreach($this->ocMapping[$category] as $oc){
         $acl.= $this->get_permissions($dn, $category."/".$oc);
+        if($any_acl && !empty($acl)) return($acl);
       }
     }else{
       trigger_error("ACL request for an invalid category (".$category.").");
@@ -430,90 +431,68 @@ class userinfo
 
     /* Use cached results if possilbe */
     $ACL_CACHE = session::get('ACL_CACHE');
-    if(isset($ACL_CACHE['MODULE_DEPARTMENTS'][serialize($module)])){
-      return($ACL_CACHE['MODULE_DEPARTMENTS'][serialize($module)]);
+
+
+    if(!is_array($module)){
+      $module = array($module);
     }
 
     global $plist;
-
-    $objects= array();
-    $deps= array();
-
-    /* Extract all relevant objects for this module from plist */
-    foreach ($plist->info as $object => $info){
-      if (!isset($info['plCategory'])){
+    $res = array();
+    foreach($module as $mod){
+      if(isset($ACL_CACHE['MODULE_DEPARTMENTS'][$mod])){
+        $res = array_merge($res,$ACL_CACHE['MODULE_DEPARTMENTS'][$mod]);
         continue;
       }
-      foreach ($info['plCategory'] as $idx => $data){
-        if (preg_match('/^[0-9]+$/', $idx)){
-          if ($data == $module){
-            $objects[$object]= $object;
-          }
-        } else {
-          if ($idx == $module){
-            $objects[$object]= $object;
-          }
-        }
-      }
-    }
 
-    /* Search for per object ACLs. 
-     */
-    $this->config->get_departments();
-    $this->config->make_idepartments();
+      $deps = array();
 
-    foreach($this->ACL as $dn => $infos){
-      foreach($infos as $info){
-        $found = FALSE;
-        foreach($info['acl'] as $cat => $data){
+#      /* Search for per object ACLs. 
+#       */
+#      $this->config->get_departments();
+#      $this->config->make_idepartments();
 
-          /* Skip self acls? */
-          if($skip_self_acls && isset($data['0']) && strpos($data['0'], "s")) continue;
+      foreach($this->ACL as $dn => $infos){
+        foreach($infos as $info){
+          $found = FALSE;
+          foreach($info['acl'] as $cat => $data){
 
-          if(is_array($module)){
-            foreach($module as $mod){
-              if(preg_match("/^".normalizePreg($mod)."/",$cat)){
-                $found =TRUE;
-                break;
-              }
-            }
-          }else{
-            if(preg_match("/^".normalizePreg($module)."/",$cat)){
+            /* Skip self acls? */
+            if($skip_self_acls && isset($data['0']) && strpos($data['0'], "s")) continue;
+            if(preg_match("/^".normalizePreg($mod)."/",$cat)){
               $found =TRUE;
               break;
             }
-          }
-        } 
+          } 
 
-        if($found && !isset($this->config->idepartments[$dn])){
-          while(!isset($this->config->idepartments[$dn]) && strpos($dn, ",")){
-            $dn = preg_replace("/^[^,]+,/","",$dn);
-          }
-          if(isset($this->config->idepartments[$dn])){
-            $deps[] = $dn;
+          if($found && !isset($this->config->idepartments[$dn])){
+            while(!isset($this->config->idepartments[$dn]) && strpos($dn, ",")){
+              $dn = preg_replace("/^[^,]+,/","",$dn);
+            }
+            if(isset($this->config->idepartments[$dn])){
+              $deps[] = $dn;
+            }
           }
         }
       }
-    }
 
-    /* For all gosaDepartments */
-    foreach ($this->config->departments as $dn){
-      if(!is_array($module)){
-        $module = array($module);
-      }
-      $acl = "";
-      foreach($module as $mod){
+      /* For all gosaDepartments */
+      foreach ($this->config->departments as $dn){
+        if(in_array($dn,$deps)) continue;
+        $acl = "";
         if(strpos($mod, '/')){
           $acl.=  $this->get_permissions($dn,$mod);
         }else{
-          $acl.=  $this->get_category_permissions($dn,$mod);
+          $acl.=  $this->get_category_permissions($dn,$mod,TRUE);
+        }
+        if(!empty($acl)) {
+          $deps[] = $dn;
         }
       }
-      if($acl !== "") $deps[] = $dn;
-    }
-  
-    $ACL_CACHE = &session::get('ACL_CACHE');
-    $ACL_CACHE['MODULE_DEPARTMENTS'][serialize($module)] = $deps;
+
+      $ACL_CACHE['MODULE_DEPARTMENTS'][$mod] = $deps;
+      $res = array_merge($res,$deps);
+    } 
     return ($deps);
   }
 
