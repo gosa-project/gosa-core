@@ -421,7 +421,6 @@ class userinfo
      accessible department) */
   function get_module_departments($module, $skip_self_acls = FALSE )
   {
-
     /* If we are forced to skip ACLs checks for the current user 
         then return all departments as valid.
      */
@@ -431,7 +430,6 @@ class userinfo
 
     /* Use cached results if possilbe */
     $ACL_CACHE = session::get('ACL_CACHE');
-
 
     if(!is_array($module)){
       $module = array($module);
@@ -530,10 +528,10 @@ class userinfo
   {
     foreach ($acl as $key => $value){
 
-			/* Continue, if value is empty or permanent */
-			if ($value == "" || $value == "p") {
-				continue;
-			}
+      /* Continue, if value is empty or permanent */
+      if ($value == "" || $value == "p") {
+	    continue;
+      }
 
       /* Reset removes everything but 'p' */
       if ($reset && $value != 'p'){
