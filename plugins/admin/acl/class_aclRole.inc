@@ -252,7 +252,6 @@ class aclrole extends acl
 
       /* ACL saving... */
       if (preg_match('/^acl_.*_[^xy]$/', $name) && $this->acl_is_writeable("gosaAclEntry")){
-        $aclDialog= TRUE;
         list($dummy, $object, $attribute, $value)= split('_', $name);
 
         /* Skip for detection entry */
@@ -271,7 +270,11 @@ class aclrole extends acl
         }
       }
     }
-    
+   
+    if(isset($_POST['acl_dummy_0_0_0'])){
+      $aclDialog= TRUE;
+    }
+ 
     /* Only be interested in new acl's, if we're in the right _POST place */
     if ($aclDialog && $this->aclObject != "" && is_array($this->ocMapping[$this->aclObject])){
 
