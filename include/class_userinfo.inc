@@ -349,22 +349,8 @@ class userinfo
 
           /* With user filter */
           if (isset($subacl['filter']) && !empty($subacl['filter'])){
-            $sdn = preg_replace("/^[^,]*+,/","",$dn);
-            $ldap->cd($sdn);
-            $ldap->ls($subacl['filter'],$sdn);
-            if(!$ldap->count()){
+            if(!$ldap->object_match_filter($dn,$subacl['filter'])){
               continue;
-            }else{
-              $found = FALSE; 
-              while($attrs = $ldap->fetch()){
-                if($attrs['dn'] == $dn){
-                  $found = TRUE;
-                  break;
-                }
-              }
-              if(!$found){
-                continue;
-              }
             }
           }
 

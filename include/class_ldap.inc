@@ -293,6 +293,19 @@ class LDAP{
     }
   }
 
+  function object_match_filter($dn,$filter)
+  {
+    if($this->hascon){
+      if ($this->reconnect) $this->connect();
+      $res =  @ldap_read($this->cid, LDAP::fix($dn), $filter, array("objectClass"));
+      $rv =   @ldap_count_entries($this->cid, $res);
+      return($rv);
+    }else{
+      $this->error = "Could not connect to LDAP server";
+      return(FALSE);
+    }
+  }
+
   function set_size_limit($size)
   {
     /* Ignore zero settings */
