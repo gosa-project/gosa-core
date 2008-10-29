@@ -549,20 +549,25 @@ class userinfo
 
   function cleanACL($acl, $reset= FALSE)
   {
-    foreach ($acl as &$value){
+    foreach ($acl as $key => $value){
+
+			/* Continue, if value is empty or permanent */
+			if ($value == "" || $value == "p") {
+				continue;
+			}
 
       /* Reset removes everything but 'p' */
       if ($reset && $value != 'p'){
-        $value= "";
+        $acl[$key]= "";
         continue;
       }
 
       /* Decrease tree level */
       if (is_int($value)){
         if ($value){
-          $value--;
+          $acl[$key]--;
         } else {
-          $value= "";
+          $acl[$key]= "";
         }
       }
     }
