@@ -724,7 +724,7 @@ class aclrole extends acl
           "plSelfModify"  => FALSE,
           "plDepends"     => array(),
           "plPriority"    => 0,
-          "plSection"     => array("admin"),
+          "plSection"     => array("administration"),
           "plCategory"    => array("acl"),
           "plProvidedAcls"    => array(
             "cn"                => _("Name"),
