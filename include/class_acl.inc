@@ -308,7 +308,6 @@ class acl extends plugin
 
       /* ACL saving... */
       if (preg_match('/^acl_.*_[^xy]$/', $name)){
-        $aclDialog= TRUE;
         list($dummy, $object, $attribute, $value)= split('_', $name);
 
         /* Skip for detection entry */
@@ -333,6 +332,10 @@ class acl extends plugin
       }
     }
 
+    if(isset($_POST['acl_dummy_0_0_0'])){
+      $aclDialog= TRUE;
+    }
+
     if($this->acl_is_writeable("")){
       
       /* Only be interested in new acl's, if we're in the right _POST place */
@@ -342,6 +345,7 @@ class acl extends plugin
 
           if(isset($this->aclContents[$oc]) && is_array($this->aclContents)){
             unset($this->aclContents[$oc]);
+          }elseif(isset($this->aclContents[$this->aclObject.'/'.$oc]) && is_array($this->aclContents)){
             unset($this->aclContents[$this->aclObject.'/'.$oc]);
           }else{
 #          trigger_error("Huhm?");
