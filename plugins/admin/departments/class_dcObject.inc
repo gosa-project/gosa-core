@@ -78,7 +78,7 @@ class dcObject extends department
           "plSelfModify"  => FALSE,
           "plPriority"    => 4,
           "plDepends"     => array(),
-          "plSection"     => array("admin"),
+          "plSection"     => array("administration"),
           "plCategory"    => array("department"),
 
           "plProvidedAcls" => array(

@@ -110,7 +110,7 @@ class organization extends department
           "plSelfModify"  => FALSE,
           "plPriority"    => 1,
           "plDepends"     => array(),
-          "plSection"     => array("admin"),
+          "plSection"     => array("administration"),
           "plCategory"    => array("department"),
 
           "plProvidedAcls" => array(

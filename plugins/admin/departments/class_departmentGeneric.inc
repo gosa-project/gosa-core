@@ -590,7 +590,7 @@ class department extends plugin
                   "plSelfModify"  => FALSE,
                   "plPriority"    => 0,
                   "plDepends"     => array(),
-                  "plSection"     => array("admin"),
+                  "plSection"     => array("administration"),
                   "plCategory"    => array("department" => array("objectClass" => "gosaDepartment", "description" => _("Departments"))),
             
                   "plProvidedAcls" => array(

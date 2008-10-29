@@ -79,7 +79,7 @@ class locality extends department
           "plSelfModify"  => FALSE,
           "plPriority"    => 3,
           "plDepends"     => array(),
-          "plSection"     => array("admin"),
+          "plSection"     => array("administration"),
           "plCategory"    => array("department"),
 
           "plProvidedAcls" => array(

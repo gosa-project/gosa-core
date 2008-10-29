@@ -1254,7 +1254,7 @@ class group extends plugin
           "plSelfModify"  => FALSE,
           "plDepends"     => array(),
           "plPriority"    => 0,
-          "plSection"     => array("admin"),
+          "plSection"     => array("administration"),
           "plCategory"    => array("groups" => array("objectClass" => "posixGroup", "description" => _("Groups"))),
 
           "plProvidedAcls"    => array(

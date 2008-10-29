@@ -79,7 +79,7 @@ class country extends department
           "plSelfModify"  => FALSE,
           "plPriority"    => 2,
           "plDepends"     => array(),
-          "plSection"     => array("admin"),
+          "plSection"     => array("administration"),
           "plCategory"    => array("department"),
 
           "plProvidedAcls" => array(
