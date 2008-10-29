@@ -370,6 +370,15 @@ class acl extends plugin
       }
     }
 
+    /* Save common values */
+    if($this->acl_is_writeable("")){
+      foreach (array("aclType","aclFilter", "aclObject", "target") as $key){
+        if (isset($_POST[$key])){
+          $this->$key= validate($_POST[$key]);
+        }
+      }
+    }
+
     /* Store ACL in main object? */
     if (isset($_POST['submit_new_acl'])){
       $this->gosaAclEntry[$this->currentIndex]['type']= $this->aclType;
@@ -423,15 +432,6 @@ class acl extends plugin
     if (isset($_POST['del']) && isset($_POST['recipient'])){
       foreach ($_POST['recipient'] as $key){
           unset($this->recipients[$key]);
-      }
-    }
-
-    /* Save common values */
-    if($this->acl_is_writeable("")){
-      foreach (array("aclType","aclFilter", "aclObject", "target") as $key){
-        if (isset($_POST[$key])){
-          $this->$key= validate($_POST[$key]);
-        }
       }
     }
 
