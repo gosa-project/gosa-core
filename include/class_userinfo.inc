@@ -493,7 +493,7 @@ class userinfo
       
       $res = array_merge($res,$deps);
     } 
-    return ($deps);
+    return ($res);
   }
 
 
