@@ -322,7 +322,7 @@ class userinfo
     foreach ($path as $element){
 
       /* Clean potential ACLs for each level */
-      if(in_array($cpath,$this->config->departments)){
+			if(isset($this->config->idepartments[$cpath])){
         $acl= $this->cleanACL($acl);
       }
 
@@ -395,7 +395,7 @@ class userinfo
     /* If the requested ACL is for a container object, then alter 
         ACLs by applying cleanACL a last time.
      */
-    if(in_array($dn,$this->config->departments)){
+    if(isset($this->config->idepartments[$dn])){
       $acl = $this->cleanACL($acl);
     }
 
@@ -445,11 +445,7 @@ class userinfo
 
       $deps = array();
 
-#      /* Search for per object ACLs. 
-#       */
-#      $this->config->get_departments();
-#      $this->config->make_idepartments();
-
+      /* Search for per object ACLs */
       foreach($this->ACL as $dn => $infos){
         foreach($infos as $info){
           $found = FALSE;
