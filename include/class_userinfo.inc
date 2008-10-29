@@ -420,7 +420,7 @@ class userinfo
      accessible department) */
   function get_module_departments($module, $skip_self_acls = FALSE )
   {
-    
+
     /* If we are forced to skip ACLs checks for the current user 
         then return all departments as valid.
      */
@@ -468,7 +468,7 @@ class userinfo
         foreach($info['acl'] as $cat => $data){
 
           /* Skip self acls? */
-          if($skip_self_acls && isset($data['0']) && preg_match("//s",$data['0'])) continue;
+          if($skip_self_acls && isset($data['0']) && strpos($data['0'], "s")) continue;
 
           if(is_array($module)){
             foreach($module as $mod){
@@ -486,7 +486,7 @@ class userinfo
         } 
 
         if($found && !isset($this->config->idepartments[$dn])){
-          while(!isset($this->config->idepartments[$dn]) && preg_match("/,/",$dn)){
+          while(!isset($this->config->idepartments[$dn]) && strpos($dn, ",")){
             $dn = preg_replace("/^[^,]+,/","",$dn);
           }
           if(isset($this->config->idepartments[$dn])){
@@ -503,7 +503,7 @@ class userinfo
       }
       $acl = "";
       foreach($module as $mod){
-        if(preg_match("/\//",$mod)){
+        if(strpos($mod, '/')){
           $acl.=  $this->get_permissions($dn,$mod);
         }else{
           $acl.=  $this->get_category_permissions($dn,$mod);

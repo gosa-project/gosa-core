@@ -32,6 +32,7 @@ class pluglist {
 	var $info= array();
 	var $headlines = array();
   var $allowed_plugins = array();
+  var $silly_cache= array();
 
 	function pluglist(&$config, &$ui)
 	{
@@ -81,7 +82,7 @@ class pluglist {
 	}
 
 
-	/*! \brief  Check whether we are allowed to modify the given acl or nit..
+	/*! \brief  Check whether we are allowed to modify the given acl or not..
 				This function is used to check which plugins are visible.
 				
 		@param	The acl tag to test, eg. 	"users/user:self", "systems", ...
@@ -89,6 +90,10 @@ class pluglist {
      */
 	function check_access($aclname)
 	{
+		if (isset($this->silly_cache[$aclname])) {
+			return $this->silly_cache[$aclname];
+		}
+
 		/* Split given acl string into an array. 
 			e.g. "user,systems" => array("users","systems");
          */
@@ -108,17 +113,24 @@ class pluglist {
 			if(preg_match("/:self$/",$acl_to_check)){
 				$acl_to_check = preg_replace("/:self$/","",$acl_to_check);	
 				if($this->ui->get_permissions($this->ui->dn,$acl_to_check,"") != ""){
+					$this->silly_cache[$aclname]= TRUE;
 					return(TRUE);
 				}
+				$this->silly_cache[$aclname]= FALSE;
 				return(FALSE);
 			}else{
 		
 				/* No self acls. Check if we have any acls for the given ACL type 
                  */
 				$deps = $this->ui->get_module_departments($acl_to_check,TRUE);
-				if(count($deps)) return TRUE;
+				if(count($deps)){
+					$this->silly_cache[$aclname]= TRUE;
+					return TRUE;
+				}
 			}
 		}
+
+		$this->silly_cache[$aclname]= FALSE;
 		return (FALSE);
 	}
 
