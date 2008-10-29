@@ -520,41 +520,27 @@ class userinfo
 
   function mergeACL($acl, $type, $newACL)
   {
+		$at= array("psub" => "p", "sub" => "s", "one" => "1");
+
     if (strpos($newACL, 'w') !== FALSE && strpos($newACL, 'r') === FALSE){
       $newACL .= "r";
     }
 
-    foreach(str_split($newACL) as $char){
+		/* Ignore invalid characters */
+		$newACL= preg_replace('/^[rwcdm]/', '', $newACL);
 
-      /* Ignore invalid characters */
-      if (!preg_match('/[rwcdm]/', $char)){
-        continue;
-      }
+    foreach(str_split($newACL) as $char){
 
       /* Skip permanent and subtree entries */
       if (preg_match('/[sp]/', $acl[$char])){
         continue;
       }
 
-      switch ($type){
-        case 'psub':
-          $acl[$char]= 'p';
-          break;
-
-        case 'sub':
-          $acl[$char]= 's';
-          break;
-
-        case 'one':
-          $acl[$char]= 1;
-          break;
-
-        case 'base':
-          if ($acl[$char] != 1){
-            $acl[$char]= 0;
-          }
-          break;
-      }
+			if ($type == "base" && $acl[$char] != 1) {
+				$acl[$char]= 0;
+			} else {
+        $acl[$char]= $at[$type];
+			}
     }
 
     return ($acl);
