@@ -527,7 +527,7 @@ class userinfo
     }
 
 		/* Ignore invalid characters */
-		$newACL= preg_replace('/^[rwcdm]/', '', $newACL);
+		$newACL= preg_replace('/[^rwcdm]/', '', $newACL);
 
     foreach(str_split($newACL) as $char){
 
