@@ -182,7 +182,6 @@ class userinfo
 
   function get_category_permissions($dn, $category, $any_acl = FALSE)
   {
-
     $ACL_CACHE = &session::get("ACL_CACHE");
     $id = $dn."+".$category."+".$any_acl;
     if(isset($ACL_CACHE['CATEGORY_ACL'][$id])){
@@ -200,7 +199,8 @@ class userinfo
     $acl= "";
     if (isset($this->ocMapping[$category])){
       foreach($this->ocMapping[$category] as $oc){
-        $acl.= $this->get_permissions($dn, $category."/".$oc);
+        if(!$oc == 0 ) continue;
+        $acl.= $this->get_permissions($dn, $category."/".$oc,0);
         if($any_acl && !empty($acl)){
           break;
         }
