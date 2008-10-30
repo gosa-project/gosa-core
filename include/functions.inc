@@ -120,8 +120,8 @@ function __autoload($class_name) {
 	    exit;
     }
 
-    if (isset($class_mapping[$class_name])){
-      require_once($BASE_DIR."/".$class_mapping[$class_name]);
+    if (isset($class_mapping["$class_name"])){
+      require_once($BASE_DIR."/".$class_mapping["$class_name"]);
     } else {
       echo sprintf(_("Fatal error: cannot instantiate class '%s' - try running '%s' to fix this"), $class_name, "<b>update-gosa</b>");
       exit;
