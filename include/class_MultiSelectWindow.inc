@@ -659,7 +659,7 @@ class MultiSelectWindow{
     $types = departmentManagement::get_support_departments();
     $ui = get_userinfo();
     $module_deps = $ui->get_module_departments($this->module);
-
+    $found_deps = array();
 
 		/* check for a valid base */
 		if(!$base){
@@ -693,29 +693,17 @@ class MultiSelectWindow{
         }
       }
     }
-    uksort($departments, 'strnatcasecmp');
 
     /* Detect allowed departments 
      */
     $deps = array_intersect($found_deps,$module_deps);
+    uksort($deps, 'strnatcasecmp');
     $key = 0;
     foreach($deps as $name => $dn){
       $key ++;
       $val = $departments[$name];
       $this->departments[$key] = $val;
-    
-      /* Check if this department contains sub-departments
-         Display different image in this case
-       */
-      $img = $val['TYPE']['IMG'];
-#      foreach($this->config->departments as $keyd){
-#        if(preg_match("/,".normalizePreg($val['dn'])."$/",$keyd)){
-#          $img = $val['TYPE']['IMG_FULL'];
-#        }
-#     }
-
-  
-      $img = "<image src='".$img."' class='center'>";
+      $img = "<image src='".$val['TYPE']['IMG']."' class='center'>";
 
 			/* Add spacer cols to divlist 
        */
@@ -757,45 +745,34 @@ class MultiSelectWindow{
 
   function create_department_list($modules)
   { 
-     /* Load possible departments */
+    $departments = array();
     $ui= get_userinfo();
     $first = "";
     $found = FALSE;
-
-    if(!is_array($modules)){
-      $modules = array($modules);
-    }
-
-    $department = $departments = array();
-    $ids = $this->config->idepartments;
-    foreach($modules as $module){
-      $d = $ui->get_module_departments($module);
-
-      foreach($ids as $department => $desc){
-        if(in_array($department,$d)){
-          $departments[$department] = $department;
-        }
-      }
-    }
-
-    $first = "";
-    $found = FALSE;
     $options ="";
-    foreach($departments as $dep => $name){
+
+    $ids = $this->config->idepartments;
+    $d   = $ui->get_module_departments($modules);
+    $k_ids = array_keys($ids);
+    $deps = array_intersect($d,$k_ids);
+    foreach($k_ids as $department){
+      $departments[$department] = $ids[$department];
+    }
+
+    foreach($departments as $value => $name){
 
       /* Keep first base dn in mind, we could need this
        *  info if no valid base was found
        */
       if(empty($first)) {
-        $first = $dep['dn'];
+        $first = $value;
       }
 
-      $value = $ids[$dep];
-      if ($this->selectedBase == $dep){
+      if ($this->selectedBase == $value){
         $found = TRUE;
-        $options.= "<option selected='selected' value='".$dep."'>$value</option>";
+        $options.= "<option selected='selected' value='".$value."'>$name</option>";
       } else {
-        $options.= "<option value='".$dep."'>$value</option>";
+        $options.= "<option value='".$value."'>$name</option>";
       }
     }
 
