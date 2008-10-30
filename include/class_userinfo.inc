@@ -182,18 +182,19 @@ class userinfo
 
   function get_category_permissions($dn, $category, $any_acl = FALSE)
   {
-    $ACL_CACHE = &session::get("ACL_CACHE");
-    $id = $dn."+".$category."+".$any_acl;
-    if(isset($ACL_CACHE['CATEGORY_ACL'][$id])){
-      return($ACL_CACHE['CATEGORY_ACL'][$id]);
-    }
-
     /* If we are forced to skip ACLs checks for the current user 
         then return all permissions.
      */
     if($this->ignore_acl_for_current_user()){
       return("rwcdm");
     }
+
+    $ACL_CACHE = &session::get("ACL_CACHE");
+    $id = $dn."+".$category."+".$any_acl;
+    if(isset($ACL_CACHE['CATEGORY_ACL'][$id])){
+      return($ACL_CACHE['CATEGORY_ACL'][$id]);
+    }
+
 
     /* Get list of objectClasses and get the permissions for it */
     $acl= "";
@@ -261,12 +262,10 @@ class userinfo
     if(!is_array($object)){
       $object = array($object);
     }
-    $r = $w = $c = TRUE;
+    $r = $w = TRUE;
     foreach($object as $category){
       $w &= preg_match("/w/",$this->has_complete_category_acls($dn, $category));
-      $c &= preg_match("/c/",$this->has_complete_category_acls($dn, $category));
       $r &= preg_match("/r/",$this->has_complete_category_acls($dn, $category));
-#     print_a(array($category => array($r.$w.$c)));
     }
     return($r && $w ); 
   }  
@@ -282,12 +281,9 @@ class userinfo
     if(!is_array($object)){
       $object = array($object);
     }
-    $r = $w = $c = TRUE;
+    $r = TRUE;
     foreach($object as $category){
-      $w &= preg_match("/w/",$this->has_complete_category_acls($dn, $category));
-      $c &= preg_match("/c/",$this->has_complete_category_acls($dn, $category));
       $r &= preg_match("/r/",$this->has_complete_category_acls($dn, $category));
-#      print_a(array($category => array($r.$w.$c)));
     }
     return($r) ; 
   }  
