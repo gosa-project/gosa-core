@@ -123,7 +123,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
     $error_collector_mailto .= prepare4mailbody("=== Trace ===");
 
     /* Generate trace history */
-    for ($index= 0; $index<count($trace); $index++){
+    for ($index= 0, $c= count($trace); $index<$c; $index++){
 
 
       $ct= $trace[$index];

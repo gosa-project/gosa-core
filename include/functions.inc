@@ -1088,7 +1088,7 @@ function getMenuCache()
       if(session::is_set('maxC')){
         $b= session::get('maxC');
         $q= "";
-        for ($m=0;$m<strlen($b);$m++) {
+        for ($m=0, $l= strlen($b);$m<$l;$m++) {
           $q.= $b[$m++];
         }
         msg_dialog::display(_("Internal error"), base64_decode($q), ERROR_DIALOG);
@@ -1667,7 +1667,7 @@ function gen_uids($rule, $attributes)
   $stripped= "";
   $variables= array();
 
-  for ($pos= 0; $pos < strlen($rule); $pos++){
+  for ($pos= 0, $l= strlen($rule); $pos < $l; $pos++){
 
     if ($rule[$pos] == "{" ){
       $trigger= true;
@@ -1710,7 +1710,7 @@ function gen_uids($rule, $attributes)
     if(preg_match('/\{id:\d+}/',$uid)){
       $size= preg_replace('/^.*{id:(\d+)}.*$/', '\\1', $uid);
 
-      for ($i= 0; $i < pow(10,$size); $i++){
+      for ($i= 0, $p= pow(10,$size); $i < $p; $i++){
         $number= sprintf("%0".$size."d", $i);
         $res= preg_replace('/{id:(\d+)}/', $number, $uid);
         if (!in_array($res, $used)){
@@ -1783,7 +1783,7 @@ function generate_alphabet($count= 10)
   $c= 0;
 
   /* Fill cells with charaters */
-  for ($i= 0; $i<mb_strlen($characters, 'UTF8'); $i++){
+  for ($i= 0, $l= mb_strlen($characters, 'UTF8'); $i<$l; $i++){
     if ($c == 0){
       $alphabet.= "<tr>";
     }
