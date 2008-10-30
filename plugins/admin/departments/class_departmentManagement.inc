@@ -405,19 +405,22 @@ class departmentManagement extends plugin
 
     /* Create search filter for each department type
      */
-    $res = array();
+
+    /* Get all departments within this subtree */
+    $s_filter = "";
+    $s_attrs  = array("description","objectClass");
+    $s_acls   = array();
+    foreach($types as $oc => $data){
+      $s_filter.= "(&(objectClass=gosaDepartment)(objectClass=".$data['OC'].")".
+        "(|(".$data['ATTR']."=".$Regex.")(description=".$Regex.")))";
+      $s_attrs[]= $data['ATTR'];
+      $s_acls[] = "department/".$data['ACL'];
+    }
+
     if($this->DivListDepartment->SubSearch){
-      foreach($types as $oc => $data){
-        $oc_f = "(&(objectClass=".$data['OC'].")(objectClass=gosaDepartment))";
-        $res= array_merge($res,get_list("(&(|(".$data['ATTR']."=$Regex)(description=$Regex))".$oc_f.")",
-            "department", $base, array($data['ATTR'],"objectClass", "description"), GL_SIZELIMIT | GL_SUBSEARCH));
-      }
+      $res = get_list("(|".$s_filter.")",$s_acls,$base,$s_attrs,GL_SIZELIMIT | GL_SUBSEARCH);
     }else{
-      foreach($types as $oc => $data){
-        $oc_f = "(&(objectClass=".$data['OC'].")(objectClass=gosaDepartment))";
-        $res= array_merge($res,get_list("(&(|(".$data['ATTR']."=$Regex)(description=$Regex))".$oc_f.")",
-            "department", $base, array($data['ATTR'], "objectClass","description"), GL_SIZELIMIT ));
-      }
+      $res = get_list("(|".$s_filter.")",$s_acls,$base,$s_attrs,GL_SIZELIMIT);
     }
 
     /* Prepare list (sortable index) 
