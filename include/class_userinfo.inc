@@ -71,7 +71,6 @@ class userinfo
     $this->ignoreACL = ($this->config->get_cfg_value("ignoreAcl") == $this->dn);
 
     /* Initialize ACL_CACHE */
-    session::set('ACL_CACHE',array());
     $this->reset_acl_cache();
   }
 
@@ -183,6 +182,13 @@ class userinfo
 
   function get_category_permissions($dn, $category, $any_acl = FALSE)
   {
+
+    $ACL_CACHE = &session::get("ACL_CACHE");
+    $id = $dn."+".$category."+".$any_acl;
+    if(isset($ACL_CACHE['CATEGORY_ACL'][$id])){
+      return($ACL_CACHE['CATEGORY_ACL'][$id]);
+    }
+
     /* If we are forced to skip ACLs checks for the current user 
         then return all permissions.
      */
@@ -195,12 +201,15 @@ class userinfo
     if (isset($this->ocMapping[$category])){
       foreach($this->ocMapping[$category] as $oc){
         $acl.= $this->get_permissions($dn, $category."/".$oc);
-        if($any_acl && !empty($acl)) return($acl);
+        if($any_acl && !empty($acl)){
+          break;
+        }
       }
     }else{
       trigger_error("ACL request for an invalid category (".$category.").");
     }
-
+    $ACL_CACHE = &session::get("ACL_CACHE");
+    $ACL_CACHE['CATEGORY_ACL'][$id] = $acl;
     return ($acl);
   }
 
@@ -354,16 +363,17 @@ class userinfo
           /* With user filter */
           if (isset($subacl['filter']) && !empty($subacl['filter'])){
             $id = $dn."-".$subacl['filter'];
-            if(!isset($ACL_CACHE[$id])){
-              $ACL_CACHE[$id] = $ldap->object_match_filter($dn,$subacl['filter']);
-            }elseif(!$ACL_CACHE[$id]){
+            if(!isset($ACL_CACHE['FILTER'][$id])){
+              $ACL_CACHE['FILTER'][$id] = $ldap->object_match_filter($dn,$subacl['filter']);
+            }
+            if(!$ACL_CACHE['FILTER'][$id]){
               continue;
             }
           }
 
           /* Self ACLs? 
            */
-          if(isset($subacl['acl'][$object][0]) && preg_match("/s/",$subacl['acl'][$object][0]) && $dn != $this->dn){
+          if($dn != $this->dn && isset($subacl['acl'][$object][0]) && strpos($subacl['acl'][$object][0],"s")){
             continue;
           }
 
@@ -435,7 +445,7 @@ class userinfo
     }
 
     /* Use cached results if possilbe */
-    $ACL_CACHE = session::get('ACL_CACHE');
+    $ACL_CACHE = &session::get('ACL_CACHE');
 
     if(!is_array($module)){
       $module = array($module);
@@ -491,8 +501,6 @@ class userinfo
       }
 
       $ACL_CACHE['MODULE_DEPARTMENTS'][$mod] = $deps;
-      session::set('ACL_CACHE',$ACL_CACHE);
-      
       $res = array_merge($res,$deps);
     } 
     return ($res);
