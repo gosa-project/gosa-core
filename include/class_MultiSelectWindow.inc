@@ -673,11 +673,10 @@ class MultiSelectWindow{
 		/* Get all departments within this subtree */
     $s_filter = "";
     $s_attrs  = array("description","objectClass");
-    $s_acls   = array();
+    $s_acls   = $this->module;
     foreach($types as $name => $data){
       $s_filter.= "(&(objectClass=gosaDepartment)(objectClass=".$data['OC'].")(".$data['ATTR']."=".$this->base_selection_regex."))";
       $s_attrs[]= $data['ATTR']; 
-      $s_acls[] = "department/".$data['ACL'];
     }
 
     $tmp = get_list("(|".$s_filter.")",$s_acls,$this->selectedBase,$s_attrs,GL_NONE);
