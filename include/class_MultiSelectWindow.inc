@@ -655,6 +655,11 @@ class MultiSelectWindow{
 		$this->DepartmentsAdded = true;
     $this->Added_Departments = array();
     $this->departments = array();
+
+    if(isset($this->Regex)){
+      $this->base_selection_regex = $this->Regex;
+    }
+
 		$linkopen = "<a href='?plug=".$_GET['plug']."&amp;post_id=".$this->post_id."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
     $types = departmentManagement::get_support_departments();
     $ui = get_userinfo();
