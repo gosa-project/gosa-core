@@ -1772,18 +1772,8 @@ function to_byte($value) {
 
 function in_array_ics($value, $items)
 {
-  if (!is_array($items)){
-    return (FALSE);
-  }
-
-  foreach ($items as $item){
-    if (strcasecmp($item, $value) == 0) {
-      return (TRUE);
-    }
-  }
-
-  return (FALSE);
-} 
+	return preg_grep('/^'.preg_quote($value, '/').'$/i', $items);
+}
 
 
 function generate_alphabet($count= 10)
