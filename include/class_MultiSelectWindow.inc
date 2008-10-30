@@ -654,6 +654,12 @@ class MultiSelectWindow{
 	{
 		$this->DepartmentsAdded = true;
     $this->Added_Departments = array();
+    $this->departments = array();
+		$linkopen = "<a href='?plug=".$_GET['plug']."&amp;post_id=".$this->post_id."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
+    $types = departmentManagement::get_support_departments();
+    $ui = get_userinfo();
+    $module_deps = $ui->get_module_departments($this->module);
+
 
 		/* check for a valid base */
 		if(!$base){
@@ -664,57 +670,51 @@ class MultiSelectWindow{
 		$ldap = $this->config->get_ldap_link();
 		$ldap->cd($base);
 
-		/* reset current deps */
-		$this->departments = array();
-
 		/* Get all departments within this subtree */
-		$deps= get_list("(&(|(ou=*)(description=*))(objectClass=gosaDepartment))", $this->module, $base,
-                    array("ou", "description","objectClass"), GL_SIZELIMIT );
-
-		/* Edit delete link for system types
-		 */
-		$linkopen = "<a href='?plug=".$_GET['plug']."&amp;post_id=".$this->post_id."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
-
-		/* Create an array with all visible (in the list) departments */
-    $types = departmentManagement::get_support_departments();
-
-
-    /* Create search filter
-     */
-    $this->departments = array();
+    $s_filter = "";
+    $s_attrs  = array("description");
+    $s_acls   = array();
     foreach($types as $name => $data){
-      $filter = "(&(objectClass=gosaDepartment)(objectClass=".$data['OC'].")
-                  (".$data['ATTR']."=".$this->base_selection_regex."))";
-      $tmp = get_list($filter,"department/".$data['ACL'],$this->selectedBase,array($data['ATTR'],"description"),GL_NONE);
-      foreach($tmp as $attrs){
-        $attrs['NAME'] = $attrs[$data['ATTR']][0];
-        $attrs['TYPE'] = $data;
-        $name = $attrs['NAME']." -".$attrs['dn'];
-        $this->departments[$name] = $attrs;
-      }
+      $s_filter.= "(&(objectClass=".$data['OC'].")(".$data['ATTR']."=".$this->base_selection_regex."))";
+      $s_attrs[]= $data['ATTR']; 
+      $s_acls[] = "department/".$data['ACL'];
     }
 
-    uksort($this->departments, 'strnatcasecmp');
+    $tmp = get_list("(|".$s_filter.")",$s_acls,$this->selectedBase,$s_attrs,GL_NONE);
+    foreach($tmp as $attrs){
+      foreach($types as $name => $data){
+        if(isset($attrs[$data['ATTR']][0])){
+          $attrs['NAME'] = $attrs[$data['ATTR']][0];
+          $attrs['TYPE'] = $data;
+          $name = $attrs['NAME']." ".$attrs['dn'];
+          $departments[$name] = $attrs;
+          $found_deps[$name] = $attrs['dn'];
+          break;
+        }
+      }
+    }
+    uksort($departments, 'strnatcasecmp');
 
-    $ui = get_userinfo();
-    $module_deps = $ui->get_module_departments($this->module);
-  
-		/* Add deps to this dialog object list */
-    $this->departments = array_values($this->departments);
-		foreach($this->departments as $key=> $val){
-
-      if(!in_array($val['dn'],$module_deps)) continue;
-
+    /* Detect allowed departments 
+     */
+    $deps = array_intersect($found_deps,$module_deps);
+    $key = 0;
+    foreach($deps as $name => $dn){
+      $key ++;
+      $val = $departments[$name];
+      $this->departments[$key] = $val;
+    
       /* Check if this department contains sub-departments
          Display different image in this case
        */
       $img = $val['TYPE']['IMG'];
-      foreach($this->config->departments as $keyd){
-        if(preg_match("/,".normalizePreg($val['dn'])."$/",$keyd)){
-          $img = $val['TYPE']['IMG_FULL'];
-        }
-      }
+#      foreach($this->config->departments as $keyd){
+#        if(preg_match("/,".normalizePreg($val['dn'])."$/",$keyd)){
+#          $img = $val['TYPE']['IMG_FULL'];
+#        }
+#     }
 
+  
       $img = "<image src='".$img."' class='center'>";
 
 			/* Add spacer cols to divlist 
@@ -735,8 +735,8 @@ class MultiSelectWindow{
 
       /* Add departments
        */
-			$row[]=$field1=array("string"=> $img,"attach"=>"style='text-align:center;width:20px;'");
-			$row[]=$field2=array("string"=>sprintf($linkopen,$key,$name), "attach" => "style=''");
+			$row[]=array("string"=> $img,"attach"=>"style='text-align:center;width:20px;'");
+			$row[]=array("string"=>sprintf($linkopen,$key,$name), "attach" => "style=''");
 
       /* Add spacer tabs 
        */
