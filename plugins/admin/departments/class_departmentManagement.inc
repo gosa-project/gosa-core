@@ -519,9 +519,8 @@ class departmentManagement extends plugin
   function save_object()
   {
     /* reload department */
-    $this->config->get_departments();
-
-    $this->config->make_idepartments();
+#    $this->config->get_departments();
+#    $this->config->make_idepartments();
     $this->DivListDepartment->config= $this->config;
     $this->DivListDepartment->save_object();
   }
