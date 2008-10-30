@@ -36,6 +36,7 @@ class userinfo
   var $ocMapping= array();
   var $groups= array();
   var $result_cache =array();
+  var $ignoreACl = FALSE;
 
   /* get acl's an put them into the userinfo object
      attr subtreeACL (userdn:components, userdn:component1#sub1#sub2,component2,...) */
@@ -66,6 +67,8 @@ class userinfo
     $this->dn= $userdn;
     $this->uid= $attrs['uid'][0];
     $this->ip= $_SERVER['REMOTE_ADDR'];
+
+    $this->ignoreACL = ($this->config->get_cfg_value("ignoreAcl") == $this->dn);
 
     /* Initialize ACL_CACHE */
     session::set('ACL_CACHE',array());
@@ -350,7 +353,10 @@ class userinfo
 
           /* With user filter */
           if (isset($subacl['filter']) && !empty($subacl['filter'])){
-            if(!$ldap->object_match_filter($dn,$subacl['filter'])){
+            $id = $dn."-".$subacl['filter'];
+            if(!isset($ACL_CACHE[$id])){
+              $ACL_CACHE[$id] = $ldap->object_match_filter($dn,$subacl['filter']);
+            }elseif(!$ACL_CACHE[$id]){
               continue;
             }
           }
@@ -599,7 +605,7 @@ class userinfo
    */ 
   function ignore_acl_for_current_user()
   {
-    return($this->config->get_cfg_value("ignoreAcl") == $this->dn);
+    return($this->ignoreACL);
   }
 
 }
