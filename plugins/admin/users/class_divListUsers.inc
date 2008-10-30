@@ -106,7 +106,6 @@ class divListUsers extends MultiSelectWindow
     /* Get copy & paste icon */
     $ui = get_userinfo();
     $acl      = $ui->get_permissions($this->selectedBase,"users/user");
-    $acl_all  = $ui->has_complete_category_acls($this->selectedBase,"users");
 
     /* Add default header */
     $listhead = MultiSelectWindow::get_default_header();
@@ -235,7 +234,6 @@ class divListUsers extends MultiSelectWindow
 
       /* Add copy & cut icons */     
       $acl      = $ui->get_permissions($val['dn'],"users/user");
-      $acl_all  = $ui->has_complete_category_acls($val['dn'],"users");
      
       /* Add copy & cut functionality */
       $action.= $this->parent->get_copypaste_action($val['dn'],"users","user");
