@@ -675,7 +675,7 @@ class MultiSelectWindow{
     $s_attrs  = array("description");
     $s_acls   = array();
     foreach($types as $name => $data){
-      $s_filter.= "(&(objectClass=".$data['OC'].")(".$data['ATTR']."=".$this->base_selection_regex."))";
+      $s_filter.= "(&(objectClass=gosaDepartment)(objectClass=".$data['OC'].")(".$data['ATTR']."=".$this->base_selection_regex."))";
       $s_attrs[]= $data['ATTR']; 
       $s_acls[] = "department/".$data['ACL'];
     }
