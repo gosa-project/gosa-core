@@ -301,6 +301,12 @@ class userinfo
       return("rwcdm");
     }
 
+    /* Ensure that we only cache relevant ACL settings 
+     */
+    while(!isset($this->ACL[$dn]) && preg_match("/,/",$dn)){
+      $dn = preg_replace("/^[^,]*+,/","",$dn);
+    }
+
     /* Push cache answer? */
     $ACL_CACHE = &session::get('ACL_CACHE');
     if (isset($ACL_CACHE["$dn+$object+$attribute"])){
