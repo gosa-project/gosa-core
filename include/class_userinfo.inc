@@ -199,8 +199,7 @@ class userinfo
     $acl= "";
     if (isset($this->ocMapping[$category])){
       foreach($this->ocMapping[$category] as $oc){
-        if(!$oc == 0 ) continue;
-        $acl.= $this->get_permissions($dn, $category."/".$oc,0);
+        $acl.= $this->get_permissions($dn, $category."/".$oc);
         if($any_acl && !empty($acl)){
           break;
         }
