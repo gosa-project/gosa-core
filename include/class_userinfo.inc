@@ -310,7 +310,7 @@ class userinfo
     /* Ensure that we only cache relevant ACL settings 
      */
     while(!isset($this->ACL[$dn]) && preg_match("/,/",$dn)){
-      $dn = preg_replace("/^[^,]*+,/","",$dn);
+      $dn = preg_replace("/^[^,]+,/","",$dn);
     }
 
     /* Push cache answer? */
