@@ -191,9 +191,9 @@ class userinfo
 
     /* Ensure that we only cache relevant ACL settings 
      */
-    while(!isset($this->ACL[$dn]) && preg_match("/,/",$dn)){
-      $dn = preg_replace("/^[^,]*+,/","",$dn);
-    }
+#    while(!isset($this->ACL[$dn]) && preg_match("/,/",$dn)){
+#      $dn = preg_replace("/^[^,]*+,/","",$dn);
+#    }
 
     $ACL_CACHE = &session::get("ACL_CACHE");
     $id = $dn."+".$category."+".$any_acl;
@@ -309,9 +309,9 @@ class userinfo
 
     /* Ensure that we only cache relevant ACL settings 
      */
-    while(!isset($this->ACL[$dn]) && preg_match("/,/",$dn)){
-      $dn = preg_replace("/^[^,]+,/","",$dn);
-    }
+#    while(!isset($this->ACL[$dn]) && preg_match("/,/",$dn)){
+#      $dn = preg_replace("/^[^,]+,/","",$dn);
+#    }
 
     /* Push cache answer? */
     $ACL_CACHE = &session::get('ACL_CACHE');
