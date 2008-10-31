@@ -596,7 +596,7 @@ class userinfo
             /* Skip objectClass '0' (e.g. users/0) get_permissions will ever return '' ??  */
             if($oc == "0") continue;
             $tmp =  $this->get_permissions($dn, $category."/".$oc);
-            for($i = 0; $l= strlen($types); $i < $l; $i++) {
+            for($i = 0, $l= strlen($types); $i < $l; $i++) {
               if(!preg_match("/".$types[$i]."/",$tmp)){ 
                 $acl = preg_replace("/".$types[$i]."/","",$acl);
               }
