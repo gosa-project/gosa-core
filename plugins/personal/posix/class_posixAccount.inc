@@ -1317,7 +1317,7 @@ class posixAccount extends plugin
     }
 
     /* Find out next free id near to UID_BASE */
-    if ($this->config->get_cfg_value("nextIdHook") == ""){
+    if ($this->config->get_cfg_value("baseIdHook") == ""){
       $base= $lwm;
     } else {
       /* Call base hook */

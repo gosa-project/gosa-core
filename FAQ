@@ -349,7 +349,7 @@ A: Just add this line into the location section of your gosa.conf.
 Q: I'd like to assign different uid bases for certain user/group objects.
    How can this be achieved?
 
-A: Use the 'nextIdHook' in your gosa.conf's location section to specify a script
+A: Use the 'baseIdHook' in your gosa.conf's location section to specify a script
    which handles the ID generation externaly. It get's called with the "dn"
    and the attribute to be ID'd. It should return an integer value.
 
