@@ -36,6 +36,7 @@ class userinfo
   var $ocMapping= array();
   var $groups= array();
   var $result_cache =array();
+  var $ignoreACL = FALSE;
 
   /* get acl's an put them into the userinfo object
      attr subtreeACL (userdn:components, userdn:component1#sub1#sub2,component2,...) */
@@ -67,8 +68,9 @@ class userinfo
     $this->uid= $attrs['uid'][0];
     $this->ip= $_SERVER['REMOTE_ADDR'];
 
+    $this->ignoreACL = ($this->config->get_cfg_value("ignoreAcl") == $this->dn);
+
     /* Initialize ACL_CACHE */
-    session::set('ACL_CACHE',array());
     $this->reset_acl_cache();
   }
 
@@ -178,25 +180,42 @@ class userinfo
   }
 
 
-  function get_category_permissions($dn, $category)
+  function get_category_permissions($dn, $category, $any_acl = FALSE)
   {
-    /* If we are forced to skip ACLs checks for the current user 
-        then return all permissions.
+    /* If we are forced to skip ACLs checks for the current user
+       then return all permissions.
      */
     if($this->ignore_acl_for_current_user()){
       return("rwcdm");
     }
+
+    /* Ensure that we only cache relevant ACL settings
+     */
+#    while(!isset($this->ACL[$dn]) && preg_match("/,/",$dn)){
+#      $dn = preg_replace("/^[^,]*+,/","",$dn);
+#    }
+
+    $ACL_CACHE = &session::get("ACL_CACHE");
+    $id = $dn."+".$category."+".$any_acl;
+    if(isset($ACL_CACHE['CATEGORY_ACL'][$id])){
+      return($ACL_CACHE['CATEGORY_ACL'][$id]);
+    }
+
 
     /* Get list of objectClasses and get the permissions for it */
     $acl= "";
     if (isset($this->ocMapping[$category])){
       foreach($this->ocMapping[$category] as $oc){
         $acl.= $this->get_permissions($dn, $category."/".$oc);
+        if($any_acl && !empty($acl)){
+          break;
+        }
       }
     }else{
       trigger_error("ACL request for an invalid category (".$category.").");
     }
-
+    $ACL_CACHE = &session::get("ACL_CACHE");
+    $ACL_CACHE['CATEGORY_ACL'][$id] = $acl;
     return ($acl);
   }
 
@@ -249,12 +268,10 @@ class userinfo
     if(!is_array($object)){
       $object = array($object);
     }
-    $r = $w = $c = TRUE;
+    $r = $w = TRUE;
     foreach($object as $category){
       $w &= preg_match("/w/",$this->has_complete_category_acls($dn, $category));
-      $c &= preg_match("/c/",$this->has_complete_category_acls($dn, $category));
       $r &= preg_match("/r/",$this->has_complete_category_acls($dn, $category));
-#     print_a(array($category => array($r.$w.$c)));
     }
     return($r && $w ); 
   }  
@@ -270,12 +287,9 @@ class userinfo
     if(!is_array($object)){
       $object = array($object);
     }
-    $r = $w = $c = TRUE;
+    $r = TRUE;
     foreach($object as $category){
-      $w &= preg_match("/w/",$this->has_complete_category_acls($dn, $category));
-      $c &= preg_match("/c/",$this->has_complete_category_acls($dn, $category));
       $r &= preg_match("/r/",$this->has_complete_category_acls($dn, $category));
-#      print_a(array($category => array($r.$w.$c)));
     }
     return($r) ; 
   }  
@@ -283,8 +297,8 @@ class userinfo
 
   function get_permissions($dn, $object, $attribute= "", $skip_write= FALSE)
   {
-    /* If we are forced to skip ACLs checks for the current user 
-        then return all permissions.
+    /* If we are forced to skip ACLs checks for the current user
+       then return all permissions.
      */
     if($this->ignore_acl_for_current_user()){
       if($skip_write){
@@ -292,6 +306,12 @@ class userinfo
       }
       return("rwcdm");
     }
+
+    /* Ensure that we only cache relevant ACL settings
+     */
+#    while(!isset($this->ACL[$dn]) && preg_match("/,/",$dn)){
+#      $dn = preg_replace("/^[^,]+,/","",$dn);
+#    }
 
     /* Push cache answer? */
     $ACL_CACHE = &session::get('ACL_CACHE');
@@ -302,11 +322,11 @@ class userinfo
         $ret = preg_replace('/w/', '', $ACL_CACHE["$dn+$object+$attribute"]);
       }else{
         $ret = $ACL_CACHE["$dn+$object+$attribute"];
-      } 
+      }
       return($ret);
     }
 
-    /* Get ldap object, for later filter checks 
+    /* Get ldap object, for later filter checks
      */
     $ldap = $this->config->get_ldap_link();
 
@@ -321,7 +341,7 @@ class userinfo
     foreach ($path as $element){
 
       /* Clean potential ACLs for each level */
-      if(in_array($cpath,$this->config->departments)){
+      if(isset($this->config->idepartments[$cpath])){
         $acl= $this->cleanACL($acl);
       }
 
@@ -349,19 +369,23 @@ class userinfo
 
           /* With user filter */
           if (isset($subacl['filter']) && !empty($subacl['filter'])){
-            if(!$ldap->object_match_filter($dn,$subacl['filter'])){
+            $id = $dn."-".$subacl['filter'];
+            if(!isset($ACL_CACHE['FILTER'][$id])){
+              $ACL_CACHE['FILTER'][$id] = $ldap->object_match_filter($dn,$subacl['filter']);
+            }
+            if(!$ACL_CACHE['FILTER'][$id]){
               continue;
             }
           }
 
-          /* Self ACLs? 
+          /* Self ACLs?
            */
-          if(isset($subacl['acl'][$object][0]) && preg_match("/s/",$subacl['acl'][$object][0]) && $dn != $this->dn){
+          if($dn != $this->dn && isset($subacl['acl'][$object][0]) && strpos($subacl['acl'][$object][0],"s")){
             continue;
           }
 
-          /* If attribute is "", we want to know, if we've *any* permissions here... 
-              Merge global class ACLs [0] with attributes specific ACLs [attribute].
+          /* If attribute is "", we want to know, if we've *any* permissions here...
+             Merge global class ACLs [0] with attributes specific ACLs [attribute].
            */
           if ($attribute == "" && isset($subacl['acl'][$object])){
             foreach($subacl['acl'][$object] as $attr => $dummy){
@@ -391,10 +415,10 @@ class userinfo
       }
     }
 
-    /* If the requested ACL is for a container object, then alter 
-        ACLs by applying cleanACL a last time.
+    /* If the requested ACL is for a container object, then alter
+       ACLs by applying cleanACL a last time.
      */
-    if(in_array($dn,$this->config->departments)){
+    if(isset($this->config->idepartments[$dn])){
       $acl = $this->cleanACL($acl);
     }
 
@@ -420,140 +444,98 @@ class userinfo
      accessible department) */
   function get_module_departments($module, $skip_self_acls = FALSE )
   {
-    
-    /* If we are forced to skip ACLs checks for the current user 
-        then return all departments as valid.
+    /* If we are forced to skip ACLs checks for the current user
+       then return all departments as valid.
      */
     if($this->ignore_acl_for_current_user()){
       return(array_keys($this->config->idepartments));
     }
 
     /* Use cached results if possilbe */
-    $ACL_CACHE = session::get('ACL_CACHE');
-    if(isset($ACL_CACHE['MODULE_DEPARTMENTS'][serialize($module)])){
-      return($ACL_CACHE['MODULE_DEPARTMENTS'][serialize($module)]);
+    $ACL_CACHE = &session::get('ACL_CACHE');
+
+    if(!is_array($module)){
+      $module = array($module);
     }
 
     global $plist;
-
-    $objects= array();
-    $deps= array();
-
-    /* Extract all relevant objects for this module from plist */
-    foreach ($plist->info as $object => $info){
-      if (!isset($info['plCategory'])){
+    $res = array();
+    foreach($module as $mod){
+      if(isset($ACL_CACHE['MODULE_DEPARTMENTS'][$mod])){
+        $res = array_merge($res,$ACL_CACHE['MODULE_DEPARTMENTS'][$mod]);
         continue;
       }
-      foreach ($info['plCategory'] as $idx => $data){
-        if (preg_match('/^[0-9]+$/', $idx)){
-          if ($data == $module){
-            $objects[$object]= $object;
-          }
-        } else {
-          if ($idx == $module){
-            $objects[$object]= $object;
-          }
-        }
-      }
-    }
 
-    /* Search for per object ACLs. 
-     */
-    $this->config->get_departments();
-    $this->config->make_idepartments();
+      $deps = array();
 
-    foreach($this->ACL as $dn => $infos){
-      foreach($infos as $info){
-        $found = FALSE;
-        foreach($info['acl'] as $cat => $data){
+      /* Search for per object ACLs */
+      foreach($this->ACL as $dn => $infos){
+        foreach($infos as $info){
+          $found = FALSE;
+          foreach($info['acl'] as $cat => $data){
 
-          /* Skip self acls? */
-          if($skip_self_acls && isset($data['0']) && preg_match("//s",$data['0'])) continue;
-
-          if(is_array($module)){
-            foreach($module as $mod){
-              if(preg_match("/^".normalizePreg($mod)."/",$cat)){
-                $found =TRUE;
-                break;
-              }
-            }
-          }else{
-            if(preg_match("/^".normalizePreg($module)."/",$cat)){
+            /* Skip self acls? */
+            if($skip_self_acls && isset($data['0']) && strpos($data['0'], "s")) continue;
+            if(preg_match("/^".normalizePreg($mod)."/",$cat)){
               $found =TRUE;
               break;
             }
           }
-        } 
 
-        if($found && !isset($this->config->idepartments[$dn])){
-          while(!isset($this->config->idepartments[$dn]) && preg_match("/,/",$dn)){
-            $dn = preg_replace("/^[^,]+,/","",$dn);
-          }
-          if(isset($this->config->idepartments[$dn])){
-            $deps[] = $dn;
+          if($found && !isset($this->config->idepartments[$dn])){
+            while(!isset($this->config->idepartments[$dn]) && strpos($dn, ",")){
+              $dn = preg_replace("/^[^,]+,/","",$dn);
+            }
+            if(isset($this->config->idepartments[$dn])){
+              $deps[] = $dn;
+            }
           }
         }
       }
-    }
 
-    /* For all gosaDepartments */
-    foreach ($this->config->departments as $dn){
-      if(!is_array($module)){
-        $module = array($module);
-      }
-      $acl = "";
-      foreach($module as $mod){
-        if(preg_match("/\//",$mod)){
+      /* For all gosaDepartments */
+      foreach ($this->config->departments as $dn){
+        if(in_array($dn,$deps)) continue;
+        $acl = "";
+        if(strpos($mod, '/')){
           $acl.=  $this->get_permissions($dn,$mod);
         }else{
-          $acl.=  $this->get_category_permissions($dn,$mod);
+          $acl.=  $this->get_category_permissions($dn,$mod,TRUE);
+        }
+        if(!empty($acl)) {
+          $deps[] = $dn;
         }
       }
-      if($acl !== "") $deps[] = $dn;
+
+      $ACL_CACHE['MODULE_DEPARTMENTS'][$mod] = $deps;
+      $res = array_merge($res,$deps);
     }
-  
-    $ACL_CACHE = &session::get('ACL_CACHE');
-    $ACL_CACHE['MODULE_DEPARTMENTS'][serialize($module)] = $deps;
-    return ($deps);
+    return ($res);
   }
 
 
   function mergeACL($acl, $type, $newACL)
   {
+    $at= array("psub" => "p", "sub" => "s", "one" => "1");
+
     if (strpos($newACL, 'w') !== FALSE && strpos($newACL, 'r') === FALSE){
       $newACL .= "r";
     }
 
-    foreach(str_split($newACL) as $char){
+    /* Ignore invalid characters */
+    $newACL= preg_replace('/[^rwcdm]/', '', $newACL);
 
-      /* Ignore invalid characters */
-      if (!preg_match('/[rwcdm]/', $char)){
-        continue;
-      }
+    foreach(str_split($newACL) as $char){
 
       /* Skip permanent and subtree entries */
       if (preg_match('/[sp]/', $acl[$char])){
         continue;
       }
 
-      switch ($type){
-        case 'psub':
-          $acl[$char]= 'p';
-          break;
-
-        case 'sub':
-          $acl[$char]= 's';
-          break;
-
-        case 'one':
-          $acl[$char]= 1;
-          break;
-
-        case 'base':
-          if ($acl[$char] != 1){
-            $acl[$char]= 0;
-          }
-          break;
+      if ($type == "base" && $acl[$char] != 1) {
+        $acl[$char]= 0;
+      } else {
+        $acl[$char]= $at[$type];
       }
     }
 
@@ -563,20 +545,25 @@ class userinfo
 
   function cleanACL($acl, $reset= FALSE)
   {
-    foreach ($acl as &$value){
+    foreach ($acl as $key => $value){
+
+      /* Continue, if value is empty or permanent */
+      if ($value == "" || $value == "p") {
+        continue;
+      }
 
       /* Reset removes everything but 'p' */
       if ($reset && $value != 'p'){
-        $value= "";
+        $acl[$key]= "";
         continue;
       }
 
       /* Decrease tree level */
       if (is_int($value)){
         if ($value){
-          $value--;
+          $acl[$key]--;
         } else {
-          $value= "";
+          $acl[$key]= "";
         }
       }
     }
@@ -609,7 +596,7 @@ class userinfo
             /* Skip objectClass '0' (e.g. users/0) get_permissions will ever return '' ??  */
             if($oc == "0") continue;
             $tmp =  $this->get_permissions($dn, $category."/".$oc);
-            for($i = 0 ; $i < strlen($types); $i++) {
+            for($i = 0, $l= strlen($types); $i < $l; $i++) {
               if(!preg_match("/".$types[$i]."/",$tmp)){ 
                 $acl = preg_replace("/".$types[$i]."/","",$acl);
               }
@@ -633,7 +620,7 @@ class userinfo
    */ 
   function ignore_acl_for_current_user()
   {
-    return($this->config->get_cfg_value("ignore_acl") == $this->dn);
+    return($this->ignoreACL);
   }
 
 }
