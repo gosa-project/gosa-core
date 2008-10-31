@@ -498,7 +498,7 @@ class userinfo
 
             /* Skip self acls? */
             if($skip_self_acls && isset($data['0']) && strpos($data['0'], "s")) continue;
-            if(preg_match("/^".normalizePreg($mod)."/",$cat)){
+            if(preg_match("/^".preg_quote($mod)."/",$cat)){
               $found =TRUE;
               break;
             }

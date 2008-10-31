@@ -870,7 +870,7 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
        *  departments like this "ou=servers,ou=blafasel,..."
        * Here we filter out those blafasel departments.
        */
-      if(preg_match("/".normalizePreg($sub_dep)."/",$attrs['dn'])){
+      if(preg_match("/".preg_quote($sub_dep)."/",$attrs['dn'])){
         $departments[$attrs['dn']] = $attrs['dn'];
         break;
       }
@@ -1124,7 +1124,7 @@ function convert_department_dn($dn, $base = NULL)
 
   /* Build a sub-directory style list of the tree level
      specified in $dn */
-  $dn = preg_replace("/".normalizePreg($base)."$/i","",$dn);
+  $dn = preg_replace("/".preg_quote($base)."$/i","",$dn);
   if(empty($dn)) return("/");
 
 
@@ -1201,7 +1201,7 @@ function get_ou($name)
       $ou = @LDAP::convert("$ou");
     }
 
-    if(preg_match("/".normalizePreg($config->current['BASE'])."$/",$ou)){
+    if(preg_match("/".preg_quote($config->current['BASE'])."$/",$ou)){
       return($ou);
     }else{
       return("$ou,");
@@ -2063,13 +2063,6 @@ function saveFilter($a_filter, $values)
   }
 
   return ($a_filter);
-}
-
-
-/* Escape all preg_* relevant characters */
-function normalizePreg($input)
-{
-  return (addcslashes($input, '[]()|/.*+-'));
 }
 
 

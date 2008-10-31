@@ -1859,7 +1859,7 @@ class gosaSupportDaemon
         There may be some Header lines like:
         -----BEGIN PGP PUBLIC KEY BLOCK-----   Version: GnuPG v1.4.6 (GNU/Linux)
      */
-    if(preg_match("/".normalizePreg("BEGIN PGP PUBLIC KEY BLOCK")."/",$key)){
+    if(preg_match("/BEGIN PGP PUBLIC KEY BLOCK/",$key)){
 
       /* Remove header */
       $key = preg_replace("/^.*\n\n/sim","",$key);

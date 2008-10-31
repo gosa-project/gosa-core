@@ -740,7 +740,7 @@ class config  {
 
       /* Split dn into single department pieces.
        */
-      $elements = array_reverse(split(",",preg_replace("/".normalizePreg($base)."$/","",$val))); 		
+      $elements = array_reverse(split(",",preg_replace("/".preg_quote($base)."$/","",$val))); 		
 
       /* Add last ou element of current dn to our array */
       $last = &$arr;

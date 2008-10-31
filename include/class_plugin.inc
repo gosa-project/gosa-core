@@ -886,7 +886,7 @@ class plugin
     $ldap->search("objectClass=*",array("dn"));
     while($attrs = $ldap->fetch()){
       $src = $attrs['dn'];
-      $dst = preg_replace("/".normalizePreg($src_dn)."$/",$dst_dn,$attrs['dn']);
+      $dst = preg_replace("/".preg_quote($src_dn)."$/",$dst_dn,$attrs['dn']);
       $this->_copy($src,$dst);
     }
     return (TRUE);
@@ -933,14 +933,14 @@ class plugin
     /* Updated acls set for this groups */
     foreach($leaf_groups as $group){
       $new_dn = $group['dn'];
-      $old_dn = preg_replace("/".normalizePreg($dst_dn)."$/i",$src_dn,$new_dn);
+      $old_dn = preg_replace("/".preg_quote($dst_dn)."$/i",$src_dn,$new_dn);
       $this->update_acls($old_dn,$new_dn); 
     }
 
     /* Updated acls set for this users */
     foreach($leaf_users as $user){
       $new_dn = $user['dn'];
-      $old_dn = preg_replace("/".normalizePreg($dst_dn)."$/i",$src_dn,$new_dn);
+      $old_dn = preg_replace("/".preg_quote($dst_dn)."$/i",$src_dn,$new_dn);
       $this->update_acls($old_dn,$new_dn); 
     }
 
@@ -965,9 +965,9 @@ class plugin
 
           $c_mem = $ogroup['member'][$i];
   
-          if(preg_match("/".normalizePreg($src_dn)."$/i",$c_mem)){
+          if(preg_match("/".preg_quote($src_dn)."$/i",$c_mem)){
  
-            $d_mem = preg_replace("/".normalizePreg($src_dn)."$/i",$dst_dn,$ogroup['member'][$i]);
+            $d_mem = preg_replace("/".preg_quote($src_dn)."$/i",$dst_dn,$ogroup['member'][$i]);
 
             if($o_ogroup == NULL){
               $o_ogroup = new ogroup($this->config,$ogroup['dn']);
@@ -1158,7 +1158,7 @@ class plugin
           }
 
           /* This one matches with the latter part. Break and don't fix this entry */
-          if (preg_match('/(^|,)'.normalizePreg($key).'$/', $dn)){
+          if (preg_match('/(^|,)'.preg_quote($key).'$/', $dn)){
             @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "DEBUG: Possibly relevant: $key", "Tagging");
             $relevant[strlen($key)]= $ntag;
             continue;
@@ -1256,7 +1256,7 @@ class plugin
       $base           = $this->config->current['BASE'];
       $snap_base      = $config->get_cfg_value("snapshotBase");
       $base_of_object = preg_replace ('/^[^,]+,/i', '', $this->dn);
-      $new_base       = preg_replace("/".normalizePreg($base)."$/","",$base_of_object).$snap_base;
+      $new_base       = preg_replace("/".preg_quote($base)."$/","",$base_of_object).$snap_base;
 
       /* Create object */
 #$data             = preg_replace('/^dn:.*\n/', '', $ldap->gen_ldif($this->dn,"(!(objectClass=gosaDepartment))"));
@@ -1374,7 +1374,7 @@ class plugin
     $base           = $this->config->current['BASE'];
     $snap_base      = $this->config->get_cfg_value("snapshotBase");
     $base_of_object = preg_replace ('/^[^,]+,/i', '', $dn);
-    $new_base       = preg_replace("/".normalizePreg($base)."$/","",$base_of_object).$snap_base;
+    $new_base       = preg_replace("/".preg_quote($base)."$/","",$base_of_object).$snap_base;
     $tmp            = array(); 
 
     /* Fetch all objects with  gosaSnapshotDN=$dn */
@@ -1431,7 +1431,7 @@ class plugin
     /* Prepare bases */ 
     $base           = $this->config->current['BASE'];
     $snap_base      = $this->config->get_cfg_value("snapshotBase");
-    $new_base       = preg_replace("/".normalizePreg($base)."$/","",$base_of_object).$snap_base;
+    $new_base       = preg_replace("/".preg_quote($base)."$/","",$base_of_object).$snap_base;
 
     /* Fetch all objects and check if they do not exist anymore */
     $ui = get_userinfo();
