@@ -2182,10 +2182,10 @@ function get_base_from_hook($dn, $attrib)
 {
   global $config;
 
-  if ($config->get_cfg_value("nextIdHook") != ""){
+  if ($config->get_cfg_value("baseIdHook") != ""){
     
     /* Call hook script - if present */
-    $command= $config->get_cfg_value("nextIdHook");
+    $command= $config->get_cfg_value("baseIdHook");
 
     if ($command != ""){
       $command.= " '".LDAP::fix($dn)."' $attrib";
@@ -2195,17 +2195,17 @@ function get_base_from_hook($dn, $attrib)
         if (preg_match("/^[0-9]+$/", $output[0])){
           return ($output[0]);
         } else {
-          msg_dialog::display(_("Warning"), _("'nextIdHook' is not available. Using default base!"), WARNING_DIALOG);
+          msg_dialog::display(_("Warning"), _("'baseIdHook' is not available. Using default base!"), WARNING_DIALOG);
           return ($config->get_cfg_value("uidNumberBase"));
         }
       } else {
-        msg_dialog::display(_("Warning"), _("'nextIdHook' is not available. Using default base!"), WARNING_DIALOG);
+        msg_dialog::display(_("Warning"), _("'baseIdHook' is not available. Using default base!"), WARNING_DIALOG);
         return ($config->get_cfg_value("uidNumberBase"));
       }
 
     } else {
 
-      msg_dialog::display(_("Warning"), _("'nextIdHook' is not available. Using default base!"), WARNING_DIALOG);
+      msg_dialog::display(_("Warning"), _("'baseIdHook' is not available. Using default base!"), WARNING_DIALOG);
       return ($config->get_cfg_value("uidNumberBase"));
 
     }
