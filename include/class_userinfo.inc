@@ -37,6 +37,8 @@ class userinfo
   var $groups= array();
   var $result_cache =array();
   var $ignoreACl = FALSE;
+  var $ACLperPath = array();
+  var $ACLperPath_usesFilter = array();
 
   /* get acl's an put them into the userinfo object
      attr subtreeACL (userdn:components, userdn:component1#sub1#sub2,component2,...) */
@@ -175,48 +177,33 @@ class userinfo
           $this->ACL[$dn][$idx]= $type;
         }
       }
-
     }
+
+    /* Create an array which represenet all relevant permissions settings 
+        per dn.
+     */
+    $tmp = array();
+    foreach($this->ACL as $dn => $acl){
+      $sdn =$dn;
+      while(strpos($dn,",") !== FALSE){
+        if(isset($this->ACL[$dn])){
+          $tmp[$sdn][$dn] = $this->ACL[$dn];
+          foreach($this->ACL[$dn] as $aclset){
+            if(isset($aclset['filter']{1})){
+              $this->ACLperPath_usesFilter[$sdn] = TRUE;
+            }
+          }
+        }
+        $dn = preg_replace("/^[^,]*+,/","",$dn);
+      }
+    } 
+    $this->ACLperPath =$tmp;
   }
 
 
   function get_category_permissions($dn, $category, $any_acl = FALSE)
   {
-    /* If we are forced to skip ACLs checks for the current user 
-        then return all permissions.
-     */
-    if($this->ignore_acl_for_current_user()){
-      return("rwcdm");
-    }
-
-    /* Ensure that we only cache relevant ACL settings 
-     */
-#    while(!isset($this->ACL[$dn]) && preg_match("/,/",$dn)){
-#      $dn = preg_replace("/^[^,]*+,/","",$dn);
-#    }
-
-    $ACL_CACHE = &session::get("ACL_CACHE");
-    $id = $dn."+".$category."+".$any_acl;
-    if(isset($ACL_CACHE['CATEGORY_ACL'][$id])){
-      return($ACL_CACHE['CATEGORY_ACL'][$id]);
-    }
-
-
-    /* Get list of objectClasses and get the permissions for it */
-    $acl= "";
-    if (isset($this->ocMapping[$category])){
-      foreach($this->ocMapping[$category] as $oc){
-        $acl.= $this->get_permissions($dn, $category."/".$oc);
-        if($any_acl && !empty($acl)){
-          break;
-        }
-      }
-    }else{
-      trigger_error("ACL request for an invalid category (".$category.").");
-    }
-    $ACL_CACHE = &session::get("ACL_CACHE");
-    $ACL_CACHE['CATEGORY_ACL'][$id] = $acl;
-    return ($acl);
+    return(@$this->get_permissions($dn,$category.'/0'));
   }
 
   
@@ -307,25 +294,47 @@ class userinfo
       return("rwcdm");
     }
 
-    /* Ensure that we only cache relevant ACL settings 
-     */
-#    while(!isset($this->ACL[$dn]) && preg_match("/,/",$dn)){
-#      $dn = preg_replace("/^[^,]+,/","",$dn);
-#    }
-
     /* Push cache answer? */
     $ACL_CACHE = &session::get('ACL_CACHE');
     if (isset($ACL_CACHE["$dn+$object+$attribute"])){
-
-      /* Remove write if needed */
-      if ($skip_write){
-        $ret = preg_replace('/w/', '', $ACL_CACHE["$dn+$object+$attribute"]);
-      }else{
-        $ret = $ACL_CACHE["$dn+$object+$attribute"];
-      } 
+      $ret = $ACL_CACHE["$dn+$object+$attribute"];
+      if($skip_write){
+        $ret = preg_replace('/w/', '',$ret);
+      }
       return($ret);
     }
 
+    /* Detect the set of ACLs we have to check for this object 
+     */
+    $adn = $dn;
+    while(!isset($this->ACLperPath[$adn]) && strpos($adn,",") !== FALSE){
+      $adn = preg_replace("/^[^,]*+,/","",$adn);
+    }
+    if(isset($this->ACLperPath[$adn])){
+      $ACL = $this->ACLperPath[$adn];
+    }else{
+      $ACL_CACHE["$dn+$object+$attribute"] = "";
+      return("");
+    }
+ 
+    /* If we do not need to respect any user-filter settings 
+        we can skip the per object ACL checks.
+     */
+    $orig_dn= $dn;
+    if(!isset($this->ACLperPath_usesFilter[$adn])){
+      $dn = $adn;
+      if (isset($ACL_CACHE["$dn+$object+$attribute"])){
+        $ret = $ACL_CACHE["$dn+$object+$attribute"];
+        if(!isset($ACL_CACHE["$orig_dn+$object+$attribute"])){
+          $ACL_CACHE["$orig_dn+$object+$attribute"] = $ACL_CACHE["$dn+$object+$attribute"];
+        }
+        if($skip_write){
+          $ret = preg_replace('/w/','',$ret);
+        }
+        return($ret);
+      }
+    }
+ 
     /* Get ldap object, for later filter checks 
      */
     $ldap = $this->config->get_ldap_link();
@@ -351,10 +360,10 @@ class userinfo
         $cpath= $element.','.$cpath;
       }
 
-      if (isset($this->ACL[$cpath])){
+      if (isset($ACL[$cpath])){
 
         /* Inspect this ACL, place the result into ACL */
-        foreach ($this->ACL[$cpath] as $subacl){
+        foreach ($ACL[$cpath] as $subacl){
 
           /* Reset? Just clean the ACL and turn over to the next one... */
           if ($subacl['type'] == 'reset'){
@@ -411,6 +420,18 @@ class userinfo
             $acl= $this->mergeACL($acl, $subacl['type'], $subacl['acl']['all'][0]);
             continue;
           }
+
+          /* Category ACLs */
+          if(strstr($object,"/0")){
+            $ocs = preg_replace("/\/0$/","",$object);
+            if(isset($this->ocMapping[$ocs]))
+            foreach($this->ocMapping[$ocs] as $oc){
+              if(isset($subacl['acl'][$ocs.'/'.$oc][0])){
+                $acl= $this->mergeACL($acl, $subacl['type'], $subacl['acl'][$ocs.'/'.$oc][0]);
+              }
+            }
+            continue;
+          }
         }
       }
     }
@@ -431,6 +452,7 @@ class userinfo
     }
 
     $ACL_CACHE["$dn+$object+$attribute"]= $ret;
+    $ACL_CACHE["$orig_dn+$object+$attribute"]= $ret;
 
     /* Remove write if needed */
     if ($skip_write){
