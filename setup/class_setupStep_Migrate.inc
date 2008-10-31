@@ -345,7 +345,7 @@ class Step_Migrate extends setup_step
 
     $this->outside_winstations = array();
     while($attrs = $ldap->fetch()){
-      if((!preg_match("/^[^,]+,".normalizePreg($winstation_ou)."/",$attrs['dn'])) && !preg_match("/,dc=addressbook,/",$attrs['dn'])){
+      if((!preg_match("/^[^,]+,".preg_quote($winstation_ou)."/",$attrs['dn'])) && !preg_match("/,dc=addressbook,/",$attrs['dn'])){
         $attrs['selected'] = FALSE;
         $attrs['ldif']     = "";
         $this->outside_winstations[base64_encode($attrs['dn'])] = $attrs;
@@ -410,12 +410,12 @@ class Step_Migrate extends setup_step
     $this->outside_groups = array();
     $this->groups_list = array();;
     while($attrs = $ldap->fetch()){
-      $group_db_base = preg_replace("/^[^,]+,".normalizePreg($group_ou)."+,/i","",$attrs['dn']);
+      $group_db_base = preg_replace("/^[^,]+,".preg_quote($group_ou)."+,/i","",$attrs['dn']);
 
       /* Check if entry is not an addressbook only user
        *  and verify that he is in a valid department
        */
-      if( !preg_match("/".normalizePreg("dc=addressbook,")."/",$group_db_base) &&
+      if( !preg_match("/".preg_quote("dc=addressbook,")."/",$group_db_base) &&
           !in_array($group_db_base,$valid_deps)
         ){
         $attrs['selected'] = FALSE;
@@ -488,12 +488,12 @@ class Step_Migrate extends setup_step
     }
 
     while($attrs = $ldap->fetch()){
-      $people_db_base = preg_replace("/^[^,]+,".normalizePreg($people_ou)."/i","",$attrs['dn']);
+      $people_db_base = preg_replace("/^[^,]+,".preg_quote($people_ou)."/i","",$attrs['dn']);
 
       /* Check if entry is not an addressbook only user
        *  and verify that he is in a valid department
        */
-      if( !preg_match("/".normalizePreg("dc=addressbook,")."/",$people_db_base) &&
+      if( !preg_match("/".preg_quote("dc=addressbook,")."/",$people_db_base) &&
           !in_array($people_db_base,$valid_deps)
          ){
         $attrs['selected'] = FALSE;

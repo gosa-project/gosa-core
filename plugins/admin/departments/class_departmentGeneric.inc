@@ -467,7 +467,7 @@ class department extends plugin
 		    }
 
 		    /* This one matches with the latter part. Break and don't fix this entry */
-		    if (preg_match('/(^|,)'.normalizePreg($key).'$/', $attrs['dn'])){
+		    if (preg_match('/(^|,)'.preg_quote($key).'$/', $attrs['dn'])){
 			    $fix= false;
 			    break;
 		    }
@@ -629,7 +629,7 @@ class department extends plugin
           }
 
           /* This one matches with the latter part. Break and don't fix this entry */
-          if (preg_match('/(^|,)'.normalizePreg($key).'$/', $dn)){
+          if (preg_match('/(^|,)'.preg_quote($key).'$/', $dn)){
             @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "DEBUG: Possibly relevant: $key", "Tagging");
             $relevant[strlen($key)]= $ntag;
             continue;
