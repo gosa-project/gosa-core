@@ -721,6 +721,8 @@ class config  {
   {
     global $config;
     $base = $config->current['BASE'];
+		$qbase = preg_quote($base, '/');
+    $utags= isset($config->current['HONOURUNITTAGS']) && preg_match('/true/i', $config->current['HONOURUNITTAGS']);
 
     $arr = array();
     $ui= get_userinfo();
@@ -731,16 +733,15 @@ class config  {
     foreach ($this->departments as $key => $val){
 
       /* When using strict_units, filter non relevant parts */
-      if (isset($config->current['HONOURUNITTAGS']) && preg_match('/true/i', $config->current['HONOURUNITTAGS'])){
-        if ($ui->gosaUnitTag != "" && isset($this->tdepartments[$val]) &&
+      if ($utags){
+        if ($ui->gosaUnitTag != '' && isset($this->tdepartments[$val]) &&
             $this->tdepartments[$val] != $ui->gosaUnitTag){
 #          continue;
         }
       }
 
-      /* Split dn into single department pieces.
-       */
-      $elements = array_reverse(split(",",preg_replace("/".preg_quote($base, '/')."$/","",$val))); 		
+      /* Split dn into single department pieces */
+      $elements = array_reverse(split(',',preg_replace("/$qbase$/",'',$val))); 		
 
       /* Add last ou element of current dn to our array */
       $last = &$arr;
@@ -750,15 +751,14 @@ class config  {
         if(empty($ele)) continue;
 
         /* Extract department name */		
-        $elestr = trim(preg_replace("/^[^=]*+=/","", $ele),",");
-        $nameA  = trim(preg_replace("/=.*$/","", $ele),",");
-        if($nameA != "ou"){
-          $nameA = " (".$nameA.")";
+        $elestr = trim(preg_replace('/^[^=]*+=/','', $ele),',');
+        $nameA  = trim(preg_replace('/=.*$/','', $ele),',');
+        if($nameA != 'ou'){
+          $nameA = " ($nameA)";
         }else{
-          $nameA = "";
+          $nameA = '';
         }
     
-
         /* Add to array */	
         if($key == (count($elements)-1)){
           $last[$elestr.$nameA]['ENTRY'] = $val;
@@ -771,8 +771,8 @@ class config  {
 
 
     /* Add base entry */
-    $ret["/"]["ENTRY"] 	= $base;
-    $ret["/"]["SUB"]	= $arr;
+    $ret['/']['ENTRY'] 	= $base;
+    $ret['/']['SUB']	= $arr;
     $this->idepartments= $this->generateDepartmentArray($ret,-1,$max_size);
   }
 
