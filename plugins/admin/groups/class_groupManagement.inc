@@ -365,7 +365,7 @@ class groupManagement extends plugin
 
           $dns_names = array();
           foreach($this->dns as $dn){
-            $dns_names[] =@LDAP::fix($dn);
+            $dns_names[] =LDAP::fix($dn);
           }
           add_lock ($this->dns, $this->ui->dn);
 
@@ -451,7 +451,7 @@ class groupManagement extends plugin
 
         /* Lock the current entry, so nobody will edit it during deletion */
         add_lock ($this->dn, $this->ui->dn);
-        $smarty->assign("info", msgPool::deleteInfo(@LDAP::fix($this->dn),_("group")));
+        $smarty->assign("info", msgPool::deleteInfo(LDAP::fix($this->dn),_("group")));
         $smarty->assign("multiple", false);
         return($smarty->fetch(get_template_path('remove.tpl', TRUE)));
 

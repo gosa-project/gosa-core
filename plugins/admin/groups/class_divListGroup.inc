@@ -213,7 +213,7 @@ class divListGroup extends MultiSelectWindow
     $ldap->search("(objectClass=gotoMenuEntry)",array("dn"));
     $configured_apps = array();
     while($entry = $ldap->fetch()){
-      $dn = preg_replace("/^.*(cn=[^,]+,".preg_quote(get_groups_ou()).")/","\\1",$entry['dn']);
+      $dn = preg_replace("/^.*(cn=[^,]+,".preg_quote(get_groups_ou(), '/').")/","\\1",$entry['dn']);
       $configured_apps[$dn] = $dn;
     }
 
@@ -258,7 +258,7 @@ class divListGroup extends MultiSelectWindow
           $appl  = $applimg;
       }
 
-      $title = "title='".preg_replace('/ /', '&nbsp;', @LDAP::fix($val['dn']))."'";
+      $title = "title='".preg_replace('/ /', '&nbsp;', LDAP::fix($val['dn']))."'";
 
       if(!isset($val['description'][0])){
         $desc = "";

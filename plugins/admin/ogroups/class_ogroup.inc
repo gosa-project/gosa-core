@@ -124,7 +124,7 @@ class ogroup extends plugin
     if ($this->dn == "new"){
       $this->base = session::get('CurrentMainBase');
     } else {
-      $this->base= preg_replace("/^[^,]+,".preg_quote(get_ou("ogroupRDN"))."/","",$this->dn);
+      $this->base= preg_replace("/^[^,]+,".preg_quote(get_ou("ogroupRDN"), '/')."/","",$this->dn);
 
       /* Is this account a trustAccount? */
       if ($this->is_account && isset($this->attrs['trustModel'])){
@@ -744,7 +744,7 @@ class ogroup extends plugin
 
       /* It has failed, add entry with type flag I (Invalid)*/
       if (!$ldap->success()){
-        $this->memberList[$dn]= array('text' => _("Non existing dn:")." ".@LDAP::fix($dn),"type" => "I");
+        $this->memberList[$dn]= array('text' => _("Non existing dn:")." ".LDAP::fix($dn),"type" => "I");
 
       } else {
 
@@ -951,7 +951,7 @@ class ogroup extends plugin
     /* Move members to target array */
     $this->attrs['member'] =array();
     foreach ($this->member as $key => $desc){
-      $this->attrs['member'][]= @LDAP::fix($key);
+      $this->attrs['member'][]= LDAP::fix($key);
     }
 
     $ldap= $this->config->get_ldap_link();

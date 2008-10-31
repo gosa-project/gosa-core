@@ -433,7 +433,7 @@ class department extends plugin
         </head>
         <body style="background: none; margin:4px;" id="body" >
         ';
-      echo "<h3>".sprintf(_("Tagging '%s'."),"<i>".@LDAP::fix($this->dn)."</i>")."</h3>";
+      echo "<h3>".sprintf(_("Tagging '%s'."),"<i>".LDAP::fix($this->dn)."</i>")."</h3>";
     }
 
     $add= $this->is_administrational_unit;
@@ -467,7 +467,7 @@ class department extends plugin
 		    }
 
 		    /* This one matches with the latter part. Break and don't fix this entry */
-		    if (preg_match('/(^|,)'.preg_quote($key).'$/', $attrs['dn'])){
+		    if (preg_match('/(^|,)'.preg_quote($key, '/').'$/', $attrs['dn'])){
 			    $fix= false;
 			    break;
 		    }
@@ -514,7 +514,7 @@ class department extends plugin
       </head>
       <body style="background: none; margin:4px;" id="body" >
       ';
-    echo "<h3>".sprintf(_("Moving '%s' to '%s'"),"<i>".@LDAP::fix($src_dn)."</i>","<i>".@LDAP::fix($dst_dn)."</i>")."</h3>";
+    echo "<h3>".sprintf(_("Moving '%s' to '%s'"),"<i>".LDAP::fix($src_dn)."</i>","<i>".LDAP::fix($dst_dn)."</i>")."</h3>";
 
 
     /* Check if the destination entry exists */
@@ -523,9 +523,9 @@ class department extends plugin
     /* Check if destination exists - abort */
     $ldap->cat($dst_dn, array('dn'));
     if ($ldap->fetch()){
-      trigger_error("Recursive_move ".@LDAP::fix($dst_dn)." already exists.",
+      trigger_error("Recursive_move ".LDAP::fix($dst_dn)." already exists.",
           E_USER_WARNING);
-      echo sprintf("Recursive_move: '%s' already exists", @LDAP::fix($dst_dn))."<br>"; 
+      echo sprintf("Recursive_move: '%s' already exists", LDAP::fix($dst_dn))."<br>"; 
       return (FALSE);
     }
 
@@ -550,12 +550,12 @@ class department extends plugin
       $dst= preg_replace("/".str_replace("\\","\\\\",$src_dn)."$/", "$dst_dn", $object);
       $dst= str_replace($src_dn,$dst_dn,$object);
 
-      echo "<b>"._("Object").":</b> ".@LDAP::fix($src)."<br>";
+      echo "<b>"._("Object").":</b> ".LDAP::fix($src)."<br>";
 
       $this->update_acls($object, $dst,TRUE);
 
       if (!$this->copy($src, $dst)){
-        echo "<font color='#FF0000'><br>".sprintf(_("FAILED to copy %s, aborting operation"),@LDAP::fix($src))."</font>";
+        echo "<font color='#FF0000'><br>".sprintf(_("FAILED to copy %s, aborting operation"),LDAP::fix($src))."</font>";
         return (FALSE);
       }
       echo "<script language=\"javascript\" type=\"text/javascript\">scrollDown2();</script>" ;
@@ -629,7 +629,7 @@ class department extends plugin
           }
 
           /* This one matches with the latter part. Break and don't fix this entry */
-          if (preg_match('/(^|,)'.preg_quote($key).'$/', $dn)){
+          if (preg_match('/(^|,)'.preg_quote($key, '/').'$/', $dn)){
             @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "DEBUG: Possibly relevant: $key", "Tagging");
             $relevant[strlen($key)]= $ntag;
             continue;
@@ -656,14 +656,14 @@ class department extends plugin
       $attrs= $ldap->fetch();
       if(isset($attrs['gosaUnitTag'][0]) && $attrs['gosaUnitTag'][0] == $tag){
         if ($show) {
-          echo sprintf(_("Object '%s' is already tagged"), @LDAP::fix($dn))."<br>";
+          echo sprintf(_("Object '%s' is already tagged"), LDAP::fix($dn))."<br>";
           flush();
         }
         return;
       }
       if (count($attrs)){
         if ($show){
-          echo sprintf(_("Adding tag (%s) to object '%s'"), $tag, @LDAP::fix($dn))."<br>";
+          echo sprintf(_("Adding tag (%s) to object '%s'"), $tag, LDAP::fix($dn))."<br>";
           flush();
         }
         $nattrs= array("gosaUnitTag" => $tag);
@@ -695,7 +695,7 @@ class department extends plugin
       }
       if (count($attrs)){
         if ($show){
-          echo sprintf(_("Removing tag from object '%s'"), @LDAP::fix($dn))."<br>";
+          echo sprintf(_("Removing tag from object '%s'"), LDAP::fix($dn))."<br>";
           flush();
         }
         $nattrs= array("gosaUnitTag" => array());

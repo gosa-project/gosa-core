@@ -170,7 +170,7 @@ class divListDepartment extends MultiSelectWindow
 
       /* Create title
        */
-      $title = @LDAP::fix($val['dn']);
+      $title = LDAP::fix($val['dn']);
 
       /* Create checkboxes infront of the entry 
        */

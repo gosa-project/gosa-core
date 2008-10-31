@@ -870,7 +870,7 @@ function get_sub_list($filter, $category,$sub_deps, $base= "", $attributes= arra
        *  departments like this "ou=servers,ou=blafasel,..."
        * Here we filter out those blafasel departments.
        */
-      if(preg_match("/".preg_quote($sub_dep)."/",$attrs['dn'])){
+      if(preg_match("/".preg_quote($sub_dep, '/')."/",$attrs['dn'])){
         $departments[$attrs['dn']] = $attrs['dn'];
         break;
       }
@@ -1124,7 +1124,7 @@ function convert_department_dn($dn, $base = NULL)
 
   /* Build a sub-directory style list of the tree level
      specified in $dn */
-  $dn = preg_replace("/".preg_quote($base)."$/i","",$dn);
+  $dn = preg_replace("/".preg_quote($base, '/')."$/i","",$dn);
   if(empty($dn)) return("/");
 
 
@@ -1142,7 +1142,7 @@ function convert_department_dn($dn, $base = NULL)
  * style value. It removes the trailing '/', too. */
 function get_sub_department($value)
 {
-  return (@LDAP::fix(preg_replace("%^.*/([^/]+)/?$%", "\\1", $value)));
+  return (LDAP::fix(preg_replace("%^.*/([^/]+)/?$%", "\\1", $value)));
 }
 
 
@@ -1201,7 +1201,7 @@ function get_ou($name)
       $ou = @LDAP::convert("$ou");
     }
 
-    if(preg_match("/".preg_quote($config->current['BASE'])."$/",$ou)){
+    if(preg_match("/".preg_quote($config->current['BASE'], '/')."$/",$ou)){
       return($ou);
     }else{
       return("$ou,");
@@ -1235,7 +1235,7 @@ function get_base_from_people($dn)
 {
   global $config;
 
-  $pattern= "/^[^,]+,".preg_quote(get_people_ou())."/i";
+  $pattern= "/^[^,]+,".preg_quote(get_people_ou(), '/')."/i";
   $base= preg_replace($pattern, '', $dn);
 
   /* Set to base, if we're not on a correct subtree */

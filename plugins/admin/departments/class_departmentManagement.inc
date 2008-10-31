@@ -206,7 +206,7 @@ class departmentManagement extends plugin
 
         $dns_names = array();
         foreach($this->dns as $dn){
-          $dns_names[] = @LDAP::fix($dn);
+          $dns_names[] = LDAP::fix($dn);
         }
         add_lock ($this->dns, $this->ui->dn);
 

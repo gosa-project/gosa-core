@@ -486,7 +486,7 @@ class userManagement extends plugin
           if ($ldap->count() != 0){
             while ($attrs= $ldap->fetch()){
               $this->templates[$ldap->getDN()]=
-                $attrs['uid'][0]." - ".@LDAP::fix($key);
+                $attrs['uid'][0]." - ".LDAP::fix($key);
             }
             if ($s_action != "templatize_multiple"){
               $this->templates['none']= _("none");
@@ -592,7 +592,7 @@ class userManagement extends plugin
 
           $dns_names = array();
           foreach($this->dns as $dn){
-            $dns_names[] = @LDAP::fix($dn);
+            $dns_names[] = LDAP::fix($dn);
           }
 
           add_lock($this->dns, $this->ui->dn);
@@ -921,7 +921,7 @@ class userManagement extends plugin
       $this->usertab->givenName = $this->givenName;
       $template_dn              = $_POST['template'];
       $this->usertab->adapt_from_template($template_dn);
-      $template_base            = preg_replace("/^[^,]+,".preg_quote(get_people_ou())."/", '', $template_dn);
+      $template_base            = preg_replace("/^[^,]+,".preg_quote(get_people_ou(), '/')."/", '', $template_dn);
       $this->usertab->by_object['user']->base= $template_base;
     }
    
@@ -1059,7 +1059,7 @@ class userManagement extends plugin
       /* Skip entries that are not located under the people ou (normaly 'ou=people,')
        * Else winstations will be listed too, if you use the subtree flag. 
        */
-      if(!preg_match("/".preg_quote(get_people_ou())."/i",$Entry['dn'])){
+      if(!preg_match("/".preg_quote(get_people_ou(), '/')."/i",$Entry['dn'])){
         continue;
       }else{
 

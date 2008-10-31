@@ -740,7 +740,7 @@ class config  {
 
       /* Split dn into single department pieces.
        */
-      $elements = array_reverse(split(",",preg_replace("/".preg_quote($base)."$/","",$val))); 		
+      $elements = array_reverse(split(",",preg_replace("/".preg_quote($base, '/')."$/","",$val))); 		
 
       /* Add last ou element of current dn to our array */
       $last = &$arr;
@@ -794,7 +794,7 @@ class config  {
       }
 
       /* Fix name, if it contains a replace tag */
-      $name= preg_replace('/\\\\,/', ',', @LDAP::fix($name));
+      $name= preg_replace('/\\\\,/', ',', LDAP::fix($name));
 
       /* Check if current name is too long, then cut it */
       if(mb_strlen($name, 'UTF-8')> $max_size){

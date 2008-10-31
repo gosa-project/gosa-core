@@ -791,7 +791,7 @@ class plugin
     }
 
     $r=ldap_bind($ds,$this->config->current['ADMINDN'], $this->config->current['ADMINPASSWORD']);
-    $sr=ldap_read($ds, @LDAP::fix($src_dn), "objectClass=*");
+    $sr=ldap_read($ds, LDAP::fix($src_dn), "objectClass=*");
 
     /* Fill data from LDAP */
     $new= array();
@@ -818,7 +818,7 @@ class plugin
     /* Adapt naming attribute */
     $dst_name= preg_replace("/^([^=]+)=.*$/", "\\1", $dst_dn);
     $dst_val = preg_replace("/^[^=]+=([^,+]+).*,.*$/", "\\1", $dst_dn);
-    $new[$dst_name]= @LDAP::fix($dst_val);
+    $new[$dst_name]= LDAP::fix($dst_val);
 
     /* Check if this is a department.
      * If it is a dep. && there is a , override in his ou 
@@ -869,7 +869,7 @@ class plugin
     $ldap->cat($dst_dn);
     $attrs= $ldap->fetch();
     if (count($attrs)){
-      trigger_error("Trying to overwrite ".@LDAP::fix($dst_dn).", which already exists.",
+      trigger_error("Trying to overwrite ".LDAP::fix($dst_dn).", which already exists.",
           E_USER_WARNING);
       return (FALSE);
     }
@@ -877,7 +877,7 @@ class plugin
     $ldap->cat($src_dn);
     $attrs= $ldap->fetch();
     if (!count($attrs)){
-      trigger_error("Trying to move ".@LDAP::fix($src_dn).", which does not seem to exist.",
+      trigger_error("Trying to move ".LDAP::fix($src_dn).", which does not seem to exist.",
           E_USER_WARNING);
       return (FALSE);
     }
@@ -886,7 +886,7 @@ class plugin
     $ldap->search("objectClass=*",array("dn"));
     while($attrs = $ldap->fetch()){
       $src = $attrs['dn'];
-      $dst = preg_replace("/".preg_quote($src_dn)."$/",$dst_dn,$attrs['dn']);
+      $dst = preg_replace("/".preg_quote($src_dn, '/')."$/",$dst_dn,$attrs['dn']);
       $this->_copy($src,$dst);
     }
     return (TRUE);
@@ -933,14 +933,14 @@ class plugin
     /* Updated acls set for this groups */
     foreach($leaf_groups as $group){
       $new_dn = $group['dn'];
-      $old_dn = preg_replace("/".preg_quote($dst_dn)."$/i",$src_dn,$new_dn);
+      $old_dn = preg_replace("/".preg_quote($dst_dn, '/')."$/i",$src_dn,$new_dn);
       $this->update_acls($old_dn,$new_dn); 
     }
 
     /* Updated acls set for this users */
     foreach($leaf_users as $user){
       $new_dn = $user['dn'];
-      $old_dn = preg_replace("/".preg_quote($dst_dn)."$/i",$src_dn,$new_dn);
+      $old_dn = preg_replace("/".preg_quote($dst_dn, '/')."$/i",$src_dn,$new_dn);
       $this->update_acls($old_dn,$new_dn); 
     }
 
@@ -965,9 +965,9 @@ class plugin
 
           $c_mem = $ogroup['member'][$i];
   
-          if(preg_match("/".preg_quote($src_dn)."$/i",$c_mem)){
+          if(preg_match("/".preg_quote($src_dn, '/')."$/i",$c_mem)){
  
-            $d_mem = preg_replace("/".preg_quote($src_dn)."$/i",$dst_dn,$ogroup['member'][$i]);
+            $d_mem = preg_replace("/".preg_quote($src_dn, '/')."$/i",$dst_dn,$ogroup['member'][$i]);
 
             if($o_ogroup == NULL){
               $o_ogroup = new ogroup($this->config,$ogroup['dn']);
@@ -1158,7 +1158,7 @@ class plugin
           }
 
           /* This one matches with the latter part. Break and don't fix this entry */
-          if (preg_match('/(^|,)'.preg_quote($key).'$/', $dn)){
+          if (preg_match('/(^|,)'.preg_quote($key, '/').'$/', $dn)){
             @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, "DEBUG: Possibly relevant: $key", "Tagging");
             $relevant[strlen($key)]= $ntag;
             continue;
@@ -1256,7 +1256,7 @@ class plugin
       $base           = $this->config->current['BASE'];
       $snap_base      = $config->get_cfg_value("snapshotBase");
       $base_of_object = preg_replace ('/^[^,]+,/i', '', $this->dn);
-      $new_base       = preg_replace("/".preg_quote($base)."$/","",$base_of_object).$snap_base;
+      $new_base       = preg_replace("/".preg_quote($base, '/')."$/","",$base_of_object).$snap_base;
 
       /* Create object */
 #$data             = preg_replace('/^dn:.*\n/', '', $ldap->gen_ldif($this->dn,"(!(objectClass=gosaDepartment))"));
@@ -1374,7 +1374,7 @@ class plugin
     $base           = $this->config->current['BASE'];
     $snap_base      = $this->config->get_cfg_value("snapshotBase");
     $base_of_object = preg_replace ('/^[^,]+,/i', '', $dn);
-    $new_base       = preg_replace("/".preg_quote($base)."$/","",$base_of_object).$snap_base;
+    $new_base       = preg_replace("/".preg_quote($base, '/')."$/","",$base_of_object).$snap_base;
     $tmp            = array(); 
 
     /* Fetch all objects with  gosaSnapshotDN=$dn */
@@ -1431,7 +1431,7 @@ class plugin
     /* Prepare bases */ 
     $base           = $this->config->current['BASE'];
     $snap_base      = $this->config->get_cfg_value("snapshotBase");
-    $new_base       = preg_replace("/".preg_quote($base)."$/","",$base_of_object).$snap_base;
+    $new_base       = preg_replace("/".preg_quote($base, '/')."$/","",$base_of_object).$snap_base;
 
     /* Fetch all objects and check if they do not exist anymore */
     $ui = get_userinfo();

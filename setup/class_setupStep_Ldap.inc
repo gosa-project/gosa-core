@@ -131,7 +131,7 @@ class Step_Ldap extends setup_step
     $ldap->search("(&(objectClass=person)(|(uid=".$filter.")(cn=".$filter.")))");
     $tmp = array();
     while($attrs = $ldap->fetch()){
-      $tmp[base64_encode($attrs['dn'])]= @LDAP::fix($attrs['dn']);
+      $tmp[base64_encode($attrs['dn'])]= LDAP::fix($attrs['dn']);
       natcasesort($tmp);
     }
     return($tmp);
