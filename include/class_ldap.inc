@@ -90,11 +90,9 @@ class LDAP{
       /   => SL                                                                  */
   static function convert($dn)
   {
-    if (SPECIALS_OVERRIDE == TRUE){
-      $tmp= preg_replace(array("/\\\\,/", "/\\\\2C/", "/\(/", "/\)/", "/\//"),
-                           array("\001CO", "\001CO", "\001OB", "\001CB", "\001SL"),
-                           $dn);
-      return (preg_replace('/,\s+/', ',', $tmp));
+    if (SPECIALS_OVERRIDE === TRUE){
+      return preg_replace('/,\s+/', ',', str_replace(array('\\\\,', '\\\\2C', '\(/', '/\)', '\/'),
+                           array("\001CO", "\001CO", "\001OB", "\001CB", "\001SL"), $dn));
     } else {
       return ($dn);
     }
@@ -107,10 +105,9 @@ class LDAP{
      servers seem to take it the correct way.                                  */
   static function fix($dn)
   {
-    if (SPECIALS_OVERRIDE == TRUE){
-      return (preg_replace(array("/\001CO/", "/\001OB/", "/\001CB/", "/\001SL/"),
-                           array("\,", "(", ")", "/"),
-                           $dn));
+    if (SPECIALS_OVERRIDE === TRUE){
+      return (str_replace(array('\001CO', '\001OB', '\001CB', '\001SL'),
+                           array('\,', '(', ')', '/'), $dn));
     } else {
       return ($dn);
     }
