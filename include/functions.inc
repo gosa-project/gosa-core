@@ -1345,7 +1345,7 @@ function rewrite($s)
   global $REWRITE;
 
   foreach ($REWRITE as $key => $val){
-    $s= preg_replace("/$key/", "$val", $s);
+    $s= str_replace("$key", "$val", $s);
   }
 
   return ($s);
@@ -1596,7 +1596,7 @@ function recurse($rule, $variables)
   unset ($variables[$key]);
 
   foreach($val as $possibility){
-    $nrule= preg_replace("/\{$key\}/", $possibility, $rule);
+    $nrule= str_replace("{$key}", $possibility, $rule);
     $result= array_merge($result, recurse($nrule, $variables));
   }
 
@@ -1614,7 +1614,7 @@ function expand_id($rule, $attributes)
   /* Check for clean attribute */
   if (preg_match('/^%[a-zA-Z0-9]+$/', $rule)){
     $rule= preg_replace('/^%/', '', $rule);
-    $val= rewrite(preg_replace('/ /', '', strtolower($attributes[$rule])));
+    $val= rewrite(str_replace(' ', '', strtolower($attributes[$rule])));
     return (array($val));
   }
 
@@ -1622,7 +1622,7 @@ function expand_id($rule, $attributes)
   if (preg_match('/^%[a-zA-Z0-9]+\[[0-9-]+\]$/', $rule)){
     $param= preg_replace('/^[^[]+\[([^]]+)]$/', '\\1', $rule);
     $part= preg_replace('/^%/', '', preg_replace('/\[.*$/', '', $rule));
-    $val= rewrite(preg_replace('/ /', '', strtolower($attributes[$part])));
+    $val= rewrite(str_replace(' ', '', strtolower($attributes[$part])));
     $start= preg_replace ('/-.*$/', '', $param);
     $stop = preg_replace ('/^[^-]+-/', '', $param);
 
@@ -1792,7 +1792,7 @@ function generate_alphabet($count= 10)
 
 function validate($string)
 {
-  return (strip_tags(preg_replace('/\0/', '', $string)));
+  return (strip_tags(str_replace('\0', '', $string)));
 }
 
 
