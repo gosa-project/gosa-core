@@ -36,7 +36,7 @@ GOsa2 changelog
     allow site wide defaults
   - Automatic configuration reloading
   - Vietnamese translation
-  - New manageable objects: country, locality, organization and dcObject.
+  - New manageable objects country, locality, organization and dcObject
 
 * gosa 2.5.16
   - Fixed problem with undefined ridbase in domain objects
