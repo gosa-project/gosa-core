@@ -258,8 +258,7 @@ function remove_unwanted_tags($str,$replacements)
 function linkwrapper($str,$link)
 {
   $str = preg_replace("/HREF=\"http/i","target=\"_blank\" href=\"http",$str);
-  $str = preg_replace("/HREF=\"/","href=\"".$link."?pg=",$str);
-  $str=str_replace("HREF=\"","href=\"".$link."?pg=",$str);  
+  $str = str_replace("HREF=\"","href=\"".$link."?pg=",$str);  
   return($str);
 }
 

@@ -632,7 +632,7 @@ class plugin
       /* Additional attributes */
       foreach ($tmp as $name => $len){
         $value = $add_attrs[$name];
-        $command= preg_replace("/%$name/", "$value", $command);
+        $command= str_replace("%$name", "$value", $command);
       }
 
       if (check_command($command)){
@@ -674,7 +674,7 @@ class plugin
       /* Additional attributes */
       foreach ($tmp as $name => $len){
         $value = $add_attrs[$name];
-        $command= preg_replace("/%$name/", "$value", $command);
+        $command= str_replace("%$name", "$value", $command);
       }
 
       if (check_command($command)){
@@ -714,7 +714,7 @@ class plugin
       /* Additional attributes */
       foreach ($tmp as $name => $len){
         $value = $add_attrs[$name];
-        $command= preg_replace("/%$name/", "$value", $command);
+        $command= str_replace("%$name", "$value", $command);
       }
 
       if (check_command($command)){
@@ -827,7 +827,7 @@ class plugin
      *  change \2C to , again, else this entry can't be saved ...
      */
     if((isset($new['ou'])) &&( preg_match("/\\,/",$new['ou']))){
-      $new['ou'] = preg_replace("/\\\\,/",",",$new['ou']);
+      $new['ou'] = str_replace("\\\\,",",",$new['ou']);
     }
 
     /* Save copy */
@@ -1263,7 +1263,7 @@ class plugin
       /* Create object */
 #$data             = preg_replace('/^dn:.*\n/', '', $ldap->gen_ldif($this->dn,"(!(objectClass=gosaDepartment))"));
       $data             = $ldap->gen_ldif($this->dn,"(&(!(objectClass=gosaDepartment))(!(objectClass=FAIclass)))");
-      $newName          = preg_replace("/\./", "", $sec."-".$usec);
+      $newName          = str_replace(".", "", $sec."-".$usec);
       $target= array();
       $target['objectClass']            = array("top", "gosaSnapshotObject");
       $target['gosaSnapshotData']       = gzcompress($data, 6);
@@ -1280,7 +1280,7 @@ class plugin
       $ldap_to->cat($new_dn);
       while($ldap_to->count()){
         $ldap_to->cat($new_dn);
-        $newName = preg_replace("/\./", "", $sec."-".($usec++));
+        $newName = str_replace(".", "", $sec."-".($usec++));
         $new_dn                           = "gosaSnapshotTimestamp=".$newName.",".$new_base;
         $target['gosaSnapshotTimestamp']  = $newName;
       } 
@@ -1519,12 +1519,12 @@ class plugin
     $this->parent = $parent;
 
     foreach($_POST as $name => $value){
+			$entry = base64_decode(preg_replace("/_[xy]$/","",$name));
 
       /* Create a new snapshot, display a dialog */
       if(preg_match("/^CreateSnapShotDialog_/",$name) && $once){
         $once = false;
-        $entry = preg_replace("/^CreateSnapShotDialog_/","",$name);
-        $entry = base64_decode(preg_replace("/_[xy]$/","",$entry));
+        $entry = preg_replace("/^CreateSnapShotDialog_/","",$entry);
 
         if(!empty($entry) && $ui->allow_snapshot_create($entry,$this->parent->acl_module)){
           $this->snapDialog = new SnapShotDialog($this->config,$entry,$this);
@@ -1536,8 +1536,7 @@ class plugin
       /* Restore a snapshot, display a dialog with all snapshots of the current object */
       if(preg_match("/^RestoreSnapShotDialog_/",$name) && $once){
         $once = false;
-        $entry = preg_replace("/^RestoreSnapShotDialog_/","",$name);
-        $entry = base64_decode(preg_replace("/_[xy]$/","",$entry));
+        $entry = preg_replace("/^RestoreSnapShotDialog_/","",$entry);
         if(!empty($entry) && $ui->allow_snapshot_restore($entry,$this->parent->acl_module)){
           $this->snapDialog = new SnapShotDialog($this->config,$entry,$this);
           $this->snapDialog->display_restore_dialog = true;
@@ -1564,8 +1563,7 @@ class plugin
       /* Restore selected snapshot */
       if(preg_match("/^RestoreSnapShot_/",$name) && $once){
         $once = false;
-        $entry = preg_replace("/^RestoreSnapShot_/","",$name);
-        $entry = base64_decode(trim(preg_replace("/_[xy]$/","",$entry)));
+        $entry = preg_replace("/^RestoreSnapShot_/","",$entry);
         if(!empty($entry) && $ui->allow_snapshot_restore($entry,$this->parent->acl_module)){
           $this->restore_snapshot($entry);
           $this->snapDialog = NULL;

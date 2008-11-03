@@ -118,7 +118,7 @@ class LDAP{
      requests. I.e. member=....                                               */
   static function prepare4filter($dn)
   {
-	return normalizeLdap(preg_replace('/\\\\/', '\\\\\\', LDAP::fix($dn)));
+	return normalizeLdap(str_replace('\\\\', '\\\\\\', LDAP::fix($dn)));
   }
 
 
