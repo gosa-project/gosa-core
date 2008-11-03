@@ -208,7 +208,7 @@ class tabs
       }
 
       /* nobr causes w3c warnings so we use &nbsp; to keep the tab name in one line */
-      $title= preg_replace("/ /","&nbsp;",$title);
+      $title= str_replace(" ","&nbsp;",$title);
 
       /* Take care about notifications */
       $obj = $this->by_object[$class];
