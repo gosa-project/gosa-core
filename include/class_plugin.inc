@@ -193,7 +193,7 @@ class plugin
         if (preg_match('/top/i', $obj)){
           continue;
         }
-        if (!isset($this->attrs['objectClass']) || !in_array_ics ($obj, $this->attrs['objectClass'])){
+        if (!in_array_ics ($obj, $this->attrs['objectClass'])){
           $found= FALSE;
           break;
         }
@@ -207,11 +207,12 @@ class plugin
       /* Prepare saved attributes */
       $this->saved_attributes= $this->attrs;
       foreach ($this->saved_attributes as $index => $value){
-        if (preg_match('/^[0-9]+$/', $index)){
+        if (is_numeric($index)){
           unset($this->saved_attributes[$index]);
           continue;
         }
-        if (!in_array($index, $this->attributes) && $index != "objectClass"){
+
+        if (!in_array_ics($index, $this->attributes) && strcasecmp('objectClass', $index)){
           unset($this->saved_attributes[$index]);
           continue;
         }
@@ -229,6 +230,7 @@ class plugin
         }
         unset($this->saved_attributes["$index"]["count"]);
       }
+
       if(isset($this->attrs['gosaUnitTag'])){
         $this->saved_attributes['gosaUnitTag'] = $this->attrs['gosaUnitTag'][0];
       }

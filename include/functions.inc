@@ -281,31 +281,14 @@ function get_template_path($filename= '', $plugin= FALSE, $path= "")
 
 function array_remove_entries($needles, $haystack)
 {
-  $tmp= array();
-
-  /* Loop through entries to be removed */
-  foreach ($haystack as $entry){
-    if (!in_array($entry, $needles)){
-      $tmp[]= $entry;
-    }
-  }
-
-  return ($tmp);
+  return (array_merge(array_diff($haystack, $needles)));
 }
 
 
 function array_remove_entries_ics($needles, $haystack)
 {
-  $tmp= array();
-
-  /* Loop through entries to be removed */
-  foreach ($haystack as $entry){
-    if (!in_array_ics($entry, $needles)){
-      $tmp[]= $entry;
-    }
-  }
-
-  return ($tmp);
+  // strcasecmp will work, because we only compare ASCII values here
+  return (array_merge(array_udiff($haystack, $needles, 'strcasecmp')));
 }
 
 
@@ -1720,27 +1703,27 @@ function gen_uids($rule, $attributes)
       }
     }
 
-  if(preg_match('/\{id#\d+}/',$uid)){
-    $size= preg_replace('/^.*{id#(\d+)}.*$/', '\\1', $uid);
+    if(preg_match('/\{id#\d+}/',$uid)){
+      $size= preg_replace('/^.*{id#(\d+)}.*$/', '\\1', $uid);
 
-    while (true){
-      mt_srand((double) microtime()*1000000);
-      $number= sprintf("%0".$size."d", mt_rand(0, pow(10, $size)-1));
-      $res= preg_replace('/{id#(\d+)}/', $number, $uid);
-      if (!in_array($res, $used)){
-        $uid= $res;
-        break;
+      while (true){
+        mt_srand((double) microtime()*1000000);
+        $number= sprintf("%0".$size."d", mt_rand(0, pow(10, $size)-1));
+        $res= preg_replace('/{id#(\d+)}/', $number, $uid);
+        if (!in_array($res, $used)){
+          $uid= $res;
+          break;
+        }
       }
+    }
+
+    /* Don't assign used ones */
+    if (!in_array($uid, $used)){
+      $ret[]= $uid;
     }
   }
 
-/* Don't assign used ones */
-if (!in_array($uid, $used)){
-  $ret[]= $uid;
-}
-}
-
-return(array_unique($ret));
+  return(array_unique($ret));
 }
 
 
@@ -2006,17 +1989,13 @@ function progressbar($percentage,$width=100,$height=15,$showvalue=false)
 
 function array_key_ics($ikey, $items)
 {
-  /* Gather keys, make them lowercase */
-  $tmp= array();
-  foreach ($items as $key => $value){
-    $tmp[strtolower($key)]= $key;
+  $tmp= array_change_key_case($itmes, CASE_LOWER);
+  $ikey= strtolower($ikey);
+  if (isset($tmp[$ikey])){
+    return($tmp[$ikey]);
   }
 
-  if (isset($tmp[strtolower($ikey)])){
-    return($tmp[strtolower($ikey)]);
-  }
-
-  return ("");
+  return ('');
 }
 
 
@@ -2027,15 +2006,7 @@ function array_differs($src, $dst)
     return (TRUE);
   }
 
-  /* So the count is the same - lets check the contents */
-  $differs= FALSE;
-  foreach($src as $value){
-    if (!in_array($value, $dst)){
-      $differs= TRUE;
-    }
-  }
-
-  return ($differs);
+  return (count(array_diff($src, $dst)) == 0);
 }
 
 
