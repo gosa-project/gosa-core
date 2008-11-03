@@ -1183,9 +1183,9 @@ class phoneAccount extends plugin
           if(isset($_POST['post_success'])){
             if($this->macroarray[$this->macro][$key]['type']=="bool"){
               if(isset($_POST[$this->macroarray[$this->macro][$key]['var']])) {
-                $this->macroarray[$this->macro][$key]['choosen']=$_POST[$paras['var']];
+                $this->macroarray[$this->macro][$key]['choosen']='1';
               }else{
-                $this->macroarray[$this->macro][$key]['choosen']=false;
+                $this->macroarray[$this->macro][$key]['choosen']='0';
               }
             }
           }
