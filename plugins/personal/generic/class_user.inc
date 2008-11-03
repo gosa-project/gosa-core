@@ -816,6 +816,20 @@ class user extends plugin
         }
       }
 
+      if($this->pw_storage != $this->last_pw_storage && isset($_POST['pw_storage'])){
+        if ($this->acl_is_writeable("userPassword")){
+          $temp= passwordMethod::get_available_methods();
+          if (!is_object($this->pwObject) || !($this->pwObject instanceOf $temp[$this->pw_storage])){
+            foreach($temp as $id => $data){
+              if(isset($data['name']) && $data['name'] == $this->pw_storage && $data['is_configurable']){
+                $this->pwObject= new $temp[$this->pw_storage]($this->config,$this->dn);
+                break;
+              }
+            }
+          }
+        }
+      }
+
       /* Save current cn
        */
       $this->cn = $this->givenName." ".$this->sn;
