@@ -550,7 +550,7 @@ class userinfo
     foreach(str_split($newACL) as $char){
 
       /* Skip permanent and subtree entries */
-      if (preg_match('/[sp]/', $acl[$char])){
+      if (!isset($acl[$char]) || preg_match('/[sp]/', $acl[$char])){
         continue;
       }
 
