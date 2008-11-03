@@ -299,7 +299,7 @@ class userinfo
     if (isset($ACL_CACHE["$dn+$object+$attribute"])){
       $ret = $ACL_CACHE["$dn+$object+$attribute"];
       if($skip_write){
-        $ret = preg_replace('/w/', '',$ret);
+        $ret = str_replace('w', '',$ret);
       }
       return($ret);
     }
@@ -329,7 +329,7 @@ class userinfo
           $ACL_CACHE["$orig_dn+$object+$attribute"] = $ACL_CACHE["$dn+$object+$attribute"];
         }
         if($skip_write){
-          $ret = preg_replace('/w/','',$ret);
+          $ret = str_replace('w','',$ret);
         }
         return($ret);
       }
@@ -456,7 +456,7 @@ class userinfo
 
     /* Remove write if needed */
     if ($skip_write){
-      $ret= preg_replace('/w/', '', $ret);
+      $ret= str_replace('w', '', $ret);
     }
     return ($ret);
   }

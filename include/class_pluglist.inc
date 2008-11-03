@@ -42,15 +42,15 @@ class pluglist {
 		/* Create dirlist for all plugins */
 		$this->dirlist= $this->get_plugins ($this->dirlist, $this->config->data['MENU']);
 
-                /* Fill info part of pluglist */
-                $classes= get_declared_classes();
+		/* Fill info part of pluglist */
+		$classes= get_declared_classes();
 
-				foreach ($classes as $cname){
-					$cmethods = get_class_methods($cname);
-					if (in_array_ics('plInfo',$cmethods)){
-						$this->info[$cname]= call_user_func(array($cname, 'plInfo'));
-					}
-				}
+		foreach ($classes as $cname){
+			$cmethods = get_class_methods($cname);
+			if (in_array_ics('plInfo',$cmethods)){
+				$this->info[$cname]= call_user_func(array($cname, 'plInfo'));
+			}
+		}
 
 		/* Provide field for 'all' */
 		$this->info['all']= array();
@@ -61,9 +61,8 @@ class pluglist {
 
 	function get_plugins($list, &$config)
 	{
-                global $class_mapping;
+		global $class_mapping;
 
-		/* Error reporting, because I'm getting strange messages in PHP 4.2.x */
 		if (!isset($config['CLASS'])){
 			if (is_array($config)){
 				foreach ($config as $val){
@@ -71,7 +70,7 @@ class pluglist {
 				}
 			}
 		} else {
-                        if (is_array($config) && isset($class_mapping[$config['CLASS']])){
+			if (is_array($config) && isset($class_mapping[$config['CLASS']])){
 				$list[$this->index++]= dirname($class_mapping[$config['CLASS']]);
 			} else {
 				$list[$this->index++]= "";
@@ -108,8 +107,7 @@ class pluglist {
       $acl_to_check = trim($acl_to_check);
 		
 			/* Check if the given acl tag is only valid for self acl entries  
-                 <plugin acl="users/user:self" class="user"...
-             */	
+                 <plugin acl="users/user:self" class="user"...  */	
 			if(preg_match("/:self$/",$acl_to_check)){
 				$acl_to_check = preg_replace("/:self$/","",$acl_to_check);	
 				if($this->ui->get_permissions($this->ui->dn,$acl_to_check,"") != ""){
@@ -120,8 +118,7 @@ class pluglist {
 				return(FALSE);
 			}else{
 		
-				/* No self acls. Check if we have any acls for the given ACL type 
-                 */
+				/* No self acls. Check if we have any acls for the given ACL type */
 				$deps = $this->ui->get_module_departments($acl_to_check,TRUE);
 				if(count($deps)){
 					$this->silly_cache[$aclname]= TRUE;
