@@ -1383,6 +1383,17 @@ class user extends plugin
   {
     plugin::adapt_from_template($dn, $skip);
 
+    /* Get password method from template 
+     */
+    $tmp= passwordMethod::get_method($this->attrs['userPassword'][0]);
+    if(is_object($tmp)){
+      if($tmp->is_configurable()){
+        $tmp->adapt_from_template($dn);
+        $this->pwObject = &$tmp;
+      }
+      $this->pw_storage= $tmp->get_hash();
+    }
+
     /* Get base */
     $this->base= preg_replace('/^[^,]+,'.get_people_ou().'/i', '', $dn);
 

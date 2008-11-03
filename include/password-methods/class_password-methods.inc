@@ -190,6 +190,10 @@ class passwordMethod
     return $this->hash;
   }
 
+  function adapt_from_template($dn)
+  {
+    return($this);
+  }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
