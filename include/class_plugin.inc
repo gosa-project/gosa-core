@@ -193,7 +193,7 @@ class plugin
         if (preg_match('/top/i', $obj)){
           continue;
         }
-        if (!in_array_ics ($obj, $this->attrs['objectClass'])){
+        if (!isset($this->attrs['objectClass']) || !in_array_ics ($obj, $this->attrs['objectClass'])){
           $found= FALSE;
           break;
         }
