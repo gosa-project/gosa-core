@@ -1491,7 +1491,7 @@ class gosaSupportDaemon
    */
   public function krb5_get_policy($server,$name)
   {
-    $res = array();  
+    $ret = array();  
 
     /* Check if the given name is a valid request value 
      */
