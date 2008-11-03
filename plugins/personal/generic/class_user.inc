@@ -1049,7 +1049,14 @@ class user extends plugin
 
     /* Set password to some junk stuff in case of templates */
     if ($this->is_template){
-      $this->attrs['userPassword']= '{crypt}N0T$3T4N0W';
+      $temp= passwordMethod::get_available_methods();
+      foreach($temp as $id => $data){
+        if(isset($data['name']) && $data['name'] == $this->pw_storage){
+          $tmp = new  $temp[$this->pw_storage]($this->config,$this->dn);
+          $this->attrs['userPassword'] = $tmp->create_template_hash($this->attrs);
+          break;
+        }
+      }
     }
 
     @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__,
