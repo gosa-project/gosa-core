@@ -585,16 +585,13 @@ class config  {
       }
     }
 
-    /* Ldap Server */
+    /* Ldap Server 
+     */
     $this->data['SERVERS']['LDAP']= array();
     $ldap->cd ($this->current['BASE']);
-    $ldap->search ("(objectClass=goLdapServer)");
+    $ldap->search ("(&(objectClass=goLdapServer)(goLdapBase=*))");
     while ($attrs= $ldap->fetch()){
-      if (isset($attrs["goLdapBase"])){
-        for ($i= 0; $i<$attrs["goLdapBase"]["count"]; $i++){
-          $this->data['SERVERS']['LDAP'][]= $attrs["cn"][0].":".$attrs["goLdapBase"][$i];
-        }
-      }
+      $this->data['SERVERS']['LDAP'][$attrs['dn']] = $attrs;
     }
 
     /* Get misc server lists */
