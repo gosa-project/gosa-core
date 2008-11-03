@@ -215,7 +215,7 @@ class gosaSupportDaemon
         $ret .= $msg." ";
       }
     }
-    $ret = preg_replace("/ /","&nbsp;",$ret);
+    $ret = str_replace(" ","&nbsp;",$ret);
     return($ret);
   }
 

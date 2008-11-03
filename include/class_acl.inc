@@ -140,7 +140,8 @@ class acl extends plugin
       foreach ($this->parent->by_object as $key => $obj){
         $oc= array_merge($oc, $obj->objectclasses);
         if(isset($obj->acl_category)){
-          $cats[preg_replace("/\//","",$obj->acl_category)] = preg_replace("/\//","",$obj->acl_category);
+					$tmp= str_replace("/","",$obj->acl_category);
+          $cats[$tmp] = $tmp;
         }
       }
       if (in_array_ics('organizationalUnit', $oc)){
@@ -267,8 +268,7 @@ class acl extends plugin
         continue;
       }
 
-      /* Only handle posts, if we allowed to modify ACLs 
-       */
+      /* Only handle posts, if we allowed to modify ACLs */
       if(!$this->acl_is_writeable("")){
         continue;
       }
@@ -720,20 +720,21 @@ class acl extends plugin
       }
 
       /* Object header */
+			$tname= preg_replace("/[^a-z0-9]/i","_",$name);
       if(session::get('js')) {
         if(isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) {
           $display.= "\n<table style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>".
                      "\n  <tr>".
                      "\n    <td style='background-color:#C8C8C8;height:1.8em;' colspan=".($cols-1)."><b>"._("Object").": $name</b></td>".
                      "\n    <td align='right' style='background-color:#C8C8C8;height:1.8em;'>".
-                     "\n    <input type='button' onclick='divtoggle(\"".preg_replace("/[^a-z0-9]/i","_",$name)."\");' value='"._("Show/hide advanced settings")."' /></td>".
+                     "\n    <input type='button' onclick='divtoggle(\"$tname\");' value='"._("Show/hide advanced settings")."' /></td>".
                      "\n  </tr>";
         } else if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/ie/i",$_SERVER['HTTP_USER_AGENT'])) {
           $display.= "\n<table style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>".
                      "\n  <tr>".
                      "\n    <td style='background-color:#C8C8C8;height:1.8em;' colspan=".($cols-1)."><b>"._("Object").": $name</b></td>".
                      "\n    <td align='right' style='background-color:#C8C8C8;height:1.8em;'>".
-                     "\n    <input type='button' onclick='divtoggle(\"".preg_replace("/[^a-z0-9]/i","_",$name)."\");' value='"._("Show/hide advanced settings")."' /></td>".
+                     "\n    <input type='button' onclick='divtoggle(\"$tname\");' value='"._("Show/hide advanced settings")."' /></td>".
                      "\n  </tr>";
         } else {
           $display.= "\n<table style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>".
@@ -780,14 +781,14 @@ class acl extends plugin
 #      asort($splist);
       if(session::get('js')) {
         if(isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) {
-          $display.= "\n  <tr id='tr_".preg_replace("/[^a-z0-9]/i","_",$name)."' style='vertical-align:top;height:0px;'>".
+          $display.= "\n  <tr id='tr_$tname' style='vertical-align:top;height:0px;'>".
                      "\n    <td colspan=".$cols.">".
-                     "\n      <div id='".preg_replace("/[^a-z0-9]/i","_",$name)."' style='overflow:hidden;visibility:hidden;height:0px;vertical-align:top;width:100%;'>".
+                     "\n      <div id='$tname' style='overflow:hidden;visibility:hidden;height:0px;vertical-align:top;width:100%;'>".
                      "\n        <table style='width:100%;'>";
         } else if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/ie/i",$_SERVER['HTTP_USER_AGENT'])) {
-          $display.= "\n  <tr id='tr_".preg_replace("/[^a-z0-9]/i","_",$name)."' style='vertical-align:top;height:0px;'>".
+          $display.= "\n  <tr id='tr_$tname' style='vertical-align:top;height:0px;'>".
                      "\n    <td colspan=".$cols.">".
-                     "\n      <div id='".preg_replace("/[^a-z0-9]/i","_",$name)."' style='position:absolute;overflow:hidden;visibility:hidden;height:0px;vertical-align:top;width:100%;'>".
+                     "\n      <div id='$tname' style='position:absolute;overflow:hidden;visibility:hidden;height:0px;vertical-align:top;width:100%;'>".
                      "\n        <table style='width:100%;'>";
         }
       }
@@ -848,8 +849,9 @@ class acl extends plugin
   {
     $state= $state?"checked":"";
     if($this->acl_is_writeable("")){
-      return "\n      <input id='acl_".preg_replace("/[^a-z0-9]/i","_",$name)."' type=checkbox name='acl_$name' $state>".
-        "\n      <label for='acl_".preg_replace("/[^a-z0-9]/i","_",$name)."'>$text</label>";
+			$tname= preg_replace("/[^a-z0-9]/i","_",$name);
+      return "\n      <input id='acl_$tname' type=checkbox name='acl_$name' $state>".
+        "\n      <label for='acl_$tname'>$text</label>";
     }else{
       return "\n <input type='checkbox' disabled name='dummy_".microtime(1)."' $state>$text";
     }
@@ -860,12 +862,13 @@ class acl extends plugin
   {
     $rstate= preg_match('/r/', $state)?'checked':'';
     $wstate= preg_match('/w/', $state)?'checked':'';
+		$tname= preg_replace("/[^a-z0-9]/i","_",$name);
       
     if($this->acl_is_writeable("")){
-      return ("\n      <input id='acl_".preg_replace("/[^a-z0-9]/i","_",$name)."_r' type=checkbox name='acl_${name}_r' $rstate>".
-          "\n      <label for='acl_".preg_replace("/[^a-z0-9]/i","_",$name)."_r'>"._("read")."</label>".
-          "\n      <input id='acl_".preg_replace("/[^a-z0-9]/i","_",$name)."_w' type=checkbox name='acl_${name}_w' $wstate>".
-          "\n      <label for='acl_".preg_replace("/[^a-z0-9]/i","_",$name)."_w'>"._("write")."</label>");
+      return ("\n      <input id='acl_".$tname."_r' type=checkbox name='acl_${name}_r' $rstate>".
+          "\n      <label for='acl_".$tname."_r'>"._("read")."</label>".
+          "\n      <input id='acl_".$tname."_w' type=checkbox name='acl_${name}_w' $wstate>".
+          "\n      <label for='acl_".$tname."_w'>"._("write")."</label>");
     }else{
       return ("\n      <input disabled type=checkbox name='dummy_".microtime(1)."' $rstate>"._("read").
           "\n      <input disabled type=checkbox name='dummy_".microtime(1)."' $wstate>"._("write"));

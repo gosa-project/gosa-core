@@ -736,7 +736,9 @@ class config  {
       if ($utags){
         if ($ui->gosaUnitTag != '' && isset($this->tdepartments[$val]) &&
             $this->tdepartments[$val] != $ui->gosaUnitTag){
-#          continue;
+
+						#TODO: link with strict*
+						#continue;
         }
       }
 
