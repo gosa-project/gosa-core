@@ -1989,7 +1989,7 @@ function progressbar($percentage,$width=100,$height=15,$showvalue=false)
 
 function array_key_ics($ikey, $items)
 {
-  $tmp= array_change_key_case($itmes, CASE_LOWER);
+  $tmp= array_change_key_case($items, CASE_LOWER);
   $ikey= strtolower($ikey);
   if (isset($tmp[$ikey])){
     return($tmp[$ikey]);

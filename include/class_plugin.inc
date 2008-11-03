@@ -168,7 +168,7 @@ class plugin
       foreach ($this->attributes as $val){
         $found= array_key_ics($val, $this->attrs);
         if ($found != ""){
-          $this->$val= $this->attrs["$found"][0];
+          $this->$val= $found[0];
         }
       }
 
