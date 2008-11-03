@@ -24,6 +24,7 @@ class passwordMethod
 {
   var $config = false;
   var $attrs= array();
+  var $display = FALSE;
   var $hash= "";
 
   // Konstructor
