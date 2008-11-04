@@ -81,18 +81,20 @@ class LDAP{
   /* Function to replace all problematic characters inside a DN by \001XX, where
      \001 is decoded to chr(1) [ctrl+a]. It is not impossible, but very unlikely
      that this character is inside a DN.
-     
+
      Currently used codes:
-      ,   => CO
-      \2C => CO
-      (   => OB
-      )   => CB
-      /   => SL                                                                  */
+     ,   => CO
+     \2C => CO
+     (   => OB
+     )   => CB
+     /   => SL                                                                  */
   static function convert($dn)
   {
-    if (SPECIALS_OVERRIDE === TRUE){
-      return preg_replace('/,\s+/', ',', str_replace(array('\\\\,', '\\\\2C', '\(/', '/\)', '\/'),
-                           array("\001CO", "\001CO", "\001OB", "\001CB", "\001SL"), $dn));
+    if (SPECIALS_OVERRIDE == TRUE){
+      $tmp= preg_replace(array("/\\\\,/", "/\\\\2C/", "/\(/", "/\)/", "/\//"),
+          array("\001CO", "\001CO", "\001OB", "\001CB", "\001SL"),
+          $dn);
+      return (preg_replace('/,\s+/', ',', $tmp));
     } else {
       return ($dn);
     }
@@ -105,20 +107,20 @@ class LDAP{
      servers seem to take it the correct way.                                  */
   static function fix($dn)
   {
-    if (SPECIALS_OVERRIDE === TRUE){
-      return (str_replace(array('\001CO', '\001OB', '\001CB', '\001SL'),
-                           array('\,', '(', ')', '/'), $dn));
+    if (SPECIALS_OVERRIDE == TRUE){
+      return (preg_replace(array("/\001CO/", "/\001OB/", "/\001CB/", "/\001SL/"),
+            array("\,", "(", ")", "/"),
+            $dn));
     } else {
       return ($dn);
     }
   }
 
-
   /* Function to fix problematic characters in DN's that are used for search
      requests. I.e. member=....                                               */
   static function prepare4filter($dn)
   {
-	return normalizeLdap(str_replace('\\\\', '\\\\\\', LDAP::fix($dn)));
+    return normalizeLdap(str_replace('\\\\', '\\\\\\', LDAP::fix($dn)));
   }
 
 
@@ -480,12 +482,12 @@ class LDAP{
          parent   =>  ou=department,dc=...
          dest_rdn =>  cn=herbert
      */
-    $parent   = @LDAP::fix(preg_replace("/^[^,]+,/","", @LDAP::convert($dest)));
-    $dest_rdn = @LDAP::fix(preg_replace("/,.*$/","",@LDAP::convert($dest)));
+    $parent   = preg_replace("/^[^,]+,/","", $dest);
+    $dest_rdn = preg_replace("/,.*$/","",$dest);
 
     if($this->hascon){
       if ($this->reconnect) $this->connect();
-      $r= ldap_rename($this->cid,$source,$dest_rdn,$parent,TRUE); 
+      $r= ldap_rename($this->cid,@LDAP::fix($source), @LDAP::fix($dest_rdn),@LDAP::fix($parent),TRUE); 
       $this->error = ldap_error($this->cid);
 
       /* Check if destination dn exists, if not the 
