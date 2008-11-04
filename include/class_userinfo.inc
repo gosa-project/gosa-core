@@ -203,7 +203,7 @@ class userinfo
 
   function get_category_permissions($dn, $category, $any_acl = FALSE)
   {
-    return(@$this->get_permissions($dn,$category.'/0'));
+    return(@$this->get_permissions($dn,$category.'/0',""));
   }
 
   
@@ -421,13 +421,28 @@ class userinfo
             continue;
           }
 
-          /* Category ACLs */
+          /* Category ACLs    (e.g. $object = "user/0")
+           */
           if(strstr($object,"/0")){
             $ocs = preg_replace("/\/0$/","",$object);
-            if(isset($this->ocMapping[$ocs]))
-            foreach($this->ocMapping[$ocs] as $oc){
-              if(isset($subacl['acl'][$ocs.'/'.$oc][0])){
-                $acl= $this->mergeACL($acl, $subacl['type'], $subacl['acl'][$ocs.'/'.$oc][0]);
+            if(isset($this->ocMapping[$ocs])){
+
+              /* if $attribute is "", then check every single attribute for this object.
+                 if it is 0, then just check the object category ACL.
+               */
+              if($attribute == ""){    
+                foreach($this->ocMapping[$ocs] as $oc){
+                  if (isset($subacl['acl'][$ocs.'/'.$oc])){
+                    foreach($subacl['acl'][$ocs.'/'.$oc] as $attr => $dummy){
+                      $acl= $this->mergeACL($acl, $subacl['type'], $subacl['acl'][$ocs.'/'.$oc][$attr]);
+                    }
+                    continue;
+                  }
+                }
+              }else{
+                if(isset($subacl['acl'][$ocs.'/'.$oc][0])){
+                  $acl= $this->mergeACL($acl, $subacl['type'], $subacl['acl'][$ocs.'/'.$oc][0]);
+                }
               }
             }
             continue;
@@ -550,7 +565,7 @@ class userinfo
     foreach(str_split($newACL) as $char){
 
       /* Skip permanent and subtree entries */
-      if (!isset($acl[$char]) || preg_match('/[sp]/', $acl[$char])){
+      if (preg_match('/[sp]/', $acl[$char])){
         continue;
       }
 
