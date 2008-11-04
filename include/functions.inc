@@ -2006,7 +2006,7 @@ function array_differs($src, $dst)
     return (TRUE);
   }
 
-  return (count(array_diff($src, $dst)) == 0);
+  return (count(array_diff($src, $dst)) != 0);
 }
 
 
