@@ -115,7 +115,7 @@ class deptabs extends tabs
 
     /* Move group? */
     if ($this->dn != $new_dn && $this->dn != "new"){
-        $baseobject->move(@LDAP::fix($this->dn),@LDAP::fix($new_dn));
+        $baseobject->move($this->dn,$new_dn);
     } 
 
     $this->dn= $new_dn;
