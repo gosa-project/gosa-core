@@ -461,9 +461,6 @@ class LDAP{
    */
   function rename_dn($source,$dest)
   {
-    $source = LDAP::fix($source);
-    $dest = LDAP::fix($dest);
-
     /* Check if source and destination are the same entry */
     if(strtolower($source) == strtolower($dest)){
       trigger_error("Source and destination can't be the same entry.");
@@ -483,9 +480,9 @@ class LDAP{
          parent   =>  ou=department,dc=...
          dest_rdn =>  cn=herbert
      */
-    $parent   = preg_replace("/^[^,]+,/","",$dest);
-    $dest_rdn = preg_replace("/,.*$/","",$dest);
-  
+    $parent   = @LDAP::fix(preg_replace("/^[^,]+,/","", @LDAP::convert($dest)));
+    $dest_rdn = @LDAP::fix(preg_replace("/,.*$/","",@LDAP::convert($dest)));
+
     if($this->hascon){
       if ($this->reconnect) $this->connect();
       $r= ldap_rename($this->cid,$source,$dest_rdn,$parent,TRUE); 
