@@ -159,9 +159,8 @@ class department extends plugin
 		}else{
 			$tmp	= array();	
 			foreach($bases as $dn=>$base){
-				$fixed = str_replace("/","\\",$this->dn);
 				/* Only attach departments which are not a subtree of this one */
-				if(!preg_match("/".$fixed."/",$dn)){
+        if(!preg_match("/".preg_quote($this->dn)."/",$dn)){
 					$tmp[$dn]=$base;
 				}
 			}
