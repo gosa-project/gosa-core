@@ -913,35 +913,18 @@ class plugin
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
     $ldap->create_missing_trees(preg_replace("/^[^,]+,/","",$dst_dn));
-
     if (!$ldap->rename_dn($src_dn,$dst_dn)){
       msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $src_dn, "", get_class()));
       return(FALSE);
     }
 
-    /* Get list of groups within this tree,
+    /* Get list of users,groups and roles within this tree,
         maybe we have to update ACL references.
      */
-    $leaf_groups = get_list("(objectClass=posixGroup)",array("all"),$dst_dn,
+    $leaf_objs = get_list("(|(objectClass=posixGroup)(objectClass=gosaAccount)(objectClass=gosaRole))",array("all"),$dst_dn,
           array("dn","objectClass"),GL_SUBSEARCH | GL_NO_ACL_CHECK);
-    
-    /* Get list of users within this tree,
-        maybe we have to update ACL references.
-     */
-    $leaf_users=  get_list("(objectClass=gosaAccount)",array("all"),$dst_dn,
-          array("dn","objectClass"),GL_SUBSEARCH | GL_NO_ACL_CHECK);
-
-
-    /* Updated acls set for this groups */
-    foreach($leaf_groups as $group){
-      $new_dn = $group['dn'];
-      $old_dn = preg_replace("/".preg_quote($dst_dn, '/')."$/i",$src_dn,$new_dn);
-      $this->update_acls($old_dn,$new_dn); 
-    }
-
-    /* Updated acls set for this users */
-    foreach($leaf_users as $user){
-      $new_dn = $user['dn'];
+    foreach($leaf_objs as $obj){
+      $new_dn = $obj['dn'];
       $old_dn = preg_replace("/".preg_quote($dst_dn, '/')."$/i",$src_dn,$new_dn);
       $this->update_acls($old_dn,$new_dn); 
     }
@@ -1710,7 +1693,7 @@ class plugin
   }
 
 
-  /* This function modifies object acls too, if an object is moved.
+  /* This function updates ACL settings if $old_dn was used.
    *  $old_dn   specifies the actually used dn
    *  $new_dn   specifies the destiantion dn
    */
@@ -1727,7 +1710,7 @@ class plugin
     if($ui->dn == $old_dn){
       $ui->dn = $new_dn;
       session::set('ui',$ui);
-      new log("view","acl/".get_class($this),$this->dn,array(),"Updated current user dn from '".$old_dn."' to '".$new_dn."'");
+      new log("view","acl/".get_class($this),$this->dn,array(),"Updated current object dn from '".$old_dn."' to '".$new_dn."'");
     }
 
     /* Object was moved, ensure that all acls will be moved too */
@@ -1737,59 +1720,46 @@ class plugin
       $update = array();
       $ldap = $this->config->get_ldap_link();
       $ldap->cd ($this->config->current['BASE']);
-      $ldap->search("(&(objectClass=gosaAcl)(gosaAclEntry=*))",array("cn","gosaAclEntry"));
+      $ldap->search("(&(objectClass=gosaAcl)(gosaAclEntry=*".base64_encode($old_dn)."*))",array("cn","gosaAclEntry"));
       while($attrs = $ldap->fetch()){
-
         $acls = array();
-
-        /* Reset vars */
         $found = false;
-
-        /* Walk through acls */
         for($i = 0 ; $i <  $attrs['gosaAclEntry']['count'] ; $i ++ ){
-
-          /* Get Acl parts */
           $acl_parts = split(":",$attrs['gosaAclEntry'][$i]);
 
-          /* Get every single member for this acl */  
-          $members = array();  
-          if(preg_match("/,/",$acl_parts[2])){
-            $members = split(",",$acl_parts[2]);
-          }else{
-            $members = array($acl_parts[2]);
-          } 
-      
-          /* Check if member match current dn */
+          /* Roles uses antoher data storage order, members are stored int the third part, 
+             while the members in direct ACL assignments are stored in the second part.
+           */
+          $id = ($acl_parts[1] == "role") ? 3 : 2;
+
+          /* Update member entries to use $new_dn instead of old_dn
+           */
+          $members = explode(",",$acl_parts[$id]);
           foreach($members as $key => $member){
             $member = base64_decode($member);
             if($member == $old_dn){
-              $found = true;
               $members[$key] = base64_encode($new_dn);
+              $found = TRUE;
             }
           } 
-       
-          /* Create new member string */ 
-          $new_members = "";
-          foreach($members as $member){
-            $new_members .= $member.",";
-          }
-          $new_members = preg_replace("/,$/","",$new_members);
-          $acl_parts[2] = $new_members;
-        
-          /* Reconstruckt acl entry */
-          $acl_str  ="";
-          foreach($acl_parts as $t){
-           $acl_str .= $t.":";
-          }
-          $acl_str = preg_replace("/:$/","",$acl_str);
-          $acls[] = $acl_str;
-       }
 
-       /* Acls for this object must be adjusted */
-       if($found){
+          /* Check if the selected role has to updated
+           */
+          if($acl_parts[1] == "role" && $acl_parts[2] == base64_encode($old_dn)){
+            $acl_parts[2] = base64_encode($new_dn);
+            $found = TRUE;
+          }
+
+          /* Build new acl string */ 
+          $acl_parts[$id] = implode($members,",");
+          $acls[] = implode($acl_parts,":");
+        }
+
+        /* Acls for this object must be adjusted */
+        if($found){
 
           $debug_info=  _("Changing ACL dn")."&nbsp;:&nbsp;<br>&nbsp;-"._("from")."&nbsp;<b>&nbsp;".
-                  $old_dn."</b><br>&nbsp;-"._("to")."&nbsp;<b>".$new_dn."</b><br>";
+            $old_dn."</b><br>&nbsp;-"._("to")."&nbsp;<b>".$new_dn."</b><br>";
           @DEBUG (DEBUG_ACL, __LINE__, __FUNCTION__, __FILE__,$debug_info,"ACL");
 
           $update[$attrs['dn']] =array();
