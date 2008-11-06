@@ -261,26 +261,26 @@ class config  {
         exit();
       }
 
-      if (!session::is_set('size_limit')){
-        session::set('size_limit',$this->current['LDAPSIZELIMIT']);
-        session::set('size_ignore',$this->current['LDAPSIZEIGNORE']);
-      }
-
-      if ($sizelimit){
-        $this->ldap->set_size_limit(session::get('size_limit'));
-      } else {
-        $this->ldap->set_size_limit(0);
-      }
-
       /* Move referrals */
       if (!isset($this->current['REFERRAL'])){
         $this->ldap->referrals= array();
       } else {
         $this->ldap->referrals= $this->current['REFERRAL'];
       }
+
+      if (!session::is_set('size_limit')){
+        session::set('size_limit',$this->current['LDAPSIZELIMIT']);
+        session::set('size_ignore',$this->current['LDAPSIZEIGNORE']);
+      }
     }
 
-    return new ldapMultiplexer($this->ldap);
+    $obj  = new ldapMultiplexer($this->ldap);
+    if ($sizelimit){
+      $obj->set_size_limit(session::get('size_limit'));
+    } else {
+      $obj->set_size_limit(0);
+    }
+    return($obj);
   }
 
   function set_current($name)
