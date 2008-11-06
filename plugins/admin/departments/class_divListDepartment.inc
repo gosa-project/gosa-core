@@ -97,7 +97,7 @@ class divListDepartment extends MultiSelectWindow
      */
     $types = $this->parent->get_support_departments();
     foreach($types as $type){
-      if(preg_match("/c/",$ui->get_permissions("ou=dummy,".$this->selectedBase  ,"department/".$type['ACL']))){
+      if(preg_match("/c/",$ui->get_permissions($this->selectedBase  ,"department/".$type['ACL']))){
       $s.= "...|<input class='center' type='image' src='".$type['IMG']."' alt='".$type['ATTR']."'>".
         "&nbsp;".$type['TITLE']."&nbsp;(".$type['ATTR'].")|dep_new_".$type['ATTR']."|\n";
       }
