@@ -557,7 +557,7 @@ class userinfo
               $dn = preg_replace("/^[^,]+,/","",$dn);
             }
             if(isset($this->config->idepartments[$dn])){
-              $deps[] = $dn;
+              $deps[$dn] = $dn;
             }
           }
         }
@@ -565,7 +565,7 @@ class userinfo
 
       /* For all gosaDepartments */
       foreach ($this->config->departments as $dn){
-        if(in_array($dn,$deps)) continue;
+        if(isset($deps[$dn])) continue;
         $acl = "";
         if(strpos($mod, '/')){
           $acl.=  $this->get_permissions($dn,$mod);
@@ -573,14 +573,15 @@ class userinfo
           $acl.=  $this->get_category_permissions($dn,$mod,TRUE);
         }
         if(!empty($acl)) {
-          $deps[] = $dn;
+          $deps[$dn] = $dn;
         }
       }
 
       $ACL_CACHE['MODULE_DEPARTMENTS'][$mod] = $deps;
       $res = array_merge($res,$deps);
-    } 
-    return ($res);
+    }
+
+    return (array_values($res));
   }
 
 
