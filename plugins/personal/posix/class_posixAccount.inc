@@ -1491,9 +1491,12 @@ class posixAccount extends plugin
   {
     plugin::PrepareForCopyPaste($source);
 
-    /* Avoid using the same gid/uid number as source user */
-    $this->savedUidNumber = $this->get_next_id("uidNumber", $this->dn);
-    $this->savedGidNumber = $this->get_next_id("gidNumber", $this->dn);
+    /* Avoid using the same gid/uid number as source user 
+        empty numbers to enforce new ones. */
+#    $this->savedUidNumber = $this->get_next_id("uidNumber", $this->dn);
+    $this->savedUidNumber = "";
+#    $this->savedGidNumber = $this->get_next_id("gidNumber", $this->dn);
+    $this->savedGidNumber = "";
   }
 
 
