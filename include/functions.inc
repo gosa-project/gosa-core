@@ -595,9 +595,27 @@ function ldap_expired_account($config, $userdn, $username)
 }
 
 
-function add_lock ($object, $user)
+function add_lock($object, $user)
 {
   global $config;
+
+  /* Remember which entries were opened as read only, because we 
+      don't need to remove any locks for them later.
+   */
+  if(!session::is_set("LOCK_CACHE")){
+    session::set("LOCK_CACHE",array(""));
+  }
+  $cache = &session::get("LOCK_CACHE");
+  if(isset($_POST['open_readonly'])){
+    $cache['READ_ONLY'][$object] = TRUE;
+    echo "ADDED : {$user}:{$object}<br>";
+    return;
+  }
+  if(isset($cache['READ_ONLY'][$object])){
+    echo "Removed lock entry $object <br>";
+    unset($cache['READ_ONLY'][$object]);
+  }
+
 
   if(is_array($object)){
     foreach($object as $obj){
@@ -654,6 +672,21 @@ function del_lock ($object)
   /* Sanity check */
   if ($object == ""){
     return;
+  }
+
+  /* If this object was opened in read only mode then 
+      skip removing the lock entry, there wasn't any lock created.
+    */
+  if(session::is_set("LOCK_CACHE")){
+    $cache = &session::get("LOCK_CACHE");
+    if(isset($cache['READ_ONLY'][$object])){
+      if(isset($_POST['delete_lock'])){
+        unset($cache['READ_ONLY'][$object]);
+      }else{
+        echo "Skipped: $object <br>";
+        return;
+      }
+    }
   }
 
   /* Check for existance and remove the entry */
