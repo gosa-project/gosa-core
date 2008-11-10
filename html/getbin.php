@@ -43,7 +43,7 @@ $bintype = session::is_set('binarytype')
   ? session::get('binarytype') : "octet-stream";
 header("Content-type: " . $bintype);
 if (session::is_set('binaryfile')) {
-  header( "Content-disposition: attachment; filename=" 
+  header( "Content-disposition: attachment; filename="
     . session::get('binaryfile'));
 }
 

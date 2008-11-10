@@ -314,6 +314,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
   if (isset($_POST['delete_lock']) && session::is_set('dn')){
     del_lock (session::get('dn'));
 
+  }
+  if (isset($_POST['delete_lock']) || isset($_POST['open_readonly'])){
+
     /* Set old Post data */
     if(session::is_set('LOCK_VARS_USED')){
       foreach(session::get('LOCK_VARS_USED') as $name => $value){
