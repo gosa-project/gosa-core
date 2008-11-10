@@ -113,6 +113,7 @@ class plugin
 
   var $acl_base= "";
   var $acl_category= "";
+  var $read_only = FALSE; // Used when the entry is opened as "readonly" due to locks.
 
   /* This can be set to render the tabulators in another stylesheet */
   var $pl_notify= FALSE;
@@ -147,6 +148,10 @@ class plugin
     /* Handle new accounts, don't read information from LDAP */
     if ($dn == "new"){
       return;
+    }
+
+    if(isset($_POST['open_readonly'])){
+      $this->read_only = TRUE;
     }
 
     /* Save current dn as acl_base */
@@ -1607,6 +1612,7 @@ class plugin
 
   function acl_is_writeable($attribute,$skip_write = FALSE)
   {
+    if($this->read_only) return(FALSE);
     $ui= get_userinfo();
     return preg_match('/w/', $ui->get_permissions($this->acl_base, $this->acl_category.get_class($this), $attribute, $skip_write));
   }
@@ -1621,6 +1627,7 @@ class plugin
 
   function acl_is_createable($base ="")
   {
+    if($this->read_only) return(FALSE);
     $ui= get_userinfo();
     if($base == "") $base = $this->acl_base;
     return preg_match('/c/', $ui->get_permissions($base, $this->acl_category.get_class($this), '0'));
@@ -1629,6 +1636,7 @@ class plugin
 
   function acl_is_removeable($base ="")
   {
+    if($this->read_only) return(FALSE);
     $ui= get_userinfo();
     if($base == "") $base = $this->acl_base;
     return preg_match('/d/', $ui->get_permissions($base, $this->acl_category.get_class($this), '0'));
@@ -1637,6 +1645,7 @@ class plugin
 
   function acl_is_moveable($base = "")
   {
+    if($this->read_only) return(FALSE);
     $ui= get_userinfo();
     if($base == "") $base = $this->acl_base;
     return preg_match('/m/', $ui->get_permissions($base, $this->acl_category.get_class($this), '0'));
@@ -1651,6 +1660,7 @@ class plugin
   function getacl($attribute,$skip_write= FALSE)
   {
     $ui= get_userinfo();
+    $skip_write |= $this->read_only;
     return  $ui->get_permissions($this->acl_base, $this->acl_category.get_class($this), $attribute,$skip_write);
   }
 

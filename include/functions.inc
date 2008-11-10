@@ -698,6 +698,9 @@ function get_lock ($object)
     return("");
   }
 
+  /* Allow readonly access, the plugin::plugin will restrict the acls */
+  if(isset($_POST['open_readonly'])) return("");
+
   /* Get LDAP link, check for presence of the lock entry */
   $user= "";
   $ldap= $config->get_ldap_link();
