@@ -60,7 +60,7 @@ class aclManagement extends plugin
     plugin::execute();
 
     session::set('LOCK_VARS_TO_USE',array("/^item_selected/","/^menu_action/",
-          "/^list/","/^id_/","/^list_acl_role_del/","/^list_acl_del/","/^menu_action/"));
+          "/^list/","/^id_/","/^menu_action/","/^act$/","/^id$/"));
 
     $smarty       = get_smarty();                 // Smarty instance
     $s_action     = "";                           // Contains the action to be taken
