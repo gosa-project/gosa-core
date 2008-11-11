@@ -578,6 +578,8 @@ class user extends plugin
   /* remove object from parent */
   function remove_from_parent()
   {
+    if(!$this->initially_was_account) return;
+
     $ldap= $this->config->get_ldap_link();
     $ldap->rmdir ($this->dn);
     show_ldap_error($ldap->get_error(), _("Removing generic user account failed"));
