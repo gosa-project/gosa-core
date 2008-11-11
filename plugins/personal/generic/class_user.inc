@@ -702,6 +702,9 @@ class user extends plugin
   /* remove object from parent */
   function remove_from_parent()
   {
+    /* Only remove valid accounts */
+    if(!$this->initially_was_account) return;
+
     /* Remove password extension */
     $temp= passwordMethod::get_available_methods();
 
