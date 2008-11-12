@@ -678,7 +678,7 @@ class Step_Migrate extends setup_step
 
         /* Create new objectClass array */
         $new_attrs  = array();
-        $new_attrs['objectClass']= array("gosaAccount","inetOrgPerson","organizationalPerson");
+        $new_attrs['objectClass']= array("gosaAccount","inetOrgPerson","organizationalPerson","person");
         for($i = 0 ; $i < $attrs['objectClass']['count']; $i ++ ){
           if(!in_array_ics($attrs['objectClass'][$i], $new_attrs['objectClass'])){
             $new_attrs['objectClass'][]   = $attrs['objectClass'][$i];
