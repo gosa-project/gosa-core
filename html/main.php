@@ -32,6 +32,7 @@ header("Content-type: text/html; charset=UTF-8");
 
 /* Set the text domain as 'messages' */
 $domain = 'messages';
+$object_id = "";
 bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
 
@@ -177,18 +178,22 @@ if (session::is_set('plugin_dir')){
 } else {
   $old_plugin_dir= "";
 }
-if (isset($_GET['plug']) && $plist->plugin_access_allowed($_GET['plug'])){
-  $plug= validate($_GET['plug']);
-  $plugin_dir= $plist->get_path($plug);
-  session::set('plugin_dir',$plugin_dir);
-  if ($plugin_dir == ""){
-    new log("security","gosa","",array(),"main.php called with invalid plug parameter \"$plug\"") ;
-    header ("Location: logout.php");
-    exit;
+
+if (isset($_GET['plug'])){
+  $plug=preg_replace("/:.*$/","",validate($_GET['plug'])); 
+  if($plist->plugin_access_allowed($plug)){
+    $plugin_dir= $plist->get_path($plug);
+    session::set('plugin_dir',$plugin_dir);
+    if ($plugin_dir == ""){
+      new log("security","gosa","",array(),"main.php called with invalid plug parameter \"$plug\"") ;
+      header ("Location: logout.php");
+      exit;
+    }
+  }else{
+    session::set('plugin_dir',"welcome");
+    $plugin_dir= "$BASE_DIR/plugins/generic/welcome";
   }
 } else {
-
-  /* set to welcome page as default plugin */
   session::set('plugin_dir',"welcome");
   $plugin_dir= "$BASE_DIR/plugins/generic/welcome";
 }
@@ -358,6 +363,11 @@ if ($config->get_cfg_value("handleExpiredAccounts") == "true"){
 
 /* Load plugin */
 if (is_file("$plugin_dir/main.inc")){
+  $o_id = get_current_object_id();
+  if(!empty($o_id)){
+    $plug .= ":".base64_encode($o_id);
+    $_GET['plug'] .= ":".base64_encode($o_id);
+  }
   require_once ("$plugin_dir/main.inc");
 } else {
   msg_dialog::display(
@@ -405,6 +415,12 @@ $focus= '<script language="JavaScript" type="text/javascript">';
 $focus.= 'next_msg_dialog();';
 $focus.= '</script>';
 $smarty->assign("focus", $focus);
+$o_id = get_current_object_id();
+if(!empty($o_id)){
+  $smarty->assign("object_id", base64_encode($o_id));
+}else{
+  $smarty->assign("object_id", "");
+}
 
 $display= $header.$smarty->fetch(get_template_path('framework.tpl'));
 

@@ -2817,5 +2817,30 @@ function cred_decrypt($input,$password) {
 }
 
 
+function get_current_object_id()
+{
+  global $object_id;
+  if(empty($object_id)){
+    if(isset($_POST['object_id']) && !empty($_POST['object_id'])){
+      $object_id = base64_decode(validate($_POST['object_id']));
+    }elseif(isset($_GET['plug'])){
+      $object_id = base64_decode(preg_replace("/^.*:/","",validate($_GET['plug'])));
+    }
+  }
+  return($object_id);
+}
+
+
+function set_current_object($id,&$object)
+{
+  global $object_id;
+  if(!session::is_set('OBJECTS')){
+    session::set('OBJECTS', array());
+  }
+  $objs = &session::get('OBJECTS');
+  $objs[$id] = $object;
+  $object_id = $id;
+}
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
