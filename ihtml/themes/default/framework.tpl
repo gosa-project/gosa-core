@@ -52,4 +52,4 @@
      </table>
     </td>
   </tr>
-</table>{$errors}{$focus}<input type='hidden' name='object_id' value='{$object_id}'><input type="hidden" name="php_c_check" value="1"></form></body></html>
+</table>{$errors}{$focus}<input type="hidden" name="php_c_check" value="1"></form></body></html>
