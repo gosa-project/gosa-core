@@ -1037,7 +1037,9 @@ class userManagement extends plugin
     if ($ShowTemplates){
       $filter= "(|(objectClass=gosaUserTemplate)(&(objectClass=gosaAccount)(|$filter)))";
     } else {
-      $filter= "(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(|$filter))";
+      $filter= "(&(objectClass=gosaAccount)(objectClass=person)".
+        "(objectClass=inetOrgPerson)(objectClass=organizationalPerson)".
+        "(!(objectClass=gosaUserTemplate))(|$filter))";
     }
     $filter= "(&(|(uid=".normalizeLdap($Regex).")(sn=".normalizeLdap($Regex).")(givenName=".normalizeLdap($Regex)."))$filter)";
 
@@ -1054,7 +1056,16 @@ class userManagement extends plugin
     }
     $SortTemp = array();
     $List = array();
+
     foreach($ListTemp as $Key => $Entry){
+    
+      /* Due to the fact that "inetOrgPerson" is derived from "organizationalPerson" and that openldap 
+          doesn't differentiate both classes in search filters, we have to skip entries that do not provide 
+          both classes. (Both classes are required for a valid GOsa user Account.)
+       */
+      if(!in_array("inetOrgPerson",$Entry['objectClass'])|| !in_array("organizationalPerson",$Entry['objectClass'])){
+        continue;
+      }
 
       /* Skip entries that are not located under the people ou (normaly 'ou=people,')
        * Else winstations will be listed too, if you use the subtree flag. 
