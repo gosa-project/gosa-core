@@ -942,14 +942,14 @@ class Step_Migrate extends setup_step
           $group_ou = trim($group_ou).",";
         }
 
-        $new_group_dn = "cn=GOsa Administrators,".$group_ou.$cv['base'];
+        $new_group_dn = "cn=gosa_administrators,".$group_ou.$cv['base'];
 	if ($cv['rfc2307bis']){
 		$new_group_attrs['objectClass'] = array("gosaObject","posixGroup", "groupOfNames");
 		$new_group_attrs['member'][] = $dn;
 	} else {
 		$new_group_attrs['objectClass'] = array("gosaObject","posixGroup");
 	}
-        $new_group_attrs['cn'] = "GOsa Administrators";
+        $new_group_attrs['cn'] = "gosa_administrators";
         $new_group_attrs['gosaSubtreeACL'] = ":all";
         $new_group_attrs['gidNumber'] = "999";
         $new_group_attrs['memberUid'] = array($object_attrs['uid'][0]);
