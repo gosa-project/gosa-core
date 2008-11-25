@@ -20,7 +20,7 @@ Group: 			System/Administration
 Vendor:			GONICUS GmbH
 Packager:		Stefan Japes <japes@GONICUS.de>
 Buildarch: 		noarch
-Patch:			01_fix_smarty_location.patch
+Patch:			01_fix_template_location.patch
 Patch1:			02_fix_class_mapping.patch
 Patch2:			03_fix_locale_location.patch
 Patch3:			04_fix_online_help_location.patch
@@ -158,10 +158,10 @@ Spain localized online manual page for GOSA package
 
 %prep
 %setup -q -n %{sourcename}
-%patch -p0
-%patch1 -p0
-%patch2 -p0
-%patch3 -p0
+%patch -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 find . -depth -name CVS -type d | xargs rm -rf
 
