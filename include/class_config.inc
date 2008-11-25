@@ -43,7 +43,7 @@ class config  {
       'MAIN' => array(),
       'MENU' => array(), 'SERVICE' => array());
   var $basedir= "";
-  var $config_version ="";
+  var $config_version ="NOT SET";
 
   /* Keep a copy of the current deparment list */
   var $departments= array();
@@ -975,7 +975,7 @@ class config  {
 
     /* Check contributed config version and current config version.
      */
-    if($this->config_version != $current && !empty($this->config_version)){
+    if(($this->config_version == "NOT SET") || ($this->config_version != $current && !empty($this->config_version))){
       msg_dialog::display(_("Configuration"),_("The configuration file you are using seems to be outdated. Please move the GOsa configuration file away to run the GOsa setup again."));
     }
   }
