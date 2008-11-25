@@ -191,11 +191,12 @@ done
 mkdir -p %{buildroot}/usr/sbin
 mkdir -p %{buildroot}/etc/gosa
 mkdir -p %{buildroot}/usr/share/doc/gosa
+mkdir -p %{buildroot}/etc/httpd/conf.d
 
 mv contrib/gosa.conf		%{buildroot}/usr/share/doc/gosa
 mv update-gosa 			%{buildroot}/usr/sbin
 mv bin/gosa-encrypt-passwords 	%{buildroot}/usr/sbin
-mv debian/gosa-apache.conf 	%{buildroot}/etc/httpd/conf.d/
+mv debian/gosa-apache.conf 	%{buildroot}/etc/httpd/conf.d
 mv contrib/shells 		%{buildroot}/etc/gosa
 mv contrib/encodings 		%{buildroot}/etc/gosa
 mv contrib/openldap/slapd.conf 	%{buildroot}/usr/share/doc/gosa/slapd.conf-example
@@ -221,26 +222,10 @@ rm -rf %{buildroot}/usr/share/gosa/doc/guide/user/*/lyx-source
 mkdir -p %{buildroot}%{confdir}
 mkdir -p %{buildroot}%{webconf}
 
-#cat > %{buildroot}%{webconf}/gosa_include.conf <<EOF
-## Just to be sure
-#<Directory "/usr/share/gosa/html">
-#	Options None
-#	AllowOverride None
-#	Order allow,deny
-#	Allow from all
-#</Directory>
-## Set alias to gosa
-#Alias /gosa /usr/share/gosa/html
-#EOF
-
 # Copy file for gosa-schema
 mkdir -p %{buildroot}/etc/openldap/schema/gosa
 
 mv contrib/openldap/*.schema %{buildroot}/etc/openldap/schema/gosa
-
-sed 's§"CONFIG_TEMPLATE_DIR", "../contrib/"§"CONFIG_TEMPLATE_DIR", "%{docdir}/"§g' %{buildroot}/usr/share/gosa/include/functions.inc > %{buildroot}/usr/share/gosa/include/functions.inc.new
-
-mv -f %{buildroot}/usr/share/gosa/include/functions.inc.new %{buildroot}/usr/share/gosa/include/functions.inc
 
 # Copy files for gosa-dev
 mkdir -p %{buildroot}/usr/bin
@@ -308,11 +293,10 @@ rm -rf %{buildroot}
 %config %attr(-,root,root) /usr/share/doc/gosa/slapd.conf-example
 %attr(755,root,root) /usr/sbin/update-gosa
 %attr(755,root,root) /usr/share/man/man1/update-gosa.1.gz
-%attr(644,root,root) /etc/gosa/gosa-apache.conf
 %attr(644,root,root) /etc/gosa/shells
 %attr(644,root,root) /etc/gosa/encodings
 %attr(755,root,root) /usr/sbin/gosa-encrypt-passwords
-%config(noreplace) %attr(0600,%{apacheuser},%{apachegroup}) %{webconf}/gosa_include.conf
+%config(noreplace) %attr(0600,%{apacheuser},%{apachegroup}) %{webconf}/gosa-apache.conf
 %attr(0700, %{apacheuser}, %{apachegroup}) /var/spool/gosa
 %attr(0755, root,root) /usr/share/gosa/html
 %attr(0755, root,root) /usr/share/gosa/ihtml
