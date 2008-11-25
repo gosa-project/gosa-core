@@ -270,6 +270,7 @@ rm -rf %{buildroot}
 ########################
 
 %post
+/usr/sbin/update-gosa
 
 ########################
 
@@ -281,7 +282,8 @@ rm -rf %{buildroot}
 
 %postun
 # Remove temporary files, just to be sure
-[ -d /var/spool/gosa ] && rm -rf /var/spool/gosa/* ; exit 0
+[ -d /var/spool/gosa ] && rm -rf /var/spool/gosa ; exit 0
+[ -d /usr/share/gosa ] && rm -rf /usr/share/gosa ; exit 0
 
 ########################
 
