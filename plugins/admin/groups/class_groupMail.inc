@@ -39,6 +39,7 @@ class mailgroup extends plugin
   var $gosaMailMaxSize            = "";       // 
   
   var $remove_folder_from_imap    = true;
+  var $only_local =""; // Dummy var used to assign ACLs.
 
   /* Helper */
   var $indexed_acl= array();
@@ -543,6 +544,7 @@ class mailgroup extends plugin
         $smarty->assign("$type", $gmailfilter[$type]);
       }
       $smarty->assign("hint", print_sizelimit_warning());
+
       $display.= $smarty->fetch (get_template_path('mail_locals.tpl', TRUE));
       return ($display);
     }
@@ -595,7 +597,7 @@ class mailgroup extends plugin
       $mailserver[]= $key;
     }
     $smarty->assign("mailServers", $mailserver);
-    foreach(array("gosaMailServer", "gosaMailQuota", "perms", "mail",
+    foreach(array("gosaMailServer", "gosaMailQuota", "perms", "mail","only_local",
           "gosaMailAlternateAddress", "gosaMailForwardingAddress") as $val){
       $smarty->assign("$val", $this->$val);
       $smarty->assign("$val"."ACL", chkacl($this->acl, "$val"));
@@ -629,6 +631,11 @@ class mailgroup extends plugin
       $smarty->assign("kolab", FALSE);
     }
 
+    if (preg_match("/I/", $this->gosaMailDeliveryMode)) {
+      $smarty->assign("only_local", "checked");
+    }else{
+      $smarty->assign("only_local", "");
+    }
 
     $display.= $smarty->fetch (get_template_path('mail.tpl', TRUE));
     return ($display);

@@ -72,6 +72,7 @@ $ACLD['mailgroup']=  array(
 			"mail",
 			"gosaMailAlternateAddress",
 			"gosaMailForwardingAddress",
+			"gosaMailDeliveryModeI",
 			"gosaMailQuota",
 			"gosaMailServer");
 $ACLD['terminal']=   array("gotoAdaptPath",
