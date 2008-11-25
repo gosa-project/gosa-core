@@ -298,6 +298,7 @@ rm -rf %{buildroot}
 %attr(755,root,root) /usr/sbin/gosa-encrypt-passwords
 %config(noreplace) %attr(0644,root,root) %{webconf}/gosa-apache.conf
 %attr(0700, %{apacheuser}, %{apachegroup}) /var/spool/gosa
+%attr(0755, root,root) /usr/share/gosa
 %attr(0755, root,root) /usr/share/gosa/html
 %attr(0755, root,root) /usr/share/gosa/ihtml
 %attr(0755, root,root) /usr/share/gosa/include
