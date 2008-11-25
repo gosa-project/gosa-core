@@ -59,7 +59,7 @@ class Step_Config3 extends setup_step
               "kioskpath" => "/var/spool/kiosk",
               "kioskpath_active" => FALSE,
 
-              "sudoou"   => "ou=sudoers,%BASE%",
+              "sudoou"   => "ou=sudoers",
               "sudoou_active" => FALSE,
 
               "noprimarygroup"  => FALSE);
