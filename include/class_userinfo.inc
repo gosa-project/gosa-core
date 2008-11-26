@@ -466,6 +466,9 @@ class userinfo
               if($attribute == ""){    
                 foreach($this->ocMapping[$ocs] as $oc){
                   if (isset($subacl['acl'][$ocs.'/'.$oc])){
+
+                    if($dn != $this->dn && strpos($subacl['acl'][$ocs.'/'.$oc][0],"s") !== FALSE) continue;
+
                     foreach($subacl['acl'][$ocs.'/'.$oc] as $attr => $dummy){
                       $acl= $this->mergeACL($acl, $subacl['type'], $subacl['acl'][$ocs.'/'.$oc][$attr]);
                     }
@@ -474,6 +477,7 @@ class userinfo
                 }
               }else{
                 if(isset($subacl['acl'][$ocs.'/'.$oc][0])){
+                  if($dn != $this->dn && strpos($subacl['acl'][$ocs.'/'.$oc][0],"s") !== FALSE) continue;
                   $acl= $this->mergeACL($acl, $subacl['type'], $subacl['acl'][$ocs.'/'.$oc][0]);
                 }
               }
