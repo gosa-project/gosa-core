@@ -30,7 +30,8 @@ class organization extends department
       "postOfficeBox","postalCode", "postalAddress","physicalDeliveryOfficeName",
       "st","l","teletexTerminalIdentifier");
 
-  var $objectclasses  = array("top", "organization", "gosaDepartment");
+  var $objectclasses  = array("top", "gosaDepartment");
+  var $structuralOC   = array("organization");
 
   /* Attributes 
    */ 

@@ -24,7 +24,8 @@ class country extends department
 {
 	/* attribute list for save action */
 	var $attributes     = array( "c", "ou", "description");
-	var $objectclasses  = array("top", "country", "gosaDepartment");
+	var $objectclasses  = array("top", "gosaDepartment");
+  var $structuralOC   = array("country");
   var $type   ="c";
   var $c      ="";
   var $orgi_c ="";

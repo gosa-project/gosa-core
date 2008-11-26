@@ -47,14 +47,39 @@ class department extends plugin
 	/* attribute list for save action */
 	var $attributes= array("ou", "description", "businessCategory", "st", "l", "postalAddress",
 			"telephoneNumber", "facsimileTelephoneNumber", "gosaUnitTag");
-	var $objectclasses= array("top", "gosaDepartment", "organizationalUnit");
-  var $initially_was_tagged = false;
 
+  /* Do not append the structural object classes here, they are added dynamically in the constructor */
+	var $objectclasses= array("top", "gosaDepartment");
+  var $structuralOC = array("organizationalUnit");
+
+  var $initially_was_tagged = false;
   var $orig_base = "";
   var $orig_ou = "";
 
 	function department (&$config, $dn)
 	{
+    /* Add the default structural obejct class 'locality' if this is a new entry
+     */
+    $ldap = $config->get_ldap_link();
+    $ldap->cd($config->current['BASE']);
+    if($dn == "" || $dn == "new" || !$ldap->dn_exists($dn)){
+      $this->objectclasses = array_merge($this->structuralOC,$this->objectclasses);
+    }else{
+      echo $dn;
+      $ldap->cat($dn, array("structuralObjectClass"));
+      $attrs= $ldap->fetch();
+      if(isset($attrs['structuralObjectClass']['count'])){
+        for($i = 0 ; $i < $attrs['structuralObjectClass']['count'] ; $i++){
+          $this->objectclasses[] = $attrs['structuralObjectClass'][$i];
+        }
+      }else{
+
+        /* Could not detect structural object class for this object, fall back to the default 'locality'
+         */
+        $this->objectclasses = array_merge($this->structuralOC,$this->objectclasses);
+      }
+    }
+    $this->objectclasses = array_unique($this->objectclasses);
 
 		plugin::plugin($config, $dn);
 		$this->is_account= TRUE;

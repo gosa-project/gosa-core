@@ -580,7 +580,7 @@ class departmentManagement extends plugin
     $types['organization']['TITLE']   = _("Organization");
     $types['organization']['TPL']     = "organization.tpl";
 
-    /* Organization
+    /* Department
      */
     $types['organizationalUnit']['ACL']     = "department";
     $types['organizationalUnit']['CLASS']   = "department";
