@@ -751,20 +751,12 @@ class acl extends plugin
 
       /* Generate options */
       $spc= "&nbsp;&nbsp;";
-#      if ($this->isContainer && $this->aclType != 'base'){
-        $options= $this->mkchkbx($key."_0_c",  _("Create objects"), preg_match('/c/', $overall_acl)).$spc;
-        $options.= $this->mkchkbx($key."_0_m", _("Move objects"), preg_match('/m/', $overall_acl)).$spc;
-        $options.= $this->mkchkbx($key."_0_d", _("Remove objects"), preg_match('/d/', $overall_acl)).$spc;
-        if ($plist[preg_replace('%^.*/%', '', $key)]['plSelfModify']){
-          $options.= $this->mkchkbx($key."_0_s", _("Grant permission to owner"), preg_match('/s/', $overall_acl)).$spc;
-        }
- #     } else {
- #       $options= $this->mkchkbx($key."_0_m", _("Move object"), preg_match('/m/', $overall_acl)).$spc;
- #       $options.= $this->mkchkbx($key."_0_d", _("Remove object"), preg_match('/d/', $overall_acl)).$spc;
- #       if ($plist[preg_replace('%^.*/%', '', $key)]['plSelfModify']){
- #         $options.= $this->mkchkbx($key."_0_s", _("Modifyable by owner"), preg_match('/s/', $overall_acl)).$spc;
- #       }
- #     }
+      $options= $this->mkchkbx($key."_0_c",  _("Create objects"), preg_match('/c/', $overall_acl)).$spc;
+      $options.= $this->mkchkbx($key."_0_m", _("Move objects"), preg_match('/m/', $overall_acl)).$spc;
+      $options.= $this->mkchkbx($key."_0_d", _("Remove objects"), preg_match('/d/', $overall_acl)).$spc;
+      if ($plist[preg_replace('%^.*/%', '', $key)]['plSelfModify']){
+        $options.= $this->mkchkbx($key."_0_s", _("Grant permission to owner"), preg_match('/s/', $overall_acl)).$spc;
+      }
 
       /* Global options */
       $more_options= $this->mkchkbx($key."_0_r",  _("read"), preg_match('/r/', $overall_acl)).$spc;
