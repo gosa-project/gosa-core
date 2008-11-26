@@ -467,7 +467,7 @@ class sambaAccount extends plugin
       }
       $smarty->assign("domains", $domains);
     }
-    $letters= array();
+    $letters= array("");
     for ($i= 68; $i<91; $i++){
       $letters[]= chr($i).":";
     }
@@ -697,6 +697,14 @@ class sambaAccount extends plugin
     $message= plugin::check();
 
     if ($this->samba3){
+
+      /* sambaHomePath requires sambaHomeDrive and vice versa */
+      if(!empty($this->sambaHomePath) && empty($this->sambaHomeDrive)){
+        $message[]= sprintf(_("Please select a value for 'Home drive'."));
+      }
+      if(!empty($this->sambaHomeDrive) && empty($this->sambaHomePath)){
+        $message[]= sprintf(_("Please specify a value for 'Home path'."));
+      }
 
       /* Strings */
       foreach (array( "sambaHomePath" => _("Home directory"),
