@@ -65,7 +65,6 @@ class department extends plugin
     if($dn == "" || $dn == "new" || !$ldap->dn_exists($dn)){
       $this->objectclasses = array_merge($this->structuralOC,$this->objectclasses);
     }else{
-      echo $dn;
       $ldap->cat($dn, array("structuralObjectClass"));
       $attrs= $ldap->fetch();
       if(isset($attrs['structuralObjectClass']['count'])){
