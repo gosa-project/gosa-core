@@ -422,7 +422,7 @@ class userinfo
 
           /* Self ACLs? 
            */
-          if($dn != $this->dn && isset($subacl['acl'][$object][0]) && strpos($subacl['acl'][$object][0],"s")){
+          if($dn != $this->dn && isset($subacl['acl'][$object][0]) && (strpos($subacl['acl'][$object][0],"s") !== FALSE)){
             continue;
           }
 
@@ -545,7 +545,7 @@ class userinfo
           foreach($info['acl'] as $cat => $data){
 
             /* Skip self acls? */
-            if($skip_self_acls && isset($data['0']) && strpos($data['0'], "s")) continue;
+            if($skip_self_acls && isset($data['0']) && (strpos($data['0'], "s") !== FALSE)) continue;
             if(preg_match("/^".preg_quote($mod, '/')."/",$cat)){
               $found =TRUE;
               break;
