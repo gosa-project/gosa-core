@@ -756,7 +756,7 @@ class acl extends plugin
         $options.= $this->mkchkbx($key."_0_m", _("Move objects"), preg_match('/m/', $overall_acl)).$spc;
         $options.= $this->mkchkbx($key."_0_d", _("Remove objects"), preg_match('/d/', $overall_acl)).$spc;
         if ($plist[preg_replace('%^.*/%', '', $key)]['plSelfModify']){
-          $options.= $this->mkchkbx($key."_0_s", _("Modifyable by owner"), preg_match('/s/', $overall_acl)).$spc;
+          $options.= $this->mkchkbx($key."_0_s", _("Grant permission to owner"), preg_match('/s/', $overall_acl)).$spc;
         }
  #     } else {
  #       $options= $this->mkchkbx($key."_0_m", _("Move object"), preg_match('/m/', $overall_acl)).$spc;
