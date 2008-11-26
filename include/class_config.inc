@@ -777,7 +777,7 @@ class config  {
 
 
   /* Creates display friendly output from make_idepartments */
-  function generateDepartmentArray($arr,$depth = -1,$max_size)
+  function generateDepartmentArray($arr,$depth = -1,$max_size = 256)
   {
     $ret = array();
     $depth ++;
