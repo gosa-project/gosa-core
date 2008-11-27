@@ -2468,13 +2468,6 @@ function change_password ($dn, $password, $mode=0, $hash= "")
   $ldap->cat ($dn, array("shadowLastChange", "userPassword", "uid"));
   $attrs      = $ldap->fetch ();
 
-  // Check if user account was deactivated, indicated by ! after } ... {crypt}!###
-  if(isset($attrs['userPassword'][0]) && preg_match("/^[^\}]*+\}!/",$attrs['userPassword'][0])){
-    $deactivated = TRUE;
-  }else{
-    $deactivated = FALSE;
-  }
-
   /* Is ensure that clear passwords will stay clear */
   if($hash == "" && isset($attrs['userPassword'][0]) && !preg_match ("/^{([^}]+)}(.+)/", $attrs['userPassword'][0])){
     $hash = "clear";
@@ -2501,6 +2494,8 @@ function change_password ($dn, $password, $mode=0, $hash= "")
   }
 
   if($test instanceOf passwordMethod){
+
+    $deactivated = $test->is_locked($config,$dn);
 
     /* Feed password backends with information */
     $test->dn= $dn;
@@ -2529,15 +2524,15 @@ function change_password ($dn, $password, $mode=0, $hash= "")
       $attrs= generate_smb_nt_hash($password);
     }
 
-    /* Read ! if user was deactivated */
-    if($deactivated){
-      $newpass = preg_replace("/(^[^\}]+\})(.*$)/","\\1!\\2",$newpass);
-    }
-
     $attrs['userPassword']= array();
     $attrs['userPassword']= $newpass;
 
     $ldap->modify($attrs);
+
+    /* Read ! if user was deactivated */
+    if($deactivated){
+      $test->lock_account($config,$dn);
+    }
 
     new log("modify","users/passwordMethod",$dn,array_keys($attrs),$ldap->get_error());
 
