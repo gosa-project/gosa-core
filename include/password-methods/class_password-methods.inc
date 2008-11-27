@@ -26,6 +26,7 @@ class passwordMethod
   var $attrs= array();
   var $display = FALSE;
   var $hash= "";
+  var $lockable = TRUE;
 
   // Konstructor
   function passwordMethod($config)
@@ -43,6 +44,101 @@ class passwordMethod
 
   function get_hash_name()
   {
+  }
+
+
+  function is_locked($config,$dn = "")
+  {
+    if(!$this->lockable) return FALSE;
+
+    /* Get current password hash */
+    $pwd ="";
+    if(!empty($dn)){
+      $ldap = $config->get_ldap_link();
+      $ldap->cd($config->current['BASE']);
+      $ldap->cat($dn);
+      $attrs = $ldap->fetch();
+      if(isset($attrs['userPassword'][0])){
+        $pwd = $attrs['userPassword'][0];
+      }
+    }elseif(isset($this->attrs['userPassword'][0])){
+      $pwd = $this->attrs['userPassword'][0];
+    }
+    return(preg_match("/^[^\}]*+\}!/",$pwd));
+  }
+
+
+  function lock_account($config,$dn = "")
+  {
+    if(!$this->lockable) return FALSE;
+
+    /* Get current password hash */
+    $pwd ="";
+    $ldap = $config->get_ldap_link();
+    $ldap->cd($config->current['BASE']);
+    if(!empty($dn)){
+      $ldap->cat($dn);
+      $attrs = $ldap->fetch();
+      if(isset($attrs['userPassword'][0])){
+        $pwd = $attrs['userPassword'][0];
+      }
+    }elseif(isset($this->attrs['userPassword'][0])){
+      $pwd = $this->attrs['userPassword'][0];
+      $dn = $this->attrs['dn'];
+    }
+
+    /* We can only lock/unlock non-empty passwords */
+    if(!empty($pwd)){
+
+      /* Check if this entry is already locked. */
+      if(preg_match("/^[^\}]*+\}!/",$pwd)){
+        return;
+      }     
+      
+      /* Lock entry */
+      $pwd = preg_replace("/(^[^\}]+\})(.*$)/","\\1!\\2",$pwd);
+      $ldap->cd($dn);
+      $ldap->modify(array("userPassword" => $pwd));
+      return($ldap->success());
+    }
+    return(FALSE);
+  }
+
+
+  function unlock_account($config,$dn = "")
+  {
+    if(!$this->lockable) return FALSE;
+
+    /* Get current password hash */
+    $pwd ="";
+    $ldap = $config->get_ldap_link();
+    $ldap->cd($config->current['BASE']);
+    if(!empty($dn)){
+      $ldap->cat($dn);
+      $attrs = $ldap->fetch();
+      if(isset($attrs['userPassword'][0])){
+        $pwd = $attrs['userPassword'][0];
+      }
+    }elseif(isset($this->attrs['userPassword'][0])){
+      $pwd = $this->attrs['userPassword'][0];
+      $dn = $this->attrs['dn'];
+    }
+
+    /* We can only lock/unlock non-empty passwords */
+    if(!empty($pwd)){
+
+      /* Check if this entry is already locked. */
+      if(!preg_match("/^[^\}]*+\}!/",$pwd)){
+        return;
+      }     
+      
+      /* Lock entry */
+      $pwd = preg_replace("/(^[^\}]+\})!(.*$)/","\\1\\2",$pwd);
+      $ldap->cd($dn);
+      $ldap->modify(array("userPassword" => $pwd));
+      return($ldap->success());
+    }
+    return(FALSE);
   }
 
 
