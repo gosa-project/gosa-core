@@ -2500,72 +2500,75 @@ function change_password ($dn, $password, $mode=0, $hash= "")
     $test = new  $available['md5']($config);
   }
 
-  /* Feed password backends with information */
-  $test->dn= $dn;
-  $test->attrs= $attrs;
-  $newpass= $test->generate_hash($password);
+  if($test instanceOf passwordMethod){
 
-  // Update shadow timestamp?
-  if (isset($attrs["shadowLastChange"][0])){
-    $shadow= (int)(date("U") / 86400);
-  } else {
-    $shadow= 0;
-  }
+    /* Feed password backends with information */
+    $test->dn= $dn;
+    $test->attrs= $attrs;
+    $newpass= $test->generate_hash($password);
 
-  // Write back modified entry
-  $ldap->cd($dn);
-  $attrs= array();
-
-  // Not for groups
-  if ($mode == 0){
-
-    if ($shadow != 0){
-      $attrs['shadowLastChange']= $shadow;
+    // Update shadow timestamp?
+    if (isset($attrs["shadowLastChange"][0])){
+      $shadow= (int)(date("U") / 86400);
+    } else {
+      $shadow= 0;
     }
 
-    // Create SMB Password
-    $attrs= generate_smb_nt_hash($password);
-  }
+    // Write back modified entry
+    $ldap->cd($dn);
+    $attrs= array();
 
- /* Read ! if user was deactivated */
-  if($deactivated){
-    $newpass = preg_replace("/(^[^\}]+\})(.*$)/","\\1!\\2",$newpass);
-  }
+    // Not for groups
+    if ($mode == 0){
 
-  $attrs['userPassword']= array();
-  $attrs['userPassword']= $newpass;
+      if ($shadow != 0){
+        $attrs['shadowLastChange']= $shadow;
+      }
 
-  $ldap->modify($attrs);
-
-  new log("modify","users/passwordMethod",$dn,array_keys($attrs),$ldap->get_error());
-
-  if (!$ldap->success()) {
-    msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, ERROR_DIALOG));
-  } else {
-
-    /* Run backend method for change/create */
-    if(!$test->set_password($password)){
-      return(FALSE);
+      // Create SMB Password
+      $attrs= generate_smb_nt_hash($password);
     }
 
-    /* Find postmodify entries for this class */
-    $command= $config->search("password", "POSTMODIFY",array('menu'));
+    /* Read ! if user was deactivated */
+    if($deactivated){
+      $newpass = preg_replace("/(^[^\}]+\})(.*$)/","\\1!\\2",$newpass);
+    }
 
-    if ($command != ""){
-      /* Walk through attribute list */
-      $command= preg_replace("/%userPassword/", $password, $command);
-      $command= preg_replace("/%dn/", $dn, $command);
+    $attrs['userPassword']= array();
+    $attrs['userPassword']= $newpass;
 
-      if (check_command($command)){
-        @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
-        exec($command);
-      } else {
-        $message= sprintf(_("Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."), $command, "password");
-        msg_dialog::display(_("Configuration error"), $message, ERROR_DIALOG);
+    $ldap->modify($attrs);
+
+    new log("modify","users/passwordMethod",$dn,array_keys($attrs),$ldap->get_error());
+
+    if (!$ldap->success()) {
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, ERROR_DIALOG));
+    } else {
+
+      /* Run backend method for change/create */
+      if(!$test->set_password($password)){
+        return(FALSE);
+      }
+
+      /* Find postmodify entries for this class */
+      $command= $config->search("password", "POSTMODIFY",array('menu'));
+
+      if ($command != ""){
+        /* Walk through attribute list */
+        $command= preg_replace("/%userPassword/", $password, $command);
+        $command= preg_replace("/%dn/", $dn, $command);
+
+        if (check_command($command)){
+          @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__, $command, "Execute");
+          exec($command);
+        } else {
+          $message= sprintf(_("Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."), $command, "password");
+          msg_dialog::display(_("Configuration error"), $message, ERROR_DIALOG);
+        }
       }
     }
+    return(TRUE);
   }
-  return(TRUE);
 }
 
 
