@@ -429,36 +429,38 @@ class servDNSeditZoneEntries extends plugin
        */
       if($hostNameOnce){
         $hostNameOnce = false;  
-        $str .="<input type='text' name='RenameHost_".$name."' value='".$objectName."'>\n";
+        $field1 ="<input style='width:250px;' type='text' name='RenameHost_".$name."' value='".$objectName."'>\n";
+      }else{
+        $field1 = "";
       }
 
       /* Create rest. Selectbox, icons ...
        */
-      $str .="
-        </td>
-        <td style='width:90px;'>
-          ".$this->createRecordTypeSelection($record['type'],$name)."
-        </td>
-        <td>
-          <input type='text'  value='".$record['value']."' name='ValueSelection_".$name."' style='width:250px;'>
-        </td>
-        <td style='width:75px;text-align:right;'>
-          <input type='image' name='AddRecord_".$name."'   src='images/list_new.png' alt='"._("Add")."' title='"._("Add")."'>
-          <input type='image' name='RemoveRecord_".$name."' src='images/edittrash.png'      alt='"._("Remove")."' title='"._("Remove")."'>
-        ";
+      $field2 = $this->createRecordTypeSelection($record['type'],$name);
+      $field3 = "<input type='text'  value='".$record['value']."' name='ValueSelection_".$name."' style='width:250px;'>";
+      $acl ="        <input type='image' name='AddRecord_".$name."'   
+        src='images/list_new.png' alt='"._("Add")."' title='"._("Add")."'>
+        <input type='image' name='RemoveRecord_".$name."' 
+        src='images/edittrash.png'      alt='"._("Remove")."' title='"._("Remove")."'>";
 
-#        if($record['type'] == "aRecord"){
-#          $str .="<input type='image' name='AddPtr_".$name."' src='images/network.png' 
-#                    alt='"._("Add PTR")."' title='"._("Add PTR record")."'>";
-#        }else{
-#          $str .= "<img src='images/empty.png' alt=''>";
-#        }
-
-      $str.=
-        "</td>
-      </tr>";
+      if($record['type'] == "cNAMERecord"){
+        $str .= "
+          <tr>
+          <td style='width:250px;text-align:right;'>".$field3."</td>
+          <td style='width:90px;'>".$field2."</td>
+          <td>".$objectName."</td>
+          <td>".$acl."</td>
+          </tr>";
+      }else{ 
+        $str .= "
+          <tr>
+          <td style='width:75px;text-align:right;'>".$field1."</td>
+          <td style='width:90px;'>".$field2."</td>
+          <td>".$field3."</td>
+          <td>".$acl."</td>
+          </tr>";
+      }
     }
-    $str .="</table>";
     return($str); 
   }
 
@@ -467,7 +469,7 @@ class servDNSeditZoneEntries extends plugin
    */
   function createRecordTypeSelection($id,$refID){
 
-    $str = "\n<select name='RecordTypeSelection_".$refID."'>";
+    $str = "\n<select name='RecordTypeSelection_".$refID."' onChange='document.mainform.submit();'>";
     foreach($this->RecordTypes as $type => $atr) {
       if($id == $type){
         $str .="\n<option value='".$type."' selected >".strtoupper(preg_replace("/record/i","",$type))."</option>";
