@@ -584,6 +584,7 @@ class user extends plugin
       }else{
         $smarty->assign("honourIvbbAttributes", "false");
       }
+      $smarty->assign("governmentmode", $this->governmentmode);
       return($smarty->fetch (get_template_path('generic_certs.tpl', TRUE, dirname(__FILE__))));
     }
 
