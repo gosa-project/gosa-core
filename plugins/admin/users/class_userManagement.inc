@@ -647,44 +647,23 @@ class userManagement extends plugin
 
       /* Get entry check current status */
       $val = $this->list[$s_entry];
-      $pwd = $val['userPassword'][0];
-
-
       if (!preg_match("/w/",$this->ui->get_permissions($val['dn'],"users/password"))){
-
-        /* Missing permissions, show message */
-        msg_dialog::display(_("Password change"),_("You have no permission to change the lock status for this user!"),WARNING_DIALOG);
-
+        msg_dialog::display(_("Password change"),
+            _("You have no permission to change the lock status for this user!"),WARNING_DIALOG);
       }else{
-
-        if(!preg_match("/^\{[^\}]/",$pwd)){
-          trigger_error("Can not deactivate user which is using clear password encryption.");
-        }else{
-
-          $locked = false;
-          if(preg_match("/^[^\}]*+\}!/",$pwd)){
-            $locked = true;
-          }
-
-          /* Create ldap array to update status */
-          $attrs = array("userPassword" => $pwd);
-          if($locked){
-            $attrs['userPassword'] = preg_replace("/(^[^\}]+\})!(.*$)/","\\1\\2",$attrs['userPassword']);
+        $pwd = $val['userPassword'][0];
+        $method = passwordMethod::get_method($pwd,$val['dn']);
+        if($method instanceOf passwordMethod){
+          if($method->is_locked($this->config,$val['dn'])){
+            $method->unlock_account($this->config,$val['dn']);
           }else{
-            $attrs['userPassword'] = preg_replace("/(^[^\}]+\})(.*$)/","\\1!\\2",$attrs['userPassword']);
+            $method->lock_account($this->config,$val['dn']);
           }
-
-          /* Write new status back to ldap */
-          $ldap = $this->config->get_ldap_link();
-          $ldap->cd($val['dn']);
-          $ldap->modify($attrs);
-          if (!$ldap->success()){
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $val['dn'], 0, get_class()));
-          }
+        }else{
+          // Can't lock unknown methods.
         }
       }
     }
-
 
     /********************
       Delete entry Canceled 
