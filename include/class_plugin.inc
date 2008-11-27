@@ -2063,6 +2063,12 @@ class plugin
   {
      return(array());
   }
+
+  function is_modal_dialog()
+  {
+    return(FALSE); 
+    // return(isset($this->dialog) && $this->dialog);
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

@@ -124,11 +124,8 @@ class tabs
       $this->save_object(FALSE);
     }
 
-    /* Build tab line */
-    $display= $this->gen_tabs();
-
     /* Show object */
-    $display.= "<table summary=\"\" cellpadding=4 cellspacing=0 border=0 style=\"width:100%; background-color:#F8F8F8; border-style:solid; border-color:#AAA; border-top-width:0px; border-bottom-width:1px; border-left-width:1px; border-right-width:1px;\">\n";
+    $display = "<table summary=\"\" cellpadding=4 cellspacing=0 border=0 style=\"width:100%; background-color:#F8F8F8; border-style:solid; border-color:#AAA; border-top-width:0px; border-bottom-width:1px; border-left-width:1px; border-right-width:1px;\">\n";
     $display.= "<tr><td>\n";
 
     /* If multiple edit is enabled for this tab, 
@@ -138,9 +135,14 @@ class tabs
     }else{
       $display.= $this->by_object[$this->current]->multiple_execute();
     }
+    $modal_dialog = $this->by_object[$this->current]->is_modal_dialog();
+    
+    /* Build tab line */
+    $modal = TRUE;
+    $tabs= $this->gen_tabs($modal_dialog);
 
     /* Footer for tabbed dialog */
-    $display.= "</td></tr></table>";
+    $display = $tabs.$display."</td></tr></table>";
 
     return ($display);
   }
@@ -179,7 +181,7 @@ class tabs
     }
   }
 
-  function gen_tabs()
+  function gen_tabs($disabled = FALSE)
   {
     $display= "<input type=\"hidden\" name=\"arg\" value=\"\">";
     $display.= "<table summary=\"\" cellpadding=0 cellspacing=0 border=0 style=\"width:100%;\"><tr>";
@@ -218,13 +220,19 @@ class tabs
         $notify= "";
       }
 
-      if (session::get('js')==FALSE){	
+      if($disabled){
+        $display.= "<div ".$notify." class=\"$style[$index]\" 
+          style=' font-family:arial,helvetica,sans-serif;
+                  font-weight:bold;
+                  font-size:13px; 
+                  color: gray;'
+          title=\"$title\">".$title."</div>";
+      }elseif (session::get('js')==FALSE){	
         $display.= "<div ".$notify." class=\"$style[$index]\"><input type=\"submit\" name=\"$class\"".
-          " class=\"$style[$index]\" value=\"$title\"";
+          " class=\"$style[$index]\" value=\"$title\"></div></td>";
       } else {			 
-        $display.= "<div ".$notify." class=\"$style[$index]\"><a class=\"$style[$index]\" onclick=\"return true;\" href=\"javascript:document.mainform.arg.value='$class';document.mainform.submit();\">$title</a";
+        $display.= "<div ".$notify." class=\"$style[$index]\"><a class=\"$style[$index]\" onclick=\"return true;\" href=\"javascript:document.mainform.arg.value='$class';document.mainform.submit();\">$title</a></div></td>";
       }
-      $display.= "></div></td>";
     }
     $display.= "<td style=\"vertical-align:bottom;\">\n";
     $display.= "<div class=\"tab_border\">&nbsp;</div></td></tr></table>";
