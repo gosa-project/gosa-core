@@ -1,6 +1,13 @@
 GOsa2 changelog
 ===============
 
+* gosa 2.6.1
+  - Build seperate packages for plugin schema files
+  - Make ACL editor more robust
+  - Fix problem with self modify ACL detection
+  - Increased all schema version numbers to make setup
+    check work again
+
 * gosa 2.6
   - Redesign of ACL handling
     - Roles
