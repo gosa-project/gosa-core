@@ -225,12 +225,23 @@ class departmentManagement extends plugin
     /* Confirmation for deletion has been passed. Users should be deleted. */
     if (isset($_POST['delete_multiple_department_confirm'])){
 
+      /* Do not remove departments that will already be deleted by its parents 
+       */
+      foreach($this->dns as $key => $dn){
+        foreach($this->dns as $key2 => $dn2){
+          if($dn == $dn2) continue;
+          if(preg_match("/".preg_quote($dn,'/')."$/",$dn2)){
+            unset($this->dns[$key2]);
+          }
+        }
+      }
+
       /* Remove user by user and check acls before removeing them */
       foreach($this->dns as $key => $dn){
         $acl = $this->ui->get_permissions($dn,"department/department");
         if (preg_match('/d/', $acl)){
 
-          /* Delete request is permitted, perform LDAP action */
+         /* Delete request is permitted, perform LDAP action */
           $this->deptabs= new deptabs($this->config,$this->config->data['TABS']['DEPTABS'], $dn,"department");
           $this->deptabs->set_acl_base();
           $this->deptabs->delete ();
