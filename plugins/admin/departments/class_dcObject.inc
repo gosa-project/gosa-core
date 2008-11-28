@@ -23,7 +23,7 @@
 class dcObject extends department
 {
 	/* attribute list for save action */
-	var $attributes     = array( "dc", "ou", "description");
+	var $attributes     = array( "dc", "ou", "description","gosaUnitTag");
 	var $objectclasses  = array("top", "dcObject", "gosaDepartment");
   var $structuralOC   = array("locality");
   var $type       = "dc";

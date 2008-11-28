@@ -23,7 +23,7 @@
 class locality extends department
 {
 	/* attribute list for save action */
-	var $attributes     = array("l", "description", "ou");
+	var $attributes     = array("l", "description", "ou", "gosaUnitTag");
 	var $objectclasses  = array("top", "gosaDepartment");
   var $structuralOC   = array("locality");
 

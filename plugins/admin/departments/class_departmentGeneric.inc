@@ -390,21 +390,18 @@ class department extends plugin
       }
     }
     $this->skipTagging = TRUE;
-    plugin::save();
-
 
     /* Remove tag information if needed */
     if (!$this->is_administrational_unit && $this->initially_was_tagged){
       $tmp= array();
 
       /* Remove gosaAdministrativeUnit from this plugin */
-      $has_unit_tag= false;
       foreach($this->attrs['objectClass'] as $oc){
+        if (preg_match("/^gosaAdministrativeUnitTag$/i", $oc)){
+          continue;
+        }
         if (!preg_match("/^gosaAdministrativeUnit$/i", $oc)){
           $tmp[]= $oc;
-        }
-        if (preg_match("/^gosaAdministrativeUnitTag$/i", $oc)){
-          $has_unit_tag= true;
         }
       }
       $this->attrs['objectClass']= $tmp;

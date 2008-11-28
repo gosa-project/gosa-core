@@ -28,7 +28,7 @@ class organization extends department
       "destinationIndicator","preferredDeliveryMethod","telexNumber",
       "telephoneNumber","internationaliSDNNumber","facsimileTelephoneNumber","street",
       "postOfficeBox","postalCode", "postalAddress","physicalDeliveryOfficeName",
-      "st","l","teletexTerminalIdentifier");
+      "st","l","teletexTerminalIdentifier","gosaUnitTag");
 
   var $objectclasses  = array("top", "gosaDepartment");
   var $structuralOC   = array("organization");
