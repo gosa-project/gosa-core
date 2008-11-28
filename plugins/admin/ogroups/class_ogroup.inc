@@ -819,8 +819,8 @@ class ogroup extends plugin
         "O" => "plugins/ogroups/images/winstation.png",
         "T" => "plugins/ogroups/images/terminal.png",
         "F" => "plugins/ogroups/images/phone.png",
-        "I" => "images/lists/flag.png",
-        "P" => "plugins/ogroups/images/printer.png");
+        "P" => "plugins/ogroups/images/printer.png",
+        "I" => "images/false.png");
 
     foreach ($input as $key => $value){
       /* Generate output */
