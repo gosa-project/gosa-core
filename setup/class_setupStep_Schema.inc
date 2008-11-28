@@ -110,13 +110,13 @@ class Step_Schema extends setup_step
   function check_schema()
   {
     $cfg = $this->parent->captured_values;
-    $rfc2307bis = $cfg['rfc2307bis'];
-    $this->checked = check_schema($cfg,$rfc2307bis);
 
     /* Get objectclasses */
     $ldap = new LDAP($cfg['admin'],$cfg['password'],$cfg['connection'] ,FALSE,$cfg['tls']);
-    $objectclasses = $ldap->get_objectclasses();
+    $objectclasses = $ldap->get_objectclasses(TRUE);
     $this->found_ocs = count($objectclasses);
+    $rfc2307bis = $cfg['rfc2307bis'];
+    $this->checked = check_schema($cfg,$rfc2307bis);
 
     /* Which samba version do we use? */
     if(isset($objectclasses['sambaSamAccount'])){
