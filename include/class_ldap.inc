@@ -1197,7 +1197,7 @@ class LDAP{
 
   }
   
-  function get_objectclasses()
+  function get_objectclasses( $force_reload = FALSE)
   {
     $objectclasses = array();
     global $config;
@@ -1210,7 +1210,7 @@ class LDAP{
     }
 
     /* Return the cached results. */
-    if(class_available('session') && session::is_set("LDAP_CACHE::get_objectclasses")){
+    if(class_available('session') && session::is_set("LDAP_CACHE::get_objectclasses") && !$force_reload){
       $objectclasses = session::get("LDAP_CACHE::get_objectclasses");
       return($objectclasses);
     }
