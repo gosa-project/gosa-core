@@ -853,6 +853,7 @@ class Step_Migrate extends setup_step
   {
     /* Establish ldap connection */
     $cv = $this->parent->captured_values;
+
     $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
@@ -868,31 +869,65 @@ class Step_Migrate extends setup_step
       $this->checks['acls']['STATUS_MSG']= _("LDAP query failed");
       $this->checks['acls']['ERROR_MSG'] = _("Possibly the 'root object' is missing.");
     }else{
-      $found = false;
+      $GOsa_26_found = false; // GOsa 2.6 Account found
+      $GOsa_25_found = false; // GOsa 2.5 Account found, allow migration
+
       $username = "";
       $attrs = $ldap->fetch();
+
+      /* Collect a list of available GOsa users and groups 
+       */
+      $users = array();
+      $ldap->search("(&(objectClass=gosaAccount)(objectClass=person)".
+        "(objectClass=inetOrgPerson)(objectClass=organizationalPerson))",array("uid","dn"));
+      while($user_attrs = $ldap->fetch()){
+        $users[$user_attrs['dn']] = $user_attrs['uid'][0];
+        $rusers[$user_attrs['uid'][0]] = $user_attrs['dn'];
+      }
+      $groups = array();
+      $ldap->search("objectClass=posixGroup",array("cn","dn"));
+      while($group_attrs = $ldap->fetch()){
+        $groups[$group_attrs['dn']] = $group_attrs['cn'][0];
+      }
+      
+      /* Check if a valid GOsa 2.6 admin exists 
+          -> gosaAclEntry for an existing and accessible user.
+       */
+      $valid_users = "";
+      $valid_groups = "";
       if(isset($attrs['gosaAclEntry'])){
         $acls = $attrs['gosaAclEntry'];
         for($i = 0 ; $i < $acls['count'] ; $i++){
           $acl = $acls[$i];
           $tmp = split(":",$acl);
+
           if($tmp[1] == "psub"){
             $members = split(",",$tmp[2]);
             foreach($members as $member){
               $member = base64_decode($member);
-
-              /* Check if acl owner is a valid GOsa user account */
-              $ldap->cat($member,array("objectClass","uid","cn"));
-              $ret = $ldap->fetch();
-
-              if(isset($ret['objectClass']) && in_array("posixGroup",$ret['objectClass'])){
-                $found = TRUE;
-                $username .= "ACL-Group:&nbsp;".$ret['cn'][0]."<br>";
-              }elseif(isset($ret['objectClass']) && in_array("gosaAccount",$ret['objectClass']) &&
-                  in_array("organizationalPerson",$ret['objectClass']) &&
-                  in_array("inetOrgPerson",$ret['objectClass'])){
-                $found = TRUE;
-                $username .= "ACL:&nbsp;".$ret['uid'][0]."<br>";
+              if(isset($users[$member])){
+                if(preg_match("/all;cmdrw/i",$tmp[3])){
+                  $valid_users .= $users[$member].", ";
+                  $GOsa_26_found  = TRUE;
+                }
+              }
+              if(isset($groups[$member])){
+                if(preg_match("/all;cmdrw/i",$tmp[3])){
+                  $ldap->cat($member);
+                  $group_attrs = $ldap->fetch();
+                  $val_users = "";
+                  if(isset($group_attrs['memberUid'])){
+                    for($e = 0 ; $e < $group_attrs['memberUid']['count']; $e ++){
+                      if(isset($rusers[$group_attrs['memberUid'][$e]])){
+                        $val_users .= $group_attrs['memberUid'][$e].", ";
+                      }
+                    }
+                  }
+                  if(!empty($val_users)){
+                    $valid_groups .= $groups[$member]."(<i>".trim($val_users,", ")."</i>), ";
+                    $GOsa_26_found  = TRUE;
+                  }
+                }
               }
             }
           }elseif($tmp[1] == "role"){
@@ -912,15 +947,25 @@ class Step_Migrate extends setup_step
                   foreach($members as $member){
                     $member = base64_decode($member);
 
-                    /* Check if acl owner is a valid GOsa user account */
-                    $ldap->cat($member,array("objectClass","uid"));
-                    $ret = $ldap->fetch();
-  
-                    if(isset($ret['objectClass']) && in_array("gosaAccount",$ret['objectClass']) &&
-                        in_array("organizationalPerson",$ret['objectClass']) &&
-                        in_array("inetOrgPerson",$ret['objectClass'])){
-                      $found = TRUE;
-                      $username .= "ACL Role:&nbsp;".$ret['uid'][0]."<br>";
+                    if(isset($users[$member])){
+                      $valid_users .= $users[$member].", ";
+                      $GOsa_26_found  = TRUE;
+                    }
+                    if(isset($groups[$member])){
+                      $ldap->cat($member);
+                      $group_attrs = $ldap->fetch();
+                      $val_users = "";
+                      if(isset($group_attrs['memberUid'])){
+                        for($e = 0 ; $e < $group_attrs['memberUid']['count']; $e ++){
+                          if(isset($rusers[$group_attrs['memberUid'][$e]])){
+                            $val_users .= $group_attrs['memberUid'][$e].", ";
+                          }
+                        }
+                      }
+                      if(!empty($val_users)){
+                        $valid_groups .= $groups[$member]."(<i>".trim($val_users,", ")."</i>), ";
+                        $GOsa_26_found  = TRUE;
+                      }
                     }
                   }
                 }
@@ -933,11 +978,20 @@ class Step_Migrate extends setup_step
       # For debugging
       #echo $username;
 
-      if($found){
+      if($GOsa_26_found){
+        $str = "";
+        if(!empty($valid_users)){
+          $str.= "<b>"._("Users")."</b>:&nbsp;".trim($valid_users,", ")."<br>";
+        }
+        if(!empty($valid_groups)){
+          $str.= "<b>"._("Groups")."</b>:&nbsp;".trim($valid_groups,", ")."<br>";
+        }
+
         $this->checks['acls']['STATUS']    = TRUE;
         $this->checks['acls']['STATUS_MSG']= _("Ok");
-        $this->checks['acls']['ERROR_MSG'] = "";
-      }else{
+        $this->checks['acls']['ERROR_MSG'] = $str;
+
+      }elseif($GOsa_25_found){
         $this->checks['acls']['STATUS']    = FALSE;
         $this->checks['acls']['STATUS_MSG']= _("Failed");
         $this->checks['acls']['ERROR_MSG']= _("There is no GOsa administrator account inside your LDAP.")."&nbsp;";
