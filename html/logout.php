@@ -51,7 +51,6 @@ if ((!isset($config)) || $config->get_cfg_value("language") == ""){
   $lang= $config->get_cfg_value("language");
 }
 
-$lang.=".UTF-8";
 putenv("LANGUAGE=");
 putenv("LANG=$lang");
 setlocale(LC_ALL, $lang);
