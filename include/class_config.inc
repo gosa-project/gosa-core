@@ -379,6 +379,10 @@ class config  {
     /* Fill imap servers */
     $ldap= $this->get_ldap_link();
     $ldap->cd ($this->current['BASE']);
+
+    /* Search mailMethod konfiguration in main section too 
+     */
+    $this->current['MAILMETHOD'] = $this->get_cfg_value("mailMethod","");
     if (!isset($this->current['MAILMETHOD'])){
       $this->current['MAILMETHOD']= "";
     }
