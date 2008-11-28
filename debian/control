@@ -39,7 +39,7 @@ Description: Desktop integration for GOsa
 
 Package: gosa-schema
 Architecture: all
-Depends: slapd
+Recommends: slapd
 Description: LDAP schema for GOsa
  This package includes the LDAP schema needed by GOsa.
  .
