@@ -234,6 +234,25 @@ sed -i "/%DESCRIPTION%/r $dsc" debian/control
 sed -i "/%DESCRIPTION%/d" debian/control
 rm $dsc
 
+# Do we need to generate another package for schema files?
+if ls contrib/*schema &> /dev/null; then
+	echo etc/ldap/schema/gosa > debian/gosa-plugin-${PL_NAME}-schema.dirs
+	ls -1 contrib/*schema | sed 's%$% /etc/ldap/schema/gosa%g' > debian/gosa-plugin-${PL_NAME}-schema.install
+
+	cat <<-EOF >> debian/control
+	
+	Package: gosa-plugin-${PL_NAME}-schema
+	Architecture: all
+	Recommends: slapd
+	Description: LDAP schema for GOsa plugin ${PL_NAME}
+	 This package includes the LDAP schema needed by the GOsa
+	 ${PL_NAME} plugin.
+	 .
+	 GOsa is a combination of system-administrator and end-user web
+	 interface, designed to handle LDAP based setups.
+	EOF
+fi
+
 # Create patch directory
 [ ! -d debian/patches ] && mkdir debian/patches
 
