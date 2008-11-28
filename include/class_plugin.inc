@@ -2066,8 +2066,7 @@ class plugin
 
   function is_modal_dialog()
   {
-    return(FALSE); 
-    // return(isset($this->dialog) && $this->dialog);
+    return(isset($this->dialog) && $this->dialog);
   }
 }
 
