@@ -25,6 +25,7 @@ SECTION="web"
 SI_SECTION="utils"
 TARGET_RELEASE="etch"
 MAKE_PLUGINS=""
+NOT_REPLEASED="heimdal dak dfs glpi opsi apache2 ssh"
 
 usage() {
 	cat <<-EOF
@@ -125,6 +126,9 @@ gzip -f -9 "gosa-si_${GOSA_VER}.orig.tar"
 export OVERRIDE_VERSION="$GOSA_VER"
 if [ -z "$MAKE_PLUGINS" ]; then
 	MAKE_PLUGINS=$(ls -1 gosa-plugins-${BRANCH}/*/plugin.dsc | sed 's/^.*\/\([^\/]*\)\/plugin.dsc$/\1/')
+	for i in $NOT_RELEASED; do
+		MAKE_PLUGINS=$(echo -n $MAKE_PLUGINS | sed "s/$i//")
+	done
 fi
 for plugin in $MAKE_PLUGINS; do
 
