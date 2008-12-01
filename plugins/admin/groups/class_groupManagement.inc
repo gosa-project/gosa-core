@@ -321,7 +321,7 @@ class groupManagement extends plugin
       /* Check locking & lock entry if required */
       $user = get_lock($this->dn);
       if ($user != ""){
-        return(gen_locked_message ($user, $this->dn));
+        return(gen_locked_message ($user, $this->dn,TRUE));
       }
       add_lock ($this->dn, $this->ui->dn);
 
@@ -534,7 +534,12 @@ class groupManagement extends plugin
 
       /* Don't show buttons if tab dialog requests this */
       if(isset($this->grouptab->by_object)){
-        if (!$this->grouptab->by_object[$this->grouptab->current]->dialog){
+      
+        if(($this->grouptab instanceOf tabs || $this->grouptab instanceOf plugin) && $this->grouptab->read_only == TRUE){
+            $display.= "<p style=\"text-align:right\">
+                          <input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">
+                        </p>";
+        }elseif (!$this->grouptab->by_object[$this->grouptab->current]->dialog){
           $display.= "<p style=\"text-align:right\">\n";
           $display.= "<input type=submit name=\"edit_finish\" style=\"width:80px\" value=\"".msgPool::okButton()."\">\n";
           $display.= "&nbsp;\n";
@@ -799,8 +804,7 @@ class groupManagement extends plugin
   {
     if (isset($this->grouptab->dn)){
       del_lock ($this->grouptab->dn);
-    }
-    if(isset($this->dn) && !empty($this->dn) && $this->dn != "new"){
+    }elseif(isset($this->dn) && !empty($this->dn) && $this->dn != "new"){
       del_lock($this->dn);
     }
     if(isset($this->dns) && is_array($this->dns) && count($this->dns)){
