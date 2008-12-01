@@ -396,7 +396,7 @@ class userManagement extends plugin
       /* Check locking, save current plugin in 'back_plugin', so
          the dialog knows where to return. */
       if (($user= get_lock($this->dn)) != ""){
-        return(gen_locked_message ($user, $this->dn));
+        return(gen_locked_message ($user, $this->dn,TRUE));
       }
 
       /* Lock the current entry, so everyone will get the
@@ -931,15 +931,21 @@ class userManagement extends plugin
         }
 
         if(!is_object($dia) && $dia != TRUE){
-          $display.= "<p style=\"text-align:right\">\n";
-          $display.= "<input type=submit name=\"edit_finish\" style=\"width:80px\" value=\"".msgPool::okButton()."\">\n";
-          $display.= "&nbsp;\n";
-          if ($this->dn != "new"){
-            $display.= "<input type=submit name=\"edit_apply\" value=\"".msgPool::applyButton()."\">\n";
+          if(($this->usertab instanceOf tabs || $this->usertab instanceOf plugin) && $this->usertab->read_only == TRUE){
+            $display.= "<p style=\"text-align:right\">
+                          <input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">
+                        </p>";
+          }else{
+            $display.= "<p style=\"text-align:right\">\n";
+            $display.= "<input type=submit name=\"edit_finish\" style=\"width:80px\" value=\"".msgPool::okButton()."\">\n";
             $display.= "&nbsp;\n";
+            if ($this->dn != "new"){
+              $display.= "<input type=submit name=\"edit_apply\" value=\"".msgPool::applyButton()."\">\n";
+              $display.= "&nbsp;\n";
+            }
+            $display.= "<input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">\n";
+            $display.= "</p>";
           }
-          $display.= "<input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">\n";
-          $display.= "</p>";
         }
       return ($display);
     }
@@ -1080,8 +1086,7 @@ class userManagement extends plugin
     /* Remove user lock if a DN is marked as "currently edited" */
     if (isset($this->usertab->dn)){
       del_lock ($this->usertab->dn);
-    }
-    if(isset($this->dn) && !empty($this->dn) && $this->dn != "new"){
+    }elseif(isset($this->dn) && !empty($this->dn) && $this->dn != "new"){
       del_lock($this->dn);
     }
     if(isset($this->dns) && is_array($this->dns) && count($this->dns)){

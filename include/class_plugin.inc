@@ -150,8 +150,14 @@ class plugin
       return;
     }
 
+    /* Check if this entry was opened in read only mode */
     if(isset($_POST['open_readonly'])){
-      $this->read_only = TRUE;
+      if(session::is_set("LOCK_CACHE")){
+        $cache = &session::get("LOCK_CACHE");
+        if(isset($cache['READ_ONLY'][$this->dn])){
+          $this->read_only = TRUE;
+        }
+      }
     }
 
     /* Save current dn as acl_base */

@@ -37,6 +37,8 @@ class tabs
   var $acl_category; 
   var $multiple_support_active = FALSE;
 
+  var $read_only = FALSE; // Used when the entry is opened as "readonly" due to locks.
+
   function tabs(&$config, $data, $dn, $acl_category= "")
   {
     /* Save dn */
@@ -68,6 +70,7 @@ class tabs
         $this->by_object[$tab['CLASS']]= new $tab['CLASS']($this->config, $this->dn, $baseobject);
       }
 
+      $this->read_only |= $this->by_object[$tab['CLASS']]->read_only;
       $this->by_object[$tab['CLASS']]->parent= &$this;
       $this->by_object[$tab['CLASS']]->set_acl_category($this->acl_category);
 

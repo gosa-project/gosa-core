@@ -608,14 +608,11 @@ function add_lock($object, $user)
   $cache = &session::get("LOCK_CACHE");
   if(isset($_POST['open_readonly'])){
     $cache['READ_ONLY'][$object] = TRUE;
-    echo "ADDED : {$user}:{$object}<br>";
     return;
   }
   if(isset($cache['READ_ONLY'][$object])){
-    echo "Removed lock entry $object <br>";
     unset($cache['READ_ONLY'][$object]);
   }
-
 
   if(is_array($object)){
     foreach($object as $obj){
@@ -680,14 +677,13 @@ function del_lock ($object)
   if(session::is_set("LOCK_CACHE")){
     $cache = &session::get("LOCK_CACHE");
     if(isset($cache['READ_ONLY'][$object])){
-      if(isset($_POST['delete_lock'])){
-        unset($cache['READ_ONLY'][$object]);
-      }else{
-        echo "Skipped: $object <br>";
-        return;
-      }
+      unset($cache['READ_ONLY'][$object]);
+      //echo "Remove ".$object."<b> Skipped!</b>";
+      return;
     }
   }
+
+  //echo "Remove ".$object."<b> Done!</b>";
 
   /* Check for existance and remove the entry */
   $ldap= $config->get_ldap_link();
@@ -1289,7 +1285,7 @@ function get_uid_regexp()
 }
 
 
-function gen_locked_message($user, $dn)
+function gen_locked_message($user, $dn, $allow_readonly = FALSE)
 {
   global $plug, $config;
 
@@ -1326,7 +1322,7 @@ function gen_locked_message($user, $dn)
 
   /* Prepare and show template */
   $smarty= get_smarty();
-  
+  $smarty->assign("allow_readonly",$allow_readonly);
   if(is_array($dn)){
     $msg = "<pre>";
     foreach($dn as $sub_dn){
