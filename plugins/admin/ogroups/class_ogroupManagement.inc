@@ -395,7 +395,7 @@ class ogroupManagement extends plugin
       /* Check locking, save current plugin in 'back_plugin', so
          the dialog knows where to return. */
       if (($user= get_lock($this->dn)) != ""){
-        return(gen_locked_message ($user, $this->dn));
+        return(gen_locked_message ($user, $this->dn,TRUE));
       }
 
       /* Lock the current entry, so everyone will get the
@@ -471,7 +471,11 @@ class ogroupManagement extends plugin
       $display= $this->ogroup->execute();
 
       /* Don't show buttons if tab dialog requests this */
-      if (!$this->ogroup->by_object[$this->ogroup->current]->dialog){
+      if(($this->ogroup instanceOf tabs || $this->ogroup instanceOf plugin) && $this->ogroup->read_only == TRUE){
+        $display.= "<p style=\"text-align:right\">
+          <input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">
+          </p>";
+      }elseif (!$this->ogroup->by_object[$this->ogroup->current]->dialog){
         $display.= "<p style=\"text-align:right\">\n";
         $display.= "<input type=submit name=\"edit_finish\" style=\"width:80px\" value=\"".msgPool::okButton()."\">\n";
         $display.= "&nbsp;\n";
@@ -709,8 +713,7 @@ class ogroupManagement extends plugin
   {
     if (isset($this->apptabs->dn)){
       del_lock ($this->apptabs->dn);
-    }
-    if(isset($this->dn) && !empty($this->dn) && $this->dn != "new"){
+    }elseif(isset($this->dn) && !empty($this->dn) && $this->dn != "new"){
       del_lock($this->dn);
     }
     if(isset($this->dns) && is_array($this->dns) && count($this->dns)){
