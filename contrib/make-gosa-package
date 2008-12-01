@@ -23,7 +23,7 @@ RELEASE_REASON="GOsa svn snapshot"
 BRANCH="trunk"
 SECTION="web"
 SI_SECTION="utils"
-TARGET_RELEASE="etch"
+TARGET_RELEASE="lenny"
 MAKE_PLUGINS=""
 NOT_RELEASED="heimdal dak dfs glpi opsi apache2 ssh"
 

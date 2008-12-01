@@ -24,6 +24,25 @@ usage() {
 }
 
 
+remove_empty_docs() {
+	for dir in $(find help); do
+		len=$(echo $dir | wc -c)
+		echo $len $dir
+	done | sort -rn | while read dummy dir; do
+
+		if [ -d $dir ]; then
+			cnt=$(ls -1A $dir | wc -l)
+			if [ $cnt -eq 0 ]; then
+				echo "Removing empty $dir"
+				rm -rf "$dir"
+				sed -i "/$(echo -n $dir | sed 's/\//\\\//g')/d" debian/install
+			fi
+		fi
+
+	done
+}
+
+
 load_dsc() {
   if [ -r "$1" ]; then
     PL_NAME=$(sed -n 's/"//g;s/^name\s*=\s*\(.*\)$/\1/p' "$1")
@@ -367,6 +386,9 @@ done
 
 # Remove examples
 rm debian/*ex debian/*EX >/dev/null 2>&1
+
+# Remove empty docs
+remove_empty_docs
 
 echo "Done."
 
