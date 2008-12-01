@@ -25,7 +25,7 @@ SECTION="web"
 SI_SECTION="utils"
 TARGET_RELEASE="etch"
 MAKE_PLUGINS=""
-NOT_REPLEASED="heimdal dak dfs glpi opsi apache2 ssh"
+NOT_RELEASED="heimdal dak dfs glpi opsi apache2 ssh"
 
 usage() {
 	cat <<-EOF
