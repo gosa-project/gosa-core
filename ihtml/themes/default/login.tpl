@@ -91,14 +91,13 @@
 
 <!-- Place cursor in username field -->
 <script language="JavaScript" type="text/javascript">
-  <!-- // Disable KeyPress actions
   enable_keyPress = false;
 
-  <!-- // First input field on page
   nextfield= "{$nextfield}";
   focus_field("{$nextfield}");
-  -->
 
 next_msg_dialog();
 </script>
-
+-->
+</body>
+</html>
