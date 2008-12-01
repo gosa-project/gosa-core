@@ -27,7 +27,12 @@ if (!$remove_lock){
   /* Reset requested? */
   if (isset($_POST['edit_cancel']) || isset($_POST['password_cancel']) || 
       (isset($_GET['reset']) && $_GET['reset'] == 1)){
-    del_lock ($ui->dn);
+
+    /* Only remove lock if object was opened 
+     */
+    if(session::is_set('user') && session::is_set('edit')){
+      del_lock ($ui->dn);
+    }
     session::un_set ('edit');
     session::un_set ('user');
   }
