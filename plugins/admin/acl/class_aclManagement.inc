@@ -188,7 +188,7 @@ class aclManagement extends plugin
         /* Check locking, save current plugin in 'back_plugin', so
            the dialog knows where to return. */
         if (($acl= get_lock($this->dn)) != ""){
-          return(gen_locked_message ($acl, $this->dn));
+          return(gen_locked_message ($acl, $this->dn,TRUE));
         }
 
         /* Lock the current entry, so everyone will get the above dialog */
@@ -641,8 +641,9 @@ class aclManagement extends plugin
     /* Remove acl lock if a DN is marked as "currently edited" */
     if (isset($this->acltabs->dn)){
       del_lock ($this->acltabs->dn);
+    }else{
+      del_lock ($this->dn);
     }
-    del_lock ($this->dn);
     del_lock ($this->dns);
   }
 

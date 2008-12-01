@@ -678,12 +678,9 @@ function del_lock ($object)
     $cache = &session::get("LOCK_CACHE");
     if(isset($cache['READ_ONLY'][$object])){
       unset($cache['READ_ONLY'][$object]);
-      //echo "Remove ".$object."<b> Skipped!</b>";
       return;
     }
   }
-
-  //echo "Remove ".$object."<b> Done!</b>";
 
   /* Check for existance and remove the entry */
   $ldap= $config->get_ldap_link();

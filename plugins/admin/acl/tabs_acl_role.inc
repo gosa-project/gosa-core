@@ -62,7 +62,11 @@ class aclroletab extends tabs
   function execute()
   {
     $display= tabs::execute();
-    if(!$this->by_object['aclrole']->dialog){
+    if($this->read_only){
+      $display.= "<p style=\"text-align:right\">\n";
+      $display.= "  <input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">\n";
+      $display.= "</p>";
+    }elseif(!$this->by_object['aclrole']->dialog){
       $display.= "<p style=\"text-align:right\">\n";
       $display.= "  <input type=submit name=\"edit_finish\" style=\"width:80px\" value=\"".msgPool::okButton()."\">\n";
       $display.= "  &nbsp;\n";

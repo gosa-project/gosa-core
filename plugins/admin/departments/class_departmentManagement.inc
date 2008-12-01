@@ -166,7 +166,7 @@ class departmentManagement extends plugin
       }else{
 
         if (($user= get_lock($this->dn)) != ""){
-          return(gen_locked_message ($user, $this->dn));
+          return(gen_locked_message ($user, $this->dn,TRUE));
         }
 
         /* Lock the current entry, so everyone will get the  above dialog */
@@ -381,7 +381,11 @@ class departmentManagement extends plugin
 
       /* Show main page (tabs) */
       $display= $this->deptabs->execute();
-      if (!$this->deptabs->by_object[$this->deptabs->current]->dialog){
+      if(($this->deptabs instanceOf tabs || $this->deptabs instanceOf plugin) && $this->deptabs->read_only == TRUE){
+        $display.= "<p style=\"text-align:right\">
+          <input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">
+          </p>";
+      }elseif (!$this->deptabs->by_object[$this->deptabs->current]->dialog){
         $display.= "<p style=\"text-align:right\">\n";
         $display.= "<input type=submit name=\"edit_finish\" value=\"".msgPool::okButton()."\">\n";
         $display.= "&nbsp;\n";
@@ -516,9 +520,6 @@ class departmentManagement extends plugin
 
   function remove_lock()
   {
-    if (isset($this->dn)){
-      del_lock ($this->dn);
-    }
     if(isset($this->dn) && !empty($this->dn) && $this->dn != "new"){
       del_lock($this->dn);
     }

@@ -54,6 +54,7 @@ class acltab extends tabs
 
       $this->by_object[$tab['CLASS']]->parent= &$this;
       $this->by_object[$tab['CLASS']]->set_acl_category("acl");
+      $this->read_only |= $this->by_object[$tab['CLASS']]->read_only;
 
       /* Initialize current */
       if ($this->current == ""){
@@ -76,7 +77,11 @@ class acltab extends tabs
   function execute()
   {
     $display= tabs::execute();
-    if(!$this->by_object['acl']->dialog){
+    if($this->read_only){
+      $display.= "<p style=\"text-align:right\">\n";
+      $display.= "  <input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">\n";
+      $display.= "</p>";
+    }elseif(!$this->by_object['acl']->dialog){
       $display.= "<p style=\"text-align:right\">\n";
       $display.= "  <input type=submit name=\"edit_finish\" style=\"width:80px\" value=\"".msgPool::okButton()."\">\n";
       $display.= "  &nbsp;\n";
