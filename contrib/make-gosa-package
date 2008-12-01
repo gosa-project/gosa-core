@@ -23,7 +23,7 @@ RELEASE_REASON="GOsa svn snapshot"
 BRANCH="trunk"
 SECTION="web"
 SI_SECTION="utils"
-TARGET_RELEASE="lenny"
+TARGET_RELEASE="etch"
 MAKE_PLUGINS=""
 NOT_RELEASED="heimdal dak dfs glpi opsi apache2 ssh"
 
@@ -34,6 +34,7 @@ usage() {
 	
 	Options:
 	  -b|--branch      Branch to export [$BRANCH]
+	  -t|--tag         Tag to export [$TAG]
 	  -p|--plugins     Comma seperate list of plugins to build. Leave empty to build all.
 	  -r|--release     Debian release to build for [$TARGET_RELEASE]
 	  -c|--changelog   Debian changelog entry [$RELEASE_REASON]
@@ -82,7 +83,6 @@ while true; do
         esac
 done
 
-[ $BRANCH = "trunk" ] || BRANCH="branches/$BRANCH"
 echo "Loading svn information for '${BRANCH}'..."
 svn co -N https://oss.gonicus.de/repositories/gosa/${BRANCH} gosa-info/ > /dev/null
 BRANCH_REV=$(LANG=C svn info gosa-info | sed -n -e 's/^Last Changed Rev: \([0-9]*\).*$/\1/p')
@@ -91,20 +91,29 @@ rm -rf gosa-info
 # Load current revision from logs
 VERSION=$(svn cat -r "${BRANCH_REV}" https://oss.gonicus.de/repositories/gosa/${BRANCH}/gosa-core/debian/changelog \
 	| head -n 1 | sed -n -e 's/.*(\([^-]*\).*/\1/p')
-GOSA_VER="${VERSION}+svn${BRANCH_REV}"
+if [ "$BRANCH" == "trunk" ]; then
+	GOSA_VER="${VERSION}+svn${BRANCH_REV}"
+else
+	GOSA_VER="${VERSION}"
+fi
 GOSA_DIR="gosa-${GOSA_VER}"
 
 ORIG_FILE="gosa_${GOSA_VER}.orig.tar.gz"
 
 # Export from svn...
-[ -d "gosa-${BRANCH}" ] && rm -rf gosa-$BRANCH
+BNAME=$(basename $BRANCH)
+[ -d "gosa-${BNAME}" ] && rm -rf gosa-$BNAME
 echo "Exporting current GOsa (rev: ${BRANCH_REV}) from '${BRANCH}'..."
-svn export -r "${BRANCH_REV}" https://oss.gonicus.de/repositories/gosa/${BRANCH}/gosa-core gosa-${BRANCH} > /dev/null
-svn export -r "${BRANCH_REV}" https://oss.gonicus.de/repositories/gosa/${BRANCH}/gosa-si gosa-si-${BRANCH} > /dev/null
-svn export -r "${BRANCH_REV}" https://oss.gonicus.de/repositories/gosa/${BRANCH}/gosa-plugins gosa-plugins-${BRANCH} > /dev/null
+svn export -r "${BRANCH_REV}" https://oss.gonicus.de/repositories/gosa/${BRANCH}/gosa-core gosa-${BNAME} > /dev/null
+svn export -r "${BRANCH_REV}" https://oss.gonicus.de/repositories/gosa/${BRANCH}/gosa-si gosa-si-${BNAME} > /dev/null
+svn export -r "${BRANCH_REV}" https://oss.gonicus.de/repositories/gosa/${BRANCH}/gosa-plugins gosa-plugins-${BNAME} > /dev/null
 
-VERSION=$(cat "gosa-${BRANCH}/debian/changelog" | head -n 1 | sed -n -e 's/.*(\([^-]*\).*/\1/p')
-GOSA_VER="${VERSION}+svn${BRANCH_REV}"
+VERSION=$(cat "gosa-${BNAME}/debian/changelog" | head -n 1 | sed -n -e 's/.*(\([^-]*\).*/\1/p')
+if [ "$BRANCH" == "trunk" ]; then
+	GOSA_VER="${VERSION}+svn${BRANCH_REV}"
+else
+	GOSA_VER="${VERSION}"
+fi
 GOSA_DIR="gosa-${GOSA_VER}"
 GOSA_SI_DIR="gosa-si-${GOSA_VER}"
 
@@ -112,8 +121,8 @@ if [ -d "gosa-${GOSA_VER}" ]
 then
 	rm -rf "gosa-${GOSA_VER}"
 fi
-mv "gosa-${BRANCH}" "gosa-${GOSA_VER}"
-mv "gosa-si-${BRANCH}" "gosa-si-${GOSA_VER}"
+mv "gosa-${BNAME}" "gosa-${GOSA_VER}"
+mv "gosa-si-${BNAME}" "gosa-si-${GOSA_VER}"
 
 echo "Creating original sources 'gosa-${GOSA_VER}'..."
 tar -c -f "gosa_${GOSA_VER}.orig.tar" "${GOSA_DIR}"
@@ -125,7 +134,7 @@ gzip -f -9 "gosa-si_${GOSA_VER}.orig.tar"
 
 export OVERRIDE_VERSION="$GOSA_VER"
 if [ -z "$MAKE_PLUGINS" ]; then
-	MAKE_PLUGINS=$(ls -1 gosa-plugins-${BRANCH}/*/plugin.dsc | sed 's/^.*\/\([^\/]*\)\/plugin.dsc$/\1/')
+	MAKE_PLUGINS=$(ls -1 gosa-plugins-${BNAME}/*/plugin.dsc | sed 's/^.*\/\([^\/]*\)\/plugin.dsc$/\1/')
 	for i in $NOT_RELEASED; do
 		MAKE_PLUGINS=$(echo -n $MAKE_PLUGINS | sed "s/$i//")
 	done
@@ -133,7 +142,7 @@ fi
 for plugin in $MAKE_PLUGINS; do
 
 	GOSA_PLUG_DIR="gosa-plugin-$plugin-${GOSA_VER}"
-	mv "gosa-plugins-${BRANCH}/$plugin" .
+	mv "gosa-plugins-${BNAME}/$plugin" .
 
 	echo "Debianizing plugin $plugin"
 	yes | dh-make-gosa --section $SECTION $plugin
@@ -146,7 +155,7 @@ for plugin in $MAKE_PLUGINS; do
 	gzip -f -9 "gosa-plugin-${plugin}_${GOSA_VER}.orig.tar"
 done
 
-rm -rf gosa-plugins-${BRANCH}
+rm -rf gosa-plugins-${BNAME}
 
 echo "Deploying patches..."
 for patch in $(find patches -type f | grep -v .svn); do
@@ -172,7 +181,11 @@ for plugin in $MAKE_PLUGINS; do
 done
 for dir in $GOSA_DIR $GOSA_SI_DIR $GOSA_PLUGIN_DIRS; do
 	echo "Adapting version in $dir"
-	(cd "$dir"; echo | debchange -v "${GOSA_VER}-1${TARGET_RELEASE}1" -D "$TARGET_RELEASE" "$RELEASE_REASON" >/dev/null 2>&1)
+	if [ "$TARGET_RELEASE" == "unstable" ]; then
+		(cd "$dir"; echo | debchange -v "${GOSA_VER}" "$RELEASE_REASON" >/dev/null 2>&1)
+	else
+		(cd "$dir"; echo | debchange -v "${GOSA_VER}-1${TARGET_RELEASE}1" -D "$TARGET_RELEASE" "$RELEASE_REASON" >/dev/null 2>&1)
+	fi
 	[ -d $dir/debian/patches ] || continue
 	echo "Creating patch list for $dir"
 	ls -1 $dir/debian/patches | grep -v 00list | sed 's%^.*/%%g' > $dir/debian/patches/00list
