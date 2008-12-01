@@ -7,6 +7,13 @@ GOsa2 changelog
   - Fix problem with self modify ACL detection
   - Increased all schema version numbers to make setup
     check work again
+  - Added admin account migration to setup
+  - Session expired dialog is now translated
+  - Fixed problems with sieveManagement
+  - Fixed issue with department saving and structuralObjectClass errors
+  - Added local delivery flag to group mail
+  - Fixed problem with sudoers creation
+  - Fixed accidentally remove of non GOsa user accounts
 
 * gosa 2.6
   - Redesign of ACL handling
