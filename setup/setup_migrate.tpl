@@ -187,6 +187,52 @@
 			</div>
 		
 
+		{elseif $method == "migrate_acls"}
+			<h2>{t}Migrate GOsa 2.5 administrative accounts{/t}</h2>
+            <p>
+            {t}This dialog allows the migration of GOsa 2.5 admin accounts into GOsa 2.6 useable accounts.{/t}
+            </p>
+			<table>	
+				<tr>	
+					<td></td>
+					<td></td>
+				</tr>
+			{foreach from=$migrateable_users item=item key=key}
+				<tr>
+					<td><input type='checkbox' name='migrate_admin_{$key}' value='{$key}' {if $item.checked} checked {/if}></td>
+					<td>{$item.dn}</td>
+				</tr>
+			{/foreach}
+			</table>
+
+			{if !$details}
+				<input type='submit' name='migrate_acls_show_changes' value='{t}Show changes{/t}'>
+				<input type='hidden' name='details' value='0'>
+			{else}
+				<input type='hidden' name='details' value='1'>
+
+				<br>
+				<div class="step2_entry_container_info">
+				{t}Current{/t}
+				<div style='padding-left:20px;'>
+					<pre>{$migrate_acl_base_entry}</pre>
+				</div>
+				{t}After migration{/t}
+				<div style='padding-left:20px;'>
+					<pre>{$migrate_acl_base_entry}{foreach from=$migrateable_users item=item key=key}{if $item.checked}<b>{$item.details}</b>{/if}{/foreach}</pre>
+				</div>
+				</div>
+				<br>
+				<input type='submit' name='migrate_acls_hide_changes' value='{t}Hide changes{/t}'>
+			{/if}
+
+			<input type='submit' value="{t}Reload{/t}">
+			<p class='seperator'>&nbsp;</p>	
+			<div style='width:99%; text-align:right; padding:5px;'>
+				<input type='submit' name='migrate_admin_user' value='{t}Apply{/t}'>	
+				<input type='submit' name='migrate_acls_cancel' value='{t}Cancel{/t}'>
+			</div>
+
 		{elseif $method == "create_acls"}
 
 		{if $acl_create_selected != "" && $what_will_be_done_now!=""}

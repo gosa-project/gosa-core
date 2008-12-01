@@ -108,6 +108,11 @@ class Step_Migrate extends setup_step
 
   var $group_list              = array();
 
+  /* Migrateable users */
+  var $migrate_users = array();
+  var $acl_migrate_dialog      = FALSE;
+  var $migrate_acl_base_entry  = "";
+
   function Step_Migrate()
   {
     $this->update_strings(); 
@@ -146,6 +151,7 @@ class Step_Migrate extends setup_step
     $this->checks['users_visible']['ERROR_MSG'] = "";
     $this->check_gosaAccounts();
 
+    $this->migrate_users = array();
     $this->checks['acls']['TITLE']     = _("Checking for super administrator");
     $this->checks['acls']['STATUS']    = FALSE;
     $this->checks['acls']['STATUS_MSG']= "";
@@ -851,9 +857,14 @@ class Step_Migrate extends setup_step
    */
   function check_administrativeAccount()
   {
+    /* Reset settings 
+     */ 
+    $this->migrate_users = array();
+    $this->acl_migrate_dialog = FALSE;
+    $this->migrate_acl_base_entry  = "";
+
     /* Establish ldap connection */
     $cv = $this->parent->captured_values;
-
     $ldap_l = new LDAP($cv['admin'],
         $cv['password'],
         $cv['connection'],
@@ -975,10 +986,42 @@ class Step_Migrate extends setup_step
         }
       }
 
-      # For debugging
-      #echo $username;
+      /* Try to find an old GOsa 2.5 administrative account that may be migrated 
+       */
+      if(!$GOsa_26_found){
+        $valid_users = "";
+        $valid_groups = "";
+        $ldap->cd($cv['base']);
+        $ldap->search("(&(objectClass=posixGroup)(gosaSubtreeACL=:all)(memberUid=*))",array("memberUid","cn"));
+        while($p_group = $ldap->fetch()){
+          $val_users = "";
+          for($e = 0 ; $e < $p_group['memberUid']['count'] ; $e ++ ){
+            $user = $p_group['memberUid'][$e];
+            if(isset($rusers[$user])){
+              $val_users .= $user.", ";
+            }  
+          }
+          if(!empty($val_users)){
+            $valid_groups .= $groups[$p_group['dn']]."(<i>".trim($val_users,", ")."</i>), ";
+            $GOsa_25_found  = TRUE;
+          }
+        }
+      }
 
-      if($GOsa_26_found){
+      /* Print out results 
+       */
+      if($GOsa_25_found){
+        $str = "";
+        if(!empty($valid_groups)){
+          $str.= "<i>".sprintf(_("GOsa 2.5 adminitrative accounts found: %s."),trim($valid_groups,", "))."</i><br>";
+        }
+        $this->checks['acls']['STATUS']    = FALSE;
+        $this->checks['acls']['STATUS_MSG']= _("Failed");
+        $this->checks['acls']['ERROR_MSG'] = $str;
+        $this->checks['acls']['ERROR_MSG'].= _("There is no valid GOsa 2.6 administrator account inside your LDAP.")."&nbsp;";
+        $this->checks['acls']['ERROR_MSG'].= "<input type='submit' name='migrate_acls' value='"._("Migrate")."'>";
+        $this->checks['acls']['ERROR_MSG'].= "<input type='submit' name='create_acls' value='"._("Create new")."'>";
+      }elseif($GOsa_26_found){
         $str = "";
         if(!empty($valid_users)){
           $str.= "<b>"._("Users")."</b>:&nbsp;".trim($valid_users,", ")."<br>";
@@ -986,11 +1029,9 @@ class Step_Migrate extends setup_step
         if(!empty($valid_groups)){
           $str.= "<b>"._("Groups")."</b>:&nbsp;".trim($valid_groups,", ")."<br>";
         }
-
         $this->checks['acls']['STATUS']    = TRUE;
         $this->checks['acls']['STATUS_MSG']= _("Ok");
         $this->checks['acls']['ERROR_MSG'] = $str;
-
       }elseif($GOsa_25_found){
         $this->checks['acls']['STATUS']    = FALSE;
         $this->checks['acls']['STATUS_MSG']= _("Failed");
@@ -1468,33 +1509,32 @@ class Step_Migrate extends setup_step
     }
  
     /*************
-     * User Migration handling 
+     * Administrative Account -- Migrate/Create 
      *************/
 
     if(isset($_POST['retry_acls'])){
       $this->check_administrativeAccount();
     }
 
+    /* Dialog handling */
     if(isset($_POST['create_acls'])){
       $this->acl_create_dialog = TRUE;
       $this->dialog = TRUE;
     }
+
+    if(isset($_POST['migrate_acls'])){
+      $this->acl_migrate_dialog = TRUE;
+      $this->dialog = TRUE;
+    }
   
-    if(isset($_POST['create_acls_cancel'])){
+    if(isset($_POST['create_acls_cancel']) || isset($_POST['migrate_acls_cancel'])){
       $this->acl_create_dialog = FALSE;
+      $this->acl_migrate_dialog = FALSE;
       $this->dialog = FALSE;
       $this->show_details = FALSE;
     }
 
-#    if(isset($_POST['create_acls_create_confirmed'])){
-#      if($this->create_admin()){
-#        $this->acl_create_dialog = FALSE;
-#        $this->dialog = FALSE;
-#      $this->show_details = FALSE;
-#        $this->initialize_checks();
-#      }
-#    }
-
+    /* Account creation */
     if(isset($_POST['create_acls_create'])){
       $this->create_admin(TRUE);
     }
@@ -1506,14 +1546,43 @@ class Step_Migrate extends setup_step
       }
     }
 
+    /* Add admin acls for the selected users to the ldap base.
+     */
+    if($this->acl_migrate_dialog && isset($_POST['migrate_admin_user'])){
+
+      /* Update ldap and reload check infos 
+       */
+      $this->migrate_selected_admin_users();
+
+    }elseif($this->acl_migrate_dialog){
+
+      /* Display admin migration dialog.
+       */
+      $this->migrate_users();
+      $smarty = get_smarty();
+
+      /* Do we have to display the changes
+       */
+      $details = isset($_POST['details']) && $_POST['details'];
+      if(isset($_POST['migrate_acls_show_changes'])){
+        $details = TRUE;
+      }elseif(isset($_POST['migrate_acls_hide_changes'])){
+        $details = FALSE;
+      }
+
+      $smarty->assign("migrate_acl_base_entry", $this->migrate_acl_base_entry);
+      $smarty->assign("details", $details);
+      $smarty->assign("method","migrate_acls");
+      $smarty->assign("migrateable_users",$this->migrate_users);
+      return($smarty->fetch(get_template_path("setup_migrate.tpl",TRUE,dirname(__FILE__))));
+    }
+
     if($this->acl_create_dialog){
       $smarty = get_smarty();
-  
       $uid = "admin";
       if(isset($_POST['new_user_uid'])){
         $uid = $_POST['new_user_uid'];
       }
-
       $smarty->assign("new_user_uid",$uid);
       $smarty->assign("new_user_password",@$_POST['new_user_password']);
       $smarty->assign("new_user_password2",@$_POST['new_user_password2']);
@@ -2887,7 +2956,148 @@ class Step_Migrate extends setup_step
      */
     $this->check_menus();
   }
-}
 
+
+  function migrate_selected_admin_users()
+  {
+    /* Updated ui selection */
+    $this->migrate_users();
+
+    /* Establish ldap connection */
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
+        $cv['password'],
+        $cv['connection'],
+        FALSE,
+        $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
+    $ldap->cd($cv['base']);
+
+    /* Get current ACL configuration for the ldap base 
+     */
+    $ldap->cat($cv['base']);
+    $base_attrs = $ldap->fetch();
+    $acl_entries= array();
+    $acl_id = -1;
+    if(isset($base_attrs['gosaAclEntry'])){
+      for($i=0; $i < $base_attrs['gosaAclEntry']['count']; $i ++){
+        $acl_entries[] = $base_attrs['gosaAclEntry'][$i];
+        $cur_id = preg_replace("/^([0-9]*):.*$/","\\1",$base_attrs['gosaAclEntry'][$i]);
+        if($cur_id > $acl_id){
+          $acl_id = $cur_id;
+        }
+      }
+    }
+
+    /* Append ACLs selected in the migrate admin account dialog 
+     */
+    foreach($this->migrate_users as $entry){
+      if($entry['checked']){
+        $acl_id ++;
+        $acl_entries[] = $acl_id.$entry['change'];
+      }
+    }
+   
+    /* Check if the required objectClasses are available 
+     */
+    $ocs = array();     
+    for($i=0;$i< $base_attrs['objectClass']['count']; $i++){
+      $ocs[] = $base_attrs['objectClass'][$i];
+    }
+    if(!in_array("gosaACL",$ocs)){
+      $ocs[] = "gosaACL";
+    }
+
+    /* Try to write changes 
+     */
+    if(count($acl_entries)){
+      $new_entry['gosaAclEntry'] = $acl_entries;
+      $new_entry['objectClass'] = $ocs;
+      $ldap->cd($cv['base']);
+      $ldap->modify($new_entry);
+      if(!$ldap->success()){
+        $this->checks['acls']['TITLE']     = _("Checking for super administrator");
+        $this->checks['acls']['STATUS']    = FALSE;
+        $this->checks['acls']['STATUS_MSG']= _("Failed");
+        $this->checks['acls']['ERROR_MSG'] = "<br>".msgPool::ldaperror($cv['base'],$ldap->get_error(),LDAP_MOD);
+      }else{
+        $this->check_administrativeAccount();
+      }     
+    }
+  }
+  
+
+  function migrate_users()
+  {
+    /* Collect a list of available GOsa users and groups 
+     */
+
+    /* Establish ldap connection */
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
+        $cv['password'],
+        $cv['connection'],
+        FALSE,
+        $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
+    $ldap->cd($cv['base']);
+
+    $users = array();
+    $ldap->search("(&(objectClass=gosaAccount)(objectClass=person)".
+        "(objectClass=inetOrgPerson)(objectClass=organizationalPerson))",array("uid","dn"));
+    while($user_attrs = $ldap->fetch()){
+      $users[$user_attrs['dn']] = $user_attrs['uid'][0];
+      $rusers[$user_attrs['uid'][0]] = $user_attrs['dn'];
+    }
+    $groups = array();
+    $ldap->search("objectClass=posixGroup",array("cn","dn"));
+    while($group_attrs = $ldap->fetch()){
+      $groups[$group_attrs['dn']] = $group_attrs['cn'][0];
+    }
+
+    foreach($this->migrate_users as $id => $data){
+      $this->migrate_users[$id]['checked'] = isset($_POST['migrate_admin_'.$id]);
+    }
+
+    /* Try to find an old GOsa 2.5 administrative account that may be migrated
+     */
+    if(!count($this->migrate_users)){
+      $ldap->cat($cv['base']);
+      $base_data = $ldap->fetch();
+      $base_entry = "dn: ".$base_data['dn']."\n";
+      for($i=0;$i<$base_data['objectClass']['count'];$i++){
+        $base_entry .= "objectClass: ".$base_data['objectClass'][$i]."\n";
+      }
+      if(!in_array("gosaACL",$base_data['objectClass'])){
+        $base_entry .= "<b>objectClass: gosaACL</b>\n";
+      }
+      if(isset($base_data['gosaAclEntry'])){
+        for($i=0;$i<$base_data['gosaAclEntry']['count'];$i++){
+          $base_entry .= "gosaAclEntry: ".$base_data['gosaAclEntry'][$i]."\n";
+        }
+      }
+      $this->migrate_acl_base_entry = $base_entry;
+      $ldap->cd($cv['base']);
+      $ldap->search("(&(objectClass=posixGroup)(gosaSubtreeACL=:all)(memberUid=*))",array("memberUid","cn"));
+      while($p_group = $ldap->fetch()){
+        for($e = 0 ; $e < $p_group['memberUid']['count'] ; $e ++ ){
+          $user = $p_group['memberUid'][$e];
+          if(isset($rusers[$user])){
+            $bsp_acl_entry = "gosaAclEntry: #:psub:".base64_encode($rusers[$user]).":all;cmdrw\n";
+            $entry = array();
+            $entry['uid'] = $user; 
+            $entry['dn'] = $rusers[$user]; 
+            $entry['details'] = $bsp_acl_entry; 
+            $entry['checked'] = FALSE;
+            $entry['change'] = ":psub:".base64_encode($rusers[$user]).":all;cmdrw";
+            $this->migrate_users[] = $entry;
+          }
+        }
+      }
+    }
+  }
+}
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
