@@ -407,7 +407,7 @@ class msgPool
           $deps.= "$dep / ";
         }
         $deps= preg_replace("/ \/ $/", "", $deps);
-        return sprintf(_("This account has %s features settings. To disable them, you'll need to add the %s settings first!"), $name, $deps);
+        return sprintf(_("This account has %s settings disabled. To enable them, you'll need to add the %s settings first!"), $name, $deps);
       }
     }
   }
