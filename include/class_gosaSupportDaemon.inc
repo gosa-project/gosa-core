@@ -31,8 +31,8 @@ class gosaSupportDaemon
   private $s_error      = "";
   private $b_error      = FALSE;
 
-  private $is_connected     = FALSE;
-
+  private $is_connected   = FALSE;
+  private $is_configured  = FALSE;
   protected $use_alternative_xml_parse_method = FALSE;
 
   public function get_host()
@@ -70,12 +70,18 @@ class gosaSupportDaemon
         $this->i_port= preg_replace("/^.*@[^:]+:(.*)$/", "$1", $config->get_cfg_value("gosaSupportURI"));
         $this->s_encryption_key = preg_replace("/^(.*)@[^:]+:.*$/", "$1", $config->get_cfg_value("gosaSupportURI"));
       }
-
+      $this->is_configured = TRUE;
       $this->f_timeout = $timeout;
       if($connect){
         $this->connect();
       }
     }
+  }
+
+
+  public function is_configured()
+  {
+    return($this->is_configured);
   }
 
 
