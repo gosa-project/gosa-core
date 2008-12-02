@@ -1,0 +1,30 @@
+#!/bin/sh
+
+if [ $# -ne 1 ]; then
+	echo "Usage: make-all trunk"
+	exit 1
+fi
+
+what=$1
+
+svn export https://oss.gonicus.de/repositories/gosa/$what/gosa-core
+svn export https://oss.gonicus.de/repositories/gosa/$what/gosa-plugins
+
+VERSION=$(cat gosa-core/debian/changelog | head -n 1 | sed -n -e 's/.*(\([^-]*\).*/\1/p')
+
+cp -a gosa-core gosa-$VERSION
+tar cvfj /usr/src/redhat/SOURCES/gosa-$VERSION.tar.bz2 gosa-$VERSION
+cp gosa-$VERSION/redhat/0* /usr/src/redhat/SOURCES/
+sed "s/^Version:.*$/Version:            $VERSION/" gosa-$VERSION/redhat/gosa.spec > /usr/src/redhat/SPECS/gosa.spec
+
+rpmbuild -bb /usr/src/redhat/SPECS/gosa.spec
+
+cd gosa-plugins
+for plugin in *; do
+        ../gosa-core/redhat/rpm-make-gosa $plugin
+        rpmbuild -bb /usr/src/redhat/SPECS/gosa-plugin-$plugin.spec
+done
+
+rm -rf gosa-core
+rm -rf gosa-$VERSION
+rm -rf gosa-plugins
