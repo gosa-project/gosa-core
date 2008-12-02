@@ -1,0 +1,97 @@
+#!/bin/sh
+
+configfile=gosa-plugin-${1}.spec
+
+echo "Reading plugin parameters..."
+
+name=$(awk /name/ $1/plugin.dsc | awk '{ print $3 }')
+description=$(awk /description/ $1/plugin.dsc | awk -F '"' '{ print $2 }')
+version=$(awk /version/ $1/plugin.dsc | awk '{ print $3 }')
+author=$(awk /author/ $1/plugin.dsc | awk -F '"' '{ print $2 }')
+homepage=$(awk /homepage/ $1/plugin.dsc | awk '{ print $3 }')
+depends=$(sed -n 's/^depends\s*=\s*//p' $1/plugin.dsc | sed 's/^/ /;s/,/ /g;s/\s\s*/ /g;s/ / gosa-plugin-/g;s/^ //;s/ /,/')
+conflicts=$(awk /conflicts/ $1/plugin.dsc | awk '{ print $3 }')
+provides=$(awk /provides/ $1/plugin.dsc | awk '{ print $3 }')
+release=0
+
+echo "Creating Spec file..."
+cat << EOF | sed -e "s/@@NAME@@/$name/g" -e "s/@@DESCRIPTION@@/$description/g" -e "s/@@VERSION@@/$version/g" -e "s/@@AUTHOR@@/$author/g" -e "s#@@HOMEPAGE@@#$homepage#g" -e "s/@@DEPENDS@@/$depends/g" -e "s/@@CONFLICTS@@/$conflicts/g" -e "s/@@PROVIDES@@/$provides/g" -e "s/@@RELEASE@@/$release/g" -e "s/@@.*@@/not_defined/g" > $configfile
+# Some sort of "detection" of suse
+%{?suse_version:%define suse 1}
+%{!?suse_version:%define suse 0}
+
+# Define Packagename, e.g.:
+# rpmbuild --rebuild --define 'sourcename gosa' gosa.srpm
+%{!?sourcename:%define sourcename %{name}-%{version}}
+
+#
+# Distribution
+#
+Summary:                @@DESCRIPTION@@
+Name:                   gosa-plugin-@@NAME@@
+Version:                @@VERSION@@
+Release:                @@RELEASE@@
+License:                GPL
+Source:                 ftp://oss.GONICUS.de/pub/gosa/%{sourcename}.tar.bz2
+URL:                    @@HOMEPAGE@@
+Group:                  System/Administration
+Vendor:                 GONICUS GmbH
+Packager:               @@AUTHOR@@
+Buildarch:              noarch
+%if %{suse}
+Requires:               gosa >= 2.6.0, @@DEPENDS@@
+%else
+Requires:               gosa >= 2.6.0, @@DEPENDS@@
+%endif
+BuildRoot:              %{_tmppath}/%{name}-%{version}-root
+BuildArch:              noarch
+
+%define confdir         /etc/%{name}
+
+%if %{suse}
+        %{echo:Building SuSE rpm}
+        %define docdir /usr/share/doc/packages/gosa
+%else
+        %{echo:Building other rpm}
+        %define webconf /etc/httpd/conf.d/
+        %define docdir /usr/share/doc/gosa-%{version}
+%endif
+
+%description
+@@DESCRIPTION@@
+
+%prep
+%setup -q -n %{sourcename}
+
+%build
+
+%install
+# Create buildroot
+mkdir -p %{buildroot}/usr/share/gosa/plugins/%{name}
+mv ./* %{buildroot}/usr/share/gosa/plugins/%{name}
+#cp -ua ./@@NAME@@* %{buildroot}/usr/share/gosa/plugins/@@NAME@@
+
+%post
+/usr/sbin/update-gosa
+
+%clean
+rm -rf %{buildroot}
+
+%files
+%defattr(-,root,root)
+%attr (-,root,root) /usr/share/gosa/plugins/%{name}
+EOF
+
+# Create eventually missing directories
+[ ! -d /usr/src/redhat/SOURCES ] && mkdir -p /usr/src/redhat/SOURCES
+[ ! -d /usr/src/redhat/SPECS ] && mkdir -p /usr/src/redhat/SPECS
+
+mv $configfile /usr/src/redhat/SPECS
+cp -r ./$1 /tmp/$1-${version}
+cd /tmp/
+mv $1-${version} gosa-plugin-${1}-${version}
+tar cjf gosa-plugin-${1}-${version}.tar.bz2 ./gosa-plugin-${1}-${version}
+rm -rf $1-${version} gosa-plugin-${1}-${version}
+mv -f gosa-plugin-${1}-${version}.tar.bz2 /usr/src/redhat/SOURCES
+
+echo "Done."

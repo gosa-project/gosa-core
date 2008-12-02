@@ -179,6 +179,7 @@ mkdir -p %{buildroot}/usr/share/gosa
 for i in compile config cache; do \
   mkdir -p %{buildroot}/var/spool/gosa/$i ; \
 done
+mkdir -p %{buildroot}/var/cache/gosa
 
 # Copy
 DIRS="doc ihtml plugins html include locale setup"
@@ -193,6 +194,7 @@ mkdir -p %{buildroot}/etc/gosa
 mkdir -p %{buildroot}/usr/share/doc/gosa
 mkdir -p %{buildroot}/etc/httpd/conf.d
 
+touch %{buildroot}/etc/gosa/gosa.secrets
 mv contrib/gosa.conf		%{buildroot}/usr/share/doc/gosa
 mv update-gosa 			%{buildroot}/usr/sbin
 mv bin/gosa-encrypt-passwords 	%{buildroot}/usr/sbin
@@ -308,6 +310,8 @@ rm -rf %{buildroot}
 %attr(0755, root,root) /usr/share/gosa/plugins
 %attr(0755, root,root) /usr/share/gosa/setup
 %attr(0755, root,root) /usr/share/gosa/doc/core/guide.xml
+%attr(0755, root,root) /var/cache/gosa
+%attr(0700, root,root) /etc/gosa/gosa.secrets
 
 ########################
 
