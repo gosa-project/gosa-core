@@ -38,7 +38,7 @@ class passwordMethod
     if($this->get_hash_name() == ""){
       return("{crypt}N0T$3T4N0W");
     }else{
-      return('{'.$this->get_hash_name().'}').'N0T$3T4N0W';
+      return('{'.$this->get_hash().'}').'N0T$3T4N0W';
     }
   }
 

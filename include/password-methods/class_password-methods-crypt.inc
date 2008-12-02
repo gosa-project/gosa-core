@@ -36,6 +36,11 @@ class passwordMethodCrypt extends passwordMethod
     }
   }
 
+  function create_template_hash($attrs)
+  {
+    return($this->generate_hash('N0T$3T4N0W').'N0T$3T4N0W');
+  }
+
 
   function generate_hash($pwd)
   {
