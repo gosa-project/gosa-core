@@ -1303,7 +1303,8 @@ class plugin
     $this->dn = $dn;
     $ldap = $this->config->get_ldap_link();
     $ldap->cd($this->config->current['BASE']);
-    $ldap->rmdir_recursive($dn);
+    $ldap->rmdir_recursive($this->dn);
+    msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn));
     $this->dn = $old_dn;
   }
 
@@ -1513,10 +1514,51 @@ class plugin
     $this->parent = $parent;
 
     foreach($_POST as $name => $value){
-			$entry = base64_decode(preg_replace("/_[xy]$/","",$name));
+
+##   foreach($_POST as $name => $value){
+## +           $entry = base64_decode(preg_replace("/_[xy]$/","",$name));
+##
+##        /* Create a new snapshot, display a dialog */
+##        if(preg_match("/^CreateSnapShotDialog_/",$name) && $once){
+##          $once = false;
+## -        $entry = preg_replace("/^CreateSnapShotDialog_/","",$name);
+## -        $entry = base64_decode(preg_replace("/_[xy]$/","",$entry));
+## +        $entry = preg_replace("/^CreateSnapShotDialog_/","",$entry);
+##
+##          if(!empty($entry) && $ui->allow_snapshot_create($entry,$this->parent->acl_module)){
+##            $this->snapDialog = new SnapShotDialog($this->config,$entry,$this);
+## @@ -1538,8 +1530,7 @@
+##        /* Restore a snapshot, display a dialog with all snapshots of the current object */
+##        if(preg_match("/^RestoreSnapShotDialog_/",$name) && $once){
+##          $once = false;
+## -        $entry = preg_replace("/^RestoreSnapShotDialog_/","",$name);
+## -        $entry = base64_decode(preg_replace("/_[xy]$/","",$entry));
+## +        $entry = preg_replace("/^RestoreSnapShotDialog_/","",$entry);
+##          if(!empty($entry) && $ui->allow_snapshot_restore($entry,$this->parent->acl_module)){
+##            $this->snapDialog = new SnapShotDialog($this->config,$entry,$this);
+##            $this->snapDialog->display_restore_dialog = true;
+## @@ -1566,8 +1557,7 @@
+##        /* Restore selected snapshot */
+##        if(preg_match("/^RestoreSnapShot_/",$name) && $once){
+##          $once = false;
+## -        $entry = preg_replace("/^RestoreSnapShot_/","",$name);
+## -        $entry = base64_decode(trim(preg_replace("/_[xy]$/","",$entry)));
+## +        $entry = preg_replace("/^RestoreSnapShot_/","",$entry);
+##          if(!empty($entry) && $ui->allow_snapshot_restore($entry,$this->parent->acl_module)){
+##            $this->restore_snapshot($entry);
+##            $this->snapDialog = NULL;
+## @@ -1628,6 +1618,7 @@
+## */
+##
+##
+##
+
+
 
       /* Create a new snapshot, display a dialog */
-      if(preg_match("/^CreateSnapShotDialog_/",$name) && $once){
+      if(preg_match("/^CreateSnapShotDialog_[^_]*_[xy]$/",$name) && $once){
+
+			  $entry = base64_decode(preg_replace("/^CreateSnapShotDialog_([^_]*)_[xy]$/","\\1",$name));
         $once = false;
         $entry = preg_replace("/^CreateSnapShotDialog_/","",$entry);
 
@@ -1530,8 +1572,8 @@ class plugin
       /* Restore a snapshot, display a dialog with all snapshots of the current object */
       if(preg_match("/^RestoreSnapShotDialog_/",$name) && $once){
         $once = false;
-        $entry = preg_replace("/^RestoreSnapShotDialog_/","",$entry);
-        if(!empty($entry) && $ui->allow_snapshot_restore($entry,$this->parent->acl_module)){
+        $entry = base64_decode(preg_replace("/^RestoreSnapShotDialog_([^_]*)_[xy]$/i","\\1",$name));
+        if(!empty($entry) && $ui->allow_snapshot_restore($this->dn,$this->parent->acl_module)){
           $this->snapDialog = new SnapShotDialog($this->config,$entry,$this);
           $this->snapDialog->display_restore_dialog = true;
         }else{
@@ -1544,7 +1586,7 @@ class plugin
           || preg_match("/^RestoreDeletedSnapShot_/",$name)) && $once){
         $once = false;
 
-        if($ui->allow_snapshot_restore($base,$this->parent->acl_module)){
+        if($ui->allow_snapshot_restore($this->dn,$this->parent->acl_module)){
           $this->snapDialog = new SnapShotDialog($this->config,"",$this);
           $this->snapDialog->set_snapshot_bases($baseSuffixe);
           $this->snapDialog->display_restore_dialog      = true;
@@ -1557,8 +1599,9 @@ class plugin
       /* Restore selected snapshot */
       if(preg_match("/^RestoreSnapShot_/",$name) && $once){
         $once = false;
-        $entry = preg_replace("/^RestoreSnapShot_/","",$entry);
-        if(!empty($entry) && $ui->allow_snapshot_restore($entry,$this->parent->acl_module)){
+        $entry = base64_decode(preg_replace("/^RestoreSnapShot_([^_]*)_[xy]$/i","\\1",$name));
+
+        if(!empty($entry) && $ui->allow_snapshot_restore($this->dn,$this->parent->acl_module)){
           $this->restore_snapshot($entry);
           $this->snapDialog = NULL;
         }else{
