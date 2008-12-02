@@ -6,6 +6,7 @@ if [ $# -ne 1 ]; then
 fi
 
 what=$1
+NOT_RELEASED="heimdal dak dfs glpi opsi apache2 ssh"
 
 svn export https://oss.gonicus.de/repositories/gosa/$what/gosa-core
 svn export https://oss.gonicus.de/repositories/gosa/$what/gosa-plugins
@@ -19,8 +20,13 @@ sed "s/^Version:.*$/Version:            $VERSION/" gosa-$VERSION/redhat/gosa.spe
 
 rpmbuild -bb /usr/src/redhat/SPECS/gosa.spec
 
+MAKE_PLUGINS=$(ls -1 gosa-plugins/*/plugin.dsc | sed 's/^.*\/\([^\/]*\)\/plugin.dsc$/\1/')
+for i in $NOT_RELEASED; do
+	MAKE_PLUGINS=$(echo -n $MAKE_PLUGINS | sed "s/$i//")
+done
+
 cd gosa-plugins
-for plugin in *; do
+for plugin in $MAKE_PLUGINS; do
         ../gosa-core/redhat/rpm-make-gosa $plugin
         rpmbuild -bb /usr/src/redhat/SPECS/gosa-plugin-$plugin.spec
 done
