@@ -25,7 +25,7 @@ Patch1:			02_fix_class_mapping.patch
 Patch2:			03_fix_locale_location.patch
 Patch3:			04_fix_online_help_location.patch
 %if %{suse}
-Requires:		apache2,apache2-mod_php5,php5,php5-gd,php5-ldap,php5-mcrypt,php5-mysql,php5-imap,php5-iconv,php5-mbstring,php5-gettext,php5-session,ImageMagick
+Requires:		apache2,apache2-mod_php5,php5,php5-gd,php5-ldap,php5-mcrypt,php5-mysql,php5-imap,php5-iconv,php5-hash,php5-mbstring,php5-gettext,php5-session,ImageMagick
 %else
 Requires: 		httpd,php,php-ldap,php-imap,php-snmp,php-mysql,php-mbstring,ImageMagick,php-mhash,perl-Crypt-SmbHash
 %endif
@@ -192,13 +192,13 @@ done
 mkdir -p %{buildroot}/usr/sbin
 mkdir -p %{buildroot}/etc/gosa
 mkdir -p %{buildroot}/usr/share/doc/gosa
-mkdir -p %{buildroot}/etc/httpd/conf.d
+mkdir -p %{buildroot}%{webconf}
 
 touch %{buildroot}/etc/gosa/gosa.secrets
 mv contrib/gosa.conf		%{buildroot}/usr/share/doc/gosa
 mv update-gosa 			%{buildroot}/usr/sbin
 mv bin/gosa-encrypt-passwords 	%{buildroot}/usr/sbin
-mv debian/gosa-apache.conf 	%{buildroot}/etc/httpd/conf.d
+mv debian/gosa-apache.conf 	%{buildroot}%{webconf}
 mv contrib/shells 		%{buildroot}/etc/gosa
 mv contrib/encodings 		%{buildroot}/etc/gosa
 mv contrib/openldap/slapd.conf 	%{buildroot}/usr/share/doc/gosa/slapd.conf-example
