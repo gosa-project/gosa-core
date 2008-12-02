@@ -179,7 +179,7 @@ class user extends plugin
     }
 
     /* Make hash default to md5 if not set in config */
-    $hash= $this->config->get_cfg_value("hash", "crypt/md5");
+    $hash= $this->config->get_cfg_value("passwordDefaultHash", "crypt/md5");
 
     /* Load data from LDAP? */
     if ($dn !== NULL){
