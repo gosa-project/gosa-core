@@ -67,7 +67,9 @@ BuildArch:              noarch
 
 # Move extra HTML and images
 mkdir -p %{buildroot}/usr/share/gosa/html/plugins/@@NAME@@
-mv ./html/* %{buildroot}/usr/share/gosa/html/plugins/@@NAME@@
+if [ -d html ]; then
+	mv ./html/* %{buildroot}/usr/share/gosa/html/plugins/@@NAME@@
+fi
 
 # Move contrib if available
 mkdir -p %{buildroot}/usr/share/doc/%{name}
