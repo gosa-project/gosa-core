@@ -25,7 +25,7 @@ Patch1:			02_fix_class_mapping.patch
 Patch2:			03_fix_locale_location.patch
 Patch3:			04_fix_online_help_location.patch
 %if %{suse}
-Requires:		apache2,apache2-mod_php5,php5,php5-gd,php5-ldap,php5-mcrypt,php5-mysql,php4-imap,php5-iconv,php5-mbstring,php5-gettext,php5-session,ImageMagick
+Requires:		apache2,apache2-mod_php5,php5,php5-gd,php5-ldap,php5-mcrypt,php5-mysql,php5-imap,php5-iconv,php5-mbstring,php5-gettext,php5-session,ImageMagick
 %else
 Requires: 		httpd,php,php-ldap,php-imap,php-snmp,php-mysql,php-mbstring,ImageMagick,php-mhash,perl-Crypt-SmbHash
 %endif
