@@ -1057,6 +1057,7 @@ class user extends plugin
       foreach($temp as $id => $data){
         if(isset($data['name']) && $data['name'] == $this->pw_storage){
           $tmp = new  $temp[$this->pw_storage]($this->config,$this->dn);
+          $tmp->set_hash($this->pw_storage);
           $this->attrs['userPassword'] = $tmp->create_template_hash($this->attrs);
           break;
         }
@@ -1289,7 +1290,7 @@ class user extends plugin
     if(in_array("pw_storage",$this->multi_boxes)){
       return(TRUE);
     }
-    return($this->pw_storage != $this->last_pw_storage);
+    return($this->pw_storage != $this->last_pw_storage && !$this->is_template);
   }
 
 
