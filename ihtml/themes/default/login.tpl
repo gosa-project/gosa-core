@@ -89,7 +89,7 @@
 
 {$errors}
 
-<!-- Place cursor in username field -->
+<!-- Place cursor in username field 
 <script language="JavaScript" type="text/javascript">
   enable_keyPress = false;
 
