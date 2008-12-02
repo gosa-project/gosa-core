@@ -46,8 +46,6 @@ Requires:               gosa >= 2.6.0, @@DEPENDS@@
 BuildRoot:              %{_tmppath}/%{name}-%{version}-root
 BuildArch:              noarch
 
-%define confdir         /etc/%{name}
-
 %if %{suse}
         %{echo:Building SuSE rpm}
         %define docdir /usr/share/doc/packages/gosa
@@ -66,12 +64,33 @@ BuildArch:              noarch
 %build
 
 %install
-# Create buildroot
-mkdir -p %{buildroot}/usr/share/gosa/plugins/%{name}
-mv ./* %{buildroot}/usr/share/gosa/plugins/%{name}
-#cp -ua ./@@NAME@@* %{buildroot}/usr/share/gosa/plugins/@@NAME@@
+
+# Move extra HTML and images
+mkdir -p %{buildroot}/usr/share/gosa/html/plugins/@@NAME@@
+mv ./html/* %{buildroot}/usr/share/gosa/html/plugins/@@NAME@@
+
+# Move contrib if available
+mkdir -p %{buildroot}/usr/share/doc/%{name}
+if [ -d contrib ]; then
+	mv ./contrib %{buildroot}/usr/share/doc/%{name}
+fi
+
+# Move help
+mkdir -p %{buildroot}/usr/share/gosa/doc/plugins/@@NAME@@
+mv ./help/* %{buildroot}/usr/share/gosa/doc/plugins/@@NAME@@
+
+# Move localization
+mkdir -p %{buildroot}/usr/share/gosa/locale/plugins/@@NAME@@
+mv ./locale/* %{buildroot}/usr/share/gosa/locale/plugins/@@NAME@@
+
+# Move plugin itself
+mkdir -p %{buildroot}/usr/share/gosa/plugins/@@NAME@@
+mv ./* %{buildroot}/usr/share/gosa/plugins/@@NAME@@
 
 %post
+/usr/sbin/update-gosa
+
+%postun
 /usr/sbin/update-gosa
 
 %clean
@@ -79,7 +98,11 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%attr (-,root,root) /usr/share/gosa/plugins/%{name}
+%attr (-,root,root) /usr/share/gosa/plugins/@@NAME@@
+%attr (-,root,root) /usr/share/gosa/doc/plugins/@@NAME@@
+%attr (-,root,root) /usr/share/gosa/locale/plugins/@@NAME@@
+%attr (-,root,root) /usr/share/gosa/html/plugins/@@NAME@@
+%attr (-,root,root) /usr/share/doc/%{name}
 EOF
 
 # Create eventually missing directories
