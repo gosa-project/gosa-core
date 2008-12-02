@@ -308,9 +308,6 @@ class config  {
     if (!isset($this->current['SAMBAMACHINEACCOUNTRDN'])){
       $this->current['SAMBAMACHINEACCOUNTRDN']= "ou=winstations,ou=systems";
     }
-    if (!isset($this->current['HASH'])){
-      $this->current['HASH']= "crypt";
-    }
     if (!isset($this->current['ACCOUNTPRIMARYATTRIBUTE'])){
       $this->current['ACCOUNTPRIMARYATTRIBUTE']= "cn";
     }
