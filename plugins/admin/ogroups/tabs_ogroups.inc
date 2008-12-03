@@ -25,58 +25,72 @@ class ogrouptabs extends tabs
   var $base= "";
   var $acl_category; 
  
-  function reload($dd){
-    $objects= preg_replace('/[\[\]]/', '', $dd);
-    
+  function reload($dd)
+  {
+    $objects      = preg_replace('/[\[\]]/', '', $dd);
+
+    /* Check if we have a group with a set different mixed objects.
+     */
+    $mixed_type = FALSE;
+    for($i = 0 ; $i < (strlen($objects) -1 );$i++){
+      $mixed_type |= $objects[$i] != $objects[($i+1)];
+    }
+ 
     /* If there is a phonequeue,
      * but there is no user left with goPhoneAccount ... remove it.
      */
     $usePhoneTab = false;
-    foreach($this->by_object['ogroup']->memberList as $dn => $val){
+    if(class_available("phonequeue")){
 
-      if(isset($this->by_object['ogroup']->objcache[$dn])){
-        $obj = $this->by_object['ogroup']->objcache[$dn];
-        if(isset($obj['objectClass'])){
-          if(in_array("goFonAccount",$obj['objectClass'])){
-            $usePhoneTab = true;
+      foreach($this->by_object['ogroup']->memberList as $dn => $val){
+        if(isset($this->by_object['ogroup']->objcache[$dn])){
+          $obj = $this->by_object['ogroup']->objcache[$dn];
+          if(isset($obj['objectClass'])){
+            if(in_array("goFonAccount",$obj['objectClass'])){
+              $usePhoneTab = true;
+            }
           }
         }
       }
-    }
-
-    if(class_available("phonequeue")){
-      if(((!$usePhoneTab)&&(isset($this->by_object['phonequeue'])))||((!preg_match("/U/",$objects))&&(isset($this->by_object['phonequeue'])))){
+      if((!$usePhoneTab && isset($this->by_object['phonequeue']))||
+         (!preg_match("/U/",$objects) && isset($this->by_object['phonequeue']))){
         $this->by_object['phonequeue']->remove_from_parent();
         unset($this->by_object['phonequeue']);
         unset($this->by_name['phonequeue']);
       }
     }
-    /* Remove mail group if there is no user anymore */
+
+    /* Remove mail group if there is no user anymore 
+     */
     if(class_available("mailogroup")){
-      if((!preg_match("/U/",$objects))&&(isset($this->by_object['mailogroup']))){
+      if(!preg_match("/U/",$objects) && isset($this->by_object['mailogroup'])){
         $this->by_object['mailogroup']->remove_from_parent();
         unset($this->by_object['mailogroup']);
         unset($this->by_name['mailogroup']);
       }
     }
 
-    /* Remove terminal group, if theres no terminal left in the object list */
+    /* Remove terminal group, if theres no terminal left in the object list 
+     */
     if(class_available("termgroup")){
-      if(((!preg_match("/T/",$objects)) && (!preg_match("/W/",$objects)))&&(isset($this->by_object['termgroup']))){
+      if(($mixed_type && isset($this->by_object['termgroup'])) ||
+          !preg_match("/T/",$objects) && !preg_match("/W/",$objects) && isset($this->by_object['termgroup'])){
         $this->by_object['termgroup']->remove_from_parent();
         unset($this->by_object['termgroup']);
         unset($this->by_name['termgroup']);
       }
     }
     if(class_available("termservice")){
-      if(!preg_match("/T/",$objects) &&(isset($this->by_object['termservice']))){
+      if(($mixed_type && isset($this->by_object['termservice'])) ||
+          !preg_match("/T/",$objects) &&(isset($this->by_object['termservice']))){
         $this->by_object['termservice']->remove_from_parent();
         unset($this->by_object['termservice']);
         unset($this->by_name['termservice']);
       }
     }
     if(class_available("termstartup")){
-      if(!preg_match("/T/",$objects)&&(isset($this->by_object['termstartup']))){
+      if(($mixed_type && isset($this->by_object['termstartup'])) ||
+          !preg_match("/T/",$objects)&&(isset($this->by_object['termstartup']))){
         $this->by_object['termstartup']->remove_from_parent();
         unset($this->by_object['termstartup']);
         unset($this->by_name['termstartup']);
@@ -85,22 +99,24 @@ class ogrouptabs extends tabs
 
     /* Remove ws tabs, if theres no ws left in the object list */
     if(class_available("workservice")){
-      if((!preg_match("/W/",$objects))&&(isset($this->by_object['workservice']))){
+      if(($mixed_type && isset($this->by_object['workservice'])) ||
+          (!preg_match("/W/",$objects))&&(isset($this->by_object['workservice']))){
         $this->by_object['workservice']->remove_from_parent();
         unset($this->by_object['workservice']);
         unset($this->by_name['workservice']);
       }
     }
     if(class_available("workstartup")){
-      if((!preg_match("/S/",$objects) && !preg_match("/W/",$objects))&&(isset($this->by_object['workstartup']))){
+      if(($mixed_type && isset($this->by_object['workstartup'])) ||
+          (!preg_match("/S/",$objects) && !preg_match("/W/",$objects))&&(isset($this->by_object['workstartup']))){
         $this->by_object['workstartup']->remove_from_parent();
         unset($this->by_object['workstartup']);
         unset($this->by_name['workstartup']);
-	if (isset($this->by_object['faiSummary'])){
-	        $this->by_object['faiSummary']->remove_from_parent();
-	        unset($this->by_object['faiSummary']);
-	        unset($this->by_name['faiSummary']);
-	}
+        if (isset($this->by_object['faiSummary'])){
+          $this->by_object['faiSummary']->remove_from_parent();
+          unset($this->by_object['faiSummary']);
+          unset($this->by_name['faiSummary']);
+        }
       }
     }
   
@@ -110,10 +126,8 @@ class ogrouptabs extends tabs
     if(class_available("phonequeue")){
       if(!isset($this->by_object['phonequeue'])){
         foreach($this->by_object['ogroup']->memberList as $dn => $val){
-
           if(isset($this->by_object['ogroup']->objcache[$dn])){
             $obj = $this->by_object['ogroup']->objcache[$dn];
-
             if(isset($obj['objectClass'])){
               if(in_array("goFonAccount",$obj['objectClass'])){
                 $this->by_name['phonequeue']= _("Phone queue");
@@ -140,7 +154,8 @@ class ogrouptabs extends tabs
 
     /* Add Terminal tab */
     if(class_available("termgroup")){
-      if(((preg_match("/T/",$objects)) || (preg_match("/W/",$objects)))&&(!isset($this->by_object['termgroup']))){
+      if(!$mixed_type && 
+          ((preg_match("/T/",$objects)) || (preg_match("/W/",$objects)))&&(!isset($this->by_object['termgroup']))){
         if(!isset($this->by_object['termgroup'])){
           $this->by_name['termgroup']= _("Systems");
           $this->by_object['termgroup']= new termgroup($this->config, $this->dn);
@@ -150,7 +165,8 @@ class ogrouptabs extends tabs
       }
     }
     if(class_available("termstartup")){
-      if(preg_match("/T/",$objects) &&(!isset($this->by_object['termstartup']))){
+      if(!$mixed_type &&
+          preg_match("/T/",$objects) &&(!isset($this->by_object['termstartup']))){
         if(!isset($this->by_object['termstartup'])){
           $this->by_name['termstartup']= _("Startup");
           $this->by_object['termstartup']= new termstartup($this->config, $this->dn,$this->by_object['ogroup']);
@@ -159,7 +175,8 @@ class ogrouptabs extends tabs
         }
       }
     }
-    if(class_available("termservice")){
+    if(!$mixed_type &&
+        class_available("termservice")){
       if(preg_match("/T/",$objects) &&(!isset($this->by_object['termservice']))){
         if(!isset($this->by_object['termservice'])){
           $this->by_name['termservice']= _("Devices");
@@ -172,14 +189,16 @@ class ogrouptabs extends tabs
 
     /* Add Workstation tabs */
     if(class_available("workstartup")){
-      if((preg_match("/S/",$objects) || preg_match("/W/",$objects))&&(!isset($this->by_object['workstartup']))){
+      if(!$mixed_type &&
+          (preg_match("/S/",$objects) || preg_match("/W/",$objects))&&(!isset($this->by_object['workstartup']))){
         $this->by_name['workstartup']= _("Startup");
         $this->by_object['workstartup']= new workstartup($this->config, $this->dn);
         $this->by_object['workstartup']->parent= &$this;
         $this->by_object['workstartup']->acl = "#all#";
       }
     }
-    if(class_available("workservice")){
+    if(!$mixed_type &&
+        class_available("workservice")){
       if((preg_match("/W/",$objects))&&(!isset($this->by_object['workservice']))){
         $this->by_name['workservice']= _("Devices");
         $this->by_object['workservice']= new workservice($this->config, $this->dn);
@@ -189,7 +208,8 @@ class ogrouptabs extends tabs
       }
     }
     if(class_available("faiSummary")){
-      if((preg_match("/S/",$objects) || preg_match("/W/",$objects))&&(!isset($this->by_object['faiSummary']))){
+      if(!$mixed_type &&
+          (preg_match("/S/",$objects) || preg_match("/W/",$objects))&&(!isset($this->by_object['faiSummary']))){
         $this->by_name['faiSummary']= _("FAI summary");
         $this->by_object['faiSummary']= new faiSummaryTab($this->config, $this->dn);
         $this->by_object['faiSummary']->parent= &$this;
@@ -273,66 +293,6 @@ class ogrouptabs extends tabs
     tabs::tabs($config, $data, $dn, $category);
     $this->base= $this->by_object['ogroup']->base;
     $this->acl_category = $category;
-
-    /* Insert extra tabs for several object types - if present */
-
-    $objects= preg_replace('/[\[\]]/', '', $this->by_object['ogroup']->gosaGroupObjects);
-   
-    for ($n= 0; $n<strlen($objects); $n++){
-      switch ($objects[$n]){
-        case "T":
-          /* Add a terminal tab */
-          if(class_available("termgroup")){
-            $this->by_name['termgroup']= _("Systems");
-            $this->by_object['termgroup']= new termgroup($this->config, $this->dn);
-            $this->by_object['termgroup']->parent= &$this;
-          }
-          if(class_available("termstartup")){
-            $this->by_name['termstartup']= _("Startup");
-            $this->by_object['termstartup']= new termstartup($this->config, $this->dn,$this->by_object['ogroup']);
-          }
-          if(class_available("termservice")){
-            $this->by_name['termservice']= _("Devices");
-            $this->by_object['termservice']= new termservice($this->config, $this->dn,$this->by_object['ogroup']);
-          }
-          break;
-
-          case "U":
-            /* Append a PhoneQueue, if objectClass = goFonAccount */
-            $use = false;
-
-          /* We found goFonAccount in users objectClasses*/
-          if(class_available("phonequeue")){
-            foreach($this->by_object['ogroup']->memberList as $dn => $val){
-
-              $obj = $this->by_object['ogroup']->objcache[$dn];
-
-              if(isset($obj['objectClass'])){
-                if(in_array("goFonAccount",$obj['objectClass'])){
-                  $use = true; 
-                }
-              }
-            }
-
-            if($use){
-              $this->by_name['phonequeue']= _("Phone queue");
-              $this->by_object['phonequeue']= new phonequeue($this->config, $this->dn);
-              $this->by_object['phonequeue']->parent= &$this;
-            } 
-          } 
- 
-          /* Add a user tab used for mail distribution lists */
-          if(class_available("mailogroup")){
-            if ($this->config->get_cfg_value("mailmethod") == "kolab"){
-              $this->by_name['mailogroup']= _("Mail");
-              $this->by_object['mailogroup']= new mailogroup($this->config, $this->dn);
-              $this->by_object['mailogroup']->parent= &$this;
-            }
-          }
-
-          break;
-      }
-    }
 
     /* Add references/acls/snapshots */
     $this->reload($this->by_object['ogroup']->gosaGroupObjects);
