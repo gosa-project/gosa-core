@@ -3,7 +3,7 @@
  * This code is part of GOsa (http://www.gosa-project.org)
  * Copyright (C) 2003-2008 GONICUS GmbH
  *
- * ID: $$Id$$
+ * ID: $$Id: functions.inc 13100 2008-12-01 14:07:48Z hickert $$
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -69,8 +69,8 @@ define('DES3_CBC_MD5',5);
 define('DES3_CBC_SHA1',16);
 
 /* Define globals for revision comparing */
-$svn_path = '$HeadURL: https://oss.gonicus.de/repositories/gosa/trunk/gosa-core/include/functions.inc $';
-$svn_revision = '$Revision: 9246 $';
+$svn_path = '$HeadURL$';
+$svn_revision = '$Revision$';
 
 /* Include required files */
 require_once("class_location.inc");
