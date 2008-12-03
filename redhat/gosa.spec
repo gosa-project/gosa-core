@@ -25,7 +25,7 @@ Patch1:			02_fix_class_mapping.patch
 Patch2:			03_fix_locale_location.patch
 Patch3:			04_fix_online_help_location.patch
 %if %{suse}
-Requires:		apache2,apache2-mod_php5,php5,php5-gd,php5-ldap,php5-mcrypt,php5-mysql,php5-imap,php5-iconv,php5-hash,php5-mbstring,php5-gettext,ImageMagick,gettext-tools
+Requires:		apache2,apache2-mod_php5,php5,php5-gd,php5-ldap,php5-mcrypt,php5-mysql,php5-imap,php5-iconv,php5-hash,php5-posix,php5-mbstring,php5-gettext,ImageMagick,gettext-tools
 %else
 Requires: 		httpd,php,php-ldap,php-imap,php-snmp,php-mysql,php-mbstring,ImageMagick,php-mhash,perl-Crypt-SmbHash
 %endif
@@ -258,6 +258,14 @@ done
 
 %if %{suse}
 	sed -i 's#/usr/bin/php#/usr/bin/php5#' %{buildroot}/usr/bin/update-gosa
+	cat <<-EOF >> %{webroot}/gosa-apache.conf
+	<Directory /usr/share/gosa/html>
+	    Options None
+	    AllowOverride None
+	    Order deny,allow
+	    Allow from all
+	</Directory>
+	EOF
 %endif
 
 # Copy manpages
