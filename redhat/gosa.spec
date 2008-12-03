@@ -259,7 +259,8 @@ done
 %if %{suse}
 	sed -i 's#/usr/bin/php#/usr/bin/php5#' %{buildroot}/usr/sbin/update-gosa
 	sed -i 's#/usr/bin/php#/usr/bin/php5#' %{buildroot}/usr/sbin/gosa-encrypt-passwords
-	cat <<-EOF >> %{webconf}/gosa-apache.conf
+	cat <<-EOF >> %{buildroot}%{webconf}/gosa-apache.conf
+	
 	<Directory /usr/share/gosa/html>
 	    Options None
 	    AllowOverride None
