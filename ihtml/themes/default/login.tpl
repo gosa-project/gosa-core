@@ -89,15 +89,13 @@
 
 {$errors}
 
-<!-- Place cursor in username field 
 <script language="JavaScript" type="text/javascript">
+<!-- 
   enable_keyPress = false;
-
   nextfield= "{$nextfield}";
   focus_field("{$nextfield}");
-
-next_msg_dialog();
-</script>
+  next_msg_dialog();
 -->
+</script>
 </body>
 </html>
