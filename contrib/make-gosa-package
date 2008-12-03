@@ -34,7 +34,6 @@ usage() {
 	
 	Options:
 	  -b|--branch      Branch to export [$BRANCH]
-	  -t|--tag         Tag to export [$TAG]
 	  -p|--plugins     Comma seperate list of plugins to build. Leave empty to build all.
 	  -r|--release     Debian release to build for [$TARGET_RELEASE]
 	  -c|--changelog   Debian changelog entry [$RELEASE_REASON]
