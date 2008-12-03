@@ -257,8 +257,8 @@ do
 done
 
 %if %{suse}
-	sed -i 's#/usr/bin/php#/usr/bin/php5#' %{buildroot}/usr/bin/update-gosa
-	cat <<-EOF >> %{webroot}/gosa-apache.conf
+	sed -i 's#/usr/bin/php#/usr/bin/php5#' %{buildroot}/usr/sbin/update-gosa
+	cat <<-EOF >> %{webconf}/gosa-apache.conf
 	<Directory /usr/share/gosa/html>
 	    Options None
 	    AllowOverride None
