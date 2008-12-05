@@ -216,13 +216,16 @@ if [ -d html ]; then
 fi
 
 # Fix copyright
+sed -i '/^### OR ###/,/^########/d' debian/copyright
 sed -i '/^#/d;/^.*likewise for another author.*$/d' debian/copyright
 year=$(date +%Y)
-sed -i "s/.Copyright (C) YYYY Name OfAuthor./Copyright (C) $year $PL_AUTHOR/g" debian/copyright
+sed -i "s/.Copyright (C) YYYY Name OfAuthor./Copyright \(C) $year $PL_AUTHOR/g" debian/copyright
+sed -i "s/<Copyright (C) YYYY Firtname Lastname>/Copyright \(C) $year $PL_AUTHOR/g" debian/copyright
 sed -i "s/.url:\/\/example.com./http:\/\/www.gosa-project.org/g" debian/copyright
 sed -i "/.put author's name and email here.\
 /d" debian/copyright
 sed -i '/^Upstream/,/^$/d' debian/copyright
+sed -i 's/ C)/ (C)/g' debian/copyright
 
 # Adapt control
 sed -i "s#^Section: unknown#Section: $SECTION#g" debian/control

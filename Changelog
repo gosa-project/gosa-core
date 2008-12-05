@@ -14,6 +14,10 @@ GOsa2 changelog
   - Added local delivery flag to group mail
   - Fixed problem with sudoers creation
   - Fixed accidentally remove of non GOsa user accounts
+  - Simplified FAI management
+  - Fixed detection issues with password methods
+  - Fixed issues with user templates and storing password methods
+  - Removed forced dependency on GOsa-SI
 
 * gosa 2.6
   - Redesign of ACL handling
