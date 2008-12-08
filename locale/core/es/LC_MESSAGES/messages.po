@@ -2,20 +2,21 @@
 # translation of systems.po to
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# , 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: admin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-11-26 16:03+0100\n"
-"PO-Revision-Date: 2007-07-24 00:26+0200\n"
-"Last-Translator: ALEJANDRO ESCANERO BLANCO\n"
-"Language-Team:  <es@li.org>\n"
+"PO-Revision-Date: 2008-12-08 11:29+0100\n"
+"Last-Translator: \n"
+"Language-Team: Spanish <kde-i18n-doc@lists.kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 0.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: include/class_CopyPasteHandler.inc:117
 #: include/class_CopyPasteHandler.inc:126
@@ -26,7 +27,7 @@ msgstr ""
 #: include/class_CopyPasteHandler.inc:268
 #, php-format
 msgid "Copy and paste failed!"
-msgstr ""
+msgstr "¡Ha fallado copiar y pegar! "
 
 #: include/class_CopyPasteHandler.inc:117
 #: include/class_CopyPasteHandler.inc:126
@@ -59,13 +60,13 @@ msgstr ""
 #: ihtml/themes/default/msg_dialog.tpl:95
 #, php-format
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #: include/class_CopyPasteHandler.inc:117
 #: include/class_CopyPasteHandler.inc:192
 #, php-format
 msgid "Cannot set permission for '%s'"
-msgstr ""
+msgstr "No se pueden modificar los permisos para '%s'"
 
 #: include/class_CopyPasteHandler.inc:118
 #: include/class_CopyPasteHandler.inc:127
@@ -81,14 +82,13 @@ msgstr ""
 #: plugins/admin/groups/class_groupGeneric.inc:163
 #: plugins/admin/groups/class_groupGeneric.inc:728 html/password.php:74
 #: html/index.php:142 html/index.php:214 html/main.php:213
-#, fuzzy
 msgid "Configuration error"
-msgstr "Se puede escribir en la configuración"
+msgstr "Error de configuración"
 
 #: include/class_CopyPasteHandler.inc:158
 #, php-format
 msgid "'%s' is no vaild LDAP object"
-msgstr ""
+msgstr "'%s' no es un objeto LDAP válido"
 
 #: include/class_CopyPasteHandler.inc:159
 #: include/class_CopyPasteHandler.inc:269 include/class_acl.inc:905
@@ -97,43 +97,40 @@ msgstr ""
 #: include/functions.inc:730 include/functions.inc:1113
 #: include/functions.inc:1923 include/functions.inc:1957
 #: include/functions.inc:1977 include/class_log.inc:88
-#, fuzzy
 msgid "Internal error"
-msgstr "Insertar separador"
+msgstr "error interno"
 
 #: include/class_CopyPasteHandler.inc:175
 #, php-format
 msgid "No write permission in '%s'"
-msgstr ""
+msgstr "No tiene permiso de escritura en '%s'"
 
 #: include/class_CopyPasteHandler.inc:386
-#, fuzzy, php-format
+#, php-format
 msgid "These objects will be pasted: %s"
-msgstr "Las siguientes referencias se actualizaran"
+msgstr "Estos objetos serán modificados: %s"
 
 #: include/class_CopyPasteHandler.inc:410
 #, php-format
 msgid "This object will be pasted: %s"
-msgstr ""
+msgstr "Este objeto sera modificado: %s"
 
 #: include/class_CopyPasteHandler.inc:506 include/class_plugin.inc:2051
 #: include/class_plugin.inc:2054
 msgid "Paste"
-msgstr ""
+msgstr "Pegar"
 
 #: include/class_CopyPasteHandler.inc:508
-#, fuzzy
 msgid "Cannot paste"
-msgstr "¡No puedo abrir el certificado especificado!"
+msgstr "No puedo pegar"
 
 #: include/class_acl.inc:26
 msgid "Access control"
-msgstr ""
+msgstr "Control de acceso"
 
 #: include/class_acl.inc:27 plugins/admin/acl/class_aclManagement.inc:27
-#, fuzzy
 msgid "Manage access control lists"
-msgstr "Lista de control de acceso"
+msgstr "Gestión de las Listas de control de acceso"
 
 #: include/class_acl.inc:201 plugins/admin/acl/class_aclRole.inc:124
 msgid "All categories"
@@ -162,7 +159,7 @@ msgstr "Subárbol completo (permanente)"
 
 #: include/class_acl.inc:214 include/class_acl.inc:217
 msgid "Use ACL defined in role"
-msgstr ""
+msgstr "Utilizar las ACL definidas en el rol"
 
 #: include/class_acl.inc:220 plugins/admin/users/class_userManagement.inc:26
 #: plugins/personal/generic/class_user.inc:1547
@@ -214,22 +211,20 @@ msgid "Delete"
 msgstr "Eliminar"
 
 #: include/class_acl.inc:512
-#, fuzzy
 msgid "No ACL settings for this category!"
-msgstr "No hay ACL configuradas en esta categoría"
+msgstr "¡No hay ACL configuradas para esta categoría!"
 
 #: include/class_acl.inc:514
 #, php-format
 msgid "Contains ACLs for these objects: %s"
-msgstr "ACLs que tienen estos objetos: %s"
+msgstr "Tiene ACLs para estos objetos: %s"
 
 #: include/class_acl.inc:520 include/class_acl.inc:524
-#, fuzzy
 msgid "category ACL"
-msgstr "Categoría"
+msgstr "Categoría ACL"
 
 #: include/class_acl.inc:574
-#, fuzzy, php-format
+#, php-format
 msgid "Edit ACL for '%s' - scope is '%s'"
 msgstr "Editar ACL para '%s', el ámbito es '%s'"
 
@@ -248,23 +243,23 @@ msgstr "Objeto"
 
 #: include/class_acl.inc:730 include/class_acl.inc:737
 msgid "Show/hide advanced settings"
-msgstr ""
+msgstr "Mostrar/ocultar caracteristicas avanzadas"
 
 #: include/class_acl.inc:754
 msgid "Create objects"
-msgstr ""
+msgstr "Crear objetos"
 
 #: include/class_acl.inc:755
 msgid "Move objects"
-msgstr ""
+msgstr "Mover objetos"
 
 #: include/class_acl.inc:756
 msgid "Remove objects"
-msgstr ""
+msgstr "Eliminar Objetos"
 
 #: include/class_acl.inc:758
 msgid "Grant permission to owner"
-msgstr ""
+msgstr "Garantizar permiso al propietario"
 
 #: include/class_acl.inc:762 include/class_acl.inc:861
 #: include/class_acl.inc:865
@@ -278,40 +273,39 @@ msgstr "escribir"
 
 #: include/class_acl.inc:767
 msgid "Complete object"
-msgstr ""
+msgstr "Objeto completo"
 
 #: include/class_acl.inc:905
 #, php-format
 msgid "Unkown ACL type '%s'!"
-msgstr ""
+msgstr "¡Tipo de ACL desconocido '%s'!"
 
 #: include/class_acl.inc:948
 #, php-format
 msgid "Unknown entry '%s'!"
-msgstr ""
+msgstr "¡Entrada desconocida '%s'!"
 
 #: include/class_acl.inc:1008 include/class_acl.inc:1010
 #, php-format
 msgid "Role: %s"
-msgstr ""
+msgstr "Rol: %s"
 
 #: include/class_acl.inc:1010
-#, fuzzy
 msgid "unknown role"
-msgstr "¡id desconocido!"
+msgstr "rol desconocido"
 
 #: include/class_acl.inc:1018
 #, php-format
 msgid "Contains settings for these objects: %s"
-msgstr ""
+msgstr "Tiene configuraciones de los siguientes objetos: %s"
 
 #: include/class_acl.inc:1027 ihtml/themes/default/acl.tpl:82
 msgid "Members"
-msgstr ""
+msgstr "Miembros"
 
 #: include/class_acl.inc:1033
 msgid "ACL takes effect for all users"
-msgstr ""
+msgstr "La ACL tendrá efecto para todos los usuarios"
 
 #: include/class_acl.inc:1170 include/class_ldap.inc:705
 #: include/class_ldap.inc:1171 include/class_config.inc:260
@@ -353,9 +347,8 @@ msgstr ""
 #: setup/class_setupStep_Migrate.inc:2457
 #: setup/class_setupStep_Migrate.inc:2804
 #: setup/class_setupStep_Migrate.inc:2818
-#, fuzzy
 msgid "LDAP error"
-msgstr "Servicio LDAP"
+msgstr "Error LDAP"
 
 #: include/class_acl.inc:1203
 msgid "Access control list"
@@ -363,20 +356,22 @@ msgstr "Lista de control de acceso"
 
 #: include/class_acl.inc:1208
 msgid "ACL roles"
-msgstr "Rol"
+msgstr "Roles ACL"
 
 #: include/class_pluglist.inc:58
 msgid "All objects in this category"
-msgstr ""
+msgstr "Todos los objetos en esta categoría"
 
 #: include/class_pluglist.inc:178
 msgid "The configuration format has changed. Please re-run setup!"
 msgstr ""
+"¡El formato de la configuración ha cambiado. Por favor use el asistente de "
+"configuración!"
 
 #: include/class_pluglist.inc:193 include/class_pluglist.inc:194
 #: include/class_pluglist.inc:307
 msgid "Unknown"
-msgstr ""
+msgstr "Desconocido"
 
 #: include/class_pluglist.inc:203 ihtml/themes/default/framework.tpl:8
 #: ihtml/themes/default/framework.tpl:11 ihtml/themes/default/framework.tpl:20
@@ -385,36 +380,41 @@ msgid ""
 "You are currently editing a database entry. Do you want to dismiss the "
 "changes?"
 msgstr ""
+"Esta actualmente editando una entrada de base de datos.¿Quiere desestimar "
+"los cambios?"
 
 #: include/class_ldap.inc:231 include/class_ldap.inc:264
 msgid "Performance warning"
-msgstr ""
+msgstr "Aviso e rendimiento"
 
 #: include/class_ldap.inc:231 include/class_ldap.inc:264
 #, php-format
 msgid "LDAP performance is poor: last query took about %.2fs!"
-msgstr ""
+msgstr "El rendimiento LDAP es bajo: ¡la última consulta tardó sobre %.2fs!"
 
 #: include/class_ldap.inc:648
 #, php-format
 msgid ""
 "Cannot automatically create subtrees with RDN '%s': no object class found!"
 msgstr ""
+"No se pueden crear automáticamente subárboles con RDN '%s': ¡No se ha "
+"encontrado la clase del objeto!"
 
 #: include/class_ldap.inc:696
 #, php-format
 msgid "Cannot automatically create subtrees with RDN '%s': not supported"
 msgstr ""
+"No se pueden crear automáticamente subárboles con RDN '%s': no soportado"
 
 #: include/class_ldap.inc:780
 #, php-format
 msgid "while operating on '%s' using LDAP server '%s'"
-msgstr ""
+msgstr "mientras operaba en '%s' usando el servidor LDAP '%s'"
 
 #: include/class_ldap.inc:782
 #, php-format
 msgid "while operating on LDAP server %s"
-msgstr ""
+msgstr "mientras operaba en el servidor LDAP '%s'"
 
 #: include/class_ldap.inc:1004
 #, php-format
@@ -422,49 +422,56 @@ msgid ""
 "This is not a valid DN: '%s'. A block for import should begin with 'dn: ...' "
 "in line %s"
 msgstr ""
+"No es un DN válido: '%s': El bloque para importar debe empezar por 'dn: ...' "
+"en la linea %s"
 
 #: include/class_ldap.inc:1033
 #, php-format
 msgid "Error while importing dn: '%s', please check your LDIF from line %s on!"
 msgstr ""
+"Ha habido un error importando dn: '%s', ¡Por favor compruebe su LDIF desde "
+"la línea %s en adelante!"
 
 #: include/class_socketClient.inc:60
 msgid "The mcrypt module was not found. Please install php5-mcrypt."
-msgstr ""
+msgstr "El módulo mcrypt no ha sido encontrado. Por favor instale php-mcrypt."
 
 #: include/class_socketClient.inc:108
 #, php-format
 msgid "Socket connection to host '%s:%s' failed: %s"
-msgstr ""
+msgstr "Ha fallado la conexión a la máquina '%s:%s': %s"
 
 #: include/class_socketClient.inc:191
 #, php-format
 msgid "Socket timeout of %s seconds reached."
-msgstr ""
+msgstr "Tiempo excedido de %s segundos para conexión alcanzado."
 
 #: include/class_config.inc:123
 #, php-format
 msgid "XML error in gosa.conf: %s at line %d"
-msgstr ""
+msgstr "Error XML en gosa.conf: %s en la línea %d"
 
 #: include/class_config.inc:260
 msgid "Cannot bind to LDAP. Please contact the system administrator."
 msgstr ""
+"No se puede conectar a LDAP: Por favor consulte con el administrador de "
+"sistemas."
 
 #: include/class_config.inc:629
 msgid "sambaSID and/or sambaRidBase missing in the configuration!"
-msgstr ""
+msgstr "¡sambaSID y/o sambaRidBase no aparece en la configuración!"
 
 #: include/class_config.inc:979
-#, fuzzy
 msgid "Configuration"
-msgstr "Se puede escribir en la configuración"
+msgstr "Configuración"
 
 #: include/class_config.inc:979
 msgid ""
 "The configuration file you are using seems to be outdated. Please move the "
 "GOsa configuration file away to run the GOsa setup again."
 msgstr ""
+"El archivo de configuración que está usando es obsoleto. Por favor quite el "
+"archivo de configuración de GOsa y use el asistente de configuración."
 
 #: include/utils/class_timezone.inc:47
 #, php-format
@@ -472,26 +479,28 @@ msgid ""
 "The timezone setting '%s' in your gosa.conf is not valid. Cannot calculate "
 "correct timezone offset."
 msgstr ""
+"El parámetro de zona horaria '%s' en gosa.conf no es válido. No se puede "
+"calcular una compensación correcta para la zona horaria."
 
 #: include/utils/class_msgPool.inc:15
-#, fuzzy, php-format
+#, php-format
 msgid "Select to list objects of type '%s'."
-msgstr "Seleccione para ver los servidores"
+msgstr "Seleccione para mostrar objetos de tipo '%s'."
 
 #: include/utils/class_msgPool.inc:17
-#, fuzzy, php-format
+#, php-format
 msgid "Select to list objects containig '%s'."
-msgstr "Seleccione para ver los servidores"
+msgstr "Seleccione para mostrar objetos conteniendo '%s'."
 
 #: include/utils/class_msgPool.inc:19
-#, fuzzy, php-format
+#, php-format
 msgid "Select to list objects that have '%s' enabled"
-msgstr "Seleccione para ver los servidores"
+msgstr "Seleccione para mostrar objetos que tengan '%s' activado"
 
 #: include/utils/class_msgPool.inc:21
 #: plugins/admin/ogroups/ogroup_objects.tpl:33
 msgid "Select to search within subtrees"
-msgstr "Seleccione para buscar dentro de los subárboles"
+msgstr "Seleccione para buscar dentro de subárboles"
 
 #: include/utils/class_msgPool.inc:23
 #: plugins/admin/ogroups/ogroup_objects.tpl:33
@@ -501,260 +510,241 @@ msgstr "Buscar en subárboles"
 
 #: include/utils/class_msgPool.inc:33
 msgid "This object will be deleted!"
-msgstr ""
+msgstr "¡El objeto será eliminado!"
 
 #: include/utils/class_msgPool.inc:35
 #, php-format
 msgid "This '%s' object will be deleted!"
-msgstr ""
+msgstr "¡El objeto '%s' será eliminado!"
 
 #: include/utils/class_msgPool.inc:40
 #, php-format
 msgid "This object will be deleted: %s"
-msgstr ""
+msgstr "Este objeto será eliminado: %s"
 
 #: include/utils/class_msgPool.inc:42
 #, php-format
 msgid "This '%s' object will be deleted: %s"
-msgstr ""
+msgstr "El objeto '%s' será eliminado: %s"
 
 #: include/utils/class_msgPool.inc:47
 msgid "This object will be deleted:"
-msgstr ""
+msgstr "Este objeto será eliminado"
 
 #: include/utils/class_msgPool.inc:49
 #, php-format
 msgid "This '%s' object will be deleted:"
-msgstr ""
+msgstr "El objeto '%s' será eliminado:"
 
 #: include/utils/class_msgPool.inc:53
 #, php-format
 msgid "These objects will be deleted: %s"
-msgstr ""
+msgstr "Estos objetos serán eliminados: %s"
 
 #: include/utils/class_msgPool.inc:55
 #, php-format
 msgid "These '%s' objects will be deleted: %s"
-msgstr ""
+msgstr "Los objetos '%s' serán eliminados: %s"
 
 #: include/utils/class_msgPool.inc:63
-#, fuzzy
 msgid "You have no permission to delete this object!"
-msgstr "No tiene permisos para eliminar este departamento."
+msgstr "¡No tiene permisos para eliminar este objeto!"
 
 #: include/utils/class_msgPool.inc:67 include/utils/class_msgPool.inc:71
-#, fuzzy
 msgid "You have no permission to delete the object:"
-msgstr "No tiene permisos para eliminar este departamento."
+msgstr "No tiene permisos para eliminar este objeto:"
 
 #: include/utils/class_msgPool.inc:74
-#, fuzzy
 msgid "You have no permission to delete these objects:"
-msgstr "No tiene permisos para eliminar este departamento."
+msgstr "No tiene permisos para eliminar estos objetos:"
 
 #: include/utils/class_msgPool.inc:81
-#, fuzzy
 msgid "You have no permission to create this object!"
-msgstr "No tiene permisos para eliminar este departamento."
+msgstr "¡No tiene permisos para crear este objeto!"
 
 #: include/utils/class_msgPool.inc:85 include/utils/class_msgPool.inc:89
-#, fuzzy
 msgid "You have no permission to create the object:"
-msgstr "No tiene permisos para eliminar este departamento."
+msgstr "No tiene permisos para crear este objeto:"
 
 #: include/utils/class_msgPool.inc:92
-#, fuzzy
 msgid "You have no permission to create these objects:"
-msgstr "No tiene permisos para eliminar este departamento."
+msgstr "No tiene permisos para crear estos objetos:"
 
 #: include/utils/class_msgPool.inc:99
-#, fuzzy
 msgid "You have no permission to modify this object!"
-msgstr "No tiene permisos para mover este objeto a '%s'."
+msgstr "¡No tiene permisos para modificar este objeto!"
 
 #: include/utils/class_msgPool.inc:103 include/utils/class_msgPool.inc:107
-#, fuzzy
 msgid "You have no permission to modify the object:"
-msgstr "No tiene permisos para mover este objeto a '%s'."
+msgstr "No tiene permisos para modificar este objeto:"
 
 #: include/utils/class_msgPool.inc:110
-#, fuzzy
 msgid "You have no permission to modify these objects:"
-msgstr "No tiene permisos para mover este objeto a '%s'."
+msgstr "No tiene permisos para modificar estos objetos:"
 
 #: include/utils/class_msgPool.inc:117
-#, fuzzy
 msgid "You have no permission to view this object!"
-msgstr "No tiene permisos para mover este objeto a '%s'."
+msgstr "¡No tiene permisos para ver este objeto!"
 
 #: include/utils/class_msgPool.inc:121 include/utils/class_msgPool.inc:125
-#, fuzzy
 msgid "You have no permission to view the object:"
-msgstr "No tiene permisos para cambiar su contraseña."
+msgstr "No tiene permisos para ver el objeto:"
 
 #: include/utils/class_msgPool.inc:128
-#, fuzzy
 msgid "You have no permission to view these objects:"
-msgstr "No tiene permisos para mover este objeto a '%s'."
+msgstr "No tiene permisos para ver estos objetos:"
 
 #: include/utils/class_msgPool.inc:135
-#, fuzzy
 msgid "You have no permission to move this object!"
-msgstr "No tiene permisos para mover este objeto a '%s'."
+msgstr "¡No tiene permisos para mover este objeto!"
 
 #: include/utils/class_msgPool.inc:139 include/utils/class_msgPool.inc:143
-#, fuzzy
 msgid "You have no permission to move the object:"
-msgstr "No tiene permisos para mover este objeto a '%s'."
+msgstr "No tiene permisos para mover el objeto:"
 
 #: include/utils/class_msgPool.inc:146
-#, fuzzy
 msgid "You have no permission to move these objects:"
-msgstr "No tiene permisos para mover este objeto a '%s'."
+msgstr "No tiene permisos para mover estos objetos:"
 
 #: include/utils/class_msgPool.inc:156 include/utils/class_msgPool.inc:168
 #: include/utils/class_msgPool.inc:186
-#, fuzzy
 msgid "Connection information"
-msgstr "Información genérica del usuario"
+msgstr "Información de conexión"
 
 #: include/utils/class_msgPool.inc:158
 #, php-format
 msgid "Cannot connect to %s database!"
-msgstr ""
+msgstr "¡No se puede conectar a la base de datos %s!"
 
 #: include/utils/class_msgPool.inc:170
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot select %s database!"
-msgstr ""
-"La Autenticación como usuario '%s' en el servidor '%s'. ha tenido éxito."
+msgstr "¡No se puede seleccionar la base de datos %s!"
 
 #: include/utils/class_msgPool.inc:176
 #, php-format
 msgid "No %s server defined!"
-msgstr ""
+msgstr "¡No se ha definido el servidor %s!"
 
 #: include/utils/class_msgPool.inc:188
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot query %s database!"
-msgstr ""
-"La Autenticación como usuario '%s' en el servidor '%s'. ha tenido éxito."
+msgstr "¡No se ha podido ejecutar la consulta %s!"
 
 #: include/utils/class_msgPool.inc:194
-#, fuzzy, php-format
+#, php-format
 msgid "The field '%s' contains a reserved keyword!"
-msgstr "El campo 'Fax' tiene un número de teléfono no valido."
+msgstr "¡El campo '%s' tiene una palabra reservada!"
 
 #: include/utils/class_msgPool.inc:200
 #, php-format
 msgid "Command specified as %s hook for plugin '%s' does not exist!"
 msgstr ""
+"¡El comando especificado como método %s para la extensión '%s' no existe!"
 
 #: include/utils/class_msgPool.inc:207
 #, php-format
 msgid "'%s' command is invalid!"
-msgstr ""
+msgstr "¡El comando '%s' no es válido!"
 
 #: include/utils/class_msgPool.inc:209
 #, php-format
 msgid "'%s' command (%s) for plugin %s is invalid!"
-msgstr ""
+msgstr "¡'%s' comando (%s) para la extensión %s no es válido!"
 
 #: include/utils/class_msgPool.inc:211
 #, php-format
 msgid "'%s' command for plugin %s is invalid!"
-msgstr ""
+msgstr "¡'%s' comando para la extensión %s no es válido!"
 
 #: include/utils/class_msgPool.inc:213
 #, php-format
 msgid "'%s' command (%s) is invalid!"
-msgstr ""
+msgstr "¡'%s' comando (%s) no es válido!"
 
 #: include/utils/class_msgPool.inc:221
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot execute '%s' command!"
-msgstr ""
-"La Autenticación como usuario '%s' en el servidor '%s'. ha tenido éxito."
+msgstr "¡No se puede ejecutar el comando '%s'!"
 
 #: include/utils/class_msgPool.inc:223
 #, php-format
 msgid "Cannot execute '%s' command (%s) for plugin %s!"
-msgstr ""
+msgstr "¡No se puede ejecutar el comando '%s' (%s) para la extensión %s!"
 
 #: include/utils/class_msgPool.inc:225
 #, php-format
 msgid "Cannot execute '%s' command for plugin %s!"
-msgstr ""
+msgstr "¡No se puede ejecutar el comando '%s' para la extensión %s!"
 
 #: include/utils/class_msgPool.inc:227
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot execute '%s' command (%s)!"
-msgstr ""
-"La Autenticación como usuario '%s' en el servidor '%s'. ha tenido éxito."
+msgstr "¡No se puede ejecutar el comando '%s' (%s)!"
 
 #: include/utils/class_msgPool.inc:235
-#, fuzzy, php-format
+#, php-format
 msgid "Value for '%s' is too large!"
-msgstr "El valor especificado como 'UID' es demasiado pequeño."
+msgstr "¡El valor especificado como '%s' es demasiado grande!"
 
 #: include/utils/class_msgPool.inc:237
 #, php-format
 msgid "'%s' must be smaller than %d!"
-msgstr ""
+msgstr "¡'%s' debe ser menor que %d!"
 
 #: include/utils/class_msgPool.inc:245
-#, fuzzy, php-format
+#, php-format
 msgid "Value for '%s' is too small!"
-msgstr "El valor especificado como 'UID' es demasiado pequeño."
+msgstr "¡El valor especificado como '%s' es demasiado pequeño!"
 
 #: include/utils/class_msgPool.inc:247
-#, fuzzy, php-format
+#, php-format
 msgid "'%s' must be %d or above!"
-msgstr "PHP debe ser versión '%s'/'%s' o superior."
+msgstr "¡'%s' debe ser %d o superior!"
 
 #: include/utils/class_msgPool.inc:254
 #, php-format
 msgid "'%s' depends on '%s' - please provide both values!"
-msgstr ""
+msgstr "¡'%s' depende de '%s' - Por favor introduzca ambos valores!"
 
 #: include/utils/class_msgPool.inc:260
-#, fuzzy, php-format
+#, php-format
 msgid "There is already an entry with this '%s' attribute in the system!"
-msgstr "Ya existe un usuario con este 'Login' en la base de datos."
+msgstr "¡Ya existe una entrada con el atributo '%s' en el sistema!"
 
 #: include/utils/class_msgPool.inc:266
-#, fuzzy, php-format
+#, php-format
 msgid "The required field '%s' is empty!"
-msgstr "No se ha asignado ningún valor al campo obligatorio 'Nombre'."
+msgstr "¡El campo obligatorio '%s' está vacio!"
 
 #: include/utils/class_msgPool.inc:274
 msgid "Example"
-msgstr ""
+msgstr "Ejemplo"
 
 #: include/utils/class_msgPool.inc:291
-#, fuzzy, php-format
+#, php-format
 msgid "The Field '%s' contains invalid characters"
-msgstr "El campo 'Nombre' no tiene caracteres validos."
+msgstr "El campo '%s' tiene caracteres no validos."
 
 #: include/utils/class_msgPool.inc:292
 #, php-format
 msgid "'%s' is not allowed:"
-msgstr ""
+msgstr "'%s' no está permitido:"
 
 #: include/utils/class_msgPool.inc:292
 #, php-format
 msgid "'%s' are not allowed!"
-msgstr ""
+msgstr "¡'%s' no están permitidos!"
 
 #: include/utils/class_msgPool.inc:295
-#, fuzzy, php-format
+#, php-format
 msgid "The Field '%s' contains invalid characters!"
-msgstr "El campo 'Nombre' no tiene caracteres validos."
+msgstr "¡El campo '%s' tiene caracteres no validos!"
 
 #: include/utils/class_msgPool.inc:302
-#, fuzzy, php-format
+#, php-format
 msgid "Missing %s PHP extension!"
-msgstr "Eliminar extensión de impresión"
+msgstr "¡Extensión PHP %s no encontrada!"
 
 #: include/utils/class_msgPool.inc:308 include/class_baseSelectDialog.inc:62
 #: setup/setup_migrate.tpl:135 setup/setup_migrate.tpl:186
@@ -815,98 +805,98 @@ msgid "Add"
 msgstr "Añadir"
 
 #: include/utils/class_msgPool.inc:332
-#, fuzzy, php-format
+#, php-format
 msgid "Add %s"
-msgstr "Añadir"
+msgstr "Añadir %s"
 
 #: include/utils/class_msgPool.inc:338
-#, fuzzy, php-format
+#, php-format
 msgid "Delete %s"
-msgstr "Eliminar"
+msgstr "Eliminar %s"
 
 #: include/utils/class_msgPool.inc:344
 #: plugins/personal/generic/generic.tpl:137
 #: ihtml/themes/default/sizelimit.tpl:14
 #, php-format
 msgid "Set"
-msgstr ""
+msgstr "Activar"
 
 #: include/utils/class_msgPool.inc:344
 #, php-format
 msgid "Set %s"
-msgstr ""
+msgstr "Activar %s"
 
 #: include/utils/class_msgPool.inc:350
-#, fuzzy, php-format
+#, php-format
 msgid "Edit..."
-msgstr "Editar"
+msgstr "Editar..."
 
 #: include/utils/class_msgPool.inc:350
-#, fuzzy, php-format
+#, php-format
 msgid "Edit %s..."
-msgstr "Editar usuario"
+msgstr "Editar %s..."
 
 #: include/utils/class_msgPool.inc:356
 msgid "Back"
 msgstr "Atrás"
 
 #: include/utils/class_msgPool.inc:375
-#, fuzzy, php-format
+#, php-format
 msgid "This account has no valid %s extensions!"
-msgstr "Esta cuenta no tiene extensiones GOsa validas"
+msgstr "¡Esta cuenta tiene extensiones %s no validas!"
 
 #: include/utils/class_msgPool.inc:381
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "This account has %s settings enabled. You can disable them by clicking below."
 msgstr ""
-"Esta cuenta tiene características posix activadas. Puede desactivarla "
+"Esta cuenta tiene características %s activadas. Puede desactivarla "
 "pulsando aquí"
 
 #: include/utils/class_msgPool.inc:384 include/utils/class_msgPool.inc:391
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "This account has %s settings enabled. To disable them, you'll need to remove "
 "the %s settings first!"
 msgstr ""
-"Esta cuenta tiene las características unix activadas. Para desactivarlas, "
-"necesita eliminar la cuenta samba / entorno primero."
+"Esta cuenta tiene las características %s activadas. ¡Para desactivarlas, "
+"necesita eliminar las caracteristicas %s primero!"
 
 #: include/utils/class_msgPool.inc:400
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "This account has %s settings disabled. You can enable them by clicking below."
 msgstr ""
-"Esta cuenta tiene la extensión posix desactivada. Puede activarla pulsando "
-"aquí."
+"Esta cuenta tiene características %s desactivadas. Puede activarla "
+"pulsando aquí"
 
 #: include/utils/class_msgPool.inc:403
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "This account has %s settings disabled. To enable them, you'll need to add "
 "the %s settings first!"
 msgstr ""
-"Esta cuenta tiene las características unix activadas. Para desactivarlas, "
-"necesita eliminar la cuenta samba / entorno primero."
+"Esta cuenta tiene las características %s desactivadas. ¡Para activarlas, "
+"necesita añadir las caracteristicas %s primero!"
 
 #: include/utils/class_msgPool.inc:410
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "This account has %s features settings. To disable them, you'll need to add "
 "the %s settings first!"
 msgstr ""
-"Esta cuenta tiene las características unix activadas. Para desactivarlas, "
-"necesita eliminar la cuenta samba / entorno primero."
+"Esta cuenta tiene las características %s activadas. ¡Para desactivarlas, "
+"necesita añadir las caracteristicas %s primero!"
 
 #: include/utils/class_msgPool.inc:418
-#, fuzzy, php-format
+#, php-format
 msgid "Add %s settings"
-msgstr "Parametros Unix"
+msgstr "Añadir caracteristicas %s"
 
 #: include/utils/class_msgPool.inc:424
-#, fuzzy, php-format
+#, php-format
 msgid "Remove %s settings"
-msgstr "Parámetros genéricos del usuario"
+msgstr "Eliminar las caracteristicas %s"
 
 #: include/utils/class_msgPool.inc:430
 msgid "Click the 'Edit' button below to change informations in this dialog"
@@ -962,123 +952,113 @@ msgid "December"
 msgstr "Diciembre"
 
 #: include/utils/class_msgPool.inc:444
-#, fuzzy
 msgid "Sunday"
-msgstr "Junio"
+msgstr "Domingo"
 
 #: include/utils/class_msgPool.inc:444
-#, fuzzy
 msgid "Monday"
-msgstr "mes"
+msgstr "Lunes"
 
 #: include/utils/class_msgPool.inc:444
 msgid "Tuesday"
-msgstr ""
+msgstr "Martes"
 
 #: include/utils/class_msgPool.inc:444
-#, fuzzy
 msgid "Wednesday"
 msgstr "Miércoles"
 
 #: include/utils/class_msgPool.inc:444
 msgid "Thursday"
-msgstr ""
+msgstr "Jueves"
 
 #: include/utils/class_msgPool.inc:444
 msgid "Friday"
-msgstr ""
+msgstr "Viernes"
 
 #: include/utils/class_msgPool.inc:444
 msgid "Saturday"
-msgstr ""
+msgstr "Sábado"
 
 #: include/utils/class_msgPool.inc:451
-#, fuzzy
 msgid "read operation"
-msgstr "Eliminar opciones"
+msgstr "lectura"
 
 #: include/utils/class_msgPool.inc:451
 msgid "add operation"
-msgstr ""
+msgstr "adición"
 
 #: include/utils/class_msgPool.inc:451
 msgid "modify operation"
-msgstr ""
+msgstr "modificación"
 
 #: include/utils/class_msgPool.inc:452
 msgid "delete operation"
-msgstr ""
+msgstr "eliminación"
 
 #: include/utils/class_msgPool.inc:452
 msgid "search operation"
-msgstr ""
+msgstr "busqueda"
 
 #: include/utils/class_msgPool.inc:452
-#, fuzzy
 msgid "authentication"
-msgstr "Tipo de autentificación IAX"
+msgstr "autenticación"
 
 #: include/utils/class_msgPool.inc:455
-#, fuzzy, php-format
+#, php-format
 msgid "LDAP %s failed!"
-msgstr "La consulta LDAP ha fallado"
+msgstr "¡LDAP %s ha fallado!"
 
 #: include/utils/class_msgPool.inc:457
-#, fuzzy
 msgid "LDAP operation failed!"
-msgstr "La consulta LDAP ha fallado"
+msgstr "¡La consulta LDAP ha fallado!"
 
 #: include/utils/class_msgPool.inc:472
 msgid "Upload failed!"
-msgstr ""
+msgstr "¡Ha fallado el subir archivo!"
 
 #: include/utils/class_msgPool.inc:475
-#, fuzzy, php-format
+#, php-format
 msgid "Upload failed: %s"
-msgstr "Servicio de Registro de sistema"
+msgstr "Ha fallado el subir archivo: %s"
 
 #: include/utils/class_msgPool.inc:482
 msgid "Communication failure with the infrastructure service!"
-msgstr ""
+msgstr "¡Ha fallado la comunciación con el servicio de infraestructura!"
 
 #: include/utils/class_msgPool.inc:484
 #, php-format
 msgid "Communication failure with the infrastructure service: %s"
-msgstr ""
+msgstr "Ha fallado la comunciación con el servicio de infraestructura: %s"
 
 #: include/utils/class_msgPool.inc:491 include/utils/class_msgPool.inc:494
 #, php-format
 msgid "This '%s' is still in use by this object: %s"
-msgstr ""
+msgstr "'%s' esta todavía en uso por el objeto: %s"
 
 #: include/utils/class_msgPool.inc:497
-#, fuzzy, php-format
+#, php-format
 msgid "This '%s' is still in use."
-msgstr ""
-"Este Rol no puede ser eliminado por estar siendo usado. Los siguientes "
-"objetos están usando este rol %s"
+msgstr "'%s' esta todavía en uso."
 
 #: include/utils/class_msgPool.inc:499
-#, fuzzy, php-format
+#, php-format
 msgid "This '%s' is still in use by these objects: %s"
-msgstr ""
-"Este Rol no puede ser eliminado por estar siendo usado. Los siguientes "
-"objetos están usando este rol %s"
+msgstr "'%s' esta todavía en uso por los objetos: %s"
 
 #: include/utils/class_msgPool.inc:505
 #, php-format
 msgid "File '%s' does not exist!"
-msgstr ""
+msgstr "¡El archivo %s no existe!"
 
 #: include/utils/class_msgPool.inc:511
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot open file '%s' for reading!"
-msgstr "No se puede grabar el archivo '%s'."
+msgstr "¡No se puede abrir el archivo '%s'!"
 
 #: include/utils/class_msgPool.inc:517
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot open file '%s' for writing!"
-msgstr "No se puede grabar el archivo '%s'."
+msgstr "¡No se puede grabar el archivo '%s'!"
 
 #: include/utils/class_msgPool.inc:523
 #, php-format
@@ -1086,32 +1066,33 @@ msgid ""
 "The value for '%s' is currently unconfigured or invalid, please check your "
 "configuration file!"
 msgstr ""
+"El valor para '%s' no esta configurado o no es válido.¡Por favor compruebe "
+"el archivo de configuración!"
 
 #: include/utils/class_msgPool.inc:529
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot delete file '%s'!"
-msgstr ""
-"La Autenticación como usuario '%s' en el servidor '%s'. ha tenido éxito."
+msgstr "¡No se puede eliminar el fichero '%s'!"
 
 #: include/utils/class_msgPool.inc:535
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot create folder '%s'!"
-msgstr "Crear nuevo departamento"
+msgstr "¡No se puede crear la carpeta '%s'!"
 
 #: include/utils/class_msgPool.inc:541
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot delete folder '%s'!"
-msgstr "Crear nuevo departamento"
+msgstr "¡No se puede eliminar la carpeta '%s'!"
 
 #: include/utils/class_msgPool.inc:547
-#, fuzzy, php-format
+#, php-format
 msgid "Checking for %s support"
-msgstr "Comprobando soporte mhash"
+msgstr "Comprobando soporte %s"
 
 #: include/utils/class_msgPool.inc:553
 #, php-format
 msgid "Install and activate the %s PHP module."
-msgstr ""
+msgstr "Instala y activa el módulo de PHP %s."
 
 #: include/utils/class_msgPool.inc:559
 #, php-format
@@ -1119,74 +1100,74 @@ msgid ""
 "Cannot initialize class '%s'! Maybe there is a plugin missing in your gosa "
 "setup?"
 msgstr ""
+"¡No se puede inicializar la clase '%s'! ¿Puede que falte la extensión "
+"correspondiente en la configuración de GOsa?"
 
 #: include/class_gosaSupportDaemon.inc:98
 msgid "GOsa support daemon"
-msgstr ""
+msgstr "Demonio de soporte GOsa"
 
 #: include/class_gosaSupportDaemon.inc:773
-#, fuzzy
 msgid "Cannot not parse XML!"
-msgstr "¡Demasiados usuarios!, no hay identificadores (ID) libres"
+msgstr "¡No se puede analizar el XML!"
 
 #: include/class_gosaSupportDaemon.inc:1154
 #, php-format
 msgid "Cannot send abort event for entry %s!"
-msgstr ""
+msgstr "¡No se puede enviar el evento abortar para la entrada %s!"
 
 #: include/class_gosaSupportDaemon.inc:1174
 #, php-format
 msgid "Cannot remove entry %s!"
-msgstr ""
+msgstr "¡No se puede eliminar la entrada %s!"
 
 #: include/functions_helpviewer.inc:45
 #, php-format
 msgid "XML error in guide.xml: %s at line %d"
-msgstr ""
+msgstr "Error XML en guide.xml: %s en la linea %d"
 
 #: include/functions_helpviewer.inc:88
 msgid "No help available for this plugin."
-msgstr ""
+msgstr "No hay ayuda disponible para esta extensión."
 
 #: include/functions_helpviewer.inc:97 html/helpviewer.php:194
 msgid "previous"
-msgstr ""
+msgstr "anterior"
 
 #: include/functions_helpviewer.inc:101 html/helpviewer.php:198
 msgid "next"
-msgstr ""
+msgstr "siguiente"
 
 #: include/functions_helpviewer.inc:388
 #, php-format
 msgid "%s results for your search with the keyword %s"
-msgstr ""
+msgstr "hay %s resultados para su busqueda con el termino %s"
 
 #: include/functions_helpviewer.inc:462
 #, php-format
 msgid "%s%% hit rate in file %s"
-msgstr ""
+msgstr "%s%% procentaje en fichero %s"
 
 #: include/class_certificate.inc:73
-#, fuzzy
 msgid "Certificate is empty!"
-msgstr "Número de serie del certificado"
+msgstr "¡El certificado esta vacío!"
 
 #: include/class_certificate.inc:100
 msgid "Cannot load certificate - only PEM/DER is supported!"
 msgstr ""
+"¡No se puede cargar el certificado - solo se soportan certificados PEM/DER!"
 
 #: include/class_certificate.inc:115
 msgid "Cannot extract information for non PEM certificates!"
-msgstr ""
+msgstr "¡No se puede extraer información de certificados que no sean PEM!"
 
 #: include/class_certificate.inc:219
-#, fuzzy
 msgid "No valid certificate loaded!"
-msgstr "No hay certificados instalados"
+msgstr "¡No ha cargado un certificado válido!"
 
 #: include/class_baseSelectDialog.inc:44
 msgid "Choose a base"
-msgstr ""
+msgstr "Elija una base"
 
 #: include/class_baseSelectDialog.inc:47
 #: include/class_MultiSelectWindow.inc:250
@@ -1235,11 +1216,12 @@ msgid ""
 "Step in the prefered tree and click save to use the current subtree as base. "
 "Or click the image at the end of each entry."
 msgstr ""
+"Entrar en el árbol preferido y pulse grabar para usar el subárbol actual "
+"como base. O pulse en la imagen al final de cada entrada"
 
 #: include/class_baseSelectDialog.inc:61
-#, fuzzy
 msgid "Use"
-msgstr "Usuario"
+msgstr "Usar"
 
 #: include/class_baseSelectDialog.inc:65
 #: plugins/admin/departments/class_countryGeneric.inc:89
@@ -1269,50 +1251,57 @@ msgid "Base"
 msgstr "Base"
 
 #: include/class_baseSelectDialog.inc:68
-#, fuzzy
 msgid "Filter entries with this syntax"
-msgstr "Entradas de filtrado con esta sintaxis"
+msgstr "Filtrar entradas con esta sintaxis"
 
 #: include/class_msg_dialog.inc:124
 msgid "Please fix the above error and reload the page."
-msgstr ""
+msgstr "Por favor solucione el problema y actualize la página."
 
 #: include/functions.inc:119
 #, php-format
 msgid "Fatal error: no class locations defined - please run '%s' to fix this"
 msgstr ""
+"Error fatal: no se han definido un emplazamiento para las clases - por favor "
+"ejecute '%s' para solucionar esto"
 
 #: include/functions.inc:126
 #, php-format
 msgid ""
 "Fatal error: cannot instantiate class '%s' - try running '%s' to fix this"
 msgstr ""
+"Error fatal: no se puede instanciar la clase '%s' - intente solucionarlo "
+"ejecutando '%s'"
 
 #: include/functions.inc:335
 #: plugins/admin/departments/class_departmentGeneric.inc:386
 #: html/password.php:58 html/main.php:147
-#, fuzzy
 msgid "Fatal error"
-msgstr "Insertar separador"
+msgstr "Error fatal"
 
 #: include/functions.inc:336
 #, php-format
 msgid "FATAL: Error when connecting the LDAP. Server said '%s'."
 msgstr ""
+"FATAL: Ha habido un error conectando a LDAP. El servidor comunicó '%s'."
 
 #: include/functions.inc:397
 msgid "Username / UID is not unique inside the LDAP tree!"
-msgstr ""
+msgstr "¡El nombre de usuario / UID no es único dentro del árbol LDAP!"
 
 #: include/functions.inc:466
 msgid ""
 "Username / UID is not unique inside the LDAP tree. Please contact your "
 "Administrator."
 msgstr ""
+"El nombre de usuario / UID no es único dentro del árbol LDAP. Por favor "
+"contacte con su Administrador."
 
 #: include/functions.inc:629 include/functions.inc:730
 msgid "Error while adding a lock. Contact the developers!"
 msgstr ""
+"Ha ocurrido un problema al añadir un bloqueo. ¡Contacte con los "
+"desarrolladores!"
 
 #: include/functions.inc:639
 #, php-format
@@ -1320,11 +1309,13 @@ msgid ""
 "Cannot create locking information in LDAP tree. Please contact your "
 "administrator!"
 msgstr ""
+"No puedo crear información de bloqueos en el árbol LDAP. ¡Por favor contacte "
+"con su Administrador!"
 
 #: include/functions.inc:639
 #, php-format
 msgid "LDAP server returned: %s"
-msgstr ""
+msgstr "El servidor LDAP devolvio: %s"
 
 #: include/functions.inc:751 include/functions.inc:2198
 #: include/functions.inc:2202 include/functions.inc:2208
@@ -1354,11 +1345,13 @@ msgid ""
 "Found multiple locks for object to be locked. This should not happen - "
 "cleaning up multiple references."
 msgstr ""
+"Se han encontrado varios bloqueos para un objeto que iba a ser bloqueado. "
+"Esto no debería ocurrir - limpiando referencias multiples."
 
 #: include/functions.inc:1041
 #, php-format
 msgid "The size limit of %d entries is exceed!"
-msgstr ""
+msgstr "¡El límite máximo de %d entradas se ha sobrepasado!"
 
 #: include/functions.inc:1043
 #, php-format
@@ -1366,66 +1359,66 @@ msgid ""
 "Set the new size limit to %s and show me this message if the limit still "
 "exceeds"
 msgstr ""
+"Introduzca un nuevo límite máximo a %s y se volvera a mostrar este mensaje "
+"si se supera el límite máximo"
 
 #: include/functions.inc:1055 plugins/personal/generic/generic.tpl:232
 msgid "Configure"
-msgstr ""
+msgstr "Configurar"
 
 #: include/functions.inc:1060
 msgid "incomplete"
-msgstr ""
+msgstr "incompleto"
 
 #: include/functions.inc:1342
 msgid "Continue anyway"
-msgstr ""
+msgstr "Continuar de cualquier manera"
 
 #: include/functions.inc:1344
 msgid "Edit anyway"
-msgstr ""
+msgstr "Editar de cualquier manera"
 
 #: include/functions.inc:1346
-#, fuzzy, php-format
+#, php-format
 msgid "You're going to edit the LDAP entry/entries %s"
-msgstr "Has decidido eliminar las siguientes entradas %s"
+msgstr "Has decidido editar las siguientes entradas LDAP %s"
 
 #: include/functions.inc:1530
 msgid "Entries per page"
-msgstr ""
+msgstr "Entradas por página"
 
 #: include/functions.inc:1558
 msgid "Apply filter"
-msgstr ""
+msgstr "Aplicar filtro"
 
 #: include/functions.inc:1800
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-msgstr ""
+msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 #: include/functions.inc:1844
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
-msgstr ""
+msgstr "Instantánea de desarrollo GOsa (Rev %s)"
 
 #: include/functions.inc:1923
 #, php-format
 msgid "File '%s' could not be deleted."
-msgstr ""
+msgstr "El archivo '%s' no puede ser eliminado."
 
 #: include/functions.inc:1957 include/functions.inc:1977
 msgid "Cannot write to revision file!"
-msgstr ""
+msgstr "¡No se puede escribir en el archivo de revisión!"
 
 #: include/functions.inc:2198 include/functions.inc:2202
 #: include/functions.inc:2208
 msgid "'baseIdHook' is not available. Using default base!"
-msgstr ""
+msgstr "No esta disponible 'baseIdHook'.¡Se usara la base predeterminada!"
 
 #: include/functions.inc:2230
-#, fuzzy
 msgid "LDAP warning"
-msgstr "Aviso"
+msgstr "Aviso LDAP"
 
 #: include/functions.inc:2230
-#, fuzzy
 msgid "Cannot get schema information from server. No schema check possible!"
 msgstr ""
 "No puedo obtener información de esquemas del servidor. ¡No es posible "
@@ -1433,64 +1426,74 @@ msgstr ""
 
 #: include/functions.inc:2256
 msgid "Used to store account specific informations."
-msgstr ""
+msgstr "Usado para guardar información específica de la cuenta."
 
 #: include/functions.inc:2263
 msgid ""
 "Used to lock currently edited entries to avoid multiple changes at the same "
 "time."
 msgstr ""
+"Usado para bloquear entradas editadas actualmente y así evitar múltiples "
+"cambios simultáneos."
 
 #: include/functions.inc:2306
 #, php-format
 msgid "Missing required object class '%s'!"
-msgstr ""
+msgstr "¡No se ha encontrado la clase de objeto necesaria '%s'!"
 
 #: include/functions.inc:2308
 #, php-format
 msgid "Missing optional object class '%s'!"
-msgstr ""
+msgstr "¡No se ha encontrado la clase de objeto opcional '%s'!"
 
 #: include/functions.inc:2314
 #, php-format
 msgid "Version mismatch for required object class '%s' (!=%s)!"
 msgstr ""
+"¡Las versiones de la clase de objeto necesaria no coinciden '%s' (!=%s)!"
 
 #: include/functions.inc:2316
 #, php-format
 msgid "Version mismatch for optional object class '%s' (!=%s)!"
 msgstr ""
+"¡Las versiones de la clase de objeto opcional no coinciden '%s' (!=%s)!"
 
 #: include/functions.inc:2320
 #, php-format
 msgid "Class(es) available"
-msgstr ""
+msgstr "Clase(s) disponibles"
 
 #: include/functions.inc:2342
 msgid ""
 "You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema    configuration do not support this option."
 msgstr ""
+"Ha activado la opción rfc2307bis en el paso 'configuración ldap', pero su "
+"configuración de esquemas no soporta esta opción."
 
 #: include/functions.inc:2343
 msgid ""
 "In order to use rfc2307bis conform groups the objectClass 'posixGroup' must "
 "be      AUXILIARY"
 msgstr ""
+"Para poder usar grupos conforme a rfc2307bis, el objectClass 'posixGroup' "
+"debe ser AUXILIARY"
 
 #: include/functions.inc:2347
 msgid ""
 "Your schema is configured to support the rfc2307bis group, but you have "
 "disabled this option on the 'ldap setup' step."
 msgstr ""
+"Su esquema está configurado para soportar grupos rfc2307bis, pero ha "
+"desactivado esta opción en el paso 'configuración ldap'."
 
 #: include/functions.inc:2348
 msgid "The objectClass 'posixGroup' must be STRUCTURAL"
-msgstr ""
+msgstr "El objectClass 'posixGroup' debe ser STRUCTURAL"
 
 #: include/functions.inc:2372
 msgid "German"
-msgstr ""
+msgstr "Alemán"
 
 #: include/functions.inc:2373
 msgid "French"
@@ -1498,7 +1501,7 @@ msgstr "Francés"
 
 #: include/functions.inc:2374
 msgid "Italian"
-msgstr ""
+msgstr "Italiano"
 
 #: include/functions.inc:2375
 msgid "Spanish"
@@ -1510,20 +1513,19 @@ msgstr "Inglés"
 
 #: include/functions.inc:2377
 msgid "Dutch"
-msgstr ""
+msgstr "Holandes"
 
 #: include/functions.inc:2378
 msgid "Polish"
-msgstr ""
+msgstr "Polaco"
 
 #: include/functions.inc:2380
 msgid "Chinese"
 msgstr "Chino"
 
 #: include/functions.inc:2381
-#, fuzzy
 msgid "Vietnamese"
-msgstr "Nombre de pila"
+msgstr "Vietnamita"
 
 #: include/functions.inc:2382
 msgid "Russian"
@@ -1534,58 +1536,61 @@ msgstr "Ruso"
 msgid ""
 "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
 msgstr ""
+"El comando '%s', utilizado como POSTMODIFY para la extensión '%s', no parece "
+"existir."
 
 #: include/functions.inc:2596
 msgid "Cannot generate samba hash!"
-msgstr ""
+msgstr "¡No se puede generar la clave samba!"
 
 #: include/php_setup.inc:93
 msgid "Generating this page caused the PHP interpreter to raise some errors!"
 msgstr ""
+"¡La generación de esta página ha provocado errores en el interprete PHP!"
 
 #: include/php_setup.inc:98
 msgid "Send bug report to the GOsa Team"
-msgstr ""
+msgstr "Enviar informe de errores al equipo de desarrollo de GOsa"
 
 #: include/php_setup.inc:98
 msgid "Send bugreport"
-msgstr ""
+msgstr "Enviar informe de errores"
 
 #: include/php_setup.inc:103
 msgid "Toggle information"
-msgstr ""
+msgstr "Modificar información"
 
 #: include/php_setup.inc:113
 msgid "PHP error"
-msgstr ""
+msgstr "Error PHP"
 
 #: include/php_setup.inc:132
 msgid "class"
-msgstr ""
+msgstr "clase"
 
 #: include/php_setup.inc:138
 msgid "function"
-msgstr ""
+msgstr "función"
 
 #: include/php_setup.inc:143
 msgid "static"
-msgstr ""
+msgstr "estático"
 
 #: include/php_setup.inc:147
 msgid "method"
-msgstr ""
+msgstr "método"
 
 #: include/php_setup.inc:180
 msgid "Trace"
-msgstr ""
+msgstr "Traza"
 
 #: include/php_setup.inc:181
 msgid "File"
-msgstr ""
+msgstr "Archivo"
 
 #: include/php_setup.inc:181
 msgid "Line"
-msgstr ""
+msgstr "Linea"
 
 #: include/php_setup.inc:181
 msgid "Type"
@@ -1593,74 +1598,75 @@ msgstr "Tipo"
 
 #: include/php_setup.inc:182
 msgid "Arguments"
-msgstr ""
+msgstr "Argumentos"
 
 #: include/password-methods/class_password-methods.inc:154
 msgid "Cannot find a suitable password method for the current hash!"
 msgstr ""
+"¡No se puede encontrar un método de codificación válido para la clave "
+"introducida!"
 
 #: include/class_log.inc:88
-#, fuzzy, php-format
+#, php-format
 msgid "Logging failed: %s"
-msgstr "Servicio de Registro de sistema"
+msgstr "Entrada fallida: %s"
 
 #: include/class_log.inc:116
 #, php-format
 msgid "Invalid option '%s' specified!"
-msgstr ""
+msgstr "¡Se ha indicado una opción no válida: '%s'!"
 
 #: include/class_log.inc:120
-#, fuzzy
 msgid "Specified objectType is empty or invalid!"
-msgstr "La contraseñas especificadas están vacías o no son iguales."
+msgstr "¡Se ha indicado un objectType vacio o no válido!"
 
 #: include/class_log.inc:139
-#, fuzzy
 msgid "MySQL error"
-msgstr "Servicio LDAP"
+msgstr "Error MySQL"
 
 #: include/class_log.inc:139
 #, php-format
 msgid "Logging to MySQL database will be disabled for server '%s'!"
 msgstr ""
+"¡La escritura del registro en la base de datos MySQL se desactivará para el "
+"servidor '%s'!"
 
 #: include/class_log.inc:164 include/class_log.inc:173
 #: include/class_log.inc:186 include/class_log.inc:203
 #: include/class_log.inc:241
 msgid "MySQL logging"
-msgstr ""
+msgstr "Escritura del registro en MySQL"
 
 #: include/class_log.inc:218
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot add location to the database!"
-msgstr ""
-"La Autenticación como usuario '%s' en el servidor '%s'. ha tenido éxito."
+msgstr "¡No se puede añadir la ubicación a la base de datos!"
 
 #: include/class_MultiSelectWindow.inc:145 setup/setup_migrate.tpl:79
 msgid "Close"
-msgstr ""
+msgstr "Cerrar"
 
 #: include/class_MultiSelectWindow.inc:550
 #, php-format
 msgid "Inconsistent DN encoding detected: '%s'"
-msgstr ""
+msgstr "Se ha detectado una codificación de DN inconsistente: '%s'"
 
 #: include/class_SnapShotDialog.inc:90
 #, php-format
 msgid "You're about to delete the snapshot '%s'."
-msgstr ""
+msgstr "Va a eliminar la instantanea '%s'."
 
 #: include/class_SnapShotDialog.inc:143 include/class_plugin.inc:1972
 msgid "Restore snapshot"
-msgstr ""
+msgstr "Recuperar instantanea"
 
 #: include/class_SnapShotDialog.inc:145
 msgid "Remove snapshot"
-msgstr ""
+msgstr "Eliminar instantanea"
 
 #: include/class_SnapShotDialog.inc:147 include/class_SnapShotDialog.inc:167
 msgid "Y-m-d, H:i:s"
-msgstr ""
+msgstr "Y-m-d, H:i:s"
 
 #: include/class_SnapShotDialog.inc:179
 #: plugins/admin/departments/class_countryGeneric.inc:59
@@ -1692,6 +1698,8 @@ msgid ""
 "The object has changed since opened in GOsa. All changes that may be done by "
 "others get lost if you save this entry!"
 msgstr ""
+"Este objeto ha cambiado desde que ha sido abierto en GOsa. ¡Todos los "
+"cambios realizados por otros se perderán si graba esta entrada!"
 
 #: include/class_plugin.inc:1313 include/class_plugin.inc:1325
 #, php-format
@@ -1699,6 +1707,8 @@ msgid ""
 "The snapshot functionality is enabled, but the required variable '%s' is not "
 "set."
 msgstr ""
+"La funcionalidad de instancias esta activa, pero el valor requerido '%s' no "
+"está activo."
 
 #: include/class_plugin.inc:1520 include/class_plugin.inc:1532
 #: include/class_plugin.inc:1547 include/class_plugin.inc:1559
@@ -1707,28 +1717,27 @@ msgstr ""
 #: plugins/admin/users/class_userManagement.inc:344
 #: plugins/admin/users/class_userManagement.inc:583
 #: plugins/admin/groups/class_groupManagement.inc:356
-#, fuzzy
 msgid "Permission"
-msgstr "Permisos"
+msgstr "Permiso"
 
 #: include/class_plugin.inc:1520
-#, fuzzy, php-format
+#, php-format
 msgid "You are not allowed to create a snapshot for %s."
-msgstr "No tiene permisos para crear un nuevo rol."
+msgstr "No tiene permisos para crear una instantanea para %s."
 
 #: include/class_plugin.inc:1532 include/class_plugin.inc:1547
 #: include/class_plugin.inc:1559
-#, fuzzy, php-format
+#, php-format
 msgid "You are not allowed to restore a snapshot for %s."
-msgstr "No tiene permisos para crear un nuevo rol."
+msgstr "No tiene permisos para recuperar una instantanea para %s."
 
 #: include/class_plugin.inc:1771
 msgid "Changing ACL dn"
-msgstr ""
+msgstr "Modificando ACL dn"
 
 #: include/class_plugin.inc:1771
 msgid "from"
-msgstr ""
+msgstr "desde"
 
 #: include/class_plugin.inc:1772 setup/class_setupStep_Migrate.inc:1139
 #: setup/class_setupStep_Migrate.inc:1189
@@ -1738,15 +1747,15 @@ msgstr "a"
 
 #: include/class_plugin.inc:1954 include/class_plugin.inc:1956
 msgid "Restore"
-msgstr ""
+msgstr "Recuperar"
 
 #: include/class_plugin.inc:1979
 msgid "Create snapshot"
-msgstr ""
+msgstr "Crear instantánea"
 
 #: include/class_plugin.inc:1980
 msgid "Create a new snapshot from this object"
-msgstr ""
+msgstr "¡Crear una nueva instantánea de este objeto!"
 
 #: include/class_plugin.inc:1998
 msgid "cut"
@@ -1765,27 +1774,25 @@ msgid "Copy this entry"
 msgstr "Copiar esta entrada"
 
 #: include/class_plugin.inc:2040
-#, fuzzy
 msgid "Copy"
-msgstr "copiar"
+msgstr "Copiar"
 
 #: include/class_plugin.inc:2044
-#, fuzzy
 msgid "Cut"
-msgstr "mover"
+msgstr "Mover"
 
 #: include/class_multi_plug.inc:362
 msgid "You are currently editing mutliple entries."
-msgstr ""
+msgstr "Está actualmente editando varias entradas."
 
 #: include/class_multi_plug.inc:391
-#, fuzzy
 msgid "Password reset"
-msgstr "La contraseña expira en"
+msgstr "Reintroducir contraseña"
 
 #: include/class_multi_plug.inc:391
 msgid "The user password was resetted, please set a new password value!"
 msgstr ""
+"¡La contraseña del usuario se ha eliminado, por favor introduzca una nueva!"
 
 #: include/class_tabs.inc:49
 #, php-format
@@ -1793,15 +1800,17 @@ msgid ""
 "No plugin definitions found to initialize '%s', please check your "
 "configuration file."
 msgstr ""
+"No hay definiciones de extensión para iniciar '%s', por favor compruebe su "
+"archivo de configuración."
 
 #: include/class_tabs.inc:248
 #, php-format
 msgid "Delete process has been canceled by plugin '%s': %s"
-msgstr ""
+msgstr "El proceso de eliminación ha sido cancelado por la extensión '%s': %s"
 
 #: include/class_tabs.inc:383
 msgid "References"
-msgstr ""
+msgstr "Referencias"
 
 #: plugins/admin/departments/class_countryGeneric.inc:43
 #: plugins/admin/departments/class_countryGeneric.inc:45
@@ -1862,9 +1871,8 @@ msgstr "País"
 
 #: plugins/admin/departments/class_countryGeneric.inc:87
 #: plugins/admin/departments/country.tpl:11
-#, fuzzy
 msgid "Country name"
-msgstr "País"
+msgstr "Nombre del País"
 
 #: plugins/admin/departments/class_countryGeneric.inc:90
 #: plugins/admin/departments/dcObject.tpl:50
@@ -1892,14 +1900,13 @@ msgstr "Propiedades"
 
 #: plugins/admin/departments/dcObject.tpl:11
 #: plugins/admin/departments/locality.tpl:11
-#, fuzzy
 msgid "Locality name"
-msgstr "Nombre del Rol"
+msgstr "Localidad"
 
 #: plugins/admin/departments/dcObject.tpl:14
 #: plugins/admin/departments/locality.tpl:14
 msgid "Name of locality to create"
-msgstr ""
+msgstr "Nombre de la localidad a crear"
 
 #: plugins/admin/departments/dcObject.tpl:22
 #: plugins/admin/departments/generic.tpl:22
@@ -1907,7 +1914,7 @@ msgstr ""
 #: plugins/admin/departments/organization.tpl:22
 #: plugins/admin/departments/locality.tpl:22
 msgid "Descriptive text for department"
-msgstr ""
+msgstr "Descripción del departamento"
 
 #: plugins/admin/departments/dcObject.tpl:31
 #: plugins/admin/departments/generic.tpl:43
@@ -1915,7 +1922,7 @@ msgstr ""
 #: plugins/admin/departments/organization.tpl:43
 #: plugins/admin/departments/locality.tpl:31
 msgid "Choose subtree to place department in"
-msgstr ""
+msgstr "Elija subárbol para colocar el departamento"
 
 #: plugins/admin/departments/dcObject.tpl:37
 #: plugins/admin/departments/generic.tpl:49
@@ -1926,7 +1933,7 @@ msgstr ""
 #: plugins/personal/generic/generic.tpl:180
 #: plugins/personal/generic/multiple_generic.tpl:56
 msgid "Select a base"
-msgstr ""
+msgstr "Seleccione una base"
 
 #: plugins/admin/departments/dcObject.tpl:52
 #: plugins/admin/departments/generic.tpl:116
@@ -1934,22 +1941,21 @@ msgstr ""
 #: plugins/admin/departments/organization.tpl:116
 #: plugins/admin/departments/locality.tpl:52
 msgid "Tag department as an independent administrative unit"
-msgstr ""
+msgstr "Marcar departamento como una unidad administrativa independiente"
 
 #: plugins/admin/departments/class_dcObject.inc:77
 #: plugins/admin/departments/class_dcObject.inc:78
 #: plugins/admin/departments/class_departmentManagement.inc:544
-#, fuzzy
 msgid "Domain Component"
-msgstr "Administradores del dominio"
+msgstr "Componentes del dominio"
 
 #: plugins/admin/departments/generic.tpl:11
 msgid "Name of department"
-msgstr ""
+msgstr "Nombre del departamento"
 
 #: plugins/admin/departments/generic.tpl:14
 msgid "Name of subtree to create"
-msgstr ""
+msgstr "Nombre del subárbol a crear"
 
 #: plugins/admin/departments/generic.tpl:27
 #: plugins/admin/departments/organization.tpl:27
@@ -1961,7 +1967,7 @@ msgstr "Categoría"
 #: plugins/admin/departments/generic.tpl:30
 #: plugins/admin/departments/organization.tpl:30
 msgid "Category for this subtree"
-msgstr ""
+msgstr "Categoría para este subárbol"
 
 #: plugins/admin/departments/generic.tpl:61
 #: plugins/admin/departments/generic.tpl:73
@@ -1989,12 +1995,12 @@ msgstr "Provincia"
 #: plugins/admin/departments/generic.tpl:68
 #: plugins/admin/departments/organization.tpl:68
 msgid "State where this subtree is located"
-msgstr ""
+msgstr "Estado donde está este subárbol localizado"
 
 #: plugins/admin/departments/generic.tpl:76
 #: plugins/admin/departments/organization.tpl:76
 msgid "Location of this subtree"
-msgstr ""
+msgstr "Localización de este subárbol"
 
 #: plugins/admin/departments/generic.tpl:81
 #: plugins/admin/departments/organization.tpl:81
@@ -2009,7 +2015,7 @@ msgstr "Dirección"
 #: plugins/admin/departments/generic.tpl:84
 #: plugins/admin/departments/organization.tpl:84
 msgid "Postal address of this subtree"
-msgstr ""
+msgstr "Dirección postal de este subárbol"
 
 #: plugins/admin/departments/generic.tpl:88
 #: plugins/admin/departments/organization.tpl:88
@@ -2030,7 +2036,7 @@ msgstr "Teléfono"
 #: plugins/admin/departments/generic.tpl:91
 #: plugins/admin/departments/organization.tpl:91
 msgid "Base telephone number of this subtree"
-msgstr ""
+msgstr "Número base de teléfono de este subárbol"
 
 #: plugins/admin/departments/generic.tpl:96
 #: plugins/admin/departments/organization.tpl:96
@@ -2050,7 +2056,7 @@ msgstr "Fax"
 #: plugins/admin/departments/generic.tpl:99
 #: plugins/admin/departments/organization.tpl:99
 msgid "Base facsimile telephone number of this subtree"
-msgstr ""
+msgstr "Número base de fax de este subárbol"
 
 #: plugins/admin/departments/class_departmentManagement.inc:26
 #: plugins/admin/departments/class_departmentGeneric.inc:612
@@ -2059,9 +2065,8 @@ msgid "Departments"
 msgstr "Departamentos"
 
 #: plugins/admin/departments/class_departmentManagement.inc:27
-#, fuzzy
 msgid "Manage Departments"
-msgstr "Departamentos"
+msgstr "Gestionar Departamentos"
 
 #: plugins/admin/departments/class_departmentManagement.inc:239
 #: plugins/admin/acl/class_aclManagement.inc:166
@@ -2076,9 +2081,8 @@ msgstr "Departamentos"
 #: plugins/admin/groups/class_groupManagement.inc:407
 #: plugins/admin/groups/class_groupManagement.inc:461
 #: plugins/admin/groups/class_groupManagement.inc:492
-#, fuzzy
 msgid "Permission error"
-msgstr "Permisos"
+msgstr "Error de Permisos"
 
 #: plugins/admin/departments/class_departmentManagement.inc:305
 msgid ""
@@ -2086,6 +2090,9 @@ msgid ""
 "the page and press the 'Continue' button to continue with the department "
 "management dialog."
 msgstr ""
+"Tan pronto como la termine la operación mover, podrá bajar al final de la "
+"página y presionar el botón 'Continuar' para continuar con el asistente de "
+"administración de departamento."
 
 #: plugins/admin/departments/class_departmentManagement.inc:325
 msgid ""
@@ -2093,13 +2100,15 @@ msgid ""
 "page and press the 'Continue' button to continue with the department "
 "management dialog."
 msgstr ""
+"Tan pronto como la operación de marcado termine, puede avanzar hasta el "
+"final de la página y presionar el botón 'Continuar' para seguir al dialogo "
+"de gestión de departamento."
 
 #: plugins/admin/departments/class_departmentManagement.inc:568
 #: plugins/admin/departments/class_localityGeneric.inc:78
 #: plugins/admin/departments/class_localityGeneric.inc:79
-#, fuzzy
 msgid "Locality"
-msgstr "Localización"
+msgstr "Localidad"
 
 #: plugins/admin/departments/class_departmentManagement.inc:580
 #: plugins/admin/departments/class_organizationGeneric.inc:109
@@ -2125,7 +2134,7 @@ msgstr "Departamento"
 
 #: plugins/admin/departments/country.tpl:14
 msgid "Name of country to create"
-msgstr ""
+msgstr "Nombre del país a crear"
 
 #: plugins/admin/departments/remove.tpl:6
 msgid ""
@@ -2133,6 +2142,9 @@ msgid ""
 "check if your really want to do this since there is no way for GOsa to get "
 "your data back."
 msgstr ""
+"Esto incluye 'todas' las cuentas, sistemas, etc. en este subárbol. Por favor "
+"pulse dos veces si quiere realmente hacer esto, ya que no hay forma de que "
+"GOsa recupere la información posteriormente."
 
 #: plugins/admin/departments/remove.tpl:10 plugins/admin/acl/remove.tpl:10
 msgid ""
@@ -2140,15 +2152,17 @@ msgid ""
 "contents of your LDAP tree in a file. So - if you've done so - press "
 "'Delete' to continue or 'Cancel' to abort."
 msgstr ""
+"La mejor opción antes de ejecutar esta acción es haber grabado el contenido "
+"actual de su árbol LDAP en un fichero. Entonces - Y solo entonces - presione "
+"'Eliminar' para continuar o 'Cancelar' para abortar."
 
 #: plugins/admin/departments/organization.tpl:11
-#, fuzzy
 msgid "Name of organization"
-msgstr "Organización"
+msgstr "Nombre de la Organización"
 
 #: plugins/admin/departments/organization.tpl:14
 msgid "Name of organization to create"
-msgstr ""
+msgstr "Nombre de la organización a crear"
 
 #: plugins/admin/departments/main.inc:42 plugins/admin/departments/main.inc:44
 msgid "Department management"
@@ -2156,39 +2170,44 @@ msgstr "Administración de departamento"
 
 #: plugins/admin/departments/dep_move_confirm.tpl:2
 msgid "You are currently moving/renaming this department."
-msgstr ""
+msgstr "Está actualmente moviendo/renombrando este departamento."
 
 #: plugins/admin/departments/dep_move_confirm.tpl:5
 msgid ""
 "Modifying a departments naming attribute 'ou' or base may corrupt acls and "
 "snapshot entries for all entire objects."
 msgstr ""
+"Modificar un atributo 'ou' de un departamento puede corromper acls e "
+"instantaneas de todos los objetos."
 
 #: plugins/admin/departments/dep_move_confirm.tpl:8
 msgid "GOsa can NOT fix this for you, yet."
-msgstr ""
+msgstr "GOsa no puede solucionar este problema, aún."
 
 #: plugins/admin/departments/dep_move_confirm.tpl:11
 msgid ""
 "Before you confirm this action, ensure that everything will be as expected, "
 "possibly the best solution is a backup."
 msgstr ""
+"Antes de que confirme la acción, asegurese que todo sera como espera, se "
+"recomienda que realize un backup."
 
 #: plugins/admin/departments/dep_iframe.tpl:1
 msgid "Processing the requested operation"
-msgstr ""
+msgstr "Procesando la operación solicitada"
 
 #: plugins/admin/departments/dep_iframe.tpl:7
 msgid ""
 "Your browser doesn't support iframes, please use this link to perform the "
 "requested operation."
 msgstr ""
+"Su navegador no soporta IFRAMES, porfavor use este enlace para ejecutar la "
+"operación solicitada."
 
 #: plugins/admin/departments/class_departmentGeneric.inc:386
-#, fuzzy
 msgid "Cannot find an unused tag for this administrative unit!"
 msgstr ""
-"Error Fatal: ¡No se puede encontrar una etiqueta sin usar para identificar "
+"¡No se puede encontrar una etiqueta sin usar para identificar "
 "la unidad administrativa!"
 
 #: plugins/admin/departments/class_departmentGeneric.inc:459
@@ -2236,22 +2255,21 @@ msgstr "Teléfono"
 #: plugins/admin/departments/class_departmentGeneric.inc:682
 #, php-format
 msgid "Object '%s' is already tagged"
-msgstr ""
+msgstr "El objeto '%s' está ya marcado"
 
 #: plugins/admin/departments/class_departmentGeneric.inc:689
 #, php-format
 msgid "Adding tag (%s) to object '%s'"
-msgstr ""
+msgstr "Añadir marca (%s) al objeto '%s'"
 
 #: plugins/admin/departments/class_departmentGeneric.inc:721
 #, php-format
 msgid "Removing tag from object '%s'"
-msgstr ""
+msgstr "Eliminando marca del objeto '%s'"
 
 #: plugins/admin/departments/class_organizationGeneric.inc:118
-#, fuzzy
 msgid "Organization name"
-msgstr "Organización"
+msgstr "Nombre de la Organización"
 
 #: plugins/admin/departments/class_organizationGeneric.inc:125
 #: plugins/personal/generic/class_user.inc:1579
@@ -2259,9 +2277,8 @@ msgid "Postal address"
 msgstr "Código Postal"
 
 #: plugins/admin/departments/class_organizationGeneric.inc:126
-#, fuzzy
 msgid "Phone number"
-msgstr "Número de teléfono personal"
+msgstr "Número de teléfono"
 
 #: plugins/admin/departments/class_divListDepartment.inc:47
 #: plugins/admin/departments/class_divListDepartment.inc:48
@@ -2278,7 +2295,7 @@ msgstr "Lista de Departamentos"
 #: setup/setup_migrate.tpl:390 setup/setup_migrate.tpl:433
 #: setup/setup_migrate.tpl:477
 msgid "Select all"
-msgstr ""
+msgstr "Seleccione todos"
 
 #: plugins/admin/departments/class_divListDepartment.inc:66
 #: plugins/admin/departments/class_divListDepartment.inc:90
@@ -2359,9 +2376,8 @@ msgstr "Eliminar esta entrada"
 #: plugins/admin/ogroups/class_divListOGroup.inc:283
 #: plugins/admin/users/class_divListUsers.inc:372
 #: plugins/admin/groups/class_divListGroup.inc:304
-#, fuzzy
 msgid "Number of listed departments"
-msgstr "Eliminar departamentos seleccionados"
+msgstr "Número de departamentos"
 
 #: plugins/admin/acl/tabs_acl_role.inc:28
 msgid "ACL Templates"
@@ -2406,76 +2422,73 @@ msgid ""
 "This includes all system and setup informations. Please double check if your "
 "really want to do this since there is no way for GOsa to get your data back."
 msgstr ""
+"Esto incluye todos los sistemas e información de configuración. Por favor "
+"pulse dos veces si quiere realmente hacer esto, ya que no hay forma de que "
+"GOsa recupere la información posteriormente."
 
 #: plugins/admin/acl/acl_role.tpl:3 ihtml/themes/default/acl.tpl:7
 msgid "Assigned ACL for current entry"
-msgstr ""
+msgstr "Asignando ACL a la entrada actual"
 
 #: plugins/admin/acl/acl_role.tpl:31 plugins/admin/ogroups/generic.tpl:29
 #: plugins/admin/groups/generic.tpl:43
 msgid "Choose subtree to place group in"
-msgstr ""
+msgstr "Elija el subárbol donde colocar el grupo"
 
 #: plugins/admin/acl/acl_role.tpl:45 ihtml/themes/default/acl.tpl:12
 msgid "New ACL"
-msgstr ""
+msgstr "Nueva ACL"
 
 #: plugins/admin/acl/acl_role.tpl:51 ihtml/themes/default/acl.tpl:17
 msgid "ACL type"
-msgstr ""
+msgstr "Tipo de ACL"
 
 #: plugins/admin/acl/acl_role.tpl:51 ihtml/themes/default/acl.tpl:19
 #: ihtml/themes/default/acl.tpl:24
 msgid "Select an acl type"
-msgstr ""
+msgstr "Seleccione un tipo de ACL"
 
 #: plugins/admin/acl/acl_role.tpl:56 ihtml/themes/default/acl.tpl:104
 msgid "List of available ACL categories"
-msgstr ""
+msgstr "Lista de categorías ACL disponibles"
 
 #: plugins/admin/acl/main.inc:45 plugins/admin/acl/main.inc:47
 msgid "ACL management"
 msgstr "Administración de ACL"
 
 #: plugins/admin/acl/class_aclManagement.inc:290
-#, fuzzy
 msgid "ACL role"
-msgstr "Rol"
+msgstr "Roles ACL"
 
 #: plugins/admin/acl/class_aclRole.inc:26
 #: plugins/admin/acl/class_aclRole.inc:726
-#, fuzzy
 msgid "Access control roles"
-msgstr "Lista de control de acceso"
+msgstr "Roles de control de acceso"
 
 #: plugins/admin/acl/class_aclRole.inc:27
-#, fuzzy
 msgid "Edit AC roles"
-msgstr "Rol"
+msgstr "Editar roles CA"
 
 #: plugins/admin/acl/class_aclRole.inc:131
-#, fuzzy
 msgid "Reset ACL"
-msgstr "Eliminar ACLs"
+msgstr "Eliminar ACL"
 
 #: plugins/admin/acl/class_aclRole.inc:421
 msgid "No ACL settings for this category"
 msgstr "No hay ACL configuradas en esta categoría"
 
 #: plugins/admin/acl/class_aclRole.inc:423
-#, fuzzy, php-format
+#, php-format
 msgid "ACL for these objects: %s"
 msgstr "ACLs que tienen estos objetos: %s"
 
 #: plugins/admin/acl/class_aclRole.inc:429
-#, fuzzy
 msgid "Edit category ACL"
-msgstr "Editar las categorías ACLs"
+msgstr "Editar la categoría ACL"
 
 #: plugins/admin/acl/class_aclRole.inc:433
-#, fuzzy
 msgid "Reset category ACL"
-msgstr "Categoría"
+msgstr "Eliminar la categoría ACL"
 
 #: plugins/admin/acl/class_aclRole.inc:453
 #, php-format
@@ -2483,19 +2496,17 @@ msgid "Edit ACL for '%s', scope is '%s'"
 msgstr "Editar ACL para '%s', el ámbito es '%s'"
 
 #: plugins/admin/acl/class_aclRole.inc:649
-#, fuzzy
 msgid "Object in use"
-msgstr "Objeto"
+msgstr "Objeto en uso"
 
 #: plugins/admin/acl/class_aclRole.inc:649
-#, fuzzy, php-format
+#, php-format
 msgid "This role cannot be removed while it is in use by these objects:"
 msgstr ""
-"Este Rol no puede ser eliminado por estar siendo usado. Los siguientes "
-"objetos están usando este rol %s"
+"Este Rol no puede ser eliminado por estar siendo usado por los siguientes "
+"objetos:"
 
 #: plugins/admin/acl/class_aclRole.inc:736
-#, fuzzy
 msgid "Permissions"
 msgstr "Permisos"
 
@@ -2504,47 +2515,47 @@ msgstr "Permisos"
 #: plugins/admin/groups/generic.tpl:11
 #: plugins/admin/groups/paste_generic.tpl:5
 msgid "Group name"
-msgstr ""
+msgstr "Nombre del grupo"
 
 #: plugins/admin/ogroups/generic.tpl:10
 msgid "Name of the group"
-msgstr ""
+msgstr "Nombre del grupo"
 
 #: plugins/admin/ogroups/generic.tpl:18 plugins/admin/groups/generic.tpl:28
 msgid "Descriptive text for this group"
-msgstr ""
+msgstr "Descripción del grupo"
 
 #: plugins/admin/ogroups/generic.tpl:41
 #: plugins/admin/groups/class_groupGeneric.inc:1269
 #: plugins/personal/posix/generic.tpl:126
 msgid "System trust"
-msgstr ""
+msgstr "Sistema de seguridad"
 
 #: plugins/admin/ogroups/generic.tpl:42 plugins/admin/groups/generic.tpl:169
 #: plugins/admin/groups/generic.tpl:203 plugins/personal/posix/generic.tpl:128
 #: plugins/personal/posix/generic.tpl:156
 msgid "Trust mode"
-msgstr ""
+msgstr "Modo seguro"
 
 #: plugins/admin/ogroups/generic.tpl:70
 msgid "Member objects"
-msgstr ""
+msgstr "Objetos miembros"
 
 #: plugins/admin/ogroups/paste_generic.tpl:7
 msgid "Please enter the new object group name"
-msgstr ""
+msgstr "Por favor introduzca un nuevo nombre del grupo de objetos"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:59
 #: plugins/admin/ogroups/class_divListOGroup.inc:60
 msgid "List of object groups"
-msgstr ""
+msgstr "Lista del grupo de objetos"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:83
 #: plugins/admin/ogroups/class_divListOGroup.inc:159
 #: plugins/admin/ogroups/class_divListOGroup.inc:266
 #: plugins/generic/references/class_reference.inc:71
 msgid "Object group"
-msgstr ""
+msgstr "Grupo de objetos"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:88
 #: plugins/admin/ogroups/class_ogroup.inc:453
@@ -2567,70 +2578,60 @@ msgstr ""
 #: plugins/admin/groups/class_divListGroup.inc:89
 #: plugins/admin/groups/class_divListGroup.inc:91
 #: plugins/admin/groups/class_divListGroup.inc:93
-#, fuzzy, php-format
+#, php-format
 msgid "Show %s"
-msgstr "Mostrar teléfonos"
+msgstr "Mostrar %s"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:89
 #: plugins/admin/ogroups/class_divListOGroup.inc:90
-#, fuzzy
 msgid "user groups"
-msgstr "Grupo de samba"
+msgstr "grupos de usuarios"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:91
 #: plugins/admin/ogroups/class_divListOGroup.inc:92
-#, fuzzy
 msgid "nested groups"
-msgstr "Lista de grupos"
+msgstr "grupos anidados"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:93
 #: plugins/admin/ogroups/class_divListOGroup.inc:94
 #: plugins/admin/groups/class_divListGroup.inc:89
-#, fuzzy
 msgid "application groups"
-msgstr "Mostrar los grupos de aplicaciones"
+msgstr "grupos de aplicacion"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:95
 #: plugins/admin/ogroups/class_divListOGroup.inc:96
-#, fuzzy
 msgid "department groups"
-msgstr "departamento"
+msgstr "grupos de departamento"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:97
 #: plugins/admin/ogroups/class_divListOGroup.inc:98
-#, fuzzy
 msgid "server groups"
-msgstr "Mostrar grupos primarios"
+msgstr "grupos de servidor"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:99
 #: plugins/admin/ogroups/class_divListOGroup.inc:100
-#, fuzzy
 msgid "workstation groups"
-msgstr "Estación de trabajo"
+msgstr "grupos de estación de trabajo"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:101
 #: plugins/admin/ogroups/class_divListOGroup.inc:102
-#, fuzzy
 msgid "windows workstation groups"
-msgstr "Mostrar estaciones de trabajo"
+msgstr "grupos de estaciones de trabajo windows"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:103
 #: plugins/admin/ogroups/class_divListOGroup.inc:104
-#, fuzzy
 msgid "terminal groups"
-msgstr "Mostrar grupos de correo"
+msgstr "grupos de terminales"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:105
 #: plugins/admin/ogroups/class_divListOGroup.inc:106
-#, fuzzy
 msgid "printer groups"
-msgstr "Mostrar grupos primarios"
+msgstr "grupos de impresoras"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:107
 #: plugins/admin/ogroups/class_divListOGroup.inc:108
-#, fuzzy
 msgid "phone groups"
-msgstr "Mostrar los grupos samba"
+msgstr "grupos de teléfonos"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:115
 #: plugins/admin/groups/class_divListGroup.inc:100
@@ -2650,28 +2651,32 @@ msgstr "Correo Electrónico"
 
 #: plugins/admin/ogroups/class_divListOGroup.inc:282
 msgid "Number of listed object groups"
-msgstr ""
+msgstr "Número de grupo de objetos listados"
 
 #: plugins/admin/ogroups/remove.tpl:7
 msgid ""
 "Please double check if you really want to do this since there is no way for "
 "GOsa to get your data back."
 msgstr ""
+"Si está seguro de lo que quiere hacer pulse dos veces, ya que no hay forma "
+"de que GOsa pueda recuperar posteriormente esa información"
 
 #: plugins/admin/ogroups/remove.tpl:10 plugins/admin/users/remove.tpl:10
 #: plugins/admin/groups/remove.tpl:10 ihtml/themes/default/remove.tpl:9
 msgid "So - if you're sure - press 'Delete' to continue or 'Cancel' to abort."
 msgstr ""
+"Entonces, si esta seguro, presione <i>Eliminar</i> para continuar o "
+"<i>Cancelar</i> para Abortar."
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:119
 #: plugins/admin/ogroups/tabs_ogroups.inc:318
 msgid "Phone queue"
-msgstr ""
+msgstr "Cola telefónica"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:145
 #: plugins/admin/ogroups/tabs_ogroups.inc:286
 msgid "Systems"
-msgstr ""
+msgstr "Sistemas"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:155
 #: plugins/admin/ogroups/tabs_ogroups.inc:176
@@ -2683,12 +2688,11 @@ msgstr "Inicio"
 #: plugins/admin/ogroups/tabs_ogroups.inc:184
 #: plugins/admin/ogroups/tabs_ogroups.inc:295
 msgid "Devices"
-msgstr ""
+msgstr "Dispositivos"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:193
-#, fuzzy
 msgid "FAI summary"
-msgstr "Sumario"
+msgstr "Sumario FAI"
 
 #: plugins/admin/ogroups/tabs_ogroups.inc:202
 #: plugins/admin/users/class_divListUsers.inc:203
@@ -2703,7 +2707,7 @@ msgstr "Aplicaciones"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:6
 msgid "Select objects to add"
-msgstr ""
+msgstr "Seleccione los objetos a añadir"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:20
 #: plugins/admin/groups/group_objects.tpl:20
@@ -2711,11 +2715,11 @@ msgstr ""
 #: ihtml/themes/default/MultiSelectWindow.tpl:63
 #: ihtml/themes/default/MultiSelectWindow.tpl:103
 msgid "Filters"
-msgstr ""
+msgstr "Filtros"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:36
 msgid "Display objects of department"
-msgstr ""
+msgstr "Mostrar objetos del departamento"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:37
 #: plugins/admin/ogroups/trust_machines.tpl:27
@@ -2724,39 +2728,36 @@ msgstr ""
 #: plugins/personal/posix/posix_groups.tpl:35
 #: plugins/personal/posix/trust_machines.tpl:27
 msgid "Choose the department the search will be based on"
-msgstr ""
+msgstr "Escoja el departamento base de la búsqueda"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:40
 msgid "Display objects matching"
-msgstr ""
+msgstr "Mostrar objetos que coincidan"
 
 #: plugins/admin/ogroups/ogroup_objects.tpl:41
 msgid "Regular expression for matching object names"
-msgstr ""
+msgstr "Expresiones regulares para buscar nombre de objetos"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:26
 #: plugins/admin/ogroups/main.inc:46 plugins/admin/ogroups/main.inc:51
 #: plugins/admin/ogroups/class_ogroup.inc:1120
 msgid "Object groups"
-msgstr ""
+msgstr "Grupos de objetos"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:27
-#, fuzzy
 msgid "Manage object groups"
-msgstr "Mostrar los grupos samba"
+msgstr "Gestionar grupos de objetos"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:176
 #: plugins/admin/users/class_userManagement.inc:211
 #: plugins/admin/groups/class_groupManagement.inc:195
-#, fuzzy
 msgid "Infrastructure error"
-msgstr "Buscar en subárboles"
+msgstr "error de infraestructura"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:255
 #: plugins/admin/ogroups/class_ogroupManagement.inc:331
-#, fuzzy
 msgid "object group"
-msgstr "Mostrar los grupos samba"
+msgstr "grupo de objetos"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:526
 #: plugins/admin/users/class_divListUsers.inc:126 setup/setup_config2.tpl:286
@@ -2788,9 +2789,8 @@ msgid "Workstation"
 msgstr "Estación de trabajo"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:533
-#, fuzzy
 msgid "Windows Install"
-msgstr "Windows RDP"
+msgstr "Instalación Windows"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:534
 msgid "Terminal"
@@ -2807,69 +2807,69 @@ msgstr "Impresora"
 #: ihtml/themes/default/msg_dialog.tpl:56
 #: ihtml/themes/default/msg_dialog.tpl:99
 msgid "Information"
-msgstr ""
+msgstr "Información"
 
 #: plugins/admin/ogroups/class_ogroup.inc:232
 msgid "You cannot combine terminals and workstations in one object group!"
 msgstr ""
+"¡No puede combinar terminales y estaciones de trabajo en un unico grupo de "
+"objetos!"
 
 #: plugins/admin/ogroups/class_ogroup.inc:451
 #: plugins/admin/ogroups/class_ogroup.inc:453
 #: plugins/admin/ogroups/class_ogroup.inc:511
 msgid "departments"
-msgstr ""
+msgstr "departamentos"
 
 #: plugins/admin/ogroups/class_ogroup.inc:455
 #: plugins/admin/ogroups/class_ogroup.inc:457
-#, fuzzy
 msgid "people"
-msgstr "Rol"
+msgstr "usuarios"
 
 #: plugins/admin/ogroups/class_ogroup.inc:459
 #: plugins/admin/ogroups/class_ogroup.inc:461
 #: plugins/admin/ogroups/class_ogroup.inc:509
 msgid "groups"
-msgstr ""
+msgstr "grupos"
 
 #: plugins/admin/ogroups/class_ogroup.inc:463
 #: plugins/admin/ogroups/class_ogroup.inc:465
 #: plugins/admin/ogroups/class_ogroup.inc:512
 msgid "servers"
-msgstr ""
+msgstr "servidores"
 
 #: plugins/admin/ogroups/class_ogroup.inc:467
 #: plugins/admin/ogroups/class_ogroup.inc:469
 #: plugins/admin/ogroups/class_ogroup.inc:513
 msgid "workstations"
-msgstr ""
+msgstr "estaciones de trabajo"
 
 #: plugins/admin/ogroups/class_ogroup.inc:471
 #: plugins/admin/ogroups/class_ogroup.inc:473
 #: plugins/admin/ogroups/class_ogroup.inc:515
 msgid "terminals"
-msgstr ""
+msgstr "terminales"
 
 #: plugins/admin/ogroups/class_ogroup.inc:475
-#, fuzzy
 msgid "printer"
-msgstr "Impresora"
+msgstr "impresora"
 
 #: plugins/admin/ogroups/class_ogroup.inc:477
 #: plugins/admin/ogroups/class_ogroup.inc:517
 msgid "printers"
-msgstr ""
+msgstr "impresoras"
 
 #: plugins/admin/ogroups/class_ogroup.inc:479
 #: plugins/admin/ogroups/class_ogroup.inc:481
 #: plugins/admin/ogroups/class_ogroup.inc:516
 msgid "phones"
-msgstr ""
+msgstr "teléfonos"
 
 #: plugins/admin/ogroups/class_ogroup.inc:487
 #: plugins/admin/ogroups/class_ogroup.inc:489
 #: plugins/admin/ogroups/class_ogroup.inc:510
 msgid "applications"
-msgstr ""
+msgstr "aplicaciones"
 
 #: plugins/admin/ogroups/class_ogroup.inc:504
 #: plugins/admin/users/class_userManagement.inc:492
@@ -2878,14 +2878,13 @@ msgstr "ninguno"
 
 #: plugins/admin/ogroups/class_ogroup.inc:506
 msgid "too many different objects!"
-msgstr ""
+msgstr "¡demasiados objetos diferentes!"
 
 #: plugins/admin/ogroups/class_ogroup.inc:508
 msgid "users"
-msgstr ""
+msgstr "usuarios"
 
 #: plugins/admin/ogroups/class_ogroup.inc:514
-#, fuzzy
 msgid "winstations"
 msgstr "Estación de trabajo Windows"
 
@@ -2910,36 +2909,35 @@ msgstr "Permitir el acceso a estos equipos"
 
 #: plugins/admin/ogroups/class_ogroup.inc:747
 msgid "Non existing dn:"
-msgstr ""
+msgstr "No existe el 'dn':"
 
 #: plugins/admin/ogroups/class_ogroup.inc:931
 msgid "You can combine two different object types at maximum, only!"
-msgstr ""
+msgstr "¡Solo se puede combiar dos tipos de objetos diferentes como máximo!"
 
 #: plugins/admin/ogroups/class_ogroup.inc:1115
 msgid "Object group generic"
-msgstr ""
+msgstr "Grupo de objetos genérico"
 
 #: plugins/admin/ogroups/class_ogroup.inc:1126
-#, fuzzy
 msgid "Sytem trust"
 msgstr "Sistema de confianza"
 
 #: plugins/admin/ogroups/class_ogroup.inc:1127
 msgid "Member"
-msgstr ""
+msgstr "Miembro"
 
 #: plugins/admin/ogroups/trust_machines.tpl:6
 #: plugins/admin/groups/trust_machines.tpl:6
 #: plugins/personal/posix/trust_machines.tpl:6
 msgid "Select systems to add"
-msgstr ""
+msgstr "Seleccione los sistemas a añadir"
 
 #: plugins/admin/ogroups/trust_machines.tpl:26
 #: plugins/admin/groups/trust_machines.tpl:26
 #: plugins/personal/posix/trust_machines.tpl:26
 msgid "Display systems of department"
-msgstr ""
+msgstr "Mostrar los sistemas del departamento"
 
 #: plugins/admin/ogroups/trust_machines.tpl:30
 #: plugins/admin/groups/trust_machines.tpl:30
@@ -2951,7 +2949,7 @@ msgstr "Mostrar sistemas que coincidan con"
 #: plugins/admin/groups/trust_machines.tpl:31
 #: plugins/personal/posix/trust_machines.tpl:31
 msgid "Regular expression for matching addresses"
-msgstr ""
+msgstr "Expresiones regulares para buscar direcciones"
 
 #: plugins/admin/users/password.tpl:4
 msgid ""
@@ -2959,12 +2957,17 @@ msgid ""
 "immediately. Please memorize the new password, because the user wouldn't be "
 "able to login without it."
 msgstr ""
+"Para cambiar la contraseña del usuario use los campos a continuación. Los "
+"cambios tomarán efecto inmediatamente. Por favor, recuerde la nueva "
+"contraseña, el usuario no podrá autenticarse sin ella."
 
 #: plugins/admin/users/password.tpl:8 plugins/personal/password/password.tpl:8
 msgid ""
 "Changing the password affects your authentification on mail, proxy, samba "
 "and unix services."
 msgstr ""
+"Cambiar la contraseña modifica la autenticación del usuario para el correo, "
+"proxy, samba y los servicios unix."
 
 #: plugins/admin/users/password.tpl:13
 #: plugins/admin/users/class_userManagement.inc:265
@@ -2975,24 +2978,23 @@ msgstr ""
 #: ihtml/themes/default/accountexpired.tpl:32
 #: ihtml/themes/default/accountexpired.tpl:36
 msgid "New password"
-msgstr ""
+msgstr "Nueva contraseña"
 
 #: plugins/admin/users/password.tpl:17
 #: plugins/personal/generic/password.tpl:11
 #: plugins/personal/password/password.tpl:23
 msgid "Repeat new password"
-msgstr ""
+msgstr "Reintroducir nueva contraseña"
 
 #: plugins/admin/users/password.tpl:21
-#, fuzzy
 msgid "Strength"
-msgstr "Calle"
+msgstr "Seguridad"
 
 #: plugins/admin/users/password.tpl:30
 #: plugins/personal/generic/password.tpl:17
 #: plugins/personal/password/password.tpl:39
 msgid "Set password"
-msgstr ""
+msgstr "Introducir contraseña"
 
 #: plugins/admin/users/class_divListUsers.inc:55
 #: plugins/admin/users/class_divListUsers.inc:56
@@ -3013,19 +3015,16 @@ msgid "Template"
 msgstr "Plantilla"
 
 #: plugins/admin/users/class_divListUsers.inc:84
-#, fuzzy
 msgid "templates"
-msgstr "Plantilla"
+msgstr "plantillas"
 
 #: plugins/admin/users/class_divListUsers.inc:85
-#, fuzzy
 msgid "GOsa object"
-msgstr "Objeto"
+msgstr "Objeto GOsa"
 
 #: plugins/admin/users/class_divListUsers.inc:85
-#, fuzzy
 msgid "functional users"
-msgstr "Mostrar usuarios funcionales"
+msgstr "usuarios funcionales"
 
 #: plugins/admin/users/class_divListUsers.inc:86
 #: plugins/admin/users/class_divListUsers.inc:201
@@ -3034,14 +3033,12 @@ msgid "Posix"
 msgstr "Posix"
 
 #: plugins/admin/users/class_divListUsers.inc:86
-#, fuzzy
 msgid "POSIX users"
-msgstr "Parametros de samba"
+msgstr "Usuarios POSIX"
 
 #: plugins/admin/users/class_divListUsers.inc:87
-#, fuzzy
 msgid "mail users"
-msgstr "Usuarios del dominio"
+msgstr "Usuarios del correo"
 
 #: plugins/admin/users/class_divListUsers.inc:88
 #: plugins/admin/users/class_divListUsers.inc:211
@@ -3053,9 +3050,8 @@ msgid "Samba"
 msgstr "Samba"
 
 #: plugins/admin/users/class_divListUsers.inc:88
-#, fuzzy
 msgid "samba users"
-msgstr "Usuarios del dominio"
+msgstr "Usuarios samba"
 
 #: plugins/admin/users/class_divListUsers.inc:89
 #: plugins/generic/references/class_reference.inc:53
@@ -3063,9 +3059,8 @@ msgid "Proxy"
 msgstr "Proxy"
 
 #: plugins/admin/users/class_divListUsers.inc:89
-#, fuzzy
 msgid "proxy users"
-msgstr "Mostrar los usuarios de proxy"
+msgstr "usuarios de proxy"
 
 #: plugins/admin/users/class_divListUsers.inc:96
 #: plugins/admin/groups/group_objects.tpl:46
@@ -3079,9 +3074,8 @@ msgid "Change password"
 msgstr "Cambiar contraseña"
 
 #: plugins/admin/users/class_divListUsers.inc:140
-#, fuzzy
 msgid "Apply template"
-msgstr "Plantilla"
+msgstr "Aplicar plantilla"
 
 #: plugins/admin/users/class_divListUsers.inc:199
 msgid "GOsa"
@@ -3132,9 +3126,8 @@ msgid "Create user with this template"
 msgstr "Crear usuario con esta plantilla"
 
 #: plugins/admin/users/class_divListUsers.inc:247
-#, fuzzy
 msgid "inactive"
-msgstr "activo"
+msgstr "inactivo"
 
 #: plugins/admin/users/class_divListUsers.inc:250
 #: plugins/personal/posix/class_posixAccount.inc:159
@@ -3145,9 +3138,8 @@ msgstr "activo"
 
 #: plugins/admin/users/class_divListUsers.inc:258
 #: plugins/admin/users/class_userManagement.inc:601
-#, fuzzy
 msgid "user"
-msgstr "Usuario"
+msgstr "usuario"
 
 #: plugins/admin/users/class_divListUsers.inc:269
 msgid "password"
@@ -3157,7 +3149,7 @@ msgstr "contraseña"
 #: plugins/admin/users/class_divListUsers.inc:285
 #: plugins/admin/groups/class_divListGroup.inc:244
 msgid "Not allowed"
-msgstr ""
+msgstr "No permitido"
 
 #: plugins/admin/users/class_divListUsers.inc:282
 msgid "Delete user"
@@ -3165,12 +3157,11 @@ msgstr "Eliminar usuario"
 
 #: plugins/admin/users/class_divListUsers.inc:371
 msgid "Number of listed users"
-msgstr ""
+msgstr "Número de usuarios mostrados"
 
 #: plugins/admin/users/class_userManagement.inc:27
-#, fuzzy
 msgid "Manage users"
-msgstr "Usuarios del dominio"
+msgstr "Gestión de usuarios"
 
 #: plugins/admin/users/class_userManagement.inc:260
 #: plugins/personal/generic/main.inc:81
@@ -3194,30 +3185,26 @@ msgstr ""
 #: plugins/personal/password/class_password.inc:107
 #: plugins/personal/password/class_password.inc:113 html/main.php:357
 #: ihtml/themes/default/password.tpl:41
-#, fuzzy
 msgid "Password change"
-msgstr "Contraseña"
+msgstr "Cambio de contraseña"
 
 #: plugins/admin/users/class_userManagement.inc:316
 #: plugins/admin/users/class_userManagement.inc:379
-#, fuzzy
 msgid "You have no permission to change this users password!"
-msgstr "No tiene permisos para cambiar su contraseña."
+msgstr "¡No tiene permisos para cambiar la contraseña de este usuario!"
 
 #: plugins/admin/users/class_userManagement.inc:545
-#, fuzzy, php-format
+#, php-format
 msgid "You have no permission to modify object '%s'!"
-msgstr "No tiene permisos para mover este objeto a '%s'."
+msgstr "¡No tiene permisos para modificar el objeto '%s'!"
 
 #: plugins/admin/users/class_userManagement.inc:549
-#, fuzzy
 msgid "You have no permission to use this template!"
-msgstr "No tiene permisos para mover este objeto a '%s'."
+msgstr "¡No tiene permisos para usar esta plantilla!"
 
 #: plugins/admin/users/class_userManagement.inc:656
-#, fuzzy
 msgid "You have no permission to change the lock status for this user!"
-msgstr "No tiene permisos para cambiar su contraseña."
+msgstr "¡No tiene permisos para cambiar el estado de bloqueo de este usuario!"
 
 #: plugins/admin/users/class_userManagement.inc:778
 #: plugins/admin/users/class_userManagement.inc:852
@@ -3234,6 +3221,10 @@ msgid ""
 "this user. Please double check if your really want to do this since there is "
 "no way for GOsa to get your data back."
 msgstr ""
+"Esto incluye toda las información de cuentas, reglas de acceso al sistema, "
+"configuración IMAP, etc. de este usuario. Si está seguro de lo que quiere "
+"hacer pulse dos veces, ya que no hay manera de que GOsa recupere "
+"posteriormente la información."
 
 #: plugins/admin/users/main.inc:44 plugins/admin/users/main.inc:50
 msgid "User administration"
@@ -3241,7 +3232,7 @@ msgstr "Administración de Usuario"
 
 #: plugins/admin/users/template.tpl:2
 msgid "Creating a new user using templates"
-msgstr ""
+msgstr "Crear un nuevo usuario usando plantillas"
 
 #: plugins/admin/users/template.tpl:6
 msgid ""
@@ -3249,16 +3240,19 @@ msgid ""
 "records will be filled automatically. Choose 'none' to skip the usage of "
 "templates."
 msgstr ""
+"Crear un nuevo usuario es mas fácil si usa plantillas. Algunos valores en la "
+"base de datos serán introducidos automáticamente. Elegir 'ninguno' para "
+"anular el uso de plantillas."
 
 #: plugins/admin/users/template.tpl:23 plugins/personal/generic/generic.tpl:49
 #: plugins/personal/generic/paste_generic.tpl:7
 msgid "Last name"
-msgstr ""
+msgstr "Apellido"
 
 #: plugins/admin/users/template.tpl:27 plugins/personal/generic/generic.tpl:69
 #: plugins/personal/generic/paste_generic.tpl:11
 msgid "First name"
-msgstr ""
+msgstr "Nombre"
 
 #: plugins/admin/users/template.tpl:32 plugins/personal/generic/generic.tpl:82
 #: plugins/personal/generic/paste_generic.tpl:15
@@ -3267,87 +3261,87 @@ msgstr ""
 #: plugins/personal/generic/class_user.inc:1250
 #: plugins/personal/generic/class_user.inc:1252 html/password.php:215
 msgid "Login"
-msgstr ""
+msgstr "Inicio"
 
 #: plugins/admin/users/templatize.tpl:2
-#, fuzzy
 msgid "Applying a template"
-msgstr "Plantilla"
+msgstr "Aplicando una plantilla"
 
 #: plugins/admin/users/templatize.tpl:6
 msgid ""
 "Applying a template to several users will replace all user attributes "
 "defined in the template."
 msgstr ""
+"Aplicar una plantilla a usuarios reemplazará los valores de estos por los "
+"definidos en la plantilla."
 
 #: plugins/admin/users/templatize.tpl:33
 msgid "No templates available!"
-msgstr ""
+msgstr "¡No hay plantillas disponibles!"
 
 #: plugins/admin/groups/generic.tpl:14 plugins/personal/generic/generic.tpl:52
 #: plugins/personal/generic/generic.tpl:73
 #: plugins/personal/generic/generic.tpl:89
 msgid "Multiple edit"
-msgstr ""
+msgstr "Edición multiple"
 
 #: plugins/admin/groups/generic.tpl:17
 #: plugins/admin/groups/paste_generic.tpl:8
 msgid "Posix name of the group"
-msgstr ""
+msgstr "Nombre Posix del grupo"
 
 #: plugins/admin/groups/generic.tpl:65
 #: plugins/admin/groups/paste_generic.tpl:13
 msgid "Normally IDs are autogenerated, select to specify manually"
 msgstr ""
+"Normalmente los IDs son generados automáticamente, seleccione para indicar "
+"manualmente"
 
 #: plugins/admin/groups/generic.tpl:68
 #: plugins/admin/groups/paste_generic.tpl:15
 msgid "Force GID"
-msgstr ""
+msgstr "Forzar GID"
 
 #: plugins/admin/groups/generic.tpl:71
 #: plugins/admin/groups/paste_generic.tpl:18
 msgid "Forced ID number"
-msgstr ""
+msgstr "Forzar número ID"
 
 #: plugins/admin/groups/generic.tpl:83 plugins/admin/groups/generic.tpl:110
 msgid "Select to create a samba conform group"
-msgstr ""
+msgstr "Seleccione para crear un grupo conforme samba"
 
 #: plugins/admin/groups/generic.tpl:95 plugins/admin/groups/generic.tpl:118
 msgid "in domain"
-msgstr ""
+msgstr "en dominio"
 
 #: plugins/admin/groups/generic.tpl:140
 msgid "Members are in a phone pickup group"
-msgstr ""
+msgstr "Los miembros están en un grupo de salto telefónico"
 
 #: plugins/admin/groups/generic.tpl:155
 msgid "Members are in a nagios group"
-msgstr ""
+msgstr "Los miembros están en un grupo Nagios"
 
 #: plugins/admin/groups/generic.tpl:245
 msgid "Group members"
-msgstr ""
+msgstr "Miembros del grupo"
 
 #: plugins/admin/groups/generic.tpl:252 plugins/personal/posix/generic.tpl:94
-#, fuzzy
 msgid "In all groups"
-msgstr "Mostrar grupos de correo"
+msgstr "en todos los grupos"
 
 #: plugins/admin/groups/generic.tpl:255 plugins/personal/posix/generic.tpl:98
-#, fuzzy
 msgid "Not in all groups"
-msgstr "Mostrar grupos de correo"
+msgstr "no en todos los grupos"
 
 #: plugins/admin/groups/paste_generic.tpl:1
 msgid "Group settings"
-msgstr ""
+msgstr "Parametros de grupos"
 
 #: plugins/admin/groups/class_groupGeneric.inc:163
-#, fuzzy
 msgid "Cannot find group SID in your configuration!"
-msgstr "¡No se puede encontrar SID en LDAP o en el archivo de configuración!"
+msgstr "¡No se puede encontrar SID de grupo en el archivo de configuración!"
 
 #: plugins/admin/groups/class_groupGeneric.inc:488
 msgid "Samba group"
@@ -3378,16 +3372,18 @@ msgstr "¡id desconocido!"
 #, php-format
 msgid "Search returned too many results. Not displaying more than %s entries!"
 msgstr ""
+"La busqueda ha devuelto demasiados reultados.¡No se muestran mas de %s "
+"entradas!"
 
 #: plugins/admin/groups/class_groupGeneric.inc:954
 #, php-format
 msgid "Cannot find any SID for '%s'!"
-msgstr ""
+msgstr "¡No se puede encontrar nigún SID para '%s'!"
 
 #: plugins/admin/groups/class_groupGeneric.inc:959
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot find any RIDBASE for '%s'!"
-msgstr "No hay ningún RIDBASE configurado para '%s'."
+msgstr "¡No se puede encontrar un RIDBASE para '%s'."
 
 #: plugins/admin/groups/class_groupGeneric.inc:1146
 #: plugins/admin/groups/class_groupGeneric.inc:1149
@@ -3401,9 +3397,8 @@ msgstr "GID"
 
 #: plugins/admin/groups/class_groupGeneric.inc:1204
 #: plugins/personal/posix/class_posixAccount.inc:1334
-#, fuzzy
 msgid "Cannot allocate a free ID!"
-msgstr "¡Demasiados usuarios!, no hay identificadores (ID) libres"
+msgstr "¡No se puede asignar un identificador (ID) libre!"
 
 #: plugins/admin/groups/class_groupGeneric.inc:1253
 msgid "Generic group settings"
@@ -3431,19 +3426,20 @@ msgstr "Miembro del grupo"
 
 #: plugins/admin/groups/class_groupManagement.inc:27
 msgid "Manage POSIX groups"
-msgstr ""
+msgstr "Gestionar grupos POSIX"
 
 #: plugins/admin/groups/class_groupManagement.inc:373
 #: plugins/admin/groups/class_groupManagement.inc:454
-#, fuzzy
 msgid "group"
-msgstr "Grupo"
+msgstr "grupo"
 
 #: plugins/admin/groups/remove.tpl:6
 msgid ""
 "This may be a primary user group. Please double check if you really want to "
 "do this since there is no way for GOsa to get your data back."
 msgstr ""
+"Este puede ser un grupo primario. Si está seguro de lo que quiere hacer "
+"pulse dos veces, dado que GOsa no tiene manera de recuperar esta información."
 
 #: plugins/admin/groups/main.inc:41 plugins/admin/groups/main.inc:45
 msgid "Group administration"
@@ -3451,7 +3447,7 @@ msgstr "Administración de grupo"
 
 #: plugins/admin/groups/group_objects.tpl:6
 msgid "Select users to add"
-msgstr ""
+msgstr "Seleccione usuarios a añadir"
 
 #: plugins/admin/groups/group_objects.tpl:30
 msgid "Select to see servers"
@@ -3459,15 +3455,15 @@ msgstr "Seleccione para ver los servidores"
 
 #: plugins/admin/groups/group_objects.tpl:30
 msgid "Search within subtree"
-msgstr ""
+msgstr "Buscar dentro del subárbol"
 
 #: plugins/admin/groups/group_objects.tpl:37
 msgid "Display users of department"
-msgstr ""
+msgstr "Mostrar usuarios del departamento"
 
 #: plugins/admin/groups/group_objects.tpl:47
 msgid "Regular expression for matching user names"
-msgstr ""
+msgstr "Expresiones regulares para buscar nombre de usuarios"
 
 #: plugins/admin/groups/class_divListGroup.inc:55
 #: plugins/admin/groups/class_divListGroup.inc:56
@@ -3479,43 +3475,36 @@ msgid "Select to see groups that are primary groups of users"
 msgstr "Seleccione para ver que grupos son grupos primarios de usuarios"
 
 #: plugins/admin/groups/class_divListGroup.inc:85
-#, fuzzy
 msgid "primary groups"
-msgstr "Mostrar grupos primarios"
+msgstr "grupos primarios"
 
 #: plugins/admin/groups/class_divListGroup.inc:86
-#, fuzzy
 msgid "samba groups mappings"
-msgstr "Tipo de grupo de samba"
+msgstr "Mapeos de grupos de samba"
 
 #: plugins/admin/groups/class_divListGroup.inc:87
-#, fuzzy
 msgid "samba groups"
-msgstr "Grupo de samba"
+msgstr "grupo de samba"
 
 #: plugins/admin/groups/class_divListGroup.inc:88
-#, fuzzy
 msgid "application settings"
-msgstr "Aplicaciones"
+msgstr "parámetros de aplicaciones"
 
 #: plugins/admin/groups/class_divListGroup.inc:90
-#, fuzzy
 msgid "mail settings"
-msgstr "Parámetros de correo"
+msgstr "parámetros de correo"
 
 #: plugins/admin/groups/class_divListGroup.inc:91
-#, fuzzy
 msgid "mail groups"
-msgstr "Mostrar grupos de correo"
+msgstr "grupos de correo"
 
 #: plugins/admin/groups/class_divListGroup.inc:92
 msgid "Select to see normal groups that have only functional aspects"
 msgstr "Seleccione para ver que grupos tienen solo aspectos funcionales"
 
 #: plugins/admin/groups/class_divListGroup.inc:93
-#, fuzzy
 msgid "functional groups"
-msgstr "Mostrar grupos funcionales"
+msgstr "grupos funcionales"
 
 #: plugins/admin/groups/class_divListGroup.inc:101
 #: plugins/personal/posix/posix_groups.tpl:59
@@ -3523,25 +3512,24 @@ msgid "User name of which groups are shown"
 msgstr "Nombre de usuario de los grupos que se muestran"
 
 #: plugins/admin/groups/class_divListGroup.inc:303
-#, fuzzy
 msgid "Number of listed groups"
-msgstr "Eliminar grupo seleccionado"
+msgstr "Número de grupos mostrados"
 
 #: plugins/personal/posix/posix_groups.tpl:6
 msgid "Select groups to add"
-msgstr ""
+msgstr "Seleccione grupos a añadir"
 
 #: plugins/personal/posix/posix_groups.tpl:32
 msgid "Display groups of department"
-msgstr ""
+msgstr "Mostrar grupos de departamentos"
 
 #: plugins/personal/posix/posix_groups.tpl:44
 msgid "Display groups matching"
-msgstr ""
+msgstr "Mostrar grupos coincidentes"
 
 #: plugins/personal/posix/posix_groups.tpl:55
 msgid "Display groups of user"
-msgstr ""
+msgstr "Mostrar grupos de usuarios"
 
 #: plugins/personal/posix/generic.tpl:7
 #: plugins/personal/posix/paste_generic.tpl:8
@@ -3560,7 +3548,7 @@ msgstr "Shell"
 
 #: plugins/personal/posix/generic.tpl:25
 msgid "Primary group"
-msgstr ""
+msgstr "Grupo primario"
 
 #: plugins/personal/posix/generic.tpl:36
 msgid "Status"
@@ -3569,42 +3557,41 @@ msgstr "Estado"
 #: plugins/personal/posix/generic.tpl:53
 #: plugins/personal/posix/paste_generic.tpl:23
 msgid "Force UID/GID"
-msgstr ""
+msgstr "Forzar UID/GID"
 
 #: plugins/personal/posix/generic.tpl:57
 #: plugins/personal/posix/paste_generic.tpl:28
 #: plugins/personal/posix/class_posixAccount.inc:1029
 #: plugins/personal/posix/class_posixAccount.inc:1032
 msgid "UID"
-msgstr ""
+msgstr "UID"
 
 #: plugins/personal/posix/generic.tpl:83
 #: plugins/personal/posix/paste_generic.tpl:47
 msgid "Group membership"
-msgstr ""
+msgstr "Pertenencia a grupo"
 
 #: plugins/personal/posix/generic.tpl:85
 #: plugins/personal/posix/paste_generic.tpl:54
 msgid "(Warning: more than 16 groups are not supported by NFS!)"
-msgstr ""
+msgstr "(Aviso: NFS no soporta mas de 16 grupos)"
 
 #: plugins/personal/posix/generic.tpl:119
 msgid "Account"
-msgstr ""
+msgstr "Cuenta"
 
 #: plugins/personal/posix/paste_generic.tpl:4
 msgid "Posix settings"
-msgstr ""
+msgstr "Caracteristicas Posix"
 
 #: plugins/personal/posix/class_posixAccount.inc:37
 #: plugins/generic/references/class_reference.inc:43
 msgid "UNIX"
-msgstr ""
+msgstr "UNIX"
 
 #: plugins/personal/posix/class_posixAccount.inc:38
-#, fuzzy
 msgid "Edit users POSIX settings"
-msgstr "Parametros de samba"
+msgstr "Editar parametros de usuarios POSIX"
 
 #: plugins/personal/posix/class_posixAccount.inc:154
 msgid "expired"
@@ -3615,14 +3602,12 @@ msgid "grace time active"
 msgstr "Periodo de gracia activado"
 
 #: plugins/personal/posix/class_posixAccount.inc:159
-#, fuzzy
 msgid "password not changeable"
-msgstr "activo, no puede cambiar la contraseña"
+msgstr "no puede cambiar la contraseña"
 
 #: plugins/personal/posix/class_posixAccount.inc:161
-#, fuzzy
 msgid "password expired"
-msgstr "activo, la contraseña expiró"
+msgstr "la contraseña expiró"
 
 #: plugins/personal/posix/class_posixAccount.inc:208
 msgid "unconfigured"
@@ -3637,7 +3622,7 @@ msgstr "automático"
 #: plugins/personal/posix/class_posixAccount.inc:297
 #: plugins/personal/posix/class_posixAccount.inc:300
 msgid "POSIX"
-msgstr ""
+msgstr "POSIX"
 
 #: plugins/personal/posix/class_posixAccount.inc:471
 #, php-format
@@ -3651,26 +3636,28 @@ msgid "Password must be changed after %s days"
 msgstr "La contraseñas deben ser cambiadas despues de %s días"
 
 #: plugins/personal/posix/class_posixAccount.inc:479
-#, fuzzy, php-format
+#, php-format
 msgid "Disable account after %s days of inactivity after password expiry"
 msgstr ""
-"Desactivar cuenta despues de %s días de inactividad una vez expirada la "
+"Desactivar cuenta despues de %s días de inactividad una vez caducada la "
 "contraseña"
 
 #: plugins/personal/posix/class_posixAccount.inc:483
-#, fuzzy, php-format
+#, php-format
 msgid "Warn user %s days before password expiry"
-msgstr "Avisar al usuario %s días antes de que la contraseña expire"
+msgstr "Avisar al usuario %s días antes de que la contraseña caduque"
 
 #: plugins/personal/posix/class_posixAccount.inc:832
 msgid "Timeout while waiting for lock. Ignoring lock!"
-msgstr ""
+msgstr "Tiempo de espera agotado esperando un bloqueo. ¡Ignorando bloqueo!"
 
 #: plugins/personal/posix/class_posixAccount.inc:925
 msgid ""
 "A duplicated UID number was written for this user. If this was not intended "
 "please verify all used uidNumbers!"
 msgstr ""
+"UN número UID duplicado ha sido introducido para este usuario. ¡Si esto no "
+"es intencionado por favor verifique todos los uidNumbers usado!"
 
 #: plugins/personal/posix/class_posixAccount.inc:962
 #: plugins/personal/posix/class_posixAccount.inc:1155
@@ -3679,27 +3666,23 @@ msgstr "Grupo de usuarios"
 
 #: plugins/personal/posix/class_posixAccount.inc:1047
 #: plugins/personal/posix/class_posixAccount.inc:1100
-#, fuzzy
 msgid "shadowMin"
-msgstr "Shadow min"
+msgstr "shadowMin"
 
 #: plugins/personal/posix/class_posixAccount.inc:1052
 #: plugins/personal/posix/class_posixAccount.inc:1105
-#, fuzzy
 msgid "shadowMax"
-msgstr "Shadow max"
+msgstr "shadowMax"
 
 #: plugins/personal/posix/class_posixAccount.inc:1057
 #: plugins/personal/posix/class_posixAccount.inc:1110
-#, fuzzy
 msgid "shadowWarning"
-msgstr "Shadow warning"
+msgstr "shadowWarning"
 
 #: plugins/personal/posix/class_posixAccount.inc:1071
 #: plugins/personal/posix/class_posixAccount.inc:1124
-#, fuzzy
 msgid "shadowInactive"
-msgstr "Shadow inactive"
+msgstr "shadowInactive"
 
 #: plugins/personal/posix/class_posixAccount.inc:1512
 msgid "POSIX account"
@@ -3749,17 +3732,16 @@ msgid "System trust model"
 msgstr "Sistema de confianza"
 
 #: plugins/personal/posix/main.inc:131
-#, fuzzy
 msgid "POSIX settings"
-msgstr "Parametros de samba"
+msgstr "Parametros POSIX"
 
 #: plugins/personal/posix/posix_shadow.tpl:9
 msgid "User must change password on first login"
-msgstr ""
+msgstr "El usuario debe introducir la contraseña en el primer inicio de sesión"
 
 #: plugins/personal/posix/posix_shadow.tpl:34
 msgid "Password expires on"
-msgstr ""
+msgstr "La contraseña expira en"
 
 #: plugins/personal/generic/password.tpl:2
 msgid ""
@@ -3767,11 +3749,14 @@ msgid ""
 "For that reason you've to enter your password at this point again. GOsa will "
 "then encode it with the selected method."
 msgstr ""
+"Ha cambiado el método en que su clave es guardada en la base de datos LDAP. "
+"Por esa razón tiene que volver a introducir su contraseña de nuevo. Gosa "
+"codificara esta con el nuevo método seleccionado."
 
 #: plugins/personal/generic/generic.tpl:6
 #: plugins/personal/generic/multiple_generic.tpl:5
 msgid "Personal information"
-msgstr ""
+msgstr "Información personal"
 
 #: plugins/personal/generic/generic.tpl:20
 #: plugins/personal/generic/generic.tpl:22
@@ -3781,16 +3766,16 @@ msgstr ""
 #: plugins/personal/generic/generic_picture.tpl:15
 #: plugins/personal/generic/multiple_generic.tpl:13
 msgid "Personal picture"
-msgstr ""
+msgstr "Foto"
 
 #: plugins/personal/generic/generic.tpl:29
 #: plugins/personal/generic/generic.tpl:40
 msgid "Change picture"
-msgstr ""
+msgstr "Cambiar foto"
 
 #: plugins/personal/generic/generic.tpl:62
 msgid "Template name"
-msgstr ""
+msgstr "Nombre de la plantilla"
 
 #: plugins/personal/generic/generic.tpl:98
 #: plugins/personal/generic/class_user.inc:1555
@@ -3810,22 +3795,22 @@ msgstr "Fecha de nacimiento"
 
 #: plugins/personal/generic/generic.tpl:144
 msgid "Sex"
-msgstr ""
+msgstr "Sexo"
 
 #: plugins/personal/generic/generic.tpl:157
 #: plugins/personal/generic/multiple_generic.tpl:33
 msgid "Preferred langage"
-msgstr ""
+msgstr "Idioma preferido"
 
 #: plugins/personal/generic/generic.tpl:175
 #: plugins/personal/generic/multiple_generic.tpl:53
 msgid "Choose subtree to place user in"
-msgstr ""
+msgstr "Elija el subárbol donde colocar al usuario"
 
 #: plugins/personal/generic/generic.tpl:202
 #: plugins/personal/generic/multiple_generic.tpl:78
 msgid "Private phone"
-msgstr ""
+msgstr "Teléfono privado"
 
 #: plugins/personal/generic/generic.tpl:210
 #: plugins/personal/generic/class_user.inc:1256
@@ -3838,37 +3823,37 @@ msgstr "Página Web"
 #: plugins/personal/generic/generic.tpl:223
 #: plugins/personal/generic/multiple_generic.tpl:105
 msgid "Password storage"
-msgstr ""
+msgstr "Almacén de claves"
 
 #: plugins/personal/generic/generic.tpl:240
 #: plugins/personal/generic/multiple_generic.tpl:117
 #: plugins/personal/generic/generic_certs.tpl:3
 msgid "Certificates"
-msgstr ""
+msgstr "Certificados"
 
 #: plugins/personal/generic/generic.tpl:243
 #: plugins/personal/generic/multiple_generic.tpl:121
 msgid "Edit certificates"
-msgstr ""
+msgstr "Editar certificados"
 
 #: plugins/personal/generic/generic.tpl:251
 msgid "Last logon"
-msgstr ""
+msgstr "Último inicio de sesión"
 
 #: plugins/personal/generic/generic.tpl:267
 #: plugins/personal/generic/multiple_generic.tpl:137
 msgid "Organizational information"
-msgstr ""
+msgstr "Información corporativa"
 
 #: plugins/personal/generic/generic.tpl:295
 #: plugins/personal/generic/multiple_generic.tpl:169
 msgid "Department No."
-msgstr ""
+msgstr "Número departamento"
 
 #: plugins/personal/generic/generic.tpl:303
 #: plugins/personal/generic/multiple_generic.tpl:179
 msgid "Employee No."
-msgstr ""
+msgstr "Número empleado"
 
 #: plugins/personal/generic/generic.tpl:311
 #: plugins/personal/generic/class_user.inc:1569
@@ -3881,21 +3866,21 @@ msgstr "Funciones laborales"
 #: plugins/personal/generic/multiple_generic.tpl:207
 #: plugins/personal/generic/multiple_generic.tpl:418
 msgid "Room No."
-msgstr ""
+msgstr "Número sala"
 
 #: plugins/personal/generic/generic.tpl:347
 #: plugins/personal/generic/class_user.inc:1267
 #: plugins/personal/generic/class_user.inc:1675
 #: plugins/personal/generic/multiple_generic.tpl:227
 msgid "Mobile"
-msgstr ""
+msgstr "Móvil"
 
 #: plugins/personal/generic/generic.tpl:355
 #: plugins/personal/generic/class_user.inc:1270
 #: plugins/personal/generic/class_user.inc:1678
 #: plugins/personal/generic/multiple_generic.tpl:237
 msgid "Pager"
-msgstr ""
+msgstr "Buscapersonas"
 
 #: plugins/personal/generic/generic.tpl:413
 #: plugins/personal/generic/class_user.inc:1528
@@ -3953,7 +3938,7 @@ msgstr "Tipo de Vía"
 
 #: plugins/personal/generic/generic.tpl:525
 msgid "Please use the phone tab"
-msgstr ""
+msgstr "Por favor use la sección telefóno"
 
 #: plugins/personal/generic/generic.tpl:540
 #: plugins/personal/generic/class_user.inc:1529
@@ -3969,7 +3954,7 @@ msgstr "Visible por todos"
 
 #: plugins/personal/generic/paste_generic.tpl:1
 msgid "User settings"
-msgstr ""
+msgstr "Caracteristicas del usuario"
 
 #: plugins/personal/generic/paste_generic.tpl:20
 #: plugins/personal/password/class_password.inc:26 setup/setup_config2.tpl:295
@@ -3981,11 +3966,11 @@ msgstr "Contraseña"
 
 #: plugins/personal/generic/paste_generic.tpl:23
 msgid "Clear password"
-msgstr ""
+msgstr "Borrar Contraseña"
 
 #: plugins/personal/generic/paste_generic.tpl:24
 msgid "Set new password"
-msgstr ""
+msgstr "Introducir nueva contraseña"
 
 #: plugins/personal/generic/paste_generic.tpl:47
 #: plugins/personal/generic/class_user.inc:1563
@@ -3995,12 +3980,11 @@ msgstr "Foto del usuario"
 #: plugins/personal/generic/paste_generic.tpl:52
 #: plugins/personal/generic/generic_picture.tpl:27
 msgid "Remove picture"
-msgstr ""
+msgstr "Eliminar foto"
 
 #: plugins/personal/generic/class_user.inc:38
-#, fuzzy
 msgid "Edit organizational user settings"
-msgstr "Parámetros administrativos"
+msgstr "Editar parámetros de usuarios administrativos"
 
 #: plugins/personal/generic/class_user.inc:314
 msgid "female"
@@ -4012,12 +3996,11 @@ msgstr "hombre"
 
 #: plugins/personal/generic/class_user.inc:412
 msgid "Cannot upload file!"
-msgstr ""
+msgstr "¡No se puede subir el archivo!"
 
 #: plugins/personal/generic/class_user.inc:513
-#, fuzzy
 msgid "Serial number"
-msgstr "Número del busca"
+msgstr "Número serie"
 
 #: plugins/personal/generic/class_user.inc:558
 msgid ""
@@ -4045,24 +4028,21 @@ msgid "No certificate installed"
 msgstr "No hay certificados instalados"
 
 #: plugins/personal/generic/class_user.inc:602 html/password.php:159
-#, fuzzy
 msgid "Password method"
-msgstr "Contraseña"
+msgstr "Metodo de contraseña"
 
 #: plugins/personal/generic/class_user.inc:602
-#, fuzzy
 msgid "The selected password method is no longer available."
-msgstr "La aplicación ya no está disponible."
+msgstr "El método de contraseña seleccionado no está disponible."
 
 #: plugins/personal/generic/class_user.inc:1194
-#, fuzzy
 msgid "The selected password method requires initial configuration!"
-msgstr "La aplicación ya no está disponible."
+msgstr ""
+"¡El método de contraseña seleccionado necesita una configuració inicial!"
 
 #: plugins/personal/generic/class_user.inc:1380
-#, fuzzy
 msgid "Cannot open certificate!"
-msgstr "¡No puedo abrir el certificado especificado!"
+msgstr "¡No puedo abrir el certificado!"
 
 #: plugins/personal/generic/class_user.inc:1534
 #: plugins/personal/generic/generic_certs.tpl:78
@@ -4074,9 +4054,8 @@ msgid "Generic user settings"
 msgstr "Parámetros genéricos del usuario"
 
 #: plugins/personal/generic/class_user.inc:1552
-#, fuzzy
 msgid "Surname"
-msgstr "Apellidos"
+msgstr "Apellido"
 
 #: plugins/personal/generic/class_user.inc:1554
 msgid "User identification"
@@ -4127,18 +4106,16 @@ msgid "Home phone number"
 msgstr "Número de teléfono personal"
 
 #: plugins/personal/generic/class_user.inc:1584
-#, fuzzy
 msgid "User password method"
-msgstr "Contraseña"
+msgstr "Metodo de contraseña de usuario"
 
 #: plugins/personal/generic/class_user.inc:1585
 msgid "User certificates"
 msgstr "Certificados de usuario"
 
 #: plugins/personal/generic/main.inc:104
-#, fuzzy
 msgid "You have no permission to set your password!"
-msgstr "No tiene permisos para cambiar su contraseña."
+msgstr "¡No tiene permisos para cambiar su contraseña!"
 
 #: plugins/personal/generic/main.inc:195
 msgid "Generic user information"
@@ -4146,15 +4123,15 @@ msgstr "Información genérica del usuario"
 
 #: plugins/personal/generic/generic_certs.tpl:8
 msgid "Standard certificate"
-msgstr ""
+msgstr "Certificado estándar"
 
 #: plugins/personal/generic/generic_certs.tpl:33
 msgid "S/MIME certificate"
-msgstr ""
+msgstr "Certificado S/MIME"
 
 #: plugins/personal/generic/generic_certs.tpl:57
 msgid "PKCS12 certificate"
-msgstr ""
+msgstr "Certificado PKCS12"
 
 #: plugins/personal/password/password.tpl:4
 msgid ""
@@ -4162,32 +4139,35 @@ msgid ""
 "effect immediately. Please memorize the new password, because you wouldn't "
 "be able to login without it."
 msgstr ""
+"Para cambiar su contraseña personal use los campos siguientes. Los cambios "
+"tendrán efecto inmediato. Por favor memorice la nueva contraseña, porque no "
+"podrá entrar sin ella."
 
 #: plugins/personal/password/password.tpl:13 html/password.php:217
 #: ihtml/themes/default/password.tpl:78 ihtml/themes/default/password.tpl:79
 msgid "Current password"
-msgstr ""
+msgstr "Contraseña actual"
 
 #: plugins/personal/password/password.tpl:28
 #: ihtml/themes/default/password.tpl:90
-#, fuzzy
 msgid "Password strength"
-msgstr "La contraseña expira en"
+msgstr "Seguridad de contraseña"
 
 #: plugins/personal/password/password.tpl:41
 msgid "Clear fields"
-msgstr ""
+msgstr "Limpiar información"
 
 #: plugins/personal/password/changed.tpl:3
 msgid ""
 "You've successfully changed your password. Remember to change all programms "
 "configured to use it as well."
 msgstr ""
+"Su cambio de contraseña se ha realizado correctamente. Recuerde cambiarla en "
+"todos los programas configurados también."
 
 #: plugins/personal/password/class_password.inc:27
-#, fuzzy
 msgid "Change user password"
-msgstr "Cambiar contraseña"
+msgstr "Cambiar contraseña de usuario"
 
 #: plugins/personal/password/class_password.inc:79
 msgid "You need to specify your current password in order to proceed."
@@ -4207,9 +4187,10 @@ msgid "The password used as new is to short."
 msgstr "La nueva contraseña es demasiado corta."
 
 #: plugins/personal/password/class_password.inc:94
-#, fuzzy, php-format
+#, php-format
 msgid "External password changer reported a problem: %s."
-msgstr "El programa externo de cambio de contraseña informo de un problema: "
+msgstr ""
+"El programa externo de cambio de contraseña informo de un problema: %s."
 
 #: plugins/personal/password/class_password.inc:108
 msgid ""
@@ -4218,7 +4199,6 @@ msgid ""
 msgstr "La contraseña introducida como contraseña actual no es correcta."
 
 #: plugins/personal/password/class_password.inc:114
-#, fuzzy
 msgid "You have no permission to change your password."
 msgstr "No tiene permisos para cambiar su contraseña."
 
@@ -4232,36 +4212,35 @@ msgstr "Parámetros de Contraseña"
 
 #: plugins/personal/password/nochange.tpl:2
 msgid "Password change not allowed"
-msgstr ""
+msgstr "No se permite modificar la contraseña"
 
 #: plugins/personal/password/nochange.tpl:6
-#, fuzzy
 msgid "You have no permission to change your password at this time"
-msgstr "No tiene permisos para cambiar su contraseña."
+msgstr "No tiene permisos para cambiar su contraseña en estos momentos"
 
 #: plugins/generic/references/class_reference.inc:51
 msgid "FAX"
-msgstr ""
+msgstr "FAX"
 
 #: plugins/generic/references/class_reference.inc:55
 msgid "FTP"
-msgstr ""
+msgstr "FTP"
 
 #: plugins/generic/references/class_reference.inc:67
 msgid "Thin Client"
-msgstr ""
+msgstr "Cliente ligero"
 
 #: plugins/generic/references/contents.tpl:11
 msgid "Object name"
-msgstr ""
+msgstr "Nombre de objeto"
 
 #: plugins/generic/references/contents.tpl:11
 msgid "Contents"
-msgstr ""
+msgstr "Contenidos"
 
 #: plugins/generic/references/contents.tpl:18
 msgid "This object has no relationship to other objects."
-msgstr ""
+msgstr "Este objeto no tiene relación con otros objetos"
 
 #: plugins/generic/welcome/welcome.tpl:4
 msgid ""
@@ -4269,49 +4248,56 @@ msgid ""
 "left, or by choosing one of the pictograms below. All changes apply directly "
 "to your companies LDAP server."
 msgstr ""
+"Esta es la pantalla principal de GOsa. Puede seleccionar las tareas del menú "
+"a la izquierda, o seleccionando entre los iconos siguientes. Todos los "
+"cambios se aplican directamente sobre los servidores LDAP de su compañía."
 
 #: plugins/generic/welcome/welcome.tpl:8
 msgid ""
 "Use 'Sign out' on the upper left to close the connection and 'Main' to get "
 "back to the pictogram view."
 msgstr ""
+"Para cerrar la conexión use <b>Cerrar</b> en la parte superior izquierda y "
+"para volver a la vista de iconos use <b>Principal</b>"
 
 #: plugins/generic/welcome/welcome.tpl:15
 msgid "The GOsa team"
-msgstr ""
+msgstr "El equipo de GOsa"
 
 #: plugins/generic/welcome/main.inc:26
 #, php-format
 msgid "Welcome %s!"
-msgstr ""
+msgstr "¡Bienvenido %s!"
 
 #: plugins/addons/bugsubmitter/class_bugsubmitter.inc:25
 msgid "Bug submitter"
-msgstr ""
+msgstr "Envío de fallos"
 
 #: plugins/addons/bugsubmitter/class_bugsubmitter.inc:26
 msgid ""
 "<a\thref='https://oss.gonicus.de/labs/gosa/"
 "newticket'\ttarget='_blank'>Bugsubmitter</a>"
 msgstr ""
+"<a\thref='https://oss.gonicus.de/labs/gosa/"
+"newticket'\ttarget='_blank'>Envío incidencias</a>"
 
 #: html/password.php:58 html/index.php:142
 #, php-format
 msgid "GOsa configuration %s/%s is not readable. Aborted."
-msgstr ""
+msgstr "No se puede acceder a la configuración de GOsa %s/%s. Cancelado"
 
 #: html/password.php:74 html/index.php:163 html/setup.php:66
 #, php-format
 msgid "Directory '%s' specified as compile directory is not accessible!"
-msgstr ""
+msgstr "¡No se puede acceder a el directorio de compilación '%s'!"
 
 #: html/password.php:159
 msgid "Error: Password method not available!"
-msgstr ""
+msgstr "Error: ¡El método de contraseñas no esta disponible!"
 
 #: html/password.php:224 html/index.php:323
 msgid "Please check the username/password combination."
-msgstr ""
+msgstr "Por favor compruebe la combinación nombre de usuario/contraseña"
 
 #: html/password.php:228
 msgid "You have no permissions to change your password."
@@ -4323,116 +4309,128 @@ msgstr "El programa externo de cambio de contraseña informo de un problema: "
 
 #: html/password.php:280 html/index.php:415
 msgid "Session will not be encrypted."
-msgstr ""
+msgstr "La sesión no será codificada."
 
 #: html/password.php:280 html/index.php:415
 msgid "Enter SSL session"
-msgstr ""
+msgstr "Entrar en sesión SSL"
 
 #: html/index.php:57
 msgid "Session is not encrypted!"
-msgstr ""
+msgstr "¡La sesión no es codificada!"
 
 #: html/index.php:64
 msgid ""
 "The session lifetime configured in your gosa.conf will be overridden by php."
 "ini settings."
 msgstr ""
+"El tiempo de vida de sesión es su gosa.conf sera sustituido por el valor de "
+"ini de php."
 
 #: html/index.php:163
-#, fuzzy
 msgid "Smarty error"
-msgstr "Insertar separador"
+msgstr "Error Smarty"
 
 #: html/index.php:214
 msgid "There is a problem with the authentication setup!"
-msgstr ""
+msgstr "¡Hay un problema con la configuración de autenticación!"
 
 #: html/index.php:222
 msgid "Cannot find a valid user for the current authentication setup!"
 msgstr ""
+"¡No se puede encontrar un usuario válido para la configuración de "
+"autenticación seleccionada!"
 
 #: html/index.php:226
 msgid "User information is not unique accross the configured LDAP trees!"
 msgstr ""
+"¡La información del usuario no es única dentro del árbol LDAP selecionado!"
 
 #: html/index.php:267
 msgid "Cannot detect information about the installed LDAP schema!"
 msgstr ""
+"¡No se puede acceder a la información sobre los esuqemas LDAP instalados!"
 
 #: html/index.php:280
 msgid "Your LDAP setup contains old schema definitions:"
-msgstr ""
+msgstr "Su configuración LDAP tiene definiciones de esquemas antiguos:"
 
 #: html/index.php:301
 msgid "Please specify a valid username!"
-msgstr ""
+msgstr "¡Por favor introduzca un nombre de usuario válido!"
 
 #: html/index.php:304
 msgid "Please specify your password!"
-msgstr ""
+msgstr "¡Por favor introduzca una contraseña!"
 
 #: html/index.php:316
-#, fuzzy
 msgid "Authentication error"
-msgstr "Tipo de autentificación IAX"
+msgstr "Error de Autenticación"
 
 #: html/index.php:316
 msgid "Cannot retrieve user information for htaccess authentication!"
 msgstr ""
+"¡No se puede recuperar la información de usuario para autenticación htaccess!"
 
 #: html/index.php:370
 msgid "Account locked. Please contact your system administrator!"
 msgstr ""
+"Cuenta bloqueada. ¡Por favor contacte con su administrador de sistemas!"
 
 #: html/index.php:421
 msgid ""
 "Your browser has cookies disabled. Please enable cookies and reload this "
 "page before logging in!"
 msgstr ""
+"Su navegador tiene las cookies desactivadas. ¡Porfavor active las cookies y "
+"recargue esta página antes de iniciar sesión!"
 
 #: html/main.php:148
 #, php-format
 msgid "Cannot locate file '%s' - please run '%s' to fix this"
 msgstr ""
+"No se puede encontrar el archivo '%s' - por favor ejecute '%s' para "
+"solucionarlo"
 
 #: html/main.php:167
-#, fuzzy
 msgid "PHP configuration"
-msgstr "Escribir archivo de configuración"
+msgstr "Configuración PHP"
 
 #: html/main.php:168
 msgid ""
 "FATAL: Register globals is on. GOsa will refuse to login unless this is "
 "fixed by an administrator."
 msgstr ""
+"FATAL: 'Register globals' está activado. No se permitirá ninguna acceso "
+"hasta que esto sea solucionado por un administrador."
 
 #: html/main.php:213
 msgid "Running out of memory!"
-msgstr ""
+msgstr "¡Funcionando sin memoria!"
 
 #: html/main.php:287
 msgid "User ACL checks disabled"
-msgstr ""
+msgstr "Desactivados chequeos de ACL de usuario"
 
 #: html/main.php:357
-#, fuzzy
 msgid "Your password is about to expire, please change your password!"
-msgstr "No tiene permisos para cambiar su contraseña."
+msgstr ""
+"Su contraseña va a caducar próximamente, ¡Por favor cambie su contraseña!"
 
 #: html/main.php:366
 msgid "Plugin"
-msgstr ""
+msgstr "Extensión"
 
 #: html/main.php:367
 #, php-format
 msgid "FATAL: Cannot find any plugin definitions for plugin '%s'!"
 msgstr ""
+"FATAL: ¡No se puede encontrar ninguna definición de extensión para la "
+"extensión '%s'!"
 
 #: html/main.php:381
-#, fuzzy
 msgid "Configuration Error"
-msgstr "Se puede escribir en la configuración"
+msgstr "Error de configuración"
 
 #: html/main.php:382
 #, php-format
@@ -4440,146 +4438,150 @@ msgid ""
 "FATAL: not all POST variables have been transfered by PHP - please inform "
 "your administrator!"
 msgstr ""
+"FATAL: No todos las variables POST han sido transferidas por PHP - ¡Por "
+"favor informe a su administrador!"
 
 #: html/setup.php:66
-#, fuzzy
 msgid "Smarty"
-msgstr "Sumario"
+msgstr "Smarty"
 
 #: html/helpviewer.php:65
 msgid "Help browser"
-msgstr ""
+msgstr "Navegador de ayuda"
 
 #: html/helpviewer.php:119
 msgid "There is no helpfile specified for this class"
-msgstr ""
+msgstr "No hay archivo de ayuda disponible para esta clase"
 
 #: html/helpviewer.php:269
 #, php-format
 msgid "Helpdir '%s' is not accessible, can't read any helpfiles."
 msgstr ""
+"El directorio de ayuda '%s' no está disponible, no podrá leer ningún archivo "
+"de ayuda."
 
 #: setup/setup_finish.tpl:3
 msgid "Create your configuration file"
-msgstr ""
+msgstr "Crear su fichero de configuración"
 
 #: setup/setup_finish.tpl:13
 msgid "Download configuration"
-msgstr ""
+msgstr "Descargar configuración"
 
 #: setup/setup_finish.tpl:18
 msgid "Status: "
-msgstr ""
+msgstr "Estado: "
 
 #: setup/setup_schema.tpl:3
 msgid "Schema specific settings"
-msgstr ""
+msgstr "Parametros específicos del esquema"
 
 #: setup/setup_schema.tpl:7
 msgid "Enable schema validation when logging in"
-msgstr ""
+msgstr "Activar validación de esquema cuando se registre"
 
 #: setup/setup_schema.tpl:16
 msgid "Check status"
-msgstr ""
+msgstr "Comprobar Estado"
 
 #: setup/setup_schema.tpl:20
 msgid "Schema check succeeded"
-msgstr ""
+msgstr "Comprobación de esquema correcta"
 
 #: setup/setup_schema.tpl:23
 msgid "Schema check failed"
-msgstr ""
+msgstr "Ha fallado la comprobación del esquema"
 
 #: setup/setup_schema.tpl:31
 msgid ""
 "Could not read any schema informations, all checks skipped. Adjust your ldap "
 "acls."
 msgstr ""
+"No se puede acceder a la información de esquemas, todos las comprobaciones "
+"se suspenden. Ajuste las acl de ldap."
 
 #: setup/setup_schema.tpl:35
 msgid ""
 "It seems that your ldap database wasn't initialized yet. This maybe the "
 "reason, why GOsa can't read your schema configuration!"
 msgstr ""
+"Parece que la base de datos ldap no ha sido inicializada. ¡Esta puede se la "
+"razón por la que GOsa no puede acceder a la configuración de esquemas!"
 
 #: setup/class_setupStep_Checks.inc:38 setup/class_setupStep_Checks.inc:39
 msgid "Installation check"
 msgstr "Comprobación de la instalación"
 
 #: setup/class_setupStep_Checks.inc:40
-#, fuzzy
 msgid "Basic checks for PHP compatibility and extensions"
-msgstr "Comprobación básica de la versión de PHP y las extensiones necesarias."
+msgstr "Comprobación básica de la versión de PHP y las extensiones."
 
 #: setup/class_setupStep_Checks.inc:64
 msgid "Checking PHP version"
 msgstr "Comprobando la versión de PHP"
 
 #: setup/class_setupStep_Checks.inc:65
-#, fuzzy, php-format
+#, php-format
 msgid "PHP must be of version %s or above."
-msgstr "PHP debe ser versión '%s'/'%s' o superior."
+msgstr "PHP debe ser versión '%s' o superior."
 
 #: setup/class_setupStep_Checks.inc:66
 msgid "Please upgrade to a supported version."
-msgstr ""
+msgstr "Por favor actualize a la versión soportada."
 
 #: setup/class_setupStep_Checks.inc:73
 msgid "GOsa requires this module to talk with your LDAP server."
-msgstr ""
+msgstr "GOsa necesita este módulo para comunicarse con el servidor LDAP."
 
 #: setup/class_setupStep_Checks.inc:81
 msgid "GOsa requires this module for an internationalized interface."
-msgstr ""
+msgstr "GOsa necesita este módulo para un interfaz internacionalizado."
 
 #: setup/class_setupStep_Checks.inc:89
 msgid "GOsa requires this module for the samba integration."
-msgstr ""
+msgstr "GOsa necesita este módulo para integración con samba."
 
 #: setup/class_setupStep_Checks.inc:97
-#, fuzzy
 msgid "GOsa requires this module to make use of SSHA encryption."
 msgstr ""
-"Este módulo es necesario para poder hacer uso del método de codificación SSHA"
+"GOsa necesita para poder hacer uso del método de codificación SSHA este "
+"módulo."
 
 #: setup/class_setupStep_Checks.inc:105
 msgid "GOsa requires this module to talk to an IMAP server."
-msgstr ""
+msgstr "GOsa necesita este módulo para comunicarse con servidores IMAP."
 
 #: setup/class_setupStep_Checks.inc:112
-#, fuzzy
 msgid "mbstring"
-msgstr "Parametros de samba"
+msgstr "mbstring"
 
 #: setup/class_setupStep_Checks.inc:113
 msgid "GOsa requires this module to handle unicode strings."
-msgstr ""
+msgstr "GOsa necesita este módulo para manejar cadenas unicode."
 
 #: setup/class_setupStep_Checks.inc:120 setup/setup_config2.tpl:188
-#, fuzzy
 msgid "MySQL"
-msgstr "Servicio LDAP"
+msgstr "MySQL"
 
 #: setup/class_setupStep_Checks.inc:121
-#, fuzzy
 msgid ""
 "GOsa requires this module to communicate with several supported databases."
-msgstr "MySQL es necesario para el acceso a algunas bases de datos soportadas."
+msgstr ""
+"Gosa necesita este módulo para comunicarse con las bases de datos soportadas."
 
 #: setup/class_setupStep_Checks.inc:138
-#, fuzzy
 msgid "samba hash generator"
-msgstr "Función de generación de hash de la contraseña SAMBA"
+msgstr "generador de hash de la contraseña SAMBA"
 
 #: setup/class_setupStep_Checks.inc:139
 msgid "GOsa requires this command to synchronize POSIX and samba passwords."
-msgstr ""
+msgstr "GOsa necesita este comando para sincronizar contraseñas POSIX y samba."
 
 #: setup/class_setupStep_Checks.inc:140
 msgid ""
 "Deploy a gosa-si installation or install the perl Crypt::SmbHash modules."
 msgstr ""
+"Desplegar una instalación gosa-si o instale el módulo PERL Crypt::SmbHash."
 
 #: setup/class_setupStep_Checks.inc:150
 msgid ""
@@ -4759,7 +4761,7 @@ msgstr "Libreta direcciones"
 
 #: setup/class_setupStep_Feedback.inc:112
 msgid "Feedback"
-msgstr ""
+msgstr "Sugerencias"
 
 #: setup/class_setupStep_Feedback.inc:113
 msgid "Get notifications or send feedback"
@@ -4771,24 +4773,22 @@ msgstr "Avisos y sugerencias"
 
 #: setup/class_setupStep_Feedback.inc:132 setup/class_setup.inc:77
 msgid "Setup error"
-msgstr ""
+msgstr "Error de configuración"
 
 #: setup/class_setupStep_Feedback.inc:141
 #: setup/class_setupStep_Feedback.inc:148
 msgid "Feedback error"
-msgstr ""
+msgstr "Error de envio de sugerencias"
 
 #: setup/class_setupStep_Feedback.inc:141
 #, php-format
 msgid "Cannot send feedback to '%s': %s"
-msgstr ""
+msgstr "No se puede enviar sugerencia a '%s': %s"
 
 #: setup/class_setupStep_Feedback.inc:148
-#, fuzzy
 msgid "Cannot send feedback: service temporarily unavailable"
 msgstr ""
-"Error mientras se envía su sugerencia. Es posible que el servicio no se "
-"encuentre disponible"
+"No se puede envíar su sugerencia. El servicio no se encuentre disponible"
 
 #: setup/class_setupStep_Feedback.inc:150
 msgid "Feedback sucessfully send"
@@ -4799,61 +4799,59 @@ msgid "Please specify a valid email address."
 msgstr "Por favor indique una dirección de correo válida."
 
 #: setup/class_setupStep_Feedback.inc:184
-#, fuzzy
 msgid ""
 "You have to select at least one of both options, subscribe or send feedback."
 msgstr ""
-"Debe tener activa al menos una opción para suscribirse o enviar una "
-"sugerencia."
+"Debe seleccionar al menos una opción de ambas, para suscribirse o enviar "
+"sugerencias."
 
 #: setup/setup_license.tpl:8
 msgid "I have read the license and accept it"
-msgstr ""
+msgstr "He leido la licencia y la acepto"
 
 #: setup/setup_config1.tpl:2
 msgid "Look and feel"
-msgstr ""
+msgstr "Temas y apariencia"
 
 #: setup/setup_config1.tpl:6
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 #: setup/setup_config1.tpl:15
 msgid "Apache"
-msgstr ""
+msgstr "Apache"
 
 #: setup/setup_config1.tpl:19
 msgid "Compress output send to browser"
-msgstr ""
+msgstr "Salida de compresión enviada al navegador"
 
 #: setup/setup_config1.tpl:27
 msgid "People and group storage"
-msgstr ""
+msgstr "Almacén de grupos y usuarios"
 
 #: setup/setup_config1.tpl:30
 msgid "People DN attribute"
-msgstr ""
+msgstr "Atributo 'dn' de los usuarios"
 
 #: setup/setup_config1.tpl:41
 msgid "People storage subtree"
-msgstr ""
+msgstr "Subárbol de almacenamiento para los usuarios"
 
 #: setup/setup_config1.tpl:50
 msgid "Group storage subtree"
-msgstr ""
+msgstr "Subárbol de almacenamiento para los grupos"
 
 #: setup/setup_config1.tpl:59
 msgid "Include personal title in user DN"
-msgstr ""
+msgstr "Incluir el título personal en el DN de usuario"
 
 #: setup/setup_config1.tpl:70
 msgid "Relaxed naming policies"
-msgstr ""
+msgstr "Reglas no estrictas de nombres"
 
 #: setup/setup_config1.tpl:81
-#, fuzzy
 msgid "Automatic UIDs"
-msgstr "Automatico"
+msgstr "UIDs Automaticas"
 
 #: setup/setup_config1.tpl:97 setup/class_setupStep_Config1.inc:118
 msgid "GID / UID min id"
@@ -4861,39 +4859,39 @@ msgstr "GID / UID min id"
 
 #: setup/setup_config1.tpl:113
 msgid "Number base for people/groups"
-msgstr ""
+msgstr "Número base para usuarios y grupos"
 
 #: setup/setup_config1.tpl:121
 msgid "Hook for number base"
-msgstr ""
+msgstr "Método para el número base"
 
 #: setup/setup_config1.tpl:140
 msgid "Password encryption algorithm"
-msgstr ""
+msgstr "Algoritmo de codificación de contraseña"
 
 #: setup/setup_config1.tpl:151
 msgid "Password restrictions"
-msgstr ""
+msgstr "Restricciones de contraseña"
 
 #: setup/setup_config1.tpl:158 setup/setup_config1.tpl:162
 msgid "Password minimum length"
-msgstr ""
+msgstr "Longitud mínima de la contraseña"
 
 #: setup/setup_config1.tpl:169 setup/setup_config1.tpl:173
 msgid "Different characters from old password"
-msgstr ""
+msgstr "Caracteres diferentes de la contraseña anterior"
 
 #: setup/setup_config1.tpl:182
 msgid "Password change hook"
-msgstr ""
+msgstr "Método de cambio de contraseña"
 
 #: setup/setup_config1.tpl:198
 msgid "Use SASL for kerberos"
-msgstr ""
+msgstr "Usar SASL para kerberos"
 
 #: setup/setup_config1.tpl:209
 msgid "Use account expiration"
-msgstr ""
+msgstr "Usar caducidad de cuenta"
 
 #: setup/setup_config1.tpl:221
 msgid ""
@@ -4901,6 +4899,9 @@ msgid ""
 "adjustable via user templates, but you can specify a default method to be "
 "used here, too."
 msgstr ""
+"Gosa soporta varios tipos diferentes de codificación para las contraseñas. "
+"Normalmente esto es seleccionable a través de las plantillas de usuario, "
+"pero también se puede introducir un método que sera usado por defecto."
 
 #: setup/setup_config1.tpl:222
 msgid ""
@@ -4908,6 +4909,11 @@ msgid ""
 "workaround till OpenLDAP's in directory ACI's are    fully implemented. For "
 "this to work, we need the admin DN and the corresponding password."
 msgstr ""
+"GOsa siempre actúa en modo administrador y gestiona los permisos de acceso "
+"internamente. Esto es una solución temporal hasta que las ACI (Access "
+"control information) estén completamente implementadas en OPENLDAP.  Para "
+"que esto funcione, necesitamos el DN del administrador y la contraseña "
+"correspondiente."
 
 #: setup/setup_config1.tpl:223
 msgid ""
@@ -4915,6 +4921,10 @@ msgid ""
 "saves people and groups, including the way accounts get created. Check the "
 "values below if the fit your needs."
 msgstr ""
+"Algunos parámetros básicos de LDAP son modificables y afectarán las "
+"ubicaciones donde GOSa guarda los usuarios y los grupos, incluyendo la "
+"manera en que las cuentas son creadas. Compruebe los valores a continuación "
+"se ajustan a sus necesidades."
 
 #: setup/setup_config1.tpl:224
 msgid ""
@@ -4922,6 +4932,10 @@ msgid ""
 "interfaces to users mailboxes and general handling    for quotas. You can "
 "choose the dummy plugin to leave all your mail settings untouched."
 msgstr ""
+"Gosa tiene un soporte modular para diferentes métodos de correo electrónico. "
+"Estos son herramientas de control de la cuentas de correo y control de "
+"cuotas. Puede elegir el método 'dummy' para dejar su configuración de correo "
+"limpia."
 
 #: setup/class_setupStep_Config3.inc:77 setup/class_setupStep_Config3.inc:78
 msgid "GOsa settings 3/3"
@@ -4946,14 +4960,12 @@ msgid "Yes"
 msgstr "Si"
 
 #: setup/class_setupStep_Config3.inc:198
-#, fuzzy
 msgid "Session lifetime must be a numeric value!"
-msgstr "Tiempo de vida de sesión debe ser un valor numérico"
+msgstr "¡El tiempo de vida de sesión debe ser un valor numérico!"
 
 #: setup/class_setupStep_Config3.inc:202
-#, fuzzy
 msgid "Maximum LDAP query time must be a numeric value!"
-msgstr "Máximo tiempo de consulta LDAP debe ser un valor numérico."
+msgstr "¡Máximo tiempo de consulta LDAP debe ser un valor numérico!"
 
 #: setup/class_setupStep_Language.inc:40 setup/class_setupStep_Language.inc:41
 msgid "Language setup"
@@ -4989,7 +5001,6 @@ msgid "Finish - write the configuration file"
 msgstr "Terminar - Escribir el archivo de configuración"
 
 #: setup/class_setupStep_Finish.inc:100
-#, fuzzy
 msgid ""
 "Your configuration file is currently world readable. Please update the file "
 "permissions!"
@@ -4999,9 +5010,7 @@ msgstr ""
 
 #: setup/class_setupStep_Finish.inc:102
 msgid "The configuration is currently not readable or it does not exists."
-msgstr ""
-"En estos momentos la configuración no es accesible o no tiene permisos para "
-"leerla."
+msgstr "En estos momentos la configuración no es accesible o no existe."
 
 #: setup/class_setupStep_Finish.inc:111
 #, php-format
@@ -5021,27 +5030,27 @@ msgstr "Completado"
 
 #: setup/class_setup.inc:267 setup/setup_migrate.tpl:198
 msgid "Next"
-msgstr ""
+msgstr "Siguiente"
 
 #: setup/setup_checks.tpl:9
 msgid "PHP module and extension checks"
-msgstr ""
+msgstr "Comprobaciones de módulos y extensiones PHP"
 
 #: setup/setup_checks.tpl:41 setup/setup_checks.tpl:103
 msgid "GOsa will NOT run without fixing this."
-msgstr ""
+msgstr "GOsa NO funcionara si no arregla esto."
 
 #: setup/setup_checks.tpl:45 setup/setup_checks.tpl:107
 msgid "GOsa will run without fixing this."
-msgstr ""
+msgstr "GOsa puede funcionar sin que se arregle esto."
 
 #: setup/setup_checks.tpl:67
 msgid "PHP setup configuration"
-msgstr ""
+msgstr "Configuración de PHP"
 
 #: setup/setup_checks.tpl:67
 msgid "show information"
-msgstr ""
+msgstr "mostrar información"
 
 #: setup/class_setupStep_Config1.inc:74 setup/class_setupStep_Config1.inc:75
 msgid "GOsa settings 1/3"
@@ -5087,7 +5096,7 @@ msgstr ""
 
 #: setup/setup_feedback.tpl:6
 msgid "Subscribe to the gosa-announce mailinglist"
-msgstr ""
+msgstr "Suscribirse a la lista de correo gosa-announce"
 
 #: setup/setup_feedback.tpl:9
 msgid ""
@@ -5095,6 +5104,9 @@ msgid ""
 "order to subscribe you to the gosa-announce mailing list. You've to confirm "
 "this by mail."
 msgstr ""
+"Cuando seleccione esta opción, Gosa intentara conectar a http://oss.gonicus."
+"de para suscribirle a la lista de correo de gosa-announce. Tendrá que "
+"confirmar esto por correo electrónico."
 
 #: setup/setup_feedback.tpl:30
 msgid "Mail address"
@@ -5102,182 +5114,179 @@ msgstr "Dirección correo electrónico"
 
 #: setup/setup_feedback.tpl:41
 msgid "Send feedback to the GOsa project team"
-msgstr ""
+msgstr "Enviar comentarios al equipo del proyecto GOsa"
 
 #: setup/setup_feedback.tpl:44
 msgid ""
 "When checking this option, GOsa will try to connect http://oss.gonicus.de in "
 "order to submit your form anonymously."
 msgstr ""
+"Cuando seleccione esta opción, Gosa intentara conectar a http://oss.gonicus."
+"de para enviar el formulario de comentarios de forma anónima."
 
 #: setup/setup_feedback.tpl:50
 msgid "Did the setup procedure help you to get started?"
-msgstr ""
+msgstr "¿El procedimiento de configuración le ha ayudado?"
 
 #: setup/setup_feedback.tpl:60
 msgid "If not, what problems did you encounter"
-msgstr ""
+msgstr "Si no, que problemas ha encontrado"
 
 #: setup/setup_feedback.tpl:68
 msgid "Is this the first time you use GOsa?"
-msgstr ""
+msgstr "¿Es la primera vez que usa GOsa?"
 
 #: setup/setup_feedback.tpl:74
 msgid "I use it since"
-msgstr ""
+msgstr "Lo uso desde"
 
 #: setup/setup_feedback.tpl:75
 msgid "Select the year since when you are using GOsa"
-msgstr ""
+msgstr "Seleccione el año desde el cual ha estado usando GOsa"
 
 #: setup/setup_feedback.tpl:82
 msgid "What operating system / distribution do you use?"
-msgstr ""
+msgstr "¿Que sistema operativo / distribución usa?"
 
 #: setup/setup_feedback.tpl:90
 msgid "What web server do you use?"
-msgstr ""
+msgstr "¿Que servidor web usa?"
 
 #: setup/setup_feedback.tpl:98
 msgid "What PHP version do you use?"
-msgstr ""
+msgstr "¿Que versión de PHP usa?"
 
 #: setup/setup_feedback.tpl:106
 msgid "LDAP"
-msgstr ""
+msgstr "LDAP"
 
 #: setup/setup_feedback.tpl:110
 msgid "What kind of LDAP server(s) do you use?"
-msgstr ""
+msgstr "¿Que tipo de servidor(es) LDAP usa?"
 
 #: setup/setup_feedback.tpl:116
 msgid "How many objects are in your LDAP?"
-msgstr ""
+msgstr "¿Cuantos objetos tiene en su servidor LDAP?"
 
 #: setup/setup_feedback.tpl:123
 msgid "Features"
-msgstr ""
+msgstr "Características"
 
 #: setup/setup_feedback.tpl:126
 msgid "What features of GOsa do you use?"
-msgstr ""
+msgstr "¿Que características de GOsa usa?"
 
 #: setup/setup_feedback.tpl:136
 msgid "What features do you want to see in future versions of GOsa?"
-msgstr ""
+msgstr "¿Que características le gustaría ver en versiones futuras de GOsa?."
 
 #: setup/setup_feedback.tpl:143
 msgid "Send feedback"
-msgstr ""
+msgstr "Enviar Comentario"
 
 #: setup/setup_config3.tpl:2
 msgid "GOsa core settings"
-msgstr ""
+msgstr "Configuración común de GOsa"
 
 #: setup/setup_config3.tpl:6
-#, fuzzy
 msgid "Enable primary group filter"
-msgstr "Mostrar grupos primarios"
+msgstr "Activar filtro de grupo primario"
 
 #: setup/setup_config3.tpl:18
-#, fuzzy
 msgid "Display summary in listings"
-msgstr "Mostrar sistemas que coincidan con"
+msgstr "Mostrar resumen en listados"
 
 #: setup/setup_config3.tpl:30
 msgid "Honour administrative units"
-msgstr ""
+msgstr "Delegar en unidades administrativas"
 
 #: setup/setup_config3.tpl:42
 msgid "Smarty compile directory"
-msgstr ""
+msgstr "Directorio de compilación Smarty"
 
 #: setup/setup_config3.tpl:51
 msgid "SNMP community"
-msgstr ""
+msgstr "Comunidad SNMP"
 
 #: setup/setup_config3.tpl:60
 msgid "Path for PPD storage"
-msgstr ""
+msgstr "Ruta del almacén PPD"
 
 #: setup/setup_config3.tpl:77
 msgid "Path for kiosk profile storage"
-msgstr ""
+msgstr "Ruta del almacén de perfiles kiosk"
 
 #: setup/setup_config3.tpl:96
 msgid "SUDO role base"
-msgstr ""
+msgstr "Rol Base SUDO"
 
 #: setup/setup_config3.tpl:115
 msgid "Mail queue script"
-msgstr ""
+msgstr "Script de cola de correo"
 
 #: setup/setup_config3.tpl:134
 msgid "Notification script"
-msgstr ""
+msgstr "Script de notificación"
 
 #: setup/setup_config3.tpl:153
-#, fuzzy
 msgid "Enable edit locking"
-msgstr "Activar comprobación de correo"
+msgstr "Activar edición de bloqueo"
 
 #: setup/setup_config3.tpl:172
 msgid "Login and session"
-msgstr ""
+msgstr "Inicio y sesión"
 
 #: setup/setup_config3.tpl:175
-#, fuzzy
 msgid "Login attribute"
-msgstr "Base de datos de Registro"
+msgstr "Atributo de inicio de sesión"
 
 #: setup/setup_config3.tpl:186
 msgid "Enforce register_globals to be deactivated"
-msgstr ""
+msgstr "Forzar register_globals para que sea desactivado"
 
 #: setup/setup_config3.tpl:198
 msgid "Enforce encrypted connections"
-msgstr ""
+msgstr "Forzar conexiones seguras"
 
 #: setup/setup_config3.tpl:210
 msgid "Warn if session is not encrypted"
-msgstr ""
+msgstr "Avisar si la sesión no esta codificada"
 
 #: setup/setup_config3.tpl:222
-#, fuzzy
 msgid "Remember dialog filter settings"
-msgstr "Parámetros genéricos del usuario"
+msgstr "Recordad los parámetros de filtro de los diálogos"
 
 #: setup/setup_config3.tpl:234
 msgid "Session lifetime"
-msgstr ""
+msgstr "Duración de sesiones."
 
 #: setup/setup_config3.tpl:243
 msgid "Debugging"
-msgstr ""
+msgstr "Depurando"
 
 #: setup/setup_config3.tpl:247
 msgid "Show PHP errors"
-msgstr ""
+msgstr "Mostrar errores PHP:"
 
 #: setup/setup_config3.tpl:259
 msgid "Maximum LDAP query time"
-msgstr ""
+msgstr "Tiempo de consulta máxima de LDAP"
 
 #: setup/setup_config3.tpl:277
 msgid "Log LDAP statistics"
-msgstr ""
+msgstr "Registrar estadísticas LDAP"
 
 #: setup/setup_config3.tpl:289
 msgid "Debug level"
-msgstr ""
+msgstr "Nivel de depuración"
 
 #: setup/setup_config3.tpl:294 setup/setup_config3.tpl:297
 msgid "Disabled"
-msgstr ""
+msgstr "Desactivado"
 
 #: setup/setup_config3.tpl:295 setup/setup_config3.tpl:298
 msgid "Enabled"
-msgstr ""
+msgstr "Activado"
 
 #: setup/class_setupStep_Migrate.inc:118 setup/class_setupStep_Migrate.inc:119
 msgid "LDAP inspection"
@@ -5296,7 +5305,6 @@ msgid "Checking permissions on LDAP database"
 msgstr "Comprobando permisos en la base de datos LDAP"
 
 #: setup/class_setupStep_Migrate.inc:138
-#, fuzzy
 msgid "Checking for invisible departments"
 msgstr "Comprobando departamentos invisibles"
 
@@ -5323,29 +5331,24 @@ msgstr ""
 "trabajo windows"
 
 #: setup/class_setupStep_Migrate.inc:174
-#, fuzzy
 msgid "Checking for duplicated UID numbers"
-msgstr "Comprobando números uid duplicados"
+msgstr "Comprobando números UID duplicados"
 
 #: setup/class_setupStep_Migrate.inc:180
-#, fuzzy
 msgid "Checking for duplicate GID numbers"
-msgstr "Comprobando números uid duplicados"
+msgstr "Comprobando números GID duplicados"
 
 #: setup/class_setupStep_Migrate.inc:186
-#, fuzzy
 msgid "Checking for old style USB devices"
-msgstr "Comprobando objeto raíz"
+msgstr "Comprobando dispositivos por método antiguo"
 
 #: setup/class_setupStep_Migrate.inc:192
-#, fuzzy
 msgid "Checking for old services that have to be migrated"
-msgstr "Comprobando cuentas fuera del árbol de usuarios"
+msgstr "Comprobando servicios antiguos que deben ser migrados"
 
 #: setup/class_setupStep_Migrate.inc:198
-#, fuzzy
 msgid "Checking for old style application menus"
-msgstr "Comprobando números gid duplicados"
+msgstr "Comprobando por menús con estilo antiguo"
 
 #: setup/class_setupStep_Migrate.inc:224 setup/class_setupStep_Migrate.inc:276
 #: setup/class_setupStep_Migrate.inc:341 setup/class_setupStep_Migrate.inc:405
@@ -5430,14 +5433,13 @@ msgstr "Encontrados %s usuario(s) que nos son visibles para GOsa."
 
 #: setup/class_setupStep_Migrate.inc:697 setup/class_setupStep_Migrate.inc:840
 #: setup/class_setupStep_Migrate.inc:1009
-#, fuzzy
 msgid "Migration error"
-msgstr "Migrar"
+msgstr "Error de migración"
 
 #: setup/class_setupStep_Migrate.inc:697 setup/class_setupStep_Migrate.inc:840
-#, fuzzy, php-format
+#, php-format
 msgid "Cannot migrate department '%s':"
-msgstr "Crear nuevo departamento"
+msgstr "No puede migrar el departamento '%s':"
 
 #: setup/class_setupStep_Migrate.inc:788
 #, php-format
@@ -5451,45 +5453,40 @@ msgstr "No hay cuenta de administrador GOsa en la base de datos LDAP."
 #: setup/class_setupStep_Migrate.inc:1009
 #, php-format
 msgid "Cannot add ACL for user '%s':"
-msgstr ""
+msgstr "No se puede añadir ACL para el usuario '%s':"
 
 #: setup/class_setupStep_Migrate.inc:1047
 #: setup/class_setupStep_Migrate.inc:1057
 msgid "Input error"
-msgstr ""
+msgstr "Error de entrada"
 
 #: setup/class_setupStep_Migrate.inc:1047
 msgid "Uid"
-msgstr ""
+msgstr "Uid"
 
 #: setup/class_setupStep_Migrate.inc:1052
-#, fuzzy
 msgid "Password error"
-msgstr "La contraseña expira en"
+msgstr "Error de contraseña"
 
 #: setup/class_setupStep_Migrate.inc:1052
-#, fuzzy
 msgid "Provided passwords do not match!"
-msgstr ""
-"¡La contraseñas introducidas como nueva y repita nueva contraseña no "
-"coinciden!"
+msgstr "¡La contraseñas introducidas no  coinciden!"
 
 #: setup/class_setupStep_Migrate.inc:1057
-#, fuzzy
 msgid "Specify a valid user ID!"
-msgstr "Por favor especifique un uid valido."
+msgstr "¡Por favor especifique un ID de usuario válido!"
 
 #: setup/class_setupStep_Migrate.inc:1090
 #, php-format
 msgid "Adding an administrative user failed: object '%s' already exists!"
 msgstr ""
+"Ha fallado al añadir un usuario administrativo: ¡El objeto '%s' ya existe!"
 
 #: setup/class_setupStep_Migrate.inc:1129
 #: setup/class_setupStep_Migrate.inc:1178
 #: setup/class_setupStep_Migrate.inc:1227
-#, fuzzy
 msgid "Cannot move users to the requested department!"
-msgstr "No puedo mover los usuarios al departamento especificado."
+msgstr "¡No puedo mover los usuarios al departamento especificado!"
 
 #: setup/class_setupStep_Migrate.inc:1139
 msgid "Winstation will be moved from"
@@ -5530,35 +5527,35 @@ msgstr ""
 "El objeto raíz no ha podido ser creado, tendra que crearlo usted mismo."
 
 #: setup/class_setupStep_Migrate.inc:2126
-#, fuzzy, php-format
+#, php-format
 msgid "Copy '%s' to '%s' failed:"
-msgstr "Moviendo '%s' a '%s'"
+msgstr "Copia fallida de '%s' a '%s':"
 
 #: setup/class_setupStep_Migrate.inc:2261
 #, php-format
 msgid "There are %s devices that need to be migrated."
-msgstr ""
+msgstr "Hay %s dispositivos que necesitan ser migrados."
 
 #: setup/class_setupStep_Migrate.inc:2321
 #, php-format
 msgid "Adding '%s' to the LDAP failed: %s"
-msgstr ""
+msgstr "Añadiendo '%s' a LDAP ha fallado: %s"
 
 #: setup/class_setupStep_Migrate.inc:2341
 #: setup/class_setupStep_Migrate.inc:2458
-#, fuzzy, php-format
+#, php-format
 msgid "Updating '%s' failed: %s"
-msgstr "Servicio de Registro de sistema"
+msgstr "Actualizando '%s' ha fallado: %s"
 
 #: setup/class_setupStep_Migrate.inc:2414
 #, php-format
 msgid "There are %s services that need to be migrated."
-msgstr ""
+msgstr "Hay %s serviccios que necesitan ser migrados."
 
 #: setup/class_setupStep_Migrate.inc:2745
 #, php-format
 msgid "There are %s application menus which have to be migrated."
-msgstr ""
+msgstr "Hay %s menu de aplicaciones que necesitan ser migrados."
 
 #: setup/setup_config2.tpl:2
 msgid "Samba settings"
@@ -5566,7 +5563,7 @@ msgstr "Parametros de samba"
 
 #: setup/setup_config2.tpl:6
 msgid "Samba hash generator"
-msgstr ""
+msgstr "Generador clave hash de Samba"
 
 #: setup/setup_config2.tpl:15
 msgid "Samba SID"
@@ -5574,69 +5571,63 @@ msgstr "Samba SID"
 
 #: setup/setup_config2.tpl:31
 msgid "RID base"
-msgstr ""
+msgstr "Base RID"
 
 #: setup/setup_config2.tpl:46
 msgid "Workstation container"
-msgstr ""
+msgstr "Contenedor de la estación de trabajo"
 
 #: setup/setup_config2.tpl:61
 msgid "Samba SID mapping"
-msgstr ""
+msgstr "Mapeando SID de Samba"
 
 #: setup/setup_config2.tpl:71
-#, fuzzy
 msgid "Timezone"
-msgstr "Zona de uso horario del usuario OX"
+msgstr "Zona de uso horario"
 
 #: setup/setup_config2.tpl:74
 msgid "Please choose your preferred timezone here"
-msgstr ""
+msgstr "Por favor introduzca su zona horaria preferida aquí"
 
 #: setup/setup_config2.tpl:96
 msgid "Additional GOsa settings"
-msgstr ""
+msgstr "Configuración avanzada de GOsa"
 
 #: setup/setup_config2.tpl:100
 msgid "Enable Copy & Paste"
-msgstr ""
+msgstr "Activar Copiar y Pegar"
 
 #: setup/setup_config2.tpl:112
-#, fuzzy
 msgid "Enable DNS extension"
-msgstr "Eliminar extensión de impresión"
+msgstr "Activar extensión DNS"
 
 #: setup/setup_config2.tpl:124
-#, fuzzy
 msgid "Enable DHCP extension"
-msgstr "Eliminar extensión de impresión"
+msgstr "Activar extensión DHCP"
 
 #: setup/setup_config2.tpl:136
-#, fuzzy
 msgid "Enable mime type management"
-msgstr "Administración Sieve"
+msgstr "Activar gestión tipos mime"
 
 #: setup/setup_config2.tpl:148
-#, fuzzy
 msgid "Enable FAI release management"
-msgstr "Administración Samba"
+msgstr "Activar gestión de versiones FAI"
 
 #: setup/setup_config2.tpl:160
 msgid "Enable user netatalk plugin"
-msgstr ""
+msgstr "Activar extensión de usuario Netatalk"
 
 #: setup/setup_config2.tpl:171
 msgid "Government mode"
-msgstr ""
+msgstr "Modo gubernamental"
 
 #: setup/setup_config2.tpl:182
-#, fuzzy
 msgid "Logging options"
-msgstr "¡id desconocido!"
+msgstr "Opciones de registro de eventos"
 
 #: setup/setup_config2.tpl:186
 msgid "Syslog"
-msgstr ""
+msgstr "Syslog"
 
 #: setup/setup_config2.tpl:193
 msgid "Mail settings"
@@ -5644,31 +5635,31 @@ msgstr "Parámetros de correo"
 
 #: setup/setup_config2.tpl:197
 msgid "Mail method"
-msgstr ""
+msgstr "Método de correo"
 
 #: setup/setup_config2.tpl:213
 msgid "Account identification attribute"
-msgstr ""
+msgstr "Modificar atributos existentes"
 
 #: setup/setup_config2.tpl:227
 msgid "Vacation templates"
-msgstr ""
+msgstr "Plantillas de ausencia"
 
 #: setup/setup_config2.tpl:243
 msgid "Use Cyrus UNIX style"
-msgstr ""
+msgstr "Usa estilo Cyrus UNIX"
 
 #: setup/setup_config2.tpl:253
 msgid "Snapshots / Undo"
-msgstr ""
+msgstr "Instantaneas / Deshacer"
 
 #: setup/setup_config2.tpl:262 setup/setup_config2.tpl:307
 msgid "Enable snapshots"
-msgstr ""
+msgstr "Activar instantaneas"
 
 #: setup/setup_config2.tpl:268 setup/setup_config2.tpl:313
 msgid "Snapshot base"
-msgstr ""
+msgstr "Base de instantaneas"
 
 #: setup/class_setupStep_License.inc:56 setup/class_setupStep_License.inc:57
 msgid "License"
@@ -5692,48 +5683,62 @@ msgid ""
 "that may occur when migration to GOsa base LDAP administration. You may want "
 "to fix the problems below, in order to provide smooth services."
 msgstr ""
+"Durante la comprobación LDAP, vamos a comprobar algunos problemas comunes "
+"que suelen ocurrir cuando se hace la migración a la base administrativa LDAP "
+"de GOsa. Puede querer arreglar estos problemas aquí, para poder tener una "
+"administración mas fácil."
 
 #: setup/setup_migrate.tpl:33
 msgid "Check again"
-msgstr ""
+msgstr "Comprobar de nuevo"
 
 #: setup/setup_migrate.tpl:37
 msgid "Move windows workstations into a valid windows workstation department"
 msgstr ""
+"Mover estaciones de trabajo windows a un departamento de estaciones de "
+"trabajo windows válido"
 
 #: setup/setup_migrate.tpl:39
 msgid ""
 "This dialog allows you to move the displayed windows workstations into a "
 "valid department"
 msgstr ""
+"Este dialogo le permite mover las estaciones de trabajo windows mostradas a "
+"un departamente válido."
 
 #: setup/setup_migrate.tpl:41
 msgid ""
 "Be careful with this tool, there may be references pointing to this "
 "workstations that can't be migrated."
 msgstr ""
+"Tenga cuidado con esta herramienta, puede haber referencias apuntando a "
+"estas estaciones de trabajo que no pueden ser migradas."
 
 #: setup/setup_migrate.tpl:67
 msgid "Move selected windows workstations into the following GOsa department"
 msgstr ""
+"Mover las estaciones de trabajo windows seleccionadas a el siguiente "
+"departamento GOsa."
 
 #: setup/setup_migrate.tpl:72
 msgid "Move selected workstations"
-msgstr ""
+msgstr "Mover estaciones de trabajo seleccionadas"
 
 #: setup/setup_migrate.tpl:73
 msgid "What will be done here"
-msgstr ""
+msgstr "Que se hará aquí"
 
 #: setup/setup_migrate.tpl:85
 msgid "Move groups into configured group tree"
-msgstr ""
+msgstr "Mover grupos en el árbol de grupos configurado"
 
 #: setup/setup_migrate.tpl:88
 msgid ""
 "This dialog allows moving a couple of groups to the configured group tree. "
 "Doing this may straighten your LDAP service."
 msgstr ""
+"Este dialogo le permite mover una pareja de grupos al árbol de grupos "
+"configurados. Hacer esto puede reforzar su servicio LDAP."
 
 #: setup/setup_migrate.tpl:91
 msgid ""
@@ -5741,34 +5746,39 @@ msgid ""
 "groups. The GOsa setup can't migrate references, so you may want to cancel "
 "the migration in this case."
 msgstr ""
+"¡Tenga cuidado con esta opción! Puede haber referencias apuntando a estos "
+"grupos. La configuración de GOsa no puede migrar referencias, en este caso "
+"puede cancelar la migración."
 
 #: setup/setup_migrate.tpl:94
 msgid "Move selected groups into this group tree"
-msgstr ""
+msgstr "Mover grupos seleccionados en este árbol de grupos"
 
 #: setup/setup_migrate.tpl:125 setup/setup_migrate.tpl:177
 #: setup/setup_migrate.tpl:298 setup/setup_migrate.tpl:351
 #: setup/setup_migrate.tpl:395 setup/setup_migrate.tpl:438
 #: setup/setup_migrate.tpl:482
 msgid "Hide changes"
-msgstr ""
+msgstr "Ocultar cambios"
 
 #: setup/setup_migrate.tpl:127 setup/setup_migrate.tpl:179
 #: setup/setup_migrate.tpl:300 setup/setup_migrate.tpl:353
 #: setup/setup_migrate.tpl:398 setup/setup_migrate.tpl:441
 #: setup/setup_migrate.tpl:485
 msgid "Show changes"
-msgstr ""
+msgstr "Mostrar cambios"
 
 #: setup/setup_migrate.tpl:140
 msgid "Move users into configured user tree"
-msgstr ""
+msgstr "Mover usuarios al árbol de usuarios configurado"
 
 #: setup/setup_migrate.tpl:142
 msgid ""
 "This dialog allows moving a couple of users to the configured user tree. "
 "Doing this may straighten your LDAP service."
 msgstr ""
+"Este dialogo le permite mover una pareja de usuarios al árbol de usuarios "
+"configurados. Hacer esto puede reforzar su servicio LDAP."
 
 #: setup/setup_migrate.tpl:145
 msgid ""
@@ -5776,28 +5786,33 @@ msgid ""
 "users. The GOsa setup can't migrate references, so you may want to cancel "
 "the migration in this case."
 msgstr ""
+"¡Tenga cuidado con esta opción! Puede haber referencias apuntando a estos "
+"usuarios. La configuración de GOsa no puede migrar referencias, por lo que "
+"puede querer cancelar la migración."
 
 #: setup/setup_migrate.tpl:148
 msgid "Move selected users into this people tree"
-msgstr ""
+msgstr "Mover usuarios seleccionados al árbol de usuarios"
 
 #: setup/setup_migrate.tpl:199
 msgid "Abort"
-msgstr ""
+msgstr "Cancelar"
 
 #: setup/setup_migrate.tpl:201
 msgid "Create a new GOsa administrator account"
-msgstr ""
+msgstr "Crear una nueva cuenta administrativa GOsa"
 
 #: setup/setup_migrate.tpl:204
 msgid ""
 "This dialog will automatically add a new super administrator to your LDAP "
 "tree."
 msgstr ""
+"Este dialogo añadirá automáticamente un nuevo superadministrador a su árbol "
+"LDAP."
 
 #: setup/setup_migrate.tpl:233
 msgid "Password (again)"
-msgstr ""
+msgstr "Contraseña (de nuevo)"
 
 #: setup/setup_migrate.tpl:259
 msgid ""
@@ -5805,6 +5820,9 @@ msgid ""
 "If you want to change this for a couple of entries, select them and use the "
 "migrate button below."
 msgstr ""
+"Actualmente los siguientes departamentos son invisibles en el interfaz de "
+"GOsa. Si quiere modificar esto para algunas de las entradas, seleccionelas y "
+"pulse el botón migrar."
 
 #: setup/setup_migrate.tpl:260 setup/setup_migrate.tpl:315
 #: setup/setup_migrate.tpl:371 setup/setup_migrate.tpl:415
@@ -5813,18 +5831,20 @@ msgid ""
 "If you want to know what will be done when migrating the selected entries, "
 "use the 'Show changes' button to see the LDIF."
 msgstr ""
+"Si quiere saber que se hará cuando se migren las entradas seleccionadas use "
+"el botón 'Mostrar cambios' para ver el LDIF."
 
 #: setup/setup_migrate.tpl:270 setup/setup_migrate.tpl:324
 #: setup/setup_migrate.tpl:379 setup/setup_migrate.tpl:422
 #: setup/setup_migrate.tpl:466
 msgid "Current"
-msgstr ""
+msgstr "Actual"
 
 #: setup/setup_migrate.tpl:277 setup/setup_migrate.tpl:331
 #: setup/setup_migrate.tpl:383 setup/setup_migrate.tpl:426
 #: setup/setup_migrate.tpl:470
 msgid "After migration"
-msgstr ""
+msgstr "Despues de migrar"
 
 #: setup/setup_migrate.tpl:314
 msgid ""
@@ -5832,6 +5852,9 @@ msgid ""
 "want to change this for a couple of users, just select them and use the "
 "'Migrate' button below."
 msgstr ""
+"Actualmente los siguientes usuarios son invisibles en el interfaz de GOsa. "
+"Si quiere modificar esto para algunos de los usuarios, seleccionelos y pulse "
+"el botón migrar."
 
 #: setup/setup_migrate.tpl:370
 msgid ""
@@ -5839,11 +5862,14 @@ msgid ""
 "want to change this for a couple of devices, just select them and use the "
 "'Migrate' button below."
 msgstr ""
+"Actualmente los siguientes dispositivos son invisibles en el interfaz de "
+"GOsa. Si quiere modificar esto para algunas de los dispositivos "
+"seleccionelos y pulse el botón migrar."
 
 #: setup/setup_migrate.tpl:396 setup/setup_migrate.tpl:439
 #: setup/setup_migrate.tpl:483
 msgid "Refresh"
-msgstr ""
+msgstr "Refresco"
 
 #: setup/setup_migrate.tpl:414
 msgid ""
@@ -5851,6 +5877,9 @@ msgid ""
 "to install. If you want to update a couple of service, just select them and "
 "use the 'Migrate' button below."
 msgstr ""
+"Actualmente los siguientes servicios son invisibles en el interfaz de GOsa. "
+"Si quiere modificar esto para algunos de los servicios, seleccionelos y "
+"pulse el botón migrar."
 
 #: setup/setup_migrate.tpl:458
 msgid ""
@@ -5858,6 +5887,9 @@ msgid ""
 "to change this for a couple of devices, just select them and use the "
 "'Migrate' button below."
 msgstr ""
+"Actualmente los siguientes menus son invisibles en el interfaz de GOsa. Si "
+"quiere modificar esto para algunas de las entradas, seleccionelas y pulse el "
+"botón migrar."
 
 #: setup/class_setupStep_Ldap.inc:53
 msgid "LDAP setup"
@@ -5876,43 +5908,40 @@ msgstr ""
 "y LDAP."
 
 #: setup/class_setupStep_Ldap.inc:105
-#, fuzzy, php-format
+#, php-format
 msgid "Anonymous bind to server '%s' failed!"
-msgstr "La Autenticación Anónima en el servidor '%s'. ha tenido éxito."
+msgstr "¡La conexión anónima al servidor '%s' ha fallado!"
 
 #: setup/class_setupStep_Ldap.inc:107
-#, fuzzy, php-format
+#, php-format
 msgid "Bind as user '%s' failed!"
-msgstr "Ha fallado la Autenticación como usuario '%s' en el servidor '%s'."
+msgstr "¡La conexión como usuario '%s' ha fallado!"
 
 #: setup/class_setupStep_Ldap.inc:112
-#, fuzzy, php-format
+#, php-format
 msgid "Anonymous bind to server '%s' succeeded."
-msgstr "La Autenticación Anónima en el servidor '%s'. ha tenido éxito."
+msgstr "La conexión anónima al servidor '%s' ha tenido exito."
 
 #: setup/class_setupStep_Ldap.inc:113
-#, fuzzy
 msgid "Please specify user and password!"
-msgstr "Por Favor especifique un usuario y contraseña"
+msgstr "¡Por Favor especifique un usuario y contraseña!"
 
 #: setup/class_setupStep_Ldap.inc:115
-#, fuzzy, php-format
+#, php-format
 msgid "Bind as user '%s' to server '%s' succeeded!"
-msgstr ""
-"La Autenticación como usuario '%s' en el servidor '%s'. ha tenido éxito."
+msgstr "¡La conexión como usuario '%s' al servidor '%s' ha tenido exito!"
 
 #: setup/setup_frame.tpl:12
 msgid "GOsa setup wizard"
-msgstr ""
+msgstr "Asistente de configuración de GOsa"
 
 #: setup/setup_frame.tpl:19
 msgid "Installation"
-msgstr ""
+msgstr "Instalación"
 
 #: setup/setup_frame.tpl:19
-#, fuzzy
 msgid "Setup"
-msgstr "Inicio"
+msgstr "Configuración"
 
 #: setup/class_setupStep_Welcome.inc:38
 msgid "Welcome"
@@ -5928,7 +5957,7 @@ msgstr "Bienvenidos al asistente de configuración de GOsa"
 
 #: setup/setup_language.tpl:3
 msgid "Please select the preferred language"
-msgstr ""
+msgstr "Por favor seleccione su idioma preferido"
 
 #: setup/setup_language.tpl:5
 msgid ""
@@ -5936,11 +5965,13 @@ msgid ""
 "'automatic' will use the language requested by the browser. This setting can "
 "be overriden per user."
 msgstr ""
+"En este punto, puede seleccionar el idioma usado por defecto. Seleccionando "
+"'automático' obtendrá el lenguaje usado por el navedador. Esta configuración "
+"puede ser modificada por cada usuario."
 
 #: setup/setup_language.tpl:9
-#, fuzzy
 msgid "Please select your preferred language here"
-msgstr "Este paso le permite seleccionar su idioma preferido"
+msgstr "Por favor seleccione su idioma preferido"
 
 #: setup/setup_welcome.tpl:4
 msgid ""
@@ -5948,42 +5979,47 @@ msgid ""
 "configuration right now. This simple wizard intends to help you while "
 "setting it up."
 msgstr ""
+"Aparentemente es la primera vez que inicia GOsa - No se ha encontrado "
+"ninguna configuración. Este asistente intentara ayudarle mientras se "
+"configura."
 
 #: setup/setup_welcome.tpl:8
 msgid "What will the wizard do for you?"
-msgstr ""
+msgstr "¿Que hará este asistente para usted?"
 
 #: setup/setup_welcome.tpl:11
 msgid "Create a basic, single site configuration"
-msgstr ""
+msgstr "Creara una configuración básica para un único sitio"
 
 #: setup/setup_welcome.tpl:12
 msgid "Tries to find problems within your PHP and LDAP setup"
-msgstr ""
+msgstr "Intentando encontrar problemas en la configuración de LDAP y de PHP"
 
 #: setup/setup_welcome.tpl:13
 msgid "Let you choose from a set of basic and advanced configuration switches"
-msgstr ""
+msgstr "Le permite seleccionar un juego de opciones básicas o avanzadas"
 
 #: setup/setup_welcome.tpl:14
 msgid "Guided migration of existing LDAP trees"
-msgstr ""
+msgstr "Migración guiada de arboles LDAP existentes"
 
 #: setup/setup_welcome.tpl:17
 msgid "What will the wizard NOT do for you?"
-msgstr ""
+msgstr "¿Que no hará este asistente por usted?"
 
 #: setup/setup_welcome.tpl:20
 msgid "Find every possible configuration error"
-msgstr ""
+msgstr "Encontrar cada posible error de configuración"
 
 #: setup/setup_welcome.tpl:21
 msgid "Migrate every possible LDAP setup - create backup dumps!"
 msgstr ""
+"Migración asistidas de cualquier configuración LDAP - ¡creando copias de "
+"seguridad!"
 
 #: setup/setup_welcome.tpl:25
 msgid "To continue..."
-msgstr ""
+msgstr "Para continuar..."
 
 #: setup/setup_welcome.tpl:28
 msgid ""
@@ -5992,55 +6028,58 @@ msgid ""
 "servers local filesystem. This can be done by executing the following "
 "command:"
 msgstr ""
+"Por razones de seguridad necesita autenticarse para la instalación, creando "
+"el archivo '/tmp/gosa.auth', que tendrá el ID de la sesión actual en el "
+"sistema de archivos del servidor. Esto puede ser hecho ejecutando el "
+"siguiente comando:"
 
 #: setup/setup_welcome.tpl:34
 msgid "Click the 'Continue' button when you've finished."
-msgstr ""
+msgstr "Pulse en el botón 'Continuar' cuando haya terminado."
 
 #: setup/setup_ldap.tpl:7
 msgid "Please choose the LDAP user to be used by GOsa"
-msgstr ""
+msgstr "."
 
 #: setup/setup_ldap.tpl:13 ihtml/themes/default/help.tpl:21
 msgid "Search"
-msgstr ""
+msgstr "Buscar"
 
 #: setup/setup_ldap.tpl:25
 msgid "LDAP connection"
-msgstr ""
+msgstr "Conexión LDAP"
 
 #: setup/setup_ldap.tpl:29
 msgid "Location name"
-msgstr ""
+msgstr "Nombre de la localización"
 
 #: setup/setup_ldap.tpl:37
-#, fuzzy
 msgid "Connection URI"
-msgstr "Conectividad"
+msgstr "URI de conexión"
 
 #: setup/setup_ldap.tpl:45
 msgid "TLS connection"
-msgstr ""
+msgstr "Conexión TLS"
 
 #: setup/setup_ldap.tpl:65
 msgid "Reload"
-msgstr ""
+msgstr "Recargar"
 
 #: setup/setup_ldap.tpl:69
 msgid "Authentication"
-msgstr ""
+msgstr "Autenticación"
 
 #: setup/setup_ldap.tpl:73
 msgid "Admin DN"
-msgstr ""
+msgstr "DN del administrador"
 
 #: setup/setup_ldap.tpl:78
 msgid "Select user"
-msgstr ""
+msgstr "Eliminar usuario"
 
 #: setup/setup_ldap.tpl:86
 msgid "Automatically append LDAP base to admin DN"
-msgstr ""
+msgstr "Añadir automáticamente la base LDAP al DN administrador"
 
 #: setup/setup_ldap.tpl:93
 msgid "Admin password"
@@ -6048,29 +6087,27 @@ msgstr "Contraseña de administrador"
 
 #: setup/setup_ldap.tpl:101
 msgid "Schema based settings"
-msgstr ""
+msgstr "Configuración basada en el esquema"
 
 #: setup/setup_ldap.tpl:105
 msgid "Use rfc2307bis compliant groups"
-msgstr ""
+msgstr "Usar grupos conformes a rfc2307bis"
 
 #: setup/setup_ldap.tpl:117
 msgid "Current status"
-msgstr ""
+msgstr "Estado actual"
 
 #: ihtml/themes/default/password.tpl:6
-#, fuzzy
 msgid "Change your password"
-msgstr "Cambiar contraseña"
+msgstr "Cambie su contraseña"
 
 #: ihtml/themes/default/password.tpl:35
-#, fuzzy
 msgid "Success"
-msgstr "Acceso sin restricciones"
+msgstr "Correcto"
 
 #: ihtml/themes/default/password.tpl:35
 msgid "Your password has been changed successfully."
-msgstr ""
+msgstr "Su contraseña se ha cambiado correctamente."
 
 #: ihtml/themes/default/password.tpl:53
 msgid ""
@@ -6078,89 +6115,92 @@ msgid ""
 "password and the new password (twice) in the fields below and press the "
 "'Change' button."
 msgstr ""
+"Este dialogo le permite cambiar de forma sencilla la contraseña. Introduzca "
+"la contraseña actual y la nueva contraseña (dos veces) en los campos "
+"siguientes y presione en el botón 'Cambiar'."
 
 #: ihtml/themes/default/password.tpl:60 ihtml/themes/default/password.tpl:62
 #: ihtml/themes/default/login.tpl:52 ihtml/themes/default/login.tpl:53
 msgid "Directory"
-msgstr ""
+msgstr "Directorio"
 
 #: ihtml/themes/default/password.tpl:86 ihtml/themes/default/password.tpl:87
-#, fuzzy
 msgid "New password repeated"
-msgstr "activo, la contraseña expiró"
+msgstr "Repita la nueva contraseña"
 
 #: ihtml/themes/default/password.tpl:101
-#, fuzzy
 msgid "Change"
-msgstr "Cancelar"
+msgstr "Cambiar"
 
 #: ihtml/themes/default/password.tpl:102
 #: ihtml/themes/default/accountexpired.tpl:52
-#, fuzzy
 msgid "Click here to change your password"
-msgstr "Permitir al usuario cambiar su contraseña"
+msgstr "Pulse aquí para cambiar su contraseña"
 
 #: ihtml/themes/default/acl.tpl:36
-#, fuzzy
 msgid "Additional filter options"
-msgstr "Eliminar opciones"
+msgstr "Añadir opciones de filtrado"
 
 #: ihtml/themes/default/acl.tpl:47
 msgid "Use members from"
-msgstr ""
+msgstr "Usar miembros de"
 
 #: ihtml/themes/default/acl.tpl:61
 msgid "Available members"
-msgstr ""
+msgstr "Miembros disponibles"
 
 #: ihtml/themes/default/acl.tpl:63 ihtml/themes/default/acl.tpl:68
 msgid "List message possible targets"
-msgstr ""
+msgstr "Mostrar mensaje de posibles destinos"
 
 #: ihtml/themes/default/acl.tpl:84 ihtml/themes/default/acl.tpl:90
 msgid "List message recipients"
-msgstr ""
+msgstr "Lista de recipientes de mensajes"
 
 #: ihtml/themes/default/acl.tpl:112
-#, fuzzy
 msgid "ACL for this object"
-msgstr "ACLs que tienen estos objetos: %s"
+msgstr "ACL que tienen este objeto"
 
 #: ihtml/themes/default/acl.tpl:118
 msgid "Available roles"
-msgstr ""
+msgstr "Roles disponibles"
 
 #: ihtml/themes/default/login.tpl:10
 msgid "GOsa login screen"
-msgstr ""
+msgstr "Pantalla de inicio de GOsa"
 
 #: ihtml/themes/default/login.tpl:27
 msgid "Login screen"
-msgstr ""
+msgstr "Pantalla de inicio"
 
 #: ihtml/themes/default/login.tpl:34
 msgid ""
 "Please use your username and your password to log into the site "
 "administration system."
 msgstr ""
+"Por favor use su nombre de usuario y contraseña para iniciar sesión en el "
+"sistema de administración."
 
 #: ihtml/themes/default/login.tpl:77 ihtml/themes/default/login.tpl:80
 msgid "Sign in"
-msgstr ""
+msgstr "Entrando"
 
 #: ihtml/themes/default/login.tpl:78
 msgid "Click here to log in"
-msgstr ""
+msgstr "Pulse aquí para iniciar sesión"
 
 #: ihtml/themes/default/snapshotdialog.tpl:3
 msgid "Restoring object snapshots"
-msgstr ""
+msgstr "Recuperar instantanea de objetos"
 
 #: ihtml/themes/default/snapshotdialog.tpl:6
 msgid ""
 "This procedure will restore a snapshot of the selected object. It will "
 "replace the existing object after pressing the restore button."
 msgstr ""
+"El procedimiento recuperara una instancia de los objetos seleccionados. "
+"Serán reemplazados los objetos actuales despues de presionar el botón "
+"recuperar."
 
 #: ihtml/themes/default/snapshotdialog.tpl:9
 msgid ""
@@ -6168,24 +6208,32 @@ msgid ""
 "For some objects it is only nescessary to open and save them again (goFon), "
 "but some entries must be recreated manually (glpi)."
 msgstr ""
+"Recuerde que la configuración DNS y las entradas de la base de datos no "
+"pueden ser recuperados. Para algunos objetos es solo necesario abrirlos y "
+"grabarlos de nuevo (goFon), pero algunas entradas deben ser creadas "
+"manualmente (glpi)."
 
 #: ihtml/themes/default/snapshotdialog.tpl:12
 msgid ""
 "Don't forget to check references to other objects, for example does the "
 "selected printer still exists ?"
 msgstr ""
+"No olvide comprobar referencias a otros objetos, por ejemplo ¿todavía "
+"existen las impresoras seleccionadas?"
 
 #: ihtml/themes/default/snapshotdialog.tpl:29
 msgid "There is no snapshot available that could be restored"
-msgstr ""
+msgstr "No hay instantaneas disponibles que puedan ser recuperadas"
 
 #: ihtml/themes/default/snapshotdialog.tpl:31
 msgid "Choose a snapshot and click the folder image, to restore the snapshot"
 msgstr ""
+"Elija una instantanea y pulse en la imagen carpeta, para recuperar la "
+"instantanea"
 
 #: ihtml/themes/default/snapshotdialog.tpl:49
 msgid "Creating object snapshots"
-msgstr ""
+msgstr "Creando instantaneas de objetos"
 
 #: ihtml/themes/default/snapshotdialog.tpl:52
 msgid ""
@@ -6193,6 +6241,9 @@ msgid ""
 "stored inside a special branch of your directory system and can be restored "
 "later on."
 msgstr ""
+"Este procedimiento creará una instantánea de los objetos seleccionados. "
+"Serán guardados dentro de una carpeta especial de sus sistema de archivos y "
+"podrán recuperados posteriormente."
 
 #: ihtml/themes/default/snapshotdialog.tpl:55
 msgid ""
@@ -6209,25 +6260,22 @@ msgid "Reason for generating this snapshot"
 msgstr ""
 
 #: ihtml/themes/default/accountexpired.tpl:15
-#, fuzzy
 msgid "Your password has expired. Please choose a new one!"
-msgstr "No tiene permisos para cambiar su contraseña."
+msgstr "Su contraseña ha caducado. ¡Por favor seleccione una nueva!"
 
 #: ihtml/themes/default/accountexpired.tpl:23
 #: ihtml/themes/default/accountexpired.tpl:27
-#, fuzzy
 msgid "Old password"
-msgstr "contraseña"
+msgstr "Contraseña antigua"
 
 #: ihtml/themes/default/accountexpired.tpl:41
 #: ihtml/themes/default/accountexpired.tpl:45
-#, fuzzy
 msgid "Verify password"
-msgstr "Contraseña del usuario"
+msgstr "Confirmar contraseña"
 
 #: ihtml/themes/default/conflict.tpl:2
 msgid "Session conflict detected"
-msgstr ""
+msgstr "Detectado conflicto de sesiones."
 
 #: ihtml/themes/default/conflict.tpl:6
 msgid ""
@@ -6242,26 +6290,28 @@ msgid ""
 "Ignoring this message will change/destroy the data you're currently editing, "
 "so please close multiple windows and log in again."
 msgstr ""
+"Ignorando este mensaje cambiara/eliminara los datos que esta actualmente "
+"editando. Por favor, cierre las otras ventanas y vuelva a entrar."
 
 #: ihtml/themes/default/conflict.tpl:14
 msgid "Logout"
-msgstr ""
+msgstr "Salir"
 
 #: ihtml/themes/default/framework.tpl:8 ihtml/themes/default/framework.tpl:11
 msgid "Main"
-msgstr ""
+msgstr "Inicio"
 
 #: ihtml/themes/default/framework.tpl:16
 msgid "Help"
-msgstr ""
+msgstr "Ayuda"
 
 #: ihtml/themes/default/framework.tpl:21 ihtml/themes/default/framework.tpl:25
 msgid "Sign out"
-msgstr ""
+msgstr "Salir"
 
 #: ihtml/themes/default/framework.tpl:29
 msgid "Signed in:"
-msgstr ""
+msgstr "Entrando"
 
 #: ihtml/themes/default/framework.tpl:32
 msgid "GOsa main menu"
@@ -6272,10 +6322,13 @@ msgid ""
 "This may be used by several groups. Please double check if your really want "
 "to do this since there is no way for GOsa to get your data back."
 msgstr ""
+"Esta puede ser usada por varios grupos. Si está seguro de lo que quiere "
+"hacer pulse dos veces, ya que no hay manera de que GOsa recupere "
+"posteriormente la información."
 
 #: ihtml/themes/default/logout.tpl:5
 msgid "Your GOsa session has expired!"
-msgstr ""
+msgstr "¡Su sesión de GOsa ha caducado!"
 
 #: ihtml/themes/default/logout.tpl:7
 msgid ""
@@ -6283,10 +6336,13 @@ msgid ""
 "the past. For security reasons, the session has been closed. To continue "
 "with administrative tasks, please sign in again."
 msgstr ""
+"La última interacción con el interfaz web de GOsa fue hace ya bastante "
+"tiempo. Por razones de seguridad, la sesión ha sido cancelada. Para "
+"continuar con las tareas administrativas, vuelva a iniciar sesión de nuevo."
 
 #: ihtml/themes/default/logout.tpl:10
 msgid "Sign in again"
-msgstr ""
+msgstr "Entrando de nuevo"
 
 #: ihtml/themes/default/sizelimit.tpl:3
 msgid ""
@@ -6295,20 +6351,28 @@ msgid ""
 "long timeouts would be to limit your search to smaller values and use "
 "filters to get the entries you are looking for."
 msgstr ""
+"La opción 'tamaño limite' permite unas operaciones con LDAP mas rápidas y "
+"protege al servidor LDAP de tener una mayor carga. La manera mas fácil de "
+"manipular grandes bases de datos sin grandes perdidas de tiempo es limitar "
+"la búsqueda a valores pequeños y usar filtros para encontrar las entradas "
+"que este buscando."
 
 #: ihtml/themes/default/sizelimit.tpl:6
 msgid "Please choose the way to react for this session"
-msgstr ""
+msgstr "Por favor elija la forma de reaccionar en esta sesión"
 
 #: ihtml/themes/default/sizelimit.tpl:9
 msgid "ignore this error and show all entries the LDAP server returns"
 msgstr ""
+"ignore este error y muestre todas las entradas devueltas por el servidor LDAP"
 
 #: ihtml/themes/default/sizelimit.tpl:10
 msgid ""
 "ignore this error and show all entries that fit into the defined sizelimit "
 "and let me use filters instead"
 msgstr ""
+"ignore este error y muestre todas las entradas que coincidan con el tamaño "
+"limite definido y active el uso de filtros en su lugar"
 
 #: ihtml/themes/default/copyPasteDialog.tpl:1
 msgid "Copy & paste wizard"
@@ -6320,6 +6384,10 @@ msgid ""
 "combinations make no sense. GOsa shows the relevant attributes. Please "
 "maintain the values below to fullfill the policies."
 msgstr ""
+"Algunos valores necesitan ser únicos en todo el directorio mientras que "
+"algunas combinaciones no tienen sentido. GOsa mostrara los atributos "
+"importantes. Por favor no cambie los valores aquí indicados para cumplir las "
+"políticas."
 
 #: ihtml/themes/default/copyPasteDialog.tpl:9
 msgid "Remember that some properties like taken snapshots will not be copied!"
@@ -6337,19 +6405,19 @@ msgstr ""
 
 #: ihtml/themes/default/copyPasteDialog.tpl:30
 msgid "Operation complete"
-msgstr ""
+msgstr "Operación incompleta"
 
 #: ihtml/themes/default/help.tpl:9
 msgid "GOsa help viewer"
-msgstr ""
+msgstr "Ventana de ayuda de GOsa"
 
 #: ihtml/themes/default/help.tpl:15
 msgid "Index"
-msgstr ""
+msgstr "índice"
 
 #: ihtml/themes/default/islocked.tpl:2
 msgid "Locking conflict detected"
-msgstr ""
+msgstr "Detectado conflicto de Bloqueos"
 
 #: ihtml/themes/default/islocked.tpl:9
 msgid ""
@@ -6357,11 +6425,13 @@ msgid ""
 "webbrowser during the edit operation. You may want to take over the lock by "
 "pressing the 'Edit anyway' button."
 msgstr ""
+"Si esta detección de bloqueo es falsa, la otra persona cerro su navegador "
+"mientras estaba editando. Puede eliminar el archivo de bloqueo en ese caso, "
+"pulsando en el botón <i>Eliminar</i>."
 
 #: ihtml/themes/default/islocked.tpl:15
-#, fuzzy
 msgid "Read only"
-msgstr "Recargar lista"
+msgstr "Solo lectura"
 
 #: ihtml/themes/default/logout-close.tpl:5
 msgid "Your GOsa session has been closed!"
@@ -7284,3 +7354,4 @@ msgstr ""
 #, fuzzy
 #~ msgid "GOsa logs"
 #~ msgstr "servicio de registro de GOsa"
+
