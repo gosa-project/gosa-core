@@ -1,8 +1,8 @@
 #! /bin/sh /usr/share/dpatch/dpatch-run
-## 03_fix_class_mapping.dpatch by  <cajus@localhost>
+## 03_fix_class_mapping.dpatch by  <cajus@debian.org>
 ##
 ## All lines beginning with `## DP:' are a description of the patch.
-## DP: No description.
+## DP: Fix location of auto-generated class mapping file
 
 @DPATCH@
 diff -urNad gosa-core~/include/class_config.inc gosa-core/include/class_config.inc

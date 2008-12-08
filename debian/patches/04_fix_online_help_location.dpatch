@@ -1,8 +1,8 @@
 #! /bin/sh /usr/share/dpatch/dpatch-run
-## 04_fix_online_help_location.dpatch by  <cajus@frost>
+## 04_fix_online_help_location.dpatch by  <cajus@debian.org>
 ##
 ## All lines beginning with `## DP:' are a description of the patch.
-## DP: No description.
+## DP: Fix location of auto-generated online help.
 
 @DPATCH@
 diff -urNad gosa-core~/html/helpviewer.php gosa-core/html/helpviewer.php

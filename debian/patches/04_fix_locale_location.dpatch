@@ -1,8 +1,8 @@
 #! /bin/sh /usr/share/dpatch/dpatch-run
-## 04_fix_locale_location.dpatch by  <cajus@localhost>
+## 04_fix_locale_location.dpatch by  <cajus@debian.org>
 ##
 ## All lines beginning with `## DP:' are a description of the patch.
-## DP: No description.
+## DP: Fixed location of auto-generated locales
 
 @DPATCH@
 diff -urNad gosa-2.6.0+svn11288~/include/php_setup.inc gosa-2.6.0+svn11288/include/php_setup.inc

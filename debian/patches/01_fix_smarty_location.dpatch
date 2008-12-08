@@ -1,8 +1,8 @@
 #! /bin/sh /usr/share/dpatch/dpatch-run
-## 01_fix_smarty_location.dpatch by  <cajus@localhost>
+## 01_fix_smarty_location.dpatch by  <cajus@debian.org>
 ##
 ## All lines beginning with `## DP:' are a description of the patch.
-## DP: No description.
+## DP: Adapt location for debian packaged smarty
 
 @DPATCH@
 diff -urNad gosa-core~/include/php_setup.inc gosa-core/include/php_setup.inc

@@ -1,8 +1,8 @@
 #! /bin/sh /usr/share/dpatch/dpatch-run
-## 02_fix_template_location.dpatch by  <cajus@localhost>
+## 02_fix_template_location.dpatch by  <cajus@debian.org>
 ##
 ## All lines beginning with `## DP:' are a description of the patch.
-## DP: No description.
+## DP: Fix location of configuration template.
 
 @DPATCH@
 diff -urNad gosa-core~/include/functions.inc gosa-core/include/functions.inc
