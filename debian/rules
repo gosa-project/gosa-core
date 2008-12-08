@@ -24,6 +24,7 @@ build: patch build-indep
         #*                please stand by                *
         #*************************************************
 
+
 build-indep: build-indep-stamp
 build-indep-stamp: configure-stamp 
 	touch $@
@@ -60,6 +61,7 @@ binary-common:
 	dh_installman
 	rm -rf debian/gosa/usr/share/gosa/include/smarty
 	dh_strip
+	dh_desktop
 	dh_compress
 	# This is an ugly workaround to preserve gosa.conf from beeing compressed. Excluding it
 	# above does not work, because the manual page will match the expression, too.
@@ -79,4 +81,6 @@ binary-indep: build-indep install-indep
 	$(MAKE) -f debian/rules DH_OPTIONS=-i binary-common
 
 binary: binary-indep
+
+binary-arch:
 .PHONY: build clean binary-indep binary install install-indep configure
