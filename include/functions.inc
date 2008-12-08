@@ -87,6 +87,7 @@ define ("DEBUG_SESSION",32);
 define ("DEBUG_CONFIG", 64);
 define ("DEBUG_ACL",    128);
 define ("DEBUG_SI",     256);
+define ("DEBUG_MAIL",   512); // mailAccounts, imap, sieve etc.
 
 /* Rewrite german 'umlauts' and spanish 'accents'
    to get better results */
