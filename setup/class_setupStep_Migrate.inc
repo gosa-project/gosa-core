@@ -1008,6 +1008,7 @@ class Step_Migrate extends setup_step
         }
       }
 
+
       /* Print out results 
        */
       if($GOsa_25_found){
@@ -1032,14 +1033,14 @@ class Step_Migrate extends setup_step
         $this->checks['acls']['STATUS']    = TRUE;
         $this->checks['acls']['STATUS_MSG']= _("Ok");
         $this->checks['acls']['ERROR_MSG'] = $str;
-      }elseif($GOsa_25_found){
+      }else{
         $this->checks['acls']['STATUS']    = FALSE;
         $this->checks['acls']['STATUS_MSG']= _("Failed");
         $this->checks['acls']['ERROR_MSG']= _("There is no GOsa administrator account inside your LDAP.")."&nbsp;";
         $this->checks['acls']['ERROR_MSG'].= "<input type='submit' name='create_acls' value='"._("Create")."'>";
       }
     }
-    return($ldap->count()>=1);
+    return($GOsa_26_found);
   }
 
 
