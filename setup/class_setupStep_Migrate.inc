@@ -1021,7 +1021,7 @@ class Step_Migrate extends setup_step
         $this->checks['acls']['ERROR_MSG'] = $str;
         $this->checks['acls']['ERROR_MSG'].= _("There is no valid GOsa 2.6 administrator account inside your LDAP.")."&nbsp;";
         $this->checks['acls']['ERROR_MSG'].= "<input type='submit' name='migrate_acls' value='"._("Migrate")."'>";
-        $this->checks['acls']['ERROR_MSG'].= "<input type='submit' name='create_acls' value='"._("Create new")."'>";
+        $this->checks['acls']['ERROR_MSG'].= "<input type='submit' name='create_acls' value='"._("Create")."'>";
       }elseif($GOsa_26_found){
         $str = "";
         if(!empty($valid_users)){

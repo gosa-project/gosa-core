@@ -906,7 +906,7 @@ class ogroup extends plugin
         foreach($test as $dn){
           $str .= "<li>".$dn."</li>";
         }
-        $message[] = sprintf(_("These systems are already configured by other object groups and cannot be added:<br><ul>%s</ul>"),$str);
+        $message[] = sprintf(_("These systems are already configured by other object groups and cannot be added:")."<br><ul>%s</ul>",$str);
       }
     }
 
