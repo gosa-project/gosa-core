@@ -44,15 +44,15 @@ class msgPool
     }
     if (count($name) == 1){
       if($type == ""){
-        return (_("This object will be deleted:")."<br>".msgPool::buildList($name)."<br><br>");
+        return (_("This object will be deleted:")."<br>".msgPool::buildList($name));
       }else{
-        return (sprintf(_("This '%s' object will be deleted:"),$type). "<br>".msgPool::buildList($name)."<br><br>");
+        return (sprintf(_("This '%s' object will be deleted:"),$type). "<br>".msgPool::buildList($name));
       }
     }
     if($type == ""){
-      return (sprintf(_("These objects will be deleted: %s"), "<br>".msgPool::buildList($name)."<br><br>"));
+      return (sprintf(_("These objects will be deleted: %s"), "<br>".msgPool::buildList($name)));
     }else{
-      return (sprintf(_("These '%s' objects will be deleted: %s"),$type, "<br>".msgPool::buildList($name)."<br><br>"));
+      return (sprintf(_("These '%s' objects will be deleted: %s"),$type, "<br>".msgPool::buildList($name)));
     }
   }
 
@@ -359,14 +359,15 @@ class msgPool
 
   public static function buildList($data)
   {
-    $objects= "";
+    $objects= "<ul>";
     foreach ($data as $key => $value){
       if (is_numeric($key)){
-        $objects.= "<br>\n<i>$value</i>";
+        $objects.= "<li>\n<i>$value</i></li>";
       } else {
-        $objects.= "<br>\n$value (<i>$key</i>)";
+        $objects.= "<li>\n$value (<i>$key</i>)</li>";
       }
     }
+    $objects.= "</ul>";
     return($objects);
   }
 
@@ -491,12 +492,12 @@ class msgPool
       return sprintf(_("This '%s' is still in use by this object: %s"), $type, "<br><br>".$objects);
     }
     if (count($objects) == 1){
-      return sprintf(_("This '%s' is still in use by this object: %s"), $type, "<br><br>".msgPool::buildList($objects));
+      return sprintf(_("This '%s' is still in use by this object: %s"), $type, "<br>".msgPool::buildList($objects));
     }
     if (count($objects) == 0){
       return sprintf(_("This '%s' is still in use."), $type);
     }
-    return sprintf(_("This '%s' is still in use by these objects: %s"), $type, "<br><br>".msgPool::buildList($objects));
+    return sprintf(_("This '%s' is still in use by these objects: %s"), $type, "<br>".msgPool::buildList($objects));
   }
 
 
