@@ -6463,7 +6463,7 @@ msgstr ""
 
 #: ihtml/themes/default/islocked.tpl:16
 msgid "Read only"
-msgstr "Nur-Lesen"
+msgstr "Nur anschauen"
 
 #: ihtml/themes/default/logout-close.tpl:5
 msgid "Your GOsa session has been closed!"
