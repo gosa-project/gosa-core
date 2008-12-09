@@ -149,19 +149,19 @@ class ogroup extends plugin
         - Check() will complain if such a system is assigned to this object group.
      */ 
     $base = $this->config->current['BASE'];
-    $res    = get_list("(objectClass=gotoWorkstation)","none" , 
+    $res    = get_list("(|(objectClass=gotoWorkstation)(objectClass=gotoTerminal))","none" , 
         $base, array("dn"),GL_NO_ACL_CHECK|GL_SUBSEARCH);
     $ws_dns = array();
     foreach($res as $data){
       $ws_dns[] = $data['dn'];
     }
     $res=get_list("(&(member=*)(objectClass=gosaGroupOfNames))","none",
-        $base, array("dn","member"),GL_NO_ACL_CHECK|GL_SUBSEARCH);
+        $base, array("dn","member", "gosaGroupObjects"),GL_NO_ACL_CHECK|GL_SUBSEARCH);
     $this->used_workstations = array();
     foreach($res as $og){
       if($og['dn'] == $this->dn) continue;
       $test = array_intersect($ws_dns,$og['member']);
-      if(count($test)){
+      if(($og['gosaGroupObjects'] == "[W]" || $og['gosaGroupObjects'] == "[T]") && count($test)){
         $this->used_workstations = array_merge($this->used_workstations,$test);
       }
     }
@@ -429,8 +429,14 @@ class ogroup extends plugin
       session::set("ogfilter", $ogfilter);
       $this->reload();
 
-      /* Calculate actual groups */
-      $smarty->assign("objects", $this->convert_list($this->objects));
+      /* Calculate actual groups / remove entries that are already inside... */
+      $strippedObjects= array();
+      foreach ($this->objects as $key => $value){
+        if (!isset($this->member[$key])){
+          $strippedObjects[$key]= $value;
+        }
+      }
+      $smarty->assign("objects", $this->convert_list($strippedObjects));
 
       /* Show dialog */
       $smarty->assign("search_image", get_template_path('images/lists/search.png'));
@@ -705,8 +711,10 @@ class ogroup extends plugin
 
           /* Skip workstations which are already assigned to an object group.
            */
-          if(in_array($attrs['dn'],$this->used_workstations)){
-            continue;
+          if ($this->gosaGroupObjects == "[W]" || $this->gosaGroupObjects == "[T]"){
+            if(in_array($attrs['dn'],$this->used_workstations)){
+              continue;
+            }
           }
 
           $type= $this->getObjectType($attrs);
@@ -890,21 +898,16 @@ class ogroup extends plugin
     }
 
     /* Check if we have workstations assigned, that are already assigned to
-        another object group.
-     */
-    $test =array_intersect($this->used_workstations,$this->member); 
-    if(count($test)){
-      $str = "";
-      $cnt = 0;
-      foreach($test as $dn){
-        $str .= $dn.",  ";
-        $cnt ++;
-        if($cnt > 2){
-          $str .= "...";
-          break;
+        another object group.  */
+    if ($this->gosaGroupObjects == "[W]" || $this->gosaGroupObjects == "[T]" ) {
+      $test =array_intersect($this->used_workstations,$this->member); 
+      if(count($test)){
+        $str = "";
+        foreach($test as $dn){
+          $str .= "<li>".$dn."</li>";
         }
+        $message[] = sprintf(_("These systems are already configured by other object groups and cannot be added:<br><ul>%s</ul>"),$str);
       }
-#      $message[] = sprintf(_("The following workstations are already member in another object group and can not be added: '%s'"),$str);
     }
 
     $ldap = $this->config->get_ldap_link();
