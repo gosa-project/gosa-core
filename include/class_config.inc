@@ -104,8 +104,15 @@ class config  {
 
 
   function parse($filename)
-  { 
-    $this->data = array(); 
+  {
+
+    $this->data = array(
+        "TABS"      => array(), 
+        "LOCATIONS" => array(), 
+        "SERVERS"   => array(), 
+        "MAIN"      => array(), 
+        "MENU"      => array(), 
+        "SERVICE"   => array());
 
     $this->last_modified = filemtime($filename);
     $this->filename = $filename;
