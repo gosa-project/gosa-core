@@ -648,20 +648,32 @@ class userManagement extends plugin
       /* Get entry check current status */
       $val = $this->list[$s_entry];
       if (!preg_match("/w/",$this->ui->get_permissions($val['dn'],"users/password"))){
-        msg_dialog::display(_("Password change"),
+        msg_dialog::display(_("Password locking"),
             _("You have no permission to change the lock status for this user!"),WARNING_DIALOG);
       }else{
         $pwd = $val['userPassword'][0];
         $method = passwordMethod::get_method($pwd,$val['dn']);
+        $success= false;
         if($method instanceOf passwordMethod){
           if($method->is_locked($this->config,$val['dn'])){
-            $method->unlock_account($this->config,$val['dn']);
+            $success= $method->unlock_account($this->config,$val['dn']);
           }else{
-            $method->lock_account($this->config,$val['dn']);
+            $success= $method->lock_account($this->config,$val['dn']);
+          }
+
+          /* Check for success */
+          if (!$success){
+            $hn= $method->get_hash_name();
+            if (is_array($hn)){
+              $hn= $hn[0];
+            }
+            msg_dialog::display(_("Password locking"),
+              sprintf(_("Password method '%s' does not support locking. Account has not been locked!"), $hn),WARNING_DIALOG);
           }
         }else{
           // Can't lock unknown methods.
         }
+
       }
     }
 
