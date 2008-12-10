@@ -420,7 +420,7 @@ class groupManagement extends plugin
        ********************/
 
       /* Remove lock */
-    if(isset($_POST['delete_multiple_group_cance'])){
+    if(isset($_POST['delete_multiple_group_cancel'])){
 
       /* Remove lock file after successfull deletion */
       $this->remove_lock();
