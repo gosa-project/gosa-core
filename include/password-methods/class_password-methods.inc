@@ -92,7 +92,7 @@ class passwordMethod
 
       /* Check if this entry is already locked. */
       if(preg_match("/^[^\}]*+\}!/",$pwd)){
-        return;
+        return(TRUE);
       }     
       
       /* Lock entry */
@@ -129,7 +129,7 @@ class passwordMethod
 
       /* Check if this entry is already locked. */
       if(!preg_match("/^[^\}]*+\}!/",$pwd)){
-        return;
+        return (TRUE);
       }     
       
       /* Lock entry */
