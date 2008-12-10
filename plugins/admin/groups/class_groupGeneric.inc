@@ -226,7 +226,7 @@ class group extends plugin
 
     /* This is always an account */
     $this->is_account= TRUE;
-    $this->reload();
+    $this->reload(TRUE);
   }
 
   function execute()
@@ -641,7 +641,7 @@ class group extends plugin
   }
 
   /* Reload data */
-  function reload()
+  function reload($silent = FALSE)
   {
     /* Fix regex string */
     $gufilter = session::get("gufilter");
@@ -724,7 +724,7 @@ class group extends plugin
     }
   
     /* If more than max users are found, display a message to warn the user */
-    if($i == $MaxUser){
+    if($i == $MaxUser && !$silent){
       msg_dialog::display(_("Configuration error"), sprintf(_("Search returned too many results. Not displaying more than %s entries!"), $MaxUser), ERROR_DIALOG);
     }
     
