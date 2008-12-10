@@ -99,26 +99,19 @@ class config  {
       xml_set_object($this->parser, $this);
       xml_set_element_handler($this->parser, "tag_open", "tag_close");
       $this->parse($this->filename);
-#     if(session::is_set('plist')){
-#       session::un_set('plist');
-#     }
-#     if(session::is_set('plug')){
-#       session::un_set('plug');
-#     }
-#     if(isset($_GET['plug'])){
-#       unset($_GET['plug']);
-#     }
     }
   }  
 
 
   function parse($filename)
   { 
+    $this->data = array(); 
+
     $this->last_modified = filemtime($filename);
     $this->filename = $filename;
     $fh= fopen($filename, "r"); 
     $xmldata= fread($fh, 100000);
-    fclose($fh); 
+    fclose($fh);
     if(!xml_parse($this->parser, chop($xmldata))){
       $msg = sprintf(_("XML error in gosa.conf: %s at line %d"),
             xml_error_string(xml_get_error_code($this->parser)),
