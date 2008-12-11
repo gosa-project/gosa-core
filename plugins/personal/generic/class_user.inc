@@ -1071,11 +1071,11 @@ class user extends plugin
     $this->cleanup();
 
     /* Update current locale settings, if we have edited ourselves */
-    $ui = session::get('ui');
+    $ui = session::global_get('ui');
     if(isset($this->attrs['preferredLanguage']) && $this->dn == $ui->dn){
       $ui->language = $this->preferredLanguage;
-      session::set('ui',$ui);
-      session::set('Last_init_lang',"update");
+      session::global_set('ui',$ui);
+      session::global_set('Last_init_lang',"update");
     }
 
     $ldap->cd ($this->dn);

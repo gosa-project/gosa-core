@@ -68,7 +68,7 @@ class groupManagement extends plugin
   	plugin::execute();
 
     /* Store these posts if the current object is locked (used by somebody else)*/
-    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/","/^item_selected/","/^remove_multiple_groups/","/^multiple_edit/","/menu_action/","/_group_/"));
+    session::global_set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/","/^item_selected/","/^remove_multiple_groups/","/^multiple_edit/","/menu_action/","/_group_/"));
 
     /* Save data */
     $s_action   = "";
@@ -616,7 +616,7 @@ class groupManagement extends plugin
     /* Prepare ldap class */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($base);
-    $ldap->set_size_limit(session::get('size_limit'));
+    $ldap->set_size_limit(session::global_get('size_limit'));
 
 
     /********************

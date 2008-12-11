@@ -173,20 +173,20 @@ class group extends plugin
     }
 
     /* Get global filter config */
-    if (!session::is_set("gufilter")){
+    if (!session::global_is_set("gufilter")){
       $ui= get_userinfo();
       $base= get_base_from_people($ui->dn);
       $gufilter= array( "dselect"       => $base,
           "regex"           => "*");
-      session::set("gufilter", $gufilter);
+      session::global_set("gufilter", $gufilter);
     }
-    $gufilter= session::get('gufilter');
+    $gufilter= session::global_get('gufilter');
     $gufilter['SubSearchGroup'] = false;
-    session::set('gufilter',$gufilter);
+    session::global_set('gufilter',$gufilter);
   
     if ($this->dn == "new"){
-      if(session::is_set('CurrentMainBase')){
-        $this->base = session::get('CurrentMainBase');
+      if(session::global_is_set('CurrentMainBase')){
+        $this->base = session::global_get('CurrentMainBase');
       }else{
         $ui= get_userinfo();
         $this->base= dn2base($ui->dn);
@@ -216,12 +216,12 @@ class group extends plugin
     }
 
     /* Get global filter config */
-    if (!session::is_set("sysfilter")){
+    if (!session::global_is_set("sysfilter")){
       $ui= get_userinfo();
       $base= get_base_from_people($ui->dn);
       $sysfilter= array( "depselect"       => $base,
           "regex"           => "*");
-      session::set("sysfilter", $sysfilter);
+      session::global_set("sysfilter", $sysfilter);
     }
 
     /* This is always an account */
@@ -344,7 +344,7 @@ class group extends plugin
     if ($this->show_ws_dialog){
 
       /* Save data */
-      $sysfilter= session::get("sysfilter");
+      $sysfilter= session::global_get("sysfilter");
       foreach( array("depselect", "regex") as $type){
         if (isset($_POST[$type])){
           $sysfilter[$type]= $_POST[$type];
@@ -357,7 +357,7 @@ class group extends plugin
         }
         $sysfilter['regex']= $s;
       }
-      session::set("sysfilter", $sysfilter);
+      session::global_set("sysfilter", $sysfilter);
 
       /* Get workstation list */
       $exclude= "";
@@ -426,7 +426,7 @@ class group extends plugin
     if ($this->group_dialog){
 
       /* Save data */
-      $gufilter= session::get("gufilter");
+      $gufilter= session::global_get("gufilter");
       foreach( array("dselect", "regex") as $type){
         if (isset($_POST[$type])){
           $gufilter[$type]= $_POST[$type];
@@ -447,7 +447,7 @@ class group extends plugin
         }
         $gufilter['regex']= $s;
       }
-      session::set("gufilter", $gufilter);
+      session::global_set("gufilter", $gufilter);
       $this->reload();
 
       /* Show dialog */
@@ -644,7 +644,7 @@ class group extends plugin
   function reload($silent = FALSE)
   {
     /* Fix regex string */
-    $gufilter = session::get("gufilter");
+    $gufilter = session::global_get("gufilter");
     $regex    = normalizeLdap($gufilter['regex']);
     $MaxUser  = $this->OnlyShowFirstEntries;
 

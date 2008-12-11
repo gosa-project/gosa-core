@@ -116,7 +116,7 @@ class password extends plugin
             change_password ($ui->dn, $_POST['new_password']);
             gosa_log ("User/password has been changed");
             $ui->password= $_POST['new_password'];
-            session::set('ui',$ui);
+            session::global_set('ui',$ui);
 #$this->handle_post_events("modify",array("userPassword" => $_POST['new_password']));
             return($smarty->fetch(get_template_path("changed.tpl", TRUE)));
           }

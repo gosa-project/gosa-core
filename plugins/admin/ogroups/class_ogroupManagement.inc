@@ -64,7 +64,7 @@ class ogroupManagement extends plugin
       Variable intialisation && Check posts for commands  
      ****************/
 
-    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/","/^item_selected/","/^remove_multiple_ogroups/","/^menu_action/"));
+    session::global_set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/","/^item_selected/","/^remove_multiple_ogroups/","/^menu_action/"));
 
     $smarty     = get_smarty();
     $s_action   = "";

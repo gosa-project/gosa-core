@@ -66,7 +66,7 @@ class userManagement extends plugin
     plugin::execute();
 
     /* LOCK MESSAGE Vars */
-    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^user_edit_/","/^user_del_/","/^item_selected/","/^remove_multiple_users/","/^multiple_edit/","/menu_action/"));
+    session::global_set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^user_edit_/","/^user_del_/","/^item_selected/","/^remove_multiple_users/","/^multiple_edit/","/menu_action/"));
 
     $smarty       = get_smarty();                 // Smarty instance
     $s_action     = "";                           // Contains the action to be taken

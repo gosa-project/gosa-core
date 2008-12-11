@@ -21,7 +21,7 @@
  */
 
 if (!$remove_lock){
-	session::set('plugin_dir',dirname(__FILE__));
+	session::global_set('plugin_dir',dirname(__FILE__));
 	$smarty->assign("iconmenu", $plist->show_iconmenu());
 	$smarty->assign("header", print_header(get_template_path('images/welcome.png'), sprintf(_("Welcome %s!"), $ui->cn)));
 	$smarty->assign("year", date("Y"));

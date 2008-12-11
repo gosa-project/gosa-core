@@ -86,14 +86,14 @@ class ogroup extends plugin
     $this->is_account= TRUE;
 
     /* Get global filter config */
-    if (!session::is_set("ogfilter")){
+    if (!session::global_is_set("ogfilter")){
       $ui= get_userinfo();
       $base= get_base_from_people($ui->dn);
       $ogfilter= array( "dselect"       => $base,
           "regex"           => "*");
-      session::set("ogfilter", $ogfilter);
+      session::global_set("ogfilter", $ogfilter);
     }
-    $ogfilter= session::get('ogfilter');
+    $ogfilter= session::global_get('ogfilter');
 
     /* Adjust flags */
     foreach( array(   "U" => "accounts",
@@ -114,15 +114,15 @@ class ogroup extends plugin
         $ogfilter[$val]= "";
       }
     }
-    session::set("ogfilter", $ogfilter);
+    session::global_set("ogfilter", $ogfilter);
   
-    if(session::is_set('CurrentMainBase')){
-     $this->base  = session::get('CurrentMainBase');
+    if(session::global_is_set('CurrentMainBase')){
+     $this->base  = global_session::get('CurrentMainBase');
     }
 
     /* Set base */
     if ($this->dn == "new"){
-      $this->base = session::get('CurrentMainBase');
+      $this->base = session::global_get('CurrentMainBase');
     } else {
       $this->base= preg_replace("/^[^,]+,".preg_quote(get_ou("ogroupRDN"), '/')."/","",$this->dn);
 
@@ -170,12 +170,12 @@ class ogroup extends plugin
     $this->orig_base = $this->base;
 
     /* Get global filter config */
-    if (!session::is_set("sysfilter")){
+    if (!session::global_is_set("sysfilter")){
       $ui= get_userinfo();
       $base= get_base_from_people($ui->dn);
       $sysfilter= array( "depselect"       => $base,
           "regex"           => "*");
-      session::set("sysfilter", $sysfilter);
+      session::global_set("sysfilter", $sysfilter);
     }
 
     /* Load member data */
@@ -309,7 +309,7 @@ class ogroup extends plugin
     /* Show ws dialog */
     if ($this->show_ws_dialog){
       /* Save data */
-      $sysfilter= session::get("sysfilter");
+      $sysfilter= session::global_get("sysfilter");
       foreach( array("depselect", "regex") as $type){
         if (isset($_POST[$type])){
           $sysfilter[$type]= $_POST[$type];
@@ -322,7 +322,7 @@ class ogroup extends plugin
         }
         $sysfilter['regex']= $s;
       }
-      session::set("sysfilter", $sysfilter);
+      session::global_set("sysfilter", $sysfilter);
 
       /* Get workstation list */
       $exclude= "";
@@ -401,7 +401,7 @@ class ogroup extends plugin
     if ($this->group_dialog){
 
       /* Save data */
-      $ogfilter= session::get("ogfilter");
+      $ogfilter= session::global_get("ogfilter");
       foreach( array("dselect", "regex") as $type){
         if (isset($_POST[$type])){
           $ogfilter[$type]= $_POST[$type];
@@ -426,7 +426,7 @@ class ogroup extends plugin
         }
         $ogfilter['regex']= $s;
       }
-      session::set("ogfilter", $ogfilter);
+      session::global_set("ogfilter", $ogfilter);
       $this->reload();
 
       /* Calculate actual groups / remove entries that are already inside... */
@@ -644,7 +644,7 @@ class ogroup extends plugin
     $filter                       = "";
     $objectClasses                = array();
     
-    $ogfilter               = session::get("ogfilter");
+    $ogfilter               = session::global_get("ogfilter");
     $regex                  = $ogfilter['regex'];
 
     $ldap= $this->config->get_ldap_link();

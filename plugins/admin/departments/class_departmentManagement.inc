@@ -61,7 +61,7 @@ class departmentManagement extends plugin
       Var init 
      ***************/
 
-    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^dep_edit_.*/","/^dep_del_.*/","/^item_selected/","/^remove_multiple_departments/","/^menu_action/"));
+    session::global_set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^dep_edit_.*/","/^dep_del_.*/","/^item_selected/","/^remove_multiple_departments/","/^menu_action/"));
 
     /* Reload departments */
     $smarty						= get_smarty();
@@ -413,7 +413,7 @@ class departmentManagement extends plugin
     $Regex        = $this->DivListDepartment->Regex;
   
     // Create Array to Test if we have a valid back button
-    $config = session::get('config');
+    $config = session::global_get('config');
     $tmp = $config->idepartments;
 
     $types = $this->get_support_departments();

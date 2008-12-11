@@ -97,8 +97,8 @@ class department extends plugin
 		/* Set base */
 		if ($this->dn == "new"){
 			$ui= get_userinfo();
-			if(session::is_set('CurrentMainBase')){
-				$this->base = session::get('CurrentMainBase');
+			if(session::global_is_set('CurrentMainBase')){
+				$this->base = global_session::get('CurrentMainBase');
 			}else{
 				$this->base= dn2base($ui->dn);
 			}

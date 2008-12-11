@@ -58,7 +58,7 @@ if (!$remove_lock){
     /* Check locking */
     if (($username= get_lock($ui->dn)) != ""){
       session::set('back_plugin',$plug);
-      session::set('LOCK_VARS_TO_USE',array("/^edit$/","/^plug$/"));
+      session::global_set('LOCK_VARS_TO_USE',array("/^edit$/","/^plug$/"));
       $lock_msg =  gen_locked_message ($username, $ui->dn);
 
     }else{

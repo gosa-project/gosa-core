@@ -60,7 +60,7 @@ class aclrole extends acl
     plugin::plugin($config, $dn);
 
     if($this->dn == "new"){
-      $this->base  = session::get('CurrentMainBase');
+      $this->base  = session::global_get('CurrentMainBase');
     }else{
       $this->base = preg_replace("/^[^,]+,[^,]+,/","",$this->dn);
       new log("view","acl/".get_class($this),$this->dn);
@@ -77,7 +77,7 @@ class aclrole extends acl
     ksort($this->gosaAclTemplate);
 
     /* Extract available categories from plugin info list */
-    $tmp= session::get('plist');
+    $tmp= session::global_get('plist');
     $plist= $tmp->info;
     $oc = array();
     foreach ($plist as $class => $acls){
@@ -177,7 +177,7 @@ class aclrole extends acl
       }
     }
 
-    $tmp= session::get('plist');
+    $tmp= session::global_get('plist');
     $plist= $tmp->info;
 
     /* Handle posts */
@@ -477,7 +477,7 @@ class aclrole extends acl
 
   function sort_by_priority($list)
   {
-    $tmp= session::get('plist');
+    $tmp= session::global_get('plist');
     $plist= $tmp->info;
     asort($plist);
     $newSort = array();
@@ -619,7 +619,7 @@ class aclrole extends acl
     /* Refresh users ACL */
     $ui= get_userinfo();
     $ui->loadACL();
-    session::set('ui',$ui);
+    session::global_set('ui',$ui);
   }
 
 
