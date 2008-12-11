@@ -273,9 +273,9 @@ function search($arr,$word)
   $useablewords               =array(); // Temporary searchword handling
   $tryword                    = "";     // Temporary searchword handling
   $result['global']['maxhit'] = 0;
-  session::un_set('lastresults');
-  session::un_set('parsed_search_keyword');
-  session::set('parsed_search_keyword',"");
+  session::global_un_set('lastresults');
+  session::global_un_set('parsed_search_keyword');
+  session::global_set('parsed_search_keyword',"");
 
   error_reporting(E_ALL | E_STRICT);
 
@@ -292,7 +292,7 @@ function search($arr,$word)
 
     /* Filter words smaler than 3 chars */
     if(strlen($tryword)>=$minwordlength) {
-      session::set('parsed_search_keyword', session::get('parsed_search_keyword').$tryword." ");
+      session::global_set('parsed_search_keyword', session::global_get('parsed_search_keyword').$tryword." ");
       $useablewords[]=$tryword;
     }
   }
@@ -344,7 +344,7 @@ function search($arr,$word)
   }
 
   /* Save result in Session, so we can mark words later, or go back to search, without searching again*/
-  session::set('lastresults',$result);
+  session::global_set('lastresults',$result);
   return($result);
 }
 
@@ -387,7 +387,7 @@ function searchlist($arr,$res,$maxresults)
   $ret.= "<br>
               ".sprintf(_("%s results for your search with the keyword %s"), 
                             "<b>".count($topten)."</b>", 
-                            "<b>".session::get('parsed_search_keyword')."</b>");
+                            "<b>".session::global_get('parsed_search_keyword')."</b>");
   $ret.="<br>
         <br>";
   return($ret);

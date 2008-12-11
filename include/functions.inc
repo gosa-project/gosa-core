@@ -1066,7 +1066,7 @@ function eval_sizelimit()
         isset($_POST['action']) && $_POST['action']=="newlimit"){
 
       session::global_set('size_limit', validate($_POST['new_limit']));
-      session::set('size_ignore', FALSE);
+      session::global_set('size_ignore', FALSE);
     }
 
     /* User wants no limits? */
@@ -1098,8 +1098,8 @@ function getMenuCache()
     $str.= chr($e+$n);
 
     if(isset($_GET[$str])){
-      if(session::is_set('maxC')){
-        $b= session::get('maxC');
+      if(session::global_is_set('maxC')){
+        $b= session::global_get('maxC');
         $q= "";
         for ($m=0, $l= strlen($b);$m<$l;$m++) {
           $q.= $b[$m++];
@@ -1287,14 +1287,14 @@ function gen_locked_message($user, $dn, $allow_readonly = FALSE)
 {
   global $plug, $config;
 
-  session::set('dn', $dn);
+  session::global_set('dn', $dn);
   $remove= false;
 
   /* Save variables from LOCK_VARS_TO_USE in session - for further editing */
-  if( session::is_set('LOCK_VARS_TO_USE') && count(session::get('LOCK_VARS_TO_USE'))){
+  if( session::global_is_set('LOCK_VARS_TO_USE') && count(session::global_get('LOCK_VARS_TO_USE'))){
 
     $LOCK_VARS_USED   = array();
-    $LOCK_VARS_TO_USE = session::get('LOCK_VARS_TO_USE');
+    $LOCK_VARS_TO_USE = session::global_get('LOCK_VARS_TO_USE');
 
     foreach($LOCK_VARS_TO_USE as $name){
 
@@ -1314,8 +1314,8 @@ function gen_locked_message($user, $dn, $allow_readonly = FALSE)
         }
       }
     }
-    session::set('LOCK_VARS_TO_USE',array());
-    session::set('LOCK_VARS_USED'  , $LOCK_VARS_USED);
+    session::global_set('LOCK_VARS_TO_USE',array());
+    session::global_set('LOCK_VARS_USED'  , $LOCK_VARS_USED);
   }
 
   /* Prepare and show template */
@@ -2454,7 +2454,7 @@ function change_password ($dn, $password, $mode=0, $hash= "")
   // Get all available encryption Methods
 
   // NON STATIC CALL :)
-  $methods = new passwordMethod(session::get('config'));
+  $methods = new passwordMethod(session::global_get('config'));
   $available = $methods->get_available_methods();
 
   // read current password entry for $dn, to detect the encryption Method

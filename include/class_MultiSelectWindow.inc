@@ -53,38 +53,38 @@ class MultiSelectWindow{
 
 	var $departments= array();
 
-  var $DivHeight          = "";
+	var $DivHeight          = "";
 
-  var $HideFilterPart     = false;
-  var $List_Bottom_Info   = "";
-  var $SaveAdditionalVars = array();  // Additional Post vars to store 
-  var $module= "";
+	var $HideFilterPart     = false;
+	var $List_Bottom_Info   = "";
+	var $SaveAdditionalVars = array();  // Additional Post vars to store 
+	var $module= "";
 
-  var $base_selection_regex = "*";
+	var $base_selection_regex = "*";
 
-  var $IgnoreAccount = TRUE;
-  var $footer = "";
-  var $post_id    = "1 2 3";
+	var $IgnoreAccount = TRUE;
+	var $footer = "";
+	var $post_id    = "1 2 3";
 
 	function ClearElementsList()
 	{
-    $ui =get_userinfo();
-    $deps = $ui->get_module_departments($this->module);
-    if(!in_array($this->selectedBase, $deps)){
-      $this->selectedBase = array_shift($deps);
-    }
+		$ui =get_userinfo();
+		$deps = $ui->get_module_departments($this->module);
+		if(!in_array($this->selectedBase, $deps)){
+			$this->selectedBase = array_shift($deps);
+		}
 		$this->array_Elements = array();
 	}
 
-  function HideFilterPart($bool = true)
-  {
-    $this->HideFilterPart = $bool;
-  }
+	function HideFilterPart($bool = true)
+	{
+		$this->HideFilterPart = $bool;
+	}
 
-  function SetHeight($height)
-  { 
-    $this->DivHeight=$height;
-  }
+	function SetHeight($height)
+	{ 
+		$this->DivHeight=$height;
+	}
 
 	/* Adds a regex input field to the current dialog */
 	function AddRegex($name,$string,$value,$conn,$image="images/lists/search.png")
@@ -93,7 +93,7 @@ class MultiSelectWindow{
 
 		/* Check if the given input field name was already used 
 		   for this type of dialog */	
-    $MultiDialogFilters = session::get('MultiDialogFilters');
+		$MultiDialogFilters = session::get('MultiDialogFilters');
 		if(isset($MultiDialogFilters[$this->filterName][$name])){
 			$arr['value']	= $MultiDialogFilters[$this->filterName][$name];
 			$this->$name = $arr['value'];
@@ -109,31 +109,31 @@ class MultiSelectWindow{
 	}
 
 
-  function SetDropDownHeaderMenu($str)
-  {
-    $this->string_ListDropDown = $str;
-  }
+	function SetDropDownHeaderMenu($str)
+	{
+		$this->string_ListDropDown = $str;
+	}
 
-  function GetDropDownHeaderMenu()
-  {
-    if(!empty($this->string_ListDropDown)){
-      $mid = new LayersMenu(6, 7, 2, 1);
-      $mid->setImgwww("./images/layer_menu/");
-      $mid->setIcondir("./images/layer_menu/");
-      $mid->setDirroot("../include/utils/layer-menu/");
-      $mid->setHorizontalMenuTpl("../ihtml/".get_template_path("",FALSE).'GOsa_MultiSelectHeader.ihtml');
-      $mid->setSubMenuTpl("../ihtml/".get_template_path("",FALSE).'GOsa_MultiSelectHeaderSubEntry.ihtml');
-      $mid->setMenuStructureString($this->string_ListDropDown);
-      $mid->parseStructureForMenu('menu');
-      $mid->newHorizontalMenu('menu');
-      $s = $mid->getHeader();
-      $s.= $mid->getMenu('menu');
-      $s.= $mid->getFooter('menu');
-      return($s);
-    }else{
-      return("");
-    }
-  }
+	function GetDropDownHeaderMenu()
+	{
+		if(!empty($this->string_ListDropDown)){
+			$mid = new LayersMenu(6, 7, 2, 1);
+			$mid->setImgwww("./images/layer_menu/");
+			$mid->setIcondir("./images/layer_menu/");
+			$mid->setDirroot("../include/utils/layer-menu/");
+			$mid->setHorizontalMenuTpl("../ihtml/".get_template_path("",FALSE).'GOsa_MultiSelectHeader.ihtml');
+			$mid->setSubMenuTpl("../ihtml/".get_template_path("",FALSE).'GOsa_MultiSelectHeaderSubEntry.ihtml');
+			$mid->setMenuStructureString($this->string_ListDropDown);
+			$mid->parseStructureForMenu('menu');
+			$mid->newHorizontalMenu('menu');
+			$s = $mid->getHeader();
+			$s.= $mid->getMenu('menu');
+			$s.= $mid->getFooter('menu');
+			return($s);
+		}else{
+			return("");
+		}
+	}
 
 
 	/* Contrucktion */
@@ -144,17 +144,17 @@ class MultiSelectWindow{
 		$this->SaveButtonString		= _("Save");
 		$this->CloseButtonString	= _("Close");
 		$this->filterName			= $filterName;
-    $this->ui = get_userinfo();
-    $this->post_id = preg_replace("/[^0-9]/","",microtime(TRUE));
+		$this->ui = get_userinfo();
+		$this->post_id = preg_replace("/[^0-9]/","",microtime(TRUE));
 
-    /* Check default values for SaveAdditionalVars */
-    $MultiDialogFilters = session::get('MultiDialogFilters');
-    foreach($this->SaveAdditionalVars as $name){
-      if(isset($MultiDialogFilters[$this->filterName][$name])){
-        $this->$name = $MultiDialogFilters[$this->filterName][$name];
-      }
-    }
-    
+		/* Check default values for SaveAdditionalVars */
+		$MultiDialogFilters = session::get('MultiDialogFilters');
+		foreach($this->SaveAdditionalVars as $name){
+			if(isset($MultiDialogFilters[$this->filterName][$name])){
+				$this->$name = $MultiDialogFilters[$this->filterName][$name];
+			}
+		}
+
 	}
 
 	/* Enables the headpage mode, which changes the list look */
@@ -220,62 +220,62 @@ class MultiSelectWindow{
 	}
 
 
-  /* Return default header part. With back, home and root icons and department selection */
-  function get_default_header($seperator= TRUE)
-  {
-    $enable_back = TRUE;
-    $enable_root = TRUE;
-    $enable_home = TRUE;
+	/* Return default header part. With back, home and root icons and department selection */
+	function get_default_header($seperator= TRUE)
+	{
+		$enable_back = TRUE;
+		$enable_root = TRUE;
+		$enable_home = TRUE;
 
-    $ui = get_userinfo();
+		$ui = get_userinfo();
 
-    /* Check if selectedBase = first available base */
-    $deps = $ui->get_module_departments($this->module);
+		/* Check if selectedBase = first available base */
+		$deps = $ui->get_module_departments($this->module);
 
-    if(!count($deps) || $deps[0] == $this->selectedBase){
-      $enable_back = FALSE;
-      $enable_root = FALSE;
-    }
-  
-    $listhead ="";
- 
-    /* Check if we are in users home  department */ 
-    if(!count($deps) ||$this->selectedBase == get_base_from_people($ui->dn)){
-      $enable_home = FALSE;
-    }
+		if(!count($deps) || $deps[0] == $this->selectedBase){
+			$enable_back = FALSE;
+			$enable_root = FALSE;
+		}
 
-    /* Draw root button */
-    if($enable_root){
-      $listhead .= " <input class='center' type='image' src='images/lists/root.png' align='middle'
-        title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;";
-    }else{
-      $listhead .= " <img src='images/lists/root_grey.png' class='center' alt='"._("Root")."'>&nbsp;";
-    }
+		$listhead ="";
 
-    /* Draw back button */
-    if($enable_back){
-      $listhead .= " <input class='center' type='image' align='middle' src='images/lists/back.png'
-        title='"._("Go up one department")."' alt='"._("Up")."'                name='dep_back'>&nbsp;";
-    }else{
-      $listhead .= " <img src='images/lists/back_grey.png' class='center' alt='"._("Up")."'>&nbsp;";
-    }
+		/* Check if we are in users home  department */ 
+		if(!count($deps) ||$this->selectedBase == get_base_from_people($ui->dn)){
+			$enable_home = FALSE;
+		}
 
-    /* Draw home button */
-    if($enable_home){
-      $listhead .= " <input class='center' type='image' align='middle' src='images/lists/home.png'
-        title='"._("Go to users department")."' alt='"._("Home")."'            name='dep_home'>&nbsp;";
-    }else{
-      $listhead .= " <img src='images/lists/home_grey.png' class='center' alt='"._("Home")."'>&nbsp;";
-    }
-   
-    /* And at least draw reload button, this button is enabled everytime */ 
-    $listhead .=  " <input class='center' type='image' src='images/lists/reload.png' align='middle'
-      title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;";
-    if ($seperator){
-      $listhead.= " <img   class='center' src='images/lists/seperator.png' align='middle' alt='-' height='16' width='1'>&nbsp;";
-    }
-    return ($listhead);
-  }
+		/* Draw root button */
+		if($enable_root){
+			$listhead .= " <input class='center' type='image' src='images/lists/root.png' align='middle'
+				title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;";
+		}else{
+			$listhead .= " <img src='images/lists/root_grey.png' class='center' alt='"._("Root")."'>&nbsp;";
+		}
+
+		/* Draw back button */
+		if($enable_back){
+			$listhead .= " <input class='center' type='image' align='middle' src='images/lists/back.png'
+				title='"._("Go up one department")."' alt='"._("Up")."'                name='dep_back'>&nbsp;";
+		}else{
+			$listhead .= " <img src='images/lists/back_grey.png' class='center' alt='"._("Up")."'>&nbsp;";
+		}
+
+		/* Draw home button */
+		if($enable_home){
+			$listhead .= " <input class='center' type='image' align='middle' src='images/lists/home.png'
+				title='"._("Go to users department")."' alt='"._("Home")."'            name='dep_home'>&nbsp;";
+		}else{
+			$listhead .= " <img src='images/lists/home_grey.png' class='center' alt='"._("Home")."'>&nbsp;";
+		}
+
+		/* And at least draw reload button, this button is enabled everytime */ 
+		$listhead .=  " <input class='center' type='image' src='images/lists/reload.png' align='middle'
+			title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;";
+		if ($seperator){
+			$listhead.= " <img   class='center' src='images/lists/seperator.png' align='middle' alt='-' height='16' width='1'>&nbsp;";
+		}
+		return ($listhead);
+	}
 
 	/* Add a checkbox to the filter element,
 	   the name specifies an existing class var to store the 'selection' */
@@ -288,13 +288,13 @@ class MultiSelectWindow{
 		}else{
 			/* Check if there was already a variable 
 			   for this dialog which we should use instead of the default*/
-      $MultiDialogFilters = session::get('MultiDialogFilters');
+			$MultiDialogFilters = session::get('MultiDialogFilters');
 			if(isset($MultiDialogFilters[$this->filterName][$name])){
 				$arr['default']	= $MultiDialogFilters[$this->filterName][$name];
 				$this->$name = $arr['default'];
 			}else{
 				$arr['default']	= $default; 
-        $this->$name = $default;
+				$this->$name = $default;
 			}
 			$arr['name'] 	      = $name;
 			$arr['string']	    = $string;
@@ -323,10 +323,10 @@ class MultiSelectWindow{
 		return($this->is_closed);
 	}
 
-  
-  function SetListFooter($str){
-    $this->footer = $str;
-  }
+
+	function SetListFooter($str){
+		$this->footer = $str;
+	}
 
 
 	/* Enable the close button */
@@ -341,19 +341,19 @@ class MultiSelectWindow{
 		$this->bool_DisplaySaveButton = $bool;
 	}
 
-  /* Add a list specific filter object to position 
-      1 on top of Information 
-      2 Between Information && Filter
-      3 Below the Filter Part */
-  function AddUserBoxToFilter($position)
-  {
-    return("");
-  }
+	/* Add a list specific filter object to position 
+	   1 on top of Information 
+	   2 Between Information && Filter
+	   3 Below the Filter Part */
+	function AddUserBoxToFilter($position)
+	{
+		return("");
+	}
 
-  function EnableJSLeaveMsg($ignore = TRUE)
-  {
-    $this->IgnoreAccount = !$ignore;
-  }
+	function EnableJSLeaveMsg($ignore = TRUE)
+	{
+		$this->IgnoreAccount = !$ignore;
+	}
 
 	/* Draw the list with all list elements and filters */
 	function Draw()
@@ -373,14 +373,14 @@ class MultiSelectWindow{
 		$divlist->SetSummary($this->string_Summary);
 		$divlist->SetEntriesPerPage(0); // 0 for scrollable list
 
-    /* Display list footer with summary of all listed entries */
-    if ($this->config->get_cfg_value("listSummary") == "true"){
-      $divlist->SetFooter($this->get_List_Bottom_Info());
-    }
-  
-    if($this->DivHeight != ""){
-      $divlist->SetHeight($this->DivHeight);
-    }
+		/* Display list footer with summary of all listed entries */
+		if ($this->config->get_cfg_value("listSummary") == "true"){
+			$divlist->SetFooter($this->get_List_Bottom_Info());
+		}
+
+		if($this->DivHeight != ""){
+			$divlist->SetHeight($this->DivHeight);
+		}
 
 		/* set Header informations 
 		 */
@@ -440,12 +440,12 @@ class MultiSelectWindow{
 		}
 		$smarty->assign("regexes"			, $regexes );
 
-    /* Hide Filter Part if Requested or empty */
-    if((empty($boxes)) && (empty($regexes)) || ($this->HideFilterPart)){
-		  $smarty->assign("Skip_Filter_Part",	true);
-    }else{ 
-		  $smarty->assign("Skip_Filter_Part",	false);
-    }
+		/* Hide Filter Part if Requested or empty */
+		if((empty($boxes)) && (empty($regexes)) || ($this->HideFilterPart)){
+			$smarty->assign("Skip_Filter_Part",	true);
+		}else{ 
+			$smarty->assign("Skip_Filter_Part",	false);
+		}
 
 		/* Assign alphabet and display it 
 		 */	
@@ -457,7 +457,7 @@ class MultiSelectWindow{
 		$smarty->assign("Title"				, $this->string_Title);
 		$smarty->assign("Information"		, $this->string_Information);
 		$smarty->assign("IgnoreAccount"		, $this->IgnoreAccount);
-    $smarty->assign("POST_ID", $this->post_id);
+		$smarty->assign("POST_ID", $this->post_id);
 
 		/* Check for exeeded sizelimit */
 		$smarty->assign("hint"				, print_sizelimit_warning());
@@ -505,90 +505,90 @@ class MultiSelectWindow{
 	function save_object()
 	{
 
-    /* Ensure that we do not handle posts for other dialogs 
-     */
-    if((isset($_POST['POST_ID']) && $_POST['POST_ID'] != $this->post_id) || 
-       (isset($_GET['post_id']) && $_GET['post_id'] != $this->post_id)){
-      return;
-    }
+		/* Ensure that we do not handle posts for other dialogs 
+		 */
+		if((isset($_POST['POST_ID']) && $_POST['POST_ID'] != $this->post_id) || 
+				(isset($_GET['post_id']) && $_GET['post_id'] != $this->post_id)){
+			return;
+		}
 
-    /* Get up to date config */
-    if(isset($this->parent->config)){
-      $this->config = $this->parent->config;
-    }
+		/* Get up to date config */
+		if(isset($this->parent->config)){
+			$this->config = $this->parent->config;
+		}
 
-    /* Update current base */
-    $s_action ="";
-    foreach($_POST as $key => $value){
-      if(preg_match("/^dep_back.*/i",$key)){
-        $s_action="back";
-      }elseif(preg_match("/^dep_root.*/",$key)){
-        $s_action="root";
-      }elseif(preg_match("/^dep_home.*/i",$key)){
-        $s_action="home";
-      }
-    }
+		/* Update current base */
+		$s_action ="";
+		foreach($_POST as $key => $value){
+			if(preg_match("/^dep_back.*/i",$key)){
+				$s_action="back";
+			}elseif(preg_match("/^dep_root.*/",$key)){
+				$s_action="root";
+			}elseif(preg_match("/^dep_home.*/i",$key)){
+				$s_action="home";
+			}
+		}
 
-    /* Save base selection from headpage selectbox*/
-    if(isset($_POST['CurrentMainBase'])){
-      $this->selectedBase = $_POST['CurrentMainBase'];
-    }
+		/* Save base selection from headpage selectbox*/
+		if(isset($_POST['CurrentMainBase'])){
+			$this->selectedBase = $_POST['CurrentMainBase'];
+		}
 
-    /* Homebutton is posted */
-    if($s_action=="home"){
-      $ui= get_userinfo();
-      $base = get_base_from_people($ui->dn);
-      $this->selectedBase= $base;
-    }
+		/* Homebutton is posted */
+		if($s_action=="home"){
+			$ui= get_userinfo();
+			$base = get_base_from_people($ui->dn);
+			$this->selectedBase= $base;
+		}
 
-    /* Open selected department
-       this is posted by the parent class MultiSelectWindow */
-    if(isset($_GET['act'])&& ($_GET['act'] == "dep_open")){
-      $s_entry = $_GET['dep_id'];
-      if (!isset($this->departments[$s_entry])){
+		/* Open selected department
+		   this is posted by the parent class MultiSelectWindow */
+		if(isset($_GET['act'])&& ($_GET['act'] == "dep_open")){
+			$s_entry = $_GET['dep_id'];
+			if (!isset($this->departments[$s_entry])){
 
-        msg_dialog::display(_("LDAP error"), sprintf(_("Inconsistent DN encoding detected: '%s'"), LDAP::fix($s_entry)), ERROR_DIALOG);
-      } else {
-        $this->selectedBase = $this->departments[$s_entry]['dn'];
-      }
-    }
+				msg_dialog::display(_("LDAP error"), sprintf(_("Inconsistent DN encoding detected: '%s'"), LDAP::fix($s_entry)), ERROR_DIALOG);
+			} else {
+				$this->selectedBase = $this->departments[$s_entry]['dn'];
+			}
+		}
 
-    /* back to the roots ^^ */
-    if($s_action=="root"){
-      $this->selectedBase=($this->config->current['BASE']);
-      $dep_id = $this->ui->get_module_departments($this->module);
-      if(isset($dep_id[key($dep_id)])){
-        $this->selectedBase = $dep_id[key($dep_id)];
-      }
-    }
+		/* back to the roots ^^ */
+		if($s_action=="root"){
+			$this->selectedBase=($this->config->current['BASE']);
+			$dep_id = $this->ui->get_module_departments($this->module);
+			if(isset($dep_id[key($dep_id)])){
+				$this->selectedBase = $dep_id[key($dep_id)];
+			}
+		}
 
-    /* If Back-button is pressed, move back one step in DN */
-    if($s_action=="back"){
+		/* If Back-button is pressed, move back one step in DN */
+		if($s_action=="back"){
 
 
-      /* Get parent deprtment and check if we are allowed to step in it */
-      $base_back= preg_replace("/^[^,]+,/", "", $this->selectedBase);
-      $dep_id = $this->ui->get_module_departments($this->module);
-      if(in_array_ics($base_back,$dep_id)){
-        if(in_array($base_back,$this->config->departments)){
-          $this->selectedBase = $base_back;
-        }
-      }
-    }
+			/* Get parent deprtment and check if we are allowed to step in it */
+			$base_back= preg_replace("/^[^,]+,/", "", $this->selectedBase);
+			$dep_id = $this->ui->get_module_departments($this->module);
+			if(in_array_ics($base_back,$dep_id)){
+				if(in_array($base_back,$this->config->departments)){
+					$this->selectedBase = $base_back;
+				}
+			}
+		}
 
 		if(isset($_POST['MultiSelectWindow'.$this->filterName])){
 
-      /* Save some additional vars */
-      $MultiDialogFilters = session::get('MultiDialogFilters');
-      foreach($this->SaveAdditionalVars as $name){
-        if(isset($_POST[$name])){
-          if(isset($this->$name)){
-            $this->$name = $_POST[$name];
-            $MultiDialogFilters[$this->filterName][$name] = $_POST[$name];
-          }
-        }
-      }
-      session::set('MultiDialogFilters',$MultiDialogFilters);
+			/* Save some additional vars */
+			$MultiDialogFilters = session::get('MultiDialogFilters');
+			foreach($this->SaveAdditionalVars as $name){
+				if(isset($_POST[$name])){
+					if(isset($this->$name)){
+						$this->$name = $_POST[$name];
+						$MultiDialogFilters[$this->filterName][$name] = $_POST[$name];
+					}
+				}
+			}
+			session::set('MultiDialogFilters',$MultiDialogFilters);
 
 			/* Check posts from checkboxes 
 			 */
@@ -602,18 +602,18 @@ class MultiSelectWindow{
 				}
 
 				/* Save settings in out session */
-        $MultiDialogFilters = session::get('MultiDialogFilters');
+				$MultiDialogFilters = session::get('MultiDialogFilters');
 				$MultiDialogFilters[$this->filterName][$box['name']] = $this->$box['name'];
-        session::set('MultiDialogFilters',$MultiDialogFilters);
+				session::set('MultiDialogFilters',$MultiDialogFilters);
 			}
 
 			/* Check regex posts */
 			foreach($this->array_Regexes as $key => $box){
 				$this->array_Regexes[$key]['value'] = $_POST[$box['name']];
 				$this->$box['name'] = $_POST[$box['name']];
-        $MultiDialogFilters = session::get('MultiDialogFilters');
+				$MultiDialogFilters = session::get('MultiDialogFilters');
 				$MultiDialogFilters[$this->filterName][$box['name']] = $this->$box['name'];
-        session::set('MultiDialogFilters',$MultiDialogFilters);
+				session::set('MultiDialogFilters',$MultiDialogFilters);
 			}
 
 			/* call close/save if buttons are pressed */
@@ -637,15 +637,15 @@ class MultiSelectWindow{
 					$val = preg_replace("/\*\**/","*",$val);
 					$this->array_Regexes[$key]['value'] = $val;
 					$this->$box['name'] = $val;
-          $MultiDialogFilters = session::get('MultiDialogFilters');
-          $MultiDialogFilters[$this->filterName][$box['name']] =  $val;
-          session::set('MultiDialogFilters',$MultiDialogFilters);
+					$MultiDialogFilters = session::get('MultiDialogFilters');
+					$MultiDialogFilters[$this->filterName][$box['name']] =  $val;
+					session::set('MultiDialogFilters',$MultiDialogFilters);
 				}
 			}
 		}
 
-    /* Save currenlty selected base in session */
-    session::global_set("CurrentMainBase",$this->selectedBase);
+		/* Save currenlty selected base in session */
+		session::global_set("CurrentMainBase",$this->selectedBase);
 	}
 
 
@@ -653,22 +653,22 @@ class MultiSelectWindow{
 	function AddDepartments($base = false,$numtabs = 3,$empty_tabs_in_front = 0)
 	{
 		$this->DepartmentsAdded = true;
-    $this->Added_Departments = array();
-    $this->departments = array();
+		$this->Added_Departments = array();
+		$this->departments = array();
 
-    if(isset($this->Regex)){
-      $this->base_selection_regex = $this->Regex;
-    }
+		if(isset($this->Regex)){
+			$this->base_selection_regex = $this->Regex;
+		}
 
 		$linkopen = "<a href='?plug=".$_GET['plug']."&amp;post_id=".$this->post_id."&amp;act=dep_open&amp;dep_id=%s'>%s</a>";
-    $types = departmentManagement::get_support_departments();
-    $ui = get_userinfo();
-    $module_deps = $ui->get_module_departments($this->module);
-    $found_deps = array();
+		$types = departmentManagement::get_support_departments();
+		$ui = get_userinfo();
+		$module_deps = $ui->get_module_departments($this->module);
+		$found_deps = array();
 
 		/* check for a valid base */
 		if(!$base){
-      $base = $this->selectedBase;
+			$base = $this->selectedBase;
 		}
 
 		/* Create ldap obj and switch into base*/
@@ -676,129 +676,129 @@ class MultiSelectWindow{
 		$ldap->cd($base);
 
 		/* Get all departments within this subtree */
-    $s_filter = "";
-    $s_attrs  = array("description","objectClass");
-    $s_acls   = $this->module;
-    foreach($types as $name => $data){
-      $s_filter.= "(&(objectClass=gosaDepartment)(objectClass=".$data['OC'].")(".$data['ATTR']."=".$this->base_selection_regex."))";
-      $s_attrs[]= $data['ATTR']; 
-    }
+		$s_filter = "";
+		$s_attrs  = array("description","objectClass");
+		$s_acls   = $this->module;
+		foreach($types as $name => $data){
+			$s_filter.= "(&(objectClass=gosaDepartment)(objectClass=".$data['OC'].")(".$data['ATTR']."=".$this->base_selection_regex."))";
+			$s_attrs[]= $data['ATTR']; 
+		}
 
-    $tmp = get_list("(|".$s_filter.")",$s_acls,$this->selectedBase,$s_attrs,GL_NONE | GL_SIZELIMIT);
-    foreach($tmp as $attrs){
-      foreach($types as $name => $data){
-        if(in_array($data['OC'],$attrs['objectClass']) && isset($attrs[$data['ATTR']][0])){
-          $attrs['NAME'] = $attrs[$data['ATTR']][0];
-          $attrs['TYPE'] = $data;
-          $name = $attrs['NAME']." ".$attrs['dn'];
-          $departments[$name] = $attrs;
-          $found_deps[$name] = $attrs['dn'];
-          break;
-        }
-      }
-    }
+		$tmp = get_list("(|".$s_filter.")",$s_acls,$this->selectedBase,$s_attrs,GL_NONE | GL_SIZELIMIT);
+		foreach($tmp as $attrs){
+			foreach($types as $name => $data){
+				if(in_array($data['OC'],$attrs['objectClass']) && isset($attrs[$data['ATTR']][0])){
+					$attrs['NAME'] = $attrs[$data['ATTR']][0];
+					$attrs['TYPE'] = $data;
+					$name = $attrs['NAME']." ".$attrs['dn'];
+					$departments[$name] = $attrs;
+					$found_deps[$name] = $attrs['dn'];
+					break;
+				}
+			}
+		}
 
-    /* Detect allowed departments 
-     */
-    $deps = array_intersect($found_deps,$module_deps);
-    uksort($deps, 'strnatcasecmp');
-    $key = 0;
-    foreach($deps as $name => $dn){
-      $key ++;
-      $val = $departments[$name];
-      $this->departments[$key] = $val;
-      $img = "<image src='".$val['TYPE']['IMG']."' class='center'>";
+		/* Detect allowed departments 
+		 */
+		$deps = array_intersect($found_deps,$module_deps);
+		uksort($deps, 'strnatcasecmp');
+		$key = 0;
+		foreach($deps as $name => $dn){
+			$key ++;
+			$val = $departments[$name];
+			$this->departments[$key] = $val;
+			$img = "<image src='".$val['TYPE']['IMG']."' class='center'>";
 
 			/* Add spacer cols to divlist 
-       */
+			 */
 			$row = array();
-      if($empty_tabs_in_front){
-        for($i = 0; $i < $empty_tabs_in_front ; $i ++){
-          $row[] = array("string"=>"&nbsp;", "attach" => "style='text-align:center;width:20px;'");
-        }
-      }
+			if($empty_tabs_in_front){
+				for($i = 0; $i < $empty_tabs_in_front ; $i ++){
+					$row[] = array("string"=>"&nbsp;", "attach" => "style='text-align:center;width:20px;'");
+				}
+			}
 
-      /* Create entry name 
-       */
-      $name = $val['NAME'];
-      if(isset($val['description'])){
-        $name .=  " - [".$val["description"][0]."]";
-      }
+			/* Create entry name 
+			 */
+			$name = $val['NAME'];
+			if(isset($val['description'])){
+				$name .=  " - [".$val["description"][0]."]";
+			}
 
-      /* Add departments
-       */
+			/* Add departments
+			 */
 			$row[]=array("string"=> $img,"attach"=>"style='text-align:center;width:20px;'");
 			$row[]=array("string"=>sprintf($linkopen,$key,$name), "attach" => "style=''");
 
-      /* Add spacer tabs 
-       */
+			/* Add spacer tabs 
+			 */
 			if($numtabs > 2){	
 				for($i = 2 ; $i < $numtabs;$i++){
-          if(isset( $this->array_Header[$i + $empty_tabs_in_front]['attach'])){
-            $row[] = array("string"=>"&nbsp;","attach" => $this->array_Header[$i + $empty_tabs_in_front]['attach']);
-          }else{
-            $row[] = array("string"=>"&nbsp;");
-          }
+					if(isset( $this->array_Header[$i + $empty_tabs_in_front]['attach'])){
+						$row[] = array("string"=>"&nbsp;","attach" => $this->array_Header[$i + $empty_tabs_in_front]['attach']);
+					}else{
+						$row[] = array("string"=>"&nbsp;");
+					}
 				}
 			}
 			$this->AddElement($row);
-      $this->Added_Departments[] = $row;
+			$this->Added_Departments[] = $row;
 		}
 	}
 
 
-  function create_department_list($modules)
-  { 
-    $departments = array();
-    $ui= get_userinfo();
-    $first = "";
-    $found = FALSE;
-    $options ="";
+	function create_department_list($modules)
+	{ 
+		$departments = array();
+		$ui= get_userinfo();
+		$first = "";
+		$found = FALSE;
+		$options ="";
 
-    $ids = $this->config->idepartments;
-    $d   = $ui->get_module_departments($modules);
-    $k_ids = array_keys($ids);
-    $deps = array_intersect($d,$k_ids);
-    foreach($k_ids as $department){
-      $departments[$department] = $ids[$department];
-    }
+		$ids = $this->config->idepartments;
+		$d   = $ui->get_module_departments($modules);
+		$k_ids = array_keys($ids);
+		$deps = array_intersect($d,$k_ids);
+		foreach($k_ids as $department){
+			$departments[$department] = $ids[$department];
+		}
 
-    foreach($departments as $value => $name){
+		foreach($departments as $value => $name){
 
-      /* Keep first base dn in mind, we could need this
-       *  info if no valid base was found
-       */
-      if(empty($first)) {
-        $first = $value;
-      }
+			/* Keep first base dn in mind, we could need this
+			 *  info if no valid base was found
+			 */
+			if(empty($first)) {
+				$first = $value;
+			}
 
-      if ($this->selectedBase == $value){
-        $found = TRUE;
-        $options.= "<option selected='selected' value='".$value."'>$name</option>";
-      } else {
-        $options.= "<option value='".$value."'>$name</option>";
-      }
-    }
+			if ($this->selectedBase == $value){
+				$found = TRUE;
+				$options.= "<option selected='selected' value='".$value."'>$name</option>";
+			} else {
+				$options.= "<option value='".$value."'>$name</option>";
+			}
+		}
 
-    /* The currently used base is not visible with your acl setup.
-     * Set base to first useable base.
-     */
-    if(!$found){
-      $this->selectedBase = $first;
-    }
+		/* The currently used base is not visible with your acl setup.
+		 * Set base to first useable base.
+		 */
+		if(!$found){
+			$this->selectedBase = $first;
+		}
 
-    return($options);
-  }
+		return($options);
+	}
 
-  function set_List_Bottom_Info($str)
-  {
-    $this->List_Bottom_Info = $str;
-  }
+	function set_List_Bottom_Info($str)
+	{
+		$this->List_Bottom_Info = $str;
+	}
 
-  function get_List_Bottom_Info()
-  {
-    return($this->List_Bottom_Info); 
-  }
+	function get_List_Bottom_Info()
+	{
+		return($this->List_Bottom_Info); 
+	}
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
