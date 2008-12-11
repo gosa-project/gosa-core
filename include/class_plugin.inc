@@ -152,7 +152,7 @@ class plugin
 
     /* Check if this entry was opened in read only mode */
     if(isset($_POST['open_readonly'])){
-      if(session::is_set("LOCK_CACHE")){
+      if(session::global_is_set("LOCK_CACHE")){
         $cache = &session::get("LOCK_CACHE");
         if(isset($cache['READ_ONLY'][$this->dn])){
           $this->read_only = TRUE;
@@ -259,7 +259,7 @@ class plugin
   function execute()
   {
     /* This one is empty currently. Fabian - please fill in the docu code */
-    session::set('current_class_for_help',get_class($this));
+    session::global_set('current_class_for_help',get_class($this));
 
     /* Reset Lock message POST/GET check array, to prevent perg_match errors*/
     session::set('LOCK_VARS_TO_USE',array());
@@ -990,7 +990,7 @@ class plugin
     if(count($leaf_deps)){
       $this->config->get_departments();
       $this->config->make_idepartments();
-      session::set("config",$this->config);
+      session::global_set("config",$this->config);
       $ui =get_userinfo();
       $ui->reset_acl_cache();
     }
@@ -1727,10 +1727,10 @@ class plugin
     }
 
     /* Update userinfo if necessary */
-    $ui = session::get('ui');
+    $ui = session::global_get('ui');
     if($ui->dn == $old_dn){
       $ui->dn = $new_dn;
-      session::set('ui',$ui);
+      session::global_set('ui',$ui);
       new log("view","acl/".get_class($this),$this->dn,array(),"Updated current object dn from '".$old_dn."' to '".$new_dn."'");
     }
 
@@ -1875,7 +1875,7 @@ class plugin
   function multiple_execute()
   {
     /* This one is empty currently. Fabian - please fill in the docu code */
-    session::set('current_class_for_help',get_class($this));
+    session::global_set('current_class_for_help',get_class($this));
 
     /* Reset Lock message POST/GET check array, to prevent perg_match errors*/
     session::set('LOCK_VARS_TO_USE',array());

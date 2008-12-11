@@ -63,9 +63,9 @@ function genIndex()
 {
   global $helpobject;
   $str = "";
-  $helpobject = session::get('helpobject');
+  $helpobject = session::global_get('helpobject');
   $ui= get_userinfo();
-  $test = new pluglist(session::get('config'), $ui);
+  $test = new pluglist(session::global_get('config'), $ui);
   $current_hl = "";
   foreach($helpobject['helpconf'] as $id => $attrs){
     $path = $test -> get_path($id);

@@ -52,4 +52,7 @@
      </table>
     </td>
   </tr>
+ {if $channel != ""}
+	<input type="hidden" name="_channel_" value="{$channel}">
+ {/if}
 </table>{$errors}{$focus}<input type="hidden" name="php_c_check" value="1"></form></body></html>

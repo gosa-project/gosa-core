@@ -75,14 +75,14 @@ class config  {
     /* Check if class_location.inc has changed, this is the case 
         if we have installed or removed plugins. 
      */
-    if(session::is_set("class_location.inc:timestamp")){
+    if(session::global_is_set("class_location.inc:timestamp")){
       $tmp = stat("../include/class_location.inc");
-      if($tmp['mtime'] != session::get("class_location.inc:timestamp")){
-        session::un_set("plist");
+      if($tmp['mtime'] != session::global_get("class_location.inc:timestamp")){
+        session::global_un_set("plist");
       }
     }
     $tmp = stat("../include/class_location.inc");
-    session::set("class_location.inc:timestamp",$tmp['mtime']);
+    session::global_set("class_location.inc:timestamp",$tmp['mtime']);
 
 
 
@@ -268,15 +268,15 @@ class config  {
         $this->ldap->referrals= $this->current['REFERRAL'];
       }
 
-      if (!session::is_set('size_limit')){
-        session::set('size_limit',$this->current['LDAPSIZELIMIT']);
-        session::set('size_ignore',$this->current['LDAPSIZEIGNORE']);
+      if (!session::global_is_set('size_limit')){
+        session::global_set('size_limit',$this->current['LDAPSIZELIMIT']);
+        session::global_set('size_ignore',$this->current['LDAPSIZEIGNORE']);
       }
     }
 
     $obj  = new ldapMultiplexer($this->ldap);
     if ($sizelimit){
-      $obj->set_size_limit(session::get('size_limit'));
+      $obj->set_size_limit(session::global_get('size_limit'));
     } else {
       $obj->set_size_limit(0);
     }
@@ -298,7 +298,7 @@ class config  {
     }
 
     if (isset($this->current['INITIAL_BASE'])){
-      session::set('CurrentMainBase',$this->current['INITIAL_BASE']);
+      session::global_set('CurrentMainBase',$this->current['INITIAL_BASE']);
     }
   
     /* Remove possibly added ',' from end of group and people ou */
@@ -966,11 +966,11 @@ class config  {
   {
     /* Skip check, if we've already mentioned the mismatch 
      */
-    if(session::is_set("LastChecked") && session::get("LastChecked") == $this->config_version) return;
+    if(session::global_is_set("LastChecked") && session::global_get("LastChecked") == $this->config_version) return;
   
     /* Remember last checked version 
      */
-    session::set("LastChecked",$this->config_version);
+    session::global_set("LastChecked",$this->config_version);
 
     $current = md5(file_get_contents(CONFIG_TEMPLATE_DIR."/gosa.conf"));
 

@@ -32,17 +32,107 @@ class session {
 	
 	}
 
+	public static function add_channel($name)
+	{
+		/* If there's already such kind of channel, skip... */
+		if (isset($_SESSION[$name])){
+			return (FALSE);
+		}
+
+		/* Allocate it... */
+		$_SESSION[$name]= array();
+		$_POST["_channel_"]= $name;
+		return (TRUE);
+	}
+
+	public static function remove_channel($name)
+	{
+		/* If there's already such kind of channel, skip... */
+		if (isset($_SESSION[$name])){
+			unset($_SESSION[$name]);
+			if (isset($_POST["_channel_"])){
+				unset($_POST["_channel_"]);
+			}
+			return (TRUE);
+		}
+
+		return (FALSE);
+	}
+
 	public static function is_set($name)
+	{
+		$channel= "";
+		if (isset($_POST['_channel_'])){
+			$channel= $_POST['_channel_'];
+		}
+
+		/* Global fallback if not set */
+		if ($channel == ""){
+			return(isset($_SESSION[$name]));
+		}
+
+		/* Sanity check */
+		if (!session::channel_exists($channel)){
+			msg_dialog::display(_("Internal error"), _("Requested channel does not exist! Please contact your Administrator."), FATAL_ERROR_DIALOG);
+		}
+
+		$channel= "gch_".$channel;
+		return(isset($_SESSION[$channel][$name]));
+	}
+
+	public static function global_is_set($name)
 	{
 		return(isset($_SESSION[$name]));
 	}
 
 	public static function set($name,$value)
 	{
+		$channel= "";
+		if (isset($_POST['_channel_'])){
+			$channel= $_POST['_channel_'];
+		}
+
+		/* Global fallback if not set */
+		if ($channel == ""){
+			$_SESSION[$name] = $value;
+		} else {
+			/* Sanity check */
+			if (!session::channel_exists($channel)){
+				msg_dialog::display(_("Internal error"), _("Requested channel does not exist! Please contact your Administrator."), FATAL_ERROR_DIALOG);
+			}
+			$_SESSION[$channel][$name] = $value;
+		}
+	}
+
+	public static function global_set($name,$value)
+	{
 		$_SESSION[$name] = $value;
 	}
 
 	public static function &get($name)
+	{
+		$channel= "";
+		if (isset($_POST['_channel_'])){
+			$channel= $_POST['_channel_'];
+		}
+
+		/* Global fallback if not set */
+		if ($channel == ""){
+			$ret = &$_SESSION[$name];
+			return($ret);
+		}
+
+		/* Sanity check */
+		if (!session::channel_exists($channel)){
+			msg_dialog::display(_("Internal error"), _("Requested channel does not exist! Please contact your Administrator."), FATAL_ERROR_DIALOG);
+		}
+
+		$channel= "gch_".$channel;
+		$ret = &$_SESSION[$channel][$name];
+		return($ret);
+	}
+
+	public static function &global_get($name)
 	{
 		$ret = &$_SESSION[$name];
 		return($ret);
@@ -50,7 +140,26 @@ class session {
 
 	public static function delete($name)
 	{
-		if(session::is_set($name)){
+		$channel= "";
+		if (isset($_POST['_channel_'])){
+			$channel= $_POST['_channel_'];
+		}
+
+		/* Global fallback if not set */
+		if ($channel == ""){
+			if(isset($_SESSION[$name])){
+				unset($_SESSION[$name]);
+			}
+		} else {
+			if(isset($_SESSION[$channel][$name])){
+				unset($_SESSION[$channel][$name]);
+			}
+		}
+	}
+
+	public static function global_delete($name)
+	{
+		if($_SESSION[$name]){
 			unset($_SESSION[$name]);
 		}
 	}
@@ -58,6 +167,11 @@ class session {
 	public static function un_set($name)
 	{
 		return(session::delete($name));
+	}
+
+	public static function global_un_set($name)
+	{
+		return(session::global_delete($name));
 	}
 
 	public static function start()

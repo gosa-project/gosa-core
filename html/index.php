@@ -132,9 +132,9 @@ session::set('errors',"");
 
 /* Check for java script */
 if(isset($_POST['javascript']) && $_POST['javascript'] == "true") {
-  session::set('js',TRUE);
+  session::global_set('js',TRUE);
 }elseif(isset($_POST['javascript'])) {
-  session::set('js',FALSE);
+  session::global_set('js',FALSE);
 }
 
 /* Check if gosa.conf (.CONFIG_FILE) is accessible */
@@ -145,7 +145,7 @@ if (!is_readable(CONFIG_DIR."/".CONFIG_FILE)){
 
 /* Parse configuration file */
 $config= new config(CONFIG_DIR."/".CONFIG_FILE, $BASE_DIR);
-session::set('DEBUGLEVEL',$config->get_cfg_value('DEBUGLEVEL'));
+session::global_set('DEBUGLEVEL',$config->get_cfg_value('DEBUGLEVEL'));
 if ($_SERVER["REQUEST_METHOD"] != "POST"){
   @DEBUG (DEBUG_CONFIG, __LINE__, __FUNCTION__, __FILE__, $config->data, "config");
 }
@@ -237,8 +237,8 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
   $message= "";
 
   /* Destroy old sessions, they cause a successfull login to relog again ...*/
-  if(session::is_set('_LAST_PAGE_REQUEST')){
-    session::set('_LAST_PAGE_REQUEST',time());
+  if(session::global_is_set('_LAST_PAGE_REQUEST')){
+    session::global_set('_LAST_PAGE_REQUEST',time());
   }
 
   if (!$htaccess_authenticated){
@@ -328,14 +328,14 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
       del_user_locks($ui->dn);
 
       /* Save userinfo and plugin structure */
-      session::set('ui',$ui);
-      session::set('session_cnt',0);
+      session::global_set('ui',$ui);
+      session::global_set('session_cnt',0);
 
       /* Let GOsa trigger a new connection for each POST, save
          config to session. */
       $config->get_departments();
       $config->make_idepartments();
-      session::set('config',$config);
+      session::global_set('config',$config);
 
       /* Restore filter settings from cookie, if available */
       if($config->get_cfg_value("storeFilterSettings") == "true"){
@@ -352,7 +352,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
             $cookie_vars= array("MultiDialogFilters","CurrentMainBase","plug");
             foreach($cookie_vars as $var){
               if(isset($cookie[$var])){
-                session::set($var,$cookie[$var]);
+                session::global_set($var,$cookie[$var]);
               }
             }
             if(isset($cookie['plug'])){

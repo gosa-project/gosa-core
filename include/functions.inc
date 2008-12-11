@@ -164,7 +164,7 @@ function make_seed() {
 /* Debug level action */
 function DEBUG($level, $line, $function, $file, $data, $info="")
 {
-  if (session::get('DEBUGLEVEL') & $level){
+  if (session::global_get('DEBUGLEVEL') & $level){
     $output= "DEBUG[$level] ";
     if ($function != ""){
       $output.= "($file:$function():$line) - $info: ";
@@ -219,10 +219,10 @@ function get_browser_language()
 /* Rewrite ui object to another dn */
 function change_ui_dn($dn, $newdn)
 {
-  $ui= session::get('ui');
+  $ui= session::global_get('ui');
   if ($ui->dn == $dn){
     $ui->dn= $newdn;
-    session::set('ui',$ui);
+    session::global_set('ui',$ui);
   }
 }
 
@@ -247,7 +247,7 @@ function get_template_path($filename= '', $plugin= FALSE, $path= "")
   /* Return plugin dir or root directory? */
   if ($plugin){
     if ($path == ""){
-      $nf= preg_replace("!^".$BASE_DIR."/!", "", session::get('plugin_dir'));
+      $nf= preg_replace("!^".$BASE_DIR."/!", "", session::global_get('plugin_dir'));
     } else {
       $nf= preg_replace("!^".$BASE_DIR."/!", "", $path);
     }
@@ -258,7 +258,7 @@ function get_template_path($filename= '', $plugin= FALSE, $path= "")
       return ("$BASE_DIR/ihtml/themes/default/$nf/$filename");
     }
     if ($path == ""){
-      return (session::get('plugin_dir')."/$filename");
+      return (session::global_get('plugin_dir')."/$filename");
     } else {
       return ($path."/$filename");
     }
@@ -411,7 +411,7 @@ function ldap_login_user_htaccess ($username)
   $ui->loadACL();
 
   /* TODO: check java script for htaccess authentication */
-  session::set('js',true);
+  session::global_set('js',true);
 
   return ($ui);
 }
@@ -603,10 +603,10 @@ function add_lock($object, $user)
   /* Remember which entries were opened as read only, because we 
       don't need to remove any locks for them later.
    */
-  if(!session::is_set("LOCK_CACHE")){
-    session::set("LOCK_CACHE",array(""));
+  if(!session::global_is_set("LOCK_CACHE")){
+    session::global_set("LOCK_CACHE",array(""));
   }
-  $cache = &session::get("LOCK_CACHE");
+  $cache = &session::global_get("LOCK_CACHE");
   if(isset($_POST['open_readonly'])){
     $cache['READ_ONLY'][$object] = TRUE;
     return;
@@ -675,8 +675,8 @@ function del_lock ($object)
   /* If this object was opened in read only mode then 
       skip removing the lock entry, there wasn't any lock created.
     */
-  if(session::is_set("LOCK_CACHE")){
-    $cache = &session::get("LOCK_CACHE");
+  if(session::global_is_set("LOCK_CACHE")){
+    $cache = &session::global_get("LOCK_CACHE");
     if(isset($cache['READ_ONLY'][$object])){
       unset($cache['READ_ONLY'][$object]);
       return;
@@ -1025,7 +1025,7 @@ function get_list($filter, $category, $base= "", $attributes= array(), $flags= G
 function check_sizelimit()
 {
   /* Ignore dialog? */
-  if (session::is_set('size_ignore') && session::get('size_ignore')){
+  if (session::global_is_set('size_ignore') && session::global_get('size_ignore')){
     return ("");
   }
 
@@ -1033,8 +1033,8 @@ function check_sizelimit()
   if (session::is_set('limit_exceeded') && session::get('limit_exceeded')){
     $smarty= get_smarty();
     $smarty->assign('warning', sprintf(_("The size limit of %d entries is exceed!"),
-          session::get('size_limit')));
-    $smarty->assign('limit_message', sprintf(_("Set the new size limit to %s and show me this message if the limit still exceeds"), '<input type="text" name="new_limit" maxlength="10" size="5" value="'.(session::get('size_limit') +100).'">'));
+          session::global_get('size_limit')));
+    $smarty->assign('limit_message', sprintf(_("Set the new size limit to %s and show me this message if the limit still exceeds"), '<input type="text" name="new_limit" maxlength="10" size="5" value="'.(session::global_get('size_limit') +100).'">'));
     return($smarty->fetch(get_template_path('sizelimit.tpl')));
   }
 
@@ -1044,7 +1044,7 @@ function check_sizelimit()
 
 function print_sizelimit_warning()
 {
-  if (session::is_set('size_limit') && session::get('size_limit') >= 10000000 ||
+  if (session::global_is_set('size_limit') && session::global_get('size_limit') >= 10000000 ||
       (session::is_set('limit_exceeded') && session::get('limit_exceeded'))){
     $config= "<input type='submit' name='edit_sizelimit' value="._("Configure").">";
   } else {
@@ -1065,25 +1065,25 @@ function eval_sizelimit()
     if (tests::is_id($_POST['new_limit']) &&
         isset($_POST['action']) && $_POST['action']=="newlimit"){
 
-      session::set('size_limit', validate($_POST['new_limit']));
+      session::global_set('size_limit', validate($_POST['new_limit']));
       session::set('size_ignore', FALSE);
     }
 
     /* User wants no limits? */
     if (isset($_POST['action']) && $_POST['action']=="ignore"){
-      session::set('size_limit', 0);
-      session::set('size_ignore', TRUE);
+      session::global_set('size_limit', 0);
+      session::global_set('size_ignore', TRUE);
     }
 
     /* User wants incomplete results */
     if (isset($_POST['action']) && $_POST['action']=="limited"){
-      session::set('size_ignore', TRUE);
+      session::global_set('size_ignore', TRUE);
     }
   }
   getMenuCache();
   /* Allow fallback to dialog */
   if (isset($_POST['edit_sizelimit'])){
-    session::set('size_ignore',FALSE);
+    session::global_set('size_ignore',FALSE);
   }
 }
 

@@ -50,7 +50,7 @@ ini_set("session.gc_maxlifetime",24*60*60);
 
 /* Start session */
 session::start();
-session::set('DEBUGLEVEL',1);
+session::global_set('DEBUGLEVEL',1);
 session::set('errorsAlreadyPosted',array());
 
 /* Attribute initialization, reset errors */
@@ -69,30 +69,30 @@ if (!(is_dir($smarty->compile_dir) && is_writable($smarty->compile_dir))){
 }
 
 /* Get posted language */
-if(!session::is_set('language')){
-  session::set('language',get_browser_language());
+if(!session::global_is_set('language')){
+  session::global_set('language',get_browser_language());
 }
 if(isset($_POST['lang_selected'])){
   if($_POST['lang_selected'] != ""){
-    session::set('lang',$_POST['lang_selected']);
+    session::global_set('lang',$_POST['lang_selected']);
   }else{
-    session::set('lang',get_browser_language());
+    session::global_set('lang',get_browser_language());
   }
 }
 
 /* Check for js */
-if (!isset($_GET['js']) && !session::is_set('js')){
+if (!isset($_GET['js']) && !session::global_is_set('js')){
   echo '<script language="JavaScript" type="text/javascript">';
   echo '  location = "setup.php?js=true";';
   echo '</script>';
 
-  session::set('js',FALSE);
+  session::global_set('js',FALSE);
 } elseif(isset($_GET['js'])) {
-  session::set('js',TRUE);
+  session::global_set('js',TRUE);
 }
 
 
-$lang = session::get('lang');
+$lang = session::global_get('lang');
 /* Append .UTF-8 to language string if necessary */
 if(!preg_match("/utf(-)8$/i",$lang)){
   $lang .= ".UTF-8";
@@ -131,7 +131,7 @@ $focus.= 'next_msg_dialog();';
 $focus.= '</script>';
 
 /* show web frontend */
-$setup = session::get('setup');
+$setup = session::global_get('setup');
 $smarty->assign("contents"  , $display);
 $smarty->assign("navigation", $setup->get_navigation_html());
 $smarty->assign("header", $setup->get_header_html());

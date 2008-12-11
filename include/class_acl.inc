@@ -132,7 +132,7 @@ class acl extends plugin
     }
 
     /* Objects */
-    $tmp= session::get('plist');
+    $tmp= session::global_get('plist');
     $plist= $tmp->info;
     $cats = array();
     if (isset($this->parent) && $this->parent !== NULL){
@@ -230,7 +230,7 @@ class acl extends plugin
     /* Call parent execute */
     plugin::execute();
 
-    $tmp= session::get('plist');
+    $tmp= session::global_get('plist');
     $plist= $tmp->info;
 
     /* Handle posts */
@@ -607,7 +607,7 @@ class acl extends plugin
 
   function sort_by_priority($list)
   {
-    $tmp= session::get('plist');
+    $tmp= session::global_get('plist');
     $plist= $tmp->info;
     asort($plist);
     $newSort = array();
@@ -664,7 +664,7 @@ class acl extends plugin
   {
     $display= "<input type='hidden' name='acl_dummy_0_0_0' value='1'>";
     $cols= 3;
-    $tmp= session::get('plist');
+    $tmp= session::global_get('plist');
     $plist= $tmp->info;
     asort($plist);
 
@@ -721,7 +721,7 @@ class acl extends plugin
 
       /* Object header */
 			$tname= preg_replace("/[^a-z0-9]/i","_",$name);
-      if(session::get('js')) {
+      if(session::global_get('js')) {
         if(isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) {
           $display.= "\n<table style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>".
                      "\n  <tr>".
@@ -771,7 +771,7 @@ class acl extends plugin
       $cnt= 1;
       $splist= $plist[preg_replace('%^.*/%', '', $key)]['plProvidedAcls'];
 #      asort($splist);
-      if(session::get('js')) {
+      if(session::global_get('js')) {
         if(isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) {
           $display.= "\n  <tr id='tr_$tname' style='vertical-align:top;height:0px;'>".
                      "\n    <td colspan=".$cols.">".
@@ -821,7 +821,7 @@ class acl extends plugin
        $display.= str_repeat("\n    <td style='border-top:1px solid #A0A0A0; width:".(int)(100/$cols)."%'>&nbsp;</td>", $cols-$cnt); 
       }
 
-      if(session::get('js')) {
+      if(session::global_get('js')) {
         if(isset($_SERVER['HTTP_USER_AGENT']) && (preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) || (preg_match("/ie/i",$_SERVER['HTTP_USER_AGENT']))) {
           $display.= "\n        </table>".
                      "\n      </div>".
@@ -1173,7 +1173,7 @@ class acl extends plugin
     /* Refresh users ACLs */
     $ui= get_userinfo();
     $ui->loadACL();
-    session::set('ui',$ui);
+    session::global_set('ui',$ui);
   }
 
 

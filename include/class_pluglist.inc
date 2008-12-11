@@ -201,7 +201,7 @@ class pluglist {
  
 						$entries= $entries."<p class=\"menuitem\" ".
 							"onClick='return question(\""._("You are currently editing a database entry. Do you want to dismiss the changes?")."\", \"$href\");'>";
-						if(session::get('js')){
+						if(session::global_get('js')){
 							$entries.= _($plHeadline)."</p>\n";
 						} else {
 							$entries.= "<a class=\"menuitem\" ".
@@ -328,7 +328,7 @@ class pluglist {
 						}
 						$entries= $entries."<td class=\"iconmenu\" style=\"width:20%;\" onClick='location.href=\"".$href."\"'".
 							">";
-							if(session::get('js')){
+							if(session::global_get('js')){
 								$entries.= "<img $isize border=0 align=middle src=\"$image".
 									"\" alt=\"*\">&nbsp;".
 									_($plHeadline);

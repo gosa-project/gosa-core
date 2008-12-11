@@ -32,14 +32,14 @@ header("Content-type: text/html; charset=UTF-8");
 session::start();
 
 /* If no config object is found in the session, abort help */
-if (!session::is_set('config')){
+if (!session::global_is_set('config')){
   new log("security","all/all","",array(),"Help viewer called without session") ;
   header ("Location: index.php");
   exit;
 }
 
-$ui= session::get('ui');
-$config= session::get('config');
+$ui= session::global_get('ui');
+$config= session::global_get('config');
 
 /* Language setup */
 $lang= $config->get_cfg_value("language");
@@ -60,7 +60,6 @@ bindtextdomain($domain, LOCALE_DIR);
 textdomain($domain);
 @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
 
-$config= session::get('config');
 $smarty->compile_dir= $config->get_cfg_value("compile", "/var/spool/gosa/");
 $smarty->assign("title", "GOsa - "._("Help browser"));
 
@@ -68,11 +67,11 @@ $smarty->assign("title", "GOsa - "._("Help browser"));
  */
 
 /* Generate helpobject */
-if(session::is_set('helpobject')){
-  $helpobject = session::get('helpobject');
+if(session::global_is_set('helpobject')){
+  $helpobject = session::global_get('helpobject');
 }else{
 
-  $plist = session::get('plist');
+  $plist = session::global_get('plist');
 
   $helpobject['lang']         = $lang; 
   $helpobject['helpconf']     = array();  
@@ -98,11 +97,11 @@ $forward  ="node1.html";
 
 $helpdir ="";
 /* Every class which is called within a tab, stores its name in the Session.
- * If session::is_set('current_class_for_help') is true, 
+ * If session::global_is_set('current_class_for_help') is true, 
  *  get the helpfile specified in the xml file and display it.
  * Unset this Session entry, to avoid displaying it again.
  */
-if(session::is_set('current_class_for_help')){
+if(session::global_is_set('current_class_for_help')){
 
   /* Create new XML parser with the path to the Xml file */
   $xml = new parseXml("../doc/guide.xml");
@@ -111,7 +110,7 @@ if(session::is_set('current_class_for_help')){
   $str = $xml->parse();
 
   /* __LANG__ is used as placeholder for the used language*/
-  $helpdir= @preg_replace("/__LANG__/i",$lang,$str[(session::get('current_class_for_help'))]['PATH']);
+  $helpdir= @preg_replace("/__LANG__/i",$lang,$str[(session::global_get('current_class_for_help'))]['PATH']);
 
   /* If there is no entry in the xml file for this class, display an error message */
   if($helpdir == ""){
@@ -120,25 +119,25 @@ if(session::is_set('current_class_for_help')){
     $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
     $display= (  $header.$smarty->fetch(get_template_path('help.tpl')));
     echo $display;
-    session::un_set('current_class_for_help');
+    session::global_un_set('current_class_for_help');
     exit();  
   }
  
   /* Save filename */
-  $helpobject['file']= $str[(session::get('current_class_for_help'))]['FILE'];
+  $helpobject['file']= $str[(session::global_get('current_class_for_help'))]['FILE'];
   
   /* Save path to the file */
   $helpobject['currentplug']  = $helpdir;
   
   /* Avoid displaying the same help every time */
   if(isset($_GET['pg'])){
-    session::un_set('current_class_for_help');
+    session::global_un_set('current_class_for_help');
   }
 
 }elseif(isset($_GET['plug'])){
   /* This displays helpfiles depending on the current $_GET[plug] */
   $ui= get_userinfo();
-  $tmp                          = new pluglist(session::get('config'), $ui);
+  $tmp                          = new pluglist($config, $ui);
   $path                         = $tmp->get_path($_GET['plug']);
   $helpobject['currentplug']    = $path;
   $helpobject['file']           = "index.html";
@@ -177,7 +176,7 @@ if(isset($_GET['pg'])){
 $helpdir.="/";
 
 /* Save current settings */
-session::set('helpobject',$helpobject);
+session::global_set('helpobject',$helpobject);
 
 /* 
  * Display management 
@@ -245,7 +244,7 @@ if(isset($_POST['search'])){
    * parse it, rework links images and so on */
   $index = readfiles($helpdir,$prefix,$suffix,false,$helpobject['file']);
 
-  $lastresults = session::get('lastresults');
+  $lastresults = session::global_get('lastresults');
 
   /* if this page is result from a search, mark the search strings */
   if(isset($_GET['mark'])){

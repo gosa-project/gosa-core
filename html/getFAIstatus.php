@@ -25,10 +25,10 @@
 @require_once ("functions.inc");
 
 session::start();
-session::set('errorsAlreadyPosted',array());
+session::global_set('errorsAlreadyPosted',array());
 
 /* Logged in? Simple security check */
-if (!session::is_set('ui')){
+if (!session::global_is_set('ui')){
   new log("security","unknown","",array(),"Error: getbin.php called without session") ;
   header ("Location: index.php");
   exit;
@@ -39,7 +39,7 @@ if(!isset($_GET['mac'])){
 	return;
 }
 
-$config = session::get("config");
+$config = session::global_get("config");
 $o =  new gosaSupportDaemon();
 $res = $o->get_entries_by_mac(split(",",$_GET['mac']));
 foreach($res as $entry){

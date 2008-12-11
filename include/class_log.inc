@@ -52,11 +52,11 @@ class log {
     }
 
     $entry = array(); 
-    if(!session::is_set('config')){
+    if(!session::global_is_set('config')){
       $entry['user']= "unkown";
     }else{
 
-      $this->config = session::get('config');
+      $this->config = session::global_get('config');
       $ui           = get_userinfo(); 
       $entry['user']= @$ui->dn;
     }

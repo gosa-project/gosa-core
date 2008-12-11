@@ -230,7 +230,7 @@ class tabs
                   font-size:13px; 
                   color: gray;'
           title=\"$title\">".$title."</div>";
-      }elseif (session::get('js')==FALSE){	
+      }elseif (session::global_get('js')==FALSE){	
         $display.= "<div ".$notify." class=\"$style[$index]\"><input type=\"submit\" name=\"$class\"".
           " class=\"$style[$index]\" value=\"$title\"></div></td>";
       } else {			 

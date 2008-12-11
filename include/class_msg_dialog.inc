@@ -135,7 +135,7 @@ class msg_dialog
 			$smarty->assign("s_Title",$this->s_Title);
 			$smarty->assign("i_ID",$this->i_ID);
 			$smarty->assign("frame",false);
-			$smarty->assign("JS",session::get('js'));
+			$smarty->assign("JS",session::global_get('js'));
 			$smarty->assign("IE",preg_match("/MSIE/", $_SERVER['HTTP_USER_AGENT']));
 			return($smarty->fetch(get_template_path('msg_dialog.tpl')));
 		}
@@ -170,7 +170,7 @@ class msg_dialog
 			$smarty->assign("IE",preg_match("/MSIE/", $_SERVER['HTTP_USER_AGENT']));
 			$return = $smarty->fetch(get_template_path('msg_dialog.tpl'));
 
-			if(!session::get('js')){
+			if(!session::global_get('js')){
 				$dialog = array_pop(session::get('msg_dialogs'));
 				$return.= $dialog->execute();
 			}else{

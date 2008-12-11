@@ -48,7 +48,7 @@ if(is_array(session::get_all()) && count(session::get_all())){
 }
 
 /* Reset errors */
-session::set('js',true);
+session::global_set('js',true);
 session::set('errors',"");
 session::set('errorsAlreadyPosted',array());
 session::set('LastError',"");
@@ -61,7 +61,7 @@ if (!is_readable(CONFIG_DIR."/".CONFIG_FILE)){
 
 /* Parse configuration file */
 $config= new config(CONFIG_DIR."/".CONFIG_FILE, $BASE_DIR);
-session::set('DEBUGLEVEL', $config->get_cfg_value("debuglevel"));
+session::global_set('DEBUGLEVEL', $config->get_cfg_value("debuglevel"));
 if ($_SERVER["REQUEST_METHOD"] != "POST"){
   @DEBUG (DEBUG_CONFIG, __LINE__, __FUNCTION__, __FILE__, $config->data, "config");
 }
@@ -122,7 +122,7 @@ if (isset($_GET['directory']) && isset($servers[$_GET['directory']])){
 
 /* Set config to selected one */
 $config->set_current($directory);
-session::set('config',$config);
+session::global_set('config',$config);
 
 if ($_SERVER["REQUEST_METHOD"] != "POST"){
   @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__, $lang, "Setting language to");
@@ -180,8 +180,8 @@ $smarty->assign("changed", false);
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['apply'])){
 
   /* Destroy old sessions, they cause a successfull login to relog again ...*/
-  if(session::is_set('_LAST_PAGE_REQUEST')){
-    session::set('_LAST_PAGE_REQUEST',time());
+  if(session::global_is_set('_LAST_PAGE_REQUEST')){
+    session::global_set('_LAST_PAGE_REQUEST',time());
   }
 
   $message= array();
@@ -283,7 +283,7 @@ if ($ssl != "" && $config->get_cfg_value("warnssl") == 'true'){
 }
 
 /* show login screen */
-$smarty->assign("JS",session::get('js'));
+$smarty->assign("JS",session::global_get('js'));
 $smarty->assign ("PHPSESSID", session_id());
 if (session::is_set('errors')){
   $smarty->assign("errors", session::get('errors'));;

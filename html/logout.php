@@ -29,13 +29,13 @@ header("Content-type: text/html; charset=UTF-8");
   if the old session is still available */
 @session::start();
 session::set('errorsAlreadyPosted',array());
-if(session::is_set('ui')){
+if(session::global_is_set('ui')){
   
   /* Get config & ui informations */
-  $ui= session::get("ui");
+  $ui= session::global_get("ui");
   
   /* config used for del_user_locks & some lines below to detect the language */  
-  $config= session::get("config");
+  $config= session::global_get("config");
 
   /* Remove all locks of this user */
   del_user_locks($ui->dn);
