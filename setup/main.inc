@@ -19,17 +19,17 @@
  */
 
 /* Create a new setup class if necessary  */
-if (!session::is_set('setup') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
-  session::set('setup',new setup());
+if (!session::global_is_set('setup') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+  session::global_set('setup',new setup());
 }
-$setup = session::get('setup');
+$setup = session::global_get('setup');
 
 /* Execute formular */
 $setup->save_object();
 $display= $setup->execute();
 
 /* Store changes  in session */
-session::set('setup',$setup);
+session::global_set('setup',$setup);
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

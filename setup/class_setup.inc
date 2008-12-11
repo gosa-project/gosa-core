@@ -199,7 +199,7 @@ class setup
         $s = "<img src='images/empty.png' alt=' ' class='center'>&nbsp;";
       }
 
-      if(session::get('js')){
+      if(session::global_get('js')){
 
         $str .="<div >";
     
