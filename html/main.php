@@ -197,21 +197,22 @@ if (isset($_GET['plug']) && $plist->plugin_access_allowed($_GET['plug'])){
 
 /* Check if we need to delete a lock */
 $cleanup = FALSE;
+$remove_lock= FALSE;
 if ($old_plugin_dir != $plugin_dir && $old_plugin_dir != "" || isset($_POST['delete_lock'])){
   if (is_file("$old_plugin_dir/main.inc")){
     if(isset($_POST['delete_lock'])){
-      $remove_lock= true;
+      $remove_lock= TRUE;
     }
     if($old_plugin_dir != $plugin_dir && $old_plugin_dir != ""){
-      $cleanup= true;
+      $cleanup= TRUE;
     }
     $display = "";
     require_once ("$old_plugin_dir/main.inc");
     $display = "";
   }
 }
-$remove_lock= false;
-$cleanup= false;
+$remove_lock= FALSE;
+$cleanup= FALSE;
 
 /* Check for sizelimits */
 eval_sizelimit();
