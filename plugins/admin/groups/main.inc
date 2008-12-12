@@ -20,19 +20,21 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/* Remove classes and variables from session
- */
-if ( $cleanup ){
-  session::un_set('groupManagement');
-}
-
-
+/* Remove locks created by this plugin
+*/
 if ($remove_lock){
   if(session::is_set('groupManagement')){
-    $groupManagement = session::get('groupManagement');
-    $groupManagement->remove_lock();
+      $macl = session::get('groupManagement');
+      $macl->remove_lock();
   }
-} else {
+}
+
+/* Remove this plugin from session
+*/
+if ( $cleanup ){
+  session::un_set('groupManagement');
+}else{
+
   /* Create groupManagement object on demand */
   if (!session::is_set('groupManagement') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
     session::set('groupManagement',new groupManagement ($config, $ui));

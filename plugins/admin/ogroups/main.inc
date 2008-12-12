@@ -20,23 +20,26 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-/* Remove classes and variables from session
- */
-if ( $cleanup ){
-  session::un_set('ogroup');
-}
 
-
+/* Remove locks created by this plugin
+*/
 if ($remove_lock){
   if(session::is_set('ogroup')){
-    $ogroup = session::get('ogroup');
-    $ogroup->remove_lock();
+      $macl = session::get('ogroup');
+      $macl->remove_lock();
   }
-} else {
+}
+
+/* Remove this plugin from session
+*/
+if ( $cleanup ){
+  session::un_set('ogroup');
+}else{
 
   /* Create object object on demand */
   if (!session::is_set('ogroup') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
     session::set('ogroup',new ogroupManagement ($config));
+    
   }
   $ogroup = session::get('ogroup');
 

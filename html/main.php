@@ -195,24 +195,29 @@ if (isset($_GET['plug']) && $plist->plugin_access_allowed($_GET['plug'])){
   $plugin_dir= "$BASE_DIR/plugins/generic/welcome";
 }
 
-/* Check if we need to delete a lock */
-$cleanup = FALSE;
+/* Handle plugin locks.
+    - Remove the plugin from session if we switched to another. (cleanup) 
+    - Remove all created locks if "reset" was posted.
+    - Remove all created locks if we switched to another plugin.
+*/
+$cleanup    = FALSE;
 $remove_lock= FALSE;
-if ($old_plugin_dir != $plugin_dir && $old_plugin_dir != "" || isset($_POST['delete_lock'])){
+
+/* Check if we have changed the selected plugin 
+*/
+if($old_plugin_dir != $plugin_dir && $old_plugin_dir != ""){
   if (is_file("$old_plugin_dir/main.inc")){
-    if(isset($_POST['delete_lock'])){
-      $remove_lock= TRUE;
-    }
-    if($old_plugin_dir != $plugin_dir && $old_plugin_dir != ""){
-      $cleanup= TRUE;
-    }
-    $display = "";
-    require_once ("$old_plugin_dir/main.inc");
-    $display = "";
+    $cleanup = $remove_lock = TRUE;
+    require ("$old_plugin_dir/main.inc");
+    $cleanup = $remove_lock = FALSE;
   }
+}else // elseif
+
+/* Reset was posted, remove all created locks for the current plugin
+*/
+if((isset($_GET['reset']) && $_GET['reset'] == 1) || isset($_POST['delete_lock'])){
+  $remove_lock = TRUE;
 }
-$remove_lock= FALSE;
-$cleanup= FALSE;
 
 /* Check for sizelimits */
 eval_sizelimit();
@@ -326,12 +331,13 @@ if ($config->get_cfg_value("handleExpiredAccounts") == "true"){
 
 /* Load plugin */
 if (is_file("$plugin_dir/main.inc")){
+  $display ="";
   require ("$plugin_dir/main.inc");
 } else {
   msg_dialog::display(
-            _("Plugin"),
-            sprintf(_("FATAL: Cannot find any plugin definitions for plugin '%s'!"), $plug),
-            FATAL_ERROR_DIALOG);
+      _("Plugin"),
+      sprintf(_("FATAL: Cannot find any plugin definitions for plugin '%s'!"), $plug),
+      FATAL_ERROR_DIALOG);
   exit();
 }
 

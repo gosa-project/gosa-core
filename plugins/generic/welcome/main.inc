@@ -20,7 +20,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-if (!$remove_lock){
+if (!$cleanup){
 	session::set('plugin_dir',dirname(__FILE__));
 	$smarty->assign("iconmenu", $plist->show_iconmenu());
 	$smarty->assign("header", print_header(get_template_path('images/welcome.png'), sprintf(_("Welcome %s!"), $ui->cn)));
