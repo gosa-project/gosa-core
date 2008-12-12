@@ -660,9 +660,6 @@ function del_lock ($object)
 {
   global $config;
 
-  echo "<font color='green'><b>$object</b></font><br>";
-  print_a(debug_backtrace());
-
   if(is_array($object)){
     foreach($object as $obj){
       del_lock($obj);
