@@ -196,10 +196,17 @@ if (isset($_GET['plug']) && $plist->plugin_access_allowed($_GET['plug'])){
 }
 
 /* Check if we need to delete a lock */
+$cleanup = FALSE;
 if ($old_plugin_dir != $plugin_dir && $old_plugin_dir != "" || isset($_POST['delete_lock'])){
   if (is_file("$old_plugin_dir/main.inc")){
-    $remove_lock= true;
-    $cleanup= true;
+    if(isset($_POST['delete_lock'])){
+      echo "<font color='red'><b>Remove lock</b></font>";
+      $remove_lock= true;
+    }
+    if($old_plugin_dir != $plugin_dir && $old_plugin_dir != ""){
+      echo "<font color='red'><b>Cleanup</b></font>";
+      $cleanup= true;
+    }
     $display = "";
     require_once ("$old_plugin_dir/main.inc");
     $display = "";
@@ -320,7 +327,7 @@ if ($config->get_cfg_value("handleExpiredAccounts") == "true"){
 
 /* Load plugin */
 if (is_file("$plugin_dir/main.inc")){
-  require_once ("$plugin_dir/main.inc");
+  require ("$plugin_dir/main.inc");
 } else {
   msg_dialog::display(
             _("Plugin"),
