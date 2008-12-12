@@ -641,10 +641,11 @@ class aclManagement extends plugin
     /* Remove acl lock if a DN is marked as "currently edited" */
     if (isset($this->acltabs->dn)){
       del_lock ($this->acltabs->dn);
-    }else{
+    }elseif(!empty($this->dn)){
       del_lock ($this->dn);
+    }elseif(count($this->dns)){
+      del_lock ($this->dns);
     }
-    del_lock ($this->dns);
   }
 
 

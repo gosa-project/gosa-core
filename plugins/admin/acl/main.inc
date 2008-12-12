@@ -24,7 +24,6 @@ if ($remove_lock){
         if(session::is_set('macl')){
                 $macl = session::get('macl');
                 $macl->remove_lock();
-                del_lock ($ui->dn);
                 session::un_set ('macl');
         }
 } else {
@@ -49,7 +48,6 @@ if (!session::is_set('macl') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
 
 	/* Reset requested? */
 	if (isset($_GET['reset']) && $_GET['reset'] == 1){
-		del_lock ($ui->dn);
 		session::un_set ('macl');
 	}
 
