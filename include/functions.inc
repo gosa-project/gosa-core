@@ -2814,7 +2814,6 @@ function get_object_info()
 
 function set_object_info($str = "")
 {
-  echo "-->> $str <br>";
   session::set('objectinfo',$str);
 }
 
