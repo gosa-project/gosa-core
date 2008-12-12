@@ -20,11 +20,17 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+/* Remove classes and variables from session
+ */
+if ( $cleanup ){
+  session::un_set('userManagement');
+}
+
+
 if ($remove_lock){
   if(session::is_set('userManagement')){
     $userManagement = session::get('userManagement');
     $userManagement->remove_lock();
-    session::un_set ('userManagement');
   }
 } else {
   /* Create usermanagement object on demand */
@@ -39,12 +45,12 @@ if ($remove_lock){
   $output= $userManagement->execute();
 
   /* Page header*/
-  if (session::is_set('objectinfo')){
+  if (get_object_info() != ""){
     $display= print_header(get_template_path($userManagement->plIcon),
                            _("User administration"),
                            "<img alt=\"\" class=\"center\" src=\"".
                            get_template_path('images/lists/locked.png').
-                           "\"> ".LDAP::fix(session::get('objectinfo')));
+                           "\"> ".LDAP::fix(get_object_info()));
   } else {
     $display= print_header(get_template_path($userManagement->plIcon),
                           _("User administration"));
@@ -55,7 +61,6 @@ if ($remove_lock){
 
   /* Reset requested? */
   if (isset($_GET['reset']) && $_GET['reset'] == 1){
-    del_lock ($ui->dn);
     session::un_set ('userManagement');
   }
 

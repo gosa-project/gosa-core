@@ -176,7 +176,7 @@ class departmentManagement extends plugin
         $this->deptabs= new deptabs($this->config,$this->config->data['TABS'][$data['TAB']], $this->dn,"department");
         $this->deptabs->set_acl_base($this->dn);
 
-        session::set('objectinfo',$this->dn);
+        set_object_info($this->dn);
       }
     }
 
@@ -359,7 +359,7 @@ class departmentManagement extends plugin
      }
      unset ($this->deptabs);
      $this->deptabs= NULL;
-     session::un_set('objectinfo');
+     set_object_info();
    }
 
 
@@ -373,7 +373,7 @@ class departmentManagement extends plugin
     if (isset($_POST['edit_cancel']) || isset($_POST['delete_cancel']) || isset($_POST['delete_department_confirm'])){
       $this->remove_lock();
       $this->deptabs= NULL;
-      session::un_set('objectinfo');
+      set_object_info();
     }
 
     /* Headpage or normal plugin screen? */

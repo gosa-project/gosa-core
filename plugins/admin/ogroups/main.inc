@@ -20,13 +20,17 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+/* Remove classes and variables from session
+ */
+if ( $cleanup ){
+  session::un_set('ogroup');
+}
 
 
 if ($remove_lock){
   if(session::is_set('ogroup')){
     $ogroup = session::get('ogroup');
     $ogroup->remove_lock();
-    session::un_set ('ogroup');
   }
 } else {
 
@@ -41,12 +45,12 @@ if ($remove_lock){
   $output= $ogroup->execute ();
 
   /* Page header*/
-  if (session::is_set('objectinfo')){
+  if (get_object_info() != ""){
     $display= print_header(get_template_path('plugins/ogroups/images/plugin.png'),
                           _("Object groups"),
                           "<img alt=\"\" align=\"middle\" src=\"".
                           get_template_path('images/lists/locked.png').
-                          "\"> ".LDAP::fix(session::get('objectinfo')));
+                          "\"> ".LDAP::fix(get_object_info()));
   } else {
     $display= print_header(get_template_path('plugins/ogroups/images/plugin.png'), _("Object groups"));
   }

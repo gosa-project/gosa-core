@@ -200,7 +200,7 @@
             <select name="mail" size="1" title="" onChange="document.mainform.submit();">
                 <option  value="disabled">{t}disabled{/t}</option>
                 {foreach from=$mail_methods item=item}
-                    <option value="{$item.name}" {if $mail == $item.name} selected {/if}>{$item.name}&nbsp;({$item.uattrib})</option>
+                    <option value="{$item.name}" {if $mail == $item.name} selected {/if}>{$item.name}</option>
                 {/foreach}
             </select>
         </div>

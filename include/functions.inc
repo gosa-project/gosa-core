@@ -2808,6 +2808,16 @@ function cred_decrypt($input,$password) {
   return mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $password, pack("H*", $input), MCRYPT_MODE_ECB, $iv);
 }
 
+function get_object_info()
+{
+  return(session::get('objectinfo'));
+}
+
+function set_object_info($str = "")
+{
+  session::set('objectinfo',$str);
+}
+
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

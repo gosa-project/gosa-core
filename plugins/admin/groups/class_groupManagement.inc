@@ -268,7 +268,7 @@ class groupManagement extends plugin
           //$this->reload ();
           unset ($this->grouptab);
           $this->grouptab= NULL;
-          session::un_set('objectinfo');
+          set_object_info();
         }else{
 
           /* Reinitialize tab */
@@ -303,7 +303,7 @@ class groupManagement extends plugin
       $tmp->lock_entries($this->ui->dn);
       if($tmp->multiple_available()){
         $this->grouptab = $tmp;
-        session::set('objectinfo',$this->grouptab->get_object_info());
+        set_object_info($this->grouptab->get_object_info());
       }
     }
 
@@ -328,7 +328,7 @@ class groupManagement extends plugin
       /* Register grouptab to trigger edit dialog */
       $this->grouptab= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $this->dn);
       $this->grouptab->set_acl_base($this->dn);
-      session::set('objectinfo',$this->dn);
+      set_object_info($this->dn);
     }
 
 
@@ -495,7 +495,7 @@ class groupManagement extends plugin
 
       /* Remove lock file after successfull deletion */
       $this->remove_lock();
-      session::un_set('objectinfo');
+      set_object_info();
     }
 
 
@@ -506,7 +506,7 @@ class groupManagement extends plugin
     /* Delete group canceled? */
     if (isset($_POST['delete_cancel'])){
       $this->remove_lock();
-      session::un_set('objectinfo');
+      set_object_info();
     }
     
 
@@ -520,7 +520,7 @@ class groupManagement extends plugin
         $this->remove_lock();
       }
       $this->grouptab= NULL;
-      session::un_set('objectinfo');
+      set_object_info();
     }
 
 

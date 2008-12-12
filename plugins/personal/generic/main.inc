@@ -23,7 +23,20 @@
 /* Preset display */
 $display  = "";
 $lock_msg = "";
-if (!$remove_lock){
+
+/* Remove classes and variables from session
+ */
+if ( $cleanup ){
+  session::un_set('user');
+  session::un_set('edit');
+}
+
+if ( $remove_lock){
+  if(session::is_set('user') && session::is_set('edit')){
+    del_lock ($ui->dn);
+  }
+}else{
+
   /* Reset requested? */
   if (isset($_POST['edit_cancel']) || isset($_POST['password_cancel']) || 
       (isset($_GET['reset']) && $_GET['reset'] == 1)){
@@ -60,7 +73,7 @@ if (!$remove_lock){
       session::set('back_plugin',$plug);
       session::set('LOCK_VARS_TO_USE',array("/^edit$/","/^plug$/"));
       $lock_msg =  gen_locked_message ($username, $ui->dn);
-  
+
     }else{
 
       /* Lock the current entry */
@@ -133,7 +146,7 @@ if (!$remove_lock){
         $display.= $smarty->fetch(get_template_path('password.tpl', TRUE));
         return ($display);
       } else {
-	session::un_set ('user');
+        session::un_set ('user');
       }
 
     } else {
@@ -167,7 +180,7 @@ if (!$remove_lock){
       $display.= "<input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">\n";
 
       $info= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/lists/locked.png').
-             "\"> ".$ui->dn."&nbsp;";
+        "\"> ".$ui->dn."&nbsp;";
     } else {
       /* 'viewid' may be set by i.e. the phonelist plugin. This
          means that we want to go back... */
@@ -178,7 +191,7 @@ if (!$remove_lock){
         $str= msgPool::editButton();
         $fn = "edit";
         $info= "<img class=\"center\" alt=\"\" align=\"middle\" src=\"".get_template_path('images/lists/unlocked.png').
-               "\"> ".$ui->dn."&nbsp;";
+          "\"> ".$ui->dn."&nbsp;";
       }
 
       /* Only display edit button if there is at least one attribute editable */
@@ -197,7 +210,7 @@ if (!$remove_lock){
 
   /* Page header*/
   $display= print_header(get_template_path('plugins/generic/images/plugin.png'),
-                         _("Generic user information"), $info).$display;
+      _("Generic user information"), $info).$display;
 
 }
 

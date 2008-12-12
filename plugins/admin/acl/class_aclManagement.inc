@@ -204,7 +204,7 @@ class aclManagement extends plugin
         }
 
         /* Set ACL and move DN to the headline */
-        session::set('objectinfo',$this->dn);
+        set_object_info($this->dn);
       }else{
         msg_dialog::display(_("Permission error"), msgPool::permModify(), ERROR_DIALOG);
       }
@@ -216,14 +216,14 @@ class aclManagement extends plugin
      ********************/
     if(isset($_POST['delete_lock'])){
       $this->remove_lock();
-      session::un_set('objectinfo');
+      set_object_info();
     }
 
     /* Reset all relevant data, if we get a _cancel request */
     if (isset($_POST['edit_cancel'])){
       $this->remove_lock();
       $this->acltabs= NULL;
-      session::un_set('objectinfo');
+      set_object_info();
     }
 
 
@@ -397,7 +397,7 @@ class aclManagement extends plugin
 
           unset ($this->acltabs);
           $this->acltabs= NULL;
-          session::un_set('objectinfo');
+          set_object_info();
         }
       } else {
         /* Ok. There seem to be errors regarding to the tab data,
@@ -641,10 +641,11 @@ class aclManagement extends plugin
     /* Remove acl lock if a DN is marked as "currently edited" */
     if (isset($this->acltabs->dn)){
       del_lock ($this->acltabs->dn);
-    }else{
+    }elseif(!empty($this->dn)){
       del_lock ($this->dn);
+    }elseif(count($this->dns)){
+      del_lock ($this->dns);
     }
-    del_lock ($this->dns);
   }
 
 
