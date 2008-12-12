@@ -1287,7 +1287,6 @@ function gen_locked_message($user, $dn, $allow_readonly = FALSE)
 {
   global $plug, $config;
 
-  session::global_set('dn', $dn);
   $remove= false;
 
   /* Save variables from LOCK_VARS_TO_USE in session - for further editing */

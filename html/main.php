@@ -196,17 +196,10 @@ if (isset($_GET['plug']) && $plist->plugin_access_allowed($_GET['plug'])){
 }
 
 /* Check if we need to delete a lock */
-
-print_a(array($old_plugin_dir,$plugin_dir,$old_plugin_dir,getcwd()));
-
 if ($old_plugin_dir != $plugin_dir && $old_plugin_dir != ""){
-  
   if (is_file("$old_plugin_dir/main.inc")){
     $remove_lock= true;
-    echo "Jaa . "."$old_plugin_dir/main.inc";
     require_once ("$old_plugin_dir/main.inc");
-  }else{
-    echo "No";
   }
 }
 $remove_lock= false;
@@ -246,10 +239,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
   if (isset($_POST['reset_session'])){
     header ("Location: logout.php");
     exit;
-  }
-
-  if (isset($_POST['cancel_lock'])){
-    session::un_set('dn');
   }
 }
 
@@ -305,13 +294,6 @@ $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
 
 /* React on clicks */
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
-
-  /* 'delete_lock' is set by the lock removal dialog. We should remove the
-     lock at this point globally. Plugins do not need to remove it. */
-  if (isset($_POST['delete_lock']) && session::is_set('dn')){
-    del_lock (session::get('dn'));
-
-  }
   if (isset($_POST['delete_lock']) || isset($_POST['open_readonly'])){
 
     /* Set old Post data */
@@ -321,9 +303,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $_POST[$name] = $value;
       } 
     }
-    session::un_set ('dn');
   }
-
 }
 
 /* check if we are using account expiration */
