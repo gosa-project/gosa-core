@@ -59,7 +59,7 @@ class aclManagement extends plugin
     /* Call parent execute */
     plugin::execute();
 
-    session::global_set('LOCK_VARS_TO_USE',array("/^item_selected/","/^menu_action/",
+    session::set('LOCK_VARS_TO_USE',array("/^item_selected/","/^menu_action/",
           "/^list/","/^id_/","/^menu_action/","/^act$/","/^id$/"));
 
     $smarty       = get_smarty();                 // Smarty instance
@@ -204,7 +204,7 @@ class aclManagement extends plugin
         }
 
         /* Set ACL and move DN to the headline */
-        set_object_info($this->dn);
+        session::set('objectinfo',$this->dn);
       }else{
         msg_dialog::display(_("Permission error"), msgPool::permModify(), ERROR_DIALOG);
       }
@@ -216,14 +216,14 @@ class aclManagement extends plugin
      ********************/
     if(isset($_POST['delete_lock'])){
       $this->remove_lock();
-      set_object_info();
+      session::un_set('objectinfo');
     }
 
     /* Reset all relevant data, if we get a _cancel request */
     if (isset($_POST['edit_cancel'])){
       $this->remove_lock();
       $this->acltabs= NULL;
-      set_object_info();
+      session::un_set('objectinfo');
     }
 
 
@@ -397,7 +397,7 @@ class aclManagement extends plugin
 
           unset ($this->acltabs);
           $this->acltabs= NULL;
-          set_object_info();
+          session::un_set('objectinfo');
         }
       } else {
         /* Ok. There seem to be errors regarding to the tab data,
@@ -641,11 +641,10 @@ class aclManagement extends plugin
     /* Remove acl lock if a DN is marked as "currently edited" */
     if (isset($this->acltabs->dn)){
       del_lock ($this->acltabs->dn);
-    }elseif(!empty($this->dn)){
+    }else{
       del_lock ($this->dn);
-    }elseif(count($this->dns)){
-      del_lock ($this->dns);
     }
+    del_lock ($this->dns);
   }
 
 

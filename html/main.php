@@ -196,17 +196,13 @@ if (isset($_GET['plug']) && $plist->plugin_access_allowed($_GET['plug'])){
 }
 
 /* Check if we need to delete a lock */
-if ($old_plugin_dir != $plugin_dir && $old_plugin_dir != "" || isset($_POST['delete_lock'])){
+if ($old_plugin_dir != $plugin_dir && $old_plugin_dir != ""){
   if (is_file("$old_plugin_dir/main.inc")){
     $remove_lock= true;
-    $cleanup= true;
-    $display = "";
     require_once ("$old_plugin_dir/main.inc");
-    $display = "";
   }
 }
 $remove_lock= false;
-$cleanup= false;
 
 /* Check for sizelimits */
 eval_sizelimit();
@@ -244,13 +240,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     header ("Location: logout.php");
     exit;
   }
+
+  if (isset($_POST['cancel_lock'])){
+    session::un_set('dn');
+  }
 }
 
 
 /* Load department list when plugin has changed. That is some kind of
    compromise between speed and beeing up to date */
 if (isset($_GET['reset'])){
-  set_object_info();
+  if (session::is_set('objectinfo')){
+    session::un_set('objectinfo');
+  }
 }
 
 /* show web frontend */
@@ -296,6 +298,13 @@ $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
 
 /* React on clicks */
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
+
+  /* 'delete_lock' is set by the lock removal dialog. We should remove the
+     lock at this point globally. Plugins do not need to remove it. */
+  if (isset($_POST['delete_lock']) && session::is_set('dn')){
+    del_lock (session::get('dn'));
+
+  }
   if (isset($_POST['delete_lock']) || isset($_POST['open_readonly'])){
 
     /* Set old Post data */
@@ -305,7 +314,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $_POST[$name] = $value;
       } 
     }
+    session::un_set ('dn');
   }
+
 }
 
 /* check if we are using account expiration */
@@ -374,7 +385,10 @@ $smarty->assign("focus", $focus);
 #      * remove regulary created channels when not needed anymore
 #      * take a look at external php calls (i.e. get fax, ldif, etc.)
 #      * handle aborted sessions (by pressing anachors i.e. Main, Menu, etc.)
+#      * check lock removals, is "dn" global or not in this case?
 #      * last page request -> global or not?
+#      * check that filters are still global
+#      * maxC global?
 if (isset($_POST['_channel_'])){
 	echo "DEBUG - current channel: ".$_POST['_channel_'];
 	$smarty->assign("channel", $_POST['_channel_']);

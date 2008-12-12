@@ -150,7 +150,7 @@ class passwordMethod
     $i =0;
 
     /* Only */
-    if(!session::global_is_set("passwordMethod::get_available_methods")){
+    if(!session::is_set("passwordMethod::get_available_methods")){
       foreach($class_mapping as $class => $path) {
         if(preg_match('/passwordMethod/i', $class) && !preg_match("/^passwordMethod$/i", $class)){
           $name = preg_replace ("/passwordMethod/i", "", $class);
@@ -181,9 +181,9 @@ class passwordMethod
           }
         }
       }
-      session::global_set("passwordMethod::get_available_methods",$ret);
+      session::set("passwordMethod::get_available_methods",$ret);
     }
-    return(session::global_get("passwordMethod::get_available_methods"));
+    return(session::get("passwordMethod::get_available_methods"));
   }
   
 

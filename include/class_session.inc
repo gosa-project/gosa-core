@@ -59,11 +59,6 @@ class session {
 		return (FALSE);
 	}
 
-	public static function channel_exists($name)
-	{
-		return (isset($_SESSION[$name]));
-	}
-
 	public static function is_set($name)
 	{
 		$channel= "";

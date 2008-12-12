@@ -64,7 +64,7 @@ class ogroupManagement extends plugin
       Variable intialisation && Check posts for commands  
      ****************/
 
-    session::global_set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/","/^item_selected/","/^remove_multiple_ogroups/","/^menu_action/"));
+    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/","/^item_selected/","/^remove_multiple_ogroups/","/^menu_action/"));
 
     $smarty     = get_smarty();
     $s_action   = "";
@@ -368,7 +368,7 @@ class ogroupManagement extends plugin
 
       /* Remove lock file after successfull deletion */
       $this->remove_lock();
-      set_object_info();
+      session::un_set('objectinfo');
     }
 
 
@@ -379,7 +379,7 @@ class ogroupManagement extends plugin
     /* Delete group canceled? */
     if (isset($_POST['delete_cancel'])){
       $this->remove_lock();
-      set_object_info();
+      session::un_set('objectinfo');
     }
 
 
@@ -405,7 +405,7 @@ class ogroupManagement extends plugin
       /* Register grouptab to trigger edit dialog */
       $this->ogroup= new ogrouptabs($this->config, $this->config->data['TABS']['OGROUPTABS'], $this->dn, "ogroups");
       $this->ogroup->set_acl_base($this->dn);
-      set_object_info($this->dn);
+      session::set('objectinfo',$this->dn);
     }
 
 
@@ -434,7 +434,7 @@ class ogroupManagement extends plugin
 
           unset ($this->ogroup);
           $this->ogroup= NULL;
-          set_object_info();
+          session::un_set('objectinfo');
         }else{
 
           /* Reinitialize tab */
@@ -458,7 +458,7 @@ class ogroupManagement extends plugin
     if ((isset($_POST['edit_cancel']))  && (isset($this->ogroup->dn))){
       $this->remove_lock();
       $this->ogroup= NULL;
-      set_object_info();
+      session::un_set('objectinfo');
     }
 
 

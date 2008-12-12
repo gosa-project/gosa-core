@@ -225,12 +225,12 @@ class posixAccount extends plugin
     asort ($this->secondaryGroups);
 
     /* Get global filter config */
-    if (!session::global_is_set("sysfilter")){
+    if (!session::is_set("sysfilter")){
       $ui= get_userinfo();
       $base= get_base_from_people($ui->dn);
       $sysfilter= array( "depselect"       => $base,
           "regex"           => "*");
-      session::global_set("sysfilter", $sysfilter);
+      session::set("sysfilter", $sysfilter);
     }
     $this->ui = get_userinfo();
   }
@@ -251,7 +251,7 @@ class posixAccount extends plugin
 
     /* Department has changed? */
     if(isset($_POST['depselect'])){
-      session::global_set('CurrentMainBase',validate($_POST['depselect']));
+      session::set('CurrentMainBase',validate($_POST['depselect']));
     }
 
     if($this->multiple_support_active){
@@ -364,7 +364,7 @@ class posixAccount extends plugin
     /* Show ws dialog */
     if ($this->show_ws_dialog){
       /* Save data */
-      $sysfilter= session::global_get("sysfilter");
+      $sysfilter= session::get("sysfilter");
       foreach( array("depselect", "regex") as $type){
         if (isset($_POST[$type])){
           $sysfilter[$type]= $_POST[$type];
@@ -377,7 +377,7 @@ class posixAccount extends plugin
         }
         $sysfilter['regex']= $s;
       }
-      session::global_set("sysfilter", $sysfilter);
+      session::set("sysfilter", $sysfilter);
 
       /* Get workstation list */
       $exclude= "";
@@ -449,7 +449,7 @@ class posixAccount extends plugin
       $smarty->assign("tree_image", get_template_path('images/lists/search-subtree.png'));
       $smarty->assign("deplist", $this->config->idepartments);
       $smarty->assign("alphabet", generate_alphabet());
-      $smarty->assign("depselect", session::global_get('CurrentMainBase'));
+      $smarty->assign("depselect", session::get('CurrentMainBase'));
       $smarty->assign("hint", print_sizelimit_warning());
 
       $smarty->assign("apply", apply_filter());
@@ -461,7 +461,7 @@ class posixAccount extends plugin
     $smarty= get_smarty();
 
     /* In 'MyAccount' mode, we must remove write acls if we are not in editing mode. */ 
-    $SkipWrite = (!isset($this->parent) || !$this->parent) && !session::global_is_set('edit');
+    $SkipWrite = (!isset($this->parent) || !$this->parent) && !session::is_set('edit');
 
     /* Depending on pwmode, currently hardcoded because there are no other methods */
     if ( 1 == 1 ){
@@ -548,11 +548,11 @@ class posixAccount extends plugin
     /* Checkboxes */
     if ($this->force_ids == 1){
       $smarty->assign("force_ids", "checked");
-      if (session::global_get('js')){
+      if (session::get('js')){
         $smarty->assign("forceMode", "");
       }
     } else {
-      if (session::global_get('js')){
+      if (session::get('js')){
         $smarty->assign("forceMode", "disabled");
       }
       $smarty->assign("force_ids", "");
@@ -587,7 +587,7 @@ class posixAccount extends plugin
         $smarty->assign("use_".$val,FALSE);
       }
 
-      if((session::global_get("js"))&&(($val=="uidNumber")||($val=="gidNumber")))
+      if((session::get("js"))&&(($val=="uidNumber")||($val=="gidNumber")))
       {
         $smarty->assign("$val"."ACL",$this->getacl($val,$SkipWrite));
         $smarty->assign("$val", $this->$val);
@@ -1340,7 +1340,7 @@ class posixAccount extends plugin
   function reload()
   {
     /* Set base for all searches */
-    $base      = session::global_get('CurrentMainBase');
+    $base      = session::get('CurrentMainBase');
     $base     = $base;
     $ldap     = $this->config->get_ldap_link();    
     $attrs    =  array("cn", "description", "gidNumber");
@@ -1420,11 +1420,11 @@ class posixAccount extends plugin
     if(!$this->is_account) return("");
     if ($this->force_ids == 1){
       $force_ids = "checked";
-      if (session::global_get('js')){
+      if (session::get('js')){
         $forceMode = "";
       }
     } else {
-      if (session::global_get('js')){
+      if (session::get('js')){
         if($this->acl != "#none#")
           $forceMode ="disabled";
       }

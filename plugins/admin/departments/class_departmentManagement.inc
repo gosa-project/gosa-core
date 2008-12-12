@@ -61,7 +61,7 @@ class departmentManagement extends plugin
       Var init 
      ***************/
 
-    session::global_set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^dep_edit_.*/","/^dep_del_.*/","/^item_selected/","/^remove_multiple_departments/","/^menu_action/"));
+    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^dep_edit_.*/","/^dep_del_.*/","/^item_selected/","/^remove_multiple_departments/","/^menu_action/"));
 
     /* Reload departments */
     $smarty						= get_smarty();
@@ -176,7 +176,7 @@ class departmentManagement extends plugin
         $this->deptabs= new deptabs($this->config,$this->config->data['TABS'][$data['TAB']], $this->dn,"department");
         $this->deptabs->set_acl_base($this->dn);
 
-        set_object_info($this->dn);
+        session::set('objectinfo',$this->dn);
       }
     }
 
@@ -359,7 +359,7 @@ class departmentManagement extends plugin
      }
      unset ($this->deptabs);
      $this->deptabs= NULL;
-     set_object_info();
+     session::un_set('objectinfo');
    }
 
 
@@ -373,7 +373,7 @@ class departmentManagement extends plugin
     if (isset($_POST['edit_cancel']) || isset($_POST['delete_cancel']) || isset($_POST['delete_department_confirm'])){
       $this->remove_lock();
       $this->deptabs= NULL;
-      set_object_info();
+      session::un_set('objectinfo');
     }
 
     /* Headpage or normal plugin screen? */
@@ -413,7 +413,7 @@ class departmentManagement extends plugin
     $Regex        = $this->DivListDepartment->Regex;
   
     // Create Array to Test if we have a valid back button
-    $config = session::global_get('config');
+    $config = session::get('config');
     $tmp = $config->idepartments;
 
     $types = $this->get_support_departments();

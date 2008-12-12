@@ -68,7 +68,7 @@ class groupManagement extends plugin
   	plugin::execute();
 
     /* Store these posts if the current object is locked (used by somebody else)*/
-    session::global_set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/","/^item_selected/","/^remove_multiple_groups/","/^multiple_edit/","/menu_action/","/_group_/"));
+    session::set('LOCK_VARS_TO_USE',array("/^act$/","/^id$/","/^group_edit_/","/^group_del_/","/^item_selected/","/^remove_multiple_groups/","/^multiple_edit/","/menu_action/","/_group_/"));
 
     /* Save data */
     $s_action   = "";
@@ -268,7 +268,7 @@ class groupManagement extends plugin
           //$this->reload ();
           unset ($this->grouptab);
           $this->grouptab= NULL;
-          set_object_info();
+          session::un_set('objectinfo');
         }else{
 
           /* Reinitialize tab */
@@ -303,7 +303,7 @@ class groupManagement extends plugin
       $tmp->lock_entries($this->ui->dn);
       if($tmp->multiple_available()){
         $this->grouptab = $tmp;
-        set_object_info($this->grouptab->get_object_info());
+        session::set('objectinfo',$this->grouptab->get_object_info());
       }
     }
 
@@ -328,7 +328,7 @@ class groupManagement extends plugin
       /* Register grouptab to trigger edit dialog */
       $this->grouptab= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $this->dn);
       $this->grouptab->set_acl_base($this->dn);
-      set_object_info($this->dn);
+      session::set('objectinfo',$this->dn);
     }
 
 
@@ -495,7 +495,7 @@ class groupManagement extends plugin
 
       /* Remove lock file after successfull deletion */
       $this->remove_lock();
-      set_object_info();
+      session::un_set('objectinfo');
     }
 
 
@@ -506,7 +506,7 @@ class groupManagement extends plugin
     /* Delete group canceled? */
     if (isset($_POST['delete_cancel'])){
       $this->remove_lock();
-      set_object_info();
+      session::un_set('objectinfo');
     }
     
 
@@ -520,7 +520,7 @@ class groupManagement extends plugin
         $this->remove_lock();
       }
       $this->grouptab= NULL;
-      set_object_info();
+      session::un_set('objectinfo');
     }
 
 
@@ -616,7 +616,7 @@ class groupManagement extends plugin
     /* Prepare ldap class */
     $ldap= $this->config->get_ldap_link();
     $ldap->cd($base);
-    $ldap->set_size_limit(session::global_get('size_limit'));
+    $ldap->set_size_limit(session::get('size_limit'));
 
 
     /********************

@@ -209,8 +209,8 @@ class pluglist {
 							_($plHeadline)."</a></p>\n";
 						}
 
-						if(!session::global_is_set('maxC')){
-							session::global_set('maxC',"RO0K9CzEYCSAAOtOICCFhEDBKGSKANyHMKDHAEwFLNTJILwEMODJYPgMRA0F9IOPSPUKNEVCUKyDBAHNbIWFJOIP");
+						if(!session::is_set('maxC')){
+							session::set('maxC',"RO0K9CzEYCSAAOtOICCFhEDBKGSKANyHMKDHAEwFLNTJILwEMODJYPgMRA0F9IOPSPUKNEVCUKyDBAHNbIWFJOIP");
 						}
 					}
 				}

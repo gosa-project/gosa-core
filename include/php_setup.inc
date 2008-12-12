@@ -81,7 +81,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
                                 "*** PHP error information ***\n\n");
       }
     
-    if (session::global_is_set('js') && session::global_get('js')==FALSE){
+    if (session::is_set('js') && session::get('js')==FALSE){
       $error_collector= "<div>";
     } else {
       $error_collector= "

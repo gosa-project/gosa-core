@@ -153,7 +153,7 @@ class plugin
     /* Check if this entry was opened in read only mode */
     if(isset($_POST['open_readonly'])){
       if(session::global_is_set("LOCK_CACHE")){
-        $cache = &session::global_get("LOCK_CACHE");
+        $cache = &session::get("LOCK_CACHE");
         if(isset($cache['READ_ONLY'][$this->dn])){
           $this->read_only = TRUE;
         }
@@ -262,8 +262,8 @@ class plugin
     session::global_set('current_class_for_help',get_class($this));
 
     /* Reset Lock message POST/GET check array, to prevent perg_match errors*/
-    session::global_set('LOCK_VARS_TO_USE',array());
-    session::global_set('LOCK_VARS_USED',array());
+    session::set('LOCK_VARS_TO_USE',array());
+    session::set('LOCK_VARS_USED',array());
   }
 
   /*! \brief execute plugin
@@ -1878,8 +1878,8 @@ class plugin
     session::global_set('current_class_for_help',get_class($this));
 
     /* Reset Lock message POST/GET check array, to prevent perg_match errors*/
-    session::global_set('LOCK_VARS_TO_USE',array());
-    session::global_set('LOCK_VARS_USED',array());
+    session::set('LOCK_VARS_TO_USE',array());
+    session::set('LOCK_VARS_USED',array());
     
     return("Multiple edit is currently not implemented for this plugin.");
   }
