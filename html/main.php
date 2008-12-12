@@ -196,10 +196,12 @@ if (isset($_GET['plug']) && $plist->plugin_access_allowed($_GET['plug'])){
 }
 
 /* Check if we need to delete a lock */
-if ($old_plugin_dir != $plugin_dir && $old_plugin_dir != ""){
+if ($old_plugin_dir != $plugin_dir && $old_plugin_dir != "" || isset($_POST['delete_lock'])){
   if (is_file("$old_plugin_dir/main.inc")){
     $remove_lock= true;
+    $display = "";
     require_once ("$old_plugin_dir/main.inc");
+    $display = "";
   }
 }
 $remove_lock= false;
