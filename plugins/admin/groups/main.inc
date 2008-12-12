@@ -24,7 +24,6 @@ if ($remove_lock){
   if(session::is_set('groupManagement')){
     $groupManagement = session::get('groupManagement');
     $groupManagement->remove_lock();
-    session::un_set ('groupManagement');
   }
 } else {
   /* Create groupManagement object on demand */

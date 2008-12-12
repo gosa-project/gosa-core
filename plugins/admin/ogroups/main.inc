@@ -26,7 +26,6 @@ if ($remove_lock){
   if(session::is_set('ogroup')){
     $ogroup = session::get('ogroup');
     $ogroup->remove_lock();
-    session::un_set ('ogroup');
   }
 } else {
 

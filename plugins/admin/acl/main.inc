@@ -24,7 +24,6 @@ if ($remove_lock){
         if(session::is_set('macl')){
                 $macl = session::get('macl');
                 $macl->remove_lock();
-                session::un_set ('macl');
         }
 } else {
 	$display= "No headpage yet for this module";
