@@ -272,11 +272,6 @@ class Step_Config2 extends setup_step
         $this->samba_settings['samba_sid_active'] = TRUE;
         $this->samba_settings['samba_rid_active'] = TRUE;
       }
-
-      /* Reload mail naming attribute */
-      if($old_mail != $this->mail && isset($this->mail_methods[$this->mail]['uattrib'])){
-        $this->mail_attrib = $this->mail_methods[$this->mail]['uattrib'];
-      }
     }
 
     $tmp = $this->check();
@@ -315,24 +310,12 @@ class Step_Config2 extends setup_step
     if(!class_available("mailMethod")){
       return(array());
     }
-
-    $default_uattrib = "";
-    $m_class_vars = get_class_vars("mailMethod");
-    if(isset($m_class_vars['uattrib'])){
-      $default_uattrib = $m_class_vars['uattrib'];
-    }
-
+    $methods = array();
     foreach($class_mapping as $name => $file){
-      if(preg_match("/^mailMethod[a-z]*$/i",$name)){
+      if(preg_match("/^mailMethod.*$/i",$name)){
         $name = preg_replace("/^mailMethod/","",$name);
         if(!empty($name)){
           $methods[$name]['name'] = $name;
-          $m_class_vars = get_class_vars("mailMethod".$methods[$name]['name']);
-          if(isset($m_class_vars['uattrib'])){
-            $methods[$name]['uattrib'] = $m_class_vars['uattrib'];
-          }else{
-            $methods[$name]['uattrib'] = $default_uattrib;
-          }
         }
       }
     }
