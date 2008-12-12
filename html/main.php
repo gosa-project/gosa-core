@@ -200,11 +200,9 @@ $cleanup = FALSE;
 if ($old_plugin_dir != $plugin_dir && $old_plugin_dir != "" || isset($_POST['delete_lock'])){
   if (is_file("$old_plugin_dir/main.inc")){
     if(isset($_POST['delete_lock'])){
-      echo "<font color='red'><b>Remove lock</b></font>";
       $remove_lock= true;
     }
     if($old_plugin_dir != $plugin_dir && $old_plugin_dir != ""){
-      echo "<font color='red'><b>Cleanup</b></font>";
       $cleanup= true;
     }
     $display = "";
