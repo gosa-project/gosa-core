@@ -24,7 +24,6 @@ if ($remove_lock){
   if(session::is_set('userManagement')){
     $userManagement = session::get('userManagement');
     $userManagement->remove_lock();
-    session::un_set ('userManagement');
   }
 } else {
   /* Create usermanagement object on demand */
