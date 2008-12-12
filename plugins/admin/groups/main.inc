@@ -20,6 +20,13 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+/* Remove classes and variables from session
+ */
+if ( $cleanup ){
+  session::un_set('groupManagement');
+}
+
+
 if ($remove_lock){
   if(session::is_set('groupManagement')){
     $groupManagement = session::get('groupManagement');

@@ -23,6 +23,11 @@
 /* Clear display */
 $display= "";
 
+if ( $cleanup ){
+  session::un_set('password');
+  session::un_set('edit');
+}
+
 if (!$remove_lock){
 
   /* Reset requested? */
