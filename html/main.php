@@ -246,9 +246,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 /* Load department list when plugin has changed. That is some kind of
    compromise between speed and beeing up to date */
 if (isset($_GET['reset'])){
-  if (session::is_set('objectinfo')){
-    session::un_set('objectinfo');
-  }
+  set_object_info();
 }
 
 /* show web frontend */

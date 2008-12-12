@@ -36,11 +36,11 @@ if ($remove_lock){
   $output= $groupManagement->execute();
 
   /* Page header*/
-  if (session::is_set('objectinfo')){
+  if (get_object_info() != ""){
     $display= print_header(get_template_path('plugins/groups/images/plugin.png'),
                            _("Group administration"), "<img alt=\"\" align=\"middle\" src=\"".
                             get_template_path('images/lists/locked.png')."\"> ".
-                            LDAP::fix(session::get('objectinfo')));
+                            LDAP::fix(get_object_info()));
   } else {
     $display= print_header(get_template_path('plugins/groups/images/plugin.png'), _("Group administration"));
   }

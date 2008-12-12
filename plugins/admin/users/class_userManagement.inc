@@ -323,7 +323,7 @@ class userManagement extends plugin
       $this->sn= "";
       $this->givenName= "";
       $this->uid= "";
-      session::un_set('objectinfo');
+      set_object_info();
     }
 
 
@@ -372,7 +372,7 @@ class userManagement extends plugin
 
         /* User is allowed to change passwords, save 'dn' and 'acl' for next
            dialog. */
-        session::set('objectinfo',$this->dn);
+        set_object_info($this->dn);
         return ($smarty->fetch(get_template_path('password.tpl', TRUE)));
       } else {
         /* User is not allowed. Show message and cancel. */
@@ -412,7 +412,7 @@ class userManagement extends plugin
 
       /* Set ACL and move DN to the headline */
       $this->usertab->set_acl_base($this->dn);
-      session::set('objectinfo',$this->dn);
+      set_object_info($this->dn);
     }
 
 
@@ -436,7 +436,7 @@ class userManagement extends plugin
       if($tmp->multiple_available()){
         $this->usertab = $tmp;
         $this->usertab->set_active_tab($s_tab);
-        session::set('objectinfo',$this->usertab->get_object_info());
+        set_object_info($this->usertab->get_object_info());
       }
     }
 
@@ -455,7 +455,7 @@ class userManagement extends plugin
       $this->sn= "";
       $this->givenName= "";
       $this->uid= "";
-      session::un_set('objectinfo');
+      set_object_info();
     }
 
 
@@ -735,7 +735,7 @@ class userManagement extends plugin
 
           unset ($this->usertab);
           $this->usertab= NULL;
-          session::un_set('objectinfo');
+          set_object_info();
         }else{
         
           /* Reinitialize tab */
