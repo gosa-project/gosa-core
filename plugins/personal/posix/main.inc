@@ -35,7 +35,7 @@ if ( $remove_lock){
 
     /* Only remove lock if object was opened 
      */
-    if(session::is_set('posix') && session::is_set('edit')){
+    if(session::is_set('posixAccount') && session::is_set('edit')){
       del_lock ($ui->dn);
     }
     session::un_set ('edit');
