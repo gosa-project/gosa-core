@@ -37,7 +37,7 @@ if ( $cleanup ){
 }else{
 
   /* Create object object on demand */
-  if (!session::is_set('ogroup') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+  if (!session::is_set('ogroup')){
     session::set('ogroup',new ogroupManagement ($config));
     
   }

@@ -38,8 +38,7 @@ if ( $cleanup ){
 }else{
 
   /* Reset requested? */
-  if (isset($_POST['edit_cancel']) ||
-      (isset($_GET['reset']) && $_GET['reset'] == 1)){
+  if (isset($_POST['edit_cancel'])){
     session::un_set ('edit');
     session::un_set ('password');
   }

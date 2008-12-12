@@ -38,7 +38,7 @@ if ( $cleanup ){
 	$display= "No headpage yet for this module";
 
 	/* Create usermanagement object on demand */
-	if (!session::is_set('macl') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+	if (!session::is_set('macl')){
 		session::set('macl',new aclManagement($config, $ui));
 	}
 	$macl = session::get('macl');

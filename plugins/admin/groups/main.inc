@@ -36,7 +36,7 @@ if ( $cleanup ){
 }else{
 
   /* Create groupManagement object on demand */
-  if (!session::is_set('groupManagement') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+  if (!session::is_set('groupManagement')){
     session::set('groupManagement',new groupManagement ($config, $ui));
   }
   $groupManagement = session::get('groupManagement');

@@ -24,7 +24,7 @@
 /* Remove locks created by this plugin
 */
 $lock_msg="";
-if ($remove_lock){
+if ($remove_lock || isset($_POST['edit_cancel'])){
   if(session::is_set('posixAccount') && session::is_set('edit')){
     del_lock($ui->dn);
   }
@@ -39,13 +39,7 @@ if ( $cleanup ){
 }else{
 
   /* Reset requested? */
-  if (isset($_POST['edit_cancel']) ||  (isset($_GET['reset']) && $_GET['reset'] == 1)){
-
-    /* Only remove lock if object was opened 
-     */
-    if(session::is_set('posix') && session::is_set('edit')){
-      del_lock ($ui->dn);
-    }
+  if (isset($_POST['edit_cancel'])){
     session::un_set ('edit');
     session::un_set ('posixAccount');
   }

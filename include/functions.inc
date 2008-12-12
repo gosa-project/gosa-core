@@ -599,6 +599,7 @@ function ldap_expired_account($config, $userdn, $username)
 function add_lock($object, $user)
 {
   global $config;
+  echo "<font color='green'><b>$object</b></object><br>";
 
   /* Remember which entries were opened as read only, because we 
       don't need to remove any locks for them later.
@@ -659,6 +660,8 @@ function add_lock($object, $user)
 function del_lock ($object)
 {
   global $config;
+
+  echo "<font color='red'><b>$object</b></object><br>";
 
   if(is_array($object)){
     foreach($object as $obj){

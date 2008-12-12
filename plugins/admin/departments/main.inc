@@ -36,7 +36,7 @@ if ( $cleanup ){
 }else{
 
 	/* Create usermanagement object on demand */
-	if (!session::is_set('department') || (isset($_GET['reset']) && $_GET['reset'] == 1)){
+	if (!session::is_set('department')){
 		session::set('department',new departmentManagement($config, $ui));
 	}
 	$department = session::get('department');
