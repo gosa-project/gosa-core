@@ -290,6 +290,30 @@ A: Yes, add
    to the main section of GOsa and the folders are created in unix style.
 
 
+Q: I've a cyrus installation with customized user and folder prefixes. 
+   How can I tell GOsa to use the prefixes I prefer?
+
+A: Simply set the following attributes in the location tag of your gosa.conf:  
+
+   <location ...>
+   ...
+         mailUserCreation="myprefix/%mail%"
+         mailFolderCreation="myfolder\\.%cn%@%domain%"
+   ... \>
+
+   The dot in the above example is escaped to prevent it from replacing with '/' if 
+    cyrusUseSlashes is set to true.
+
+   You can use the following replacements:
+    %cn%       - The groups cn.
+    %uid%      - The users uid.
+    %prefix%   - The default prefix used by the mailmethod.
+    %uattrib%  - The configured mailAttribute="" (gosa.conf).
+    %domain%   - The domain part of the given mail address. (user@domain.com = domain.com)
+    %mailpart% - The user part of the mail address. (user@domain.com = user)
+    %mail%     - The complete mail address. 
+
+
 Q: I'd like to do special checks for several plugin parameters. How can I modify
    GOsa to take care of these checks?
 
