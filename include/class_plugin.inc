@@ -925,7 +925,10 @@ class plugin
     $ldap->cd($this->config->current['BASE']);
     $ldap->create_missing_trees(preg_replace("/^[^,]+,/","",$dst_dn));
     if (!$ldap->rename_dn($src_dn,$dst_dn)){
-      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $src_dn, "", get_class()));
+#      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $src_dn, "", get_class()));
+      new log("debug","Ldap Protocol v3 implementation error, ldap_rename failed, falling back to manual copy.","FROM: $src_dn  -- TO: $dst_dn",array(),$ldap->get_error());
+      @DEBUG(DEBUG_LDAP,__LINE__,__FUNCTION__,__FILE__,"Rename failed FROM: $src_dn  -- TO:  $dst_dn", 
+          "Ldap Protocol v3 implementation error, falling back to maunal method.");
       return(FALSE);
     }
 
