@@ -1054,7 +1054,7 @@ This script can be used to do automatted dialing from the addressbook.
 .B Mail options
 .PP
 .B mailMethod
-.I cyrus/kolab/golab/sendmail
+.I Cyrus/SendmailCyrus/GOlab/Kolab/Kolab22
 .PP
 The
 .I mailMethod
@@ -1062,12 +1062,12 @@ statement tells GOsa which mail method the setup should use to communicate
 with a possible mail server. Leave this undefined if your mail method does
 not match the predefined ones.
 
-.I cyrus
+.I Cyrus
 maintains accounts and sieve scripts in cyrus servers.
-.I kolab
+.I Kolab/Kolab22
 is like cyrus, but lets the kolab daemon maintain the accounts.
-.I golab is like cyrus - just with kolab attributes.
-.I sendmail just disables everything which is IMAP dependent.
+.I GOlab is like cyrus - just with kolab attributes.
+.I SendmailCyrus is based on sendmail LDAP attributes.
 .PP
 
 .B cyrusUseSlashes
@@ -1104,6 +1104,51 @@ Valid values are
 .I mail
 and
 .I uid.
+
+.B mailFolderCreation
+Every mail method has its own way to create mail accounts like 
+.I share/development
+or 
+.I shared.development@example.com
+which is used to identify the accounts, set quotas or add acls. 
+
+To override the methods default account creation syntax, you can set the
+.I mailFolderCreation
+option.
+
+.I Examples
+
+.nf
+ mailFolderCreation="%prefix%%cn%"              => "shared.development"
+ mailFolderCreation="my-prefix.%cn%%domain%"    => "my-prefix.development@example.com">
+.fi
+
+.I Placeholders
+
+.nf
+ %prefix%    The methods default prefix. (Depends on cyrusUseSlashes=FALSE/TRUE)
+ %cn%        The groups/users cn.
+ %uid%       The users uid.
+ %mail%      The objects mail attribute.
+ %domain%    The domain part of the objects mail attribute.
+ %mailpart%  The user address part of the mail address.
+ %uattrib%   Depends on mailAttribute="uid/mail".
+.fi
+
+
+.B mailUserCreation
+This attribute allows to override the user account creation syntax, see
+the
+.I mailFolderCreation
+description for more details. 
+
+.I Examples
+
+.nf
+ mailUserCreation="%prefix%%uid%"           => "user.foobar"
+ mailUserCreation=my-prefix.%uid%%domain%"  => "my-prefix.foobar@example.com"
+.fi
+
 
 .B vacationTemplateDirectory
 .I path
