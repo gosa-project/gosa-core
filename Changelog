@@ -1,5 +1,7 @@
 GOsa2 changelog
 ===============
+* gosa 2.6.2
+  - Remove golab mail method - no longer required.
 
 * gosa 2.6.1
   - Build seperate packages for plugin schema files
