@@ -109,7 +109,6 @@ class config  {
     $this->data = array(
         "TABS"      => array(), 
         "LOCATIONS" => array(), 
-        "SERVERS"   => array(), 
         "MAIN"      => array(), 
         "MENU"      => array(), 
         "SERVICE"   => array());
