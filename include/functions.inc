@@ -2574,6 +2574,11 @@ function generate_smb_nt_hash($password)
     } else {
       $hash= "";
     }
+
+    if ($hash == "") {
+      msg_dialog::display(_("Configuration error"), _("Cannot generate samba hash!"), ERROR_DIALOG);
+      return ("");
+    }
   } else {
 	  $tmp= $config->get_cfg_value('sambaHashHook')." ".escapeshellarg($password);
 	  @DEBUG (DEBUG_LDAP, __LINE__, __FUNCTION__, __FILE__, $tmp, "Execute");
@@ -2582,11 +2587,11 @@ function generate_smb_nt_hash($password)
 	  flush();
 	  reset($ar);
 	  $hash= current($ar);
-  }
 
-  if ($hash == "") {
-	  msg_dialog::display(_("Configuration error"), _("Cannot generate samba hash!"), ERROR_DIALOG);
-	  return ("");
+    if ($hash == "") {
+      msg_dialog::display(_("Configuration error"), sprintf(_("Cannot generate samba hash! Couldn't execute '%s', check the configuration attribute 'sambaHashHook' in your gosa.conf!"),$config->get_cfg_value('sambaHashHook')), ERROR_DIALOG);
+      return ("");
+    }
   }
 
   list($lm,$nt)= split (":", trim($hash));
