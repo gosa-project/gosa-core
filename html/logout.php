@@ -80,6 +80,7 @@ if (isset($_GET['request'])){
   if (isset($config) && $config->get_cfg_value("htaccessAuthentication") == "true"){
 
     /* Else notice that the user has to close the browser... */
+    $smarty->assign("iePngWorkaround", FALSE);
     $smarty->display (get_template_path('headers.tpl'));
     $smarty->display (get_template_path('logout-close.tpl'));
     exit;

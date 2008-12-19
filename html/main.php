@@ -303,6 +303,7 @@ $plist->gen_menu();
 $smarty->assign ("menu", $plist->menu);
 $smarty->assign ("plug", "$plug");
 
+$smarty->assign("iePngWorkaround", $config->get_cfg_value("iePngWorkaround", FALSE));
 $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
 
 /* React on clicks */
