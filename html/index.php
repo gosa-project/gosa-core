@@ -90,7 +90,7 @@ function displayLogin()
     $smarty->assign("php_errors", "");
   }
   $smarty->assign("msg_dialogs", msg_dialog::get_dialogs());
-  $smarty->assign("iePngWorkaround", $config->get_cfg_value("iePngWorkaround", FALSE));
+  $smarty->assign("iePngWorkaround", $config->get_cfg_value("iePngWorkaround","false" ) == "true");
   $smarty->display (get_template_path('headers.tpl'));
   $smarty->assign("version",get_gosa_version());
   $smarty->display(get_template_path('login.tpl'));
