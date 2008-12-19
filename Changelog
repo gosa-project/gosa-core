@@ -1,7 +1,17 @@
 GOsa2 changelog
 ===============
+
 * gosa 2.6.2
-  - Remove golab mail method - no longer required.
+  - Updated german locales
+  - Updated french locales
+  - Updated spanish locales
+  - Improved sieve handling, added more detailed error messages
+  - Mail methods cleanup for kolab 2.2 / IMAP acls
+  - Removed obsoleted GOlab mail method
+  - Optimized system to group assignments when activating new devices
+  - Add a choice for OPSI clients when activating new devices
+  - Setup cleanups
+  - Edit locking improvements, code cleanup
 
 * gosa 2.6.1
   - Build seperate packages for plugin schema files
