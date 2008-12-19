@@ -249,6 +249,7 @@ a.maintitlebar, div.maintitlebar {
 	font-size:12px;
 	text-align:center;
 	vertical-align:middle;
+	cursor: pointer;
 }
 
 a.maintitlebar:hover {
