@@ -279,6 +279,7 @@ p.menuitem {
 	font-weight:normal;
 	font-size:12px;
 	text-align:left;
+	cursor: pointer;
 	padding-left:15px;
 	padding-top:2px;
 	padding-bottom:2px;
@@ -366,6 +367,10 @@ a.menuitem:hover {
 	text-decoration:none;
 }
 
+td.iconmenu {
+	cursor:pointer;
+}
+
 a.iconmenu:link {
 	text-decoration:none;
 	color:#00008f;
@@ -373,7 +378,6 @@ a.iconmenu:link {
 
 td.iconmenu:hover {
 	background-color:#F0F0F0;
-	cursor:pointer;
 }
 
 a.iconmenu:visited {
