@@ -649,7 +649,7 @@ class userManagement extends plugin
       /* Get entry check current status */
       $val = $this->list[$s_entry];
       if (!preg_match("/w/",$this->ui->get_permissions($val['dn'],"users/password"))){
-        msg_dialog::display(_("Password locking"),
+        msg_dialog::display(_("Account locking"),
             _("You have no permission to change the lock status for this user!"),WARNING_DIALOG);
       }else{
         $pwd = $val['userPassword'][0];
@@ -668,7 +668,7 @@ class userManagement extends plugin
             if (is_array($hn)){
               $hn= $hn[0];
             }
-            msg_dialog::display(_("Password locking"),
+            msg_dialog::display(_("Account locking"),
               sprintf(_("Password method '%s' does not support locking. Account has not been locked!"), $hn),WARNING_DIALOG);
           }
         }else{

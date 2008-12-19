@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-09 15:29+0100\n"
+"POT-Creation-Date: 2008-12-19 09:29+0100\n"
 "PO-Revision-Date: 2008-11-30 14:15+0100\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team: french <fr@li.org>\n"
@@ -40,7 +40,7 @@ msgstr "Le copier/coller à échoué !"
 #: include/password-methods/class_password-methods.inc:250
 #: include/class_log.inc:138 include/class_log.inc:218
 #: include/class_plugin.inc:659 include/class_plugin.inc:700
-#: include/class_plugin.inc:742 include/class_plugin.inc:1582
+#: include/class_plugin.inc:742 include/class_plugin.inc:1585
 #: include/class_tabs.inc:50 plugins/admin/groups/class_groupGeneric.inc:954
 #: plugins/admin/groups/class_groupGeneric.inc:959
 #: plugins/admin/groups/class_groupGeneric.inc:1204
@@ -49,7 +49,7 @@ msgstr "Le copier/coller à échoué !"
 #: plugins/personal/generic/class_user.inc:513
 #: plugins/personal/generic/class_user.inc:806
 #: plugins/personal/generic/class_user.inc:1382
-#: plugins/personal/generic/main.inc:109 html/index.php:222 html/index.php:226
+#: plugins/personal/generic/main.inc:115 html/index.php:222 html/index.php:226
 #: setup/setup_checks.tpl:30 setup/setup_checks.tpl:91
 #: setup/class_setupStep_Migrate.inc:1186
 #: ihtml/themes/default/msg_dialog.tpl:52
@@ -69,15 +69,16 @@ msgstr "Impossible d'attribuer les permissions pour '%s'"
 #: include/class_CopyPasteHandler.inc:176
 #: include/class_CopyPasteHandler.inc:185
 #: include/class_CopyPasteHandler.inc:193 include/class_pluglist.inc:177
-#: include/class_config.inc:126 include/class_config.inc:630
+#: include/class_config.inc:125 include/class_config.inc:629
 #: include/utils/class_timezone.inc:47 include/functions.inc:637
-#: include/functions.inc:2555 include/functions.inc:2588
+#: include/functions.inc:2555 include/functions.inc:2579
+#: include/functions.inc:2592
 #: include/password-methods/class_password-methods-ssha.inc:51
 #: include/password-methods/class_password-methods-sha.inc:48
-#: include/class_plugin.inc:1322 include/class_plugin.inc:1334
+#: include/class_plugin.inc:1325 include/class_plugin.inc:1337
 #: plugins/admin/groups/class_groupGeneric.inc:163
 #: plugins/admin/groups/class_groupGeneric.inc:728 html/password.php:74
-#: html/index.php:142 html/index.php:214 html/main.php:213
+#: html/index.php:142 html/index.php:214 html/main.php:228
 msgid "Configuration error"
 msgstr "Erreur de configuration"
 
@@ -89,10 +90,12 @@ msgstr "'%s' n'est pas un objet LDAP valide"
 #: include/class_CopyPasteHandler.inc:159
 #: include/class_CopyPasteHandler.inc:269 include/class_acl.inc:905
 #: include/class_ldap.inc:648 include/class_ldap.inc:696
-#: include/functions.inc:467 include/functions.inc:627
-#: include/functions.inc:724 include/functions.inc:1107
-#: include/functions.inc:1917 include/functions.inc:1951
-#: include/functions.inc:1971 include/class_log.inc:88
+#: include/class_session.inc:76 include/class_session.inc:101
+#: include/class_session.inc:127 include/functions.inc:467
+#: include/functions.inc:627 include/functions.inc:724
+#: include/functions.inc:1107 include/functions.inc:1917
+#: include/functions.inc:1951 include/functions.inc:1971
+#: include/class_log.inc:88
 msgid "Internal error"
 msgstr "Erreur interne"
 
@@ -111,8 +114,8 @@ msgstr "Ces objets seront collés : %s"
 msgid "This object will be pasted: %s"
 msgstr "Cet objet sera collé : %s"
 
-#: include/class_CopyPasteHandler.inc:506 include/class_plugin.inc:2062
-#: include/class_plugin.inc:2065
+#: include/class_CopyPasteHandler.inc:506 include/class_plugin.inc:2065
+#: include/class_plugin.inc:2068
 msgid "Paste"
 msgstr "Coller"
 
@@ -306,17 +309,17 @@ msgid "ACL takes effect for all users"
 msgstr "ACL valide pour tout les utilisateurs"
 
 #: include/class_acl.inc:1170 include/class_ldap.inc:705
-#: include/class_ldap.inc:1171 include/class_config.inc:260
+#: include/class_ldap.inc:1171 include/class_config.inc:259
 #: include/functions.inc:364 include/functions.inc:390
 #: include/functions.inc:398 include/functions.inc:427
 #: include/functions.inc:652 include/functions.inc:695
 #: include/functions.inc:737 include/functions.inc:782
-#: include/functions.inc:2534 include/functions.inc:2776
-#: include/class_MultiSelectWindow.inc:550 include/class_plugin.inc:928
-#: include/class_plugin.inc:1240 include/class_plugin.inc:1289
-#: include/class_plugin.inc:1293 include/class_plugin.inc:1308
-#: include/class_plugin.inc:1368 include/class_plugin.inc:1426
-#: include/class_plugin.inc:1492 include/class_plugin.inc:1507
+#: include/functions.inc:2534 include/functions.inc:2781
+#: include/class_MultiSelectWindow.inc:550 include/class_plugin.inc:1243
+#: include/class_plugin.inc:1292 include/class_plugin.inc:1296
+#: include/class_plugin.inc:1311 include/class_plugin.inc:1371
+#: include/class_plugin.inc:1429 include/class_plugin.inc:1495
+#: include/class_plugin.inc:1510
 #: plugins/admin/departments/class_departmentGeneric.inc:241
 #: plugins/admin/departments/class_departmentGeneric.inc:428
 #: plugins/admin/departments/class_departmentGeneric.inc:701
@@ -446,26 +449,26 @@ msgstr "La connexion socket vers l'hôte '%s:%s' à echoué : %s"
 msgid "Socket timeout of %s seconds reached."
 msgstr "Le temps limite du socket de '%s' secondes à été atteint."
 
-#: include/class_config.inc:123
+#: include/class_config.inc:122
 #, php-format
 msgid "XML error in gosa.conf: %s at line %d"
 msgstr "Erreur XML dans gosa.conf: %s à la ligne %d"
 
-#: include/class_config.inc:260
+#: include/class_config.inc:259
 msgid "Cannot bind to LDAP. Please contact the system administrator."
 msgstr ""
 "Impossible de se connecter à l'annuaire LDAP. Veuillez contacter "
 "l'administrateur du système."
 
-#: include/class_config.inc:630
+#: include/class_config.inc:629
 msgid "sambaSID and/or sambaRidBase missing in the configuration!"
 msgstr "sambaSID et/ou sambaRidBase absents de votre configuration !"
 
-#: include/class_config.inc:980
+#: include/class_config.inc:979
 msgid "Configuration"
 msgstr ""
 
-#: include/class_config.inc:980
+#: include/class_config.inc:979
 msgid ""
 "The configuration file you are using seems to be outdated. Please move the "
 "GOsa configuration file away to run the GOsa setup again."
@@ -1127,11 +1130,11 @@ msgstr "Erreur XML dans guide.xml: %s à la ligne %d"
 msgid "No help available for this plugin."
 msgstr "L'aide n'est pas disponible pour cette extension."
 
-#: include/functions_helpviewer.inc:97 html/helpviewer.php:194
+#: include/functions_helpviewer.inc:97 html/helpviewer.php:193
 msgid "previous"
 msgstr "précédent"
 
-#: include/functions_helpviewer.inc:101 html/helpviewer.php:198
+#: include/functions_helpviewer.inc:101 html/helpviewer.php:197
 msgid "next"
 msgstr "suivant"
 
@@ -1252,6 +1255,14 @@ msgstr ""
 msgid "Filter entries with this syntax"
 msgstr "Filtrer les entrées avec cette syntaxe"
 
+#: include/class_session.inc:76 include/class_session.inc:101
+#: include/class_session.inc:127
+#, fuzzy
+msgid "Requested channel does not exist! Please contact your Administrator."
+msgstr ""
+"Le nom de l'utilisateur / UID n'est pas unique dans votre annuaire LDAP. "
+"Veuillez contacter votre administrateur système."
+
 #: include/class_msg_dialog.inc:124
 msgid "Please fix the above error and reload the page."
 msgstr "Veuillez fixer l'erreur ci dessus et recharger la page."
@@ -1320,7 +1331,7 @@ msgstr "Le serveur LDAP à retourné: %s"
 #: include/class_tabs.inc:259 plugins/admin/departments/remove.tpl:2
 #: plugins/admin/departments/dep_move_confirm.tpl:2
 #: plugins/admin/acl/remove.tpl:2 plugins/admin/ogroups/remove.tpl:2
-#: plugins/admin/users/class_userManagement.inc:630
+#: plugins/admin/users/class_userManagement.inc:631
 #: plugins/admin/users/remove.tpl:2 plugins/admin/groups/remove.tpl:2
 #: plugins/personal/posix/class_posixAccount.inc:832
 #: plugins/personal/posix/class_posixAccount.inc:925 html/password.php:280
@@ -1537,9 +1548,15 @@ msgstr ""
 "La commande '%s', utilisée dans le POSTMODIFY de l'extension '%s' n'existe "
 "pas."
 
-#: include/functions.inc:2588
+#: include/functions.inc:2579
 msgid "Cannot generate samba hash!"
 msgstr "Impossible de générer un hash samba !"
+
+#: include/functions.inc:2592
+#, php-format
+msgid ""
+"Cannot generate samba hash: running '%s' failed, check the 'sambaHashHook'!"
+msgstr ""
 
 #: include/php_setup.inc:93
 msgid "Generating this page caused the PHP interpreter to raise some errors!"
@@ -1655,7 +1672,7 @@ msgstr "Encodage du inconsistant du DN détecté : '%s'"
 msgid "You're about to delete the snapshot '%s'."
 msgstr "Vous êtes sur le point de supprimer le snapshot '%s'."
 
-#: include/class_SnapShotDialog.inc:143 include/class_plugin.inc:1983
+#: include/class_SnapShotDialog.inc:143 include/class_plugin.inc:1986
 msgid "Restore snapshot"
 msgstr "Restaurer la copie instantanée"
 
@@ -1700,7 +1717,7 @@ msgstr ""
 "Cet objet à changer depuis son ouverture dans GOsa. Tout les changement "
 "éffectués par les autres seront perdus si vous sauvez cette entrée !"
 
-#: include/class_plugin.inc:1322 include/class_plugin.inc:1334
+#: include/class_plugin.inc:1325 include/class_plugin.inc:1337
 #, php-format
 msgid ""
 "The snapshot functionality is enabled, but the required variable '%s' is not "
@@ -1709,75 +1726,75 @@ msgstr ""
 "La fonctionnalité pour les copie instantanées est activée, mais la variable "
 "requise '%s' n'est pas configurée."
 
-#: include/class_plugin.inc:1530 include/class_plugin.inc:1542
-#: include/class_plugin.inc:1557 include/class_plugin.inc:1570
+#: include/class_plugin.inc:1533 include/class_plugin.inc:1545
+#: include/class_plugin.inc:1560 include/class_plugin.inc:1573
 #: plugins/admin/acl/class_aclManagement.inc:268
 #: plugins/admin/ogroups/class_ogroupManagement.inc:237
 #: plugins/admin/users/class_userManagement.inc:344
-#: plugins/admin/users/class_userManagement.inc:583
+#: plugins/admin/users/class_userManagement.inc:584
 #: plugins/admin/groups/class_groupManagement.inc:356
 msgid "Permission"
 msgstr "Permissions"
 
-#: include/class_plugin.inc:1530
+#: include/class_plugin.inc:1533
 #, php-format
 msgid "You are not allowed to create a snapshot for %s."
 msgstr ""
 "Vous n'êtes pas autorisé à créer une nouvelle copie instantanée pour %s."
 
-#: include/class_plugin.inc:1542 include/class_plugin.inc:1557
-#: include/class_plugin.inc:1570
+#: include/class_plugin.inc:1545 include/class_plugin.inc:1560
+#: include/class_plugin.inc:1573
 #, php-format
 msgid "You are not allowed to restore a snapshot for %s."
 msgstr "Vous n'êtes pas autorisé à restaurer un copie instantanée de %s."
 
-#: include/class_plugin.inc:1782
+#: include/class_plugin.inc:1785
 msgid "Changing ACL dn"
 msgstr "Changement du dn de l'acl"
 
-#: include/class_plugin.inc:1782
+#: include/class_plugin.inc:1785
 msgid "from"
 msgstr "de"
 
-#: include/class_plugin.inc:1783 setup/class_setupStep_Migrate.inc:1235
+#: include/class_plugin.inc:1786 setup/class_setupStep_Migrate.inc:1235
 #: setup/class_setupStep_Migrate.inc:1285
 #: setup/class_setupStep_Migrate.inc:1333
 msgid "to"
 msgstr "vers"
 
-#: include/class_plugin.inc:1965 include/class_plugin.inc:1967
+#: include/class_plugin.inc:1968 include/class_plugin.inc:1970
 msgid "Restore"
 msgstr "Restaurer"
 
-#: include/class_plugin.inc:1990
+#: include/class_plugin.inc:1993
 msgid "Create snapshot"
 msgstr "Créer un snapshot"
 
-#: include/class_plugin.inc:1991
+#: include/class_plugin.inc:1994
 msgid "Create a new snapshot from this object"
 msgstr "Créer un nouveau snapshot depuis cet objet"
 
-#: include/class_plugin.inc:2009
+#: include/class_plugin.inc:2012
 msgid "cut"
 msgstr "couper"
 
-#: include/class_plugin.inc:2009
+#: include/class_plugin.inc:2012
 msgid "Cut this entry"
 msgstr "Couper cette entrée"
 
-#: include/class_plugin.inc:2017
+#: include/class_plugin.inc:2020
 msgid "copy"
 msgstr "copier"
 
-#: include/class_plugin.inc:2017
+#: include/class_plugin.inc:2020
 msgid "Copy this entry"
 msgstr "Copier cette entrée"
 
-#: include/class_plugin.inc:2051
+#: include/class_plugin.inc:2054
 msgid "Copy"
 msgstr "Copier"
 
-#: include/class_plugin.inc:2055
+#: include/class_plugin.inc:2058
 msgid "Cut"
 msgstr "Couper"
 
@@ -1845,9 +1862,9 @@ msgstr "Références"
 #: plugins/admin/ogroups/class_ogroup.inc:919
 #: plugins/admin/ogroups/class_ogroup.inc:929
 #: plugins/admin/ogroups/class_ogroup.inc:1126
-#: plugins/admin/users/class_userManagement.inc:754
-#: plugins/admin/users/class_userManagement.inc:828
-#: plugins/admin/users/class_userManagement.inc:840
+#: plugins/admin/users/class_userManagement.inc:767
+#: plugins/admin/users/class_userManagement.inc:841
+#: plugins/admin/users/class_userManagement.inc:853
 #: plugins/admin/groups/class_groupGeneric.inc:1096
 #: plugins/admin/groups/class_groupGeneric.inc:1102
 #: plugins/admin/groups/class_groupGeneric.inc:1104
@@ -2079,8 +2096,8 @@ msgstr "Gérer les départements"
 #: plugins/admin/ogroups/class_ogroupManagement.inc:285
 #: plugins/admin/ogroups/class_ogroupManagement.inc:338
 #: plugins/admin/ogroups/class_ogroupManagement.inc:365
-#: plugins/admin/users/class_userManagement.inc:545
-#: plugins/admin/users/class_userManagement.inc:549
+#: plugins/admin/users/class_userManagement.inc:546
+#: plugins/admin/users/class_userManagement.inc:550
 #: plugins/admin/groups/class_groupManagement.inc:407
 #: plugins/admin/groups/class_groupManagement.inc:461
 #: plugins/admin/groups/class_groupManagement.inc:492
@@ -2166,7 +2183,7 @@ msgstr "Nom de l'entreprise"
 msgid "Name of organization to create"
 msgstr "Nom de l'entreprise à créer"
 
-#: plugins/admin/departments/main.inc:42 plugins/admin/departments/main.inc:44
+#: plugins/admin/departments/main.inc:50 plugins/admin/departments/main.inc:52
 msgid "Department management"
 msgstr "Gestion des départements"
 
@@ -2455,7 +2472,7 @@ msgstr "Sélectionnez un type d'acl"
 msgid "List of available ACL categories"
 msgstr "Liste des catégories d'acl disponibles"
 
-#: plugins/admin/acl/main.inc:45 plugins/admin/acl/main.inc:47
+#: plugins/admin/acl/main.inc:52 plugins/admin/acl/main.inc:54
 msgid "ACL management"
 msgstr "Gestion des ACL"
 
@@ -2737,7 +2754,7 @@ msgid "Regular expression for matching object names"
 msgstr "Expression régulière pour trouver les objets correspondants"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:26
-#: plugins/admin/ogroups/main.inc:46 plugins/admin/ogroups/main.inc:51
+#: plugins/admin/ogroups/main.inc:53 plugins/admin/ogroups/main.inc:58
 #: plugins/admin/ogroups/class_ogroup.inc:1123
 msgid "Object groups"
 msgstr "Groupes d'objets"
@@ -2870,7 +2887,7 @@ msgid "applications"
 msgstr ""
 
 #: plugins/admin/ogroups/class_ogroup.inc:510
-#: plugins/admin/users/class_userManagement.inc:492
+#: plugins/admin/users/class_userManagement.inc:493
 msgid "none"
 msgstr "aucun"
 
@@ -2977,7 +2994,7 @@ msgstr ""
 #: plugins/admin/users/password.tpl:13
 #: plugins/admin/users/class_userManagement.inc:265
 #: plugins/personal/generic/password.tpl:7
-#: plugins/personal/generic/main.inc:91
+#: plugins/personal/generic/main.inc:97
 #: plugins/personal/password/password.tpl:18 html/password.php:196
 #: ihtml/themes/default/password.tpl:82 ihtml/themes/default/password.tpl:83
 #: ihtml/themes/default/accountexpired.tpl:32
@@ -3014,7 +3031,7 @@ msgstr "Nom d'utilisateur"
 
 #: plugins/admin/users/class_divListUsers.inc:84
 #: plugins/admin/users/class_divListUsers.inc:128
-#: plugins/admin/users/class_userManagement.inc:751
+#: plugins/admin/users/class_userManagement.inc:764
 #: plugins/admin/users/template.tpl:15 plugins/admin/users/templatize.tpl:15
 msgid "Template"
 msgstr "Modèle"
@@ -3142,7 +3159,7 @@ msgid "active"
 msgstr "actif"
 
 #: plugins/admin/users/class_divListUsers.inc:258
-#: plugins/admin/users/class_userManagement.inc:601
+#: plugins/admin/users/class_userManagement.inc:602
 msgid "user"
 msgstr "utilisateurs"
 
@@ -3169,7 +3186,7 @@ msgid "Manage users"
 msgstr "Gèrer les utilisateurs"
 
 #: plugins/admin/users/class_userManagement.inc:260
-#: plugins/personal/generic/main.inc:86
+#: plugins/personal/generic/main.inc:92
 #: plugins/personal/password/class_password.inc:82 html/password.php:193
 msgid ""
 "The passwords you've entered as 'New password' and 'Repeated new password' "
@@ -3180,7 +3197,6 @@ msgstr ""
 
 #: plugins/admin/users/class_userManagement.inc:316
 #: plugins/admin/users/class_userManagement.inc:379
-#: plugins/admin/users/class_userManagement.inc:651
 #: plugins/personal/password/class_password.inc:78
 #: plugins/personal/password/class_password.inc:81
 #: plugins/personal/password/class_password.inc:84
@@ -3188,7 +3204,7 @@ msgstr ""
 #: plugins/personal/password/class_password.inc:90
 #: plugins/personal/password/class_password.inc:93
 #: plugins/personal/password/class_password.inc:107
-#: plugins/personal/password/class_password.inc:113 html/main.php:357
+#: plugins/personal/password/class_password.inc:113 html/main.php:328
 #: ihtml/themes/default/password.tpl:41
 msgid "Password change"
 msgstr "Changement de mot de passe"
@@ -3200,23 +3216,35 @@ msgstr ""
 "Vous n'avez pas l'autorisation pour changer le mot de passe de ce(s) "
 "utilisateurs !"
 
-#: plugins/admin/users/class_userManagement.inc:545
+#: plugins/admin/users/class_userManagement.inc:546
 #, php-format
 msgid "You have no permission to modify object '%s'!"
 msgstr "Vous n'avez pas l'autorisation pour modifier l'objet '%s' !"
 
-#: plugins/admin/users/class_userManagement.inc:549
+#: plugins/admin/users/class_userManagement.inc:550
 msgid "You have no permission to use this template!"
 msgstr "Vous n'avez pas l'autorisation pour utiliser ce modèle !"
 
 #: plugins/admin/users/class_userManagement.inc:652
+#: plugins/admin/users/class_userManagement.inc:671
+#, fuzzy
+msgid "Account locking"
+msgstr "Compte"
+
+#: plugins/admin/users/class_userManagement.inc:653
 msgid "You have no permission to change the lock status for this user!"
 msgstr ""
 "Vous n'avez pas l'autorisation pour changer le verrouillage de cet "
 "utilisateur !"
 
-#: plugins/admin/users/class_userManagement.inc:757
-#: plugins/admin/users/class_userManagement.inc:831
+#: plugins/admin/users/class_userManagement.inc:672
+#, php-format
+msgid ""
+"Password method '%s' does not support locking. Account has not been locked!"
+msgstr ""
+
+#: plugins/admin/users/class_userManagement.inc:770
+#: plugins/admin/users/class_userManagement.inc:844
 #: plugins/personal/generic/class_user.inc:1235
 #: plugins/personal/generic/class_user.inc:1277
 #: plugins/personal/generic/class_user.inc:1555
@@ -3235,7 +3263,7 @@ msgstr ""
 "voulez effectuez cette opération étant donné qu'il est impossible pour GOsa "
 "de récupérer vos données."
 
-#: plugins/admin/users/main.inc:44 plugins/admin/users/main.inc:50
+#: plugins/admin/users/main.inc:51 plugins/admin/users/main.inc:57
 msgid "User administration"
 msgstr "Administration des utilisateurs"
 
@@ -3450,7 +3478,7 @@ msgstr ""
 "assurez que vous voulez bien exécuter cette action étant donné qu'il est "
 "impossible pour GOsa de récupérer vos données."
 
-#: plugins/admin/groups/main.inc:41 plugins/admin/groups/main.inc:45
+#: plugins/admin/groups/main.inc:49 plugins/admin/groups/main.inc:53
 msgid "Group administration"
 msgstr "Administration du groupe"
 
@@ -3745,7 +3773,7 @@ msgstr ""
 msgid "System trust model"
 msgstr "Système de Confiance"
 
-#: plugins/personal/posix/main.inc:136
+#: plugins/personal/posix/main.inc:142
 msgid "POSIX settings"
 msgstr "Paramètres Posix"
 
@@ -4130,11 +4158,11 @@ msgstr "Méthode d'encodage des mots de passe"
 msgid "User certificates"
 msgstr "Certificats utilisateurs"
 
-#: plugins/personal/generic/main.inc:109
+#: plugins/personal/generic/main.inc:115
 msgid "You have no permission to set your password!"
 msgstr "Vous n'avez pas l'autorisation pour changer votre mot de passe !"
 
-#: plugins/personal/generic/main.inc:200
+#: plugins/personal/generic/main.inc:206
 msgid "Generic user information"
 msgstr "Information générales sur l'utilisateur"
 
@@ -4226,7 +4254,7 @@ msgstr "Vous n'avez pas l'autorisation pour changer votre mot de passe."
 msgid "User password"
 msgstr "Mot de passe"
 
-#: plugins/personal/password/main.inc:47 setup/setup_config1.tpl:136
+#: plugins/personal/password/main.inc:57 setup/setup_config1.tpl:136
 msgid "Password settings"
 msgstr "Préférences pour les mots de passe"
 
@@ -4429,33 +4457,33 @@ msgstr ""
 "FATAL: Register globals est activé. GOsa ne permettra pas aux utilisateurs "
 "de se connecter tant que ceci n'est pas corrigé par un administrateur."
 
-#: html/main.php:213
+#: html/main.php:228
 msgid "Running out of memory!"
 msgstr "Plus de mémoire disponible !"
 
-#: html/main.php:287
+#: html/main.php:284
 msgid "User ACL checks disabled"
 msgstr "Les vérifications des ACL de l'utilisateur ont été désactivés"
 
-#: html/main.php:357
+#: html/main.php:328
 msgid "Your password is about to expire, please change your password!"
 msgstr ""
 "Votre mot de passe va bientôt expirer, veuillez changer votre mot de passe !"
 
-#: html/main.php:366
+#: html/main.php:338
 msgid "Plugin"
 msgstr "Extension"
 
-#: html/main.php:367
+#: html/main.php:339
 #, php-format
 msgid "FATAL: Cannot find any plugin definitions for plugin '%s'!"
 msgstr "FATAL: Impossible de trouver une définition pour l'extension '%s' !"
 
-#: html/main.php:381
+#: html/main.php:353
 msgid "Configuration Error"
 msgstr "Erreur de configuration"
 
-#: html/main.php:382
+#: html/main.php:354
 #, php-format
 msgid ""
 "FATAL: not all POST variables have been transfered by PHP - please inform "
@@ -4468,15 +4496,15 @@ msgstr ""
 msgid "Smarty"
 msgstr "Smarty"
 
-#: html/helpviewer.php:65
+#: html/helpviewer.php:64
 msgid "Help browser"
 msgstr "Aide"
 
-#: html/helpviewer.php:119
+#: html/helpviewer.php:118
 msgid "There is no helpfile specified for this class"
 msgstr "Il n'y a pas de fichier d'aide spécifiée pour cette classe."
 
-#: html/helpviewer.php:269
+#: html/helpviewer.php:268
 #, php-format
 msgid "Helpdir '%s' is not accessible, can't read any helpfiles."
 msgstr ""
@@ -6527,6 +6555,10 @@ msgid ""
 msgstr ""
 "Veuillez fermer la fenêtre de votre navigateur et vider les cache des mots "
 "de passe pour éviter l'authentification automatique par votre navigateur."
+
+#, fuzzy
+#~ msgid "Password locking"
+#~ msgstr "Changement de mot de passe"
 
 #, fuzzy
 #~ msgid "Create new"

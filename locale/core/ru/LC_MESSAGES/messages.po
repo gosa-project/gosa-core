@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-09 15:29+0100\n"
+"POT-Creation-Date: 2008-12-19 09:29+0100\n"
 "PO-Revision-Date: 2005-04-18 14:35+0300\n"
 "Last-Translator: Igor Muratov <migor@altlinux.org>\n"
 "Language-Team: ALT Linux Team\n"
@@ -40,7 +40,7 @@ msgstr "Ошибка при регистрации. Ответ сервера: \
 #: include/password-methods/class_password-methods.inc:250
 #: include/class_log.inc:138 include/class_log.inc:218
 #: include/class_plugin.inc:659 include/class_plugin.inc:700
-#: include/class_plugin.inc:742 include/class_plugin.inc:1582
+#: include/class_plugin.inc:742 include/class_plugin.inc:1585
 #: include/class_tabs.inc:50 plugins/admin/groups/class_groupGeneric.inc:954
 #: plugins/admin/groups/class_groupGeneric.inc:959
 #: plugins/admin/groups/class_groupGeneric.inc:1204
@@ -49,7 +49,7 @@ msgstr "Ошибка при регистрации. Ответ сервера: \
 #: plugins/personal/generic/class_user.inc:513
 #: plugins/personal/generic/class_user.inc:806
 #: plugins/personal/generic/class_user.inc:1382
-#: plugins/personal/generic/main.inc:109 html/index.php:222 html/index.php:226
+#: plugins/personal/generic/main.inc:115 html/index.php:222 html/index.php:226
 #: setup/setup_checks.tpl:30 setup/setup_checks.tpl:91
 #: setup/class_setupStep_Migrate.inc:1186
 #: ihtml/themes/default/msg_dialog.tpl:52
@@ -69,15 +69,16 @@ msgstr "Удалить"
 #: include/class_CopyPasteHandler.inc:176
 #: include/class_CopyPasteHandler.inc:185
 #: include/class_CopyPasteHandler.inc:193 include/class_pluglist.inc:177
-#: include/class_config.inc:126 include/class_config.inc:630
+#: include/class_config.inc:125 include/class_config.inc:629
 #: include/utils/class_timezone.inc:47 include/functions.inc:637
-#: include/functions.inc:2555 include/functions.inc:2588
+#: include/functions.inc:2555 include/functions.inc:2579
+#: include/functions.inc:2592
 #: include/password-methods/class_password-methods-ssha.inc:51
 #: include/password-methods/class_password-methods-sha.inc:48
-#: include/class_plugin.inc:1322 include/class_plugin.inc:1334
+#: include/class_plugin.inc:1325 include/class_plugin.inc:1337
 #: plugins/admin/groups/class_groupGeneric.inc:163
 #: plugins/admin/groups/class_groupGeneric.inc:728 html/password.php:74
-#: html/index.php:142 html/index.php:214 html/main.php:213
+#: html/index.php:142 html/index.php:214 html/main.php:228
 #, fuzzy
 msgid "Configuration error"
 msgstr "Настроить"
@@ -90,10 +91,12 @@ msgstr ""
 #: include/class_CopyPasteHandler.inc:159
 #: include/class_CopyPasteHandler.inc:269 include/class_acl.inc:905
 #: include/class_ldap.inc:648 include/class_ldap.inc:696
-#: include/functions.inc:467 include/functions.inc:627
-#: include/functions.inc:724 include/functions.inc:1107
-#: include/functions.inc:1917 include/functions.inc:1951
-#: include/functions.inc:1971 include/class_log.inc:88
+#: include/class_session.inc:76 include/class_session.inc:101
+#: include/class_session.inc:127 include/functions.inc:467
+#: include/functions.inc:627 include/functions.inc:724
+#: include/functions.inc:1107 include/functions.inc:1917
+#: include/functions.inc:1951 include/functions.inc:1971
+#: include/class_log.inc:88
 #, fuzzy
 msgid "Internal error"
 msgstr "Терминал-сервер"
@@ -113,8 +116,8 @@ msgstr ""
 msgid "This object will be pasted: %s"
 msgstr ""
 
-#: include/class_CopyPasteHandler.inc:506 include/class_plugin.inc:2062
-#: include/class_plugin.inc:2065
+#: include/class_CopyPasteHandler.inc:506 include/class_plugin.inc:2065
+#: include/class_plugin.inc:2068
 #, fuzzy
 msgid "Paste"
 msgstr "Дата"
@@ -327,17 +330,17 @@ msgid "ACL takes effect for all users"
 msgstr ""
 
 #: include/class_acl.inc:1170 include/class_ldap.inc:705
-#: include/class_ldap.inc:1171 include/class_config.inc:260
+#: include/class_ldap.inc:1171 include/class_config.inc:259
 #: include/functions.inc:364 include/functions.inc:390
 #: include/functions.inc:398 include/functions.inc:427
 #: include/functions.inc:652 include/functions.inc:695
 #: include/functions.inc:737 include/functions.inc:782
-#: include/functions.inc:2534 include/functions.inc:2776
-#: include/class_MultiSelectWindow.inc:550 include/class_plugin.inc:928
-#: include/class_plugin.inc:1240 include/class_plugin.inc:1289
-#: include/class_plugin.inc:1293 include/class_plugin.inc:1308
-#: include/class_plugin.inc:1368 include/class_plugin.inc:1426
-#: include/class_plugin.inc:1492 include/class_plugin.inc:1507
+#: include/functions.inc:2534 include/functions.inc:2781
+#: include/class_MultiSelectWindow.inc:550 include/class_plugin.inc:1243
+#: include/class_plugin.inc:1292 include/class_plugin.inc:1296
+#: include/class_plugin.inc:1311 include/class_plugin.inc:1371
+#: include/class_plugin.inc:1429 include/class_plugin.inc:1495
+#: include/class_plugin.inc:1510
 #: plugins/admin/departments/class_departmentGeneric.inc:241
 #: plugins/admin/departments/class_departmentGeneric.inc:428
 #: plugins/admin/departments/class_departmentGeneric.inc:701
@@ -459,29 +462,29 @@ msgstr ""
 msgid "Socket timeout of %s seconds reached."
 msgstr ""
 
-#: include/class_config.inc:123
+#: include/class_config.inc:122
 #, php-format
 msgid "XML error in gosa.conf: %s at line %d"
 msgstr "Ошибка XML в gosa.conf: %s в строке %d"
 
-#: include/class_config.inc:260
+#: include/class_config.inc:259
 #, fuzzy
 msgid "Cannot bind to LDAP. Please contact the system administrator."
 msgstr ""
 "Не удается начать сеанс на LDAP-сервере. Обратитесь к системному "
 "администратору."
 
-#: include/class_config.inc:630
+#: include/class_config.inc:629
 #, fuzzy
 msgid "sambaSID and/or sambaRidBase missing in the configuration!"
 msgstr "В вашем файле настройки отсутствуют значения SID и/или RIDBASE!"
 
-#: include/class_config.inc:980
+#: include/class_config.inc:979
 #, fuzzy
 msgid "Configuration"
 msgstr "Настроить"
 
-#: include/class_config.inc:980
+#: include/class_config.inc:979
 msgid ""
 "The configuration file you are using seems to be outdated. Please move the "
 "GOsa configuration file away to run the GOsa setup again."
@@ -1162,11 +1165,11 @@ msgstr "Ошибка XML в gosa.conf: %s в строке %d"
 msgid "No help available for this plugin."
 msgstr ""
 
-#: include/functions_helpviewer.inc:97 html/helpviewer.php:194
+#: include/functions_helpviewer.inc:97 html/helpviewer.php:193
 msgid "previous"
 msgstr ""
 
-#: include/functions_helpviewer.inc:101 html/helpviewer.php:198
+#: include/functions_helpviewer.inc:101 html/helpviewer.php:197
 #, fuzzy
 msgid "next"
 msgstr "текст"
@@ -1295,6 +1298,13 @@ msgstr "Ветка"
 msgid "Filter entries with this syntax"
 msgstr "Показать подходяшие адреса"
 
+#: include/class_session.inc:76 include/class_session.inc:101
+#: include/class_session.inc:127
+#, fuzzy
+msgid "Requested channel does not exist! Please contact your Administrator."
+msgstr ""
+"Имя/идентификатор пользователя не уникальны. Проверьте свою базу данных LDAP."
+
 #: include/class_msg_dialog.inc:124
 msgid "Please fix the above error and reload the page."
 msgstr ""
@@ -1359,7 +1369,7 @@ msgstr "LDAP-сервер"
 #: include/class_tabs.inc:259 plugins/admin/departments/remove.tpl:2
 #: plugins/admin/departments/dep_move_confirm.tpl:2
 #: plugins/admin/acl/remove.tpl:2 plugins/admin/ogroups/remove.tpl:2
-#: plugins/admin/users/class_userManagement.inc:630
+#: plugins/admin/users/class_userManagement.inc:631
 #: plugins/admin/users/remove.tpl:2 plugins/admin/groups/remove.tpl:2
 #: plugins/personal/posix/class_posixAccount.inc:832
 #: plugins/personal/posix/class_posixAccount.inc:925 html/password.php:280
@@ -1572,8 +1582,14 @@ msgid ""
 msgstr ""
 "Не удается найти команду \"%s\", указанную в поле POSTREMOVE модуля \"%s\"."
 
-#: include/functions.inc:2588
+#: include/functions.inc:2579
 msgid "Cannot generate samba hash!"
+msgstr ""
+
+#: include/functions.inc:2592
+#, php-format
+msgid ""
+"Cannot generate samba hash: running '%s' failed, check the 'sambaHashHook'!"
 msgstr ""
 
 #: include/php_setup.inc:93
@@ -1696,7 +1712,7 @@ msgstr ""
 msgid "You're about to delete the snapshot '%s'."
 msgstr "Вы собираетесь удалить группу \"%s\"."
 
-#: include/class_SnapShotDialog.inc:143 include/class_plugin.inc:1983
+#: include/class_SnapShotDialog.inc:143 include/class_plugin.inc:1986
 msgid "Restore snapshot"
 msgstr ""
 
@@ -1740,91 +1756,91 @@ msgid ""
 "others get lost if you save this entry!"
 msgstr ""
 
-#: include/class_plugin.inc:1322 include/class_plugin.inc:1334
+#: include/class_plugin.inc:1325 include/class_plugin.inc:1337
 #, php-format
 msgid ""
 "The snapshot functionality is enabled, but the required variable '%s' is not "
 "set."
 msgstr ""
 
-#: include/class_plugin.inc:1530 include/class_plugin.inc:1542
-#: include/class_plugin.inc:1557 include/class_plugin.inc:1570
+#: include/class_plugin.inc:1533 include/class_plugin.inc:1545
+#: include/class_plugin.inc:1560 include/class_plugin.inc:1573
 #: plugins/admin/acl/class_aclManagement.inc:268
 #: plugins/admin/ogroups/class_ogroupManagement.inc:237
 #: plugins/admin/users/class_userManagement.inc:344
-#: plugins/admin/users/class_userManagement.inc:583
+#: plugins/admin/users/class_userManagement.inc:584
 #: plugins/admin/groups/class_groupManagement.inc:356
 #, fuzzy
 msgid "Permission"
 msgstr "Права для членов группы"
 
-#: include/class_plugin.inc:1530
+#: include/class_plugin.inc:1533
 #, fuzzy, php-format
 msgid "You are not allowed to create a snapshot for %s."
 msgstr "Вам не разрешено менять пароль."
 
-#: include/class_plugin.inc:1542 include/class_plugin.inc:1557
-#: include/class_plugin.inc:1570
+#: include/class_plugin.inc:1545 include/class_plugin.inc:1560
+#: include/class_plugin.inc:1573
 #, fuzzy, php-format
 msgid "You are not allowed to restore a snapshot for %s."
 msgstr "Вам не разрешено менять пароль."
 
-#: include/class_plugin.inc:1782
+#: include/class_plugin.inc:1785
 msgid "Changing ACL dn"
 msgstr ""
 
-#: include/class_plugin.inc:1782
+#: include/class_plugin.inc:1785
 #, fuzzy
 msgid "from"
 msgstr "и"
 
-#: include/class_plugin.inc:1783 setup/class_setupStep_Migrate.inc:1235
+#: include/class_plugin.inc:1786 setup/class_setupStep_Migrate.inc:1235
 #: setup/class_setupStep_Migrate.inc:1285
 #: setup/class_setupStep_Migrate.inc:1333
 #, fuzzy
 msgid "to"
 msgstr "Отношение"
 
-#: include/class_plugin.inc:1965 include/class_plugin.inc:1967
+#: include/class_plugin.inc:1968 include/class_plugin.inc:1970
 #, fuzzy
 msgid "Restore"
 msgstr "Повторить"
 
-#: include/class_plugin.inc:1990
+#: include/class_plugin.inc:1993
 #, fuzzy
 msgid "Create snapshot"
 msgstr "Создать настройки запись эл. почты"
 
-#: include/class_plugin.inc:1991
+#: include/class_plugin.inc:1994
 #, fuzzy
 msgid "Create a new snapshot from this object"
 msgstr "Объект группы"
 
-#: include/class_plugin.inc:2009
+#: include/class_plugin.inc:2012
 #, fuzzy
 msgid "cut"
 msgstr "Выполнить"
 
-#: include/class_plugin.inc:2009
+#: include/class_plugin.inc:2012
 #, fuzzy
 msgid "Cut this entry"
 msgstr "Редактиовать объект"
 
-#: include/class_plugin.inc:2017
+#: include/class_plugin.inc:2020
 msgid "copy"
 msgstr ""
 
-#: include/class_plugin.inc:2017
+#: include/class_plugin.inc:2020
 #, fuzzy
 msgid "Copy this entry"
 msgstr "Редактиовать объект"
 
-#: include/class_plugin.inc:2051
+#: include/class_plugin.inc:2054
 #, fuzzy
 msgid "Copy"
 msgstr "Компания"
 
-#: include/class_plugin.inc:2055
+#: include/class_plugin.inc:2058
 #, fuzzy
 msgid "Cut"
 msgstr "Выполнить"
@@ -1892,9 +1908,9 @@ msgstr "Ссылки"
 #: plugins/admin/ogroups/class_ogroup.inc:919
 #: plugins/admin/ogroups/class_ogroup.inc:929
 #: plugins/admin/ogroups/class_ogroup.inc:1126
-#: plugins/admin/users/class_userManagement.inc:754
-#: plugins/admin/users/class_userManagement.inc:828
-#: plugins/admin/users/class_userManagement.inc:840
+#: plugins/admin/users/class_userManagement.inc:767
+#: plugins/admin/users/class_userManagement.inc:841
+#: plugins/admin/users/class_userManagement.inc:853
 #: plugins/admin/groups/class_groupGeneric.inc:1096
 #: plugins/admin/groups/class_groupGeneric.inc:1102
 #: plugins/admin/groups/class_groupGeneric.inc:1104
@@ -2131,8 +2147,8 @@ msgstr "Подразделения"
 #: plugins/admin/ogroups/class_ogroupManagement.inc:285
 #: plugins/admin/ogroups/class_ogroupManagement.inc:338
 #: plugins/admin/ogroups/class_ogroupManagement.inc:365
-#: plugins/admin/users/class_userManagement.inc:545
-#: plugins/admin/users/class_userManagement.inc:549
+#: plugins/admin/users/class_userManagement.inc:546
+#: plugins/admin/users/class_userManagement.inc:550
 #: plugins/admin/groups/class_groupManagement.inc:407
 #: plugins/admin/groups/class_groupManagement.inc:461
 #: plugins/admin/groups/class_groupManagement.inc:492
@@ -2220,7 +2236,7 @@ msgstr "Организация"
 msgid "Name of organization to create"
 msgstr "Имя создаваемой ветки"
 
-#: plugins/admin/departments/main.inc:42 plugins/admin/departments/main.inc:44
+#: plugins/admin/departments/main.inc:50 plugins/admin/departments/main.inc:52
 msgid "Department management"
 msgstr "Управление подразделениями"
 
@@ -2524,7 +2540,7 @@ msgstr "Выберите, чтобы просмотреть серверы"
 msgid "List of available ACL categories"
 msgstr "Выберите тип мыши"
 
-#: plugins/admin/acl/main.inc:45 plugins/admin/acl/main.inc:47
+#: plugins/admin/acl/main.inc:52 plugins/admin/acl/main.inc:54
 #, fuzzy
 msgid "ACL management"
 msgstr "Управление подразделениями"
@@ -2831,7 +2847,7 @@ msgid "Regular expression for matching object names"
 msgstr "Регулярное выражение, соответствующее именам объектов"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:26
-#: plugins/admin/ogroups/main.inc:46 plugins/admin/ogroups/main.inc:51
+#: plugins/admin/ogroups/main.inc:53 plugins/admin/ogroups/main.inc:58
 #: plugins/admin/ogroups/class_ogroup.inc:1123
 msgid "Object groups"
 msgstr "Объединения"
@@ -2969,7 +2985,7 @@ msgid "applications"
 msgstr "приложения"
 
 #: plugins/admin/ogroups/class_ogroup.inc:510
-#: plugins/admin/users/class_userManagement.inc:492
+#: plugins/admin/users/class_userManagement.inc:493
 msgid "none"
 msgstr "нет"
 
@@ -3085,7 +3101,7 @@ msgstr ""
 #: plugins/admin/users/password.tpl:13
 #: plugins/admin/users/class_userManagement.inc:265
 #: plugins/personal/generic/password.tpl:7
-#: plugins/personal/generic/main.inc:91
+#: plugins/personal/generic/main.inc:97
 #: plugins/personal/password/password.tpl:18 html/password.php:196
 #: ihtml/themes/default/password.tpl:82 ihtml/themes/default/password.tpl:83
 #: ihtml/themes/default/accountexpired.tpl:32
@@ -3123,7 +3139,7 @@ msgstr "Имя пользователя"
 
 #: plugins/admin/users/class_divListUsers.inc:84
 #: plugins/admin/users/class_divListUsers.inc:128
-#: plugins/admin/users/class_userManagement.inc:751
+#: plugins/admin/users/class_userManagement.inc:764
 #: plugins/admin/users/template.tpl:15 plugins/admin/users/templatize.tpl:15
 msgid "Template"
 msgstr "Шаблон"
@@ -3272,7 +3288,7 @@ msgid "active"
 msgstr "Личный"
 
 #: plugins/admin/users/class_divListUsers.inc:258
-#: plugins/admin/users/class_userManagement.inc:601
+#: plugins/admin/users/class_userManagement.inc:602
 #, fuzzy
 msgid "user"
 msgstr "пользователи"
@@ -3305,7 +3321,7 @@ msgid "Manage users"
 msgstr "Пользователи домена"
 
 #: plugins/admin/users/class_userManagement.inc:260
-#: plugins/personal/generic/main.inc:86
+#: plugins/personal/generic/main.inc:92
 #: plugins/personal/password/class_password.inc:82 html/password.php:193
 msgid ""
 "The passwords you've entered as 'New password' and 'Repeated new password' "
@@ -3314,7 +3330,6 @@ msgstr "Введенные пароли не совпадают!"
 
 #: plugins/admin/users/class_userManagement.inc:316
 #: plugins/admin/users/class_userManagement.inc:379
-#: plugins/admin/users/class_userManagement.inc:651
 #: plugins/personal/password/class_password.inc:78
 #: plugins/personal/password/class_password.inc:81
 #: plugins/personal/password/class_password.inc:84
@@ -3322,7 +3337,7 @@ msgstr "Введенные пароли не совпадают!"
 #: plugins/personal/password/class_password.inc:90
 #: plugins/personal/password/class_password.inc:93
 #: plugins/personal/password/class_password.inc:107
-#: plugins/personal/password/class_password.inc:113 html/main.php:357
+#: plugins/personal/password/class_password.inc:113 html/main.php:328
 #: ihtml/themes/default/password.tpl:41
 #, fuzzy
 msgid "Password change"
@@ -3334,23 +3349,35 @@ msgstr "Сменить пароль"
 msgid "You have no permission to change this users password!"
 msgstr "У вас недостаточно прав для смены своего пароля."
 
-#: plugins/admin/users/class_userManagement.inc:545
+#: plugins/admin/users/class_userManagement.inc:546
 #, fuzzy, php-format
 msgid "You have no permission to modify object '%s'!"
 msgstr "У вас недостаточно прав для удаления этого стоп-листа."
 
-#: plugins/admin/users/class_userManagement.inc:549
+#: plugins/admin/users/class_userManagement.inc:550
 #, fuzzy
 msgid "You have no permission to use this template!"
 msgstr "У вас недостаточно прав для удаления этого стоп-листа."
 
 #: plugins/admin/users/class_userManagement.inc:652
+#: plugins/admin/users/class_userManagement.inc:671
+#, fuzzy
+msgid "Account locking"
+msgstr "Учетная запись"
+
+#: plugins/admin/users/class_userManagement.inc:653
 #, fuzzy
 msgid "You have no permission to change the lock status for this user!"
 msgstr "У вас недостаточно прав для смены своего пароля."
 
-#: plugins/admin/users/class_userManagement.inc:757
-#: plugins/admin/users/class_userManagement.inc:831
+#: plugins/admin/users/class_userManagement.inc:672
+#, php-format
+msgid ""
+"Password method '%s' does not support locking. Account has not been locked!"
+msgstr ""
+
+#: plugins/admin/users/class_userManagement.inc:770
+#: plugins/admin/users/class_userManagement.inc:844
 #: plugins/personal/generic/class_user.inc:1235
 #: plugins/personal/generic/class_user.inc:1277
 #: plugins/personal/generic/class_user.inc:1555
@@ -3369,7 +3396,7 @@ msgstr ""
 "ли вам нужно удаление, так как GOsa не сможет отменить результаты этой "
 "операции."
 
-#: plugins/admin/users/main.inc:44 plugins/admin/users/main.inc:50
+#: plugins/admin/users/main.inc:51 plugins/admin/users/main.inc:57
 msgid "User administration"
 msgstr "Управление пользователями"
 
@@ -3599,7 +3626,7 @@ msgstr ""
 "действительно хотите удалить ее, так как GOsa не сможет отменить результаты "
 "этой операции."
 
-#: plugins/admin/groups/main.inc:41 plugins/admin/groups/main.inc:45
+#: plugins/admin/groups/main.inc:49 plugins/admin/groups/main.inc:53
 msgid "Group administration"
 msgstr "Управление группами"
 
@@ -3916,7 +3943,7 @@ msgstr "Показать людей"
 msgid "System trust model"
 msgstr "Системные доверия"
 
-#: plugins/personal/posix/main.inc:136
+#: plugins/personal/posix/main.inc:142
 #, fuzzy
 msgid "POSIX settings"
 msgstr "Атрибуты UNIX"
@@ -4325,12 +4352,12 @@ msgstr "Хэширование паролей"
 msgid "User certificates"
 msgstr "Стандартный сертификат"
 
-#: plugins/personal/generic/main.inc:109
+#: plugins/personal/generic/main.inc:115
 #, fuzzy
 msgid "You have no permission to set your password!"
 msgstr "У вас недостаточно прав для смены своего пароля."
 
-#: plugins/personal/generic/main.inc:200
+#: plugins/personal/generic/main.inc:206
 msgid "Generic user information"
 msgstr "Общая информация о пользователе"
 
@@ -4422,7 +4449,7 @@ msgstr "У вас недостаточно прав для смены своег
 msgid "User password"
 msgstr "Новый пароль"
 
-#: plugins/personal/password/main.inc:47 setup/setup_config1.tpl:136
+#: plugins/personal/password/main.inc:57 setup/setup_config1.tpl:136
 #, fuzzy
 msgid "Password settings"
 msgstr "Почтовые настройки пользователя"
@@ -4621,35 +4648,35 @@ msgstr ""
 "Используется механизм register_globals. GOsa не допустит пользователей в "
 "систему, пока он не будет отключен администратором."
 
-#: html/main.php:213
+#: html/main.php:228
 msgid "Running out of memory!"
 msgstr ""
 
-#: html/main.php:287
+#: html/main.php:284
 msgid "User ACL checks disabled"
 msgstr ""
 
-#: html/main.php:357
+#: html/main.php:328
 #, fuzzy
 msgid "Your password is about to expire, please change your password!"
 msgstr "У вас недостаточно прав для смены своего пароля."
 
-#: html/main.php:366
+#: html/main.php:338
 #, fuzzy
 msgid "Plugin"
 msgstr "в"
 
-#: html/main.php:367
+#: html/main.php:339
 #, fuzzy, php-format
 msgid "FATAL: Cannot find any plugin definitions for plugin '%s'!"
 msgstr "Не удается найти определение для модуля \"%s\"!"
 
-#: html/main.php:381
+#: html/main.php:353
 #, fuzzy
 msgid "Configuration Error"
 msgstr "Настроить"
 
-#: html/main.php:382
+#: html/main.php:354
 #, php-format
 msgid ""
 "FATAL: not all POST variables have been transfered by PHP - please inform "
@@ -4661,16 +4688,16 @@ msgstr ""
 msgid "Smarty"
 msgstr "Запуск"
 
-#: html/helpviewer.php:65
+#: html/helpviewer.php:64
 msgid "Help browser"
 msgstr ""
 
-#: html/helpviewer.php:119
+#: html/helpviewer.php:118
 #, fuzzy
 msgid "There is no helpfile specified for this class"
 msgstr "Метод '%s' не описан в вашем файле конфигурации."
 
-#: html/helpviewer.php:269
+#: html/helpviewer.php:268
 #, php-format
 msgid "Helpdir '%s' is not accessible, can't read any helpfiles."
 msgstr ""
@@ -6740,6 +6767,10 @@ msgid ""
 "Please close this browser window and clean the authentication caches to "
 "avoid an automatic re-authentication by your browser."
 msgstr ""
+
+#, fuzzy
+#~ msgid "Password locking"
+#~ msgstr "Сменить пароль"
 
 #, fuzzy
 #~ msgid "Create new"
