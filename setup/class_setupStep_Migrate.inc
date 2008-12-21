@@ -1014,7 +1014,7 @@ class Step_Migrate extends setup_step
       if($GOsa_25_found){
         $str = "";
         if(!empty($valid_groups)){
-          $str.= "<i>".sprintf(_("GOsa 2.5 adminitrative accounts found: %s."),trim($valid_groups,", "))."</i><br>";
+          $str.= "<i>".sprintf(_("GOsa 2.5 administrative accounts found: %s."),trim($valid_groups,", "))."</i><br>";
         }
         $this->checks['acls']['STATUS']    = FALSE;
         $this->checks['acls']['STATUS_MSG']= _("Failed");
