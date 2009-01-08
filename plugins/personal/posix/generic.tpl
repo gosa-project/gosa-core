@@ -116,7 +116,7 @@
 <table summary="" style="width:100% ; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td style='width:50%;vertical-align:top'>
-   <h2><img alt="" class="center" align="middle" src="plugins/posix/images/account.png" /> {t}Account{/t}</h2>
+   <h2><img alt="" class="center" align="middle" src="plugins/posix/images/terminal_small.png" /> {t}Account{/t}</h2>
    {include file="$pwmode.tpl"}
   </td>
   <td style="border-left:1px solid #A0A0A0">
