@@ -24,10 +24,20 @@ class usertabs extends tabs
 {
   var $base;
 
+  /* Template adaption variables
+   */
+  var $uid  ="";
+  var $givenName = "";
+  var $sn;
+
   function usertabs($config, $data, $dn)
   {
     tabs::tabs($config, $data, $dn, 'users');
     $this->base= $this->by_object['user']->base;
+
+    $this->uid = &$this->by_object['user']->uid;
+    $this->sn = &$this->by_object['user']->sn;
+    $this->givenName = &$this->by_object['user']->givenName;
 
     /* Add references/acls/snapshots */
     $this->addSpecialTabs();

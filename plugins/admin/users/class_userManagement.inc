@@ -902,17 +902,15 @@ class userManagement extends plugin
     /* Finish template preamble */
     if (isset($_POST['template_continue']) && $_POST['template'] != 'none' && (isset($_POST['uid']))){
 
-      /* Might not be filled if IDGEN is unset */
-      $this->sn                 = $_POST['sn'];
-      $this->givenName          = $_POST['givenName'];
-
       /* Move user supplied data to sub plugins */
-      $this->uid                = $_POST['uid'];
-      $this->usertab->uid       = $this->uid;
-      $this->usertab->sn        = $this->sn;
-      $this->usertab->givenName = $this->givenName;
+      foreach(array("uid","sn","givenName") as $attr){
+        $this->$attr = $_POST[$attr];
+        $this->usertab->$attr       = $this->$attr;
+        $this->usertab->by_object['user']->$attr = $this->$attr;
+      }
+
       $template_dn              = $_POST['template'];
-      $this->usertab->adapt_from_template($template_dn);
+      $this->usertab->adapt_from_template($template_dn, array("uid","cn","givenName","sn"));
       $template_base            = preg_replace("/^[^,]+,".preg_quote(get_people_ou(), '/')."/", '', $template_dn);
       $this->usertab->by_object['user']->base= $template_base;
     }
