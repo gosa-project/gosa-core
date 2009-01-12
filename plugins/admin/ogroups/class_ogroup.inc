@@ -818,6 +818,7 @@ class ogroup extends plugin
   {
     $temp= "";
     $conv= array(  
+        "Y" => "plugins/users/images/select_template.png",
         "U" => "plugins/generic/images/head.png",
         "G" => "plugins/groups/images/groups.png",
         "A" => "plugins/ogroups/images/application.png",
@@ -843,7 +844,9 @@ class ogroup extends plugin
   {
     $type= "I";
 
-    foreach(array(  "U" => "gosaAccount",
+    foreach(array(  
+          "Y" => "gosaUserTemplate",
+          "U" => "gosaAccount",
           "G" => "posixGroup",
           "A" => "gosaApplication",
           "D" => "gosaDepartment",
