@@ -133,15 +133,17 @@ A: Create a directory to keep a set of vacation messages which are readable by t
    first line followed by the normal vacation text. You can use all attributes from
    the generic tab. I.e.:
 
-   /etc/gosa/vacation/business.txt ------------------------------------------------->8
-   DESC:Away from desk
-   Hi, I'm currently away from my desk. You can contact me on
-   my cell phone via %mobile.
-   
-   Greetings,
-   %givenName %sn
-   -----------------------------------------------------------------------------------
+    /etc/gosa/vacation/business.txt 
 
+   |--> 
+    DESC:Away from desk
+    Hi, I'm currently away from my desk. You can contact me on
+    my cell phone via %mobile.
+    
+    Greetings,
+    %givenName %sn
+   |<--
+ 
    Place the config option vacationTemplateDirectory="/etc/gosa/vacation" in the location found in
    gosa.conf and a template box is show in the vacation mail tab.
 
@@ -155,7 +157,9 @@ A: Add an entry describing your id policy in gosa.conf, location section:
       and add a percent sign befor it. Optionally you can strip it down to a number
       of characters, specified in []. I.e.
 
-    idGenerator="{%sn}-{%givenName[2-4]}"
+   |--> 
+      idGenerator="{%sn}-{%givenName[2-4]}"
+   |<--
 
       will generate an ID using the full surename, adding a dash, and adding at least
       the first two characters of givenName. If this ID is used, it'll use up to four
@@ -164,11 +168,15 @@ A: Add an entry describing your id policy in gosa.conf, location section:
    b) using automatic id's
       I.e. specifying
 
+   |--> 
       idGenerator="acct{id:3}"
+   |<--
 
       will generate a three digits id with the next free entry appended to "acct".
 
+   |--> 
       idGenerator="ext{id#3}"
+   |<--
 
       will generate a three digits random number appended to "ext".
 
@@ -186,8 +194,10 @@ Q: I'd like to place my users under ou=staff, not under ou=people. Can I change
 A: Yes. You can change the people and group locations by adding the following
    statements to your location sections:
 
+   |--> 
    userRDN="ou=staff"
    groupRDN="ou=crowds"
+   |<--
 
    After logging in again, people and groups are created in the configured places.
    As a side note, you can leave these strings blank for flat structures, too.
@@ -215,10 +225,12 @@ A: You've configured GOsa to use samba3, but your LDAP has no samba domain objec
    inside. Either log into samba for the first time to let it create that object,
    or supply the sid and ridbase for your domain in your gosa.conf's location, i.e.:
 
+   |--> 
    <location name=...>
              ...
              sambaRidBase="1000"
              sambaSID="0-815-4711" \>
+   |<--
 
    Remember to fill in your real domain sid which is retrievable by the command
    "net getlocalsid".
@@ -228,10 +240,12 @@ Q: We have massive performance problems with using samba as a member server.
 
 A: This is a known issue. We're working around this by putting
 
+   |--> 
    <location name=...>
     ...
     sambaIdMapping="true"
     ... \>
+   |<--
 
     into the configuration. GOsa will write the additional objectClass sambaIdmapEntry
     to the group and user objects.
@@ -242,10 +256,12 @@ Q: I get 'The value specified as GID/UID number is too small' when forcing IDs. 
 A: This is an additional security feature, so that no one can fall back to uid 0. The
    default minimum ID is 100. You can set it to every value you like by specifying
 
+   |--> 
    <location name=...>
     ...
     minId="40"
     ... \>
+   |<--
 
    in your configuration. In this example 40 will be the smallest ID you can enter.
 
@@ -260,10 +276,12 @@ Q: I've saved my windows workstations in other locations like GOsa is doing it
 
 A: Yes. Use the winstation parameter in your location section: 
 
+   |--> 
    <location name=...>
    ...
    sambaMachineAccountRDN="ou=machineaccounts"
    ... \>
+   |<--
 
 
 Q: GOsa doesn't seem to follow my referrals. What can I do?
@@ -276,10 +294,12 @@ Q: I'd like to have TLS based LDAP connections from within GOsa. Is this possibl
 
 A: Yes, add
 
+   |--> 
    <location ...>
    ...
          ldapTLS="true"
    ... \>
+   |<--
 
    to the location section of GOsa. This switch affects LDAP connections for a single location only.
 
@@ -289,10 +309,11 @@ Q: Cyrus folder get created in the style user.username. I prefer the unix hirach
 
 A: Yes, add
 
-   <main ...>
-   ...
-         cyrusUseSlashes="true"
-   ... \>
+   |--> 
+   <location
+	...
+    cyrusUseSlashes="true"
+   |<--
 
    to the location or main section of GOsa and the folders are created in unix style.
 
@@ -302,16 +323,18 @@ Q: I've a cyrus installation with customized user and folder prefixes.
 
 A: Simply set the following attributes in the location tag of your gosa.conf:  
 
-   <location ...>
-   ...
-         mailUserCreation="myprefix/%mail%"
-         mailFolderCreation="myfolder\\.%cn%@%domain%"
-   ... \>
+   |--> 
+   <location 
+	...
+    mailUserCreation="myprefix/%mail%"
+    mailFolderCreation="myfolder\\.%cn%@%domain%"
+   |<--
 
    The dot in the above example is escaped to prevent it from replacing with '/' if 
     cyrusUseSlashes is set to true.
 
    You can use the following replacements:
+   |--> 
     %cn%       - The groups cn.
     %uid%      - The users uid.
     %prefix%   - The default prefix used by the mailmethod.
@@ -319,15 +342,18 @@ A: Simply set the following attributes in the location tag of your gosa.conf:
     %domain%   - The domain part of the given mail address. (user@domain.com = domain.com)
     %mailpart% - The user part of the mail address. (user@domain.com = user)
     %mail%     - The complete mail address. 
+   |<--
 
 
 Q: I want to use cyrus for multiple mail domains, but GOsa uses the 'uid' attribute for account namens, how do I change this to 'mail'?
 
 A: Just add/modify the following line to/in your gosa.conf:
 
+   |--> 
    <location 
     ...
     mailAttribute="mail"
+   |<--
 
 
 Q: I'd like to do special checks for several plugin parameters. How can I modify
@@ -336,7 +362,9 @@ Q: I'd like to do special checks for several plugin parameters. How can I modify
 A: No need to modify anything. Just add a hook the the plugin you'd like to
    check:
 
-   check="/your/command/binary"
+   |--> 
+    check="/your/command/binary"
+   |<--
 
    This binary will get an ldif to STDIN for analysis and may write an error message
    to STDOUT. Note, that the supplied ldif may NOT be the original target ldif due
@@ -378,13 +406,17 @@ A: Probably something is wrong with the authentification which is used by timesi
    Here is an older, but maybe helpful solution for Cyrus-Imapd 2.1.5 on SuSE 9.0:
    - Install the "cyrus-sasl-plain" rpm from the distro-cd (This packet contains "sasl2/libplain" library).
    - Modify your /etc/imap.conf:
-    ...
+
+   |--> 
     sasl_pwcheck_method: saslauthd
     sasl_mech_list: plain login
+   |<--
 
    - Modify your /etc/sysconfig/saslauthd:
-    ...
+
+   |--> 
     SASLAUTHD_AUTHMECH=pam
+   |<--
 
 
 Q: Slapd does not start with kolab2.schema included. It claims that the
@@ -403,9 +435,12 @@ A: You can set "useSaslForKerberos" to "true" in your gosa.conf's main section.
 Q: Is there a way to add the personalTitle attribute the the users dn?
 
 A: Just add this line into the location section of your gosa.conf.
-   <location name=...
+
+   |--> 
+   <location
+    ... 
     personalTitleInDN="true"
-   ...>
+   |<--
 
 
 Q: I'd like to assign different uid bases for certain user/group objects.
@@ -453,7 +488,9 @@ Q: Is there a way to let users change passwords without logging into GOsa?
 
 A: Yes. Browse to "password.php". You can preset a couple of things i.e.:
 
-   http://your.admin.server/password.php?uid=cajus&method=md5&directory=GONICUS+GmbH
+   |--> 
+    http://your.admin.server/password.php?uid=cajus&method=md5&directory=GONICUS+GmbH
+   |<--
 
 
 Q: GOsa only shows 300 entries at a time. Is this normal?
@@ -467,18 +504,22 @@ Q: I have problems with my ldap server when I open groups with
 
 A: You can set a nesting limit which ensures that the user names will not be 
    resolved if the amount of members reaches this limit.
-   <location
-        ...
-        ldapFilterNestingLimit="100"
-        ... />
-   </location>
+
+   |--> 
+    <location
+     ...
+     ldapFilterNestingLimit="100"
+   |<--
 
 
 Q: I want to disable the "Is the configuration file up to date?" check when logging in.
    How can I disable this check?
 
 A: Just set the configVersion attribute to an empty value:
-   <conf configVersion="" >
+
+   |--> 
+    <conf configVersion="" >
+   |<--
 
 
 Q: I've shredded my access control and am not able to do anything from now on. Is there
@@ -486,7 +527,9 @@ Q: I've shredded my access control and am not able to do anything from now on. I
 
 A: Yes. Insert the following statement in the location section of your gosa.conf:
 
-   ignoreAcl="your user's dn"
+   |--> 
+    ignoreAcl="your user's dn"
+   |<--
 
 
 Q: I can't logon as Administration, what is wrong?
@@ -504,17 +547,23 @@ A: Just copy or link your /etc/shell in /etc/gosa.
 
 
 Q: After upgrading GOsa, the setup.php doesn't work or looks broken. 
-   You should delete all files in /var/spool/gosa
+
+A: You should delete all files in /var/spool/gosa
+
+   |--> 
     # cd /var/spool/gosa
     # rm -rf *
+   |<--
 
 
 Q: After installing GOsa using an existing LDAP tree, my user accounts are not listed.
 
 A: You need to add the following objectClasses to your accounts:
   
+   |--> 
     objectClass: person
     objectClass: organizationalPerson
+   |<--
 
    The setup will automatically migrate those accounts, see migration step in GOsa setup!
 
@@ -523,15 +572,19 @@ Q: Is it possible to login with the users mail address too?
 
 A: Yes, just add the following line to your gosa.conf:
 
+   |--> 
    <location 
     ...
     loginAttribute="mail"
+   |<--
 
    or for both, uid and mail:
 
+   |--> 
    <location 
     ...
     loginAttribute="uid,mail"
+   |<--
 
 
 
