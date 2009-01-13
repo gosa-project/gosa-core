@@ -1,5 +1,5 @@
 This is the textual form of the GOsa FAQ. Online information with
-comments is set up at Wiki: http://oss.gonicus.de/gosa/.
+comments is set up at Wiki: https://oss.gonicus.de/labs/gosa/wiki/documentation
 
 Q: When creating many users for one department, I need to fill some
    fields again and again. Is there a shortcut for that?
@@ -14,7 +14,7 @@ A: Just create a user template and pre-fill all values you need. You
 Q: Can GOsa execute commands after creating/editing/removing users,
    departments, etc.
 
-A: Yes. Edit /etc/gosa/gosa.conf's menu section. Each plugin may have
+A: Yes. Edit /etc/gosa/gosa.conf's menu section. Each plugin may has
    an entry "postremove", "postmodify" and "postcreate".  You can use
    ldap attributes as command line options.
    i.E. postcreate="/usr/bin/sudo /usr/local/sbin/ftp.setperms %uid '%givenName'"
@@ -36,21 +36,25 @@ A: Themes are splitted into two parts. ihtml/ contains templates which
    * login.tpl          -> login screen
    * framework.tpl	-> page contents
    * style.css          -> stylesheets used by GOsa
-
-   In fact, the rest of the UI is not converted to smarty, yet. Please be
-   patient.
-
+ 
 
 Q: How can I let a person do administrative tasks under a specific department?
 
-A: Create a group inside this department. Put all administrative people inside,
-   go to the "ACL" tab and check all fields these users should be able to adminstrate.
-
+A: Gosa 2.5.x
+   * Create a group inside this department. 
+   * Put all administrative people inside
+   * go to the "ACL" tab and check all fields these users should be able to adminstrate.
+   
+   GOsa 2.6 implements a more flexible but complex ACL management, please have a look at 
+   the following wiki page: https://oss.gonicus.de/labs/gosa/wiki/DocumentationWritingACLs2.6
+   If you have still questions, please use the mailing list or the forum.
+   
 
 Q: How can I permit users to change some of their own attributes?
 
-A: Same like the point above, but this rule only works for users own attributes
-   by checking the box on the acl page.
+A: Same like described above, but additionally you have to check the option 
+   'Apply this acl only for users own entries'.
+   (For versions 2.6.x, see the wiki pages)
 
 
 Q: What about applications?
@@ -73,8 +77,10 @@ A: GOto is - similar to LTSP - a ldap based diskless client system. It is availa
 
 Q: I can't select any mailservers. What's wrong?
 
-A: LDAP stores information about all your servers. The server plugin is not ready
-   yet, so you've to adjust/add these entries using your favorite ldap tool.
+A: It seems that a mail server is missing in your configuration.
+   Create a new server, go to the services tab and add the imap service.
+   For more details, please have a look at the FAQ and wiki pages. 
+   (This may differ in older GOsa versions)
 
 
 Q: GOsa is not in my native language, can I translate it to my language?
@@ -89,12 +95,14 @@ A: Yes. Just go to the locale directory and copy the messages.po file somewhere
    You may need to restart apache, depending on your setup. On Debian, be sure
    to have your locale generated (dpkg-reconfigure locales) before.
 
+
 Q: The online help doesn't exist in my language, can i translate it to my language?
 
 A: Yes. Just go to the doc/guide/user/en directory and copy the lyx-source directory
    to a new directory in doc/guide/user/<your language>. You have to use the lyx
    program create the online help in your language. When you have finish just run
    ./gen_online_help from the gosa root directory to generate the online docs.
+
    
 Q: Can I specify some kind of password policies?
 
@@ -146,21 +154,21 @@ A: Add an entry describing your id policy in gosa.conf, location section:
       You can specify LDAP attributes (currently only sn and givenName) in braces {}
       and add a percent sign befor it. Optionally you can strip it down to a number
       of characters, specified in []. I.e.
-      
-	idGenerator="{%sn}-{%givenName[2-4]}"
-	
+
+    idGenerator="{%sn}-{%givenName[2-4]}"
+
       will generate an ID using the full surename, adding a dash, and adding at least
       the first two characters of givenName. If this ID is used, it'll use up to four
       characters. If no automatic generation is possible, a input box is shown.
 
    b) using automatic id's
       I.e. specifying
-      
-      	idGenerator="acct{id:3}"
+
+      idGenerator="acct{id:3}"
 
       will generate a three digits id with the next free entry appended to "acct".
-      
-  	idGenerator="ext{id#3}"
+
+      idGenerator="ext{id#3}"
 
       will generate a three digits random number appended to "ext".
 
@@ -221,9 +229,9 @@ Q: We have massive performance problems with using samba as a member server.
 A: This is a known issue. We're working around this by putting
 
    <location name=...>
-   	...
-  	sambaidmapping="true"
-	... \>
+    ...
+    sambaIdMapping="true"
+    ... \>
 
     into the configuration. GOsa will write the additional objectClass sambaIdmapEntry
     to the group and user objects.
@@ -235,17 +243,16 @@ A: This is an additional security feature, so that no one can fall back to uid 0
    default minimum ID is 100. You can set it to every value you like by specifying
 
    <location name=...>
-   	...
-  	minId="40"
-	... \>
+    ...
+    minId="40"
+    ... \>
 
    in your configuration. In this example 40 will be the smallest ID you can enter.
 
 
 Q: Aahhrg. I've updated to a new version and my gosa.conf seems to be broken.
 
-A: Some parameters have changed. Please call the fix_config.sh script which is in
-   the contrib directory.
+A: Some parameters may have changed. Please move your gosa.conf away and re-run the setup.
 
 
 Q: I've saved my windows workstations in other locations like GOsa is doing it
@@ -254,9 +261,9 @@ Q: I've saved my windows workstations in other locations like GOsa is doing it
 A: Yes. Use the winstation parameter in your location section: 
 
    <location name=...>
-   	...
-  	sambaMachineAccountRDN="ou=machineaccounts"
-	... \>
+   ...
+   sambaMachineAccountRDN="ou=machineaccounts"
+   ... \>
 
 
 Q: GOsa doesn't seem to follow my referrals. What can I do?
@@ -275,7 +282,7 @@ A: Yes, add
    ... \>
 
    to the location section of GOsa. This switch affects LDAP connections for a single location only.
-   
+
 
 Q: Cyrus folder get created in the style user.username. I prefer the unix hirachy
    style user/username. Is it possible to change this?
@@ -287,7 +294,7 @@ A: Yes, add
          cyrusUseSlashes="true"
    ... \>
 
-   to the main section of GOsa and the folders are created in unix style.
+   to the location or main section of GOsa and the folders are created in unix style.
 
 
 Q: I've a cyrus installation with customized user and folder prefixes. 
@@ -314,6 +321,15 @@ A: Simply set the following attributes in the location tag of your gosa.conf:
     %mail%     - The complete mail address. 
 
 
+Q: I want to use cyrus for multiple mail domains, but GOsa uses the 'uid' attribute for account namens, how do I change this to 'mail'?
+
+A: Just add/modify the following line to/in your gosa.conf:
+
+   <location 
+    ...
+    mailAttribute="mail"
+
+
 Q: I'd like to do special checks for several plugin parameters. How can I modify
    GOsa to take care of these checks?
 
@@ -325,7 +341,7 @@ A: No need to modify anything. Just add a hook the the plugin you'd like to
    This binary will get an ldif to STDIN for analysis and may write an error message
    to STDOUT. Note, that the supplied ldif may NOT be the original target ldif due
    to technical reasons.
-   
+
 
 Q: Is there a way to use ACL independet filtering when using administrative units?
 
@@ -347,6 +363,28 @@ Q: Sieve is not working from GOsa - there are authentication problems
 
 A: Verify that the paramater sasl_auto_transition: no is not
    present in your imap.conf
+
+
+Q: I have a SIEVE problem - "Can't log into SIEVE server. Server  says //. -
+
+A: Probably something is wrong with the authentification which is used by timesieved.
+   - Check if you can login with "sieveshell" on this host.
+   - Also check "telnet localhost 2000" - Is there any output about "Plain Login"?
+
+   Please verify the ldap imap attributes, like goImapSieveServer and goImapSievePort. 
+   These value can be modified using the server->services tab in GOsa 2.6 and in
+    GOsa 2.5 you can find these options under server->databases.
+
+   Here is an older, but maybe helpful solution for Cyrus-Imapd 2.1.5 on SuSE 9.0:
+   - Install the "cyrus-sasl-plain" rpm from the distro-cd (This packet contains "sasl2/libplain" library).
+   - Modify your /etc/imap.conf:
+    ...
+    sasl_pwcheck_method: saslauthd
+    sasl_mech_list: plain login
+
+   - Modify your /etc/sysconfig/saslauthd:
+    ...
+    SASLAUTHD_AUTHMECH=pam
 
 
 Q: Slapd does not start with kolab2.schema included. It claims that the
@@ -395,7 +433,7 @@ Q: GOsa sessions expire too quick. Is there a way to change this?
 A: Yes. Set "sessionLifetime" to the number of seconds of inactivity. 7200
    (60x60x2) would be for two hours. Place this option inside the main
    section of your gosa.conf.
-   
+
 
 Q: Microsoft Internet Explorer <=6 seems paints strange blocks around
    images.
@@ -449,4 +487,51 @@ Q: I've shredded my access control and am not able to do anything from now on. I
 A: Yes. Insert the following statement in the location section of your gosa.conf:
 
    ignoreAcl="your user's dn"
+
+
+Q: I can't logon as Administration, what is wrong?
+
+A: It looks like you are missing an administrativ account. 
+   In newer versions of GOsa you can simply re-run the setup and create 
+    an admin account on the migration page. 
+
+   Additionally you can set ignoreACL in GOsa 2.6, just search the FAQ.
+ 
+
+Q: The Unix's user's shell list is empty (unconfigured)
+
+A: Just copy or link your /etc/shell in /etc/gosa.
+
+
+Q: After upgrading GOsa, the setup.php doesn't work or looks broken. 
+   You should delete all files in /var/spool/gosa
+    # cd /var/spool/gosa
+    # rm -rf *
+
+
+Q: After installing GOsa using an existing LDAP tree, my user accounts are not listed.
+
+A: You need to add the following objectClasses to your accounts:
+  
+    objectClass: person
+    objectClass: organizationalPerson
+
+   The setup will automatically migrate those accounts, see migration step in GOsa setup!
+
+
+Q: Is it possible to login with the users mail address too? 
+
+A: Yes, just add the following line to your gosa.conf:
+
+   <location 
+    ...
+    loginAttribute="mail"
+
+   or for both, uid and mail:
+
+   <location 
+    ...
+    loginAttribute="uid,mail"
+
+
 
