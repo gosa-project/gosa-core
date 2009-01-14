@@ -72,6 +72,8 @@ class sambaAccount extends plugin
   var $mungedObject;
 
   /* Helper */
+  var $cache = array();
+  var $display_information = FALSE;
   var $dialog;
   var $show_ws_dialog= FALSE;
   var $logon_time_set= 0;
@@ -641,6 +643,44 @@ class sambaAccount extends plugin
       }
     }
 
+    /* Create additional info for sambaKickOffTime and sambaPwdMustChange.
+       e.g. Display effective kickoff time. Domain policy + user settings.
+     */
+    $additional_info_PwdMustChange = "";
+
+    /* Calculate effective max Password Age
+        This can only be calculated if sambaPwdLastSet ist set.
+     */
+    if(isset($this->attrs['sambaPwdLastSet'][0])){
+      $last = $this->attrs['sambaPwdLastSet'][0];
+
+      $sid = $this->get_domain_info();
+      if(isset($sid['sambaMaxPwdAge'][0])){
+        $d = ($last + $sid['sambaMaxPwdAge'][0]) - time();
+
+        /* A negative value means the password is outdated
+         */
+        if($d < 0){
+          $additional_info_PwdMustChange = sprintf(_("The password is outdated since %s, by domain policy."),
+              date("d.m.Y H:i:s",$last + $sid['sambaMaxPwdAge'][0]));
+        }else{
+          if($this->password_expires && ($last + $sid['sambaMaxPwdAge'][0]) > $this->sambaPwdMustChange){
+            $additional_info_PwdMustChange = sprintf(_("The password is valid till %s, by user policy."),
+                date("d.m.Y H:i:s",  $this->sambaPwdMustChange));
+          }else{
+             $additional_info_PwdMustChange = sprintf(_("The password is valid till %s, by domain policy."),
+                date("d.m.Y H:i:s",  ($last + $sid['sambaMaxPwdAge'][0])));
+          }
+        }
+      }
+    }
+    $smarty->assign("additional_info_PwdMustChange",$additional_info_PwdMustChange);
+    $smarty->assign("samba_information","");
+    $smarty->assign("display_information",$this->display_information);
+    if($this->display_information){
+      $smarty->assign("samba_information",$this->get_samba_information());
+    }
+
     /* Show main page */
     if ($this->samba3){
       $display.= $smarty->fetch (get_template_path('samba3.tpl', TRUE, dirname(__FILE__)));
@@ -755,6 +795,10 @@ class sambaAccount extends plugin
     /* We only care if we are on the sambaTab... */
     if (isset($_POST['sambaTab'])){
       plugin::save_object();
+
+      if(isset($_POST['display_information'])){
+        $this->display_information = !$this->display_information;
+      }
 
       /* Take care about access options */
       if (chkacl ($this->acl, "acctFlags") == ""){
@@ -1135,6 +1179,267 @@ class sambaAccount extends plugin
       register_global("sambafilter", $sambafilter);
     }
   }
+
+
+  /*! \brief  Returns the samba Domain object, selected in the samba tab.
+   */
+  function get_domain_info()
+  {
+    /* Only search once, return last result if available
+     */
+    if(!isset($this->cache['DOMAIN'][$this->sambaDomainName])){
+      $this->cache['DOMAIN'][$this->sambaDomainName] = array();
+      if(!empty($this->sambaDomainName) && isset($this->config->data['SERVERS']['SAMBA'][$this->sambaDomainName])){
+        $cfg = $this->config->data['SERVERS']['SAMBA'][$this->sambaDomainName];
+        $ldap = $this->config->get_ldap_link();
+        $ldap->cd($this->config->current['BASE']);
+        $ldap->search("(&(objectClass=sambaDomain)(sambaSID=".$cfg['SID']."))",array("*"));
+        if($ldap->count()){
+          $this->cache['DOMAIN'][$this->sambaDomainName] = $ldap->fetch();
+        }
+      }
+    }
+    return($this->cache['DOMAIN'][$this->sambaDomainName]);
+  }
+
+
+
+  function get_samba_information()
+  {
+
+    /* Defaults
+     */
+    $sambaMinPwdLength = "unset";
+    $sambaPwdHistoryLength = "unset";
+    $sambaLogonToChgPwd = "unset";
+    $sambaMaxPwdAge = "unset";
+    $sambaMinPwdAge = "unset";
+    $sambaLockoutDuration = "unset";
+    $sambaLockoutThreshold = "unset";
+    $sambaForceLogoff = "unset";
+    $sambaRefuseMachinePwdChange = "unset";
+    $sambaPwdLastSet = "unset";
+    $sambaLogonTime = "unset";
+    $sambaLogoffTime = "unset";
+
+    $sambaKickoffTime = "unset";
+    $sambaPwdCanChange = "unset";
+    $sambaPwdMustChange = "unset";
+    $sambaBadPasswordCount = "unset";
+    $sambaBadPasswordTime = "unset";
+
+    /* Domain attributes
+     */
+    $domain_attributes = array("sambaMinPwdLength","sambaPwdHistoryLength","sambaMaxPwdAge",
+        "sambaMinPwdAge","sambaLockoutDuration","sambaRefuseMachinePwdChange",
+        "sambaLogonToChgPwd","sambaLockoutThreshold","sambaForceLogoff");
+
+    /* User attributes
+     */
+    $user_attributes = array("sambaBadPasswordTime","sambaPwdLastSet","sambaLogonTime","sambaLogoffTime",
+        "sambaKickoffTime","sambaPwdCanChange","sambaPwdMustChange","sambaBadPasswordCount");
+
+    /* Get samba SID object and parse settings.
+     */
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    if(!empty($this->sambaDomainName) && isset($this->config->data['SERVERS']['SAMBA'][$this->sambaDomainName])){
+      $attrs = $this->get_domain_info();
+      foreach($domain_attributes as $attr){
+        if(isset($attrs[$attr])){
+          $$attr = $attrs[$attr][0];
+        }
+      }
+    }
+    /* Get user infos
+     */
+    foreach($user_attributes as $attr){
+      if(isset($this->attrs[$attr])){
+        $$attr = $this->attrs[$attr][0];
+      }
+    }
+    if($this->password_expires){
+      $sambaPwdMustChange = $this->sambaPwdMustChange;
+    }
+    if($this->kickoff_time_set){
+      $sambaKickoffTime = $this->sambaKickoffTime;
+    }
+    $sambaPwdCanChange = $this->sambaPwdCanChange;
+
+
+    /* DOMAIN Attributes
+     */
+
+    /* sambaMinPwdLength: Password length has a default of 5
+     */
+    if($sambaMinPwdLength == "unset" || $sambaMinPwdLength == 5){
+      $sambaMinPwdLength  = "5 <i>("._("default").")</i>";
+    }
+
+    /* sambaPwdHistoryLength: Length of Password History Entries (default: 0 => off)
+     */
+    if($sambaPwdHistoryLength == "unset" || $sambaPwdHistoryLength == 0){
+      $sambaPwdHistoryLength = _("Off")." <i>("._("default").")</i>";
+    }
+
+    /* sambaLogonToChgPwd: Force Users to logon for password change (default: 0 => off, 2 => on)
+     */
+    if($sambaLogonToChgPwd == "unset" || $sambaLogonToChgPwd == 0){
+      $sambaLogonToChgPwd = _("Off")." <i>("._("default").")</i>";
+    }else{
+      $sambaLogonToChgPwd = _("On");
+    }
+
+    /* sambaMaxPwdAge: Maximum password age, in seconds (default: -1 => never expire passwords)'
+     */
+    if($sambaMaxPwdAge == "unset" || $sambaMaxPwdAge == "-1"){
+      $sambaMaxPwdAge = _("disabled")." <i>("._("default").")</i>";
+    }else{
+      $sambaMaxPwdAge .= " "._("seconds");
+    }
+    /* sambaMinPwdAge: Minimum password age, in seconds (default: 0 => allow immediate password change
+     */
+    if($sambaMinPwdAge == "unset" || $sambaMinPwdAge == 0){
+      $sambaMinPwdAge = _("disabled")." <i>("._("default").")</i>";
+    }else{
+      $sambaMinPwdAge .= " "._("seconds");
+    }
+
+    /* sambaLockoutDuration: Lockout duration in minutes (default: 30, -1 => forever)
+     */
+    if($sambaLockoutDuration == "unset" || $sambaLockoutDuration == 30){
+      $sambaLockoutDuration = "30 "._("minutes")." <i>("._("default").")</i>";
+    }elseif($sambaLockoutDuration == -1){
+      $sambaLockoutDuration = _("forever");
+    }else{
+      $sambaLockoutDuration .= " "._("minutes");
+    }
+
+    /* sambaLockoutThreshold: Lockout users after bad logon attempts (default: 0 => off
+     */
+    if($sambaLockoutThreshold == "unset" || $sambaLockoutThreshold == 0){
+      $sambaLockoutThreshold = _("disabled")." <i>("._("default").")</i>";
+    }
+
+    /* sambaForceLogoff: Disconnect Users outside logon hours (default: -1 => off, 0 => on
+     */
+    if($sambaForceLogoff == "unset" || $sambaForceLogoff == -1){
+      $sambaForceLogoff = _("off")." <i>("._("default").")</i>";
+    }else{
+      $sambaForceLogoff = _("on");
+    }
+
+    /* sambaRefuseMachinePwdChange: Allow Machine Password changes (default: 0 => off
+     */
+    if($sambaRefuseMachinePwdChange == "none" || $sambaRefuseMachinePwdChange == 0){
+      $sambaRefuseMachinePwdChange = _("off")." <i>("._("default").")</i>";
+    }else{
+      $sambaRefuseMachinePwdChange = _("on");
+    }
+
+    /* USER Attributes
+     */
+    /* sambaBadPasswordTime: Time of the last bad password attempt
+     */
+    if($sambaBadPasswordTime == "unset" || empty($sambaBadPasswordTime)){
+      $sambaBadPasswordTime = "<i>("._("unset").")</i>";
+    }else{
+      $sambaBadPasswordTime = date("d.m.Y H:i:s",$sambaBadPasswordTime);
+    }
+
+    /* sambaBadPasswordCount: Bad password attempt count
+     */
+    if($sambaBadPasswordCount == "unset" || empty($sambaBadPasswordCount)){
+      $sambaBadPasswordCount = "<i>("._("unset").")</i>";
+    }else{
+      $sambaBadPasswordCount = date("d.m.Y H:i:s",$sambaBadPasswordCount);
+    }
+
+    /* sambaPwdLastSet: Timestamp of the last password update
+     */
+    if($sambaPwdLastSet == "unset" || empty($sambaPwdLastSet)){
+      $sambaPwdLastSet = "<i>("._("unset").")</i>";
+    }else{
+      $sambaPwdLastSet = date("d.m.Y H:i:s",$sambaPwdLastSet);
+    }
+
+    /* sambaLogonTime: Timestamp of last logon
+     */
+    if($sambaLogonTime == "unset" || empty($sambaLogonTime)){
+      $sambaLogonTime = "<i>("._("unset").")</i>";
+    }else{
+      $sambaLogonTime = date("d.m.Y H:i:s",$sambaLogonTime);
+    }
+
+    /* sambaLogoffTime: Timestamp of last logoff
+     */
+    if($sambaLogoffTime == "unset" || empty($sambaLogoffTime)){
+      $sambaLogoffTime = "<i>("._("unset").")</i>";
+    }else{
+      $sambaLogoffTime = date("d.m.Y H:i:s",$sambaLogoffTime);
+    }
+
+    /* sambaKickoffTime: Timestamp of when the user will be logged off automatically
+     */
+    if($sambaKickoffTime == "unset" || empty($sambaKickoffTime)){
+      $sambaKickoffTime = "<i>("._("unset").")</i>";
+    }else{
+      $sambaKickoffTime = date("d.m.Y H:i:s",$sambaKickoffTime);
+    }
+
+    /* sambaPwdMustChange: Timestamp of when the password will expire
+     */
+    if($sambaPwdMustChange == "unset" || empty($sambaPwdMustChange)){
+      $sambaPwdMustChange = "<i>("._("unset").")</i>";
+    }else{
+      $sambaPwdMustChange = date("d.m.Y H:i:s",$sambaPwdMustChange);
+    }
+
+
+    /* sambaPwdCanChange: Timestamp of when the user is allowed to update the password
+     */
+    if($sambaPwdCanChange == "unset" || empty($sambaPwdCanChange)){
+      $sambaPwdCanChange = "<i>("._("unset").")</i>";
+    }elseif($sambaPwdCanChange != "unset" && time() > $sambaPwdCanChange){
+      $sambaPwdCanChange = _("immediately") ;
+    }else{
+      $days     = floor((($sambaPwdCanChange - time()) / 60 / 60 / 24)) ;
+      $hours    = floor((($sambaPwdCanChange - time()) / 60 / 60) % 24) ;
+      $minutes  = floor((($sambaPwdCanChange - time()) / 60 ) % 60) ;
+
+      $sambaPwdCanChange = " ".$days." "._("days");
+      $sambaPwdCanChange.= " ".$hours." "._("hours");
+      $sambaPwdCanChange.= " ".$minutes." "._("minutes");
+    }
+
+    $str =
+      "\n<table style='width:100%;'><tr><td style='width:50%; border-right: solid 1px #B0B0B0;'>".
+      "\n<table>".
+      "\n<tr><td><b>"._("Domain attributes")."</b></td></tr>".
+      "\n<tr><td>"._("Min password length").":           </td><td>".$sambaMinPwdLength."</td></tr>".
+      "\n<tr><td>"._("Min password length").":           </td><td>".$sambaMinPwdLength."</td></tr>".
+      "\n<tr><td>"._("Password history").":              </td><td>".$sambaPwdHistoryLength."</td></tr>".
+      "\n<tr><td>"._("Force password change").":         </td><td>".$sambaLogonToChgPwd."</td></tr>".
+      "\n<tr><td>"._("Maximum password age").":          </td><td>".$sambaMaxPwdAge."</td></tr>".
+      "\n<tr><td>"._("Minimum password age").":          </td><td>".$sambaMinPwdAge."</td></tr>".
+      "\n<tr><td>"._("Lockout duration").":              </td><td>".$sambaLockoutDuration."</td></tr>".
+      "\n<tr><td>"._("Bad lockout attempt").":           </td><td>".$sambaLockoutThreshold."</td></tr>".
+      "\n<tr><td>"._("Disconnect time").":               </td><td>".$sambaForceLogoff."</td></tr>".
+      "\n<tr><td>"._("Refuse machine password change").":</td><td>".$sambaRefuseMachinePwdChange."</td></tr>".
+      "\n</table></td><td style='vertical-align: top;'><table>".
+      "\n<tr><td><b>"._("User attributes")."</b></td></tr>".
+      "\n<tr><td>"._("Last failed login").":             </td><td>".$sambaBadPasswordTime."</td></tr>".
+      "\n<tr><td>"._("Logon attempts").":                </td><td>".$sambaBadPasswordCount."</td></tr>".
+      "\n<tr><td>"._("Last password update").":          </td><td>".$sambaPwdLastSet."</td></tr>".
+      "\n<tr><td>"._("Last logon").":                    </td><td>".$sambaLogonTime."</td></tr>".
+      "\n<tr><td>"._("Last logoff").":                   </td><td>".$sambaLogoffTime."</td></tr>".
+      "\n<tr><td>"._("Automatic logoff").":              </td><td>".$sambaKickoffTime."</td></tr>".
+      "\n<tr><td>"._("Password expires").":              </td><td>".$sambaPwdMustChange."</td></tr>".
+      "\n<tr><td>"._("Password change available").":     </td><td>".$sambaPwdCanChange."</td></tr>".
+      "\n</table></td></tr></table>";
+    return($str);
+  }
+
 
   function PrepareForCopyPaste($source)
   {

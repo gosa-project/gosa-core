@@ -21,7 +21,8 @@
     <tr>
      <td><label for="sambaDomainName">{t}Domain{/t}</label></td>
      <td>
-      <select id="sambaDomainName" size="1" name="sambaDomainName" {$sambaDomainNameACL}>
+      <select id="sambaDomainName" size="1" name="sambaDomainName" {$sambaDomainNameACL}
+       onChange="document.mainform.submit();">
        {html_options values=$domains output=$domains selected=$sambaDomainName}
       </select>
      </td>
@@ -50,6 +51,27 @@
  </tr>
 </table>
 
+<p class="seperator">&nbsp;</p>
+
+<h2>&nbsp;<img class="center" src='images/info_small.png'>&nbsp;{t}Information{/t}</h2>
+<table style='width:100%;'>
+ <tr>
+  <td>{t}Show information{/t}
+   {if $display_information}
+    <input type='submit' name='display_information' value='{t}Hide{/t}'>
+   {else}
+    <input type='submit' name='display_information' value='{t}Show{/t}'>
+   {/if}
+  </td>
+ </tr>
+ {if $display_information}
+ <tr>
+  <td>
+    {$samba_information}
+  </td>
+ </tr>
+ {/if}
+</table>
 <p class="seperator">&nbsp;</p>
 
 <h2><img class="center" alt="" align="middle" src="images/display.png" />&nbsp;{t}Terminal Server{/t}</h2>
@@ -263,41 +285,22 @@
    <input id="temporary_disable" type=checkbox name="temporary_disable" value="1" {$flagsD} {$temporary_disableACL}>
    <label for="temporary_disable">{t}Lock samba account{/t}</label>
    <br>
-   <input id="password_expires" type=checkbox name="password_expires" value="1" {$flagsC} {$sambaPwdMustChangeACL}>
+   <input id="password_expires" type=checkbox name="password_expires" value="1" {$flagsC} {$sambaPwdMustChangeACL}
+     onChange="document.mainform.submit();">
    <label for="password_expires">{t}Password expires on{/t}</label>
-   <select name=day onChange="createResult(this.form,this.form.sambaPwdMustChange);" {$sambaPwdMustChangeACL}>
+   <select name=day onChange="createResult(this.form,this.form.sambaPwdMustChange); document.mainform.submit();" {$sambaPwdMustChangeACL}>
     {html_options values=$days output=$days selected=$day}
    </select>
-   <select name=month onChange="populate(this.form,this.form.sambaPwdMustChange);" {$sambaPwdMustChangeACL}>
+   <select name=month onChange="populate(this.form,this.form.sambaPwdMustChange);document.mainform.submit();" {$sambaPwdMustChangeACL}>
     {html_options options=$months selected=$month}
    </select>
-   <select name=year onChange="populate(this.form,this.form.sambaPwdMustChange);" {$sambaPwdMustChangeACL}>
+   <select name=year onChange="populate(this.form,this.form.sambaPwdMustChange);document.mainform.submit();" {$sambaPwdMustChangeACL}>
     {html_options values=$years output=$years selected=$year}
    </select>
-   <br>
-   <input id="logon_time_set" type=checkbox name="logon_time_set" value="1" {$flagsT} {$sambaLogonTimeACL}>
-   <label for="logon_time_set">{t}Limit Logon Time{/t}</label>
-   <select name=sambaLogonTime_day onChange="createResult_sambaLogonTime(this.form,this.form.sambaLogonTime);" {$sambaLogonTimeACL}>
-   {html_options values=$sambaLogonTime_days output=$sambaLogonTime_days selected=$sambaLogonTime_day}
-   </select>
-   <select name=sambaLogonTime_month onChange="populate_sambaLogonTime(this.form,this.form.sambaLogonTime);" {$sambaLogonTimeACL}>
-   {html_options options=$sambaLogonTime_months output=$sambaLogonTime_months selected=$sambaLogonTime_month}
-   </select>
-   <select name=sambaLogonTime_year onChange="populate_sambaLogonTime(this.form,this.form.sambaLogonTime);" {$sambaLogonTimeACL}>
-   {html_options values=$sambaLogonTime_years output=$sambaLogonTime_years selected=$sambaLogonTime_year}
-   </select>
-   <br>
-   <input id="logoff_time_set" type=checkbox name="logoff_time_set" value="1" {$flagsO} {$sambaLogoffTimeACL}>
-   <label for="logoff_time_set">{t}Limit Logoff Time{/t}</label>
-   <select name=sambaLogoffTime_day onChange="createResult_sambaLogoffTime(this.form,this.form.sambaLogoffTime);" {$sambaLogoffTimeACL}>
-   {html_options values=$sambaLogoffTime_days output=$sambaLogoffTime_days selected=$sambaLogoffTime_day}
-   </select>
-   <select name=sambaLogoffTime_month onChange="populate_sambaLogoffTime(this.form,this.form.sambaLogoffTime);" {$sambaLogoffTimeACL}>
-   {html_options options=$sambaLogoffTime_months output=$sambaLogoffTime_months selected=$sambaLogoffTime_month}
-   </select>
-   <select name=sambaLogoffTime_year onChange="populate_sambaLogoffTime(this.form,this.form.sambaLogoffTime);" {$sambaLogoffTimeACL}>
-   {html_options values=$sambaLogoffTime_years output=$sambaLogoffTime_years selected=$sambaLogoffTime_year}
-   </select>
+   {if $additional_info_PwdMustChange}
+   <br><i>({$additional_info_PwdMustChange})</i>
+   {/if}
+
    <br>
    
    <input id="kickoff_time_set" type=checkbox name="kickoff_time_set" value="1" {$flagsK} {$sambaKickoffTimeACL}>
