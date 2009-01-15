@@ -5,29 +5,29 @@
 ## DP: Fix location of auto-generated class mapping file
 
 @DPATCH@
-diff -urNad gosa-core~/include/class_config.inc gosa-core/include/class_config.inc
---- gosa-core~/include/class_config.inc	2008-07-10 17:18:52.000000000 +0200
-+++ gosa-core/include/class_config.inc	2008-07-15 10:00:12.000000000 +0200
+diff -urNad gosa-2.6.3~/include/class_config.inc gosa-2.6.3/include/class_config.inc
+--- gosa-2.6.3~/include/class_config.inc	2008-12-18 15:13:44.000000000 +0100
++++ gosa-2.6.3/include/class_config.inc	2009-01-15 14:08:54.000000000 +0100
 @@ -76,12 +76,12 @@
          if we have installed or removed plugins. 
       */
-     if(session::is_set("class_location.inc:timestamp")){
+     if(session::global_is_set("class_location.inc:timestamp")){
 -      $tmp = stat("../include/class_location.inc");
 +      $tmp = stat("/var/cache/gosa/class.cache");
-       if($tmp['mtime'] != session::get("class_location.inc:timestamp")){
-         session::un_set("plist");
+       if($tmp['mtime'] != session::global_get("class_location.inc:timestamp")){
+         session::global_un_set("plist");
        }
      }
 -    $tmp = stat("../include/class_location.inc");
 +    $tmp = stat("/var/cache/gosa/class.cache");
-     session::set("class_location.inc:timestamp",$tmp['mtime']);
+     session::global_set("class_location.inc:timestamp",$tmp['mtime']);
  
  
-diff -urNad gosa-core~/include/functions.inc gosa-core/include/functions.inc
---- gosa-core~/include/functions.inc	2008-07-15 09:58:50.000000000 +0200
-+++ gosa-core/include/functions.inc	2008-07-15 09:58:51.000000000 +0200
+diff -urNad gosa-2.6.3~/include/functions.inc gosa-2.6.3/include/functions.inc
+--- gosa-2.6.3~/include/functions.inc	2009-01-15 14:07:35.000000000 +0100
++++ gosa-2.6.3/include/functions.inc	2009-01-15 14:07:36.000000000 +0100
 @@ -73,7 +73,7 @@
- $svn_revision = '$Revision: 9246 $';
+ $svn_revision = '$Revision: 13322 $';
  
  /* Include required files */
 -require_once("class_location.inc");
@@ -35,9 +35,9 @@ diff -urNad gosa-core~/include/functions.inc gosa-core/include/functions.inc
  require_once ("functions_debug.inc");
  require_once ("accept-to-gettext.inc");
  
-diff -urNad gosa-core~/update-gosa gosa-core/update-gosa
---- gosa-core~/update-gosa	2008-06-10 09:56:22.000000000 +0200
-+++ gosa-core/update-gosa	2008-07-15 09:58:51.000000000 +0200
+diff -urNad gosa-2.6.3~/update-gosa gosa-2.6.3/update-gosa
+--- gosa-2.6.3~/update-gosa	2008-06-10 09:56:22.000000000 +0200
++++ gosa-2.6.3/update-gosa	2009-01-15 14:07:36.000000000 +0100
 @@ -21,7 +21,7 @@
   * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
   */
