@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-19 09:29+0100\n"
+"POT-Creation-Date: 2009-01-15 11:49+0100\n"
 "PO-Revision-Date: 2008-12-08 11:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: Spanish <kde-i18n-doc@lists.kde.org>\n"
@@ -53,7 +53,7 @@ msgstr "¡Ha fallado copiar y pegar! "
 #: plugins/personal/generic/class_user.inc:513
 #: plugins/personal/generic/class_user.inc:806
 #: plugins/personal/generic/class_user.inc:1382
-#: plugins/personal/generic/main.inc:115 html/index.php:222 html/index.php:226
+#: plugins/personal/generic/main.inc:115 html/index.php:223 html/index.php:227
 #: setup/setup_checks.tpl:30 setup/setup_checks.tpl:91
 #: setup/class_setupStep_Migrate.inc:1186
 #: ihtml/themes/default/msg_dialog.tpl:52
@@ -82,7 +82,7 @@ msgstr "No se pueden modificar los permisos para '%s'"
 #: include/class_plugin.inc:1325 include/class_plugin.inc:1337
 #: plugins/admin/groups/class_groupGeneric.inc:163
 #: plugins/admin/groups/class_groupGeneric.inc:728 html/password.php:74
-#: html/index.php:142 html/index.php:214 html/main.php:228
+#: html/index.php:143 html/index.php:215 html/main.php:228
 msgid "Configuration error"
 msgstr "Error de configuración"
 
@@ -240,7 +240,7 @@ msgstr "Todos los objetos en el subárbol actual"
 #: include/class_acl.inc:728 include/class_acl.inc:735
 #: include/class_acl.inc:742 include/class_acl.inc:748
 #: include/utils/class_msgPool.inc:463
-#: plugins/admin/departments/class_departmentGeneric.inc:573
+#: plugins/admin/departments/class_departmentGeneric.inc:574
 #: ihtml/themes/default/snapshotdialog.tpl:20
 #: ihtml/themes/default/snapshotdialog.tpl:62
 msgid "Object"
@@ -325,21 +325,21 @@ msgstr "La ACL tendrá efecto para todos los usuarios"
 #: include/class_plugin.inc:1429 include/class_plugin.inc:1495
 #: include/class_plugin.inc:1510
 #: plugins/admin/departments/class_departmentGeneric.inc:241
-#: plugins/admin/departments/class_departmentGeneric.inc:428
-#: plugins/admin/departments/class_departmentGeneric.inc:701
-#: plugins/admin/departments/class_departmentGeneric.inc:732
+#: plugins/admin/departments/class_departmentGeneric.inc:429
+#: plugins/admin/departments/class_departmentGeneric.inc:702
+#: plugins/admin/departments/class_departmentGeneric.inc:733
 #: plugins/admin/acl/class_aclRole.inc:616
 #: plugins/admin/acl/class_aclRole.inc:656
 #: plugins/admin/acl/class_aclRole.inc:670
-#: plugins/admin/ogroups/class_ogroup.inc:1030
-#: plugins/admin/ogroups/class_ogroup.inc:1044
+#: plugins/admin/ogroups/class_ogroup.inc:1033
+#: plugins/admin/ogroups/class_ogroup.inc:1047
 #: plugins/admin/groups/class_groupGeneric.inc:758
 #: plugins/admin/groups/class_groupGeneric.inc:1069
 #: plugins/personal/posix/class_posixAccount.inc:678
 #: plugins/personal/posix/class_posixAccount.inc:942
 #: plugins/personal/generic/class_user.inc:722
-#: plugins/personal/generic/class_user.inc:1084 html/index.php:252
-#: html/index.php:267 html/index.php:280
+#: plugins/personal/generic/class_user.inc:1084 html/index.php:253
+#: html/index.php:268 html/index.php:281
 #: setup/class_setupStep_Migrate.inc:1197
 #: setup/class_setupStep_Migrate.inc:1225
 #: setup/class_setupStep_Migrate.inc:1274
@@ -1128,11 +1128,11 @@ msgstr "Error XML en guide.xml: %s en la linea %d"
 msgid "No help available for this plugin."
 msgstr "No hay ayuda disponible para esta extensión."
 
-#: include/functions_helpviewer.inc:97 html/helpviewer.php:193
+#: include/functions_helpviewer.inc:97 html/helpviewer.php:194
 msgid "previous"
 msgstr "anterior"
 
-#: include/functions_helpviewer.inc:101 html/helpviewer.php:197
+#: include/functions_helpviewer.inc:101 html/helpviewer.php:198
 msgid "next"
 msgstr "siguiente"
 
@@ -1230,14 +1230,14 @@ msgstr "Usar"
 #: plugins/admin/departments/country.tpl:28
 #: plugins/admin/departments/organization.tpl:39
 #: plugins/admin/departments/locality.tpl:28
-#: plugins/admin/departments/class_departmentGeneric.inc:620
+#: plugins/admin/departments/class_departmentGeneric.inc:621
 #: plugins/admin/departments/class_organizationGeneric.inc:121
 #: plugins/admin/departments/class_divListDepartment.inc:85
 #: plugins/admin/acl/class_divListACL.inc:102
 #: plugins/admin/acl/acl_role.tpl:27 plugins/admin/acl/class_aclRole.inc:734
 #: plugins/admin/ogroups/generic.tpl:26
 #: plugins/admin/ogroups/class_divListOGroup.inc:146
-#: plugins/admin/ogroups/class_ogroup.inc:1127
+#: plugins/admin/ogroups/class_ogroup.inc:1130
 #: plugins/admin/users/class_divListUsers.inc:113
 #: plugins/admin/groups/generic.tpl:39
 #: plugins/admin/groups/class_groupGeneric.inc:1263
@@ -1332,7 +1332,7 @@ msgstr "El servidor LDAP devolvio: %s"
 #: plugins/admin/users/remove.tpl:2 plugins/admin/groups/remove.tpl:2
 #: plugins/personal/posix/class_posixAccount.inc:832
 #: plugins/personal/posix/class_posixAccount.inc:925 html/password.php:280
-#: html/index.php:57 html/index.php:63 html/index.php:415 html/index.php:421
+#: html/index.php:57 html/index.php:63 html/index.php:416 html/index.php:422
 #: setup/setup_checks.tpl:32 setup/setup_checks.tpl:93
 #: setup/class_setupStep_Migrate.inc:251 setup/class_setupStep_Migrate.inc:303
 #: setup/class_setupStep_Migrate.inc:436 setup/class_setupStep_Migrate.inc:513
@@ -1693,12 +1693,12 @@ msgstr "Y-m-d, H:i:s"
 #: plugins/admin/departments/organization.tpl:19
 #: plugins/admin/departments/locality.tpl:19
 #: plugins/admin/departments/class_departmentGeneric.inc:317
-#: plugins/admin/departments/class_departmentGeneric.inc:618
+#: plugins/admin/departments/class_departmentGeneric.inc:619
 #: plugins/admin/departments/class_organizationGeneric.inc:91
 #: plugins/admin/departments/class_organizationGeneric.inc:119
 #: plugins/admin/acl/acl_role.tpl:17 plugins/admin/acl/class_aclRole.inc:735
 #: plugins/admin/ogroups/generic.tpl:15
-#: plugins/admin/ogroups/class_ogroup.inc:1128
+#: plugins/admin/ogroups/class_ogroup.inc:1131
 #: plugins/admin/groups/generic.tpl:24
 #: plugins/admin/groups/class_groupGeneric.inc:1262
 #: plugins/generic/references/contents.tpl:11
@@ -1853,9 +1853,9 @@ msgstr "Referencias"
 #: plugins/admin/acl/paste_role.tpl:4 plugins/admin/acl/acl_role.tpl:7
 #: plugins/admin/acl/class_aclRole.inc:733
 #: plugins/admin/acl/class_aclRole.inc:745
-#: plugins/admin/ogroups/class_ogroup.inc:919
-#: plugins/admin/ogroups/class_ogroup.inc:929
-#: plugins/admin/ogroups/class_ogroup.inc:1126
+#: plugins/admin/ogroups/class_ogroup.inc:922
+#: plugins/admin/ogroups/class_ogroup.inc:932
+#: plugins/admin/ogroups/class_ogroup.inc:1129
 #: plugins/admin/users/class_userManagement.inc:767
 #: plugins/admin/users/class_userManagement.inc:841
 #: plugins/admin/users/class_userManagement.inc:853
@@ -1894,7 +1894,7 @@ msgstr "Nombre del País"
 #: plugins/admin/departments/country.tpl:50
 #: plugins/admin/departments/organization.tpl:114
 #: plugins/admin/departments/locality.tpl:50
-#: plugins/admin/departments/class_departmentGeneric.inc:628
+#: plugins/admin/departments/class_departmentGeneric.inc:629
 #: plugins/admin/departments/class_organizationGeneric.inc:129
 msgid "Administrative settings"
 msgstr "Parámetros administrativos"
@@ -1971,7 +1971,7 @@ msgstr "Nombre del subárbol a crear"
 
 #: plugins/admin/departments/generic.tpl:27
 #: plugins/admin/departments/organization.tpl:27
-#: plugins/admin/departments/class_departmentGeneric.inc:619
+#: plugins/admin/departments/class_departmentGeneric.inc:620
 #: plugins/admin/departments/class_organizationGeneric.inc:120
 msgid "Category"
 msgstr "Categoría"
@@ -1986,7 +1986,7 @@ msgstr "Categoría para este subárbol"
 #: plugins/admin/departments/class_localityGeneric.inc:87
 #: plugins/admin/departments/organization.tpl:61
 #: plugins/admin/departments/organization.tpl:73
-#: plugins/admin/departments/class_departmentGeneric.inc:623
+#: plugins/admin/departments/class_departmentGeneric.inc:624
 #: plugins/admin/departments/class_organizationGeneric.inc:124
 #: plugins/personal/generic/generic.tpl:381
 #: plugins/personal/generic/class_user.inc:1580
@@ -1996,7 +1996,7 @@ msgstr "Localización"
 
 #: plugins/admin/departments/generic.tpl:65
 #: plugins/admin/departments/organization.tpl:65
-#: plugins/admin/departments/class_departmentGeneric.inc:622
+#: plugins/admin/departments/class_departmentGeneric.inc:623
 #: plugins/admin/departments/class_organizationGeneric.inc:123
 #: plugins/personal/generic/generic.tpl:389
 #: plugins/personal/generic/class_user.inc:1579
@@ -2016,7 +2016,7 @@ msgstr "Localización de este subárbol"
 
 #: plugins/admin/departments/generic.tpl:81
 #: plugins/admin/departments/organization.tpl:81
-#: plugins/admin/departments/class_departmentGeneric.inc:624
+#: plugins/admin/departments/class_departmentGeneric.inc:625
 #: plugins/personal/generic/generic.tpl:194
 #: plugins/personal/generic/generic.tpl:397
 #: plugins/personal/generic/multiple_generic.tpl:67
@@ -2032,7 +2032,7 @@ msgstr "Dirección postal de este subárbol"
 #: plugins/admin/departments/generic.tpl:88
 #: plugins/admin/departments/organization.tpl:88
 #: plugins/admin/departments/class_departmentGeneric.inc:328
-#: plugins/admin/ogroups/class_ogroupManagement.inc:535
+#: plugins/admin/ogroups/class_ogroupManagement.inc:536
 #: plugins/admin/users/class_divListUsers.inc:207
 #: plugins/admin/groups/class_divListGroup.inc:196
 #: plugins/personal/generic/generic.tpl:338
@@ -2053,7 +2053,7 @@ msgstr "Número base de teléfono de este subárbol"
 #: plugins/admin/departments/generic.tpl:96
 #: plugins/admin/departments/organization.tpl:96
 #: plugins/admin/departments/class_departmentGeneric.inc:331
-#: plugins/admin/departments/class_departmentGeneric.inc:626
+#: plugins/admin/departments/class_departmentGeneric.inc:627
 #: plugins/admin/departments/class_organizationGeneric.inc:127
 #: plugins/admin/users/class_divListUsers.inc:209
 #: plugins/personal/generic/generic.tpl:363
@@ -2071,8 +2071,8 @@ msgid "Base facsimile telephone number of this subtree"
 msgstr "Número base de fax de este subárbol"
 
 #: plugins/admin/departments/class_departmentManagement.inc:26
-#: plugins/admin/departments/class_departmentGeneric.inc:609
-#: plugins/admin/departments/class_departmentGeneric.inc:614
+#: plugins/admin/departments/class_departmentGeneric.inc:610
+#: plugins/admin/departments/class_departmentGeneric.inc:615
 msgid "Departments"
 msgstr "Departamentos"
 
@@ -2134,7 +2134,7 @@ msgstr "Organización"
 
 #: plugins/admin/departments/class_departmentManagement.inc:604
 #: plugins/admin/ogroups/class_divListOGroup.inc:83
-#: plugins/admin/ogroups/class_ogroupManagement.inc:533
+#: plugins/admin/ogroups/class_ogroupManagement.inc:534
 #: plugins/admin/users/class_divListUsers.inc:80
 #: plugins/admin/groups/class_divListGroup.inc:79
 #: plugins/personal/generic/generic.tpl:287
@@ -2222,30 +2222,30 @@ msgstr ""
 "¡No se puede encontrar una etiqueta sin usar para identificar la unidad "
 "administrativa!"
 
-#: plugins/admin/departments/class_departmentGeneric.inc:456
+#: plugins/admin/departments/class_departmentGeneric.inc:457
 #, php-format
 msgid "Tagging '%s'."
 msgstr "Etiquetando '%s'."
 
-#: plugins/admin/departments/class_departmentGeneric.inc:513
-#: plugins/admin/departments/class_departmentGeneric.inc:595
+#: plugins/admin/departments/class_departmentGeneric.inc:514
+#: plugins/admin/departments/class_departmentGeneric.inc:596
 #: plugins/admin/users/template.tpl:48
 #: ihtml/themes/default/snapshotdialog.tpl:87
 msgid "Continue"
 msgstr "Continuar"
 
-#: plugins/admin/departments/class_departmentGeneric.inc:537
+#: plugins/admin/departments/class_departmentGeneric.inc:538
 #, php-format
 msgid "Moving '%s' to '%s'"
 msgstr "Moviendo '%s' a '%s'"
 
-#: plugins/admin/departments/class_departmentGeneric.inc:578
+#: plugins/admin/departments/class_departmentGeneric.inc:579
 #, php-format
 msgid "FAILED to copy %s, aborting operation"
 msgstr "Ha fallado a copiar %s, operación abortada"
 
-#: plugins/admin/departments/class_departmentGeneric.inc:608
-#: plugins/admin/ogroups/class_ogroup.inc:1117
+#: plugins/admin/departments/class_departmentGeneric.inc:609
+#: plugins/admin/ogroups/class_ogroup.inc:1120
 #: plugins/admin/groups/class_groupGeneric.inc:1252
 #: plugins/personal/posix/generic.tpl:4
 #: plugins/personal/generic/class_user.inc:37
@@ -2255,26 +2255,26 @@ msgstr "Ha fallado a copiar %s, operación abortada"
 msgid "Generic"
 msgstr "Genérico"
 
-#: plugins/admin/departments/class_departmentGeneric.inc:617
+#: plugins/admin/departments/class_departmentGeneric.inc:618
 #: plugins/admin/departments/class_divListDepartment.inc:65
 msgid "Department name"
 msgstr "Nombre de departamento"
 
-#: plugins/admin/departments/class_departmentGeneric.inc:625
+#: plugins/admin/departments/class_departmentGeneric.inc:626
 msgid "Telephone"
 msgstr "Teléfono"
 
-#: plugins/admin/departments/class_departmentGeneric.inc:679
+#: plugins/admin/departments/class_departmentGeneric.inc:680
 #, php-format
 msgid "Object '%s' is already tagged"
 msgstr "El objeto '%s' está ya marcado"
 
-#: plugins/admin/departments/class_departmentGeneric.inc:686
+#: plugins/admin/departments/class_departmentGeneric.inc:687
 #, php-format
 msgid "Adding tag (%s) to object '%s'"
 msgstr "Añadir marca (%s) al objeto '%s'"
 
-#: plugins/admin/departments/class_departmentGeneric.inc:718
+#: plugins/admin/departments/class_departmentGeneric.inc:719
 #, php-format
 msgid "Removing tag from object '%s'"
 msgstr "Eliminando marca del objeto '%s'"
@@ -2748,7 +2748,7 @@ msgstr "Expresiones regulares para buscar nombre de objetos"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:26
 #: plugins/admin/ogroups/main.inc:53 plugins/admin/ogroups/main.inc:58
-#: plugins/admin/ogroups/class_ogroup.inc:1123
+#: plugins/admin/ogroups/class_ogroup.inc:1126
 msgid "Object groups"
 msgstr "Grupos de objetos"
 
@@ -2768,43 +2768,48 @@ msgid "object group"
 msgstr "grupo de objetos"
 
 #: plugins/admin/ogroups/class_ogroupManagement.inc:530
+#, fuzzy
+msgid "Templates"
+msgstr "Plantilla"
+
+#: plugins/admin/ogroups/class_ogroupManagement.inc:531
 #: plugins/admin/users/class_divListUsers.inc:126 setup/setup_config2.tpl:286
 #: setup/setup_config2.tpl:331
 msgid "User"
 msgstr "Usuario"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:531
+#: plugins/admin/ogroups/class_ogroupManagement.inc:532
 #: plugins/admin/groups/class_divListGroup.inc:133
 #: plugins/generic/references/class_reference.inc:57
 msgid "Group"
 msgstr "Grupo"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:532
+#: plugins/admin/ogroups/class_ogroupManagement.inc:533
 #: plugins/admin/groups/class_divListGroup.inc:194
 #: plugins/generic/references/class_reference.inc:63
 msgid "Application"
 msgstr "Aplicación"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:534
+#: plugins/admin/ogroups/class_ogroupManagement.inc:535
 #: plugins/generic/references/class_reference.inc:65
 #: setup/setup_config2.tpl:277 setup/setup_config2.tpl:322
 msgid "Server"
 msgstr "Servidor"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:536
+#: plugins/admin/ogroups/class_ogroupManagement.inc:537
 #: plugins/generic/references/class_reference.inc:69
 msgid "Workstation"
 msgstr "Estación de trabajo"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:537
+#: plugins/admin/ogroups/class_ogroupManagement.inc:538
 msgid "Windows Install"
 msgstr "Instalación Windows"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:538
+#: plugins/admin/ogroups/class_ogroupManagement.inc:539
 msgid "Terminal"
 msgstr "Terminal"
 
-#: plugins/admin/ogroups/class_ogroupManagement.inc:539
+#: plugins/admin/ogroups/class_ogroupManagement.inc:540
 #: plugins/generic/references/class_reference.inc:73
 msgid "Printer"
 msgstr "Impresora"
@@ -2919,26 +2924,26 @@ msgstr "Permitir el acceso a estos equipos"
 msgid "Non existing dn:"
 msgstr "No existe el 'dn':"
 
-#: plugins/admin/ogroups/class_ogroup.inc:909
+#: plugins/admin/ogroups/class_ogroup.inc:912
 #, php-format
 msgid ""
 "These systems are already configured by other object groups and cannot be "
 "added:"
 msgstr ""
 
-#: plugins/admin/ogroups/class_ogroup.inc:934
+#: plugins/admin/ogroups/class_ogroup.inc:937
 msgid "You can combine two different object types at maximum, only!"
 msgstr "¡Solo se puede combiar dos tipos de objetos diferentes como máximo!"
 
-#: plugins/admin/ogroups/class_ogroup.inc:1118
+#: plugins/admin/ogroups/class_ogroup.inc:1121
 msgid "Object group generic"
 msgstr "Grupo de objetos genérico"
 
-#: plugins/admin/ogroups/class_ogroup.inc:1129
+#: plugins/admin/ogroups/class_ogroup.inc:1132
 msgid "Sytem trust"
 msgstr "Sistema de confianza"
 
-#: plugins/admin/ogroups/class_ogroup.inc:1130
+#: plugins/admin/ogroups/class_ogroup.inc:1133
 msgid "Member"
 msgstr "Miembro"
 
@@ -3197,7 +3202,7 @@ msgstr ""
 #: plugins/personal/password/class_password.inc:90
 #: plugins/personal/password/class_password.inc:93
 #: plugins/personal/password/class_password.inc:107
-#: plugins/personal/password/class_password.inc:113 html/main.php:328
+#: plugins/personal/password/class_password.inc:113 html/main.php:329
 #: ihtml/themes/default/password.tpl:41
 msgid "Password change"
 msgstr "Cambio de contraseña"
@@ -3353,11 +3358,11 @@ msgstr "Los miembros están en un grupo Nagios"
 msgid "Group members"
 msgstr "Miembros del grupo"
 
-#: plugins/admin/groups/generic.tpl:252 plugins/personal/posix/generic.tpl:94
+#: plugins/admin/groups/generic.tpl:252
 msgid "In all groups"
 msgstr "en todos los grupos"
 
-#: plugins/admin/groups/generic.tpl:255 plugins/personal/posix/generic.tpl:98
+#: plugins/admin/groups/generic.tpl:255
 msgid "Not in all groups"
 msgstr "no en todos los grupos"
 
@@ -3601,6 +3606,16 @@ msgstr "Pertenencia a grupo"
 #: plugins/personal/posix/paste_generic.tpl:54
 msgid "(Warning: more than 16 groups are not supported by NFS!)"
 msgstr "(Aviso: NFS no soporta mas de 16 grupos)"
+
+#: plugins/personal/posix/generic.tpl:94
+#, fuzzy
+msgid "Common group"
+msgstr "grupos de teléfonos"
+
+#: plugins/personal/posix/generic.tpl:98
+#, fuzzy
+msgid "Non common group"
+msgstr "no en todos los grupos"
 
 #: plugins/personal/posix/generic.tpl:119
 msgid "Account"
@@ -4307,12 +4322,12 @@ msgstr ""
 "<a\thref='https://oss.gonicus.de/labs/gosa/newticket'\ttarget='_blank'>Envío "
 "incidencias</a>"
 
-#: html/password.php:58 html/index.php:142
+#: html/password.php:58 html/index.php:143
 #, php-format
 msgid "GOsa configuration %s/%s is not readable. Aborted."
 msgstr "No se puede acceder a la configuración de GOsa %s/%s. Cancelado"
 
-#: html/password.php:74 html/index.php:163 html/setup.php:66
+#: html/password.php:74 html/index.php:164 html/setup.php:66
 #, php-format
 msgid "Directory '%s' specified as compile directory is not accessible!"
 msgstr "¡No se puede acceder a el directorio de compilación '%s'!"
@@ -4321,7 +4336,7 @@ msgstr "¡No se puede acceder a el directorio de compilación '%s'!"
 msgid "Error: Password method not available!"
 msgstr "Error: ¡El método de contraseñas no esta disponible!"
 
-#: html/password.php:224 html/index.php:323
+#: html/password.php:224 html/index.php:324
 msgid "Please check the username/password combination."
 msgstr "Por favor compruebe la combinación nombre de usuario/contraseña"
 
@@ -4333,11 +4348,11 @@ msgstr "No tiene permisos para cambiar su contraseña."
 msgid "External password changer reported a problem: "
 msgstr "El programa externo de cambio de contraseña informo de un problema: "
 
-#: html/password.php:280 html/index.php:415
+#: html/password.php:280 html/index.php:416
 msgid "Session will not be encrypted."
 msgstr "La sesión no será codificada."
 
-#: html/password.php:280 html/index.php:415
+#: html/password.php:280 html/index.php:416
 msgid "Enter SSL session"
 msgstr "Entrar en sesión SSL"
 
@@ -4353,57 +4368,57 @@ msgstr ""
 "El tiempo de vida de sesión es su gosa.conf sera sustituido por el valor de "
 "ini de php."
 
-#: html/index.php:163
+#: html/index.php:164
 msgid "Smarty error"
 msgstr "Error Smarty"
 
-#: html/index.php:214
+#: html/index.php:215
 msgid "There is a problem with the authentication setup!"
 msgstr "¡Hay un problema con la configuración de autenticación!"
 
-#: html/index.php:222
+#: html/index.php:223
 msgid "Cannot find a valid user for the current authentication setup!"
 msgstr ""
 "¡No se puede encontrar un usuario válido para la configuración de "
 "autenticación seleccionada!"
 
-#: html/index.php:226
+#: html/index.php:227
 msgid "User information is not unique accross the configured LDAP trees!"
 msgstr ""
 "¡La información del usuario no es única dentro del árbol LDAP selecionado!"
 
-#: html/index.php:267
+#: html/index.php:268
 msgid "Cannot detect information about the installed LDAP schema!"
 msgstr ""
 "¡No se puede acceder a la información sobre los esuqemas LDAP instalados!"
 
-#: html/index.php:280
+#: html/index.php:281
 msgid "Your LDAP setup contains old schema definitions:"
 msgstr "Su configuración LDAP tiene definiciones de esquemas antiguos:"
 
-#: html/index.php:301
+#: html/index.php:302
 msgid "Please specify a valid username!"
 msgstr "¡Por favor introduzca un nombre de usuario válido!"
 
-#: html/index.php:304
+#: html/index.php:305
 msgid "Please specify your password!"
 msgstr "¡Por favor introduzca una contraseña!"
 
-#: html/index.php:316
+#: html/index.php:317
 msgid "Authentication error"
 msgstr "Error de Autenticación"
 
-#: html/index.php:316
+#: html/index.php:317
 msgid "Cannot retrieve user information for htaccess authentication!"
 msgstr ""
 "¡No se puede recuperar la información de usuario para autenticación htaccess!"
 
-#: html/index.php:370
+#: html/index.php:371
 msgid "Account locked. Please contact your system administrator!"
 msgstr ""
 "Cuenta bloqueada. ¡Por favor contacte con su administrador de sistemas!"
 
-#: html/index.php:421
+#: html/index.php:422
 msgid ""
 "Your browser has cookies disabled. Please enable cookies and reload this "
 "page before logging in!"
@@ -4438,27 +4453,27 @@ msgstr "¡Funcionando sin memoria!"
 msgid "User ACL checks disabled"
 msgstr "Desactivados chequeos de ACL de usuario"
 
-#: html/main.php:328
+#: html/main.php:329
 msgid "Your password is about to expire, please change your password!"
 msgstr ""
 "Su contraseña va a caducar próximamente, ¡Por favor cambie su contraseña!"
 
-#: html/main.php:338
+#: html/main.php:339
 msgid "Plugin"
 msgstr "Extensión"
 
-#: html/main.php:339
+#: html/main.php:340
 #, php-format
 msgid "FATAL: Cannot find any plugin definitions for plugin '%s'!"
 msgstr ""
 "FATAL: ¡No se puede encontrar ninguna definición de extensión para la "
 "extensión '%s'!"
 
-#: html/main.php:353
+#: html/main.php:354
 msgid "Configuration Error"
 msgstr "Error de configuración"
 
-#: html/main.php:354
+#: html/main.php:355
 #, php-format
 msgid ""
 "FATAL: not all POST variables have been transfered by PHP - please inform "
@@ -4479,7 +4494,7 @@ msgstr "Navegador de ayuda"
 msgid "There is no helpfile specified for this class"
 msgstr "No hay archivo de ayuda disponible para esta clase"
 
-#: html/helpviewer.php:268
+#: html/helpviewer.php:269
 #, php-format
 msgid "Helpdir '%s' is not accessible, can't read any helpfiles."
 msgstr ""
@@ -5478,9 +5493,9 @@ msgid "Found %s department(s) that will not be visible in GOsa."
 msgstr "Encontrados %s departamento(s) que nos son visibles para GOsa."
 
 #: setup/class_setupStep_Migrate.inc:1017
-#, php-format
-msgid "GOsa 2.5 adminitrative accounts found: %s."
-msgstr ""
+#, fuzzy, php-format
+msgid "GOsa 2.5 administrative accounts found: %s"
+msgstr "Crear una nueva cuenta administrativa GOsa"
 
 #: setup/class_setupStep_Migrate.inc:1022
 #, fuzzy
