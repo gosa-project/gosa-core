@@ -390,6 +390,7 @@ class department extends plugin
       }
     }
     $this->skipTagging = TRUE;
+    plugin::save();
 
     /* Remove tag information if needed */
     if (!$this->is_administrational_unit && $this->initially_was_tagged){
