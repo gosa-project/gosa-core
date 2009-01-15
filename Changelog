@@ -1,6 +1,13 @@
 GOsa2 changelog
 ===============
 
+* gosa 2.6.3
+  - Fixed several issues, occurred when using templates. 
+  - Fixed problem with department creation, since GOsa 2.6.1.
+  - Fixed exponential escaping of special chars in dns record entries.
+  - Added samba domain information to samba tab.
+  - Removed readonly attributes from samba tab.
+
 * gosa 2.6.2
   - Updated german locales
   - Updated french locales

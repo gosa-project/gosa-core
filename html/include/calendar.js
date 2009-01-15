@@ -147,6 +147,40 @@
 		saveResult(selectedDate,resultForm);
 	}
 
+	function populate_sambaPwdCanChange(objForm,resultForm) {
+
+		var yearSel=objForm.sambaPwdCanChange_year.options[objForm.sambaPwdCanChange_year.selectedIndex].text;
+		var monthIx=objForm.sambaPwdCanChange_month.selectedIndex;
+		var nextMonthIx=0;
+		if(monthIx!=11)
+			nextMonthIx=monthIx+1;
+
+		var nextMonthSel=objForm.sambaPwdCanChange_month.options[nextMonthIx].value;
+		var monthSel=objForm.sambaPwdCanChange_month.options[monthIx].value;
+
+		var daySel=1;
+		if(objForm.sambaPwdCanChange_day.selectedIndex!=-1)
+			daySel=objForm.sambaPwdCanChange_day.options[objForm.sambaPwdCanChange_day.selectedIndex].value;
+
+		var timeOfDayOne = new Date(yearSel, nextMonthSel, 1);
+		var timeDifference = timeOfDayOne - 86400000;
+		var timeOfLastDay = new Date(timeDifference);
+
+		var daysInMonth = timeOfLastDay.getDate();
+
+		if(daySel>daysInMonth) daySel=daysInMonth;
+
+		var selectedDate= new Date(yearSel,monthSel,daySel);
+		for (var i = 0; i < objForm.sambaPwdCanChange_day.length; i++) {
+			objForm.sambaPwdCanChange_day.options[0] = null;
+		}
+		for (var i = 0; i < daysInMonth; i++) {
+			objForm.sambaPwdCanChange_day.options[i] = new Option(i+1);
+		}
+		objForm.sambaPwdCanChange_day.selectedIndex=daySel-1;
+		saveResult(selectedDate,resultForm);
+	}
+
 	function createResult_sambaLogonTime(objForm,resultForm){
 		yearSel=objForm.sambaLogonTime_year.options[objForm.sambaLogonTime_year.selectedIndex].text;
 		monthIx=objForm.sambaLogonTime_month.selectedIndex;
@@ -168,6 +202,14 @@
 		monthIx=objForm.sambaKickoffTime_month.selectedIndex;
 		monthSel=objForm.sambaKickoffTime_month.options[monthIx].value;
 		daySel=objForm.sambaKickoffTime_day.options[objForm.sambaKickoffTime_day.selectedIndex].value;
+		selectedDate= new Date(yearSel,monthSel,daySel);
+		saveResult(selectedDate,resultForm);
+	}
+	function createResult_sambaPwdCanChange(objForm,resultForm){
+		yearSel=objForm.sambaPwdCanChange_year.options[objForm.sambaPwdCanChange_year.selectedIndex].text;
+		monthIx=objForm.sambaPwdCanChange_month.selectedIndex;
+		monthSel=objForm.sambaPwdCanChange_month.options[monthIx].value;
+		daySel=objForm.sambaPwdCanChange_day.options[objForm.sambaPwdCanChange_day.selectedIndex].value;
 		selectedDate= new Date(yearSel,monthSel,daySel);
 		saveResult(selectedDate,resultForm);
 	}
