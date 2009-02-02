@@ -602,6 +602,11 @@ class userinfo
 
     foreach(str_split($newACL) as $char){
 
+      /* Skip "self" ACLs without combination of rwcdm, they have no effect.
+         -self flag without read/write/create/...
+       */
+      if(empty($char)) continue;
+
       /* Skip permanent and subtree entries */
       if (preg_match('/[sp]/', $acl[$char])){
         continue;
