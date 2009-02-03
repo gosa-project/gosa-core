@@ -1758,6 +1758,9 @@ class gosaSupportDaemon
 
           /* Get list of available log files 
            */
+          if(!is_array($entry)){
+            $entry = array($entry);
+          }
           foreach($entry as $log_date){
             $xml_msg2 = "<xml> 
               <header>gosa_show_log_files_by_date_and_mac</header> 
@@ -1766,7 +1769,7 @@ class gosaSupportDaemon
               <date>".$log_date."</date> 
               <mac>".$mac."</mac> 
               </xml>";
-
+   
             $ret[$mac][$log_date] = array();
             $res = $this->_send($xml_msg2,TRUE);
             $ret[$mac][$log_date]['DATE_STR']  = $log_date; 
