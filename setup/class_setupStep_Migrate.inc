@@ -1533,9 +1533,9 @@ class Step_Migrate extends setup_step
 	}
 	if(isset($_POST['rootOC_migrate_start'])){
 		if($this->checkBaseOC(FALSE)){
+			$this->checkBaseOC();
 			$this->dialog = FALSE;
 			$this->rootOC_migrate_dialog = FALSE;
-			$this->checkBaseOC();
 		}
 	}
 	
