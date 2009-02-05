@@ -49,7 +49,7 @@ class Step_Feedback  extends setup_step
 
   var $features_used        = array();  
   var $initialized          = FALSE; 
-
+  var $feedback_send        = FALSE;
   var $attributes = array("organization","eMail","name","subscribe","use_gosa_announce","get_started","problems_encountered","features_used",
                           "first_use","use_since","distribution","web_server","php_version","ldap_server","object_count","want_to_see_next");
   
@@ -123,7 +123,6 @@ class Step_Feedback  extends setup_step
     }
 
     $additional_info ="";
-
     if(isset($_POST['send_feedback'])){
 
       $msgs = $this->check_feedback();
@@ -147,7 +146,7 @@ class Step_Feedback  extends setup_step
           if(!preg_match("/successful/i",$ret_value)){
             msg_dialog::display(_("Feedback error"), _("Cannot send feedback: service temporarily unavailable"), ERROR_DIALOG);
           }else{
-            $additional_info = "<font color='green'>"._("Feedback sucessfully send")."</font>";
+            $this->feedback_send = TRUE;
           }
         }
         @fclose($ret);
@@ -165,6 +164,7 @@ class Step_Feedback  extends setup_step
     foreach($this->attributes as $attr){
       $smarty->assign($attr,   reverse_html_entities($this->$attr));
     }
+    $smarty->assign("feedback_send",$this->feedback_send);
     $smarty->assign("years",$years);
     $smarty->assign("features_used",$this->features_used);
     $smarty->assign("additional_info", reverse_html_entities($additional_info));
@@ -176,7 +176,7 @@ class Step_Feedback  extends setup_step
   function check_feedback()
   {
     $msgs = array();
-    if(!tests::is_email($this->eMail) || empty($this->eMail)){
+    if($this->subscribe && (!tests::is_email($this->eMail) || empty($this->eMail))){
       $msgs[] = _("Please specify a valid email address.");
     }
 

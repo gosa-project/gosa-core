@@ -1,3 +1,12 @@
+
+{if $feedback_send}
+
+	<div class='default' style='margin:12px; '>  
+		<font color='green'>{t}Feedback sucessfully send{/t}</font>
+	</div>	
+
+{else}
+	
 <div class='default' style='margin:12px; '>  
 
 	<h2>{$additional_info}</h2>
@@ -141,4 +150,5 @@
 	</table>
 </div>
 <input type='submit' name='send_feedback' value='{t}Send feedback{/t}'>
+{/if}
 <input type='hidden' name='step_feedback' value='1'>
