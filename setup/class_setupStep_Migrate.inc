@@ -113,6 +113,10 @@ class Step_Migrate extends setup_step
   var $acl_migrate_dialog      = FALSE;
   var $migrate_acl_base_entry  = "";
 
+  /* Root object classes */
+  var $rootOC_migrate_dialog = FALSE;
+  var $rootOC_details = array();
+	
   function Step_Migrate()
   {
     $this->update_strings(); 
@@ -133,6 +137,12 @@ class Step_Migrate extends setup_step
     $this->checks['root']['STATUS_MSG']= "";
     $this->checks['root']['ERROR_MSG'] = "";
     $this->checkBase();
+
+    $this->checks['rootOC']['TITLE']     = _("Checking object classes for root object");
+    $this->checks['rootOC']['STATUS']    = FALSE;
+    $this->checks['rootOC']['STATUS_MSG']= "";
+    $this->checks['rootOC']['ERROR_MSG'] = "";
+    $this->checkBaseOC();
 
     $this->checks['permissions']['TITLE']     = _("Checking permissions on LDAP database");
     $this->checks['permissions']['STATUS']    = FALSE;
@@ -1508,6 +1518,34 @@ class Step_Migrate extends setup_step
         $this->initialize_checks();
       }
     }
+
+    /*************
+     * Root object class check  
+     *************/
+  
+    if(isset($_POST['root_add_objectclasses'])){
+	 	$this->rootOC_migrate_dialog = TRUE;
+      	$this->dialog = TRUE;
+    }
+	if(isset($_POST['rootOC_dialog_cancel'])){
+		$this->rootOC_migrate_dialog = FALSE;
+      	$this->dialog = FALSE;
+	}
+	if(isset($_POST['rootOC_migrate_start'])){
+		if($this->checkBaseOC(FALSE)){
+			$this->dialog = FALSE;
+			$this->rootOC_migrate_dialog = FALSE;
+			$this->checkBaseOC();
+		}
+	}
+	
+
+	if($this->rootOC_migrate_dialog){
+		$smarty = get_smarty();
+        $smarty->assign("details",$this->rootOC_details);
+        $smarty->assign("method","rootOC_migrate_dialog");
+		return($smarty->fetch(get_template_path("setup_migrate.tpl",TRUE,dirname(__FILE__))));
+	}
  
     /*************
      * Administrative Account -- Migrate/Create 
@@ -1966,6 +2004,145 @@ class Step_Migrate extends setup_step
     /* Create & remove of dummy object was successful */
     $this->checks['root']['STATUS']    = TRUE;
     $this->checks['root']['STATUS_MSG']= _("Ok");
+  }
+
+
+  /* Check if the root object includes the required object classes, e.g. gosaDepartment is required for ACLs.
+   * If the parameter just_check is true, then just check for the OCs. 
+   * If the Parameter is false, try to add the required object classes.
+   */
+  function checkBaseOC($just_check = TRUE)
+  {
+    /* Establish ldap connection */
+    $cv = $this->parent->captured_values;
+    $ldap_l = new LDAP($cv['admin'],
+        $cv['password'],
+        $cv['connection'],
+        FALSE,
+        $cv['tls']);
+
+    $ldap = new ldapMultiplexer($ldap_l);
+
+    /* Check if root object exists */
+    $ldap->cd($cv['base']);
+    $ldap->cat($cv['base']);
+    if(!$ldap->count()){
+      $this->checks['rootOC']['STATUS']    = FALSE;
+      $this->checks['rootOC']['STATUS_MSG']= _("LDAP query failed");
+      $this->checks['rootOC']['ERROR_MSG'] = _("Possibly the 'root object' is missing.");
+      return;
+    }
+
+	$attrs = $ldap->fetch();
+
+	/* Root object doesn't exists 
+	 */
+	if(!in_array("gosaDepartment",$attrs['objectClass'])){
+		if($just_check){
+
+			$this->rootOC_details = array();	
+			$mods = array();
+
+			/* Get list of possible container objects, to be able to detect naming 
+			 *  attributes and missing attribute types.
+			 */
+			if(!class_available("departmentManagement")){
+				$this->checks['rootOC']['STATUS']    = FALSE;
+				$this->checks['rootOC']['STATUS_MSG']= _("Failed");
+				$this->checks['rootOC']['ERROR_MSG'] = sprintf(_("Missing GOsa class %s."),"departmentManagement")."&nbsp;"._("Please check your installation.");
+				return;
+			}
+
+			/* Try to detect base class type, e.g. is it a dcObject.
+			 */
+			$dep_types = departmentManagement::get_support_departments();
+			$dep_type ="";
+			foreach($dep_types as $dep_name => $dep_class){
+				if(in_array($dep_class['CLASS'], $attrs['objectClass'])){
+					$dep_type = $dep_name;
+					break;
+				}
+			}
+
+			/* If no known base class was detect, abort with message
+			 */	
+			if(empty($dep_type)){
+				$this->checks['rootOC']['STATUS']    = FALSE;
+				$this->checks['rootOC']['STATUS_MSG']= _("Failed");
+				$this->checks['rootOC']['ERROR_MSG'] = 
+					sprintf(_("Could not detect the object type of your root object, please try to add the objectClass '%s' manually."),"gosaDepartment");
+				return;
+			}
+
+			/* Create 'current' and 'target' object properties, to be able to display 
+			 *  a set of modifications required to create a valid GOsa department.
+			 */	
+			$str = "dn: ".$cv['base']."\n";
+			for($i = 0 ; $i<$attrs['objectClass']['count'];$i++){
+				$str .= "objectClass: ".$attrs['objectClass'][$i]."\n";
+			}
+			$this->rootOC_details['current'] = $str;
+
+			/* Create target infos 
+			 */
+			$str = "dn: ".$cv['base']."\n";
+			for($i = 0 ; $i<$attrs['objectClass']['count'];$i++){
+				$str .= "objectClass: ".$attrs['objectClass'][$i]."\n";
+				$mods['objectClass'][] = $attrs['objectClass'][$i];
+			}
+			$mods['objectClass'][] = "gosaDepartment";
+			$str .= "<b>objectClass: gosaDepartment</b>\n";
+
+			/* Append attribute 'ou', it is required by gosaDepartment
+			 */
+			if(!isset($attrs['ou'])){
+				$val = "GOsa";
+				if(isset($attrs[$dep_types[$dep_type]['ATTR']][0])){
+					$val = $attrs[$dep_types[$dep_type]['ATTR']][0];
+				}
+				$str .= "<b>ou: ".$val."</b>\n";
+				$mods['ou'] =$val;
+			}
+
+			/*Append description, it is required by gosaDepartment too.
+			 */
+			if(!isset($attrs['description'])){
+				$val = "GOsa";
+				if(isset($attrs[$dep_types[$dep_type]['ATTR']][0])){
+					$val = $attrs[$dep_types[$dep_type]['ATTR']][0];
+				}
+				$str .= "<b>description: ".$val."</b>\n";
+				$mods['description'] = $val;
+			}
+			$this->rootOC_details['target'] = $str;
+			$this->rootOC_details['mods'] = $mods;
+
+			$this->checks['rootOC']['STATUS']    = FALSE;
+			$this->checks['rootOC']['STATUS_MSG']= _("Failed");
+			$this->checks['rootOC']['ERROR_MSG'] = "&nbsp;<input type='submit' name='root_add_objectclasses' value='"._("Migrate")."'>";
+ 
+			return(FALSE);
+		}else{
+
+			/* Add root object */ 
+			$ldap->cd($cv['base']);
+			if(isset($this->rootOC_details['mods'])){
+				$res  = $ldap->modify($this->rootOC_details['mods']);	
+				if(!$res){
+					msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $source, LDAP_MOD, get_class()));
+				}
+				return($res);
+			}else{
+				trigger_error("No modifications to make... ");
+			}
+		}
+		return(TRUE);
+	}
+
+    /* Create & remove of dummy object was successful */
+    $this->checks['rootOC']['STATUS']    = TRUE;
+    $this->checks['rootOC']['STATUS_MSG']= _("Ok");
+	$this->checks['rootOC']['ERROR_MSG'] = "";
   }
 
 

@@ -5,7 +5,7 @@
 		</div>
 	</div>	
 	<div style='width:95%; text-align: right'>
-		<input {if $accepted} checked {/if} type='checkbox' name='accepted' class="center">{t}I have read the license and accept it{/t}
+		<input {if $accepted} checked {/if} id="accepted" type='checkbox' name='accepted' class="center"><label for="accepted">{t}I have read the license and accept it{/t}</label>
 	</div>
 </div>
 <input type='hidden' name='step_license' value='1'>

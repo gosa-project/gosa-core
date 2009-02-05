@@ -32,6 +32,34 @@
 		<br>
 		<input type='submit' name='reload' value='{t}Check again{/t}'>
 
+		{elseif $method == "rootOC_migrate_dialog"}
+
+			<h2>{t}Add required object classes to the ldap base{/t}</h2>
+
+			<b>{t}Current{/t}</b>
+			<div class="step2_entry_container_info">
+				<div style='padding-left:20px;'>
+					<pre>{$details.current}</pre>
+				</div>
+			</div>
+			<br>
+			<b>{t}After migration{/t}</b>
+			<div class="step2_entry_container_info">
+				<div style='padding-left:20px;'>
+					<pre>{$details.target}</pre>
+				</div>
+			</div>
+
+			<br>
+			<input type='submit' name='rootOC_migrate_start' value='{t}Migrate{/t}'>
+			</p>
+				
+
+			<p class='seperator'>&nbsp;</p>	
+			<div style='width:100%; text-align:right; padding:5px;'>
+				<input type='submit' name='rootOC_dialog_cancel' value='{t}Close{/t}'>
+			</div>
+
 		{elseif $method == "outside_winstations"}
 
 			<h2>{t}Move windows workstations into a valid windows workstation department{/t}</h2>
