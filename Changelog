@@ -1,6 +1,15 @@
 GOsa2 changelog
 ===============
 
+* gosa 2.6.4
+  - Added missing images
+  - Fixed issue with the FAI log viewer
+  - Made DNS TTL settings optional
+  - Correct issues with newly created servers and DNS zones
+  - Added setup check for gosaDepartments at the base object
+  - Corrected js based disabling of widgets in Samba settings
+  - Fixed issue with wrong set mail attributes in the setup
+
 * gosa 2.6.3
   - Fixed several issues, occurred when using user templates
   - Fixed problem with department creation, since GOsa 2.6.1
