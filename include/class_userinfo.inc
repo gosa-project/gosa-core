@@ -196,8 +196,9 @@ class userinfo
     $without_self_acl = $all_acl = array();
     foreach($this->ACL as $dn => $acl){
       $sdn =$dn;
-      while(strpos($dn,",") !== FALSE){
-
+      $first= TRUE; // Run at least once 
+      while(strpos($dn,",") !== FALSE || $first){
+        $first = FALSE;
         if(isset($this->ACL[$dn])){
           $all_acl[$sdn][$dn] = $this->ACL[$dn];
           $without_self_acl[$sdn][$dn] = $this->ACL[$dn]; 
