@@ -9,6 +9,8 @@ GOsa2 changelog
   - Added setup check for gosaDepartments at the base object
   - Corrected js based disabling of widgets in Samba settings
   - Fixed issue with wrong set mail attributes in the setup
+  - Added missing existance checks for group mail addresses
+  - Fixed uid autogeneration which contained curly braces
 
 * gosa 2.6.3
   - Fixed several issues, occurred when using user templates
