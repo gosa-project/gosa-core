@@ -1749,7 +1749,8 @@ function gen_uids($rule, $attributes)
 
     /* Don't assign used ones */
     if (!in_array($uid, $used)){
-      $ret[]= $uid;
+      /* Add uid, but remove {} first. These are invalid anyway. */
+      $ret[]= preg_replace('/[{}]/', '', $uid);
     }
   }
 
