@@ -84,8 +84,6 @@ class config  {
     $tmp = stat("../include/class_location.inc");
     session::global_set("class_location.inc:timestamp",$tmp['mtime']);
 
-
-
     if($this->filename != "" && filemtime($this->filename) != $this->last_modified){
 
       $this->config_found= FALSE;
@@ -99,6 +97,7 @@ class config  {
       xml_set_object($this->parser, $this);
       xml_set_element_handler($this->parser, "tag_open", "tag_close");
       $this->parse($this->filename);
+      $this->set_current($this->current['NAME']);
     }
   }  
 
