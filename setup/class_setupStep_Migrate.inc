@@ -869,6 +869,7 @@ class Step_Migrate extends setup_step
   {
     /* Reset settings 
      */ 
+    $GOsa_26_found = FALSE;
     $this->migrate_users = array();
     $this->acl_migrate_dialog = FALSE;
     $this->migrate_acl_base_entry  = "";
@@ -884,7 +885,7 @@ class Step_Migrate extends setup_step
     $ldap = new ldapMultiplexer($ldap_l);
     $ldap->cd($cv['base']);
     $res = $ldap->cat($cv['base']);
-    
+   
     if(!$res){
       $this->checks['acls']['STATUS']    = FALSE;
       $this->checks['acls']['STATUS_MSG']= _("LDAP query failed");
