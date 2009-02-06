@@ -1044,12 +1044,12 @@ class phoneAccount extends plugin
 
     /* Add phone number */
     if (isset($_POST["add_phonenumber"]) && $_POST['phonenumber']){
-      if (is_phone_nr($_POST['phonenumber']) && strlen($_POST['phonenumber']) <=10){
+      if (is_phone_nr($_POST['phonenumber']) && strlen($_POST['phonenumber']) <= 5){
         $number= $_POST["phonenumber"];
         $this->phoneNumbers[$number]= $number;
         $this->is_modified= TRUE;
       } else {
-        print_red(_("Please enter a valid phone number! Because of the realtime extension tables, the number must be less than 11 digits."));
+        print_red(sprintf(_("Please enter a valid phone number! Because of the realtime extension tables, the number must be less than %s digits."),5));
       }
     }
 
