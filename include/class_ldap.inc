@@ -618,7 +618,7 @@ class LDAP{
 
       } else {
         $type= preg_replace('/^([^=]+)=.*$/', '\\1', $cdn);
-        $param= preg_replace('/^[^=]+=([^,]+),.*$/', '\\1', $cdn);
+        $param= preg_replace('/^[^=]+=([^,]+).*$/', '\\1', $cdn);
 
         $na= array();
 
@@ -702,6 +702,9 @@ class LDAP{
         $this->add($na);
     
         if (!$this->success()){
+
+          print_a(array($cdn,$na));
+
           msg_dialog::display(_("LDAP error"), msgPool::ldaperror($this->get_error(), $cdn, LDAP_ADD, get_class()));
           return FALSE;
         }
