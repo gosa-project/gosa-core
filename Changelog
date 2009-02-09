@@ -12,6 +12,7 @@ GOsa2 changelog
   - Added missing existance checks for group mail addresses
   - Fixed uid autogeneration which contained curly braces
   - Moved essential schema files back to the core package
+  - Updated integrated smarty
 
 * gosa 2.6.3
   - Fixed several issues, occurred when using user templates
