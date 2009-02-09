@@ -142,6 +142,19 @@ class Step_Checks extends setup_step
     $M = TRUE;
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
+    /* Read data written by convert */
+    $output= "";
+    $sh= popen("convert", 'r');
+    while (!feof($sh)){
+      $output.= fread($sh, 4096);
+    }
+    pclose($sh);
+    $N = msgPool::checkingFor(_("imagick"));
+    $D = _("GOsa requires this extension to handle images.");
+    $S = msgPool::installPhpModule("php5-imagick");
+    $R = is_callable("imagick_blob2image") || !empty($output);
+    $M = TRUE;
+    $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
     /* PHP Configuration checks */
 
@@ -233,17 +246,6 @@ class Step_Checks extends setup_step
     $M = FALSE;
     $this->is_writeable[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
-    /* If we have writeaccess to the config dir, check if there is already a config file */
-#    if($R){
-#
-#      /* check if there is already a config file. */
-#      $N = _("No old configuration file.");
-#      $D = "";//_("");
-#      $S = _("If there is already a configuration file, this file will be overwritten when GOsa setup finishes. Please move your old config file away.");
-#      $R =  !file_exists(CONFIG_DIR."/".CONFIG_FILE);
-#      $M = FALSE;
-#      $this->is_writeable[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
-#    }
   }
  
 
