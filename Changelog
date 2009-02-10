@@ -14,6 +14,10 @@ GOsa2 changelog
   - Fixed FAI package list acl mapping
   - Moved essential schema files back to the core package
   - Updated integrated smarty
+  - Added imagick dependency to the setup
+  - Fixed ACL resolution for small ldap bases
+  - Added phoneNumber limitations to match asterisk realtime extension tables
+  - Updated addressbook permissions
 
 * gosa 2.6.3
   - Fixed several issues, occurred when using user templates
