@@ -11,6 +11,7 @@ GOsa2 changelog
   - Fixed issue with wrong set mail attributes in the setup
   - Added missing existance checks for group mail addresses
   - Fixed uid autogeneration which contained curly braces
+  - Fixed FAI package list acl mapping
   - Moved essential schema files back to the core package
   - Updated integrated smarty
 
