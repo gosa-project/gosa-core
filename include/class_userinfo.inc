@@ -157,7 +157,7 @@ class userinfo
           /* Inspect members... */
           foreach ($type['members'] as $grp => $grpdsc){
             /* Some group inside the members that is relevant for us? */
-            if (in_array_ics(preg_replace('/^G:/', '', $grp), $this->groups)){
+            if (in_array_ics(@LDAP::convert(preg_replace('/^G:/', '', $grp)), $this->groups)){
               $interresting= TRUE;
             }
 
