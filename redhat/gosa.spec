@@ -317,12 +317,12 @@ rm -rf %{buildroot}
 %config(noreplace) %attr(0644,root,root) %{webconf}/gosa-apache.conf
 %attr(0700, %{apacheuser}, %{apachegroup}) /var/spool/gosa
 %attr(0755, root,root) /usr/share/gosa
-%attr(0755, root,root) /usr/share/gosa/html
-%attr(0755, root,root) /usr/share/gosa/ihtml
-%attr(0755, root,root) /usr/share/gosa/include
-%attr(0755, root,root) /usr/share/gosa/locale
-%attr(0755, root,root) /usr/share/gosa/plugins
-%attr(0755, root,root) /usr/share/gosa/setup
+#%attr(0755, root,root) /usr/share/gosa/html
+#%attr(0755, root,root) /usr/share/gosa/ihtml
+#%attr(0755, root,root) /usr/share/gosa/include
+#%attr(0755, root,root) /usr/share/gosa/locale
+#%attr(0755, root,root) /usr/share/gosa/plugins
+#%attr(0755, root,root) /usr/share/gosa/setup
 %attr(0755, root,root) /usr/share/gosa/doc/core/guide.xml
 %attr(0755, root,root) /var/cache/gosa
 %attr(0700, root,root) /etc/gosa/gosa.secrets
