@@ -8,15 +8,31 @@ fi
 what=$1
 NOT_RELEASED="heimdal dak dfs glpi opsi apache2 ssh"
 
-svn export https://oss.gonicus.de/repositories/gosa/$what/gosa-core
-svn export https://oss.gonicus.de/repositories/gosa/$what/gosa-plugins
+svn export https://oss.gonicus.de/repositories/gosa/tags/$what/gosa-core
+svn export https://oss.gonicus.de/repositories/gosa/tags/$what/gosa-plugins 
 
 VERSION=$(cat gosa-core/debian/changelog | head -n 1 | sed -n -e 's/.*(\([^-]*\).*/\1/p')
 
+#redhat
+rm -rf /usr/src/redhat/RPMS/noarch/gosa*
+rm -rf /usr/src/redhat/SPECS/gosa.spec
+rm -rf /usr/src/redhat/SOURCES/*
+rm -rf /usr/src/redhat/SPECS/*
+
+#suse
+rm -rf /usr/src/packages/RPMS/noarch/gosa*
+rm -rf /usr/src/packages/SPECS/gosa.spec
+rm -rf /usr/src/packages/SOURCES/*
+rm -rf /usr/src/packages/SPECS/*
+
 cp -a gosa-core gosa-$VERSION
-tar cvfj /usr/src/redhat/SOURCES/gosa-$VERSION.tar.bz2 gosa-$VERSION
+tar cfj /usr/src/redhat/SOURCES/gosa-$VERSION.tar.bz2 gosa-$VERSION
 cp gosa-$VERSION/redhat/0* /usr/src/redhat/SOURCES/
 sed "s/^Version:.*$/Version:            $VERSION/" gosa-$VERSION/redhat/gosa.spec > /usr/src/redhat/SPECS/gosa.spec
+
+#suse fallback 
+mkdir -p /usr/src/packages/SOURCES/
+ln -s /usr/src/redhat/SPECS/gosa.spec /usr/src/packages/SOURCES/gosa.spec
 
 rpmbuild -bb /usr/src/redhat/SPECS/gosa.spec
 
@@ -31,6 +47,6 @@ for plugin in $MAKE_PLUGINS; do
         rpmbuild -bb /usr/src/redhat/SPECS/gosa-plugin-$plugin.spec
 done
 
-rm -rf gosa-core
+#rm -rf gosa-core
 rm -rf gosa-$VERSION
 rm -rf gosa-plugins
