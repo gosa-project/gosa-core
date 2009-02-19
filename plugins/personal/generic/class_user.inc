@@ -1445,7 +1445,7 @@ class user extends plugin
   function saveCopyDialog()
   {
     /* Set_acl_base */
-    $this->set_acl_base("cn=dummy,".get_people_ou().$this->base);
+    $this->set_acl_base($this->base);
 
     if((isset($_FILES['picture_file']['tmp_name'])) && ($_FILES['picture_file']['size'] > 0)){
       $this->set_picture($_FILES['picture_file']['tmp_name']);

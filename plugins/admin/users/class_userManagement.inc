@@ -473,7 +473,7 @@ class userManagement extends plugin
       foreach ($this->config->departments as $key => $value){
     
         /* Get acls from different ou's */
-        $acl = $this->ui->get_permissions("cn=dummy,".get_people_ou().$value,"users/user")       ; 
+        $acl = $this->ui->get_permissions($value,"users/user")       ; 
  
         /* If creation of a new user is allowed, append this template */
         if (preg_match("/c/",$acl)){
@@ -808,7 +808,7 @@ class userManagement extends plugin
       /* Create new usertab object */
       $this->usertab= new usertabs($this->config,$this->config->data['TABS']['USERTABS'], $this->dn);
       $this->usertab->by_object['user']->base= $this->DivListUsers->selectedBase;
-      $this->usertab->set_acl_base('dummy,'.$this->DivListUsers->selectedBase);
+      $this->usertab->set_acl_base($this->DivListUsers->selectedBase);
 
       /* Take care about templates */
       if ($s_action=="new_tpl"){
