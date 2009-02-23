@@ -37,14 +37,14 @@
          if we have installed or removed plugins. 
       */
      if(session::global_is_set("class_location.inc:timestamp")){
--      $tmp = $tmp = stat("/var/cache/gosa/class.cache");
-+      $tmp = stat("../include/class_location.inc");
+-      $tmp = stat("../include/class_location.inc");
++      $tmp = $tmp = stat("/var/cache/gosa/class.cache");
        if($tmp['mtime'] != session::global_get("class_location.inc:timestamp")){
          session::global_un_set("plist");
        }
      }
--    $tmp = stat("/var/cache/gosa/class.cache");
-+    $tmp = stat("../include/class_location.inc");
+-    $tmp = stat("../include/class_location.inc");
++    $tmp = stat("/var/cache/gosa/class.cache");
      session::global_set("class_location.inc:timestamp",$tmp['mtime']);
  
      if($this->filename != "" && filemtime($this->filename) != $this->last_modified){
