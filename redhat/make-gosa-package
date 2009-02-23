@@ -47,13 +47,18 @@ VERSION=$(cat rpm_src/gosa-core/debian/changelog | head -n 1 | sed -n -e 's/.*(\
 
 case "$distribution" in 
  "RHEL" ) 
+	rm -rf /var/tmp/gosa*
 	build_path='/usr/src/redhat'
+	target='redhat'
 	;;
  "SLES" ) 
 	build_path='/usr/src/packages'
+	target='SLES'
 	;;
  "OpenSuse" ) 
+	rm -rf /var/tmp/rpm-tmp*
 	build_path='/usr/src/packages'
+	target='suse'
 	;;
  * ) 
 	echo "$distribution is unknown"
@@ -64,7 +69,6 @@ esac
 # Clean up
 ## 
 echo ".. some cleanup in '$build_path'"
-rm -rf /var/tmp/gosa*
 rm -rf $build_path/RPMS/noarch/gosa*
 rm -rf $build_path/SOURCES/gosa*
 rm -rf $build_path/SPECS/gosa*
@@ -101,7 +105,7 @@ sed "s/^Version:.*$/Version:            $VERSION/" \
 # Build GOsa RPM 
 ##
 echo "Try to build package ... rpmbuild" 
-rpmbuild --quiet -bb $build_path/SPECS/gosa.spec
+rpmbuild -bb $build_path/SPECS/gosa.spec
 if [ $? != 0 ]
 then
 	echo "Error: Build error" 
@@ -136,10 +140,37 @@ for plugin in $MAKE_PLUGINS; do
 		exit 1
         fi
 
-        rpmbuild --quiet -bb $build_path/SPECS/gosa-plugin-$plugin.spec 
+        rpmbuild -bb $build_path/SPECS/gosa-plugin-$plugin.spec 
 	if [ $? != 0 ]
 	then 
 		echo "Error: Build error in $plugin"
 		exit 1
 	fi
 done
+
+echo ""
+echo ""
+echo ""
+echo "#### Build done "
+
+if [ ! -d "RPMS/$target" ] 
+then 
+	mkdir -p "RPMS/$target"
+	
+	echo "Copying rpms to '$curdir/RPMS/$target'"
+	curdir=`pwd`
+	cp $build_path/RPMS/noarch/gosa* "RPMS/$target"
+fi
+
+
+if [ "$distribution" == "OpenSuse" ]
+then
+	cd "RPMS/$target"
+	curdir=`pwd`
+	echo "Creating repostory in '$curdir'"
+	createrepo .
+fi
+
+
+
+
