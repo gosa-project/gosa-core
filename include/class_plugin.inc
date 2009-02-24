@@ -1320,11 +1320,31 @@ class plugin
   {
     $config = $this->config;
     if($config->get_cfg_value("enableSnapshots") == "true"){
+
 	    /* Check if the snapshot_base is defined */
 	    if ($config->get_cfg_value("snapshotBase") == ""){
-		    msg_dialog::display(_("Configuration error"), sprintf(_("The snapshot functionality is enabled, but the required variable '%s' is not set."),"snapshotBase"), ERROR_DIALOG);
+
+        /* Send message if not done already */
+        if(!session::is_set("snapshotFailMessageSend")){
+          session::set("snapshotFailMessageSend",TRUE);
+          msg_dialog::display(_("Configuration error"), 
+              sprintf(_("The snapshot functionality is enabled, but the required variable '%s' is not set."),
+                "snapshotBase"), ERROR_DIALOG);
+        }
 		    return(FALSE);
 	    }
+
+      /* Check if the snapshot_base is defined */
+      if (!is_callable("gzcompress")){
+
+        /* Send message if not done already */
+        if(!session::is_set("snapshotFailMessageSend")){
+          session::set("snapshotFailMessageSend",TRUE);
+          msg_dialog::display(_("Configuration error"), 
+              sprintf(_("The snapshot functionality is enabled, but the required compression package is missing, try to install '%s'."),"php5-zip / php5-gzip"), ERROR_DIALOG);
+        }
+        return(FALSE);
+      }
 
 	    /* check if there are special server configurations for snapshots */
 	    if ($config->get_cfg_value("snapshotURI") != ""){
@@ -1332,11 +1352,18 @@ class plugin
 		    /* check if all required vars are available to create a new ldap connection */
 		    $missing = "";
 		    foreach(array("snapshotURI","snapshotAdminDn","snapshotAdminPassword","snapshotBase") as $var){
-			    if($config->get_cfg_value($var) == ""){
-				    $missing .= $var." ";
-				    msg_dialog::display(_("Configuration error"), sprintf(_("The snapshot functionality is enabled, but the required variable '%s' is not set."), $missing), ERROR_DIALOG);
-				    return(FALSE);
-			    }
+          if($config->get_cfg_value($var) == ""){
+            $missing .= $var." ";
+
+            /* Send message if not done already */
+            if(!session::is_set("snapshotFailMessageSend")){
+              ession::set("snapshotFailMessageSend",TRUE);
+              msg_dialog::display(_("Configuration error"), 
+                  sprintf(_("The snapshot functionality is enabled, but the required variable '%s' is not set."), 
+                    $missing), ERROR_DIALOG);
+            }
+            return(FALSE);
+          }
 		    }
 	    }
 	    return(TRUE);
