@@ -1,6 +1,0 @@
-dn: cn=trust,cn=schema,cn=config
-objectClass: olcSchemaConfig
-cn: trust
-olcAttributeTypes: ( 5.3.6.1.1.1.1.0 NAME 'trustModel' DESC 'Access scheme' EQUALITY caseIgnoreIA5Match SUBSTR caseIgnoreIA5SubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE )
-olcAttributeTypes: ( 5.3.6.1.1.1.1.1 NAME 'accessTo' DESC 'Access to which servers user is allowed' EQUALITY caseIgnoreIA5Match SUBSTR caseIgnoreIA5SubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
-olcObjectClasses: ( 5.3.6.1.1.1.2.0 NAME 'trustAccount' SUP top AUXILIARY DESC 'Sets trust accounts information' MUST ( trustModel ) MAY ( accessTo ) )
