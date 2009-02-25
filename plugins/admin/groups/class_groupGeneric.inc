@@ -617,6 +617,33 @@ class group extends plugin
       }
     }  
 
+    /* Ensure that the requested object is known to the group class 
+     */
+    if(!isset($this->dnMapping[$uid])){
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cd($this->config->current['BASE']);
+      $ldap->search("(&(objectClass=gosaAccount)(uid=".$uid."))",array("dn", "uid","sn","givenName"));
+      if($ldap->count() == 0 ){
+        msg_dialog::display(_("Error"), 
+            sprintf(_("Cannot add uid '%s' to the group '%s'. Could not find matching user object."), 
+              $uid,$this->cn), 
+            ERROR_DIALOG);
+        return;
+      }elseif($ldap->count() >= 2){
+        msg_dialog::display(_("Error"), 
+            sprintf(_("Cannot add uid '%s' to the group '%s'. The uid is used more than once."),
+              $uid,$this->cn), 
+            ERROR_DIALOG);
+        return;
+      }else{
+        while($attrs = $ldap->fetch()){
+          $this->dnMapping[$attrs['uid'][0]] = $attrs['dn'];
+          $this->members[$attrs['uid'][0]] = $this->createResultName($attrs);
+          $this->allusers[$attrs['uid'][0]]= $this->createResultName($attrs);
+        }
+      }
+    }
+
     $this->memberUid[$uid]= $uid;
   }
 
@@ -669,7 +696,7 @@ class group extends plugin
 
     if(!empty($filter)){    
       $ldap->cd($this->config->current['BASE']);
-      $ldap->search("(&(objectClass=gosaAccount)(!(objectClass=gosaUserTemplate))(|".$filter."))",array("dn", "uid","sn","givenName"));
+      $ldap->search("(&(objectClass=gosaAccount)(|".$filter."))",array("dn", "uid","sn","givenName"));
       while($attrs = $ldap->fetch()){
         $this->dnMapping[$attrs['uid'][0]] = $attrs['dn'];
         $this->members[$attrs['uid'][0]] = $this->createResultName($attrs);
