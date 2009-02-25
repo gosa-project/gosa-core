@@ -1073,6 +1073,22 @@ class group extends plugin
       $ldap->create_missing_trees(preg_replace('/^[^,]+,/', '', $this->dn));
     }
 
+
+    /* Check generated gidNumber, it may be used by another group. 
+     */
+    if($this->gidNumber != ""){
+      $ldap->cd($this->config->current['BASE']);
+      $ldap->search("(&(!(cn=".$this->orig_cn."))(objectClass=posixGroup)(gidNumber=".$this->gidNumber."))",array("cn"));
+      if($ldap->count()){
+        $cns = "";
+        while($attrs = $ldap->fetch()){
+          $cns .= $attrs['cn'][0].", ";
+        }
+        $cns = rtrim($cns,", ");
+        msg_dialog::display(_("Warning"),sprintf(_("The gidNumber (%s) used or generated for this group is not uniq! It is already used in the following groups: '%s'."),$this->gidNumber,$cns) , WARNING_DIALOG );
+      }
+    }
+
     /* Write back to ldap */
     $ldap->cd($this->dn);
     $this->cleanup();
