@@ -947,7 +947,7 @@ class posixAccount extends plugin
 
     /* Posix accounts have group interrelationship, 
        take care about these here if this is a new user without forced gidNumber. */
-    if ($this->force_ids == 0 && $this->primaryGroup == 0 && !$this->initially_was_account){
+    if ($this->force_ids == 0 && $this->primaryGroup == 0){
       $ldap->cd($this->config->current['BASE']);
       $ldap->search("(&(objectClass=posixGroup)(gidNumber=".$this->gidNumber."))", array("cn"));
 
@@ -961,6 +961,12 @@ class posixAccount extends plugin
         $g->gidNumber= $this->gidNumber;
         $g->description= _("Group of user")." ".$this->givenName." ".$this->sn;
         $g->save ();
+
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,
+                sprintf("Primary group '%s' created, using gidNumber '%s'.",$this->uid,$this->gidNumber),"");
+      }else{
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,
+                sprintf("Primary group '%s' exists.",$this->uid),"");
       }
     }
 
