@@ -1,6 +1,11 @@
-gosa (2.6.4-1) unstable; urgency=low
+gosa (2.6.5-1) unstable; urgency=low
 
   * New upstream release
+
+ -- Cajus Pollmeier <cajus@dyn-muc-50.intranet.gonicus.de>  Wed, 25 Feb 2009 13:36:18 +0100
+
+gosa (2.6.4-1) unstable; urgency=low
+
 
  -- Cajus Pollmeier <cajus@debian.org>  Fri, 06 Feb 2009 11:35:38 +0100
 
