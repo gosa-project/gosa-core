@@ -191,6 +191,18 @@ class aclrole extends acl
     $new_acl= array();
     $aclDialog= FALSE;
     $firstedit= FALSE;
+
+    /* Act on HTML post and gets here.
+     */
+    if(isset($_GET['id']) && isset($_GET['act']) && $_GET['act'] == "edit"){
+      $id = trim($_GET['id']);
+      $this->dialogState= 'create';
+      $firstedit= TRUE;
+      $this->dialog= TRUE;
+      $this->currentIndex= $id;
+      $this->loadAclEntry();
+    }
+
     foreach($_POST as $name => $post){
 
       /* Actions... */
@@ -364,8 +376,15 @@ class aclrole extends acl
 
       /* Fill in entries */
       foreach ($this->gosaAclTemplate as $key => $entry){
-        $field1= array("string" => $this->aclTypes[$entry['type']], "attach" => "style='width:100px'");
-        $field2= array("string" => $this->assembleAclSummary($entry));
+
+        if($this->acl_is_readable("")){
+          $link = "<a href=?plug=".$_GET['plug']."&amp;id=".$key."&amp;act=edit>".$this->assembleAclSummary($entry)."</a>";
+        }else{
+          $link = $this->assembleAclSummary($entry);
+        }
+
+        $field1= array("string" => $this->aclTypes[$entry['type']], "attach" => "style='width:150px'");
+        $field2= array("string" => $link);
 
         $action ="";
         if($this->acl_is_writeable("gosaAclEntry")){

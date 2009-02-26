@@ -245,6 +245,17 @@ class acl extends plugin
     $aclDialog= FALSE;
     $firstedit= FALSE;
 
+    /* Act on HTML post and gets here.
+     */
+    if(isset($_GET['id']) && isset($_GET['act']) && $_GET['act'] == "edit"){
+      $id = trim($_GET['id']);
+      $this->dialogState= 'create';
+      $firstedit= TRUE;
+      $this->dialog= TRUE;
+      $this->currentIndex= $id;
+      $this->loadAclEntry();
+    }
+
     foreach($_POST as $name => $post){
 
       /* Actions... */
@@ -456,9 +467,15 @@ class acl extends plugin
         if(!$this->acl_is_readable("")) continue;
 
         $action ="";      
+
+        if($this->acl_is_readable("")){
+          $link = "<a href=?plug=".$_GET['plug']."&amp;id=".$key."&amp;act=edit>".$this->assembleAclSummary($entry)."</a>";
+        }else{
+          $link = $this->assembleAclSummary($entry);
+        }
   
         $field1= array("string" => $this->aclTypes[$entry['type']], "attach" => "style='width:150px'");
-        $field2= array("string" => $this->assembleAclSummary($entry));
+        $field2= array("string" => $link);
 
         if($this->acl_is_writeable("")){
           $action.= "<input type='image' name='sortup_$key' alt='up' 
