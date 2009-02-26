@@ -424,9 +424,7 @@ class aclrole extends acl
             $summary.= "$oc, ";
             continue;
           }
-          if (isset($this->aclContents["$section/$oc"]) && count($this->aclContents["$section/$oc"]) && isset($this->aclContents["$section/$oc"][0]) &&
-              $this->aclContents["$section/$oc"][0] != ""){
-
+          if (isset($this->aclContents["$section/$oc"]) && count($this->aclContents["$section/$oc"])){
             $summary.= "$oc, ";
             continue;
           }
