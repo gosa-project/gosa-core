@@ -116,7 +116,7 @@ fi
 GOSA_DIR="gosa-${GOSA_VER}"
 GOSA_SI_DIR="gosa-si-${GOSA_VER}"
 
-if [ -d "gosa-${GOSA_VER}" ]
+if [ "$BNAME" != "$GOSA_VER" ]
 then
 	rm -rf "gosa-${GOSA_VER}"
 fi
