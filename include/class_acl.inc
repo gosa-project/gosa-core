@@ -722,7 +722,9 @@ class acl extends plugin
       /* Object header */
 			$tname= preg_replace("/[^a-z0-9]/i","_",$name);
       if(session::global_get('js')) {
-        if(isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) {
+        if(isset($_SERVER['HTTP_USER_AGENT']) && 
+             (preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) || 
+             (preg_match("/presto/i",$_SERVER['HTTP_USER_AGENT']))) {
           $display.= "\n<table style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>".
                      "\n  <tr>".
                      "\n    <td style='background-color:#C8C8C8;height:1.8em;' colspan=".($cols-1)."><b>"._("Object").": $name</b></td>".
@@ -770,9 +772,9 @@ class acl extends plugin
       /* Walk through the list of attributes */
       $cnt= 1;
       $splist= $plist[preg_replace('%^.*/%', '', $key)]['plProvidedAcls'];
-#      asort($splist);
       if(session::global_get('js')) {
-        if(isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) {
+        if(isset($_SERVER['HTTP_USER_AGENT']) && 
+            (preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) || (preg_match("/presto/i",$_SERVER['HTTP_USER_AGENT']))) {
           $display.= "\n  <tr id='tr_$tname' style='vertical-align:top;height:0px;'>".
                      "\n    <td colspan=".$cols.">".
                      "\n      <div id='$tname' style='overflow:hidden;visibility:hidden;height:0px;vertical-align:top;width:100%;'>".
@@ -782,6 +784,7 @@ class acl extends plugin
                      "\n    <td colspan=".$cols.">".
                      "\n      <div id='$tname' style='position:absolute;overflow:hidden;visibility:hidden;height:0px;vertical-align:top;width:100%;'>".
                      "\n        <table style='width:100%;'>";
+        }else{
         }
       }
       foreach($splist as $attr => $dsc){
@@ -822,7 +825,10 @@ class acl extends plugin
       }
 
       if(session::global_get('js')) {
-        if(isset($_SERVER['HTTP_USER_AGENT']) && (preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) || (preg_match("/ie/i",$_SERVER['HTTP_USER_AGENT']))) {
+        if(isset($_SERVER['HTTP_USER_AGENT']) && 
+            (preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) || 
+            (preg_match("/presto/i",$_SERVER['HTTP_USER_AGENT'])) || 
+            (preg_match("/ie/i",$_SERVER['HTTP_USER_AGENT']))) {
           $display.= "\n        </table>".
                      "\n      </div>".
                      "\n    </td>".
