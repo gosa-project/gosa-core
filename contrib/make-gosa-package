@@ -33,14 +33,15 @@ usage() {
 	Usage: ${0##*/} [options]
 	
 	Options:
-	  -b|--branch      Branch to export [$BRANCH]
-	  -p|--plugins     Comma seperate list of plugins to build. Leave empty to build all.
-	  -r|--release     Debian release to build for [$TARGET_RELEASE]
-	  -c|--changelog   Debian changelog entry [$RELEASE_REASON]
-	  -s|--section     Debian section to place GOsa in [$SECTION]
-	  -i|--si-section  Debian section to place GOsa-SI in [$SI_SECTION]
-          -d|--debian-pkg  Don't clear up debian packages for plugins (for developers only)
-	  -h|--help        this help
+	  -b|--branch       Branch to export [$BRANCH]
+	  -p|--plugins      Comma seperate list of plugins to build. Leave empty to build all.
+	  -e|--experimental Build not released plugins (for testers and developers only)
+	  -r|--release      Debian release to build for [$TARGET_RELEASE]
+	  -c|--changelog    Debian changelog entry [$RELEASE_REASON]
+	  -s|--section      Debian section to place GOsa in [$SECTION]
+	  -i|--si-section   Debian section to place GOsa-SI in [$SI_SECTION]
+          -d|--debian-pkg   Don't clear up debian packages for plugins (for developers only)
+	  -h|--help         this help
 
 	EOF
 	exit 1
@@ -54,7 +55,7 @@ for cmd in dh-make-gosa debchange dpkg-buildpackage dpkg-source svn; do
 done
 
 # Import command line parameters
-PARMS=`getopt -o d::b:r:s:c:i:p:,h --long branch:,changelog:,plugins:,section:,si-section:,release:,help -n "${0##*/}" -- "$@"`
+PARMS=`getopt -o e::d::b:r:s:c:i:p:,h --long branch:,changelog:,plugins:,section:,si-section:,release:,help -n "${0##*/}" -- "$@"`
 eval set -- "$PARMS"
 
 while true; do
@@ -67,6 +68,8 @@ while true; do
 			RELEASE_REASON=$2; shift 2 ;;
                 -p|--plugins)
 			MAKE_PLUGINS=$(echo $2 | tr ',' ' '); shift 2 ;;
+		-e|--experimental)
+			NOT_RELEASED=""; shift 2;;
                 -s|--section)
 			SECTION=$2; shift 2 ;;
                 -i|--si-section)
@@ -120,8 +123,12 @@ if [ "$BNAME" != "$GOSA_VER" ]
 then
 	rm -rf "gosa-${GOSA_VER}"
 fi
-mv "gosa-${BNAME}" "gosa-${GOSA_VER}"
-mv "gosa-si-${BNAME}" "gosa-si-${GOSA_VER}"
+
+if [ "$BNAME" != "$GOSA_VER" ]
+then
+	mv "gosa-${BNAME}" "gosa-${GOSA_VER}"
+	mv "gosa-si-${BNAME}" "gosa-si-${GOSA_VER}"
+fi
 
 echo "Creating original sources 'gosa-${GOSA_VER}'..."
 tar -c -f "gosa_${GOSA_VER}.orig.tar" "${GOSA_DIR}"
