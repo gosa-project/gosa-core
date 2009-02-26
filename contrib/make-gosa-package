@@ -26,6 +26,7 @@ SI_SECTION="utils"
 TARGET_RELEASE="etch"
 MAKE_PLUGINS=""
 NOT_RELEASED="heimdal dak dfs glpi opsi apache2 ssh"
+DEBIAN_PKG="remove"
 
 usage() {
 	cat <<-EOF
@@ -75,7 +76,7 @@ while true; do
                 -i|--si-section)
 			SI_SECTION=$2; shift 2 ;;
                 -d|--debian-pkg)
-                        DEBIAN_PKG=$2; shift 2 ;;
+                        DEBIAN_PKG=""; shift 2 ;;
                 -h|--help)
 			usage ;;
                 --)
