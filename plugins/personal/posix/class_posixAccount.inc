@@ -812,17 +812,22 @@ class posixAccount extends plugin
       $this->shadowWarning= "0";
     }
 
-    /* Check what to do with ID's */
+    /* Check what to do with ID's 
+        Nothing forced, so we may have to generate our own IDs, if not done already.
+     */
     if ($this->force_ids == 0){
 
-      /* Use id's that are already set */
+      /* Handle uidNumber. 
+       * - use existing number if possible
+       * - if not, try to create a new uniqe one.
+       * */
       if ($this->savedUidNumber != ""){
         $this->uidNumber= $this->savedUidNumber;
-        $this->gidNumber= $this->savedGidNumber;
       } else {
 
         /* Calculate new id's. We need to place a lock before calling get_next_id
-           to get real unique values. */
+           to get real unique values. 
+         */
         $wait= 10;
         while (get_lock("uidnumber") != ""){
           sleep (1);
@@ -833,19 +838,79 @@ class posixAccount extends plugin
             break;
           }
         }
-
         add_lock ("uidnumber", "gosa");
         $this->uidNumber= $this->get_next_id("uidNumber", $this->dn);
-        if ($this->savedGidNumber != ""){
-          $this->gidNumber= $this->savedGidNumber;
-        } else {
-          $this->gidNumber= $this->get_next_id("gidNumber", $this->dn);
-        }
+      }
+    }
+
+
+    /* Handle gidNumber 
+     * - If we do not have a primary group selected (automatic), we will check if there 
+     *    is already a group  with the same name and use this as primary.
+     * - .. if we couldn't find a group with the same name, we will create a new one, 
+     *    using the users uid as cn and a generated uniqe gidNumber. 
+     * */
+    if ($this->primaryGroup == 0 || $this->force_ids){
+
+      /* Search for existing group */
+      $ldap = $this->config->get_ldap_link();
+      $ldap->cd($this->config->current['BASE']);
+
+      /* Are we forced to use a special gidNumber? */ 
+      if($this->force_ids){
+        $ldap->search("(&(objectClass=posixGroup)(gidNumber=".$this->gidNumber."))", array("cn","gidNumber"));
+      }else{
+        $ldap->search("(&(objectClass=posixGroup)(gidNumber=*)(cn=".$this->uid."))", array("cn","gidNumber"));
       }
 
-      if ($this->primaryGroup != 0){
-        $this->gidNumber= $this->primaryGroup;
+      /* No primary group found, create a new one */
+      if ($ldap->count() == 0){
+
+        $groupcn = $this->uid;
+        $groupdn= preg_replace ('/^'.$this->config->get_cfg_value("accountPrimaryAttribute").'=[^,]+,'.get_people_ou().'/i',
+            'cn='.$groupcn.','.get_groups_ou(), $this->dn);
+
+        /* Request a new and uniqe gidNumber, if required */
+        if(!$this->force_ids){
+          $this->gidNumber= $this->get_next_id("gidNumber", $this->dn);
+        }else{
+
+          /* If forced gidNumber could not be found, then check if the given group name already exists 
+              we do not want to modify the gidNumber of an existing group.
+           */
+          $cnt= 0; 
+          while($ldap->dn_exists($groupdn)){
+            $cnt ++;
+            $groupcn = $this->uid."_".$cnt;
+            $groupdn= preg_replace ('/^'.$this->config->get_cfg_value("accountPrimaryAttribute").'=[^,]+,'.get_people_ou().'/i',
+            'cn='.$groupcn.','.get_groups_ou(), $this->dn);
+          }
+        }
+
+        /* Create new primary group and enforce the new gidNumber */
+        $g= new group($this->config, $groupdn);
+        $g->cn= $groupcn;
+        $g->force_gid= 1;
+        $g->gidNumber= $this->gidNumber;
+        $g->description= _("Group of user")." ".$this->givenName." ".$this->sn;
+        $g->save ();
+
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,
+            sprintf("Primary group '%s' created, using gidNumber '%s'.",$groupcn,$this->gidNumber),"");
+      }else{
+        $attrs = $ldap->fetch();
+        $this->gidNumber = $attrs['gidNumber'][0];
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,
+            "Found and used: <i>".$attrs['dn']."</i>",
+            sprintf("Primary group '%s' exists, gidNumber is '%s'.",$this->uid,$this->gidNumber));
       }
+    }else{
+
+      /* Primary group was selected by user
+       */
+      $this->gidNumber = $this->primaryGroup;
+      @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,
+          sprintf("Primary group '%s' for user '%s' manually selected.",$this->gidNumber,$this->uid),"");
     }
 
     if ($this->activate_shadowMin != "1" ) {
@@ -945,30 +1010,6 @@ class posixAccount extends plugin
     /* Remove lock needed for unique id generation */
     del_lock ("uidnumber");
 
-    /* Posix accounts have group interrelationship, 
-       take care about these here if this is a new user without forced gidNumber. */
-    if ($this->force_ids == 0 && $this->primaryGroup == 0){
-      $ldap->cd($this->config->current['BASE']);
-      $ldap->search("(&(objectClass=posixGroup)(gidNumber=".$this->gidNumber."))", array("cn"));
-
-      /* Create group if it doesn't exist */
-      if ($ldap->count() == 0){
-        $groupdn= preg_replace ('/^'.$this->config->get_cfg_value("accountPrimaryAttribute").'=[^,]+,'.get_people_ou().'/i', 'cn='.$this->uid.','.get_groups_ou(), $this->dn);
-
-        $g= new group($this->config, $groupdn);
-        $g->cn= $this->uid;
-        $g->force_gid= 1;
-        $g->gidNumber= $this->gidNumber;
-        $g->description= _("Group of user")." ".$this->givenName." ".$this->sn;
-        $g->save ();
-
-        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,
-                sprintf("Primary group '%s' created, using gidNumber '%s'.",$this->uid,$this->gidNumber),"");
-      }else{
-        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,
-                sprintf("Primary group '%s' exists.",$this->uid),"");
-      }
-    }
 
     /* Take care about groupMembership values: add to groups */
     foreach ($this->groupMembership as $key => $value){
@@ -980,7 +1021,7 @@ class posixAccount extends plugin
       }
     }
 
-    /* Remove from groups not listed in groupMembership */
+    /* Remove groups not listed in groupMembership */
     foreach ($this->savedGroupMembership as $key => $value){
       if (!isset($this->groupMembership[$key])){
         $g= new grouptabs($this->config,$this->config->data['TABS']['GROUPTABS'], $key,"groups");
@@ -999,6 +1040,7 @@ class posixAccount extends plugin
       $this->handle_post_events("add" ,array("uid"=> $this->uid));
     }
   }
+
 
   /* Check formular input */
   function check()
