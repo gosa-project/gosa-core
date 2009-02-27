@@ -34,7 +34,7 @@
 
 		{elseif $method == "rootOC_migrate_dialog"}
 
-			<h2>{t}Add required object classes to the ldap base{/t}</h2>
+			<h2>{t}Add required object classes to the LDAP base{/t}</h2>
 
 			<b>{t}Current{/t}</b>
 			<div class="step2_entry_container_info">

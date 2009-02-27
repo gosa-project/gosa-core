@@ -1,6 +1,12 @@
 GOsa2 changelog
 ===============
 
+* gosa 2.6.5
+  - Updated locales
+  - Improved PPD handling
+  - Added more sanity checks in group management
+  - Fixed switching between primary groups
+
 * gosa 2.6.4
   - Added missing images
   - Fixed issue with the FAI log viewer

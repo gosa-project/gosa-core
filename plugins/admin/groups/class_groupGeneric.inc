@@ -625,13 +625,13 @@ class group extends plugin
       $ldap->search("(&(objectClass=gosaAccount)(uid=".$uid."))",array("dn", "uid","sn","givenName"));
       if($ldap->count() == 0 ){
         msg_dialog::display(_("Error"), 
-            sprintf(_("Cannot add uid '%s' to the group '%s'. Could not find matching user object."), 
+            sprintf(_("Adding UID '%s' to group '%s' failed: cannot find user object!"), 
               $uid,$this->cn), 
             ERROR_DIALOG);
         return;
       }elseif($ldap->count() >= 2){
         msg_dialog::display(_("Error"), 
-            sprintf(_("Cannot add uid '%s' to the group '%s'. The uid is used more than once."),
+            sprintf(_("Add UID '%s' to group '%s' failed: UID is used more than once!"),
               $uid,$this->cn), 
             ERROR_DIALOG);
         return;
@@ -709,7 +709,7 @@ class group extends plugin
         count($this->memberUid) < $this->config->get_cfg_value("ldapFilterNestingLimit")){
       foreach ($this->memberUid as $value){
         if(!isset($this->members[$value])){
-          $this->members[$value] =  _("! unknown id")." [".$value."]"; 
+          $this->members[$value] =  _("! unknown UID")." [".$value."]"; 
         }
       }  
     }else{
@@ -1085,7 +1085,7 @@ class group extends plugin
           $cns .= $attrs['cn'][0].", ";
         }
         $cns = rtrim($cns,", ");
-        msg_dialog::display(_("Warning"),sprintf(_("The gidNumber (%s) used or generated for this group is not uniq! It is already used in the following groups: '%s'."),$this->gidNumber,$cns) , WARNING_DIALOG );
+        msg_dialog::display(_("Warning"),sprintf(_("The gidNumber '%s' is already in use by %s!"),$this->gidNumber,$cns) , WARNING_DIALOG );
       }
     }
 

@@ -138,13 +138,13 @@ class Step_Migrate extends setup_step
     $this->checks['root']['ERROR_MSG'] = "";
     $this->checkBase();
 
-    $this->checks['rootOC']['TITLE']     = _("Checking object classes for root object");
+    $this->checks['rootOC']['TITLE']     = _("Inspecting object classes in root object");
     $this->checks['rootOC']['STATUS']    = FALSE;
     $this->checks['rootOC']['STATUS_MSG']= "";
     $this->checks['rootOC']['ERROR_MSG'] = "";
     $this->checkBaseOC();
 
-    $this->checks['permissions']['TITLE']     = _("Checking permissions on LDAP database");
+    $this->checks['permissions']['TITLE']     = _("Checking permission for LDAP database");
     $this->checks['permissions']['STATUS']    = FALSE;
     $this->checks['permissions']['STATUS_MSG']= "";
     $this->checks['permissions']['ERROR_MSG'] = "";
@@ -2050,7 +2050,7 @@ class Step_Migrate extends setup_step
         if(!class_available("departmentManagement")){
           $this->checks['rootOC']['STATUS']    = FALSE;
           $this->checks['rootOC']['STATUS_MSG']= _("Failed");
-          $this->checks['rootOC']['ERROR_MSG'] = sprintf(_("Missing GOsa class %s."),"departmentManagement").
+          $this->checks['rootOC']['ERROR_MSG'] = sprintf(_("Missing GOsa object class '%s'!"),"departmentManagement").
             "&nbsp;"._("Please check your installation.");
           return;
         }
@@ -2072,7 +2072,7 @@ class Step_Migrate extends setup_step
           $this->checks['rootOC']['STATUS']    = FALSE;
           $this->checks['rootOC']['STATUS_MSG']= _("Failed");
           $this->checks['rootOC']['ERROR_MSG'] = 
-            sprintf(_("Could not detect the object type of your root object, please try to add the objectClass '%s' manually."),"gosaDepartment");
+            sprintf(_("Cannot handle the structural object type of your root object. Please try to add the object class '%s' manually."),"gosaDepartment");
           return;
         }
 

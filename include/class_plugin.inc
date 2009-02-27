@@ -1341,7 +1341,7 @@ class plugin
         if(!session::is_set("snapshotFailMessageSend")){
           session::set("snapshotFailMessageSend",TRUE);
           msg_dialog::display(_("Configuration error"), 
-              sprintf(_("The snapshot functionality is enabled, but the required compression package is missing, try to install '%s'."),"php5-zip / php5-gzip"), ERROR_DIALOG);
+              sprintf(_("The snapshot functionality is enabled, but the required compression module is missing. Please install '%s'."),"php5-zip / php5-gzip"), ERROR_DIALOG);
         }
         return(FALSE);
       }
