@@ -225,7 +225,7 @@ class ogroupManagement extends plugin
         $disallowed = array();
         foreach($ids as $id){
           $dn = $this->ogrouplist[$id]['dn'];
-          $acl = $this->ui->get_permissions($dn, "users/user");
+          $acl = $this->ui->get_permissions($dn, "ogroups/ogroup");
           if(preg_match("/d/",$acl)){
             $this->dns[$id] = $dn;
           }else{
@@ -270,7 +270,7 @@ class ogroupManagement extends plugin
       /* Remove user by user and check acls before removeing them */
       foreach($this->dns as $key => $dn){
 
-        $acl = $this->ui->get_permissions($dn, "ogroups");
+        $acl = $this->ui->get_permissions($dn, "ogroups/ogroup");
         if (preg_match('/d/', $acl)){
 
           /* Delete request is permitted, perform LDAP action */
@@ -317,7 +317,7 @@ class ogroupManagement extends plugin
 
       /* Load permissions for selected 'dn' and check if
          we're allowed to remove this 'dn' */
-      $acl = $this->ui->get_permissions($this->dn,"ogroups");
+      $acl = $this->ui->get_permissions($this->dn,"ogroups/ogroup");
       if(preg_match("/d/",$acl)){
 
         /* Check locking, save current plugin in 'back_plugin', so
@@ -349,7 +349,7 @@ class ogroupManagement extends plugin
 
       /* Some nice guy may send this as POST, so we've to check
          for the permissions again. */
-      $acl = $this->ui->get_permissions($this->dn,"ogroups");
+      $acl = $this->ui->get_permissions($this->dn,"ogroups/ogroup");
       if(preg_match("/d/",$acl)){
 
         /* Delete request is permitted, perform LDAP action */
