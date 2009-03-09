@@ -446,6 +446,14 @@ class msgPool
   }
 
 
+  public static function mysqlerror($error,  $plugin= "")
+  {
+    /* Assign headline depending on type */
+    $headline= _("MySQL operation failed!");
+    return $headline."<br><br><i>"._("Error").":</i> ".$error;
+  }
+
+
   public static function ldaperror($error, $dn= "", $type= 0, $plugin= "")
   {
     /* Assign headline depending on type */
