@@ -447,8 +447,8 @@ class conference extends plugin
       $EXT[$i]['exten']   =$this->telephoneNumber;
       $EXT[$i]['context'] = $context;
       $EXT[$i]['priority']= $i;
-      $EXT[$i]['app']     ="SetLanguage";
-      $EXT[$i]['appdata'] =$this->language;
+      $EXT[$i]['app']     ="Set";
+      $EXT[$i]['appdata'] ="LANGUAGE()=".$this->language;
       $i++;      
 
       if($this->goFonConferenceOption_r == "r"){
