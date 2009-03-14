@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-11 11:41+0100\n"
-"PO-Revision-Date: 2009-02-28 13:53+0100\n"
+"PO-Revision-Date: 2009-03-14 13:02+0100\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -56,8 +56,7 @@ msgstr ""
 
 #: plugins/personal/password/class_password.inc:85
 msgid "The password you've entered as 'New password' is empty."
-msgstr ""
-"Le mot de passe que vous avez entré comme 'Nouveau mot de passe' est vide."
+msgstr "Le mot de passe que vous avez entré comme 'Nouveau mot de passe' est vide."
 
 #: plugins/personal/password/class_password.inc:88 html/password.php:204
 msgid "The password used as new and current are too similar."
@@ -102,8 +101,7 @@ msgstr "Le changement du mot de passe n'est pas autorisé"
 
 #: plugins/personal/password/nochange.tpl:6
 msgid "You have no permission to change your password at this time"
-msgstr ""
-"Vous n'avez pas l'autorisation pour changer votre mot de passe à ce moment"
+msgstr "Vous n'avez pas l'autorisation pour changer votre mot de passe à ce moment"
 
 #: plugins/personal/password/password.tpl:4
 msgid ""
@@ -223,8 +221,7 @@ msgstr "Chercher dans les sous arbre"
 
 #: plugins/personal/posix/posix_shadow.tpl:9
 msgid "User must change password on first login"
-msgstr ""
-"L'utilisateur doit changer son mot de passe lors de sa première connexion"
+msgstr "L'utilisateur doit changer son mot de passe lors de sa première connexion"
 
 #: plugins/personal/posix/posix_shadow.tpl:34
 msgid "Password expires on"
@@ -1130,8 +1127,7 @@ msgstr ""
 
 #: plugins/personal/generic/class_user.inc:1196
 msgid "The selected password method requires initial configuration!"
-msgstr ""
-"Le format de stockage sélectionné nécessite une configuration de base !"
+msgstr "Le format de stockage sélectionné nécessite une configuration de base !"
 
 #: plugins/personal/generic/class_user.inc:1230
 #: plugins/personal/generic/class_user.inc:1243
@@ -1605,8 +1601,7 @@ msgstr "Objet utilisé"
 #: plugins/admin/acl/class_aclRole.inc:666
 #, php-format
 msgid "This role cannot be removed while it is in use by these objects:"
-msgstr ""
-"Ce rôle ne peut pas être supprimé car il est encore utilisé par ces objets :"
+msgstr "Ce rôle ne peut pas être supprimé car il est encore utilisé par ces objets :"
 
 #: plugins/admin/acl/class_aclRole.inc:753
 msgid "Permissions"
@@ -1682,7 +1677,7 @@ msgid "Special group (%d)"
 msgstr "Groupe spécial (%d)"
 
 #: plugins/admin/groups/class_groupGeneric.inc:628
-#, fuzzy, php-format
+#, php-format
 msgid "Adding UID '%s' to group '%s' failed: cannot find user object!"
 msgstr ""
 "L'ajout de l'UID '%s' au groupe '%s' à échoué : Impossible de trouver "
@@ -1702,8 +1697,7 @@ msgstr "! identifiant inconnu"
 #: plugins/admin/groups/class_groupGeneric.inc:755
 #, php-format
 msgid "Search returned too many results. Not displaying more than %s entries!"
-msgstr ""
-"La recherche à retourné trop de résultats. Je n'affiche que %s entr§es !"
+msgstr "La recherche à retourné trop de résultats. Je n'affiche que %s entr§es !"
 
 #: plugins/admin/groups/class_groupGeneric.inc:981
 #, php-format
@@ -2050,8 +2044,7 @@ msgstr ""
 
 #: plugins/admin/users/class_userManagement.inc:672
 #, php-format
-msgid ""
-"Password method '%s' does not support locking. Account has not been locked!"
+msgid "Password method '%s' does not support locking. Account has not been locked!"
 msgstr ""
 "La méthode '%s' ne permet pas le verrouillage du mot de passe. Le compte n'a "
 "pas été verrouillé !"
@@ -3049,8 +3042,7 @@ msgstr "Impossible d'exécuter '%s' de la commande (%s) pour l'extension %s !"
 #: include/utils/class_msgPool.inc:225
 #, php-format
 msgid "Cannot execute '%s' command for plugin %s!"
-msgstr ""
-"Impossible d'exécuter l'option '%s' de la commande pour l'extension %s !"
+msgstr "Impossible d'exécuter l'option '%s' de la commande pour l'extension %s !"
 
 #: include/utils/class_msgPool.inc:227
 #, php-format
@@ -3218,8 +3210,7 @@ msgstr "Ce compte n'a pas d'extensions %s valides !"
 
 #: include/utils/class_msgPool.inc:382
 #, php-format
-msgid ""
-"This account has %s settings enabled. You can disable them by clicking below."
+msgid "This account has %s settings enabled. You can disable them by clicking below."
 msgstr ""
 "Ce compte possède l'extension %s activée. Vous pouvez la supprimer en "
 "cliquant sur le bouton ci-dessous."
@@ -3235,8 +3226,7 @@ msgstr ""
 
 #: include/utils/class_msgPool.inc:401
 #, php-format
-msgid ""
-"This account has %s settings disabled. You can enable them by clicking below."
+msgid "This account has %s settings disabled. You can enable them by clicking below."
 msgstr ""
 "Ce compte possède %s paramètres desactivés. Vous pouvez les activer en "
 "clicquant ci dessous."
@@ -3343,9 +3333,8 @@ msgid "Saturday"
 msgstr "Samedi"
 
 #: include/utils/class_msgPool.inc:452
-#, fuzzy
 msgid "MySQL operation failed!"
-msgstr "La requête LDAP à échoué !"
+msgstr "La requête MySQL à échoué !"
 
 #: include/utils/class_msgPool.inc:460
 msgid "read operation"
@@ -3622,8 +3611,7 @@ msgstr ""
 
 #: include/functions.inc:127
 #, php-format
-msgid ""
-"Fatal error: cannot instantiate class '%s' - try running '%s' to fix this"
+msgid "Fatal error: cannot instantiate class '%s' - try running '%s' to fix this"
 msgstr ""
 "Erreur fatale : impossible d'initialiser la classe '%s' - veuillez exécuter "
 "'%s' pour essayer de régler le problème"
@@ -3637,8 +3625,7 @@ msgstr ""
 
 #: include/functions.inc:398
 msgid "Username / UID is not unique inside the LDAP tree!"
-msgstr ""
-"Le nom de l'utilisateur / UID n'est pas unique dans votre annuaire LDAP !"
+msgstr "Le nom de l'utilisateur / UID n'est pas unique dans votre annuaire LDAP !"
 
 #: include/functions.inc:467
 msgid ""
@@ -3855,8 +3842,7 @@ msgstr "Russe"
 
 #: include/functions.inc:2555
 #, php-format
-msgid ""
-"Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
+msgid "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
 msgstr ""
 "La commande '%s', utilisée dans le POSTMODIFY de l'extension '%s' n'existe "
 "pas."
@@ -3867,8 +3853,7 @@ msgstr "Impossible de générer un hash samba !"
 
 #: include/functions.inc:2593
 #, php-format
-msgid ""
-"Cannot generate samba hash: running '%s' failed, check the 'sambaHashHook'!"
+msgid "Cannot generate samba hash: running '%s' failed, check the 'sambaHashHook'!"
 msgstr ""
 "Impossible de générer le mot de passe samba: l'exécution de '%s' à échoué, "
 "veuillez vérifier le paramètre 'sambaHashHook'!"
@@ -3954,8 +3939,7 @@ msgstr ""
 #: include/class_plugin.inc:1560
 #, php-format
 msgid "You are not allowed to create a snapshot for %s."
-msgstr ""
-"Vous n'êtes pas autorisé à créer une nouvelle copie instantanée pour %s."
+msgstr "Vous n'êtes pas autorisé à créer une nouvelle copie instantanée pour %s."
 
 #: include/class_plugin.inc:1572 include/class_plugin.inc:1587
 #: include/class_plugin.inc:1600
@@ -4276,8 +4260,7 @@ msgstr ""
 
 #: include/class_ldap.inc:648
 #, php-format
-msgid ""
-"Cannot automatically create subtrees with RDN '%s': no object class found!"
+msgid "Cannot automatically create subtrees with RDN '%s': no object class found!"
 msgstr ""
 "Impossible de créer automatiquement des sous arbres avec le RDN '%s': object "
 "class non trouvé !"
@@ -4563,8 +4546,7 @@ msgid "Please specify a valid email address."
 msgstr "Veuillez indiquer une adresse de messagerie valide."
 
 #: setup/class_setupStep_Feedback.inc:184
-msgid ""
-"You have to select at least one of both options, subscribe or send feedback."
+msgid "You have to select at least one of both options, subscribe or send feedback."
 msgstr ""
 "Vous devez au moins avoir activé une option, souscrire ou envoyer votre "
 "retour d'information."
@@ -4631,8 +4613,7 @@ msgstr "Sélectionner un utilisateur"
 
 #: setup/setup_ldap.tpl:86
 msgid "Automatically append LDAP base to admin DN"
-msgstr ""
-"Ajouter automatiquement la base de l'annuaire LDAP au DN de l'administrateur"
+msgstr "Ajouter automatiquement la base de l'annuaire LDAP au DN de l'administrateur"
 
 #: setup/setup_ldap.tpl:93
 msgid "Admin password"
@@ -4818,8 +4799,7 @@ msgstr "Echec"
 
 #: setup/class_setupStep_Migrate.inc:375
 #, php-format
-msgid ""
-"Found %s winstations outside the predefined winstation department ou '%s'."
+msgid "Found %s winstations outside the predefined winstation department ou '%s'."
 msgstr ""
 "J'ai trouvé %s winstations en dehors du département winstation prédéfini '%"
 "s'."
@@ -4850,10 +4830,8 @@ msgstr "J'ai trouvé %s utilsateur(s) en dehors de la branche configurée '%s'."
 
 #: setup/class_setupStep_Migrate.inc:586 setup/class_setupStep_Migrate.inc:599
 #, php-format
-msgid ""
-"The specified user '%s' does not have full access to your ldap database."
-msgstr ""
-"L'utilisateur spécifié '%s' n'a pas l'accès complet à votre annuaire ldap."
+msgid "The specified user '%s' does not have full access to your ldap database."
+msgstr "L'utilisateur spécifié '%s' n'a pas l'accès complet à votre annuaire ldap."
 
 #: setup/class_setupStep_Migrate.inc:663
 #, php-format
@@ -4882,8 +4860,7 @@ msgstr "Compte administratifs de GOsa 2.5 trouvés : %s"
 
 #: setup/class_setupStep_Migrate.inc:1033
 msgid "There is no valid GOsa 2.6 administrator account inside your LDAP."
-msgstr ""
-"Il n'y a pas d'administrateur GOsa 2.6 valide dans votre annuaire LDAP."
+msgstr "Il n'y a pas d'administrateur GOsa 2.6 valide dans votre annuaire LDAP."
 
 #: setup/class_setupStep_Migrate.inc:1050
 msgid "There is no GOsa administrator account inside your LDAP."
@@ -4920,8 +4897,7 @@ msgstr "Le nom d'utilisateur est incorrect !"
 #: setup/class_setupStep_Migrate.inc:1197
 #, php-format
 msgid "Adding an administrative user failed: object '%s' already exists!"
-msgstr ""
-"L'ajout d'un utilisateur administratif à échoué : l'objet '%s' existe déja !"
+msgstr "L'ajout d'un utilisateur administratif à échoué : l'objet '%s' existe déja !"
 
 #: setup/class_setupStep_Migrate.inc:1236
 #: setup/class_setupStep_Migrate.inc:1285
@@ -4951,8 +4927,7 @@ msgid "The following references will be updated"
 msgstr "Les références suivantes seront mises à jour"
 
 #: setup/class_setupStep_Migrate.inc:1985
-msgid ""
-"The LDAP root object is missing. It is required to use your LDAP service."
+msgid "The LDAP root object is missing. It is required to use your LDAP service."
 msgstr ""
 "L'objet LDAP racine est manquant. Il est indispensable pour utiliser votre "
 "annuaire LDAP."
@@ -5175,8 +5150,7 @@ msgstr "Compresser les données envoyées au navigateur web"
 
 #: setup/setup_config1.tpl:27
 msgid "People and group storage"
-msgstr ""
-"Branches de l'arbre ldap ou sont stockes les utilisateurs et les groupes"
+msgstr "Branches de l'arbre ldap ou sont stockes les utilisateurs et les groupes"
 
 #: setup/setup_config1.tpl:30
 msgid "People DN attribute"
@@ -5519,8 +5493,7 @@ msgstr "Vérification de l'installation"
 
 #: setup/class_setupStep_Checks.inc:40
 msgid "Basic checks for PHP compatibility and extensions"
-msgstr ""
-"Vérification de base de la version de PHP et des extensions nécéssaires."
+msgstr "Vérification de base de la version de PHP et des extensions nécéssaires."
 
 #: setup/class_setupStep_Checks.inc:64
 msgid "Checking PHP version"
@@ -5563,12 +5536,10 @@ msgstr "mbstring"
 
 #: setup/class_setupStep_Checks.inc:113
 msgid "GOsa requires this module to handle unicode strings."
-msgstr ""
-"GOsa a besoin  de ce module pour gèrer les chaînes de caractère unicode."
+msgstr "GOsa a besoin  de ce module pour gèrer les chaînes de caractère unicode."
 
 #: setup/class_setupStep_Checks.inc:121
-msgid ""
-"GOsa requires this module to communicate with several supported databases."
+msgid "GOsa requires this module to communicate with several supported databases."
 msgstr ""
 "GOsa à besion de ce module pour dialoguer avec les bases de données "
 "supportées."
@@ -5584,8 +5555,7 @@ msgstr ""
 "mots de passe Samba."
 
 #: setup/class_setupStep_Checks.inc:140
-msgid ""
-"Deploy a gosa-si installation or install the perl Crypt::SmbHash modules."
+msgid "Deploy a gosa-si installation or install the perl Crypt::SmbHash modules."
 msgstr ""
 "Déployez une installation gosa-si ou installer les modules perl Crypt::"
 "Smbash."
@@ -5671,8 +5641,7 @@ msgstr ""
 "mémoire pour les installations plus complexes."
 
 #: setup/class_setupStep_Checks.inc:199
-msgid ""
-"Search for 'memory_limit' in your php.ini and set it to '32M' or higher."
+msgid "Search for 'memory_limit' in your php.ini and set it to '32M' or higher."
 msgstr ""
 "Recherchez pour 'memory_limit' dans votre php.ini et mettez le à '32M' or "
 "plus haut."
@@ -5694,8 +5663,7 @@ msgid "The Execution time should be at least 30 seconds."
 msgstr "Le temps d'exécution doit être au moins de 30 secondes."
 
 #: setup/class_setupStep_Checks.inc:215
-msgid ""
-"Search for 'max_execution_time' in your php.ini and set it to '30' or higher."
+msgid "Search for 'max_execution_time' in your php.ini and set it to '30' or higher."
 msgstr ""
 "Rechercher l'option 'max_execution_time' dans votre php.ini et mettez le à "
 "'30' ou plus."
@@ -5737,8 +5705,7 @@ msgstr ""
 "'off'."
 
 #: setup/class_setupStep_Checks.inc:239
-msgid ""
-"Search for 'zend.ze1_compatibility_mode' in your php.ini and set it to 'Off'."
+msgid "Search for 'zend.ze1_compatibility_mode' in your php.ini and set it to 'Off'."
 msgstr ""
 "Recherchez l'option 'zend.ze1_compatibility_mode' dans votre hp.ini et "
 "mettez la à 'Off'."
@@ -6145,8 +6112,7 @@ msgstr "Vous n'avez pas l'autorisation pour changer votre mot de passe."
 
 #: html/password.php:249
 msgid "External password changer reported a problem: "
-msgstr ""
-"Le programme externe pour changer votre mot de passe à renvoyé une erreur: "
+msgstr "Le programme externe pour changer votre mot de passe à renvoyé une erreur: "
 
 #: html/password.php:280 html/index.php:416
 msgid "Session will not be encrypted."
@@ -6190,8 +6156,7 @@ msgstr ""
 
 #: html/index.php:268
 msgid "Cannot detect information about the installed LDAP schema!"
-msgstr ""
-"Impossible de détecter les information sur les schémas LDAP installés !"
+msgstr "Impossible de détecter les information sur les schémas LDAP installés !"
 
 #: html/index.php:281
 msgid "Your LDAP setup contains old schema definitions:"
@@ -6245,8 +6210,7 @@ msgstr ""
 #: html/main.php:148
 #, php-format
 msgid "Cannot locate file '%s' - please run '%s' to fix this"
-msgstr ""
-"Je n'ai pas trouvé '%s' - veuillez exécuter '%s' pour régler ce problème"
+msgstr "Je n'ai pas trouvé '%s' - veuillez exécuter '%s' pour régler ce problème"
 
 #: html/main.php:167
 msgid "PHP configuration"
@@ -6270,8 +6234,7 @@ msgstr "Les vérifications des ACL de l'utilisateur ont été désactivés"
 
 #: html/main.php:329
 msgid "Your password is about to expire, please change your password!"
-msgstr ""
-"Votre mot de passe va bientôt expirer, veuillez changer votre mot de passe !"
+msgstr "Votre mot de passe va bientôt expirer, veuillez changer votre mot de passe !"
 
 #: html/main.php:339
 msgid "Plugin"
@@ -6658,3 +6621,4 @@ msgstr "Date"
 #: ihtml/themes/default/snapshotdialog.tpl:79
 msgid "Reason for generating this snapshot"
 msgstr "Raison pour la génération de cette copie instantanée"
+
