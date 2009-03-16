@@ -34,8 +34,6 @@ class Step_Config2 extends setup_step
                              "vacationdir_active" => FALSE);
 
   var $generic_settings  = array( "enableCopyPaste" => false,
-                                  "enableDNS"      => false,
-                                  "enableDHCP"      => false,
                                   "wws_ou"        => "ou=winstations",
                                   "wws_ou_active" => FALSE,
                                   "snapshot_active"     => FALSE,
@@ -52,14 +50,10 @@ class Step_Config2 extends setup_step
                                   "samba_rid_active" => FALSE); 
 
   var $sambaDomain_found    = FALSE;
-  var $use_netatalk         = FALSE;
-  var $enableFAI_management = FALSE;
-  var $enableMimeType       = FALSE;
-
   var $timezone       = "Europe/Berlin";
   var $timezones      = array();
 
-  var $attributes = array("mail_attrib","governmentmode","sambaidmapping","cyrusunixstyle","mail","use_netatalk","enableFAI_management","timezone","enableMimeType");
+  var $attributes = array("mail_attrib","governmentmode","sambaidmapping","cyrusunixstyle","mail","timezone");
   var $called = FALSE;
 
   function Step_Config2()
@@ -116,30 +110,6 @@ class Step_Config2 extends setup_step
         $this->samba_settings['samba_rid_active'] = TRUE;
       }
   
-      /* Check if we can enable netatalk plugin */
-      $tmp = $ldap->get_objectclasses();
-      if(is_array($tmp) && isset($tmp['apple-user'])) {
-        $this->use_netatalk = TRUE;
-      }
-
-      /* Check the FAI schema is used */
-      if(is_array($tmp) && isset($tmp['FAIclass'])){
-#        $this->enableFAI_management = TRUE;
-      }
-
-      /* Check the MimeType schema is used */
-      if(is_array($tmp) && isset($tmp['gotoMimeType'])){
-        $this->enableMimeType = TRUE;
-      }
-
-      if(is_array($tmp) && isset($tmp['dhcpClass'])){
-        $this->generic_settings['enableDHCP'] = TRUE;
-      }
-
-      if(is_array($tmp) && isset($tmp['dNSZone'])){
-        $this->generic_settings['enableDNS'] = TRUE;
-      }
-
       $this->called = TRUE;
     }
 
@@ -212,12 +182,6 @@ class Step_Config2 extends setup_step
 
       if(isset($_POST['enableCopyPaste'])){
         $this->generic_settings['enableCopyPaste'] = get_post('enableCopyPaste');
-      }
-      if(isset($_POST['enableDNS'])){
-        $this->generic_settings['enableDNS'] = get_post('enableDNS');
-      }
-      if(isset($_POST['enableDHCP'])){
-        $this->generic_settings['enableDHCP'] = get_post('enableDHCP');
       }
 
       if(isset($_POST['wws_ou_active'])){

@@ -107,65 +107,6 @@
         </div>
     </div>
 
-	<div class='step4_container'>
-        <div class='step4_name'>
-            {t}Enable DNS extension{/t}
-        </div>
-        <div class='step4_value'>
-
-            <select name="enableDNS" size="1" title="">
-                {html_options options=$bool selected=$generic_settings.enableDNS}
-            </select>
-        </div>
-    </div>
-
-	<div class='step4_container'>
-        <div class='step4_name'>
-            {t}Enable DHCP extension{/t}
-        </div>
-        <div class='step4_value'>
-
-            <select name="enableDHCP" size="1" title="">
-                {html_options options=$bool selected=$generic_settings.enableDHCP}
-            </select>
-        </div>
-    </div>
-
-	<div class='step4_container'>
-        <div class='step4_name'>
-            {t}Enable mime type management{/t}
-        </div>
-        <div class='step4_value'>
-
-            <select name="enableMimeType" size="1" title="">
-                {html_options options=$bool selected=$enableMimeType}
-            </select>
-        </div>
-    </div>
-
-	<div class='step4_container'>
-        <div class='step4_name'>
-            {t}Enable FAI release management{/t}
-        </div>
-        <div class='step4_value'>
-
-            <select name="enableFAI_management" size="1" title="">
-                {html_options options=$bool selected=$enableFAI_management}
-            </select>
-        </div>
-    </div>
-
-	<div class='step4_container'>
-        <div class='step4_name'>
-            {t}Enable user netatalk plugin{/t}
-        </div>
-        <div class='step4_value'>
-            <select name="use_netatalk" size="1" title="">
-                {html_options options=$bool selected=$use_netatalk}
-            </select>
-        </div>
-    </div>
-
     <div class='step4_container'>
         <div class='step4_name'>
             {t}Government mode{/t}
