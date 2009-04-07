@@ -76,7 +76,7 @@ class log {
     $entry['changes']   = $changes;
     $entry['result']    = $result;
 
-    if(!isset($config) || ( $this->config->get_cfg_value("logging") == ""  && empty($entry['user']))){
+    if(!isset($this->config) || ( $this->config->get_cfg_value("logging") == ""  && empty($entry['user']))){
       $entry['user']  = "unknown";
     }
  
@@ -90,7 +90,7 @@ class log {
       
     }else{
 
-      if (isset ($config)){
+      if (isset ($this->config)){
         if ($this->config->get_cfg_value("logging") == ""){
           $this->log_into_syslog($entry);
         }else{
