@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -e 
+
+	dpkg-divert --package gosa-plugin-apache2 --add\
+			--rename --divert /usr/share/gosa/include/functions\
+			 /usr/share/gosa/include/functions.inc
+

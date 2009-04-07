@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e 
+
+# Removes the left over diversions of the old package
+
+        dpkg-divert --package gosa-plugin-apache2 --rename --remove\
+                        /usr/share/gosa/include/functions.inc
+

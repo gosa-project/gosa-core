@@ -1,0 +1,18 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 01_patch_functions.inc.dpatch by  <benoit@catbert.opensides.be>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: patch functions.inc to include apache vhost plugin
+
+@DPATCH@
+
+--- include/functions.inc	2008-09-01 08:45:28.000000000 +0200
++++ include/functions.inc	2009-03-19 13:30:40.000000000 +0100
+@@ -61,6 +61,7 @@
+ require_once("class_password-methods.inc");
+ require_once ("functions_debug.inc");
+ require_once ("functions_dns.inc");
++require_once ("functions_apache.inc");
+ require_once ("accept-to-gettext.inc");
+ require_once ("class_MultiSelectWindow.inc");
+ 

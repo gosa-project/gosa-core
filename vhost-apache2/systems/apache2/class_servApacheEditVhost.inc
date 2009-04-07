@@ -17,7 +17,8 @@ class servapacheVhostEdit extends plugin
   var $apacheSuexecUid		= "";
   var $apacheSuexecGid		= "";
     
-  var $apacheServerAlias                = array();
+//  var $apacheServerAlias                = array();
+  var $apacheServerAlias	= ""; 
   var $apacheScriptAlias                = array();
 
   var $OldApacheServerName              = ""; // To detect changes made with this edit
@@ -55,7 +56,7 @@ class servapacheVhostEdit extends plugin
         }
       }
 
-      if(!isset($attrs['apacheServerAlias'])) $this->apacheServerAlias  = array();
+//      if(!isset($attrs['apacheServerAlias'])) $this->apacheServerAlias  = array();
       if(!isset($attrs['apacheScriptAlias'])) $this->apacheScriptAlias  = array();
 
     }
@@ -252,6 +253,8 @@ class servapacheVhostEdit extends plugin
     if((isset($_POST['AddSARecord'])) && (!empty($_POST['StrSAAlias'])) && (!empty($_POST['StrSADir']))){
       $this->apacheServerAlias[] = trim($_POST['StrSAAlias']." ".$_POST['StrSADir']);      
     }
+
+
     
   	if((isset($_POST['AddSCRecord'])) && (!empty($_POST['StrSCAlias'])) && (!empty($_POST['StrSCDir']))){
       $this->apacheScriptAlias[] = trim($_POST['StrSCAlias']." ".$_POST['StrSCDir']);      

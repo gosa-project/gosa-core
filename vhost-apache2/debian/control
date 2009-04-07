@@ -1,0 +1,14 @@
+Source: gosa-plugin-apache2
+Section: web
+Priority: optional
+Maintainer: Benoit Mortier <benoit.mortier@opensides.be>
+Build-Depends: debhelper (>= 5), dpatch
+Standards-Version: 3.8.0
+
+Package: gosa-plugin-apache2
+Architecture: all
+Depends: gosa (>= 2.5.17-1)
+Description: Apache2 virtual host for GOsa 2.5
+ Plugin to manage apache2 virtualhost in gosa 2.5
+ .
+

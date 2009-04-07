@@ -1,0 +1,6 @@
+systems/apache2/class_servApacheEditVhost.inc	/usr/share/gosa/plugins/admin/systems/
+systems/apache2/class_servApacheVhost.inc	/usr/share/gosa/plugins/admin/systems/
+systems/apache2/servApacheVhostEdit.tpl		/usr/share/gosa/plugins/admin/systems/
+systems/apache2/servApacheVhost.tpl		/usr/share/gosa/plugins/admin/systems/
+systems/apache2/functions_apache.inc		/usr/share/gosa/include/
+functions.inc					/usr/share/gosa/include/
