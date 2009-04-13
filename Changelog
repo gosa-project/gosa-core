@@ -1,6 +1,28 @@
 GOsa2 changelog
 ===============
 
+* gosa 2.5.18
+
+  * Added postgresql fix
+  * Updated smarty
+  * Added swedish debconf translation
+  * Corrected scalix Group problems
+  * Updated gofon macro parsing allowing multiple brackets in macro apps.
+  * Updated macro checks
+  * Updated termDNS check ensure that a valid macAddress is given
+  * Updated gohpone account, save sip user information also if hardware is automatic
+  * Do not remove invalid user accounts.
+  * Do not create admin groups with spaces. Closes #589
+  * Updated groupMail, Added checkbox to toggle local delivery, Updated template &&
+    added ACLs
+  * Updated samba Account, sambaHomePath and Drive can be empty.
+  * Updated server DNS zone editor. Fixed CName entry order.
+  * Updated samba Tab, added info for domain policies
+  * Updated gophone realtime dependencies
+  * Fixed goPhone conference language selection
+  * Corrected contrib/slapd.conf.gz attr in place of attrs
+  * Updated locales for 2.5.18 
+
 * gosa 2.5.17
   - Added scalix group support.
   - Added debug information for post events, debug level is DEBUG_SHELL.
