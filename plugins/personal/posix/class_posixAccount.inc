@@ -1457,6 +1457,11 @@ class posixAccount extends plugin
         $this->is_modified= TRUE;
       }
       $this->force_ids= $data;
+      $data= $_POST['primaryGroup'];
+      if ($this->primaryGroup != $data){
+        $this->is_modified= TRUE;
+      }
+      $this->primaryGroup= $_POST['primaryGroup'];
     }
   }
  
@@ -1510,6 +1515,9 @@ class posixAccount extends plugin
     /* Assigned informations to smarty */
     $smarty = get_smarty();
     $smarty->assign("homeDirectory",$this->homeDirectory);
+    $smarty->assign("secondaryGroups",$this->secondaryGroups);
+    $smarty->assign("primaryGroup",$this->primaryGroup);
+ 
     $smarty->assign("uidNumber",$this->uidNumber);
     $smarty->assign("gidNumber",$this->gidNumber);
     $smarty->assign("forceMode",$forceMode);
@@ -1545,6 +1553,12 @@ class posixAccount extends plugin
     $this->savedUidNumber = "";
 #    $this->savedGidNumber = $this->get_next_id("gidNumber", $this->dn);
     $this->savedGidNumber = "";
+
+    /* Fill group */
+    if(isset($source['gidNumber'][0])){
+      $this->primaryGroup= $source['gidNumber'][0];
+    }
+
   }
 
 

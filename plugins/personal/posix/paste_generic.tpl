@@ -13,6 +13,14 @@
 	  			</tr>
 			</table>
 			<table style='width:100%;'>
+        <tr>
+         <td><label for="primaryGroup">{t}Primary group{/t}</label></td>
+         <td>
+          <select id="primaryGroup" size="1" name="primaryGroup">
+           {html_options options=$secondaryGroups selected=$primaryGroup}
+          </select> 
+         </td>
+        </tr>
 	  			<tr>
 					<td>
 					  	<input id="force_ids" type=checkbox name="force_ids" value="1"  {$force_ids}
