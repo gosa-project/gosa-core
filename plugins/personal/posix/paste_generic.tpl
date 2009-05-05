@@ -11,6 +11,14 @@
 		  				<input id="homeDirectory" name="homeDirectory" size=40 maxlength=120 value="{$homeDirectory}">
 					</td>
 	  			</tr>
+        <tr>
+         <td><label for="">{t}Primary group{/t}</label></td>
+         <td>
+          <select id="primaryGroup" size="1" name="primaryGroup">
+           {html_options options=$secondaryGroups selected=$primaryGroup}
+          </select> 
+         </td>
+        </tr>
 			</table>
 			<table style='width:100%;'>
 	  			<tr>

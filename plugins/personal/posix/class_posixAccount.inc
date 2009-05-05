@@ -1201,6 +1201,10 @@ class posixAccount extends plugin
         $this->is_modified= TRUE;
       }
       $this->force_ids= $data;
+      $this->primaryGroup= $_POST['primaryGroup'];
+      if ($this->primaryGroup != 0){
+        $this->gidNumber= $this->primaryGroup;
+      }
     }
   }
 
@@ -1253,7 +1257,9 @@ class posixAccount extends plugin
 
     /* Assigned informations to smarty */
     $smarty = get_smarty();
+    $smarty->assign("secondaryGroups",$this->secondaryGroups);
     $smarty->assign("homeDirectory",$this->homeDirectory);
+    $smarty->assign("primaryGroup",$this->primaryGroup);
     $smarty->assign("uidNumber",$this->uidNumber);
     $smarty->assign("gidNumber",$this->gidNumber);
     $smarty->assign("forceMode",$forceMode);
@@ -1285,6 +1291,9 @@ class posixAccount extends plugin
     /* Avoid using the same gid/uid number as source user */
     $this->savedUidNumber = $this->get_next_id("uidNumber", $this->dn);
     $this->savedGidNumber = $this->get_next_id("gidNumber", $this->dn);
+
+    /* Fill group */
+    $this->primaryGroup= $source->gidNumber;
   }
 
   function convertToSeconds($val)
