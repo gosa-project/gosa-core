@@ -1192,7 +1192,7 @@ class gosaSupportDaemon
   {
     if (tests::is_mac($target)){
       /* Get communication object */
-      $d= new gosaSupportDaemon(TRUE,0.5);
+      $d= new gosaSupportDaemon(TRUE,2);
       $answer= $d->_send("<xml><header>gosa_ping</header><source>GOSA</source><target>$target</target></xml>", TRUE);
       return (count($answer) ? TRUE:FALSE);
     }
