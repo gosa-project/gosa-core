@@ -52,7 +52,7 @@ class gosaSupportDaemon
     @param boolean  Connect Directly connect to daemon socket.
     @param float    Timeout The timelimit for all socket actions.
    */
-  public function __construct($connect=TRUE,$timeout=10)
+  public function __construct($connect=TRUE,$timeout=15)
   {
     #FIXME: bad idea about referencing global variables from within classes
     global $config;
