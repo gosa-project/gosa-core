@@ -1981,40 +1981,7 @@ function compare_revision($revision_file, $revision)
 
 function progressbar($percentage,$width=100,$height=15,$showvalue=false)
 {
-  $str = ""; // Our return value will be saved in this var
-
-  $color  = dechex($percentage+150);
-  $color2 = dechex(150 - $percentage);
-  $bgcolor= $showvalue?"FFFFFF":"DDDDDD";
-
-  $progress = (int)(($percentage /100)*$width);
-
-  /* If theres a better solution for this, use it... */
-  $str = "\n   <div style=\" width:".($width)."px; ";
-  $str.= "\n       height:".($height)."px; ";
-  $str.= "\n       background-color:#000000; ";
-  $str.= "\n       padding:1px;\" > ";
-
-  $str.= "\n     <div style=\" width:".($width)."px; ";
-  $str.= "\n         background-color:#$bgcolor; ";
-  $str.= "\n         height:".($height)."px;\" > ";
-
-  if(($height >10)&&($showvalue)){
-    $str.= "\n   <font style=\"font-size:".($height-2)."px; ";
-    $str.= "\n     color:#FF0000; align:middle; ";
-    $str.= "\n     padding-left:".((int)(($width*0.4)))."px; \"> ";
-    $str.= "\n     <b>".$percentage."%</b> ";
-    $str.= "\n   </font> ";
-  }
-
-  $str.= "\n       <div style=\" width:".$progress."px; ";
-  $str.= "\n         height:".$height."px; ";
-  $str.= "\n         background-color:#".$color2.$color2.$color."; \" >";
-  $str.= "\n       </div>";
-  $str.= "\n     </div>";
-  $str.= "\n   </div>";
-
-  return($str);
+  return("<img src='progress.php?x=$width&amp;y=$height&amp;p=$percentage'>");
 }
 
 
