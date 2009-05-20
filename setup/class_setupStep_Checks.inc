@@ -149,10 +149,20 @@ class Step_Checks extends setup_step
       $output.= fread($sh, 4096);
     }
     pclose($sh);
+
     $N = msgPool::checkingFor(_("imagick"));
     $D = _("GOsa requires this extension to handle images.");
     $S = msgPool::installPhpModule("php5-imagick");
-    $R = is_callable("imagick_blob2image") || !empty($output);
+
+    $IMGVER = phpversion('imagick');
+
+    if ($IMGVER > 1.0) {
+        $R = method_exists('imagick','getImageBlob');
+    }
+    else {
+        $R = is_callable("imagick_blob2image") || !empty($output);
+    }
+
     $M = TRUE;
     $this->basic_checks[] = array("NAME" => $N , "DESC" => $D , "RESULT" => $R , "SOLUTION" => $S , "MUST" => $M );
 
