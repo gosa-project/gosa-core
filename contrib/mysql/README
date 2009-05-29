@@ -1,6 +1,6 @@
 
 in those directories you will find the database definitions for the plugins
-gofax gofon glog with mysql.
+glpi gofax gofon glog with mysql.
 
 Benoit Mortier <benoit.mortier@opensides.be>
 
