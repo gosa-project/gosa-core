@@ -3,7 +3,12 @@ GOsa2 changelog
 
 * gosa 2.5.19
 
-  * Closed Debian Bugs #502589, #502465, #512979, #501937, #502888
+  * Added basque debconf template (closes:#502589)
+  * Added italian debconf template (closes:#502465)
+  * Added japanese debconf template (closes:#512979)
+  * Added finish debconf template (closes:#501937)
+  * Added russian debconf template (closes:#502888)
+  * Missing attributes in group ACL menu (closes:528179)
   * Cleaned debian packaging
   * Updated German Translation.
   * Applied patch to allow selecting the primary Group when copying users
