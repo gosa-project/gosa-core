@@ -3,8 +3,11 @@ GOsa2 changelog
 
 * gosa 2.5.19
 
-  * Closed Debian Bugs #
+  * Closed Debian Bugs #502589, #502465, #512979, #501937, #502888
   * Cleaned debian packaging
+  * Updated German Translation.
+  * Applied patch to allow selecting the primary Group when copying users
+  * Added a section how to report a bug
 
 * gosa 2.5.18
 
