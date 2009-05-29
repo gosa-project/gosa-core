@@ -1,6 +1,11 @@
 GOsa2 changelog
 ===============
 
+* gosa 2.5.19
+
+  * Closed Debian Bugs #
+  * Cleaned debian packaging
+
 * gosa 2.5.18
 
   * Added postgresql fix
