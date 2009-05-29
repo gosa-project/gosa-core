@@ -70,9 +70,21 @@ entries get rewritten to a GOsa style dn.
 * More informations
 
 To improve this piece of software, please report all kind of errors.
+
+The bugtracker is situated at
+
+https://oss.gonicus.de/labs/gosa/
+
+Look first at View ticket to see if your bug is not already reported,
+If not create a new bug report with New Ticket
+
 Looking for a mailing list? Go to
 
 https://oss.gonicus.de/mailman/listinfo/gosa/
+
+Want to help localize it in your language subscribe to
+
+https://oss.gonicus.de/mailman/listinfo/gosai-18n/
 
 Thanks
 
