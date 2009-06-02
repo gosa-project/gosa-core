@@ -272,7 +272,7 @@ class ogrouptabs extends tabs
       }
 
       /* Reset acls */
-      $this->set_acl_base($this->base);
+      $this->set_acl_base($this->dn);
       foreach($this->by_object as $name => $obj){
         $this->by_object[$name]->set_acl_category($this->acl_category);
       }
