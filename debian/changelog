@@ -1,3 +1,20 @@
+gosa (2.5.19-1) unstable; urgency=low
+
+  * New upstream release
+  * Added basque debconf template (closes:#502589)
+  * Added italian debconf template (closes:#502465)
+  * Added japanese debconf template (closes:#512979)
+  * Added finish debconf template (closes:#501937)
+  * Added russian debconf template (closes:#502888)
+  * Missing attributes in group ACL menu (closes:528179)
+  * Cleaned debian packaging
+  * Updated German Translation.
+  * Applied patch to allow selecting the primary Group when copying users
+  * Added a section how to report a bug
+  * Added Benoit Mortier as maintener
+
+ -- Benoit Mortier <benoit.mortier@opensides.be>  Fri, 29 May 2009 18:23:00 +0100
+ 
 gosa (2.5.18-1) unstable; urgency=low
 
   * New upstream release
@@ -8,11 +25,12 @@ gosa (2.5.18-1) unstable; urgency=low
   * Updated gofon macro parsing allowing multiple brackets in macro apps.
   * Updated macro checks
   * Updated termDNS check ensure that a valid macAddress is given
-  * Updated gohpone account, save sip user information also if hardware is automatic
+  * Updated gohpone account, save sip user information also if hardware
+    is automatic
   * Do not remove invalid user accounts.
   * Do not create admin groups with spaces. Closes #589
-  * Updated groupMail, Added checkbox to toggle local delivery, Updated template &&
-    added ACLs
+  * Updated groupMail, Added checkbox to toggle local delivery, 
+    Updated template and added ACLs
   * Updated samba Account, sambaHomePath and Drive can be empty.
   * Updated server DNS zone editor. Fixed CName entry order.
   * Updated samba Tab, added info for domain policies

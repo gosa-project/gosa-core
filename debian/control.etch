@@ -2,6 +2,7 @@ Source: gosa
 Section: web
 Priority: optional
 Maintainer: Cajus Pollmeier <cajus@debian.org>
+Uploaders: Benoit Mortier <benoit.mortier@opensides.be>
 Build-Depends: debhelper(>= 4.2.32), dpatch
 Standards-Version: 3.7.2.2
 
