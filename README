@@ -44,7 +44,7 @@ In case of spain this will be
 
 and put the freshly translated messages.po in this directory.
 
-To test this, you've depoly the messages.po file in your running copy
+To test this, you've deploy the messages.po file in your running copy
 of GOsa and run the "update-gosa" command, to let GOsa merge the
 translations. Then, Make sure your apache has locale support or, in case
 of debian, that the specific locale will be generated (via dpkg-reconfigure
