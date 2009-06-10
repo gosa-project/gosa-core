@@ -147,10 +147,12 @@ class user extends plugin
     plugin::plugin ($config, $dn);
 
     /*  If gotoLastSystemLogin is available read it from ldap and create a readable
-        date time string.
+        date time string, fallback to sambaLogonTime if available.
      */
     if(isset($this->attrs['gotoLastSystemLogin'][0]) && preg_match("/^[0-9]*$/",$this->attrs['gotoLastSystemLogin'][0])){
-      $this->gotoLastSystemLogin = date("d.m.Y H:i:s", $this->attrs['gotoLastSystemLogin'][0]);
+      $this->gotoLastSystemLogin = date("d.m.Y H:i:s", strtotime($this->attrs['gotoLastSystemLogin'][0]));
+    } else if(isset($this->attrs['sambaLogonTime'][0]) && preg_match("/^[0-9]*$/",$this->attrs['sambaLogonTime'][0])){
+      $this->gotoLastSystemLogin = date("d.m.Y H:i:s", $this->attrs['sambaLogonTime'][0]);
     }
 
     $this->orig_dn  = $this->dn;
