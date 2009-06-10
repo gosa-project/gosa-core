@@ -1,10 +1,13 @@
 Source: gosa
 Section: web
 Priority: optional
-Maintainer: Cajus Pollmeier <cajus@debian.org>
-Uploaders: Benoit Mortier <benoit.mortier@opensides.be>
+Maintainer: GOsa packages mainteners group <gosa-pkg@oss.gonicus.de>
+Uploaders: Cajus Pollmeier <cajus@debian.org>, Benoit Mortier <benoit.mortier@opensides.be>
 Build-Depends: debhelper (>= 5), dpatch, po-debconf
 Standards-Version: 3.8.0
+Homepage: https://oss.gonicus.de/labs/gosa/
+Vcs-Browser: https://oss.gonicus.de/repositories/gosa/trunk
+Vcs-Svn: https://oss.gonicus.de/repositories/gosa/trunk
 
 Package: gosa
 Architecture: all
