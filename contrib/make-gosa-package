@@ -180,6 +180,11 @@ then
 	fi
 fi
 
+echo "cleaning svn entries from sources"
+find ${GOSA_DIR} -type d -name ".svn" -exec rm -rf {} \; >/dev/null 2>&1
+find ${GOSA_SI_DIR} -type d -name ".svn" -exec rm -rf {} \; >/dev/null 2>&1
+find gosa-plugins-${BNAME} -type d -name ".svn" -exec rm -rf {} \; >/dev/null 2>&1
+
 echo "Creating original sources 'gosa-${GOSA_VER}'..."
 tar -c -f "gosa_${GOSA_VER}.orig.tar" "${GOSA_DIR}"
 tar -c -f "gosa-si_${GOSA_VER}.orig.tar" "${GOSA_SI_DIR}"
