@@ -6,7 +6,7 @@
 		{$msg2}
 	</p>
 	<tt>
-	chown root.{$webgroup} {$CONFIG_DIR}/{$CONFIG_FILE}<br>
+	chown root:{$webgroup} {$CONFIG_DIR}/{$CONFIG_FILE}<br>
 	chmod 640 {$CONFIG_DIR}/{$CONFIG_FILE}
 	</tt>
 	<p>	
