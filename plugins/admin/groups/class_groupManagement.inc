@@ -172,7 +172,7 @@ class groupManagement extends plugin
           $type = $events['BY_CLASS'][$event];
           $this->grouptab = new $type['CLASS_NAME']($this->config);
           $this->grouptab->add_groups($uids);
-          $this->grouptab->set_type(TRIGGERED_EVENT);
+          $this->grouptab->set_type(SCHEDULED_EVENT);
         }
       }
     }

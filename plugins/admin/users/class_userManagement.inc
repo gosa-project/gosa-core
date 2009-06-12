@@ -187,7 +187,7 @@ class userManagement extends plugin
           $type = $events['BY_CLASS'][$event];
           $this->usertab = new $type['CLASS_NAME']($this->config);
           $this->usertab->add_users($uids);
-          $this->usertab->set_type(TRIGGERED_EVENT);
+          $this->usertab->set_type(SCHEDULED_EVENT);
         }
       }
     }
