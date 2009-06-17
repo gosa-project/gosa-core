@@ -36,7 +36,7 @@ class userinfo
   var $ocMapping= array();
   var $groups= array();
   var $result_cache =array();
-  var $ignoreACl = FALSE;
+  var $ignoreACL = FALSE;
   var $ACLperPath = array();
   var $ACLperPath_usesFilter = array();
 
