@@ -45,7 +45,12 @@
 
 	{if !$JS}
 
+		{if $i_Type == INFO_DIALOG || $i_Type == CONFIRM_DIALOG || $i_Type == OK_CANCEL_DIALOG}
+		<div id='e_layer{$i_ID}' class="infoMsgDialog" style='top:200px;left:200px;'>
+    {else}
 		<div id='e_layer{$i_ID}' class="errorMsgDialog" style='top:200px;left:200px;'>
+    {/if}
+
 			<div id="e_layerTitle{$i_ID}" class="errorMsgTitle">
 			<table><tr><td>
 		{if $i_Type == ERROR_DIALOG}
@@ -87,7 +92,11 @@
 		
 		{/if}
 
-		<div id='e_layer{$i_ID}' class="errorMsgDialog" style="top:200px;left:200px; display:none;">
+    {if $i_Type == INFO_DIALOG || $i_Type == CONFIRM_DIALOG || $i_Type == OK_CANCEL_DIALOG}
+    <div id='e_layer{$i_ID}' class="infoMsgDialog" style='top:200px;left:200px;'>
+    {else}
+    <div id='e_layer{$i_ID}' class="errorMsgDialog" style='top:200px;left:200px;'>
+    {/if}
 
 		<div id="e_layerTitle{$i_ID}" class="errorMsgTitle">
 			<table><tr><td>

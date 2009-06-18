@@ -1556,3 +1556,13 @@ div.errorMsgDialog {
 	z-index:150;
 	position:absolute;
 }
+
+div.infoMsgDialog {
+	width:60%;
+	left:200px;
+	top:200px;
+	background-color:white;
+	border: 2px solid black;
+	z-index:150;
+	position:absolute;
+}
