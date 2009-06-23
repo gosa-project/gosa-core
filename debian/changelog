@@ -1,13 +1,13 @@
 gosa (2.5.19-1) unstable; urgency=low
 
   * New upstream release
-  * Added basque debconf template (closes:#502589)
+  * Added basque debconf template (closes:#502289)
   * Added italian debconf template (closes:#502465)
   * Added japanese debconf template (closes:#512979)
   * Added finish debconf template (closes:#501937)
   * Added russian debconf template (closes:#502888)
-  * Missing attributes in group ACL menu (closes:528179)
-  * Added test in apache for php5 apache module presence (closes:523461)
+  * Missing attributes in group ACL menu (closes:#528179)
+  * Added test in apache for php5 apache module presence (closes:#523461)
   * Corrected bashism in mailqueue script (closes:#530093)
   * Cleaned debian packaging
   * Updated German Translation.
