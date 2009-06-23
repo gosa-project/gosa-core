@@ -5,7 +5,7 @@ Maintainer: GOsa packages mainteners group <gosa-pkg@oss.gonicus.de>
 Uploaders: Cajus Pollmeier <cajus@debian.org>, Benoit Mortier <benoit.mortier@opensides.be>
 Uploaders: Benoit Mortier <benoit.mortier@opensides.be>
 Build-Depends: debhelper(>= 4.2.32), dpatch
-Standards-Version: 3.7.2.2
+Standards-Version: 3.8.0
 
 Package: gosa
 Architecture: all
