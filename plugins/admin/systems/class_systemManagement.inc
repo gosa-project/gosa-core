@@ -687,13 +687,22 @@ class systems extends plugin
     }
 
     /* This array represents the combination between checkboxes and search filters */
-    $objs = array( "ShowServers"        => array("CLASS" => "goServer"        ,"TREE" => "ou=servers,ou=systems," ),
-        "ShowTerminals"      => array("CLASS" => "gotoTerminal"    ,"TREE" => "ou=terminals,ou=systems,"), 
-        "ShowPrinters"       => array("CLASS" => "gotoPrinter"     ,"TREE" => "ou=printers,ou=systems," ),
-        "ShowDevices"        => array("CLASS" => "ieee802Device"   ,"TREE" => "ou=netdevices,ou=systems," ),
-        "ShowPhones"         => array("CLASS" => "goFonHardware"   ,"TREE" => "ou=phones,ou=systems," ),
-        "ShowWorkstations"   => array("CLASS" => "gotoWorkstation" ,"TREE" => "ou=workstations,ou=systems," ),
-        "ShowWinWorkstations"=> array("CLASS" => $samba            ,"TREE" => get_winstations_ou() ));
+    $objs = array( 
+      
+        "ShowWinWorkstations"=> array("CLASS" => $samba            ,
+                                      "TREE" => get_winstations_ou()),
+        "ShowServers"        => array("CLASS" => "goServer"        ,
+                                      "TREE" => "ou=servers,ou=systems," ),
+        "ShowTerminals"      => array("CLASS" => "gotoTerminal"    ,
+                                      "TREE" => "ou=terminals,ou=systems,"), 
+        "ShowPrinters"       => array("CLASS" => "gotoPrinter"     ,
+                                      "TREE" => "ou=printers,ou=systems," ),
+        "ShowDevices"        => array("CLASS" => "ieee802Device"   ,
+                                      "TREE" => "ou=netdevices,ou=systems," ),
+        "ShowPhones"         => array("CLASS" => "goFonHardware"   ,
+                                      "TREE" => "ou=phones,ou=systems," ),
+        "ShowWorkstations"   => array("CLASS" => "gotoWorkstation" ,
+                                      "TREE" => "ou=workstations,ou=systems," ));
 
     /* Include the 'Display Systems of user' attribute */ 
     if ((!empty($this->DivListSystem->UserRegex)) && ($this->DivListSystem->UserRegex!= "*")){
@@ -760,7 +769,17 @@ class systems extends plugin
       /* Detect type of object and create an entry for $this->terminals */
       $terminal = array();
       if ((in_array ($tmp, $responsible)) || ($add != "")){
-        if (in_array_ics('gotoTerminal', $value["objectClass"])){
+        if (in_array_ics($samba, $value["objectClass"])){
+          $name= preg_replace('/\$$/', '', $value['cn'][0]);
+          if (isset($value['sambaDomainName'])){
+            $domain= " [".$value['sambaDomainName'][0]."]";
+          } else {
+            $domain= "";
+          }
+          $terminal=$value;
+          $terminal['type']     ="W";
+          $terminal['domain']   = $name.$domain;
+        }elseif (in_array_ics('gotoTerminal', $value["objectClass"])){
           if (isset($value["macAddress"][0]) && $value["macAddress"][0] != "-"){
             $terminal             = $value;
             $terminal['type']     = "T";
@@ -804,16 +823,6 @@ class systems extends plugin
         } elseif (in_array_ics('ieee802Device', $value["objectClass"])){
           $terminal             = $value;
           $terminal['type']     = "C";
-        } else{
-          $name= preg_replace('/\$$/', '', $value['cn'][0]);
-          if (isset($value['sambaDomainName'])){
-            $domain= " [".$value['sambaDomainName'][0]."]";
-          } else {
-            $domain= "";
-          }
-          $terminal=$value;
-          $terminal['type']     ="W";
-          $terminal['domain']   = $name.$domain;
         }
         $this->terminals[]=$terminal;
       }
@@ -845,7 +854,10 @@ class systems extends plugin
     $classes = $attrs['objectClass'];
 
     $type= "";
-    if (in_array_ics('ieee802Device', $classes)){
+    if (in_array_ics('sambaAccount', $classes) ||
+        in_array_ics('sambaSamAccount', $classes)){
+      $type= "winstation";
+    }elseif (in_array_ics('ieee802Device', $classes)){
       $type= "component";
     }elseif (in_array_ics('gotoTerminal', $classes)){
       $type= "terminal";
@@ -861,9 +873,6 @@ class systems extends plugin
       $type= "ArpNewDevice";
     }elseif (in_array_ics('GOhard', $classes)){
       $type= "NewDevice";
-    }elseif (in_array_ics('sambaAccount', $classes) ||
-        in_array_ics('sambaSamAccount', $classes)){
-      $type= "winstation";
     }
     return ($type);
   }
