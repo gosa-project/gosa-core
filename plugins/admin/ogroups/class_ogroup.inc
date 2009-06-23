@@ -914,7 +914,7 @@ class ogroup extends plugin
     }
 
     $ldap = $this->config->get_ldap_link();
-    if($this->dn != $new_dn){
+    if(LDAP::fix($this->dn) != LDAP::fix($new_dn)){
       $ldap->cat ($new_dn, array('dn'));
     }
     

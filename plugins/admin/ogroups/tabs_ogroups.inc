@@ -343,7 +343,7 @@ class ogrouptabs extends tabs
     $new_dn= 'cn='.$baseobject->cn.','.get_ou('ogroupRDN').$baseobject->base;
 
     /* Move group? */
-    if ($this->dn != $new_dn){
+    if (LDAP::fix($this->dn) != LDAP::fix($new_dn)){
 
       /* Write entry on new 'dn' */
       if ($this->dn != "new"){
