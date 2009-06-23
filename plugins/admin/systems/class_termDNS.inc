@@ -40,22 +40,24 @@ class termDNS extends plugin
   var $dnsEntry                 = array();
   var $DNSenabled               = false;
   var $hide_dns_check_box       = FALSE;
-
+  var $namingAttr               = "cn";
+  
   /*  Terminal dns 
    */
-  function termDNS ($config, $dn,$objectClasses,$IPisMust = false)
+  function termDNS ($config, $dn,$objectClasses,$IPisMust = false, $namingAttr = "cn")
   {
     /* We need to know which objectClasses are used, to store the ip/mac
      * Because of different type of devices   
      */
     $this->objectclasses  =  $objectClasses;
     $this->IPisMust       = $IPisMust;
+    $this->namingAttr     = $namingAttr;
 
     plugin::plugin ($config, $dn);
 
-    if(isset($this->attrs['cn'][0])){
-      $this->OrigCn = preg_replace("/\\\$\$/","",$this->attrs['cn'][0]);
-      $this->cn = preg_replace("/\\\$\$/","",$this->attrs['cn'][0]);
+    if(isset($this->attrs[$this->namingAttr][0])){
+      $this->OrigCn = preg_replace("/\\\$\$/","",$this->attrs[$this->namingAttr][0]);
+      $this->cn = preg_replace("/\\\$\$/","",$this->attrs[$this->namingAttr][0]);
     }
 
  

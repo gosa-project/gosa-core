@@ -44,7 +44,7 @@ class wingeneric extends plugin
   function wingeneric ($config, $dn= NULL, $parent= NULL)
   {
     plugin::plugin ($config, $dn, $parent);
-    $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses);
+    $this->netConfigDNS = new termDNS($this->config,$this->dn,$this->objectclasses,FALSE,'uid');
     $this->netConfigDNS->acl = $this->acl;
     $this->netConfigDNS->MACisMust = FALSE;
 
@@ -115,7 +115,7 @@ class wingeneric extends plugin
     }
     
     $smarty->assign("base_select", $this->base);
-    $this->netConfigDNS->cn= $this->cn;
+    $this->netConfigDNS->cn= $this->uid;
     $smarty->assign("netconfig", $this->netConfigDNS->execute());
 
     /* Display sub dialog from network settings */
@@ -236,7 +236,7 @@ class wingeneric extends plugin
       $this->handle_post_events("modify");
     }
 
-    $this->netConfigDNS->cn = preg_replace("/\\\$\$/","",$this->cn);
+    $this->netConfigDNS->cn = preg_replace("/\\\$\$/","",$this->uid);
     $this->netConfigDNS->save($this->dn);
     show_ldap_error($ldap->get_error(), _("Saving Samba workstation failed"));
 
