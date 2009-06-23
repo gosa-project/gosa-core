@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Cajus Pollmeier <cajus@debian.org>
 Uploaders: Benoit Mortier <benoit.mortier@opensides.be>
 Build-Depends-Indep: debhelper(>= 4.1.16), dpatch
-Standards-Version: 3.7.2.0
+Standards-Version: 3.8.0
 
 Package: gosa
 Architecture: all
