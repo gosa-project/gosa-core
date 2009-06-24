@@ -52,10 +52,15 @@ class gosaSupportDaemon
     @param boolean  Connect Directly connect to daemon socket.
     @param float    Timeout The timelimit for all socket actions.
    */
-  public function __construct($connect=TRUE,$timeout=15)
+  public function __construct($connect=TRUE,$timeout=null)
   {
     #FIXME: bad idea about referencing global variables from within classes
     global $config;
+
+    // Detect timeout 
+    if($timeout == null){
+      $timeout = $config->get_cfg_value("gosaSupportTimeout",15);
+    }
 
     /* This should only be the case if we call this from setup.
         __autoload() 
