@@ -62,7 +62,7 @@ class Step_Config1 extends setup_step
   {
     $this->update_strings();
 
-    $tmp = @passwordMethod::get_available_methods();
+    $tmp = passwordMethod::get_available_methods();
     foreach($tmp['name'] as $name){
       $this->crypt_methods[$name] = $name;
     }
