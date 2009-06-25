@@ -725,8 +725,11 @@ class acl extends plugin
       /* Create sub acl if it does not exist */
       if (!isset($this->aclContents[$key])){
         $this->aclContents[$key]= array();
+      }
+      if(!isset($this->aclContents[$key][0])){
         $this->aclContents[$key][0]= '';
       }
+
       $currentAcl= $this->aclContents[$key];
 
       /* Get the overall plugin acls 
