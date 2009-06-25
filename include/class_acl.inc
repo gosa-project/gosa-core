@@ -736,16 +736,26 @@ class acl extends plugin
         $overall_acl = $currentAcl[0];
       }
 
+      // Detect configured plugins
+      $expand = count($currentAcl) > 1 || $currentAcl[0] != "";
+
       /* Object header */
 			$tname= preg_replace("/[^a-z0-9]/i","_",$name);
+
+      if($expand){
+        $back_color = "#C8C8FF";
+      }else{
+        $back_color = "#C8C8C8";
+      }
+
       if(session::global_get('js')) {
         if(isset($_SERVER['HTTP_USER_AGENT']) && 
              (preg_match("/gecko/i",$_SERVER['HTTP_USER_AGENT'])) || 
              (preg_match("/presto/i",$_SERVER['HTTP_USER_AGENT']))) {
           $display.= "\n<table style='width:100%;border:1px solid #A0A0A0' cellspacing=0 cellpadding=2>".
                      "\n  <tr>".
-                     "\n    <td style='background-color:#C8C8C8;height:1.8em;' colspan=".($cols-1)."><b>"._("Object").": $name</b></td>".
-                     "\n    <td align='right' style='background-color:#C8C8C8;height:1.8em;'>".
+                     "\n    <td style='background-color:{$back_color};height:1.8em;' colspan=".($cols-1)."><b>"._("Object").": $name</b></td>".
+                     "\n    <td align='right' style='background-color:{$back_color};height:1.8em;'>".
                      "\n    <input type='button' onclick='divtoggle(\"$tname\");' value='"._("Show/hide advanced settings")."' /></td>".
                      "\n  </tr>";
         } else if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match("/ie/i",$_SERVER['HTTP_USER_AGENT'])) {
@@ -804,6 +814,8 @@ class acl extends plugin
         }else{
         }
       }
+
+  
       foreach($splist as $attr => $dsc){
 
         /* Skip pl* attributes, they are internal... */
