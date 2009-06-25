@@ -169,6 +169,41 @@
         </div>
     </div>
 
+    <div class='step4_container'>
+        <div class='step4_name'>
+            {t}Gosa support daemon{/t}
+        </div>
+        <div class='step4_value'>
+            {if $optional.gosaSupportURI_active == FALSE}
+                <input type='checkbox' value='1' name='gosaSupportURI_active'
+                  onClick='changeState("gosaSupportURI");changeState("gosaSupportTimeout");'>
+                <input size=40 id='gosaSupportURI' name='gosaSupportURI' 
+				        	type='text' value='{$optional.gosaSupportURI}' disabled>
+            {else}
+                <input type='checkbox' value='1' name='gosaSupportURI_active' checked 
+					        onClick='changeState("gosaSupportURI");changeState("gosaSupportTimeout");'>
+                <input size=40 id='gosaSupportURI' name='gosaSupportURI' 
+        					type='text' value='{$optional.gosaSupportURI}'  >
+            {/if}
+        </div>
+    </div>
+
+    <div class='step4_container'>
+        <div class='step4_name'>
+            {t}Daemon timeout{/t}
+        </div>
+        <div class='step4_value'>
+            {if $optional.gosaSupportURI_active == FALSE}
+                <input size=40 id='gosaSupportTimeout' name='gosaSupportTimeout' 
+				        	type='text' value='{$optional.gosaSupportTimeout}' disabled>
+            {else}
+                <input size=40 id='gosaSupportTimeout' name='gosaSupportTimeout' 
+        					type='text' value='{$optional.gosaSupportTimeout}'  >
+            {/if}
+        </div>
+    </div>
+
+
     <p><b>{t}Login and session{/t}</b></p>
     <div class='step4_container'>
         <div class='step4_name'>
