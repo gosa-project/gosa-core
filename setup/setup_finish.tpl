@@ -5,9 +5,24 @@
 	<p>	
 		{$msg2}
 	</p>
-	<tt>
-	chown root:{$webgroup} {$CONFIG_DIR}/{$CONFIG_FILE}<br>
-	chmod 640 {$CONFIG_DIR}/{$CONFIG_FILE}
+
+      {if $webgroup == ""}
+{t}Depending on the user name your webserver is running on:{/t}
+<tt>
+<pre> chown root:www-data {$CONFIG_DIR}/{$CONFIG_FILE}
+ chmod 640 {$CONFIG_DIR}/{$CONFIG_FILE}
+
+or
+
+ chown root:apache {$CONFIG_DIR}/{$CONFIG_FILE}
+ chmod 640 {$CONFIG_DIR}/{$CONFIG_FILE}
+</pre>
+{else}
+<pre>
+ chown root:{$webgroup} {$CONFIG_DIR}/{$CONFIG_FILE}
+ chmod 640 {$CONFIG_DIR}/{$CONFIG_FILE}
+</pre>
+{/if} 
 	</tt>
 	<p>	
 		<input type='submit' name='getconf' value='{t}Download configuration{/t}'>

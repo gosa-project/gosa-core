@@ -53,8 +53,12 @@ class Step_Finish extends setup_step
   function execute()
   {
 
-    $info= posix_getgrgid(posix_getgid());
-    $webgroup = $info['name'];
+    if(!function_exists("posix_getgrgid")){
+      $webgroup = "";
+    }else{
+      $info= posix_getgrgid(posix_getgid());
+      $webgroup = $info['name'];
+    }
 
     /* Check if there is currently an active gosa.conf 
      */
