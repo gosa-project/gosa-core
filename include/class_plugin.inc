@@ -1234,7 +1234,7 @@ class plugin
     }else{
       $server         = $config->get_cfg_value("snapshotURI");
       $user           = $config->get_cfg_value("snapshotAdminDn");
-      $password       = $config->get_cfg_value("snapshotAdminPassword");
+      $password       = $this->config->get_credentials($config->get_cfg_value("snapshotAdminPassword"));
       $snapldapbase   = $config->get_cfg_value("snapshotBase");
 
       $ldap_to        = new ldapMultiplexer(new LDAP($user,$password, $server));
@@ -1391,7 +1391,7 @@ class plugin
     }else{
       $server         = $this->config->get_cfg_value("snapshotURI");
       $user           = $this->config->get_cfg_value("snapshotAdminDn");
-      $password       = $this->config->get_cfg_value("snapshotAdminPassword");
+      $password       = $this->config->get_credentials($this->config->get_cfg_value("snapshotAdminPassword"));
       $snapldapbase   = $this->config->get_cfg_value("snapshotBase");
       $ldap_to        = new ldapMultiplexer(new LDAP($user,$password, $server));
       $ldap_to -> cd($snapldapbase);
@@ -1449,7 +1449,7 @@ class plugin
     }else{
       $server         = $this->config->get_cfg_value("snapshotURI");
       $user           = $this->config->get_cfg_value("snapshotAdminDn");
-      $password       = $this->config->get_cfg_value("snapshotAdminPassword");
+      $password       = $this->config->get_credentials($this->config->get_cfg_value("snapshotAdminPassword"));
       $snapldapbase   = $this->config->get_cfg_value("snapshotBase");
       $ldap_to        = new ldapMultiplexer(new LDAP($user,$password, $server));
       $ldap_to -> cd($snapldapbase);
@@ -1515,7 +1515,7 @@ class plugin
     }else{
       $server         = $this->config->get_cfg_value("snapshotURI");
       $user           = $this->config->get_cfg_value("snapshotAdminDn");
-      $password       = $this->config->get_cfg_value("snapshotAdminPassword");
+      $password       = $this->config->get_credentials($this->config->get_cfg_value("snapshotAdminPassword"));
       $snapldapbase   = $this->config->get_cfg_value("snapshotBase");
       $ldap_to        = new ldapMultiplexer(new LDAP($user,$password, $server));
       $ldap_to -> cd($snapldapbase);
