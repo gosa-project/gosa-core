@@ -803,7 +803,8 @@ class plugin
       ldap_set_rebind_proc($ds, array(&$this, "rebind"));
     }
 
-    $r=ldap_bind($ds,$this->config->current['ADMINDN'], $this->config->current['ADMINPASSWORD']);
+    $pwd = $this->config->get_credentials($this->config->current['ADMINPASSWORD']);
+    $r=ldap_bind($ds,$this->config->current['ADMINDN'], $pwd);
     $sr=ldap_read($ds, LDAP::fix($src_dn), "objectClass=*");
 
     /* Fill data from LDAP */
