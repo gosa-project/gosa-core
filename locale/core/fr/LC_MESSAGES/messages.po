@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-11 11:41+0100\n"
-"PO-Revision-Date: 2009-03-14 13:02+0100\n"
+"PO-Revision-Date: 2009-06-30 10:33+0200\n"
 "Last-Translator: Benoit Mortier <benoit.mortier@opensides.be>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -4029,7 +4029,7 @@ msgstr "Contient les ACL pour ces objets: %s"
 
 #: include/class_acl.inc:537 include/class_acl.inc:541
 msgid "category ACL"
-msgstr ""
+msgstr "ACL de la catégorie"
 
 #: include/class_acl.inc:591
 #, php-format
