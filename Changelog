@@ -6,6 +6,12 @@ GOsa2 changelog
   - Improved PPD handling
   - Added more sanity checks in group management
   - Fixed switching between primary groups
+  - Dhcp now allows multiple values for options and statements 
+  - Added soa record to the dns plugin
+  - Grouping of FAI classes improved. 
+  - Add free-text input to fai packages.
+  - Updated ppd upload, allows special chars now.
+
 
 * gosa 2.6.4
   - Added missing images
