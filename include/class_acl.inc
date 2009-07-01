@@ -1205,7 +1205,7 @@ class acl extends plugin
     }
 
     if (!$ldap->success()){
-      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_MOD, get_class()));
+      msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $this->dn, LDAP_MOD, get_class()), ERROR_DIALOG);
     }
 
     /* Refresh users ACLs */
