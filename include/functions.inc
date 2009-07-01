@@ -1164,6 +1164,7 @@ function get_ou($name)
   global $config;
 
   $map = array( 
+                "roleRDN"      => "ou=roles,",
                 "ogroupRDN"      => "ou=groups,",
                 "applicationRDN" => "ou=apps,",
                 "systemRDN"     => "ou=systems,",
