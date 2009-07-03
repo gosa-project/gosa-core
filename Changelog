@@ -5,13 +5,17 @@ GOsa2 changelog
   - Updated locales
   - Improved PPD handling
   - Added more sanity checks in group management
-  - Fixed switching between primary groups
-  - Dhcp now allows multiple values for options and statements 
-  - Added soa record to the dns plugin
-  - Grouping of FAI classes improved. 
-  - Add free-text input to fai packages.
-  - Updated ppd upload, allows special chars now.
-
+  - DHCP now allows multiple values for options and statements containing
+    the same keyword
+  - Added per entry SOA record to the DNS plugin
+  - Improved grouping of FAI classes
+  - Add free-text input to FAI packages
+  - PPD upload allows special chars now
+  - Fixed config generation with sambaMachineAccountRDN
+  - Added compression robustness check for snapshots
+  - Added brasilian portuguese
+  - Updated logging on debian systems
+  - Various minor bugfixes
 
 * gosa 2.6.4
   - Added missing images
