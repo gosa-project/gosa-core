@@ -1358,7 +1358,7 @@ class plugin
 
             /* Send message if not done already */
             if(!session::is_set("snapshotFailMessageSend")){
-              ession::set("snapshotFailMessageSend",TRUE);
+              session::set("snapshotFailMessageSend",TRUE);
               msg_dialog::display(_("Configuration error"), 
                   sprintf(_("The snapshot functionality is enabled, but the required variable '%s' is not set."), 
                     $missing), ERROR_DIALOG);
