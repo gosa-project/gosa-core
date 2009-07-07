@@ -962,17 +962,12 @@ class plugin
          */
         $o_ogroup = NULL; 
         for($i = 0 ; $i < $ogroup['member']['count'] ; $i ++){
-
           $c_mem = $ogroup['member'][$i];
-  
           if(preg_match("/".preg_quote($src_dn, '/')."$/i",$c_mem)){
- 
             $d_mem = preg_replace("/".preg_quote($src_dn, '/')."$/i",$dst_dn,$ogroup['member'][$i]);
-
             if($o_ogroup == NULL){
               $o_ogroup = new ogroup($this->config,$ogroup['dn']);
             }              
-
             unset($o_ogroup->member[$c_mem]);
             $o_ogroup->member[$d_mem]= $d_mem;
           }
@@ -982,6 +977,21 @@ class plugin
         if($o_ogroup != NULL){
           $o_ogroup->save();
         }
+      }
+    }
+
+    /* Update roles to use the new entry dn
+     */
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(&(objectClass=organizationalRole)".
+        "(roleOccupant=".LDAP::prepare4filter($src_dn)."))");
+    while($attrs = $ldap->fetch()){
+      $role = new roleGeneric($this->config,$attrs['dn']);
+      $key = array_search($src_dn,$role->roleOccupant); 
+      if($key !== FALSE){
+        $role->roleOccupant[$key] = $dst_dn;
+        $role->save();
       }
     }
  
