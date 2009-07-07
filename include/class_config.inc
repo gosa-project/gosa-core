@@ -244,7 +244,8 @@ class config  {
       $cache = session::global_get('HTTP_GOSA_KEY_CACHE');
       if(!isset($cache[$creds])){
         $cache[$creds] = cred_decrypt($creds, $_SERVER['HTTP_GOSA_KEY']);
-      } 
+        session::global_set('HTTP_GOSA_KEY_CACHE',$cache);
+      }
       return ($cache[$creds]);
     }
     return ($creds);
