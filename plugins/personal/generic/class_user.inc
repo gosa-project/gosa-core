@@ -744,6 +744,19 @@ class user extends plugin
       $og->save ();
     }
 
+    /* Delete references to roles */
+    $ldap->cd ($this->config->current['BASE']);
+    $ldap->search ("(&(objectClass=organizationalRole)(roleOccupant=".LDAP::prepare4filter($this->dn)."))", array("cn"));
+    while ($ldap->fetch()){
+      $role= new roleGeneric($this->config, $ldap->getDN());
+      $key = array_search($this->dn,$role->roleOccupant);
+      if($key !== FALSE){
+        unset($role->roleOccupant[$key]);
+        $role->reload();
+        $role->save ();
+      }
+    }
+
     /* If needed, let the password method do some cleanup */
     $tmp = new passwordMethod($this->config);
     $available = $tmp->get_available_methods();
@@ -863,6 +876,7 @@ class user extends plugin
     /* Only force save of changes .... 
        If this attributes aren't changed, avoid saving.
      */
+  
     if($this->gender=="0") $this->gender ="";
     if($this->preferredLanguage=="0") $this->preferredLanguage ="";
 
