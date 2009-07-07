@@ -238,7 +238,14 @@ class config  {
   function get_credentials($creds)
   {
     if (isset($_SERVER['HTTP_GOSA_KEY'])){
-      return (cred_decrypt($creds, $_SERVER['HTTP_GOSA_KEY']));
+      if (!session::global_is_set('HTTP_GOSA_KEY_CACHE')){
+        session::global_set('HTTP_GOSA_KEY_CACHE',array());
+      }
+      $cache = session::global_get('HTTP_GOSA_KEY_CACHE');
+      if(!isset($cache[$creds])){
+        $cache[$creds] = cred_decrypt($creds, $_SERVER['HTTP_GOSA_KEY']);
+      } 
+      return ($cache[$creds]);
     }
     return ($creds);
   }
