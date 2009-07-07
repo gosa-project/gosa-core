@@ -249,7 +249,7 @@ for dir in $GOSA_DIR $GOSA_SI_DIR $GOSA_PLUGIN_DIRS; do
 	if [ "$TARGET_RELEASE" == "unstable" ]; then
 		(cd "$dir"; echo | debchange -v "${GOSA_VER}" "$RELEASE_REASON" >/dev/null 2>&1)
 	else
-		(cd "$dir"; echo | debchange -v "${GOSA_VER}-1${TARGET_RELEASE}1" -D "$TARGET_RELEASE" "$RELEASE_REASON" >/dev/null 2>&1)
+		(cd "$dir"; echo | debchange -v "${GOSA_VER}~${TARGET_RELEASE}1" -D "$TARGET_RELEASE" "$RELEASE_REASON" >/dev/null 2>&1)
 	fi
 	[ -d $dir/debian/patches ] || continue
 	echo "Creating patch list for $dir"
