@@ -9,4 +9,4 @@ Type=Application
 Terminal=false
 Name=GOsa
 X-KDE-StartupNotify=true
-Categories=Qt;KDE;Utility;System
+Categories=Qt;KDE;Utility;System;
