@@ -1045,7 +1045,10 @@ class group extends plugin
       $this->attrs['member'] = array();
       if (count($this->memberUid)){
         foreach($this->attrs['memberUid'] as $uid) {
-          $this->attrs['member'][]= $this->dnMapping[$uid];
+
+          if(isset($this->dnMapping[$uid])){
+            $this->attrs['member'][]= $this->dnMapping[$uid];
+          }
         }
       } else {
         $this->attrs['member'][]= $this->dn;
