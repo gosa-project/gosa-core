@@ -1451,6 +1451,13 @@ class group extends plugin
         $this->memberUid[] = $source['memberUid'][$i];
       }
     }
+    $this->accessTo = array();
+    if (isset($source['accessTo'])){
+      for ($i= 0; $i<$source['accessTo']['count']; $i++){
+        $tmp= $source['accessTo'][$i];
+        $this->accessTo[$tmp]= $tmp;
+      }
+    }
   }
 
 
