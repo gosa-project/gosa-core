@@ -25,7 +25,10 @@ SECTION="web"
 SI_SECTION="utils"
 TARGET_RELEASE="etch"
 MAKE_PLUGINS=""
+MAKE_GOTO=""
+GOTO=""
 NOT_RELEASED="heimdal dak dfs glpi apache2 ssh"
+GOTO_NOT_RELEASED="apache-directory-studio goto-cd libresourcepool-net-ldap-perl-1.002 libresourcepool-perl-1.0104 openproj ptc syslinux" 
 DEBIAN_PKG="remove"
 NO_SVN="use"
 EXTRACT=`pwd`
@@ -45,7 +48,8 @@ usage() {
 	  -i|--si-section   Debian section to place GOsa-SI in [$SI_SECTION]
 	  -d|--debian-pkg   Don't clear up debian packages for plugins (for developers only)
 	  -n|--no-svn       Don't extract gosa from svn (when internet connectivity is not present)
-	  -x|--extract-dir  Directory where the checkout is for no-svn 
+	  -x|--extract-dir  Directory where the checkout is for no-svn
+	  -g|--build-goto   Build the goto2 packages
 	  -h|--help         this help
 
 	EOF
@@ -60,7 +64,7 @@ for cmd in dh-make-gosa debchange dpkg-buildpackage dpkg-source svn; do
 done
 
 # Import command line parameters
-PARMS=`getopt -o e::d::b:r:s:c:i:p:n:x:,h --long branch:,changelog:,plugins:,section:,si-section:,release:,help -n "${0##*/}" -- "$@"`
+PARMS=`getopt -o e::d::b:r:s:c:i:p:n:x:g::,h --long branch:,changelog:,plugins:,section:,si-section:,release:,help -n "${0##*/}" -- "$@"`
 eval set -- "$PARMS"
 
 while true; do
@@ -85,6 +89,8 @@ while true; do
                         NO_SVN=""; shift 2;;
                 -x|--extract-dir)
                         EXTRACT=$2; shift 2;;
+                -g|--build-goto)
+                        GOTO="use"; shift 2;;
                 -h|--help)
 			usage ;;
                 --)
@@ -96,13 +102,25 @@ done
 
 if [ "$NO_SVN" = "use" ]
 then
-	echo "Loading svn information for '${BRANCH}'..."
+	echo "Loading svn information for gosa '${BRANCH}'..."
 	svn co -N https://oss.gonicus.de/repositories/gosa/${BRANCH} gosa-info/ > /dev/null
 	BRANCH_REV=$(LANG=C svn info gosa-info | sed -n -e 's/^Last Changed Rev: \([0-9]*\).*$/\1/p')
 	rm -rf gosa-info
+
+        echo "Loading svn information for goto '${BRANCH}'..."
+        svn co -N https://oss.gonicus.de/repositories/goto/${BRANCH} goto-info/ > /dev/null
+        GOTO_BRANCH_REV=$(LANG=C svn info goto-info | sed -n -e 's/^Last Changed Rev: \([0-9]*\).*$/\1/p')
+        rm -rf goto-info
+
 else
-        echo "Loading svn information for '${BRANCH}' from local checkout ..."
+        echo "Loading svn information for gosa '${BRANCH}' from local checkout ..."
 	BRANCH_REV=$(LANG=C svn info $EXTRACT/gosa-core | sed -n -e 's/^Last Changed Rev: \([0-9]*\).*$/\1/p')
+
+	if [ "$GOTO" = "use" ]
+	then
+		echo "Loading svn information for goto '${BRANCH}' from local checkout ..."
+        	GOTO_BRANCH_REV=$(LANG=C svn info $EXTRACT/goto | sed -n -e 's/^Last Changed Rev: \([0-9]*\).*$/\1/p')
+	fi
 fi
 
 if [ "$NO_SVN" = "use" ]
@@ -115,6 +133,7 @@ then
 	else
 		GOSA_VER="${VERSION}"
 	fi
+
 else
         # Load current revision from logs
 	VERSION=$(cat $EXTRACT/gosa-core/debian/changelog | head -n 1 | sed -n -e 's/.*(\([^-]*\).*/\1/p')
@@ -140,6 +159,12 @@ then
 	svn export -r "${BRANCH_REV}" https://oss.gonicus.de/repositories/gosa/${BRANCH}/gosa-core gosa-${BNAME} > /dev/null
 	svn export -r "${BRANCH_REV}" https://oss.gonicus.de/repositories/gosa/${BRANCH}/gosa-si gosa-si-${BNAME} > /dev/null
 	svn export -r "${BRANCH_REV}" https://oss.gonicus.de/repositories/gosa/${BRANCH}/gosa-plugins gosa-plugins-${BNAME} > /dev/null
+
+        if [ "$GOTO" = "use" ]
+        then
+		echo "Exporting current GOto (rev: ${GOTO_BRANCH_REV}) from '${BRANCH}'..."
+        	svn export -r "${GOTO_BRANCH_REV}" https://oss.gonicus.de/repositories/goto/${BRANCH}/ goto-${BNAME} > /dev/null
+	fi
 else
         # Export from local checkout...
         echo "Exporting current GOsa (rev: ${BRANCH_REV}) from localcheckout '${BRANCH}'..."
@@ -147,6 +172,13 @@ else
 	cp -r gosa-core gosa-${GOSA_VER}
 	mv gosa-si gosa-si-${GOSA_VER}
 	mv gosa-plugins gosa-plugins-${BNAME}
+
+        if [ "$GOTO" = "use" ]
+        then
+		echo "Exporting current GOto (rev: ${GOTO_BRANCH_REV}) from localcheckout '${BRANCH}'..."
+        	BNAME=$(basename $BRANCH)
+		mv goto goto-${BNAME}
+	fi
 fi
 
 if [ "$NO_SVN" = "use" ]
@@ -154,14 +186,9 @@ then
         VERSION=$(cat "gosa-${BNAME}/debian/changelog" | head -n 1 | sed -n -e 's/.*(\([^-]*\).*/\1/p')
 fi
 
-#if [ "$BRANCH" == "trunk" ]; then
-#	GOSA_VER="${VERSION}+svn${BRANCH_REV}"
-#else
-#	GOSA_VER="${VERSION}"
-#fi
-
 GOSA_DIR="gosa-${GOSA_VER}"
 GOSA_SI_DIR="gosa-si-${GOSA_VER}"
+GOTO_DIR="goto-${BNAME}"
 
 if [ "$NO_SVN" = "use" ]
 then
@@ -184,6 +211,11 @@ echo "cleaning svn entries from sources"
 find ${GOSA_DIR} -type d -name ".svn" -exec rm -rf {} \; >/dev/null 2>&1
 find ${GOSA_SI_DIR} -type d -name ".svn" -exec rm -rf {} \; >/dev/null 2>&1
 find gosa-plugins-${BNAME} -type d -name ".svn" -exec rm -rf {} \; >/dev/null 2>&1
+
+if [ "$GOTO" = "use" ]
+then
+	find goto-${BNAME} -type d -name ".svn" -exec rm -rf {} \; >/dev/null 2>&1
+fi
 
 echo "Creating original sources 'gosa-${GOSA_VER}'..."
 tar -c -f "gosa_${GOSA_VER}.orig.tar" "${GOSA_DIR}"
@@ -222,6 +254,21 @@ done
 
 rm -rf gosa-plugins-${BNAME}
 
+if [ "$GOTO" = "use" ]
+then
+        MAKE_GOTO=$(ls -1 goto-${BNAME}/)
+
+        for i in $GOTO_NOT_RELEASED; do
+                MAKE_GOTO=$(echo -n $MAKE_GOTO | sed "s/$i//")
+        done
+
+	for goto in $MAKE_GOTO; do
+        	mv "goto-${BNAME}/$goto" .
+	done
+
+	rm -rf goto-${BNAME}
+fi
+
 echo "Deploying patches..."
 for patch in $(find patches -type f | grep -v .svn); do
 
@@ -244,6 +291,14 @@ sed -i "s#^Section: utils#Section: $SI_SECTION#g" ${GOSA_SI_DIR}/debian/control
 for plugin in $MAKE_PLUGINS; do
 	GOSA_PLUGIN_DIRS="$GOSA_PLUGIN_DIRS gosa-plugin-$plugin-${GOSA_VER}"
 done
+
+if [ "$GOTO" = "use" ]
+then
+	for goto in $MAKE_GOTO; do
+        	GOTO_DIRS="$GOTO_DIRS $goto"
+	done
+fi
+
 for dir in $GOSA_DIR $GOSA_SI_DIR $GOSA_PLUGIN_DIRS; do
 	echo "Adapting version in $dir"
 	if [ "$TARGET_RELEASE" == "unstable" ]; then
@@ -265,11 +320,27 @@ then
 	for dir in $GOSA_DIR $GOSA_SI_DIR $GOSA_PLUGIN_DIRS; do
 		dpkg-source -b "$dir"
 	done
+
+        if [ "$GOTO" = "use" ]
+        then
+	        echo "Creating GOto sources..."
+        	for dir in $GOTO_DIRS; do
+                	dpkg-source -b "$dir"
+        	done
+	fi
 else
 	echo "Creating debian packages..."
 	for dir in $GOSA_DIR $GOSA_SI_DIR $GOSA_PLUGIN_DIRS; do
 		(cd "$dir"; dpkg-buildpackage -k$DEBSIGN_KEYID -rfakeroot -sa)
 	done
+
+        if [ "$GOTO" = "use" ]
+        then
+	        echo "Creating GOto debian packages..."
+        	for dir in $GOTO_DIRS; do
+                	(cd "$dir"; dpkg-buildpackage -k$DEBSIGN_KEYID -rfakeroot -sa)
+	        done
+	fi
 fi
 
 echo "Removing gosa snapshot..."
@@ -282,6 +353,13 @@ else
 	for dir in $GOSA_DIR $GOSA_SI_DIR $GOSA_PLUGIN_DIRS; do
 	rm -rf "$dir"
 	done
+
+        if [ "$GOTO" = "use" ]
+        then
+	        for dir in $GOTO_DIRs; do
+        	rm -rf "$dir"
+        	done
+	fi
 fi
 
 
