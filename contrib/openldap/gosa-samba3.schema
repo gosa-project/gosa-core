@@ -265,9 +265,9 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.12.45 NAME 'gotoLastSystem'
 
 attributetype ( 1.3.6.1.4.1.10098.1.1.6.2 NAME 'academicTitle'
         DESC 'Field to represent the academic title'
-        EQUALITY caseIgnoreIA5Match
-	SUBSTR caseIgnoreIA5SubstringsMatch
-        SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
+        EQUALITY caseIgnoreMatch
+        SUBSTR caseIgnoreSubstringsMatch
+        SYNTAX 1.3.6.1.4.1.1466.115.121.1.15)
 
 attributetype ( 1.3.6.1.4.1.15305.2.1 NAME ( 'gender' 'sex' )
         DESC    'Gender: M for male, F for female'
