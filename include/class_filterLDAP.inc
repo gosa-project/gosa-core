@@ -5,14 +5,7 @@ class filterLDAP {
   static function query($base, $scope, $filter, $attributes, $category, $objectStorage= "", $objectBase= "")
   {
     global $config;
-
-    echo "Base: $base<br>";
-    echo "Scope: $scope<br>";
-    echo "filter: $filter<br>";
-    print_a($attributes);
-
     $ldap= $config->get_ldap_link(TRUE);
-
     $result= filterLDAP::get_list($base, $scope, $filter, $attributes,
                                   $category, $objectStorage, $objectBase,
                                   GL_SUBSEARCH | GL_SIZELIMIT);

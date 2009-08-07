@@ -330,16 +330,16 @@ class filter {
         $e_unset= (string)$element->unset;
 
         if ($this->elementValues[$tag] == "") {
-          $e_unset= preg_replace('/\$/', $this->elementValues[$tag], $e_unset);
+          $e_unset= preg_replace('/\$/', normalizeLdap($this->elementValues[$tag]), $e_unset);
           $filter= preg_replace("/\\$$tag/", $e_unset, $filter);
         } else {
-          $e_set= preg_replace('/\$/', $this->elementValues[$tag], $e_set);
+          $e_set= preg_replace('/\$/', normalizeLdap($this->elementValues[$tag]), $e_set);
           $filter= preg_replace("/\\$$tag/", $e_set, $filter);
         }
       }
 
-      $result= call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes,
-                               $this->category, $this->objectStorage, $this->objectBase);
+      $result= array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes,
+                               $this->category, $this->objectStorage, $this->objectBase));
     }
     
 
@@ -349,7 +349,14 @@ class filter {
 
   function isValid()
   {
-    return (false);
+    foreach ($this->elements as $tag => $element) {
+      if (isset($element->regex)){
+        if (!preg_match('/'.(string)$element->regex.'/', $this->elementValues[$tag])){
+          return false;
+        }
+      }
+    }
+    return true;
   }
 
 
