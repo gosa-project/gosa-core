@@ -31,5 +31,7 @@
   <script language="javascript" src="include/layersmenu.js" type="text/javascript"></script>
   <script language="javascript" src="include/prototype.js" type="text/javascript"></script>
   <script language="javascript" src="include/scriptaculous.js" type="text/javascript"></script>
+  <script language="javascript" src="include/effects.js" type="text/javascript"></script>
+  <script language="javascript" src="include/controls.js" type="text/javascript"></script>
 </head>
 

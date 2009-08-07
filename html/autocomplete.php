@@ -37,15 +37,15 @@ if (!session::global_is_set('ui')){
 if(isset($_POST['NAME'])){
 
   /* Get configuration from session */
-  $config= $_SESSION['ui'];
+  $config= $_SESSION['config'];
   $ldap= $config->get_ldap_link();
   $ldap->cd($config->current['BASE']);
   $n= normalizeLDAP($_POST['NAME']);
-  $res= $ldap->search ("(&(objectClass=gosaAccount)(cn=*$n*)(givenName=*$n*)(sn=*$n*)(uid=*$n*))", array("cn"));
+  $ldap->search ("(&(objectClass=gosaAccount)(|(cn=*$n*)(givenName=*$n*)(sn=*$n*)(uid=*$n*)))", array("cn"));
 
   echo '<ul>';
-  foreach($res as $attrs){
-    echo '<li>'.$line['cn'][0].'</li>';
+  while ($attrs= $ldap->fetch()){
+    echo '<li>'.$attrs['cn'][0].'</li>';
   }
   echo '</ul>';
 }

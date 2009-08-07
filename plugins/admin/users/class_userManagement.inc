@@ -968,7 +968,6 @@ class userManagement extends plugin
     }
   
     /* Return rendered main page */
-        /* Display dialog with system list */
     $this->DivListUsers->parent = $this;
     $this->DivListUsers->execute();
 
@@ -978,6 +977,22 @@ class userManagement extends plugin
     }
     $this->reload();
     $this->DivListUsers->setEntries($this->list);
+
+    # FILTER Test #################################################
+    #$filter = new filter(CONFIG_DIR."/filters/user-filter.xml");
+    #$filter->setObjectStorage(get_people_ou());
+    #$filter->setCategory("users");
+    #$filter->setCurrentBase($this->DivListUsers->selectedBase);
+    #$filter->update();
+    #if (!$filter->isValid()){
+    #  msg_dialog::display(_("Filter error"), _("The filter is uncomplete!"), ERROR_DIALOG);
+    #} else {
+    #  print "Filter results:";
+    #  print_a($filter->query());
+    #}
+    #return($filter->renderFilter().$this->DivListUsers->Draw());
+    ################################################### FILTER Test
+
     return($this->DivListUsers->Draw());
   }
 
