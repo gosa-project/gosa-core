@@ -52,7 +52,7 @@
     <type>checkbox</type>
     <tag>TEMPLATE</tag>
     <default></default>
-    <unset>(!(objectClass=gosaUserTemplate))</unset>
+    <unset>(&amp;(!(objectClass=gosaUserTemplate)(!(objectClass=gosaAccount))))</unset>
     <set>(objectClass=gosaUserTemplate)</set>
   </element>
 
