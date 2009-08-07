@@ -1565,13 +1565,31 @@ div.infoMsgDialog {
 	position:absolute;
 }
 
-.autocomplete{
-  border: 1px solid #000;
+div.autocomplete {
+  position:absolute;
+  width:250px;
   background-color: #FFF;
+  border:1px solid #AAA;
+  margin:0;
+  padding:0;
 }
 
-.autocomplete li:hover{
-  background: #555;
-  color: #DDD;
+div.autocomplete ul {
+  list-style-type:none;
+  margin:0;
+  padding:0;
+}
+
+div.autocomplete ul li {
+  list-style-type:none;
+  display:block;
+  margin:0;
+  padding:2px;
+  padding-left:4px;
+  cursor:pointer;
+}
+
+div.autocomplete li:hover{
+  background-color: #F0F0F0;
 }
 
