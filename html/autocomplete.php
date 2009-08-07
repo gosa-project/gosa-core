@@ -29,20 +29,26 @@ session::global_set('errorsAlreadyPosted',array());
 
 /* Logged in? Simple security check */
 if (!session::global_is_set('ui')){
-  new log("security","unknown","",array(),"Error: getFAIstatus.php called without session") ;
+  new log("security","unknown","",array(),"Error: autocomplete.php called without session") ;
   header ("Location: index.php");
   exit;
 }
 
-/* There must be a mac address given */
-if(!isset($_GET['mac'])){
-	return;
+if(isset($_POST['NAME'])){
+
+  /* Get configuration from session */
+  $config= $_SESSION['ui'];
+  $ldap= $config->get_ldap_link();
+  $ldap->cd($config->current['BASE']);
+  $n= normalizeLDAP($_POST['NAME']);
+  $res= $ldap->search ("(&(objectClass=gosaAccount)(cn=*$n*)(givenName=*$n*)(sn=*$n*)(uid=*$n*))", array("cn"));
+
+  echo '<ul>';
+  foreach($res as $attrs){
+    echo '<li>'.$line['cn'][0].'</li>';
+  }
+  echo '</ul>';
 }
 
-$config = session::global_get("config");
-$o =  new gosaSupportDaemon();
-$res = $o->get_entries_by_mac(split(",",$_GET['mac']));
-foreach($res as $entry){
-	echo $entry['MACADDRESS']."|".$entry['PROGRESS']."\n";
-}
+
 ?>
