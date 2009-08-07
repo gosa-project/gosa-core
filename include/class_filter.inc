@@ -6,8 +6,6 @@ class filter {
   var $elements= array();
   var $elementValues= array();
   var $alphabetElements= array();
-  var $search;
-  var $definition;
   var $category= "";
   var $objectStorage= array();
   var $objectBase= "";
@@ -18,8 +16,7 @@ class filter {
   var $baseMode= false;
   var $scopeMode= "auto";
   var $alphabet= null;
-  var $templatePath= "";
-  var $target= "";
+
 
   function filter($filename)
   {
@@ -28,83 +25,67 @@ class filter {
     }
   }
 
+
   function load($filename)
   {
-    // Load data into array
-    $xmlData= simplexml_load_file($filename);
-    if ($xmlData === false) {
+    $contents = file_get_contents($filename);
+    $this->xmlData= xml::xml2array($contents, 1);
+
+    if (!isset($this->xmlData['filter'])) {
       return false;
     }
 
-    // Load definition
-    if (isset($xmlData->definition)) {
-      foreach ($xmlData->definition as $entry) {
-        if (!isset($entry->target) || !isset($entry->template)) {
-          return false;
-        }
-
-        // Move information
-        $this->templatePath= (string)$entry->template;
-        $this->target= (string)$entry->target;
-
-        // One is enough
-        break;
-      }
-    }
+    $this->xmlData= $this->xmlData["filter"];
 
     // Load filter
-    if (isset($xmlData->search)) {
-      foreach ($xmlData->search as $entry) {
-        if (!isset($entry->query) || !isset($entry->base) || !isset($entry->scope)) {
-          return false;
-        }
-
-        // Move information
-        $this->baseMode= (string)$entry->base;
-        $this->scopeMode= (string)$entry->scope;
-        $this->query= $entry->query;
-
-        // One is enough
-        break;
+    if (isset($this->xmlData['search'])) {
+      if (!isset($this->xmlData['search']['query'][0])){
+        $this->xmlData['search']['query']= array($this->xmlData['search']['query']);
       }
+
+      // Move information
+      $entry= $this->xmlData['search'];
+      $this->baseMode= $entry['base'];
+      $this->scopeMode= $entry['scope'];
+      $this->query= $entry['query'];
+    } else {
+      return false;
     }
 
     // Generate formular data
-    if (isset($xmlData->element)) {
-      foreach ($xmlData->element as $element) {
+    if (isset($this->xmlData['element'])) {
+      if (!isset($this->xmlData['element'][0])){
+        $this->xmlData['element']= array($this->xmlData['element']);
+      }
+      foreach ($this->xmlData['element'] as $element) {
 
         // Ignore elements without type
-        if (!isset($element->type)) {
+        if (!isset($element['type']) || !isset($element['tag'])) {
           next;
         }
 
-        $tag= (string)$element->tag;
+        $tag= $element['tag'];
+
+        // Fix arrays
+        if (isset($element['value']) && !isset($element['value'][0])) {
+          $element['value']= array($element['value']);
+        }
 
         // Store element for quick access
         $this->elements[$tag] = $element;
 
         // Preset elementValues with default values if exist
-        if (isset($element->default)) {
-          $this->elementValues[$tag] = (string)$element->default;
+        if (isset($element['default']) && !is_array($element['default'])) {
+          $this->elementValues[$tag] = $element['default'];
         } else {
           $this->elementValues[$tag] = "";
         }
 
         // Does this element react on alphabet links?
-        if (isset($element->alphabet) && (string)$element->alphabet == "true") {
+        if (isset($element['alphabet']) && $element['alphabet'] == "true") {
           $this->alphabetElements[]= $tag;
         }
       }
-    }
-
-    // Save definition
-    if (isset($xmlData->definition)) {
-     $this->definition = $xmlData->definition;
-    }
-
-    // Save search
-    if (isset($xmlData->search)) {
-     $this->search = $xmlData->search;
     }
 
     return true;  
@@ -113,16 +94,16 @@ class filter {
 
   function getTextfield($element)
   {
-    $tag= (string)$element->tag;
+    $tag= $element['tag'];
     $result= "<input class='filter_textfield' id='$tag' name='$tag' type='text' size='30' maxlength='30' value='".$this->elementValues[$tag]."'>";
-    if (isset($element->autocomplete)) {
+    if (isset($element['autocomplete'])) {
       $frequency= "0.5";
       $characters= "1";
-      if (isset($element->autocomplete->frequency)) {
-        $frequency= (string)$element->autocomplete->frequency;
+      if (isset($element['autocomplete']['frequency'])) {
+        $frequency= $element['autocomplete']['frequency'];
       }
-      if (isset($element->autocomplete->characters)) {
-        $characters= (string)$element->autocomplete->characters;
+      if (isset($element['autocomplete']['characters'])) {
+        $characters= $element['autocomplete']['characters'];
       }
       $result.= "<div id='autocomplete$tag' class='autocomplete'></div>".
                 "<script type='text/javascript'>".
@@ -135,7 +116,7 @@ class filter {
 
   function getCheckbox($element)
   {
-    $tag= (string)$element->tag;
+    $tag= $element['tag'];
     $checked= "";
     if ($this->elementValues[$tag] == "true") {
       $checked= " checked";
@@ -148,13 +129,13 @@ class filter {
 
   function getCombobox($element)
   {
-    $result= "<select name='".$element->tag."' size='1' onClick='document.mainform.submit();'>";
-    foreach ($element->value as $key=>$value) {
+    $result= "<select name='".$element['tag']."' size='1' onClick='document.mainform.submit();'>";
+    foreach ($element['value'] as $value) {
       $selected= "";
-      if ($this->elementValues[(string)$element->tag] == $value->key) {
+      if ($this->elementValues[$element['tag']] == $value['key']) {
         $selected= " selected";
       }
-      $result.= "<option value='".$value->key."'$selected>{t}".$value->set."{/t}</option>";
+      $result.= "<option value='".$value['key']."'$selected>{t}".$value['set']."{/t}</option>";
     }
     $result.= "</select>";
 
@@ -292,7 +273,7 @@ class filter {
     // Load template and replace elementsHtml[]
     foreach ($this->elements as $tag => $element) {
       $htmlCode= "";
-      switch ($element->type) {
+      switch ($element['type']) {
         case "textfield":
           $htmlCode = $this->getTextfield($element);
           break;
@@ -312,7 +293,7 @@ class filter {
     }
 
     // Load template
-    return ("<input type='hidden' name='FILTER_LOADED' value='1'>".$smarty->fetch(get_template_path("filter/$this->templatePath")));
+    return ("<input type='hidden' name='FILTER_LOADED' value='1'>".$smarty->fetch(get_template_path("filter/".$this->xmlData['definition']['template'])));
   }
 
 
@@ -323,27 +304,27 @@ class filter {
 
     // Go thru all queries and merge results
     foreach ($this->query as $query) {
-      if (!isset($query->backend) || !isset($query->filter) || !isset($query->attribute)) {
+      if (!isset($query['backend']) || !isset($query['filter']) || !isset($query['attribute'])) {
         die("No backend specified in search config.");
       }
 
       // Is backend available?
-      $backend= "filter".(string)$query->backend;
+      $backend= "filter".$query['backend'];
       if (!isset($class_mapping["$backend"])) {
         die("Invalid backend specified in search config.");
       }
 
       // Load filter and attributes
-      $filter= $query->filter;
-      $attributes= array();
-      foreach($query->attribute as $attr) {
-        $attributes[]= (string)$attr;
-      }
+      $filter= $query['filter'];
+      $attributes= $query['attribute'];
 
       // Generate final filter
       foreach ($this->elements as $tag => $element) {
-        $e_set= (string)$element->set;
-        $e_unset= (string)$element->unset;
+        if (!isset($element['set']) || !isset($element['unset'])) {
+          next;
+        }
+        $e_set= is_array($element['set'])?"":$element['set'];
+        $e_unset= is_array($element['unset'])?"":$element['unset'];
 
         if ($this->elementValues[$tag] == "") {
           $e_unset= preg_replace('/\$/', normalizeLdap($this->elementValues[$tag]), $e_unset);
