@@ -324,7 +324,7 @@ class filter {
       // Generate final filter
       foreach ($this->elements as $tag => $element) {
         if (!isset($element['set']) || !isset($element['unset'])) {
-          next;
+          continue;
         }
         $e_set= is_array($element['set'])?"":$element['set'];
         $e_unset= is_array($element['unset'])?"":$element['unset'];
