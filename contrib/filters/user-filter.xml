@@ -96,7 +96,8 @@
     <default>*</default>
     <value>
       <key>*</key>
-      <set>Alle</set>
+      <set>All</set>
+      <set xml:lang="de">Alle</set>
     </value>
     <autocomplete>
       <backend>LDAP</backend>
