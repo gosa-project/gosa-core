@@ -4,7 +4,7 @@ class filterLDAP {
 
   static function query($base, $scope, $filter, $attributes, $category, $objectStorage= "", $objectBase= "")
   {
-    global $config;
+    $config= session::global_get('config');
     $ldap= $config->get_ldap_link(TRUE);
     $result= filterLDAP::get_list($base, $scope, $filter, $attributes,
                                   $category, $objectStorage, $objectBase,
@@ -16,7 +16,8 @@ class filterLDAP {
   static function get_list($base, $scope, $filter, $attributes, $category,
                            $objectStorage= array(), $objectBase= "", $flags= GL_SUBSEARCH)
   {
-    global $config, $ui;
+    $config= session::global_get('config');
+    $ui= session::global_get('ui');
     $departments= array();
 
     /* Get LDAP link */
@@ -166,7 +167,8 @@ class filterLDAP {
 
   function get_list_old($filter, $category, $base= "", $attributes= array(), $flags= GL_SUBSEARCH)
   {
-    global $config, $ui;
+    $config= session::global_get('config');
+    $ui= session::global_get('ui');
   
     /* Get LDAP link */
     $ldap= $config->get_ldap_link($flags & GL_SIZELIMIT);
@@ -221,7 +223,6 @@ class filterLDAP {
         }
       }
     }
-  
     return ($result);
   }
 

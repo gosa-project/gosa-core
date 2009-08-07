@@ -6,6 +6,7 @@ class filter {
   var $elements= array();
   var $elementValues= array();
   var $alphabetElements= array();
+  var $autocompleter= array();
   var $category= "";
   var $objectStorage= array();
   var $objectBase= "";
@@ -109,6 +110,8 @@ class filter {
                 "<script type='text/javascript'>".
                 "new Ajax.Autocompleter('$tag', 'autocomplete$tag', 'autocomplete.php', { minChars: $characters, frequency: $frequency });".
                 "</script>";
+
+       $this->autocompleters[$tag]= $element['autocomplete'];
     }
     return $result;
   }
@@ -394,6 +397,52 @@ class filter {
     // Save scope if needed
     if ($this->scopeMode == "auto") {
       $this->scope= isset($_POST['SCOPE'])?"sub":"one";
+    }
+  }
+
+
+  function processAutocomplete()
+  {
+    global $class_mapping;
+    $result= array();
+
+    foreach ($this->autocompleters as $tag => $config) {
+      if(isset($_POST[$tag])){
+      
+        // Is backend available?
+        $backend= "filter".$config['backend'];
+        if (!isset($class_mapping["$backend"])) {
+          die("Invalid backend specified in search config.");
+        }
+
+        // Load filter and attributes
+        $filter= $config['filter'];
+        $attributes= $config['attribute'];
+        if (!is_array($attributes)) {
+          $attributes= array($attributes);
+        }
+
+        // Make filter
+        $filter= preg_replace("/\\$$tag/", normalizeLDAP($_POST[$tag]), $filter);
+        $result= call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes,
+                             $this->category, $this->objectStorage, $this->objectBase);
+
+        echo '<ul>';
+        foreach ($result as $entry) {
+          foreach ($attributes as $attribute) {
+            if (is_array($entry[$attribute])) {
+              for ($i= 0; $i<$entry[$attribute]['count']; $i++) {
+                echo '<li>'.$entry[$attribute][$i].'</li>';
+              }
+            } else {
+              echo '<li>'.$entry[$entry][$attribute].'</li>';
+            }
+          }
+        }
+
+        echo '</ul>';
+      }
+
     }
   }
 
