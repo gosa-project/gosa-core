@@ -113,19 +113,35 @@ class filter {
 
   function getTextfield($element)
   {
-    $result= "<input class='filter_textfield' name='$element' type='text' size='30' maxlength='30' value='".$this->elementValues[$element]."'>";
+    $tag= (string)$element->tag;
+    $result= "<input class='filter_textfield' id='$tag' name='$tag' type='text' size='30' maxlength='30' value='".$this->elementValues[$tag]."'>";
+    if (isset($element->autocomplete)) {
+      $frequency= "0.5";
+      $characters= "1";
+      if (isset($element->autocomplete->frequency)) {
+        $frequency= (string)$element->autocomplete->frequency;
+      }
+      if (isset($element->autocomplete->characters)) {
+        $characters= (string)$element->autocomplete->characters;
+      }
+      $result.= "<div id='autocomplete$tag' class='autocomplete'></div>".
+                "<script type='text/javascript'>".
+                "new Ajax.Autocompleter('$tag', 'autocomplete$tag', 'autocomplete.php', { minChars: $characters, frequency: $frequency });".
+                "</script>";
+    }
     return $result;
   }
 
 
   function getCheckbox($element)
   {
+    $tag= (string)$element->tag;
     $checked= "";
-    if ($this->elementValues[$element] == "true") {
+    if ($this->elementValues[$tag] == "true") {
       $checked= " checked";
     }
 
-    $result= "<input class='filter_checkbox' name='$element' type='checkbox' onClick='document.mainform.submit();' value='true'$checked>";
+    $result= "<input class='filter_checkbox' name='$tag' type='checkbox' onClick='document.mainform.submit();' value='true'$checked>";
     return $result;
   }
 
@@ -278,11 +294,11 @@ class filter {
       $htmlCode= "";
       switch ($element->type) {
         case "textfield":
-          $htmlCode = $this->getTextfield($tag);
+          $htmlCode = $this->getTextfield($element);
           break;
 
         case "checkbox":
-          $htmlCode = $this->getCheckbox($tag);
+          $htmlCode = $this->getCheckbox($element);
           break;
 
         case "combobox":
