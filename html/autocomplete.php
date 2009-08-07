@@ -34,21 +34,10 @@ if (!session::global_is_set('ui')){
   exit;
 }
 
-if(isset($_POST['NAME'])){
-
-  /* Get configuration from session */
-  $config= $_SESSION['config'];
-  $ldap= $config->get_ldap_link();
-  $ldap->cd($config->current['BASE']);
-  $n= normalizeLDAP($_POST['NAME']);
-  $ldap->search ("(&(objectClass=gosaAccount)(|(cn=*$n*)(givenName=*$n*)(sn=*$n*)(uid=*$n*)))", array("cn"));
-
-  echo '<ul>';
-  while ($attrs= $ldap->fetch()){
-    echo '<li>'.$attrs['cn'][0].'</li>';
-  }
-  echo '</ul>';
+/* Is there a filter object arround? */
+if (session::is_set("autocomplete")){
+  $filter= session::get("autocomplete");
+  $filter->processAutocomplete();
 }
-
 
 ?>
