@@ -14,6 +14,7 @@ class filter {
   var $bases= array();
   var $scope= "";
   var $query;
+  var $initial= false;
   var $baseMode= false;
   var $scopeMode= "auto";
   var $alphabet= null;
@@ -51,6 +52,11 @@ class filter {
       $this->query= $entry['query'];
     } else {
       return false;
+    }
+
+    // Transfer initial value
+    if (isset($this->xmlData['definition']['initial']) && $this->xmlData['definition']['initial'] == "true"){
+      $this->initial= true;
     }
 
     // Generate formular data
@@ -133,13 +139,55 @@ class filter {
   function getCombobox($element)
   {
     $result= "<select name='".$element['tag']."' size='1' onClick='document.mainform.submit();'>";
+
+    // Fill with presets
     foreach ($element['value'] as $value) {
       $selected= "";
       if ($this->elementValues[$element['tag']] == $value['key']) {
         $selected= " selected";
       }
-      $result.= "<option value='".$value['key']."'$selected>{t}".$value['set']."{/t}</option>";
+
+      // Handle translations
+      if (is_array($value['set'])) {
+        $li= null;
+
+        // Get language index if available
+        $lang= preg_replace('/_.*$/', '', $GLOBALS['t_language']);
+        $mapper= array();
+        foreach($value['set'] as $index => $lv){
+          if (preg_match('/_attr$/', $index) && isset($lv['xml:lang']) && $lv['xml:lang'] == $lang) {
+            $li= preg_replace('/_attr$/', '', $index);
+            if (isset($mapper[$li])) {
+              unset($mapper[$li]);
+            }
+          } else {
+            $mapper[$index]= $index;
+          }
+        }
+
+        // Use some default if no index is available
+        if (!$li) {
+          $li= array_shift($mapper);
+        }
+
+        $result.= "<option value='".$value['key']."'$selected>".$value['set'][$li]."</option>";
+      } else {
+        $result.= "<option value='".$value['key']."'$selected>".$value['set']."</option>";
+      }
     }
+
+    // Use autocompleter for additional data
+    if (isset($element['autocomplete'])) {
+      $list= $this->getCompletitionList($element['autocomplete'], $element['tag']);
+      foreach ($list as $value) {
+        $selected= "";
+        if ($this->elementValues[$element['tag']] == $value) {
+          $selected= " selected";
+        }
+        $result.= "<option value='$value'$selected>$value</option>";
+      }
+    }
+
     $result.= "</select>";
 
     return $result;
@@ -296,7 +344,7 @@ class filter {
     }
 
     // Load template
-    return ("<input type='hidden' name='FILTER_LOADED' value='1'>".$smarty->fetch(get_template_path("filter/".$this->xmlData['definition']['template'])));
+    return ("<input type='hidden' name='FILTER_LOADED' value='1'>".$smarty->fetch(get_template_path($this->xmlData['definition']['template'], true)));
   }
 
 
@@ -401,6 +449,51 @@ class filter {
   }
 
 
+  function getCompletitionList($config, $tag, $value="*")
+  {
+    global $class_mapping;
+    $res= array();
+
+    // Is backend available?
+    $backend= "filter".$config['backend'];
+    if (!isset($class_mapping["$backend"])) {
+      die("Invalid backend specified in search config.");
+    }
+
+    // Load filter and attributes
+    $filter= $config['filter'];
+    $attributes= $config['attribute'];
+    if (!is_array($attributes)) {
+      $attributes= array($attributes);
+    }
+
+    // Make filter
+    $filter= preg_replace("/\\$$tag/", normalizeLDAP($value), $filter);
+    if (isset($config['base']) && isset($config['scope'])
+        && isset($config['category']) && isset($config['objectbase']) ) {
+      $result= call_user_func(array($backend, 'query'), $config['base'], $config['scope'], $filter, $attributes,
+                           $config["category"], $config["objectbase"]);
+    } else {
+      $result= call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes,
+                           $this->category, $this->objectStorage, $this->objectBase);
+    }
+
+    foreach ($result as $entry) {
+      foreach ($attributes as $attribute) {
+        if (is_array($entry[$attribute])) {
+          for ($i= 0; $i<$entry[$attribute]['count']; $i++) {
+            $res[]= $entry[$attribute][$i];
+          }
+        } else {
+          $res[]= $entry[$attribute];
+        }
+      }
+    }
+
+    return $res;
+  }
+
+
   function processAutocomplete()
   {
     global $class_mapping;
@@ -408,36 +501,11 @@ class filter {
 
     foreach ($this->autocompleters as $tag => $config) {
       if(isset($_POST[$tag])){
-      
-        // Is backend available?
-        $backend= "filter".$config['backend'];
-        if (!isset($class_mapping["$backend"])) {
-          die("Invalid backend specified in search config.");
-        }
-
-        // Load filter and attributes
-        $filter= $config['filter'];
-        $attributes= $config['attribute'];
-        if (!is_array($attributes)) {
-          $attributes= array($attributes);
-        }
-
-        // Make filter
-        $filter= preg_replace("/\\$$tag/", normalizeLDAP($_POST[$tag]), $filter);
-        $result= call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes,
-                             $this->category, $this->objectStorage, $this->objectBase);
+        $result= $this->getCompletitionList($config, $tag, $_POST[$tag]);
 
         echo '<ul>';
         foreach ($result as $entry) {
-          foreach ($attributes as $attribute) {
-            if (is_array($entry[$attribute])) {
-              for ($i= 0; $i<$entry[$attribute]['count']; $i++) {
-                echo '<li>'.$entry[$attribute][$i].'</li>';
-              }
-            } else {
-              echo '<li>'.$entry[$entry][$attribute].'</li>';
-            }
-          }
+          echo '<li>'.$entry.'</li>';
         }
 
         echo '</ul>';

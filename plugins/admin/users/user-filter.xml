@@ -3,7 +3,8 @@
 <filter>
   <definition>
     <target>users</target>
-    <template>users.tpl</template>
+    <template>user-filter.tpl</template>
+    <initial>true</initial>
   </definition>
 
   <search>
@@ -101,6 +102,10 @@
     </value>
     <autocomplete>
       <backend>LDAP</backend>
+      <base>dc=gonicus,dc=de</base>
+      <scope>sub</scope>
+      <category>roles</category>
+      <objectbase>ou=roles</objectbase>
       <filter>(objectClass=organizationalRole)</filter>
       <attribute>cn</attribute>
       <key>cn</key>

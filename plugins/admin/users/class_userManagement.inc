@@ -979,11 +979,12 @@ class userManagement extends plugin
     $this->DivListUsers->setEntries($this->list);
 
     # FILTER Test #################################################
-    #$filter = new filter(CONFIG_DIR."/filters/user-filter.xml");
+    #$filter = new filter(get_template_path("user-filter.xml", true));
     #$filter->setObjectStorage(get_people_ou());
     #$filter->setCategory("users");
     #$filter->setCurrentBase($this->DivListUsers->selectedBase);
     #$filter->update();
+    #session::set('autocomplete', $filter);
     #if (!$filter->isValid()){
     #  msg_dialog::display(_("Filter error"), _("The filter is uncomplete!"), ERROR_DIALOG);
     #} else {
