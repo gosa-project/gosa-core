@@ -99,7 +99,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
               </a>
             </td>
             <td align=right>
-              <button onClick='toggle(\"errorbox\")'>".
+              <button onClick='GOsa_toggle(\"errorbox\")'>".
                 _("Toggle information")."
               </button>
             </td>

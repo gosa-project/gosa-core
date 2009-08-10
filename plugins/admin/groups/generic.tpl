@@ -199,7 +199,7 @@
 	<tr>
 	 <td colspan="2">
     <input type="checkbox" name="use_trustmode" {if $use_trustmode} checked {/if}
-        class="center" onClick="toggle('div_trustmode');">
+        class="center" onClick="GOsa_toggle('div_trustmode');">
 		    {t}Trust mode{/t}&nbsp;
 	<div {if !$use_trustmode} style="visibility:hidden;" {/if} id="div_trustmode">
     {render acl=$trustmodeACL}

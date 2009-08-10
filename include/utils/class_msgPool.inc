@@ -234,7 +234,7 @@ class msgPool
     if ($min == ""){
       return (sprintf(_("Value for '%s' is too large!"), $name));
     } else {
-      return (sprintf(_("'%s' must be smaller than %d!"), $name, $min));
+      return (sprintf(_("'%s' must be smaller than %s!"), $name, $min));
     }
   }
 

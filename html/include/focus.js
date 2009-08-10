@@ -256,7 +256,7 @@ function show(element) {
   document.poppedLayer.style.visibility = "visible";
 }
 
-function toggle(element) {
+function GOsa_toggle(element) {
   if (browserType == "gecko" )
      document.poppedLayer = document.getElementById(element);
   else if (browserType == "ie")
@@ -286,7 +286,7 @@ function js_check(form) {
 	form.javascript.value = 'true';
 }
 
-function divtoggle(element) {
+function divGOsa_toggle(element) {
 	var cell;
 	var cellname="tr_"+(element);
 

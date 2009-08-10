@@ -363,6 +363,9 @@ if (session::is_set('errors')){
   $smarty->assign("errors", session::get('errors'));
 }
 if ($error_collector != ""){
+
+  echo htmlentities($error_collector);
+
   $smarty->assign("php_errors", preg_replace("/%BUGBODY%/",$error_collector_mailto,$error_collector)."</div>");
 } else {
   $smarty->assign("php_errors", "");
