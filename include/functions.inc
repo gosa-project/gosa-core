@@ -88,6 +88,7 @@ define ("DEBUG_CONFIG", 64);
 define ("DEBUG_ACL",    128);
 define ("DEBUG_SI",     256);
 define ("DEBUG_MAIL",   512); // mailAccounts, imap, sieve etc.
+define ("DEBUG_FAI",   1024); // FAI (incomplete)
 
 /* Rewrite german 'umlauts' and spanish 'accents'
    to get better results */
