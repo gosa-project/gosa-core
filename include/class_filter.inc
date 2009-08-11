@@ -59,6 +59,11 @@ class filter {
       $this->initial= true;
     }
 
+    // Transfer category
+    if (isset($this->xmlData['definition']['category'])){
+      $this->category= $this->xmlData['definition']['category'];
+    }
+
     // Generate formular data
     if (isset($this->xmlData['element'])) {
       if (!isset($this->xmlData['element'][0])){
@@ -149,28 +154,7 @@ class filter {
 
       // Handle translations
       if (is_array($value['set'])) {
-        $li= null;
-
-        // Get language index if available
-        $lang= preg_replace('/_.*$/', '', $GLOBALS['t_language']);
-        $mapper= array();
-        foreach($value['set'] as $index => $lv){
-          if (preg_match('/_attr$/', $index) && isset($lv['xml:lang']) && $lv['xml:lang'] == $lang) {
-            $li= preg_replace('/_attr$/', '', $index);
-            if (isset($mapper[$li])) {
-              unset($mapper[$li]);
-            }
-          } else {
-            $mapper[$index]= $index;
-          }
-        }
-
-        // Use some default if no index is available
-        if (!$li) {
-          $li= array_shift($mapper);
-        }
-
-        $result.= "<option value='".$value['key']."'$selected>".$value['set'][$li]."</option>";
+        $result.= "<option value='".$value['key']."'$selected>".xml::getLocalizedAttribute($value['set'], $GLOBALS['t_language'])."</option>";
       } else {
         $result.= "<option value='".$value['key']."'$selected>".$value['set']."</option>";
       }
@@ -226,11 +210,6 @@ class filter {
 
   function setObjectBase($base) {
     $this->objectBase= $base;    
-  }
-
-
-  function setCategory($category) {
-    $this->category= $category;    
   }
 
 
@@ -313,7 +292,7 @@ class filter {
   }
 
 
-  function renderFilter()
+  function render()
   {
     $smarty= get_smarty();
     $smarty->assign("ALPHABET", $this->renderAlphabet());

@@ -143,4 +143,35 @@ class xml {
     
     return($xml_array);
   }
+
+
+  static function getLocalizedAttribute($attribute, $lang)
+  {
+    // Return directly if there's no lang code
+    if (!is_array($attribute)) {
+      return($attribute);
+    }
+
+    // Get language index if available
+    $lang= preg_replace('/_.*$/', '', $lang);
+    $mapper= array();
+    foreach($attribute as $index => $lv){
+      if (preg_match('/_attr$/', $index) && isset($lv['xml:lang']) && $lv['xml:lang'] == $lang) {
+        $li= preg_replace('/_attr$/', '', $index);
+        if (isset($mapper[$li])) {
+          unset($mapper[$li]);
+        }
+      } else {
+        $mapper[$index]= $index;
+      }
+    }
+
+    // Use some default if no index is available
+    if (!$li) {
+      $li= array_shift($mapper);
+    }
+
+    return $attribute[$li];
+  }
+
 }  
