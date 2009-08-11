@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<list>
+  <definition>
+    <departmentBrowser>true</departmentBrowser>
+    <baseSelector>true</baseSelector>
+    <departmentRootVisible>false</departmentRootVisible>
+    <multiSelect>true</multiSelect>
+    <template>user-list.tpl</template>
+  </definition>
+
+  <table>
+    <!--<oddColor></oddColor>
+    <evenColor></evenColor>-->
+    <layout>|20px|20px|95%|5%;r|</layout>
+
+    <column>
+      <value>%{filter:objectType(objectClass)}</value>
+    </column>
+
+    <column>
+      <header>Name / Department</header>
+      <header xml:lang="de">Name / Organisationseinheit</header>
+      <sortable>true</sortable>
+      <value>%sn, %givenName [%uid]</value>
+    </column>
+
+    <column>
+      <header>Properties</header>
+      <header xml:lang="de">Eigenschaften</header>
+      <sortable>false</sortable>
+      <value>%{filter:accountProperties(objectClass)}</value>
+    </column>
+
+    <column>
+      <header>Actions</header>
+      <header xml:lang="de">Aktionen</header>
+      <sortable>false</sortable>
+      <value>%{filter:actions}</value>
+    </column>
+
+  </table>
+
+</list>
