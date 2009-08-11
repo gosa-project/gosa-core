@@ -3,16 +3,17 @@
 <list>
   <definition>
     <departmentBrowser>true</departmentBrowser>
-    <baseSelector>true</baseSelector>
     <departmentRootVisible>false</departmentRootVisible>
     <multiSelect>true</multiSelect>
     <template>user-list.tpl</template>
+    <summary>List of users</summary>
+    <summary xml:lang="de">Benutzerliste</summary>
   </definition>
 
   <table>
     <!--<oddColor></oddColor>
     <evenColor></evenColor>-->
-    <layout>|20px|20px|95%|5%;r|</layout>
+    <layout>|20px|65%|5%|80px;r|</layout>
 
     <column>
       <value>%{filter:objectType(objectClass)}</value>
