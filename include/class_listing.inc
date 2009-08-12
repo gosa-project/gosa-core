@@ -11,12 +11,31 @@ class listing {
   var $summary;
   var $header= array();
   var $colprops= array();
+  var $filters= array();
+  static $objectTypes;
+
 
   function listing($filename)
   {
     if (!$this->load($filename)) {
       die("Cannot parse $filename!");
     }
+
+    // Register build in filters
+    $this->registerFilter("objectType", "listing::filterObjectType");
+    $this->registerFilter("link", "listing::filterLink");
+    $this->registerFilter("actions", "listing::filterActions");
+  }
+
+
+  function registerFilter($name, $call)
+  {
+    if (!isset($this->filters[$name])) {
+      $this->filters[$name]= $call;
+      return true;
+    }
+
+    return false;
   }
 
 
@@ -36,6 +55,13 @@ class listing {
       if (isset($this->xmlData['definition'][$token]) &&
           $this->xmlData['definition'][$token] == "true"){
         $this->$token= true;
+      }
+    }
+
+    // Fill objectTypes
+    if (isset($this->xmlData['definition']['objectType'])) {
+      foreach ($this->xmlData['definition']['objectType'] as $index => $otype) {
+        listing::$objectTypes[$otype['objectClass']]= $this->xmlData['definition']['objectType'][$index];
       }
     }
 
@@ -60,9 +86,7 @@ class listing {
 
   function render()
   {
-    #print_a($this->xmlData);
-    #print_a($this->entries);
-echo "Fill summary, handle empty lists differently, alternating<br>";
+echo "Fill summary, handle empty lists differently, alternating, sorting, post_id<br>";
     $summary= "empty";
 
     // Initialize list
@@ -83,29 +107,22 @@ echo "Fill summary, handle empty lists differently, alternating<br>";
     $result.= "<td class='listheader' style='width:13px;border-right:0px;'>&nbsp;</td></table></td></tr>";
 
     // New table for the real list contents
-    $result.= "<tr><td colspan='$num_cols' class='scrollbody'><div style='width:100%;height:430px;' id='d_scrollbody' class='scrollbody'><table summary='' style='height:100%;width:581px;' cellspacing='0' id='t_scrollbody'>";
+    $result.= "<tr><td colspan='$num_cols' class='scrollbody'><div style='width:600px;height:430px;' id='d_scrollbody' class='scrollbody'><table summary='' style='height:100%;width:581px;' cellspacing='0' id='t_scrollbody'>";
 
     // Fill with contents
-    $first= true;
-    foreach ($this->entries as $entry){
-      $result.="<tr class='rowxp1'>";
-      foreach ($this->xmlData['table']['column'] as $config) {
-        if ($first) {
-          
-        } else {
-        }
+    foreach ($this->entries as $row => $entry){
+      $result.="<tr class='rowxp".($row&1)."'>";
+
+      // Render multi select if needed
+      if ($this->multiSelect) {
+        $result.="<td style='text-align:center;width:20px;' class='list1'>&nbsp;</td>";
       }
-      $first= false;
+
+      foreach ($this->xmlData['table']['column'] as $index => $config) {
+        $result.="<td ".$this->colprops[$index]." class='list0'>".$this->renderCell($config['value'], $entry, $row)."</td>";
+      }
+      $result.="</tr>";
     }
-#    for ($i= 0; $i<10; $i++) {
-#      $result.="<tr class='rowxp1'>";
-#      $result.="<td  style='text-align:center;width:20px;'  class='list1'>&nbsp;</td>";
-#      $result.="<td  style='text-align:center;width:20px;'  class='list1'><image src='images/lists/folder.png' class='center'></td>";
-#      $result.="<td  style=''  class='list1'><a href='?plug=19&amp;post_id=12499984306&amp;act=dep_open&amp;dep_id=1'>Administrativa - [Funktionelle Daten]</a></td>";
-#      $result.="<td  style='width:100px;'  class='list1'>&nbsp;</td>";
-#      $result.="<td  style='width:158px;border-right:0px;'  class='list1'>&nbsp;</td>";
-#      $result.="</tr>";
-#    }
 
     // Need to fill the list if it's not full (nobody knows why this is 22 ;-))
     if (count($this->entries) < 22) {
@@ -174,6 +191,133 @@ echo "Fill summary, handle empty lists differently, alternating<br>";
     return $result;
   }
 
+
+  function renderCell($data, $config, $row)
+  {
+    // Replace flat attributes in data string
+    for ($i= 0; $i<$config['count']; $i++) {
+      $attr= $config[$i];
+      $value= "";
+      if (is_array($config[$attr])) {
+        $value= $config[$attr][0];
+      } else {
+        $value= $config[$attr];
+      }
+      $data= preg_replace("/%\{$attr\}/", $value, $data);
+    }
+
+    // Watch out for filters and prepare to execute them
+    preg_match_all("/%\{filter:([^(]+)\((.*)\)\}/", $data, $matches, PREG_SET_ORDER);
+
+    foreach ($matches as $match) {
+      if (!isset($this->filters[$match[1]])) {
+        continue;
+      }
+      $cl= preg_replace('/::.*$/', '', $this->filters[$match[1]]);
+      $method= preg_replace('/^.*::/', '', $this->filters[$match[1]]);
+
+      // Prepare params for function call
+      $params= array();
+      preg_match_all('/"[^"]+"|[^,]+/', $match[2], $parts);
+      foreach ($parts[0] as $param) {
+
+        // Row is replaced by the row number
+        if ($param == "row") {
+          $params[]= $row;
+        }
+
+        // pid is replaced by the current post_id
+        if ($param == "pid") {
+          #TODO: get post_id 
+          $params[]= "99";
+        }
+
+        // Fixie with "" is passed directly
+        if (preg_match('/^".*"$/', $param)){
+          $params[]= preg_replace('/"/', '', $param);
+        }
+
+        // LDAP variables get replaced by their objects
+        for ($i= 0; $i<$config['count']; $i++) {
+          if ($param == $config[$i]) {
+            $values= $config[$config[$i]];
+            if (is_array($values)){
+              unset($values['count']);
+            }
+            $params[]= $values;
+          }
+        }
+
+        // Move dn if needed
+        if ($param == "dn") {
+          $params[]= $config["dn"];
+        }
+      }
+
+      // Replace information
+      $data= preg_replace('/'.preg_quote($match[0]).'/', call_user_func_array(array($cl, $method), $params), $data);
+    }
+
+    return $data;
+  }
+
+
+  static function filterObjectType($dn, $classes)
+  {
+    // Walk thru classes and return on first match
+    $result= "&nbsp;";
+    $prio= 99;
+    foreach ($classes as $objectClass) {
+      if (isset(listing::$objectTypes[$objectClass])){
+        if (!isset(listing::$objectTypes[$objectClass]["priority"])){
+          $result= "<img class='center' title='$dn' src='".listing::$objectTypes[$objectClass]["image"]."'>";
+          return $result; 
+        }
+
+        if (listing::$objectTypes[$objectClass]["priority"] < $prio){
+          $prio= listing::$objectTypes[$objectClass]["priority"];
+          $result= "<img class='center' title='$dn' src='".listing::$objectTypes[$objectClass]["image"]."'>";
+        }
+      }
+    }
+
+    return $result;
+  }
+
+
+  static function filterLink()
+  {
+    $result= "&nbsp;";
+
+    $row= func_get_arg(0);
+    $pid= func_get_arg(1);
+    $dn= func_get_arg(2);
+    $params= array(func_get_arg(3));
+
+    // Collect sprintf params
+    for ($i = 4;$i < func_num_args();$i++) {
+      $val= func_get_arg($i);
+      if (is_array($val)){
+        $params[]= $val[0];
+        continue;
+      }
+      $params[]= $val;
+    }
+
+    $result= "&nbsp;";
+    $trans= call_user_func_array("sprintf", $params);
+    if ($trans != "") {
+      return("<a href='?plug=".$_GET['plug']."&amp;post_id=$pid&amp;act=edit_$row' title='$dn'>$trans</a>");
+    }
+
+    return $result;
+  }
+
+
+  static function filterActions()
+  {
+    return "TBD";
+  }
 }
 
 ?>
