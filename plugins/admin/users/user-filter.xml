@@ -13,8 +13,8 @@
       <filter>(&amp;(!(objectClass=gosaUserTemplate))(|$GENERIC$POSIX$MAIL$SAMBA)(|(cn=$NAME)(sn=$NAME)(givenName=$NAME)(uid=$NAME)))</filter>
       <attribute>dn</attribute>
       <attribute>objectClass</attribute>
-      <attribute>cn</attribute>
-      <attribute>mail</attribute>
+      <attribute>givenName</attribute>
+      <attribute>sn</attribute>
       <attribute>uid</attribute>
       <attribute>modifyTimestamp</attribute>
     </query>
@@ -23,8 +23,8 @@
       <filter>(&amp;$TEMPLATE(|(cn=$NAME)(sn=$NAME)(givenName=$NAME)(uid=$NAME)))</filter>
       <attribute>dn</attribute>
       <attribute>objectClass</attribute>
-      <attribute>cn</attribute>
-      <attribute>mail</attribute>
+      <attribute>givenName</attribute>
+      <attribute>sn</attribute>
       <attribute>uid</attribute>
       <attribute>modifyTimestamp</attribute>
     </query>

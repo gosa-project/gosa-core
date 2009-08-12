@@ -8,22 +8,34 @@
     <template>user-list.tpl</template>
     <summary>List of users</summary>
     <summary xml:lang="de">Benutzerliste</summary>
+
+    <objectType>
+      <objectClass>gosaAccount</objectClass>
+      <image>plugins/users/images/select_user.png</image>
+      <priority>2</priority>
+    </objectType>
+    <objectType>
+      <objectClass>gosaUserTemplate</objectClass>
+      <priority>1</priority>
+      <image>plugins/users/images/select_template.png</image>
+    </objectType>
+
   </definition>
 
   <table>
     <!--<oddColor></oddColor>
     <evenColor></evenColor>-->
-    <layout>|20px|65%|5%|80px;r|</layout>
+    <layout>|20px||120px|80px;r|</layout>
 
     <column>
-      <value>%{filter:objectType(objectClass)}</value>
+      <value>%{filter:objectType(dn,objectClass)}</value>
     </column>
 
     <column>
       <header>Name / Department</header>
       <header xml:lang="de">Name / Organisationseinheit</header>
       <sortable>true</sortable>
-      <value>%sn, %givenName [%uid]</value>
+      <value>%{filter:link(row,pid,dn,"%s, %s [%s]",sn,givenName,uid)}</value>
     </column>
 
     <column>
