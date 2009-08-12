@@ -49,7 +49,7 @@
       <header>Actions</header>
       <header xml:lang="de">Aktionen</header>
       <sortable>false</sortable>
-      <value>%{filter:actions}</value>
+      <value>%{filter:actions()}</value>
     </column>
 
   </table>
