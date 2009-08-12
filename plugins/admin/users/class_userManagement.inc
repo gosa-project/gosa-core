@@ -978,24 +978,73 @@ class userManagement extends plugin
     $this->reload();
     $this->DivListUsers->setEntries($this->list);
 
-    # FILTER Test #################################################
+    ## FILTER Test #################################################
+
+    ## Build filter
     #$filter = new filter(get_template_path("user-filter.xml", true));
     #$filter->setObjectStorage(get_people_ou());
-    #$filter->setCategory("users");
     #$filter->setCurrentBase($this->DivListUsers->selectedBase);
     #$filter->update();
     #session::set('autocomplete', $filter);
     #if (!$filter->isValid()){
     #  msg_dialog::display(_("Filter error"), _("The filter is uncomplete!"), ERROR_DIALOG);
-    #} else {
-    #  print "Filter results:";
-    #  print_a($filter->query());
     #}
-    #return($filter->renderFilter().$this->DivListUsers->Draw());
+
+    ## Build headpage
+    #$headpage = new listing(get_template_path("user-list.xml", true));
+    #$headpage->registerFilter("accountProperties", "userManagement::filterProperties");
+    #$headpage->setEntries($filter->query());
+    #
+    #return($filter->render().$headpage->render());
     ################################################### FILTER Test
 
     return($this->DivListUsers->Draw());
   }
+
+
+  static function filterProperties($dn, $row, $class)
+  {
+    $result= "";
+
+    $map= array( "gosaAccount" => array( "image" => "plugins/users/images/select_user.png",
+                                         "alt" => _("Generic"),
+                                         "title" => _("Edit generic properties")),
+                 "posixAccount" => array("image" => "images/penguin.png",
+                                         "alt" => _("POSIX"),
+                                         "title" => _("Edit POSIX properties")),
+                 "gosaMailAccount" => array("image" => "images/mailto.png",
+                                         "alt" => _("Mail"),
+                                         "title" => _("Edit mail properties")),
+                 "sambaSamAccount" => array("image" => "plugins/systems/images/select_winstation.png",
+                                         "alt" => _("Samba"),
+                                         "title" => _("Edit samba properties")),
+                 "apple-user" => array("image" => "plugins/netatalk/images/select_netatalk.png",
+                                         "alt" => _("Netatalk"),
+                                         "title" => _("Edit netatalk properties")),
+                 "gotoEnvironment" => array("image" => "plugins/users/images/small_environment.png",
+                                         "alt" => _("Environment"),
+                                         "title" => _("Edit environment properties")),
+                 "goFaxAccount" => array("image" => "plugins/users/images/fax_small.png",
+                                         "alt" => _("FAX"),
+                                         "title" => _("Edit FAX properties")),
+                 "goFonAccount" => array("image" => "plugins/gofon/images/select_phone.png",
+                                         "alt" => _("Phone"),
+                                         "title" => _("Edit phone properties")));
+
+    // Walk thru map
+    foreach ($map as $oc => $properties) {
+      if (in_array($oc, $class)) {
+        $result.="<input class='center' type='image' src='".$properties['image']."' ".
+                 "alt='".$properties['alt']."' title='".$properties['title'].
+                 "' name='edit_${row}_$oc' style='padding:1px'>";
+      } else {
+        $result.="<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+      }
+    }
+
+    return $result;
+  }
+
 
 
   /* Return departments, that will be included within snapshot detection */

@@ -25,7 +25,7 @@
   <table>
     <!--<oddColor></oddColor>
     <evenColor></evenColor>-->
-    <layout>|20px||120px|80px;r|</layout>
+    <layout>|20px||145px|80px;r|</layout>
 
     <column>
       <value>%{filter:objectType(dn,objectClass)}</value>
@@ -42,7 +42,7 @@
       <header>Properties</header>
       <header xml:lang="de">Eigenschaften</header>
       <sortable>false</sortable>
-      <value>%{filter:accountProperties(objectClass)}</value>
+      <value>%{filter:accountProperties(dn,row,objectClass)}</value>
     </column>
 
     <column>
