@@ -391,6 +391,9 @@ function adjust_width(e)
 
 		// Resize the body cells, 470 represents the info box and the navigation part 
 		var diff= width	-	div_width	-	470;
+                if(document.getElementById('d_save')) {
+                  diff= width - div_width - document.getElementById('d_save').value;
+                }
 		
 		// window has been upscaled
 		if(div_width+diff>=600) {
