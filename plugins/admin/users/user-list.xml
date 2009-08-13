@@ -60,7 +60,7 @@
         <name>create_user</name>
         <type>entry</type>
         <image>plugins/users/images/list_new_user.png</timage>
-        <acl>c</acl>
+        <acl>users/user:c</acl>
         <label>User</label>
       </action>
 
@@ -68,7 +68,7 @@
         <name>create_template</name>
         <type>entry</type>
         <image>images/lists/new.png</timage>
-        <acl>c</acl>
+        <acl>users/user:c</acl>
         <label>Template</label>
       </action>
 
@@ -82,7 +82,6 @@
       <name>edit</name>
       <type>entry</type>
       <image>images/lists/edit.png</timage>
-      <acl>rw</acl>
       <label>Edit</label>
     </action>
 
@@ -90,7 +89,6 @@
       <name>password</name>
       <type>entry</type>
       <image>plugins/users/images/list_password.png</timage>
-      <acl>users/password:w</acl>
       <label>Change password</label>
     </action>
 
@@ -98,7 +96,6 @@
       <name>remove</name>
       <type>entry</type>
       <image>images/lists/trash.png</timage>
-      <acl>d</acl>
       <label>Remove</label>
     </action>
 
@@ -106,7 +103,6 @@
       <name>templatize</name>
       <type>entry</type>
       <image>plugins/users/images/wizard.png</timage>
-      <acl>w</acl>
       <label>Apply template</label>
     </action>
 
