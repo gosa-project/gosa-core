@@ -14,6 +14,7 @@
       <image>plugins/users/images/select_user.png</image>
       <priority>2</priority>
     </objectType>
+
     <objectType>
       <objectClass>gosaUserTemplate</objectClass>
       <priority>1</priority>
@@ -114,11 +115,15 @@
     </action>
 
     <action>
-      <type>copypaste</type>
+      <type>daemon</type>
     </action>
 
     <action>
       <type>separator</type>
+    </action>
+
+    <action>
+      <type>copypaste</type>
     </action>
 
     <action>
