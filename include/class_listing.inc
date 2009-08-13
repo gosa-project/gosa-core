@@ -169,7 +169,7 @@ echo "filter for images, action menu, sorting, department browsing, filter base 
     }
 
     // Assign action menu
-    $smarty->assign("ACTIONS", "TBD");
+    $smarty->assign("ACTIONS", $this->renderActionMenu());
 
     // Assign separator
     $smarty->assign("SEPARATOR", "<img src='images/lists/seperator.png' alt='-' align='middle' height='16' width='1' class='center'>");
@@ -345,6 +345,12 @@ echo "filter for images, action menu, sorting, department browsing, filter base 
   }
 
 
+  function filterActions()
+  {
+    return "TBD";
+  }
+
+
   function filterLink()
   {
     $result= "&nbsp;";
@@ -482,6 +488,69 @@ echo "filter for images, action menu, sorting, department browsing, filter base 
 
     return $result;
   }
+
+
+  function renderActionMenu()
+  {
+    // Don't send anything if the menu is not defined
+    if (!isset($this->xmlData['actionmenu']['action'])){
+      return "";
+    }
+
+    // Load shortcut
+    $actions= &$this->xmlData['actionmenu']['action'];
+    $result= "<ul class='level1' id='root'><li><a href='#'>Aktionen&nbsp;<img ".
+             "border=0 src='images/lists/sort-down.png'></a>";
+
+    // Build ul/li list
+    $result.= $this->recurseActions($actions);
+
+    return "<div id='pulldown'>".$result."</li></ul><div>";
+  }
+
+
+  function recurseActions($actions)
+  {
+    static $level= 2;
+    $result= "<ul class='level$level'>";
+    $separator= "";
+
+    foreach ($actions as $action) {
+
+      // Fill image if set
+      $img= "";
+      if (isset($action['image'])){
+        $img= "<img border=0 src='".$action['image']."'>&nbsp;";
+      }
+
+      if ($action['type'] == "separator"){
+        $separator= " style='border-top:1px solid #AAA' ";
+        continue;
+      }
+
+      // Dive into subs
+      if ($action['type'] == "sub" && isset($action['action'])) {
+        $level++;
+        if (isset($action['label'])){
+          $result.= "<li$separator><a href='#'>$img".$action['label']."&nbsp;<img border='0' src='images/forward-arrow.png'></a>";
+        }
+        $result.= $this->recurseActions($action['action'])."</li>";
+        $level--;
+        $separator= "";
+        continue;
+      }
+
+      // Render entry elseways
+      if (isset($action['label'])){
+        $result.= "<li$separator><a href='#'>$img".$action['label']."</a></li>";
+        $separator= "";
+      }
+    }
+
+    $result.= "</ul>";
+    return $result;
+  }
+
 
 }
 
