@@ -1593,3 +1593,4 @@ div.autocomplete li:hover{
   background-color: #F0F0F0;
 }
 
+div.autocomplete ul li.selected { background-color: #F0F0F0;}
