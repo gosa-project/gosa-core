@@ -13,6 +13,7 @@ class listing {
   var $header= array();
   var $colprops= array();
   var $filters= array();
+  var $pid;
   static $objectTypes;
 
 
@@ -26,6 +27,9 @@ class listing {
     $this->registerFilter("objectType", "listing::filterObjectType");
     $this->registerFilter("link", "listing::filterLink");
     $this->registerFilter("actions", "listing::filterActions");
+
+    // Initialize pid
+    $this->pid= preg_replace("/[^0-9]/", "", microtime(TRUE));
   }
 
 
@@ -91,10 +95,11 @@ class listing {
 
   function render()
   {
-echo "Handle empty lists differently, alternating, sorting, post_id, bottom list info<br>";
+echo "action menu, sorting, department browsing, filter base handling, bottom list info, copy'n paste handler<br>";
 
     // Initialize list
-    $result= "<div class='contentboxb' id='listing_container' style='border-top:1px solid #B0B0B0;'>";
+    $result= "<input type='hidden' value='$this->pid' name='PID'>";
+    $result.= "<div class='contentboxb' id='listing_container' style='border-top:1px solid #B0B0B0;'>";
     $result.= "<table summary='$this->headline' style='width:600px;height:450px;' cellspacing='0' id='t_scrolltable'>
 <tr><td class='scrollhead'><table summary='' style='width:100%;' cellspacing='0' id='t_scrollhead'>";
     $num_cols= count($this->colprops) + ($this->multiSelect?1:0);
@@ -113,6 +118,11 @@ echo "Handle empty lists differently, alternating, sorting, post_id, bottom list
 
     // New table for the real list contents
     $result.= "<tr><td colspan='$num_cols' class='scrollbody'><div style='width:600px;height:430px;' id='d_scrollbody' class='scrollbody'><table summary='' style='height:100%;width:581px;' cellspacing='0' id='t_scrollbody'>";
+
+    // No results? Just take an empty colspanned row
+    if (count($this->entries) == 0) {
+      $result.= "<tr class='rowxp0'><td class='list1nohighlight' colspan='$num_cols' style='height:100%;border-right:0px;width:100%;'>&nbsp;</td></tr>";
+    }
 
     // Fill with contents
     foreach ($this->entries as $row => $entry){
@@ -174,11 +184,18 @@ echo "Handle empty lists differently, alternating, sorting, post_id, bottom list
   function setFilter($filter)
   {
     $this->filter= &$filter;
+    $this->entries= $this->filter->query();
   }
 
 
   function update()
   {
+    // Do not do anything if this is not our PID
+    # DISABLED because the object is not in the session
+    #if(isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->pid) {
+    #  return;
+    #}
+
     $this->entries= $this->filter->query();
   }
 
@@ -256,10 +273,9 @@ echo "Handle empty lists differently, alternating, sorting, post_id, bottom list
           $params[]= $row;
         }
 
-        // pid is replaced by the current post_id
+        // pid is replaced by the current PID
         if ($param == "pid") {
-          #TODO: get post_id 
-          $params[]= "99";
+          $params[]= $this->pid;
         }
 
         // Fixie with "" is passed directly
@@ -280,7 +296,7 @@ echo "Handle empty lists differently, alternating, sorting, post_id, bottom list
 
         // Move dn if needed
         if ($param == "dn") {
-          $params[]= $config["dn"];
+          $params[]= LDAP::fix($config["dn"]);
         }
       }
 
@@ -300,13 +316,13 @@ echo "Handle empty lists differently, alternating, sorting, post_id, bottom list
     foreach ($classes as $objectClass) {
       if (isset(listing::$objectTypes[$objectClass])){
         if (!isset(listing::$objectTypes[$objectClass]["priority"])){
-          $result= "<img class='center' title='$dn' src='".listing::$objectTypes[$objectClass]["image"]."'>";
+          $result= "<img class='center' title='".LDAP::fix($dn)."' src='".listing::$objectTypes[$objectClass]["image"]."'>";
           return $result; 
         }
 
         if (listing::$objectTypes[$objectClass]["priority"] < $prio){
           $prio= listing::$objectTypes[$objectClass]["priority"];
-          $result= "<img class='center' title='$dn' src='".listing::$objectTypes[$objectClass]["image"]."'>";
+          $result= "<img class='center' title='".LDAP::fix($dn)."' src='".listing::$objectTypes[$objectClass]["image"]."'>";
         }
       }
     }
@@ -321,7 +337,7 @@ echo "Handle empty lists differently, alternating, sorting, post_id, bottom list
 
     $row= func_get_arg(0);
     $pid= func_get_arg(1);
-    $dn= func_get_arg(2);
+    $dn= LDAP::fix(func_get_arg(2));
     $params= array(func_get_arg(3));
 
     // Collect sprintf params
@@ -337,7 +353,7 @@ echo "Handle empty lists differently, alternating, sorting, post_id, bottom list
     $result= "&nbsp;";
     $trans= call_user_func_array("sprintf", $params);
     if ($trans != "") {
-      return("<a href='?plug=".$_GET['plug']."&amp;post_id=$pid&amp;act=listing_edit_$row' title='$dn'>$trans</a>");
+      return("<a href='?plug=".$_GET['plug']."&amp;PID=$pid&amp;act=listing_edit_$row' title='$dn'>$trans</a>");
     }
 
     return $result;
@@ -397,6 +413,60 @@ echo "Handle empty lists differently, alternating, sorting, post_id, bottom list
                        "title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>";
 
     return ($result);
+  }
+
+
+  function getAction()
+  {
+    // Do not do anything if this is not our PID
+    # DISABLED because the object is not in the session
+    #if(isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->pid) {
+    #  return;
+    #}
+
+    $result= array("targets" => array(), "action" => "");
+
+    // Filter GET with "act" attributes
+    if (isset($_GET['act'])) {
+      $key= validate($_GET['act']);
+      $target= preg_replace('/^listing_[a-zA-Z_]+_([0-9]+)$/', '$1', $key);
+      if (isset($this->entries[$target]['dn'])) {
+        $result['action']= preg_replace('/^listing_([a-zA-Z_]+)_[0-9]+$/', '$1', $key);
+        $result['targets'][]= $this->entries[$target]['dn'];
+      }
+      return $result;
+    }
+
+    // Filter POST with "listing_" attributes
+    foreach ($_POST as $key => $prop) {
+
+      // Capture selections
+      if (preg_match('/^listing_selected_[0-9]+$/', $key)) {
+        $target= preg_replace('/^listing_selected_([0-9]+)$/', '$1', $key);
+        if (isset($this->entries[$target]['dn'])) {
+          $result['targets'][]= $this->entries[$target]['dn'];
+        }
+        continue;
+      }
+
+      // Capture action with target - this is a one shot
+      if (preg_match('/^listing_[a-zA-Z_]+_[0-9]+(|_x)$/', $key)) {
+        $target= preg_replace('/^listing_[a-zA-Z_]+_([0-9]+)(|_x)$/', '$1', $key);
+        if (isset($this->entries[$target]['dn'])) {
+          $result['action']= preg_replace('/^listing_([a-zA-Z_]+)_[0-9]+(|_x)$/', '$1', $key);
+          $result['targets']= array($this->entries[$target]['dn']);
+        }
+        break;
+      }
+
+      // Capture action without target
+      if (preg_match('/^listing_[a-zA-Z_]+(|_x)$/', $key)) {
+        $result['action']= preg_replace('/^listing_([a-zA-Z_]+)(|_x)$/', '$1', $key);
+        continue;
+      }
+    }
+
+    return $result;
   }
 
 

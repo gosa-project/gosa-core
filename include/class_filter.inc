@@ -49,6 +49,11 @@ class filter {
       $entry= $this->xmlData['search'];
       $this->baseMode= $entry['base'];
       $this->scopeMode= $entry['scope'];
+      if ($entry['scope'] == "auto") {
+        $this->scope= "one";
+      } else {
+        $this->scope= $entry['scope'];
+      }
       $this->query= $entry['query'];
     } else {
       return false;
