@@ -33,5 +33,6 @@
   <script language="javascript" src="include/scriptaculous.js" type="text/javascript"></script>
   <script language="javascript" src="include/effects.js" type="text/javascript"></script>
   <script language="javascript" src="include/controls.js" type="text/javascript"></script>
+  <script language="javascript" src="include/pulldown.js" type="text/javascript"></script>
 </head>
 
