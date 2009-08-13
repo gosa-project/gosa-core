@@ -8,7 +8,8 @@ class listing {
   var $departmentRootVisible= false;
   var $multiSelect= false;
   var $template;
-  var $summary;
+  var $headline;
+  var $module;
   var $header= array();
   var $colprops= array();
   var $filters= array();
@@ -80,24 +81,28 @@ class listing {
       }
     }
 
+    // Assign headline/module
+    $this->headline= xml::getLocalizedAttribute($this->xmlData['definition']['headline'], $GLOBALS['t_language']);
+    $this->module= $this->xmlData['definition']['module'];
+
     return true;  
   }
 
 
   function render()
   {
-echo "Fill summary, handle empty lists differently, alternating, sorting, post_id<br>";
-    $summary= "empty";
+echo "Handle empty lists differently, alternating, sorting, post_id, bottom list info<br>";
 
     // Initialize list
-    $result= "<table summary='$summary' style='width:600px;height:450px;' cellspacing='0' id='t_scrolltable'>
+    $result= "<div class='contentboxb' id='listing_container' style='border-top:1px solid #B0B0B0;'>";
+    $result.= "<table summary='$this->headline' style='width:600px;height:450px;' cellspacing='0' id='t_scrolltable'>
 <tr><td class='scrollhead'><table summary='' style='width:100%;' cellspacing='0' id='t_scrollhead'>";
     $num_cols= count($this->colprops) + ($this->multiSelect?1:0);
 
     // Build list header
     $result.= "<tr>";
     if ($this->multiSelect) {
-      $result.= "<td class='listheader' style='width:20px;'><input type='checkbox' id='select_all' name='select_all' title='"._("Select all")."' onClick='toggle_all_(\"item_selected_[0-9]*$\",\"select_all\");' ></td>";
+      $result.= "<td class='listheader' style='width:20px;'><input type='checkbox' id='select_all' name='select_all' title='"._("Select all")."' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' ></td>";
     }
     foreach ($this->header as $header) {
       $result.= $header;
@@ -115,7 +120,7 @@ echo "Fill summary, handle empty lists differently, alternating, sorting, post_i
 
       // Render multi select if needed
       if ($this->multiSelect) {
-        $result.="<td style='text-align:center;width:20px;' class='list1'>&nbsp;</td>";
+        $result.="<td style='text-align:center;width:20px;' class='list0'><input type='checkbox' id='listing_selected_$row' name='listing_selected_$row'></td>";
       }
 
       foreach ($this->xmlData['table']['column'] as $index => $config) {
@@ -141,15 +146,40 @@ echo "Fill summary, handle empty lists differently, alternating, sorting, post_i
       $result.= "</tr>";
     }
 
-    $result.= "</table></div></td></tr></table>";
+    $result.= "</table></div></td></tr></table></div>";
 
-    return $result;
+    $smarty= get_smarty();
+    $smarty->assign("FILTER", $this->filter->render());
+    $smarty->assign("LIST", $result);
+
+    // Assign navigation elements
+    $nav= $this->renderNavigation();
+    foreach ($nav as $key => $html) {
+      $smarty->assign($key, $html);
+    }
+
+    // Assign action menu
+    $smarty->assign("ACTIONS", "TBD");
+
+    // Assign separator
+    $smarty->assign("SEPARATOR", "<img src='images/lists/seperator.png' alt='-' align='middle' height='16' width='1' class='center'>");
+
+    // Assign summary
+    $smarty->assign("HEADLINE", $this->headline);
+
+    return ($smarty->fetch(get_template_path($this->xmlData['definition']['template'], true)));
   }
 
 
-  function setEntries($entries)
+  function setFilter($filter)
   {
-    $this->entries= &$entries;
+    $this->filter= &$filter;
+  }
+
+
+  function update()
+  {
+    $this->entries= $this->filter->query();
   }
 
 
@@ -307,10 +337,66 @@ echo "Fill summary, handle empty lists differently, alternating, sorting, post_i
     $result= "&nbsp;";
     $trans= call_user_func_array("sprintf", $params);
     if ($trans != "") {
-      return("<a href='?plug=".$_GET['plug']."&amp;post_id=$pid&amp;act=edit_$row' title='$dn'>$trans</a>");
+      return("<a href='?plug=".$_GET['plug']."&amp;post_id=$pid&amp;act=listing_edit_$row' title='$dn'>$trans</a>");
     }
 
     return $result;
+  }
+
+
+  function renderNavigation()
+  {
+    $result= array();
+    $enableBack = true;
+    $enableRoot = true;
+    $enableHome = true;
+
+    $ui = get_userinfo();
+
+    /* Check if base = first available base */
+    $deps = $ui->get_module_departments($this->module);
+
+    if(!count($deps) || $deps[0] == $this->filter->base){
+      $enableBack = false;
+      $enableRoot = false;
+    }
+
+    $listhead ="";
+
+    /* Check if we are in users home  department */
+    if(!count($deps) ||$this->filter->base == get_base_from_people($ui->dn)){
+      $enableHome = false;
+    }
+
+    /* Draw root button */
+    if($enableRoot){
+      $result["ROOT"]= "<input class='center' type='image' src='images/lists/root.png' align='middle' ".
+                       "title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>";
+    }else{
+      $result["ROOT"]= "<img src='images/lists/root_grey.png' class='center' alt='"._("Root")."'>";
+    }
+
+    /* Draw back button */
+    if($enableBack){
+      $result["BACK"]= "<input class='center' type='image' align='middle' src='images/lists/back.png' ".
+                       "title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>";
+    }else{
+      $result["BACK"]= "<img src='images/lists/back_grey.png' class='center' alt='"._("Up")."'>";
+    }
+
+    /* Draw home button */
+    if($enableHome){
+      $result["HOME"]= "<input class='center' type='image' align='middle' src='images/lists/home.png' ".
+                       "title='"._("Go to users department")."' alt='"._("Home")."' name='dep_home'>";
+    }else{
+      $result["HOME"]= "<img src='images/lists/home_grey.png' class='center' alt='"._("Home")."'>";
+    }
+
+    /* Draw reload button, this button is enabled everytime */
+    $result["RELOAD"]= "<input class='center' type='image' src='images/lists/reload.png' align='middle' ".
+                       "title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>";
+
+    return ($result);
   }
 
 

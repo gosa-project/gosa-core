@@ -225,7 +225,7 @@ class filter {
 
   function renderBase()
   {
-    $result= "<select name='currentMainBase' onChange='mainform.submit()' size='1'>";
+    $result= "<select name='base' onChange='mainform.submit()' size='1'>";
 
     foreach ($this->bases as $key=>$value) {
       $selected= "";
