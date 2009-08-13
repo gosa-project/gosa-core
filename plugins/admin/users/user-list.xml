@@ -6,8 +6,9 @@
     <departmentRootVisible>false</departmentRootVisible>
     <multiSelect>true</multiSelect>
     <template>user-list.tpl</template>
-    <summary>List of users</summary>
-    <summary xml:lang="de">Benutzerliste</summary>
+    <module>users</module>
+    <headline>List of users</headline>
+    <headline xml:lang="de">Benutzerliste</headline>
 
     <objectType>
       <objectClass>gosaAccount</objectClass>

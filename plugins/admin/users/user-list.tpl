@@ -3,8 +3,8 @@
 <table summary="" style="width:100%; vertical-align:top; text-align:left;" cellpadding=2>
   <tr>
     <td style="vertical-align:top; width:50%;">
-      <div class="contentboxh" >
-        <p class="contentboxh" >{$HEADLINE}</p>
+      <div class="contentboxh">
+        <p class="contentboxh">&nbsp;{$HEADLINE}</p>
       </div>
       
       <div class="contentboxb">
@@ -24,3 +24,5 @@
     </td>
   </tr>
 </table>
+
+<input type="hidden" name="ignore">
