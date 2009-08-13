@@ -53,13 +53,13 @@
   <actionmenu>
     <action>
       <type>sub</type>
-      <image>images/lists/new.png</timage>
+      <image>images/lists/new.png</image>
       <label>Create</label>
 
       <action>
         <name>create_user</name>
         <type>entry</type>
-        <image>plugins/users/images/list_new_user.png</timage>
+        <image>plugins/users/images/list_new_user.png</image>
         <acl>users/user:c</acl>
         <label>User</label>
       </action>
@@ -67,7 +67,7 @@
       <action>
         <name>create_template</name>
         <type>entry</type>
-        <image>images/lists/new.png</timage>
+        <image>images/lists/new.png</image>
         <acl>users/user:c</acl>
         <label>Template</label>
       </action>
@@ -81,28 +81,28 @@
     <action>
       <name>edit</name>
       <type>entry</type>
-      <image>images/lists/edit.png</timage>
+      <image>images/lists/edit.png</image>
       <label>Edit</label>
     </action>
 
     <action>
       <name>password</name>
       <type>entry</type>
-      <image>plugins/users/images/list_password.png</timage>
+      <image>plugins/users/images/list_password.png</image>
       <label>Change password</label>
     </action>
 
     <action>
       <name>remove</name>
       <type>entry</type>
-      <image>images/lists/trash.png</timage>
+      <image>images/lists/trash.png</image>
       <label>Remove</label>
     </action>
 
     <action>
       <name>templatize</name>
       <type>entry</type>
-      <image>plugins/users/images/wizard.png</timage>
+      <image>plugins/users/images/wizard.png</image>
       <label>Apply template</label>
     </action>
 
@@ -136,15 +136,14 @@
     <action>
       <name>edit</name>
       <type>entry</type>
-      <image>images/lists/edit.png</timage>
-      <acl>w</acl>
+      <image>images/lists/edit.png</image>
       <label>Edit user</label>
     </action>
 
     <action>
       <name>lock</name>
       <type>entry</type>
-      <image>%{filter:lockImage(userPassword)}</timage>
+      <image>%{filter:lockImage(userPassword)}</image>
       <acl>users/password:w</acl>
       <label>%{filter:lockLabel(userPassword)}</label>
     </action>
@@ -152,7 +151,7 @@
     <action>
       <name>password</name>
       <type>entry</type>
-      <image>plugins/users/images/list_password.png</timage>
+      <image>plugins/users/images/list_password.png</image>
       <acl>users/password:w</acl>
       <label>Change password</label>
     </action>
@@ -164,8 +163,8 @@
     <action>
       <name>remove</name>
       <type>entry</type>
-      <image>images/lists/trash.png</timage>
-      <acl>d</acl>
+      <image>images/lists/trash.png</image>
+      <acl>users/user:d</acl>
       <label>Remove user</label>
     </action>
 
