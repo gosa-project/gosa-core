@@ -142,7 +142,7 @@ echo "filter for images, action menu, sorting, department browsing, filter base 
     // Need to fill the list if it's not full (nobody knows why this is 22 ;-))
     if (count($this->entries) < 22) {
       $result.= "<tr>";
-      for ($i= 0; $i<=$num_cols; $i++) {
+      for ($i= 0; $i<$num_cols; $i++) {
         if ($i == 0) {
           $result.= "<td class='list1nohighlight' style='height:100%;'>&nbsp;</td>";
           continue;
