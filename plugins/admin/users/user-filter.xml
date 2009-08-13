@@ -17,6 +17,7 @@
       <attribute>sn</attribute>
       <attribute>uid</attribute>
       <attribute>modifyTimestamp</attribute>
+      <attribute>userPassword</attribute>
     </query>
     <query>
       <backend>LDAP</backend>
@@ -27,6 +28,7 @@
       <attribute>sn</attribute>
       <attribute>uid</attribute>
       <attribute>modifyTimestamp</attribute>
+      <attribute>userPassword</attribute>
     </query>
     <base>true</base>
     <scope>auto</scope>
@@ -97,8 +99,7 @@
     <default>*</default>
     <value>
       <key>*</key>
-      <set>All</set>
-      <set xml:lang="de">Alle</set>
+      <label>All</label>
     </value>
     <autocomplete>
       <backend>LDAP</backend>
