@@ -14,7 +14,7 @@ class listing {
   var $colprops= array();
   var $filters= array();
   var $pid;
-  static $objectTypes;
+  var $objectTypes;
 
 
   function listing($filename)
@@ -24,16 +24,16 @@ class listing {
     }
 
     // Register build in filters
-    $this->registerFilter("objectType", "listing::filterObjectType");
-    $this->registerFilter("link", "listing::filterLink");
-    $this->registerFilter("actions", "listing::filterActions");
+    $this->registerElementFilter("objectType", "listing::filterObjectType");
+    $this->registerElementFilter("link", "listing::filterLink");
+    $this->registerElementFilter("actions", "listing::filterActions");
 
     // Initialize pid
     $this->pid= preg_replace("/[^0-9]/", "", microtime(TRUE));
   }
 
 
-  function registerFilter($name, $call)
+  function registerElementFilter($name, $call)
   {
     if (!isset($this->filters[$name])) {
       $this->filters[$name]= $call;
@@ -66,7 +66,7 @@ class listing {
     // Fill objectTypes
     if (isset($this->xmlData['definition']['objectType'])) {
       foreach ($this->xmlData['definition']['objectType'] as $index => $otype) {
-        listing::$objectTypes[$otype['objectClass']]= $this->xmlData['definition']['objectType'][$index];
+        $this->objectTypes[$otype['objectClass']]= $this->xmlData['definition']['objectType'][$index];
       }
     }
 
@@ -77,8 +77,8 @@ class listing {
     $this->header= array();
     if (isset($this->xmlData['table']['column'])){
       foreach ($this->xmlData['table']['column'] as $index => $config) {
-        if (isset($config['header'])) {
-          $this->header[$index]= "<td class='listheader' ".$this->colprops[$index].">".xml::getLocalizedAttribute($config['header'], $GLOBALS['t_language'])."</td>";
+        if (isset($config['label'])) {
+          $this->header[$index]= "<td class='listheader' ".$this->colprops[$index].">"._($config['label'])."</td>";
         } else {
           $this->header[$index]= "<td class='listheader' ".$this->colprops[$index].">&nbsp;</td>";
         }
@@ -86,7 +86,7 @@ class listing {
     }
 
     // Assign headline/module
-    $this->headline= xml::getLocalizedAttribute($this->xmlData['definition']['headline'], $GLOBALS['t_language']);
+    $this->headline= _($this->xmlData['definition']['label']);
     $this->module= $this->xmlData['definition']['module'];
 
     return true;  
@@ -95,7 +95,7 @@ class listing {
 
   function render()
   {
-echo "action menu, sorting, department browsing, filter base handling, bottom list info, copy'n paste handler<br>";
+echo "filter for images, action menu, sorting, department browsing, filter base handling, bottom list info, copy'n paste handler, snapshot handler<br>";
 
     // Initialize list
     $result= "<input type='hidden' value='$this->pid' name='PID'>";
@@ -254,6 +254,14 @@ echo "action menu, sorting, department browsing, filter base handling, bottom li
     }
 
     // Watch out for filters and prepare to execute them
+    $data= $this->processElementFilter($data, $config, $row);
+
+    return $data;
+  }
+
+
+  function processElementFilter($data, $config, $row)
+  {
     preg_match_all("/%\{filter:([^(]+)\((.*)\)\}/", $data, $matches, PREG_SET_ORDER);
 
     foreach ($matches as $match) {
@@ -301,28 +309,34 @@ echo "action menu, sorting, department browsing, filter base handling, bottom li
       }
 
       // Replace information
-      $data= preg_replace('/'.preg_quote($match[0]).'/', call_user_func_array(array($cl, $method), $params), $data);
+      if ($cl == "listing") {
+        // Non static call - seems to result in errors
+        $data= @preg_replace('/'.preg_quote($match[0]).'/', call_user_func_array(array($this, "$method"), $params), $data);
+      } else {
+        // Static call
+        $data= preg_replace('/'.preg_quote($match[0]).'/', call_user_func_array(array($cl, $method), $params), $data);
+      }
     }
 
     return $data;
   }
 
 
-  static function filterObjectType($dn, $classes)
+  function filterObjectType($dn, $classes)
   {
     // Walk thru classes and return on first match
     $result= "&nbsp;";
     $prio= 99;
     foreach ($classes as $objectClass) {
-      if (isset(listing::$objectTypes[$objectClass])){
-        if (!isset(listing::$objectTypes[$objectClass]["priority"])){
-          $result= "<img class='center' title='".LDAP::fix($dn)."' src='".listing::$objectTypes[$objectClass]["image"]."'>";
+      if (isset($this->objectTypes[$objectClass])){
+        if (!isset($this->objectTypes[$objectClass]["priority"])){
+          $result= "<img class='center' title='".LDAP::fix($dn)."' src='".$this->objectTypes[$objectClass]["image"]."'>";
           return $result; 
         }
 
-        if (listing::$objectTypes[$objectClass]["priority"] < $prio){
-          $prio= listing::$objectTypes[$objectClass]["priority"];
-          $result= "<img class='center' title='".LDAP::fix($dn)."' src='".listing::$objectTypes[$objectClass]["image"]."'>";
+        if ($this->objectTypes[$objectClass]["priority"] < $prio){
+          $prio= $this->objectTypes[$objectClass]["priority"];
+          $result= "<img class='center' title='".LDAP::fix($dn)."' src='".$this->objectTypes[$objectClass]["image"]."'>";
         }
       }
     }
@@ -331,7 +345,7 @@ echo "action menu, sorting, department browsing, filter base handling, bottom li
   }
 
 
-  static function filterLink()
+  function filterLink()
   {
     $result= "&nbsp;";
 
@@ -469,11 +483,6 @@ echo "action menu, sorting, department browsing, filter base handling, bottom li
     return $result;
   }
 
-
-  static function filterActions()
-  {
-    return "TBD";
-  }
 }
 
 ?>

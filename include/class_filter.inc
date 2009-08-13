@@ -158,11 +158,7 @@ class filter {
       }
 
       // Handle translations
-      if (is_array($value['set'])) {
-        $result.= "<option value='".$value['key']."'$selected>".xml::getLocalizedAttribute($value['set'], $GLOBALS['t_language'])."</option>";
-      } else {
-        $result.= "<option value='".$value['key']."'$selected>".$value['set']."</option>";
-      }
+      $result.= "<option value='".$value['key']."'$selected>"._($value['label'])."</option>";
     }
 
     // Use autocompleter for additional data
