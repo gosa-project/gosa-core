@@ -978,9 +978,9 @@ class userManagement extends plugin
     $this->reload();
     $this->DivListUsers->setEntries($this->list);
 
-    ## FILTER Test #################################################
+    # FILTER Test #################################################
 
-    ## Build filter
+    # Build filter
     #$filter = new filter(get_template_path("user-filter.xml", true));
     #$filter->setObjectStorage(get_people_ou());
     #$filter->setCurrentBase($this->DivListUsers->selectedBase);
@@ -993,9 +993,15 @@ class userManagement extends plugin
     ## Build headpage
     #$headpage = new listing(get_template_path("user-list.xml", true));
     #$headpage->registerFilter("accountProperties", "userManagement::filterProperties");
-    #$headpage->setEntries($filter->query());
+    #$headpage->setFilter($filter);
+
+    ## Needs to be called before update!
+    #print_a($headpage->getAction());
+
+    ## Refresh for filter
+    #$headpage->update();
     #
-    #return($filter->render().$headpage->render());
+    #return($headpage->render());
     ################################################### FILTER Test
 
     return($this->DivListUsers->Draw());
@@ -1007,27 +1013,35 @@ class userManagement extends plugin
     $result= "";
 
     $map= array( "gosaAccount" => array( "image" => "plugins/users/images/select_user.png",
+                                         "plugin" => "user",
                                          "alt" => _("Generic"),
                                          "title" => _("Edit generic properties")),
                  "posixAccount" => array("image" => "images/penguin.png",
+                                         "plugin" => "posixAccount",
                                          "alt" => _("POSIX"),
                                          "title" => _("Edit POSIX properties")),
                  "gosaMailAccount" => array("image" => "images/mailto.png",
                                          "alt" => _("Mail"),
+                                         "plugin" => "mailAccount",
                                          "title" => _("Edit mail properties")),
                  "sambaSamAccount" => array("image" => "plugins/systems/images/select_winstation.png",
+                                         "plugin" => "sambaAccount",
                                          "alt" => _("Samba"),
                                          "title" => _("Edit samba properties")),
                  "apple-user" => array("image" => "plugins/netatalk/images/select_netatalk.png",
+                                         "plugin" => "sambaAccount",
                                          "alt" => _("Netatalk"),
                                          "title" => _("Edit netatalk properties")),
                  "gotoEnvironment" => array("image" => "plugins/users/images/small_environment.png",
+                                         "plugin" => "gotoEnvironment",
                                          "alt" => _("Environment"),
                                          "title" => _("Edit environment properties")),
                  "goFaxAccount" => array("image" => "plugins/users/images/fax_small.png",
+                                         "plugin" => "goFaxAccount",
                                          "alt" => _("FAX"),
                                          "title" => _("Edit FAX properties")),
                  "goFonAccount" => array("image" => "plugins/gofon/images/select_phone.png",
+                                         "plugin" => "goFonAccount",
                                          "alt" => _("Phone"),
                                          "title" => _("Edit phone properties")));
 
@@ -1036,7 +1050,7 @@ class userManagement extends plugin
       if (in_array($oc, $class)) {
         $result.="<input class='center' type='image' src='".$properties['image']."' ".
                  "alt='".$properties['alt']."' title='".$properties['title'].
-                 "' name='edit_${row}_$oc' style='padding:1px'>";
+                 "' name='listing_edit_".$properties['plugin']."_$row' style='padding:1px'>";
       } else {
         $result.="<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
       }

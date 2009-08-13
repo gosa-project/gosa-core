@@ -24,8 +24,6 @@
   </definition>
 
   <table>
-    <!--<oddColor></oddColor>
-    <evenColor></evenColor>-->
     <layout>|20px||145px|80px;r|</layout>
 
     <column>
