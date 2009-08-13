@@ -90,7 +90,7 @@
       <name>password</name>
       <type>entry</type>
       <image>plugins/users/images/list_password.png</timage>
-      <acl>users/password;w</acl>
+      <acl>users/password:w</acl>
       <label>Change password</label>
     </action>
 
@@ -149,7 +149,7 @@
       <name>lock</name>
       <type>entry</type>
       <image>%{filter:lockImage(userPassword)}</timage>
-      <acl>users/password;w</acl>
+      <acl>users/password:w</acl>
       <label>%{filter:lockLabel(userPassword)}</label>
     </action>
 
@@ -157,7 +157,7 @@
       <name>password</name>
       <type>entry</type>
       <image>plugins/users/images/list_password.png</timage>
-      <acl>users/password;w</acl>
+      <acl>users/password:w</acl>
       <label>Change password</label>
     </action>
 
