@@ -532,7 +532,7 @@ echo "filter for images, action menu, sorting, department browsing, filter base 
       if ($action['type'] == "sub" && isset($action['action'])) {
         $level++;
         if (isset($action['label'])){
-          $result.= "<li$separator><a href='#'>$img".$action['label']."&nbsp;<img border='0' src='images/forward-arrow.png'></a>";
+          $result.= "<li$separator><a href='#'>$img"._($action['label'])."&nbsp;<img border='0' src='images/forward-arrow.png'></a>";
         }
         $result.= $this->recurseActions($action['action'])."</li>";
         $level--;
@@ -542,7 +542,7 @@ echo "filter for images, action menu, sorting, department browsing, filter base 
 
       // Render entry elseways
       if (isset($action['label'])){
-        $result.= "<li$separator><a href='#'>$img".$action['label']."</a></li>";
+        $result.= "<li$separator><a href='#'>$img"._($action['label'])."</a></li>";
         $separator= "";
       }
     }
