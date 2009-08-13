@@ -1594,3 +1594,88 @@ div.autocomplete li:hover{
 }
 
 div.autocomplete ul li.selected { background-color: #F0F0F0;}
+
+#pulldown {                                                                                                                    
+        background: #FFFFFF;                                                                                                   
+        height: 26px;                                                                                                          
+        border-top: 1px #D0D0D0 solid;                                                                                         
+        border-left: 1px #D0D0D0 solid;                                                                                        
+        border-bottom: 1px #808080 solid;                                                                                      
+        border-right: 1px #808080 solid;                                                                                       
+}                                                                                                                              
+
+#pulldown  ul {
+        display: block;
+        margin: 0;     
+        padding: 0;    
+        line-height: 1em;
+        list-style: none;
+        z-index: 90      
+}                        
+
+#pulldown  ul li {
+        float: left;
+        margin: 0 3px 0 0;
+        padding: 0;       
+        font-size: 12px;  
+        line-height: 1, 5em;
+        list-style-type: none;
+}                             
+
+#pulldown ul li a {
+        float: left;
+        display: block;
+        width: auto;   
+        font-weight: normal;
+        background: transparent;
+        text-decoration: none;  
+        color: #000;            
+        margin: 0;              
+        padding: 5px 5px 5px 5px;
+}                                
+
+#pulldown  ul li a:hover {
+        color: #000;      
+        text-decoration: none;
+}                             
+
+#pulldown  ul li.sep {
+        color: white;
+        padding: 0.8em 0em 0.5em 0em;
+}
+
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#pulldown  ul li a {
+        float: none;
+}
+
+/* End IE5-Mac hack */
+#pulldown  ul.level2, #pulldown ul.level3 {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        visibility: hidden;
+        border-top: 1px #D0D0D0 solid;
+        border-left: 1px #D0D0D0 solid;
+        border-bottom: 1px #808080 solid;
+        border-right: 1px #808080 solid;
+        background: #FFFFFF;
+}
+
+#pulldown  ul.level2 li, #pulldown ul.level3 li {
+        border-bottom: 1px solid #fff;
+        float: none;
+        margin: 0;
+        padding: 0;
+        width: 150px;
+}
+
+#pulldown  ul.level2 li a, #pulldown ul.level3 li a {
+        padding: 5px 9px 5px 5px;
+}
+
+#pulldown  ul.level2 li a:hover,#pulldown  ul.level3 li a:hover {
+        font-weight: normal;
+        background-color: #418DD4;
+        background-image: none;
+}
