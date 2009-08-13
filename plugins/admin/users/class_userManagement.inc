@@ -980,7 +980,7 @@ class userManagement extends plugin
 
     # FILTER Test #################################################
 
-    # Build filter
+    ## Build filter
     #$filter = new filter(get_template_path("user-filter.xml", true));
     #$filter->setObjectStorage(get_people_ou());
     #$filter->setCurrentBase($this->DivListUsers->selectedBase);
@@ -992,7 +992,7 @@ class userManagement extends plugin
 
     ## Build headpage
     #$headpage = new listing(get_template_path("user-list.xml", true));
-    #$headpage->registerFilter("accountProperties", "userManagement::filterProperties");
+    #$headpage->registerElementFilter("accountProperties", "userManagement::filterProperties");
     #$headpage->setFilter($filter);
 
     ## Needs to be called before update!
