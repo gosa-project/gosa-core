@@ -15,13 +15,19 @@ class listing {
   var $filters= array();
   var $pid;
   var $objectTypes;
+  var $objectTypeCount= array();
 
 
   function listing($filename)
   {
+    global $config;
+
     if (!$this->load($filename)) {
       die("Cannot parse $filename!");
     }
+
+    // Move footer information
+    $this->showFooter= ($config->get_cfg_value("listSummary") == "true");
 
     // Register build in filters
     $this->registerElementFilter("objectType", "listing::filterObjectType");
@@ -66,7 +72,7 @@ class listing {
     // Fill objectTypes
     if (isset($this->xmlData['definition']['objectType'])) {
       foreach ($this->xmlData['definition']['objectType'] as $index => $otype) {
-        $this->objectTypes[$otype['objectClass']]= $this->xmlData['definition']['objectType'][$index];
+        $this->objectTypes[]= $this->xmlData['definition']['objectType'][$index];
       }
     }
 
@@ -95,7 +101,7 @@ class listing {
 
   function render()
   {
-echo "sorting, department browsing, filter base handling, bottom list info, copy'n paste handler, snapshot handler<br>";
+echo "sorting, department browsing, filter base handling, copy'n paste handler, snapshot handler<br>";
 
     // Initialize list
     $result= "<input type='hidden' value='$this->pid' name='PID'>";
@@ -140,23 +146,40 @@ echo "sorting, department browsing, filter base handling, bottom list info, copy
     }
 
     // Need to fill the list if it's not full (nobody knows why this is 22 ;-))
+    $emptyListStyle= (count($this->entries) == 0)?"border:0;":"";
     if (count($this->entries) < 22) {
       $result.= "<tr>";
       for ($i= 0; $i<$num_cols; $i++) {
         if ($i == 0) {
-          $result.= "<td class='list1nohighlight' style='height:100%;'>&nbsp;</td>";
+          $result.= "<td class='list1nohighlight' style='$emptyListStyle height:100%;'>&nbsp;</td>";
           continue;
         }
         if ($i != $num_cols-1) {
-          $result.= "<td class='list1nohighlight''>&nbsp;</td>";
+          $result.= "<td class='list1nohighlight' style='$emptyListStyle'>&nbsp;</td>";
         } else {
-          $result.= "<td class='list1nohighlight' style='border-right:1px solid #AAA'>&nbsp;</td>";
+          $result.= "<td class='list1nohighlight' style='border-right:1px solid #AAA;$emptyListStyle'>&nbsp;</td>";
         }
       }
       $result.= "</tr>";
     }
 
-    $result.= "</table></div></td></tr></table></div>";
+    $result.= "</table></div></td></tr>";
+
+    // Add the footer if requested
+    if ($this->showFooter) {
+      $result.= "<tr><td class='scrollhead'><table summary='' style='width:100%' cellspacing='0' id='t_scrollfoot'><tr><td class='listfooter' style='border-bottom:0px;'>";
+
+      foreach ($this->objectTypes as $objectType) {
+        if (isset($this->objectTypeCount[$objectType['label']])) {
+          $label= _($objectType['label']);
+          $result.= "<img class='center' src='".$objectType['image']."' title='$label' alt='$label'>&nbsp;".$this->objectTypeCount[$objectType['label']]."&nbsp;&nbsp;&nbsp;&nbsp;";
+        }
+      }
+
+      $result.= "<td class='listfooter' style='width:13px;border-right:0px;'>&nbsp;</td></table></td></tr>";
+    }
+
+    $result.= "</table></div>";
 
     $smarty= get_smarty();
     $smarty->assign("FILTER", $this->filter->render());
@@ -322,25 +345,51 @@ echo "sorting, department browsing, filter base handling, bottom list info, copy
   }
 
 
+  function getObjectType($types, $classes)
+  {
+    // Walk thru types and see if there's something matching
+    foreach ($types as $objectType) {
+      $ocs= $objectType['objectClass'];
+      if (!is_array($ocs)){
+        $ocs= array($ocs);
+      }
+
+      $found= true;
+      foreach ($ocs as $oc){
+        if (preg_match('/^!(.*)$/', $oc, $match)) {
+          $oc= $match[1];
+          if (in_array($oc, $classes)) {
+            $found= false;
+          }
+        } else {
+          if (!in_array($oc, $classes)) {
+            $found= false;
+          }
+        }
+      }
+
+      if ($found) {
+        return $objectType;
+      }
+    }
+
+    return null;
+  }
+
+
   function filterObjectType($dn, $classes)
   {
     // Walk thru classes and return on first match
     $result= "&nbsp;";
-    $prio= 99;
-    foreach ($classes as $objectClass) {
-      if (isset($this->objectTypes[$objectClass])){
-        if (!isset($this->objectTypes[$objectClass]["priority"])){
-          $result= "<img class='center' title='".LDAP::fix($dn)."' src='".$this->objectTypes[$objectClass]["image"]."'>";
-          return $result; 
-        }
 
-        if ($this->objectTypes[$objectClass]["priority"] < $prio){
-          $prio= $this->objectTypes[$objectClass]["priority"];
-          $result= "<img class='center' title='".LDAP::fix($dn)."' src='".$this->objectTypes[$objectClass]["image"]."'>";
-        }
+    $objectType= $this->getObjectType($this->objectTypes, $classes);
+    if ($objectType) {
+      $result= "<img class='center' title='".LDAP::fix($dn)."' src='".$objectType["image"]."'>";
+      if (!isset($this->objectTypeCount[$objectType['label']])) {
+        $this->objectTypeCount[$objectType['label']]= 0;
       }
+      $this->objectTypeCount[$objectType['label']]++;
     }
-
     return $result;
   }
 
