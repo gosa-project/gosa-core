@@ -30,7 +30,6 @@
       <attribute>modifyTimestamp</attribute>
       <attribute>userPassword</attribute>
     </query>
-    <base>true</base>
     <scope>auto</scope>
   </search>
 

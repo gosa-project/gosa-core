@@ -4,6 +4,7 @@
   <definition>
     <departmentBrowser>true</departmentBrowser>
     <departmentRootVisible>false</departmentRootVisible>
+    <baseMode>true</baseMode>
     <multiSelect>true</multiSelect>
     <template>user-list.tpl</template>
     <module>users</module>
@@ -33,19 +34,17 @@
 
     <column>
       <label>Name / Department</label>
-      <sortable>true</sortable>
+      <sort>string</sort>
       <value>%{filter:link(row,pid,dn,"%s, %s [%s]",sn,givenName,uid)}</value>
     </column>
 
     <column>
       <label>Properties</label>
-      <sortable>false</sortable>
       <value>%{filter:accountProperties(dn,row,objectClass)}</value>
     </column>
 
     <column>
       <label>Actions</label>
-      <sortable>false</sortable>
       <value>%{filter:actions(dn,row,objectClass)}</value>
     </column>
 
