@@ -10,14 +10,15 @@
     <label>List of users</label>
 
     <objectType>
+      <label>Users</label>
       <objectClass>gosaAccount</objectClass>
+      <objectClass>!gosaUserTemplate</objectClass>
       <image>plugins/users/images/select_user.png</image>
-      <priority>2</priority>
     </objectType>
 
     <objectType>
+      <label>Templates</label>
       <objectClass>gosaUserTemplate</objectClass>
-      <priority>1</priority>
       <image>plugins/users/images/select_template.png</image>
     </objectType>
 
