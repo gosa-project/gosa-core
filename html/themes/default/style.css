@@ -1629,18 +1629,16 @@ div.autocomplete ul li.selected { background-color: #F0F0F0;}
         font-weight: normal;
         background: transparent;
         text-decoration: none;  
-        color: #000;            
         margin: 0;              
         padding: 5px 5px 5px 5px;
 }                                
 
 #pulldown  ul li a:hover {
-        color: #000;      
         text-decoration: none;
 }                             
 
 #pulldown  ul li.sep {
-        color: white;
+        color: #AAA;
         padding: 0.8em 0em 0.5em 0em;
 }
 
