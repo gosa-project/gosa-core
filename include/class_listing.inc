@@ -232,6 +232,9 @@ echo "sorting, department browsing, copypaste handler, snapshot handler, daemon 
 
   function update()
   {
+    global $config;
+    $ui= get_userinfo();
+
     // Do not do anything if this is not our PID
     # DISABLED because the object is not in the session
     #if(isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->pid) {
@@ -250,6 +253,33 @@ echo "sorting, department browsing, copypaste handler, snapshot handler, daemon 
       }
     }
 
+    // Override base if we got signals from the navigation elements
+    $action= "";
+    foreach ($_POST as $key => $value) {
+      if (preg_match('/^(ROOT|BACK|HOME)_x$/', $key, $match)) {
+        $action= $match[1];
+        break;
+      }
+    }
+
+    // Navigation handling
+    if ($action == 'ROOT') {
+      $deps= $ui->get_module_departments($this->module);
+      $this->base= $deps[0];
+    }
+    if ($action == 'BACK') {
+      $deps= $ui->get_module_departments($this->module);
+      $base= preg_replace("/^[^,]+,/", "", $this->base);
+      if(in_array_ics($base, $deps)){
+        $this->base= $base;
+      }
+    }
+    if ($action == 'HOME') {
+      $ui= get_userinfo();
+      $this->base= get_base_from_people($ui->dn);
+    }
+
+    // Update filter and refresh entries
     $this->filter->setBase($this->base);
     $this->entries= $this->filter->query();
   }
@@ -576,7 +606,7 @@ echo "sorting, department browsing, copypaste handler, snapshot handler, daemon 
     /* Draw root button */
     if($enableRoot){
       $result["ROOT"]= "<input class='center' type='image' src='images/lists/root.png' align='middle' ".
-                       "title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>";
+                       "title='"._("Go to root department")."' name='ROOT' alt='"._("Root")."'>";
     }else{
       $result["ROOT"]= "<img src='images/lists/root_grey.png' class='center' alt='"._("Root")."'>";
     }
@@ -584,7 +614,7 @@ echo "sorting, department browsing, copypaste handler, snapshot handler, daemon 
     /* Draw back button */
     if($enableBack){
       $result["BACK"]= "<input class='center' type='image' align='middle' src='images/lists/back.png' ".
-                       "title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>";
+                       "title='"._("Go up one department")."' alt='"._("Up")."' name='BACK'>";
     }else{
       $result["BACK"]= "<img src='images/lists/back_grey.png' class='center' alt='"._("Up")."'>";
     }
@@ -592,14 +622,14 @@ echo "sorting, department browsing, copypaste handler, snapshot handler, daemon 
     /* Draw home button */
     if($enableHome){
       $result["HOME"]= "<input class='center' type='image' align='middle' src='images/lists/home.png' ".
-                       "title='"._("Go to users department")."' alt='"._("Home")."' name='dep_home'>";
+                       "title='"._("Go to users department")."' alt='"._("Home")."' name='HOME'>";
     }else{
       $result["HOME"]= "<img src='images/lists/home_grey.png' class='center' alt='"._("Home")."'>";
     }
 
     /* Draw reload button, this button is enabled everytime */
     $result["RELOAD"]= "<input class='center' type='image' src='images/lists/reload.png' align='middle' ".
-                       "title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>";
+                       "title='"._("Reload list")."' name='REFRESH' alt='"._("Submit")."'>";
 
     return ($result);
   }
