@@ -345,7 +345,7 @@ echo "filter for images, action menu, sorting, department browsing, filter base 
   }
 
 
-  function filterActions()
+  function filterActions($row, $dn)
   {
     return "TBD";
   }
@@ -486,6 +486,11 @@ echo "filter for images, action menu, sorting, department browsing, filter base 
       }
     }
 
+    // Filter POST with "act" attributes -> posted from action menu
+    if (isset($_POST['act']) && $_POST['act'] != '') {
+      $result['action']= validate($_POST['act']);
+    }
+
     return $result;
   }
 
@@ -499,7 +504,8 @@ echo "filter for images, action menu, sorting, department browsing, filter base 
 
     // Load shortcut
     $actions= &$this->xmlData['actionmenu']['action'];
-    $result= "<ul class='level1' id='root'><li><a href='#'>Aktionen&nbsp;<img ".
+    $result= "<input type='hidden' name='act' id='actionmenu' value=''>".
+             "<ul class='level1' id='root'><li><a href='#'>Aktionen&nbsp;<img ".
              "border=0 src='images/lists/sort-down.png'></a>";
 
     // Build ul/li list
@@ -516,6 +522,11 @@ echo "filter for images, action menu, sorting, department browsing, filter base 
     $separator= "";
 
     foreach ($actions as $action) {
+
+      // Skip the entry completely if there's no permission to execute it
+      if (!$this->hasActionPermission($action, $this->filter->base)) {
+        continue;
+      }
 
       // Fill image if set
       $img= "";
@@ -542,9 +553,25 @@ echo "filter for images, action menu, sorting, department browsing, filter base 
 
       // Render entry elseways
       if (isset($action['label'])){
-        $result.= "<li$separator><a href='#'>$img"._($action['label'])."</a></li>";
-        $separator= "";
+        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"".$action['name']."\";mainform.submit();'>$img"._($action['label'])."</a></li>";
       }
+
+      // Check for special types
+      switch ($action['type']) {
+        case 'copypaste':
+          echo "actionmenu: copypaste missing<br>";
+          break;
+
+        case 'snapshot':
+          echo "actionmenu: snapshot missing<br>";
+          break;
+
+        case 'daemon':
+          echo "actionmenu: daemon missing<br>";
+          break;
+      }
+
+      $separator= "";
     }
 
     $result.= "</ul>";
@@ -552,6 +579,76 @@ echo "filter for images, action menu, sorting, department browsing, filter base 
   }
 
 
+  function hasActionPermission($action, $dn)
+  {
+    $ui= get_userinfo();
+
+    if (isset($action['acl'])) {
+      $acls= $action['acl'];
+      if (!is_array($acls)) {
+        $acls= array($acls);
+      }
+
+      // Every ACL has to pass
+      foreach ($acls as $acl) {
+        $module= $this->module;
+        $acllist= array();
+
+        // Split for category and plugins if needed
+        // match for "[rw]" style entries
+        if (preg_match('/^\[([rwcdm]+)\]$/', $acl, $match)){
+          $aclList= array($match[1]);
+        }
+
+        // match for "users[rw]" style entries
+        if (preg_match('/^([a-zA-Z0-9]+)\[([rwcdm]+)\]$/', $acl, $match)){
+          $module= $match[1];
+          $aclList= array($match[2]);
+        }
+
+        // match for "users/user[rw]" style entries
+        if (preg_match('/^([a-zA-Z0-9]+\/[a-zA-Z0-9]+)\[([rwcdm]+)\]$/', $acl, $match)){
+          $module= $match[1];
+          $aclList= array($match[2]);
+        }
+
+        // match "users/user[userPassword:rw(,...)*]" style entries
+        if (preg_match('/^([a-zA-Z0-9]+\/[a-zA-Z0-9]+)\[([a-zA-Z0-9]+:[rwcdm]+(,[a-zA-Z0-9]+:[rwcdm]+)*)\]$/', $acl, $match)){
+          $module= $match[1];
+          $aclList= split(',', $match[2]);
+        }
+
+        // Walk thru prepared ACL by using $module
+        foreach($aclList as $sAcl) {
+          $checkAcl= "";
+
+          // Category or detailed permission?
+          if (strpos('/', $module) === false) {
+            if (preg_match('/([a-zA-Z0-9]+):([rwcdm]+)/', $sAcl, $m) ) {
+              $checkAcl= $ui->get_permissions($dn, $module, $m[1]);
+              $sAcl= $m[2];
+            } else {
+              $checkAcl= $ui->get_permissions($dn, $module, '0');
+            }
+          } else {
+            $checkAcl= $ui->get_category_permissions($dn, $module);
+          }
+
+          // Split up remaining part of the acl and check if it we're
+          // allowed to do something...
+          $parts= str_split($sAcl);
+          foreach ($parts as $part) {
+            if (strpos($checkAcl, $part) === false){
+              return false;
+            }
+          }
+
+        }
+      }
+    }
+
+    return true;
+  }
 }
 
 ?>
