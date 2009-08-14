@@ -982,7 +982,6 @@ class userManagement extends plugin
     ## Build filter
     #$filter = new filter(get_template_path("user-filter.xml", true));
     #$filter->setObjectStorage(get_people_ou());
-    #$filter->setCurrentBase($this->DivListUsers->selectedBase);
     #$filter->update();
     #session::set('autocomplete', $filter);
     #if (!$filter->isValid()){
@@ -997,7 +996,11 @@ class userManagement extends plugin
     #$headpage->setFilter($filter);
 
     ## Needs to be called before update!
-    #print_a($headpage->getAction());
+    #$action= $headpage->getAction();
+    #if ($action['action'] != '') {
+    #  echo "List detected action:";
+    #  print_a($action);
+    #}
 
     ## Refresh for filter
     #$headpage->update();
