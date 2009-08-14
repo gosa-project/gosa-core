@@ -24,7 +24,7 @@
   </definition>
 
   <table>
-    <layout>|20px||145px|80px;r|</layout>
+    <layout>|20px||145px|100px;r|</layout>
 
     <column>
       <value>%{filter:objectType(dn,objectClass)}</value>
@@ -134,11 +134,11 @@
     </action>
 
     <action>
-      <name>edit</name>
+      <name>templatize</name>
       <type>entry</type>
-      <objectclass>gosaUserTemplate</objectclass>
-      <image>images/lists/edit.png</image>
-      <label>Edit user</label>
+      <objectclass>!gosaUserTemplate</objectclass>
+      <image>plugins/users/images/wizard.png</image>
+      <label>Apply template</label>
     </action>
 
     <action>

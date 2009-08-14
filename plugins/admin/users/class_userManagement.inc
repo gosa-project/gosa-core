@@ -979,7 +979,6 @@ class userManagement extends plugin
     $this->DivListUsers->setEntries($this->list);
 
     # FILTER Test #################################################
-
     ## Build filter
     #$filter = new filter(get_template_path("user-filter.xml", true));
     #$filter->setObjectStorage(get_people_ou());
@@ -993,6 +992,8 @@ class userManagement extends plugin
     ## Build headpage
     #$headpage = new listing(get_template_path("user-list.xml", true));
     #$headpage->registerElementFilter("accountProperties", "userManagement::filterProperties");
+    #$headpage->registerElementFilter("lockLabel", "userManagement::filterLockLabel");
+    #$headpage->registerElementFilter("lockImage", "userManagement::filterLockImage");
     #$headpage->setFilter($filter);
 
     ## Needs to be called before update!
@@ -1005,6 +1006,38 @@ class userManagement extends plugin
     ################################################### FILTER Test
 
     return($this->DivListUsers->Draw());
+  }
+
+
+  static function filterLockImage($userPassword)
+  {
+    $image= "images/empty.png";
+
+    if(isset($userPassword[0]) && preg_match("/^\{[^\}]/",$userPassword[0])){
+      if(preg_match("/^[^\}]*+\}!/",$userPassword[0])){
+        $image= "images/lists/locked.png";
+      }else{
+        $image= "images/lists/unlocked.png";
+      }
+    }
+
+    return $image;
+  }
+
+
+  static function filterLockLabel($userPassword)
+  {
+    $label= "";
+
+    if(isset($userPassword[0]) && preg_match("/^\{[^\}]/",$userPassword[0])){
+      if(preg_match("/^[^\}]*+\}!/",$userPassword[0])){
+        $label= _("Unlock account");
+      }else{
+        $label= _("Lock account");
+      }
+    }
+
+    return $label;
   }
 
 
