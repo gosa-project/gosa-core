@@ -95,7 +95,7 @@ class listing {
 
   function render()
   {
-echo "filter for images, action menu, sorting, department browsing, filter base handling, bottom list info, copy'n paste handler, snapshot handler<br>";
+echo "sorting, department browsing, filter base handling, bottom list info, copy'n paste handler, snapshot handler<br>";
 
     // Initialize list
     $result= "<input type='hidden' value='$this->pid' name='PID'>";
@@ -150,7 +150,7 @@ echo "filter for images, action menu, sorting, department browsing, filter base 
         if ($i != $num_cols-1) {
           $result.= "<td class='list1nohighlight''>&nbsp;</td>";
         } else {
-          $result.= "<td class='list1nohighlight' style='border-right:0px'>&nbsp;</td>";
+          $result.= "<td class='list1nohighlight' style='border-right:1px solid #AAA'>&nbsp;</td>";
         }
       }
       $result.= "</tr>";
@@ -345,9 +345,65 @@ echo "filter for images, action menu, sorting, department browsing, filter base 
   }
 
 
-  function filterActions($row, $dn)
+  function filterActions($dn, $row, $classes)
   {
-    return "TBD";
+    // Do nothing if there's no menu defined
+    if (!isset($this->xmlData['actiontriggers']['action'])) {
+      return "&nbsp;";
+    }
+
+    // Go thru all actions
+    $result= "";
+    $actions= $this->xmlData['actiontriggers']['action'];
+    foreach($actions as $action) {
+      // Skip the entry completely if there's no permission to execute it
+      if (!$this->hasActionPermission($action, $dn)) {
+        continue;
+      }
+
+      // If there's an objectclass definition and we don't have it
+      // add an empty picture here.
+      if (isset($action['objectclass'])){
+        $objectclass= $action['objectclass'];
+        if (preg_match('/^!(.*)$/', $objectclass, $m)){
+          $objectclass= $m[1];
+          if(in_array($objectclass, $classes)) {
+            $result.= "<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+            continue;
+          }
+        } else {
+          if(!in_array($objectclass, $classes)) {
+            $result.= "<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+            continue;
+          }
+        }
+      }
+
+      // Render normal entries as usual
+      if ($action['type'] == "entry") {
+        $label= $this->processElementFilter($action['label'], $this->entries[$row], $row);
+        $image= $this->processElementFilter($action['image'], $this->entries[$row], $row);
+        $result.="<input class='center' type='image' src='$image' title='$label' ".
+                 "name='listing_".$action['name']."_$row' style='padding:1px'>";
+      }
+
+      // Handle special types
+      if ($action['type'] == "snapshot") {
+        #TODO
+        #echo "actiontriggers: snapshot missing<br>";
+      }
+      if ($action['type'] == "copypaste") {
+        #TODO
+        #echo "actiontriggers: copypaste missing<br>";
+      }
+      if ($action['type'] == "daemon") {
+        #TODO
+        #echo "actiontriggers: daemon missing<br>";
+      }
+
+    }
+
+    return $result;
   }
 
 
@@ -454,6 +510,11 @@ echo "filter for images, action menu, sorting, department browsing, filter base 
         $result['action']= preg_replace('/^listing_([a-zA-Z_]+)_[0-9]+$/', '$1', $key);
         $result['targets'][]= $this->entries[$target]['dn'];
       }
+
+      // Drop targets if empty
+      if (count($result['targets']) == 0) {
+        unset($result['targets']);
+      }
       return $result;
     }
 
@@ -491,6 +552,10 @@ echo "filter for images, action menu, sorting, department browsing, filter base 
       $result['action']= validate($_POST['act']);
     }
 
+    // Drop targets if empty
+    if (count($result['targets']) == 0) {
+      unset($result['targets']);
+    }
     return $result;
   }
 
@@ -559,15 +624,18 @@ echo "filter for images, action menu, sorting, department browsing, filter base 
       // Check for special types
       switch ($action['type']) {
         case 'copypaste':
-          echo "actionmenu: copypaste missing<br>";
+          #TODO
+          #echo "actionmenu: copypaste missing<br>";
           break;
 
         case 'snapshot':
-          echo "actionmenu: snapshot missing<br>";
+          #TODO
+          #echo "actionmenu: snapshot missing<br>";
           break;
 
         case 'daemon':
-          echo "actionmenu: daemon missing<br>";
+          #TODO
+          #echo "actionmenu: daemon missing<br>";
           break;
       }
 
@@ -649,6 +717,7 @@ echo "filter for images, action menu, sorting, department browsing, filter base 
 
     return true;
   }
+
 }
 
 ?>
