@@ -11,17 +11,18 @@ class filter {
   var $objectStorage= array();
   var $objectBase= "";
   var $base= "";
-  var $bases= array();
   var $scope= "";
   var $query;
   var $initial= false;
-  var $baseMode= false;
   var $scopeMode= "auto";
   var $alphabet= null;
 
 
   function filter($filename)
   {
+    global $config;
+
+    // Load eventually passed filename
     if (!$this->load($filename)) {
       die("Cannot parse $filename!");
     }
@@ -47,7 +48,6 @@ class filter {
 
       // Move information
       $entry= $this->xmlData['search'];
-      $this->baseMode= $entry['base'];
       $this->scopeMode= $entry['scope'];
       if ($entry['scope'] == "auto") {
         $this->scope= "one";
@@ -199,11 +199,6 @@ class filter {
   }
 
 
-  function setBases($bases) {
-    $this->bases= $bases;    
-  }
-
-
   function setObjectStorage($storage) {
     $this->objectStorage= $storage;    
   }
@@ -214,30 +209,13 @@ class filter {
   }
 
 
-  function setCurrentBase($base) {
+  function setBase($base) {
     $this->base= $base;
   }
 
 
   function setCurrentScope($scope) {
     $this->scope= $scope;
-  }
-
-
-  function renderBase()
-  {
-    $result= "<select name='base' onChange='mainform.submit()' size='1'>";
-
-    foreach ($this->bases as $key=>$value) {
-      $selected= "";
-      if ($key == $this->base) {
-        $selected= " selected";
-      }
-      $result.= "<option value='".$key."'$selected>".$value."</option>";
-    }
-    $result.= "</select>";
-
-    return $result;
   }
 
 
@@ -299,7 +277,6 @@ class filter {
     $smarty->assign("ALPHABET", $this->renderAlphabet());
     $smarty->assign("APPLY", $this->renderApply());
     $smarty->assign("SCOPE", $this->renderScope());
-    $smarty->assign("BASE", $this->renderBase());
 
     // Load template and replace elementsHtml[]
     foreach ($this->elements as $tag => $element) {
@@ -414,14 +391,6 @@ class filter {
       }
     }
 
-    // Save base
-    if (isset($_POST['BASE']) && $this->baseMode == "true") {
-      $base= validate($_POST['BASE']);
-      if (isset($this->bases[$base])) {
-        $this->base= $base;
-      }
-    }
-
     // Save scope if needed
     if ($this->scopeMode == "auto") {
       $this->scope= isset($_POST['SCOPE'])?"sub":"one";
@@ -493,6 +462,7 @@ class filter {
 
     }
   }
+
 
 }
 

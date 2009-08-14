@@ -4,12 +4,16 @@ class listing {
 
   var $xmlData;
   var $entries;
+  var $departments= array();
   var $departmentBrowser= false;
   var $departmentRootVisible= false;
   var $multiSelect= false;
   var $template;
   var $headline;
   var $module;
+  var $base;
+  var $baseMode= false;
+  var $bases= array();
   var $header= array();
   var $colprops= array();
   var $filters= array();
@@ -25,6 +29,13 @@ class listing {
     if (!$this->load($filename)) {
       die("Cannot parse $filename!");
     }
+
+    // Set base for filter
+    $this->base= session::global_get("CurrentMainBase");
+    if ($this->base == null) {
+      $this->base= $config->current['BASE'];
+    }
+    $this->refreshBasesList();
 
     // Move footer information
     $this->showFooter= ($config->get_cfg_value("listSummary") == "true");
@@ -62,7 +73,7 @@ class listing {
     $this->xmlData= $this->xmlData["list"];
 
     // Load some definition values
-    foreach (array("departmentBrowser", "departmentRootVisible", "multiSelect") as $token) {
+    foreach (array("departmentBrowser", "departmentRootVisible", "multiSelect", "baseMode") as $token) {
       if (isset($this->xmlData['definition'][$token]) &&
           $this->xmlData['definition'][$token] == "true"){
         $this->$token= true;
@@ -101,7 +112,7 @@ class listing {
 
   function render()
   {
-echo "sorting, department browsing, filter base handling, copy'n paste handler, snapshot handler<br>";
+echo "sorting, department browsing, copypaste handler, snapshot handler, daemon handler<br>";
 
     // Initialize list
     $result= "<input type='hidden' value='$this->pid' name='PID'>";
@@ -126,9 +137,12 @@ echo "sorting, department browsing, filter base handling, copy'n paste handler, 
     $result.= "<tr><td colspan='$num_cols' class='scrollbody'><div style='width:600px;height:430px;' id='d_scrollbody' class='scrollbody'><table summary='' style='height:100%;width:581px;' cellspacing='0' id='t_scrollbody'>";
 
     // No results? Just take an empty colspanned row
-    if (count($this->entries) == 0) {
+    if (count($this->entries) + count($this->departments) == 0) {
       $result.= "<tr class='rowxp0'><td class='list1nohighlight' colspan='$num_cols' style='height:100%;border-right:0px;width:100%;'>&nbsp;</td></tr>";
     }
+
+    // Fill with department browser if configured this way
+###############
 
     // Fill with contents
     foreach ($this->entries as $row => $entry){
@@ -191,8 +205,9 @@ echo "sorting, department browsing, filter base handling, copy'n paste handler, 
       $smarty->assign($key, $html);
     }
 
-    // Assign action menu
+    // Assign action menu / base
     $smarty->assign("ACTIONS", $this->renderActionMenu());
+    $smarty->assign("BASE", $this->renderBase());
 
     // Assign separator
     $smarty->assign("SEPARATOR", "<img src='images/lists/seperator.png' alt='-' align='middle' height='16' width='1' class='center'>");
@@ -207,6 +222,10 @@ echo "sorting, department browsing, filter base handling, copy'n paste handler, 
   function setFilter($filter)
   {
     $this->filter= &$filter;
+    if ($this->departmentBrowser){
+      # $this->departments= $this->filter->getDepartments();
+    }
+    $this->filter->setBase($this->base);
     $this->entries= $this->filter->query();
   }
 
@@ -219,6 +238,19 @@ echo "sorting, department browsing, filter base handling, copy'n paste handler, 
     #  return;
     #}
 
+    if ($this->departmentBrowser){
+      # $this->departments= $this->filter->getDepartments();
+    }
+
+    // Save base
+    if (isset($_POST['BASE']) && $this->baseMode == true) {
+      $base= validate($_POST['BASE']);
+      if (isset($this->bases[$base])) {
+        $this->base= $base;
+      }
+    }
+
+    $this->filter->setBase($this->base);
     $this->entries= $this->filter->query();
   }
 
@@ -280,6 +312,38 @@ echo "sorting, department browsing, filter base handling, copy'n paste handler, 
     $data= $this->processElementFilter($data, $config, $row);
 
     return $data;
+  }
+
+
+  function renderBase()
+  {
+    $result= "<select name='BASE' onChange='mainform.submit()' size='1'>";
+    $firstDN= null;
+    $found= false;
+
+    foreach ($this->bases as $key=>$value) {
+      // Keep first entry to fall back eventually
+      if(!$firstDN) {
+        $firstDN= $key;
+      }
+
+      // Prepare to render entry
+      $selected= "";
+      if ($key == $this->base) {
+        $selected= " selected";
+        $found= true;
+      }
+      $result.= "<option value='".$key."'$selected>".$value."</option>";
+    }
+    $result.= "</select>";
+
+    // Reset the currently used base to the first DN we found if there
+    // was no match.
+    if(!$found){
+      $this->base = $firstDN;
+    }
+
+    return $result;
   }
 
 
@@ -766,6 +830,26 @@ echo "sorting, department browsing, filter base handling, copy'n paste handler, 
 
     return true;
   }
+
+
+  function refreshBasesList()
+  {
+    global $config;
+    $ui= get_userinfo();
+
+    // Do some array munching to get it user friendly
+    $ids= $config->idepartments;
+    $d= $ui->get_module_departments($this->module);
+    $k_ids= array_keys($ids);
+    $deps= array_intersect($d,$k_ids);
+
+    // Fill internal bases list
+    $this->bases= array();
+    foreach($k_ids as $department){
+      $this->bases[$department] = $ids[$department];
+    }
+  }
+
 
 }
 
