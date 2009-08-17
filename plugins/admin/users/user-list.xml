@@ -9,6 +9,7 @@
     <template>user-list.tpl</template>
     <module>users</module>
     <label>List of users</label>
+    <defaultSortColumn>1</defaultSortColumn>
 
     <objectType>
       <label>Users</label>
@@ -34,7 +35,8 @@
 
     <column>
       <label>Name / Department</label>
-      <sort>string</sort>
+      <sortAttribute>sn</sortAttribute>
+      <sortType>string</sortType>
       <value>%{filter:link(row,pid,dn,"%s, %s [%s]",sn,givenName,uid)}</value>
     </column>
 
