@@ -303,10 +303,9 @@ echo "department browsing, copypaste handler, snapshot handler, daemon handler<b
     $ui= get_userinfo();
 
     // Do not do anything if this is not our PID
-    # DISABLED because the object is not in the session
-    #if(isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->pid) {
-    #  return;
-    #}
+    if(isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->pid) {
+      return;
+    }
 
     if ($this->departmentBrowser){
       # $this->departments= $this->filter->getDepartments();
@@ -726,10 +725,9 @@ echo "department browsing, copypaste handler, snapshot handler, daemon handler<b
   function getAction()
   {
     // Do not do anything if this is not our PID
-    # DISABLED because the object is not in the session
-    #if(isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->pid) {
-    #  return;
-    #}
+    if(isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->pid) {
+      return;
+    }
 
     $result= array("targets" => array(), "action" => "");
 
