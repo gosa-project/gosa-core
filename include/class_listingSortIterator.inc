@@ -23,7 +23,7 @@
 class listingSortIterator implements Iterator {
   private $data;
 
-  public function __construct($data, $attribute, $type= "string") {
+  public function __construct($data, $direction, $attribute, $type= "string") {
     global $_sortAttribute;
     global $_sortType;
     $_sortAttribute= $attribute; 
@@ -54,14 +54,23 @@ class listingSortIterator implements Iterator {
         case 'string':
           return strnatcmp($a, $b);
 
+        // Sort for string by default
         default:
-          die(sprintf(_("Cannot sort entries: method '%s' is unknown!"), $_sortType));
+          return strnatcmp($a, $b);
       }
     }
 
     // Sort for attribute
-    usort($data, "attrSort"); 
-    $this->data= $data;
+    if ($attribute != "") {
+      usort($data, "attrSort");
+    }
+
+    // Invert if direction is set
+    if ($direction) {
+      $this->data= array_reverse($data);
+    } else {
+      $this->data= $data;
+    }
   }
 
   function rewind() {

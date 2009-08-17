@@ -409,12 +409,13 @@ class filter {
           $this->elementValues[$tag]= "";
         }
       }
+
+      // Save scope if needed
+      if ($this->scopeMode == "auto") {
+        $this->scope= isset($_POST['SCOPE'])?"sub":"one";
+      }
     }
 
-    // Save scope if needed
-    if ($this->scopeMode == "auto") {
-      $this->scope= isset($_POST['SCOPE'])?"sub":"one";
-    }
   }
 
 

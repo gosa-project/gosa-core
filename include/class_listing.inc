@@ -1,4 +1,24 @@
 <?php
+/*
+ * This code is part of GOsa (http://www.gosa-project.org)
+ * Copyright (C) 2003-2008 GONICUS GmbH
+ *
+ * ID: $$Id$$
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 class listing {
 
@@ -12,6 +32,10 @@ class listing {
   var $headline;
   var $module;
   var $base;
+  var $sortDirection= null;
+  var $sortColumn= null;
+  var $sortAttribute;
+  var $sortType;
   var $baseMode= false;
   var $bases= array();
   var $header= array();
@@ -91,16 +115,7 @@ class listing {
     $this->colprops= $this->parseLayout($this->xmlData['table']['layout']);
 
     // Prepare table headers
-    $this->header= array();
-    if (isset($this->xmlData['table']['column'])){
-      foreach ($this->xmlData['table']['column'] as $index => $config) {
-        if (isset($config['label'])) {
-          $this->header[$index]= "<td class='listheader' ".$this->colprops[$index].">"._($config['label'])."</td>";
-        } else {
-          $this->header[$index]= "<td class='listheader' ".$this->colprops[$index].">&nbsp;</td>";
-        }
-      }
-    }
+    $this->renderHeader();
 
     // Assign headline/module
     $this->headline= _($this->xmlData['definition']['label']);
@@ -110,9 +125,60 @@ class listing {
   }
 
 
+  function renderHeader()
+  {
+    $this->header= array();
+
+    // Initialize sort?
+    $sortInit= false;
+    if (!$this->sortDirection) {
+      $this->sortColumn= 0;
+      if (isset($this->xmlData['definition']['defaultSortColumn'])){
+        $this->sortColumn= $this->xmlData['definition']['defaultSortColumn'];
+      } else {
+        $this->sortAttribute= "";
+      }
+      $this->sortDirection= array();
+      $sortInit= true;
+    }
+
+    if (isset($this->xmlData['table']['column'])){
+      foreach ($this->xmlData['table']['column'] as $index => $config) {
+        // Initialize everything to one direction
+        if ($sortInit) {
+          $this->sortDirection[$index]= false;
+        }
+
+        $sorter= "";
+        if ($index == $this->sortColumn && isset($config['sortAttribute']) &&
+            isset($config['sortType'])) {
+          $this->sortAttribute= $config['sortAttribute'];
+          $this->sortType= $config['sortType'];
+          $sorter= "&nbsp;<img border='0' title='".($this->sortDirection[$index]?_("Up"):_("Down"))."' src='images/lists/sort-".($this->sortDirection[$index]?"up":"down").".png' align='top'>";
+        }
+        $sortable= (isset($config['sortAttribute']));
+
+        $link= "href='?plug=".$_GET['plug']."&amp;PID=$this->pid&amp;act=SORT_$index'";
+        if (isset($config['label'])) {
+          if ($sortable) {
+            $this->header[$index]= "<td class='listheader' ".$this->colprops[$index]."><a $link>"._($config['label'])."$sorter</a></td>";
+          } else {
+            $this->header[$index]= "<td class='listheader' ".$this->colprops[$index].">"._($config['label'])."</td>";
+          }
+        } else {
+          if ($sortable) {
+            $this->header[$index]= "<td class='listheader' ".$this->colprops[$index]."><a $link>&nbsp;$sorter</a></td>";
+          } else {
+            $this->header[$index]= "<td class='listheader' ".$this->colprops[$index].">&nbsp;</td>";
+          }
+        }
+      }
+    }
+  }
+
   function render()
   {
-echo "sorting, department browsing, copypaste handler, snapshot handler, daemon handler<br>";
+echo "department browsing, copypaste handler, snapshot handler, daemon handler<br>";
 
     // Initialize list
     $result= "<input type='hidden' value='$this->pid' name='PID'>";
@@ -144,8 +210,9 @@ echo "sorting, department browsing, copypaste handler, snapshot handler, daemon 
     // Fill with department browser if configured this way
 ###############
 
-    // Fill with contents
-    foreach ($this->entries as $row => $entry){
+    // Fill with contents, sort as configured
+    $entryIterator= new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], $this->sortAttribute, $this->sortType);
+    foreach ($entryIterator as $row => $entry){
       $result.="<tr class='rowxp".($row&1)."'>";
 
       // Render multi select if needed
@@ -253,6 +320,23 @@ echo "sorting, department browsing, copypaste handler, snapshot handler, daemon 
       }
     }
 
+    // Filter GET with "act" attributes
+    if (isset($_GET['act'])) {
+      $key= validate($_GET['act']);
+      if (preg_match('/^SORT_([0-9]+)$/', $key, $match)) {
+        // Switch to new column or invert search order?
+        $column= $match[1];
+        if ($this->sortColumn != $column) {
+          $this->sortColumn= $column;
+        } else {
+          $this->sortDirection[$column]= !$this->sortDirection[$column];
+        }
+
+        // Allow header to update itself according to the new sort settings
+        $this->renderHeader();
+      }
+    }
+
     // Override base if we got signals from the navigation elements
     $action= "";
     foreach ($_POST as $key => $value) {
@@ -277,6 +361,10 @@ echo "sorting, department browsing, copypaste handler, snapshot handler, daemon 
     if ($action == 'HOME') {
       $ui= get_userinfo();
       $this->base= get_base_from_people($ui->dn);
+    }
+
+    // Check sorting
+    if (isset($_GET['SORT'])) {
     }
 
     // Update filter and refresh entries
