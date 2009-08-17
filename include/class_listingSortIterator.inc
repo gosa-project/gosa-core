@@ -62,12 +62,12 @@ class listingSortIterator implements Iterator {
 
     // Sort for attribute
     if ($attribute != "") {
-      usort($data, "attrSort");
+      uasort($data, "attrSort");
     }
 
     // Invert if direction is set
     if ($direction) {
-      $this->data= array_reverse($data);
+      $this->data= array_reverse($data, true);
     } else {
       $this->data= $data;
     }

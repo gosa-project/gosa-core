@@ -50,11 +50,11 @@ class departmentSortIterator implements Iterator {
     }
 
     // Sort for attribute
-    usort($data, "depSort");
+    uasort($data, "depSort");
 
     // Invert if direction is set
     if ($direction) {
-      $this->data= array_reverse($data);
+      $this->data= array_reverse($data, true);
     } else {
       $this->data= $data;
     }
