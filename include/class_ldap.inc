@@ -120,10 +120,7 @@ class LDAP{
      requests. I.e. member=....                                               */
   static function prepare4filter($dn)
   {
-    $str = normalizeLdap(str_replace('\\\\', '\\\\\\', LDAP::fix($dn))); 
-    /* Special-case '\,' for filters */ 
-    $str = str_replace('\\,', '\\5C2C', $str); 
-    return $str;
+    return normalizeLdap(str_replace('\\\\', '\\\\\\', LDAP::fix($dn)));
   }
 
 

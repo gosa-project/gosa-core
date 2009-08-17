@@ -968,9 +968,7 @@ class plugin
             if($o_ogroup == NULL){
               $o_ogroup = new ogroup($this->config,$ogroup['dn']);
             }              
-            /* Members are stored with their converted names, so convert $c_mem as well 
-               to have it match in case of special characters in its name. */ 
-            unset($o_ogroup->member[LDAP::convert($c_mem)]); 
+            unset($o_ogroup->member[$c_mem]);
             $o_ogroup->member[$d_mem]= $d_mem;
           }
         }
