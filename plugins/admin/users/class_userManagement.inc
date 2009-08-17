@@ -43,6 +43,11 @@ class userManagement extends plugin
   var $acl_module = array("users");  
   var $dns    = array();
 
+  // Filter/headpage tests
+  var $filter= null;
+  var $headpage= null;
+
+
   function userManagement(&$config, $ui)
   {
     /* Save configuration for internal use */
@@ -980,32 +985,36 @@ class userManagement extends plugin
 
     # FILTER Test #################################################
     ## Build filter
-    #$filter = new filter(get_template_path("user-filter.xml", true));
-    #$filter->setObjectStorage(get_people_ou());
-    #$filter->update();
-    #session::set('autocomplete', $filter);
-    #if (!$filter->isValid()){
+    #if (!$this->filter) {
+    #  $this->filter = new filter(get_template_path("user-filter.xml", true));
+    #  $this->filter->setObjectStorage(get_people_ou());
+    #}
+    #$this->filter->update();
+    #session::set('autocomplete', $this->filter);
+    #if (!$this->filter->isValid()){
     #  msg_dialog::display(_("Filter error"), _("The filter is uncomplete!"), ERROR_DIALOG);
     #}
 
     ## Build headpage
-    #$headpage = new listing(get_template_path("user-list.xml", true));
-    #$headpage->registerElementFilter("accountProperties", "userManagement::filterProperties");
-    #$headpage->registerElementFilter("lockLabel", "userManagement::filterLockLabel");
-    #$headpage->registerElementFilter("lockImage", "userManagement::filterLockImage");
-    #$headpage->setFilter($filter);
+    #if (!$this->headpage){
+    #  $this->headpage = new listing(get_template_path("user-list.xml", true));
+    #  $this->headpage->registerElementFilter("accountProperties", "userManagement::filterProperties");
+    #  $this->headpage->registerElementFilter("lockLabel", "userManagement::filterLockLabel");
+    #  $this->headpage->registerElementFilter("lockImage", "userManagement::filterLockImage");
+    #  $this->headpage->setFilter($this->filter);
+    #}
 
     ## Needs to be called before update!
-    #$action= $headpage->getAction();
+    #$action= $this->headpage->getAction();
     #if ($action['action'] != '') {
     #  echo "List detected action:";
     #  print_a($action);
     #}
 
     ## Refresh for filter
-    #$headpage->update();
+    #$this->headpage->update();
     #
-    #return($headpage->render());
+    #return($this->headpage->render());
     ################################################### FILTER Test
 
     return($this->DivListUsers->Draw());
