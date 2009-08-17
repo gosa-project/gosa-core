@@ -36,19 +36,23 @@ class listing {
   var $sortColumn= null;
   var $sortAttribute;
   var $sortType;
+  var $numColumns;
   var $baseMode= false;
   var $bases= array();
   var $header= array();
   var $colprops= array();
   var $filters= array();
   var $pid;
-  var $objectTypes;
+  var $objectTypes= array();
   var $objectTypeCount= array();
 
 
   function listing($filename)
   {
     global $config;
+
+    // Initialize pid
+    $this->pid= preg_replace("/[^0-9]/", "", microtime(TRUE));
 
     if (!$this->load($filename)) {
       die("Cannot parse $filename!");
@@ -66,11 +70,9 @@ class listing {
 
     // Register build in filters
     $this->registerElementFilter("objectType", "listing::filterObjectType");
+    $this->registerElementFilter("departmentLink", "listing::filterDepartmentLink");
     $this->registerElementFilter("link", "listing::filterLink");
     $this->registerElementFilter("actions", "listing::filterActions");
-
-    // Initialize pid
-    $this->pid= preg_replace("/[^0-9]/", "", microtime(TRUE));
   }
 
 
@@ -104,7 +106,13 @@ class listing {
       }
     }
 
-    // Fill objectTypes
+    // Fill objectTypes from departments and xml definition
+    $types = departmentManagement::get_support_departments();
+    foreach ($types as $class => $data) {
+      $this->objectTypes[]= array("label" => $data['TITLE'],
+                                  "objectClass" => $data['OC'],
+                                  "image" => $data['IMG']);
+    }
     if (isset($this->xmlData['definition']['objectType'])) {
       foreach ($this->xmlData['definition']['objectType'] as $index => $otype) {
         $this->objectTypes[]= $this->xmlData['definition']['objectType'][$index];
@@ -158,7 +166,7 @@ class listing {
         }
         $sortable= (isset($config['sortAttribute']));
 
-        $link= "href='?plug=".$_GET['plug']."&amp;PID=$this->pid&amp;act=SORT_$index'";
+        $link= "href='?plug=".$_GET['plug']."&amp;PID=".$this->pid."&amp;act=SORT_$index'";
         if (isset($config['label'])) {
           if ($sortable) {
             $this->header[$index]= "<td class='listheader' ".$this->colprops[$index]."><a $link>"._($config['label'])."$sorter</a></td>";
@@ -178,14 +186,14 @@ class listing {
 
   function render()
   {
-echo "department browsing, copypaste handler, snapshot handler, daemon handler<br>";
+echo "sizelimit, copypaste handler, snapshot handler, daemon handler<br>";
 
     // Initialize list
     $result= "<input type='hidden' value='$this->pid' name='PID'>";
     $result.= "<div class='contentboxb' id='listing_container' style='border-top:1px solid #B0B0B0;'>";
     $result.= "<table summary='$this->headline' style='width:600px;height:450px;' cellspacing='0' id='t_scrolltable'>
 <tr><td class='scrollhead'><table summary='' style='width:100%;' cellspacing='0' id='t_scrollhead'>";
-    $num_cols= count($this->colprops) + ($this->multiSelect?1:0);
+    $this->numColumns= count($this->colprops) + ($this->multiSelect?1:0);
 
     // Build list header
     $result.= "<tr>";
@@ -200,20 +208,49 @@ echo "department browsing, copypaste handler, snapshot handler, daemon handler<b
     $result.= "<td class='listheader' style='width:13px;border-right:0px;'>&nbsp;</td></table></td></tr>";
 
     // New table for the real list contents
-    $result.= "<tr><td colspan='$num_cols' class='scrollbody'><div style='width:600px;height:430px;' id='d_scrollbody' class='scrollbody'><table summary='' style='height:100%;width:581px;' cellspacing='0' id='t_scrollbody'>";
+    $result.= "<tr><td colspan='$this->numColumns' class='scrollbody'><div style='width:600px;height:430px;' id='d_scrollbody' class='scrollbody'><table summary='' style='height:100%;width:581px;' cellspacing='0' id='t_scrollbody'>";
 
     // No results? Just take an empty colspanned row
     if (count($this->entries) + count($this->departments) == 0) {
-      $result.= "<tr class='rowxp0'><td class='list1nohighlight' colspan='$num_cols' style='height:100%;border-right:0px;width:100%;'>&nbsp;</td></tr>";
+      $result.= "<tr class='rowxp0'><td class='list1nohighlight' colspan='$this->numColumns' style='height:100%;border-right:0px;width:100%;'>&nbsp;</td></tr>";
     }
 
-    // Fill with department browser if configured this way
-###############
+    // Line color alternation
+    $alt= 0;
+    $deps= 0;
+
+    // Draw department browser if configured and we're not in sub mode
+    if ($this->departmentBrowser && $this->filter->scope != "sub") {
+      // Fill with department browser if configured this way
+      $departmentIterator= new departmentSortIterator($this->departments, $this->sortDirection[$this->sortColumn]);
+      foreach ($departmentIterator as $row => $entry){
+        $result.="<tr class='rowxp".($alt&1)."'>";
+
+        // Render multi select if needed
+        if ($this->multiSelect) {
+          $result.="<td style='text-align:center;width:20px;' class='list1'>&nbsp;</td>";
+        }
+
+        // Render defined department columns, fill the rest with some stuff
+        foreach ($this->xmlData['table']['department'] as $index => $config) {
+          $result.="<td ".$this->colprops[$index]." class='list1'>".$this->renderCell($config['value'], $entry, $row)."</td>";
+        }
+        $last= count($this->xmlData['table']['department']) + 1;
+        $rest= $this->numColumns - $last;
+        for ($i= 0; $i<$rest; $i++){
+          $result.= "<td ".$this->colprops[$last+$i-1]." class='list1'>&nbsp;</td>";
+        }
+        $result.="</tr>";
+
+        $alt++;
+      }
+      $deps= $alt;
+    }
 
     // Fill with contents, sort as configured
     $entryIterator= new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], $this->sortAttribute, $this->sortType);
     foreach ($entryIterator as $row => $entry){
-      $result.="<tr class='rowxp".($row&1)."'>";
+      $result.="<tr class='rowxp".($alt&1)."'>";
 
       // Render multi select if needed
       if ($this->multiSelect) {
@@ -224,18 +261,20 @@ echo "department browsing, copypaste handler, snapshot handler, daemon handler<b
         $result.="<td ".$this->colprops[$index]." class='list0'>".$this->renderCell($config['value'], $entry, $row)."</td>";
       }
       $result.="</tr>";
+
+      $alt++;
     }
 
     // Need to fill the list if it's not full (nobody knows why this is 22 ;-))
-    $emptyListStyle= (count($this->entries) == 0)?"border:0;":"";
-    if (count($this->entries) < 22) {
+    $emptyListStyle= (count($this->entries) + count($deps) == 0)?"border:0;":"";
+    if (count($this->entries) + count($deps) < 22) {
       $result.= "<tr>";
-      for ($i= 0; $i<$num_cols; $i++) {
+      for ($i= 0; $i<$this->numColumns; $i++) {
         if ($i == 0) {
           $result.= "<td class='list1nohighlight' style='$emptyListStyle height:100%;'>&nbsp;</td>";
           continue;
         }
-        if ($i != $num_cols-1) {
+        if ($i != $this->numColumns-1) {
           $result.= "<td class='list1nohighlight' style='$emptyListStyle'>&nbsp;</td>";
         } else {
           $result.= "<td class='list1nohighlight' style='border-right:1px solid #AAA;$emptyListStyle'>&nbsp;</td>";
@@ -290,7 +329,7 @@ echo "department browsing, copypaste handler, snapshot handler, daemon handler<b
   {
     $this->filter= &$filter;
     if ($this->departmentBrowser){
-      # $this->departments= $this->filter->getDepartments();
+      $this->departments= $this->getDepartments();
     }
     $this->filter->setBase($this->base);
     $this->entries= $this->filter->query();
@@ -307,15 +346,20 @@ echo "department browsing, copypaste handler, snapshot handler, daemon handler<b
       return;
     }
 
-    if ($this->departmentBrowser){
-      # $this->departments= $this->filter->getDepartments();
-    }
-
     // Save base
     if (isset($_POST['BASE']) && $this->baseMode == true) {
       $base= validate($_POST['BASE']);
       if (isset($this->bases[$base])) {
         $this->base= $base;
+      }
+    }
+
+    // Override the base if we got a message from the browser navigation
+    if ($this->departmentBrowser && isset($_GET['act'])) {
+      if (preg_match('/^department_([0-9]+)$/', validate($_GET['act']), $match)){
+        if (isset($this->departments[$match[1]])){
+          $this->base= $this->departments[$match[1]]['dn'];
+        }
       }
     }
 
@@ -362,8 +406,9 @@ echo "department browsing, copypaste handler, snapshot handler, daemon handler<b
       $this->base= get_base_from_people($ui->dn);
     }
 
-    // Check sorting
-    if (isset($_GET['SORT'])) {
+    // Reload departments
+    if ($this->departmentBrowser){
+      $this->departments= $this->getDepartments();
     }
 
     // Update filter and refresh entries
@@ -406,6 +451,9 @@ echo "department browsing, copypaste handler, snapshot handler, daemon handler<b
         $result[$index]= null;
       }
     }
+
+    // Save number of columns for later use
+    $this->numColumns= count($cols);
 
     return $result;
   }
@@ -637,17 +685,29 @@ echo "department browsing, copypaste handler, snapshot handler, daemon handler<b
   }
 
 
+  function filterDepartmentLink($row, $dn, $description)
+  {
+    $attr= $this->departments[$row]['sort-attribute'];
+    $name= $this->departments[$row][$attr];
+    if (is_array($name)){
+      $name= $name[0];
+    }
+    $result= sprintf("%s [%s]", $name, $description[0]);
+    return("<a href='?plug=".$_GET['plug']."&amp;PID=$this->pid&amp;act=department_$row' title='$dn'>$result</a>");
+  }
+
+
   function filterLink()
   {
     $result= "&nbsp;";
 
     $row= func_get_arg(0);
-    $pid= func_get_arg(1);
-    $dn= LDAP::fix(func_get_arg(2));
-    $params= array(func_get_arg(3));
+    $pid= $this->pid;
+    $dn= LDAP::fix(func_get_arg(1));
+    $params= array(func_get_arg(2));
 
     // Collect sprintf params
-    for ($i = 4;$i < func_num_args();$i++) {
+    for ($i = 3;$i < func_num_args();$i++) {
       $val= func_get_arg($i);
       if (is_array($val)){
         $params[]= $val[0];
@@ -966,6 +1026,51 @@ echo "department browsing, copypaste handler, snapshot handler, daemon handler<b
     }
   }
 
+
+  function getDepartments()
+  {
+    $departments= array();
+    $ui= get_userinfo();
+
+    // Get list of supported department types
+    $types = departmentManagement::get_support_departments();
+
+    // Load departments allowed by ACL
+    $validDepartments = $ui->get_module_departments($this->module);
+
+    // Build filter and look in the LDAP for possible sub departments
+    // of current base
+    $filter= "(&(objectClass=gosaDepartment)(|";
+    $attrs= array("description", "objectClass");
+    foreach($types as $name => $data){
+      $filter.= "(objectClass=".$data['OC'].")";
+      $attrs[]= $data['ATTR'];
+    }
+    $filter.= "))";
+    $res= get_list($filter, $this->module, $this->base, $attrs, GL_NONE | GL_SIZELIMIT);
+
+    // Analyze list of departments
+    foreach ($res as $department) {
+      if (!in_array($department['dn'], $validDepartments)) {
+        continue;
+      }
+
+      // Add the attribute where we use for sorting
+      $oc= null;
+      foreach(array_keys($types) as $type) {
+        if (in_array($type, $department['objectClass'])) {
+          $oc= $type;
+          break;
+        }
+      }
+      $department['sort-attribute']= $types[$oc]['ATTR'];
+
+      // Move to the result list
+      $departments[]= $department;
+    }
+
+    return $departments;
+  }
 
 }
 
