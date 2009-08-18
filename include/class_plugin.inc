@@ -944,17 +944,11 @@ class plugin
       $this->update_acls($old_dn,$new_dn); 
     }
 
-    /* Get all objectGroups defined in this database. 
-        and check if there is an entry matching the source dn,
-        if this is the case, then update this objectgroup to use the new dn.
-     */
-    $ogroups = get_sub_list("(&(objectClass=gosaGroupOfNames)(member=".LDAP::prepare4filter(LDAP::fix($src_dn))."))","ogroups",
-        array(get_ou("ogroupRDN")),$this->config->current['BASE'],array("member"),
-        GL_SUBSEARCH | GL_NO_ACL_CHECK) ;
+    // Migrate objectgroups if needed
+    $ogroups = get_sub_list("(&(objectClass=gosaGroupOfNames)(member=".LDAP::prepare4filter(LDAP::fix($src_dn))."))","ogroups", array(get_ou("ogroupRDN")),$this->config->current['BASE'],array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
 
-    // Walk through all objectGroups and check if there are members matching the source dn
+    // Walk through all objectGroups
     foreach($ogroups as $ogroup){
-
       // Migrate old to new dn
       $o_ogroup= new ogroup($this->config,$ogroup['dn']);
       unset($o_ogroup->member[$src_dn]);
@@ -964,15 +958,27 @@ class plugin
       $o_ogroup->save();
     }
 
-    /* Update roles to use the new entry dn
-     */
-    $ldap = $this->config->get_ldap_link();
-    $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(&(objectClass=organizationalRole)".
-        "(roleOccupant=".LDAP::prepare4filter($src_dn)."))");
-    while($attrs = $ldap->fetch()){
-      $role = new roleGeneric($this->config,$attrs['dn']);
-      $key = array_search($src_dn,$role->roleOccupant); 
+    // Migrate rfc groups if needed
+    $groups = get_sub_list("(&(objectClass=posixGroups)(member=".LDAP::prepare4filter(LDAP::fix($src_dn))."))","groups", array(get_ou("groupRDN")),$this->config->current['BASE'],array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
+
+    // Walk through all POSIX groups
+    foreach($groups as $group){
+      // Migrate old to new dn
+      $o_group= new group($this->config,$group['dn']);
+      unset($o_group->member[$src_dn]);
+      $o_group->member[$dst_dn]= $dst_dn;
+      
+      // Save object group
+      $o_group->save();
+    }
+
+    /* Update roles to use the new entry dn */
+    $roles = get_sub_list("(&(objectClass=organizationalRole)(roleOccupant=".LDAP::prepare4filter(LDAP::fix($src_dn))."))","roles", array(get_ou("roleRDN")),$this->config->current['BASE'],array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
+
+    // Walk through all roles
+    foreach($roles as $role){
+      $role = new roleGeneric($this->config,$role['dn']);
+      $key= array_search($src_dn, $role->roleOccupant);      
       if($key !== FALSE){
         $role->roleOccupant[$key] = $dst_dn;
         $role->save();
