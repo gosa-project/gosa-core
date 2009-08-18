@@ -948,36 +948,20 @@ class plugin
         and check if there is an entry matching the source dn,
         if this is the case, then update this objectgroup to use the new dn.
      */
-    $ogroups = get_sub_list("(&(objectClass=gosaGroupOfNames)(member=*))","ogroups",
+    $ogroups = get_sub_list("(&(objectClass=gosaGroupOfNames)(member=".LDAP::prepare4filter(LDAP::fix($src_dn))."))","ogroups",
         array(get_ou("ogroupRDN")),$this->config->current['BASE'],array("member"),
         GL_SUBSEARCH | GL_NO_ACL_CHECK) ;
 
-    /* Walk through all objectGroups and check if there are 
-        members matching the source dn 
-     */
+    // Walk through all objectGroups and check if there are members matching the source dn
     foreach($ogroups as $ogroup){
-      if(isset($ogroup['member'])){
 
-        /* Reset class object, this will be initialized with class_ogroup on demand 
-         */
-        $o_ogroup = NULL; 
-        for($i = 0 ; $i < $ogroup['member']['count'] ; $i ++){
-          $c_mem = $ogroup['member'][$i];
-          if(preg_match("/".preg_quote($src_dn, '/')."$/i",$c_mem)){
-            $d_mem = preg_replace("/".preg_quote($src_dn, '/')."$/i",$dst_dn,$ogroup['member'][$i]);
-            if($o_ogroup == NULL){
-              $o_ogroup = new ogroup($this->config,$ogroup['dn']);
-            }              
-            unset($o_ogroup->member[$c_mem]);
-            $o_ogroup->member[$d_mem]= $d_mem;
-          }
-        }
-       
-        /* Save object group if there were changes made on the membership */ 
-        if($o_ogroup != NULL){
-          $o_ogroup->save();
-        }
-      }
+      // Migrate old to new dn
+      $o_ogroup= new ogroup($this->config,$ogroup['dn']);
+      unset($o_ogroup->member[$src_dn]);
+      $o_ogroup->member[$dst_dn]= $dst_dn;
+      
+      // Save object group
+      $o_ogroup->save();
     }
 
     /* Update roles to use the new entry dn
