@@ -2068,10 +2068,10 @@ class plugin
     /* Check permissions for each category, if there is at least one category which 
         support read or paste permissions for the given base, then display the specific actions.
      */
-    $readable = $pasteable = TRUE;
+    $readable = $pasteable = false;
     foreach($category as $cat){
-      $readable |= $ui->get_category_permissions($base,$cat);
-      $pasteable|= $ui->is_pasteable($base,$cat);
+      $readable= $readable || preg_match('/r/', $ui->get_category_permissions($base, $cat));
+      $pasteable= $pasteable || $ui->is_pasteable($base, $cat) == 1;
     }
   
     if(($cut || $copy) && isset($this->CopyPasteHandler) && is_object($this->CopyPasteHandler)){

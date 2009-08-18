@@ -45,6 +45,7 @@ class listing {
   var $pid;
   var $objectTypes= array();
   var $objectTypeCount= array();
+  var $CopyPasteHandler= null;
 
 
   function listing($filename)
@@ -73,6 +74,12 @@ class listing {
     $this->registerElementFilter("departmentLink", "listing::filterDepartmentLink");
     $this->registerElementFilter("link", "listing::filterLink");
     $this->registerElementFilter("actions", "listing::filterActions");
+  }
+
+
+  function setCopyPasteHandler($handler)
+  {
+    $this->CopyPasteHandler= &$handler;
   }
 
 
@@ -113,9 +120,13 @@ class listing {
                                   "objectClass" => $data['OC'],
                                   "image" => $data['IMG']);
     }
+    $this->categories= array();
     if (isset($this->xmlData['definition']['objectType'])) {
       foreach ($this->xmlData['definition']['objectType'] as $index => $otype) {
         $this->objectTypes[]= $this->xmlData['definition']['objectType'][$index];
+        if (isset($this->xmlData['definition']['objectType'][$index]['category'])){
+          $this->categories[]= $this->xmlData['definition']['objectType'][$index]['category'];
+        }
       }
     }
 
@@ -128,6 +139,9 @@ class listing {
     // Assign headline/module
     $this->headline= _($this->xmlData['definition']['label']);
     $this->module= $this->xmlData['definition']['module'];
+    if (!is_array($this->categories)){
+      $this->categories= array($this->categories);
+    }
 
     return true;  
   }
@@ -186,7 +200,11 @@ class listing {
 
   function render()
   {
-echo "sizelimit, copypaste handler, snapshot handler, daemon handler<br>";
+echo "snapshot handler, daemon handler<br>";
+    // Check for exeeded sizelimit
+    if (($message= check_sizelimit()) != ""){
+      return($message);
+    }
 
     // Initialize list
     $result= "<input type='hidden' value='$this->pid' name='PID'>";
@@ -303,6 +321,7 @@ echo "sizelimit, copypaste handler, snapshot handler, daemon handler<br>";
 
     $smarty= get_smarty();
     $smarty->assign("FILTER", $this->filter->render());
+    $smarty->assign("SIZELIMIT", print_sizelimit_warning());
     $smarty->assign("LIST", $result);
 
     // Assign navigation elements
@@ -671,8 +690,15 @@ echo "sizelimit, copypaste handler, snapshot handler, daemon handler<br>";
         #echo "actiontriggers: snapshot missing<br>";
       }
       if ($action['type'] == "copypaste") {
-        #TODO
-        #echo "actiontriggers: copypaste missing<br>";
+
+        $objectType= $this->getObjectType($this->objectTypes, $this->entries[$row]['objectClass']);
+        $category= $class= null;
+        if ($objectType) {
+          $category= $objectType['category'];
+          $class= $objectType['class'];
+        }
+
+        $result.= $this->renderCopyPasteActions($row, $this->entries[$row]['dn'], $category, $class);
       }
       if ($action['type'] == "daemon") {
         #TODO
@@ -913,8 +939,7 @@ echo "sizelimit, copypaste handler, snapshot handler, daemon handler<br>";
       // Check for special types
       switch ($action['type']) {
         case 'copypaste':
-          #TODO
-          #echo "actionmenu: copypaste missing<br>";
+          $result.= $this->renderCopyPasteMenu($separator);
           break;
 
         case 'snapshot':
@@ -1070,6 +1095,91 @@ echo "sizelimit, copypaste handler, snapshot handler, daemon handler<br>";
     }
 
     return $departments;
+  }
+
+
+  function renderCopyPasteMenu($separator, $copy= true, $cut= true)
+  {
+    // We can only provide information if we've got a copypaste handler
+    // instance
+    if(!(isset($this->CopyPasteHandler) && is_object($this->CopyPasteHandler))){
+      return "";
+    }
+
+    // Presets
+    $result= "";
+    $read= $paste= false;
+    $ui= get_userinfo();
+
+    // Switch flags to on if there's at least one category which allows read/paste
+    foreach($this->categories as $category){
+      $read= $read || preg_match('/r/', $ui->get_category_permissions($this->base, $category));
+      $paste= $paste || $ui->is_pasteable($this->base, $category) == 1;
+    }
+
+
+    // Draw entries that allow copy and cut
+    if($read){
+
+      // Copy entry
+      if($copy){
+        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"copy\";mainform.submit();'><img src='images/lists/copy.png' alt='' border='0' class='center'>&nbsp;"._("Copy")."</a></li>";
+        $separator= "";
+      }
+
+      // Cut entry
+      if($cut){
+        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"cut\";mainform.submit();'><img src='images/lists/cut.png' alt='' border='0' class='center'>&nbsp;"._("Cut")."</a></li>";
+        $separator= "";
+      }
+    }
+
+    // Draw entries that allow pasting entries
+    if($paste){
+      if($this->CopyPasteHandler->entries_queued()){
+        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"paste\";mainform.submit();'><img src='images/lists/paste.png' alt='' border='0' class='center'>&nbsp;"._("Paste")."</a></li>";
+      }else{
+        $result.= "<li$separator><a href='#'><img src='images/lists/paste-grey.png' alt='' border='0' class='center'>&nbsp;"._("Paste")."</a></li>";
+      }
+    }
+    
+    return($result);
+  }
+
+
+  function renderCopyPasteActions($row, $dn, $category, $class, $copy= true, $cut= true)
+  {
+    // We can only provide information if we've got a copypaste handler
+    // instance
+    if(!(isset($this->CopyPasteHandler) && is_object($this->CopyPasteHandler))){
+      return "";
+    }
+
+    // Presets
+    $ui = get_userinfo();
+    $result = "";
+
+    // Render cut entries
+    if($cut){
+      if($ui->is_cutable($dn, $category, $class)){
+        $result .= "<input class='center' type='image'
+          src='images/lists/cut.png' alt='"._("Cut")."' name='listing_cut_$row' title='"._("Cut this entry")."' style='padding:1px'>";
+      }else{
+        $result.="<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+      }
+    }
+
+    // Render copy entries
+    if($copy){
+      if($ui->is_copyable($dn, $category, $class)){
+        $result.= "<input class='center' type='image'
+          src='images/lists/copy.png' alt='"._("Copy")."' name='listing_copy_$row' title='"._("Copy this entry")."' style='padding:1px'>";
+      }else{
+        $result.="<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+      }
+    }
+
+    return($result);
   }
 
 }
