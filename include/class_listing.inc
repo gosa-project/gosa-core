@@ -267,11 +267,18 @@ class listing {
         }
 
         // Render defined department columns, fill the rest with some stuff
+        $rest= $this->numColumns - 1;
         foreach ($this->xmlData['table']['department'] as $index => $config) {
-          $result.="<td ".$this->colprops[$index]." class='list1'>".$this->renderCell($config['value'], $entry, $row)."</td>";
+          $colspan= 1;
+          if (isset($config['span'])){
+            $colspan= $config['span'];
+          }
+          $result.="<td colspan='$colspan' ".$this->colprops[$index]." class='list1'>".$this->renderCell($config['value'], $entry, $row)."</td>";
+          $rest-= $colspan;
         }
-        $last= count($this->xmlData['table']['department']) + 1;
-        $rest= $this->numColumns - $last;
+
+        // Fill remaining cols with nothing
+        $last= $this->numColumns - $rest;
         for ($i= 0; $i<$rest; $i++){
           $result.= "<td ".$this->colprops[$last+$i-1]." class='list1'>&nbsp;</td>";
         }
