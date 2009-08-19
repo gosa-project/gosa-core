@@ -33,6 +33,7 @@ class userManagement extends plugin
   var $templates            = array();
   var $got_uid              = false;
   var $CopyPasteHandler     = NULL;
+  var $SnapshotHandler     = NULL;
   var $CPPasswordChange     = ""; // Contains the entry id which should get a new password
   var $DivListUsers;
 
@@ -57,6 +58,9 @@ class userManagement extends plugin
     /* Copy & Paste handler */
     if ($this->config->boolValueIsTrue("main", "copyPaste")){
       $this->CopyPasteHandler= new CopyPasteHandler($this->config);
+    }
+    if($this->config->get_cfg_value("enableSnapshots") == "true"){
+      $this->SnapshotHandler= new SnapshotHandler($this->config);
     }
 
     /* Creat dialog object */
@@ -1001,6 +1005,9 @@ class userManagement extends plugin
     #  $this->headpage->registerElementFilter("accountProperties", "userManagement::filterProperties");
     #  $this->headpage->registerElementFilter("lockLabel", "userManagement::filterLockLabel");
     #  $this->headpage->registerElementFilter("lockImage", "userManagement::filterLockImage");
+    #  $this->headpage->setCopyPasteHandler($this->CopyPasteHandler);
+    #  $this->SnapshotHandler->setSnapshotBases($this->get_used_snapshot_bases());
+    #  $this->headpage->setSnapshotHandler($this->SnapshotHandler);
     #  $this->headpage->setFilter($this->filter);
     #}
 

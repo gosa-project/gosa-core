@@ -15,19 +15,23 @@
       <label>Users</label>
       <objectClass>gosaAccount</objectClass>
       <objectClass>!gosaUserTemplate</objectClass>
+      <category>users</category>
+      <class>user</class>
       <image>plugins/users/images/select_user.png</image>
     </objectType>
 
     <objectType>
       <label>Templates</label>
       <objectClass>gosaUserTemplate</objectClass>
+      <category>users</category>
+      <class>user</class>
       <image>plugins/users/images/select_template.png</image>
     </objectType>
 
   </definition>
 
   <table>
-    <layout>|20px||145px|100px;r|</layout>
+    <layout>|20px||145px|165px;r|</layout>
 
     <department>
       <value>%{filter:objectType(dn,objectClass)}</value>
@@ -133,6 +137,10 @@
     </action>
 
     <action>
+      <type>separator</type>
+    </action>
+
+    <action>
       <type>snapshot</type>
     </action>
 
@@ -140,15 +148,15 @@
 
   <actiontriggers snapshot="true" copypaste="true">
     <action>
-      <type>copypaste</type>
-    </action>
-
-    <action>
       <name>templatize</name>
       <type>entry</type>
       <objectclass>!gosaUserTemplate</objectclass>
       <image>plugins/users/images/wizard.png</image>
       <label>Apply template</label>
+    </action>
+
+    <action>
+      <type>copypaste</type>
     </action>
 
     <action>
