@@ -308,8 +308,8 @@ class listing {
     }
 
     // Need to fill the list if it's not full (nobody knows why this is 22 ;-))
-    $emptyListStyle= (count($this->entries) + count($deps) == 0)?"border:0;":"";
-    if (count($this->entries) + count($deps) < 22) {
+    $emptyListStyle= (count($this->entries) + $deps == 0)?"border:0;":"";
+    if ((count($this->entries) + $deps) < 22) {
       $result.= "<tr>";
       for ($i= 0; $i<$this->numColumns; $i++) {
         if ($i == 0) {
@@ -372,6 +372,9 @@ class listing {
   {
     global $config;
     $ui= get_userinfo();
+
+    // Reset object counter
+    $this->objectTypeCount= array();
 
     // Do not do anything if this is not our PID
     if(isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->pid) {
