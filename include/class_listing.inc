@@ -45,7 +45,8 @@ class listing {
   var $pid;
   var $objectTypes= array();
   var $objectTypeCount= array();
-  var $CopyPasteHandler= null;
+  var $copyPasteHandler= null;
+  var $snapshotHandler= null;
 
 
   function listing($filename)
@@ -79,7 +80,24 @@ class listing {
 
   function setCopyPasteHandler($handler)
   {
-    $this->CopyPasteHandler= &$handler;
+    $this->copyPasteHandler= &$handler;
+  }
+
+
+  function setSnapshotHandler($handler)
+  {
+    $this->snapshotHandler= &$handler;
+  }
+
+
+  function setFilter($filter)
+  {
+    $this->filter= &$filter;
+    if ($this->departmentBrowser){
+      $this->departments= $this->getDepartments();
+    }
+    $this->filter->setBase($this->base);
+    $this->entries= $this->filter->query();
   }
 
 
@@ -200,7 +218,6 @@ class listing {
 
   function render()
   {
-echo "snapshot handler, daemon handler<br>";
     // Check for exeeded sizelimit
     if (($message= check_sizelimit()) != ""){
       return($message);
@@ -341,17 +358,6 @@ echo "snapshot handler, daemon handler<br>";
     $smarty->assign("HEADLINE", $this->headline);
 
     return ($smarty->fetch(get_template_path($this->xmlData['definition']['template'], true)));
-  }
-
-
-  function setFilter($filter)
-  {
-    $this->filter= &$filter;
-    if ($this->departmentBrowser){
-      $this->departments= $this->getDepartments();
-    }
-    $this->filter->setBase($this->base);
-    $this->entries= $this->filter->query();
   }
 
 
@@ -685,11 +691,7 @@ echo "snapshot handler, daemon handler<br>";
       }
 
       // Handle special types
-      if ($action['type'] == "snapshot") {
-        #TODO
-        #echo "actiontriggers: snapshot missing<br>";
-      }
-      if ($action['type'] == "copypaste") {
+      if ($action['type'] == "copypaste" || $action['type'] == "snapshot") {
 
         $objectType= $this->getObjectType($this->objectTypes, $this->entries[$row]['objectClass']);
         $category= $class= null;
@@ -698,13 +700,12 @@ echo "snapshot handler, daemon handler<br>";
           $class= $objectType['class'];
         }
 
-        $result.= $this->renderCopyPasteActions($row, $this->entries[$row]['dn'], $category, $class);
+        if ($action['type'] == "copypaste") {
+          $result.= $this->renderCopyPasteActions($row, $this->entries[$row]['dn'], $category, $class);
+        } else {
+          $result.= $this->renderSnapshotActions($row, $this->entries[$row]['dn'], $category, $class);
+        }
       }
-      if ($action['type'] == "daemon") {
-        #TODO
-        #echo "actiontriggers: daemon missing<br>";
-      }
-
     }
 
     return $result;
@@ -943,13 +944,11 @@ echo "snapshot handler, daemon handler<br>";
           break;
 
         case 'snapshot':
-          #TODO
-          #echo "actionmenu: snapshot missing<br>";
+          $result.= $this->renderSnapshotMenu($separator);
           break;
 
         case 'daemon':
-          #TODO
-          #echo "actionmenu: daemon missing<br>";
+          $result.= $this->renderDaemonMenu($separator);
           break;
       }
 
@@ -1102,7 +1101,7 @@ echo "snapshot handler, daemon handler<br>";
   {
     // We can only provide information if we've got a copypaste handler
     // instance
-    if(!(isset($this->CopyPasteHandler) && is_object($this->CopyPasteHandler))){
+    if(!(isset($this->copyPasteHandler) && is_object($this->copyPasteHandler))){
       return "";
     }
 
@@ -1136,7 +1135,7 @@ echo "snapshot handler, daemon handler<br>";
 
     // Draw entries that allow pasting entries
     if($paste){
-      if($this->CopyPasteHandler->entries_queued()){
+      if($this->copyPasteHandler->entries_queued()){
         $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"paste\";mainform.submit();'><img src='images/lists/paste.png' alt='' border='0' class='center'>&nbsp;"._("Paste")."</a></li>";
       }else{
         $result.= "<li$separator><a href='#'><img src='images/lists/paste-grey.png' alt='' border='0' class='center'>&nbsp;"._("Paste")."</a></li>";
@@ -1151,7 +1150,7 @@ echo "snapshot handler, daemon handler<br>";
   {
     // We can only provide information if we've got a copypaste handler
     // instance
-    if(!(isset($this->CopyPasteHandler) && is_object($this->CopyPasteHandler))){
+    if(!(isset($this->copyPasteHandler) && is_object($this->copyPasteHandler))){
       return "";
     }
 
@@ -1180,6 +1179,99 @@ echo "snapshot handler, daemon handler<br>";
     }
 
     return($result);
+  }
+
+
+  function renderSnapshotMenu($separator)
+  {
+    // We can only provide information if we've got a snapshot handler
+    // instance
+    if(!(isset($this->snapshotHandler) && is_object($this->snapshotHandler))){
+      return "";
+    }
+
+    // Presets
+    $result = "";
+    $ui = get_userinfo();
+
+    if($this->snapshotHandler->enabled() && $ui->allow_snapshot_restore($this->base, $this->module)){
+
+      // Check if there is something to restore
+      $restore= false;
+      foreach($this->snapshotHandler->getSnapshotBases() as $base){
+        $restore= $restore || count($this->snapshotHandler->getDeletedSnapshots($base)) > 0;
+      }
+
+      // Draw icons according to the restore flag
+      if($restore){
+        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"restore\";mainform.submit();'><img src='images/lists/restore.png' alt='' border='0' class='center'>&nbsp;"._("Restore snapshots")."</a></li>";
+      }else{
+        $result.= "<li$separator><a href='#'><img src='images/lists/restore_grey.png' alt='' border='0' class='center'>&nbsp;"._("Restore snapshots")."</a></li>";
+      }
+    }
+
+    return($result);
+  }
+
+
+  function renderSnapshotActions($row, $dn, $category, $class, $copy= true, $cut= true)
+  {
+    // We can only provide information if we've got a snapshot handler
+    // instance
+    if(!(isset($this->snapshotHandler) && is_object($this->snapshotHandler))){
+      return "";
+    }
+
+    // Presets
+    $result= "";
+    $ui = get_userinfo();
+
+    // Only act if enabled here
+    if($this->snapshotHandler->enabled()){
+
+      // Draw restore button
+      if ($ui->allow_snapshot_restore($dn, $category)){
+
+        // Do we have snapshots for this dn?
+        if($this->snapshotHandler->hasSnapshots($dn)){
+          $result.= "<input class='center' type='image' src='images/lists/restore.png' ".
+                     "alt='"._("Restore snapshot")."' name='listing_restore_$row' title='".
+                     _("Restore snapshot")."' style='padding:1px'>";
+        } else {
+          $result.= "<img src='images/lists/restore_grey.png' alt=' ' class='center' style='padding:1px'>";
+        }
+      }
+
+      // Draw snapshot button
+      if($ui->allow_snapshot_create($dn, $category)){
+          $result.= "<input class='center' type='image' src='images/snapshot.png' ".
+                     "alt='"._("Create snapshot")."' name='listing_snapshot_$row' title='".
+                     _("Create a new snapshot from this object")."' style='padding:1px'>";
+      }else{
+          $result.= "<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+      }
+    }
+
+    return($result);
+  }
+
+
+  function renderDaemonMenu($separator)
+  {
+    $result= "";
+
+    // If there is a daemon registered, draw the menu entries
+    if(class_available("DaemonEvent")){
+      $events= DaemonEvent::get_event_types_by_category($this->categories);
+      if(count($events['BY_CLASS'])){
+        foreach($events['BY_CLASS'] as $name => $event){
+          $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"$name\";mainform.submit();'><img src='".$event['MenuImage']."' alt='' border='0' class='center'>&nbsp;".$event['s_Menu_Name']."</a></li>";
+          $separator= "";
+        }
+      }
+    }
+
+    return $result;
   }
 
 }

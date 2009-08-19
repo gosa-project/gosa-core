@@ -1005,6 +1005,63 @@ class config  {
       return(TRUE);
     }
   }
+
+  /* Returns true if snapshots are enabled, and false if it is disalbed
+     There will also be some errors psoted, if the configuration failed */
+  function snapshotEnabled()
+  {
+    if($this->get_cfg_value("enableSnapshots") == "true"){
+
+      /* Check if the snapshot_base is defined */
+      if ($this->get_cfg_value("snapshotBase") == ""){
+
+        /* Send message if not done already */
+        if(!session::is_set("snapshotFailMessageSend")){
+          session::set("snapshotFailMessageSend",TRUE);
+          msg_dialog::display(_("Configuration error"),
+              sprintf(_("The snapshot functionality is enabled, but the required variable '%s' is not set."),
+                      "snapshotBase"), ERROR_DIALOG);
+        }
+        return(FALSE);
+      }
+
+      /* Check if the snapshot_base is defined */
+      if (!is_callable("gzcompress")){
+
+        /* Send message if not done already */
+        if(!session::is_set("snapshotFailMessageSend")){
+          session::set("snapshotFailMessageSend",TRUE);
+          msg_dialog::display(_("Configuration error"),
+              sprintf(_("The snapshot functionality is enabled, but the required compression module is missing. Please install '%s'."),"php5-zip / php5-gzip"), ERROR_DIALOG);
+        }
+        return(FALSE);
+      }
+
+      /* check if there are special server configurations for snapshots */
+      if ($this->get_cfg_value("snapshotURI") != ""){
+
+        /* check if all required vars are available to create a new ldap connection */
+        $missing = "";
+        foreach(array("snapshotURI","snapshotAdminDn","snapshotAdminPassword","snapshotBase") as $var){
+          if($this->get_cfg_value($var) == ""){
+            $missing .= $var." ";
+
+            /* Send message if not done already */
+            if(!session::is_set("snapshotFailMessageSend")){
+              session::set("snapshotFailMessageSend",TRUE);
+              msg_dialog::display(_("Configuration error"),
+                  sprintf(_("The snapshot functionality is enabled, but the required variable '%s' is not set."),
+                    $missing), ERROR_DIALOG);
+            }
+            return(FALSE);
+          }
+                    }
+            }
+            return(TRUE);
+    }
+    return(FALSE);
+  }
+
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
