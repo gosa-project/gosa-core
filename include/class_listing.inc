@@ -511,6 +511,10 @@ class listing {
     // Watch out for filters and prepare to execute them
     $data= $this->processElementFilter($data, $config, $row);
 
+    // Replace all non replaced %{...} instances because they
+    // are non resolved attributes or filters
+    $data= preg_replace('/%{[^}]+}/', '&nbsp;', $data);
+
     return $data;
   }
 
