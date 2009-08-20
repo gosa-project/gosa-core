@@ -983,7 +983,7 @@ class listing {
       // Every ACL has to pass
       foreach ($acls as $acl) {
         $module= $this->module;
-        $acllist= array();
+        $aclList= array();
 
         // Split for category and plugins if needed
         // match for "[rw]" style entries
