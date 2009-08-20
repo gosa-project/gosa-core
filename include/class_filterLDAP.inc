@@ -6,9 +6,10 @@ class filterLDAP {
   {
     $config= session::global_get('config');
     $ldap= $config->get_ldap_link(TRUE);
+    $flag= ($scope == "sub")?GL_SUBSEARCH:0;
     $result= filterLDAP::get_list($base, $scope, $filter, $attributes,
                                   $category, $objectStorage, $objectBase,
-                                  GL_SUBSEARCH | GL_SIZELIMIT);
+                                  $flag | GL_SIZELIMIT);
     return $result;
   }
 
