@@ -52,11 +52,21 @@ class listingSortIterator implements Iterator {
       // Take a look at the several types
       switch ($_sortType) {
         case 'string':
-          return strnatcmp($a, $b);
+          return strcoll($a, $b);
+
+        case 'integer':
+          return $b - $a;
+
+        case 'date':
+          list($d, $m, $y)= split('\.', $a);
+          $a= (int)sprintf("%04d%02d%02d", $y, $m, $d);
+          list($d, $m, $y)= split('\.', $b);
+          $b= (int)sprintf("%04d%02d%02d", $y, $m, $d);
+          return $b-$a;
 
         // Sort for string by default
         default:
-          return strnatcmp($a, $b);
+          return strcoll($a, $b);
       }
     }
 
