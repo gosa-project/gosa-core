@@ -123,6 +123,17 @@ class filter {
           $this->alphabetElements[]= $tag;
         }
       }
+
+      // Sort elements for element length to allow proper replacing later on
+      function strlenSort($a, $b) {
+        if (strlen($a['tag']) == strlen($b['tag'])) {
+          return 0;
+        }
+       return (strlen($a['tag']) < strlen($b['tag']) ? -1 : 1);
+      } 
+      uasort($this->elements, 'strlenSort');
+      $this->elements= array_reverse($this->elements);
+
     }
 
     return true;  
@@ -132,7 +143,15 @@ class filter {
   function getTextfield($element)
   {
     $tag= $element['tag'];
-    $result= "<input class='filter_textfield' id='$tag' name='$tag' type='text' size='30' maxlength='30' value='".$this->elementValues[$tag]."'>";
+    $size= 30;
+    if (isset($element['size'])){
+      $size= $element['size'];
+    }
+    $maxlength= 30;
+    if (isset($element['maxlength'])){
+      $maxlength= $element['maxlength'];
+    }
+    $result= "<input class='filter_textfield' id='$tag' name='$tag' type='text' size='$size' maxlength='maxlength' value='".$this->elementValues[$tag]."'>";
     if (isset($element['autocomplete'])) {
       $frequency= "0.5";
       $characters= "1";
