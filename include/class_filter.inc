@@ -482,7 +482,7 @@ class filter {
     $result= array();
 
     // Introduce maximum number of entries
-    $max= 10;
+    $max= 25;
 
     foreach ($this->autocompleters as $tag => $config) {
       if(isset($_POST[$tag])){
