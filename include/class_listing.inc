@@ -901,7 +901,7 @@ class listing {
     $actions= &$this->xmlData['actionmenu']['action'];
     $result= "<input type='hidden' name='act' id='actionmenu' value=''>".
              "<ul class='level1' id='root'><li><a href='#'>Aktionen&nbsp;<img ".
-             "border=0 src='images/lists/sort-down.png'></a>";
+             "border=0 class='center' src='images/lists/sort-down.png'></a>";
 
     // Build ul/li list
     $result.= $this->recurseActions($actions);
@@ -926,7 +926,7 @@ class listing {
       // Fill image if set
       $img= "";
       if (isset($action['image'])){
-        $img= "<img border=0 src='".$action['image']."'>&nbsp;";
+        $img= "<img border='0' class='center' src='".$action['image']."'>&nbsp;";
       }
 
       if ($action['type'] == "separator"){
@@ -1279,7 +1279,7 @@ class listing {
       $events= DaemonEvent::get_event_types_by_category($this->categories);
       if(isset($events['BY_CLASS']) && count($events['BY_CLASS'])){
         foreach($events['BY_CLASS'] as $name => $event){
-          $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"$name\";mainform.submit();'><img src='".$event['MenuImage']."' alt='' border='0' class='center'>&nbsp;".$event['s_Menu_Name']."</a></li>";
+          $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value=\"$name\";mainform.submit();'>".$event['MenuImage']."&nbsp;".$event['s_Menu_Name']."</a></li>";
           $separator= "";
         }
       }
