@@ -14,8 +14,8 @@ class filterLDAP {
 
   static function get_list($base, $filter, $attributes, $category, $objectStorage, $flags= GL_SUBSEARCH)
   {
-    global $ui;
-    global $config;
+    $ui= session::global_get('ui');
+    $config= session::global_get('config');
 
     // Move to arrays for category and objectStorage
     if (!is_array($category)) {
