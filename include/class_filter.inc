@@ -29,7 +29,6 @@ class filter {
   var $autocompleter= array();
   var $category= "";
   var $objectStorage= array();
-  var $objectBase= "";
   var $base= "";
   var $scope= "";
   var $query;
@@ -243,11 +242,6 @@ class filter {
   }
 
 
-  function setObjectBase($base) {
-    $this->objectBase= $base;    
-  }
-
-
   function setBase($base) {
     $this->base= $base;
   }
@@ -383,7 +377,7 @@ class filter {
       }
 
       $result= array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes,
-                               $this->category, $this->objectStorage, $this->objectBase));
+                               $this->category, $this->objectStorage));
     }
     
 
@@ -458,13 +452,12 @@ class filter {
 
     // Make filter
     $filter= preg_replace("/\\$$tag/", normalizeLDAP($value), $filter);
-    if (isset($config['base']) && isset($config['scope'])
-        && isset($config['category']) && isset($config['objectbase']) ) {
+    if (isset($config['base']) && isset($config['scope']) && isset($config['category'])) {
       $result= call_user_func(array($backend, 'query'), $config['base'], $config['scope'], $filter, $attributes,
-                           $config["category"], $config["objectbase"]);
+                           $config["category"], $config["objectStorage"]);
     } else {
       $result= call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes,
-                           $this->category, $this->objectStorage, $this->objectBase);
+                           $this->category, $this->objectStorage);
     }
 
     foreach ($result as $entry) {
@@ -488,18 +481,25 @@ class filter {
     global $class_mapping;
     $result= array();
 
+    // Introduce maximum number of entries
+    $max= 10;
+
     foreach ($this->autocompleters as $tag => $config) {
       if(isset($_POST[$tag])){
         $result= $this->getCompletitionList($config, $tag, $_POST[$tag]);
+        $result= array_unique($result);
+        asort($result);
 
         echo '<ul>';
         foreach ($result as $entry) {
           echo '<li>'.$entry.'</li>';
+          if ($max-- == 0) {
+            break;
+          }
         }
 
         echo '</ul>';
       }
-
     }
   }
 

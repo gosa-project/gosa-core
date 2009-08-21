@@ -29,24 +29,28 @@ class filterLDAP {
     $bases= array();
     
     // Get list of sub bases to search on
-    foreach ($objectStorage as $oc) {
-      $oc= preg_replace('/,$/', '', $oc);
-      $tmp= split(',', $oc);
-      if (count($tmp) == 1) {
-        preg_match('/([^=]+)=(.*)$/', $oc, $m);
-        if ($flags & GL_SUBSEARCH) {
-          $bases[$base][]= $m[1].":dn:=".$m[2];
+    if (count($objectStorage) == 0) {
+      $bases[$base]= "";
+    } else {
+      foreach ($objectStorage as $oc) {
+        $oc= preg_replace('/,$/', '', $oc);
+        $tmp= split(',', $oc);
+        if (count($tmp) == 1) {
+          preg_match('/([^=]+)=(.*)$/', $oc, $m);
+          if ($flags & GL_SUBSEARCH) {
+            $bases[$base][]= $m[1].":dn:=".$m[2];
+          } else {
+            $bases["$oc,$base"][]= $m[1].":dn:=".$m[2];
+          }
         } else {
-          $bases["$oc,$base"][]= $m[1].":dn:=".$m[2];
-        }
-      } else {
-        // No, there's no \, in pre defined RDN values
-        preg_match('/^([^,]+),(.*)$/', $oc, $matches);
-        preg_match('/([^=]+)=(.*)$/', $matches[1], $m);
-        if ($flags & GL_SUBSEARCH) {
-          $bases[$base][]= $m[1].":dn:=".$m[2];
-        } else {
-          $bases[$matches[2].",$base"][]= $m[1].":dn:=".$m[2];
+          // No, there's no \, in pre defined RDN values
+          preg_match('/^([^,]+),(.*)$/', $oc, $matches);
+          preg_match('/([^=]+)=(.*)$/', $matches[1], $m);
+          if ($flags & GL_SUBSEARCH) {
+            $bases[$base][]= $m[1].":dn:=".$m[2];
+          } else {
+            $bases[$matches[2].",$base"][]= $m[1].":dn:=".$m[2];
+          }
         }
       }
     }
@@ -66,11 +70,15 @@ class filterLDAP {
 
       // Switch to new base and search
       $ldap->cd($base);
-      $dnFilter= "(|";
-      foreach ($dnFilters as $df) {
-        $dnFilter.= "($df)";
+      if (is_array($dnFilters)){
+        $dnFilter= "(|";
+        foreach ($dnFilters as $df) {
+          $dnFilter.= "($df)";
+        }
+        $dnFilter.= ")";
+      } else {
+        $dnFilter= "";
       }
-      $dnFilter.= ")";
       $ldap->search ("(&$filter$dnFilter)", $attributes);
 
       // Check for size limit exceeded messages for GUI feedback
