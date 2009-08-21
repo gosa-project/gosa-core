@@ -25,9 +25,6 @@ class filterLDAP {
       $objectStorage= array($objectStorage);
     }
 
-    # Test
-    $objectStorage= array("ou=printers,ou=systems", "ou=workstations,ou=systems", "ou=servers,ou=systems", "ou=people");
-
     // Initialize search bases
     $bases= array();
     
