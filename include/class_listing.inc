@@ -140,6 +140,9 @@ class listing {
     }
     $this->categories= array();
     if (isset($this->xmlData['definition']['objectType'])) {
+      if(isset($this->xmlData['definition']['objectType']['label'])) {
+        $this->xmlData['definition']['objectType']= array($this->xmlData['definition']['objectType']);
+      }
       foreach ($this->xmlData['definition']['objectType'] as $index => $otype) {
         $this->objectTypes[]= $this->xmlData['definition']['objectType'][$index];
         if (isset($this->xmlData['definition']['objectType'][$index]['category'])){
