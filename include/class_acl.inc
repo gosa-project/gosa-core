@@ -87,7 +87,14 @@ class acl extends plugin
       $ldap->search('(&(objectClass=gosaAccount)(gosaUnitTag='.$tag.'))', array('uid', 'cn'));
     }
     while ($attrs= $ldap->fetch()){
-      $this->users['U:'.$attrs['dn']]= $attrs['cn'][0].' ['.$attrs['uid'][0].']';
+
+      // Allow objects without cn to be listed without causing an error.
+      if(!isset($attrs['cn'][0])){
+        $this->users['U:'.$attrs['dn']]=  $attrs['uid'][0];
+      }else{
+        $this->users['U:'.$attrs['dn']]= $attrs['cn'][0].' ['.$attrs['uid'][0].']';
+      }
+
     }
     ksort($this->users);
 
