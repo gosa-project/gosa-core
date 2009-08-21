@@ -89,8 +89,12 @@ class acl extends plugin
     while ($attrs= $ldap->fetch()){
 
       // Allow objects without cn to be listed without causing an error.
-      if(!isset($attrs['uid'][0])){
+      if(!isset($attrs['cn'][0]) && isset($attrs['uid'][0])){
+        $this->users['U:'.$attrs['dn']]=  $attrs['uid'][0];
+      }elseif(!isset($attrs['uid'][0]) && isset($attrs['cn'][0])){
         $this->users['U:'.$attrs['dn']]=  $attrs['cn'][0];
+      }elseif(!isset($attrs['uid'][0]) && !isset($attrs['cn'][0])){
+        $this->users['U:'.$attrs['dn']]= $attrs['dn'];
       }else{
         $this->users['U:'.$attrs['dn']]= $attrs['cn'][0].' ['.$attrs['uid'][0].']';
       }
