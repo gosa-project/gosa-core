@@ -28,14 +28,12 @@ class filterLDAP {
     // Initialize search bases
     $bases= array();
     
-    // Get list of sub bases to search on and fill dn components to search for
-    $components= array();
+    // Get list of sub bases to search on
     foreach ($objectStorage as $oc) {
       $oc= preg_replace('/,$/', '', $oc);
       $tmp= split(',', $oc);
       if (count($tmp) == 1) {
         preg_match('/([^=]+)=(.*)$/', $oc, $m);
-        $components[]= $m[1].":dn:=".$m[2];
         if ($flags & GL_SUBSEARCH) {
           $bases[$base][]= $m[1].":dn:=".$m[2];
         } else {
@@ -45,7 +43,6 @@ class filterLDAP {
         // No, there's no \, in pre defined RDN values
         preg_match('/^([^,]+),(.*)$/', $oc, $matches);
         preg_match('/([^=]+)=(.*)$/', $matches[1], $m);
-        $components[]= $m[1].":dn:=".$m[2];
         if ($flags & GL_SUBSEARCH) {
           $bases[$base][]= $m[1].":dn:=".$m[2];
         } else {
