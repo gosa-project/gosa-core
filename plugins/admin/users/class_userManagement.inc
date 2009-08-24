@@ -988,40 +988,40 @@ class userManagement extends plugin
     $this->DivListUsers->setEntries($this->list);
 
     # FILTER Test #################################################
-    # Build filter
-    if (!$this->filter) {
-      $this->filter = new filter(get_template_path("user-filter.xml", true));
-      $this->filter->setObjectStorage(get_people_ou());
-    }
-    $this->filter->update();
-    session::set('autocomplete', $this->filter);
-    if (!$this->filter->isValid()){
-      msg_dialog::display(_("Filter error"), _("The filter is uncomplete!"), ERROR_DIALOG);
-    }
+    ## Build filter
+    #if (!$this->filter) {
+    #  $this->filter = new filter(get_template_path("user-filter.xml", true));
+    #  $this->filter->setObjectStorage(get_people_ou());
+    #}
+    #$this->filter->update();
+    #session::set('autocomplete', $this->filter);
+    #if (!$this->filter->isValid()){
+    #  msg_dialog::display(_("Filter error"), _("The filter is uncomplete!"), ERROR_DIALOG);
+    #}
 
-    # Build headpage
-    if (!$this->headpage){
-      $this->headpage = new listing(get_template_path("user-list.xml", true));
-      $this->headpage->registerElementFilter("accountProperties", "userManagement::filterProperties");
-      $this->headpage->registerElementFilter("lockLabel", "userManagement::filterLockLabel");
-      $this->headpage->registerElementFilter("lockImage", "userManagement::filterLockImage");
-      $this->headpage->setCopyPasteHandler($this->CopyPasteHandler);
-      $this->SnapshotHandler->setSnapshotBases($this->get_used_snapshot_bases());
-      $this->headpage->setSnapshotHandler($this->SnapshotHandler);
-      $this->headpage->setFilter($this->filter);
-    }
+    ## Build headpage
+    #if (!$this->headpage){
+    #  $this->headpage = new listing(get_template_path("user-list.xml", true));
+    #  $this->headpage->registerElementFilter("accountProperties", "userManagement::filterProperties");
+    #  $this->headpage->registerElementFilter("lockLabel", "userManagement::filterLockLabel");
+    #  $this->headpage->registerElementFilter("lockImage", "userManagement::filterLockImage");
+    #  $this->headpage->setCopyPasteHandler($this->CopyPasteHandler);
+    #  $this->SnapshotHandler->setSnapshotBases($this->get_used_snapshot_bases());
+    #  $this->headpage->setSnapshotHandler($this->SnapshotHandler);
+    #  $this->headpage->setFilter($this->filter);
+    #}
 
-    # Needs to be called before update!
-    $action= $this->headpage->getAction();
-    if ($action['action'] != '') {
-      echo "List detected action:";
-      print_a($action);
-    }
+    ## Needs to be called before update!
+    #$action= $this->headpage->getAction();
+    #if ($action['action'] != '') {
+    #  echo "List detected action:";
+    #  print_a($action);
+    #}
 
-    # Refresh for filter
-    $this->headpage->update();
-    
-    return($this->headpage->render());
+    ## Refresh for filter
+    #$this->headpage->update();
+    #
+    #return($this->headpage->render());
     ################################################### FILTER Test
 
     return($this->DivListUsers->Draw());
