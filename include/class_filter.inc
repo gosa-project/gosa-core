@@ -35,6 +35,7 @@ class filter {
   var $initial= false;
   var $scopeMode= "auto";
   var $alphabet= null;
+  var $converter= array();
 
 
   function filter($filename)
@@ -237,17 +238,26 @@ class filter {
   }
 
 
-  function setObjectStorage($storage) {
+  function setConverter($field, $hook)
+  {
+    $this->converter[$field]= $hook;
+  }
+
+
+  function setObjectStorage($storage)
+  {
     $this->objectStorage= $storage;    
   }
 
 
-  function setBase($base) {
+  function setBase($base)
+  {
     $this->base= $base;
   }
 
 
-  function setCurrentScope($scope) {
+  function setCurrentScope($scope)
+  {
     $this->scope= $scope;
   }
 
