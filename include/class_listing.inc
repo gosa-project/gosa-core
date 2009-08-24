@@ -471,6 +471,12 @@ class listing {
   }
 
 
+  function getBase($base)
+  {
+    $this->base= $base;
+  }
+
+
   function getBase()
   {
     return $this->base;
