@@ -471,6 +471,12 @@ class listing {
   }
 
 
+  function getBase()
+  {
+    return $this->base;
+  }
+
+
   function parseLayout($layout)
   {
     $result= array();
@@ -980,6 +986,10 @@ class listing {
           $result.= $this->renderSnapshotMenu($separator);
           break;
 
+        case 'exporter':
+          $result.= $this->renderExporterMenu($separator);
+          break;
+
         case 'daemon':
           $result.= $this->renderDaemonMenu($separator);
           break;
@@ -1242,6 +1252,24 @@ class listing {
         $result.= "<li$separator><a href='#'><img src='images/lists/restore_grey.png' alt='' border='0' class='center'>&nbsp;"._("Restore snapshots")."</a></li>";
       }
     }
+
+    return($result);
+  }
+
+
+  function renderExporterMenu($separator)
+  {
+    // Presets
+    $result = "";
+
+    // Draw entries
+    $result.= "<li$separator><a href='#'><img border='0' class='center' src='images/lists/export.png'>&nbsp;"._("Export list")."&nbsp;<img border='0' src='images/forward-arrow.png'></a><ul class='level3'>";
+
+    // Export CVS as build in exporter
+    $result.= "<li><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"exportCSV\";mainform.submit();'><img border='0' class='center' src='plugins/lists/exportCSV.png'>&nbsp;CSV</a></li>";
+
+    // Finalize list
+    $result.= "</ul></li>";
 
     return($result);
   }
