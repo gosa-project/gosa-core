@@ -374,8 +374,16 @@ class filter {
         if (!isset($element['set']) || !isset($element['unset'])) {
           continue;
         }
-        $e_set= is_array($element['set'])?"":$element['set'];
-        $e_unset= is_array($element['unset'])?"":$element['unset'];
+
+        // Handle converters if present
+        if (isset($this->converter[$tag])) {
+          preg_match('/([^:]+)::(.*)$/', $this->converter[$tag], $m);
+          $e_set= call_user_func(array($m[1], $m[2]), preg_replace('/\$/', $this->elementValues[$tag], is_array($element['set'])?"":$element['set']));
+          $e_unset= call_user_func(array($m[1], $m[2]), preg_replace('/\$/', $this->elementValues[$tag], is_array($element['unset'])?"":$element['unset']));
+        } else {
+          $e_set= is_array($element['set'])?"":$element['set'];
+          $e_unset= is_array($element['unset'])?"":$element['unset'];
+        }
 
         if ($this->elementValues[$tag] == "") {
           $e_unset= preg_replace('/\$/', normalizeLdap($this->elementValues[$tag]), $e_unset);
@@ -386,11 +394,9 @@ class filter {
         }
       }
 
-      $result= array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes,
-                               $this->category, $this->objectStorage));
+      $result= array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes, $this->category, $this->objectStorage));
     }
     
-
     return ($result);
   }
 
