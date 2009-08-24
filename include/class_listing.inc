@@ -306,7 +306,11 @@ class listing {
         $trow.="<td ".$this->colprops[$index]." class='list0'>".$renderedCell."</td>\n";
 
         // Save rendered column
-        $this->entries[$row]["_sort$index"]= $renderedCell;
+        $sort= preg_replace('/.*>([^<]+)<.*$/', '$1', $renderedCell);
+        if (preg_match('/</', $sort)){
+          $sort= "";
+        }
+        $this->entries[$row]["_sort$index"]= $sort;
       }
       $trow.="</tr>\n";
 
