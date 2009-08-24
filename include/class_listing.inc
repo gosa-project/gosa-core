@@ -47,11 +47,15 @@ class listing {
   var $objectTypeCount= array();
   var $copyPasteHandler= null;
   var $snapshotHandler= null;
+  var $exporter= array();
+  var $exportColumns= array();
+  var $showExporter= false;
 
 
   function listing($filename)
   {
     global $config;
+    global $class_mapping;
 
     // Initialize pid
     $this->pid= preg_replace("/[^0-9]/", "", microtime(TRUE));
@@ -75,6 +79,14 @@ class listing {
     $this->registerElementFilter("departmentLink", "listing::filterDepartmentLink");
     $this->registerElementFilter("link", "listing::filterLink");
     $this->registerElementFilter("actions", "listing::filterActions");
+
+    // Load exporters
+    foreach($class_mapping as $class => $dummy) {
+      if (preg_match('/Exporter$/', $class)) {
+        $info= call_user_func(array($class, "getInfo"));
+        $this->exporter= array_merge($this->exporter, $info);
+      }
+    }
   }
 
 
@@ -164,6 +176,15 @@ class listing {
       $this->categories= array($this->categories);
     }
 
+    // Evaluate columns to be exported
+    if (isset($this->xmlData['table']['column'])){
+      foreach ($this->xmlData['table']['column'] as $index => $config) {
+        if (isset($config['export']) && $config['export'] == "true"){
+          $this->exportColumns[]= $index;
+        }
+      }
+    }
+
     return true;  
   }
 
@@ -171,6 +192,7 @@ class listing {
   function renderHeader()
   {
     $this->header= array();
+    $this->plainHeader= array();
 
     // Initialize sort?
     $sortInit= false;
@@ -208,12 +230,14 @@ class listing {
           } else {
             $this->header[$index]= "<td class='listheader' ".$this->colprops[$index].">"._($config['label'])."</td>";
           }
+          $this->plainHeader[]= _($config['label']);
         } else {
           if ($sortable) {
             $this->header[$index]= "<td class='listheader' ".$this->colprops[$index]."><a $link>&nbsp;$sorter</a></td>";
           } else {
             $this->header[$index]= "<td class='listheader' ".$this->colprops[$index].">&nbsp;</td>";
           }
+          $this->plainHeader[]= "";
         }
       }
     }
@@ -294,7 +318,7 @@ class listing {
 
     // Fill with contents, sort as configured
     foreach ($this->entries as $row => $entry) {
-      $trow ="<tr class='rowxp".($alt&1)."'>\n";
+      $trow= "";
 
       // Render multi select if needed
       if ($this->multiSelect) {
@@ -312,18 +336,18 @@ class listing {
         }
         $this->entries[$row]["_sort$index"]= $sort;
       }
-      $trow.="</tr>\n";
 
       // Save rendered entry
       $this->entries[$row]['_rendered']= $trow;
-
-      $alt++;
     }
 
     // Complete list by sorting entries for _sort$index and appending them to the output
     $entryIterator= new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], "_sort".$this->sortColumn, $this->sortType);
     foreach ($entryIterator as $row => $entry){
+      $alt++;
+      $result.="<tr class='rowxp".($alt&1)."'>\n";
       $result.= $entry['_rendered'];
+      $result.="</tr>\n";
     }
 
     // Need to fill the list if it's not full (nobody knows why this is 22 ;-))
@@ -361,6 +385,12 @@ class listing {
     }
 
     $result.= "</table></div>";
+
+    // Open export window?
+    if ($this->showExporter) {
+      $result.= "<SCRIPT TYPE='text/javascript'>window.open('getbin.php', '"._("GOsa - export list")."');</SCRIPT>";
+      $this->showExporter= false;
+    }
 
     $smarty= get_smarty();
     $smarty->assign("FILTER", $this->filter->render());
@@ -414,6 +444,20 @@ class listing {
         if (isset($this->departments[$match[1]])){
           $this->base= $this->departments[$match[1]]['dn'];
         }
+      }
+    }
+
+    // Filter POST with "act" attributes -> posted from action menu
+    if (isset($_POST['act']) && $_POST['act'] != '') {
+      if (preg_match('/^export.*$/', $_POST['act']) && isset($this->exporter[$_POST['act']])) {
+        $exporter= $this->exporter[$_POST['act']];
+        $instance= new $exporter['class']($this->plainHeader, $this->entries, $this->exportColumns);
+        $type= call_user_func(array($exporter['class'], "getInfo"));
+        $type= $type[$_POST['act']];
+        session::set('binarytype', $type['mime']);
+        session::set('binaryfile', $type['filename']);
+        session::set('binary', $instance->query());
+        $this->showExporter= true;
       }
     }
 
@@ -910,7 +954,9 @@ class listing {
 
     // Filter POST with "act" attributes -> posted from action menu
     if (isset($_POST['act']) && $_POST['act'] != '') {
-      $result['action']= validate($_POST['act']);
+      if (!preg_match('/^export.*$/', $_POST['act'])){
+        $result['action']= validate($_POST['act']);
+      }
     }
 
     // Drop targets if empty
@@ -1272,7 +1318,9 @@ class listing {
     $result.= "<li$separator><a href='#'><img border='0' class='center' src='images/lists/export.png'>&nbsp;"._("Export list")."&nbsp;<img border='0' src='images/forward-arrow.png'></a><ul class='level3'>";
 
     // Export CVS as build in exporter
-    $result.= "<li><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"exportCSV\";mainform.submit();'><img border='0' class='center' src='plugins/lists/exportCSV.png'>&nbsp;CSV</a></li>";
+    foreach ($this->exporter as $action => $exporter) {
+      $result.= "<li><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"$action\";mainform.submit();'><img border='0' class='center' src='".$exporter['image']."'>&nbsp;".$exporter['label']."</a></li>";
+    }
 
     // Finalize list
     $result.= "</ul></li>";
