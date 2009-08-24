@@ -227,26 +227,26 @@ class listing {
     }
 
     // Initialize list
-    $result= "<input type='hidden' value='$this->pid' name='PID'>";
-    $result.= "<div class='contentboxb' id='listing_container' style='border-top:1px solid #B0B0B0;'>";
+    $result= "<input type='hidden' value='$this->pid' name='PID'>\n";
+    $result.= "<div class='contentboxb' id='listing_container' style='border-top:1px solid #B0B0B0;'>\n";
     $result.= "<table summary='$this->headline' style='width:600px;height:450px;' cellspacing='0' id='t_scrolltable'>
-<tr><td class='scrollhead'><table summary='' style='width:100%;' cellspacing='0' id='t_scrollhead'>";
+<tr><td class='scrollhead'><table summary='' style='width:100%;' cellspacing='0' id='t_scrollhead'>\n";
     $this->numColumns= count($this->colprops) + ($this->multiSelect?1:0);
 
     // Build list header
-    $result.= "<tr>";
+    $result.= "<tr>\n";
     if ($this->multiSelect) {
-      $result.= "<td class='listheader' style='width:20px;'><input type='checkbox' id='select_all' name='select_all' title='"._("Select all")."' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' ></td>";
+      $result.= "<td class='listheader' style='width:20px;'><input type='checkbox' id='select_all' name='select_all' title='"._("Select all")."' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' ></td>\n";
     }
     foreach ($this->header as $header) {
       $result.= $header;
     }
 
     // Add 13px for scroller
-    $result.= "<td class='listheader' style='width:13px;border-right:0px;'>&nbsp;</td></table></td></tr>";
+    $result.= "<td class='listheader' style='width:13px;border-right:0px;'>&nbsp;</td></table></td></tr>\n";
 
     // New table for the real list contents
-    $result.= "<tr><td colspan='$this->numColumns' class='scrollbody'><div style='width:600px;height:430px;' id='d_scrollbody' class='scrollbody'><table summary='' style='height:100%;width:581px;' cellspacing='0' id='t_scrollbody'>";
+    $result.= "<tr><td colspan='$this->numColumns' class='scrollbody'><div style='width:600px;height:430px;' id='d_scrollbody' class='scrollbody'><table summary='' style='height:100%;width:581px;' cellspacing='0' id='t_scrollbody'>\n";
 
     // No results? Just take an empty colspanned row
     if (count($this->entries) + count($this->departments) == 0) {
@@ -293,25 +293,25 @@ class listing {
     }
 
     // Fill with contents, sort as configured
-    foreach ($this->entry as $row => $entry) {
-      $trow ="<tr class='rowxp".($alt&1)."'>";
+    foreach ($this->entries as $row => $entry) {
+      $trow ="<tr class='rowxp".($alt&1)."'>\n";
 
       // Render multi select if needed
       if ($this->multiSelect) {
-        $trow.="<td style='text-align:center;width:20px;' class='list0'><input type='checkbox' id='listing_selected_$row' name='listing_selected_$row'></td>";
+        $trow.="<td style='text-align:center;width:20px;' class='list0'><input type='checkbox' id='listing_selected_$row' name='listing_selected_$row'></td>\n";
       }
 
       foreach ($this->xmlData['table']['column'] as $index => $config) {
         $renderedCell= $this->renderCell($config['value'], $entry, $row);
-        $trow.="<td ".$this->colprops[$index]." class='list0'>".$renderedCell."</td>";
+        $trow.="<td ".$this->colprops[$index]." class='list0'>".$renderedCell."</td>\n";
 
         // Save rendered column
-        $this->entry[$row]["_sort$index"]= $renderedCell;
+        $this->entries[$row]["_sort$index"]= $renderedCell;
       }
-      $trow.="</tr>";
+      $trow.="</tr>\n";
 
       // Save rendered entry
-      $this->entry[$row]['_rendered']= $trow;
+      $this->entries[$row]['_rendered']= $trow;
 
       $alt++;
     }
