@@ -293,21 +293,33 @@ class listing {
     }
 
     // Fill with contents, sort as configured
-    $entryIterator= new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], $this->sortAttribute, $this->sortType);
-    foreach ($entryIterator as $row => $entry){
-      $result.="<tr class='rowxp".($alt&1)."'>";
+    foreach ($this->entry as $row => $entry) {
+      $trow ="<tr class='rowxp".($alt&1)."'>";
 
       // Render multi select if needed
       if ($this->multiSelect) {
-        $result.="<td style='text-align:center;width:20px;' class='list0'><input type='checkbox' id='listing_selected_$row' name='listing_selected_$row'></td>";
+        $trow.="<td style='text-align:center;width:20px;' class='list0'><input type='checkbox' id='listing_selected_$row' name='listing_selected_$row'></td>";
       }
 
       foreach ($this->xmlData['table']['column'] as $index => $config) {
-        $result.="<td ".$this->colprops[$index]." class='list0'>".$this->renderCell($config['value'], $entry, $row)."</td>";
+        $renderedCell= $this->renderCell($config['value'], $entry, $row);
+        $trow.="<td ".$this->colprops[$index]." class='list0'>".$renderedCell."</td>";
+
+        // Save rendered column
+        $this->entry[$row]["_sort$index"]= $renderedCell;
       }
-      $result.="</tr>";
+      $trow.="</tr>";
+
+      // Save rendered entry
+      $this->entry[$row]['_rendered']= $trow;
 
       $alt++;
+    }
+
+    // Complete list by sorting entries for _sort$index and appending them to the output
+    $entryIterator= new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], "_sort".$this->sortColumn, $this->sortType);
+    foreach ($entryIterator as $row => $entry){
+      $result.= $entry['_rendered'];
     }
 
     // Need to fill the list if it's not full (nobody knows why this is 22 ;-))
