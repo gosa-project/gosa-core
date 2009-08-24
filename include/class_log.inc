@@ -159,6 +159,7 @@ class log {
    
       /* Connect to the database 
        */
+      ini_set("mysql.connect_timeout",5);
       $con = @mysql_pconnect($server_name,$server['USER'],$server['PWD']);
       if(!$con){
         $error = msgPool::dbconnect(_("MySQL logging"),mysql_error());
