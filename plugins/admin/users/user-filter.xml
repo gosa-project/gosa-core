@@ -47,6 +47,7 @@
       <attribute>cn</attribute>
       <frequency>0.5</frequency>
       <characters>3</characters>
+      <objectStorage></objectStorage>
     </autocomplete>
   </element>
 
@@ -109,6 +110,7 @@
       <filter>(objectClass=organizationalRole)</filter>
       <attribute>cn</attribute>
       <key>cn</key>
+      <objectStorage></objectStorage>
     </autocomplete>
    </element>
 
