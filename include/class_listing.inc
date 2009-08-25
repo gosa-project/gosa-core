@@ -49,7 +49,6 @@ class listing {
   var $snapshotHandler= null;
   var $exporter= array();
   var $exportColumns= array();
-  var $showExporter= false;
 
 
   function listing($filename)
@@ -84,7 +83,9 @@ class listing {
     foreach($class_mapping as $class => $dummy) {
       if (preg_match('/Exporter$/', $class)) {
         $info= call_user_func(array($class, "getInfo"));
-        $this->exporter= array_merge($this->exporter, $info);
+        if ($info != null) {
+          $this->exporter= array_merge($this->exporter, $info);
+        }
       }
     }
   }
@@ -386,12 +387,6 @@ class listing {
 
     $result.= "</table></div>";
 
-    // Open export window?
-    if ($this->showExporter) {
-      $result.= "<SCRIPT TYPE='text/javascript'>window.open('getbin.php', '"._("GOsa - export list")."');</SCRIPT>";
-      $this->showExporter= false;
-    }
-
     $smarty= get_smarty();
     $smarty->assign("FILTER", $this->filter->render());
     $smarty->assign("SIZELIMIT", print_sizelimit_warning());
@@ -448,16 +443,14 @@ class listing {
     }
 
     // Filter POST with "act" attributes -> posted from action menu
-    if (isset($_POST['act']) && $_POST['act'] != '') {
+    if (isset($_POST['exec_act']) && $_POST['act'] != '') {
       if (preg_match('/^export.*$/', $_POST['act']) && isset($this->exporter[$_POST['act']])) {
         $exporter= $this->exporter[$_POST['act']];
-        $instance= new $exporter['class']($this->plainHeader, $this->entries, $this->exportColumns);
+        $userinfo= ", "._("created by")." ".$ui->cn." - ".strftime('%A, %d. %B %Y, %H:%M:%S');
+        $instance= new $exporter['class']($this->headline.$userinfo, $this->plainHeader, $this->entries, $this->exportColumns);
         $type= call_user_func(array($exporter['class'], "getInfo"));
         $type= $type[$_POST['act']];
-        session::set('binarytype', $type['mime']);
-        session::set('binaryfile', $type['filename']);
-        session::set('binary', $instance->query());
-        $this->showExporter= true;
+        send_binary_content($instance->query(), $type['filename'], $type= $type['mime']);
       }
     }
 
@@ -976,7 +969,7 @@ class listing {
 
     // Load shortcut
     $actions= &$this->xmlData['actionmenu']['action'];
-    $result= "<input type='hidden' name='act' id='actionmenu' value=''>".
+    $result= "<input type='hidden' name='act' id='actionmenu' value=''><div style='display:none'><input type='submit' name='exec_act' id='exec_act' value=''></div>".
              "<ul class='level1' id='root'><li><a href='#'>Aktionen&nbsp;<img ".
              "border=0 class='center' src='images/lists/sort-down.png'></a>";
 
@@ -1217,13 +1210,13 @@ class listing {
 
       // Copy entry
       if($copy){
-        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"copy\";mainform.submit();'><img src='images/lists/copy.png' alt='' border='0' class='center'>&nbsp;"._("Copy")."</a></li>";
+        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"copy\";document.getElementById(\"exec_act\").click();'><img src='images/lists/copy.png' alt='' border='0' class='center'>&nbsp;"._("Copy")."</a></li>";
         $separator= "";
       }
 
       // Cut entry
       if($cut){
-        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"cut\";mainform.submit();'><img src='images/lists/cut.png' alt='' border='0' class='center'>&nbsp;"._("Cut")."</a></li>";
+        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"cut\";document.getElementById(\"exec_act\").click();'><img src='images/lists/cut.png' alt='' border='0' class='center'>&nbsp;"._("Cut")."</a></li>";
         $separator= "";
       }
     }
@@ -1231,7 +1224,7 @@ class listing {
     // Draw entries that allow pasting entries
     if($paste){
       if($this->copyPasteHandler->entries_queued()){
-        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"paste\";mainform.submit();'><img src='images/lists/paste.png' alt='' border='0' class='center'>&nbsp;"._("Paste")."</a></li>";
+        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"paste\";document.getElementById(\"exec_act\").click();'><img src='images/lists/paste.png' alt='' border='0' class='center'>&nbsp;"._("Paste")."</a></li>";
       }else{
         $result.= "<li$separator><a href='#'><img src='images/lists/paste-grey.png' alt='' border='0' class='center'>&nbsp;"._("Paste")."</a></li>";
       }
@@ -1299,7 +1292,7 @@ class listing {
 
       // Draw icons according to the restore flag
       if($restore){
-        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"restore\";mainform.submit();'><img src='images/lists/restore.png' alt='' border='0' class='center'>&nbsp;"._("Restore snapshots")."</a></li>";
+        $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"restore\";document.getElementById(\"exec_act\").click();'><img src='images/lists/restore.png' alt='' border='0' class='center'>&nbsp;"._("Restore snapshots")."</a></li>";
       }else{
         $result.= "<li$separator><a href='#'><img src='images/lists/restore_grey.png' alt='' border='0' class='center'>&nbsp;"._("Restore snapshots")."</a></li>";
       }
@@ -1319,7 +1312,7 @@ class listing {
 
     // Export CVS as build in exporter
     foreach ($this->exporter as $action => $exporter) {
-      $result.= "<li><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"$action\";mainform.submit();'><img border='0' class='center' src='".$exporter['image']."'>&nbsp;".$exporter['label']."</a></li>";
+      $result.= "<li><a href='#' onClick='document.getElementById(\"actionmenu\").value= \"$action\";document.getElementById(\"exec_act\").click();'><img border='0' class='center' src='".$exporter['image']."'>&nbsp;".$exporter['label']."</a></li>";
     }
 
     // Finalize list
@@ -1380,7 +1373,7 @@ class listing {
       $events= DaemonEvent::get_event_types_by_category($this->categories);
       if(isset($events['BY_CLASS']) && count($events['BY_CLASS'])){
         foreach($events['BY_CLASS'] as $name => $event){
-          $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value=\"$name\";mainform.submit();'>".$event['MenuImage']."&nbsp;".$event['s_Menu_Name']."</a></li>";
+          $result.= "<li$separator><a href='#' onClick='document.getElementById(\"actionmenu\").value=\"$name\";document.getElementById(\"exec_act\").click();'>".$event['MenuImage']."&nbsp;".$event['s_Menu_Name']."</a></li>";
           $separator= "";
         }
       }
