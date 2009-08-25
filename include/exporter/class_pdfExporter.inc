@@ -4,6 +4,12 @@
 define('FPDF_FONTPATH', '/usr/share/php/fpdf/font/');
 include('fpdf/fpdf.php');
 
+// Load supporter class only if FPDF is loaded
+$classes= get_declared_classes();
+if(in_array('FPDF', $classes)) {
+  include('class_PDF.inc');
+}
+
 class pdfExporter
 {
   var $result;
@@ -17,8 +23,10 @@ class pdfExporter
     }
 
     // Create new PDF
-    $this->result=new FPDF('L', 'mm', 'A4');
+    $this->result=new PDF('L', 'mm', 'A4');
+    $this->result->AliasNbPages();
     $this->result->SetFont('Helvetica', '', 10);
+    $this->result->setHeadline(utf8_decode($headline));
     $this->result->AddPage();
 
     // Analyze for width
@@ -26,32 +34,36 @@ class pdfExporter
     
     // Render head
     $this->result->SetFont('','B');
-    $this->result->Cell(0,0,utf8_decode($headline),0,0,'L');
-    $this->result->Ln(5);
-
-    // Generate header
-    $this->result->SetFillColor(240,240,240);
     $this->result->SetTextColor(0);
     $this->result->SetDrawColor(0,0,0);
     $this->result->SetLineWidth(.3);
-    $this->result->SetFont('','B');
 
-    foreach ($columns as $order => $index) {
-      if (isset($header[$index])){
-        $this->result->Cell($width[$order], 7, utf8_decode($header[$index]), 1, 0, 'C', 1);
-      } else {
-        $this->result->Cell($width[$order], 7, '', 1, 0, 'C', 1);
-      }
-    }
-    $this->result->Ln();
-
-    // Append entries
-    $this->result->SetFillColor(224,235,255);
-    $this->result->SetTextColor(0);
-    $this->result->SetFont('');
+    // Height calculator
+    $height= 0;
 
     $fill= false;
     foreach ($entries as $row) {
+      // Render header
+      if ($height == 0) {
+        // Generate header
+        $this->result->SetFillColor(230,230,230);
+        $this->result->SetFont('','B');
+
+        foreach ($columns as $order => $index) {
+          if (isset($header[$index])){
+            $this->result->Cell($width[$order], 7, utf8_decode($header[$index]), 1, 0, 'C', 1);
+          } else {
+            $this->result->Cell($width[$order], 7, '', 1, 0, 'C', 1);
+          }
+        }
+        $this->result->Ln();
+        $height= 7;
+
+        // Set entry collors
+        $this->result->SetFillColor(240,240,240);
+        $this->result->SetFont('');
+      }
+
       foreach ($columns as $order => $index) {
 
         if (isset($row["_sort$index"])){
@@ -62,7 +74,17 @@ class pdfExporter
       }
 
       $this->result->Ln();
-      $fill= !$fill;
+
+      // Increase height to eventually create new page
+      $height+= 8;
+      if ($height > 220) {
+        $height= 0;
+        $this->result->Cell(array_sum($width), 0, '', 'T');
+        $this->result->AddPage();
+        $fill= false;
+      } else {
+        $fill= !$fill;
+      }
     }
     $this->result->Cell(array_sum($width), 0, '', 'T');
   }
