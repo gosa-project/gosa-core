@@ -50,6 +50,7 @@
       <sortAttribute>sn</sortAttribute>
       <sortType>string</sortType>
       <value>%{filter:link(row,dn,"%s, %s [%s]",sn,givenName,uid)}</value>
+      <export>true</export>
     </column>
 
     <column>
@@ -144,6 +145,13 @@
       <type>snapshot</type>
     </action>
 
+    <action>
+      <type>separator</type>
+    </action>
+
+    <action>
+      <type>exporter</type>
+    </action>
   </actionmenu>
 
   <actiontriggers snapshot="true" copypaste="true">
