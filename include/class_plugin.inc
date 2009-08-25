@@ -1806,9 +1806,10 @@ class plugin
     /* Copy needed attributes */
     foreach ($this->attributes as $val){
       $found= array_key_ics($val, $this->multi_attrs);
+ 
       if ($found != ""){
-        if(isset($this->multi_attrs["$found"][0])){
-          $this->$val= $this->multi_attrs["$found"][0];
+        if(isset($this->multi_attrs["$val"][0])){
+          $this->$val= $this->multi_attrs["$val"][0];
         }
       }
     }
