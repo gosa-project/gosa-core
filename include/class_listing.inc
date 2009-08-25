@@ -515,13 +515,13 @@ class listing {
   }
 
 
-  function getBase($base)
+  function setBase($base)
   {
     $this->base= $base;
   }
 
 
-  function setBase()
+  function getBase()
   {
     return $this->base;
   }
