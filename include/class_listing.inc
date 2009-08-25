@@ -332,6 +332,7 @@ class listing {
 
         // Save rendered column
         $sort= preg_replace('/.*>([^<]+)<.*$/', '$1', $renderedCell);
+        $sort= preg_replace('/&nbsp;/', '', $sort);
         if (preg_match('/</', $sort)){
           $sort= "";
         }
