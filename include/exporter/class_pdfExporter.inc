@@ -2,7 +2,7 @@
 
 // Try to load PDF library
 define('FPDF_FONTPATH', '/usr/share/php/fpdf/font/');
-include('fpdf/fpdf.php');
+@include('fpdf/fpdf.php');
 
 // Load supporter class only if FPDF is loaded
 $classes= get_declared_classes();
