@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<filter>
+<filterdef>
   <definition>
     <category>users</category>
     <template>user-filter.tpl</template>
@@ -114,4 +114,4 @@
     </autocomplete>
    </element>
 
-</filter>
+</filterdef>

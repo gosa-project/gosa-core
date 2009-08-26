@@ -54,11 +54,11 @@ class filter {
     $contents = file_get_contents($filename);
     $this->xmlData= xml::xml2array($contents, 1);
 
-    if (!isset($this->xmlData['filter'])) {
+    if (!isset($this->xmlData['filterdef'])) {
       return false;
     }
 
-    $this->xmlData= $this->xmlData["filter"];
+    $this->xmlData= $this->xmlData["filterdef"];
 
     // Load filter
     if (isset($this->xmlData['search'])) {
