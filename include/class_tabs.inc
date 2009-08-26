@@ -190,7 +190,10 @@ class tabs
 
   function gen_tabs($disabled = FALSE)
   {
-    $display= "<input type=\"hidden\" name=\"arg\" value=\"\">";
+    $display ="";
+    if(!$disabled){
+      $display.= "<input type=\"hidden\" name=\"arg\" value=\"\">";
+    }
     $display.= "<table summary=\"\" cellpadding=0 cellspacing=0 border=0 style=\"width:100%;\"><tr>";
     $index= 0;
     $style= array("tab_left", "tab_active", "tab_near_active", "tab_right");
