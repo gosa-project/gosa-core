@@ -110,7 +110,6 @@ class listing {
       $this->departments= $this->getDepartments();
     }
     $this->filter->setBase($this->base);
-    $this->entries= $this->filter->query();
   }
 
 

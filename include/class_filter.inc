@@ -353,6 +353,12 @@ class filter {
     global $class_mapping;
     $result= array();
 
+    // Return empty list if initial is not set
+    if (!$this->initial) {
+      $this->initial= true;
+      return $result;
+    }
+
     // Go thru all queries and merge results
     foreach ($this->query as $query) {
       if (!isset($query['backend']) || !isset($query['filter']) || !isset($query['attribute'])) {
