@@ -26,9 +26,9 @@ class deptabs extends tabs
   var $moved = FALSE;
   var $base_name = "department";
 
-  function deptabs($config, $data, $dn,$category)
+  function deptabs($config, $data, $dn,$category,$hide_refs = FALSE, $hide_acls = FALSE)
   {
-    tabs::tabs($config, $data, $dn,$category);
+    tabs::tabs($config, $data, $dn,$category,$hide_refs, $hide_acls);
 
     /* Detect the base class  (The classs which extends from department)
      */

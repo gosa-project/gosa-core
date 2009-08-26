@@ -38,12 +38,16 @@ class tabs
   var $multiple_support_active = FALSE;
 
   var $read_only = FALSE; // Used when the entry is opened as "readonly" due to locks.
-
-  function tabs(&$config, $data, $dn, $acl_category= "")
+  var $hide_refs = FALSE;
+  var $hide_acls = FALSE;
+  
+  function tabs(&$config, $data, $dn, $acl_category= "", $hide_refs = FALSE, $hide_acls = FALSE)
   {
     /* Save dn */
     $this->dn= $dn;
     $this->config= &$config;
+    $this->hide_refs = $hide_refs;
+    $this->hide_acls = $hide_acls;
 
     if(!count($data)) {
       $data[] = array("CLASS" => 'plugin',"NAME" => 'Error');
@@ -388,12 +392,16 @@ class tabs
 
   function addSpecialTabs()
   {
-    $this->by_name['acl']= _("ACL");
-    $this->by_object['acl']= new acl($this->config, $this, $this->dn);
-    $this->by_object['acl']->parent= &$this;
-    $this->by_name['reference']= _("References");
-    $this->by_object['reference']= new reference($this->config, $this->dn);
-    $this->by_object['reference']->parent= &$this;
+    if(!$this->hide_acls){
+      $this->by_name['acl']= _("ACL");
+      $this->by_object['acl']= new acl($this->config, $this, $this->dn);
+      $this->by_object['acl']->parent= &$this;
+    }
+    if(!$this->hide_refs){
+      $this->by_name['reference']= _("References");
+      $this->by_object['reference']= new reference($this->config, $this->dn);
+      $this->by_object['reference']->parent= &$this;
+    }
   }
 
 

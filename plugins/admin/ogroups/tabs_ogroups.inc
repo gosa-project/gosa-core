@@ -291,10 +291,10 @@ class ogrouptabs extends tabs
     return ( $str);
   }  
 
-  function ogrouptabs($config, $data, $dn,$category ="ogroups")
+  function ogrouptabs($config, $data, $dn,$category ="ogroups",$hide_refs = FALSE, $hide_acls = FALSE)
   {
 
-    tabs::tabs($config, $data, $dn, $category);
+    tabs::tabs($config, $data, $dn, $category,$hide_refs, $hide_acls);
     $this->base= $this->by_object['ogroup']->base;
     $this->acl_category = $category;
 

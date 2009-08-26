@@ -156,7 +156,7 @@ class multi_plug
     /* Initialize collector object 
      * Used to display the ui and to collect the user input.
      */
-    $this->o_tab    = new $class($config,$tab,"new",$acl_category);
+    $this->o_tab    = new $class($config,$tab,"new",$acl_category, TRUE, TRUE);
     $this->o_tab->set_acl_base($acl_base);
     $this->by_object = &$this->o_tab->by_object;
     $this->by_name   = &$this->o_tab->by_name;
@@ -173,7 +173,7 @@ class multi_plug
       /* Initialize the objects we want to edit at once 
        */
       foreach($dns as $dn){
-        $obj = new $class($config,$tab,$dn,$acl_category);
+        $obj = new $class($config,$tab,$dn,$acl_category, TRUE, TRUE);
         $obj->set_acl_base($acl_base);
         $this->a_handles[] = $obj;
       }
