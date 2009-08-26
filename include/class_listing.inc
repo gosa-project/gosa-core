@@ -64,11 +64,15 @@ class listing {
     }
 
     // Set base for filter
-    $this->base= session::global_get("CurrentMainBase");
-    if ($this->base == null) {
+    if ($this->baseMode) {
+      $this->base= session::global_get("CurrentMainBase");
+      if ($this->base == null) {
+        $this->base= $config->current['BASE'];
+      }
+      $this->refreshBasesList();
+    } else {
       $this->base= $config->current['BASE'];
     }
-    $this->refreshBasesList();
 
     // Move footer information
     $this->showFooter= ($config->get_cfg_value("listSummary") == "true");
@@ -426,7 +430,7 @@ class listing {
     }
 
     // Save base
-    if (isset($_POST['BASE']) && $this->baseMode == true) {
+    if (isset($_POST['BASE']) && $this->baseMode) {
       $base= validate($_POST['BASE']);
       if (isset($this->bases[$base])) {
         $this->base= $base;
@@ -589,6 +593,10 @@ class listing {
 
   function renderBase()
   {
+    if (!$this->baseMode) {
+      return;
+    }
+
     $result= "<select name='BASE' onChange='mainform.submit()' size='1'>";
     $firstDN= null;
     $found= false;
