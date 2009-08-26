@@ -607,6 +607,13 @@ function add_lock($object, $user)
   if(!session::global_is_set("LOCK_CACHE")){
     session::global_set("LOCK_CACHE",array(""));
   }
+  if(is_array($object)){
+    foreach($object as $obj){
+      add_lock($obj,$user);
+    }
+    return;
+  }
+
   $cache = &session::global_get("LOCK_CACHE");
   if(isset($_POST['open_readonly'])){
     $cache['READ_ONLY'][$object] = TRUE;
@@ -616,12 +623,6 @@ function add_lock($object, $user)
     unset($cache['READ_ONLY'][$object]);
   }
 
-  if(is_array($object)){
-    foreach($object as $obj){
-      add_lock($obj,$user);
-    }
-    return;
-  }
 
   /* Just a sanity check... */
   if ($object == "" || $user == ""){
