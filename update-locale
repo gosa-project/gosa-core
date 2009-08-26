@@ -23,6 +23,12 @@ generate_po() {
     mv $template.new $template
   done
 
+  for template in $(find . -name '*.xml'); do
+    echo "* converting .xml files: $(basename $template)"
+    sed -e 's/<label>/<?php $t= _("/g;s!</label>!");?>!g' $template > $template.new
+    mv $template.new $template
+  done
+
   for class in $(find . -name 'class_*.inc'); do
     echo "* converting class_*.inc files: $(basename $class)"
     sed -e 's/\($pl[DH][^=]*\)= *"\([^"]*\)";$/\1= _("\2");/g' $class > $class.new
@@ -31,7 +37,7 @@ generate_po() {
 
   echo "Extracting languages..."
   [ -f locale/${l_path}messages.po ] && rm locale/${l_path}messages.po
-  find . -name '*.[ctpi][ophn][nlpc]' | xgettext -f - --keyword=must -d Domain -L PHP -n -o locale/${l_path}messages.po
+  find . -name '*.[ctpix][mophn][nlpc]' | xgettext -f - --keyword=must -d Domain -L PHP -n -o locale/${l_path}messages.po
 
   echo "Merging po files with existing ones"
   error=0
