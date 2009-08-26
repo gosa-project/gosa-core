@@ -1295,7 +1295,8 @@ function gen_locked_message($user, $dn, $allow_readonly = FALSE)
   /* Save variables from LOCK_VARS_TO_USE in session - for further editing */
   if( session::is_set('LOCK_VARS_TO_USE') && count(session::get('LOCK_VARS_TO_USE'))){
 
-    $LOCK_VARS_USED   = array();
+    $LOCK_VARS_USED_GET   = array();
+    $LOCK_VARS_USED_POST   = array();
     $LOCK_VARS_TO_USE = session::get('LOCK_VARS_TO_USE');
 
     foreach($LOCK_VARS_TO_USE as $name){
@@ -1306,18 +1307,19 @@ function gen_locked_message($user, $dn, $allow_readonly = FALSE)
 
       foreach($_POST as $Pname => $Pvalue){
         if(preg_match($name,$Pname)){
-          $LOCK_VARS_USED[$Pname] = $_POST[$Pname];
+          $LOCK_VARS_USED_POST[$Pname] = $_POST[$Pname];
         }
       }
 
       foreach($_GET as $Pname => $Pvalue){
         if(preg_match($name,$Pname)){
-          $LOCK_VARS_USED[$Pname] = $_GET[$Pname];
+          $LOCK_VARS_USED_GET[$Pname] = $_GET[$Pname];
         }
       }
     }
     session::set('LOCK_VARS_TO_USE',array());
-    session::set('LOCK_VARS_USED'  , $LOCK_VARS_USED);
+    session::set('LOCK_VARS_USED_GET'  , $LOCK_VARS_USED_GET);
+    session::set('LOCK_VARS_USED_POST'  , $LOCK_VARS_USED_POST);
   }
 
   /* Prepare and show template */

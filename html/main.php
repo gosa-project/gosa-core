@@ -311,9 +311,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
   if (isset($_POST['delete_lock']) || isset($_POST['open_readonly'])){
 
     /* Set old Post data */
-    if(session::global_is_set('LOCK_VARS_USED')){
-      foreach(session::global_get('LOCK_VARS_USED') as $name => $value){
+    if(session::global_is_set('LOCK_VARS_USED_GET')){
+      foreach(session::global_get('LOCK_VARS_USED_GET') as $name => $value){
         $_GET[$name]  = $value;
+      } 
+    } 
+    if(session::global_is_set('LOCK_VARS_USED_POST')){
+      foreach(session::global_get('LOCK_VARS_USED_POST') as $name => $value){
         $_POST[$name] = $value;
       } 
     }
