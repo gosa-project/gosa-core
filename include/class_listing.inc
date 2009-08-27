@@ -424,8 +424,9 @@ class listing {
     // Reset object counter
     $this->objectTypeCount= array();
 
-    // Do not do anything if this is not our PID
-    if(isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->pid) {
+    // Do not do anything if this is not our PID or there's even
+    // no PID available
+    if(!isset($_REQUEST['PID']) || $_REQUEST['PID'] != $this->pid) {
       return;
     }
 
@@ -901,8 +902,8 @@ class listing {
 
   function getAction()
   {
-    // Do not do anything if this is not our PID
-    if(isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->pid) {
+    // Do not do anything if this is not our PID, or there's even no PID available...
+    if(!isset($_REQUEST['PID']) || $_REQUEST['PID'] != $this->pid) {
       return;
     }
 
