@@ -321,6 +321,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         $_POST[$name] = $value;
       } 
     }
+    if(session::global_is_set('LOCK_VARS_USED_REQUEST')){
+      foreach(session::global_get('LOCK_VARS_USED_REQUEST') as $name => $value){
+        $_REQUEST[$name] = $value;
+      } 
+    }
   }
 }
 

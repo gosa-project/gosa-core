@@ -1298,6 +1298,7 @@ function gen_locked_message($user, $dn, $allow_readonly = FALSE)
 
     $LOCK_VARS_USED_GET   = array();
     $LOCK_VARS_USED_POST   = array();
+    $LOCK_VARS_USED_REQUEST   = array();
     $LOCK_VARS_TO_USE = session::get('LOCK_VARS_TO_USE');
 
     foreach($LOCK_VARS_TO_USE as $name){
@@ -1317,10 +1318,17 @@ function gen_locked_message($user, $dn, $allow_readonly = FALSE)
           $LOCK_VARS_USED_GET[$Pname] = $_GET[$Pname];
         }
       }
+
+      foreach($_REQUEST as $Pname => $Pvalue){
+        if(preg_match($name,$Pname)){
+          $LOCK_VARS_USED_REQUEST[$Pname] = $_REQUEST[$Pname];
+        }
+      }
     }
     session::set('LOCK_VARS_TO_USE',array());
     session::set('LOCK_VARS_USED_GET'  , $LOCK_VARS_USED_GET);
     session::set('LOCK_VARS_USED_POST'  , $LOCK_VARS_USED_POST);
+    session::set('LOCK_VARS_USED_REQUEST'  , $LOCK_VARS_USED_REQUEST);
   }
 
   /* Prepare and show template */

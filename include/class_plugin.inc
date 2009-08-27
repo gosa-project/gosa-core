@@ -265,6 +265,7 @@ class plugin
     session::set('LOCK_VARS_TO_USE',array());
     session::set('LOCK_VARS_USED_GET',array());
     session::set('LOCK_VARS_USED_POST',array());
+    session::set('LOCK_VARS_USED_REQUEST',array());
   }
 
   /*! \brief execute plugin
@@ -1862,7 +1863,9 @@ class plugin
 
     /* Reset Lock message POST/GET check array, to prevent perg_match errors*/
     session::set('LOCK_VARS_TO_USE',array());
-    session::set('LOCK_VARS_USED',array());
+    session::set('LOCK_VARS_USED_GET',array());
+    session::set('LOCK_VARS_USED_POST',array());
+    session::set('LOCK_VARS_USED_REQUEST',array());
     
     return("Multiple edit is currently not implemented for this plugin.");
   }
