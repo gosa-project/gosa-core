@@ -49,6 +49,7 @@ class listing {
   var $snapshotHandler= null;
   var $exporter= array();
   var $exportColumns= array();
+  var $firstCall= true;
 
 
   function listing($filename)
@@ -423,6 +424,12 @@ class listing {
 
     // Reset object counter
     $this->objectTypeCount= array();
+
+    // If we call for the first time, simulate the PID
+    if($this->firstCall) {
+      $_REQUEST['PID']= $this->pid;
+      $this->firstCall= false;
+    }
 
     // Do not do anything if this is not our PID or there's even
     // no PID available
