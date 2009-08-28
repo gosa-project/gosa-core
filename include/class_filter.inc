@@ -486,7 +486,9 @@ class filter {
       foreach ($attributes as $attribute) {
         if (is_array($entry[$attribute])) {
           for ($i= 0; $i<$entry[$attribute]['count']; $i++) {
-            $res[]= $entry[$attribute][$i];
+            if (mb_stristr($entry[$attribute][$i], $value)) {
+              $res[]= $entry[$attribute][$i];
+            }
           }
         } else {
           $res[]= $entry[$attribute];
