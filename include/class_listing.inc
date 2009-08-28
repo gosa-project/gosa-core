@@ -50,6 +50,7 @@ class listing {
   var $exporter= array();
   var $exportColumns= array();
   var $useSpan= false;
+  var $height= 0;
 
 
   function listing($filename)
@@ -99,6 +100,12 @@ class listing {
   function setCopyPasteHandler($handler)
   {
     $this->copyPasteHandler= &$handler;
+  }
+
+
+  function setHeight($height)
+  {
+    $this->height= $height;
   }
 
 
@@ -257,8 +264,14 @@ class listing {
 
     // Initialize list
     $result= "<input type='hidden' value='$this->pid' name='PID'>\n";
+    $height= 450;
+    if ($this->height != 0) {
+      $result= "<input type='hidden' value='$this->height' id='d_height'>\n";
+      $height= $this->height;
+    }
+    
     $result.= "<div class='contentboxb' id='listing_container' style='border-top:1px solid #B0B0B0;'>\n";
-    $result.= "<table summary='$this->headline' style='width:600px;height:450px;' cellspacing='0' id='t_scrolltable'>
+    $result.= "<table summary='$this->headline' style='width:600px;height:".$height."px;' cellspacing='0' id='t_scrolltable'>
 <tr><td class='scrollhead'><table summary='' style='width:100%;' cellspacing='0' id='t_scrollhead'>\n";
     $this->numColumns= count($this->colprops) + ($this->multiSelect?1:0);
 
@@ -275,7 +288,7 @@ class listing {
     $result.= "<td class='listheader' style='width:13px;border-right:0px;'>&nbsp;</td></table></td></tr>\n";
 
     // New table for the real list contents
-    $result.= "<tr><td colspan='$this->numColumns' class='scrollbody'><div style='width:600px;height:430px;' id='d_scrollbody' class='scrollbody'><table summary='' style='height:100%;width:581px;' cellspacing='0' id='t_scrollbody'>\n";
+    $result.= "<tr><td colspan='$this->numColumns' class='scrollbody'><div style='width:600px;height:".($height-20)."px;' id='d_scrollbody' class='scrollbody'><table summary='' style='height:100%;width:581px;' cellspacing='0' id='t_scrollbody'>\n";
 
     // No results? Just take an empty colspanned row
     if (count($this->entries) + count($this->departments) == 0) {
