@@ -58,6 +58,12 @@ class listingSortIterator implements Iterator {
           return $b - $a;
 
         case 'date':
+          if ($a == "") {
+            $a= "31.12.0000";
+          }
+          if ($b == "") {
+            $b= "31.12.0000";
+          }
           list($d, $m, $y)= split('\.', $a);
           $a= (int)sprintf("%04d%02d%02d", $y, $m, $d);
           list($d, $m, $y)= split('\.', $b);
