@@ -36,6 +36,7 @@ class filter {
   var $scopeMode= "auto";
   var $alphabet= null;
   var $converter= array();
+  var $pid;
 
 
   function filter($filename)
@@ -46,6 +47,8 @@ class filter {
     if (!$this->load($filename)) {
       die("Cannot parse $filename!");
     }
+
+    $this->pid= preg_replace("/[^0-9]/", "", microtime(TRUE)); 
   }
 
 
@@ -344,7 +347,7 @@ class filter {
     }
 
     // Load template
-    return ("<input type='hidden' name='FILTER_LOADED' value='1'>".$smarty->fetch(get_template_path($this->xmlData['definition']['template'], true)));
+    return ("<input type='hidden' name='FILTER_PID' value='".$this->pid."'>".$smarty->fetch(get_template_path($this->xmlData['definition']['template'], true)));
   }
 
 
@@ -434,7 +437,7 @@ class filter {
       }
     }
 
-    if (isset($_POST['FILTER_LOADED'])) {
+    if (isset($_POST['FILTER_PID']) && $_POST['FILTER_PID'] == $this->pid) {
       // Load post values and adapt filter, base and scope accordingly - but
       // only if we didn't get a _GET
       foreach ($this->elements as $tag => $element) {
