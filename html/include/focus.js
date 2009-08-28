@@ -338,15 +338,20 @@ function adjust_height(e) {
 	
 		// document.defaultView allows access to the rendered size of elements and should be supported by modern browsers
 		if(document.defaultView) {
-			var menu_height=parseInt(document.defaultView.getComputedStyle(document.getElementById("menucell"),"").getPropertyValue('height'));
-	
-			// Minimum height for divlist should be the bottom edge of the menu
-			min_height= menu_height-197;
-			suggested= min_height;
-			if((inner_height-230)-suggested>0) {
-				suggested= inner_height-230;
-			}
+                        var menu_height= 0;
+                        if (document.getElementById("d_height")){
+  			  suggested= parseInt(document.getElementById("d_height").value);
+                        } else {
+  			  menu_height=parseInt(document.defaultView.getComputedStyle(document.getElementById("menucell"),"").getPropertyValue('height'));
+			  // Minimum height for divlist should be the bottom edge of the menu
+			  min_height= menu_height-197;
+			  suggested= min_height;
+			  if((inner_height-230)-suggested>0) {
+			  	suggested= inner_height-230;
+			  }
 		
+                        }
+	
 		// IE uses other height specifications
 		} else if (browserType == "ie") {
 			suggested= document.all.menucell.offsetHeight;
