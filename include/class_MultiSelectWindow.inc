@@ -684,7 +684,7 @@ class MultiSelectWindow{
       $s_attrs[]= $data['ATTR']; 
     }
 
-    $tmp = get_list("(|".$s_filter.")",$s_acls,$this->selectedBase,$s_attrs,GL_NONE | GL_SIZELIMIT);
+    $tmp = get_list("(|".$s_filter.")",$s_acls,$this->selectedBase,$s_attrs,GL_NONE);
     foreach($tmp as $attrs){
       foreach($types as $name => $data){
         if(in_array($data['OC'],$attrs['objectClass']) && isset($attrs[$data['ATTR']][0])){
