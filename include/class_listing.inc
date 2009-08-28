@@ -1167,7 +1167,7 @@ class listing {
       $attrs[]= $data['ATTR'];
     }
     $filter.= "))";
-    $res= get_list($filter, $this->module, $this->base, $attrs, GL_NONE | GL_SIZELIMIT);
+    $res= get_list($filter, $this->module, $this->base, $attrs, GL_NONE);
 
     // Analyze list of departments
     foreach ($res as $department) {
