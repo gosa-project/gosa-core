@@ -49,6 +49,7 @@ class listing {
   var $snapshotHandler= null;
   var $exporter= array();
   var $exportColumns= array();
+  var $useSpan= false;
 
 
   function listing($filename)
@@ -286,6 +287,7 @@ class listing {
     $deps= 0;
 
     // Draw department browser if configured and we're not in sub mode
+    $this->useSpan= false;
     if ($this->departmentBrowser && $this->filter->scope != "sub") {
       // Fill with department browser if configured this way
       $departmentIterator= new departmentSortIterator($this->departments, $this->sortDirection[$this->sortColumn]);
@@ -303,6 +305,7 @@ class listing {
           $colspan= 1;
           if (isset($config['span'])){
             $colspan= $config['span'];
+            $this->useSpan= true;
           }
           $result.="<td colspan='$colspan' ".$this->colprops[$index]." class='list1'>".$this->renderCell($config['value'], $entry, $row)."</td>";
           $rest-= $colspan;
@@ -356,7 +359,7 @@ class listing {
     }
 
     // Need to fill the list if it's not full (nobody knows why this is 22 ;-))
-    $emptyListStyle= (count($this->entries) + $deps == 0)?"border:0;":"";
+    $emptyListStyle= (count($this->entries) + (($this->useSpan && count($this->entries))?$deps:0) == 0)?"border:0;":"";
     if ((count($this->entries) + $deps) < 22) {
       $result.= "<tr>";
       for ($i= 0; $i<$this->numColumns; $i++) {
