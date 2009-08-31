@@ -116,6 +116,13 @@
 <table summary="" style="width:100% ; vertical-align:top; text-align:left;" cellpadding=0 border=0>
  <tr>
   <td style='width:50%;vertical-align:top'>
+   {if $sshPublicKey == 1}
+   {render acl=$sshPublicKeyACL}
+   <h2><img alt="" class="center" align="middle" src="images/lists/key.png" /> {t}SSH keys{/t}</h2>
+   <input type=submit value="{t}Edit public ssh keys...{/t}" name="edit_sshpublickey">
+   <div style='border-bottom:1px solid #A0A0A0;height:8px'></div>
+   {/render}
+   {/if}
    <h2><img alt="" class="center" align="middle" src="plugins/posix/images/terminal_small.png" /> {t}Account{/t}</h2>
    {include file="$pwmode.tpl"}
   </td>

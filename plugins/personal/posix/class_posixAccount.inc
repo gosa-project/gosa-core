@@ -72,15 +72,16 @@ class posixAccount extends plugin
   var $secondaryGroups= array();
   var $primaryGroup= 0;
   var $was_trust_account= FALSE;
-  var $memberGroup = array();
-  var $grouplist  = array();
-  var $ui         = array();
+  var $memberGroup= array();
+  var $grouplist= array();
+  var $ui= array();
+  var $ssh= null;
 
-  var $GroupRegex       = "*";
-  var $GroupUserRegex   = "*";
-  var $SubSearch        = false;
+  var $GroupRegex= "*";
+  var $GroupUserRegex= "*";
+  var $SubSearch= false;
 
-  var $view_logged = FALSE;
+  var $view_logged= false;
 
   /* attribute list for save action */
   var $CopyPasteVars  = 
@@ -102,6 +103,8 @@ class posixAccount extends plugin
      'dn' from LDAP */
   function posixAccount (&$config, $dn= NULL)
   {
+    global $class_mapping;
+
     /* Configuration is fine, allways */
     $this->config= $config;
 
@@ -180,6 +183,11 @@ class posixAccount extends plugin
       $this->savedGroupMembership= $this->groupMembership;
       $this->savedUidNumber= $this->uidNumber;
       $this->savedGidNumber= $this->gidNumber;
+
+      // Instanciate SSH object if available
+      if (isset($class_mapping["sshPublicKey"])){
+        $this->ssh= new sshPublicKey($this->config, $this->dn);
+      }
     }
 
     /* Adjust shadow checkboxes */
@@ -302,6 +310,7 @@ class posixAccount extends plugin
         }
       }
     }
+
     /* Trigger group edit? */
     if (isset($_POST['edit_groupmembership'])){
       $this->group_dialog= TRUE;
@@ -451,17 +460,29 @@ class posixAccount extends plugin
       $smarty->assign("alphabet", generate_alphabet());
       $smarty->assign("depselect", session::get('CurrentMainBase'));
       $smarty->assign("hint", print_sizelimit_warning());
-
       $smarty->assign("apply", apply_filter());
+
       $display.= $smarty->fetch (get_template_path('posix_groups.tpl', TRUE, dirname(__FILE__)));
       return ($display);
     }
+
+    // Handle ssh dialog?
+    if ($this->ssh && preg_match('/[rw]/', $this->getacl("sshPublicKey"))) {
+       if ($result= $this->ssh->execute()) {
+         $this->dialog= true;
+         return $result;
+       }
+       $this->dialog= false;
+    }
+
 
     /* Show main page */
     $smarty= get_smarty();
 
     /* In 'MyAccount' mode, we must remove write acls if we are not in editing mode. */ 
     $SkipWrite = (!isset($this->parent) || !$this->parent) && !session::is_set('edit');
+
+    $smarty->assign("sshPublicKeyACL", $this->getacl("sshPublicKey"));
 
     /* Depending on pwmode, currently hardcoded because there are no other methods */
     if ( 1 == 1 ){
@@ -637,6 +658,11 @@ class posixAccount extends plugin
       }
 
     $smarty->assign("workstations", $this->accessTo);
+
+    // Add SSH button if available
+    if ($this->ssh) {
+      $smarty->assign("sshPublicKey", 1);
+    }
 
     $smarty->assign("apply", apply_filter());
     $smarty->assign("multiple_support" , $this->multiple_support_active);
@@ -1010,6 +1036,11 @@ class posixAccount extends plugin
     /* Remove lock needed for unique id generation */
     del_lock ("uidnumber");
 
+    // Save ssh stuff if needed
+    if ($this->ssh) {
+      $this->ssh->setDN($this->dn);
+      $this->ssh->save();
+    }
 
     /* Take care about groupMembership values: add to groups */
     foreach ($this->groupMembership as $key => $value){
