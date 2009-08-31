@@ -735,6 +735,7 @@ class LDAP{
     }
   }
 
+
   function get_attribute($dn, $name,$r_array=0)
   {
     $data= "";
@@ -750,12 +751,11 @@ class LDAP{
         }
       }
     }
-    if($r_array==0)
-    return ($data);
-    else
-    return ($info);
-  
-  
+    if($r_array==0) {
+      return ($data);
+    } else {
+      return ($info);
+    }
   }
  
 
