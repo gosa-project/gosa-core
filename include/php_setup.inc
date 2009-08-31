@@ -26,34 +26,41 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
 {
   global $error_collector,$config, $error_collector_mailto;
 
+  // To avoid recursion - restore original error handler.
+  restore_error_handler();
+
   /* Return if error reporting is set to zero */
   if (error_reporting() == 0){
+    set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE | E_STRICT) ;
     return;
   }
 
   /* Workaround for buggy imap_open error outputs */
   if (preg_match('/imap_open/', $errstr)){
+    set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE | E_STRICT) ;
     return;
   }
 
   /* Hide ldap size limit messages */
   if (preg_match('/ldap_error/', $errstr)){
     if (preg_match('/sizelimit/', $errstr)){
+      set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE | E_STRICT) ;
       return;
     }
   }
 
   /* Error messages are hidden in GOsa, so we only send them to the logging class and abort here */
   if(isset($config->data) && $config->get_cfg_value("displayerrors") != "true"){
-      
-      /* Write to syslog */
-      if(class_exists("log") && !preg_match("/No such object/",$errstr)){
-        new log("view","error","",array(),"PHP error: $errstr ($errfile, line $errline)");
-      }
 
-      return;
+    /* Write to syslog */
+    if(class_exists("log") && !preg_match("/No such object/",$errstr)){
+      new log("view","error","",array(),"PHP error: $errstr ($errfile, line $errline)");
+    }
+
+    set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE | E_STRICT) ;
+    return;
   }
-  
+ 
   /* Send all errors to logging class, except "Ldap : No such object" messages*/
   if(class_exists("log") && !preg_match("/No such object/",$errstr)){
     new log("debug","all",$errfile,array(),"Type:".$errno.", Message:".$errstr.", File:".$errfile.", Line: ".$errline);
@@ -199,6 +206,7 @@ function gosaRaiseError($errno, $errstr, $errfile, $errline)
   $error_collector.= "</table>";
 
   /* Flush in case of fatal errors */
+  set_error_handler('gosaRaiseError', E_WARNING |  E_NOTICE | E_USER_ERROR | E_USER_WARNING | E_USER_NOTICE | E_STRICT) ;
   if (preg_match('/^fatal/i', $errstr)){
     echo $error_collector."</div>";
     flush();
