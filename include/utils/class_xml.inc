@@ -20,6 +20,41 @@
  */
 
 class xml {
+
+  static function validate($file, $schema) {
+    // Enable user error handling
+    libxml_use_internal_errors(true);
+    
+    $xml = new DOMDocument();
+    $xml->load($file);
+    
+    if (!$xml->schemaValidate($schema)) {
+      $errors = libxml_get_errors();
+      foreach ($errors as $error) {
+        $str= "";
+        switch ($error->level) {
+            case LIBXML_ERR_WARNING:
+                $str= _("Warning")." ".$error->code.": ";
+                break;
+            case LIBXML_ERR_ERROR:
+                $str= _("Error")." ".$error->code.": ";
+                break;
+            case LIBXML_ERR_FATAL:
+                $str= _("Fatal error")." ".$error->code.": ";
+                break;
+        }
+        $str.= trim($error->message);
+        if ($error->file) {
+            $str.= " "._("in")." ".$error->file;
+        }
+        $str.= " "._("on line")." ".$error->line;
+        msg_dialog::display(_("XML error"), $str, ERROR_DIALOG);
+      }
+      libxml_clear_errors();
+    }
+  }
+
+
   static function xml2array($contents, $get_attributes=1, $priority = 'tag') {
     if(!$contents) return array();
 
