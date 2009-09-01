@@ -77,8 +77,8 @@
 				<xsd:element ref="default" minOccurs="0"/>
 				<xsd:element ref="unset"/>
 				<xsd:element ref="set"/>
-				<xsd:element ref="autocomplete" minOccurs="0"/>
 				<xsd:element ref="value" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="autocomplete" minOccurs="0"/>
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
