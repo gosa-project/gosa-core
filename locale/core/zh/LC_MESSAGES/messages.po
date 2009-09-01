@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-26 15:58+0200\n"
+"POT-Creation-Date: 2009-09-01 08:22+0200\n"
 "PO-Revision-Date: 2007-06-03 12:27+0800\n"
 "Last-Translator: Jiang Xin <worldhello.net@gmail.com>\n"
 "Language-Team: Chinese Simplified <zh@li.org>\n"
@@ -36,18 +36,18 @@ msgstr "过滤器"
 #: ihtml/themes/default/msg_dialog.tpl:106 ihtml/themes/default/islocked.tpl:6
 #: ihtml/themes/default/conflict.tpl:6 html/password.php:280 html/index.php:57
 #: html/index.php:63 html/index.php:416 html/index.php:422
-#: include/functions.inc:747 include/functions.inc:2165
-#: include/functions.inc:2169 include/functions.inc:2175
-#: include/class_tabs.inc:266 plugins/admin/ogroups/remove.tpl:2
-#: plugins/admin/groups/remove.tpl:2
+#: include/functions.inc:747 include/functions.inc:2173
+#: include/functions.inc:2177 include/functions.inc:2183
+#: include/class_tabs.inc:266 include/utils/class_xml.inc:37
+#: plugins/admin/ogroups/remove.tpl:2 plugins/admin/groups/remove.tpl:2
 #: plugins/admin/groups/class_groupGeneric.inc:1091
 #: plugins/admin/users/remove.tpl:2
 #: plugins/admin/users/class_userManagement.inc:640
 #: plugins/admin/departments/remove.tpl:2
 #: plugins/admin/departments/dep_move_confirm.tpl:2
 #: plugins/admin/acl/remove.tpl:2
-#: plugins/personal/posix/class_posixAccount.inc:837
-#: plugins/personal/posix/class_posixAccount.inc:990
+#: plugins/personal/posix/class_posixAccount.inc:863
+#: plugins/personal/posix/class_posixAccount.inc:1016
 #: setup/class_setupStep_Migrate.inc:261 setup/class_setupStep_Migrate.inc:313
 #: setup/class_setupStep_Migrate.inc:446 setup/class_setupStep_Migrate.inc:523
 #: setup/class_setupStep_Migrate.inc:662 setup/class_setupStep_Migrate.inc:803
@@ -408,13 +408,14 @@ msgstr "继续"
 #: ihtml/themes/default/msg_dialog.tpl:57
 #: ihtml/themes/default/msg_dialog.tpl:104 html/index.php:223
 #: html/index.php:227 include/password-methods/class_password-methods.inc:250
-#: include/class_tabs.inc:54 include/class_plugin.inc:660
-#: include/class_plugin.inc:701 include/class_plugin.inc:743
-#: include/class_plugin.inc:1564 include/utils/class_msgPool.inc:153
-#: include/utils/class_msgPool.inc:165 include/utils/class_msgPool.inc:183
-#: include/utils/class_msgPool.inc:453 include/utils/class_msgPool.inc:474
-#: include/utils/class_msgPool.inc:493 include/class_log.inc:138
-#: include/class_log.inc:219 include/class_gosaSupportDaemon.inc:1165
+#: include/class_tabs.inc:54 include/class_plugin.inc:661
+#: include/class_plugin.inc:702 include/class_plugin.inc:744
+#: include/class_plugin.inc:1565 include/utils/class_xml.inc:40
+#: include/utils/class_msgPool.inc:153 include/utils/class_msgPool.inc:165
+#: include/utils/class_msgPool.inc:183 include/utils/class_msgPool.inc:453
+#: include/utils/class_msgPool.inc:474 include/utils/class_msgPool.inc:493
+#: include/class_log.inc:138 include/class_log.inc:219
+#: include/class_gosaSupportDaemon.inc:1165
 #: include/class_gosaSupportDaemon.inc:1185
 #: include/class_CopyPasteHandler.inc:117
 #: include/class_CopyPasteHandler.inc:126
@@ -434,7 +435,7 @@ msgstr "继续"
 #: plugins/personal/generic/class_user.inc:821
 #: plugins/personal/generic/class_user.inc:1398
 #: plugins/personal/generic/main.inc:115
-#: plugins/personal/posix/class_posixAccount.inc:1382
+#: plugins/personal/posix/class_posixAccount.inc:1413
 #: setup/class_setupStep_Migrate.inc:1197 setup/setup_checks.tpl:30
 #: setup/setup_checks.tpl:91
 #, php-format
@@ -475,7 +476,7 @@ msgstr "访问"
 msgid "Your password has been changed successfully."
 msgstr ""
 
-#: ihtml/themes/default/password.tpl:41 html/main.php:333
+#: ihtml/themes/default/password.tpl:41 html/main.php:338
 #: plugins/admin/users/class_userManagement.inc:325
 #: plugins/admin/users/class_userManagement.inc:388
 #: plugins/personal/password/class_password.inc:78
@@ -621,6 +622,7 @@ msgid "GOsa main menu"
 msgstr ""
 
 #: html/password.php:58 html/main.php:147 include/functions.inc:337
+#: include/utils/class_xml.inc:43
 #: plugins/admin/departments/class_departmentGeneric.inc:386
 #, fuzzy
 msgid "Fatal error"
@@ -637,8 +639,8 @@ msgstr "GOsa 配置 %s/gosa.conf 不可读取。退出。"
 #: include/password-methods/class_password-methods-sha.inc:48
 #: include/class_SnapshotHandler.inc:45 include/class_SnapshotHandler.inc:58
 #: include/class_SnapshotHandler.inc:76 include/functions.inc:639
-#: include/functions.inc:2528 include/functions.inc:2552
-#: include/functions.inc:2565 include/utils/class_timezone.inc:47
+#: include/functions.inc:2536 include/functions.inc:2560
+#: include/functions.inc:2573 include/utils/class_timezone.inc:47
 #: include/class_config.inc:124 include/class_config.inc:636
 #: include/class_config.inc:1021 include/class_config.inc:1034
 #: include/class_config.inc:1052 include/class_pluglist.inc:177
@@ -747,12 +749,12 @@ msgstr ""
 #: include/functions.inc:391 include/functions.inc:399
 #: include/functions.inc:428 include/functions.inc:654
 #: include/functions.inc:697 include/functions.inc:739
-#: include/functions.inc:784 include/functions.inc:2507
-#: include/functions.inc:2754 include/class_plugin.inc:1245
-#: include/class_plugin.inc:1294 include/class_plugin.inc:1298
-#: include/class_plugin.inc:1313 include/class_plugin.inc:1350
-#: include/class_plugin.inc:1408 include/class_plugin.inc:1474
-#: include/class_plugin.inc:1489 include/class_ldap.inc:709
+#: include/functions.inc:784 include/functions.inc:2515
+#: include/functions.inc:2762 include/class_plugin.inc:1246
+#: include/class_plugin.inc:1295 include/class_plugin.inc:1299
+#: include/class_plugin.inc:1314 include/class_plugin.inc:1351
+#: include/class_plugin.inc:1409 include/class_plugin.inc:1475
+#: include/class_plugin.inc:1490 include/class_ldap.inc:709
 #: include/class_ldap.inc:1175 include/class_config.inc:266
 #: plugins/admin/ogroups/class_ogroup.inc:1033
 #: plugins/admin/ogroups/class_ogroup.inc:1047
@@ -767,8 +769,8 @@ msgstr ""
 #: plugins/admin/acl/class_aclRole.inc:687
 #: plugins/personal/generic/class_user.inc:724
 #: plugins/personal/generic/class_user.inc:1100
-#: plugins/personal/posix/class_posixAccount.inc:678
-#: plugins/personal/posix/class_posixAccount.inc:1007
+#: plugins/personal/posix/class_posixAccount.inc:704
+#: plugins/personal/posix/class_posixAccount.inc:1033
 #: setup/class_setupStep_Migrate.inc:1208
 #: setup/class_setupStep_Migrate.inc:1236
 #: setup/class_setupStep_Migrate.inc:1285
@@ -851,27 +853,27 @@ msgstr ""
 msgid "User ACL checks disabled"
 msgstr ""
 
-#: html/main.php:333
+#: html/main.php:338
 #, fuzzy
 msgid "Your password is about to expire, please change your password!"
 msgstr "您的口令就要过期，请修改您的口令"
 
-#: html/main.php:343
+#: html/main.php:348
 #, fuzzy
 msgid "Plugin"
 msgstr "于"
 
-#: html/main.php:344
+#: html/main.php:349
 #, fuzzy, php-format
 msgid "FATAL: Cannot find any plugin definitions for plugin '%s'!"
 msgstr "警告： 没有发现针对插件 '%s' 的任何插件定义！"
 
-#: html/main.php:358
+#: html/main.php:363
 #, fuzzy
 msgid "Configuration Error"
 msgstr "配置文件"
 
-#: html/main.php:359
+#: html/main.php:364
 #, php-format
 msgid ""
 "FATAL: not all POST variables have been transfered by PHP - please inform "
@@ -990,13 +992,13 @@ msgstr "用户组"
 
 #: include/class_acl.inc:493 include/class_MultiSelectWindow.inc:258
 #: include/class_MultiSelectWindow.inc:260
-#: include/class_baseSelectDialog.inc:49 include/class_listing.inc:226
-#: include/class_listing.inc:881 include/class_listing.inc:883
+#: include/class_baseSelectDialog.inc:49 include/class_listing.inc:234
+#: include/class_listing.inc:897 include/class_listing.inc:899
 #: plugins/admin/acl/class_aclRole.inc:392
 msgid "Up"
 msgstr "上"
 
-#: include/class_acl.inc:495 include/class_listing.inc:226
+#: include/class_acl.inc:495 include/class_listing.inc:234
 #: plugins/admin/acl/class_aclRole.inc:394
 msgid "Down"
 msgstr "关闭"
@@ -1096,8 +1098,8 @@ msgstr "成员对象"
 #: include/class_session.inc:101 include/class_session.inc:127
 #: include/functions.inc:468 include/functions.inc:629
 #: include/functions.inc:726 include/functions.inc:1109
-#: include/functions.inc:1923 include/functions.inc:1957
-#: include/functions.inc:1977 include/class_ldap.inc:649
+#: include/functions.inc:1931 include/functions.inc:1965
+#: include/functions.inc:1985 include/class_ldap.inc:649
 #: include/class_ldap.inc:697 include/class_log.inc:88
 #: include/class_CopyPasteHandler.inc:159
 #: include/class_CopyPasteHandler.inc:269
@@ -1150,41 +1152,41 @@ msgid "Close"
 msgstr "关闭"
 
 #: include/class_MultiSelectWindow.inc:250
-#: include/class_baseSelectDialog.inc:47 include/class_listing.inc:873
+#: include/class_baseSelectDialog.inc:47 include/class_listing.inc:889
 msgid "Go to root department"
 msgstr "转到根部门"
 
 #: include/class_MultiSelectWindow.inc:250
 #: include/class_MultiSelectWindow.inc:252
-#: include/class_baseSelectDialog.inc:47 include/class_listing.inc:873
-#: include/class_listing.inc:875
+#: include/class_baseSelectDialog.inc:47 include/class_listing.inc:889
+#: include/class_listing.inc:891
 msgid "Root"
 msgstr "根"
 
 #: include/class_MultiSelectWindow.inc:258
-#: include/class_baseSelectDialog.inc:49 include/class_listing.inc:881
+#: include/class_baseSelectDialog.inc:49 include/class_listing.inc:897
 msgid "Go up one department"
 msgstr "向上跳转一个部门"
 
 #: include/class_MultiSelectWindow.inc:266
-#: include/class_baseSelectDialog.inc:51 include/class_listing.inc:889
+#: include/class_baseSelectDialog.inc:51 include/class_listing.inc:905
 msgid "Go to users department"
 msgstr "转到用户部门"
 
 #: include/class_MultiSelectWindow.inc:266
 #: include/class_MultiSelectWindow.inc:268
-#: include/class_baseSelectDialog.inc:51 include/class_listing.inc:889
-#: include/class_listing.inc:891
+#: include/class_baseSelectDialog.inc:51 include/class_listing.inc:905
+#: include/class_listing.inc:907
 msgid "Home"
 msgstr ""
 
 #: include/class_MultiSelectWindow.inc:273
-#: include/class_baseSelectDialog.inc:52 include/class_listing.inc:896
+#: include/class_baseSelectDialog.inc:52 include/class_listing.inc:912
 msgid "Reload list"
 msgstr "重新加载列表"
 
 #: include/class_MultiSelectWindow.inc:273
-#: include/class_baseSelectDialog.inc:52 include/class_listing.inc:896
+#: include/class_baseSelectDialog.inc:52 include/class_listing.inc:912
 #: plugins/admin/ogroups/class_divListOGroup.inc:148
 #: plugins/admin/groups/class_divListGroup.inc:122
 #: plugins/admin/users/class_divListUsers.inc:115
@@ -1253,7 +1255,7 @@ msgstr "位置"
 msgid "Filter entries with this syntax"
 msgstr "用这个语法过滤条目"
 
-#: include/class_listing.inc:267
+#: include/class_listing.inc:281
 #: plugins/admin/ogroups/class_divListOGroup.inc:77
 #: plugins/admin/groups/class_divListGroup.inc:73
 #: plugins/admin/users/class_divListUsers.inc:74
@@ -1267,58 +1269,58 @@ msgstr "用这个语法过滤条目"
 msgid "Select all"
 msgstr "选择"
 
-#: include/class_listing.inc:453
+#: include/class_listing.inc:469
 #, fuzzy
 msgid "created by"
 msgstr "创建"
 
-#: include/class_listing.inc:1221 include/class_listing.inc:1271
-#: include/class_plugin.inc:2034
+#: include/class_listing.inc:1237 include/class_listing.inc:1287
+#: include/class_plugin.inc:2037
 #, fuzzy
 msgid "Copy"
 msgstr "复制"
 
-#: include/class_listing.inc:1227 include/class_listing.inc:1261
-#: include/class_plugin.inc:2038
+#: include/class_listing.inc:1243 include/class_listing.inc:1277
+#: include/class_plugin.inc:2041
 #, fuzzy
 msgid "Cut"
 msgstr "剪切"
 
-#: include/class_listing.inc:1235 include/class_listing.inc:1237
-#: include/class_plugin.inc:2045 include/class_plugin.inc:2048
+#: include/class_listing.inc:1251 include/class_listing.inc:1253
+#: include/class_plugin.inc:2048 include/class_plugin.inc:2051
 #: include/class_CopyPasteHandler.inc:506
 msgid "Paste"
 msgstr "粘贴"
 
-#: include/class_listing.inc:1261 include/class_plugin.inc:1992
+#: include/class_listing.inc:1277 include/class_plugin.inc:1995
 msgid "Cut this entry"
 msgstr "剪切条目"
 
-#: include/class_listing.inc:1271 include/class_plugin.inc:2000
+#: include/class_listing.inc:1287 include/class_plugin.inc:2003
 msgid "Copy this entry"
 msgstr "拷贝条目"
 
-#: include/class_listing.inc:1303 include/class_listing.inc:1305
+#: include/class_listing.inc:1319 include/class_listing.inc:1321
 #, fuzzy
 msgid "Restore snapshots"
 msgstr "删除记录"
 
-#: include/class_listing.inc:1319
+#: include/class_listing.inc:1335
 #, fuzzy
 msgid "Export list"
 msgstr "导出"
 
-#: include/class_listing.inc:1354 include/class_listing.inc:1355
-#: include/class_SnapShotDialog.inc:143 include/class_plugin.inc:1966
+#: include/class_listing.inc:1370 include/class_listing.inc:1371
+#: include/class_SnapShotDialog.inc:143 include/class_plugin.inc:1969
 msgid "Restore snapshot"
 msgstr ""
 
-#: include/class_listing.inc:1364 include/class_plugin.inc:1973
+#: include/class_listing.inc:1380 include/class_plugin.inc:1976
 #, fuzzy
 msgid "Create snapshot"
 msgstr "创建 nagios 账户"
 
-#: include/class_listing.inc:1365 include/class_plugin.inc:1974
+#: include/class_listing.inc:1381 include/class_plugin.inc:1977
 #, fuzzy
 msgid "Create a new snapshot from this object"
 msgstr "创建新 FAI 对象"
@@ -1394,171 +1396,171 @@ msgstr "配置"
 msgid "incomplete"
 msgstr "不完整"
 
-#: include/functions.inc:1341
+#: include/functions.inc:1349
 msgid "Continue anyway"
 msgstr "仍然继续"
 
-#: include/functions.inc:1343
+#: include/functions.inc:1351
 msgid "Edit anyway"
 msgstr "仍然编辑"
 
-#: include/functions.inc:1345
+#: include/functions.inc:1353
 #, fuzzy, php-format
 msgid "You're going to edit the LDAP entry/entries %s"
 msgstr "您将要拷贝条目 '%s'。"
 
-#: include/functions.inc:1529
+#: include/functions.inc:1537
 msgid "Entries per page"
 msgstr "每页条目数"
 
-#: include/functions.inc:1557 include/class_filter.inc:306
+#: include/functions.inc:1565 include/class_filter.inc:309
 msgid "Apply filter"
 msgstr "应用过滤器"
 
-#: include/functions.inc:1800 include/class_filter.inc:272
+#: include/functions.inc:1808 include/class_filter.inc:275
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-#: include/functions.inc:1844
+#: include/functions.inc:1852
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "GOsa 开发版（版本 %s）"
 
-#: include/functions.inc:1923
+#: include/functions.inc:1931
 #, php-format
 msgid "File '%s' could not be deleted."
 msgstr ""
 
-#: include/functions.inc:1957 include/functions.inc:1977
+#: include/functions.inc:1965 include/functions.inc:1985
 #, fuzzy
 msgid "Cannot write to revision file!"
 msgstr "无法创建文件 '%s'。"
 
-#: include/functions.inc:2165 include/functions.inc:2169
-#: include/functions.inc:2175
+#: include/functions.inc:2173 include/functions.inc:2177
+#: include/functions.inc:2183
 #, fuzzy
 msgid "'baseIdHook' is not available. Using default base!"
 msgstr "警告： nextIdHook不可用。使用缺省 base。"
 
-#: include/functions.inc:2197
+#: include/functions.inc:2205
 #, fuzzy
 msgid "LDAP warning"
 msgstr "LDAP 管理"
 
-#: include/functions.inc:2197
+#: include/functions.inc:2205
 #, fuzzy
 msgid "Cannot get schema information from server. No schema check possible!"
 msgstr "不能从服务器得到 schema 信息。无法对 schema 检查！"
 
-#: include/functions.inc:2223
+#: include/functions.inc:2231
 msgid "Used to store account specific informations."
 msgstr ""
 
-#: include/functions.inc:2230
+#: include/functions.inc:2238
 msgid ""
 "Used to lock currently edited entries to avoid multiple changes at the same "
 "time."
 msgstr ""
 
-#: include/functions.inc:2273
+#: include/functions.inc:2281
 #, php-format
 msgid "Missing required object class '%s'!"
 msgstr ""
 
-#: include/functions.inc:2275
+#: include/functions.inc:2283
 #, php-format
 msgid "Missing optional object class '%s'!"
 msgstr ""
 
-#: include/functions.inc:2281
+#: include/functions.inc:2289
 #, php-format
 msgid "Version mismatch for required object class '%s' (!=%s)!"
 msgstr ""
 
-#: include/functions.inc:2283
+#: include/functions.inc:2291
 #, php-format
 msgid "Version mismatch for optional object class '%s' (!=%s)!"
 msgstr ""
 
-#: include/functions.inc:2287
+#: include/functions.inc:2295
 #, fuzzy, php-format
 msgid "Class(es) available"
 msgstr "文件可用。"
 
-#: include/functions.inc:2309
+#: include/functions.inc:2317
 msgid ""
 "You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema    configuration do not support this option."
 msgstr ""
 
-#: include/functions.inc:2310
+#: include/functions.inc:2318
 msgid ""
 "In order to use rfc2307bis conform groups the objectClass 'posixGroup' must "
 "be      AUXILIARY"
 msgstr ""
 
-#: include/functions.inc:2314
+#: include/functions.inc:2322
 msgid ""
 "Your schema is configured to support the rfc2307bis group, but you have "
 "disabled this option on the 'ldap setup' step."
 msgstr ""
 
-#: include/functions.inc:2315
+#: include/functions.inc:2323
 msgid "The objectClass 'posixGroup' must be STRUCTURAL"
 msgstr ""
 
-#: include/functions.inc:2339
+#: include/functions.inc:2347
 msgid "German"
 msgstr "德语"
 
-#: include/functions.inc:2340
+#: include/functions.inc:2348
 msgid "French"
 msgstr "法语"
 
-#: include/functions.inc:2341
+#: include/functions.inc:2349
 msgid "Italian"
 msgstr "意大利语"
 
-#: include/functions.inc:2342
+#: include/functions.inc:2350
 msgid "Spanish"
 msgstr "西班牙语"
 
-#: include/functions.inc:2343
+#: include/functions.inc:2351
 msgid "English"
 msgstr "英语"
 
-#: include/functions.inc:2344
+#: include/functions.inc:2352
 msgid "Dutch"
 msgstr "荷兰语"
 
-#: include/functions.inc:2345
+#: include/functions.inc:2353
 msgid "Polish"
 msgstr "波兰语"
 
-#: include/functions.inc:2347
+#: include/functions.inc:2355
 msgid "Chinese"
 msgstr "芯片组"
 
-#: include/functions.inc:2348
+#: include/functions.inc:2356
 #, fuzzy
 msgid "Vietnamese"
 msgstr "名"
 
-#: include/functions.inc:2349
+#: include/functions.inc:2357
 msgid "Russian"
 msgstr "俄语"
 
-#: include/functions.inc:2527
+#: include/functions.inc:2535
 #, php-format
 msgid ""
 "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
 msgstr "命令 '%s'，作为插件 '%s' 的 POSTMODIFY 好像并不存在。"
 
-#: include/functions.inc:2552
+#: include/functions.inc:2560
 msgid "Cannot generate samba hash!"
 msgstr ""
 
-#: include/functions.inc:2565
+#: include/functions.inc:2573
 #, php-format
 msgid ""
 "Cannot generate samba hash: running '%s' failed, check the 'sambaHashHook'!"
@@ -1664,78 +1666,78 @@ msgstr ""
 msgid "No valid certificate loaded!"
 msgstr "无有效证书加载"
 
-#: include/php_setup.inc:93
+#: include/php_setup.inc:100
 msgid "Generating this page caused the PHP interpreter to raise some errors!"
 msgstr "生成这个页面导致 PHP 解析器发生一些错误！"
 
-#: include/php_setup.inc:98
+#: include/php_setup.inc:105
 msgid "Send bug report to the GOsa Team"
 msgstr ""
 
-#: include/php_setup.inc:98
+#: include/php_setup.inc:105
 #, fuzzy
 msgid "Send bugreport"
 msgstr "发送者"
 
-#: include/php_setup.inc:103
+#: include/php_setup.inc:110
 msgid "Toggle information"
 msgstr "切换信息"
 
-#: include/php_setup.inc:113
+#: include/php_setup.inc:120
 msgid "PHP error"
 msgstr "PHP 错误"
 
-#: include/php_setup.inc:132
+#: include/php_setup.inc:139
 msgid "class"
 msgstr "类"
 
-#: include/php_setup.inc:138
+#: include/php_setup.inc:145
 msgid "function"
 msgstr "功能"
 
-#: include/php_setup.inc:143
+#: include/php_setup.inc:150
 msgid "static"
 msgstr "静态"
 
-#: include/php_setup.inc:147
+#: include/php_setup.inc:154
 msgid "method"
 msgstr "方法"
 
-#: include/php_setup.inc:180
+#: include/php_setup.inc:187
 msgid "Trace"
 msgstr "跟踪"
 
-#: include/php_setup.inc:181
+#: include/php_setup.inc:188
 msgid "File"
 msgstr "文件"
 
-#: include/php_setup.inc:181
+#: include/php_setup.inc:188
 msgid "Line"
 msgstr "行"
 
-#: include/php_setup.inc:181
+#: include/php_setup.inc:188
 msgid "Type"
 msgstr "类型"
 
-#: include/php_setup.inc:182
+#: include/php_setup.inc:189
 msgid "Arguments"
 msgstr "参数"
 
-#: include/class_filter.inc:313 include/utils/class_msgPool.inc:23
+#: include/class_filter.inc:316 include/utils/class_msgPool.inc:23
 #: plugins/admin/ogroups/ogroup_objects.tpl:33
 #: plugins/personal/posix/posix_groups.tpl:68
 #, fuzzy
 msgid "Search in subtrees"
 msgstr "在子树中查找"
 
-#: include/class_plugin.inc:511
+#: include/class_plugin.inc:512
 msgid ""
 "The object has changed since opened in GOsa. All changes that may be done by "
 "others get lost if you save this entry!"
 msgstr ""
 
-#: include/class_plugin.inc:1512 include/class_plugin.inc:1524
-#: include/class_plugin.inc:1539 include/class_plugin.inc:1552
+#: include/class_plugin.inc:1513 include/class_plugin.inc:1525
+#: include/class_plugin.inc:1540 include/class_plugin.inc:1553
 #: plugins/admin/ogroups/class_ogroupManagement.inc:237
 #: plugins/admin/groups/class_groupManagement.inc:356
 #: plugins/admin/users/class_userManagement.inc:353
@@ -1745,42 +1747,42 @@ msgstr ""
 msgid "Permission"
 msgstr "允许"
 
-#: include/class_plugin.inc:1512
+#: include/class_plugin.inc:1513
 #, fuzzy, php-format
 msgid "You are not allowed to create a snapshot for %s."
 msgstr "您无权删除这个用户！"
 
-#: include/class_plugin.inc:1524 include/class_plugin.inc:1539
-#: include/class_plugin.inc:1552
+#: include/class_plugin.inc:1525 include/class_plugin.inc:1540
+#: include/class_plugin.inc:1553
 #, fuzzy, php-format
 msgid "You are not allowed to restore a snapshot for %s."
 msgstr "您无权删除这个用户！"
 
-#: include/class_plugin.inc:1764
+#: include/class_plugin.inc:1765
 msgid "Changing ACL dn"
 msgstr ""
 
-#: include/class_plugin.inc:1764
+#: include/class_plugin.inc:1765
 msgid "from"
 msgstr "从"
 
-#: include/class_plugin.inc:1765 setup/class_setupStep_Migrate.inc:1246
+#: include/class_plugin.inc:1766 setup/class_setupStep_Migrate.inc:1246
 #: setup/class_setupStep_Migrate.inc:1296
 #: setup/class_setupStep_Migrate.inc:1344
 #, fuzzy
 msgid "to"
 msgstr "停止"
 
-#: include/class_plugin.inc:1948 include/class_plugin.inc:1950
+#: include/class_plugin.inc:1951 include/class_plugin.inc:1953
 #, fuzzy
 msgid "Restore"
 msgstr "仓库"
 
-#: include/class_plugin.inc:1992
+#: include/class_plugin.inc:1995
 msgid "cut"
 msgstr "剪切"
 
-#: include/class_plugin.inc:2000
+#: include/class_plugin.inc:2003
 msgid "copy"
 msgstr "复制"
 
@@ -1809,6 +1811,21 @@ msgid ""
 "The timezone setting '%s' in your gosa.conf is not valid. Cannot calculate "
 "correct timezone offset."
 msgstr ""
+
+#: include/utils/class_xml.inc:48
+#, fuzzy
+msgid "in"
+msgstr "首页"
+
+#: include/utils/class_xml.inc:50
+#, fuzzy
+msgid "on line"
+msgstr "继续"
+
+#: include/utils/class_xml.inc:51
+#, fuzzy
+msgid "XML error"
+msgstr "LDAP 错误:"
 
 #: include/utils/class_msgPool.inc:15
 #, fuzzy, php-format
@@ -2590,7 +2607,7 @@ msgstr "邮件"
 #: plugins/admin/users/class_divListUsers.inc:88
 #: plugins/admin/users/class_divListUsers.inc:211
 #: plugins/admin/users/class_userManagement.inc:1078
-#: plugins/personal/posix/class_posixAccount.inc:295
+#: plugins/personal/posix/class_posixAccount.inc:303
 msgid "Samba"
 msgstr "Samba"
 
@@ -3060,20 +3077,20 @@ msgstr "Windows 工作站"
 
 #: plugins/admin/ogroups/class_ogroup.inc:570
 #: plugins/admin/groups/class_groupGeneric.inc:521
-#: plugins/personal/posix/class_posixAccount.inc:623
+#: plugins/personal/posix/class_posixAccount.inc:644
 #: setup/setup_config2.tpl:142
 msgid "disabled"
 msgstr "禁用"
 
 #: plugins/admin/ogroups/class_ogroup.inc:570
 #: plugins/admin/groups/class_groupGeneric.inc:521
-#: plugins/personal/posix/class_posixAccount.inc:623
+#: plugins/personal/posix/class_posixAccount.inc:644
 msgid "full access"
 msgstr "完全访问权限"
 
 #: plugins/admin/ogroups/class_ogroup.inc:571
 #: plugins/admin/groups/class_groupGeneric.inc:522
-#: plugins/personal/posix/class_posixAccount.inc:624
+#: plugins/personal/posix/class_posixAccount.inc:645
 msgid "allow access to these hosts"
 msgstr "允许访问这些主机"
 
@@ -3192,13 +3209,13 @@ msgstr "选择一个位置"
 
 #: plugins/admin/ogroups/generic.tpl:41
 #: plugins/admin/groups/class_groupGeneric.inc:1315
-#: plugins/personal/posix/generic.tpl:126
+#: plugins/personal/posix/generic.tpl:133
 msgid "System trust"
 msgstr "信赖的系统"
 
 #: plugins/admin/ogroups/generic.tpl:42 plugins/admin/groups/generic.tpl:169
-#: plugins/admin/groups/generic.tpl:203 plugins/personal/posix/generic.tpl:128
-#: plugins/personal/posix/generic.tpl:156
+#: plugins/admin/groups/generic.tpl:203 plugins/personal/posix/generic.tpl:135
+#: plugins/personal/posix/generic.tpl:163
 msgid "Trust mode"
 msgstr "信赖模式"
 
@@ -3233,7 +3250,7 @@ msgstr "自动化安装说明"
 #: plugins/admin/groups/class_divListGroup.inc:198
 #: plugins/admin/users/class_divListUsers.inc:203
 #: plugins/admin/users/class_userManagement.inc:1086
-#: plugins/personal/posix/class_posixAccount.inc:295
+#: plugins/personal/posix/class_posixAccount.inc:303
 msgid "Environment"
 msgstr "环境设置"
 
@@ -3518,15 +3535,15 @@ msgstr ""
 #: plugins/admin/groups/class_groupGeneric.inc:1192
 #: plugins/admin/groups/class_groupGeneric.inc:1195
 #: plugins/admin/groups/class_groupGeneric.inc:1311
-#: plugins/personal/posix/class_posixAccount.inc:1084
-#: plugins/personal/posix/class_posixAccount.inc:1087
+#: plugins/personal/posix/class_posixAccount.inc:1115
+#: plugins/personal/posix/class_posixAccount.inc:1118
 #: plugins/personal/posix/generic.tpl:68
 #: plugins/personal/posix/paste_generic.tpl:45
 msgid "GID"
 msgstr "GID"
 
 #: plugins/admin/groups/class_groupGeneric.inc:1250
-#: plugins/personal/posix/class_posixAccount.inc:1382
+#: plugins/personal/posix/class_posixAccount.inc:1413
 #, fuzzy
 msgid "Cannot allocate a free ID!"
 msgstr "太多用户，无法分配一个可用的 ID！"
@@ -3728,9 +3745,9 @@ msgid "inactive"
 msgstr "活动"
 
 #: plugins/admin/users/class_divListUsers.inc:250
-#: plugins/personal/posix/class_posixAccount.inc:159
-#: plugins/personal/posix/class_posixAccount.inc:161
-#: plugins/personal/posix/class_posixAccount.inc:163
+#: plugins/personal/posix/class_posixAccount.inc:162
+#: plugins/personal/posix/class_posixAccount.inc:164
+#: plugins/personal/posix/class_posixAccount.inc:166
 msgid "active"
 msgstr "活动"
 
@@ -3864,10 +3881,10 @@ msgid "Lock account"
 msgstr "我的账号"
 
 #: plugins/admin/users/class_userManagement.inc:1070
-#: plugins/personal/posix/class_posixAccount.inc:275
-#: plugins/personal/posix/class_posixAccount.inc:295
-#: plugins/personal/posix/class_posixAccount.inc:297
-#: plugins/personal/posix/class_posixAccount.inc:300
+#: plugins/personal/posix/class_posixAccount.inc:283
+#: plugins/personal/posix/class_posixAccount.inc:303
+#: plugins/personal/posix/class_posixAccount.inc:305
+#: plugins/personal/posix/class_posixAccount.inc:308
 msgid "POSIX"
 msgstr ""
 
@@ -4553,7 +4570,7 @@ msgid "Generic user settings"
 msgstr "通用队列设置"
 
 #: plugins/personal/generic/class_user.inc:1564
-#: plugins/personal/posix/class_posixAccount.inc:1578
+#: plugins/personal/posix/class_posixAccount.inc:1609
 #: plugins/personal/password/class_password.inc:145
 msgid "My account"
 msgstr "我的账号"
@@ -4800,157 +4817,157 @@ msgstr "PKCS12 证书"
 msgid "Edit users POSIX settings"
 msgstr "Posix 设置"
 
-#: plugins/personal/posix/class_posixAccount.inc:154
+#: plugins/personal/posix/class_posixAccount.inc:157
 msgid "expired"
 msgstr "过期"
 
-#: plugins/personal/posix/class_posixAccount.inc:156
+#: plugins/personal/posix/class_posixAccount.inc:159
 msgid "grace time active"
 msgstr "时间限制激活"
 
-#: plugins/personal/posix/class_posixAccount.inc:159
+#: plugins/personal/posix/class_posixAccount.inc:162
 #, fuzzy
 msgid "password not changeable"
 msgstr "活动，口令不可更改"
 
-#: plugins/personal/posix/class_posixAccount.inc:161
+#: plugins/personal/posix/class_posixAccount.inc:164
 #, fuzzy
 msgid "password expired"
 msgstr "活动，口令过期"
 
-#: plugins/personal/posix/class_posixAccount.inc:208
+#: plugins/personal/posix/class_posixAccount.inc:216
 msgid "unconfigured"
 msgstr "未配置"
 
-#: plugins/personal/posix/class_posixAccount.inc:219
+#: plugins/personal/posix/class_posixAccount.inc:227
 msgid "automatic"
 msgstr "自动"
 
-#: plugins/personal/posix/class_posixAccount.inc:471
+#: plugins/personal/posix/class_posixAccount.inc:492
 #, php-format
 msgid "Password can't be changed up to %s days after last change"
 msgstr "自上次更改以来 %s 天，不能修改口令"
 
-#: plugins/personal/posix/class_posixAccount.inc:475
+#: plugins/personal/posix/class_posixAccount.inc:496
 #, php-format
 msgid "Password must be changed after %s days"
 msgstr "口令必须在 %s 天之后更改"
 
-#: plugins/personal/posix/class_posixAccount.inc:479
+#: plugins/personal/posix/class_posixAccount.inc:500
 #, fuzzy, php-format
 msgid "Disable account after %s days of inactivity after password expiry"
 msgstr "口令过期 %s 天后，禁用账号"
 
-#: plugins/personal/posix/class_posixAccount.inc:483
+#: plugins/personal/posix/class_posixAccount.inc:504
 #, fuzzy, php-format
 msgid "Warn user %s days before password expiry"
 msgstr "在口令过期 %s 天之前警告用户"
 
-#: plugins/personal/posix/class_posixAccount.inc:837
+#: plugins/personal/posix/class_posixAccount.inc:863
 msgid "Timeout while waiting for lock. Ignoring lock!"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:895
-#: plugins/personal/posix/class_posixAccount.inc:1203
+#: plugins/personal/posix/class_posixAccount.inc:921
+#: plugins/personal/posix/class_posixAccount.inc:1234
 msgid "Group of user"
 msgstr "用户组"
 
-#: plugins/personal/posix/class_posixAccount.inc:990
+#: plugins/personal/posix/class_posixAccount.inc:1016
 msgid ""
 "A duplicated UID number was written for this user. If this was not intended "
 "please verify all used uidNumbers!"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:1066
-#: plugins/personal/posix/class_posixAccount.inc:1069
-#: plugins/personal/posix/class_posixAccount.inc:1139
-#: plugins/personal/posix/class_posixAccount.inc:1142
-#: plugins/personal/posix/class_posixAccount.inc:1584
+#: plugins/personal/posix/class_posixAccount.inc:1097
+#: plugins/personal/posix/class_posixAccount.inc:1100
+#: plugins/personal/posix/class_posixAccount.inc:1170
+#: plugins/personal/posix/class_posixAccount.inc:1173
+#: plugins/personal/posix/class_posixAccount.inc:1615
 #: plugins/personal/posix/generic.tpl:7
 #: plugins/personal/posix/paste_generic.tpl:8
 msgid "Home directory"
 msgstr "用户主目录"
 
-#: plugins/personal/posix/class_posixAccount.inc:1077
-#: plugins/personal/posix/class_posixAccount.inc:1080
+#: plugins/personal/posix/class_posixAccount.inc:1108
+#: plugins/personal/posix/class_posixAccount.inc:1111
 #: plugins/personal/posix/generic.tpl:57
 #: plugins/personal/posix/paste_generic.tpl:36
 msgid "UID"
 msgstr "UID"
 
-#: plugins/personal/posix/class_posixAccount.inc:1095
-#: plugins/personal/posix/class_posixAccount.inc:1148
+#: plugins/personal/posix/class_posixAccount.inc:1126
+#: plugins/personal/posix/class_posixAccount.inc:1179
 #, fuzzy
 msgid "shadowMin"
 msgstr "显示终端"
 
-#: plugins/personal/posix/class_posixAccount.inc:1100
-#: plugins/personal/posix/class_posixAccount.inc:1153
+#: plugins/personal/posix/class_posixAccount.inc:1131
+#: plugins/personal/posix/class_posixAccount.inc:1184
 msgid "shadowMax"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:1105
-#: plugins/personal/posix/class_posixAccount.inc:1158
+#: plugins/personal/posix/class_posixAccount.inc:1136
+#: plugins/personal/posix/class_posixAccount.inc:1189
 #, fuzzy
 msgid "shadowWarning"
 msgstr "显示分区"
 
-#: plugins/personal/posix/class_posixAccount.inc:1119
-#: plugins/personal/posix/class_posixAccount.inc:1172
+#: plugins/personal/posix/class_posixAccount.inc:1150
+#: plugins/personal/posix/class_posixAccount.inc:1203
 #, fuzzy
 msgid "shadowInactive"
 msgstr "显示打印机"
 
-#: plugins/personal/posix/class_posixAccount.inc:1574
+#: plugins/personal/posix/class_posixAccount.inc:1605
 #, fuzzy
 msgid "POSIX account"
 msgstr "GLPI 账号"
 
-#: plugins/personal/posix/class_posixAccount.inc:1585
+#: plugins/personal/posix/class_posixAccount.inc:1616
 #: plugins/personal/posix/generic.tpl:15
 msgid "Shell"
 msgstr "Shell"
 
-#: plugins/personal/posix/class_posixAccount.inc:1586
+#: plugins/personal/posix/class_posixAccount.inc:1617
 #: setup/setup_migrate.tpl:291
 msgid "User ID"
 msgstr "用户 ID"
 
-#: plugins/personal/posix/class_posixAccount.inc:1587
+#: plugins/personal/posix/class_posixAccount.inc:1618
 #, fuzzy
 msgid "Group ID"
 msgstr "组"
 
-#: plugins/personal/posix/class_posixAccount.inc:1589
+#: plugins/personal/posix/class_posixAccount.inc:1620
 #, fuzzy
 msgid "Force password change on login"
 msgstr "不允许修改口令"
 
-#: plugins/personal/posix/class_posixAccount.inc:1590
+#: plugins/personal/posix/class_posixAccount.inc:1621
 #, fuzzy
 msgid "Shadow min"
 msgstr "显示终端"
 
-#: plugins/personal/posix/class_posixAccount.inc:1591
+#: plugins/personal/posix/class_posixAccount.inc:1622
 msgid "Shadow max"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:1592
+#: plugins/personal/posix/class_posixAccount.inc:1623
 #, fuzzy
 msgid "Shadow warning"
 msgstr "显示分区"
 
-#: plugins/personal/posix/class_posixAccount.inc:1593
+#: plugins/personal/posix/class_posixAccount.inc:1624
 #, fuzzy
 msgid "Shadow inactive"
 msgstr "显示打印机"
 
-#: plugins/personal/posix/class_posixAccount.inc:1594
+#: plugins/personal/posix/class_posixAccount.inc:1625
 #, fuzzy
 msgid "Shadow expire"
 msgstr "显示人员"
 
-#: plugins/personal/posix/class_posixAccount.inc:1595
+#: plugins/personal/posix/class_posixAccount.inc:1626
 #, fuzzy
 msgid "System trust model"
 msgstr "信赖的系统"
@@ -4989,7 +5006,15 @@ msgstr "显示组"
 msgid "Non common group"
 msgstr "显示邮件组"
 
-#: plugins/personal/posix/generic.tpl:119
+#: plugins/personal/posix/generic.tpl:121
+msgid "SSH keys"
+msgstr ""
+
+#: plugins/personal/posix/generic.tpl:122
+msgid "Edit public ssh keys..."
+msgstr ""
+
+#: plugins/personal/posix/generic.tpl:126
 msgid "Account"
 msgstr "账户"
 

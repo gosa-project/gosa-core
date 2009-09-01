@@ -76,6 +76,7 @@ class posixAccount extends plugin
   var $grouplist= array();
   var $ui= array();
   var $ssh= null;
+  var $sshAcl= "";
 
   var $GroupRegex= "*";
   var $GroupUserRegex= "*";
@@ -186,7 +187,8 @@ class posixAccount extends plugin
 
       // Instanciate SSH object if available
       if (isset($class_mapping["sshPublicKey"])){
-        $this->ssh= new sshPublicKey($this->config, $this->dn);
+        $this->sshAcl= $this->getacl("sshPublicKey");
+        $this->ssh= new sshPublicKey($this->config, $this->dn, $this->sshAcl);
       }
     }
 
@@ -1623,6 +1625,7 @@ class posixAccount extends plugin
             "shadowWarning"       =>  _("Shadow warning"),
             "shadowInactive"      =>  _("Shadow inactive"),
             "shadowExpire"        =>  _("Shadow expire"),
+            "sshPublickey"        =>  _("Public SSH key"),
             "trustModel"          =>  _("System trust model")))
             );
   }
