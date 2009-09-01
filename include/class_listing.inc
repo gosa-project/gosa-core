@@ -514,7 +514,7 @@ class listing {
     }
     if ($action == 'HOME') {
       $ui= get_userinfo();
-      $this->base= get_base_from_people($ui->dn);
+      $this->base= $this->filter->getObjectBase($ui->dn);
     }
 
     // Reload departments
@@ -879,7 +879,7 @@ class listing {
     $listhead ="";
 
     /* Check if we are in users home  department */
-    if(!count($deps) ||$this->filter->base == get_base_from_people($ui->dn)){
+    if(!count($deps) || $this->filter->base == $this->filter->getObjectBase($ui->dn)){
       $enableHome = false;
     }
 

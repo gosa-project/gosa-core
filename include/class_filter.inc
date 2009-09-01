@@ -531,6 +531,30 @@ class filter {
   }
 
 
+  function getObjectBase($dn)
+  {
+    global $config;
+    $base= "";
+
+    // Try every object storage
+    $storage= $this->objectStorage;
+    if (!is_array($storage)){
+      $storage= array($storage);
+    }
+    foreach ($storage as $location) {
+      $pattern= "/^[^,]+,".preg_quote($location, '/')."/i";
+      $base= preg_replace($pattern, '', $dn);
+    }
+
+    /* Set to base, if we're not on a correct subtree */
+    if (!isset($config->idepartments[$base])){
+      $base= $config->current['BASE'];
+    }
+
+    return $base;
+  }
+
+
 }
 
 ?>
