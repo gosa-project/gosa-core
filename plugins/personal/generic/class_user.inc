@@ -1170,27 +1170,86 @@ class user extends plugin
     return (0);
   }
 
+
+  function create_initial_rdn($pattern)
+  {
+    // Only generate single RDNs
+    if (preg_match('/\+/', $pattern)){
+      msg_dialog::display(_("Error"), _("Cannot build RDN: no + allowed to build sub RDN!"), ERROR_DIALOG);
+      return "";
+    }
+
+    // Extract attribute
+    $attribute= preg_replace('/=.*$/', '', $pattern);
+    if (!in_array_ics($attribute, $this->attributes)) {
+      msg_dialog::display(_("Error"), _("Cannot build RDN: attribute is not defined!"), ERROR_DIALOG);
+      return "";
+    }
+
+    // Sort attributes for length
+    $attrl= array();
+    foreach ($this->attributes as $attr) {
+      $attrl[$attr]= strlen($attr);
+    }
+    arsort($attrl);
+    
+    // Walk thru sorted attributes and replace them in pattern
+    foreach ($attrl as $attr => $dummy) {
+      if (!is_array($this->$attr)){
+        $pattern= preg_replace("/%$attr/", $this->$attr, $pattern);
+      } else {
+        msg_dialog::display(_("Error"), _("Cannot build RDN: invalid attribute parameters!"), ERROR_DIALOG);
+        break;
+      }
+    }
+
+    // Internally assign value
+    $this->$attribute= preg_replace('/^[^=]+=/', '', $pattern);
+
+    return $pattern;
+  }
+
   
   function update_new_dn()
   {
-    $pt= "";
-    if($this->config->get_cfg_value("personalTitleInDN") == "true"){
-      if(!empty($this->personalTitle)){
-        $pt = $this->personalTitle." ";
-      }
-    }
-    $this->cn= $pt.$this->givenName." ".$this->sn;
+    // Alternative way to handle DN
+    $pattern= $this->config->get_cfg_value("accountRDN");
+    if ($pattern != "") {
+      $rdn= $this->create_initial_rdn($pattern);
+      $attribute= preg_replace('/=.*$/', '', $rdn);
+      $value= preg_replace('/^[^=]+=$/', '', $rdn);
 
-    /* Permissions for that base? */
-    if ($this->config->get_cfg_value("accountPrimaryAttribute") == "uid"){
-      $this->new_dn= 'uid='.$this->uid.','.get_people_ou().$this->base;
-    } else {
-      /* Don't touch dn, if cn hasn't changed */
-      if (isset($this->saved_attributes['cn']) && $this->saved_attributes['cn'] == $this->cn &&
-          $this->orig_base == $this->base ){
+      /* Don't touch dn, if $attribute hasn't changed */
+      if (isset($this->saved_attributes[$attribute]) && $this->saved_attributes[$attribute] == $this->$attribute &&
+            $this->orig_base == $this->base ){
         $this->new_dn= $this->dn;
       } else {
-        $this->new_dn= $this->create_unique_dn('cn', get_people_ou().$this->base);
+        $this->new_dn= $this->create_unique_dn2($rdn, get_people_ou().$this->base);
+      }
+
+    // Original way to handle DN
+    } else {
+
+      $pt= "";
+      if($this->config->get_cfg_value("personalTitleInDN") == "true"){
+        if(!empty($this->personalTitle)){
+          $pt = $this->personalTitle." ";
+        }
+      }
+
+      $this->cn= $pt.$this->givenName." ".$this->sn;
+
+      /* Permissions for that base? */
+      if ($this->config->get_cfg_value("accountPrimaryAttribute") == "uid"){
+        $this->new_dn= 'uid='.$this->uid.','.get_people_ou().$this->base;
+      } else {
+        /* Don't touch dn, if cn hasn't changed */
+        if (isset($this->saved_attributes['cn']) && $this->saved_attributes['cn'] == $this->cn &&
+            $this->orig_base == $this->base ){
+          $this->new_dn= $this->dn;
+        } else {
+          $this->new_dn= $this->create_unique_dn('cn', get_people_ou().$this->base);
+        }
       }
     }
   }

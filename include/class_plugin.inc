@@ -746,6 +746,39 @@ class plugin
     }
   }
 
+
+  /* Create unique DN */
+  function create_unique_dn2($data, $base)
+  {
+    $ldap= $this->config->get_ldap_link();
+    $base= preg_replace("/^,*/", "", $base);
+
+    /* Try to use plain entry first */
+    $dn= "$data,$base";
+    $attribute= preg_replace('/=.*$/', '', $data);
+    $ldap->cat ($dn, array('dn'));
+    if (!$ldap->fetch()){
+      return ($dn);
+    }
+
+    /* Look for additional attributes */
+    foreach ($this->attributes as $attr){
+      if ($attr == $attribute || $this->$attr == ""){
+        continue;
+      }
+
+      $dn= "$data+$attr=".$this->$attr.",$base";
+      $ldap->cat ($dn, array('dn'));
+      if (!$ldap->fetch()){
+        return ($dn);
+      }
+    }
+
+    /* None found */
+    return ("none");
+  }
+
+
   /* Create unique DN */
   function create_unique_dn($attribute, $base)
   {
@@ -775,6 +808,7 @@ class plugin
     /* None found */
     return ("none");
   }
+
 
   function rebind($ldap, $referral)
   {

@@ -644,6 +644,25 @@ selecting
 .I personalTitleInDN.
 .PP
 
+.B accountRDN
+.I pattern
+.PP
+The
+.I accountRDN
+option tells GOsa to use a placeholder pattern for generating account
+RDNs. A pattern can include attribute names prefaced by a % and normal
+text:
+.nf
+accountRDN="cn=%sn %givenName"
+.fi
+This will generate a RDN consisting of cn=.... filled with surname and
+given name of the edited account. This option disables the use of
+.I accountPrimaryAttribute
+and
+.I personalTitleInDn
+in your config. The latter attributes are maintained for compatibility.
+
+
 .B personalTitleInDN
 .I bool
 .PP
