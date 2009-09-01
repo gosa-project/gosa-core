@@ -47,7 +47,6 @@
       <attribute>cn</attribute>
       <frequency>0.5</frequency>
       <characters>3</characters>
-      <objectStorage></objectStorage>
     </autocomplete>
   </element>
 
@@ -90,28 +89,5 @@
     <unset></unset>
     <set>(objectClass=sambaSamAccount)</set>
   </element>
-
-  <element>
-    <type>combobox</type>
-    <tag>ROLLE</tag>
-    <unset></unset>
-    <set></set>
-    <default>*</default>
-    <value>
-      <key>*</key>
-      <label>All</label>
-    </value>
-    <autocomplete>
-      <backend>LDAP</backend>
-      <base>dc=gonicus,dc=de</base>
-      <scope>sub</scope>
-      <category>roles</category>
-      <objectbase>ou=roles</objectbase>
-      <filter>(objectClass=organizationalRole)</filter>
-      <attribute>cn</attribute>
-      <key>cn</key>
-      <objectStorage></objectStorage>
-    </autocomplete>
-   </element>
 
 </filterdef>
