@@ -2224,7 +2224,7 @@ function check_schema($cfg,$rfc2307bis = FALSE)
   $checks['gosaObject']['IS_MUST_HAVE']     = TRUE;
 
   /* GOsa Account class */
-  $checks["gosaAccount"]["REQUIRED_VERSION"]= "2.6.1";
+  $checks["gosaAccount"]["REQUIRED_VERSION"]= "2.6.6";
   $checks["gosaAccount"]["SCHEMA_FILES"]    = array("gosa+samba3.schema","gosa.schema");
   $checks["gosaAccount"]["CLASSES_REQUIRED"]= array("gosaAccount");
   $checks["gosaAccount"]["IS_MUST_HAVE"]    = TRUE;
