@@ -991,6 +991,11 @@ class listing {
       return "";
     }
 
+    // Array?
+    if (isset($this->xmlData['actionmenu']['action']['type'])){
+      $this->xmlData['actionmenu']['action']= array($this->xmlData['actionmenu']['action']);
+    }
+
     // Load shortcut
     $actions= &$this->xmlData['actionmenu']['action'];
     $result= "<input type='hidden' name='act' id='actionmenu' value=''><div style='display:none'><input type='submit' name='exec_act' id='exec_act' value=''></div>".
