@@ -935,8 +935,15 @@ class gosaSupportDaemon
     /* Prepare data */
     foreach ($data as $key => $value){
       if(is_array($value)){
-        foreach($value as $sub_value){
-          $xml_message.= "<$key>$sub_value</$key>";
+        if($key == "periodic"){
+          foreach($value as $sub_name => $sub_value){
+            $xml_message.= "<periodic>$sub_name</periodic>";
+            $xml_message.= "<$sub_name>$sub_value</$sub_name>";
+          }
+        }else{
+          foreach($value as $sub_value){
+            $xml_message.= "<$key>$sub_value</$key>";
+          }
         }
       }else{
         $xml_message.= "<$key>$value</$key>";
