@@ -48,47 +48,53 @@
     $y= 20;
   }
 
-  $x_matches= FALSE;
-  $y_matches= FALSE;
-  foreach (array(7,6,5,4,3,2,1,0) as $font){
-    $fx= ImageFontWidth($font) * strlen("$p%");
-    $fy= ImageFontHeight($font);
+  if(!function_exists("imagecreate")){
+    syslog(LOG_ERR, "GOsa is missing the gd library, please install php5-gd to be able to see progress images.");
+    echo "Please install the php5-gd library, GOsa can't create images without it.";
+    exit();
+  }else{
 
-    /* Look if font size matches image size */
-    if ($fx < ($x-2)){
-      $x_matches= TRUE;
-    }
-    if ($fy < ($y-2)){
-      $y_matches= TRUE;
-    }
-    if ($x_matches && $y_matches){
-      break;
-    }
-  }
+    $x_matches= FALSE;
+    $y_matches= FALSE;
+    foreach (array(7,6,5,4,3,2,1,0) as $font){
+      $fx= ImageFontWidth($font) * strlen("$p%");
+      $fy= ImageFontHeight($font);
 
-  /* Draw image in GD image stream */
-  $im = @imagecreate ($x, $y)
+      /* Look if font size matches image size */
+      if ($fx < ($x-2)){
+        $x_matches= TRUE;
+      }
+      if ($fy < ($y-2)){
+        $y_matches= TRUE;
+      }
+      if ($x_matches && $y_matches){
+        break;
+      }
+    }
+
+    /* Draw image in GD image stream */
+    $im = imagecreate ($x, $y)
       or die ("Cannot Initialize new GD image stream");
 
-  /* Set colors */
-  $bg_color= imagecolorallocate ($im, 255, 255, 255);
-  $br_color= imagecolorallocate ($im, 0,0,0);
-  $fi_color= imagecolorallocate ($im, 0,0,180);
-  $tx_color= imagecolorallocate ($im, 240, 10, 90);
+    /* Set colors */
+    $bg_color= imagecolorallocate ($im, 255, 255, 255);
+    $br_color= imagecolorallocate ($im, 0,0,0);
+    $fi_color= imagecolorallocate ($im, 0,0,180);
+    $tx_color= imagecolorallocate ($im, 240, 10, 90);
 
-  /* Draw progress bar */
-  imagerectangle ($im, 0, 0, $x-1, $y-1, $br_color);
-  imagefilledrectangle ($im, 1, 1, (($x - 2) * $p / 100),
-                                     $y - 2, $fi_color);
+    /* Draw progress bar */
+    imagerectangle ($im, 0, 0, $x-1, $y-1, $br_color);
+    imagefilledrectangle ($im, 1, 1, (($x - 2) * $p / 100),
+        $y - 2, $fi_color);
 
-  /* Is font to big for progress bar? */
-  if ($font != 0){
-    imagestring ($im, $font, ($x - $fx) / 2, ($y - $fy) / 2, "$p%", $tx_color);
+    /* Is font to big for progress bar? */
+    if ($font != 0){
+      imagestring ($im, $font, ($x - $fx) / 2, ($y - $fy) / 2, "$p%", $tx_color);
+    }
+
+    /* Finally draw the image and remove context */
+    header ("Content-type: image/png");
+    imagepng ($im);
+    imagedestroy ($im);
   }
-
-  /* Finally draw the image and remove context */
-  header ("Content-type: image/png");
-  imagepng ($im);
-  imagedestroy ($im);
 ?>
-
