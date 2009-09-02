@@ -266,7 +266,7 @@ class listing {
     $result= "<input type='hidden' value='$this->pid' name='PID'>\n";
     $height= 450;
     if ($this->height != 0) {
-      $result= "<input type='hidden' value='$this->height' id='d_height'>\n";
+      $result.= "<input type='hidden' value='$this->height' id='d_height'>\n";
       $height= $this->height;
     }
     
