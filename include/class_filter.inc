@@ -127,13 +127,6 @@ class filter {
         }
       }
 
-      // Sort elements for element length to allow proper replacing later on
-      function strlenSort($a, $b) {
-        if (strlen($a['tag']) == strlen($b['tag'])) {
-          return 0;
-        }
-       return (strlen($a['tag']) < strlen($b['tag']) ? -1 : 1);
-      } 
       uasort($this->elements, 'strlenSort');
       $this->elements= array_reverse($this->elements);
 
@@ -556,5 +549,13 @@ class filter {
 
 
 }
+
+// Sort elements for element length to allow proper replacing later on
+function strlenSort($a, $b) {
+  if (strlen($a['tag']) == strlen($b['tag'])) {
+    return 0;
+  }
+  return (strlen($a['tag']) < strlen($b['tag']) ? -1 : 1);
+} 
 
 ?>
