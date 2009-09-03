@@ -36,6 +36,12 @@
      <td>{t}Status{/t}</td>
      <td>{$status}</td>
     </tr>
+{if $gotoLastSystemLogin}
+    <tr>
+     <td>{t}Last logon{/t}</td>
+     <td>{$gotoLastSystemLogin}</td>
+    </tr>
+{/if}
 {/if}
    </table>
 

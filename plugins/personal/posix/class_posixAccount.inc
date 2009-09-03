@@ -67,6 +67,7 @@ class posixAccount extends plugin
   var $activate_shadowExpire= "0";
   var $mustchangepassword= "0";
   var $force_ids= 0;
+  var $gotoLastSystemLogin= "";
   var $group_dialog= FALSE;
   var $show_ws_dialog= FALSE;
   var $secondaryGroups= array();
@@ -92,7 +93,7 @@ class posixAccount extends plugin
 
   var $attributes     = array("homeDirectory", "loginShell", "uidNumber", "gidNumber", "gecos",
       "shadowMin", "shadowMax", "shadowWarning", "shadowInactive", "shadowLastChange",
-      "shadowExpire", "gosaDefaultPrinter", "uid","accessTo","trustModel");
+      "shadowExpire", "gosaDefaultPrinter", "uid","accessTo","trustModel", "gotoLastSystemLogin");
 
   var $objectclasses= array("posixAccount", "shadowAccount");
 
@@ -111,6 +112,15 @@ class posixAccount extends plugin
 
     /* Load bases attributes */
     plugin::plugin($config, $dn);
+
+    /*  If gotoLastSystemLogin is available read it from ldap and create a readable
+        date time string, fallback to sambaLogonTime if available.
+     */
+    if(isset($this->attrs['gotoLastSystemLogin'][0]) && preg_match("/^[0-9]*$/",$this->attrs['gotoLastSystemLogin'][0])){
+      $this->gotoLastSystemLogin = date("d.m.Y H:i:s", strtotime($this->attrs['gotoLastSystemLogin'][0]));
+    } else if(isset($this->attrs['sambaLogonTime'][0]) && preg_match("/^[0-9]*$/",$this->attrs['sambaLogonTime'][0])){
+      $this->gotoLastSystemLogin = date("d.m.Y H:i:s", $this->attrs['sambaLogonTime'][0]);
+    }
 
     /* Setting uid to default */
     if(isset($this->attrs['uid'][0])){
@@ -518,6 +528,9 @@ class posixAccount extends plugin
 
       $smarty->assign("mustchangepasswordACL", $this->getacl("mustchangepassword",$SkipWrite));
     }
+
+    // Set last system login
+    $smarty->assign("gotoLastSystemLogin",$this->gotoLastSystemLogin);
 
     /* Fill calendar */
     /* If this $this->shadowExpire is empty 
