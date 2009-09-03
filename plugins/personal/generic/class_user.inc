@@ -37,12 +37,6 @@ class user extends plugin
   var $plHeadline= "Generic";
   var $plDescription= "Edit organizational user settings";
 
-  /* The attribute gotoLastSystemLogin represents the timestamp of the last 
-      successfull login on the users workstation. 
-     Read the FAQ to get a hint about how to configure this.
-   */
-  var $gotoLastSystemLogin = "";
-
   /* Plugin specific values */
   var $base= "";
   var $orig_base= "";
@@ -145,15 +139,6 @@ class user extends plugin
 
     /* Load base attributes */
     plugin::plugin ($config, $dn);
-
-    /*  If gotoLastSystemLogin is available read it from ldap and create a readable
-        date time string, fallback to sambaLogonTime if available.
-     */
-    if(isset($this->attrs['gotoLastSystemLogin'][0]) && preg_match("/^[0-9]*$/",$this->attrs['gotoLastSystemLogin'][0])){
-      $this->gotoLastSystemLogin = date("d.m.Y H:i:s", strtotime($this->attrs['gotoLastSystemLogin'][0]));
-    } else if(isset($this->attrs['sambaLogonTime'][0]) && preg_match("/^[0-9]*$/",$this->attrs['sambaLogonTime'][0])){
-      $this->gotoLastSystemLogin = date("d.m.Y H:i:s", $this->attrs['sambaLogonTime'][0]);
-    }
 
     $this->orig_dn  = $this->dn;
     $this->new_dn   = $dn;
@@ -266,7 +251,6 @@ class user extends plugin
     }
 
     $smarty= get_smarty();
-    $smarty->assign("gotoLastSystemLogin",$this->gotoLastSystemLogin);
 
     /* Fill calendar */
     if ($this->dateOfBirth == "0"){
