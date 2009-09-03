@@ -216,7 +216,7 @@
     </tr>
     <tr>
      <td colspan=2>
-      <div style="height:20px;"></div>
+      <div style="height:10px;"></div>
      </td>
     </tr>
     <tr>
@@ -246,12 +246,26 @@
     </tr>
     {/if}
 
-	{if $gotoLastSystemLogin}
-		<tr>
-			<td>{t}Last logon{/t}</td>
-			<td>{$gotoLastSystemLogin}</td>
-		</tr>		
-	{/if}
+    {if !$multiple_support}
+    <tr>
+     <td colspan=2>
+      <div style="height:10px;"></div>
+     </td>
+    </tr>
+    <tr>
+     <td style='vertical-align:top'><label for="edit_perms">{t}Restrict login to{/t}</label></td>
+     <td>
+{render acl=$gosaLoginRestrictionACL}
+	      <select size="3" multiple style='width:100%' id="restrictions" name="restrictions">
+	       {html_options values=$gosaLoginRestriction output=$gosaLoginRestriction}
+	      </select><br>
+	      <input id="res" name="res" size=22 maxlength=33 value="{t}IP or network{/t}" onFocus='document.getElementById("res").value=""'>
+      	      <input id="add_res" type="submit" name="add_res" value="+">
+      	      <input id="del_res" type="submit" name="del_res" value="-">
+{/render}
+     </td>
+    </tr>
+    {/if}
    </table>
   </td>
  </tr>

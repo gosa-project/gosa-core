@@ -50,6 +50,7 @@ class user extends plugin
   var $o= "";
   var $ou= "";
   var $departmentNumber= "";
+  var $gosaLoginRestriction= array();
   var $employeeNumber= "";
   var $employeeType= "";
   var $roomNumber= "";
@@ -110,7 +111,7 @@ class user extends plugin
       "homePostalAddress", "homePhone", "labeledURI", "ou", "o", "dateOfBirth", "gender","preferredLanguage",
       "departmentNumber", "employeeNumber", "employeeType", "l", "st","jpegPhoto",
       "roomNumber", "telephoneNumber", "mobile", "pager", "cn", "userPKCS12",
-      "postalAddress", "facsimileTelephoneNumber", "userSMIMECertificate");
+      "postalAddress", "facsimileTelephoneNumber", "userSMIMECertificate", "gosaLoginRestriction");
 
   var $objectclasses= array("top", "person", "organizationalPerson", "inetOrgPerson",
       "gosaAccount");
@@ -243,6 +244,29 @@ class user extends plugin
   {
     /* Call parent execute */
     plugin::execute();
+
+    /* Handle add/delete for restriction mode */
+    if (isset($_POST['add_res']) && isset($_POST['res'])) {
+      $val= validate($_POST['res']);
+      if (preg_match('/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/', $val) ||
+          preg_match('/^([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\/([0-9]+)$/', $val) ||
+          preg_match('/^([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\/([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)$/', $val)) {
+        $this->gosaLoginRestriction[]= $val;
+      } else {
+        msg_dialog::display(_("Error"), _("Please add a single IP address or a network/netmask combination!"), ERROR_DIALOG);
+      }
+    }
+    if (isset($_POST['del_res']) && isset($_POST['restrictions'])) {
+      $res= $_POST['restrictions'];
+      if (!is_array($res)){
+        $res= array($res);
+      }
+      foreach ($res as $restriction) {
+        if (in_array($restriction, $this->gosaLoginRestriction)) {
+          $this->gosaLoginRestriction= array_remove_entries(array($restriction), $this->gosaLoginRestriction);
+        }
+      }
+    }
 
     /* Log view */
     if($this->is_account && !$this->view_logged){
@@ -624,6 +648,8 @@ class user extends plugin
       $smarty->assign("$val"."ACL", $this->getacl($val,(!is_object($this->parent) && !session::is_set('edit'))));
     }
 
+    $smarty->assign("gosaLoginRestriction", $this->gosaLoginRestriction);
+    $smarty->assign("gosaLoginRestrictionACL", $this->getacl('gosaLoginRestriction', (!is_object($this->parent) && !session::is_set('edit'))));
     $smarty->assign("pwmode", $pwd_methods);
     $smarty->assign("pwmode_select", $this->pw_storage);
     $smarty->assign("pw_configurable", $is_configurable);
