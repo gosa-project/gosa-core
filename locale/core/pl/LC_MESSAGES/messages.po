@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polski\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-01 08:22+0200\n"
+"POT-Creation-Date: 2009-09-03 13:15+0200\n"
 "PO-Revision-Date: 2007-07-14 21:45+0100\n"
 "Last-Translator: Piotr Rybicki <meritus@innervision.pl>\n"
 "Language-Team: Piotr Rybicki <meritus@innervision.pl>\n"
@@ -34,8 +34,8 @@ msgstr "Filtry"
 #: ihtml/themes/default/msg_dialog.tpl:106 ihtml/themes/default/islocked.tpl:6
 #: ihtml/themes/default/conflict.tpl:6 html/password.php:280 html/index.php:57
 #: html/index.php:63 html/index.php:416 html/index.php:422
-#: include/functions.inc:747 include/functions.inc:2173
-#: include/functions.inc:2177 include/functions.inc:2183
+#: include/functions.inc:759 include/functions.inc:2185
+#: include/functions.inc:2189 include/functions.inc:2195
 #: include/class_tabs.inc:266 include/utils/class_xml.inc:37
 #: plugins/admin/ogroups/remove.tpl:2 plugins/admin/groups/remove.tpl:2
 #: plugins/admin/groups/class_groupGeneric.inc:1091
@@ -44,8 +44,8 @@ msgstr "Filtry"
 #: plugins/admin/departments/remove.tpl:2
 #: plugins/admin/departments/dep_move_confirm.tpl:2
 #: plugins/admin/acl/remove.tpl:2
-#: plugins/personal/posix/class_posixAccount.inc:863
-#: plugins/personal/posix/class_posixAccount.inc:1016
+#: plugins/personal/posix/class_posixAccount.inc:878
+#: plugins/personal/posix/class_posixAccount.inc:1031
 #: setup/class_setupStep_Migrate.inc:261 setup/class_setupStep_Migrate.inc:313
 #: setup/class_setupStep_Migrate.inc:446 setup/class_setupStep_Migrate.inc:523
 #: setup/class_setupStep_Migrate.inc:662 setup/class_setupStep_Migrate.inc:803
@@ -413,13 +413,13 @@ msgstr "Kontynuuj"
 #: html/index.php:227 include/password-methods/class_password-methods.inc:250
 #: include/class_tabs.inc:54 include/class_plugin.inc:661
 #: include/class_plugin.inc:702 include/class_plugin.inc:744
-#: include/class_plugin.inc:1565 include/utils/class_xml.inc:40
+#: include/class_plugin.inc:1599 include/utils/class_xml.inc:40
 #: include/utils/class_msgPool.inc:153 include/utils/class_msgPool.inc:165
 #: include/utils/class_msgPool.inc:183 include/utils/class_msgPool.inc:453
 #: include/utils/class_msgPool.inc:474 include/utils/class_msgPool.inc:493
 #: include/class_log.inc:138 include/class_log.inc:219
-#: include/class_gosaSupportDaemon.inc:1165
-#: include/class_gosaSupportDaemon.inc:1185
+#: include/class_gosaSupportDaemon.inc:1172
+#: include/class_gosaSupportDaemon.inc:1192
 #: include/class_CopyPasteHandler.inc:117
 #: include/class_CopyPasteHandler.inc:126
 #: include/class_CopyPasteHandler.inc:158
@@ -433,12 +433,16 @@ msgstr "Kontynuuj"
 #: plugins/admin/groups/class_groupGeneric.inc:981
 #: plugins/admin/groups/class_groupGeneric.inc:986
 #: plugins/admin/groups/class_groupGeneric.inc:1250
-#: plugins/personal/generic/class_user.inc:414
-#: plugins/personal/generic/class_user.inc:515
-#: plugins/personal/generic/class_user.inc:821
-#: plugins/personal/generic/class_user.inc:1398
+#: plugins/personal/generic/class_user.inc:256
+#: plugins/personal/generic/class_user.inc:422
+#: plugins/personal/generic/class_user.inc:523
+#: plugins/personal/generic/class_user.inc:831
+#: plugins/personal/generic/class_user.inc:1188
+#: plugins/personal/generic/class_user.inc:1195
+#: plugins/personal/generic/class_user.inc:1211
+#: plugins/personal/generic/class_user.inc:1467
 #: plugins/personal/generic/main.inc:115
-#: plugins/personal/posix/class_posixAccount.inc:1413
+#: plugins/personal/posix/class_posixAccount.inc:1428
 #: setup/class_setupStep_Migrate.inc:1197 setup/setup_checks.tpl:30
 #: setup/setup_checks.tpl:91
 #, php-format
@@ -644,9 +648,9 @@ msgstr "Nie można czytać pliku konfiguracji %s/gosa.conf. Kończę."
 #: include/password-methods/class_password-methods-ssha.inc:51
 #: include/password-methods/class_password-methods-sha.inc:48
 #: include/class_SnapshotHandler.inc:45 include/class_SnapshotHandler.inc:58
-#: include/class_SnapshotHandler.inc:76 include/functions.inc:639
-#: include/functions.inc:2536 include/functions.inc:2560
-#: include/functions.inc:2573 include/utils/class_timezone.inc:47
+#: include/class_SnapshotHandler.inc:76 include/functions.inc:651
+#: include/functions.inc:2548 include/functions.inc:2572
+#: include/functions.inc:2585 include/utils/class_timezone.inc:47
 #: include/class_config.inc:124 include/class_config.inc:636
 #: include/class_config.inc:1021 include/class_config.inc:1034
 #: include/class_config.inc:1052 include/class_pluglist.inc:177
@@ -666,7 +670,7 @@ msgstr "Plik konfiguracyjny"
 msgid "Directory '%s' specified as compile directory is not accessible!"
 msgstr "Katalog '%s' podany jako katalog kompilacji jest niedostępny!"
 
-#: html/password.php:159 plugins/personal/generic/class_user.inc:605
+#: html/password.php:159 plugins/personal/generic/class_user.inc:613
 #, fuzzy
 msgid "Password method"
 msgstr "Przechowywanie hasła"
@@ -692,10 +696,10 @@ msgid "The password used as new is to short."
 msgstr "Hasło podane jako nowe jest za krótkie."
 
 #: html/password.php:215 plugins/admin/users/template.tpl:32
-#: plugins/personal/generic/class_user.inc:1241
-#: plugins/personal/generic/class_user.inc:1254
-#: plugins/personal/generic/class_user.inc:1268
-#: plugins/personal/generic/class_user.inc:1270
+#: plugins/personal/generic/class_user.inc:1310
+#: plugins/personal/generic/class_user.inc:1323
+#: plugins/personal/generic/class_user.inc:1337
+#: plugins/personal/generic/class_user.inc:1339
 #: plugins/personal/generic/generic.tpl:82
 #: plugins/personal/generic/paste_generic.tpl:15
 msgid "Login"
@@ -753,14 +757,14 @@ msgstr ""
 #: include/class_SnapshotHandler.inc:124 include/class_acl.inc:1219
 #: include/class_MultiSelectWindow.inc:550 include/functions.inc:365
 #: include/functions.inc:391 include/functions.inc:399
-#: include/functions.inc:428 include/functions.inc:654
-#: include/functions.inc:697 include/functions.inc:739
-#: include/functions.inc:784 include/functions.inc:2515
-#: include/functions.inc:2762 include/class_plugin.inc:1246
-#: include/class_plugin.inc:1295 include/class_plugin.inc:1299
-#: include/class_plugin.inc:1314 include/class_plugin.inc:1351
-#: include/class_plugin.inc:1409 include/class_plugin.inc:1475
-#: include/class_plugin.inc:1490 include/class_ldap.inc:709
+#: include/functions.inc:434 include/functions.inc:666
+#: include/functions.inc:709 include/functions.inc:751
+#: include/functions.inc:796 include/functions.inc:2527
+#: include/functions.inc:2774 include/class_plugin.inc:1280
+#: include/class_plugin.inc:1329 include/class_plugin.inc:1333
+#: include/class_plugin.inc:1348 include/class_plugin.inc:1385
+#: include/class_plugin.inc:1443 include/class_plugin.inc:1509
+#: include/class_plugin.inc:1524 include/class_ldap.inc:709
 #: include/class_ldap.inc:1175 include/class_config.inc:266
 #: plugins/admin/ogroups/class_ogroup.inc:1033
 #: plugins/admin/ogroups/class_ogroup.inc:1047
@@ -773,10 +777,10 @@ msgstr ""
 #: plugins/admin/acl/class_aclRole.inc:633
 #: plugins/admin/acl/class_aclRole.inc:673
 #: plugins/admin/acl/class_aclRole.inc:687
-#: plugins/personal/generic/class_user.inc:724
-#: plugins/personal/generic/class_user.inc:1100
-#: plugins/personal/posix/class_posixAccount.inc:704
-#: plugins/personal/posix/class_posixAccount.inc:1033
+#: plugins/personal/generic/class_user.inc:734
+#: plugins/personal/generic/class_user.inc:1110
+#: plugins/personal/posix/class_posixAccount.inc:719
+#: plugins/personal/posix/class_posixAccount.inc:1048
 #: setup/class_setupStep_Migrate.inc:1208
 #: setup/class_setupStep_Migrate.inc:1236
 #: setup/class_setupStep_Migrate.inc:1285
@@ -992,7 +996,7 @@ msgstr "Użyj ACL zdefiniowanego w tej roli"
 
 #: include/class_acl.inc:231 plugins/admin/users/class_userManagement.inc:26
 #: plugins/admin/users/user-list.xml:15
-#: plugins/personal/generic/class_user.inc:1565
+#: plugins/personal/generic/class_user.inc:1634
 #: setup/class_setupStep_Migrate.inc:1039
 msgid "Users"
 msgstr "Użytkownicy"
@@ -1107,10 +1111,10 @@ msgstr "Utwórz obiekty"
 
 #: include/class_acl.inc:954 include/class_session.inc:76
 #: include/class_session.inc:101 include/class_session.inc:127
-#: include/functions.inc:468 include/functions.inc:629
-#: include/functions.inc:726 include/functions.inc:1109
-#: include/functions.inc:1931 include/functions.inc:1965
-#: include/functions.inc:1985 include/class_ldap.inc:649
+#: include/functions.inc:474 include/functions.inc:641
+#: include/functions.inc:738 include/functions.inc:1121
+#: include/functions.inc:1943 include/functions.inc:1977
+#: include/functions.inc:1997 include/class_ldap.inc:649
 #: include/class_ldap.inc:697 include/class_log.inc:88
 #: include/class_CopyPasteHandler.inc:159
 #: include/class_CopyPasteHandler.inc:269
@@ -1256,7 +1260,7 @@ msgstr "Użytkownik"
 #: plugins/admin/departments/organization.tpl:39
 #: plugins/admin/acl/class_divListACL.inc:102
 #: plugins/admin/acl/class_aclRole.inc:751 plugins/admin/acl/acl_role.tpl:27
-#: plugins/personal/generic/class_user.inc:1579
+#: plugins/personal/generic/class_user.inc:1648
 #: plugins/personal/generic/generic.tpl:170
 #: plugins/personal/generic/multiple_generic.tpl:47 setup/setup_ldap.tpl:55
 msgid "Base"
@@ -1286,52 +1290,52 @@ msgstr "Wybierz"
 msgid "created by"
 msgstr "Utwórz"
 
-#: include/class_listing.inc:1237 include/class_listing.inc:1287
-#: include/class_plugin.inc:2037
+#: include/class_listing.inc:1242 include/class_listing.inc:1292
+#: include/class_plugin.inc:2071
 #, fuzzy
 msgid "Copy"
 msgstr "kopiuj"
 
-#: include/class_listing.inc:1243 include/class_listing.inc:1277
-#: include/class_plugin.inc:2041
+#: include/class_listing.inc:1248 include/class_listing.inc:1282
+#: include/class_plugin.inc:2075
 #, fuzzy
 msgid "Cut"
 msgstr "wytnij"
 
-#: include/class_listing.inc:1251 include/class_listing.inc:1253
-#: include/class_plugin.inc:2048 include/class_plugin.inc:2051
+#: include/class_listing.inc:1256 include/class_listing.inc:1258
+#: include/class_plugin.inc:2082 include/class_plugin.inc:2085
 #: include/class_CopyPasteHandler.inc:506
 msgid "Paste"
 msgstr "Wklej"
 
-#: include/class_listing.inc:1277 include/class_plugin.inc:1995
+#: include/class_listing.inc:1282 include/class_plugin.inc:2029
 msgid "Cut this entry"
 msgstr "Wytnij ten obiekt"
 
-#: include/class_listing.inc:1287 include/class_plugin.inc:2003
+#: include/class_listing.inc:1292 include/class_plugin.inc:2037
 msgid "Copy this entry"
 msgstr "Kopiuj ten obiekt"
 
-#: include/class_listing.inc:1319 include/class_listing.inc:1321
+#: include/class_listing.inc:1324 include/class_listing.inc:1326
 #, fuzzy
 msgid "Restore snapshots"
 msgstr "Odtwórz snapshot"
 
-#: include/class_listing.inc:1335
+#: include/class_listing.inc:1340
 #, fuzzy
 msgid "Export list"
 msgstr "Export"
 
-#: include/class_listing.inc:1370 include/class_listing.inc:1371
-#: include/class_SnapShotDialog.inc:143 include/class_plugin.inc:1969
+#: include/class_listing.inc:1375 include/class_listing.inc:1376
+#: include/class_SnapShotDialog.inc:143 include/class_plugin.inc:2003
 msgid "Restore snapshot"
 msgstr "Odtwórz snapshot"
 
-#: include/class_listing.inc:1380 include/class_plugin.inc:1976
+#: include/class_listing.inc:1385 include/class_plugin.inc:2010
 msgid "Create snapshot"
 msgstr "Utwórz spanshot"
 
-#: include/class_listing.inc:1381 include/class_plugin.inc:1977
+#: include/class_listing.inc:1386 include/class_plugin.inc:2011
 msgid "Create a new snapshot from this object"
 msgstr "Utwórz nowy snapshot z tego obiektu"
 
@@ -1356,18 +1360,18 @@ msgstr "BŁĄD: Nie można połączyć się z serwerem LDAP. Odpowiedź serwera 
 msgid "Username / UID is not unique inside the LDAP tree!"
 msgstr "Użytkownik /UID nie są unikalne. Proszę sprawdzić bazę LDAP."
 
-#: include/functions.inc:468
+#: include/functions.inc:474
 #, fuzzy
 msgid ""
 "Username / UID is not unique inside the LDAP tree. Please contact your "
 "Administrator."
 msgstr "Użytkownik /UID nie są unikalne. Proszę sprawdzić bazę LDAP."
 
-#: include/functions.inc:629 include/functions.inc:726
+#: include/functions.inc:641 include/functions.inc:738
 msgid "Error while adding a lock. Contact the developers!"
 msgstr ""
 
-#: include/functions.inc:639
+#: include/functions.inc:651
 #, fuzzy, php-format
 msgid ""
 "Cannot create locking information in LDAP tree. Please contact your "
@@ -1376,12 +1380,12 @@ msgstr ""
 "Nie można pobrać informacji o blokadach w bazie LDAP. Proszę sprawdzić wpis "
 "'config' w gosa.conf!"
 
-#: include/functions.inc:639
+#: include/functions.inc:651
 #, fuzzy, php-format
 msgid "LDAP server returned: %s"
 msgstr "Serwer LDAP"
 
-#: include/functions.inc:747
+#: include/functions.inc:759
 #, fuzzy
 msgid ""
 "Found multiple locks for object to be locked. This should not happen - "
@@ -1390,12 +1394,12 @@ msgstr ""
 "Znaleziono wiele blokad dla obiektu do zablokowania. Taka sytuacja nie "
 "powinna się wydażyć - czyszczę wiele odwołań."
 
-#: include/functions.inc:1037
+#: include/functions.inc:1049
 #, php-format
 msgid "The size limit of %d entries is exceed!"
 msgstr "Limit wielkości %d elementów został przekroczony!"
 
-#: include/functions.inc:1039
+#: include/functions.inc:1051
 #, php-format
 msgid ""
 "Set the new size limit to %s and show me this message if the limit still "
@@ -1404,181 +1408,181 @@ msgstr ""
 "Ustaw nowy limit rozmiaru na %s i pokaż ten komunikat jeśli limit wciąż jest "
 "przekroczony"
 
-#: include/functions.inc:1051 plugins/personal/generic/generic.tpl:232
+#: include/functions.inc:1063 plugins/personal/generic/generic.tpl:232
 msgid "Configure"
 msgstr "Konfiguruj"
 
-#: include/functions.inc:1056
+#: include/functions.inc:1068
 msgid "incomplete"
 msgstr "niepełne"
 
-#: include/functions.inc:1349
+#: include/functions.inc:1361
 msgid "Continue anyway"
 msgstr "Kontynuuj mimo wszystko"
 
-#: include/functions.inc:1351
+#: include/functions.inc:1363
 msgid "Edit anyway"
 msgstr "Edytuj mimo wszystko"
 
-#: include/functions.inc:1353
+#: include/functions.inc:1365
 #, fuzzy, php-format
 msgid "You're going to edit the LDAP entry/entries %s"
 msgstr "Zamierzasz skopiować wpis '%s'."
 
-#: include/functions.inc:1537
+#: include/functions.inc:1549
 msgid "Entries per page"
 msgstr "Wpisów na stronie"
 
-#: include/functions.inc:1565 include/class_filter.inc:309
+#: include/functions.inc:1577 include/class_filter.inc:302
 msgid "Apply filter"
 msgstr "Zastosuj filtr"
 
-#: include/functions.inc:1808 include/class_filter.inc:275
+#: include/functions.inc:1820 include/class_filter.inc:268
 msgid "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 msgstr "*ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-#: include/functions.inc:1852
+#: include/functions.inc:1864
 #, php-format
 msgid "GOsa development snapshot (Rev %s)"
 msgstr "Wersja deweloperska GOsa (Rev %s)"
 
-#: include/functions.inc:1931
+#: include/functions.inc:1943
 #, php-format
 msgid "File '%s' could not be deleted."
 msgstr ""
 
-#: include/functions.inc:1965 include/functions.inc:1985
+#: include/functions.inc:1977 include/functions.inc:1997
 #, fuzzy
 msgid "Cannot write to revision file!"
 msgstr "Nie można stworzyć pliku '%s'."
 
-#: include/functions.inc:2173 include/functions.inc:2177
-#: include/functions.inc:2183
+#: include/functions.inc:2185 include/functions.inc:2189
+#: include/functions.inc:2195
 msgid "'baseIdHook' is not available. Using default base!"
 msgstr ""
 
-#: include/functions.inc:2205
+#: include/functions.inc:2217
 #, fuzzy
 msgid "LDAP warning"
 msgstr "Menedżer LDAP"
 
-#: include/functions.inc:2205
+#: include/functions.inc:2217
 #, fuzzy
 msgid "Cannot get schema information from server. No schema check possible!"
 msgstr ""
 "Nie można pobrać informacji o schematach z serwera. Sprawdzenie schematów "
 "niemożliwe!"
 
-#: include/functions.inc:2231
+#: include/functions.inc:2243
 msgid "Used to store account specific informations."
 msgstr ""
 
-#: include/functions.inc:2238
+#: include/functions.inc:2250
 msgid ""
 "Used to lock currently edited entries to avoid multiple changes at the same "
 "time."
 msgstr ""
 
-#: include/functions.inc:2281
+#: include/functions.inc:2293
 #, fuzzy, php-format
 msgid "Missing required object class '%s'!"
 msgstr "Wyświetl szablony FAI"
 
-#: include/functions.inc:2283
+#: include/functions.inc:2295
 #, php-format
 msgid "Missing optional object class '%s'!"
 msgstr ""
 
-#: include/functions.inc:2289
+#: include/functions.inc:2301
 #, php-format
 msgid "Version mismatch for required object class '%s' (!=%s)!"
 msgstr ""
 
-#: include/functions.inc:2291
+#: include/functions.inc:2303
 #, php-format
 msgid "Version mismatch for optional object class '%s' (!=%s)!"
 msgstr ""
 
-#: include/functions.inc:2295
+#: include/functions.inc:2307
 #, fuzzy, php-format
 msgid "Class(es) available"
 msgstr "Plik jest dostępny"
 
-#: include/functions.inc:2317
+#: include/functions.inc:2329
 msgid ""
 "You have enabled the rfc2307bis option on the 'ldap setup' step, but your "
 "schema    configuration do not support this option."
 msgstr ""
 
-#: include/functions.inc:2318
+#: include/functions.inc:2330
 msgid ""
 "In order to use rfc2307bis conform groups the objectClass 'posixGroup' must "
 "be      AUXILIARY"
 msgstr ""
 
-#: include/functions.inc:2322
+#: include/functions.inc:2334
 msgid ""
 "Your schema is configured to support the rfc2307bis group, but you have "
 "disabled this option on the 'ldap setup' step."
 msgstr ""
 
-#: include/functions.inc:2323
+#: include/functions.inc:2335
 msgid "The objectClass 'posixGroup' must be STRUCTURAL"
 msgstr ""
 
-#: include/functions.inc:2347
+#: include/functions.inc:2359
 msgid "German"
 msgstr "Niemiecki"
 
-#: include/functions.inc:2348
+#: include/functions.inc:2360
 msgid "French"
 msgstr "Francuski"
 
-#: include/functions.inc:2349
+#: include/functions.inc:2361
 msgid "Italian"
 msgstr "Włoski"
 
-#: include/functions.inc:2350
+#: include/functions.inc:2362
 msgid "Spanish"
 msgstr "Hiszpański"
 
-#: include/functions.inc:2351
+#: include/functions.inc:2363
 msgid "English"
 msgstr "Angielski"
 
-#: include/functions.inc:2352
+#: include/functions.inc:2364
 msgid "Dutch"
 msgstr "Holenderski"
 
-#: include/functions.inc:2353
+#: include/functions.inc:2365
 msgid "Polish"
 msgstr "Polski"
 
-#: include/functions.inc:2355
+#: include/functions.inc:2367
 #, fuzzy
 msgid "Chinese"
 msgstr "Chipset"
 
-#: include/functions.inc:2356
+#: include/functions.inc:2368
 #, fuzzy
 msgid "Vietnamese"
 msgstr "Imię"
 
-#: include/functions.inc:2357
+#: include/functions.inc:2369
 msgid "Russian"
 msgstr "Rosyjski"
 
-#: include/functions.inc:2535
+#: include/functions.inc:2547
 #, php-format
 msgid ""
 "Command '%s', specified as POSTMODIFY for plugin '%s' doesn't seem to exist."
 msgstr "Polecenie '%s', podane jako POSTMODIFY dla dodatku '%s' nie istnieje."
 
-#: include/functions.inc:2560
+#: include/functions.inc:2572
 msgid "Cannot generate samba hash!"
 msgstr ""
 
-#: include/functions.inc:2573
+#: include/functions.inc:2585
 #, php-format
 msgid ""
 "Cannot generate samba hash: running '%s' failed, check the 'sambaHashHook'!"
@@ -1743,7 +1747,7 @@ msgstr "Typ"
 msgid "Arguments"
 msgstr "Argumenty"
 
-#: include/class_filter.inc:316 include/utils/class_msgPool.inc:23
+#: include/class_filter.inc:309 include/utils/class_msgPool.inc:23
 #: plugins/admin/ogroups/ogroup_objects.tpl:33
 #: plugins/personal/posix/posix_groups.tpl:68
 #, fuzzy
@@ -1756,8 +1760,8 @@ msgid ""
 "others get lost if you save this entry!"
 msgstr ""
 
-#: include/class_plugin.inc:1513 include/class_plugin.inc:1525
-#: include/class_plugin.inc:1540 include/class_plugin.inc:1553
+#: include/class_plugin.inc:1547 include/class_plugin.inc:1559
+#: include/class_plugin.inc:1574 include/class_plugin.inc:1587
 #: plugins/admin/ogroups/class_ogroupManagement.inc:237
 #: plugins/admin/groups/class_groupManagement.inc:356
 #: plugins/admin/users/class_userManagement.inc:353
@@ -1767,42 +1771,42 @@ msgstr ""
 msgid "Permission"
 msgstr "Uprawnienia"
 
-#: include/class_plugin.inc:1513
+#: include/class_plugin.inc:1547
 #, fuzzy, php-format
 msgid "You are not allowed to create a snapshot for %s."
 msgstr "Brak uprawnień do zmiany przekazywania poczty"
 
-#: include/class_plugin.inc:1525 include/class_plugin.inc:1540
-#: include/class_plugin.inc:1553
+#: include/class_plugin.inc:1559 include/class_plugin.inc:1574
+#: include/class_plugin.inc:1587
 #, fuzzy, php-format
 msgid "You are not allowed to restore a snapshot for %s."
 msgstr "Brak uprawnień do zmiany przekazywania poczty"
 
-#: include/class_plugin.inc:1765
+#: include/class_plugin.inc:1799
 msgid "Changing ACL dn"
 msgstr ""
 
-#: include/class_plugin.inc:1765
+#: include/class_plugin.inc:1799
 #, fuzzy
 msgid "from"
 msgstr "losowy"
 
-#: include/class_plugin.inc:1766 setup/class_setupStep_Migrate.inc:1246
+#: include/class_plugin.inc:1800 setup/class_setupStep_Migrate.inc:1246
 #: setup/class_setupStep_Migrate.inc:1296
 #: setup/class_setupStep_Migrate.inc:1344
 #, fuzzy
 msgid "to"
 msgstr "Zatrzymaj"
 
-#: include/class_plugin.inc:1951 include/class_plugin.inc:1953
+#: include/class_plugin.inc:1985 include/class_plugin.inc:1987
 msgid "Restore"
 msgstr "Odtwórz"
 
-#: include/class_plugin.inc:1995
+#: include/class_plugin.inc:2029
 msgid "cut"
 msgstr "wytnij"
 
-#: include/class_plugin.inc:2003
+#: include/class_plugin.inc:2037
 msgid "copy"
 msgstr "kopiuj"
 
@@ -2507,12 +2511,12 @@ msgstr ""
 msgid "Cannot not parse XML!"
 msgstr "Zbyt wielu użytkowników, nie można nadać wolnego ID"
 
-#: include/class_gosaSupportDaemon.inc:1165
+#: include/class_gosaSupportDaemon.inc:1172
 #, fuzzy, php-format
 msgid "Cannot send abort event for entry %s!"
 msgstr "Nie można stworzyć pliku '%s'."
 
-#: include/class_gosaSupportDaemon.inc:1185
+#: include/class_gosaSupportDaemon.inc:1192
 #, fuzzy, php-format
 msgid "Cannot remove entry %s!"
 msgstr "Nieznany wpis  '%s'!"
@@ -2609,7 +2613,7 @@ msgstr ""
 #: plugins/admin/users/class_userManagement.inc:1066
 #: plugins/admin/departments/class_departmentGeneric.inc:609
 #: plugins/personal/generic/class_user.inc:37
-#: plugins/personal/generic/class_user.inc:1559
+#: plugins/personal/generic/class_user.inc:1628
 #: plugins/personal/posix/generic.tpl:4 setup/setup_feedback.tpl:55
 msgid "Generic"
 msgstr "Ogólne"
@@ -2635,7 +2639,7 @@ msgstr "Poczta"
 #: plugins/admin/users/class_divListUsers.inc:88
 #: plugins/admin/users/class_divListUsers.inc:211
 #: plugins/admin/users/class_userManagement.inc:1078
-#: plugins/personal/posix/class_posixAccount.inc:303
+#: plugins/personal/posix/class_posixAccount.inc:315
 msgid "Samba"
 msgstr "Samba"
 
@@ -2665,8 +2669,8 @@ msgstr "Grupa"
 #: plugins/admin/groups/class_divListGroup.inc:79
 #: plugins/admin/users/class_divListUsers.inc:80
 #: plugins/admin/departments/class_departmentManagement.inc:604
-#: plugins/personal/generic/class_user.inc:1584
-#: plugins/personal/generic/generic.tpl:287
+#: plugins/personal/generic/class_user.inc:1653
+#: plugins/personal/generic/generic.tpl:301
 #: plugins/personal/generic/multiple_generic.tpl:159
 msgid "Department"
 msgstr "Departament"
@@ -2679,10 +2683,10 @@ msgstr "Departament"
 #: plugins/admin/departments/class_departmentGeneric.inc:328
 #: plugins/admin/departments/generic.tpl:88
 #: plugins/admin/departments/organization.tpl:88
-#: plugins/personal/generic/class_user.inc:1279
-#: plugins/personal/generic/class_user.inc:1687
-#: plugins/personal/generic/generic.tpl:338
-#: plugins/personal/generic/generic.tpl:519
+#: plugins/personal/generic/class_user.inc:1348
+#: plugins/personal/generic/class_user.inc:1756
+#: plugins/personal/generic/generic.tpl:352
+#: plugins/personal/generic/generic.tpl:533
 #: plugins/personal/generic/multiple_generic.tpl:217
 #: plugins/personal/generic/multiple_generic.tpl:428
 msgid "Phone"
@@ -3108,20 +3112,20 @@ msgstr "Stacja Windows"
 
 #: plugins/admin/ogroups/class_ogroup.inc:570
 #: plugins/admin/groups/class_groupGeneric.inc:521
-#: plugins/personal/posix/class_posixAccount.inc:644
+#: plugins/personal/posix/class_posixAccount.inc:659
 #: setup/setup_config2.tpl:142
 msgid "disabled"
 msgstr "wyłączone"
 
 #: plugins/admin/ogroups/class_ogroup.inc:570
 #: plugins/admin/groups/class_groupGeneric.inc:521
-#: plugins/personal/posix/class_posixAccount.inc:644
+#: plugins/personal/posix/class_posixAccount.inc:659
 msgid "full access"
 msgstr "pełen dostęp"
 
 #: plugins/admin/ogroups/class_ogroup.inc:571
 #: plugins/admin/groups/class_groupGeneric.inc:522
-#: plugins/personal/posix/class_posixAccount.inc:645
+#: plugins/personal/posix/class_posixAccount.inc:660
 msgid "allow access to these hosts"
 msgstr "zezwól na dostęp do tych hostów"
 
@@ -3179,10 +3183,10 @@ msgstr ""
 #: plugins/admin/acl/class_aclRole.inc:750
 #: plugins/admin/acl/class_aclRole.inc:762 plugins/admin/acl/paste_role.tpl:4
 #: plugins/admin/acl/acl_role.tpl:7
-#: plugins/personal/generic/class_user.inc:1246
-#: plugins/personal/generic/class_user.inc:1259
-#: plugins/personal/generic/class_user.inc:1296
-#: plugins/personal/generic/class_user.inc:1702 setup/setup_migrate.tpl:283
+#: plugins/personal/generic/class_user.inc:1315
+#: plugins/personal/generic/class_user.inc:1328
+#: plugins/personal/generic/class_user.inc:1365
+#: plugins/personal/generic/class_user.inc:1771 setup/setup_migrate.tpl:283
 #: setup/setup_feedback.tpl:31
 msgid "Name"
 msgstr "Imię"
@@ -3238,13 +3242,13 @@ msgstr "Wybierz bazę"
 
 #: plugins/admin/ogroups/generic.tpl:41
 #: plugins/admin/groups/class_groupGeneric.inc:1315
-#: plugins/personal/posix/generic.tpl:133
+#: plugins/personal/posix/generic.tpl:139
 msgid "System trust"
 msgstr "Zaufanie systemowe"
 
 #: plugins/admin/ogroups/generic.tpl:42 plugins/admin/groups/generic.tpl:169
-#: plugins/admin/groups/generic.tpl:203 plugins/personal/posix/generic.tpl:135
-#: plugins/personal/posix/generic.tpl:163
+#: plugins/admin/groups/generic.tpl:203 plugins/personal/posix/generic.tpl:141
+#: plugins/personal/posix/generic.tpl:169
 msgid "Trust mode"
 msgstr "Tryb zaufania"
 
@@ -3279,7 +3283,7 @@ msgstr "Podsumowanie FAI"
 #: plugins/admin/groups/class_divListGroup.inc:198
 #: plugins/admin/users/class_divListUsers.inc:203
 #: plugins/admin/users/class_userManagement.inc:1086
-#: plugins/personal/posix/class_posixAccount.inc:303
+#: plugins/personal/posix/class_posixAccount.inc:315
 msgid "Environment"
 msgstr "Środowisko"
 
@@ -3566,15 +3570,15 @@ msgstr ""
 #: plugins/admin/groups/class_groupGeneric.inc:1192
 #: plugins/admin/groups/class_groupGeneric.inc:1195
 #: plugins/admin/groups/class_groupGeneric.inc:1311
-#: plugins/personal/posix/class_posixAccount.inc:1115
-#: plugins/personal/posix/class_posixAccount.inc:1118
-#: plugins/personal/posix/generic.tpl:68
+#: plugins/personal/posix/class_posixAccount.inc:1130
+#: plugins/personal/posix/class_posixAccount.inc:1133
+#: plugins/personal/posix/generic.tpl:74
 #: plugins/personal/posix/paste_generic.tpl:45
 msgid "GID"
 msgstr "GID"
 
 #: plugins/admin/groups/class_groupGeneric.inc:1250
-#: plugins/personal/posix/class_posixAccount.inc:1413
+#: plugins/personal/posix/class_posixAccount.inc:1428
 #, fuzzy
 msgid "Cannot allocate a free ID!"
 msgstr "Zbyt wielu użytkowników, nie można nadać wolnego ID"
@@ -3635,11 +3639,6 @@ msgstr ""
 #: plugins/admin/users/main.inc:51 plugins/admin/users/main.inc:57
 msgid "User administration"
 msgstr "Administracja użytkownikami"
-
-#: plugins/admin/users/user-filter.xml:102
-#, fuzzy
-msgid "All"
-msgstr "ACL"
 
 #: plugins/admin/users/class_divListUsers.inc:55
 #: plugins/admin/users/class_divListUsers.inc:56
@@ -3730,10 +3729,10 @@ msgstr "Edytuj właściwości Telefonu"
 #: plugins/admin/departments/generic.tpl:96
 #: plugins/admin/departments/class_organizationGeneric.inc:127
 #: plugins/admin/departments/organization.tpl:96
-#: plugins/personal/generic/class_user.inc:1282
-#: plugins/personal/generic/class_user.inc:1690
-#: plugins/personal/generic/generic.tpl:363
-#: plugins/personal/generic/generic.tpl:531
+#: plugins/personal/generic/class_user.inc:1351
+#: plugins/personal/generic/class_user.inc:1759
+#: plugins/personal/generic/generic.tpl:377
+#: plugins/personal/generic/generic.tpl:545
 #: plugins/personal/generic/multiple_generic.tpl:247
 #: plugins/personal/generic/multiple_generic.tpl:438
 msgid "Fax"
@@ -3772,9 +3771,9 @@ msgid "inactive"
 msgstr "Aktywne"
 
 #: plugins/admin/users/class_divListUsers.inc:250
-#: plugins/personal/posix/class_posixAccount.inc:162
-#: plugins/personal/posix/class_posixAccount.inc:164
-#: plugins/personal/posix/class_posixAccount.inc:166
+#: plugins/personal/posix/class_posixAccount.inc:173
+#: plugins/personal/posix/class_posixAccount.inc:175
+#: plugins/personal/posix/class_posixAccount.inc:177
 msgid "active"
 msgstr "Aktywne"
 
@@ -3896,10 +3895,10 @@ msgstr ""
 
 #: plugins/admin/users/class_userManagement.inc:779
 #: plugins/admin/users/class_userManagement.inc:853
-#: plugins/personal/generic/class_user.inc:1251
-#: plugins/personal/generic/class_user.inc:1293
-#: plugins/personal/generic/class_user.inc:1571
-#: plugins/personal/generic/class_user.inc:1699
+#: plugins/personal/generic/class_user.inc:1320
+#: plugins/personal/generic/class_user.inc:1362
+#: plugins/personal/generic/class_user.inc:1640
+#: plugins/personal/generic/class_user.inc:1768
 msgid "Given name"
 msgstr "Imię"
 
@@ -3914,10 +3913,10 @@ msgid "Lock account"
 msgstr "Moje konto "
 
 #: plugins/admin/users/class_userManagement.inc:1070
-#: plugins/personal/posix/class_posixAccount.inc:283
-#: plugins/personal/posix/class_posixAccount.inc:303
-#: plugins/personal/posix/class_posixAccount.inc:305
-#: plugins/personal/posix/class_posixAccount.inc:308
+#: plugins/personal/posix/class_posixAccount.inc:295
+#: plugins/personal/posix/class_posixAccount.inc:315
+#: plugins/personal/posix/class_posixAccount.inc:317
+#: plugins/personal/posix/class_posixAccount.inc:320
 msgid "POSIX"
 msgstr ""
 
@@ -4054,8 +4053,8 @@ msgstr "Kategoria"
 #: plugins/admin/departments/generic.tpl:65
 #: plugins/admin/departments/class_organizationGeneric.inc:123
 #: plugins/admin/departments/organization.tpl:65
-#: plugins/personal/generic/class_user.inc:1595
-#: plugins/personal/generic/generic.tpl:389
+#: plugins/personal/generic/class_user.inc:1664
+#: plugins/personal/generic/generic.tpl:403
 #: plugins/personal/generic/multiple_generic.tpl:275
 msgid "State"
 msgstr "Stan"
@@ -4067,8 +4066,8 @@ msgstr "Stan"
 #: plugins/admin/departments/class_organizationGeneric.inc:124
 #: plugins/admin/departments/organization.tpl:61
 #: plugins/admin/departments/organization.tpl:73
-#: plugins/personal/generic/class_user.inc:1596
-#: plugins/personal/generic/generic.tpl:381
+#: plugins/personal/generic/class_user.inc:1665
+#: plugins/personal/generic/generic.tpl:395
 #: plugins/personal/generic/multiple_generic.tpl:265
 msgid "Location"
 msgstr "Lokalizacja"
@@ -4077,7 +4076,7 @@ msgstr "Lokalizacja"
 #: plugins/admin/departments/generic.tpl:81
 #: plugins/admin/departments/organization.tpl:81
 #: plugins/personal/generic/generic.tpl:194
-#: plugins/personal/generic/generic.tpl:397
+#: plugins/personal/generic/generic.tpl:411
 #: plugins/personal/generic/multiple_generic.tpl:67
 #: plugins/personal/generic/multiple_generic.tpl:285
 msgid "Address"
@@ -4240,8 +4239,8 @@ msgstr "Lokalizacja"
 #: plugins/admin/departments/class_departmentManagement.inc:592
 #: plugins/admin/departments/class_organizationGeneric.inc:109
 #: plugins/admin/departments/class_organizationGeneric.inc:110
-#: plugins/personal/generic/class_user.inc:1583
-#: plugins/personal/generic/generic.tpl:279
+#: plugins/personal/generic/class_user.inc:1652
+#: plugins/personal/generic/generic.tpl:293
 #: plugins/personal/generic/multiple_generic.tpl:149
 #: setup/setup_feedback.tpl:23
 msgid "Organization"
@@ -4253,7 +4252,7 @@ msgid "Organization name"
 msgstr "Organizacja"
 
 #: plugins/admin/departments/class_organizationGeneric.inc:125
-#: plugins/personal/generic/class_user.inc:1597
+#: plugins/personal/generic/class_user.inc:1666
 msgid "Postal address"
 msgstr "Adres pocztowy"
 
@@ -4349,8 +4348,8 @@ msgstr "Wyświetl ACL pasujące"
 #: plugins/admin/acl/class_divListACL.inc:114
 #: plugins/admin/acl/class_divListACL.inc:152
 #: plugins/admin/acl/class_aclRole.inc:742
-#: plugins/personal/generic/class_user.inc:1555
-#: plugins/personal/generic/generic.tpl:448
+#: plugins/personal/generic/class_user.inc:1624
+#: plugins/personal/generic/generic.tpl:462
 #: plugins/personal/generic/multiple_generic.tpl:345
 msgid "Role"
 msgstr "Pełniona funkcja"
@@ -4449,249 +4448,265 @@ msgstr ""
 msgid "Edit organizational user settings"
 msgstr "Ustawienia Aplikacji"
 
-#: plugins/personal/generic/class_user.inc:316
+#: plugins/personal/generic/class_user.inc:256
+msgid "Please add a single IP address or a network/netmask combination!"
+msgstr ""
+
+#: plugins/personal/generic/class_user.inc:324
 msgid "female"
 msgstr "kobieta"
 
-#: plugins/personal/generic/class_user.inc:316
+#: plugins/personal/generic/class_user.inc:324
 msgid "male"
 msgstr "mężczyzna"
 
-#: plugins/personal/generic/class_user.inc:414
+#: plugins/personal/generic/class_user.inc:422
 msgid "Cannot upload file!"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:515
+#: plugins/personal/generic/class_user.inc:523
 #, fuzzy
 msgid "Serial number"
 msgstr "Numer pagera"
 
-#: plugins/personal/generic/class_user.inc:560
+#: plugins/personal/generic/class_user.inc:568
 msgid ""
 "(Some types of certificates are currently not supported and may be displayed "
 "as 'invalid'.)"
 msgstr ""
 
-#: plugins/personal/generic/class_user.inc:570
+#: plugins/personal/generic/class_user.inc:578
 #, php-format
 msgid "Certificate is valid from %s to %s and is currently %s."
 msgstr "Certyfikat jest ważny od %s do %s i jest obecnie %s."
 
-#: plugins/personal/generic/class_user.inc:573
+#: plugins/personal/generic/class_user.inc:581
 msgid "valid"
 msgstr "prawidłowy"
 
-#: plugins/personal/generic/class_user.inc:574
+#: plugins/personal/generic/class_user.inc:582
 msgid "invalid"
 msgstr "nieprawidłowy"
 
-#: plugins/personal/generic/class_user.inc:579
+#: plugins/personal/generic/class_user.inc:587
 msgid "No certificate installed"
 msgstr "Brak zainstalowanych certyfikatów"
 
-#: plugins/personal/generic/class_user.inc:605
+#: plugins/personal/generic/class_user.inc:613
 #, fuzzy
 msgid "The selected password method is no longer available."
 msgstr "Ta aplikacja nie jest już dostępna."
 
-#: plugins/personal/generic/class_user.inc:1212
+#: plugins/personal/generic/class_user.inc:1188
+msgid "Cannot build RDN: no + allowed to build sub RDN!"
+msgstr ""
+
+#: plugins/personal/generic/class_user.inc:1195
+msgid "Cannot build RDN: attribute is not defined!"
+msgstr ""
+
+#: plugins/personal/generic/class_user.inc:1211
+msgid "Cannot build RDN: invalid attribute parameters!"
+msgstr ""
+
+#: plugins/personal/generic/class_user.inc:1281
 #, fuzzy
 msgid "The selected password method requires initial configuration!"
 msgstr "Ta aplikacja nie jest już dostępna."
 
-#: plugins/personal/generic/class_user.inc:1274
-#: plugins/personal/generic/class_user.inc:1601
-#: plugins/personal/generic/class_user.inc:1684
+#: plugins/personal/generic/class_user.inc:1343
+#: plugins/personal/generic/class_user.inc:1670
+#: plugins/personal/generic/class_user.inc:1753
 #: plugins/personal/generic/generic.tpl:210
 #: plugins/personal/generic/multiple_generic.tpl:88
 msgid "Homepage"
 msgstr "Strona domowa"
 
-#: plugins/personal/generic/class_user.inc:1285
-#: plugins/personal/generic/class_user.inc:1693
-#: plugins/personal/generic/generic.tpl:347
+#: plugins/personal/generic/class_user.inc:1354
+#: plugins/personal/generic/class_user.inc:1762
+#: plugins/personal/generic/generic.tpl:361
 #: plugins/personal/generic/multiple_generic.tpl:227
 msgid "Mobile"
 msgstr "Komórka"
 
-#: plugins/personal/generic/class_user.inc:1288
-#: plugins/personal/generic/class_user.inc:1696
-#: plugins/personal/generic/generic.tpl:355
+#: plugins/personal/generic/class_user.inc:1357
+#: plugins/personal/generic/class_user.inc:1765
+#: plugins/personal/generic/generic.tpl:369
 #: plugins/personal/generic/multiple_generic.tpl:237
 msgid "Pager"
 msgstr "Pager"
 
-#: plugins/personal/generic/class_user.inc:1398
+#: plugins/personal/generic/class_user.inc:1467
 #, fuzzy
 msgid "Cannot open certificate!"
 msgstr "Nie można otworzyć wybranego certyfikatu!"
 
-#: plugins/personal/generic/class_user.inc:1544
-#: plugins/personal/generic/generic.tpl:471
+#: plugins/personal/generic/class_user.inc:1613
+#: plugins/personal/generic/generic.tpl:485
 #: plugins/personal/generic/multiple_generic.tpl:371
 msgid "Unit"
 msgstr "Jednostka"
 
-#: plugins/personal/generic/class_user.inc:1545
-#: plugins/personal/generic/generic.tpl:496
+#: plugins/personal/generic/class_user.inc:1614
+#: plugins/personal/generic/generic.tpl:510
 #: plugins/personal/generic/multiple_generic.tpl:402
 msgid "House identifier"
 msgstr "Identyfikator budynku"
 
-#: plugins/personal/generic/class_user.inc:1546
-#: plugins/personal/generic/generic.tpl:413
+#: plugins/personal/generic/class_user.inc:1615
+#: plugins/personal/generic/generic.tpl:427
 #: plugins/personal/generic/multiple_generic.tpl:302
 msgid "Vocation"
 msgstr "Wywołanie"
 
-#: plugins/personal/generic/class_user.inc:1547
-#: plugins/personal/generic/generic.tpl:540
+#: plugins/personal/generic/class_user.inc:1616
+#: plugins/personal/generic/generic.tpl:554
 #: plugins/personal/generic/multiple_generic.tpl:449
 msgid "Last delivery"
 msgstr "Ostatnia dostawa"
 
-#: plugins/personal/generic/class_user.inc:1548
-#: plugins/personal/generic/generic.tpl:462
+#: plugins/personal/generic/class_user.inc:1617
+#: plugins/personal/generic/generic.tpl:476
 #: plugins/personal/generic/multiple_generic.tpl:360
 msgid "Person locality"
 msgstr "Lokalizacja osoby"
 
-#: plugins/personal/generic/class_user.inc:1549
-#: plugins/personal/generic/generic.tpl:421
+#: plugins/personal/generic/class_user.inc:1618
+#: plugins/personal/generic/generic.tpl:435
 #: plugins/personal/generic/multiple_generic.tpl:312
 msgid "Unit description"
 msgstr "Opis jednostki"
 
-#: plugins/personal/generic/class_user.inc:1550
-#: plugins/personal/generic/generic.tpl:430
+#: plugins/personal/generic/class_user.inc:1619
+#: plugins/personal/generic/generic.tpl:444
 #: plugins/personal/generic/multiple_generic.tpl:323
 msgid "Subject area"
 msgstr "Sektor"
 
-#: plugins/personal/generic/class_user.inc:1551
-#: plugins/personal/generic/generic.tpl:439
+#: plugins/personal/generic/class_user.inc:1620
+#: plugins/personal/generic/generic.tpl:453
 #: plugins/personal/generic/multiple_generic.tpl:334
 msgid "Functional title"
 msgstr "Tytuł funkcjonalny"
 
-#: plugins/personal/generic/class_user.inc:1552
+#: plugins/personal/generic/class_user.inc:1621
 #: plugins/personal/generic/generic_certs.tpl:78
 msgid "Certificate serial number"
 msgstr "Nmer seryjny certyfikatu"
 
-#: plugins/personal/generic/class_user.inc:1553
-#: plugins/personal/generic/generic.tpl:549
+#: plugins/personal/generic/class_user.inc:1622
+#: plugins/personal/generic/generic.tpl:563
 #: plugins/personal/generic/multiple_generic.tpl:460
 msgid "Public visible"
 msgstr "Publicznie widoczne"
 
-#: plugins/personal/generic/class_user.inc:1554
-#: plugins/personal/generic/generic.tpl:480
+#: plugins/personal/generic/class_user.inc:1623
+#: plugins/personal/generic/generic.tpl:494
 #: plugins/personal/generic/multiple_generic.tpl:382
 msgid "Street"
 msgstr "Ulica"
 
-#: plugins/personal/generic/class_user.inc:1556
-#: plugins/personal/generic/generic.tpl:488
+#: plugins/personal/generic/class_user.inc:1625
+#: plugins/personal/generic/generic.tpl:502
 #: plugins/personal/generic/multiple_generic.tpl:392
 msgid "Postal code"
 msgstr "Kod pocztowy"
 
-#: plugins/personal/generic/class_user.inc:1560
+#: plugins/personal/generic/class_user.inc:1629
 msgid "Generic user settings"
 msgstr "Ogólne ustawienia użytkownika"
 
-#: plugins/personal/generic/class_user.inc:1564
-#: plugins/personal/posix/class_posixAccount.inc:1609
+#: plugins/personal/generic/class_user.inc:1633
+#: plugins/personal/posix/class_posixAccount.inc:1624
 #: plugins/personal/password/class_password.inc:145
 msgid "My account"
 msgstr "Moje konto "
 
-#: plugins/personal/generic/class_user.inc:1570
+#: plugins/personal/generic/class_user.inc:1639
 msgid "Surname"
 msgstr "Nazwisko"
 
-#: plugins/personal/generic/class_user.inc:1572
+#: plugins/personal/generic/class_user.inc:1641
 msgid "User identification"
 msgstr "Identyfikacja użytkownika"
 
-#: plugins/personal/generic/class_user.inc:1573
+#: plugins/personal/generic/class_user.inc:1642
 #: plugins/personal/generic/generic.tpl:98
 msgid "Personal title"
 msgstr "Osobisty tytuł"
 
-#: plugins/personal/generic/class_user.inc:1574
+#: plugins/personal/generic/class_user.inc:1643
 #: plugins/personal/generic/generic.tpl:108
 #: plugins/personal/generic/multiple_generic.tpl:23
 msgid "Academic title"
 msgstr "Tytuł naukowy"
 
-#: plugins/personal/generic/class_user.inc:1576
+#: plugins/personal/generic/class_user.inc:1645
 #: plugins/personal/generic/generic.tpl:119
 msgid "Date of birth"
 msgstr "Data urodzenia"
 
-#: plugins/personal/generic/class_user.inc:1577
+#: plugins/personal/generic/class_user.inc:1646
 msgid "Gender"
 msgstr "Płeć"
 
-#: plugins/personal/generic/class_user.inc:1578
+#: plugins/personal/generic/class_user.inc:1647
 msgid "Preferred language"
 msgstr "Preferowany język"
 
-#: plugins/personal/generic/class_user.inc:1581
+#: plugins/personal/generic/class_user.inc:1650
 #: plugins/personal/generic/paste_generic.tpl:47
 msgid "User picture"
 msgstr "Zdjęcie użytkownika"
 
-#: plugins/personal/generic/class_user.inc:1585
+#: plugins/personal/generic/class_user.inc:1654
 msgid "Department number"
 msgstr "Numer departamentu"
 
-#: plugins/personal/generic/class_user.inc:1586
+#: plugins/personal/generic/class_user.inc:1655
 msgid "Employee number"
 msgstr "Numer pracownika"
 
-#: plugins/personal/generic/class_user.inc:1587
-#: plugins/personal/generic/generic.tpl:311
+#: plugins/personal/generic/class_user.inc:1656
+#: plugins/personal/generic/generic.tpl:325
 #: plugins/personal/generic/multiple_generic.tpl:189
 msgid "Employee type"
 msgstr "Typ pracownika"
 
-#: plugins/personal/generic/class_user.inc:1589
+#: plugins/personal/generic/class_user.inc:1658
 msgid "Room number"
 msgstr "Numer pokoju"
 
-#: plugins/personal/generic/class_user.inc:1590
+#: plugins/personal/generic/class_user.inc:1659
 msgid "Telefon number"
 msgstr "Numer telefonu"
 
-#: plugins/personal/generic/class_user.inc:1591
+#: plugins/personal/generic/class_user.inc:1660
 msgid "Pager number"
 msgstr "Numer pagera"
 
-#: plugins/personal/generic/class_user.inc:1592
+#: plugins/personal/generic/class_user.inc:1661
 msgid "Mobile number"
 msgstr "Telefon komórkowy"
 
-#: plugins/personal/generic/class_user.inc:1593
+#: plugins/personal/generic/class_user.inc:1662
 msgid "Fax number"
 msgstr "Numer fax"
 
-#: plugins/personal/generic/class_user.inc:1599
+#: plugins/personal/generic/class_user.inc:1668
 msgid "Home postal address"
 msgstr "Adres domowy"
 
-#: plugins/personal/generic/class_user.inc:1600
+#: plugins/personal/generic/class_user.inc:1669
 msgid "Home phone number"
 msgstr "Numer telefonu domowego"
 
-#: plugins/personal/generic/class_user.inc:1602
+#: plugins/personal/generic/class_user.inc:1671
 #, fuzzy
 msgid "User password method"
 msgstr "Przechowywanie hasła"
 
-#: plugins/personal/generic/class_user.inc:1603
+#: plugins/personal/generic/class_user.inc:1672
 msgid "User certificates"
 msgstr "Certyfikaty użytkownika"
 
@@ -4754,34 +4769,37 @@ msgstr "Certyfikaty"
 msgid "Edit certificates"
 msgstr "Edytuj certyfikaty"
 
-#: plugins/personal/generic/generic.tpl:251
-#, fuzzy
-msgid "Last logon"
-msgstr "Nazwisko"
+#: plugins/personal/generic/generic.tpl:256
+msgid "Restrict login to"
+msgstr ""
 
-#: plugins/personal/generic/generic.tpl:267
+#: plugins/personal/generic/generic.tpl:262
+msgid "IP or network"
+msgstr ""
+
+#: plugins/personal/generic/generic.tpl:281
 #: plugins/personal/generic/multiple_generic.tpl:137
 msgid "Organizational information"
 msgstr "Informacje organizacyjne"
 
-#: plugins/personal/generic/generic.tpl:295
+#: plugins/personal/generic/generic.tpl:309
 #: plugins/personal/generic/multiple_generic.tpl:169
 msgid "Department No."
 msgstr "Numer departamentu"
 
-#: plugins/personal/generic/generic.tpl:303
+#: plugins/personal/generic/generic.tpl:317
 #: plugins/personal/generic/multiple_generic.tpl:179
 msgid "Employee No."
 msgstr "Numer pracownika"
 
-#: plugins/personal/generic/generic.tpl:329
-#: plugins/personal/generic/generic.tpl:511
+#: plugins/personal/generic/generic.tpl:343
+#: plugins/personal/generic/generic.tpl:525
 #: plugins/personal/generic/multiple_generic.tpl:207
 #: plugins/personal/generic/multiple_generic.tpl:418
 msgid "Room No."
 msgstr "Numer pokoju"
 
-#: plugins/personal/generic/generic.tpl:525
+#: plugins/personal/generic/generic.tpl:539
 msgid "Please use the phone tab"
 msgstr "Proszę użyć zakładki telefony"
 
@@ -4837,151 +4855,155 @@ msgstr "certyfikat PKCS12"
 msgid "Edit users POSIX settings"
 msgstr "Ustawienia Posix"
 
-#: plugins/personal/posix/class_posixAccount.inc:157
+#: plugins/personal/posix/class_posixAccount.inc:168
 msgid "expired"
 msgstr "wygasło"
 
-#: plugins/personal/posix/class_posixAccount.inc:159
+#: plugins/personal/posix/class_posixAccount.inc:170
 msgid "grace time active"
 msgstr "Czas prolongaty aktywny"
 
-#: plugins/personal/posix/class_posixAccount.inc:162
+#: plugins/personal/posix/class_posixAccount.inc:173
 #, fuzzy
 msgid "password not changeable"
 msgstr "aktywne, hasło niezmienialne"
 
-#: plugins/personal/posix/class_posixAccount.inc:164
+#: plugins/personal/posix/class_posixAccount.inc:175
 #, fuzzy
 msgid "password expired"
 msgstr "aktywne, hasło wygasło"
 
-#: plugins/personal/posix/class_posixAccount.inc:216
+#: plugins/personal/posix/class_posixAccount.inc:228
 msgid "unconfigured"
 msgstr "nieskonfigurowane"
 
-#: plugins/personal/posix/class_posixAccount.inc:227
+#: plugins/personal/posix/class_posixAccount.inc:239
 msgid "automatic"
 msgstr "automatyczne"
 
-#: plugins/personal/posix/class_posixAccount.inc:492
+#: plugins/personal/posix/class_posixAccount.inc:504
 #, php-format
 msgid "Password can't be changed up to %s days after last change"
 msgstr "Hasło nie może być zmienione do %s dni po ostatniej zmianie"
 
-#: plugins/personal/posix/class_posixAccount.inc:496
+#: plugins/personal/posix/class_posixAccount.inc:508
 #, php-format
 msgid "Password must be changed after %s days"
 msgstr "Hasło musi zostać zmienione po %s dniach"
 
-#: plugins/personal/posix/class_posixAccount.inc:500
+#: plugins/personal/posix/class_posixAccount.inc:512
 #, fuzzy, php-format
 msgid "Disable account after %s days of inactivity after password expiry"
 msgstr "Wyłącz konto po %s dniach nieaktywności po wygaśnięciu hasła"
 
-#: plugins/personal/posix/class_posixAccount.inc:504
+#: plugins/personal/posix/class_posixAccount.inc:516
 #, fuzzy, php-format
 msgid "Warn user %s days before password expiry"
 msgstr "Ostrzeż użytkownika na %s dni przed wygaśnięciem hasła"
 
-#: plugins/personal/posix/class_posixAccount.inc:863
+#: plugins/personal/posix/class_posixAccount.inc:878
 msgid "Timeout while waiting for lock. Ignoring lock!"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:921
-#: plugins/personal/posix/class_posixAccount.inc:1234
+#: plugins/personal/posix/class_posixAccount.inc:936
+#: plugins/personal/posix/class_posixAccount.inc:1249
 msgid "Group of user"
 msgstr "Grupa użytkownika"
 
-#: plugins/personal/posix/class_posixAccount.inc:1016
+#: plugins/personal/posix/class_posixAccount.inc:1031
 msgid ""
 "A duplicated UID number was written for this user. If this was not intended "
 "please verify all used uidNumbers!"
 msgstr ""
 
-#: plugins/personal/posix/class_posixAccount.inc:1097
-#: plugins/personal/posix/class_posixAccount.inc:1100
-#: plugins/personal/posix/class_posixAccount.inc:1170
-#: plugins/personal/posix/class_posixAccount.inc:1173
-#: plugins/personal/posix/class_posixAccount.inc:1615
+#: plugins/personal/posix/class_posixAccount.inc:1112
+#: plugins/personal/posix/class_posixAccount.inc:1115
+#: plugins/personal/posix/class_posixAccount.inc:1185
+#: plugins/personal/posix/class_posixAccount.inc:1188
+#: plugins/personal/posix/class_posixAccount.inc:1630
 #: plugins/personal/posix/generic.tpl:7
 #: plugins/personal/posix/paste_generic.tpl:8
 msgid "Home directory"
 msgstr "Katalog domowy"
 
-#: plugins/personal/posix/class_posixAccount.inc:1108
-#: plugins/personal/posix/class_posixAccount.inc:1111
-#: plugins/personal/posix/generic.tpl:57
+#: plugins/personal/posix/class_posixAccount.inc:1123
+#: plugins/personal/posix/class_posixAccount.inc:1126
+#: plugins/personal/posix/generic.tpl:63
 #: plugins/personal/posix/paste_generic.tpl:36
 msgid "UID"
 msgstr "UID"
 
-#: plugins/personal/posix/class_posixAccount.inc:1126
-#: plugins/personal/posix/class_posixAccount.inc:1179
+#: plugins/personal/posix/class_posixAccount.inc:1141
+#: plugins/personal/posix/class_posixAccount.inc:1194
 #, fuzzy
 msgid "shadowMin"
 msgstr "Shadow min"
 
-#: plugins/personal/posix/class_posixAccount.inc:1131
-#: plugins/personal/posix/class_posixAccount.inc:1184
+#: plugins/personal/posix/class_posixAccount.inc:1146
+#: plugins/personal/posix/class_posixAccount.inc:1199
 #, fuzzy
 msgid "shadowMax"
 msgstr "Shadow max"
 
-#: plugins/personal/posix/class_posixAccount.inc:1136
-#: plugins/personal/posix/class_posixAccount.inc:1189
+#: plugins/personal/posix/class_posixAccount.inc:1151
+#: plugins/personal/posix/class_posixAccount.inc:1204
 #, fuzzy
 msgid "shadowWarning"
 msgstr "Shadow ostrzeżenie"
 
-#: plugins/personal/posix/class_posixAccount.inc:1150
-#: plugins/personal/posix/class_posixAccount.inc:1203
+#: plugins/personal/posix/class_posixAccount.inc:1165
+#: plugins/personal/posix/class_posixAccount.inc:1218
 #, fuzzy
 msgid "shadowInactive"
 msgstr "Shadow nieaktywne"
 
-#: plugins/personal/posix/class_posixAccount.inc:1605
+#: plugins/personal/posix/class_posixAccount.inc:1620
 msgid "POSIX account"
 msgstr "Konto POSIX"
 
-#: plugins/personal/posix/class_posixAccount.inc:1616
+#: plugins/personal/posix/class_posixAccount.inc:1631
 #: plugins/personal/posix/generic.tpl:15
 msgid "Shell"
 msgstr "Shell"
 
-#: plugins/personal/posix/class_posixAccount.inc:1617
+#: plugins/personal/posix/class_posixAccount.inc:1632
 #: setup/setup_migrate.tpl:291
 msgid "User ID"
 msgstr "Identyfikator użytkownika"
 
-#: plugins/personal/posix/class_posixAccount.inc:1618
+#: plugins/personal/posix/class_posixAccount.inc:1633
 msgid "Group ID"
 msgstr "ID grupy"
 
-#: plugins/personal/posix/class_posixAccount.inc:1620
+#: plugins/personal/posix/class_posixAccount.inc:1635
 msgid "Force password change on login"
 msgstr "Wymuś zmianę hasła podczas logowania"
 
-#: plugins/personal/posix/class_posixAccount.inc:1621
+#: plugins/personal/posix/class_posixAccount.inc:1636
 msgid "Shadow min"
 msgstr "Shadow min"
 
-#: plugins/personal/posix/class_posixAccount.inc:1622
+#: plugins/personal/posix/class_posixAccount.inc:1637
 msgid "Shadow max"
 msgstr "Shadow max"
 
-#: plugins/personal/posix/class_posixAccount.inc:1623
+#: plugins/personal/posix/class_posixAccount.inc:1638
 msgid "Shadow warning"
 msgstr "Shadow ostrzeżenie"
 
-#: plugins/personal/posix/class_posixAccount.inc:1624
+#: plugins/personal/posix/class_posixAccount.inc:1639
 msgid "Shadow inactive"
 msgstr "Shadow nieaktywne"
 
-#: plugins/personal/posix/class_posixAccount.inc:1625
+#: plugins/personal/posix/class_posixAccount.inc:1640
 msgid "Shadow expire"
 msgstr "Shadow wygasa"
 
-#: plugins/personal/posix/class_posixAccount.inc:1626
+#: plugins/personal/posix/class_posixAccount.inc:1641
+msgid "Public SSH key"
+msgstr ""
+
+#: plugins/personal/posix/class_posixAccount.inc:1642
 msgid "System trust model"
 msgstr "Zaufanie do systemów"
 
@@ -4994,40 +5016,45 @@ msgstr "Grupa podstawowa"
 msgid "Status"
 msgstr "Status"
 
-#: plugins/personal/posix/generic.tpl:53
+#: plugins/personal/posix/generic.tpl:41
+#, fuzzy
+msgid "Last logon"
+msgstr "Nazwisko"
+
+#: plugins/personal/posix/generic.tpl:59
 #: plugins/personal/posix/paste_generic.tpl:31
 msgid "Force UID/GID"
 msgstr "Wymuś UID/GID"
 
-#: plugins/personal/posix/generic.tpl:83
+#: plugins/personal/posix/generic.tpl:89
 #: plugins/personal/posix/paste_generic.tpl:55
 msgid "Group membership"
 msgstr "Przynależność do grup"
 
-#: plugins/personal/posix/generic.tpl:85
+#: plugins/personal/posix/generic.tpl:91
 #: plugins/personal/posix/paste_generic.tpl:62
 msgid "(Warning: more than 16 groups are not supported by NFS!)"
 msgstr "(Uwaga: NFS nie wspiera więcej niż 16 grup!)"
 
-#: plugins/personal/posix/generic.tpl:94
+#: plugins/personal/posix/generic.tpl:100
 #, fuzzy
 msgid "Common group"
 msgstr "Pokaż grupy"
 
-#: plugins/personal/posix/generic.tpl:98
+#: plugins/personal/posix/generic.tpl:104
 #, fuzzy
 msgid "Non common group"
 msgstr "Pokaż grupy pocztowe"
 
-#: plugins/personal/posix/generic.tpl:121
+#: plugins/personal/posix/generic.tpl:127
 msgid "SSH keys"
 msgstr ""
 
-#: plugins/personal/posix/generic.tpl:122
+#: plugins/personal/posix/generic.tpl:128
 msgid "Edit public ssh keys..."
 msgstr ""
 
-#: plugins/personal/posix/generic.tpl:126
+#: plugins/personal/posix/generic.tpl:132
 msgid "Account"
 msgstr "Konto"
 
@@ -6914,6 +6941,10 @@ msgstr "To menu umożliwia dodawanie, edycję i kasowanie wybranych grup."
 #, fuzzy
 msgid "Automatic"
 msgstr "automatyczne"
+
+#, fuzzy
+#~ msgid "All"
+#~ msgstr "ACL"
 
 #, fuzzy
 #~ msgid "Enable DNS extension"
