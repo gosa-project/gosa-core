@@ -48,6 +48,7 @@ load_dsc() {
     PL_NAME=$(sed -n 's/"//g;s/^name\s*=\s*\(.*\)$/\1/p' "$1")
     PL_VERSION=$(sed -n 's/"//g;s/^version\s*=\s*\(.*\)$/\1/p' "$1")
     TDEPENDS=$(sed -n 's/"//g;s/^depends\s*=\s*\(.*\)$/\1/p' "$1")
+		TDEPENDS=$(echo $TDEPENDS | tr , " ")
     for dep in $TDEPENDS; do
       PL_DEPENDS="gosa-plugin-$dep, $PL_DEPENDS"
     done
