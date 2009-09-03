@@ -59,8 +59,8 @@ class userinfo
     }
 
     /* Restrictions? */
-    if (isset($attrs['gosaLoginRestrictions'])){
-      $this->restrictions= $attrs['gosaLoginRestrictions'];
+    if (isset($attrs['gosaLoginRestriction'])){
+      $this->restrictions= $attrs['gosaLoginRestriction'];
       unset($this->restrictions['count']);
     }
 
