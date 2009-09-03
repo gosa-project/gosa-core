@@ -405,6 +405,12 @@ function ldap_login_user_htaccess ($username)
   $ui= new userinfo($config, $ldap->getDN());
   $ui->username= $attrs['uid'][0];
 
+  /* Bail out if we have login restrictions set, for security reasons
+     the message is the same than failed user/pw */
+  if (!$ui->loginAllowed()){
+    return (NULL);
+  }
+
   /* No password check needed - the webserver did it for us */
   $ldap->disconnect();
 
@@ -484,6 +490,12 @@ function ldap_login_user ($username, $password)
   /* got user dn, fill acl's */
   $ui= new userinfo($config, $ldap->getDN());
   $ui->username= $attrs['uid'][0];
+
+  /* Bail out if we have login restrictions set, for security reasons
+     the message is the same than failed user/pw */
+  if (!$ui->loginAllowed()){
+    return (NULL);
+  }
 
   /* password check, bind as user with supplied password  */
   $ldap->disconnect();
@@ -2787,6 +2799,7 @@ function cred_encrypt($input, $password) {
 
 }
 
+
 function cred_decrypt($input,$password) {
   $size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
   $iv = mcrypt_create_iv($size, MCRYPT_DEV_RANDOM);
@@ -2794,14 +2807,29 @@ function cred_decrypt($input,$password) {
   return mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $password, pack("H*", $input), MCRYPT_MODE_ECB, $iv);
 }
 
+
 function get_object_info()
 {
   return(session::get('objectinfo'));
 }
 
+
 function set_object_info($str = "")
 {
   session::set('objectinfo',$str);
+}
+
+
+function isIpInNet($ip, $net, $mask) {
+   // Move to long ints
+   $ip= ip2long($ip);
+   $net= ip2long($net);
+   $mask= ip2long($mask);
+
+   // Mask given IP with mask. If it returns "net", we're in...
+   $res= $ip & $mask;
+
+   return ($res == $net);
 }
 
 
