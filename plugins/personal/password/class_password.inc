@@ -113,7 +113,7 @@ class password extends plugin
             msg_dialog::display(_("Password change"),
                                 _("You have no permission to change your password."),WARNING_DIALOG);
           }else{
-            change_password ($ui->dn, $_POST['new_password']);
+            $this->change_password($ui->dn, $_POST['new_password']);
             gosa_log ("User/password has been changed");
             $ui->password= $_POST['new_password'];
             session::set('ui',$ui);
@@ -125,6 +125,11 @@ class password extends plugin
     }
     return($smarty->fetch(get_template_path("password.tpl", TRUE)));
   } 
+
+  function change_password($dn, $pwd)
+  {
+    change_password ($dn, $pwd);
+  }
 
   function remove_from_parent()
   {
