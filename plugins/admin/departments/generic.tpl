@@ -16,10 +16,10 @@
        </td>
       </tr>
       <tr>
-       <td><LABEL for="description">{t}Description{/t}</LABEL>{$must}</td>
+       <td style='vertical-align:top;'><LABEL for="description">{t}Description{/t}</LABEL>{$must}</td>
        <td>
 {render acl=$descriptionACL}
-        <input id="description" name="description" size=25 maxlength=80 value="{$description}" title="{t}Descriptive text for department{/t}">
+        <textarea id='description' name='description' style='width:220px' title="{t}Descriptive text for   department{/t}">{$description}</textarea>
 {/render}
        </td>
       </tr>
