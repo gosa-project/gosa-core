@@ -183,7 +183,11 @@ class pluglist {
 						continue;
 					}
 					$vars= get_class_vars($info['CLASS']);
-					$plHeadline= $vars['plHeadline'];
+					if (isset($info['NAME'])){
+  					  $plHeadline= _($info['NAME']);
+                                        } else {
+  					  $plHeadline= $vars['plHeadline'];
+                                        }
 					$plDescription= $vars['plDescription'];
 
 					$index= $this->get_index($info['CLASS']);
