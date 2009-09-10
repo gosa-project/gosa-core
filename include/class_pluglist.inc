@@ -31,8 +31,8 @@ class pluglist {
 	var $current= "";
 	var $info= array();
 	var $headlines = array();
-  var $allowed_plugins = array();
-  var $silly_cache= array();
+        var $allowed_plugins = array();
+        var $silly_cache= array();
 
 	function pluglist(&$config, &$ui)
 	{

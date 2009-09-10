@@ -467,7 +467,12 @@ class listing {
       if (preg_match('/^export.*$/', $_POST['act']) && isset($this->exporter[$_POST['act']])) {
         $exporter= $this->exporter[$_POST['act']];
         $userinfo= ", "._("created by")." ".$ui->cn." - ".strftime('%A, %d. %B %Y, %H:%M:%S');
-        $instance= new $exporter['class']($this->headline.$userinfo, $this->plainHeader, $this->entries, $this->exportColumns);
+        $entryIterator= new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], "_sort".$this->sortColumn, $this->sortType);
+        $sortedEntries= array();
+        foreach ($entryIterator as $entry){
+          $sortedEntries[]= $entry;
+        }
+        $instance= new $exporter['class']($this->headline.$userinfo, $this->plainHeader, $sortedEntries, $this->exportColumns);
         $type= call_user_func(array($exporter['class'], "getInfo"));
         $type= $type[$_POST['act']];
         send_binary_content($instance->query(), $type['filename'], $type= $type['mime']);
