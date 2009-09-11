@@ -914,7 +914,7 @@ class group extends plugin
       } else {
         /* Calculate new, lock uids */
         $wait= 10;
-        while (get_lock("uidnumber") != ""){
+        while (get_lock("gidnumber") != ""){
           sleep (1);
 
           /* timed out? */
@@ -922,7 +922,7 @@ class group extends plugin
             break;
           }
         }
-        add_lock ("uidnumber", "gosa");
+        add_lock ("gidnumber", "gosa");
         $this->gidNumber= $this->get_next_id("gidNumber", $this->dn);
       }
     }
@@ -1117,7 +1117,7 @@ class group extends plugin
     }
 
     /* Remove uid lock */
-    del_lock ("uidnumber");
+    del_lock ("gidnumber");
 
     /* Post that we've done*/
     $this->handle_post_events($mode);
@@ -1222,8 +1222,10 @@ class group extends plugin
     $ldap->cd ($this->config->current['BASE']);
     if (preg_match('/gidNumber/i', $attrib)){
       $oc= "posixGroup";
+      $att= "gidNumberBase";
     } else {
       $oc= "posixAccount";
+      $att= "uidNumberBase";
     }
     $ldap->search ("(&(objectClass=$oc)($attrib=*))", array("$attrib"));
 
@@ -1234,7 +1236,7 @@ class group extends plugin
 
     /* Find out next free id near to UID_BASE */
     if ($this->config->get_cfg_value("baseIdHook") == ""){
-      $base= $this->config->get_cfg_value("uidNumberBase");
+      $base= $this->config->get_cfg_value($att);
     } else {
       /* Call base hook */
       $base= get_base_from_hook($dn, $attrib);
