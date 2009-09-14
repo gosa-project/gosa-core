@@ -842,8 +842,15 @@ class gosaSupportDaemon
     foreach($data as $key => $value){
       $key = strtolower($key);
       if(is_array($value)){
-        foreach($value as $sub_value){
-          $attr.= "<$key>".strtolower($sub_value)."</$key>\n";
+        if($key == "periodic"){
+          foreach($value as $sub_name => $sub_value){
+            $attr.= "<periodic>$sub_name</periodic>";
+            $attr.= "<$sub_name>$sub_value</$sub_name>";
+          }
+        }else{
+          foreach($value as $sub_value){
+            $attr.= "<$key>".strtolower($sub_value)."</$key>";
+          }
         }
       }else{
         $attr.= "<$key>".strtolower($value)."</$key>\n";
