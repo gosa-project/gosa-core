@@ -1730,15 +1730,15 @@ function gen_uids($rule, $attributes)
   /* Recurse through all possible combinations */
   $proposed= recurse($stripped, $variables);
 
-  /* Get list of used ID's */
-  $used= array();
-  $ldap= $config->get_ldap_link();
-  $ldap->cd($config->current['BASE']);
-  $ldap->search('(uid=*)');
-
-  while($attrs= $ldap->fetch()){
-    $used[]= $attrs['uid'][0];
-  }
+# /* Get list of used ID's */
+# $used= array();
+ $ldap= $config->get_ldap_link();
+ $ldap->cd($config->current['BASE']);
+# $ldap->search('(uid=*)');
+#
+# while($attrs= $ldap->fetch()){
+#   $used[]= $attrs['uid'][0];
+# }
 
   /* Remove used uids and watch out for id tags */
   $ret= array();
@@ -1751,7 +1751,9 @@ function gen_uids($rule, $attributes)
       for ($i= 0, $p= pow(10,$size); $i < $p; $i++){
         $number= sprintf("%0".$size."d", $i);
         $res= preg_replace('/{id:(\d+)}/', $number, $uid);
-        if (!in_array($res, $used)){
+
+        $ldap->search("uid={$res}",array('dn'));
+        if(!count($ldap)){
           $uid= $res;
           break;
         }
@@ -1765,7 +1767,8 @@ function gen_uids($rule, $attributes)
         mt_srand((double) microtime()*1000000);
         $number= sprintf("%0".$size."d", mt_rand(0, pow(10, $size)-1));
         $res= preg_replace('/{id#(\d+)}/', $number, $uid);
-        if (!in_array($res, $used)){
+        $ldap->search("uid={$res}",array('dn'));
+        if(!count($ldap)){
           $uid= $res;
           break;
         }
@@ -1773,7 +1776,8 @@ function gen_uids($rule, $attributes)
     }
 
     /* Don't assign used ones */
-    if (!in_array($uid, $used)){
+    $ldap->search("uid={$uid}",array('dn'));
+    if(!count($ldap)){
       /* Add uid, but remove {} first. These are invalid anyway. */
       $ret[]= preg_replace('/[{}]/', '', $uid);
     }
