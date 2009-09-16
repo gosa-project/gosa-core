@@ -529,9 +529,12 @@ class MultiSelectWindow{
       }
     }
 
-    /* Save base selection from headpage selectbox*/
+    /* Save base selection from headpage selectbox */
     if(isset($_POST['CurrentMainBase'])){
       $this->selectedBase = $_POST['CurrentMainBase'];
+      session::global_set("CurrentMainBase", $this->selectedBase);
+    } else {
+      $this->selectedBase= session::global_get("CurrentMainBase");
     }
 
     /* Homebutton is posted */
