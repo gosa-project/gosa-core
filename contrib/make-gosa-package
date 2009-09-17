@@ -35,7 +35,7 @@ EXTRACT=`pwd`
 
 usage() {
 	cat <<-EOF
-	GOsa Debian package build tool. Build snapshots from selected SVN locations.
+	GOsa Debian package build tool. Build snapshots from selected SVN locations or local directories.
 	Usage: ${0##*/} [options]
 	
 	Options:
