@@ -1,12 +1,7 @@
 <?php
 
-// Try to load PDF library
-define('FPDF_FONTPATH', '/usr/share/php/fpdf/font/');
-@include('fpdf/fpdf.php');
-
 // Load supporter class only if FPDF is loaded
-$classes= get_declared_classes();
-if(in_array('FPDF', $classes)) {
+if(class_exists('FPDF')) {
   include('class_PDF.inc');
 }
 
@@ -15,6 +10,11 @@ class pdfExporter
   var $result;
 
   function pdfExporter($headline, $header, $entries, $columns= array()) {
+    // Bail out if no FPDF available
+    if(!class_exists('FPDF')) {
+      die(_("No PDF export possible: there is no FPDF library installed."));
+    }
+
     // If no preset, render all columns
     if (!count($columns)) {
       foreach ($header as $index => $dummy) {
