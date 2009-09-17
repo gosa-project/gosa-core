@@ -346,9 +346,12 @@ fi
 echo "Removing gosa snapshot..."
 if [ -z "$DEBIAN_PKG" ]
 then
-	for dir in $GOSA_DIR; do
-        rm -rf "$dir"
-	done
+	if [ "$NO_SVN" = "use" ]
+	then
+		for dir in $GOSA_DIR; do
+        	rm -rf "$dir"
+		done
+	fi
 else
 	for dir in $GOSA_DIR $GOSA_SI_DIR $GOSA_PLUGIN_DIRS; do
 	rm -rf "$dir"
