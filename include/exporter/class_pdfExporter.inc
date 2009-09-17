@@ -1,7 +1,8 @@
 <?php
 
 // Load supporter class only if FPDF is loaded
-if(class_exists('FPDF')) {
+$classes= get_declared_classes();
+if(in_array('FPDF', $classes)) {
   include('class_PDF.inc');
 }
 
