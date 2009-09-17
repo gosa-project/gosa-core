@@ -1662,8 +1662,8 @@ function recurse($rule, $variables)
 function expand_id($rule, $attributes)
 {
   /* Check for id rule */
-  if(preg_match('/^id(:|#)\d+$/',$rule)){
-    return (array("\{$rule}"));
+  if(preg_match('/^id(:|#|!)\d+$/',$rule)){
+    return (array("{$rule}"));
   }
 
   /* Check for clean attribute */
@@ -1739,12 +1739,17 @@ function gen_uids($rule, $attributes)
   foreach($proposed as $uid){
 
     /* Check for id tag and modify uid if needed */
-    if(preg_match('/\{id:\d+}/',$uid)){
-      $size= preg_replace('/^.*{id:(\d+)}.*$/', '\\1', $uid);
+    if(preg_match('/\{id(:|!)\d+}/',$uid, $m)){
+      $size= preg_replace('/^.*{id(:|!)(\d+)}.*$/', '\\2', $uid);
 
-      for ($i= 0, $p= pow(10,$size); $i < $p; $i++){
-        $number= sprintf("%0".$size."d", $i);
-        $res= preg_replace('/{id:(\d+)}/', $number, $uid);
+      $start= $m[1]==":"?0:-1;
+      for ($i= $start, $p= pow(10,$size); $i < $p; $i++){
+        if ($i == -1) {
+          $number= "";
+        } else {
+          $number= sprintf("%0".$size."d", $i+1);
+        }
+        $res= preg_replace('/{id(:|!)\d+}/', $number, $uid);
 
         $ldap->search("(uid=".preg_replace('/[{}]/', '', $res).")",array('dn'));
         if($ldap->count() == 0){
