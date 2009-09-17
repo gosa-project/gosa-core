@@ -101,7 +101,7 @@
 	{/foreach}
 	{foreach from=$groupMembership_some item=group key=key}
 		<option value="{$key}" 
-			style='color: #888888; background: #DDDDDD;background-color: #DDDDDD;'>{$group}&nbsp;({t}Non common group{/t})</option>
+			style='color: #888888; background: #DDDDDD;background-color: #DDDDDD;'>{$group}&nbsp;({t}Groups differ{/t})</option>
 	{/foreach}
 {/if}
    </select>
