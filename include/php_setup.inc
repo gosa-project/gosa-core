@@ -291,9 +291,5 @@ $smarty->template_dir = $BASE_DIR.'/ihtml/';
 $smarty->caching= false;
 $smarty->php_handling= SMARTY_PHP_REMOVE;
 
-// Try to load PDF library
-define('FPDF_FONTPATH', '/usr/share/php/fpdf/font/');
-@include('fpdf/fpdf.php');
-
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
