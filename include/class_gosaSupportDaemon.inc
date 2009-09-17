@@ -842,15 +842,8 @@ class gosaSupportDaemon
     foreach($data as $key => $value){
       $key = strtolower($key);
       if(is_array($value)){
-        if($key == "periodic"){
-          foreach($value as $sub_name => $sub_value){
-            $attr.= "<periodic>$sub_name</periodic>";
-            $attr.= "<$sub_name>$sub_value</$sub_name>";
-          }
-        }else{
-          foreach($value as $sub_value){
-            $attr.= "<$key>".strtolower($sub_value)."</$key>";
-          }
+        foreach($value as $sub_value){
+          $attr.= "<$key>".strtolower($sub_value)."</$key>\n";
         }
       }else{
         $attr.= "<$key>".strtolower($value)."</$key>\n";
@@ -942,15 +935,8 @@ class gosaSupportDaemon
     /* Prepare data */
     foreach ($data as $key => $value){
       if(is_array($value)){
-        if($key == "periodic"){
-          foreach($value as $sub_name => $sub_value){
-            $xml_message.= "<periodic>$sub_name</periodic>";
-            $xml_message.= "<$sub_name>$sub_value</$sub_name>";
-          }
-        }else{
-          foreach($value as $sub_value){
-            $xml_message.= "<$key>$sub_value</$key>";
-          }
+        foreach($value as $sub_value){
+          $xml_message.= "<$key>$sub_value</$key>";
         }
       }else{
         $xml_message.= "<$key>$value</$key>";
