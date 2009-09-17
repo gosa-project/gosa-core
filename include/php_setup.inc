@@ -291,5 +291,9 @@ $smarty->template_dir = $BASE_DIR.'/ihtml/';
 $smarty->caching= false;
 $smarty->php_handling= SMARTY_PHP_REMOVE;
 
+/* Global FPDF define */
+define('FPDF_FONTPATH', '/usr/share/php/fpdf/font/');
+
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
