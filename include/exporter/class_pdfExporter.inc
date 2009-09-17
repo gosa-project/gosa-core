@@ -5,7 +5,6 @@
 // Load supporter class only if FPDF is loaded
 $classes= get_declared_classes();
 if(in_array('FPDF', $classes)) {
-  define('FPDF_FONTPATH', '/usr/share/php/fpdf/font/');
   include('class_PDF.inc');
 }
 
