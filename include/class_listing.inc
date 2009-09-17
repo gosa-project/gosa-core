@@ -772,8 +772,19 @@ class listing {
     foreach($actions as $action) {
       // Skip the entry completely if there's no permission to execute it
       if (!$this->hasActionPermission($action, $dn)) {
+        $result.= "<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
         continue;
       }
+
+      // Skip entry if the pseudo filter does not fit
+      if (isset($action['filter']) && preg_match('/^[a-z0-9_]+=[a-z0-9_]+$/i', $action['filter'])) {
+        list($fa, $fv)= split('=', $action['filter']);
+        if (!isset($this->entries[$row][$fa]) && !$this->entries[$row][$fa][0] == $fv) {
+          $result.= "<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+          continue;
+        }
+      }
+
 
       // If there's an objectclass definition and we don't have it
       // add an empty picture here.
