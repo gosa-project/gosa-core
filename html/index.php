@@ -256,10 +256,6 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
   }
 
   /* Check for schema file presence */
-  #TODO: these three lines should go to the class_config.inc, shouldn't they?
-  if(!isset($config->data['MAIN']['SCHEMACHECK'])){
-    $config->data['MAIN']['SCHEMACHECK'] = "true";
-  }
   if ($config->get_cfg_value("schemaCheck") == "true"){
     $recursive = ($config->get_cfg_value("ldapFollowReferrals") == "true");
     $tls =       ($config->get_cfg_value("ldapTLS") == "true");
