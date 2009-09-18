@@ -104,7 +104,6 @@ class config  {
 
   function parse($filename)
   {
-
     $this->data = array(
         "TABS"      => array(), 
         "LOCATIONS" => array(), 
@@ -123,6 +122,11 @@ class config  {
             xml_get_current_line_number($this->parser));
       msg_dialog::display(_("Configuration error"), $msg, FATAL_ERROR_DIALOG);
       exit;
+    }
+
+    // Default schemacheck to "true"
+    if(!isset($this->data['MAIN']['SCHEMACHECK'])){
+      $this->data['MAIN']['SCHEMACHECK'] = "true";
     }
   }
 
