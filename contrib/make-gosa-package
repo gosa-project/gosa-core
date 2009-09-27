@@ -27,6 +27,7 @@ TARGET_RELEASE="etch"
 MAKE_PLUGINS=""
 MAKE_GOTO=""
 GOTO=""
+PBUILDER=""
 NOT_RELEASED="heimdal dak dfs glpi apache2"
 GOTO_NOT_RELEASED="apache-directory-studio goto-cd libresourcepool-net-ldap-perl-1.002 libresourcepool-perl-1.0104 openproj ptc syslinux" 
 DEBIAN_PKG="remove"
@@ -50,6 +51,7 @@ usage() {
 	  -n|--no-svn       Don't extract gosa from svn (when internet connectivity is not present)
 	  -x|--extract-dir  Directory where the checkout is for no-svn
 	  -g|--build-goto   Build the goto2 packages
+          -l|--use-pbuilder Use pbuilder to build the packages
 	  -h|--help         this help
 
 	EOF
@@ -64,7 +66,7 @@ for cmd in dh-make-gosa debchange dpkg-buildpackage dpkg-source svn; do
 done
 
 # Import command line parameters
-PARMS=`getopt -o e::d::b:r:s:c:i:p:n:x:g::,h --long branch:,changelog:,plugins:,section:,si-section:,release:,help -n "${0##*/}" -- "$@"`
+PARMS=`getopt -o e::d::b:r:s:c:i:p:n:x:g::l::,h --long branch:,changelog:,plugins:,section:,si-section:,release:,help -n "${0##*/}" -- "$@"`
 eval set -- "$PARMS"
 
 while true; do
@@ -91,6 +93,8 @@ while true; do
                         EXTRACT=$2; shift 2;;
                 -g|--build-goto)
                         GOTO="use"; shift 2;;
+                -l|--use-pbuilder)
+                        PBUILDER="use"; shift 2;;
                 -h|--help)
 			usage ;;
                 --)
@@ -330,15 +334,29 @@ then
 	fi
 else
 	echo "Creating debian packages..."
+	echo $PBUILDER
+
 	for dir in $GOSA_DIR $GOSA_SI_DIR $GOSA_PLUGIN_DIRS; do
+	if [ "$PBUILDER" = "use" ]
+	then
+		echo "using pbuilder"
+		(cd "$dir"; pdebuild)
+	else
 		(cd "$dir"; dpkg-buildpackage -k$DEBSIGN_KEYID -rfakeroot -sa)
+	fi
 	done
 
         if [ "$GOTO" = "use" ]
         then
 	        echo "Creating GOto debian packages..."
         	for dir in $GOTO_DIRS; do
+	        if [ "$PBUILDER" = "use" ]
+        	then
+			echo "using pbuilder to build goto debian packages"
+                	(cd "$dir"; pdebuild)
+		else
                 	(cd "$dir"; dpkg-buildpackage -k$DEBSIGN_KEYID -rfakeroot -sa)
+		fi
 	        done
 	fi
 fi
