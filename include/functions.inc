@@ -2291,8 +2291,13 @@ function check_schema($cfg,$rfc2307bis = FALSE)
     foreach($value['CLASSES_REQUIRED'] as $class){
 
       if(!isset($objectclasses[$name])){
-        $checks[$name]['STATUS'] = FALSE;
-        $checks[$name]['MSG']    = sprintf(_("Missing required object class '%s'!"),$class);
+        if($value['IS_MUST_HAVE']){
+          $checks[$name]['STATUS'] = FALSE;
+          $checks[$name]['MSG']    = sprintf(_("Missing required object class '%s'!"),$class);
+        } else {
+          $checks[$name]['STATUS'] = TRUE;
+          $checks[$name]['MSG']    = sprintf(_("Missing optional object class '%s'!"),$class);
+        }
       }elseif(!check_schema_version($objectclasses[$name],$value['REQUIRED_VERSION'])){
         $checks[$name]['STATUS'] = FALSE;
 
