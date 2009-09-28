@@ -1681,7 +1681,7 @@ div.autocomplete ul li.selected { background-color: #F0F0F0;}
 div.datepicker {
         position:absolute;
         text-align:center;
-        border: 1px #C4D5E3 solid;
+        border: 1px #AAA solid;
         font-family:arial;
         background:#FFF;
         font-size:10px;
@@ -1770,7 +1770,7 @@ div.datepicker-calendar table tbody tr td.outbound {
 div.datepicker-calendar table tbody tr td.today {
         border:1px #CCE9FF solid;
         background:#E9F5FF;
-        background-image:url(images/date_active.gif);
+        background-image:url(../../images/date_active.gif);
         background-repeat:no-repeat;
         position:top left;
         width:21px;
@@ -1780,7 +1780,7 @@ div.datepicker-calendar table tbody tr td.today {
 div.datepicker-calendar table tbody tr td.today:hover {
         border:1px #CCE9FF solid;
         background:#E9F5FF;
-        background-image:url(images/date_active.gif);
+        background-image:url(../../images/date_active.gif);
         background-repeat:no-repeat;
         position:top left;
 }
@@ -1817,7 +1817,7 @@ div.datepicker div.datepicker-footer {
 
 .date {
         float:left;
-        border:1px solid #CCE9FF;
+        border:1px solid #AAA;
         font-size:11px;
         font-family:arial;
         padding:1px;
@@ -1827,7 +1827,7 @@ div.datepicker div.datepicker-footer {
         padding:0;
         border-spacing:0;
         margin:0 0 0 3px;
-        background:transparent url(images/datepicker.gif) no-repeat 0 0;
+        background:transparent url(../../images/datepicker.gif) no-repeat 0 0;
         width:16px;
         height:16px;
         cursor:pointer;
@@ -1841,7 +1841,7 @@ div.datepicker div.datepicker-footer {
         left:3px;
 }
 .datepicker-opener-table:hover {
-        background:transparent url(images/gfx/datepicker_ro.gif) no-repeat 0 0;
+        background:transparent url(../../images/datepicker_ro.gif) no-repeat 0 0;
 }
 .datepicker-opener {
         width:16px;
