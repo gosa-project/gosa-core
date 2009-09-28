@@ -29,10 +29,13 @@
   <script language="javascript" src="include/layersmenu-browser_detection.js" type="text/javascript"></script>
   <script language="javascript" src="include/layersmenu-library.js" type="text/javascript"></script>
   <script language="javascript" src="include/layersmenu.js" type="text/javascript"></script>
+{if $usePrototype == 'true'}
   <script language="javascript" src="include/prototype.js" type="text/javascript"></script>
   <script language="javascript" src="include/scriptaculous.js" type="text/javascript"></script>
   <script language="javascript" src="include/effects.js" type="text/javascript"></script>
   <script language="javascript" src="include/controls.js" type="text/javascript"></script>
   <script language="javascript" src="include/pulldown.js" type="text/javascript"></script>
+  <script language="javascript" src="include/datepicker.js" type="text/javascript"></script>
+{/if}
 </head>
 

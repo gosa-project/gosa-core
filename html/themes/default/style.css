@@ -638,7 +638,7 @@ p.gosaLoginHeader {
 	font-size:14px;
 	font-weight:bold;
 	margin-bottom:15px;
-} 
+}
 
 p.gosaLoginWarning {
 	text-align:center;
@@ -668,7 +668,7 @@ p.gosaAccountExpiredHeader {
   font-size:14px;
   font-weight:bold;
   margin-bottom:15px;
-} 
+}
 
 table.framework {
 	height:100%;
@@ -826,7 +826,7 @@ div.setup_plug_header_container {
 }
 
 /* Setup content container */
-div.setup_contents_container { 
+div.setup_contents_container {
 }
 
 /* Setup footer */
@@ -953,7 +953,7 @@ div.navigation_info {
 
 
 /*
-	Setup step 2 styles 
+	Setup step 2 styles
 */
 
 /* used to hide display info div */
@@ -967,19 +967,19 @@ div.solution_visible {
 h2.step2_container_title {
 	background-color:#F0F0F0;
 	border: solid 1px #CCCCCC;
-	width:100%; 
+	width:100%;
 	padding:3px;
 }
 
 /* Container for name and status */
-div.step2_entry_container { 
+div.step2_entry_container {
 	padding:3px;
-	width:99%; 
+	width:99%;
 	cursor:default;
 }
 
 /* Container for name and status, when status is failed */
-div.step2_entry_container_info { 
+div.step2_entry_container_info {
 	padding:3px;
 	border: 1px solid #AAAAAA;
 	width:99%;
@@ -1020,19 +1020,19 @@ div.step2_successful {
 
 /* Text used in info div. */
 div.step2_failed_text {
-	background-repeat: no-repeat;     
+	background-repeat: no-repeat;
 	padding-left: 25px;
 }
 
 /* Text used in info div. On warnings */
 div.step2_warning_text{
-	background-repeat: no-repeat;     
+	background-repeat: no-repeat;
 	padding-left: 25px;
 }
 
 
 /*
-	Setup step 4 styles 
+	Setup step 4 styles
 */
 
 li.step4_name, div.step4_name {
@@ -1056,13 +1056,13 @@ ul.step4_container, div.step4_container {
 
 
 /************************
- * Sieve 
- *  The following styles are 
- *  used to display the sieve 
- *  management user interface  
+ * Sieve
+ *  The following styles are
+ *  used to display the sieve
+ *  management user interface
  ************************/
 
-/* Editing dialog styles 
+/* Editing dialog styles
  */
 
 table.sieve_default_table {
@@ -1089,18 +1089,18 @@ td.editing_surface_menu {
 
 /* Editing surface content */
 td.editing_surface_content {
-	background-color: #FFFFFF; 
+	background-color: #FFFFFF;
 	margin: 0px;
 	padding:0px;
 }
 
 /* Error message will be displayed as follows */
-div.sieve_error_msgs { 
+div.sieve_error_msgs {
 	background-color: #ff8d00;
 	color: #000000;
 	padding:5px;
-	background-image: url("images/warning.png"); 
-	background-repeat: no-repeat;     
+	background-image: url(images/warning.png);
+	background-repeat: no-repeat;
 	font-weight: bold;
 }
 
@@ -1112,11 +1112,11 @@ textarea.editing_source {
 
 
 /*************
- * Object container  
+ * Object container
  *************/
 
 /* The container itself */
-table.object_container_container { 
+table.object_container_container {
 	width:100%;
 	border-spacing: 0px ;
 	background-color: #F8F8F8;
@@ -1125,29 +1125,29 @@ table.object_container_container {
 
 /* Container cell top left */
 td.object_container_cell_top_left {
-	background-color: #EEE; 
-	text-align:center; 
+	background-color: #EEE;
+	text-align:center;
 }
 
 /* Container cell top right */
 td.object_container_cell_top_right {
-	background-color: #EEE; 
-	text-align:left; 
-	padding:2px;  
+	background-color: #EEE;
+	text-align:left;
+	padding:2px;
 	border-bottom: solid 1px #AAAAAA;
 }
 
 /* Container cell bottom left */
 td.object_container_cell_bottom_left {
-	width:5px; 
-	background-color: #EEE; 
-	text-align:center; 
+	width:5px;
+	background-color: #EEE;
+	text-align:center;
 	border-right: solid 1px #AAAAAA;
 }
 
 
 /*************
- * Sieve comment 
+ * Sieve comment
  *************/
 
 /* Container */
@@ -1167,7 +1167,7 @@ textarea.sieve_comment_area {
 
 
 /*************
- * Sieve require 
+ * Sieve require
  *************/
 
 /* Container */
@@ -1187,7 +1187,7 @@ input.sieve_require_input {
 
 
 /*************
- * Sieve fileinto 
+ * Sieve fileinto
  *************/
 
 /* Container */
@@ -1209,7 +1209,7 @@ select.sieve_fileinto_input {
 
 
 /*************
- * Sieve keep 
+ * Sieve keep
  *************/
 
 /* Container */
@@ -1228,7 +1228,7 @@ td.sieve_keep_input {
 
 
 /*************
- * Sieve discard 
+ * Sieve discard
  *************/
 
 /* Container */
@@ -1247,7 +1247,7 @@ td.sieve_discard_input {
 
 
 /*************
- * Sieve redirect 
+ * Sieve redirect
  *************/
 
 /* Container */
@@ -1264,7 +1264,7 @@ td.sieve_redirect_input {
 	padding-left:20px;
 }
 textarea.sieve_redirect_input {
-	width:100%; 
+	width:100%;
 	height:30px;
 }
 
@@ -1287,13 +1287,13 @@ td.sieve_reject_input {
 	padding-left:20px;
 }
 textarea.sieve_reject_input {
-	width:100%; 
+	width:100%;
 	height:55px;
 }
 
 
 /*************
- * Sieve end 
+ * Sieve end
  *************/
 
 /* Container */
@@ -1312,7 +1312,7 @@ td.sieve_stop_input {
 
 
 /*************
- * Sieve vacation 
+ * Sieve vacation
  *************/
 
 /* Container */
@@ -1337,7 +1337,7 @@ textarea.sieve_vacation_input {
 
 
 /*************
- * Sieve allof 
+ * Sieve allof
  *************/
 
 table.sieve_allof_container {
@@ -1359,11 +1359,11 @@ td.sieve_allof_left {
 
 /* Container */
 td.sieve_allof_right {
-	background-color:#BDBDBD ; 
+	background-color:#BDBDBD ;
 }
 
 /*************
- * Sieve anyof 
+ * Sieve anyof
  *************/
 
 table.sieve_anyof_container {
@@ -1385,12 +1385,12 @@ td.sieve_anyof_left {
 
 /* Container */
 td.sieve_anyof_right {
-	background-color:#BDBDBD ; 
+	background-color:#BDBDBD ;
 	border: solid 1px #AAAAAA;
 }
 
 /*************
- * Sieve Test Cases  
+ * Sieve Test Cases
  *************/
 
 table.sieve_test_container {
@@ -1539,12 +1539,12 @@ td.container_:hover,div.container_:hover {
 }
 
 div.errorMsgTitle {
-	width:100%; 
+	width:100%;
 	font-size: 1.4em;
 	padding-bottom:0.3em;
 	padding-top:0.3em;
 	font-weight:bold;
-	background-color: #F0F0F0; 
+	background-color: #F0F0F0;
 }
 
 div.errorMsgDialog {
@@ -1595,47 +1595,47 @@ div.autocomplete li:hover{
 
 div.autocomplete ul li.selected { background-color: #F0F0F0;}
 
-#pulldown {                                                                                                                    
-        background: #FFFFFF;                                                                                                   
-        height: 23px;                                                                                                          
-        border-top: 1px #D0D0D0 solid;                                                                                         
-        border-left: 1px #D0D0D0 solid;                                                                                        
-        border-bottom: 1px #808080 solid;                                                                                      
-        border-right: 1px #808080 solid;                                                                                       
-}                                                                                                                              
+#pulldown {
+        background: #FFFFFF;
+        height: 23px;
+        border-top: 1px #D0D0D0 solid;
+        border-left: 1px #D0D0D0 solid;
+        border-bottom: 1px #808080 solid;
+        border-right: 1px #808080 solid;
+}
 
 #pulldown  ul {
         display: block;
-        margin: 0;     
-        padding: 0;    
+        margin: 0;
+        padding: 0;
         line-height: 1em;
         list-style: none;
-        z-index: 90      
-}                        
+        z-index: 90
+}
 
 #pulldown  ul li {
         float: left;
         margin: 0 3px 0 0;
-        padding: 0;       
-        font-size: 12px;  
+        padding: 0;
+        font-size: 12px;
         line-height: 1, 5em;
         list-style-type: none;
-}                             
+}
 
 #pulldown ul li a {
         float: left;
         display: block;
-        width: auto;   
+        width: auto;
         font-weight: normal;
         background: transparent;
-        text-decoration: none;  
-        margin: 0;              
+        text-decoration: none;
+        margin: 0;
         padding: 5px 5px 5px 5px;
-}                                
+}
 
 #pulldown  ul li a:hover {
         text-decoration: none;
-}                             
+}
 
 #pulldown  ul li.sep {
         color: #AAA;
@@ -1676,4 +1676,176 @@ div.autocomplete ul li.selected { background-color: #F0F0F0;}
         font-weight: normal;
         background-color: #418DD4;
         background-image: none;
+}
+
+div.datepicker {
+        position:absolute;
+        text-align:center;
+        border: 1px #C4D5E3 solid;
+        font-family:arial;
+        background:#FFF;
+        font-size:10px;
+        padding:0;
+}
+div.datepicker-calendar table {
+        font-size:10px;
+        border:1px solid #FFF;
+        margin:0;
+        padding:0;
+        text-align:center;
+}
+div.datepicker div.datepicker-header {
+        font-size:11px;
+        font-weight:bold;
+        background:#E9F5FF;
+        border-bottom:1px solid #CCE9FF;
+        padding:2px;
+        text-align:center;
+}
+div.datepicker table.header {
+        width:175px;
+        border:0;
+        padding:0;
+        text-align:center;
+}
+td.prev,
+td.prev_year,
+td.next,
+td.next_year {
+        width:8%;
+        color:#F7B72E;
+        cursor:pointer;
+        font-weight:bold;
+        line-height:16px;
+}
+td.prev:hover,
+td.prev_year:hover,
+td.next:hover,
+td.next_year:hover {
+        color:#FF6600;
+}
+td.header {
+        text-align:center;
+        width:68%;
+        font-weight:bold;
+        line-height:16px;
+}
+div.datepicker-header {
+        height:16px;
+}
+div.datepicker-calendar table tbody tr {
+        border:1px solid #FFF;
+        margin:0;
+        padding:0;
+}
+div.datepicker-calendar table tbody tr td {
+        border:1px #EAEAEA solid;
+        margin:0;
+        padding:0;
+        text-align:center;
+        height:16px;
+        line-height:16px;
+        width:21px;
+        cursor:pointer;
+}
+div.datepicker-calendar table tbody tr td:hover,
+div.datepicker-calendar table tbody tr td.outbound:hover,
+div.datepicker-calendar table tbody tr td.today:hover {
+        border:1px #CCE9FF solid;
+        background:#E9F5FF;
+        cursor:pointer;
+}
+div.datepicker-calendar table tbody tr td.wday {
+        border:1px #CCE8FE solid;
+        background:#E9F5FF;
+        cursor:text;
+        width:21px;
+        height:16px;
+        line-height:16px;
+        font-weight:bold;
+}
+div.datepicker-calendar table tbody tr td.outbound {
+        background:#F4F3F3;
+}
+div.datepicker-calendar table tbody tr td.today {
+        border:1px #CCE9FF solid;
+        background:#E9F5FF;
+        background-image:url(images/date_active.gif);
+        background-repeat:no-repeat;
+        position:top left;
+        width:21px;
+        height:16px;
+        line-height:16px;
+}
+div.datepicker-calendar table tbody tr td.today:hover {
+        border:1px #CCE9FF solid;
+        background:#E9F5FF;
+        background-image:url(images/date_active.gif);
+        background-repeat:no-repeat;
+        position:top left;
+}
+div.datepicker-calendar table tbody tr td.nclick,
+div.datepicker-calendar table tbody tr td.nclick_outbound {
+        cursor:default;
+        color:#aaa;
+        width:21px;
+        height:16px;
+        line-height:16px;
+}
+div.datepicker-calendar table tbody tr td.nclick_outbound {
+        background:#E8E4E4;
+        width:21px;
+        height:16px;
+        line-height:16px;
+}
+div.datepicker-calendar table tbody tr td.nclick:hover,
+div.datepicker-calendar table tbody tr td.nclick_outbound:hover {
+        border:1px #EAEAEA solid;
+        background:#FFF;
+}
+div.datepicker-calendar table tbody tr td.nclick_outbound:hover {
+        background:#E8E4E4;
+}
+div.datepicker div.datepicker-footer {
+        font-size:10px;
+        background:#E9F5FF;
+        border-top:1px solid #CCE9FF;
+        cursor:pointer;
+        text-align:center;
+        padding:2px;
+}
+
+.date {
+        float:left;
+        border:1px solid #CCE9FF;
+        font-size:11px;
+        font-family:arial;
+        padding:1px;
+}
+.datepicker-opener-table {
+        border:none;
+        padding:0;
+        border-spacing:0;
+        margin:0 0 0 3px;
+        background:transparent url(images/datepicker.gif) no-repeat 0 0;
+        width:16px;
+        height:16px;
+        cursor:pointer;
+}
+.Opera .datepicker-opener-table {
+        float:right;
+}
+.IE7 .datepicker-opener-table {
+        position:relative;
+        top:0;
+        left:3px;
+}
+.datepicker-opener-table:hover {
+        background:transparent url(images/gfx/datepicker_ro.gif) no-repeat 0 0;
+}
+.datepicker-opener {
+        width:16px;
+        height:16px;
+        margin:0 0 0 3px;
+        cursor:pointer;
 }

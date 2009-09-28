@@ -81,6 +81,7 @@ if (isset($_GET['request'])){
 
     /* Else notice that the user has to close the browser... */
     $smarty->assign("iePngWorkaround", FALSE);
+    $smarty->assign("usePrototype", "false");
     $smarty->display (get_template_path('headers.tpl'));
     $smarty->display (get_template_path('logout-close.tpl'));
     exit;
@@ -91,6 +92,7 @@ if (isset($_GET['request'])){
 
 }else{  // The logout wasn't forced, so the session is invalid 
   
+  $smarty->assign("usePrototype", "false");
   $smarty->display (get_template_path('headers.tpl'));
   $smarty->display (get_template_path('logout.tpl'));
   exit;

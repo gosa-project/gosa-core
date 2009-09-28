@@ -304,6 +304,7 @@ $smarty->assign ("menu", $plist->menu);
 $smarty->assign ("plug", "$plug");
 
 $smarty->assign("iePngWorkaround", $config->get_cfg_value("iePngWorkaround","false" ) == "true");
+$smarty->assign("usePrototype", "false");
 $header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
 
 /* React on clicks */
