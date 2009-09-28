@@ -1831,10 +1831,6 @@ div.datepicker div.datepicker-footer {
 
 .date {
         float:left;
-        border:1px solid black;
-        font-size:11px;
-        font-family:arial;
-        padding:1px;
 }
 .datepicker-opener-table {
         border:1px solid transparent;
