@@ -425,6 +425,8 @@ DatePicker.prototype	= {
 	
 		/* init the datepicker if it doesn't exists */
 		if ( $(this._id_datepicker) == null ) this.load();
+		var a_pos = Element.cumulativeOffset($(this._relative));
+		this.setPosition(a_pos[1], a_pos[0]);
 		if (!this._isPositionned && this._relativePosition) {
 			/* position the datepicker relatively to element */
 			var a_lt = Element.positionedOffset($(this._relative));
