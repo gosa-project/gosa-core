@@ -2285,26 +2285,18 @@ function check_schema($cfg,$rfc2307bis = FALSE)
           if(isset($values['file'])){
             $checks[$name]["SCHEMA_FILES"] = array($values['file']);
           }
-          $checks[$name]["CLASSES_REQUIRED"] = array($name);
+          $checks[$name]["CLASSES_REQUIRED"] = is_array($values['class'])?$values['class']:array($values['class']);
         }
   foreach($checks as $name => $value){
     foreach($value['CLASSES_REQUIRED'] as $class){
 
       if(!isset($objectclasses[$name])){
         $checks[$name]['STATUS'] = FALSE;
-        if($value['IS_MUST_HAVE']){
-          $checks[$name]['MSG']    = sprintf(_("Missing required object class '%s'!"),$class);
-        }else{
-          $checks[$name]['MSG']    = sprintf(_("Missing optional object class '%s'!"),$class);
-        }
+        $checks[$name]['MSG']    = sprintf(_("Missing required object class '%s'!"),$class);
       }elseif(!check_schema_version($objectclasses[$name],$value['REQUIRED_VERSION'])){
         $checks[$name]['STATUS'] = FALSE;
 
-        if($value['IS_MUST_HAVE']){
-          $checks[$name]['MSG'] = sprintf(_("Version mismatch for required object class '%s' (!=%s)!"), $class,                           $value['REQUIRED_VERSION']);
-        }else{
-          $checks[$name]['MSG'] = sprintf(_("Version mismatch for optional object class '%s' (!=%s)!"), $class,                           $value['REQUIRED_VERSION']);
-        }
+        $checks[$name]['MSG'] = sprintf(_("Version mismatch for required object class '%s' (!=%s)!"), $class,                           $value['REQUIRED_VERSION']);
       }else{
         $checks[$name]['STATUS'] = TRUE;
         $checks[$name]['MSG'] = sprintf(_("Class(es) available"));
