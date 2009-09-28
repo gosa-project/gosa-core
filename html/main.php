@@ -305,7 +305,6 @@ $smarty->assign ("plug", "$plug");
 
 $smarty->assign("iePngWorkaround", $config->get_cfg_value("iePngWorkaround","false" ) == "true");
 $smarty->assign("usePrototype", "false");
-$header= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl'));
 
 /* React on clicks */
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -408,7 +407,8 @@ if (isset($_POST['_channel_'])){
 	$smarty->assign("channel", "");
 }
 
-$display= $header.$smarty->fetch(get_template_path('framework.tpl'));
+$display= "<!-- headers.tpl-->".$smarty->fetch(get_template_path('headers.tpl')).
+          $smarty->fetch(get_template_path('framework.tpl'));
 
 /* Save dialog filters and selected base in a cookie. 
    So we may be able to restore the filter an base settings on reload.
