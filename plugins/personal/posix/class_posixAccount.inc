@@ -1600,6 +1600,22 @@ class posixAccount extends plugin
 #    $this->savedGidNumber = $this->get_next_id("gidNumber", $this->dn);
     $this->savedGidNumber = "";
 
+    /* Get group membership */
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    $ldap->search("(&(objectClass=posixGroup)(memberUid=".$source['uid'][0]."))", array("cn", "description"));
+
+    while ($attrs= $ldap->fetch()){
+      if (!isset($attrs["description"][0])){
+        $entry= $attrs["cn"][0];
+      } else {
+        $entry= $attrs["cn"][0]." [".$attrs["description"][0]."]";
+      }
+      $this->groupMembership[$ldap->getDN()]= $entry;
+    }
+    asort($this->groupMembership);
+    reset($this->groupMembership);
+
     /* Fill group */
     if(isset($source['gidNumber'][0])){
       $this->primaryGroup= $source['gidNumber'][0];
