@@ -2254,8 +2254,8 @@ function check_schema($cfg,$rfc2307bis = FALSE)
 
   /* Some other checks */
   foreach(array(
-        "gosaCacheEntry"        => array("version" => "2.6.1"),
-        "gosaDepartment"        => array("version" => "2.6.1"),
+        "gosaCacheEntry"        => array("version" => "2.6.1", "class" => "gosaAccount"),
+        "gosaDepartment"        => array("version" => "2.6.1", "class" => "gosaAccount"),
         "goFaxAccount"          => array("version" => "1.0.4", "class" => "gofaxAccount","file" => "gofax.schema"),
         "goFaxSBlock"           => array("version" => "1.0.4", "class" => "gofaxAccount","file" => "gofax.schema"),
         "goFaxRBlock"           => array("version" => "1.0.4", "class" => "gofaxAccount","file" => "gofax.schema"),
@@ -2271,10 +2271,10 @@ function check_schema($cfg,$rfc2307bis = FALSE)
         "goShareServer"         => array("version" => "2.6.1", "class" => "terminals","file" => "goto.schema"),
         "goNtpServer"           => array("version" => "2.6.1", "class" => "terminals","file" => "goto.schema"),
         "goSyslogServer"        => array("version" => "2.6.1", "class" => "terminals","file" => "goto.schema"),
-        "goLdapServer"          => array("version" => "2.6.1"),
+        "goLdapServer"          => array("version" => "2.6.1", "class" => "goServer"),
         "goCupsServer"          => array("version" => "2.6.1", "class" => array("posixAccount", "terminals"),),
         "goImapServer"          => array("version" => "2.6.1", "class" => array("mailAccount", "mailgroup"),"file" => "gosa-samba3.schema"),
-        "goKrbServer"           => array("version" => "2.6.1"),
+        "goKrbServer"           => array("version" => "2.6.1", "class" => "goServer"),
         "goFaxServer"           => array("version" => "2.6.1", "class" => "gofaxAccount","file" => "gofax.schema"),
         ) as $name => $values){
 
@@ -2285,7 +2285,9 @@ function check_schema($cfg,$rfc2307bis = FALSE)
           if(isset($values['file'])){
             $checks[$name]["SCHEMA_FILES"] = array($values['file']);
           }
-          $checks[$name]["CLASSES_REQUIRED"] = is_array($values['class'])?$values['class']:array($values['class']);
+          if (isset($values['class'])) {
+            $checks[$name]["CLASSES_REQUIRED"] = is_array($values['class'])?$values['class']:array($values['class']);
+          }
         }
   foreach($checks as $name => $value){
     foreach($value['CLASSES_REQUIRED'] as $class){
