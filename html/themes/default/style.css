@@ -1770,8 +1770,8 @@ div.datepicker-calendar table tbody tr td.today:hover {
         cursor:pointer;                                  
 }                                                        
 div.datepicker-calendar table tbody tr td.wday {         
-        border:1px #CCE8FE solid;                        
-        background:#E9F5FF;                              
+        border:1px #AAA solid;                        
+        background:#CCCCCC;                              
         cursor:text;                                     
         width:21px;                                      
         height:16px;                                     
