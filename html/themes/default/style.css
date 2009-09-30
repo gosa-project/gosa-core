@@ -1679,7 +1679,7 @@ div.autocomplete ul li.selected { background-color: #F0F0F0;}
 }
 
 input[disabled] {
-  color:black;   
+  color:#888;   
   background-color:#DDD;
 }                       
                         
