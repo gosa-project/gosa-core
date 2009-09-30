@@ -1051,6 +1051,9 @@ class Step_Migrate extends setup_step
         $this->checks['acls']['ERROR_MSG'].= "<input type='submit' name='create_acls' value='"._("Create")."'>";
       }
     }
+
+    // Reload base OC
+    $this->checkBaseOC();
     return($GOsa_26_found);
   }
 
@@ -2134,8 +2137,10 @@ class Step_Migrate extends setup_step
         if(isset($this->rootOC_details['mods'])){
           $res  = $ldap->modify($this->rootOC_details['mods']);	
           if(!$res){
-            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $source, LDAP_MOD, get_class()));
+            msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $cv['base'], LDAP_MOD, get_class()));
           }
+          $this->checkBaseOC();
+          $this->check_administrativeAccount();
           return($res);
         }else{
           trigger_error("No modifications to make... ");
