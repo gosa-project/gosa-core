@@ -1596,6 +1596,8 @@ class Step_Migrate extends setup_step
       /* Update ldap and reload check infos 
        */
       $this->migrate_selected_admin_users();
+      $this->dialog = FALSE;
+      $this->acl_migrate_dialog = FALSE;
 
     }elseif($this->acl_migrate_dialog){
 
