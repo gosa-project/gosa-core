@@ -48,7 +48,7 @@ class posixAccount extends plugin
   var $shadowWarning= "0";
   var $shadowLastChange= "0";
   var $shadowInactive= "0";
-  var $shadowExpire= "0";
+  var $shadowExpire= "";
   var $gosaDefaultPrinter= "";
   var $accessTo= array();
   var $trustModel= "";
@@ -212,8 +212,13 @@ class posixAccount extends plugin
       }
     }
 
-    /* Convert to seconds */
-    $this->shadowExpire= $this->convertToSeconds($this->shadowExpire);
+    /* Convert shadowExpire for usage */
+    if ($this->shadowExpire == 0){
+      $this->shadowExpire= "";
+    } else {
+      $this->shadowExpire= date('d.m.Y', $this->shadowExpire * 60 * 60 * 24);
+    }
+
 
     /* Generate shell list from CONFIG_DIR./shells */
     if (file_exists(CONFIG_DIR.'/shells')){
@@ -381,6 +386,7 @@ class posixAccount extends plugin
 
     /* Templates now! */
     $smarty= get_smarty();
+    $smarty->assign("usePrototype", "true");
 
     /* Show ws dialog */
     if ($this->show_ws_dialog){
@@ -531,32 +537,6 @@ class posixAccount extends plugin
 
     // Set last system login
     $smarty->assign("gotoLastSystemLogin",$this->gotoLastSystemLogin);
-
-    /* Fill calendar */
-    /* If this $this->shadowExpire is empty 
-        use current date as base for calculating selectbox values.
-       (This attribute is empty if this is a new user )*/ 
-    if(empty($this->shadowExpire)){
-      $date= getdate(time());
-    }else{
-      $date= getdate($this->shadowExpire);
-    }
- 
-    $days= array();
-    for($d= 1; $d<32; $d++){
-      $days[$d]= $d;
-    }
-    $years= array();
-    for($y= $date['year']-10; $y<$date['year']+10; $y++){
-      $years[]= $y;
-    }
-    $months= msgPool::months();
-    $smarty->assign("day", $date["mday"]);
-    $smarty->assign("days", $days);
-    $smarty->assign("months", $months);
-    $smarty->assign("month", $date["mon"]-1);
-    $smarty->assign("years", $years);
-    $smarty->assign("year", $date["year"]);
 
     /* Fill arrays */
     $smarty->assign("shells", $this->loginShellList);
@@ -775,7 +755,9 @@ class posixAccount extends plugin
             $this->$var      = $_POST[$var];
           }else{
             $this->$activate_var  = false;
-            $this->$var      = 0;
+            if ($var != "shadowExpire") {
+              $this->$var      = 0;
+            }
           }
         }
       }
@@ -838,8 +820,9 @@ class posixAccount extends plugin
     if (!$this->activate_shadowExpire){
       $this->shadowExpire= "0";
     } else {
-      /* Transform seconds to days here */
-      $this->shadowExpire= (int)($this->shadowExpire / (60 * 60 * 24)) ;
+      /* Transform date to days since the beginning */
+      list($day, $month, $year)= split('\.', $this->shadowExpire, 3);
+      $this->shadowExpire= (int)(mktime(0, 0, 0, $month, $day, $year)/ (60 * 60 * 24)) ;
     }
     if (!$this->activate_shadowMax){
       $this->shadowMax= "0";
@@ -1133,6 +1116,11 @@ class posixAccount extends plugin
           $message[]= msgPool::toosmall(_("GID"), $this->config->get_cfg_value("minId"));
         }
       }
+    }
+
+    /* Check dates */
+    if ($this->activate_shadowExpire && ($this->shadowExpire == "" || !tests::is_date($this->shadowExpire))){
+      $message[]= msgPool::invalid("shadowExpire", $this->shadowExpire);
     }
 
     /* Check shadow settings, well I like spaghetties... */

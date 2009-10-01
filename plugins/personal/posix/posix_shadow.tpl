@@ -29,26 +29,22 @@
 
 <!-- activate_shadowExpire -->
 {render acl=$shadowExpireACL checkbox=$multiple_support checked=$use_activate_shadowExpire}
-   <input type="checkbox" class="center" name="activate_shadowExpire" value="1" {$activate_shadowExpire}>
+   <table border="0" cellpadding="0" cellspacing="0"><tr><td><input type="checkbox" class="center" name="activate_shadowExpire" value="1" {$activate_shadowExpire}>
 {/render}
-   {t}Password expires on{/t}
-{render acl=$shadowExpireACL}
-   <select name=day onChange="createResult(this.form,this.form.shadowExpire);">
-    {html_options values=$days output=$days selected=$day}
-   </select>
-{/render}
-{render acl=$shadowExpireACL}
-   <select name=month onChange="populate(this.form,this.form.shadowExpire);">
-    {html_options options=$months selected=$month}
-   </select>
-{/render}
-{render acl=$shadowExpireACL}
-   <select name=year onChange="populate(this.form,this.form.shadowExpire);">
-    {html_options values=$years output=$years selected=$year}
-   </select>
-   <input type="hidden" name="shadowExpire" value="{$shadowExpire}">
-{/render}
-   <br>
+   {t}Password expires on{/t}&nbsp;
+   {render acl=$shadowExpireACL}
+   </td><td style='width:130px'>
+   <input type="text" id="shadowExpire" name="shadowExpire" class="date" style='width:100px' value="{$shadowExpire}">
+     {if $shadowExpireACL|regex_replace:"/[cdmr]/":"" == "w"}
+     <script type="text/javascript">
+     {literal}
+       var datepicker  = new DatePicker({ relative : 'shadowExpire', language : '{/literal}{$lang}{literal}',
+                             keepFieldEmpty : true, enableCloseEffect : false, enableShowEffect : false});
+     {/literal}
+     </script>
+     {/if}
+     </td></tr></table>
+   {/render}
 
 <!-- shadowInactive -->
 {render acl=$shadowInactiveACL checkbox=$multiple_support checked=$use_activate_shadowInactive}
@@ -69,11 +65,3 @@
   </td>
  </tr>
 </table>
-
-<!-- Place cursor -->
-<script language="JavaScript" type="text/javascript">
-  <!--
-  // Populate expiery dialog
-  populate(document.mainform,document.mainform.shadowExpire);
-  -->
-</script>
