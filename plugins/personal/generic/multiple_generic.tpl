@@ -476,7 +476,5 @@
 <script language="JavaScript" type="text/javascript">
 <!-- // First input field on page
 focus_field('academicTitle');
-if (document.mainform.yearSel != "")
-populate(document.mainform,document.mainform.dateOfBirth);
 -->
 </script>
