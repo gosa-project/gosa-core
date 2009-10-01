@@ -12,6 +12,7 @@ GOsa2 changelog
   - Fix "suggest IP" function to return unique IP
   - Add LVM support to FAI modules using setup-storage
   - Prepared for new configurable and sortable lists
+  - Add GOsa login restrictions
 
 * gosa 2.6.5
   - Updated locales
