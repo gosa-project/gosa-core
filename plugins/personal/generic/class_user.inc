@@ -131,6 +131,8 @@ class user extends plugin
      'dn' from LDAP */
   function user (&$config, $dn= NULL)
   {
+    global $lang;
+
     $this->config= $config;
     /* Configuration is fine, allways */
     if($this->config->get_cfg_value("honourIvbbAttributes") == "true"){
@@ -222,10 +224,10 @@ class user extends plugin
       /* This entry is ISO 8601 conform */
       list($year, $month, $day)= split("-", $this->attrs['dateOfBirth'][0], 3);
     
-      $this->dateOfBirth=array( 'mon'=> $month,"mday"=> $day,"year"=> $year);
-      $this->use_dob= "1";
+      #TODO: use $lang to convert date
+      $this->dateOfBirth= "$day.$month.$year";
     } else {
-      $this->use_dob= "0";
+      $this->dateOfBirth= "";
     }
 
     /* Put gender attribute to upper case */
@@ -275,50 +277,7 @@ class user extends plugin
     }
 
     $smarty= get_smarty();
-
-    /* Fill calendar */
-    if ($this->dateOfBirth == "0"){
-      $date= getdate();
-    } else {
-      if(is_array($this->dateOfBirth)){
-        $date = $this->dateOfBirth;
-  
-        // Trigger on dates like 1985-04-01, getdate only understands timestamps
-      } else if (!empty($this->dateOfBirth) && !is_numeric($this->dateOfBirth)){
-        $date= getdate(strtotime($this->dateOfBirth));
-
-      } else {
-        $date = getdate($this->dateOfBirth);
-      }
-    }
-
-    $days= array();
-    for($d= 1; $d<32; $d++){
-      $days[$d]= $d;
-    }
-    $years= array();
-
-    if(($date['year']-100)<1901){
-      $start = 1901;
-    }else{
-      $start = $date['year']-100;
-    }
-
-    $end = $start +100;
-    
-    for($y= $start; $y<=$end; $y++){
-      $years[]= $y;
-    }
-    $years['-']= "-&nbsp;";
-    $months= msgPool::months();
-    $months['-'] = '-&nbsp;';
-
-    $smarty->assign("day", $date["mday"]);
-    $smarty->assign("days", $days);
-    $smarty->assign("months", $months);
-    $smarty->assign("month", $date["mon"]-1);
-    $smarty->assign("years", $years);
-    $smarty->assign("year", $date["year"]);
+    $smarty->assign("usePrototype", "true");
 
     /* Assign sex */
     $sex= array(0 => "&nbsp;", "F" => _("female"), "M" => _("male"));
@@ -444,12 +403,6 @@ class user extends plugin
       $this->picture_dialog= FALSE;
       $this->dialog= FALSE;
     }
-
-    /* Toggle dateOfBirth information */
-    if (isset($_POST['set_dob'])){
-      $this->use_dob= ($this->use_dob == "0")?"1":"0";
-    }
-
 
     /* Want certificate= */
     if ((isset($_POST['edit_cert'])) && $this->acl_is_readable("Certificate")){
@@ -883,6 +836,8 @@ class user extends plugin
   /* Save data to LDAP, depending on is_account we save or delete */
   function save()
   {
+    global $lang;
+
     /* Only force save of changes .... 
        If this attributes aren't changed, avoid saving.
      */
@@ -893,10 +848,11 @@ class user extends plugin
     /* First use parents methods to do some basic fillup in $this->attrs */
     plugin::save ();
 
-    if ($this->use_dob == "1"){
-      /* If it is an array, the generic page has never been loaded - so there's no difference. Using an array would cause an error btw. */
+    if ($this->dateOfBirth != ""){
       if(!is_array($this->attrs['dateOfBirth'])) {
-        $this->attrs['dateOfBirth'] = date("Y-m-d", $this->dateOfBirth);
+        #TODO: use $lang to convert date
+        list($day, $month, $year)= split("\.", $this->dateOfBirth);
+        $this->attrs['dateOfBirth'] = sprintf("%04d-%02d-%02d", $year, $month, $day);
       }
     }
 
@@ -959,7 +915,7 @@ class user extends plugin
     }
 
     /* Special handling for dateOfBirth value */
-    if ($this->use_dob != "1"){
+    if ($this->dateOfBirth == ""){
       if ($this->is_new) {
         unset($this->attrs["dateOfBirth"]);
       } else {
@@ -1292,9 +1248,7 @@ class user extends plugin
       $this->set_acl_base($this->base);
     }
 
-    /* Check if we are allowed to create/move this user 
-     */
-    
+    /* Check if we are allowed to create/move this user */
     if($this->orig_dn == "new" && !$this->acl_is_createable($this->base)){
       $message[]= msgPool::permCreate();
     }elseif($this->orig_dn != "new" && $this->new_dn != $this->orig_dn && !$this->acl_is_moveable($this->base)){
@@ -1355,6 +1309,11 @@ class user extends plugin
     }
     if (!tests::is_phone_nr($this->pager)){
       $message[]= msgPool::invalid(_("Pager"), $this->pager, "/[\/0-9 ()+*-]/");
+    }
+
+    /* Check dates */
+    if (!tests::is_date($this->dateOfBirth)){
+      $message[]= msgPool::invalid(_("Date of birth"), $this->dateOfBirth);
     }
 
     /* Check for reserved characers */

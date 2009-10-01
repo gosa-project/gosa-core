@@ -121,21 +121,15 @@
      <td>
       <div style="height:10px;"></div>
 {render acl=$dateOfBirthACL}
-	      {if $use_dob eq 1}
-	      <select id="day" name=day onChange="createResult(this.form,this.form.dateOfBirth);"> 
-	       {html_options values=$days output=$days selected=$day}
-	      </select>
-	      <select name=month onChange="populate(this.form,this.form.dateOfBirth);" >
-	       {html_options options=$months selected=$month}
-	      </select>
-	      <select name=year onChange="populate(this.form,this.form.dateOfBirth);" >
-	       {html_options values=$years output=$years selected=$year}
-	      </select>
-	      <input type="hidden" name="dateOfBirth" value="{$dateOfBirth}">
-	      <input type="submit" name="set_dob" value="-" >
-	      {else}
-	      <input type="submit" name="set_dob" value="{t}Set{/t}" >
-	      {/if}
+        <input type="text" id="dateOfBirth" name="dateOfBirth" class="date" style='width:100px' value="{$dateOfBirth}">
+        {if $dateOfBirthACL|regex_replace:"/[cdmr]/":"" == "w"}
+        <script type="text/javascript">
+          {literal}
+          var datepicker  = new DatePicker({ relative : 'dateOfBirth', language : '{/literal}{$lang}{literal}', keepFieldEmpty : true,
+                                             enableCloseEffect : false, enableShowEffect : false });
+          {/literal}
+        </script>
+        {/if}
 {/render}
      </td>
     </tr>
@@ -584,7 +578,5 @@
 <script language="JavaScript" type="text/javascript">
   <!-- // First input field on page
 	focus_field('sn');
-  	if (document.mainform.yearSel != "")
-				populate(document.mainform,document.mainform.dateOfBirth);
   -->
 </script>
