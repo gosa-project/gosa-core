@@ -60,7 +60,7 @@ class organization extends department
   /* Naming attributes 
    */
   var $o            ="";
-  var $type         = "o";
+  var $type         = "organization";
   var $orgi_o       = "";
   var $namingAttr   = "o";
 

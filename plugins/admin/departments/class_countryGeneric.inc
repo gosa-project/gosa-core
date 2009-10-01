@@ -26,7 +26,7 @@ class country extends department
 	var $attributes     = array( "c", "ou", "description","gosaUnitTag");
 	var $objectclasses  = array("top", "gosaDepartment");
   var $structuralOC   = array("country");
-  var $type   ="c";
+  var $type   ="country";
   var $c      ="";
   var $orgi_c ="";
 

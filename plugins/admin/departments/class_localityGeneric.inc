@@ -28,7 +28,7 @@ class locality extends department
   var $structuralOC   = array("locality");
 
   var $description= "";
-  var $type       = "l";
+  var $type       = "locality";
   var $l          = "";
   var $orig_l     = "";
   var $namingAttr = "l";

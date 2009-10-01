@@ -36,7 +36,7 @@ class department extends plugin
 	var $gosaUnitTag= "";
   var $view_logged = FALSE;
 
-  var $type ="ou";
+  var $type ="organizationalUnit";
   var $namingAttr = "ou";
 
 	/* Headpage attributes */

@@ -26,7 +26,7 @@ class dcObject extends department
 	var $attributes     = array( "dc", "ou", "description","gosaUnitTag");
 	var $objectclasses  = array("top", "dcObject", "gosaDepartment");
   var $structuralOC   = array("locality");
-  var $type       = "dc";
+  var $type       = "dcObject";
   var $dc         = "";
   var $orgi_dc    = "";
   var $namingAttr = "dc";
