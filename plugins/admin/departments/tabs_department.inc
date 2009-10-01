@@ -69,8 +69,6 @@ class deptabs extends tabs
     $new_dn   = @LDAP::convert($namingAttr.'='.$value.','.$baseobject->base);
     $old_dn   = @LDAP::convert($namingAttr.'='.$orig_value.','.$baseobject->orig_base);
 
-    print_a(array($new_dn,$old_dn));
-
     if ($this->dn != $new_dn && $this->dn != "new"){
       return(TRUE); 
     }
