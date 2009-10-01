@@ -209,7 +209,7 @@ class department extends plugin
     $dep_types = departmentManagement::get_support_departments();
     $tpl ="";
     foreach($dep_types as $key => $data){
-      if($data['ATTR'] == $this->type){
+      if($data['OC'] == $this->type){
         $tpl = $data['TPL'];
         break;
       }

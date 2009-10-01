@@ -116,7 +116,7 @@ class departmentManagement extends plugin
       $types = $this->get_support_departments();
       $type = "";
       foreach($types as $key => $data){
-        if($data['ATTR'] == $s_entry){
+        if($data['OC'] == $s_entry){
           $type = $key;
           break;
         }
@@ -125,7 +125,7 @@ class departmentManagement extends plugin
       if(isset($types[$type])){
         $tab = $types[$type]['TAB'];
         $acl = $types[$type]['ACL'];
-        $this->deptabs= new deptabs($this->config,$this->config->data['TABS'][$tab], $this->dn,"department");
+        $this->deptabs= new deptabs($this->config, $this->config->data['TABS'][$tab], $this->dn, "department");
         $this->deptabs->set_acl_base($this->DivListDepartment->selectedBase);
       }else{
         trigger_error("Invalid / Not implemented countainer type.");
@@ -152,7 +152,7 @@ class departmentManagement extends plugin
       $data = array();
       foreach($types as $oc => $type){
         if(in_array($oc,$entry['objectClass'])){
-          $data = $type;
+          $data = $oc;
           break;
         }
       }
@@ -555,6 +555,18 @@ class departmentManagement extends plugin
     $types['dcObject']['IMG_FULL']= "plugins/departments/images/dc.png";
     $types['dcObject']['TITLE']   = _("Domain Component");
     $types['dcObject']['TPL']     = "dcObject.tpl";
+
+    /* Domain 
+     */ 
+    $types['domain']['ACL']     = "domain"; 
+    $types['domain']['CLASS']   = "domain"; 
+    $types['domain']['ATTR']    = "dc"; 
+    $types['domain']['TAB']     = "DOMAIN_TABS"; 
+    $types['domain']['OC']      = "domain"; 
+    $types['domain']['IMG']     = "plugins/departments/images/domain.png"; 
+    $types['domain']['IMG_FULL']= "plugins/departments/images/domain.png"; 
+    $types['domain']['TITLE']   = _("Domain"); 
+    $types['domain']['TPL']     = "domain.tpl"; 
 
     /* Country object
      */
