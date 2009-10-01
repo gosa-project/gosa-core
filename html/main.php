@@ -266,6 +266,7 @@ if (isset($_GET['reset'])){
 
 /* show web frontend */
 $smarty->assign ("date", date("l, dS F Y H:i:s O"));
+$smarty->assign ("lang", preg_replace('/_.*$/', '', $lang));
 $smarty->assign ("must", "<font class=\"must\">*</font>");
 if (isset($plug)){
   $plug= "?plug=$plug";
