@@ -543,21 +543,9 @@ class departmentManagement extends plugin
    */
   public static function get_support_departments()
   {
-    /* Domain component 
-     */
-    $types = array();
-    $types['dcObject']['ACL']     = "dcObject";
-    $types['dcObject']['CLASS']   = "dcObject";
-    $types['dcObject']['ATTR']    = "dc";
-    $types['dcObject']['TAB']     = "DCOBJECT_TABS";
-    $types['dcObject']['OC']      = "dcObject";
-    $types['dcObject']['IMG']     = "plugins/departments/images/dc.png";
-    $types['dcObject']['IMG_FULL']= "plugins/departments/images/dc.png";
-    $types['dcObject']['TITLE']   = _("Domain Component");
-    $types['dcObject']['TPL']     = "dcObject.tpl";
-
     /* Domain 
      */ 
+    $types = array();
     $types['domain']['ACL']     = "domain"; 
     $types['domain']['CLASS']   = "domain"; 
     $types['domain']['ATTR']    = "dc"; 
@@ -567,6 +555,18 @@ class departmentManagement extends plugin
     $types['domain']['IMG_FULL']= "plugins/departments/images/domain.png"; 
     $types['domain']['TITLE']   = _("Domain"); 
     $types['domain']['TPL']     = "domain.tpl"; 
+
+    /* Domain component 
+     */
+    $types['dcObject']['ACL']     = "dcObject";
+    $types['dcObject']['CLASS']   = "dcObject";
+    $types['dcObject']['ATTR']    = "dc";
+    $types['dcObject']['TAB']     = "DCOBJECT_TABS";
+    $types['dcObject']['OC']      = "dcObject";
+    $types['dcObject']['IMG']     = "plugins/departments/images/dc.png";
+    $types['dcObject']['IMG_FULL']= "plugins/departments/images/dc.png";
+    $types['dcObject']['TITLE']   = _("Domain Component");
+    $types['dcObject']['TPL']     = "dcObject.tpl";
 
     /* Country object
      */
