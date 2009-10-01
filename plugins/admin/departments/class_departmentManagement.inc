@@ -152,7 +152,7 @@ class departmentManagement extends plugin
       $data = array();
       foreach($types as $oc => $type){
         if(in_array($oc,$entry['objectClass'])){
-          $data = $oc;
+          $data = $type;
           break;
         }
       }
