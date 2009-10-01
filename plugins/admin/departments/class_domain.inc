@@ -25,7 +25,7 @@ class domain extends department
 	/* attribute list for save action */
 	var $attributes     = array( "dc", "ou", "description","gosaUnitTag");
 	var $objectclasses  = array("top", "domain", "gosaDepartment");
-        var $structuralOC   = array("locality");
+        var $structuralOC   = array("domain");
         var $type       = "domain";
         var $dc         = "";
         var $orgi_dc    = "";
