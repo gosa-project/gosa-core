@@ -13,6 +13,8 @@ GOsa2 changelog
   - Add LVM support to FAI modules using setup-storage
   - Prepared for new configurable and sortable lists
   - Add GOsa login restrictions
+  - Added "Domain" to department management
+  - Various minor bugfixes
 
 * gosa 2.6.5
   - Updated locales
