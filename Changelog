@@ -15,6 +15,7 @@ GOsa2 changelog
   - Add GOsa login restrictions
   - Added "Domain" to department management
   - Various minor bugfixes
+  - Moved to unified datepicker for dates
 
 * gosa 2.6.5
   - Updated locales
