@@ -29,7 +29,7 @@ MAKE_GOTO=""
 GOTO=""
 PBUILDER=""
 NOT_RELEASED="heimdal dak dfs glpi apache2"
-GOTO_NOT_RELEASED="apache-directory-studio goto-cd libresourcepool-net-ldap-perl-1.002 libresourcepool-perl-1.0104 openproj ptc syslinux" 
+GOTO_NOT_RELEASED="apache-directory-studio goto-cd libresourcepool-net-ldap-perl-1.002 libresourcepool-perl-1.0104 openproj ptc syslinux konch" 
 DEBIAN_PKG="remove"
 NO_SVN="use"
 EXTRACT=`pwd`
@@ -51,7 +51,7 @@ usage() {
 	  -n|--no-svn       Don't extract gosa from svn (when internet connectivity is not present)
 	  -x|--extract-dir  Directory where the checkout is for no-svn
 	  -g|--build-goto   Build the goto2 packages
-          -l|--use-pbuilder Use pbuilder to build the packages
+	  -l|--use-pbuilder Use pbuilder to build the packages
 	  -h|--help         this help
 
 	EOF
@@ -334,12 +334,11 @@ then
 	fi
 else
 	echo "Creating debian packages..."
-	echo $PBUILDER
 
 	for dir in $GOSA_DIR $GOSA_SI_DIR $GOSA_PLUGIN_DIRS; do
 	if [ "$PBUILDER" = "use" ]
 	then
-		echo "using pbuilder"
+		echo "using pbuilder to build gosa gosa-si gosa-plugins"
 		(cd "$dir"; pdebuild)
 	else
 		(cd "$dir"; dpkg-buildpackage -k$DEBSIGN_KEYID -rfakeroot -sa)
