@@ -1079,7 +1079,7 @@ class acl extends plugin
         $summary.= $cn.", ";
       }
     } else {
-      $summary.= _("ACL takes effect for all users");
+      $summary.= "<font color='red'><i>"._("inactive")."&nbsp;-&nbsp;"._("No members")."</i></font>";
     }
 
     return (preg_replace('/, $/', '', $summary));

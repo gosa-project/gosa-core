@@ -158,9 +158,9 @@ class userinfo
       foreach($aclc[$dn] as $idx => $type){
         $interresting= FALSE;
         
-        /* No members? This is good for all users... */
+        /* No members? This ACL rule is deactivated ... */
         if (!count($type['members'])){
-          $interresting= TRUE;
+          $interresting= FALSE; 
         } else {
 
           /* Inspect members... */
