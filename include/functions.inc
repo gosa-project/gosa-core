@@ -2591,17 +2591,11 @@ function generate_smb_nt_hash($password)
 
   list($lm,$nt)= split (":", trim($hash));
 
-  if ($config->get_cfg_value("sambaversion") == 3) {
-	  $attrs['sambaLMPassword']= $lm;
-	  $attrs['sambaNTPassword']= $nt;
-	  $attrs['sambaPwdLastSet']= date('U');
-	  $attrs['sambaBadPasswordCount']= "0";
-	  $attrs['sambaBadPasswordTime']= "0";
-  } else {
-	  $attrs['lmPassword']= $lm;
-	  $attrs['ntPassword']= $nt;
-	  $attrs['pwdLastSet']= date('U');
-  }
+  $attrs['sambaLMPassword']= $lm;
+  $attrs['sambaNTPassword']= $nt;
+  $attrs['sambaPwdLastSet']= date('U');
+  $attrs['sambaBadPasswordCount']= "0";
+  $attrs['sambaBadPasswordTime']= "0";
   return($attrs);
 }
 

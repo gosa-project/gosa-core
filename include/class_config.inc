@@ -297,9 +297,6 @@ class config  {
   {
     $this->current= $this->data['LOCATIONS'][$name];
 
-    if (!isset($this->current['SAMBAVERSION'])){
-      $this->current['SAMBAVERSION']= 3;
-    }
     if (!isset($this->current['USERRDN'])){
       $this->current['USERRDN']= "ou=people";
     }
@@ -620,31 +617,30 @@ class config  {
     }
 
     /* Get samba servers from LDAP, in case of samba3 */
-    if ($this->current['SAMBAVERSION'] == 3){
-      $this->data['SERVERS']['SAMBA']= array();
-      $ldap->cd ($this->current['BASE']);
-      $ldap->search ("(objectClass=sambaDomain)");
-      while ($attrs= $ldap->fetch()){
-        $this->data['SERVERS']['SAMBA'][$attrs['sambaDomainName'][0]]= array( "SID" =>"","RIDBASE" =>"");
-        if(isset($attrs["sambaSID"][0])){
-          $this->data['SERVERS']['SAMBA'][$attrs['sambaDomainName'][0]]["SID"]  = $attrs["sambaSID"][0];
-        }
-        if(isset($attrs["sambaAlgorithmicRidBase"][0])){
-          $this->data['SERVERS']['SAMBA'][$attrs['sambaDomainName'][0]]["RIDBASE"] = $attrs["sambaAlgorithmicRidBase"][0];
-        }
+    $this->data['SERVERS']['SAMBA']= array();
+    $ldap->cd ($this->current['BASE']);
+    $ldap->search ("(objectClass=sambaDomain)");
+    while ($attrs= $ldap->fetch()){
+      $this->data['SERVERS']['SAMBA'][$attrs['sambaDomainName'][0]]= array( "SID" =>"","RIDBASE" =>"");
+      if(isset($attrs["sambaSID"][0])){
+        $this->data['SERVERS']['SAMBA'][$attrs['sambaDomainName'][0]]["SID"]  = $attrs["sambaSID"][0];
       }
-
-      /* If no samba servers are found, look for configured sid/ridbase */
-      if (count($this->data['SERVERS']['SAMBA']) == 0){
-        if (!isset($this->current["SAMBASID"]) || !isset($this->current["SAMBARIDBASE"])){
-          msg_dialog::display(_("Configuration error"), _("sambaSID and/or sambaRidBase missing in the configuration!"), ERROR_DIALOG);
-        } else {
-          $this->data['SERVERS']['SAMBA']['DEFAULT']= array(
-              "SID" => $this->current["SAMBASID"],
-              "RIDBASE" => $this->current["SAMBARIDBASE"]);
-        }
+      if(isset($attrs["sambaAlgorithmicRidBase"][0])){
+        $this->data['SERVERS']['SAMBA'][$attrs['sambaDomainName'][0]]["RIDBASE"] = $attrs["sambaAlgorithmicRidBase"][0];
       }
     }
+
+    /* If no samba servers are found, look for configured sid/ridbase */
+    if (count($this->data['SERVERS']['SAMBA']) == 0){
+      if (!isset($this->current["SAMBASID"]) || !isset($this->current["SAMBARIDBASE"])){
+        msg_dialog::display(_("Configuration error"), _("sambaSID and/or sambaRidBase missing in the configuration!"), ERROR_DIALOG);
+      } else {
+        $this->data['SERVERS']['SAMBA']['DEFAULT']= array(
+            "SID" => $this->current["SAMBASID"],
+            "RIDBASE" => $this->current["SAMBARIDBASE"]);
+      }
+    }
+    
   }
 
 
