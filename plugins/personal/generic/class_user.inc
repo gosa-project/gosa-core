@@ -1316,7 +1316,7 @@ class user extends plugin
 
     /* Check dates */
     if (!tests::is_date($this->dateOfBirth)){
-      $message[]= msgPool::invalid(_("Date of birth"), $this->dateOfBirth);
+      $message[]= msgPool::invalid(_("Date of birth"), $this->dateOfBirth,"" ,"23.02.2009");
     }
 
     /* Check for reserved characers */
