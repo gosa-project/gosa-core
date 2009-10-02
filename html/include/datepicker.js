@@ -316,8 +316,7 @@ DatePicker.prototype	= {
   		this._div.innerHTML = '<div class="datepicker-header"><table class="header" cellspacing="0"><tr><td id="'+ this._id_datepicker_prev_year +'" class="prev_year"> << </td><td id="'+ this._id_datepicker_prev +'" class="prev"> < </td><td id="'+ this._id_datepicker_hdr +'" class="header"></td><td id="'+ this._id_datepicker_next +'" class="next"> > </td><td id="'+ this._id_datepicker_next_year +'" class="next_year"> >> </td></tr></table></div><div class="datepicker-calendar"><table class="body"><tbody id="'+ this._id_datepicker +'-tbody"></tbody></table></div><div id="'+ this._id_datepicker_ftr +'" class="datepicker-footer"></div>';
 		
 		/* Build the datepicker icon */
-		var datepickeropener = Builder.node('table',{className : "datepicker-opener-table"});
-
+		var datepickeropener = Builder.node('table',{className : "datepicker-opener-table", id: this._id_datepicker + '_image'});
 		var con = Builder.node('tr',{},[
 		    Builder.node('td',{className : "datepicker-opener", id : "datepicker-opener-"+ this._relative})
 		]);
