@@ -74,8 +74,6 @@
     </tr>
 {/if}
 
-{if $samba3 ne ""}
-
 {if $multiple_support}
     <tr>
     <td colspan=2>
@@ -125,7 +123,6 @@
      </td>
     </tr>
     {/if}
-{/if}
 
 	{if $pickupGroup == "true"}
     <tr>

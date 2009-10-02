@@ -35,7 +35,6 @@ class group extends plugin
   var $fon_group= FALSE;
   var $smbgroup= FALSE;
   var $groupType= FALSE;
-  var $samba3= FALSE;
   var $sambaSID= "";
   var $sambaDomainName= "DEFAULT";
   var $SID= "";
@@ -86,7 +85,6 @@ class group extends plugin
     plugin::plugin ($config, $dn);
 
     /* Load attributes depending on the samba version */
-    $this->samba3= ($config->get_cfg_value("sambaversion") == 3);
     $this->orig_dn= $dn;
     $this->orig_cn= $this->cn;
 
@@ -133,7 +131,7 @@ class group extends plugin
     }
 
     /* Get samba Domain in case of samba 3 */
-    if ($this->samba3 && $this->sambaSID != ""){
+    if ($this->sambaSID != ""){
       $this->SID= preg_replace ("/-[^-]+$/", "", $this->sambaSID);
       $ldap= $this->config->get_ldap_link();
       $ldap->cd($this->config->current['BASE']);
@@ -403,13 +401,6 @@ class group extends plugin
       return ($display);
     }
 
-    /* Assign templating stuff */
-    if ($this->samba3){
-      $smarty->assign("samba3", "true");
-    } else {
-      $smarty->assign("samba3", "");
-    }
-
     if($this->config->search("nagiosaccount", "CLASS",array('menu'))){
       $smarty->assign("nagios",true);
     }else{
@@ -478,25 +469,24 @@ class group extends plugin
     $smarty->assign("bases", $this->get_allowed_bases());
     $smarty->assign("base_select", $this->base);
 
-    if ($this->samba3){
-      $domains= array();
-      foreach($this->config->data['SERVERS']['SAMBA'] as $name => $content){
-        $domains[$name]= $name;
-      }
-      $smarty->assign("sambaDomains", $domains);
-      $smarty->assign("sambaDomainName", $this->sambaDomainName);
-      $groupTypes= array(0 => _("Samba group"), 512 => _("Domain admins"), 513 => _("Domain users"),
-          514 => _("Domain guests"));
-
-      /* Don't loose special groups! If not key'ed above, add it to
-         the combo box... */	
-      if ($this->groupType >= 500 && $this->groupType <= 553 && !isset($groupTypes[$this->groupType])){
-        $groupTypes[$this->groupType]= sprintf(_("Special group (%d)"), $this->groupType);
-      }
-
-      $smarty->assign("groupTypes", $groupTypes);
-      $smarty->assign("groupType", $this->groupType);
+    $domains= array();
+    foreach($this->config->data['SERVERS']['SAMBA'] as $name => $content){
+      $domains[$name]= $name;
     }
+    $smarty->assign("sambaDomains", $domains);
+    $smarty->assign("sambaDomainName", $this->sambaDomainName);
+    $groupTypes= array(0 => _("Samba group"), 512 => _("Domain admins"), 513 => _("Domain users"),
+        514 => _("Domain guests"));
+
+    /* Don't loose special groups! If not key'ed above, add it to
+       the combo box... */	
+    if ($this->groupType >= 500 && $this->groupType <= 553 && !isset($groupTypes[$this->groupType])){
+      $groupTypes[$this->groupType]= sprintf(_("Special group (%d)"), $this->groupType);
+    }
+
+    $smarty->assign("groupTypes", $groupTypes);
+    $smarty->assign("groupType", $this->groupType);
+    
 
     /* Members and users */
     $smarty->assign("members", $this->members);
@@ -861,7 +851,7 @@ class group extends plugin
       }
 
       /* Save sambaDomain attribute */
-      if ($this->acl_is_writeable("sambaDomainName") && $this->samba3 && isset ($_POST['sambaDomainName'])){
+      if ($this->acl_is_writeable("sambaDomainName") && isset ($_POST['sambaDomainName'])){
         $this->sambaDomainName= $_POST['sambaDomainName'];
         $this->groupType= $_POST['groupType'];
       }
@@ -970,7 +960,7 @@ class group extends plugin
     $ldap= $this->config->get_ldap_link();
 
     /* Add samba group functionality */
-    if ($this->samba3 && $this->smbgroup){
+    if ($this->smbgroup){
   
       /* Fixed undefined index ... 
        */ 
@@ -1063,12 +1053,11 @@ class group extends plugin
       if (!count ($this->memberUid)){
         $this->attrs['memberUid']= array();
       }
-      if ($this->samba3){
-        if (!$this->smbgroup){
-          $this->attrs['sambaGroupType']= array();
-          $this->attrs['sambaSID']= array();
-        }
+      if (!$this->smbgroup){
+        $this->attrs['sambaGroupType']= array();
+        $this->attrs['sambaSID']= array();
       }
+      
       $mode= "modify";
     } else {
       $mode= "add";
@@ -1360,7 +1349,7 @@ class group extends plugin
       }
 
       /* Save sambaDomain attribute */
-      if ($this->acl_is_writeable("sambaDomainName") && $this->samba3 && isset ($_POST['sambaDomainName'])){
+      if ($this->acl_is_writeable("sambaDomainName") && isset ($_POST['sambaDomainName'])){
         $this->sambaDomainName= $_POST['sambaDomainName'];
         $this->groupType= $_POST['groupType'];
       }

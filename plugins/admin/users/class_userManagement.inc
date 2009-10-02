@@ -1135,11 +1135,7 @@ class userManagement extends plugin
 
     /* Setup filter depending on selection */
     $filter="";
-    if ($this->config->get_cfg_value("sambaversion") == 3){
-      $samba= "sambaSamAccount";
-    } else {
-      $samba= "sambaAccount";
-    }
+    $samba= "sambaSamAccount";
 
     if ($ShowFunctionalUsers){
       $filter.= "(&(objectClass=gosaAccount)(!(|(objectClass=posixAccount)".

@@ -16,6 +16,7 @@ GOsa2 changelog
   - Added "Domain" to department management
   - Various minor bugfixes
   - Moved to unified datepicker for dates
+  - Remove samba 2
 
 * gosa 2.6.5
   - Updated locales

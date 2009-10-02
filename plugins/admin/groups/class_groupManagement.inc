@@ -634,13 +634,12 @@ class groupManagement extends plugin
     }
 
     $sfilter= "";
-    if ($this->config->get_cfg_value("sambaversion") == 3){
-      if (!$ShowPrimaryGroups){
-        $sfilter= "(objectClass=sambaGroupMapping)";
-      } elseif ($ShowSambaGroups){
-        $filter.= "(objectClass=sambaGroupMapping)";
-      }
+    if (!$ShowPrimaryGroups){
+      $sfilter= "(objectClass=sambaGroupMapping)";
+    } elseif ($ShowSambaGroups){
+      $filter.= "(objectClass=sambaGroupMapping)";
     }
+    
 
     /* Prepare filter for given Regex && UserRegex */
     if ($filter != ""){
