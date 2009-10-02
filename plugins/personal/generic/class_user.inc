@@ -1164,8 +1164,11 @@ class user extends plugin
       if (!is_array($this->$attr)){
         $pattern= preg_replace("/%$attr/", $this->$attr, $pattern);
       } else {
-        msg_dialog::display(_("Error"), _("Cannot build RDN: invalid attribute parameters!"), ERROR_DIALOG);
-        break;
+        // Array elements cannot be used for ID generation
+        if (preg_match("/%$attr/", $pattern)) {
+          msg_dialog::display(_("Error"), _("Cannot build RDN: invalid attribute parameters!"), ERROR_DIALOG);
+          break;
+        }
       }
     }
 
