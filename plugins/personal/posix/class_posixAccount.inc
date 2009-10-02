@@ -1361,6 +1361,30 @@ class posixAccount extends plugin
   }
 
   
+  function get_next_id_new($attrib, $dn)
+  {
+    /* ID to skip */
+    $nobody= 65534;
+
+    # again:
+    # Look for ID map entry (objectClass=sambaUnixIdPool)
+
+    # If it does not exist, create one with these defaults
+    #dn: ou=idmap,$BASE
+    #objectClass: organizationalUnit
+    #objectClass: sambaUnixIdPool
+    #ou: idmap
+    #uidNumber: $minId
+    #gidNumber: $minId
+
+    # Take $attrib, modify it to [$attrib] + 1
+    # -> if $attrib does not exist -> bail out
+    # -> if this works, return [$attrib]
+    # -> if this does not work: goto again for max 3 times
+    # -> if this fails -> bail out
+  }
+
+
   function get_next_id($attrib, $dn)
   {
     $ids= array();
@@ -1416,8 +1440,8 @@ class posixAccount extends plugin
       msg_dialog::display(_("Error"), _("Cannot allocate a free ID!"), ERROR_DIALOG);
       exit;
     }
-
   }
+
 
   function reload()
   {
