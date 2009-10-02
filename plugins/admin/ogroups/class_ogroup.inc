@@ -1056,10 +1056,7 @@ class ogroup extends plugin
   
   function PrepareForCopyPaste($source)
   {
-    /* Update available object types */
-    if(isset($source['gosaGroupObjects'][0])){
-      $this->gosaGroupObjects =  $source['gosaGroupObjects'][0];
-    }
+    plugin::PrepareForCopyPaste($source);
 
     /* Reload tabs */
     $this->parent->reload($this->gosaGroupObjects );
@@ -1071,16 +1068,10 @@ class ogroup extends plugin
       }
     }
 
-    /* Load member objects */
-    if (isset($source['member'])){
-      foreach ($source['member'] as $key => $value){
-        if ("$key" != "count"){
-          $value= @LDAP::convert($value);
-          $this->member["$value"]= "$value";
-        }
-      }
+    $source_o = new ogroup ($this->config, $source['dn']);
+    foreach(array("accessTo","member","gosaGroupObjects")  as $attr){
+      $this->$attr = $source_o->$attr;
     }
-
   }
 
 
