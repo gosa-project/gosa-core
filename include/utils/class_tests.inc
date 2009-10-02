@@ -231,6 +231,18 @@ class tests {
     return ($first < $curr&& $last > $curr);
   }
 
+  /* Check if entry value is a valid date */
+  public static function is_date($date)
+  {
+    global $lang;
+
+    if ($date == ""){
+      return (TRUE);
+    }
+
+    #TODO: use $lang to check date format
+    return preg_match("/[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4}/", $date);
+  }
 
   /* Check if the specified IP address $address is inside the given network */
   public static function is_in_ip_range($from, $to, $address)
