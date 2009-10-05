@@ -2,21 +2,33 @@ GOsa2 changelog
 ===============
 
 * gosa 2.6.6
-  - Updated locales
-  - Fixed setup issues
   - Added ssh public key management
-  - Made user DN's more configurable
-  - Introduced OPSI license management
-  - Made it possible to add FAI packages without the SI service
-  - Add DHCP/DNS options to the OPSI hosts
-  - Fix "suggest IP" function to return unique IP
-  - Add LVM support to FAI modules using setup-storage
-  - Prepared for new configurable and sortable lists
-  - Add GOsa login restrictions
+  - Added LVM support to FAI modules using setup-storage
+  - Added DHCP/DNS options to the OPSI hosts
+  - Added GOsa login restrictions
   - Added "Domain" to department management
+  - Added organizational roles management
+  - Added option to configure user DNs
+  - Added OPSI license management
+  - Added posibility to add FAI packages without the SI service (thanks to GLG)
+  - Added IMAP timeout option
+  - Added pool method for uidNumber/gidNumber using sambaUnixIdPool
+  - Updated locales
+  - Updated gosa.conf manual page
+  - Updated DNS settings dialoges
+  - Moved to unified datepicker for all dates
+  - Fixed display of opsi hosts in the system list
+  - Fixed usage of the sambe "base" for every list page
+  - Fixed automatic base settings for new systems based on the ogroup base
+  - Fixed setup issues with LDAP inspection
+  - Fixed setup issues with sub dialogues
+  - Fixed next group ID generation
+  - Fixed "suggest IP" function to return unique IP
+  - Fixed multiple password decryption
+  - Fixed issues with empty ACL definitions
+  - Fixed lost attributes when using copy and paste with objectgroups
+  - Removed outdated samba 2 mode
   - Various minor bugfixes
-  - Moved to unified datepicker for dates
-  - Remove samba 2
 
 * gosa 2.6.5
   - Updated locales
