@@ -1525,9 +1525,7 @@ class posixAccount extends plugin
 
     /* Avoid using the same gid/uid number as source user 
         empty numbers to enforce new ones. */
-#    $this->savedUidNumber = $get_next_id("uidNumber", $this->dn);
     $this->savedUidNumber = "";
-#    $this->savedGidNumber = $get_next_id("gidNumber", $this->dn);
     $this->savedGidNumber = "";
 
     /* Get group membership */
