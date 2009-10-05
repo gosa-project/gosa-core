@@ -913,7 +913,7 @@ class group extends plugin
           }
         }
         add_lock ("gidnumber", "gosa");
-        $this->gidNumber= $this->get_next_id("gidNumber", $this->dn);
+        $this->gidNumber= get_next_id("gidNumber", $this->dn);
       }
     }
   
@@ -1203,45 +1203,6 @@ class group extends plugin
     return ($message);
   }
 
-  function get_next_id($attrib, $dn)
-  {
-    $ids= array();
-    $ldap= $this->config->get_ldap_link();
-
-    $ldap->cd ($this->config->current['BASE']);
-    if (preg_match('/gidNumber/i', $attrib)){
-      $oc= "posixGroup";
-      $att= "gidNumberBase";
-    } else {
-      $oc= "posixAccount";
-      $att= "uidNumberBase";
-    }
-    $ldap->search ("(&(objectClass=$oc)($attrib=*))", array("$attrib"));
-
-    /* Get list of ids */
-    while ($attrs= $ldap->fetch()){
-      $ids[]= (int)$attrs["$attrib"][0];
-    }
-
-    /* Find out next free id near to UID_BASE */
-    if ($this->config->get_cfg_value("baseIdHook") == ""){
-      $base= $this->config->get_cfg_value($att);
-    } else {
-      /* Call base hook */
-      $base= get_base_from_hook($dn, $attrib);
-    }
-    for ($id= $base; $id++; $id < pow(2,32)){
-      if (!in_array($id, $ids)){
-        return ($id);
-      }
-    }
-
-    /* Check if id reached maximum */
-    if ($id >= pow(2,32)){
-      msg_dialog::display(_("Error"), _("Cannot allocate a free ID!"), ERROR_DIALOG);
-      exit;
-    }
-  }
 
   function getCopyDialog()
   {

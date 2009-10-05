@@ -2829,5 +2829,173 @@ function isIpInNet($ip, $net, $mask) {
 }
 
 
+function get_next_id($attrib, $dn)
+{
+  global $config;
+
+  switch ($config->get_cfg_value("idAllocationMethod", "traditional")){
+    case "pool":
+      return get_next_id_pool($attrib);
+    case "traditional":
+      return get_next_id_traditional($attrib, $dn);
+  }
+
+  msg_dialog::display(_("Error"), _("Cannot allocate a free ID:")." "._("unknown idAllocation method!"), ERROR_DIALOG);
+  return null;
+}
+
+
+function get_next_id_pool($attrib) {
+  global $config;
+
+  /* Fill informational values */
+  $min= $config->get_cfg_value("${attrib}PoolMin", 10000);
+  $max= $config->get_cfg_value("${attrib}PoolMax", 40000);
+
+  /* Sanity check */
+  if ($min >= $max) {
+    msg_dialog::display(_("Error"), _("Cannot allocate a free ID:")." ".sprintf(_("%sPoolMin >= %sPoolMax!"), $attrib), ERROR_DIALOG);
+    return null;
+  }
+
+  /* ID to skip */
+  $ldap= $config->get_ldap_link();
+  $id= null;
+
+  /* Try to allocate the ID several times before failing */
+  $tries= 3;
+  while ($tries--) {
+
+    /* Look for ID map entry */
+    $ldap->cd ($config->current['BASE']);
+    $ldap->search ("(&(objectClass=sambaUnixIdPool)($attrib=*))", array("$attrib"));
+
+    /* If it does not exist, create one with these defaults */
+    if ($ldap->count() == 0) {
+      /* Fill informational values */
+      $minUserId= $config->get_cfg_value("uidPoolMin", 10000);
+      $minGroupId= $config->get_cfg_value("gidPoolMin", 10000);
+
+      /* Add as default */
+      $attrs= array("objectClass" => array("organizationalUnit", "sambaUnixIdPool"));
+      $attrs["ou"]= "idmap";
+      $attrs["uidNumber"]= $minUserId;
+      $attrs["gidNumber"]= $minGroupId;
+      $ldap->cd("ou=idmap,".$config->current['BASE']);
+      $ldap->add($attrs);
+      if ($ldap->error != "Success") {
+        msg_dialog::display(_("Error"), _("Cannot create sambaUnixIdPool entry!"), ERROR_DIALOG);
+        return null;
+      }
+      $tries++;
+      continue;
+    }
+    /* Bail out if it's not unique */
+    if ($ldap->count() != 1) {
+      msg_dialog::display(_("Error"), _("Cannot allocate a free ID:")." "._("sambaUnixIdPool is not unique!"), ERROR_DIALOG);
+      return null;
+    }
+
+    /* Store old attrib and generate new */
+    $attrs= $ldap->fetch();
+    $dn= $ldap->getDN();
+    $oldAttr= $attrs[$attrib][0];
+    $newAttr= $oldAttr + 1;
+
+    /* Sanity check */
+    if ($newAttr >= $max) {
+      msg_dialog::display(_("Error"), _("Cannot allocate a free ID:")." "._("no ID available!"), ERROR_DIALOG);
+      return null;
+    }
+    if ($newAttr < $min) {
+      msg_dialog::display(_("Error"), _("Cannot allocate a free ID:")." "._("no ID available!"), ERROR_DIALOG);
+      return null;
+    }
+
+    #FIXME: PHP is not able to do a modification of "del: .../add: ...", so this
+    #       is completely unsafe in the moment.
+    #/* Remove old attr, add new attr */
+    #$attrs= array($attrib => $oldAttr);
+    #$ldap->rm($attrs, $dn);
+    #if ($ldap->error != "Success") {
+    #  continue;
+    #}
+    $ldap->cd($dn);
+    $ldap->modify(array($attrib => $newAttr));
+    if ($ldap->error != "Success") {
+      msg_dialog::display(_("Error"), _("Cannot allocate a free ID:")." ".$ldap->get_error(), ERROR_DIALOG);
+      return null;
+    } else {
+      return $newAttr;
+    }
+  }
+
+  /* Bail out if we had problems getting the next id */
+  if (!$tries) {
+    msg_dialog::display(_("Error"), _("Cannot allocate a free ID:")." "._("maximum tries exceeded!"), ERROR_DIALOG);
+  }
+
+  return $id;
+}
+
+function get_next_id_traditional($attrib, $dn)
+{
+  global $config;
+
+  $ids= array();
+  $ldap= $config->get_ldap_link();
+
+  $ldap->cd ($config->current['BASE']);
+  if (preg_match('/gidNumber/i', $attrib)){
+    $oc= "posixGroup";
+  } else {
+    $oc= "posixAccount";
+  }
+  $ldap->search ("(&(objectClass=$oc)($attrib=*))", array("$attrib"));
+
+  /* Get list of ids */
+  while ($attrs= $ldap->fetch()){
+    $ids[]= (int)$attrs["$attrib"][0];
+  }
+
+  /* Add the nobody id */
+  $ids[]= 65534;
+
+  /* get the ranges */
+  $tmp = array('0'=> 1000);
+  if (preg_match('/posixAccount/', $oc) && $config->get_cfg_value("uidNumberBase") != ""){
+    $tmp= split('-',$config->get_cfg_value("uidNumberBase"));
+  } elseif($config->get_cfg_value("gidNumberBase") != ""){
+    $tmp= split('-',$config->get_cfg_value("gidNumberBase"));
+  }
+
+  /* Set hwm to max if not set - for backward compatibility */
+  $lwm= $tmp[0];
+  if (isset($tmp[1])){
+    $hwm= $tmp[1];
+  } else {
+    $hwm= pow(2,32);
+  }
+  /* Find out next free id near to UID_BASE */
+  if ($config->get_cfg_value("baseIdHook") == ""){
+    $base= $lwm;
+  } else {
+    /* Call base hook */
+    $base= get_base_from_hook($dn, $attrib);
+  }
+  for ($id= $base; $id++; $id < pow(2,32)){
+    if (!in_array($id, $ids)){
+      return ($id);
+    }
+  }
+
+  /* Should not happen */
+  if ($id == $hwm){
+    msg_dialog::display(_("Error"), _("Cannot allocate a free ID!"), ERROR_DIALOG);
+    exit;
+  }
+}
+
+
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

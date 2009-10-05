@@ -418,7 +418,23 @@ class LDAP{
       if ($dn == "")
         $dn = $this->basedn;
 
-      $r = @ldap_mod_del($this->cid, LDAP::fix($dn), $attrs);
+      $r = ldap_mod_del($this->cid, LDAP::fix($dn), $attrs);
+      $this->error = @ldap_error($this->cid);
+      return($r);
+    }else{
+      $this->error = "Could not connect to LDAP server";
+      return("");
+    }
+  }
+
+  function mod_add($attrs = "", $dn = "")
+  {
+    if($this->hascon){
+      if ($this->reconnect) $this->connect();
+      if ($dn == "")
+        $dn = $this->basedn;
+
+      $r = @ldap_mod_add($this->cid, LDAP::fix($dn), $attrs);
       $this->error = @ldap_error($this->cid);
       return($r);
     }else{

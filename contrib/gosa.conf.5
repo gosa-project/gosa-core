@@ -923,13 +923,50 @@ can even be dynamic. Take a look at the
 definition below.
 .PP
 
+.B idAllocationMethod
+.I traditional/pool
+.PP
+The
+.I idAllocationMethod
+statement defines how GOsa generates numeric user and group id values. If it is set to
+.I traditional
+GOsa will do create a lock and perform a search for the next free ID. The lock will be
+removed after the procedure completes.
+.I pool
+will use the sambaUnixIdPool objectclass settings inside your LDAP. This one is unsafe,
+because it does not check for concurrent LDAP access and already used IDs in this range. 
+On the other hand it is much faster.
+.PP
+
 .B minId
 .I integer
 .PP
 The
 .I minId
 statement defines the minimum assignable user or group id to avoid security leaks with
-uid 0 accounts.
+uid 0 accounts. This is used for the
+.I traditional
+method
+.PP
+
+.B uidPoolMin/gidPoolMin
+.I integer
+.PP
+The
+.I uidPoolMin/gidPoolMin
+statement defines the minimum assignable user/group id for use with the
+.I pool
+method.
+.PP
+
+.B uidPoolMax/gidPoolMax
+.I integer
+.PP
+The
+.I uidPoolMin/gidPoolMin
+statement defines the highest assignable user/group id for use with the
+.I pool
+method.
 .PP
 
 .B nextIdHook

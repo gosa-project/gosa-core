@@ -863,7 +863,7 @@ class posixAccount extends plugin
           }
         }
         add_lock ("uidnumber", "gosa");
-        $this->uidNumber= $this->get_next_id("uidNumber", $this->dn);
+        $this->uidNumber= get_next_id("uidNumber", $this->dn);
       }
     }
 
@@ -896,7 +896,7 @@ class posixAccount extends plugin
 
         /* Request a new and uniqe gidNumber, if required */
         if(!$this->force_ids){
-          $this->gidNumber= $this->get_next_id("gidNumber", $this->dn);
+          $this->gidNumber= get_next_id("gidNumber", $this->dn);
         }else{
 
           /* If forced gidNumber could not be found, then check if the given group name already exists 
@@ -1361,88 +1361,6 @@ class posixAccount extends plugin
   }
 
   
-  function get_next_id_new($attrib, $dn)
-  {
-    /* ID to skip */
-    $nobody= 65534;
-
-    # again:
-    # Look for ID map entry (objectClass=sambaUnixIdPool)
-
-    # If it does not exist, create one with these defaults
-    #dn: ou=idmap,$BASE
-    #objectClass: organizationalUnit
-    #objectClass: sambaUnixIdPool
-    #ou: idmap
-    #uidNumber: $minId
-    #gidNumber: $minId
-
-    # Take $attrib, modify it to [$attrib] + 1
-    # -> if $attrib does not exist -> bail out
-    # -> if this works, return [$attrib]
-    # -> if this does not work: goto again for max 3 times
-    # -> if this fails -> bail out
-  }
-
-
-  function get_next_id($attrib, $dn)
-  {
-    $ids= array();
-    $ldap= $this->config->get_ldap_link();
-
-    $ldap->cd ($this->config->current['BASE']);
-    if (preg_match('/gidNumber/i', $attrib)){
-      $oc= "posixGroup";
-    } else {
-      $oc= "posixAccount";
-    }
-    $ldap->search ("(&(objectClass=$oc)($attrib=*))", array("$attrib"));
-
-    /* Get list of ids */
-    while ($attrs= $ldap->fetch()){
-      $ids[]= (int)$attrs["$attrib"][0];
-    }
-
-    /* Add the nobody id */
-    $ids[]= 65534;
-
-    /* get the ranges */
-    $tmp = array('0'=> 1000); 
-    if (preg_match('/posixAccount/', $oc) && $this->config->get_cfg_value("uidNumberBase") != ""){
-      $tmp= split('-',$this->config->get_cfg_value("uidNumberBase"));
-    } elseif($this->config->get_cfg_value("gidNumberBase") != ""){
-      $tmp= split('-',$this->config->get_cfg_value("gidNumberBase"));
-    }
-
-    /* Set hwm to max if not set - for backward compatibility */
-    $lwm= $tmp[0];
-    if (isset($tmp[1])){
-      $hwm= $tmp[1];
-    } else {
-      $hwm= pow(2,32);
-    }
-
-    /* Find out next free id near to UID_BASE */
-    if ($this->config->get_cfg_value("baseIdHook") == ""){
-      $base= $lwm;
-    } else {
-      /* Call base hook */
-      $base= get_base_from_hook($dn, $attrib);
-    }
-    for ($id= $base; $id++; $id < pow(2,32)){
-      if (!in_array($id, $ids)){
-        return ($id);
-      }
-    }
-
-    /* Should not happen */
-    if ($id == $hwm){
-      msg_dialog::display(_("Error"), _("Cannot allocate a free ID!"), ERROR_DIALOG);
-      exit;
-    }
-  }
-
-
   function reload()
   {
     /* Set base for all searches */
@@ -1607,9 +1525,9 @@ class posixAccount extends plugin
 
     /* Avoid using the same gid/uid number as source user 
         empty numbers to enforce new ones. */
-#    $this->savedUidNumber = $this->get_next_id("uidNumber", $this->dn);
+#    $this->savedUidNumber = $get_next_id("uidNumber", $this->dn);
     $this->savedUidNumber = "";
-#    $this->savedGidNumber = $this->get_next_id("gidNumber", $this->dn);
+#    $this->savedGidNumber = $get_next_id("gidNumber", $this->dn);
     $this->savedGidNumber = "";
 
     /* Get group membership */
