@@ -37,6 +37,7 @@ class divListUsers extends MultiSelectWindow
   var $ShowMailUsers;
   var $ShowSambaUsers;
   var $ShowProxyUsers;
+  var $ShowPhoneUsers;
 
   /* Subsearch checkbox */
   var $SubSearch              = false;
@@ -87,6 +88,10 @@ class divListUsers extends MultiSelectWindow
     $this->AddCheckBox("ShowMailUsers"      ,msgPool::selectToView(_("Mail"),"enabled")       ,sprintf(_("Show %s"),_("mail users")), true);
     $this->AddCheckBox("ShowSambaUsers"     ,msgPool::selectToView(_("Samba"),"enabled")      ,sprintf(_("Show %s"),_("samba users")), true);
     $this->AddCheckBox("ShowProxyUsers"     ,msgPool::selectToView(_("Proxy"),"enabled")      ,sprintf(_("Show %s"),_("proxy users")), true);
+
+    if(class_available("phoneAccount")){
+      $this->AddCheckBox("ShowPhoneUsers"     ,msgPool::selectToView(_("Phone"),"enabled")      ,sprintf(_("Show %s"),_("phone users")), true);
+    }
 
     /* Add SubSearch checkbox */
     $this->AddCheckBox(SEPERATOR);

@@ -1132,6 +1132,7 @@ class userManagement extends plugin
     $ShowMailUsers        = $this->DivListUsers->ShowMailUsers;
     $ShowSambaUsers       = $this->DivListUsers->ShowSambaUsers;
     $ShowProxyUsers       = $this->DivListUsers->ShowProxyUsers;
+    $ShowPhoneUsers       = $this->DivListUsers->ShowPhoneUsers;
 
     /* Setup filter depending on selection */
     $filter="";
@@ -1153,6 +1154,9 @@ class userManagement extends plugin
     }
     if ($ShowProxyUsers){
       $filter.= "(objectClass=gosaProxyAccount)";
+    }
+    if ($ShowPhoneUsers){
+      $filter.= "(objectClass=gofonAccount)";
     }
     if ($ShowTemplates){
       $filter= "(|(objectClass=gosaUserTemplate)(&(objectClass=gosaAccount)(|$filter)))";
