@@ -2926,7 +2926,7 @@ function get_next_id_pool($attrib) {
       msg_dialog::display(_("Error"), _("Cannot allocate a free ID:")." ".$ldap->get_error(), ERROR_DIALOG);
       return null;
     } else {
-      return $newAttr;
+      return $oldAttr;
     }
   }
 
