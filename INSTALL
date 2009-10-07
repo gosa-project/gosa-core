@@ -28,6 +28,10 @@ As a summmary, you now have these directories for GOsa:
 /var/spool/gosa
 /usr/share/gosa
 
+Update the class cache:
+
+Run "update-gosa" from the GOsa main directory.
+
 After this has been done, include settings for GOsa in your apache
 config:
 
