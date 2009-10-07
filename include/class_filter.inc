@@ -176,7 +176,7 @@ class filter {
       $checked= " checked";
     }
 
-    $result= "<input class='filter_checkbox' name='$tag' type='checkbox' onClick='document.mainform.submit();' value='true'$checked>";
+    $result= "<input class='filter_checkbox' id='$tag' name='$tag' type='checkbox' onClick='document.mainform.submit();' value='true'$checked>";
     return $result;
   }
 
@@ -306,7 +306,7 @@ class filter {
   function renderScope()
   {
     $checked= $this->scope == "sub"?" checked":"";
-    return "<input type='checkbox' name='SCOPE' value='1' onClick='document.mainform.submit();'$checked>&nbsp;"._("Search in subtrees");
+    return "<input type='checkbox' id='SCOPE' name='SCOPE' value='1' onClick='document.mainform.submit();'$checked>&nbsp;<LABEL for='SCOPE'>"._("Search in subtrees")."</LABEL>";
   }
 
 
