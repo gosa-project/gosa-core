@@ -24,7 +24,7 @@ class Step_Config3 extends setup_step
 {
   var $header_image = "images/setup/server.png";
 
-  var $errorlvl   = TRUE;
+  var $errorlvl   = false;
 
   var $login_attributes = array("uid"       => "uid", 
                                 "mail"      => "mail",
@@ -32,7 +32,7 @@ class Step_Config3 extends setup_step
   var $optional = array(
               "login_attribute" => "uid",
               "strict_units" => false,
-              "list_summary" => false,
+              "list_summary" => true,
               "forceglobals" => true,
               "forcessl" => false,
               "ldapstats" => false,
