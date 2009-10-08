@@ -1743,7 +1743,7 @@ function gen_uids($rule, $attributes)
       $size= preg_replace('/^.*{id(:|!)(\d+)}.*$/', '\\2', $uid);
 
       $start= $m[1]==":"?0:-1;
-      for ($i= $start, $p= pow(10,$size); $i < $p; $i++){
+      for ($i= $start, $p= pow(10,$size)-1; $i < $p; $i++){
         if ($i == -1) {
           $number= "";
         } else {
@@ -1757,6 +1757,9 @@ function gen_uids($rule, $attributes)
           break;
         }
       }
+
+      /* Remove link if nothing has been found */
+      $uid= preg_replace('/{id(:|!)\d+}/', '', $uid);
     }
 
     if(preg_match('/\{id#\d+}/',$uid)){
@@ -1772,6 +1775,9 @@ function gen_uids($rule, $attributes)
           break;
         }
       }
+
+      /* Remove link if nothing has been found */
+      $uid= preg_replace('/{id#\d+}/', '', $uid);
     }
 
     /* Don't assign used ones */
