@@ -778,11 +778,19 @@ class listing {
       }
 
       // Skip entry if the pseudo filter does not fit
-      if (isset($action['filter']) && preg_match('/^[a-z0-9_]+=[a-z0-9_]+$/i', $action['filter'])) {
+      if (isset($action['filter']) && preg_match('/^[a-z0-9_]+!?=[a-z0-9_]+$/i', $action['filter'])) {
         list($fa, $fv)= split('=', $action['filter']);
-        if (!isset($this->entries[$row][$fa]) && !$this->entries[$row][$fa][0] == $fv) {
-          $result.= "<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
-          continue;
+        if (preg_match('/^(.*)!$/', $fa, $m)){
+          $fa= $m[1];
+          if (isset($this->entries[$row][$fa]) && $this->entries[$row][$fa][0] == $fv) {
+            $result.= "<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+            continue;
+          }
+        } else {
+          if (!isset($this->entries[$row][$fa]) && !$this->entries[$row][$fa][0] == $fv) {
+            $result.= "<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+            continue;
+          }
         }
       }
 
