@@ -769,19 +769,20 @@ class user extends plugin
         $this->givenName= $this->sn;
       }
 
-      /* Save base and pw_storage, since these are no LDAP attributes */
+      /* Save base - its no no LDAP attribute */
       if (isset($_POST['base'])){
-
-        $tmp = $this->get_allowed_bases();
-        if(isset($tmp[$_POST['base']])){
-          $base= validate($_POST['base']);
-          if ($base != $this->base){
-            $this->is_modified= TRUE;
+        $base= validate($_POST['base']);
+        if ($base != $this->base){
+          $tmp = $this->get_allowed_bases();
+          if(isset($tmp[$_POST['base']])){
+            if ($base != $this->base){
+              $this->is_modified= TRUE;
+            }
+            $this->base= $base;
+          }else{
+            $this->base = $base_tmp;
+            msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
           }
-          $this->base= $base;
-        }else{
-          $this->base = $base_tmp;
-          msg_dialog::display(_("Error"), msgPool::permMove(), ERROR_DIALOG);
         }
       }
 
