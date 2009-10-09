@@ -197,6 +197,10 @@ class posixAccount extends plugin
 
       // Instanciate SSH object if available
       if (isset($class_mapping["sshPublicKey"])){
+        if (empty($this->acl_base)){
+          $this->acl_base= $config->current['BASE'];
+        }
+
         $this->sshAcl= $this->getacl("sshPublicKey");
         $this->ssh= new sshPublicKey($this->config, $this->dn, $this->sshAcl);
       }
@@ -500,7 +504,7 @@ class posixAccount extends plugin
     /* In 'MyAccount' mode, we must remove write acls if we are not in editing mode. */ 
     $SkipWrite = (!isset($this->parent) || !$this->parent) && !session::is_set('edit');
 
-    $smarty->assign("sshPublicKeyACL", $this->getacl("sshPublicKey"));
+    $smarty->assign("sshPublicKeyACL", $this->getacl("sshPublicKey", $SkipWrite));
 
     /* Depending on pwmode, currently hardcoded because there are no other methods */
     if ( 1 == 1 ){
