@@ -976,7 +976,7 @@ class plugin
           array("dn","objectClass"),GL_SUBSEARCH | GL_NO_ACL_CHECK);
     foreach($leaf_objs as $obj){
       $new_dn = $obj['dn'];
-      $old_dn = preg_replace("/".preg_quote($dst_dn, '/')."$/i",$src_dn,$new_dn);
+      $old_dn = preg_replace("/".preg_quote(LDAP::convert($dst_dn), '/')."$/i",$src_dn,LDAP::convert($new_dn));
       $this->update_acls($old_dn,$new_dn); 
     }
 
