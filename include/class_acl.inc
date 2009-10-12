@@ -1068,20 +1068,22 @@ class acl extends plugin
       }
     }
 
-    /* Summarize members */
-    if ($summary != ""){
-      $summary.= ", ";
-    }
-    if (count($entry['members'])){
-      $summary.= _("Members").": ";
-      foreach ($entry['members'] as $cn){
-        $cn= preg_replace('/ \[.*$/', '', $cn);
-        $summary.= $cn.", ";
-      }
-    } else {
-      $summary.= "<font color='red'><i>"._("inactive")."&nbsp;-&nbsp;"._("No members")."</i></font>";
-    }
 
+    /* Summarize members */
+    if(!($this instanceOf aclrole)){
+      if ($summary != ""){
+        $summary.= ", ";
+      }
+      if (count($entry['members'])){
+        $summary.= _("Members").": ";
+        foreach ($entry['members'] as $cn){
+          $cn= preg_replace('/ \[.*$/', '', $cn);
+          $summary.= $cn.", ";
+        }
+      } else {
+        $summary.= "<font color='red'><i>"._("inactive")."&nbsp;-&nbsp;"._("No members")."</i></font>";
+      }
+    }
     return (preg_replace('/, $/', '', $summary));
   }
 
