@@ -243,6 +243,14 @@ class userinfo
   }
 
 
+  /* Returns an array containing all target objects we've permssions on.
+   */
+  function get_acl_target_objects()
+  {
+    return(array_keys($this->ACLperPath));
+  }
+  
+
   function get_category_permissions($dn, $category, $any_acl = FALSE)
   {
     return(@$this->get_permissions($dn,$category.'/0',""));
