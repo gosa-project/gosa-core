@@ -73,10 +73,10 @@
 				<tr>
 					<td colspan='2' align='center'>
 		{if $i_Type == ERROR_DIALOG || $i_Type == WARNING_DIALOG || $i_Type == INFO_DIALOG}
-						<button type='submit' name='MSG_OK{$i_ID}'>{t}Ok{/t}</button>
+						<input type='button' type='submit' name='MSG_OK{$i_ID}' value='{t}Ok{/t}'> 
 		{elseif $i_Type == CONFIRM_DIALOG || $i_Type == OK_CANCEL_DIALOG}
-						<button type='submit' name='MSG_OK{$i_ID}'>{t}Ok{/t}</button>
-						<button type='submit' name='MSG_CANCEL{$i_ID}'>{t}Cancel{/t}</button>
+						<input type='button' type='submit' name='MSG_OK{$i_ID}' value='{t}Ok{/t}'>
+						<input type='button' type='submit' name='MSG_CANCEL{$i_ID}' value='{t}Cancel{/t}'>
 		{/if}
 					</td>
 				</tr>
@@ -111,7 +111,7 @@
 		</table>
 		</div>
 
-			<table style='width:100%; border-top: solid 1px #BBBBBB;' cellspacing=0 cellpadding=2 summary='' border=0>
+			<table style='z-index:250;width:100%; border-top: solid 1px #BBBBBB;' cellspacing=0 cellpadding=2 summary='' border=0>
 				<tr>
 					<td style='width:100%; padding:7px; padding-bottom:14px;'>
 						{$s_Message}
@@ -130,17 +130,26 @@
 					<td colspan='2' align='center' style="border-top: solid 1px #BBBBBB;">
 					{/if}
 		{if $i_Type == ERROR_DIALOG || $i_Type == WARNING_DIALOG || $i_Type == INFO_DIALOG}
-						<button type='button' name='MSG_OK{$i_ID}' onClick='next_msg_dialog();'>{t}Ok{/t}</button>
+						<input type='button' id='MSG_OK{$i_ID}' type='button' name='MSG_OK{$i_ID}' 
+              onClick='next_msg_dialog();' value='{t}Ok{/t}'>
 		{elseif $i_Type == CONFIRM_DIALOG}
-						<button type='submit' name='MSG_OK{$i_ID}' onClick='next_msg_dialog();'>{t}Ok{/t}</button>
-						<button type='button' name='MSG_CANCEL{$i_ID}' onClick='next_msg_dialog();'>{t}Cancel{/t}</button>
+						<input type='button' id='MSG_OK{$i_ID}' type='submit' name='MSG_OK{$i_ID}' 
+              onClick='next_msg_dialog();' value='{t}Ok{/t}'>
+						<input type='button' type='button' name='MSG_CANCEL{$i_ID}' 
+              onClick='next_msg_dialog();' value='{t}Cancel{/t}'>
 		{elseif $i_Type == OK_CANCEL_DIALOG}
-						<button type='submit' name='MSG_OK{$i_ID}' onClick='next_msg_dialog();'>{t}Ok{/t}</button>
-						<button type='submit' name='MSG_CANCEL{$i_ID}' onClick='next_msg_dialog();'>{t}Cancel{/t}</button>
+						<input type='button' id='MSG_OK{$i_ID}' type='submit' name='MSG_OK{$i_ID}' 
+              onClick='next_msg_dialog();' value='{t}Ok{/t}'>
+						<input type='button' type='submit' name='MSG_CANCEL{$i_ID}' 
+              onClick='next_msg_dialog();' value='{t}Cancel{/t}'>
 		{/if}
 					</td>
 				</tr>
 			</table>
-		</div>
+      </div>
+    <script language="JavaScript" type="text/javascript">
+      focus_field('MSG_OK{$i_ID}');
+    </script>
+
 	{/if}
 {/if}
