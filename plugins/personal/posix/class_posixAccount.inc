@@ -489,7 +489,8 @@ class posixAccount extends plugin
     }
 
     // Handle ssh dialog?
-    if ($this->ssh && preg_match('/[rw]/', $this->getacl("sshPublicKey"))) {
+    if ($this->ssh instanceOf sshPublicKey && preg_match('/[rw]/', $this->getacl("sshPublicKey"))) {
+        $smarty->assign("usePrototype", "false");
        if ($result= $this->ssh->execute()) {
          $this->dialog= true;
          return $result;
