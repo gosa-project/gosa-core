@@ -13,6 +13,7 @@ GOsa2 changelog
   - Added posibility to add FAI packages without the SI service (thanks to GLG)
   - Added IMAP timeout option
   - Added pool method for uidNumber/gidNumber using sambaUnixIdPool
+  - Added workaround for non closable message dialogues in Konqueror 3.x
   - Updated locales
   - Updated gosa.conf manual page
   - Updated DNS settings dialoges
