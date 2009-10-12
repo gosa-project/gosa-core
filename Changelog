@@ -27,6 +27,7 @@ GOsa2 changelog
   - Fixed multiple password decryption
   - Fixed issues with empty ACL definitions
   - Fixed lost attributes when using copy and paste with objectgroups
+  - Enhanced addressbook plugin ACL
   - Removed outdated samba 2 mode
   - Various minor bugfixes
 
