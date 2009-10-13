@@ -81,25 +81,31 @@ mkdir -p %{buildroot}/usr/share/gosa/html/plugins/@@NAME@@
 
 echo "%{buildroot} <<---------" 
 
-if [ -d html ]; then
+if [ -e ./html/* ]; then
 	mv ./html/* %{buildroot}/usr/share/gosa/html/plugins/@@NAME@@
 fi
 
 # Move contrib if available
 mkdir -p %{buildroot}/usr/share/doc/%{name}
-if [ -d contrib ]; then
+if [ -e ./contrib/* ]; then
 	mv ./contrib %{buildroot}/usr/share/doc/%{name}
 fi
 
 # Move help
 mkdir -p %{buildroot}/usr/share/gosa/doc/plugins/@@NAME@@
-if [ -d help ]; then
+if [ -e ./help/* ]; then
 	mv ./help/* %{buildroot}/usr/share/gosa/doc/plugins/@@NAME@@
+fi
+
+# Copy etc
+mkdir -p %{buildroot}/etc/gosa
+if [ -e ./etc/* ]; then
+	mv ./etc/* %{buildroot}/etc/gosa
 fi
 
 # Move localization
 mkdir -p %{buildroot}/usr/share/gosa/locale/plugins/@@NAME@@
-if [ -d locale ]; then
+if [ -e ./locale/* ]; then
 	mv ./locale/* %{buildroot}/usr/share/gosa/locale/plugins/@@NAME@@
 fi
 
@@ -123,6 +129,7 @@ rm -rf %{buildroot}
 %attr (-,root,root) /usr/share/gosa/locale/plugins/@@NAME@@
 %attr (-,root,root) /usr/share/gosa/html/plugins/@@NAME@@
 %attr (-,root,root) /usr/share/doc/%{name}
+%attr (-,root,root) /etc/gosa/
 EOF
 
 # Create eventually missing directories
