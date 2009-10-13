@@ -93,11 +93,15 @@ fi
 
 # Move help
 mkdir -p %{buildroot}/usr/share/gosa/doc/plugins/@@NAME@@
-mv ./help/* %{buildroot}/usr/share/gosa/doc/plugins/@@NAME@@
+if [ -d help ]; then
+	mv ./help/* %{buildroot}/usr/share/gosa/doc/plugins/@@NAME@@
+fi
 
 # Move localization
 mkdir -p %{buildroot}/usr/share/gosa/locale/plugins/@@NAME@@
-mv ./locale/* %{buildroot}/usr/share/gosa/locale/plugins/@@NAME@@
+if [ -d locale ]; then
+	mv ./locale/* %{buildroot}/usr/share/gosa/locale/plugins/@@NAME@@
+fi
 
 # Move plugin itself
 mkdir -p %{buildroot}/usr/share/gosa/plugins/@@NAME@@
