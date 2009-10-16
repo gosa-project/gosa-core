@@ -320,7 +320,8 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
     if ($ui === NULL || !$ui){
       $message= _("Please check the username/password combination.");
       $smarty->assign ('nextfield', 'password');
-      new log("security","login","",array(),"Authentication failed for user \"$username\"") ;
+      session::global_set('config',$config);
+      new log("security","login","",array(),"Authentication failed for user \"$username\"");
     } else {
       /* Remove all locks of this user */
       del_user_locks($ui->dn);
