@@ -127,7 +127,12 @@ class log {
   /* This function is used to into the systems syslog */
   function log_into_syslog($entry)
   {
-    $str = $entry['user']." ".$entry['action']." ".$entry['object']." from type ".$entry['objecttype']." ".$entry['changes']." : Result was ".$entry['result'];
+    $str= "";
+    if (empty($entry['object']) && empty($entry['changes'])) {
+      $str = "(".$entry['action'].") ".$entry['objecttype'].": ".$entry['result'];
+    } else {
+      $str = "(".$entry['action'].") ".$entry['object']." of type ".$entry['objecttype']." ".$entry['changes'].": ".$entry['result'];
+    }
     gosa_log($str);
   }
 

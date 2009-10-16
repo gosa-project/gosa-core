@@ -309,14 +309,14 @@ function gosa_log ($message)
   global $ui;
 
   /* Preset to something reasonable */
-  $username= " unauthenticated";
+  $username= "[unauthenticated]";
 
   /* Replace username if object is present */
   if (isset($ui)){
     if ($ui->username != ""){
       $username= "[$ui->username]";
     } else {
-      $username= "unknown";
+      $username= "[unknown]";
     }
   }
 
