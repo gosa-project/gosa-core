@@ -566,6 +566,12 @@ class LDAP{
       if ($this->reconnect) $this->connect();
       $r = @ldap_modify($this->cid, LDAP::fix($this->basedn), $attrs);
       $this->error = @ldap_error($this->cid);
+      if(!$this->success() && preg_match("/^objectClass: value #([0-9]*) invalid per syntax$/", $this->get_additional_error())){
+        $oc = preg_replace("/^objectClass: value #([0-9]*) invalid per syntax$/","\\1", $this->get_additional_error());
+        if(isset($attrs['objectClass'][$oc])){
+          $this->error.= " <b>objectClass: ".$attrs['objectClass'][$oc]."</b>"; 
+        }
+      }
       return($r ? $r : 0);
     }else{
       $this->error = "Could not connect to LDAP server";
@@ -579,6 +585,12 @@ class LDAP{
       if ($this->reconnect) $this->connect();
       $r = @ldap_add($this->cid, LDAP::fix($this->basedn), $attrs);
       $this->error = @ldap_error($this->cid);
+      if(!$this->success() && preg_match("/^objectClass: value #([0-9]*) invalid per syntax$/", $this->get_additional_error())){
+        $oc = preg_replace("/^objectClass: value #([0-9]*) invalid per syntax$/","\\1", $this->get_additional_error());
+        if(isset($attrs['objectClass'][$oc])){
+          $this->error.= " <b>objectClass: ".$attrs['objectClass'][$oc]."</b>"; 
+        }
+      }
       return($r ? $r : 0);
     }else{
       $this->error = "Could not connect to LDAP server";
