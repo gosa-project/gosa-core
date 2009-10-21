@@ -49,6 +49,7 @@ class aclrole extends acl
   /* Role attributes */
   var $gosaAclTemplate= "";
   var $cn = "";
+  var $orig_cn = "";
   var $description = "";
   var $orig_dn;
   var $orig_base;
@@ -139,6 +140,7 @@ class aclrole extends acl
     $this->is_account= TRUE;
     $this->orig_base = $this->base;
     $this->orig_dn = $this->dn;
+    $this->orig_cn = $this->cn;
   }
 
 
@@ -761,7 +763,20 @@ class aclrole extends acl
     if(empty($this->cn)){
       $message[] = msgPool::required(_("Name"));
     }
-   
+  
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    if($this->cn != $this->orig_cn){
+      $ldap->search("(&(objectClass=gosaRole)(cn=".$this->cn."))");
+      if($ldap->count()) {
+        while($attrs = $ldap->fetch()){
+          if($attrs['dn'] != $this->orig_dn){
+            $message[] = msgPool::duplicated(_("Name"));
+          }
+        }
+      }
+    } 
+ 
     if(!count($this->gosaAclTemplate)){
       $message[] = msgPool::required(_("ACL"));
     }
