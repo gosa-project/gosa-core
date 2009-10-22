@@ -1,6 +1,8 @@
 #! /bin/sh
 # GOsa postinst script
 
+set -e
+
 #DEBHELPER#
 
 # We exit unless the package is being configured

@@ -3,12 +3,15 @@ Section: web
 Priority: optional
 Maintainer: GOsa packages mainteners group <gosa-pkg@oss.gonicus.de>
 Uploaders: Cajus Pollmeier <cajus@debian.org>, Benoit Mortier <benoit.mortier@opensides.be>
-Build-Depends: debhelper(>= 4.2.32), dpatch
-Standards-Version: 3.8.2
+Build-Depends: debhelper(>= 5.0.0), dpatch
+Standards-Version: 3.8.3
+Homepage: https://oss.gonicus.de/labs/gosa/
+Vcs-Browser: https://oss.gonicus.de/repositories/gosa/branches/2.5/
+Vcs-Svn: https://oss.gonicus.de/repositories/gosa/branches/2.5/
 
 Package: gosa
 Architecture: all
-Depends: php5, php5-cli, apache2, exim4 | mail-transport-agent, php5-gd, php5-imap, php5-ldap, php5-mhash, php5-mysql, php5-imagick | imagemagick (>= 5.4.4.5-1) | graphicsmagick-im-compat, fping, libcrypt-smbhash-perl, smarty, php5-recode, wwwconfig-common, smarty-gettext
+Depends: ${misc:Depends}, php5, php5-cli, apache2, exim4 | mail-transport-agent, php5-gd, php5-imap, php5-ldap, php5-mhash, php5-mysql, php5-imagick | imagemagick (>= 5.4.4.5-1) | graphicsmagick-im-compat, fping, libcrypt-smbhash-perl, smarty, php5-recode, wwwconfig-common, smarty-gettext
 Conflicts: gosa-help-en
 Suggests: cyrus22-imapd, postfix-ldap, etherwake, slapd, gosa-schema
 Description: Web Based LDAP Administration Program
@@ -21,7 +24,7 @@ Description: Web Based LDAP Administration Program
 
 Package: gosa-desktop
 Architecture: all
-Depends: iceweasel | mozilla | firefox, debconf, po-debconf
+Depends: ${misc:Depends}, iceweasel | mozilla | firefox, debconf, po-debconf
 Suggests: x11-xserver-utils
 Description: Desktop integration for GOsa
  This package includes a menu definition for your desktop
@@ -32,7 +35,7 @@ Description: Desktop integration for GOsa
 
 Package: gosa-schema
 Architecture: all
-Depends: slapd
+Depends: ${misc:Depends}, slapd
 Description: LDAP schema for GOsa
  This package includes the LDAP schema needed by GOsa.
  .
@@ -41,7 +44,7 @@ Description: LDAP schema for GOsa
 
 Package: gosa-help-de
 Architecture: all
-Depends: gosa
+Depends: ${misc:Depends}, gosa
 Description: German online help for GOsa
  This package includes the German online documentation for GOsa
  .
@@ -50,7 +53,7 @@ Description: German online help for GOsa
 
 Package: gosa-help-fr
 Architecture: all
-Depends: gosa
+Depends: ${misc:Depends}, gosa
 Description: French online help for GOsa
  This package includes the French online documentation for GOsa
  .
@@ -59,7 +62,7 @@ Description: French online help for GOsa
 
 Package: gosa-help-nl
 Architecture: all
-Depends: gosa
+Depends: ${misc:Depends}, gosa
 Description: Dutch online help for GOsa
  This package includes the Dutch online documentation for GOsa
  .

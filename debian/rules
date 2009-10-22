@@ -118,7 +118,6 @@ binary-indep: install
 	dh_installdebconf
 	dh_installmenu
 	dh_installman
-	dh_desktop
 	dh_link
 	dh_strip
 	dh_compress --exclude=gosa.conf
