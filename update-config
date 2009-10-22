@@ -8,8 +8,8 @@ will not touch the parts you have touched between the main tabs.  A backup copy 
 created.
 
 EOF
-read -n1 -sp "Do you want to continue? (y/n)" answer
-echo
+printf "Do you want to continue? (y/n) " "$answer"
+read answer
 
 if [ "$answer" != "y" -a "$answer" != "Y" ]; then
 	echo "Aborted."
