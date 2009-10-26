@@ -76,14 +76,12 @@ class management
       return($this->getHeader().$ret);
     }
 
-
-
     // Handle actions (POSTs and GETs)
     $str = $this->detectPostActions();
     if($str) return($this->getHeader().$str);
 
     // Display tab object.
-    if($this->tabObject instanceOf tabs){
+    if($this->tabObject instanceOf tabs || $this->tabObject instanceOf multi_plug){
       $this->tabObject->save_object();
       $display = $this->tabObject->execute();
       $display.= $this->_getTabFooter();
@@ -110,7 +108,7 @@ class management
 
   protected function _getTabFooter()
   { 
-    if(!$this->tabObject instanceOf tabs){
+    if(!($this->tabObject instanceOf tabs || $this->tabObject instanceOf multi_plug)){
       return("");
     }
   
@@ -122,7 +120,7 @@ class management
     }
 
     $str = "";
-    if($this->tabObject->read_only == TRUE){
+    if(isset($this->tabObject->read_only) && $this->tabObject->read_only == TRUE){
       $str.= "<p style=\"text-align:right\">
         <input type=submit name=\"edit_cancel\" value=\"".msgPool::cancelButton()."\">
         </p>";
@@ -281,18 +279,29 @@ class management
         $this->tabObject->set_acl_base($this->dn);
       }
     }else{
-      echo "? Multiple not implemented yet";
 
       $this->is_new = FALSE;
       $this->is_singel_edit = FALSE;
       $this->is_multiple_edit = TRUE;
+
+      $this->dns = $target;
+      $tmp = new multi_plug($this->config,$this->tabClass,$this->config->data['TABS'][$this->tabType],
+            $this->dns,$this->headpage->getBase(),$this->aclCategory);
+      if ($tmp->entries_locked()){
+        return($tmp->display_lock_message());
+      }
+      $tmp->lock_entries($this->ui->dn);
+      if($tmp->multiple_available()){
+        $this->tabObject = $tmp;
+        set_object_info($this->tabObject->get_object_info());
+      }
 
     }
   }
 
   protected function saveChanges()
   {
-    if($this->tabObject instanceOf tabs){
+    if($this->tabObject instanceOf tabs || $this->tabObject instanceOf multi_plug){
       $this->tabObject->save_object();
       $msgs = $this->tabObject->check();
       if(count($msgs)){
@@ -308,7 +317,7 @@ class management
 
   protected function applyChanges()
   {
-  if($this->tabObject instanceOf tabs){
+  if($this->tabObject instanceOf tabs || $this->tabObject instanceOf multi_plug){
     $this->tabObject->save_object();
       $msgs = $this->tabObject->check();
       if(count($msgs)){
