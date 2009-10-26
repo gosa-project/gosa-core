@@ -18,6 +18,7 @@
       <attribute>customerNumber</attribute>
       <attribute>customerState</attribute>
       <attribute>dateOfBirth</attribute>
+      <attribute>userPassword</attribute>
     </query>
     <scope>one</scope>
   </search>

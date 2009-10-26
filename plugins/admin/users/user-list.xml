@@ -30,7 +30,7 @@
   </definition>
 
   <table>
-    <layout>|20px||260px|100px|120px|60px;c|140px;r|</layout>
+    <layout>|20px||260px|180px;r|</layout>
 
     <department>
       <value>%{filter:objectType(dn,objectClass)}</value>
@@ -38,7 +38,7 @@
 
     <department>
       <value>%{filter:departmentLink(row,dn,description)}</value>
-      <span>5</span>
+      <span>3</span>
     </department>
 
     <column>
@@ -107,11 +107,6 @@
     </action>
 
     <action>
-      <name>cp</name>
-      <type>copypaste</type>
-    </action>
-
-    <action>
       <type>separator</type>
     </action>
 
@@ -130,11 +125,40 @@
   <actiontriggers snapshot="true" copypaste="true">
 
     <action>
+      <name>cp</name>
+      <objectclass>!gosaUserTemplate</objectclass>
+      <type>copypaste</type>
+    </action>
+
+    <action>
       <name>edit</name>
       <type>entry</type>
       <objectclass>gosaAccount</objectclass>
       <image>images/lists/edit.png</image>
-      <label>Edit person</label>
+      <label>Edit user</label>
+    </action>
+
+    <action>
+      <name>lock</name>
+      <type>entry</type>
+      <objectclass>!gosaUserTemplate</objectclass>
+      <image>%{filter:lockImage(userPassword)}</image>
+      <acl>uniBonnAccount/password[w]</acl>
+      <label>%{filter:lockLabel(userPassword)}</label>
+    </action>
+
+    <action>
+      <name>password</name>
+      <type>entry</type>
+      <objectclass>!gosaUserTemplate</objectclass>
+      <image>plugins/users/images/list_password.png</image>
+      <label>Change password</label>
+    </action>
+
+    <action>
+      <name>snapshot</name>
+      <type>snapshot</type>
+      <objectclass>!gosaUserTemplate</objectclass>
     </action>
 
     <action>
@@ -143,13 +167,7 @@
       <image>images/lists/trash.png</image>
       <objectclass>gosaAccount</objectclass>
       <acl>users/user[d]</acl>
-      <label>Remove person</label>
-    </action>
-
-    <action>
-      <name>cp</name>
-      <type>copypaste</type>
-      <acl>users/user[w]</acl>
+      <label>Remove user</label>
     </action>
 
   </actiontriggers>

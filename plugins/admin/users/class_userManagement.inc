@@ -35,14 +35,20 @@ class userManagement extends management
 
   function __construct($config,$ui)
   {
+    $this->config = $config;
+    $this->ui = $ui;
+    
     // Build filter
     $filter = new filter(get_template_path("user-filter.xml", true));
     $filter->setObjectStorage("ou=people,");
 
     // Build headpage
     $headpage = new listing(get_template_path("user-list.xml", true));
+    $headpage->registerElementFilter("lockLabel", "userManagement::filterLockLabel");
+    $headpage->registerElementFilter("lockImage", "userManagement::filterLockImage");
     $headpage->setFilter($filter);
     $this->cpHandler = new CopyPasteHandler($this->config);
+    $this->snapHandler = new SnapshotHandler($this->config);
 
     parent::__construct($config, $ui, "users", $headpage);
 
@@ -66,6 +72,38 @@ class userManagement extends management
     $this->newEntry();
     $this->tabObject->set_template_mode ();
   }
+static function filterLockImage($userPassword)
+  {
+    $image= "images/empty.png";
+
+    if(isset($userPassword[0]) && preg_match("/^\{[^\}]/",$userPassword[0])){
+      if(preg_match("/^[^\}]*+\}!/",$userPassword[0])){
+        $image= "images/lists/locked.png";
+      }else{
+        $image= "images/lists/unlocked.png";
+      }
+    }
+
+    return $image;
+  }
+
+
+  static function filterLockLabel($userPassword)
+  {
+    $label= "";
+
+    if(isset($userPassword[0]) && preg_match("/^\{[^\}]/",$userPassword[0])){
+      if(preg_match("/^[^\}]*+\}!/",$userPassword[0])){
+        $label= _("Unlock account");
+      }else{
+        $label= _("Lock account");
+      }
+    }
+
+    return $label;
+  }
+
+
 } 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
