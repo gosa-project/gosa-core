@@ -10,84 +10,33 @@
   <search>
     <query>
       <backend>LDAP</backend>
-      <filter>(&amp;(!(objectClass=gosaUserTemplate))(|$GENERIC$POSIX$MAIL$SAMBA)(|(cn=$NAME)(sn=$NAME)(givenName=$NAME)(uid=$NAME)))</filter>
+      <filter>(&amp;(objectClass=person)$NAME)</filter>
       <attribute>dn</attribute>
       <attribute>objectClass</attribute>
       <attribute>givenName</attribute>
       <attribute>sn</attribute>
-      <attribute>uid</attribute>
-      <attribute>modifyTimestamp</attribute>
-      <attribute>userPassword</attribute>
+      <attribute>customerNumber</attribute>
+      <attribute>customerState</attribute>
+      <attribute>dateOfBirth</attribute>
     </query>
-    <query>
-      <backend>LDAP</backend>
-      <filter>(&amp;$TEMPLATE(|(cn=$NAME)(sn=$NAME)(givenName=$NAME)(uid=$NAME)))</filter>
-      <attribute>dn</attribute>
-      <attribute>objectClass</attribute>
-      <attribute>givenName</attribute>
-      <attribute>sn</attribute>
-      <attribute>uid</attribute>
-      <attribute>modifyTimestamp</attribute>
-      <attribute>userPassword</attribute>
-    </query>
-    <scope>auto</scope>
+    <scope>one</scope>
   </search>
 
   <element>
     <type>textfield</type>
     <tag>NAME</tag>
-    <!--<regex>^...</regex>-->
-    <alphabet>true</alphabet>
-    <default>*</default>
-    <unset>this is a not valid and failing filter</unset>
-    <set>$</set>
+    <size>20</size>
+    <maxlength>60</maxlength>
+    <default></default>
+    <unset></unset>
+    <set>(|(cn=*$*)(sn=*$*)(givenName=*$*))</set>
     <autocomplete>
       <backend>LDAP</backend>
-      <filter>(&amp;(objectClass=gosaAccount)(|(cn=*$NAME*)(sn=*$NAME*)(givenName=*$NAME*)(uid=*$NAME*)))</filter>
+      <filter>(&amp;(objectClass=person)(|(cn=*$NAME*)(sn=*$NAME*)(givenName=*$NAME*)))</filter>
       <attribute>cn</attribute>
       <frequency>0.5</frequency>
       <characters>3</characters>
     </autocomplete>
-  </element>
-
-  <element>
-    <type>checkbox</type>
-    <tag>TEMPLATE</tag>
-    <default></default>
-    <unset>(&amp;(!(objectClass=gosaUserTemplate)(!(objectClass=gosaAccount))))</unset>
-    <set>(objectClass=gosaUserTemplate)</set>
-  </element>
-
-  <element>
-    <type>checkbox</type>
-    <tag>GENERIC</tag>
-    <default>true</default>
-    <unset></unset>
-    <set>(&amp;(objectClass=gosaAccount)(!(|(objectClass=posixAccount)(objectClass=gosaMailAccount)(objectClass=sambaSamAccount)(objectClass=gosaProxyAccount))))</set>
-  </element>
-
-  <element>
-    <type>checkbox</type>
-    <tag>POSIX</tag>
-    <default>true</default>
-    <unset></unset>
-    <set>(objectClass=posixAccount)</set>
-  </element>
-
-  <element>
-    <type>checkbox</type>
-    <tag>MAIL</tag>
-    <default>true</default>
-    <unset></unset>
-    <set>(objectClass=gosaMailAccount)</set>
-  </element>
-
-  <element>
-    <type>checkbox</type>
-    <tag>SAMBA</tag>
-    <default>true</default>
-    <unset></unset>
-    <set>(objectClass=sambaSamAccount)</set>
   </element>
 
 </filterdef>

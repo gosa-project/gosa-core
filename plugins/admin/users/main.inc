@@ -38,27 +38,10 @@ if ( $cleanup ){
   /* Create usermanagement object on demand */
   if (!session::is_set('userManagement')){
     $userManagement= new userManagement ($config, $ui);
-    $userManagement->set_acl_category("users");
     session::set('userManagement',$userManagement);
   }
   $userManagement = session::get('userManagement');
-  $userManagement->save_object();
-  $output= $userManagement->execute();
-
-  /* Page header*/
-  if (get_object_info() != ""){
-    $display= print_header(get_template_path($userManagement->plIcon),
-                           _("User administration"),
-                           "<img alt=\"\" class=\"center\" src=\"".
-                           get_template_path('images/lists/locked.png').
-                           "\"> ".LDAP::fix(get_object_info()));
-  } else {
-    $display= print_header(get_template_path($userManagement->plIcon),
-                          _("User administration"));
-  }
-
-  /* Generate dialog output */
-  $display.= $output;
+  $display= $userManagement->execute();
 
   /* Reset requested? */
   if (isset($_GET['reset']) && $_GET['reset'] == 1){

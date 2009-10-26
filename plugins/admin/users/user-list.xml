@@ -13,25 +13,16 @@
 
     <objectType>
       <label>Users</label>
-      <objectClass>gosaAccount</objectClass>
-      <objectClass>!gosaUserTemplate</objectClass>
+      <objectClass>person</objectClass>
       <category>users</category>
       <class>user</class>
       <image>plugins/users/images/select_user.png</image>
     </objectType>
 
-    <objectType>
-      <label>Templates</label>
-      <objectClass>gosaUserTemplate</objectClass>
-      <category>users</category>
-      <class>user</class>
-      <image>plugins/users/images/select_template.png</image>
-    </objectType>
-
   </definition>
 
   <table>
-    <layout>|20px||145px|165px;r|</layout>
+    <layout>|20px||260px|100px|120px|60px;c|140px;r|</layout>
 
     <department>
       <value>%{filter:objectType(dn,objectClass)}</value>
@@ -39,6 +30,7 @@
 
     <department>
       <value>%{filter:departmentLink(row,dn,description)}</value>
+      <span>5</span>
     </department>
 
     <column>
@@ -46,16 +38,19 @@
     </column>
 
     <column>
-      <label>Name / Department</label>
-      <sortAttribute>sn</sortAttribute>
+      <label>Given name</label>
+      <sortAttribute>givenName</sortAttribute>
       <sortType>string</sortType>
-      <value>%{filter:link(row,dn,"%s, %s [%s]",sn,givenName,uid)}</value>
+      <value>%{filter:link(row,dn,"%s",givenName)}</value>
       <export>true</export>
     </column>
 
     <column>
-      <label>Properties</label>
-      <value>%{filter:accountProperties(dn,row,objectClass)}</value>
+      <label>Surname</label>
+      <sortAttribute>sn</sortAttribute>
+      <sortType>string</sortType>
+      <value>%{filter:link(row,dn,"%s",sn)}</value>
+      <export>true</export>
     </column>
 
     <column>
@@ -66,27 +61,12 @@
   </table>
 
   <actionmenu>
+
     <action>
-      <type>sub</type>
-      <image>images/lists/new.png</image>
-      <label>Create</label>
-
-      <action>
-        <name>create_user</name>
-        <type>entry</type>
-        <image>plugins/users/images/list_new_user.png</image>
-        <acl>users/user[c]</acl>
-        <label>User</label>
-      </action>
-
-      <action>
-        <name>create_template</name>
-        <type>entry</type>
-        <image>images/lists/new.png</image>
-        <acl>users/user[c]</acl>
-        <label>Template</label>
-      </action>
-
+      <name>new</name>
+      <type>entry</type>
+      <image>plugins/users/images/list_new_user.png</image>
+      <label>New person</label>
     </action>
 
     <action>
@@ -101,48 +81,10 @@
     </action>
 
     <action>
-      <name>password</name>
-      <type>entry</type>
-      <image>plugins/users/images/list_password.png</image>
-      <label>Change password</label>
-    </action>
-
-    <action>
       <name>remove</name>
       <type>entry</type>
       <image>images/lists/trash.png</image>
       <label>Remove</label>
-    </action>
-
-    <action>
-      <name>templatize</name>
-      <type>entry</type>
-      <image>plugins/users/images/wizard.png</image>
-      <label>Apply template</label>
-    </action>
-
-    <action>
-      <type>separator</type>
-    </action>
-
-    <action>
-      <type>daemon</type>
-    </action>
-
-    <action>
-      <type>separator</type>
-    </action>
-
-    <action>
-      <type>copypaste</type>
-    </action>
-
-    <action>
-      <type>separator</type>
-    </action>
-
-    <action>
-      <type>snapshot</type>
     </action>
 
     <action>
@@ -156,15 +98,11 @@
 
   <actiontriggers snapshot="true" copypaste="true">
     <action>
-      <name>templatize</name>
+      <name>provision</name>
       <type>entry</type>
-      <objectclass>!gosaUserTemplate</objectclass>
-      <image>plugins/users/images/wizard.png</image>
-      <label>Apply template</label>
-    </action>
-
-    <action>
-      <type>copypaste</type>
+      <objectclass>gosaAccount</objectclass>
+      <image>images/lists/reload.png</image>
+      <label>Provision all accounts</label>
     </action>
 
     <action>
@@ -172,38 +110,16 @@
       <type>entry</type>
       <objectclass>gosaAccount</objectclass>
       <image>images/lists/edit.png</image>
-      <label>Edit user</label>
-    </action>
-
-    <action>
-      <name>lock</name>
-      <type>entry</type>
-      <objectclass>gosaAccount</objectclass>
-      <image>%{filter:lockImage(userPassword)}</image>
-      <acl>users/password[w]</acl>
-      <label>%{filter:lockLabel(userPassword)}</label>
-    </action>
-
-    <action>
-      <name>password</name>
-      <type>entry</type>
-      <objectclass>gosaAccount</objectclass>
-      <image>plugins/users/images/list_password.png</image>
-      <acl>users/password[w]</acl>
-      <label>Change password</label>
-    </action>
-
-    <action>
-      <type>snapshot</type>
+      <label>Edit person</label>
     </action>
 
     <action>
       <name>remove</name>
       <type>entry</type>
-      <objectclass>gosaAccount</objectclass>
       <image>images/lists/trash.png</image>
+      <objectclass>gosaAccount</objectclass>
       <acl>users/user[d]</acl>
-      <label>Remove user</label>
+      <label>Remove person</label>
     </action>
 
   </actiontriggers>

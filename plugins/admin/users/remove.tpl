@@ -11,7 +11,7 @@
 </p>
 
 <p class="plugbottom">
-  <input type=submit name="delete_user_confirm" value="{msgPool type=delButton}">
+  <input type=submit name="delete_confirmed" value="{msgPool type=delButton}">
   <input type=submit name="delete_cancel" value="{msgPool type=cancelButton}">
   &nbsp;
 </p>
