@@ -284,8 +284,8 @@ class department extends plugin
         }
       }
 
-      /* If this is the root directory service entry (rootDSE)
-         then avoid changing the naming attribute of this entry.
+      /* If this is the root directory service entry then avoid
+         changing the naming attribute of this entry.
        */
       if($this->dn == $this->config->current['BASE']){
         $this->$nA = $old_nA;
