@@ -92,18 +92,16 @@
     </action>
 
     <action>
+      <name>cp</name>
+      <type>copypaste</type>
+    </action>
+
+    <action>
       <type>exporter</type>
     </action>
   </actionmenu>
 
   <actiontriggers snapshot="true" copypaste="true">
-    <action>
-      <name>provision</name>
-      <type>entry</type>
-      <objectclass>gosaAccount</objectclass>
-      <image>images/lists/reload.png</image>
-      <label>Provision all accounts</label>
-    </action>
 
     <action>
       <name>edit</name>
@@ -120,6 +118,12 @@
       <objectclass>gosaAccount</objectclass>
       <acl>users/user[d]</acl>
       <label>Remove person</label>
+    </action>
+
+    <action>
+      <name>cp</name>
+      <type>copypaste</type>
+      <acl>users/user[w]</acl>
     </action>
 
   </actiontriggers>

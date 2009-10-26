@@ -42,16 +42,21 @@ class userManagement extends management
     // Build headpage
     $headpage = new listing(get_template_path("user-list.xml", true));
     $headpage->setFilter($filter);
+    $this->cpHandler = new CopyPasteHandler($this->config);
 
     parent::__construct($config, $ui, "users", $headpage);
 
-    $this->registerAction("new", "newEntry");
-    $this->registerAction("edit", "editEntry");
-    $this->registerAction("apply", "applyChanges");
-    $this->registerAction("save", "saveChanges");
+    $this->registerAction("new",    "newEntry");
+    $this->registerAction("edit",   "editEntry");
+    $this->registerAction("apply",  "applyChanges");
+    $this->registerAction("save",   "saveChanges");
     $this->registerAction("cancel", "cancelEdit");
     $this->registerAction("remove", "removeEntryRequested");
     $this->registerAction("removeConfirmed", "removeEntryConfirmed");
+
+    $this->registerAction("copy",   "copyPasteHandler");
+    $this->registerAction("cut",    "copyPasteHandler");
+    $this->registerAction("paste",  "copyPasteHandler");
   }
 } 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
