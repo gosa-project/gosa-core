@@ -64,7 +64,15 @@ class userManagement extends management
     $this->registerAction("cut",    "copyPasteHandler");
     $this->registerAction("paste",  "copyPasteHandler");
 
+    $this->registerAction("lock",  "alert");
+    $this->registerAction("unlock",  "alert");
+
     $this->registerAction("new_template", "newTemplate");
+  }
+
+  function alert($action,$values)
+  {
+    print_a(array($action,$values));
   }
 
   function newTemplate($action,$entry)
