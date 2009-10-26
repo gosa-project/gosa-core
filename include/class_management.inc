@@ -38,6 +38,7 @@ class management
   protected $tabType = "";
   protected $aclCategory = "";
   protected $objectName = "";
+  protected $tabObject = null;
 
   protected $displayApplyBtn = "";
   protected $cpHandler = null;
@@ -48,7 +49,6 @@ class management
   private $headpage = null;
   private $filter = null;
   private $actions = array();
-  private $tabObject = null;
   
   function  __construct($config,$ui,$plugname, $headpage)
   {
@@ -228,7 +228,7 @@ class management
     }
   } 
 
-  function newEntry($action,$target,$all)
+  function newEntry($action="",$target=array(),$all=array())
   {
     // Check locking & lock entry if required 
     $this->displayApplyBtn = FALSE;
@@ -370,7 +370,7 @@ class management
       return("");
     }
 
-    $ui = get_userinfo();
+    $this->cpHandler->save_object();
 
     /* Add entries to queue */
     if($s_action == "copy" || $s_action == "cut"){
@@ -380,10 +380,10 @@ class management
 
       /* Add new entries to CP queue */
       foreach($s_entry as $dn){
-        if($s_action == "copy" && $ui->is_copyable($dn,$this->aclCategory,$this->aclPlugin)){
+        if($s_action == "copy" && $this->ui->is_copyable($dn,$this->aclCategory,$this->aclPlugin)){
           $this->cpHandler->add_to_queue($dn,"copy",$this->tabClass,$this->tabType,$this->aclCategory);
         }
-        if($s_action == "cut" && $ui->is_cutable($dn,$this->aclCategory,$this->aclPlugin)){
+        if($s_action == "cut" && $this->ui->is_cutable($dn,$this->aclCategory,$this->aclPlugin)){
           $this->cpHandler->add_to_queue($dn,"cut",$this->tabClass,$this->tabType,$this->aclCategory);
         }
       }
@@ -415,7 +415,6 @@ class management
   }
 
 
-  function save_object(){}
   function setDescription($str) {
     $this->plDescription = $str;
   } 
