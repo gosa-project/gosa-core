@@ -40,6 +40,8 @@ class management
   protected $objectName = "";
 
   protected $displayApplyBtn = "";
+  protected $cpHandler = null;
+  protected $cpPastingStarted = FALSE;
  
   // Private
   private $plugname = "";
@@ -55,6 +57,8 @@ class management
     $this->ui = $ui;
     $this->config = $config;
 
+    if($this->cpHandler) $this->headpage->setCopyPasteHandler($this->cpHandler);
+
     if(empty($this->plIcon)){
       $this->plIcon = "plugins/".$plugname."/images/plugin.png";
     }
@@ -65,6 +69,14 @@ class management
     // Ensure that html posts and gets are kept even if we see a 'Entry islocked' dialog.
     $vars = array('/^act$/','/^listing/','/^PID$/','/^FILTER_PID$/');
     session::set('LOCK_VARS_TO_USE',$vars);
+
+    /* Display the copy & paste dialog, if it is currently open */
+    $ret = $this->copyPasteHandler("",array());
+    if($ret){
+      return($this->getHeader().$ret);
+    }
+
+
 
     // Handle actions (POSTs and GETs)
     $str = $this->detectPostActions();
@@ -339,6 +351,58 @@ class management
     if(count($this->dns)){
       del_lock($this->dns);
     }
+  }
+
+  function copyPasteHandler($s_action,$s_entry)
+  {
+
+    /* Check if Copy & Paste is disabled */
+    if(!is_object($this->cpHandler)){
+      return("");
+    }
+
+    $ui = get_userinfo();
+
+    /* Add entries to queue */
+    if($s_action == "copy" || $s_action == "cut"){
+
+      /* Cleanup object queue */
+      $this->cpHandler->cleanup_queue();
+
+      /* Add new entries to CP queue */
+      foreach($s_entry as $dn){
+        if($s_action == "copy" && $ui->is_copyable($dn,$this->aclCategory,$this->aclPlugin)){
+          $this->cpHandler->add_to_queue($dn,"copy",$this->tabClass,$this->tabType,$this->aclCategory);
+        }
+        if($s_action == "cut" && $ui->is_cutable($dn,$this->aclCategory,$this->aclPlugin)){
+          $this->cpHandler->add_to_queue($dn,"cut",$this->tabClass,$this->tabType,$this->aclCategory);
+        }
+      }
+    }
+
+    /* Start pasting entries */
+    if($s_action == "paste"){
+      $this->cpPastingStarted = TRUE;
+    }
+
+    /* Return C&P dialog */
+    if($this->cpPastingStarted && $this->cpHandler->entries_queued()){
+
+      /* Get dialog */
+      $this->cpHandler->SetVar("base",$this->headpage->getBase());
+      $data = $this->cpHandler->execute();
+
+      /* Return dialog data */
+      if(!empty($data)){
+        return($data);
+      }
+    }
+
+    /* Automatically disable status for pasting */
+    if(!$this->cpHandler->entries_queued()){
+      $this->cpPastingStarted = FALSE;
+    }
+    return("");
   }
 
 
