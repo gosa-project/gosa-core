@@ -47,10 +47,10 @@ class management
   protected $snapHandler = null;
 
   // Private
-  private $plugname = "";
-  private $headpage = null;
-  private $filter = null;
-  private $actions = array();
+  protected $plugname = "";
+  protected $headpage = null;
+  protected $filter = null;
+  protected $actions = array();
   
   function  __construct($config,$ui,$plugname, $headpage)
   {
@@ -80,7 +80,7 @@ class management
     }
 
     // Handle actions (POSTs and GETs)
-    $str = $this->detectPostActions();
+    $str = $this->handleActions($this->detectPostActions());
     if($str) return($this->getHeader().$str);
 
     // Display tab object.
@@ -223,6 +223,11 @@ class management
     if(isset($_POST['edit_cancel'])) $action['action'] = "cancel";    
     if(isset($_POST['delete_confirmed'])) $action['action'] = "removeConfirmed";    
 
+    return($action);
+  }
+
+  function handleActions($action)
+  {
     // Start action  
     if(isset($this->actions[$action['action']])){
       $func = $this->actions[$action['action']];
