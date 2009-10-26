@@ -44,6 +44,8 @@ class management
   protected $cpHandler = null;
   protected $cpPastingStarted = FALSE;
  
+  protected $snapHandler = null;
+
   // Private
   private $plugname = "";
   private $headpage = null;
@@ -58,6 +60,7 @@ class management
     $this->config = $config;
 
     if($this->cpHandler) $this->headpage->setCopyPasteHandler($this->cpHandler);
+    if($this->snapHandler) $this->headpage->setSnapshotHandler($this->snapHandler);
 
     if(empty($this->plIcon)){
       $this->plIcon = "plugins/".$plugname."/images/plugin.png";
