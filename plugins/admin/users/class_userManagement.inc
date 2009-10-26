@@ -64,11 +64,58 @@ class userManagement extends management
     $this->registerAction("cut",    "copyPasteHandler");
     $this->registerAction("paste",  "copyPasteHandler");
 
-    $this->registerAction("lock",  "alert");
-    $this->registerAction("unlock",  "alert");
+    $this->registerAction("lock",   "lockEntry");
+    $this->registerAction("unlock", "alert");
 
     $this->registerAction("new_template", "newTemplate");
   }
+
+
+  function lockEntry($action,$entry)
+  {
+    $disallowed = array();
+    $dns = array();
+    foreach($entry as $dn){
+      if (!preg_match("/w/",$this->ui->get_permissions($dn,"users/password"))){
+        $disallowed[] = $dn;
+      }else{
+        $allowed[] = $dn;
+      }
+    }
+    if(count($disallowed)){
+      msg_dialog::display(_("Permission"),msgPool::permDelete($disallowed),INFO_DIALOG);
+    }
+    $ldap = $this->config->get_ldap_link();
+    foreach($allowed as $dn){
+      $ldap->cat($dn, array('userPassword'));
+      if($ldap->count() == 1){
+        $val = $ldap->fetch();
+        $pwd = $val['userPassword'][0];
+        $method = passwordMethod::get_method($pwd,$val['dn']);
+        $success= false;
+        if($method instanceOf passwordMethod){
+          if($method->is_locked($this->config,$val['dn'])){
+            $success= $method->unlock_account($this->config,$val['dn']);
+          }else{
+            $success= $method->lock_account($this->config,$val['dn']);
+          }
+
+          /* Check for success */
+          if (!$success){
+            $hn= $method->get_hash_name();
+            if (is_array($hn)){
+              $hn= $hn[0];
+            }
+            msg_dialog::display(_("Account locking"),
+              sprintf(_("Password method '%s' does not support locking. Account has not been locked!"), $hn),WARNING_DIALOG);
+          }
+        }else{
+          // Can't lock unknown methods.
+        }
+      }
+    }
+  }
+
 
   function alert($action,$values)
   {
