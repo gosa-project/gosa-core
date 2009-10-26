@@ -26,6 +26,9 @@ class userManagement extends management
   var $plDescription  = "Manage users";
   var $plIcon  = "plugins/users/images/user.png";
 
+  var $sn = "";
+  var $givenName = "";
+
   // Tab definition 
   protected $tabClass = "usertabs";
   protected $tabType = "USERTABS";
@@ -64,10 +67,20 @@ class userManagement extends management
     $this->registerAction("cut",    "copyPasteHandler");
     $this->registerAction("paste",  "copyPasteHandler");
 
+    // Register special user actions 
     $this->registerAction("lock",   "lockEntry");
     $this->registerAction("unlock", "alert");
-
     $this->registerAction("new_template", "newTemplate");
+    $this->registerAction("newfromtpl", "newUserFromTemplate");
+    $this->registerAction("templateContinue", "templateContinue");
+  }
+
+  // Inject user actions 
+  function detectPostActions()
+  {
+    $action = management::detectPostActions();
+    if(isset($_POST['template_continue'])) $action['action'] = "templateContinue";
+    return($action);
   }
 
 
@@ -127,7 +140,185 @@ class userManagement extends management
     $this->newEntry();
     $this->tabObject->set_template_mode ();
   }
-static function filterLockImage($userPassword)
+
+ 
+  function templateContinue()
+  {
+    $smarty = get_smarty();
+    $templates = array();
+    $templates['none']= _("none");
+    $templates = array_merge($templates,$this->get_templates());
+
+    if (isset($_POST['template_continue'])){
+      $message = array();
+      if(!isset($_POST['template']) || (empty($_POST['template']))){
+        $message[]= msgPool::invalid(_("Template"));
+      }
+      if(!isset($_POST['sn']) || (empty($_POST['sn']))){
+        $message[]= msgPool::required(_("Name"));
+      }
+      if(!isset($_POST['givenName']) || (empty($_POST['givenName']))){
+        $message[]= msgPool::required(_("Given name"));
+      }
+
+      /* Show error message / continue editing */
+      if (count($message) > 0){
+        msg_dialog::displayChecks($message);
+
+        foreach(array("sn", "givenName", "uid", "template") as $attr){
+          if(isset($_POST[$attr])){
+            $smarty->assign("$attr", $_POST[$attr]);
+          }else{
+            $smarty->assign("$attr", "");
+          }
+        }
+        $smarty->assign("templates",$templates);
+        $smarty->assign("got_uid",$this->got_uid);
+        $smarty->assign("edit_uid",false);
+        return($smarty->fetch(get_template_path('template.tpl', TRUE)));
+      }
+    }
+
+
+    /* Continue template editing */
+    if ($_POST['template'] != 'none' && !isset($_POST['uid'])){
+
+      $this->sn             = $_POST['sn'];
+      $this->givenName      = $_POST['givenName'];
+
+      /* Check for requred values */
+      $message= array();
+      if ($this->sn == "") {
+        $message[]= msgPool::required(_("Name"));
+      }
+      if ($this->givenName == "") {
+        $message[]= msgPool::required(_("Given name"));
+      }
+
+      /* Check if dn is used */
+      $dn= preg_replace("/^[^,]+,/i", "", $_POST['template']);
+      $ldap= $this->config->get_ldap_link();
+      $ldap->cd ($dn);
+      $ldap->search ("(&(sn=".normalizeLdap($this->sn).")(givenName=".normalizeLdap($this->givenName)."))", array("givenName"));
+      if ($ldap->count () != 0){
+        msgPool::duplicated(_("Name"));
+      }
+
+      /* Show error message / continue editing */
+      if (count($message) > 0){
+        msg_dialog::displayChecks($message);
+      } else {
+        $attributes= array('sn' => $this->sn, 'givenName' => $this->givenName);
+        if ($this->config->get_cfg_value("idGenerator") != ""){
+          $uids= gen_uids ($this->config->get_cfg_value("idGenerator"), $attributes);
+          if (count($uids)){
+            $smarty->assign("edit_uid", "false");
+            $smarty->assign("uids", $uids);
+            $this->uid= current($uids);
+          }
+        } else {
+          $smarty->assign("edit_uid", "");
+          $this->uid= "";
+        }
+        $this->got_uid= true;
+      }
+
+      foreach(array("sn", "givenName", "uid", "got_uid") as $attr){
+        $smarty->assign("$attr", $this->$attr);
+      }
+      if (isset($_POST['template'])){
+        $smarty->assign("template", $_POST['template']);
+      }
+      $smarty->assign("templates",$templates); 
+      return($smarty->fetch(get_template_path('template.tpl', TRUE)));
+    }
+
+    /* No template. Ok. Lets fill data into the normal user dialog */
+    if ($_POST['template'] == 'none'){
+      foreach(array("sn", "givenName", "uid") as $attr){
+        if (isset($_POST[$attr])){
+          $this->tabObject->by_object['user']->$attr= $_POST[$attr];
+        }
+      }
+    }elseif(isset($_POST['uid'])){
+
+      /* Move user supplied data to sub plugins */
+      foreach(array("uid","sn","givenName") as $attr){
+        $this->$attr = $_POST[$attr];
+        $this->tabObject->$attr       = $this->$attr;
+        $this->tabObject->by_object['user']->$attr = $this->$attr;
+      }
+
+      $template_dn              = $_POST['template'];
+      $this->tabObject->adapt_from_template($template_dn, array("uid","cn","givenName","sn"));
+      $template_base            = preg_replace("/^[^,]+,".preg_quote(get_people_ou(), '/')."/", '', $template_dn);
+      $this->tabObject->by_object['user']->base= $template_base;
+    }
+  }
+
+  function newUserFromTemplate($action,$entry)
+  {
+
+    // By default we set 'dn' to 'new', all relevant plugins will react on this.
+    $this->dn= "new";
+    $this->got_uid= ($this->config->get_cfg_value("idGenerator") == "");
+
+    $tab = $this->tabClass;
+    $this->tabObject= new $tab($this->config,$this->config->data['TABS'][$this->tabType], $this->dn, $this->aclCategory);
+    $this->tabObject->by_object['user']->base= $this->headpage->getBase();
+    $this->tabObject->set_acl_base($this->headpage->getBase());
+
+    // Use template if there are any of them 
+    $templates = array();
+    $templates['none']= _("none");
+    $templates = array_merge($templates,$this->get_templates());
+    if (count($templates)){
+      $smarty = get_smarty();
+      foreach(array("sn", "givenName", "uid", "got_uid") as $attr){
+        $smarty->assign("$attr", "");
+      }
+      $smarty->assign("template",  array_pop($entry));
+      $smarty->assign("templates", $templates);
+      $smarty->assign("edit_uid", "");
+      return($smarty->fetch(get_template_path('template.tpl', TRUE)));
+    }
+  }
+
+  function get_templates()
+  {
+    $templates= array();
+    $ldap= $this->config->get_ldap_link();
+
+    /* Create list of templates */
+    foreach ($this->config->departments as $key => $value){
+
+      /* Get acls from different ou's */
+      $acl = $this->ui->get_permissions($value,$this->aclCategory."/".$this->aclPlugin);
+
+      /* If creation of a new user is allowed, append this template */
+      if (preg_match("/c/",$acl)){
+
+        /* Search all templates from the current dn */
+        $ldap->cd (get_people_ou().$value);
+        $ldap->search ("(objectClass=gosaUserTemplate)", array("uid"));
+
+        /* Append */
+        if ($ldap->count() != 0){
+          while ($attrs= $ldap->fetch()){
+            $templates[$ldap->getDN()]= $attrs['uid'][0]." - ".LDAP::fix($key);
+          }
+        }
+      }
+    }
+    natcasesort ($templates);
+    reset ($templates);
+    return($templates);
+  }
+
+
+
+
+  static function filterLockImage($userPassword)
   {
     $image= "images/empty.png";
 

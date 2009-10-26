@@ -30,7 +30,7 @@
   </definition>
 
   <table>
-    <layout>|20px||260px|180px;r|</layout>
+    <layout>|20px||260px|200px;r|</layout>
 
     <department>
       <value>%{filter:objectType(dn,objectClass)}</value>
@@ -123,6 +123,14 @@
   </actionmenu>
 
   <actiontriggers snapshot="true" copypaste="true">
+
+    <action>
+      <name>newfromtpl</name>
+      <type>entry</type>
+      <image>images/lists/new.png</image>
+      <objectclass>gosaUserTemplate</objectclass>
+      <label>New user from template</label>
+    </action>
 
     <action>
       <name>cp</name>
