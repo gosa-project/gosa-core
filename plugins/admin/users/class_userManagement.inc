@@ -57,6 +57,14 @@ class userManagement extends management
     $this->registerAction("copy",   "copyPasteHandler");
     $this->registerAction("cut",    "copyPasteHandler");
     $this->registerAction("paste",  "copyPasteHandler");
+
+    $this->registerAction("new_template", "newTemplate");
+  }
+
+  function newTemplate($action,$entry)
+  {
+    $this->newEntry();
+    $this->tabObject->set_template_mode ();
   }
 } 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:

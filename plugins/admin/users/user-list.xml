@@ -12,8 +12,16 @@
     <defaultSortColumn>1</defaultSortColumn>
 
     <objectType>
-      <label>Users</label>
-      <objectClass>person</objectClass>
+      <label>Template</label>
+      <objectClass>gosaUserTemplate</objectClass>
+      <category>users</category>
+      <class>user</class>
+      <image>plugins/users/images/select_template.png</image>
+    </objectType>
+
+    <objectType>
+      <label>User</label>
+      <objectClass>gosaAccount</objectClass>
       <category>users</category>
       <class>user</class>
       <image>plugins/users/images/select_user.png</image>
@@ -70,6 +78,13 @@
     </action>
 
     <action>
+      <name>new_template</name>
+      <type>entry</type>
+      <image>plugins/users/images/select_template.png</image>
+      <label>New template</label>
+    </action>
+
+    <action>
       <type>separator</type>
     </action>
 
@@ -94,6 +109,17 @@
     <action>
       <name>cp</name>
       <type>copypaste</type>
+    </action>
+
+    <action>
+      <type>separator</type>
+    </action>
+
+    <action>
+      <name>templatize</name>
+      <type>entry</type>
+      <image>plugins/users/images/wizard.png</image>
+      <label>Apply template</label>
     </action>
 
     <action>
