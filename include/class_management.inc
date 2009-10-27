@@ -34,6 +34,8 @@ class management
   protected $dn = "";
   protected $dns = array();
 
+  protected $storagePoints = array();
+
   protected $last_dn = "";
   protected $last_dns = array();
 
@@ -117,6 +119,15 @@ class management
       return($this->getHeader().$display);
     }
 
+    // Set current restore base for snapshot handling.
+    if(is_object($this->snapHandler)){
+      $bases = array();
+      foreach($this->storagePoints as $sp){
+        $bases[] = $sp.$this->headpage->getBase();
+      }
+      $this->snapHandler->setSnapshotBases($bases);
+    }
+      
     $this->headpage->update();
     $display = $this->headpage->render();
     return($this->getHeader().$display);
@@ -245,7 +256,20 @@ class management
     if(isset($_POST['edit_apply']))  $action['action'] = "apply";    
     if(isset($_POST['edit_finish'])) $action['action'] = "save";    
     if(isset($_POST['edit_cancel'])) $action['action'] = "cancel";    
-    if(isset($_POST['delete_confirmed'])) $action['action'] = "removeConfirmed";    
+    if(isset($_POST['delete_confirmed'])) $action['action'] = "removeConfirmed";   
+
+    // Detect Snapshot actions
+    if(isset($_POST['CreateSnapshot'])) $action['action'] = "saveSnapshot";   
+    if(isset($_POST['CancelSnapshot'])) $action['action'] = "cancelSnapshot";   
+    foreach($_POST as $name => $value){
+      $once =TRUE;
+      if(preg_match("/^RestoreSnapShot_/",$name) && $once){
+        $once = FALSE;
+        $entry = base64_decode(preg_replace("/^RestoreSnapShot_([^_]*)_[xy]$/i","\\1",$name));
+        $action['action'] = "restoreSnapshot";
+        $action['targets'] = array($entry);
+      }
+    }
 
     return($action);
   }
@@ -259,6 +283,84 @@ class management
       return($this->$func($action['action'],$action['targets'],$action));
     }
   } 
+
+  function createSnapshotDialog($action="",$target=array(),$all=array())
+  {
+    foreach($target as $entry){
+      if(!empty($entry) && $this->ui->allow_snapshot_create($entry,$this->aclCategory)){
+        $this->dialogObject = new SnapShotDialog($this->config,$entry,$this);
+        $this->dialogObject->aclCategories = array($this->aclCategory);
+        
+      }else{
+        msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to create a snapshot for %s."),$entry),
+            ERROR_DIALOG);
+      }
+    }
+  }
+
+
+  function saveSnapshot()
+  {
+    $this->dialogObject->save_object();
+    $msgs = $this->dialogObject->check();
+    if(count($msgs)){
+      foreach($msgs as $msg){
+        msg_dialog::display(_("Error"), $msg, ERROR_DIALOG);
+      }
+    }else{
+      $this->dn =  $this->dialogObject->dn;
+      $this->snapHandler->create_snapshot( $this->dn,$this->dialogObject->CurrentDescription);
+      $this->closeDialogs();
+    }
+  }
+
+
+  function restoreSnapshot($action="",$target=array(),$all=array())
+  {
+    $entry = array_pop($target);
+    if(!empty($entry) && $this->ui->allow_snapshot_restore($entry,$this->aclCategory)){
+      $this->snapHandler->restore_snapshot($entry);
+      $this->closeDialogs();
+    }else{
+      msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s."),$entry),
+          ERROR_DIALOG);
+    }
+  }
+
+
+  function restoreSnapshotDialog($action="",$target=array(),$all=array())
+  {
+    // Set current restore base for snapshot handling.
+    if(is_object($this->snapHandler)){
+      $bases = array();
+      foreach($this->storagePoints as $sp){
+        $bases[] = $sp.$this->headpage->getBase();
+      }
+    }
+    if(!count($target)){ 
+      $entry = $this->headpage->getBase();
+      if(!empty($entry) && $this->ui->allow_snapshot_restore($entry,$this->aclCategory)){
+        $this->dialogObject = new SnapShotDialog($this->config,$entry,$this);
+        $this->dialogObject->set_snapshot_bases($bases);
+        $this->dialogObject->display_all_removed_objects = true;
+        $this->dialogObject->display_restore_dialog = true;
+      }else{
+        msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s."),$entry),
+            ERROR_DIALOG);
+      } 
+    }else{
+      $entry = array_pop($target);
+      if(!empty($entry) && $this->ui->allow_snapshot_restore($entry,$this->aclCategory)){
+        $this->dialogObject = new SnapShotDialog($this->config,$entry,$this);
+        $this->dialogObject->set_snapshot_bases($bases);
+        $this->dialogObject->display_restore_dialog = true;
+      }else{
+        msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s."),$entry),
+            ERROR_DIALOG);
+      } 
+    }
+  }
+
 
   function newEntry($action="",$target=array(),$all=array())
   {

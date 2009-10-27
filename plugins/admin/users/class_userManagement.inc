@@ -45,10 +45,12 @@ class userManagement extends management
   {
     $this->config = $config;
     $this->ui = $ui;
-    
+   
+    $this->storagePoints = array(get_ou("userRDN"));
+ 
     // Build filter
     $filter = new filter(get_template_path("user-filter.xml", true));
-    $filter->setObjectStorage("ou=people,");
+    $filter->setObjectStorage($this->storagePoints);
     $this->setFilter($filter);
 
     // Build headpage
@@ -78,6 +80,12 @@ class userManagement extends management
     $this->registerAction("copy",   "copyPasteHandler");
     $this->registerAction("cut",    "copyPasteHandler");
     $this->registerAction("paste",  "copyPasteHandler");
+
+    $this->registerAction("snapshot",    "createSnapshotDialog");
+    $this->registerAction("restore",     "restoreSnapshotDialog");
+    $this->registerAction("saveSnapshot","saveSnapshot");
+    $this->registerAction("restoreSnapshot","restoreSnapshot");
+    $this->registerAction("cancelSnapshot","closeDialogs");
 
     // Register special user actions 
     $this->registerAction("lock",   "lockEntry");

@@ -61,21 +61,13 @@ class SnapShotDialog extends plugin
 		plugin::execute();
 		$smarty = get_smarty();
 
-    if(!isset($this->parent->acl_module) || !count($this->parent->acl_module)){
-      trigger_error("Could not detect acl_module in parent object (".get_class($this->parent).").");
-      return("");
-    }
-
     $ui = get_userinfo();
-
 		$once = true;
 		foreach($_POST as $name => $value){
 			if((preg_match("/^RemoveSnapShot_/",$name)) && ($once)){
 				$once = false;
-	
         $entry = preg_replace("/^RemoveSnapShot_/","",$name);
         $entry = base64_decode(preg_replace("/_[xy]$/","",$entry));
-
         $found = false;
         foreach($this->last_list as $t_stamp => $obj){
           if($obj['dn'] == $entry){
