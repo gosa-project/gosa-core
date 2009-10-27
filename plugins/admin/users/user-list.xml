@@ -117,6 +117,13 @@
     </action>
 
     <action>
+      <name>password</name>
+      <type>entry</type>
+      <image>plugins/users/images/list_password.png</image>
+      <label>Change password</label>
+    </action>
+
+    <action>
       <type>separator</type>
     </action>
 
@@ -139,6 +146,7 @@
     <action>
       <name>sendMessage</name>
       <type>entry</type>
+      <depends>goto</depends>
       <image>plugins/goto/images/notify.png</image>
       <label>Send message</label>
     </action>

@@ -34,11 +34,18 @@ class management
   protected $dn = "";
   protected $dns = array();
 
+  protected $last_dn = "";
+  protected $last_dns = array();
+
   protected $tabClass = "";
   protected $tabType = "";
   protected $aclCategory = "";
   protected $objectName = "";
   protected $tabObject = null;
+  protected $dialogObject = null;
+
+  protected $last_tabObject = null;
+  protected $last_dialogObject = null;
 
   protected $displayApplyBtn = "";
   protected $cpHandler = null;
@@ -357,6 +364,11 @@ class management
   
   protected function closeDialogs()
   {
+    $this->last_dn = $this->dn;
+    $this->last_dns = $this->dns;
+    $this->last_tabObject = $this->tabObject;
+    $this->last_dialogObject = $this->dialogObject;
+
     $this->dn = "";
     $this->dns = array();
     $this->tabObject = null;

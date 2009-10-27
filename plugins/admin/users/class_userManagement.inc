@@ -32,6 +32,8 @@ class userManagement extends management
   var $got_uid = "";
   var $edit_uid = "";
 
+  var $pwd_change_queue = array();
+
   // Tab definition 
   protected $tabClass = "usertabs";
   protected $tabType = "USERTABS";
@@ -87,6 +89,10 @@ class userManagement extends management
     $this->registerAction("templatize", "templatizeUsers");
     $this->registerAction("templatizeContinue", "templatizeContinue");
 
+    $this->registerAction("password", "changePassword");
+    $this->registerAction("passwordQueue", "handlePasswordQueue");
+    $this->registerAction("passwordCancel", "closeDialogs");
+
     $this->registerAction("sendMessage", "sendMessage");
     $this->registerAction("saveEventDialog", "saveEventDialog");
     $this->registerAction("abortEventDialog", "closeDialogs");
@@ -101,9 +107,21 @@ class userManagement extends management
     if(isset($_POST['templatize_continue'])) $action['action'] = "templatizeContinue";
     if(isset($_POST['save_event_dialog'])) $action['action'] = "saveEventDialog";
     if(isset($_POST['abort_event_dialog'])) $action['action'] = "abortEventDialog";
+    if(isset($_POST['password_cancel'])){
+      $action['action'] = "passwordCancel";
+    }elseif((count($this->pwd_change_queue) || isset($_POST['password_finish']))){
+      $action['action'] = "passwordQueue";
+    }
     return($action);
   }
 
+
+  function closeDialogs()
+  {
+    management::closeDialogs();
+    $this->pwd_change_queue = array();
+  }
+    
 
   /*! \brief  Sends a message to a set of users using gosa-si events.
    */ 
@@ -159,6 +177,100 @@ class userManagement extends management
   {
     $this->newEntry();
     $this->tabObject->set_template_mode ();
+  }
+
+
+  /*! \brief  Queues a set of users for password changes
+   */ 
+  function changePassword($action="",$target=array(),$all=array())
+  {
+    $this->dn ="";
+    $this->pwd_change_queue = $target;
+
+    // Check permisions
+    $disallowed = array();
+    foreach($this->pwd_change_queue as $key => $dn){
+      if(!preg_match("/w/",$this->ui->get_permissions($dn,$this->aclCategory."/password"))){
+        unset($this->pwd_change_queue[$key]);
+        $disallowed[] = $dn; 
+      }
+    }
+    if(count($disallowed)){
+      msg_dialog::display(_("Permission"),msgPool::permModify($disallowed),INFO_DIALOG);
+    }
+
+    // Now display change dialog.
+    return($this->handlePasswordQueue()); 
+  }
+
+
+  function handlePasswordQueue()
+  {
+    // Get next entry from queue.
+    if(empty($this->dn) && count($this->pwd_change_queue)){
+      $this->dn = array_pop($this->pwd_change_queue);
+      set_object_info($this->dn);
+      $smarty = get_smarty();
+      return ($smarty->fetch(get_template_path('password.tpl', TRUE)));
+    }
+
+    // Check permissions
+    $dn  = $this->dn;
+    $acl = $this->ui->get_permissions($dn, "users/password");
+    $cacl= $this->ui->get_permissions($dn, "users/user");
+    if (preg_match('/w/', $acl) || preg_match('/c/', $cacl)){
+      $message= array();
+      if ($_POST['new_password'] != $_POST['repeated_password']){
+        $message[]= _("The passwords you've entered as 'New password' and 'Repeated new password' do not match.");
+      } else {
+        if ($_POST['new_password'] == ""){
+          $message[] = msgPool::required(_("New password"));
+        }
+      }
+
+      // Display errors
+      if (count($message) != 0){
+        msg_dialog::displayChecks($message);
+        $smarty = get_smarty();
+        return($smarty->fetch(get_template_path('password.tpl', TRUE)));
+      }
+
+      // Change cassword 
+      if(!change_password ($this->dn, $_POST['new_password'])){
+        return($smarty->fetch(get_template_path('password.tpl', TRUE)));
+      }
+      if ($this->config->get_cfg_value("passwordHook") != ""){
+        exec($this->config->get_cfg_value("passwordHook")." ".$username." ".$_POST['new_password'], $resarr);
+      }
+      new log("modify","users/".get_class($this),$this->dn,array(),"Password has been changed");
+      $this->dn ="";
+      
+    } else {
+      msg_dialog::display(_("Password change"),
+          _("You have no permission to change this users password!"),
+          WARNING_DIALOG);
+    }
+
+    // Cleanup
+    if(!count($this->pwd_change_queue)){
+      $this->remove_lock();
+      $this->closeDialogs();
+    }else{
+      return($this->handlePasswordQueue());
+    }
+  }
+
+
+  /*! \brief  Save user modifications. 
+   *          Whenever we save a 'new' user, request a password change for him.
+   */ 
+  function saveChanges()
+  {
+    management::saveChanges();
+    if($this->last_dn == "new"){
+      $this->pwd_change_queue[] = $this->last_tabObject->dn;
+      return($this->handlePasswordQueue());
+    }
   }
 
 
