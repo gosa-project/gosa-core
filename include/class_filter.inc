@@ -418,13 +418,9 @@ class filter {
 
   function update()
   {
-
     /* React on alphabet links if needed */
     if (isset($_GET['filter'])){
-      $s= mb_substr(validate($_GET['filter']), 0, 1, "UTF8")."*";
-      if ($s == "**"){
-        $s= "*";
-      }
+      $s= mb_substr(validate($_GET['filter']), 0, 1, "UTF8");
       foreach ($this->alphabetElements as $tag) {
         $this->elementValues[$tag]= $s;
       }
