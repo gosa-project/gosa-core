@@ -1036,6 +1036,7 @@ class listing {
 
   function recurseActions($actions)
   {
+    global $class_mapping;
     static $level= 2;
     $result= "<ul class='level$level'>";
     $separator= "";
@@ -1045,6 +1046,16 @@ class listing {
       // Skip the entry completely if there's no permission to execute it
       if (!$this->hasActionPermission($action, $this->filter->base)) {
         continue;
+      }
+
+      // Skip entry if there're missing dependencies
+      if (isset($action['depends'])) {
+        $deps= is_array($action['depends'])?$action['depends']:array($action['depends']);
+        foreach($deps as $clazz) {
+          if (!isset($class_mapping[$clazz])){
+            continue 2;
+          }
+        }
       }
 
       // Fill image if set
