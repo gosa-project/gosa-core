@@ -123,6 +123,13 @@
     </action>
 
     <action>
+      <name>sendMessage</name>
+      <type>entry</type>
+      <image>plugins/goto/images/notify.png</image>
+      <label>Send message</label>
+    </action>
+
+    <action>
       <type>separator</type>
     </action>
 
@@ -135,6 +142,18 @@
 
     <action>
       <type>exporter</type>
+    </action>
+
+    <action>
+      <type>separator</type>
+    </action>
+
+    <action>
+      <type>copypaste</type>
+    </action>
+
+    <action>
+      <type>snapshot</type>
     </action>
   </actionmenu>
 

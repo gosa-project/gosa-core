@@ -83,6 +83,16 @@ class management
     $str = $this->handleActions($this->detectPostActions());
     if($str) return($this->getHeader().$str);
 
+    // Open single dialog objects
+    if(is_object($this->dialogObject)){
+      if(method_exists($this->dialogObject,'save_object')) $this->dialogObject->save_object(); 
+      if(method_exists($this->dialogObject,'execute')){
+        $display = $this->dialogObject->execute(); 
+        $display.= $this->_getTabFooter();
+        return($this->getHeader().$display);
+      } 
+    }
+
     // Display tab object.
     if($this->tabObject instanceOf tabs || $this->tabObject instanceOf multi_plug){
       $this->tabObject->save_object();
@@ -341,6 +351,7 @@ class management
     $this->dn = "";
     $this->dns = array();
     $this->tabObject = null;
+    $this->dialogObject = null;
     set_object_info();
   }
 
