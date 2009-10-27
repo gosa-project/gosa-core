@@ -451,6 +451,7 @@ class listing {
       $base= validate($_POST['BASE']);
       if (isset($this->bases[$base])) {
         $this->base= $base;
+        session::global_set("CurrentMainBase", $this->base);
       }
     }
 
