@@ -18,7 +18,7 @@
       <attribute>uid</attribute>
       <attribute>userPassword</attribute>
     </query>
-    <scope>one</scope>
+    <scope>auto</scope>
   </search>
 
   <element>

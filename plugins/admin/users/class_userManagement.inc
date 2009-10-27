@@ -47,6 +47,7 @@ class userManagement extends management
     // Build filter
     $filter = new filter(get_template_path("user-filter.xml", true));
     $filter->setObjectStorage("ou=people,");
+    $this->setFilter($filter);
 
     // Build headpage
     $headpage = new listing(get_template_path("user-list.xml", true));

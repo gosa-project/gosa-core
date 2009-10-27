@@ -30,7 +30,7 @@
   </definition>
 
   <table>
-    <layout>|20px||200px|100px|200px;r|</layout>
+    <layout>|20px||200px|150px|180px;r|</layout>
 
     <department>
       <value>%{filter:objectType(dn,objectClass)}</value>
