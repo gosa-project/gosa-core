@@ -10,14 +10,12 @@
   <search>
     <query>
       <backend>LDAP</backend>
-      <filter>(&amp;(objectClass=person)$NAME)</filter>
+      <filter>(&amp;(objectClass=gosaAccount)$NAME)</filter>
       <attribute>dn</attribute>
       <attribute>objectClass</attribute>
       <attribute>givenName</attribute>
       <attribute>sn</attribute>
-      <attribute>customerNumber</attribute>
-      <attribute>customerState</attribute>
-      <attribute>dateOfBirth</attribute>
+      <attribute>uid</attribute>
       <attribute>userPassword</attribute>
     </query>
     <scope>one</scope>
@@ -33,7 +31,7 @@
     <set>(|(cn=*$*)(sn=*$*)(givenName=*$*))</set>
     <autocomplete>
       <backend>LDAP</backend>
-      <filter>(&amp;(objectClass=person)(|(cn=*$NAME*)(sn=*$NAME*)(givenName=*$NAME*)))</filter>
+      <filter>(&amp;(objectClass=gosaAccount)(|(cn=*$NAME*)(sn=*$NAME*)(givenName=*$NAME*)))</filter>
       <attribute>cn</attribute>
       <frequency>0.5</frequency>
       <characters>3</characters>
