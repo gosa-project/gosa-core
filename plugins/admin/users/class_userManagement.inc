@@ -57,6 +57,7 @@ class userManagement extends management
     $headpage = new listing(get_template_path("user-list.xml", true));
     $headpage->registerElementFilter("lockLabel", "userManagement::filterLockLabel");
     $headpage->registerElementFilter("lockImage", "userManagement::filterLockImage");
+    $headpage->registerElementFilter("filterProperties", "userManagement::filterProperties");
     $headpage->setFilter($filter);
 
     // Add copy&paste and snapshot handler.
@@ -676,6 +677,57 @@ class userManagement extends management
     }
     return $label;
   }
+
+
+  static function filterProperties($row, $classes)
+  {
+    $result= "";
+    $map= array( "gosaAccount" => array( "image" => "plugins/users/images/select_user.png",
+                                         "plugin" => "user",
+                                         "alt" => _("Generic"),
+                                         "title" => _("Edit generic properties")),
+                 "posixAccount" => array("image" => "images/penguin.png",
+                                         "plugin" => "posixAccount",
+                                         "alt" => _("POSIX"),
+                                         "title" => _("Edit POSIX properties")),
+                 "gosaMailAccount" => array("image" => "images/mailto.png",
+                                         "alt" => _("Mail"),
+                                         "plugin" => "mailAccount",
+                                         "title" => _("Edit mail properties")),
+                 "sambaSamAccount" => array("image" => "plugins/systems/images/select_winstation.png",
+                                         "plugin" => "sambaAccount",
+                                         "alt" => _("Samba"),
+                                         "title" => _("Edit samba properties")),
+                 "apple-user" => array("image" => "plugins/netatalk/images/select_netatalk.png",
+                                         "plugin" => "sambaAccount",
+                                         "alt" => _("Netatalk"),
+                                         "title" => _("Edit netatalk properties")),
+                 "gotoEnvironment" => array("image" => "plugins/users/images/small_environment.png",
+                                         "plugin" => "gotoEnvironment",
+                                         "alt" => _("Environment"),
+                                         "title" => _("Edit environment properties")),
+                 "goFaxAccount" => array("image" => "plugins/users/images/fax_small.png",
+                                         "plugin" => "goFaxAccount",
+                                         "alt" => _("FAX"),
+                                         "title" => _("Edit FAX properties")),
+                 "goFonAccount" => array("image" => "plugins/gofon/images/select_phone.png",
+                                         "plugin" => "goFonAccount",
+                                         "alt" => _("Phone"),
+                                         "title" => _("Edit phone properties")));
+
+    // Walk thru map
+    foreach ($map as $oc => $properties) {
+      if (in_array_ics($oc, $classes)) {
+        $result.="<input class='center' type='image' src='".$properties['image']."' ".
+                 "alt='".$properties['alt']."' title='".$properties['title'].
+                 "' name='listing_edit_".$properties['plugin']."_$row' style='padding:1px'>";
+      } else {
+        $result.="<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+      }
+    }
+    return $result;
+  }
+
 } 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

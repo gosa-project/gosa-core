@@ -38,4 +38,44 @@
     </autocomplete>
   </element>
 
+  <element>
+    <type>checkbox</type>
+    <tag>TEMPLATES</tag>
+    <default>false</default>
+    <unset>(!(objectClass=gosaUserTemplate))</unset>
+    <set></set>
+  </element>
+
+  <element>
+    <type>checkbox</type>
+    <tag>FUNCTIONAL</tag>
+    <default>true</default>
+    <unset></unset>
+    <set>(objectClass=gosaAccount)</set>
+  </element>
+
+  <element>
+    <type>checkbox</type>
+    <tag>POSIX</tag>
+    <default>true</default>
+    <unset></unset>
+    <set>(objectClass=posixAccount)</set>
+  </element>
+
+  <element>
+    <type>checkbox</type>
+    <tag>MAIL</tag>
+    <default>true</default>
+    <unset></unset>
+    <set>(objectClass=gosaMailAccount)</set>
+  </element>
+
+  <element>
+    <type>checkbox</type>
+    <tag>SAMBA</tag>
+    <default>true</default>
+    <unset></unset>
+    <set>(objectClass=sambaSamAccount)</set>
+  </element>
+
 </filterdef>
