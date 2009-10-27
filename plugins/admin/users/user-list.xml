@@ -71,17 +71,23 @@
   <actionmenu>
 
     <action>
+     <type>sub</type>
+     <image>images/lists/new.png</image>
+     <label>Create</label>
+
+     <action>
       <name>new</name>
       <type>entry</type>
       <image>plugins/users/images/list_new_user.png</image>
-      <label>New person</label>
-    </action>
+      <label>User</label>
+     </action>
 
-    <action>
+     <action>
       <name>new_template</name>
       <type>entry</type>
       <image>plugins/users/images/select_template.png</image>
-      <label>New template</label>
+      <label>Template</label>
+     </action>
     </action>
 
     <action>
@@ -141,6 +147,10 @@
     </action>
 
     <action>
+      <type>separator</type>
+    </action>
+
+    <action>
       <type>exporter</type>
     </action>
 
@@ -155,6 +165,7 @@
     <action>
       <type>snapshot</type>
     </action>
+
   </actionmenu>
 
   <actiontriggers snapshot="true" copypaste="true">
