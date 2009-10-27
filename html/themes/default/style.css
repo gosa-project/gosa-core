@@ -1665,7 +1665,7 @@ div.autocomplete ul li.selected { background-color: #F0F0F0;}
         float: none;
         margin: 0;
         padding: 0;
-        width: 150px;
+        width: 200px;
 }
 
 #pulldown  ul.level2 li a, #pulldown ul.level3 li a {
