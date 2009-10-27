@@ -62,7 +62,7 @@
     </column>
 
     <column>
-      <label>ID</label>
+      <label>Login</label>
       <sortAttribute>uid</sortAttribute>
       <sortType>string</sortType>
       <value>%{filter:link(row,dn,"%s",uid)}</value>
