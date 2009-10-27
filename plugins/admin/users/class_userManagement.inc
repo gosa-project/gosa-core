@@ -28,6 +28,9 @@ class userManagement extends management
 
   var $sn = "";
   var $givenName = "";
+  var $uid = "";
+  var $got_uid = "";
+  var $edit_uid = "";
 
   // Tab definition 
   protected $tabClass = "usertabs";
@@ -69,10 +72,13 @@ class userManagement extends management
 
     // Register special user actions 
     $this->registerAction("lock",   "lockEntry");
-    $this->registerAction("unlock", "alert");
+    $this->registerAction("lockUsers",   "lockUsers");
+    $this->registerAction("unlockUsers", "lockUsers");
     $this->registerAction("new_template", "newTemplate");
     $this->registerAction("newfromtpl", "newUserFromTemplate");
     $this->registerAction("templateContinue", "templateContinue");
+    $this->registerAction("templatize", "templatizeUsers");
+    $this->registerAction("templatizeContinue", "templatizeContinue");
   }
 
   // Inject user actions 
@@ -80,54 +86,10 @@ class userManagement extends management
   {
     $action = management::detectPostActions();
     if(isset($_POST['template_continue'])) $action['action'] = "templateContinue";
+    if(isset($_POST['templatize_continue'])) $action['action'] = "templatizeContinue";
     return($action);
   }
 
-
-  function lockEntry($action,$entry)
-  {
-    $disallowed = array();
-    $dns = array();
-    foreach($entry as $dn){
-      if (!preg_match("/w/",$this->ui->get_permissions($dn,"users/password"))){
-        $disallowed[] = $dn;
-      }else{
-        $allowed[] = $dn;
-      }
-    }
-    if(count($disallowed)){
-      msg_dialog::display(_("Permission"),msgPool::permDelete($disallowed),INFO_DIALOG);
-    }
-    $ldap = $this->config->get_ldap_link();
-    foreach($allowed as $dn){
-      $ldap->cat($dn, array('userPassword'));
-      if($ldap->count() == 1){
-        $val = $ldap->fetch();
-        $pwd = $val['userPassword'][0];
-        $method = passwordMethod::get_method($pwd,$val['dn']);
-        $success= false;
-        if($method instanceOf passwordMethod){
-          if($method->is_locked($this->config,$val['dn'])){
-            $success= $method->unlock_account($this->config,$val['dn']);
-          }else{
-            $success= $method->lock_account($this->config,$val['dn']);
-          }
-
-          /* Check for success */
-          if (!$success){
-            $hn= $method->get_hash_name();
-            if (is_array($hn)){
-              $hn= $hn[0];
-            }
-            msg_dialog::display(_("Account locking"),
-              sprintf(_("Password method '%s' does not support locking. Account has not been locked!"), $hn),WARNING_DIALOG);
-          }
-        }else{
-          // Can't lock unknown methods.
-        }
-      }
-    }
-  }
 
 
   function alert($action,$values)
@@ -135,79 +97,154 @@ class userManagement extends management
     print_a(array($action,$values));
   }
 
+  /*! \brief  Intiates template creation. 
+   */ 
   function newTemplate($action,$entry)
   {
     $this->newEntry();
     $this->tabObject->set_template_mode ();
   }
 
- 
-  function templateContinue()
+
+  /*! \brief  Intiates user creation. 
+   *          If we've user templates, then the user will be asked to use to use one. 
+   *          -> See 'templateContinue' for further handling.
+   */ 
+  function newUserFromTemplate($action="",$target=array(),$all=array())
   {
-    $smarty = get_smarty();
+    // Call parent method, it knows whats to do, locking and so on ...
+    management::newEntry($action,$target,$all);
+
+    // Reset uid selection.
+    $this->got_uid= "";
+
+    // Use template if there are any of them 
     $templates = array();
     $templates['none']= _("none");
     $templates = array_merge($templates,$this->get_templates());
 
-    if (isset($_POST['template_continue'])){
-      $message = array();
-      if(!isset($_POST['template']) || (empty($_POST['template']))){
-        $message[]= msgPool::invalid(_("Template"));
+    // We've templates, so preset the current template and display the input dialog.
+    if (count($templates)){
+      $smarty = get_smarty();
+      foreach(array("sn", "givenName", "uid", "got_uid") as $attr){
+        $smarty->assign("$attr", "");
       }
-      if(!isset($_POST['sn']) || (empty($_POST['sn']))){
-        $message[]= msgPool::required(_("Name"));
-      }
-      if(!isset($_POST['givenName']) || (empty($_POST['givenName']))){
-        $message[]= msgPool::required(_("Given name"));
-      }
+      $smarty->assign("template",  array_pop($target));
+      $smarty->assign("templates", $templates);
+      $smarty->assign("edit_uid", "");
+      return($smarty->fetch(get_template_path('template.tpl', TRUE)));
 
-      /* Show error message / continue editing */
-      if (count($message) > 0){
-        msg_dialog::displayChecks($message);
+      // -> See 'templateContinue' for further handling!
+    }
+  }
 
-        foreach(array("sn", "givenName", "uid", "template") as $attr){
-          if(isset($_POST[$attr])){
-            $smarty->assign("$attr", $_POST[$attr]);
-          }else{
-            $smarty->assign("$attr", "");
-          }
+
+
+  /*! \brief  Intiates user creation. 
+   *          If we've user templates, then the user will be asked 
+   *           if he wants to use one. 
+   *          -> See 'templateContinue' for further handling.
+   */ 
+  function newEntry($action="",$target=array(),$all=array())
+  {
+  
+    // Call parent method, it manages everything, locking, object creation...
+    management::newEntry($action,$target,$all);
+    
+    // If we've at least one template, then ask the user if he wants to use one?
+    $templates = array();
+    $templates['none']= _("none");
+    $templates = array_merge($templates,$this->get_templates());
+
+    // Display template selection
+    if (count($templates)){
+      $smarty = get_smarty();
+  
+      // Set default variables, normally empty.
+      foreach(array("sn", "givenName", "uid", "got_uid") as $attr){
+        $smarty->assign($attr, "");
+      }
+      $smarty->assign("template", "none");
+      $smarty->assign("templates", $templates);
+      $smarty->assign("edit_uid", "");
+      return($smarty->fetch(get_template_path('template.tpl', TRUE)));
+
+      // -> See 'templateContinue' for further handling!
+    }
+  }
+
+
+  /* !\brief  This method is called whenever a template selection was displayed.
+   *          Here we act on the use selection. 
+   *          - Does the user want to create a user from template?
+   *          - Create user without template?
+   *          - Input correct, every value given and valid? 
+   */ 
+  function templateContinue()
+  {
+    // Get the list of available templates.
+    $templates = array();
+    $templates['none']= _("none");
+    $templates = array_merge($templates,$this->get_templates());
+
+    // Input validation, if someone wants to create a user from a template
+    //  then validate the given values.
+    $message = array();
+    if(!isset($_POST['template']) || (empty($_POST['template']))){
+      $message[]= msgPool::invalid(_("Template"));
+    }
+    if(!isset($_POST['sn']) || (empty($_POST['sn']))){
+      $message[]= msgPool::required(_("Name"));
+    }
+    if(!isset($_POST['givenName']) || (empty($_POST['givenName']))){
+      $message[]= msgPool::required(_("Given name"));
+    }
+
+    /********************
+     * 1   We've had input errors - Display errors and show input dialog again. 
+     ********************/
+
+    if (count($message) > 0){
+      msg_dialog::displayChecks($message);
+
+      // Preset input fields with user input. 
+      $smarty = get_smarty();
+      foreach(array("sn", "givenName", "uid", "template") as $attr){
+        if(isset($_POST[$attr])){
+          $smarty->assign("$attr", get_post($attr));
+        }else{
+          $smarty->assign("$attr", "");
         }
-        $smarty->assign("templates",$templates);
-        $smarty->assign("got_uid",$this->got_uid);
-        $smarty->assign("edit_uid",false);
-        return($smarty->fetch(get_template_path('template.tpl', TRUE)));
       }
+
+      $smarty->assign("templates",$templates);
+      $smarty->assign("got_uid", $this->got_uid);
+      $smarty->assign("edit_uid",false);
+      return($smarty->fetch(get_template_path('template.tpl', TRUE)));
     }
 
 
-    /* Continue template editing */
+    /********************
+     * 2   There was a template selected, now ask for the uid.
+     ********************/
+
     if ($_POST['template'] != 'none' && !isset($_POST['uid'])){
 
+      // Remember user input.
+      $smarty = get_smarty();
       $this->sn             = $_POST['sn'];
       $this->givenName      = $_POST['givenName'];
 
-      /* Check for requred values */
-      $message= array();
-      if ($this->sn == "") {
-        $message[]= msgPool::required(_("Name"));
-      }
-      if ($this->givenName == "") {
-        $message[]= msgPool::required(_("Given name"));
-      }
-
-      /* Check if dn is used */
+      // Avoid duplicate entries, check if such a user already exists.
       $dn= preg_replace("/^[^,]+,/i", "", $_POST['template']);
       $ldap= $this->config->get_ldap_link();
       $ldap->cd ($dn);
       $ldap->search ("(&(sn=".normalizeLdap($this->sn).")(givenName=".normalizeLdap($this->givenName)."))", array("givenName"));
       if ($ldap->count () != 0){
-        msgPool::duplicated(_("Name"));
-      }
+        msg_dialog::displayChecks(array(msgPool::duplicated(_("Name"))));
+      }else{
 
-      /* Show error message / continue editing */
-      if (count($message) > 0){
-        msg_dialog::displayChecks($message);
-      } else {
+        // Preset uid field by using the idGenerator 
         $attributes= array('sn' => $this->sn, 'givenName' => $this->givenName);
         if ($this->config->get_cfg_value("idGenerator") != ""){
           $uids= gen_uids ($this->config->get_cfg_value("idGenerator"), $attributes);
@@ -223,6 +260,7 @@ class userManagement extends management
         $this->got_uid= true;
       }
 
+      // Assign user input 
       foreach(array("sn", "givenName", "uid", "got_uid") as $attr){
         $smarty->assign("$attr", $this->$attr);
       }
@@ -233,76 +271,196 @@ class userManagement extends management
       return($smarty->fetch(get_template_path('template.tpl', TRUE)));
     }
 
-    /* No template. Ok. Lets fill data into the normal user dialog */
+
+    /********************
+     * 3   No template - Ok. Lets fill the data into the user object and skip templating here. 
+     ********************/
     if ($_POST['template'] == 'none'){
       foreach(array("sn", "givenName", "uid") as $attr){
         if (isset($_POST[$attr])){
           $this->tabObject->by_object['user']->$attr= $_POST[$attr];
         }
       }
-    }elseif(isset($_POST['uid'])){
+      
+      // The user Tab object is already instantiated, so just go back and let the 
+      //  management class do the rest.
+      return("");
+    }
 
-      /* Move user supplied data to sub plugins */
+
+    /********************
+     * 4   Template selected and uid given - Ok, then lets adapt tempalte values. 
+     ********************/
+    if(isset($_POST['uid'])){
+
+      // Move user supplied data to sub plugins 
       foreach(array("uid","sn","givenName") as $attr){
         $this->$attr = $_POST[$attr];
         $this->tabObject->$attr       = $this->$attr;
         $this->tabObject->by_object['user']->$attr = $this->$attr;
       }
 
+      // Adapt template values.
       $template_dn              = $_POST['template'];
       $this->tabObject->adapt_from_template($template_dn, array("uid","cn","givenName","sn"));
       $template_base            = preg_replace("/^[^,]+,".preg_quote(get_people_ou(), '/')."/", '', $template_dn);
       $this->tabObject->by_object['user']->base= $template_base;
+
+      // The user Tab object is already instantiated, so just go back and let the 
+      //  management class do the rest.
+      return("");
     }
   }
 
-  function newUserFromTemplate($action,$entry)
+
+  /* !\brief  This method applies a template to a set of users.
+   */ 
+  function templatizeUsers($action="",$target=array(),$all=array())
   {
+    $this->dns = array();
+    if(count($target)){
 
-    // By default we set 'dn' to 'new', all relevant plugins will react on this.
-    $this->dn= "new";
-    $this->got_uid= ($this->config->get_cfg_value("idGenerator") == "");
+      // Get the list of available templates.
+      $templates = $this->get_templates();
 
-    $tab = $this->tabClass;
-    $this->tabObject= new $tab($this->config,$this->config->data['TABS'][$this->tabType], $this->dn, $this->aclCategory);
-    $this->tabObject->by_object['user']->base= $this->headpage->getBase();
-    $this->tabObject->set_acl_base($this->headpage->getBase());
-
-    // Use template if there are any of them 
-    $templates = array();
-    $templates['none']= _("none");
-    $templates = array_merge($templates,$this->get_templates());
-    if (count($templates)){
-      $smarty = get_smarty();
-      foreach(array("sn", "givenName", "uid", "got_uid") as $attr){
-        $smarty->assign("$attr", "");
+      // Check entry locking
+      foreach($target as $dn){
+        if (($user= get_lock($dn)) != ""){
+          return(gen_locked_message ($user, $dn));
+        }
+        $this->dns[] = $dn;
       }
-      $smarty->assign("template",  array_pop($entry));
+          
+      // Display template
+      $smarty = get_smarty();
       $smarty->assign("templates", $templates);
-      $smarty->assign("edit_uid", "");
-      return($smarty->fetch(get_template_path('template.tpl', TRUE)));
+      return($smarty->fetch(get_template_path('templatize.tpl', TRUE)));
     }
   }
 
+
+  /* !\brief  This method is called whenever the templatize dialog was used.
+   */ 
+  function templatizeContinue()
+  {
+    // Template readable? 
+    $template= get_post('template');
+    $acl = $this->ui->get_permissions($template, $this->aclCategory."/".$this->aclPlugin);
+    if (preg_match('/r/', $acl)){
+      $tab = $this->tabClass;
+      foreach ($this->dns as $dn){
+
+        // User writeable
+        $acl = $this->ui->get_permissions($dn,  $this->aclCategory."/".$this->aclPlugin);
+        if (preg_match('/w/', $acl)){
+          $this->tabObject= new $tab($this->config, $this->config->data['TABS'][$this->tabType], $dn, $this->aclCategory);
+          $this->tabObject->adapt_from_template($template, array("sn", "givenName", "uid"));
+          $this->tabObject->save();
+        } else {
+          msg_dialog::display(_("Permission error"), msgPool::permModify($dn), ERROR_DIALOG);
+        }
+      }
+    } else {
+      msg_dialog::display(_("Permission error"), msgPool::permView($template), ERROR_DIALOG);
+    }
+
+    // Cleanup!
+    $this->remove_lock(); 
+    $this->closeDialogs();
+  }
+
+
+  /* !\brief  Lock/unlock multiple users.
+   */ 
+  function lockUsers($action,$target,$all)
+  {
+    if($action == "lockUsers"){
+      $this->lockEntry($action,$target, $all, "lock");
+    }else{
+      $this->lockEntry($action,$target, $all, "unlock");
+    }
+  }
+
+  
+  /* !\brief  Locks/unlocks the given user(s).
+   */ 
+  function lockEntry($action,$entry, $all, $type = "toggle")
+  {
+    
+    // Filter out entries we are not allowed to modify
+    $disallowed = array();
+    $dns = array();
+    foreach($entry as $dn){
+      if (!preg_match("/w/",$this->ui->get_permissions($dn,"users/password"))){
+        $disallowed[] = $dn;
+      }else{
+        $allowed[] = $dn;
+      }
+    }
+    if(count($disallowed)){
+      msg_dialog::display(_("Permission"),msgPool::permDelete($disallowed),INFO_DIALOG);
+    }
+
+    // Try to lock/unlock the rest of the entries.
+    $ldap = $this->config->get_ldap_link();
+    foreach($allowed as $dn){
+      $ldap->cat($dn, array('userPassword'));
+      if($ldap->count() == 1){
+
+        // We can't lock empty passwords.
+        $val = $ldap->fetch();
+        if(!isset($val['userPassword'])){
+          continue;
+        }
+
+        // Detect the password method and try to lock/unlock.
+        $pwd = $val['userPassword'][0];
+        $method = passwordMethod::get_method($pwd,$val['dn']);
+        $success= true;
+        if($method instanceOf passwordMethod){
+          if($type == "toggle"){
+            if($method->is_locked($this->config,$val['dn'])){
+              $success= $method->unlock_account($this->config,$val['dn']);
+            }else{
+              $success= $method->lock_account($this->config,$val['dn']);
+            }
+          }elseif($type == "lock" && !$method->is_locked($this->config,$val['dn'])){
+            $success= $method->lock_account($this->config,$val['dn']);
+          }elseif($type == "unlock" && $method->is_locked($this->config,$val['dn'])){
+            $success= $method->unlock_account($this->config,$val['dn']);
+          }
+
+          // Check if everything went fine.
+          if (!$success){
+            $hn= $method->get_hash_name();
+            if (is_array($hn)){
+              $hn= $hn[0];
+            }
+            msg_dialog::display(_("Account locking"),
+                sprintf(_("Password method '%s' does not support locking. Account (%s) has not been locked!"), 
+                  $hn,$dn),WARNING_DIALOG);
+          }
+        }else{
+          // Can't lock unknown methods.
+        }
+      }
+    }
+  }
+
+
+  /* !\brief  This method returns a list of all available templates.
+   */ 
   function get_templates()
   {
     $templates= array();
     $ldap= $this->config->get_ldap_link();
-
-    /* Create list of templates */
     foreach ($this->config->departments as $key => $value){
-
-      /* Get acls from different ou's */
       $acl = $this->ui->get_permissions($value,$this->aclCategory."/".$this->aclPlugin);
-
-      /* If creation of a new user is allowed, append this template */
       if (preg_match("/c/",$acl)){
 
-        /* Search all templates from the current dn */
+        // Search all templates from the current dn.
         $ldap->cd (get_people_ou().$value);
         $ldap->search ("(objectClass=gosaUserTemplate)", array("uid"));
-
-        /* Append */
         if ($ldap->count() != 0){
           while ($attrs= $ldap->fetch()){
             $templates[$ldap->getDN()]= $attrs['uid'][0]." - ".LDAP::fix($key);
@@ -316,12 +474,9 @@ class userManagement extends management
   }
 
 
-
-
   static function filterLockImage($userPassword)
   {
     $image= "images/empty.png";
-
     if(isset($userPassword[0]) && preg_match("/^\{[^\}]/",$userPassword[0])){
       if(preg_match("/^[^\}]*+\}!/",$userPassword[0])){
         $image= "images/lists/locked.png";
@@ -329,7 +484,6 @@ class userManagement extends management
         $image= "images/lists/unlocked.png";
       }
     }
-
     return $image;
   }
 
@@ -337,7 +491,6 @@ class userManagement extends management
   static function filterLockLabel($userPassword)
   {
     $label= "";
-
     if(isset($userPassword[0]) && preg_match("/^\{[^\}]/",$userPassword[0])){
       if(preg_match("/^[^\}]*+\}!/",$userPassword[0])){
         $label= _("Unlock account");
@@ -345,11 +498,8 @@ class userManagement extends management
         $label= _("Lock account");
       }
     }
-
     return $label;
   }
-
-
 } 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

@@ -107,6 +107,22 @@
     </action>
 
     <action>
+      <name>lockUsers</name>
+      <type>entry</type>
+      <image>images/lists/locked.png</image>
+      <acl>uniBonnAccount/password[w]</acl>
+      <label>Lock users</label>
+    </action>
+
+    <action>
+      <name>unlockUsers</name>
+      <type>entry</type>
+      <image>images/lists/unlocked.png</image>
+      <acl>uniBonnAccount/password[w]</acl>
+      <label>Unlock users</label>
+    </action>
+
+    <action>
       <type>separator</type>
     </action>
 

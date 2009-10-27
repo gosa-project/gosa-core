@@ -197,7 +197,6 @@ class management
         $this->tabObject= new $tab($this->config,$this->config->data['TABS'][$this->tabType], $this->dn, $this->aclCategory);
         $this->tabObject->set_acl_base($this->dn);
         $this->tabObject->delete ();
-        $this->closeDialogs();
         del_lock($this->dn);        
       } else {
 
@@ -205,12 +204,11 @@ class management
            logs to notify the administrator */
         msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
         new log("security","groups/".get_class($this),$dn,array(),"Tried to trick deletion.");
-        return;
       }
     }
 
-    $this->closeDialogs();
     $this->remove_lock();
+    $this->closeDialogs();
   }
 
 
@@ -317,8 +315,8 @@ class management
         return("");
       }else{
         $this->tabObject->save();
-        $this->closeDialogs();
         $this->remove_lock();
+        $this->closeDialogs();
       }
     }
   }
@@ -348,8 +346,8 @@ class management
 
   protected function cancelEdit()
   {
-    $this->closeDialogs();
     $this->remove_lock();
+    $this->closeDialogs();
   }
 
 
