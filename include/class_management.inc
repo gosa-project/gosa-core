@@ -91,6 +91,7 @@ class management
     // Update filter
     if ($this->filter) {
       $this->filter->update();
+      session::global_set(get_class($this)."_filter", $this->filter);
       session::set('autocomplete', $this->filter);
       if (!$this->filter->isValid()){
         msg_dialog::display(_("Filter error"), _("The filter is incomplete!"), ERROR_DIALOG);
@@ -558,15 +559,23 @@ class management
   function setDescription($str) {
     $this->plDescription = $str;
   } 
+
+
   function setHeadpage($str) {
     $this->headpage = $str;
   } 
+
+
   function setFilter($str) {
     $this->filter = $str;
   } 
+
+
   function setIcon($str) {
     $this->plIcon = $str;
   } 
+
+
   function setHeadline($str) {
     $this->plHeadline = $str;
   } 
