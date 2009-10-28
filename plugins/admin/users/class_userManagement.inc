@@ -308,7 +308,7 @@ class userManagement extends management
    *           if he wants to use one. 
    *          -> See 'templateContinue' for further handling.
    */ 
-  function newEntry($action="",$target=array(),$all=array())
+  function newEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
   {
   
     // Call parent method, it manages everything, locking, object creation...
@@ -637,11 +637,11 @@ class userManagement extends management
   }
 
 
-  function copyPasteHandler($s_action,$s_entry)
+  function copyPasteHandler($action="",$target=array(),$all=array(),
+      $altTabClass ="", $altTabType = "", $altAclCategory="",$altAclPlugin="")
   {
     $this->cpHandler->lastdn = "";
-    $str = management::copyPasteHandler($s_action,$s_entry);
-
+    $str = management::copyPasteHandler($action,$target,$all);
     if($this->cpHandler->lastdn != "" && isset($_POST['passwordTodo']) && $_POST['passwordTodo'] == "new"){
       $this->pwd_change_queue[] = $this->cpHandler->lastdn;
       return($this->handlePasswordQueue());
