@@ -24,6 +24,7 @@ class filterLDAP {
     if (!is_array($objectStorage)) {
       $objectStorage= array($objectStorage);
     }
+    $method= empty($objectStorage)?"ls":"search";
 
     // Initialize search bases
     $bases= array();
@@ -69,7 +70,6 @@ class filterLDAP {
       }
 
       // Switch to new base and search
-      $ldap->cd($base);
       if (is_array($dnFilters)){
         $dnFilter= "(|";
         foreach ($dnFilters as $df) {
@@ -79,7 +79,12 @@ class filterLDAP {
       } else {
         $dnFilter= "";
       }
-      $ldap->search ("(&$filter$dnFilter)", $attributes);
+      $ldap->cd($base);
+      if ($method == "ls") {
+        $ldap->ls("(&$filter$dnFilter)", $base, $attributes);
+      } else {
+        $ldap->search("(&$filter$dnFilter)", $attributes);
+      }
 
       // Check for size limit exceeded messages for GUI feedback
       if (preg_match("/size limit/i", $ldap->get_error())){
