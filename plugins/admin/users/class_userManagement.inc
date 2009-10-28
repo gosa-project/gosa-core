@@ -91,6 +91,16 @@ class userManagement extends management
     $this->registerAction("sendMessage", "sendMessage");
     $this->registerAction("saveEventDialog", "saveEventDialog");
     $this->registerAction("abortEventDialog", "closeDialogs");
+
+    // Register shortcut icon actions 
+    $this->registerAction("edit_user","editEntry");
+    $this->registerAction("edit_posixAccount","editEntry");
+    $this->registerAction("edit_mailAccount","editEntry");
+    $this->registerAction("edit_sambaAccount","editEntry");
+    $this->registerAction("edit_netatalk","editEntry");
+    $this->registerAction("edit_environment","editEntry");
+    $this->registerAction("edit_gofaxAccount","editEntry");
+    $this->registerAction("edit_phoneAccount","editEntry");
   }
 
 
@@ -111,6 +121,21 @@ class userManagement extends management
   }
 
 
+  function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
+  {
+    management::editEntry($action,$target);
+
+    if(preg_match("/^edit_/",$action)){
+      $tab = preg_replace("/^edit_/","",$action); 
+      if(isset($this->tabObject->by_object[$tab])){
+        $this->tabObject->current = $tab;
+      }else{
+        trigger_error("Unknown tab: ".$tab);
+      }
+    }
+  }
+
+  
   function closeDialogs()
   {
     management::closeDialogs();
@@ -698,25 +723,25 @@ class userManagement extends management
                                          "alt" => _("Samba"),
                                          "title" => _("Edit samba properties")),
                  "apple-user" => array("image" => "plugins/netatalk/images/select_netatalk.png",
-                                         "plugin" => "sambaAccount",
+                                         "plugin" => "netatalk",
                                          "alt" => _("Netatalk"),
                                          "title" => _("Edit netatalk properties")),
                  "gotoEnvironment" => array("image" => "plugins/users/images/small_environment.png",
-                                         "plugin" => "gotoEnvironment",
+                                         "plugin" => "environment",
                                          "alt" => _("Environment"),
                                          "title" => _("Edit environment properties")),
                  "goFaxAccount" => array("image" => "plugins/users/images/fax_small.png",
-                                         "plugin" => "goFaxAccount",
+                                         "plugin" => "gofaxAccount",
                                          "alt" => _("FAX"),
                                          "title" => _("Edit FAX properties")),
                  "goFonAccount" => array("image" => "plugins/gofon/images/select_phone.png",
-                                         "plugin" => "goFonAccount",
+                                         "plugin" => "phoneAccount",
                                          "alt" => _("Phone"),
                                          "title" => _("Edit phone properties")));
 
     // Walk thru map
     foreach ($map as $oc => $properties) {
-      if (in_array_ics($oc, $classes)) {
+      if (in_array_ics($oc, $classes) || 1) {
         $result.="<input class='center' type='image' src='".$properties['image']."' ".
                  "alt='".$properties['alt']."' title='".$properties['title'].
                  "' name='listing_edit_".$properties['plugin']."_$row' style='padding:1px'>";
