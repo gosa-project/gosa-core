@@ -71,16 +71,20 @@ class departmentManagement extends management
   {
     $types= $this->get_support_departments();
     $type = $this->headpage->getType($target[0]);
-    management::editEntry($action,$target,$all,$this->tabClass,$types[$type]['TAB'],$this->aclCategory);
+    return(management::editEntry($action,$target,$all,$this->tabClass,$types[$type]['TAB'],$this->aclCategory));
   }
 
   
-
   function openEntry($action,$entry)
   {
     $this->headpage->setBase(array_pop($entry));
   }
 
+  protected function removeEntryRequested($action="",$target=array(),$all=array())
+  {
+    $target = array_remove_entries(array($this->config->current['BASE']),$target);
+    return(management::removeEntryRequested($action,$target,$all)); 
+  }
 
   static function filterDepLabel($row,$dn,$params,$ou,$pid,$base)
   {
