@@ -146,13 +146,6 @@
     </action>
 
     <action>
-      <name>edit</name>
-      <type>entry</type>
-      <image>images/lists/edit.png</image>
-      <label>Edit</label>
-    </action>
-
-    <action>
       <name>remove</name>
       <type>entry</type>
       <image>images/lists/trash.png</image>
