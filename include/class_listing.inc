@@ -45,6 +45,7 @@ class listing {
   var $pid;
   var $objectTypes= array();
   var $objectTypeCount= array();
+  var $objectDnMapping= array();
   var $copyPasteHandler= null;
   var $snapshotHandler= null;
   var $exporter= array();
@@ -438,8 +439,9 @@ class listing {
     global $config;
     $ui= get_userinfo();
 
-    // Reset object counter
+    // Reset object counter / DN mapping
     $this->objectTypeCount= array();
+    $this->objectDnMapping= array();
 
     // Do not do anything if this is not our PID
     if(isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->pid) {
@@ -751,12 +753,14 @@ class listing {
 
     $objectType= $this->getObjectType($this->objectTypes, $classes);
     if ($objectType) {
+      $this->objectDnMapping[$dn]= $objectType["objectClass"];
       $result= "<img class='center' title='".LDAP::fix($dn)."' src='".$objectType["image"]."'>";
       if (!isset($this->objectTypeCount[$objectType['label']])) {
         $this->objectTypeCount[$objectType['label']]= 0;
       }
       $this->objectTypeCount[$objectType['label']]++;
     }
+
     return $result;
   }
 
@@ -1446,6 +1450,15 @@ class listing {
     }
 
     return $result;
+  }
+
+
+  function getType($dn)
+  {
+    if (isset($this->objectDnMapping[$dn])) {
+      return $this->objectDnMapping[$dn];
+    }
+    return null;
   }
 
 }
