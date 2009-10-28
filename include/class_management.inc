@@ -287,8 +287,16 @@ class management
    *  @param  Array   'target'  A list of object dns, which should be affected by this method.
    *  @param  Array   'all'     A combination of both 'action' and 'target'.
    */
-  function removeEntryConfirmed($action="",$target=array(),$all=array())
+  function removeEntryConfirmed($action="",$target=array(),$all=array(),
+      $altTabClass="",$altTabType="",$altAclCategory="")
   {
+    $tabType = $this->tabType;
+    $tabClass = $this->tabClass;
+    $aclCategory = $this->aclCategory;
+    if(!empty($altTabClass)) $tabClass = $altTabClass;
+    if(!empty($altTabType)) $tabType = $altTabType;
+    if(!empty($altAclCategory)) $aclCategory = $altAclCategory;
+
     foreach($this->dns as $key => $dn){
 
       // Check permissions, are we allowed to remove this object? 
@@ -297,8 +305,7 @@ class management
 
         // Delete the object
         $this->dn = $dn;
-        $tab = $this->tabClass;
-        $this->tabObject= new $tab($this->config,$this->config->data['TABS'][$this->tabType], $this->dn, $this->aclCategory);
+        $this->tabObject= new $tabClass($this->config,$this->config->data['TABS'][$tabType], $this->dn, $aclCategory);
         $this->tabObject->set_acl_base($this->dn);
         $this->tabObject->delete ();
 
