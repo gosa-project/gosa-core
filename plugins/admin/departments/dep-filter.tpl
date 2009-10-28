@@ -10,8 +10,11 @@
   <tr>
    <td>
     <label for="NAME">
-     <img src="images/lists/search.png" align=middle>&nbsp;{$NAME}
+     <img src="images/lists/search.png" align=middle>&nbsp;Name
     </label>
+   </td>
+   <td>
+    {$NAME}
    </td>
   </tr>
  </table>
