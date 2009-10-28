@@ -66,6 +66,16 @@ class departmentManagement extends management
     $this->registerAction("open","openEntry");
   }
 
+
+  function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
+  {
+    $types= $this->get_support_departments();
+    $type = $this->headpage->getType($target[0]);
+    management::editEntry($action,$target,$all,$this->tabClass,$types[$type]['TAB'],$this->aclCategory);
+  }
+
+  
+
   function openEntry($action,$entry)
   {
     $this->headpage->setBase(array_pop($entry));
@@ -81,7 +91,6 @@ class departmentManagement extends management
     $dn= LDAP::fix(func_get_arg(1));
     return("<a href='?plug=".$_GET['plug']."&amp;PID=$pid&amp;act=listing_open_$row' title='$dn'>$ou</a>");
   }
-
 
 
   /*! \brief  Returns information about all container types that GOsa con handle.
