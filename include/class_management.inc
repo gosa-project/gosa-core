@@ -74,6 +74,26 @@ class management
     if(empty($this->plIcon)){
       $this->plIcon = "plugins/".$plugname."/images/plugin.png";
     }
+
+    // Register default actions
+    $this->registerAction("new",    "newEntry");
+    $this->registerAction("edit",   "editEntry");
+    $this->registerAction("apply",  "applyChanges");
+    $this->registerAction("save",   "saveChanges");
+    $this->registerAction("cancel", "cancelEdit");
+    $this->registerAction("remove", "removeEntryRequested");
+    $this->registerAction("removeConfirmed", "removeEntryConfirmed");
+
+    $this->registerAction("copy",   "copyPasteHandler");
+    $this->registerAction("cut",    "copyPasteHandler");
+    $this->registerAction("paste",  "copyPasteHandler");
+
+    $this->registerAction("snapshot",    "createSnapshotDialog");
+    $this->registerAction("restore",     "restoreSnapshotDialog");
+    $this->registerAction("saveSnapshot","saveSnapshot");
+    $this->registerAction("restoreSnapshot","restoreSnapshot");
+    $this->registerAction("cancelSnapshot","closeDialogs");
+
   }
 
   function execute()
@@ -128,7 +148,9 @@ class management
       }
       $this->snapHandler->setSnapshotBases($bases);
     }
-      
+    
+    echo $this->cpHandler->lastdn;
+  
     $this->headpage->update();
     $display = $this->headpage->render();
     return($this->getHeader().$display);

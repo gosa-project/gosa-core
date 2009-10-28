@@ -74,24 +74,6 @@ class userManagement extends management
 
     parent::__construct($config, $ui, "users", $headpage);
 
-    $this->registerAction("new",    "newEntry");
-    $this->registerAction("edit",   "editEntry");
-    $this->registerAction("apply",  "applyChanges");
-    $this->registerAction("save",   "saveChanges");
-    $this->registerAction("cancel", "cancelEdit");
-    $this->registerAction("remove", "removeEntryRequested");
-    $this->registerAction("removeConfirmed", "removeEntryConfirmed");
-
-    $this->registerAction("copy",   "copyPasteHandler");
-    $this->registerAction("cut",    "copyPasteHandler");
-    $this->registerAction("paste",  "copyPasteHandler");
-
-    $this->registerAction("snapshot",    "createSnapshotDialog");
-    $this->registerAction("restore",     "restoreSnapshotDialog");
-    $this->registerAction("saveSnapshot","saveSnapshot");
-    $this->registerAction("restoreSnapshot","restoreSnapshot");
-    $this->registerAction("cancelSnapshot","closeDialogs");
-
     // Register special user actions 
     $this->registerAction("lock",   "lockEntry");
     $this->registerAction("lockUsers",   "lockUsers");
@@ -652,6 +634,19 @@ class userManagement extends management
     natcasesort ($templates);
     reset ($templates);
     return($templates);
+  }
+
+
+  function copyPasteHandler($s_action,$s_entry)
+  {
+    $this->cpHandler->lastdn = "";
+    $str = management::copyPasteHandler($s_action,$s_entry);
+
+    if($this->cpHandler->lastdn != "" && isset($_POST['passwordTodo']) && $_POST['passwordTodo'] == "new"){
+      $this->pwd_change_queue[] = $this->cpHandler->lastdn;
+      return($this->handlePasswordQueue());
+    }
+    return($str);
   }
 
 

@@ -359,8 +359,8 @@ class CopyPasteHandler {
 
       /* Load next queue entry */
       if(!count($msgs)){
-        $this->lastdn = $this->current['object']->dn;
         $this->current['object']->save();
+        $this->lastdn = $this->current['object']->dn;
         $this->current = FALSE;
       }else{
         foreach( $msgs as $msg){
