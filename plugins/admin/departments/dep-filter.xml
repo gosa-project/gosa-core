@@ -2,7 +2,7 @@
 
 <filterdef>
   <definition>
-    <category>users</category>
+    <category>departments</category>
     <template>dep-filter.tpl</template>
     <initial>true</initial>
   </definition>
@@ -16,7 +16,7 @@
       <attribute>ou</attribute>
       <attribute>description</attribute>
     </query>
-    <scope>auto</scope>
+    <scope>one</scope>
   </search>
 
   <element>
@@ -27,7 +27,7 @@
     <default></default>
     <unset></unset>
     <set>(|(ou=*$*)(dc=*$*)(c=*$*)(l=*$*))</set>
-    <alphabet>true</alphabet>
+    <alphabet>false</alphabet>
     <autocomplete>
       <backend>LDAP</backend>
       <filter>(&amp;(objectClass=gosaDepartment)(|(ou=*$NAME*)(dc=*$NAME*)(l=*$NAME*)(c=*$NAME*)))</filter>
