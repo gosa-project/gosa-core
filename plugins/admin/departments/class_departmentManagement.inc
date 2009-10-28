@@ -64,8 +64,22 @@ class departmentManagement extends management
     parent::__construct($config, $ui, "departments", $headpage);
 
     $this->registerAction("open","openEntry");
+
+    $this->registerAction("new_domain","newEntry");
+    $this->registerAction("new_country","newEntry");
+    $this->registerAction("new_locality","newEntry");
+    $this->registerAction("new_dcObject","newEntry");
+    $this->registerAction("new_organization","newEntry");
+    $this->registerAction("new_department","newEntry");
+
   }
 
+  function newEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
+  {
+    $types= $this->get_support_departments();
+    $type = preg_replace("/^new_/","",$action);
+    return(management::newEntry($action,$target,$all,$this->tabClass,$types[$type]['TAB'],$this->aclCategory));
+  }
 
   function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
   {
