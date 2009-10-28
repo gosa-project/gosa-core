@@ -678,6 +678,11 @@ class listing {
           $params[]= $this->pid;
         }
 
+        // base is replaced by the current base
+        if ($param == "base") {
+          $params[]= $this->getBase();
+        }
+
         // Fixie with "" is passed directly
         if (preg_match('/^".*"$/', $param)){
           $params[]= preg_replace('/"/', '', $param);
