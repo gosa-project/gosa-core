@@ -741,7 +741,7 @@ class userManagement extends management
 
     // Walk thru map
     foreach ($map as $oc => $properties) {
-      if (in_array_ics($oc, $classes) || 1) {
+      if (in_array_ics($oc, $classes)) {
         $result.="<input class='center' type='image' src='".$properties['image']."' ".
                  "alt='".$properties['alt']."' title='".$properties['title'].
                  "' name='listing_edit_".$properties['plugin']."_$row' style='padding:1px'>";
