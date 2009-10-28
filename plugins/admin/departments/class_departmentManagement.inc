@@ -23,7 +23,7 @@
 class departmentManagement extends management
 {
   var $plHeadline     = "Departments";
-  var $plDescription  = "Manage department";
+  var $plDescription  = "Manage departments";
   var $plIcon         = "plugins/departments/images/plugin.png";
 
   // Tab definition 
@@ -47,7 +47,6 @@ class departmentManagement extends management
       $filter = new filter(get_template_path("dep-filter.xml", true));
       $filter->setObjectStorage($this->storagePoints);
     }
-    $this->setFilter($filter);
 
     // Build headpage
     $headpage = new listing(get_template_path("dep-list.xml", true));
