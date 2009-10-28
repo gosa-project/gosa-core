@@ -8,14 +8,13 @@
 
 <div style="border-top:1px solid #AAAAAA"></div>
 
- <div style="border-top:1px solid #AAAAAA"></div>
  {$SCOPE}
 
  <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
   <tr>
    <td>
     <label for="NAME">
-     <img src="images/lists/search.png" align=middle>&nbsp;Name
+     <img src="images/lists/search.png" align=middle>&nbsp;{$NAME}
     </label>
    </td>
   </tr>
