@@ -146,6 +146,14 @@
     </action>
 
     <action>
+      <type>exporter</type>
+    </action>
+
+    <action>
+      <type>separator</type>
+    </action>
+
+    <action>
       <name>remove</name>
       <type>entry</type>
       <image>images/lists/trash.png</image>
