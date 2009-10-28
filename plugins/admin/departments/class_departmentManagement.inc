@@ -170,31 +170,6 @@ class departmentManagement extends management
     $types['organizationalUnit']['IMG_FULL']= "images/lists/folder-full.png";//:wplugins/departments/images/department.png";
     $types['organizationalUnit']['TITLE']   = _("Department");
     $types['organizationalUnit']['TPL']     = "generic.tpl";
-
-#  /* Alias
-#   */
-#  $types['alias']['ACL']     = "alias";
-#  $types['alias']['CLASS']   = "alias";
-#  $types['alias']['TAB']     = "ALIASTABS";
-#  $types['alias']['ATTR']    = "???";
-#  $types['alias']['OC']      = "???";
-#  $types['alias']['IMG']     = "plugins/departments/images/department_alias.png";
-#  $types['alias']['IMG_FULL']= "plugins/departments/images/department_alias.png";
-#  $types['alias']['TITLE']   = _("Alias");
-#  $types['alias']['TPL']     = "alias.tpl";
-#
-#  /* Referal
-#   */
-#  $types['referal']['ACL']     = "referal";
-#  $types['referal']['CLASS']   = "referal";
-#  $types['referal']['TAB']     = "REFERALTABS";
-#  $types['referal']['ATTR']    = "???";
-#  $types['referal']['OC']      = "???";
-#  $types['referal']['IMG']     = "plugins/departments/images/department_referal.png";
-#  $types['referal']['IMG_FULL']= "plugins/departments/images/department_referal.png";
-#  $types['referal']['TITLE']   = _("Referal");
-#  $types['referal']['TPL']     = "referal.tpl";
-
     return($types);
   }
 } 

@@ -129,7 +129,7 @@
     </action>
 
     <action>
-      <name>remove_organizationalUnit</name>
+      <name>remove</name>
       <type>entry</type>
       <nospan></nospan>
       <image>images/lists/trash.png</image>
