@@ -40,12 +40,12 @@ class departmentManagement extends management
     $this->storagePoints = array("");
  
     // Build filter
-    #if (session::global_is_set(get_class($this)."_filter")){
+    if (session::global_is_set(get_class($this)."_filter")){
       $filter= session::global_get(get_class($this)."_filter");
-#    } else {
+    } else {
       $filter = new filter(get_template_path("dep-filter.xml", true));
- #     $filter->setObjectStorage($this->storagePoints);
- #   }
+      $filter->setObjectStorage($this->storagePoints);
+    }
     $this->setFilter($filter);
 
     // Build headpage
@@ -76,6 +76,7 @@ class departmentManagement extends management
 
   function newEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
   {
+    echo "Remember to add recursive move and department tagging again!";
     $types= $this->get_support_departments();
     $type = preg_replace("/^new_/","",$action);
     return(management::newEntry($action,$target,$all,$this->tabClass,$types[$type]['TAB'],$this->aclCategory));
