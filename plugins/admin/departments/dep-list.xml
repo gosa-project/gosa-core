@@ -79,7 +79,7 @@
       <label>description</label>
       <sortAttribute>description</sortAttribute>
       <sortType>string</sortType>
-      <value>%{filter:link(row,dn,"%s",description)}</value>
+      <value>%{filter:depLabel(row,dn,"%s",description,pid,base)}</value>
       <export>true</export>
     </column>
 
