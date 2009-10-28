@@ -49,6 +49,7 @@ class departmentManagement extends management
     $headpage = new listing(get_template_path("dep-list.xml", true));
     $headpage->registerElementFilter("depLabel", "departmentManagement::filterDepLabel");
     $headpage->setFilter($filter);
+    $this->setFilter($filter);
 
     // Add copy&paste and snapshot handler.
     if ($this->config->boolValueIsTrue("main", "copyPaste")){
