@@ -239,7 +239,7 @@ class management
    *  @param  Array   'target'  A list of object dns, which should be affected by this method.
    *  @param  Array   'all'     A combination of both 'action' and 'target'.
    */
-  protected function removeEntryRequested($action,$target,$all)
+  protected function removeEntryRequested($action="",$target=array(),$all=array())
   {
     $disallowed = array();
     $this->dns = array();

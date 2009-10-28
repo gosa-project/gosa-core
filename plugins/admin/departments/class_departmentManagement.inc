@@ -23,7 +23,8 @@
 class departmentManagement extends management
 {
   var $plHeadline     = "Departments";
-  var $plDescription  = "Manage departmentw";
+  var $plDescription  = "Manage department";
+  var $plIcon         = "plugins/departments/images/plugin.png";
 
   // Tab definition 
   protected $tabClass = "deptabs";
@@ -72,7 +73,37 @@ class departmentManagement extends management
     $this->registerAction("new_organization","newEntry");
     $this->registerAction("new_department","newEntry");
 
+    $this->registerAction("performRecMove","performRecMove");
+    $this->registerAction("tagDepartment","tagDepartment");
   }
+
+
+  function detectPostActions()
+  {
+    $actions = management::detectPostActions();
+    if(isset($_GET['PerformRecMove'])) $action['action'] = "performRecMove";
+    if(isset($_GET['TagDepartment'])) $action['action'] = "tagDepartment";
+    return($actions);
+  }
+
+  function performRecMove()
+  {
+    if(isset($_GET['PerformRecMove'])){
+      $this->deptabs->move_me();
+      $this->DivListDepartment->selectedBase = $this->deptabs->by_object['department']->dn;
+      exit();
+    }
+  }
+
+  function tagDepartment()
+  {
+    if(isset($_GET['TagDepartment'])){
+      $base_name = $this->deptabs->base_name;
+      $this->deptabs->by_object[$base_name]->tag_objects();
+      exit();
+    }
+  }
+
 
   function newEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
   {
