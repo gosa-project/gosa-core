@@ -289,7 +289,7 @@ class listing {
     $result.= "<td class='listheader' style='width:13px;border-right:0px;'>&nbsp;</td></table></td></tr>\n";
 
     // New table for the real list contents
-    $result.= "<tr><td colspan='$this->numColumns' class='scrollbody'><div style='width:600px;height:".($height-20)."px;' id='d_scrollbody' class='scrollbody'><table summary='' style='height:100%;width:581px;' cellspacing='0' id='t_scrollbody'>\n";
+    $result.= "<tr><td colspan='$this->numColumns' class='scrollbody'><div style='width:600px;height:".($height-20)."px;' id='d_scrollbody' class='scrollbody'><table summary='' style='height:100%;width:581px;table-layout:fixed;overflow:hidden;word-wrap:break-word;' cellspacing='0' id='t_scrollbody'>\n";
 
     // No results? Just take an empty colspanned row
     if (count($this->entries) + count($this->departments) == 0) {
