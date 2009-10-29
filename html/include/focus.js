@@ -395,23 +395,36 @@ function adjust_width(e)
 		var width= parseInt(window.innerWidth);
 
 		// Resize the body cells, 470 represents the info box and the navigation part 
-		var diff= width	-	div_width	-	470;
+                var save= 470;
                 if(document.getElementById('d_save')) {
-                  diff= width - div_width - document.getElementById('d_save').value;
+                  save= document.getElementById('d_save').value;
                 }
-		
+                var space= 600;
+                if(document.getElementById('d_space')) {
+                  space= document.getElementById('d_space').value;
+                }
+		var diff= width	- div_width - save;
+
 		// window has been upscaled
-		if(div_width+diff>=600) {
-			document.getElementById('d_scrollbody').style.width=div_width+diff+"px";
-			document.getElementById('t_scrollbody').style.width=(div_width-19)+diff+"px";
+		if(div_width+diff>=space) {
+                        if (width - save > space) {
+			  document.getElementById('d_scrollbody').style.width=div_width+diff+"px";
+			  document.getElementById('t_scrollbody').style.width=(div_width-19)+diff+"px";
 	
-			// Resize the Header cells (only the relative-width ones)
-			document.getElementById('t_scrollhead').style.width=div_width+diff+"px";
+			  // Resize the Header cells (only the relative-width ones)
+			  document.getElementById('t_scrollhead').style.width=div_width+diff+"px";
+                        } else {
+			  document.getElementById('d_scrollbody').style.width=div_width+"px";
+			  document.getElementById('t_scrollbody').style.width=(div_width-19)+"px";
+	
+			  // Resize the Header cells (only the relative-width ones)
+			  document.getElementById('t_scrollhead').style.width=div_width+"px";
+                        }
 
 		// window has been downscaled, we must reset the div to 600px
-		} else if (width < 930) {
+		} else if (width < 1200) {
 			// Reset layout (set width to 600px)
-			div_width=600;
+			div_width=space;
 			document.getElementById('d_scrollbody').style.width=div_width+"px";
 			document.getElementById('t_scrollbody').style.width=(div_width-19)+"px";
 	

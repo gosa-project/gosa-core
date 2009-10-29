@@ -555,6 +555,7 @@ class listing {
     $layout= preg_replace("/^\|/", "", $layout);
     $layout= preg_replace("/\|$/", "", $layout);
     $cols= split("\|", $layout);
+
     foreach ($cols as $index => $config) {
       if ($config != "") {
         $res= "";
