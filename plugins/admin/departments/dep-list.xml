@@ -61,7 +61,7 @@
   </definition>
 
   <table>
-    <layout>|20px||320px|70px;r|</layout>
+    <layout>|20px|||70px;r|</layout>
 
     <column>
       <value>%{filter:objectType(dn,objectClass)}</value>
