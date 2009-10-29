@@ -68,7 +68,7 @@ class departmentManagement extends management
     $this->registerAction("new_locality","newEntry");
     $this->registerAction("new_dcObject","newEntry");
     $this->registerAction("new_organization","newEntry");
-    $this->registerAction("new_department","newEntry");
+    $this->registerAction("new_organizationalUnit","newEntry");
 
     $this->registerAction("performRecMove","performRecMove");
     $this->registerAction("tagDepartment","tagDepartment");

@@ -53,7 +53,7 @@
 
     <objectType>
       <label>Department</label>
-      <objectClass>department</objectClass>
+      <objectClass>organizationalUnit</objectClass>
       <category>department</category>
       <class>department</class>
       <image>images/lists/folder.png</image>
@@ -133,7 +133,7 @@
      </action>
 
      <action>
-      <name>new_department</name>
+      <name>new_organizationalUnit</name>
       <type>entry</type>
       <label>Department</label>
       <image>images/lists/folder.png</image>
