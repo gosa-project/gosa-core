@@ -557,30 +557,35 @@ class listing {
     $cols= split("\|", $layout);
     foreach ($cols as $index => $config) {
       if ($config != "") {
+        $res= "";
         $components= split(';', $config);
-        $config= "";
         foreach ($components as $part) {
           if (preg_match("/^r$/", $part)) {
-            $config.= "text-align:right;";
+            $res.= "text-align:right;";
             continue;
           }
           if (preg_match("/^l$/", $part)) {
-            $config.= "text-align:left;";
+            $res.= "text-align:left;";
             continue;
           }
           if (preg_match("/^c$/", $part)) {
-            $config.= "text-align:center;";
+            $res.= "text-align:center;";
             continue;
           }
           if (preg_match("/^[0-9]+(|px|%)$/", $part)) {
-            $config.= "width:$part;";
+            $res.= "width:$part;min-width:$part;";
             continue;
           }
         }
 
-        $result[$index]= " style='$config' ";
+        // Add minimum width for scalable columns
+        if (!preg_match('/width:/', $res)){
+          $res.= "min-width:200px;";
+        }
+
+        $result[$index]= " style='$res' ";
       } else {
-        $result[$index]= null;
+        $result[$index]= " style='min-width:100px'";
       }
     }
 
