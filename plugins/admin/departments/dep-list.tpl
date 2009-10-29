@@ -18,7 +18,7 @@
       <div style='height:4px;'>
       </div>
       
-      <input type="hidden" id="d_save" value="490">
+      <input type="hidden" id="d_save" value="450">
       {$LIST}
     </td>
     <td style='vertical-align:top'>

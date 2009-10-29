@@ -22,7 +22,7 @@
   <element>
     <type>textfield</type>
     <tag>NAME</tag>
-    <size>20</size>
+    <size>18</size>
     <maxlength>60</maxlength>
     <default></default>
     <unset></unset>
