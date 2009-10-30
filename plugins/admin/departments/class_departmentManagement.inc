@@ -78,33 +78,21 @@ class departmentManagement extends management
   function detectPostActions()
   {
     $actions = management::detectPostActions();
-    if(isset($_GET['PerformRecMove'])) $action['action'] = "performRecMove";
-    if(isset($_GET['TagDepartment'])) $action['action'] = "tagDepartment";
+    if(isset($_GET['PerformRecMove'])) $actions['action'] = "performRecMove";
+    if(isset($_GET['TagDepartment'])) $actions['action'] = "tagDepartment";
     return($actions);
-  }
-
-  function performRecMove()
-  {
-    if(isset($_GET['PerformRecMove'])){
-      $this->deptabs->move_me();
-      $this->DivListDepartment->selectedBase = $this->deptabs->by_object['department']->dn;
-      exit();
-    }
   }
 
   function tagDepartment()
   {
-    if(isset($_GET['TagDepartment'])){
-      $base_name = $this->deptabs->base_name;
-      $this->deptabs->by_object[$base_name]->tag_objects();
-      exit();
-    }
+    $plugname = $this->last_tabObject->base_name;
+    $this->last_tabObject->by_object[$plugname]->tag_objects();
+    exit();
   }
 
 
   function newEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
   {
-    echo "Remember to add recursive move and department tagging again!";
     $types= $this->get_support_departments();
     $type = preg_replace("/^new_/","",$action);
     return(management::newEntry($action,$target,$all,$this->tabClass,$types[$type]['TAB'],$this->aclCategory));
@@ -120,9 +108,18 @@ class departmentManagement extends management
   protected function saveChanges()
   {
     management::saveChanges();
-    
-    if($this->last_tabObject->am_i_moved()){
-      return($smarty->fetch(get_template_path("dep_move_confirm.tpl",TRUE)));
+  
+    global $config; 
+    $config->get_departments();
+    $config->make_idepartments();
+    $this->config = $config;
+
+    $plugname = $this->last_tabObject->base_name;
+    if($this->last_tabObject->by_object[$plugname]->must_be_tagged()){
+      $smarty = get_smarty();
+      $smarty->assign("src","?plug=".$_GET['plug']."&TagDepartment&no_output_compression");
+      $smarty->assign("message",_("As soon as the tag operation has finished, you can scroll down to end of the page and    press the 'Continue' button to continue with the department management dialog."));
+      return($smarty->fetch(get_template_path("dep_iframe.tpl",TRUE)));
     }
   }
   
