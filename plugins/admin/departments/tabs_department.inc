@@ -50,64 +50,10 @@ class deptabs extends tabs
     return (tabs::check(TRUE));
   }
 
-
-  /*! \brief Check if the department must must be moved 
-      return Boolean TRUE if we have to move the dep, else FALSE
-   */
-  function am_i_moved()
-  {
-    return(FALSE);
-    if($this->moved) return(FALSE);
-    $baseobject= &$this->by_object[$this->base_name];
-
-    $namingAttr       = $baseobject->namingAttr;
-    $orig_namingAttr  = $baseobject->orig_namingAttr;
-
-    $value       = preg_replace('/,/', '\,', $baseobject->$namingAttr);  
-    $orig_value  = preg_replace('/,/', '\,', $baseobject->$orig_namingAttr);  
-
-    $new_dn   = @LDAP::convert($namingAttr.'='.$value.','.$baseobject->base);
-    $old_dn   = @LDAP::convert($namingAttr.'='.$orig_value.','.$baseobject->orig_base);
-
-    if ($this->dn != $new_dn && $this->dn != "new"){
-      return(TRUE); 
-    }
-    return(FALSE);
-  }
-
- 
-  /*! \brief  Checks if the department was moved successfully 
-      @return Boolean TRUE if the dep was already moved.
-   */ 
-  function move_done()
-  {
-    return($this->moved);
-  }
-
-  
-  /*! \brief  Initiate recursive move 
-   */
-  function move_me()
-  {
-    if(!$this->am_i_moved()) return;
-    $baseobject= &$this->by_object[$this->base_name];
-    $ou       = preg_replace('/,/', '\,', $baseobject->ou);  
-    $new_dn   = @LDAP::convert('ou='.$ou.','.$baseobject->base);
-    $old_ou   = preg_replace('/,/', '\,', $baseobject->orig_ou);
-    $old_dn   = @LDAP::convert('ou='.$ou.','.$baseobject->orig_base);
-    if ($this->dn != $new_dn && $this->dn != "new"){
-      $baseobject->recursive_move($this->dn, $new_dn);
-      $this->moved= TRUE;
-    }
-  }
-
-
   function save($ignore_account= FALSE)
   {
     $baseobject= &$this->by_object[$this->base_name];
-
     $namingAttr       = $baseobject->namingAttr;
-
     $nAV      = preg_replace('/,/', '\,', $baseobject->$namingAttr); 
     $new_dn   = @LDAP::convert($namingAttr.'='.$nAV.','.$baseobject->base);
 
@@ -123,15 +69,12 @@ class deptabs extends tabs
       $config->get_departments();
     }
 
-
     $this->dn= $new_dn;
     $baseobject->dn= $this->dn;
     if (!$ignore_account){
       tabs::save(TRUE);
     }
   }
-
-
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

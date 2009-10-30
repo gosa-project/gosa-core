@@ -117,7 +117,17 @@ class departmentManagement extends management
     return(management::editEntry($action,$target,$all,$this->tabClass,$types[$type]['TAB'],$this->aclCategory));
   }
 
+  protected function saveChanges()
+  {
+    management::saveChanges();
+    
+    if($this->last_tabObject->am_i_moved()){
+      return($smarty->fetch(get_template_path("dep_move_confirm.tpl",TRUE)));
+    }
+  }
   
+ 
+ 
   function openEntry($action,$entry)
   {
     $this->headpage->setBase(array_pop($entry));
