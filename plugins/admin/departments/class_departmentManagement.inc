@@ -62,19 +62,17 @@ class departmentManagement extends management
     parent::__construct($config, $ui, "departments", $headpage);
 
     $this->registerAction("open","openEntry");
-
     $this->registerAction("new_domain","newEntry");
     $this->registerAction("new_country","newEntry");
     $this->registerAction("new_locality","newEntry");
     $this->registerAction("new_dcObject","newEntry");
     $this->registerAction("new_organization","newEntry");
     $this->registerAction("new_organizationalUnit","newEntry");
-
     $this->registerAction("performRecMove","performRecMove");
     $this->registerAction("tagDepartment","tagDepartment");
   }
 
-
+  // Inject additional actions here.
   function detectPostActions()
   {
     $actions = management::detectPostActions();
@@ -83,6 +81,7 @@ class departmentManagement extends management
     return($actions);
   }
 
+  // Action handler which allows department tagging - Creates the iframe contents.
   function tagDepartment()
   {
     $plugname = $this->last_tabObject->base_name;
@@ -90,7 +89,7 @@ class departmentManagement extends management
     exit();
   }
 
-
+  // Overridden new handler - We've different types of departments to create!
   function newEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
   {
     $types= $this->get_support_departments();
@@ -98,6 +97,7 @@ class departmentManagement extends management
     return(management::newEntry($action,$target,$all,$this->tabClass,$types[$type]['TAB'],$this->aclCategory));
   }
 
+  // Overridden edit handler - We've different types of departments to edit!
   function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
   {
     $types= $this->get_support_departments();
@@ -105,6 +105,8 @@ class departmentManagement extends management
     return(management::editEntry($action,$target,$all,$this->tabClass,$types[$type]['TAB'],$this->aclCategory));
   }
 
+
+  // Overriden save handler - We've to take care about the department tagging here.
   protected function saveChanges()
   {
     management::saveChanges();
@@ -122,20 +124,24 @@ class departmentManagement extends management
       return($smarty->fetch(get_template_path("dep_iframe.tpl",TRUE)));
     }
   }
-  
  
- 
+
+  // An action handler which enables to switch into deparmtment by clicking the names.
   function openEntry($action,$entry)
   {
     $this->headpage->setBase(array_pop($entry));
   }
 
+
+  // Overridden remove request method - Avoid removal of the ldap base.
   protected function removeEntryRequested($action="",$target=array(),$all=array())
   {
     $target = array_remove_entries(array($this->config->current['BASE']),$target);
     return(management::removeEntryRequested($action,$target,$all)); 
   }
 
+
+  // A filter which allows to open a department by clicking on the departments name.
   static function filterDepLabel($row,$dn,$params,$ou,$pid,$base)
   {
     $ou = $ou[0];
