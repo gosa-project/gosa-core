@@ -108,7 +108,6 @@ class management
     $this->registerAction("saveSnapshot","saveSnapshot");
     $this->registerAction("restoreSnapshot","restoreSnapshot");
     $this->registerAction("cancelSnapshot","closeDialogs");
-
   }
 
   /*! \brief  Execute this plugin
@@ -244,6 +243,8 @@ class management
     $disallowed = array();
     $this->dns = array();
 
+    @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$target,"Entry removel requested!");
+
     // Check permissons for each target 
     foreach($target as $dn){
       $acl = $this->ui->get_permissions($dn, $this->aclCategory."/".$this->aclPlugin);
@@ -296,6 +297,8 @@ class management
     if(!empty($altTabClass)) $tabClass = $altTabClass;
     if(!empty($altTabType)) $tabType = $altTabType;
     if(!empty($altAclCategory)) $aclCategory = $altAclCategory;
+
+    @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$target,"Entry removel confirmed!");
 
     foreach($this->dns as $key => $dn){
 
@@ -372,6 +375,8 @@ class management
    */
   function createSnapshotDialog($action="",$target=array(),$all=array())
   {
+    @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$target,"Snaptshot creation initiated!");
+
     foreach($target as $entry){
       if(!empty($entry) && $this->ui->allow_snapshot_create($entry,$this->aclCategory)){
         $this->dialogObject = new SnapShotDialog($this->config,$entry,$this);
@@ -403,6 +408,7 @@ class management
     }else{
       $this->dn =  $this->dialogObject->dn;
       $this->snapHandler->create_snapshot( $this->dn,$this->dialogObject->CurrentDescription);
+      @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dn,"Snaptshot created!");
       $this->closeDialogs();
     }
   }
@@ -420,6 +426,7 @@ class management
     $entry = array_pop($target);
     if(!empty($entry) && $this->ui->allow_snapshot_restore($entry,$this->aclCategory)){
       $this->snapHandler->restore_snapshot($entry);
+      @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dn,"Snaptshot restored!");
       $this->closeDialogs();
     }else{
       msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s."),$entry),
@@ -449,6 +456,7 @@ class management
     if(!count($target)){ 
       $entry = $this->headpage->getBase();
       if(!empty($entry) && $this->ui->allow_snapshot_restore($entry,$this->aclCategory)){
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$entry,"Snaptshot restoring initiated!");
         $this->dialogObject = new SnapShotDialog($this->config,$entry,$this);
         $this->dialogObject->set_snapshot_bases($bases);
         $this->dialogObject->display_all_removed_objects = true;
@@ -462,6 +470,7 @@ class management
       // Display the restore points for a given object.
       $entry = array_pop($target);
       if(!empty($entry) && $this->ui->allow_snapshot_restore($entry,$this->aclCategory)){
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$entry,"Snaptshot restoring initiated!");
         $this->dialogObject = new SnapShotDialog($this->config,$entry,$this);
         $this->dialogObject->set_snapshot_bases($bases);
         $this->dialogObject->display_restore_dialog = true;
@@ -521,6 +530,7 @@ class management
     }else{
       $this->tabObject= new $tabClass($this->config,$this->config->data['TABS'][$tabType], $this->dn, $aclCategory);
       $this->tabObject->set_acl_base($this->headpage->getBase());
+      @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dn,"Create new entry initiated!");
     }
   }
 
@@ -581,6 +591,7 @@ class management
       }else{
         $tab = $tabClass;
         $this->tabObject= new $tab($this->config,$this->config->data['TABS'][$tabType], $this->dn,$aclCategory);
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dn,"Edit entry initiated!");
         $this->tabObject->set_acl_base($this->dn);
       }
     }else{
@@ -602,6 +613,8 @@ class management
         if ($tmp->entries_locked()){
           return($tmp->display_lock_message());
         }
+
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dns,"Edit entry initiated!");
 
         // Now lock entries.
         $tmp->lock_entries($this->ui->dn);
@@ -630,6 +643,7 @@ class management
         return("");
       }else{
         $this->tabObject->save();
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dns,"Entry saved!");
         $this->remove_lock();
         $this->closeDialogs();
       }
@@ -651,6 +665,7 @@ class management
         return("");
       }else{
         $this->tabObject->save();
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dns,"Modifications applied!");
         $this->tabObject->re_init();
       }
     }
@@ -742,9 +757,11 @@ class management
       foreach($target as $dn){
         if($action == "copy" && $this->ui->is_copyable($dn,$aclCategory,$aclPlugin)){
           $this->cpHandler->add_to_queue($dn,"copy",$tabClass,$tabType,$aclCategory);
+          @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$dn,"Entry copied!");
         }
         if($action == "cut" && $this->ui->is_cutable($dn,$aclCategory,$aclPlugin)){
           $this->cpHandler->add_to_queue($dn,"cut",$tabClass,$tabType,$aclCategory);
+          @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$dn,"Entry cutted!");
         }
       }
     }
