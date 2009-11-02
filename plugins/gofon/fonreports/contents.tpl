@@ -9,6 +9,10 @@
  <select size="1" name="search_base" title="{t}Select subtree to base search on{/t}" onChange="mainform.submit()">
   {html_options options=$bases selected=$base_select}
  </select>
+ {t}on{/t}
+ <select size="1" name="selected_server" title="{t}Select server to search on{/t}" onChange="mainform.submit()">
+  {html_options options=$servers selected=$selected_server}
+ </select>
  {t}during{/t}
  <select size="1" name="month" onChange="mainform.submit()">
   {html_options options=$months selected=$month_select}

@@ -20,6 +20,7 @@ class fonreport extends plugin
   var $ui					    = NULL;
   var $range 				  = 20;
   var $EntryPerPage   = 20;
+  var $selected_server = "";
 
   /* attribute list for save action */
   var $attributes_SO  = array("start","search_for","search_base","range","month","sort_direction","sort","year");
@@ -64,7 +65,7 @@ class fonreport extends plugin
     if (isset($_GET['start'])){
       $this->start= (int)$_GET['start'];
     }
-    foreach( array("year", "month", "search_for", "search_base") as $type){
+    foreach( array("year", "month", "search_for", "search_base","selected_server") as $type){
       if (isset($_POST[$type])){
         $this->$type= $_POST[$type];
       }
@@ -152,6 +153,15 @@ class fonreport extends plugin
       Check Database , Table , Connection 
      *****************/
 
+    // Collect servers and allow to select the server in the ui.
+    $servers = array();
+    foreach($this->config->data['SERVERS']['FON'] as $key => $server){
+      $servers[$server['SERVER']] = $server['SERVER'];
+    }
+    $smarty->assign("servers",  $servers);
+    $smarty->assign("selected_server",  $this->selected_server);
+
+
     /* Connecting, selecting database */
     if (!isset($this->config->data['SERVERS']['FON'][0])){
       print_red(_("Can't connect to phone database, no reports can be shown!"));
@@ -161,7 +171,18 @@ class fonreport extends plugin
       return($smarty->fetch(get_template_path('contents.tpl', TRUE)));
     }else{
 
-      $cfg= $this->config->data['SERVERS']['FON'][0];
+      // Get CFG for the selected server, if empty use first.
+      if($this->selected_server == ""){
+        $cfg= $this->config->data['SERVERS']['FON'][0];
+      }else{
+        foreach($this->config->data['SERVERS']['FON'] as $server){
+          if($server['SERVER'] == $this->selected_server){
+            $cfg = $server; 
+          }
+        }
+      }
+      
+      // Try to connect 
       $link = @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
       if ($link === FALSE){
         print_red(_("Can't connect to phone database, no reports can be shown!"));
@@ -179,7 +200,6 @@ class fonreport extends plugin
      *****************/
 
     $query  = $this->CreateQuerySyntax();
-    $cfg    = $this->config->data['SERVERS']['FON'][0];
     $link   = @mysql_pconnect($cfg['SERVER'], $cfg['LOGIN'], $cfg['PASSWORD']);
 
     @DEBUG (DEBUG_MYSQL, __LINE__, __FUNCTION__, __FILE__,$query, "Database query");
