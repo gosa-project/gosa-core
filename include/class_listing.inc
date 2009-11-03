@@ -450,7 +450,7 @@ class listing {
 
     // Save base
     if (isset($_POST['BASE']) && $this->baseMode) {
-      $base= validate($_POST['BASE']);
+      $base= get_post('BASE');
       if (isset($this->bases[$base])) {
         $this->base= $base;
         session::global_set("CurrentMainBase", $this->base);
@@ -644,8 +644,10 @@ class listing {
         $selected= " selected";
         $found= true;
       }
-      $result.= "<option value='".$key."'$selected>".$value."</option>";
+      $key = htmlentities($key,ENT_QUOTES);
+      $result.= "\n<option value=\"".$key."\"$selected>".$value."</option>";
     }
+
     $result.= "</select>";
 
     // Reset the currently used base to the first DN we found if there
