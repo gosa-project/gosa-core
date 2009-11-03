@@ -177,7 +177,7 @@ class user extends plugin
       /* Do base conversation */
       if ($this->dn == "new"){
         $ui= get_userinfo();
-        $this->base= dn2base($ui->dn);
+        $this->base= dn2base(session::global_is_set("CurrentMainBase")?"cn=dummy,".session::global_get("CurrentMainBase"):$ui->dn);
       } else {
         $this->base= dn2base($dn);
       }
