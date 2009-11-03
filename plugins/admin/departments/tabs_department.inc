@@ -55,6 +55,7 @@ class deptabs extends tabs
     $baseobject= &$this->by_object[$this->base_name];
     $namingAttr       = $baseobject->namingAttr;
     $nAV      = preg_replace('/,/', '\,', $baseobject->$namingAttr); 
+    $nAV      = preg_replace('/"/', '\"', $nAV); 
     $new_dn   = @LDAP::convert($namingAttr.'='.$nAV.','.$baseobject->base);
 
     /* Move group? */

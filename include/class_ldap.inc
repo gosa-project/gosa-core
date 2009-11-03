@@ -87,12 +87,13 @@ class LDAP{
      \2C => CO
      (   => OB
      )   => CB
-     /   => SL                                                                  */
+     /   => SL                                                                  
+     \22 => DQ                                                                  */
   static function convert($dn)
   {
     if (SPECIALS_OVERRIDE == TRUE){
-      $tmp= preg_replace(array("/\\\\,/", "/\\\\2C/", "/\(/", "/\)/", "/\//"),
-          array("\001CO", "\001CO", "\001OB", "\001CB", "\001SL"),
+      $tmp= preg_replace(array("/\\\\,/", "/\\\\2C/", "/\(/", "/\)/", "/\//", "/\\\\22/", '/\\\\"/'),
+          array("\001CO", "\001CO", "\001OB", "\001CB", "\001SL", "\001DQ", "\001DQ"),
           $dn);
       return (preg_replace('/,\s+/', ',', $tmp));
     } else {
@@ -108,8 +109,8 @@ class LDAP{
   static function fix($dn)
   {
     if (SPECIALS_OVERRIDE == TRUE){
-      return (preg_replace(array("/\001CO/", "/\001OB/", "/\001CB/", "/\001SL/"),
-            array("\,", "(", ")", "/"),
+      return (preg_replace(array("/\001CO/", "/\001OB/", "/\001CB/", "/\001SL/", "/\001DQ/"),
+            array("\,", "(", ")", "/", '\"'),
             $dn));
     } else {
       return ($dn);
