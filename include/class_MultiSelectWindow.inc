@@ -531,7 +531,7 @@ class MultiSelectWindow{
 
     /* Save base selection from headpage selectbox */
     if(isset($_POST['CurrentMainBase'])){
-      $this->selectedBase = $_POST['CurrentMainBase'];
+      $this->selectedBase = get_post('CurrentMainBase');
       session::global_set("CurrentMainBase", $this->selectedBase);
     } else {
       $this->selectedBase= session::global_get("CurrentMainBase");
@@ -775,11 +775,13 @@ class MultiSelectWindow{
         $first = $value;
       }
 
+
+      $v_value = htmlentities($value,ENT_QUOTES);
       if ($this->selectedBase == $value){
         $found = TRUE;
-        $options.= "<option selected='selected' value='".$value."'>$name</option>";
+        $options.= "<option selected='selected' value=\"".$v_value."\">$name</option>";
       } else {
-        $options.= "<option value='".$value."'>$name</option>";
+        $options.= "<option value=\"".$v_value."\">$name</option>";
       }
     }
 
