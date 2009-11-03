@@ -771,10 +771,10 @@ class user extends plugin
 
       /* Save base - its no no LDAP attribute */
       if (isset($_POST['base'])){
-        $base= validate($_POST['base']);
+        $base= get_post('base');
         if ($base != $this->base){
           $tmp = $this->get_allowed_bases();
-          if(isset($tmp[$_POST['base']])){
+          if(isset($tmp[$base])){
             if ($base != $this->base){
               $this->is_modified= TRUE;
             }
