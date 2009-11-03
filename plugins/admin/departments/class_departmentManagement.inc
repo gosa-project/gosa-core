@@ -115,6 +115,7 @@ class departmentManagement extends management
     $config->get_departments();
     $config->make_idepartments();
     $this->config = $config;
+    $this->headpage->refreshBasesList();
 
     $plugname = $this->last_tabObject->base_name;
     if($this->last_tabObject->by_object[$plugname]->must_be_tagged()){
