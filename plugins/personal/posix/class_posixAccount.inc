@@ -660,9 +660,7 @@ class posixAccount extends plugin
     $smarty->assign("workstations", $this->accessTo);
 
     // Add SSH button if available
-    if ($this->ssh) {
-      $smarty->assign("sshPublicKey", 1);
-    }
+    $smarty->assign("sshPublicKey", $this->ssh?1:0);
 
     $smarty->assign("apply", apply_filter());
     $smarty->assign("multiple_support" , $this->multiple_support_active);
