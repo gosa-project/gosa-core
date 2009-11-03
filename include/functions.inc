@@ -2420,10 +2420,11 @@ function get_post($name)
     trigger_error("Requested POST value (".$name.") does not exists, you should add a check to prevent this message.");
     return(FALSE);
   }
+
   if(get_magic_quotes_gpc()){
-    return(stripcslashes($_POST[$name]));
+    return(stripcslashes(validate($_POST[$name])));
   }else{
-    return($_POST[$name]);
+    return(validate($_POST[$name]));
   }
 }
 
