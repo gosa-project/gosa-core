@@ -35,25 +35,13 @@ if ( $cleanup ){
   session::un_set('groupManagement');
 }else{
 
-  /* Create groupManagement object on demand */
+  /* Create groupmanagement object on demand */
   if (!session::is_set('groupManagement')){
-    session::set('groupManagement',new groupManagement ($config, $ui));
+    $groupManagement= new groupManagement ($config, $ui);
+    session::set('groupManagement',$groupManagement);
   }
   $groupManagement = session::get('groupManagement');
-  $groupManagement->save_object();
-  $output= $groupManagement->execute();
-
-  /* Page header*/
-  if (get_object_info() != ""){
-    $display= print_header(get_template_path('plugins/groups/images/plugin.png'),
-                           _("Group administration"), "<img alt=\"\" align=\"middle\" src=\"".
-                            get_template_path('images/lists/locked.png')."\"> ".
-                            LDAP::fix(get_object_info()));
-  } else {
-    $display= print_header(get_template_path('plugins/groups/images/plugin.png'), _("Group administration"));
-  }
-
-  $display.= $output;
+  $display= $groupManagement->execute();
 
   /* Reset requested? */
   if (isset($_GET['reset']) && $_GET['reset'] == 1){
