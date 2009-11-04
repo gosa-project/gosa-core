@@ -397,7 +397,7 @@ class management
    *  @param  Array   'target'  A list of object dns, which should be affected by this method.
    *  @param  Array   'all'     A combination of both 'action' and 'target'.
    */
-  function saveSnapsho($action="",$target=array(),$all=array())
+  function saveSnapshot($action="",$target=array(),$all=array())
   {
     $this->dialogObject->save_object();
     $msgs = $this->dialogObject->check();
