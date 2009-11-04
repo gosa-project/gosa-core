@@ -1093,6 +1093,12 @@ class listing {
         if (isset($action['label'])){
           $result.= "<li$separator><a href='#'>$img"._($action['label'])."&nbsp;<img border='0' src='images/forward-arrow.png'></a>";
         }
+
+        // Ensure we've an array of actions, this enables sub menus with only one action.
+        if(isset($action['action']['type'])){
+          $action['action'] = array($action['action']);
+        }
+
         $result.= $this->recurseActions($action['action'])."</li>";
         $level--;
         $separator= "";
