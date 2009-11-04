@@ -30,7 +30,7 @@
 
     <department>
       <value>%{filter:departmentLink(row,dn,description)}</value>
-      <span>1</span>
+      <span>2</span>
     </department>
 
     <column>
