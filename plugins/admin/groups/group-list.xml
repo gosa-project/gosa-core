@@ -22,7 +22,7 @@
   </definition>
 
   <table>
-    <layout>|16px||250px|170px;r|</layout>
+    <layout>|16px||250px|100px|170px;r|</layout>
 
     <department>
       <value>%{filter:objectType(dn,objectClass)}</value>
@@ -51,6 +51,11 @@
       <sortType>string</sortType>
       <value>%{filter:link(row,dn,"%s",description)}</value>
       <export>true</export>
+    </column>
+
+    <column>
+      <label>Properties</label>
+      <value>%{filter:filterProperties(row,objectClass)}</value>
     </column>
 
     <column>

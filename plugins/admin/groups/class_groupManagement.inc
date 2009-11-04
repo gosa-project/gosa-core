@@ -51,6 +51,7 @@ class groupManagement extends management
 
     // Build headpage
     $headpage = new listing(get_template_path("group-list.xml", true));
+    $headpage->registerElementFilter("filterProperties", "groupManagement::filterProperties");
     $headpage->setFilter($filter);
 
     // Add copy&paste and snapshot handler.
@@ -61,6 +62,85 @@ class groupManagement extends management
       $this->snapHandler = new SnapshotHandler($this->config);
     }
     parent::__construct($config, $ui, "groups", $headpage);
+
+    $this->registerAction("edit_group","editEntry");
+    $this->registerAction("edit_environment","editEntry");
+    $this->registerAction("edit_appgroup","editEntry");
+    $this->registerAction("edit_mailgroup","editEntry");
+  }
+
+  function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
+  {
+    management::editEntry($action,$target);
+
+    if(preg_match("/^edit_/",$action)){
+      $tab = preg_replace("/^edit_/","",$action);
+      if(isset($this->tabObject->by_object[$tab])){
+        $this->tabObject->current = $tab;
+      }else{
+        trigger_error("Unknown tab: ".$tab);
+      }
+    }
+  }
+
+  static function filterProperties($row, $classes)
+  {
+    $result= "";
+
+    $map = array(
+        "posixGroup" => 
+        array(
+          "image" => "plugins/groups/images/groups.png",
+          "plugin" => "group",
+          "alt" => _("Posix"),
+          "title" => _("Edit posix properties")
+          ),
+
+        "gosaMailAccount" => 
+        array(
+          "image" => "plugins/groups/images/mail.png",
+          "plugin" => "mailgroup",
+          "alt" => _("Mail"),
+          "title" => _("Edit mail properties")
+          ),
+
+        "sambaGroupMapping" => 
+        array(
+          "image" => "plugins/groups/images/samba.png",
+          "plugin" => "group",
+          "alt" => _("Samba"),
+          "title" => _("Edit samba properties")
+          ),
+
+        "goFonPickupGroup" => 
+          array(
+              "image" => "plugins/groups/images/asterisk.png",
+              "plugin" => "group",
+              "alt" => _("Phone"),
+              "title" => _("Edit phone properties")
+              ),
+
+        "gotoEnvironment" => 
+          array(
+              "image" => "plugins/groups/images/environment.png",
+              "plugin" => "environment",
+              "alt" => _("Environment"),
+              "title" => _("Edit environment properties")
+              )
+          );
+
+
+    // Walk thru map
+    foreach ($map as $oc => $properties) {
+      if (in_array_ics($oc, $classes)) {
+        $result.="<input class='center' type='image' src='".$properties['image']."' ".
+          "alt='".$properties['alt']."' title='".$properties['title'].
+                 "' name='listing_edit_".$properties['plugin']."_$row' style='padding:1px'>";
+      } else {
+        $result.="<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+      }
+    }
+    return $result;
   }
 } 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
