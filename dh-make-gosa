@@ -242,8 +242,9 @@ else
 	sed -i 's/^Depends: .*$/Depends: gosa/g' debian/control
 fi
 if [ "$PL_CONFLICTS" ]; then
-	sed "11Conflicts: $PL_CONFLICTS" debian/control
+	sed -i "11iConflicts: $PL_CONFLICTS" debian/control
 fi
+sed -i "12iBreaks: gosa (<2.6)" debian/control
 sed -i 's/^\(Build-Depends: .*\)$/\1, dpatch/g' debian/control
 sed -i "s/^Description: .*$/Description: $PL_NAME plugin for GOsa/g" debian/control
 sed -i "s/^ <.*$/ %DESCRIPTION%/g" debian/control
