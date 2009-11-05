@@ -40,33 +40,33 @@ class ogroupManagement extends management
 
     $this->storagePoints = array(get_ou("ogroupRDN"));
 
-#   // Build filter
-#   if (session::global_is_set(get_class($this)."_filter")){
-#     $filter= session::global_get(get_class($this)."_filter");
-#   } else {
-  $filter = new filter(get_template_path("ogroup-filter.xml", true));
-  $filter->setObjectStorage($this->storagePoints);
-#   }
-  $this->setFilter($filter);
+    // Build filter
+    if (session::global_is_set(get_class($this)."_filter")){
+      $filter= session::global_get(get_class($this)."_filter");
+    } else {
+      $filter = new filter(get_template_path("ogroup-filter.xml", true));
+      $filter->setObjectStorage($this->storagePoints);
+    }
+    $this->setFilter($filter);
 
-  // Build headpage
-  $headpage = new listing(get_template_path("ogroup-list.xml", true));
-  $headpage->registerElementFilter("filterProperties", "ogroupManagement::filterProperties");
-  $headpage->setFilter($filter);
+    // Build headpage
+    $headpage = new listing(get_template_path("ogroup-list.xml", true));
+    $headpage->registerElementFilter("filterProperties", "ogroupManagement::filterProperties");
+    $headpage->setFilter($filter);
 
-  // Add copy&paste and snapshot handler.
-  if ($this->config->boolValueIsTrue("main", "copyPaste")){
-    $this->cpHandler = new CopyPasteHandler($this->config);
-  }
-  if($this->config->get_cfg_value("enableSnapshots") == "true"){
-    $this->snapHandler = new SnapshotHandler($this->config);
-  }
-  parent::__construct($config, $ui, "ogroups", $headpage);
+    // Add copy&paste and snapshot handler.
+    if ($this->config->boolValueIsTrue("main", "copyPaste")){
+      $this->cpHandler = new CopyPasteHandler($this->config);
+    }
+    if($this->config->get_cfg_value("enableSnapshots") == "true"){
+      $this->snapHandler = new SnapshotHandler($this->config);
+    }
+    parent::__construct($config, $ui, "ogroups", $headpage);
 
-  $this->registerAction("edit_ogroup","editEntry");
-  $this->registerAction("edit_phonequeue","editEntry");
-  $this->registerAction("edit_workstartup","editEntry");
-  $this->registerAction("edit_termgroup","editEntry");
+    $this->registerAction("edit_ogroup","editEntry");
+    $this->registerAction("edit_phonequeue","editEntry");
+    $this->registerAction("edit_workstartup","editEntry");
+    $this->registerAction("edit_termgroup","editEntry");
   }
 
   function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
