@@ -99,6 +99,14 @@
     </action>
 
     <action>
+      <name>sendMessage</name>
+      <type>entry</type>
+      <depends>DaemonEvent_notify</depends>
+      <image>plugins/goto/images/notify.png</image>
+      <label>Send message</label>
+    </action>
+
+    <action>
       <type>exporter</type>
     </action>
 

@@ -67,7 +67,67 @@ class groupManagement extends management
     $this->registerAction("edit_environment","editEntry");
     $this->registerAction("edit_appgroup","editEntry");
     $this->registerAction("edit_mailgroup","editEntry");
+
+    $this->registerAction("sendMessage", "sendMessage");
+    $this->registerAction("saveEventDialog", "saveEventDialog");
+    $this->registerAction("abortEventDialog", "closeDialogs");
   }
+
+  // Inject user actions
+  function detectPostActions()
+  {
+    $action = management::detectPostActions();
+    if(isset($_POST['save_event_dialog'])) $action['action'] = "saveEventDialog";
+    if(isset($_POST['abort_event_dialog'])) $action['action'] = "abortEventDialog";
+    return($action);
+  }
+
+
+  /*! \brief  Sends a message to a set of users using gosa-si events.
+   */
+  function saveEventDialog()
+  {
+    $this->dialogObject->save_object();
+    $msgs = $this->dialogObject->check();
+    if(count($msgs)){
+      msg_dialog::displayChecks($msgs);
+    }else{
+      $o_queue = new gosaSupportDaemon();
+      $o_queue->append($this->dialogObject);
+      if($o_queue->is_error()){
+        msg_dialog::display(_("Infrastructure error"), msgPool::siError($o_queue->get_error()),ERROR_DIALOG);
+      }
+      $this->closeDialogs();
+    }
+  }
+
+
+  /*! \brief  Sends a message to a set of users using gosa-si events.
+   */
+  function sendMessage($action="",$target=array(),$all=array())
+  {
+    $uids = array();
+    $ldap = $this->config->get_ldap_link();
+    $ldap->cd($this->config->current['BASE']);
+    foreach($target as $dn){
+      $ldap->cat($dn,array('cn'));
+      if($ldap->count()){
+        $attrs = $ldap->fetch();
+        $uids[] = $attrs['cn'][0];
+      }
+    }
+    if(count($uids)){
+      $events = DaemonEvent::get_event_types(USER_EVENT);
+      $event = "DaemonEvent_notify";
+      if(isset($events['BY_CLASS'][$event])){
+        $type = $events['BY_CLASS'][$event];
+        $this->dialogObject = new $type['CLASS_NAME']($this->config);
+        $this->dialogObject->add_groups($uids);
+        $this->dialogObject->set_type(SCHEDULED_EVENT);
+      }
+    }
+  }
+
 
   function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
   {
