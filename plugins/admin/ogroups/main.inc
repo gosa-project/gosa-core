@@ -20,12 +20,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-
 /* Remove locks created by this plugin
 */
 if ($remove_lock){
-  if(session::is_set('ogroup')){
-      $macl = session::get('ogroup');
+  if(session::is_set('ogroupManagement')){
+      $macl = session::get('ogroupManagement');
       $macl->remove_lock();
   }
 }
@@ -33,35 +32,24 @@ if ($remove_lock){
 /* Remove this plugin from session
 */
 if ( $cleanup ){
-  session::un_set('ogroup');
+  session::un_set('ogroupManagement');
 }else{
 
-  /* Create object object on demand */
-  if (!session::is_set('ogroup')){
-    session::set('ogroup',new ogroupManagement ($config));
-    
+  /* Create ogroupmanagement object on demand */
+  if (!session::is_set('ogroupManagement')){
+    $ogroupManagement= new ogroupManagement ($config, $ui);
+    session::set('ogroupManagement',$ogroupManagement);
   }
-  $ogroup = session::get('ogroup');
+  $ogroupManagement = session::get('ogroupManagement');
+  $display= $ogroupManagement->execute();
 
-  /* Execute formular */
-  $ogroup->save_object();
-  $output= $ogroup->execute ();
-
-  /* Page header*/
-  if (get_object_info() != ""){
-    $display= print_header(get_template_path('plugins/ogroups/images/plugin.png'),
-                          _("Object groups"),
-                          "<img alt=\"\" align=\"middle\" src=\"".
-                          get_template_path('images/lists/locked.png').
-                          "\"> ".LDAP::fix(get_object_info()));
-  } else {
-    $display= print_header(get_template_path('plugins/ogroups/images/plugin.png'), _("Object groups"));
+  /* Reset requested? */
+  if (isset($_GET['reset']) && $_GET['reset'] == 1){
+    session::un_set ('ogroupManagement');
   }
 
-  $display.= $output;
-
-  /* Store changes  in session */
-  session::set('ogroup',$ogroup);
+  /* Show and save dialog */
+  session::set('ogroupManagement',$ogroupManagement);
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
