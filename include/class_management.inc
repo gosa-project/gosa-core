@@ -203,7 +203,7 @@ class management
     // Check if there is a dialog opened - We don't need any buttons in this case. 
     if($this->tabObject->by_object[$this->tabObject->current]){
       $current = $this->tabObject->by_object[$this->tabObject->current];  
-      if(is_object($current->dialog)){
+      if(isset($current->dialog) && (is_object($current->dialog) || $current->dialog)){
         return("");
       }
     }
