@@ -96,6 +96,7 @@ class management
     $this->registerAction("apply",  "applyChanges");
     $this->registerAction("save",   "saveChanges");
     $this->registerAction("cancel", "cancelEdit");
+    $this->registerAction("cancelDelete", "cancelEdit");
     $this->registerAction("remove", "removeEntryRequested");
     $this->registerAction("removeConfirmed", "removeEntryConfirmed");
 
@@ -336,6 +337,7 @@ class management
     if(isset($_POST['edit_finish'])) $action['action'] = "save";    
     if(isset($_POST['edit_cancel'])) $action['action'] = "cancel";    
     if(isset($_POST['delete_confirmed'])) $action['action'] = "removeConfirmed";   
+    if(isset($_POST['delete_cancel'])) $action['action'] = "cancelDelete";   
 
     // Detect Snapshot actions
     if(isset($_POST['CreateSnapshot'])) $action['action'] = "saveSnapshot";   
