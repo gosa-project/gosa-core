@@ -557,6 +557,29 @@ class LDAP{
     }
   }
 
+  function makeReadableErrors($error,$attrs)
+  { 
+    global $config;
+
+    if($this->success()) return("");
+
+    $str = "";
+    if(preg_match("/^objectClass: value #([0-9]*) invalid per syntax$/", $this->get_additional_error())){
+      $oc = preg_replace("/^objectClass: value #([0-9]*) invalid per syntax$/","\\1", $this->get_additional_error());
+      if(isset($attrs['objectClass'][$oc])){
+        $str.= " - <b>objectClass: ".$attrs['objectClass'][$oc]."</b>";
+      }
+    }
+    if($error == "Undefined attribute type"){
+      $str = " - <b>attribute: ".preg_replace("/:.*$/","",$this->get_additional_error())."</b>";
+    } 
+
+    if(is_object($config) && $config->get_cfg_value("displayerrors") == "true" && function_exists("print_a")){
+      $str .= print_a($attrs,true);
+    }
+    
+    return($str);
+  }
 
   function modify($attrs)
   {
@@ -564,14 +587,13 @@ class LDAP{
       return (0);
     }
     if($this->hascon){
+
+      $attrs['objectClass'][0] = "Herb ert";
       if ($this->reconnect) $this->connect();
       $r = @ldap_modify($this->cid, LDAP::fix($this->basedn), $attrs);
       $this->error = @ldap_error($this->cid);
-      if(!$this->success() && preg_match("/^objectClass: value #([0-9]*) invalid per syntax$/", $this->get_additional_error())){
-        $oc = preg_replace("/^objectClass: value #([0-9]*) invalid per syntax$/","\\1", $this->get_additional_error());
-        if(isset($attrs['objectClass'][$oc])){
-          $this->error.= " <b>objectClass: ".$attrs['objectClass'][$oc]."</b>"; 
-        }
+      if(!$this->success()){
+        $this->error.= $this->makeReadableErrors($this->error,$attrs);
       }
       return($r ? $r : 0);
     }else{
@@ -586,11 +608,8 @@ class LDAP{
       if ($this->reconnect) $this->connect();
       $r = @ldap_add($this->cid, LDAP::fix($this->basedn), $attrs);
       $this->error = @ldap_error($this->cid);
-      if(!$this->success() && preg_match("/^objectClass: value #([0-9]*) invalid per syntax$/", $this->get_additional_error())){
-        $oc = preg_replace("/^objectClass: value #([0-9]*) invalid per syntax$/","\\1", $this->get_additional_error());
-        if(isset($attrs['objectClass'][$oc])){
-          $this->error.= " <b>objectClass: ".$attrs['objectClass'][$oc]."</b>"; 
-        }
+      if(!$this->success()){
+        $this->error.= $this->makeReadableErrors($this->error,$attrs);
       }
       return($r ? $r : 0);
     }else{
