@@ -8,8 +8,6 @@
 
 <div style="border-top:1px solid #AAAAAA"></div>
 
- <div style="border-top:1px solid #AAAAAA"></div>
-
  {$USER}&nbsp;<LABEL for=''>{t}user groups{/t}</LABEL><br>
  {$GROUP}&nbsp;<LABEL for=''>{t}nested groups{/t}</LABEL><br>
  {$APPLICATION}&nbsp;<LABEL for=''>{t}application groups{/t}</LABEL><br>
