@@ -574,10 +574,8 @@ class LDAP{
       $str = " - <b>attribute: ".preg_replace("/:.*$/","",$this->get_additional_error())."</b>";
     } 
 
-    if(is_object($config) && $config->get_cfg_value("displayerrors") == "true" && function_exists("print_a")){
-      $str .= print_a($attrs,true);
-    }
-    
+    @DEBUG(DEBUG_LDAP,__LINE__,__FUNCTION__,__FILE__,$attrs,"Erroneous data");
+
     return($str);
   }
 
