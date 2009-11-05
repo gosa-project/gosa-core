@@ -9,7 +9,7 @@
 
   <search>
     <query>
-      <backend>LDAP</backend>
+      <backend>GroupLDAP</backend>
       <filter>(&amp;(objectClass=posixGroup)$NAME(|$PRIMARY$MAIL$SAMBA))</filter>
       <attribute>dn</attribute>
       <attribute>objectClass</attribute>
@@ -22,7 +22,7 @@
   <element>
     <type>checkbox</type>
     <tag>PRIMARY</tag>
-    <default></default>
+    <default>true</default>
     <unset></unset>
     <set>(!(objectClass=gosaObject))</set>
   </element>
@@ -50,11 +50,11 @@
     <maxlength>60</maxlength>
     <default></default>
     <unset></unset>
-    <set>(|(cn=*$*)(sn=*$*)(givenName=*$*))</set>
+    <set>(|(cn=*$*)(description=*$*))</set>
     <alphabet>true</alphabet>
     <autocomplete>
       <backend>LDAP</backend>
-      <filter>(&amp;(objectClass=posixGroup)(|(cn=*$NAME*)))</filter>
+      <filter>(&amp;(objectClass=posixGroup)(|(cn=*$NAME*)(description=*$NAME*)))</filter>
       <attribute>cn</attribute>
       <frequency>0.5</frequency>
       <characters>3</characters>

@@ -120,6 +120,14 @@ class groupManagement extends management
               "title" => _("Edit phone properties")
               ),
 
+        "gotoMenuGroup" => 
+          array(
+              "image" => "plugins/groups/images/menu.png",
+              "plugin" => "groupApplication",
+              "alt" => _("Menu"),
+              "title" => _("Edit start menu properties")
+              ),
+
         "gotoEnvironment" => 
           array(
               "image" => "plugins/groups/images/environment.png",
