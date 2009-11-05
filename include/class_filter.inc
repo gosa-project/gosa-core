@@ -465,7 +465,7 @@ class filter {
     }
 
     // Make filter
-    $filter= preg_replace("/\\$$tag/", normalizeLDAP($value), $filter);
+    $filter= preg_replace("/\\$$tag/", normalizeLdap($value), $filter);
     if (isset($config['base']) && isset($config['scope']) && isset($config['category'])) {
       $result= call_user_func(array($backend, 'query'), $config['base'], $config['scope'], $filter, $attributes,
                            $config["category"], $config["objectStorage"]);
