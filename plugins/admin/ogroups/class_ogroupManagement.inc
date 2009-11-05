@@ -67,7 +67,23 @@ class ogroupManagement extends management
     $this->registerAction("edit_phonequeue","editEntry");
     $this->registerAction("edit_workstartup","editEntry");
     $this->registerAction("edit_termgroup","editEntry");
+
+    $this->registerAction("sendMessage", "sendMessage");
+    $this->registerAction("saveEventDialog", "saveEventDialog");
+    $this->registerAction("abortEventDialog", "closeDialogs");
   }
+
+
+  // Inject user actions
+  function detectPostActions()
+  {
+    $action = management::detectPostActions();
+
+    if(isset($_POST['save_event_dialog'])) $action['action'] = "saveEventDialog";
+    if(isset($_POST['abort_event_dialog'])) $action['action'] = "abortEventDialog";
+    return($action);
+  }
+
 
   function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
   {
@@ -80,6 +96,82 @@ class ogroupManagement extends management
       }else{
         trigger_error("Unknown tab: ".$tab);
       }
+    }
+  }
+
+
+  /*! \brief  Sends a message to a set of users using gosa-si events.
+   */
+  function saveEventDialog()
+  {
+    $this->dialogObject->save_object();
+    $msgs = $this->dialogObject->check();
+    if(count($msgs)){
+      msg_dialog::displayChecks($msgs);
+    }else{
+      $o_queue = new gosaSupportDaemon();
+      $o_queue->append($this->dialogObject);
+      if($o_queue->is_error()){
+        msg_dialog::display(_("Infrastructure error"), msgPool::siError($o_queue->get_error()),ERROR_DIALOG);
+      }
+      $this->closeDialogs();
+    }
+  }
+
+
+  /*! \brief  Sends a message to a set of users using gosa-si events.
+   */
+  function sendMessage($action="",$target=array(),$all=array())
+  {
+
+    if(class_available("DaemonEvent_notify")){
+
+      // Resolv targets  
+      $targets = array();
+      $m_list  = array();
+      $ldap = $this->config->get_ldap_link();
+
+      // Collect selected ogroups
+      foreach($target as $dn){
+        $ldap->cat($dn, array('member'));
+        while ($entry = $ldap->fetch()) {
+          $m_list[] = $entry;
+        }
+      }
+
+      // Collect object group member dns
+      foreach($m_list as $entry){
+        $members = $entry['member'];
+        for($i=0;$i<$members['count'];$i++) {
+
+          // Fetch member object
+          $ldap->cat($members[$i], array('uid','cn','objectClass'));
+          if ($ldap->count() > 0) {
+
+            // Determine which type the object has
+            $attrs = $ldap->fetch();
+            if (array_search('gosaAccount', $attrs['objectClass'])) {
+              $uid = $attrs['uid'][0];
+              $targets['USERS'][] = $uid;
+            }elseif (array_search('posixGroup', $attrs['objectClass'])) {
+              $group = $attrs['cn'][0];
+              $targets['GROUPS'][] = $group;
+            }
+          }
+        }
+      }
+    
+      // We've at least one recipient
+      if(count($targets)){
+        $events = DaemonEvent::get_event_types(USER_EVENT);
+        if(isset($events['BY_CLASS']['DaemonEvent_notify'])){
+          $type = $events['BY_CLASS']['DaemonEvent_notify'];
+          $this->dialogObject = new $type['CLASS_NAME']($this->config);
+          $this->dialogObject->add_targets($targets);
+          $this->dialogObject->set_type(TRIGGERED_EVENT);
+        }
+      }
+
     }
   }
 
