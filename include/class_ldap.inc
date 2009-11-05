@@ -587,8 +587,6 @@ class LDAP{
       return (0);
     }
     if($this->hascon){
-
-      $attrs['objectClass'][0] = "Herb ert";
       if ($this->reconnect) $this->connect();
       $r = @ldap_modify($this->cid, LDAP::fix($this->basedn), $attrs);
       $this->error = @ldap_error($this->cid);
