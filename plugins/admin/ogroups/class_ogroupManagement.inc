@@ -63,10 +63,10 @@ class ogroupManagement extends management
   }
   parent::__construct($config, $ui, "ogroups", $headpage);
 
-  $this->registerAction("edit_group","editEntry");
-  $this->registerAction("edit_environment","editEntry");
-  $this->registerAction("edit_appgroup","editEntry");
-  $this->registerAction("edit_mailgroup","editEntry");
+  $this->registerAction("edit_ogroup","editEntry");
+  $this->registerAction("edit_phonequeue","editEntry");
+  $this->registerAction("edit_workstartup","editEntry");
+  $this->registerAction("edit_termgroup","editEntry");
   }
 
   function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
@@ -99,42 +99,16 @@ class ogroupManagement extends management
         "T" => array("plugins/ogroups/images/terminal.png"    ,_("Terminal")    , "termgroup"),
         "P" => array("plugins/ogroups/images/printer.png"     ,_("Printer")     , "ogroup"));
 
-    /* Assemble picture */
-    $type= $gosaGroupObjects[0];
-    $type= preg_replace("/[^A-Z]/i","",$type);
-    if (isset($type[0])){
-      $p1['pic']= $conv[$type[0]][0];
-      $p1['tit']= $conv[$type[0]][1];
-      $p1['alt']= $type[0];
-      $p1['lnk']= $conv[$type[0]][2];
-      $html_object_1 = "<input type='image' name='".$p1['lnk']."_group_edit_%KEY' ";
-    } else {
-      $p1['pic']= "images/empty.png";
-      $p1['tit']= "";
-      $p1['alt']= "";
-      $p1['lnk']= "";//$conv[$type[0]][2];
-      $html_object_1 = "<img ";
-    }
+    $types = preg_replace("/[^a-z]/i","",$gosaGroupObjects[0]);
+    $result ="";
+    for($i = 0 ; $i < strlen($types); $i++){
+      $type = $types[$i];
+      $result.="<input class='center' type='image' src='".$conv[$type][0]."' ".
+        "alt='".$conv[$type][1]."' title='".$conv[$type][1].
+        "' name='listing_edit_".$conv[$type][2]."_$row' style='padding:1px'>";
 
-    if (isset($type[1])){
-      $p2['pic']= $conv[$type[1]][0];
-      $p2['alt']= $type[1];
-      $p2['tit']= $conv[$type[1]][1];
-      $p2['lnk']= $conv[$type[1]][2];
-      $html_object_2 = "<input type='image' name='".$p2['lnk']."_group_edit_%KEY' ";
-    } else {
-      $p2['pic']= "images/empty.png";
-      $p2['alt']= "";
-      $p2['tit']= "";
-      $p2['lnk']= ""; //$conv[$type[0]][2];
-      $html_object_2 = "<img ";
     }
-
-    $temp = $html_object_1." class='center' id='iconA".preg_replace("/_/","",$p1['lnk']."_group_edit_%KEY")."'
-      src='".$p1['pic']."' alt='".$p1['alt']."' title='".$p1['tit']."'>";
-    $temp.= $html_object_2." class='center' id='iconB".preg_replace("/_/","",$p2['lnk']."_group_edit_%KEY")."'
-      src='".$p2['pic']."' alt='".$p2['alt']."' title='".$p2['tit']."'>";
-    return ($temp);
+    return($result);
   }
 } 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
