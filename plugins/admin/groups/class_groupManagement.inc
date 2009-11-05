@@ -123,7 +123,7 @@ class groupManagement extends management
         "gotoMenuGroup" => 
           array(
               "image" => "plugins/groups/images/menu.png",
-              "plugin" => "groupApplication",
+              "plugin" => "appgroup",
               "alt" => _("Menu"),
               "title" => _("Edit start menu properties")
               ),
