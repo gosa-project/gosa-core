@@ -214,6 +214,18 @@ class filter {
   }
 
 
+  function setComboBoxOptions($tag, $options)
+  {
+    if (isset($this->elements[$tag]) && $this->elements[$tag]['type'] == "combobox") {
+      
+      $this->elements[$tag]['value']= array();
+      foreach ($options as $key => $label) {
+        $this->elements[$tag]['value'][]= array('label' => $label, 'key' => $key);
+      }
+    }
+  }
+
+
   function getCurrentBase()
   {
     if (isset($this->search->base) && (string)$this->search->scope != "auto") {
