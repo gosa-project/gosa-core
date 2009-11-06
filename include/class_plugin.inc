@@ -139,7 +139,7 @@ class plugin
     \param dn Distinguished name to initialize plugin from
     \sa plugin()
    */
-  function plugin (&$config, $dn= NULL, $parent= NULL)
+  function plugin (&$config, $dn= NULL, $object= NULL)
   {
     /* Configuration is fine, allways */
     $this->config= &$config;	
@@ -167,8 +167,8 @@ class plugin
     if ($dn !== NULL){
 
       /* Load data to 'attrs' and save 'dn' */
-      if ($parent !== NULL){
-        $this->attrs= $parent->attrs;
+      if ($object !== NULL){
+        $this->attrs= $object->attrs;
       } else {
         $ldap= $this->config->get_ldap_link();
         $ldap->cat ($dn);
