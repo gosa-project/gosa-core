@@ -894,7 +894,7 @@ class posixAccount extends plugin
       if ($ldap->count() == 0){
 
         $groupcn = $this->uid;
-        $groupdn= preg_replace ('/^'.$this->config->get_cfg_value("accountPrimaryAttribute").'=[^,]+,'.get_people_ou().'/i',
+        $groupdn= preg_replace ('/^'.preg_quote($this->config->get_cfg_value("accountPrimaryAttribute").'=[^,]+,'.get_people_ou(), '/').'/i',
             'cn='.$groupcn.','.get_groups_ou(), $this->dn);
 
         /* Request a new and uniqe gidNumber, if required */
@@ -909,7 +909,7 @@ class posixAccount extends plugin
           while($ldap->dn_exists($groupdn)){
             $cnt ++;
             $groupcn = $this->uid."_".$cnt;
-            $groupdn= preg_replace ('/^'.$this->config->get_cfg_value("accountPrimaryAttribute").'=[^,]+,'.get_people_ou().'/i',
+            $groupdn= preg_replace ('/^'.preg_quote($this->config->get_cfg_value("accountPrimaryAttribute").'=[^,]+,'.get_people_ou(), '/').'/i',
             'cn='.$groupcn.','.get_groups_ou(), $this->dn);
           }
         }
