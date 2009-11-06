@@ -183,7 +183,7 @@ class filter {
 
   function getCombobox($element)
   {
-    $result= "<select name='".$element['tag']."' size='1' onClick='document.mainform.submit();'>";
+    $result= "<select name='".$element['tag']."' size='1' onChange='document.mainform.submit();'>";
 
     // Fill with presets
     foreach ($element['value'] as $value) {
