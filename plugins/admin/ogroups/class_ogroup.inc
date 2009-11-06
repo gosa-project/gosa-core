@@ -124,7 +124,7 @@ class ogroup extends plugin
     if ($this->dn == "new"){
       $this->base = session::get('CurrentMainBase');
     } else {
-      $this->base= preg_replace("/^[^,]+,".preg_quote(get_ou("ogroupRDN"), '/')."/","",$this->dn);
+      $this->base= preg_replace("/^[^,]+,".preg_quote(get_ou("ogroupRDN"), '/')."/i","",$this->dn);
 
       /* Is this account a trustAccount? */
       if ($this->is_account && isset($this->attrs['trustModel'])){
