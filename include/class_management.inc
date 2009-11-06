@@ -312,6 +312,7 @@ class management
         $this->tabObject= new $tabClass($this->config,$this->config->data['TABS'][$tabType], $this->dn, $aclCategory);
         $this->tabObject->set_acl_base($this->dn);
         $this->tabObject->delete ();
+        $this->tabObject->parent = &$this;
 
         // Remove the lock for the current object.
         del_lock($this->dn);        
@@ -383,6 +384,7 @@ class management
       if(!empty($entry) && $this->ui->allow_snapshot_create($entry,$this->aclCategory)){
         $this->dialogObject = new SnapShotDialog($this->config,$entry,$this);
         $this->dialogObject->aclCategories = array($this->aclCategory);
+        $this->dialogObject->parent = &$this;
 
       }else{
         msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to create a snapshot for %s."),$entry),
@@ -463,6 +465,7 @@ class management
         $this->dialogObject->set_snapshot_bases($bases);
         $this->dialogObject->display_all_removed_objects = true;
         $this->dialogObject->display_restore_dialog = true;
+        $this->dialogObject->parent = &$this;
       }else{
         msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s."),$entry),
             ERROR_DIALOG);
@@ -476,6 +479,7 @@ class management
         $this->dialogObject = new SnapShotDialog($this->config,$entry,$this);
         $this->dialogObject->set_snapshot_bases($bases);
         $this->dialogObject->display_restore_dialog = true;
+        $this->dialogObject->parent = &$this;
       }else{
         msg_dialog::display(_("Permission"),sprintf(_("You are not allowed to restore a snapshot for %s."),$entry),
             ERROR_DIALOG);
@@ -532,6 +536,7 @@ class management
     }else{
       $this->tabObject= new $tabClass($this->config,$this->config->data['TABS'][$tabType], $this->dn, $aclCategory);
       $this->tabObject->set_acl_base($this->headpage->getBase());
+      $this->tabObject->parent = &$this;
       @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dn,"Create new entry initiated!");
     }
   }
@@ -595,6 +600,7 @@ class management
         $this->tabObject= new $tab($this->config,$this->config->data['TABS'][$tabType], $this->dn,$aclCategory);
         @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dn,"Edit entry initiated!");
         $this->tabObject->set_acl_base($this->dn);
+        $this->tabObject->parent = &$this;
       }
     }else{
 

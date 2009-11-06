@@ -37,6 +37,8 @@ class tabs
   var $acl_category; 
   var $multiple_support_active = FALSE;
 
+  var $parent = null; // A parent object if available, e.g. a management class.
+
   var $read_only = FALSE; // Used when the entry is opened as "readonly" due to locks.
   var $hide_refs = FALSE;
   var $hide_acls = FALSE;
