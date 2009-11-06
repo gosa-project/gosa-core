@@ -491,7 +491,7 @@ class userManagement extends management
       // Adapt template values.
       $template_dn              = $_POST['template'];
       $this->tabObject->adapt_from_template($template_dn, array("uid","cn","givenName","sn"));
-      $template_base            = preg_replace("/^[^,]+,".preg_quote(get_people_ou(), '/')."/", '', $template_dn);
+      $template_base            = preg_replace("/^[^,]+,".preg_quote(get_people_ou(), '/i')."/", '', $template_dn);
       $this->tabObject->by_object['user']->base= $template_base;
 
       // The user Tab object is already instantiated, so just go back and let the 
