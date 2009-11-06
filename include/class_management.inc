@@ -70,8 +70,8 @@ class management
   protected $snapHandler = null;
 
   // The listing handlers
-  protected $headpage = null;
-  protected $filter = null;
+  private $headpage = null;
+  private $filter = null;
 
   // A list of configured actions/events
   protected $actions = array();
@@ -166,13 +166,27 @@ class management
       }
       $this->snapHandler->setSnapshotBases($bases);
     }
-
+    
+    // Display list
+    return($this->renderList());
+  }
+  
+  function renderList()
+  {
     $this->headpage->update();
     $display = $this->headpage->render();
     return($this->getHeader().$display);
   }
 
+  function getHeadpage()
+  {
+    return($this->headpage);
+  }
 
+  function getFilter()
+  {
+    return($this->filter);
+  }
 
   /*! \brief  Generates the plugin header which is displayed whenever a tab object is 
    *           opened.
@@ -333,6 +347,10 @@ class management
    */
   function detectPostActions()
   {
+    if(!is_object($this->headpage)){
+      trigger_error("No valid headpage given....!");
+      return(array());
+    }
     $action= $this->headpage->getAction();
     if(isset($_POST['edit_apply']))  $action['action'] = "apply";    
     if(isset($_POST['edit_finish'])) $action['action'] = "save";    

@@ -101,7 +101,8 @@ class departmentManagement extends management
   function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
   {
     $types= $this->get_support_departments();
-    $type = $this->headpage->getType($target[0]);
+    $headpage = $this->getHeadpage();
+    $type = $headpage->getType($target[0]);
     return(management::editEntry($action,$target,$all,$this->tabClass,$types[$type]['TAB'],$this->aclCategory));
   }
 
@@ -115,7 +116,8 @@ class departmentManagement extends management
     $config->get_departments();
     $config->make_idepartments();
     $this->config = $config;
-    $this->headpage->refreshBasesList();
+    $headpage = $this->getHeadpage();
+    $headpage->refreshBasesList();
 
     $plugname = $this->last_tabObject->base_name;
     if($this->last_tabObject->by_object[$plugname]->must_be_tagged()){
@@ -130,7 +132,8 @@ class departmentManagement extends management
   // An action handler which enables to switch into deparmtment by clicking the names.
   function openEntry($action,$entry)
   {
-    $this->headpage->setBase(array_pop($entry));
+    $headpage = $this->getHeadpage();
+    $headpage->setBase(array_pop($entry));
   }
 
 
