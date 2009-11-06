@@ -20,6 +20,13 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+/*! \brief Configuration class
+ *  \ingroup coreclasses
+ *
+ * The configuration class, responsible for parsing and querying the
+ * gosa configuration file.
+ */
+
 class config  {
 
   /* XML parser */
@@ -31,14 +38,17 @@ class config  {
   var $section= "";
   var $currentLocation= "";
 
-  /* Selected connection */
-  var $current= array();
+  /*! \brief Store configuration for current location */
+  var $current= array(); 
 
   /* Link to LDAP-server */
   var $ldap= NULL;
   var $referrals= array();
 
-  /* Configuration data */
+  /* \brief Configuration data
+   *
+   * - $data['SERVERS'] contains server informations.
+   * */
   var $data= array( 'TABS' => array(), 'LOCATIONS' => array(), 'SERVERS' => array(),
       'MAIN' => array(),
       'MENU' => array(), 'SERVICE' => array());
@@ -53,6 +63,12 @@ class config  {
   var $filename = "";
   var $last_modified = 0;
 
+  /*! \brief Class constructor of the config class
+   *  
+   *  \param string 'filename' path to the configuration file
+   *  \param string 'basedir' base directory
+   *
+   * */
   function config($filename, $basedir= "")
   {
     $this->parser = xml_parser_create();
@@ -67,7 +83,14 @@ class config  {
     }
   }
 
-  
+
+  /*! \brief Check and reload the configuration
+   * 
+   * This function checks if the configuration has changed, since it was
+   * read the last time and reloads it. It uses the file mtime to check
+   * weither the file changed or not.
+   *
+   * */ 
   function check_and_reload()
   {
     global $ui;
@@ -101,6 +124,14 @@ class config  {
     }
   }  
 
+
+  /*! \brief Parse the given configuration file 
+   *
+   *  Parses the configuration file and displays errors if there
+   *  is something wrong with it.
+   *
+   *  \param string 'filename' The filename of the configuration file.
+   * */
 
   function parse($filename)
   {
@@ -256,6 +287,22 @@ class config  {
   }
 
 
+  /*! \brief Get a LDAP link object
+   *
+   * This function can be used to get an ldap object, which in turn can
+   * be used to query the LDAP. See the LDAP class for more information
+   * on how to use it.
+   *
+   * Example usage:
+   * \code
+   * $ldap = $this->config->get_ldap_link();
+   * \endcode
+   *
+   * \param boolean sizelimit Weither to impose a sizelimit on the LDAP object or not.
+   * Defaults to false. If set to true, the size limit in the configuration
+   * file will be used to set the option LDAP_OPT_SIZELIMIT.
+   * \return ldapMultiplexer object
+   */
   function get_ldap_link($sizelimit= FALSE)
   {
     if($this->ldap === NULL || !is_resource($this->ldap->cid)){
@@ -293,6 +340,10 @@ class config  {
     return($obj);
   }
 
+  /*! \brief Set the current location
+   *  
+   *  \param string name the name of the location
+   */
   function set_current($name)
   {
     $this->current= $this->data['LOCATIONS'][$name];
@@ -373,6 +424,13 @@ class config  {
     $this->load_servers();
   }
 
+
+  /*! \brief Load server information from config/LDAP
+   *
+   *  This function searches the LDAP for servers (e.g. goImapServer, goMailServer etc.)
+   *  and stores information about them $this->data['SERVERS']. In the case of mailservers
+   *  the main section of the configuration file is searched, too.
+   */
   function load_servers ()
   {
     /* Only perform actions if current is set */
@@ -825,10 +883,13 @@ class config  {
     return($ret);
   }
 
-  /* This function returns all available Shares defined in this ldap
-   * There are two ways to call this function, if listboxEntry is true
-   *  only name and path are attached to the array, in it is false, the whole
-   *  entry will be parsed an atached to the result.
+  /*! \brief Get all available shares defined in the current LDAP
+   *
+   *  This function returns all available Shares defined in this ldap
+   *  
+   *  \param boolean listboxEntry If set to TRUE, only name and path are
+   *  attached to the array. If FALSE, the whole entry will be parsed an atached to the result.
+   *  \return array
    */
   function getShareList($listboxEntry = false)
   {
@@ -861,7 +922,12 @@ class config  {
   }
 
 
-  /* This function returns all available ShareServer */
+  /*! \brief Return al available share servers
+   *
+   * This function returns all available ShareServers.
+   *
+   * \return array
+   * */
   function getShareServerList()
   {
     global $config;
@@ -893,7 +959,24 @@ class config  {
   }
 
 
-  /* Check if there's the specified bool value set in the configuration */
+  /*! \brief Check if there's the specified bool value set in the configuration
+   *
+   *  The function checks, weither the specified bool value is set to a true
+   *  value in the configuration file. Considered true are either true or yes,
+   *  case-insensitive.
+   *
+   *  Example usage:
+   *  \code
+   *  if ($this->config->boolValueIsTrue("main", "copyPaste")) {
+   *    echo "Copy Paste Handling is enabled";
+   *  }
+   *  \endcode
+   *
+   *  \param string 'section' Section in the configuration file.
+   *  \param string 'value' Key in the given section, which is subject to check
+   *
+   *
+   * */
   function boolValueIsTrue($section, $value)
   {
     $section= strtoupper($section);
@@ -930,6 +1013,18 @@ class config  {
   }
 
 
+  /*! Search for a configuration setting in different categories
+   *
+   *  Searches for the value of a given key in the configuration data.
+   *  Optionally the list of categories to search (tabs, main, locations) can
+   *  be specified. The first value that matches is returned.
+   *
+   *  Example usage:
+   *  \code
+   *  $postcmd = $this->config->search(get_class($this), "POSTCOMMAND", array("menu", "tabs"));
+   *  \endcode
+   *
+   * */
   function search($class, $value, $categories= "")
   {
     if (is_array($categories)){
@@ -951,6 +1046,21 @@ class config  {
   }
 
 
+  /*! \brief Get a configuration value from the config
+   *
+   *  This returns a configuration value from the config. It either
+   *  uses the data of the current location ($this->current),
+   *  if it contains the value (e.g. current['BASE']) or otherwise
+   *  uses the data from the main configuration section.
+   *
+   *  If no value is found and an optional default has been specified,
+   *  then the default is returned.
+   *
+   *  \param string 'name' the configuration key (case-insensitive)
+   *  \param string 'default' a default that is returned, if no value is found
+   *
+   *
+   */
   function get_cfg_value($name, $default= "") {
     $name= strtoupper($name);
 
@@ -968,6 +1078,13 @@ class config  {
   }
 
 
+  /*! \brief Check if current configuration version matches the GOsa version
+   *
+   *  This function checks if the configuration file version matches the
+   *  version of the gosa version, by comparing it with the configuration
+   *  file version of the example gosa.conf that comes with GOsa.
+   *  If a version mismatch occurs an error is triggered.
+   * */
   function check_config_version()
   {
     /* Skip check, if we've already mentioned the mismatch 
@@ -988,11 +1105,17 @@ class config  {
   }
 
 
-  /* On debian systems the session files are deleted with
+  /*! \brief Check if session lifetime matches session.gc_maxlifetime 
+   *
+   *  On debian systems the session files are deleted with
    *  a cronjob, which detects all files older than specified 
    *  in php.ini:'session.gc_maxlifetime' and removes them.
-   * This function checks if the gosa.conf value matches the range
+   *  This function checks if the gosa.conf value matches the range
    *  defined by session.gc_maxlifetime.
+   *
+   *  \return boolean TRUE or FALSE depending on weither the settings match
+   *  or not. If SESSIONLIFETIME is not configured in GOsa it always returns
+   *  TRUE.
    */
   function check_session_lifetime()
   {
