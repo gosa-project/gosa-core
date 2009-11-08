@@ -1,0 +1,19 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 02_net-resolver.sh bashisms.dpatch by  <benoit.mortier@opensides.be>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: fix net-resolver.sh bashims
+
+@DPATCH@
+
+--- gosa_2.5.19/contrib/scripts/net-resolver.sh	2006-11-06 10:08:18.000000000 +0100
++++ gosa_2.5.19/contrib/scripts/net-resolver.sh	2009-10-22 21:48:55.000000000 +0200
+@@ -17,7 +17,7 @@
+ 
+ mac=""
+ ip=$(LANG=C $host $1 | grep address | head -n1 | sed 's/^.*[^0-9]\([0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*\).*$/\1/g')
+-if $fping -c1 -r3 -t500 $ip &> /dev/null; then
++if $fping -c1 -r3 -t500 $ip >/dev/null 2>&1; then
+ 	mac=$($arp -n | awk "/^$ip/ {print \$3}")
+ fi
+ echo "$ip;$mac"

@@ -2,7 +2,7 @@ gosa (2.5.19-2) unstable; urgency=low
 
   * bashism in /bin/sh script (Closes: #535872)
 
- -- Benoit Mortier <benoit.mortier@opensides.be>  Thu, 22 Oct 2009 21:52:45 +0200
+ -- Benoit Mortier <benoit.mortier@opensides.be>  Sun, 08 Nov 2009 23:08:37 +0100
 
 gosa (2.5.19-1) unstable; urgency=low
 
@@ -20,10 +20,9 @@ gosa (2.5.19-1) unstable; urgency=low
   * Applied patch to allow selecting the primary Group when copying users
   * Added a section how to report a bug
   * Added Benoit Mortier as uploader
-  * bashism in /bin/sh script (Closes: #535872)
 
- -- Benoit Mortier <benoit.mortier@opensides.be>  Thu, 22 Oct 2009 21:52:24 +0200
-
+ -- Benoit Mortier <benoit.mortier@opensides.be>  Fri, 29 May 2009 18:23:00 +0100
+ 
 gosa (2.5.18-1) unstable; urgency=low
 
   * New upstream release

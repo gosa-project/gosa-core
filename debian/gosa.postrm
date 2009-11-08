@@ -2,7 +2,7 @@
 # postrm script for GOsa
 #
 
-set -e
+set -e 
 
 case "$1" in
     purge|remove)

@@ -1,7 +1,7 @@
 #! /bin/sh
 # GOsa postinst script
 
-set -e
+set -e 
 
 #DEBHELPER#
 
