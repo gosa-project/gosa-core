@@ -208,7 +208,7 @@ class LDAP{
     if ($basedn==""){
       $basedn = $this->basedn;
     } else {
-      $basedn = LDAP::convert($this->basedn);
+      $basedn = LDAP::convert($basedn);
     }
     return(ereg_replace("[^,]*[,]*[ ]*(.*)", "\\1", $basedn));
   }
