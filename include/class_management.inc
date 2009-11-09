@@ -782,11 +782,11 @@ class management
       $this->cpHandler->cleanup_queue();
       foreach($target as $dn){
         if($action == "copy" && $this->ui->is_copyable($dn,$aclCategory,$aclPlugin)){
-          $this->cpHandler->add_to_queue($dn,"copy",$tabClass,$tabType,$aclCategory);
+          $this->cpHandler->add_to_queue($dn,"copy",$tabClass,$tabType,$aclCategory,$this);
           @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$dn,"Entry copied!");
         }
         if($action == "cut" && $this->ui->is_cutable($dn,$aclCategory,$aclPlugin)){
-          $this->cpHandler->add_to_queue($dn,"cut",$tabClass,$tabType,$aclCategory);
+          $this->cpHandler->add_to_queue($dn,"cut",$tabClass,$tabType,$aclCategory,$this);
           @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$dn,"Entry cutted!");
         }
       }
