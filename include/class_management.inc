@@ -164,6 +164,10 @@ class management
       foreach($this->storagePoints as $sp){
         $bases[] = $sp.$this->headpage->getBase();
       }
+
+      // No bases specified? Try base  
+      if(!count($bases)) $bases[] = $this->headpage->getBase();
+
       $this->snapHandler->setSnapshotBases($bases);
     }
     
@@ -473,6 +477,9 @@ class management
         $bases[] = $sp.$this->headpage->getBase();
       }
     }
+
+    // No bases specified? Try base  
+    if(!count($bases)) $bases[] = $this->headpage->getBase();
 
     // No target, open the restore removed object dialog.
     if(!count($target)){ 
