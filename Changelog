@@ -1,6 +1,11 @@
 GOsa2 changelog
 ===============
 
+* gosa 2.6.7
+  - Added more information to DHCP service dialog (thanks to Mathieu)
+  - Fixed generation of kerberos host keys when DNS is enabled
+  - Fixed template error message when no sshkey plugin is enabled
+
 * gosa 2.6.6
   - Added ssh public key management
   - Added LVM support to FAI modules using setup-storage
