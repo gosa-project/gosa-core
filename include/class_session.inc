@@ -186,6 +186,7 @@ class session {
 		   !! The garbage collector is a cron job on debian systems, the cronjob will fetch the timeout from
 		   the php.ini, so if you use debian, you must hardcode session.gc_maxlifetime in your php.ini */
 		ini_set("session.gc_maxlifetime",24*60*60);
+		session_name("GOsa");
 		session_start();
 
 		/* Check for changed browsers and bail out */
@@ -193,6 +194,7 @@ class session {
 		{
 			if ($_SESSION['HTTP_USER_AGENT'] !=  md5($_SERVER['HTTP_USER_AGENT'])) {
 				session_destroy();
+		                session_name("GOsa");
 				session_start();
 			}
 		} else {
