@@ -894,24 +894,24 @@ class posixAccount extends plugin
       if ($ldap->count() == 0){
 
         $groupcn = $this->uid;
-        $groupdn= preg_replace ('/^'.preg_quote($this->config->get_cfg_value("accountPrimaryAttribute").'=[^,]+,'.get_people_ou(), '/').'/i',
+        $pri_attr = $this->config->get_cfg_value("accountPrimaryAttribute");
+        $groupdn= preg_replace ('/^'.preg_quote($pri_attr,'/').'=[^,]+,'.preg_quote(get_people_ou(),'/').'/i',
             'cn='.$groupcn.','.get_groups_ou(), $this->dn);
 
         /* Request a new and uniqe gidNumber, if required */
         if(!$this->force_ids){
           $this->gidNumber= get_next_id("gidNumber", $this->dn);
-        }else{
+        }
 
-          /* If forced gidNumber could not be found, then check if the given group name already exists 
-              we do not want to modify the gidNumber of an existing group.
-           */
-          $cnt= 0; 
-          while($ldap->dn_exists($groupdn)){
-            $cnt ++;
-            $groupcn = $this->uid."_".$cnt;
-            $groupdn= preg_replace ('/^'.preg_quote($this->config->get_cfg_value("accountPrimaryAttribute").'=[^,]+,'.get_people_ou(), '/').'/i',
-            'cn='.$groupcn.','.get_groups_ou(), $this->dn);
-          }
+        /* If forced gidNumber could not be found, then check if the given group name already exists 
+           we do not want to modify the gidNumber of an existing group.
+         */
+        $cnt= 0; 
+        while($ldap->dn_exists($groupdn) && ($cnt < 100)){
+          $cnt ++;
+          $groupcn = $this->uid."_".$cnt;
+          $groupdn= preg_replace ('/^'.preg_quote($pri_attr,'/').'=[^,]+,'.preg_quote(get_people_ou(),'/').'/i',
+              'cn='.$groupcn.','.get_groups_ou(), $this->dn);
         }
 
         /* Create new primary group and enforce the new gidNumber */
