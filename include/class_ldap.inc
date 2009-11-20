@@ -219,7 +219,7 @@ class LDAP{
     if($this->hascon){
       if ($this->reconnect) $this->connect();
 
-      $start = microtime();
+      $start = microtime(true);
       $this->clearResult($srp);
       $this->sr[$srp] = @ldap_search($this->cid, LDAP::fix($this->basedn), $filter, $attrs);
       $this->error = @ldap_error($this->cid);
@@ -228,13 +228,13 @@ class LDAP{
    
       /* Check if query took longer as specified in max_ldap_query_time */
       if($this->max_ldap_query_time){
-        $diff = get_MicroTimeDiff($start,microtime());
+        $diff = microtime(true) - $start;
         if($diff > $this->max_ldap_query_time){
           msg_dialog::display(_("Performance warning"), sprintf(_("LDAP performance is poor: last query took about %.2fs!"), $diff), WARNING_DIALOG);
         }
       }
 
-      $this->log("LDAP operation: time=".get_MicroTimeDiff($start,microtime())." operation=search('".LDAP::fix($this->basedn)."', '$filter')");
+      $this->log("LDAP operation: time=".(microtime(true)-$start)." operation=search('".LDAP::fix($this->basedn)."', '$filter')");
       return($this->sr[$srp]);
     }else{
       $this->error = "Could not connect to LDAP server";
@@ -253,7 +253,7 @@ class LDAP{
       else
         $basedn= LDAP::convert($basedn);
   
-      $start = microtime();
+      $start = microtime(true);
       $this->sr[$srp] = @ldap_list($this->cid, LDAP::fix($basedn), $filter,$attrs);
       $this->error = @ldap_error($this->cid);
       $this->resetResult($srp);
@@ -261,13 +261,13 @@ class LDAP{
 
        /* Check if query took longer as specified in max_ldap_query_time */
       if($this->max_ldap_query_time){
-        $diff = get_MicroTimeDiff($start,microtime());
+        $diff = microtime(true) - $start;
         if($diff > $this->max_ldap_query_time){
           msg_dialog::display(_("Performance warning"), sprintf(_("LDAP performance is poor: last query took about %.2fs!"), $diff), WARNING_DIALOG);
         }
       }
 
-      $this->log("LDAP operation: time=".get_MicroTimeDiff($start,microtime())." operation=ls('".LDAP::fix($basedn)."', '$filter')");
+      $this->log("LDAP operation: time=".(microtime(true) - $start)." operation=ls('".LDAP::fix($basedn)."', '$filter')");
 
       return($this->sr[$srp]);
     }else{

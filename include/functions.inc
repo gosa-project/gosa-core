@@ -2076,20 +2076,6 @@ function normalizeLdap($input)
 }
 
 
-/* Resturns the difference between to microtime() results in float  */
-function get_MicroTimeDiff($start , $stop)
-{
-  $a = split("\ ",$start);
-  $b = split("\ ",$stop);
-
-  $secs = $b[1] - $a[1];
-  $msecs= $b[0] - $a[0]; 
-
-  $ret = (float) ($secs+ $msecs);
-  return($ret);
-}
-
-
 function get_base_dir()
 {
   global $BASE_DIR;
