@@ -358,8 +358,11 @@ class CopyPasteHandler {
 
     /* Save edited entry and force loading new one 
      */
-    if(isset($_POST['PerformCopyPaste']) && $this->current){
+    if(isset($this->current['object']) && method_exists($this->current['object'],"saveCopyDialog")) {
       $this->current['object']->saveCopyDialog();
+    }
+
+    if(isset($_POST['PerformCopyPaste']) && $this->current){
       $msgs = $this->check();
 
       /* Load next queue entry */
