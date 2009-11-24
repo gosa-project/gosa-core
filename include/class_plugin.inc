@@ -987,7 +987,9 @@ class plugin
     foreach($ogroups as $ogroup){
       // Migrate old to new dn
       $o_ogroup= new ogroup($this->config,$ogroup['dn']);
-      unset($o_ogroup->member[$src_dn]);
+      if (isset($o_group->member[$src_dn])) {
+        unset($o_ogroup->member[$src_dn]);
+      }
       $o_ogroup->member[$dst_dn]= $dst_dn;
       
       // Save object group
@@ -995,13 +997,15 @@ class plugin
     }
 
     // Migrate rfc groups if needed
-    $groups = get_sub_list("(&(objectClass=posixGroups)(member=".LDAP::prepare4filter(LDAP::fix($src_dn))."))","groups", array(get_ou("groupRDN")),$this->config->current['BASE'],array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
+    $groups = get_sub_list("(&(objectClass=posixGroup)(member=".LDAP::prepare4filter(LDAP::fix($src_dn))."))","groups", array(get_ou("groupRDN")),$this->config->current['BASE'],array("dn"), GL_SUBSEARCH | GL_NO_ACL_CHECK);
 
     // Walk through all POSIX groups
     foreach($groups as $group){
       // Migrate old to new dn
       $o_group= new group($this->config,$group['dn']);
-      unset($o_group->member[$src_dn]);
+      if (isset($o_group->member[$src_dn])) {
+        unset($o_group->member[$src_dn]);
+      }
       $o_group->member[$dst_dn]= $dst_dn;
       
       // Save object group
