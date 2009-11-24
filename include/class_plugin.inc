@@ -1001,14 +1001,9 @@ class plugin
 
     // Walk through all POSIX groups
     foreach($groups as $group){
+
       // Migrate old to new dn
       $o_group= new group($this->config,$group['dn']);
-      if (isset($o_group->member[$src_dn])) {
-        unset($o_group->member[$src_dn]);
-      }
-      $o_group->member[$dst_dn]= $dst_dn;
-      
-      // Save object group
       $o_group->save();
     }
 
