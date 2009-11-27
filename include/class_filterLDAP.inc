@@ -24,7 +24,7 @@ class filterLDAP {
     if (!is_array($objectStorage)) {
       $objectStorage= array($objectStorage);
     }
-    $method= empty($objectStorage)?"ls":"search";
+    $method= (empty($objectStorage) && !($flags & GL_SUBSEARCH))?"ls":"search";
 
     // Initialize search bases
     $bases= array();
