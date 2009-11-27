@@ -593,7 +593,14 @@ class management
      *     }
      *   }
      * }
-     **/ 
+     **/
+
+    // Do not create a new tabObject while there is already one opened,
+    //  the user may have just pressed F5 to reload the page.
+    if(is_object($this->tabObject)){
+      return;
+    }
+ 
     $tabType = $this->tabType;
     $tabClass = $this->tabClass;
     $aclCategory = $this->aclCategory;
@@ -676,6 +683,18 @@ class management
         return("");
       }else{
         $this->tabObject->save();
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dns,"Entry saved!");
+        $this->remove_lock();
+        $this->closeDialogs();
+      }
+    }elseif($this->dialogObject instanceOf plugin){
+      $this->dialogObject->save_object();
+      $msgs = $this->dialogObject->check();
+      if(count($msgs)){
+        msg_dialog::displayChecks($msgs); 
+        return("");
+      }else{
+        $this->dialogObject->save();
         @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dns,"Entry saved!");
         $this->remove_lock();
         $this->closeDialogs();
