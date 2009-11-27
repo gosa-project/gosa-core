@@ -229,7 +229,7 @@ sed -i "s/.url:\/\/example.com./http:\/\/www.gosa-project.org/g" debian/copyrigh
 sed -i "/.put author's name and email here.\
 /d" debian/copyright
 sed -i '/^Upstream/,/^$/d' debian/copyright
-sed -i 's/ C)/ (C)/g' debian/copyright
+sed -i 's/ C)/ Copyright (C)/g' debian/copyright
 
 # Adapt control
 sed -i "s#^Section: unknown#Section: $SECTION#g" debian/control
