@@ -234,11 +234,17 @@ class user extends plugin
     if (isset ($this->attrs['gender'])){
       $this->gender= strtoupper($this->attrs['gender'][0]);
     }
+
+    // Get login restrictions
+    if(isset($this->attrs['gosaLoginRestriction'])){
+      $this->gosaLoginRestriction  =array();
+      for($i =0;$i < $this->attrs['gosaLoginRestriction']['count']; $i++){
+        $this->gosaLoginRestriction[] = $this->attrs['gosaLoginRestriction'][$i];
+      }
+    }
  
     $this->orig_base = $this->base;
   }
-
-
 
 
   /* execute generates the html output for this node */
