@@ -59,6 +59,7 @@ load_dsc() {
     PL_DESCRIPTION=$(sed -n 's/"//g;s/^description\s*=\s*\(.*\)$/\1/p' "$1")
     PL_AUTHOR=$(sed -n 's/"//g;s/^author\s*=\s*\([^<]*\).*$/\1/p' "$1")
     PL_MAIL=$(sed -n 's/"//g;s/^author\s*=[^<].*<\([^>]*\).*$/\1/p' "$1")
+    PL_MAINTAINER=$(sed -n 's/"//g;s/^maintainer\s*=[^<].*<\([^>]*\).*$/\1/p' "$1")
     PL_HOMEPAGE=$(sed -n 's/"//g;s/^homepage\s*=\s*\(.*\)$/\1/p' "$1")
   else
     echo "Error: cannot find description file" >&2
@@ -175,6 +176,7 @@ echo "Depends:      $PL_DEPENDS"
 echo "Conflicts:    $PL_CONFLICTS"
 echo "Author name:  $PL_AUTHOR"
 echo "Author email: $PL_MAIL"
+echo "Maintainer email: $PL_MAINTAINER"
 echo "Homepage:     $PL_HOMEPAGE"
 echo
 read -s -n 1 -p "Do you want to continue? (y/n)" ans; echo
@@ -184,7 +186,7 @@ cd "$BUILD_PATH"
 
 # Use gosa-plugin skelleton
 echo "Calling dh_make..."
-echo | dh_make -e "$PL_MAIL" -c gpl -s -n -f gosa-plugin-${PL_NAME}-${PL_VERSION}.tar.gz >/dev/null 2>&1
+echo | dh_make -e "$PL_MAINTAINER" -c gpl -s -n -f gosa-plugin-${PL_NAME}-${PL_VERSION}.tar.gz >/dev/null 2>&1
 if [ $? -ne 0 ]; then
 	echo "Failed to call dh_make - aborting!"
 	exit 1
@@ -229,7 +231,9 @@ sed -i "s/.url:\/\/example.com./http:\/\/www.gosa-project.org/g" debian/copyrigh
 sed -i "/.put author's name and email here.\
 /d" debian/copyright
 sed -i '/^Upstream/,/^$/d' debian/copyright
-sed -i 's/ C)/ Copyright (C)/g' debian/copyright
+sed -i 's/ C)/ (C)/g' debian/copyright
+sed -i 's/GPL/GPL-2/g' debian/copyright
+sed -i 's/The Debian packaging is/The Debian packaging is Copyright (C)/g' debian/copyright
 
 # Adapt control
 sed -i "s#^Section: unknown#Section: $SECTION#g" debian/control
@@ -246,6 +250,8 @@ if [ "$PL_CONFLICTS" ]; then
 fi
 sed -i "12iBreaks: gosa (<2.6)" debian/control
 sed -i 's/^\(Build-Depends: .*\)$/\1, dpatch/g' debian/control
+sed -i 's/^Standards-Version: 3.7.3/Standards-Version: 3.8.3/g' debian/control
+
 sed -i "s/^Description: .*$/Description: $PL_NAME plugin for GOsa/g" debian/control
 sed -i "s/^ <.*$/ %DESCRIPTION%/g" debian/control
 dsc=$(tempfile)
@@ -283,6 +289,11 @@ fi
 # Create patch directory
 [ ! -d debian/patches ] && mkdir debian/patches
 
+# Create empty patch list
+cat <<EOF > debian/patches/00list
+This file left intentionnaly blank
+EOF
+
 # Adapt README.debian
 cat <<EOF > debian/README.Debian
 README.Debian for GOsa $PL_NAME plugin $PL_VERSION
@@ -292,6 +303,11 @@ Please read the main GOsa README.Debian file for more information.
 
 ----
 $PL_AUTHOR <$PL_MAIL>  Fri 02 Jun 2006 16:23:50 +0200
+EOF
+
+# Adapt README.source
+cat <<EOF > debian/README.source
+/usr/share/doc/dpatch/README.source.gz
 EOF
 
 # Fix README
@@ -341,7 +357,6 @@ unpatch:
 install: build
 	dh_testdir
 	dh_testroot
-	dh_clean -k 
 	dh_installdirs
 
 # Build architecture-independent files here.

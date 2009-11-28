@@ -222,8 +222,8 @@ then
 fi
 
 echo "Creating original sources 'gosa-${GOSA_VER}'..."
-tar -c -f "gosa_${GOSA_VER}.orig.tar" "${GOSA_DIR}"
-tar -c -f "gosa-si_${GOSA_VER}.orig.tar" "${GOSA_SI_DIR}"
+tar -c --exclude "${GOSA_DIR}"/debian -f "gosa_${GOSA_VER}.orig.tar" "${GOSA_DIR}"
+tar -c --exclude "${GOSA_SI_DIR}"/debian -f "gosa-si_${GOSA_VER}.orig.tar" "${GOSA_SI_DIR}"
 
 echo "Compressing sources..."
 gzip -f -9 "gosa_${GOSA_VER}.orig.tar"
@@ -250,7 +250,7 @@ for plugin in $MAKE_PLUGINS; do
 	rm -rf "$plugin"
 
 	echo "Packing original sources 'gosa-plugin-$plugin-${GOSA_VER}'..."
-	tar -c -f "gosa-plugin-${plugin}_${GOSA_VER}.orig.tar" "${GOSA_PLUG_DIR}"
+	tar -c --exclude "gosa-plugin-${plugin}-${GOSA_VER}/debian" -f "gosa-plugin-${plugin}_${GOSA_VER}.orig.tar" "${GOSA_PLUG_DIR}"
 
 	echo "Compressing sources..."
 	gzip -f -9 "gosa-plugin-${plugin}_${GOSA_VER}.orig.tar"
