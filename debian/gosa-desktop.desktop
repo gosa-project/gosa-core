@@ -1,10 +1,9 @@
 [Desktop Entry]
-Encoding=UTF-8
-MimeType=text/plain
+MimeType=text/plain;
 GenericName=GOsa²
 Exec=/usr/bin/gosa
 Icon=gosa
-Path=
+Path=/usr/bin
 Type=Application
 Terminal=false
 Name=GOsa
