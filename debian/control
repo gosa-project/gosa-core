@@ -1,7 +1,7 @@
 Source: gosa
 Section: web
 Priority: optional
-Maintainer: GOsa packages mainteners group <gosa-pkg@oss.gonicus.de>
+Maintainer: GOsa packages maintainers group <gosa-pkg@oss.gonicus.de>
 Uploaders: Cajus Pollmeier <cajus@debian.org>, Benoit Mortier <benoit.mortier@opensides.be>
 Build-Depends: debhelper (>= 5), dpatch
 Build-Depends-Indep: po-debconf
