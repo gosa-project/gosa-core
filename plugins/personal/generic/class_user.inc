@@ -1612,7 +1612,7 @@ class user extends plugin
           "academicTitle"     => _("Academic title"),
 
           "dateOfBirth"       => _("Date of birth"),
-          "gender"            => _("Gender"),
+          "gender"            => _("Sex"),
           "preferredLanguage" => _("Preferred language"),
           "base"              => _("Base"), 
 
