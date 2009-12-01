@@ -339,7 +339,7 @@ else
 	if [ "$PBUILDER" = "use" ]
 	then
 		echo "using pbuilder to build gosa gosa-si gosa-plugins"
-		(cd "$dir"; pdebuild)
+		(cd "$dir"; pdebuild --debbuildopts -sa; debsign)
 	else
 		(cd "$dir"; dpkg-buildpackage -k$DEBSIGN_KEYID -rfakeroot -sa)
 	fi
@@ -352,7 +352,7 @@ else
 	        if [ "$PBUILDER" = "use" ]
         	then
 			echo "using pbuilder to build goto debian packages"
-                	(cd "$dir"; pdebuild)
+                	(cd "$dir"; pdebuild --debbuildopts -sa; debsign -k$DEBSIGN_KEYID)
 		else
                 	(cd "$dir"; dpkg-buildpackage -k$DEBSIGN_KEYID -rfakeroot -sa)
 		fi
