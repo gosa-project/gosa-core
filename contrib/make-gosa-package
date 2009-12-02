@@ -29,7 +29,7 @@ MAKE_GOTO=""
 GOTO=""
 PBUILDER=""
 NOT_RELEASED="heimdal dak dfs glpi apache2"
-GOTO_NOT_RELEASED="apache-directory-studio goto-cd libresourcepool-net-ldap-perl-1.002 libresourcepool-perl-1.0104 openproj ptc syslinux konch" 
+GOTO_NOT_RELEASED="apache-directory-studio goto-cd libresourcepool-net-ldap-perl-1.002 libresourcepool-perl-1.0104 openproj ptc syslinux konch ldm openssh-4.3p2" 
 DEBIAN_PKG="remove"
 NO_SVN="use"
 EXTRACT=`pwd`
@@ -134,8 +134,19 @@ then
 		| head -n 1 | sed -n -e 's/.*(\([^-]*\).*/\1/p')
 	if [ "$BRANCH" == "trunk" ]; then
 		GOSA_VER="${VERSION}+svn${BRANCH_REV}"
+
+	        if [ "$GOTO" = "use" ]
+        	then
+			GOTO_VER="+svn${GOTO_BRANCH_REV}"
+		fi
 	else
 		GOSA_VER="${VERSION}"
+
+                if [ "$GOTO" = "use" ]
+                then
+                        GOTO_VER=""
+                fi
+
 	fi
 
 else
@@ -272,10 +283,21 @@ then
 
                 echo "Packing original sources '$goto'..."
                 GOTO_VERSION=$(cat $goto/debian/changelog | head -n 1 | sed -n -e 's/.*(\([^-]*\).*/\1/p')
-                tar -c --exclude "$goto/debian" -f "${goto}_${GOTO_VERSION}.orig.tar" $goto
 
-                echo "Compressing sources..."
-                gzip -f -9 "${goto}_${GOTO_VERSION}.orig.tar"
+                if [ "$GOTO_VER" = "" ]
+                then
+			tar -c --exclude "$goto/debian" -f "${goto}_${GOTO_VERSION}.orig.tar" $goto
+                        echo "Compressing sources..."
+                        gzip -f -9 "${goto}_${GOTO_VERSION}.orig.tar"
+                else
+			tar -c --exclude "$goto/debian" -f "${goto}_${GOTO_VERSION}${GOTO_VER}.orig.tar" $goto
+
+			echo "Compressing svn sources..."
+			gzip -f -9 "${goto}_${GOTO_VERSION}${GOTO_VER}.orig.tar"
+
+			echo "Adapting version in $goto"
+			(cd "$goto"; echo | debchange -v "${GOTO_VERSION}${GOTO_VER}-1${TARGET_RELEASE}1" -D "$TARGET_RELEASE" "$RELEASE_REASON")
+		fi
 
         done
 
