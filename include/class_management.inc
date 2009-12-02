@@ -3,7 +3,7 @@
  * This code is part of GOsa (http://www.gosa-project.org)
  * Copyright (C) 2003-2008 GONICUS GmbH
  *
- * ID: $$Id: class_plugin.inc 14584 2009-10-12 14:04:22Z hickert $$
+ * ID: $$Id$$
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -327,7 +327,7 @@ class management
 
         // Delete the object
         $this->dn = $dn;
-        $this->tabObject= new $tabClass($this->config,$this->config->data['TABS'][$tabType], $this->dn, $aclCategory);
+        $this->tabObject= new $tabClass($this->config,$this->config->data['TABS'][$tabType], $this->dn, $aclCategory, false, true);
         $this->tabObject->set_acl_base($this->dn);
         $this->tabObject->delete ();
         $this->tabObject->parent = &$this;
