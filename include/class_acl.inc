@@ -1270,36 +1270,55 @@ class acl extends plugin
   /* Remove acls defined for $src */
   function remove_acl()
   {
-    $this->remove_acl_for_dn($this->dn);
+    acl::remove_acl_for($this->dn);
   }
 
 
   /* Remove acls defined for $src */
-  function remove_acl_for_dn($src = "")
-  {
-    if($src == ""){
-      $src = $this->dn;
-    }
-    $ldap = $this->config->get_ldap_link();
-    $ldap->cd($this->config->current['BASE']);
-    $ldap->search("(&(objectClass=gosaAcl)(gosaAclEntry=*".base64_encode($src)."*))",array("gosaAclEntry","dn"));
-    while($attrs = $ldap->fetch()){
-      $acl = new acl($this->config,$this->parent,$attrs['dn']);
-      foreach($acl->gosaAclEntry as $id => $entry){
-        foreach($entry['members'] as $m_id => $member){
-          if($m_id == "U:".$src){
-            unset($acl->gosaAclEntry[$id]['members'][$m_id]);
-            gosa_log("modify","users/acl",$attrs['dn'],array(),sprintf("Removed acl for user %s on object %s.",$src,$attrs['dn']));
-          }
-          if($m_id == "G:".$src){
-            unset($acl->gosaAclEntry[$id]['members'][$m_id]);
-            gosa_log("modify","groups/acl",$attrs['dn'],array(),sprintf("Removed acl for group %s on object %s.",$src,$attrs['dn']));
-          }
-        }
+  static function remove_acl_for($dn)
+  {                                  
+    global $config;                  
+
+    $ldap = $config->get_ldap_link();
+    $ldap->cd($config->current['BASE']);
+    $ldap->search("(&(objectClass=gosaAcl)(gosaAclEntry=*".base64_encode($dn)."*))",array("gosaAclEntry","dn"));
+    $new_entries= array();                                                                                      
+    while($attrs = $ldap->fetch()){                                                                             
+      if (!isset($attrs['gosaAclEntry'])) {                                                                     
+        continue;                                                                                               
+      }                                                                                                         
+      unset($attrs['gosaAclEntry']['count']);                                                                   
+
+      // Remove entry directly
+      foreach($attrs['gosaAclEntry'] as $id => $entry){
+        $parts= split(':',$entry);                     
+        $members= split(',',$parts[2]);                
+        $new_members= array();                         
+        foreach($members as $member) {                 
+          if (base64_decode($member) != $dn) {         
+            $new_members[]= $member;                   
+          } else {                                     
+            gosa_log("modify","users/acl",$attrs['dn'],array(),sprintf("Removed acl for %s on object %s.",$dn,$attrs['dn']));
+          }                                                                                                                  
+        }                                                                                                                    
+
+        /* We can completely remove the entry if there are no members anymore */
+        if (count($new_members)) {                                              
+          $parts[2]= implode(",", $new_members);                                
+          $new_entries[]= implode(":", $parts);                                 
+        }                                                                       
+      }                                                                         
+
+      // There should be a modification, so write it back
+      $ldap->cd($attrs['dn']);
+      $new_attrs= array("gosaAclEntry" => $new_entries);
+      $ldap->modify($new_attrs);
+      if (!$ldap->success()){
+        msg_dialog::display(_("LDAP error"), msgPool::ldaperror($ldap->get_error(), $dn, LDAP_MOD, get_class()), ERROR_DIALOG);
       }
-      $acl -> save();
     }
   }
+
 
   function update_acl_membership($src,$dst)
   {
