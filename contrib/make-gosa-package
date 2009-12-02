@@ -266,11 +266,20 @@ then
                 MAKE_GOTO=$(echo -n $MAKE_GOTO | sed "s/$i//")
         done
 
-	for goto in $MAKE_GOTO; do
-        	mv "goto-${BNAME}/$goto" .
-	done
+        for goto in $MAKE_GOTO; do
 
-	rm -rf goto-${BNAME}
+                mv "goto-${BNAME}/$goto" .
+
+                echo "Packing original sources '$goto'..."
+                GOTO_VERSION=$(cat $goto/debian/changelog | head -n 1 | sed -n -e 's/.*(\([^-]*\).*/\1/p')
+                tar -c --exclude "$goto/debian" -f "${goto}_${GOTO_VERSION}.orig.tar" $goto
+
+                echo "Compressing sources..."
+                gzip -f -9 "${goto}_${GOTO_VERSION}.orig.tar"
+
+        done
+
+        rm -rf goto-${BNAME}
 fi
 
 echo "Deploying patches..."
