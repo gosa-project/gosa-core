@@ -804,10 +804,8 @@ class group extends plugin
       $acl->save();
     }
 
-    /* Remove ACL dependencies too,
-     */
-    $tmp = new acl($this->config,$this->parent,$this->dn);
-    $tmp->remove_acl();
+    /* Remove ACL dependencies, too */
+    acl::remove_acl_for($this->dn);
 
     /* Send signal to the world that we've done */
     $this->handle_post_events("remove");

@@ -737,8 +737,7 @@ class user extends plugin
     }
 
     /* Remove ACL dependencies too */
-    $tmp = new acl($this->config,$this->parent,$this->dn);
-    $tmp->remove_acl();
+    acl::remove_acl_for($this->dn);
 
     /* Optionally execute a command after we're done */
     $this->handle_post_events("remove",array("uid" => $this->uid));
