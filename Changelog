@@ -6,6 +6,7 @@ GOsa2 changelog
   - Fixed generation of kerberos host keys when DNS is enabled
   - Fixed template error message when no sshkey plugin is enabled
   - Speed up group and user removal by large factors
+  - Fix Problem where arrays got shortened by one in copy and paste
 
 * gosa 2.6.6
   - Added ssh public key management

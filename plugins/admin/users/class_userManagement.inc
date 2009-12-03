@@ -665,13 +665,17 @@ class userManagement extends management
   function copyPasteHandler($action="",$target=array(),$all=array(),
       $altTabClass ="", $altTabType = "", $altAclCategory="",$altAclPlugin="")
   {
-    $this->cpHandler->lastdn = "";
-    $str = management::copyPasteHandler($action,$target,$all);
-    if($this->cpHandler->lastdn != "" && isset($_POST['passwordTodo']) && $_POST['passwordTodo'] == "new"){
-      $this->pwd_change_queue[] = $this->cpHandler->lastdn;
-      return($this->handlePasswordQueue());
+    if ($this->config->boolValueIsTrue("main", "copyPaste")){
+      $this->cpHandler->lastdn = "";
+      $str = management::copyPasteHandler($action,$target,$all);
+      if($this->cpHandler->lastdn != "" && isset($_POST['passwordTodo']) && $_POST['passwordTodo'] == "new"){
+        $this->pwd_change_queue[] = $this->cpHandler->lastdn;
+        return($this->handlePasswordQueue());
+      }
+      return($str);
     }
-    return($str);
+
+    return "";
   }
 
 
