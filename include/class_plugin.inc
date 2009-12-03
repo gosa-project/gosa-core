@@ -1149,11 +1149,8 @@ class plugin
       if (isset($source[$var])){
         if(isset($source[$var]['count'])){
           if($source[$var]['count'] > 1){
-            $this->$var = array();
-            $tmp = array();
-            for($i = 0 ; $i < $source[$var]['count']; $i++){
-              $tmp = $source[$var][$i];
-            }
+            $tmp= $source[$var];
+            unset($tmp['count']);
             $this->$var = $tmp;
           }else{
             $this->$var = $source[$var][0];
