@@ -710,6 +710,7 @@ class user extends plugin
     while ($ldap->fetch()){
       $og= new ogroup($this->config, $ldap->getDN());
       unset($og->member[$this->dn]);
+      $og->member= array_values($og->member);
       $og->save ();
     }
 
@@ -721,7 +722,7 @@ class user extends plugin
       $key = array_search($this->dn,$role->roleOccupant);
       if($key !== FALSE){
         unset($role->roleOccupant[$key]);
-        $role->reload();
+        $role->roleOccupant= array_values($role->roleOccupant);
         $role->save ();
       }
     }
