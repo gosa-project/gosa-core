@@ -248,6 +248,10 @@ if [ -z "$MAKE_PLUGINS" ]; then
 	done
 fi
 
+if [ "TARGET_RELEASE" == "etch" ]; then
+  NOBREAKS="--no-break"
+fi
+
 for plugin in $MAKE_PLUGINS; do
 
 	GOSA_PLUG_DIR="gosa-plugin-$plugin-${GOSA_VER}"
@@ -257,7 +261,7 @@ for plugin in $MAKE_PLUGINS; do
 	mv "gosa-plugins-${BNAME}/$plugin" .
 
 	echo "Debianizing plugin $plugin"
-	yes | dh-make-gosa --section $SECTION $plugin
+	yes | dh-make-gosa $NOBREAKS --section $SECTION $plugin
 	rm -rf "$plugin"
 
 	echo "Packing original sources 'gosa-plugin-$plugin-${GOSA_VER}'..."

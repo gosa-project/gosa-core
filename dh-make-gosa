@@ -19,7 +19,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 usage() {
-  echo "Usage: ${0##*/} [--section section name] [-b|--branch branch] [-e|--email mail] [--depends] plugin-dir|plugin.tar.gz" >&2
+  echo "Usage: ${0##*/} [--no-break] [--section section name] [-b|--branch branch] [-e|--email mail] [--depends] plugin-dir|plugin.tar.gz" >&2
   exit 1
 }
 
@@ -80,6 +80,7 @@ eval set -- "$TEMP"
 RELEASE=trunk
 DOWNLOAD=
 DEPENDS=
+NOBREAK=
 SECTION=web
 DEST=
 while true; do
@@ -98,6 +99,9 @@ while true; do
                 ;;
     --section)  SECTION="$2"
                 shift 2
+                ;;
+    --no-break) NOBREAK=1
+                shift 1
                 ;;
     --dest)     DEST=$2/
                 shift 2
@@ -248,7 +252,9 @@ fi
 if [ "$PL_CONFLICTS" ]; then
 	sed -i "11iConflicts: $PL_CONFLICTS" debian/control
 fi
-sed -i "12iBreaks: gosa (<2.6)" debian/control
+if [ -z "$NOBREAK" ]; then
+  sed -i "12iBreaks: gosa (<2.6)" debian/control
+fi
 sed -i 's/^\(Build-Depends: .*\)$/\1, dpatch/g' debian/control
 sed -i 's/^Standards-Version: 3.7.3/Standards-Version: 3.8.3/g' debian/control
 
