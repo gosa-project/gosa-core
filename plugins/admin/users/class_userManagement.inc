@@ -33,6 +33,7 @@ class userManagement extends management
   var $edit_uid = "";
 
   var $pwd_change_queue = array();
+  var $force_hash_type = array();
 
   // Tab definition 
   protected $tabClass = "usertabs";
@@ -256,8 +257,14 @@ class userManagement extends management
       }
 
       // Change cassword 
-      if(!change_password ($this->dn, $_POST['new_password'])){
-        return($smarty->fetch(get_template_path('password.tpl', TRUE)));
+      if(isset($this->force_hash_type[$this->dn])){
+        if(!change_password ($this->dn, $_POST['new_password'],0,$this->force_hash_type[$this->dn])){
+          return($smarty->fetch(get_template_path('password.tpl', TRUE)));
+        }
+      }else{
+        if(!change_password ($this->dn, $_POST['new_password'])){
+          return($smarty->fetch(get_template_path('password.tpl', TRUE)));
+        }
       }
       if ($this->config->get_cfg_value("passwordHook") != ""){
         exec($this->config->get_cfg_value("passwordHook")." ".$username." ".$_POST['new_password'], $resarr);
@@ -287,7 +294,12 @@ class userManagement extends management
   function saveChanges()
   {
     management::saveChanges();
-    if($this->last_dn == "new"){
+
+    if(isset($this->last_tabObject->by_object['user']) && $this->last_tabObject->by_object['user']->password_change_needed()){
+      $this->force_hash_type[$this->last_tabObject->dn] = $this->last_tabObject->by_object['user']->pw_storage;
+      $this->pwd_change_queue[] = $this->last_tabObject->dn;
+      return($this->handlePasswordQueue());
+    }elseif($this->last_dn == "new"){
       $this->pwd_change_queue[] = $this->last_tabObject->dn;
       return($this->handlePasswordQueue());
     }
