@@ -299,9 +299,6 @@ class userManagement extends management
       $this->force_hash_type[$this->last_tabObject->dn] = $this->last_tabObject->by_object['user']->pw_storage;
       $this->pwd_change_queue[] = $this->last_tabObject->dn;
       return($this->handlePasswordQueue());
-    }elseif($this->last_dn == "new"){
-      $this->pwd_change_queue[] = $this->last_tabObject->dn;
-      return($this->handlePasswordQueue());
     }
   }
 
