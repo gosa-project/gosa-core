@@ -466,6 +466,24 @@ attributetype ( 1.3.6.1.4.1.10098.1.1.9.82 NAME 'gotoSessionType'
 	EQUALITY caseExactIA5Match
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26)
 
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.84 NAME 'rSyslogDatabase'
+  DESC 'Name of rSyslog DB'
+  EQUALITY caseExactIA5Match
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+  SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.85 NAME 'rSyslogUser'
+  DESC 'Auth user for rSyslog DB'
+  EQUALITY caseExactIA5Match
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+  SINGLE-VALUE)
+
+attributetype ( 1.3.6.1.4.1.10098.1.1.9.86 NAME 'rSyslogPassword'
+  DESC 'Password for rSyslog DB user'
+  EQUALITY caseExactIA5Match
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+  SINGLE-VALUE)
+
 
 ##
 ##		Objectclasses
@@ -592,3 +610,8 @@ objectclass (1.3.6.1.4.1.10098.1.2.1.41 NAME 'goEnvironmentServer' SUP top AUXIL
 	MUST ( cn )
 	MAY  ( gotoKioskProfile ) )
 
+# rSyslog Server description
+objectclass (1.3.6.1.4.1.10098.1.2.1.45 NAME 'rSyslogServer' SUP top AUXILIARY
+	DESC 'rSyslog log server (v2.6)'
+	MUST ( cn $ rSyslogDatabase $ rSyslogUser )
+  MAY  ( rSyslogPassword ) )
