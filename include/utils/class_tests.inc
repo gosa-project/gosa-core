@@ -31,7 +31,7 @@ class tests {
 
   public static function is_dns_name($str)
   {
-    return(preg_match("/^[a-z0-9\.\-]*$/i",$str));
+    return(preg_match("/^[a-z0-9\.\-_]*$/i",$str));
   }
 
 
@@ -73,7 +73,24 @@ class tests {
 
   public static function is_ip($ip)
   {
-    return preg_match("/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/", $ip);
+    if(function_exists('filter_var')) {
+      return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
+    } else {
+      return preg_match("/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/", $ip);
+    }
+  }
+
+
+  public static function is_ipv6($ip)
+  {
+    if(function_exists('filter_var')) {
+        return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
+    } else {
+        $ipv4 = '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)';
+        $g = '([0-9a-f]{1,4})'; //IPv6 group
+        return preg_match("/^$g:$g:$g:$g:$g:$g:$g:$g$/", $ip) ||
+               preg_match("/^$g:$g:$g:$g:$g:$g:$ipv4$/", $ip);
+    }
   }
 
 
