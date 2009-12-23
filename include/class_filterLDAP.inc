@@ -2,29 +2,17 @@
 
 class filterLDAP {
 
-  static function query($base, $scope, $filter, $attributes, $category, $method,$objectStorage= "")
+  static function query($base, $scope, $filter, $attributes, $category, $objectStorage= "")
   {
     $config= session::global_get('config');
     $ldap= $config->get_ldap_link(TRUE);
     $flag= ($scope == "sub")?GL_SUBSEARCH:0;
-    $result= filterLDAP::get_list($base, $filter, $attributes, $category, $objectStorage,$method, $flag | GL_SIZELIMIT);
+    $result= filterLDAP::get_list($base, $filter, $attributes, $category, $objectStorage, $flag | GL_SIZELIMIT);
     return $result;
   }
 
-  
-  static function unifyResults($results)
-  {
-    $res = array();
-    foreach($results as $entry){
-      if(!isset($res[$entry['dn']])){
-        $res[$entry['dn']] = $entry;
-      }
-    }
-    return(array_values($res));
-  }
 
-
-  static function get_list($base, $filter, $attributes, $category, $objectStorage, $method, $flags= GL_SUBSEARCH)
+  static function get_list($base, $filter, $attributes, $category, $objectStorage, $flags= GL_SUBSEARCH)
   {
     $ui= session::global_get('ui');
     $config= session::global_get('config');
@@ -36,9 +24,7 @@ class filterLDAP {
     if (!is_array($objectStorage)) {
       $objectStorage= array($objectStorage);
     }
-    if(empty($method)){
-      $method= (empty($objectStorage) && !($flags & GL_SUBSEARCH))?"ls":"search";
-    }
+    $method= (empty($objectStorage) && !($flags & GL_SUBSEARCH))?"ls":"search";
 
     // Initialize search bases
     $bases= array();

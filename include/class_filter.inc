@@ -383,9 +383,6 @@ class filter {
       $filter= $query['filter'];
       $attributes= $query['attribute'];
 
-      $method = "";
-      if(isset($query['method'])) $method = $query['method'];
-
       // Generate final filter
       foreach ($this->elements as $tag => $element) {
         if (!isset($element['set']) || !isset($element['unset'])) {
@@ -411,8 +408,7 @@ class filter {
         }
       }
 
-      $result= array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes, $this->category,$method, $this->objectStorage));
-      $result = call_user_func(array($backend, 'unifyResults'), $result);
+      $result= array_merge($result, call_user_func(array($backend, 'query'), $this->base, $this->scope, $filter, $attributes, $this->category, $this->objectStorage));
     }
     
     return ($result);
