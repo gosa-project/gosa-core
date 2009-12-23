@@ -7,8 +7,8 @@ class filterACL {
     $config= session::global_get('config');
     $ldap= $config->get_ldap_link(TRUE);
     $flag= ($scope == "sub")?GL_SUBSEARCH:0;
-    $result= filterACL::get_list($base, $filter, $attributes, $category, array(), $flag | GL_SIZELIMIT, "cat");
-    $result= array_merge($result,filterACL::get_list($base, $filter, $attributes, $category, array(), $flag | GL_SIZELIMIT, ""));
+    $result=array();
+    $result= array_merge($result,filterACL::get_list($base, $filter, $attributes, $category, array(), $flag | GL_SIZELIMIT, "search"));
     $result= array_merge($result,filterACL::get_list($base, $filter, $attributes, $category, $objectStorage, $flag | GL_SIZELIMIT, ""));
     return(filterACL::unifyResult($result));
   }
@@ -97,8 +97,6 @@ class filterACL {
       $ldap->cd($base);
       if ($method == "ls") {
         $ldap->ls("(&$filter$dnFilter)", $base, $attributes);
-      } elseif($method == "cat") {
-        $ldap->cat($base, $attributes);
       } else {
         $ldap->search("(&$filter$dnFilter)", $attributes);
       }
