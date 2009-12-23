@@ -41,7 +41,7 @@
     <alphabet>true</alphabet>
     <autocomplete>
       <backend>LDAP</backend>
-      <filter>(&amp;(objectClass=gosaACL)(|(ou=*$NAME*)(description=*$NAME*)))</filter>
+      <filter>(&amp;(|(objectClass=gosaAcl)(objectClass=gosaAclRole))(|(ou=*$NAME*)(description=*$NAME*)))</filter>
       <attribute>ou</attribute>
       <attribute>description</attribute>
       <frequency>0.5</frequency>
