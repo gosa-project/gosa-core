@@ -37,11 +37,11 @@
     <maxlength>60</maxlength>
     <default></default>
     <unset></unset>
-    <set>(|(ou=*$*)(description=*$*))</set>
+    <set>(|(cn=*$*)(ou=*$*)(description=*$*))</set>
     <alphabet>true</alphabet>
     <autocomplete>
       <backend>LDAP</backend>
-      <filter>(&amp;(|(objectClass=gosaAcl)(objectClass=gosaAclRole))(|(ou=*$NAME*)(description=*$NAME*)))</filter>
+      <filter>(&amp;(|(objectClass=gosaAcl)(objectClass=gosaRole))(|(ou=*$NAME*)(description=*$NAME*)(cn=*$NAME*)))</filter>
       <attribute>ou</attribute>
       <attribute>description</attribute>
       <frequency>0.5</frequency>
@@ -62,7 +62,7 @@
     <tag>ROLE</tag>
     <default>true</default>
     <unset></unset>
-    <set>(objectClass=gosaAclRole)</set>
+    <set>(objectClass=gosaRole)</set>
   </element>
 
 </filterdef>

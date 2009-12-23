@@ -21,7 +21,7 @@
 
     <objectType>
       <label>Role</label>
-      <objectClass>gosaAclRole</objectClass>
+      <objectClass>gosaRole</objectClass>
       <category>acl</category>
       <class>acl</class>
       <image>plugins/users/images/select_user.png</image>
@@ -49,7 +49,7 @@
       <label>Name</label>
       <sortAttribute>ou</sortAttribute>
       <sortType>string</sortType>
-      <value>%{filter:link(row,dn,"%s",ou)}</value>
+      <value>%{filter:filterLabel(row,dn,"%s",ou,cn,pid,base)}</value>
       <export>true</export>
     </column>
 

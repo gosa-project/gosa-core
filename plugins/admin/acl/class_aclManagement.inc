@@ -51,6 +51,7 @@ class aclManagement extends management
 
     // Build headpage
     $headpage = new listing(get_template_path("acl-list.xml", true));
+    $headpage->registerElementFilter("filterLabel", "aclManagement::filterLabel");
     $headpage->setFilter($filter);
 
     // Add copy&paste and snapshot handler.
@@ -64,6 +65,23 @@ class aclManagement extends management
     parent::__construct($config, $ui, "acl", $headpage);
 
   }
+
+  // A filter which allows to open a department by clicking on the departments name.
+  static function filterLabel($row,$dn,$params,$ou= array(),$cn=array(),$pid=0,$base="")
+  {
+    if(!isset($ou[0])){
+      $ou = $cn[0];
+    }else{
+      $ou = $ou[0];
+    }
+    if($dn == $base){
+      $ou =".";
+    }
+    $dn= LDAP::fix(func_get_arg(1));
+    return("<a href='?plug=".$_GET['plug']."&amp;PID=$pid&amp;act=listing_open_$row' title='$dn'>$ou</a>");
+  }
+
+
 } 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
