@@ -10,6 +10,15 @@
   <search>
     <query>
       <backend>LDAP</backend>
+      <method>cat</method>
+      <filter>(&amp;(objectClass=gosaDepartment)$NAME)</filter>
+      <attribute>dn</attribute>
+      <attribute>objectClass</attribute>
+      <attribute>ou</attribute>
+      <attribute>description</attribute>
+    </query>
+    <query>
+      <backend>LDAP</backend>
       <filter>(&amp;(objectClass=gosaDepartment)$NAME)</filter>
       <attribute>dn</attribute>
       <attribute>objectClass</attribute>
