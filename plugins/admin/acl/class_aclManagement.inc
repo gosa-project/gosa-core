@@ -28,12 +28,12 @@ class aclManagement extends management
 
   // Tab definition 
   protected $tabClass = "aclroletab";
-  protected $tabType = "ACLROLETABS";
+  protected $tabType = NULL;
   protected $aclCategory = "acl";
   protected $aclPlugin   = "acl";
   protected $objectName   = "acl";
 
-  function __construct($config,$ui)
+  function __construct(&$config,$ui)
   {
     $this->config = $config;
     $this->ui = $ui;
@@ -62,16 +62,16 @@ class aclManagement extends management
       $this->snapHandler = new SnapshotHandler($this->config);
     }
 
-    parent::__construct($config, $ui, "acl", $headpage);
+    parent::__construct($this->config, $ui, "acl", $headpage);
   }
 
   function removeEntryConfirmed($action="",$target=array(),$all=array(),
       $altTabClass="",$altTabType="",$altAclCategory="")
   {
+    $this->config->data['TABS'][$this->tabClass] =NULL;
     $tabType = $this->tabType;
     $tabClass = $this->tabClass;
     $aclCategory = $this->aclCategory;
-    $this->config->data['TABS'][$this->tabType] = NULL;
 
     @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$target,"Entry removel confirmed!");
 
@@ -111,11 +111,11 @@ class aclManagement extends management
 
   function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
   {
+    $this->config->data['TABS'][$this->tabClass] =NULL;
     $this->skipFooter = TRUE;
     if(count($target) == 1){
   
       // Set dummy tab object...
-      $this->config->data['TABS'][$this->tabType] = NULL;
       $this->dn = array_pop($target);
       $headpage = $this->getHeadpage();
       if($headpage->getType($this->dn) == "gosaRole"){
