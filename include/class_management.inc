@@ -60,6 +60,9 @@ class management
   // Whether to display the apply button or not
   protected $displayApplyBtn = "";
 
+  // Whether to display a footer or not.
+  protected $skipFooter = false;
+
   // Copy&Paste handler
   protected $cpHandler = null;
 
@@ -225,6 +228,9 @@ class management
         return("");
       }
     }
+
+    // Skip footer if requested;
+    if($this->skipFooter) return("");
 
     // In case an of locked entry, we may have opened a read-only tab.
     $str = "";
