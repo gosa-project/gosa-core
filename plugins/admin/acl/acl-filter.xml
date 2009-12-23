@@ -9,17 +9,7 @@
 
   <search>
     <query>
-      <backend>LDAP</backend>
-      <filter>(|$ACL$ROLE)$NAME</filter>
-      <method>cat</method>
-      <attribute>dn</attribute>
-      <attribute>objectClass</attribute>
-      <attribute>cn</attribute>
-      <attribute>ou</attribute>
-      <attribute>description</attribute>
-    </query>
-    <query>
-      <backend>LDAP</backend>
+      <backend>ACL</backend>
       <filter>(|$ACL$ROLE)$NAME</filter>
       <attribute>dn</attribute>
       <attribute>objectClass</attribute>
@@ -40,9 +30,10 @@
     <set>(|(cn=*$*)(ou=*$*)(description=*$*))</set>
     <alphabet>true</alphabet>
     <autocomplete>
-      <backend>LDAP</backend>
+      <backend>ACL</backend>
       <filter>(&amp;(|(objectClass=gosaAcl)(objectClass=gosaRole))(|(ou=*$NAME*)(description=*$NAME*)(cn=*$NAME*)))</filter>
       <attribute>ou</attribute>
+      <attribute>cn</attribute>
       <attribute>description</attribute>
       <frequency>0.5</frequency>
       <characters>3</characters>

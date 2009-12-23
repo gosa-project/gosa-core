@@ -16,7 +16,7 @@
       <objectClass>gosaAcl</objectClass>
       <category>acl</category>
       <class>acl</class>
-      <image>plugins/users/images/select_template.png</image>
+      <image>images/lists/locked.png</image>
     </objectType>
 
     <objectType>
@@ -24,7 +24,7 @@
       <objectClass>gosaRole</objectClass>
       <category>acl</category>
       <class>acl</class>
-      <image>plugins/users/images/select_user.png</image>
+      <image>plugins/acl/images/role.png</image>
     </objectType>
 
   </definition>
@@ -47,7 +47,7 @@
 
     <column>
       <label>Name</label>
-      <sortAttribute>ou</sortAttribute>
+      <sortAttribute>dn</sortAttribute>
       <sortType>string</sortType>
       <value>%{filter:filterLabel(row,dn,"%s",ou,cn,pid,base)}</value>
       <export>true</export>

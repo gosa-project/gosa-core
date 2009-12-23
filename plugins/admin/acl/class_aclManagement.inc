@@ -45,7 +45,7 @@ class aclManagement extends management
 #      $filter= session::global_get(get_class($this)."_filter");
 #    } else {
       $filter = new filter(get_template_path("acl-filter.xml", true));
-#      $filter->setObjectStorage($this->storagePoints);
+      $filter->setObjectStorage($this->storagePoints);
 #    }
     $this->setFilter($filter);
 
