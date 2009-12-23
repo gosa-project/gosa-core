@@ -730,7 +730,6 @@ class listing {
   function getObjectType($types, $classes)
   {
     // Walk thru types and see if there's something matching
-    $types=array_reverse($types);
     foreach ($types as $objectType) {
       $ocs= $objectType['objectClass'];
       if (!is_array($ocs)){
