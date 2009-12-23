@@ -27,8 +27,8 @@ class aclManagement extends management
   var $plIcon  = "plugins/acl/images/plugin.png";
 
   // Tab definition 
-  protected $tabClass = "acltab";
-  protected $tabType = "ACLTABS";
+  protected $tabClass = "aclroletab";
+  protected $tabType = "ACLROLETABS";
   protected $aclCategory = "acl";
   protected $aclPlugin   = "acl";
   protected $objectName   = "acl";
@@ -39,7 +39,7 @@ class aclManagement extends management
     $this->ui = $ui;
    
     $this->storagePoints = array(get_ou("aclRoleRDN")); // ACLs are attached to department containers
- 
+
     // Build filter
 #    if (session::global_is_set(get_class($this)."_filter")){
 #      $filter= session::global_get(get_class($this)."_filter");
@@ -63,8 +63,36 @@ class aclManagement extends management
     }
 
     parent::__construct($config, $ui, "acl", $headpage);
-
   }
+
+
+  function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
+  {
+    $this->skipFooter = TRUE;
+    if(count($target) == 1){
+  
+      // Set dummy tab object...
+      $this->config->data['TABS'][$this->tabType] = NULL;
+      $this->dn = array_pop($target);
+      $headpage = $this->getHeadpage();
+      if($headpage->getType($this->dn) == "gosaRole"){
+        $altTabClass = "aclroletab";
+      }else{
+        $altTabClass = "acltab";
+      }
+      management::editEntry($action,array($this->dn),$all,$altTabClass,$altTabType,$altAclCategory);
+    }
+  }
+
+
+  function detectPostActions()
+  {
+    $action= management::detectPostActions();
+    if(isset($_POST['edit_acl'])) $action['action'] = "edit_acl";
+    if(isset($_POST['edit_role'])) $action['action'] = "edit_role";
+    return($action);
+  }
+  
 
   // A filter which allows to open a department by clicking on the departments name.
   static function filterLabel($row,$dn,$ou= array(),$pid=0,$base="")
@@ -78,7 +106,7 @@ class aclManagement extends management
     }
 
     $dn= LDAP::fix(func_get_arg(1));
-    return("<a href='?plug=".$_GET['plug']."&amp;PID=$pid&amp;act=listing_open_$row' title='$dn'>$ou</a>");
+    return("<a href='?plug=".$_GET['plug']."&amp;PID=$pid&amp;act=listing_edit_$row' title='$dn'>$ou</a>");
   }
 
 
