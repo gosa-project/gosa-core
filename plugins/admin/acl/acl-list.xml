@@ -30,7 +30,7 @@
   </definition>
 
   <table>
-    <layout>|16px||150px|170px;r|</layout>
+    <layout>|16px|200px||170px;r|</layout>
 
     <department>
       <value>%{filter:objectType(dn,objectClass)}</value>
@@ -49,7 +49,7 @@
       <label>Name</label>
       <sortAttribute>dn</sortAttribute>
       <sortType>string</sortType>
-      <value>%{filter:filterLabel(row,dn,"%s",ou,cn,pid,base)}</value>
+      <value>%{filter:filterLabel(row,dn,ou,cn,pid,base)}</value>
       <export>true</export>
     </column>
 

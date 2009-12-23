@@ -34,7 +34,6 @@
       <filter>(&amp;(|(objectClass=gosaAcl)(objectClass=gosaRole))(|(ou=*$NAME*)(description=*$NAME*)(cn=*$NAME*)))</filter>
       <attribute>ou</attribute>
       <attribute>cn</attribute>
-      <attribute>description</attribute>
       <frequency>0.5</frequency>
       <characters>3</characters>
     </autocomplete>

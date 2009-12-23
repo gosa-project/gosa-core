@@ -38,7 +38,7 @@ class aclManagement extends management
     $this->config = $config;
     $this->ui = $ui;
    
-    $this->storagePoints = array(); // ACLs are attached to department containers
+    $this->storagePoints = array(get_ou("aclRoleRDN")); // ACLs are attached to department containers
  
     // Build filter
 #    if (session::global_is_set(get_class($this)."_filter")){
@@ -67,16 +67,16 @@ class aclManagement extends management
   }
 
   // A filter which allows to open a department by clicking on the departments name.
-  static function filterLabel($row,$dn,$params,$ou= array(),$cn=array(),$pid=0,$base="")
+  static function filterLabel($row,$dn,$ou= array(),$pid=0,$base="")
   {
-    if(!isset($ou[0])){
-      $ou = $cn[0];
-    }else{
-      $ou = $ou[0];
-    }
+    $ou = $ou[0];
     if($dn == $base){
-      $ou =".";
+      $ou =" . ";
     }
+    if(!preg_match("/^cn=/",$dn)){
+      $ou.="  &nbsp; ["._("ACL Assignment")."]";
+    }
+
     $dn= LDAP::fix(func_get_arg(1));
     return("<a href='?plug=".$_GET['plug']."&amp;PID=$pid&amp;act=listing_open_$row' title='$dn'>$ou</a>");
   }
