@@ -47,9 +47,9 @@
 
     <column>
       <label>Name</label>
-      <sortAttribute>cn</sortAttribute>
+      <sortAttribute>ou</sortAttribute>
       <sortType>string</sortType>
-      <value>%{filter:link(row,dn,"%s",cn)}</value>
+      <value>%{filter:link(row,dn,"%s",ou)}</value>
       <export>true</export>
     </column>
 
