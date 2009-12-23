@@ -23,43 +23,34 @@
 /* Remove locks created by this plugin
 */
 if ($remove_lock){
-  if(session::is_set('macl')){
-	  $macl = session::get('macl');
-	  $macl->remove_lock();
+  if(session::is_set('aclManagement')){
+      $macl = session::get('aclManagement');
+      $macl->remove_lock();
   }
 }
 
 /* Remove this plugin from session
 */
 if ( $cleanup ){
-  session::un_set('macl');
+  session::un_set('aclManagement');
 }else{
 
-	$display= "No headpage yet for this module";
+  /* Create usermanagement object on demand */
+  if (!session::is_set('aclManagement')){
+    $aclManagement= new aclManagement ($config, $ui);
+    session::set('aclManagement',$aclManagement);
+  }
+  $aclManagement = session::get('aclManagement');
+  $display= $aclManagement->execute();
 
-	/* Create usermanagement object on demand */
-	if (!session::is_set('macl')){
-		session::set('macl',new aclManagement($config, $ui));
-	}
-	$macl = session::get('macl');
-	
-	/* Show and save dialog */
-	$macl->save_object();
-	$output= $macl->execute();
+  /* Reset requested? */
+  if (isset($_GET['reset']) && $_GET['reset'] == 1){
+    session::un_set ('aclManagement');
+  }
 
-	/* Page header*/
-	if (get_object_info() != ""){
-		$display= print_header(get_template_path('plugins/acl/images/plugin.png'), _("ACL management"), "<img alt=\"\" align=\"middle\" src=\"".get_template_path('images/lists/locked.png')."\"> ".LDAP::fix(get_object_info()));
-	} else {
-		$display= print_header(get_template_path('plugins/acl/images/plugin.png'), _("ACL management"));
-	}
-
-	/* Reset requested? */
-	if (isset($_GET['reset']) && $_GET['reset'] == 1){
-		session::un_set ('macl');
-	}
-
-	$display.= $output;
-	session::set('macl',$macl);
+  /* Show and save dialog */
+  session::set('aclManagement',$aclManagement);
 }
+
+// vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
