@@ -9,6 +9,9 @@ class filterACL {
     $flag= ($scope == "sub")?GL_SUBSEARCH:0;
     $result=array();
     $result= array_merge($result,filterACL::get_list($base, $filter, $attributes, $category, array(), $flag | GL_SIZELIMIT, "cat"));
+    if($scope == "sub"){
+      $result= array_merge($result,filterACL::get_list($base, $filter, $attributes, $category, array(), $flag | GL_SIZELIMIT, "search"));
+    }
     $result= array_merge($result,filterACL::get_list($base, $filter, $attributes, $category, $objectStorage, $flag | GL_SIZELIMIT, ""));
     return(filterACL::unifyResult($result));
   }
