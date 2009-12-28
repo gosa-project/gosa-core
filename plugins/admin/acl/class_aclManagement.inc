@@ -109,6 +109,15 @@ class aclManagement extends management
   }
 
 
+  function newEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
+  {
+    $this->skipFooter = TRUE;
+    $altTabClass = "aclroletab";
+    $altTabType = "ACLROLES";
+    $this->config->data['TABS'][$altTabType] =NULL;
+    management::newEntry($action,$target,$all,$altTabClass,$altTabType,$altAclCategory);
+  }
+
   function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
   {
     $this->config->data['TABS'][$this->tabClass] =NULL;

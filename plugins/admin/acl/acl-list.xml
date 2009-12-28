@@ -78,16 +78,10 @@
      <action>
       <name>new</name>
       <type>entry</type>
-      <image>plugins/users/images/list_new_user.png</image>
-      <label>Acl</label>
-     </action>
-
-     <action>
-      <name>new_role</name>
-      <type>entry</type>
-      <image>plugins/users/images/select_template.png</image>
+      <image>plugins/acl/images/role.png</image>
       <label>Role</label>
      </action>
+
     </action>
 
     <action>
