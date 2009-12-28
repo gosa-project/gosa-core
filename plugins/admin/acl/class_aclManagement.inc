@@ -28,7 +28,7 @@ class aclManagement extends management
 
   // Tab definition 
   protected $tabClass = "aclroletab";
-  protected $tabType = NULL;
+  protected $tabType = "ACLROLETAB";
   protected $aclCategory = "acl";
   protected $aclPlugin   = "acl";
   protected $objectName   = "acl";
@@ -68,11 +68,6 @@ class aclManagement extends management
   function removeEntryConfirmed($action="",$target=array(),$all=array(),
       $altTabClass="",$altTabType="",$altAclCategory="")
   {
-    $this->config->data['TABS'][$this->tabClass] =NULL;
-    $tabType = $this->tabType;
-    $tabClass = $this->tabClass;
-    $aclCategory = $this->aclCategory;
-
     @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$target,"Entry removel confirmed!");
 
     $headpage = $this->getHeadpage();
@@ -84,8 +79,10 @@ class aclManagement extends management
 
         if($headpage->getType($dn) == "gosaRole"){
           $tabClass = "aclroletab";
+          $tabTape  = "ACLROLETAB";
         }else{
           $tabClass = "acltab";
+          $tabTape  = "ACLTAB";
         }
 
         // Delete the object
@@ -114,13 +111,11 @@ class aclManagement extends management
     $this->skipFooter = TRUE;
     $altTabClass = "aclroletab";
     $altTabType = "ACLROLES";
-    $this->config->data['TABS'][$altTabType] =NULL;
     management::newEntry($action,$target,$all,$altTabClass,$altTabType,$altAclCategory);
   }
 
   function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
   {
-    $this->config->data['TABS'][$this->tabClass] =NULL;
     $this->skipFooter = TRUE;
     if(count($target) == 1){
   
@@ -129,8 +124,10 @@ class aclManagement extends management
       $headpage = $this->getHeadpage();
       if($headpage->getType($this->dn) == "gosaRole"){
         $altTabClass = "aclroletab";
+        $altTabType  = "ACLROLETAB";
       }else{
         $altTabClass = "acltab";
+        $altTabType  = "ACLTAB";
       }
       management::editEntry($action,array($this->dn),$all,$altTabClass,$altTabType,$altAclCategory);
     }
