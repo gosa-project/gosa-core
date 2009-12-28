@@ -79,7 +79,7 @@ class management
   // A list of configured actions/events
   protected $actions = array();
 
-  function  __construct($config,$ui,$plugname, $headpage)
+  function  __construct(&$config,$ui,$plugname, $headpage)
   {
     $this->plugname = $plugname;
     $this->headpage = $headpage;
