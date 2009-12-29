@@ -77,8 +77,9 @@ class log {
     if(!isset($this->config) && empty($entry['user'])){
       $entry['user']  = "unknown";
     }
- 
+
     /* Check if all given values are valid */
+    global $config;
     $msgs = @log::check($entry);
     if(count($msgs)){
       foreach($msgs as $msg){
@@ -86,7 +87,9 @@ class log {
         msg_dialog::display(_("Internal error"), sprintf(_("Logging failed: %s"), $msg), ERROR_DIALOG);
       }
     }else{
-      $this->log_into_syslog($entry);
+      if(is_object($config) && preg_match("/true/i",$config->get_cfg_value("logging",""))){
+        $this->log_into_syslog($entry);
+      }
     }
   }
 

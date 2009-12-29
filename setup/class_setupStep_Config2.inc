@@ -40,7 +40,7 @@ class Step_Config2 extends setup_step
                                   "snapshot_base"       => "ou=snapshots,%base%",
                                   "snapshot_user"       => "%admin%",
                                   "snapshot_password"   => "",
-                                  "logging"             => "syslog,mysql",
+                                  "logging"             => TRUE,
                                   "snapshot_server"     => "%connection%");
 
   var $samba_settings    = array( "samba_sid"        => "0-815-4711",
@@ -131,8 +131,7 @@ class Step_Config2 extends setup_step
     $smarty->assign("mail_methods",      reverse_html_entities($this->mail_methods));
     $smarty->assign("samba_settings",    reverse_html_entities($this->samba_settings));
 
-    $smarty->assign("logging_mysql" ,preg_match("/mysql/",$this->generic_settings['logging']));
-    $smarty->assign("logging_syslog",preg_match("/syslog/",$this->generic_settings['logging']));
+    $smarty->assign("logging",$this->generic_settings['logging']);
    
     $smarty->assign("bool",array(FALSE => _("No"), TRUE => _("Yes")));
     foreach($this->attributes as $attr){
@@ -161,14 +160,7 @@ class Step_Config2 extends setup_step
       }
 
       /* Get logging */
-      $logging = "";
-      if(isset($_POST['logging_syslog'])){
-        $logging.= "syslog,";
-      }
-      if(isset($_POST['logging_mysql'])){
-        $logging.= "mysql,";
-      }
-      $this->generic_settings['logging'] = trim($logging,",");
+      $this->generic_settings['logging'] =  isset($_POST['logging']);
 
       /* Mail settings */
       if(isset($_POST['vacationdir_active'])){

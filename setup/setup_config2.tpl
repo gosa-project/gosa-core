@@ -120,13 +120,14 @@
 
     <div class='step4_container'>
         <div class='step4_name'>
-            {t}Logging options{/t}
+            {t}GOsa logging{/t}
         </div>
         <div class='step4_value'>
-			<input type='checkbox' name='logging_syslog' value='1' 
-				{if $logging_syslog} checked {/if} class='center'>{t}Syslog{/t} 
-			<input type='checkbox' name='logging_mysql' value='1' 
-				{if $logging_mysql} checked {/if} class='center'>{t}MySQL{/t}
+          {if $logging} 
+            <input checked type='checkbox' name='logging' value='1' class='center'>
+          {else}
+            <input type='checkbox' name='logging' value='1' class='center'>
+          {/if}
         </div>
     </div>
 
