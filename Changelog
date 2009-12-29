@@ -4,10 +4,11 @@ GOsa2 changelog
 * gosa 2.6.7
   - Added more information to DHCP service dialog (thanks to Mathieu)
   - Fixed generation of kerberos host keys when DNS is enabled
+  - Added more checks for DNS zone records
   - Fixed template error message when no sshkey plugin is enabled
   - Speed up group and user removal by large factors
   - Fix Problem where arrays got shortened by one in copy and paste
-  - Added rSyslog plugin and service.
+  - Unified complete logging with rSyslog plugin and service
 
 * gosa 2.6.6
   - Added ssh public key management
