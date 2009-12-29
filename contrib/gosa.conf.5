@@ -241,14 +241,13 @@ for Sun DS based systems.
 The
 .I logging
 statement enables event logging on GOsa side. Setting it to 
-.I syslog,
-GOsa will log every action a user performs via syslog. Setting it to
-.I mysql,
-GOsa will log every action to a mysql server, defined in the
-GOsa systems plugin. Both values can be combined as a comma seperated
-list.
+.I true,
+GOsa will log every action a user performs via syslog. If you use
+rsyslog and configure it to mysql logging, you can browse all events
+within GOsa.
 
-GOsa will not log anything, if the logging value is empty.
+GOsa will not log anything, if the logging value is empty or set to
+false.
 .PP
 
 .B loginAttribute
