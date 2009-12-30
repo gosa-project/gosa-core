@@ -107,6 +107,54 @@ class departmentManagement extends management
   }
 
 
+
+  function removeEntryConfirmed($action="",$target=array(),$all=array(),
+      $altTabClass="",$altTabType="",$altAclCategory="")
+  {
+    $types= $this->get_support_departments();
+    $headpage = $this->getHeadpage();
+
+    $tabType = $this->tabType;
+    $tabClass = $this->tabClass;
+    $aclCategory = $this->aclCategory;
+    if(!empty($altTabClass)) $tabClass = $altTabClass;
+    if(!empty($altTabType)) $tabType = $altTabType;
+    if(!empty($altAclCategory)) $aclCategory = $altAclCategory;
+
+    @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$target,"Entry removel confirmed!");
+
+    foreach($this->dns as $key => $dn){
+
+      // Check permissions, are we allowed to remove this object?
+      $type = $headpage->getType($dn);
+      $tabType = $types[$type]['TAB'];
+    
+      $acl = $this->ui->get_permissions($dn, $this->aclCategory."/".$this->aclPlugin);
+      if(preg_match("/d/",$acl)){
+
+        // Delete the object
+        $this->dn = $dn;
+        $this->tabObject= new $tabClass($this->config,$this->config->data['TABS'][$tabType], $this->dn, $aclCategory, true, true);
+        $this->tabObject->set_acl_base($this->dn);
+        $this->tabObject->delete ();
+        $this->tabObject->parent = &$this;
+
+        // Remove the lock for the current object.
+        del_lock($this->dn);
+      } else {
+        msg_dialog::display(_("Permission error"), msgPool::permDelete(), ERROR_DIALOG);
+        new log("security","groups/".get_class($this),$dn,array(),"Tried to trick deletion.");
+      }
+    }
+
+    // Cleanup
+    $this->remove_lock();
+    $this->closeDialogs();
+  }
+
+
+
+
   // Overriden save handler - We've to take care about the department tagging here.
   protected function saveChanges()
   {
