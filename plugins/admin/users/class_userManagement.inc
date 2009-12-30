@@ -302,6 +302,17 @@ class userManagement extends management
     }
   }
 
+  function cancelEdit()
+  {
+    management::cancelEdit();
+
+    if(isset($this->last_tabObject->by_object['user']) && $this->last_tabObject->by_object['user']->password_change_needed()){
+      $this->force_hash_type[$this->last_tabObject->dn] = $this->last_tabObject->by_object['user']->pw_storage;
+      $this->pwd_change_queue[] = $this->last_tabObject->dn;
+      return($this->handlePasswordQueue());
+    }
+  }
+
 
   /*! \brief  Intiates user creation. 
    *          If we've user templates, then the user will be asked to use to use one. 
