@@ -320,7 +320,7 @@ function get_template_path($filename= '', $plugin= FALSE, $path= "")
   /* Return plugin dir or root directory? */
   if ($plugin){
     if ($path == ""){
-      $nf= preg_replace("!^".$BASE_DIR."/!", "", session::global_get('plugin_dir'));
+      $nf= preg_replace("!^".$BASE_DIR."/!", "", preg_replace('/^\.\.\//', '', session::global_get('plugin_dir')));
     } else {
       $nf= preg_replace("!^".$BASE_DIR."/!", "", $path);
     }
