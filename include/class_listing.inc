@@ -665,11 +665,18 @@ class listing {
     preg_match_all("/%\{filter:([^(]+)\((.*)\)\}/", $data, $matches, PREG_SET_ORDER);
 
     foreach ($matches as $match) {
-      if (!isset($this->filters[$match[1]])) {
-        continue;
+      $cl= "";
+      $method= "";
+      if (preg_match('/::/', $match[1])) {
+        $cl= preg_replace('/::.*$/', '', $match[1]);
+        $method= preg_replace('/^.*::/', '', $match[1]);
+      } else {
+        if (!isset($this->filters[$match[1]])) {
+          continue;
+        }
+        $cl= preg_replace('/::.*$/', '', $this->filters[$match[1]]);
+        $method= preg_replace('/^.*::/', '', $this->filters[$match[1]]);
       }
-      $cl= preg_replace('/::.*$/', '', $this->filters[$match[1]]);
-      $method= preg_replace('/^.*::/', '', $this->filters[$match[1]]);
 
       // Prepare params for function call
       $params= array();
