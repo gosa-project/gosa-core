@@ -256,6 +256,7 @@ class listing {
     }
   }
 
+
   function render()
   {
     // Check for exeeded sizelimit
@@ -271,25 +272,25 @@ class listing {
       $height= $this->height;
     }
     
-    $result.= "<div class='contentboxb' id='listing_container' style='border-top:1px solid #B0B0B0;'>\n";
-    $result.= "<table summary='$this->headline' style='width:600px;height:".$height."px;' cellspacing='0' id='t_scrolltable'>
-<tr><td class='scrollhead'><table summary='' style='width:100%;' cellspacing='0' id='t_scrollhead'>\n";
+    $result.= "<table cellpadding='0' cellspacing='0' border='0'><tr><td><div class='listContainer' id='d_scrollbody' style='border-top:1px solid #B0B0B0;width:700px;height:".($height+25)."px;'>\n";
+
+    $result.= "<table summary='$this->headline' style='width:100%; table-layout:fixed;' cellspacing='0' cellpadding='0' id='t_scrolltable'>\n";
     $this->numColumns= count($this->colprops) + ($this->multiSelect?1:0);
 
     // Build list header
-    $result.= "<tr>\n";
+    $result.= "<thead class='fixedListHeader listHeaderFormat'><tr>\n";
     if ($this->multiSelect) {
       $result.= "<td class='listheader' style='width:20px;'><input type='checkbox' id='select_all' name='select_all' title='"._("Select all")."' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' ></td>\n";
     }
     foreach ($this->header as $header) {
       $result.= $header;
     }
+    $result.= "</tr></thead>\n";
 
-    // Add 13px for scroller
-    $result.= "<td class='listheader' style='width:13px;border-right:0px;'>&nbsp;</td></table></td></tr>\n";
+    // Build list body
+    $result.= "<tbody class='listScrollContent listBodyFormat' id='t_nscrollbody' style='height:".$height."px;'>\n";
 
-    // New table for the real list contents
-    $result.= "<tr><td colspan='$this->numColumns' class='scrollbody'><div style='width:600px;height:".($height-20)."px;' id='d_scrollbody' class='scrollbody'><table summary='' style='height:100%;width:581px;table-layout:fixed;overflow:hidden;word-wrap:break-word;' cellspacing='0' id='t_scrollbody'>\n";
+###########################
 
     // No results? Just take an empty colspanned row
     if (count($this->entries) + count($this->departments) == 0) {
@@ -390,23 +391,23 @@ class listing {
       $result.= "</tr>";
     }
 
-    $result.= "</table></div></td></tr>";
+    // Close list
+    $result.= "</tbody></table></div></td></tr></table>";
 
     // Add the footer if requested
-    if ($this->showFooter) {
-      $result.= "<tr><td class='scrollhead'><table summary='' style='width:100%' cellspacing='0' id='t_scrollfoot'><tr><td class='listfooter' style='border-bottom:0px;'>";
+#################################
+    #if ($this->showFooter) {
+    #  $result.= "<tr><td class='scrollhead'><table summary='' style='width:100%' cellspacing='0' id='t_scrollfoot'><tr><td class='listfooter' style='border-bottom:0px;'>";
 
-      foreach ($this->objectTypes as $objectType) {
-        if (isset($this->objectTypeCount[$objectType['label']])) {
-          $label= _($objectType['label']);
-          $result.= "<img class='center' src='".$objectType['image']."' title='$label' alt='$label'>&nbsp;".$this->objectTypeCount[$objectType['label']]."&nbsp;&nbsp;&nbsp;&nbsp;";
-        }
-      }
+    #  foreach ($this->objectTypes as $objectType) {
+    #    if (isset($this->objectTypeCount[$objectType['label']])) {
+    #      $label= _($objectType['label']);
+    #      $result.= "<img class='center' src='".$objectType['image']."' title='$label' alt='$label'>&nbsp;".$this->objectTypeCount[$objectType['label']]."&nbsp;&nbsp;&nbsp;&nbsp;";
+    #    }
+    #  }
 
-      $result.= "<td class='listfooter' style='width:13px;border-right:0px;'>&nbsp;</td></table></td></tr>";
-    }
-
-    $result.= "</table></div>";
+    #  $result.= "<td class='listfooter' style='width:13px;border-right:0px;'>&nbsp;</td></table></td></tr>";
+    #}
 
     $smarty= get_smarty();
     $smarty->assign("usePrototype", "true");

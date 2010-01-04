@@ -368,6 +368,9 @@ function adjust_height(e) {
 		}
 
 		document.getElementById("d_scrollbody").style.height=suggested+"px";
+	        if (document.getElementById("t_nscrollbody")) {
+              		document.getElementById("t_nscrollbody").style.height=(suggested-24)+"px";
+                }
 	}
 	return true;
 }

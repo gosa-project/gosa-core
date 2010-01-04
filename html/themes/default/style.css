@@ -1859,3 +1859,57 @@ div.datepicker div.datepicker-footer {
         margin:0 0 0 3px;
         cursor:pointer;
 }
+
+/********************************
+ *           L i s t s          *
+ ********************************/
+
+/* List border */
+div.listContainer {
+	border-top: 1px solid #AAA;
+	border-bottom: 1px solid #AAA;
+	border-left: 1px solid #AAA;
+}
+
+.fixedListHeader tr {
+	position: relative;
+	height: auto;
+}
+
+.listHeaderFormat {
+	margin: 3px;
+	padding: 1px;
+	white-space: nowrap;
+}
+
+.listHeaderFormat tr td {
+	border-right: 1px solid #AAA;
+	padding: 2px;
+	background-color: #F5F5F5;
+}
+
+.listScrollContent {
+	height:100px;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+
+.listScrollContent tr {
+	height: auto;
+	white-space: nowrap;
+}
+
+.listScrollContent tr td:last-child {
+	padding-right: 20px;
+}
+
+.listBodyFormat tr td {
+	color: #000000;
+	margin: 3px;
+	padding: 1px;
+	border-right: 1px solid #AAA;
+	word-wrap:break-word;
+	white-space:normal;
+	overflow: hidden;
+	max-width:500px;
+}

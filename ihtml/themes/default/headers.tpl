@@ -17,6 +17,12 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
   <style type="text/css">@import url('themes/default/style.css');</style>
+  <!--[if IE]>
+  <style type="text/css">
+  div.listContainer { height: 121px; overflow-x:hidden; overflow-y:auto; }
+  </style>
+  <![endif]-->
+
   <link rel="shortcut icon" href="favicon.ico">
 
   <script language="javascript" src="include/events.js" type="text/javascript"></script>
