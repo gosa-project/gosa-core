@@ -274,7 +274,7 @@ class listing {
     
     $result.= "<table cellpadding='0' cellspacing='0' border='0'><tr><td><div class='listContainer' id='d_scrollbody' style='border-top:1px solid #B0B0B0;width:700px;height:".($height+25)."px;'>\n";
 
-    $result.= "<table summary='$this->headline' style='width:100%; table-layout:fixed;' cellspacing='0' cellpadding='0' id='t_scrolltable'>\n";
+    $result.= "<table summary='$this->headline' style='height:99%;width:100%; table-layout:fixed;' cellspacing='0' cellpadding='0' id='t_scrolltable'>\n";
     $this->numColumns= count($this->colprops) + ($this->multiSelect?1:0);
 
     // Build list header
