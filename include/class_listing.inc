@@ -280,7 +280,7 @@ class listing {
     // Build list header
     $result.= "<thead class='fixedListHeader listHeaderFormat'><tr>\n";
     if ($this->multiSelect) {
-      $result.= "<td class='listheader' style='width:20px;'><input type='checkbox' id='select_all' name='select_all' title='"._("Select all")."' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' ></td>\n";
+      $result.= "<td class='listheader' style='text-align:center;padding:0;width:24px;'><input type='checkbox' id='select_all' name='select_all' title='"._("Select all")."' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' ></td>\n";
     }
     foreach ($this->header as $header) {
       $result.= $header;
@@ -309,7 +309,7 @@ class listing {
 
         // Render multi select if needed
         if ($this->multiSelect) {
-          $result.="<td style='text-align:center;width:20px;' class='list1'>&nbsp;</td>";
+          $result.="<td style='text-align:center;width:24px;padding:0;' class='list1'>&nbsp;</td>";
         }
 
         // Render defined department columns, fill the rest with some stuff
