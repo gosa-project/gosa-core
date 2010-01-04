@@ -110,7 +110,7 @@ class aclManagement extends management
   {
     $this->skipFooter = TRUE;
     $altTabClass = "aclroletab";
-    $altTabType = "ACLROLES";
+    $altTabType = "ACLROLETAB";
     management::newEntry($action,$target,$all,$altTabClass,$altTabType,$altAclCategory);
   }
 
