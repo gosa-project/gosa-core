@@ -290,8 +290,6 @@ class listing {
     // Build list body
     $result.= "<tbody class='listScrollContent listBodyFormat' id='t_nscrollbody' style='height:".$height."px;'>\n";
 
-###########################
-
     // No results? Just take an empty colspanned row
     if (count($this->entries) + count($this->departments) == 0) {
       $result.= "<tr class='rowxp0'><td class='list1nohighlight' colspan='$this->numColumns' style='height:100%;border-right:0px;width:100%;'>&nbsp;</td></tr>";
@@ -391,23 +389,25 @@ class listing {
       $result.= "</tr>";
     }
 
-    // Close list
-    $result.= "</tbody></table></div></td></tr></table>";
+    // Close list body
+    $result.= "</tbody></table></div></td></tr>";
 
     // Add the footer if requested
-#################################
-    #if ($this->showFooter) {
-    #  $result.= "<tr><td class='scrollhead'><table summary='' style='width:100%' cellspacing='0' id='t_scrollfoot'><tr><td class='listfooter' style='border-bottom:0px;'>";
+    if ($this->showFooter) {
+      $result.= "<tr><td class='nlistFooter'>";
 
-    #  foreach ($this->objectTypes as $objectType) {
-    #    if (isset($this->objectTypeCount[$objectType['label']])) {
-    #      $label= _($objectType['label']);
-    #      $result.= "<img class='center' src='".$objectType['image']."' title='$label' alt='$label'>&nbsp;".$this->objectTypeCount[$objectType['label']]."&nbsp;&nbsp;&nbsp;&nbsp;";
-    #    }
-    #  }
+      foreach ($this->objectTypes as $objectType) {
+        if (isset($this->objectTypeCount[$objectType['label']])) {
+          $label= _($objectType['label']);
+          $result.= "<img class='center' src='".$objectType['image']."' title='$label' alt='$label'>&nbsp;".$this->objectTypeCount[$objectType['label']]."&nbsp;&nbsp;&nbsp;&nbsp;";
+        }
+      }
 
-    #  $result.= "<td class='listfooter' style='width:13px;border-right:0px;'>&nbsp;</td></table></td></tr>";
-    #}
+      $result.= "</td></tr>";
+    }
+
+    // Close list
+    $result.= "</table>";
 
     $smarty= get_smarty();
     $smarty->assign("usePrototype", "true");
