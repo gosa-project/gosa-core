@@ -663,8 +663,8 @@ class management
         @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dns,"Edit entry initiated!");
 
         // Now lock entries.
-        $tmp->lock_entries($this->ui->dn);
         if($tmp->multiple_available()){
+          $tmp->lock_entries($this->ui->dn);
           $this->tabObject = $tmp;
           set_object_info($this->tabObject->get_object_info());
         }
