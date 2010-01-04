@@ -306,7 +306,9 @@ class userManagement extends management
   {
     management::cancelEdit();
 
-    if(isset($this->last_tabObject->by_object['user']) && $this->last_tabObject->by_object['user']->password_change_needed()){
+    if(isset($this->last_tabObject->by_object['user']) && 
+        $this->last_tabObject->by_object['user']->dn != "new" &&  
+        $this->last_tabObject->by_object['user']->password_change_needed()){
       $this->force_hash_type[$this->last_tabObject->dn] = $this->last_tabObject->by_object['user']->pw_storage;
       $this->pwd_change_queue[] = $this->last_tabObject->dn;
       return($this->handlePasswordQueue());
@@ -365,7 +367,7 @@ class userManagement extends management
     $templates = array_merge($templates,$this->get_templates());
 
     // Display template selection
-    if (count($templates)){
+    if (count($templates) > 1){
       $smarty = get_smarty();
   
       // Set default variables, normally empty.
