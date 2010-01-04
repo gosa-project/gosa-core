@@ -1906,7 +1906,7 @@ div.listContainer {
 .listBodyFormat tr td {
 	color: #000000;
 	margin: 3px;
-	padding: 1px;
+	padding: 2px;
 	border-right: 1px solid #AAA;
 	word-wrap:break-word;
 	white-space:normal;
