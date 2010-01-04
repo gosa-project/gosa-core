@@ -887,6 +887,9 @@ class plugin
     /* FAIvariable=.../..., cn=.. 
         could not be saved, because the attribute FAIvariable was different to 
         the dn FAIvariable=..., cn=... */
+
+    if(!is_array($new['objectClass'])) $new['objectClass'] = array($new['objectClass']);
+
     if(in_array_ics("FAIdebconfInfo",$new['objectClass'])){
       $new['FAIvariable'] = $ldap->fix($new['FAIvariable']);
     }
