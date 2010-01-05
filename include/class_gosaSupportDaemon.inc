@@ -56,6 +56,9 @@ class gosaSupportDaemon
   {
     #FIXME: bad idea about referencing global variables from within classes
     global $config;
+    if(!isset($config) || !$config){
+      $config = session::global_get('config');
+    }
 
     // Detect timeout 
     if($timeout == null){
@@ -1143,6 +1146,9 @@ class gosaSupportDaemon
   function clean_queue_from_mac($mac)
   {
     global $config;
+    if(!isset($config) || !$config){
+      $config = session::global_get('config');
+    }
 
     /* First of all we have to check which jobs are startet 
      *  for $mac 
