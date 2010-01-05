@@ -704,40 +704,43 @@ class listing {
         // Row is replaced by the row number
         if ($param == "row") {
           $params[]= $row;
+          continue;
         }
 
         // pid is replaced by the current PID
         if ($param == "pid") {
           $params[]= $this->pid;
+          continue;
         }
 
         // base is replaced by the current base
         if ($param == "base") {
           $params[]= $this->getBase();
+          continue;
         }
 
         // Fixie with "" is passed directly
         if (preg_match('/^".*"$/', $param)){
           $params[]= preg_replace('/"/', '', $param);
+          continue;
+        }
+
+        // Move dn if needed
+        if ($param == "dn") {
+          $params[]= LDAP::fix($config["dn"]);
+          continue;
         }
 
         // LDAP variables get replaced by their objects
         for ($i= 0; $i<$config['count']; $i++) {
-          if ($config[$i] == 'dn') {
-            continue;
-          }
           if ($param == $config[$i]) {
             $values= $config[$config[$i]];
             if (is_array($values)){
               unset($values['count']);
             }
             $params[]= $values;
+            break;
           }
-        }
-
-        // Move dn if needed
-        if ($param == "dn") {
-          $params[]= LDAP::fix($config["dn"]);
         }
       }
 
