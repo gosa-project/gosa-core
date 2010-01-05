@@ -463,6 +463,7 @@ class listing {
       if (preg_match('/^department_([0-9]+)$/', validate($_GET['act']), $match)){
         if (isset($this->departments[$match[1]])){
           $this->base= $this->departments[$match[1]]['dn'];
+          session::global_set("CurrentMainBase", $this->base);
         }
       }
     }
