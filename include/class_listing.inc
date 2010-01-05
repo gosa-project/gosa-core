@@ -264,6 +264,13 @@ class listing {
       return($message);
     }
 
+    // Some browsers don't have the ability do do scrollable table bodies, filter them
+    // here.
+    $switch= false;
+    if (preg_match('/(Opera|Konqueror|Safari)/i', $_SERVER['HTTP_USER_AGENT'])){
+      $switch= true;
+    }
+
     // Initialize list
     $result= "<input type='hidden' value='$this->pid' name='PID'>\n";
     $height= 450;
@@ -272,15 +279,23 @@ class listing {
       $height= $this->height;
     }
     
-    $result.= "<table cellpadding='0' cellspacing='0' border='0'><tr><td><div class='listContainer' id='d_scrollbody' style='border-top:1px solid #B0B0B0;width:700px;height:".($height+25)."px;'>\n";
+    $result.= "<table cellpadding='0' cellspacing='0' border='0'><tr><td><div class='listContainer' id='d_scrollbody' style='border-top:1px solid #B0B0B0;width:700px;min-height:".($height+25)."px;'>\n";
 
-    $result.= "<table summary='$this->headline' style='height:99%;width:100%; table-layout:fixed;' cellspacing='0' cellpadding='0' id='t_scrolltable'>\n";
+    $height= "";
+    if ($switch){
+      $height= "height:100%;";
+    }
+    $result.= "<table summary='$this->headline' style='${height}width:100%; table-layout:fixed;' cellspacing='0' cellpadding='0' id='t_scrolltable'>\n";
     $this->numColumns= count($this->colprops) + ($this->multiSelect?1:0);
 
     // Build list header
     $result.= "<thead class='fixedListHeader listHeaderFormat'><tr>\n";
     if ($this->multiSelect) {
-      $result.= "<td class='listheader' style='text-align:center;padding:0;width:24px;'><input type='checkbox' id='select_all' name='select_all' title='"._("Select all")."' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' ></td>\n";
+      $width= "24px";
+      if (preg_match('/Konqueror/i', $_SERVER['HTTP_USER_AGENT'])){
+        $width= "28px";
+      }
+      $result.= "<td class='listheader' style='text-align:center;padding:0;width:$width;'><input type='checkbox' id='select_all' name='select_all' title='"._("Select all")."' onClick='toggle_all_(\"listing_selected_[0-9]*$\",\"select_all\");' ></td>\n";
     }
     foreach ($this->header as $header) {
       $result.= $header;
@@ -309,7 +324,7 @@ class listing {
 
         // Render multi select if needed
         if ($this->multiSelect) {
-          $result.="<td style='text-align:center;width:24px;padding:0;' class='list1'>&nbsp;</td>";
+          $result.="<td style='text-align:center;padding:0;' class='list1'>&nbsp;</td>";
         }
 
         // Render defined department columns, fill the rest with some stuff
@@ -414,6 +429,7 @@ class listing {
     $smarty->assign("FILTER", $this->filter->render());
     $smarty->assign("SIZELIMIT", print_sizelimit_warning());
     $smarty->assign("LIST", $result);
+    $smarty->assign("list_workaround", $switch?"<input type='hidden' id='list_workaround'>":"");
 
     // Assign navigation elements
     $nav= $this->renderNavigation();

@@ -367,9 +367,11 @@ function adjust_height(e) {
 			suggested = suggested -20;
 		}
 
-		document.getElementById("d_scrollbody").style.height=suggested+"px";
+	        if (!document.getElementById("list_workaround")) {
+		  document.getElementById("d_scrollbody").style.height=suggested+20+"px";
+                }
 	        if (document.getElementById("t_nscrollbody")) {
-              		document.getElementById("t_nscrollbody").style.height=(suggested-24)+"px";
+              		document.getElementById("t_nscrollbody").style.height=(suggested-22)+"px";
                 }
 	}
 	return true;
