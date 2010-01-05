@@ -423,13 +423,13 @@ class listing {
 
     // Close list
     $result.= "</table>";
+    $result.= $switch?"<input type='hidden' id='list_workaround'>":"";
 
     $smarty= get_smarty();
     $smarty->assign("usePrototype", "true");
     $smarty->assign("FILTER", $this->filter->render());
     $smarty->assign("SIZELIMIT", print_sizelimit_warning());
     $smarty->assign("LIST", $result);
-    $smarty->assign("list_workaround", $switch?"<input type='hidden' id='list_workaround'>":"");
 
     // Assign navigation elements
     $nav= $this->renderNavigation();
