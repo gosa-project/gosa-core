@@ -370,9 +370,11 @@ function adjust_height(e) {
 	        if (!document.getElementById("list_workaround")) {
 		  document.getElementById("d_scrollbody").style.height=suggested+"px";
                 } else {
-                  current_height= parseInt(document.defaultView.getComputedStyle(document.getElementById("t_nscrollbody"),"").getPropertyValue('height'));
-                  if (current_height < menu_height) {
-		    document.getElementById("d_scrollbody").style.height=suggested+20+"px";
+		  if (browserType != "ie") {
+                    current_height= parseInt(document.defaultView.getComputedStyle(document.getElementById("t_nscrollbody"),"").getPropertyValue('height'));
+                    if (current_height < menu_height) {
+  		      document.getElementById("d_scrollbody").style.height=suggested+20+"px";
+                    }
                   }
                 }
 	        if (document.getElementById("t_nscrollbody")) {
