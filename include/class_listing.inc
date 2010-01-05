@@ -1500,6 +1500,17 @@ class listing {
   }
 
 
+  function getEntry($dn)
+  {
+    foreach ($this->entries as $entry) {
+      if (isset($entry['dn']) && strcasecmp($dn, $entry['dn'])){
+        return $entry;
+      }
+    }
+    return null;
+  }
+
+
   function getType($dn)
   {
     if (isset($this->objectDnMapping[$dn])) {
