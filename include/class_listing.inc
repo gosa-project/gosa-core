@@ -1506,7 +1506,7 @@ class listing {
   function getEntry($dn)
   {
     foreach ($this->entries as $entry) {
-      if (isset($entry['dn']) && strcasecmp($dn, $entry['dn'])){
+      if (isset($entry['dn']) && strcasecmp($dn, $entry['dn']) == 0){
         return $entry;
       }
     }
