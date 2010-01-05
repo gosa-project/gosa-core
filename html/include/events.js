@@ -10,6 +10,9 @@ function OnKeyPress()
 function OnLoad()
 {
 	adjust();
+        if(document['loadHandler']) {
+               loadHandler();
+        }
 }
 
 function OnResize()
