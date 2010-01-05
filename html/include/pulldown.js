@@ -60,6 +60,7 @@ MenuContainer.prototype = {
 
 	init: function(idOrElement, parent) {
 	  this.element = $(idOrElement);
+          if (!this.element) return;
 	  this.parent = parent;
 	  this.parentMenu = (this.type == "menuContainer") ? ((parent) ? parent.parent : null) : parent;
 	  this.root = parent instanceof Menu ? parent : parent.root;
