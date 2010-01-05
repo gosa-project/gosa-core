@@ -723,6 +723,9 @@ class listing {
 
         // LDAP variables get replaced by their objects
         for ($i= 0; $i<$config['count']; $i++) {
+          if ($config[$i] == 'dn') {
+            continue;
+          }
           if ($param == $config[$i]) {
             $values= $config[$config[$i]];
             if (is_array($values)){
