@@ -335,8 +335,8 @@ class management
         $this->dn = $dn;
         $this->tabObject= new $tabClass($this->config,$this->config->data['TABS'][$tabType], $this->dn, $aclCategory, true, true);
         $this->tabObject->set_acl_base($this->dn);
-        $this->tabObject->delete ();
         $this->tabObject->parent = &$this;
+        $this->tabObject->delete ();
 
         // Remove the lock for the current object.
         del_lock($this->dn);        
@@ -850,6 +850,59 @@ class management
     $this->filter = $str;
   }
 
+
+  function postcreate() {
+    $this->_handlePostEvent('POSTCREATE');
+  }
+  function postmodify(){
+    $this->_handlePostEvent('POSTMODIFY');
+  }
+  function postremove(){
+    $this->_handlePostEvent('POSTREMOVE');
+  }
+
+  function _handlePostEvent($type)
+  {
+
+    /* Find postcreate entries for this class */
+    $command= $this->config->search(get_class($this), $type,array('menu', 'tabs'));
+    if ($command != ""){
+
+      /* Walk through attribute list */
+      foreach ($this->attributes as $attr){
+        if (!is_array($this->$attr)){
+          $add_attrs[$attr] = $this->$attr;
+        }
+      }
+      $add_attrs['dn']=$this->dn;
+
+      $tmp = array();
+      foreach($add_attrs as $name => $value){
+        $tmp[$name] =  strlen($name);
+      }
+      arsort($tmp);
+
+      /* Additional attributes */
+      foreach ($tmp as $name => $len){
+        $value = $add_attrs[$name];
+        $command= str_replace("%$name", "$value", $command);
+      }
+
+      if (check_command($command)){
+        @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
+            $command, "Execute");
+        exec($command,$arr);
+        foreach($arr as $str){
+          @DEBUG (DEBUG_SHELL, __LINE__, __FUNCTION__, __FILE__,
+              $command, "Result: ".$str);
+        }
+      } else {
+        $message= msgPool::cmdnotfound($type, get_class($this));
+        msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
+      }
+    }
+
+  }
 }
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
