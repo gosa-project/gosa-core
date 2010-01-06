@@ -79,6 +79,9 @@ class management
   // A list of configured actions/events
   protected $actions = array();
 
+  // Attributes managed by this plugin, can be used in post events;
+  protected $attributes = array(); 
+
   function  __construct(&$config,$ui,$plugname, $headpage)
   {
     $this->plugname = $plugname;
