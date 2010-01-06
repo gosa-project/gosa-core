@@ -1146,7 +1146,9 @@ class listing {
       // Check for special types
       switch ($action['type']) {
         case 'copypaste':
-          $result.= $this->renderCopyPasteMenu($separator);
+          $cut = !isset($action['cut']) || $action['cut'] != "false";
+          $copy = !isset($action['copy']) || $action['copy'] != "false";
+          $result.= $this->renderCopyPasteMenu($separator, $copy , $cut);
           break;
 
         case 'snapshot':
