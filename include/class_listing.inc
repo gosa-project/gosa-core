@@ -881,7 +881,9 @@ class listing {
         }
 
         if ($action['type'] == "copypaste") {
-          $result.= $this->renderCopyPasteActions($row, $this->entries[$row]['dn'], $category, $class);
+          $copy = !isset($action['copy']) || $action['copy'] == "true";
+          $cut = !isset($action['cut']) || $action['cut'] == "true";
+          $result.= $this->renderCopyPasteActions($row, $this->entries[$row]['dn'], $category, $class,$copy,$cut);
         } else {
           $result.= $this->renderSnapshotActions($row, $this->entries[$row]['dn'], $category, $class);
         }
