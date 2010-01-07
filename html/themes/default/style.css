@@ -1923,3 +1923,45 @@ td.nlistFooter {
 	height:16px;
 }
 
+/* Sortable Lists */
+div.sortableListContainer {
+    border: 1px solid #AAA;
+    overflow: auto;
+}
+
+.sortableListContainer th{
+    background-color: #D8D8D8;
+    padding: 3px;
+    text-align:left;
+    border-left:1px solid #AAA;
+}
+
+.sortableListContainer td{
+    padding: 3px;
+    text-align:left;
+    border-left:1px solid #AAA;
+}
+
+tr.sortableListItem {
+    background-color: white;
+    cursor:move;
+}
+
+tr.sortableListItemOdd {
+    background-color: #F5F5F5;
+    cursor:move;
+}
+
+table.sortableListTable {
+    border: 0px;
+}
+
+div.dropmarker {
+      height:1px;
+      border-top:1px solid #A00;
+      color: #fff;
+      z-index:1000;
+      margin : 0 0 0 0;
+}
+
+
