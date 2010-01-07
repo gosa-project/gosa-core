@@ -34,6 +34,9 @@ if (!session::global_is_set('ui')){
   exit;
 }
 
+$config = session::global_get('config');
+$ui = session::global_get('ui');
+
 /* Is there a filter object arround? */
 if (session::is_set("autocomplete")){
   $filter= session::get("autocomplete");
