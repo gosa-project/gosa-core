@@ -1951,6 +1951,10 @@ tr.sortableListItemOdd {
     background-color: #F5F5F5;
     cursor:move;
 }
+tr.sortableListItem:hover, tr.sortableListItemOdd:hover {
+    background-color: #EEE;
+}
+
 
 table.sortableListTable {
     border: 0px;
