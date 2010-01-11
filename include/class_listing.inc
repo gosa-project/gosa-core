@@ -854,8 +854,13 @@ class listing {
             $result.= "<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
             continue;
           }
-        } else {
+        } elseif (is_string($objectclass)) {
           if(!in_array($objectclass, $classes)) {
+            $result.= "<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
+            continue;
+          }
+        } elseif (is_array($objectclass)) {
+          if(count(array_intersect($objectclass, $classes)) == count($objectclass)){
             $result.= "<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
             continue;
           }
