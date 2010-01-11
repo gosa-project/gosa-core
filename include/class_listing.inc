@@ -860,7 +860,7 @@ class listing {
             continue;
           }
         } elseif (is_array($objectclass)) {
-          if(count(array_intersect($objectclass, $classes)) == count($objectclass)){
+          if(count(array_intersect($objectclass, $classes)) != count($objectclass)){
             $result.= "<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
             continue;
           }
