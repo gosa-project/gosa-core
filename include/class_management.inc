@@ -746,6 +746,7 @@ class management
     $this->dns = array();
     $this->tabObject = null;
     $this->dialogObject = null;
+    $this->skipFooter = FALSE;
     set_object_info();
   }
 
