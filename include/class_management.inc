@@ -58,7 +58,7 @@ class management
   protected $last_dialogObject = null;
 
   // Whether to display the apply button or not
-  protected $displayApplyBtn = "";
+  protected $displayApplyBtn = FALSE;
 
   // Whether to display a footer or not.
   protected $skipFooter = false;
