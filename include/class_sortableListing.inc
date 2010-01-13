@@ -31,7 +31,7 @@ class sortableListing {
 
   private $data= array();
   private $columns= 0;
-  private $deletable= false;
+  private $deleteable= false;
   private $editable= false;
   private $instantDelete= true;
   private $action;
@@ -49,7 +49,7 @@ class sortableListing {
 
     // Generate instance wide unique ID
     $tmp= gettimeofday();
-    $this->id= 'l'.md5($t['sec']);
+    $this->id= 'l'.md5($tmp['sec']);
   }
 
 
@@ -133,6 +133,7 @@ class sortableListing {
     $delete_image= $this->deleteable?"<input class='center' type='image' src='images/lists/trash.png' alt='"._("Delete")."' name='%ID' title='"._("Delete this entry")."'>":"";
 
     // Do we need colspecs?
+    $action_width= ($this->editable?20:0) + ($this->deleteable?20:0);
     if ($this->colspecs) {
       $result.= " <colgroup>\n";
       for ($i= 0; $i<$this->columns; $i++) {
@@ -140,7 +141,6 @@ class sortableListing {
       }
 
       // Extend by another column if we've actions specified
-      $action_width= ($this->editable?20:0) + ($this->deleteable?20:0);
       if ($action_width) {
         $result.= "  <col width='$action_width'/>\n";
       }
