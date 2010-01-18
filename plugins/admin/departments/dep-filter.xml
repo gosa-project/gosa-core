@@ -32,6 +32,9 @@
       <backend>LDAP</backend>
       <filter>(&amp;(objectClass=gosaDepartment)(|(ou=*$NAME*)(dc=*$NAME*)(l=*$NAME*)(c=*$NAME*)))</filter>
       <attribute>cn</attribute>
+      <attribute>dc</attribute>
+      <attribute>c</attribute>
+      <attribute>l</attribute>
       <frequency>0.5</frequency>
       <characters>3</characters>
     </autocomplete>
