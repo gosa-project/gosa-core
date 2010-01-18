@@ -30,6 +30,7 @@ class sortableListing {
   private $id;
 
   private $data= array();
+  private $displayData= array();
   private $columns= 0;
   private $deleteable= false;
   private $editable= false;
@@ -40,12 +41,23 @@ class sortableListing {
   private $current_mapping;
   private $active_index;
 
-  function sortableListing($data= array())
+  private $acl= "";
+  private $modified= false;
+
+  function sortableListing($data= array(), $displayData= null)
   {
     global $config;
 
     // Save data to display
     $this->setData($data);
+    if (!$displayData) {
+      $displayData= array();
+      foreach ($data as $value) {
+        $displayData[]= array($value);
+      }
+    } else {
+      $this->setDisplayData($displayData);
+    }
 
     // Generate instance wide unique ID
     $tmp= gettimeofday();
@@ -55,19 +67,26 @@ class sortableListing {
 
   function setData($data)
   {
+    $this->data= $data;
+  }
+
+
+  function setDisplayData($data)
+  {
     if (!is_array($data)) {
       die ("sortableList needs an array as data!");
     }
 
     // Transfer information
-    $this->data= $data;
+    $this->displayData= $data;
 
     // Create initial mapping
     $this->mapping= array_keys($data);
+    $this->current_mapping= $this->mapping;
 
     // Find the number of coluns
-    reset($this->data);
-    $first= current($this->data);
+    reset($this->displayData);
+    $first= current($this->displayData);
     if (is_array($first)) {
       $this->columns= count($first);
     } else {
@@ -129,8 +148,16 @@ class sortableListing {
     $result= "<div class='sortableListContainer' id='scroll_".$this->id."' style='width: ".$this->width."; height: ".$this->height."'>\n";
     $result.= "<table border='0' cellpadding='0' cellspacing='0' width='100%' height='100%' style='position: relative;'".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">\n";
     $action_width= 0;
-    $edit_image= $this->editable?"<input class='center' type='image' src='images/lists/edit.png' alt='"._("Edit")."' name='%ID' title='"._("Edit this entry")."'>":"";
-    $delete_image= $this->deleteable?"<input class='center' type='image' src='images/lists/trash.png' alt='"._("Delete")."' name='%ID' title='"._("Delete this entry")."'>":"";
+    if (strpos($this->acl, 'w') === false) {
+      $edit_image= $this->editable?"<img class='center' src='images/lists/edit-grey.png' alt='"._("Edit")."'>":"";
+    } else {
+      $edit_image= $this->editable?"<input class='center' type='image' src='images/lists/edit.png' alt='"._("Edit")."' name='%ID' title='"._("Edit this entry")."'>":"";
+    }
+    if (strpos($this->acl, 'd') === false) {
+      $delete_image= $this->deleteable?"<img class='center' src='images/lists/trash-grey.png' alt='"._("Delete")."'>":"";
+    } else {
+      $delete_image= $this->deleteable?"<input class='center' type='image' src='images/lists/trash.png' alt='"._("Delete")."' name='%ID' title='"._("Delete this entry")."'>":"";
+    }
 
     // Do we need colspecs?
     $action_width= ($this->editable?20:0) + ($this->deleteable?20:0);
@@ -159,18 +186,22 @@ class sortableListing {
       $result.= "\n  </tr>\n </thead>\n";
     }
 
-    // Render table body
+    // Render table body if we've read permission
     $result.= " <tbody id='".$this->id."'>\n";
-    foreach ($this->mapping as $nr => $row) {
-      $result.= "  <tr class='sortableListItem".($nr&1?'Odd':'')."' id='item_".$this->id."_$nr'>\n";
-      foreach ($this->data[$row] as $column) {
-        $result.= "   <td>".htmlentities($column)."</td>\n";
+    if (strpos($this->acl, 'r') !== false) {
+      foreach ($this->mapping as $nr => $row) {
+        $result.= "  <tr class='sortableListItem".($nr&1?'Odd':'')."' id='item_".$this->id."_$nr'>\n";
+        foreach ($this->displayData[$row] as $column) {
+          $result.= "   <td>".htmlentities($column)."</td>\n";
+        }
+        if ($action_width) {
+          $result.= "<td>".str_replace('%ID', "edit_".$this->id."_$nr", $edit_image).
+                           str_replace('%ID', "del_".$this->id."_$nr", $delete_image)."</td>";
+        }
+        $result.= "  </tr>\n";
       }
-      if ($action_width) {
-        $result.= "<td>".str_replace('%ID', "edit_".$this->id."_$nr", $edit_image).
-                         str_replace('%ID', "del_".$this->id."_$nr", $delete_image)."</td>";
-      }
-      $result.= "  </tr>\n";
+    } else {
+      $result.= "  <tr class='sortableListItem' style='height:100%'></tr>\n";
     }
 
     $result.= " </tbody>\n</table>\n</div>\n";
@@ -194,8 +225,8 @@ class sortableListing {
 
   function update()
   {
-    // Do not do anything if we're not posted
-    if (isset($_POST['reorder_'.$this->id])){
+    // Do not do anything if we're not posted - or have no permission
+    if (strpos($this->acl, 'w') !== false && isset($_POST['reorder_'.$this->id])){
 
       // Move requested?
       $move= $_POST['reorder_'.$this->id];
@@ -208,10 +239,13 @@ class sortableListing {
         }
         $this->mapping= $tmp;
         $this->current_mapping= $matches[1];
+        $this->modified= true;
         return;
       }
+    }
 
-      // Delete requested?
+    // Delete requested?
+    if (strpos($this->acl, 'd') !== false){
       foreach ($_POST as $key => $value) {
         if (preg_match('/^del_'.$this->id.'_([0-9]+)_x.*$/', $key, $matches)) {
           $this->active_index= $this->mapping[$matches[1]];
@@ -221,15 +255,16 @@ class sortableListing {
           }
         }
       }
+    }
 
-      // Edit requested?
+    // Edit requested?
+    if (strpos($this->acl, 'w') !== false){
       foreach ($_POST as $key => $value) {
         if (preg_match('/^edit_'.$this->id.'_([0-9]+)_x.*$/', $key, $matches)) {
           $this->active_index= $this->mapping[$matches[1]];
           $this->action= "edit";
         }
       }
-
     }
   }
 
@@ -255,12 +290,37 @@ class sortableListing {
 
   function deleteEntry($id)
   {
+    // Remove mapping
     $index= array_search($id, $this->mapping);
     if ($index !== false) {
       unset($this->mapping[$index]);
-      $this->mappings= array_values($this->mappings);
+      $this->mapping= array_values($this->mapping);
+      $this->modified= true;
     }
   }
 
+
+  function getMaintainedData()
+  {
+    $tmp= array();
+
+    foreach ($this->mapping as $src => $dst) {
+      $tmp[$src]= $this->data[$dst];
+    }
+
+    return $tmp;
+  }
+
+
+  function isModified()
+  {
+    return $this->modified;
+  }
+
+
+  function setAcl($acl)
+  {
+    $this->acl= $acl;
+  }
 
 }
