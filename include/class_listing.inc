@@ -447,7 +447,15 @@ class listing {
     // Assign summary
     $smarty->assign("HEADLINE", $this->headline);
 
-    return ($smarty->fetch(get_template_path($this->xmlData['definition']['template'], true)));
+    // Try to load template from plugin the folder first...
+    $file = get_template_path($this->xmlData['definition']['template'], true);
+
+    // ... if this fails, try to load the file from the theme folder.
+    if(!file_exists($file)){
+      $file = get_template_path($this->xmlData['definition']['template']);
+    }
+
+    return ($smarty->fetch($file));
   }
 
 

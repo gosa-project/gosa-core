@@ -351,8 +351,16 @@ class filter {
       $smarty->assign("$tag", $htmlCode);
     }
 
+    // Try to load template from plugin the folder first...
+    $file = get_template_path($this->xmlData['definition']['template'], true);
+
+    // ... if this fails, try to load the file from the theme folder.
+    if(!file_exists($file)){
+      $file = get_template_path($this->xmlData['definition']['template']);
+    }
+
     // Load template
-    return ("<input type='hidden' name='FILTER_PID' value='".$this->pid."'>".$smarty->fetch(get_template_path($this->xmlData['definition']['template'], true)));
+    return ("<input type='hidden' name='FILTER_PID' value='".$this->pid."'>".$smarty->fetch($file));
   }
 
 
