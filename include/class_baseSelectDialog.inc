@@ -20,81 +20,84 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-class baseSelectDialog extends MultiSelectWindow
+class baseSelectDialog extends management
 {
-  var $selectedBase        = ""; // Used for navigation 
-  var $base_selection_regex = "*"; // Used regex ... 
-  var $BaseToUse         = false;  // used to specify the selected base, 
-                                      // false if none is selected
+  // The plugin description
+  public $plugname      = "Base";
+  public $plIcon        = "plugins/departments/images/plugin.png";
+  public $plDescription = "Choose a base";
+  public $plHeadline    = "Base";
 
-  var $allowedBases         = array();
-  var $parent               = NULL;
- 
-  function baseSelectDialog (&$config,$parent,$onlyAllowThisBases = array())
-  {
-    $module= "department";
-    MultiSelectWindow::MultiSelectWindow($config, "BASEselectWindow", $module);
-   
-    $this->parent = $parent;
- 
-    $this->selectedBase = $config->current['BASE'];
-    $this->allowedBases  = $onlyAllowThisBases;
+  protected $skipHeader = TRUE;
+  protected $allowedBases = array();
 
-    $this->SetTitle("Base");
-    $this->SetSummary(_("Choose a base"));
-    $this->SetListHeader("<div style='background:#F0F0F9;padding:5px;'>".
-        " <input class='center' type='image' src='images/lists/root.png' align='middle'
-        title='"._("Go to root department")."' name='dep_root' alt='"._("Root")."'>&nbsp;".
-        " <input class='center' type='image' align='middle' src='images/lists/back.png'
-        title='"._("Go up one department")."' alt='"._("Up")."' name='dep_back'>&nbsp;".
-        " <input class='center' type='image' align='middle' src='images/lists/home.png'
-        title='"._("Go to users department")."' alt='"._("Home")."' name='dep_home'>&nbsp;".
-        " <input class='center' type='image' src='images/lists/reload.png' align='middle' title='"._("Reload list")."' name='submit_department' alt='"._("Submit")."'>&nbsp;".
-        "</div>");
+  // #FIXME  -  Updated plugins to use a function instead of the public class var. 
+  public $BaseToUse = "";
 
-    $this->SetInformation(_("Step in the prefered tree and click save to use the current subtree as base. Or click the image at the end of each entry."));
+  function __construct (&$config,$parent,$onlyAllowThisBases = array())
+  { 
+    $this->config = $config;
+    $this->ui = get_userinfo();
+    $this->allowedBases = $onlyAllowThisBases;
 
-    $this->EnableAplhabet   (true);
-    $this->EnableCloseButton(true);
-    $this->EnableSaveButton (true);
+#    // Build filter
+#    if (session::global_is_set(get_class($this)."_filter")){
+#      $filter= session::global_get(get_class($this)."_filter");
+#    } else {
+      $filter = new filter(get_template_path("dep-filter.xml"));
+#    }
+    $this->setFilter($filter);
 
-    $this->SetSaveButtonString(_("Use"));
-    $this->SetCloseButtonString(_("Cancel"));
-
-    $this->AddHeader(array("string"=>"&nbsp;","attach"=>"style='width:20px;'"));
-    $this->AddHeader(array("string"=>_("Base")));
-
-    /*                  Name                 ,Text                              ,Default  , Connect with alphabet  */
-    $this->AddRegex   ("base_selection_regex",_("Filter entries with this syntax"),"*"      , true);
+    // Build headpage
+    $headpage = new listing(get_template_path("dep-list.xml"));
+    $headpage->registerElementFilter("depLabel", "baseSelectDialog::filterDepLabel");
+    $headpage->setFilter($filter);
+    parent::__construct($config, $this->ui, "departments", $headpage);
   }
 
-  function execute()
+
+  // A filter which allows to open a department by clicking on the departments name.
+  static function filterDepLabel($row,$dn,$params,$ou,$pid,$base)
   {
-    $this->ClearElementsList();
-    $this->AddDepartments($this->selectedBase,2);
-    return($this->Draw());
+    $ou = $ou[0];
+    if($dn == $base){
+      $ou =".";
+    }
+    $dn= LDAP::fix(func_get_arg(1));
+    return("<a href='?plug=".$_GET['plug']."&amp;PID=$pid&amp;act=listing_open_$row' title='$dn'>$ou</a>");
   }
 
-  function setEntries()
+  
+  function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
   {
-    // Do nothing here 
+    if(count($target) == 1){
+      $this->BaseToUse = array_pop($target);
+    }
   }
 
-  function Save()
+  function save_object()
   {
-    MultiSelectWindow :: Save();  
-    $this->BaseToUse = $this->selectedBase;
+    // Damn ... , we've to call post detection manually & thus twice ...
+    // #FIXME - We should fix the class handling in the plugins to match the class_management style.
+    //        - save_object isn't needed anymore, just call execute...
+    $this->handleActions($this->detectPostActions());
   }
 
-  function isSelected() 
+  function isClosed()
   {
-    return($this->BaseToUse);
+    return(!empty($this->BaseToUse));
   }
 
-  function setCurrentBase($base)
-  {
-    $this->selectedBase = $base;
-  }
+ function isSelected() 
+ {
+   return($this->BaseToUse);
+ }
+
+ function setCurrentBase($base)
+ {
+   $headpage = $this->getHeadpage();
+   $headpage->setBase = $base;
+ }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>

@@ -60,6 +60,9 @@ class management
   // Whether to display the apply button or not
   protected $displayApplyBtn = FALSE;
 
+  // Whether to display a header or not.
+  protected $skipHeader = false;
+
   // Whether to display a footer or not.
   protected $skipFooter = false;
 
@@ -203,6 +206,8 @@ class management
    */
   protected function getHeader()
   {
+    if($this->skipHeader) return("");
+
     if (get_object_info() != ""){
       $display= print_header(get_template_path($this->plIcon),_($this->plDescription),
           "<img alt=\"\" class=\"center\" src=\"".get_template_path('images/lists/locked.png')."\">".
