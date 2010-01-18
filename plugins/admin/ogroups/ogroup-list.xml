@@ -8,7 +8,7 @@
     <multiSelect>true</multiSelect>
     <template>ogroup-list.tpl</template>
     <module>ogroups</module>
-    <label>List of ogroups</label>
+    <label>List of object groups</label>
     <defaultSortColumn>1</defaultSortColumn>
 
     <objectType>
@@ -139,7 +139,7 @@
       <name>edit</name>
       <type>entry</type>
       <image>images/lists/edit.png</image>
-      <label>Edit ogroup</label>
+      <label>Edit object group</label>
     </action>
 
     <action>
@@ -152,7 +152,7 @@
       <type>entry</type>
       <image>images/lists/trash.png</image>
       <acl>ogroups/ogroup[d]</acl>
-      <label>Remove ogroup</label>
+      <label>Remove object group</label>
     </action>
 
   </actiontriggers>
