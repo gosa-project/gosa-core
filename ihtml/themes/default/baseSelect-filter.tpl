@@ -19,6 +19,7 @@
   </tr>
  </table>
 
+ {$SCOPE}
  <table summary=""  width="100%"  style="background:#EEEEEE;border-top:1px solid #B0B0B0;">
   <tr>
    <td width="100%" align="right">
