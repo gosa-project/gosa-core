@@ -100,6 +100,13 @@
       <name>edit</name>
       <type>entry</type>
       <nospan></nospan>
+      <image>images/empty.png</image>
+      <label>Edit</label>
+    </action>
+    <action>
+      <name>edit</name>
+      <type>entry</type>
+      <nospan></nospan>
       <image>images/lists/edit.png</image>
       <label>Edit</label>
     </action>
