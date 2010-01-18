@@ -92,74 +92,6 @@
 
   <actionmenu>
 
-    <action>
-     <type>sub</type>
-     <image>images/lists/new.png</image>
-     <label>Create</label>
-
-     <action>
-      <name>new_domain</name>
-      <type>entry</type>
-      <label>Domain</label>
-      <image>plugins/departments/images/domain.png</image>
-     </action>
-    
-     <action>
-      <name>new_dcObject</name>
-      <type>entry</type>
-      <label>Domain component</label>
-      <image>plugins/departments/images/dc.png</image>
-     </action>
-
-     <action>
-      <name>new_country</name>
-      <type>entry</type>
-      <label>Country</label>
-      <image>plugins/departments/images/country.png</image>
-     </action>
-
-     <action>
-      <name>new_locality</name>
-      <type>entry</type>
-      <label>Locality</label>
-      <image>plugins/departments/images/locality.png</image>
-     </action>
-
-     <action>
-      <name>new_organization</name>
-      <type>entry</type>
-      <label>Organization</label>
-      <image>plugins/departments/images/organization.png</image>
-     </action>
-
-     <action>
-      <name>new_organizationalUnit</name>
-      <type>entry</type>
-      <label>Department</label>
-      <image>images/lists/folder.png</image>
-     </action>
-
-    </action>
-
-    <action>
-      <type>separator</type>
-    </action>
-
-    <action>
-      <type>exporter</type>
-    </action>
-
-    <action>
-      <type>separator</type>
-    </action>
-
-    <action>
-      <name>remove</name>
-      <type>entry</type>
-      <image>images/lists/trash.png</image>
-      <label>Remove</label>
-    </action>
-
   </actionmenu>
 
   <actiontriggers snapshot="false" copypaste="false">
@@ -170,15 +102,6 @@
       <nospan></nospan>
       <image>images/lists/edit.png</image>
       <label>Edit</label>
-    </action>
-
-    <action>
-      <name>remove</name>
-      <type>entry</type>
-      <nospan></nospan>
-      <image>images/lists/trash.png</image>
-      <acl>department[d]</acl>
-      <label>Remove</label>
     </action>
 
   </actiontriggers>
