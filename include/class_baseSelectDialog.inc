@@ -33,6 +33,7 @@ class baseSelectDialog extends management
 
   // #FIXME  -  Updated plugins to use a function instead of the public class var. 
   public $BaseToUse = "";
+  public $dialogClose = FALSE;
 
   function __construct (&$config,$parent,$onlyAllowThisBases = array())
   { 
@@ -53,6 +54,7 @@ class baseSelectDialog extends management
   $headpage->registerElementFilter("depLabel", "baseSelectDialog::filterDepLabel");
   $headpage->setFilter($filter);
   $this->registerAction("open","openEntry");
+  $this->registerAction("cancelBaseSelect","cancelBaseSelect");
   parent::__construct($config, $this->ui, "departments", $headpage);
   }
 
@@ -62,6 +64,16 @@ class baseSelectDialog extends management
   {
     $headpage = $this->getHeadpage();
     $headpage->setBase(array_pop($entry));
+  }
+
+  function execute()
+  {
+    $str = management::execute();
+    $str.= "<p class='separator'>&nbsp;</p>
+      <p style=\"text-align:right\">
+      <input type=submit name=\"cancelBaseSelect\" value=\"".msgPool::cancelButton()."\">
+      </p>";
+    return($str);
   }
 
 
@@ -95,7 +107,7 @@ class baseSelectDialog extends management
 
   function isClosed()
   {
-    return(FALSE);
+    return($this->dialogClose);
   }
 
   function isSelected() 
@@ -108,6 +120,18 @@ class baseSelectDialog extends management
     $headpage = $this->getHeadpage();
     $headpage->setBase = $base;
   }
+
+  function cancelBaseSelect()
+  {
+    $this->dialogClose = TRUE;
+  }
+
+  function detectPostActions()
+  {
+    $action = management::detectPostActions();
+    if(isset($_POST['cancelBaseSelect']))  $action['action'] = "cancelBaseSelect";
+    return($action);
+  } 
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
