@@ -6,7 +6,7 @@
     <departmentRootVisible>false</departmentRootVisible>
     <baseMode>true</baseMode>
     <multiSelect>true</multiSelect>
-    <template>dep-list.tpl</template>
+    <template>baseSelect-list.tpl</template>
     <module>departments</module>
     <label>List of departments</label>
     <defaultSortColumn>1</defaultSortColumn>

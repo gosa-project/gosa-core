@@ -3,7 +3,7 @@
 <filterdef>
   <definition>
     <category>departments</category>
-    <template>dep-filter.tpl</template>
+    <template>baseSelect-filter.tpl</template>
     <initial>true</initial>
   </definition>
 
