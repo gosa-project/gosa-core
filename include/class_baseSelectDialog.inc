@@ -44,15 +44,24 @@ class baseSelectDialog extends management
 #    if (session::global_is_set(get_class($this)."_filter")){
 #      $filter= session::global_get(get_class($this)."_filter");
 #    } else {
-      $filter = new filter(get_template_path("dep-filter.xml"));
+  $filter = new filter(get_template_path("dep-filter.xml"));
 #    }
-    $this->setFilter($filter);
+  $this->setFilter($filter);
 
-    // Build headpage
-    $headpage = new listing(get_template_path("dep-list.xml"));
-    $headpage->registerElementFilter("depLabel", "baseSelectDialog::filterDepLabel");
-    $headpage->setFilter($filter);
-    parent::__construct($config, $this->ui, "departments", $headpage);
+  // Build headpage
+  $headpage = new listing(get_template_path("dep-list.xml"));
+  $headpage->registerElementFilter("depLabel", "baseSelectDialog::filterDepLabel");
+  $headpage->setFilter($filter);
+  $this->registerAction("open","openEntry");
+  parent::__construct($config, $this->ui, "departments", $headpage);
+  }
+
+
+  // An action handler which enables to switch into deparmtment by clicking the names.
+  function openEntry($action,$entry)
+  {
+    $headpage = $this->getHeadpage();
+    $headpage->setBase(array_pop($entry));
   }
 
 
@@ -67,7 +76,7 @@ class baseSelectDialog extends management
     return("<a href='?plug=".$_GET['plug']."&amp;PID=$pid&amp;act=listing_open_$row' title='$dn'>$ou</a>");
   }
 
-  
+
   function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
   {
     if(count($target) == 1){
@@ -83,21 +92,22 @@ class baseSelectDialog extends management
     $this->handleActions($this->detectPostActions());
   }
 
+
   function isClosed()
   {
-    return(!empty($this->BaseToUse));
+    return(FALSE);
   }
 
- function isSelected() 
- {
-   return($this->BaseToUse);
- }
+  function isSelected() 
+  {
+    return($this->BaseToUse);
+  }
 
- function setCurrentBase($base)
- {
-   $headpage = $this->getHeadpage();
-   $headpage->setBase = $base;
- }
+  function setCurrentBase($base)
+  {
+    $headpage = $this->getHeadpage();
+    $headpage->setBase = $base;
+  }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
