@@ -102,6 +102,12 @@ class sortableListing {
   }
 
 
+  function setReorderable($flag)
+  {
+    $this->reorderable= $flag;
+  }
+
+
   function setInstantDelete($flag)
   {
     $this->instantDelete= $flag;
@@ -152,7 +158,7 @@ class sortableListing {
     if (strpos($this->acl, 'w') === false) {
       $edit_image= $this->editable?"<img class='center' src='images/lists/edit-grey.png' alt='"._("Edit")."'>":"";
     } else {
-      $edit_image= $this->editable?"<input class='center' type='image' src='images/lists/edit.png' alt='"._("Edit")."' name='%ID' title='"._("Edit this entry")."'>":"";
+      $edit_image= $this->editable?"<input class='center' type='image' src='images/lists/edit.png' alt='"._("Edit")."' name='%ID' id='%ID' title='"._("Edit this entry")."'>":"";
     }
     if (strpos($this->acl, 'd') === false) {
       $delete_image= $this->deleteable?"<img class='center' src='images/lists/trash-grey.png' alt='"._("Delete")."'>":"";
@@ -189,9 +195,11 @@ class sortableListing {
 
     // Render table body if we've read permission
     $result.= " <tbody id='".$this->id."'>\n";
+    $reorderable= $this->reorderable?"":" style='cursor:default'";
     if (strpos($this->acl, 'r') !== false) {
       foreach ($this->mapping as $nr => $row) {
-        $result.= "  <tr class='sortableListItem".($nr&1?'Odd':'')."' id='item_".$this->id."_$nr'>\n";
+        $editable= $this->editable?" onclick='$(\"edit_".$this->id."_$nr\").click()'":"";
+        $result.= "  <tr class='sortableListItem".($nr&1?'Odd':'')."' id='item_".$this->id."_$nr'$reorderable$editable>\n";
         foreach ($this->displayData[$row] as $column) {
           $result.= "   <td>".htmlentities($column)."</td>\n";
         }
@@ -211,14 +219,16 @@ class sortableListing {
 
     // Append script stuff if needed
     $result.= '<script type="text/javascript" language="javascript">';
-    $result.= ' function updateOrder(){';
-    $result.= '    var ampcharcode= \'%26\';';
-    $result.= '    var serializeOpts = Sortable.serialize(\''.$this->id.'\')+"='.$this->id.'";';
-    $result.= '    $("reorder_'.$this->id.'").value= serializeOpts;';
-    $result.= '    document.mainform.submit();';
-    $result.= ' }';
-    $result.= 'Position.includeScrollOffsets = true;';
-    $result.= ' Sortable.create(\''.$this->id.'\',{tag:\'tr\', ghosting:false, constraint:\'vertical\', scroll:\'scroll_'.$this->id.'\',onUpdate : updateOrder});';
+    if ($this->reorderable) {
+      $result.= ' function updateOrder(){';
+      $result.= '    var ampcharcode= \'%26\';';
+      $result.= '    var serializeOpts = Sortable.serialize(\''.$this->id.'\')+"='.$this->id.'";';
+      $result.= '    $("reorder_'.$this->id.'").value= serializeOpts;';
+      $result.= '    document.mainform.submit();';
+      $result.= ' }';
+      $result.= 'Position.includeScrollOffsets = true;';
+      $result.= ' Sortable.create(\''.$this->id.'\',{tag:\'tr\', ghosting:false, constraint:\'vertical\', scroll:\'scroll_'.$this->id.'\',onUpdate : updateOrder});';
+    }
     $result.= '$("scroll_'.$this->id.'").scrollTop= '.$this->scrollPosition.';';
     $result.= 'var box = $("scroll_'.$this->id.'").onscroll= function() {$("position_'.$this->id.'").value= this.scrollTop;}';
     $result.= '</script>';
