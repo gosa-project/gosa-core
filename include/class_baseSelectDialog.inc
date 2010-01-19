@@ -40,7 +40,7 @@ class baseSelectDialog extends management
     $this->config = $config;
     $this->ui = get_userinfo();
     $this->allowedBases = $onlyAllowThisBases;
-    session::set('filterBaseSelect_WhiteList', &$this->allowedBases);
+    session::set('filterBaseSelect_WhiteList', $this->allowedBases);
 
 #    // Build filter
 #    if (session::global_is_set(get_class($this)."_filter")){
