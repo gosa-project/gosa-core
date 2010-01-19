@@ -58,9 +58,9 @@ class sortableListing {
       foreach ($data as $value) {
         $displayData[]= array($value);
       }
-    } else {
-      $this->setDisplayData($displayData);
     }
+
+    $this->setDisplayData($displayData);
 
     // Generate instance wide unique ID
     $tmp= gettimeofday();
@@ -160,7 +160,7 @@ class sortableListing {
   public function render()
   {
     $result= "<div class='sortableListContainer' id='scroll_".$this->id."' style='width: ".$this->width."; height: ".$this->height."'>\n";
-    $result.= "<table border='0' cellpadding='0' cellspacing='0' width='100%' height='100%' style='position: relative;'".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">\n";
+    $result.= "<table border='0' cellpadding='0' cellspacing='0' height='100%' width='100%' style='table-layout:fixed; position: relative;'".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">\n";
     $action_width= 0;
     if (strpos($this->acl, 'w') === false) {
       $edit_image= $this->editable?"<img class='center' src='images/lists/edit-grey.png' alt='"._("Edit")."'>":"";
@@ -217,8 +217,10 @@ class sortableListing {
       foreach ($this->mapping as $nr => $row) {
         $editable= $this->editable?" onclick='$(\"edit_".$this->id."_$nr\").click()'":"";
         $result.= "  <tr class='sortableListItem".($nr&1?'Odd':'')."' id='item_".$this->id."_$nr'$reorderable>\n";
+        $first= " style='border:0'";
         foreach ($this->displayData[$row] as $column) {
-          $result.= "   <td$editable>".htmlentities($column)."</td>\n";
+          $result.= "   <td$editable$first>".htmlentities($column)."</td>\n";
+          $first= "";
         }
         if ($action_width) {
           $result.= "<td>".str_replace('%ID', "edit_".$this->id."_$nr", $edit_image).
@@ -226,9 +228,15 @@ class sortableListing {
         }
         $result.= "  </tr>\n";
       }
-    } else {
-      $result.= "  <tr class='sortableListItem' style='height:100%'></tr>\n";
     }
+
+    // Add spacer
+    $result.= "  <tr class='sortableListItemFill' style='height:100%'><td style='border:0'></td>";
+    $num= $action_width?$this->columns:$this->columns-1;
+    for ($i= 0; $i<$num; $i++) {
+      $result.= "<td class='sortableListItemFill'></td>";
+    }
+    $result.= "</tr>\n";
 
     $result.= " </tbody>\n</table>\n</div>\n";
     $result.= " <input type='hidden' name='PID' value='".$this->id."' id='PID'>\n";

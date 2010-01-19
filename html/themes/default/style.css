@@ -1927,6 +1927,7 @@ td.nlistFooter {
 div.sortableListContainer {
     border: 1px solid #AAA;
     overflow: auto;
+    background-color: white;
 }
 
 .sortableListContainer th{
@@ -1945,6 +1946,12 @@ div.sortableListContainer {
 tr.sortableListItem {
     background-color: white;
     cursor:move;
+    color: black;
+}
+
+tr.sortableListItemFill {
+    background-color: white;
+    cursor:default;
 }
 
 tr.sortableListItemOdd ::-moz-selection, tr.sortableListItem ::-moz-selection{
@@ -1967,6 +1974,7 @@ tr.sortableListItemOdd code::selection, tr.sortableListItem code::selection {
 tr.sortableListItemOdd {
     background-color: #F5F5F5;
     cursor:move;
+    color: black;
 }
 tr.sortableListItem:hover, tr.sortableListItemOdd:hover {
     background-color: #EEE;
