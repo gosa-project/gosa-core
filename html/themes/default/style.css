@@ -1928,6 +1928,7 @@ div.sortableListContainer {
     border: 1px solid #AAA;
     overflow: auto;
     background-color: white;
+    margin-bottom:2px;
 }
 
 .sortableListContainer th{
