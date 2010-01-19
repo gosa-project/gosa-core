@@ -419,6 +419,11 @@ class sortableListing {
 
   public function addEntry($entry, $displayEntry= null)
   {
+    // Only add if not already there
+    if (in_array($entry, $this->data)) {
+      return;
+    }
+
     // Prefill with default value if not specified
     if (!$displayEntry) {
       $displayEntry= array($entry);
