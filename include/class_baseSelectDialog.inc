@@ -40,6 +40,7 @@ class baseSelectDialog extends management
     $this->config = $config;
     $this->ui = get_userinfo();
     $this->allowedBases = $onlyAllowThisBases;
+    session::set('filterBaseSelect_WhiteList', &$this->allowedBases);
 
 #    // Build filter
 #    if (session::global_is_set(get_class($this)."_filter")){
@@ -132,6 +133,25 @@ class baseSelectDialog extends management
     if(isset($_POST['cancelBaseSelect']))  $action['action'] = "cancelBaseSelect";
     return($action);
   } 
+}
+
+class filterBaseSelect extends filterLDAP
+{
+  static function query($base, $scope, $filter, $attributes, $category, $objectStorage= "")
+  {
+    $res= filterLDAP::query($base, $scope, $filter, $attributes, $category, $objectStorage);
+    return(filterBaseSelect::filterEntries($res));
+  }
+
+  static function filterEntries($res)
+  {
+    if(!session::is_set('filterBaseSelect_WhiteList')) return $res;
+    $list = session::get('filterBaseSelect_WhiteList');
+    foreach($res as $key => $entry){
+      if(!isset($list[$entry['dn']])) unset($res[$key]);
+    }
+    return(array_values($res));
+  }
 }
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
