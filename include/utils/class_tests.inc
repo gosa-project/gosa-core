@@ -262,7 +262,7 @@ class tests {
       return false;
     }
 
-    return checkdate($matches[1],$matches[2],$matches[3]);
+    return checkdate($matches[2],$matches[1],$matches[3]);
   }
 
   /* Check if the specified IP address $address is inside the given network */
