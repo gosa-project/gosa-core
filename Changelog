@@ -5,6 +5,8 @@ GOsa2 changelog
   - Added more information to DHCP service dialog (thanks to Mathieu)
   - Added more checks for DNS zone records
   - Added IMAP folder autocreation
+  - Added printer css
+  - Store list positions
   - Fixed generation of kerberos host keys when DNS is enabled
   - Fixed template error message when no sshkey plugin is enabled
   - Fixed problem where arrays got shortened by one in copy and paste
