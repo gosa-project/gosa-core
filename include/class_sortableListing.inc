@@ -40,6 +40,7 @@ class sortableListing {
   private $mapping;
   private $current_mapping;
   private $active_index;
+  private $scrollPosition= 0;
 
   private $acl= "";
   private $modified= false;
@@ -218,9 +219,7 @@ class sortableListing {
     $result.= ' }';
     $result.= 'Position.includeScrollOffsets = true;';
     $result.= ' Sortable.create(\''.$this->id.'\',{tag:\'tr\', ghosting:false, constraint:\'vertical\', scroll:\'scroll_'.$this->id.'\',onUpdate : updateOrder});';
-    if (isset($_POST['position_'.$this->id]) && is_numeric($_POST['position_'.$this->id])) {
-      $result.= '$("scroll_'.$this->id.'").scrollTop= '.$_POST['position_'.$this->id].';';
-    }
+    $result.= '$("scroll_'.$this->id.'").scrollTop= '.$this->scrollPosition.';';
     $result.= 'var box = $("scroll_'.$this->id.'").onscroll= function() {$("position_'.$this->id.'").value= this.scrollTop;}';
     $result.= '</script>';
 
@@ -232,6 +231,10 @@ class sortableListing {
   {
     // Do not do anything if we're not posted - or have no permission
     if (strpos($this->acl, 'w') !== false && isset($_POST['reorder_'.$this->id])){
+
+      if (isset($_POST['position_'.$this->id]) && is_numeric($_POST['position_'.$this->id])) {
+        $this->scrollPosition= $_POST['position_'.$this->id];
+      }
 
       // Move requested?
       $move= $_POST['reorder_'.$this->id];
