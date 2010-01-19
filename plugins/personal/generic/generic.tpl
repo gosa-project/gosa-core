@@ -250,12 +250,10 @@
      <td style='vertical-align:top'><label for="edit_perms">{t}Restrict login to{/t}</label></td>
      <td>
 {render acl=$gosaLoginRestrictionACL}
-	      <select size="3" multiple style='width:100%' id="restrictions" name="restrictions">
-	       {html_options values=$gosaLoginRestriction output=$gosaLoginRestriction}
-	      </select><br>
+              {$gosaLoginRestrictionWidget}
 	      <input id="res" name="res" size=22 maxlength=33 value="{t}IP or network{/t}" onFocus='document.getElementById("res").value=""'>
-      	      <input id="add_res" type="submit" name="add_res" value="+">
-      	      <input id="del_res" type="submit" name="del_res" value="-">
+      	      <input id="add_res" type="submit" name="add_res" value="{t}Add{/t}">
+
 {/render}
      </td>
     </tr>

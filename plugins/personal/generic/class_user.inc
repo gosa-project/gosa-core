@@ -51,6 +51,7 @@ class user extends plugin
   var $ou= "";
   var $departmentNumber= "";
   var $gosaLoginRestriction= array();
+  var $gosaLoginRestrictionWidget;
   var $employeeNumber= "";
   var $employeeType= "";
   var $roomNumber= "";
@@ -242,6 +243,11 @@ class user extends plugin
         $this->gosaLoginRestriction[] = $this->attrs['gosaLoginRestriction'][$i];
       }
     }
+    $this->gosaLoginRestrictionWidget= new sortableListing($this->gosaLoginRestriction);
+    $this->gosaLoginRestrictionWidget->setDeleteable(true);
+    $this->gosaLoginRestrictionWidget->setColspecs(array('*'));
+    $this->gosaLoginRestrictionWidget->setWidth("320px");
+    $this->gosaLoginRestrictionWidget->setHeight("70px");
  
     $this->orig_base = $this->base;
   }
@@ -253,26 +259,19 @@ class user extends plugin
     /* Call parent execute */
     plugin::execute();
 
+    /* Let the lists update themselves */
+    $this->gosaLoginRestrictionWidget->setAcl($this->getacl('gosaLoginRestriction', (!is_object($this->parent) && !session::is_set('edit'))));
+    $this->gosaLoginRestrictionWidget->update();
+
     /* Handle add/delete for restriction mode */
     if (isset($_POST['add_res']) && isset($_POST['res'])) {
       $val= validate($_POST['res']);
       if (preg_match('/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/', $val) ||
           preg_match('/^([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\/([0-9]+)$/', $val) ||
           preg_match('/^([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)\/([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)$/', $val)) {
-        $this->gosaLoginRestriction[]= $val;
+        $this->gosaLoginRestrictionWidget->addEntry($val);
       } else {
         msg_dialog::display(_("Error"), _("Please add a single IP address or a network/netmask combination!"), ERROR_DIALOG);
-      }
-    }
-    if (isset($_POST['del_res']) && isset($_POST['restrictions'])) {
-      $res= $_POST['restrictions'];
-      if (!is_array($res)){
-        $res= array($res);
-      }
-      foreach ($res as $restriction) {
-        if (in_array($restriction, $this->gosaLoginRestriction)) {
-          $this->gosaLoginRestriction= array_remove_entries(array($restriction), $this->gosaLoginRestriction);
-        }
       }
     }
 
@@ -284,6 +283,7 @@ class user extends plugin
 
     $smarty= get_smarty();
     $smarty->assign("usePrototype", "true");
+    $smarty->assign("gosaLoginRestrictionWidget", $this->gosaLoginRestrictionWidget->render());
 
     /* Assign sex */
     $sex= array(0 => "&nbsp;", "F" => _("female"), "M" => _("male"));
@@ -607,7 +607,6 @@ class user extends plugin
       $smarty->assign("$val"."ACL", $this->getacl($val,(!is_object($this->parent) && !session::is_set('edit'))));
     }
 
-    $smarty->assign("gosaLoginRestriction", $this->gosaLoginRestriction);
     $smarty->assign("gosaLoginRestrictionACL", $this->getacl('gosaLoginRestriction', (!is_object($this->parent) && !session::is_set('edit'))));
     $smarty->assign("pwmode", $pwd_methods);
     $smarty->assign("pwmode_select", $this->pw_storage);
@@ -755,6 +754,11 @@ class user extends plugin
 
       /* Parents save function */
       plugin::save_object ();
+
+      /* Sync lists */
+      if ($this->gosaLoginRestrictionWidget->isModified()) {
+        $this->gosaLoginRestriction= $this->gosaLoginRestrictionWidget->getMaintainedData();
+      }
 
       /* Save government mode attributes */
       if ($this->governmentmode){
