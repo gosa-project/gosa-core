@@ -421,16 +421,24 @@ function adjust_width(e)
 		if(div_width+diff>=space) {
                         if (width - save > space) {
 			  document.getElementById('d_scrollbody').style.width=div_width+diff+"px";
-			  document.getElementById('t_scrollbody').style.width=(div_width-19)+diff+"px";
+                          if (document.getElementById('t_scrollbody') != null) {
+  			    document.getElementById('t_scrollbody').style.width=(div_width-19)+diff+"px";
+                          }
 	
 			  // Resize the Header cells (only the relative-width ones)
-			  document.getElementById('t_scrollhead').style.width=div_width+diff+"px";
+                          if (document.getElementById('t_scrollhead') != null) {
+			    document.getElementById('t_scrollhead').style.width=div_width+diff+"px";
+                          }
                         } else {
 			  document.getElementById('d_scrollbody').style.width=div_width+"px";
-			  document.getElementById('t_scrollbody').style.width=(div_width-19)+"px";
+                          if (document.getElementById('t_scrollbody') != null) {
+			    document.getElementById('t_scrollbody').style.width=(div_width-19)+"px";
+                          }
 	
 			  // Resize the Header cells (only the relative-width ones)
-			  document.getElementById('t_scrollhead').style.width=div_width+"px";
+                          if (document.getElementById('t_scrollhead') != null) {
+			    document.getElementById('t_scrollhead').style.width=div_width+"px";
+                          }
                         }
 
 		// window has been downscaled, we must reset the div to 600px
@@ -438,10 +446,14 @@ function adjust_width(e)
 			// Reset layout (set width to 600px)
 			div_width=space;
 			document.getElementById('d_scrollbody').style.width=div_width+"px";
-			document.getElementById('t_scrollbody').style.width=(div_width-19)+"px";
+                        if (document.getElementById('t_scrollbody') != null) {
+			  document.getElementById('t_scrollbody').style.width=(div_width-19)+"px";
+                        }
 	
 			// Resize the Header cells (only the relative-width ones)
-			document.getElementById('t_scrollhead').style.width=div_width+"px";
+                        if (document.getElementById('t_scrollhead') != null) {
+			  document.getElementById('t_scrollhead').style.width=div_width+"px";
+                        }
 		}
 	} else if(document.defaultView && document.getElementById("t_scrolltable_onlywidth")){
 		// Resize the div

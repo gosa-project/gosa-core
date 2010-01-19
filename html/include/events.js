@@ -18,5 +18,7 @@ function OnLoad()
 function OnResize()
 {
 	adjust();
-	resizeHandler();
+        if(document['resizeHandler']) {
+	  resizeHandler();
+        }
 }
