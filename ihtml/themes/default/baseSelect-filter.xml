@@ -9,7 +9,7 @@
 
   <search>
     <query>
-      <backend>LDAP</backend>
+      <backend>BaseSelect</backend>
       <filter>(&amp;(objectClass=gosaDepartment)$NAME)</filter>
       <attribute>dn</attribute>
       <attribute>objectClass</attribute>
@@ -29,7 +29,7 @@
     <set>(|(ou=*$*)(dc=*$*)(c=*$*)(l=*$*))</set>
     <alphabet>false</alphabet>
     <autocomplete>
-      <backend>LDAP</backend>
+      <backend>BaseSelect</backend>
       <filter>(&amp;(objectClass=gosaDepartment)(|(ou=*$NAME*)(dc=*$NAME*)(l=*$NAME*)(c=*$NAME*)))</filter>
       <attribute>cn</attribute>
       <attribute>dc</attribute>
