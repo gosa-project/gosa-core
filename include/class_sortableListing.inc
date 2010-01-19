@@ -42,12 +42,12 @@ class sortableListing {
   private $active_index;
   private $scrollPosition= 0;
   private $sortColumn= 0;
-  private $sortColumnOrder= array();
+  private $sortDirection= array();
 
   private $acl= "";
   private $modified= false;
 
-  function sortableListing($data= array(), $displayData= null)
+  public function sortableListing($data= array(), $displayData= null, $reorderable= false)
   {
     global $config;
 
@@ -65,16 +65,22 @@ class sortableListing {
     // Generate instance wide unique ID
     $tmp= gettimeofday();
     $this->id= 'l'.md5($tmp['sec']);
+
+    // Set reorderable flag
+    $this->reorderable= $reorderable;
+    if (!$reorderable) {
+      $this->sortData();
+    }
   }
 
 
-  function setData($data)
+  private function setData($data)
   {
     $this->data= $data;
   }
 
 
-  function setDisplayData($data)
+  private function setDisplayData($data)
   {
     if (!is_array($data)) {
       die ("sortableList needs an array as data!");
@@ -95,64 +101,63 @@ class sortableListing {
     } else {
       $this->columns= 1;
     }
+
+    // Preset sort orders to 'down'
+    for ($column= 0; $column<$this->columns; $column++) {
+      $this->sortDirection[]= true;
+    }
   }
 
 
-  function setWidth($width)
+  public function setWidth($width)
   {
     $this->width= $width;
   }
 
 
-  function setReorderable($flag)
-  {
-    $this->reorderable= $flag;
-  }
-
-
-  function setInstantDelete($flag)
+  public function setInstantDelete($flag)
   {
     $this->instantDelete= $flag;
   }
 
 
-  function setEditable($flag)
+  public function setEditable($flag)
   {
     $this->editable= $flag;
   }
 
 
-  function setDeleteable($flag)
+  public function setDeleteable($flag)
   {
     $this->deleteable= $flag;
   }
 
 
-  function setHeight($height)
+  public function setHeight($height)
   {
     $this->height= $height;
   }
 
 
-  function setCssClass($css)
+  public function setCssClass($css)
   {
     $this->cssclass= $css;
   }
 
 
-  function setHeader($header)
+  public function setHeader($header)
   {
     $this->header= $header;
   }
 
 
-  function setColspecs($specs)
+  public function setColspecs($specs)
   {
     $this->colspecs= $specs;
   }
 
 
-  function render()
+  public function render()
   {
     $result= "<div class='sortableListContainer' id='scroll_".$this->id."' style='width: ".$this->width."; height: ".$this->height."'>\n";
     $result.= "<table border='0' cellpadding='0' cellspacing='0' width='100%' height='100%' style='position: relative;'".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">\n";
@@ -187,7 +192,17 @@ class sortableListing {
     if ($this->header) {
       $result.= " <thead>\n  <tr>\n";
       for ($i= 0; $i<$this->columns; $i++) {
-        $result.= "   <th>".(isset($this->header[$i])?$this->header[$i]:"")."</th>";
+        $link= "href='?plug=".$_GET['plug']."&amp;PID=".$this->id."&amp;act=SORT_$i'";
+        $sorter= "";
+        if ($i == $this->sortColumn){
+          $sorter= "&nbsp;<img border='0' title='".($this->sortDirection[$i]?_("Up"):_("Down"))."' src='images/lists/sort-".($this->sortDirection[$i]?"up":"down").".png' align='top'>";
+        }
+
+        if ($this->reorderable) {
+          $result.= "   <th>".(isset($this->header[$i])?$this->header[$i]:"")."</th>";
+        } else {
+          $result.= "   <th><a $link>".(isset($this->header[$i])?$this->header[$i]:"")."$sorter</a></th>";
+        }
       }
       if ($action_width) {
         $result.= "<th>&nbsp;</th>";
@@ -201,9 +216,9 @@ class sortableListing {
     if (strpos($this->acl, 'r') !== false) {
       foreach ($this->mapping as $nr => $row) {
         $editable= $this->editable?" onclick='$(\"edit_".$this->id."_$nr\").click()'":"";
-        $result.= "  <tr class='sortableListItem".($nr&1?'Odd':'')."' id='item_".$this->id."_$nr'$reorderable$editable>\n";
+        $result.= "  <tr class='sortableListItem".($nr&1?'Odd':'')."' id='item_".$this->id."_$nr'$reorderable>\n";
         foreach ($this->displayData[$row] as $column) {
-          $result.= "   <td>".htmlentities($column)."</td>\n";
+          $result.= "   <td$editable>".htmlentities($column)."</td>\n";
         }
         if ($action_width) {
           $result.= "<td>".str_replace('%ID', "edit_".$this->id."_$nr", $edit_image).
@@ -216,6 +231,7 @@ class sortableListing {
     }
 
     $result.= " </tbody>\n</table>\n</div>\n";
+    $result.= " <input type='hidden' name='PID' value='".$this->id."' id='PID'>\n";
     $result.= " <input type='hidden' name='position_".$this->id."' id='position_".$this->id."'>\n";
     $result.= " <input type='hidden' name='reorder_".$this->id."' id='reorder_".$this->id."'>\n";
 
@@ -239,8 +255,30 @@ class sortableListing {
   }
 
 
-  function update()
+  public function update()
   {
+    // Do not do anything if this is not our PID, or there's even no PID available...
+    if(!isset($_REQUEST['PID']) || $_REQUEST['PID'] != $this->id) {
+      return;
+    }
+
+    // Filter GET with "act" attributes
+    if (!$this->reorderable && isset($_GET['act'])) {
+      $key= validate($_GET['act']);
+      if (preg_match('/^SORT_([0-9]+)$/', $key, $match)) {
+        // Switch to new column or invert search order?
+        $column= $match[1];
+        if ($this->sortColumn != $column) {
+          $this->sortColumn= $column;
+        } else {
+          $this->sortDirection[$column]= !$this->sortDirection[$column];
+        }
+
+        // Update mapping according to sort parameters
+        $this->sortData();
+      }
+    }
+
     // Do not do anything if we're not posted - or have no permission
     if (strpos($this->acl, 'w') !== false && isset($_POST['reorder_'.$this->id])){
 
@@ -289,7 +327,7 @@ class sortableListing {
   }
 
 
-  function getAction()
+  public function getAction()
   {
     // Do not do anything if we're not posted
     if(!isset($_POST['reorder_'.$this->id])) {
@@ -308,7 +346,7 @@ class sortableListing {
   }
 
 
-  function deleteEntry($id)
+  private function deleteEntry($id)
   {
     // Remove mapping
     $index= array_search($id, $this->mapping);
@@ -320,7 +358,7 @@ class sortableListing {
   }
 
 
-  function getMaintainedData()
+  public function getMaintainedData()
   {
     $tmp= array();
 
@@ -332,15 +370,42 @@ class sortableListing {
   }
 
 
-  function isModified()
+  public function isModified()
   {
     return $this->modified;
   }
 
 
-  function setAcl($acl)
+  public function setAcl($acl)
   {
     $this->acl= $acl;
+  }
+
+
+  public function sortData()
+  {
+    // Extract data
+    $tmp= array();
+    foreach($this->displayData as $item) {
+      if (isset($item[$this->sortColumn])){
+        $tmp[]= $item[$this->sortColumn];
+      } else {
+        $tmp[]= "";
+      }
+    }
+
+    // Sort entries
+    if ($this->sortDirection[$this->sortColumn]) {
+      asort($tmp);
+    } else {
+      arsort($tmp);
+    }
+
+    // Adapt mapping accordingly
+    $this->mapping= array();
+    foreach ($tmp as $key => $value) {
+      $this->mapping[]= $key;
+    }
   }
 
 }
