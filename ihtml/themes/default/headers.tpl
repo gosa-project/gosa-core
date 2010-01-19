@@ -17,6 +17,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
   <style type="text/css">@import url('themes/default/style.css');</style>
+  <link rel="stylesheet" type="text/css" href="themes/default/printer.css" media="print">
+
   <!--[if IE]>
   <style type="text/css">
   div.listContainer { height: 121px; overflow-x:hidden; overflow-y:auto; }
