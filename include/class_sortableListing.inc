@@ -205,6 +205,7 @@ class sortableListing {
     }
 
     $result.= " </tbody>\n</table>\n</div>\n";
+    $result.= " <input type='hidden' name='position_".$this->id."' id='position_".$this->id."'>\n";
     $result.= " <input type='hidden' name='reorder_".$this->id."' id='reorder_".$this->id."'>\n";
 
     // Append script stuff if needed
@@ -216,7 +217,11 @@ class sortableListing {
     $result.= '    document.mainform.submit();';
     $result.= ' }';
     $result.= 'Position.includeScrollOffsets = true;';
-    $result.= ' Sortable.create(\''.$this->id.'\',{tag:\'tr\', ghosting:false,constraint:\'vertical\', scroll:\'scroll_'.$this->id.'\',onUpdate : updateOrder})';
+    $result.= ' Sortable.create(\''.$this->id.'\',{tag:\'tr\', ghosting:false, constraint:\'vertical\', scroll:\'scroll_'.$this->id.'\',onUpdate : updateOrder});';
+    if (isset($_POST['position_'.$this->id]) && is_numeric($_POST['position_'.$this->id])) {
+      $result.= '$("scroll_'.$this->id.'").scrollTop= '.$_POST['position_'.$this->id].';';
+    }
+    $result.= 'var box = $("scroll_'.$this->id.'").onscroll= function() {$("position_'.$this->id.'").value= this.scrollTop;}';
     $result.= '</script>';
 
     return $result;
