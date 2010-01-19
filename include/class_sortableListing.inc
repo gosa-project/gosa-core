@@ -408,4 +408,19 @@ class sortableListing {
     }
   }
 
+
+  public function addEntry($entry, $displayEntry= null)
+  {
+    // Prefill with default value if not specified
+    if (!$displayEntry) {
+      $displayEntry= array($entry);
+    }
+
+    // Append to data and mapping
+    $this->data[]= $entry;
+    $this->displayData[]= $displayData;
+    $this->mapping[]= count($this->mapping);
+  }
+
+
 }
