@@ -3,7 +3,7 @@
  * This code is part of GOsa (http://www.gosa-project.org)
  * Copyright (C) 2003-2008 GONICUS GmbH
  *
- * ID: $$Id: class_listing.inc 15087 2010-01-06 13:45:49Z hickert $$
+ * ID: $$Id$$
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,6 +41,8 @@ class sortableListing {
   private $current_mapping;
   private $active_index;
   private $scrollPosition= 0;
+  private $sortColumn= 0;
+  private $sortColumnOrder= array();
 
   private $acl= "";
   private $modified= false;
