@@ -428,6 +428,7 @@ class sortableListing {
     $this->data[]= $entry;
     $this->displayData[]= $displayEntry;
     $this->mapping[]= count($this->mapping);
+    $this->modified= true;
   }
 
 
