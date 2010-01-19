@@ -52,6 +52,7 @@ class listing {
   var $exportColumns= array();
   var $useSpan= false;
   var $height= 0;
+  var $scrollPosition= 0;
 
 
   function listing($filename)
@@ -273,6 +274,7 @@ class listing {
 
     // Initialize list
     $result= "<input type='hidden' value='$this->pid' name='PID'>\n";
+    $result.= "<input type='hidden' name='position_".$this->pid."' id='position_".$this->pid."'>\n";
     $height= 450;
     if ($this->height != 0) {
       $result.= "<input type='hidden' value='$this->height' id='d_height'>\n";
@@ -425,6 +427,12 @@ class listing {
     $result.= "</table>";
     $result.= $switch?"<input type='hidden' id='list_workaround'>":"";
 
+    // Add scroll positioner
+    $result.= '<script type="text/javascript" language="javascript">';
+    $result.= '$("t_nscrollbody").scrollTop= '.$this->scrollPosition.';';
+    $result.= 'var box = $("t_nscrollbody").onscroll= function() {$("position_'.$this->pid.'").value= this.scrollTop;}';
+    $result.= '</script>';
+
     $smarty= get_smarty();
     $smarty->assign("usePrototype", "true");
     $smarty->assign("FILTER", $this->filter->render());
@@ -471,6 +479,11 @@ class listing {
     // Do not do anything if this is not our PID
     if(isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->pid) {
       return;
+    }
+
+    // Save position if set
+    if (isset($_POST['position_'.$this->pid]) && is_numeric($_POST['position_'.$this->pid])) {
+      $this->scrollPosition= $_POST['position_'.$this->pid];
     }
 
     // Save base
@@ -1009,6 +1022,11 @@ class listing {
     // Do not do anything if this is not our PID, or there's even no PID available...
     if(!isset($_REQUEST['PID']) || $_REQUEST['PID'] != $this->pid) {
       return;
+    }
+
+    // Save position if set
+    if (isset($_POST['position_'.$this->pid]) && is_numeric($_POST['position_'.$this->pid])) {
+      $this->scrollPosition= $_POST['position_'.$this->pid];
     }
 
     $result= array("targets" => array(), "action" => "");
