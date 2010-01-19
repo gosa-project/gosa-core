@@ -258,7 +258,11 @@ class tests {
     }
 
     #TODO: use $lang to check date format
-    return preg_match("/[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4}/", $date);
+    if (!preg_match("/([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{4})/", $date, $matches)) {
+      return false;
+    }
+
+    return checkdate($matches[1],$matches[2],$matches[3]);
   }
 
   /* Check if the specified IP address $address is inside the given network */
