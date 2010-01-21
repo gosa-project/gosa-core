@@ -1937,7 +1937,6 @@ td.nlistFooter {
 div.sortableListContainer {
     border: 1px solid #AAA;
     overflow: auto;
-    background-color: white;
     margin-bottom:2px;
 }
 
@@ -1991,7 +1990,7 @@ tr.sortableListItem:hover, tr.sortableListItemOdd:hover {
     background-color: #EEE;
 }
 tr.sortableListItemDisabled {
-    background-color: #CCC;
+    background-color: #DDD;
     cursor:default;
     color: black;
 }
