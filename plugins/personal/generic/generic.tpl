@@ -49,10 +49,10 @@
      <td><label for="sn">{t}Last name{/t}{$must}</label></td>
      <td>
 {if $multiple_support}
-	 <input id="sn" name="dummy2" size=25 maxlength=60 value="{t}Multiple edit{/t}" disabled>
+	 <input type="text" id="sn" name="dummy2" size=25 maxlength=60 value="{t}Multiple edit{/t}" disabled>
 {else}
 {render acl=$snACL}
-	 <input id="sn" name="sn" size=25 maxlength=60 value="{$sn}">
+	 <input type="text" id="sn" name="sn" size=25 maxlength=60 value="{$sn}">
 {/render}
 {/if}
 	 </td>
@@ -60,7 +60,7 @@
     {else}
     <tr>
      <td><label for="sn">{t}Template name{/t}{$must}</label></td>
-     <td>{render acl=$snACL}<input id="sn" name="sn" size=25 maxlength=60 value="{$sn}">{/render}</td>
+     <td>{render acl=$snACL}<input type="text" id="sn" name="sn" size=25 maxlength=60 value="{$sn}">{/render}</td>
     </tr>
     {/if}
 
@@ -70,10 +70,10 @@
      <td>
 
 {if $multiple_support}
-	 <input id="givenName" name="dummy3" size=25 maxlength=60 value="{t}Multiple edit{/t}" disabled>
+	 <input type="text" id="givenName" name="dummy3" size=25 maxlength=60 value="{t}Multiple edit{/t}" disabled>
 {else}
 {render acl=$givenNameACL}
-	 <input id="givenName" name="givenName" size=25 maxlength=60 value="{$givenName}">
+	 <input type="text" id="givenName" name="givenName" size=25 maxlength=60 value="{$givenName}">
 {/render}
 {/if}
 	 </td>
@@ -83,10 +83,10 @@
      <td>
 		{if !$multiple_support}
 {render acl=$uidACL}
-			<input id="uid" name="uid" size=25 maxlength=60  value="{$uid}">
+			<input type="text" id="uid" name="uid" size=25 maxlength=60  value="{$uid}">
 {/render}
 		{else}
-			<input id="uid" name="dummy1" size=25 maxlength=60  value="{t}Multiple edit{/t}" disabled>
+			<input type="text" id="uid" name="dummy1" size=25 maxlength=60  value="{t}Multiple edit{/t}" disabled>
 		{/if}
 	 </td>
     </tr>
@@ -100,7 +100,7 @@
      <td>
       <div style="height:10px;"></div>
 {render acl=$personalTitleACL checkbox=$multiple_support checked=$use_personalTitle}
-		<input id="personalTitle" name="personalTitle" size=25 maxlength=60 value="{$personalTitle}">
+		<input type="text" id="personalTitle" name="personalTitle" size=25 maxlength=60 value="{$personalTitle}">
 {/render}
      </td>
     </tr>
@@ -108,7 +108,7 @@
      <td><label for="academicTitle">{t}Academic title{/t}</label></td>
      <td>
 {render acl=$academicTitleACL checkbox=$multiple_support checked=$use_academicTitle}
-	      <input id="academicTitle" name="academicTitle" size=25 maxlength=60 value="{$academicTitle}">
+	      <input type="text" id="academicTitle" name="academicTitle" size=25 maxlength=60 value="{$academicTitle}">
 {/render}
      </td>
     </tr>
@@ -196,7 +196,7 @@
      <td><label for="homePhone">{t}Private phone{/t}</label>
      </td><td>
 {render acl=$homePhoneACL checkbox=$multiple_support checked=$use_homePhone}
-	     <input id="homePhone" name="homePhone" size=25 maxlength=60 value="{$homePhone}">
+	     <input type="text" id="homePhone" name="homePhone" size=25 maxlength=60 value="{$homePhone}">
 {/render}
      </td>
     </tr>
@@ -204,7 +204,7 @@
      <td><label for="labeledURI">{t}Homepage{/t}</label></td>
      <td>
 {render acl=$labeledURIACL checkbox=$multiple_support checked=$use_labeledURI}
-	 	<input id="labeledURI" name="labeledURI" size=25 maxlength=60 value="{$labeledURI}">
+	 	<input type="text" id="labeledURI" name="labeledURI" size=25 maxlength=60 value="{$labeledURI}">
 {/render}
      </td>
     </tr>
@@ -251,7 +251,7 @@
      <td>
 {render acl=$gosaLoginRestrictionACL}
               {$gosaLoginRestrictionWidget}
-	      <input id="res" name="res" size=22 maxlength=33 value="{t}IP or network{/t}" onFocus='document.getElementById("res").value=""'>
+	      <input type="text" id="res" name="res" size=22 maxlength=33 value="{t}IP or network{/t}" onFocus='document.getElementById("res").value=""'>
       	      <input id="add_res" type="submit" name="add_res" value="{t}Add{/t}">
 
 {/render}
@@ -285,7 +285,7 @@
      <td><label for="o">{t}Organization{/t}</label></td>
      <td>	
 {render acl=$oACL checkbox=$multiple_support checked=$use_o}
-		<input id="o" name="o" size=22 maxlength=60 value="{$o}">
+		<input type="text" id="o" name="o" size=22 maxlength=60 value="{$o}">
 {/render}
      </td>
     </tr>
@@ -293,7 +293,7 @@
      <td><label for="ou">{t}Department{/t}</label></td>
      <td>
 {render acl=$ouACL checkbox=$multiple_support checked=$use_ou}
-		<input id="ou" name="ou" size=22 maxlength=60 value="{$ou}">
+		<input type="text" id="ou" name="ou" size=22 maxlength=60 value="{$ou}">
 {/render}
      </td>
     </tr>
@@ -301,7 +301,7 @@
      <td><label for="departmentNumber">{t}Department No.{/t}</label></td>
      <td>
 {render acl=$departmentNumberACL checkbox=$multiple_support checked=$use_departmentNumber}
-	      <input id="departmentNumber" name="departmentNumber" size=22 maxlength=60 value="{$departmentNumber}">
+	      <input type="text" id="departmentNumber" name="departmentNumber" size=22 maxlength=60 value="{$departmentNumber}">
 {/render}
      </td>
     </tr>
@@ -309,7 +309,7 @@
      <td><label for="employeeNumber">{t}Employee No.{/t}</label></td>
      <td>
 {render acl=$employeeNumberACL checkbox=$multiple_support checked=$use_employeeNumber}
-      		<input id="employeeNumber" name="employeeNumber" size=22 maxlength=60 value="{$employeeNumber}">
+      		<input type="text" id="employeeNumber" name="employeeNumber" size=22 maxlength=60 value="{$employeeNumber}">
 {/render}
      </td>
     </tr>
@@ -317,7 +317,7 @@
      <td><label for="employeeType">{t}Employee type{/t}</label></td>
      <td>
 {render acl=$employeeTypeACL checkbox=$multiple_support checked=$use_employeeType}
-      		<input id="employeeType" name="employeeType" size=22 maxlength=60 value="{$employeeType}">
+      		<input type="text" id="employeeType" name="employeeType" size=22 maxlength=60 value="{$employeeType}">
 {/render}
      </td>
     </tr>
@@ -335,7 +335,7 @@
      <td><label for="roomNumber">{t}Room No.{/t}</label></td>
      <td>
 {render acl=$roomNumberACL checkbox=$multiple_support checked=$use_roomNumber}
-		<input id="roomNumber" name="roomNumber" size=22 maxlength=60 value="{$roomNumber}">
+		<input type="text" id="roomNumber" name="roomNumber" size=22 maxlength=60 value="{$roomNumber}">
 {/render}
      </td>
     </tr>
@@ -344,7 +344,7 @@
      <td><label for="telephoneNumber">{t}Phone{/t}</label></td>
      <td>
 {render acl=$telephoneNumberACL checkbox=$multiple_support checked=$use_telephoneNumber}
-      		<input id="telephoneNumber" name="telephoneNumber" size=22 maxlength=60 value="{$telephoneNumber}">
+      		<input type="text" id="telephoneNumber" name="telephoneNumber" size=22 maxlength=60 value="{$telephoneNumber}">
 {/render}
      </td>
     </tr>
@@ -353,7 +353,7 @@
      <td><label for="mobile">{t}Mobile{/t}</label></td>
      <td>
 {render acl=$mobileACL checkbox=$multiple_support checked=$use_mobile}
-		<input id="mobile" name="mobile" size=22 maxlength=60 value="{$mobile}">
+		<input type="text" id="mobile" name="mobile" size=22 maxlength=60 value="{$mobile}">
 {/render}
      </td>
     </tr>
@@ -361,7 +361,7 @@
      <td><label for="pager">{t}Pager{/t}</label></td>
      <td>
 {render acl=$pagerACL checkbox=$multiple_support checked=$use_pager}
-      		<input id="pager" name="pager" size=22 maxlength=60 value="{$pager}">
+      		<input type="text" id="pager" name="pager" size=22 maxlength=60 value="{$pager}">
 {/render}
      </td>
     </tr>
@@ -369,7 +369,7 @@
      <td><label for="facsimileTelephoneNumber">{t}Fax{/t}</label></td>
      <td>
 {render acl=$facsimileTelephoneNumberACL checkbox=$multiple_support checked=$use_facsimileTelephoneNumber}
-		<input id="facsimileTelephoneNumber" name="facsimileTelephoneNumber" size=22 maxlength=60 value="{$facsimileTelephoneNumber}">
+		<input type="text" id="facsimileTelephoneNumber" name="facsimileTelephoneNumber" size=22 maxlength=60 value="{$facsimileTelephoneNumber}">
 {/render}
      </td>
     </tr>
@@ -387,7 +387,7 @@
      <td><label for="l">{t}Location{/t}</label></td>
      <td>
 {render acl=$lACL checkbox=$multiple_support checked=$use_l}
-		<input id="l" name="l" size=22 maxlength=60 value="{$l}">
+		<input type="text" id="l" name="l" size=22 maxlength=60 value="{$l}">
 {/render}
      </td>
     </tr>
@@ -395,7 +395,7 @@
      <td><label for="st">{t}State{/t}</label></td>
      <td>
 {render acl=$stACL checkbox=$multiple_support checked=$use_st}
-		<input id="st" name="st" size=22 maxlength=60 value="{$st}">
+		<input type="text" id="st" name="st" size=22 maxlength=60 value="{$st}">
 {/render}
      </td>
     </tr>
@@ -419,7 +419,7 @@
      <td><label for="vocation">{t}Vocation{/t}</label></td>
      <td>
 {render acl=$vocationACL checkbox=$multiple_support checked=$use_vocation}
-		<input id="vocation" name="vocation" size=22 maxlength=60 value="{$vocation}">
+		<input type="text" id="vocation" name="vocation" size=22 maxlength=60 value="{$vocation}">
 {/render}
      </td>
     </tr>
@@ -427,7 +427,7 @@
      <td><label for="gouvernmentOrganizationalUnitDescription">{t}Unit description{/t}</label></td>
      <td>
 {render acl=$gouvernmentOrganizationalUnitDescriptionACL checkbox=$multiple_support checked=$use_gouvernmentOrganizationalUnitDescription}
-      		<input id="gouvernmentOrganizationalUnitDescription" name="gouvernmentOrganizationalUnitDescription" size=22 maxlength=60
+      		<input type="text" id="gouvernmentOrganizationalUnitDescription" name="gouvernmentOrganizationalUnitDescription" size=22 maxlength=60
 		value="{$gouvernmentOrganizationalUnitDescription}">
 {/render}
      </td>
@@ -436,7 +436,7 @@
      <td><label for="gouvernmentOrganizationalUnitSubjectArea">{t}Subject area{/t}</label></td>
      <td>
 {render acl=$gouvernmentOrganizationalUnitSubjectAreaACL checkbox=$multiple_support checked=$use_gouvernmentOrganizationalUnitSubjectArea}
-	      	<input id="gouvernmentOrganizationalUnitSubjectArea" name="gouvernmentOrganizationalUnitSubjectArea" size=22 maxlength=60
+	      	<input type="text" id="gouvernmentOrganizationalUnitSubjectArea" name="gouvernmentOrganizationalUnitSubjectArea" size=22 maxlength=60
            	value="{$gouvernmentOrganizationalUnitSubjectArea}">
 {/render}
      </td>
@@ -445,7 +445,7 @@
      <td><label for="functionalTitle">{t}Functional title{/t}</label></td>
      <td>
 {render acl=$functionalTitleACL checkbox=$multiple_support checked=$use_functionalTitle}
-      		<input name="functionalTitle" id="functionalTitle"  size=22 maxlength=60
+      		<input type="text" name="functionalTitle" id="functionalTitle"  size=22 maxlength=60
              	value="{$functionalTitle}">
 {/render}
      </td>
@@ -454,7 +454,7 @@
      <td><label for="role">{t}Role{/t}</label></td>
      <td>
 {render acl=$roleACL checkbox=$multiple_support checked=$use_role}
-      		<input id="role" name="role" size=22 maxlength=60 value="{$role}">
+      		<input type="text" id="role" name="role" size=22 maxlength=60 value="{$role}">
 {/render}
      </td>
     </tr>
@@ -468,7 +468,7 @@
      <td><label for="gouvernmentOrganizationalPersonLocality">{t}Person locality{/t}</label></td>
      <td>
 {render acl=$gouvernmentOrganizationalPersonLocalityACL checkbox=$multiple_support checked=$use_gouvernmentOrganizationalPersonLocality}
-      		<input id="gouvernmentOrganizationalPersonLocality" name="gouvernmentOrganizationalPersonLocality" size=22 maxlength=60
+      		<input type="text" id="gouvernmentOrganizationalPersonLocality" name="gouvernmentOrganizationalPersonLocality" size=22 maxlength=60
                 value="{$gouvernmentOrganizationalPersonLocality}">
 {/render}
      </td>
@@ -477,7 +477,7 @@
      <td><label for="gouvernmentOrganizationalUnit">{t}Unit{/t}</label></td>
      <td>
 {render acl=$gouvernmentOrganizationalUnitACL checkbox=$multiple_support checked=$use_gouvernmentOrganizationalUnit}
-		<input id="gouvernmentOrganizationalUnit" name="gouvernmentOrganizationalUnit" size=22 maxlength=60 
+		<input type="text" id="gouvernmentOrganizationalUnit" name="gouvernmentOrganizationalUnit" size=22 maxlength=60 
             	value="{$gouvernmentOrganizationalUnit}">
 {/render}
      </td>
@@ -486,7 +486,7 @@
      <td><label for="street">{t}Street{/t}</label></td>
      <td>
 {render acl=$streetACL checkbox=$multiple_support checked=$use_street}
-      		<input name="street" id="street" size=22 maxlength=60 value="{$street}">
+      		<input type="text" name="street" id="street" size=22 maxlength=60 value="{$street}">
 {/render}
      </td>
     </tr>
@@ -494,7 +494,7 @@
      <td><label for="postalCode">{t}Postal code{/t}</label></td>
      <td> 
 {render acl=$postalCodeACL checkbox=$multiple_support checked=$use_postalCode}
-      		<input name="postalCode" id="postalCode" size=22 maxlength=60 value="{$postalCode}">
+      		<input type="text" name="postalCode" id="postalCode" size=22 maxlength=60 value="{$postalCode}">
 {/render}
      </td>
     </tr>
@@ -502,7 +502,7 @@
      <td><label for="houseIdentifier">{t}House identifier{/t}</label></td>
      <td>
 {render acl=$houseIdentifierACL checkbox=$multiple_support checked=$use_houseIdentifier}
-      		<input id="houseIdentifier" name="houseIdentifier" size=22 maxlength=60
+      		<input type="text" id="houseIdentifier" name="houseIdentifier" size=22 maxlength=60
              	value="{$houseIdentifier}">
 {/render}
      </td>
@@ -517,7 +517,7 @@
      <td><label for="roomNumber">{t}Room No.{/t}</label></td>
      <td>
 {render acl=$roomNumberACL checkbox=$multiple_support checked=$use_roomNumber}
-		<input id="roomNumber" name="roomNumber" size=22 maxlength=60 value="{$roomNumber}">
+		<input type="text" id="roomNumber" name="roomNumber" size=22 maxlength=60 value="{$roomNumber}">
 {/render}
      </td>
     </tr>
@@ -526,7 +526,7 @@
      <td>
 {render acl=$telephoneNumberACL checkbox=$multiple_support checked=$use_telephoneNumber}
 	      {if $has_phoneaccount ne "true"}
-			<input id="telephoneNumber" name="telephoneNumber" size=22 maxlength=60 value="{$telephoneNumber}">
+			<input type="text" id="telephoneNumber" name="telephoneNumber" size=22 maxlength=60 value="{$telephoneNumber}">
 	      {else}
 			<i>{t}Please use the phone tab{/t}</i>
 	      {/if}
@@ -537,7 +537,7 @@
      <td><label for="facsimileTelephoneNumber">{t}Fax{/t}</label></td>
      <td>
 {render acl=$facsimileTelephoneNumberACL checkbox=$multiple_support checked=$use_facsimileTelephoneNumber}
-      		<input id="facsimileTelephoneNumber" name="facsimileTelephoneNumber" size=22 maxlength=60 
+      		<input type="text" id="facsimileTelephoneNumber" name="facsimileTelephoneNumber" size=22 maxlength=60 
                 value="{$facsimileTelephoneNumber}">
 {/render}
      </td>
@@ -546,7 +546,7 @@
      <td><label for="ivbbLastDeliveryCollective">{t}Last delivery{/t}</label></td>
      <td>
 {render acl=$ivbbLastDeliveryCollectiveACL checkbox=$multiple_support checked=$use_ivbbLastDeliveryCollective}
-      		<input name="ivbbLastDeliveryCollective" size=22 maxlength=60 id="ivbbLastDeliveryCollective" 
+      		<input type="text" name="ivbbLastDeliveryCollective" size=22 maxlength=60 id="ivbbLastDeliveryCollective" 
              	value="{$ivbbLastDeliveryCollective}">
 {/render}
      </td>

@@ -695,6 +695,15 @@ input {
 	font-size:12px;
 }
 
+input[type=text] {
+        border:1px solid #AAA;
+}
+
+input[type=password] {
+        border:1px solid #AAA;
+}
+
+
 input:focus {
 	font-size:12px;
 }
@@ -704,6 +713,7 @@ select {
 }
 
 textarea {
+        border:1px solid #AAA;
 	font-size:12px;
 }
 
