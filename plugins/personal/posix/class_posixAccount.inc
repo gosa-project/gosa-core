@@ -501,6 +501,7 @@ class posixAccount extends plugin
 
     /* Show main page */
     $smarty= get_smarty();
+    $smarty->assign("usePrototype", "true");
 
     /* In 'MyAccount' mode, we must remove write acls if we are not in editing mode. */ 
     $SkipWrite = (!isset($this->parent) || !$this->parent) && !session::is_set('edit');
