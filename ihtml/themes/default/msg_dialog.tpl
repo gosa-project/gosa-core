@@ -14,7 +14,7 @@
 				allowtransparency='true';
 				background-color: #FFFFFF;
 				filter:chroma(color=#FFFFFF);
-				z-index:0; ">
+				z-index:100; ">
 		</iframe>
 		<div  id='e_layer2'
 			style="
@@ -23,7 +23,7 @@
 				top: 0px;
 				right:0px;
 				bottom:0px;
-				z-index:0;
+				z-index:100;
 				width:100%;
 				height:100%;
 				filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src='images/opacity_black.png'); "
@@ -36,7 +36,7 @@
 				top: 0px;
 				right:0px;
 				bottom:0px;
-				z-index:0;
+				z-index:100;
 				background-image: url(images/opacity_black.png);">
 
 	{/if}
