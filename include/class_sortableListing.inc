@@ -30,13 +30,14 @@ class sortableListing {
   private $id;
 
   private $data= array();
+  private $keys= array();
   private $displayData= array();
   private $columns= 0;
   private $deleteable= false;
   private $editable= false;
+  private $colorAlternate= false;
   private $instantDelete= true;
   private $action;
-  private $targets;
   private $mapping;
   private $current_mapping;
   private $active_index;
@@ -52,15 +53,7 @@ class sortableListing {
     global $config;
 
     // Save data to display
-    $this->setData($data);
-    if (!$displayData) {
-      $displayData= array();
-      foreach ($data as $value) {
-        $displayData[]= array($value);
-      }
-    }
-
-    $this->setDisplayData($displayData);
+    $this->setListData($data, $displayData);
 
     // Generate instance wide unique ID
     $tmp= gettimeofday();
@@ -71,6 +64,21 @@ class sortableListing {
     if (!$reorderable) {
       $this->sortData();
     }
+  }
+
+
+  public function setListData($data, $displayData= null)
+  {
+    // Save data to display
+    $this->setData($data);
+    if (!$displayData) {
+      $displayData= array();
+      foreach ($data as $key => $value) {
+        $displayData[$key]= array($value);
+      }
+    }
+
+    $this->setDisplayData($displayData);
   }
 
 
@@ -87,10 +95,11 @@ class sortableListing {
     }
 
     // Transfer information
-    $this->displayData= $data;
+    $this->displayData= array_values($data);
+    $this->keys= array_keys($data);
 
     // Create initial mapping
-    $this->mapping= array_keys($data);
+    $this->mapping= range(0, abs(count($this->keys)-1));
     $this->current_mapping= $this->mapping;
 
     // Find the number of coluns
@@ -118,6 +127,12 @@ class sortableListing {
   public function setInstantDelete($flag)
   {
     $this->instantDelete= $flag;
+  }
+
+
+  public function setColorAlternate($flag)
+  {
+    $this->colorAlternate= $flag;
   }
 
 
@@ -191,6 +206,7 @@ class sortableListing {
     // Do we need a header?
     if ($this->header) {
       $result.= " <thead>\n  <tr>\n";
+      $first= " style='border:0'";
       for ($i= 0; $i<$this->columns; $i++) {
         $link= "href='?plug=".$_GET['plug']."&amp;PID=".$this->id."&amp;act=SORT_$i'";
         $sorter= "";
@@ -199,10 +215,11 @@ class sortableListing {
         }
 
         if ($this->reorderable) {
-          $result.= "   <th>".(isset($this->header[$i])?$this->header[$i]:"")."</th>";
+          $result.= "   <th$first>".(isset($this->header[$i])?$this->header[$i]:"")."</th>";
         } else {
-          $result.= "   <th><a $link>".(isset($this->header[$i])?$this->header[$i]:"")."$sorter</a></th>";
+          $result.= "   <th$first><a $link>".(isset($this->header[$i])?$this->header[$i]:"")."$sorter</a></th>";
         }
+        $first= "";
       }
       if ($action_width) {
         $result.= "<th>&nbsp;</th>";
@@ -216,7 +233,7 @@ class sortableListing {
     if (strpos($this->acl, 'r') !== false) {
       foreach ($this->mapping as $nr => $row) {
         $editable= $this->editable?" onclick='$(\"edit_".$this->id."_$nr\").click()'":"";
-        $result.= "  <tr class='sortableListItem".($nr&1?'Odd':'')."' id='item_".$this->id."_$nr'$reorderable>\n";
+        $result.= "  <tr class='sortableListItem".((($nr&1)||!$this->colorAlternate)?'':'Odd')."' id='item_".$this->id."_$nr'$reorderable>\n";
         $first= " style='border:0'";
         foreach ($this->displayData[$row] as $column) {
           $result.= "   <td$editable$first>".htmlentities($column)."</td>\n";
@@ -371,7 +388,7 @@ class sortableListing {
     $tmp= array();
 
     foreach ($this->mapping as $src => $dst) {
-      $tmp[$src]= $this->data[$dst];
+      $tmp[$this->keys[$dst]]= $this->data[$dst];
     }
 
     return $tmp;
@@ -417,11 +434,17 @@ class sortableListing {
   }
 
 
-  public function addEntry($entry, $displayEntry= null)
+  public function addEntry($entry, $displayEntry= null, $key= null)
   {
     // Only add if not already there
-    if (in_array($entry, $this->data)) {
-      return;
+    if (!$key) {
+      if (in_array($entry, $this->data)) {
+        return;
+      }
+    } else {
+      if (isset($this->data[$key])) {
+        return;
+      }
     }
 
     // Prefill with default value if not specified
@@ -430,11 +453,21 @@ class sortableListing {
     }
 
     // Append to data and mapping
-    $this->data[]= $entry;
+    if ($key) {
+      $this->data[$key]= $entry;
+      $this->keys[]= $key;
+    } else {
+      $this->data[]= $entry;
+      $this->keys[]= count($this->mapping);
+    }
     $this->displayData[]= $displayEntry;
     $this->mapping[]= count($this->mapping);
     $this->modified= true;
   }
 
+
+  public function getKey($index) {
+    return isset($this->keys[$index])?$this->keys[$index]:null;
+  }
 
 }
