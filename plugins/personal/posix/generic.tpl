@@ -91,28 +91,15 @@
     <b style="color:red">{t}(Warning: more than 16 groups are not supported by NFS!){/t}</b>
     <br>
    {/if}
-{render acl=$groupMembershipACL}
-   <select style="width:100%; height:130px;" name="group_list[]" size=16 multiple >
-{if !$multiple_support}
-    {html_options options=$groupMembership}
-{else}
-	{foreach from=$groupMembership item=group key=key}
-		<option value="{$key}">{$group}&nbsp;({t}Common group{/t})</option>
-	{/foreach}
-	{foreach from=$groupMembership_some item=group key=key}
-		<option value="{$key}" 
-			style='color: #888888; background: #DDDDDD;background-color: #DDDDDD;'>{$group}&nbsp;({t}Groups differ{/t})</option>
-	{/foreach}
-{/if}
-   </select>
-{/render}
-   <br>
-{render acl=$groupMembershipACL}
+   {render acl=$groupMembershipACL}
+     {$groupMembershipList}
+   {/render}
+   {render acl=$groupMembershipACL}
    <input type=submit value="{msgPool type=addButton}" name="edit_groupmembership" >&nbsp;
-{/render}
-{render acl=$groupMembershipACL}
+   {/render}
+<!--{render acl=$groupMembershipACL}
    <input type=submit value="{msgPool type=delButton}" name="delete_groupmembership" >
-{/render}
+{/render}-->
   </td>
  </tr>
 </table>
