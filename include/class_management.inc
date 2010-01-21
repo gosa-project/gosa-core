@@ -161,7 +161,7 @@ class management
 
     // Display tab object.
     if($this->tabObject instanceOf tabs || $this->tabObject instanceOf multi_plug){
-      $this->tabObject->save_object();
+#      $this->tabObject->save_object();
       $display = $this->tabObject->execute();
       $display.= $this->_getTabFooter();
       return($this->getHeader().$display);
