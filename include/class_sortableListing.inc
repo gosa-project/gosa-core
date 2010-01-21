@@ -159,8 +159,8 @@ class sortableListing {
 
   public function render()
   {
-    $result= "<div class='sortableListContainer' id='scroll_".$this->id."' style='width: ".$this->width."; height: ".$this->height."'>\n";
-    $result.= "<table border='0' cellpadding='0' cellspacing='0' height='100%' width='100%' style='table-layout:fixed; position: relative;'".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">\n";
+    $result= "<div class='sortableListContainer' id='scroll_".$this->id."' style='height: ".$this->height."'>\n";
+    $result.= "<table border='0' cellpadding='0' cellspacing='0' height='100%' style='width: ".$this->width."';table-layout:fixed; position: relative;'".(!empty($this->cssclass)?" class='".$this->cssclass."'":"").">\n";
     $action_width= 0;
     if (strpos($this->acl, 'w') === false) {
       $edit_image= $this->editable?"<img class='center' src='images/lists/edit-grey.png' alt='"._("Edit")."'>":"";
@@ -183,7 +183,7 @@ class sortableListing {
 
       // Extend by another column if we've actions specified
       if ($action_width) {
-        $result.= "  <col width='$action_width'/>\n";
+        $result.= "  <col style='width:".$action_width."px'/>\n";
       }
       $result.= " </colgroup>\n";
     }

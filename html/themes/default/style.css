@@ -1562,7 +1562,7 @@ div.errorMsgDialog {
 	background-color:white;
 	border:4px solid red;
 	z-index:150;
-  display: none;
+        display: none;
 	position:absolute;
 }
 
@@ -1571,7 +1571,7 @@ div.infoMsgDialog {
 	background-color:white;
 	border: 2px solid black;
 	z-index:150;
-  display: none;
+        display: none;
 	position:absolute;
 }
 
