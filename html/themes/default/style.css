@@ -1990,6 +1990,11 @@ tr.sortableListItemOdd {
 tr.sortableListItem:hover, tr.sortableListItemOdd:hover {
     background-color: #EEE;
 }
+tr.sortableListItemDisabled {
+    background-color: #CCC;
+    cursor:default;
+    color: black;
+}
 
 
 table.sortableListTable {
