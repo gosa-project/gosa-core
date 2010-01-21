@@ -11,10 +11,10 @@
      <td><LABEL for="cn">{t}Group name{/t}</LABEL>{$must}</td>
      <td>
 {if $multiple_support}
-	<input id="dummy1" name="dummy1" size=25 maxlength=60 value="{t}Multiple edit{/t}" disabled>
+	<input type='text' id="dummy1" name="dummy1" size=25 maxlength=60 value="{t}Multiple edit{/t}" disabled>
 {else}
 {render acl=$cnACL}
-       <input id="cn" name="cn" size=25 maxlength=60 value="{$cn}" title="{t}Posix name of the group{/t}">
+       <input type='text' id="cn" name="cn" size=25 maxlength=60 value="{$cn}" title="{t}Posix name of the group{/t}">
 {/render}
 {/if}
      </td>
@@ -25,7 +25,7 @@
      </td>
      <td>
 {render acl=$descriptionACL checkbox=$multiple_support checked=$use_description}
-      <input id="description" name="description" size=40 maxlength=80 value="{$description}" title="{t}Descriptive text for this group{/t}">
+      <input type='text' id="description" name="description" size=40 maxlength=80 value="{$description}" title="{t}Descriptive text for this group{/t}">
 {/render}
      </td>
     </tr>
@@ -68,7 +68,7 @@
 	<LABEL for="gidNumber">{t}Force GID{/t}</LABEL>
       &nbsp;
 {render acl=$gidNumberACL}
-      <input name="gidNumber" size=9 maxlength=9 id="gidNumber" {$forceMode} value="{$gidNumber}" title="{t}Forced ID number{/t}">
+      <input type='text' name="gidNumber" size=9 maxlength=9 id="gidNumber" {$forceMode} value="{$gidNumber}" title="{t}Forced ID number{/t}">
 {/render}
      </td>
     </tr>

@@ -11,7 +11,7 @@
        <td><LABEL for="l">{t}Locality name{/t}</LABEL>{$must}</td>
        <td>
 {render acl=$lACL}
-    	<input id="l" name="l" size=25 maxlength=60 value="{$l}" title="{t}Name of locality to create{/t}">
+    	<input type='text' id="l" name="l" size=25 maxlength=60 value="{$l}" title="{t}Name of locality to create{/t}">
 {/render}
        </td>
       </tr>
@@ -19,7 +19,7 @@
        <td><LABEL for="description">{t}Description{/t}</LABEL>{$must}</td>
        <td>
 {render acl=$descriptionACL}
-        <input id="description" name="description" size=25 maxlength=80 value="{$description}" title="{t}Descriptive text for department{/t}">
+        <input type='text' id="description" name="description" size=25 maxlength=80 value="{$description}" title="{t}Descriptive text for department{/t}">
 {/render}
        </td>
       </tr>

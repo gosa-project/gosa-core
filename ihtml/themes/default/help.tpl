@@ -18,7 +18,7 @@
 		{$forward}
 	</td>
 	<td style="text-align:right;">
-	 <input name="search_string" size="15" value="{$search_string}" maxlength="50">&nbsp;<input type="submit" name="search" value="{t}Search{/t}">
+	 <input type='text' name="search_string" size="15" value="{$search_string}" maxlength="50">&nbsp;<input type="submit" name="search" value="{t}Search{/t}">
 	</td>
    </tr>
   </table>

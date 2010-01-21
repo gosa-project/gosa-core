@@ -11,7 +11,7 @@
        <td><LABEL for="c">{t}Country name{/t}</LABEL>{$must}</td>
        <td>
 {render acl=$cACL}
-    	<input id="c" name="c" size=25 maxlength=60 value="{$c}" title="{t}Name of country to create{/t}">
+    	<input type='text' id="c" name="c" size=25 maxlength=60 value="{$c}" title="{t}Name of country to create{/t}">
 {/render}
        </td>
       </tr>
@@ -19,7 +19,7 @@
        <td><LABEL for="description">{t}Description{/t}</LABEL>{$must}</td>
        <td>
 {render acl=$descriptionACL}
-        <input id="description" name="description" size=25 maxlength=80 value="{$description}" title="{t}Descriptive text for department{/t}">
+        <input type='text' id="description" name="description" size=25 maxlength=80 value="{$description}" title="{t}Descriptive text for department{/t}">
 {/render}
        </td>
       </tr>

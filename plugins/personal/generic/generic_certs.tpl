@@ -79,7 +79,7 @@
    </td>
    <td>
 	{render acl=$CertificateACL}
-     <input id="certificateSerialNumber" name="certificateSerialNumber" size=10 maxlength=20 value="{$certificateSerialNumber}">
+     <input type='text' id="certificateSerialNumber" name="certificateSerialNumber" size=10 maxlength=20 value="{$certificateSerialNumber}">
 	{/render}
    </td>
  </tr>

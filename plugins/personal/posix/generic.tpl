@@ -7,7 +7,7 @@
      <td><label for="homeDirectory">{t}Home directory{/t}</label>{$must}</td>
      <td>
 {render acl=$homeDirectoryACL checkbox=$multiple_support checked=$use_homeDirectory}
-      <input id="homeDirectory" name="homeDirectory" size=40 maxlength=120 value="{$homeDirectory}">
+      <input type='text' id="homeDirectory" name="homeDirectory" size=40 maxlength=120 value="{$homeDirectory}">
 {/render}
      </td>
     </tr>
@@ -64,7 +64,7 @@
 					</td>
 					<td>
 {render acl=$uidNumberACL}
-						<input id="uidNumber" name="uidNumber" size=9 maxlength=9 {$forceMode} value="{$uidNumber}">
+						<input type='text' id="uidNumber" name="uidNumber" size=9 maxlength=9 {$forceMode} value="{$uidNumber}">
 {/render}
 					</td>
 				</tr>
@@ -75,7 +75,7 @@
 					</td>
      <td>
 {render acl=$gidNumberACL}
-						<input id="gidNumber" name="gidNumber" size=9 maxlength=9 {$forceMode} value="{$gidNumber}">
+						<input type='text' id="gidNumber" name="gidNumber" size=9 maxlength=9 {$forceMode} value="{$gidNumber}">
 {/render}
 					</td>
 				</tr>

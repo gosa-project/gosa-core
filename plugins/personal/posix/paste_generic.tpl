@@ -8,7 +8,7 @@
 		  				<label for="homeDirectory">{t}Home directory{/t}</label>
 					</td>
 					<td>
-		  				<input id="homeDirectory" name="homeDirectory" size=40 maxlength=120 value="{$homeDirectory}">
+		  				<input type='text' id="homeDirectory" name="homeDirectory" size=40 maxlength=120 value="{$homeDirectory}">
 					</td>
 	  			</tr>
 			</table>
@@ -36,7 +36,7 @@
 						<label for="uidNumber">{t}UID{/t}</label>
 					</td>
 					<td>
-						<input id="uidNumber" name="uidNumber" size=9 maxlength=9 {$forceMode} value="{$uidNumber}">
+						<input type='text' id="uidNumber" name="uidNumber" size=9 maxlength=9 {$forceMode} value="{$uidNumber}">
 					</td>
 				</tr>
 				<tr>
@@ -45,7 +45,7 @@
 						<label for="gidNumber">{t}GID{/t}</label>
 					</td>
 					<td>
-						<input id="gidNumber" name="gidNumber" size=9 maxlength=9 {$forceMode} value="{$gidNumber}">
+						<input type='text' id="gidNumber" name="gidNumber" size=9 maxlength=9 {$forceMode} value="{$gidNumber}">
 					</td>
 				</tr>
 			</table>

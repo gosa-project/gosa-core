@@ -24,7 +24,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_academicTitle" value="1" {if $use_academicTitle} checked {/if}>
-      <input id="academicTitle" name="academicTitle" size=25 maxlength=60 value="{$academicTitle}">
+      <input type='text' id="academicTitle" name="academicTitle" size=25 maxlength=60 value="{$academicTitle}">
      </td>
     </tr>
     <tr>
@@ -79,7 +79,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_homePhone" value="1" {if $use_homePhone} checked {/if}>
-      <input id="homePhone" name="homePhone" size=25 maxlength=60 value="{$homePhone}">
+      <input type='text' id="homePhone" name="homePhone" size=25 maxlength=60 value="{$homePhone}">
      </td>
     </tr>
     <tr>
@@ -89,7 +89,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_labeledURI" value="1" {if $use_labeledURI} checked {/if}>
-      <input id="labeledURI" name="labeledURI" size=25 maxlength=60 value="{$labeledURI}">
+      <input type='text' id="labeledURI" name="labeledURI" size=25 maxlength=60 value="{$labeledURI}">
      </td>
     </tr>
     <tr>
@@ -150,7 +150,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_o" value="1" {if $use_o} checked {/if}>
-      <input id="o" name="o" size=22 maxlength=60 value="{$o}">
+      <input type='text' id="o" name="o" size=22 maxlength=60 value="{$o}">
      </td>
     </tr>
     <tr>
@@ -160,7 +160,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_ou" value="1" {if $use_ou} checked {/if}>
-      <input id="ou" name="ou" size=22 maxlength=60 value="{$ou}">
+      <input type='text' id="ou" name="ou" size=22 maxlength=60 value="{$ou}">
      </td>
     </tr>
     <tr>
@@ -170,7 +170,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_departmentNumber" value="1" {if $use_departmentNumber} checked {/if}>
-      <input id="departmentNumber" name="departmentNumber" size=22 maxlength=60 value="{$departmentNumber}">
+      <input type='text' id="departmentNumber" name="departmentNumber" size=22 maxlength=60 value="{$departmentNumber}">
      </td>
     </tr>
     <tr>
@@ -180,7 +180,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_employeeNumber" value="1" {if $use_employeeNumber} checked {/if}>
-      <input id="employeeNumber" name="employeeNumber" size=22 maxlength=60 value="{$employeeNumber}">
+      <input type='text' id="employeeNumber" name="employeeNumber" size=22 maxlength=60 value="{$employeeNumber}">
      </td>
     </tr>
     <tr>
@@ -190,7 +190,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_employeeType" value="1" {if $use_employeeType} checked {/if}>
-      <input id="employeeType" name="employeeType" size=22 maxlength=60 value="{$employeeType}">
+      <input type='text' id="employeeType" name="employeeType" size=22 maxlength=60 value="{$employeeType}">
      </td>
     </tr>
    </table>
@@ -208,7 +208,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_roomNumber" value="1" {if $use_roomNumber} checked {/if}>
-      <input id="roomNumber" name="roomNumber" size=22 maxlength=60 value="{$roomNumber}">
+      <input type='text' id="roomNumber" name="roomNumber" size=22 maxlength=60 value="{$roomNumber}">
      </td>
     </tr>
     <tr>
@@ -218,7 +218,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_telephoneNumber" value="1" {if $use_telephoneNumber} checked {/if}>
-      <input id="telephoneNumber" name="telephoneNumber" size=22 maxlength=60 value="{$telephoneNumber}">
+      <input type='text' id="telephoneNumber" name="telephoneNumber" size=22 maxlength=60 value="{$telephoneNumber}">
      </td>
     </tr>
     <tr>
@@ -228,7 +228,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_mobile" value="1" {if $use_mobile} checked {/if}>
-      <input id="mobile" name="mobile" size=22 maxlength=60 value="{$mobile}">
+      <input type='text' id="mobile" name="mobile" size=22 maxlength=60 value="{$mobile}">
      </td>
     </tr>
     <tr>
@@ -238,7 +238,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_pager" value="1" {if $use_pager} checked {/if}>
-      <input id="pager" name="pager" size=22 maxlength=60 value="{$pager}">
+      <input type='text' id="pager" name="pager" size=22 maxlength=60 value="{$pager}">
      </td>
     </tr>
     <tr>
@@ -248,7 +248,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_facsimileTelephoneNumber" value="1" {if $use_facsimileTelephoneNumber} checked {/if}>
-      <input id="facsimileTelephoneNumber" name="facsimileTelephoneNumber" size=22 maxlength=60 value="{$facsimileTelephoneNumber}">
+      <input type='text' id="facsimileTelephoneNumber" name="facsimileTelephoneNumber" size=22 maxlength=60 value="{$facsimileTelephoneNumber}">
      </td>
     </tr>
    </table>
@@ -266,7 +266,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_l" value="1" {if $use_l} checked {/if}>
-      <input id="l" name="l" size=22 maxlength=60 value="{$l}">
+      <input type='text' id="l" name="l" size=22 maxlength=60 value="{$l}">
      </td>
     </tr>
     <tr>
@@ -276,7 +276,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_st" value="1" {if $use_st} checked {/if}>
-      <input id="st" name="st" size=22 maxlength=60 value="{$st}">
+      <input type='text' id="st" name="st" size=22 maxlength=60 value="{$st}">
      </td>
     </tr>
     <tr>
@@ -303,7 +303,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_vocation" value="1" {if $use_vocation} checked {/if}>
-      <input id="vocation" name="vocation" size=22 maxlength=60 value="{$vocation}">
+      <input type='text' id="vocation" name="vocation" size=22 maxlength=60 value="{$vocation}">
      </td>
     </tr>
     <tr>
@@ -346,7 +346,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_role" value="1" {if $use_role} checked {/if}>
-      <input id="role" name="role" size=22 maxlength=60 value="{$role}">
+      <input type='text' id="role" name="role" size=22 maxlength=60 value="{$role}">
      </td>
     </tr>
    </table>
@@ -383,7 +383,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_street" value="1" {if $use_street} checked {/if}>
-      <input name="street" id="street" size=22 maxlength=60 value="{$street}">
+      <input type='text' name="street" id="street" size=22 maxlength=60 value="{$street}">
      </td>
     </tr>
     <tr>
@@ -393,7 +393,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_postalCode" value="1" {if $use_postalCode} checked {/if}>
-      <input name="postalCode" id="postalCode" size=22 maxlength=60 value="{$postalCode}">
+      <input type='text' name="postalCode" id="postalCode" size=22 maxlength=60 value="{$postalCode}">
      </td>
     </tr>
     <tr>
@@ -419,7 +419,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_roomNumber" value="1" {if $use_roomNumber} checked {/if}>
-      <input id="roomNumber" name="roomNumber" size=22 maxlength=60 value="{$roomNumber}">
+      <input type='text' id="roomNumber" name="roomNumber" size=22 maxlength=60 value="{$roomNumber}">
      </td>
     </tr>
     <tr>
@@ -429,7 +429,7 @@
      </td>
      <td>
 	<input type="checkbox" name="use_telephoneNumber" value="1" {if $use_telephoneNumber} checked {/if}>
-      <input id="telephoneNumber" name="telephoneNumber" size=22 maxlength=60 value="{$telephoneNumber}">
+      <input type='text' id="telephoneNumber" name="telephoneNumber" size=22 maxlength=60 value="{$telephoneNumber}">
      </td>
     </tr>
     <tr>

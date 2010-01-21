@@ -5,15 +5,15 @@
 	  <table>
 		<tr>
 		  <td><label for="sn">{t}Last name{/t}</label></td>
-		  <td><input id="sn" name="sn" size=25 maxlength=60  value="{$sn}"></td>
+		  <td><input type='text' id="sn" name="sn" size=25 maxlength=60  value="{$sn}"></td>
 		</tr>
 		<tr>
 		  <td><label for="givenName">{t}First name{/t}</label></td>
-		  <td><input id="givenName" name="givenName" size=25 maxlength=60 value="{$givenName}"></td>
+		  <td><input type='text' id="givenName" name="givenName" size=25 maxlength=60 value="{$givenName}"></td>
 		</tr>
 		<tr>
 		  <td><label for="uid">{t}Login{/t}</label></td>
-		  <td><input id="uid" name="uid" size=25 maxlength=60 value="{$uid}"></td>
+		  <td><input type='text' id="uid" name="uid" size=25 maxlength=60 value="{$uid}"></td>
 		</tr>
 		<tr>
 			<td style='vertical-align:top;'>

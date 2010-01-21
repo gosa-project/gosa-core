@@ -5,7 +5,7 @@
 			{t}Group name{/t}
 		</td>
 		<td>
-			<input id='cn' name='cn' size='35' maxlength='60' value='{$cn}' title='{t}Posix name of the group{/t}'>
+			<input type='text' id='cn' name='cn' size='35' maxlength='60' value='{$cn}' title='{t}Posix name of the group{/t}'>
 		</td>
 	</tr>
 	<tr>
@@ -15,7 +15,7 @@
 			<LABEL for='gidNumber'>{t}Force GID{/t}</LABEL>
 		</td>
 		<td>
-			<input name='gidNumber' size=9 maxlength=9 id='gidNumber' {$dis} value='{$gidNumber}' title='{t}Forced ID number{/t}'>
+			<input type='text' name='gidNumber' size=9 maxlength=9 id='gidNumber' {$dis} value='{$gidNumber}' title='{t}Forced ID number{/t}'>
 		</td>
 	</tr>
 </table>

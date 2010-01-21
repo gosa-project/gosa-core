@@ -7,7 +7,7 @@
      <td><LABEL for="cn">{t}Group name{/t}</LABEL>{$must}</td>
      <td>
 {render acl=$cnACL}
-       <input name="cn" id="cn" size=25 maxlength=60 value="{$cn}" title="{t}Name of the group{/t}">
+       <input type='text' name="cn" id="cn" size=25 maxlength=60 value="{$cn}" title="{t}Name of the group{/t}">
 {/render}
      </td>
     </tr>
@@ -15,7 +15,7 @@
      <td><LABEL for="description">{t}Description{/t}</LABEL></td>
      <td>
 {render acl=$descriptionACL}
-	<input id="description" name="description" size=40 maxlength=80 value="{$description}" title="{t}Descriptive text for this group{/t}">
+	<input type='text' id="description" name="description" size=40 maxlength=80 value="{$description}" title="{t}Descriptive text for this group{/t}">
 {/render}
      </td>
     </tr>
