@@ -1221,7 +1221,7 @@ class listing {
         // Replace %acl if available
         if ($classes) {
           $otype= $this->getObjectType($this->objectTypes, $classes);
-          $acl= str_replace('%acl', $otype['category']."/".$otype['class']);
+          $acl= str_replace('%acl', $otype['category']."/".$otype['class'], $acl);
         }
 
         // Split for category and plugins if needed
