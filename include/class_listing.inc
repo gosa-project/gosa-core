@@ -1221,7 +1221,6 @@ class listing {
         // Replace %acl if available
         if ($classes) {
           $otype= $this->getObjectType($this->objectTypes, $classes);
-          echo "ACL replace: $module/".$otype['category']."<br>";
           $acl= str_replace('%acl', $module."/".$otype['category']);
         }
 
