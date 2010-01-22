@@ -749,8 +749,8 @@ class listing {
         // Move acl information if needed
         if ($param == "acl") {
           $otype= $this->getObjectType($this->objectTypes, $config["objectClass"]);
-          $category= $this->category[$otype]
-          $params[]= $ui->get_category_permissions($config["dn"], $category));
+          $category= $this->category[$otype];
+          $params[]= $ui->get_category_permissions($config["dn"], $category);
           continue;
         }
 
