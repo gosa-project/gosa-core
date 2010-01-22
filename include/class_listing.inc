@@ -172,7 +172,7 @@ class listing {
       foreach ($this->xmlData['definition']['objectType'] as $index => $otype) {
         $this->objectTypes[]= $this->xmlData['definition']['objectType'][$index];
         if (isset($this->xmlData['definition']['objectType'][$index]['category'])){
-          $this->categories[]= $this->xmlData['definition']['objectType'][$index]['category'];
+          $this->categories[$otype]= $this->xmlData['definition']['objectType'][$index]['category'];
         }
       }
     }
@@ -743,6 +743,14 @@ class listing {
         // Fixie with "" is passed directly
         if (preg_match('/^".*"$/', $param)){
           $params[]= preg_replace('/"/', '', $param);
+          continue;
+        }
+
+        // Move acl information if needed
+        if ($param == "acl") {
+          $otype= $this->getObjectType($this->objectTypes, $config["objectClass"]);
+          $category= $this->category[$otype]
+          $params[]= $ui->get_category_permissions($config["dn"], $category));
           continue;
         }
 
