@@ -102,7 +102,7 @@ class sortableListing {
 
   private function setModes($modes)
   {
-    $this->modes= $modes;
+    $this->modes= array_values($modes);
   }
 
 
@@ -267,7 +267,7 @@ class sortableListing {
         $first= " style='border:0'";
 
         foreach ($this->displayData[$row] as $column) {
-          $result.= "   <td$editable$first>".htmlentities($column)."</td>\n";
+          $result.= "   <td$editable$first>".$column."</td>\n";
           $first= "";
         }
 
@@ -467,7 +467,7 @@ class sortableListing {
   }
 
 
-  public function addEntry($entry, $displayEntry= null, $key= null)
+  public function addEntry($entry, $displayEntry= null, $key= null, $mode= null)
   {
     // Only add if not already there
     if (!$key) {
@@ -493,6 +493,7 @@ class sortableListing {
       $this->data[]= $entry;
       $this->keys[]= count($this->mapping);
     }
+    $this->modes[]= $mode;
     $this->displayData[]= $displayEntry;
     $this->mapping[]= count($this->mapping);
     $this->modified= true;
