@@ -1,7 +1,7 @@
 <?php
 /*
  * This code is part of GOsa (http://www.gosa-project.org)
- * Copyright (C) 2003-2008 GONICUS GmbH
+ * Copyright (C) 2003-2010 GONICUS GmbH
  *
  * ID: $$Id$$
  *
@@ -20,6 +20,10 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+define ('LIST_NORMAL', 0);
+define ('LIST_MARKED', 1);
+define ('LIST_DISABLED', 2);
+
 class sortableListing {
   private $header= null;
   private $colspecs= null;
@@ -31,6 +35,7 @@ class sortableListing {
 
   private $data= array();
   private $keys= array();
+  private $modes= array();
   private $displayData= array();
   private $columns= 0;
   private $deleteable= false;
@@ -48,12 +53,12 @@ class sortableListing {
   private $acl= "";
   private $modified= false;
 
-  public function sortableListing($data= array(), $displayData= null, $reorderable= false)
+  public function sortableListing($data= array(), $displayData= null, $modes= null, $reorderable= false)
   {
     global $config;
 
     // Save data to display
-    $this->setListData($data, $displayData);
+    $this->setListData($data, $displayData, $modes);
 
     // Generate instance wide unique ID
     $tmp= gettimeofday();
@@ -67,7 +72,7 @@ class sortableListing {
   }
 
 
-  public function setListData($data, $displayData= null)
+  public function setListData($data, $displayData= null, $modes= null)
   {
     // Save data to display
     $this->setData($data);
@@ -77,14 +82,27 @@ class sortableListing {
         $displayData[$key]= array($value);
       }
     }
+    if (!$modes) {
+      $modes= array();
+      foreach ($data as $key => $value) {
+        $modes[$key]= LIST_NORMAL;
+      }
+    }
 
     $this->setDisplayData($displayData);
+    $this->setModes($modes);
   }
 
 
   private function setData($data)
   {
     $this->data= $data;
+  }
+
+
+  private function setModes($modes)
+  {
+    $this->modes= $modes;
   }
 
 
@@ -233,16 +251,31 @@ class sortableListing {
     if (strpos($this->acl, 'r') !== false) {
       foreach ($this->mapping as $nr => $row) {
         $editable= $this->editable?" onclick='$(\"edit_".$this->id."_$nr\").click()'":"";
-        $result.= "  <tr class='sortableListItem".((($nr&1)||!$this->colorAlternate)?'':'Odd')."' id='item_".$this->id."_$nr'$reorderable>\n";
+
+        $id= "";
+        switch ($this->modes[$row]) {
+          case LIST_DISABLED:
+            $id= " sortableListItemDisabled";
+            $editable= false;
+            break;
+          case LIST_MARKED:
+            $id= " sortableListItemMarked";
+            break;
+        }
+
+        $result.= "  <tr class='sortableListItem".((($nr&1)||!$this->colorAlternate)?'':'Odd')."$id' id='item_".$this->id."_$nr'$reorderable>\n";
         $first= " style='border:0'";
+
         foreach ($this->displayData[$row] as $column) {
           $result.= "   <td$editable$first>".htmlentities($column)."</td>\n";
           $first= "";
         }
+
         if ($action_width) {
           $result.= "<td>".str_replace('%ID', "edit_".$this->id."_$nr", $edit_image).
                            str_replace('%ID', "del_".$this->id."_$nr", $delete_image)."</td>";
         }
+
         $result.= "  </tr>\n";
       }
     }
