@@ -282,9 +282,8 @@ class posixAccount extends plugin
     plugin::execute();
     $display= "";
 
-    /* Let the lists update themselves */
+    /* Assign list acl */
     $this->groupMembershipList->setAcl($this->getacl('memberUid', (!is_object($this->parent) && !session::is_set('edit'))));
-    $this->groupMembershipList->update();
 
     /* Log view */
     if($this->is_account && !$this->view_logged){
@@ -569,16 +568,6 @@ class posixAccount extends plugin
     $smarty->assign("shells", $this->loginShellList);
     $smarty->assign("secondaryGroups", $this->secondaryGroups);
     $smarty->assign("primaryGroup", $this->primaryGroup);
-    if(!$this->multiple_support_active){
-      if (!count($this->groupMembership)){
-        $smarty->assign("groupMembership", array("&nbsp;"));
-      } else {
-        $smarty->assign("groupMembership", $this->groupMembership);
-      }
-    }else{
-      $smarty->assign("groupMembership", $this->groupMembership);
-      $smarty->assign("groupMembership_some", $this->groupMembership_some);
-    }
     if (count($this->groupMembership) > 16){
       $smarty->assign("groups", "too_many_for_nfs");
     } else {
@@ -748,6 +737,8 @@ class posixAccount extends plugin
       /* Save values to object */
       plugin::save_object();
 
+      /* Maintain list */
+      $this->groupMembershipList->update();
 
       /* Save force GID checkbox */
       if($this->acl_is_writeable("gidNumber") || $this->acl_is_writeable("uidNumber")){
@@ -1835,9 +1826,9 @@ class posixAccount extends plugin
 
     foreach ($this->groupMembership as $key => $value) {
       if (!preg_match('/^([^[]+)\[(.*)\]$/', $value, $m)) {
-        $tmp[$key]= array($value, "");
+        $tmp[$key]= array("data" => array($value, ""));
       } else {
-        $tmp[$key]= array(rtrim($m[1]), $m[2]);
+        $tmp[$key]= array("data" => array(rtrim($m[1]), $m[2]));
       }
     }
 

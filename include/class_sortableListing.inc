@@ -53,12 +53,12 @@ class sortableListing {
   private $acl= "";
   private $modified= false;
 
-  public function sortableListing($data= array(), $displayData= null, $modes= null, $reorderable= false)
+  public function sortableListing($data= array(), $displayData= null, $reorderable= false)
   {
     global $config;
 
     // Save data to display
-    $this->setListData($data, $displayData, $modes);
+    $this->setListData($data, $displayData);
 
     // Generate instance wide unique ID
     $tmp= gettimeofday();
@@ -72,37 +72,23 @@ class sortableListing {
   }
 
 
-  public function setListData($data, $displayData= null, $modes= null)
+  public function setListData($data, $displayData= null)
   {
     // Save data to display
     $this->setData($data);
     if (!$displayData) {
       $displayData= array();
       foreach ($data as $key => $value) {
-        $displayData[$key]= array($value);
+        $displayData[$key]= array("data" => array($value));
       }
     }
-    if (!$modes) {
-      $modes= array();
-      foreach ($data as $key => $value) {
-        $modes[$key]= LIST_NORMAL;
-      }
-    }
-
     $this->setDisplayData($displayData);
-    $this->setModes($modes);
   }
 
 
   private function setData($data)
   {
     $this->data= $data;
-  }
-
-
-  private function setModes($modes)
-  {
-    $this->modes= array_values($modes);
   }
 
 
@@ -113,7 +99,10 @@ class sortableListing {
     }
 
     // Transfer information
-    $this->displayData= array_values($data);
+    $this->displayData= array();
+    foreach ($data as $key => $value) {
+      $this->displayData[]= $value['data'];
+    }
     $this->keys= array_keys($data);
 
     // Create initial mapping
@@ -253,14 +242,16 @@ class sortableListing {
         $editable= $this->editable?" onclick='$(\"edit_".$this->id."_$nr\").click()'":"";
 
         $id= "";
-        switch ($this->modes[$row]) {
-          case LIST_DISABLED:
-            $id= " sortableListItemDisabled";
-            $editable= false;
-            break;
-          case LIST_MARKED:
-            $id= " sortableListItemMarked";
-            break;
+        if (isset($this->modes[$row])) {
+          switch ($this->modes[$row]) {
+            case LIST_DISABLED:
+              $id= " sortableListItemDisabled";
+              $editable= false;
+              break;
+            case LIST_MARKED:
+              $id= " sortableListItemMarked";
+              break;
+          }
         }
 
         $result.= "  <tr class='sortableListItem".((($nr&1)||!$this->colorAlternate)?'':'Odd')."$id' id='item_".$this->id."_$nr'$reorderable>\n";
@@ -467,7 +458,7 @@ class sortableListing {
   }
 
 
-  public function addEntry($entry, $displayEntry= null, $key= null, $mode= null)
+  public function addEntry($entry, $displayEntry= null, $key= null)
   {
     // Only add if not already there
     if (!$key) {
@@ -482,7 +473,7 @@ class sortableListing {
 
     // Prefill with default value if not specified
     if (!$displayEntry) {
-      $displayEntry= array($entry);
+      $displayEntry= array('data' => array($entry));
     }
 
     // Append to data and mapping
@@ -493,10 +484,12 @@ class sortableListing {
       $this->data[]= $entry;
       $this->keys[]= count($this->mapping);
     }
-    $this->modes[]= $mode;
-    $this->displayData[]= $displayEntry;
+    $this->displayData[]= $displayEntry['data'];
     $this->mapping[]= count($this->mapping);
     $this->modified= true;
+
+    // Sort data after we've added stuff
+    $this->sortData();
   }
 
 
