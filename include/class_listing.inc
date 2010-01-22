@@ -1207,14 +1207,6 @@ class listing {
   {
     $ui= get_userinfo();
 
-############# MARKER
-    if ($classes) {
-      $otype= $this->getObjectType($this->objectTypes, $classes);
-      echo "Type: $otype<br>";
-      #$category= $this->category[$otype];
-      #$params[]= $ui->get_category_permissions($dn, $category);
-    }
-
     if (isset($action['acl'])) {
       $acls= $action['acl'];
       if (!is_array($acls)) {
@@ -1225,6 +1217,13 @@ class listing {
       foreach ($acls as $acl) {
         $module= $this->module;
         $aclList= array();
+
+        // Replace %acl if available
+        if ($classes) {
+          $otype= $this->getObjectType($this->objectTypes, $classes);
+          echo "ACL replace: $module/".$otype['category']."<br>";
+          $acl= str_replace('%acl', $module."/".$otype['category']);
+        }
 
         // Split for category and plugins if needed
         // match for "[rw]" style entries
