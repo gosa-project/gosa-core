@@ -30,7 +30,6 @@ class listing {
   var $multiSelect= false;
   var $template;
   var $headline;
-  var $module;
   var $base;
   var $sortDirection= null;
   var $sortColumn= null;
@@ -183,9 +182,8 @@ class listing {
     // Prepare table headers
     $this->renderHeader();
 
-    // Assign headline/module
+    // Assign headline/Categories
     $this->headline= _($this->xmlData['definition']['label']);
-    $this->module= $this->xmlData['definition']['module'];
     if (!is_array($this->categories)){
       $this->categories= array($this->categories);
     }
@@ -550,11 +548,11 @@ class listing {
 
     // Navigation handling
     if ($action == 'ROOT') {
-      $deps= $ui->get_module_departments($this->module);
+      $deps= $ui->get_module_departments($this->categories);
       $this->base= $deps[0];
     }
     if ($action == 'BACK') {
-      $deps= $ui->get_module_departments($this->module);
+      $deps= $ui->get_module_departments($this->categories);
       $base= preg_replace("/^[^,]+,/", "", $this->base);
       if(in_array_ics($base, $deps)){
         $this->base= $base;
@@ -971,7 +969,7 @@ class listing {
     $ui = get_userinfo();
 
     /* Check if base = first available base */
-    $deps = $ui->get_module_departments($this->module);
+    $deps = $ui->get_module_departments($this->categories);
 
     if(!count($deps) || $deps[0] == $this->filter->base){
       $enableBack = false;
@@ -1215,7 +1213,7 @@ class listing {
 
       // Every ACL has to pass
       foreach ($acls as $acl) {
-        $module= $this->module;
+        $module= $this->categories;
         $aclList= array();
 
         // Replace %acl if available
@@ -1288,7 +1286,7 @@ class listing {
 
     // Do some array munching to get it user friendly
     $ids= $config->idepartments;
-    $d= $ui->get_module_departments($this->module);
+    $d= $ui->get_module_departments($this->categories);
     $k_ids= array_keys($ids);
     $deps= array_intersect($d,$k_ids);
 
@@ -1309,7 +1307,7 @@ class listing {
     $types = departmentManagement::get_support_departments();
 
     // Load departments allowed by ACL
-    $validDepartments = $ui->get_module_departments($this->module);
+    $validDepartments = $ui->get_module_departments($this->categories);
 
     // Build filter and look in the LDAP for possible sub departments
     // of current base
@@ -1320,7 +1318,7 @@ class listing {
       $attrs[]= $data['ATTR'];
     }
     $filter.= "))";
-    $res= get_list($filter, $this->module, $this->base, $attrs, GL_NONE);
+    $res= get_list($filter, $this->categories, $this->base, $attrs, GL_NONE);
 
     // Analyze list of departments
     foreach ($res as $department) {
@@ -1443,7 +1441,7 @@ class listing {
     $result = "";
     $ui = get_userinfo();
 
-    if($this->snapshotHandler->enabled() && $ui->allow_snapshot_restore($this->base, $this->module)){
+    if($this->snapshotHandler->enabled() && $ui->allow_snapshot_restore($this->base, $this->categories)){
 
       // Check if there is something to restore
       $restore= false;
