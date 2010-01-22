@@ -261,6 +261,7 @@ class user extends plugin
 
     /* Set list ACL */
     $this->gosaLoginRestrictionWidget->setAcl($this->getacl('gosaLoginRestriction', (!is_object($this->parent) && !session::is_set('edit'))));
+    $this->gosaLoginRestrictionWidget->update();
 
     /* Handle add/delete for restriction mode */
     if (isset($_POST['add_res']) && isset($_POST['res'])) {
@@ -755,7 +756,7 @@ class user extends plugin
       plugin::save_object ();
 
       /* Sync lists */
-      $this->gosaLoginRestrictionWidget->update();
+      $this->gosaLoginRestrictionWidget->save_object();
       if ($this->gosaLoginRestrictionWidget->isModified()) {
         $this->gosaLoginRestriction= $this->gosaLoginRestrictionWidget->getMaintainedData();
       }

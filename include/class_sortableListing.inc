@@ -327,6 +327,15 @@ class sortableListing {
         $this->sortData();
       }
     }
+  }
+
+
+  public function save_object()
+  {
+    // Do not do anything if this is not our PID, or there's even no PID available...
+    if(!isset($_REQUEST['PID']) || $_REQUEST['PID'] != $this->id) {
+      return;
+    }
 
     // Do not do anything if we're not posted - or have no permission
     if (strpos($this->acl, 'w') !== false && isset($_POST['reorder_'.$this->id])){

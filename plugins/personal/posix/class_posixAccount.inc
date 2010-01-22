@@ -284,6 +284,7 @@ class posixAccount extends plugin
 
     /* Assign list acl */
     $this->groupMembershipList->setAcl($this->getacl('memberUid', (!is_object($this->parent) && !session::is_set('edit'))));
+    $this->groupMembershipList->update();
 
     /* Log view */
     if($this->is_account && !$this->view_logged){
@@ -738,7 +739,7 @@ class posixAccount extends plugin
       plugin::save_object();
 
       /* Maintain list */
-      $this->groupMembershipList->update();
+      $this->groupMembershipList->save_object();
 
       /* Save force GID checkbox */
       if($this->acl_is_writeable("gidNumber") || $this->acl_is_writeable("uidNumber")){
