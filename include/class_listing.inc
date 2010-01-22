@@ -172,7 +172,7 @@ class listing {
       foreach ($this->xmlData['definition']['objectType'] as $index => $otype) {
         $this->objectTypes[]= $this->xmlData['definition']['objectType'][$index];
         if (isset($this->xmlData['definition']['objectType'][$index]['category'])){
-          $this->categories[$otype]= $this->xmlData['definition']['objectType'][$index]['category'];
+          $this->categories[]= $otype['category'];
         }
       }
     }
@@ -749,8 +749,10 @@ class listing {
         // Move acl information if needed
         if ($param == "acl") {
           $otype= $this->getObjectType($this->objectTypes, $config["objectClass"]);
-          $category= $this->category[$otype];
-          $params[]= $ui->get_category_permissions($config["dn"], $category);
+          echo "Type: $otype<br>";
+          #$category= $this->category[$otype];
+          #$params[]= $ui->get_category_permissions($config["dn"], $category);
+          $params[]= 'rwcdm';
           continue;
         }
 
