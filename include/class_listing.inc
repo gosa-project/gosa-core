@@ -746,16 +746,6 @@ class listing {
           continue;
         }
 
-        // Move acl information if needed
-        if ($param == "acl") {
-          $otype= $this->getObjectType($this->objectTypes, $config["objectClass"]);
-          echo "Type: $otype<br>";
-          #$category= $this->category[$otype];
-          #$params[]= $ui->get_category_permissions($config["dn"], $category);
-          $params[]= 'rwcdm';
-          continue;
-        }
-
         // Move dn if needed
         if ($param == "dn") {
           $params[]= LDAP::fix($config["dn"]);
@@ -852,7 +842,7 @@ class listing {
     $actions= $this->xmlData['actiontriggers']['action'];
     foreach($actions as $action) {
       // Skip the entry completely if there's no permission to execute it
-      if (!$this->hasActionPermission($action, $dn)) {
+      if (!$this->hasActionPermission($action, $dn, $classes)) {
         $result.= "<img src='images/empty.png' alt=' ' class='center' style='padding:1px'>";
         continue;
       }
@@ -1213,9 +1203,17 @@ class listing {
   }
 
 
-  function hasActionPermission($action, $dn)
+  function hasActionPermission($action, $dn, $classes= null)
   {
     $ui= get_userinfo();
+
+############# MARKER
+    if ($classes) {
+      $otype= $this->getObjectType($this->objectTypes, $classes);
+      echo "Type: $otype<br>";
+      #$category= $this->category[$otype];
+      #$params[]= $ui->get_category_permissions($dn, $category);
+    }
 
     if (isset($action['acl'])) {
       $acls= $action['acl'];
