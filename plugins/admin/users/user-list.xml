@@ -151,7 +151,7 @@
     <action>
       <name>sendMessage</name>
       <type>entry</type>
-      <depends>goto</depends>
+      <depends>DaemonEvent_notify</depends>
       <image>plugins/goto/images/notify.png</image>
       <label>Send message</label>
     </action>
