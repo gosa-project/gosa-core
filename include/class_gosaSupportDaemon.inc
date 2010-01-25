@@ -1049,6 +1049,7 @@ class gosaSupportDaemon
     }
     @DEBUG(DEBUG_SI, $line, "<b>".$class."::".$function."</b>" , $file, "<i>".htmlentities($data)."</i>", $info="");
 
+    $start = microtime(1);
 
     /*******
       Start sending data 
@@ -1061,6 +1062,7 @@ class gosaSupportDaemon
         /* Check if something went wrong while reading */
         if($this->o_sock->is_error()){
           $this->set_error($this->o_sock->get_error());
+          @DEBUG(DEBUG_SI, $line, "<b>".$class."::".$function."</b>" , $file, sprintf('%.7f', microtime(1) - $start) , "<b>FAILED Duration:</b>");
           return($ret);
         }
 
@@ -1101,6 +1103,8 @@ class gosaSupportDaemon
             array($data=>$data),"Fire & forget, not result.! ".$this->get_error());
       }
     }
+
+    @DEBUG(DEBUG_SI, $line, "<b>".$class."::".$function."</b>" , $file, sprintf('%.7f', microtime(1) - $start) , "<b>Duration:</b>");
     return($ret);
   }
 
