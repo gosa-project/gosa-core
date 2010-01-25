@@ -41,6 +41,7 @@ class listing {
   var $header= array();
   var $colprops= array();
   var $filters= array();
+  var $filter= null;
   var $pid;
   var $objectTypes= array();
   var $objectTypeCount= array();
@@ -475,92 +476,91 @@ class listing {
     $this->objectDnMapping= array();
 
     // Do not do anything if this is not our PID
-    if(isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->pid) {
-      return;
-    }
+    if(!(isset($_REQUEST['PID']) && $_REQUEST['PID'] != $this->pid)) {
 
-    // Save position if set
-    if (isset($_POST['position_'.$this->pid]) && is_numeric($_POST['position_'.$this->pid])) {
-      $this->scrollPosition= $_POST['position_'.$this->pid];
-    }
-
-    // Save base
-    if (isset($_POST['BASE']) && $this->baseMode) {
-      $base= base64_decode(get_post('BASE'));
-      if (isset($this->bases[$base])) {
-        $this->base= $base;
-        session::global_set("CurrentMainBase", $this->base);
+      // Save position if set
+      if (isset($_POST['position_'.$this->pid]) && is_numeric($_POST['position_'.$this->pid])) {
+        $this->scrollPosition= $_POST['position_'.$this->pid];
       }
-    }
 
-    // Override the base if we got a message from the browser navigation
-    if ($this->departmentBrowser && isset($_GET['act'])) {
-      if (preg_match('/^department_([0-9]+)$/', validate($_GET['act']), $match)){
-        if (isset($this->departments[$match[1]])){
-          $this->base= $this->departments[$match[1]]['dn'];
+      // Save base
+      if (isset($_POST['BASE']) && $this->baseMode) {
+        $base= base64_decode(get_post('BASE'));
+        if (isset($this->bases[$base])) {
+          $this->base= $base;
           session::global_set("CurrentMainBase", $this->base);
         }
       }
-    }
 
-    // Filter POST with "act" attributes -> posted from action menu
-    if (isset($_POST['exec_act']) && $_POST['act'] != '') {
-      if (preg_match('/^export.*$/', $_POST['act']) && isset($this->exporter[$_POST['act']])) {
-        $exporter= $this->exporter[$_POST['act']];
-        $userinfo= ", "._("created by")." ".$ui->cn." - ".strftime('%A, %d. %B %Y, %H:%M:%S');
-        $entryIterator= new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], "_sort".$this->sortColumn, $this->sortType);
-        $sortedEntries= array();
-        foreach ($entryIterator as $entry){
-          $sortedEntries[]= $entry;
+      // Override the base if we got a message from the browser navigation
+      if ($this->departmentBrowser && isset($_GET['act'])) {
+        if (preg_match('/^department_([0-9]+)$/', validate($_GET['act']), $match)){
+          if (isset($this->departments[$match[1]])){
+            $this->base= $this->departments[$match[1]]['dn'];
+            session::global_set("CurrentMainBase", $this->base);
+          }
         }
-        $instance= new $exporter['class']($this->headline.$userinfo, $this->plainHeader, $sortedEntries, $this->exportColumns);
-        $type= call_user_func(array($exporter['class'], "getInfo"));
-        $type= $type[$_POST['act']];
-        send_binary_content($instance->query(), $type['filename'], $type= $type['mime']);
       }
-    }
 
-    // Filter GET with "act" attributes
-    if (isset($_GET['act'])) {
-      $key= validate($_GET['act']);
-      if (preg_match('/^SORT_([0-9]+)$/', $key, $match)) {
-        // Switch to new column or invert search order?
-        $column= $match[1];
-        if ($this->sortColumn != $column) {
-          $this->sortColumn= $column;
-        } else {
-          $this->sortDirection[$column]= !$this->sortDirection[$column];
+      // Filter POST with "act" attributes -> posted from action menu
+      if (isset($_POST['exec_act']) && $_POST['act'] != '') {
+        if (preg_match('/^export.*$/', $_POST['act']) && isset($this->exporter[$_POST['act']])) {
+          $exporter= $this->exporter[$_POST['act']];
+          $userinfo= ", "._("created by")." ".$ui->cn." - ".strftime('%A, %d. %B %Y, %H:%M:%S');
+          $entryIterator= new listingSortIterator($this->entries, $this->sortDirection[$this->sortColumn], "_sort".$this->sortColumn, $this->sortType);
+          $sortedEntries= array();
+          foreach ($entryIterator as $entry){
+            $sortedEntries[]= $entry;
+          }
+          $instance= new $exporter['class']($this->headline.$userinfo, $this->plainHeader, $sortedEntries, $this->exportColumns);
+          $type= call_user_func(array($exporter['class'], "getInfo"));
+          $type= $type[$_POST['act']];
+          send_binary_content($instance->query(), $type['filename'], $type= $type['mime']);
         }
-
-        // Allow header to update itself according to the new sort settings
-        $this->renderHeader();
       }
-    }
 
-    // Override base if we got signals from the navigation elements
-    $action= "";
-    foreach ($_POST as $key => $value) {
-      if (preg_match('/^(ROOT|BACK|HOME)_x$/', $key, $match)) {
-        $action= $match[1];
-        break;
-      }
-    }
+      // Filter GET with "act" attributes
+      if (isset($_GET['act'])) {
+        $key= validate($_GET['act']);
+        if (preg_match('/^SORT_([0-9]+)$/', $key, $match)) {
+          // Switch to new column or invert search order?
+          $column= $match[1];
+          if ($this->sortColumn != $column) {
+            $this->sortColumn= $column;
+          } else {
+            $this->sortDirection[$column]= !$this->sortDirection[$column];
+          }
 
-    // Navigation handling
-    if ($action == 'ROOT') {
-      $deps= $ui->get_module_departments($this->categories);
-      $this->base= $deps[0];
-    }
-    if ($action == 'BACK') {
-      $deps= $ui->get_module_departments($this->categories);
-      $base= preg_replace("/^[^,]+,/", "", $this->base);
-      if(in_array_ics($base, $deps)){
-        $this->base= $base;
+          // Allow header to update itself according to the new sort settings
+          $this->renderHeader();
+        }
       }
-    }
-    if ($action == 'HOME') {
-      $ui= get_userinfo();
-      $this->base= $this->filter->getObjectBase($ui->dn);
+
+      // Override base if we got signals from the navigation elements
+      $action= "";
+      foreach ($_POST as $key => $value) {
+        if (preg_match('/^(ROOT|BACK|HOME)_x$/', $key, $match)) {
+          $action= $match[1];
+          break;
+        }
+      }
+
+      // Navigation handling
+      if ($action == 'ROOT') {
+        $deps= $ui->get_module_departments($this->categories);
+        $this->base= $deps[0];
+      }
+      if ($action == 'BACK') {
+        $deps= $ui->get_module_departments($this->categories);
+        $base= preg_replace("/^[^,]+,/", "", $this->base);
+        if(in_array_ics($base, $deps)){
+          $this->base= $base;
+        }
+      }
+      if ($action == 'HOME') {
+        $ui= get_userinfo();
+        $this->base= $this->filter->getObjectBase($ui->dn);
+      }
     }
 
     // Reload departments
@@ -571,6 +571,11 @@ class listing {
     // Update filter and refresh entries
     $this->filter->setBase($this->base);
     $this->entries= $this->filter->query();
+
+    // Fix filter if querie returns NULL
+    if ($this->entries == null) {
+      $this->entries= array();
+    }
   }
 
 
