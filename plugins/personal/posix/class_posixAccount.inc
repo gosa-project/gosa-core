@@ -100,7 +100,6 @@ class posixAccount extends plugin
   var $uid= "";
   var $multiple_support = TRUE;
   var $groupMembership_some = array();
-  var $groupMembershipList;
 
   /* constructor, if 'dn' is set, the node loads the given
      'dn' from LDAP */
@@ -263,15 +262,6 @@ class posixAccount extends plugin
       session::set("sysfilter", $sysfilter);
     }
     $this->ui = get_userinfo();
-
-    /* Create list widget */
-    $this->groupMembershipList= new sortableListing($this->groupMembership, $this->generateGroupInfos());
-    $this->groupMembershipList->setDeleteable(true);
-    $this->groupMembershipList->setHeader(array(_("Group"),_("Description")));
-    $this->groupMembershipList->setColspecs(array('*','*'));
-    $this->groupMembershipList->setWidth("100%");
-    $this->groupMembershipList->setHeight("130px");
-    $this->groupMembershipList->setInstantDelete(false);
   }
 
 
@@ -281,10 +271,6 @@ class posixAccount extends plugin
     /* Call parent execute */
     plugin::execute();
     $display= "";
-
-    /* Assign list acl */
-    $this->groupMembershipList->setAcl($this->getacl('memberUid', (!is_object($this->parent) && !session::is_set('edit'))));
-    $this->groupMembershipList->update();
 
     /* Log view */
     if($this->is_account && !$this->view_logged){
@@ -371,12 +357,6 @@ class posixAccount extends plugin
         isset($_POST['group_list']) && count($_POST['group_list'])){
 
       $this->delGroup ($_POST['group_list']);
-    }
-
-    /* Delete selected groups */
-    $action= $this->groupMembershipList->getAction();
-    if ($action['action'] == 'delete') {
-      $this->delGroup (array($this->groupMembershipList->getKey($action['targets'][0])));
     }
 
     /* Add user workstation? */
@@ -522,7 +502,6 @@ class posixAccount extends plugin
     /* Show main page */
     $smarty= get_smarty();
     $smarty->assign("usePrototype", "true");
-    $smarty->assign("groupMembershipList", $this->groupMembershipList->render());
 
     /* In 'MyAccount' mode, we must remove write acls if we are not in editing mode. */ 
     $SkipWrite = (!isset($this->parent) || !$this->parent) && !session::is_set('edit');
@@ -569,6 +548,16 @@ class posixAccount extends plugin
     $smarty->assign("shells", $this->loginShellList);
     $smarty->assign("secondaryGroups", $this->secondaryGroups);
     $smarty->assign("primaryGroup", $this->primaryGroup);
+    if(!$this->multiple_support_active){
+      if (!count($this->groupMembership)){
+        $smarty->assign("groupMembership", array("&nbsp;"));
+      } else {
+        $smarty->assign("groupMembership", $this->groupMembership);
+      }
+    }else{
+      $smarty->assign("groupMembership", $this->groupMembership);
+      $smarty->assign("groupMembership_some", $this->groupMembership_some);
+    }
     if (count($this->groupMembership) > 16){
       $smarty->assign("groups", "too_many_for_nfs");
     } else {
@@ -738,8 +727,6 @@ class posixAccount extends plugin
       /* Save values to object */
       plugin::save_object();
 
-      /* Maintain list */
-      $this->groupMembershipList->save_object();
 
       /* Save force GID checkbox */
       if($this->acl_is_writeable("gidNumber") || $this->acl_is_writeable("uidNumber")){
@@ -1265,8 +1252,9 @@ class posixAccount extends plugin
       }
     }
 
-    // Sync new list
-    $this->groupMembershipList->setListData($this->groupMembership, $this->generateGroupInfos());
+    /* Sort groups */
+    asort ($this->groupMembership);
+    reset ($this->groupMembership);
   }
 
 
@@ -1284,9 +1272,6 @@ class posixAccount extends plugin
         }
       }
     }
-
-    // Sync new list
-    $this->groupMembershipList->setListData($this->groupMembership, $this->generateGroupInfos());
   }
 
 
@@ -1819,25 +1804,7 @@ class posixAccount extends plugin
     plugin::set_multi_edit_values($attrs);
     $this->groupMembership = $groups;
   }
-
-
-  function generateGroupInfos()
-  {
-    $tmp= array();
-
-    foreach ($this->groupMembership as $key => $value) {
-      if (!preg_match('/^([^[]+)\[(.*)\]$/', $value, $m)) {
-        $tmp[$key]= array("data" => array($value, ""));
-      } else {
-        $tmp[$key]= array("data" => array(rtrim($m[1]), $m[2]));
-      }
-    }
-
-    return ($tmp);
-  }
-
 }
-
 
 // vim:tabstop=2:expandtab:shiftwidth=2:filetype=php:syntax:ruler:
 ?>
