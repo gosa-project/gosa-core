@@ -1990,9 +1990,8 @@ tr.sortableListItem:hover, tr.sortableListItemOdd:hover {
     background-color: #EEE;
 }
 tr.sortableListItemDisabled {
-    background-color: #DDD;
     cursor:default;
-    color: black;
+    color: #CCC;
 }
 
 
@@ -2000,3 +1999,6 @@ table.sortableListTable {
     border: 0px;
 }
 
+tr.sortableListItemMarked {
+    background-color: #FFD;
+}
