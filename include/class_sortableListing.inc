@@ -100,8 +100,12 @@ class sortableListing {
 
     // Transfer information
     $this->displayData= array();
+    $this->modes= array();
     foreach ($data as $key => $value) {
       $this->displayData[]= $value['data'];
+      if (isset($value['mode'])) {
+        $this->modes[]= $value['mode'];
+      }
     }
     $this->keys= array_keys($data);
 
@@ -246,7 +250,7 @@ class sortableListing {
           switch ($this->modes[$row]) {
             case LIST_DISABLED:
               $id= " sortableListItemDisabled";
-              $editable= false;
+              $editable= "";
               break;
             case LIST_MARKED:
               $id= " sortableListItemMarked";
@@ -365,7 +369,17 @@ class sortableListing {
       foreach ($_POST as $key => $value) {
         if (preg_match('/^del_'.$this->id.'_([0-9]+)_x.*$/', $key, $matches)) {
           $this->active_index= $this->mapping[$matches[1]];
+
+          // Ignore request if mode requests it
+          if (isset($this->modes[$this->active_index]) && $this->modes[$this->active_index] == LIST_DISABLED) {
+            $this->active_index= null;
+            continue;
+          }
+
+          // Set action
           $this->action= "delete";
+
+          // Remove value if requested
           if ($this->instantDelete) {
             $this->deleteEntry($this->active_index);
           }
@@ -378,6 +392,13 @@ class sortableListing {
       foreach ($_POST as $key => $value) {
         if (preg_match('/^edit_'.$this->id.'_([0-9]+)_x.*$/', $key, $matches)) {
           $this->active_index= $this->mapping[$matches[1]];
+
+          // Ignore request if mode requests it
+          if (isset($this->modes[$this->active_index]) && $this->modes[$this->active_index] == LIST_DISABLED) {
+            $this->active_index= null;
+            continue;
+          }
+
           $this->action= "edit";
         }
       }
