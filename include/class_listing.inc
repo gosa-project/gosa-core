@@ -486,7 +486,7 @@ class listing {
 
     // Save base
     if (isset($_POST['BASE']) && $this->baseMode) {
-      $base= get_post('BASE');
+      $base= base64_decode(get_post('BASE'));
       if (isset($this->bases[$base])) {
         $this->base= $base;
         session::global_set("CurrentMainBase", $this->base);
@@ -668,7 +668,6 @@ class listing {
     $result= "<select name='BASE' onChange='mainform.submit()' size='1'>";
     $firstDN= null;
     $found= false;
-
     foreach ($this->bases as $key=>$value) {
       // Keep first entry to fall back eventually
       if(!$firstDN) {
@@ -681,8 +680,8 @@ class listing {
         $selected= " selected";
         $found= true;
       }
-      $key = htmlentities($key,ENT_QUOTES);
-      $result.= "\n<option value=\"".$key."\"$selected>".$value."</option>";
+      // Encode key in b64 to avoid strange characters
+      $result.= "\n<option value=\"".base64_encode($key)."\"$selected>".$value."</option>";
     }
 
     $result.= "</select>";
