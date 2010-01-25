@@ -33,7 +33,7 @@ class management
   public $plHeadline    = "unconfigured";
 
   // The currently used object(s) (e.g. in edit, removal)
-  protected $dn = "";
+  public $dn = "";  // this is public due to some compatibility problems with class plugin..
   protected $dns = array();
 
   // The last used object(s).
@@ -910,7 +910,11 @@ class management
         msg_dialog::display(_("Error"), $message, ERROR_DIALOG);
       }
     }
+  }
 
+  function is_modal_dialog()
+  {
+    return(is_object($this->tabObject) || is_object($this->dialogObject));
   }
 }
 

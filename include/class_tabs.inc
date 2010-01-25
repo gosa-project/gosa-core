@@ -332,7 +332,7 @@ class tabs
 
       $obj->dn= $this->dn;
 
-      if(!$obj instanceof plugin){
+      if(!$obj instanceof plugin && !$obj instanceOf management){
         trigger_error("Something went wrong while saving ".$obj->dn.". Object class '".get_class($obj)."'.");
       }else{
 
