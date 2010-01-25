@@ -279,7 +279,7 @@ class listing {
       $height= $this->height;
     }
     
-    $result.= "<table cellpadding='0' cellspacing='0' border='0'><tr><td><div class='listContainer' id='d_scrollbody' style='border-top:1px solid #B0B0B0;width:700px;min-height:".($height+25)."px;'>\n";
+    $result.= "<table cellpadding='0' cellspacing='0' border='0'><tr><td><div class='listContainer' id='d_scrollbody' style='border-top:1px solid #B0B0B0;border-right:1px solid #B0B0B0;width:700px;min-height:".($height+25)."px;'>\n";
 
     $height= "";
     if ($switch){
@@ -398,7 +398,7 @@ class listing {
         if ($i != $this->numColumns-1) {
           $result.= "<td class='list1nohighlight' style='$emptyListStyle'>&nbsp;</td>";
         } else {
-          $result.= "<td class='list1nohighlight' style='border-right:1px solid #AAA;$emptyListStyle'>&nbsp;</td>";
+          $result.= "<td class='list1nohighlight' style='border-right:0;$emptyListStyle'>&nbsp;</td>";
         }
       }
       $result.= "</tr>";
@@ -621,14 +621,17 @@ class listing {
           $res.= "min-width:200px;";
         }
 
-        $result[$index]= " style='$res' ";
+        $result[$index]= " style='$res'";
       } else {
-        $result[$index]= " style='min-width:100px'";
+        $result[$index]= " style='min-width:100px;'";
       }
     }
 
     // Save number of columns for later use
     $this->numColumns= count($cols);
+
+    // Add no border to the last column
+    $result[$this->numColumns-1]= preg_replace("/'$/", "border-right:0;'", $result[$this->numColumns-1]);
 
     return $result;
   }
