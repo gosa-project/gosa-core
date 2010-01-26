@@ -41,7 +41,7 @@
       <label>Name</label>
       <sortAttribute>cn</sortAttribute>
       <sortType>string</sortType>
-      <value>%{filter:link(row,dn,"%s",cn)}</value>
+      <value>%{cn}</value>
       <export>true</export>
     </column>
 
@@ -49,7 +49,7 @@
       <label>Description</label>
       <sortAttribute>description</sortAttribute>
       <sortType>string</sortType>
-      <value>%{filter:link(row,dn,"%s",description)}</value>
+      <value>%{description}</value>
       <export>true</export>
     </column>
 
