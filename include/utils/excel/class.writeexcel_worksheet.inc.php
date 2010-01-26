@@ -767,37 +767,37 @@ function write() {
 
     # Match an array ref.
     if (is_array($token)) {
-        return call_user_method_array('write_row', $this, $_);
+        return call_user_func_array(array($this, 'write_row'), $_);
     }
 
     # Match number
     if (preg_match('/^([+-]?)(?=\d|\.\d)\d*(\.\d*)?([Ee]([+-]?\d+))?$/', $token)) {
-        return call_user_method_array('write_number', $this, $_);
+        return call_user_func_array(array($this, 'write_number'), $_);
     }
     # Match http, https or ftp URL
     elseif (preg_match('|^[fh]tt?ps?://|', $token)) {
-        return call_user_method_array('write_url', $this, $_);
+        return call_user_func_array(array($this, 'write_url'), $_);
     }
     # Match mailto:
     elseif (preg_match('/^mailto:/', $token)) {
-        return call_user_method_array('write_url', $this, $_);
+        return call_user_func_array(array($this, 'write_url'), $_);
     }
     # Match internal or external sheet link
     elseif (preg_match('[^(?:in|ex)ternal:]', $token)) {
-        return call_user_method_array('write_url', $this, $_);
+        return call_user_func_array(array($this, 'write_url'), $_);
     }
     # Match formula
     elseif (preg_match('/^=/', $token)) {
-        return call_user_method_array('write_formula', $this, $_);
+        return call_user_func_array(array($this, 'write_formula'), $_);
     }
     # Match blank
     elseif ($token == '') {
         array_splice($_, 2, 1); # remove the empty string from the parameter list
-        return call_user_method_array('write_blank', $this, $_);
+        return call_user_func_array(array($this, 'write_blank'), $_);
     }
     # Default: match string
     else {
-        return call_user_method_array('write_string', $this, $_);
+        return call_user_func_array(array($this, 'write_string'), $_);
     }
 }
 
@@ -1377,8 +1377,8 @@ function write_url() {
     }
 
     # Add start row and col to arg list
-    return call_user_method_array('write_url_range', $this,
-                                  array_merge(array($_[0], $_[1]), $_));
+    return call_user_func_array(array($this, 'write_url_range'),
+                                array_merge(array($_[0], $_[1]), $_));
 }
 
 ###############################################################################
@@ -1413,14 +1413,14 @@ function write_url_range() {
 
     # Check for internal/external sheet links or default to web link
     if (preg_match('[^internal:]', $url)) {
-        return call_user_method_array('_write_url_internal', $this, $_);
+        return call_user_func_array(array($this, '_write_url_internal'), $_);
     }
 
     if (preg_match('[^external:]', $url)) {
-        return call_user_method_array('_write_url_external', $this, $_);
+        return call_user_func_array(array($this, '_write_url_external'), $_);
     }
 
-    return call_user_method_array('_write_url_web', $this, $_);
+    return call_user_func_array(array($this, '_write_url_web'), $_);
 }
 
 ###############################################################################
@@ -1582,7 +1582,7 @@ function _write_url_external() {
     # Network drives are different. We will handle them separately
     # MS/Novell network drives and shares start with \\
     if (preg_match('[^external:\\\\]', $_[4])) {
-        return call_user_method_array('_write_url_external_net', $this, $_);
+        return call_user_func_array(array($this, '_write_url_external_net'), $_);
     }
 
     $record      = 0x01B8;                       # Record identifier
