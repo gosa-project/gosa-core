@@ -217,10 +217,10 @@ class tests {
     if(!tests::is_ip($ip1) || !tests::is_ip($ip2)){
       return(FALSE);
     }else{
-      $ar1 = split("\.",$ip1);
+      $ar1 = explode(".",$ip1);
       $var1 = $ar1[0] * (16777216) + $ar1[1] * (65536) + $ar1[2] * (256) + $ar1[3];
 
-      $ar2 = split("\.",$ip2);
+      $ar2 = explode(".",$ip2);
       $var2 = $ar2[0] * (16777216) + $ar2[1] * (65536) + $ar2[2] * (256) + $ar2[3];
       return($var1 < $var2);
     }
@@ -230,9 +230,9 @@ class tests {
   /* Check if the specified IP address $address is inside the given network */
   public static function is_in_network($network, $netmask, $address)
   {
-    $nw= split('\.', $network);
-    $nm= split('\.', $netmask);
-    $ad= split('\.', $address);
+    $nw= explode('.', $network);
+    $nm= explode('.', $netmask);
+    $ad= explode('.', $address);
 
     /* Generate inverted netmask */
     for ($i= 0; $i<4; $i++){
@@ -268,9 +268,9 @@ class tests {
   /* Check if the specified IP address $address is inside the given network */
   public static function is_in_ip_range($from, $to, $address)
   {
-    $from = split('\.', $from);
-    $to   = split('\.', $to);
-    $ad   = split('\.', $address);
+    $from = explode('.', $from);
+    $to   = explode('.', $to);
+    $ad   = explode('.', $address);
 
     /* Transform to integer */
     $from= $from[0] * (16777216) + $from[1] * (65536) + $from[2] * (256) + $from[3];

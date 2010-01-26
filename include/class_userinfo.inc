@@ -392,7 +392,7 @@ class userinfo
     $acl= array("r" => "", "w" => "", "c" => "", "d" => "", "m" => "", "a" => "");
 
     /* Build dn array */
-    $path= split(',', $dn);
+    $path= explode(',', $dn);
     $path= array_reverse($path);
 
     /* Walk along the path to evaluate the acl */

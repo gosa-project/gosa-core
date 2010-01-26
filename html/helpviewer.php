@@ -151,7 +151,7 @@ if(session::global_is_set('current_class_for_help')){
 if(isset($_GET['pg'])){
  
   if(preg_match("/\//",$_GET['pg'])){
-    $arr = split("\/",$_GET['pg']);
+    $arr = explode("/", $_GET['pg']);
     $helpobject['currentplug'] = "../doc/core/".$helpobject['lang']."/html/".$arr[0];
     $helpdir = $helpobject['currentplug'];
     $helpobject['file']= $arr[1];

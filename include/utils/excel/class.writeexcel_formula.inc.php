@@ -565,9 +565,9 @@ function _convertRange2d($range) {
     
     // Split the range into 2 cell refs
     if (preg_match("/^([A-Ia-i]?[A-Za-z])(\d+)\:([A-Ia-i]?[A-Za-z])(\d+)$/",$range)) {
-        list($cell1, $cell2) = split(':', $range);
+        list($cell1, $cell2) = explode(':', $range);
     } elseif (preg_match("/^([A-Ia-i]?[A-Za-z])(\d+)\.\.([A-Ia-i]?[A-Za-z])(\d+)$/",$range)) {
-        list($cell1, $cell2) = split('\.\.', $range);
+        list($cell1, $cell2) = explode('..', $range);
     } else {
         // TODO: use real error codes
         trigger_error("Unknown range separator", E_USER_ERROR);
@@ -610,7 +610,7 @@ function _convertRange3d($token) {
     $class = 2; // as far as I know, this is magick.
 
     // Split the ref at the ! symbol
-    list($ext_ref, $range) = split('!', $token);
+    list($ext_ref, $range) = explode('!', $token);
 
     // Convert the external reference part
     $ext_ref = $this->_packExtRef($ext_ref);
@@ -619,7 +619,7 @@ function _convertRange3d($token) {
     }
 
     // Split the range into 2 cell refs
-    list($cell1, $cell2) = split(':', $range);
+    list($cell1, $cell2) = explode(':', $range);
 
     // Convert the cell references
     if (preg_match("/^(\$)?[A-Ia-i]?[A-Za-z](\$)?(\d+)$/", $cell1)) {
@@ -698,7 +698,7 @@ function _convertRef3d($cell) {
     $class = 2; // as far as I know, this is magick.
  
     // Split the ref at the ! symbol
-    list($ext_ref, $cell) = split('!', $cell);
+    list($ext_ref, $cell) = explode('!', $cell);
  
     // Convert the external reference part
     $ext_ref = $this->_packExtRef($ext_ref);
@@ -737,7 +737,7 @@ function _packExtRef($ext_ref) {
 
     // Check if there is a sheet range eg., Sheet1:Sheet2.
     if (preg_match("/:/", $ext_ref)) {
-        list($sheet_name1, $sheet_name2) = split(':', $ext_ref);
+        list($sheet_name1, $sheet_name2) = explode(':', $ext_ref);
 
         $sheet1 = $this->_getSheetIndex($sheet_name1);
         if ($sheet1 == -1) {
@@ -998,43 +998,43 @@ function _match($token) {
             if (preg_match('/^\$?[A-Ia-i]?[A-Za-z]\$?[0-9]+$/',$token) and
                !ereg("[0-9]",$this->_lookahead) and 
                ($this->_lookahead != ':') and ($this->_lookahead != '.') and
-               ($this->_lookahead != '!')) {
+               ($this->_lookahead != '!')) {
                 return $token;
             }
             // If it's an external reference (Sheet1!A1 or Sheet1:Sheet2!A1)
             elseif (preg_match("/^[A-Za-z0-9_]+(\:[A-Za-z0-9_]+)?\![A-Ia-i]?[A-Za-z][0-9]+$/",$token) and
                    !ereg("[0-9]",$this->_lookahead) and
-                   ($this->_lookahead != ':') and ($this->_lookahead != '.')) {
+                   ($this->_lookahead != ':') and ($this->_lookahead != '.')) {
                 return $token;
             }
             // if it's a range (A1:A2)
             elseif (preg_match("/^(\$)?[A-Ia-i]?[A-Za-z](\$)?[0-9]+:(\$)?[A-Ia-i]?[A-Za-z](\$)?[0-9]+$/",$token) and 
-                   !ereg("[0-9]",$this->_lookahead)) {
+                   !ereg("[0-9]",$this->_lookahead)) {
                 return $token;
             }
             // if it's a range (A1..A2)
             elseif (preg_match("/^(\$)?[A-Ia-i]?[A-Za-z](\$)?[0-9]+\.\.(\$)?[A-Ia-i]?[A-Za-z](\$)?[0-9]+$/",$token) and 
-                   !ereg("[0-9]",$this->_lookahead)) {
+                   !ereg("[0-9]",$this->_lookahead)) {
                 return $token;
             }
             // If it's an external range like Sheet1:Sheet2!A1:B2
             elseif (preg_match("/^[A-Za-z0-9_]+(\:[A-Za-z0-9_]+)?\!([A-Ia-i]?[A-Za-z])?[0-9]+:([A-Ia-i]?[A-Za-z])?[0-9]+$/",$token) and
-                   !ereg("[0-9]",$this->_lookahead)) {
+                   !ereg("[0-9]",$this->_lookahead)) {
                 return $token;
             }
 	    // If it's an external range like 'Sheet1:Sheet2'!A1:B2
             elseif (preg_match("/^'[A-Za-z0-9_ ]+(\:[A-Za-z0-9_ ]+)?'\!([A-Ia-i]?[A-Za-z])?[0-9]+:([A-Ia-i]?[A-Za-z])?[0-9]+$/",$token) and
-                   !ereg("[0-9]",$this->_lookahead)) {
+                   !ereg("[0-9]",$this->_lookahead)) {
                 return $token;
             }
             // If it's a number (check that it's not a sheet name or range)
             elseif (is_numeric($token) and 
                     (!is_numeric($token.$this->_lookahead) or ($this->_lookahead == '')) and
-                    ($this->_lookahead != '!') and ($this->_lookahead != ':')) {
+                    ($this->_lookahead != '!') and ($this->_lookahead != ':')) {
                 return $token;
             }
             // If it's a string (of maximum 255 characters)
-            elseif (ereg("^\"[^\"]{0,255}\"$",$token)) {
+            elseif (ereg("^\"[^\"]{0,255}\"$",$token)) {
                 return $token;
             }
             // if it's a function call
@@ -1051,7 +1051,7 @@ function _match($token) {
 * @access public
 * @param string $formula The formula to parse, without the initial equal sign (=).
 */
-function parse($formula) {
+function parse($formula) {
     $this->_current_char = 0;
     $this->_formula      = $formula;
     $this->_lookahead    = $formula{1};
@@ -1282,7 +1282,7 @@ function _func() {
                 $this->_advance();  // eat the ","
             } else {
                 trigger_error("Sintactic error: coma expected in ".
-                                  "function $function, {$num_args}� arg", E_USER_ERROR);
+                                  "function $function, {$num_args}Âº arg", E_USER_ERROR);
             }
             $result2 = $this->_condition();
             if ($this->isError($result2)) {

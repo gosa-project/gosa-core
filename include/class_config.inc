@@ -805,7 +805,7 @@ class config  {
       }
 
       /* Split dn into single department pieces */
-      $elements = array_reverse(split(',',preg_replace("/$qbase$/",'',$val))); 		
+      $elements = array_reverse(explode(',',preg_replace("/$qbase$/",'',$val))); 		
 
       /* Add last ou element of current dn to our array */
       $last = &$arr;
@@ -903,7 +903,7 @@ class config  {
       }
       if(isset($entry['goExportEntry'])){
         foreach($entry['goExportEntry'] as $export){
-          $shareAttrs = split("\|",$export);
+          $shareAttrs = explode("|",$export);
           if($listboxEntry) {
             $return[$shareAttrs[0]."|".$entry['cn'][0]] = $shareAttrs[0]." - ".$entry['cn'][0];
           }else{
@@ -944,7 +944,7 @@ class config  {
           unset($entry['goExportEntry']['count']);
         }
         foreach($entry['goExportEntry'] as $share){
-          $a_share = split("\|",$share);
+          $a_share = explode("|",$share);
           $sharename = $a_share[0];
           $data= array();
           $data['NAME']   = $sharename;

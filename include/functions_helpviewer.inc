@@ -284,7 +284,7 @@ function search($arr,$word)
 
   /* Filter all unusable chars */
   $word   = preg_replace($allowed_chars_in_searchword,"",$word);
-  $words  = split(" ",str_replace("+"," ",$word));
+  $words  = explode(" ",str_replace("+"," ",$word));
 
   /* Check all wordlengths */
   foreach($words as $tryword){
@@ -376,7 +376,7 @@ function searchlist($arr,$res,$maxresults)
   /* Foreach */  
   foreach($topten as $key => $hits)  {
 
-    $ks = split("\/",$key);
+    $ks = explode("/",$key);
     $k1 = $ks[0];
     $k2 = $ks[1];
     
@@ -494,7 +494,7 @@ function getheader_from_content($str)
 {
   $str = strip_tags($str);
   $pos = 0;
-  $arr = split("\n",$str);
+  $arr = preg_split("/\n/",$str);
   foreach($arr as $possibleheadline){
     if(strlen($possibleheadline)>=3){
       return $possibleheadline; 

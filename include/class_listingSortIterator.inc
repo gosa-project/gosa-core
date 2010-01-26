@@ -64,9 +64,9 @@ class listingSortIterator implements Iterator {
           if ($b == "") {
             $b= "31.12.0000";
           }
-          list($d, $m, $y)= split('\.', $a);
+          list($d, $m, $y)= explode('.', $a);
           $a= (int)sprintf("%04d%02d%02d", $y, $m, $d);
-          list($d, $m, $y)= split('\.', $b);
+          list($d, $m, $y)= explode('.', $b);
           $b= (int)sprintf("%04d%02d%02d", $y, $m, $d);
           return $b-$a;
 

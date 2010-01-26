@@ -223,7 +223,7 @@ class user extends plugin
     /* Generate dateOfBirth entry */
     if (isset ($this->attrs['dateOfBirth'])){
       /* This entry is ISO 8601 conform */
-      list($year, $month, $day)= split("-", $this->attrs['dateOfBirth'][0], 3);
+      list($year, $month, $day)= explode("-", $this->attrs['dateOfBirth'][0], 3);
     
       #TODO: use $lang to convert date
       $this->dateOfBirth= "$day.$month.$year";
@@ -863,7 +863,7 @@ class user extends plugin
     if ($this->dateOfBirth != ""){
       if(!is_array($this->attrs['dateOfBirth'])) {
         #TODO: use $lang to convert date
-        list($day, $month, $year)= split("\.", $this->dateOfBirth);
+        list($day, $month, $year)= explode(".", $this->dateOfBirth);
         $this->attrs['dateOfBirth'] = sprintf("%04d-%02d-%02d", $year, $month, $day);
       }
     }

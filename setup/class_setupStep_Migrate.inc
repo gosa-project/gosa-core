@@ -921,10 +921,10 @@ class Step_Migrate extends setup_step
         $acls = $attrs['gosaAclEntry'];
         for($i = 0 ; $i < $acls['count'] ; $i++){
           $acl = $acls[$i];
-          $tmp = split(":",$acl);
+          $tmp = explode(":",$acl);
 
           if($tmp[1] == "psub"){
-            $members = split(",",$tmp[2]);
+            $members = explode(",",$tmp[2]);
             foreach($members as $member){
               $member = base64_decode($member);
               if(isset($users[$member])){
@@ -965,7 +965,7 @@ class Step_Migrate extends setup_step
                 $a_str = $ret['gosaAclTemplate'][$e];
                 if(preg_match("/^[0-9]*:psub:/",$a_str) && preg_match("/:all;cmdrw$/",$a_str)){
 
-                  $members = split(",",$tmp[3]);
+                  $members = explode(",",$tmp[3]);
                   foreach($members as $member){
                     $member = base64_decode($member);
 
@@ -2902,7 +2902,7 @@ class Step_Migrate extends setup_step
        */ 
       $release = "";
       $r = $info['FAIrelease'][0];
-      $z = split("/",$r);
+      $z = explode("/",$r);
       foreach($z as $part){
 
         if(!empty($part)){

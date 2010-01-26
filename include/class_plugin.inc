@@ -1762,7 +1762,7 @@ class plugin
         $acls = array();
         $found = false;
         for($i = 0 ; $i <  $attrs['gosaAclEntry']['count'] ; $i ++ ){
-          $acl_parts = split(":",$attrs['gosaAclEntry'][$i]);
+          $acl_parts = explode(":",$attrs['gosaAclEntry'][$i]);
 
           /* Roles uses antoher data storage order, members are stored int the third part, 
              while the members in direct ACL assignments are stored in the second part.

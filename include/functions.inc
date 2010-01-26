@@ -569,7 +569,7 @@ function ldap_login_user ($username, $password)
   $allowed_attributes = array("uid","mail");
   $verify_attr = array();
   if($config->get_cfg_value("loginAttribute") != ""){
-    $tmp = split(",", $config->get_cfg_value("loginAttribute")); 
+    $tmp = explode(",", $config->get_cfg_value("loginAttribute")); 
     foreach($tmp as $attr){
       if(in_array($attr,$allowed_attributes)){
         $verify_attr[] = $attr;
@@ -1357,7 +1357,7 @@ function convert_department_dn($dn, $base = NULL)
 
 
   $dep= "";
-  foreach (split(',', $dn) as $rdn){
+  foreach (explode(',', $dn) as $rdn){
     $dep = preg_replace("/^[^=]+=/","",$rdn)."/".$dep;
   }
 
@@ -1978,7 +1978,7 @@ function normalize_netmask($netmask)
  */
 function netmask_to_bits($netmask)
 {
-  list($nm0, $nm1, $nm2, $nm3)= split('\.', $netmask);
+  list($nm0, $nm1, $nm2, $nm3)= explode('.', $netmask);
   $res= 0;
 
   for ($n= 0; $n<4; $n++){
@@ -3069,7 +3069,7 @@ function generate_smb_nt_hash($password)
     }
   }
 
-  list($lm,$nt)= split (":", trim($hash));
+  list($lm,$nt)= explode(":", trim($hash));
 
   $attrs['sambaLMPassword']= $lm;
   $attrs['sambaNTPassword']= $nt;
@@ -3470,9 +3470,9 @@ function get_next_id_traditional($attrib, $dn)
   /* get the ranges */
   $tmp = array('0'=> 1000);
   if (preg_match('/posixAccount/', $oc) && $config->get_cfg_value("uidNumberBase") != ""){
-    $tmp= split('-',$config->get_cfg_value("uidNumberBase"));
+    $tmp= explode('-',$config->get_cfg_value("uidNumberBase"));
   } elseif($config->get_cfg_value("gidNumberBase") != ""){
-    $tmp= split('-',$config->get_cfg_value("gidNumberBase"));
+    $tmp= explode('-',$config->get_cfg_value("gidNumberBase"));
   }
 
   /* Set hwm to max if not set - for backward compatibility */

@@ -98,7 +98,7 @@ class pluglist {
          */
 		$acls_to_check = array();
 		if(preg_match("/,/",$aclname)){
-			$acls_to_check = split(",",$aclname);
+			$acls_to_check = explode(",",$aclname);
 		}else{
 			$acls_to_check = array($aclname);
 		}
@@ -271,7 +271,7 @@ class pluglist {
 			$cfg= $this->config->data['MENU'];
 
 			if (isset($this->config->current['ICONSIZE'])){
-				list($x, $y)= split("x", $this->config->get_cfg_value("iconsize"));
+				list($x, $y)= explode("x", $this->config->get_cfg_value("iconsize"));
 				$isize= "width=\"$x\" height=\"$y\"";
 			} else {
 				$isize= "";

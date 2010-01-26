@@ -596,12 +596,12 @@ class listing {
     $result= array();
     $layout= preg_replace("/^\|/", "", $layout);
     $layout= preg_replace("/\|$/", "", $layout);
-    $cols= split("\|", $layout);
+    $cols= explode("|", $layout);
 
     foreach ($cols as $index => $config) {
       if ($config != "") {
         $res= "";
-        $components= split(';', $config);
+        $components= explode(';', $config);
         foreach ($components as $part) {
           if (preg_match("/^r$/", $part)) {
             $res.= "text-align:right;";
@@ -854,7 +854,7 @@ class listing {
 
       // Skip entry if the pseudo filter does not fit
       if (isset($action['filter']) && preg_match('/^[a-z0-9_]+!?=[a-z0-9_]+$/i', $action['filter'])) {
-        list($fa, $fv)= split('=', $action['filter']);
+        list($fa, $fv)= explode('=', $action['filter']);
         if (preg_match('/^(.*)!$/', $fa, $m)){
           $fa= $m[1];
           if (isset($this->entries[$row][$fa]) && $this->entries[$row][$fa][0] == $fv) {
@@ -1250,7 +1250,7 @@ class listing {
         // match "users/user[userPassword:rw(,...)*]" style entries
         if (preg_match('/^([a-zA-Z0-9]+\/[a-zA-Z0-9]+)\[([a-zA-Z0-9]+:[rwcdm]+(,[a-zA-Z0-9]+:[rwcdm]+)*)\]$/', $acl, $match)){
           $module= $match[1];
-          $aclList= split(',', $match[2]);
+          $aclList= explode(',', $match[2]);
         }
 
         // Walk thru prepared ACL by using $module

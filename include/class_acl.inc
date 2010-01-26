@@ -330,7 +330,7 @@ class acl extends plugin
 
       /* ACL saving... */
       if (preg_match('/^acl_.*_[^xy]$/', $name)){
-        list($dummy, $object, $attribute, $value)= split('_', $name);
+        list($dummy, $object, $attribute, $value)= explode('_', $name);
 
         /* Skip for detection entry */
         if ($object == 'dummy') {
@@ -920,7 +920,7 @@ class acl extends plugin
   static function explodeACL($acl)
   {
 
-    $list= split(':', $acl);
+    $list= explode(':', $acl);
     if(count($list) == 5){
       list($index, $type,$member,$permission,$filter)= $list;
       $filter = base64_decode($filter);
@@ -972,7 +972,7 @@ class acl extends plugin
     if ($ms == $acl){
       return $a;
     }
-    $ma= split(',', $ms);
+    $ma= explode(',', $ms);
 
     /* Decode dn's, fill with informations from LDAP */
     $ldap= $config->get_ldap_link();
@@ -1006,14 +1006,14 @@ class acl extends plugin
   {
     /* Rip acl off the string, seperate by ',' and place it in an array */
     $as= preg_replace('/^[^:]+:[^:]+:[^:]*:([^:]*).*$/', '\1', $acl);
-    $aa= split(',', $as);
+    $aa= explode(',', $as);
     $a= array();
 
     /* Dis-assemble single ACLs */
     foreach($aa as $sacl){
       
       /* Dis-assemble field ACLs */
-      $ao= split('#', $sacl);
+      $ao= explode('#', $sacl);
       $gobject= "";
       foreach($ao as $idx => $ssacl){
 
@@ -1032,7 +1032,7 @@ class acl extends plugin
         } else {
 
           /* All other entries get appended... */
-          list($field, $facl)= split(';', $ssacl);
+          list($field, $facl)= explode(';', $ssacl);
           $a[$gobject][$field]= $facl;
         }
 
@@ -1291,8 +1291,8 @@ class acl extends plugin
 
       // Remove entry directly
       foreach($attrs['gosaAclEntry'] as $id => $entry){
-        $parts= split(':',$entry);                     
-        $members= split(',',$parts[2]);                
+        $parts= explode(':',$entry);                     
+        $members= explode(',',$parts[2]);                
         $new_members= array();                         
         foreach($members as $member) {                 
           if (base64_decode($member) != $dn) {         

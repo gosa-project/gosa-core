@@ -969,9 +969,9 @@ class LDAP{
   {
     if($this->reconnect) $this->connect();
 
-    /* First we have to splitt the string ito detect empty lines
+    /* First we have to split the string into empty lines.
        An empty line indicates an new Entry */
-    $entries = split("\n",$str_attr);
+    $entries = preg_split("/\n/",$str_attr);
 
     $data = "";
     $cnt = 0; 
@@ -1014,7 +1014,7 @@ class LDAP{
           /* check if we need base64_decode for this line */
           if(ereg("::",$tmp2))
           {
-            $encoded = split("::",$entry);
+            $encoded = explode("::",$entry);
             $attr  = trim($encoded[0]);
             $value = base64_decode(trim($encoded[1]));
             /* Add linenumber */
@@ -1037,11 +1037,11 @@ class LDAP{
        
        Now we check every insertblock and try to insert */
     foreach ( $all as $single) {
-      $lineone = split("\n",$single);  
-      $ndn = split("#", $lineone[0]);
+      $lineone = preg_split("/\n/",$single);  
+      $ndn = explode("#", $lineone[0]);
       $line = base64_decode($ndn[1]);
 
-      $dnn = split (":",$line,2);
+      $dnn = explode (":",$line,2);
       $current_line = $ndn[0];
       $dn    = $dnn[0];
       $value = $dnn[1];
@@ -1103,7 +1103,7 @@ class LDAP{
     if($this->reconnect) $this->connect();
 
     $ret = false;
-    $rows= split("\n",$str_attr);
+    $rows= preg_split("/\n/",$str_attr);
     $data= false;
 
     foreach($rows as $row) {
@@ -1115,13 +1115,13 @@ class LDAP{
 
           /* We are using line numbers 
              Because there is a # before a : */
-          $tmp1= split("#",$row);
+          $tmp1= explode("#",$row);
           $current_line= $tmp1[0];
           $row= base64_decode($tmp1[1]);
         }
 
         /* Split the line into  attribute  and value */
-        $attr   = split(":", $row,2);
+        $attr   = explode(":", $row,2);
         $attr[0]= trim($attr[0]);  /* attribute */
         $attr[1]= $attr[1];  /* value */
 
@@ -1224,7 +1224,7 @@ class LDAP{
   
   function importcsv($str)
   {
-    $lines = split("\n",$str);
+    $lines = preg_split("/\n/",$str);
     foreach($lines as $line)
     {
       /* continue if theres a comment */
@@ -1236,9 +1236,9 @@ class LDAP{
       $line= str_replace ("\t"  ,"," ,$line);
       echo $line;
 
-      $cells = split(",",$line )  ;
+      $cells = explode(",",$line )  ;
       $linet= str_replace ("\t\t",",",$line);
-      $cells = split("\t",$line);
+      $cells = preg_split("/\t/",$line);
       $count = count($cells);  
     }
 
@@ -1282,7 +1282,7 @@ class LDAP{
         continue;
       }
       $name= "OID";
-      $pattern= split(' ', $val);
+      $pattern= explode(' ', $val);
       $ocname= preg_replace("/^.* NAME\s+\(*\s*'([^']+)'\s*\)*.*$/", '\\1', $val);
       $objectclasses[$ocname]= array();
 
@@ -1362,10 +1362,10 @@ class LDAP{
 
   /* added by Guido Serra aka Zeph <zeph@purotesto.it> */
   function getCn($dn){
-    $simple= split(",", $dn);
+    $simple= explode(",", $dn);
 
     foreach($simple as $piece) {
-      $partial= split("=", $piece);
+      $partial= explode("=", $piece);
 
       if($partial[0] == "cn"){
         return $partial[1];

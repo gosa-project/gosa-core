@@ -825,7 +825,7 @@ class posixAccount extends plugin
       $this->shadowExpire= "0";
     } else {
       /* Transform date to days since the beginning */
-      list($day, $month, $year)= split('\.', $this->shadowExpire, 3);
+      list($day, $month, $year)= explode('.', $this->shadowExpire, 3);
       $this->shadowExpire= (int)(mktime(0, 0, 0, $month, $day, $year)/ (60 * 60 * 24)) ;
     }
     if (!$this->activate_shadowMax){

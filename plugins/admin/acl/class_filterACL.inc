@@ -53,7 +53,7 @@ class filterACL {
     } else {
       foreach ($objectStorage as $oc) {
         $oc= preg_replace('/,$/', '', $oc);
-        $tmp= split(',', $oc);
+        $tmp= explode(',', $oc);
         if (count($tmp) == 1) {
           preg_match('/([^=]+)=(.*)$/', $oc, $m);
           if ($flags & GL_SUBSEARCH) {
