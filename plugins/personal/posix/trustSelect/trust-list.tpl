@@ -8,7 +8,7 @@
       </div>
       
       <div class="contentboxb">
-       <div style='background:white;padding:0px;padding:3px;'>
+       <div style='background:white;padding:3px;'>
         <table><tr>
           <td>{$ROOT}&nbsp;</td><td>{$BACK}&nbsp;</td><td>{$HOME}&nbsp;</td><td>{$RELOAD}&nbsp;</td><td>{$SEPARATOR}&nbsp;</td><td>{t}Base{/t} {$BASE}&nbsp;<input class='center' type='image' src='images/lists/submit.png' align='middle' title='{t}Update{/t}' name='submit_department' alt='{t}Submit{/t}'>&nbsp;</td><td>{$SEPARATOR}&nbsp;</td><td><img src='images/rocket.png' alt='' class='center'></td><td> {$ACTIONS}</td>
         </tr></table>
