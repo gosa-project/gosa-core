@@ -110,7 +110,7 @@ if ( $cleanup ){
   }
 
   /* Show page footer depending on the mode */
-  if (!$posixAccount->groupSelect && !$posixAccount->show_ws_dialog && $posixAccount->is_account && empty($lock_msg)){
+  if (!$posixAccount->groupSelect && !$posixAccount->trustSelect && $posixAccount->is_account && empty($lock_msg)){
 
     $display.= "<p class=\"plugbottom\">";
 
