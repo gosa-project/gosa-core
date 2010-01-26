@@ -68,7 +68,7 @@ class posixAccount extends plugin
   var $mustchangepassword= "0";
   var $force_ids= 0;
   var $gotoLastSystemLogin= "";
-  var $group_dialog= FALSE;
+  var $groupSelect= FALSE;
   var $show_ws_dialog= FALSE;
   var $secondaryGroups= array();
   var $primaryGroup= 0;
@@ -334,22 +334,24 @@ class posixAccount extends plugin
 
     /* Trigger group edit? */
     if (isset($_POST['edit_groupmembership'])){
-      $this->group_dialog= TRUE;
+      $this->groupSelect = new groupSelect($this->config,get_userinfo());
       $this->dialog= TRUE;
     }
 
     /* Cancel group edit? */
-    if (isset($_POST['add_groups_cancel']) ||
-        isset($_POST['add_groups_finish'])){
-      $this->group_dialog= FALSE;
+    if (isset($_POST['add_groups_cancel'])){
+      $this->groupSelect= NULL;
       $this->dialog= FALSE;
     }
 
     /* Add selected groups */
-    if (isset($_POST['add_groups_finish']) && isset($_POST['groups']) &&
-        count($_POST['groups'])){
-
-      $this->addGroup ($_POST['groups']);
+    if (isset($_POST['add_groups_finish']) && $this->groupSelect){
+      $groups = $this->groupSelect->detectPostActions();
+      if(isset($groups['targets'])){
+        $this->addGroup ($groups['targets']);
+      }
+      $this->groupSelect= NULL;
+      $this->dialog= FALSE;
     }
 
     /* Delete selected groups */
@@ -453,7 +455,9 @@ class posixAccount extends plugin
     }
 
     /* Manage group add dialog */
-    if ($this->group_dialog){
+    if ($this->groupSelect){
+
+      return($this->groupSelect->execute());
 
       /* Get global filter config */
       $this->reload();
@@ -1468,7 +1472,7 @@ class posixAccount extends plugin
 
     /* Open group add dialog */
     if(isset($_POST['edit_groupmembership'])){
-      $this->group_dialog = TRUE;
+      $this->groupSelect = new groupSelect($this->config,get_userinfo());
       $sta = "SubDialog";
     }
 
@@ -1476,10 +1480,10 @@ class posixAccount extends plugin
        to ensure that the membership is updatd */
     if(isset($_POST['add_groups_finish']) || isset($_POST['add_groups_cancel'])){
       $this->execute();
-      $this->group_dialog =FALSE;
+      $this->groupSelect =NULL;
     }
 
-    if($this->group_dialog){
+    if($this->groupSelect){
       $str = $this->execute(true);
       $ret = array();
       $ret['string'] = $str;
