@@ -295,7 +295,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) || $htacces
   $ok= true;
   if (!$htaccess_authenticated){
     $username= $_POST["username"];
-    if (!ereg("^[@A-Za-z0-9_.-]+$", $username)){
+    if (!preg_match("/^[@A-Za-z0-9_.-]+$/", $username)){
       $message= _("Please specify a valid username!");
       $ok= false;
     } elseif (mb_strlen($_POST["password"], 'UTF-8') == 0){

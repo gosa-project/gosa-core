@@ -210,7 +210,7 @@ class LDAP{
     } else {
       $basedn = LDAP::convert($basedn);
     }
-    return(ereg_replace("[^,]*[,]*[ ]*(.*)", "\\1", $basedn));
+    return(preg_replace("/[^,]*[,]*[ ]*(.*)/", "$1", $basedn));
   }
 
   
@@ -1012,7 +1012,7 @@ class LDAP{
         /* Append lines ... */
         if(!empty($tmp2)) {
           /* check if we need base64_decode for this line */
-          if(ereg("::",$tmp2))
+          if(strstr($tmp2, "::") !== false)
           {
             $encoded = explode("::",$entry);
             $attr  = trim($encoded[0]);
