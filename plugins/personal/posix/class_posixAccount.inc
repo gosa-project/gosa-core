@@ -69,7 +69,7 @@ class posixAccount extends plugin
   var $force_ids= 0;
   var $gotoLastSystemLogin= "";
   var $groupSelect= FALSE;
-  var $trustDialog= FALSE;
+  var $trustSelect= FALSE;
   var $secondaryGroups= array();
   var $primaryGroup= 0;
   var $was_trust_account= FALSE;
@@ -332,51 +332,61 @@ class posixAccount extends plugin
       }
     }
 
-    /* Trigger group edit? */
+    // Display dialog to allow selection of groups
     if (isset($_POST['edit_groupmembership'])){
       $this->groupSelect = new groupSelect($this->config,get_userinfo());
       $this->dialog= TRUE;
     }
 
-    /* Cancel group edit? */
-    if (isset($_POST['add_groups_cancel'])){
+    // Allow to select trusted machines from a list
+    if (isset($_POST["add_ws"])){
+      $this->trustSelect= new trustSelect($this->config,get_userinfo());
+      $this->dialog= TRUE;
+    }
+
+    // Cancel trust and group dialog
+    if (isset($_POST['add_groups_cancel']) || isset($_POST['add_ws_cancel'])){
       $this->groupSelect= NULL;
+      $this->trustSelect= NULL;
       $this->dialog= FALSE;
     }
 
-    /* Add selected groups */
+    // Add groups selected in groupSelect dialog to ours.
     if (isset($_POST['add_groups_finish']) && $this->groupSelect){
       $groups = $this->groupSelect->detectPostActions();
       if(isset($groups['targets'])){
         $this->addGroup ($groups['targets']);
+        $this->is_modified= TRUE;
       }
       $this->groupSelect= NULL;
       $this->dialog= FALSE;
     }
 
-    /* Delete selected groups */
+    // Remove groups from currently selected groups.
     if (isset($_POST['delete_groupmembership']) && 
         isset($_POST['group_list']) && count($_POST['group_list'])){
 
       $this->delGroup ($_POST['group_list']);
     }
 
-    /* Add user workstation? */
-    if (isset($_POST["add_ws"])){
-      $this->trustDialog= new trustSelect($this->config,get_userinfo());
-      $this->dialog= TRUE;
-    }
+    // Add selected machines to trusted ones.
+    if (isset($_POST["add_ws_finish"]) &&  $this->trustSelect){
+      $trusts = $this->trustSelect->detectPostActions();
+      if(isset($trusts['targets'])){
 
-    /* Add user workstation? */
-    if (isset($_POST["add_ws_finish"]) && isset($_POST['wslist'])){
-      foreach($_POST['wslist'] as $ws){
-        $this->accessTo[$ws]= $ws;
+        $headpage = $this->trustSelect->getHeadpage();              
+        foreach($trusts['targets'] as $id){
+          $attrs = $headpage->getEntry($id);
+          $this->accessTo[$attrs['cn'][0]]= $attrs['cn'][0];
+        }
+        ksort($this->accessTo);
+        $this->is_modified= TRUE;
       }
-      ksort($this->accessTo);
-      $this->is_modified= TRUE;
+      $this->trustSelect= NULL;
+      $this->dialog= FALSE;
     }
 
-    /* Remove user workstations? */
+    // Remove machine from trusted ones.
     if (isset($_POST["delete_ws"]) && isset($_POST['workstation_list'])){
       foreach($_POST['workstation_list'] as $name){
         unset ($this->accessTo[$name]);
@@ -384,19 +394,15 @@ class posixAccount extends plugin
       $this->is_modified= TRUE;
     }
 
-    /* Add user workstation finished? */
-    if (isset($_POST["add_ws_finish"]) || isset($_POST["add_ws_cancel"])){
-      $this->trustDialog= NULL;
-      $this->dialog= FALSE;
-    }
+
 
     /* Templates now! */
     $smarty= get_smarty();
     $smarty->assign("usePrototype", "true");
 
     /* Show ws dialog */
-    if ($this->trustDialog){
-      return($this->trustDialog->execute());
+    if ($this->trustSelect){
+      return($this->trustSelect->execute());
     }
 
     /* Manage group add dialog */
