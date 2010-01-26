@@ -69,7 +69,7 @@ class posixAccount extends plugin
   var $force_ids= 0;
   var $gotoLastSystemLogin= "";
   var $groupSelect= FALSE;
-  var $show_ws_dialog= FALSE;
+  var $trustDialog= FALSE;
   var $secondaryGroups= array();
   var $primaryGroup= 0;
   var $was_trust_account= FALSE;
@@ -363,7 +363,7 @@ class posixAccount extends plugin
 
     /* Add user workstation? */
     if (isset($_POST["add_ws"])){
-      $this->show_ws_dialog= TRUE;
+      $this->trustDialog= new trustSelect($this->config,get_userinfo());
       $this->dialog= TRUE;
     }
 
@@ -386,7 +386,7 @@ class posixAccount extends plugin
 
     /* Add user workstation finished? */
     if (isset($_POST["add_ws_finish"]) || isset($_POST["add_ws_cancel"])){
-      $this->show_ws_dialog= FALSE;
+      $this->trustDialog= NULL;
       $this->dialog= FALSE;
     }
 
@@ -395,101 +395,13 @@ class posixAccount extends plugin
     $smarty->assign("usePrototype", "true");
 
     /* Show ws dialog */
-    if ($this->show_ws_dialog){
-      /* Save data */
-      $sysfilter= session::get("sysfilter");
-      foreach( array("depselect", "regex") as $type){
-        if (isset($_POST[$type])){
-          $sysfilter[$type]= $_POST[$type];
-        }
-      }
-      if (isset($_GET['search'])){
-        $s= mb_substr($_GET['search'], 0, 1, "UTF8")."*";
-        if ($s == "**"){
-          $s= "*";
-        }
-        $sysfilter['regex']= $s;
-      }
-      session::set("sysfilter", $sysfilter);
-
-      /* Get workstation list */
-      $exclude= "";
-      foreach($this->accessTo as $ws){
-        $exclude.= "(cn=$ws)";
-      }
-      if ($exclude != ""){
-        $exclude= "(!(|$exclude))";
-      }
-      $regex= $sysfilter['regex'];
-
-      $acls = array();
-      if(class_available("servgeneric")) $acls[] = "server";
-      if(class_available("workgeneric")) $acls[] = "worstation";
-      if(class_available("termgeneric")) $acls[] = "terminal";
-
-      $filter= "(&(|(objectClass=goServer)(objectClass=gotoWorkstation)(objectClass=gotoTerminal))$exclude(cn=*)(cn=$regex))";
-
-      $deps_a = array(get_ou("serverRDN"),
-                      get_ou("terminalRDN"),
-                      get_ou("workstationRDN")); 
-
-      $res= get_sub_list($filter, $acls, $deps_a, get_ou("systemRDN").$sysfilter['depselect'], array("cn"), GL_SUBSEARCH | GL_SIZELIMIT);
-      $wslist= array();
-      foreach ($res as $attrs){
-        $wslist[]= preg_replace('/\$/', '', $attrs['cn'][0]);
-      }
-      asort($wslist);
-      $smarty->assign("search_image", get_template_path('images/lists/search.png'));
-      $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
-      $smarty->assign("tree_image", get_template_path('images/lists/search-subtree.png'));
-      $smarty->assign("deplist", $this->config->idepartments);
-      $smarty->assign("alphabet", generate_alphabet());
-      foreach( array("depselect", "regex") as $type){
-        $smarty->assign("$type", $sysfilter[$type]);
-      }
-      $smarty->assign("hint", print_sizelimit_warning());
-      $smarty->assign("wslist", $wslist);
-      $smarty->assign("apply", apply_filter());
-      $display= $smarty->fetch (get_template_path('trust_machines.tpl', TRUE, dirname(__FILE__)));
-      return ($display);
+    if ($this->trustDialog){
+      return($this->trustDialog->execute());
     }
 
     /* Manage group add dialog */
     if ($this->groupSelect){
-
       return($this->groupSelect->execute());
-
-      /* Get global filter config */
-      $this->reload();
-
-      /* remove already assigned groups */
-      $glist= array();
-      foreach ($this->grouplist as $key => $value){
-        if (!isset($this->groupMembership[$key]) && obj_is_writable($key,"groups/group","memberUid")){
-          $glist[$key]= $value;
-        }
-      }
-
-      if($this->SubSearch){
-        $smarty->assign("SubSearchCHK"," checked ");
-      }else{
-        $smarty->assign("SubSearchCHK","");
-      }
-
-      $smarty->assign("regex",$this->GroupRegex);
-      $smarty->assign("guser",$this->GroupUserRegex);
-      $smarty->assign("groups", $glist);
-      $smarty->assign("search_image", get_template_path('images/lists/search.png'));
-      $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
-      $smarty->assign("tree_image", get_template_path('images/lists/search-subtree.png'));
-      $smarty->assign("deplist", $this->config->idepartments);
-      $smarty->assign("alphabet", generate_alphabet());
-      $smarty->assign("depselect", session::get('CurrentMainBase'));
-      $smarty->assign("hint", print_sizelimit_warning());
-      $smarty->assign("apply", apply_filter());
-
-      $display.= $smarty->fetch (get_template_path('posix_groups.tpl', TRUE, dirname(__FILE__)));
-      return ($display);
     }
 
     // Handle ssh dialog?
