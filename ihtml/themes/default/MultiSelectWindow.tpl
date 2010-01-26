@@ -69,7 +69,7 @@
 			  		{$alphabet}
 			 	</table>
 				{/if}
-				{ if $CheckBoxes != ""}
+				{if $CheckBoxes != ""}
 				<table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
 					<tr>
 						<td>
@@ -109,7 +109,7 @@
 			  		{$alphabet}
 			 	</table>
 				{/if}
-				{ if $CheckBoxes != ""}
+				{if $CheckBoxes != ""}
 				<table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
 					<tr>
 						<td>
@@ -127,7 +127,7 @@
 		{/if}
 	</tr>
 </table>
-{if $Display_Save | $Display_Close}
+{if $Display_Save || $Display_Close}
 <p class="seperator">&nbsp;
 </p>
 <div style="text-align:right;" align="right">
