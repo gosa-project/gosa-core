@@ -1286,62 +1286,6 @@ class posixAccount extends plugin
     return($ids);
   }
 
-  
-  function reload()
-  {
-    /* Set base for all searches */
-    $base      = session::get('CurrentMainBase');
-    $base     = $base;
-    $ldap     = $this->config->get_ldap_link();    
-    $attrs    =  array("cn", "description", "gidNumber");
-    $Flags    = GL_SIZELIMIT;
-
-    /* Get groups */
-    if ($this->GroupUserRegex == '*'){
-      $filter = "(&(objectClass=posixGroup)(cn=".$this->GroupRegex."))";
-    } else {
-      $filter= "(&(objectClass=posixGroup)(cn=".$this->GroupRegex.")(memberUid=".$this->GroupUserRegex."))";
-    }
-    if($this->SubSearch){
-      $Flags |= GL_SUBSEARCH;
-    }else{
-      $base = get_groups_ou().$base;
-    }
-
-    $res= get_list($filter, "groups", $base,$attrs, $Flags);
-  
-    /* check sizelimit */
-    if (preg_match("/size limit/i", $ldap->get_error())){
-      session::set('limit_exceeded',TRUE);
-    }
-
-    /* Create a list of users */
-    $this->grouplist = array();
-    foreach ($res as $value){
-      $this->grouplist[$value['gidNumber'][0]]= $value;
-    }
-
-    $tmp=array();
-    foreach($this->grouplist as $tkey => $val ){
-      $tmp[strtolower($val['cn'][0]).$val['cn'][0]]=$val;
-    }
-
-    /* Sort index */
-    ksort($tmp);
-
-    /* Recreate index array[dn]=cn[description]*/
-    $this->grouplist=array();
-    foreach($tmp as $val){
-      if(isset($val['description'])){
-        $this->grouplist[$val['dn']]=$val['cn'][0]."&nbsp;[".$val['description'][0]."]";
-      }else{
-        $this->grouplist[$val['dn']]=$val['cn'][0];
-      }
-    }
-
-    reset ($this->grouplist);
-  }
-
 
   /* Get posts from copy & paste dialog */ 
   function saveCopyDialog()
