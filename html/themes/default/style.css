@@ -697,10 +697,17 @@ input {
 
 input[type=text] {
         border:1px solid #AAA;
+        padding:2px;
 }
+
+input[type=text]:focus, input[type=password]:focus {
+        border:1px solid #333;
+}
+
 
 input[type=password] {
         border:1px solid #AAA;
+        padding:2px;
 }
 
 
