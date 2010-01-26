@@ -124,7 +124,8 @@ class userManagement extends management
 
   function editEntry($action="",$target=array(),$all=array(), $altTabClass ="", $altTabType = "", $altAclCategory="")
   {
-    management::editEntry($action,$target);
+    $str = management::editEntry($action,$target);
+    if($str) return($str);
 
     if(preg_match("/^edit_/",$action)){
       $tab = preg_replace("/^edit_/","",$action); 
