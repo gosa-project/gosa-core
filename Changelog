@@ -10,13 +10,16 @@ GOsa2 changelog
   - Fixed generation of kerberos host keys when DNS is enabled
   - Fixed template error message when no sshkey plugin is enabled
   - Fixed problem where arrays got shortened by one in copy and paste
-  - Fixed avascript for IE
+  - Fixed javascript for IE
+  - Fixed problems deprecated functions in PHP > 5.3
   - Fixed issues with templates and password methods that got introduced
     in 2.6.6 user list migration
   - Speed up OPSI operations
   - Speed up group and user removal by large factors
   - Unified logging with rSyslog plugin and service
   - Converted to new configurable lists view
+  - Updated internal smarty to version 3.0b7 to avoid broken templates
+    during further development
 
 * gosa 2.6.6
   - Added ssh public key management
