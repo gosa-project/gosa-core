@@ -7,10 +7,10 @@
     <initial>true</initial>
   </definition>
 
-  <search>
+ <search>
     <query>
       <backend>LDAP</backend>
-      <filter>(&amp;(objectClass=posixGroup)$NAME(|$PRIMARY$MAIL$SAMBA))</filter>
+      <filter>(&amp;(|$SERVER $WORKSTATION $TERMINAL)$NAME)</filter>
       <attribute>dn</attribute>
       <attribute>objectClass</attribute>
       <attribute>cn</attribute>
@@ -20,45 +20,45 @@
   </search>
 
   <element>
-    <type>checkbox</type>
-    <tag>PRIMARY</tag>
-    <default>true</default>
-    <unset></unset>
-    <set>(!(objectClass=gosaObject))</set>
-  </element>
-
-  <element>
-    <type>checkbox</type>
-    <tag>MAIL</tag>
-    <default>true</default>
-    <unset></unset>
-    <set>(objectClass=gosaMailAccount)</set>
-  </element>
-
-  <element>
-    <type>checkbox</type>
-    <tag>SAMBA</tag>
-    <default>true</default>
-    <unset></unset>
-    <set>(objectClass=sambaGroupMapping)</set>
-  </element>
-
-  <element>
     <type>textfield</type>
     <tag>NAME</tag>
     <size>20</size>
     <maxlength>60</maxlength>
     <default></default>
     <unset></unset>
-    <set>(|(cn=*$*)(description=*$*))</set>
-    <alphabet>true</alphabet>
+    <set>(cn=*$*)</set>
+    <alphabet>false</alphabet>
     <autocomplete>
-      <backend>LDAP</backend>
-      <filter>(&amp;(objectClass=posixGroup)(|(cn=*$NAME*)(description=*$NAME*)))</filter>
+      <backend>SYSTEMS</backend>
+      <filter>(cn=*$NAME*)</filter>
       <attribute>cn</attribute>
       <frequency>0.5</frequency>
       <characters>3</characters>
     </autocomplete>
+  </element>
+
+  <element>
+    <type>checkbox</type>
+    <tag>SERVER</tag>
+    <default>true</default>
+    <unset></unset>
+    <set>(objectClass=goServer)</set>
+  </element>
+
+  <element>
+    <type>checkbox</type>
+    <tag>WORKSTATION</tag>
+    <default>true</default>
+    <unset></unset>
+    <set>(objectClass=gotoWorkstation)</set>
+  </element>
+
+  <element>
+    <type>checkbox</type>
+    <tag>TERMINAL</tag>
+    <default>true</default>
+    <unset></unset>
+    <set>(objectClass=gotoTerminal)</set>
   </element>
 
 </filterdef>

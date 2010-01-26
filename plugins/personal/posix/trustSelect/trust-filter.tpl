@@ -8,11 +8,13 @@
 
 <div style="border-top:1px solid #AAAAAA"></div>
 
- {$PRIMARY}&nbsp;<LABEL for='TEMPLATES'>{t}Show primary groups{/t}</LABEL><br>
- {$SAMBA}&nbsp;<LABEL for='TEMPLATES'>{t}Show samba groups{/t}</LABEL><br>
- {$MAIL}&nbsp;<LABEL for='TEMPLATES'>{t}Show mail groups{/t}</LABEL><br>
+  {$SERVER}&nbsp;{t}Show servers{/t}<br>
+  {$WORKSTATION}&nbsp;{t}Show workstations{/t}<br>
+  {$TERMINAL}&nbsp;{t}Show terminals{/t}<br>
 
- {$SCOPE}
+  <div style="border-top:1px solid #AAAAAA"></div>
+
+  {$SCOPE}
 
  <table summary="" style="width:100%;border-top:1px solid #B0B0B0;">
   <tr>

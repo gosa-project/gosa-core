@@ -7,16 +7,31 @@
     <baseMode>true</baseMode>
     <multiSelect>true</multiSelect>
     <template>../plugins/personal/posix/trustSelect/trust-list.tpl</template>
-    <module>groups</module>
-    <label>List of groups</label>
+    <label>List of systems</label>
     <defaultSortColumn>1</defaultSortColumn>
 
     <objectType>
-      <label>Group</label>
-      <objectClass>posixGroup</objectClass>
-      <category>groups</category>
-      <class>group</class>
-      <image>plugins/groups/images/groups.png</image>
+      <label>Server</label>
+      <objectClass>goServer</objectClass>
+      <category>server</category>
+      <class>servgeneric</class>
+      <image>plugins/systems/images/select_server.png</image>
+    </objectType>
+
+    <objectType>
+      <label>Workstation</label>
+      <objectClass>gotoWorkstation</objectClass>
+      <category>workstation</category>
+      <class>workgeneric</class>
+      <image>plugins/systems/images/select_workstation.png</image>
+    </objectType>
+
+    <objectType>
+      <label>Terminal</label>
+      <objectClass>gotoTerminal</objectClass>
+      <category>terminal</category>
+      <class>termgeneric</class>
+      <image>plugins/systems/images/select_terminal.png</image>
     </objectType>
 
   </definition>
