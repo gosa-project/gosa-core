@@ -402,11 +402,17 @@ class posixAccount extends plugin
 
     /* Show ws dialog */
     if ($this->trustSelect){
+
+      // Build up blocklist
+      session::set('filterBlacklist', array('cn' => array_values($this->accessTo)));
       return($this->trustSelect->execute());
     }
 
     /* Manage group add dialog */
     if ($this->groupSelect){
+      
+      // Build up blocklist
+      session::set('filterBlacklist', array('dn' => array_keys($this->groupMembership)));
       return($this->groupSelect->execute());
     }
 
