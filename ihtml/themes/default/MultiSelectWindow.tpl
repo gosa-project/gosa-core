@@ -57,7 +57,7 @@
    			<br>
         {/if}
 			{$UserBox2}
-			{if !$Skip_Filter_Part }
+			{if !$Skip_Filter_Part}
    			<div class="contentboxh">
     			<p class="contentboxh">
 					<img src="{$launchimage}" align="right" alt="[F]">{t}Filters{/t}
@@ -97,7 +97,7 @@
    			</div>
 			{$UserBox2}
    			<br>
-			{if !$Skip_Filter_Part }
+			{if !$Skip_Filter_Part}
    			<div class="contentboxh" style="height:20px;">
     			<p class="contentboxh">
 					<img src="{$launchimage}" align="right" alt="[F]"><font style='font-size:13px;'>{t}Filters{/t}</font>

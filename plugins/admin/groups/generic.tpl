@@ -1,6 +1,6 @@
 {if $multiple_support}
 <input type="hidden" value="1" name="group_mulitple_edit">
-{/if }
+{/if}
 
 
 <table summary="" style="width:100%;">
