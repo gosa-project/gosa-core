@@ -55,7 +55,7 @@ class ogroup extends plugin
 
   var $accessTo= array();
   var $trustModel= "";
-  var $show_ws_dialog = FALSE;
+  var $trustSelect = FALSE;
 
   var $was_trust_account= FALSE;
 
@@ -279,18 +279,27 @@ class ogroup extends plugin
 
     /* Add user workstation? */
     if (isset($_POST["add_ws"])){
-      $this->show_ws_dialog= TRUE;
+      $this->trustSelect= new trustSelect($this->config,get_userinfo());
       $this->dialog= TRUE;
     }
 
-    /* Add user workstation? */
-    if (isset($_POST["add_ws_finish"]) && isset($_POST['wslist'])){
-      foreach($_POST['wslist'] as $ws){
-        $this->accessTo[$ws]= $ws;
+    // Add selected machines to trusted ones.
+    if (isset($_POST["add_ws_finish"]) &&  $this->trustSelect){
+      $trusts = $this->trustSelect->detectPostActions();
+      if(isset($trusts['targets'])){
+
+        $headpage = $this->trustSelect->getHeadpage();
+        foreach($trusts['targets'] as $id){
+          $attrs = $headpage->getEntry($id);
+          $this->accessTo[$attrs['cn'][0]]= $attrs['cn'][0];
+        }
+        ksort($this->accessTo);
+        $this->is_modified= TRUE;
       }
-      ksort($this->accessTo);
-      $this->is_modified= TRUE;
+      $this->trustSelect= NULL;
+      $this->dialog= FALSE;
     }
+
 
     /* Remove user workstations? */
     if (isset($_POST["delete_ws"]) && isset($_POST['workstation_list'])){
@@ -301,63 +310,17 @@ class ogroup extends plugin
     }
 
     /* Add user workstation finished? */
-    if (isset($_POST["add_ws_finish"]) || isset($_POST["add_ws_cancel"])){
-      $this->show_ws_dialog= FALSE;
+    if (isset($_POST["add_ws_cancel"])){
+      $this->trustSelect= NULL;
       $this->dialog= FALSE;
     }
 
     /* Show ws dialog */
-    if ($this->show_ws_dialog){
-      /* Save data */
-      $sysfilter= session::get("sysfilter");
-      foreach( array("depselect", "regex") as $type){
-        if (isset($_POST[$type])){
-          $sysfilter[$type]= $_POST[$type];
-        }
-      }
-      if (isset($_GET['search'])){
-        $s= mb_substr($_GET['search'], 0, 1, "UTF8")."*";
-        if ($s == "**"){
-          $s= "*";
-        }
-        $sysfilter['regex']= $s;
-      }
-      session::set("sysfilter", $sysfilter);
-
-      /* Get workstation list */
-      $exclude= "";
-      foreach($this->accessTo as $ws){
-        $exclude.= "(cn=$ws)";
-      }
-      if ($exclude != ""){
-        $exclude= "(!(|$exclude))";
-      }
-      $regex= $sysfilter['regex'];
-      $filter= "(&(|(objectClass=goServer)(objectClass=gotoWorkstation)(objectClass=gotoTerminal))$exclude(cn=*)(cn=$regex))";
-
-      $deps_a = array(get_ou("serverRDN"),
-          get_ou("terminalRDN"),
-          get_ou("workstationRDN"));
-      $res= get_sub_list($filter, array("terminal","server","workstation"), $deps_a, get_ou("systemRDN").$sysfilter['depselect'],
-          array("cn"), GL_SUBSEARCH | GL_SIZELIMIT);
-      $wslist= array();
-      foreach ($res as $attrs){
-        $wslist[]= preg_replace('/\$/', '', $attrs['cn'][0]);
-      }
-      asort($wslist);
-      $smarty->assign("search_image", get_template_path('images/lists/search.png'));
-      $smarty->assign("launchimage", get_template_path('images/lists/action.png'));
-      $smarty->assign("tree_image", get_template_path('images/lists/search-subtree.png'));
-      $smarty->assign("deplist", $this->config->idepartments);
-      $smarty->assign("alphabet", generate_alphabet());
-      foreach( array("depselect", "regex") as $type){
-        $smarty->assign("$type", $sysfilter[$type]);
-      }
-      $smarty->assign("hint", print_sizelimit_warning());
-      $smarty->assign("wslist", $wslist);
-      $smarty->assign("apply", apply_filter());
-      $display= $smarty->fetch (get_template_path('trust_machines.tpl', TRUE, dirname(__FILE__)));
-      return ($display);
+    if ($this->trustSelect){
+  
+      // Build up blocklist
+      session::set('filterBlacklist', array('cn' => array_values($this->accessTo)));
+      return($this->trustSelect->execute());
     }
 
     /***********
