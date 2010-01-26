@@ -46,6 +46,7 @@ class management
   // The tab definitions to use for the current object.
   protected $tabClass = "";         // e.g. usertabs
   protected $tabType = "";          // e.g. USERTABS
+  protected $aclPlugin = "";        // e.g. generic
   protected $aclCategory = "";      // e.g. users
   protected $objectName = "";       // e.g. users
 
