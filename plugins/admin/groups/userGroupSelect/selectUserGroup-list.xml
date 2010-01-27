@@ -8,7 +8,7 @@
     <multiSelect>true</multiSelect>
     <template>../plugins/admin/groups/userGroupSelect/selectUserGroup-list.tpl</template>
     <module>users</module>
-    <label>List of users and groups</label>
+    <label>Please select the desired entries</label>
     <defaultSortColumn>1</defaultSortColumn>
 
     <objectType>
@@ -54,7 +54,7 @@
     </column>
 
     <column>
-      <label>Description name</label>
+      <label>Description</label>
       <sortAttribute>description</sortAttribute>
       <sortType>string</sortType>
       <value>%{description}</value>
