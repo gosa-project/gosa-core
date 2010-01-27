@@ -1,3 +1,9 @@
+gosa (2.6.7-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Cajus Pollmeier <cajus@debian.org>  Wed, 27 Jan 2010 21:53:12 +0100
+
 gosa (2.6.6-1) unstable; urgency=low
 
   * New upstream release
