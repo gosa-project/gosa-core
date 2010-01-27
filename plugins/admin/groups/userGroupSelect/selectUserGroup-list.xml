@@ -6,7 +6,7 @@
     <departmentRootVisible>false</departmentRootVisible>
     <baseMode>true</baseMode>
     <multiSelect>true</multiSelect>
-    <template>selectUserGroup-list.tpl</template>
+    <template>../plugins/admin/groups/userSelect/selectUserGroup-list.tpl</template>
     <module>users</module>
     <label>List of users and groups</label>
     <defaultSortColumn>1</defaultSortColumn>
