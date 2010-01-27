@@ -6,7 +6,6 @@ GOsa2 changelog
   - Added more checks for DNS zone records
   - Added IMAP folder autocreation
   - Added printer css
-  - Store list positions
   - Fixed generation of kerberos host keys when DNS is enabled
   - Fixed template error message when no sshkey plugin is enabled
   - Fixed problem where arrays got shortened by one in copy and paste
@@ -14,11 +13,12 @@ GOsa2 changelog
   - Fixed problems deprecated functions in PHP > 5.3
   - Fixed issues with templates and password methods that got introduced
     in 2.6.6 user list migration
-  - Speed up OPSI operations
+  - Speed up OPSI operations by large factors
   - Speed up group and user removal by large factors
   - Unified logging with rSyslog plugin and service
-  - Converted to new configurable lists view
-  - Updated internal smarty to version 3.0b7 to avoid broken templates
+  - Converted to new configurable list view
+  - Save list positions
+  - Updated integrated smarty to version 3.0b7 to avoid broken templates
     during further development
 
 * gosa 2.6.6
