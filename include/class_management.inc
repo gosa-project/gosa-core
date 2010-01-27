@@ -574,10 +574,14 @@ class management
     if(empty($tabClass) || empty($tabType)){
       // No tab type defined
     }else{
-      $this->tabObject= new $tabClass($this->config,$this->config->data['TABS'][$tabType], $this->dn, $aclCategory);
-      $this->tabObject->set_acl_base($this->headpage->getBase());
-      $this->tabObject->parent = &$this;
-      @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dn,"Create new entry initiated!");
+      if (isset($this->config->data['TABS'][$tabType])) {
+        $this->tabObject= new $tabClass($this->config,$this->config->data['TABS'][$tabType], $this->dn, $aclCategory);
+        $this->tabObject->set_acl_base($this->headpage->getBase());
+        $this->tabObject->parent = &$this;
+        @DEBUG (DEBUG_TRACE, __LINE__, __FUNCTION__, __FILE__,$this->dn,"Create new entry initiated!");
+      } else {
+        msg_dialog::display(_("Error"), sprintf(_("No tab declaration for '%s' found in your configuration file. Cannot create plugin instance!"), $tabType), ERROR_DIALOG);
+      }
     }
   }
 
