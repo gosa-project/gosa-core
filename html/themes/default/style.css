@@ -2014,6 +2014,9 @@ tr.sortableListItemMarked {
 
 ul.treeList, ul.treeList ul { list-style-type: none; background: url(../../images/lists/vline.png) repeat-y; margin: 0; padding: 0; }
 ul.treeList ul { margin-left: 10px; }
-ul.treeList li { margin: 0; padding: 0 12px; line-height: 20px; background: url(../../images/lists/node.png) no-repeat; color: #369; font-weight: bold; }
+ul.treeList a:hover { background-color: #DDD }
+a.treeList { font-weight: bold }
+ul.treeList li { margin: 0; padding: 0 12px; line-height: 20px; background: url(../../images/lists/node.png) no-repeat; font-weight: bold; }
+li.treeListSelected a {color: red}
 ul.treeList li.last { background: #fff url(../../images/lists/lastnode.png) no-repeat; }
 ul.treeList li:last-child { background: #fff url(../../images/lists/lastnode.png) no-repeat; }
