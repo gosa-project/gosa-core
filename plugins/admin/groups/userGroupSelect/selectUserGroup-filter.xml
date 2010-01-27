@@ -3,13 +3,13 @@
 <filterdef>
   <definition>
     <category>users</category>
-    <template>../plugins/admin/groups/userSelect/selectUserGroup-filter.tpl</template>
+    <template>../plugins/admin/groups/userGroupSelect/selectUserGroup-filter.tpl</template>
     <initial>true</initial>
   </definition>
 
   <search>
     <query>
-      <backend>LDAP</backend>
+      <backend>LDAPBlacklist</backend>
       <filter>(&amp;(|$USER $GROUP ) $NAME)</filter>
       <attribute>dn</attribute>
       <attribute>objectClass</attribute>
@@ -33,7 +33,7 @@
     <set>(|(cn=*$*)(sn=*$*)(givenName=*$*))</set>
     <alphabet>true</alphabet>
     <autocomplete>
-      <backend>LDAP</backend>
+      <backend>LDAPBlacklist</backend>
       <filter>(&amp;(objectClass=gosaAccount)(|(cn=*$NAME*)(sn=*$NAME*)(givenName=*$NAME*)))</filter>
       <attribute>cn</attribute>
       <frequency>0.5</frequency>
